@@ -31,7 +31,7 @@ RUNTIME_SOURCES = (
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/build_alchimie_discovery_world.py",
     "scripts/audit_alchimie_discovery_world.py",
-    "docs/reviews/v92-alchimie-discovery-world/candidates.json",
+    "docs/reviews/v92-alchimie-more-concepts/candidates.json",
 )
 
 
@@ -109,6 +109,8 @@ def audit(path: Path) -> dict:
         "runtime_sources": [{"path": p, "sha256": file_sha(ROOT / p)} for p in RUNTIME_SOURCES],
         "metrics": {
             "concepts": len(world.concepts), "starting_supplies": len(starters),
+            "kg_concepts": sum(c.origin == "kg" for c in world.concepts.values()),
+            "authored_concepts": sum(c.origin == "authored" for c in world.concepts.values()),
             "unlocked_supplies": sum(len(u.concept_ids) for u in world.catalog.unlocks),
             "crafted_discoveries": len(counts), "recipes": len(world.recipes),
             "results_with_alternatives": sum(count > 1 for count in counts.values()),
@@ -127,7 +129,8 @@ def audit(path: Path) -> dict:
         "compatible_save_replays": migrations,
         "checks": {"all_concepts_reachable": True, "all_goals_reachable": True,
                    "goal_independent_recipes": True, "complete_replay_restoration": True,
-                   "concept_snapshots_match_graph": True, "undiscovered_target_ids_hidden": True,
+                   "kg_snapshots_match_graph": True, "authored_definitions_bound": True,
+                   "undiscovered_target_ids_hidden": True,
                    "recipes_private": True},
     }
 

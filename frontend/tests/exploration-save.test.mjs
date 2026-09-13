@@ -31,13 +31,48 @@ test("collection stores replay instructions and resumes without private recipe-b
 });
 
 test("malformed and excessive checkpoints are preserved and never overwritten", async () => {
-  for (const raw of ["{broken", "null", "x".repeat(65537), JSON.stringify({ version: 1, ...state({ progress: { world_id: "kitchen-v1", recipe_hash: HASH, discoveries: Array(129).fill(["a", "b"]) } }) })]) {
+  for (const raw of ["{broken", "null", "x".repeat(65537), JSON.stringify({ version: 1, ...state({ progress: { world_id: "kitchen-v1", recipe_hash: HASH, discoveries: Array(257).fill(["a", "b"]) } }) })]) {
     const store = storage();
     store.setItem(key, raw);
     assert.equal(read(store).kind, "invalid");
     assert.equal((await save(state(), raw, store, null)).kind, "changed");
     assert.equal(store.getItem(key), raw);
   }
+});
+
+test("large earned collections remain readable through the 256-craft checkpoint boundary", async () => {
+  const store = storage();
+  let expected = null;
+  for (const count of [129, 200, 256]) {
+    const progress = { ...state().progress, discoveries: Array.from({ length: count }, (_, i) => [`ingredient-${i}`, "water"]) };
+    const result = await save(state({ revision: count, progress }), expected, store, null);
+    assert.equal(result.kind, "saved");
+    assert.ok(Buffer.byteLength(result.raw, "utf8") < 64 * 1024);
+    assert.equal(read(store).kind, "saved");
+    assert.deepEqual(read(store).value.progress, progress);
+    expected = result.raw;
+  }
+  const excessive = { ...state().progress, discoveries: Array.from({ length: 257 }, (_, i) => [`ingredient-${i}`, "water"]) };
+  assert.equal((await save(state({ revision: 257, progress: excessive }), expected, store, null)).kind, "unavailable");
+  assert.equal(store.getItem(key), expected);
+});
+
+test("the 64 KiB checkpoint limit counts UTF-8 bytes and preserves a smaller valid save", async () => {
+  const store = storage();
+  const original = await save(state(), null, store, null);
+  const oversized = state({ progress: {
+    ...state().progress,
+    discoveries: Array.from({ length: 128 }, (_, i) => [`${i}${"ș".repeat(240)}`, `b${"ț".repeat(240)}`]),
+  } });
+  const raw = JSON.stringify({ version: 1, ...oversized });
+  assert.ok(raw.length < 64 * 1024);
+  assert.ok(Buffer.byteLength(raw, "utf8") > 64 * 1024);
+  assert.equal((await save(oversized, original.raw, store, null)).kind, "unavailable");
+  assert.equal(store.getItem(key), original.raw);
+  store.setItem(key, raw);
+  assert.equal(read(store).kind, "invalid");
+  assert.equal((await save(state(), raw, store, null)).kind, "changed");
+  assert.equal(store.getItem(key), raw);
 });
 
 test("an older revision cannot replace a more advanced tab", async () => {
@@ -105,6 +140,39 @@ test("a newer response upgrades a concurrent old-book union and keeps compatibil
   assert.equal(current.needs_restore, true);
 });
 
+test("late discoveries from both earlier worlds merge into a larger third-version collection", async () => {
+  const store = storage();
+  const middleHash = "b".repeat(64);
+  const newestHash = "c".repeat(64);
+  const original = await save(state(), null, store, null);
+  const middle = state({ game_id: "111-world-session", compatible_recipe_hashes: [HASH], progress: {
+    ...state().progress, recipe_hash: middleHash,
+    discoveries: [["flour", "water"], ["dough", "heat"]],
+  } });
+  const upgraded = await save(middle, original.raw, store, null);
+  const newest = state({ game_id: "large-world-session", compatible_recipe_hashes: [HASH, middleHash], progress: {
+    ...middle.progress, recipe_hash: newestHash,
+    discoveries: [...middle.progress.discoveries, ...Array.from({ length: 128 }, (_, i) => [`ingredient-${i}`, "water"])],
+  } });
+  await save(newest, upgraded.raw, store, null);
+  const lateOriginal = state({ revision: 9, progress: {
+    ...state().progress, discoveries: [["flour", "water"], ["flour", "egg"]],
+  } });
+  assert.equal((await save(lateOriginal, original.raw, store, null)).kind, "merged");
+  const lateMiddle = { ...middle, revision: 12, progress: {
+    ...middle.progress, discoveries: [...middle.progress.discoveries, ["bread", "jam"]],
+  } };
+  assert.equal((await save(lateMiddle, upgraded.raw, store, null)).kind, "merged");
+  const current = read(store);
+  assert.equal(current.kind, "saved");
+  assert.equal(current.value.game_id, newest.game_id);
+  assert.equal(current.value.progress.recipe_hash, newestHash);
+  assert.equal(current.value.progress.discoveries.length, 132);
+  assert.deepEqual(current.value.progress.discoveries.slice(-2), [["flour", "egg"], ["bread", "jam"]]);
+  assert.deepEqual(current.value.compatible_recipe_hashes, [HASH, middleHash]);
+  assert.equal(current.value.needs_restore, true);
+});
+
 test("an unrelated recipe book cannot overwrite or merge with a migrated checkpoint", async () => {
   const store = storage();
   const original = await save(state(), null, store, null);
@@ -139,7 +207,7 @@ test("union keeps ingredient order, drops duplicate pairs, and respects world an
   assert.deepEqual(merge({ world_id: "a", recipe_hash: HASH, discoveries: [["a", "b"]] }, { world_id: "a", recipe_hash: HASH, discoveries: [["b", "a"], ["c", "d"]] }).discoveries, [["a", "b"], ["c", "d"]]);
   assert.equal(merge({ world_id: "a", recipe_hash: HASH, discoveries: [] }, { world_id: "b", recipe_hash: HASH, discoveries: [] }), null);
   assert.equal(merge({ world_id: "a", recipe_hash: HASH, discoveries: [] }, { world_id: "a", recipe_hash: "b".repeat(64), discoveries: [] }), null);
-  assert.equal(merge({ world_id: "a", recipe_hash: HASH, discoveries: Array.from({ length: 128 }, (_, i) => [`a${i}`, "b"]) }, { world_id: "a", recipe_hash: HASH, discoveries: [["extra", "b"]] }), null);
+  assert.equal(merge({ world_id: "a", recipe_hash: HASH, discoveries: Array.from({ length: 256 }, (_, i) => [`a${i}`, "b"]) }, { world_id: "a", recipe_hash: HASH, discoveries: [["extra", "b"]] }), null);
 });
 
 test("a checkpoint requires the exact lowercase recipe-book binding", () => {

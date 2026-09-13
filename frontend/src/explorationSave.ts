@@ -2,6 +2,8 @@ import type { ExplorationProgress, ExplorationState } from "./api/alchimieExplor
 
 export const EXPLORATION_SAVE_KEY = "cat_alchimie_exploration_v1";
 const MAX_SAVE_BYTES = 64 * 1024;
+const MAX_DISCOVERIES = 256;
+const encoder = new TextEncoder();
 type SaveStorage = Pick<Storage, "getItem" | "setItem">;
 
 export interface ExplorationSave {
@@ -29,12 +31,16 @@ function validId(value: unknown): value is string {
   return typeof value === "string" && value.length > 0 && value.length <= 256;
 }
 
+function exceedsSaveLimit(raw: string): boolean {
+  return raw.length > MAX_SAVE_BYTES || encoder.encode(raw).byteLength > MAX_SAVE_BYTES;
+}
+
 export function readExplorationSave(storage: SaveStorage | null = browserStorage()): SaveRead {
   if (!storage) return { kind: "unavailable", raw: null };
   let raw: string | null;
   try { raw = storage.getItem(EXPLORATION_SAVE_KEY); } catch { return { kind: "unavailable", raw: null }; }
   if (raw === null) return { kind: "empty", raw: null };
-  if (raw.length > MAX_SAVE_BYTES) return { kind: "invalid", raw };
+  if (exceedsSaveLimit(raw)) return { kind: "invalid", raw };
   try {
     const value = JSON.parse(raw) as ExplorationSave;
     if (value?.version !== 1 || !validId(value.game_id) ||
@@ -48,7 +54,7 @@ export function readExplorationSave(storage: SaveStorage | null = browserStorage
         value.compatible_recipe_hashes.some((hash) => typeof hash !== "string" || !/^[a-f0-9]{64}$/.test(hash) || hash === value.progress.recipe_hash)
       )) ||
       !Array.isArray(value.progress.discoveries) ||
-      value.progress.discoveries.length > 128 || value.progress.discoveries.some((pair) =>
+      value.progress.discoveries.length > MAX_DISCOVERIES || value.progress.discoveries.some((pair) =>
         !Array.isArray(pair) || pair.length !== 2 || !pair.every(validId) || pair[0] === pair[1])) {
       return { kind: "invalid", raw };
     }
@@ -80,7 +86,7 @@ export function mergeExplorationProgress(
     pairs.add(key);
     discoveries.push(pair);
   }
-  return discoveries.length <= 128 ? { world_id: a.world_id, recipe_hash: recipeHash, discoveries } : null;
+  return discoveries.length <= MAX_DISCOVERIES ? { world_id: a.world_id, recipe_hash: recipeHash, discoveries } : null;
 }
 
 /** A browser lock serializes compare-and-write across tabs when supported. */
@@ -119,7 +125,7 @@ export async function saveExplorationState(
       kind = "merged";
     }
     const raw = JSON.stringify(value);
-    if (raw.length > MAX_SAVE_BYTES) return { kind: "unavailable" };
+    if (value.progress.discoveries.length > MAX_DISCOVERIES || exceedsSaveLimit(raw)) return { kind: "unavailable" };
     try { storage.setItem(EXPLORATION_SAVE_KEY, raw); return { kind, raw }; }
     catch { return { kind: "unavailable" }; }
   };

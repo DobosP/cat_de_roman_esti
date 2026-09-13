@@ -1,0 +1,31 @@
+{
+  "additional_checks": {
+    "authored_concepts": 47,
+    "concepts": 221,
+    "crafted_discoveries": 117,
+    "crafted_intermediates": 47,
+    "current_checkpoint_restores": 50,
+    "current_randomized_full_runs": 50,
+    "exact_rebuilt_catalog": true,
+    "historical_live_session_upgrades": 100,
+    "historical_randomized_checkpoints": 100,
+    "independent_live_audit_byte_identical": true,
+    "kg_concepts": 174,
+    "opening_pairs": 9,
+    "optional_goals": 32,
+    "possible_starting_pairs": 28,
+    "private_recipe_map_not_public": true,
+    "recipes": 285,
+    "results_with_alternatives": 77,
+    "starting_supplies": 8,
+    "terminal_discoveries": 70,
+    "unlocked_supplies": 96
+  },
+  "audit_sha256": "0b76f7f66b782b182a105ed90d78d5ef42d4979efe1b45964ac746939ef334f9",
+  "catalog_sha256": "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df",
+  "kind": "alchimie-discovery-world-final-v1",
+  "rationale": "Independently rebuilt the proposed catalog byte-for-byte from the exact frozen candidate and both complete semantic reviews. Independently reran the actual serving audit to an identical artifact, verifying all current source bindings, no-goal play and all 32 goal variants, every canonical pair result, private recipes and both historical prefix sets. Added 50 randomized complete-world runs, 50 current checkpoint restores, 100 randomized historical checkpoint migrations across the 75- and 111-concept books, and 100 actual live-session upgrades through the current implementation. Every full run reached 221 concepts and 117 crafted discoveries without goal-dependent recipes. All earned historical pairs/concepts remained intact. Distinguishes 96 later supplied concepts and 8 starters from craftable discoveries, and 174 unchanged-KG identities from 47 authored world-local concepts. The exact semantic review covers all 169 added recipes and 110 added definitions; 116 old recipe judgments and 111 old concept records remain byte-identical. Factual acceptance concerns the curated game associations and disclosed culinary simplifications, not unique real-world derivations or complete cooking instructions. No human playtest or enjoyment measurement is inferred from these automated replays.",
+  "reviewer": "large_factual-independent-review",
+  "role": "factual",
+  "verdict": "accept"
+}

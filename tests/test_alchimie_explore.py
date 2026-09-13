@@ -7,7 +7,11 @@ import pytest
 from django.test import Client
 
 from cat_de_roman_esti.wordgames import alchimie_explore as E
-from cat_de_roman_esti.wordgames.discovery_world import validate_world
+from cat_de_roman_esti.wordgames.discovery_world import (
+    MAX_CONCEPTS,
+    authored_snapshot,
+    validate_world,
+)
 from cat_de_roman_esti.wordgames.service import SessionStore
 
 BASE = "/api/alchimie/explore"
@@ -169,7 +173,7 @@ def test_stale_or_malformed_checkpoint_fails_without_allocating_session(world):
     post(data={"progress": {"world_id": "old-world", "recipe_hash": world.recipe_hash,
                             "discoveries": []}}, status=409)
     post(data={"progress": {"world_id": world.id, "recipe_hash": world.recipe_hash,
-                            "discoveries": [["a", "b"]] * 129}},
+                            "discoveries": [["a", "b"]] * 257}},
          status=422)
     post(data={"owned": ["q"]}, status=422)
     post(data={"goal_id": "unknown"}, status=400)
@@ -344,3 +348,114 @@ def test_compatible_world_can_reorder_displayed_starters(world):
     raw = expanded.catalog.model_dump()
     raw["world"]["starter_ids"].reverse()
     assert validate_world(raw, check_graph=False).recipe_hash == expanded.recipe_hash
+
+
+def authored_concept(concept_id="alw_food_test", label="Ingredient pentru test"):
+    description = "Definiție originală pentru verificarea provenienței."
+    references = ["https://example.test/ingredient"]
+    return {"id": concept_id, "label": label, "description": description,
+            "source": "authored:alchimie", "redistributable": False, "origin": "authored",
+            "references": references,
+            "snapshot": authored_snapshot(concept_id, label, description, references)}
+
+
+def authored_world_record():
+    raw = example_catalog()
+    concept = authored_concept()
+    raw["concepts"].append(concept)
+    raw["recipes"].append({"id": "authored-dish", "pair": ["a", "q"],
+                           "result": concept["id"], "explanation": "Test combination.",
+                           "sources": ["https://example.test/recipe"]})
+    return raw
+
+
+@pytest.mark.parametrize("change", [
+    lambda c: c.update(source="copied without provenance"),
+    lambda c: c.update(redistributable=True),
+    lambda c: c.update(description="Changed without updating its source snapshot"),
+    lambda c: c.update(references=[]),
+    lambda c: c.update(references=["file:///private"]),
+    lambda c: c.update(references=["https://user:pass@example.test"]),
+    lambda c: c.update(references=["https://bad host.example"]),
+    lambda c: c["snapshot"].update(id="different"),
+])
+def test_authored_definitions_require_exact_provenance_and_checked_references(change):
+    raw = authored_world_record()
+    change(raw["concepts"][-1])
+    with pytest.raises(ValueError, match="authored"):
+        validate_world(raw, check_graph=False)
+
+
+def test_authored_definitions_are_playable_without_mutating_the_global_graph(monkeypatch):
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    service = get_service()
+    before = len(service.graph.nodes)
+    world = validate_world(authored_world_record(), check_graph=False)
+    monkeypatch.setattr(E, "get_world", lambda: world)
+    state = post()
+    for pair in (("a", "b"), ("x", "d"), ("z", "e"), ("a", "q")):
+        state = craft(state, *pair)
+    assert state["discovered"][0]["id"] == "alw_food_test"
+    assert service.node("alw_food_test") is None and len(service.graph.nodes) == before
+
+
+def test_authored_namespace_and_existing_identity_shadowing_are_rejected():
+    from cat_de_roman_esti.wordgames.discovery_world import _check_graph
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    raw = authored_world_record()
+    raw["concepts"][-1]["id"] = "n_forged"
+    raw["recipes"][-1]["result"] = "n_forged"
+    with pytest.raises(ValueError, match="namespace"):
+        validate_world(raw, check_graph=False)
+    world = validate_world(authored_world_record(), check_graph=False)
+    # Isolate the authored definition to test collision against the actual KG.
+    concept = world.concepts["alw_food_test"]
+    concept.label = next(iter(get_service().graph.nodes.values())).label_ro
+    world.concepts.clear()
+    world.concepts[concept.id] = concept
+    with pytest.raises(ValueError, match="shadows"):
+        _check_graph(world)
+
+
+@pytest.mark.parametrize("label", ["  INGREDIENT PENTRU TEST  ", "   "])
+def test_authored_labels_cannot_be_blank_or_indistinguishable(label):
+    raw = authored_world_record()
+    concept = authored_concept("alw_food_second_test", label)
+    raw["concepts"].append(concept)
+    raw["recipes"].append({"id": "second-authored", "pair": ["b", "q"],
+                           "result": concept["id"], "explanation": "Test.",
+                           "sources": ["https://example.test/recipe"]})
+    with pytest.raises(ValueError, match="labels"):
+        validate_world(raw, check_graph=False)
+
+
+def test_full_256_concept_collection_restores_more_than_128_earned_crafts(monkeypatch):
+    raw = example_catalog()
+    previous = "q"
+    for number in range(MAX_CONCEPTS - len(raw["concepts"])):
+        concept_id = f"test_{number}"
+        raw["concepts"].append({"id": concept_id, "label": f"Test {number}", "description": "",
+                                "source": "", "redistributable": False, "snapshot": {}})
+        raw["recipes"].append({"id": f"chain-{number}", "pair": sorted(["a", previous]),
+                               "result": concept_id, "explanation": "Test chain.",
+                               "sources": ["https://example.test/chain"]})
+        previous = concept_id
+    world = validate_world(raw, check_graph=False)
+    monkeypatch.setattr(E, "get_world", lambda: world)
+    session = E.restore_session(world, None)
+    while True:
+        pair = next((p for p, r in world.recipes.items()
+                     if set(p) <= session.owned.keys() and r.result not in session.owned), None)
+        if pair is None:
+            break
+        session.craft(pair)
+    checkpoint = E.state_payload("test", session)["progress"]
+    assert len(checkpoint["discoveries"]) > 128 and len(session.owned) == MAX_CONCEPTS
+    restored = post(data={"progress": checkpoint})
+    assert restored["complete"] and len(restored["inventory"]) == MAX_CONCEPTS
+    assert restored["progress"] == checkpoint
+    raw["concepts"].append({**raw["concepts"][-1], "id": "one-too-many"})
+    with pytest.raises(ValueError):
+        validate_world(raw, check_graph=False)

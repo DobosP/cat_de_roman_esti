@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "baseline": "8f97bd9",
+  "branch": "feat/v92-alchimie-gui",
+  "version": "V92 larger reviewed Alchimie vocabulary",
+  "environment": {
+    "python": "3.12.3",
+    "node": "24.19.0",
+    "python_3_14": "not rerun"
+  },
+  "candidate_sha256": "da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a",
+  "catalog_sha256": "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df",
+  "live_audit_sha256": "0b76f7f66b782b182a105ed90d78d5ef42d4979efe1b45964ac746939ef334f9",
+  "frontend_receipt_sha256": "f23218cf0e8c0c6fef92ec2c0bb3225f032b20f1caaf21c0015169ca8c793fd1",
+  "checks": [
+    {
+      "command": "PYTHONPATH=. <venv>/bin/python -m pytest -o addopts=\"\" -q --basetemp=<task-scratch>/pytest-full",
+      "result": "1837 passed in 308.71s",
+      "log_sha256": "83b5601547487c853b5126b24709e7192f0fec58abc2e7cf54251212b5923629"
+    },
+    {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <venv>/bin/python -m pytest -o addopts=\"\" -q tests/accounts --basetemp=<task-scratch>/pytest-accounts",
+      "result": "53 passed in 1.86s",
+      "log_sha256": "cce489e6f1e92dbe543899cd46b0ad282c9d15912e87e095de45dad1574a6ae4"
+    },
+    {
+      "command": "pytest tests/test_alchimie_explore.py tests/test_alchimie_discovery_catalog.py tests/test_mobile_contract.py",
+      "result": "143 passed in 11.63s",
+      "log_sha256": "3b3a2bd3cc89e6f79d6d76363ba2c97d9e185324966a696e41635f5d555c4686"
+    },
+    {
+      "command": "npm ci; npm test",
+      "result": "install pass; 212 native tests pass"
+    },
+    {
+      "command": "npm run lint; npm run build",
+      "result": "lint/typecheck/build pass; initial gzip 119.23 of 120 KiB"
+    },
+    {
+      "command": "npm run test:e2e -- e2e/alchimie-exploration.spec.mjs --workers=4",
+      "result": "24 passed in 23.8s",
+      "log_sha256": "593e8eb330665bc8a6854af6c83ac2b39a9f10b2839594a5b9de74302f320ec9"
+    },
+    {
+      "command": "npm run test:e2e -- --workers=4",
+      "result": "446 passed in 4.2m",
+      "workers": 4,
+      "retries": 0,
+      "log_sha256": "43e624728e39530bda6d53f4fbc7b784af6eed5bf030eb864b0fce503b3f8fbb"
+    },
+    {
+      "command": "validate_fixture.py; validate_games_pack.py",
+      "result": "both GREEN; 0 fixture errors"
+    },
+    {
+      "command": "python -m ruff check; git diff --check; check_docs.py .",
+      "result": "pass; no dead links, stale terms, retired verbs or orphan docs"
+    },
+    {
+      "command": "audit_alchimie_discovery_world.py --catalog <proposal> --output <live-audit>",
+      "result": "all 221 concepts, 285 recipes and 33 free/goal replays pass; all 39/58 historical prefixes preserved"
+    },
+    {
+      "command": "independent factual replays",
+      "result": "50 complete explorations, 50 current restores, 100 historical migrations and 100 live upgrades pass"
+    },
+    {
+      "command": "synthetic capacity and provenance tests",
+      "result": "256-concept collection with more than 128 crafts restores; excessive saves, forged provenance and ambiguous labels reject"
+    },
+    {
+      "command": "compare published catalog against 8f97bd9",
+      "result": "all previous 111 concepts, 116 recipes, six pantry tiers and 19 goals remain exact"
+    },
+    {
+      "command": "local preview restore on port 8144",
+      "result": "existing one-discovery collection restored and displays 9/221 owned items with 32 optional goals"
+    }
+  ],
+  "runtime_sources": [
+    {
+      "path": "cat_de_roman_esti/wordgames/discovery_world.py",
+      "sha256": "7e3e770f7788786948ee74e5c87c991d3b88bd1d34b4b082e918f68b391c3788"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/alchimie_explore.py",
+      "sha256": "2effb23e1f7fb14868dd29279f6bc9ddb7d3eb8b030b8ec731401ce9658e69f2"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/service.py",
+      "sha256": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/_session_endpoint.py",
+      "sha256": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f"
+    },
+    {
+      "path": "cat_de_roman_esti/web/urls.py",
+      "sha256": "ead8b6ca81be580a1006f81e14d106723e826d248117cea14ecc162a9768d61f"
+    },
+    {
+      "path": "scripts/alchimie_discovery_recipe_source.py",
+      "sha256": "b8d82e561297d4e8ddba374e78d3590f3db0da87f6883baf6cc65eacf8621a96"
+    },
+    {
+      "path": "scripts/build_alchimie_discovery_world.py",
+      "sha256": "3af78a89155c00c1f6288adc2c93aac8b51ecf88f56d86ef54be883761200e0e"
+    },
+    {
+      "path": "scripts/audit_alchimie_discovery_world.py",
+      "sha256": "d284923510c8bf63f3a7cada9c0905242dbc9f93f2ac3f9a43633d5f73fdebae"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-more-concepts/candidates.json",
+      "sha256": "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209"
+    }
+  ],
+  "frontend_source_and_asset_sha256": {
+    "frontend/src/explorationSave.ts": "e92e6a6f66b31c9d1cc82c913a6afb18ba092982da19009287229c6560cace43",
+    "frontend/tests/exploration-save.test.mjs": "f6d70fc67becd731dab10fb530f84e58fa2b78d9c23a06ff6183c30502afa591",
+    "frontend/e2e/alchimie-exploration.spec.mjs": "305d1178463643aac7e518ab3f7e0d4b6f1a7b3161fc29709b09d5aef0b15673",
+    "frontend/e2e/alchimie-111-checkpoint.json": "c3c1385b649487fbf0ee9b387cf134d145842800a0c683e0f999b07dc75dd7d1",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "7e3e770f7788786948ee74e5c87c991d3b88bd1d34b4b082e918f68b391c3788",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "2effb23e1f7fb14868dd29279f6bc9ddb7d3eb8b030b8ec731401ce9658e69f2",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "a4739825c548dedc1c1c3532b7bf01bee2196e82cf6df6bdb06f0f48dbdc5e88",
+    "cat_de_roman_esti/web/static/index.html": "7ce03646867c77983c8b4a061a02d19a34557b9cb7a0ea465052bdde0a26a19c",
+    "cat_de_roman_esti/web/static/assets/AccountBar-9GPtiZDq.js": "19c2e65d9266ee9756e06310c827440f3cb0764e83b402f61e9d7d9dbe0469de",
+    "cat_de_roman_esti/web/static/assets/Alchimie-CATzOXOP.css": "2e4c7b06a436b1a4aeb4a6ec265fe44390932310b04553952e3b0df6cd3e8623",
+    "cat_de_roman_esti/web/static/assets/Alchimie-q_KfS_tR.js": "751d0fafa8750e9ccafb9e2886e167cb42531e17f512c19cc8c2f4007dccc9b7",
+    "cat_de_roman_esti/web/static/assets/CaldRece-DUzbFA6S.js": "548cbcec2d658ec6a99e4b7b4ef057e2281a6fad67ead35a258bedf90aab7a7d",
+    "cat_de_roman_esti/web/static/assets/CaldRece-rhEghXDo.css": "3917da426471656e3b236e3346cccd6f0164b008b7ea1d92710ca5b3ae68f411",
+    "cat_de_roman_esti/web/static/assets/CategoryPicker-BIuqR3zh.js": "1fa11488ef594b8921482ab40725fd4a1888d15919be8515f5b9a918d6e81c8d",
+    "cat_de_roman_esti/web/static/assets/Conexiuni-CRniDikL.css": "6270dcbcc98c677c4cbc744a32c7e331aedd53943caad14942a0e6d1ef62ec3a",
+    "cat_de_roman_esti/web/static/assets/Conexiuni-CU8zwq6_.js": "2d24aa017253500c408078fdf6e30874730a6e8b6d99ad18b7c1885125f707ad",
+    "cat_de_roman_esti/web/static/assets/GameOptions-3LA0yo-J.js": "d24e469c578c219411c744fadc86bd28922f116a0ca398c8b90c4c7899b427ce",
+    "cat_de_roman_esti/web/static/assets/GameOptions-CEWYWGsz.css": "cbe029df658db3187af13ffc55d388268d410c9483521d550222bc48d4240bbd",
+    "cat_de_roman_esti/web/static/assets/GameSetupOptions-B36y6H1j.js": "1a9916616bb3f5d7aaf78fad422a8e7de47245855cb93134718e5ef6225862f6",
+    "cat_de_roman_esti/web/static/assets/Intrusul-CFXs-7wh.js": "79e2558125fd9a2db112b11664d8db24fdaba903f95f3505de481107aad51b79",
+    "cat_de_roman_esti/web/static/assets/Intrusul-D1oQwidZ.css": "1e0b55a6598522c4bdad5be4a828735927dc9c1d128883747b9e04fde99720fa",
+    "cat_de_roman_esti/web/static/assets/Lant-CDVYGXUK.css": "a48444a1b68faba20a4ef4c97f9a787b9281ba9cd70fbf7e58ce57635ab7b441",
+    "cat_de_roman_esti/web/static/assets/Lant-CP7p1_wO.js": "3d5dc24f2c76e7cec191b131a5fb0575284b24268e66a3dee3e0ef44c73e06e1",
+    "cat_de_roman_esti/web/static/assets/Perechi-CTtB5Tqp.js": "8b57dc70d36497119a412d39b8dba33796b755b75bf264db65f5ac3e16b75c2f",
+    "cat_de_roman_esti/web/static/assets/Perechi-Dnjh2U--.css": "2de43ed085e42e4c193dd2a3bd7a23ede64ec5688c7b8fd3dc88d6bbe5620a3d",
+    "cat_de_roman_esti/web/static/assets/Ranking-D4XEu7p-.js": "3113c736073bec4f195a3e4f5064ee3ae8a62528abed3dfacdffe81fdb403342",
+    "cat_de_roman_esti/web/static/assets/auth-BQkoQX_A.js": "ee61fc763443c23091582de09978fcc1382b27c066e60eab8eebcfce65eaa8f3",
+    "cat_de_roman_esti/web/static/assets/derivedReplay-BkW_Ev1N.js": "c4043b79927c87e6b88f99ca3c248f4b97a72f6cc328b4f0957a7348c9e4e195",
+    "cat_de_roman_esti/web/static/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+    "cat_de_roman_esti/web/static/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+    "cat_de_roman_esti/web/static/assets/index-CuK-Dzim.js": "690c32d0456317ec109b69b6ece679668f95ff118577400274713fe58586fdc3",
+    "cat_de_roman_esti/web/static/assets/index-D9HNWgEs.css": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2",
+    "cat_de_roman_esti/web/static/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+    "cat_de_roman_esti/web/static/assets/inter-latin-wght-normal-Dx4kXJAl.woff2": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+    "cat_de_roman_esti/web/static/assets/scoreSync-CAJ3M6KO.js": "85918d65d02708c8750054e880e43df10f7f9a9a6b4d220b79199557ad3cef6b",
+    "cat_de_roman_esti/web/static/assets/useSavedGameResume-B4QDaSHs.js": "a4aad1686721fe091a2e74b9e1fbc729908ec920dbcaa439fa61e3bd977d9860"
+  },
+  "reviews": {
+    "factual-review.json": "ab861e19731aa23199cee8b21dea23acc8592c589cf152e6b7bebcab0230c4f8",
+    "final-factual-review.json": "8e84b7fa4a63ecf180ef21c1ed847de1a0e643acc59e7159452fe1512b4ff214",
+    "final-quality-review.json": "afee2d740668e85c9901adb55c63458080eb9fc71367268e56ba5c2441dfff55",
+    "quality-review.json": "1bae553a0250d52c390b1d58031cd1acc9de91fa95d8947ddbd64085053a7f29"
+  },
+  "metrics": {
+    "concepts": 221,
+    "starting_supplies": 8,
+    "kg_concepts": 174,
+    "authored_concepts": 47,
+    "unlocked_supplies": 96,
+    "crafted_discoveries": 117,
+    "recipes": 285,
+    "results_with_alternatives": 77,
+    "crafted_intermediates": 47,
+    "terminal_discoveries": 70,
+    "opening_pairs": 9,
+    "possible_starting_pairs": 28,
+    "optional_goals": 32
+  },
+  "compatible_save_replays": [
+    {
+      "recipe_hash": "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+      "previous_owned": 75,
+      "prefixes_preserved": 39,
+      "all_earned_concepts_preserved": true
+    },
+    {
+      "recipe_hash": "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+      "previous_owned": 111,
+      "prefixes_preserved": 58,
+      "all_earned_concepts_preserved": true
+    }
+  ],
+  "intermediate_findings": [
+    {
+      "scope": "initial generated draft",
+      "result": "runtime validation rejected a 16-item pantry tier",
+      "resolution": "rebalanced new tiers to at most 12 items before formal review"
+    },
+    {
+      "scope": "runtime review",
+      "result": "generator rejected normalized-label collisions but loader lacked same check",
+      "resolution": "added runtime uniqueness/nonblank validation and targeted regressions"
+    },
+    {
+      "scope": "focused suite on evolving draft",
+      "result": "142 passed; one historical-removal test selected the first new authored item",
+      "resolution": "test now removes an actual predecessor concept; final 143 pass"
+    },
+    {
+      "scope": "first exploration browser focus",
+      "result": "23 passed; one transient fade contrast measurement failed",
+      "resolution": "wait for route opacity to settle before unchanged Axe audit; final focus and full suite pass"
+    }
+  ],
+  "production_changed": false,
+  "human_playtest": "not performed",
+  "physical_device_acceptance": "not performed",
+  "scope_limits": [
+    "Finite food-themed world; not every possible pair is a recipe",
+    "70 terminal crafted results remain",
+    "World-local vocabulary is separate from unchanged KG/mobile content",
+    "Browser-local progress without cross-device account synchronization"
+  ]
+}

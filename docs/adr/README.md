@@ -55,7 +55,8 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0143 | [Simplify the five other game interfaces](0143-simplify-the-five-other-games.md) | accepted |
 | 0144 | [Reviewed Alchimie recipe freedom](0144-reviewed-alchimie-recipe-freedom.md) | partially superseded by 0145 for exploration scope |
 | 0145 | [Persistent Alchimie discovery world](0145-persistent-alchimie-discovery-world.md) | partially superseded by 0146 for expansion and compatible upgrades |
-| 0146 | [Expand Alchimie and preserve collections](0146-expand-alchimie-and-preserve-collections.md) | accepted |
+| 0146 | [Expand Alchimie and preserve collections](0146-expand-alchimie-and-preserve-collections.md) | partially superseded by 0147 for larger vocabulary, bounds and history |
+| 0147 | [Grow Alchimie with reviewed vocabulary](0147-grow-alchimie-with-reviewed-vocabulary.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

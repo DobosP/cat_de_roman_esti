@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import sys
@@ -20,16 +21,23 @@ from content_file_transaction import atomic_write  # noqa: E402
 
 from cat_de_roman_esti.graph import Node  # noqa: E402
 from cat_de_roman_esti.wordgames.discovery_world import (  # noqa: E402
+    MAX_CONCEPTS,
+    MAX_RECIPES,
+    MAX_SUPPLIES,
+    MAX_SUPPLY_TIERS,
+    authored_snapshot,
     mechanics_for,
     mechanics_hash,
+    validate_world,
 )
 from cat_de_roman_esti.wordgames.recipe_extensions import record_snapshot  # noqa: E402
+from cat_de_roman_esti.wordgames.service import normalize  # noqa: E402
 
 CATALOG = ROOT / "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json"
 REVIEW_KIND = "alchimie-discovery-world-review-v1"
 FINAL_REVIEW_KIND = "alchimie-discovery-world-final-v1"
-BASELINE = ROOT / "docs/reviews/v92-alchimie-discovery-world/candidates.json"
-BASELINE_SHA = "559abb0b475665f73b010b1a0acdc7650576d829819a50a2e99bdd50700f8fae"
+BASELINE = ROOT / "docs/reviews/v92-alchimie-more-concepts/candidates.json"
+BASELINE_SHA = "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209"
 RUNTIME_SOURCES = (
     "cat_de_roman_esti/wordgames/discovery_world.py",
     "cat_de_roman_esti/wordgames/alchimie_explore.py",
@@ -39,7 +47,7 @@ RUNTIME_SOURCES = (
     "scripts/build_alchimie_discovery_world.py",
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/audit_alchimie_discovery_world.py",
-    "docs/reviews/v92-alchimie-discovery-world/candidates.json",
+    "docs/reviews/v92-alchimie-more-concepts/candidates.json",
 )
 
 
@@ -55,6 +63,10 @@ def file_sha(path: Path) -> str:
 def json_bytes(value: object) -> bytes:
     return (json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2,
                        allow_nan=False) + "\n").encode()
+
+
+def concept_digest(value: dict) -> str:
+    return hashlib.sha256(json_bytes(value)).hexdigest()
 
 
 def bindings() -> dict:
@@ -88,20 +100,51 @@ def compatible_versions(artifact: dict) -> list[dict]:
                              {tuple(r["pair"]): r["result"] for r in value["recipes"]},
                              [(u["after_discoveries"], u["concept_ids"]) for u in value["unlocks"]])
     old = mechanics(previous)
-    if mechanics_hash(old) == mechanics_hash(mechanics(artifact)):
-        return []
-    return [{"world_id": previous["world"]["id"], "recipe_hash": mechanics_hash(old),
-             "source_sha256": BASELINE_SHA, "mechanics": old}]
+    # The newest reviewed candidate already binds its full older compatibility history.
+    # Carry it forward so adding a third book does not strand saves from either predecessor.
+    versions = copy.deepcopy(previous.get("compatible_versions", []))
+    if mechanics_hash(old) != mechanics_hash(mechanics(artifact)):
+        versions.append({"world_id": previous["world"]["id"], "recipe_hash": mechanics_hash(old),
+                         "source_sha256": BASELINE_SHA, "mechanics": old})
+    require(len(versions) <= 8 and len({v["recipe_hash"] for v in versions}) == len(versions),
+            "invalid compatible history")
+    return versions
 
 
 def candidate() -> dict:
     kg = json.loads((ROOT / "cat_de_roman_esti/fixtures/kg_sample.json").read_bytes())
     by_label: dict[str, list[Node]] = {}
+    known_surfaces: set[str] = set()
     for record in kg["kg_nodes"]:
         node = Node.from_record(record)
         by_label.setdefault(node.label_ro, []).append(node)
+        known_surfaces.update(normalize(s) for s in (node.label_ro, *node.aliases))
+    authored: dict[str, Node] = {}
+    authored_rows: dict[str, dict] = {}
+    for label, definition in getattr(SOURCE, "WORLD_CONCEPTS", {}).items():
+        require(normalize(label) not in known_surfaces, f"authored label shadows KG: {label}")
+        require(set(definition) == {"id", "description", "sources"}, "invalid authored definition")
+        require(isinstance(definition["sources"], list) and definition["sources"]
+                and all(valid_url(url) for url in definition["sources"]),
+                f"missing authored references: {label}")
+        concept_id = definition["id"]
+        require(concept_id not in authored_rows, "duplicate authored id")
+        node = Node(id=concept_id, node_type="concept", label_ro=label, category="gastronomie",
+                    description=definition["description"], source="authored:alchimie")
+        authored[label] = node
+        authored_rows[concept_id] = {
+            "id": concept_id, "label": label, "description": definition["description"],
+            "source": node.source, "redistributable": False, "origin": "authored",
+            "references": definition["sources"],
+            "snapshot": authored_snapshot(
+                concept_id, label, node.description, definition["sources"],
+            ),
+        }
+        known_surfaces.add(normalize(label))
 
     def node(label: str) -> Node:
+        if label in authored:
+            return authored[label]
         matches = by_label.get(label, [])
         require(len(matches) == 1, f"unknown or ambiguous concept label: {label}")
         return matches[0]
@@ -120,12 +163,17 @@ def candidate() -> dict:
     used = (set(starters) | {nid for tier in unlocks for nid in tier["concept_ids"]}
             | {nid for r in recipes for nid in [*r["pair"], r["result"]]})
     concepts = []
-    for n in sorted((Node.from_record(r) for r in kg["kg_nodes"]), key=lambda n: n.id):
+    for n in sorted([*(Node.from_record(r) for r in kg["kg_nodes"]), *authored.values()],
+                    key=lambda n: n.id):
         if n.id in used:
+            if n.id in authored_rows:
+                concepts.append(authored_rows[n.id])
+                continue
             concepts.append({"id": n.id, "label": n.label_ro,
                              "description": SOURCE.DESCRIPTIONS.get(n.label_ro, n.description),
                              "source": n.source, "redistributable": n.redistributable,
                              "snapshot": record_snapshot(n)})
+    require(set(authored_rows) <= used, "unused authored definitions")
     artifact = {
         "schema_version": 1, "kind": "alchimie-discovery-world-candidates-v1",
         "world": {**SOURCE.WORLD, "starter_ids": starters},
@@ -143,21 +191,22 @@ def audit(world: dict) -> dict:
     """Deterministic full closure with supply milestones counted separately."""
     concepts = world["concepts"]
     ids = {c["id"] for c in concepts}
-    require(1 <= len(ids) == len(concepts) <= 128, "duplicate or excessive concepts")
+    require(1 <= len(ids) == len(concepts) <= MAX_CONCEPTS, "duplicate or excessive concepts")
     starters = world["world"]["starter_ids"]
     require(2 <= len(set(starters)) == len(starters) <= 12, "invalid starting inventory")
     require(set(starters) <= ids, "unknown starter")
     unlocks = world["unlocks"]
-    require(len(unlocks) <= 8 and len({u["id"] for u in unlocks}) == len(unlocks),
+    require(len(unlocks) <= MAX_SUPPLY_TIERS and len({u["id"] for u in unlocks}) == len(unlocks),
             "invalid supply tiers")
     supplies = [nid for u in unlocks for nid in u["concept_ids"]]
-    require(len(supplies) <= 48 and len(set(supplies)) == len(supplies)
+    require(len(supplies) <= MAX_SUPPLIES and len(set(supplies)) == len(supplies)
             and not set(supplies) & set(starters) and set(supplies) <= ids,
             "duplicate, overlapping or unknown supplies")
-    require(all(type(u["after_discoveries"]) is int and 0 < u["after_discoveries"] <= 128
-                and u["concept_ids"] for u in unlocks), "invalid supply threshold")
+    require(all(type(u["after_discoveries"]) is int and 0 < u["after_discoveries"] <= MAX_CONCEPTS
+                and 1 <= len(u["concept_ids"]) <= 12 for u in unlocks),
+            "invalid supply threshold or tier size")
     recipes = world["recipes"]
-    require(1 <= len(recipes) <= 512 and len({r["id"] for r in recipes}) == len(recipes),
+    require(1 <= len(recipes) <= MAX_RECIPES and len({r["id"] for r in recipes}) == len(recipes),
             "invalid recipe inventory")
     pairs = []
     for r in recipes:
@@ -220,7 +269,7 @@ def valid_url(value: object) -> bool:
         return False
 
 
-def read_review(path: Path, role: str, sha: str, ids: set[str]) -> dict:
+def read_review(path: Path, role: str, sha: str, ids: set[str], concepts: list[dict]) -> dict:
     value = json.loads(path.read_bytes())
     require(isinstance(value, dict) and value.get("kind") == REVIEW_KIND
             and value.get("role") == role, f"{role}: invalid review")
@@ -245,6 +294,30 @@ def read_review(path: Path, role: str, sha: str, ids: set[str]) -> dict:
                 f"{role}: invalid sources")
         if role == "factual" and row["verdict"] == "accept":
             require(bool(sources), "factual acceptance requires checked source URLs")
+    concept_rows = value.get("concepts")
+    require(isinstance(concept_rows, list) and all(isinstance(r, dict) for r in concept_rows),
+            f"{role}: missing concept judgments")
+    by_id = {c["id"]: c for c in concepts}
+    actual = [r.get("id") for r in concept_rows]
+    require(all(isinstance(i, str) for i in actual) and len(set(actual)) == len(actual)
+            and set(actual) == set(by_id), f"{role}: incomplete/unknown/duplicate concept coverage")
+    previous = {c["id"]: c for c in json.loads(BASELINE.read_bytes())["concepts"]}
+    for row in concept_rows:
+        concept = by_id[row["id"]]
+        require(row.get("concept_sha256") == concept_digest(concept),
+                f"{role}: stale concept judgment")
+        require(row.get("verdict") == "accept"
+                and isinstance(row.get("rationale"), str) and row["rationale"].strip(),
+                f"{role}: concept acceptance required")
+        sources = row.get("sources")
+        require(isinstance(sources, list) and all(valid_url(s) for s in sources),
+                f"{role}: invalid concept sources")
+        inherited = row.get("inherited", False)
+        require(type(inherited) is bool, f"{role}: invalid concept inheritance")
+        if inherited:
+            require(previous.get(row["id"]) == concept, f"{role}: altered inherited concept")
+        elif role == "factual":
+            require(bool(sources), "new factual concept acceptance requires checked sources")
     return value
 
 
@@ -257,8 +330,8 @@ def build_catalog(candidate_path: Path, factual_path: Path, quality_path: Path) 
     require(raw == json_bytes(candidate()), "candidate differs from current editorial generator")
     sha = hashlib.sha256(raw).hexdigest()
     ids = {r["id"] for r in value["recipes"]}
-    factual = read_review(factual_path, "factual", sha, ids)
-    quality = read_review(quality_path, "quality", sha, ids)
+    factual = read_review(factual_path, "factual", sha, ids, value["concepts"])
+    quality = read_review(quality_path, "quality", sha, ids, value["concepts"])
     require(factual["reviewer"] != quality["reviewer"], "reviewers must be independent")
     accepted = set(ids)
     for review in (factual, quality):
@@ -277,6 +350,7 @@ def build_catalog(candidate_path: Path, factual_path: Path, quality_path: Path) 
                                    (quality_path, "quality", quality))
     ]
     audit(value)
+    validate_world(value)
     return value
 
 

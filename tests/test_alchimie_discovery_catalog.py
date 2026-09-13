@@ -34,6 +34,10 @@ def reviewed_files(tmp_path, candidate):
             "items": [{"id": r["id"], "verdict": "accept", "rationale": "Test fixture.",
                        "sources": ["https://example.test/recipe/" + r["id"]]}
                       for r in candidate["recipes"]],
+            "concepts": [{"id": c["id"], "concept_sha256": B.concept_digest(c),
+                          "verdict": "accept", "rationale": "Test concept fixture.",
+                          "sources": ["https://example.test/concept/" + c["id"]]}
+                         for c in candidate["concepts"]],
         }))
         files.append(path)
     return files
@@ -74,10 +78,9 @@ def test_catalog_validates_with_serving_loader(reviewed_files):
 
 
 def test_editorial_descriptions_keep_original_fixes_and_provenance(candidate):
-    old_ids = {c["id"] for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
-    corrected = {c["label"] for c in candidate["concepts"]
-                 if c["id"] in old_ids and c["description"] != c["snapshot"]["description"]}
-    assert corrected == {"Compot", "Ardei umpluți", "Sarmale", "Paste"}
+    old = {c["id"]: c for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
+    current = {c["id"]: c for c in candidate["concepts"]}
+    assert all(current[cid] == concept for cid, concept in old.items())
     for concept in candidate["concepts"]:
         assert concept["source"] == concept["snapshot"]["source"]
         assert concept["redistributable"] == concept["snapshot"]["redistributable"]
@@ -127,7 +130,7 @@ def test_stale_kg_binding_rejected_before_review(reviewed_files):
 
 
 def test_automatic_supplies_do_not_unlock_themselves(candidate):
-    candidate["unlocks"][0]["after_discoveries"] = 128
+    candidate["unlocks"][0]["after_discoveries"] = B.MAX_CONCEPTS
     with pytest.raises(ValueError, match="unreachable"):
         B.audit(candidate)
 
@@ -274,6 +277,15 @@ def test_expansion_preserves_all_prior_recipes_goals_and_collections(candidate):
     assert candidate["compatible_versions"][0]["recipe_hash"] == (
         "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c"
     )
+    assert {v["recipe_hash"] for v in candidate["compatible_versions"]} == {
+        "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+        "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+    }
+
+
+def drop_original_concept(candidate):
+    original_id = json.loads(B.BASELINE.read_bytes())["concepts"][0]["id"]
+    candidate["concepts"] = [c for c in candidate["concepts"] if c["id"] != original_id]
 
 
 @pytest.mark.parametrize("mutation", [
@@ -282,7 +294,7 @@ def test_expansion_preserves_all_prior_recipes_goals_and_collections(candidate):
     lambda c: c["world"]["starter_ids"].pop(),
     lambda c: c["unlocks"][0].update(after_discoveries=4),
     lambda c: c["goals"].pop(0),
-    lambda c: c["concepts"].pop(0),
+    drop_original_concept,
 ])
 def test_incompatible_editorial_changes_cannot_claim_old_save_support(candidate, mutation):
     mutation(candidate)
@@ -298,3 +310,49 @@ def test_archived_save_authority_is_bound_to_the_actual_reviewed_bytes(monkeypat
     monkeypatch.setattr(B, "BASELINE", edited)
     with pytest.raises(ValueError, match="archive changed"):
         B.candidate()
+
+
+@pytest.mark.parametrize("role_index", [1, 2])
+@pytest.mark.parametrize("change", [
+    lambda r: r.pop("concepts"),
+    lambda r: r["concepts"].pop(),
+    lambda r: r["concepts"].append(copy.deepcopy(r["concepts"][0])),
+    lambda r: r["concepts"][0].update(id="unknown-concept"),
+    lambda r: r["concepts"][0].update(concept_sha256="0" * 64),
+    lambda r: r["concepts"][0].update(verdict="hold"),
+    lambda r: r["concepts"][0].update(rationale=""),
+    lambda r: r["concepts"][0].update(sources=["file:///private"]),
+])
+def test_every_concept_requires_complete_bound_review(reviewed_files, role_index, change):
+    mutate(reviewed_files[role_index], change)
+    with pytest.raises(ValueError, match="concept"):
+        B.build_catalog(*reviewed_files)
+
+
+def test_new_concept_cannot_forge_inherited_approval(reviewed_files):
+    old_ids = {c["id"] for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
+    def forge(review):
+        next(c for c in review["concepts"] if c["id"] not in old_ids).update(inherited=True)
+    mutate(reviewed_files[1], forge)
+    with pytest.raises(ValueError, match="inherited"):
+        B.build_catalog(*reviewed_files)
+
+
+def test_new_concept_needs_factual_sources(reviewed_files):
+    old_ids = {c["id"] for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
+    def remove_sources(review):
+        next(c for c in review["concepts"] if c["id"] not in old_ids).update(sources=[])
+    mutate(reviewed_files[1], remove_sources)
+    with pytest.raises(ValueError, match="checked sources"):
+        B.build_catalog(*reviewed_files)
+
+
+def test_reviewed_unchanged_concepts_can_inherit_without_new_source_claims(reviewed_files):
+    old_ids = {c["id"] for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
+    def inherit(review):
+        for row in review["concepts"]:
+            if row["id"] in old_ids:
+                row.update(inherited=True, sources=[])
+    for path in reviewed_files[1:]:
+        mutate(path, inherit)
+    assert B.build_catalog(*reviewed_files)["concepts"]

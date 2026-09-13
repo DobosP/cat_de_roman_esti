@@ -1,7 +1,7 @@
 """Unscored Alchimie exploration with validated, portable discovery checkpoints.
 
 Sessions retain the common 7200-second TTL/1000-session cap. A checkpoint contains only
-at most 128 successful crafts; replay validates ownership, canonical recipes and supplies.
+at most 256 successful crafts; replay validates ownership, canonical recipes and supplies.
 Goals affect guidance only. They never choose recipes, award scores or stop play.
 """
 

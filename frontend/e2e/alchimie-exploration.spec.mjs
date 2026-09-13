@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { readFileSync } from "node:fs";
 
 const BASE = "/api/alchimie/explore";
 const SAVE = "cat_alchimie_exploration_v1";
@@ -7,6 +8,7 @@ const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const word = (page, label) => page.locator(".alchemy-inventory-grid").getByRole("button", { name: new RegExp(`^${escapeRegex(label)}(?:,|$)`) });
 const responseTo = (page, path, method = "POST") => page.waitForResponse((response) => response.request().method() === method && new URL(response.url()).pathname === path);
 const saved = (page) => page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "null"), SAVE);
+const EXPANDED_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-111-checkpoint.json", import.meta.url), "utf8"));
 
 // The original 75-concept world shipped in 2257766. This historical checkpoint must
 // keep its original fingerprint; changing it would hide a broken upgrade path.
@@ -240,6 +242,49 @@ test("the original kitchen collection upgrades without losing recipes, pantry su
   expect((await saved(page)).progress).toEqual(next.progress);
 });
 
+test("a completed 111-concept collection keeps every earned item and opens the larger world", async ({ page }) => {
+  const checkpoint = EXPANDED_CHECKPOINT.collection;
+  await page.goto("/alchimie");
+  await page.evaluate(({ key, collection }) => localStorage.setItem(key, JSON.stringify(collection)), {
+    key: SAVE, collection: checkpoint,
+  });
+  const restore = responseTo(page, BASE);
+  await page.reload();
+  const response = await restore;
+  expect(response.status()).toBe(200);
+  const restored = await response.json();
+  expect(restored.progress.recipe_hash).not.toBe(checkpoint.progress.recipe_hash);
+  expect(restored.compatible_recipe_hashes).toEqual(expect.arrayContaining([
+    LEGACY_COLLECTION.progress.recipe_hash, checkpoint.progress.recipe_hash,
+  ]));
+  expect(restored.world.total_concepts).toBeGreaterThan(111);
+  expect(restored.world.total_recipes).toBeGreaterThan(116);
+  expect(restored.complete).toBe(false);
+  expect(restored.discovered_count).toBe(58);
+  expect(restored.goal_id).toBe("cornulete");
+  expect(restored.goals.find((goal) => goal.id === "cornulete").completed).toBe(true);
+  expect(restored.inventory.map((item) => item.id)).toEqual(expect.arrayContaining(EXPANDED_CHECKPOINT.owned_ids));
+  expect(restored.progress.discoveries).toEqual(checkpoint.progress.discoveries);
+  await expect.poll(async () => (await saved(page))?.progress.recipe_hash).toBe(restored.progress.recipe_hash);
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.getByLabel("Obiectiv opțional", { exact: true })).toHaveValue("cornulete");
+  const query = page.getByRole("searchbox", { name: "Caută în colecție" });
+  await query.fill("cornulete");
+  await expect(word(page, "Cornulețe")).toBeVisible();
+  await query.press("Escape");
+  await page.locator(".alchemy-explore-journal > summary").click();
+  await expect(page.locator(".alchemy-journal-entry")).toHaveCount(58);
+  await page.locator(".alchemy-explore-journal > summary").click();
+  const next = await discover(page, restored);
+  expect(next.discovered_count).toBe(59);
+  expect(next.progress.discoveries.slice(0, 58)).toEqual(checkpoint.progress.discoveries);
+  await page.reload();
+  await expect(page.getByLabel("Obiectiv opțional", { exact: true })).toBeEnabled();
+  expect((await saved(page)).progress).toEqual(next.progress);
+  expect(await page.evaluate((key) => new TextEncoder().encode(localStorage.getItem(key)).byteLength, SAVE)).toBeLessThan(64 * 1024);
+  expect(await page.evaluate(() => globalThis.document.documentElement.scrollWidth <= globalThis.innerWidth)).toBe(true);
+});
+
 test("the daily circuit opens scored challenges while the arcade card opens exploration", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Deschide Alchimie — neterminat azi", exact: true }).click();
@@ -255,6 +300,8 @@ test("exploration intro, active collection and earned recipes are accessible", a
   await page.goto("/alchimie");
   await expect(page.getByRole("button", { name: "Începe explorarea →" })).toBeEnabled();
   async function audit(label) {
+    // The route fade can start after mount; audit the settled screen colors.
+    await expect(page.locator(".screen")).toHaveCSS("opacity", "1");
     await page.evaluate(async () => { await globalThis.document.fonts.ready; await Promise.all(globalThis.document.getAnimations().filter((animation) => Number.isFinite(animation.effect?.getComputedTiming().endTime)).map((animation) => animation.finished.catch(() => {}))); });
     const result = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
     expect(result.violations.map(({ id, nodes }) => ({ id, targets: nodes.map(({ target }) => target) }))).toEqual([]);

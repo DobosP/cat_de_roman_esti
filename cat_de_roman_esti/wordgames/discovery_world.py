@@ -4,20 +4,23 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from functools import cached_property, lru_cache
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 from urllib.parse import urlparse
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from .recipe_extensions import record_snapshot
-from .service import get_service
+from .service import get_service, normalize
 
 CATALOG_PATH = Path(__file__).resolve().parents[1] / "fixtures/alchimie_discovery_world_v92.json"
-MAX_CONCEPTS = 128
+MAX_CONCEPTS = 256
 MAX_RECIPES = 512
+MAX_SUPPLIES = 96
+MAX_SUPPLY_TIERS = 12
 MAX_CATALOG_BYTES = 2 * 1024 * 1024
 Identifier = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=160)]
 Text = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=2000)]
@@ -42,6 +45,8 @@ class Concept(Record):
     source: str
     redistributable: bool
     snapshot: dict
+    origin: Literal["kg", "authored"] = "kg"
+    references: list[Text] = Field(default_factory=list, max_length=8)
 
 
 class Recipe(Record):
@@ -85,7 +90,7 @@ class MechanicUnlock(Record):
 class Mechanics(Record):
     starters: list[Identifier] = Field(min_length=2, max_length=12)
     recipes: list[MechanicRecipe] = Field(min_length=2, max_length=MAX_RECIPES)
-    unlocks: list[MechanicUnlock] = Field(max_length=8)
+    unlocks: list[MechanicUnlock] = Field(max_length=MAX_SUPPLY_TIERS)
 
 
 class CompatibleVersion(Record):
@@ -103,7 +108,7 @@ class Catalog(BaseModel):
     concepts: list[Concept] = Field(min_length=3, max_length=MAX_CONCEPTS)
     recipes: list[Recipe] = Field(min_length=2, max_length=MAX_RECIPES)
     goals: list[Goal] = Field(max_length=32)
-    unlocks: list[Unlock] = Field(default_factory=list, max_length=8)
+    unlocks: list[Unlock] = Field(default_factory=list, max_length=MAX_SUPPLY_TIERS)
     candidate_sha256: Sha
     bindings: dict[str, Sha]
     reviews: list[Review] = Field(min_length=2, max_length=2)
@@ -127,6 +132,23 @@ def mechanics_hash(mechanics: dict) -> str:
     return hashlib.sha256(json.dumps(
         mechanics, sort_keys=True, separators=(",", ":"),
     ).encode()).hexdigest()
+
+
+def authored_snapshot(concept_id: str, label: str, description: str, references: list[str]) -> dict:
+    """Original world-local wording and citations, without asserting third-party licenses."""
+    return {"id": concept_id, "label": label, "description": description,
+            "source": "authored:alchimie", "redistributable": False, "references": references}
+
+
+def valid_reference(value: str) -> bool:
+    try:
+        url = urlparse(value)
+        return (url.scheme in {"http", "https"} and bool(url.hostname)
+                and url.username is None and url.password is None
+                and not any(c.isspace() for c in value)
+                and (url.port is None or url.port > 0))
+    except ValueError:
+        return False
 
 
 @dataclass(frozen=True)
@@ -174,6 +196,20 @@ def validate_world(raw: dict, *, check_graph: bool = True) -> DiscoveryWorld:
     _require({"kg_sha256", "rubric_sha256"} <= catalog.bindings.keys(), "source bindings")
     concepts = {c.id: c for c in catalog.concepts}
     _require(len(concepts) == len(catalog.concepts), "duplicate concept")
+    labels = [normalize(c.label) for c in concepts.values()]
+    _require(all(labels) and len(set(labels)) == len(labels), "empty or ambiguous concept labels")
+    for concept in concepts.values():
+        if concept.origin == "authored":
+            _require(bool(re.fullmatch(r"alw_food_[a-z0-9_]+", concept.id)),
+                     "authored id namespace")
+            _require(0 < len(concept.description.strip()) <= 2000
+                     and bool(concept.references)
+                     and all(valid_reference(url) for url in concept.references),
+                     "authored definition references")
+            _require(concept.source == "authored:alchimie" and not concept.redistributable
+                     and concept.snapshot == authored_snapshot(
+                         concept.id, concept.label, concept.description, concept.references,
+                     ), "authored definition provenance changed")
     supplied = set(catalog.world.starter_ids)
     _require(len(supplied) == len(catalog.world.starter_ids), "duplicate starter")
     unlock_ids: set[str] = set()
@@ -185,7 +221,7 @@ def validate_world(raw: dict, *, check_graph: bool = True) -> DiscoveryWorld:
                  "duplicate supply")
         supplied.update(ids)
     _require(supplied <= concepts.keys()
-             and len(supplied) - len(catalog.world.starter_ids) <= 48, "invalid supplies")
+             and len(supplied) - len(catalog.world.starter_ids) <= MAX_SUPPLIES, "invalid supplies")
     recipes: dict[tuple[str, str], Recipe] = {}
     recipe_ids: set[str] = set()
     for recipe in catalog.recipes:
@@ -196,9 +232,7 @@ def validate_world(raw: dict, *, check_graph: bool = True) -> DiscoveryWorld:
         _require(set(pair) | {recipe.result} <= concepts.keys(), "unknown recipe concept")
         _require(recipe.result not in pair and recipe.result not in supplied,
                  "recipe recreates ingredient or supply")
-        for source in recipe.sources:
-            url = urlparse(source)
-            _require(url.scheme in {"http", "https"} and bool(url.netloc), "source URL")
+        _require(all(valid_reference(source) for source in recipe.sources), "source URL")
         recipes[pair] = recipe
     goals = {g.id: g for g in catalog.goals}
     _require(len(goals) == len(catalog.goals), "duplicate goal")
@@ -280,6 +314,10 @@ def _check_graph(world: DiscoveryWorld) -> None:
     service = get_service()
     for concept in world.concepts.values():
         node = service.node(concept.id)
+        if concept.origin == "authored":
+            _require(node is None and service.resolve(concept.label) is None,
+                     "authored concept shadows KG identity")
+            continue
         _require(node is not None and record_snapshot(node) == concept.snapshot,
                  "concept source changed")
         # Public descriptions may contain independently reviewed world-local corrections.

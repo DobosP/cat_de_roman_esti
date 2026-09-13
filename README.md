@@ -1,13 +1,14 @@
 # cat_de_roman_esti
 
-A **text-only arcade of six Romanian word games** over one concept graph
+A **text-only arcade of six Romanian word games** using a shared concept graph
 (**2,416 concepts / 9,459 links / 8,641 typed aliases / 180 puzzles**,
 `fixture-v90-household-discovery` — generated hashes and gate state are
-recorded in `docs/STATUS.md`; no graph visualization). All six are **server-authoritative**:
+recorded in `docs/STATUS.md`; no graph visualization). Alchimie exploration also has its
+own reviewed vocabulary and recipe catalog. All six are **server-authoritative**:
 the Django BFF validates every move and hides the answers.
 
 - **Alchimie** — explore a saved Romanian kitchen collection with consistent recipes
-  and optional goals, or play short scored target challenges ([ADR-0145](docs/adr/0145-persistent-alchimie-discovery-world.md)).
+  and optional goals, or play short scored target challenges ([ADR-0147](docs/adr/0147-grow-alchimie-with-reviewed-vocabulary.md)).
 - **Intrusul** — tap the one word that does not belong with the other three.
 - **Perechi** — match eight words into four hidden semantic pairs.
 - **Conexiuni** *(à la NYT Connections)* — group 16 concepts into 4 hidden categories,

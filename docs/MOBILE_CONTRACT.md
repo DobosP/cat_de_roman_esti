@@ -114,7 +114,7 @@ The additive `/api/alchimie/explore` routes use stable operation IDs
 `{progress: {world_id, recipe_hash, discoveries: [[a,b], ...]}, goal_id: null|string}` to create or
 restore. GET `/{game_id}` reads state; POST suffixes `/combine`, `/hint`, `/goal` accept
 `{a,b}`, `{}`, and `{goal_id: null|string}` respectively. Identifiers are strings;
-unknown fields in command bodies are rejected and a checkpoint has at most 128 pairs.
+unknown fields in command bodies are rejected and a checkpoint has at most 256 pairs.
 
 State contains `mode: explore`, `game_id`, a per-session monotonic `revision`, public
 world counts, earned `inventory`, `discovered_count` (crafted results only), `seed_count`,
@@ -145,6 +145,14 @@ and preserves earned concepts and goals. Existing sessions upgrade before reads/
 when compatible; unrelated fingerprints still return 409 on restore. New recipes cannot
 be claimed under old save authority. Client unions across fingerprints require an explicit
 compatibility direction, keep the newer book, and remain subject to server replay.
+
+The larger vocabulary ([ADR-0147](adr/0147-grow-alchimie-with-reviewed-vocabulary.md))
+keeps these operations and fields. A world may now contain up to 256 concepts and a
+checkpoint up to 256 pairs; request bodies and UTF-8 browser saves remain limited to
+64 KiB. Both previously reviewed 75- and 111-concept fingerprints are supported. Some
+earned exploration IDs use the `alw_food_` namespace for reviewed world-local concepts;
+clients render their supplied labels and do not assume every exploration ID is in the
+unchanged KG/mobile pack. This introduces no source/identity lookup requirement for clients.
 
 ### Lanț progress and help
 

@@ -1,6 +1,7 @@
 # ADR-0146: Expand Alchimie and preserve collections
 
-- Status: accepted
+- Status: partially superseded by [ADR-0147](0147-grow-alchimie-with-reviewed-vocabulary.md)
+  for inventory, bounds and compatibility history; other decisions remain accepted.
 - Date: 2026-09-13
 - Partially supersedes: [ADR-0145](0145-persistent-alchimie-discovery-world.md), for the
   initial content inventory and strict rejection of all changed recipe fingerprints.

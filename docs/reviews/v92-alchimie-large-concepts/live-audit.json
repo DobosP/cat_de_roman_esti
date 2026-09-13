@@ -1,0 +1,3745 @@
+{
+  "kind": "alchimie-discovery-world-audit-v1",
+  "verdict": "accept",
+  "catalog_sha256": "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df",
+  "candidate_sha256": "da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a",
+  "world_id": "bucataria-romaneasca-v1",
+  "runtime_sources": [
+    {
+      "path": "cat_de_roman_esti/wordgames/discovery_world.py",
+      "sha256": "7e3e770f7788786948ee74e5c87c991d3b88bd1d34b4b082e918f68b391c3788"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/alchimie_explore.py",
+      "sha256": "2effb23e1f7fb14868dd29279f6bc9ddb7d3eb8b030b8ec731401ce9658e69f2"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/service.py",
+      "sha256": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/_session_endpoint.py",
+      "sha256": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f"
+    },
+    {
+      "path": "cat_de_roman_esti/web/urls.py",
+      "sha256": "ead8b6ca81be580a1006f81e14d106723e826d248117cea14ecc162a9768d61f"
+    },
+    {
+      "path": "scripts/alchimie_discovery_recipe_source.py",
+      "sha256": "b8d82e561297d4e8ddba374e78d3590f3db0da87f6883baf6cc65eacf8621a96"
+    },
+    {
+      "path": "scripts/build_alchimie_discovery_world.py",
+      "sha256": "3af78a89155c00c1f6288adc2c93aac8b51ecf88f56d86ef54be883761200e0e"
+    },
+    {
+      "path": "scripts/audit_alchimie_discovery_world.py",
+      "sha256": "d284923510c8bf63f3a7cada9c0905242dbc9f93f2ac3f9a43633d5f73fdebae"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-more-concepts/candidates.json",
+      "sha256": "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209"
+    }
+  ],
+  "metrics": {
+    "concepts": 221,
+    "starting_supplies": 8,
+    "kg_concepts": 174,
+    "authored_concepts": 47,
+    "unlocked_supplies": 96,
+    "crafted_discoveries": 117,
+    "recipes": 285,
+    "results_with_alternatives": 77,
+    "crafted_intermediates": 47,
+    "terminal_discoveries": 70,
+    "opening_pairs": 9,
+    "possible_starting_pairs": 28,
+    "optional_goals": 32
+  },
+  "recipes": [
+    {
+      "id": "aluat-apa",
+      "ingredients": [
+        "Făină",
+        "Apă"
+      ],
+      "result": "Aluat",
+      "explanation": "Făina amestecată și frământată cu apă formează un aluat simplu.",
+      "sources": [
+        "https://dexonline.ro/definitie/aluat/322624",
+        "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+      ]
+    },
+    {
+      "id": "aluat-lapte",
+      "ingredients": [
+        "Făină",
+        "Lapte"
+      ],
+      "result": "Aluat",
+      "explanation": "Laptele poate înlocui apa în aluaturi; frământarea leagă făina cu lichidul.",
+      "sources": [
+        "https://dexonline.ro/definitie/aluat/322624",
+        "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+      ]
+    },
+    {
+      "id": "paste-ou",
+      "ingredients": [
+        "Făină",
+        "Ou"
+      ],
+      "result": "Paste",
+      "explanation": "Făina și oul formează aluatul de paste proaspete, întins și tăiat apoi.",
+      "sources": [
+        "https://shop.pastacinquepalmi.com/produs/tagliatelle-alluovo/",
+        "https://www.petitchef.ro/retete/acompaniamente/cum-sa-faci-paste-proaspete-de-casa-fid-1569687"
+      ]
+    },
+    {
+      "id": "paste-aluat",
+      "ingredients": [
+        "Ou",
+        "Aluat"
+      ],
+      "result": "Paste",
+      "explanation": "Un aluat cu ou, întins subțire și tăiat, devine paste de casă.",
+      "sources": [
+        "https://shop.pastacinquepalmi.com/produs/tagliatelle-alluovo/",
+        "https://www.petitchef.ro/retete/acompaniamente/cum-sa-faci-paste-proaspete-de-casa-fid-1569687"
+      ]
+    },
+    {
+      "id": "pandispan-ou-zahar",
+      "ingredients": [
+        "Zahăr",
+        "Ou"
+      ],
+      "result": "Pandișpan",
+      "explanation": "Ouăle bătute cu zahăr dau baza unui pandișpan; se încorporează făină și se coace.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/pandispan-cu-capsuni"
+      ]
+    },
+    {
+      "id": "paine-cuptor",
+      "ingredients": [
+        "Aluat",
+        "Cuptor de bucătărie"
+      ],
+      "result": "Pâine",
+      "explanation": "Aluatul de pâine se coace în cuptor; dospirea depinde de sortiment.",
+      "sources": [
+        "https://dexonline.ro/definitie/p%C3%A2ine"
+      ]
+    },
+    {
+      "id": "branza-cheag",
+      "ingredients": [
+        "Lapte",
+        "Cheag alimentar"
+      ],
+      "result": "Brânză",
+      "explanation": "Cheagul coagulează laptele; prin scurgerea zerului se obține brânza.",
+      "sources": [
+        "https://delacojunior.ro/branza-de-capra/",
+        "https://www.lalena.ro/reteta/1862/Branza-Telemea-de-Casa/"
+      ]
+    },
+    {
+      "id": "branza-lamaie",
+      "ingredients": [
+        "Lămâie",
+        "Lapte"
+      ],
+      "result": "Brânză",
+      "explanation": "Zeama de lămâie poate coagula laptele încălzit pentru o brânză proaspătă.",
+      "sources": [
+        "https://portal.eduhr.ro/wp-content/uploads/2021/11/A451.pdf",
+        "https://www.lalena.ro/u/reteta/1279/Branza-de-vaci-din-lapte-fiert/"
+      ]
+    },
+    {
+      "id": "saramura",
+      "ingredients": [
+        "Apă",
+        "Sare"
+      ],
+      "result": "Saramură",
+      "explanation": "Sarea dizolvată în apă formează saramură.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1862/Branza-Telemea-de-Casa/"
+      ]
+    },
+    {
+      "id": "mamaliga-apa",
+      "ingredients": [
+        "Apă",
+        "Mălai"
+      ],
+      "result": "Mămăligă",
+      "explanation": "Mălaiul fiert în apă și amestecat devine mămăligă.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1166/Mamaliga-Moldoveneasca/"
+      ]
+    },
+    {
+      "id": "mamaliga-lapte",
+      "ingredients": [
+        "Lapte",
+        "Mălai"
+      ],
+      "result": "Mămăligă",
+      "explanation": "Există și mămăligă fiartă în lapte, în loc de apă sau împreună cu aceasta.",
+      "sources": [
+        "https://teoskitchen.ro/2013/10/m-b-s-mamaliga-cu-branza-si-smantana.html"
+      ]
+    },
+    {
+      "id": "telemea",
+      "ingredients": [
+        "Brânză",
+        "Saramură"
+      ],
+      "result": "Telemea",
+      "explanation": "Telemeaua este o brânză care se sărează și se păstrează în saramură.",
+      "sources": [
+        "https://hochland.ro/produse/telemea/",
+        "https://www.lalena.ro/reteta/1862/Branza-Telemea-de-Casa/"
+      ]
+    },
+    {
+      "id": "bulz-branza",
+      "ingredients": [
+        "Mămăligă",
+        "Brânză"
+      ],
+      "result": "Bulz",
+      "explanation": "Mămăliga umplută cu brânză și coaptă formează bulzul.",
+      "sources": [
+        "https://www.pastebaneasa.ro/retete/bulz-la-cuptor/"
+      ]
+    },
+    {
+      "id": "bulz-telemea",
+      "ingredients": [
+        "Mămăligă",
+        "Telemea"
+      ],
+      "result": "Bulz",
+      "explanation": "Telemeaua poate umple un bulz de mămăligă, copt apoi.",
+      "sources": [
+        "https://www.pastebaneasa.ro/retete/bulz-la-cuptor/"
+      ]
+    },
+    {
+      "id": "dulceata-fruct",
+      "ingredients": [
+        "Zahăr",
+        "Fruct"
+      ],
+      "result": "Dulceață",
+      "explanation": "Fructele fierte cu zahăr dau dulceață; timpul și proporțiile depind de fruct.",
+      "sources": [
+        "https://www.lalena.ro/reteta/541/Dulceata-de-cirese-albe/"
+      ]
+    },
+    {
+      "id": "dulceata-mar",
+      "ingredients": [
+        "Măr",
+        "Zahăr"
+      ],
+      "result": "Dulceață",
+      "explanation": "Bucățile de măr se pot fierbe în sirop de zahăr pentru dulceață de mere.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/dulceata-de-mere"
+      ]
+    },
+    {
+      "id": "compot-fruct",
+      "ingredients": [
+        "Apă",
+        "Fruct"
+      ],
+      "result": "Compot",
+      "explanation": "Fructele fierte în apă formează compot, îndulcit după gust.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1873/Compot-de-Capsuni/"
+      ]
+    },
+    {
+      "id": "compot-mar",
+      "ingredients": [
+        "Măr",
+        "Apă"
+      ],
+      "result": "Compot",
+      "explanation": "Merele fierte în apă dau compot de mere, cu zahăr după gust.",
+      "sources": [
+        "https://pofta-buna.com/compot-de-mere-pentru-iarna-reteta/"
+      ]
+    },
+    {
+      "id": "muraturi-legume",
+      "ingredients": [
+        "Legume",
+        "Saramură"
+      ],
+      "result": "Murături",
+      "explanation": "Legumele se pot conserva prin fermentare în saramură.",
+      "sources": [
+        "https://nasulrosu.ro/product/castraveti-murati-1700ml-nasul-rosu/",
+        "https://www.lalena.ro/reteta/117/Castraveti-murati-in-saramura-la-borcan/"
+      ]
+    },
+    {
+      "id": "castraveti-saramura",
+      "ingredients": [
+        "Castravete",
+        "Saramură"
+      ],
+      "result": "Castraveți murați",
+      "explanation": "Castraveții ținuți în saramură fermentează și devin castraveți murați.",
+      "sources": [
+        "https://nasulrosu.ro/product/castraveti-murati-1700ml-nasul-rosu/",
+        "https://www.lalena.ro/reteta/117/Castraveti-murati-in-saramura-la-borcan/"
+      ]
+    },
+    {
+      "id": "supa-legume",
+      "ingredients": [
+        "Apă",
+        "Legume"
+      ],
+      "result": "Supă",
+      "explanation": "Legumele fierte în apă dau baza unei supe de legume.",
+      "sources": [
+        "https://dexonline.ro/definitie/sup%C4%83"
+      ]
+    },
+    {
+      "id": "ciorba-bors",
+      "ingredients": [
+        "Borș",
+        "Supă"
+      ],
+      "result": "Ciorbă",
+      "explanation": "Borșul acrește o supă de legume sau carne, transformând-o într-o ciorbă.",
+      "sources": [
+        "https://dexonline.ro/definitie/ciorb%C4%83",
+        "https://pofta-buna.com/ciorba-de-fasole/"
+      ]
+    },
+    {
+      "id": "ciorba-fasole",
+      "ingredients": [
+        "Ciorbă",
+        "Fasole"
+      ],
+      "result": "Ciorbă de fasole",
+      "explanation": "Fasolea fiartă este ingredientul principal al ciorbei de fasole.",
+      "sources": [
+        "https://pofta-buna.com/ciorba-de-fasole/"
+      ]
+    },
+    {
+      "id": "ciorba-fasole-bors",
+      "ingredients": [
+        "Borș",
+        "Fasole"
+      ],
+      "result": "Ciorbă de fasole",
+      "explanation": "Fasolea fiartă cu legume se poate acri cu borș pentru ciorbă de fasole.",
+      "sources": [
+        "https://pofta-buna.com/ciorba-de-fasole/"
+      ]
+    },
+    {
+      "id": "mujdei",
+      "ingredients": [
+        "Apă",
+        "Usturoi"
+      ],
+      "result": "Mujdei",
+      "explanation": "Usturoiul zdrobit, frecat cu sare și diluat cu apă dă un mujdei simplu.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1580/Mujdei-de-Usturoi/?all_comments=1"
+      ]
+    },
+    {
+      "id": "mujdei-ulei",
+      "ingredients": [
+        "Ulei",
+        "Usturoi"
+      ],
+      "result": "Mujdei",
+      "explanation": "Usturoiul zdrobit poate fi frecat cu ulei pentru un mujdei cremos.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1580/Mujdei-de-Usturoi/?all_comments=1"
+      ]
+    },
+    {
+      "id": "fasole-batuta",
+      "ingredients": [
+        "Fasole",
+        "Usturoi"
+      ],
+      "result": "Fasole bătută",
+      "explanation": "Fasolea fiartă, pasată și aromatizată cu usturoi formează fasole bătută.",
+      "sources": [
+        "https://www.lalena.ro/reteta/268/Fasole-batuta/"
+      ]
+    },
+    {
+      "id": "ardei-orez",
+      "ingredients": [
+        "Ardei",
+        "Orez"
+      ],
+      "result": "Ardei umpluți",
+      "explanation": "Ardeii se pot umple cu orez și legume pentru o variantă de post.",
+      "sources": [
+        "https://pofta-buna.com/ardei-umpluti-cu-orez-si-ciuperci-reteta-de-post/",
+        "https://retete.unica.ro/recipes/ardei-umpluti-cu-orez-3/"
+      ]
+    },
+    {
+      "id": "ardei-carne",
+      "ingredients": [
+        "Ardei",
+        "Carne"
+      ],
+      "result": "Ardei umpluți",
+      "explanation": "Ardeii umpluți pot avea o compoziție cu carne tocată, orez și condimente.",
+      "sources": [
+        "https://www.lalena.ro/reteta/69/Ardei-umpluti/"
+      ]
+    },
+    {
+      "id": "friptura-cuptor",
+      "ingredients": [
+        "Carne",
+        "Cuptor de bucătărie"
+      ],
+      "result": "Friptură",
+      "explanation": "Carnea pregătită și coaptă în cuptor devine friptură.",
+      "sources": [
+        "https://dexonline.ro/definitie/friptur%C4%83"
+      ]
+    },
+    {
+      "id": "salata",
+      "ingredients": [
+        "Castravete",
+        "Roșie"
+      ],
+      "result": "Salată",
+      "explanation": "Roșiile și castraveții tăiați sunt baza unei salate proaspete de vară.",
+      "sources": [
+        "https://dexonline.ro/definitie/salat%C4%83"
+      ]
+    },
+    {
+      "id": "branza-smantana",
+      "ingredients": [
+        "Smântână",
+        "Brânză"
+      ],
+      "result": "Brânză cu smântână",
+      "explanation": "Brânza proaspătă se poate amesteca și servi cu smântână.",
+      "sources": [
+        "https://www.lalena.ro/reteta/230/Branza-de-vaci-de-casa/"
+      ]
+    },
+    {
+      "id": "frisca-mixer",
+      "ingredients": [
+        "Mixer de bucătărie",
+        "Smântână dulce pentru frișcă"
+      ],
+      "result": "Frișcă",
+      "explanation": "Smântâna dulce rece, potrivită pentru bătut, devine frișcă folosind mixerul.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1044/Crema-de-frisca-cum-batem-corect-smantana-pentru-a-face-frisca/",
+        "https://www.sanlacta.ro/pagini%20HTML/frisca.html"
+      ]
+    },
+    {
+      "id": "crema-vanilie",
+      "ingredients": [
+        "Lapte",
+        "Vanilie"
+      ],
+      "result": "Cremă de vanilie",
+      "explanation": "Laptele aromatizat cu vanilie este baza cremei, îngroșată cu ou sau amidon.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/sos-de-vanilie-creme-anglaise.html",
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-tort"
+      ]
+    },
+    {
+      "id": "crema-ou",
+      "ingredients": [
+        "Ou",
+        "Vanilie"
+      ],
+      "result": "Cremă de vanilie",
+      "explanation": "Oul și vanilia intră în crema de vanilie, preparată cu lapte și zahăr.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/sos-de-vanilie-creme-anglaise.html",
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-tort"
+      ]
+    },
+    {
+      "id": "ciocolata-casa",
+      "ingredients": [
+        "Cacao",
+        "Lapte praf"
+      ],
+      "result": "Ciocolată",
+      "explanation": "Cacaua și laptele praf formează ciocolata de casă împreună cu sirop de zahăr și unt.",
+      "sources": [
+        "https://jamilacuisine.ro/ciocolata-de-casa-gustul-copilariei-reteta-video/",
+        "https://www.lalena.ro/reteta/666/Ciocolata-de-casa/"
+      ]
+    },
+    {
+      "id": "biscuit-unt",
+      "ingredients": [
+        "Unt",
+        "Făină"
+      ],
+      "result": "Biscuit",
+      "explanation": "Făina și untul formează baza biscuiților fragezi, cu zahăr și coacere.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/biscuiti-cu-unt-love-letters"
+      ]
+    },
+    {
+      "id": "salam-cacao",
+      "ingredients": [
+        "Biscuit",
+        "Cacao"
+      ],
+      "result": "Salam de biscuiți",
+      "explanation": "Biscuiții rupți și cacaua sunt ingredientele caracteristice ale salamului de biscuiți.",
+      "sources": [
+        "https://jamilacuisine.ro/salam-de-biscuiti-de-post-reteta-simpla-rapida-si-delicioasa-video/",
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/salam-de-biscuiti-cu-ciocolata-si-fistic-reteta-detaliata.html"
+      ]
+    },
+    {
+      "id": "salam-ciocolata",
+      "ingredients": [
+        "Biscuit",
+        "Ciocolată"
+      ],
+      "result": "Salam de biscuiți",
+      "explanation": "O variantă de salam de biscuiți leagă biscuiții cu o compoziție de ciocolată.",
+      "sources": [
+        "https://jamilacuisine.ro/salam-de-biscuiti-de-post-reteta-simpla-rapida-si-delicioasa-video/",
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/salam-de-biscuiti-cu-ciocolata-si-fistic-reteta-detaliata.html"
+      ]
+    },
+    {
+      "id": "placinta-mere",
+      "ingredients": [
+        "Măr",
+        "Aluat"
+      ],
+      "result": "Plăcintă cu mere",
+      "explanation": "Foile de aluat învelesc umplutura de mere pentru plăcinta cu mere.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/placinta-cu-mere"
+      ]
+    },
+    {
+      "id": "cozonac-nuca",
+      "ingredients": [
+        "Nucă",
+        "Aluat"
+      ],
+      "result": "Cozonac",
+      "explanation": "Aluatul dulce dospit și umplutura de nucă alcătuiesc cozonacul cu nucă.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+      ]
+    },
+    {
+      "id": "cozonac-cacao",
+      "ingredients": [
+        "Aluat",
+        "Cacao"
+      ],
+      "result": "Cozonac",
+      "explanation": "Cacaua poate aromatiza umplutura unui cozonac din aluat dulce dospit.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+      ]
+    },
+    {
+      "id": "papanasi-faina",
+      "ingredients": [
+        "Făină",
+        "Brânză"
+      ],
+      "result": "Papanași",
+      "explanation": "Brânza proaspătă și făina intră în aluatul de papanași, alături de ou.",
+      "sources": [
+        "https://www.lauraadamache.ro/2016/01/papanasi-fierti.html",
+        "https://www.oetker.ro/produsele/p/mix-pentru-papanasi"
+      ]
+    },
+    {
+      "id": "papanasi-gris",
+      "ingredients": [
+        "Brânză",
+        "Griș"
+      ],
+      "result": "Papanași",
+      "explanation": "Papanașii fierți pot lega brânza proaspătă cu griș și ou.",
+      "sources": [
+        "https://www.lauraadamache.ro/2016/01/papanasi-fierti.html"
+      ]
+    },
+    {
+      "id": "supa-galuste",
+      "ingredients": [
+        "Supă",
+        "Griș"
+      ],
+      "result": "Supă cu găluște",
+      "explanation": "Găluștele din griș și ou se fierb în supă pentru supă cu găluște.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1205/Supa-de-pui-cu-galuste/"
+      ]
+    },
+    {
+      "id": "cremsnit",
+      "ingredients": [
+        "Aluat",
+        "Cremă de vanilie"
+      ],
+      "result": "Cremșnit",
+      "explanation": "Foile coapte de foietaj, un tip de aluat, se umplu cu cremă de vanilie pentru cremșnit.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-cremsnit-crema-fiarta"
+      ]
+    },
+    {
+      "id": "poale-brau",
+      "ingredients": [
+        "Brânză",
+        "Aluat"
+      ],
+      "result": "Poale-n brâu",
+      "explanation": "Poalele-n brâu sunt plăcinte din aluat dospit, împăturite peste brânză dulce.",
+      "sources": [
+        "https://jamilacuisine.ro/page/84/?taxonomy=ingredient",
+        "https://retete.unica.ro/recipes/poale-n-brau/"
+      ]
+    },
+    {
+      "id": "inghetata-frisca",
+      "ingredients": [
+        "Frișcă",
+        "Congelator"
+      ],
+      "result": "Înghețată",
+      "explanation": "O bază îndulcită cu frișcă, congelată, poate deveni înghețată de casă.",
+      "sources": [
+        "https://www.lauraadamache.ro/2021/07/inghetata-de-ciocolata-de-casa-cremoasa-fara-ace-de-gheata.html"
+      ]
+    },
+    {
+      "id": "inghetata-crema",
+      "ingredients": [
+        "Cremă de vanilie",
+        "Congelator"
+      ],
+      "result": "Înghețată",
+      "explanation": "O cremă de vanilie potrivită poate fi răcită și congelată ca bază de înghețată.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/inghetata-de-casa-cu-vanilie-reteta-video.html"
+      ]
+    },
+    {
+      "id": "diplomat-piscot",
+      "ingredients": [
+        "Frișcă",
+        "Pișcot"
+      ],
+      "result": "Tort Diplomat",
+      "explanation": "Tortul Diplomat poate avea pișcoturi și o cremă cu frișcă, fructe și gelatină.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/tort-diplomat"
+      ]
+    },
+    {
+      "id": "diplomat-gelatina",
+      "ingredients": [
+        "Frișcă",
+        "Gelatină alimentară"
+      ],
+      "result": "Tort Diplomat",
+      "explanation": "Frișca și gelatina intră în crema de Diplomat, împreună cu ou, lapte și fructe.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/tort-diplomat"
+      ]
+    },
+    {
+      "id": "pasca-stafide",
+      "ingredients": [
+        "Brânză",
+        "Stafide"
+      ],
+      "result": "Pască",
+      "explanation": "Brânza dulce și stafidele formează umplutura clasică a unei păști.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/pasca-cu-branza-si-stafide"
+      ]
+    },
+    {
+      "id": "amandina-cacao",
+      "ingredients": [
+        "Cacao",
+        "Pandișpan"
+      ],
+      "result": "Amandină",
+      "explanation": "Amandina pornește de la un blat de pandișpan cu cacao, completat cu sirop și cremă.",
+      "sources": [
+        "https://jamilacuisine.ro/amandina-de-casa-gustoasa-si-bine-insiropata-reteta-video/",
+        "https://jamilacuisine.ro/prajitura-amandina-amandine-facute-in-casa/"
+      ]
+    },
+    {
+      "id": "amandina-ciocolata",
+      "ingredients": [
+        "Ciocolată",
+        "Pandișpan"
+      ],
+      "result": "Amandină",
+      "explanation": "O amandină poate avea blat de pandișpan cu cacao și cremă sau glazură de ciocolată.",
+      "sources": [
+        "https://jamilacuisine.ro/amandina-de-casa-gustoasa-si-bine-insiropata-reteta-video/",
+        "https://jamilacuisine.ro/prajitura-amandina-amandine-facute-in-casa/"
+      ]
+    },
+    {
+      "id": "sarmale-carne",
+      "ingredients": [
+        "Varză murată",
+        "Carne"
+      ],
+      "result": "Sarmale",
+      "explanation": "Frunzele de varză murată învelesc umplutura de carne, orez și condimente a sarmalelor.",
+      "sources": [
+        "https://www.lalena.ro/reteta/73/Sarmale/"
+      ]
+    },
+    {
+      "id": "sarmale-orez",
+      "ingredients": [
+        "Orez",
+        "Varză murată"
+      ],
+      "result": "Sarmale",
+      "explanation": "Sarmalele de post pot avea orez și legume învelite în frunze de varză murată.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/sarmale-de-post-manastiresti-cu-nuca-si-stafide.html"
+      ]
+    },
+    {
+      "id": "gogosi",
+      "ingredients": [
+        "Ulei",
+        "Aluat"
+      ],
+      "result": "Gogoși",
+      "explanation": "Bucățile de aluat dospit, prăjite în ulei și îndulcite, devin gogoși.",
+      "sources": [
+        "https://jamilacuisine.ro/gogosi-pufoase-reteta-video/"
+      ]
+    },
+    {
+      "id": "sandvis-branza",
+      "ingredients": [
+        "Brânză",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Brânza pusă pe pâine sau între două felii formează un sandviș simplu.",
+      "sources": [
+        "https://dexonline.ro/definitie/sandvi%C8%99/352217",
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/sandwich-cu-friptura-sfecla-si-crema-liptauer.html"
+      ]
+    },
+    {
+      "id": "sandvis-telemea",
+      "ingredients": [
+        "Telemea",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Telemeaua poate fi umplutura unui sandviș, singură sau alături de legume.",
+      "sources": [
+        "https://dexonline.ro/definitie/sandvi%C8%99/352217",
+        "https://www.culinar.ro/retete/culinare/aperitive/sandviciuri/sandvis-cuptorul-de-aur"
+      ]
+    },
+    {
+      "id": "sandvis-friptura",
+      "ingredients": [
+        "Friptură",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Feliile de friptură rămase de la masă pot umple un sandviș.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/sandwich-cu-friptura-sfecla-si-crema-liptauer.html"
+      ]
+    },
+    {
+      "id": "sandvis-fasole",
+      "ingredients": [
+        "Fasole bătută",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Fasolea bătută întinsă pe pâine formează o gustare de tip sandviș deschis.",
+      "sources": [
+        "https://pofta-buna.com/fasole-batuta/"
+      ]
+    },
+    {
+      "id": "sandvis-salata",
+      "ingredients": [
+        "Salată",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Salata de legume poate umple un sandviș vegetarian, cu pâine și un sos după gust.",
+      "sources": [
+        "https://sanovita.ro/blog/sandwich-uri-cu-pasta-de-naut/",
+        "https://www.gustos.ro/retete-culinare/sandwich-cu-castraveti.html"
+      ]
+    },
+    {
+      "id": "sandvis-zacusca",
+      "ingredients": [
+        "Zacuscă",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Zacusca întinsă pe pâine formează un sandviș deschis de legume.",
+      "sources": [
+        "https://jamilacuisine.ro/zacusca-cu-fasole-reteta-video/"
+      ]
+    },
+    {
+      "id": "sandvis-cascaval",
+      "ingredients": [
+        "Cașcaval",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Feliile de cașcaval puse între felii de pâine formează un sandviș.",
+      "sources": [
+        "https://dexonline.ro/definitie/sandvi%C8%99/352217",
+        "https://www.cityfood.ro/ro/122-sandwich-cu-sunca-si-cascaval.html"
+      ]
+    },
+    {
+      "id": "sandvis-snitel",
+      "ingredients": [
+        "Șnițel",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Șnițelul pus în pâine, cu legume sau sos, devine umplutură de sandviș.",
+      "sources": [
+        "https://www.lagardere-tr.ro/sites/default/files/info_food_4.pdf"
+      ]
+    },
+    {
+      "id": "sandvis-chiftele",
+      "ingredients": [
+        "Chiftele",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Chiftelele pot umple un sandviș, alături de legume și sos.",
+      "sources": [
+        "https://dorbob.ro/product/sandwich-cu-chiftele/"
+      ]
+    },
+    {
+      "id": "clatite-tigaie",
+      "ingredients": [
+        "Tigaie",
+        "Aluat"
+      ],
+      "result": "Clătite",
+      "explanation": "Un aluat fluid cu făină, lapte și ou se întinde în tigaie pentru clătite subțiri.",
+      "sources": [
+        "https://www.lalena.ro/reteta/28/Aluat-pentru-clatite/"
+      ]
+    },
+    {
+      "id": "pizza-rosie",
+      "ingredients": [
+        "Roșie",
+        "Aluat"
+      ],
+      "result": "Pizza",
+      "explanation": "Aluatul întins și sosul din roșii formează baza unei pizza, coaptă cu toppinguri.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/pizza-cu-sunca-si-cascaval.html"
+      ]
+    },
+    {
+      "id": "pizza-cascaval",
+      "ingredients": [
+        "Cașcaval",
+        "Aluat"
+      ],
+      "result": "Pizza",
+      "explanation": "Cașcavalul se poate topi peste un blat de pizza din aluat, cu sos și alte ingrediente.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/pizza-cu-sunca-si-cascaval.html"
+      ]
+    },
+    {
+      "id": "cartofi-ulei",
+      "ingredients": [
+        "Ulei",
+        "Cartof"
+      ],
+      "result": "Cartofi prăjiți",
+      "explanation": "Cartoful tăiat în bucăți și prăjit în ulei devine cartofi prăjiți.",
+      "sources": [
+        "https://jamilacuisine.ro/cartofi-prajiti-in-stil-belgian-reteta-video/"
+      ]
+    },
+    {
+      "id": "cartofi-tigaie",
+      "ingredients": [
+        "Cartof",
+        "Tigaie"
+      ],
+      "result": "Cartofi prăjiți",
+      "explanation": "Cartofii tăiați se pot prăji într-o tigaie cu ulei încins.",
+      "sources": [
+        "https://jamilacuisine.ro/cartofi-prajiti-in-stil-belgian-reteta-video/"
+      ]
+    },
+    {
+      "id": "snitel-faina",
+      "ingredients": [
+        "Făină",
+        "Carne"
+      ],
+      "result": "Șnițel",
+      "explanation": "Feliile subțiri de carne trecute prin făină, apoi ou și pesmet, se prăjesc ca șnițele.",
+      "sources": [
+        "https://dexonline.ro/definitie/pesmet",
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html"
+      ]
+    },
+    {
+      "id": "snitel-firimitura",
+      "ingredients": [
+        "Carne",
+        "Firimitură"
+      ],
+      "result": "Șnițel",
+      "explanation": "Firimiturile de pâine uscată, măcinate ca pesmet, acoperă carnea cu ou pentru șnițel pane.",
+      "sources": [
+        "https://dexonline.ro/definitie/pesmet",
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html"
+      ]
+    },
+    {
+      "id": "cascaval-pane-ou",
+      "ingredients": [
+        "Cașcaval",
+        "Ou"
+      ],
+      "result": "Cașcaval pane",
+      "explanation": "Feliile de cașcaval se trec prin făină, ou bătut și pesmet, apoi se prăjesc.",
+      "sources": [
+        "https://bucate-aromate.ro/2020/05/cascaval-pane/",
+        "https://dexonline.ro/definitie/pesmet"
+      ]
+    },
+    {
+      "id": "cascaval-pane-firimitura",
+      "ingredients": [
+        "Cașcaval",
+        "Firimitură"
+      ],
+      "result": "Cașcaval pane",
+      "explanation": "Firimiturile uscate și măcinate pentru pesmet formează crusta cașcavalului pane, cu făină și ou.",
+      "sources": [
+        "https://bucate-aromate.ro/2020/05/cascaval-pane/",
+        "https://dexonline.ro/definitie/pesmet"
+      ]
+    },
+    {
+      "id": "chiftele-ou",
+      "ingredients": [
+        "Carne",
+        "Ou"
+      ],
+      "result": "Chiftele",
+      "explanation": "Oul ajută să lege carnea tocată cu legume și condimente pentru chiftele.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1420/Chiftele-marinate/"
+      ]
+    },
+    {
+      "id": "chiftele-usturoi",
+      "ingredients": [
+        "Carne",
+        "Usturoi"
+      ],
+      "result": "Chiftele",
+      "explanation": "Carnea tocată aromatizată cu usturoi se poate modela în chiftele și prăji ori coace.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1420/Chiftele-marinate/"
+      ]
+    },
+    {
+      "id": "frigarui-ceapa",
+      "ingredients": [
+        "Carne",
+        "Ceapă"
+      ],
+      "result": "Frigărui",
+      "explanation": "Cuburile de carne și bucățile de ceapă înșirate pe bețe se frig ca frigărui.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/frigarui-de-pui-cu-legume-reteta-simpla-si-gustoasa.html"
+      ]
+    },
+    {
+      "id": "friptura-tigaie",
+      "ingredients": [
+        "Tigaie",
+        "Carne"
+      ],
+      "result": "Friptură",
+      "explanation": "Bucățile de carne pot fi fripte și rumenite în tigaie.",
+      "sources": [
+        "https://dexonline.ro/definitie/friptur%C4%83"
+      ]
+    },
+    {
+      "id": "friptura-gratar",
+      "ingredients": [
+        "Grătar",
+        "Carne"
+      ],
+      "result": "Friptură",
+      "explanation": "Carnea friptă la grătar este o variantă de friptură.",
+      "sources": [
+        "https://dexonline.ro/definitie/friptur%C4%83"
+      ]
+    },
+    {
+      "id": "perisoare-orez",
+      "ingredients": [
+        "Orez",
+        "Carne"
+      ],
+      "result": "Ciorbă de perișoare",
+      "explanation": "Carnea tocată și orezul formează perișoare, legate cu ou și fierte într-o ciorbă.",
+      "sources": [
+        "https://www.lalena.ro/reteta/56/Ciorba-de-perisoare/?_aui_consent_management=1"
+      ]
+    },
+    {
+      "id": "piftie-supa",
+      "ingredients": [
+        "Supă",
+        "Gelatină alimentară"
+      ],
+      "result": "Piftie",
+      "explanation": "O supă de carne poate fi închegată cu gelatină și răcită, cu carne și usturoi, pentru piftie.",
+      "sources": [
+        "https://www.lalena.ro/reteta/165/Racituri-de-pui-Piftie/?_aui_consent_management=1"
+      ]
+    },
+    {
+      "id": "piftie-carne",
+      "ingredients": [
+        "Carne",
+        "Gelatină alimentară"
+      ],
+      "result": "Piftie",
+      "explanation": "Carnea fiartă în zeamă aromată poate fi legată cu gelatină și răcită într-o piftie.",
+      "sources": [
+        "https://www.lalena.ro/reteta/165/Racituri-de-pui-Piftie/?_aui_consent_management=1"
+      ]
+    },
+    {
+      "id": "zacusca-rosie",
+      "ingredients": [
+        "Ardei",
+        "Roșie"
+      ],
+      "result": "Zacuscă",
+      "explanation": "Ardeii copți și roșiile intră în zacuscă, gătite cu ceapă și, după variantă, vinete sau fasole.",
+      "sources": [
+        "https://www.lalena.ro/reteta/980/Zacusca-de-vinete/",
+        "https://www.lauralaurentiu.ro/retete-culinare/conserve/zacusca-de-fasole-boabe.html"
+      ]
+    },
+    {
+      "id": "zacusca-fasole",
+      "ingredients": [
+        "Ardei",
+        "Fasole"
+      ],
+      "result": "Zacuscă",
+      "explanation": "Ardeii copți și fasolea fiartă intră în zacusca de fasole, cu ceapă și roșii.",
+      "sources": [
+        "https://www.lalena.ro/reteta/980/Zacusca-de-vinete/",
+        "https://www.lauralaurentiu.ro/retete-culinare/conserve/zacusca-de-fasole-boabe.html"
+      ]
+    },
+    {
+      "id": "fasole-mujdei",
+      "ingredients": [
+        "Mujdei",
+        "Fasole"
+      ],
+      "result": "Fasole bătută",
+      "explanation": "Fasolea fiartă și pasată se poate aromatiza cu mujdei pentru fasole bătută.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1580/Mujdei-de-Usturoi/?all_comments=1",
+        "https://www.lalena.ro/reteta/268/Fasole-batuta/"
+      ]
+    },
+    {
+      "id": "urda-oala",
+      "ingredients": [
+        "Oală",
+        "Zer"
+      ],
+      "result": "Urdă",
+      "explanation": "Zerul încălzit în oală dă flocoane de proteine, care se adună și se scurg ca urdă.",
+      "sources": [
+        "https://www.indalpartner.ro/instalatii-si-linii-procesare/linii-pentru-urda-ricotta"
+      ]
+    },
+    {
+      "id": "urda-lamaie",
+      "ingredients": [
+        "Lămâie",
+        "Zer"
+      ],
+      "result": "Urdă",
+      "explanation": "La încălzirea zerului, puțină zeamă de lămâie poate ajuta coagularea proteinelor pentru urdă.",
+      "sources": [
+        "https://laptariacucaimac.ro/povesti-cu-caimac/branza-proaspata-laptaria-cu-caimac/"
+      ]
+    },
+    {
+      "id": "papanasi-urda-faina",
+      "ingredients": [
+        "Urdă",
+        "Făină"
+      ],
+      "result": "Papanași",
+      "explanation": "Urda poate înlocui brânza proaspătă într-un aluat de papanași cu făină și ou.",
+      "sources": [
+        "https://corinaureche.ro/papanasi-cu-urda/"
+      ]
+    },
+    {
+      "id": "papanasi-urda-gris",
+      "ingredients": [
+        "Urdă",
+        "Griș"
+      ],
+      "result": "Papanași",
+      "explanation": "Urda poate fi legată cu griș, făină și ou pentru o variantă de papanași copți.",
+      "sources": [
+        "https://www.culinar.ro/retete/culinare/dulciuri/prajituri/papanasi-copti"
+      ]
+    },
+    {
+      "id": "poale-brau-urda",
+      "ingredients": [
+        "Urdă",
+        "Aluat"
+      ],
+      "result": "Poale-n brâu",
+      "explanation": "Poalele-n brâu pot avea umplutură de urdă îndulcită, învelită în aluat dospit.",
+      "sources": [
+        "https://pofta-buna.com/branzoaice-poale-n-brau-reteta-moldoveneasca/"
+      ]
+    },
+    {
+      "id": "urda-smantana",
+      "ingredients": [
+        "Urdă",
+        "Smântână"
+      ],
+      "result": "Brânză cu smântână",
+      "explanation": "Urda este un produs lactat care poate fi amestecat cu smântână, ca variantă de brânză cu smântână.",
+      "sources": [
+        "https://www.culinar.ro/retete/culinare/aperitive/aperitive-cu-branza/urda-cu-marar-si-smintina"
+      ]
+    },
+    {
+      "id": "mucenici-miere",
+      "ingredients": [
+        "Miere",
+        "Aluat"
+      ],
+      "result": "Mucenici",
+      "explanation": "Mucenicii moldovenești se modelează din aluat dospit ca opturi, se coc și se ung cu miere.",
+      "sources": [
+        "https://jamilacuisine.ro/mucenici-moldovenesti-cu-nuca-si-miere-foarte-pufosi-reteta-video/"
+      ]
+    },
+    {
+      "id": "mucenici-paste",
+      "ingredients": [
+        "Paste",
+        "Nucă"
+      ],
+      "result": "Mucenici",
+      "explanation": "Pastele mici în formă de opt se fierb în zeamă dulce cu nucă pentru mucenici muntenești.",
+      "sources": [
+        "https://jamilacuisine.ro/mucenici-muntenesti-fierti-reteta-video/"
+      ]
+    },
+    {
+      "id": "alivenci-branza",
+      "ingredients": [
+        "Brânză",
+        "Mălai"
+      ],
+      "result": "Alivenci",
+      "explanation": "Mălaiul și brânza intră în compoziția de alivenci, coaptă cu ou și alte lactate.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1183/Alivanca-Malai/",
+        "https://www.lalena.ro/reteta/1579/Alivenci-Moldovenesti-cu-branza-si-marar/"
+      ]
+    },
+    {
+      "id": "alivenci-smantana",
+      "ingredients": [
+        "Smântână",
+        "Mălai"
+      ],
+      "result": "Alivenci",
+      "explanation": "Mălaiul și smântâna se combină cu ou și lactate în variante de alivenci coapte.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1183/Alivanca-Malai/",
+        "https://www.lalena.ro/reteta/1579/Alivenci-Moldovenesti-cu-branza-si-marar/"
+      ]
+    },
+    {
+      "id": "cornulete-dulceata",
+      "ingredients": [
+        "Dulceață",
+        "Aluat"
+      ],
+      "result": "Cornulețe",
+      "explanation": "Aluatul fraged rulat în mici cornuri poate înveli o umplutură de dulceață bine scursă.",
+      "sources": [
+        "https://www.bucataras.ro/retete/cornulete-cu-dulceata-2305.html"
+      ]
+    },
+    {
+      "id": "cornulete-untura",
+      "ingredients": [
+        "Untură",
+        "Aluat"
+      ],
+      "result": "Cornulețe",
+      "explanation": "Untura frăgezește un aluat modelat în cornulețe, umplute și apoi coapte.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/cornulete-fragede-cu-untura-reteta-veche-in-format-video-si-text.html"
+      ]
+    },
+    {
+      "id": "cornulete-smantana",
+      "ingredients": [
+        "Smântână",
+        "Aluat"
+      ],
+      "result": "Cornulețe",
+      "explanation": "Smântâna intră în unele aluaturi fragede pentru cornulețe cu umplutură dulce.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/cornulete-fragede-cu-unt-si-smantana.html"
+      ]
+    },
+    {
+      "id": "turta-faina",
+      "ingredients": [
+        "Miere",
+        "Făină"
+      ],
+      "result": "Turtă dulce",
+      "explanation": "Făina și mierea formează baza aluatului de turtă dulce, cu mirodenii și coacere.",
+      "sources": [
+        "https://www.oetker.ro/produsele/p/mix-pentru-turta-dulce",
+        "https://www.oetker.ro/retete/r/turta-dulce"
+      ]
+    },
+    {
+      "id": "turta-scortisoara",
+      "ingredients": [
+        "Miere",
+        "Scorțișoară"
+      ],
+      "result": "Turtă dulce",
+      "explanation": "Mierea și scorțișoara dau gust caracteristic turtei dulci, într-un aluat cu făină.",
+      "sources": [
+        "https://www.oetker.ro/produsele/p/mix-pentru-turta-dulce",
+        "https://www.oetker.ro/retete/r/turta-dulce"
+      ]
+    },
+    {
+      "id": "halva-zahar",
+      "ingredients": [
+        "Zahăr",
+        "Semințe de floarea-soarelui"
+      ],
+      "result": "Halva",
+      "explanation": "Miezul de semințe de floarea-soarelui măcinat se leagă cu sirop de zahăr pentru halva.",
+      "sources": [
+        "https://feleacul.ro/produse/halva"
+      ]
+    },
+    {
+      "id": "halva-miere",
+      "ingredients": [
+        "Miere",
+        "Semințe de floarea-soarelui"
+      ],
+      "result": "Halva",
+      "explanation": "O variantă de halva de casă leagă semințele de floarea-soarelui măcinate cu miere.",
+      "sources": [
+        "https://sanovita.ro/blog/halva/"
+      ]
+    },
+    {
+      "id": "coliva-nuca",
+      "ingredients": [
+        "Nucă",
+        "Arpacaș"
+      ],
+      "result": "Colivă",
+      "explanation": "Arpacașul fiert, îndulcit și amestecat cu nucă este baza unei colive.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/coliva-reteta-traditionala-din-grau-cu-multa-nuca.html"
+      ]
+    },
+    {
+      "id": "coliva-zahar",
+      "ingredients": [
+        "Zahăr",
+        "Arpacaș"
+      ],
+      "result": "Colivă",
+      "explanation": "Arpacașul fiert se îndulcește cu zahăr și se completează de obicei cu nucă pentru colivă.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/coliva-reteta-traditionala-din-grau-cu-multa-nuca.html"
+      ]
+    },
+    {
+      "id": "placinte-dovleac",
+      "ingredients": [
+        "Dovleac",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Aluatul învelește dovleacul ras și pregătit ca umplutură pentru plăcinte.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1014/Placinte-cu-dovleac/"
+      ]
+    },
+    {
+      "id": "placinte-telemea",
+      "ingredients": [
+        "Telemea",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Telemeaua poate umple foi de aluat pentru plăcinte sărate.",
+      "sources": [
+        "https://jamilacuisine.ro/placinta-creata-cu-branza-telemea-reteta-video/"
+      ]
+    },
+    {
+      "id": "placinte-pruna",
+      "ingredients": [
+        "Prună",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Prunele fără sâmburi pot umple un aluat de plăcintă, îndulcite după gust.",
+      "sources": [
+        "https://www.lalena.ro/reteta/41/Placinta-cu-prune/"
+      ]
+    },
+    {
+      "id": "dulceata-pruna",
+      "ingredients": [
+        "Prună",
+        "Zahăr"
+      ],
+      "result": "Dulceață",
+      "explanation": "Prunele fierte cu zahăr, cu fructele păstrate în bucăți, dau dulceață de prune.",
+      "sources": [
+        "https://pofta-buna.com/dulceata-de-prune-umplute-cu-nuci/"
+      ]
+    },
+    {
+      "id": "dulceata-capsuna",
+      "ingredients": [
+        "Zahăr",
+        "Căpșună"
+      ],
+      "result": "Dulceață",
+      "explanation": "Căpșunile fierte cu zahăr dau dulceață de căpșuni.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1481/Dulceata-de-Capsuni/?all_comments=1"
+      ]
+    },
+    {
+      "id": "compot-pruna",
+      "ingredients": [
+        "Prună",
+        "Apă"
+      ],
+      "result": "Compot",
+      "explanation": "Prunele fierte în apă dau compot de prune, îndulcit după gust.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/conserve/compot-de-prune.html"
+      ]
+    },
+    {
+      "id": "compot-capsuna",
+      "ingredients": [
+        "Căpșună",
+        "Apă"
+      ],
+      "result": "Compot",
+      "explanation": "Căpșunile fierte scurt în apă pot fi păstrate în compot, cu zahăr după gust.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1873/Compot-de-Capsuni/"
+      ]
+    },
+    {
+      "id": "inghetata-iaurt",
+      "ingredients": [
+        "Iaurt",
+        "Congelator"
+      ],
+      "result": "Înghețată",
+      "explanation": "Iaurtul îndulcit, eventual cu fructe, poate fi congelat ca înghețată de iaurt.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/inghetata-cu-iaurt"
+      ]
+    },
+    {
+      "id": "gogosi-iaurt",
+      "ingredients": [
+        "Iaurt",
+        "Aluat"
+      ],
+      "result": "Gogoși",
+      "explanation": "Iaurtul intră în aluaturi moi de gogoși, porționate cu lingura și prăjite.",
+      "sources": [
+        "https://jamilacuisine.ro/gogosi-cu-lingura-reteta-video/"
+      ]
+    },
+    {
+      "id": "supa-oala",
+      "ingredients": [
+        "Oală",
+        "Legume"
+      ],
+      "result": "Supă",
+      "explanation": "Legumele fierte în apă într-o oală dau o supă de legume.",
+      "sources": [
+        "https://dexonline.ro/definitie/sup%C4%83",
+        "https://www.lalena.ro/reteta/170/Supa-cu-hrisca-si-legume/"
+      ]
+    },
+    {
+      "id": "mamaliga-oala",
+      "ingredients": [
+        "Oală",
+        "Mălai"
+      ],
+      "result": "Mămăligă",
+      "explanation": "Mălaiul se fierbe și se amestecă într-o oală cu apă pentru mămăligă.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1166/Mamaliga-Moldoveneasca/"
+      ]
+    },
+    {
+      "id": "dulceata-para",
+      "ingredients": [
+        "Pară",
+        "Zahăr"
+      ],
+      "result": "Dulceață",
+      "explanation": "Perele curățate și tăiate se fierb cu zahăr pentru dulceață de pere.",
+      "sources": [
+        "https://www.restaurantedelux.ro/reteta-dulceata-pere.html"
+      ]
+    },
+    {
+      "id": "compot-para",
+      "ingredients": [
+        "Pară",
+        "Apă"
+      ],
+      "result": "Compot",
+      "explanation": "Perele fierte în apă dau compot, îndulcit după gust.",
+      "sources": [
+        "https://pofta-buna.com/compot-de-pere-reteta-simpla/"
+      ]
+    },
+    {
+      "id": "placinte-para",
+      "ingredients": [
+        "Pară",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Perele tăiate și pregătite ca umplutură se pot coace în foi de plăcintă.",
+      "sources": [
+        "https://pofta-buna.com/foietaj-cu-pere/"
+      ]
+    },
+    {
+      "id": "dulceata-cireasa",
+      "ingredients": [
+        "Zahăr",
+        "Cireașă"
+      ],
+      "result": "Dulceață",
+      "explanation": "Cireșele fără sâmburi, fierte cu zahăr, dau dulceață de cireșe.",
+      "sources": [
+        "https://www.lalena.ro/reteta/541/Dulceata-de-cirese-albe/"
+      ]
+    },
+    {
+      "id": "compot-cireasa",
+      "ingredients": [
+        "Cireașă",
+        "Apă"
+      ],
+      "result": "Compot",
+      "explanation": "Cireșele se pot fierbe și păstra în compot, cu apă și zahăr după gust.",
+      "sources": [
+        "https://www.youtube.com/watch?v=axQI8pMiADU"
+      ]
+    },
+    {
+      "id": "placinte-cireasa",
+      "ingredients": [
+        "Cireașă",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Cireșele fără sâmburi pot umple o plăcintă, bine scurse și îndulcite după gust.",
+      "sources": [
+        "https://pofta-buna.com/placinta-cu-visine-cirese-sau-alte-fructe/"
+      ]
+    },
+    {
+      "id": "dulceata-strugure",
+      "ingredients": [
+        "Zahăr",
+        "Strugure"
+      ],
+      "result": "Dulceață",
+      "explanation": "Boabele de strugure pregătite fără sâmburi se pot fierbe cu zahăr în dulceață.",
+      "sources": [
+        "https://pofta-buna.com/dulceata-de-struguri/"
+      ]
+    },
+    {
+      "id": "compot-strugure",
+      "ingredients": [
+        "Strugure",
+        "Apă"
+      ],
+      "result": "Compot",
+      "explanation": "Boabele de strugure se pot păstra în compot de apă și zahăr.",
+      "sources": [
+        "https://pofta-buna.com/compot-struguri-fara-conservanti/"
+      ]
+    },
+    {
+      "id": "pepene-saramura",
+      "ingredients": [
+        "Pepene",
+        "Saramură"
+      ],
+      "result": "Pepene murat",
+      "explanation": "Pepenii verzi mici se pun la fermentat în saramură, cu aromele potrivite pentru murături.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1164/Pepene-verde-murat-la-butoi/"
+      ]
+    },
+    {
+      "id": "dulceata-pepene",
+      "ingredients": [
+        "Zahăr",
+        "Pepene"
+      ],
+      "result": "Dulceață",
+      "explanation": "Partea albă a cojii de pepene verde, curățată și tăiată, se fierbe cu zahăr în dulceață.",
+      "sources": [
+        "https://www.reteteangela.com/2016/07/dulceata-din-coji-de-pepene.html"
+      ]
+    },
+    {
+      "id": "dulceata-caisa",
+      "ingredients": [
+        "Zahăr",
+        "Caisă"
+      ],
+      "result": "Dulceață",
+      "explanation": "Caisele fără sâmburi, fierte cu zahăr, dau dulceață de caise.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/conserve/dulceata-de-caise-cu-bucati-de-fruct.html"
+      ]
+    },
+    {
+      "id": "compot-caisa",
+      "ingredients": [
+        "Caisă",
+        "Apă"
+      ],
+      "result": "Compot",
+      "explanation": "Caisele fără sâmburi se pot fierbe și păstra în compot, îndulcit după gust.",
+      "sources": [
+        "https://pofta-buna.com/compot-caise-reteta-pas-cu-pas/"
+      ]
+    },
+    {
+      "id": "placinte-caisa",
+      "ingredients": [
+        "Caisă",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Caisele fără sâmburi pot umple o plăcintă din foi de aluat, îndulcite după gust.",
+      "sources": [
+        "https://www.bucataras.ro/retete/placinta-cu-caise-23940.html"
+      ]
+    },
+    {
+      "id": "dulceata-piersica",
+      "ingredients": [
+        "Zahăr",
+        "Piersică"
+      ],
+      "result": "Dulceață",
+      "explanation": "Piersicile curățate și tăiate se fierb cu zahăr pentru dulceață de piersici.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1816/Dulceata-de-Piersici/"
+      ]
+    },
+    {
+      "id": "compot-piersica",
+      "ingredients": [
+        "Piersică",
+        "Apă"
+      ],
+      "result": "Compot",
+      "explanation": "Piersicile fără sâmburi, întregi sau tăiate, se pot păstra în compot.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/conserve/compot-de-piersici.html"
+      ]
+    },
+    {
+      "id": "placinte-piersica",
+      "ingredients": [
+        "Piersică",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Piersicile feliate și bine scurse pot umple o plăcintă coaptă.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/placinta-cu-piersici-sau-nectarine-reteta-video-si-pas-cu-pas.html"
+      ]
+    },
+    {
+      "id": "inghetata-banana",
+      "ingredients": [
+        "Banană",
+        "Congelator"
+      ],
+      "result": "Înghețată",
+      "explanation": "Bucățile de banană congelate și apoi pasate dau un desert cu textura înghețatei.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/inghetata-de-banane-dintr-un-singur-ingredient-reteta-video.html"
+      ]
+    },
+    {
+      "id": "clatite-banana",
+      "ingredients": [
+        "Banană",
+        "Ou"
+      ],
+      "result": "Clătite",
+      "explanation": "Banana pasată și oul pot forma clătite mici, rumenite pe ambele părți în tigaie.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/clatite-americane-cu-banane-reteta-fara-gluten.html"
+      ]
+    },
+    {
+      "id": "dulceata-portocala",
+      "ingredients": [
+        "Portocală",
+        "Zahăr"
+      ],
+      "result": "Dulceață",
+      "explanation": "Pulpa de portocală pregătită fără sâmburi și membrane tari se fierbe cu zahăr în dulceață.",
+      "sources": [
+        "https://www.bucatareselevesele.ro/retete-culinare/conserve-si-muraturi/dulceata-de-portocale.html"
+      ]
+    },
+    {
+      "id": "inghetata-portocala",
+      "ingredients": [
+        "Portocală",
+        "Frișcă"
+      ],
+      "result": "Înghețată",
+      "explanation": "Sucul de portocală și frișca pot intra într-o bază îndulcită de înghețată, apoi congelată.",
+      "sources": [
+        "https://www.lauraadamache.ro/2022/03/inghetata-de-portocale.html"
+      ]
+    },
+    {
+      "id": "branza-burduf-sare",
+      "ingredients": [
+        "Brânză",
+        "Sare"
+      ],
+      "result": "Brânză de burduf",
+      "explanation": "Cașul de oaie, un tip de brânză, se mărunțește, se frământă cu sare și se maturează ca brânză de burduf.",
+      "sources": [
+        "https://bonas.ro/branza-burduf/",
+        "https://www.montlact.ro/ro/produs/branza-de-burduf-din-lapte-de-vaca"
+      ]
+    },
+    {
+      "id": "bulz-burduf",
+      "ingredients": [
+        "Mămăligă",
+        "Brânză de burduf"
+      ],
+      "result": "Bulz",
+      "explanation": "Brânza de burduf umple bulzul de mămăligă, încălzit sau copt apoi.",
+      "sources": [
+        "https://bonas.ro/branza-burduf/"
+      ]
+    },
+    {
+      "id": "sandvis-burduf",
+      "ingredients": [
+        "Brânză de burduf",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Brânza de burduf întinsă pe pâine formează un sandviș deschis.",
+      "sources": [
+        "https://mirdatod.ro/catalog/burduf/branza-de-burduf/"
+      ]
+    },
+    {
+      "id": "langosi-mujdei",
+      "ingredients": [
+        "Mujdei",
+        "Aluat"
+      ],
+      "result": "Langoși",
+      "explanation": "Turtele de aluat dospit se prăjesc în ulei și se ung cu mujdei pentru langoși cu usturoi.",
+      "sources": [
+        "https://www.culinar.ro/retete/culinare/produse-de-panificatie/preparate-sarate/langosi-obisnuiti"
+      ]
+    },
+    {
+      "id": "langosi-burduf",
+      "ingredients": [
+        "Brânză de burduf",
+        "Aluat"
+      ],
+      "result": "Langoși",
+      "explanation": "Aluatul dospit poate înveli brânză de burduf în langoși umpluți, prăjiți în ulei.",
+      "sources": [
+        "https://www.bucataras.ro/retete/langosi-cu-branza-de-burduf-si-marar-90431.html"
+      ]
+    },
+    {
+      "id": "merdenea-telemea",
+      "ingredients": [
+        "Foietaj",
+        "Telemea"
+      ],
+      "result": "Merdenea",
+      "explanation": "Foietajul poate înveli o umplutură de telemea într-o variantă de casă de merdenele, coapte apoi.",
+      "sources": [
+        "https://www.bucataras.ro/retete/aperitiv-merdenele-din-aluat-de-foietaj-81597.html"
+      ]
+    },
+    {
+      "id": "merdenea-branza-smantana",
+      "ingredients": [
+        "Foietaj",
+        "Brânză cu smântână"
+      ],
+      "result": "Merdenea",
+      "explanation": "O umplutură sărată de brânză cu smântână poate intra în merdenele de casă din foietaj, coapte apoi.",
+      "sources": [
+        "https://www.bucataras.ro/retete/aperitiv-merdenele-din-aluat-de-foietaj-81597.html"
+      ]
+    },
+    {
+      "id": "savarina-frisca",
+      "ingredients": [
+        "Aluat",
+        "Frișcă"
+      ],
+      "result": "Savarină",
+      "explanation": "Aluatul dospit pentru savarine se coace în forme mici, se însiropează și se umple cu frișcă.",
+      "sources": [
+        "https://jamilacuisine.ro/savarine-de-casa-reteta-video/"
+      ]
+    },
+    {
+      "id": "ecler-oparit-crema",
+      "ingredients": [
+        "Aluat opărit",
+        "Cremă de vanilie"
+      ],
+      "result": "Ecler",
+      "explanation": "Aluatul opărit se modelează alungit și se coace; cojile răcite se umplu cu cremă de vanilie pentru eclere.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1208/Eclere-cu-crema-de-vanilie/"
+      ]
+    },
+    {
+      "id": "ecler-oparit-ciocolata",
+      "ingredients": [
+        "Aluat opărit",
+        "Ciocolată"
+      ],
+      "result": "Ecler",
+      "explanation": "Cojile alungite și coapte din aluat opărit se umplu cu cremă și se glazurează cu ciocolată pentru eclere.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1208/Eclere-cu-crema-de-vanilie/"
+      ]
+    },
+    {
+      "id": "chec-stafide",
+      "ingredients": [
+        "Aluat",
+        "Stafide"
+      ],
+      "result": "Chec",
+      "explanation": "Stafidele se încorporează într-un aluat fluid de chec, copt într-o formă alungită.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/chec-pufos-si-economic-cu-cacao-reteta-video.html"
+      ]
+    },
+    {
+      "id": "chec-banana",
+      "ingredients": [
+        "Banană",
+        "Aluat"
+      ],
+      "result": "Chec",
+      "explanation": "Banana pasată intră într-un aluat fluid cu făină și agent de afânare, copt ca un chec cu banane.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/banana-bread-reteta-simpla-si-rapida-de-chec-cu-banane.html"
+      ]
+    },
+    {
+      "id": "chec-portocala",
+      "ingredients": [
+        "Portocală",
+        "Aluat"
+      ],
+      "result": "Chec",
+      "explanation": "Sucul de portocală aromatizează un aluat fluid de chec, copt apoi în formă.",
+      "sources": [
+        "https://www.reteta-video.ro/retete/chec-cu-portocale-si-cacao.html"
+      ]
+    },
+    {
+      "id": "briose-forma",
+      "ingredients": [
+        "Formă de brioșe",
+        "Aluat"
+      ],
+      "result": "Brioșă",
+      "explanation": "Aluatul fluid de prăjitură se porționează în forme de brioșe și se coace până devine pufos.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/briose-cu-afine"
+      ]
+    },
+    {
+      "id": "briose-iaurt",
+      "ingredients": [
+        "Iaurt",
+        "Făină"
+      ],
+      "result": "Brioșă",
+      "explanation": "Făina și iaurtul intră în brioșe, alături de ou, zahăr, grăsime și praf de copt; compoziția se coace în forme mici.",
+      "sources": [
+        "https://www.bucataras.ro/retete/reteta-de-briose-cu-iaurt-delicate-si-usor-de-facut-97279.html"
+      ]
+    },
+    {
+      "id": "mici-bicarbonat",
+      "ingredients": [
+        "Carne",
+        "Bicarbonat de sodiu alimentar"
+      ],
+      "result": "Mici",
+      "explanation": "Carnea tocată pentru mici se frământă cu condimente și puțin bicarbonat alimentar, apoi se modelează și se frige la grătar.",
+      "sources": [
+        "https://jamilacuisine.ro/mici-de-casa-pasta-pentru-mici-suculenti-si-deliciosi-reteta-video/"
+      ]
+    },
+    {
+      "id": "oua-rosii-ceapa",
+      "ingredients": [
+        "Ceapă",
+        "Ou"
+      ],
+      "result": "Ouă roșii",
+      "explanation": "Ouăle fierte cu coji de ceapă se pot colora natural în nuanțe roșcate; culoarea depinde de coji și timpul de fierbere.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/oua-vopsite-cu-coji-de-ceapa.html"
+      ]
+    },
+    {
+      "id": "gogonele-saramura",
+      "ingredients": [
+        "Roșie",
+        "Saramură"
+      ],
+      "result": "Gogonele",
+      "explanation": "Roșiile încă verzi, necoapte, se aleg ca gogonele și se pun la murat în saramură.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1695/Gogonele-murate-in-saramura-umplute-cu-verdeata/?all_comments=1"
+      ]
+    },
+    {
+      "id": "aluat-drojdie",
+      "ingredients": [
+        "Făină",
+        "Drojdie"
+      ],
+      "result": "Aluat",
+      "explanation": "Făina, drojdia și un lichid se frământă într-un aluat care se lasă la dospit.",
+      "sources": [
+        "https://www.oetker.ro/produsele/p/drojdie"
+      ]
+    },
+    {
+      "id": "paine-drojdie",
+      "ingredients": [
+        "Aluat",
+        "Drojdie"
+      ],
+      "result": "Pâine",
+      "explanation": "Un aluat de pâine cu drojdie se lasă să dospească, se modelează și se coace.",
+      "sources": [
+        "https://www.oetker.ro/produsele/p/drojdie"
+      ]
+    },
+    {
+      "id": "coliva-grau",
+      "ingredients": [
+        "Nucă",
+        "Grâu"
+      ],
+      "result": "Colivă",
+      "explanation": "Grâul fiert, îndulcit și amestecat cu nucă formează baza unei colive.",
+      "sources": [
+        "https://www.lauraadamache.ro/2015/03/coliva.html"
+      ]
+    },
+    {
+      "id": "coliva-orz",
+      "ingredients": [
+        "Nucă",
+        "Orz"
+      ],
+      "result": "Colivă",
+      "explanation": "Arpacașul din orz decorticat se poate fierbe și îndulci, apoi amesteca cu nucă pentru colivă.",
+      "sources": [
+        "https://pronat.ro/products/arpacas-de-orz-bio-pronat"
+      ]
+    },
+    {
+      "id": "biscuit-ovaz",
+      "ingredients": [
+        "Unt",
+        "Ovăz"
+      ],
+      "result": "Biscuit",
+      "explanation": "Fulgii sau făina de ovăz intră în biscuiți cu unt, zahăr și alte ingrediente, copți apoi.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1918/Fursecuri-americane-Cookies-cu-ovaz-migdale-si-merisoare/"
+      ]
+    },
+    {
+      "id": "biscuit-ovaz-banana",
+      "ingredients": [
+        "Banană",
+        "Ovăz"
+      ],
+      "result": "Biscuit",
+      "explanation": "Fulgii de ovăz legați cu banană pasată se pot porționa și coace ca biscuiți moi.",
+      "sources": [
+        "https://retetefeldefel.ro/biscuiti-de-banane-si-fulgi-de-ovaz/"
+      ]
+    },
+    {
+      "id": "paine-secara",
+      "ingredients": [
+        "Aluat",
+        "Secară"
+      ],
+      "result": "Pâine",
+      "explanation": "Făina obținută din secară intră în aluatul de pâine, dospit și copt apoi.",
+      "sources": [
+        "https://www.kingarthurbaking.com/recipes/classic-rye-sandwich-bread-recipe"
+      ]
+    },
+    {
+      "id": "biscuit-secara",
+      "ingredients": [
+        "Unt",
+        "Secară"
+      ],
+      "result": "Biscuit",
+      "explanation": "Făina de secară se poate folosi în biscuiți cu unt și zahăr, formați și copți apoi.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/biscuiti-de-secara-cu-stafide.html"
+      ]
+    },
+    {
+      "id": "biscuit-migdale",
+      "ingredients": [
+        "Făină",
+        "Migdale"
+      ],
+      "result": "Biscuit",
+      "explanation": "Migdalele măcinate și făina intră în aluat de biscuiți, cu grăsime, zahăr și coacere.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1918/Fursecuri-americane-Cookies-cu-ovaz-migdale-si-merisoare/"
+      ]
+    },
+    {
+      "id": "biscuit-alune",
+      "ingredients": [
+        "Făină",
+        "Alune de pădure"
+      ],
+      "result": "Biscuit",
+      "explanation": "Alunele de pădure măcinate se pot adăuga în aluatul de biscuiți cu făină, unt și zahăr.",
+      "sources": [
+        "https://www.lauraadamache.ro/2014/06/biscuiti-cu-alune.html"
+      ]
+    },
+    {
+      "id": "cornulete-migdale",
+      "ingredients": [
+        "Aluat",
+        "Migdale"
+      ],
+      "result": "Cornulețe",
+      "explanation": "Migdalele măcinate intră în aluat fraged modelat în cornulețe și copt.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/cornulete-fragede-cu-nuci-si-vanilie.html"
+      ]
+    },
+    {
+      "id": "cornulete-alune",
+      "ingredients": [
+        "Aluat",
+        "Alune de pădure"
+      ],
+      "result": "Cornulețe",
+      "explanation": "Alunele de pădure măcinate pot aromatiza aluatul fraged al cornulețelor coapte.",
+      "sources": [
+        "https://retetepentrutoategusturile.ro/cornulete-cu-vanilie-si-alune-de-padure"
+      ]
+    },
+    {
+      "id": "pandispan-albus",
+      "ingredients": [
+        "Făină",
+        "Albuș"
+      ],
+      "result": "Pandișpan",
+      "explanation": "Albușurile bătute cu zahăr primesc făină încorporată ușor și se coc într-un pandișpan alb.",
+      "sources": [
+        "https://www.reteta-video.ro/retete/prajitura-din-albusuri-prajitura-ingerilor.html"
+      ]
+    },
+    {
+      "id": "crema-galbenus",
+      "ingredients": [
+        "Vanilie",
+        "Gălbenuș"
+      ],
+      "result": "Cremă de vanilie",
+      "explanation": "Gălbenușul și vanilia intră în crema fiartă cu lapte, zahăr și făină sau amidon.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-cu-amidon"
+      ]
+    },
+    {
+      "id": "crema-amidon",
+      "ingredients": [
+        "Lapte",
+        "Amidon alimentar"
+      ],
+      "result": "Cremă de vanilie",
+      "explanation": "Laptele se îngroașă prin fierbere cu amidon și zahăr, iar vanilia aromatizează crema.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-cu-amidon"
+      ]
+    },
+    {
+      "id": "biscuit-zahar-pudra",
+      "ingredients": [
+        "Făină",
+        "Zahăr pudră"
+      ],
+      "result": "Biscuit",
+      "explanation": "Făina și zahărul pudră intră în biscuiți fragezi, cu unt și apoi coacere.",
+      "sources": [
+        "https://www.reteta-video.ro/retete/biscuiti-fragezi-in-doua-culori-cu-unt-ciocolata-si-cacao.html"
+      ]
+    },
+    {
+      "id": "turta-bicarbonat",
+      "ingredients": [
+        "Miere",
+        "Bicarbonat de sodiu alimentar"
+      ],
+      "result": "Turtă dulce",
+      "explanation": "Mierea și bicarbonatul alimentar intră în unele aluaturi de turtă dulce cu făină, condimente și coacere.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1035/Turta-dulce/"
+      ]
+    },
+    {
+      "id": "varza-cluj-tocata",
+      "ingredients": [
+        "Carne tocată",
+        "Varză călită"
+      ],
+      "result": "Varză a la Cluj",
+      "explanation": "Varza călită, carnea tocată pregătită și orezul se așază în straturi și se coc ca varză a la Cluj.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/varza-a-la-cluj.html"
+      ]
+    },
+    {
+      "id": "paste-sucitor",
+      "ingredients": [
+        "Făină",
+        "Sucitor"
+      ],
+      "result": "Paste",
+      "explanation": "Făina se frământă cu ou sau apă; sucitorul întinde foaia, care se taie în paste și se fierbe.",
+      "sources": [
+        "https://www.petitchef.ro/retete/acompaniamente/cum-sa-faci-paste-proaspete-de-casa-fid-1569687"
+      ]
+    },
+    {
+      "id": "compot-cratita",
+      "ingredients": [
+        "Fruct",
+        "Cratiță"
+      ],
+      "result": "Compot",
+      "explanation": "Fructele se fierb în apă într-o cratiță pentru compot, îndulcit după gust.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1873/Compot-de-Capsuni/"
+      ]
+    },
+    {
+      "id": "salata-boeuf-cartofi",
+      "ingredients": [
+        "Maioneză",
+        "Cartof"
+      ],
+      "result": "Salată de boeuf",
+      "explanation": "Cartofii fierți se taie cuburi și se leagă cu maioneză, alături de morcov, murături și carne după variantă, în salată de boeuf.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/aperitive/salata-de-boeuf-reteta-pas-cu-pas.html"
+      ]
+    },
+    {
+      "id": "salata-boeuf-legume",
+      "ingredients": [
+        "Maioneză",
+        "Legume"
+      ],
+      "result": "Salată de boeuf",
+      "explanation": "Legumele fierte și tăiate cuburi se leagă cu maioneză, cu murături și carne după variantă, în salată de boeuf.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/aperitive/salata-de-boeuf-reteta-pas-cu-pas.html"
+      ]
+    },
+    {
+      "id": "supa-morcov",
+      "ingredients": [
+        "Morcov",
+        "Apă"
+      ],
+      "result": "Supă",
+      "explanation": "Morcovul fiert în apă, cu alte legume și condimente după gust, dă o supă de legume.",
+      "sources": [
+        "https://jamilacuisine.ro/ciorba-de-legume-reteta-video/"
+      ]
+    },
+    {
+      "id": "supa-mazare",
+      "ingredients": [
+        "Mazăre",
+        "Apă"
+      ],
+      "result": "Supă",
+      "explanation": "Mazărea fiartă în apă cu legume și condimente poate deveni o supă, simplă sau pasată.",
+      "sources": [
+        "https://www.e-retete.ro/retete/supa-de-mazare"
+      ]
+    },
+    {
+      "id": "salata-ridiche",
+      "ingredients": [
+        "Ridiche",
+        "Castravete"
+      ],
+      "result": "Salată",
+      "explanation": "Ridichile și castraveții tăiați formează o salată proaspătă, asezonată după gust.",
+      "sources": [
+        "https://www.kaufland.ro/retete/cauta-o-reteta/reteta.salata-castraveti-si-ridichi.r_id%3DRO_2053.html"
+      ]
+    },
+    {
+      "id": "salata-ridiche-rosie",
+      "ingredients": [
+        "Ridiche",
+        "Roșie"
+      ],
+      "result": "Salată",
+      "explanation": "Ridichile și roșiile tăiate se pot combina într-o salată de legume.",
+      "sources": [
+        "https://www.nestle.ro/nutritie/retete/salata-cu-ridichi-si-menta"
+      ]
+    },
+    {
+      "id": "supa-conopida",
+      "ingredients": [
+        "Conopidă",
+        "Apă"
+      ],
+      "result": "Supă",
+      "explanation": "Conopida fiartă în apă cu alte legume și condimente dă o supă, pasată sau cu buchețele.",
+      "sources": [
+        "https://www.e-retete.ro/retete/supa-de-conopida"
+      ]
+    },
+    {
+      "id": "muraturi-conopida",
+      "ingredients": [
+        "Conopidă",
+        "Saramură"
+      ],
+      "result": "Murături",
+      "explanation": "Buchețelele de conopidă se pot pune la fermentat în saramură pentru murături.",
+      "sources": [
+        "https://pofta-buna.com/conopida-murata-in-saramura/"
+      ]
+    },
+    {
+      "id": "placinte-spanac",
+      "ingredients": [
+        "Spanac",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Spanacul pregătit și bine scurs poate umple foi de plăcintă, singur sau cu brânză.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/placinta-cu-branza-si-spanac.html"
+      ]
+    },
+    {
+      "id": "salata-spanac",
+      "ingredients": [
+        "Spanac",
+        "Roșie"
+      ],
+      "result": "Salată",
+      "explanation": "Frunzele tinere de spanac și roșiile tăiate se pot servi într-o salată.",
+      "sources": [
+        "https://www.gustos.ro/retete-culinare/salata-cu-spanac-si-rosii.html"
+      ]
+    },
+    {
+      "id": "salata-varza",
+      "ingredients": [
+        "Morcov",
+        "Varză"
+      ],
+      "result": "Salată",
+      "explanation": "Varza tăiată fin și morcovul ras formează o salată, asezonată după gust.",
+      "sources": [
+        "https://www.bucataras.ro/retete/salata-de-varza-cu-morcov-6000.html"
+      ]
+    },
+    {
+      "id": "placinte-varza",
+      "ingredients": [
+        "Varză",
+        "Aluat"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Varza tăiată și călită poate umple plăcinte din aluat, coapte sau prăjite.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/placinta-cu-varza-reteta-taraneasca.html"
+      ]
+    },
+    {
+      "id": "placinte-marar",
+      "ingredients": [
+        "Brânză",
+        "Mărar"
+      ],
+      "result": "Plăcinte",
+      "explanation": "Brânza amestecată cu mărar formează o umplutură sărată, învelită în foi de plăcintă și gătită.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/aluat-foietaj-placinta-cu-branza-si-urda.html"
+      ]
+    },
+    {
+      "id": "chiftele-patrunjel",
+      "ingredients": [
+        "Pătrunjel",
+        "Carne"
+      ],
+      "result": "Chiftele",
+      "explanation": "Pătrunjelul tocat aromatizează carnea tocată pentru chiftele, legată cu ou și alte ingrediente și apoi gătită.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/chiftele-marinate-reteta-ca-la-mama.html"
+      ]
+    },
+    {
+      "id": "ciorba-fasole-leustean",
+      "ingredients": [
+        "Leuștean",
+        "Fasole"
+      ],
+      "result": "Ciorbă de fasole",
+      "explanation": "Leușteanul aromatizează ciorba de fasole, preparată din boabe fierte, legume și un ingredient pentru acrire.",
+      "sources": [
+        "https://www.e-retete.ro/retete/ciorba-de-fasole-cu-leustean"
+      ]
+    },
+    {
+      "id": "crutoane-cimbru",
+      "ingredients": [
+        "Cimbru",
+        "Pâine"
+      ],
+      "result": "Crutoane",
+      "explanation": "Cubulețele de pâine se stropesc cu ulei, se aromatizează cu cimbru și se coc până devin crutoane crocante.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/crutoane-de-casa.html"
+      ]
+    },
+    {
+      "id": "fasole-ciolan-afumat",
+      "ingredients": [
+        "Ciolan afumat",
+        "Fasole"
+      ],
+      "result": "Fasole cu ciolan",
+      "explanation": "Un ciolan de porc afumat se fierbe și se gătește cu fasole boabe și legume pentru fasole cu ciolan.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/fasole-boabe-cu-ciolan-afumat.html"
+      ]
+    },
+    {
+      "id": "slanina-ceapa",
+      "ingredients": [
+        "Slănină",
+        "Ceapă"
+      ],
+      "result": "Slănină cu ceapă",
+      "explanation": "Slănina gata de consum se servește feliată cu ceapă crudă și pâine.",
+      "sources": [
+        "https://www.restaurantedelux.ro/slanina-ceapa-paine-casa.html"
+      ]
+    },
+    {
+      "id": "sandvis-parizer",
+      "ingredients": [
+        "Parizer",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Feliile de parizer puse pe pâine sau între două felii formează un sandviș.",
+      "sources": [
+        "https://www.bucataras.ro/retete/sandvis-cu-cascaval-delaco-si-parizer-37384.html"
+      ]
+    },
+    {
+      "id": "sandvis-pate",
+      "ingredients": [
+        "Pate",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Pateul întins pe pâine formează un sandviș deschis.",
+      "sources": [
+        "https://www.bucataras.ro/retete/sandvis-de-seara-40936.html"
+      ]
+    },
+    {
+      "id": "sandvis-pastrama",
+      "ingredients": [
+        "Pastramă",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Pastrama gata de consum, feliată, poate umple un sandviș, cu legume după gust.",
+      "sources": [
+        "https://www.bucataras.ro/retete/sandvis-cu-pastrama-de-pui-53399.html"
+      ]
+    },
+    {
+      "id": "friptura-pastrama",
+      "ingredients": [
+        "Grătar",
+        "Pastramă"
+      ],
+      "result": "Friptură",
+      "explanation": "Pastrama pregătită pentru gătit se poate frige pe grătar ca friptură condimentată.",
+      "sources": [
+        "https://www.preparatedevis.ro/2017/11/pastrama-la-gratar.html"
+      ]
+    },
+    {
+      "id": "friptura-mustar",
+      "ingredients": [
+        "Muștar",
+        "Carne"
+      ],
+      "result": "Friptură",
+      "explanation": "Carnea se poate unge sau marina cu muștar și condimente, apoi se coace ca friptură.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/friptura-inabusita-de-porc-cu-ceapa-si-mustar.html"
+      ]
+    },
+    {
+      "id": "sushi-peste",
+      "ingredients": [
+        "Orez",
+        "pește"
+      ],
+      "result": "Sushi",
+      "explanation": "Orezul fiert și asezonat cu oțet se poate combina cu pește gătit pentru sushi; unele variante folosesc și alge.",
+      "sources": [
+        "https://jamilacuisine.ro/sushi-la-bol-cu-ton-reteta-video/"
+      ]
+    },
+    {
+      "id": "snitel-peste",
+      "ingredients": [
+        "pește",
+        "Firimitură"
+      ],
+      "result": "Șnițel",
+      "explanation": "Fileul de pește trecut prin făină, ou și pesmet din pâine uscată se poate prăji ca șnițel de pește.",
+      "sources": [
+        "https://www.bucataras.ro/retete/file-de-peste-pane-40945.html"
+      ]
+    },
+    {
+      "id": "ciocolata-dubai-umplutura",
+      "ingredients": [
+        "Umplutură de fistic și kataif",
+        "Ciocolată"
+      ],
+      "result": "Ciocolata Dubai",
+      "explanation": "O cochilie de ciocolată învelește umplutura de cremă de fistic și fidea kataif rumenită pentru ciocolata Dubai.",
+      "sources": [
+        "https://www.oetker.co.uk/recipes/r/dubai-chocolate"
+      ]
+    },
+    {
+      "id": "biscuit-fistic",
+      "ingredients": [
+        "Fistic",
+        "Făină"
+      ],
+      "result": "Biscuit",
+      "explanation": "Fisticul mărunțit se poate adăuga în aluat de biscuiți cu făină, unt și zahăr, copt apoi.",
+      "sources": [
+        "https://flaveur.ro/biscuiti-cu-fistic-si-merisoare-reteta-video/"
+      ]
+    },
+    {
+      "id": "inghetata-fistic",
+      "ingredients": [
+        "Fistic",
+        "Frișcă"
+      ],
+      "result": "Înghețată",
+      "explanation": "Fisticul măcinat fin aromatizează o bază îndulcită cu frișcă, apoi congelată ca înghețată.",
+      "sources": [
+        "https://www.cuisinart.360.ro/retete/reteta-inghetata-de-fistic"
+      ]
+    },
+    {
+      "id": "tochitura-mamaliga",
+      "ingredients": [
+        "Mămăligă",
+        "Friptură"
+      ],
+      "result": "Tochitură moldovenească",
+      "explanation": "Bucățile de carne de porc rumenite ca friptură se servesc cu mămăligă, adesea cu ou și brânză, într-o tochitură moldovenească.",
+      "sources": [
+        "https://www.bucataras.ro/retete/tochitura-moldoveneasca-6541.html"
+      ]
+    },
+    {
+      "id": "radauteana-smantana",
+      "ingredients": [
+        "Carne de pui",
+        "Smântână"
+      ],
+      "result": "Ciorbă rădăuțeană",
+      "explanation": "Carnea de pui se fierbe cu legume; zeama se drege cu smântână și gălbenuș, se aromatizează cu usturoi și se acrește pentru ciorbă rădăuțeană.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/supe-ciorbe/ciorba-radauteana.html"
+      ]
+    },
+    {
+      "id": "maioneza-galbenus",
+      "ingredients": [
+        "Ulei",
+        "Gălbenuș"
+      ],
+      "result": "Maioneză",
+      "explanation": "Uleiul încorporat treptat în gălbenuș prin amestecare formează maioneză, asezonată apoi.",
+      "sources": [
+        "https://www.lauraadamache.ro/2010/02/maioneza-de-casa-reteta-clasica.html"
+      ]
+    },
+    {
+      "id": "maioneza-ou",
+      "ingredients": [
+        "Ulei",
+        "Ou"
+      ],
+      "result": "Maioneză",
+      "explanation": "Oul întreg se poate emulsiona cu ulei folosind un blender vertical pentru maioneză.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/maioneza-reteta-rapida-in-mai-putin-de-1-minut.html"
+      ]
+    },
+    {
+      "id": "oparit-cratita",
+      "ingredients": [
+        "Făină",
+        "Cratiță"
+      ],
+      "result": "Aluat opărit",
+      "explanation": "Făina se amestecă în cratiță cu apă și unt fierbinți; compoziția se gătește, se răcorește și primește ouă pentru aluat opărit.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1208/Eclere-cu-crema-de-vanilie/"
+      ]
+    },
+    {
+      "id": "foietaj-unt",
+      "ingredients": [
+        "Unt",
+        "Aluat"
+      ],
+      "result": "Foietaj",
+      "explanation": "Untul se închide în aluat, care se întinde și se împăturește repetat, cu răcire între etape, pentru foietaj.",
+      "sources": [
+        "https://bucate-aromate.ro/2022/02/foietaj-de-casa/"
+      ]
+    },
+    {
+      "id": "lipie-sucitor",
+      "ingredients": [
+        "Aluat",
+        "Sucitor"
+      ],
+      "result": "Lipie",
+      "explanation": "Aluatul pentru lipie se întinde subțire cu sucitorul și se coace repede, de obicei în tigaie.",
+      "sources": [
+        "https://jamilacuisine.ro/lipii-pentru-shaorma-quesadilla-si-tacos-reteta-video/"
+      ]
+    },
+    {
+      "id": "sos-rosii-cratita",
+      "ingredients": [
+        "Roșie",
+        "Cratiță"
+      ],
+      "result": "Sos de roșii",
+      "explanation": "Roșiile pregătite se gătesc în cratiță până se leagă într-un sos, aromatizat după gust.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1487/Sos-de-rosii-Marinara-clasic/"
+      ]
+    },
+    {
+      "id": "sos-rosii-usturoi",
+      "ingredients": [
+        "Roșie",
+        "Usturoi"
+      ],
+      "result": "Sos de roșii",
+      "explanation": "Roșiile se gătesc cu usturoi și puțin ulei pentru un sos de roșii aromat.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1487/Sos-de-rosii-Marinara-clasic/"
+      ]
+    },
+    {
+      "id": "piure-cartofi-unt",
+      "ingredients": [
+        "Unt",
+        "Cartof"
+      ],
+      "result": "Piure de cartofi",
+      "explanation": "Cartofii fierți se pasează și se amestecă cu unt și lapte pentru piure.",
+      "sources": [
+        "https://www.lalena.ro/reteta/120/Piure-de-cartofi/"
+      ]
+    },
+    {
+      "id": "piure-cartofi-lapte",
+      "ingredients": [
+        "Cartof",
+        "Lapte"
+      ],
+      "result": "Piure de cartofi",
+      "explanation": "Laptele cald se încorporează în cartofii fierți și pasați, cu unt după gust, pentru piure.",
+      "sources": [
+        "https://www.lalena.ro/reteta/120/Piure-de-cartofi/"
+      ]
+    },
+    {
+      "id": "limonada-apa",
+      "ingredients": [
+        "Lămâie",
+        "Apă"
+      ],
+      "result": "Limonadă",
+      "explanation": "Zeama de lămâie amestecată cu apă dă limonadă, îndulcită după gust.",
+      "sources": [
+        "https://www.bucataras.ro/retete/limonada-cu-miere-si-lamaie-86571.html"
+      ]
+    },
+    {
+      "id": "limonada-miere",
+      "ingredients": [
+        "Miere",
+        "Lămâie"
+      ],
+      "result": "Limonadă",
+      "explanation": "Mierea îndulcește zeama de lămâie diluată cu apă pentru limonadă.",
+      "sources": [
+        "https://www.bucataras.ro/retete/limonada-cu-miere-si-lamaie-86571.html"
+      ]
+    },
+    {
+      "id": "bezea-albus",
+      "ingredients": [
+        "Zahăr",
+        "Albuș"
+      ],
+      "result": "Bezea",
+      "explanation": "Albușurile bătute spumă cu zahăr se modelează și se usucă prin coacere blândă în bezele.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/bezele-cremoase-cu-ciocolata"
+      ]
+    },
+    {
+      "id": "mousse-frisca",
+      "ingredients": [
+        "Ciocolată",
+        "Frișcă"
+      ],
+      "result": "Mousse de ciocolată",
+      "explanation": "Ciocolata topită și răcorită se încorporează în frișcă pentru un mousse de ciocolată, răcit apoi.",
+      "sources": [
+        "https://sallysbakingaddiction.com/dark-chocolate-mousse-cake/"
+      ]
+    },
+    {
+      "id": "crema-fistic-zahar",
+      "ingredients": [
+        "Fistic",
+        "Zahăr"
+      ],
+      "result": "Pastă dulce de fistic",
+      "explanation": "Fisticul curățat se macină foarte fin cu zahăr până se transformă într-o pastă dulce pentru deserturi.",
+      "sources": [
+        "https://www.seriouseats.com/homemade-pistachio-paste"
+      ]
+    },
+    {
+      "id": "caramel-cratita",
+      "ingredients": [
+        "Zahăr",
+        "Cratiță"
+      ],
+      "result": "Caramel",
+      "explanation": "Zahărul încălzit în cratiță până se topește și devine brun-auriu formează caramel.",
+      "sources": [
+        "https://www.lalena.ro/reteta/13/Crema-de-zahar-ars/"
+      ]
+    },
+    {
+      "id": "caramel-apa",
+      "ingredients": [
+        "Zahăr",
+        "Apă"
+      ],
+      "result": "Caramel",
+      "explanation": "Zahărul umezit cu puțină apă se fierbe până se evaporă apa și zahărul se caramelizează.",
+      "sources": [
+        "https://www.lalena.ro/reteta/13/Crema-de-zahar-ars/"
+      ]
+    },
+    {
+      "id": "sos-caramel-smantana",
+      "ingredients": [
+        "Caramel",
+        "Smântână dulce pentru frișcă"
+      ],
+      "result": "Sos de caramel",
+      "explanation": "Caramelul se combină cu smântână dulce caldă și, după rețetă, unt, pentru un sos fin.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/placinta-cu-mere-cu-sos-de-caramel"
+      ]
+    },
+    {
+      "id": "ganache-smantana",
+      "ingredients": [
+        "Ciocolată",
+        "Smântână dulce pentru frișcă"
+      ],
+      "result": "Ganache",
+      "explanation": "Smântâna dulce încălzită se amestecă cu ciocolata până se obține un ganache omogen.",
+      "sources": [
+        "https://www.kingarthurbaking.com/blog/2019/02/13/how-to-make-ganache"
+      ]
+    },
+    {
+      "id": "tarta-foietaj-mar",
+      "ingredients": [
+        "Foietaj",
+        "Măr"
+      ],
+      "result": "Tartă",
+      "explanation": "Feliile de măr se așază pe o bază de foietaj, cu zahăr după gust, și se coc într-o tartă.",
+      "sources": [
+        "https://www.kotanyi.com/ro/reteta/tarta-cu-mere/"
+      ]
+    },
+    {
+      "id": "tarta-foietaj-fruct",
+      "ingredients": [
+        "Foietaj",
+        "Fruct"
+      ],
+      "result": "Tartă",
+      "explanation": "Fructele pregătite acoperă o bază de foietaj, coaptă ca tartă dulce.",
+      "sources": [
+        "https://www.kotanyi.com/ro/reteta/tarta-cu-mere/"
+      ]
+    },
+    {
+      "id": "tarta-ganache",
+      "ingredients": [
+        "Ganache",
+        "Biscuit"
+      ],
+      "result": "Tartă",
+      "explanation": "Biscuiții mărunțiți și legați cu unt formează o bază de tartă, umplută cu ganache și răcită.",
+      "sources": [
+        "https://www.petitchef.ro/retete/desert/tarta-oreo-si-ciocolata-fara-coacere-fid-1574303"
+      ]
+    },
+    {
+      "id": "budinca-orez-lapte",
+      "ingredients": [
+        "Orez",
+        "Lapte"
+      ],
+      "result": "Budincă de orez",
+      "explanation": "Orezul se fierbe în lapte îndulcit, apoi se leagă cu ou și se coace într-o budincă.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1854/Budinca-de-orez-la-cuptor/"
+      ]
+    },
+    {
+      "id": "gris-lapte",
+      "ingredients": [
+        "Lapte",
+        "Griș"
+      ],
+      "result": "Griș cu lapte",
+      "explanation": "Grișul se fierbe în lapte îndulcit, amestecând până se îngroașă.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1781/Gris-cu-lapte/"
+      ]
+    },
+    {
+      "id": "piure-mazare-unt",
+      "ingredients": [
+        "Unt",
+        "Mazăre"
+      ],
+      "result": "Piure de mazăre",
+      "explanation": "Mazărea fiartă se pasează fin și se amestecă cu unt pentru un piure.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1019/Piure-de-mazare-verde/"
+      ]
+    },
+    {
+      "id": "salata-cartofi-ceapa",
+      "ingredients": [
+        "Cartof",
+        "Ceapă"
+      ],
+      "result": "Salată de cartofi",
+      "explanation": "Cartofii fierți și răciți se taie și se amestecă cu ceapă, ulei și condimente într-o salată.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-de-salate/salata-orientala-reteta-simpla-de-post.html"
+      ]
+    },
+    {
+      "id": "salata-cartofi-masline",
+      "ingredients": [
+        "Măsline",
+        "Cartof"
+      ],
+      "result": "Salată de cartofi",
+      "explanation": "Măslinele se combină cu cartofi fierți și răciți, ceapă și dressing într-o salată de cartofi.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-de-salate/salata-orientala-reteta-simpla-de-post.html"
+      ]
+    },
+    {
+      "id": "chiftele-legume-ou",
+      "ingredients": [
+        "Legume",
+        "Ou"
+      ],
+      "result": "Chiftele de legume",
+      "explanation": "Legumele mărunțite și bine scurse se leagă cu ou și făină sau pesmet, apoi se modelează și se gătesc.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/chiftele-de-legume.html"
+      ]
+    },
+    {
+      "id": "chiftele-cartofi-ou",
+      "ingredients": [
+        "Cartof",
+        "Ou"
+      ],
+      "result": "Chiftele de legume",
+      "explanation": "Cartofii pregătiți și mărunțiți se leagă cu ou, verdețuri și puțină făină, apoi se prăjesc ori se coc ca chiftele.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/chiftele-de-legume.html"
+      ]
+    },
+    {
+      "id": "omleta-tigaie",
+      "ingredients": [
+        "Tigaie",
+        "Ou"
+      ],
+      "result": "Omletă",
+      "explanation": "Ouăle bătute se gătesc în tigaie cu puțină grăsime până se încheagă într-o omletă.",
+      "sources": [
+        "https://jamilacuisine.ro/omleta-delicioasa-reteta-video/"
+      ]
+    },
+    {
+      "id": "omleta-lapte",
+      "ingredients": [
+        "Lapte",
+        "Ou"
+      ],
+      "result": "Omletă",
+      "explanation": "O cantitate mică de lapte se poate adăuga ouălor bătute, gătite apoi în tigaie ca omletă.",
+      "sources": [
+        "https://jamilacuisine.ro/omleta-delicioasa-reteta-video/"
+      ]
+    },
+    {
+      "id": "ou-fiert-oala",
+      "ingredients": [
+        "Oală",
+        "Ou"
+      ],
+      "result": "Ou fiert",
+      "explanation": "Oul în coajă se gătește în apă fierbinte, într-o oală, până se încheagă în gradul dorit.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/oua-vopsite-cu-coji-de-ceapa.html"
+      ]
+    },
+    {
+      "id": "ou-fiert-apa",
+      "ingredients": [
+        "Apă",
+        "Ou"
+      ],
+      "result": "Ou fiert",
+      "explanation": "Oul în coajă se fierbe în apă pentru un ou fiert, moale sau tare după timpul de gătire.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/oua-vopsite-cu-coji-de-ceapa.html"
+      ]
+    },
+    {
+      "id": "paine-prajita-tigaie",
+      "ingredients": [
+        "Tigaie",
+        "Pâine"
+      ],
+      "result": "Pâine prăjită",
+      "explanation": "Felia de pâine rumenită pe ambele părți într-o tigaie devine pâine prăjită.",
+      "sources": [
+        "https://www.youtube.com/watch?v=U3swWBYVM58"
+      ]
+    },
+    {
+      "id": "paine-prajita-cuptor",
+      "ingredients": [
+        "Pâine",
+        "Cuptor de bucătărie"
+      ],
+      "result": "Pâine prăjită",
+      "explanation": "Feliile de pâine se rumenesc pe ambele părți în cuptor pentru pâine prăjită.",
+      "sources": [
+        "https://www.e-retete.ro/retete/paine-prajita-cu-usturoi"
+      ]
+    },
+    {
+      "id": "friganele-ou",
+      "ingredients": [
+        "Ou",
+        "Pâine"
+      ],
+      "result": "Frigănele",
+      "explanation": "Feliile de pâine trecute prin lapte și ou bătut se rumenesc în tigaie ca frigănele.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/friganele-bundas-kenyer-pain-perdu-french-toast.html"
+      ]
+    },
+    {
+      "id": "supa-crema-mazare",
+      "ingredients": [
+        "Piure de mazăre",
+        "Supă"
+      ],
+      "result": "Supă cremă",
+      "explanation": "Piureul de mazăre se subțiază cu supă și se omogenizează într-o supă cremă.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/supe-ciorbe/supa-crema-de-spanac-cu-crutoane-de-casa-cu-parmezan.html"
+      ]
+    },
+    {
+      "id": "supa-crema-cartofi",
+      "ingredients": [
+        "Piure de cartofi",
+        "Supă"
+      ],
+      "result": "Supă cremă",
+      "explanation": "Piureul de cartofi se poate omogeniza cu supă într-o supă cremă, asezonată după gust.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/supe-ciorbe/supa-crema-de-spanac-cu-crutoane-de-casa-cu-parmezan.html"
+      ]
+    },
+    {
+      "id": "sos-iaurt-usturoi",
+      "ingredients": [
+        "Iaurt",
+        "Usturoi"
+      ],
+      "result": "Sos de iaurt",
+      "explanation": "Usturoiul zdrobit se amestecă în iaurt, cu sare și alte arome după gust, pentru un sos rece.",
+      "sources": [
+        "https://www.bucataras.ro/retete/sos-din-iaurt-cu-usturoi-93431.html"
+      ]
+    },
+    {
+      "id": "sos-iaurt-mujdei",
+      "ingredients": [
+        "Mujdei",
+        "Iaurt"
+      ],
+      "result": "Sos de iaurt",
+      "explanation": "Mujdeiul amestecat cu iaurt formează un sos rece cu usturoi.",
+      "sources": [
+        "https://www.bucataras.ro/retete/sos-din-iaurt-cu-usturoi-93431.html"
+      ]
+    },
+    {
+      "id": "cartofi-copti-cuptor",
+      "ingredients": [
+        "Cartof",
+        "Cuptor de bucătărie"
+      ],
+      "result": "Cartofi copți",
+      "explanation": "Cartofii întregi sau tăiați se gătesc în cuptor până sunt fragezi și rumeniți.",
+      "sources": [
+        "https://www.lalena.ro/reteta/156/Cartofi-crocanti-la-cuptor/"
+      ]
+    },
+    {
+      "id": "legume-gratar",
+      "ingredients": [
+        "Grătar",
+        "Legume"
+      ],
+      "result": "Legume la grătar",
+      "explanation": "Legumele pregătite și feliate se frig pe grătar și se asezonează după gust.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-de-garnitura/legume-la-gratar.html"
+      ]
+    },
+    {
+      "id": "legume-gratar-vanata",
+      "ingredients": [
+        "Vânătă",
+        "Grătar"
+      ],
+      "result": "Legume la grătar",
+      "explanation": "Vânăta feliată și unsă ușor cu ulei se poate frige pe grătar ca garnitură de legume.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-de-garnitura/legume-la-gratar.html"
+      ]
+    },
+    {
+      "id": "sos-branza-lapte",
+      "ingredients": [
+        "Brânză",
+        "Lapte"
+      ],
+      "result": "Sos de brânză",
+      "explanation": "O brânză care se topește se încorporează într-o bază caldă cu lapte, făină și unt pentru un sos de brânză.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/sos-bechamel.html"
+      ]
+    },
+    {
+      "id": "sos-cascaval-lapte",
+      "ingredients": [
+        "Cașcaval",
+        "Lapte"
+      ],
+      "result": "Sos de brânză",
+      "explanation": "Cașcavalul ras se topește într-o bază albă cu lapte, unt și făină pentru un sos cremos.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/sos-bechamel.html"
+      ]
+    },
+    {
+      "id": "paste-sos-rosii",
+      "ingredients": [
+        "Sos de roșii",
+        "Paste"
+      ],
+      "result": "Paste cu sos de roșii",
+      "explanation": "Pastele fierte se amestecă și se încălzesc împreună cu sosul de roșii.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1498/Sos-de-rosii-pentru-paste-si-pizza-reteta-mea/"
+      ]
+    },
+    {
+      "id": "paste-branza",
+      "ingredients": [
+        "Brânză",
+        "Paste"
+      ],
+      "result": "Paste cu brânză",
+      "explanation": "Pastele fierte se amestecă cu brânză, dulci sau sărate după sortiment, și se pot rumeni la cuptor.",
+      "sources": [
+        "https://www.lalena.ro/u/reteta/659/Paste-cu-branza-la-cuptor/"
+      ]
+    },
+    {
+      "id": "paste-sos-branza",
+      "ingredients": [
+        "Sos de brânză",
+        "Paste"
+      ],
+      "result": "Paste cu brânză",
+      "explanation": "Sosul cald de brânză se amestecă cu pastele fierte pentru un preparat cremos.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1961/Paste-Mac-and-Cheese/"
+      ]
+    },
+    {
+      "id": "pesto-busuioc",
+      "ingredients": [
+        "Busuioc",
+        "Ulei"
+      ],
+      "result": "Pesto",
+      "explanation": "Frunzele de busuioc se mărunțesc cu ulei de măsline, usturoi, nuci sau semințe și brânză tare pentru pesto.",
+      "sources": [
+        "https://bucate-aromate.ro/2023/08/pesto-de-busuioc/"
+      ]
+    },
+    {
+      "id": "pesto-patrunjel",
+      "ingredients": [
+        "Pătrunjel",
+        "Nucă"
+      ],
+      "result": "Pesto",
+      "explanation": "Pătrunjelul se poate mărunți cu nucă, usturoi și ulei într-o variantă de pesto.",
+      "sources": [
+        "https://www.gatesc.ro/recipes/29798/paste-cu-pesto-de-patrunjel-si-rosii-uscate"
+      ]
+    },
+    {
+      "id": "focaccia-masline",
+      "ingredients": [
+        "Măsline",
+        "Aluat"
+      ],
+      "result": "Focaccia",
+      "explanation": "Aluatul dospit și bine hidratat se întinde în tavă cu ulei de măsline, se adaugă măsline și se coace ca focaccia.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1929/Focaccia-cu-rosii-si-masline-sau-Focaccia-Barese/"
+      ]
+    },
+    {
+      "id": "hummus-lamaie",
+      "ingredients": [
+        "Năut",
+        "Lămâie"
+      ],
+      "result": "Hummus",
+      "explanation": "Năutul fiert se pasează cu zeamă de lămâie, tahini, usturoi și apă sau ulei pentru hummus.",
+      "sources": [
+        "https://www.youtube.com/watch?v=mKCkPoY5XG8"
+      ]
+    },
+    {
+      "id": "hummus-usturoi",
+      "ingredients": [
+        "Năut",
+        "Usturoi"
+      ],
+      "result": "Hummus",
+      "explanation": "Usturoiul aromatizează pasta de năut fiert, cu tahini și lămâie, pentru hummus.",
+      "sources": [
+        "https://www.youtube.com/watch?v=mKCkPoY5XG8"
+      ]
+    },
+    {
+      "id": "crema-branza-iaurt",
+      "ingredients": [
+        "Iaurt",
+        "Brânză"
+      ],
+      "result": "Cremă de brânză",
+      "explanation": "Brânza bine scursă se pasează fin cu iaurt pentru o cremă tartinabilă.",
+      "sources": [
+        "https://g4food.ro/video-foto-crema-de-branza-cu-masline/"
+      ]
+    },
+    {
+      "id": "salata-vinete-ulei",
+      "ingredients": [
+        "Vânătă",
+        "Ulei"
+      ],
+      "result": "Salată de vinete",
+      "explanation": "Vinetele coapte, curățate și scurse se toacă și se freacă cu ulei pentru salată de vinete.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-vinete-romaneasca.html"
+      ]
+    },
+    {
+      "id": "salata-vinete-maioneza",
+      "ingredients": [
+        "Maioneză",
+        "Vânătă"
+      ],
+      "result": "Salată de vinete",
+      "explanation": "Vinetele coapte, curățate și tocate se pot amesteca cu maioneză pentru salată de vinete.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-vinete-romaneasca.html"
+      ]
+    },
+    {
+      "id": "zacusca-vinete",
+      "ingredients": [
+        "Vânătă",
+        "Ardei"
+      ],
+      "result": "Zacuscă",
+      "explanation": "Vinetele și ardeii copți se gătesc împreună cu ceapă, roșii și ulei în zacuscă.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/conserve/zacusca-de-vinete.html"
+      ]
+    },
+    {
+      "id": "shaorma-lipie-friptura",
+      "ingredients": [
+        "Lipie",
+        "Friptură"
+      ],
+      "result": "Șaorma cu de toate",
+      "explanation": "Lipia învelește carne friptă și feliată, completată cu legume, cartofi prăjiți și sosuri pentru șaorma.",
+      "sources": [
+        "https://jamilacuisine.ro/shaorma-de-pui-reteta-video/"
+      ]
+    },
+    {
+      "id": "shaorma-lipie-cartofi",
+      "ingredients": [
+        "Lipie",
+        "Cartofi prăjiți"
+      ],
+      "result": "Șaorma cu de toate",
+      "explanation": "Cartofii prăjiți intră în lipia de șaorma alături de carne friptă, legume și sosuri.",
+      "sources": [
+        "https://jamilacuisine.ro/shaorma-de-pui-reteta-video/"
+      ]
+    },
+    {
+      "id": "sandvis-lipie-hummus",
+      "ingredients": [
+        "Hummus",
+        "Lipie"
+      ],
+      "result": "Sandviș",
+      "explanation": "Lipia umplută cu hummus și legume după gust se rulează ca un sandviș.",
+      "sources": [
+        "https://www.bucataras.ro/retete/hummus-cu-lipii-95570.html"
+      ]
+    },
+    {
+      "id": "sandvis-vinete",
+      "ingredients": [
+        "Salată de vinete",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Salata de vinete întinsă pe pâine formează un sandviș deschis.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-vinete-romaneasca.html"
+      ]
+    },
+    {
+      "id": "sandvis-crema-branza",
+      "ingredients": [
+        "Cremă de brânză",
+        "Pâine"
+      ],
+      "result": "Sandviș",
+      "explanation": "Crema de brânză întinsă pe pâine este baza unui sandviș, cu adaosuri după gust.",
+      "sources": [
+        "https://g4food.ro/video-foto-crema-de-branza-cu-masline/"
+      ]
+    },
+    {
+      "id": "sandvis-paine-prajita",
+      "ingredients": [
+        "Pâine prăjită",
+        "Brânză"
+      ],
+      "result": "Sandviș",
+      "explanation": "Brânza pusă pe pâine prăjită formează un sandviș crocant.",
+      "sources": [
+        "https://www.bucataras.ro/retete/sandvis-simplu-si-bun-77177.html"
+      ]
+    },
+    {
+      "id": "sandvis-focaccia",
+      "ingredients": [
+        "Focaccia",
+        "Cașcaval"
+      ],
+      "result": "Sandviș",
+      "explanation": "Focaccia tăiată pe grosime și umplută cu cașcaval formează un sandviș.",
+      "sources": [
+        "https://www.bucataras.ro/retete/sandvis-cu-cascaval-delaco-si-muschi-file-37232.html",
+        "https://www.kingarthurbaking.com/recipes/crisp-airy-focaccia-recipe"
+      ]
+    },
+    {
+      "id": "pizza-sos-rosii",
+      "ingredients": [
+        "Sos de roșii",
+        "Aluat"
+      ],
+      "result": "Pizza",
+      "explanation": "Sosul de roșii se întinde pe blatul de aluat, se adaugă toppinguri și se coace pizza.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1498/Sos-de-rosii-pentru-paste-si-pizza-reteta-mea/"
+      ]
+    },
+    {
+      "id": "pizza-pesto",
+      "ingredients": [
+        "Pesto",
+        "Aluat"
+      ],
+      "result": "Pizza",
+      "explanation": "Pesto poate aromatiza blatul unei pizza, completat cu brânză și alte ingrediente înainte de coacere.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1950/Pizza-cu-pui-si-sos-pesto/"
+      ]
+    },
+    {
+      "id": "cremsnit-foietaj",
+      "ingredients": [
+        "Foietaj",
+        "Cremă de vanilie"
+      ],
+      "result": "Cremșnit",
+      "explanation": "Foile coapte de foietaj se umplu cu cremă de vanilie pentru cremșnit.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-cremsnit-crema-fiarta"
+      ]
+    },
+    {
+      "id": "cornulete-crema-fistic",
+      "ingredients": [
+        "Pastă dulce de fistic",
+        "Aluat"
+      ],
+      "result": "Cornulețe",
+      "explanation": "Crema de fistic poate umple cornulețe din aluat fraged, coapte apoi.",
+      "sources": [
+        "https://www.youtube.com/watch?v=1XC80NDLW3A"
+      ]
+    },
+    {
+      "id": "inghetata-sos-caramel",
+      "ingredients": [
+        "Sos de caramel",
+        "Frișcă"
+      ],
+      "result": "Înghețată",
+      "explanation": "Sosul de caramel se încorporează într-o bază cu frișcă, apoi se congelează ca înghețată.",
+      "sources": [
+        "https://pofta-buna.com/inghetata-de-caramel-cu-frisca-si-lapte-condensat/"
+      ]
+    },
+    {
+      "id": "mousse-ganache",
+      "ingredients": [
+        "Ganache",
+        "Frișcă"
+      ],
+      "result": "Mousse de ciocolată",
+      "explanation": "Ganache-ul răcorit se încorporează în frișcă pentru o compoziție aerată de mousse.",
+      "sources": [
+        "https://sallysbakingaddiction.com/dark-chocolate-mousse-cake/"
+      ]
+    },
+    {
+      "id": "pui-cuptor",
+      "ingredients": [
+        "Carne de pui",
+        "Cuptor de bucătărie"
+      ],
+      "result": "Friptură",
+      "explanation": "Carnea de pui pregătită și condimentată se coace în cuptor ca friptură.",
+      "sources": [
+        "https://www.youtube.com/watch?v=Jw6Itf8L61Q"
+      ]
+    },
+    {
+      "id": "pui-firimitura",
+      "ingredients": [
+        "Carne de pui",
+        "Firimitură"
+      ],
+      "result": "Șnițel",
+      "explanation": "Feliile de piept de pui se trec prin făină, ou și pesmet din pâine uscată, apoi se prăjesc ca șnițele.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html"
+      ]
+    },
+    {
+      "id": "carne-cutit",
+      "ingredients": [
+        "Cuțit",
+        "Carne"
+      ],
+      "result": "Carne tocată",
+      "explanation": "Carnea dezosată se poate toca foarte mărunt cu un cuțit pentru umpluturi și alte preparate.",
+      "sources": [
+        "https://www.e-retete.ro/retete/biftec-tartar"
+      ]
+    },
+    {
+      "id": "varza-calita-tigaie",
+      "ingredients": [
+        "Varză",
+        "Tigaie"
+      ],
+      "result": "Varză călită",
+      "explanation": "Varza tăiată fin se călește în tigaie cu grăsime și se înăbușă până devine fragedă.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/varza-a-la-cluj.html"
+      ]
+    },
+    {
+      "id": "varza-murata-calita",
+      "ingredients": [
+        "Tigaie",
+        "Varză murată"
+      ],
+      "result": "Varză călită",
+      "explanation": "Varza murată tăiată și scursă se călește cu grăsime în tigaie, apoi se gătește până se înmoaie.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/varza-a-la-cluj.html"
+      ]
+    },
+    {
+      "id": "crutoane-cutit",
+      "ingredients": [
+        "Pâine prăjită",
+        "Cuțit"
+      ],
+      "result": "Crutoane",
+      "explanation": "Pâinea prăjită se taie în cubulețe cu un cuțit pentru crutoane de pus în supe și salate.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/crutoane-de-casa.html"
+      ]
+    },
+    {
+      "id": "umplutura-fistic-kataif",
+      "ingredients": [
+        "Pastă dulce de fistic",
+        "Kataif"
+      ],
+      "result": "Umplutură de fistic și kataif",
+      "explanation": "Fideaua kataif rumenită în unt se amestecă cu pasta dulce de fistic pentru umplutură crocantă.",
+      "sources": [
+        "https://www.oetker.co.uk/recipes/r/dubai-chocolate"
+      ]
+    },
+    {
+      "id": "aluat-praf-copt",
+      "ingredients": [
+        "Făină",
+        "Praf de copt"
+      ],
+      "result": "Aluat",
+      "explanation": "Făina și praful de copt se combină cu lichid și alte ingrediente într-un aluat afânat pentru copt.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/briose-cu-vanilie-la-air-fryer"
+      ]
+    },
+    {
+      "id": "crutoane-tava",
+      "ingredients": [
+        "Pâine",
+        "Tavă de copt"
+      ],
+      "result": "Crutoane",
+      "explanation": "Cubulețele de pâine se așază în tavă, se stropesc cu ulei și se coc până devin crutoane crocante.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/crutoane-de-casa.html"
+      ]
+    },
+    {
+      "id": "ciorba-fasole-afumaturi",
+      "ingredients": [
+        "Afumături",
+        "Fasole"
+      ],
+      "result": "Ciorbă de fasole",
+      "explanation": "Afumăturile se fierb cu fasole și legume într-o ciorbă de fasole, acrită după gust.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/supe-ciorbe/ciorba-de-fasole-cu-tarhon-si-afumatura.html"
+      ]
+    },
+    {
+      "id": "mici-tocata-bicarbonat",
+      "ingredients": [
+        "Carne tocată",
+        "Bicarbonat de sodiu alimentar"
+      ],
+      "result": "Mici",
+      "explanation": "Carnea tocată se frământă cu condimente și puțin bicarbonat alimentar, apoi se modelează și se frige la grătar ca mici.",
+      "sources": [
+        "https://jamilacuisine.ro/mici-de-casa-pasta-pentru-mici-suculenti-si-deliciosi-reteta-video/"
+      ]
+    },
+    {
+      "id": "chiftele-tocata-ou",
+      "ingredients": [
+        "Carne tocată",
+        "Ou"
+      ],
+      "result": "Chiftele",
+      "explanation": "Oul leagă carnea tocată cu legume, pesmet și condimente; compoziția se modelează și se gătește în chiftele.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/chiftele-marinate-reteta-ca-la-mama.html"
+      ]
+    }
+  ],
+  "goal_replays": [
+    {
+      "goal_id": null,
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "paine",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "bulz",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "muraturi",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "ciorba-fasole",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "cozonac",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "papanasi",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "inghetata",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "diplomat",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "sarmale",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "sandvis",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "clatite",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "pizza",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "snitel",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "zacusca",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "urda",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "mucenici",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "cornulete",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "halva",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "placinte",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "pepene-murat",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "branza-burduf",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "langosi",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "merdenea",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "savarina",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "ecler",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "chec",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "briose",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "mici",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "oua-rosii",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "salata-boeuf",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "sushi",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    },
+    {
+      "goal_id": "ciocolata-dubai",
+      "all_recipes_consistent": true,
+      "complete": true,
+      "replayed_discoveries": 117
+    }
+  ],
+  "compatible_save_replays": [
+    {
+      "recipe_hash": "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+      "previous_owned": 75,
+      "prefixes_preserved": 39,
+      "all_earned_concepts_preserved": true
+    },
+    {
+      "recipe_hash": "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+      "previous_owned": 111,
+      "prefixes_preserved": 58,
+      "all_earned_concepts_preserved": true
+    }
+  ],
+  "checks": {
+    "all_concepts_reachable": true,
+    "all_goals_reachable": true,
+    "goal_independent_recipes": true,
+    "complete_replay_restoration": true,
+    "kg_snapshots_match_graph": true,
+    "authored_definitions_bound": true,
+    "undiscovered_target_ids_hidden": true,
+    "recipes_private": true
+  }
+}
