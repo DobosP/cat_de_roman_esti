@@ -53,7 +53,8 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0141 | [Alchimie workbench GUI rebuild](0141-rebuild-alchimie-workbench.md) | superseded by 0142 for interaction and default layout; safety boundaries retained |
 | 0142 | [Direct Alchimie crafting with fewer actions](0142-direct-alchimie-crafting.md) | accepted; other-game scope expanded by 0143 |
 | 0143 | [Simplify the five other game interfaces](0143-simplify-the-five-other-games.md) | accepted |
-| 0144 | [Reviewed Alchimie recipe freedom](0144-reviewed-alchimie-recipe-freedom.md) | accepted |
+| 0144 | [Reviewed Alchimie recipe freedom](0144-reviewed-alchimie-recipe-freedom.md) | partially superseded by 0145 for exploration scope |
+| 0145 | [Persistent Alchimie discovery world](0145-persistent-alchimie-discovery-world.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

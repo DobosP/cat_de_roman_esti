@@ -1,0 +1,1 @@
+import{w as e}from"./index-DKIH8qfP.js";import"./GameOptions-CfT9aNq-.js";var t=e();function n({children:e,summary:n=`Personalizează jocul`}){return(0,t.jsxs)(`details`,{className:`game-setup-options`,children:[(0,t.jsx)(`summary`,{children:n}),(0,t.jsx)(`div`,{className:`game-setup-options-content`,children:e})]})}export{n as t};

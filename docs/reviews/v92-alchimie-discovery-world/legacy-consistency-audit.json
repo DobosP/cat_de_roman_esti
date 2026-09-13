@@ -1,0 +1,795 @@
+{
+  "recipe_pairs": 573,
+  "context_dependent_pairs": 22,
+  "conflicts": [
+    {
+      "pair": [
+        "n_v2fil_emisiune_tv",
+        "n_v3fil_film"
+      ],
+      "labels": [
+        "Emisiune TV",
+        "Film"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_v4fil_operator_imagine"
+          ],
+          "labels": [
+            "operator imagine"
+          ],
+          "boards": [
+            "al_film_tv_020"
+          ]
+        },
+        {
+          "outputs": [
+            "n_v4fil_spectator"
+          ],
+          "labels": [
+            "spectator"
+          ],
+          "boards": [
+            "al_film_tv_021"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_gas_mici",
+        "n_v2gas_mancare_stradala"
+      ],
+      "labels": [
+        "Mici",
+        "Mâncare stradală"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_gas_mustar"
+          ],
+          "labels": [
+            "Muștar"
+          ],
+          "boards": [
+            "al_gastronomie_025"
+          ]
+        },
+        {
+          "outputs": [
+            "n_gas_mititei_obor"
+          ],
+          "labels": [
+            "Mititeii de la Obor"
+          ],
+          "boards": [
+            "al_gastronomie_027"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_dobrogea",
+        "n_marea_neagra"
+      ],
+      "labels": [
+        "Dobrogea",
+        "Marea Neagră"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_v2geo_litoral"
+          ],
+          "labels": [
+            "litoral"
+          ],
+          "boards": [
+            "al_geografie_031"
+          ]
+        },
+        {
+          "outputs": [
+            "n_v3geo_mare"
+          ],
+          "labels": [
+            "mare"
+          ],
+          "boards": [
+            "al_geografie_033"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_marea_neagra",
+        "n_v2geo_litoral"
+      ],
+      "labels": [
+        "Marea Neagră",
+        "litoral"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_v4geo_plaja"
+          ],
+          "labels": [
+            "plajă"
+          ],
+          "boards": [
+            "al_geografie_031"
+          ]
+        },
+        {
+          "outputs": [
+            "n_v4geo_golf"
+          ],
+          "labels": [
+            "golf"
+          ],
+          "boards": [
+            "al_geografie_033"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_dacia",
+        "n_razboaiele_daco_romane"
+      ],
+      "labels": [
+        "Dacia",
+        "Războaiele daco-romane"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_decebal"
+          ],
+          "labels": [
+            "Decebal"
+          ],
+          "boards": [
+            "al_istorie_001"
+          ]
+        },
+        {
+          "outputs": [
+            "n_sarmizegetusa"
+          ],
+          "labels": [
+            "Sarmizegetusa Regia"
+          ],
+          "boards": [
+            "al_istorie_034"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_imperiul_otoman",
+        "n_v2ist_domnitor"
+      ],
+      "labels": [
+        "Imperiul Otoman",
+        "Domnitor"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_istx_constantin_brancoveanu"
+          ],
+          "labels": [
+            "Constantin Brâncoveanu"
+          ],
+          "boards": [
+            "al_istorie_035"
+          ]
+        },
+        {
+          "outputs": [
+            "n_istx_petru_rares"
+          ],
+          "labels": [
+            "Petru Rareș"
+          ],
+          "boards": [
+            "al_istorie_038"
+          ]
+        },
+        {
+          "outputs": [
+            "n_stefan_cel_mare"
+          ],
+          "labels": [
+            "Ștefan cel Mare"
+          ],
+          "boards": [
+            "al_istorie_039"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_mihai_viteazul",
+        "n_vlad_tepes"
+      ],
+      "labels": [
+        "Mihai Viteazul",
+        "Vlad Țepeș"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_tara_romaneasca"
+          ],
+          "labels": [
+            "Țara Românească"
+          ],
+          "boards": [
+            "al_istorie_035"
+          ]
+        },
+        {
+          "outputs": [
+            "n_v4ist_legenda"
+          ],
+          "labels": [
+            "Legendă"
+          ],
+          "boards": [
+            "al_istorie_039"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_limba_romana",
+        "n_v3lim_limba"
+      ],
+      "labels": [
+        "Limba română",
+        "Limbă"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_v2lim_vorbire_populara"
+          ],
+          "labels": [
+            "Vorbire populară"
+          ],
+          "boards": [
+            "al_limba_014"
+          ]
+        },
+        {
+          "outputs": [
+            "n_limbile_romanice"
+          ],
+          "labels": [
+            "Limbile romanice"
+          ],
+          "boards": [
+            "al_limba_043"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_limba_romana",
+        "n_scoala_ardeleana"
+      ],
+      "labels": [
+        "Limba română",
+        "Școala Ardeleană"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_alfabetul_latin"
+          ],
+          "labels": [
+            "Alfabetul latin"
+          ],
+          "boards": [
+            "al_limba_042"
+          ]
+        },
+        {
+          "outputs": [
+            "n_limba_latina"
+          ],
+          "labels": [
+            "Limba latină"
+          ],
+          "boards": [
+            "al_limba_043"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_convorbiri_literare",
+        "n_junimea"
+      ],
+      "labels": [
+        "Convorbiri literare",
+        "Junimea"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_titu_maiorescu"
+          ],
+          "labels": [
+            "Titu Maiorescu"
+          ],
+          "boards": [
+            "al_literatura_005"
+          ]
+        },
+        {
+          "outputs": [
+            "n_mihai_eminescu"
+          ],
+          "labels": [
+            "Mihai Eminescu"
+          ],
+          "boards": [
+            "al_literatura_052"
+          ]
+        },
+        {
+          "outputs": [
+            "n_v2lit_cenaclu_literar"
+          ],
+          "labels": [
+            "Cenaclu literar"
+          ],
+          "boards": [
+            "al_literatura_054"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_net_fenomen_viral",
+        "n_net_meme_romanesc"
+      ],
+      "labels": [
+        "Fenomen viral",
+        "Memă românească"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_net_ghita_ciobanul"
+          ],
+          "labels": [
+            "Ghiță Ciobanul"
+          ],
+          "boards": [
+            "al_meme_net_055"
+          ]
+        },
+        {
+          "outputs": [
+            "n_v2mem_replici_memorabile"
+          ],
+          "labels": [
+            "Replică memorabilă"
+          ],
+          "boards": [
+            "al_meme_net_057"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_net_youtube_ro",
+        "n_v2mem_public_online"
+      ],
+      "labels": [
+        "YouTube România",
+        "Public online"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_net_andrei_terbea"
+          ],
+          "labels": [
+            "Andrei Terbea"
+          ],
+          "boards": [
+            "al_meme_net_056"
+          ]
+        },
+        {
+          "outputs": [
+            "n_net_reactie_video"
+          ],
+          "labels": [
+            "Video de reacție"
+          ],
+          "boards": [
+            "al_meme_net_059"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_v2mem_format_video",
+        "n_v2mem_public_online"
+      ],
+      "labels": [
+        "Format video",
+        "Public online"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_net_andrei_terbea"
+          ],
+          "labels": [
+            "Andrei Terbea"
+          ],
+          "boards": [
+            "al_meme_net_056"
+          ]
+        },
+        {
+          "outputs": [
+            "n_net_reactie_video"
+          ],
+          "labels": [
+            "Video de reacție"
+          ],
+          "boards": [
+            "al_meme_net_059"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_muz_hip_hop_ro",
+        "n_v2muz_rap_romanesc"
+      ],
+      "labels": [
+        "Hip-hop românesc",
+        "Rap românesc"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_muz_dupa_blocuri"
+          ],
+          "labels": [
+            "După blocuri"
+          ],
+          "boards": [
+            "al_muzica_061"
+          ]
+        },
+        {
+          "outputs": [
+            "n_muz_guess_who"
+          ],
+          "labels": [
+            "Guess Who"
+          ],
+          "boards": [
+            "al_muzica_067"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_muz_rock_ro",
+        "n_v2muz_trupa_rock"
+      ],
+      "labels": [
+        "Rock românesc",
+        "Trupă rock"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_v3muz_chitara"
+          ],
+          "labels": [
+            "Chitară"
+          ],
+          "boards": [
+            "al_muzica_063"
+          ]
+        },
+        {
+          "outputs": [
+            "n_v4muz_rock"
+          ],
+          "labels": [
+            "Rock"
+          ],
+          "boards": [
+            "al_muzica_064"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_romania_stat",
+        "n_v2soc_stat"
+      ],
+      "labels": [
+        "România",
+        "Stat"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_bnr",
+            "n_leul_romanesc"
+          ],
+          "labels": [
+            "Banca Națională a României",
+            "Leul românesc"
+          ],
+          "boards": [
+            "al_societate_074"
+          ]
+        },
+        {
+          "outputs": [
+            "n_unirea_principatelor"
+          ],
+          "labels": [
+            "Unirea Principatelor Române"
+          ],
+          "boards": [
+            "al_societate_075"
+          ]
+        },
+        {
+          "outputs": [
+            "n_recensamant"
+          ],
+          "labels": [
+            "Recensământul populației"
+          ],
+          "boards": [
+            "al_societate_080"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_v2soc_stat",
+        "n_v4soc_bani"
+      ],
+      "labels": [
+        "Stat",
+        "bani"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_bnr",
+            "n_leul_romanesc"
+          ],
+          "labels": [
+            "Banca Națională a României",
+            "Leul românesc"
+          ],
+          "boards": [
+            "al_societate_074"
+          ]
+        },
+        {
+          "outputs": [
+            "n_bnr",
+            "n_v3soc_impozit"
+          ],
+          "labels": [
+            "Banca Națională a României",
+            "Impozit"
+          ],
+          "boards": [
+            "al_societate_081"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_comuna",
+        "n_judet"
+      ],
+      "labels": [
+        "Comuna",
+        "Județ"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_recensamant"
+          ],
+          "labels": [
+            "Recensământul populației"
+          ],
+          "boards": [
+            "al_societate_078"
+          ]
+        },
+        {
+          "outputs": [
+            "n_municipiu"
+          ],
+          "labels": [
+            "Municipiu"
+          ],
+          "boards": [
+            "al_societate_080"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_comuna",
+        "n_v3soc_populatie"
+      ],
+      "labels": [
+        "Comuna",
+        "Populație"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_v4soc_comunitate"
+          ],
+          "labels": [
+            "comunitate"
+          ],
+          "boards": [
+            "al_societate_078"
+          ]
+        },
+        {
+          "outputs": [
+            "n_municipiu"
+          ],
+          "labels": [
+            "Municipiu"
+          ],
+          "boards": [
+            "al_societate_080"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_judet",
+        "n_v3soc_populatie"
+      ],
+      "labels": [
+        "Județ",
+        "Populație"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_romania_stat"
+          ],
+          "labels": [
+            "România"
+          ],
+          "boards": [
+            "al_societate_078"
+          ]
+        },
+        {
+          "outputs": [
+            "n_municipiu"
+          ],
+          "labels": [
+            "Municipiu"
+          ],
+          "boards": [
+            "al_societate_080"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_vdr_joaca_in_fata_blocului",
+        "n_vdr_sotron"
+      ],
+      "labels": [
+        "Joaca în fața blocului",
+        "Șotronul"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_v2via_jocuri_copilarie"
+          ],
+          "labels": [
+            "Jocuri de copilărie"
+          ],
+          "boards": [
+            "al_viata_de_roman_090"
+          ]
+        },
+        {
+          "outputs": [
+            "n_v2via_jocuri_copilarie",
+            "n_vdr_copilaria_anilor_90"
+          ],
+          "labels": [
+            "Jocuri de copilărie",
+            "Copilăria anilor 90"
+          ],
+          "boards": [
+            "al_viata_de_roman_096"
+          ]
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_vdr_bloc",
+        "n_vdr_viata_la_bloc"
+      ],
+      "labels": [
+        "Blocul",
+        "Viața la bloc"
+      ],
+      "variants": [
+        {
+          "outputs": [
+            "n_vdr_papuci_de_casa"
+          ],
+          "labels": [
+            "Papucii de casă"
+          ],
+          "boards": [
+            "al_viata_de_roman_091"
+          ]
+        },
+        {
+          "outputs": [
+            "n_vdr_scara_blocului"
+          ],
+          "labels": [
+            "Scara blocului"
+          ],
+          "boards": [
+            "al_viata_de_roman_096"
+          ]
+        }
+      ]
+    }
+  ]
+}

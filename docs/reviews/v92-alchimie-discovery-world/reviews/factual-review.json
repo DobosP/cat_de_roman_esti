@@ -1,0 +1,496 @@
+{
+  "candidate_sha256": "559abb0b475665f73b010b1a0acdc7650576d829819a50a2e99bdd50700f8fae",
+  "concept_description_notes": "Ingredient and tool labels are existing KG concepts. World-local copy corrects four identified descriptions; none changes original graph metadata.",
+  "evidence_date": "2026-09-13",
+  "items": [
+    {
+      "id": "aluat-apa",
+      "rationale": "Flour combines with water or milk in dough. The explanation describes mixing/kneading; it does not imply that all dough varieties have identical ingredients.",
+      "sources": [
+        "https://dexonline.ro/definitie/aluat/322624",
+        "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "aluat-lapte",
+      "rationale": "Flour combines with water or milk in dough. The explanation describes mixing/kneading; it does not imply that all dough varieties have identical ingredients.",
+      "sources": [
+        "https://dexonline.ro/definitie/aluat/322624",
+        "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "paste-ou",
+      "rationale": "Fresh egg pasta is made from flour and eggs, then rolled and cut. These are coherent alternative entries to one general pasta concept.",
+      "sources": [
+        "https://www.petitchef.ro/retete/acompaniamente/cum-sa-faci-paste-proaspete-de-casa-fid-1569687",
+        "https://shop.pastacinquepalmi.com/produs/tagliatelle-alluovo/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "paste-aluat",
+      "rationale": "Fresh egg pasta is made from flour and eggs, then rolled and cut. These are coherent alternative entries to one general pasta concept.",
+      "sources": [
+        "https://www.petitchef.ro/retete/acompaniamente/cum-sa-faci-paste-proaspete-de-casa-fid-1569687",
+        "https://shop.pastacinquepalmi.com/produs/tagliatelle-alluovo/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "pandispan-ou-zahar",
+      "rationale": "Beaten eggs and sugar form the aerated base for sponge cake, with flour incorporation and baking explicitly required by the explanation.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/pandispan-cu-capsuni"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "paine-cuptor",
+      "rationale": "Bread is baked dough; the explanation specifies bread dough and acknowledges leavening variation. The pair is a conceptual baking transformation.",
+      "sources": [
+        "https://dexonline.ro/definitie/p%C3%A2ine"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "branza-cheag",
+      "rationale": "Milk coagulation by rennet and draining whey is a real cheese-making route. Both the producer ingredient list and a worked home recipe support it.",
+      "sources": [
+        "https://delacojunior.ro/branza-de-capra/",
+        "https://www.lalena.ro/reteta/1862/Branza-Telemea-de-Casa/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "branza-lamaie",
+      "rationale": "Lemon juice coagulates heated milk; the explanation correctly describes an acid-set fresh cheese rather than claiming this is every cheese-making process.",
+      "sources": [
+        "https://www.lalena.ro/u/reteta/1279/Branza-de-vaci-din-lapte-fiert/",
+        "https://portal.eduhr.ro/wp-content/uploads/2021/11/A451.pdf"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "saramura",
+      "rationale": "Dissolving salt in water produces brine. This is a direct transformation; the game gives no preservation quantities or safety instructions.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1862/Branza-Telemea-de-Casa/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "mamaliga-apa",
+      "rationale": "Cornmeal is boiled and stirred in water to make mamaliga; heating is explicitly stated in the explanation.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1166/Mamaliga-Moldoveneasca/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "mamaliga-lapte",
+      "rationale": "Mamaliga may be cooked in milk or milk mixed with water. The text says this is a variant and does not replace the classic water route.",
+      "sources": [
+        "https://teoskitchen.ro/2013/10/m-b-s-mamaliga-cu-branza-si-smantana.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "telemea",
+      "rationale": "Telemea is a salted cheese stored in brine. The explanation treats salting/storage as the distinguishing transformation, not arbitrary milk-to-product taxonomy.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1862/Branza-Telemea-de-Casa/",
+        "https://hochland.ro/produse/telemea/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "bulz-branza",
+      "rationale": "Bulz combines mamaliga and cheese; telemea is an attested option. The explanation names filling and baking instead of claiming any unheated serving is bulz.",
+      "sources": [
+        "https://www.pastebaneasa.ro/retete/bulz-la-cuptor/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "bulz-telemea",
+      "rationale": "Bulz combines mamaliga and cheese; telemea is an attested option. The explanation names filling and baking instead of claiming any unheated serving is bulz.",
+      "sources": [
+        "https://www.pastebaneasa.ro/retete/bulz-la-cuptor/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "dulceata-fruct",
+      "rationale": "Fruit cooked with sugar is a conventional preserve route. The explanation acknowledges fruit-dependent proportions and does not promise a complete preserving procedure.",
+      "sources": [
+        "https://www.lalena.ro/reteta/541/Dulceata-de-cirese-albe/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "dulceata-mar",
+      "rationale": "Apple pieces can be cooked with sugar to make apple preserve; this is a legitimate specific-fruit route to the same general preserve concept.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/dulceata-de-mere"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "compot-fruct",
+      "rationale": "Compot is prepared from fruit and water, generally sweetened. The explanation explicitly includes optional sweetening and cooking.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1873/Compot-de-Capsuni/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "compot-mar",
+      "rationale": "Apples are a conventional compot fruit, cooked in water with sweetening to taste; the general result label is accurate.",
+      "sources": [
+        "https://pofta-buna.com/compot-de-mere-pentru-iarna-reteta/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "muraturi-legume",
+      "rationale": "Vegetables including cucumbers are fermented in brine to make pickles. A producer explicitly describes natural brine fermentation; the explanation claims no instant real-world pickling.",
+      "sources": [
+        "https://nasulrosu.ro/product/castraveti-murati-1700ml-nasul-rosu/",
+        "https://www.lalena.ro/reteta/117/Castraveti-murati-in-saramura-la-borcan/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "castraveti-saramura",
+      "rationale": "Vegetables including cucumbers are fermented in brine to make pickles. A producer explicitly describes natural brine fermentation; the explanation claims no instant real-world pickling.",
+      "sources": [
+        "https://nasulrosu.ro/product/castraveti-murati-1700ml-nasul-rosu/",
+        "https://www.lalena.ro/reteta/117/Castraveti-murati-in-saramura-la-borcan/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "supa-legume",
+      "rationale": "Vegetables cooked in water form a vegetable soup base. This broad result matches the broad ingredient class.",
+      "sources": [
+        "https://dexonline.ro/definitie/sup%C4%83"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "ciorba-bors",
+      "rationale": "Fermented bran bors is a souring ingredient for ciorba. The text describes a real souring route without claiming all ciorbe require bors.",
+      "sources": [
+        "https://dexonline.ro/definitie/ciorb%C4%83",
+        "https://pofta-buna.com/ciorba-de-fasole/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "ciorba-fasole",
+      "rationale": "Boiled beans are central to bean ciorba and bors is an attested optional souring ingredient. The shortcut explanation names the additional vegetables and boiling.",
+      "sources": [
+        "https://pofta-buna.com/ciorba-de-fasole/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "ciorba-fasole-bors",
+      "rationale": "Boiled beans are central to bean ciorba and bors is an attested optional souring ingredient. The shortcut explanation names the additional vegetables and boiling.",
+      "sources": [
+        "https://pofta-buna.com/ciorba-de-fasole/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "mujdei",
+      "rationale": "Crushed garlic is central to mujdei; water thins it and oil can emulsify a creamy variant. Salt/crushing and the variant distinction are stated.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1580/Mujdei-de-Usturoi/?all_comments=1"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "mujdei-ulei",
+      "rationale": "Crushed garlic is central to mujdei; water thins it and oil can emulsify a creamy variant. Salt/crushing and the variant distinction are stated.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1580/Mujdei-de-Usturoi/?all_comments=1"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "fasole-batuta",
+      "rationale": "Cooked mashed beans flavored with garlic form the basis of fasole batuta. The explanation names cooking and mashing, not raw-bean mixing.",
+      "sources": [
+        "https://www.lalena.ro/reteta/268/Fasole-batuta/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "ardei-orez",
+      "rationale": "Rice-and-vegetable stuffed peppers are an attested fasting variant. The explanation clearly identifies the omitted vegetables.",
+      "sources": [
+        "https://pofta-buna.com/ardei-umpluti-cu-orez-si-ciuperci-reteta-de-post/",
+        "https://retete.unica.ro/recipes/ardei-umpluti-cu-orez-3/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "ardei-carne",
+      "rationale": "Peppers stuffed with minced meat and rice are conventional; the explanation names both rice and seasoning beyond the selected pair.",
+      "sources": [
+        "https://www.lalena.ro/reteta/69/Ardei-umpluti/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "friptura-cuptor",
+      "rationale": "Roasting prepared meat in an oven produces friptura. The broad result does not invent a specific cut or named regional dish.",
+      "sources": [
+        "https://dexonline.ro/definitie/friptur%C4%83"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "salata",
+      "rationale": "Tomato and cucumber are a conventional fresh vegetable salad base. The broad result label avoids claiming a distinctive regional recipe.",
+      "sources": [
+        "https://dexonline.ro/definitie/salat%C4%83"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "branza-smantana",
+      "rationale": "Fresh cheese can be served or mixed with sour cream. This is a literal serving combination, acceptable outside a hidden-target challenge.",
+      "sources": [
+        "https://www.lalena.ro/reteta/230/Branza-de-vaci-de-casa/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "frisca-mixer",
+      "rationale": "Unfermented cream suitable for whipping is aerated with a mixer into whipped cream. The source ingredient is specifically whipping cream, not generic sour cream.",
+      "sources": [
+        "https://www.sanlacta.ro/pagini%20HTML/frisca.html",
+        "https://www.lalena.ro/reteta/1044/Crema-de-frisca-cum-batem-corect-smantana-pentru-a-face-frisca/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "crema-vanilie",
+      "rationale": "Vanilla custard contains milk, vanilla, egg and/or starch with sugar. Both explanations name necessary omitted thickening ingredients; these are conceptual base-ingredient recipes.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-tort",
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/sos-de-vanilie-creme-anglaise.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "crema-ou",
+      "rationale": "Vanilla custard contains milk, vanilla, egg and/or starch with sugar. Both explanations name necessary omitted thickening ingredients; these are conceptual base-ingredient recipes.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-tort",
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/sos-de-vanilie-creme-anglaise.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "ciocolata-casa",
+      "rationale": "Romanian home chocolate is made with cocoa and milk powder plus sugar syrup and butter. This is a documented home variant, not a claim about all industrial chocolate.",
+      "sources": [
+        "https://jamilacuisine.ro/ciocolata-de-casa-gustul-copilariei-reteta-video/",
+        "https://www.lalena.ro/reteta/666/Ciocolata-de-casa/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "biscuit-unt",
+      "rationale": "Flour and butter are characteristic short biscuit ingredients; sugar and baking are named in the explanation. It is not presented as a complete two-ingredient cooking recipe.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/biscuiti-cu-unt-love-letters"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "salam-cacao",
+      "rationale": "Broken biscuits and cocoa/chocolate are characteristic components of biscuit salami. A chocolate variant is directly documented by its recipe author.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/salam-de-biscuiti-cu-ciocolata-si-fistic-reteta-detaliata.html",
+        "https://jamilacuisine.ro/salam-de-biscuiti-de-post-reteta-simpla-rapida-si-delicioasa-video/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "salam-ciocolata",
+      "rationale": "Broken biscuits and cocoa/chocolate are characteristic components of biscuit salami. A chocolate variant is directly documented by its recipe author.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/salam-de-biscuiti-cu-ciocolata-si-fistic-reteta-detaliata.html",
+        "https://jamilacuisine.ro/salam-de-biscuiti-de-post-reteta-simpla-rapida-si-delicioasa-video/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "placinta-mere",
+      "rationale": "Dough layers around apple filling are a straightforward apple-pie association; no unsupported regional-origin claim is added.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/placinta-cu-mere"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "cozonac-nuca",
+      "rationale": "Walnut and cocoa fillings occur in cozonac. The explanations specifically require sweet leavened dough; generic dough alone is not claimed to be sufficient. Predictability among pastries is the separate quality review.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "cozonac-cacao",
+      "rationale": "Walnut and cocoa fillings occur in cozonac. The explanations specifically require sweet leavened dough; generic dough alone is not claimed to be sufficient. Predictability among pastries is the separate quality review.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "papanasi-faina",
+      "rationale": "Fresh cheese and flour are characteristic papanasi dough components, with egg explicitly acknowledged as another ingredient.",
+      "sources": [
+        "https://www.oetker.ro/produsele/p/mix-pentru-papanasi",
+        "https://www.lauraadamache.ro/2016/01/papanasi-fierti.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "papanasi-gris",
+      "rationale": "Boiled papanasi can be made with fresh cheese, semolina and egg. The explanation accurately limits the route to the boiled variant.",
+      "sources": [
+        "https://www.lauraadamache.ro/2016/01/papanasi-fierti.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "supa-galuste",
+      "rationale": "Semolina-and-egg dumplings are cooked in soup. The omitted egg is explicit, preventing the false implication that loose semolina alone forms dumplings.",
+      "sources": [
+        "https://www.lalena.ro/reteta/1205/Supa-de-pui-cu-galuste/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "cremsnit",
+      "rationale": "Cremsnit consists of baked pastry sheets with vanilla cream; the explanation explicitly identifies puff pastry as the required dough subtype.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-cremsnit-crema-fiarta"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "poale-brau",
+      "rationale": "Poale-n brau are folded leavened pastries with sweet cheese. The explanation names the dough subtype and folding. Specificity against other cheese pastries remains a quality concern.",
+      "sources": [
+        "https://retete.unica.ro/recipes/poale-n-brau/",
+        "https://jamilacuisine.ro/page/84/?taxonomy=ingredient"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "inghetata-frisca",
+      "rationale": "Sweetened whipped-cream bases are used for frozen home ice cream. The explanation says a suitable sweetened base can become ice cream, not that plain frozen cream is identical.",
+      "sources": [
+        "https://www.lauraadamache.ro/2021/07/inghetata-de-ciocolata-de-casa-cremoasa-fara-ace-de-gheata.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "inghetata-crema",
+      "rationale": "A vanilla custard base may be chilled and frozen for ice cream; the explanation correctly qualifies the cream as suitable rather than treating every pastry custard identically.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/inghetata-de-casa-cu-vanilie-reteta-video.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "diplomat-piscot",
+      "rationale": "Diplomat recipes use whipped cream, gelatin, fruit, egg/milk cream and often ladyfingers. Explanations disclose the other defining ingredients. Pair specificity is separately judged for gameplay quality.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/tort-diplomat"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "diplomat-gelatina",
+      "rationale": "Diplomat recipes use whipped cream, gelatin, fruit, egg/milk cream and often ladyfingers. Explanations disclose the other defining ingredients. Pair specificity is separately judged for gameplay quality.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/tort-diplomat"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "pasca-stafide",
+      "rationale": "Sweet cheese and raisins are characteristic of a conventional pasca filling. The text calls them the filling, not the entire pastry.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/pasca-cu-branza-si-stafide"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "amandina-cacao",
+      "rationale": "Amandina uses a cocoa sponge base, syrup and cocoa/chocolate cream or glaze; both explanations acknowledge the other defining components. These ingredient claims are factual despite competing possible cakes.",
+      "sources": [
+        "https://jamilacuisine.ro/amandina-de-casa-gustoasa-si-bine-insiropata-reteta-video/",
+        "https://jamilacuisine.ro/prajitura-amandina-amandine-facute-in-casa/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "amandina-ciocolata",
+      "rationale": "Amandina uses a cocoa sponge base, syrup and cocoa/chocolate cream or glaze; both explanations acknowledge the other defining components. These ingredient claims are factual despite competing possible cakes.",
+      "sources": [
+        "https://jamilacuisine.ro/amandina-de-casa-gustoasa-si-bine-insiropata-reteta-video/",
+        "https://jamilacuisine.ro/prajitura-amandina-amandine-facute-in-casa/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "sarmale-carne",
+      "rationale": "Sour cabbage leaves wrap a minced-meat-and-rice filling in conventional Romanian sarmale. Rice and seasoning are explicitly acknowledged.",
+      "sources": [
+        "https://www.lalena.ro/reteta/73/Sarmale/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "sarmale-orez",
+      "rationale": "Fasting sarmale can use rice and vegetables in sour cabbage leaves; the meat-free route is factual rather than an invented substitution.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/sarmale-de-post-manastiresti-cu-nuca-si-stafide.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "gogosi",
+      "rationale": "Frying portions of leavened dough in oil produces a familiar doughnut variant. Leavening and sweetening are named, not assumed to result from oil alone.",
+      "sources": [
+        "https://jamilacuisine.ro/gogosi-pufoase-reteta-video/"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "kind": "alchimie-discovery-world-review-v1",
+  "research_reference": "reference-review.md",
+  "reviewed_description_overrides": {
+    "Ardei umpluți": "Ardei umpluți cu orez, legume și uneori carne, fierți într-un sos.",
+    "Compot": "Fructe fierte în apă, de obicei îndulcite; se consumă proaspăt sau se păstrează la borcan.",
+    "Paste": "Preparat din aluat de făină, cu apă sau ou, modelat și apoi fiert.",
+    "Sarmale": "Frunze de varză sau de viță umplute cu orez, legume și uneori carne."
+  },
+  "reviewer": "discovery_review-independent-factual",
+  "role": "factual",
+  "world_rationale": "All 57 exact recipes and their explanations were independently checked against live dictionary, author-recipe, educational or producer evidence. These are explicitly simplified culinary idea pairs, not complete cooking instructions; necessary omitted processing or ingredients are acknowledged. Four inherited concept descriptions were corrected locally to cover meat-free stuffed dishes, ordinary flour pasta and non-season-specific compot, while retaining KG snapshots and provenance. No recipe claims regional exclusivity or changes with a selected goal. Common pantry concepts and recognizable dishes meet the broad Romanian-relevance baseline; recipe specificity and long-term play quality remain the separate independent quality judgment. No claim is made that every possible pair works.",
+  "world_verdict": "accept"
+}

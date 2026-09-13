@@ -86,10 +86,10 @@ export default function Home({
   const playedTotal = totals.reduce((sum, row) => sum + (row.record?.played ?? 0), 0);
 
   const openGame = useCallback(
-    (game: GameDef) => {
+    (game: GameDef, challenge = false) => {
       sound.unlockAudio();
       sound.playSelect();
-      navigate(game.path);
+      navigate(challenge && game.key === "alchimie" ? `${game.path}?mode=challenges` : game.path);
     },
     [navigate],
   );
@@ -216,7 +216,7 @@ export default function Home({
                   <button
                     type="button"
                     className="daily-circuit-game daily-circuit-game-action"
-                    onClick={() => openGame(game)}
+                    onClick={() => openGame(game, true)}
                     aria-label={`Deschide ${game.title} — neterminat azi`}
                   >
                     <span className="daily-circuit-game-icon" aria-hidden>

@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { expect } from "@playwright/test";
 
 export const games = [
-  { key: "alchimie", path: "/alchimie", board: ".alchemy-inventory-grid" },
+  { key: "alchimie", path: "/alchimie?mode=challenges", board: ".alchemy-inventory-grid" },
   { key: "intrusul", path: "/intrusul", board: ".intrusul-grid", derived: true },
   { key: "perechi", path: "/perechi", board: ".perechi-grid", derived: true },
   { key: "conexiuni", path: "/conexiuni", board: ".connections-grid" },

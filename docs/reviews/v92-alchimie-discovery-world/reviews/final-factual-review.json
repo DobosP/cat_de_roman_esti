@@ -1,0 +1,23 @@
+{
+  "additional_checks": {
+    "changed_recipe_same_id_rejected_http409": true,
+    "changed_threshold_invalidates_hash": true,
+    "concepts": 75,
+    "crafted_results": 39,
+    "exact_rebuilt_catalog": true,
+    "harmless_copy_restores_http200": true,
+    "independent_audit_byte_identical": true,
+    "ordering_does_not_change_hash": true,
+    "randomized_complete_world_replays": 100,
+    "recipe_hash": "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+    "recipes": 57,
+    "supplies": 28
+  },
+  "audit_sha256": "972c42e712d4ec7070ba43c6710cfe954ef77d2516a89dc80a877f2cfb08df7d",
+  "catalog_sha256": "fd3f5547e2a771b8d6d6caae7cf2d18335ce97d512a37446daa3062acb638a8c",
+  "kind": "alchimie-discovery-world-final-v1",
+  "rationale": "Independently rebuilt the unchanged 57-recipe catalog byte-for-byte and reran the current serving audit to a separate byte-identical file, checking all current runtime source hashes and all concept snapshots. Repeated 100 randomized complete-world playthroughs with goal changes; every run reached 39 crafted results plus 28 supplies and all 57 repeat outcomes remained fixed. Inspected the new saved-progress mechanics fingerprint: it binds canonical pairs/results, starter IDs and unlock thresholds/supply IDs independently of copy or goals. Using the real proposed world through the Django endpoint, changed an existing pair result while keeping the world ID: the original checkpoint was rejected with HTTP409. Copy-only edits restored the exact original checkpoint with HTTP200; threshold edits changed the hash, and harmless recipe/unlock/starter ordering did not. The loader now enforces at most48 unlocked supplies. Existing content, four reviewed description corrections and culinary simplification statements are unchanged. Prior final acceptance and original audit are retained as initial-runtime history.",
+  "reviewer": "discovery_review-independent-factual",
+  "role": "factual",
+  "verdict": "accept"
+}

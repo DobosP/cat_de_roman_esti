@@ -106,6 +106,37 @@ after reset; rejected actions and free repeated pairs preserve it. Later paid hi
 this single object. The existing POST hint fields remain compatible. See
 [ADR-0136](adr/0136-reconcile-uncertain-alchimie-actions.md) for retention and recovery policy.
 
+### Alchimie exploration (V92, separate from scored challenges)
+
+The additive `/api/alchimie/explore` routes use stable operation IDs
+`alchimie_explore_create`, `alchimie_explore_get`, `alchimie_explore_combine`,
+`alchimie_explore_hint`, and `alchimie_explore_goal`. POST the base path with `{}` or
+`{progress: {world_id, recipe_hash, discoveries: [[a,b], ...]}, goal_id: null|string}` to create or
+restore. GET `/{game_id}` reads state; POST suffixes `/combine`, `/hint`, `/goal` accept
+`{a,b}`, `{}`, and `{goal_id: null|string}` respectively. Identifiers are strings;
+unknown fields in command bodies are rejected and a checkpoint has at most 128 pairs.
+
+State contains `mode: explore`, `game_id`, a per-session monotonic `revision`, public
+world counts, earned `inventory`, `discovered_count` (crafted results only), `seed_count`,
+`complete`, public optional `goals`, `goal_id`, `hint`, `unlocked`, `next_unlock`, and the
+validated `progress` checkpoint. Inventory exposes first-discovery parents/explanation/
+sources and `status: active|depleted|final` plus `ready`. The selected goal never changes
+the recipe book. `complete` means the entire world is owned; individual goals never end play.
+
+Goal `target_id` is null until earned; labels are public guidance. Hints first show only
+an output label, then one owned pair. Supply milestones disclose counts/titles until
+earned. Full recipes, unearned IDs, scores and account/ranking records are absent.
+Combine adds `discovered`, `result`, `supplied`, `already_known`, and `message`; repeating
+a known pair is harmless. GET preserves the hint. Restoring revalidates each recipe and
+reconstructs automatic supplies; it does not accept claimed inventory IDs.
+
+A missing session returns 404 and can be restored with its checkpoint. An incompatible
+world ID or recipe fingerprint returns 409; invalid replay returns 400, schema validation 422,
+and an unavailable
+catalog or exhausted session capacity 503. Clients retain a save on failure. Progress is
+local to the browser and requires server validation; the existing KG/mobile content
+manifest and old challenge routes are unchanged. See [ADR-0145](adr/0145-persistent-alchimie-discovery-world.md).
+
 ### Lanț progress and help
 
 Successful `usor` and `normal` moves may add `progress: {kind, message}`, where `kind` is

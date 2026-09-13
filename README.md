@@ -6,8 +6,8 @@ A **text-only arcade of six Romanian word games** over one concept graph
 recorded in `docs/STATUS.md`; no graph visualization). All six are **server-authoritative**:
 the Django BFF validates every move and hides the answers.
 
-- **Alchimie** *(à la Infinite Craft)* — combine two concepts into a new one (their shared
-  link) and keep crafting until you reach the target.
+- **Alchimie** — explore a saved Romanian kitchen collection with consistent recipes
+  and optional goals, or play short scored target challenges ([ADR-0145](docs/adr/0145-persistent-alchimie-discovery-world.md)).
 - **Intrusul** — tap the one word that does not belong with the other three.
 - **Perechi** — match eight words into four hidden semantic pairs.
 - **Conexiuni** *(à la NYT Connections)* — group 16 concepts into 4 hidden categories,

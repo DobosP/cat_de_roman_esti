@@ -14,6 +14,7 @@ from drf_spectacular.views import SpectacularJSONAPIView
 
 from ..wordgames import (
     alchimie,
+    alchimie_explore,
     conexiuni,
     contexto,
     intrusul,
@@ -34,6 +35,7 @@ urlpatterns = [
     path("legal/privacy", legal.privacy),
     path("legal/terms", legal.terms),
     *alchimie.urlpatterns,
+    *alchimie_explore.urlpatterns,
     *contexto.urlpatterns,
     *lant.urlpatterns,
     *conexiuni.urlpatterns,

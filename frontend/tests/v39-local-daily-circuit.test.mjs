@@ -162,7 +162,7 @@ test("Home renders local-only circuit actions and keeps completed rows read-only
     /aria-label=\{`\$\{game\.title\}: terminat azi, \$\{row\.score\} puncte`\}/,
   );
   assert.match(circuitMarkup, /className="daily-circuit-game daily-circuit-game-action"/);
-  assert.match(circuitMarkup, /onClick=\{\(\) => openGame\(game\)\}/);
+  assert.match(circuitMarkup, /onClick=\{\(\) => openGame\(game, true\)\}/);
   assert.match(
     circuitMarkup,
     /aria-label=\{`Deschide \$\{game\.title\} — neterminat azi`\}/,

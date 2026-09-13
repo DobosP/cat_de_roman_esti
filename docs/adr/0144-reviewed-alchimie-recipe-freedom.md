@@ -1,6 +1,7 @@
 # ADR-0144: Reviewed Alchimie recipe freedom
 
-- Status: accepted
+- Status: partially superseded by [ADR-0145](0145-persistent-alchimie-discovery-world.md)
+  for the deferred exploration scope; challenge recipes and scoring remain accepted.
 - Date: 2026-09-13
 - Partially supersedes: [ADR-0044](0044-alchimie-sparse-recipe-projection.md), for the
   target-route-only runtime book and retained penalties on unsuccessful attempts.

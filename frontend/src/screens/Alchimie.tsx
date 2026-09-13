@@ -5,6 +5,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
   alchimieApi,
@@ -31,6 +32,9 @@ import { sound } from "../sound";
 import { bestScore } from "../scores";
 import { categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
+import { AlchimieModes } from "../components/AlchimieModes";
+import AlchimieExplore from "./AlchimieExplore";
+import { readExplorationSave } from "../explorationSave";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 import "../styles/alchimie.css";
 
@@ -109,7 +113,22 @@ const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
   { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "țintă îndepărtată" },
 ];
 
-export default function Alchimie({
+export default function Alchimie(props: {
+  onExit: () => void;
+  onToast: (message: string, kind?: ToastKind) => void;
+}) {
+  const location = useLocation();
+  const [legacyResume] = useState(() => {
+    try { return Boolean(localStorage.getItem("cat_active_game_v1_alchimie")) && readExplorationSave().kind === "empty"; }
+    catch { return false; }
+  });
+  const params = new URLSearchParams(location.search);
+  const challenge = params.get("mode") !== "explore" && (params.get("mode") === "challenges" ||
+    ["daily", "category", "seed", "difficulty"].some((key) => params.has(key)) || legacyResume);
+  return challenge ? <AlchimieChallenge {...props} /> : <AlchimieExplore {...props} />;
+}
+
+function AlchimieChallenge({
   onExit,
   onToast,
 }: {
@@ -643,6 +662,7 @@ export default function Alchimie({
         {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
         <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
+          <AlchimieModes mode="challenges" busy={creating || loading} />
 
           <GameIntro
             startFailed={startFailed}
@@ -714,6 +734,7 @@ export default function Alchimie({
             <StatBadge label="Combinații" value={state.moves} accent={DEF.accent} />
           </Hud>
         </GameShell>
+        <AlchimieModes mode="challenges" busy={creating || busy || loading} />
 
         <section className={`alchemy-target${won ? " alchemy-target--won" : ""}`} aria-label="Ținta de făurit">
           <span className="alchemy-target-icon" aria-hidden>{won ? "★" : "◎"}</span>

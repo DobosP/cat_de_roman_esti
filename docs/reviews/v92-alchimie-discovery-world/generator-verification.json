@@ -1,0 +1,34 @@
+{
+  "candidate_sha256": "559abb0b475665f73b010b1a0acdc7650576d829819a50a2e99bdd50700f8fae",
+  "checks": [
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_alchimie_discovery_catalog.py -q --basetemp=/home/dobo/work/_temp/feat__v92-alchimie-gui/discovery-world/pytest-catalog-complete",
+      "result": "61 passed"
+    },
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m ruff check scripts/alchimie_discovery_recipe_source.py scripts/build_alchimie_discovery_world.py tests/test_alchimie_discovery_catalog.py",
+      "result": "All checks passed"
+    }
+  ],
+  "date": "2026-09-13",
+  "intermediate_findings": [
+    "Review set intersection initially aliased expected-ID set, allowing rejected rows; meaningful hold/reject guard tests caught it before any package write. Fixed accepted=set(ids).",
+    "One long description source line required syntax-only wrapping; generated visible content unchanged but new source binding correctly required updated candidate SHA."
+  ],
+  "kind": "alchimie-discovery-generator-verification-v1",
+  "package_write_performed_by_content_agent": false,
+  "source_files": [
+    {
+      "path": "scripts/alchimie_discovery_recipe_source.py",
+      "sha256": "450c62eedf397c8703a3a497ad116c58b740e8936b3e872b545cc778a87a6733"
+    },
+    {
+      "path": "scripts/build_alchimie_discovery_world.py",
+      "sha256": "e859a714d1f83acb070ab102fbfbba5737154e88f852f4d3bddba78fda5bb13a"
+    },
+    {
+      "path": "tests/test_alchimie_discovery_catalog.py",
+      "sha256": "8a3259639dd627a63d9559f6bdd5ecd9a699059f5853a64a7b8e61adf9c06463"
+    }
+  ]
+}

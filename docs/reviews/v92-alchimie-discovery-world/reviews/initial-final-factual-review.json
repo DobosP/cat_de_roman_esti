@@ -1,0 +1,19 @@
+{
+  "additional_checks": {
+    "concepts": 75,
+    "crafted_results": 39,
+    "exact_rebuilt_catalog": true,
+    "goals_changed_between_crafts": true,
+    "independent_audit_byte_identical": true,
+    "randomized_complete_world_replays": 100,
+    "recipes": 57,
+    "supplies": 28
+  },
+  "audit_sha256": "c3775a6360980054bc1705f582e29bd270420c3ecba04ad52392c27b9428a5a8",
+  "catalog_sha256": "fd3f5547e2a771b8d6d6caae7cf2d18335ce97d512a37446daa3062acb638a8c",
+  "kind": "alchimie-discovery-world-final-v1",
+  "rationale": "Independently rebuilt the exact generated catalog from the current bound 57-item candidate and both complete reviews; package proposal bytes match. Re-ran the actual serving audit to a separate file and obtained byte-identical evidence, verifying every runtime source fingerprint, all 75 existing KG snapshots/provenance, all recipes and all nine optional goals. Additionally replayed 100 randomized discovery orders while changing goals between crafts: each reached all 39 crafted results and 28 supplied ingredients, with no dead end, all 57 stable repeat outcomes and no goal-dependent recipe change. Public snapshots disclose only discovered target IDs and no private recipe book. The four corrected descriptions and sugar-syrup/butter explanation remain exactly reviewed. This accepts factual content and consistency in the separate culinary discovery world, not a claim that legacy challenge recipes were globally reconciled.",
+  "reviewer": "discovery_review-independent-factual",
+  "role": "factual",
+  "verdict": "accept"
+}

@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "baseline": "c0f3945",
+  "branch": "feat/v92-alchimie-gui",
+  "version": "V92 persistent Alchimie discovery world",
+  "environment": {
+    "python": "3.12.3",
+    "node": "24.19.0",
+    "python_3_14": "not rerun"
+  },
+  "catalog_sha256": "fd3f5547e2a771b8d6d6caae7cf2d18335ce97d512a37446daa3062acb638a8c",
+  "live_audit_sha256": "972c42e712d4ec7070ba43c6710cfe954ef77d2516a89dc80a877f2cfb08df7d",
+  "candidate_sha256": "559abb0b475665f73b010b1a0acdc7650576d829819a50a2e99bdd50700f8fae",
+  "checks": [
+    {
+      "command": "PYTHONPATH=. <venv>/bin/python -m pytest -o addopts=\"\" -q --basetemp=<task-scratch>/pytest-full",
+      "result": "1787 passed in 280.10s",
+      "log_sha256": "5147095b21da3e531740655d709be48198e99a7f453b289b54dd3d0e7ce9148b"
+    },
+    {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <venv>/bin/python -m pytest -o addopts=\"\" -q tests/accounts --basetemp=<task-scratch>/pytest-accounts",
+      "result": "53 passed in 1.94s",
+      "log_sha256": "c953724a521766dbcb36aab09a7e0babdf39dad4fddcec4843e9983235df6a0b"
+    },
+    {
+      "command": "pytest tests/test_alchimie_explore.py tests/test_alchimie_discovery_catalog.py tests/test_mobile_contract.py",
+      "result": "93 passed in 4.24s"
+    },
+    {
+      "command": "pytest tests/test_alchimie_discovery_catalog.py",
+      "result": "61 passed"
+    },
+    {
+      "command": "npm test",
+      "result": "204 passed",
+      "log_sha256": "21bf6773a7594c9eab8b0db152cf889555f349defa0325cd898df65bbe24e96d"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass",
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39"
+    },
+    {
+      "command": "npm run build",
+      "result": "Typecheck, build and budget pass; 119.22 of 120 KiB initial gzip.",
+      "log_sha256": "3e79d578d8e859ecfb1151f75e47cb44a93287cf12a6717c3f81562ed6f61f61"
+    },
+    {
+      "command": "npm run test:e2e -- --workers=4",
+      "result": "442 passed in 4.1m",
+      "retries": 0,
+      "log_sha256": "5c49a1f54d20617f91c2f8d78226e5282132ee10c23239847bc7b5148d907600"
+    },
+    {
+      "command": "validate_fixture.py; validate_games_pack.py",
+      "result": "Both GREEN; 0 fixture errors."
+    },
+    {
+      "command": "python -m ruff check; git diff --check",
+      "result": "pass"
+    },
+    {
+      "command": "check_docs.py .",
+      "result": "dead_links=0 stale_terms=0 retired_verbs=0 orphans=0"
+    },
+    {
+      "command": "audit_alchimie_discovery_world.py --catalog <proposal> --output <live-audit>",
+      "result": "All 57 recipes, 75 concepts, free play and nine goals: replay and metadata checks pass."
+    },
+    {
+      "command": "independent factual reviewer randomized goal-switching replays",
+      "result": "100 complete playthroughs; stable recipes, no dead ends."
+    },
+    {
+      "command": "Playwright preview screenshot journey on local port8144",
+      "result": "All eight desktop starters visible at 1280x800; mobile bread goal completed in two crafts. PNG artifacts inspected."
+    }
+  ],
+  "runtime_sources": [
+    {
+      "path": "cat_de_roman_esti/wordgames/discovery_world.py",
+      "sha256": "8fb9ed79e5239abcbaf6352fca94bdb94b7e22c85c452666eb7ac48aadd22482"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/alchimie_explore.py",
+      "sha256": "0da74156150ff9250ad3a3dac1d0b5afd516d8dca4edfe37c895834d7f57c705"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/service.py",
+      "sha256": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/_session_endpoint.py",
+      "sha256": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f"
+    },
+    {
+      "path": "cat_de_roman_esti/web/urls.py",
+      "sha256": "ead8b6ca81be580a1006f81e14d106723e826d248117cea14ecc162a9768d61f"
+    },
+    {
+      "path": "scripts/alchimie_discovery_recipe_source.py",
+      "sha256": "450c62eedf397c8703a3a497ad116c58b740e8936b3e872b545cc778a87a6733"
+    },
+    {
+      "path": "scripts/build_alchimie_discovery_world.py",
+      "sha256": "e859a714d1f83acb070ab102fbfbba5737154e88f852f4d3bddba78fda5bb13a"
+    },
+    {
+      "path": "scripts/audit_alchimie_discovery_world.py",
+      "sha256": "377182e36318d22844f0f650ca96771d110be28a7dfd9b50ca6f521eac891f49"
+    }
+  ],
+  "frontend_sources": [
+    {
+      "path": "frontend/src/screens/AlchimieExplore.tsx",
+      "sha256": "809facaea87a619c91f26a3ee683a92805ad7ac65a1cb0472770a3a952d5fd33"
+    },
+    {
+      "path": "frontend/src/screens/Alchimie.tsx",
+      "sha256": "a83a889ceac09caf748a74f054ce2868a3241823a72680e52cb56bcc842c17a8"
+    },
+    {
+      "path": "frontend/src/screens/Home.tsx",
+      "sha256": "28cb814712b5f0e687f3c2d3827a102134690ec4072140d76e59ed1acccaff3c"
+    },
+    {
+      "path": "frontend/src/explorationSave.ts",
+      "sha256": "9e27f104c8354a6769d71eb66656d1933ad514937525e980427089e958514be7"
+    },
+    {
+      "path": "frontend/src/api/alchimieExplore.ts",
+      "sha256": "96d0772c4d760857bc349bcce0ca99d3c4bbd78d220b071480cad4db40fa07d9"
+    },
+    {
+      "path": "frontend/src/components/AlchimieModes.tsx",
+      "sha256": "eebb5c974b8cf9ab47ab6653840a075b587788cfe42301ed56be5614150d0bbd"
+    },
+    {
+      "path": "frontend/src/styles/alchimie-explore.css",
+      "sha256": "319558170c4de70730868789decee483171ef22712dca2b14929ad9883eb100a"
+    },
+    {
+      "path": "cat_de_roman_esti/web/static/.vite/manifest.json",
+      "sha256": "3e4819573c98759448ab2350572a4cbe1117508b2b3649ae27a7628a9d976b92"
+    }
+  ],
+  "reviews": {
+    "factual-review.json": "9341e9b768d28824c82dfd5dc47a90b8866904db2cba295693b41df1b07e83f1",
+    "final-factual-review.json": "606a201c27586e5d08ca00e976e9d812e89acdc2e2f260a5f1f33131f4a88cf8",
+    "final-quality-review.json": "9a53bb2ae4d96e9b6de90677bf3cea0a3b0269da18fa404c2100765473d54b67",
+    "initial-final-factual-review.json": "9e811e5a08ad6080d9754124be4a0ea263e30db285b91df6a06cafc5030219fd",
+    "quality-review.json": "37f86e9b0ebf114d2421a26dc0a6d134e3d2959faa6fb679d1a1281bbb7153b1"
+  },
+  "metrics": {
+    "concepts": 75,
+    "starting_supplies": 8,
+    "unlocked_supplies": 28,
+    "crafted_discoveries": 39,
+    "recipes": 57,
+    "results_with_alternatives": 18,
+    "crafted_intermediates": 12,
+    "terminal_discoveries": 27,
+    "opening_pairs": 7,
+    "possible_starting_pairs": 28,
+    "optional_goals": 9
+  },
+  "intermediate_findings": [
+    {
+      "scope": "content candidate",
+      "resolution": "Pandișpan became a crafted intermediate; four inherited descriptions corrected in world only; all57finalrecipes accepted"
+    },
+    {
+      "scope": "runtime review",
+      "resolution": "added mechanic fingerprint to checkpoint, preventing silent changed outcomes under sameworldID; tightened unlocked-supply cap48"
+    },
+    {
+      "scope": "legacy browser focus",
+      "result": "66 passed /2zoomoverflow failures",
+      "resolution": "mode-switch wrapping corrected"
+    },
+    {
+      "scope": "new exploration browser focus",
+      "result": "18 passed /2introcontrast failures",
+      "resolution": "button foreground/background corrected"
+    },
+    {
+      "scope": "final compactness check",
+      "result": "1pass/1desktop startervisibilityfailure",
+      "resolution": "selector specificity corrected; both finalaccessibility checks andfull442 pass"
+    },
+    {
+      "scope": "first preview screenshot attempt",
+      "result": "stale localpreview process served an earlier asset index after rebuild",
+      "resolution": "restartedpreview onfinalstatic;newcapturepassed"
+    }
+  ],
+  "production_changed": false,
+  "human_playtest": "not performed",
+  "physical_device_acceptance": "not performed",
+  "scope_limits": [
+    "Finite kitchen world",
+    "27 terminal crafted dishes",
+    "Browser-local persistence without cross-device synchronization",
+    "Legacy challenge books retain scoped recipes",
+    "Recipe changes require explicit checkpoint compatibility handling"
+  ],
+  "frontend_receipt_sha256": "38e9778f2c5381a2b3995b4efbaf0fc580558bb1a84c3bde0c86ae33290a2cfb"
+}

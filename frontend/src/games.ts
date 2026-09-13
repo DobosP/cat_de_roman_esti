@@ -34,7 +34,7 @@ export const GAMES: GameDef[] = [
     path: "/alchimie",
     title: "Alchimie",
     tag: "Combină și descoperă",
-    blurb: "Alege două concepte și făurește ținta.",
+    blurb: "Combină cuvinte și crește-ți colecția.",
     accent: "#c689ff",
     glow: "#e3ccff",
     icon: "⚗️",
