@@ -25,7 +25,8 @@ test("every live game has concise guidance for goal, feedback and recovery", () 
         "Alchimie keeps optional rules below the main workspace",
       );
     } else {
-      assert.match(source, /<GameShell[^>]*helpGame=\{GAME_KEY\}/);
+      assert.match(source, /<GameOptions game=(?:\{GAME_KEY\}|"lant")[\s>]/);
+      assert.doesNotMatch(source, /<GameShell[^>]*helpGame=/);
     }
   }
 });
@@ -45,6 +46,11 @@ test("rules use a closed native disclosure with no session or clue side effects"
   assert.match(component, /<summary>Reguli și ajutor<\/summary>/);
   assert.doesNotMatch(component, /\bopen=|useEffect|useState|fetch|Api|onClick|localStorage/);
   assert.match(component, /Citirea regulilor nu folosește un indiciu și nu schimbă scorul/);
+  const options = read("../src/components/GameOptions.tsx");
+  assert.match(options, /<details className="game-options">/);
+  assert.match(options, /<summary>Opțiuni de joc<\/summary>/);
+  assert.match(options, /<GameHelp game=\{game\} \/>/);
+  assert.doesNotMatch(options, /\bopen=|useEffect|useState|fetch|Api|onClick|localStorage/);
 });
 
 test("earned Alchimie evidence preserves the server's oriented relationship", () => {

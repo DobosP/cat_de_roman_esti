@@ -1,0 +1,31 @@
+.connections-screen .game-shell-header,
+.connections-screen .connections-coach-stack,
+.connections-screen .connections-actions { position: static; }
+.connections-screen { scroll-padding-top: 12px; }
+.connections-screen .game-shell-header { flex-direction: row; align-items: center; margin: 0; padding: 0; background: none; backdrop-filter: none; }
+.connections-screen .game-shell-main { width: auto; max-width: 100%; flex: 0 1 auto; }
+.connections-screen .game-shell-status { width: auto; max-width: 100%; margin-left: auto; flex: 0 1 auto; }
+.connections-screen .game-shell-status .hud { justify-content: flex-end; }
+.connections-screen .connections-coach.next-move { padding: 9px 12px; border-radius: 12px; background: var(--surface); }
+.connections-screen .connections-coach .next-move-icon,
+.connections-screen .connections-coach .next-move-label { display: none; }
+.connections-screen .connections-coach .next-move-copy { gap: 4px; }
+.connections-screen .connections-coach strong { font-size: 0.9rem; }
+.connections-screen .connections-coach .next-move-progress { display: block; font-size: 0.8rem; }
+.connections-screen .connections-coach-action { display: flex; flex-direction: column; gap: 5px; align-items: center; }
+.connections-lives-label { font-size: 0.67rem; color: var(--text-dim); }
+.connections-screen .connections-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.connections-screen .connection-tile { min-width: 0; overflow-wrap: anywhere; white-space: normal; border-radius: 10px; }
+.connections-screen .connections-actions { padding: 0; background: none; backdrop-filter: none; }
+.connections-screen .game-action-buttons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px !important; }
+.connections-screen .game-action-buttons > button { min-width: 0; min-height: 44px; padding: 8px 6px; white-space: normal; overflow-wrap: anywhere; }
+.connections-hint-action { display: flex; justify-content: center; }
+.connections-hint-action > button { min-height: 44px; white-space: normal; }
+.connections-hint-status { margin: 0; font-size: 0.74rem; text-align: center; color: var(--text-dim); }
+.connections-screen .roedu-btn:focus-visible { outline: 3px solid var(--game-conexiuni); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .connections-screen .connections-grid { gap: 6px !important; }
+  .connections-screen .connection-tile { padding: 10px 4px !important; min-height: 68px !important; font-size: 0.76rem !important; }
+  .connections-screen .connections-coach.next-move { padding: 8px; gap: 8px; flex-wrap: wrap; }
+  .connections-screen .connections-coach strong { font-size: 0.83rem; }
+}

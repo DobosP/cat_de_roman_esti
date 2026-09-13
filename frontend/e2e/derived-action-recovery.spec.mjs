@@ -7,7 +7,7 @@ const result = (page) => page.getByRole("button", { name: "Copiază rezultatul",
 const saved = (page, game) => page.evaluate((key) => localStorage.getItem(key), activeKey(game));
 const played = (page, game) => page.evaluate((key) => JSON.parse(localStorage.getItem("cat_wordgame_scores_v1") || "{}")[key]?.played ?? 0, game.key);
 const server = async (request, game, id) => (await request.get(gameURL(game, id))).json();
-const hint = (page, game) => page.getByRole("button", { name: game.key === "intrusul" ? "💡 Arată indiciul" : "💡 Arată o pereche", exact: true });
+const hint = (page, game) => page.getByRole("button", { name: game.key === "intrusul" ? /^💡 Arată indiciul/ : /^💡 Arată o pereche/ });
 const cue = (page, game) => page.locator(game.key === "intrusul" ? ".intrusul-clue" : ".perechi-hint");
 
 function traffic(page, game, id) {
@@ -125,7 +125,7 @@ for (const game of games.filter(({ derived }) => derived)) {
           if (mode === "hint") {
             await expect(cue(page, game)).toContainText(game.key === "intrusul" ? fresh.clue.label : fresh.hint.label);
             expect(fresh.hints_used).toBe(1);
-            await expect(page.getByRole("button", { name: "Indiciu folosit", exact: true })).toBeDisabled();
+            await expect(hint(page, game)).toHaveCount(0);
             await screenshot(page, "recovered-hint.png");
             await page.reload();
             await expect(cue(page, game)).toBeVisible();

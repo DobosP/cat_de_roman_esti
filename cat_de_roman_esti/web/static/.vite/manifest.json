@@ -1,10 +1,33 @@
 {
-  "_CategoryPicker-Dzk7u9Mb.js": {
-    "file": "assets/CategoryPicker-Dzk7u9Mb.js",
+  "_CategoryPicker-GtbCadr2.js": {
+    "file": "assets/CategoryPicker-GtbCadr2.js",
     "name": "CategoryPicker",
     "imports": [
-      "_useSavedGameResume-DF2z2HoL.js",
+      "_useSavedGameResume-D8csfQvn.js",
       "index.html"
+    ]
+  },
+  "_GameOptions-C4j_yOuo.js": {
+    "file": "assets/GameOptions-C4j_yOuo.js",
+    "name": "GameOptions",
+    "imports": [
+      "_useSavedGameResume-D8csfQvn.js",
+      "index.html"
+    ],
+    "css": [
+      "assets/GameOptions-CEWYWGsz.css"
+    ]
+  },
+  "_GameOptions-CEWYWGsz.css": {
+    "file": "assets/GameOptions-CEWYWGsz.css",
+    "src": "_GameOptions-CEWYWGsz.css"
+  },
+  "_GameSetupOptions-DqEp3a7K.js": {
+    "file": "assets/GameSetupOptions-DqEp3a7K.js",
+    "name": "GameSetupOptions",
+    "imports": [
+      "index.html",
+      "_GameOptions-C4j_yOuo.js"
     ]
   },
   "_auth-BQkoQX_A.js": {
@@ -15,24 +38,24 @@
     "file": "assets/derivedReplay-BkW_Ev1N.js",
     "name": "derivedReplay"
   },
-  "_scoreSync-Dow8uyN-.js": {
-    "file": "assets/scoreSync-Dow8uyN-.js",
+  "_scoreSync-26O-FC8N.js": {
+    "file": "assets/scoreSync-26O-FC8N.js",
     "name": "scoreSync",
     "imports": [
       "index.html",
       "_auth-BQkoQX_A.js"
     ]
   },
-  "_useSavedGameResume-DF2z2HoL.js": {
-    "file": "assets/useSavedGameResume-DF2z2HoL.js",
+  "_useSavedGameResume-D8csfQvn.js": {
+    "file": "assets/useSavedGameResume-D8csfQvn.js",
     "name": "useSavedGameResume",
     "imports": [
       "index.html",
-      "_scoreSync-Dow8uyN-.js"
+      "_scoreSync-26O-FC8N.js"
     ]
   },
   "index.html": {
-    "file": "assets/index-2NzWaWal.js",
+    "file": "assets/index-BnOcGRII.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -73,93 +96,110 @@
     "src": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2"
   },
   "src/components/AccountBar.tsx": {
-    "file": "assets/AccountBar-l4ECgjI2.js",
+    "file": "assets/AccountBar-CSdZPS3W.js",
     "name": "AccountBar",
     "src": "src/components/AccountBar.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
       "_auth-BQkoQX_A.js",
-      "_scoreSync-Dow8uyN-.js"
+      "_scoreSync-26O-FC8N.js"
     ]
   },
   "src/screens/Alchimie.tsx": {
-    "file": "assets/Alchimie-DQiVyg8m.js",
+    "file": "assets/Alchimie-uQdcaoDN.js",
     "name": "Alchimie",
     "src": "src/screens/Alchimie.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_useSavedGameResume-DF2z2HoL.js",
+      "_useSavedGameResume-D8csfQvn.js",
       "index.html",
-      "_CategoryPicker-Dzk7u9Mb.js"
+      "_CategoryPicker-GtbCadr2.js"
     ],
     "css": [
       "assets/Alchimie-C20kM5C4.css"
     ]
   },
   "src/screens/CaldRece.tsx": {
-    "file": "assets/CaldRece-ChoVXNw5.js",
+    "file": "assets/CaldRece-CgkzDa-O.js",
     "name": "CaldRece",
     "src": "src/screens/CaldRece.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_useSavedGameResume-DF2z2HoL.js",
+      "_useSavedGameResume-D8csfQvn.js",
       "index.html",
-      "_CategoryPicker-Dzk7u9Mb.js"
+      "_CategoryPicker-GtbCadr2.js",
+      "_GameOptions-C4j_yOuo.js",
+      "_GameSetupOptions-DqEp3a7K.js"
+    ],
+    "css": [
+      "assets/CaldRece-rhEghXDo.css"
     ]
   },
   "src/screens/Conexiuni.tsx": {
-    "file": "assets/Conexiuni-pHwoHfPn.js",
+    "file": "assets/Conexiuni-B4IT2vi4.js",
     "name": "Conexiuni",
     "src": "src/screens/Conexiuni.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_useSavedGameResume-DF2z2HoL.js",
+      "_useSavedGameResume-D8csfQvn.js",
       "index.html",
-      "_CategoryPicker-Dzk7u9Mb.js"
+      "_CategoryPicker-GtbCadr2.js",
+      "_GameOptions-C4j_yOuo.js",
+      "_GameSetupOptions-DqEp3a7K.js"
+    ],
+    "css": [
+      "assets/Conexiuni-CRniDikL.css"
     ]
   },
   "src/screens/Intrusul.tsx": {
-    "file": "assets/Intrusul-CzJPSIg6.js",
+    "file": "assets/Intrusul-BXeUWmZ9.js",
     "name": "Intrusul",
     "src": "src/screens/Intrusul.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_useSavedGameResume-DF2z2HoL.js",
+      "_useSavedGameResume-D8csfQvn.js",
       "index.html",
+      "_GameOptions-C4j_yOuo.js",
       "_derivedReplay-BkW_Ev1N.js"
     ],
     "css": [
-      "assets/Intrusul-Cqfmxx4e.css"
+      "assets/Intrusul-D1oQwidZ.css"
     ]
   },
   "src/screens/Lant.tsx": {
-    "file": "assets/Lant-DDvia7h2.js",
+    "file": "assets/Lant-CDGU7Hsz.js",
     "name": "Lant",
     "src": "src/screens/Lant.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_useSavedGameResume-DF2z2HoL.js",
+      "_useSavedGameResume-D8csfQvn.js",
       "index.html",
-      "_CategoryPicker-Dzk7u9Mb.js"
+      "_CategoryPicker-GtbCadr2.js",
+      "_GameOptions-C4j_yOuo.js",
+      "_GameSetupOptions-DqEp3a7K.js"
+    ],
+    "css": [
+      "assets/Lant-CDVYGXUK.css"
     ]
   },
   "src/screens/Perechi.tsx": {
-    "file": "assets/Perechi-DmyXwMQT.js",
+    "file": "assets/Perechi-DBv1kMSO.js",
     "name": "Perechi",
     "src": "src/screens/Perechi.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_useSavedGameResume-DF2z2HoL.js",
+      "_useSavedGameResume-D8csfQvn.js",
       "index.html",
+      "_GameOptions-C4j_yOuo.js",
       "_derivedReplay-BkW_Ev1N.js"
     ],
     "css": [
-      "assets/Perechi-BmknC8dD.css"
+      "assets/Perechi-Dnjh2U--.css"
     ]
   },
   "src/screens/Ranking.tsx": {
-    "file": "assets/Ranking-Bi9L1v-F.js",
+    "file": "assets/Ranking-Bl2goM5C.js",
     "name": "Ranking",
     "src": "src/screens/Ranking.tsx",
     "isDynamicEntry": true,

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, activeKey, gameURL, deterministicStarts, solution, start, solve, openAlchemyDisclosure } from "./games.mjs";
+import { games, activeKey, gameURL, deterministicStarts, solution, start, solve, openAlchemyDisclosure, openGameOptions } from "./games.mjs";
 
 const SCORE_KEY = "cat_wordgame_scores_v1";
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -52,7 +52,7 @@ for (const game of games) {
     await deterministicStarts(page, game);
     await page.goto(game.path);
     if (!game.derived) {
-      if (game.key === "alchimie") await openAlchemyDisclosure(page, ".alchemy-setup-options");
+      await openGameOptions(page, game, { setup: true });
       await page.getByRole("group", { name: "DIFICULTATE" })
         .getByRole("button", { name: /^Normal/ }).click();
       await page.getByRole("group", { name: "CATEGORIE" }).getByRole("button").nth(1).click();
@@ -96,7 +96,7 @@ for (const game of games) {
     await page.clock.install();
     await deterministicStarts(page, game);
     await start(page, game);
-    if (game.key === "alchimie") await openAlchemyDisclosure(page, ".alchemy-menu");
+    await openGameOptions(page, game);
     await page.getByText("Reguli și ajutor", { exact: true }).click();
     await solve(page, game, solution(game).steps);
     await expect.poll(async () => {
@@ -106,6 +106,9 @@ for (const game of games) {
     const originalScores = await scoreState(page);
     const copy = page.getByRole("button", { name: "Copiază rezultatul" });
     const replay = page.getByRole("button", { name: /^Încă (?:unul|un lanț) →$/ });
+    // The compact quick-game result now fits a 560px desktop. Keep this recovery
+    // scenario genuinely scrolled by exercising a shorter window after completion.
+    if (game.derived) await page.setViewportSize({ ...page.viewportSize(), height: 320 });
     await replay.scrollIntoViewIfNeeded();
     // Sticky headers and partially visible rules do not indicate scroll length.
     expect(await replay.evaluate((button) => {

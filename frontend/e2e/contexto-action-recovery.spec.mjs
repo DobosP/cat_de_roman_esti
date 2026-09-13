@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, activeKey, gameURL, deterministicStarts, solution, start, act } from "./games.mjs";
+import { games, activeKey, gameURL, deterministicStarts, solution, start, act, openGameOptions } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "contexto");
 const scoresKey = "cat_wordgame_scores_v1";
@@ -129,6 +129,7 @@ test("a lost give-up response reveals only the server's terminal answer without 
   const initial = await start(page, game);
   const counts = traffic(page, initial.game_id);
   await loseCommittedResponse(page, initial.game_id, "giveup");
+  await openGameOptions(page, game);
   await page.getByRole("button", { name: "Răspuns", exact: true }).click();
   const failed = responseFor(page, initial.game_id, "giveup");
   await page.getByRole("button", { name: "Da, arată", exact: true }).click();

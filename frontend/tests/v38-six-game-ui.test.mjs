@@ -77,8 +77,9 @@ test("both boards are tap-first, compact and responsive from tiny phones to desk
   ]) {
     assert.doesNotMatch(screen, /draggable=|onDrag|onDrop/);
     assert.match(css, new RegExp(`\\.${grid} \\{[\\s\\S]*?repeat\\(2, minmax\\(0, 1fr\\)\\)`));
-    assert.match(css, /@media \(min-width: 760px\)[\s\S]*?repeat\(3, minmax\(0, 1fr\)\)/);
-    assert.match(css, /@media \(max-width: 339px\)[\s\S]*?grid-template-columns: minmax\(0, 1fr\)/);
+    assert.match(css, new RegExp(`@media \\(min-width: 760px\\)[\\s\\S]*?\\.${grid} \\{[^}]*repeat\\(4, minmax\\(0, 1fr\\)\\)`));
+    assert.doesNotMatch(css, new RegExp(`\\.${grid} \\{[^}]*grid-template-columns: minmax\\(0, 1fr\\)`));
+    assert.match(css, /@media \(max-width: 339px\)[\s\S]*?min-height: 64px/);
     assert.match(css, /min-height: 44px/);
   }
 });

@@ -1,0 +1,27 @@
+.game-options,
+.game-setup-options { min-width: 0; width: 100%; }
+.game-options > summary,
+.game-setup-options > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 4px;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+  list-style: none;
+}
+.game-options > summary::before { content: "⋯"; font-size: 1.3rem; }
+.game-setup-options > summary::before { content: "+"; }
+.game-setup-options[open] > summary::before { content: "−"; }
+.game-options > summary::-webkit-details-marker,
+.game-setup-options > summary::-webkit-details-marker { display: none; }
+.game-setup-options > summary { justify-content: center; }
+.game-options-content,
+.game-setup-options-content { display: flex; flex-direction: column; gap: 12px; padding: 14px; }
+.game-options-content { border: 1px solid var(--surface-border); border-radius: 14px; background: var(--surface); }
+.game-options-content .roedu-btn { min-height: 44px; white-space: normal; overflow-wrap: anywhere; }
+.game-options > summary:focus-visible,
+.game-setup-options > summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 8px; }

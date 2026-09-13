@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "version": "V92: five additional game interfaces",
+  "baseline": "f57162d",
+  "branch": "feat/v92-alchimie-gui",
+  "environment": {
+    "node": "24.19.0",
+    "python_serving_runtime": "3.12.3",
+    "browser": "Chromium desktop/mobile emulation"
+  },
+  "checks": [
+    {
+      "command": "npm test",
+      "result": "195 passed"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass"
+    },
+    {
+      "command": "npm run build",
+      "result": "typecheck/build/119.18 of 120 KiB initial gzip budget pass"
+    },
+    {
+      "command": "npm run test:e2e -- conexiuni-simpler-ui.spec.mjs contexto-simpler-ui.spec.mjs lant-simpler-ui.spec.mjs quick-games-simpler-ui.spec.mjs accessibility.spec.mjs --workers=4",
+      "result": "50 passed in 43.7s before final quick-game focus follow-up"
+    },
+    {
+      "command": "npm run test:e2e -- quick-games-simpler-ui.spec.mjs --workers=4",
+      "result": "18 passed in 18.8s after final quick-game focus changes"
+    },
+    {
+      "command": "npm run test:e2e -- start-failure.spec.mjs --grep '(intrusul|perechi) retains its completed result' --workers=4",
+      "result": "4 passed in 6.4s"
+    },
+    {
+      "command": "npm run test:e2e -- --workers=4",
+      "result": "414 passed (4.1m)",
+      "retries": 0
+    },
+    {
+      "command": "python3 scripts/report_content_delta.py --baseline f57162d --json",
+      "result": "zero content delta"
+    },
+    {
+      "command": "git diff f57162d -- cat_de_roman_esti/wordgames frontend/src/api cat_de_roman_esti/fixtures frontend/src/screens/Alchimie.tsx frontend/src/styles/alchimie.css",
+      "result": "empty"
+    },
+    {
+      "command": "python3 <agent-ops>/scripts/check_docs.py .",
+      "result": "dead_links=0 stale_terms=0 retired_verbs=0 orphans=0"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "prior_backend_evidence": {
+    "reference": "../v92-alchimie-gui/verification.json",
+    "backend_passed": 1652,
+    "accounts_passed": 53,
+    "scope": "Retained baseline; unchanged backend/API/content, not rerun for this UI-only pass. New browser tests use actual BFF."
+  },
+  "development_runs": [
+    {
+      "passed": 42,
+      "failed": 4,
+      "cause": "Test-only casing mismatch; expectations now use server-authored labels."
+    },
+    {
+      "passed": 412,
+      "failed": 2,
+      "cause": "Old replay test assumed overflow at560px. Compact quick-game results fit, so scrolled recovery now uses320px; source behavior unchanged."
+    }
+  ],
+  "independent_review": "Exact hints and owned response handling inspected across agents. Confirmed focus loss/stealing and confirmation reachability addressed and regression-tested.",
+  "geometry": "geometry.json",
+  "content_delta": "content-delta.json",
+  "sha256": {
+    "frontend/src/screens/Intrusul.tsx": "dd806d13d3b3418b765075e19670ff9b38b70232a55a9b10e5f15cad95971075",
+    "frontend/src/screens/Perechi.tsx": "b15e3b1f1db408cce419ced7e71ebcff7540b71231ca11debf689955d73ca86e",
+    "frontend/src/screens/Conexiuni.tsx": "de9f11357aaf9739560917fe0ac0491cff06bff9148a13804539e845d1345ae2",
+    "frontend/src/screens/CaldRece.tsx": "7ce70cbb5fa981d1d10c0b7fa46daecdbd93fe8f7d68314bcb98ca707a057b98",
+    "frontend/src/screens/Lant.tsx": "53da4a7eae3733c9e3c9b285a2a87a4bf2a02f5defbabd49f89aa2027c60a1f0",
+    "frontend/src/components/GameOptions.tsx": "6db5e0e04a843b60b60e10d57bbbd098a94a67a7dcd5e8270eaf0ea1974fc43b",
+    "frontend/src/components/GameSetupOptions.tsx": "0c1429636cc92da7cf5526091c5796d5dfce5e806c098e7c880e051fe4212ca9",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "811ec3d00d38b1be6996a5e8192e7af94a0043b2f057b1d5d5417acf5537f285"
+  },
+  "source_references": "../../adr/0143-simplify-the-five-other-games.md",
+  "production_changed": false,
+  "recurring_iteration": "stopped",
+  "human_playtesting": "not performed",
+  "physical_device_acceptance": "not performed"
+}

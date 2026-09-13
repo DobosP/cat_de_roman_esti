@@ -2,6 +2,26 @@
   --perechi-accent: #ff78b7;
 }
 
+.perechi-instruction {
+  width: min(100%, 820px);
+  align-self: center;
+  display: grid;
+  gap: 3px;
+  min-height: 3.5rem;
+  align-content: center;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.perechi-instruction strong {
+  color: var(--perechi-accent);
+}
+
+.perechi-instruction-detail {
+  font-size: 0.8rem;
+}
+
 .perechi-grid {
   width: min(100%, 820px);
   align-self: center;
@@ -97,11 +117,16 @@
 }
 
 .perechi-actions {
-  min-height: 44px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.perechi-hint-status {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .perechi-actions .roedu-btn {
@@ -120,15 +145,11 @@
 
 @media (min-width: 760px) {
   .perechi-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 339px) {
-  .perechi-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .perechi-tile {
     min-height: 64px;
   }

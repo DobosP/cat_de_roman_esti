@@ -16,9 +16,9 @@ import {
   type PerechiState,
 } from "../api/perechi";
 import { GameIntro } from "../components/GameIntro";
+import { GameOptions } from "../components/GameOptions";
 import { GameShell } from "../components/GameShell";
 import { Hud, StatBadge } from "../components/Hud";
-import { NextMove } from "../components/PlayGuide";
 import { ResultCard } from "../components/ResultCard";
 import { nextActiveTileId } from "../perechiFocus.mjs";
 import { gameByKey } from "../games";
@@ -49,7 +49,11 @@ interface StartOpts {
   previousGameId?: string;
 }
 
-type PendingFocus = ({ kind: "tile"; id: string } | { kind: "result" }) & {
+type PendingFocus = (
+  | { kind: "tile"; id: string }
+  | { kind: "result" }
+  | { kind: "hint"; id: string; origin: HTMLButtonElement }
+) & {
   gameId: string;
   savedId: string | null;
 };
@@ -68,6 +72,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   } | null>(null);
   useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
+  const hintButtonRef = useRef<HTMLButtonElement>(null);
   const resultFocusRef = useRef<HTMLDivElement>(null);
   const pendingFocus = useRef<PendingFocus | null>(null);
   const focusedTileBeforeMutation = useRef<string | null>(null);
@@ -122,18 +127,26 @@ export default function Perechi({ onExit, onToast }: Props) {
   useEffect(() => {
     const pending = pendingFocus.current;
     if (!pending) return;
+    if (pending.kind === "hint" && busy) return;
     if (state?.game_id !== pending.gameId || active.peek() !== pending.savedId) {
       pendingFocus.current = null;
       return;
     }
+    if (pending.kind === "hint") {
+      pendingFocus.current = null;
+      if (actionsLocked || finished) return;
+      // The disabled/removed hint button loses focus; do not override a player
+      // who moved to options or another control while the response was pending.
+      if (document.activeElement !== document.body && document.activeElement !== pending.origin) return;
+    }
     const target =
-      pending.kind === "tile"
-        ? tileRefs.current.get(pending.id)
-        : resultFocusRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)");
+      pending.kind === "result"
+        ? resultFocusRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)")
+        : tileRefs.current.get(pending.id);
     if (!target) return;
     target.focus();
     pendingFocus.current = null;
-  }, [active, finished, state?.game_id, state?.solved_count]);
+  }, [active, actionsLocked, busy, finished, state?.game_id, state?.solved_count, state?.hints_used]);
 
   const applyResumedGame = useCallback((fresh: PerechiState) => {
     actionOwner.invalidate();
@@ -387,12 +400,12 @@ export default function Perechi({ onExit, onToast }: Props) {
       sound.playSelect();
       if (selected === id) {
         setSelected(null);
-        setFeedback("Alegerea a fost golită.");
+        setFeedback(null);
         return;
       }
       if (selected === null) {
         setSelected(id);
-        setFeedback("Primul cuvânt este ales. Atinge perechea lui.");
+        setFeedback(null);
         return;
       }
       const pair: [string, string] = [selected, id];
@@ -413,6 +426,8 @@ export default function Perechi({ onExit, onToast }: Props) {
     const ticket = beginAction(state, "hint");
     if (!ticket) return;
     focusedTileBeforeMutation.current = null;
+    const focusOrigin = hintButtonRef.current;
+    const restoreFocus = focusOrigin !== null && document.activeElement === focusOrigin;
     setBusy(true);
     try {
       const fresh = await perechiApi.hint(state.game_id);
@@ -420,6 +435,18 @@ export default function Perechi({ onExit, onToast }: Props) {
       if (fresh.game_id !== ticket.gameId) {
         await reconcile(ticket, state, "hint");
         return;
+      }
+      const nextTile = fresh.hint.tiles.find((hinted) =>
+        fresh.tiles.some((tile) => tile.id === hinted.id && !tile.solved),
+      );
+      if (restoreFocus && nextTile && fresh.hints_used > state.hints_used && !fresh.won && !fresh.lost) {
+        pendingFocus.current = {
+          kind: "hint",
+          gameId: fresh.game_id,
+          savedId: ticket.savedId,
+          origin: focusOrigin,
+          id: nextTile.id,
+        };
       }
       setState(fresh);
       setSelected(null);
@@ -482,10 +509,11 @@ export default function Perechi({ onExit, onToast }: Props) {
 
   const hintIds = new Set(state.hint?.tiles.map((tile) => tile.id) ?? []);
   const activeTiles = state.tiles.filter((tile) => !tile.solved);
+  const selectedTile = activeTiles.find((tile) => tile.id === selected);
   return (
     <div className="screen-pad fill perechi-game">
       <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
-        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={loading}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge label="PERECHI" value={`${state.solved_count}/4`} accent={DEF.accent} />
@@ -510,24 +538,18 @@ export default function Perechi({ onExit, onToast }: Props) {
         )}
 
         {!finished && !actionSync && (
-          <NextMove
-            icon={selected ? "👉" : "👆"}
-            title={selected ? "Atinge perechea lui" : "Atinge primul cuvânt"}
-            detail="Două atingeri verifică imediat. Repetările nu costă."
-            progress={`${state.solved_count}/4`}
-            accent={DEF.accent}
-            ready={selected !== null}
-          />
-        )}
-
-        {state.solved_pairs.length > 0 && !finished && (
-          <div className="perechi-solved" aria-label="Perechi găsite">
-            {state.solved_pairs.map((pair) => (
-              <div className="perechi-solved-row" key={pair.tiles.map((tile) => tile.id).join("+")}>
-                <strong>{pair.label}</strong>
-                <span>{pair.tiles.map((tile) => tile.label).join(" + ")}</span>
-              </div>
-            ))}
+          <div className="perechi-instruction" id="perechi-instruction" role="status" aria-live="polite" aria-atomic="true">
+            {selectedTile ? (
+              <>
+                <span>Atinge perechea pentru <strong>{selectedTile.label}</strong>.</span>
+                <span className="perechi-instruction-detail">Atinge din nou cuvântul ales ca să-l deselectezi.</span>
+              </>
+            ) : (
+              <>
+                <span>Atinge două cuvinte care se potrivesc.</span>
+                <span className="perechi-instruction-detail">A doua atingere verifică perechea.</span>
+              </>
+            )}
           </div>
         )}
 
@@ -544,6 +566,7 @@ export default function Perechi({ onExit, onToast }: Props) {
           <div
             className="perechi-grid"
             aria-label={`Cuvinte de potrivit, ${activeTiles.length} rămase`}
+            aria-describedby={!actionSync ? "perechi-instruction" : undefined}
           >
             {activeTiles.map((tile) => {
               const isSelected = selected === tile.id || Boolean(checking?.includes(tile.id));
@@ -591,40 +614,36 @@ export default function Perechi({ onExit, onToast }: Props) {
           )}
         </AnimatePresence>
 
-        {!finished && (
+        {!finished && !state.hints_used && (
           <div className="perechi-actions">
-            <Button
-              variant="secondary"
-              disabled={actionsLocked || !state.hint_available}
-              onClick={() => void requestHint()}
-              title={
-                state.hint_available
-                  ? "Marchează o pereche nerezolvată"
-                  : state.hints_used
-                    ? "Indiciul a fost folosit"
-                    : `Disponibil după ${Math.max(0, 2 - state.mistakes)} greșeli`
-              }
-            >
-              {state.hints_used
-                ? "Indiciu folosit"
-                : state.hint_available
-                  ? "💡 Arată o pereche"
-                  : `Indiciu în ${Math.max(0, 2 - state.mistakes)}`}
-            </Button>
-            {selected && (
+            {state.hint_available ? (
               <Button
+                ref={hintButtonRef}
                 variant="secondary"
                 disabled={actionsLocked}
-                onClick={() => {
-                  setSelected(null);
-                  setFeedback("Alegerea a fost golită.");
-                }}
+                onClick={() => void requestHint()}
+                title="Marchează o pereche nerezolvată. Costă 150 de puncte."
               >
-                Golește
+                💡 Arată o pereche · −150 pct
               </Button>
+            ) : (
+              <span className="perechi-hint-status">Indiciu disponibil după două greșeli.</span>
             )}
           </div>
         )}
+
+        {state.solved_pairs.length > 0 && !finished && (
+          <div className="perechi-solved" aria-label="Perechi găsite">
+            {state.solved_pairs.map((pair) => (
+              <div className="perechi-solved-row" key={pair.tiles.map((tile) => tile.id).join("+")}>
+                <strong>{pair.label}</strong>
+                <span>{pair.tiles.map((tile) => tile.label).join(" + ")}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {!finished && <GameOptions game={GAME_KEY} />}
 
         {finished && state.solution && (
           <div ref={resultFocusRef}>

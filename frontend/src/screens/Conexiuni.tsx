@@ -21,6 +21,9 @@ import {
 import { Button, type ToastKind } from "@roedu/ui";
 import { GameShell } from "../components/GameShell";
 import { GameIntro } from "../components/GameIntro";
+import { GameOptions } from "../components/GameOptions";
+import { GameSetupOptions } from "../components/GameSetupOptions";
+import "../styles/conexiuni.css";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
@@ -107,7 +110,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // Client-only display order for the remaining tiles (the "shuffle" button reorders
   // these; the authoritative grouping never changes). Keyed by tile id.
   const [shuffleNonce, setShuffleNonce] = useState(0);
-  // Transient inline feedback shown in the sticky action region. Recovery remains until
+  // Transient inline feedback shown beside the board. Recovery remains until
   // the player makes the requested selection change, then clears immediately.
   const [hint, setHint] = useState<string | null>(null);
   const recordOnce = useRecordScore(GAME_KEY);
@@ -529,7 +532,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // ----------------------------------------------------------------- INTRO
   if (!state) {
     return (
-      <div className="screen-pad fill" style={{ overflowY: "auto" }}>
+      <div className="screen-pad fill connections-screen" style={{ overflowY: "auto" }}>
         <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
           <GameShell onExit={handleExit} accent={DEF.accent} busy={loading} />
 
@@ -562,6 +565,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             dailyLabel="Provocarea zilei"
             starting={loading}
           >
+            <GameSetupOptions>
             <DifficultyPicker
               options={DIFFICULTY_OPTIONS}
               value={difficulty}
@@ -581,6 +585,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               onInvalid={() => setCategory(null)}
               accent={DEF.accent}
             />
+            </GameSetupOptions>
           </GameIntro>
         </div>
       </div>
@@ -589,28 +594,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
   // ----------------------------------------------------------------- BOARD
   return (
-    <div className="screen-pad fill" style={{ overflowY: "auto" }}>
-      <div className="container col game-container" style={{ gap: 16, paddingBottom: 32 }}>
+    <div className="screen-pad fill connections-screen" style={{ overflowY: "auto" }}>
+      <div className="container col game-container connections-game" style={{ gap: 12, paddingBottom: 24 }}>
         {/* Header */}
-        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={loading}>
-          <Hud>
-            {state.daily && (
-              <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />
-            )}
-            <StatBadge label="DIFICULTATE" value={DIFF_LABEL[state.difficulty]} accent={DEF.accent} />
-            {state.board_category && (
-              <StatBadge
-                label="CATEGORIE"
-                value={categoryLabel(state.board_category)}
-                accent={categoryColor(state.board_category)}
-              />
-            )}
-            <StatBadge
-              label="GREȘELI"
-              value={`${state.lives} rămase`}
-              accent={DEF.accent}
-            />
-          </Hud>
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={loading}>
+          <Hud><StatBadge label="Grupuri" value={`${state.solved.length}/4`} accent={DEF.accent} /></Hud>
         </GameShell>
 
         {/* Solved groups as locked coloured rows */}
@@ -633,19 +621,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                       ? `Încă ${GROUP_SIZE - selected.length}`
                       : "Grup gata"
               }
-              detail={
-                exactBlockedRetry
-                  ? "Aceeași combinație a fost deja verificată."
-                  : selected.length === GROUP_SIZE
-                    ? "Apasă Verifică."
-                    : "Caută o categorie comună."
-              }
+              detail={exactBlockedRetry ? "Aceeași combinație a fost deja verificată." : undefined}
               progress={`${selected.length}/${GROUP_SIZE}`}
               accent={DEF.accent}
               ready={selected.length === GROUP_SIZE && !exactBlockedRetry}
               className="connections-coach"
               action={
                 <span className="connections-coach-action">
+                  <span className="connections-lives-label">Greșeli disponibile</span>
                   <span
                     className="connections-lives"
                     role="img"
@@ -660,14 +643,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                       />
                     ))}
                   </span>
-                  <Button
-                    type="button"
-                    disabled={actionsLocked || selected.length !== GROUP_SIZE || exactBlockedRetry}
-                    onClick={submit}
-                    style={{ borderColor: DEF.accent }}
-                  >
-                    {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
-                  </Button>
+
                 </span>
               }
             />
@@ -686,7 +662,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           </div>
         ) : null}
 
-        {/* Feedback stays immediately before the board without enlarging the sticky coach. */}
+        {/* Feedback stays immediately before the board. */}
         <AnimatePresence>
           {!finished && (feedback || clueMessages.length > 0) && (
             <m.div
@@ -743,7 +719,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                     layout
                     initial={{ scale: 0.6, opacity: 0 }}
                     animate={{
-                      scale: isSel ? 1.05 : 1,
+                      scale: 1,
                       opacity: 1,
                     }}
                     exit={{ scale: 0.4, opacity: 0 }}
@@ -785,30 +761,6 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               <Button
                 type="button"
                 variant="secondary"
-                disabled={actionsLocked || !state.clue_available}
-                onClick={() => void requestClue()}
-                title={
-                  state.clue_available
-                    ? "Arată începutul unei categorii"
-                    : cluesUsed >= MAX_CLUES
-                      ? "Indicii epuizate"
-                      : `Disponibil după ${clueMistakesNeeded} greșeli`
-                }
-                  >
-                    {cluesUsed >= MAX_CLUES ? "Indicii folosite" : "Indiciu"}
-                    {!state.clue_available && cluesUsed < MAX_CLUES ? (
-                      <span className="conexiuni-clue-status">
-                        {" "}
-                        · încă {clueMistakesRemaining}{" "}
-                        {clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}
-                      </span>
-                    ) : cluesUsed === 1 ? (
-                      <span className="conexiuni-clue-status"> · 1 rămas</span>
-                    ) : null}
-                  </Button>
-              <Button
-                type="button"
-                variant="secondary"
                 disabled={actionsLocked || remainingTiles.length <= GROUP_SIZE}
                 onClick={shuffle}
                 title="Amestecă pozițiile pieselor"
@@ -823,12 +775,68 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               >
                 Golește
               </Button>
+                  <Button
+                    type="button"
+                    disabled={actionsLocked || selected.length !== GROUP_SIZE || exactBlockedRetry}
+                    onClick={submit}
+                    style={{ borderColor: DEF.accent }}
+                  >
+                    {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
+                  </Button>
             </div>
+            {state.clue_available ? (
+              <div className="connections-hint-action">
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={actionsLocked || !state.clue_available}
+                onClick={() => void requestClue()}
+                title={
+                  state.clue_available
+                    ? "Arată începutul unei categorii"
+                    : cluesUsed >= MAX_CLUES
+                      ? "Indicii epuizate"
+                      : `Disponibil după ${clueMistakesNeeded} greșeli`
+                }
+                  >
+                    {cluesUsed >= MAX_CLUES ? "Indicii folosite" : "Indiciu"}<span className="conexiuni-clue-status"> · −100 pct</span>
+                    {!state.clue_available && cluesUsed < MAX_CLUES ? (
+                      <span className="conexiuni-clue-status">
+                        {" "}
+                        · încă {clueMistakesRemaining}{" "}
+                        {clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}
+                      </span>
+                    ) : cluesUsed === 1 ? (
+                      <span className="conexiuni-clue-status"> · 1 rămas</span>
+                    ) : null}
+                  </Button>
+              </div>
+            ) : (
+              <p className="connections-hint-status">
+                {cluesUsed >= MAX_CLUES ? "Indicii folosite" : `Indiciu disponibil după încă ${clueMistakesRemaining} ${clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}.`}
+              </p>
+            )}
             <span className="faint center fine-only" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
               Enter = verifică · Esc = golește
             </span>
           </div>
         )}
+
+        <GameOptions game={GAME_KEY}>
+          <div className="row wrap" style={{ gap: 8 }}>
+            {state.daily && (
+              <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />
+            )}
+            <StatBadge label="DIFICULTATE" value={DIFF_LABEL[state.difficulty]} accent={DEF.accent} />
+            {state.board_category && (
+              <StatBadge
+                label="CATEGORIE"
+                value={categoryLabel(state.board_category)}
+                accent={categoryColor(state.board_category)}
+              />
+            )}
+          </div>
+        </GameOptions>
 
         {/* Lose reveal */}
         {state.lost && state.solution && (

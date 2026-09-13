@@ -7,6 +7,7 @@ const guide = read("../src/components/PlayGuide.tsx");
 const intro = read("../src/components/GameIntro.tsx");
 const css = read("../src/styles/arcade.css");
 const alchimieCss = read("../src/styles/alchimie.css");
+const conexiuniCss = read("../src/styles/conexiuni.css");
 const alchimie = read("../src/screens/Alchimie.tsx");
 const caldRece = read("../src/screens/CaldRece.tsx");
 const lant = read("../src/screens/Lant.tsx");
@@ -23,9 +24,14 @@ test("all games teach the loop with a semantic three-step guide", () => {
   for (const screen of [alchimie, intrusul, perechi, caldRece, lant, conexiuni]) {
     assert.match(screen, /steps=\{\[/);
   }
-  for (const screen of [intrusul, perechi, caldRece, lant, conexiuni]) {
-    assert.match(screen, /<NextMove/);
+  for (const screen of [intrusul, perechi, caldRece, lant]) {
+    assert.doesNotMatch(screen, /<NextMove/);
   }
+  assert.match(intrusul, /id="intrusul-instruction"[\s\S]*?Atinge cuvântul care nu se potrivește/);
+  assert.match(perechi, /id="perechi-instruction"[\s\S]*?Atinge două cuvinte care se potrivesc/);
+  assert.match(caldRece, /aria-describedby="contexto-rank-guide"/);
+  assert.match(lant, /aria-labelledby="lant-choice-title"[\s\S]*?id="lant-choice-title">Atinge următorul cuvânt/);
+  assert.match(conexiuni, /<NextMove[\s\S]*?Alege 4 care merg împreună/);
   assert.match(alchimie, /className="alchemy-craft-cue" id="alchemy-instructions"/);
   assert.match(alchimie, /Atinge un cuvânt, apoi altul\. Se combină imediat\./);
   // The four configurable games default to easy; derived V38 boards carry their
@@ -43,7 +49,9 @@ test("mobile layout wraps status and keeps category rails compact with 44px targ
   assert.match(alchimieCss, /\.alchemy-screen \.alchemy-bench[^}]*?position: static/);
   assert.match(alchimie, /className="alchemy-slot-label"/);
   assert.match(alchimieCss, /\.alchemy-slot-label \{[^}]*?white-space: normal[^}]*?overflow-wrap: anywhere/);
-  assert.match(css, /\.connections-coach-stack \{[\s\S]*?position: sticky/);
+  assert.match(conexiuni, /import "\.\.\/styles\/conexiuni\.css"/);
+  assert.match(conexiuniCss, /\.connections-screen \.game-shell-header,[\s\S]*?\.connections-screen \.connections-coach-stack,[\s\S]*?\.connections-screen \.connections-actions \{ position: static; \}/);
+  assert.doesNotMatch(conexiuniCss, /position:\s*sticky/);
   const coach = conexiuni.indexOf('className="connections-coach-stack"');
   const coachEnd = conexiuni.indexOf("\n          </div>\n        )}", coach);
   const feedback = conexiuni.indexOf('className="card connections-feedback col"');
@@ -52,9 +60,10 @@ test("mobile layout wraps status and keeps category rails compact with 44px targ
 
 test("Romanian labels wrap on a responsive Connections board and long paths scroll", () => {
   assert.doesNotMatch(conexiuni, /gridTemplateColumns/);
-  assert.match(css, /\.connections-grid \{\s*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
-  assert.match(css, /@media \(max-width: 480px\)[\s\S]*?repeat\(2, minmax\(0, 1fr\)\)/);
-  assert.match(css, /\.connection-tile \{[\s\S]*?overflow-wrap: anywhere/);
+  assert.match(conexiuniCss, /\.connections-screen \.connections-grid \{\s*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
+  assert.doesNotMatch(conexiuniCss, /\.connections-grid \{[^}]*grid-template-columns: repeat\([123],/);
+  assert.match(conexiuniCss, /\.connection-tile \{[^}]*?overflow-wrap: anywhere;[^}]*?white-space: normal/);
+  assert.match(conexiuniCss, /@media \(max-width: 640px\)[\s\S]*?\.connection-tile \{[^}]*?min-height: 68px/);
   assert.match(lant, /className="row wrap breadcrumb-trail"/);
   assert.match(css, /\.breadcrumb-trail \{[\s\S]*?overflow-x: auto/);
   assert.match(css, /\.lant-choice-grid \{[\s\S]*?repeat\(3, minmax\(0, 1fr\)\)/);
@@ -82,8 +91,9 @@ test("global shortcuts ignore focused controls instead of double-submitting", ()
 });
 
 test("touch users get visible rank meaning and important feedback is announced", () => {
-  assert.match(caldRece, /className="contexto-legend-toggle"/);
-  assert.match(caldRece, /#1 este ținta; un număr mai mic/);
+  assert.match(caldRece, /aria-describedby="contexto-rank-guide"/);
+  assert.match(caldRece, /<p id="contexto-rank-guide"[^>]*>\s*Un număr mai mic = mai aproape\. <strong>#1 este ținta\.<\/strong>/);
+  assert.ok(caldRece.indexOf('<p id="contexto-rank-guide"') < caldRece.indexOf("<GameOptions"), "rank meaning stays visible outside optional tools");
   assert.match(alchimie, /lastMessage[\s\S]*?role="status"[\s\S]*?aria-live="polite"/);
   assert.match(
     lant,

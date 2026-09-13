@@ -46,6 +46,13 @@ test("create and replay are single-flight with visible result busy state", () =>
   assert.match(gameShell, /busy \? "Se pregătește…" : "Ieși"/);
 });
 
-test("Intrusul exposes the hint unlock rule to touch users", () => {
-  assert.match(intrusul, /💡 Indiciu după 1 greșeală/);
+test("quick games explain locked hints and visibly price only the available hint action", () => {
+  assert.match(intrusul, /<span className="intrusul-hint-status">Indiciu disponibil după prima greșeală\.<\/span>/);
+  assert.match(perechi, /<span className="perechi-hint-status">Indiciu disponibil după două greșeli\.<\/span>/);
+  for (const screen of [intrusul, perechi]) {
+    assert.match(screen, /!finished && !state\.hints_used && \([\s\S]*?state\.hint_available \? \(\s*<Button/);
+    assert.match(screen, /onClick=\{\(\) => void requestHint\(\)\}/);
+    assert.match(screen, /Costă 150 de puncte\./);
+    assert.match(screen, /💡 Arată (?:indiciul|o pereche) · −150 pct/);
+  }
 });

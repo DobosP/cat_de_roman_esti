@@ -64,6 +64,17 @@ export async function openAlchemyDisclosure(page, selector, { keyboard = false }
   await expect(details).toHaveAttribute("open", "");
 }
 
+export async function openGameOptions(page, game, { keyboard = false, setup = false } = {}) {
+  if (game.key === "alchimie") {
+    return openAlchemyDisclosure(page, setup ? ".alchemy-setup-options" : ".alchemy-menu", { keyboard });
+  }
+  const details = page.locator(setup ? ".game-setup-options" : ".game-options");
+  if (await details.getAttribute("open") === null) {
+    await activate(page, details.locator(":scope > summary"), keyboard);
+  }
+  await expect(details).toHaveAttribute("open", "");
+}
+
 export async function start(page, game, { keyboard = false } = {}) {
   await page.goto(game.path);
   const response = page.waitForResponse((r) =>

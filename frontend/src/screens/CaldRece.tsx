@@ -10,10 +10,11 @@ import { AnimatePresence, m } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
 import { GameShell } from "../components/GameShell";
 import { GameIntro } from "../components/GameIntro";
+import { GameOptions } from "../components/GameOptions";
+import { GameSetupOptions } from "../components/GameSetupOptions";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
-import { NextMove } from "../components/PlayGuide";
 import { sound } from "../sound";
 import {
   contextoApi,
@@ -39,6 +40,7 @@ import { gameByKey } from "../games";
 import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import "../styles/contexto.css";
 
 const GAME_KEY = "contexto";
 const DEF = gameByKey("contexto");
@@ -111,17 +113,6 @@ const TEMP_LABEL: Record<Temperature, string> = {
   Inghetat: "Înghețat",
 };
 
-// Short, encouraging gloss per tier so the latest verdict reads as feedback, not a number.
-const TEMP_HINT: Record<Temperature, string> = {
-  Gasit: "Exact!",
-  Fierbinte: "Arde! Ești la un pas.",
-  Cald: "Foarte aproape.",
-  Caldut: "Te apropii.",
-  Rece: "Cam departe.",
-  "Foarte rece": "Departe — caută altă zonă.",
-  Inghetat: "Înghețat — încearcă altă direcție.",
-};
-
 function barColor(g: Guess): string {
   return TEMP_COLOR[g.temperature] ?? "#9aa3b2";
 }
@@ -135,7 +126,7 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
       initial={isLatest ? { opacity: 0, y: -10, scale: 0.97 } : false}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
-      className="card"
+      className="card contexto-guess-row"
       style={{
         position: "relative",
         overflow: "hidden",
@@ -210,7 +201,6 @@ export default function CaldRece({
   const [confirmReveal, setConfirmReveal] = useState(false);
   const [recovery, setRecovery] = useState<GuessRecovery | null>(null);
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
-  const [showLegend, setShowLegend] = useState(false);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
   // Intro is shown until the player picks how to start.
@@ -218,6 +208,7 @@ export default function CaldRece({
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const restoreInputFocus = useRef(false);
   const unconfirmedAction = useRef(false);
   const recordOnce = useRecordScore("contexto");
   const active = useActiveGame("contexto");
@@ -297,6 +288,18 @@ export default function CaldRece({
   const won = state?.won ?? false;
   const gaveUp = state?.gave_up ?? false;
   const finished = won || gaveUp;
+
+  // A disabled field cannot receive focus in the request's finally block. Wait
+  // for React to enable it, and preserve deliberate navigation during the request.
+  useEffect(() => {
+    if (busy || !restoreInputFocus.current) return;
+    restoreInputFocus.current = false;
+    const input = inputRef.current;
+    if (!input || finished || showIntro || actionSync) return;
+    if (document.activeElement === document.body || document.activeElement === input) {
+      input.focus({ preventScroll: true });
+    }
+  }, [busy, finished, showIntro, actionSync]);
 
   const puzzleKey = useMemo(() => {
     if (!state?.won || !state.target) return null;
@@ -522,8 +525,8 @@ export default function CaldRece({
         await reconcileAction(ticket, state);
       } finally {
         if (actionOwner.finish(ticket)) {
+          restoreInputFocus.current = true;
           setBusy(false);
-          inputRef.current?.focus();
         }
       }
     },
@@ -547,8 +550,8 @@ export default function CaldRece({
       await reconcileAction(ticket, state);
     } finally {
       if (actionOwner.finish(ticket)) {
+        restoreInputFocus.current = true;
         setBusy(false);
-        inputRef.current?.focus();
       }
     }
   }, [state, busy, finished, actionSync, beginAction, mayAdoptAction, reconcileAction, actionOwner]);
@@ -677,29 +680,31 @@ export default function CaldRece({
             dailyLabel="Provocarea zilei"
             starting={busy}
           >
-            <div style={{ width: "100%", maxWidth: 420 }}>
-              <DifficultyPicker
-                options={DIFFICULTIES}
-                value={difficulty}
-                onChange={(id) => {
-                  sound.playSelect();
-                  setDifficulty(id);
-                }}
-              />
-            </div>
-            <div style={{ width: "100%", maxWidth: 420 }}>
-              <CategoryPicker
-                game="contexto"
-                difficulty={difficulty}
-                value={category}
-                onChange={(key) => {
-                  sound.playSelect();
-                  setCategory(key);
-                }}
-                onInvalid={() => setCategory(null)}
-                accent={DEF.accent}
-              />
-            </div>
+            <GameSetupOptions>
+              <div style={{ width: "100%", maxWidth: 420 }}>
+                <DifficultyPicker
+                  options={DIFFICULTIES}
+                  value={difficulty}
+                  onChange={(id) => {
+                    sound.playSelect();
+                    setDifficulty(id);
+                  }}
+                />
+              </div>
+              <div style={{ width: "100%", maxWidth: 420 }}>
+                <CategoryPicker
+                  game="contexto"
+                  difficulty={difficulty}
+                  value={category}
+                  onChange={(key) => {
+                    sound.playSelect();
+                    setCategory(key);
+                  }}
+                  onInvalid={() => setCategory(null)}
+                  accent={DEF.accent}
+                />
+              </div>
+            </GameSetupOptions>
           </GameIntro>
         </div>
       </div>
@@ -708,32 +713,15 @@ export default function CaldRece({
 
   return (
     // Whole-screen scroll (the .screen-pad owns overflow-y): the header/title flow
-    // and scroll away; the input plus its compact action row stay pinned. The old fixed-header +
+    // and scroll away; the input stays pinned. The old fixed-header +
     // inner-scroll-list layout collapsed the list to ~0px on short/phone viewports
     // (worst with the keyboard up), stranding the guesses; single-scroll keeps every
     // guess reachable at any height.
-    <div className="screen-pad fill">
-      <div className="container col game-container" style={{ gap: 16, paddingBlock: 8 }}>
+    <div className="screen-pad fill contexto-screen">
+      <div className="container col game-container" style={{ gap: 12, paddingBlock: 8 }}>
         {/* header */}
-        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={busy && finished}>
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={busy && finished}>
           <Hud>
-            <StatBadge
-              label="Mod"
-              value={
-                state?.daily
-                  ? `📅 ${state.daily}`
-                  : DIFFICULTY_LABEL[state?.difficulty ?? difficulty]
-              }
-              accent={DEF.accent}
-              title="Mod de joc"
-            />
-            {state?.board_category && (
-              <StatBadge
-                label="Categorie"
-                value={categoryLabel(state.board_category)}
-                accent={categoryColor(state.board_category)}
-              />
-            )}
             <StatBadge
               label="Încercări"
               value={`${state?.attempts ?? 0} ${state?.attempts === 1 ? "încercare" : "încercări"}`}
@@ -751,24 +739,7 @@ export default function CaldRece({
           </Hud>
         </GameShell>
 
-        {!finished && (
-          <>
-            <NextMove
-              icon={latestGuess ? TEMP_ICON[latestGuess.temperature] : "⌨️"}
-              title={latestGuess ? "Urmează căldura" : "Încearcă un cuvânt"}
-              detail={
-                latestGuess
-                  ? `${TEMP_HINT[latestGuess.temperature]} Încearcă ceva înrudit.`
-                  : "Sensul contează, nu literele."
-              }
-              progress={`${state?.attempts ?? 0} încercări`}
-              accent={latestGuess ? barColor(latestGuess) : DEF.accent}
-              ready={Boolean(latestGuess && latestGuess.rank <= 10)}
-            />
-          </>
-        )}
-
-        {/* The form and its three recovery actions stay together above the scrolling list. */}
+        {/* The guess field stays within reach while the ranked words scroll. */}
         <div className="contexto-sticky-controls">
           {actionSync && !finished && (
             <div className="card col contexto-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
@@ -807,6 +778,7 @@ export default function CaldRece({
               autoFocus
               spellCheck={false}
               aria-label="Concept de ghicit"
+              aria-describedby="contexto-rank-guide"
               enterKeyHint="send"
             />
             <Button
@@ -816,13 +788,19 @@ export default function CaldRece({
               Ghicește
             </Button>
           </form>
+          <p id="contexto-rank-guide" className="faint contexto-rank-guide">
+            Un număr mai mic = mai aproape. <strong>#1 este ținta.</strong>
+          </p>
+        </div>
 
-          <div className="contexto-action-row" aria-label="Acțiuni joc">
+        <div className="contexto-tools">
+          {!finished && <div className="contexto-action-row" aria-label="Acțiuni joc">
             <Button
               type="button"
               variant="secondary"
               size="sm"
               onClick={() => void handleClue()}
+              aria-describedby="contexto-clue-cost"
               disabled={busy || finished || actionSync !== null || !state?.clue_available}
               title={
                 state?.clue_available
@@ -836,6 +814,29 @@ export default function CaldRece({
             >
               {clueActionLabel}
             </Button>
+            <span id="contexto-clue-cost" className="faint contexto-clue-cost">−120 puncte / indiciu</span>
+          </div>}
+
+          <GameOptions game={GAME_KEY}>
+            <div className="row wrap" style={{ gap: 8 }}>
+              <StatBadge
+                label="Mod"
+                value={
+                  state?.daily
+                    ? `📅 ${state.daily}`
+                    : DIFFICULTY_LABEL[state?.difficulty ?? difficulty]
+                }
+                accent={DEF.accent}
+                title="Mod de joc"
+              />
+              {state?.board_category && (
+                <StatBadge
+                  label="Categorie"
+                  value={categoryLabel(state.board_category)}
+                  accent={categoryColor(state.board_category)}
+                />
+              )}
+            </div>
             <Button
               type="button"
               variant="secondary"
@@ -853,44 +854,75 @@ export default function CaldRece({
               size="sm"
               onClick={showOptions}
               disabled={busy || actionSync !== null}
-              title="Schimbă opțiunile"
+              title="Părăsește runda curentă și revino la alegerea dificultății și categoriei"
             >
-              ⚙ Opțiuni
+              Începe alt joc
             </Button>
-          </div>
-
-          <AnimatePresence initial={false}>
-            {confirmReveal && !finished && (
-              <m.div
-                id="contexto-reveal-confirmation"
-                key="reveal-confirmation"
-                className="contexto-reveal-confirm"
-                initial={{ opacity: 0, y: -4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                role="alert"
+            <AnimatePresence initial={false}>
+              {confirmReveal && !finished && (
+                <m.div
+                  id="contexto-reveal-confirmation"
+                  key="reveal-confirmation"
+                  className="contexto-reveal-confirm"
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  role="alert"
+                >
+                  <span>Arătăm răspunsul?</span>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    autoFocus
+                    onClick={() => setConfirmReveal(false)}
+                    disabled={busy || actionSync !== null}
+                  >
+                    Nu
+                  </Button>
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => void handleGiveUp()}
+                    disabled={busy || actionSync !== null}
+                  >
+                    Da, arată
+                  </Button>
+                </m.div>
+              )}
+            </AnimatePresence>
+            {guesses.length > 1 && (
+              <div
+                className="contexto-guess-tabs"
+                role="group"
+                aria-label="Ordinea încercărilor"
               >
-                <span>Arătăm răspunsul?</span>
-                <Button
+                <button
                   type="button"
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => setConfirmReveal(false)}
-                  disabled={busy || actionSync !== null}
+                  aria-pressed={guessView === "best"}
+                  className={guessView === "best" ? "is-active" : ""}
+                  onClick={() => {
+                    sound.playSelect();
+                    setGuessView("best");
+                  }}
                 >
-                  Nu
-                </Button>
-                <Button
+                  Bune
+                </button>
+                <button
                   type="button"
-                  size="sm"
-                  onClick={() => void handleGiveUp()}
-                  disabled={busy || actionSync !== null}
+                  aria-pressed={guessView === "recent"}
+                  className={guessView === "recent" ? "is-active" : ""}
+                  onClick={() => {
+                    sound.playSelect();
+                    setGuessView("recent");
+                  }}
                 >
-                  Da, arată
-                </Button>
-              </m.div>
+                  Recente
+                </button>
+              </div>
             )}
-          </AnimatePresence>
+
+          </GameOptions>
         </div>
 
         <span
@@ -1115,66 +1147,14 @@ export default function CaldRece({
           </p>
         )}
 
-        {/* Tappable rank legend: the phone has no hover, so the row tooltips alone
-            left the numbers unexplained on the only screen most players use. */}
-        <div className="contexto-legend">
-          <Button
-            type="button"
-            variant="secondary"
-            size="sm"
-            className="contexto-legend-toggle"
-            aria-expanded={showLegend}
-            aria-controls="contexto-legend-body"
-            onClick={() => {
-              sound.playSelect();
-              setShowLegend((open) => !open);
-            }}
-          >
-            Cum citesc #?
-          </Button>
-          {showLegend && (
-            <p id="contexto-legend-body" className="contexto-legend-body faint">
-              #1 este ținta; un număr mai mic și mai multă căldură înseamnă mai aproape.
-            </p>
-          )}
-        </div>
-
-        {guesses.length > 1 && (
-          <div
-            className="contexto-guess-tabs"
-            role="group"
-            aria-label="Ordinea încercărilor"
-          >
-            <button
-              type="button"
-              aria-pressed={guessView === "best"}
-              className={guessView === "best" ? "is-active" : ""}
-              onClick={() => {
-                sound.playSelect();
-                setGuessView("best");
-              }}
-            >
-              Bune
-            </button>
-            <button
-              type="button"
-              aria-pressed={guessView === "recent"}
-              className={guessView === "recent" ? "is-active" : ""}
-              onClick={() => {
-                sound.playSelect();
-                setGuessView("recent");
-              }}
-            >
-              Recente
-            </button>
-          </div>
-        )}
-
+        <h2 className="contexto-list-title">
+          {guessView === "best" ? "Cele mai apropiate cuvinte" : "Ultimele încercări"}
+        </h2>
         {/* Bune keeps server rank order; Recente uses stable server attempt ordinals. */}
         <div id="contexto-guess-list" className="col" style={{ gap: 8 }}>
           {guesses.length === 0 && !finished && (
             <p className="faint center" style={{ marginTop: 24 }}>
-              Nicio încercare încă. Începe cu orice idee!
+              Sensul contează, nu literele. Începe cu orice idee!
             </p>
           )}
           <AnimatePresence initial={false}>

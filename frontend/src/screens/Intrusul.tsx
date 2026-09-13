@@ -17,9 +17,9 @@ import {
   type IntrusulState,
 } from "../api/intrusul";
 import { GameIntro } from "../components/GameIntro";
+import { GameOptions } from "../components/GameOptions";
 import { GameShell } from "../components/GameShell";
 import { Hud, StatBadge } from "../components/Hud";
-import { NextMove } from "../components/PlayGuide";
 import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
@@ -55,6 +55,14 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const recordOnce = useRecordScore(GAME_KEY);
   const startInFlight = useRef(false);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
+  const tileRefs = useRef(new Map<string, HTMLButtonElement>());
+  const hintButtonRef = useRef<HTMLButtonElement>(null);
+  const pendingHintFocus = useRef<{
+    gameId: string;
+    savedId: string | null;
+    origin: HTMLButtonElement;
+    tileId: string;
+  } | null>(null);
   const [actionSync, setActionSync] = useState<{
     previous: IntrusulState;
     action: "guess" | "hint";
@@ -65,6 +73,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   useLayoutEffect(() => {
     if (!isPresent) {
       actionOwner.invalidate();
+      pendingHintFocus.current = null;
     }
   }, [actionOwner, isPresent]);
   const [state, setState] = useState<IntrusulState | null>(null);
@@ -77,6 +86,18 @@ export default function Intrusul({ onExit, onToast }: Props) {
 
   const finished = Boolean(state?.won || state?.lost);
   const actionsLocked = !isPresent || loading || busy || actionSync !== null;
+  useLayoutEffect(() => {
+    const pending = pendingHintFocus.current;
+    if (!pending || busy) return;
+    pendingHintFocus.current = null;
+    if (!state || finished || actionsLocked || state.game_id !== pending.gameId ||
+      active.peek() !== pending.savedId) return;
+    // Disabling/removing the initiating hint button can move focus to body. Keep
+    // deliberate navigation to options or another control during the request.
+    if (document.activeElement !== document.body && document.activeElement !== pending.origin) return;
+    const target = tileRefs.current.get(pending.tileId);
+    if (target && !target.disabled) target.focus();
+  }, [active, actionsLocked, busy, finished, state]);
   // Re-read after a terminal write when the player returns to this intro.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
@@ -85,11 +106,13 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const exitSafely = useCallback(() => {
     if (startInFlight.current) return;
     actionOwner.invalidate();
+    pendingHintFocus.current = null;
     onExit();
   }, [actionOwner, onExit]);
 
   const applyResumedGame = useCallback((fresh: IntrusulState) => {
     actionOwner.invalidate();
+    pendingHintFocus.current = null;
     setActionSync(null);
     setBusy(false);
     setStartFailed(false);
@@ -113,6 +136,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       if (!isPresent) return;
       if (!acquireFlight(startInFlight)) return;
       actionOwner.invalidate();
+      pendingHintFocus.current = null;
       cancelResume();
       setStartFailed(false);
       setLoading(true);
@@ -316,6 +340,8 @@ export default function Intrusul({ onExit, onToast }: Props) {
     }
     const ticket = beginAction(state, "hint");
     if (!ticket) return;
+    const focusOrigin = hintButtonRef.current;
+    const restoreFocus = focusOrigin !== null && document.activeElement === focusOrigin;
     setBusy(true);
     try {
       const fresh = await intrusulApi.hint(state.game_id);
@@ -323,6 +349,15 @@ export default function Intrusul({ onExit, onToast }: Props) {
       if (fresh.game_id !== ticket.gameId) {
         await reconcile(ticket, state, "hint");
         return;
+      }
+      const nextTile = fresh.tiles.find((tile) => !fresh.wrong_ids.includes(tile.id));
+      if (restoreFocus && nextTile && fresh.hints_used > state.hints_used && !fresh.won && !fresh.lost) {
+        pendingHintFocus.current = {
+          gameId: fresh.game_id,
+          savedId: ticket.savedId,
+          origin: focusOrigin,
+          tileId: nextTile.id,
+        };
       }
       setState(fresh);
       setFeedback(fresh.clue?.message ?? "Indiciul este pe tablă.");
@@ -369,7 +404,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             steps={[
               { icon: "👀", label: "Privește cele patru" },
               { icon: "👆", label: "Atinge intrusul" },
-              { icon: "💡", label: "Cere un indiciu" },
+              { icon: "✨", label: "Descoperă legătura" },
             ]}
             best={best}
             startLabel="Joacă"
@@ -386,7 +421,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   return (
     <div className="screen-pad fill intrusul-game">
       <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
-        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={loading}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge
@@ -410,13 +445,9 @@ export default function Intrusul({ onExit, onToast }: Props) {
         )}
 
         {!finished && !actionSync && (
-          <NextMove
-            icon="🔎"
-            title="Care este intrusul?"
-            detail="Atinge un cuvânt. Repetările nu costă."
-            progress={`${state.mistakes}/3`}
-            accent={DEF.accent}
-          />
+          <p className="intrusul-instruction" id="intrusul-instruction">
+            Atinge cuvântul care nu se potrivește.
+          </p>
         )}
 
         {!finished && state.clue && (
@@ -429,12 +460,16 @@ export default function Intrusul({ onExit, onToast }: Props) {
         )}
 
         {!finished && (
-          <div className="intrusul-grid" aria-label="Cuvinte pentru Intrusul">
+          <div className="intrusul-grid" aria-label="Cuvinte pentru Intrusul" aria-describedby={!actionSync ? "intrusul-instruction" : undefined}>
             {state.tiles.map((tile) => {
               const tried = wrong.has(tile.id);
               return (
                 <m.button
                   key={tile.id}
+                  ref={(node) => {
+                    if (node) tileRefs.current.set(tile.id, node);
+                    else tileRefs.current.delete(tile.id);
+                  }}
                   type="button"
                   className={`card intrusul-tile${tried ? " intrusul-tile--tried" : ""}`}
                   onClick={() => void choose(tile.id)}
@@ -466,28 +501,25 @@ export default function Intrusul({ onExit, onToast }: Props) {
           )}
         </AnimatePresence>
 
-        {!finished && (
+        {!finished && !state.hints_used && (
           <div className="intrusul-actions">
-            <Button
-              variant="secondary"
-              disabled={actionsLocked || !state.hint_available}
-              onClick={() => void requestHint()}
-              title={
-                state.hint_available
-                  ? "Arată legătura celor trei cuvinte"
-                  : state.hints_used
-                    ? "Indiciul a fost folosit"
-                    : "Disponibil după prima greșeală"
-              }
-            >
-              {state.hints_used
-                ? "Indiciu folosit"
-                : state.hint_available
-                  ? "💡 Arată indiciul"
-                  : "💡 Indiciu după 1 greșeală"}
-            </Button>
+            {state.hint_available ? (
+              <Button
+                ref={hintButtonRef}
+                variant="secondary"
+                disabled={actionsLocked}
+                onClick={() => void requestHint()}
+                title="Arată legătura celor trei cuvinte. Costă 150 de puncte."
+              >
+                💡 Arată indiciul · −150 pct
+              </Button>
+            ) : (
+              <span className="intrusul-hint-status">Indiciu disponibil după prima greșeală.</span>
+            )}
           </div>
         )}
+
+        {!finished && <GameOptions game={GAME_KEY} />}
 
         {finished && state.solution && (
           <ResultCard

@@ -69,7 +69,7 @@ test("Lanț renders local relation chips and keeps free typing available", () =>
   assert.match(screen, /state\.choices\.map\(\(choice\)/);
   assert.match(screen, /className="lant-choice"/);
   assert.match(screen, /onClick=\{\(\) => void submit\(choice\)\}/);
-  assert.match(screen, /toate sunt legături valide/);
+  assert.match(screen, /Atinge următorul cuvânt/);
   assert.match(screen, /placeholder="Sau scrie alt concept…"/);
 });
 
@@ -113,29 +113,32 @@ test("Lanț renders progressive direction, alternatives, and one-hop help", () =
   assert.match(screen, /hint\.stage === "alternatives"/);
   assert.match(screen, /hint\.alternatives_choices\?\.length/);
   assert.match(screen, /hint\.alternatives_choices\.map\(\(choice\)/);
-  assert.match(screen, /if \(hint\.hint\) setText\(hint\.hint\.label\)/);
+  assert.match(screen, /if \(hint\.hint\) void submit\(\{ label: hint\.hint\.label, relation: hint\.relation \?\? "" \}\)/);
   assert.match(screen, /res\.hint \|\| res\.stage/);
   assert.match(screen, /VARIANTE UTILE/);
   assert.match(screen, /\? "💡 Mai clar"/);
   assert.doesNotMatch(screen, /DOUĂ VARIANTE/);
 });
 
-test("Lanț turns revisit traps into an explicit free-undo action", () => {
+test("Lanț turns revisit traps into a recommendation on the existing free-undo action", () => {
   assert.match(screen, /hint\.stage === "backtrack"/);
   assert.match(screen, /UN PAS ÎNAPOI/);
-  assert.match(screen, /Anulează ultimul salt/);
+  assert.match(screen, /state\.backtrack_recommended \|\| hint\?\.stage === "backtrack"/);
+  assert.doesNotMatch(screen, /Anulează ultimul salt/);
   assert.match(screen, /onClick=\{\(\) => void handleUndo\(\)\}/);
 });
 
-test("Lanț recovery fills focus only fine pointers", () => {
+test("Lanț spelling recovery fills focus only fine pointers; exact hint choices make a deliberate hop", () => {
   assert.match(
     screen,
     /const focusInputForFinePointer = useCallback[\s\S]*?matchMedia\("\(pointer: fine\)"\)\.matches[\s\S]*?inputRef\.current\?\.focus\(\)/,
   );
   assert.match(
     screen,
-    /const fresh = await undoLant\(state\.game_id\);[\s\S]{0,160}focusInputForFinePointer\(\)/,
+    /const fresh = await undoLant\(state\.game_id\);[\s\S]*?finally \{\s*finishAction\(ticket\)/,
   );
+  assert.match(screen, /focused !== document\.body && focused !== pending\.origin/);
+  assert.match(screen, /active\.peek\(\) !== pending\.ticket\.gameId/);
   assert.equal(
     screen.match(/inputRef\.current\?\.focus\(\)/g)?.length,
     1,
@@ -147,10 +150,10 @@ test("Lanț recovery fills focus only fine pointers", () => {
   );
   assert.match(
     screen,
-    /hint\.alternatives_choices\.map[\s\S]*?setText\(choice\.label\);[\s\S]*?focusInputForFinePointer\(\)/,
+    /hint\.alternatives_choices\.map[\s\S]*?onClick=\{\(\) => void submit\(choice\)\}/,
   );
   assert.match(
     screen,
-    /if \(hint\.hint\) setText\(hint\.hint\.label\);[\s\S]*?focusInputForFinePointer\(\)/,
+    /onClick=\{\(\) => \{\s+if \(hint\.hint\) void submit\(/,
   );
 });

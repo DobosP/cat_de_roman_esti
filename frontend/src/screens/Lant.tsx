@@ -18,19 +18,21 @@ import { ApiError } from "../api/client";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import { GameShell } from "../components/GameShell";
 import { GameIntro } from "../components/GameIntro";
+import { GameOptions } from "../components/GameOptions";
+import { GameSetupOptions } from "../components/GameSetupOptions";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
-import { NextMove } from "../components/PlayGuide";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { sound } from "../sound";
 import { bestScore } from "../scores";
 import { gameByKey } from "../games";
-import { categoryColor, categoryLabel } from "../categories";
+import { categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import "../styles/lant.css";
 
 const GAME_KEY = "lant";
 const DEF = gameByKey("lant");
@@ -43,8 +45,8 @@ const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
   { key: "greu", label: "Greu", hint: "4–6 salturi" },
 ];
 
-// Lanțul Cuvintelor — a text-only word-ladder. The player types a concept directly
-// linked to the CURRENT one, hopping toward the TARGET in as few moves as possible.
+// Lanțul Cuvintelor — choose a direct link from CURRENT toward TARGET.
+// Free typing remains available for concepts outside the server's local choices.
 // All logic is server-authoritative; this screen only renders state + sends actions.
 
 const TARGET_COLOR = "#f178b6";
@@ -58,6 +60,12 @@ const PROGRESS_ICON: Record<LantProgress["kind"], string> = {
 };
 
 type ActionSync = { gameId: string; kind: "failed" | "changed" };
+
+type ActionFocus = {
+  ticket: GameActionTicket;
+  origin: HTMLElement;
+  ready: boolean;
+};
 
 type RecoveryFeedback = {
   message: string;
@@ -141,6 +149,9 @@ export default function Lant({
     isPuzzleBest: boolean;
   } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const choicesRef = useRef<HTMLElement>(null);
+  const pendingActionFocus = useRef<ActionFocus | null>(null);
+  const initiallyFocusedGame = useRef<string | null>(null);
 
   const focusInputForFinePointer = useCallback(() => {
     if (window.matchMedia("(pointer: fine)").matches) {
@@ -176,6 +187,7 @@ export default function Lant({
   const applyResumedGame = useCallback(
     (fresh: LantState, { terminal }: { terminal: boolean }) => {
       actionOwner.invalidate();
+      pendingActionFocus.current = null;
       setActionSync(null);
       setBusy(false);
       setHint(fresh.earned_hint ?? null);
@@ -209,6 +221,7 @@ export default function Lant({
       if (startInFlight.current) return;
       startInFlight.current = true;
       actionOwner.invalidate();
+      pendingActionFocus.current = null;
       cancelResume();
       setStartFailed(false);
       setCreating(true);
@@ -264,10 +277,45 @@ export default function Lant({
     };
   }, [state, puzzleKey, recordOnce, active]);
 
+  const currentGameId = state?.game_id;
+  const won = state?.won ?? false;
+
   useEffect(() => {
-    // Do not summon the phone keyboard over the new tap-first local choices.
-    if (state && !state.won) focusInputForFinePointer();
-  }, [state, focusInputForFinePointer]);
+    if (!currentGameId || won || busy || loading || creating || actionSync) return;
+    if (initiallyFocusedGame.current === currentGameId) return;
+    initiallyFocusedGame.current = currentGameId;
+    // Focus only a newly opened round, without stealing navigation during loading
+    // or summoning the phone keyboard over the tap-first local choices.
+    if (active.peek() === currentGameId &&
+        (document.activeElement === document.body || document.activeElement === inputRef.current)) {
+      focusInputForFinePointer();
+    }
+  }, [currentGameId, won, busy, loading, creating, actionSync, active, focusInputForFinePointer]);
+
+  useEffect(() => {
+    const pending = pendingActionFocus.current;
+    if (busy || loading || creating || !pending?.ready) return;
+    pendingActionFocus.current = null;
+    if (won || actionSync || currentGameId !== pending.ticket.gameId ||
+        active.peek() !== pending.ticket.gameId) return;
+    const focused = document.activeElement;
+    if (focused !== document.body && focused !== pending.origin) return;
+    const input = inputRef.current;
+    if (pending.origin.closest(".word-hop-input") && input && !input.disabled) {
+      input.focus({ preventScroll: true });
+      return;
+    }
+    // Keep the initiating input/button when it survives. A used hint can linger
+    // briefly during its exit animation, so focus the next usable link instead.
+    if (pending.origin.isConnected && !pending.origin.matches(":disabled") &&
+        !pending.origin.closest(".lant-hint-panel")) {
+      if (focused !== pending.origin) pending.origin.focus({ preventScroll: true });
+      return;
+    }
+    const nextChoice = choicesRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)");
+    if (nextChoice) nextChoice.focus({ preventScroll: true });
+    else if (input && !input.disabled) input.focus({ preventScroll: true });
+  }, [busy, loading, creating, currentGameId, won, actionSync, active]);
 
   // On the win screen, Enter starts another chain with the same free-play filters.
   useEffect(() => {
@@ -290,7 +338,6 @@ export default function Lant({
     return () => window.removeEventListener("keydown", onKey);
   }, [state?.won, state?.difficulty, start]);
 
-  const won = state?.won ?? false;
   const actionsLocked = busy || loading || actionSync !== null;
   // Moves spent beyond the optimal path length from the original start.
   const overPar = useMemo(() => {
@@ -310,7 +357,20 @@ export default function Lant({
       setActionSync({ gameId: previous.game_id, kind: "changed" });
       return null;
     }
+    const origin = document.activeElement;
+    pendingActionFocus.current = origin instanceof HTMLElement && origin !== document.body
+      ? { ticket, origin, ready: false }
+      : null;
     return ticket;
+  }
+
+  function finishAction(ticket: GameActionTicket) {
+    if (!actionOwner.finish(ticket)) {
+      if (pendingActionFocus.current?.ticket === ticket) pendingActionFocus.current = null;
+      return;
+    }
+    if (pendingActionFocus.current?.ticket === ticket) pendingActionFocus.current.ready = true;
+    setBusy(false);
   }
 
   function mayAdoptAction(ticket: GameActionTicket) {
@@ -372,7 +432,7 @@ export default function Lant({
     try {
       await reconcileAction(ticket, state);
     } finally {
-      if (actionOwner.finish(ticket)) setBusy(false);
+      finishAction(ticket);
     }
   }
 
@@ -436,7 +496,7 @@ export default function Lant({
     } catch {
       await reconcileAction(ticket, state);
     } finally {
-      if (actionOwner.finish(ticket)) setBusy(false);
+      finishAction(ticket);
     }
   }
 
@@ -454,11 +514,10 @@ export default function Lant({
       setState(fresh);
       setHint(fresh.earned_hint ?? null);
       sound.playUndo();
-      focusInputForFinePointer();
     } catch {
       await reconcileAction(ticket, state);
     } finally {
-      if (actionOwner.finish(ticket)) setBusy(false);
+      finishAction(ticket);
     }
   }
 
@@ -483,7 +542,7 @@ export default function Lant({
     } catch {
       await reconcileAction(ticket, state);
     } finally {
-      if (actionOwner.finish(ticket)) setBusy(false);
+      finishAction(ticket);
     }
   }
 
@@ -560,25 +619,27 @@ export default function Lant({
             dailyLabel="Provocarea zilei"
             starting={creating || loading}
           >
-            <DifficultyPicker
-              options={DIFFICULTIES.map((d) => ({ id: d.key, label: d.label, hint: d.hint }))}
-              value={difficulty}
-              onChange={(id) => {
-                sound.playSelect();
-                setDifficulty(id);
-              }}
-            />
-            <CategoryPicker
-              game="lant"
-              difficulty={difficulty}
-              value={category}
-              onChange={(key) => {
-                sound.playSelect();
-                setCategory(key);
-              }}
-              onInvalid={() => setCategory(null)}
-              accent={DEF.accent}
-            />
+            <GameSetupOptions>
+              <DifficultyPicker
+                options={DIFFICULTIES.map((d) => ({ id: d.key, label: d.label, hint: d.hint }))}
+                value={difficulty}
+                onChange={(id) => {
+                  sound.playSelect();
+                  setDifficulty(id);
+                }}
+              />
+              <CategoryPicker
+                game="lant"
+                difficulty={difficulty}
+                value={category}
+                onChange={(key) => {
+                  sound.playSelect();
+                  setCategory(key);
+                }}
+                onInvalid={() => setCategory(null)}
+                accent={DEF.accent}
+              />
+            </GameSetupOptions>
           </GameIntro>
         </div>
       </div>
@@ -586,112 +647,54 @@ export default function Lant({
   }
 
   return (
-    <div className="screen-pad fill" aria-busy={creating}>
+    <div className="screen-pad fill lant-screen" aria-busy={creating}>
       {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
-      <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
+      <div inert={creating} className="container col game-container">
         {/* header */}
-        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={creating}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={creating}>
           <Hud>
-            {state.daily && (
-              <StatBadge
-                label="ZI"
-                value={state.daily}
-                accent={DEF.accent}
-                title="Provocarea zilei"
-              />
-            )}
-            {state.board_category && (
-              <StatBadge
-                label="CATEGORIE"
-                value={categoryLabel(state.board_category)}
-                accent={categoryColor(state.board_category)}
-              />
-            )}
             <StatBadge
               label="MUTĂRI"
               value={`${state.moves} ${state.moves === 1 ? "mutare" : "mutări"}`}
               accent={DEF.accent}
               title="Mutări făcute"
             />
-            <StatBadge
-              label="REPER"
-              value={<>{state.optimal} salturi{overPar > 0 ? ` (+${overPar})` : ""}</>}
-              accent={DEF.accent}
-              title="Numărul minim de salturi"
-            />
           </Hud>
         </GameShell>
 
-        {/* start -> target */}
-        <div className="card col route-card" style={{ gap: 12, padding: 18 }}>
-          <div className="spread row wrap" style={{ gap: 12, alignItems: "center" }}>
-            <div className="col" style={{ gap: 2 }}>
-              <span className="faint" style={{ fontSize: "0.7rem" }}>
-                START
-              </span>
-              <strong>{state.start.label}</strong>
-            </div>
-            <span className="muted" aria-hidden style={{ fontSize: "1.2rem" }}>
-              ⟶
-            </span>
-            <div className="col" style={{ gap: 2, textAlign: "right" }}>
-              <span className="faint" style={{ fontSize: "0.7rem" }}>
-                ȚINTĂ
-              </span>
-              <strong style={{ color: TARGET_COLOR }}>
-                {state.target.label}
-              </strong>
-            </div>
+        <section className="card lant-route" aria-label="Poziția și ținta">
+          <div className="lant-current">
+            <span className="faint">EȘTI ACUM LA</span>
+            <AnimatePresence mode="wait">
+              <m.div
+                key={state.current.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.15 }}
+                className="lant-route-word"
+                style={{ color: won ? TARGET_COLOR : DEF.accent }}
+              >
+                {state.current.label}
+              </m.div>
+            </AnimatePresence>
+          </div>
+          <span className="lant-route-arrow muted" aria-hidden>→</span>
+          <div className="lant-target">
+            <span className="faint">ȚINTĂ</span>
+            <strong className="lant-route-word" style={{ color: TARGET_COLOR }}>
+              {state.target.label}
+            </strong>
           </div>
           {state.target.description && (
-            <p className="muted" style={{ margin: 0, fontSize: "0.85rem" }}>
-              {state.target.description}
-            </p>
+            <p className="muted lant-target-description">{state.target.description}</p>
           )}
-        </div>
-
-        {/* current concept — big */}
-        <div className="col center" style={{ gap: 6 }}>
-          <span className="faint" style={{ fontSize: "0.72rem" }}>
-            EȘTI ACUM LA
-          </span>
-          <AnimatePresence mode="wait">
-            <m.div
-              key={state.current.id}
-              initial={{ opacity: 0, y: 14, scale: 0.92 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 800,
-                fontSize: "clamp(1.8rem, 6vw, 3rem)",
-                color: won ? TARGET_COLOR : DEF.accent,
-                textShadow: `0 0 30px ${won ? TARGET_COLOR : DEF.accent}55`,
-                lineHeight: 1.1,
-                textAlign: "center",
-              }}
-            >
-              {state.current.label}
-            </m.div>
-          </AnimatePresence>
-        </div>
-
-        {!won && (
-          <NextMove
-            icon="🔗"
-            title={`Leagă-te de ${state.current.label}`}
-            detail="Alege o sugestie sau scrie alt vecin."
-            progress={`→ ${state.target.label}`}
-            accent={DEF.accent}
-          />
-        )}
+        </section>
 
         {!won && state.choices?.length > 0 ? (
-          <section className="lant-choice-panel col" aria-labelledby="lant-choice-title">
+          <section ref={choicesRef} className="lant-choice-panel col" aria-labelledby="lant-choice-title">
             <div className="spread row" style={{ gap: 10, alignItems: "baseline" }}>
-              <strong id="lant-choice-title">Salturi de aici</strong>
-              <span className="faint">toate sunt legături valide</span>
+              <strong id="lant-choice-title">Atinge următorul cuvânt</strong>
             </div>
             <div className="lant-choice-grid">
               {state.choices.map((choice) => (
@@ -816,12 +819,12 @@ export default function Lant({
               </Button>
             </div>
 
-            <div className="row wrap" style={{ gap: 8 }}>
+            <div className="row wrap lant-tools" style={{ gap: 8 }}>
               <Button
                 type="button"
                 variant="secondary"
                 className={
-                  state.backtrack_recommended
+                  state.backtrack_recommended || hint?.stage === "backtrack"
                     ? "lant-undo lant-undo--recommended"
                     : "lant-undo"
                 }
@@ -845,17 +848,6 @@ export default function Lant({
                   ? "💡 Mai clar"
                   : "💡 Indiciu"}
               </Button>
-              <span className="muted" style={{ alignSelf: "center" }}>
-                {hintRemaining !== null
-                  ? hintRemaining <= 1
-                    ? "ești la un pas de țintă!"
-                    : `${hintRemaining} salturi până la țintă`
-                  : overPar > 0
-                    ? `cu ${overPar} peste optim — încearcă ↶ Înapoi`
-                    : state.moves === state.optimal
-                      ? "ai atins reperul optim; ținta este încă înainte"
-                      : `drumul optim de la start: ${state.optimal} salturi`}
-              </span>
             </div>
 
             <AnimatePresence>
@@ -909,7 +901,7 @@ export default function Lant({
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="card"
+                  className="card lant-hint-panel"
                   style={{ padding: 12, borderColor: "var(--warn)" }}
                   role="status"
                   aria-live="polite"
@@ -929,6 +921,13 @@ export default function Lant({
                         {hint.message}
                       </span>
                     ) : null}
+                    {hintRemaining !== null && (
+                      <span className="muted">
+                        {hintRemaining <= 1
+                          ? "Ești la un pas de țintă!"
+                          : `${hintRemaining} salturi până la țintă`}
+                      </span>
+                    )}
                     {hint.alternatives_choices?.length ? (
                       <div className="row wrap" style={{ gap: 8 }}>
                         {hint.alternatives_choices.map((choice) => (
@@ -938,10 +937,8 @@ export default function Lant({
                             variant="secondary"
                             title={choice.relation}
                             disabled={actionsLocked}
-                            onClick={() => {
-                              setText(choice.label);
-                              focusInputForFinePointer();
-                            }}
+                            aria-label={`Salt la ${choice.label}: ${choice.relation}`}
+                            onClick={() => void submit(choice)}
                           >
                             {choice.label}
                           </Button>
@@ -953,25 +950,15 @@ export default function Lant({
                         type="button"
                         className="hint-fill-button"
                         disabled={actionsLocked}
-                        title="Pune în căsuță"
+                        title="Fă acest salt"
+                        aria-label={`Salt la ${hint.hint.label}${hint.relation ? `: ${hint.relation}` : ""}`}
                         onClick={() => {
-                          if (hint.hint) setText(hint.hint.label);
-                          focusInputForFinePointer();
+                          if (hint.hint) void submit({ label: hint.hint.label, relation: hint.relation ?? "" });
                         }}
                       >
                         Încearcă <strong>{hint.hint.label}</strong>
                         {hint.relation ? ` · ${hint.relation}` : ""}
                       </button>
-                    ) : null}
-                    {hint.stage === "backtrack" ? (
-                      <Button
-                        type="button"
-                        variant="secondary"
-                        disabled={actionsLocked || state.moves === 0}
-                        onClick={() => void handleUndo()}
-                      >
-                        ↶ Anulează ultimul salt
-                      </Button>
                     ) : null}
                   </div>
                 </m.div>
@@ -980,13 +967,16 @@ export default function Lant({
           </m.div>
         )}
 
-        {/* path breadcrumb */}
-        <div className="col" style={{ gap: 6 }}>
-          <span className="faint" style={{ fontSize: "0.72rem" }}>
-            DRUMUL TĂU
-          </span>
+        <GameOptions game="lant">
+          <p className="muted lant-round-details">
+            De la <strong>{state.start.label}</strong> la <strong>{state.target.label}</strong>.
+            {" "}Drumul optim: {state.optimal} salturi{overPar > 0 ? ` · ${overPar} peste optim` : ""}.
+            {state.daily ? ` Provocarea zilei: ${state.daily}.` : ""}
+            {state.board_category ? ` Categoria: ${categoryLabel(state.board_category)}.` : ""}
+          </p>
+          <strong>Drumul tău</strong>
           <Breadcrumb path={state.path} />
-        </div>
+        </GameOptions>
       </div>
     </div>
   );

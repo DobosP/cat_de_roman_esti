@@ -1,0 +1,63 @@
+.lant-screen .game-container {
+  gap: 12px;
+}
+
+.lant-route {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 8px 12px;
+  align-items: center;
+  padding: 16px;
+}
+
+.lant-current,
+.lant-target {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.lant-target {
+  text-align: right;
+}
+
+.lant-route .faint {
+  font-size: 0.7rem;
+}
+
+.lant-route-word {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4.5vw, 1.9rem);
+  font-weight: 800;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.lant-route-arrow {
+  font-size: 1.4rem;
+}
+
+.lant-target-description {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.lant-screen .lant-choice-panel {
+  margin: 0;
+}
+
+.lant-round-details {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .lant-route {
+    padding: 12px;
+    column-gap: 8px;
+  }
+}

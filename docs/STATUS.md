@@ -1,33 +1,37 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-13 — V92 direct crafting is green locally; ready for owner playtesting.
+Last verified: 2026-09-13 — V92 interfaces are green locally across all six games; ready for owner playtesting.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- V92 continues on `feat/v92-alchimie-gui`. The owner clarified that the primary problem
-  was too many buttons/actions. This revision supersedes the first GUI candidate `e609de6`
-  with direct crafting informed by the official Infinite Craft and Little Alchemy 2 interfaces.
-  The automatic version loop remains stopped; this is still V92 (ADR-0142).
-- Tap a word, then another: the second tap immediately combines them. Desktop dragging
-  one owned word onto another invokes the same guarded action. There is no Combine button,
-  two-slot form, Golește button or mandatory use-result step. Tapping the active word cancels.
-- The sole useful new discovery automatically stays selected for the next combination.
-  A failed attempt keeps the first word; a different partner takes one tap. An unchanged
-  failed pair is blocked locally. Multiple useful discoveries require an explicit choice.
-- Default play exposes three controls outside word tiles: exit, search and options.
-  Filters, history, rules and round actions begin collapsed. Intro difficulty/category
-  settings are optional. The target, active word, result and inventory occupy one compact area.
-- Available hints still show their 150-point penalty. Pair hints select only the first
-  suggested word and highlight both; neither hints nor resume cause an automatic mutation.
-  Lost replies retain GET-only recovery, ownership checks and paid-cue persistence.
-- Keyboard crafting uses native Enter/Space. If a discovery removes the focused word,
-  focus follows the carried word or inventory panel, preserving deliberate navigation
-  elsewhere during the request. Carried selection is announced; terminal focus stays owned.
-- Real seed-38 phone journey: **3 word taps / 2 combinations / 1000 points**, versus six
-  actions for the first candidate. The first word starts at **y=367.91** at 390×844
-  (first candidate: 613.75); six words fit. These are emulated-browser measurements,
-  not human playtesting. Decision: [ADR-0142](adr/0142-direct-alchimie-crafting.md).
+- V92 continues on `feat/v92-alchimie-gui`. The owner explicitly expanded the interface
+  review to all five other games after the Alchimie correction. This pass starts from
+  `f57162d`; no V93 or recurring version loop is started (ADR-0143).
+- Intrusul keeps one-tap answers and Perechi two-tap matching. Compact instructions
+  and balanced grids prioritize the board. Retapping cancels a Perechi selection;
+  redundant Golește is removed. Solved pairs follow remaining tiles. Locked hint states
+  are text; available hints show their 150-point cost and retain earned feedback.
+- Conexiuni keeps four columns on phones and places shuffle/clear/check below the board.
+  Checking stays explicit because mistakes are limited. The fourth selected tile never
+  submits automatically. Lives, selection count, one-away feedback and earned clues
+  remain visible; available clues show the existing 100-point cost.
+- Cald sau Rece prioritizes the guess field, inline rank meaning and ranked words.
+  Input focus supports repeated guesses while respecting navigation elsewhere. Options
+  contain reveal, ordering and a clearly named new-round action. Reveal still needs
+  confirmation, with safe cancel focused and reachable. Hint cost remains 120 points.
+- Lanț puts current word, target and legal next choices together. Exact earned hint
+  choices now take one tap; uncertain spelling suggestions remain edit-only. History
+  and the original-start optimal benchmark move into options, with no invented distance.
+  Undo stays available. Owned action focus follows consumed choices without stealing it.
+- All five games use closed optional rules/tools; configurable setup choices are
+  optional. Consumed quick-game hints restore lost keyboard focus to an eligible word,
+  while deliberate focus moves and passive saved-hint restoration remain untouched.
+- Alchimie direct crafting from `f57162d` is unchanged: two word taps combine, a sole
+  useful result carries forward, failed attempts keep the first word, drag/keyboard
+  use the same guarded path. Its previous three-tap seed-38 win remains baseline evidence.
+- References: NYT Connections, official Contexto, Wikispeedia, Wordwall and Sporcle.
+  Details and inspection limits: [ADR-0143](adr/0143-simplify-the-five-other-games.md).
 
 ## Inventory and invariants
 
@@ -61,22 +65,22 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Verification
 
-- Node 24.19.0: **195 native checks**, ESLint, typecheck/build and **119.09/120 KiB**
-  initial gzip budget pass. Styles remain scoped to the lazy Alchimie screen.
-- **368 final browser checks pass**, four workers, zero retries; **26 focused workbench
-  checks pass** with actual touchscreen taps, native drag, three-tap completion, retries,
-  passive paid hints, keyboard focus restoration, no focus stealing and 320px/200% text.
-  Commands and fingerprints: [verification](reviews/v92-direct-crafting/verification.json).
-- A first focused run found duplicate replay-failure notices (108 pass/2 fail); the
-  correction passed both regression cases. A pre-focus-fix full run passed 364 cases;
-  independent review then reproduced lost keyboard focus after a submitting word vanished.
-- Backend and content are unchanged from `e609de6`. Its **1652 backend/53 accounts**
-  tests and both content validators remain baseline evidence; they were not rerun for
-  this further GUI-only correction. New browser tests exercise the real BFF contracts.
-- Content delta from `e609de6`: zero concept, connection, form, puzzle, round, approval,
-  eligibility and derived-board changes. API wrappers and backend source have no diff.
-- Previous V92 layout evidence remains historical in `reviews/v92-alchimie-gui/`.
-  Current evidence: [direct-crafting review](reviews/v92-direct-crafting/README.md).
+- Node 24.19.0: **195 native checks**, ESLint, typecheck/build and **119.18/120 KiB**
+  initial gzip budget pass. New styles/components load through the game screens.
+- Focused interface/accessibility gate: **50 passed**. Consumed-hint focus follow-up:
+  **18 passed**, covering both quick games, keyboard restoration and no focus stealing.
+  Final complete six-game gate: **414 passed**, four workers, zero retries.
+  Commands and fingerprints: [verification](reviews/v92-other-interfaces/verification.json).
+- The first focused run had 42 passes and four test-only casing mismatches; assertions
+  now follow server-authored labels. Review also reproduced/fixed lost or stolen focus
+  and made reveal confirmation reachable on short screens. Two stale replay fixtures
+  were corrected to exercise genuinely scrolled compact results; final focused/full gates pass.
+- Backend, API wrappers, content and Alchimie source have no diff from `f57162d`.
+  Prior **1652 backend/53 accounts** tests and validators remain baseline evidence;
+  this GUI-only pass uses new real BFF browser journeys rather than rerunning those suites.
+- Content delta from `f57162d`: zero concept/connection/form/puzzle/round/approval/
+  eligibility/derived-board changes. Human playtesting and physical-device acceptance
+  remain unrun. Current review: [other interfaces](reviews/v92-other-interfaces/README.md).
 
 ## Production and remaining work
 
@@ -93,4 +97,4 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 ## Doc map
 
 - `README.md`/`AGENTS.md`: orientation; `docs/agent-map.md`/`docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0142), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0143), `docs/reviews/`, WORKLOG: decisions, evidence and history.

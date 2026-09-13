@@ -43,8 +43,12 @@ test("all result screens offer immediate replay and a distinct options action", 
 
 test("Lanț reports its optimal benchmark without inventing distance after detours", () => {
   assert.doesNotMatch(lant, /state\.optimal - state\.moves/);
-  assert.match(lant, /drumul optim de la start/);
-  assert.match(lant, /ai atins reperul optim; ținta este încă înainte/);
+  assert.match(lant, /return state\.moves - state\.optimal/);
+  const options = lant.slice(lant.indexOf('<GameOptions game="lant">'), lant.indexOf("</GameOptions>"));
+  assert.match(options, /De la <strong>\{state\.start\.label\}<\/strong> la <strong>\{state\.target\.label\}/);
+  assert.match(options, /Drumul optim: \{state\.optimal\} salturi/);
+  assert.match(options, /overPar > 0 \? ` · \$\{overPar\} peste optim` : ""/);
+  assert.match(lant, /const hintRemaining = hint\?\.remaining \?\? null/);
 });
 
 test("Romanian-first shell copy keeps the brand and game rules truthful", () => {

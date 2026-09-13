@@ -45,7 +45,7 @@ test("the latest accepted guess renders exactly one server-authored comparison",
 });
 
 test("terminal results and clue cards each have one announcement owner", () => {
-  assert.match(screen, /!finished && \(\s*<>\s*<NextMove/);
+  assert.doesNotMatch(screen, /<NextMove/);
   const clueTry = screen.match(
     /try \{\s*const res = await contextoApi\.requestClue\(state\.game_id\);[\s\S]*?\n {4}\} catch/,
   );
@@ -54,7 +54,7 @@ test("terminal results and clue cards each have one announcement owner", () => {
   assert.match(screen, /aria-label="Indicii folosite"\s*aria-live="polite"/);
 });
 
-test("guess form owns a compact phone-safe clue reveal options row", () => {
+test("the guess form exposes the paid clue while optional controls stay in the menu", () => {
   const form = screen.indexOf('<form onSubmit={handleGuess} className="row contexto-input-bar"');
   const actions = screen.indexOf('className="contexto-action-row"', form);
   const hudEnd = screen.indexOf("</Hud>");
@@ -62,7 +62,13 @@ test("guess form owns a compact phone-safe clue reveal options row", () => {
   assert.ok(actions > form);
   assert.match(screen, /\{clueActionLabel\}/);
   assert.match(screen, /`Indiciu în \$\{clueCountdown\}`/);
-  assert.match(css, /\.contexto-action-row \{[\s\S]*?repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(screen, /aria-describedby="contexto-clue-cost"/);
+  assert.match(screen, /−120 puncte \/ indiciu/);
+  const options = screen.match(/<GameOptions game=\{GAME_KEY\}>[\s\S]*?<\/GameOptions>/);
+  assert.ok(options);
+  assert.match(options[0], /onClick=\{requestRevealConfirmation\}/);
+  assert.match(options[0], /onClick=\{showOptions\}/);
+  assert.match(options[0], /aria-label="Ordinea încercărilor"/);
   assert.match(css, /\.contexto-action-row \.roedu-btn,[\s\S]*?min-height: 44px/);
 });
 

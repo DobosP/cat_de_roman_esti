@@ -1,12 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { GAME_HELP } from "../src/gameHelp.mjs";
-import { games, gameURL, deterministicStarts, tabTo, start, act, solution, openAlchemyDisclosure } from "./games.mjs";
+import { games, gameURL, deterministicStarts, tabTo, start, act, solution, openAlchemyDisclosure, openGameOptions } from "./games.mjs";
 
 for (const game of games) {
   test(`${game.key} rules preserve the round and focused choices`, async ({ page, request }, testInfo) => {
     await deterministicStarts(page, game);
     const initial = await start(page, game);
-    if (game.key === "alchimie") await openAlchemyDisclosure(page, ".alchemy-menu");
+    await openGameOptions(page, game);
     const help = page.locator("details.game-help");
     const toggle = help.locator("summary");
     await expect(help).not.toHaveAttribute("open");

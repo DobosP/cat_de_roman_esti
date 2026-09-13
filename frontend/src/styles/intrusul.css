@@ -2,6 +2,15 @@
   --intrusul-accent: #ffcf5c;
 }
 
+.intrusul-instruction {
+  width: min(100%, 760px);
+  align-self: center;
+  margin: 0;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 1.4;
+}
+
 .intrusul-grid {
   width: min(100%, 760px);
   align-self: center;
@@ -66,9 +75,14 @@
 }
 
 .intrusul-actions {
-  min-height: 44px;
   display: flex;
   justify-content: center;
+}
+
+.intrusul-hint-status {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .intrusul-actions .roedu-btn {
@@ -87,19 +101,11 @@
 
 @media (min-width: 760px) {
   .intrusul-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .intrusul-grid > :nth-child(4) {
-    grid-column: 2;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 339px) {
-  .intrusul-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .intrusul-tile {
     min-height: 64px;
   }

@@ -13,9 +13,9 @@ test("the cold half is split into six tiers everywhere the client renders them",
   for (const tier of ["Gasit", "Fierbinte", "Cald", "Caldut", "Rece", "Foarte rece", "Inghetat"]) {
     assert.match(temperature[0], new RegExp(`\\| "${tier}"`));
   }
-  // Colour, icon, label and hint all know the new tier, and it sits between the two
+  // Colour, icon and label all know the new tier, and it sits between the two
   // blues so the ramp still reads coldest-last.
-  for (const map of ["TEMP_COLOR", "TEMP_ICON", "TEMP_LABEL", "TEMP_HINT"]) {
+  for (const map of ["TEMP_COLOR", "TEMP_ICON", "TEMP_LABEL"]) {
     const record = screen.match(new RegExp(`const ${map}: Record<Temperature, string> = \\{[\\s\\S]*?\\n\\};`));
     assert.ok(record, map);
     assert.match(record[0], /"Foarte rece": /);
@@ -32,25 +32,14 @@ test("the cold half is split into six tiers everywhere the client renders them",
   assert.match(screen, /"Foarte rece": "Foarte rece",/);
 });
 
-test("the rank legend is a tappable disclosure, not a hover-only tooltip", () => {
-  assert.match(screen, /const \[showLegend, setShowLegend\] = useState\(false\)/);
-  const legend = screen.match(/<div className="contexto-legend">[\s\S]*?\n {8}<\/div>/);
+test("the rank direction is explained beside the input without a help action", () => {
+  const legend = screen.match(/<p id="contexto-rank-guide"[\s\S]*?<\/p>/);
   assert.ok(legend);
-  assert.match(legend[0], /type="button"/);
-  assert.match(legend[0], /className="contexto-legend-toggle"/);
-  assert.match(legend[0], /aria-expanded=\{showLegend\}/);
-  assert.match(legend[0], /aria-controls="contexto-legend-body"/);
-  assert.match(legend[0], /setShowLegend\(\(open\) => !open\)/);
-  assert.match(legend[0], /Cum citesc #\?/);
-  assert.match(legend[0], /\{showLegend && \(/);
-  assert.match(legend[0], /id="contexto-legend-body"/);
-  assert.match(
-    legend[0],
-    /#1 este ținta; un număr mai mic și mai multă căldură înseamnă mai aproape\./,
-  );
-  // The disclosure sits with the guess list it explains, above the ordering tabs.
-  assert.ok(screen.indexOf('<div className="contexto-legend">') < screen.indexOf('className="contexto-guess-tabs"'));
-  assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.roedu-btn,[\s\S]*?min-height: 44px/);
+  assert.match(legend[0], /Un număr mai mic = mai aproape\./);
+  assert.match(legend[0], /#1 este ținta\./);
+  assert.match(screen, /aria-describedby="contexto-rank-guide"/);
+  assert.doesNotMatch(screen, /showLegend|contexto-legend-toggle/);
+  assert.ok(screen.indexOf('id="contexto-rank-guide"') < screen.indexOf('id="contexto-guess-list"'));
 });
 
 test("a fuzzy correction is offered as an explicit chip and only then costs an attempt", () => {
