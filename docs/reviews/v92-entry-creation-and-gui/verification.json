@@ -1,0 +1,75 @@
+{
+  "kind": "v92-entry-creation-and-gui-integration-v1",
+  "date": "2026-09-14",
+  "baseline_commit": "c0ead5eb524fe40ec4a1760488badec395c0ae0c",
+  "branch": "feat/v92-entry-creation-02",
+  "passed": true,
+  "added_rounds": {
+    "conexiuni": 1,
+    "contexto": 3,
+    "lant": 1,
+    "intrusul": 3,
+    "perechi": 3
+  },
+  "added_alchimie_recipes": 3,
+  "rejected_lant_proposals": 2,
+  "new_shared_concepts": 0,
+  "checks": {
+    "backend_python312": {
+      "passed": 1948,
+      "log_sha256": "155496e462fe7a809ef3fa58313be1474dec80adc91a24662efb8442a11f3d9a"
+    },
+    "browser_desktop_mobile": {
+      "passed": 458,
+      "log_sha256": "2ad53d5969a18ddb1b55cf0d3f147823bbc89733b6458feac5be0435e4fa4ba7"
+    },
+    "accounts": {
+      "passed": 53,
+      "log_sha256": "6c5415be74adf3750442ceb77f271eca1b54386c29dd73a8a9c7d67c0f905d7c"
+    },
+    "frontend_native": {
+      "passed": 212,
+      "log_sha256": "6c317ee3e4feddc01f6fc032d8485d057138baf2763b178de96722459d6977c6"
+    },
+    "corrected_regression_suites": {
+      "passed": 99,
+      "log_sha256": "b7a65d03fc9be0a129b8d794c09c7e6c5d7e14abd4a3a58f8ea267362caa6f2d"
+    }
+  },
+  "gates": [
+    "Ruff",
+    "git diff --check",
+    "fixture validator",
+    "pack validator",
+    "frontend lint",
+    "frontend typecheck/build",
+    "documentation check"
+  ],
+  "initial_gzip_kib": 119.23,
+  "initial_gzip_limit_kib": 120,
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "9c0a8fde33742ad5230d1697fe7617eabfc8a257a6409562e3b0357c0b8fc77b",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "cdc148bfc95c9791b8b941b7c537a04b72d8d21398e1b258cf8e743ac9bdbde5",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "931278ac590aa1d4904e15d4a30990a349fe82af09cbbb1b9c1a3e3c1461671a",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "361387e01ef512d1e31bfe65a333af54c24a1a5a1040ba0d8b3a19d20936c741",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "c2bfc524e31115be3283b9dfd8e1bb1853c7082bc153716b5db368596ac5f672",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "14c156c417c312bb29a6b63187f3b86e3ff5630fdf267f38b37808480fad3310"
+  },
+  "quick_audit_sha256": "639de3e030127b7341553d850bc6b9e8ce6942d3a449c0ba8d61b0c7a5e62f80",
+  "world_audit_sha256": "25a83ce0cca1b94d6c358291e56e45aebf70a22b08147aae33cb763ff495df68",
+  "gui_final_review_sha256": "a6c90ad7206cedc2c59ce42b4ab96c1d719023db5c8fa3ca7db526a4f54e271e",
+  "archived_evidence_files_verified": 151,
+  "preview": {
+    "port": 8150,
+    "health_status": 200
+  },
+  "limits": [
+    "No human playtest",
+    "No physical-device acceptance",
+    "Python3.14 not rerun",
+    "No push, main merge or deployment"
+  ]
+}

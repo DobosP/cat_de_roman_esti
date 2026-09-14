@@ -1,0 +1,79 @@
+"""Save bounded source retrieval receipts; no full web page copies."""
+import concurrent.futures
+from datetime import datetime, timezone
+import hashlib
+import html
+from html.parser import HTMLParser
+import json
+from pathlib import Path
+import re
+import urllib.request
+from urllib.parse import unquote
+
+from candidate_source import BOARDS
+
+ROOT = Path(__file__).resolve().parent
+URLS = sorted({u for b in BOARDS for u in b['sources']})
+
+class DefinitionParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.depth = 0
+        self.text = []
+        self.definitions = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'span':
+            if self.depth:
+                self.depth += 1
+            elif attrs.get('class') == 'def':
+                self.depth = 1
+                self.text = []
+
+    def handle_endtag(self, tag):
+        if tag == 'span' and self.depth:
+            self.depth -= 1
+            if not self.depth:
+                self.definitions.append(' '.join(''.join(self.text).split()))
+
+    def handle_data(self, text):
+        if self.depth:
+            self.text.append(text)
+
+def fetch(url):
+    try:
+        request = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; editorial source verification)'})
+        with urllib.request.urlopen(request, timeout=25) as response:
+            raw = response.read(4 * 1024 * 1024)
+            title = None
+            snippet = None
+            if 'html' in response.headers.get('Content-Type', ''):
+                body = raw.decode('utf-8', 'replace')
+                matched = re.search(r'<title[^>]*>(.*?)</title>', body, re.S | re.I)
+                title = html.unescape(re.sub('<[^>]+>', ' ', matched[1])).strip() if matched else None
+                # DEX publishes dictionary entries in def html containers. This
+                # receipt records only their beginning, capped at 20 words.
+                parser = DefinitionParser()
+                parser.feed(body)
+                if parser.definitions:
+                    keywords = {'cablu': 'Conductă electrică', 'prelungitor': 'șnur electric',
+                                'cozonac': 'făină', 'curcubeu': 'multicolor', 'ochi': 'organe ale vederii',
+                                'pat': 'Piesă de mobilier', 'port': 'acostarea',
+                                'perie': 'curăț', 'lingură': 'lichide', 'robinet': 'fluid'}
+                    keyword = keywords.get(unquote(url.rsplit('/', 1)[-1]))
+                    entry = next((entry for entry in parser.definitions if keyword and keyword.casefold() in entry.casefold()), parser.definitions[0])
+                    start = entry.casefold().find(keyword.casefold()) if keyword and keyword.casefold() in entry.casefold() else 0
+                    snippet = ' '.join(entry[start:].split()[:20])
+            return {'url': url, 'status': response.status, 'final_url': response.url,
+                    'sha256': hashlib.sha256(raw).hexdigest(), 'bytes_read': len(raw),
+                    'content_type': response.headers.get('Content-Type'), 'title': title,
+                    'dictionary_excerpt_max_20_words': snippet}
+    except Exception as exc:
+        return {'url': url, 'error': type(exc).__name__ + ': ' + str(exc)}
+
+with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+    results = list(pool.map(fetch, URLS))
+ROOT.joinpath('source-fetch.json').write_text(json.dumps({'kind': 'quick-author-source-receipts-v1', 'retrieved_utc': datetime.now(timezone.utc).isoformat(), 'sources': results}, ensure_ascii=False, sort_keys=True, indent=2) + '\n')
+for result in results:
+    print(result['url'], result.get('status', result.get('error')), result.get('dictionary_excerpt_max_20_words'))

@@ -1,0 +1,61 @@
+{
+  "candidate_sha256": "90e972f3ec2b2cdbe37ae97d16aa512ce37a9cb22f974a4e0957f687fe41ccf8",
+  "independent_checks": [
+    {
+      "all_identities_existing": true,
+      "id": "sandvis-omleta",
+      "identity_labels_match": true,
+      "pair_unused": true,
+      "reuses_previously_terminal_input": true,
+      "row_sha256": "d3959c91280016f7327ac7555ae3f9cf3891558bed2359e6aa4cfe09784ab37b"
+    },
+    {
+      "all_identities_existing": true,
+      "id": "salata-cartofi-ou-fiert",
+      "identity_labels_match": true,
+      "pair_unused": true,
+      "reuses_previously_terminal_input": true,
+      "row_sha256": "34d1694c222223e41bafa1c678a81c9ec715ac5182d185f992bf5b53e09fc1df"
+    },
+    {
+      "all_identities_existing": true,
+      "id": "piure-cartofi-copti-unt",
+      "identity_labels_match": true,
+      "pair_unused": true,
+      "reuses_previously_terminal_input": true,
+      "row_sha256": "36026ab7a1968e39f5aaaae800fabd30d298a2f8b253db7bca25311b713b92e8"
+    }
+  ],
+  "items": [
+    {
+      "id": "sandvis-omleta",
+      "rationale": "Accept. The primary recipe author describes a cooked omelette served in bread slices as an omelette sandwich, with vegetables among optional additions. The explanation preserves cooking and assembly; the two selected concepts identify a recognizable filling and bread, rather than pretending they alone define an exact culinary formula. This gives the already discovered omelette a sensible reuse. No new identity, ingredient exclusivity, regional-origin claim or alcohol-dependent framing is introduced.",
+      "sources": [
+        "https://pofta-buna.com/sandvisuri-cu-omleta/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "salata-cartofi-ou-fiert",
+      "rationale": "Accept. Laura Laurențiu’s own recipe combines fully boiled eggs with potatoes that are separately boiled, drained and cooled, then mixed with dressing. The candidate explicitly includes those preparation steps; it does not assert raw potato becomes ready salad merely by contact with an egg. Potato salad is an existing broad result and accommodates this familiar egg-containing variant without claiming all potato salads contain eggs. Reusing a cooked egg is semantically purposeful.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "piure-cartofi-copti-unt",
+      "rationale": "Accept. The original cooking guide specifically recommends baked potatoes, removes their skins, presses the flesh and folds in butter, followed by liquid dairy; it expressly allows milk in place of cream. The candidate accurately states mashing and peeling, so the result is mashed potato rather than simply baked potatoes with butter. This is a plausible alternate preparation using the existing baked-potato discovery, not a claim that baking is the only or standard Romanian method.",
+      "sources": [
+        "https://www.crunchtimekitchen.com/ultimate-guide-to-mashed-potatoes/"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "kind": "alchimie-reuse-review-v1",
+  "reviewed_on": "2026-09-14",
+  "reviewer": "content_verifier",
+  "role": "factual",
+  "scope": "Independent exact-byte raw factual review of three proposed reuse recipes only. Existing-world concepts and pairs checked against the currently pinned package; no full candidate publication or runtime play is accepted here. Final world/dossier/API review is required after assembly. Primary recipe pages opened and read during this review; no recipe text is copied into the game.",
+  "world_sha256": "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df"
+}

@@ -1,0 +1,235 @@
+"""Six unapproved V92 session-02 quick-game candidates; no served artifact writes.
+
+Run with the repository interpreter and --repo path to reproduce candidates.json
+and mechanical-checks.json beside this file. Existing 336+45 boards are read only.
+This authorship probe is neither an independent review nor an approval artifact.
+"""
+from __future__ import annotations
+
+import argparse
+from copy import deepcopy
+import hashlib
+import itertools
+import json
+from pathlib import Path
+import sys
+import subprocess
+
+BOARDS = (
+    {
+        "id": "iq92_s02_electric_connections",
+        "game": "intrusul",
+        "source_id": "aq92_intrusul_s02_electric_connections",
+        "category": "viata_de_roman",
+        "difficulty": "usor",
+        "payload": {
+            "members": ["n_v33_electric_plug_stecher", "n_v33_electric_extension_prelungitor", "n_v33_electric_wire_cablu"],
+            "intruder": "n_v33_bathroom_fixture_robinet",
+            "group_label": "Piese pentru conectarea aparatelor la curent electric",
+        },
+        "sources": [
+            "https://dexonline.ro/definitie/%C8%99techer",
+            "https://dexonline.ro/definitie/prelungitor",
+            "https://dexonline.ro/definitie/cablu",
+            "https://dexonline.ro/definitie/robinet",
+        ],
+        "rationale": "Ștecherul, prelungitorul electric și cablul electric realizează alimentarea electrică; robinetul reglează curgerea unui fluid. Patru obiecte familiare din casă, cu o diferență funcțională precisă. Toate trei legăturile interioare sunt puternice; intrusul nu are legături native cu trio-ul.",
+    },
+    {
+        "id": "iq92_s02_bodily_needs",
+        "game": "intrusul",
+        "source_id": "aq92_intrusul_s02_bodily_needs",
+        "category": "stiinta",
+        "difficulty": "usor",
+        "payload": {
+            "members": ["n_v24_feeling_needs_foame", "n_v24_feeling_needs_sete", "n_v24_feeling_needs_oboseala"],
+            "intruder": "n_v28_feeling_social_rusine",
+            "group_label": "Stări care semnalează nevoi fiziologice",
+        },
+        "sources": [
+            "https://dexonline.ro/definitie/foame",
+            "https://dexonline.ro/definitie/sete",
+            "https://dexonline.ro/definitie/oboseal%C4%83",
+            "https://dexonline.ro/definitie/ru%C8%99ine",
+        ],
+        "rationale": "Foamea, setea și oboseala indică nevoi de hrană, apă sau odihnă; rușinea este un sentiment social. Se folosesc sensurile cotidiene, nu expresii figurate. Toate cuvintele numesc stări, astfel încât intrusul nu se găsește printr-o simplă diferență de tip. Trio nou; numai Foame apare în vechiul board despre emoții.",
+    },
+    {
+        "id": "iq92_s02_family_relations",
+        "game": "intrusul",
+        "source_id": "aq92_intrusul_s02_family_relations",
+        "category": "viata_de_roman",
+        "difficulty": "usor",
+        "payload": {
+            "members": ["n_v24_people_grandparents_bunica", "n_v24_people_grandparents_bunic", "n_v24_people_grandparents_matusa"],
+            "intruder": "n_v29_people_coleg",
+            "group_label": "Termeni care numesc rude",
+        },
+        "sources": [
+            "https://dexonline.ro/definitie/bunic%C4%83",
+            "https://dexonline.ro/definitie/bunic",
+            "https://dexonline.ro/definitie/m%C4%83tu%C8%99%C4%83",
+            "https://dexonline.ro/definitie/coleg",
+        ],
+        "rationale": "Bunică, bunic și mătușă numesc relații de rudenie; coleg numește o relație de școală sau de muncă. Patru relații interpersonale ușor de recunoscut, fără opoziție om/obiect. Predicatul privește sensurile cuvintelor: faptul că o anumită rudă poate fi și coleg nu schimbă definiția termenului coleg. Trio nerefolosit.",
+    },
+    {
+        "id": "pq92_s02_associations_01",
+        "game": "perechi",
+        "source_id": "aq92_perechi_s02_associations_01",
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "payload": {"pairs": [
+            {"members": ["n_v4sti_ochi", "n_v24_action_senses_a_vedea"], "group_label": "Organul vederii și funcția lui"},
+            {"members": ["n_v24_home_rooms_dormitor", "n_v24_home_bed_pat"], "group_label": "Camera de dormit și mobila pentru somn"},
+            {"members": ["n_v30_kitchen_utensil_lingura", "n_v4gas_supa"], "group_label": "Tacâm și preparat lichid mâncat cu el"},
+            {"members": ["n_v20fil_stela_popescu", "n_v20fil_alexandru_arsinel"], "group_label": "Parteneri celebri în scenete comice"},
+        ]},
+        "sources": [
+            "https://dexonline.ro/definitie/ochi",
+            "https://dexonline.ro/intrare/dormitor/17553",
+            "https://dexonline.ro/definitie/pat",
+            "https://dexonline.ro/definitie/lingur%C4%83",
+            "https://dexonline.ro/definitie/sup%C4%83",
+            "https://www.romania-actualitati.ro/interviuri/stela-popescu-am-fost-si-voi-fi-o-optimista-id44871.html",
+        ],
+        "rationale": "Trei asocieri practice oferă intrări rapide; cuplul artistic Stela Popescu–Alexandru Arșinel aduce recunoaștere culturală. Nu se afirmă o căsătorie. Nicio pereche nu a mai fost folosită în Perechi. Perechile au relații diferite și nu formează un al doilea grup de autori sau opere. Nicio legătură încrucișată în graf; niciun partener alternativ semantic comparabil.",
+    },
+    {
+        "id": "pq92_s02_associations_02",
+        "game": "perechi",
+        "source_id": "aq92_perechi_s02_associations_02",
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "payload": {"pairs": [
+            {"members": ["n_v4sti_ureche", "n_v24_action_senses_a_auzi"], "group_label": "Organul auzului și funcția lui"},
+            {"members": ["n_v28_body_mouth_dinte", "n_v31_hygiene_oral_periuta_dinti"], "group_label": "Dintele și obiectul folosit la curățarea lui"},
+            {"members": ["n_v28_transport_water_vapor", "n_v2soc_port"], "group_label": "Navă și locul de acostare"},
+            {"members": ["n_v20lit_scrisoarea_iii", "n_mihai_eminescu"], "group_label": "Poezie și autorul ei"},
+        ]},
+        "sources": [
+            "https://dexonline.ro/definitie/ureche",
+            "https://dspbihor.gov.ro/promsan/2024/Campanii/Analiza_de_situatie_Sanatate_orala_martie_2024.pdf",
+            "https://dexonline.ro/definitie/vapor",
+            "https://dexonline.ro/definitie/port",
+            "https://ro.wikisource.org/wiki/Scrisoarea_III",
+        ],
+        "rationale": "Auzul, igiena orală și transportul pe apă oferă trei legături precise; Scrisoarea III și Eminescu sunt perechea din literatura școlară. Urechea nu are funcția de a curăța dintele, iar periuța nu ține de auz. Sensul naval al lui Port este fixat de Vapor. Nicio pereche nu este refolosită; toate legăturile intenționate sunt puternice și nu există legături încrucișate.",
+    },
+    {
+        "id": "pq92_s02_associations_03",
+        "game": "perechi",
+        "source_id": "aq92_perechi_s02_associations_03",
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "payload": {"pairs": [
+            {"members": ["n_v28_nature_weather_curcubeu", "n_v4art_culoare"], "group_label": "Fenomen optic și culorile sale"},
+            {"members": ["n_v29_time_calendar", "n_v24_time_day_zi"], "group_label": "Calendarul arată zilele anului"},
+            {"members": ["n_v20ist_castelul_peles", "n_geox_sinaia"], "group_label": "Castel și orașul în care se află"},
+            {"members": ["n_v24_food_pantry_faina", "n_gas_cozonac"], "group_label": "Ingredient de bază și preparat din aluat dospit"},
+        ]},
+        "sources": [
+            "https://dexonline.ro/definitie/curcubeu",
+            "https://dexonline.ro/definitie/calendar",
+            "https://peles.ro/ro/",
+            "https://dexonline.ro/definitie/cozonac",
+        ],
+        "rationale": "Culorile curcubeului, zilele calendarului, Peleșul din Sinaia și făina pentru cozonac dau patru asocieri din domenii diferite. Calendarul nu este tratat drept instrument meteo, iar Culoare trimite la spectrul curcubeului. Ingredientul nu concurează cu alt preparat de pe board. Toate patru perechile sunt noi în Perechi, fără vreo legătură încrucișată nativă.",
+    },
+)
+
+
+def candidate_boards() -> list[dict]:
+    return deepcopy(list(BOARDS))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", type=Path, required=True)
+    args = parser.parse_args()
+    repo = args.repo.resolve()
+    sys.path.insert(0, str(repo))
+    from cat_de_roman_esti.wordgames import quick_catalog as Q
+    from cat_de_roman_esti.wordgames.derived_catalog import load_derived_catalog
+    from cat_de_roman_esti.wordgames.service import get_service
+    from scripts.quick_game_content_source_v92 import candidate_boards as prior_authored
+
+    output = Path(__file__).resolve().parent
+    frozen = repo / "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
+    supplement = repo / "cat_de_roman_esti/fixtures/quick_games_v92.json"
+    pins = {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in [frozen, supplement, repo / "cat_de_roman_esti/fixtures/kg_sample.json",
+                      repo / "scripts/quick_game_content_source_v92.py"]}
+    baseline_pins = {
+        relative: hashlib.sha256(subprocess.check_output(
+            ["git", "show", f"c0ead5eb:{relative}"], cwd=repo)).hexdigest()
+        for relative in pins
+    }
+    assert pins == baseline_pins, "protected baseline content changed"
+    candidate = {"kind": "quick-content-candidates-v1", "boards": candidate_boards(),
+                 "bindings": {**Q.bindings(live=False),
+                              "editorial_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}}
+    output.joinpath("candidates.json").write_bytes(Q.json_bytes(candidate))
+    old_core = json.loads(frozen.read_bytes())["boards"]
+    old_extra = json.loads(supplement.read_bytes())["boards"]
+    old = old_core + old_extra
+    assert len(old_core) == 336 and len(old_extra) == 45
+    assert prior_authored() == json.loads(supplement.read_bytes())["authored"]
+    svc = get_service()
+    strengths = Q.graph_strengths(svc)
+    # Replay the unchanged current structural gate over the full 45+6 supplement,
+    # retaining the old 45 source rows exactly and using the original frozen base.
+    combined = Q.rated_boards(prior_authored() + candidate_boards(), load_derived_catalog(), svc)
+    old_pairs = {frozenset(p["members"]) for b in old if b["game"] == "perechi" for p in b["payload"]["pairs"]}
+    seen_new_pairs = set()
+    details = []
+    for b, rated in zip(BOARDS, combined[45:], strict=True):
+        ids = Q.visible_ids(b)
+        same_game = [r for r in old if r["game"] == b["game"]]
+        detail = {"id": b["id"], "labels": {i: svc.node(i).label_ro for i in ids},
+                  "node_types": sorted({svc.node(i).node_type for i in ids}),
+                  "minimum_salience": min(svc.node(i).salience for i in ids),
+                  "old_maximum_visible_overlap": max(len(set(ids) & set(Q.visible_ids(r))) for r in same_game),
+                  "standard_score": rated["standard_score"], "play_quality": rated["play_quality"],
+                  "starter_eligible": rated["starter_eligible"]}
+        if b["game"] == "intrusul":
+            m, intruder = b["payload"]["members"], b["payload"]["intruder"]
+            detail["inlier_strengths"] = [strengths.get(frozenset(p), 0) for p in itertools.combinations(m, 2)]
+            detail["intruder_strengths"] = [strengths.get(frozenset([x, intruder]), 0) for x in m]
+            detail["reused_old_trio"] = any(set(m) == set(r["payload"]["members"]) for r in same_game)
+            assert not detail["reused_old_trio"]
+        else:
+            pairs = {frozenset(p["members"]) for p in b["payload"]["pairs"]}
+            detail["intended_strengths"] = [strengths[frozenset(pair["members"])] for pair in b["payload"]["pairs"]]
+            detail["maximum_cross_strength"] = max(strengths.get(frozenset(p), 0) for p in itertools.combinations(ids, 2) if frozenset(p) not in pairs)
+            detail["reused_old_pairs"] = len(pairs & old_pairs)
+            detail["reused_new_pairs"] = len(pairs & seen_new_pairs)
+            assert not pairs & old_pairs and not pairs & seen_new_pairs
+            seen_new_pairs.update(pairs)
+        details.append(detail)
+    # Mechanical matches under native strong edges: enumerate all 105 perfect
+    # matchings, without claiming this proves natural-language uniqueness.
+    def matching_count(ids):
+        if not ids:
+            return 1
+        first, rest = ids[0], ids[1:]
+        return sum(matching_count([x for x in rest if x != second])
+                   for second in rest if strengths.get(frozenset([first, second]), 0) >= .60)
+    for b, d in zip(BOARDS, details, strict=True):
+        if b["game"] == "perechi":
+            d["strong_graph_perfect_matchings"] = matching_count(Q.visible_ids(b))
+            assert d["strong_graph_perfect_matchings"] == 1
+    report = {"kind": "quick-content-author-probe-v1", "approval_status": "unapproved candidates; no independent reviews",
+              "candidate_sha256": Q.digest(candidate), "baseline_commit": "c0ead5eb",
+              "source_pins": pins, "baseline_pins_match": pins == baseline_pins, "preserved_core_boards": len(old_core),
+              "preserved_existing_supplement_boards": len(old_extra),
+              "candidate_counts": {g: sum(b["game"] == g for b in BOARDS) for g in ["intrusul", "perechi"]},
+              "new_intended_pairs": len(seen_new_pairs), "boards": details}
+    for relative, sha in pins.items():
+        assert hashlib.sha256((repo / relative).read_bytes()).hexdigest() == sha
+    output.joinpath("mechanical-checks.json").write_bytes(Q.json_bytes(report))
+    print(json.dumps({"candidate_counts": report["candidate_counts"], "new_intended_pairs": len(seen_new_pairs), "existing_boards_preserved": 381, "candidate_sha256": report["candidate_sha256"]}))
+
+
+if __name__ == "__main__":
+    main()

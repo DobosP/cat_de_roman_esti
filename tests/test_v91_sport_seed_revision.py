@@ -44,8 +44,8 @@ def isolated(tmp_path):
     for name in (*migration.INPUT_SHA256, "quality-review.json", "factual-review.json"):
         shutil.copyfile(migration.ROOT / migration.REVIEW_DIR / name, review_dir / name)
     proposal = json.loads((review_dir / "replacement-proposal.json").read_bytes())
-    # Peel the exact later content wave and V91 seed revision before applying the
-    # frozen migration again. Current stock also contains V92's 25 new records.
+    # Peel both exact V92 content sessions and the V91 seed revision before applying
+    # the frozen migration again. Neither later additions nor their counts enter it.
     pack = before_v91_artifact(
         json.loads((tmp_path / migration.PACK_PATHS[0]).read_bytes()), "games_pack.json"
     )

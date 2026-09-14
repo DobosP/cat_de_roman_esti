@@ -1,0 +1,84 @@
+import sys,copy,random
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-02')
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import critique_pack as C
+p,s,strong,regions=C.load_all(ROOT/'cat_de_roman_esti/fixtures/games_pack.json', ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')
+GROUPS=[
+('Au scoarță','Copac|Pământ|Pâine|Carte'),
+('Fructe cu un singur sâmbure','Caisă|Piersică|Prună|Cireașă'),
+('Se folosesc pentru afânarea aluaturilor sau compozițiilor','Drojdie|Praf de copt|Bicarbonat de sodiu alimentar|Albuș'),
+('Aparatură pentru redarea sunetului','Boxă|Căști|Casetofonul|Radio'),
+('Pot bate fără pumni','Ceas|Inimă|Vânt|Ploaie'),
+('Mirodenii folosite în prăjituri','Scorțișoară|Cacao|Vanilie|Coajă de lămâie'),
+('Obiecte de mobilier pentru șezut','Scaun|Fotoliu|Canapea|Taburet'),
+('Legume ale căror frunze se mănâncă','Varză|Spanac|Salată|Leuștean'),
+('Se folosesc în instalația electrică a unei locuințe','Priză electrică|Ștecher|Întrerupător de lumină|Cablu electric'),
+('Pot fi umplute cu haine','Dulap|Ghiozdan|Sacoșa|Comodă cu sertare'),
+('Alimente conservate în saramură','Telemea|Gogonele|Castraveți murați|Pepene murat'),
+('Verdețuri folosite pentru aromă','Leuștean|Mărar|Pătrunjel|Cimbru'),
+('Sunt cuvinte scrise cu cratimă','Cluj-Napoca|Ștefan cel Mare|Poale-n brâu|Făt-Frumos'),
+]
+for idx,(label,names) in enumerate(GROUPS):
+ ids=[s.resolve(x) for x in names.split('|')]
+ if not all(ids):print(idx,'MISSING',names,ids);continue
+ quads=[(r['id'],set(x)) for r in p['conexiuni'] for x in r['groups'].values()]+[(r['id'],set(x)) for r in C.load_rejection_tombstones() for x in r['groups'].values()]
+ debt=[k for k,q in quads if len(set(ids)&q)>=3]
+ use={s.label(n):sum(n in set(x for g in r['groups'].values() for x in g) for r in p['conexiuni'] if r['status']=='approved') for n in ids}
+ print(idx,label,ids,'debt',debt,'use',use)
+for idx,groupids in enumerate([(0,1,2,3),(4,6,8,11)]):
+ groups={f'g{i}':[s.resolve(x) for x in GROUPS[j][1].split('|')] for i,j in enumerate(groupids)}
+ rec={'id':f'preview_cx_{idx}','difficulty':'normal','category':'viata_de_roman','status':'pending','source':'ai','groups':groups,'group_labels':{f'g{i}':GROUPS[j][0] for i,j in enumerate(groupids)},'order':[n for g in groups.values() for n in g]}
+ private=copy.deepcopy(p);private['conexiuni'].append(rec)
+ items,_,selected=C.run(private,s,strong,regions,['conexiuni'],{'pending'},{rec['id']})
+ print('BOARD',idx,items)
+ print('fairness',C.build_dossier(rec,'conexiuni',s,strong,[],regions)['fairness'])
+MORE=[
+('Pot avea capac','Oală|Cratiță|Pix|Stilou'),
+('Se pot rula','Covor|Cablu electric|Furtun de grădină|Aluat'),
+('Pot fi închise cu fermoar','Ghiozdan|Penar|Geacă|Pantaloni'),
+('Au mâner','Cană|Cuțit|Greblă|Șurubelniță'),
+('Se pot stoarce','Lămâie|Portocală|Strugure|Burete de vase'),
+('Se macină pentru a obține făină','Grâu|Secară|Ovăz|Migdale'),
+('Au formă de pulbere','Lapte praf|Cacao|Zahăr pudră|Amidon alimentar'),
+('Au gură','Om|Râu|Peșteră|Cuptor de bucătărie'),
+('Se fac din lapte','Brânză|Iaurt|Cașcaval|Unt'),
+('Pot avea dop','Ureche|Chiuvetă|Cadă de baie|Pahar'),
+]
+GROUPS.extend(MORE)
+for idx,(label,names) in enumerate(MORE,13):
+ ids=[s.resolve(x) for x in names.split('|')]
+ if not all(ids):print(idx,'MISSING',names,ids);continue
+ quads=[(r['id'],set(x)) for r in p['conexiuni'] for x in r['groups'].values()]+[(r['id'],set(x)) for r in C.load_rejection_tombstones() for x in r['groups'].values()]
+ debt=[k for k,q in quads if len(set(ids)&q)>=3]
+ print(idx,label,'debt',debt)
+for idx,groupids in enumerate([(0,13,14,15),(4,2,17,19),(0,13,17,15),(4,2,14,15)],2):
+ groups={f'g{i}':[s.resolve(x) for x in GROUPS[j][1].split('|')] for i,j in enumerate(groupids)}
+ rec={'id':f'preview_cx_{idx}','difficulty':'normal','category':'viata_de_roman','status':'pending','source':'ai','groups':groups,'group_labels':{f'g{i}':GROUPS[j][0] for i,j in enumerate(groupids)},'order':[n for g in groups.values() for n in g]}
+ private=copy.deepcopy(p);private['conexiuni'].append(rec)
+ items,_,selected=C.run(private,s,strong,regions,['conexiuni'],{'pending'},{rec['id']})
+ print('BOARD',idx,groupids,items)
+ print('fairness',C.build_dossier(rec,'conexiuni',s,strong,[],regions)['fairness'])
+MORE2=[
+('Se joacă pe suprafețe de gheață','Hochei pe gheață|Patinaj|Curling|Schi'),
+('Se pot înfășura pe un mosor sau tambur','Furtun de grădină|Cablu electric|Fir|Ață'),
+('Au butoane sau clape apăsate cu degetele','Pian|Telefon|Telecomandă|Întrerupător de lumină'),
+('Obiecte folosite pentru udarea plantelor','Stropitoare|Furtun de grădină|Găleată|Robinet'),
+('Se folosesc la curățarea podelei','Mop|Aspirator|Mătură|Făraș'),
+('Au brațe','Fotoliu|Râu|Om|Cruce'),
+('Se pot atârna pe perete','Oglindă|Ceas|Covor|Raft'),
+('Se fac din lapte','Brânză|Iaurt|Cașcaval|Unt'),
+]
+GROUPS.extend(MORE2)
+for idx,(label,names) in enumerate(MORE2,23):
+ ids=[s.resolve(x) for x in names.split('|')]
+ if not all(ids):print(idx,'MISSING',names,ids);continue
+ quads=[(r['id'],set(x)) for r in p['conexiuni'] for x in r['groups'].values()]+[(r['id'],set(x)) for r in C.load_rejection_tombstones() for x in r['groups'].values()]
+ print(idx,label,'debt',[k for k,q in quads if len(set(ids)&q)>=3])
+for idx,groupids in enumerate([(0,15,19,25),(0,19,25,26),(0,13,19,25),(4,2,17,21),(0,15,21,26),(4,2,15,26)],6):
+ groups={f'g{i}':[s.resolve(x) for x in GROUPS[j][1].split('|')] for i,j in enumerate(groupids)}
+ rec={'id':f'preview_cx_{idx}','difficulty':'normal','category':'viata_de_roman','status':'pending','source':'ai','groups':groups,'group_labels':{f'g{i}':GROUPS[j][0] for i,j in enumerate(groupids)},'order':[n for g in groups.values() for n in g]}
+ private=copy.deepcopy(p);private['conexiuni'].append(rec)
+ items,_,selected=C.run(private,s,strong,regions,['conexiuni'],{'pending'},{rec['id']})
+ print('BOARD',idx,groupids,items)
+ print('fairness',C.build_dossier(rec,'conexiuni',s,strong,[],regions)['fairness'])

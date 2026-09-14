@@ -268,7 +268,11 @@ def test_package_write_requires_final_review_gate(monkeypatch, tmp_path, reviewe
 
 
 def test_expansion_preserves_all_prior_recipes_goals_and_collections(candidate):
-    old = json.loads(B.BASELINE.read_bytes())
+    # Preserve the historical111→221 expansion assertions as later recipe-only
+    # additions use the221-concept book as their compatibility predecessor.
+    old = json.loads(
+        (ROOT / "docs/reviews/v92-alchimie-more-concepts/candidates.json").read_bytes(),
+    )
     before, after = B.audit(old), B.audit(candidate)
     assert after["concepts"] >= before["concepts"] + 25
     assert after["discoverable_results"] >= before["discoverable_results"] + 15
@@ -280,7 +284,23 @@ def test_expansion_preserves_all_prior_recipes_goals_and_collections(candidate):
     assert {v["recipe_hash"] for v in candidate["compatible_versions"]} == {
         "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
         "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+        "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
     }
+
+
+def test_recipe_reuse_keeps_complete221_book_and_preparation_sources(candidate):
+    old = json.loads(B.BASELINE.read_bytes())
+    assert len(old["concepts"]) == 221 and len(old["recipes"]) == 285
+    for field in ("concepts", "world", "unlocks", "goals"):
+        assert candidate[field] == old[field]
+    assert all(row in candidate["recipes"] for row in old["recipes"])
+    old_ids = {row["id"] for row in old["recipes"]}
+    additions = [row for row in candidate["recipes"] if row["id"] not in old_ids]
+    assert {row["id"] for row in additions} == {
+        "sandvis-omleta", "salata-cartofi-ou-fiert", "piure-cartofi-copti-unt",
+    }
+    assert all(row["sources"] == B.SOURCE.RECIPE_SOURCES[row["id"]] for row in additions)
+    assert B.audit(old)["terminal_results"] - B.audit(candidate)["terminal_results"] == 3
 
 
 def drop_original_concept(candidate):
@@ -329,22 +349,41 @@ def test_every_concept_requires_complete_bound_review(reviewed_files, role_index
         B.build_catalog(*reviewed_files)
 
 
-def test_new_concept_cannot_forge_inherited_approval(reviewed_files):
-    old_ids = {c["id"] for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
-    def forge(review):
-        next(c for c in review["concepts"] if c["id"] not in old_ids).update(inherited=True)
-    mutate(reviewed_files[1], forge)
+def _new_concept_review(reviewed_files, monkeypatch):
+    """Exercise a new concept even during waves that only add recipes."""
+    candidate = json.loads(reviewed_files[0].read_bytes())
+    old = json.loads(B.BASELINE.read_bytes())
+    concept_id = candidate["concepts"][0]["id"]
+    old["concepts"] = [row for row in old["concepts"] if row["id"] != concept_id]
+    baseline = reviewed_files[0].parent / "prior-without-concept.json"
+    baseline.write_bytes(B.json_bytes(old))
+    monkeypatch.setattr(B, "BASELINE", baseline)
+    return candidate, concept_id
+
+
+def _read_factual_concepts(reviewed_files, candidate):
+    return B.read_review(
+        reviewed_files[1], "factual", B.file_sha(reviewed_files[0]),
+        {row["id"] for row in candidate["recipes"]}, candidate["concepts"],
+    )
+
+
+def test_new_concept_cannot_forge_inherited_approval(reviewed_files, monkeypatch):
+    candidate, concept_id = _new_concept_review(reviewed_files, monkeypatch)
+    mutate(reviewed_files[1], lambda review: next(
+        row for row in review["concepts"] if row["id"] == concept_id
+    ).update(inherited=True))
     with pytest.raises(ValueError, match="inherited"):
-        B.build_catalog(*reviewed_files)
+        _read_factual_concepts(reviewed_files, candidate)
 
 
-def test_new_concept_needs_factual_sources(reviewed_files):
-    old_ids = {c["id"] for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
-    def remove_sources(review):
-        next(c for c in review["concepts"] if c["id"] not in old_ids).update(sources=[])
-    mutate(reviewed_files[1], remove_sources)
+def test_new_concept_needs_factual_sources(reviewed_files, monkeypatch):
+    candidate, concept_id = _new_concept_review(reviewed_files, monkeypatch)
+    mutate(reviewed_files[1], lambda review: next(
+        row for row in review["concepts"] if row["id"] == concept_id
+    ).update(sources=[]))
     with pytest.raises(ValueError, match="checked sources"):
-        B.build_catalog(*reviewed_files)
+        _read_factual_concepts(reviewed_files, candidate)
 
 
 def test_reviewed_unchanged_concepts_can_inherit_without_new_source_claims(reviewed_files):

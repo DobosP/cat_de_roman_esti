@@ -1,0 +1,466 @@
+{
+  "candidate_sha256": {
+    "geografie": "9f95d794874f7c505894ef829b4d10c023e21c65a53e8b52b2baae4ff9ccb3fb",
+    "literatura": "dc5f9174c8fb295ff5786075024356fab507210a90ce9f1a72344c4335d8db6e",
+    "muzica": "835ad434910b5c4468b2167e20e09eb656ecdf2b5db2dd45ff4d6ca3de3f3dc4",
+    "personalitati": "26a29be61eb4d251b6259ca7a761c4a7b230bd3443a358f5b54d558ae3daf699",
+    "viata_de_roman": "25287ecbebd96e680c7d019f3e920e196bdd69c6c1c601bf562bbd61e53a4131"
+  },
+  "contexto": [
+    {
+      "guesses": [
+        {
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 94,
+            "distance": 3,
+            "id": "n_romania_stat",
+            "label": "România",
+            "rank": 146,
+            "temperature": "Caldut"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "România",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 2,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v2geo_oras",
+            "label": "oraș",
+            "rank": 2,
+            "temperature": "Fierbinte"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "oraș",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 3,
+            "closeness": 98,
+            "distance": 2,
+            "id": "n_carpati",
+            "label": "Carpați",
+            "rank": 42,
+            "temperature": "Cald"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "Carpați",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 4,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v20geo_poiana_brasov",
+            "label": "Poiana Brașov",
+            "rank": 2,
+            "temperature": "Fierbinte"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "Poiana Brașov",
+          "won": false
+        },
+        {
+          "guess": null,
+          "message": "Nu cunosc acest concept",
+          "needs_confirmation": false,
+          "ok": false,
+          "text": "Biserica Neagră",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 5,
+            "closeness": 100,
+            "distance": 0,
+            "id": "n_brasov",
+            "label": "Brașov",
+            "rank": 1,
+            "temperature": "Gasit"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "Brașov",
+          "won": true
+        }
+      ],
+      "incoming": 11,
+      "preview_id": "preview02_contexto_geografie_0",
+      "target": "n_brasov",
+      "terminal_get_won": true
+    },
+    {
+      "guesses": [
+        {
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 97,
+            "distance": 3,
+            "id": "n_v4art_muzica",
+            "label": "Muzică",
+            "rank": 71,
+            "temperature": "Caldut"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "muzică",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 2,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v3muz_instrument_muzical",
+            "label": "Instrument muzical",
+            "rank": 2,
+            "temperature": "Fierbinte"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "instrument muzical",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 3,
+            "closeness": 99,
+            "distance": 2,
+            "id": "n_v4muz_rock",
+            "label": "Rock",
+            "rank": 17,
+            "temperature": "Cald"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "rock",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 4,
+            "closeness": 99,
+            "distance": 2,
+            "id": "n_v3muz_pian",
+            "label": "Pian",
+            "rank": 15,
+            "temperature": "Cald"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "pian",
+          "won": false
+        },
+        {
+          "guess": null,
+          "message": "Am înțeles: Coada. Confirmă sau corectează.",
+          "needs_confirmation": true,
+          "ok": false,
+          "text": "coardă",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 5,
+            "closeness": 100,
+            "distance": 0,
+            "id": "n_v3muz_chitara",
+            "label": "Chitară",
+            "rank": 1,
+            "temperature": "Gasit"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "chitară",
+          "won": true
+        }
+      ],
+      "incoming": 13,
+      "preview_id": "preview02_contexto_muzica_0",
+      "target": "n_v3muz_chitara",
+      "terminal_get_won": true
+    },
+    {
+      "guesses": [
+        {
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 88,
+            "distance": 3,
+            "id": "n_v4spo_sport",
+            "label": "sport",
+            "rank": 274,
+            "temperature": "Rece"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "sport",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 2,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_gimnastica",
+            "label": "Gimnastică",
+            "rank": 3,
+            "temperature": "Fierbinte"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "gimnastică",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 3,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v2per_olimpiada",
+            "label": "Olimpiadă",
+            "rank": 5,
+            "temperature": "Fierbinte"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "Olimpiadă",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 4,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_spt_barna_gimnastica",
+            "label": "Bârna",
+            "rank": 16,
+            "temperature": "Fierbinte"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "bârnă",
+          "won": false
+        },
+        {
+          "guess": null,
+          "message": "Nu cunosc acest concept",
+          "needs_confirmation": false,
+          "ok": false,
+          "text": "Montreal",
+          "won": false
+        },
+        {
+          "guess": {
+            "attempt_number": 5,
+            "closeness": 100,
+            "distance": 0,
+            "id": "n_nadia_comaneci",
+            "label": "Nadia Comăneci",
+            "rank": 1,
+            "temperature": "Gasit"
+          },
+          "message": null,
+          "needs_confirmation": false,
+          "ok": true,
+          "text": "Nadia Comăneci",
+          "won": true
+        }
+      ],
+      "incoming": 18,
+      "preview_id": "preview02_contexto_personalitati_0",
+      "target": "n_nadia_comaneci",
+      "terminal_get_won": true
+    }
+  ],
+  "kind": "pack-raw-independent-api-v1",
+  "lant": [
+    {
+      "path_index": 0,
+      "preview_id": "preview02_lant_literatura_0",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "autor și poveste",
+          "from": "Capra cu trei iezi",
+          "to": "Ion Creangă"
+        },
+        {
+          "caption": "creator și operă",
+          "from": "Ion Creangă",
+          "to": "Amintiri din copilărie"
+        }
+      ],
+      "won": true
+    },
+    {
+      "path_index": 1,
+      "preview_id": "preview02_lant_literatura_0",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "exemplu și categorie",
+          "from": "Capra cu trei iezi",
+          "to": "Poveste"
+        },
+        {
+          "caption": "legătură directă",
+          "from": "Poveste",
+          "to": "Amintiri din copilărie"
+        }
+      ],
+      "won": true
+    },
+    {
+      "path_index": 2,
+      "preview_id": "preview02_lant_literatura_0",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "poveste și carte",
+          "from": "Capra cu trei iezi",
+          "to": "Carte"
+        },
+        {
+          "caption": "legătură directă",
+          "from": "Carte",
+          "to": "Amintiri din copilărie"
+        }
+      ],
+      "won": true
+    },
+    {
+      "path_index": 0,
+      "preview_id": "preview02_lant_personalitati_0",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "exemplu și categorie",
+          "from": "Nadia Comăneci",
+          "to": "Gimnastică"
+        },
+        {
+          "caption": "legătură directă",
+          "from": "Gimnastică",
+          "to": "Simona Amânar"
+        }
+      ],
+      "won": true
+    },
+    {
+      "path_index": 1,
+      "preview_id": "preview02_lant_personalitati_0",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "legătură directă",
+          "from": "Nadia Comăneci",
+          "to": "gimnast"
+        },
+        {
+          "caption": "legătură directă",
+          "from": "gimnast",
+          "to": "Simona Amânar"
+        }
+      ],
+      "won": true
+    },
+    {
+      "path_index": 2,
+      "preview_id": "preview02_lant_personalitati_0",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "legătură directă",
+          "from": "Nadia Comăneci",
+          "to": "Lotul olimpic al României"
+        },
+        {
+          "caption": "legătură directă",
+          "from": "Lotul olimpic al României",
+          "to": "Simona Amânar"
+        }
+      ],
+      "won": true
+    },
+    {
+      "path_index": 0,
+      "preview_id": "preview02_lant_personalitati_1",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "legătură directă",
+          "from": "Gheorghe Zamfir",
+          "to": "Muzică populară"
+        },
+        {
+          "caption": "legătură directă",
+          "from": "Muzică populară",
+          "to": "Maria Tănase"
+        }
+      ],
+      "won": true
+    },
+    {
+      "path_index": 1,
+      "preview_id": "preview02_lant_personalitati_1",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "legătură directă",
+          "from": "Gheorghe Zamfir",
+          "to": "Muzician"
+        },
+        {
+          "caption": "legătură directă",
+          "from": "Muzician",
+          "to": "Maria Tănase"
+        }
+      ],
+      "won": true
+    },
+    {
+      "path_index": 2,
+      "preview_id": "preview02_lant_personalitati_1",
+      "score": 1000,
+      "steps": [
+        {
+          "caption": "legătură directă",
+          "from": "Gheorghe Zamfir",
+          "to": "Folclor românesc"
+        },
+        {
+          "caption": "legătură directă",
+          "from": "Folclor românesc",
+          "to": "Maria Tănase"
+        }
+      ],
+      "won": true
+    }
+  ],
+  "reviewer": "content_verifier",
+  "scope": "Fresh fixed candidate sessions using actual server methods and real BFF requests. No package or score shortcuts; not a natural-selector claim."
+}

@@ -1,0 +1,363 @@
+{
+  "reviewer": "content_verifier",
+  "kind": "lant-help-change-verification-v1",
+  "before_sha256": "3276dcec7fb0359457ea485b612136d2f27b3670a6d0ca34b959db5d88be0975",
+  "after_sha256": "4d1ffe5f5c2eb8b77a10670dd5b5f6ff0bd0868ba39994364a4cbb355d7e2f0f",
+  "passed": true,
+  "summary": "All 20 deterministic starts, targets, local choices and par remain exact. All 13 generic first stages become bounded ID-free alternatives; all seven specific first-stage payloads remain exact. GET never escalates, moves and undo discard only the earned payload while level persists at 3; repeated help is capped. The separate naturally selected hinted win remains 1000 points. This validates fewer wasted actions, not measured player enjoyment.",
+  "transitions": [
+    {
+      "action": "first help",
+      "retained_level": 2,
+      "earned_hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Congelator",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Frișcă",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Congelator",
+          "Frișcă"
+        ],
+        "message": "Variante utile: Congelator, Frișcă."
+      },
+      "moves": 0,
+      "payload_stage": "alternatives",
+      "current": "n_v24_home_appliances_frigider"
+    },
+    {
+      "action": "GET",
+      "retained_level": 2,
+      "earned_hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Congelator",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Frișcă",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Congelator",
+          "Frișcă"
+        ],
+        "message": "Variante utile: Congelator, Frișcă."
+      },
+      "moves": 0,
+      "payload_stage": null,
+      "current": "n_v24_home_appliances_frigider"
+    },
+    {
+      "action": "second help",
+      "retained_level": 3,
+      "earned_hint": {
+        "hint": {
+          "id": "n_v86_kitchen_congelator",
+          "label": "Congelator"
+        },
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "hop",
+        "relation": "legătură directă",
+        "message": "Un salt bun: Congelator."
+      },
+      "moves": 0,
+      "payload_stage": "hop",
+      "current": "n_v24_home_appliances_frigider"
+    },
+    {
+      "action": "move",
+      "retained_level": 3,
+      "earned_hint": null,
+      "moves": 1,
+      "payload_stage": null,
+      "current": "n_v86_kitchen_congelator"
+    },
+    {
+      "action": "GET after move",
+      "retained_level": 3,
+      "earned_hint": null,
+      "moves": 1,
+      "payload_stage": null,
+      "current": "n_v86_kitchen_congelator"
+    },
+    {
+      "action": "undo",
+      "retained_level": 3,
+      "earned_hint": null,
+      "moves": 0,
+      "payload_stage": null,
+      "current": "n_v24_home_appliances_frigider"
+    },
+    {
+      "action": "help after undo",
+      "retained_level": 3,
+      "earned_hint": {
+        "hint": {
+          "id": "n_v86_kitchen_congelator",
+          "label": "Congelator"
+        },
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "hop",
+        "relation": "legătură directă",
+        "message": "Un salt bun: Congelator."
+      },
+      "moves": 0,
+      "payload_stage": "hop",
+      "current": "n_v24_home_appliances_frigider"
+    },
+    {
+      "action": "five further helps",
+      "retained_level": 3,
+      "earned_hint": {
+        "hint": {
+          "id": "n_v86_kitchen_congelator",
+          "label": "Congelator"
+        },
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "hop",
+        "relation": "legătură directă",
+        "message": "Un salt bun: Congelator."
+      },
+      "moves": 0,
+      "payload_stage": "hop",
+      "current": "n_v24_home_appliances_frigider"
+    },
+    {
+      "action": "terminal GET",
+      "retained_level": 3,
+      "earned_hint": {
+        "hint": {
+          "id": "n_v86_kitchen_congelator",
+          "label": "Congelator"
+        },
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "hop",
+        "relation": "legătură directă",
+        "message": "Un salt bun: Congelator."
+      },
+      "moves": 0,
+      "payload_stage": null,
+      "current": "n_v24_home_appliances_frigider"
+    }
+  ],
+  "comparisons": [
+    {
+      "params": {
+        "seed": 0,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "direction",
+      "generic_stage_skipped": false
+    },
+    {
+      "params": {
+        "seed": 1,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 2,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 3,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 4,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 5,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "direction",
+      "generic_stage_skipped": false
+    },
+    {
+      "params": {
+        "seed": 6,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 7,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "direction",
+      "generic_stage_skipped": false
+    },
+    {
+      "params": {
+        "seed": 8,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 9,
+        "difficulty": "usor"
+      },
+      "before": "direction",
+      "after": "direction",
+      "generic_stage_skipped": false
+    },
+    {
+      "params": {
+        "seed": 0,
+        "difficulty": "normal",
+        "category": "geografie"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 1,
+        "difficulty": "normal",
+        "category": "gastronomie"
+      },
+      "before": "direction",
+      "after": "direction",
+      "generic_stage_skipped": false
+    },
+    {
+      "params": {
+        "seed": 2,
+        "difficulty": "normal",
+        "category": "film_tv"
+      },
+      "before": "direction",
+      "after": "direction",
+      "generic_stage_skipped": false
+    },
+    {
+      "params": {
+        "seed": 3,
+        "difficulty": "normal",
+        "category": "sport"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 4,
+        "difficulty": "normal",
+        "category": "literatura"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 5,
+        "difficulty": "normal",
+        "category": "istorie"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 6,
+        "difficulty": "normal",
+        "category": "stiinta"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 7,
+        "difficulty": "normal",
+        "category": "viata_de_roman"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 8,
+        "difficulty": "normal",
+        "category": "limba"
+      },
+      "before": "direction",
+      "after": "alternatives",
+      "generic_stage_skipped": true
+    },
+    {
+      "params": {
+        "seed": 9,
+        "difficulty": "normal",
+        "category": "arta_cultura"
+      },
+      "before": "direction",
+      "after": "direction",
+      "generic_stage_skipped": false
+    }
+  ],
+  "score_check": {
+    "seed": 3,
+    "difficulty": "usor",
+    "hint_requests": 3,
+    "moves": 2,
+    "optimal": 2,
+    "score": 1000,
+    "won": true
+  }
+}

@@ -1168,3 +1168,23 @@ RECIPES.extend([
          "modelează și se gătește în chiftele."
      )),
 ])
+
+# Session 02: reuse three previously terminal discoveries.
+RECIPES.extend([
+    ('sandvis-omleta', 'Omletă', 'Pâine', 'Sandviș',
+     'Omleta gătită, așezată între felii de pâine, formează un sandviș; '
+     'se pot adăuga legume sau brânză.'),
+    ('salata-cartofi-ou-fiert', 'Ou fiert', 'Cartof', 'Salată de cartofi',
+     'Cartofii fierți, răciți și tăiați se amestecă cu ou fiert și un sos '
+     'pentru o salată de cartofi.'),
+    ('piure-cartofi-copti-unt', 'Cartofi copți', 'Unt', 'Piure de cartofi',
+     'Miezul cartofilor copți se scoate din coajă și se pasează cu unt; '
+     'se adaugă lapte pentru consistența dorită.'),
+])
+
+# Preparation-specific references for the newly authored reuse recipes.
+RECIPE_SOURCES = {
+    'sandvis-omleta': ['https://pofta-buna.com/sandvisuri-cu-omleta/'],
+    'salata-cartofi-ou-fiert': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html'],
+    'piure-cartofi-copti-unt': ['https://www.crunchtimekitchen.com/ultimate-guide-to-mashed-potatoes/'],
+}

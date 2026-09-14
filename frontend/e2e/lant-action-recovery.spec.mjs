@@ -122,22 +122,26 @@ test("a lost earned hint restores the exact stage and resume does not escalate i
   const counts = traffic(page, initial.game_id);
   const committed = await loseCommittedResponse(page, initial.game_id, "hint");
   expect((await askHint(page, initial.game_id)).status()).toBe(503);
-  await expect(page.getByText("O DIRECȚIE", { exact: true })).toBeVisible();
+  await expect(page.locator(".lant-hint-panel")).toBeVisible();
   await expect(hintButton(page)).toBeEnabled();
   const server = await (await request.get(gameURL(game, initial.game_id))).json();
   expect(server.earned_hint).toEqual(committed());
-  expect(server.earned_hint.stage).toBe("direction");
+  const firstStage = server.earned_hint.stage;
+  expect(["direction", "alternatives"]).toContain(firstStage);
+  const heading = firstStage === "direction" ? "O DIRECȚIE" : "VARIANTE UTILE";
   expect(server.earned_hint.hint).toBeNull();
-  expect(server.earned_hint.alternatives_labels).toBeUndefined();
+  if (firstStage === "direction") expect(server.earned_hint.alternatives_labels).toBeUndefined();
+  else expect(server.earned_hint.alternatives_labels.length).toBeGreaterThan(0);
   expect(server.moves).toBe(0);
   expect(counts).toEqual({ reads: 1, mutations: 1 });
-  await expect(page.getByText("O DIRECȚIE", { exact: true }).locator("../..")).toHaveCSS("opacity", "1");
-  await page.getByText("O DIRECȚIE", { exact: true }).scrollIntoViewIfNeeded();
+  await expect(page.getByText(heading, { exact: true }).locator("../..")).toHaveCSS("opacity", "1");
+  await page.getByText(heading, { exact: true }).scrollIntoViewIfNeeded();
   await page.screenshot({ path: test.info().outputPath("recovered-hint.png") });
   await page.reload();
-  await expect(page.getByText("O DIRECȚIE", { exact: true })).toBeVisible();
-  expect((await (await askHint(page, initial.game_id)).json()).stage).toBe("alternatives");
-  await expect(page.getByText("VARIANTE UTILE", { exact: true })).toBeVisible();
+  await expect(page.getByText(heading, { exact: true })).toBeVisible();
+  const nextStage = firstStage === "direction" ? "alternatives" : "hop";
+  expect((await (await askHint(page, initial.game_id)).json()).stage).toBe(nextStage);
+  await expect(page.getByText(nextStage === "alternatives" ? "VARIANTE UTILE" : "UN SALT", { exact: true })).toBeVisible();
   expect(counts.mutations).toBe(2); // The second POST is the player's next explicit request.
   expect(await played(page)).toBe(0);
 });
@@ -145,7 +149,8 @@ test("a lost earned hint restores the exact stage and resume does not escalate i
 test("a lost undo restores the earlier position and discards help earned at the undone position", async ({ page, request }) => {
   const initial = await start(page, game);
   expect((await (await act(page, game, firstMove())).json()).won).toBe(false);
-  expect((await (await askHint(page, initial.game_id)).json()).stage).toBe("direction");
+  const firstHint = await (await askHint(page, initial.game_id)).json();
+  expect(["direction", "alternatives"]).toContain(firstHint.stage);
   const counts = traffic(page, initial.game_id);
   await loseCommittedResponse(page, initial.game_id, "undo");
   const response = responseFor(page, initial.game_id, "undo");
@@ -153,13 +158,15 @@ test("a lost undo restores the earlier position and discards help earned at the 
   expect((await response).status()).toBe(503);
   await expect(field(page)).toBeEnabled();
   await expect(page.locator(".hud")).toContainText("0 mutări");
-  await expect(page.getByText("O DIRECȚIE", { exact: true })).toHaveCount(0);
+  await expect(page.locator(".lant-hint-panel")).toHaveCount(0);
   const server = await (await request.get(gameURL(game, initial.game_id))).json();
   expect(server.current).toEqual(initial.current);
   expect(server.path).toEqual(initial.path);
   expect(server.earned_hint).toBeUndefined();
   expect(counts).toEqual({ reads: 1, mutations: 1 });
-  expect((await (await askHint(page, initial.game_id)).json()).stage).toBe("alternatives");
+  expect((await (await askHint(page, initial.game_id)).json()).stage).toBe(
+    firstHint.stage === "direction" ? "alternatives" : "hop",
+  );
 });
 
 test("failed verification locks mutations and its persistent retry only reads", async ({ page, request }) => {

@@ -1,0 +1,512 @@
+[
+  {
+    "game": "explore",
+    "width": 390,
+    "stage": "intro",
+    "text": "←\nIeși\nAlchimie\nExplorează\nProvocări\nUN CUVÂNT DUCE LA ALTUL\nO lume de descoperit.\n\nAtinge două cuvinte și vezi ce creezi. Păstrezi fiecare descoperire și alegi singur ce explorezi mai departe.\n\nCuvânt\n+\nCuvânt\n→\n✦ Descoperire\nÎncepe explorarea →\n\nFără scor sau penalizări. Colecția se salvează pe acest dispozitiv. Obiectivele sunt opționale.",
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "label": "Ieși la lista de jocuri",
+        "cls": "roedu-btn roedu-btn--secondary roedu-btn--sm",
+        "x": 18,
+        "y": 23.5,
+        "w": 64,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "A",
+        "label": "Provocări",
+        "cls": "",
+        "x": 197,
+        "y": 90,
+        "w": 175,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Începe explorarea →",
+        "cls": "roedu-btn roedu-btn--primary roedu-btn--md",
+        "x": 37,
+        "y": 435.15625,
+        "w": 190,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      }
+    ],
+    "scrollWidth": 390,
+    "scrolls": [],
+    "active": "<body>\n    <div id=\"root\"><div class=\"roedu-root\" style=\"--roedu-color-bg: #0d0b20; --roedu-color-surface: rgba(32, 28, 64, 0.66); --roedu-color-surface-muted: rgba(20, 17, 44, 0.55); --roedu-color-text: #f4f2ff; --roedu-color-text-muted: #a8a1cc; --roedu-color-border: rgba(168, 156, 236, 0.2); --roedu-color-primary: #ff5470; --roedu-color-primary-text: #2b0714; --roedu-color-accent: #ffd166; --roedu-color-danger: #ff4d6d; --roedu-color-success: #3ddc97; --roedu-color-focus: #ffd166; --roedu-font-body: 'Inter Variable', 'Inter', system-ui, sans-serif; --roedu-font-heading: 'Fredoka Variable', 'Fredoka', system-ui, sans-serif; --roedu-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; --roedu-font-size-xs: 0.75rem; --roedu-font-size-sm: 0.875rem; --roedu-font-size-md: 1rem; --roedu-font-size-lg: 1.25rem; --roedu-font-size-xl: 1.5rem; --roedu-font-size-xxl: 2rem; --roedu-radius-sm: 10px; --roedu-radius-md: 16px; --roedu-radius-lg: 24px; --roedu-radius-pill: 999px; --roedu-space-xs: 4px; --roedu-space-sm: 8px; --roedu-space-md: 16px; --roedu-space-lg: 24px; --roedu-space-xl: 32px; --roedu-space-xxl: 48px; --roedu-shadow-sm: 0 2px 10px rgba(4, 2, 18, 0.4); --roedu-shadow-md: 0 12px 32px -10px rgba(4, 2, 18, 0.6); --roedu-shadow-lg: 0 24px 64px -16px rgba(4, 2, 18, 0.8);\"><div class=\"app-shell\"><div class=\"account-bar\"></div><div class=\"app-notices\"><div class=\"roedu-toast-stack\" role=\"status\" aria-live=\"polite\"></div></div><div class=\"app-content\"><div class=\"screen\" style=\"opacity: 1; transform: none;\"><div class=\"screen-pad fill alchemy-screen alchemy-explore-screen\" aria-busy=\"false\" style=\"--game-shell-header-height: 52px;\"><div class=\"container col game-container alchemy-game\"><div class=\"row spread game-shell-header\" style=\"gap: 12px;\"><div class=\"row game-shell-main\" style=\"gap: 10px; align-items: center;\"><button type=\"button\" class=\"roedu-btn roedu-btn--secondary roedu-btn--sm\" aria-label=\"Ieși la lista de jocuri\"><span aria-hidden=\"true\">←</span> Ieși</button><strong class=\"game-shell-title\" style=\"font-family: var(--font-display); color: rgb(197, 160, 240); font-size: 1.05rem;\">Alchimie</strong></div></div><nav class=\"alchemy-modes\" aria-label=\"Modul Alchimie\"><span aria-current=\"page\">Explorează</span><a href=\"/alchimie?mode=challenges\" data-discover=\"true\">Provocări</a></nav><section class=\"alchemy-explore-intro\"><span class=\"alchemy-eyebrow\">UN CUVÂNT DUCE LA ALTUL</span><h1>O lume de descoperit.</h1><p>Atinge două cuvinte și vezi ce creezi. Păstrezi fiecare descoperire și alegi singur ce explorezi mai departe.</p><div class=\"alchemy-intro-example\" aria-label=\"Două cuvinte se combină într-o descoperire\"><span>Cuvânt</span><b>+</b><span>Cuvânt</span><b>→</b><span>✦ Descoperire</span></div><button type=\"button\" class=\"roedu-btn roedu-btn--primary roedu-btn--md\">Începe explorarea →</button><p class=\"alchemy-inventory-note\">Fără scor sau penalizări. Colecția se salvează pe acest dispozitiv. Obiectivele sunt opționale.</p></section></div></div></div></div></div></div></div>\n  \n\n</body>"
+  },
+  {
+    "game": "explore",
+    "width": 390,
+    "stage": "round",
+    "text": "←\nIeși\nAlchimie\n8 / 221 cuvinte\nExplorează\nProvocări\nEXPLOREAZĂ ÎN RITMUL TĂU\nBucătăria românească\n\nDupă încă 3 descoperiri primești provizii noi.\n\nObiectiv opțional\nExplorez liber\n\nAtinge un cuvânt, apoi altul. Se combină imediat.\n\n💡 O idee?\nGratuit\nCuvintele tale\n8 de explorat\nCaută și filtrează\nFăină\nApă\nLapte\nSare\nCheag alimentar\nMălai\nCuptor de bucătărie\nOu\nRețetele mele · 0\nCum explorezi",
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "label": "Ieși la lista de jocuri",
+        "cls": "roedu-btn roedu-btn--secondary roedu-btn--sm",
+        "x": 18,
+        "y": 23.5,
+        "w": 64,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "A",
+        "label": "Provocări",
+        "cls": "",
+        "x": 197,
+        "y": 90,
+        "w": 175,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "SUMMARY",
+        "label": "Obiectiv opțional\nExplorez liber",
+        "cls": "",
+        "x": 15,
+        "y": 281.53125,
+        "w": 360,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "SELECT",
+        "label": null,
+        "cls": "field",
+        "x": 140,
+        "y": 329.53125,
+        "w": 223,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "💡 O idee?",
+        "cls": "roedu-btn roedu-btn--secondary roedu-btn--md",
+        "x": 31,
+        "y": 407.53125,
+        "w": 115,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "SUMMARY",
+        "label": "Caută și filtrează",
+        "cls": "",
+        "x": 31,
+        "y": 500.53125,
+        "w": 328,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "INPUT",
+        "label": "Caută în colecție",
+        "cls": "field alchemy-inventory-search",
+        "x": 31,
+        "y": 544.53125,
+        "w": 228,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "INPUT",
+        "label": null,
+        "cls": "",
+        "x": 275,
+        "y": 556.53125,
+        "w": 20,
+        "h": 20,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Făină",
+        "cls": "chip alchemy-word",
+        "x": 31,
+        "y": 552.53125,
+        "w": 159,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Apă",
+        "cls": "chip alchemy-word",
+        "x": 200,
+        "y": 552.53125,
+        "w": 159,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Lapte",
+        "cls": "chip alchemy-word",
+        "x": 31,
+        "y": 624.53125,
+        "w": 159,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Sare",
+        "cls": "chip alchemy-word",
+        "x": 200,
+        "y": 624.53125,
+        "w": 159,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Cheag alimentar",
+        "cls": "chip alchemy-word",
+        "x": 31,
+        "y": 696.53125,
+        "w": 159,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Mălai",
+        "cls": "chip alchemy-word",
+        "x": 200,
+        "y": 696.53125,
+        "w": 159,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Cuptor de bucătărie",
+        "cls": "chip alchemy-word",
+        "x": 31,
+        "y": 768.53125,
+        "w": 159,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Ou",
+        "cls": "chip alchemy-word",
+        "x": 200,
+        "y": 768.53125,
+        "w": 159,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "SUMMARY",
+        "label": "Rețetele mele · 0",
+        "cls": "",
+        "x": 14,
+        "y": 859.53125,
+        "w": 362,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "SUMMARY",
+        "label": "Cum explorezi",
+        "cls": "",
+        "x": 14,
+        "y": 915.53125,
+        "w": 362,
+        "h": 44,
+        "focus": false
+      }
+    ],
+    "scrollWidth": 390,
+    "scrolls": [
+      {
+        "tag": "DIV",
+        "cls": "screen-pad fill alchemy-screen alchemy-explore-screen",
+        "scrollTop": 0,
+        "scrollHeight": 1008,
+        "clientHeight": 844
+      }
+    ],
+    "active": "<body>\n    <div id=\"root\"><div class=\"roedu-root\" style=\"--roedu-color-bg: #0d0b20; --roedu-color-surface: rgba(32, 28, 64, 0.66); --roedu-color-surface-muted: rgba(20, 17, 44, 0.55); --roedu-color-text: #f4f2ff; --roedu-color-text-muted: #a8a1cc; --roedu-color-border: rgba(168, 156, 236, 0.2); --roedu-color-primary: #ff5470; --roedu-color-primary-text: #2b0714; --roedu-color-accent: #ffd166; --roedu-color-danger: #ff4d6d; --roedu-color-success: #3ddc97; --roedu-color-focus: #ffd166; --roedu-font-body: 'Inter Variable', 'Inter', system-ui, sans-serif; --roedu-font-heading: 'Fredoka Variable', 'Fredoka', system-ui, sans-serif; --roedu-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; --roedu-font-size-xs: 0.75rem; --roedu-font-size-sm: 0.875rem; --roedu-font-size-md: 1rem; --roedu-font-size-lg: 1.25rem; --roedu-font-size-xl: 1.5rem; --roedu-font-size-xxl: 2rem; --roedu-radius-sm: 10px; --roedu-radius-md: 16px; --roedu-radius-lg: 24px; --roedu-radius-pill: 999px; --roedu-space-xs: 4px; --roedu-space-sm: 8px; --roedu-space-md: 16px; --roedu-space-lg: 24px; --roedu-space-xl: 32px; --roedu-space-xxl: 48px; --roedu-shadow-sm: 0 2px 10px rgba(4, 2, 18, 0.4); --roedu-shadow-md: 0 12px 32px -10px rgba(4, 2, 18, 0.6); --roedu-shadow-lg: 0 24px 64px -16px rgba(4, 2, 18, 0.8);\"><div class=\"app-shell\"><div class=\"account-bar\"></div><div class=\"app-notices\"><div class=\"roedu-toast-stack\" role=\"status\" aria-live=\"polite\"></div></div><div class=\"app-content\"><div class=\"screen\" style=\"opacity: 1; transform: none;\"><div class=\"screen-pad fill alchemy-screen alchemy-explore-screen\" aria-busy=\"false\" style=\"--game-shell-header-height: 52px;\"><div class=\"container col game-container alchemy-game\"><div class=\"row spread game-shell-header\" style=\"gap: 12px;\"><div class=\"row game-shell-main\" style=\"gap: 10px; align-items: center;\"><button type=\"button\" class=\"roedu-btn roedu-btn--secondary roedu-btn--sm\" aria-label=\"Ieși la lista de jocuri\"><span aria-hidden=\"true\">←</span> Ieși</button><strong class=\"game-shell-title\" style=\"font-family: var(--font-display); color: rgb(197, 160, 240); font-size: 1.05rem;\">Alchimie</strong></div><div class=\"game-shell-status\"><span class=\"alchemy-collection-count\" aria-label=\"Progresul colecției\">8 / 221 cuvinte</span></div></div><nav class=\"alchemy-modes\" aria-label=\"Modul Alchimie\"><span aria-current=\"page\">Explorează</span><a href=\"/alchimie?mode=challenges\" data-discover=\"true\">Provocări</a></nav><section class=\"alchemy-world-heading\" aria-label=\"Lumea de explorat\"><div><span class=\"alchemy-eyebrow\">EXPLOREAZĂ ÎN RITMUL TĂU</span><h1>Bucătăria românească</h1></div><progress aria-label=\"Colecție descoperită\" value=\"8\" max=\"221\"></progress><p class=\"alchemy-pantry-progress\">După încă 3 descoperiri primești provizii noi.</p></section><details class=\"alchemy-explore-goal\"><summary><span>Obiectiv opțional</span><strong>Explorez liber</strong></summary><div class=\"alchemy-goal-content\"><label for=\"alchemy-optional-goal\">Obiectiv opțional</label><select id=\"alchemy-optional-goal\" class=\"field\"><option value=\"\">Explorez liber</option><option value=\"paine\">Prima pâine</option><option value=\"bulz\">Gust de stână</option><option value=\"muraturi\">Cămara pentru iarnă</option><option value=\"ciorba-fasole\">O ciorbă de casă</option><option value=\"cozonac\">Cozonacul de sărbătoare</option><option value=\"papanasi\">Papanași pentru desert</option><option value=\"inghetata\">Un desert rece</option><option value=\"diplomat\">Tortul de sărbătoare</option><option value=\"sarmale\">Sarmale pentru masă</option><option value=\"sandvis\">O gustare din ce ai descoperit</option><option value=\"clatite\">Clătite la tigaie</option><option value=\"pizza\">Pizza de casă</option><option value=\"snitel\">Crusta crocantă</option><option value=\"zacusca\">Încă un borcan în cămară</option><option value=\"urda\">Din zer, o nouă brânză</option><option value=\"mucenici\">Opturi dulci</option><option value=\"cornulete\">Cornulețe fragede</option><option value=\"halva\">Dulce din semințe</option><option value=\"placinte\">Plăcinte dulci sau sărate</option><option value=\"pepene-murat\">Pepeni pentru cămara de iarnă</option><option value=\"branza-burduf\">Brânză frământată la stână</option><option value=\"langosi\">Turte calde cu usturoi</option><option value=\"merdenea\">Foi fragede cu brânză</option><option value=\"savarina\">Frișcă și prăjitură însiropată</option><option value=\"ecler\">O nouă idee pentru crema de vanilie</option><option value=\"chec\">Checul din tava de acasă</option><option value=\"briose\">Prăjituri în forme mici</option><option value=\"mici\">Mici pe grătar</option><option value=\"oua-rosii\">Culori din coji de ceapă</option><option value=\"salata-boeuf\">Salata mesei de sărbătoare</option><option value=\"sushi\">Orezul întâlnește peștele</option><option value=\"ciocolata-dubai\">Fistic și ciocolată crocantă</option></select></div></details><div class=\"alchemy-workspace\" style=\"--alchemy-bench-clearance: 141px;\"><div class=\"card alchemy-bench alchemy-bench--pinned\" aria-label=\"Alambic\"><div class=\"alchemy-craft-cue\"><p class=\"alchemy-craft-prompt\">Atinge un cuvânt, apoi altul. Se combină imediat.</p></div><div class=\"alchemy-assistance\"><button type=\"button\" class=\"roedu-btn roedu-btn--secondary roedu-btn--md\">💡 O idee?</button><span>Gratuit</span></div></div><section tabindex=\"-1\" class=\"card col alchemy-inventory-panel\" aria-label=\"Colecția ta\"><div class=\"alchemy-panel-heading\"><h2>Cuvintele tale</h2><span class=\"alchemy-selection-count\">8 de explorat</span></div><details class=\"alchemy-library-tools\"><summary>Caută și filtrează</summary><div class=\"alchemy-explore-library-tools\"><input class=\"field alchemy-inventory-search\" placeholder=\"Caută în colecție…\" aria-label=\"Caută în colecție\" autocomplete=\"off\" spellcheck=\"false\" type=\"search\" value=\"\"><label class=\"alchemy-show-collection\"><input type=\"checkbox\">Toate (8)</label></div></details><div class=\"alchemy-inventory-grid\"><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Făină\" title=\"Concept cotidian din grupul «ingrediente de bază»: Făină.\" draggable=\"true\"><span class=\"alchemy-word-label\">Făină</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Apă\" title=\"Lichid de băut și ingredient de bază în gătit.\" draggable=\"true\"><span class=\"alchemy-word-label\">Apă</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Lapte\" title=\"Lichid alimentar folosit ca băutură și ingredient lactat.\" draggable=\"true\"><span class=\"alchemy-word-label\">Lapte</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Sare\" title=\"Mineral alimentar folosit pentru gust și conservare.\" draggable=\"true\"><span class=\"alchemy-word-label\">Sare</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Cheag alimentar\" title=\"Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi.\" draggable=\"true\"><span class=\"alchemy-word-label\">Cheag alimentar</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Mălai\" title=\"Produs din măcinarea boabelor de porumb, folosit pentru mămăligă.\" draggable=\"true\"><span class=\"alchemy-word-label\">Mălai</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Cuptor de bucătărie\" title=\"Aparat sau instalație de bucătărie folosită la coacerea alimentelor.\" draggable=\"true\"><span class=\"alchemy-word-label\">Cuptor de bucătărie</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Ou\" title=\"Ingredient alimentar folosit la gătit, copt și preparate festive.\" draggable=\"true\"><span class=\"alchemy-word-label\">Ou</span></button></div></section></div><details class=\"alchemy-menu alchemy-explore-journal\"><summary>Rețetele mele · 0</summary><div class=\"alchemy-menu-content\"><p class=\"alchemy-inventory-note\">Prima rețetă apare aici când creezi un cuvânt nou.</p></div></details><details class=\"alchemy-menu\"><summary>Cum explorezi</summary><div class=\"alchemy-menu-content\"><p>Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.</p><p>Atinge două cuvinte sau trage unul peste altul. O pereche are aceeași rețetă indiferent de obiectivul ales.</p><p>Nu toate perechile au o rețetă. Încercările nu te costă nimic. Cere o idee pentru un rezultat apropiat, apoi perechea exactă dacă ai nevoie.</p><p>Cuvintele fără descoperiri noi sunt păstrate în „Toate”. Rețetele găsite apar în jurnal. Proviziile noi se deschid automat pe măsură ce descoperi.</p><p>Colecția se salvează în acest browser. Ștergerea datelor browserului șterge și salvarea locală.</p></div></details></div></div></div></div></div></div></div>\n  \n\n</body>"
+  },
+  {
+    "game": "explore",
+    "width": 320,
+    "stage": "intro",
+    "text": "←\nIeși\nAlchimie\nExplorează\nProvocări\nUN CUVÂNT DUCE LA ALTUL\nO lume de descoperit.\n\nAtinge două cuvinte și vezi ce creezi. Păstrezi fiecare descoperire și alegi singur ce explorezi mai departe.\n\nCuvânt\n+\nCuvânt\n→\n✦ Descoperire\nÎncepe explorarea →\n\nFără scor sau penalizări. Colecția se salvează pe acest dispozitiv. Obiectivele sunt opționale.",
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "label": "Ieși la lista de jocuri",
+        "cls": "roedu-btn roedu-btn--secondary roedu-btn--sm",
+        "x": 18,
+        "y": 23.5,
+        "w": 64,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "A",
+        "label": "Provocări",
+        "cls": "",
+        "x": 162,
+        "y": 90,
+        "w": 140,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Începe explorarea →",
+        "cls": "roedu-btn roedu-btn--primary roedu-btn--md",
+        "x": 37,
+        "y": 507.75,
+        "w": 190,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      }
+    ],
+    "scrollWidth": 320,
+    "scrolls": [],
+    "active": "<body>\n    <div id=\"root\"><div class=\"roedu-root\" style=\"--roedu-color-bg: #0d0b20; --roedu-color-surface: rgba(32, 28, 64, 0.66); --roedu-color-surface-muted: rgba(20, 17, 44, 0.55); --roedu-color-text: #f4f2ff; --roedu-color-text-muted: #a8a1cc; --roedu-color-border: rgba(168, 156, 236, 0.2); --roedu-color-primary: #ff5470; --roedu-color-primary-text: #2b0714; --roedu-color-accent: #ffd166; --roedu-color-danger: #ff4d6d; --roedu-color-success: #3ddc97; --roedu-color-focus: #ffd166; --roedu-font-body: 'Inter Variable', 'Inter', system-ui, sans-serif; --roedu-font-heading: 'Fredoka Variable', 'Fredoka', system-ui, sans-serif; --roedu-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; --roedu-font-size-xs: 0.75rem; --roedu-font-size-sm: 0.875rem; --roedu-font-size-md: 1rem; --roedu-font-size-lg: 1.25rem; --roedu-font-size-xl: 1.5rem; --roedu-font-size-xxl: 2rem; --roedu-radius-sm: 10px; --roedu-radius-md: 16px; --roedu-radius-lg: 24px; --roedu-radius-pill: 999px; --roedu-space-xs: 4px; --roedu-space-sm: 8px; --roedu-space-md: 16px; --roedu-space-lg: 24px; --roedu-space-xl: 32px; --roedu-space-xxl: 48px; --roedu-shadow-sm: 0 2px 10px rgba(4, 2, 18, 0.4); --roedu-shadow-md: 0 12px 32px -10px rgba(4, 2, 18, 0.6); --roedu-shadow-lg: 0 24px 64px -16px rgba(4, 2, 18, 0.8);\"><div class=\"app-shell\"><div class=\"account-bar\"></div><div class=\"app-notices\"><div class=\"roedu-toast-stack\" role=\"status\" aria-live=\"polite\"></div></div><div class=\"app-content\"><div class=\"screen\" style=\"opacity: 1; transform: none;\"><div class=\"screen-pad fill alchemy-screen alchemy-explore-screen\" aria-busy=\"false\" style=\"--game-shell-header-height: 52px;\"><div class=\"container col game-container alchemy-game\"><div class=\"row spread game-shell-header\" style=\"gap: 12px;\"><div class=\"row game-shell-main\" style=\"gap: 10px; align-items: center;\"><button type=\"button\" class=\"roedu-btn roedu-btn--secondary roedu-btn--sm\" aria-label=\"Ieși la lista de jocuri\"><span aria-hidden=\"true\">←</span> Ieși</button><strong class=\"game-shell-title\" style=\"font-family: var(--font-display); color: rgb(197, 160, 240); font-size: 1.05rem;\">Alchimie</strong></div></div><nav class=\"alchemy-modes\" aria-label=\"Modul Alchimie\"><span aria-current=\"page\">Explorează</span><a href=\"/alchimie?mode=challenges\" data-discover=\"true\">Provocări</a></nav><section class=\"alchemy-explore-intro\"><span class=\"alchemy-eyebrow\">UN CUVÂNT DUCE LA ALTUL</span><h1>O lume de descoperit.</h1><p>Atinge două cuvinte și vezi ce creezi. Păstrezi fiecare descoperire și alegi singur ce explorezi mai departe.</p><div class=\"alchemy-intro-example\" aria-label=\"Două cuvinte se combină într-o descoperire\"><span>Cuvânt</span><b>+</b><span>Cuvânt</span><b>→</b><span>✦ Descoperire</span></div><button type=\"button\" class=\"roedu-btn roedu-btn--primary roedu-btn--md\">Începe explorarea →</button><p class=\"alchemy-inventory-note\">Fără scor sau penalizări. Colecția se salvează pe acest dispozitiv. Obiectivele sunt opționale.</p></section></div></div></div></div></div></div></div>\n  \n\n</body>"
+  },
+  {
+    "game": "explore",
+    "width": 320,
+    "stage": "round",
+    "text": "←\nIeși\nAlchimie\n8 / 221 cuvinte\nExplorează\nProvocări\nEXPLOREAZĂ ÎN RITMUL TĂU\nBucătăria românească\n\nDupă încă 3 descoperiri primești provizii noi.\n\nObiectiv opțional\nExplorez liber\n\nAtinge un cuvânt, apoi altul. Se combină imediat.\n\n💡 O idee?\nGratuit\nCuvintele tale\n8 de explorat\nCaută și filtrează\nFăină\nApă\nLapte\nSare\nCheag alimentar\nMălai\nCuptor de bucătărie\nOu\nRețetele mele · 0\nCum explorezi",
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "label": "Ieși la lista de jocuri",
+        "cls": "roedu-btn roedu-btn--secondary roedu-btn--sm",
+        "x": 18,
+        "y": 23.5,
+        "w": 64,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "A",
+        "label": "Provocări",
+        "cls": "",
+        "x": 162,
+        "y": 90,
+        "w": 140,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "SUMMARY",
+        "label": "Obiectiv opțional\nExplorez liber",
+        "cls": "",
+        "x": 15,
+        "y": 281.53125,
+        "w": 290,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "SELECT",
+        "label": null,
+        "cls": "field",
+        "x": 27,
+        "y": 352.53125,
+        "w": 266,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "💡 O idee?",
+        "cls": "roedu-btn roedu-btn--secondary roedu-btn--md",
+        "x": 31,
+        "y": 407.53125,
+        "w": 115,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "SUMMARY",
+        "label": "Caută și filtrează",
+        "cls": "",
+        "x": 31,
+        "y": 500.53125,
+        "w": 258,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "INPUT",
+        "label": "Caută în colecție",
+        "cls": "field alchemy-inventory-search",
+        "x": 31,
+        "y": 544.53125,
+        "w": 258,
+        "h": 44,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "INPUT",
+        "label": null,
+        "cls": "",
+        "x": 35,
+        "y": 608.53125,
+        "w": 20,
+        "h": 20,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Făină",
+        "cls": "chip alchemy-word",
+        "x": 31,
+        "y": 552.53125,
+        "w": 124,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Apă",
+        "cls": "chip alchemy-word",
+        "x": 165,
+        "y": 552.53125,
+        "w": 124,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Lapte",
+        "cls": "chip alchemy-word",
+        "x": 31,
+        "y": 624.53125,
+        "w": 124,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Sare",
+        "cls": "chip alchemy-word",
+        "x": 165,
+        "y": 624.53125,
+        "w": 124,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Cheag alimentar",
+        "cls": "chip alchemy-word",
+        "x": 31,
+        "y": 696.53125,
+        "w": 124,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Mălai",
+        "cls": "chip alchemy-word",
+        "x": 165,
+        "y": 696.53125,
+        "w": 124,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Cuptor de bucătărie",
+        "cls": "chip alchemy-word",
+        "x": 31,
+        "y": 768.53125,
+        "w": 124,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Ou",
+        "cls": "chip alchemy-word",
+        "x": 165,
+        "y": 768.53125,
+        "w": 124,
+        "h": 62,
+        "disabled": false,
+        "focus": false
+      },
+      {
+        "tag": "SUMMARY",
+        "label": "Rețetele mele · 0",
+        "cls": "",
+        "x": 14,
+        "y": 859.53125,
+        "w": 292,
+        "h": 44,
+        "focus": false
+      },
+      {
+        "tag": "SUMMARY",
+        "label": "Cum explorezi",
+        "cls": "",
+        "x": 14,
+        "y": 915.53125,
+        "w": 292,
+        "h": 44,
+        "focus": false
+      }
+    ],
+    "scrollWidth": 320,
+    "scrolls": [
+      {
+        "tag": "DIV",
+        "cls": "screen-pad fill alchemy-screen alchemy-explore-screen",
+        "scrollTop": 0,
+        "scrollHeight": 1008,
+        "clientHeight": 844
+      }
+    ],
+    "active": "<body>\n    <div id=\"root\"><div class=\"roedu-root\" style=\"--roedu-color-bg: #0d0b20; --roedu-color-surface: rgba(32, 28, 64, 0.66); --roedu-color-surface-muted: rgba(20, 17, 44, 0.55); --roedu-color-text: #f4f2ff; --roedu-color-text-muted: #a8a1cc; --roedu-color-border: rgba(168, 156, 236, 0.2); --roedu-color-primary: #ff5470; --roedu-color-primary-text: #2b0714; --roedu-color-accent: #ffd166; --roedu-color-danger: #ff4d6d; --roedu-color-success: #3ddc97; --roedu-color-focus: #ffd166; --roedu-font-body: 'Inter Variable', 'Inter', system-ui, sans-serif; --roedu-font-heading: 'Fredoka Variable', 'Fredoka', system-ui, sans-serif; --roedu-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; --roedu-font-size-xs: 0.75rem; --roedu-font-size-sm: 0.875rem; --roedu-font-size-md: 1rem; --roedu-font-size-lg: 1.25rem; --roedu-font-size-xl: 1.5rem; --roedu-font-size-xxl: 2rem; --roedu-radius-sm: 10px; --roedu-radius-md: 16px; --roedu-radius-lg: 24px; --roedu-radius-pill: 999px; --roedu-space-xs: 4px; --roedu-space-sm: 8px; --roedu-space-md: 16px; --roedu-space-lg: 24px; --roedu-space-xl: 32px; --roedu-space-xxl: 48px; --roedu-shadow-sm: 0 2px 10px rgba(4, 2, 18, 0.4); --roedu-shadow-md: 0 12px 32px -10px rgba(4, 2, 18, 0.6); --roedu-shadow-lg: 0 24px 64px -16px rgba(4, 2, 18, 0.8);\"><div class=\"app-shell\"><div class=\"account-bar\"></div><div class=\"app-notices\"><div class=\"roedu-toast-stack\" role=\"status\" aria-live=\"polite\"></div></div><div class=\"app-content\"><div class=\"screen\" style=\"opacity: 1; transform: none;\"><div class=\"screen-pad fill alchemy-screen alchemy-explore-screen\" aria-busy=\"false\" style=\"--game-shell-header-height: 52px;\"><div class=\"container col game-container alchemy-game\"><div class=\"row spread game-shell-header\" style=\"gap: 12px;\"><div class=\"row game-shell-main\" style=\"gap: 10px; align-items: center;\"><button type=\"button\" class=\"roedu-btn roedu-btn--secondary roedu-btn--sm\" aria-label=\"Ieși la lista de jocuri\"><span aria-hidden=\"true\">←</span> Ieși</button><strong class=\"game-shell-title\" style=\"font-family: var(--font-display); color: rgb(197, 160, 240); font-size: 1.05rem;\">Alchimie</strong></div><div class=\"game-shell-status\"><span class=\"alchemy-collection-count\" aria-label=\"Progresul colecției\">8 / 221 cuvinte</span></div></div><nav class=\"alchemy-modes\" aria-label=\"Modul Alchimie\"><span aria-current=\"page\">Explorează</span><a href=\"/alchimie?mode=challenges\" data-discover=\"true\">Provocări</a></nav><section class=\"alchemy-world-heading\" aria-label=\"Lumea de explorat\"><div><span class=\"alchemy-eyebrow\">EXPLOREAZĂ ÎN RITMUL TĂU</span><h1>Bucătăria românească</h1></div><progress aria-label=\"Colecție descoperită\" value=\"8\" max=\"221\"></progress><p class=\"alchemy-pantry-progress\">După încă 3 descoperiri primești provizii noi.</p></section><details class=\"alchemy-explore-goal\"><summary><span>Obiectiv opțional</span><strong>Explorez liber</strong></summary><div class=\"alchemy-goal-content\"><label for=\"alchemy-optional-goal\">Obiectiv opțional</label><select id=\"alchemy-optional-goal\" class=\"field\"><option value=\"\">Explorez liber</option><option value=\"paine\">Prima pâine</option><option value=\"bulz\">Gust de stână</option><option value=\"muraturi\">Cămara pentru iarnă</option><option value=\"ciorba-fasole\">O ciorbă de casă</option><option value=\"cozonac\">Cozonacul de sărbătoare</option><option value=\"papanasi\">Papanași pentru desert</option><option value=\"inghetata\">Un desert rece</option><option value=\"diplomat\">Tortul de sărbătoare</option><option value=\"sarmale\">Sarmale pentru masă</option><option value=\"sandvis\">O gustare din ce ai descoperit</option><option value=\"clatite\">Clătite la tigaie</option><option value=\"pizza\">Pizza de casă</option><option value=\"snitel\">Crusta crocantă</option><option value=\"zacusca\">Încă un borcan în cămară</option><option value=\"urda\">Din zer, o nouă brânză</option><option value=\"mucenici\">Opturi dulci</option><option value=\"cornulete\">Cornulețe fragede</option><option value=\"halva\">Dulce din semințe</option><option value=\"placinte\">Plăcinte dulci sau sărate</option><option value=\"pepene-murat\">Pepeni pentru cămara de iarnă</option><option value=\"branza-burduf\">Brânză frământată la stână</option><option value=\"langosi\">Turte calde cu usturoi</option><option value=\"merdenea\">Foi fragede cu brânză</option><option value=\"savarina\">Frișcă și prăjitură însiropată</option><option value=\"ecler\">O nouă idee pentru crema de vanilie</option><option value=\"chec\">Checul din tava de acasă</option><option value=\"briose\">Prăjituri în forme mici</option><option value=\"mici\">Mici pe grătar</option><option value=\"oua-rosii\">Culori din coji de ceapă</option><option value=\"salata-boeuf\">Salata mesei de sărbătoare</option><option value=\"sushi\">Orezul întâlnește peștele</option><option value=\"ciocolata-dubai\">Fistic și ciocolată crocantă</option></select></div></details><div class=\"alchemy-workspace\" style=\"--alchemy-bench-clearance: 141px;\"><div class=\"card alchemy-bench alchemy-bench--pinned\" aria-label=\"Alambic\"><div class=\"alchemy-craft-cue\"><p class=\"alchemy-craft-prompt\">Atinge un cuvânt, apoi altul. Se combină imediat.</p></div><div class=\"alchemy-assistance\"><button type=\"button\" class=\"roedu-btn roedu-btn--secondary roedu-btn--md\">💡 O idee?</button><span>Gratuit</span></div></div><section tabindex=\"-1\" class=\"card col alchemy-inventory-panel\" aria-label=\"Colecția ta\"><div class=\"alchemy-panel-heading\"><h2>Cuvintele tale</h2><span class=\"alchemy-selection-count\">8 de explorat</span></div><details class=\"alchemy-library-tools\"><summary>Caută și filtrează</summary><div class=\"alchemy-explore-library-tools\"><input class=\"field alchemy-inventory-search\" placeholder=\"Caută în colecție…\" aria-label=\"Caută în colecție\" autocomplete=\"off\" spellcheck=\"false\" type=\"search\" value=\"\"><label class=\"alchemy-show-collection\"><input type=\"checkbox\">Toate (8)</label></div></details><div class=\"alchemy-inventory-grid\"><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Făină\" title=\"Concept cotidian din grupul «ingrediente de bază»: Făină.\" draggable=\"true\"><span class=\"alchemy-word-label\">Făină</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Apă\" title=\"Lichid de băut și ingredient de bază în gătit.\" draggable=\"true\"><span class=\"alchemy-word-label\">Apă</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Lapte\" title=\"Lichid alimentar folosit ca băutură și ingredient lactat.\" draggable=\"true\"><span class=\"alchemy-word-label\">Lapte</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Sare\" title=\"Mineral alimentar folosit pentru gust și conservare.\" draggable=\"true\"><span class=\"alchemy-word-label\">Sare</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Cheag alimentar\" title=\"Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi.\" draggable=\"true\"><span class=\"alchemy-word-label\">Cheag alimentar</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Mălai\" title=\"Produs din măcinarea boabelor de porumb, folosit pentru mămăligă.\" draggable=\"true\"><span class=\"alchemy-word-label\">Mălai</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Cuptor de bucătărie\" title=\"Aparat sau instalație de bucătărie folosită la coacerea alimentelor.\" draggable=\"true\"><span class=\"alchemy-word-label\">Cuptor de bucătărie</span></button><button type=\"button\" class=\"chip alchemy-word\" aria-pressed=\"false\" aria-label=\"Ou\" title=\"Ingredient alimentar folosit la gătit, copt și preparate festive.\" draggable=\"true\"><span class=\"alchemy-word-label\">Ou</span></button></div></section></div><details class=\"alchemy-menu alchemy-explore-journal\"><summary>Rețetele mele · 0</summary><div class=\"alchemy-menu-content\"><p class=\"alchemy-inventory-note\">Prima rețetă apare aici când creezi un cuvânt nou.</p></div></details><details class=\"alchemy-menu\"><summary>Cum explorezi</summary><div class=\"alchemy-menu-content\"><p>Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.</p><p>Atinge două cuvinte sau trage unul peste altul. O pereche are aceeași rețetă indiferent de obiectivul ales.</p><p>Nu toate perechile au o rețetă. Încercările nu te costă nimic. Cere o idee pentru un rezultat apropiat, apoi perechea exactă dacă ai nevoie.</p><p>Cuvintele fără descoperiri noi sunt păstrate în „Toate”. Rețetele găsite apar în jurnal. Proviziile noi se deschid automat pe măsură ce descoperi.</p><p>Colecția se salvează în acest browser. Ștergerea datelor browserului șterge și salvarea locală.</p></div></details></div></div></div></div></div></div></div>\n  \n\n</body>"
+  }
+]

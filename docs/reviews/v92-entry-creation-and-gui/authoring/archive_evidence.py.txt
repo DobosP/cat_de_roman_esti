@@ -1,0 +1,123 @@
+"""Copy an explicit compact evidence set byte-for-byte; never modify review payloads."""
+from pathlib import Path
+from collections import Counter
+import hashlib,json
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-02')
+SCRATCH=Path('/home/dobo/work/_temp/feat__v92-entry-creation-02')
+ARCHIVE=ROOT/'docs/reviews/v92-entry-creation-and-gui'
+COPIES={}
+def add(source,destination=None):
+ destination=destination or source
+ assert destination not in COPIES
+ COPIES[destination]=source
+
+for category in ['geografie','literatura','muzica','personalitati','viata_de_roman']:
+ for name in ['candidates.json','verify_factual.json','verify_quality.json']:
+  add(f'session-02/pack-import/{category}/{name}',f'pack/raw/{category}/{name}')
+for source,destination in {
+ 'session-02/pack-import/curation_report.txt':'pack/curation_report.txt',
+ 'session-02/pack-import.log':'pack/import.log',
+ 'session-02/pack-promotion.log':'pack/promotion.log',
+ 'session-02/pack-critique.log':'pack/critique.log',
+ 'session-02/pack-artifact.log':'pack/artifact-build.log',
+ 'gui-critique/content-quality/pack-analyst.json':'pack/analyst.json',
+ 'gui-critique/content-quality/pack-analyst-binding-check.json':'pack/analyst-binding-check.json',
+ 'gui-critique/content-quality/pack-quality-notes.md':'pack/quality-notes.md',
+ 'verifier/pack-verifier.json':'pack/verifier.json',
+ 'verifier/pack-final-independent-receipt.json':'pack/independent-final-receipt.json',
+ 'verifier/pack-independent-api.json':'pack/independent-api.json',
+ 'author/pack-editorial-notes-verified-urls.json':'pack/author/editorial-notes.json',
+ 'author/source-url-corrections.json':'pack/author/source-url-corrections.json',
+ 'author/contexto-author-probes.json':'pack/author/contexto-probes.json',
+ 'author/pack-preview-lints.json':'pack/author/preview-lints.json',
+ 'author/author_pack.py':'pack/author/author_pack.py.txt',
+ 'author/rejected-conexiuni-drafts/candidates.json':'pack/author/rejected-conexiuni-drafts/candidates.json',
+ 'author/rejected-conexiuni-drafts/preview-lints.json':'pack/author/rejected-conexiuni-drafts/preview-lints.json',
+ 'session-02/quick-full-candidate.json':'quick/candidate.json',
+ 'verifier/quick-full-factual.json':'quick/factual-review.json',
+ 'gui-critique/content-quality/quick-full-quality.json':'quick/quality-review.json',
+ 'verifier/quick-final-factual.json':'quick/final-factual.json',
+ 'gui-critique/content-quality/quick-final-quality.json':'quick/final-quality.json',
+ 'session-02/quick-live-audit.json':'quick/live-audit.json',
+ 'author/quick-candidates-v2.json':'quick/raw/candidates-v2.json',
+ 'author/quick-candidates.json':'quick/raw/candidates-original.json',
+ 'author/quick-label-correction.json':'quick/raw/label-correction.json',
+ 'author/quick-author-audit-v2.json':'quick/raw/author-audit.json',
+ 'verifier/quick-raw-factual.json':'quick/raw/factual-original.json',
+ 'verifier/quick-raw-factual-v2.json':'quick/raw/factual-v2.json',
+ 'gui-critique/content-quality/quick-quality-v2.json':'quick/raw/quality-v2.json',
+ 'gui-critique/content-quality/quick-quality-inheritance.json':'quick/quality-inheritance.json',
+ 'verifier/quick-independent-checks.json':'quick/independent-checks.json',
+ 'verifier/quick-independent-final-api.json':'quick/independent-final-api.json',
+ 'gui-critique/content-quality/quick-independent-live-audit.json':'quick/independent-quality-live-audit.json',
+ 'gui-critique/content-quality/quick-final-quality-independent-check.json':'quick/independent-quality-final-check.json',
+ 'session-02/world-candidate-final.json':'alchimie/candidate.json',
+ 'verifier/world-factual-final.json':'alchimie/factual-review.json',
+ 'session-02/world-quality-final.json':'alchimie/quality-review.json',
+ 'verifier/world-final-factual-final.json':'alchimie/final-factual.json',
+ 'session-02/world-final-quality-final.json':'alchimie/final-quality.json',
+ 'session-02/world-live-audit-final.json':'alchimie/live-audit.json',
+ 'author/alchimie-candidates.json':'alchimie/raw/candidates.json',
+ 'verifier/alchimie-raw-factual.json':'alchimie/raw/factual-review.json',
+ 'session-02/alchimie-raw-quality.json':'alchimie/raw/quality-review.json',
+ 'verifier/world-independent-api-final.json':'alchimie/independent-api.json',
+ 'author/author_entries.py':'authoring/author_entries.py.txt',
+ 'author/manifest.json':'authoring/proposed-batch-manifest.json',
+ 'author/build_author_manifest.py':'authoring/build_author_manifest.py.txt',
+ 'author/archive_evidence.py':'authoring/archive_evidence.py.txt',
+ 'author/build_session02_history_receipt.py':'authoring/build_session02_history_receipt.py.txt',
+ 'author/history-tests-final.log':'history-focused-tests.log',
+ 'gui-critique/critique.md':'gui/critique.md',
+ 'gui-critique/verification.json':'gui/verification.json',
+ 'gui-critique/captures.json':'gui/captures.json',
+ 'gui-critique/after/captures.json':'gui/after/captures.json',
+ 'gui-critique/journeys.json':'gui/journeys.json',
+ 'gui-critique/exploration-depth.json':'gui/exploration-depth.json',
+ 'gui-critique/after/exploration-depth.json':'gui/after/exploration-depth.json',
+ 'gui-critique/explore-320-round.png':'gui/explore-320-round.png',
+ 'gui-critique/after/explore-320-round.png':'gui/after/explore-320-round.png',
+ 'gui-critique/exploration-depth-bottom-combine.png':'gui/exploration-depth-bottom-combine.png',
+ 'gui-critique/after/exploration-depth-bottom-combine.png':'gui/after/exploration-depth-bottom-combine.png',
+ 'gui-critique/lant-390-hint-one.png':'gui/lant-390-hint-one.png',
+ 'gui-critique/lant-390-hint-two.png':'gui/lant-390-hint-two.png',
+ 'verifier/lant-earned-hint-audit.json':'gui/lant-hint-before.json',
+ 'verifier/lant-earned-hint-after.json':'gui/lant-hint-after.json',
+ 'verifier/lant-help-change-verification.json':'gui/lant-hint-change-verification.json',
+}.items():add(source,destination)
+for path in sorted((SCRATCH/'session-02/pack-verdicts').rglob('*.json')):
+ add(str(path.relative_to(SCRATCH)),str(Path('pack/gate')/path.relative_to(SCRATCH/'session-02/pack-verdicts')))
+# Preserve the entire earlier author queue (small sources/notes/candidates only), clearly unapproved.
+for subdir in ['pack','quick','alchimie']:
+ for path in sorted((SCRATCH/'session-02'/subdir).rglob('*')):
+  if not path.is_file() or '__pycache__' in path.parts or path.suffix not in {'.json','.md','.py'}:continue
+  destination=Path('unapproved-author-backlog')/subdir/path.relative_to(SCRATCH/'session-02'/subdir)
+  if path.suffix=='.py':destination=destination.with_name(destination.name+'.txt')
+  add(str(path.relative_to(SCRATCH)),str(destination))
+for name in ['README.md','batch-index.json','session-start.json','final-author-verification.json','build_batch_index.py']:
+ destination='unapproved-author-backlog/'+name+('.txt' if name.endswith('.py') else '')
+ add('session-02/'+name,destination)
+
+def sha(blob):return hashlib.sha256(blob).hexdigest()
+def main():
+ receipt=ARCHIVE/'artifact-delta.json'
+ assert sha(receipt.read_bytes())=='9133bcdef3ad91679208a9b60ef690aaa6df58b0333242ac65a70b8af16f732b'
+ entries=[];totals=Counter()
+ for destination,source in sorted(COPIES.items()):
+  origin=SCRATCH/source;blob=origin.read_bytes();target=ARCHIVE/destination
+  target.parent.mkdir(parents=True,exist_ok=True)
+  if target.exists():assert target.read_bytes()==blob,f'Refuse to replace differing evidence: {target}'
+  else:target.write_bytes(blob)
+  assert target.read_bytes()==blob
+  entries.append({'path':destination,'bytes':len(blob),'sha256':sha(blob),'source_path':str(origin),'source_sha256':sha(blob),'classification':'unapproved author backlog' if destination.startswith('unapproved-author-backlog/') else 'review evidence'})
+  totals[Path(destination).parts[0]]+=len(blob)
+ # Copy a script manifest only after all file additions above are declared.
+ installed=[]
+ for name in ['quick_games_v92.json','alchimie_discovery_world_v92.json']:
+  path=ROOT/'cat_de_roman_esti/fixtures'/name
+  installed.append({'path':str(path.relative_to(ROOT)),'bytes':path.stat().st_size,'sha256':sha(path.read_bytes()),'duplicate_proposal_archived':False})
+ for entry in entries:assert sha(Path(entry['source_path']).read_bytes())==entry['sha256'],'Source changed during archive copy'
+ result={'kind':'entry-creation-and-gui-evidence-manifest-v1','baseline_commit':'c0ead5eb524fe40ec4a1760488badec395c0ae0c','archive_scope':'14 installed additions: five curated records, six quick boards, three reuse recipes. The earlier17-entry author queue remains unapproved backlog and is not counted again.','copy_policy':'Exact source bytes; review JSON never edited. Python source snapshots use .py.txt to keep archived authors outside runtime/lint discovery. Screenshots are original selected captures.','coverage':'Copied evidence and pre-existing generated inverse receipt. README, this manifest and any later root integration-validation records are outside the copied-file hash set.','copied_file_count':len(entries),'copied_bytes':sum(e['bytes'] for e in entries),'bytes_by_section':dict(totals),'files':entries,'generated_receipt':{'path':'artifact-delta.json','bytes':receipt.stat().st_size,'sha256':sha(receipt.read_bytes()),'source_path':str(SCRATCH/'author/build_session02_history_receipt.py'),'baseline_commit':'c0ead5eb524fe40ec4a1760488badec395c0ae0c'},'installed_catalogs':installed,'final_integration_checks':'pending root validation; this manifest records copying and content review evidence only'}
+ (ARCHIVE/'evidence-manifest.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+ print(json.dumps({'copied_files':len(entries),'copied_bytes':result['copied_bytes'],'receipt_bytes':receipt.stat().st_size,'sections':dict(totals),'manifest_sha256':sha((ARCHIVE/'evidence-manifest.json').read_bytes())},indent=2))
+
+if __name__=='__main__':main()

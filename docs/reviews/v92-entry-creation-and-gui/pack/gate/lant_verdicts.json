@@ -1,0 +1,75 @@
+{
+ "game": "lant",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_geografie_365",
+   "ct_muzica_366",
+   "ct_personalitati_367",
+   "cx_viata_de_roman_368",
+   "lt_literatura_236"
+  ]
+ },
+ "verdicts": {
+  "lt_literatura_236": "promote"
+ },
+ "perItem": [
+  {
+   "id": "lt_literatura_236",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:3f2050b0386164c871769560215ec69e7bae26f6ab4c28ada70dae23aee0ec74",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_literatura_236",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:3f2050b0386164c871769560215ec69e7bae26f6ab4c28ada70dae23aee0ec74",
+    "rationale": "Promote easy Capra cu trei iezi → Amintiri din copilărie. The specific shared-author bridge through Ion Creangă supplies the meaningful association; Carte and Poveste are additional understandable routes rather than the sole basis of play. Three first hops and three shortest-layer nodes preserve real alternatives without a forced intermediary. Familiar school and childhood titles justify overriding the low numerical target-salience warning. Reviewed neutral display captions and topology remain exact. No strict FAIL occurs. The two separately dropped personality routes remain rejected for repeating broad classifications.",
+    "sources": [
+     "https://ro.wikisource.org/wiki/Capra_cu_trei_iezi",
+     "https://ro.wikisource.org/wiki/Amintiri_din_copil%C4%83rie"
+    ]
+   },
+   "verifier_review": {
+    "game": "lant",
+    "id": "lt_literatura_236",
+    "rationale": "The public-domain works identify Ion Creangă as author; Capra cu trei iezi and Amintiri din copilărie are distinct familiar works. An author bridge is specific and legible, with broader story/book routes still understandable. All3representative routes/6moves replay at par1000 and GET retains earned captions. The salience0.2998 warning for Amintiri is contradicted by enduring educational/cultural presence, not waived merely to fill a quota. Sources: https://ro.wikisource.org/wiki/Capra_cu_trei_iezi ; https://ro.wikisource.org/wiki/Amintiri_din_copil%C4%83rie ; https://www.muzeulliteraturiiiasi.ro/categorie-produs/limba-romana/page/3/?product_count=24&product_view=list . The exact current pending dossier was independently regenerated and matches root bytes, including all visible identities, routes, predicates and lint evidence from raw review. A1-A7 and the applicable B/C/D criteria have no unresolved blocker for this retained record. Rejecting the two weak raw sport/music ladders is not undone. This is an agent editorial verdict supported by source checks and actual API evidence, not human enjoyment or deployment evidence. PROMOTE only this exact binding.",
+    "review_binding": "sha256:3f2050b0386164c871769560215ec69e7bae26f6ab4c28ada70dae23aee0ec74",
+    "sources": [
+     "https://ro.wikisource.org/wiki/Capra_cu_trei_iezi",
+     "https://ro.wikisource.org/wiki/Amintiri_din_copil%C4%83rie",
+     "https://www.muzeulliteraturiiiasi.ro/categorie-produs/limba-romana/page/3/?product_count=24&product_view=list"
+    ],
+    "verdict": "promote"
+   }
+  }
+ ],
+ "coverage": {
+  "total": 1,
+  "verified": 1,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v92-entry-creation-02/gui-critique/content-quality/pack-analyst.json",
+   "sha256": "sha256:3bac8dbc05044d3a224541fdafdd20656636ba27437b46eeaff3d0165dc2c93e",
+   "reviewer": "v92-session02-independent-pack-analyst-gui-critique",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v92-entry-creation-02/verifier/pack-verifier.json",
+   "sha256": "sha256:a8b4301ca75b03d543f73b05522987947076c7b6dd3ce7c9b38174c0d56f91db",
+   "reviewer": "content_verifier",
+   "role": "verifier"
+  }
+ }
+}

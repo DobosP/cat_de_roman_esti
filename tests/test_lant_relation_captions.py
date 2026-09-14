@@ -57,3 +57,33 @@ def test_reverse_geographic_route_has_correct_captions_in_move_and_get():
         ]
     finally:
         L.store.delete(gid)
+
+
+def test_generic_direction_gives_useful_options_in_one_request_and_keeps_free_par_score():
+    session = L.LantSession(
+        start="n_v24_home_appliances_frigider", target="n_v3gas_inghetata",
+        optimal=2, difficulty="usor", chain=["n_v24_home_appliances_frigider"],
+    )
+    gid = L.store.create(session)
+    client = Client()
+    root = f"/api/wordgames/lant/games/{gid}"
+    try:
+        first = client.post(root + "/hint").json()
+        assert first["stage"] == "alternatives" and first["hint"] is None
+        assert 1 <= len(first["alternatives_choices"]) <= 2
+        assert all(set(choice) == {"label", "relation"}
+                   for choice in first["alternatives_choices"])
+        assert session.hint_requests == 2 and session.moves == 0
+        assert client.get(root).json()["earned_hint"] == first
+        assert session.hint_requests == 2
+        for _ in range(2):
+            hint = client.post(root + "/hint").json()
+            assert hint["stage"] == "hop"
+            state = client.post(root + "/move", {"text": hint["hint"]["label"]},
+                                content_type="application/json").json()
+            assert state["ok"]
+        assert state["won"] and state["moves"] == 2 and state["score"] == 1000
+        assert session.hint_requests == 3
+        assert client.get(root).json()["score"] == 1000
+    finally:
+        L.store.delete(gid)

@@ -1,0 +1,92 @@
+{
+  "status": "unapproved",
+  "baseline_commit": "c0ead5eb524fe40ec4a1760488badec395c0ae0c",
+  "baseline_artifacts_unchanged": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "62c1eaaa7bb72674cf59a66f9b543d911749d52973155f6b201d796d97d6ea4a",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109"
+  },
+  "author_source_sha256": "18c0627386d342650e6e019dcac0eff8fe6218785455a53af4cb2698e2515996",
+  "counts": {
+    "conexiuni": 2,
+    "contexto": 3,
+    "lant": 3
+  },
+  "candidate_files": {
+    "candidates/arta_cultura/candidates.json": "d7a584bcb6eb6e8f10f60a0165f5dc32c6c42e0bca367d9d60a84cfc8b11db75",
+    "candidates/istorie/candidates.json": "3a03ee8e8e599af885476da67f3277e6a4fe0ce6ba84a8daab928051795f74cf",
+    "candidates/literatura/candidates.json": "838a54ccedf4eba05332ee1fc6748eeb70102b7813899d8818413dc9b1c1449d",
+    "candidates/personalitati/candidates.json": "0c1c37d6c0d7a44e21965baffcfacdeb34d7b9d252570271e084bfc8eb5394b2",
+    "candidates/viata_de_roman/candidates.json": "3c908d14b930e4a2839b9a3103ba4b93af2d7352f8dafad6b53b729fcd6d56dd"
+  },
+  "strict_preview_failures": 0,
+  "findings": {
+    "preview_s02_literatura_contexto_01": {
+      "game": "contexto",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Ion Creangă salience 0.56 < 0.60 (usor floor)"
+        }
+      ]
+    },
+    "preview_s02_istorie_contexto_01": {
+      "game": "contexto",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Alba Iulia salience 0.39 < 0.60 (usor floor)"
+        }
+      ]
+    },
+    "preview_s02_personalitati_lant_01": {
+      "game": "lant",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Vioară salience 0.19 < 0.60 (usor floor)"
+        }
+      ]
+    },
+    "preview_s02_arta_cultura_lant_01": {
+      "game": "lant",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Poarta Sărutului salience 0.36 < 0.60 (usor floor)"
+        },
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Oltenia salience 0.42 < 0.60 (usor floor)"
+        }
+      ]
+    },
+    "preview_s02_istorie_lant_01": {
+      "game": "lant",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Bucovina salience 0.38 < 0.60 (usor floor)"
+        }
+      ]
+    }
+  },
+  "contexto_targets_solved": 3,
+  "lant_routes_solved": 9,
+  "preview_ids_are_not_allocated_pack_ids": true
+}

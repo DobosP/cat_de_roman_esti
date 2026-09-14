@@ -1,0 +1,53 @@
+"""Index already-authored candidates without writing any served fixture or approval."""
+
+import hashlib
+import json
+from collections import Counter
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+REPO = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-02')
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+entries = []
+files = {}
+for path in sorted((HERE / 'pack/candidates').glob('*/candidates.json')):
+    relative = str(path.relative_to(HERE))
+    files[relative] = sha(path)
+    data = json.loads(path.read_text())
+    assert data['nodes'] == data['edges'] == data['alchimie'] == []
+    for game in ['conexiuni', 'contexto', 'lant']:
+        for index, row in enumerate(data[game]):
+            entries.append({'game': game, 'candidate_file': relative,
+                            'ref': f'{game}[{index}]', 'record': row})
+for lane, key, game in [('alchimie', 'proposals', 'alchimie'), ('quick', 'boards', None)]:
+    path = HERE / lane / 'candidates.json'
+    relative = str(path.relative_to(HERE))
+    files[relative] = sha(path)
+    for row in json.loads(path.read_text())[key]:
+        entries.append({'game': game or row['game'], 'candidate_file': relative,
+                        'ref': row['id'], 'record': row})
+counts = dict(sorted(Counter(row['game'] for row in entries).items()))
+assert counts == {'alchimie': 3, 'conexiuni': 2, 'contexto': 3,
+                  'intrusul': 3, 'lant': 3, 'perechi': 3}
+sources = ['build_batch_index.py', 'pack/author_candidates.py',
+           'alchimie/author_candidates.py', 'quick/candidate_source.py']
+protected = ['kg_sample.json', 'games_pack.json', 'derived_catalog_v38.json',
+             'quick_games_v92.json', 'alchimie_discovery_world_v92.json',
+             'alchimie_recipe_extensions_v92.json']
+report = {'kind': 'game-entry-author-batch-index-v1',
+          'status': 'unapproved; independent review required; none installed',
+          'baseline_commit': 'c0ead5eb524fe40ec4a1760488badec395c0ae0c',
+          'counts': counts, 'total_candidate_entries': len(entries),
+          'round_or_target_candidates': 14, 'exploration_recipe_candidates': 3,
+          'candidate_file_sha256': files,
+          'author_source_sha256': {path: sha(HERE / path) for path in sources},
+          'served_artifact_sha256': {name: sha(REPO / 'cat_de_roman_esti/fixtures' / name)
+                                    for name in protected},
+          'entries': entries}
+(HERE / 'batch-index.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+print(json.dumps({'counts': counts, 'total': len(entries), 'status': report['status']}, indent=2))

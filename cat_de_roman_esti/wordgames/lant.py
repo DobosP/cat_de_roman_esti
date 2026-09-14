@@ -144,7 +144,7 @@ class LantSession:
     # Player-picked board theme + curated-pack provenance (None for mined games).
     category: str | None = None
     pack_id: str | None = None
-    # Voluntary help consumed this session, not position on the chain: it escalates with
+    # Voluntary help level reached this session, not position on the chain: it escalates with
     # every hint request and persists across moves and undo (a capped scalar, never a
     # per-position map, so it cannot retain O(n²) tuple keys in the session). It resets
     # only when a fresh game is created.
@@ -1050,15 +1050,19 @@ class HintView(ContractAPIView):
             }
             if asks_here == 1:
                 relation = _short_relation(cur, best)
-                return _earned_hint_response(
-                    session,
-                    {
-                        **common,
-                        "stage": "direction",
-                        "relation": relation,
-                        "message": f"Direcție: caută o legătură „{relation}”.",
-                    }
-                )
+                if relation != "legătură directă":
+                    return _earned_hint_response(
+                        session,
+                        {
+                            **common,
+                            "stage": "direction",
+                            "relation": relation,
+                            "message": f"Direcție: caută o legătură „{relation}”.",
+                        }
+                    )
+                # A generic caption cannot guide a choice. Skip that empty stage
+                # and retain the useful help level, including across GET/move/undo.
+                session.hint_requests = asks_here = 2
             if asks_here == 2:
                 near = (
                     _distinct_hops(

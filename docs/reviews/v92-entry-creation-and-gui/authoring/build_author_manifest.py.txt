@@ -1,0 +1,18 @@
+"""Collect exact frozen candidate bindings and prospective import IDs, without approving."""
+from pathlib import Path
+import json,hashlib,subprocess,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-02');OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+from import_candidates import initial_item_numbers,PREFIX
+base=json.loads(subprocess.check_output(['git','show','c0ead5e:cat_de_roman_esti/fixtures/games_pack.json'],cwd=ROOT));numbers=initial_item_numbers(base);proposed=[]
+paths=sorted((OUT/'pack-candidates').glob('*/candidates.json'))
+for path in paths:
+ category=path.parent.name;raw=json.loads(path.read_bytes())
+ for game in ['conexiuni','contexto','lant','alchimie']:
+  for index,row in enumerate(raw[game]):
+   proposed.append({'category':category,'ref':f'{game}[{index}]','game':game,'prospective_id_if_all_accepted':f'{PREFIX[game]}_{category}_{numbers[game]:03d}','record':row});numbers[game]+=1
+q=json.loads((OUT/'quick-candidates-v2.json').read_bytes());a=json.loads((OUT/'alchimie-candidates.json').read_bytes())
+paths += [OUT/'quick-candidates-v2.json',OUT/'alchimie-candidates.json']
+result={'kind':'entry-session-author-manifest-v1','baseline':'c0ead5e','authority':'Authored proposals only; no self-approval, import, promotion or served fixture mutation.','count':len(proposed)+len(q['boards'])+len(a['recipes']),'per_game':{'conexiuni':1,'contexto':3,'lant':3,'intrusul':3,'perechi':3,'alchimie_recipes':3},'candidate_files':{str(p.relative_to(OUT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},'proposed_pack_ids':proposed,'quick_ids':[r['id'] for r in q['boards']],'recipe_ids':[r['id'] for r in a['recipes']],'preservation':{'new_shared_nodes':0,'new_shared_edges':0,'old_pack_records':sum(len(base[g]) for g in PREFIX),'old_quick_board_records':381,'old_world_concepts':221,'old_world_recipes':285,'goals_unchanged':32},'quality_evidence':['pack-preview-dossiers.json','pack-preview-lints.json','contexto-author-probes.json','quick-author-audit-v2.json','quick-label-correction.json','pack-editorial-notes-verified-urls.json','source-url-corrections.json'],'rejected_author_drafts':['rejected-conexiuni-drafts/preview-lints.json']}
+(OUT/'manifest.json').write_text(json.dumps(result,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+print(json.dumps({'count':result['count'],'proposed_pack_ids':[r['prospective_id_if_all_accepted'] for r in proposed],'manifest_sha256':hashlib.sha256((OUT/'manifest.json').read_bytes()).hexdigest()},indent=2))

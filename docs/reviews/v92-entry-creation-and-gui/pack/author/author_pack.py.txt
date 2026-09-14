@@ -1,0 +1,70 @@
+"""Create only raw pending candidates and private dossiers; no repo mutation or approval."""
+from pathlib import Path
+import sys,json,copy,random,hashlib,os
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-02');OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+import critique_pack as C
+from cat_de_roman_esti.wordgames.packs import validate_payload
+from cat_de_roman_esti.wordgames import contexto
+from django.test import Client
+pack,svc,strong,regions=C.load_all(ROOT/'cat_de_roman_esti/fixtures/games_pack.json',ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')
+
+def write(path,value):
+ p=OUT/path;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(value,ensure_ascii=False,sort_keys=True,indent=2)+'\n');return hashlib.sha256(p.read_bytes()).hexdigest()
+BUNDLES={};NOTES=[]
+def add(cat,game,row,why,urls):
+ bundle=BUNDLES.setdefault(cat,{k:[] for k in ['nodes','edges','conexiuni','contexto','lant','alchimie']});ref=f'{game}[{len(bundle[game])}]';bundle[game].append(row);NOTES.append({'category':cat,'ref':ref,'rationale':why,'sources':urls})
+GROUPS=[
+ [('Se folosesc pentru afânarea aluatului','Drojdie|Praf de copt|Bicarbonat de sodiu alimentar|Albuș'),('Folosesc mișcarea de rotație','Șurubelniță|Bicicletă|Compas|cheie'),('Au umplutură învelită în aluat','Plăcinte|Cornulețe|Merdenea|Poale-n brâu'),('Se poartă de la talie în jos','Pantaloni|Fustă|Șosetă|Pantof')],
+]
+from urllib.parse import quote
+for index,groups in enumerate(GROUPS):
+ row={'difficulty':'normal','groups':[{'label':label,'tiles':[svc.resolve(t) for t in tiles.split('|')]} for label,tiles in groups]}
+ refs=['https://dexonline.ro/definitie/'+quote(t.lower()) for _,ts in groups for t in ts.split('|')]
+ add('viata_de_roman','conexiuni',row,'Three concrete predicates establish food or clothing anchors; the hardest group is the shared rotating action of a screwdriver, bicycle, compass and key. The dough-aeration group includes whipped egg white, with mechanical aeration rather than fermentation. No tile needs specialist vocabulary; independent review must assess that aeration and rotation labels are sufficiently precise.',refs)
+CONTEXT={
+ 'Chitară':['muzică','instrument muzical','instrument','coardă','rock','sunet','pian','chitară'],
+ 'Brașov':['România','oraș','munte','Carpați','București','Biserica Neagră','Poiana Brașov','Brașov'],
+ 'Nadia Comăneci':['sport','gimnastică','Olimpiadă','gimnast','bârnă','Montreal','Simona Amânar','Nadia Comăneci'],
+}
+PROBES=[]
+for label,guesses in CONTEXT.items():
+ target=svc.resolve(label);node=svc.node(target);assert target not in {r['target'] for r in pack['contexto']}
+ urls={'Chitară':['https://dexonline.ro/definitie/chitar%C4%83'],'Brașov':['https://www.brasovcity.ro/index.php?area=Cum+ajung+la+Bra%C8%99ov&ck=36&lang=ro'],'Nadia Comăneci':['https://www.cosrold.cosr.ro/sportiv/nadia-comaneci','https://olympics.com/en/athletes/nadia-comaneci']}[label]
+ why={'Chitară':'Recognizable concrete instrument with 13 direct predecessors and several independently useful instrument/rock/sound openers. Music is only rank71 and coardă is unresolved; these limits are explicitly retained for independent review.','Brașov':'Recognizable city with 11 direct predecessors. Oraș, Poiana Brașov, București and Carpați provide an interpretable travel/geography gradient. The generic România opener is cooler and Biserica Neagră is not guaranteed to resolve.','Nadia Comăneci':'Cross-generational Olympic gymnast with18direct predecessors. Gimnastică, Olimpiadă and Bârnă give immediate warm feedback; the broad sport opener is cooler and the bare city Montreal is unresolved. The exact Olympic event label remains known.'}[label]
+ add(node.category,'contexto',{'difficulty':'usor','target':target},why,urls)
+ records=[]
+ for guess in guesses:
+  sess=contexto._build_session(target,'usor',None,category=node.category);gid=contexto.store.create(sess)
+  try:
+   response=Client().post(f'/api/wordgames/contexto/games/{gid}/guess',{'text':guess},content_type='application/json');body=response.json();last=body.get('guess') or body.get('last_guess')
+   records.append({'text':guess,'status':response.status_code,'body':body})
+  finally:contexto.store.delete(gid)
+ PROBES.append({'target':target,'label':label,'incoming':[{'id':n,'label':svc.node(n).label_ro} for n in sorted(svc._rev_adj[target])],'probes':records})
+LANT=[
+ ('Nadia Comăneci','Simona Amânar','Two Olympic generations are linked through their shared gymnastics discipline and the Romanian Olympic squad. A beginner can choose between recognizable sports bridges without a single named intermediary.',['https://www.cosrold.cosr.ro/sportiv/nadia-comaneci','https://www.cosrold.cosr.ro/despre-noi/conducere/comitetul-executiv']),
+ ('Capra cu trei iezi','Amintiri din copilărie','A childhood tale leads to a different work by the same familiar author, with alternatives through the author, reading medium and story form. The target is not merely another tile of the same new Conexiuni quartet.',['https://www.muzeulliteraturiiiasi.ro/etabularium-bojdeuca-lui-ion-creanga/','https://ro.wikisource.org/wiki/Capra_cu_trei_iezi','https://ro.wikisource.org/wiki/Amintiri_din_copil%C4%83rie']),
+ ('Gheorghe Zamfir','Maria Tănase','Instrumental and vocal performers connect through Romanian folk music, with folklore and musician bridges. Familiar endpoints support a short introduction to musical connections; independent review must decide whether category bridges are sufficiently satisfying.',['https://gheorghezamfir.ro/','https://www.radioromaniacultural.ro/sectiuni-articole/muzica-dans-arte/portret-maria-tanase-un-fenomen-unic-in-muzica-romaneasca-debutul-la-radio-si-dragostea-pentru-brancusi-repere-ale-unei-existente-fascinante-id4122.html']),
+]
+for a,b,why,urls in LANT:
+ start,target=svc.resolve(a),svc.resolve(b);assert (start,target) not in {(r['start'],r['target']) for r in pack['lant']}
+ add(svc.node(start).category,'lant',{'difficulty':'usor','start':start,'target':target},why,urls)
+private=copy.deepcopy(pack);records=[]
+for cat,bundle in sorted(BUNDLES.items()):
+ for game in ['conexiuni','contexto','lant']:
+  for i,row in enumerate(bundle[game]):
+   r=copy.deepcopy(row)
+   if game=='conexiuni':
+    r['groups']={f'g{j+1}':g['tiles'] for j,g in enumerate(row['groups'])};r['group_labels']={f'g{j+1}':g['label'] for j,g in enumerate(row['groups'])};r['order']=[n for g in row['groups'] for n in g['tiles']];random.Random(9292+i).shuffle(r['order'])
+   if game=='lant':r['optimal']=svc.distance(r['start'],r['target'])
+   r.update(id=f'preview02_{game}_{cat}_{i}',category=cat,source='ai',status='pending')
+   errors=validate_payload(r,game,svc);assert not errors,(r['id'],errors);private[game].append(r);records.append((game,r))
+ids={r['id'] for _,r in records};items,globalfindings,selected=C.run(private,svc,strong,regions,['conexiuni','contexto','lant'],{'pending'},ids)
+dossiers={r['id']:C.build_dossier(r,game,svc,strong,findings,regions) for game,r,findings in selected}
+write('pack-preview-dossiers.json',dossiers);write('pack-preview-lints.json',items)
+write('contexto-author-probes.json',{'kind':'fresh-target-bff-probes-v1','scope':'Each guess uses a fresh session with a fixed authored target; no claim of runtime eligibility or approval.','targets':PROBES})
+write('pack-editorial-notes.json',NOTES)
+for cat,bundle in sorted(BUNDLES.items()):print(cat,write(f'pack-candidates/{cat}/candidates.json',bundle))
+print(json.dumps(items,ensure_ascii=False,indent=2))

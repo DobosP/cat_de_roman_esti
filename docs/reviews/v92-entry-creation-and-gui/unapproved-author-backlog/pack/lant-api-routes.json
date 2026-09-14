@@ -1,0 +1,815 @@
+{
+  "scope": "Author fixed-session replay of all shortest routes; not public selector or independent review.",
+  "ladders": [
+    {
+      "start": "n_vioara",
+      "target": "n_ateneul_roman",
+      "routes": [
+        {
+          "ids": [
+            "n_vioara",
+            "n_festivalul_enescu",
+            "n_ateneul_roman"
+          ],
+          "labels": [
+            "Vioară",
+            "Festivalul George Enescu",
+            "Ateneul Român"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_festivalul_enescu",
+                "label": "Festivalul George Enescu"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_vioara",
+                  "label": "Vioară"
+                },
+                {
+                  "id": "n_festivalul_enescu",
+                  "label": "Festivalul George Enescu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Ateneul Român",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Festival",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Orchestră",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_ateneul_roman",
+                "label": "Ateneul Român"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_vioara",
+                  "label": "Vioară"
+                },
+                {
+                  "id": "n_festivalul_enescu",
+                  "label": "Festivalul George Enescu",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_ateneul_roman",
+                  "label": "Ateneul Român",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_vioara",
+            "n_george_enescu",
+            "n_ateneul_roman"
+          ],
+          "labels": [
+            "Vioară",
+            "George Enescu",
+            "Ateneul Român"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_george_enescu",
+                "label": "George Enescu"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_vioara",
+                  "label": "Vioară"
+                },
+                {
+                  "id": "n_george_enescu",
+                  "label": "George Enescu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Ateneul Român",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Compozitor",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "talent",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_ateneul_roman",
+                "label": "Ateneul Român"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_vioara",
+                  "label": "Vioară"
+                },
+                {
+                  "id": "n_george_enescu",
+                  "label": "George Enescu",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_ateneul_roman",
+                  "label": "Ateneul Român",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_vioara",
+            "n_muzica_clasica",
+            "n_ateneul_roman"
+          ],
+          "labels": [
+            "Vioară",
+            "Muzică clasică",
+            "Ateneul Român"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_muzica_clasica",
+                "label": "Muzică clasică"
+              },
+              "relation": "parte și întreg",
+              "path": [
+                {
+                  "id": "n_vioara",
+                  "label": "Vioară"
+                },
+                {
+                  "id": "n_muzica_clasica",
+                  "label": "Muzică clasică",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Ateneul Român",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Dirijor",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Operă",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_ateneul_roman",
+                "label": "Ateneul Român"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_vioara",
+                  "label": "Vioară"
+                },
+                {
+                  "id": "n_muzica_clasica",
+                  "label": "Muzică clasică",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "id": "n_ateneul_roman",
+                  "label": "Ateneul Român",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "start": "n_poarta_sarutului",
+      "target": "n_oltenia",
+      "routes": [
+        {
+          "ids": [
+            "n_poarta_sarutului",
+            "n_ansamblul_targu_jiu",
+            "n_oltenia"
+          ],
+          "labels": [
+            "Poarta Sărutului",
+            "Ansamblul monumental de la Târgu Jiu",
+            "Oltenia"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_ansamblul_targu_jiu",
+                "label": "Ansamblul monumental de la Târgu Jiu"
+              },
+              "relation": "parte și întreg",
+              "path": [
+                {
+                  "id": "n_poarta_sarutului",
+                  "label": "Poarta Sărutului"
+                },
+                {
+                  "id": "n_ansamblul_targu_jiu",
+                  "label": "Ansamblul monumental de la Târgu Jiu",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Constantin Brâncuși",
+                  "relation": "creator și operă"
+                },
+                {
+                  "label": "Oltenia",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Sculptură românească",
+                  "relation": "exemplu și categorie"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_oltenia",
+                "label": "Oltenia"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_poarta_sarutului",
+                  "label": "Poarta Sărutului"
+                },
+                {
+                  "id": "n_ansamblul_targu_jiu",
+                  "label": "Ansamblul monumental de la Târgu Jiu",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "id": "n_oltenia",
+                  "label": "Oltenia",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_poarta_sarutului",
+            "n_constantin_brancusi",
+            "n_oltenia"
+          ],
+          "labels": [
+            "Poarta Sărutului",
+            "Constantin Brâncuși",
+            "Oltenia"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_constantin_brancusi",
+                "label": "Constantin Brâncuși"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_poarta_sarutului",
+                  "label": "Poarta Sărutului"
+                },
+                {
+                  "id": "n_constantin_brancusi",
+                  "label": "Constantin Brâncuși",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Domnișoara Pogany",
+                  "relation": "creator și operă"
+                },
+                {
+                  "label": "Oltenia",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "talent",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_oltenia",
+                "label": "Oltenia"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_poarta_sarutului",
+                  "label": "Poarta Sărutului"
+                },
+                {
+                  "id": "n_constantin_brancusi",
+                  "label": "Constantin Brâncuși",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_oltenia",
+                  "label": "Oltenia",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_poarta_sarutului",
+            "n_targu_jiu",
+            "n_oltenia"
+          ],
+          "labels": [
+            "Poarta Sărutului",
+            "Târgu Jiu",
+            "Oltenia"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_targu_jiu",
+                "label": "Târgu Jiu"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_poarta_sarutului",
+                  "label": "Poarta Sărutului"
+                },
+                {
+                  "id": "n_targu_jiu",
+                  "label": "Târgu Jiu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Constantin Brâncuși",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Masa Tăcerii",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Oltenia",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_oltenia",
+                "label": "Oltenia"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_poarta_sarutului",
+                  "label": "Poarta Sărutului"
+                },
+                {
+                  "id": "n_targu_jiu",
+                  "label": "Târgu Jiu",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_oltenia",
+                  "label": "Oltenia",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "start": "n_stefan_cel_mare",
+      "target": "n_bucovina",
+      "routes": [
+        {
+          "ids": [
+            "n_stefan_cel_mare",
+            "n_putna",
+            "n_bucovina"
+          ],
+          "labels": [
+            "Ștefan cel Mare",
+            "Mănăstirea Putna",
+            "Bucovina"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_putna",
+                "label": "Mănăstirea Putna"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_stefan_cel_mare",
+                  "label": "Ștefan cel Mare"
+                },
+                {
+                  "id": "n_putna",
+                  "label": "Mănăstirea Putna",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Bucovina",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Moldova",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Mormânt",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_bucovina",
+                "label": "Bucovina"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_stefan_cel_mare",
+                  "label": "Ștefan cel Mare"
+                },
+                {
+                  "id": "n_putna",
+                  "label": "Mănăstirea Putna",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_bucovina",
+                  "label": "Bucovina",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_stefan_cel_mare",
+            "n_v11geo_suceava",
+            "n_bucovina"
+          ],
+          "labels": [
+            "Ștefan cel Mare",
+            "Suceava",
+            "Bucovina"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v11geo_suceava",
+                "label": "Suceava"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_stefan_cel_mare",
+                  "label": "Ștefan cel Mare"
+                },
+                {
+                  "id": "n_v11geo_suceava",
+                  "label": "Suceava",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Bucovina",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Mănăstirile pictate din Bucovina",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Protestul #șîeu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_bucovina",
+                "label": "Bucovina"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_stefan_cel_mare",
+                  "label": "Ștefan cel Mare"
+                },
+                {
+                  "id": "n_v11geo_suceava",
+                  "label": "Suceava",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_bucovina",
+                  "label": "Bucovina",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_stefan_cel_mare",
+            "n_voronet",
+            "n_bucovina"
+          ],
+          "labels": [
+            "Ștefan cel Mare",
+            "Mănăstirea Voroneț",
+            "Bucovina"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_voronet",
+                "label": "Mănăstirea Voroneț"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_stefan_cel_mare",
+                  "label": "Ștefan cel Mare"
+                },
+                {
+                  "id": "n_voronet",
+                  "label": "Mănăstirea Voroneț",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Bucovina",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Frescă",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Mănăstire",
+                  "relation": "exemplu și categorie"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_bucovina",
+                "label": "Bucovina"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_stefan_cel_mare",
+                  "label": "Ștefan cel Mare"
+                },
+                {
+                  "id": "n_voronet",
+                  "label": "Mănăstirea Voroneț",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_bucovina",
+                  "label": "Bucovina",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

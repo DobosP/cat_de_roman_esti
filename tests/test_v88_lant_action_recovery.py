@@ -13,13 +13,16 @@ from cat_de_roman_esti.wordgames.service import WordGameService
 
 
 @pytest.fixture
-def game(monkeypatch):
+def game(monkeypatch, request):
     nodes = [
         {"id": node, "label_ro": node.upper(), "category": "test"}
         for node in ("start", "mid", "other", "target", "dead")
     ]
+    # Informative first-hop captions retain the original three-stage recovery case.
+    first_relation = getattr(request, "param", "part_of")
     edges = [
-        {"id": f"e_{i}", "src_id": source, "dst_id": target}
+        {"id": f"e_{i}", "src_id": source, "dst_id": target,
+         "relation": first_relation if source == "start" else "related_to"}
         for i, (source, target) in enumerate([
             ("start", "mid"), ("start", "other"), ("mid", "target"),
             ("other", "target"), ("mid", "start"), ("mid", "dead"),
@@ -95,6 +98,29 @@ def test_move_and_real_undo_clear_position_help_without_resetting_escalation(gam
     assert session.earned_hint is None
     assert session.hint_requests == 2
     assert client.post(f"{url}/hint").json()["stage"] == "hop"
+
+
+@pytest.mark.parametrize("game", ["related_to"], indirect=True)
+def test_skipped_generic_direction_preserves_earned_stage_across_get_and_undo(game):
+    client, url, session = game
+    earned = client.post(f"{url}/hint").json()
+    assert earned["stage"] == "alternatives"
+    assert session.hint_requests == 2
+    for _ in range(3):
+        assert client.get(url).json()["earned_hint"] == earned
+        assert session.hint_requests == 2
+    assert move(client, url, "TARGET")["ok"] is False
+    assert client.post(f"{url}/undo").json()["earned_hint"] == earned
+    assert session.hint_requests == 2
+    assert move(client, url, "MID")["ok"] is True
+    assert "earned_hint" not in client.get(url).json()
+    undone = client.post(f"{url}/undo").json()
+    assert undone["moves"] == 0 and "earned_hint" not in undone
+    assert session.hint_requests == 2
+    next_hint = client.post(f"{url}/hint").json()
+    assert next_hint["stage"] == "hop"
+    assert session.hint_requests == 3
+    assert client.get(url).json()["earned_hint"] == next_hint
 
 
 def test_dead_end_and_move_limit_backtrack_help_are_recoverable(game):

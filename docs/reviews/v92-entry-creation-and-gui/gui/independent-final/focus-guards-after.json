@@ -1,0 +1,124 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "test": "pointer_preserves_browsing_position",
+      "beforeScroll": 2252,
+      "after": {
+        "active": "Aluat",
+        "activeTag": "BUTTON",
+        "top": -1411.3125,
+        "bottom": -1349.3125,
+        "benchPosition": "sticky",
+        "benchBottom": 203.15625,
+        "benchHeight": 173.15625,
+        "libraryHeading": {
+          "top": -1703.3125,
+          "bottom": -1682.3125
+        },
+        "scroll": 2228,
+        "feedbackVisible": true,
+        "focusVisible": false,
+        "viewportHeight": 844
+      }
+    },
+    {
+      "test": "no_focus_steal_after_user_moves_focus",
+      "mutations": 1,
+      "after": {
+        "active": "Caută în colecție",
+        "activeTag": "INPUT",
+        "top": 429.6875,
+        "bottom": 473.6875,
+        "benchPosition": "sticky",
+        "benchBottom": 349.6875,
+        "benchHeight": 173.15625,
+        "libraryHeading": {
+          "top": 361.6875,
+          "bottom": 382.6875
+        },
+        "scroll": 163,
+        "feedbackVisible": true,
+        "focusVisible": true,
+        "viewportHeight": 844
+      }
+    },
+    {
+      "test": "short_keyboard_restore",
+      "after": {
+        "active": "Aluat",
+        "activeTag": "BUTTON",
+        "top": 160.6875,
+        "bottom": 222.6875,
+        "benchPosition": "static",
+        "benchBottom": -143.3125,
+        "benchHeight": 173.15625,
+        "libraryHeading": {
+          "top": -131.3125,
+          "bottom": -110.3125
+        },
+        "scroll": 656,
+        "feedbackVisible": false,
+        "focusVisible": true,
+        "viewportHeight": 360
+      }
+    },
+    {
+      "test": "large_text_keyboard_restore",
+      "after": {
+        "active": "Aluat",
+        "activeTag": "BUTTON",
+        "top": 506.640625,
+        "bottom": 598.4375,
+        "benchPosition": "sticky",
+        "benchBottom": 292.203125,
+        "benchHeight": 262.203125,
+        "libraryHeading": {
+          "top": 37.265625,
+          "bottom": 79.265625
+        },
+        "scroll": 865,
+        "feedbackVisible": true,
+        "focusVisible": true,
+        "viewportHeight": 844
+      }
+    },
+    {
+      "test": "library_heading_and_next_keyboard_step_visible",
+      "fallback": {
+        "active": "Colecția ta",
+        "activeTag": "SECTION",
+        "top": 405.6875,
+        "bottom": 2371.6875,
+        "benchPosition": "sticky",
+        "benchBottom": 405.6875,
+        "benchHeight": 173.15625,
+        "libraryHeading": {
+          "top": 417.6875,
+          "bottom": 438.6875
+        },
+        "scroll": 107,
+        "feedbackVisible": true,
+        "focusVisible": false,
+        "viewportHeight": 844
+      },
+      "next": {
+        "active": "Caută și filtrează",
+        "activeTag": "SUMMARY",
+        "top": 441.6875,
+        "bottom": 485.6875,
+        "benchPosition": "sticky",
+        "benchBottom": 405.6875,
+        "benchHeight": 173.15625,
+        "libraryHeading": {
+          "top": 417.6875,
+          "bottom": 438.6875
+        },
+        "scroll": 107,
+        "feedbackVisible": true,
+        "focusVisible": true,
+        "viewportHeight": 844
+      }
+    }
+  ]
+}

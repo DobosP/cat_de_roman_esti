@@ -1,0 +1,58 @@
+{
+  "baseline": "c0ead5e",
+  "reviewed_on": "2026-09-14",
+  "reviewer": "gui_critique",
+  "scope": "All six games critiqued; exploration layout implementation only",
+  "sources": {
+    "frontend/src/screens/AlchimieExplore.tsx": "0e2df0ae020cc12c8cc8c60bca6e755569b8ef9f70d263c29a4025f80ab3f7c9",
+    "frontend/src/styles/alchimie-explore.css": "b1fe38b1b406f3ff1761378ef45deb06d4a64899cb6a7c4c85b8bf50657e9e75",
+    "frontend/e2e/alchimie-exploration.spec.mjs": "68077e7bec86f624af6e57f61bbbacf15518f28975992c251b5b5e942401e0ed"
+  },
+  "checks": {
+    "exploration_browser": "30 passed (31.1s), desktop/mobile, browser-check.log",
+    "lint": "passed",
+    "typecheck_build": "passed",
+    "initial_gzip_KiB": 119.22,
+    "initial_limit_KiB": 120
+  },
+  "initial_starters": {
+    "390x844": {
+      "before": [
+        578,
+        856
+      ],
+      "after": [
+        553,
+        831
+      ]
+    },
+    "320x844": {
+      "before": [
+        674,
+        952
+      ],
+      "after": [
+        553,
+        831
+      ]
+    },
+    "minimum_tile_height": 62
+  },
+  "deep_collection_feedback": {
+    "discoveries": 8,
+    "active_words": 24,
+    "before_top_bottom": [
+      -405,
+      -345
+    ],
+    "after_top_bottom": [
+      98,
+      158
+    ]
+  },
+  "limitations": [
+    "Responsive Chromium, not physical-device or human enjoyment acceptance",
+    "Large text and short visual viewports intentionally use a flowing bench when it would occupy over35percent of available height",
+    "Root final integration checks and independent implementation review remain separate"
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "batch_id": "v92-entry-creation-02-alchimie",
+  "bindings": {
+    "author_source_sha256": "1bf8d4661bcd433895a0f52c3c946a135a620968562b0465c3b7d24b86e71b23",
+    "editorial_source_sha256": "b8d82e561297d4e8ddba374e78d3590f3db0da87f6883baf6cc65eacf8621a96",
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "world_builder_sha256": "3af78a89155c00c1f6288adc2c93aac8b51ecf88f56d86ef54be883761200e0e",
+    "world_sha256": "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df"
+  },
+  "created_on": "2026-09-14",
+  "exclusions": [
+    {
+      "idea": "Cozonac + Ou → Frigănele",
+      "reason": "Well-grounded culinary variant, but the current authored Frigănele description specifically says bread. Excluded from this unchanged-concept batch rather than silently broadening an accepted concept record.",
+      "sources": [
+        "https://retetepentrutoategusturile.ro/friganele-din-felii-de-cozonac-cu-ciocolata",
+        "https://www.reteteculinare.ro/carte_de_bucate/dulciuri/friganele-din-cozonac-725"
+      ]
+    },
+    {
+      "idea": "Compot + Frișcă → Tort Diplomat",
+      "reason": "Compote fruit can be used in Diplomat, but this pair is too broad without its distinctive cake construction and setting ingredients. Not promoted into a candidate.",
+      "sources": []
+    },
+    {
+      "idea": "Cașcaval pane / Chiftele de legume / Legume la grătar + Pâine → Sandviș",
+      "reason": "Not authored: adding a whole cluster of bread fillings would spend this small batch on repetitive sandwich alternatives. Omelette is the one retained everyday case.",
+      "sources": []
+    }
+  ],
+  "kind": "alchimie-discovery-recipe-delta-candidates-v1",
+  "new_concepts": [],
+  "proposals": [
+    {
+      "explanation": "Oul fiert tare, tăiat, se amestecă cu cartofi fierți și răciți, ceapă și un sos după gust pentru salată de cartofi cu ou.",
+      "id": "salata-cartofi-ou-fiert",
+      "left": "Ou fiert",
+      "newly_reusable_ids": [
+        "alw_food_ou_fiert"
+      ],
+      "pair_ids": [
+        "alw_food_ou_fiert",
+        "n_v2lim_cartof"
+      ],
+      "player_route": "Ou + Apă → Ou fiert; Ou fiert + Cartof → Salată de cartofi.",
+      "rationale": "Reuses the terminal boiled-egg discovery in a familiar cold salad. The explanation names both the hard-boiled state and cooked, cooled potatoes. It is a variant of the existing potato-salad definition, with no new regional claim.",
+      "result": "Salată de cartofi",
+      "result_id": "alw_food_salata_cartofi",
+      "review_risk": "Potato and egg can also be baked together, but the cold-salad result is a common defensible outcome and does not conflict with any existing pair.",
+      "right": "Cartof",
+      "sources": [
+        "https://www.bucatarmaniac.ro/2022/05/salata-de-cartofi-cu-oua-si-ceapa-calita-reteta-video.html",
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "explanation": "Omleta pusă între două felii de pâine formează un sandviș, cu legume sau brânză după gust.",
+      "id": "sandvis-omleta",
+      "left": "Omletă",
+      "newly_reusable_ids": [
+        "alw_food_omleta"
+      ],
+      "pair_ids": [
+        "alw_food_omleta",
+        "n_v4gas_paine"
+      ],
+      "player_route": "Ou + Lapte → Omletă; Făină + Apă → Aluat; Aluat + Cuptor de bucătărie → Pâine; Omletă + Pâine → Sandviș.",
+      "rationale": "Makes the currently terminal omelette reusable through a clear breakfast idea. The world already teaches bread plus a prepared filling; this candidate gives that established rule one missing everyday case, rather than adding many fillings.",
+      "result": "Sandviș",
+      "result_id": "n_v24_food_snack_sandvis",
+      "review_risk": "Sandviș already has many alternatives. Retain only if removing this obvious dead end is worth one more recipe; no claim of a new result or new theme.",
+      "right": "Pâine",
+      "sources": [
+        "https://pofta-buna.com/sandvisuri-cu-omleta/",
+        "https://www.petitchef.ro/retete/felul-principal/sandwich-expres-cu-omleta-fid-1575880",
+        "https://dexonline.ro/intrare/sandvi%C8%99/49996"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "explanation": "Mousse-ul de ciocolată poate umple o bază din biscuiți mărunțiți și legați cu unt; tarta se lasă la rece să se întărească.",
+      "id": "tarta-mousse-biscuit",
+      "left": "Mousse de ciocolată",
+      "newly_reusable_ids": [
+        "alw_food_mousse_ciocolata"
+      ],
+      "pair_ids": [
+        "alw_food_mousse_ciocolata",
+        "n_v24_food_snack_biscuit"
+      ],
+      "player_route": "Cacao + Lapte praf → Ciocolată; Smântână dulce pentru frișcă + Mixer de bucătărie → Frișcă; Ciocolată + Frișcă → Mousse de ciocolată; Făină + Unt → Biscuit; Mousse de ciocolată + Biscuit → Tartă.",
+      "rationale": "Gives a further use to completed chocolate mousse by treating it as tart filling. The current Tartă definition explicitly permits a biscuit base. The explanation states the butter binder and chilling, so it describes assembly rather than claiming that a loose biscuit and mousse instantly form a tart.",
+      "result": "Tartă",
+      "result_id": "alw_food_tarta",
+      "review_risk": "The existing Ganache + Biscuit → Tartă is a nearby precedent. Mousse is already a distinct world concept; the benefit is its first outgoing recipe, not a novel tart result. Independent quality review may prefer to keep only the two more everyday candidates.",
+      "right": "Biscuit",
+      "sources": [
+        "https://madelicii.ro/reteta/tarta-cu-mousse-de-ciocolata-si-tonka/",
+        "https://www.bucataras.ro/retete/tarta-cu-afine-si-mousse-de-ciocolata-14364.html"
+      ],
+      "status": "unapproved"
+    }
+  ],
+  "recipes": [
+    {
+      "explanation": "Oul fiert tare, tăiat, se amestecă cu cartofi fierți și răciți, ceapă și un sos după gust pentru salată de cartofi cu ou.",
+      "id": "salata-cartofi-ou-fiert",
+      "pair": [
+        "alw_food_ou_fiert",
+        "n_v2lim_cartof"
+      ],
+      "result": "alw_food_salata_cartofi",
+      "sources": [
+        "https://www.bucatarmaniac.ro/2022/05/salata-de-cartofi-cu-oua-si-ceapa-calita-reteta-video.html",
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html"
+      ]
+    },
+    {
+      "explanation": "Omleta pusă între două felii de pâine formează un sandviș, cu legume sau brânză după gust.",
+      "id": "sandvis-omleta",
+      "pair": [
+        "alw_food_omleta",
+        "n_v4gas_paine"
+      ],
+      "result": "n_v24_food_snack_sandvis",
+      "sources": [
+        "https://pofta-buna.com/sandvisuri-cu-omleta/",
+        "https://www.petitchef.ro/retete/felul-principal/sandwich-expres-cu-omleta-fid-1575880",
+        "https://dexonline.ro/intrare/sandvi%C8%99/49996"
+      ]
+    },
+    {
+      "explanation": "Mousse-ul de ciocolată poate umple o bază din biscuiți mărunțiți și legați cu unt; tarta se lasă la rece să se întărească.",
+      "id": "tarta-mousse-biscuit",
+      "pair": [
+        "alw_food_mousse_ciocolata",
+        "n_v24_food_snack_biscuit"
+      ],
+      "result": "alw_food_tarta",
+      "sources": [
+        "https://madelicii.ro/reteta/tarta-cu-mousse-de-ciocolata-si-tonka/",
+        "https://www.bucataras.ro/retete/tarta-cu-afine-si-mousse-de-ciocolata-14364.html"
+      ]
+    }
+  ],
+  "review_requirements": [
+    "Independent factual and quality reviews of exact candidates",
+    "Bound full-world generation through existing review gates before serving changes",
+    "Review/update save compatibility history for the changed recipe mechanics",
+    "Final artifact/runtime binding and live API checks before serving changes"
+  ],
+  "schema_version": 1,
+  "source_notes": [
+    {
+      "access": "direct article body read",
+      "checked": "2026-09-14",
+      "supports": "Recipe boils and cools potatoes, then combines them with sliced cooked eggs and onion.",
+      "type": "primary recipe by Cristian Borod, 2022-05-04",
+      "url": "https://www.bucatarmaniac.ro/2022/05/salata-de-cartofi-cu-oua-si-ceapa-calita-reteta-video.html"
+    },
+    {
+      "access": "search-index recipe body read; direct page presented a browser-verification challenge",
+      "checked": "2026-09-14",
+      "supports": "A potato salad uses hard-boiled eggs, cooked potatoes and a yogurt/mayonnaise dressing.",
+      "type": "primary recipe by Laura Laurențiu, 2015-04-17",
+      "url": "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html"
+    },
+    {
+      "access": "direct article body read",
+      "checked": "2026-09-14",
+      "supports": "Prepared omelette is served in bread sandwiches, with optional vegetables and condiments.",
+      "type": "primary recipe by Gina Bradea, 2016-11-02",
+      "url": "https://pofta-buna.com/sandvisuri-cu-omleta/"
+    },
+    {
+      "access": "search-index recipe body read",
+      "checked": "2026-09-14",
+      "supports": "The recipe uses sliced sandwich bread and omelette with cheese and ham additions.",
+      "type": "publisher recipe, also demonstrated on its own video channel",
+      "url": "https://www.petitchef.ro/retete/felul-principal/sandwich-expres-cu-omleta-fid-1575880"
+    },
+    {
+      "access": "search-index dictionary body read",
+      "checked": "2026-09-14",
+      "supports": "Lexical support for bread with a filling; the modern recipe sources establish the omelette variant.",
+      "type": "DEX 1998 and other dictionary entries via dexonline",
+      "url": "https://dexonline.ro/intrare/sandvi%C8%99/49996"
+    },
+    {
+      "access": "direct recipe body read",
+      "checked": "2026-09-14",
+      "supports": "Crushed biscuits bind with melted butter as a tart base, filled with chocolate mousse and chilled; other biscuit types are allowed.",
+      "type": "primary recipe published on Madelicii",
+      "url": "https://madelicii.ro/reteta/tarta-cu-mousse-de-ciocolata-si-tonka/"
+    },
+    {
+      "access": "search-index recipe body read",
+      "checked": "2026-09-14",
+      "supports": "A tart uses a biscuit-and-butter base with chocolate mousse and another fruit cream, then chills to set.",
+      "type": "recipe posted by its maker cristinne, 2010-12-03",
+      "url": "https://www.bucataras.ro/retete/tarta-cu-afine-si-mousse-de-ciocolata-14364.html"
+    }
+  ],
+  "status": "unapproved",
+  "world_id": "bucataria-romaneasca-v1"
+}

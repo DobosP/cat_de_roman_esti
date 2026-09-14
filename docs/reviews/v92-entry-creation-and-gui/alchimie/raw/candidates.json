@@ -1,0 +1,85 @@
+{
+  "audit": {
+    "all_pairs_unused": true,
+    "existing_concepts_only": true,
+    "new_concepts": 0,
+    "new_goals": 0,
+    "old_recipe_records_preserved": 285,
+    "terminal_inputs_reused": 3
+  },
+  "baseline": "c0ead5e",
+  "concept_count": 221,
+  "kind": "alchimie-reuse-candidates-v1",
+  "recipes": [
+    {
+      "explanation": "Omleta gătită, așezată între felii de pâine, formează un sandviș; se pot adăuga legume sau brânză.",
+      "id": "sandvis-omleta",
+      "labels": {
+        "pair": [
+          "Omletă",
+          "Pâine"
+        ],
+        "result": "Sandviș"
+      },
+      "pair": [
+        "alw_food_omleta",
+        "n_v4gas_paine"
+      ],
+      "previously_terminal_inputs": [
+        "alw_food_omleta"
+      ],
+      "rationale": "Omleta primește o întrebuințare după descoperire. Perechea numește direct umplutura și suportul; nu cere un preparat nou sau o regulă arbitrară.",
+      "result": "n_v24_food_snack_sandvis",
+      "sources": [
+        "https://pofta-buna.com/sandvisuri-cu-omleta/"
+      ]
+    },
+    {
+      "explanation": "Cartofii fierți, răciți și tăiați se amestecă cu ou fiert și un sos pentru o salată de cartofi.",
+      "id": "salata-cartofi-ou-fiert",
+      "labels": {
+        "pair": [
+          "Ou fiert",
+          "Cartof"
+        ],
+        "result": "Salată de cartofi"
+      },
+      "pair": [
+        "alw_food_ou_fiert",
+        "n_v2lim_cartof"
+      ],
+      "previously_terminal_inputs": [
+        "alw_food_ou_fiert"
+      ],
+      "rationale": "Oul deja fiert devine util într-un preparat cunoscut. Explicația cere fierberea cartofului, nu sugerează consumul lui crud; completează căile prin ceapă și măsline.",
+      "result": "alw_food_salata_cartofi",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html"
+      ]
+    },
+    {
+      "explanation": "Miezul cartofilor copți se scoate din coajă și se pasează cu unt; se adaugă lapte pentru consistența dorită.",
+      "id": "piure-cartofi-copti-unt",
+      "labels": {
+        "pair": [
+          "Cartofi copți",
+          "Unt"
+        ],
+        "result": "Piure de cartofi"
+      },
+      "pair": [
+        "alw_food_cartofi_copti",
+        "n_v24_food_breakfast_unt"
+      ],
+      "previously_terminal_inputs": [
+        "alw_food_cartofi_copti"
+      ],
+      "rationale": "Cartofii copți capătă o întrebuințare distinctă: miezul se pasează, nu rămâne o garnitură cu unt. Rezultatul are deja două căi din cartof crud; această cale recompensează prepararea anterioară.",
+      "result": "alw_food_piure_cartofi",
+      "sources": [
+        "https://www.crunchtimekitchen.com/ultimate-guide-to-mashed-potatoes/"
+      ]
+    }
+  ],
+  "world_sha256": "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df"
+}

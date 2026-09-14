@@ -1,0 +1,515 @@
+{
+  "kind": "game-entry-author-batch-index-v1",
+  "status": "unapproved; independent review required; none installed",
+  "baseline_commit": "c0ead5eb524fe40ec4a1760488badec395c0ae0c",
+  "counts": {
+    "alchimie": 3,
+    "conexiuni": 2,
+    "contexto": 3,
+    "intrusul": 3,
+    "lant": 3,
+    "perechi": 3
+  },
+  "total_candidate_entries": 17,
+  "round_or_target_candidates": 14,
+  "exploration_recipe_candidates": 3,
+  "candidate_file_sha256": {
+    "pack/candidates/arta_cultura/candidates.json": "d7a584bcb6eb6e8f10f60a0165f5dc32c6c42e0bca367d9d60a84cfc8b11db75",
+    "pack/candidates/istorie/candidates.json": "3a03ee8e8e599af885476da67f3277e6a4fe0ce6ba84a8daab928051795f74cf",
+    "pack/candidates/literatura/candidates.json": "838a54ccedf4eba05332ee1fc6748eeb70102b7813899d8818413dc9b1c1449d",
+    "pack/candidates/personalitati/candidates.json": "0c1c37d6c0d7a44e21965baffcfacdeb34d7b9d252570271e084bfc8eb5394b2",
+    "pack/candidates/viata_de_roman/candidates.json": "3c908d14b930e4a2839b9a3103ba4b93af2d7352f8dafad6b53b729fcd6d56dd",
+    "alchimie/candidates.json": "00e7ef03a8025c88fd9e5b92faee082b8f6df552cdf75aad44828caa6bf16b5e",
+    "quick/candidates.json": "aa2911ae3124c1405f9b4fb8c22f89de046f38e909155a8f8b2b4c893b0f0f03"
+  },
+  "author_source_sha256": {
+    "build_batch_index.py": "47262eb37dede1de76b50d937874f3e319fea7ba839477919feeb9f6e570bc27",
+    "pack/author_candidates.py": "18c0627386d342650e6e019dcac0eff8fe6218785455a53af4cb2698e2515996",
+    "alchimie/author_candidates.py": "1bf8d4661bcd433895a0f52c3c946a135a620968562b0465c3b7d24b86e71b23",
+    "quick/candidate_source.py": "d5096e2addf3895fbb73842f2bf5928644da50fa0027060b3e58f0cf8a2a2cc6"
+  },
+  "served_artifact_sha256": {
+    "kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "games_pack.json": "62c1eaaa7bb72674cf59a66f9b543d911749d52973155f6b201d796d97d6ea4a",
+    "derived_catalog_v38.json": "09e6b1caa3ed586264a85d3d9807f0173384c02c80102dae072d14665432f2aa",
+    "quick_games_v92.json": "36f5fc575ed5ae36735d792dd71df5860d917dba1b3b58090f792afd4f3b0d39",
+    "alchimie_discovery_world_v92.json": "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df",
+    "alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301"
+  },
+  "entries": [
+    {
+      "game": "lant",
+      "candidate_file": "pack/candidates/arta_cultura/candidates.json",
+      "ref": "lant[0]",
+      "record": {
+        "difficulty": "usor",
+        "start": "n_poarta_sarutului",
+        "target": "n_oltenia"
+      }
+    },
+    {
+      "game": "contexto",
+      "candidate_file": "pack/candidates/istorie/candidates.json",
+      "ref": "contexto[0]",
+      "record": {
+        "difficulty": "usor",
+        "target": "n_alba_iulia"
+      }
+    },
+    {
+      "game": "lant",
+      "candidate_file": "pack/candidates/istorie/candidates.json",
+      "ref": "lant[0]",
+      "record": {
+        "difficulty": "usor",
+        "start": "n_stefan_cel_mare",
+        "target": "n_bucovina"
+      }
+    },
+    {
+      "game": "contexto",
+      "candidate_file": "pack/candidates/literatura/candidates.json",
+      "ref": "contexto[0]",
+      "record": {
+        "difficulty": "usor",
+        "target": "n_ion_creanga"
+      }
+    },
+    {
+      "game": "contexto",
+      "candidate_file": "pack/candidates/personalitati/candidates.json",
+      "ref": "contexto[0]",
+      "record": {
+        "difficulty": "usor",
+        "target": "n_nadia_comaneci"
+      }
+    },
+    {
+      "game": "lant",
+      "candidate_file": "pack/candidates/personalitati/candidates.json",
+      "ref": "lant[0]",
+      "record": {
+        "difficulty": "usor",
+        "start": "n_vioara",
+        "target": "n_ateneul_roman"
+      }
+    },
+    {
+      "game": "conexiuni",
+      "candidate_file": "pack/candidates/viata_de_roman/candidates.json",
+      "ref": "conexiuni[0]",
+      "record": {
+        "difficulty": "normal",
+        "groups": [
+          {
+            "label": "Au scoarță",
+            "tiles": [
+              "n_v4sti_copac",
+              "n_v24_nature_world_pamant",
+              "n_v4sti_creier",
+              "n_v3lit_carte"
+            ]
+          },
+          {
+            "label": "Au formă de pulbere",
+            "tiles": [
+              "n_v24_food_pantry_faina",
+              "n_v85_food_cacao",
+              "n_v86_food_zahar_pudra",
+              "n_v86_food_amidon"
+            ]
+          },
+          {
+            "label": "Au butoane sau clape apăsate cu degetele",
+            "tiles": [
+              "n_v3muz_pian",
+              "n_v4mem_telefon",
+              "n_v4fil_telecomanda",
+              "n_v33_electric_control_intrerupator"
+            ]
+          },
+          {
+            "label": "Pot fi folosite la udarea plantelor",
+            "tiles": [
+              "n_v32_garden_water_stropitoare",
+              "n_v32_garden_water_furtun",
+              "n_v31_cleaning_water_galeata",
+              "n_v33_bathroom_fixture_robinet"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "game": "conexiuni",
+      "candidate_file": "pack/candidates/viata_de_roman/candidates.json",
+      "ref": "conexiuni[1]",
+      "record": {
+        "difficulty": "normal",
+        "groups": [
+          {
+            "label": "Pot bate fără pumni",
+            "tiles": [
+              "n_v24_time_day_ceas",
+              "n_v4sti_inima",
+              "n_v24_weather_air_vant",
+              "n_v24_weather_precipitation_ploaie"
+            ]
+          },
+          {
+            "label": "Ingrediente care pot afâna aluaturi sau compoziții",
+            "tiles": [
+              "n_v84_food_drojdie",
+              "n_v87_food_praf_copt",
+              "n_v87_food_bicarbonat",
+              "n_v86_food_albus"
+            ]
+          },
+          {
+            "label": "Pot fi închise cu fermoar",
+            "tiles": [
+              "n_v23via_ghiozdan",
+              "n_v23via_penar",
+              "n_v30_clothing_outer_geaca",
+              "n_v30_clothing_everyday_pantaloni"
+            ]
+          },
+          {
+            "label": "Se obțin din lapte",
+            "tiles": [
+              "n_v2gas_branza",
+              "n_v20gas_cascaval",
+              "n_v24_food_breakfast_unt",
+              "n_v86_food_lapte_praf"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "game": "alchimie",
+      "candidate_file": "alchimie/candidates.json",
+      "ref": "salata-cartofi-ou-fiert",
+      "record": {
+        "explanation": "Oul fiert tare, tăiat, se amestecă cu cartofi fierți și răciți, ceapă și un sos după gust pentru salată de cartofi cu ou.",
+        "id": "salata-cartofi-ou-fiert",
+        "left": "Ou fiert",
+        "newly_reusable_ids": [
+          "alw_food_ou_fiert"
+        ],
+        "pair_ids": [
+          "alw_food_ou_fiert",
+          "n_v2lim_cartof"
+        ],
+        "player_route": "Ou + Apă → Ou fiert; Ou fiert + Cartof → Salată de cartofi.",
+        "rationale": "Reuses the terminal boiled-egg discovery in a familiar cold salad. The explanation names both the hard-boiled state and cooked, cooled potatoes. It is a variant of the existing potato-salad definition, with no new regional claim.",
+        "result": "Salată de cartofi",
+        "result_id": "alw_food_salata_cartofi",
+        "review_risk": "Potato and egg can also be baked together, but the cold-salad result is a common defensible outcome and does not conflict with any existing pair.",
+        "right": "Cartof",
+        "sources": [
+          "https://www.bucatarmaniac.ro/2022/05/salata-de-cartofi-cu-oua-si-ceapa-calita-reteta-video.html",
+          "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html"
+        ],
+        "status": "unapproved"
+      }
+    },
+    {
+      "game": "alchimie",
+      "candidate_file": "alchimie/candidates.json",
+      "ref": "sandvis-omleta",
+      "record": {
+        "explanation": "Omleta pusă între două felii de pâine formează un sandviș, cu legume sau brânză după gust.",
+        "id": "sandvis-omleta",
+        "left": "Omletă",
+        "newly_reusable_ids": [
+          "alw_food_omleta"
+        ],
+        "pair_ids": [
+          "alw_food_omleta",
+          "n_v4gas_paine"
+        ],
+        "player_route": "Ou + Lapte → Omletă; Făină + Apă → Aluat; Aluat + Cuptor de bucătărie → Pâine; Omletă + Pâine → Sandviș.",
+        "rationale": "Makes the currently terminal omelette reusable through a clear breakfast idea. The world already teaches bread plus a prepared filling; this candidate gives that established rule one missing everyday case, rather than adding many fillings.",
+        "result": "Sandviș",
+        "result_id": "n_v24_food_snack_sandvis",
+        "review_risk": "Sandviș already has many alternatives. Retain only if removing this obvious dead end is worth one more recipe; no claim of a new result or new theme.",
+        "right": "Pâine",
+        "sources": [
+          "https://pofta-buna.com/sandvisuri-cu-omleta/",
+          "https://www.petitchef.ro/retete/felul-principal/sandwich-expres-cu-omleta-fid-1575880",
+          "https://dexonline.ro/intrare/sandvi%C8%99/49996"
+        ],
+        "status": "unapproved"
+      }
+    },
+    {
+      "game": "alchimie",
+      "candidate_file": "alchimie/candidates.json",
+      "ref": "tarta-mousse-biscuit",
+      "record": {
+        "explanation": "Mousse-ul de ciocolată poate umple o bază din biscuiți mărunțiți și legați cu unt; tarta se lasă la rece să se întărească.",
+        "id": "tarta-mousse-biscuit",
+        "left": "Mousse de ciocolată",
+        "newly_reusable_ids": [
+          "alw_food_mousse_ciocolata"
+        ],
+        "pair_ids": [
+          "alw_food_mousse_ciocolata",
+          "n_v24_food_snack_biscuit"
+        ],
+        "player_route": "Cacao + Lapte praf → Ciocolată; Smântână dulce pentru frișcă + Mixer de bucătărie → Frișcă; Ciocolată + Frișcă → Mousse de ciocolată; Făină + Unt → Biscuit; Mousse de ciocolată + Biscuit → Tartă.",
+        "rationale": "Gives a further use to completed chocolate mousse by treating it as tart filling. The current Tartă definition explicitly permits a biscuit base. The explanation states the butter binder and chilling, so it describes assembly rather than claiming that a loose biscuit and mousse instantly form a tart.",
+        "result": "Tartă",
+        "result_id": "alw_food_tarta",
+        "review_risk": "The existing Ganache + Biscuit → Tartă is a nearby precedent. Mousse is already a distinct world concept; the benefit is its first outgoing recipe, not a novel tart result. Independent quality review may prefer to keep only the two more everyday candidates.",
+        "right": "Biscuit",
+        "sources": [
+          "https://madelicii.ro/reteta/tarta-cu-mousse-de-ciocolata-si-tonka/",
+          "https://www.bucataras.ro/retete/tarta-cu-afine-si-mousse-de-ciocolata-14364.html"
+        ],
+        "status": "unapproved"
+      }
+    },
+    {
+      "game": "intrusul",
+      "candidate_file": "quick/candidates.json",
+      "ref": "iq92_s02_electric_connections",
+      "record": {
+        "category": "viata_de_roman",
+        "difficulty": "usor",
+        "game": "intrusul",
+        "id": "iq92_s02_electric_connections",
+        "payload": {
+          "group_label": "Piese pentru conectarea aparatelor la curent electric",
+          "intruder": "n_v33_bathroom_fixture_robinet",
+          "members": [
+            "n_v33_electric_plug_stecher",
+            "n_v33_electric_extension_prelungitor",
+            "n_v33_electric_wire_cablu"
+          ]
+        },
+        "rationale": "Ștecherul, prelungitorul electric și cablul electric realizează alimentarea electrică; robinetul reglează curgerea unui fluid. Patru obiecte familiare din casă, cu o diferență funcțională precisă. Toate trei legăturile interioare sunt puternice; intrusul nu are legături native cu trio-ul.",
+        "source_id": "aq92_intrusul_s02_electric_connections",
+        "sources": [
+          "https://dexonline.ro/definitie/%C8%99techer",
+          "https://dexonline.ro/definitie/prelungitor",
+          "https://dexonline.ro/definitie/cablu",
+          "https://dexonline.ro/definitie/robinet"
+        ]
+      }
+    },
+    {
+      "game": "intrusul",
+      "candidate_file": "quick/candidates.json",
+      "ref": "iq92_s02_bodily_needs",
+      "record": {
+        "category": "stiinta",
+        "difficulty": "usor",
+        "game": "intrusul",
+        "id": "iq92_s02_bodily_needs",
+        "payload": {
+          "group_label": "Stări care semnalează nevoi fiziologice",
+          "intruder": "n_v28_feeling_social_rusine",
+          "members": [
+            "n_v24_feeling_needs_foame",
+            "n_v24_feeling_needs_sete",
+            "n_v24_feeling_needs_oboseala"
+          ]
+        },
+        "rationale": "Foamea, setea și oboseala indică nevoi de hrană, apă sau odihnă; rușinea este un sentiment social. Se folosesc sensurile cotidiene, nu expresii figurate. Toate cuvintele numesc stări, astfel încât intrusul nu se găsește printr-o simplă diferență de tip. Trio nou; numai Foame apare în vechiul board despre emoții.",
+        "source_id": "aq92_intrusul_s02_bodily_needs",
+        "sources": [
+          "https://dexonline.ro/definitie/foame",
+          "https://dexonline.ro/definitie/sete",
+          "https://dexonline.ro/definitie/oboseal%C4%83",
+          "https://dexonline.ro/definitie/ru%C8%99ine"
+        ]
+      }
+    },
+    {
+      "game": "intrusul",
+      "candidate_file": "quick/candidates.json",
+      "ref": "iq92_s02_family_relations",
+      "record": {
+        "category": "viata_de_roman",
+        "difficulty": "usor",
+        "game": "intrusul",
+        "id": "iq92_s02_family_relations",
+        "payload": {
+          "group_label": "Termeni care numesc rude",
+          "intruder": "n_v29_people_coleg",
+          "members": [
+            "n_v24_people_grandparents_bunica",
+            "n_v24_people_grandparents_bunic",
+            "n_v24_people_grandparents_matusa"
+          ]
+        },
+        "rationale": "Bunică, bunic și mătușă numesc relații de rudenie; coleg numește o relație de școală sau de muncă. Patru relații interpersonale ușor de recunoscut, fără opoziție om/obiect. Predicatul privește sensurile cuvintelor: faptul că o anumită rudă poate fi și coleg nu schimbă definiția termenului coleg. Trio nerefolosit.",
+        "source_id": "aq92_intrusul_s02_family_relations",
+        "sources": [
+          "https://dexonline.ro/definitie/bunic%C4%83",
+          "https://dexonline.ro/definitie/bunic",
+          "https://dexonline.ro/definitie/m%C4%83tu%C8%99%C4%83",
+          "https://dexonline.ro/definitie/coleg"
+        ]
+      }
+    },
+    {
+      "game": "perechi",
+      "candidate_file": "quick/candidates.json",
+      "ref": "pq92_s02_associations_01",
+      "record": {
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "game": "perechi",
+        "id": "pq92_s02_associations_01",
+        "payload": {
+          "pairs": [
+            {
+              "group_label": "Organul vederii și funcția lui",
+              "members": [
+                "n_v4sti_ochi",
+                "n_v24_action_senses_a_vedea"
+              ]
+            },
+            {
+              "group_label": "Camera de dormit și mobila pentru somn",
+              "members": [
+                "n_v24_home_rooms_dormitor",
+                "n_v24_home_bed_pat"
+              ]
+            },
+            {
+              "group_label": "Tacâm și preparat lichid mâncat cu el",
+              "members": [
+                "n_v30_kitchen_utensil_lingura",
+                "n_v4gas_supa"
+              ]
+            },
+            {
+              "group_label": "Parteneri celebri în scenete comice",
+              "members": [
+                "n_v20fil_stela_popescu",
+                "n_v20fil_alexandru_arsinel"
+              ]
+            }
+          ]
+        },
+        "rationale": "Trei asocieri practice oferă intrări rapide; cuplul artistic Stela Popescu–Alexandru Arșinel aduce recunoaștere culturală. Nu se afirmă o căsătorie. Nicio pereche nu a mai fost folosită în Perechi. Perechile au relații diferite și nu formează un al doilea grup de autori sau opere. Nicio legătură încrucișată în graf; niciun partener alternativ semantic comparabil.",
+        "source_id": "aq92_perechi_s02_associations_01",
+        "sources": [
+          "https://dexonline.ro/definitie/ochi",
+          "https://dexonline.ro/intrare/dormitor/17553",
+          "https://dexonline.ro/definitie/pat",
+          "https://dexonline.ro/definitie/lingur%C4%83",
+          "https://dexonline.ro/definitie/sup%C4%83",
+          "https://www.romania-actualitati.ro/interviuri/stela-popescu-am-fost-si-voi-fi-o-optimista-id44871.html"
+        ]
+      }
+    },
+    {
+      "game": "perechi",
+      "candidate_file": "quick/candidates.json",
+      "ref": "pq92_s02_associations_02",
+      "record": {
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "game": "perechi",
+        "id": "pq92_s02_associations_02",
+        "payload": {
+          "pairs": [
+            {
+              "group_label": "Organul auzului și funcția lui",
+              "members": [
+                "n_v4sti_ureche",
+                "n_v24_action_senses_a_auzi"
+              ]
+            },
+            {
+              "group_label": "Dintele și obiectul folosit la curățarea lui",
+              "members": [
+                "n_v28_body_mouth_dinte",
+                "n_v31_hygiene_oral_periuta_dinti"
+              ]
+            },
+            {
+              "group_label": "Navă și locul de acostare",
+              "members": [
+                "n_v28_transport_water_vapor",
+                "n_v2soc_port"
+              ]
+            },
+            {
+              "group_label": "Poezie și autorul ei",
+              "members": [
+                "n_v20lit_scrisoarea_iii",
+                "n_mihai_eminescu"
+              ]
+            }
+          ]
+        },
+        "rationale": "Auzul, igiena orală și transportul pe apă oferă trei legături precise; Scrisoarea III și Eminescu sunt perechea din literatura școlară. Urechea nu are funcția de a curăța dintele, iar periuța nu ține de auz. Sensul naval al lui Port este fixat de Vapor. Nicio pereche nu este refolosită; toate legăturile intenționate sunt puternice și nu există legături încrucișate.",
+        "source_id": "aq92_perechi_s02_associations_02",
+        "sources": [
+          "https://dexonline.ro/definitie/ureche",
+          "https://dspbihor.gov.ro/promsan/2024/Campanii/Analiza_de_situatie_Sanatate_orala_martie_2024.pdf",
+          "https://dexonline.ro/definitie/vapor",
+          "https://dexonline.ro/definitie/port",
+          "https://ro.wikisource.org/wiki/Scrisoarea_III"
+        ]
+      }
+    },
+    {
+      "game": "perechi",
+      "candidate_file": "quick/candidates.json",
+      "ref": "pq92_s02_associations_03",
+      "record": {
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "game": "perechi",
+        "id": "pq92_s02_associations_03",
+        "payload": {
+          "pairs": [
+            {
+              "group_label": "Fenomen optic și culorile sale",
+              "members": [
+                "n_v28_nature_weather_curcubeu",
+                "n_v4art_culoare"
+              ]
+            },
+            {
+              "group_label": "Calendarul arată zilele anului",
+              "members": [
+                "n_v29_time_calendar",
+                "n_v24_time_day_zi"
+              ]
+            },
+            {
+              "group_label": "Castel și orașul în care se află",
+              "members": [
+                "n_v20ist_castelul_peles",
+                "n_geox_sinaia"
+              ]
+            },
+            {
+              "group_label": "Ingredient de bază și preparat din aluat dospit",
+              "members": [
+                "n_v24_food_pantry_faina",
+                "n_gas_cozonac"
+              ]
+            }
+          ]
+        },
+        "rationale": "Culorile curcubeului, zilele calendarului, Peleșul din Sinaia și făina pentru cozonac dau patru asocieri din domenii diferite. Calendarul nu este tratat drept instrument meteo, iar Culoare trimite la spectrul curcubeului. Ingredientul nu concurează cu alt preparat de pe board. Toate patru perechile sunt noi în Perechi, fără vreo legătură încrucișată nativă.",
+        "source_id": "aq92_perechi_s02_associations_03",
+        "sources": [
+          "https://dexonline.ro/definitie/curcubeu",
+          "https://dexonline.ro/definitie/calendar",
+          "https://peles.ro/ro/",
+          "https://dexonline.ro/definitie/cozonac"
+        ]
+      }
+    }
+  ]
+}

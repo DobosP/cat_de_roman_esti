@@ -1,0 +1,370 @@
+#!/usr/bin/env python3
+"""Reproduce three unapproved recipe proposals; read the repo and write scratch only."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import json
+import sys
+from collections import Counter
+from pathlib import Path
+
+sys.dont_write_bytecode = True
+
+BASE_WORLD_SHA = "baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df"
+
+PROPOSALS = [
+    {
+        "id": "salata-cartofi-ou-fiert",
+        "left": "Ou fiert",
+        "right": "Cartof",
+        "result": "Salată de cartofi",
+        "explanation": (
+            "Oul fiert tare, tăiat, se amestecă cu cartofi fierți și răciți, "
+            "ceapă și un sos după gust pentru salată de cartofi cu ou."
+        ),
+        "sources": [
+            "https://www.bucatarmaniac.ro/2022/05/salata-de-cartofi-cu-oua-si-ceapa-calita-reteta-video.html",
+            "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html",
+        ],
+        "rationale": (
+            "Reuses the terminal boiled-egg discovery in a familiar cold salad. "
+            "The explanation names both the hard-boiled state and cooked, cooled potatoes. "
+            "It is a variant of the existing potato-salad definition, with no new regional claim."
+        ),
+        "player_route": "Ou + Apă → Ou fiert; Ou fiert + Cartof → Salată de cartofi.",
+        "review_risk": (
+            "Potato and egg can also be baked together, but the cold-salad result is a "
+            "common defensible outcome and does not conflict with any existing pair."
+        ),
+    },
+    {
+        "id": "sandvis-omleta",
+        "left": "Omletă",
+        "right": "Pâine",
+        "result": "Sandviș",
+        "explanation": (
+            "Omleta pusă între două felii de pâine formează un sandviș, "
+            "cu legume sau brânză după gust."
+        ),
+        "sources": [
+            "https://pofta-buna.com/sandvisuri-cu-omleta/",
+            "https://www.petitchef.ro/retete/felul-principal/sandwich-expres-cu-omleta-fid-1575880",
+            "https://dexonline.ro/intrare/sandvi%C8%99/49996",
+        ],
+        "rationale": (
+            "Makes the currently terminal omelette reusable through a clear breakfast idea. "
+            "The world already teaches bread plus a prepared filling; this candidate gives "
+            "that established rule one missing everyday case, rather than adding many fillings."
+        ),
+        "player_route": (
+            "Ou + Lapte → Omletă; Făină + Apă → Aluat; "
+            "Aluat + Cuptor de bucătărie → Pâine; Omletă + Pâine → Sandviș."
+        ),
+        "review_risk": (
+            "Sandviș already has many alternatives. Retain only if removing this obvious "
+            "dead end is worth one more recipe; no claim of a new result or new theme."
+        ),
+    },
+    {
+        "id": "tarta-mousse-biscuit",
+        "left": "Mousse de ciocolată",
+        "right": "Biscuit",
+        "result": "Tartă",
+        "explanation": (
+            "Mousse-ul de ciocolată poate umple o bază din biscuiți mărunțiți "
+            "și legați cu unt; tarta se lasă la rece să se întărească."
+        ),
+        "sources": [
+            "https://madelicii.ro/reteta/tarta-cu-mousse-de-ciocolata-si-tonka/",
+            "https://www.bucataras.ro/retete/tarta-cu-afine-si-mousse-de-ciocolata-14364.html",
+        ],
+        "rationale": (
+            "Gives a further use to completed chocolate mousse by treating it as tart filling. "
+            "The current Tartă definition explicitly permits a biscuit base. The explanation "
+            "states the butter binder and chilling, so it describes assembly rather than "
+            "claiming that a loose biscuit and mousse instantly form a tart."
+        ),
+        "player_route": (
+            "Cacao + Lapte praf → Ciocolată; "
+            "Smântână dulce pentru frișcă + Mixer de bucătărie → Frișcă; "
+            "Ciocolată + Frișcă → Mousse de ciocolată; Făină + Unt → Biscuit; "
+            "Mousse de ciocolată + Biscuit → Tartă."
+        ),
+        "review_risk": (
+            "The existing Ganache + Biscuit → Tartă is a nearby precedent. "
+            "Mousse is already a distinct world concept; the benefit is its first outgoing "
+            "recipe, not a novel tart result. Independent quality review may prefer to keep "
+            "only the two more everyday candidates."
+        ),
+    },
+]
+
+EXCLUSIONS = [
+    {
+        "idea": "Cozonac + Ou → Frigănele",
+        "reason": (
+            "Well-grounded culinary variant, but the current authored Frigănele description "
+            "specifically says bread. Excluded from this unchanged-concept batch rather than "
+            "silently broadening an accepted concept record."
+        ),
+        "sources": [
+            "https://retetepentrutoategusturile.ro/friganele-din-felii-de-cozonac-cu-ciocolata",
+            "https://www.reteteculinare.ro/carte_de_bucate/dulciuri/friganele-din-cozonac-725",
+        ],
+    },
+    {
+        "idea": "Compot + Frișcă → Tort Diplomat",
+        "reason": (
+            "Compote fruit can be used in Diplomat, but this pair is too broad without "
+            "its distinctive cake construction and setting ingredients. "
+            "Not promoted into a candidate."
+        ),
+        "sources": [],
+    },
+    {
+        "idea": "Cașcaval pane / Chiftele de legume / Legume la grătar + Pâine → Sandviș",
+        "reason": (
+            "Not authored: adding a whole cluster of bread fillings would spend this small "
+            "batch on repetitive sandwich alternatives. Omelette is the one retained everyday case."
+        ),
+        "sources": [],
+    },
+]
+
+SOURCE_NOTES = [
+    {
+        "url": PROPOSALS[0]["sources"][0],
+        "checked": "2026-09-14",
+        "access": "direct article body read",
+        "type": "primary recipe by Cristian Borod, 2022-05-04",
+        "supports": (
+            "Recipe boils and cools potatoes, then combines them with sliced cooked eggs and onion."
+        ),
+    },
+    {
+        "url": PROPOSALS[0]["sources"][1],
+        "checked": "2026-09-14",
+        "access": (
+            "search-index recipe body read; direct page presented a browser-verification challenge"
+        ),
+        "type": "primary recipe by Laura Laurențiu, 2015-04-17",
+        "supports": (
+            "A potato salad uses hard-boiled eggs, cooked potatoes "
+            "and a yogurt/mayonnaise dressing."
+        ),
+    },
+    {
+        "url": PROPOSALS[1]["sources"][0],
+        "checked": "2026-09-14",
+        "access": "direct article body read",
+        "type": "primary recipe by Gina Bradea, 2016-11-02",
+        "supports": (
+            "Prepared omelette is served in bread sandwiches, "
+            "with optional vegetables and condiments."
+        ),
+    },
+    {
+        "url": PROPOSALS[1]["sources"][1],
+        "checked": "2026-09-14",
+        "access": "search-index recipe body read",
+        "type": "publisher recipe, also demonstrated on its own video channel",
+        "supports": (
+            "The recipe uses sliced sandwich bread and omelette with cheese and ham additions."
+        ),
+    },
+    {
+        "url": PROPOSALS[1]["sources"][2],
+        "checked": "2026-09-14",
+        "access": "search-index dictionary body read",
+        "type": "DEX 1998 and other dictionary entries via dexonline",
+        "supports": (
+            "Lexical support for bread with a filling; "
+            "the modern recipe sources establish the omelette variant."
+        ),
+    },
+    {
+        "url": PROPOSALS[2]["sources"][0],
+        "checked": "2026-09-14",
+        "access": "direct recipe body read",
+        "type": "primary recipe published on Madelicii",
+        "supports": (
+            "Crushed biscuits bind with melted butter as a tart base, filled with chocolate "
+            "mousse and chilled; other biscuit types are allowed."
+        ),
+    },
+    {
+        "url": PROPOSALS[2]["sources"][1],
+        "checked": "2026-09-14",
+        "access": "search-index recipe body read",
+        "type": "recipe posted by its maker cristinne, 2010-12-03",
+        "supports": (
+            "A tart uses a biscuit-and-butter base with chocolate mousse and another fruit cream, "
+            "then chills to set."
+        ),
+    },
+]
+
+
+def bytes_for(value: object) -> bytes:
+    return (json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode()
+
+
+def sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def candidate_witness(world: dict, proposal: dict) -> dict:
+    """Produce the result first with this recipe, then finish the kitchen legally."""
+    owned = set(world["world"]["starter_ids"])
+    discovered: set[str] = set()
+    unlocked: set[str] = set()
+    trace = []
+    first_index = None
+    while True:
+        gifts = [u for u in world["unlocks"] if u["id"] not in unlocked
+                 and u["after_discoveries"] <= len(discovered)]
+        for tier in gifts:
+            owned.update(tier["concept_ids"])
+            unlocked.add(tier["id"])
+            trace.append({"unlock": tier["id"], "after_discoveries": len(discovered)})
+        available = [r for r in world["recipes"]
+                     if set(r["pair"]) <= owned and r["result"] not in owned]
+        preferred = next((r for r in available if r["id"] == proposal["id"]), None)
+        if first_index is None and preferred is None:
+            available = [r for r in available if r["result"] != proposal["result"]]
+        chosen = preferred or (available[0] if available else None)
+        if chosen is None:
+            break
+        assert chosen["result"] not in owned
+        assert set(chosen["pair"]) <= owned
+        discovered.add(chosen["result"])
+        owned.add(chosen["result"])
+        trace.append({"recipe_id": chosen["id"], "pair": chosen["pair"],
+                      "new_result": chosen["result"]})
+        if chosen["id"] == proposal["id"]:
+            first_index = len(trace) - 1
+    assert first_index is not None, proposal["id"]
+    assert len(discovered) == 117
+    assert len(owned) == 221
+    assert len(unlocked) == 12
+    return {"recipe_id": proposal["id"], "first_use_trace_index": first_index,
+            "craft_count": len(discovered), "owned_count": len(owned),
+            "unlocked_tiers": len(unlocked), "trace": trace}
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", type=Path, required=True)
+    parser.add_argument("--out", type=Path, default=Path(__file__).resolve().parent)
+    args = parser.parse_args()
+    repo = args.repo.resolve()
+    out = args.out.resolve()
+    allowed = Path("/home/dobo/work/_temp/feat__v92-entry-creation-02/session-02/alchimie")
+    if not out.is_relative_to(allowed):
+        raise ValueError("output must remain in the assigned Alchimie scratch directory")
+    out.mkdir(parents=True, exist_ok=True)
+    catalog = repo / "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json"
+    assert sha(catalog) == BASE_WORLD_SHA, "baseline catalog drift; re-author against current IDs"
+    baseline = json.loads(catalog.read_bytes())
+    by_label = {c["label"]: c["id"] for c in baseline["concepts"]}
+    assert len(by_label) == len(baseline["concepts"]) == 221
+    existing_pairs = {tuple(sorted(r["pair"])) for r in baseline["recipes"]}
+    existing_ids = {r["id"] for r in baseline["recipes"]}
+    outputs = {r["result"] for r in baseline["recipes"]}
+    inputs = {i for r in baseline["recipes"] for i in r["pair"]}
+    terminal = outputs - inputs
+    recipes = []
+    proposals = []
+    for p in PROPOSALS:
+        pair = sorted([by_label[p["left"]], by_label[p["right"]]])
+        row = {"id": p["id"], "pair": pair, "result": by_label[p["result"]],
+               "explanation": p["explanation"], "sources": p["sources"]}
+        assert tuple(pair) not in existing_pairs and p["id"] not in existing_ids
+        assert row["result"] not in pair
+        assert row["result"] in outputs
+        assert len(set(pair) & terminal) == 1
+        recipes.append(row)
+        proposals.append({**p, "status": "unapproved", "pair_ids": pair,
+                          "result_id": row["result"],
+                          "newly_reusable_ids": sorted(set(pair) & terminal)})
+    assert len({tuple(r["pair"]) for r in recipes}) == len(recipes)
+    sys.path[:0] = [str(repo), str(repo / "scripts")]
+    import build_alchimie_discovery_world as builder
+
+    from cat_de_roman_esti.wordgames.discovery_world import MAX_CONCEPTS, MAX_RECIPES
+
+    augmented = copy.deepcopy(baseline)
+    augmented["recipes"].extend(recipes)
+    before = builder.audit(baseline)
+    after = builder.audit(augmented)
+    witnesses = [candidate_witness(augmented, p) for p in recipes]
+    bindings = {
+        "world_sha256": sha(catalog),
+        "rubric_sha256": sha(repo / "docs/CRITIQUE_RUBRIC.md"),
+        "editorial_source_sha256": sha(repo / "scripts/alchimie_discovery_recipe_source.py"),
+        "world_builder_sha256": sha(repo / "scripts/build_alchimie_discovery_world.py"),
+        "author_source_sha256": sha(Path(__file__)),
+    }
+    artifact = {
+        "schema_version": 1,
+        "kind": "alchimie-discovery-recipe-delta-candidates-v1",
+        "status": "unapproved",
+        "batch_id": "v92-entry-creation-02-alchimie",
+        "created_on": "2026-09-14",
+        "world_id": baseline["world"]["id"],
+        "bindings": bindings,
+        "recipes": recipes,
+        "proposals": proposals,
+        "new_concepts": [],
+        "source_notes": SOURCE_NOTES,
+        "exclusions": EXCLUSIONS,
+        "review_requirements": [
+            "Independent factual and quality reviews of exact candidates",
+            "Bound full-world generation through existing review gates before serving changes",
+            "Review/update save compatibility history for the changed recipe mechanics",
+            "Final artifact/runtime binding and live API checks before serving changes",
+        ],
+    }
+    counts = Counter(r["result"] for r in baseline["recipes"])
+    audit = {
+        "kind": "alchimie-author-screening-v1",
+        "status": "mechanical-pass-editorially-unapproved",
+        "bindings": bindings,
+        "before": before,
+        "hypothetical_after": after,
+        "added_recipe_count": len(recipes),
+        "added_concept_count": 0,
+        "unchanged_concept_records": baseline["concepts"] == augmented["concepts"],
+        "unchanged_existing_recipe_records": baseline["recipes"] == augmented["recipes"][:285],
+        "unchanged_world_unlocks_goals": all(baseline[k] == augmented[k]
+                                              for k in ("world", "unlocks", "goals")),
+        "pair_conflicts": [],
+        "newly_reusable_ids": sorted({i for r in recipes for i in r["pair"]} & terminal),
+        "recipe_alternative_counts": [
+            {"result": r["result"], "before": counts[r["result"]],
+             "after": counts[r["result"]] + 1} for r in recipes
+        ],
+        "bounds": {"concepts": MAX_CONCEPTS, "recipes": MAX_RECIPES},
+        "witnesses": [{k: v for k, v in w.items() if k != "trace"} for w in witnesses],
+        "limitations": [
+            "Author screening is not independent factual/quality approval or measured enjoyment.",
+            "Witnesses replay the world mechanics in scratch; this is not a live API audit.",
+            "No generated candidate world or serving fixture is written.",
+        ],
+    }
+    (out / "candidates.json").write_bytes(bytes_for(artifact))
+    (out / "mechanical-audit.json").write_bytes(bytes_for(audit))
+    (out / "candidate-witnesses.json").write_bytes(bytes_for(witnesses))
+    print(json.dumps({"recipes": len(recipes), "concepts": after["concepts"],
+                      "hypothetical_recipes": after["recipes"],
+                      "terminal_before": before["terminal_results"],
+                      "terminal_after": after["terminal_results"],
+                      "witnesses_completed": len(witnesses),
+                      "candidate_sha256": sha(out / "candidates.json")}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1224 @@
+{
+  "kind": "lant-earned-hint-audit-v1",
+  "reviewer": "content_verifier",
+  "baseline": "c0ead5e",
+  "phase": "after-generic-stage-skip",
+  "method": "20 predeclared deterministic natural free-play seeds, first earned help through real Django API; ten unthemed usor and ten themed normal. No invented fixture/session shortcuts. This is not a representative user study. Lanț hints currently do not deduct score: first paid stage in the task means first explicit help request, not monetary or score cost.",
+  "source_sha256": {
+    "cat_de_roman_esti/wordgames/lant.py": "1818ed57384d6f9b20359a21dfa8fdee585cc9a7712453f4699bddeecd13ff84",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+    "cat_de_roman_esti/fixtures/games_pack.json": "62c1eaaa7bb72674cf59a66f9b543d911749d52973155f6b201d796d97d6ea4a",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "6f2662615b686a492b41f2d689a7ba6b380b62d7b8cecc5e7a3c9788d1dce641"
+  },
+  "summary": {
+    "rounds": 20,
+    "direction_stage": 7,
+    "generic_first_hint": 0,
+    "caption_already_visible": 7,
+    "narrows_visible_choices": 7,
+    "all_choices_same_caption": 0,
+    "caption_counts": {
+      "exemplu și categorie": 4,
+      "null": 13,
+      "muzeu și oraș": 1,
+      "autor și poezie": 1,
+      "parte și întreg": 1
+    }
+  },
+  "hint_scoring_check": {
+    "seed": 3,
+    "difficulty": "usor",
+    "hint_requests": 3,
+    "moves": 2,
+    "optimal": 2,
+    "score": 1000,
+    "won": true
+  },
+  "repro_cases": [],
+  "rows": [
+    {
+      "params": {
+        "seed": 0,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_vdr_vecin_bormasina",
+        "label": "Vecinul cu bormașina"
+      },
+      "current": {
+        "id": "n_vdr_vecin_bormasina",
+        "label": "Vecinul cu bormașina"
+      },
+      "target": {
+        "id": "n_vdr_asociatia_proprietari",
+        "label": "Asociația de proprietari",
+        "description": "Organizația locatarilor care gestionează cheltuielile și spațiile comune ale blocului."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Scara blocului",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Vecini",
+          "relation": "exemplu și categorie"
+        },
+        {
+          "label": "Viața la bloc",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "direction",
+        "relation": "exemplu și categorie",
+        "message": "Direcție: caută o legătură „exemplu și categorie”."
+      },
+      "caption_generic": false,
+      "caption_already_visible": true,
+      "matching_visible_labels": [
+        "Vecini"
+      ],
+      "narrows_visible_choices": true,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 1,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_gas_mici",
+        "label": "Mici"
+      },
+      "current": {
+        "id": "n_gas_mici",
+        "label": "Mici"
+      },
+      "target": {
+        "id": "n_ion_luca_caragiale",
+        "label": "I.L. Caragiale",
+        "description": "Dramaturg roman, maestru al comediei, membru al Junimii."
+      },
+      "optimal": 3,
+      "choices": [
+        {
+          "label": "București",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Grătar",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Mititeii de la Obor",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 3,
+        "alternatives": 2,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Mititeii de la Obor",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "București",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Mititeii de la Obor",
+          "București"
+        ],
+        "message": "Variante utile: Mititeii de la Obor, București."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 2,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_vdr_taiatul_porcului",
+        "label": "Tăiatul porcului de Ignat"
+      },
+      "current": {
+        "id": "n_vdr_taiatul_porcului",
+        "label": "Tăiatul porcului de Ignat"
+      },
+      "target": {
+        "id": "n_gas_sarmale",
+        "label": "Sarmale",
+        "description": "Foi de varză sau viță umplute cu carne și orez, reper al meselor românești de sărbătoare."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Carne",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Sărbători în familie",
+          "relation": "parte și întreg"
+        },
+        {
+          "label": "Sarmalele de Crăciun",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Carne",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Sarmalele de Crăciun",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Carne",
+          "Sarmalele de Crăciun"
+        ],
+        "message": "Variante utile: Carne, Sarmalele de Crăciun."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 3,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_v24_home_appliances_frigider",
+        "label": "Frigider"
+      },
+      "current": {
+        "id": "n_v24_home_appliances_frigider",
+        "label": "Frigider"
+      },
+      "target": {
+        "id": "n_v3gas_inghetata",
+        "label": "Înghețată",
+        "description": "Desert rece, cremos, din lapte sau apă, zahăr și arome."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Aragaz",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Bucătărie",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Congelator",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Frișcă",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Congelator",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Frișcă",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Congelator",
+          "Frișcă"
+        ],
+        "message": "Variante utile: Congelator, Frișcă."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 4,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_v24_home_appliances_frigider",
+        "label": "Frigider"
+      },
+      "current": {
+        "id": "n_v24_home_appliances_frigider",
+        "label": "Frigider"
+      },
+      "target": {
+        "id": "n_v3gas_inghetata",
+        "label": "Înghețată",
+        "description": "Desert rece, cremos, din lapte sau apă, zahăr și arome."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Aragaz",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Bucătărie",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Congelator",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Frișcă",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Congelator",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Frișcă",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Congelator",
+          "Frișcă"
+        ],
+        "message": "Variante utile: Congelator, Frișcă."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 5,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_carul_cu_boi",
+        "label": "Carul cu boi"
+      },
+      "current": {
+        "id": "n_carul_cu_boi",
+        "label": "Carul cu boi"
+      },
+      "target": {
+        "id": "n_theodor_aman",
+        "label": "Theodor Aman",
+        "description": "Pictor roman, fondator al Scolii de Belle-Arte din Bucuresti (1831-1891)."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Nicolae Grigorescu",
+          "relation": "creator și operă"
+        },
+        {
+          "label": "Pictură românească",
+          "relation": "exemplu și categorie"
+        },
+        {
+          "label": "Tablou",
+          "relation": "exemplu și categorie"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 3,
+        "stage": "direction",
+        "relation": "exemplu și categorie",
+        "message": "Direcție: caută o legătură „exemplu și categorie”."
+      },
+      "caption_generic": false,
+      "caption_already_visible": true,
+      "matching_visible_labels": [
+        "Pictură românească",
+        "Tablou"
+      ],
+      "narrows_visible_choices": true,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 6,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_hermann_oberth",
+        "label": "Hermann Oberth"
+      },
+      "current": {
+        "id": "n_hermann_oberth",
+        "label": "Hermann Oberth"
+      },
+      "target": {
+        "id": "n_aerodinamica",
+        "label": "Aerodinamică",
+        "description": "Ramura a fizicii care studiaza miscarea aerului si fortele asupra corpurilor."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Conrad Haas",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Fizică",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Rachete",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 4,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Rachete",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Fizică",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Rachete",
+          "Fizică"
+        ],
+        "message": "Variante utile: Rachete, Fizică."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 7,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_sibiu",
+        "label": "Sibiu"
+      },
+      "current": {
+        "id": "n_sibiu",
+        "label": "Sibiu"
+      },
+      "target": {
+        "id": "n_v2art_muzeu",
+        "label": "Muzeu",
+        "description": "Instituție care păstrează și expune colecții de artă, istorie sau știință."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Muzeul ASTRA",
+          "relation": "muzeu și oraș"
+        },
+        {
+          "label": "Muzeul Național Brukenthal",
+          "relation": "muzeu și oraș"
+        },
+        {
+          "label": "Salam de Sibiu",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "direction",
+        "relation": "muzeu și oraș",
+        "message": "Direcție: caută o legătură „muzeu și oraș”."
+      },
+      "caption_generic": false,
+      "caption_already_visible": true,
+      "matching_visible_labels": [
+        "Muzeul ASTRA",
+        "Muzeul Național Brukenthal"
+      ],
+      "narrows_visible_choices": true,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 8,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_v85_food_stafide",
+        "label": "Stafide"
+      },
+      "current": {
+        "id": "n_v85_food_stafide",
+        "label": "Stafide"
+      },
+      "target": {
+        "id": "n_v2gas_branza",
+        "label": "Brânză",
+        "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Cozonac",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Pască",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Poale-n brâu",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 2,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Pască",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Poale-n brâu",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Pască",
+          "Poale-n brâu"
+        ],
+        "message": "Variante utile: Pască, Poale-n brâu."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 9,
+        "difficulty": "usor"
+      },
+      "start": {
+        "id": "n_v20lit_scrisoarea_iii",
+        "label": "Scrisoarea III"
+      },
+      "current": {
+        "id": "n_v20lit_scrisoarea_iii",
+        "label": "Scrisoarea III"
+      },
+      "target": {
+        "id": "n_v21lit_floare_albastra",
+        "label": "Floare albastră",
+        "description": "Poezie de Mihai Eminescu publicată în 1873 în „Convorbiri literare”, construită pe motivul romantic european al florii albastre."
+      },
+      "optimal": 2,
+      "choices": [
+        {
+          "label": "Convorbiri literare",
+          "relation": "poezie și revistă"
+        },
+        {
+          "label": "Mihai Eminescu",
+          "relation": "autor și poezie"
+        },
+        {
+          "label": "Mircea cel Bătrân",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 2,
+        "alternatives": 3,
+        "stage": "direction",
+        "relation": "autor și poezie",
+        "message": "Direcție: caută o legătură „autor și poezie”."
+      },
+      "caption_generic": false,
+      "caption_already_visible": true,
+      "matching_visible_labels": [
+        "Mihai Eminescu"
+      ],
+      "narrows_visible_choices": true,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 0,
+        "difficulty": "normal",
+        "category": "geografie"
+      },
+      "start": {
+        "id": "n_ftv_bd_la_munte_si_la_mare",
+        "label": "B.D. la munte și la mare"
+      },
+      "current": {
+        "id": "n_ftv_bd_la_munte_si_la_mare",
+        "label": "B.D. la munte și la mare"
+      },
+      "target": {
+        "id": "n_marea_neagra",
+        "label": "Marea Neagră",
+        "description": "Mare la est de România, litoralul românesc."
+      },
+      "optimal": 4,
+      "choices": [
+        {
+          "label": "Cinematografia românească",
+          "relation": "exemplu și categorie"
+        },
+        {
+          "label": "Dem Rădulescu",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Film",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 4,
+        "alternatives": 3,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Film",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Cinematografia românească",
+            "relation": "exemplu și categorie"
+          }
+        ],
+        "alternatives_labels": [
+          "Film",
+          "Cinematografia românească"
+        ],
+        "message": "Variante utile: Film, Cinematografia românească."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 1,
+        "difficulty": "normal",
+        "category": "gastronomie"
+      },
+      "start": {
+        "id": "n_gas_placinte_poale_brau",
+        "label": "Poale-n brâu"
+      },
+      "current": {
+        "id": "n_gas_placinte_poale_brau",
+        "label": "Poale-n brâu"
+      },
+      "target": {
+        "id": "n_gas_gratar_1_mai",
+        "label": "Grătarul de 1 Mai",
+        "description": "Ritual urban și de picnic: mici, fum, muștar și aglomerație la iarbă verde."
+      },
+      "optimal": 4,
+      "choices": [
+        {
+          "label": "Brânză",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Papanași",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Plăcinte",
+          "relation": "exemplu și categorie"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 4,
+        "alternatives": 6,
+        "stage": "direction",
+        "relation": "exemplu și categorie",
+        "message": "Direcție: caută o legătură „exemplu și categorie”."
+      },
+      "caption_generic": false,
+      "caption_already_visible": true,
+      "matching_visible_labels": [
+        "Plăcinte"
+      ],
+      "narrows_visible_choices": true,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 2,
+        "difficulty": "normal",
+        "category": "film_tv"
+      },
+      "start": {
+        "id": "n_ftv_bobita",
+        "label": "Bobiță"
+      },
+      "current": {
+        "id": "n_ftv_bobita",
+        "label": "Bobiță"
+      },
+      "target": {
+        "id": "n_ftv_chefi_la_cutite",
+        "label": "Chefi la cuțite",
+        "description": "Show culinar competitiv difuzat de Antena 1."
+      },
+      "optimal": 4,
+      "choices": [
+        {
+          "label": "Celentano",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Las Fierbinți",
+          "relation": "parte și întreg"
+        },
+        {
+          "label": "Mihai Bobonete",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 4,
+        "alternatives": 2,
+        "stage": "direction",
+        "relation": "parte și întreg",
+        "message": "Direcție: caută o legătură „parte și întreg”."
+      },
+      "caption_generic": false,
+      "caption_already_visible": true,
+      "matching_visible_labels": [
+        "Las Fierbinți"
+      ],
+      "narrows_visible_choices": true,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 3,
+        "difficulty": "normal",
+        "category": "sport"
+      },
+      "start": {
+        "id": "n_spt_columbia_romania_1994",
+        "label": "Columbia - România 1994"
+      },
+      "current": {
+        "id": "n_spt_columbia_romania_1994",
+        "label": "Columbia - România 1994"
+      },
+      "target": {
+        "id": "n_spt_patru_penaltyuri",
+        "label": "Patru penalty-uri apărate",
+        "description": "Performanța unică a lui Duckadam în finala Cupei Campionilor Europeni din 1986."
+      },
+      "optimal": 3,
+      "choices": [
+        {
+          "label": "Cupa Mondială 1994",
+          "relation": "parte și întreg"
+        },
+        {
+          "label": "Gol",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Meci",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 3,
+        "alternatives": 2,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Meci",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Gol",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Meci",
+          "Gol"
+        ],
+        "message": "Variante utile: Meci, Gol."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 4,
+        "difficulty": "normal",
+        "category": "literatura"
+      },
+      "start": {
+        "id": "n_vdr_ulita_satului",
+        "label": "Ulița satului"
+      },
+      "current": {
+        "id": "n_vdr_ulita_satului",
+        "label": "Ulița satului"
+      },
+      "target": {
+        "id": "n_morometii",
+        "label": "Moromeții",
+        "description": "Roman de Marin Preda despre lumea satului romanesc."
+      },
+      "optimal": 4,
+      "choices": [
+        {
+          "label": "Gospodăria bunicilor",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Las Fierbinți",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Vara la bunici",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 4,
+        "alternatives": 4,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Vara la bunici",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Las Fierbinți",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Vara la bunici",
+          "Las Fierbinți"
+        ],
+        "message": "Variante utile: Vara la bunici, Las Fierbinți."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 5,
+        "difficulty": "normal",
+        "category": "istorie"
+      },
+      "start": {
+        "id": "n_carol_i",
+        "label": "Carol I"
+      },
+      "current": {
+        "id": "n_carol_i",
+        "label": "Carol I"
+      },
+      "target": {
+        "id": "n_revolutia_1989",
+        "label": "Revoluția din 1989",
+        "description": "Revolutia care a inlaturat regimul comunist din Romania."
+      },
+      "optimal": 3,
+      "choices": [
+        {
+          "label": "Castelul Peleș",
+          "relation": "creator și operă"
+        },
+        {
+          "label": "Războiul de Independență 1877",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Regatul României",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 3,
+        "alternatives": 3,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Regatul României",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Războiul de Independență 1877",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Regatul României",
+          "Războiul de Independență 1877"
+        ],
+        "message": "Variante utile: Regatul României, Războiul de Independență 1877."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 6,
+        "difficulty": "normal",
+        "category": "stiinta"
+      },
+      "start": {
+        "id": "n_gas_mici",
+        "label": "Mici"
+      },
+      "current": {
+        "id": "n_gas_mici",
+        "label": "Mici"
+      },
+      "target": {
+        "id": "n_v2sti_bacterie",
+        "label": "Bacterie",
+        "description": "Microorganism unicelular, studiat în microbiologie și medicină."
+      },
+      "optimal": 4,
+      "choices": [
+        {
+          "label": "Grătar",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Mâncare",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Pâine de casă",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 4,
+        "alternatives": 3,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Pâine de casă",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Mâncare",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Pâine de casă",
+          "Mâncare"
+        ],
+        "message": "Variante utile: Pâine de casă, Mâncare."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 7,
+        "difficulty": "normal",
+        "category": "viata_de_roman"
+      },
+      "start": {
+        "id": "n_vdr_ulita_satului",
+        "label": "Ulița satului"
+      },
+      "current": {
+        "id": "n_vdr_ulita_satului",
+        "label": "Ulița satului"
+      },
+      "target": {
+        "id": "n_folclor_romanesc",
+        "label": "Folclor românesc",
+        "description": "Traditia populara romaneasca: muzica, dans, obiceiuri."
+      },
+      "optimal": 3,
+      "choices": [
+        {
+          "label": "Gospodăria bunicilor",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Las Fierbinți",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Vara la bunici",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 3,
+        "alternatives": 4,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Vara la bunici",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Gospodăria bunicilor",
+            "relation": "legătură directă"
+          }
+        ],
+        "alternatives_labels": [
+          "Vara la bunici",
+          "Gospodăria bunicilor"
+        ],
+        "message": "Variante utile: Vara la bunici, Gospodăria bunicilor."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 8,
+        "difficulty": "normal",
+        "category": "limba"
+      },
+      "start": {
+        "id": "n_v17lim_cacofonie",
+        "label": "Cacofonie"
+      },
+      "current": {
+        "id": "n_v17lim_cacofonie",
+        "label": "Cacofonie"
+      },
+      "target": {
+        "id": "n_pronume",
+        "label": "Pronume",
+        "description": "Parte de vorbire flexibila care tine locul unui substantiv; include pronumele personal, posesiv, demonstrativ si reflexiv."
+      },
+      "optimal": 4,
+      "choices": [
+        {
+          "label": "Greșeală",
+          "relation": "exemplu și categorie"
+        },
+        {
+          "label": "Pleonasm",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Sunet",
+          "relation": "legătură directă"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 4,
+        "alternatives": 4,
+        "stage": "alternatives",
+        "alternatives_choices": [
+          {
+            "label": "Sunet",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Greșeală",
+            "relation": "exemplu și categorie"
+          }
+        ],
+        "alternatives_labels": [
+          "Sunet",
+          "Greșeală"
+        ],
+        "message": "Variante utile: Sunet, Greșeală."
+      },
+      "caption_generic": false,
+      "caption_already_visible": false,
+      "matching_visible_labels": [],
+      "narrows_visible_choices": false,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    },
+    {
+      "params": {
+        "seed": 9,
+        "difficulty": "normal",
+        "category": "arta_cultura"
+      },
+      "start": {
+        "id": "n_ceramica_de_horezu",
+        "label": "Ceramica de Horezu"
+      },
+      "current": {
+        "id": "n_ceramica_de_horezu",
+        "label": "Ceramica de Horezu"
+      },
+      "target": {
+        "id": "n_albastru_de_voronet",
+        "label": "Albastru de Voroneț",
+        "description": "Nuanta de albastru a frescelor de la Voronet."
+      },
+      "optimal": 3,
+      "choices": [
+        {
+          "label": "Artă plastică",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Ceramică populară",
+          "relation": "exemplu și categorie"
+        },
+        {
+          "label": "Patrimoniul mondial UNESCO",
+          "relation": "exemplu și categorie"
+        }
+      ],
+      "hint": {
+        "hint": null,
+        "remaining": 3,
+        "alternatives": 2,
+        "stage": "direction",
+        "relation": "exemplu și categorie",
+        "message": "Direcție: caută o legătură „exemplu și categorie”."
+      },
+      "caption_generic": false,
+      "caption_already_visible": true,
+      "matching_visible_labels": [
+        "Ceramică populară",
+        "Patrimoniul mondial UNESCO"
+      ],
+      "narrows_visible_choices": true,
+      "all_choices_have_same_caption": false,
+      "earned_hint_resumes": true,
+      "moves_unchanged": true
+    }
+  ]
+}

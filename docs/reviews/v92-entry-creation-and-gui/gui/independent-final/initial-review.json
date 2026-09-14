@@ -1,0 +1,33 @@
+{
+  "kind": "independent-exploration-gui-review-v1",
+  "reviewer": "content_verifier",
+  "verdict": "fix_required",
+  "port": 8156,
+  "fresh_isolated_contexts": true,
+  "user_browser_untouched": true,
+  "scope": "Keyboard focus after deep-collection crafting, sticky feedback visibility,44pxsummarytargets,shortviewportand200%textfallback",
+  "source_sha256": {
+    "frontend/src/screens/AlchimieExplore.tsx": "0e2df0ae020cc12c8cc8c60bca6e755569b8ef9f70d263c29a4025f80ab3f7c9",
+    "frontend/src/styles/alchimie-explore.css": "b1fe38b1b406f3ff1761378ef45deb06d4a64899cb6a7c4c85b8bf50657e9e75",
+    "frontend/src/styles/alchimie.css": "1f7a4489dd4c5c3fe5b581f7d2d15ac164fdfaa231e9eaf4d8f1116ad6c8646a",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "2bc9e5341f20c9600ea0e6d50fc5a4d2b5a7f6e001bc31d4cf0a201974ad2da4"
+  },
+  "finding": {
+    "severity": "medium",
+    "title": "Post-craft keyboard restoration can leave focused tile completely outside viewport",
+    "repro": "Restore existing221checkpoint first45discoveries; select Aluat, focus deep Portocală, pressEnter. Portocală becomes inactive and disappears; code focuses Aluat withpreventScroll:true at y=-1411, offscreen.65prefix Nucă+Pătrunjel focuses a library section whose top is y=-1211.",
+    "source": "frontend/src/screens/AlchimieExplore.tsx:199",
+    "evidence": "keyboard-focus-repros.json",
+    "fix_requirement": "Restored keyboard focus must be visible and clear of stickybench. Preserve no-steal guard when usermovesfocusduringrequest; verify fallbacklibrarycase too."
+  },
+  "passing_checks": {
+    "summary_targets_min44": true,
+    "journal_source_summaries_checked": 45,
+    "deep_craft_feedback_visible": true,
+    "short320x360_unpins": true,
+    "large_text200percent_unpins": true,
+    "horizontal_overflow": false,
+    "native_deep_focus_visible_when_unpinned": true
+  },
+  "pin_provenance": "Exact source and manifest hashes captured after the defect replay and before root changed focus code; do not substitute later file bytes."
+}

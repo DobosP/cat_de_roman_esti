@@ -46,6 +46,20 @@ _V91_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v91-recovery-and-mobile-clarity/artifact-delta.json"
 )
 
+_V92_ENTRY_SESSION_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v92-entry-creation-and-gui/artifact-delta.json"
+)
+# Pin the generated receipt as well as complete artifacts on both sides of its delta.
+_V92_ENTRY_SESSION_RECEIPT_SHA256 = (
+    "9133bcdef3ad91679208a9b60ef690aaa6df58b0333242ac65a70b8af16f732b"
+)
+_V92_ENTRY_SESSION_ADDED_IDS = {
+    "conexiuni": {"cx_viata_de_roman_368"},
+    "contexto": {"ct_geografie_365", "ct_muzica_366", "ct_personalitati_367"},
+    "lant": {"lt_literatura_236"},
+    "alchimie": set(),
+}
+
 
 # The V92 expansion adds exactly 4 Conexiuni, 8 Contexto and 13 Lanț records.
 # Pin complete current bytes before peeling it; never replace historical wave hashes.
@@ -134,6 +148,7 @@ _V92_WEIGHT_CHANGES = {
 
 def before_v92_artifact(current: dict, filename: str) -> dict:
     """Peel the exact reviewed V92 delta and reproduce complete 75584bf artifact bytes."""
+    current = before_v92_entry_session_artifact(current, filename)
     indent = 2 if filename == "kg_sample.json" else 1
 
     def digest(value):
@@ -225,6 +240,40 @@ def _reverse_bound_delta(current: dict, filename: str, receipt_path: Path) -> di
     restored = _reverse_reviewed_delta(current, filename, receipt_path)
     assert digest(restored) == receipt["baseline_sha256"]
     return restored
+
+
+def before_v92_entry_session_artifact(current: dict, filename: str) -> dict:
+    """Restore complete c0ead5e bytes, rejecting drift before removing new records."""
+    receipt_blob = _V92_ENTRY_SESSION_RECEIPT.read_bytes()
+    assert hashlib.sha256(receipt_blob).hexdigest() == _V92_ENTRY_SESSION_RECEIPT_SHA256
+    files = json.loads(receipt_blob)["files"]
+    assert set(files) == set(_V92_ARTIFACT_HASHES)
+    assert filename in _V92_ARTIFACT_HASHES
+    receipt = files[filename]
+    assert receipt["baseline_sha256"] == _V92_ARTIFACT_HASHES[filename]
+    expected_ids = {item_id for ids in _V92_ENTRY_SESSION_ADDED_IDS.values()
+                    for item_id in ids}
+    assert len(expected_ids) == 5
+    for table, changes in receipt["tables"].items():
+        assert not changes["removed"]
+        if filename == "games_pack.json":
+            assert table in _V92_ENTRY_SESSION_ADDED_IDS
+            added = changes["added"]
+            assert {row["id"] for row in added} == _V92_ENTRY_SESSION_ADDED_IDS[table]
+            assert all(row["status"] == "approved" for row in added)
+            assert not changes["changed"]
+        elif filename == "board_rankings_v37.json":
+            assert table == "boards"
+            assert {row["id"] for row in changes["added"]} == expected_ids
+            for change in changes["changed"].values():
+                before, after = change["before"], change["after"]
+                assert set(before) == set(after)
+                assert {key for key in before if before[key] != after[key]} <= {
+                    "rank", "selection_weight",
+                }
+        else:
+            assert not changes["added"] and not changes["changed"]
+    return _reverse_bound_delta(current, filename, _V92_ENTRY_SESSION_RECEIPT)
 
 
 def before_v91_artifact(current: dict, filename: str) -> dict:

@@ -36,8 +36,8 @@ from cat_de_roman_esti.wordgames.service import normalize  # noqa: E402
 CATALOG = ROOT / "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json"
 REVIEW_KIND = "alchimie-discovery-world-review-v1"
 FINAL_REVIEW_KIND = "alchimie-discovery-world-final-v1"
-BASELINE = ROOT / "docs/reviews/v92-alchimie-more-concepts/candidates.json"
-BASELINE_SHA = "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209"
+BASELINE = ROOT / "docs/reviews/v92-alchimie-large-concepts/candidate.json"
+BASELINE_SHA = "da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a"
 RUNTIME_SOURCES = (
     "cat_de_roman_esti/wordgames/discovery_world.py",
     "cat_de_roman_esti/wordgames/alchimie_explore.py",
@@ -47,7 +47,7 @@ RUNTIME_SOURCES = (
     "scripts/build_alchimie_discovery_world.py",
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/audit_alchimie_discovery_world.py",
-    "docs/reviews/v92-alchimie-more-concepts/candidates.json",
+    "docs/reviews/v92-alchimie-large-concepts/candidate.json",
 )
 
 
@@ -154,7 +154,9 @@ def candidate() -> dict:
         recipes.append({
             "id": rid, "pair": sorted([node(left).id, node(right).id]),
             "result": node(result).id, "explanation": explanation,
-            "sources": ["https://dexonline.ro/definitie/" + quote(result.lower())],
+            "sources": getattr(SOURCE, "RECIPE_SOURCES", {}).get(
+                rid, ["https://dexonline.ro/definitie/" + quote(result.lower())],
+            ),
         })
     starters = [node(label).id for label in SOURCE.STARTERS]
     unlocks = [{"id": uid, "after_discoveries": threshold, "title": title,

@@ -907,7 +907,11 @@ def test_visible_homonym_chip_binds_to_its_unvisited_authored_node(monkeypatch):
 
 # --------------------------------------------------------------------- hardening: hint
 def test_progressive_hint_reveals_direction_alternatives_then_shortest_hop():
-    game = _create()
+    # A specifically reviewed geographic caption still teaches a direction first.
+    session = LantSession(start="n_marea_neagra", target="n_dunarea", optimal=2,
+                          chain=["n_marea_neagra"])
+    game_id = store.create(session)
+    game = c.get(f"/api/wordgames/lant/games/{game_id}").json()
     gid = game["game_id"]
     svc = get_service()
     first = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
@@ -982,7 +986,8 @@ def _branchy_hint_service():
     ]
     edges = [
         {"id": "e1", "src_id": "start", "dst_id": "famous", "bidirectional": 1, "strength": 0.2},
-        {"id": "e2", "src_id": "start", "dst_id": "tight", "bidirectional": 1, "strength": 0.9},
+        {"id": "e2", "src_id": "start", "dst_id": "tight", "bidirectional": 1,
+         "strength": 0.9, "relation": "part_of"},
         {"id": "e3", "src_id": "famous", "dst_id": "target", "bidirectional": 1, "strength": 0.5},
         {"id": "e4", "src_id": "tight", "dst_id": "target", "bidirectional": 1, "strength": 0.5},
     ]
@@ -1695,18 +1700,15 @@ def test_hint_prefers_a_longer_unvisited_safe_route_before_backtracking(monkeypa
     assert lant._visible_choice_nodes(session) == ["scenic"]
 
     first = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    assert first["stage"] == "direction"
+    assert first["stage"] == "alternatives"
     assert svc.link("detour", "scenic").label_ro == "ocol sigur"
-    assert first["relation"] == "legătură directă"
     assert first["remaining"] == 3
+    assert first["alternatives"] == 1
+    assert first["alternatives_labels"] == ["SCENIC"]
+    assert first["message"].startswith("O variantă utilă")
     second = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    assert second["stage"] == "alternatives"
-    assert second["alternatives"] == 1
-    assert second["alternatives_labels"] == ["SCENIC"]
-    assert second["message"].startswith("O variantă utilă")
-    third = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    assert third["stage"] == "hop"
-    assert third["hint"]["id"] == "scenic"
+    assert second["stage"] == "hop"
+    assert second["hint"]["id"] == "scenic"
 
 
 def test_hint_escalation_counter_is_capped_and_persists_through_moves_and_undo(
@@ -1739,7 +1741,7 @@ def test_hint_escalation_counter_is_capped_and_persists_through_moves_and_undo(
         c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["stage"]
         for _ in range(4)
     ]
-    assert stages == ["direction", "alternatives", "hop", "hop"]
+    assert stages == ["alternatives", "hop", "hop", "hop"]
     assert session.hint_requests == 3
 
     for walk in range(24):

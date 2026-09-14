@@ -1,0 +1,68 @@
+"""Reproduce author candidates against the c0ead5e V92 content; never approves or mutates repo."""
+from pathlib import Path
+import argparse, hashlib, json, sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-02')
+OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+
+def write(name,value):
+ path=OUT/name;path.parent.mkdir(parents=True,exist_ok=True)
+ path.write_text(json.dumps(value,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+ print(name,hashlib.sha256(path.read_bytes()).hexdigest())
+
+def alchimie():
+ world=json.loads((ROOT/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json').read_bytes())
+ ids={c['label']:c['id'] for c in world['concepts']};old={frozenset(r['pair']) for r in world['recipes']};used={i for r in world['recipes'] for i in r['pair']}
+ specs=[
+ ('sandvis-omleta','Omletă','Pâine','Sandviș','Omleta gătită, așezată între felii de pâine, formează un sandviș; se pot adăuga legume sau brânză.',['https://pofta-buna.com/sandvisuri-cu-omleta/'],'Omleta primește o întrebuințare după descoperire. Perechea numește direct umplutura și suportul; nu cere un preparat nou sau o regulă arbitrară.'),
+ ('salata-cartofi-ou-fiert','Ou fiert','Cartof','Salată de cartofi','Cartofii fierți, răciți și tăiați se amestecă cu ou fiert și un sos pentru o salată de cartofi.',['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html'],'Oul deja fiert devine util într-un preparat cunoscut. Explicația cere fierberea cartofului, nu sugerează consumul lui crud; completează căile prin ceapă și măsline.'),
+ ('piure-cartofi-copti-unt','Cartofi copți','Unt','Piure de cartofi','Miezul cartofilor copți se scoate din coajă și se pasează cu unt; se adaugă lapte pentru consistența dorită.',['https://www.crunchtimekitchen.com/ultimate-guide-to-mashed-potatoes/'],'Cartofii copți capătă o întrebuințare distinctă: miezul se pasează, nu rămâne o garnitură cu unt. Rezultatul are deja două căi din cartof crud; această cale recompensează prepararea anterioară.'),
+ ]
+ rows=[]
+ for rid,a,b,res,ex,refs,why in specs:
+  pair=sorted([ids[a],ids[b]]);assert frozenset(pair) not in old;assert ids[res] not in pair
+  rows.append({'id':rid,'pair':pair,'result':ids[res],'explanation':ex,'sources':refs,'rationale':why,'labels':{'pair':[a,b],'result':res},'previously_terminal_inputs':[i for i in pair if i not in used]})
+ write('alchimie-candidates.json',{'kind':'alchimie-reuse-candidates-v1','baseline':'c0ead5e','world_sha256':hashlib.sha256((ROOT/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json').read_bytes()).hexdigest(),'concept_count':len(ids),'recipes':rows,'audit':{'existing_concepts_only':True,'all_pairs_unused':True,'new_concepts':0,'new_goals':0,'terminal_inputs_reused':3,'old_recipe_records_preserved':len(world['recipes'])}})
+
+def quick():
+ from urllib.parse import quote
+ from cat_de_roman_esti.wordgames.service import get_service
+ from cat_de_roman_esti.wordgames.quick_catalog import graph_strengths,rate_board,visible_ids,bindings
+ from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog
+ service=get_service();strengths=graph_strengths(service);base=list(get_derived_catalog()._boards)
+ rows=[]
+ intrusul=[
+  ('school_tools','Rechizite folosite la școală','Stilou|Radieră|Riglă','Cană','Trei rechizite cu funcții diferite împart o categorie exactă; cana este un vas, chiar dacă poate fi folosită într-o școală. Niciun membru nu depinde de o descriere ascunsă.'),
+  ('kitchen_vessels','Vase folosite în bucătărie','Tigaie|Oală|Castron','Cuțit','Toate cele patru obiecte țin de bucătărie, dar doar cele trei vase pot conține alimente. Cuțitul este o unealtă de tăiere, ceea ce oferă un intrus tematic și corect.'),
+  ('road_vehicles','Autovehicule care circulă pe șosea','Camion|Microbuz|Dubă','Tren','Toate sunt mijloace de transport motorizate. Distincția exactă este șosea față de șine; numărul de pasageri sau transportul de marfă nu determină soluția.'),
+ ]
+ for slug,label,members,intruder,why in intrusul:
+  labels=members.split('|')+[intruder]
+  rows.append({'id':'iq92_session02_'+slug,'game':'intrusul','source_id':'aq92_session02_intrusul_'+slug,'category':'viata_de_roman','difficulty':'usor','payload':{'members':[service.resolve(t) for t in labels[:3]],'intruder':service.resolve(intruder),'group_label':label},'sources':['https://dexonline.ro/definitie/'+quote(t.lower()) for t in labels],'rationale':why})
+ pair_specs=[
+  [('Găină','Ou','Pasăre domestică și produsul ei'),('Lampă','Bec','Corp de iluminat și sursa sa de lumină'),('Supă','Lingură','Preparat lichid și tacâmul potrivit'),('Aeroport','Avion','Infrastructură de transport și vehiculul deservit')],
+  [('Dinte','Periuță de dinți','Parte a corpului și obiect pentru curățarea ei'),('Mop','Podea','Unealtă de curățat și suprafața curățată'),('copac','Rădăcină','Plantă lemnoasă și partea ei subterană'),('Cumpărături','magazin','Activitate și locul unde o faci')],
+  [('Școală','A învăța','Loc de educație și activitatea sa centrală'),('Morcov','Iepure','Legumă și animal asociat cu ea'),('Ceas','Minut','Instrument și unitate de timp măsurată'),('floare','Ghiveci de flori','Floare și recipient pentru planta ei')],
+ ]
+ for index,spec in enumerate(pair_specs,1):
+  rows.append({'id':f'pq92_session02_everyday_{index:02d}','game':'perechi','source_id':f'aq92_session02_perechi_everyday_{index:02d}','category':'viata_de_roman','difficulty':'usor','payload':{'pairs':[{'members':[service.resolve(a),service.resolve(b)],'group_label':label} for a,b,label in spec]},'sources':['https://dexonline.ro/definitie/'+quote(t.lower().removeprefix('a ')) for a,b,label in spec for t in [a,b]],'rationale':'Patru relații distincte din viața de zi cu zi: '+ '; '.join(a+' — '+b+' ('+label.lower()+')' for a,b,label in spec)+'. Fiecare pereche este nouă în Perechi; nu există muchii concurente puternice pe tablă.'})
+ ratings=[rate_board(r,service,strengths) for r in rows]
+ old_pairs={frozenset(p['members']) for b in base if b.game=='perechi' for p in b.payload['pairs']}
+ old_trios={frozenset(b.payload['members']) for b in base if b.game=='intrusul'}
+ audit=[];seen_pairs=set();seen_boards=set()
+ for row,rating in zip(rows,ratings):
+  visible=set(visible_ids(row));assert frozenset(visible) not in seen_boards;seen_boards.add(frozenset(visible))
+  prior=[b for b in base if b.game==row['game']]
+  old_visible={n for b in prior for n in visible_ids({'game':b.game,'payload':b.payload})}
+  overlap=max(len(visible & set(visible_ids({'game':b.game,'payload':b.payload}))) for b in prior)
+  assert overlap<len(visible)
+  if row['game']=='intrusul':assert frozenset(row['payload']['members']) not in old_trios
+  else:
+   for pair in row['payload']['pairs']:
+    members=frozenset(pair['members']);assert members not in old_pairs and members not in seen_pairs;seen_pairs.add(members)
+  audit.append({'id':row['id'],'labels':[service.node(i).label_ro for i in visible_ids(row)],'standard_score':rating['standard_score'],'starter_eligible':rating['starter_eligible'],'maximum_old_board_overlap':overlap,'new_visible_concepts':len(visible-old_visible)})
+ write('quick-candidates-v2.json',{'kind':'quick-entry-candidates-v1','baseline':'c0ead5e','bindings':bindings(live=True),'boards':rows})
+ write('quick-author-audit-v2.json',{'kind':'quick-author-audit-v1','candidate_sha256':hashlib.sha256((OUT/'quick-candidates-v2.json').read_bytes()).hexdigest(),'scope':'Author structural and novelty checks, not independent approval. Exact existing V38 formulas and graph gates.','old_catalog_boards':len(base),'all_six_preferred':True,'all_six_starter_eligible':True,'new_intended_pairs':len(seen_pairs),'results':audit})
+
+if __name__=='__main__':
+ p=argparse.ArgumentParser();p.add_argument('subset',choices=['alchimie','quick']);a=p.parse_args();globals()[a.subset]()

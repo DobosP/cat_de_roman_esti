@@ -9,6 +9,7 @@ const word = (page, label) => page.locator(".alchemy-inventory-grid").getByRole(
 const responseTo = (page, path, method = "POST") => page.waitForResponse((response) => response.request().method() === method && new URL(response.url()).pathname === path);
 const saved = (page) => page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "null"), SAVE);
 const EXPANDED_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-111-checkpoint.json", import.meta.url), "utf8"));
+const LARGE_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-221-checkpoint.json", import.meta.url), "utf8"));
 
 // The original 75-concept world shipped in 2257766. This historical checkpoint must
 // keep its original fingerprint; changing it would hide a broken upgrade path.
@@ -77,6 +78,7 @@ test("exploration is the clean default, saves discoveries, searches accents and 
   await expect(page.getByLabel("Obiectiv opțional", { exact: true })).toBeEnabled();
   const query = page.getByRole("searchbox", { name: "Caută în colecție" });
   const item = resumed.inventory.at(-1);
+  await page.locator(".alchemy-library-tools > summary").click();
   await query.fill(item.label.normalize("NFD").replace(/\p{M}/gu, ""));
   await expect(word(page, item.label)).toBeVisible();
   await query.press("Escape");
@@ -100,6 +102,7 @@ test("optional goal completion keeps exploration playable and pantry gifts arriv
   let state = await begin(page);
   const goalId = state.goals[0].id;
   const goalResponse = responseTo(page, `${BASE}/${state.game_id}/goal`);
+  await page.locator(".alchemy-explore-goal > summary").click();
   await page.getByLabel("Obiectiv opțional", { exact: true }).selectOption(goalId);
   state = await (await goalResponse).json();
   for (let steps = 0; steps < 32 && !state.goals.find((goal) => goal.id === goalId).completed; steps += 1) state = await discover(page, state);
@@ -269,6 +272,7 @@ test("a completed 111-concept collection keeps every earned item and opens the l
   await expect(page.getByRole("alert")).toHaveCount(0);
   await expect(page.getByLabel("Obiectiv opțional", { exact: true })).toHaveValue("cornulete");
   const query = page.getByRole("searchbox", { name: "Caută în colecție" });
+  await page.locator(".alchemy-library-tools > summary").click();
   await query.fill("cornulete");
   await expect(word(page, "Cornulețe")).toBeVisible();
   await query.press("Escape");
@@ -284,6 +288,69 @@ test("a completed 111-concept collection keeps every earned item and opens the l
   expect(await page.evaluate((key) => new TextEncoder().encode(localStorage.getItem(key)).byteLength, SAVE)).toBeLessThan(64 * 1024);
   expect(await page.evaluate(() => globalThis.document.documentElement.scrollWidth <= globalThis.innerWidth)).toBe(true);
 });
+
+test("a completed221-concept save retains its full collection and journal after recipe additions", async ({ page }) => {
+  const checkpoint = LARGE_CHECKPOINT.collection;
+  await page.goto("/alchimie");
+  await page.evaluate(({ key, collection }) => localStorage.setItem(key, JSON.stringify(collection)), {
+    key: SAVE, collection: checkpoint,
+  });
+  const response = responseTo(page, BASE);
+  await page.reload();
+  const restored = await (await response).json();
+  expect(restored.progress.recipe_hash).not.toBe(checkpoint.progress.recipe_hash);
+  expect(restored.compatible_recipe_hashes).toContain(checkpoint.progress.recipe_hash);
+  expect(restored.world.total_concepts).toBe(221);
+  expect(restored.world.total_recipes).toBeGreaterThan(285);
+  expect(restored.complete).toBe(true);
+  expect(restored.discovered_count).toBe(117);
+  expect(restored.inventory.map((item) => item.id).sort()).toEqual(LARGE_CHECKPOINT.owned_ids);
+  expect(restored.progress.discoveries).toEqual(checkpoint.progress.discoveries);
+  expect(restored.goal_id).toBe(checkpoint.goal_id);
+  await expect.poll(async () => (await saved(page))?.progress).toEqual(restored.progress);
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  await page.locator(".alchemy-explore-journal > summary").click();
+  await expect(page.locator(".alchemy-journal-entry")).toHaveCount(117);
+  await page.reload();
+  await expect(page.locator(".alchemy-collection-count")).toContainText("221 / 221");
+  expect((await saved(page)).progress).toEqual(restored.progress);
+});
+
+for (const example of [
+  { prefix: 45, first: "Aluat", second: "Portocală", result: "Chec", focus: "Aluat" },
+  { prefix: 65, first: "Nucă", second: "Pătrunjel", result: "Pesto", focus: null },
+]) {
+  test(`deep keyboard crafting keeps ${example.focus ?? "the collection"} focus visible`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const checkpoint = structuredClone(LARGE_CHECKPOINT.collection);
+    checkpoint.revision = example.prefix;
+    checkpoint.goal_id = null;
+    checkpoint.progress.discoveries = checkpoint.progress.discoveries.slice(0, example.prefix);
+    await page.goto("/alchimie");
+    await page.evaluate(({ key, value }) => localStorage.setItem(key, JSON.stringify(value)), {
+      key: SAVE, value: checkpoint,
+    });
+    const response = responseTo(page, BASE);
+    await page.reload();
+    const state = await (await response).json();
+    await word(page, example.first).click();
+    const second = word(page, example.second);
+    await second.focus();
+    await second.scrollIntoViewIfNeeded();
+    const crafted = responseTo(page, `${BASE}/${state.game_id}/combine`);
+    await page.keyboard.press("Enter");
+    const result = await (await crafted).json();
+    expect(result.discovered.some((item) => item.label === example.result)).toBe(true);
+    const focused = example.focus ? word(page, example.focus) : page.getByRole("region", { name: "Colecția ta" });
+    await expect(focused).toBeFocused();
+    await expect.poll(async () => {
+      const box = await focused.boundingBox();
+      const bench = await page.locator(".alchemy-bench").boundingBox();
+      return box.y >= bench.y + bench.height && box.y < 844;
+    }).toBe(true);
+    if (example.focus) expect((await focused.boundingBox()).y + (await focused.boundingBox()).height).toBeLessThanOrEqual(844);
+  });
+}
 
 test("the daily circuit opens scored challenges while the arcade card opens exploration", async ({ page }) => {
   await page.goto("/");
@@ -321,4 +388,60 @@ test("exploration intro, active collection and earned recipes are accessible", a
   await page.setViewportSize({ width: 320, height: 850 });
   await page.evaluate(() => { globalThis.document.documentElement.style.fontSize = "200%"; });
   await audit("exploration-320-text-zoom");
+});
+
+for (const width of [390, 320]) {
+  test(`exploration starts with all eight words visible at ${width}px without opening optional tools`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    const state = await begin(page);
+    await expect(page.locator(".screen")).toHaveCSS("opacity", "1");
+    await page.evaluate(() => globalThis.document.fonts.ready);
+    await expect(page.locator(".alchemy-explore-goal")).not.toHaveAttribute("open");
+    await expect(page.locator(".alchemy-library-tools")).not.toHaveAttribute("open");
+    await expect(page.locator(".alchemy-word")).toHaveCount(8);
+    for (const tile of await page.locator(".alchemy-word").all()) {
+      await expect(tile).toBeInViewport({ ratio: 1 });
+      const box = await tile.boundingBox();
+      expect(box.width).toBeGreaterThanOrEqual(44);
+      expect(box.height).toBeGreaterThanOrEqual(44);
+    }
+    expect(await page.locator(".alchemy-explore-screen").evaluate((element) => element.scrollTop)).toBe(0);
+    const mutations = [];
+    page.on("request", (request) => {
+      if (request.method() === "POST" && request.url().includes(`${BASE}/${state.game_id}/`)) mutations.push(request.url());
+    });
+    await word(page, state.inventory[0].label).click();
+    for (const selector of [".alchemy-explore-goal", ".alchemy-library-tools"]) {
+      const summary = page.locator(`${selector} > summary`);
+      await summary.click();
+      await expect(page.locator(selector)).toHaveAttribute("open", "");
+      await summary.click();
+    }
+    await expect(word(page, state.inventory[0].label)).toHaveAttribute("aria-pressed", "true");
+    expect(mutations).toEqual([]);
+  });
+}
+
+test("exploration keeps bottom-of-collection craft feedback visible and lets short views scroll normally", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  let state = await begin(page);
+  for (let index = 0; index < 8; index += 1) state = await discover(page, state);
+  expect(state.inventory.filter((item) => item.status === "active").length).toBeGreaterThan(16);
+  const selected = page.getByRole("button", { name: /^Scoate .* din alambic$/ });
+  if (await selected.count()) await selected.click();
+  const active = page.locator(".alchemy-word:not(:disabled)");
+  await active.last().click();
+  const response = responseTo(page, `${BASE}/${state.game_id}/combine`);
+  await active.nth(-2).click();
+  const result = await (await response).json();
+  await expect(page.locator(".alchemy-bench .alchemy-feedback").first()).toContainText(result.message);
+  await expect(page.locator(".alchemy-bench .alchemy-feedback").first()).toBeInViewport({ ratio: 1 });
+  await expect(page.locator(".alchemy-bench")).toHaveCSS("position", "sticky");
+  expect(await page.locator(".alchemy-explore-screen").evaluate((element) => element.scrollTop)).toBeGreaterThan(100);
+  await page.setViewportSize({ width: 320, height: 360 });
+  await expect(page.locator(".alchemy-bench")).toHaveCSS("position", "static");
+  await page.evaluate(() => { globalThis.document.documentElement.style.fontSize = "200%"; });
+  await active.last().scrollIntoViewIfNeeded();
+  await expect(active.last()).toBeInViewport({ ratio: 1 });
+  expect(await page.evaluate(() => globalThis.document.documentElement.scrollWidth <= globalThis.innerWidth)).toBe(true);
 });

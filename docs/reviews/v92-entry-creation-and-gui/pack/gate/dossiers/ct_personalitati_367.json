@@ -1,0 +1,183 @@
+{
+ "id": "ct_personalitati_367",
+ "game": "contexto",
+ "category": "personalitati",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "4f821cb40df9c490c256123d92ea2a27d8fb1a69f52b65bd6bde87ebef882aba",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_nadia_comaneci",
+  "label": "Nadia Comăneci",
+  "node_type": "person",
+  "category": "personalitati",
+  "salience": 0.6128,
+  "degree": 18,
+  "incoming_degree": 18,
+  "description": "Gimnasta romana, primul 10 perfect olimpic."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 18,
+  "sample": [
+   {
+    "id": "n_gimnastica",
+    "label": "Gimnastică"
+   },
+   {
+    "id": "n_montreal_1976",
+    "label": "Jocurile Olimpice Montreal 1976"
+   },
+   {
+    "id": "n_romania_stat",
+    "label": "România"
+   },
+   {
+    "id": "n_sportiv",
+    "label": "Sportiv"
+   },
+   {
+    "id": "n_spt_barna_gimnastica",
+    "label": "Bârna"
+   },
+   {
+    "id": "n_spt_lotul_olimpic_romania",
+    "label": "Lotul olimpic al României"
+   },
+   {
+    "id": "n_spt_nadia_zecele_perfect",
+    "label": "Primul 10 perfect"
+   },
+   {
+    "id": "n_spt_paralele_gimnastica",
+    "label": "Paralele inegale"
+   },
+   {
+    "id": "n_v20per_cristian_topescu",
+    "label": "Cristian Țopescu"
+   },
+   {
+    "id": "n_v2per_olimpiada",
+    "label": "Olimpiadă"
+   }
+  ],
+  "sample_truncated": true,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_spt_nadia_zecele_perfect",
+   "label": "Primul 10 perfect",
+   "node_type": "concept",
+   "category": "sport",
+   "salience": 0.9484,
+   "degree": 9,
+   "incoming_degree": 9,
+   "description": "Nota 10 obținută de Nadia Comăneci la Montreal 1976, premieră olimpică în gimnastică.",
+   "strength": 0.98
+  },
+  {
+   "id": "n_gimnastica",
+   "label": "Gimnastică",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.2901,
+   "degree": 15,
+   "incoming_degree": 15,
+   "description": "Sport al exercitiilor de forta si echilibru.",
+   "strength": 0.95
+  },
+  {
+   "id": "n_spt_paralele_gimnastica",
+   "label": "Paralele inegale",
+   "node_type": "concept",
+   "category": "sport",
+   "salience": 0.4257,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Aparatul la care Nadia Comăneci a primit primul 10 perfect la Montreal.",
+   "strength": 0.92
+  },
+  {
+   "id": "n_v2per_olimpiada",
+   "label": "Olimpiadă",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.9231,
+   "degree": 13,
+   "incoming_degree": 13,
+   "description": "Competiție sportivă internațională organizată o dată la patru ani.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v4per_campion",
+   "label": "campion",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.8696,
+   "degree": 8,
+   "incoming_degree": 9,
+   "description": "Persoană care câștigă o competiție importantă.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v4per_gimnast",
+   "label": "gimnast",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.5547,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Sportiv care practică gimnastica.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v4per_celebritate",
+   "label": "celebritate",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.8099,
+   "degree": 6,
+   "incoming_degree": 7,
+   "description": "Persoană foarte cunoscută publicului larg.",
+   "strength": 0.89
+  },
+  {
+   "id": "n_romania_stat",
+   "label": "România",
+   "node_type": "place",
+   "category": "societate",
+   "salience": 0.7986,
+   "degree": 52,
+   "incoming_degree": 54,
+   "description": "Stat national, suveran, unitar si indivizibil, organizat ca republica semiprezidentiala.",
+   "strength": 0.86
+  },
+  {
+   "id": "n_v3per_personalitate",
+   "label": "Personalitate",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.7044,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Persoană cunoscută public prin activitate, operă sau influență.",
+   "strength": 0.86
+  },
+  {
+   "id": "n_v4per_talent",
+   "label": "talent",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.774,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Aptitudine remarcabilă într-un domeniu artistic, sportiv sau științific.",
+   "strength": 0.86
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:b3700b2b082ebb3592f497fc2b992485243a149443ef9cd2a580eca784bb04eb"
+}

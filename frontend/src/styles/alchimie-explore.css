@@ -19,12 +19,20 @@
 .alchemy-world-heading progress::-webkit-progress-value { background: #d4b0fa; border-radius: 5px; }
 .alchemy-world-heading progress::-moz-progress-bar { background: #d4b0fa; border-radius: 5px; }
 .alchemy-world-heading .alchemy-pantry-progress { font-size: .73rem; margin-top: 8px; }
-.alchemy-explore-goal { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; padding: 12px 16px; border: 1px solid #4b405b; border-radius: 13px; background: #211b2d; }
+.alchemy-explore-goal { border: 1px solid #4b405b; border-radius: 13px; background: #211b2d; }
+.alchemy-explore-goal > summary { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 8px 12px; cursor: pointer; color: #c5b7d8; font-size: .78rem; }
+.alchemy-explore-goal > summary strong { margin-left: auto; color: #eeeaf8; overflow-wrap: anywhere; }
+.alchemy-explore-goal > summary::after { content: "⌄"; }
+.alchemy-explore-goal[open] > summary::after { content: "⌃"; }
+.alchemy-goal-content { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; padding: 4px 12px 12px; }
 .alchemy-explore-goal label { color: #c5b7d8; font-size: .78rem; }
 .alchemy-explore-goal select { flex: 1 1 180px; min-width: 0; min-height: 44px; max-width: 100%; background: #131020; color: #eeeaf8; border-color: #6b537e; font-size: .86rem; }
 .alchemy-explore-goal p { flex-basis: 100%; margin: 0; color: #e5d2f7; line-height: 1.5; font-size: .8rem; }
 .alchemy-screen.alchemy-explore-screen .alchemy-panel-heading h2 { margin: 0; color: var(--alchemy-ink); font-family: var(--font-display); font-size: 1.1rem; }
 .alchemy-screen.alchemy-explore-screen .alchemy-bench { padding: 12px 16px; gap: 8px; }
+.alchemy-screen.alchemy-explore-screen .alchemy-bench--pinned { position: sticky; top: 8px; z-index: 2; }
+.alchemy-explore-screen .alchemy-word { scroll-margin-top: var(--alchemy-bench-clearance, 12px); }
+.alchemy-explore-screen .alchemy-assistance > span { flex: 1 1 60px; }
 .alchemy-screen.alchemy-explore-screen .alchemy-craft-cue { min-height: 48px; }
 .alchemy-screen.alchemy-explore-screen .alchemy-inventory-panel { padding: 12px 16px 16px; gap: 8px; }
 .alchemy-explore-library-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
@@ -51,7 +59,6 @@
   .alchemy-explore-intro { gap: 16px; }
   .alchemy-modes { align-self: stretch; }
   .alchemy-modes > * { flex: 1; padding: 7px 10px; }
-  .alchemy-explore-goal { padding: 10px 12px; gap: 4px 12px; }
   .alchemy-collection-count { font-size: .72rem; }
   .alchemy-explore-library-tools .alchemy-inventory-search { flex-basis: 150px; }
 }

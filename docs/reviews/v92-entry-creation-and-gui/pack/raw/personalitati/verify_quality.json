@@ -1,0 +1,23 @@
+{
+  "category": "personalitati",
+  "candidate_sha256": "sha256:26a29be61eb4d251b6259ca7a761c4a7b230bd3443a358f5b54d558ae3daf699",
+  "reviewer": "v92-session02-independent-pack-quality-gui-critique",
+  "coverage_note": "Every raw reference reviewed against its exact candidate, KG snapshots, full preview dossiers and lint/novelty results, authored actual BFF Contexto probes, and the current rubric. Quality keep permits pending staging only; factual review and allocated-ID final dossiers remain required. Two taxonomy-only Lanț proposals are explicitly dropped.",
+  "instances": [
+    {
+      "ref": "contexto[0]",
+      "verdict": "keep",
+      "note": "Accept quality for easy Nadia Comăneci. This is a cross-generational Olympic name, with eighteen existing incoming neighbors. gimnastică #3, Olimpiadă and gimnast #5, bârnă #16 and Simona Amânar #20 give an interpretable gradient through several familiar guesses. sport #274 and unresolved Montreal are acknowledged rough edges; the exact Olympic event remains known. The target is concrete, nameable and supported by several obvious approaches rather than one forced answer chain."
+    },
+    {
+      "ref": "lant[0]",
+      "verdict": "drop",
+      "note": "Reject under D2 and D5. Nadia Comăneci → Simona Amânar has three shortest intermediate nodes, but Gimnastică, gimnast and Lotul olimpic al României merely restate shared discipline/profession/national Olympic membership. No specific shared event, place, work or other concrete bridge makes the two-hop route feel discovered. Numerical branching does not establish meaningful choice when its branches are near-equivalent classifications. Famous endpoints and easy vocabulary do not rescue this arc."
+    },
+    {
+      "ref": "lant[1]",
+      "verdict": "drop",
+      "note": "Reject under D2 and D5. All representative shortest paths between Gheorghe Zamfir and Maria Tănase run through Muzică populară, Muzician or Folclor românesc. These are overlapping genre/profession classifications, so the second move mostly guesses another member of the same broad class. There is no concrete collaborator, named work, event or distinctive biographical bridge. Three graph alternatives and recognized endpoints do not establish a satisfying route."
+    }
+  ]
+}

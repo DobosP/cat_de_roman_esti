@@ -13,7 +13,11 @@ import pytest
 
 from cat_de_roman_esti.wordgames import alchimie
 from cat_de_roman_esti.wordgames.service import get_service
-from tests.content_history import before_v91_artifact, before_v92_artifact
+from tests.content_history import (
+    before_v91_artifact,
+    before_v92_artifact,
+    before_v92_entry_session_artifact,
+)
 from tests.current_content import CURRENT_CONTENT
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +30,12 @@ BASELINE = {
     "cat_mobile_app_pack_contract.json": (
         "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
     ),
+}
+V92_SESSION_ONE = {
+    **BASELINE,
+    "games_pack.json": "62c1eaaa7bb72674cf59a66f9b543d911749d52973155f6b201d796d97d6ea4a",
+    "board_rankings_v37.json": "6f2662615b686a492b41f2d689a7ba6b380b62d7b8cecc5e7a3c9788d1dce641",
+    "derived_catalog_v38.json": "09e6b1caa3ed586264a85d3d9807f0173384c02c80102dae072d14665432f2aa",
 }
 
 
@@ -118,14 +128,15 @@ def test_v92_inverse_restores_exact_reviewed_v91_after_artifact(filename):
     directory = "tests/fixtures" if filename.startswith("cat_mobile") else (
         "cat_de_roman_esti/fixtures"
     )
-    current = read(ROOT / directory / filename)
-    untouched = deepcopy(current)
-    restored = before_v92_artifact(current, filename)
+    live = read(ROOT / directory / filename)
+    untouched = deepcopy(live)
+    current = before_v92_entry_session_artifact(live, filename)
+    restored = before_v92_artifact(live, filename)
     receipt = read(REVIEW / "artifact-delta.json")["files"][filename]
     indent = 2 if filename == "kg_sample.json" else 1
     blob = (json.dumps(restored, ensure_ascii=False, indent=indent) + "\n").encode()
     assert hashlib.sha256(blob).hexdigest() == receipt["after_sha256"]
-    assert current == untouched
+    assert live == untouched
     if filename == "games_pack.json":
         assert {game: len(current[game]) - len(restored[game])
                 for game in ("conexiuni", "contexto", "lant", "alchimie")} == {
@@ -167,3 +178,76 @@ def test_v92_inverse_rejects_tampering_before_stripping_new_content(change):
         current["contexto"].append({**current["contexto"][-1], "id": "ct_unreviewed_999"})
     with pytest.raises(AssertionError):
         before_v92_artifact(current, filename)
+
+
+@pytest.mark.parametrize("filename", V92_SESSION_ONE)
+def test_session_two_inverse_restores_complete_c0ead5e_bytes(filename):
+    directory = "tests/fixtures" if filename.startswith("cat_mobile") else (
+        "cat_de_roman_esti/fixtures"
+    )
+    current = read(ROOT / directory / filename)
+    untouched = deepcopy(current)
+    restored = before_v92_entry_session_artifact(current, filename)
+    indent = 2 if filename == "kg_sample.json" else 1
+    blob = (json.dumps(restored, ensure_ascii=False, indent=indent) + "\n").encode()
+    assert hashlib.sha256(blob).hexdigest() == V92_SESSION_ONE[filename]
+    assert current == untouched
+    if filename == "games_pack.json":
+        expected = {
+            "conexiuni": {"cx_viata_de_roman_368"},
+            "contexto": {"ct_geografie_365", "ct_muzica_366", "ct_personalitati_367"},
+            "lant": {"lt_literatura_236"},
+            "alchimie": set(),
+        }
+        for game, added in expected.items():
+            before = {row["id"]: row for row in restored[game]}
+            after = {row["id"]: row for row in current[game]}
+            assert set(after) - set(before) == added
+            assert all(after[item_id]["status"] == "approved" for item_id in added)
+            assert all(row == after[item_id] for item_id, row in before.items())
+    elif filename == "board_rankings_v37.json":
+        assert len(current["boards"]) - len(restored["boards"]) == 5
+    elif filename == "derived_catalog_v38.json":
+        assert current["boards"] == restored["boards"]
+    else:
+        assert current == restored
+
+
+@pytest.mark.parametrize("change", [
+    "new_row", "missing_new_row", "old_row", "rank_weight", "extra_row",
+])
+def test_session_two_inverse_checks_current_bytes_before_removing_additions(change):
+    filename = "board_rankings_v37.json" if change == "rank_weight" else "games_pack.json"
+    current = read(ROOT / "cat_de_roman_esti/fixtures" / filename)
+    if change == "new_row":
+        row = next(row for row in current["lant"] if row["id"] == "lt_literatura_236")
+        row["start"] = "n_unreviewed"
+    elif change == "missing_new_row":
+        current["conexiuni"] = [
+            row for row in current["conexiuni"] if row["id"] != "cx_viata_de_roman_368"
+        ]
+    elif change == "old_row":
+        current["alchimie"][0]["unreviewed"] = True
+    elif change == "rank_weight":
+        current["boards"][0]["selection_weight"] += 1
+    else:
+        current["contexto"].append({**current["contexto"][-1], "id": "ct_unreviewed_999"})
+    with pytest.raises(AssertionError):
+        before_v92_entry_session_artifact(current, filename)
+
+
+def test_session_two_receipt_cannot_be_rebound_to_modified_current_bytes(tmp_path, monkeypatch):
+    from tests import content_history
+
+    filename = "games_pack.json"
+    current = read(ROOT / "cat_de_roman_esti/fixtures" / filename)
+    current["meta"]["unreviewed"] = True
+    receipt = read(content_history._V92_ENTRY_SESSION_RECEIPT)
+    blob = (json.dumps(current, ensure_ascii=False, indent=1) + "\n").encode()
+    receipt["files"][filename]["after_sha256"] = hashlib.sha256(blob).hexdigest()
+    receipt["files"][filename]["head_after"]["meta"]["unreviewed"] = True
+    path = tmp_path / "modified-receipt.json"
+    path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n")
+    monkeypatch.setattr(content_history, "_V92_ENTRY_SESSION_RECEIPT", path)
+    with pytest.raises(AssertionError):
+        before_v92_entry_session_artifact(current, filename)

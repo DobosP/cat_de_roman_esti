@@ -3,15 +3,15 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 238,
-   "contexto": 252,
-   "lant": 113,
+   "conexiuni": 239,
+   "contexto": 255,
+   "lant": 114,
    "alchimie": 83
   },
   "id_high_water": {
-   "conexiuni": 367,
-   "contexto": 364,
-   "lant": 235,
+   "conexiuni": 368,
+   "contexto": 367,
+   "lant": 236,
    "alchimie": 107
   }
  },
@@ -13581,6 +13581,63 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v84_food_drojdie",
+     "n_v87_food_praf_copt",
+     "n_v87_food_bicarbonat",
+     "n_v86_food_albus"
+    ],
+    "g2": [
+     "n_v32_workshop_hand_surubelnita",
+     "n_v24_transport_personal_bicicleta",
+     "n_v88_school_compas",
+     "n_v4via_cheie"
+    ],
+    "g3": [
+     "n_v2gas_placinte",
+     "n_v21gas_cornulete",
+     "n_v21gas_merdenea",
+     "n_gas_placinte_poale_brau"
+    ],
+    "g4": [
+     "n_v30_clothing_everyday_pantaloni",
+     "n_v30_clothing_everyday_fusta",
+     "n_v30_clothing_footwear_soseta",
+     "n_v30_clothing_footwear_pantof"
+    ]
+   },
+   "group_labels": {
+    "g1": "Se folosesc pentru afânarea aluatului",
+    "g2": "Folosesc mișcarea de rotație",
+    "g3": "Au umplutură învelită în aluat",
+    "g4": "Se poartă de la talie în jos"
+   },
+   "order": [
+    "n_v21gas_merdenea",
+    "n_gas_placinte_poale_brau",
+    "n_v30_clothing_footwear_pantof",
+    "n_v30_clothing_everyday_fusta",
+    "n_v30_clothing_everyday_pantaloni",
+    "n_v88_school_compas",
+    "n_v2gas_placinte",
+    "n_v30_clothing_footwear_soseta",
+    "n_v86_food_albus",
+    "n_v4via_cheie",
+    "n_v87_food_bicarbonat",
+    "n_v87_food_praf_copt",
+    "n_v84_food_drojdie",
+    "n_v24_transport_personal_bicicleta",
+    "n_v32_workshop_hand_surubelnita",
+    "n_v21gas_cornulete"
+   ],
+   "id": "cx_viata_de_roman_368",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -14337,6 +14394,14 @@
    "status": "approved"
   },
   {
+   "difficulty": "usor",
+   "target": "n_brasov",
+   "id": "ct_geografie_365",
+   "category": "geografie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
    "id": "ct_istorie_001",
    "category": "istorie",
    "difficulty": "normal",
@@ -14970,6 +15035,14 @@
   },
   {
    "difficulty": "usor",
+   "target": "n_v3muz_chitara",
+   "id": "ct_muzica_366",
+   "category": "muzica",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
    "target": "n_constantin_brancusi",
    "id": "ct_personalitati_075",
    "category": "personalitati",
@@ -15020,6 +15093,14 @@
    "difficulty": "greu",
    "target": "n_emil_cioran",
    "id": "ct_personalitati_174",
+   "category": "personalitati",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_nadia_comaneci",
+   "id": "ct_personalitati_367",
    "category": "personalitati",
    "source": "ai",
    "status": "approved"
@@ -16208,6 +16289,16 @@
    "target": "n_v21lit_floare_albastra",
    "optimal": 2,
    "id": "lt_literatura_231",
+   "category": "literatura",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_v23lit_capra_cu_trei_iezi",
+   "target": "n_amintiri_copilarie",
+   "optimal": 2,
+   "id": "lt_literatura_236",
    "category": "literatura",
    "source": "ai",
    "status": "approved"

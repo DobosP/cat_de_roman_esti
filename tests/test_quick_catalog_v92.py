@@ -23,9 +23,10 @@ from cat_de_roman_esti.wordgames.derived_catalog import (
 )
 from cat_de_roman_esti.wordgames.service import SessionStore, WordGameService, get_service
 from scripts import build_derived_catalog_v38 as V38
+from tests.current_content import CURRENT_CONTENT
 
 FROZEN_CORE_SHA256 = "b78f069479f99741bf5187db638eebbc476eccf2d914c4a48b072b895446dc29"
-REVIEWED_QUICK_SHA256 = "36f5fc575ed5ae36735d792dd71df5860d917dba1b3b58090f792afd4f3b0d39"
+REVIEWED_QUICK_SHA256 = CURRENT_CONTENT.quick_sha256
 
 
 @pytest.fixture(autouse=True)
@@ -70,9 +71,11 @@ def test_installed_supplement_preserves_every_frozen_core_field_and_adds_reviewe
     for original in core._boards:
         assert vars(current[original._catalog_id]) == vars(original)
     additions = [board for board in served._boards if board._source_id.startswith("aq92_")]
-    assert Counter(board.game for board in additions) == {"intrusul": 25, "perechi": 20}
-    assert served.counts() == {"intrusul": 208, "perechi": 173}
-    assert len(current) == len(served._boards) == 381
+    assert Counter(board.game for board in additions) == (
+        CURRENT_CONTENT.quick_counts["authored_by_game"]
+    )
+    assert served.counts() == CURRENT_CONTENT.quick_counts["by_game"]
+    assert len(current) == len(served._boards) == CURRENT_CONTENT.quick_counts["total"]
     assert all(board._standard_score >= 55 for board in additions)
 
 

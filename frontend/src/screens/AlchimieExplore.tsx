@@ -33,8 +33,32 @@ export default function AlchimieExplore({ onExit }: {
   const dragSource = useRef<{ gameId: string; id: string } | null>(null);
   const buttons = useRef(new Map<string, HTMLButtonElement>());
   const library = useRef<HTMLElement>(null);
-  const pendingFocus = useRef<{ origin: HTMLElement; id: string | null } | null>(null);
+  const bench = useRef<HTMLDivElement>(null);
+  const [benchPinned, setBenchPinned] = useState(false);
+  const pendingFocus = useRef<{ origin: HTMLElement; id: string | null; keyboard: boolean } | null>(null);
   const locked = busy || recovery !== null;
+
+  useEffect(() => {
+    const element = bench.current;
+    if (!element) return;
+    const resize = () => {
+      const height = element.getBoundingClientRect().height;
+      const viewport = window.visualViewport?.height ?? window.innerHeight;
+      const pinned = viewport >= 480 && height <= viewport * 0.35;
+      setBenchPinned(pinned);
+      element.parentElement?.style.setProperty("--alchemy-bench-clearance", `${pinned ? height + 16 : 12}px`);
+    };
+    const observer = new ResizeObserver(resize);
+    observer.observe(element);
+    window.visualViewport?.addEventListener("resize", resize);
+    window.addEventListener("resize", resize);
+    resize();
+    return () => {
+      observer.disconnect();
+      window.visualViewport?.removeEventListener("resize", resize);
+      window.removeEventListener("resize", resize);
+    };
+  }, [state?.game_id]);
 
   const adopt = useCallback(async (fresh: ExplorationState) => {
     const epoch = generation.current;
@@ -143,7 +167,7 @@ export default function AlchimieExplore({ onExit }: {
     }
   }, [state, locked, adopt]);
 
-  const combine = useCallback((a: string, b: string) => {
+  const combine = useCallback((a: string, b: string, keyboard = false) => {
     if (a === b || !state || [a, b].some((id) => !state.inventory.some((item) => item.id === id && item.status === "active"))) return;
     const origin = document.activeElement;
     void act((gameId) => explorationApi.combine(gameId, a, b), (fresh) => {
@@ -154,14 +178,14 @@ export default function AlchimieExplore({ onExit }: {
       setFreshIds([...result.discovered, ...(result.supplied ?? [])].map((item) => item.id));
       setMessage(result.message + (carry ? ` ${carry.label} rămâne ales.` : ""));
       if (result.discovered.length) { setQuery(""); sound.playHop(); }
-      if (origin instanceof HTMLElement && origin.matches(".alchemy-word")) pendingFocus.current = { origin, id: next };
+      if (origin instanceof HTMLElement && origin.matches(".alchemy-word")) pendingFocus.current = { origin, id: next, keyboard };
     });
   }, [state, act]);
 
-  const choose = useCallback((id: string) => {
+  const choose = useCallback((id: string, keyboard: boolean) => {
     if (locked || flight.current) return;
     if (selected === id) setSelected(null);
-    else if (selected) combine(selected, id);
+    else if (selected) combine(selected, id, keyboard);
     else { setSelected(id); setMessage(""); sound.playSelect(); }
   }, [locked, selected, combine]);
 
@@ -170,10 +194,13 @@ export default function AlchimieExplore({ onExit }: {
     if (!pending || busy) return;
     pendingFocus.current = null;
     if (document.activeElement !== document.body && document.activeElement !== pending.origin) return;
-    if (pending.origin.isConnected && !(pending.origin as HTMLButtonElement).disabled) return;
-    const target = pending.id ? buttons.current.get(pending.id) : null;
-    if (target && !target.disabled) target.focus({ preventScroll: true });
+    const target = pending.origin.isConnected && !(pending.origin as HTMLButtonElement).disabled
+      ? pending.origin : pending.id ? buttons.current.get(pending.id) : null;
+    if (target && !(target as HTMLButtonElement).disabled) target.focus({ preventScroll: true });
     else library.current?.focus({ preventScroll: true });
+    // Keyboard activation must leave its focus visible. Centering clears the bench,
+    // whose pinned height is bounded; pointer crafting keeps its browsing position.
+    if (pending.keyboard) (target ?? library.current?.querySelector("h2"))?.scrollIntoView({ block: "center" });
   }, [state, busy]);
 
   useEffect(() => {
@@ -233,7 +260,9 @@ export default function AlchimieExplore({ onExit }: {
               <progress aria-label="Colecție descoperită" value={state.inventory.length} max={state.world.total_concepts} />
               {state.next_unlock && <p className="alchemy-pantry-progress">După încă {state.next_unlock.remaining} {state.next_unlock.remaining === 1 ? "descoperire primești" : "descoperiri primești"} provizii noi.</p>}
             </section>
-            <div className="alchemy-explore-goal">
+            <details className="alchemy-explore-goal">
+              <summary><span>Obiectiv opțional</span><strong>{goal ? `${goal.completed ? "✓ " : ""}${goal.label}` : "Explorez liber"}</strong></summary>
+              <div className="alchemy-goal-content">
               <label htmlFor="alchemy-optional-goal">Obiectiv opțional</label>
               <select id="alchemy-optional-goal" className="field" value={state.goal_id ?? ""} disabled={locked}
                 onChange={(event) => { const value = event.target.value || null; void act((id) => explorationApi.goal(id, value), () => { setSelected(null); setMessage(""); }); }}>
@@ -241,22 +270,24 @@ export default function AlchimieExplore({ onExit }: {
                 {state.goals.map((item) => <option key={item.id} value={item.id}>{item.completed ? "✓ " : ""}{item.title}</option>)}
               </select>
               {goal && <p role="status">{goal.completed ? `✓ ${goal.label} descoperit! Poți continua sau alege alt obiectiv.` : `Descoperă: ${goal.label}. Poți crea și orice altceva pe drum.`}</p>}
-            </div>
+              </div>
+            </details>
             {state.complete && <p className="alchemy-explore-complete" role="status">✦ Ai descoperit toate cuvintele din această lume! Colecția și rețetele tale rămân aici.</p>}
             <div className="alchemy-workspace">
-              <div className="card alchemy-bench" aria-label="Alambic">
+              <div ref={bench} className={`card alchemy-bench${benchPinned ? " alchemy-bench--pinned" : ""}`} aria-label="Alambic">
                 <div className="alchemy-craft-cue">
                   {selectedItem ? <><button type="button" className="alchemy-slot" disabled={locked} aria-label={`Scoate ${selectedItem.label} din alambic`} onClick={() => setSelected(null)}><span className="alchemy-slot-label">{selectedItem.label}</span><span aria-hidden>×</span></button><span className="alchemy-craft-plus" aria-hidden>+</span><span className="alchemy-craft-prompt">Atinge un alt cuvânt</span></> : <p className="alchemy-craft-prompt">Atinge un cuvânt, apoi altul. Se combină imediat.</p>}
                 </div>
                 {busy && <span className="alchemy-working" role="status">Se verifică…</span>}
                 {message && <p className="alchemy-feedback" role="status">{message}</p>}
                 {state.hint && <p className="alchemy-feedback alchemy-explore-hint" role="status">{state.hint.message}</p>}
-                {!state.complete && <div className="alchemy-assistance"><Button variant="secondary" disabled={locked || state.hint?.stage === "pair"} onClick={() => void act(explorationApi.hint, (fresh) => { setSelected(fresh.hint?.pair?.[0].id ?? null); setQuery(""); setShowAll(false); setMessage(""); })}>{state.hint?.stage === "output" ? "Arată-mi perechea" : "💡 O idee?"}</Button><span>{state.hint?.stage === "pair" ? "Cuvintele sugerate sunt marcate. Atinge-l pe al doilea." : "Un indiciu, oricând ai nevoie."}</span></div>}
+                {!state.complete && <div className="alchemy-assistance"><Button variant="secondary" disabled={locked || state.hint?.stage === "pair"} onClick={() => void act(explorationApi.hint, (fresh) => { setSelected(fresh.hint?.pair?.[0].id ?? null); setQuery(""); setShowAll(false); setMessage(""); })}>{state.hint?.stage === "output" ? "Arată-mi perechea" : "💡 O idee?"}</Button><span>{state.hint?.stage === "pair" ? "Atinge al doilea cuvânt marcat." : "Gratuit"}</span></div>}
               </div>
               <section ref={library} tabIndex={-1} className="card col alchemy-inventory-panel" aria-label="Colecția ta">
                 <div className="alchemy-panel-heading"><h2>Cuvintele tale</h2><span className="alchemy-selection-count">{activeCount} de explorat</span></div>
+                <details className="alchemy-library-tools"><summary>{query ? `Căutare: ${query}` : showAll ? `Toate cuvintele · ${state.inventory.length}` : "Caută și filtrează"}</summary>
                 <div className="alchemy-explore-library-tools"><input type="search" className="field alchemy-inventory-search" value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Escape" && query) { event.preventDefault(); setQuery(""); } }} placeholder="Caută în colecție…" aria-label="Caută în colecție" autoComplete="off" spellCheck={false} />
-                  <label className="alchemy-show-collection"><input type="checkbox" checked={showAll} onChange={(event) => setShowAll(event.target.checked)} />Toate ({state.inventory.length})</label></div>
+                  <label className="alchemy-show-collection"><input type="checkbox" checked={showAll} onChange={(event) => setShowAll(event.target.checked)} />Toate ({state.inventory.length})</label></div></details>
                 <div className="alchemy-inventory-grid">
                   {items.map((item) => {
                     const inactive = item.status !== "active";
@@ -267,7 +298,7 @@ export default function AlchimieExplore({ onExit }: {
                       className={`chip alchemy-word${isSelected ? " alchemy-word--selected" : ""}${fresh ? " alchemy-word--fresh" : ""}${hinted ? " alchemy-word--hint" : ""}${dropId === item.id ? " alchemy-word--drop" : ""}`}
                       disabled={locked || inactive} aria-pressed={isSelected} aria-label={`${item.label}${inactive ? ", colecționat" : ""}`}
                       title={inactive ? item.status === "final" ? "Colecționat: nu intră în alte rețete." : "Toate descoperirile cu acest cuvânt sunt deja în colecție." : item.description}
-                      onClick={() => choose(item.id)} draggable={!locked && !inactive}
+                      onClick={(event) => choose(item.id, event.detail === 0)} draggable={!locked && !inactive}
                       onDragStart={(event) => { if (locked || inactive || flight.current) { event.preventDefault(); return; } dragSource.current = { gameId: state.game_id, id: item.id }; event.dataTransfer.setData("text/plain", item.id); event.dataTransfer.effectAllowed = "copy"; }}
                       onDragOver={(event) => { if (!locked && !inactive && dragSource.current?.gameId === state.game_id && dragSource.current.id !== item.id) { event.preventDefault(); setDropId(item.id); event.dataTransfer.dropEffect = "copy"; } }}
                       onDragLeave={() => setDropId(null)} onDragEnd={() => { dragSource.current = null; setDropId(null); }}

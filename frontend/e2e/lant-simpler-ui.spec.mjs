@@ -63,8 +63,8 @@ test("one local-choice tap makes one hop without typing or confirmation", async 
 for (const stage of ["alternatives", "hop"]) {
   test(`an exact ${stage} hint takes one tap and resume never makes the hop`, async ({ page, request }) => {
     const initial = await start(page, game);
-    expect((await requestHint(page, initial.game_id)).stage).toBe("direction");
     let earned = await requestHint(page, initial.game_id);
+    if (earned.stage === "direction") earned = await requestHint(page, initial.game_id);
     expect(earned.stage).toBe("alternatives");
     if (stage === "hop") earned = await requestHint(page, initial.game_id);
     expect(earned.stage).toBe(stage);
@@ -96,9 +96,10 @@ for (const stage of ["alternatives", "hop"]) {
 }
 
 async function earnExactHint(page, id) {
-  for (const stage of ["direction", "alternatives", "hop"]) {
-    expect((await requestHint(page, id)).stage).toBe(stage);
-  }
+  let earned = await requestHint(page, id);
+  if (earned.stage === "direction") earned = await requestHint(page, id);
+  expect(earned.stage).toBe("alternatives");
+  expect((await requestHint(page, id)).stage).toBe("hop");
   const choice = page.locator(".lant-hint-panel .hint-fill-button");
   await expect(choice).toBeEnabled();
   return choice;

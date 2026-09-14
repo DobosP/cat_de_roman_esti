@@ -1,0 +1,44 @@
+{
+  "kind": "independent-exploration-gui-review-v1",
+  "reviewer": "content_verifier",
+  "verdict": "accept",
+  "port": 8156,
+  "fresh_isolated_contexts": true,
+  "user_browser_untouched": true,
+  "source_sha256": {
+    "frontend/src/screens/AlchimieExplore.tsx": "149e32b5262fe8f3aceb45bc06c329f5c9a6b88ff4871a1eda7c6efb16daa2f7",
+    "frontend/src/styles/alchimie-explore.css": "b1fe38b1b406f3ff1761378ef45deb06d4a64899cb6a7c4c85b8bf50657e9e75",
+    "frontend/src/styles/alchimie.css": "1f7a4489dd4c5c3fe5b581f7d2d15ac164fdfaa231e9eaf4d8f1116ad6c8646a",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "14c156c417c312bb29a6b63187f3b86e3ff5630fdf267f38b37808480fad3310"
+  },
+  "scope": "Adversarial keyboard focus after deep-list crafting, sticky feedback,summarytouchareas,shortviewportand200%textfallback. Actual built Chromium with fresh localcontexts; this is not physicaldevice or humanplaytest acceptance.",
+  "resolved_finding": {
+    "title": "Restored keyboard focus was offscreen after a disappearing ingredient",
+    "before": "At45discoveries Aluat+Portocală→Chec restored Aluat to y=-1411.3125 while retaining deep scroll. At65discoveries terminalPesto pair focused an offscreen libraryheading.",
+    "after": "Keyboard Aluat restoration is fully visible at y479.6875–541.6875 below the stickybench bottom203.15625. Terminal fallback exposes the library heading at417.6875–438.6875 and subsequentTab focus is visible. The retained-origin Ou case also stays visible afterbenchgrowth.",
+    "before_evidence_sha256": "481b6f530ec2b07a59aec553aaf9fb0916e7006e35db93d96edec3525f126e28",
+    "after_evidence_sha256": "05ebc7d7b2adaf32a7b5b739668f54e2e344cd83fd95c4b8d1cce366220a049e"
+  },
+  "passing_checks": {
+    "all49summarytargets_at_least44px": true,
+    "deep_craft_feedback_visible_when_pinned": true,
+    "short320x360_unpins": true,
+    "200percent_text_tall_bench_unpins": true,
+    "rendered_height_policy_obeyed_after_shorter_feedback": true,
+    "keyboard_restoration_visible_short_and_large_text": true,
+    "pointer_browsing_position_preserved": true,
+    "focus_not_stolen_after_user_focuses_search_during_request": true,
+    "one_request_per_craft": true,
+    "retained_origin_clear_of_growing_bench": true,
+    "fallback_heading_and_nextTab_visible": true,
+    "horizontal_overflow": false
+  },
+  "notes": "Pinning depends on renderedheight and viewport, not text-size setting alone: the351.6pxbench at200%unpins, then shorter262.2pxfeedback maypinwithin35%of844px. In the360pxviewport normal scrolling makes feedback scrollaway while keyboardfocus staysvisible. Pointer activation deliberately retains the deep browsingposition.",
+  "evidence_sha256": {
+    "layout-receipt.json": "f6688f91f590b3bec19bf844d9b77bc16959c9e05ad45ef0b266a68faa94a431",
+    "retained-origin-repro.json": "33c67e88c86dea607f8dcc01bcc6264095a9cc63163a897fd9ce6dcbf2b89d0c",
+    "focus-guards-after.json": "7a90b339b9226c6e4e275f7df3bf8a8541a4663c2c6140b8c8bbc3ff8860315c",
+    "keyboard-focus-after-case-4.png": "80835d9eb2da22cf301100f0110e979646ef3d669eff9cd07274025913fbee7e",
+    "keyboard-focus-after-case-0.png": "180dfef4ace1f722f93b1f58599e5f3b61daf8eb6f35a4537dd5c886fc57ff76"
+  }
+}

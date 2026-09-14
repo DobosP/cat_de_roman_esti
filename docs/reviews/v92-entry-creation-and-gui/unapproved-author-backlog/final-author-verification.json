@@ -1,0 +1,58 @@
+{
+  "kind": "candidate-author-reproduction-check-v1",
+  "candidate_files": {
+    "pack/candidates/arta_cultura/candidates.json": "d7a584bcb6eb6e8f10f60a0165f5dc32c6c42e0bca367d9d60a84cfc8b11db75",
+    "pack/candidates/istorie/candidates.json": "3a03ee8e8e599af885476da67f3277e6a4fe0ce6ba84a8daab928051795f74cf",
+    "pack/candidates/literatura/candidates.json": "838a54ccedf4eba05332ee1fc6748eeb70102b7813899d8818413dc9b1c1449d",
+    "pack/candidates/personalitati/candidates.json": "0c1c37d6c0d7a44e21965baffcfacdeb34d7b9d252570271e084bfc8eb5394b2",
+    "pack/candidates/viata_de_roman/candidates.json": "3c908d14b930e4a2839b9a3103ba4b93af2d7352f8dafad6b53b729fcd6d56dd",
+    "alchimie/candidates.json": "00e7ef03a8025c88fd9e5b92faee082b8f6df552cdf75aad44828caa6bf16b5e",
+    "quick/candidates.json": "aa2911ae3124c1405f9b4fb8c22f89de046f38e909155a8f8b2b4c893b0f0f03"
+  },
+  "candidate_files_exact_after_regeneration": 7,
+  "commands": [
+    {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/feat__v92-entry-creation-02/session-02/pack/author_candidates.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/feat__v92-entry-creation-02/session-02/alchimie/author_candidates.py",
+        "--repo",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-02"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/feat__v92-entry-creation-02/session-02/quick/candidate_source.py",
+        "--repo",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-02"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/feat__v92-entry-creation-02/session-02/build_batch_index.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "protected_served_files_exact_to_baseline": {
+    "kg_sample.json": true,
+    "games_pack.json": true,
+    "derived_catalog_v38.json": true,
+    "quick_games_v92.json": true,
+    "alchimie_discovery_world_v92.json": true,
+    "alchimie_recipe_extensions_v92.json": true
+  },
+  "git_status_porcelain": "",
+  "total_entries": 17,
+  "independent_review": "not performed; required next"
+}

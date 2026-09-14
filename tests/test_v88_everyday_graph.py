@@ -328,8 +328,16 @@ def test_sour_sweet_and_whipped_cream_remain_distinct_and_the_false_step_is_reje
 
 
 def _public_item(game, marker):
+    # This journey exercises the exact V88 addition; later boards may legitimately
+    # reuse an individual marker without being the historical board under test.
+    receipt = json.loads((REVIEW / "artifact-delta.json").read_bytes())
+    reviewed_ids = {
+        row["id"] for row in receipt["files"]["games_pack.json"]["tables"][game]["added"]
+    }
     candidates = []
     for item in get_pack().pool(game):
+        if item.id not in reviewed_ids:
+            continue
         members = {node for group in item.payload.get("groups", {}).values() for node in group}
         if (item.payload.get("target") == marker if game == "alchimie" else marker in members):
             candidates.append(item)

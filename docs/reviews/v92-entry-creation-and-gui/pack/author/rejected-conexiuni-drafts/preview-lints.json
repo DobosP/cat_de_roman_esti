@@ -1,0 +1,94 @@
+{
+  "preview02_conexiuni_viata_de_roman_0": {
+    "difficulty": "usor",
+    "findings": [
+      {
+        "check": "duplicate_groups",
+        "detail": "group \"Vase din care mănânci sau bei\" reuses an inventory/selected quad (also in: rejected:cx_gastronomie_328)",
+        "level": "FAIL"
+      },
+      {
+        "check": "duplicate_groups",
+        "detail": "group \"Se așază pe un pat\" shares 3 members with an inventory/selected quad (near-duplicate; see: rejected:cx_viata_de_roman_293)",
+        "level": "FAIL"
+      },
+      {
+        "check": "duplicate_groups",
+        "detail": "group \"Instrumente pentru scris de mână\" shares 3 members with an inventory/selected quad (near-duplicate; see: rejected:cx_viata_de_roman_293)",
+        "level": "FAIL"
+      },
+      {
+        "check": "duplicate_groups",
+        "detail": "group \"Povești de Ion Creangă\" reuses an inventory/selected quad (also in: rejected:cx_viata_de_roman_291)",
+        "level": "FAIL"
+      }
+    ],
+    "game": "conexiuni",
+    "status": "pending"
+  },
+  "preview02_conexiuni_viata_de_roman_1": {
+    "difficulty": "normal",
+    "findings": [
+      {
+        "check": "duplicate_groups",
+        "detail": "group \"Legume recoltate pentru partea subterană\" shares 3 members with an inventory/selected quad (near-duplicate; see: rejected:cx_gastronomie_331)",
+        "level": "FAIL"
+      }
+    ],
+    "game": "conexiuni",
+    "status": "pending"
+  },
+  "preview02_contexto_geografie_0": {
+    "difficulty": "usor",
+    "findings": [
+      {
+        "check": "salience_floor",
+        "detail": "Brașov salience 0.31 < 0.60 (usor floor)",
+        "level": "WARN"
+      }
+    ],
+    "game": "contexto",
+    "status": "pending"
+  },
+  "preview02_lant_literatura_0": {
+    "difficulty": "usor",
+    "findings": [
+      {
+        "check": "salience_floor",
+        "detail": "Amintiri din copilărie salience 0.30 < 0.60 (usor floor)",
+        "level": "WARN"
+      }
+    ],
+    "game": "lant",
+    "status": "pending"
+  },
+  "preview02_lant_personalitati_0": {
+    "difficulty": "usor",
+    "findings": [
+      {
+        "check": "salience_floor",
+        "detail": "Simona Amânar salience 0.56 < 0.60 (usor floor)",
+        "level": "WARN"
+      }
+    ],
+    "game": "lant",
+    "status": "pending"
+  },
+  "preview02_lant_personalitati_1": {
+    "difficulty": "usor",
+    "findings": [
+      {
+        "check": "salience_floor",
+        "detail": "Gheorghe Zamfir salience 0.58 < 0.60 (usor floor)",
+        "level": "WARN"
+      },
+      {
+        "check": "salience_floor",
+        "detail": "Maria Tănase salience 0.37 < 0.60 (usor floor)",
+        "level": "WARN"
+      }
+    ],
+    "game": "lant",
+    "status": "pending"
+  }
+}

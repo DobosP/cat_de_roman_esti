@@ -12,6 +12,7 @@ import pytest
 
 from scripts import build_quick_content_v92 as B
 from scripts import content_file_transaction as T
+from tests.current_content import CURRENT_CONTENT
 
 
 def write(path: Path, value: dict) -> Path:
@@ -149,8 +150,9 @@ def test_candidate_reproducible_and_independent_copies():
 
 def test_real_proposal_uses_reviewed_rows_ratings_and_provenance(evidence):
     catalog = build(evidence)
-    assert len(catalog["authored"]) == len(catalog["boards"]) == 45
-    assert len([r for r in catalog["boards"] if r["game"] == "intrusul"]) == 25
+    expected = CURRENT_CONTENT.quick_counts["authored_by_game"]
+    assert len(catalog["authored"]) == len(catalog["boards"]) == sum(expected.values())
+    assert len([r for r in catalog["boards"] if r["game"] == "intrusul"]) == expected["intrusul"]
     assert catalog["authored"] == evidence.artifact["boards"]
     assert catalog["excluded"] == []
     assert {r["sha256"] for r in catalog["reviews"]} == {B.file_sha(p) for p in evidence.reviews}
@@ -165,8 +167,8 @@ def test_acceptance_is_intersection_and_exclusions_remain_visible(evidence):
     change_review(evidence, 1, lambda r: r["items"][1].update(verdict="hold"))
     catalog = build(evidence)
     assert catalog["excluded"] == sorted([reject_id, hold_id])
-    assert len(catalog["boards"]) == 43
-    assert not {reject_id, hold_id} & {r["id"] for r in catalog["authored"]}
+    assert len(catalog["boards"]) == len(evidence.ids) - 2
+    assert {r["id"] for r in catalog["authored"]} == set(evidence.ids) - {reject_id, hold_id}
     assert set(catalog["reviews"][0]) == {"role", "reviewer", "sha256"}
 
 

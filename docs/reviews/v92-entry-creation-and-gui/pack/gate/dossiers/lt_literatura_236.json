@@ -1,0 +1,185 @@
+{
+ "id": "lt_literatura_236",
+ "game": "lant",
+ "category": "literatura",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "3ce112705722c74c90309a3dddf87ed8b7fa33968d56ac47629cc6ad5d0b8dca",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Amintiri din copilărie salience 0.30 < 0.60 (usor floor)"
+  }
+ ],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_v23lit_capra_cu_trei_iezi",
+  "label": "Capra cu trei iezi",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.92,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Poveste publicată de Ion Creangă în 1875, despre o capră, cei trei iezi ai ei și lupul care încearcă să intre în casă."
+ },
+ "target": {
+  "id": "n_amintiri_copilarie",
+  "label": "Amintiri din copilărie",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.2998,
+  "degree": 12,
+  "incoming_degree": 12,
+  "description": "Opera autobiografica de Ion Creanga."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    },
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă"
+    },
+    {
+     "id": "n_amintiri_copilarie",
+     "label": "Amintiri din copilărie"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "label": "Capra cu trei iezi"
+     },
+     "to": {
+      "id": "n_ion_creanga",
+      "label": "Ion Creangă"
+     },
+     "relation": "created_by",
+     "label": "scrisă de",
+     "display_label": "autor și poveste",
+     "strength": 0.96
+    },
+    {
+     "from": {
+      "id": "n_ion_creanga",
+      "label": "Ion Creangă"
+     },
+     "to": {
+      "id": "n_amintiri_copilarie",
+      "label": "Amintiri din copilărie"
+     },
+     "relation": "created_by",
+     "label": "a scris",
+     "display_label": "creator și operă",
+     "strength": 0.9
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    },
+    {
+     "id": "n_amintiri_copilarie",
+     "label": "Amintiri din copilărie"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "label": "Capra cu trei iezi"
+     },
+     "to": {
+      "id": "n_v3lit_poveste",
+      "label": "Poveste"
+     },
+     "relation": "is_a",
+     "label": "este poveste",
+     "display_label": "exemplu și categorie",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v3lit_poveste",
+      "label": "Poveste"
+     },
+     "to": {
+      "id": "n_amintiri_copilarie",
+      "label": "Amintiri din copilărie"
+     },
+     "relation": "related_to",
+     "label": "amintiri povestite",
+     "display_label": "legătură directă",
+     "strength": 0.72
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    },
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_amintiri_copilarie",
+     "label": "Amintiri din copilărie"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "label": "Capra cu trei iezi"
+     },
+     "to": {
+      "id": "n_v3lit_carte",
+      "label": "Carte"
+     },
+     "relation": "is_a",
+     "label": "apare în cărți pentru copii",
+     "display_label": "poveste și carte",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_v3lit_carte",
+      "label": "Carte"
+     },
+     "to": {
+      "id": "n_amintiri_copilarie",
+      "label": "Amintiri din copilărie"
+     },
+     "relation": "related_to",
+     "label": "volum de proză",
+     "display_label": "legătură directă",
+     "strength": 0.76
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:3f2050b0386164c871769560215ec69e7bae26f6ab4c28ada70dae23aee0ec74"
+}

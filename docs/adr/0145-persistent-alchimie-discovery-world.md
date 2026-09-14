@@ -1,7 +1,8 @@
 # ADR-0145: Persistent Alchimie discovery world
 
 - Status: partially superseded by [ADR-0146](0146-expand-alchimie-and-preserve-collections.md)
-  for the inventory and reviewed additive collection upgrades; other decisions remain accepted.
+  for inventory/upgrades, and by [ADR-0149](0149-review-new-levels-and-keep-crafting-feedback-visible.md)
+  for optional-control layout; other decisions remain accepted.
 - Date: 2026-09-13
 - Partially supersedes: [ADR-0144](0144-reviewed-alchimie-recipe-freedom.md), for its
   deferred discovery-world scope. Its existing challenge recipes and scoring remain accepted.

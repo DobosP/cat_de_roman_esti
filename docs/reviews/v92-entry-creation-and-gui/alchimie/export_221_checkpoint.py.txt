@@ -1,0 +1,16 @@
+import hashlib,json,os
+from pathlib import Path
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from cat_de_roman_esti.wordgames import alchimie_explore as E
+from cat_de_roman_esti.wordgames.discovery_world import CATALOG_PATH,get_world
+assert hashlib.sha256(CATALOG_PATH.read_bytes()).hexdigest()=='baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df'
+world=get_world();session=E.restore_session(world,None,'cornulete')
+while pair:=next((p for p,r in world.recipes.items() if set(p)<=session.owned.keys() and r.result not in session.owned),None):
+ session.craft(pair)
+state=E.state_payload('expired-221-concept-kitchen-session',session)
+assert state['complete'] and state['discovered_count']==117 and len(state['inventory'])==221
+record={'provenance':{'commit':'c0ead5eb524fe40ec4a1760488badec395c0ae0c','catalog_path':str(CATALOG_PATH.relative_to(Path.cwd())),'catalog_sha256':hashlib.sha256(CATALOG_PATH.read_bytes()).hexdigest(),'method':'Replay first available productive recipe in exact catalog order, with earned pantry milestones.'},'owned_ids':sorted(session.owned),'collection':{'version':1,'game_id':state['game_id'],'revision':len(session.discoveries),'goal_id':state['goal_id'],'progress':state['progress'],'compatible_recipe_hashes':state['compatible_recipe_hashes']}}
+Path('frontend/e2e/alchimie-221-checkpoint.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
+print('Generated117-craft historical checkpoint',world.recipe_hash)

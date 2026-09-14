@@ -105,7 +105,8 @@ def test_muzica_easy_shelf_stays_above_daily_floor_and_never_serves_reserve() ->
     ]
     selectable_ids = {item.id for item in shelf}
 
-    assert len(shelf) == 6
+    assert len(shelf) == 7
+    assert any(item.payload["target"] == "n_v3muz_chitara" for item in shelf)
     assert len(shelf) >= CURATED_CATEGORY_DAILY_MIN_POOL
     assert _RESERVE_ID not in selectable_ids
     for seed in range(400):

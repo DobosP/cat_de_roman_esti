@@ -255,7 +255,8 @@ def test_reviewed_daily_assignments_match_current_inventory() -> None:
     expected = {
         # ADR-0066: the previous winners were owner-demoted; deterministic re-pick.
         ("conexiuni", "2026-07-19"): "cx_meme_net_201",
-        ("conexiuni", "2026-12-31"): "cx_viata_de_roman_288",
+        # The reviewed session02 board joins the current normal shelf.
+        ("conexiuni", "2026-12-31"): "cx_viata_de_roman_368",
         ("contexto", "2026-07-19"): "ct_viata_de_roman_273",
         # V82: the newly reviewed Bulz target wins this normal-pool date.
         ("contexto", "2026-12-31"): "ct_gastronomie_328",
