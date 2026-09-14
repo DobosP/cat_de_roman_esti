@@ -1,0 +1,190 @@
+{
+ "id": "lt_arta_cultura_237",
+ "game": "lant",
+ "category": "arta_cultura",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "51fcb2a173cbf290139cc52137ba97765be550dfa5797bc4b49d9184acd9486e",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Poarta Sărutului salience 0.36 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Oltenia salience 0.42 < 0.60 (usor floor)"
+  }
+ ],
+ "display_rules_sha256": "c74d52eda142c2a99da407f35265f808879e7fce565e373e9c926b7b7b06f287",
+ "start": {
+  "id": "n_poarta_sarutului",
+  "label": "Poarta Sărutului",
+  "node_type": "work",
+  "category": "arta_cultura",
+  "salience": 0.361,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+ },
+ "target": {
+  "id": "n_oltenia",
+  "label": "Oltenia",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.4197,
+  "degree": 23,
+  "incoming_degree": 23,
+  "description": "Regiune istorică din sud-vestul României."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_poarta_sarutului",
+     "label": "Poarta Sărutului"
+    },
+    {
+     "id": "n_constantin_brancusi",
+     "label": "Constantin Brâncuși"
+    },
+    {
+     "id": "n_oltenia",
+     "label": "Oltenia"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_poarta_sarutului",
+      "label": "Poarta Sărutului"
+     },
+     "to": {
+      "id": "n_constantin_brancusi",
+      "label": "Constantin Brâncuși"
+     },
+     "relation": "related_to",
+     "label": "a sculptat",
+     "display_label": "sculptură și sculptor",
+     "strength": 0.94
+    },
+    {
+     "from": {
+      "id": "n_constantin_brancusi",
+      "label": "Constantin Brâncuși"
+     },
+     "to": {
+      "id": "n_oltenia",
+      "label": "Oltenia"
+     },
+     "relation": "related_to",
+     "label": "originar din Oltenia",
+     "display_label": "sculptor și regiune natală",
+     "strength": 0.7
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_poarta_sarutului",
+     "label": "Poarta Sărutului"
+    },
+    {
+     "id": "n_targu_jiu",
+     "label": "Târgu Jiu"
+    },
+    {
+     "id": "n_oltenia",
+     "label": "Oltenia"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_poarta_sarutului",
+      "label": "Poarta Sărutului"
+     },
+     "to": {
+      "id": "n_targu_jiu",
+      "label": "Târgu Jiu"
+     },
+     "relation": "located_in",
+     "label": "se află la",
+     "display_label": "sculptură și oraș",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_targu_jiu",
+      "label": "Târgu Jiu"
+     },
+     "to": {
+      "id": "n_oltenia",
+      "label": "Oltenia"
+     },
+     "relation": "located_in",
+     "label": "oraș din Oltenia",
+     "display_label": "oraș și regiune",
+     "strength": 0.86
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_poarta_sarutului",
+     "label": "Poarta Sărutului"
+    },
+    {
+     "id": "n_ansamblul_targu_jiu",
+     "label": "Ansamblul monumental de la Târgu Jiu"
+    },
+    {
+     "id": "n_oltenia",
+     "label": "Oltenia"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_poarta_sarutului",
+      "label": "Poarta Sărutului"
+     },
+     "to": {
+      "id": "n_ansamblul_targu_jiu",
+      "label": "Ansamblul monumental de la Târgu Jiu"
+     },
+     "relation": "part_of",
+     "label": "face parte din",
+     "display_label": "sculptură și ansamblu",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_ansamblul_targu_jiu",
+      "label": "Ansamblul monumental de la Târgu Jiu"
+     },
+     "to": {
+      "id": "n_oltenia",
+      "label": "Oltenia"
+     },
+     "relation": "located_in",
+     "label": "în Oltenia",
+     "display_label": "ansamblu și regiune",
+     "strength": 0.73
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:1bf9af5a878b4a7f4d725b5cffcb82aabd936ca8ed67d888bb59080d27fa59da"
+}

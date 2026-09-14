@@ -1,0 +1,111 @@
+{
+  "kind": "alchimie-new-words-raw-review-v1",
+  "role": "factual",
+  "reviewer": "session03-independent-factual-verifier",
+  "candidate_sha256": "9d9a67f39e7789a543ec3a3b90c7f265f832890828031f3363abc1ab1519a622",
+  "baseline_world_sha256": "c2bfc524e31115be3283b9dfd8e1bb1853c7082bc153716b5db368596ac5f672",
+  "verdict": "accept",
+  "concepts": [
+    {
+      "id": "alw_food_mere_coapte",
+      "verdict": "accept",
+      "rationale": "Kamis original recipe heats whole prepared apples in an oven until soft and uses a sweet walnut, honey and cinnamon filling. The new definition correctly identifies a cooked apple preparation with optional fillings; it does not rename the raw fruit.",
+      "sources": [
+        "https://www.kamis.ro/retete/deserturi-si-bauturi/mere-coapte"
+      ]
+    },
+    {
+      "id": "alw_food_ardei_copti",
+      "verdict": "accept",
+      "rationale": "Laura Laurențiu demonstrates oven-roasting peppers, cooling and peeling their skin, then using the flesh in salads or other dishes. The authored definition states the preparation and culinary uses accurately.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/ardei-copti-in-cuptor-cea-mai-simpla-si-igienica-metoda-de-copt-ardeii.html"
+      ]
+    },
+    {
+      "id": "alw_food_pilaf_legume",
+      "verdict": "accept",
+      "rationale": "BărbatLaCratiță cooks rice with sautéed onion, carrot and pepper plus water until the rice softens and liquid falls. DEX 2009 independently recognizes vegetable pilaf; the definition correctly narrows this familiar rice dish to vegetables.",
+      "sources": [
+        "https://www.barbatlacratita.ro/2011/01/pilaf-de-orez-cu-legume.html",
+        "https://dexonline.ro/definitie/pilaf"
+      ]
+    },
+    {
+      "id": "alw_food_dovleac_copt",
+      "verdict": "accept",
+      "rationale": "Laura Laurențiu cuts and deseeds pumpkin, bakes it until soft and removes or scoops the flesh. The definition accurately covers eating the baked flesh and using it in another preparation.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/dovleac-copt-cum-se-coace-dovleacul-placintar-la-cuptor.html"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "id": "mere-coapte-cuptor",
+      "verdict": "accept",
+      "rationale": "Apple plus kitchen oven gives baked apples by an ordinary direct heat transformation. The explanation states cooking and treats the sweet additions as optional; source preparation agrees.",
+      "sources": [
+        "https://www.kamis.ro/retete/deserturi-si-bauturi/mere-coapte"
+      ]
+    },
+    {
+      "id": "ardei-copti-cuptor",
+      "verdict": "accept",
+      "rationale": "Pepper plus kitchen oven is the precise roasting method demonstrated in the cited original. The explanation preserves the required softening, browned skin and peeling.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/ardei-copti-in-cuptor-cea-mai-simpla-si-igienica-metoda-de-copt-ardeii.html"
+      ]
+    },
+    {
+      "id": "dovleac-copt-cuptor",
+      "verdict": "accept",
+      "rationale": "Pumpkin plus oven has a directly documented baked result. Deseeding, cutting and baking to softness are stated; no extra ingredient is represented as magic.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/dovleac-copt-cum-se-coace-dovleacul-placintar-la-cuptor.html"
+      ]
+    },
+    {
+      "id": "pilaf-orez-legume",
+      "verdict": "accept",
+      "rationale": "Rice with vegetables identifies vegetable pilaf. The explanation states sautéing, liquid and cooking, so the binary mechanic is a purposeful ingredient shorthand rather than a claim that raw ingredients are already a dish.",
+      "sources": [
+        "https://www.barbatlacratita.ro/2011/01/pilaf-de-orez-cu-legume.html"
+      ]
+    },
+    {
+      "id": "zacusca-ardei-copti",
+      "verdict": "accept",
+      "rationale": "The original zacuscă recipe specifically combines roasted peeled peppers with roasted eggplants and then onion, tomato and oil. The pair uses the existing raw eggplant identity but explicitly requires roasting it in the explanation; the result is the established zacuscă dish, not a new alias.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/conserve/zacusca-de-vinete.html"
+      ]
+    },
+    {
+      "id": "supa-crema-dovleac-copt",
+      "verdict": "accept",
+      "rationale": "Diana Neacșu lists vegetable soup as a liquid option for roasted pumpkin cream soup and blends the cooked vegetables with hot liquid. A second original recipe at Absolut Delicios corroborates heating baked pumpkin with broth and blending. The short explanation accurately describes this preparation and adds useful reuse of baked pumpkin.",
+      "sources": [
+        "https://www.retetelemeledragi.com/2024/11/supa-crema-de-dovleac-copt.html/",
+        "https://www.absolutdelicios.ro/2022/08/supa-crema-de-dovleac-copt.html"
+      ]
+    }
+  ],
+  "checks": {
+    "coverage": {
+      "concepts": 4,
+      "recipes": 6
+    },
+    "mechanics_receipt_sha256": "2d8062064bb5d1ea346b5093fcc5ca2ea2e9acd7bf5b1aa337b1f4ae29050615",
+    "primary_sources_retrieved": 6,
+    "all_concepts_nonshadowing": true,
+    "all_pairs_unique": true,
+    "all_new_concepts_reachable": true
+  },
+  "provenance_scope": "All raw definitions are short original paraphrases and preserve original preparation URLs. No copying license or redistribution permission is asserted. Raw rows intentionally omit final Concept source/origin/redistributable/snapshot fields; acceptance requires final authored:alchimie provenance, redistributable:false, exact cited references and full bound record review before installation.",
+  "limitations": [
+    "This is raw semantic/factual acceptance, not approval of an unbuilt catalog or GUI.",
+    "Mere coapte and Pilaf de legume are terminal in this proposed subset; roasted pepper and baked pumpkin have onward uses.",
+    "No additional supply or optional goal is introduced."
+  ]
+}

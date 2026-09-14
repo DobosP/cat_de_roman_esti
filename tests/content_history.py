@@ -60,6 +60,29 @@ _V92_ENTRY_SESSION_ADDED_IDS = {
     "alchimie": set(),
 }
 
+_V92_SESSION03_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v92-session03-vocabulary-and-interface/artifact-delta.json"
+)
+# Pin the complete final receipt independently of every before/after artifact hash.
+_V92_SESSION03_RECEIPT_SHA256 = (
+    "8c990bc5645400e83b18bda92157dddeef45a18f9d66f1648c1ece7a9b29fd6c"
+)
+_V92_SESSION03_BASELINE = {
+    "kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "games_pack.json": "9c0a8fde33742ad5230d1697fe7617eabfc8a257a6409562e3b0357c0b8fc77b",
+    "board_rankings_v37.json": "cdc148bfc95c9791b8b941b7c537a04b72d8d21398e1b258cf8e743ac9bdbde5",
+    "derived_catalog_v38.json": "931278ac590aa1d4904e15d4a30990a349fe82af09cbbb1b9c1a3e3c1461671a",
+    "cat_mobile_app_pack_contract.json": (
+        "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+    ),
+}
+_V92_SESSION03_ADDED_IDS = {
+    "conexiuni": {"cx_viata_de_roman_369"},
+    "contexto": {"ct_istorie_368", "ct_literatura_369"},
+    "lant": {"lt_arta_cultura_237", "lt_istorie_238"},
+    "alchimie": set(),
+}
+
 
 # The V92 expansion adds exactly 4 Conexiuni, 8 Contexto and 13 Lanț records.
 # Pin complete current bytes before peeling it; never replace historical wave hashes.
@@ -244,6 +267,7 @@ def _reverse_bound_delta(current: dict, filename: str, receipt_path: Path) -> di
 
 def before_v92_entry_session_artifact(current: dict, filename: str) -> dict:
     """Restore complete c0ead5e bytes, rejecting drift before removing new records."""
+    current = before_v92_session03_artifact(current, filename)
     receipt_blob = _V92_ENTRY_SESSION_RECEIPT.read_bytes()
     assert hashlib.sha256(receipt_blob).hexdigest() == _V92_ENTRY_SESSION_RECEIPT_SHA256
     files = json.loads(receipt_blob)["files"]
@@ -274,6 +298,40 @@ def before_v92_entry_session_artifact(current: dict, filename: str) -> dict:
         else:
             assert not changes["added"] and not changes["changed"]
     return _reverse_bound_delta(current, filename, _V92_ENTRY_SESSION_RECEIPT)
+
+
+def before_v92_session03_artifact(current: dict, filename: str) -> dict:
+    """Restore exact 0b51e03 bytes before any older content inverse runs."""
+    receipt_blob = _V92_SESSION03_RECEIPT.read_bytes()
+    assert hashlib.sha256(receipt_blob).hexdigest() == _V92_SESSION03_RECEIPT_SHA256
+    receipt = json.loads(receipt_blob)
+    assert receipt["baseline_commit"] == "0b51e03c983bcbfc042807b4eb97e59a8a9e7781"
+    files = receipt["files"]
+    assert set(files) == set(_V92_SESSION03_BASELINE)
+    assert filename in _V92_SESSION03_BASELINE
+    artifact = files[filename]
+    assert artifact["baseline_sha256"] == _V92_SESSION03_BASELINE[filename]
+    expected_ids = set().union(*_V92_SESSION03_ADDED_IDS.values())
+    assert len(expected_ids) == 5
+    for table, changes in artifact["tables"].items():
+        assert not changes["removed"]
+        if filename == "games_pack.json":
+            assert table in _V92_SESSION03_ADDED_IDS
+            assert {row["id"] for row in changes["added"]} == _V92_SESSION03_ADDED_IDS[table]
+            assert all(row["status"] == "approved" for row in changes["added"])
+            assert not changes["changed"]
+        elif filename == "board_rankings_v37.json":
+            assert table == "boards"
+            assert {row["id"] for row in changes["added"]} == expected_ids
+            for change in changes["changed"].values():
+                before, after = change["before"], change["after"]
+                assert set(before) == set(after)
+                assert {key for key in before if before[key] != after[key]} <= {
+                    "rank", "selection_weight",
+                }
+        else:
+            assert not changes["added"] and not changes["changed"]
+    return _reverse_bound_delta(current, filename, _V92_SESSION03_RECEIPT)
 
 
 def before_v91_artifact(current: dict, filename: str) -> dict:

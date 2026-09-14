@@ -1,0 +1,35 @@
+"""Scratch-only caption proposals; all inherited68 records stay untouched."""
+import sys,json,hashlib
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-03');OUT=Path(__file__).parent;sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.lant_relations import REVIEWED_CAPTIONS,caption
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+s=get_service();src=json.loads((OUT/'pack-final/sources-quality.json').read_text())['source_notes'];ds=json.loads((OUT/'pack-final/preview-dossiers.json').read_text())
+specs=[
+('Vioară','George Enescu','muzician și instrument',['enescu_ateneu']),
+('George Enescu','Ateneul Român','muzician și sală de concerte',['enescu_ateneu']),
+('Vioară','Festivalul George Enescu','instrument și festival',['festival_ateneu']),
+('Festivalul George Enescu','Ateneul Român','festival și sală de concerte',['festival_ateneu']),
+('Vioară','Muzică clasică','instrument și gen muzical',['festival_ateneu']),
+('Muzică clasică','Ateneul Român','gen muzical și sală de concerte',['festival_ateneu']),
+('Poarta Sărutului','Constantin Brâncuși','sculptură și sculptor',['poarta']),
+('Constantin Brâncuși','Oltenia','sculptor și regiune natală',['brancusi','oltenia']),
+('Poarta Sărutului','Târgu Jiu','sculptură și oraș',['poarta']),
+('Târgu Jiu','Oltenia','oraș și regiune',['oltenia']),
+('Poarta Sărutului','Ansamblul monumental de la Târgu Jiu','sculptură și ansamblu',['poarta']),
+('Ansamblul monumental de la Târgu Jiu','Oltenia','ansamblu și regiune',['poarta','oltenia']),
+('Ștefan cel Mare','Mănăstirea Putna','domnitor și ctitorie',['putna']),
+('Mănăstirea Putna','Bucovina','mănăstire și regiune',['putna']),
+('Ștefan cel Mare','Mănăstirea Voroneț','domnitor și ctitorie',['voronet']),
+('Mănăstirea Voroneț','Bucovina','mănăstire și regiune',['voronet_region']),
+('Ștefan cel Mare','Suceava','domnitor și capitală medievală',['suceava']),
+('Suceava','Bucovina','oraș și regiune',['suceava']),
+]
+rows=[]
+for a,b,label,keys in specs:
+ ia,ib=s.resolve(a),s.resolve(b);assert ia and ib,(a,b);pair=tuple(sorted((ia,ib)));assert pair not in REVIEWED_CAPTIONS;assert len(label)<=34;edge=s.link(ia,ib);assert edge
+ reverse=s.link(ib,ia);rows.append({'pair':list(pair),'direction_used':[ia,ib],'labels':[a,b],'caption':label,'old_display':caption(s,ia,ib),'edge_snapshot':record_snapshot(edge),'edge_sha256':digest(record_snapshot(edge)),'reverse_edge_sha256':digest(record_snapshot(reverse)) if reverse else None,'sources':[src[k] for k in keys]})
+covered={frozenset(r['pair']) for r in rows};actual={frozenset((e['from']['id'],e['to']['id'])) for d in ds.values() if d['game']=='lant' for p in d['representative_shortest_paths'] for e in p['edges']};assert covered==actual
+obj={'kind':'lant-caption-author-candidates-v1','status':'unapproved','baseline':'0b51e03','runtime_source_sha256':hashlib.sha256((ROOT/'cat_de_roman_esti/wordgames/lant_relations.py').read_bytes()).hexdigest(),'kg_sha256':hashlib.sha256((ROOT/'cat_de_roman_esti/fixtures/kg_sample.json').read_bytes()).hexdigest(),'existing_reviewed_captions_preserved':len(REVIEWED_CAPTIONS),'proposed_count':len(rows),'captions':rows,'notes':['Noun phrases describe both endpoints and cannot reverse the original directional claim.','A caption clarifies an existing graph link; it does not prove that a candidate route meets distinctive-association quality gates.','Vioară musical style link remains a generic alternative and must not be treated as specific authorial evidence.','Do not apply captions belonging only to an independently rejected route without separate approval.']}
+p=OUT/'lant-captions.json';p.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n');print(hashlib.sha256(p.read_bytes()).hexdigest(),len(rows))

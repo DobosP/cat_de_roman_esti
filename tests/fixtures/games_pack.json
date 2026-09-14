@@ -3,15 +3,15 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 239,
-   "contexto": 255,
-   "lant": 114,
+   "conexiuni": 240,
+   "contexto": 257,
+   "lant": 116,
    "alchimie": 83
   },
   "id_high_water": {
-   "conexiuni": 368,
-   "contexto": 367,
-   "lant": 236,
+   "conexiuni": 369,
+   "contexto": 369,
+   "lant": 238,
    "alchimie": 107
   }
  },
@@ -13638,6 +13638,63 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v4sti_copac",
+     "n_v24_nature_world_pamant",
+     "n_v4sti_creier",
+     "n_v3lit_carte"
+    ],
+    "g2": [
+     "n_v24_food_pantry_faina",
+     "n_v85_food_cacao",
+     "n_v86_food_zahar_pudra",
+     "n_v86_food_amidon"
+    ],
+    "g3": [
+     "n_v3muz_pian",
+     "n_v4mem_telefon",
+     "n_v4fil_telecomanda",
+     "n_v33_electric_control_intrerupator"
+    ],
+    "g4": [
+     "n_v32_garden_water_stropitoare",
+     "n_v32_garden_water_furtun",
+     "n_v31_cleaning_water_galeata",
+     "n_v33_bathroom_fixture_robinet"
+    ]
+   },
+   "group_labels": {
+    "g1": "Au scoarță",
+    "g2": "Au formă de pulbere",
+    "g3": "Au butoane sau clape apăsate cu degetele",
+    "g4": "Pot fi folosite la udarea plantelor"
+   },
+   "order": [
+    "n_v4fil_telecomanda",
+    "n_v33_electric_control_intrerupator",
+    "n_v33_bathroom_fixture_robinet",
+    "n_v32_garden_water_furtun",
+    "n_v32_garden_water_stropitoare",
+    "n_v86_food_zahar_pudra",
+    "n_v3muz_pian",
+    "n_v31_cleaning_water_galeata",
+    "n_v3lit_carte",
+    "n_v86_food_amidon",
+    "n_v4sti_creier",
+    "n_v24_nature_world_pamant",
+    "n_v4sti_copac",
+    "n_v85_food_cacao",
+    "n_v24_food_pantry_faina",
+    "n_v4mem_telefon"
+   ],
+   "id": "cx_viata_de_roman_369",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -14523,6 +14580,14 @@
   },
   {
    "difficulty": "usor",
+   "target": "n_alba_iulia",
+   "id": "ct_istorie_368",
+   "category": "istorie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
    "target": "n_dex",
    "id": "ct_limba_043",
    "category": "limba",
@@ -14749,6 +14814,14 @@
    "difficulty": "usor",
    "target": "n_v23lit_capra_cu_trei_iezi",
    "id": "ct_literatura_298",
+   "category": "literatura",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_ion_creanga",
+   "id": "ct_literatura_369",
    "category": "literatura",
    "source": "ai",
    "status": "approved"
@@ -15784,6 +15857,16 @@
    "status": "approved"
   },
   {
+   "difficulty": "usor",
+   "start": "n_poarta_sarutului",
+   "target": "n_oltenia",
+   "optimal": 2,
+   "id": "lt_arta_cultura_237",
+   "category": "arta_cultura",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
    "difficulty": "normal",
    "start": "n_ftv_bobita",
    "target": "n_ftv_chefi_la_cutite",
@@ -16179,6 +16262,16 @@
    "target": "n_v11ist_revolutia_1848",
    "optimal": 2,
    "id": "lt_istorie_229",
+   "category": "istorie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_stefan_cel_mare",
+   "target": "n_bucovina",
+   "optimal": 2,
+   "id": "lt_istorie_238",
    "category": "istorie",
    "source": "ai",
    "status": "approved"

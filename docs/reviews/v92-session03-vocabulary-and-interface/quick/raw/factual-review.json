@@ -1,0 +1,91 @@
+{
+  "kind": "quick-entry-raw-review-v1",
+  "role": "factual",
+  "reviewer": "session03-independent-factual-verifier",
+  "candidate_sha256": "8a9e0049854e5ffab670f9990dedfa75bab75dda2a86043e01ac058b5979b70f",
+  "verdict": "accept",
+  "items": [
+    {
+      "id": "iq92_s03_electric_connections",
+      "verdict": "accept",
+      "rationale": "The exact KG labels mean an electrical plug, wired extension and electrical cable, all used for electrical connection. The tap regulates water instead. DEX documents the plug and extension; manufacturer construction confirms the cable-and-connectors relationship. No mains-voltage instructions or safety claims are presented.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99techer",
+        "https://dexonline.ro/definitie/prelungitor",
+        "https://dexonline.ro/definitie/cablu",
+        "https://dexonline.ro/definitie/robinet",
+        "https://www.brennenstuhl.com/de-DE/produkte/verlaengerungskabel"
+      ]
+    },
+    {
+      "id": "iq92_s03_bodily_needs",
+      "verdict": "accept",
+      "rationale": "The ordinary senses of hunger, thirst and fatigue indicate food, water and rest needs. Shame is a social feeling rather than a bodily-maintenance need. The wording says states that signal needs, so it does not misclassify fatigue as an emotion or claim diagnosis. All four are familiar states in the exact KG senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/foame",
+        "https://dexonline.ro/definitie/sete",
+        "https://dexonline.ro/definitie/oboseal%C4%83",
+        "https://dexonline.ro/definitie/ru%C8%99ine"
+      ]
+    },
+    {
+      "id": "iq92_s03_family_relations",
+      "verdict": "accept",
+      "rationale": "Grandmother, grandfather and aunt denote family relations. Colleague denotes a shared study or work relationship. The label explicitly concerns kinship terms, so a real individual having both roles does not create a competing word definition. DEX supports the ordinary senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/bunic%C4%83",
+        "https://dexonline.ro/definitie/bunic",
+        "https://dexonline.ro/definitie/m%C4%83tu%C8%99%C4%83",
+        "https://dexonline.ro/definitie/coleg"
+      ]
+    },
+    {
+      "id": "pq92_s03_associations_01",
+      "verdict": "accept",
+      "rationale": "All four exact associations are sound: eye/seeing, bedroom/bed, cleaning detergent/dish sponge, and Stela Popescu/Alexandru Arșinel as comedy partners. The latter is documented in a Radio România interview from 2013; stage comedy rather than private relationships is the predicate. The sponge is the dish-cleaning object, not the fungal or zoological sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/detergent",
+        "https://dexonline.ro/definitie/burete%20de%20vase",
+        "https://dexonline.ro/definitie/ochi",
+        "https://dexonline.ro/intrare/dormitor/17553",
+        "https://dexonline.ro/definitie/pat",
+        "https://www.romania-actualitati.ro/interviuri/stela-popescu-am-fost-si-voi-fi-o-optimista-id44871.html"
+      ]
+    },
+    {
+      "id": "pq92_s03_associations_02",
+      "verdict": "accept",
+      "rationale": "Ear/hearing, insulated electrical cable/wired extension, ship/port, and Scrisoarea III/Mihai Eminescu each state a single true relation. The extension label denotes the wired KG device. The poem attribution is confirmed by its original literary text; no lyric or historical quotation is imported. There are no alternative strong native pairings.",
+      "sources": [
+        "https://dexonline.ro/definitie/cablu%20electric",
+        "https://dexonline.ro/definitie/prelungitor%20electric",
+        "https://dexonline.ro/definitie/ureche",
+        "https://dexonline.ro/definitie/vapor",
+        "https://dexonline.ro/definitie/port",
+        "https://ro.wikisource.org/wiki/Scrisoarea_III",
+        "https://www.brennenstuhl.com/de-DE/produkte/verlaengerungskabel"
+      ]
+    },
+    {
+      "id": "pq92_s03_associations_03",
+      "verdict": "accept",
+      "rationale": "Rainbow/color, calendar/day, Peleș Castle/Sinaia and flour/cozonac are supported by dictionary senses and the museum’s own location. Cozonac is a flour-based leavened dough preparation. The calendar association concerns its days, not rainfall; the four intended roles remain distinct in the exact eight-tile set.",
+      "sources": [
+        "https://dexonline.ro/definitie/curcubeu",
+        "https://dexonline.ro/definitie/calendar",
+        "https://peles.ro/ro/",
+        "https://dexonline.ro/definitie/cozonac"
+      ]
+    }
+  ],
+  "mechanics_receipt_sha256": "37546df298b3e99b7ed6f215c4663c82abec50240c5f94ed64f19e5713082452",
+  "coverage": {
+    "intrusul": 3,
+    "perechi": 3
+  },
+  "limitations": [
+    "The exact cablu and compound burete-de-vase dictionary URLs were not retrievable by the web tool; broader dictionary senses, exact KG definitions and manufacturer electrical construction corroborate the common functional claims.",
+    "Raw subset acceptance does not replace final full-candidate checks or public API audit.",
+    "No prior semantic judgments are inherited by this six-row review."
+  ]
+}

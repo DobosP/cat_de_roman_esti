@@ -1188,3 +1188,70 @@ RECIPE_SOURCES = {
     'salata-cartofi-ou-fiert': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/salata-de-cartofi-cu-oua-fierte.html'],
     'piure-cartofi-copti-unt': ['https://www.crunchtimekitchen.com/ultimate-guide-to-mashed-potatoes/'],
 }
+
+# Session 03: new recognizable preparations and onward uses.
+WORLD_CONCEPTS.update(
+    {'Mere coapte': {'id': 'alw_food_mere_coapte',
+                     'description': 'Mere gătite în cuptor până se înmoaie, servite simple '
+                                    'sau cu umpluturi dulci și arome.',
+                     'sources': ['https://www.kamis.ro/retete/deserturi-si-bauturi/mere-coapte']},
+     'Ardei copți': {'id': 'alw_food_ardei_copti',
+                     'description': 'Ardei gătiți la căldură puternică și curățați de '
+                                    'pieliță, folosiți în salate, garnituri sau alte '
+                                    'preparate.',
+                     'sources': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/ardei-copti-in-cuptor-cea-mai-simpla-si-igienica-metoda-de-copt-ardeii.html']},
+     'Pilaf de legume': {'id': 'alw_food_pilaf_legume',
+                         'description': 'Preparat din orez gătit cu legume și apă sau supă, '
+                                        'până când boabele absorb lichidul și se înmoaie.',
+                         'sources': ['https://www.barbatlacratita.ro/2011/01/pilaf-de-orez-cu-legume.html']},
+     'Dovleac copt': {'id': 'alw_food_dovleac_copt',
+                      'description': 'Bucăți de dovleac gătite în cuptor până când pulpa se '
+                                     'înmoaie; pot fi servite ca atare sau folosite în alte '
+                                     'preparate.',
+                      'sources': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/dovleac-copt-cum-se-coace-dovleacul-placintar-la-cuptor.html']}}
+)
+RECIPES.extend(
+    [('mere-coapte-cuptor',
+      'Măr',
+      'Cuptor de bucătărie',
+      'Mere coapte',
+      'Merele pregătite se coc în cuptor până se înmoaie, simple sau umplute cu nucă, miere '
+      'și scorțișoară.'),
+     ('ardei-copti-cuptor',
+      'Ardei',
+      'Cuptor de bucătărie',
+      'Ardei copți',
+      'Ardeii se coc în cuptor până se înmoaie și li se rumenește pielița, apoi se curăță.'),
+     ('dovleac-copt-cuptor',
+      'Dovleac',
+      'Cuptor de bucătărie',
+      'Dovleac copt',
+      'Dovleacul curățat de semințe și tăiat în bucăți se coace până când pulpa devine '
+      'moale.'),
+     ('pilaf-orez-legume',
+      'Orez',
+      'Legume',
+      'Pilaf de legume',
+      'Orezul se gătește împreună cu legume călite și apă sau supă până absoarbe lichidul și '
+      'se înmoaie.'),
+     ('zacusca-ardei-copti',
+      'Ardei copți',
+      'Vânătă',
+      'Zacuscă',
+      'Ardeii copți și curățați se toacă împreună cu vinete coapte, apoi se gătesc cu ceapă, '
+      'roșii și ulei în zacuscă.'),
+     ('supa-crema-dovleac-copt',
+      'Dovleac copt',
+      'Supă',
+      'Supă cremă',
+      'Pulpa dovleacului copt se pasează cu supă și se încălzește până se obține o supă '
+      'cremă, asezonată după gust.')]
+)
+RECIPE_SOURCES.update(
+    {'mere-coapte-cuptor': ['https://www.kamis.ro/retete/deserturi-si-bauturi/mere-coapte'],
+     'ardei-copti-cuptor': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/ardei-copti-in-cuptor-cea-mai-simpla-si-igienica-metoda-de-copt-ardeii.html'],
+     'dovleac-copt-cuptor': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/dovleac-copt-cum-se-coace-dovleacul-placintar-la-cuptor.html'],
+     'pilaf-orez-legume': ['https://www.barbatlacratita.ro/2011/01/pilaf-de-orez-cu-legume.html'],
+     'zacusca-ardei-copti': ['https://www.lauralaurentiu.ro/retete-culinare/conserve/zacusca-de-vinete.html'],
+     'supa-crema-dovleac-copt': ['https://www.retetelemeledragi.com/2024/11/supa-crema-de-dovleac-copt.html/']}
+)

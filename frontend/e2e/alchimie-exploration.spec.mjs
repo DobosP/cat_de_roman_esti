@@ -10,6 +10,7 @@ const responseTo = (page, path, method = "POST") => page.waitForResponse((respon
 const saved = (page) => page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "null"), SAVE);
 const EXPANDED_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-111-checkpoint.json", import.meta.url), "utf8"));
 const LARGE_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-221-checkpoint.json", import.meta.url), "utf8"));
+const LATEST_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-221-expanded-checkpoint.json", import.meta.url), "utf8"));
 
 // The original 75-concept world shipped in 2257766. This historical checkpoint must
 // keep its original fingerprint; changing it would hide a broken upgrade path.
@@ -289,32 +290,38 @@ test("a completed 111-concept collection keeps every earned item and opens the l
   expect(await page.evaluate(() => globalThis.document.documentElement.scrollWidth <= globalThis.innerWidth)).toBe(true);
 });
 
-test("a completed221-concept save retains its full collection and journal after recipe additions", async ({ page }) => {
-  const checkpoint = LARGE_CHECKPOINT.collection;
-  await page.goto("/alchimie");
-  await page.evaluate(({ key, collection }) => localStorage.setItem(key, JSON.stringify(collection)), {
-    key: SAVE, collection: checkpoint,
+for (const [name, previous] of [["285-recipe", LARGE_CHECKPOINT], ["288-recipe", LATEST_CHECKPOINT]]) {
+  test(`a completed221-word ${name} save keeps its journal and opens the new discoveries`, async ({ page }) => {
+    const checkpoint = previous.collection;
+    await page.goto("/alchimie");
+    await page.evaluate(({ key, collection }) => localStorage.setItem(key, JSON.stringify(collection)), {
+      key: SAVE, collection: checkpoint,
+    });
+    const response = responseTo(page, BASE);
+    await page.reload();
+    const restored = await (await response).json();
+    expect(restored.progress.recipe_hash).not.toBe(checkpoint.progress.recipe_hash);
+    expect(restored.compatible_recipe_hashes).toContain(checkpoint.progress.recipe_hash);
+    expect(restored.world.total_concepts).toBeGreaterThan(221);
+    expect(restored.world.total_recipes).toBeGreaterThan(288);
+    expect(restored.complete).toBe(false);
+    expect(restored.discovered_count).toBe(117);
+    expect(restored.inventory.map((item) => item.id).sort()).toEqual(previous.owned_ids);
+    expect(restored.progress.discoveries).toEqual(checkpoint.progress.discoveries);
+    expect(restored.goal_id).toBe(checkpoint.goal_id);
+    await expect.poll(async () => (await saved(page))?.progress).toEqual(restored.progress);
+    await expect(page.getByRole("alert")).toHaveCount(0);
+    await page.locator(".alchemy-explore-journal > summary").click();
+    await expect(page.locator(".alchemy-journal-entry")).toHaveCount(117);
+    await page.locator(".alchemy-explore-journal > summary").click();
+    const next = await discover(page, restored);
+    expect(next.discovered_count).toBe(118);
+    expect(next.progress.discoveries.slice(0,117)).toEqual(checkpoint.progress.discoveries);
+    await page.reload();
+    await expect(page.locator(".alchemy-collection-count")).toContainText("222 /");
+    expect((await saved(page)).progress).toEqual(next.progress);
   });
-  const response = responseTo(page, BASE);
-  await page.reload();
-  const restored = await (await response).json();
-  expect(restored.progress.recipe_hash).not.toBe(checkpoint.progress.recipe_hash);
-  expect(restored.compatible_recipe_hashes).toContain(checkpoint.progress.recipe_hash);
-  expect(restored.world.total_concepts).toBe(221);
-  expect(restored.world.total_recipes).toBeGreaterThan(285);
-  expect(restored.complete).toBe(true);
-  expect(restored.discovered_count).toBe(117);
-  expect(restored.inventory.map((item) => item.id).sort()).toEqual(LARGE_CHECKPOINT.owned_ids);
-  expect(restored.progress.discoveries).toEqual(checkpoint.progress.discoveries);
-  expect(restored.goal_id).toBe(checkpoint.goal_id);
-  await expect.poll(async () => (await saved(page))?.progress).toEqual(restored.progress);
-  await expect(page.getByRole("alert")).toHaveCount(0);
-  await page.locator(".alchemy-explore-journal > summary").click();
-  await expect(page.locator(".alchemy-journal-entry")).toHaveCount(117);
-  await page.reload();
-  await expect(page.locator(".alchemy-collection-count")).toContainText("221 / 221");
-  expect((await saved(page)).progress).toEqual(restored.progress);
-});
+}
 
 for (const example of [
   { prefix: 45, first: "Aluat", second: "Portocală", result: "Chec", focus: "Aluat" },

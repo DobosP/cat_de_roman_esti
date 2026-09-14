@@ -60,7 +60,9 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 
 | 0148 | [Expand all game content with independent review](0148-expand-all-game-content-with-independent-review.md) | accepted |
 
-| 0149 | [Review new levels and keep crafting feedback visible](0149-review-new-levels-and-keep-crafting-feedback-visible.md) | accepted |
+| 0149 | [Review new levels and keep crafting feedback visible](0149-review-new-levels-and-keep-crafting-feedback-visible.md) | accepted; extended by 0150 |
+
+| 0150 | [Expand vocabulary and clarify game controls](0150-expand-vocabulary-and-clarify-game-controls.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

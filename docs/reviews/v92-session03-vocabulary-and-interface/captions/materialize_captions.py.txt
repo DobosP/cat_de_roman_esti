@@ -1,0 +1,17 @@
+import hashlib,json
+from pathlib import Path
+from cat_de_roman_esti.wordgames.lant_relations import REVIEWED_CAPTIONS
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+from cat_de_roman_esti.wordgames.service import get_service
+s=Path('/home/dobo/work/_temp/feat__v92-entry-creation-03');p=s/'author/lant-captions-selected.json';raw=json.loads(p.read_bytes());sha=hashlib.sha256(p.read_bytes()).hexdigest()
+assert sha=='e12e83ff16eeb4cf69496d8119c1ae12a69e9d0df033c29ded0751474780775a'
+for name in ['verifier/captions-factual.json','gui/content-quality/captions-quality.json']:
+ r=json.loads((s/name).read_bytes());assert r['candidate_sha256']==sha and r['verdict']=='accept' and len(r['items'])==12
+ assert all(x['verdict']=='accept' for x in r['items'])
+service=get_service();lines=['        # Session 03: exact reviewed art and history connections.']
+for row in sorted(raw['captions'],key=lambda x:x['pair']):
+ pair=tuple(row['pair']);assert pair==tuple(sorted(pair)) and pair not in REVIEWED_CAPTIONS
+ assert 0<len(row['caption'])<=34
+ edge=service.link(*row['direction_used']);assert digest(record_snapshot(edge))==row['edge_sha256']
+ lines += ['        '+repr(pair)+': (','            '+repr(row['edge_sha256'])+',','            '+repr(row['caption'])+',','        ),']
+p=Path('cat_de_roman_esti/wordgames/lant_relations.py');src=p.read_text();assert hashlib.sha256(p.read_bytes()).hexdigest()==raw['runtime_source_sha256'];anchor='    }\n)\n\n_FALLBACKS';assert src.count(anchor)==1;src=src.replace(anchor,'\n'.join(lines)+'\n'+anchor);p.write_text(src)

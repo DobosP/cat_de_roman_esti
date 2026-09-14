@@ -1,0 +1,19 @@
+import hashlib,json,os
+from pathlib import Path
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from cat_de_roman_esti.wordgames import alchimie_explore as E
+from cat_de_roman_esti.wordgames.discovery_world import CATALOG_PATH,get_world
+expected='c2bfc524e31115be3283b9dfd8e1bb1853c7082bc153716b5db368596ac5f672'
+assert hashlib.sha256(CATALOG_PATH.read_bytes()).hexdigest()==expected
+world=get_world();session=E.restore_session(world,None,'cornulete')
+new_ids={'sandvis-omleta','salata-cartofi-ou-fiert','piure-cartofi-copti-unt'}
+preferred={r.result:p for p,r in world.recipes.items() if r.id in new_ids}
+while pair:=next((p for p,r in world.recipes.items() if set(p)<=session.owned.keys() and r.result not in session.owned and (r.result not in preferred or p==preferred[r.result])),None):session.craft(pair)
+state=E.state_payload('expired-221-expanded-recipe-session',session)
+assert state['complete'] and len(session.discoveries)==117 and len(session.owned)==221
+assert set(preferred.values())<=set(session.discoveries)
+record={'provenance':{'commit':'0b51e03c983bcbfc042807b4eb97e59a8a9e7781','catalog_sha256':expected,'method':'Replay productive recipes in catalog order, requiring the three session02 alternatives for their results.','required_recipe_ids':sorted(new_ids)},'owned_ids':sorted(session.owned),'collection':{'version':1,'game_id':state['game_id'],'revision':len(session.discoveries),'goal_id':state['goal_id'],'progress':state['progress'],'compatible_recipe_hashes':state['compatible_recipe_hashes']}}
+Path('frontend/e2e/alchimie-221-expanded-checkpoint.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
+print('117-craft checkpoint includes all three session02 recipe alternatives',world.recipe_hash)

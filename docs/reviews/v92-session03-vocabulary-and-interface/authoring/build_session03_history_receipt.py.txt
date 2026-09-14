@@ -1,0 +1,74 @@
+"""Generate the exact five-core-artifact inverse after root freezes session03 content."""
+from pathlib import Path
+from copy import deepcopy
+import hashlib,json,subprocess,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-03')
+OUT=ROOT/'docs/reviews/v92-session03-vocabulary-and-interface/artifact-delta.json'
+FILES={
+ 'kg_sample.json':'cat_de_roman_esti/fixtures/kg_sample.json',
+ 'games_pack.json':'cat_de_roman_esti/fixtures/games_pack.json',
+ 'board_rankings_v37.json':'cat_de_roman_esti/fixtures/board_rankings_v37.json',
+ 'derived_catalog_v38.json':'cat_de_roman_esti/fixtures/derived_catalog_v38.json',
+ 'cat_mobile_app_pack_contract.json':'tests/fixtures/cat_mobile_app_pack_contract.json',
+}
+ADDED={'conexiuni':{'cx_viata_de_roman_369'},'contexto':{'ct_istorie_368','ct_literatura_369'},'lant':{'lt_arta_cultura_237','lt_istorie_238'},'alchimie':set()}
+EXPECTED_BEFORE={
+ 'kg_sample.json':'d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109',
+ 'games_pack.json':'9c0a8fde33742ad5230d1697fe7617eabfc8a257a6409562e3b0357c0b8fc77b',
+ 'board_rankings_v37.json':'cdc148bfc95c9791b8b941b7c537a04b72d8d21398e1b258cf8e743ac9bdbde5',
+ 'derived_catalog_v38.json':'931278ac590aa1d4904e15d4a30990a349fe82af09cbbb1b9c1a3e3c1461671a',
+ 'cat_mobile_app_pack_contract.json':'5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f',
+}
+def sha(blob):return hashlib.sha256(blob).hexdigest()
+def encoded(value,name):return (json.dumps(value,ensure_ascii=False,indent=2 if name=='kg_sample.json' else 1)+'\n').encode()
+
+def main():
+ if sys.argv[1:]!=['--fixtures-final']:
+  raise SystemExit('Run only after root final-artifact notification: --fixtures-final')
+ receipt={'schema_version':1,'baseline_commit':subprocess.check_output(['git','rev-parse','0b51e03'],cwd=ROOT,text=True).strip(),'files':{}}
+ stats={}
+ for name,relative in FILES.items():
+  before_blob=subprocess.check_output(['git','show','0b51e03:'+relative],cwd=ROOT);after_blob=(ROOT/relative).read_bytes()
+  before=json.loads(before_blob);after=json.loads(after_blob)
+  assert sha(before_blob)==EXPECTED_BEFORE[name]
+  assert encoded(before,name)==before_blob and encoded(after,name)==after_blob
+  assert set(before)==set(after)
+  head=lambda v:{k:x for k,x in v.items() if not isinstance(x,list)}
+  item={'baseline_sha256':sha(before_blob),'after_sha256':sha(after_blob),'head_before':head(before),'head_after':head(after),'tables':{}}
+  for table,rows_before in before.items():
+   if not isinstance(rows_before,list):continue
+   rows_after=after[table];assert isinstance(rows_after,list)
+   old={r['id']:r for r in rows_before};new={r['id']:r for r in rows_after}
+   assert len(old)==len(rows_before) and len(new)==len(rows_after)
+   added=[r for r in rows_after if r['id'] not in old]
+   removed=[{'index':i,'row':r} for i,r in enumerate(rows_before) if r['id'] not in new]
+   changed={r['id']:{'before':r,'after':new[r['id']]} for r in rows_before if r['id'] in new and r!=new[r['id']]}
+   assert not removed
+   if name=='games_pack.json':
+    assert {r['id'] for r in added}==ADDED[table] and not changed
+    assert all(r['status']=='approved' for r in added)
+   elif name=='board_rankings_v37.json':
+    assert table=='boards' and {r['id'] for r in added}==set().union(*ADDED.values())
+    for change in changed.values():
+     assert set(change['before'])==set(change['after'])
+     assert {k for k in change['before'] if change['before'][k]!=change['after'][k]} <= {'rank','selection_weight'}
+   else:assert not added and not changed
+   after_old_order=[r['id'] for r in rows_after if r['id'] in old]
+   before_order=[r['id'] for r in rows_before]
+   item['tables'][table]={'added':added,'changed':changed,'removed':removed,'baseline_order':before_order if after_old_order!=before_order else None}
+  receipt['files'][name]=item
+  stats[name]={'before':item['baseline_sha256'],'after':item['after_sha256'],'tables':{t:{k:len(v[k]) for k in ['added','changed','removed']} for t,v in item['tables'].items()}}
+ OUT.parent.mkdir(parents=True,exist_ok=True)
+ blob=(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n').encode()
+ if OUT.exists():assert OUT.read_bytes()==blob,'Refuse to replace an existing different receipt'
+ OUT.write_bytes(blob)
+ sys.path.insert(0,str(ROOT))
+ from tests.content_history import _reverse_reviewed_delta
+ for name,relative in FILES.items():
+  current=json.loads((ROOT/relative).read_bytes());untouched=deepcopy(current)
+  restored=_reverse_reviewed_delta(current,name,OUT)
+  assert sha(encoded(restored,name))==EXPECTED_BEFORE[name]
+  assert current==untouched
+ print(json.dumps({'receipt_sha256':sha(blob),'byte_size':len(blob),'files':stats},indent=2))
+
+if __name__=='__main__':main()

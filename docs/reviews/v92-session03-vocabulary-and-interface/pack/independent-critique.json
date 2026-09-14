@@ -1,0 +1,75 @@
+{
+ "thresholds": {
+  "salience_floors": {
+   "usor": 0.6,
+   "normal": 0.35,
+   "greu": 0.2
+  },
+  "strong_edge": 0.6,
+  "contexto_incoming_floor": 5,
+  "mirror_pairs": 3,
+  "red_herring_warn": 2,
+  "red_herring_fail": 4,
+  "member_overuse": 8,
+  "board_overlap_fail": 8,
+  "label_leak_min_chars": 3,
+  "region_fanout": 2,
+  "national_salience": 0.7
+ },
+ "items": {
+  "ct_istorie_368": {
+   "game": "contexto",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Alba Iulia salience 0.39 < 0.60 (usor floor)"
+    }
+   ]
+  },
+  "ct_literatura_369": {
+   "game": "contexto",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Ion Creangă salience 0.56 < 0.60 (usor floor)"
+    }
+   ]
+  },
+  "lt_arta_cultura_237": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Poarta Sărutului salience 0.36 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Oltenia salience 0.42 < 0.60 (usor floor)"
+    }
+   ]
+  },
+  "lt_istorie_238": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Bucovina salience 0.38 < 0.60 (usor floor)"
+    }
+   ]
+  }
+ },
+ "pack_findings": []
+}

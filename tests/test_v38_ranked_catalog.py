@@ -253,8 +253,8 @@ def test_daily_selection_is_stable_and_order_independent() -> None:
 def test_reviewed_daily_assignments_match_current_inventory() -> None:
     pack = load_pack()
     expected = {
-        # ADR-0066: the previous winners were owner-demoted; deterministic re-pick.
-        ("conexiuni", "2026-07-19"): "cx_meme_net_201",
+        # The session03 normal board joins the current deterministic daily shelf.
+        ("conexiuni", "2026-07-19"): "cx_viata_de_roman_369",
         # The reviewed session02 board joins the current normal shelf.
         ("conexiuni", "2026-12-31"): "cx_viata_de_roman_368",
         ("contexto", "2026-07-19"): "ct_viata_de_roman_273",

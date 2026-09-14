@@ -1,6 +1,6 @@
 # ADR-0149: Review new levels and keep crafting feedback visible
 
-- Status: accepted
+- Status: accepted; extended by [ADR-0150](0150-expand-vocabulary-and-clarify-game-controls.md)
 - Date: 2026-09-14
 - Partially supersedes [ADR-0043](0043-lant-visible-route-corridors.md) for mandatory
   first-stage direction hints, and [ADR-0145](0145-persistent-alchimie-discovery-world.md)

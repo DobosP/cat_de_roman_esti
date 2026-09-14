@@ -1,0 +1,505 @@
+"""Reproduce UNAPPROVED pack candidates and author screening; never write repo files."""
+
+from __future__ import annotations
+
+import copy
+import hashlib
+import json
+import os
+import random
+import sys
+from pathlib import Path
+
+ROOT = Path("/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-03")
+OUT = Path(__file__).resolve().parent / "pack-final"
+BASELINE = "0b51e03c983bcbfc042807b4eb97e59a8a9e7781"
+sys.path[:0] = [str(ROOT), str(ROOT / "scripts")]
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+
+import django  # noqa: E402
+
+django.setup()
+import critique_pack as critique  # noqa: E402
+from django.test import Client  # noqa: E402
+
+from cat_de_roman_esti.wordgames import contexto, lant  # noqa: E402
+from cat_de_roman_esti.wordgames.packs import validate_payload  # noqa: E402
+
+GAMES = ("nodes", "edges", "conexiuni", "contexto", "lant", "alchimie")
+PACK_PATH = ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
+KG_PATH = ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
+pack, svc, strong, regions = critique.load_all(PACK_PATH, KG_PATH)
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def write(name, value):
+    path = OUT / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+
+
+def ids(labels):
+    result = [svc.resolve(label) for label in labels]
+    assert all(result), (labels, result)
+    return result
+
+
+SOURCES = {
+    "sapun": ("https://dexonline.ro/definitie/săpun", "Ordinary cleaning product."),
+    "detergent": ("https://dexonline.ro/definitie/detergent", "Ordinary cleaning product."),
+    "sampon": ("https://dexonline.ro/definitie/șampon", "Product for washing hair."),
+    "pasta": ("https://dexonline.ro/definitie/pastă", "Pasta de dinți definition for cleaning teeth."),
+    "maner": ("https://dexonline.ro/definitie/mâner/definitii", "Handle of tool or vessel; use exact dictionary definitions for the four objects."),
+    "dinti": ("https://dexonline.ro/definitie/dinte/definitii", "Dictionary tooth projections of saws, rakes, forks and combs."),
+    "scoarta": (
+        "https://dexonline.ro/definitie/scoarță/definitii",
+        "Dictionary senses: tree bark, book cover, terrestrial crust, cerebral cortex.",
+    ),
+    "faina": ("https://dexonline.ro/definitie/făină", "Dictionary definition: milled food powder."),
+    "cacao": (
+        "https://dexonline.ro/definitie/cacao",
+        "Dictionary powder sense; the exact KG identity is culinary cacao powder.",
+    ),
+    "amidon": (
+        "https://technical-regulation-information-system.ec.europa.eu/en/notification/26519/text/D/RO",
+        "Primary food terminology defines starch as powder obtained from plant raw materials; cited only for physical form.",
+    ),
+    "zahar": (
+        "https://dexonline.ro/intrare/pudră/46419",
+        "Dictionary compound identifies very finely ground powdered sugar.",
+    ),
+    "pian": (
+        "https://dexonline.ro/definitie/pian",
+        "Keyboard instrument; its keys operate the hammers.",
+    ),
+    "telefon": (
+        "https://support.apple.com/ro-ro/guide/iphone/iphb71f9b54d/ios",
+        "Manufacturer guide shows the physical side and volume buttons of modern phones.",
+    ),
+    "telecomanda": (
+        "https://www.samsung.com/ro/tv-accessories/remocon-tv-2019-tv-samsung-bn59-01315b/",
+        "Manufacturer remote-control page explicitly identifies physical buttons.",
+    ),
+    "intrerupator": (
+        "https://dexonline.ro/definitie/întrerupător",
+        "Dictionary electrical-switch sense; ordinary household rocker/button use.",
+    ),
+    "stropitoare": (
+        "https://m.dex.ro/stropitoare",
+        "DEX 1998 definition explicitly identifies watering garden crops.",
+    ),
+    "galeata": (
+        "https://dexonline.ro/definitie/găleată",
+        "Dictionary vessel used to carry water; watering use is an ordinary functional inference.",
+    ),
+    "furtun": ("https://dexonline.ro/definitie/furtun", "Flexible tube conducting fluids."),
+    "robinet": (
+        "https://www.gardena.com/ro/produse/irigarea/fitinguri-furtun",
+        "Manufacturer irrigation system links tap, hose and watering equipment.",
+    ),
+    "bate": (
+        "https://dexonline.ro/definitie/bate/definitii",
+        "Dictionary explicitly supports clock sounds, heartbeat, blowing wind and striking rain.",
+    ),
+    "drojdie": (
+        "https://www.oetker.ro/retete/r/aluat-dospit",
+        "Primary dough recipe uses yeast and proofing.",
+    ),
+    "praf_copt": (
+        "https://www.oetker.ro/produsele/p/praf-de-copt",
+        "Manufacturer identifies leavening agents.",
+    ),
+    "bicarbonat": (
+        "https://www.oetker.ro/produsele/p/bicarbonat-de-sodiu-50g",
+        "Manufacturer identifies sodium bicarbonate as leavening agent.",
+    ),
+    "albus": (
+        "https://www.kingarthurbaking.com/blog/2019/03/26/how-to-bake-high-rising-cakes",
+        "Primary baking guidance explains whipped whites and incorporated air as leavening.",
+    ),
+    "fermoar": (
+        "https://dexonline.ro/definitie/fermoar",
+        "Dictionary closing mechanism for garments/bags; proposed members use common optional zipper closures.",
+    ),
+    "branza": (
+        "https://dexonline.ro/definitie/brânză",
+        "Dictionary milk-derived cheese definition.",
+    ),
+    "cascaval": (
+        "https://dexonline.ro/definitie/cașcaval",
+        "Dictionary cheese made from milk/curd.",
+    ),
+    "unt": (
+        "https://dexonline.ro/definitie/unt",
+        "Dictionary dairy fat separated from milk/cream.",
+    ),
+    "lapte_praf": (
+        "https://dexonline.ro/definitie/praf",
+        "Dictionary compound lapte praf: milk dehydrated into powder.",
+    ),
+    "nadia": (
+        "https://www.cosr.ro/public/aboutus/istoric",
+        "Romanian Olympic Committee: Nadia, Montreal 1976 and the first perfect score on uneven bars.",
+    ),
+    "nadia_relevance": (
+        "https://www.cosr.ro/public/news/2026-anul-nadia-comaneci",
+        "Current primary commemoration establishes continuing recognition, not a changing answer.",
+    ),
+    "creanga": (
+        "https://www.muzeulliteraturiiiasi.ro/produs/ion-creanga-amintiri-povesti-povestiri/",
+        "Author museum publication identifies Creangă with the memoirs, tales and stories.",
+    ),
+    "creanga_eminescu": (
+        "https://www.cimec.ro/muzee/Iasi/eng/creanga_eng.htm",
+        "National heritage museum page documents the friendship and authorship context.",
+    ),
+    "alba": (
+        "https://turism.apulum.ro/tour-item/scurt-istoric/",
+        "Municipal tourism history documents Alba Iulia, Transylvania, 1600 and the 1918 union.",
+    ),
+    "alba_1918": (
+        "https://turism.apulum.ro/destinations/monumentul-unirii/",
+        "Municipal tourism page documents the Alba Iulia union assembly.",
+    ),
+    "enescu_ateneu": (
+        "https://festivalenescu.ro/images/revista-festivalului/Revista_Enescu_nr1.pdf",
+        "Festival primary publication documents Enescu as violinist and his performances at the Athenaeum.",
+    ),
+    "festival_ateneu": (
+        "https://blog.festivalenescu.ro/serii-de-concerte/seria-concertelor-de-la-ateneu-aduce-27-de-evenimente-extraordinare/",
+        "Festival organizer documents violin concerts at the Athenaeum; supports venue and instrument links.",
+    ),
+    "poarta": (
+        "https://centrulbrancusi.ro/poarta-sarutului-2/",
+        "Municipal Brâncuși research center identifies the sculpture, artist and Târgu Jiu ensemble.",
+    ),
+    "oltenia": (
+        "https://vechi.utgjiu.ro/admitere/admitere-master/despre-tgjiu/",
+        "Local university identifies Târgu Jiu in Oltenia and Brâncuși’s local biography.",
+    ),
+    "brancusi": (
+        "https://monumenteistoricegorj.ro/brancusi/",
+        "County culture directorate documents the author, Hobița/Gorj origins and ensemble.",
+    ),
+    "putna": (
+        "https://primariaputna.ro/manastirea-putna/",
+        "Municipality identifies Putna in Bucovina, founded by Ștefan and containing his tomb.",
+    ),
+    "voronet": (
+        "https://basilica.ro/26-mai-1488-a-inceput-constructia-manastirii-voronet-ctitoria-sfantului-stefan-cel-mare/",
+        "Church primary news agency documents Ștefan’s foundation at Voroneț.",
+    ),
+    "voronet_region": (
+        "https://primariagurahumorului.ro/despre/prezentarea-orasului/",
+        "Municipal description places Voroneț in Gura Humorului and the Bucovina setting.",
+    ),
+    "suceava": (
+        "https://www.primariasv.ro/dm_suceava/site.nsf/BE5C166EE0BFCFCEC2257BEC00240D2A/%24FILE/Profil%20Municipiul%20Suceava.pdf",
+        "Municipal profile documents the historical seat, Ștefan and Bucovina context.",
+    ),
+}
+
+GROUPS = [
+    ("Au scoarță", ["Copac", "Pământ", "Creier", "Carte"], ["scoarta"]),
+    (
+        "Au formă de pulbere",
+        ["Făină", "Cacao", "Zahăr pudră", "Amidon alimentar"],
+        ["faina", "cacao", "amidon", "zahar"],
+    ),
+    (
+        "Au butoane sau clape apăsate cu degetele",
+        ["Pian", "Telefon", "Telecomandă", "Întrerupător de lumină"],
+        ["pian", "telefon", "telecomanda", "intrerupator"],
+    ),
+    (
+        "Pot fi folosite la udarea plantelor",
+        ["Stropitoare", "Furtun de grădină", "Găleată", "Robinet"],
+        ["stropitoare", "galeata", "furtun", "robinet"],
+    ),
+    ("Pot bate fără pumni", ["Ceas", "Inimă", "Vânt", "Ploaie"], ["bate"]),
+    (
+        "Produse pentru spălare și curățare",
+        ["Săpun", "Detergent", "Șampon", "Pastă de dinți"],
+        ["sapun", "detergent", "sampon", "pasta"],
+    ),
+    ("Pot fi închise cu fermoar", ["Ghiozdan", "Penar", "Geacă", "Pantaloni"], ["fermoar"]),
+    (
+        "Se obțin din lapte",
+        ["Brânză", "Cașcaval", "Unt", "Lapte praf"],
+        ["branza", "cascaval", "unt", "lapte_praf"],
+    ),
+]
+TARGETS = [
+    (
+        "Ion Creangă",
+        ["carte", "scriitor", "basm", "Mihai Eminescu", "Harap-Alb", "Amintiri din copilărie"],
+        ["creanga", "creanga_eminescu"],
+    ),
+    (
+        "Alba Iulia",
+        ["oraș", "Transilvania", "cetate", "Marea Unire 1918", "Mihai Viteazul", "Mureș"],
+        ["alba", "alba_1918"],
+    ),
+]
+LADDERS = [
+    ("Vioară", "Ateneul Român", ["enescu_ateneu", "festival_ateneu"]),
+    ("Poarta Sărutului", "Oltenia", ["poarta", "oltenia", "brancusi"]),
+    ("Ștefan cel Mare", "Bucovina", ["putna", "voronet", "voronet_region", "suceava"]),
+]
+
+
+def main():
+    baseline_hashes = {str(p.relative_to(ROOT)): sha(p) for p in [PACK_PATH, KG_PATH]}
+    bundles = {}
+    records = []
+    rationales = []
+
+    def add(category, game, raw, rationale, sources, risk):
+        bundle = bundles.setdefault(category, {key: [] for key in GAMES})
+        ref = f"{game}[{len(bundle[game])}]"
+        bundle[game].append(raw)
+        record = copy.deepcopy(raw)
+        preview_id = f"preview_s03_{category}_{game}_{len(bundle[game]):02d}"
+        if game == "conexiuni":
+            record["groups"] = {
+                f"g{i + 1}": group["tiles"] for i, group in enumerate(raw["groups"])
+            }
+            record["group_labels"] = {
+                f"g{i + 1}": group["label"] for i, group in enumerate(raw["groups"])
+            }
+            record["order"] = [node for group in record["groups"].values() for node in group]
+            random.Random(preview_id).shuffle(record["order"])
+        if game == "lant":
+            record["optimal"] = svc.distance(record["start"], record["target"])
+        record.update(id=preview_id, category=category, status="pending", source="ai")
+        errors = validate_payload(record, game, svc)
+        assert not errors, (preview_id, errors)
+        records.append((game, record))
+        rationales.append(
+            {
+                "category": category,
+                "ref": ref,
+                "preview_id": preview_id,
+                "status": "unapproved",
+                "rationale": rationale,
+                "source_keys": sources,
+                "review_risk": risk,
+            }
+        )
+
+    for index, groups in enumerate([GROUPS[:4]]):
+        add(
+            "viata_de_roman",
+            "conexiuni",
+            {
+                "difficulty": "normal",
+                "groups": [{"label": label, "tiles": ids(labels)} for label, labels, _ in groups],
+            },
+            [
+                "Everyday powder and watering anchors lead to controls and four dictionary senses of scoarță. The hardest link is a named polysemy, not obscure identities. Phone means the usual physical side buttons; the tap supplies/regulates water for the hose. A bucket is not claimed to be made exclusively for gardening.",
+                "Milk-derived foods and zipper closures are everyday anchors. The hardest group is the active verb bate applied to a clock, heart, wind and rain. Whipped egg white is the deliberate non-chemical leavener; the conditional label includes preparation. Albuș se bate is a passive phrase and does not satisfy the active Pot bate predicate.",
+            ][index],
+            [key for _, _, keys in groups for key in keys],
+            [
+                "Review whether cerebral cortex is an enjoyable normal-band association and whether the watering function is specific enough. Missing graph edges alone cannot establish semantic uniqueness.",
+                "Review the egg-white leavener and active/passive wordplay carefully. Do not silently restore yogurt: its acid-assisted leavening would create a crossfit. Zipper labels deliberately say can, not always.",
+            ][index],
+        )
+
+    existing_targets = {row["target"] for row in pack["contexto"]}
+    for label, _, sources in TARGETS:
+        target = ids([label])[0]
+        assert target not in existing_targets
+        add(
+            svc.node(target).category,
+            "contexto",
+            {"difficulty": "usor", "target": target},
+            "Concrete canonical Romanian target with native recognizable incoming links. Actual author API probes check category and distinctive approaches instead of inferring feedback from degree.",
+            sources,
+            {
+                "Nadia Comăneci": "Bare sport is cool (rank274); football is warmish and gymnastics is hot. Do not claim every category synonym is well calibrated.",
+                "Ion Creangă": "The graph includes generic or incidental neighbors; approval must judge the writer, work and friend routes, not raw degree alone.",
+                "Alba Iulia": "KG salience under-rates this school-history city. Generic oraș is only warmish (rank117); Transylvania, union and citadel are hot.",
+            }[label],
+        )
+
+    existing_pairs = {(r["start"], r["target"]) for r in pack["lant"]}
+    rejected_pairs = {(r["start"], r["target"]) for r in critique.load_lant_rejection_tombstones()}
+    for start_label, target_label, sources in LADDERS:
+        start, target = ids([start_label, target_label])
+        assert (start, target) not in existing_pairs | rejected_pairs
+        assert (target, start) not in existing_pairs  # also avoid merely reversing stock
+        add(
+            ("muzica" if start_label == "Vioară" else svc.node(start).category),
+            "lant",
+            {"difficulty": "usor", "start": start, "target": target},
+            "Two-step bridge with multiple native shortest first hops. Specific artist/venue or historical/geographical links carry the arc; no graph enrichment is proposed.",
+            sources,
+            {
+                "Vioară": "Enescu and his festival are the two concrete bridges; a third classical-music route is generic. Existing caption fallback can be neutral, so independent live review must judge its legibility.",
+                "Poarta Sărutului": "Three closely related but distinct bridges: the ensemble, the sculptor and the city. Review whether this is sufficient meaningful choice beyond location recall.",
+                "Ștefan cel Mare": "Putna, Voroneț and Suceava are distinctive historical/place bridges. Bucovina is the present regional location, not a claim about a medieval province bearing that name.",
+            }[start_label],
+        )
+
+    preview = copy.deepcopy(pack)
+    for game, record in records:
+        preview[game].append(record)
+    requested_ids = {record["id"] for _, record in records}
+    prior_raw = []
+    for path in sorted(
+        (ROOT / "docs/reviews/v92-all-games-content/pack/candidates").glob("*/candidates.json")
+    ):
+        prior_raw.extend(json.loads(path.read_text())["conexiuni"])
+    raw_novelty = []
+    for game, rec in records:
+        if game != "conexiuni":
+            continue
+        quads = [set(group) for group in rec["groups"].values()]
+        old_quads = [set(group["tiles"]) for row in prior_raw for group in row["groups"]]
+        maximum_quad_overlap = max(len(a & b) for a in quads for b in old_quads)
+        old_boards = [
+            set(n for group in row["groups"] for n in group["tiles"]) for row in prior_raw
+        ]
+        maximum_board_overlap = max(len(set(rec["order"]) & board) for board in old_boards)
+        assert maximum_quad_overlap < 3 and maximum_board_overlap < 8
+        raw_novelty.append(
+            {
+                "preview_id": rec["id"],
+                "previous_raw_boards_compared": len(prior_raw),
+                "maximum_quad_overlap": maximum_quad_overlap,
+                "maximum_board_overlap": maximum_board_overlap,
+            }
+        )
+    findings, _, selected = critique.run(
+        preview, svc, strong, regions, ["conexiuni", "contexto", "lant"], {"pending"}, requested_ids
+    )
+    fails = [f for item in findings.values() for f in item["findings"] if f["level"] == "FAIL"]
+    assert not fails, fails
+    dossiers = {
+        rec["id"]: critique.build_dossier(rec, game, svc, strong, lint, regions)
+        for game, rec, lint in selected
+    }
+    for category, bundle in sorted(bundles.items()):
+        write(f"candidates/{category}/candidates.json", bundle)
+    write("preview-records.json", {"status": "unapproved", "records": [r for _, r in records]})
+    write("preview-dossiers.json", dossiers)
+    write("preview-lints.json", findings)
+    write("prior-raw-novelty.json", raw_novelty)
+    write(
+        "sources-quality.json",
+        {
+            "kind": "author-rationale-not-independent-review-v1",
+            "baseline_commit": BASELINE,
+            "sources_checked_on": "2026-09-14",
+            "source_notes": {
+                key: {"url": url, "supports": note} for key, (url, note) in SOURCES.items()
+            },
+            "items": rationales,
+        },
+    )
+    client = Client()
+    probes = []
+    for label, guesses, _ in TARGETS:
+        target = ids([label])[0]
+        session = contexto._build_session(target, "usor", None)
+        sid = contexto.store.create(session)
+        steps = []
+        # Sport is deliberately retained as weak feedback evidence for Nadia.
+        if label == "Nadia Comăneci":
+            guesses = ["sport", *guesses]
+        for guess in [*guesses, label]:
+            response = client.post(
+                f"/api/wordgames/contexto/games/{sid}/guess",
+                data={"text": guess},
+                content_type="application/json",
+            )
+            data = response.json()
+            assert response.status_code == 200 and data.get("ok"), (label, guess, data)
+            steps.append({"text": guess, "guess": data["guess"], "won": data["won"]})
+        assert steps[-1]["won"]
+        probes.append(
+            {
+                "target": target,
+                "label": label,
+                "incoming_ids": critique.contexto_incoming_ids(svc, target),
+                "reachable": session.reachable,
+                "responsive": sum(
+                    n for distance, n in session.dist_hist.items() if 1 <= distance <= 5
+                ),
+                "steps": steps,
+            }
+        )
+    write(
+        "contexto-api-probes.json",
+        {
+            "scope": "Author fixed-target API probes; not public selector/playtesting or independent review.",
+            "targets": probes,
+        },
+    )
+    ladders = []
+    for a, b, _ in LADDERS:
+        start, target = ids([a, b])
+        assert svc.distance(start, target) == 2
+        middles = [n for n in svc.neighbor_ids(start) if svc.distance(n, target) == 1]
+        assert len(middles) >= 2
+        routes = []
+        for middle in middles:
+            session = lant.LantSession(
+                start=start, target=target, optimal=2, difficulty="usor", chain=[start]
+            )
+            sid = lant.store.create(session)
+            actions = []
+            for node in [middle, target]:
+                response = client.post(
+                    f"/api/wordgames/lant/games/{sid}/move",
+                    data={"text": svc.label(node)},
+                    content_type="application/json",
+                )
+                data = response.json()
+                assert response.status_code == 200, (a, b, data)
+                actions.append(data)
+            assert session.won
+            routes.append(
+                {
+                    "ids": [start, middle, target],
+                    "labels": [svc.label(n) for n in [start, middle, target]],
+                    "actions": actions,
+                }
+            )
+        ladders.append({"start": start, "target": target, "routes": routes})
+    write(
+        "lant-api-routes.json",
+        {
+            "scope": "Author fixed-session replay of all shortest routes; not public selector or independent review.",
+            "ladders": ladders,
+        },
+    )
+    assert baseline_hashes == {str(p.relative_to(ROOT)): sha(p) for p in [PACK_PATH, KG_PATH]}
+    report = {
+        "status": "unapproved",
+        "baseline_commit": BASELINE,
+        "baseline_artifacts_unchanged": baseline_hashes,
+        "author_source_sha256": sha(__file__),
+        "counts": {
+            game: sum(game == g for g, _ in records) for game in ["conexiuni", "contexto", "lant"]
+        },
+        "candidate_files": {
+            str(path.relative_to(OUT)): sha(path)
+            for path in sorted((OUT / "candidates").glob("*/candidates.json"))
+        },
+        "strict_preview_failures": 0,
+        "findings": findings,
+        "contexto_targets_solved": len(probes),
+        "lant_routes_solved": sum(len(row["routes"]) for row in ladders),
+        "preview_ids_are_not_allocated_pack_ids": True,
+    }
+    write("author-checks.json", report)
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()

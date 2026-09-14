@@ -217,13 +217,15 @@ test("a failure before commit keeps the input and earned help without an extra r
   expect((await act(page, game, firstMove())).status()).toBe(503);
   await expect(field(page)).toBeEnabled();
   await expect(field(page)).toHaveValue(firstMove().payload.text);
-  await expect(page.getByText("O DIRECȚIE", { exact: true })).toBeVisible();
+  const heading = earned.stage === "direction" ? "O DIRECȚIE" : "VARIANTE UTILE";
+  expect(["direction", "alternatives"]).toContain(earned.stage);
+  await expect(page.getByText(heading, { exact: true })).toBeVisible();
   expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(before);
   expect(before.earned_hint).toEqual(earned);
   expect(counts).toEqual({ reads: 1, mutations: 1 });
   const accepted = await act(page, game, firstMove());
   expect((await accepted.json()).moves).toBe(1);
-  await expect(page.getByText("O DIRECȚIE", { exact: true })).toHaveCount(0);
+  await expect(page.locator(".lant-hint-panel")).toHaveCount(0);
   expect(counts.mutations).toBe(2);
 });
 

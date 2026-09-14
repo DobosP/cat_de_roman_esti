@@ -1,0 +1,49 @@
+
+> cat-de-roman-esti-frontend@0.1.0 build
+> tsc --noEmit && vite build && npm run check:bundle
+
+vite v8.1.4 building client environment for production...
+[2Ktransforming...✓ 490 modules transformed.
+rendering chunks...
+computing gzip size...
+../cat_de_roman_esti/web/static/index.html                                             1.16 kB │ gzip:   0.60 kB
+../cat_de_roman_esti/web/static/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2    4.57 kB
+../cat_de_roman_esti/web/static/.vite/manifest.json                                    5.97 kB │ gzip:   0.98 kB
+../cat_de_roman_esti/web/static/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2       29.73 kB
+../cat_de_roman_esti/web/static/assets/inter-latin-wght-normal-Dx4kXJAl.woff2         48.25 kB
+../cat_de_roman_esti/web/static/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2     85.06 kB
+../cat_de_roman_esti/web/static/assets/Lant-NRun4RQo.css                               0.77 kB │ gzip:   0.41 kB
+../cat_de_roman_esti/web/static/assets/GameOptions-CEWYWGsz.css                        1.06 kB │ gzip:   0.44 kB
+../cat_de_roman_esti/web/static/assets/CaldRece-B885PE19.css                           1.07 kB │ gzip:   0.41 kB
+../cat_de_roman_esti/web/static/assets/Intrusul-D1oQwidZ.css                           1.80 kB │ gzip:   0.64 kB
+../cat_de_roman_esti/web/static/assets/Conexiuni-BWRoQO9R.css                          2.59 kB │ gzip:   0.75 kB
+../cat_de_roman_esti/web/static/assets/Perechi-Dnjh2U--.css                            2.62 kB │ gzip:   0.84 kB
+../cat_de_roman_esti/web/static/assets/Alchimie-C60LPQlQ.css                          14.52 kB │ gzip:   3.31 kB
+../cat_de_roman_esti/web/static/assets/index-D9HNWgEs.css                             39.52 kB │ gzip:   8.79 kB
+../cat_de_roman_esti/web/static/assets/GameSetupOptions-DnwpghsS.js                    0.33 kB │ gzip:   0.24 kB
+../cat_de_roman_esti/web/static/assets/GameOptions-zxcvpUo3.js                         0.35 kB │ gzip:   0.24 kB
+../cat_de_roman_esti/web/static/assets/scoreSync-CyBzX-A0.js                           0.63 kB │ gzip:   0.39 kB
+../cat_de_roman_esti/web/static/assets/derivedReplay-BkW_Ev1N.js                       0.95 kB │ gzip:   0.49 kB
+../cat_de_roman_esti/web/static/assets/auth-BQkoQX_A.js                                1.18 kB │ gzip:   0.70 kB
+../cat_de_roman_esti/web/static/assets/CategoryPicker-BSxGsH-8.js                      3.39 kB │ gzip:   1.53 kB
+../cat_de_roman_esti/web/static/assets/Ranking-D9OcoAkX.js                             3.47 kB │ gzip:   1.42 kB
+../cat_de_roman_esti/web/static/assets/AccountBar-BMtfCmni.js                          6.02 kB │ gzip:   2.10 kB
+../cat_de_roman_esti/web/static/assets/Intrusul-B9HFXRyc.js                           10.56 kB │ gzip:   4.21 kB
+../cat_de_roman_esti/web/static/assets/Perechi-Bo38L_0W.js                            13.02 kB │ gzip:   4.97 kB
+../cat_de_roman_esti/web/static/assets/useSavedGameResume-BWDIdm9t.js                 14.92 kB │ gzip:   5.67 kB
+../cat_de_roman_esti/web/static/assets/Conexiuni-Crb_2n93.js                          15.67 kB │ gzip:   5.98 kB
+../cat_de_roman_esti/web/static/assets/Lant-CjPas-YY.js                               18.11 kB │ gzip:   6.41 kB
+../cat_de_roman_esti/web/static/assets/CaldRece-B7vKW74w.js                           19.50 kB │ gzip:   6.65 kB
+../cat_de_roman_esti/web/static/assets/Alchimie-B6sK_2sb.js                           42.34 kB │ gzip:  13.06 kB
+../cat_de_roman_esti/web/static/assets/index-DaJVDDJ5.js                             348.89 kB │ gzip: 114.72 kB
+
+✓ built in 172ms
+
+> cat-de-roman-esti-frontend@0.1.0 check:bundle
+> node scripts/check-bundle-budget.mjs
+
+Initial JS/CSS gzip budget (limit 120.0 KiB):
+     8.53 KiB  assets/index-D9HNWgEs.css
+   110.69 KiB  assets/index-DaJVDDJ5.js
+   119.22 KiB  total
+Romanian font subsets: 4 (Latin + Latin Extended only)

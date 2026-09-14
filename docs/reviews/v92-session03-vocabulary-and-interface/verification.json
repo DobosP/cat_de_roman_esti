@@ -1,0 +1,84 @@
+{
+  "kind": "v92-session03-integration-v1",
+  "verified_on": "2026-09-15",
+  "baseline_commit": "0b51e03c983bcbfc042807b4eb97e59a8a9e7781",
+  "branch": "feat/v92-entry-creation-03",
+  "passed": true,
+  "new_rounds": {
+    "conexiuni": 1,
+    "contexto": 2,
+    "lant": 2,
+    "intrusul": 3,
+    "perechi": 3
+  },
+  "new_alchimie_words": 4,
+  "new_alchimie_recipes": 6,
+  "new_shared_KG_nodes": 0,
+  "new_per_game_visible_words": {
+    "conexiuni_pack": 6,
+    "intrusul": 10,
+    "perechi": 20
+  },
+  "new_lant_captions": 12,
+  "checks": {
+    "backend_python312": {
+      "passed": 1968,
+      "log_sha256": "1c53474fc1a944d9d2aff4803bd26b689b36745d4ab45349042eaf6c1ebf9584"
+    },
+    "browser_desktop_mobile": {
+      "passed": 480,
+      "log_sha256": "4da2e759bbc93cd2370a51b497bb8bc0c24178a6c02b065da0d35f940a318d7b"
+    },
+    "accounts": {
+      "passed": 53,
+      "log_sha256": "da6d4343456530a963291eeac3d35875d363cc9c575af833a4d9f4e73d39eba2"
+    },
+    "frontend_native": {
+      "passed": 212,
+      "log_sha256": "f215730dd61d456690bc9cac50637848f8fa12c782ebe4f15cb5240df1378cca"
+    },
+    "perechi_privacy_and_gameplay": {
+      "passed": 28,
+      "log_sha256": "f5cf750b8c23c70a3a20a99944239a504d11f3d4d877117f0cb3cf2552abeba0"
+    }
+  },
+  "other_green_gates": [
+    "Ruff",
+    "git diff --check",
+    "fixture validator",
+    "pack validator",
+    "frontend lint",
+    "frontend typecheck/build",
+    "documentation checker"
+  ],
+  "initial_gzip_kib": 119.22,
+  "initial_limit_kib": 120,
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "02b966eacaa851a9b20c4f36e0ee50c217e49670553da462313b16830b2c13e6",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "e467823999d6b20bd0abeb6a41ceb239faaf7c600afe7d9df3adfc65daad3b12",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "de2f46a72c23e5ecbd496d3a4314a48f0d4f636b71aa5ba4662bccc837298449",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "9fdcd45bca05d94077465c300851d18bcc487a7b82af3b69863e3d57534766ad",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "b9ff7122f6499d4eea365cc6292249744e34c6576f5f16ca694d9644c19c327f",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "952236c27a2d176bd2c701a907e752c72a7efa6cb8177e329d3c88deeed156b4"
+  },
+  "quick_live_audit_sha256": "1c549c9ae32911542a892b72cf9929634f98ddacc310e688d6584009d4bf94f8",
+  "world_live_audit_sha256": "e3875b8cd19c361ed033c0a043c0a61d5e5cfc128240579794d0b049e8cc6122",
+  "independent_gui_review": "gui/independent-final/final-review.json",
+  "independent_gui_review_sha256": "1a43a93a1f8d153dbc2b9da4dd2b4622a1b5d781a9df8c27275ba384bbaa7496",
+  "exact_archived_evidence_files": 131,
+  "preview": {
+    "port": 8150,
+    "health_status": 200,
+    "origin_preserved_from_previous_session": true
+  },
+  "test_expectation_repairs": "The current daily board fixture follows the expanded approved shelf. Lanț recovery checks the actual earned hint stage. Perechi privacy guards distinguish canonical public tile labels from hidden category metadata and separately reject unearned hints/categories. No serving code changed for these test repairs.",
+  "limits": [
+    "No human enjoyment study",
+    "No physical-device acceptance",
+    "Python3.14 not rerun",
+    "No push, main merge or deployment"
+  ]
+}

@@ -1,0 +1,185 @@
+{
+ "id": "lt_istorie_238",
+ "game": "lant",
+ "category": "istorie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "5c273f48c2359c10a38efc9d578b13b107402ddb1082794ec818ace58cdb6ec7",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Bucovina salience 0.38 < 0.60 (usor floor)"
+  }
+ ],
+ "display_rules_sha256": "c74d52eda142c2a99da407f35265f808879e7fce565e373e9c926b7b7b06f287",
+ "start": {
+  "id": "n_stefan_cel_mare",
+  "label": "Ștefan cel Mare",
+  "node_type": "person",
+  "category": "istorie",
+  "salience": 0.6939,
+  "degree": 18,
+  "incoming_degree": 18,
+  "description": "Domnitor al Moldovei (1457-1504)."
+ },
+ "target": {
+  "id": "n_bucovina",
+  "label": "Bucovina",
+  "node_type": "place",
+  "category": "arta_cultura",
+  "salience": 0.3754,
+  "degree": 13,
+  "incoming_degree": 14,
+  "description": "Regiune istorica din nordul Moldovei."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_stefan_cel_mare",
+     "label": "Ștefan cel Mare"
+    },
+    {
+     "id": "n_putna",
+     "label": "Mănăstirea Putna"
+    },
+    {
+     "id": "n_bucovina",
+     "label": "Bucovina"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_stefan_cel_mare",
+      "label": "Ștefan cel Mare"
+     },
+     "to": {
+      "id": "n_putna",
+      "label": "Mănăstirea Putna"
+     },
+     "relation": "related_to",
+     "label": "ctitorie și mormânt",
+     "display_label": "domnitor și ctitorie",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_putna",
+      "label": "Mănăstirea Putna"
+     },
+     "to": {
+      "id": "n_bucovina",
+      "label": "Bucovina"
+     },
+     "relation": "related_to",
+     "label": "mănăstire din zonă",
+     "display_label": "mănăstire și regiune",
+     "strength": 0.52
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_stefan_cel_mare",
+     "label": "Ștefan cel Mare"
+    },
+    {
+     "id": "n_voronet",
+     "label": "Mănăstirea Voroneț"
+    },
+    {
+     "id": "n_bucovina",
+     "label": "Bucovina"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_stefan_cel_mare",
+      "label": "Ștefan cel Mare"
+     },
+     "to": {
+      "id": "n_voronet",
+      "label": "Mănăstirea Voroneț"
+     },
+     "relation": "related_to",
+     "label": "ctitor al",
+     "display_label": "domnitor și ctitorie",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_voronet",
+      "label": "Mănăstirea Voroneț"
+     },
+     "to": {
+      "id": "n_bucovina",
+      "label": "Bucovina"
+     },
+     "relation": "located_in",
+     "label": "se afla in",
+     "display_label": "mănăstire și regiune",
+     "strength": 0.7
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_stefan_cel_mare",
+     "label": "Ștefan cel Mare"
+    },
+    {
+     "id": "n_v11geo_suceava",
+     "label": "Suceava"
+    },
+    {
+     "id": "n_bucovina",
+     "label": "Bucovina"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_stefan_cel_mare",
+      "label": "Ștefan cel Mare"
+     },
+     "to": {
+      "id": "n_v11geo_suceava",
+      "label": "Suceava"
+     },
+     "relation": "associated_with",
+     "label": "fosta capitală a lui",
+     "display_label": "domnitor și capitală medievală",
+     "strength": 0.75
+    },
+    {
+     "from": {
+      "id": "n_v11geo_suceava",
+      "label": "Suceava"
+     },
+     "to": {
+      "id": "n_bucovina",
+      "label": "Bucovina"
+     },
+     "relation": "located_in",
+     "label": "e poarta spre",
+     "display_label": "oraș și regiune",
+     "strength": 0.7
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:006eeae6a2c5f507dbc27f3cbfb6e0680ae4ce6670c7f1217c13012a64e807f6"
+}

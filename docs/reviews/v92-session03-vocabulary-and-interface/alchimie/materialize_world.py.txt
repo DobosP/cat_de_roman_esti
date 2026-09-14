@@ -1,0 +1,18 @@
+import hashlib,json,pprint,textwrap
+from pathlib import Path
+rawpath=Path('/home/dobo/work/_temp/feat__v92-entry-creation-03/author/alchimie-candidates.json')
+assert hashlib.sha256(rawpath.read_bytes()).hexdigest()=='9d9a67f39e7789a543ec3a3b90c7f265f832890828031f3363abc1ab1519a622'
+raw=json.loads(rawpath.read_bytes());source=Path('scripts/alchimie_discovery_recipe_source.py');s=source.read_text();assert '# Session 03:' not in s
+words={r['label']:{'id':r['id'],'description':r['description'],'sources':r['sources']} for r in raw['concepts']}
+recipes=[(r['id'],*r['labels']['pair'],r['labels']['result'],r['explanation']) for r in raw['recipes']]
+refs={r['id']:r['sources'] for r in raw['recipes']}
+s+='\n# Session 03: new recognizable preparations and onward uses.\n'
+for name,data in [('WORLD_CONCEPTS.update',words),('RECIPES.extend',recipes),('RECIPE_SOURCES.update',refs)]:
+ s+=name+'(\n'+textwrap.indent(pprint.pformat(data,width=90,sort_dicts=False),'    ')+'\n)\n'
+source.write_text(s)
+old='docs/reviews/v92-alchimie-large-concepts/candidate.json';new='docs/reviews/v92-entry-creation-and-gui/alchimie/candidate.json'
+for name in ['scripts/build_alchimie_discovery_world.py','scripts/audit_alchimie_discovery_world.py']:
+ p=Path(name);s=p.read_text().replace(old,new)
+ if name.endswith('build_alchimie_discovery_world.py'):
+  s=s.replace('da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a',hashlib.sha256(Path(new).read_bytes()).hexdigest())
+ p.write_text(s)

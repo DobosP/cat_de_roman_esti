@@ -106,7 +106,7 @@ export default function AlchimieExplore({ onExit }: {
         setSelected(fresh.hint?.pair?.[0].id ?? null);
         setQuery("");
         setFreshIds([]);
-        setMessage(save.kind === "saved" ? "Colecția ta este pregătită. Continuă să descoperi." : "");
+        setMessage(save.kind === "saved" && !fresh.complete ? "Colecția ta este pregătită. Continuă să descoperi." : "");
       }
     } catch (error) {
       if (generation.current === epoch) {
@@ -215,7 +215,7 @@ export default function AlchimieExplore({ onExit }: {
   const normalizedQuery = normalize(query);
   const items = state?.inventory.filter((item) => normalizedQuery
     ? normalize(item.label).includes(normalizedQuery)
-    : showAll || item.status === "active" || freshIds.includes(item.id)) ?? [];
+    : state.complete || showAll || item.status === "active" || freshIds.includes(item.id)) ?? [];
   const selectedItem = state?.inventory.find((item) => item.id === selected);
   const goal = state?.goals.find((item) => item.id === state.goal_id);
   const journal = state?.inventory.filter((item) => item.parents !== null).slice().reverse() ?? [];
@@ -276,7 +276,7 @@ export default function AlchimieExplore({ onExit }: {
             <div className="alchemy-workspace">
               <div ref={bench} className={`card alchemy-bench${benchPinned ? " alchemy-bench--pinned" : ""}`} aria-label="Alambic">
                 <div className="alchemy-craft-cue">
-                  {selectedItem ? <><button type="button" className="alchemy-slot" disabled={locked} aria-label={`Scoate ${selectedItem.label} din alambic`} onClick={() => setSelected(null)}><span className="alchemy-slot-label">{selectedItem.label}</span><span aria-hidden>×</span></button><span className="alchemy-craft-plus" aria-hidden>+</span><span className="alchemy-craft-prompt">Atinge un alt cuvânt</span></> : <p className="alchemy-craft-prompt">Atinge un cuvânt, apoi altul. Se combină imediat.</p>}
+                  {state.complete ? <p className="alchemy-craft-prompt">Răsfoiește cuvintele sau deschide „Rețetele mele”.</p> : selectedItem ? <><button type="button" className="alchemy-slot" disabled={locked} aria-label={`Scoate ${selectedItem.label} din alambic`} onClick={() => setSelected(null)}><span className="alchemy-slot-label">{selectedItem.label}</span><span aria-hidden>×</span></button><span className="alchemy-craft-plus" aria-hidden>+</span><span className="alchemy-craft-prompt">Atinge un alt cuvânt</span></> : <p className="alchemy-craft-prompt">Atinge un cuvânt, apoi altul. Se combină imediat.</p>}
                 </div>
                 {busy && <span className="alchemy-working" role="status">Se verifică…</span>}
                 {message && <p className="alchemy-feedback" role="status">{message}</p>}
@@ -284,10 +284,11 @@ export default function AlchimieExplore({ onExit }: {
                 {!state.complete && <div className="alchemy-assistance"><Button variant="secondary" disabled={locked || state.hint?.stage === "pair"} onClick={() => void act(explorationApi.hint, (fresh) => { setSelected(fresh.hint?.pair?.[0].id ?? null); setQuery(""); setShowAll(false); setMessage(""); })}>{state.hint?.stage === "output" ? "Arată-mi perechea" : "💡 O idee?"}</Button><span>{state.hint?.stage === "pair" ? "Atinge al doilea cuvânt marcat." : "Gratuit"}</span></div>}
               </div>
               <section ref={library} tabIndex={-1} className="card col alchemy-inventory-panel" aria-label="Colecția ta">
-                <div className="alchemy-panel-heading"><h2>Cuvintele tale</h2><span className="alchemy-selection-count">{activeCount} de explorat</span></div>
-                <details className="alchemy-library-tools"><summary>{query ? `Căutare: ${query}` : showAll ? `Toate cuvintele · ${state.inventory.length}` : "Caută și filtrează"}</summary>
+                <div className="alchemy-panel-heading"><h2>Cuvintele tale</h2><span className="alchemy-selection-count">{state.complete ? `${state.inventory.length} colecționate` : `${activeCount} de explorat`}</span></div>
+                <details className="alchemy-library-tools"><summary>{query ? `Căutare: ${query}` : state.complete || showAll ? `Toate cuvintele · ${state.inventory.length}` : "Caută și filtrează"}</summary>
                 <div className="alchemy-explore-library-tools"><input type="search" className="field alchemy-inventory-search" value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Escape" && query) { event.preventDefault(); setQuery(""); } }} placeholder="Caută în colecție…" aria-label="Caută în colecție" autoComplete="off" spellCheck={false} />
-                  <label className="alchemy-show-collection"><input type="checkbox" checked={showAll} onChange={(event) => setShowAll(event.target.checked)} />Toate ({state.inventory.length})</label></div></details>
+                  {!state.complete && <label className="alchemy-show-collection"><input type="checkbox" checked={showAll} onChange={(event) => setShowAll(event.target.checked)} />Toate ({state.inventory.length})</label>}</div></details>
+                {query && <Button variant="secondary" className="alchemy-clear-search" onClick={(event) => { setQuery(""); library.current?.focus({ preventScroll: true }); if (event.detail === 0) library.current?.querySelector("h2")?.scrollIntoView({ block: "center" }); }}>Șterge căutarea</Button>}
                 <div className="alchemy-inventory-grid">
                   {items.map((item) => {
                     const inactive = item.status !== "active";

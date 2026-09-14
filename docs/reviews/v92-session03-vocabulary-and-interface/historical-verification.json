@@ -1,0 +1,62 @@
+{
+  "status": "pass",
+  "world_and_editorial_passed": 97,
+  "history_and_migration_passed": 71,
+  "current_pin_tests_deferred": 0,
+  "receipt_sha256": "8c990bc5645400e83b18bda92157dddeef45a18f9d66f1648c1ece7a9b29fd6c",
+  "file_sha256": {
+    "tests/content_history.py": "08046279d44d06971a84aa054f344e0db3af91333844fd5b5753239571b10b7e",
+    "tests/test_v91_content_history.py": "ff44b02ecedc6f5fc2b4b6c2eac1ffd1ad5d24135908f246924a581523ece708",
+    "tests/test_v91_sport_seed_revision.py": "163f842825dc62844a1be86c6f55f0149ea8beaf35e618f2f32a489f9beb899e",
+    "tests/test_alchimie_discovery_catalog.py": "850c06f6a3ed1df586cab3d1999ddd77fba0040b9a1964e006d82aa2e81af185",
+    "tests/test_v92_session03_world.py": "ecfc11ae2d6b9ab671dca1ce8684fe069cda765100011644787a812fdd9130c5",
+    "docs/reviews/v92-session03-vocabulary-and-interface/artifact-delta.json": "8c990bc5645400e83b18bda92157dddeef45a18f9d66f1648c1ece7a9b29fd6c"
+  },
+  "current_pin_tests_passed": 5,
+  "total_owned_tests_passed": 173,
+  "commands": [
+    {
+      "args": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_alchimie_discovery_catalog.py",
+        "tests/test_v92_session03_world.py",
+        "-o",
+        "addopts=",
+        "-q"
+      ],
+      "result": "97 passed in10.39s",
+      "log_sha256": "963daac61855056f76391fc16c8dd5d7f44c0a02954e76bf266a21c61720def7"
+    },
+    {
+      "args": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_v91_content_history.py",
+        "tests/test_v91_sport_seed_revision.py",
+        "-k",
+        "not test_exact_v90_artifact_inverse_rejects_unreviewed_changes",
+        "-o",
+        "addopts=",
+        "-q"
+      ],
+      "result": "71 passed,5 deselected in15.20s",
+      "log_sha256": "986f1ee532c0997be4603071692959770d24209e8e6ae575e148b5940e9f2b3e"
+    },
+    {
+      "args": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_v91_content_history.py::test_exact_v90_artifact_inverse_rejects_unreviewed_changes",
+        "-o",
+        "addopts=",
+        "-q"
+      ],
+      "result": "5 passed in1.35s",
+      "log_sha256": "ae2604274a833403d5a93d1b2dcea196bb9d11ba794c12f5c389cb0ec08875ba"
+    }
+  ]
+}

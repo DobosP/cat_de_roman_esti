@@ -1,0 +1,183 @@
+{
+  "kind": "alchimie-new-words-author-candidates-v1",
+  "status": "unapproved",
+  "baseline": "0b51e03",
+  "world_sha256": "c2bfc524e31115be3283b9dfd8e1bb1853c7082bc153716b5db368596ac5f672",
+  "concepts": [
+    {
+      "id": "alw_food_mere_coapte",
+      "label": "Mere coapte",
+      "description": "Mere gătite în cuptor până se înmoaie, servite simple sau cu umpluturi dulci și arome.",
+      "sources": [
+        "https://www.kamis.ro/retete/deserturi-si-bauturi/mere-coapte"
+      ]
+    },
+    {
+      "id": "alw_food_ardei_copti",
+      "label": "Ardei copți",
+      "description": "Ardei gătiți la căldură puternică și curățați de pieliță, folosiți în salate, garnituri sau alte preparate.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/ardei-copti-in-cuptor-cea-mai-simpla-si-igienica-metoda-de-copt-ardeii.html"
+      ]
+    },
+    {
+      "id": "alw_food_pilaf_legume",
+      "label": "Pilaf de legume",
+      "description": "Preparat din orez gătit cu legume și apă sau supă, până când boabele absorb lichidul și se înmoaie.",
+      "sources": [
+        "https://www.barbatlacratita.ro/2011/01/pilaf-de-orez-cu-legume.html"
+      ]
+    },
+    {
+      "id": "alw_food_dovleac_copt",
+      "label": "Dovleac copt",
+      "description": "Bucăți de dovleac gătite în cuptor până când pulpa se înmoaie; pot fi servite ca atare sau folosite în alte preparate.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/dovleac-copt-cum-se-coace-dovleacul-placintar-la-cuptor.html"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "id": "mere-coapte-cuptor",
+      "pair": [
+        "n_v24_food_orchard_mar",
+        "n_v84_food_cuptor"
+      ],
+      "result": "alw_food_mere_coapte",
+      "explanation": "Merele pregătite se coc în cuptor până se înmoaie, simple sau umplute cu nucă, miere și scorțișoară.",
+      "sources": [
+        "https://www.kamis.ro/retete/deserturi-si-bauturi/mere-coapte"
+      ],
+      "rationale": "Familiar unused oven transformation gives the apple a distinct preparation, rather than another filling variant.",
+      "labels": {
+        "pair": [
+          "Măr",
+          "Cuptor de bucătărie"
+        ],
+        "result": "Mere coapte"
+      }
+    },
+    {
+      "id": "ardei-copti-cuptor",
+      "pair": [
+        "n_v24_food_salad_veg_ardei",
+        "n_v84_food_cuptor"
+      ],
+      "result": "alw_food_ardei_copti",
+      "explanation": "Ardeii se coc în cuptor până se înmoaie și li se rumenește pielița, apoi se curăță.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/ardei-copti-in-cuptor-cea-mai-simpla-si-igienica-metoda-de-copt-ardeii.html"
+      ],
+      "rationale": "Teaches the ordinary pepper-roasting transformation through a precise tool pair.",
+      "labels": {
+        "pair": [
+          "Ardei",
+          "Cuptor de bucătărie"
+        ],
+        "result": "Ardei copți"
+      }
+    },
+    {
+      "id": "dovleac-copt-cuptor",
+      "pair": [
+        "n_v24_food_garden_veg_dovleac",
+        "n_v84_food_cuptor"
+      ],
+      "result": "alw_food_dovleac_copt",
+      "explanation": "Dovleacul curățat de semințe și tăiat în bucăți se coace până când pulpa devine moale.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/dovleac-copt-cum-se-coace-dovleacul-placintar-la-cuptor.html"
+      ],
+      "rationale": "A familiar autumn preparation makes an underused supply useful and has a later soup path.",
+      "labels": {
+        "pair": [
+          "Dovleac",
+          "Cuptor de bucătărie"
+        ],
+        "result": "Dovleac copt"
+      }
+    },
+    {
+      "id": "pilaf-orez-legume",
+      "pair": [
+        "n_v3gas_orez",
+        "n_v4gas_legume"
+      ],
+      "result": "alw_food_pilaf_legume",
+      "explanation": "Orezul se gătește împreună cu legume călite și apă sau supă până absoarbe lichidul și se înmoaie.",
+      "sources": [
+        "https://www.barbatlacratita.ro/2011/01/pilaf-de-orez-cu-legume.html"
+      ],
+      "rationale": "Direct ingredient pairing distinguishes a familiar savory rice preparation from the existing rice pudding.",
+      "labels": {
+        "pair": [
+          "Orez",
+          "Legume"
+        ],
+        "result": "Pilaf de legume"
+      }
+    },
+    {
+      "id": "zacusca-ardei-copti",
+      "pair": [
+        "alw_food_ardei_copti",
+        "alw_food_vanata"
+      ],
+      "result": "n_gas_zacusca",
+      "explanation": "Ardeii copți și curățați se toacă împreună cu vinete coapte, apoi se gătesc cu ceapă, roșii și ulei în zacuscă.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/conserve/zacusca-de-vinete.html"
+      ],
+      "rationale": "The new roasted pepper stays useful after discovery and rewards preparation before an established dish.",
+      "labels": {
+        "pair": [
+          "Ardei copți",
+          "Vânătă"
+        ],
+        "result": "Zacuscă"
+      }
+    },
+    {
+      "id": "supa-crema-dovleac-copt",
+      "pair": [
+        "alw_food_dovleac_copt",
+        "n_v4gas_supa"
+      ],
+      "result": "alw_food_supa_crema",
+      "explanation": "Pulpa dovleacului copt se pasează cu supă și se încălzește până se obține o supă cremă, asezonată după gust.",
+      "sources": [
+        "https://www.retetelemeledragi.com/2024/11/supa-crema-de-dovleac-copt.html/"
+      ],
+      "rationale": "The new baked pumpkin is a useful intermediate rather than a terminal renamed supply.",
+      "labels": {
+        "pair": [
+          "Dovleac copt",
+          "Supă"
+        ],
+        "result": "Supă cremă"
+      }
+    }
+  ],
+  "audit": {
+    "old_concepts_preserved": 221,
+    "old_recipes_preserved": 288,
+    "new_concepts": 4,
+    "new_recipes": 6,
+    "new_supplies": 0,
+    "new_goals": 0,
+    "all_new_concepts_reachable": true,
+    "hypothetical_complete_discoveries": 121,
+    "new_concept_onward_recipe_count": 2
+  },
+  "exclusions": [
+    {
+      "label": "Chiftele marinate",
+      "reason": "Resolves to existing KG Chiftele alias; adding a world-local shadow is forbidden."
+    },
+    {
+      "label": "Ou ochi",
+      "reason": "Most natural Ou+Tigaie is occupied by Omletă and Ou+Ulei by Maioneză; do not choose a less predictable leftover pair just to add another word."
+    }
+  ]
+}

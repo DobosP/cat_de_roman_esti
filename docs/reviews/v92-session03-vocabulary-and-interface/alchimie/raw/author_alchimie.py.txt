@@ -1,0 +1,47 @@
+"""Author-only new culinary concepts; no served files are written."""
+from pathlib import Path
+import sys,json,hashlib
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-03');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+s=get_service(); wp=ROOT/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json'; w=json.loads(wp.read_bytes());ids={c['label']:c['id'] for c in w['concepts']}
+sources={
+'mere':'https://www.kamis.ro/retete/deserturi-si-bauturi/mere-coapte',
+'ardei':'https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/ardei-copti-in-cuptor-cea-mai-simpla-si-igienica-metoda-de-copt-ardeii.html',
+'pilaf':'https://www.barbatlacratita.ro/2011/01/pilaf-de-orez-cu-legume.html',
+'dovleac':'https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/dovleac-copt-cum-se-coace-dovleacul-placintar-la-cuptor.html',
+'zacusca':'https://www.lauralaurentiu.ro/retete-culinare/conserve/zacusca-de-vinete.html',
+'supa':'https://www.retetelemeledragi.com/2024/11/supa-crema-de-dovleac-copt.html/',
+}
+spec=[
+('alw_food_mere_coapte','Mere coapte','Mere gătite în cuptor până se înmoaie, servite simple sau cu umpluturi dulci și arome.','mere'),
+('alw_food_ardei_copti','Ardei copți','Ardei gătiți la căldură puternică și curățați de pieliță, folosiți în salate, garnituri sau alte preparate.','ardei'),
+('alw_food_pilaf_legume','Pilaf de legume','Preparat din orez gătit cu legume și apă sau supă, până când boabele absorb lichidul și se înmoaie.','pilaf'),
+('alw_food_dovleac_copt','Dovleac copt','Bucăți de dovleac gătite în cuptor până când pulpa se înmoaie; pot fi servite ca atare sau folosite în alte preparate.','dovleac'),
+]
+concepts=[]
+for nid,label,desc,key in spec:
+ assert label not in ids and s.resolve(label) is None,(label,s.resolve(label))
+ ids[label]=nid;concepts.append({'id':nid,'label':label,'description':desc,'sources':[sources[key]]})
+rows=[
+('mere-coapte-cuptor','Măr','Cuptor de bucătărie','Mere coapte','Merele pregătite se coc în cuptor până se înmoaie, simple sau umplute cu nucă, miere și scorțișoară.','mere','Familiar unused oven transformation gives the apple a distinct preparation, rather than another filling variant.'),
+('ardei-copti-cuptor','Ardei','Cuptor de bucătărie','Ardei copți','Ardeii se coc în cuptor până se înmoaie și li se rumenește pielița, apoi se curăță.','ardei','Teaches the ordinary pepper-roasting transformation through a precise tool pair.'),
+('dovleac-copt-cuptor','Dovleac','Cuptor de bucătărie','Dovleac copt','Dovleacul curățat de semințe și tăiat în bucăți se coace până când pulpa devine moale.','dovleac','A familiar autumn preparation makes an underused supply useful and has a later soup path.'),
+('pilaf-orez-legume','Orez','Legume','Pilaf de legume','Orezul se gătește împreună cu legume călite și apă sau supă până absoarbe lichidul și se înmoaie.','pilaf','Direct ingredient pairing distinguishes a familiar savory rice preparation from the existing rice pudding.'),
+('zacusca-ardei-copti','Ardei copți','Vânătă','Zacuscă','Ardeii copți și curățați se toacă împreună cu vinete coapte, apoi se gătesc cu ceapă, roșii și ulei în zacuscă.','zacusca','The new roasted pepper stays useful after discovery and rewards preparation before an established dish.'),
+('supa-crema-dovleac-copt','Dovleac copt','Supă','Supă cremă','Pulpa dovleacului copt se pasează cu supă și se încălzește până se obține o supă cremă, asezonată după gust.','supa','The new baked pumpkin is a useful intermediate rather than a terminal renamed supply.'),
+]
+oldpairs={frozenset(r['pair']) for r in w['recipes']};recipes=[]
+for rid,a,b,result,ex,key,why in rows:
+ pair=sorted([ids[a],ids[b]]);assert frozenset(pair) not in oldpairs;oldpairs.add(frozenset(pair));assert ids[result] not in pair
+ recipes.append({'id':rid,'pair':pair,'result':ids[result],'explanation':ex,'sources':[sources[key]],'rationale':why,'labels':{'pair':[a,b],'result':result}})
+known=set(w['world']['starter_ids']); unlocked=set();history=[]
+for _ in range(1000):
+ for tier in w['unlocks']:
+  if tier['after_discoveries']<=len(history): known.update(tier['concept_ids'])
+ available=[r for r in [*w['recipes'],*recipes] if set(r['pair'])<=known and r['result'] not in known]
+ if not available:break
+ r=available[0];known.add(r['result']);history.append(r['id'])
+assert all(c['id'] in known for c in concepts)
+obj={'kind':'alchimie-new-words-author-candidates-v1','status':'unapproved','baseline':'0b51e03','world_sha256':hashlib.sha256(wp.read_bytes()).hexdigest(),'concepts':concepts,'recipes':recipes,'audit':{'old_concepts_preserved':len(w['concepts']),'old_recipes_preserved':len(w['recipes']),'new_concepts':4,'new_recipes':6,'new_supplies':0,'new_goals':0,'all_new_concepts_reachable':True,'hypothetical_complete_discoveries':len(history),'new_concept_onward_recipe_count':2},'exclusions':[{'label':'Chiftele marinate','reason':'Resolves to existing KG Chiftele alias; adding a world-local shadow is forbidden.'},{'label':'Ou ochi','reason':'Most natural Ou+Tigaie is occupied by Omletă and Ou+Ulei by Maioneză; do not choose a less predictable leftover pair just to add another word.'}]}
+path=OUT/'alchimie-candidates.json';path.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n');print(hashlib.sha256(path.read_bytes()).hexdigest())

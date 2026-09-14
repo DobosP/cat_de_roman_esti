@@ -1,0 +1,189 @@
+{
+ "id": "ct_literatura_369",
+ "game": "contexto",
+ "category": "literatura",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "274fe3373a72cec5e663dc60e05254d82b847577b1047652a19ff64940fccb2d",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Ion Creangă salience 0.56 < 0.60 (usor floor)"
+  }
+ ],
+ "target": {
+  "id": "n_ion_creanga",
+  "label": "Ion Creangă",
+  "node_type": "person",
+  "category": "literatura",
+  "salience": 0.5583,
+  "degree": 19,
+  "incoming_degree": 18,
+  "description": "Scriitor roman, autor al Amintirilor din copilarie."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 18,
+  "sample": [
+   {
+    "id": "n_amintiri_copilarie",
+    "label": "Amintiri din copilărie"
+   },
+   {
+    "id": "n_junimea",
+    "label": "Junimea"
+   },
+   {
+    "id": "n_litx_harap_alb",
+    "label": "Harap-Alb"
+   },
+   {
+    "id": "n_litx_povestea_lui_harap_alb",
+    "label": "Povestea lui Harap-Alb"
+   },
+   {
+    "id": "n_mihai_eminescu",
+    "label": "Mihai Eminescu"
+   },
+   {
+    "id": "n_moldova",
+    "label": "Moldova"
+   },
+   {
+    "id": "n_v17lit_petre_ispirescu",
+    "label": "Petre Ispirescu"
+   },
+   {
+    "id": "n_v21lit_nica",
+    "label": "Nică"
+   },
+   {
+    "id": "n_v23lit_capra_cu_trei_iezi",
+    "label": "Capra cu trei iezi"
+   },
+   {
+    "id": "n_v23lit_povestea_porcului",
+    "label": "Povestea porcului"
+   }
+  ],
+  "sample_truncated": true,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v23lit_capra_cu_trei_iezi",
+   "label": "Capra cu trei iezi",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.92,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Poveste publicată de Ion Creangă în 1875, despre o capră, cei trei iezi ai ei și lupul care încearcă să intre în casă.",
+   "strength": 0.96
+  },
+  {
+   "id": "n_v23lit_povestea_porcului",
+   "label": "Povestea porcului",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.62,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Basm cult de Ion Creangă despre un fiu fermecat cu înfățișare de porc și drumul soției sale pentru a-l regăsi.",
+   "strength": 0.96
+  },
+  {
+   "id": "n_v23lit_punguta_cu_doi_bani",
+   "label": "Punguța cu doi bani",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.88,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Poveste de Ion Creangă despre cocoșul moșneagului, care pornește să-și recupereze punguța cu doi bani.",
+   "strength": 0.96
+  },
+  {
+   "id": "n_v23lit_ursul_pacalit_de_vulpe",
+   "label": "Ursul păcălit de vulpe",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.86,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Poveste de Ion Creangă în care vulpea îl păcălește pe urs să încerce să prindă pește cu coada.",
+   "strength": 0.96
+  },
+  {
+   "id": "n_litx_povestea_lui_harap_alb",
+   "label": "Povestea lui Harap-Alb",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.4617,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Basm cult de Ion Creangă, publicat în Convorbiri literare; eroul trece probe inițiatice.",
+   "strength": 0.93
+  },
+  {
+   "id": "n_amintiri_copilarie",
+   "label": "Amintiri din copilărie",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.2998,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Opera autobiografica de Ion Creanga.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v21lit_nica",
+   "label": "Nică",
+   "node_type": "person",
+   "category": "literatura",
+   "salience": 0.75,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Eroul-copil din „Amintiri din copilărie” de Ion Creangă, alter ego al autorului, crescut la Humulești. Năzdrăvăniile sale, de la furatul cireșelor la pupăza din tei, sunt celebre.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v3lit_scriitor",
+   "label": "Scriitor",
+   "node_type": "concept",
+   "category": "literatura",
+   "salience": 0.9371,
+   "degree": 18,
+   "incoming_degree": 18,
+   "description": "Persoană care scrie opere literare.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v2lit_basm_cult",
+   "label": "Basm cult",
+   "node_type": "concept",
+   "category": "literatura",
+   "salience": 0.8254,
+   "degree": 10,
+   "incoming_degree": 10,
+   "description": "Basm scris de autor cunoscut, cu motive fantastice prelucrate literar.",
+   "strength": 0.88
+  },
+  {
+   "id": "n_litx_harap_alb",
+   "label": "Harap-Alb",
+   "node_type": "person",
+   "category": "literatura",
+   "salience": 0.3856,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Personajul principal din basmul lui Ion Creangă, fiu de crai aflat într-o probă de maturizare.",
+   "strength": 0.84
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:8013b2612dd0338bdabd193cd500b946693017ab58d2cffb99768266d591dba5"
+}

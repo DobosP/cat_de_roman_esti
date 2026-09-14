@@ -1,0 +1,178 @@
+{
+ "id": "ct_istorie_368",
+ "game": "contexto",
+ "category": "istorie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "28d952ec12b7ce60fe2501d44587a6e652a7f753b9ff8a774fd07c0c881fad83",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Alba Iulia salience 0.39 < 0.60 (usor floor)"
+  }
+ ],
+ "target": {
+  "id": "n_alba_iulia",
+  "label": "Alba Iulia",
+  "node_type": "place",
+  "category": "istorie",
+  "salience": 0.3892,
+  "degree": 10,
+  "incoming_degree": 11,
+  "description": "Oras al marilor uniri (1600, 1918)."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 11,
+  "sample": [
+   {
+    "id": "n_gas_ziua_nationala_masa",
+    "label": "Masa de 1 Decembrie"
+   },
+   {
+    "id": "n_marea_unire_1918",
+    "label": "Marea Unire 1918"
+   },
+   {
+    "id": "n_mihai_viteazul",
+    "label": "Mihai Viteazul"
+   },
+   {
+    "id": "n_mures",
+    "label": "Mureș"
+   },
+   {
+    "id": "n_transilvania",
+    "label": "Transilvania"
+   },
+   {
+    "id": "n_unirea_1600",
+    "label": "Unirea de la 1600"
+   },
+   {
+    "id": "n_v21per_iuliu_hossu",
+    "label": "Iuliu Hossu"
+   },
+   {
+    "id": "n_v21soc_ziua_nationala",
+    "label": "Ziua Națională a României"
+   },
+   {
+    "id": "n_v2ist_capitala_istorica",
+    "label": "Capitală istorică"
+   },
+   {
+    "id": "n_v3ist_cetate",
+    "label": "Cetate"
+   }
+  ],
+  "sample_truncated": true,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_marea_unire_1918",
+   "label": "Marea Unire 1918",
+   "node_type": "event",
+   "category": "istorie",
+   "salience": 0.6014,
+   "degree": 28,
+   "incoming_degree": 29,
+   "description": "Unirea Transilvaniei, Basarabiei si Bucovinei cu Romania.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_transilvania",
+   "label": "Transilvania",
+   "node_type": "place",
+   "category": "istorie",
+   "salience": 0.9779,
+   "degree": 62,
+   "incoming_degree": 65,
+   "description": "Regiune istorica romaneasca.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v21per_iuliu_hossu",
+   "label": "Iuliu Hossu",
+   "node_type": "person",
+   "category": "personalitati",
+   "salience": 0.5,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Episcop greco-catolic care a citit mulțimii Rezoluția Unirii la Alba Iulia, la 1 decembrie 1918. Întemnițat de regimul comunist, a fost numit cardinal de papa Paul al VI-lea și beatificat în 2019.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v4ist_steag",
+   "label": "Steag",
+   "node_type": "concept",
+   "category": "istorie",
+   "salience": 0.7944,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Simbol al unei țări, armate sau mișcări istorice.",
+   "strength": 0.78
+  },
+  {
+   "id": "n_mihai_viteazul",
+   "label": "Mihai Viteazul",
+   "node_type": "person",
+   "category": "istorie",
+   "salience": 0.6182,
+   "degree": 13,
+   "incoming_degree": 14,
+   "description": "Domnitor, prima unire a Tarilor Romane (1600).",
+   "strength": 0.75
+  },
+  {
+   "id": "n_v2ist_capitala_istorica",
+   "label": "Capitală istorică",
+   "node_type": "concept",
+   "category": "istorie",
+   "salience": 0.2213,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Oraș cu rol politic major într-o epocă istorică.",
+   "strength": 0.72
+  },
+  {
+   "id": "n_v3ist_cetate",
+   "label": "Cetate",
+   "node_type": "concept",
+   "category": "istorie",
+   "salience": 0.2385,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Așezare sau fortificație apărată prin ziduri.",
+   "strength": 0.72
+  },
+  {
+   "id": "n_v21soc_ziua_nationala",
+   "label": "Ziua Națională a României",
+   "node_type": "event",
+   "category": "societate",
+   "salience": 0.9,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Ziua Națională a României se sărbătorește pe 1 decembrie, în amintirea Marii Uniri de la 1918. Din 1990, ziua este marcată prin parade militare, cea mai cunoscută având loc la Arcul de Triumf din București.",
+   "strength": 0.7
+  },
+  {
+   "id": "n_unirea_1600",
+   "label": "Unirea de la 1600",
+   "node_type": "event",
+   "category": "istorie",
+   "salience": 0.1981,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "În 1600, Mihai Viteazul a ajuns pentru scurt timp să conducă Țara Românească, Transilvania și Moldova.",
+   "strength": 0.66
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:79eed748f5a1572ee91f6dc6514b7fe4a296cc59b9326ed8ac53eab0d8dae93e"
+}

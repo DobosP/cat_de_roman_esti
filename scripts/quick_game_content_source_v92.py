@@ -1592,3 +1592,145 @@ BOARDS += ({'category': 'viata_de_roman',
               'https://dexonline.ro/definitie/minut',
               'https://dexonline.ro/definitie/floare',
               'https://dexonline.ro/definitie/ghiveci%20de%20flori']})
+
+
+# Session 03: fresh everyday and cultural vocabulary.
+BOARDS += (
+    ({'category': 'viata_de_roman',
+      'difficulty': 'usor',
+      'game': 'intrusul',
+      'id': 'iq92_s03_electric_connections',
+      'payload': {'group_label': 'Piese pentru conectarea aparatelor la curent electric',
+                  'intruder': 'n_v33_bathroom_fixture_robinet',
+                  'members': ['n_v33_electric_plug_stecher',
+                              'n_v33_electric_extension_prelungitor',
+                              'n_v33_electric_wire_cablu']},
+      'rationale': 'Ștecherul, prelungitorul electric și cablul electric realizează '
+                   'alimentarea electrică; robinetul reglează curgerea unui fluid. Patru '
+                   'obiecte familiare din casă, cu o diferență funcțională precisă. Toate '
+                   'trei legăturile interioare sunt puternice; intrusul nu are legături '
+                   'native cu trio-ul.',
+      'source_id': 'aq92_intrusul_s03_electric_connections',
+      'sources': ['https://dexonline.ro/definitie/%C8%99techer',
+                  'https://dexonline.ro/definitie/prelungitor',
+                  'https://dexonline.ro/definitie/cablu',
+                  'https://dexonline.ro/definitie/robinet']},
+     {'category': 'stiinta',
+      'difficulty': 'usor',
+      'game': 'intrusul',
+      'id': 'iq92_s03_bodily_needs',
+      'payload': {'group_label': 'Stări care semnalează nevoi fiziologice',
+                  'intruder': 'n_v28_feeling_social_rusine',
+                  'members': ['n_v24_feeling_needs_foame',
+                              'n_v24_feeling_needs_sete',
+                              'n_v24_feeling_needs_oboseala']},
+      'rationale': 'Foamea, setea și oboseala indică nevoi de hrană, apă sau odihnă; rușinea '
+                   'este un sentiment social. Se folosesc sensurile cotidiene, nu expresii '
+                   'figurate. Toate cuvintele numesc stări, astfel încât intrusul nu se '
+                   'găsește printr-o simplă diferență de tip. Trio nou; numai Foame apare în '
+                   'vechiul board despre emoții.',
+      'source_id': 'aq92_intrusul_s03_bodily_needs',
+      'sources': ['https://dexonline.ro/definitie/foame',
+                  'https://dexonline.ro/definitie/sete',
+                  'https://dexonline.ro/definitie/oboseal%C4%83',
+                  'https://dexonline.ro/definitie/ru%C8%99ine']},
+     {'category': 'viata_de_roman',
+      'difficulty': 'usor',
+      'game': 'intrusul',
+      'id': 'iq92_s03_family_relations',
+      'payload': {'group_label': 'Termeni care numesc rude',
+                  'intruder': 'n_v29_people_coleg',
+                  'members': ['n_v24_people_grandparents_bunica',
+                              'n_v24_people_grandparents_bunic',
+                              'n_v24_people_grandparents_matusa']},
+      'rationale': 'Bunică, bunic și mătușă numesc relații de rudenie; coleg numește o '
+                   'relație de școală sau de muncă. Patru relații interpersonale ușor de '
+                   'recunoscut, fără opoziție om/obiect. Predicatul privește sensurile '
+                   'cuvintelor: faptul că o anumită rudă poate fi și coleg nu schimbă '
+                   'definiția termenului coleg. Trio nerefolosit.',
+      'source_id': 'aq92_intrusul_s03_family_relations',
+      'sources': ['https://dexonline.ro/definitie/bunic%C4%83',
+                  'https://dexonline.ro/definitie/bunic',
+                  'https://dexonline.ro/definitie/m%C4%83tu%C8%99%C4%83',
+                  'https://dexonline.ro/definitie/coleg']},
+     {'category': 'viata_de_roman',
+      'difficulty': 'normal',
+      'game': 'perechi',
+      'id': 'pq92_s03_associations_01',
+      'payload': {'pairs': [{'group_label': 'Organul vederii și funcția lui',
+                             'members': ['n_v4sti_ochi', 'n_v24_action_senses_a_vedea']},
+                            {'group_label': 'Camera de dormit și mobila pentru somn',
+                             'members': ['n_v24_home_rooms_dormitor', 'n_v24_home_bed_pat']},
+                            {'group_label': 'Produs și ustensilă folosite împreună la spălat '
+                                            'vase',
+                             'members': ['n_v31_cleaning_supply_detergent',
+                                         'n_v31_cleaning_dishes_burete_vase']},
+                            {'group_label': 'Parteneri celebri în scenete comice',
+                             'members': ['n_v20fil_stela_popescu',
+                                         'n_v20fil_alexandru_arsinel']}]},
+      'rationale': 'Corectare față de schița neaprobată: înlocuiește perechea deja instalată '
+                   'în sesiunea 02. Detergentul se folosește pe buretele de vase; niciun alt '
+                   'cuvânt de pe tablă nu numește o ustensilă de curățat. Celelalte trei '
+                   'relații sunt organul vederii și funcția lui; camera de dormit și mobila '
+                   'pentru somn; parteneri celebri în scenete comice. Toate cele patru '
+                   'perechi sunt noi în inventarul curent, cu o singură soluție de asociere '
+                   'și fără muchii încrucișate puternice.',
+      'source_id': 'aq92_perechi_s03_associations_01',
+      'sources': ['https://dexonline.ro/definitie/detergent',
+                  'https://dexonline.ro/definitie/burete%20de%20vase',
+                  'https://dexonline.ro/definitie/ochi',
+                  'https://dexonline.ro/intrare/dormitor/17553',
+                  'https://dexonline.ro/definitie/pat',
+                  'https://www.romania-actualitati.ro/interviuri/stela-popescu-am-fost-si-voi-fi-o-optimista-id44871.html']},
+     {'category': 'viata_de_roman',
+      'difficulty': 'normal',
+      'game': 'perechi',
+      'id': 'pq92_s03_associations_02',
+      'payload': {'pairs': [{'group_label': 'Organul auzului și funcția lui',
+                             'members': ['n_v4sti_ureche', 'n_v24_action_senses_a_auzi']},
+                            {'group_label': 'Conductor izolat și dispozitivul electric care '
+                                            'îl include',
+                             'members': ['n_v33_electric_wire_cablu',
+                                         'n_v33_electric_extension_prelungitor']},
+                            {'group_label': 'Navă și locul de acostare',
+                             'members': ['n_v28_transport_water_vapor', 'n_v2soc_port']},
+                            {'group_label': 'Poezie și autorul ei',
+                             'members': ['n_v20lit_scrisoarea_iii', 'n_mihai_eminescu']}]},
+      'rationale': 'Corectare față de schița neaprobată: înlocuiește perechea deja instalată '
+                   'în sesiunea 02. Cablul electric este o componentă a unui prelungitor cu '
+                   'fir; perechea numește partea și dispozitivul complet. Celelalte trei '
+                   'relații sunt organul auzului și funcția lui; navă și locul de acostare; '
+                   'poezie și autorul ei. Toate cele patru perechi sunt noi în inventarul '
+                   'curent, cu o singură soluție de asociere și fără muchii încrucișate '
+                   'puternice.',
+      'source_id': 'aq92_perechi_s03_associations_02',
+      'sources': ['https://dexonline.ro/definitie/cablu%20electric',
+                  'https://dexonline.ro/definitie/prelungitor%20electric',
+                  'https://dexonline.ro/definitie/ureche',
+                  'https://dexonline.ro/definitie/vapor',
+                  'https://dexonline.ro/definitie/port',
+                  'https://ro.wikisource.org/wiki/Scrisoarea_III']},
+     {'category': 'viata_de_roman',
+      'difficulty': 'normal',
+      'game': 'perechi',
+      'id': 'pq92_s03_associations_03',
+      'payload': {'pairs': [{'group_label': 'Fenomen optic și culorile sale',
+                             'members': ['n_v28_nature_weather_curcubeu', 'n_v4art_culoare']},
+                            {'group_label': 'Calendarul arată zilele anului',
+                             'members': ['n_v29_time_calendar', 'n_v24_time_day_zi']},
+                            {'group_label': 'Castel și orașul în care se află',
+                             'members': ['n_v20ist_castelul_peles', 'n_geox_sinaia']},
+                            {'group_label': 'Ingredient de bază și preparat din aluat dospit',
+                             'members': ['n_v24_food_pantry_faina', 'n_gas_cozonac']}]},
+      'rationale': 'Culorile curcubeului, zilele calendarului, Peleșul din Sinaia și făina '
+                   'pentru cozonac dau patru asocieri din domenii diferite. Calendarul nu '
+                   'este tratat drept instrument meteo, iar Culoare trimite la spectrul '
+                   'curcubeului. Ingredientul nu concurează cu alt preparat de pe board. '
+                   'Toate patru perechile sunt noi în Perechi, fără vreo legătură '
+                   'încrucișată nativă.',
+      'source_id': 'aq92_perechi_s03_associations_03',
+      'sources': ['https://dexonline.ro/definitie/curcubeu',
+                  'https://dexonline.ro/definitie/calendar',
+                  'https://peles.ro/ro/',
+                  'https://dexonline.ro/definitie/cozonac']})
+)

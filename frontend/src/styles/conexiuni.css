@@ -6,7 +6,7 @@
 .connections-screen .game-shell-main { width: auto; max-width: 100%; flex: 0 1 auto; }
 .connections-screen .game-shell-status { width: auto; max-width: 100%; margin-left: auto; flex: 0 1 auto; }
 .connections-screen .game-shell-status .hud { justify-content: flex-end; }
-.connections-screen .connections-coach.next-move { padding: 9px 12px; border-radius: 12px; background: var(--surface); }
+.connections-screen .connections-coach.next-move { grid-template-columns: minmax(0, 1fr) auto auto; padding: 9px 12px; border-radius: 12px; background: var(--surface); }
 .connections-screen .connections-coach .next-move-icon,
 .connections-screen .connections-coach .next-move-label { display: none; }
 .connections-screen .connections-coach .next-move-copy { gap: 4px; }
@@ -26,6 +26,7 @@
 @media (max-width: 640px) {
   .connections-screen .connections-grid { gap: 6px !important; }
   .connections-screen .connection-tile { padding: 10px 4px !important; min-height: 68px !important; font-size: 0.76rem !important; }
-  .connections-screen .connections-coach.next-move { padding: 8px; gap: 8px; flex-wrap: wrap; }
+  .connections-screen .connections-coach.next-move { grid-template-columns: minmax(0, 1fr) auto; padding: 8px; gap: 8px; }
+  .connections-screen .connections-coach .next-move-action { grid-column: 1 / -1; justify-self: end; }
   .connections-screen .connections-coach strong { font-size: 0.83rem; }
 }

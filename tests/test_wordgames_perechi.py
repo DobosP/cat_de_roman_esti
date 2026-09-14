@@ -98,12 +98,48 @@ def _assert_private_preterminal(body: dict, session: P.PerechiSession) -> None:
     serialized = _serialized_strings(body)
     assert session.source_id not in serialized
     assert session.catalog_id not in serialized
-    revealed = {pair["label"] for pair in body["solved_pairs"]}
-    if body.get("hint"):
-        revealed.add(body["hint"]["label"])
+    revealed = {session.pairs[index].label for index in session.solved}
+    assert [pair["label"] for pair in body["solved_pairs"]] == [
+        session.pairs[index].label for index in session.solved
+    ]
+    if session.hinted_pair is None:
+        assert not body.get("hint")
+    else:
+        hinted = session.pairs[session.hinted_pair]
+        assert body["hint"]["label"] == hinted.label
+        assert {tile["id"] for tile in body["hint"]["tiles"]} == set(hinted.members)
+        revealed.add(hinted.label)
+
+    # A historical category name can also be a visible tile's name. Strip only
+    # canonical public word labels; unearned category metadata must still fail.
+    public_words = {node_id: P.get_service().label(node_id) for node_id in session.order}
+
+    def without_public_word_labels(value):
+        if isinstance(value, dict):
+            if set(value) in ({"id", "label"}, {"id", "label", "solved"}):
+                assert value["label"] == public_words[value["id"]]
+                return {key: item for key, item in value.items() if key != "label"}
+            return {key: without_public_word_labels(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [without_public_word_labels(item) for item in value]
+        return value
+
+    private_text = _serialized_strings(without_public_word_labels(body))
     for pair in session.pairs:
         if pair.label not in revealed:
-            assert pair.label not in serialized
+            assert pair.label not in private_text
+
+
+def test_privacy_guard_distinguishes_public_words_from_unearned_category_metadata() -> None:
+    body = _create(Client(), seed=12)
+    session = _session(body["game_id"])
+    label = body["tiles"][0]["label"]
+    collided = replace(session, pairs=(replace(session.pairs[0], label=label), *session.pairs[1:]))
+    _assert_private_preterminal(body, collided)
+    with pytest.raises(AssertionError):
+        _assert_private_preterminal({**body, "message": label}, collided)
+    with pytest.raises(AssertionError):
+        _assert_private_preterminal({**body, "hint": {"label": label, "tiles": []}}, collided)
 
 
 def test_create_shape_privacy_and_default_store_bounds() -> None:

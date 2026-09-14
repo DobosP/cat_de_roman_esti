@@ -1,0 +1,112 @@
+{
+ "game": "lant",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_istorie_368",
+   "ct_literatura_369",
+   "cx_viata_de_roman_369",
+   "lt_arta_cultura_237",
+   "lt_istorie_238"
+  ]
+ },
+ "verdicts": {
+  "lt_arta_cultura_237": "promote",
+  "lt_istorie_238": "promote"
+ },
+ "perItem": [
+  {
+   "id": "lt_arta_cultura_237",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:1bf9af5a878b4a7f4d725b5cffcb82aabd936ca8ed67d888bb59080d27fa59da",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_arta_cultura_237",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:1bf9af5a878b4a7f4d725b5cffcb82aabd936ca8ed67d888bb59080d27fa59da",
+    "rationale": "Promote easy Poarta Sărutului→Oltenia. Three first hops and a three-node shortest layer preserve alternatives without a forced intermediate. City and ensemble are related geographical routes; Brâncuși’s authorship and natal region supply the independent biographical idea that makes the arc more than nested location recall. Both endpoints are recognizable Romanian cultural/geographical references despite0.36/0.42 salience warnings. All six displayed edges now carry the exact reviewed noun phrases, including sculptură și sculptor and sculptor și regiune natală; the captions read correctly in reverse and reveal only the chosen local relation. Raw edges, weights, endpoints and topology match preview review. D2/D3/D5 pass for a modest two-hop easy round, with no strict FAIL.",
+    "sources": [
+     "https://centrulbrancusi.ro/poarta-sarutului-2/",
+     "https://monumenteistoricegorj.ro/brancusi/",
+     "https://vechi.utgjiu.ro/admitere/admitere-master/despre-tgjiu/"
+    ]
+   },
+   "verifier_review": {
+    "game": "lant",
+    "id": "lt_arta_cultura_237",
+    "rationale": "All three two-hop routes connect Poarta Sărutului to Oltenia through factual distinctive relations: its sculptor and his natal region, its city and that city’s region, or its ensemble and its location. The municipal Brâncuși center verifies sculpture, author, ensemble and Târgu Jiu. The local university places Târgu Jiu in Oltenia; primary cultural publications locate Brâncuși’s birth in Hobița/Gorj. No arbitrary pan-Romanian regional cuisine association is used. New neutral captions require their own exact review. Sources: https://centrulbrancusi.ro/poarta-sarutului-2/ ; https://vechi.utgjiu.ro/admitere/admitere-master/despre-tgjiu/ ; https://biblioteca-digitala.ro/reviste/Brancusi_centrul-brancusi/Brancusi_02_2014-centrul-brancusi.pdf . Exact current pending dossier was independently regenerated and matches the requested binding, including actual neutral route captions. All five salience warnings concern familiar school-history/literary/geographical identities, not specialist facts. Independent API evidence confirms every accepted forward/reverse Lanț route, all four Conexiuni groups and both Contexto journeys. Original68captions remain exact; all12newpairs are snapshot-bound with84mutation fallback checks. The rejected Ateneul route is not restored. Applicable A1-A7 and B/C/D gates have no unresolved blocker for this exact retained item; this is an agent verdict, not human enjoyment evidence.",
+    "review_binding": "sha256:1bf9af5a878b4a7f4d725b5cffcb82aabd936ca8ed67d888bb59080d27fa59da",
+    "sources": [
+     "https://centrulbrancusi.ro/poarta-sarutului-2/",
+     "https://vechi.utgjiu.ro/admitere/admitere-master/despre-tgjiu/",
+     "https://biblioteca-digitala.ro/reviste/Brancusi_centrul-brancusi/Brancusi_02_2014-centrul-brancusi.pdf"
+    ],
+    "verdict": "promote"
+   }
+  },
+  {
+   "id": "lt_istorie_238",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:006eeae6a2c5f507dbc27f3cbfb6e0680ae4ce6670c7f1217c13012a64e807f6",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_istorie_238",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:006eeae6a2c5f507dbc27f3cbfb6e0680ae4ce6670c7f1217c13012a64e807f6",
+    "rationale": "Promote easy Ștefan cel Mare→Bucovina. Putna and Voroneț are concrete foundations; Suceava offers a distinct political-seat bridge. The three available first hops avoid a single intermediary, while the capital route prevents all alternatives being repeated monastery taxonomy. The two-step heritage arc is understandable from familiar historical places. Bucovina is the present regional classification, not a claim about a medieval province of that name. Its0.38 salience warning is outweighed by recognizable geography and the documented associations. Final captions domnitor și ctitorie, domnitor și capitală medievală and the neutral location phrases are exact, meaningful in both directions and preserve underlying graph metadata. No strict FAIL or new semantic drift appears.",
+    "sources": [
+     "https://www.primariasv.ro/dm_suceava/site.nsf/pagini/prezentare-000016C2",
+     "https://basilica.ro/26-mai-1488-a-inceput-constructia-manastirii-voronet-ctitoria-sfantului-stefan-cel-mare/"
+    ]
+   },
+   "verifier_review": {
+    "game": "lant",
+    "id": "lt_istorie_238",
+    "rationale": "Ștefan cel Mare founded Putna and Voroneț and ruled from medieval Suceava; all three are geographically in the region later called Bucovina. Present-day regional location is not a claim that Bucovina existed as a named medieval province. Municipality/Church sources substantiate the two foundations; Suceava municipal historical profile supports the capital and region. These concrete foundations/seat make meaningful alternatives to a generic profession or genre bridge. Sources: https://primariaputna.ro/despre-comuna/ ; https://basilica.ro/26-mai-1488-a-inceput-constructia-manastirii-voronet-ctitoria-sfantului-stefan-cel-mare/ ; https://primariagurahumorului.ro/despre/prezentarea-orasului/ ; https://www.primariasv.ro/dm_suceava/site.nsf/BE5C166EE0BFCFCEC2257BEC00240D2A/%24FILE/Profil%20Municipiul%20Suceava.pdf . Exact current pending dossier was independently regenerated and matches the requested binding, including actual neutral route captions. All five salience warnings concern familiar school-history/literary/geographical identities, not specialist facts. Independent API evidence confirms every accepted forward/reverse Lanț route, all four Conexiuni groups and both Contexto journeys. Original68captions remain exact; all12newpairs are snapshot-bound with84mutation fallback checks. The rejected Ateneul route is not restored. Applicable A1-A7 and B/C/D gates have no unresolved blocker for this exact retained item; this is an agent verdict, not human enjoyment evidence.",
+    "review_binding": "sha256:006eeae6a2c5f507dbc27f3cbfb6e0680ae4ce6670c7f1217c13012a64e807f6",
+    "sources": [
+     "https://primariaputna.ro/despre-comuna/",
+     "https://basilica.ro/26-mai-1488-a-inceput-constructia-manastirii-voronet-ctitoria-sfantului-stefan-cel-mare/",
+     "https://primariagurahumorului.ro/despre/prezentarea-orasului/",
+     "https://www.primariasv.ro/dm_suceava/site.nsf/BE5C166EE0BFCFCEC2257BEC00240D2A/%24FILE/Profil%20Municipiul%20Suceava.pdf"
+    ],
+    "verdict": "promote"
+   }
+  }
+ ],
+ "coverage": {
+  "total": 2,
+  "verified": 2,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v92-entry-creation-03/gui/content-quality/pack-analyst.json",
+   "sha256": "sha256:acb519680288d8ae18e44fe2ad765d207ea4a74da4b2cc2f87fde46ab7437837",
+   "reviewer": "v92-session03-independent-pack-analyst-gui-critic",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v92-entry-creation-03/verifier/pack-verifier.json",
+   "sha256": "sha256:2d8fa92cef65f17ce1e20f929323c4bcfce14b65d6b3eafc771412652b96237b",
+   "reviewer": "session03-independent-factual-verifier",
+   "role": "verifier"
+  }
+ }
+}

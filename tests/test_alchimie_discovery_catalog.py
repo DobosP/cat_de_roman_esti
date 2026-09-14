@@ -15,6 +15,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import build_alchimie_discovery_world as B  # noqa: E402
 
 
+def archived_candidate(relative, expected_sha256):
+    path = ROOT / "docs/reviews" / relative
+    assert B.file_sha(path) == expected_sha256
+    return json.loads(path.read_bytes())
+
+
 @pytest.fixture
 def candidate():
     return B.candidate()
@@ -267,17 +273,21 @@ def test_package_write_requires_final_review_gate(monkeypatch, tmp_path, reviewe
     assert target.read_text() == "untouched"
 
 
-def test_expansion_preserves_all_prior_recipes_goals_and_collections(candidate):
-    # Preserve the historical111→221 expansion assertions as later recipe-only
-    # additions use the221-concept book as their compatibility predecessor.
-    old = json.loads(
-        (ROOT / "docs/reviews/v92-alchimie-more-concepts/candidates.json").read_bytes(),
+def test_expansion_preserves_all_prior_recipes_goals_and_collections():
+    # Keep the historical111→221 expansion and its three save generations exact;
+    # later world growth has its own checks and must not rewrite these expectations.
+    old = archived_candidate(
+        "v92-alchimie-more-concepts/candidates.json",
+        "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209",
+    )
+    candidate = archived_candidate(
+        "v92-entry-creation-and-gui/alchimie/candidate.json",
+        "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
     )
     before, after = B.audit(old), B.audit(candidate)
     assert after["concepts"] >= before["concepts"] + 25
     assert after["discoverable_results"] >= before["discoverable_results"] + 15
     assert after["recipes"] >= before["recipes"] + 30
-    assert candidate["compatible_versions"] == B.compatible_versions(candidate)
     assert candidate["compatible_versions"][0]["recipe_hash"] == (
         "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c"
     )
@@ -288,8 +298,15 @@ def test_expansion_preserves_all_prior_recipes_goals_and_collections(candidate):
     }
 
 
-def test_recipe_reuse_keeps_complete221_book_and_preparation_sources(candidate):
-    old = json.loads(B.BASELINE.read_bytes())
+def test_recipe_reuse_keeps_complete221_book_and_preparation_sources():
+    old = archived_candidate(
+        "v92-alchimie-large-concepts/candidate.json",
+        "da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a",
+    )
+    candidate = archived_candidate(
+        "v92-entry-creation-and-gui/alchimie/candidate.json",
+        "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+    )
     assert len(old["concepts"]) == 221 and len(old["recipes"]) == 285
     for field in ("concepts", "world", "unlocks", "goals"):
         assert candidate[field] == old[field]

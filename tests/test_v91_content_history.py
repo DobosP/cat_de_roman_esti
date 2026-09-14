@@ -17,6 +17,7 @@ from tests.content_history import (
     before_v91_artifact,
     before_v92_artifact,
     before_v92_entry_session_artifact,
+    before_v92_session03_artifact,
 )
 from tests.current_content import CURRENT_CONTENT
 
@@ -36,6 +37,12 @@ V92_SESSION_ONE = {
     "games_pack.json": "62c1eaaa7bb72674cf59a66f9b543d911749d52973155f6b201d796d97d6ea4a",
     "board_rankings_v37.json": "6f2662615b686a492b41f2d689a7ba6b380b62d7b8cecc5e7a3c9788d1dce641",
     "derived_catalog_v38.json": "09e6b1caa3ed586264a85d3d9807f0173384c02c80102dae072d14665432f2aa",
+}
+V92_SESSION_TWO = {
+    **BASELINE,
+    "games_pack.json": "9c0a8fde33742ad5230d1697fe7617eabfc8a257a6409562e3b0357c0b8fc77b",
+    "board_rankings_v37.json": "cdc148bfc95c9791b8b941b7c537a04b72d8d21398e1b258cf8e743ac9bdbde5",
+    "derived_catalog_v38.json": "931278ac590aa1d4904e15d4a30990a349fe82af09cbbb1b9c1a3e3c1461671a",
 }
 
 
@@ -185,13 +192,14 @@ def test_session_two_inverse_restores_complete_c0ead5e_bytes(filename):
     directory = "tests/fixtures" if filename.startswith("cat_mobile") else (
         "cat_de_roman_esti/fixtures"
     )
-    current = read(ROOT / directory / filename)
-    untouched = deepcopy(current)
-    restored = before_v92_entry_session_artifact(current, filename)
+    live = read(ROOT / directory / filename)
+    untouched = deepcopy(live)
+    current = before_v92_session03_artifact(live, filename)
+    restored = before_v92_entry_session_artifact(live, filename)
     indent = 2 if filename == "kg_sample.json" else 1
     blob = (json.dumps(restored, ensure_ascii=False, indent=indent) + "\n").encode()
     assert hashlib.sha256(blob).hexdigest() == V92_SESSION_ONE[filename]
-    assert current == untouched
+    assert live == untouched
     if filename == "games_pack.json":
         expected = {
             "conexiuni": {"cx_viata_de_roman_368"},
@@ -240,7 +248,11 @@ def test_session_two_receipt_cannot_be_rebound_to_modified_current_bytes(tmp_pat
     from tests import content_history
 
     filename = "games_pack.json"
-    current = read(ROOT / "cat_de_roman_esti/fixtures" / filename)
+    current = before_v92_session03_artifact(
+        read(ROOT / "cat_de_roman_esti/fixtures" / filename), filename,
+    )
+    # Isolate the historical receipt guard after the later wave has been validated.
+    monkeypatch.setattr(content_history, "before_v92_session03_artifact", lambda value, _: value)
     current["meta"]["unreviewed"] = True
     receipt = read(content_history._V92_ENTRY_SESSION_RECEIPT)
     blob = (json.dumps(current, ensure_ascii=False, indent=1) + "\n").encode()
@@ -251,3 +263,76 @@ def test_session_two_receipt_cannot_be_rebound_to_modified_current_bytes(tmp_pat
     monkeypatch.setattr(content_history, "_V92_ENTRY_SESSION_RECEIPT", path)
     with pytest.raises(AssertionError):
         before_v92_entry_session_artifact(current, filename)
+
+
+@pytest.mark.parametrize("filename", V92_SESSION_TWO)
+def test_session_three_inverse_restores_complete_0b51e03_bytes(filename):
+    directory = "tests/fixtures" if filename.startswith("cat_mobile") else (
+        "cat_de_roman_esti/fixtures"
+    )
+    current = read(ROOT / directory / filename)
+    untouched = deepcopy(current)
+    restored = before_v92_session03_artifact(current, filename)
+    indent = 2 if filename == "kg_sample.json" else 1
+    blob = (json.dumps(restored, ensure_ascii=False, indent=indent) + "\n").encode()
+    assert hashlib.sha256(blob).hexdigest() == V92_SESSION_TWO[filename]
+    assert current == untouched
+    if filename == "games_pack.json":
+        expected = {
+            "conexiuni": {"cx_viata_de_roman_369"},
+            "contexto": {"ct_istorie_368", "ct_literatura_369"},
+            "lant": {"lt_arta_cultura_237", "lt_istorie_238"},
+            "alchimie": set(),
+        }
+        for game, added in expected.items():
+            before = {row["id"]: row for row in restored[game]}
+            after = {row["id"]: row for row in current[game]}
+            assert set(after) - set(before) == added
+            assert all(after[item_id]["status"] == "approved" for item_id in added)
+            assert all(row == after[item_id] for item_id, row in before.items())
+    elif filename == "board_rankings_v37.json":
+        assert len(current["boards"]) - len(restored["boards"]) == 5
+    elif filename == "derived_catalog_v38.json":
+        assert current["boards"] == restored["boards"]
+    else:
+        assert current == restored
+
+
+@pytest.mark.parametrize("change", [
+    "new_row", "missing_new_row", "old_row", "rank_weight", "extra_row",
+])
+def test_session_three_inverse_rejects_unreviewed_current_bytes(change):
+    filename = "board_rankings_v37.json" if change == "rank_weight" else "games_pack.json"
+    current = read(ROOT / "cat_de_roman_esti/fixtures" / filename)
+    if change == "new_row":
+        row = next(row for row in current["lant"] if row["id"] == "lt_istorie_238")
+        row["start"] = "n_unreviewed"
+    elif change == "missing_new_row":
+        current["conexiuni"] = [
+            row for row in current["conexiuni"] if row["id"] != "cx_viata_de_roman_369"
+        ]
+    elif change == "old_row":
+        current["alchimie"][0]["unreviewed"] = True
+    elif change == "rank_weight":
+        current["boards"][0]["selection_weight"] += 1
+    else:
+        current["contexto"].append({**current["contexto"][-1], "id": "ct_unreviewed_999"})
+    with pytest.raises(AssertionError):
+        before_v92_session03_artifact(current, filename)
+
+
+def test_session_three_receipt_cannot_rebind_modified_artifacts(tmp_path, monkeypatch):
+    from tests import content_history
+
+    filename = "games_pack.json"
+    current = read(ROOT / "cat_de_roman_esti/fixtures" / filename)
+    current["meta"]["unreviewed"] = True
+    receipt = read(content_history._V92_SESSION03_RECEIPT)
+    blob = (json.dumps(current, ensure_ascii=False, indent=1) + "\n").encode()
+    receipt["files"][filename]["after_sha256"] = hashlib.sha256(blob).hexdigest()
+    receipt["files"][filename]["head_after"]["meta"]["unreviewed"] = True
+    path = tmp_path / "modified-receipt.json"
+    path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n")
+    monkeypatch.setattr(content_history, "_V92_SESSION03_RECEIPT", path)
+    with pytest.raises(AssertionError):
+        before_v92_session03_artifact(current, filename)

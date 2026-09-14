@@ -1,0 +1,555 @@
+{
+  "kind": "quick-raw-independent-graph-check-v1",
+  "candidate_sha256": "8a9e0049854e5ffab670f9990dedfa75bab75dda2a86043e01ac058b5979b70f",
+  "baseline_total_boards": 387,
+  "checks": [
+    {
+      "id": "iq92_s03_electric_connections",
+      "visible": [
+        {
+          "id": "n_v33_electric_plug_stecher",
+          "label": "Ștecher",
+          "description": "Piesă cu pini introdusă într-o priză electrică.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v33_electric_extension_prelungitor",
+          "label": "Prelungitor electric",
+          "description": "Cablu cu una sau mai multe prize care duce curentul mai departe.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v33_electric_wire_cablu",
+          "label": "Cablu electric",
+          "description": "Ansamblu de fire izolate care transportă energie electrică.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v33_bathroom_fixture_robinet",
+          "label": "Robinet",
+          "description": "Dispozitiv care deschide, oprește și reglează curgerea apei.",
+          "node_type": "concept"
+        }
+      ],
+      "inside_strengths": [
+        0.97,
+        0.98,
+        0.99
+      ],
+      "intruder_edges": 0,
+      "old_trio_reused": false,
+      "new_visible_in_game": [
+        "n_v33_electric_extension_prelungitor",
+        "n_v33_electric_plug_stecher",
+        "n_v33_electric_wire_cablu"
+      ],
+      "maximum_old_board_overlap": 1,
+      "rating": {
+        "id": "vi_5471807ef19bccf219e9",
+        "game": "intrusul",
+        "source_id": "aq92_intrusul_s03_electric_connections",
+        "category": "viata_de_roman",
+        "difficulty": "usor",
+        "payload": {
+          "group_label": "Piese pentru conectarea aparatelor la curent electric",
+          "intruder": "n_v33_bathroom_fixture_robinet",
+          "members": [
+            "n_v33_electric_plug_stecher",
+            "n_v33_electric_extension_prelungitor",
+            "n_v33_electric_wire_cablu"
+          ]
+        },
+        "romanian_familiarity": 92,
+        "play_quality": 99,
+        "standard_score": 95,
+        "starter_score": 94,
+        "starter_eligible": true,
+        "standard_rank": 0,
+        "starter_rank": null
+      }
+    },
+    {
+      "id": "iq92_s03_bodily_needs",
+      "visible": [
+        {
+          "id": "n_v24_feeling_needs_foame",
+          "label": "Foame",
+          "description": "Concept cotidian din grupul «stări și nevoi ale corpului»: Foame.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_feeling_needs_sete",
+          "label": "Sete",
+          "description": "Concept cotidian din grupul «stări și nevoi ale corpului»: Sete.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_feeling_needs_oboseala",
+          "label": "Oboseală",
+          "description": "Concept cotidian din grupul «stări și nevoi ale corpului»: Oboseală.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v28_feeling_social_rusine",
+          "label": "Rușine",
+          "description": "Emoție neplăcută simțită când credem că am făcut ceva greșit.",
+          "node_type": "concept"
+        }
+      ],
+      "inside_strengths": [
+        0.9,
+        0.9,
+        0.9
+      ],
+      "intruder_edges": 0,
+      "old_trio_reused": false,
+      "new_visible_in_game": [
+        "n_v24_feeling_needs_oboseala",
+        "n_v24_feeling_needs_sete",
+        "n_v28_feeling_social_rusine"
+      ],
+      "maximum_old_board_overlap": 1,
+      "rating": {
+        "id": "vi_33cec64b293cfefa38e9",
+        "game": "intrusul",
+        "source_id": "aq92_intrusul_s03_bodily_needs",
+        "category": "stiinta",
+        "difficulty": "usor",
+        "payload": {
+          "group_label": "Stări care semnalează nevoi fiziologice",
+          "intruder": "n_v28_feeling_social_rusine",
+          "members": [
+            "n_v24_feeling_needs_foame",
+            "n_v24_feeling_needs_sete",
+            "n_v24_feeling_needs_oboseala"
+          ]
+        },
+        "romanian_familiarity": 90,
+        "play_quality": 95,
+        "standard_score": 92,
+        "starter_score": 91,
+        "starter_eligible": true,
+        "standard_rank": 0,
+        "starter_rank": null
+      }
+    },
+    {
+      "id": "iq92_s03_family_relations",
+      "visible": [
+        {
+          "id": "n_v24_people_grandparents_bunica",
+          "label": "Bunică",
+          "description": "Concept cotidian din grupul «bunici și mătuși»: Bunică.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_people_grandparents_bunic",
+          "label": "Bunic",
+          "description": "Concept cotidian din grupul «bunici și mătuși»: Bunic.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_people_grandparents_matusa",
+          "label": "Mătușă",
+          "description": "Concept cotidian din grupul «bunici și mătuși»: Mătușă.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v29_people_coleg",
+          "label": "Coleg",
+          "description": "Persoană cu care cineva învață la școală sau lucrează.",
+          "node_type": "concept"
+        }
+      ],
+      "inside_strengths": [
+        0.9,
+        0.9,
+        0.9
+      ],
+      "intruder_edges": 0,
+      "old_trio_reused": false,
+      "new_visible_in_game": [
+        "n_v24_people_grandparents_bunic",
+        "n_v24_people_grandparents_bunica",
+        "n_v24_people_grandparents_matusa",
+        "n_v29_people_coleg"
+      ],
+      "maximum_old_board_overlap": 0,
+      "rating": {
+        "id": "vi_77adc20e604ba8c8f7fc",
+        "game": "intrusul",
+        "source_id": "aq92_intrusul_s03_family_relations",
+        "category": "viata_de_roman",
+        "difficulty": "usor",
+        "payload": {
+          "group_label": "Termeni care numesc rude",
+          "intruder": "n_v29_people_coleg",
+          "members": [
+            "n_v24_people_grandparents_bunica",
+            "n_v24_people_grandparents_bunic",
+            "n_v24_people_grandparents_matusa"
+          ]
+        },
+        "romanian_familiarity": 90,
+        "play_quality": 95,
+        "standard_score": 92,
+        "starter_score": 91,
+        "starter_eligible": true,
+        "standard_rank": 0,
+        "starter_rank": null
+      }
+    },
+    {
+      "id": "pq92_s03_associations_01",
+      "visible": [
+        {
+          "id": "n_v4sti_ochi",
+          "label": "ochi",
+          "description": "Organ de simț care detectează lumina și permite vederea.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_action_senses_a_vedea",
+          "label": "A vedea",
+          "description": "Concept cotidian din grupul «simțuri și comunicare»: A vedea.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_home_rooms_dormitor",
+          "label": "Dormitor",
+          "description": "Concept cotidian din grupul «camere ale locuinței»: Dormitor.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_home_bed_pat",
+          "label": "Pat",
+          "description": "Concept cotidian din grupul «obiecte pentru somn»: Pat.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v31_cleaning_supply_detergent",
+          "label": "Detergent",
+          "description": "Produs de curățare folosit pentru vase, haine sau suprafețe.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v31_cleaning_dishes_burete_vase",
+          "label": "Burete de vase",
+          "description": "Obiect moale și poros folosit pentru a spăla vasele.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v20fil_stela_popescu",
+          "label": "Stela Popescu",
+          "description": "Actriță de comedie și de revistă (1935-2017), una dintre cele mai iubite figuri ale televiziunii române. A format zeci de ani un cuplu comic celebru cu Alexandru Arșinel, nelipsit din programele de Revelion.",
+          "node_type": "person"
+        },
+        {
+          "id": "n_v20fil_alexandru_arsinel",
+          "label": "Alexandru Arșinel",
+          "description": "Actor de comedie și de revistă (1939-2022), director mulți ani al Teatrului de revistă „Constantin Tănase” din București. A rămas în memoria publicului prin cuplul comic cu Stela Popescu.",
+          "node_type": "person"
+        }
+      ],
+      "intended_strengths": [
+        0.99,
+        0.94,
+        0.99,
+        0.95
+      ],
+      "max_cross_strength": 0,
+      "old_pairs_reused": 0,
+      "new_visible_in_game": [
+        "n_v20fil_alexandru_arsinel",
+        "n_v20fil_stela_popescu",
+        "n_v24_action_senses_a_vedea",
+        "n_v24_home_rooms_dormitor",
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_supply_detergent",
+        "n_v4sti_ochi"
+      ],
+      "maximum_old_board_overlap": 1,
+      "rating": {
+        "id": "vp_7c681af1d4ca2cc15c05",
+        "game": "perechi",
+        "source_id": "aq92_perechi_s03_associations_01",
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "payload": {
+          "pairs": [
+            {
+              "group_label": "Organul vederii și funcția lui",
+              "members": [
+                "n_v4sti_ochi",
+                "n_v24_action_senses_a_vedea"
+              ]
+            },
+            {
+              "group_label": "Camera de dormit și mobila pentru somn",
+              "members": [
+                "n_v24_home_rooms_dormitor",
+                "n_v24_home_bed_pat"
+              ]
+            },
+            {
+              "group_label": "Produs și ustensilă folosite împreună la spălat vase",
+              "members": [
+                "n_v31_cleaning_supply_detergent",
+                "n_v31_cleaning_dishes_burete_vase"
+              ]
+            },
+            {
+              "group_label": "Parteneri celebri în scenete comice",
+              "members": [
+                "n_v20fil_stela_popescu",
+                "n_v20fil_alexandru_arsinel"
+              ]
+            }
+          ]
+        },
+        "romanian_familiarity": 76,
+        "play_quality": 97,
+        "standard_score": 84,
+        "starter_score": 81,
+        "starter_eligible": true,
+        "standard_rank": 0,
+        "starter_rank": null
+      }
+    },
+    {
+      "id": "pq92_s03_associations_02",
+      "visible": [
+        {
+          "id": "n_v4sti_ureche",
+          "label": "ureche",
+          "description": "Organ de simț pentru auz și echilibru.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_action_senses_a_auzi",
+          "label": "A auzi",
+          "description": "Concept cotidian din grupul «simțuri și comunicare»: A auzi.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v33_electric_wire_cablu",
+          "label": "Cablu electric",
+          "description": "Ansamblu de fire izolate care transportă energie electrică.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v33_electric_extension_prelungitor",
+          "label": "Prelungitor electric",
+          "description": "Cablu cu una sau mai multe prize care duce curentul mai departe.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v28_transport_water_vapor",
+          "label": "Vapor",
+          "description": "Navă care transportă oameni sau mărfuri pe apă.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v2soc_port",
+          "label": "Port",
+          "description": "Loc amenajat pentru acostarea navelor și schimbul de mărfuri.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v20lit_scrisoarea_iii",
+          "label": "Scrisoarea III",
+          "description": "Poem de Mihai Eminescu publicat în 1881 în Convorbiri literare, celebru pentru dialogul dintre Mircea cel Bătrân și sultanul Baiazid înaintea bătăliei de la Rovine. Partea a doua este o satiră a politicienilor vremii.",
+          "node_type": "work"
+        },
+        {
+          "id": "n_mihai_eminescu",
+          "label": "Mihai Eminescu",
+          "description": "Poet roman, autor al poemului Luceafarul.",
+          "node_type": "person"
+        }
+      ],
+      "intended_strengths": [
+        0.99,
+        0.99,
+        0.99,
+        0.95
+      ],
+      "max_cross_strength": 0,
+      "old_pairs_reused": 0,
+      "new_visible_in_game": [
+        "n_v20lit_scrisoarea_iii",
+        "n_v24_action_senses_a_auzi",
+        "n_v28_transport_water_vapor",
+        "n_v2soc_port",
+        "n_v33_electric_extension_prelungitor",
+        "n_v33_electric_wire_cablu",
+        "n_v4sti_ureche"
+      ],
+      "maximum_old_board_overlap": 1,
+      "rating": {
+        "id": "vp_998f1bdb3de1c6c18dde",
+        "game": "perechi",
+        "source_id": "aq92_perechi_s03_associations_02",
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "payload": {
+          "pairs": [
+            {
+              "group_label": "Organul auzului și funcția lui",
+              "members": [
+                "n_v4sti_ureche",
+                "n_v24_action_senses_a_auzi"
+              ]
+            },
+            {
+              "group_label": "Conductor izolat și dispozitivul electric care îl include",
+              "members": [
+                "n_v33_electric_wire_cablu",
+                "n_v33_electric_extension_prelungitor"
+              ]
+            },
+            {
+              "group_label": "Navă și locul de acostare",
+              "members": [
+                "n_v28_transport_water_vapor",
+                "n_v2soc_port"
+              ]
+            },
+            {
+              "group_label": "Poezie și autorul ei",
+              "members": [
+                "n_v20lit_scrisoarea_iii",
+                "n_mihai_eminescu"
+              ]
+            }
+          ]
+        },
+        "romanian_familiarity": 60,
+        "play_quality": 98,
+        "standard_score": 75,
+        "starter_score": 70,
+        "starter_eligible": true,
+        "standard_rank": 0,
+        "starter_rank": null
+      }
+    },
+    {
+      "id": "pq92_s03_associations_03",
+      "visible": [
+        {
+          "id": "n_v28_nature_weather_curcubeu",
+          "label": "Curcubeu",
+          "description": "Arc colorat care apare pe cer când lumina trece prin picături de apă.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v4art_culoare",
+          "label": "Culoare",
+          "description": "Proprietate vizuală folosită în pictură, design și decor.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v29_time_calendar",
+          "label": "Calendar",
+          "description": "Sistem sau obiect care arată zilele, lunile și datele unui an.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v24_time_day_zi",
+          "label": "Zi",
+          "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Zi.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_v20ist_castelul_peles",
+          "label": "Castelul Peleș",
+          "description": "Reședință regală de vară construită la Sinaia din inițiativa regelui Carol I, inaugurată în 1883. Este considerat unul dintre cele mai frumoase castele din Europa și a fost printre primele electrificate integral.",
+          "node_type": "place"
+        },
+        {
+          "id": "n_geox_sinaia",
+          "label": "Sinaia",
+          "description": "Stațiune de pe Valea Prahovei, la poalele Bucegilor, cunoscută pentru Peleș.",
+          "node_type": "place"
+        },
+        {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+          "node_type": "concept"
+        },
+        {
+          "id": "n_gas_cozonac",
+          "label": "Cozonac",
+          "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște.",
+          "node_type": "concept"
+        }
+      ],
+      "intended_strengths": [
+        0.97,
+        0.98,
+        0.95,
+        0.97
+      ],
+      "max_cross_strength": 0,
+      "old_pairs_reused": 0,
+      "new_visible_in_game": [
+        "n_gas_cozonac",
+        "n_geox_sinaia",
+        "n_v20ist_castelul_peles",
+        "n_v24_time_day_zi",
+        "n_v28_nature_weather_curcubeu",
+        "n_v4art_culoare"
+      ],
+      "maximum_old_board_overlap": 1,
+      "rating": {
+        "id": "vp_e47e589688e3096b1ff9",
+        "game": "perechi",
+        "source_id": "aq92_perechi_s03_associations_03",
+        "category": "viata_de_roman",
+        "difficulty": "normal",
+        "payload": {
+          "pairs": [
+            {
+              "group_label": "Fenomen optic și culorile sale",
+              "members": [
+                "n_v28_nature_weather_curcubeu",
+                "n_v4art_culoare"
+              ]
+            },
+            {
+              "group_label": "Calendarul arată zilele anului",
+              "members": [
+                "n_v29_time_calendar",
+                "n_v24_time_day_zi"
+              ]
+            },
+            {
+              "group_label": "Castel și orașul în care se află",
+              "members": [
+                "n_v20ist_castelul_peles",
+                "n_geox_sinaia"
+              ]
+            },
+            {
+              "group_label": "Ingredient de bază și preparat din aluat dospit",
+              "members": [
+                "n_v24_food_pantry_faina",
+                "n_gas_cozonac"
+              ]
+            }
+          ]
+        },
+        "romanian_familiarity": 71,
+        "play_quality": 97,
+        "standard_score": 81,
+        "starter_score": 78,
+        "starter_eligible": false,
+        "standard_rank": 0,
+        "starter_rank": null
+      }
+    }
+  ],
+  "old_payloads_modified": 0,
+  "all_native_gates_pass": true
+}

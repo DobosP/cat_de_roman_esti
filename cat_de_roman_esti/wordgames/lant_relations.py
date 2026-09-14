@@ -290,6 +290,55 @@ REVIEWED_CAPTIONS = MappingProxyType(
             "0f6375bcdec5eddb1dec28d902552826a37f9969f2eb64bb3ccfe7094fd20e95",
             "prăjitură și pudră dulce",
         ),
+        # Session 03: exact reviewed art and history connections.
+        ('n_ansamblul_targu_jiu', 'n_oltenia'): (
+            'ab6269a5521bc7f3975faa8315b81319b69a44c2799984b7435e87f527739194',
+            'ansamblu și regiune',
+        ),
+        ('n_ansamblul_targu_jiu', 'n_poarta_sarutului'): (
+            '0a101e588e5064bf2aac70f21415045d31b23608798df682b31c342a3f01141a',
+            'sculptură și ansamblu',
+        ),
+        ('n_bucovina', 'n_putna'): (
+            '3c70fb9e8afda8221d32fd59f0a5fd547047e508044b2a308b2cc894c066cf2a',
+            'mănăstire și regiune',
+        ),
+        ('n_bucovina', 'n_v11geo_suceava'): (
+            'f4fbaf38aab680125649613977f564e06c4eab08e496d58e3b2a40243918da27',
+            'oraș și regiune',
+        ),
+        ('n_bucovina', 'n_voronet'): (
+            '9b25b2f5387bfc47345a799562cd1065785c276048bd34faa6afcbad0fc4e9e3',
+            'mănăstire și regiune',
+        ),
+        ('n_constantin_brancusi', 'n_oltenia'): (
+            '8a69213956242023db99398db696ed3319af000f7cac480b85e9b563b92e0234',
+            'sculptor și regiune natală',
+        ),
+        ('n_constantin_brancusi', 'n_poarta_sarutului'): (
+            'a4685cd932408b9e67acaf80daa2c442a0e3c83894ab7ec8924e73d8bd4e0c13',
+            'sculptură și sculptor',
+        ),
+        ('n_oltenia', 'n_targu_jiu'): (
+            '7af0c0494296fd4e982225747438bcad7971d5ed493a7c67768fc56b4327ffa1',
+            'oraș și regiune',
+        ),
+        ('n_poarta_sarutului', 'n_targu_jiu'): (
+            '423546eab58ec56acb5565e941fb5769b813d9f215ea28c25b98b1b25f25bb1c',
+            'sculptură și oraș',
+        ),
+        ('n_putna', 'n_stefan_cel_mare'): (
+            '8ed11d47193dbdf9588124b493561ec23592ddc294fbe02d80b6c71d48ee867a',
+            'domnitor și ctitorie',
+        ),
+        ('n_stefan_cel_mare', 'n_v11geo_suceava'): (
+            '6f5663336e1fb96110d282c610647e8a3e85aaa75a4a8af6743b40c2bbd9a6ee',
+            'domnitor și capitală medievală',
+        ),
+        ('n_stefan_cel_mare', 'n_voronet'): (
+            '178de0f5529dd7c500d6ef0c689f974cc45331a894819d808fc926fdbccddb86',
+            'domnitor și ctitorie',
+        ),
     }
 )
 

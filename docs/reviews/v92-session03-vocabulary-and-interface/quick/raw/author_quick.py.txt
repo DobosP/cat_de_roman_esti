@@ -1,0 +1,25 @@
+"""Re-screen archived unapproved ideas against session03 live inventory."""
+import json,sys,hashlib,copy
+from pathlib import Path
+from urllib.parse import quote
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-entry-creation-03');OUT=Path(__file__).parent;sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.quick_catalog import graph_strengths,rate_board,visible_ids,bindings
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog
+s=get_service();base=list(get_derived_catalog()._boards);strength=graph_strengths(s)
+source=ROOT/'docs/reviews/v92-entry-creation-and-gui/unapproved-author-backlog/quick/candidates.json';rows=copy.deepcopy(json.loads(source.read_text())['boards'])
+for r in rows:r['id']=r['id'].replace('_s02_','_s03_');r['source_id']=r['source_id'].replace('_s02_','_s03_')
+for r,idx,a,b,label,why in [(rows[3],2,'Detergent','Burete de vase','Produs și ustensilă folosite împreună la spălat vase','Detergentul se folosește pe buretele de vase; niciun alt cuvânt de pe tablă nu numește o ustensilă de curățat.'),(rows[4],1,'Cablu electric','Prelungitor electric','Conductor izolat și dispozitivul electric care îl include','Cablul electric este o componentă a unui prelungitor cu fir; perechea numește partea și dispozitivul complet.')]:
+ r['payload']['pairs'][idx]={'group_label':label,'members':[s.resolve(a),s.resolve(b)]}
+ r['sources']=['https://dexonline.ro/definitie/'+quote(x.lower()) for x in [a,b]]+[u for u in r['sources'] if not any(t in u for t in ['lingur','sup%C4','dspbihor'])]
+ r['rationale']='Corectare față de schița neaprobată: înlocuiește perechea deja instalată în sesiunea 02. '+why+' Celelalte trei relații sunt '+ '; '.join(p['group_label'].lower() for i,p in enumerate(r['payload']['pairs']) if i!=idx)+'. Toate cele patru perechi sunt noi în inventarul curent, cu o singură soluție de asociere și fără muchii încrucișate puternice.'
+ratings=[rate_board(r,s,strength) for r in rows];audit=[];seen_pairs=set();seen_boards=set();old_pairs={frozenset(p['members']) for b in base if b.game=='perechi' for p in b.payload['pairs']};old_trios={frozenset(b.payload['members']) for b in base if b.game=='intrusul'}
+for r,rating in zip(rows,ratings):
+ visible=set(visible_ids(r));assert frozenset(visible) not in seen_boards;seen_boards.add(frozenset(visible));prior=[b for b in base if b.game==r['game']];old_visible={i for b in prior for i in visible_ids({'game':b.game,'payload':b.payload})};assert len(visible-old_visible)>=2
+ if r['game']=='intrusul':assert frozenset(r['payload']['members']) not in old_trios
+ else:
+  for p in r['payload']['pairs']:
+   pair=frozenset(p['members']);assert pair not in old_pairs and pair not in seen_pairs;seen_pairs.add(pair)
+ audit.append({'id':r['id'],'visible_labels':[s.node(i).label_ro for i in visible_ids(r)],'new_visible_labels':[s.node(i).label_ro for i in sorted(visible-old_visible)],'new_visible_count':len(visible-old_visible),'maximum_existing_board_overlap':max(len(visible & set(visible_ids({'game':b.game,'payload':b.payload}))) for b in prior),'rating':rating})
+obj={'kind':'quick-entry-candidates-v1','baseline':'0b51e03','bindings':bindings(live=True),'boards':rows};p=OUT/'quick-candidates.json';p.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n');sha=hashlib.sha256(p.read_bytes()).hexdigest()
+(OUT/'quick-author-audit.json').write_text(json.dumps({'kind':'quick-author-audit-v1','candidate_sha256':sha,'archived_source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'current_board_count':len(base),'new_intended_pairs':len(seen_pairs),'results':audit},ensure_ascii=False,indent=2)+'\n');print(sha);print([(r['id'],a['new_visible_count'],a['rating']['standard_score']) for r,a in zip(rows,audit)])
