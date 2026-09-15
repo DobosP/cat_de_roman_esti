@@ -1,13 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-16 — V95 local candidate; complete integration gates green.
+Last verified: 2026-09-16 — V95 integrated on main; complete local integration gates green.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
 - V94 landed and was pushed to main at `cf6b28b`; [GitHub CI 35018580589 passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35018580589).
   Its verified task branch, worktree and scratch were cleaned after preview relocation.
-- V95 develops from that main commit in `feat/v95-discovery-and-game-quality`.
+- V95 implementation `085e792` is integrated on main; publication and V96 startup are authorized.
   **13 new rounds/targets, five Alchimie words and ten recipes**: Conexiuni +1,
   Cald sau Rece +2, Lanț +2, Intrusul +4 and Perechi +4. Per-game fresh word exposures:
   nine Conexiuni, ten Intrusul and twenty-three Perechi; shared KG remains unchanged.
@@ -85,7 +85,8 @@ Both catalogs require exact final live-audit reviews before installation.
 - Strict inverses restore exact five-core-artifact baseline bytes; all 261 old Contexto
   profiles remain exact. Browser seed changes affect only Conexiuni and Lanț.
 - [Preview checks](reviews/v95-discovery-and-game-quality/preview-check.json): 8150 serves
-  V95's 247/342 world; 8160 serves landed V94's 242/332 world, with matching built assets.
+  V95's 247/342 world before landing. Both origins move to main before cleanup.
+  [V95 landing receipt](reviews/v95-discovery-and-game-quality/landing.json).
 
 ## Production and remaining work
 

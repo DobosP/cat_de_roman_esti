@@ -1021,3 +1021,17 @@ results, exact input hashes, preserved initial failures and review amendments be
 [the V95 receipt](docs/reviews/v95-discovery-and-game-quality/verification.json).
 Preview 8150 runs V95 and 8160 retains landed V94. The owner subsequently authorized
 landing V95 and starting V96; production deployment remains outside that authorization.
+
+
+## V95 main landing and V96 authorization (2026-09-16)
+
+Valid until: a later main landing changes these inputs — then treat as history.
+
+The owner requested landing V95 and starting the next version. Main fast-forwards from
+cf6b28b to implementation 085e792. The final receipt verifies 253 archived records, 46
+changed inputs, 15 removed assets, ten installed-artifact pins and twelve final-evidence
+pins. All 528 browser checks pass on the final build; Python 3.12/3.14 each pass 2191
+backend/53 accounts, and 212 native checks pass. The frontend-only focus correction is
+independently bound without changing Python/data approvals. The landing record precedes
+the authorized main push. After remote proof, previews move off the task worktree and
+only verified-landed V95 work is cleaned. V96 starts separately; production stays V91.
