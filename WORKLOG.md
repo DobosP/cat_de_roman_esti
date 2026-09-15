@@ -926,3 +926,8 @@ remote verification, relocation of the port 8150 preview and cleanup limited to 
 verified V93 branch/worktree/scratch. Main then supplies the new V94 task baseline.
 The original V93 integration receipt retains its pre-landing scope as historical fact.
 Production remains anonymous V91; no deployment is included.
+
+V93 landing audit checks 291 SHA bindings and all 168 archived scratch sources with zero
+mismatches or missing reviewed keepers. Final build log rounds initial gzip to119.23KiB,
+correcting the earlier119.22 figure in current STATUS/landing evidence; the original
+sealed integration receipt is retained. The120KiB budget remains green.

@@ -13,5 +13,17 @@
   "publication": "Owner explicitly requested land v93 start v94. This receipt is written after local main integration and before the authorized main push; remote CI follows the push.",
   "cleanup_scope": "Only the verified-landed feat/v93-words-and-game-quality branch, worktree and matching scratch, after remote confirmation and preview relocation.",
   "next_authorized_version": "V94: fresh content/game-quality session from landed main.",
-  "production_changed": false
+  "production_changed": false,
+  "independent_landing_audit": {
+    "sha_bindings": 291,
+    "mismatches": 0,
+    "archived_scratch_sources": 168,
+    "missing_reviewed_keepers": 0
+  },
+  "bundle_report_correction": {
+    "initial_gzip_kib": 119.23,
+    "limit_kib": 120,
+    "evidence": "gui/frontend-build-final.log",
+    "note": "Final build log rounds to119.23KiB. Original sealed V93 integration receipt reported119.22 from the earlier build; unchanged final sources/assets and all accepted gates remain valid."
+  }
 }

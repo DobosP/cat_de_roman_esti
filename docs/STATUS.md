@@ -75,7 +75,7 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 - Python 3.12 and 3.14 each pass **2017 backend/53 accounts tests**; browser **486 pass**,
   frontend native **212 pass**. Both validators, Ruff, frontend lint/typecheck/build, docs
-  and whitespace are GREEN. Initial gzip is **119.22/120 KiB**.
+  and whitespace are GREEN. Initial gzip is **119.23/120 KiB**.
 - [Final integration receipt](reviews/v93-words-and-game-quality/verification.json) binds
   the exact inputs and logs. Two stale current snapshots were corrected with explicit
   before/after evidence; all older profile and historical assertions remain intact.
