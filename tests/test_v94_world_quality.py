@@ -12,14 +12,16 @@ import pytest
 from django.test import Client
 
 from cat_de_roman_esti.wordgames import alchimie_explore as E
-from cat_de_roman_esti.wordgames.discovery_world import MAX_CONCEPTS, get_world
+from cat_de_roman_esti.wordgames.discovery_world import MAX_CONCEPTS, validate_world
 from cat_de_roman_esti.wordgames.service import SessionStore, get_service
-from scripts import build_alchimie_discovery_world as B
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "/api/alchimie/explore"
 PREVIOUS = ROOT / "docs/reviews/v93-words-and-game-quality/alchimie/candidate.json"
 PREVIOUS_SHA = "fd6d47853a424695d1c0ebf6c2a94b18196c9ce7e38560f4b7b4dcb1c4e6bbef"
+ARCHIVE = ROOT / "docs/reviews/v94-words-and-clearer-connections/alchimie"
+ARCHIVE_SHA = "d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188"
+CATALOG_SHA = "8b174e16edf6ad279f9fa6cc0328776cba033be0b177c849ad77d81ec603da89"
 NEW_WORDS = {
     "alw_food_cartofi_gratinati": "Cartofi gratinați",
     "alw_food_chiftele_peste": "Chiftele de pește",
@@ -51,7 +53,11 @@ NEW_RECIPES = (
 
 @pytest.fixture
 def world(monkeypatch):
-    world = get_world()
+    # Keep V94's exact reviewed world and gameplay after later content additions.
+    blob = (ARCHIVE / "catalog.json").read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == CATALOG_SHA
+    world = validate_world(json.loads(blob))
+    monkeypatch.setattr(E, "get_world", lambda: world)
     assert len(world.concepts) == 242 and len(world.recipes) == 332
     monkeypatch.setattr(E, "store", SessionStore())
     return world
@@ -93,7 +99,9 @@ def craft(state, world, recipe_id):
 def test_additions_preserve_prior_records_and_create_reusable_puree_and_jelly():
     blob = PREVIOUS.read_bytes()
     assert hashlib.sha256(blob).hexdigest() == PREVIOUS_SHA
-    old, current = json.loads(blob), B.candidate()
+    current_blob = (ARCHIVE / "candidate.json").read_bytes()
+    assert hashlib.sha256(current_blob).hexdigest() == ARCHIVE_SHA
+    old, current = json.loads(blob), json.loads(current_blob)
     old_concepts = {c["id"]: c for c in old["concepts"]}
     new_concepts = {c["id"]: c for c in current["concepts"]}
     assert len(old_concepts) == 235

@@ -1,0 +1,21 @@
+from pathlib import Path
+import hashlib,json,subprocess
+from collections import Counter
+from cat_de_roman_esti.wordgames.service import get_service
+root=Path.cwd();out=Path(__file__).parent
+old=json.loads(subprocess.check_output(['git','show','cf6b28b:cat_de_roman_esti/fixtures/games_pack.json']))
+pack=json.loads((root/'cat_de_roman_esti/fixtures/games_pack.json').read_bytes());rank=json.loads((root/'cat_de_roman_esti/fixtures/board_rankings_v37.json').read_bytes())
+svc=get_service(); profile=lambda p:{r['id']:sorted(svc.distances_to(r['target']).items()) for r in p['contexto']}
+a,b=profile(old),profile(pack)
+canonical=lambda v:hashlib.sha256(json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+assert canonical(a)=='f24cbff4983f0086cac877628b047bc3bb68b31df0a5bff16c571dd32cc5b9ed'
+assert all(b[k]==v for k,v in a.items()) and set(b)-set(a)=={'ct_viata_de_roman_374','ct_viata_de_roman_375'}
+(out/'contexto-profile-delta.json').write_text(json.dumps({'before_sha256':canonical(a),'after_sha256':canonical(b),'preserved':len(a),'added':{k:b[k] for k in sorted(set(b)-set(a))},'all_previous_exact':True},ensure_ascii=False,indent=2)+'\n')
+p=root/'tests/current_content.py';s=p.read_text()
+from tests.current_content import CURRENT_CONTENT as C
+for rel,h in C.artifact_sha256.items():s=s.replace(h,hashlib.sha256((root/rel).read_bytes()).hexdigest())
+s=s.replace(C.ranking_rows_sha256,hashlib.sha256((json.dumps(rank['boards'],ensure_ascii=False,indent=1)+'\n').encode()).hexdigest()).replace(C.contexto_profile_sha256,canonical(b))
+changes={"'conexiuni': 242":"'conexiuni': 243","'contexto': 261":"'contexto': 263","'lant': 119":"'lant': 121","'conexiuni': 371":"'conexiuni': 372","'contexto': 373":"'contexto': 375","'lant': 242":"'lant': 244","'approved': 697":"'approved': 702","(242, 242, 0)":"(243, 243, 0)","(261, 259, 2)":"(263, 261, 2)","(119, 116, 3)":"(121, 118, 3)","'total': 705":"'total': 710","'pilot_eligible': 535":"'pilot_eligible': 540","'conexiuni': 84":"'conexiuni': 85","'contexto': 255":"'contexto': 257","'lant': 116":"'lant': 118",'"total": 409':'"total": 417','"intrusul": 222, "perechi": 187':'"intrusul": 226, "perechi": 191','"intrusul": 39, "perechi": 34':'"intrusul": 43, "perechi": 38','"intrusul": 57, "perechi": 55':'"intrusul": 60, "perechi": 59','contexto_approved=259':'contexto_approved=261','contexto_eligible=255':'contexto_eligible=257','contexto_id_high_water=373':'contexto_id_high_water=375'}
+for a,b in changes.items():assert a in s,a;s=s.replace(a,b)
+p.write_text(s)
+print('Current expectations advanced after exact historical profile and artifact review; final tests verify new counts.')

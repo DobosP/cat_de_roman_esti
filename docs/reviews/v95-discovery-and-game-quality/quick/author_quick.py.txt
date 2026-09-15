@@ -1,0 +1,195 @@
+"""Author V95 quick proposals and reproducible mechanics/novelty checks, never approvals."""
+from pathlib import Path
+import hashlib
+import itertools
+import json
+import pprint
+import sys
+from urllib.parse import quote
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog, load_derived_catalog
+from cat_de_roman_esti.wordgames import quick_catalog as Q
+s = get_service()
+base = list(get_derived_catalog()._boards)
+w = Q.graph_strengths(s)
+rows = []
+def url(word):
+    return 'https://dexonline.ro/definitie/' + quote(word.lower())
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def write(name, value):
+    (OUT / name).write_bytes(Q.json_bytes(value))
+def intr(slug, members, intruder, label, why, extra=()):
+    rows.append({'id': 'iq92_v95_' + slug, 'game': 'intrusul',
+                 'source_id': 'aq92_v95_intrusul_' + slug,
+                 'category': 'viata_de_roman', 'difficulty': 'usor',
+                 'payload': {'members': [s.resolve(x) for x in members],
+                             'intruder': s.resolve(intruder), 'group_label': label},
+                 'sources': [url(x) for x in members + [intruder]] + list(extra),
+                 'rationale': why})
+intr('workshop', ['Ciocan', 'Clește', 'Șurubelniță'], 'Burete de vase',
+     'Unelte de atelier',
+     'Ciocanul, cleștele și șurubelnița sunt unelte de atelier folosite la lucrul cu piese. Buretele de vase este un obiect de curățenie, nu o unealtă de atelier; folosirea lui incidentală pentru a șterge o masă de lucru nu îi schimbă funcția obișnuită.')
+intr('body', ['Mână', 'Deget', 'Picior'], 'Cămașă',
+     'Părți ale corpului',
+     'Mâna, degetul și piciorul sunt părți ale corpului. Cămașa este un obiect vestimentar purtat pe corp. Nu sunt numite toate membre: degetul este parte a unui membru, iar predicatul mai larg este intenționat.')
+intr('tableware', ['Farfurie', 'Castron', 'Cană'], 'Găleată',
+     'Vase folosite la masă',
+     'Farfuria, castronul și cana sunt vase din care se servește în mod obișnuit mâncare sau băutură la masă. Găleata este un recipient pentru transport sau lucru gospodăresc, nu veselă de masă. Toate sunt recipiente, astfel că forma de vas nu rezolvă singură alegerea.',
+     [url('veselă')])
+intr('floor_cleaning', ['Găleată', 'Mop', 'Detergent'], 'Lampă',
+     'Folosite la spălarea podelei',
+     'Găleata ține apa, mopul spală, iar detergentul curăță în spălarea obișnuită a podelei. Lampa luminează încăperea și nu este un mijloc de spălare. Eticheta numește aceeași utilizare pentru obiecte și produs; nu pretinde că toate sunt unelte ori că detergentul este obligatoriu la orice mop.',
+     ['https://www.viledaromania.ro/turbo',
+      'https://s1.kaercher-media.com/documents/datasheets/cleaningagents/ro_RO/0.011-319.0_PI_ro_RO.pdf'])
+boards = [
+ [('Sete', 'Apă', 'Nevoie de a bea și lichidul care o potolește'),
+  ('Roabă', 'Grădină', 'Mijloc de transport și locul unde poate căra pământ'),
+  ('Stilou', 'Ghiozdan', 'Instrument de scris și geanta școlară în care se poate păstra'),
+  ('Fiu', 'Fiică', 'Termeni pentru copilul băiat și copilul fată')],
+ [('Foame', 'Mâncare', 'Nevoie de a mânca și ceea ce o potolește'),
+  ('Fierăstrău', 'copac', 'Unealtă de tăiat și arborele ale cărui ramuri le poate tăia'),
+  ('Câine', 'Curte', 'Animal de pază și un spațiu pe care îl poate păzi'),
+  ('Pătură', 'Cearșaf', 'Obiecte textile folosite la așternutul patului')],
+ [('Picior', 'Gleznă', 'Membru inferior și regiunea articulației sale de jos'),
+  ('Soare', 'Stea', 'Astrul nostru și tipul de corp ceresc căruia îi aparține'),
+  ('A scrie', 'Caiet', 'Acțiune și suportul cu foi pe care se poate face'),
+  ('Geacă', 'Dulap', 'Haină de exterior și mobilierul în care se poate păstra')],
+ [('Lună', 'Noapte', 'Astru și perioada cu care este asociat pe cer'),
+  ('Unt', 'Salam de biscuiți', 'Ingredient și desertul în care se folosește'),
+  ('Lămâie', 'Portocală', 'Fructe din grupa citricelor'),
+  ('Dinte', 'Pastă de dinți', 'Parte a danturii și produsul folosit la curățarea ei')],
+]
+extra_sources = [
+ [url('roabă'), url('ghiozdan')],
+ ['https://www.gardena.com/ro/produse/copac-arbust-ingrijire/ferastraie-ferastrau-de-gradina', url('câine') + '/definitii'],
+ ['https://science.nasa.gov/sun/facts/'],
+ ['https://astro-urseanu.ro/ghidul-vizitatorului/',
+  'https://jamilacuisine.ro/salam-de-biscuiti-facut-in-casa-reteta-video/', url('citrice')],
+]
+notes = [
+ 'Setea nu se potolește cu roaba sau cu ghiozdanul. Apa poate uda grădina, dar schimbul lasă Sete fără partener. Fiu/Fiică sunt termenii de rudenie, fără a afirma că cei doi au aceiași părinți. Roaba este un mijloc de transport în grădină, nu o unealtă care sapă.',
+ 'Câinele poate mânca, dar Foame ar rămâne fără partener dacă Mâncare ar fi cuplată cu animalul. Fierăstrăul taie ramurile copacului; curtea este un spațiu, nu material de tăiat. Pătura și cearșaful au folosirea comună de așternut, nu aceeași poziție pe pat. Nu se afirmă că orice câine locuiește în curte.',
+ 'Soarele este o stea; nu se confundă Luna cu o stea. Picior este membrul inferior în sensul românesc obișnuit, nu doar laba piciorului. Scrisul pe alte materiale și depozitarea altor obiecte nu produc o a doua împărțire a celor opt cuvinte.',
+ 'Luna poate fi vizibilă și ziua; eticheta exprimă asocierea familiară cu noaptea, fără exclusivitate sau promisiunea vizibilității în fiecare noapte. Untul este documentat în varianta obișnuită de salam de biscuiți, fără pretenția că orice variantă conține lactate. Cele două citrice rămân perechea distinctă; nu sunt ingrediente obligatorii ale desertului.',
+]
+for ix, pairs in enumerate(boards, 1):
+    names = [x for a, b, _ in pairs for x in (a, b)]
+    sources = list(dict.fromkeys([url(x.removeprefix('A ')) for x in names] + extra_sources[ix-1]))
+    rows.append({'id': f'pq92_v95_everyday_{ix:02}', 'game': 'perechi',
+                 'source_id': f'aq92_v95_perechi_everyday_{ix:02}',
+                 'category': 'viata_de_roman', 'difficulty': 'usor',
+                 'payload': {'pairs': [{'members': [s.resolve(a), s.resolve(b)], 'group_label': label}
+                                       for a, b, label in pairs]},
+                 'sources': sources,
+                 'rationale': 'Patru asocieri cotidiene distincte: ' + '; '.join(
+                     f'{a} — {b}' for a, b, _ in pairs) + '. ' + notes[ix-1]})
+assert all(all(Q.visible_ids(r)) for r in rows)
+raw = {'kind': 'quick-entry-candidates-v1', 'baseline': 'cf6b28b',
+       'bindings': Q.bindings(live=True), 'boards': rows}
+write('raw-candidates.json', raw)
+# Every archived authored/raw/final quick row remains novelty debt, not only served rows.
+archived = []
+archive_sources = []
+def visit(v, path):
+    if isinstance(v, dict):
+        if v.get('game') in ('intrusul', 'perechi') and isinstance(v.get('payload'), dict):
+            try:
+                Q.visible_ids(v)
+            except (KeyError, TypeError):
+                pass
+            else:
+                archived.append((path, v))
+        for value in v.values():
+            visit(value, path)
+    elif isinstance(v, list):
+        for value in v:
+            visit(value, path)
+for p in sorted((ROOT / 'docs/reviews').rglob('*.json')):
+    try:
+        before = len(archived)
+        visit(json.loads(p.read_text()), str(p.relative_to(ROOT)))
+        if len(archived) > before:
+            archive_sources.append({'path': str(p.relative_to(ROOT)), 'sha256': sha(p)})
+    except (ValueError, UnicodeError):
+        pass
+used = {g: {i for b in base if b.game == g for i in Q.visible_ids({'game': b.game, 'payload': b.payload})}
+        for g in ('intrusul', 'perechi')}
+old_pairs = {frozenset(p['members']) for b in base if b.game == 'perechi' for p in b.payload['pairs']}
+seen_pairs, selected, results = set(), [], []
+for r in rows:
+    ids = Q.visible_ids(r)
+    visible, g = set(ids), r['game']
+    rating = Q.rate_board(r, s, w)
+    comparisons = [(b._catalog_id, {'game': b.game, 'payload': b.payload}) for b in base if b.game == g]
+    comparisons += [(path + '#' + a.get('id', ''), a) for path, a in archived if a['game'] == g]
+    comparisons += [(a['id'], a) for a in selected if a['game'] == g]
+    overlaps = [(name, len(visible & set(Q.visible_ids(a)))) for name, a in comparisons]
+    maximum_overlap = max(count for _, count in overlaps)
+    assert maximum_overlap < (3 if g == 'intrusul' else 4), (r['id'], overlaps)
+    fresh = visible - used[g]
+    assert len(fresh) >= 2, (r['id'], fresh)
+    if g == 'intrusul':
+        members, intruder = r['payload']['members'], r['payload']['intruder']
+        assert all(frozenset(members) != frozenset(a['payload']['members']) for _, a in comparisons)
+        mechanics = {'inside_strengths': [w.get(frozenset(p), 0) for p in itertools.combinations(members, 2)],
+                     'intruder_strengths': [w.get(frozenset((m, intruder)), 0) for m in members]}
+    else:
+        intended = {frozenset(p['members']) for p in r['payload']['pairs']}
+        for pair in intended:
+            assert pair not in old_pairs | seen_pairs
+            assert not [(name, a) for name, a in comparisons
+                        if any(frozenset(p['members']) == pair for p in a['payload']['pairs'])]
+            seen_pairs.add(pair)
+        def matchings(remaining):
+            if not remaining:
+                return 1
+            a = remaining[0]
+            return sum(matchings([n for n in remaining if n not in (a, b)])
+                       for b in remaining[1:] if w.get(frozenset((a, b)), 0) >= .6)
+        mechanics = {'intended_strengths': [w.get(p, 0) for p in intended],
+                     'maximum_cross_strength': max(w.get(frozenset(p), 0) for p in itertools.combinations(ids, 2) if frozenset(p) not in intended),
+                     'native_perfect_matchings': matchings(ids)}
+        assert mechanics['native_perfect_matchings'] == 1
+    selected.append(r)
+    results.append({'id': r['id'], 'visible_labels': [s.label(n) for n in ids],
+                    'new_visible_labels': [s.label(n) for n in sorted(fresh)],
+                    'new_visible_count': len(fresh), 'maximum_existing_or_archived_overlap': maximum_overlap,
+                    'archive_records_compared': sum(a['game'] == g for _, a in archived),
+                    'mechanics': mechanics, 'rating': rating})
+source = ROOT / 'scripts/quick_game_content_source_v92.py'
+original = source.read_text()
+marker = '\n\n# V95: fresh functional associations; independent reviews gate installation.\n'
+if marker in original:
+    original = original.split(marker)[0]
+source.write_text(original + marker + 'BOARDS += ' + pprint.pformat(tuple(rows), width=99, sort_dicts=False) + '\n')
+from scripts import quick_game_content_source_v92 as S
+assert len(S.candidate_boards()) == 81
+prior = json.loads((ROOT / 'cat_de_roman_esti/fixtures/quick_games_v92.json').read_bytes())
+assert S.candidate_boards()[:73] == prior['authored']
+rated = Q.rated_boards(S.candidate_boards(), load_derived_catalog(), s)
+ignore = {'standard_rank', 'starter_rank'}
+assert [{k: v for k, v in r.items() if k not in ignore} for r in rated[:73]] == [
+    {k: v for k, v in r.items() if k not in ignore} for r in prior['boards']]
+from scripts.build_quick_content_v92 import candidate
+write('candidate.json', candidate())
+audit = {'kind': 'quick-author-audit-v1', 'status': 'unapproved author proposals',
+         'candidate_sha256': sha(OUT/'raw-candidates.json'),
+         'complete_candidate_sha256': sha(OUT/'candidate.json'),
+         'baseline': 'cf6b28b', 'current_board_count': len(base), 'new_intended_pairs': len(seen_pairs),
+         'original_authored_records_exact': 73, 'original_payloads_and_scores_exact': 73,
+         'archive_records_scanned': len(archived), 'archive_sources': archive_sources,
+         'author_source_sha256': sha(__file__), 'editorial_source_sha256': sha(source),
+         'baseline_editorial_source_sha256': hashlib.sha256(original.encode()).hexdigest(),
+         'new_words_by_game': {g: len({n for r in rows if r['game'] == g for n in Q.visible_ids(r)} - used[g]) for g in used},
+         'results': results}
+write('author-audit.json', audit)
+write('author-freeze.json', {'kind': 'quick-v95-author-freeze-v1',
+      'status': 'unapproved; independent raw and complete candidate reviews remain required',
+      'files': {name: sha(OUT/name) for name in ('raw-candidates.json','candidate.json','author-audit.json','author_quick.py')},
+      'editorial_source_sha256': sha(source), 'counts': {'intrusul': 4, 'perechi': 4, 'complete': 81}})
+print(json.dumps({k: v for k, v in audit.items() if k not in {'results', 'archive_sources'}}, ensure_ascii=False, indent=2))
+print([(r['id'], a['new_visible_count'], a['rating']['standard_score'], a['rating']['starter_eligible']) for r, a in zip(rows, results)])

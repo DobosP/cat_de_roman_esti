@@ -1,0 +1,24 @@
+from pathlib import Path
+import gzip,hashlib,json,subprocess
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT=ROOT/'docs/reviews/v95-discovery-and-game-quality'
+SCRATCH=Path(__file__).parent
+def sha(b):return hashlib.sha256(b).hexdigest()
+r=json.loads((OUT/'verification.json').read_bytes());assert r['passed'] is True
+manifest=json.loads((OUT/'archive-manifest.json').read_bytes())
+assert sha((OUT/'archive-manifest.json').read_bytes())==r['archive_manifest_sha256']
+for entry in manifest['files']:
+ blob=(OUT/entry['archive']).read_bytes();assert len(blob)==entry['archive_size'];assert sha(blob)==entry['archive_sha256']
+ raw=gzip.decompress(blob) if entry['encoding']=='gzip' else blob
+ assert sha(raw)==entry['sha256'] and len(raw)==entry['source_size']
+ source=SCRATCH/entry['source']
+ if source.exists():assert source.read_bytes()==raw,entry['source']
+assert len(manifest['files'])==r['archived_files']
+assert sha((OUT/'gate-inputs.json').read_bytes())==r['gate_inputs_sha256']
+gates=json.loads((OUT/'gate-inputs.json').read_bytes())
+for rel,h in gates['sha256'].items():assert sha((ROOT/rel).read_bytes())==h,rel
+for rel in gates['deleted']:assert not (ROOT/rel).exists(),rel
+for rel,h in r['artifact_sha256'].items():assert sha((ROOT/rel).read_bytes())==h,rel
+for rel,h in r['final_evidence_sha256'].items():assert sha((OUT/rel).read_bytes())==h,rel
+for check in r['checks'].values():assert sha((OUT/check['log']).read_bytes())==check['sha256']
+print(json.dumps({'passed':True,'archive_files':len(manifest['files']),'gate_inputs':len(gates['sha256']),'deleted_assets':len(gates['deleted']),'artifacts':len(r['artifact_sha256']),'final_evidence_pins':len(r['final_evidence_sha256'])},indent=2))

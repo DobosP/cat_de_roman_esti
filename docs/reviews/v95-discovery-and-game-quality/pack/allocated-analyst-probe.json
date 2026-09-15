@@ -1,0 +1,2190 @@
+{
+  "kind": "v95-independent-allocated-analyst-probes-v1",
+  "reviewer": "codex-v95-independent-world-quality",
+  "scope": "Exact pending allocated records, fresh BFF sessions; natural selection remains a post-promotion check.",
+  "input_ids": [
+    "ct_viata_de_roman_374",
+    "ct_viata_de_roman_375",
+    "cx_viata_de_roman_372",
+    "lt_gastronomie_243",
+    "lt_gastronomie_244"
+  ],
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "d7be5db0389e0d441a5c2dfceefdf7660aacca7f2f8569ccd21f0a5a44274a8e",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109"
+  },
+  "dossier_bindings": {
+    "cx_viata_de_roman_372": "sha256:64a1c3ef81894686e5fbfe98bfe86b210f0ab2345534d503f943060b27907865",
+    "ct_viata_de_roman_374": "sha256:1ab116033bc98f6ac4634013a703383fec648420e5bec957c83a510bf85d0939",
+    "ct_viata_de_roman_375": "sha256:750608d26ab9fdc00d20fec623ee426a471d62a83e22ec42929133c24a88f7d9",
+    "lt_gastronomie_243": "sha256:d7d6017dfb5cc2e4d7ff7470d23ec4f09812c40e01c162996728d7f88b5e5590",
+    "lt_gastronomie_244": "sha256:4fe5426f6a73e27a8faef8b4bb83d2a42a209fc18d68be4a65eec7d3ada87716"
+  },
+  "findings": {},
+  "checks": [
+    {
+      "id": "cx_viata_de_roman_372",
+      "initial": {
+        "game_id": "9d87ade5-06b9-424a-96cf-e355e59e1586",
+        "tiles": [
+          {
+            "id": "n_v24_nature_sky_soare",
+            "label": "Soare"
+          },
+          {
+            "id": "n_v33_electric_light_bec",
+            "label": "Bec"
+          },
+          {
+            "id": "n_v24_food_small_fruit_cireasa",
+            "label": "Cireașă"
+          },
+          {
+            "id": "n_v3muz_pian",
+            "label": "Pian"
+          },
+          {
+            "id": "n_v30_kitchen_utensil_lingura",
+            "label": "Lingură"
+          },
+          {
+            "id": "n_v17gas_dulceata",
+            "label": "Dulceață"
+          },
+          {
+            "id": "n_v24_weather_storm_fulger",
+            "label": "Fulger"
+          },
+          {
+            "id": "n_v33_forest_animal_vulpe",
+            "label": "Vulpe"
+          },
+          {
+            "id": "n_v84_food_arpacas",
+            "label": "Arpacaș"
+          },
+          {
+            "id": "n_gas_salata_vinete",
+            "label": "Salată de vinete"
+          },
+          {
+            "id": "n_v24_food_garden_veg_mazare",
+            "label": "Mazăre"
+          },
+          {
+            "id": "n_v4gas_fasole",
+            "label": "Fasole"
+          },
+          {
+            "id": "n_v3gas_orez",
+            "label": "Orez"
+          },
+          {
+            "id": "n_v24_food_breakfast_miere",
+            "label": "Miere"
+          },
+          {
+            "id": "n_v24_food_breakfast_unt",
+            "label": "Unt"
+          },
+          {
+            "id": "n_v24_home_appliances_lampa",
+            "label": "Lampă"
+          }
+        ],
+        "solved": [],
+        "solved_count": 0,
+        "remaining_groups": 4,
+        "lives": 4,
+        "mistakes": 0,
+        "won": false,
+        "lost": false,
+        "difficulty": "normal",
+        "clues_used": 0,
+        "clue_available": false,
+        "clues": []
+      },
+      "solved": true,
+      "lives": 4,
+      "steps": [
+        {
+          "ok": true,
+          "correct": true,
+          "category": {
+            "key": "g1",
+            "label": "Boabe fierte în mâncăruri"
+          },
+          "game_id": "9d87ade5-06b9-424a-96cf-e355e59e1586",
+          "tiles": [
+            {
+              "id": "n_v24_nature_sky_soare",
+              "label": "Soare"
+            },
+            {
+              "id": "n_v33_electric_light_bec",
+              "label": "Bec"
+            },
+            {
+              "id": "n_v24_food_small_fruit_cireasa",
+              "label": "Cireașă"
+            },
+            {
+              "id": "n_v3muz_pian",
+              "label": "Pian"
+            },
+            {
+              "id": "n_v30_kitchen_utensil_lingura",
+              "label": "Lingură"
+            },
+            {
+              "id": "n_v17gas_dulceata",
+              "label": "Dulceață"
+            },
+            {
+              "id": "n_v24_weather_storm_fulger",
+              "label": "Fulger"
+            },
+            {
+              "id": "n_v33_forest_animal_vulpe",
+              "label": "Vulpe"
+            },
+            {
+              "id": "n_gas_salata_vinete",
+              "label": "Salată de vinete"
+            },
+            {
+              "id": "n_v24_food_breakfast_miere",
+              "label": "Miere"
+            },
+            {
+              "id": "n_v24_food_breakfast_unt",
+              "label": "Unt"
+            },
+            {
+              "id": "n_v24_home_appliances_lampa",
+              "label": "Lampă"
+            }
+          ],
+          "solved": [
+            {
+              "key": "g1",
+              "label": "Boabe fierte în mâncăruri",
+              "tiles": [
+                {
+                  "id": "n_v3gas_orez",
+                  "label": "Orez"
+                },
+                {
+                  "id": "n_v4gas_fasole",
+                  "label": "Fasole"
+                },
+                {
+                  "id": "n_v24_food_garden_veg_mazare",
+                  "label": "Mazăre"
+                },
+                {
+                  "id": "n_v84_food_arpacas",
+                  "label": "Arpacaș"
+                }
+              ]
+            }
+          ],
+          "solved_count": 1,
+          "remaining_groups": 3,
+          "lives": 4,
+          "mistakes": 0,
+          "won": false,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": []
+        },
+        {
+          "ok": true,
+          "correct": true,
+          "category": {
+            "key": "g2",
+            "label": "Se întind pe pâine"
+          },
+          "game_id": "9d87ade5-06b9-424a-96cf-e355e59e1586",
+          "tiles": [
+            {
+              "id": "n_v24_nature_sky_soare",
+              "label": "Soare"
+            },
+            {
+              "id": "n_v33_electric_light_bec",
+              "label": "Bec"
+            },
+            {
+              "id": "n_v24_food_small_fruit_cireasa",
+              "label": "Cireașă"
+            },
+            {
+              "id": "n_v3muz_pian",
+              "label": "Pian"
+            },
+            {
+              "id": "n_v30_kitchen_utensil_lingura",
+              "label": "Lingură"
+            },
+            {
+              "id": "n_v24_weather_storm_fulger",
+              "label": "Fulger"
+            },
+            {
+              "id": "n_v33_forest_animal_vulpe",
+              "label": "Vulpe"
+            },
+            {
+              "id": "n_v24_home_appliances_lampa",
+              "label": "Lampă"
+            }
+          ],
+          "solved": [
+            {
+              "key": "g1",
+              "label": "Boabe fierte în mâncăruri",
+              "tiles": [
+                {
+                  "id": "n_v3gas_orez",
+                  "label": "Orez"
+                },
+                {
+                  "id": "n_v4gas_fasole",
+                  "label": "Fasole"
+                },
+                {
+                  "id": "n_v24_food_garden_veg_mazare",
+                  "label": "Mazăre"
+                },
+                {
+                  "id": "n_v84_food_arpacas",
+                  "label": "Arpacaș"
+                }
+              ]
+            },
+            {
+              "key": "g2",
+              "label": "Se întind pe pâine",
+              "tiles": [
+                {
+                  "id": "n_v24_food_breakfast_unt",
+                  "label": "Unt"
+                },
+                {
+                  "id": "n_v24_food_breakfast_miere",
+                  "label": "Miere"
+                },
+                {
+                  "id": "n_v17gas_dulceata",
+                  "label": "Dulceață"
+                },
+                {
+                  "id": "n_gas_salata_vinete",
+                  "label": "Salată de vinete"
+                }
+              ]
+            }
+          ],
+          "solved_count": 2,
+          "remaining_groups": 2,
+          "lives": 4,
+          "mistakes": 0,
+          "won": false,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": []
+        },
+        {
+          "ok": true,
+          "correct": true,
+          "category": {
+            "key": "g3",
+            "label": "Produc lumină"
+          },
+          "game_id": "9d87ade5-06b9-424a-96cf-e355e59e1586",
+          "tiles": [
+            {
+              "id": "n_v24_food_small_fruit_cireasa",
+              "label": "Cireașă"
+            },
+            {
+              "id": "n_v3muz_pian",
+              "label": "Pian"
+            },
+            {
+              "id": "n_v30_kitchen_utensil_lingura",
+              "label": "Lingură"
+            },
+            {
+              "id": "n_v33_forest_animal_vulpe",
+              "label": "Vulpe"
+            }
+          ],
+          "solved": [
+            {
+              "key": "g1",
+              "label": "Boabe fierte în mâncăruri",
+              "tiles": [
+                {
+                  "id": "n_v3gas_orez",
+                  "label": "Orez"
+                },
+                {
+                  "id": "n_v4gas_fasole",
+                  "label": "Fasole"
+                },
+                {
+                  "id": "n_v24_food_garden_veg_mazare",
+                  "label": "Mazăre"
+                },
+                {
+                  "id": "n_v84_food_arpacas",
+                  "label": "Arpacaș"
+                }
+              ]
+            },
+            {
+              "key": "g2",
+              "label": "Se întind pe pâine",
+              "tiles": [
+                {
+                  "id": "n_v24_food_breakfast_unt",
+                  "label": "Unt"
+                },
+                {
+                  "id": "n_v24_food_breakfast_miere",
+                  "label": "Miere"
+                },
+                {
+                  "id": "n_v17gas_dulceata",
+                  "label": "Dulceață"
+                },
+                {
+                  "id": "n_gas_salata_vinete",
+                  "label": "Salată de vinete"
+                }
+              ]
+            },
+            {
+              "key": "g3",
+              "label": "Produc lumină",
+              "tiles": [
+                {
+                  "id": "n_v24_weather_storm_fulger",
+                  "label": "Fulger"
+                },
+                {
+                  "id": "n_v24_home_appliances_lampa",
+                  "label": "Lampă"
+                },
+                {
+                  "id": "n_v24_nature_sky_soare",
+                  "label": "Soare"
+                },
+                {
+                  "id": "n_v33_electric_light_bec",
+                  "label": "Bec"
+                }
+              ]
+            }
+          ],
+          "solved_count": 3,
+          "remaining_groups": 1,
+          "lives": 4,
+          "mistakes": 0,
+          "won": false,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": []
+        },
+        {
+          "ok": true,
+          "correct": true,
+          "category": {
+            "key": "g4",
+            "label": "Pot avea coadă"
+          },
+          "game_id": "9d87ade5-06b9-424a-96cf-e355e59e1586",
+          "tiles": [
+            {
+              "id": "n_v24_nature_sky_soare",
+              "label": "Soare"
+            },
+            {
+              "id": "n_v33_electric_light_bec",
+              "label": "Bec"
+            },
+            {
+              "id": "n_v24_food_small_fruit_cireasa",
+              "label": "Cireașă"
+            },
+            {
+              "id": "n_v3muz_pian",
+              "label": "Pian"
+            },
+            {
+              "id": "n_v30_kitchen_utensil_lingura",
+              "label": "Lingură"
+            },
+            {
+              "id": "n_v17gas_dulceata",
+              "label": "Dulceață"
+            },
+            {
+              "id": "n_v24_weather_storm_fulger",
+              "label": "Fulger"
+            },
+            {
+              "id": "n_v33_forest_animal_vulpe",
+              "label": "Vulpe"
+            },
+            {
+              "id": "n_v84_food_arpacas",
+              "label": "Arpacaș"
+            },
+            {
+              "id": "n_gas_salata_vinete",
+              "label": "Salată de vinete"
+            },
+            {
+              "id": "n_v24_food_garden_veg_mazare",
+              "label": "Mazăre"
+            },
+            {
+              "id": "n_v4gas_fasole",
+              "label": "Fasole"
+            },
+            {
+              "id": "n_v3gas_orez",
+              "label": "Orez"
+            },
+            {
+              "id": "n_v24_food_breakfast_miere",
+              "label": "Miere"
+            },
+            {
+              "id": "n_v24_food_breakfast_unt",
+              "label": "Unt"
+            },
+            {
+              "id": "n_v24_home_appliances_lampa",
+              "label": "Lampă"
+            }
+          ],
+          "solved": [
+            {
+              "key": "g1",
+              "label": "Boabe fierte în mâncăruri",
+              "tiles": [
+                {
+                  "id": "n_v3gas_orez",
+                  "label": "Orez"
+                },
+                {
+                  "id": "n_v4gas_fasole",
+                  "label": "Fasole"
+                },
+                {
+                  "id": "n_v24_food_garden_veg_mazare",
+                  "label": "Mazăre"
+                },
+                {
+                  "id": "n_v84_food_arpacas",
+                  "label": "Arpacaș"
+                }
+              ]
+            },
+            {
+              "key": "g2",
+              "label": "Se întind pe pâine",
+              "tiles": [
+                {
+                  "id": "n_v24_food_breakfast_unt",
+                  "label": "Unt"
+                },
+                {
+                  "id": "n_v24_food_breakfast_miere",
+                  "label": "Miere"
+                },
+                {
+                  "id": "n_v17gas_dulceata",
+                  "label": "Dulceață"
+                },
+                {
+                  "id": "n_gas_salata_vinete",
+                  "label": "Salată de vinete"
+                }
+              ]
+            },
+            {
+              "key": "g3",
+              "label": "Produc lumină",
+              "tiles": [
+                {
+                  "id": "n_v24_weather_storm_fulger",
+                  "label": "Fulger"
+                },
+                {
+                  "id": "n_v24_home_appliances_lampa",
+                  "label": "Lampă"
+                },
+                {
+                  "id": "n_v24_nature_sky_soare",
+                  "label": "Soare"
+                },
+                {
+                  "id": "n_v33_electric_light_bec",
+                  "label": "Bec"
+                }
+              ]
+            },
+            {
+              "key": "g4",
+              "label": "Pot avea coadă",
+              "tiles": [
+                {
+                  "id": "n_v30_kitchen_utensil_lingura",
+                  "label": "Lingură"
+                },
+                {
+                  "id": "n_v3muz_pian",
+                  "label": "Pian"
+                },
+                {
+                  "id": "n_v33_forest_animal_vulpe",
+                  "label": "Vulpe"
+                },
+                {
+                  "id": "n_v24_food_small_fruit_cireasa",
+                  "label": "Cireașă"
+                }
+              ]
+            }
+          ],
+          "solved_count": 4,
+          "remaining_groups": 0,
+          "lives": 4,
+          "mistakes": 0,
+          "won": true,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": [],
+          "score": 1000,
+          "share": "cat_de_roman_esti · Conexiuni · 0 greseli\n🟩🟩🟩🟩\n🟦🟦🟦🟦\n🟪🟪🟪🟪\n🟧🟧🟧🟧",
+          "solution": [
+            {
+              "key": "g1",
+              "label": "Boabe fierte în mâncăruri",
+              "tiles": [
+                {
+                  "id": "n_v3gas_orez",
+                  "label": "Orez"
+                },
+                {
+                  "id": "n_v4gas_fasole",
+                  "label": "Fasole"
+                },
+                {
+                  "id": "n_v24_food_garden_veg_mazare",
+                  "label": "Mazăre"
+                },
+                {
+                  "id": "n_v84_food_arpacas",
+                  "label": "Arpacaș"
+                }
+              ]
+            },
+            {
+              "key": "g2",
+              "label": "Se întind pe pâine",
+              "tiles": [
+                {
+                  "id": "n_v24_food_breakfast_unt",
+                  "label": "Unt"
+                },
+                {
+                  "id": "n_v24_food_breakfast_miere",
+                  "label": "Miere"
+                },
+                {
+                  "id": "n_v17gas_dulceata",
+                  "label": "Dulceață"
+                },
+                {
+                  "id": "n_gas_salata_vinete",
+                  "label": "Salată de vinete"
+                }
+              ]
+            },
+            {
+              "key": "g3",
+              "label": "Produc lumină",
+              "tiles": [
+                {
+                  "id": "n_v24_weather_storm_fulger",
+                  "label": "Fulger"
+                },
+                {
+                  "id": "n_v24_home_appliances_lampa",
+                  "label": "Lampă"
+                },
+                {
+                  "id": "n_v24_nature_sky_soare",
+                  "label": "Soare"
+                },
+                {
+                  "id": "n_v33_electric_light_bec",
+                  "label": "Bec"
+                }
+              ]
+            },
+            {
+              "key": "g4",
+              "label": "Pot avea coadă",
+              "tiles": [
+                {
+                  "id": "n_v30_kitchen_utensil_lingura",
+                  "label": "Lingură"
+                },
+                {
+                  "id": "n_v3muz_pian",
+                  "label": "Pian"
+                },
+                {
+                  "id": "n_v33_forest_animal_vulpe",
+                  "label": "Vulpe"
+                },
+                {
+                  "id": "n_v24_food_small_fruit_cireasa",
+                  "label": "Cireașă"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ct_viata_de_roman_374",
+      "target": "Penar",
+      "steps": [
+        {
+          "input": "școală",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v3soc_scoala",
+              "label": "Școală",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #2."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "ghiozdan",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v23via_ghiozdan",
+              "label": "Ghiozdan",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 2 locuri.",
+              "rank_delta": -2
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "rechizite",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2353,
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "creion",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_writing_creion",
+              "label": "Creion",
+              "distance": 2,
+              "rank": 39,
+              "temperature": "Cald",
+              "closeness": 98,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_writing_creion",
+                "label": "Creion",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 3
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 35 locuri.",
+              "rank_delta": -35
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 2,
+              "rank": 11,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_school_writing_creion",
+                "label": "Creion",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 3
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "warmer",
+              "message": "Mai cald cu 28 locuri.",
+              "rank_delta": 28
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "pix",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_writing_pix",
+              "label": "Pix",
+              "distance": 2,
+              "rank": 39,
+              "temperature": "Cald",
+              "closeness": 98,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_school_writing_creion",
+                "label": "Creion",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_writing_pix",
+                "label": "Pix",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 5
+              }
+            ],
+            "attempts": 5,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 28 locuri.",
+              "rank_delta": -28
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "elev",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v4soc_elev",
+              "label": "elev",
+              "distance": 2,
+              "rank": 10,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 6
+            },
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v4soc_elev",
+                "label": "elev",
+                "distance": 2,
+                "rank": 10,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_school_writing_creion",
+                "label": "Creion",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_writing_pix",
+                "label": "Pix",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 5
+              }
+            ],
+            "attempts": 6,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "warmer",
+              "message": "Mai cald cu 29 locuri.",
+              "rank_delta": 29
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "penar",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v23via_penar",
+              "label": "Penar",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 7
+            },
+            "guesses": [
+              {
+                "id": "n_v23via_penar",
+                "label": "Penar",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v4soc_elev",
+                "label": "elev",
+                "distance": 2,
+                "rank": 10,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_school_writing_creion",
+                "label": "Creion",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_writing_pix",
+                "label": "Pix",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 5
+              }
+            ],
+            "attempts": 7,
+            "won": true,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 0,
+            "clue_available": false,
+            "target": {
+              "id": "n_v23via_penar",
+              "label": "Penar",
+              "description": "Etui pentru instrumentele de scris, întâlnit în mod obișnuit printre rechizitele unui elev."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece\n🟩🟩🟩🟩🟩🟩🎯\n7 incercari"
+          }
+        }
+      ],
+      "reachable": 2353,
+      "responsive": 2028
+    },
+    {
+      "id": "ct_viata_de_roman_375",
+      "target": "Clește",
+      "steps": [
+        {
+          "input": "metal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v4sti_metal",
+              "label": "metal",
+              "distance": 2,
+              "rank": 9,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #9."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "reparație",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept. Poate cautai: pârâu?",
+            "suggestions": [
+              "pârâu"
+            ],
+            "guesses": [
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "unealtă",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "scule",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "fier",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept. Poate cautai: fluier?",
+            "suggestions": [
+              "fluier"
+            ],
+            "guesses": [
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "ciocan",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v32_workshop_hand_ciocan",
+              "label": "Ciocan",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v32_workshop_hand_ciocan",
+                "label": "Ciocan",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 6 locuri mai aproape.",
+              "rank_delta": 6
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "șurubelniță",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v32_workshop_hand_surubelnita",
+              "label": "Șurubelniță",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_v32_workshop_hand_ciocan",
+                "label": "Ciocan",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v32_workshop_hand_surubelnita",
+                "label": "Șurubelniță",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "same",
+              "message": "La fel de aproape ca încercarea trecută.",
+              "rank_delta": 0
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "atelier",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "ctxp_7697a452c18fc6220fe0",
+              "label": "Atelier",
+              "distance": 4,
+              "rank": 99,
+              "temperature": "Caldut",
+              "closeness": 96,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v32_workshop_hand_ciocan",
+                "label": "Ciocan",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v32_workshop_hand_surubelnita",
+                "label": "Șurubelniță",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "ctxp_7697a452c18fc6220fe0",
+                "label": "Atelier",
+                "distance": 4,
+                "rank": 99,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 4
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 96 locuri.",
+              "rank_delta": -96
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "foarfecă",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "ctxp_827db53f17f1c99e1b1c",
+              "label": "Foarfecă",
+              "distance": 5,
+              "rank": 223,
+              "temperature": "Caldut",
+              "closeness": 91,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v32_workshop_hand_ciocan",
+                "label": "Ciocan",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v32_workshop_hand_surubelnita",
+                "label": "Șurubelniță",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "ctxp_7697a452c18fc6220fe0",
+                "label": "Atelier",
+                "distance": 4,
+                "rank": 99,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 4
+              },
+              {
+                "id": "ctxp_827db53f17f1c99e1b1c",
+                "label": "Foarfecă",
+                "distance": 5,
+                "rank": 223,
+                "temperature": "Caldut",
+                "closeness": 91,
+                "attempt_number": 5
+              }
+            ],
+            "attempts": 5,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 124 locuri.",
+              "rank_delta": -124
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "clești",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v32_workshop_hand_cleste",
+              "label": "Clește",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 6
+            },
+            "guesses": [
+              {
+                "id": "n_v32_workshop_hand_cleste",
+                "label": "Clește",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v32_workshop_hand_ciocan",
+                "label": "Ciocan",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v32_workshop_hand_surubelnita",
+                "label": "Șurubelniță",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "ctxp_7697a452c18fc6220fe0",
+                "label": "Atelier",
+                "distance": 4,
+                "rank": 99,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 4
+              },
+              {
+                "id": "ctxp_827db53f17f1c99e1b1c",
+                "label": "Foarfecă",
+                "distance": 5,
+                "rank": 223,
+                "temperature": "Caldut",
+                "closeness": 91,
+                "attempt_number": 5
+              }
+            ],
+            "attempts": 6,
+            "won": true,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 0,
+            "clue_available": false,
+            "target": {
+              "id": "n_v32_workshop_hand_cleste",
+              "label": "Clește",
+              "description": "Unealtă cu două brațe, folosită pentru a prinde, îndoi sau tăia."
+            },
+            "score": 700,
+            "share": "cat_de_roman_esti · Cald sau Rece\n🟩🟩🟩🟩🟩🎯\n6 incercari"
+          }
+        }
+      ],
+      "reachable": 2359,
+      "responsive": 657
+    },
+    {
+      "id": "lt_gastronomie_243",
+      "routes": [
+        {
+          "labels": [
+            "Cuptor de bucătărie",
+            "Biscuit",
+            "Firimitură"
+          ],
+          "initial": {
+            "game_id": "01baa899-01e6-4db8-bbd9-5e36231131cc",
+            "start": {
+              "id": "n_v84_food_cuptor",
+              "label": "Cuptor de bucătărie"
+            },
+            "target": {
+              "id": "n_v90_food_firimitura",
+              "label": "Firimitură",
+              "description": "Bucățică foarte mică desprinsă din pâine sau din alt aliment, de exemplu dintr-un biscuit."
+            },
+            "current": {
+              "id": "n_v84_food_cuptor",
+              "label": "Cuptor de bucătărie"
+            },
+            "path": [
+              {
+                "id": "n_v84_food_cuptor",
+                "label": "Cuptor de bucătărie"
+              }
+            ],
+            "moves": 0,
+            "optimal": 2,
+            "won": false,
+            "difficulty": "usor",
+            "choices": [
+              {
+                "label": "Biscuit",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cornulețe",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cozonac",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Pâine",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Pandișpan",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Pișcot",
+                "relation": "legătură directă"
+              }
+            ],
+            "backtrack_recommended": false
+          },
+          "steps": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v24_food_snack_biscuit",
+                "label": "Biscuit"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v84_food_cuptor",
+                  "label": "Cuptor de bucătărie"
+                },
+                {
+                  "id": "n_v24_food_snack_biscuit",
+                  "label": "Biscuit",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "casă",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Firimitură",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Salam de biscuiți",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Sandviș",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v90_food_firimitura",
+                "label": "Firimitură"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v84_food_cuptor",
+                  "label": "Cuptor de bucătărie"
+                },
+                {
+                  "id": "n_v24_food_snack_biscuit",
+                  "label": "Biscuit",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v90_food_firimitura",
+                  "label": "Firimitură",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "labels": [
+            "Cuptor de bucătărie",
+            "Pâine",
+            "Firimitură"
+          ],
+          "initial": {
+            "game_id": "4cab5084-4d30-410d-9f8b-e820ae92dd1b",
+            "start": {
+              "id": "n_v84_food_cuptor",
+              "label": "Cuptor de bucătărie"
+            },
+            "target": {
+              "id": "n_v90_food_firimitura",
+              "label": "Firimitură",
+              "description": "Bucățică foarte mică desprinsă din pâine sau din alt aliment, de exemplu dintr-un biscuit."
+            },
+            "current": {
+              "id": "n_v84_food_cuptor",
+              "label": "Cuptor de bucătărie"
+            },
+            "path": [
+              {
+                "id": "n_v84_food_cuptor",
+                "label": "Cuptor de bucătărie"
+              }
+            ],
+            "moves": 0,
+            "optimal": 2,
+            "won": false,
+            "difficulty": "usor",
+            "choices": [
+              {
+                "label": "Biscuit",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cornulețe",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cozonac",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Pâine",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Pandișpan",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Pișcot",
+                "relation": "legătură directă"
+              }
+            ],
+            "backtrack_recommended": false
+          },
+          "steps": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v4gas_paine",
+                "label": "Pâine"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v84_food_cuptor",
+                  "label": "Cuptor de bucătărie"
+                },
+                {
+                  "id": "n_v4gas_paine",
+                  "label": "Pâine",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Firimitură",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Masa în familie",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Pâine de casă",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v90_food_firimitura",
+                "label": "Firimitură"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v84_food_cuptor",
+                  "label": "Cuptor de bucătărie"
+                },
+                {
+                  "id": "n_v4gas_paine",
+                  "label": "Pâine",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v90_food_firimitura",
+                  "label": "Firimitură",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lt_gastronomie_244",
+      "routes": [
+        {
+          "labels": [
+            "Zahăr pudră",
+            "Frișcă",
+            "Tort Diplomat"
+          ],
+          "initial": {
+            "game_id": "c990f5ce-5e35-49c9-97e6-ad3d8c716f69",
+            "start": {
+              "id": "n_v86_food_zahar_pudra",
+              "label": "Zahăr pudră"
+            },
+            "target": {
+              "id": "n_v87_food_tort_diplomat",
+              "label": "Tort Diplomat",
+              "description": "Desert rece cu cremă aerată, fructe și blat sau pișcoturi."
+            },
+            "current": {
+              "id": "n_v86_food_zahar_pudra",
+              "label": "Zahăr pudră"
+            },
+            "path": [
+              {
+                "id": "n_v86_food_zahar_pudra",
+                "label": "Zahăr pudră"
+              }
+            ],
+            "moves": 0,
+            "optimal": 2,
+            "won": false,
+            "difficulty": "usor",
+            "choices": [
+              {
+                "label": "Amandină",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cornulețe",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cremșnit",
+                "relation": "prăjitură și pudră dulce"
+              },
+              {
+                "label": "Frișcă",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Gogoși",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Pișcot",
+                "relation": "legătură directă"
+              }
+            ],
+            "backtrack_recommended": false
+          },
+          "steps": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v86_food_frisca",
+                "label": "Frișcă"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v86_food_zahar_pudra",
+                  "label": "Zahăr pudră"
+                },
+                {
+                  "id": "n_v86_food_frisca",
+                  "label": "Frișcă",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Ecler",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Înghețată",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Savarină",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Tort Diplomat",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v87_food_tort_diplomat",
+                "label": "Tort Diplomat"
+              },
+              "relation": "parte și întreg",
+              "path": [
+                {
+                  "id": "n_v86_food_zahar_pudra",
+                  "label": "Zahăr pudră"
+                },
+                {
+                  "id": "n_v86_food_frisca",
+                  "label": "Frișcă",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v87_food_tort_diplomat",
+                  "label": "Tort Diplomat",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "labels": [
+            "Zahăr pudră",
+            "Pișcot",
+            "Tort Diplomat"
+          ],
+          "initial": {
+            "game_id": "6d4750ed-b3ce-40c5-9dcc-3cfd7769d6c2",
+            "start": {
+              "id": "n_v86_food_zahar_pudra",
+              "label": "Zahăr pudră"
+            },
+            "target": {
+              "id": "n_v87_food_tort_diplomat",
+              "label": "Tort Diplomat",
+              "description": "Desert rece cu cremă aerată, fructe și blat sau pișcoturi."
+            },
+            "current": {
+              "id": "n_v86_food_zahar_pudra",
+              "label": "Zahăr pudră"
+            },
+            "path": [
+              {
+                "id": "n_v86_food_zahar_pudra",
+                "label": "Zahăr pudră"
+              }
+            ],
+            "moves": 0,
+            "optimal": 2,
+            "won": false,
+            "difficulty": "usor",
+            "choices": [
+              {
+                "label": "Amandină",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cornulețe",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cremșnit",
+                "relation": "prăjitură și pudră dulce"
+              },
+              {
+                "label": "Frișcă",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Gogoși",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Pișcot",
+                "relation": "legătură directă"
+              }
+            ],
+            "backtrack_recommended": false
+          },
+          "steps": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v87_food_piscot",
+                "label": "Pișcot"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v86_food_zahar_pudra",
+                  "label": "Zahăr pudră"
+                },
+                {
+                  "id": "n_v87_food_piscot",
+                  "label": "Pișcot",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Tort Diplomat",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v87_food_tort_diplomat",
+                "label": "Tort Diplomat"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v86_food_zahar_pudra",
+                  "label": "Zahăr pudră"
+                },
+                {
+                  "id": "n_v87_food_piscot",
+                  "label": "Pișcot",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v87_food_tort_diplomat",
+                  "label": "Tort Diplomat",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "script_sha256": "5d682362d88f08d96e3a70d1a87e1acd1205a157f1e1baa6ead4955bad6fbef9"
+}

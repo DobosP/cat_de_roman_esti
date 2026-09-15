@@ -1,0 +1,286 @@
+{
+  "scope": "Author fixed-target API probes, not independent review or public selection.",
+  "targets": [
+    {
+      "target": "n_v23via_penar",
+      "label": "Penar",
+      "incoming": [
+        {
+          "id": "n_v23via_ghiozdan",
+          "label": "Ghiozdan"
+        },
+        {
+          "id": "n_v23via_tabla_scolara",
+          "label": "Tablă școlară"
+        },
+        {
+          "id": "n_v3lit_carte",
+          "label": "Carte"
+        },
+        {
+          "id": "n_v3soc_scoala",
+          "label": "Școală"
+        },
+        {
+          "id": "n_v4soc_copil",
+          "label": "copil"
+        }
+      ],
+      "reachable": 2353,
+      "responsive": 2028,
+      "steps": [
+        {
+          "text": "școală",
+          "guess": {
+            "id": "n_v3soc_scoala",
+            "label": "Școală",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "creion",
+          "guess": {
+            "id": "n_v24_school_writing_creion",
+            "label": "Creion",
+            "distance": 2,
+            "rank": 39,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "pix",
+          "guess": {
+            "id": "n_v24_school_writing_pix",
+            "label": "Pix",
+            "distance": 2,
+            "rank": 39,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "stilou",
+          "guess": {
+            "id": "n_v24_school_supplies_stilou",
+            "label": "Stilou",
+            "distance": 2,
+            "rank": 11,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "radieră",
+          "guess": {
+            "id": "n_v24_school_supplies_radiera",
+            "label": "Radieră",
+            "distance": 2,
+            "rank": 11,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "ghiozdan",
+          "guess": {
+            "id": "n_v23via_ghiozdan",
+            "label": "Ghiozdan",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "caiet",
+          "guess": {
+            "id": "n_v24_school_writing_caiet",
+            "label": "Caiet",
+            "distance": 2,
+            "rank": 39,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 7
+          },
+          "won": false
+        },
+        {
+          "text": "elev",
+          "guess": {
+            "id": "n_v4soc_elev",
+            "label": "elev",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 8
+          },
+          "won": false
+        },
+        {
+          "text": "Penar",
+          "guess": {
+            "id": "n_v23via_penar",
+            "label": "Penar",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 9
+          },
+          "won": true
+        }
+      ]
+    },
+    {
+      "target": "n_v32_workshop_hand_cleste",
+      "label": "Clește",
+      "incoming": [
+        {
+          "id": "n_v24_action_routine_a_lucra",
+          "label": "A lucra"
+        },
+        {
+          "id": "n_v32_workshop_fastener_cui",
+          "label": "Cui"
+        },
+        {
+          "id": "n_v32_workshop_fastener_surub",
+          "label": "Șurub"
+        },
+        {
+          "id": "n_v32_workshop_hand_ciocan",
+          "label": "Ciocan"
+        },
+        {
+          "id": "n_v32_workshop_hand_surubelnita",
+          "label": "Șurubelniță"
+        }
+      ],
+      "reachable": 2359,
+      "responsive": 657,
+      "steps": [
+        {
+          "text": "ciocan",
+          "guess": {
+            "id": "n_v32_workshop_hand_ciocan",
+            "label": "Ciocan",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "șurubelniță",
+          "guess": {
+            "id": "n_v32_workshop_hand_surubelnita",
+            "label": "Șurubelniță",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "cui",
+          "guess": {
+            "id": "n_v32_workshop_fastener_cui",
+            "label": "Cui",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "șurub",
+          "guess": {
+            "id": "n_v32_workshop_fastener_surub",
+            "label": "Șurub",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "a lucra",
+          "guess": {
+            "id": "n_v24_action_routine_a_lucra",
+            "label": "A lucra",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "atelier",
+          "guess": {
+            "id": "ctxp_7697a452c18fc6220fe0",
+            "label": "Atelier",
+            "distance": 4,
+            "rank": 99,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "foarfecă",
+          "guess": {
+            "id": "ctxp_827db53f17f1c99e1b1c",
+            "label": "Foarfecă",
+            "distance": 5,
+            "rank": 223,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 7
+          },
+          "won": false
+        },
+        {
+          "text": "Clește",
+          "guess": {
+            "id": "n_v32_workshop_hand_cleste",
+            "label": "Clește",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 8
+          },
+          "won": true
+        }
+      ]
+    }
+  ]
+}

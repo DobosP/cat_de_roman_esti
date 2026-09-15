@@ -1,0 +1,133 @@
+{
+ "id": "lt_gastronomie_243",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "be42ef03819dec788319e0cdbd4f48897d24a1c3022f69e0f786fcfe864bce93",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+ "start": {
+  "id": "n_v84_food_cuptor",
+  "label": "Cuptor de bucătărie",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.85,
+  "degree": 6,
+  "incoming_degree": 2,
+  "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor."
+ },
+ "target": {
+  "id": "n_v90_food_firimitura",
+  "label": "Firimitură",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9,
+  "degree": 2,
+  "incoming_degree": 2,
+  "description": "Bucățică foarte mică desprinsă din pâine sau din alt aliment, de exemplu dintr-un biscuit."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v84_food_cuptor",
+     "label": "Cuptor de bucătărie"
+    },
+    {
+     "id": "n_v24_food_snack_biscuit",
+     "label": "Biscuit"
+    },
+    {
+     "id": "n_v90_food_firimitura",
+     "label": "Firimitură"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v84_food_cuptor",
+      "label": "Cuptor de bucătărie"
+     },
+     "to": {
+      "id": "n_v24_food_snack_biscuit",
+      "label": "Biscuit"
+     },
+     "relation": "preparation_tool",
+     "label": "coace",
+     "display_label": "legătură directă",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v24_food_snack_biscuit",
+      "label": "Biscuit"
+     },
+     "to": {
+      "id": "n_v90_food_firimitura",
+      "label": "Firimitură"
+     },
+     "relation": "crumbles_into",
+     "label": "poate lăsa bucățele mici la rupere sau consum",
+     "display_label": "legătură directă",
+     "strength": 0.85
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v84_food_cuptor",
+     "label": "Cuptor de bucătărie"
+    },
+    {
+     "id": "n_v4gas_paine",
+     "label": "Pâine"
+    },
+    {
+     "id": "n_v90_food_firimitura",
+     "label": "Firimitură"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v84_food_cuptor",
+      "label": "Cuptor de bucătărie"
+     },
+     "to": {
+      "id": "n_v4gas_paine",
+      "label": "Pâine"
+     },
+     "relation": "used_to_cook",
+     "label": "coace",
+     "display_label": "legătură directă",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v4gas_paine",
+      "label": "Pâine"
+     },
+     "to": {
+      "id": "n_v90_food_firimitura",
+      "label": "Firimitură"
+     },
+     "relation": "crumbles_into",
+     "label": "lasă bucățele mici când se taie sau se rupe",
+     "display_label": "legătură directă",
+     "strength": 0.85
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:d7d6017dfb5cc2e4d7ff7470d23ec4f09812c40e01c162996728d7f88b5e5590"
+}

@@ -1,0 +1,159 @@
+{
+  "kind": "v95-independent-empty-pair-browser-v1",
+  "reviewer": "codex-v95-independent-world-quality",
+  "date": "2026-09-16",
+  "candidateOrigin": "http://127.0.0.1:8150",
+  "baselineOrigin": "http://127.0.0.1:8160",
+  "passed": true,
+  "source_sha256": {
+    "frontend/src/screens/AlchimieExplore.tsx": "f7180f1068c628aeb34a7f1b08da2d25578e0b4355aee00e20db6c185294a23e",
+    "frontend/src/api/alchimieExplore.ts": "15a0a1208318968d2f4b3888167f2bdd71ac9247954c0916b8249134055cc55e",
+    "frontend/src/styles/alchimie-explore.css": "59b8c4788e7be48905c1579890a707f9f1b3b9c2b3b5ff4d63b44281594e8332",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "7e3e770f7788786948ee74e5c87c991d3b88bd1d34b4b082e918f68b391c3788",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "d7b6fb1545efcdd13d96856cd0c0a3e75eca3d9071d60f4be0e7da7e1bf930b7"
+  },
+  "served_assets": [
+    {
+      "file": "assets/index-DhQwTrQw.js",
+      "sha256": "2d0c6980fc386bba59de645628a5f236c690827691d324cde0331e4feef9c826"
+    },
+    {
+      "file": "assets/index-D9HNWgEs.css",
+      "sha256": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2"
+    },
+    {
+      "file": "assets/Alchimie-ByDMcNy6.js",
+      "sha256": "6f26cf8111e829b157494983cf26667bb8997815d8d40a7e54f754f963339296"
+    },
+    {
+      "file": "assets/Alchimie-C3_w2vL6.css",
+      "sha256": "e1c099a2852fb0203d08c357736c2dfb40ca0c2ef16eb812f8ee81b5da41bdfe"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "baseline-repeat",
+      "combineRequests": 2,
+      "world": {
+        "id": "bucataria-romaneasca-v1",
+        "title": "Bucătăria românească",
+        "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+        "total_concepts": 242,
+        "total_recipes": 332
+      },
+      "marked": false,
+      "feedback": "Perechea nu are încă o rețetă. Încearcă alt ingredient; nu pierzi nimic.",
+      "screenshot": "baseline-mobile.png",
+      "pageErrors": [],
+      "screenshot_sha256": "faba7510838ae766c20f226724e280825804406dd38974c3ab9c2a6a3fb23a30"
+    },
+    {
+      "scenario": "candidate-repeat",
+      "combineRequests": 1,
+      "world": {
+        "id": "bucataria-romaneasca-v1",
+        "title": "Bucătăria românească",
+        "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+        "total_concepts": 247,
+        "total_recipes": 342
+      },
+      "marked": true,
+      "feedback": "Făină + Cheag alimentar: ai încercat deja această pereche fără rezultat. Alege alt ingredient.",
+      "screenshot": "candidate-mobile.png",
+      "pageErrors": [],
+      "screenshot_sha256": "9bea7e1715c84e9303b7b2c06a1a29a0f03c551e08a3122dfb74bc5063cd642a"
+    },
+    {
+      "scenario": "narrow-keyboard-reverse-drag",
+      "width": 320,
+      "zoom": 200,
+      "noPostOnLocal": true,
+      "saveUnchanged": true,
+      "geometry": {
+        "viewport": 320,
+        "documentWidth": 320,
+        "screenWidth": 320,
+        "screenScrollWidth": 320,
+        "rootFont": "32px",
+        "elements": [
+          {
+            "text": "Cheag alimentar + Făină: ai încercat deja această pereche fără rezultat. Alege alt ingredient.",
+            "left": 31,
+            "right": 289,
+            "top": -155.046875,
+            "bottom": 147.140625,
+            "clientWidth": 255,
+            "scrollWidth": 255,
+            "clientHeight": 302,
+            "scrollHeight": 302
+          },
+          {
+            "text": "FăinăÎncercat",
+            "left": 31,
+            "right": 155,
+            "top": 416.171875,
+            "bottom": 507.96875,
+            "clientWidth": 122,
+            "scrollWidth": 122,
+            "clientHeight": 90,
+            "scrollHeight": 90
+          },
+          {
+            "text": "Făină",
+            "left": 54,
+            "right": 132,
+            "top": 427.171875,
+            "bottom": 464.765625,
+            "clientWidth": 78,
+            "scrollWidth": 78,
+            "clientHeight": 38,
+            "scrollHeight": 38
+          },
+          {
+            "text": "Încercat",
+            "left": 50.5,
+            "right": 135.5,
+            "top": 469.765625,
+            "bottom": 496.96875,
+            "clientWidth": 85,
+            "scrollWidth": 85,
+            "clientHeight": 27,
+            "scrollHeight": 27
+          }
+        ]
+      },
+      "screenshot": "narrow-keyboard.png",
+      "pageErrors": [],
+      "screenshot_sha256": "82c832a5bab38ba5bf9fa40ff33b20b2546a4a8b094c31004d70152bb40866e0"
+    },
+    {
+      "scenario": "lost-response-not-committed",
+      "observedCount": 0,
+      "postCount": 1,
+      "getRecoveryCount": 1,
+      "pageErrors": []
+    },
+    {
+      "scenario": "lost-response-committed",
+      "observedCount": 1,
+      "postCount": 1,
+      "getRecoveryCount": 1,
+      "pageErrors": []
+    },
+    {
+      "scenario": "reload-expired-save",
+      "liveReloadRetainedMark": true,
+      "restoredCrafts": 1,
+      "restoredEmptyPairs": 0,
+      "pageErrors": []
+    },
+    {
+      "scenario": "freshness-not-renewed-by-local-repeat",
+      "localAt20Seconds": true,
+      "serverRecheckAt31Seconds": true,
+      "pageErrors": []
+    }
+  ],
+  "script_sha256": "8a4e8871097181ca2faf9622c58880ad04ceb8048ad547db5bcbd1281ba5e454"
+}

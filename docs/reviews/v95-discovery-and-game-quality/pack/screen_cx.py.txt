@@ -1,0 +1,7 @@
+exec(open('/home/dobo/work/_temp/feat__v95-discovery-and-game-quality/pack/scout.py').read().split('for labels in')[0])
+import copy
+GROUPS=[('Boabe fierte în mâncăruri',['Orez','Fasole','Mazăre','Arpacaș']),('Se întind pe pâine',['Unt','Miere','Dulceață','Salată de vinete']),('Au coadă',['Lingură','Pian','Vulpe','Cireașă']),('Produc lumină',['Fulger','Lampă','Soare','Bec'])]
+rec=dict(id='preview_v95_cx',difficulty='normal',category='viata_de_roman',status='pending',source='ai',groups={f'g{i}':[s.resolve(x) for x in labels] for i,(_,labels) in enumerate(GROUPS)},group_labels={f'g{i}':label for i,(label,_)in enumerate(GROUPS)})
+rec['order']=[n for g in rec['groups'].values() for n in g];p['conexiuni'].append(rec)
+f,_,selected=c.run(p,s,st,r,['conexiuni'],{'pending'},{rec['id']});print(json.dumps(f,ensure_ascii=False,indent=2))
+for game,rec,lint in selected:print(json.dumps(c.build_dossier(rec,game,s,st,lint,r),ensure_ascii=False,indent=2))

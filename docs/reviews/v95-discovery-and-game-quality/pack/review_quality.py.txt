@@ -1,0 +1,36 @@
+"""Independent complete raw-pack quality decisions; this reviewer did not author pack."""
+import hashlib
+import json
+from pathlib import Path
+
+OUT=Path(__file__).resolve().parent
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def write(p,v):p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+decisions={
+ 'viata_de_roman':[
+  {'ref':'conexiuni[0]','verdict':'keep',
+   'note':'B1–B9 and A1–A7 pass for normal pending staging. The first quartet names the familiar cooked-grain form shared by two cereals and two legumes, without falsely calling them all cereals. Bread spreads are ordinary uses of all four items; the stored eggplant-salad identity is explicitly the cooked spread. Sun, lightning, lamp and bulb all produce light; lamp/bulb is one assembly relationship within one group, not mirrored cross-groups. The last quartet has the conventional Romanian coadă senses: animal appendage, fruit stalk, utensil handle and grand-piano body. Pot avea correctly accommodates piano variants. None of the grain/spread/light tiles supplies a comparably ordinary fifth coadă member; arbitrary physical possibilities or plant stems do not overturn the whole partition. Cireașă can make jam, but the tile is the fruit, not a ready spread, and does not fit the boiled grain predicate. Three recognizable anchors and one shared-word trick provide a real difficulty gradient; Arpacaș is the one less everyday name alongside three common foods. No name leaks, raw unfair tiles, contested tiles, forbidden quad reuse or eight-tile reskin appears in the exact dossiers and archived comparisons. I independently reran prospective strict lint and solved all four groups through fresh BFF calls with four lives.',
+   'sources':['https://dexonline.ro/definitie/coad%C4%83','https://dexonline.ro/definitie/pian']},
+  {'ref':'contexto[0]','verdict':'keep',
+   'note':'C1–C6 and A1–A7 pass for an easy, concrete school object. The actual description identifies a writing-tool case, with no factual embellishment. All five native predecessors are recognizable school concepts. Independent actual guesses show school rank2, schoolbag4, pupil10, pen/eraser11, and pencil/ballpoint/notebook39. These are coherent broad and specific approaches to the answer. Generic rechizite is unknown and uncharged: retained dictionary debt, but the many familiar school and contents routes satisfy C3/C4 without that word. Exact Penar wins; no hidden-answer disclosure is needed. Current and archived raw novelty checks contain no previous target.',
+   'sources':['https://dexonline.ro/definitie/penar']},
+  {'ref':'contexto[1]','verdict':'keep',
+   'note':'C1–C6 pass with explicit vocabulary debt. Clește is a widely recognized hand tool; the dictionary supports the actual two-arm gripping/bending/cutting description as a tool family. The crab-claw sense is secondary in this workshop context, not an equal competing standalone target. Five native incoming concepts satisfy the floor and are individually familiar. My broader independent BFF challenge found metal hot at9 and a repara hot at3 in addition to hammer/screwdriver hot3 and nail/screw hot10. Thus a naive player can enter through material, action or familiar neighboring tools, not only a hidden five-node list. Unealtă, fier, scule and reparație are unknown and uncharged; fier suggests fluier and reparație suggests pârâu, irrelevant but visibly optional suggestions rather than accepted semantic corrections. Mână is very cold1564, foarfecă lukewarm223 and atelier lukewarm99. These imperfections remain debt; they do not erase the six plainly inferable hot guesses or violate the one-obvious-opener rule. Plural clești resolves exactly and wins. Keep for staging, with actual allocated-ID review still required; this does not approve the unknown-word coverage generally.',
+   'sources':['https://dexonline.ro/definitie/cle%C8%99te']},
+ ],
+ 'gastronomie':[
+  {'ref':'lant[0]','verdict':'keep',
+   'note':'D1–D5 and A1–A7 pass for easy. Cuptor de bucătărie and Firimitură are independently recognizable, exact descriptions are ordinary and accurate, and the two-hop bridge is causal rather than category hopping: an oven bakes bread or biscuits; either yields crumbs when cut/broken/eaten. Both separate first hops remain valid, so no single intermediate choke point exists. The crumb endpoint is different enough from the appliance to give a small satisfying discovery arc appropriate to easy. I independently replayed both complete shortest paths through actual BFF GET/move calls and both won in two moves. Displayed relation phrases remain generic legacy captions, not false factual statements; the dossier retains the precise source predicates. No current/rejected/raw pair duplicate exists in either direction.',
+   'sources':['https://media3.bsh-group.com/Documents/9001253126_A.pdf','https://dexonline.ro/definitie/firimitur%C4%83']},
+  {'ref':'lant[1]','verdict':'keep',
+   'note':'D1–D5 and A1–A7 pass for easy. Powdered sugar and Tort Diplomat are everyday baking concepts, and the actual target description accurately allows chilled airy fruit cream with sponge or ladyfingers. Two different familiar intermediates support the two-hop bridge: sweetened whipped cream becomes a cream ingredient, while powdered sugar coats some ladyfingers used around the cake. Robert Eisler’s original recipe explicitly demonstrates both the powdered ladyfingers and powdered-sugar whipped topping; the graph variant qualifiers avoid universal recipe claims. Both branches have independently successful fresh BFF replays. The single continuation from ladyfinger is not a global choke point because the separate whipped-cream branch remains available. This is ingredient-to-preparation reasoning, not a bare taxonomy shortcut; easy difficulty is honest. No reused endpoint pair exists in current/rejected/raw inventories.',
+   'sources':['https://www.roberteisler.ro/retete/tort-diplomat']},
+ ]}
+probe=sha(OUT/'independent-raw-quality-probe.json')
+for category,items in decisions.items():
+ p=OUT/'candidates'/category/'candidates.json'
+ write(p.parent/'verify_quality.json',{'category':category,'candidate_sha256':'sha256:'+sha(p),
+       'reviewer':'v95-independent-pack-quality-world-author',
+       'coverage_note':'Independent complete universal/B/C/D review of all five raw proposals. Fresh fixed-proposal API sessions and strict prospective lint are separately bound. keep permits pending staging only, not promotion. No Alchimie world content was reviewed by its author.',
+       'instances':items,'independent_probe_sha256':probe})
+print('Wrote complete exact-bound raw quality reviews: five keep, zero rejects; explicit dictionary debt retained.')

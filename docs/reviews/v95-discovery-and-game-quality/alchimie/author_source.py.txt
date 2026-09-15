@@ -1,0 +1,57 @@
+"""Original V95 proposals; author notes, never independent approval."""
+from pathlib import Path
+import hashlib
+import json
+import pprint
+import sys
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT = Path(__file__).resolve().parent
+S = {
+    'negresa_cacao': 'https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/negresa-de-post.html',
+    'negresa_ciocolata': 'https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/negresa-cu-cheesecake-si-zmeura-reteta-video.html',
+    'crema': 'https://bucate-aromate.ro/2023/08/crema-de-zahar-ars/',
+    'paste_dulci': 'https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/budinca-de-taitei-cu-branza-la-cuptor.html',
+    'paste_sarate': 'https://www.protv.ro/emisiuni/vorbeste-lumea/articol/126330-majda-a-gatit-macaroane-cu-branza-la-vorbeste-lumea-reteta-rapida-gata-in-mai-putin-de-o-ora-care-cucereste-pe-toata-lumea',
+    'pavlova': 'https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/prajitura-pavlova.html',
+    'profiterol': 'https://pofta-buna.com/profiterol-cu-inghetata-frisca-si-ciocolata/',
+}
+concept_rows = [
+    ('Negresă', 'negresa', 'Prăjitură coaptă în tavă, cu cacao sau ciocolată în compoziție, tăiată de obicei în bucăți pătrate.', ['negresa_cacao', 'negresa_ciocolata']),
+    ('Cremă de zahăr ars', 'crema_zahar_ars', 'Desert din ouă, lapte și zahăr, copt într-un vas tapetat cu caramel, apoi răcit și răsturnat.', ['crema']),
+    ('Budincă de paste', 'budinca_paste', 'Preparat din paste fierte, legate cu ou și lactate, apoi coapte; poate fi dulce, cu stafide, sau sărat.', ['paste_dulci', 'paste_sarate']),
+    ('Pavlova', 'pavlova', 'Desert dintr-un blat de bezea copt și răcit, acoperit cu frișcă și fructe.', ['pavlova']),
+    ('Profiterol', 'profiterol', 'Desert cu mici coji coapte din aluat opărit, umplute cu cremă și servite cu sos de ciocolată, adesea și cu înghețată.', ['profiterol']),
+]
+rows = [
+    ('negresa-faina-cacao', 'Făină', 'Cacao', 'Negresă', 'Făina și cacaua se amestecă cu zahăr, apă, ulei și un agent de creștere; compoziția se coace în tavă pentru o negresă de post.', 'negresa_cacao'),
+    ('negresa-ciocolata-unt', 'Ciocolată', 'Unt', 'Negresă', 'Ciocolata topită cu unt se încorporează în ouă bătute cu zahăr și făină; compoziția coaptă în tavă formează baza unei negrese.', 'negresa_ciocolata'),
+    ('crema-zahar-ars-caramel-ou', 'Caramel', 'Ou', 'Cremă de zahăr ars', 'Ouăle amestecate cu lapte, zahăr și vanilie se toarnă într-un vas tapetat cu caramel; crema se coace în baie de apă și se răcește.', 'crema'),
+    ('crema-zahar-ars-caramel-lapte', 'Caramel', 'Lapte', 'Cremă de zahăr ars', 'Laptele se amestecă cu ouă, zahăr și vanilie, apoi se coace într-un vas cu caramel, așezat în apă; crema răcită se răstoarnă.', 'crema'),
+    ('budinca-paste-branza-ou', 'Paste cu brânză', 'Ou', 'Budincă de paste', 'Pastele fierte amestecate cu brânză se leagă cu ou și smântână, apoi se coc până când compoziția se încheagă într-o budincă.', 'paste_sarate'),
+    ('budinca-paste-stafide', 'Paste', 'Stafide', 'Budincă de paste', 'Pastele fierte se amestecă cu brânză dulce, ou, zahăr și stafide hidratate în apă; se coc într-un vas uns pentru o budincă dulce.', 'paste_dulci'),
+    ('pavlova-bezea-frisca', 'Bezea', 'Frișcă', 'Pavlova', 'Blatul de bezea deja copt și răcit se acoperă cu frișcă bătută și fructe proaspete, alcătuind o Pavlova.', 'pavlova'),
+    ('pavlova-bezea-fruct', 'Bezea', 'Fruct', 'Pavlova', 'Fructele tăiate se așază peste frișcă pe un blat de bezea copt și răcit; desertul se montează înainte de servire.', 'pavlova'),
+    ('profiterol-oparit-inghetata', 'Aluat opărit', 'Înghețată', 'Profiterol', 'Aluatul opărit se coace în mici forme rotunde; cojile răcite se umplu cu cremă și se servesc cu înghețată și sos de ciocolată.', 'profiterol'),
+    ('profiterol-oparit-ganache', 'Aluat opărit', 'Ganache', 'Profiterol', 'Din aluat opărit se coc mici coji rotunde, umplute cu cremă după răcire; un ganache fluid le acoperă ca sos de ciocolată.', 'profiterol'),
+]
+
+def write_source():
+    concepts = {label: {'id': 'alw_food_' + slug, 'description': description, 'sources': [S[key] for key in refs]}
+                for label, slug, description, refs in concept_rows}
+    raw = {'kind': 'v95-alchimie-author-proposals', 'concepts': concepts,
+           'recipes': [{'id': r[0], 'pair_labels': list(r[1:3]), 'result_label': r[3],
+                        'explanation': r[4], 'sources': [S[r[5]]]} for r in rows]}
+    (OUT / 'raw/proposals.json').write_text(json.dumps(raw, ensure_ascii=False, sort_keys=True, indent=2) + '\n')
+    path = ROOT / 'scripts/alchimie_discovery_recipe_source.py'
+    source = path.read_text()
+    marker = '\n# V95: familiar desserts with two approaches and reuse of prepared ingredients.\n'
+    assert marker not in source, 'V95 has already been authored'
+    source += marker
+    source += 'WORLD_CONCEPTS.update(\n' + pprint.pformat(concepts, width=99, sort_dicts=False) + '\n)\n'
+    source += 'RECIPES.extend(\n' + pprint.pformat([r[:5] for r in rows], width=99, sort_dicts=False) + '\n)\n'
+    source += 'RECIPE_SOURCES.update(\n' + pprint.pformat({r[0]: [S[r[5]]] for r in rows}, width=99, sort_dicts=False) + '\n)\n'
+    path.write_text(source)
+
+if __name__ == '__main__':
+    write_source()

@@ -1,1 +1,0 @@
-import{w as e}from"./index-J_99uYN0.js";import"./GameOptions-D60I76eq.js";var t=e();function n({children:e,summary:n=`Personalizează jocul`}){return(0,t.jsxs)(`details`,{className:`game-setup-options`,children:[(0,t.jsx)(`summary`,{children:n}),(0,t.jsx)(`div`,{className:`game-setup-options-content`,children:e})]})}export{n as t};

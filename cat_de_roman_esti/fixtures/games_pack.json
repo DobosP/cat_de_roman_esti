@@ -3,15 +3,15 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 242,
-   "contexto": 261,
-   "lant": 119,
+   "conexiuni": 243,
+   "contexto": 263,
+   "lant": 121,
    "alchimie": 83
   },
   "id_high_water": {
-   "conexiuni": 371,
-   "contexto": 373,
-   "lant": 242,
+   "conexiuni": 372,
+   "contexto": 375,
+   "lant": 244,
    "alchimie": 107
   }
  },
@@ -13809,6 +13809,63 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v3gas_orez",
+     "n_v4gas_fasole",
+     "n_v24_food_garden_veg_mazare",
+     "n_v84_food_arpacas"
+    ],
+    "g2": [
+     "n_v24_food_breakfast_unt",
+     "n_v24_food_breakfast_miere",
+     "n_v17gas_dulceata",
+     "n_gas_salata_vinete"
+    ],
+    "g3": [
+     "n_v24_weather_storm_fulger",
+     "n_v24_home_appliances_lampa",
+     "n_v24_nature_sky_soare",
+     "n_v33_electric_light_bec"
+    ],
+    "g4": [
+     "n_v30_kitchen_utensil_lingura",
+     "n_v3muz_pian",
+     "n_v33_forest_animal_vulpe",
+     "n_v24_food_small_fruit_cireasa"
+    ]
+   },
+   "group_labels": {
+    "g1": "Boabe fierte în mâncăruri",
+    "g2": "Se întind pe pâine",
+    "g3": "Produc lumină",
+    "g4": "Pot avea coadă"
+   },
+   "order": [
+    "n_v24_nature_sky_soare",
+    "n_v33_electric_light_bec",
+    "n_v24_food_small_fruit_cireasa",
+    "n_v3muz_pian",
+    "n_v30_kitchen_utensil_lingura",
+    "n_v17gas_dulceata",
+    "n_v24_weather_storm_fulger",
+    "n_v33_forest_animal_vulpe",
+    "n_v84_food_arpacas",
+    "n_gas_salata_vinete",
+    "n_v24_food_garden_veg_mazare",
+    "n_v4gas_fasole",
+    "n_v3gas_orez",
+    "n_v24_food_breakfast_miere",
+    "n_v24_food_breakfast_unt",
+    "n_v24_home_appliances_lampa"
+   ],
+   "id": "cx_viata_de_roman_372",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -15899,6 +15956,22 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v23via_penar",
+   "id": "ct_viata_de_roman_374",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v32_workshop_hand_cleste",
+   "id": "ct_viata_de_roman_375",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "lant": [
@@ -16178,6 +16251,26 @@
    "target": "n_gas_sarmale",
    "optimal": 2,
    "id": "lt_gastronomie_241",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_v84_food_cuptor",
+   "target": "n_v90_food_firimitura",
+   "optimal": 2,
+   "id": "lt_gastronomie_243",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_v86_food_zahar_pudra",
+   "target": "n_v87_food_tort_diplomat",
+   "optimal": 2,
+   "id": "lt_gastronomie_244",
    "category": "gastronomie",
    "source": "ai",
    "status": "approved"

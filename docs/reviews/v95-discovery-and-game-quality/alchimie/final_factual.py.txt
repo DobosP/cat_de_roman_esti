@@ -1,0 +1,39 @@
+"""Bind factual acceptance to the reproduced catalog and current live audit."""
+import hashlib
+import json
+import sys
+from pathlib import Path
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT = Path(__file__).resolve().parent
+sys.path[:0] = [str(ROOT), str(ROOT / 'scripts')]
+import build_alchimie_discovery_world as B
+import audit_alchimie_discovery_world as A
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p): return json.loads(p.read_bytes())
+proposal_path = OUT / 'proposed-catalog.json'
+catalog = read(proposal_path)
+factual = read(OUT / 'factual-review.json')
+quality = read(OUT / 'quality-review.json')
+assert factual['reviewer'] == 'codex-v95-independent-world-factual'
+assert quality['reviewer'] != factual['reviewer']
+assert proposal_path.read_bytes() == B.json_bytes(B.build_catalog(OUT / 'candidate.json', OUT / 'factual-review.json', OUT / 'quality-review.json'))
+live_path = OUT / 'live-audit.json'
+live = read(live_path)
+assert live == A.audit(proposal_path)
+assert live['catalog_sha256'] == sha(proposal_path)
+for source in live['runtime_sources']:
+    assert source['sha256'] == sha(ROOT / source['path'])
+baseline_path = ROOT / 'docs/reviews/v94-words-and-clearer-connections/alchimie/catalog.json'
+assert sha(baseline_path) == '8b174e16edf6ad279f9fa6cc0328776cba033be0b177c849ad77d81ec603da89'
+baseline = read(baseline_path)
+for key in ('concepts', 'recipes'):
+    current = {r['id']: r for r in catalog[key]}
+    assert all(current[r['id']] == r for r in baseline[key])
+assert len(baseline['concepts']) == 242 and len(baseline['recipes']) == 332
+assert len(live['goal_replays']) == 33 and len(live['compatible_save_replays']) == 7
+assert live['compatible_save_replays'][-1]['previous_owned'] == 242
+assert live['compatible_save_replays'][-1]['prefixes_preserved'] == 138
+final = {'kind': B.FINAL_REVIEW_KIND, 'role': 'factual', 'reviewer': factual['reviewer'], 'catalog_sha256': sha(proposal_path), 'audit_sha256': sha(live_path), 'verdict': 'accept', 'rationale': 'The exact proposed 247-concept/342-recipe catalog reproduces both complete semantic reviews. All 242 prior concept records and 332 prior installed recipe records remain exact. Independently reproduced the current live audit: all 342 recipes, 33 free/optional-goal traversals and every earned prefix across seven previous saved books pass. All nine runtime bindings match. The five new descriptions and ten recipe ideas retain the independently checked factual cooking/assembly stages; additional water-hydration provenance is confined to the new raisin recipe. Reachability, hidden-target privacy and restoration pass. This does not establish human enjoyment or physical-device acceptance.'}
+(OUT / 'final-factual.json').write_bytes(B.json_bytes(final))
+(OUT / 'final-factual-check.json').write_bytes(B.json_bytes({'passed': True, 'catalog_sha256': sha(proposal_path), 'audit_sha256': sha(live_path), 'reproduced_live_audit_exact': True, 'old_installed_concepts_exact': 242, 'old_installed_recipes_exact': 332, 'current_runtime_sources': 9, 'goal_replays': 33, 'save_generations': 7, 'v94_earned_entries_preserved': 138, 'source_sha256': sha(Path(__file__))}))
+print(json.dumps({'catalog_sha256': sha(proposal_path), 'audit_sha256': sha(live_path), 'final_review_sha256': sha(OUT / 'final-factual.json'), 'metrics': live['metrics']}))

@@ -1,0 +1,89 @@
+"""Independent V95 raw quality probes; fixed proposals, no imports or fixture writes."""
+import copy
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT = Path(__file__).resolve().parent
+sys.path[:0] = [str(ROOT), str(ROOT/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from django.test import Client
+import critique_pack as C
+from cat_de_roman_esti.wordgames import conexiuni as X, contexto as T, lant as L
+
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def write(path, value): path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
+frozen = json.loads((OUT/'author-freeze.json').read_bytes())
+assert all(sha(OUT/name)==digest for name,digest in frozen['files'].items())
+pack, svc, strong, regions = C.load_all(C.PACKAGE_PACK,C.PACKAGE_KG)
+original = {str(p.relative_to(ROOT)):sha(p) for p in [C.PACKAGE_PACK,C.PACKAGE_KG]}
+records = json.loads((OUT/'preview-records.json').read_bytes())['records']
+prospective = copy.deepcopy(pack)
+for row in records:
+    game = next(g for g in ['conexiuni','contexto','lant'] if '_'+g+'_' in row['id'])
+    prospective[game].append(row)
+findings, _, selected = C.run(prospective,svc,strong,regions,['conexiuni','contexto','lant'],{'pending'},{r['id'] for r in records})
+assert not [f for row in findings.values() for f in row['findings'] if f['level']=='FAIL']
+client=Client(); outputs=[]
+for row in records:
+    if '_conexiuni_' in row['id']:
+        s=X.ConexiuniSession(groups=row['groups'],group_labels=row['group_labels'],order=row['order'],difficulty=row['difficulty'])
+        sid=X.store.create(s); url=f'/api/wordgames/conexiuni/games/{sid}'
+        first=client.get(url).json()
+        assert 'groups' not in first and not first.get('solution')
+        steps=[]
+        for ids in row['groups'].values():
+            r=client.post(url+'/guess',{'ids':ids},content_type='application/json')
+            assert r.status_code==200,r.content
+            steps.append(r.json())
+        assert s.won and s.lives==4
+        outputs.append({'id':row['id'],'all_four_groups_win':True,'initial_hidden':True,'steps':steps})
+    elif '_contexto_' in row['id']:
+        s=T._build_session(row['target'],row['difficulty'],None)
+        sid=T.store.create(s);url=f'/api/wordgames/contexto/games/{sid}'
+        queries=(['școală','creion','pix','stilou','radieră','ghiozdan','caiet','elev','rechizite','Penar']
+                 if svc.label(row['target'])=='Penar' else
+                 ['unealtă','fier','scule','reparație','metal','a repara','ciocan','șurubelniță','cui','șurub','mână','foarfecă','atelier','clești'])
+        steps=[]
+        for q in queries:
+            before=s.attempts;r=client.post(url+'/guess',{'text':q},content_type='application/json')
+            assert r.status_code==200,r.content
+            payload=r.json()
+            if not payload['ok']: assert s.attempts==before
+            steps.append({'input':q,'response':payload})
+        assert s.won
+        outputs.append({'id':row['id'],'target_description':svc.node(row['target']).description,
+                        'incoming':[svc.label(n) for n in C.contexto_incoming_ids(svc,row['target'])],
+                        'reachable':s.reachable,'steps':steps})
+    else:
+        shortest=svc.distance(row['start'],row['target']); dist=svc.distances_to(row['target']); paths=[]
+        def walk(path):
+            if path[-1]==row['target']: paths.append(path); return
+            for nxt in sorted(svc.neighbor_ids(path[-1])):
+                if dist.get(nxt)==shortest-len(path):walk(path+[nxt])
+        walk([row['start']]); assert len(paths)==2
+        routes=[]
+        for path in paths:
+            s=L.LantSession(start=row['start'],target=row['target'],optimal=shortest,difficulty=row['difficulty'],chain=[row['start']])
+            sid=L.store.create(s);url=f'/api/wordgames/lant/games/{sid}';steps=[]
+            initial=client.get(url).json()
+            for nid in path[1:]:
+                r=client.post(url+'/move',{'text':svc.label(nid)},content_type='application/json')
+                assert r.status_code==200 and r.json()['ok'],r.content
+                steps.append(r.json())
+            assert s.won
+            routes.append({'labels':[svc.label(n) for n in path],'initial':initial,'steps':steps})
+        outputs.append({'id':row['id'],'routes':routes})
+assert original=={str(p.relative_to(ROOT)):sha(p) for p in [C.PACKAGE_PACK,C.PACKAGE_KG]}
+write(OUT/'independent-raw-quality-probe.json',{
+    'reviewer':'v95-independent-pack-quality-world-author',
+    'scope':'Independent strict prospective lint, fresh fixed-proposal BFF sessions; no natural selection or allocated-ID approval claim.',
+    'raw_bindings':{p.parent.name:sha(p) for p in (OUT/'candidates').glob('*/candidates.json')},
+    'source_bindings':original,'findings':findings,'checks':outputs,
+    'author_freeze_sha256':sha(OUT/'author-freeze.json')})
+print('Independent raw quality probes pass: five proposals, four ladder routes; fixtures unchanged.')

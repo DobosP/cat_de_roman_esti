@@ -2082,3 +2082,200 @@ BOARDS += ({'id': 'iq92_v94_sleep',
                'Furtun de grădină — Stropitoare (obiecte folosite la udarea plantelor). Fiecare '
                'pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între '
                'perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.'})
+
+
+# V95: fresh functional associations; independent reviews gate installation.
+BOARDS += ({'id': 'iq92_v95_workshop',
+  'game': 'intrusul',
+  'source_id': 'aq92_v95_intrusul_workshop',
+  'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'payload': {'members': ['n_v32_workshop_hand_ciocan',
+                          'n_v32_workshop_hand_cleste',
+                          'n_v32_workshop_hand_surubelnita'],
+              'intruder': 'n_v31_cleaning_dishes_burete_vase',
+              'group_label': 'Unelte de atelier'},
+  'sources': ['https://dexonline.ro/definitie/ciocan',
+              'https://dexonline.ro/definitie/cle%C8%99te',
+              'https://dexonline.ro/definitie/%C8%99urubelni%C8%9B%C4%83',
+              'https://dexonline.ro/definitie/burete%20de%20vase'],
+  'rationale': 'Ciocanul, cleștele și șurubelnița sunt unelte de atelier folosite la lucrul cu '
+               'piese. Buretele de vase este un obiect de curățenie, nu o unealtă de atelier; '
+               'folosirea lui incidentală pentru a șterge o masă de lucru nu îi schimbă funcția '
+               'obișnuită.'},
+ {'id': 'iq92_v95_body',
+  'game': 'intrusul',
+  'source_id': 'aq92_v95_intrusul_body',
+  'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'payload': {'members': ['n_v24_body_limbs_mana',
+                          'n_v24_body_limbs_deget',
+                          'n_v24_body_limbs_picior'],
+              'intruder': 'n_v29_clothing_everyday_camasa',
+              'group_label': 'Părți ale corpului'},
+  'sources': ['https://dexonline.ro/definitie/m%C3%A2n%C4%83',
+              'https://dexonline.ro/definitie/deget',
+              'https://dexonline.ro/definitie/picior',
+              'https://dexonline.ro/definitie/c%C4%83ma%C8%99%C4%83'],
+  'rationale': 'Mâna, degetul și piciorul sunt părți ale corpului. Cămașa este un obiect '
+               'vestimentar purtat pe corp. Nu sunt numite toate membre: degetul este parte a '
+               'unui membru, iar predicatul mai larg este intenționat.'},
+ {'id': 'iq92_v95_tableware',
+  'game': 'intrusul',
+  'source_id': 'aq92_v95_intrusul_tableware',
+  'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'payload': {'members': ['n_v30_kitchen_table_farfurie',
+                          'n_v30_kitchen_table_castron',
+                          'n_v30_kitchen_drink_cana'],
+              'intruder': 'n_v31_cleaning_water_galeata',
+              'group_label': 'Vase folosite la masă'},
+  'sources': ['https://dexonline.ro/definitie/farfurie',
+              'https://dexonline.ro/definitie/castron',
+              'https://dexonline.ro/definitie/can%C4%83',
+              'https://dexonline.ro/definitie/g%C4%83leat%C4%83',
+              'https://dexonline.ro/definitie/vesel%C4%83'],
+  'rationale': 'Farfuria, castronul și cana sunt vase din care se servește în mod obișnuit '
+               'mâncare sau băutură la masă. Găleata este un recipient pentru transport sau lucru '
+               'gospodăresc, nu veselă de masă. Toate sunt recipiente, astfel că forma de vas nu '
+               'rezolvă singură alegerea.'},
+ {'id': 'iq92_v95_floor_cleaning',
+  'game': 'intrusul',
+  'source_id': 'aq92_v95_intrusul_floor_cleaning',
+  'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'payload': {'members': ['n_v31_cleaning_water_galeata',
+                          'n_v31_cleaning_floor_mop',
+                          'n_v31_cleaning_supply_detergent'],
+              'intruder': 'n_v24_home_appliances_lampa',
+              'group_label': 'Folosite la spălarea podelei'},
+  'sources': ['https://dexonline.ro/definitie/g%C4%83leat%C4%83',
+              'https://dexonline.ro/definitie/mop',
+              'https://dexonline.ro/definitie/detergent',
+              'https://dexonline.ro/definitie/lamp%C4%83',
+              'https://www.viledaromania.ro/turbo',
+              'https://s1.kaercher-media.com/documents/datasheets/cleaningagents/ro_RO/0.011-319.0_PI_ro_RO.pdf'],
+  'rationale': 'Găleata ține apa, mopul spală, iar detergentul curăță în spălarea obișnuită a '
+               'podelei. Lampa luminează încăperea și nu este un mijloc de spălare. Eticheta '
+               'numește aceeași utilizare pentru obiecte și produs; nu pretinde că toate sunt '
+               'unelte ori că detergentul este obligatoriu la orice mop.'},
+ {'id': 'pq92_v95_everyday_01',
+  'game': 'perechi',
+  'source_id': 'aq92_v95_perechi_everyday_01',
+  'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'payload': {'pairs': [{'members': ['n_v24_feeling_needs_sete', 'n_v4gas_apa'],
+                         'group_label': 'Nevoie de a bea și lichidul care o potolește'},
+                        {'members': ['n_v32_garden_transport_roaba', 'n_v24_home_outdoor_gradina'],
+                         'group_label': 'Mijloc de transport și locul unde poate căra pământ'},
+                        {'members': ['n_v24_school_supplies_stilou', 'n_v23via_ghiozdan'],
+                         'group_label': 'Instrument de scris și geanta școlară în care se poate '
+                                        'păstra'},
+                        {'members': ['n_v24_people_descendants_fiu',
+                                     'n_v24_people_descendants_fiica'],
+                         'group_label': 'Termeni pentru copilul băiat și copilul fată'}]},
+  'sources': ['https://dexonline.ro/definitie/sete',
+              'https://dexonline.ro/definitie/ap%C4%83',
+              'https://dexonline.ro/definitie/roab%C4%83',
+              'https://dexonline.ro/definitie/gr%C4%83din%C4%83',
+              'https://dexonline.ro/definitie/stilou',
+              'https://dexonline.ro/definitie/ghiozdan',
+              'https://dexonline.ro/definitie/fiu',
+              'https://dexonline.ro/definitie/fiic%C4%83'],
+  'rationale': 'Patru asocieri cotidiene distincte: Sete — Apă; Roabă — Grădină; Stilou — '
+               'Ghiozdan; Fiu — Fiică. Setea nu se potolește cu roaba sau cu ghiozdanul. Apa '
+               'poate uda grădina, dar schimbul lasă Sete fără partener. Fiu/Fiică sunt termenii '
+               'de rudenie, fără a afirma că cei doi au aceiași părinți. Roaba este un mijloc de '
+               'transport în grădină, nu o unealtă care sapă.'},
+ {'id': 'pq92_v95_everyday_02',
+  'game': 'perechi',
+  'source_id': 'aq92_v95_perechi_everyday_02',
+  'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'payload': {'pairs': [{'members': ['n_v24_feeling_needs_foame', 'n_v4gas_mancare'],
+                         'group_label': 'Nevoie de a mânca și ceea ce o potolește'},
+                        {'members': ['n_v32_workshop_cut_fierastrau', 'n_v4sti_copac'],
+                         'group_label': 'Unealtă de tăiat și arborele ale cărui ramuri le poate '
+                                        'tăia'},
+                        {'members': ['n_v29_animal_pets_caine', 'n_v24_home_outdoor_curte'],
+                         'group_label': 'Animal de pază și un spațiu pe care îl poate păzi'},
+                        {'members': ['n_v24_home_textiles_patura', 'n_v24_home_textiles_cearsaf'],
+                         'group_label': 'Obiecte textile folosite la așternutul patului'}]},
+  'sources': ['https://dexonline.ro/definitie/foame',
+              'https://dexonline.ro/definitie/m%C3%A2ncare',
+              'https://dexonline.ro/definitie/fier%C4%83str%C4%83u',
+              'https://dexonline.ro/definitie/copac',
+              'https://dexonline.ro/definitie/c%C3%A2ine',
+              'https://dexonline.ro/definitie/curte',
+              'https://dexonline.ro/definitie/p%C4%83tur%C4%83',
+              'https://dexonline.ro/definitie/cear%C8%99af',
+              'https://www.gardena.com/ro/produse/copac-arbust-ingrijire/ferastraie-ferastrau-de-gradina',
+              'https://dexonline.ro/definitie/c%C3%A2ine/definitii'],
+  'rationale': 'Patru asocieri cotidiene distincte: Foame — Mâncare; Fierăstrău — copac; Câine — '
+               'Curte; Pătură — Cearșaf. Câinele poate mânca, dar Foame ar rămâne fără partener '
+               'dacă Mâncare ar fi cuplată cu animalul. Fierăstrăul taie ramurile copacului; '
+               'curtea este un spațiu, nu material de tăiat. Pătura și cearșaful au folosirea '
+               'comună de așternut, nu aceeași poziție pe pat. Nu se afirmă că orice câine '
+               'locuiește în curte.'},
+ {'id': 'pq92_v95_everyday_03',
+  'game': 'perechi',
+  'source_id': 'aq92_v95_perechi_everyday_03',
+  'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'payload': {'pairs': [{'members': ['n_v24_body_limbs_picior', 'n_v31_body_lower_glezna'],
+                         'group_label': 'Membru inferior și regiunea articulației sale de jos'},
+                        {'members': ['n_v24_nature_sky_soare', 'n_v24_nature_sky_stea'],
+                         'group_label': 'Astrul nostru și tipul de corp ceresc căruia îi '
+                                        'aparține'},
+                        {'members': ['n_v24_action_language_a_scrie',
+                                     'n_v24_school_writing_caiet'],
+                         'group_label': 'Acțiune și suportul cu foi pe care se poate face'},
+                        {'members': ['n_v30_clothing_outer_geaca', 'n_v24_home_storage_dulap'],
+                         'group_label': 'Haină de exterior și mobilierul în care se poate '
+                                        'păstra'}]},
+  'sources': ['https://dexonline.ro/definitie/picior',
+              'https://dexonline.ro/definitie/glezn%C4%83',
+              'https://dexonline.ro/definitie/soare',
+              'https://dexonline.ro/definitie/stea',
+              'https://dexonline.ro/definitie/scrie',
+              'https://dexonline.ro/definitie/caiet',
+              'https://dexonline.ro/definitie/geac%C4%83',
+              'https://dexonline.ro/definitie/dulap',
+              'https://science.nasa.gov/sun/facts/'],
+  'rationale': 'Patru asocieri cotidiene distincte: Picior — Gleznă; Soare — Stea; A scrie — '
+               'Caiet; Geacă — Dulap. Soarele este o stea; nu se confundă Luna cu o stea. Picior '
+               'este membrul inferior în sensul românesc obișnuit, nu doar laba piciorului. '
+               'Scrisul pe alte materiale și depozitarea altor obiecte nu produc o a doua '
+               'împărțire a celor opt cuvinte.'},
+ {'id': 'pq92_v95_everyday_04',
+  'game': 'perechi',
+  'source_id': 'aq92_v95_perechi_everyday_04',
+  'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'payload': {'pairs': [{'members': ['n_v24_nature_sky_luna', 'n_v29_time_daily_noapte'],
+                         'group_label': 'Astru și perioada cu care este asociat pe cer'},
+                        {'members': ['n_v24_food_breakfast_unt', 'n_v18gas_salam_de_biscuiti'],
+                         'group_label': 'Ingredient și desertul în care se folosește'},
+                        {'members': ['n_v24_food_imported_fruit_lamaie',
+                                     'n_v24_food_imported_fruit_portocala'],
+                         'group_label': 'Fructe din grupa citricelor'},
+                        {'members': ['n_v28_body_mouth_dinte', 'n_v31_hygiene_oral_pasta_dinti'],
+                         'group_label': 'Parte a danturii și produsul folosit la curățarea ei'}]},
+  'sources': ['https://dexonline.ro/definitie/lun%C4%83',
+              'https://dexonline.ro/definitie/noapte',
+              'https://dexonline.ro/definitie/unt',
+              'https://dexonline.ro/definitie/salam%20de%20biscui%C8%9Bi',
+              'https://dexonline.ro/definitie/l%C4%83m%C3%A2ie',
+              'https://dexonline.ro/definitie/portocal%C4%83',
+              'https://dexonline.ro/definitie/dinte',
+              'https://dexonline.ro/definitie/past%C4%83%20de%20din%C8%9Bi',
+              'https://astro-urseanu.ro/ghidul-vizitatorului/',
+              'https://jamilacuisine.ro/salam-de-biscuiti-facut-in-casa-reteta-video/',
+              'https://dexonline.ro/definitie/citrice'],
+  'rationale': 'Patru asocieri cotidiene distincte: Lună — Noapte; Unt — Salam de biscuiți; '
+               'Lămâie — Portocală; Dinte — Pastă de dinți. Luna poate fi vizibilă și ziua; '
+               'eticheta exprimă asocierea familiară cu noaptea, fără exclusivitate sau '
+               'promisiunea vizibilității în fiecare noapte. Untul este documentat în varianta '
+               'obișnuită de salam de biscuiți, fără pretenția că orice variantă conține lactate. '
+               'Cele două citrice rămân perechea distinctă; nu sunt ingrediente obligatorii ale '
+               'desertului.'})

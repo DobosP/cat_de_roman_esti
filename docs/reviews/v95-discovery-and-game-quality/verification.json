@@ -1,0 +1,117 @@
+{
+  "kind": "v95-integration-v1",
+  "verified_on": "2026-09-16",
+  "baseline_commit": "cf6b28bc0d247be33e494be1395ca7d676a9f4b4",
+  "branch": "feat/v95-discovery-and-game-quality",
+  "passed": true,
+  "backend_final_frontend_amendment": "Both full Python runs precede the final frontend-only focus fix. Independent closure verifies all Python, data and prior approval inputs remain exact; final frontend checks and full browser replay cover the rebuilt assets.",
+  "new_rounds": {
+    "conexiuni": 1,
+    "contexto": 2,
+    "lant": 2,
+    "intrusul": 4,
+    "perechi": 4
+  },
+  "new_alchimie_words": 5,
+  "new_alchimie_recipes": 10,
+  "new_shared_KG_nodes": 0,
+  "new_per_game_visible_words": {
+    "conexiuni": 9,
+    "intrusul": 10,
+    "perechi": 23
+  },
+  "checks": {
+    "backend_python312": {
+      "passed": 2191,
+      "log": "backend312.log.gz",
+      "sha256": "0d6d6a6c9db6b8830d4fcea35085b08fe2f1323f33ce34b4bed1c1f74e6eed0d"
+    },
+    "backend_python314": {
+      "passed": 2191,
+      "log": "backend314.log.gz",
+      "sha256": "c02790d93f08b467a7625492e3522cd7f4f23f8fdb1fafc2edd94dd82a3adc8f"
+    },
+    "accounts_python312": {
+      "passed": 53,
+      "log": "accounts312.log.gz",
+      "sha256": "c270c8673b03900ece4b4c0d2eb2b75b67d497d066eb4bf6ca7ce42eaeb70f95"
+    },
+    "accounts_python314": {
+      "passed": 53,
+      "log": "accounts314.log.gz",
+      "sha256": "893e791855e3b1a8667619927428a14a16ae8c44ddf8d237175d14951f679910"
+    },
+    "browser_desktop_mobile": {
+      "passed": 528,
+      "log": "browser-tests.log.gz",
+      "sha256": "5e4604e4e2818dabfad4bb380f9f185f0f7288d903b7995d1444073844b0bfd9"
+    },
+    "frontend_native": {
+      "passed": 212,
+      "log": "gui/frontend-tests-after-focus.log.gz",
+      "sha256": "70273272376598a0dcccac85c4d5df8c55f98b6200c62bc5353e23a596ac4ee3"
+    }
+  },
+  "other_green_gates": [
+    "fixture validator",
+    "pack validator",
+    "Ruff",
+    "frontend lint",
+    "frontend typecheck/build/bundle",
+    "documentation checker",
+    "staged whitespace check"
+  ],
+  "initial_gzip_kib": 119.23,
+  "initial_limit_kib": 120,
+  "gate_inputs_sha256": "5065fc603da880dc94f418e783d9c03084f34f8c1fc6cf602e1769557c0fbf3e",
+  "archive_manifest_sha256": "ce3333831fd8055e5a316009640db3805df4e36259a07f29427aa21d83f4062f",
+  "archived_files": 253,
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "b166aa76e2746c5c2f1382889ede528cce25536fb5480c9d21b027cf65c5d319",
+    "cat_de_roman_esti/fixtures/games_pack.json": "27b1dba81a2e02d1e2616a1ad4e6eceefe12d189a86a0913c3655adee99bb3cf",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b4c32d0ff65e024e4bd2e292c03e5382f0927c7c388367bf1f80bd7a3c09a831",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "5e27495fcc34980ced41a7bbd5c0b61d703c459489d08d6b7322dac197fd7e96",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "d7b6fb1545efcdd13d96856cd0c0a3e75eca3d9071d60f4be0e7da7e1bf930b7"
+  },
+  "final_evidence_sha256": {
+    "alchimie/final-factual.json": "5056b627c8f14f7f29683e2e0677a234444824726a1f28ab33d0b7b5ffa2ba86",
+    "alchimie/final-quality.json": "5f75cd9a9466bdd40693e6a2a1b6b6162248c8981881b1e5b2961b597a62b8bd",
+    "alchimie/live-audit.json": "5f880186301d075a5481dfda8f465bf8e4b3dbe8e987a9db7175b9956861a9c7",
+    "quick/final-factual.json": "b70ca088462294c85f8ebd7260c6ae38f91a6b70a2fc8db7e36838a547b70e8e",
+    "quick/final-quality.json": "81ed950aa42358ce3146ad4a509c25461a2fd7fb415beed75f0479435b723f29",
+    "quick/live-audit.json": "76a5b11b054754025c57b42c33f5f0e512be13684e044edad40140a6b5b2bf79",
+    "pack/independent-final-api.json": "0cd53ac1546f6daa9087faad8875f58628b191d7b29e30a8d9bf1e2b1c873f95",
+    "pack/independent-selector-review.json": "916cb0324f5e641fcc816cd838103db172651446887e1f603a85cd3efbd4e7e6",
+    "gui/independent-browser-final/review.json": "56b5dc82fd6388301f35338e8d8ec407d75da33b7606c4082c4a2b3531ce2189",
+    "closure-audit.json": "2979c9c74473432e5223192be7d29819912f1b801d42687e11f8a5dca33e47b1",
+    "artifact-delta.json": "7672de9ef287a7808a12d77d11183b0b3741f6d969998ec026de9367f7fe47e1",
+    "preview-check.json": "83097cd02cae1e1bd52ffa0002e0a32d863931b9b955e4be97c8439086b950f6"
+  },
+  "publication": {
+    "v94_main_commit": "cf6b28bc0d247be33e494be1395ca7d676a9f4b4",
+    "v94_github_ci_run": 35018580589,
+    "v94_ci_conclusion": "success",
+    "v95_landed": false,
+    "v95_pushed": false,
+    "production_commit": "13e49b2c1148bb0aab35cc1e3b023b5bd29c142d"
+  },
+  "limitations": [
+    "Agent reviews and browser simulations do not establish human enjoyment or physical-device acceptance.",
+    "Clește has useful hot openers but several common generic tool words remain unknown.",
+    "New Lanț relation captions remain mostly generic; the existing 101 custom captions are exact.",
+    "Seven of eight quick additions qualify as starters; tableware remains nonstarter."
+  ],
+  "initial_failures": [
+    "New empty-pair test expected400 for a schema-extra field that correctly returns422; test corrected.",
+    "Initial lint flagged a browser-global declaration and a long test signature; corrected.",
+    "Two account quick-game checks per Python ran during catalog replacement and saw503; finalinstalled suites pass.",
+    "Initial analyst artifact had surplus metadata; reviewer moved it to a sidecar and exact schema then passed.",
+    "Two identical cached retries left a stale focus ref that jumped backward after a lost response; synchronous local centering and four regression cases resolve it.",
+    "Initial natural-selection audit proved both newLanțrounds unreachable for anonymous play; reviewedcasualsamplingfix andfreshpublicreplays resolve it."
+  ]
+}

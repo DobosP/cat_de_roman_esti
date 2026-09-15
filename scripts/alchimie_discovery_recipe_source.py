@@ -1612,3 +1612,103 @@ RECIPE_SOURCES.update(
  'tarta-aluat-jeleu': ['https://retete.unica.ro/recipes/tarta-cu-fructe/'],
  'cascaval-pane-pesmet': ['https://www.lauralaurentiu.ro/retete-culinare/aperitive/cascaval-pane-reteta-video.html']}
 )
+
+# V95: familiar desserts with two approaches and reuse of prepared ingredients.
+WORLD_CONCEPTS.update(
+{'Negresă': {'id': 'alw_food_negresa',
+             'description': 'Prăjitură coaptă în tavă, cu cacao sau ciocolată în compoziție, '
+                            'tăiată de obicei în bucăți pătrate.',
+             'sources': ['https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/negresa-de-post.html',
+                         'https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/negresa-cu-cheesecake-si-zmeura-reteta-video.html']},
+ 'Cremă de zahăr ars': {'id': 'alw_food_crema_zahar_ars',
+                        'description': 'Desert din ouă, lapte și zahăr, copt într-un vas tapetat '
+                                       'cu caramel, apoi răcit și răsturnat.',
+                        'sources': ['https://bucate-aromate.ro/2023/08/crema-de-zahar-ars/']},
+ 'Budincă de paste': {'id': 'alw_food_budinca_paste',
+                      'description': 'Preparat din paste fierte, legate cu ou și lactate, apoi '
+                                     'coapte; poate fi dulce, cu stafide, sau sărat.',
+                      'sources': ['https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/budinca-de-taitei-cu-branza-la-cuptor.html',
+                                  'https://www.protv.ro/emisiuni/vorbeste-lumea/articol/126330-majda-a-gatit-macaroane-cu-branza-la-vorbeste-lumea-reteta-rapida-gata-in-mai-putin-de-o-ora-care-cucereste-pe-toata-lumea']},
+ 'Pavlova': {'id': 'alw_food_pavlova',
+             'description': 'Desert dintr-un blat de bezea copt și răcit, acoperit cu frișcă și '
+                            'fructe.',
+             'sources': ['https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/prajitura-pavlova.html']},
+ 'Profiterol': {'id': 'alw_food_profiterol',
+                'description': 'Desert cu mici coji coapte din aluat opărit, umplute cu cremă și '
+                               'servite cu sos de ciocolată, adesea și cu înghețată.',
+                'sources': ['https://pofta-buna.com/profiterol-cu-inghetata-frisca-si-ciocolata/']}}
+)
+RECIPES.extend(
+[('negresa-faina-cacao',
+  'Făină',
+  'Cacao',
+  'Negresă',
+  'Făina și cacaua se amestecă cu zahăr, apă, ulei și un agent de creștere; compoziția se coace '
+  'în tavă pentru o negresă de post.'),
+ ('negresa-ciocolata-unt',
+  'Ciocolată',
+  'Unt',
+  'Negresă',
+  'Ciocolata topită cu unt se încorporează în ouă bătute cu zahăr și făină; compoziția coaptă în '
+  'tavă formează baza unei negrese.'),
+ ('crema-zahar-ars-caramel-ou',
+  'Caramel',
+  'Ou',
+  'Cremă de zahăr ars',
+  'Ouăle amestecate cu lapte, zahăr și vanilie se toarnă într-un vas tapetat cu caramel; crema se '
+  'coace în baie de apă și se răcește.'),
+ ('crema-zahar-ars-caramel-lapte',
+  'Caramel',
+  'Lapte',
+  'Cremă de zahăr ars',
+  'Laptele se amestecă cu ouă, zahăr și vanilie, apoi se coace într-un vas cu caramel, așezat în '
+  'apă; crema răcită se răstoarnă.'),
+ ('budinca-paste-branza-ou',
+  'Paste cu brânză',
+  'Ou',
+  'Budincă de paste',
+  'Pastele fierte amestecate cu brânză se leagă cu ou și smântână, apoi se coc până când '
+  'compoziția se încheagă într-o budincă.'),
+ ('budinca-paste-stafide',
+  'Paste',
+  'Stafide',
+  'Budincă de paste',
+  'Pastele fierte se amestecă cu brânză dulce, ou, zahăr și stafide hidratate în apă; se coc '
+  'într-un vas uns pentru o budincă dulce.'),
+ ('pavlova-bezea-frisca',
+  'Bezea',
+  'Frișcă',
+  'Pavlova',
+  'Blatul de bezea deja copt și răcit se acoperă cu frișcă bătută și fructe proaspete, alcătuind '
+  'o Pavlova.'),
+ ('pavlova-bezea-fruct',
+  'Bezea',
+  'Fruct',
+  'Pavlova',
+  'Fructele tăiate se așază peste frișcă pe un blat de bezea copt și răcit; desertul se montează '
+  'înainte de servire.'),
+ ('profiterol-oparit-inghetata',
+  'Aluat opărit',
+  'Înghețată',
+  'Profiterol',
+  'Aluatul opărit se coace în mici forme rotunde; cojile răcite se umplu cu cremă și se servesc '
+  'cu înghețată și sos de ciocolată.'),
+ ('profiterol-oparit-ganache',
+  'Aluat opărit',
+  'Ganache',
+  'Profiterol',
+  'Din aluat opărit se coc mici coji rotunde, umplute cu cremă după răcire; un ganache fluid le '
+  'acoperă ca sos de ciocolată.')]
+)
+RECIPE_SOURCES.update(
+{'negresa-faina-cacao': ['https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/negresa-de-post.html'],
+ 'negresa-ciocolata-unt': ['https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/negresa-cu-cheesecake-si-zmeura-reteta-video.html'],
+ 'crema-zahar-ars-caramel-ou': ['https://bucate-aromate.ro/2023/08/crema-de-zahar-ars/'],
+ 'crema-zahar-ars-caramel-lapte': ['https://bucate-aromate.ro/2023/08/crema-de-zahar-ars/'],
+ 'budinca-paste-branza-ou': ['https://www.protv.ro/emisiuni/vorbeste-lumea/articol/126330-majda-a-gatit-macaroane-cu-branza-la-vorbeste-lumea-reteta-rapida-gata-in-mai-putin-de-o-ora-care-cucereste-pe-toata-lumea'],
+ 'budinca-paste-stafide': ['https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/budinca-de-taitei-cu-branza-la-cuptor.html'],
+ 'pavlova-bezea-frisca': ['https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/prajitura-pavlova.html'],
+ 'pavlova-bezea-fruct': ['https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/prajitura-pavlova.html'],
+ 'profiterol-oparit-inghetata': ['https://pofta-buna.com/profiterol-cu-inghetata-frisca-si-ciocolata/'],
+ 'profiterol-oparit-ganache': ['https://pofta-buna.com/profiterol-cu-inghetata-frisca-si-ciocolata/']}
+)

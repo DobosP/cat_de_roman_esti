@@ -1,0 +1,125 @@
+{
+  "status": "unapproved",
+  "records": [
+    {
+      "difficulty": "normal",
+      "groups": {
+        "g1": [
+          "n_v3gas_orez",
+          "n_v4gas_fasole",
+          "n_v24_food_garden_veg_mazare",
+          "n_v84_food_arpacas"
+        ],
+        "g2": [
+          "n_v24_food_breakfast_unt",
+          "n_v24_food_breakfast_miere",
+          "n_v17gas_dulceata",
+          "n_gas_salata_vinete"
+        ],
+        "g3": [
+          "n_v24_weather_storm_fulger",
+          "n_v24_home_appliances_lampa",
+          "n_v24_nature_sky_soare",
+          "n_v33_electric_light_bec"
+        ],
+        "g4": [
+          "n_v30_kitchen_utensil_lingura",
+          "n_v3muz_pian",
+          "n_v33_forest_animal_vulpe",
+          "n_v24_food_small_fruit_cireasa"
+        ]
+      },
+      "group_labels": {
+        "g1": "Boabe fierte în mâncăruri",
+        "g2": "Se întind pe pâine",
+        "g3": "Produc lumină",
+        "g4": "Pot avea coadă"
+      },
+      "order": [
+        "n_v24_nature_sky_soare",
+        "n_v3gas_orez",
+        "n_v84_food_arpacas",
+        "n_v4gas_fasole",
+        "n_v33_forest_animal_vulpe",
+        "n_v33_electric_light_bec",
+        "n_v30_kitchen_utensil_lingura",
+        "n_v24_food_breakfast_unt",
+        "n_v17gas_dulceata",
+        "n_v3muz_pian",
+        "n_v24_home_appliances_lampa",
+        "n_v24_food_small_fruit_cireasa",
+        "n_v24_food_breakfast_miere",
+        "n_v24_food_garden_veg_mazare",
+        "n_v24_weather_storm_fulger",
+        "n_gas_salata_vinete"
+      ],
+      "id": "preview_v95_viata_de_roman_conexiuni_1",
+      "category": "viata_de_roman",
+      "status": "pending",
+      "source": "ai"
+    },
+    {
+      "difficulty": "usor",
+      "target": "n_v23via_penar",
+      "id": "preview_v95_viata_de_roman_contexto_1",
+      "category": "viata_de_roman",
+      "status": "pending",
+      "source": "ai"
+    },
+    {
+      "difficulty": "usor",
+      "target": "n_v32_workshop_hand_cleste",
+      "id": "preview_v95_viata_de_roman_contexto_2",
+      "category": "viata_de_roman",
+      "status": "pending",
+      "source": "ai"
+    },
+    {
+      "difficulty": "usor",
+      "start": "n_v84_food_cuptor",
+      "target": "n_v90_food_firimitura",
+      "optimal": 2,
+      "id": "preview_v95_gastronomie_lant_1",
+      "category": "gastronomie",
+      "status": "pending",
+      "source": "ai"
+    },
+    {
+      "difficulty": "usor",
+      "start": "n_v86_food_zahar_pudra",
+      "target": "n_v87_food_tort_diplomat",
+      "optimal": 2,
+      "id": "preview_v95_gastronomie_lant_2",
+      "category": "gastronomie",
+      "status": "pending",
+      "source": "ai"
+    }
+  ],
+  "refs": [
+    {
+      "category": "viata_de_roman",
+      "ref": "conexiuni[0]",
+      "preview_id": "preview_v95_viata_de_roman_conexiuni_1"
+    },
+    {
+      "category": "viata_de_roman",
+      "ref": "contexto[0]",
+      "preview_id": "preview_v95_viata_de_roman_contexto_1"
+    },
+    {
+      "category": "viata_de_roman",
+      "ref": "contexto[1]",
+      "preview_id": "preview_v95_viata_de_roman_contexto_2"
+    },
+    {
+      "category": "gastronomie",
+      "ref": "lant[0]",
+      "preview_id": "preview_v95_gastronomie_lant_1"
+    },
+    {
+      "category": "gastronomie",
+      "ref": "lant[1]",
+      "preview_id": "preview_v95_gastronomie_lant_2"
+    }
+  ]
+}

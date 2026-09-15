@@ -1,0 +1,40 @@
+{
+  "reviewer": "v95-independent-empty-pair-review-world-author",
+  "date": "2026-09-15",
+  "scope": "Source review and independent backend probes; final browser integration is not claimed here.",
+  "source_sha256": {
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "frontend/src/screens/AlchimieExplore.tsx": "b366dfce44ffbcf7516e2a0174e81fac28ad7040b85b94ad58b7645d6fd2f1b9",
+    "frontend/src/api/alchimieExplore.ts": "15a0a1208318968d2f4b3888167f2bdd71ac9247954c0916b8249134055cc55e",
+    "frontend/src/styles/alchimie-explore.css": "59b8c4788e7be48905c1579890a707f9f1b3b9c2b3b5ff4d63b44281594e8332",
+    "tests/test_alchimie_empty_pairs.py": "061bb68ecc6200d64b0ee2a9da99d0545ec3fefb47643549ea11064e48e2184f"
+  },
+  "findings": [
+    {
+      "issue": "Unbounded local acknowledgments prevented retries reaching compatible-world upgrades.",
+      "resolution": "Root added a monotonic 30-second freshness window since the last successfully adopted server state. Local acknowledgments do not renew it. An expired retry uses normal guarded POST, so server upgrade can clear formerly empty pairs and apply a newly added recipe.",
+      "status": "resolved by source review; final browser expiry/upgrade test required"
+    },
+    {
+      "issue": "Extra empty_pairs input test expected400 but schema responds422.",
+      "resolution": "Expectation corrected to422; eight focused backend tests pass.",
+      "status": "resolved"
+    }
+  ],
+  "independent_probes": {
+    "actual_cap": 128,
+    "distinct_empty_submissions": 130,
+    "concurrent_duplicate_requests": 16,
+    "distinct_revisions": 16,
+    "oldest_distinct_eviction_correct": true,
+    "unknown_unowned_equal_inputs_not_recorded": true,
+    "forged_nested_portable_empty_pairs_rejected422": true,
+    "new_session_isolated": true,
+    "focused_tests_passed": 8
+  },
+  "ownership_assessment": "Both local and network paths obey flight/locked and current saved-pointer guards. Only successful adopt renews stateConfirmedAt. Existing lost-response read recovery adopts observed memory; conflict/failed recovery keeps actions locked. Server stores canonical observed owned pairs under the session transaction lock; portable progress excludes failure history.",
+  "limitations": [
+    "Remembered-pair behavior intentionally trusts the last observed book for at most30seconds.",
+    "Remaining final GUI browser/keyboard/mobile evidence belongs to a separate integration check."
+  ]
+}

@@ -1,0 +1,44 @@
+"""Independent V95 selection-policy probes against actual current reviewed inventory."""
+import ast,collections,datetime,hashlib,json,os,random,subprocess,sys
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from cat_de_roman_esti.wordgames import lant as L
+from cat_de_roman_esti.wordgames.packs import get_pack
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+source=ROOT/'cat_de_roman_esti/wordgames/lant.py';before=sha(source)
+old_text=subprocess.check_output(['git','show','cf6b28b:cat_de_roman_esti/wordgames/lant.py'],cwd=ROOT).decode()
+old_fn=next(n for n in ast.parse(old_text).body if isinstance(n,ast.FunctionDef) and n.name=='_pick_curated')
+old_fn.name='_baseline_pick_curated'
+module=ast.Module(body=[old_fn],type_ignores=[])
+namespace=dict(vars(L));exec(compile(ast.fix_missing_locations(module),'<baseline-selector>','exec'),namespace)
+old_picker=namespace['_baseline_pick_curated']
+daily=[]
+for day in range(14):
+    date=(datetime.date(2026,9,15)+datetime.timedelta(days=day)).isoformat()
+    for category in [None,'gastronomie','literatura','stiinta']:
+        args={'daily':date,'category':category,'difficulty':'usor','exclude_ids':set()}
+        previous=old_picker(random.Random(827),**args)
+        current=L._pick_curated(random.Random(827),**args)
+        assert (current.id if current else None)==(previous.id if previous else None)
+        daily.append({'date':date,'category':category,'selected':current.id if current else None})
+counts=collections.Counter();first={};exclusion_checks=0
+for seed in range(1024):
+    args={'daily':None,'category':'gastronomie','difficulty':'usor','exclude_ids':set()}
+    item=L._pick_curated(random.Random(seed),**args)
+    again=L._pick_curated(random.Random(seed),**args)
+    assert item.id==again.id and item._pilot_eligible
+    counts[item.id]+=1;first.setdefault(item.id,seed)
+    excluded=L._pick_curated(random.Random(seed),**{**args,'exclude_ids':{'lt_gastronomie_243'}})
+    assert excluded.id!='lt_gastronomie_243';exclusion_checks+=1
+assert counts['lt_gastronomie_243']>0 and counts['lt_gastronomie_244']>0
+pool={i.id:i for i in get_pack().pool('lant',category='gastronomie',difficulty='usor')}
+wide_count=sum(count for i,count in counts.items() if L._is_wide_beginner_item(pool[i]))
+assert wide_count>768
+assert sha(source)==before
+report={'kind':'v95-independent-casual-lant-selector-review-v1','reviewer':'codex-v95-independent-world-quality','verdict':'accept','source_sha256':before,'baseline_policy_source_sha256':hashlib.sha256(old_text.encode()).hexdigest(),'same_inventory_daily_policy_comparisons':daily,'casual_samples':1024,'wide_selections':wide_count,'selection_counts':dict(counts),'first_public_seed_candidates':first,'same_seed_results_identical':True,'exclusion_checks':exclusion_checks,'all_selected_items_pilot_eligible':True,'rationale':'The optional narrow return happens only after the existing private eligible/exclusion-aware picker selects a valid item and only for casual easy play. Returning a subset of those original picks creates positive selection probability for reviewed two-route boards; the remaining path preserves the existing wide preference. Observed broad routes remain the clear majority. Daily selection takes no new RNG draw and matches the previous function on56 current-inventory date/filter cases. No graph, route-quality floor, scoring, state boundary or session capacity changed.','limits':['Daily comparison isolates policy on the same current inventory; adding content/ranking metadata can independently remap dates.','The1024-seed distribution is a bounded empirical check, not a universal probability guarantee.','Final public BFF winning/recovery checks are recorded separately.'],'script_sha256':sha(Path(__file__))}
+(OUT/'independent-selector-review.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'daily_comparisons':len(daily),'casual_samples':1024,'wide':wide_count,'new243':counts['lt_gastronomie_243'],'new244':counts['lt_gastronomie_244'],'first243':first['lt_gastronomie_243'],'first244':first['lt_gastronomie_244'],'exclusions':exclusion_checks},indent=2))

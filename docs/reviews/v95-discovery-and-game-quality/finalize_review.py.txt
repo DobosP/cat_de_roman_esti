@@ -1,0 +1,130 @@
+from pathlib import Path
+import hashlib,json,re
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT=ROOT/'docs/reviews/v95-discovery-and-game-quality'
+SCRATCH=Path(__file__).parent
+BASE='cf6b28bc0d247be33e494be1395ca7d676a9f4b4'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def count(name):
+ s=(SCRATCH/name).read_text(); assert not re.search(r'\b[1-9]\d* failed\b',s),name
+ m=re.search(r'(\d+) passed',s);assert m,name;return int(m[1])
+checks={}
+for name,log in [('backend_python312','backend312.log'),('backend_python314','backend314.log'),('accounts_python312','accounts312.log'),('accounts_python314','accounts314.log'),('browser_desktop_mobile','browser-tests.log')]:
+ checks[name]={'passed':count(log),'log':log+'.gz','sha256':sha(OUT/(log+'.gz'))}
+assert checks['backend_python312']['passed']==checks['backend_python314']['passed']
+assert checks['accounts_python312']['passed']==checks['accounts_python314']['passed']==53
+assert checks['browser_desktop_mobile']['passed']==528
+assert 'pass 212' in (SCRATCH/'gui/frontend-tests-after-focus.log').read_text()
+assert 'All checks passed!' in (SCRATCH/'ruff.log').read_text()
+assert 'games pack GREEN' in (SCRATCH/'validate-pack.log').read_text()
+assert 'GREEN' in (SCRATCH/'validate-kg.log').read_text()
+assert '119.23 KiB  total' in (SCRATCH/'gui/frontend-build-after-focus.log').read_text()
+checks['frontend_native']={'passed':212,'log':'gui/frontend-tests-after-focus.log.gz','sha256':sha(OUT/'gui/frontend-tests-after-focus.log.gz')}
+artifacts=['cat_de_roman_esti/fixtures/'+n for n in ['alchimie_discovery_world_v92.json','alchimie_recipe_extensions_v92.json','quick_games_v92.json','games_pack.json','board_rankings_v37.json','derived_catalog_v38.json','lant_rejection_tombstones.json','kg_sample.json']]+['tests/fixtures/cat_mobile_app_pack_contract.json','cat_de_roman_esti/web/static/.vite/manifest.json']
+pins={rel:sha(ROOT/rel) for rel in artifacts}
+evidence=['alchimie/final-factual.json','alchimie/final-quality.json','alchimie/live-audit.json','quick/final-factual.json','quick/final-quality.json','quick/live-audit.json','pack/independent-final-api.json','pack/independent-selector-review.json','gui/independent-browser-final/review.json','closure-audit.json','artifact-delta.json','preview-check.json']
+record={'kind':'v95-integration-v1','verified_on':'2026-09-16','baseline_commit':BASE,'branch':'feat/v95-discovery-and-game-quality','passed':True,'backend_final_frontend_amendment':'Both full Python runs precede the final frontend-only focus fix. Independent closure verifies all Python, data and prior approval inputs remain exact; final frontend checks and full browser replay cover the rebuilt assets.','new_rounds':{'conexiuni':1,'contexto':2,'lant':2,'intrusul':4,'perechi':4},'new_alchimie_words':5,'new_alchimie_recipes':10,'new_shared_KG_nodes':0,'new_per_game_visible_words':{'conexiuni':9,'intrusul':10,'perechi':23},'checks':checks,'other_green_gates':['fixture validator','pack validator','Ruff','frontend lint','frontend typecheck/build/bundle','documentation checker','staged whitespace check'],'initial_gzip_kib':119.23,'initial_limit_kib':120,'gate_inputs_sha256':sha(OUT/'gate-inputs.json'),'archive_manifest_sha256':sha(OUT/'archive-manifest.json'),'archived_files':len(json.loads((OUT/'archive-manifest.json').read_bytes())['files']),'artifact_sha256':pins,'final_evidence_sha256':{p:sha(OUT/p) for p in evidence},'publication':{'v94_main_commit':BASE,'v94_github_ci_run':35018580589,'v94_ci_conclusion':'success','v95_landed':False,'v95_pushed':False,'production_commit':'13e49b2c1148bb0aab35cc1e3b023b5bd29c142d'},'limitations':['Agent reviews and browser simulations do not establish human enjoyment or physical-device acceptance.','Clește has useful hot openers but several common generic tool words remain unknown.','New Lanț relation captions remain mostly generic; the existing 101 custom captions are exact.','Seven of eight quick additions qualify as starters; tableware remains nonstarter.'],'initial_failures':['New empty-pair test expected400 for a schema-extra field that correctly returns422; test corrected.','Initial lint flagged a browser-global declaration and a long test signature; corrected.','Two account quick-game checks per Python ran during catalog replacement and saw503; finalinstalled suites pass.','Initial analyst artifact had surplus metadata; reviewer moved it to a sidecar and exact schema then passed.','Two identical cached retries left a stale focus ref that jumped backward after a lost response; synchronous local centering and four regression cases resolve it.','Initial natural-selection audit proved both newLanțrounds unreachable for anonymous play; reviewedcasualsamplingfix andfreshpublicreplays resolve it.']}
+(OUT/'verification.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
+n=checks['backend_python312']['passed']
+status=f'''# Status — cat_de_roman_esti
+
+Last verified: 2026-09-16 — V95 local candidate; complete integration gates green.
+
+## Current state
+
+- Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
+- V94 landed and was pushed to main at `cf6b28b`; [GitHub CI 35018580589 passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35018580589).
+  Its verified task branch, worktree and scratch were cleaned after preview relocation.
+- V95 develops from that main commit in `feat/v95-discovery-and-game-quality`.
+  **13 new rounds/targets, five Alchimie words and ten recipes**: Conexiuni +1,
+  Cald sau Rece +2, Lanț +2, Intrusul +4 and Perechi +4. Per-game fresh word exposures:
+  nine Conexiuni, ten Intrusul and twenty-three Perechi; shared KG remains unchanged.
+- New targets are Penar and Clește. Lanț connects oven→crumb through bread or biscuit,
+  and powdered sugar→Tort Diplomat through whipped cream or ladyfinger.
+  Conexiuni combines boiled grains, bread spreads, light sources and meanings of coadă.
+- Final selection review found that the beginner preference hid both new Lanț rounds.
+  Casual easy play now retains one in four initially picked eligible narrow rounds;
+  other picks continue through the wider-route preference. Daily selection is unchanged.
+  Strict two-route content floors, exclusions and deterministic seeded play remain.
+- Alchimie has **247 concepts, 342 recipes and 143 craftable discoveries**. New words:
+  Budincă de paste, Cremă de zahăr ars, Negresă, Pavlova and Profiterol, each with two
+  routes. Bezea and Paste cu brânză gain onward uses; the five new results are terminal.
+  Alternative-result count grows 92→97, intermediates 61→63.
+- All 242 old concepts and 332 recipes remain exact. Seven saved-book generations retain
+  earned progress, including all 138 V94 entries. Eight starters, 96 later supplies,
+  twelve tiers and 32 goals remain exact; vocabulary is 174 KG identities + 73 local words.
+- Alchimie marks attempted empty pairs and acknowledges immediate retries without a
+  request or save write. Server memory is bounded to128 unordered observed pairs.
+  Local freshness lasts30 seconds; recipe-book changes and restored/new sessions clear
+  observations. Save ownership, request locks and keyboard focus remain guarded.
+- Decision/evidence: [ADR-0153](adr/0153-expand-discovery-and-remember-attempted-pairs.md),
+  [V95 review](reviews/v95-discovery-and-game-quality/README.md).
+
+## Inventory and invariants
+
+| Game | Total | Approved | Pending | Runtime eligible/preferred |
+|---|---:|---:|---:|---|
+| Conexiuni | 243 | 243 | 0 | 85 eligible |
+| Cald sau Rece | 263 | 261 | 2 | 257 eligible |
+| Lanțul Cuvintelor | 121 | 118 | 3 | 118 eligible |
+| Alchimie | 83 | 80 | 3 | 80 eligible |
+| Intrusul | 226 | 226 | 0 | 187 preferred |
+| Perechi | 191 | 191 | 0 | 151 preferred |
+
+Pack **710 =702 approved +8 pending**, with **540 eligible** four-game records.
+All705 earlier pack records,336 core quick boards and73 authored payloads/scores stay exact.
+The authored supplement now has81 boards; seven of eight additions qualify as starters.
+Starter shelves are60 Intrusul /59 Perechi. Tableware remains outside the starter shelf.
+Private ranking metadata recomputes;105 rejection tombstones and101 custom Lanț captions stay exact.
+KG/mobile: `fixture-v90-household-discovery`, **2416 nodes/9459 links/8641 forms/180 puzzles**.
+Sessions retain7200-second sliding TTL,1000 entries/game,locks,64 KiB requests and bounded
+histories/caches. Exploration retains≤256 concepts/512 recipes/256 saved crafts; quick
+supplements≤256 boards/2 MiB. Answers, private recipes/routes and source IDs remain server-controlled.
+Both catalogs require exact final live-audit reviews before installation.
+
+## Current artifact pins
+
+'''
+for rel,h in pins.items():status+=f'- {Path(rel).name}: `{h}`\n'
+status+=f'''
+## Verification
+
+- Python3.12 and3.14 each pass **{n} backend/53 account tests**; browser **528 pass**,
+  native frontend **212 pass**. Both validators,Ruff,frontend lint/typecheck/build,docs
+  and whitespace pass; initial gzip **119.23/120 KiB**.
+- [Final integration receipt](reviews/v95-discovery-and-game-quality/verification.json)
+  binds exact tested inputs, installed artifacts, final reviews and original failures.
+- Installed-world tests20 pass. The live audit exhausts342 recipes,33 free/goal runs
+  and seven historical save generations. Independent quick audits win all81 authored
+  boards and verify wrong/repeat/hint/GET recovery for all eight additions.
+- Five new pack records serve and win through public category/difficulty/seed requests;
+  both routes win for each Lanț round. Daily behavior matches56 previous-policy cases;
+  deterministic1024-seed sampling retains982 wider picks while reaching both additions.
+- Independent Alchimie GUI review passes seven fresh scenarios plus six focus controls;18 new desktop/mobile
+  cases cover repeated pairs,reload, transport recovery,save ownership and narrow screens.
+- Strict inverses restore exact five-core-artifact baseline bytes; all261 old Contexto
+  profiles remain exact. Browser seed changes affect only Conexiuni and Lanț.
+- [Preview checks](reviews/v95-discovery-and-game-quality/preview-check.json):8150 serves
+  V95's247/342 world;8160 serves landed V94's242/332 world, with matching built assets.
+
+## Production and remaining work
+
+- Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`.
+  The owner authorized V95 landing and V96 startup; production deployment remains separate.
+- Owner playtesting and physical-device acceptance remain. Clește has strong tool/material
+  openers but unealtă,fier and scule are unknown; new Lanț captions remain mostly generic.
+- Existing Crucea Caraiman,museum/Dem/Ateneul description debt,Neagu labels,thin neighborhoods,
+  unknown household forms and hidden-target/A5 holds remain. Prior queues stay historical.
+  Broader target calibration,cross-device synchronization and HSTS are separate.
+  Accounts stay disabled until the DEPLOY gates pass.
+
+## Doc map
+
+- README/AGENTS:orientation;agent-map/agent-testing:routes/gates.
+- ADRs(newest0153),reviews and WORKLOG:decisions,evidence and history.
+'''
+# Keep Romanian/technical prose spaced naturally without changing identifiers or hashes.
+for a,b in [('to128','to 128'),('lasts30','lasts 30'),('=702','= 702'),('+8','+ 8'),('All705','All 705'),(',336',', 336'),('and73','and 73'),('has81','has 81'),('are60','are 60'),('/59','/ 59'),(';105','; 105'),('and101','and 101'),('retain7200','retain 7200'),(',1000',', 1000'),(',locks',', locks'),(',64',', 64'),('retains≤','retains ≤'),('supplements≤','supplements ≤'),('Python3.12','Python 3.12'),('and3.14','and 3.14'),('validators,Ruff,frontend','validators, Ruff, frontend'),('build,docs','build, docs'),('tests20','tests 20'),('exhausts342','exhausts 342'),(',33',', 33'),('all81','all 81'),('matches56','matches 56'),('deterministic1024','deterministic 1024'),('retains982','retains 982'),(';18','; 18'),('pairs,reload','pairs, reload'),('recovery,save','recovery, save'),('all261','all 261'),('json):8150','json): 8150'),('V95\'s247','V95\'s 247'),(';8160','; 8160'),('V94\'s242','V94\'s 242'),('landing,push','landing, push'),('unealtă,fier','unealtă, fier'),('Caraiman,museum','Caraiman, museum'),('debt,Neagu','debt, Neagu'),('labels,thin','labels, thin'),('calibration,cross','calibration, cross'),('AGENTS:orientation;agent-map/agent-testing:routes/gates','AGENTS: orientation; agent-map/agent-testing: routes/gates'),('ADRs(newest0153),reviews','ADRs (newest 0153), reviews'),('WORKLOG:decisions,evidence','WORKLOG: decisions, evidence')]:status=status.replace(a,b)
+assert len(status.splitlines())<=120,len(status.splitlines())
+(ROOT/'docs/STATUS.md').write_text(status)
+print(json.dumps({'backend_each':n,'browser':528,'status_lines':len(status.splitlines()),'artifacts':len(pins)}))

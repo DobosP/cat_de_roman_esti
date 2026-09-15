@@ -1,0 +1,79 @@
+"""Independent V95 quick factual verification and exact prior-review inheritance."""
+from pathlib import Path
+import hashlib
+import json
+import sys
+
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT))
+from scripts import build_quick_content_v92 as B
+from cat_de_roman_esti.wordgames.service import get_service
+Q=B.Q
+IDENTITY='/root/v95_world_author'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(name,value):(OUT/name).write_bytes(Q.json_bytes(value))
+prior_dir=ROOT/'docs/reviews/v94-words-and-clearer-connections/quick'
+old=read(prior_dir/'candidate.json');old_review=read(prior_dir/'factual-review.json')
+old_catalog=read(prior_dir/'catalog.json')
+full=read(OUT/'candidate.json');raw=read(OUT/'raw-candidates.json')
+assert sha(OUT/'candidate.json')=='e0a745b1150a2060ee2a20719d3ebb79b0838e8db95b54bc2bfc7da5a5c2497b'
+assert sha(OUT/'raw-candidates.json')=='a5dea01952cc8810d441acda1971f37fbb20b94096f69b7d24c74dd8b069aa62'
+old_rows={r['id']:r for r in old['boards']};all_rows={r['id']:r for r in full['boards']}
+assert len(old_rows)==73 and len(all_rows)==81
+assert all(all_rows[i]==r for i,r in old_rows.items())
+assert old_catalog['authored']==old['boards']
+assert old_review['candidate_sha256']==sha(prior_dir/'candidate.json')
+assert next(r['sha256'] for r in old_catalog['reviews'] if r['role']=='factual')==sha(prior_dir/'factual-review.json')
+assert {i['id'] for i in old_review['items']}==set(old_rows)
+assert all(i['verdict']=='accept' and i['sources'] for i in old_review['items'])
+assert {r['id'] for r in raw['boards']}==set(all_rows)-set(old_rows)
+assert all(all_rows[r['id']]==r for r in raw['boards'])
+assert full==B.candidate()
+for key in ('kg_sha256','rubric_sha256','core_payload_sha256'):
+    assert full['bindings'][key]==old['bindings'][key]==raw['bindings'][key]==Q.bindings(live=False)[key]
+assert full['bindings']['editorial_source_sha256']==sha(B.SOURCE_PATH)
+
+reasons={
+'iq92_v95_workshop':('The three named tools perform ordinary workshop manipulation: striking, gripping and screw turning. Original dictionary definitions support each identity. The qualified dish sponge is a porous cleaning implement, not one of those workshop tools; incidental use on a workbench does not change its ordinary purpose. Exact stored descriptions agree and all words are ordinary Romanian household vocabulary.',[
+'https://dexonline.ro/definitie/ciocan','https://dexonline.ro/definitie/cle%C8%99te','https://dexonline.ro/definitie/%C8%99urubelni%C8%9B%C4%83','https://dexonline.ro/definitie/burete']),
+'iq92_v95_body':('Mână, Deget and Picior denote human body parts, while Cămașă is clothing. The broad body-parts predicate correctly includes a finger without claiming that each item is a whole limb. Dictionary descriptions and the stored ordinary-sense descriptions agree; no specialist anatomical or medical advice is embedded.',[
+'https://dexonline.ro/definitie/m%C3%A2n%C4%83','https://dexonline.ro/definitie/deget','https://dexonline.ro/definitie/picior','https://dexonline.ro/definitie/c%C4%83ma%C8%99%C4%83']),
+'iq92_v95_tableware':('Plate, bowl and cup are customary vessels for food/drink at a table. The named dictionaries define tableware by table use, castron as a serving vessel and cană as a drinking vessel; găleată normally transports or stores liquids/materials. The predicate distinguishes ordinary function among containers, without claiming a bucket can never contain food. The exact native descriptions are consistent.',[
+'https://dexonline.ro/definitie/vesel%C4%83','https://dexonline.ro/definitie/castron/567139','https://dexonline.ro/definitie/can%C4%83/326335','https://dexonline.ro/definitie/g%C4%83leat%C4%83']),
+'iq92_v95_floor_cleaning':('Vileda describes floor cleaning with mop and bucket and permits a cleaning solution; Kärcher’s Romanian sheet explicitly lists water, detergent and bucket for manual mop cleaning. A lamp provides illumination rather than washing. The row accurately states a shared activity, not a uniform object type or a rule that detergent is always required. No dilution, chemical-safety or product-performance claim is imported.',[
+'https://www.viledaromania.ro/turbo','https://s1.kaercher-media.com/documents/datasheets/cleaningagents/ro_RO/0.011-319.0_PI_ro_RO.pdf']),
+'pq92_v95_everyday_01':('Sete is the need to drink, and water is the ordinary matching liquid. Roabă is a pushed vehicle for carrying materials over short distances; carrying soil in a garden is an ordinary instance, not a digging claim. A schoolbag can carry a writing instrument, as the exact ghiozdan record describes school supplies. Fiu and Fiică are corresponding parent-child relational terms, with no assertion of shared parents or sibling status. These familiar meanings are supported by the original dictionary entries and exact native identities.',[
+'https://dexonline.ro/definitie/sete','https://dexonline.ro/definitie/roab%C4%83','https://dexonline.ro/definitie/ghiozdan','https://dexonline.ro/definitie/fiu','https://dexonline.ro/definitie/fiic%C4%83']),
+'pq92_v95_everyday_02':('Foame denotes the need to eat. Gardena’s original hand-saw product description explicitly covers cutting tree branches; the saw/tree wording is accurate. Dictionary descriptions document dogs used for guarding, so a yard is a possible guarded space without prescribing where dogs should live. Blanket and sheet are bedding textiles, with different usual positions; neither is claimed to be identical to the other. Familiar words and stored descriptions agree.',[
+'https://dexonline.ro/definitie/foame','https://www.gardena.com/ro/produse/sol-teren/combisystem/ferastrau-combisistem-300-pp/967238001.html','https://dexonline.ro/definitie/c%C3%A2ine/definitii','https://dexonline.ro/definitie/cear%C8%99af']),
+'pq92_v95_everyday_03':('The dictionary gives Picior the whole lower-limb sense and Gleznă as its lower joint region, matching the qualified label. NASA explicitly identifies our Sun as a star. Caiet is a bound paper support for writing, and Dulap stores clothes, including a jacket. The native descriptions are ordinary and consistent. The four relationships are separately stated; no claim equates a body-part relation with an astronomical classification.',[
+'https://dexonline.ro/definitie/picior','https://dexonline.ro/definitie/glezn%C4%83','https://science.nasa.gov/sun/facts/','https://dexonline.ro/definitie/caiet','https://dexonline.ro/definitie/dulap']),
+'pq92_v95_everyday_04':('The Romanian observatory documents evening Moon observation, supporting the familiar Moon/night association without excluding daytime visibility or requiring it every night. Jamila’s original 2013 biscuit-salami recipe contains butter; the wording does not universalize across dairy-free variants. The citrice dictionary explicitly includes lemons and oranges, and the pastă entry defines toothpaste by tooth cleaning. Native labels/descriptions do not contradict these everyday relations.',[
+'https://astro-urseanu.ro/ghidul-vizitatorului/','https://jamilacuisine.ro/salam-de-biscuiti-facut-in-casa-reteta-video/','https://dexonline.ro/definitie/citrice','https://dexonline.ro/definitie/past%C4%83']),
+}
+assert set(reasons)==set(all_rows)-set(old_rows)
+items=[{'id':r['id'],'verdict':'accept','rationale':reasons[r['id']][0],'sources':reasons[r['id']][1]} for r in raw['boards']]
+svc=get_service();visible={i for r in raw['boards'] for i in Q.visible_ids(r)}
+nodes={i:{'label':svc.label(i),'description':svc.node(i).description} for i in sorted(visible)}
+evidence={'kind':'quick-independent-factual-source-checks-v1','reviewer':IDENTITY,'checked_on':'2026-09-15',
+'candidate_sha256':sha(OUT/'candidate.json'),'raw_candidate_sha256':sha(OUT/'raw-candidates.json'),
+'previous_candidate_sha256':sha(prior_dir/'candidate.json'),'previous_factual_review_sha256':sha(prior_dir/'factual-review.json'),
+'previous_catalog_sha256':sha(prior_dir/'catalog.json'),'previous_73_records_exact':True,'previous_73_judgments_inherited_exactly':True,
+'kg_rubric_core_payload_bindings_exact':True,'new_rows_checked':8,'new_visible_nodes':nodes,'source_checks':items,
+'source_access_notes':['Dexonline preserves named original dictionary entries; their ordinary senses are used, not crowdsourced comments.','Some find requests returned no matches despite valid pages; direct paragraph opens or named-entry search resolved roabă, ghiozdan, fiică, gleznă and veselă.','The observatory guide initially failed and then opened successfully.','The broad Gardena catalog did not expose the expected text; an original specific saw product page supplied direct branch-cutting evidence.'],
+'scope':'Independent factual/recognition review. No claim of measured player enjoyment or final API acceptance.'}
+write('factual-source-checks.json',evidence)
+raw_review={'kind':B.REVIEW_KIND,'role':'factual','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'raw-candidates.json'),'items':items}
+write('raw-factual-review.json',raw_review)
+review={'kind':B.REVIEW_KIND,'role':'factual','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'candidate.json'),
+'items':old_review['items']+items,'baseline_evidence':{
+'candidate_path':str((prior_dir/'candidate.json').relative_to(ROOT)),'candidate_sha256':sha(prior_dir/'candidate.json'),
+'factual_review_path':str((prior_dir/'factual-review.json').relative_to(ROOT)),'factual_review_sha256':sha(prior_dir/'factual-review.json'),
+'inherited_rows':73,'new_rows':8,'raw_factual_review_sha256':sha(OUT/'raw-factual-review.json'),
+'source_checks_sha256':sha(OUT/'factual-source-checks.json')}}
+write('factual-review.json',review)
+B.read_review(OUT/'factual-review.json','factual',sha(OUT/'candidate.json'),set(all_rows))
+B.read_review(OUT/'raw-factual-review.json','factual',sha(OUT/'raw-candidates.json'),set(reasons))
+print(json.dumps({'accepted_new':8,'inherited_exact':73,'reviewer':IDENTITY,'factual_sha256':sha(OUT/'factual-review.json'),'raw_sha256':sha(OUT/'raw-factual-review.json')}))

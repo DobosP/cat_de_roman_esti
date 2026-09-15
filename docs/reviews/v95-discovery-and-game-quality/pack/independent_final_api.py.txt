@@ -1,0 +1,152 @@
+"""Independent BFF replay using public category/difficulty/seed selection only."""
+from pathlib import Path
+import ast,copy,hashlib,json,os,subprocess,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+D=Path('/home/dobo/work/_temp/feat__v95-discovery-and-game-quality/pack')
+sys.path[:0]=[str(R),str(R/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import conexiuni,contexto,lant
+from cat_de_roman_esti.wordgames.packs import get_pack
+from cat_de_roman_esti.wordgames.service import get_service
+assert (D/'rank.log').exists()
+assert (D/'derived.log').exists()
+FILES=['cat_de_roman_esti/fixtures/'+x for x in ['games_pack.json','board_rankings_v37.json','derived_catalog_v38.json','kg_sample.json']]+['cat_de_roman_esti/wordgames/'+x for x in ['conexiuni.py','contexto.py','lant.py','packs.py','service.py','lant_relations.py','_session_endpoint.py','_progress.py']]+['docs/CRITIQUE_RUBRIC.md','cat_de_roman_esti/fixtures/lant_rejection_tombstones.json']
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def bindings():return {p:sha(R/p) for p in FILES}
+before=bindings();svc=get_service();pack=get_pack()
+private_keys={'pack_id','group_labels','source_board_id','selection_weight','pilot_eligible','catalog_id','rank_score','optimal_path','shortest_path','shortest_paths'}
+def keys(value):
+ if isinstance(value,dict):return set(value)|set().union(*(keys(v) for v in value.values()))
+ if isinstance(value,list):return set().union(*(keys(v) for v in value))
+ return set()
+def clean(value):assert not keys(value)&private_keys,keys(value)&private_keys
+checks=[]
+def get(client,base):
+ response=client.get(base);assert response.status_code==200,response.content
+ value=response.json();clean(value);return value
+
+def post(client,url,payload=None,status=200):
+ response=client.post(url,payload or {},content_type='application/json');assert response.status_code==status,(url,response.status_code,response.content)
+ value=response.json();clean(value);return value
+
+specs=[('conexiuni','viata_de_roman','normal','cx_viata_de_roman_372'),('contexto','viata_de_roman','usor','ct_viata_de_roman_374'),('contexto','viata_de_roman','usor','ct_viata_de_roman_375'),('lant','gastronomie','usor','lt_gastronomie_243'),('lant','gastronomie','usor','lt_gastronomie_244')]
+seeds={};seed_search_counts={}
+for game,category,difficulty,ident in specs:
+ for seed in range(3000):
+  client=Client()
+  url=f'/api/wordgames/{game}/games?category={category}&difficulty={difficulty}&seed={seed}'
+  state=post(client,url)
+  selected={'conexiuni':conexiuni,'contexto':contexto,'lant':lant}[game].store.get(state['game_id'])
+  if selected.pack_id==ident:
+   seeds[ident]=seed;seed_search_counts[ident]=seed+1;break
+ else:raise AssertionError('No natural public seed for '+ident)
+
+records=json.loads((R/'cat_de_roman_esti/fixtures/games_pack.json').read_bytes())
+rows={row['id']:row for game in ['conexiuni','contexto','lant'] for row in records[game]}
+
+def create(spec):
+ game,category,difficulty,ident=spec;client=Client();url=f'/api/wordgames/{game}/games?category={category}&difficulty={difficulty}&seed={seeds[ident]}'
+ state=post(client,url);base=f'/api/wordgames/{game}/games/'+state['game_id']
+ session={'conexiuni':conexiuni,'contexto':contexto,'lant':lant}[game].store.get(state['game_id'])
+ assert session.pack_id==ident,(ident,session.pack_id)
+ assert state['board_category']==category and state['difficulty']==difficulty
+ assert get(client,base)==state and get(client,base)==state
+ return client,base,state,session,url
+
+for spec in specs:
+ game,category,difficulty,ident=spec;row=rows[ident];assert row['status']=='approved'
+ item=next(i for i in pack.pool(game,category=category,difficulty=difficulty) if i.id==ident)
+ assert item._pilot_eligible
+ client,base,state,session,url=create(spec)
+ result={'id':ident,'game':game,'public_create_url':url,'seed':seeds[ident],'natural_selection_confirmed_by_private_session_id':True,'pilot_eligible':True,'initial_get_and_repeat_get_exact':True,'forced_session_or_picker_patch':False,'initial_public_state':copy.deepcopy(state)}
+ if game=='conexiuni':
+  assert 'solution' not in state and state['solved']==[]
+  public=json.dumps(state,ensure_ascii=False)
+  assert all(label not in public for label in row['group_labels'].values())
+  original=copy.deepcopy(state);tiles=list(row['groups'].values());a,b,c,d=tiles
+  post(client,base+'/guess',{'ids':['unowned-v95']+a[:3],'solution':row['groups'],'score':999999},400);assert get(client,base)==original
+  post(client,base+'/clue',{},400);assert get(client,base)==original
+  wrong=a[:3]+b[:1];state=post(client,base+'/guess',{'ids':wrong});assert not state['correct'] and state['one_away'] and state['mistakes']==1
+  current=get(client,base);post(client,base+'/guess',{'ids':list(reversed(wrong))},409);assert get(client,base)==current
+  state=post(client,base+'/guess',{'ids':a[:2]+c[:2]});assert state['mistakes']==2
+  clue=post(client,base+'/clue');earned=get(client,base);assert earned['clues_used']==1 and 'solution' not in earned
+  assert all(label not in json.dumps(earned,ensure_ascii=False) for label in row['group_labels'].values())
+  for group in tiles:state=post(client,base+'/guess',{'ids':group});assert state['correct']
+  assert state['won'] and len(state['solution'])==4
+  terminal=get(client,base);post(client,base+'/guess',{'ids':a},400);assert get(client,base)==terminal
+  post(client,base+'/clue',{},400);assert get(client,base)==terminal
+  result.update(wrong_attempts=2,reordered_wrong_repeat_status=409,repeat_wrong_free=True,unearned_group_labels_hidden=True,earned_clue_persists=True,unknown_tile_and_forged_solution_unchanged=True,terminal_get_and_rejected_replay_exact=True,final_score=terminal['score'],solved_groups=4)
+ elif game=='contexto':
+  assert 'target' not in state
+  forbidden=[row['target'],svc.label(row['target'])]
+  def secret_hidden(value):
+   assert 'target' not in value
+   serialized=json.dumps(value,ensure_ascii=False).casefold()
+   assert all(word.casefold() not in serialized for word in forbidden),(ident,value)
+  secret_hidden(state);original=copy.deepcopy(state)
+  post(client,base+'/clue',{},400);assert get(client,base)==original
+  unknown=post(client,base+'/guess',{'text':'zzqxxv95unrecognized','target':row['target'],'score':999999});assert not unknown['ok'];secret_hidden(unknown);assert get(client,base)==original
+  post(client,base+'/guess',{'text':''},400);assert get(client,base)==original
+  opener='ghiozdan' if ident=='ct_viata_de_roman_374' else 'ciocan'
+  guess=post(client,base+'/guess',{'text':opener});assert guess['ok'] and not guess['won'];secret_hidden(guess)
+  current=get(client,base);again=post(client,base+'/guess',{'text':opener.upper()});secret_hidden(again);assert get(client,base)==current and again['attempts']==1
+  # The free strongest opener may leave no warmer clue. Use another naturally selected
+  # session and earn the normal three-attempt clue threshold with colder valid words.
+  client,base,state,session,url=create(spec)
+  for text in ['pian','munte','tren']:
+   step=post(client,base+'/guess',{'text':text});assert step['ok'] and not step['won'];secret_hidden(step)
+  clue=post(client,base+'/clue');secret_hidden(clue);earned=get(client,base);secret_hidden(earned);assert earned['clues_used']==1 and get(client,base)==earned
+  won=post(client,base+'/guess',{'text':svc.label(row['target'])});assert won['won'];terminal=get(client,base);assert terminal['target']['id']==row['target']
+  post(client,base+'/guess',{'text':svc.label(row['target'])},400);assert get(client,base)==terminal
+  post(client,base+'/clue',{},400);assert get(client,base)==terminal
+  result.update(target_hidden_until_win=True,unknown_blank_and_forged_target_unchanged=True,repeated_guess_free=True,earned_hint_persists=True,hint_session_is_separate_natural_selection=True,hint_preparation_guesses=["pian","munte","tren"],opener=opener,opener_feedback=guess['guess'],final_attempts=terminal['attempts'],final_score=terminal['score'],terminal_get_and_rejected_replay_exact=True)
+ else:
+  assert 'solution' not in state and len(state['path'])==1 and 'earned_hint' not in state
+  original=copy.deepcopy(state)
+  unknown=post(client,base+'/move',{'text':'zzqxxv95unrecognized','target':row['target'],'path':[row['start'],row['target']],'score':999999});assert not unknown['ok'];assert get(client,base)==original
+  repeated=post(client,base+'/move',{'text':svc.label(row['start'])});assert not repeated['ok'] and get(client,base)==original
+  assert post(client,base+'/undo')==original
+  hint=post(client,base+'/hint');earned=get(client,base);assert earned['earned_hint']==hint and get(client,base)==earned
+  second_hint=post(client,base+'/hint');earned=get(client,base);assert earned['earned_hint']==second_hint and get(client,base)==earned
+  distances=svc.distances_to(row['target']);paths=[]
+  def walk(path):
+   if path[-1]==row['target']:paths.append(path);return
+   for node in sorted(svc.neighbor_ids(path[-1])):
+    if distances.get(node)==distances[path[-1]]-1:walk(path+[node])
+  walk([row['start']]);routes=[]
+  for index,path in enumerate(paths):
+   if index:client,base,state,session,url=create(spec)
+   else:state=earned
+   for move_index,node in enumerate(path[1:]):
+    state=post(client,base+'/move',{'text':svc.label(node)});assert state['ok']
+    resumed=get(client,base);assert len(resumed['path'])==move_index+2
+    assert 'earned_hint' not in resumed
+    if not state['won']:
+     exact=copy.deepcopy(resumed);repeated=post(client,base+'/move',{'text':svc.label(node)});assert not repeated['ok'];assert get(client,base)==exact
+   assert state['won'] and state['score']==1000 and state['moves']==row['optimal']
+   terminal=get(client,base);ack=post(client,base+'/move',{'text':svc.label(row['target'])});assert ack['won'] and ack['score']==1000 and get(client,base)==terminal
+   assert post(client,base+'/undo')==terminal
+   post(client,base+'/hint');assert get(client,base)==terminal
+   routes.append({'labels':[svc.label(x) for x in path],'moves':state['moves'],'score':state['score'],'captions':[step.get('relation') for step in terminal['path'][1:]],'natural_seed':seeds[ident],'final_get_replay_undo_stable':True})
+  result.update(public_target_allowed=True,unearned_full_route_hidden=True,unknown_forged_route_same_node_and_start_undo_unchanged=True,earned_hint_persists_without_get_escalation=True,moving_clears_hint=True,all_native_shortest_paths_completed=routes)
+ checks.append(result)
+# Current display rules and all105 rejection tombstones remain exact main-baseline bytes.
+assert before==bindings(), 'Audited source/artifact changed during audit'
+assert len(checks)==5 and sum(len(x.get('all_native_shortest_paths_completed',[])) for x in checks)==4
+baseline=json.loads(subprocess.check_output(['git','show','cf6b28b:cat_de_roman_esti/fixtures/games_pack.json'],cwd=R))
+games=['conexiuni','contexto','lant','alchimie']
+preserved={g:all(row in records[g] for row in baseline[g]) for g in games}
+assert all(preserved.values())
+old_ids={r['id'] for g in games for r in baseline[g]}
+new_ids={r['id'] for g in games for r in records[g]}-old_ids
+assert new_ids=={spec[3] for spec in specs}
+assert sum(len(baseline[g]) for g in games)==705
+assert all(r['status']=='approved' for g in games for r in records[g] if r['id'] in new_ids)
+assert sum(r['status']=='pending' for g in games for r in records[g])==8
+for relative in ['cat_de_roman_esti/wordgames/lant_relations.py','cat_de_roman_esti/fixtures/lant_rejection_tombstones.json']:
+ assert (R/relative).read_bytes()==subprocess.check_output(['git','show','cf6b28b:'+relative],cwd=R)
+report={'kind':'v95-independent-final-pack-bff-audit-v1','reviewer':'codex-v95-independent-world-quality','method':'Seed discovery and winning/recovery replays use real Django BFF requests with public category/difficulty/seed selection; private store reads only confirm selected authored ID. No forced sessions, picker overrides, runtime edits or score changes.','source_bindings':before,'script_sha256':sha(__file__),'all_source_bindings_stable':True,'seed_discovery_public_create_counts':seed_search_counts,'display_rules_and_rejection_ledger_unchanged_from_main':True,'exact_new_approved_ids':sorted(new_ids),'all_five_approved_entries_naturally_served':True,'all_unearned_private_keys_hidden':True,'checks':checks,'baseline_commit':'cf6b28b','counts':{g:{'before':len(baseline[g]),'after':len(records[g]),'added':len(records[g])-len(baseline[g])} for g in games},'all_705_previous_pack_records_exact':preserved,'pending_count':sum(r['status']=='pending' for g in games for r in records[g]),'total_pack_records':sum(len(records[g]) for g in games),'limitations':['Automated BFF correctness does not establish human enjoyment or physical-device acceptance.','Quick-game supplement is outside this pack audit.','Lanț endpoints and earned local choices are public; unearned full route corridors stay hidden.','New Lanț captions remain generic direct-link/part-whole labels; raw edge wording is not presented as player-visible copy.','Clește and Penar retain explicitly documented unknown-vocabulary gaps from allocated analyst probes.']}
+(D/'independent-final-api.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'naturally_served':seeds,'all_checks_passed':True,'shortest_routes_completed':sum(len(x.get('all_native_shortest_paths_completed',[])) for x in checks),'total_pack':report['total_pack_records'],'old_records_exact':all(preserved.values()),'pending':report['pending_count']},ensure_ascii=False))

@@ -1,0 +1,67 @@
+"""Record reproducible author-side preservation and provenance; no approval verdicts."""
+import hashlib
+import json
+from collections import Counter
+from pathlib import Path
+import sys
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+from scripts import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.service import normalize
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def write(name, value):
+    (OUT / name).write_bytes(B.json_bytes(value))
+
+old = json.loads(B.BASELINE.read_bytes())
+current = B.candidate()
+assert (OUT / 'candidate.json').read_bytes() == B.json_bytes(current)
+oldc = {r['id']: r for r in old['concepts']}
+oldr = {r['id']: r for r in old['recipes']}
+newc = {r['id']: r for r in current['concepts']}
+newr = {r['id']: r for r in current['recipes']}
+assert all(newc[k] == v for k, v in oldc.items())
+assert all(newr[k] == v for k, v in oldr.items())
+assert all(current[k] == old[k] for k in ['world', 'unlocks', 'goals'])
+assert current['compatible_versions'][:-1] == old['compatible_versions']
+kg = json.loads((ROOT / 'cat_de_roman_esti/fixtures/kg_sample.json').read_bytes())
+surfaces = {normalize(s) for c in kg['kg_nodes'] for s in [c['label_ro'], *c.get('aliases', [])]}
+assert all(normalize(newc[k]['label']) not in surfaces for k in newc.keys()-oldc.keys())
+used_before = {cid for r in oldr.values() for cid in r['pair']}
+used_after = {cid for r in newr.values() for cid in r['pair']}
+results_before = {r['result'] for r in oldr.values()}
+results_after = {r['result'] for r in newr.values()}
+write('author-audit.json', {'kind': 'v95-alchimie-author-audit',
+    'approval': False, 'candidate_sha256': sha(OUT/'candidate.json'),
+    'baseline_sha256': sha(B.BASELINE), 'baseline': B.audit(old), 'current': B.audit(current),
+    'crafted_intermediates_before': len(results_before & used_before),
+    'crafted_intermediates_after': len(results_after & used_after),
+    'reused_old_leaves': {cid: newc[cid]['label'] for cid in sorted((results_before-used_before)&used_after)},
+    'new_words': {cid: newc[cid]['label'] for cid in sorted(newc.keys()-oldc.keys())},
+    'new_recipe_ids': sorted(newr.keys()-oldr.keys()),
+    'new_word_recipe_counts': dict(Counter(r['result'] for r in newr.values() if r['result'] not in oldc)),
+    'concept_headroom': B.MAX_CONCEPTS-len(newc), 'recipe_headroom': B.MAX_RECIPES-len(newr)})
+write('author-preservation.json', {'kind': 'v95-alchimie-author-preservation', 'approval': False,
+    'candidate_sha256': sha(OUT/'candidate.json'), 'baseline_sha256': sha(B.BASELINE),
+    'baseline_concepts_unchanged': len(oldc), 'baseline_recipe_records_unchanged': len(oldr),
+    'world_starters_unlocks_and_goals_exact': True, 'old_compatible_versions_exact': len(old['compatible_versions']),
+    'historical_generations': len(current['compatible_versions']),
+    'new_labels_shadow_kg_names_or_aliases': False,
+    'shared_kg_sha256': sha(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json'),
+    'source_files': {p: sha(ROOT/p) for p in ['scripts/alchimie_discovery_recipe_source.py',
+        'scripts/build_alchimie_discovery_world.py','scripts/audit_alchimie_discovery_world.py']}})
+write('author-exclusions.json', {'kind': 'v95-alchimie-author-screening', 'approval': False,
+    'note': 'Exploratory leads excluded before candidate generation; not independent verdicts.',
+    'excluded': [
+        {'lead': 'Ecler + Înghețată → Profiterol', 'reason': 'An already shaped and glazed eclair is not a small round choux shell. Use explicitly baked aluat opărit instead.'},
+        {'lead': 'Bezea + Cuptor → Pavlova', 'reason': 'Existing Bezea is already cooked; baking again does not supply cream or fruit.'},
+        {'lead': 'Cremă de vanilie + Caramel → Cremă de zahăr ars', 'reason': 'Already thickened pastry cream is not the uncooked egg/milk custard baked over caramel.'},
+        {'lead': 'Paste cu brânză + Cuptor → Budincă de paste', 'reason': 'Old prepared-pasta concept already allows oven browning. Egg binding is the meaningful additional transformation.'},
+        {'lead': 'Cozonac + Lapte → Budincă de pâine', 'reason': 'Plausible economical dish but old result description specifies bread; leave exact descriptions untouched rather than stretch their scope.'},
+        {'lead': 'Budincă de griș', 'reason': 'Deferred: another pudding and close to already served Griș cu lapte; selected additions have clearer distinctions.'},
+    ]})
+print(json.dumps({'candidate_sha256': sha(OUT/'candidate.json'), 'metrics': B.audit(current)}))

@@ -1,0 +1,36 @@
+"""Write independent V95 allocated analyst judgments after fresh dossier/BFF review."""
+import json,hashlib,sys
+from pathlib import Path
+OUT=Path(__file__).resolve().parent
+REVIEWER='codex-v95-independent-world-quality'
+probe=json.loads((OUT/'allocated-analyst-probe.json').read_text())
+assert probe['reviewer']==REVIEWER
+items=[
+ ('cx_viata_de_roman_372','conexiuni',
+  'Promote normal after reading every allocated identity. B1/B2: the grains are culinary seeds boiled in dishes, not all cereals; the four spreads have ordinary bread use; all four light sources emit light; coadă intentionally joins handle, piano form, tail and fruit stalk. Pot avea allows upright-piano exceptions. B3/B4: boiling a cherry or imagining rice paste is incidental possibility, not an equally normal alternate partition; no other tile supplies a defensible fourth coadă member. B5: lamp/bulb are nested in one light group, with no mirrored counterpart group. B6/B7: concrete everyday anchors lead to a nameable Romanian polysemy trick, not an abstraction worksheet or obscurity. B8: Arpacaș is the least common member but three immediately familiar cooked grains support it; the remaining vocabulary is ordinary. B9: no label repeats a complete tile name. Rebuilt exact dossiers have no contested/raw-unfair tiles or strict failures, novelty checks remain green, and all four groups win by fresh BFF requests with four lives. Actual descriptions preserve eggplant spread and the ordinary cooking senses; no KG repair or new aliases are implied.',
+  ['https://dexonline.ro/definitie/coad%C4%83','https://dexonline.ro/definitie/pian','https://dexonline.ro/definitie/arpaca%C8%99','https://catalog.manualedigitaleart.ro/art-fizica8/v1/art-fizica8.pdf']),
+ ('ct_viata_de_roman_374','contexto',
+  'Promote easy. C1/C2/C5: Penar names the familiar school writing-tool container with one dominant sense and an accurate public description; older DLRLC/DEX and a current pencil-maker catalog support cross-generational recognition. C3: five distinct native incoming concepts are ordinary school words, not projected fillers. C4: my fresh exact-target BFF run gives școală2, ghiozdan4, elev10, stilou11 and creion/pix39, all useful early approaches within two hops. Rechizite remains unrecognized and costs no attempt; that explicit vocabulary gap does not remove the multiple independent broad school and contents routes. C6: stored salience0.78 is consistent with the easy band. Dossier/rubric bindings were regenerated and match; no strict failure or reused target was found.',
+  ['https://dexonline.ro/definitie/penar','https://www.koh-i-noor.ro/arta']),
+ ('ct_viata_de_roman_375','contexto',
+  'Promote easy with disclosed vocabulary debt. C1/C2/C5: the standalone workshop word predominantly names a common hinged hand tool; the public description accurately covers a family used to grip, bend or cut, without claiming every model does all three. Dictionary history and Knipex Romanian product evidence support recognition. C3: A lucra, Cui, Șurub, Ciocan and Șurubelniță are five existing recognizable incoming neighbors. C4: my fresh BFF probes give metal9 and both ciocan/șurubelniță3, providing a broad material approach and two obvious neighboring tools. Unealtă, scule, fier and reparație are unknown; atelier99 and foarfecă223 are only lukewarm. These are material limitations, not successful openers, but the hot alternatives are strong enough to make the target fair without guessing an obscure link. Unknown inputs cost no attempt, and the recognized plural clești wins. C6: salience0.91 fits ordinary recognition. Exact dossier binding and strict floors pass; this acceptance does not claim general tool-vocabulary calibration.',
+  ['https://dexonline.ro/definitie/cle%C8%99te','https://www.knipex.com/ro-ro/produse/cle%C8%99ti-de-prindere/cle%C8%99ti-de-prindere-cle%C8%99ti-ac/cle%C8%99ti-de-prindere-cle%C8%99ti-ac/3115160']),
+ ('lt_gastronomie_243','lant',
+  'Promote easy. D1: oven and crumb are ordinary independently recognizable endpoints with accurate actual GET descriptions. D2/D5: baking bread or biscuits, followed by their small broken pieces, is a concrete everyday transformation with a satisfying equipment-to-remnant arc. D3: two separate intermediates, Pâine and Biscuit, each produce a complete shortest route; neither is compulsory. D4: two hops and familiar actions fit easy. Fresh allocated BFF sessions win both routes. The actual public captions are generic legătură directă throughout; they do not display the detailed coace/crumbles wording from raw KG metadata. This is retained explicitly as a presentation limitation, not misreported as a caption improvement. The very familiar endpoint/intermediate relationships remain legible without those explanations. No source description debt, generic-region bridge or strict failure was found.',
+  ['https://media3.bsh-group.com/Documents/9001175827_A.pdf','https://dexonline.ro/definitie/firimitur%C4%83']),
+ ('lt_gastronomie_244','lant',
+  'Promote easy. D1: powdered sugar and Tort Diplomat are familiar culinary endpoints; the public target description allows a cold airy fruit cake with sponge or ladyfingers. D2: original Eisler and Minimal recipes support powdered sugar in whipped cream or on ladyfingers, which enter Diplomat cakes; these are ordinary variant-aware ingredient links. D3: Frișcă and Pișcot are separate credible shortest intermediates with no single-node choke point. D4/D5: the two-hop arc moves from a finishing ingredient to a recognizable finished dessert without taxonomy or a regional coincidence. Both routes win through fresh BFF actions. Actual captions read legătură directă, except Frișcă→Tort Diplomat reads parte și întreg; the claimed unele variante wording exists only in raw metadata and is not presented to players. Those generic captions do not contradict the links, but richer explanations remain a presentation opportunity. The baseline captions and graph are unchanged; no caption improvement is claimed by this judgment.',
+  ['https://www.roberteisler.ro/retete/tort-diplomat','https://cofetariaminimal.ro/produs/tort-diplomat']),
+]
+assert {i for i,_,_,_ in items}==set(probe['input_ids'])
+report={'reviewer':REVIEWER,'role':'analyst','input_ids':probe['input_ids'],'items':[],'probe_sha256':hashlib.sha256((OUT/'allocated-analyst-probe.json').read_bytes()).hexdigest(),'scope':'Independent allocated pending dossier judgments and fresh BFF sessions. Natural public selection is verified after promotion, not inferred here.'}
+for i,g,r,s in items:
+ d=json.loads((OUT/'dossiers'/f'{i}.json').read_text());assert d['review_binding']==probe['dossier_bindings'][i]
+ report['items'].append({'id':i,'game':g,'verdict':'promote','review_binding':d['review_binding'],'rationale':r,'sources':s})
+metadata={key:report.pop(key) for key in ('probe_sha256','scope')}
+(OUT/'analyst-provenance.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n')
+(OUT/'analyst.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+sys.path[:0]=['/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality/scripts']
+from build_review_artifact import read_review
+read_review(OUT/'analyst.json','analyst')
+print('Five exact allocated records receive independent promote judgments; all caveats retained.')

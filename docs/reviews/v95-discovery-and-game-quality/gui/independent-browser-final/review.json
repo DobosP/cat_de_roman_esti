@@ -1,0 +1,56 @@
+{
+  "kind": "v95-independent-final-empty-pair-gui-review-v1",
+  "reviewer": "codex-v95-independent-world-quality",
+  "date": "2026-09-16",
+  "verdict": "accept",
+  "source_sha256": {
+    "frontend/src/screens/AlchimieExplore.tsx": "f7180f1068c628aeb34a7f1b08da2d25578e0b4355aee00e20db6c185294a23e",
+    "frontend/src/api/alchimieExplore.ts": "15a0a1208318968d2f4b3888167f2bdd71ac9247954c0916b8249134055cc55e",
+    "frontend/src/styles/alchimie-explore.css": "59b8c4788e7be48905c1579890a707f9f1b3b9c2b3b5ff4d63b44281594e8332",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "7e3e770f7788786948ee74e5c87c991d3b88bd1d34b4b082e918f68b391c3788",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "d7b6fb1545efcdd13d96856cd0c0a3e75eca3d9071d60f4be0e7da7e1bf930b7"
+  },
+  "candidate_origin": "http://127.0.0.1:8150",
+  "baseline_origin": "http://127.0.0.1:8160",
+  "candidate_world": {
+    "id": "bucataria-romaneasca-v1",
+    "title": "Bucătăria românească",
+    "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+    "total_concepts": 247,
+    "total_recipes": 342
+  },
+  "evidence": {
+    "independent-browser-final/probe.mjs": "8a4e8871097181ca2faf9622c58880ad04ceb8048ad547db5bcbd1281ba5e454",
+    "independent-browser-final/probes.json": "a69762374327648835ec9cb214bc30bb9adf869e508862e0c2b872a4d883f0dc",
+    "independent-browser-final/run.log": "9485c8b72cc13d3a32dd00ef5ad78d13174c0c44aea56a9928dbcf7148ce8524",
+    "cached-focus-final/probe.mjs": "1fde72dc6f0adcaa0980ad8ce3d814df3ca3eb591003aac6733612a1052cda7c",
+    "cached-focus-final/results.json": "3f74a739e91294f41b25bc66f6c90dc8f3485a1ca10b432ab422eba1371861fb",
+    "cached-focus-final/run.log": "a21403e7a833319cfa18cd5bbdfe820c657617817723b158ea1c2a06c7be7605",
+    "cached-focus-final/control-one-cached/probe.mjs": "9410e5c8a8e91189d72af3089f03a32f9c90d301683e6a007ed2a62df429e567",
+    "cached-focus-final/control-one-cached/results.json": "2f870b984a9ff05eda45449378a21bd5f05914d47302498b2cc17d8fde33287b",
+    "cached-focus-final/control-one-cached/run.log": "dc40f1bb7412876bd32eef4dc67856344d16646efe86357b1d334c4670fa989f",
+    "cached-focus-probe/finding.json": "95873f6317563ab4b0fecd32474e9cf994d4b1dcef10a7089b0d230245241481"
+  },
+  "observations": [
+    "Seven broader scenarios pass again against final emitted assets: old-versus-new request counts, narrow reverse/keyboard/drag, committed/uncommitted recovery trust, live reload/expired restore and31-second server recheck.",
+    "Final mobile and320px/200% screenshots were visually inspected. Tried markers and focus remain visible; labels and feedback fit without clipping.",
+    "Two identical cached Enter acknowledgments preserve focused visible Cheag alimentar and send no extra combine request.",
+    "Following either committed or uncommitted lost-response craft on Apă, focus remains on BODY exactly as in the one-cached-retry control; no backward jump to Cheag occurs.",
+    "Normal successful crafting keeps the activated Apă button focused. Escape, next-anchor navigation and collection search retain logical visible focus.",
+    "The cached branch now performs synchronous keyboard centering and never creates a deferred pendingFocus ref. No extra state counter, request, mutation or save write was introduced for that acknowledgement."
+  ],
+  "resolved_findings": [
+    {
+      "finding": "Repeated identical cached feedback left pendingFocus stale and caused a later recovery to focus a previous ingredient.",
+      "status": "Resolved by source inspection and six fresh controlled browser journeys; before evidence retained in cached-focus-probe/."
+    }
+  ],
+  "unresolved_findings": [],
+  "limits": [
+    "Lost-response recovery still leaves focus on BODY, matching the previous one-cached control; retaining focus on the newly activated partner remains a separate improvement.",
+    "Observations last only in the bounded live session and revalidate after30seconds; portable successful discoveries remain unchanged.",
+    "Automated browser review is not physical-device or human enjoyment acceptance.",
+    "This final review supersedes earlier GUI acceptance for the changed frontend source; original evidence remains historical."
+  ]
+}

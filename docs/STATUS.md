@@ -1,110 +1,104 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-15 — V94 integrated on main; all local integration gates green.
+Last verified: 2026-09-16 — V95 local candidate; complete integration gates green.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- V93 landed and was pushed to main at `c971846`; GitHub CI run 35011658720 passed.
-  Its verified task branch/worktree/scratch were cleaned after preview relocation.
-- V94 implementation `b75d68e` is integrated on main; the owner authorized its
-  publication and a fresh V95 content/game-quality session.
-  **12 new rounds/targets, seven Alchimie words and 17 recipes**: Conexiuni +1,
-  Cald sau Rece +2, Lanț +1, Intrusul +4 and Perechi +4. New boards expose twelve
-  previously unused Conexiuni words, sixteen Intrusul words and twenty-three Perechi words.
-  These are per-game exposures; shared KG vocabulary remains unchanged.
-- New targets are Ciorbă de perișoare and Temă pentru acasă. The new Lanț round connects
-  Ciorbă de perișoare→Sarmale through either meat or rice. Conexiuni uses household
-  preparation/cleaning wordplay, printed publications, lower-limb parts and calendar units.
-- Four pack entries pass independent raw/allocated-ID review and strict promotion.
-  The proposed Sfinx→Crucea Caraiman round was rejected: its existing target description
-  is publicly visible and conflicts with the monument owner's location account. ID 242
-  remains reserved; the exact rejection becomes the 105th durable Lanț tombstone.
-- Alchimie has **242 concepts, 332 recipes and 138 craftable discoveries**. New words:
-  Cartofi gratinați, Chiftele de pește, Crochete de cartofi, Jeleu de fructe, Paste cu pesto,
-  Piure de dovleac and Tzatziki. Compot and Sos de iaurt gain onward uses; new jelly/purée
-  feed existing preparations. Alternative-result count grows 86→92; intermediates 57→61.
-- All 235 old concept records and 315 recipes remain exact. Six saved-book generations
-  preserve earned progress; completed V93 collections retain all 131 recipe entries.
-  Eight starters, 96 later supplies, twelve tiers and 32 optional goals remain exact.
-  World vocabulary comprises 174 KG identities and 68 reviewed world-local definitions.
-- Twenty-one reviewed, exact-edge-bound Lanț captions clarify membership, publication,
-  locations and ingredients in both directions. All eighty previous captions remain exact.
-  One initial plateau phrase was corrected against the monument owner's source.
-- Earned Lanț paths and captions now wrap inside the viewport, removing the hidden
-  horizontal scrolling needed at 320px/200% text. Keyboard focus and game actions remain.
-- Decision/evidence: [ADR-0152](adr/0152-expand-reviewed-rounds-and-explain-lant-connections.md),
-  [V94 review](reviews/v94-words-and-clearer-connections/README.md).
+- V94 landed and was pushed to main at `cf6b28b`; [GitHub CI 35018580589 passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35018580589).
+  Its verified task branch, worktree and scratch were cleaned after preview relocation.
+- V95 develops from that main commit in `feat/v95-discovery-and-game-quality`.
+  **13 new rounds/targets, five Alchimie words and ten recipes**: Conexiuni +1,
+  Cald sau Rece +2, Lanț +2, Intrusul +4 and Perechi +4. Per-game fresh word exposures:
+  nine Conexiuni, ten Intrusul and twenty-three Perechi; shared KG remains unchanged.
+- New targets are Penar and Clește. Lanț connects oven→crumb through bread or biscuit,
+  and powdered sugar→Tort Diplomat through whipped cream or ladyfinger.
+  Conexiuni combines boiled grains, bread spreads, light sources and meanings of coadă.
+- Final selection review found that the beginner preference hid both new Lanț rounds.
+  Casual easy play now retains one in four initially picked eligible narrow rounds;
+  other picks continue through the wider-route preference. Daily selection is unchanged.
+  Strict two-route content floors, exclusions and deterministic seeded play remain.
+- Alchimie has **247 concepts, 342 recipes and 143 craftable discoveries**. New words:
+  Budincă de paste, Cremă de zahăr ars, Negresă, Pavlova and Profiterol, each with two
+  routes. Bezea and Paste cu brânză gain onward uses; the five new results are terminal.
+  Alternative-result count grows 92→97, intermediates 61→63.
+- All 242 old concepts and 332 recipes remain exact. Seven saved-book generations retain
+  earned progress, including all 138 V94 entries. Eight starters, 96 later supplies,
+  twelve tiers and 32 goals remain exact; vocabulary is 174 KG identities + 73 local words.
+- Alchimie marks attempted empty pairs and acknowledges immediate retries without a
+  request or save write. Server memory is bounded to 128 unordered observed pairs.
+  Local freshness lasts 30 seconds; recipe-book changes and restored/new sessions clear
+  observations. Save ownership, request locks and keyboard focus remain guarded.
+- Decision/evidence: [ADR-0153](adr/0153-expand-discovery-and-remember-attempted-pairs.md),
+  [V95 review](reviews/v95-discovery-and-game-quality/README.md).
 
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---|
-| Conexiuni | 242 | 242 | 0 | 84 eligible |
-| Cald sau Rece | 261 | 259 | 2 | 255 eligible |
-| Lanțul Cuvintelor | 119 | 116 | 3 | 116 eligible |
+| Conexiuni | 243 | 243 | 0 | 85 eligible |
+| Cald sau Rece | 263 | 261 | 2 | 257 eligible |
+| Lanțul Cuvintelor | 121 | 118 | 3 | 118 eligible |
 | Alchimie | 83 | 80 | 3 | 80 eligible |
-| Intrusul | 222 | 222 | 0 | 183 preferred |
-| Perechi | 187 | 187 | 0 | 147 preferred |
+| Intrusul | 226 | 226 | 0 | 187 preferred |
+| Perechi | 191 | 191 | 0 | 151 preferred |
 
-Pack **705 = 697 approved + 8 pending**, with **535 eligible** four-game records.
-All 701 prior pack records, 336 core quick boards and 65 authored payloads/scores remain
-exact; the authored supplement now has 73 boards. All eight additions qualify as starters;
-starter shelves are 57 Intrusul / 55 Perechi. Private ranking metadata recomputes.
+Pack **710 = 702 approved + 8 pending**, with **540 eligible** four-game records.
+All 705 earlier pack records, 336 core quick boards and 73 authored payloads/scores stay exact.
+The authored supplement now has 81 boards; seven of eight additions qualify as starters.
+Starter shelves are 60 Intrusul / 59 Perechi. Tableware remains outside the starter shelf.
+Private ranking metadata recomputes; 105 rejection tombstones and 101 custom Lanț captions stay exact.
 KG/mobile: `fixture-v90-household-discovery`, **2416 nodes/9459 links/8641 forms/180 puzzles**.
 Sessions retain 7200-second sliding TTL, 1000 entries/game, locks, 64 KiB requests and bounded
-histories/caches. Exploration retains <=256 concepts/512 recipes/256 saved crafts; quick
-supplements <=256 boards/2 MiB. Answers, private recipes/routes and source IDs remain
-server-controlled. Both catalogs require exact final live-audit reviews before installation.
+histories/caches. Exploration retains ≤256 concepts/512 recipes/256 saved crafts; quick
+supplements ≤256 boards/2 MiB. Answers, private recipes/routes and source IDs remain server-controlled.
+Both catalogs require exact final live-audit reviews before installation.
 
 ## Current artifact pins
 
-- Discovery world: `8b174e16edf6ad279f9fa6cc0328776cba033be0b177c849ad77d81ec603da89`
-- Recipe extensions: `ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301`
-- Quick supplement: `6ca48cc452d33a150bad949ef09d5e624df349b5d19a2eeeb253a2d123cf4042`
-- games_pack.json: `7d28b9df887fe561150bc582f390df0dde4f8c292e5550055bbe84e9e8d90990`
-- board_rankings_v37.json: `82f128edb3ccdd8208d41c43b7eb77df1e8d528d2aaea1fed5972712047255ed`
-- derived_catalog_v38.json: `4088402b80b78946e6f9cb7ee5379c9c3f32438801611008f266101625bb428d`
+- alchimie_discovery_world_v92.json: `22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd`
+- alchimie_recipe_extensions_v92.json: `ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301`
+- quick_games_v92.json: `b166aa76e2746c5c2f1382889ede528cce25536fb5480c9d21b027cf65c5d319`
+- games_pack.json: `27b1dba81a2e02d1e2616a1ad4e6eceefe12d189a86a0913c3655adee99bb3cf`
+- board_rankings_v37.json: `b4c32d0ff65e024e4bd2e292c03e5382f0927c7c388367bf1f80bd7a3c09a831`
+- derived_catalog_v38.json: `5e27495fcc34980ced41a7bbd5c0b61d703c459489d08d6b7322dac197fd7e96`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
 - kg_sample.json: `d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109`
 - cat_mobile_app_pack_contract.json: `5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f`
-- Rubric: `3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101`
-
-Server KG content: `sha256:b005b9d24b9b7df0bd1869f8ade38ec62fd9080b2332444924dd40ad82a50486`.
-Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a24ea61de3`.
+- manifest.json: `d7b6fb1545efcdd13d96856cd0c0a3e75eca3d9071d60f4be0e7da7e1bf930b7`
 
 ## Verification
 
-- Python 3.12 and 3.14 each pass **2133 backend/53 account tests**; browser **510 pass**,
+- Python 3.12 and 3.14 each pass **2191 backend/53 account tests**; browser **528 pass**,
   native frontend **212 pass**. Both validators, Ruff, frontend lint/typecheck/build, docs
   and whitespace pass; initial gzip **119.23/120 KiB**.
-- [Final integration receipt](reviews/v94-words-and-clearer-connections/verification.json)
-  binds 69 changed inputs and the final logs. Pesto focus expectations now reflect its
-  onward recipe; a separate terminal case preserves collection-fallback coverage.
-- Installed new-world tests 26 pass. Independent world audit exhausts 332 recipes, 33 free/goal
-  runs and six historical save generations. Old 235→242 restoration preserves all 131 entries.
-- All four new pack entries naturally serve and win through the BFF. All 73 authored quick
-  boards have natural-seed winning replays; eight additions also pass wrong/repeat/hint/GET
-  recovery. Rejected 242 is absent from served pools and fails reimport.
-- Caption checks 68 pass; scoped browser checks 22 pass. Separate independent GUI review
-  verifies wrapping, keyboard focus, reload, undo and read-only interactions in three journeys.
-- Strict inverses preserve all five original core artifacts and the original 104-entry ledger;
-  focused history checks 111 and historical-ledger checks 21 pass. Current target profiles add
-  exactly two rows while all 259 old profiles remain exact; only Lanț's seed 38 snapshot changes.
-- Preview origin **8150** is retained, supporting restoration of earlier collections.
-  [V94 landing receipt](reviews/v94-words-and-clearer-connections/landing.json).
+- [Final integration receipt](reviews/v95-discovery-and-game-quality/verification.json)
+  binds exact tested inputs, installed artifacts, final reviews and original failures.
+- Installed-world tests 20 pass. The live audit exhausts 342 recipes, 33 free/goal runs
+  and seven historical save generations. Independent quick audits win all 81 authored
+  boards and verify wrong/repeat/hint/GET recovery for all eight additions.
+- Five new pack records serve and win through public category/difficulty/seed requests;
+  both routes win for each Lanț round. Daily behavior matches 56 previous-policy cases;
+  deterministic 1024-seed sampling retains 982 wider picks while reaching both additions.
+- Independent Alchimie GUI review passes seven fresh scenarios plus six focus controls; 18 new desktop/mobile
+  cases cover repeated pairs, reload, transport recovery, save ownership and narrow screens.
+- Strict inverses restore exact five-core-artifact baseline bytes; all 261 old Contexto
+  profiles remain exact. Browser seed changes affect only Conexiuni and Lanț.
+- [Preview checks](reviews/v95-discovery-and-game-quality/preview-check.json): 8150 serves
+  V95's 247/342 world; 8160 serves landed V94's 242/332 world, with matching built assets.
 
 ## Production and remaining work
 
-- Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`, deployed
-  2026-09-09. V94 is integrated on main; production deployment is outside this landing.
-- Owner playtesting and physical-device acceptance remain. Existing Crucea Caraiman,
-  museum/Dem/Ateneul description debt, Neagu labels, thin neighborhoods, unknown household
-  forms and hidden-target/A5 holds stay explicit. New captions do not approve bad descriptions.
-- Prior unapproved queues remain historical. Broader target calibration, cross-device
-  synchronization and HSTS follow-up are separate. Keep accounts out until DEPLOY gates pass.
+- Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`.
+  The owner authorized V95 landing and V96 startup; production deployment remains separate.
+- Owner playtesting and physical-device acceptance remain. Clește has strong tool/material
+  openers but unealtă, fier and scule are unknown; new Lanț captions remain mostly generic.
+- Existing Crucea Caraiman, museum/Dem/Ateneul description debt, Neagu labels, thin neighborhoods,
+  unknown household forms and hidden-target/A5 holds remain. Prior queues stay historical.
+  Broader target calibration, cross-device synchronization and HSTS are separate.
+  Accounts stay disabled until the DEPLOY gates pass.
 
 ## Doc map
 
 - README/AGENTS: orientation; agent-map/agent-testing: routes/gates.
-- ADRs (newest 0152), reviews and WORKLOG: decisions, evidence and history.
+- ADRs (newest 0153), reviews and WORKLOG: decisions, evidence and history.

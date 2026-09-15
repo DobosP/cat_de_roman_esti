@@ -65,6 +65,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0150 | [Expand vocabulary and clarify game controls](0150-expand-vocabulary-and-clarify-game-controls.md) | accepted |
 | 0151 | [Expand game vocabulary and search earned recipes](0151-expand-game-vocabulary-and-search-earned-recipes.md) | accepted |
 | 0152 | [Expand reviewed rounds and explain Lanț connections](0152-expand-reviewed-rounds-and-explain-lant-connections.md) | accepted |
+| 0153 | [Expand discovery and remember attempted Alchimie pairs](0153-expand-discovery-and-remember-attempted-pairs.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially
@@ -76,3 +77,6 @@ ADR-0148 for authored quick-game catalog expansion; their selection and safety r
 
 [ADR-0043](0043-lant-visible-route-corridors.md) is also partially superseded by ADR-0149
 for skipping generic direction hints; informative hint stages and route boundaries remain.
+
+ADR-0153 also partially supersedes [ADR-0043](0043-lant-visible-route-corridors.md)
+for casual easy-round sampling; daily preference and route-quality floors remain.

@@ -983,3 +983,41 @@ The final post-amendment frontend lint log is also preserved. Landing documentat
 changes no runtime inputs. After the authorized push and remote proof, only the
 verified V94 branch/worktree/scratch are cleaned; the preview moves off its worktree.
 V95 starts in a new task worktree. Production remains anonymous V91.
+
+## V95 discovery and game quality (2026-09-16)
+
+Valid until: later content or runtime changes these bindings — then treat as history.
+
+V94 landed at cf6b28b and GitHub CI 35018580589 passed. Its verified worktree and scratch
+were cleaned. V95 starts from that main commit and adds thirteen reviewed rounds/targets,
+five world-local Alchimie concepts and ten recipes. All 705 previous pack records,
+242 world concepts, 332 recipes, 73 authored quick payloads/scores and 336 core boards
+remain exact. Shared KG/mobile data, 105 rejection tombstones and 101 custom captions stay
+unchanged. Seven historical Alchimie save generations preserve earned entries.
+
+Alchimie now marks tried empty pairs and immediately acknowledges recent retries.
+Memory holds at most 128 unordered confirmed failures per session. It stays out of saves,
+clears on book upgrades/restoration, and local acknowledgments expire after 30 seconds.
+Review first caught an indefinite-cache risk, then a stale deferred focus reference after
+two identical retries followed by a lost response. Synchronous keyboard centering fixes
+the latter without storing a deferred reference. The four new regression cases cover both
+committed and uncommitted lost responses on desktop and mobile. The pre-existing lost-
+response path can leave focus on the page body; the new backward jump is removed.
+
+Final natural selection found both new Lanț rounds were hidden from anonymous players by
+the strict wider-beginner preference. Casual selection now retains one in four initially
+picked eligible narrow boards, otherwise applying the existing wider preference. Daily
+selection and strict two-route approval remain unchanged. Independent sampling reaches
+both additions, retains 982/1024 wider picks and preserves 56 daily comparisons. All five
+new pack records and four Lanț routes complete through public BFF selection/actions.
+
+Independent quick review wins all 81 authored boards and verifies all eight new recovery
+journeys. Seven additions qualify as starters; the tableware board stays nonstarter.
+Clește retains unknown generic tool-word debt despite useful hot alternative openers.
+The new Lanț captions remain mostly generic; private edge text is not claimed displayed.
+
+Both Python versions pass 2191 backend/53 account tests. Final frontend and browser
+results, exact input hashes, preserved initial failures and review amendments belong in
+[the V95 receipt](docs/reviews/v95-discovery-and-game-quality/verification.json).
+Preview 8150 runs V95 and 8160 retains landed V94. The owner subsequently authorized
+landing V95 and starting V96; production deployment remains outside that authorization.

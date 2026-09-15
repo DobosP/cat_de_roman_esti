@@ -569,7 +569,7 @@ def _pick_curated(
     difficulty: str,
     exclude_ids: set[str],
 ) -> CuratedItem | None:
-    """Select curated content with an easy width-three preference and safe fallback."""
+    """Favor wider easy routes while keeping approved narrow casual rounds reachable."""
     pack = get_pack()
     if daily is not None:
         picked = pack.pick_daily(
@@ -587,6 +587,10 @@ def _pick_curated(
             exclude_ids=exclude_ids,
         )
     if picked is None or difficulty != "usor" or _is_wide_beginner_item(picked):
+        return picked
+    # Casual play retains one in four eligible narrow picks. Daily selection keeps
+    # its stable width-three preference, and the strict two-route content gate stays.
+    if daily is None and rng.randrange(4) == 0:
         return picked
 
     pool = pack.pool(

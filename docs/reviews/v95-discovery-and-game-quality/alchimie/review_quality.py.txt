@@ -1,0 +1,115 @@
+"""Independent V95 world quality review. Never mutates author content or installation."""
+from pathlib import Path
+from collections import Counter
+import copy
+import hashlib
+import json
+import sys
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT = Path(__file__).resolve().parent
+sys.path[:0] = [str(ROOT), str(ROOT/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import mechanics_for
+from cat_de_roman_esti.wordgames.service import normalize
+REVIEWER = 'codex-v95-independent-world-quality'
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def digest(v): return hashlib.sha256(B.json_bytes(v)).hexdigest()
+def read(p): return json.loads(p.read_bytes())
+def write(n,v): (OUT/n).write_bytes(B.json_bytes(v))
+base_dir = ROOT/'docs/reviews/v94-words-and-clearer-connections/alchimie'
+base, prior = read(base_dir/'candidate.json'), read(base_dir/'quality-review.json')
+prior_final, prior_audit = read(base_dir/'final-quality.json'), read(base_dir/'live-audit.json')
+assert sha(base_dir/'candidate.json') == prior['candidate_sha256'] == 'd6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188'
+assert prior_final['audit_sha256'] == sha(base_dir/'live-audit.json')
+assert prior_final['catalog_sha256'] == prior_audit['catalog_sha256'] == '8b174e16edf6ad279f9fa6cc0328776cba033be0b177c849ad77d81ec603da89'
+assert prior_final['verdict'] == prior['world_verdict'] == prior_audit['verdict'] == 'accept'
+assert prior_final['reviewer'] == prior['reviewer'] != REVIEWER
+assert prior_audit['candidate_sha256'] == prior['candidate_sha256']
+p = OUT/'candidate.json'
+c = read(p)
+candidate_sha = sha(p)
+assert candidate_sha == 'c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801'
+assert p.read_bytes() == B.json_bytes(B.candidate())
+old_c, old_r = ({r['id']:r for r in base[k]} for k in ('concepts','recipes'))
+concepts, recipes = ({r['id']:r for r in c[k]} for k in ('concepts','recipes'))
+old_cq, old_rq = ({r['id']:r for r in prior[k]} for k in ('concepts','items'))
+assert len(old_c) == 242 and len(old_r) == 332
+assert set(old_cq) == set(old_c) and set(old_rq) == set(old_r)
+for i,r in old_c.items():
+    assert concepts[i] == r and old_cq[i]['verdict'] == 'accept' and old_cq[i]['concept_sha256'] == digest(r)
+for i,r in old_r.items():
+    assert recipes[i] == r and old_rq[i]['verdict'] == 'accept'
+for k in ('world','unlocks','goals'):
+    assert c[k] == base[k]
+assert c['compatible_versions'][:-1] == base['compatible_versions']
+assert c['compatible_versions'][-1]['source_sha256'] == sha(base_dir/'candidate.json')
+assert c['compatible_versions'][-1]['mechanics'] == mechanics_for(base['world']['starter_ids'],{tuple(r['pair']):r['result'] for r in base['recipes']},[(u['after_discoveries'],u['concept_ids']) for u in base['unlocks']])
+new_ids, new_rids = set(concepts)-set(old_c), set(recipes)-set(old_r)
+raw = read(OUT/'raw/proposals.json')
+assert {x['id'] for x in raw['concepts'].values()} == new_ids
+assert {x['id'] for x in raw['recipes']} == new_rids
+kg = read(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')
+surfaces = {normalize(v) for n in kg['kg_nodes'] for v in [n['label_ro'],*n.get('aliases',[])]}
+assert not {normalize(concepts[i]['label']) for i in new_ids} & surfaces
+assert len({normalize(r['label']) for r in concepts.values()}) == len(concepts)
+assert len({tuple(r['pair']) for r in recipes.values()}) == len(recipes)
+def closure(v):
+    owned = set(v['world']['starter_ids'])
+    crafted, tiers, witness = set(), set(), {n:[] for n in owned}
+    while True:
+        progressed = False
+        for u in v['unlocks']:
+            if u['id'] not in tiers and len(crafted) >= u['after_discoveries']:
+                tiers.add(u['id']); owned.update(u['concept_ids']); progressed = True
+                witness.update({n:['supply:'+u['id']] for n in u['concept_ids']})
+        for r in v['recipes']:
+            if r['result'] not in owned and set(r['pair']) <= owned:
+                owned.add(r['result']); crafted.add(r['result']); progressed = True
+                witness[r['result']] = list(dict.fromkeys(witness[r['pair'][0]]+witness[r['pair'][1]]+[r['id']]))
+        if not progressed: break
+    assert owned == {r['id'] for r in v['concepts']}
+    return crafted, tiers, witness
+crafted, tiers, witness = closure(c)
+old_crafted, _, _ = closure(base)
+inputs = {n for r in c['recipes'] for n in r['pair']}
+old_inputs = {n for r in base['recipes'] for n in r['pair']}
+new_inputs = {n for i in new_rids for n in recipes[i]['pair']}
+alts = Counter(r['result'] for r in recipes.values())
+concept_reasons = {
+ 'alw_food_negresa': 'A familiar Romanian cake name, explained through cocoa/chocolate, tray baking and its usual cut pieces. The culinary context is unambiguous; it is distinct from plain sponge and chocolate cream. Original recipes show both cocoa and melted-chocolate forms.',
+ 'alw_food_crema_zahar_ars': 'A recognizable caramel custard with a clear egg/milk/baking/cooling definition. It is not a relabeling of thickened pastry cream or caramel sauce, and both routes retain the uncooked custard stage.',
+ 'alw_food_budinca_paste': 'The descriptive name explains a baked, egg-bound pasta preparation. Sweet and savory forms share that structure. This is a useful next step for prepared pasta with cheese rather than a different flavor name for the same unbound pasta.',
+ 'alw_food_pavlova': 'A borrowed but established dessert name, explained immediately by cooked meringue, whipped cream and fruit. Romanian first-person publication from 2009 and national broadcast in 2022 support ordinary culinary exposure. It is an optional discoverable outcome, never a newly forced goal.',
+ 'alw_food_profiterol': 'The definition explains the pastry-shop dessert through small baked choux shells, filling and sauce. It differs from the existing elongated glazed eclair and reuses dough honestly before baking; the source records a longstanding Romanian pastry-shop version.',
+}
+recipe_reasons = {
+ 'negresa-faina-cacao': 'Flour plus cocoa is an intuitive cake experiment. Additional liquid, sugar, fat, leavening and baking are disclosed; the pair illustrates a recipe idea rather than claiming two ingredients alone are sufficient.',
+ 'negresa-ciocolata-unt': 'Chocolate and butter lead naturally toward a rich baked cake. Eggs and flour are expressly added before baking. The referenced decorated recipe identifies a separate negresa base, so omitted cheesecake/raspberries do not change the selected result.',
+ 'crema-zahar-ars-caramel-ou': 'Egg custard over caramel is a legible route to this familiar dessert. Milk, mixing and a water bath are explicit; cooked pastry cream is not silently converted into raw custard.',
+ 'crema-zahar-ars-caramel-lapte': 'Milk plus caramel gives a forgiving alternate approach to the same custard. Egg setting and baking are stated, preserving the result identity rather than naming a caramel milk drink.',
+ 'budinca-paste-branza-ou': 'Egg binding provides a meaningful transformation of already cooked pasta and cheese. Sour cream and oven setting are explicit. The old optional browned-pasta state does not itself imply egg-bound pudding.',
+ 'budinca-paste-stafide': 'Raisins identify the familiar sweet pasta-pudding variation. The recipe reuses cooked pasta and discloses cheese, eggs, sugar and baking. Hydrating in water avoids importing the source optional alcohol framing.',
+ 'pavlova-bezea-frisca': 'Cooked cooled meringue plus whipped cream is a strong dessert expectation. Fresh fruit is explicitly added; existing Bezea allows modeled meringue and is not turned back into raw foam.',
+ 'pavlova-bezea-fruct': 'Fruit and an already baked meringue base provide a second understandable approach. Cream and assembly are stated, with no forced new ingredient or reheating of the completed base.',
+ 'profiterol-oparit-inghetata': 'Choux dough and ice cream suggest the familiar filled-pastry dessert. Baking small round shells, cooling and filling are explicit before service. No pre-made eclair is reshaped and no raw dough is served.',
+ 'profiterol-oparit-ganache': 'Chocolate-and-cream ganache can serve as the fluid chocolate sauce on baked filled choux. The explanation requires baking and filling first and fluid sauce afterwards, respecting both prepared ingredient identities.',
+}
+assert set(concept_reasons) == new_ids and set(recipe_reasons) == new_rids
+extra = {'alw_food_pavlova':['https://www.protv.ro/emisiuni/vorbeste-lumea/clip/42035-tort-pavlova-un-desert-simplu-si-delicios']}
+new_cq = [{'id':i,'concept_sha256':digest(concepts[i]),'inherited':False,'verdict':'accept','rationale':concept_reasons[i],'sources':concepts[i]['references']+extra.get(i,[])} for i in sorted(new_ids)]
+new_rq = [{'id':i,'verdict':'accept','rationale':recipe_reasons[i],'sources':recipes[i]['sources']} for i in sorted(new_rids)]
+rationale = ('All 242 old concepts and 332 recipes exactly retain accepted V94 judgments, with prior candidate, final and audit bindings independently checked before inheritance. Five new named preparations each have two routes. Cooked meringue and prepared cheese pasta gain onward uses; crafted intermediates increase 61 to 63. Independent closure reaches all 247 concepts and 143 crafted discoveries with the same eight starters, 96 supplies, 12 tiers and 32 goals. All ten new unordered pairs are distinct and preserve previously defined outcomes. Selected raw/prepared states are respected through disclosed cooking and assembly. Capacity remains 247/256 concepts and 342/512 recipes; no alias collision was found. These five new results are terminal, a disclosed limit rather than a claim that every new word deepens the graph. This accepts editorial quality, not final installed runtime, human enjoyment or production readiness.')
+review = {'kind':B.REVIEW_KIND,'role':'quality','reviewer':REVIEWER,'candidate_sha256':candidate_sha,'world_verdict':'accept','world_rationale':rationale,'inherited_review_sha256':sha(base_dir/'quality-review.json'),'concepts':[],'items':[]}
+for i in sorted(concepts):
+    row = copy.deepcopy(old_cq[i]) if i in old_c else next(r for r in new_cq if r['id']==i)
+    if i in old_c: row['inherited'] = True
+    review['concepts'].append(row)
+for i in recipes:
+    row = copy.deepcopy(old_rq[i]) if i in old_r else next(r for r in new_rq if r['id']==i)
+    review['items'].append(row)
+write('quality-review.json', review)
+B.read_review(OUT/'quality-review.json','quality',candidate_sha,set(recipes),c['concepts'])
+write('raw/quality-review.json', {'kind':'alchimie-v95-new-content-quality-review-v1','role':'quality','reviewer':REVIEWER,'candidate_sha256':sha(OUT/'raw/proposals.json'),'complete_candidate_sha256':candidate_sha,'verdict':'accept','world_rationale':rationale,'concepts':new_cq,'items':new_rq})
+checks = {'kind':'alchimie-v95-independent-quality-check-v1','reviewer':REVIEWER,'candidate_sha256':candidate_sha,'raw_sha256':sha(OUT/'raw/proposals.json'),'old_concepts_exact':len(old_c),'old_recipes_exact':len(old_r),'concepts':len(concepts),'recipes':len(recipes),'craftable_results':len(crafted),'compatible_generations':len(c['compatible_versions']),'formerly_terminal_reused':{i:concepts[i]['label'] for i in sorted((old_crafted-old_inputs)&new_inputs)},'crafted_intermediates':len(crafted&inputs),'terminal_results':len(crafted-inputs),'results_with_alternatives':sum(n>1 for n in alts.values()),'new_results':{i:{'label':concepts[i]['label'],'direct_recipes':alts[i],'witness':witness[i]} for i in sorted(new_ids)},'unresolved_findings':[],'preserved_bindings':{str(p.relative_to(ROOT)):sha(p) for p in [base_dir/'candidate.json',base_dir/'quality-review.json',base_dir/'final-quality.json',base_dir/'live-audit.json',ROOT/'cat_de_roman_esti/fixtures/kg_sample.json',ROOT/'docs/CRITIQUE_RUBRIC.md']},'review_source_sha256':sha(Path(__file__)),'limits':['Final installed world audit is not covered by this semantic review.','All five new results are terminal; two old terminals now have onward recipes.','No physical-device or human enjoyment evidence.']}
+write('independent-quality-check.json', checks)
+print(json.dumps({k:v for k,v in checks.items() if k not in {'new_results','preserved_bindings','limits'}},ensure_ascii=False,indent=2))

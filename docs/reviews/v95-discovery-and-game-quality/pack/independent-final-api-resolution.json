@@ -1,0 +1,27 @@
+{
+  "kind": "v95-independent-public-serving-resolution-v1",
+  "reviewer": "codex-v95-independent-world-quality",
+  "verdict": "accept",
+  "initial_blocker": {
+    "file": "independent-final-api-blocker.json",
+    "sha256": "d5ef7277f707dbd35cd1277989c5175127146c2649efef2d84d52466c761622e",
+    "log": "independent-final-api.log",
+    "log_sha256": "31b2db19e00093e9cd14d43b9d06ffa6946a62ffa48ec84686334c566c6b9fdc"
+  },
+  "final_audit": {
+    "file": "independent-final-api.json",
+    "sha256": "0cd53ac1546f6daa9087faad8875f58628b191d7b29e30a8d9bf1e2b1c873f95",
+    "log": "independent-final-api-final.log",
+    "log_sha256": "06f263d951ca8e6461d645756db2bb22ace9dbeca929d54ffa2627d89ce881c5"
+  },
+  "selector_review": {
+    "file": "independent-selector-review.json",
+    "sha256": "916cb0324f5e641fcc816cd838103db172651446887e1f603a85cd3efbd4e7e6"
+  },
+  "reviewed_targeted_tests": {
+    "path": "tests/test_v95_lant_selection.py",
+    "sha256": "84a9e54982a2ac0f8b7c428aebf0161ef51341032cec774075179993f46e474f",
+    "assessment": "Read all10 cases: distribution/repeatability, two daily scopes, exclusions, thin and exhausted shelves, unchanged normal RNG state and two actual anonymous new-board seeds. Author reports10 passing; my separate56daily/1024casual probes and public BFF audit corroborate actual behavior."
+  },
+  "resolved": "Casual easy picks retain a bounded chance for eligible two-route boards, while wider routes remain preferred. Both new rounds now naturally serve and both shortest routes win, preserving recovery, hints, scoring and private state."
+}

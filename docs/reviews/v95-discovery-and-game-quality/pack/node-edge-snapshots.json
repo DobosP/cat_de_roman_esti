@@ -1,0 +1,973 @@
+{
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "nodes": [
+    {
+      "id": "n_gas_salata_vinete",
+      "node_type": "concept",
+      "label_ro": "Salată de vinete",
+      "category": "gastronomie",
+      "description": "Pastă de vinete coapte, frecată cu ulei și ceapă, servită pe pâine.",
+      "salience": 0.8528,
+      "difficulty_tier": "easy",
+      "degree": 10,
+      "aliases": [
+        "vinete tocate",
+        "vinete coapte tocate",
+        "salată de pătlăgele vinete",
+        "salată vinete",
+        "salatei de vinete",
+        "salatelor de vinete"
+      ]
+    },
+    {
+      "id": "n_v3gas_orez",
+      "node_type": "concept",
+      "label_ro": "Orez",
+      "category": "gastronomie",
+      "description": "Cereală gătită prin fierbere, folosită în garnituri și feluri principale.",
+      "salience": 0.2249,
+      "difficulty_tier": "hard",
+      "degree": 6,
+      "aliases": [
+        "orezul",
+        "orez fiert",
+        "orez alb"
+      ]
+    },
+    {
+      "id": "n_v3lit_carte",
+      "node_type": "concept",
+      "label_ro": "Carte",
+      "category": "literatura",
+      "description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+      "salience": 0.973,
+      "difficulty_tier": "easy",
+      "degree": 38,
+      "aliases": [
+        "cartea",
+        "cărți",
+        "cărțile",
+        "volum"
+      ]
+    },
+    {
+      "id": "n_v3muz_pian",
+      "node_type": "concept",
+      "label_ro": "Pian",
+      "category": "muzica",
+      "description": "Instrument muzical cu clape și corzi lovite de ciocănele.",
+      "salience": 0.3508,
+      "difficulty_tier": "medium",
+      "degree": 5,
+      "aliases": [
+        "pianul",
+        "piane",
+        "pianele",
+        "pianului de concert",
+        "pianelor de concert"
+      ]
+    },
+    {
+      "id": "n_v3soc_scoala",
+      "node_type": "concept",
+      "label_ro": "Școală",
+      "category": "societate",
+      "description": "Instituție de învățământ pentru educația copiilor și tinerilor.",
+      "salience": 0.9181,
+      "difficulty_tier": "easy",
+      "degree": 34,
+      "aliases": [
+        "școli",
+        "școlile",
+        "unitate școlară",
+        "școlii",
+        "școlilor"
+      ]
+    },
+    {
+      "id": "n_v4gas_paine",
+      "node_type": "concept",
+      "label_ro": "Pâine",
+      "category": "gastronomie",
+      "description": "Aliment de bază făcut din aluat copt, consumat la masă.",
+      "salience": 0.9273,
+      "difficulty_tier": "easy",
+      "degree": 21,
+      "aliases": [
+        "pâinea",
+        "pâini",
+        "pâinile",
+        "pită",
+        "pite",
+        "pitele",
+        "pitei",
+        "pitelor",
+        "pâinii",
+        "pâinilor"
+      ]
+    },
+    {
+      "id": "n_v4gas_fasole",
+      "node_type": "concept",
+      "label_ro": "Fasole",
+      "category": "gastronomie",
+      "description": "Plantă alimentară cu boabe sau păstăi, folosită în mâncăruri gătite.",
+      "salience": 0.6488,
+      "difficulty_tier": "medium",
+      "degree": 4,
+      "aliases": [
+        "fasolea",
+        "fasolei",
+        "fasole boabe"
+      ]
+    },
+    {
+      "id": "n_v4soc_copil",
+      "node_type": "concept",
+      "label_ro": "copil",
+      "category": "societate",
+      "description": "Persoană aflată la vârsta copilăriei sau fiu ori fiică.",
+      "salience": 0.909,
+      "difficulty_tier": "easy",
+      "degree": 26,
+      "aliases": [
+        "copilul",
+        "copii",
+        "copiii",
+        "copilului",
+        "copiilor"
+      ]
+    },
+    {
+      "id": "n_v17gas_dulceata",
+      "node_type": "concept",
+      "label_ro": "Dulceață",
+      "category": "gastronomie",
+      "description": "Fructe fierte în sirop de zahăr și păstrate la borcan pentru iarnă. Se servește peste papanași și clătite sau simplă, cu un pahar de apă rece.",
+      "salience": 0.76,
+      "difficulty_tier": "easy",
+      "degree": 6,
+      "aliases": [
+        "dulcețuri",
+        "dulceață de casă",
+        "dulceață la borcan"
+      ]
+    },
+    {
+      "id": "n_v23via_ghiozdan",
+      "node_type": "concept",
+      "label_ro": "Ghiozdan",
+      "category": "viata_de_roman",
+      "description": "Geantă purtată pe spate în care elevii își duc la școală manualele, caietele și rechizitele.",
+      "salience": 0.84,
+      "difficulty_tier": "easy",
+      "degree": 13,
+      "aliases": [
+        "ghiozdanul",
+        "rucsac școlar"
+      ]
+    },
+    {
+      "id": "n_v23via_penar",
+      "node_type": "concept",
+      "label_ro": "Penar",
+      "category": "viata_de_roman",
+      "description": "Etui pentru instrumentele de scris, întâlnit în mod obișnuit printre rechizitele unui elev.",
+      "salience": 0.78,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "penarul",
+        "trusă de creioane"
+      ]
+    },
+    {
+      "id": "n_v23via_tabla_scolara",
+      "node_type": "concept",
+      "label_ro": "Tablă școlară",
+      "category": "viata_de_roman",
+      "description": "Suprafață de scris folosită de profesor și elevi în sala de clasă, cu cretă sau markere.",
+      "salience": 0.82,
+      "difficulty_tier": "easy",
+      "degree": 11,
+      "aliases": [
+        "tabla de la școală",
+        "tablă de clasă",
+        "tablă"
+      ]
+    },
+    {
+      "id": "n_v24_food_breakfast_unt",
+      "node_type": "concept",
+      "label_ro": "Unt",
+      "category": "gastronomie",
+      "description": "Concept cotidian din grupul «alimente pentru micul dejun»: Unt.",
+      "salience": 0.88,
+      "difficulty_tier": "easy",
+      "degree": 8,
+      "aliases": [
+        "untul",
+        "untului"
+      ]
+    },
+    {
+      "id": "n_v24_food_breakfast_miere",
+      "node_type": "concept",
+      "label_ro": "Miere",
+      "category": "gastronomie",
+      "description": "Concept cotidian din grupul «alimente pentru micul dejun»: Miere.",
+      "salience": 0.88,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "mierea",
+        "mierii"
+      ]
+    },
+    {
+      "id": "n_v24_food_small_fruit_cireasa",
+      "node_type": "concept",
+      "label_ro": "Cireașă",
+      "category": "gastronomie",
+      "description": "Concept cotidian din grupul «fructe mici»: Cireașă.",
+      "salience": 0.86,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "cireșe",
+        "cireșele",
+        "cireșei",
+        "cireșelor"
+      ]
+    },
+    {
+      "id": "n_v24_food_garden_veg_mazare",
+      "node_type": "concept",
+      "label_ro": "Mazăre",
+      "category": "gastronomie",
+      "description": "Concept cotidian din grupul «legume de grădină»: Mazăre.",
+      "salience": 0.84,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "mazărea",
+        "mazării"
+      ]
+    },
+    {
+      "id": "n_v24_food_snack_biscuit",
+      "node_type": "concept",
+      "label_ro": "Biscuit",
+      "category": "gastronomie",
+      "description": "Concept cotidian din grupul «gustare simplă»: Biscuit.",
+      "salience": 0.87,
+      "difficulty_tier": "easy",
+      "degree": 15,
+      "aliases": [
+        "biscuitul",
+        "biscuiți",
+        "biscuiții"
+      ]
+    },
+    {
+      "id": "n_v24_home_appliances_lampa",
+      "node_type": "concept",
+      "label_ro": "Lampă",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «obiecte utile în casă»: Lampă.",
+      "salience": 0.9,
+      "difficulty_tier": "easy",
+      "degree": 6,
+      "aliases": [
+        "lămpi",
+        "lămpile",
+        "lămpii",
+        "lămpilor"
+      ]
+    },
+    {
+      "id": "n_v24_nature_sky_soare",
+      "node_type": "concept",
+      "label_ro": "Soare",
+      "category": "stiinta",
+      "description": "Concept cotidian din grupul «corpuri văzute pe cer»: Soare.",
+      "salience": 0.94,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "soarele",
+        "soarelui"
+      ]
+    },
+    {
+      "id": "n_v24_weather_storm_fulger",
+      "node_type": "concept",
+      "label_ro": "Fulger",
+      "category": "stiinta",
+      "description": "Concept cotidian din grupul «fenomene de furtună»: Fulger.",
+      "salience": 0.88,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "fulgerul",
+        "fulgere",
+        "fulgerele",
+        "fulgerului",
+        "fulgerelor"
+      ]
+    },
+    {
+      "id": "n_v24_action_routine_a_lucra",
+      "node_type": "concept",
+      "label_ro": "A lucra",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «rutina zilnică»: A lucra.",
+      "salience": 0.93,
+      "difficulty_tier": "easy",
+      "degree": 9,
+      "aliases": [
+        "lucrez",
+        "lucrează",
+        "lucrăm",
+        "lucra",
+        "lucrezi",
+        "lucrați"
+      ]
+    },
+    {
+      "id": "n_v30_kitchen_utensil_lingura",
+      "node_type": "concept",
+      "label_ro": "Lingură",
+      "category": "gastronomie",
+      "description": "Ustensilă cu mâner și cap adâncit, folosită pentru a lua mâncare lichidă.",
+      "salience": 0.94,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "linguri",
+        "lingurile",
+        "lingurii"
+      ]
+    },
+    {
+      "id": "n_v32_workshop_hand_ciocan",
+      "node_type": "concept",
+      "label_ro": "Ciocan",
+      "category": "viata_de_roman",
+      "description": "Unealtă cu mâner și cap greu, folosită pentru a bate cuie.",
+      "salience": 0.94,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "ciocanul",
+        "ciocane",
+        "ciocanele",
+        "ciocanului",
+        "ciocanului de atelier",
+        "ciocanelor de atelier"
+      ]
+    },
+    {
+      "id": "n_v32_workshop_fastener_cui",
+      "node_type": "concept",
+      "label_ro": "Cui",
+      "category": "viata_de_roman",
+      "description": "Piesă mică și ascuțită din metal, bătută cu ciocanul pentru a prinde obiecte.",
+      "salience": 0.92,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "cuiul",
+        "cuie",
+        "cuiele",
+        "cuiului",
+        "cuiului de atelier",
+        "cuielor de atelier"
+      ]
+    },
+    {
+      "id": "n_v32_workshop_hand_surubelnita",
+      "node_type": "concept",
+      "label_ro": "Șurubelniță",
+      "category": "viata_de_roman",
+      "description": "Unealtă folosită pentru a strânge sau desface șuruburi.",
+      "salience": 0.93,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "șurubelnițe",
+        "șurubelnițele",
+        "șurubelniței",
+        "șurubelniței de atelier",
+        "șurubelnițelor de atelier"
+      ]
+    },
+    {
+      "id": "n_v32_workshop_fastener_surub",
+      "node_type": "concept",
+      "label_ro": "Șurub",
+      "category": "viata_de_roman",
+      "description": "Piesă metalică filetată care prinde obiecte prin rotire.",
+      "salience": 0.92,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "șurubul",
+        "șuruburi",
+        "șuruburile",
+        "șurubului",
+        "șurubului de atelier",
+        "șuruburilor de atelier"
+      ]
+    },
+    {
+      "id": "n_v32_workshop_hand_cleste",
+      "node_type": "concept",
+      "label_ro": "Clește",
+      "category": "viata_de_roman",
+      "description": "Unealtă cu două brațe, folosită pentru a prinde, îndoi sau tăia.",
+      "salience": 0.91,
+      "difficulty_tier": "easy",
+      "degree": 7,
+      "aliases": [
+        "cleștele",
+        "clești",
+        "cleștii",
+        "cleștelui",
+        "cleștelui de atelier",
+        "cleștilor de atelier"
+      ]
+    },
+    {
+      "id": "n_v33_electric_light_bec",
+      "node_type": "concept",
+      "label_ro": "Bec",
+      "category": "viata_de_roman",
+      "description": "Obiect care produce lumină când primește energie electrică.",
+      "salience": 0.94,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "becul",
+        "becuri",
+        "becurile",
+        "becului"
+      ]
+    },
+    {
+      "id": "n_v33_forest_animal_vulpe",
+      "node_type": "concept",
+      "label_ro": "Vulpe",
+      "category": "stiinta",
+      "description": "Mamifer de pădure cu bot ascuțit și coadă stufoasă.",
+      "salience": 0.93,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "vulpea",
+        "vulpi",
+        "vulpile",
+        "vulpii"
+      ]
+    },
+    {
+      "id": "n_v84_food_cuptor",
+      "node_type": "concept",
+      "label_ro": "Cuptor de bucătărie",
+      "category": "gastronomie",
+      "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor.",
+      "salience": 0.85,
+      "difficulty_tier": "easy",
+      "degree": 8,
+      "aliases": [
+        "cuptorul de bucătărie",
+        "cuptorului de bucătărie",
+        "cuptoare de bucătărie",
+        "cuptoarele de bucătărie"
+      ]
+    },
+    {
+      "id": "n_v84_food_arpacas",
+      "node_type": "concept",
+      "label_ro": "Arpacaș",
+      "category": "gastronomie",
+      "description": "Boabe decorticate de cereale, precum grâu sau orz, fierte pentru preparate culinare.",
+      "salience": 0.65,
+      "difficulty_tier": "medium",
+      "degree": 4,
+      "aliases": [
+        "arpacașul",
+        "arpacașului"
+      ]
+    },
+    {
+      "id": "n_v86_food_frisca",
+      "node_type": "concept",
+      "label_ro": "Frișcă",
+      "category": "gastronomie",
+      "description": "Smântână dulce aerată prin batere, folosită la umplerea și decorarea deserturilor.",
+      "salience": 0.85,
+      "difficulty_tier": "easy",
+      "degree": 10,
+      "aliases": [
+        "frișcă bătută",
+        "frișcă naturală",
+        "frișcă de smântână"
+      ]
+    },
+    {
+      "id": "n_v86_food_zahar_pudra",
+      "node_type": "concept",
+      "label_ro": "Zahăr pudră",
+      "category": "gastronomie",
+      "description": "Zahăr măcinat foarte fin, folosit în creme și pentru pudrarea deserturilor.",
+      "salience": 0.85,
+      "difficulty_tier": "easy",
+      "degree": 8,
+      "aliases": [
+        "zahărul pudră",
+        "zahărului pudră",
+        "zahăr pudră fin"
+      ]
+    },
+    {
+      "id": "n_v87_food_tort_diplomat",
+      "node_type": "concept",
+      "label_ro": "Tort Diplomat",
+      "category": "gastronomie",
+      "description": "Desert rece cu cremă aerată, fructe și blat sau pișcoturi.",
+      "salience": 0.75,
+      "difficulty_tier": "easy",
+      "degree": 7,
+      "aliases": [
+        "tortul Diplomat",
+        "tortului Diplomat",
+        "torturi Diplomat"
+      ]
+    },
+    {
+      "id": "n_v87_food_piscot",
+      "node_type": "concept",
+      "label_ro": "Pișcot",
+      "category": "gastronomie",
+      "description": "Produs de patiserie alungit și poros, folosit și la asamblarea deserturilor în straturi.",
+      "salience": 0.8,
+      "difficulty_tier": "easy",
+      "degree": 6,
+      "aliases": [
+        "pișcotul",
+        "pișcotului",
+        "pișcoturi",
+        "pișcoturile"
+      ]
+    },
+    {
+      "id": "n_v90_food_firimitura",
+      "node_type": "concept",
+      "label_ro": "Firimitură",
+      "category": "gastronomie",
+      "description": "Bucățică foarte mică desprinsă din pâine sau din alt aliment, de exemplu dintr-un biscuit.",
+      "salience": 0.9,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "firimituri",
+        "firimiturile",
+        "firimiturii",
+        "firimiturilor"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "de4518",
+      "src_id": "n_v4soc_copil",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "related_to",
+      "label_ro": "merge la școală",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7563",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v23via_penar",
+      "relation": "same_category",
+      "label_ro": "rechizite purtate la școală",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7564",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v23via_tabla_scolara",
+      "relation": "same_category",
+      "label_ro": "obiecte folosite pentru scris la școală",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7578",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "related_to",
+      "label_ro": "purtat la școală",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7579",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "conține cărți și manuale",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7580",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "folosit de elevi",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7581",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "related_to",
+      "label_ro": "rechizită școlară",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7582",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "păstrat lângă caiete și cărți",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7583",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "folosit de elevi",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7584",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "part_of",
+      "label_ro": "se află în sala de clasă",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7585",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "susține lecția din manual",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7586",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "folosită în clasa elevilor",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7607",
+      "src_id": "n_v24_food_breakfast_unt",
+      "dst_id": "n_v24_food_breakfast_miere",
+      "relation": "served_together",
+      "label_ro": "alimente pentru micul dejun",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8076",
+      "src_id": "n_v3soc_scoala",
+      "dst_id": "n_v3lit_carte",
+      "relation": "beginner_repair",
+      "label_ro": "legătură intuitivă",
+      "strength": 0.96,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8090",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "beginner_diamond",
+      "label_ro": "două drumuri spre lecție",
+      "strength": 0.93,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8091",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v3lit_carte",
+      "relation": "beginner_diamond",
+      "label_ro": "două drumuri spre lecție",
+      "strength": 0.93,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8368",
+      "src_id": "n_v32_workshop_hand_ciocan",
+      "dst_id": "n_v32_workshop_fastener_cui",
+      "relation": "used_with",
+      "label_ro": "se folosește pentru a bate cuiul",
+      "strength": 0.99,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8369",
+      "src_id": "n_v32_workshop_hand_ciocan",
+      "dst_id": "n_v32_workshop_hand_cleste",
+      "relation": "same_kind",
+      "label_ro": "este unealtă de mână, ca cleștele",
+      "strength": 0.94,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8370",
+      "src_id": "n_v32_workshop_fastener_cui",
+      "dst_id": "n_v32_workshop_fastener_surub",
+      "relation": "same_kind",
+      "label_ro": "este element de prindere, ca șurubul",
+      "strength": 0.96,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8371",
+      "src_id": "n_v32_workshop_fastener_cui",
+      "dst_id": "n_v32_workshop_hand_cleste",
+      "relation": "removed_with",
+      "label_ro": "poate fi scos cu cleștele",
+      "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8372",
+      "src_id": "n_v32_workshop_fastener_surub",
+      "dst_id": "n_v32_workshop_hand_surubelnita",
+      "relation": "turned_with",
+      "label_ro": "se rotește cu șurubelnița",
+      "strength": 0.99,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8373",
+      "src_id": "n_v32_workshop_fastener_surub",
+      "dst_id": "n_v32_workshop_hand_cleste",
+      "relation": "held_with",
+      "label_ro": "poate fi prins cu cleștele",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8374",
+      "src_id": "n_v32_workshop_hand_surubelnita",
+      "dst_id": "n_v32_workshop_hand_cleste",
+      "relation": "same_kind",
+      "label_ro": "este unealtă de mână, ca cleștele",
+      "strength": 0.94,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8375",
+      "src_id": "n_v32_workshop_hand_surubelnita",
+      "dst_id": "n_v32_workshop_hand_ciocan",
+      "relation": "same_kind",
+      "label_ro": "este unealtă de mână, ca ciocanul",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8377",
+      "src_id": "n_v32_workshop_hand_cleste",
+      "dst_id": "n_v32_workshop_fastener_cui",
+      "relation": "grasps_fastener",
+      "label_ro": "poate prinde și scoate cuiul",
+      "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8380",
+      "src_id": "n_v24_action_routine_a_lucra",
+      "dst_id": "n_v32_workshop_hand_ciocan",
+      "relation": "uses_tool",
+      "label_ro": "poate folosi un ciocan",
+      "strength": 0.98,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8382",
+      "src_id": "n_v24_action_routine_a_lucra",
+      "dst_id": "n_v32_workshop_hand_surubelnita",
+      "relation": "uses_tool",
+      "label_ro": "poate folosi o șurubelniță",
+      "strength": 0.98,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8384",
+      "src_id": "n_v24_action_routine_a_lucra",
+      "dst_id": "n_v32_workshop_hand_cleste",
+      "relation": "uses_tool",
+      "label_ro": "poate folosi un clește",
+      "strength": 0.98,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8434",
+      "src_id": "n_v24_home_appliances_lampa",
+      "dst_id": "n_v33_electric_light_bec",
+      "relation": "contains_part",
+      "label_ro": "conține un bec",
+      "strength": 0.99,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8585",
+      "src_id": "n_v84_food_cuptor",
+      "dst_id": "n_v4gas_paine",
+      "relation": "used_to_cook",
+      "label_ro": "coace",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8668",
+      "src_id": "n_v86_food_zahar_pudra",
+      "dst_id": "n_v86_food_frisca",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește unele variante de",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8701",
+      "src_id": "n_v24_food_breakfast_unt",
+      "dst_id": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele rețete de",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8703",
+      "src_id": "n_v84_food_cuptor",
+      "dst_id": "n_v24_food_snack_biscuit",
+      "relation": "preparation_tool",
+      "label_ro": "coace",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8722",
+      "src_id": "n_v87_food_piscot",
+      "dst_id": "n_v87_food_tort_diplomat",
+      "relation": "ingredient_variant",
+      "label_ro": "căptușește unele variante de",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8723",
+      "src_id": "n_v86_food_frisca",
+      "dst_id": "n_v87_food_tort_diplomat",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru crema din",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8730",
+      "src_id": "n_v86_food_zahar_pudra",
+      "dst_id": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "pudrează unele variante de",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8731",
+      "src_id": "n_v84_food_cuptor",
+      "dst_id": "n_v87_food_piscot",
+      "relation": "preparation_tool",
+      "label_ro": "coace",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8787",
+      "src_id": "n_v4gas_paine",
+      "dst_id": "n_v90_food_firimitura",
+      "relation": "crumbles_into",
+      "label_ro": "lasă bucățele mici când se taie sau se rupe",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8788",
+      "src_id": "n_v24_food_snack_biscuit",
+      "dst_id": "n_v90_food_firimitura",
+      "relation": "crumbles_into",
+      "label_ro": "poate lăsa bucățele mici la rupere sau consum",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    }
+  ]
+}

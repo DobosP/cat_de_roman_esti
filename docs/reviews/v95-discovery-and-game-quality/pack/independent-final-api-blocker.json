@@ -1,0 +1,148 @@
+{
+  "kind": "v95-independent-public-serving-blocker-v1",
+  "reviewer": "codex-v95-independent-world-quality",
+  "blocker": "Both newly approved easy Lanț rounds are filtered out by the active wide-beginner selector for fresh anonymous players.",
+  "failed_public_seed_search": {
+    "id": "lt_gastronomie_243",
+    "category": "gastronomie",
+    "difficulty": "usor",
+    "seed_min": 0,
+    "seed_max": 2999,
+    "result": "No selection; assertion failure retained in log."
+  },
+  "affected_ids": [
+    "lt_gastronomie_243",
+    "lt_gastronomie_244"
+  ],
+  "wide_preference_floor": 3,
+  "pool": [
+    {
+      "id": "lt_gastronomie_015",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "id": "lt_gastronomie_017",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        20,
+        20,
+        131
+      ]
+    },
+    {
+      "id": "lt_gastronomie_018",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "lt_gastronomie_105",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        22,
+        22,
+        22
+      ]
+    },
+    {
+      "id": "lt_gastronomie_107",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "id": "lt_gastronomie_163",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "id": "lt_gastronomie_220",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "id": "lt_gastronomie_221",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "lt_gastronomie_222",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": "lt_gastronomie_224",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": "lt_gastronomie_241",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": "lt_gastronomie_243",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "id": "lt_gastronomie_244",
+      "pilot_eligible": true,
+      "runtime_corridor": [
+        2,
+        2,
+        2
+      ]
+    }
+  ],
+  "source_bindings": {
+    "cat_de_roman_esti/wordgames/lant.py": "1818ed57384d6f9b20359a21dfa8fdee585cc9a7712453f4699bddeecd13ff84",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/_progress.py": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48",
+    "cat_de_roman_esti/fixtures/games_pack.json": "27b1dba81a2e02d1e2616a1ad4e6eceefe12d189a86a0913c3655adee99bb3cf",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b4c32d0ff65e024e4bd2e292c03e5382f0927c7c388367bf1f80bd7a3c09a831"
+  },
+  "script_sha256": "078e0232f1084c8d3744b9d1407193dba402da9f25a42423dc6ce94fb0c6b002",
+  "failed_log_sha256": "31b2db19e00093e9cd14d43b9d06ffa6946a62ffa48ec84686334c566c6b9fdc",
+  "policy_reference": "docs/adr/0043-lant-visible-route-corridors.md",
+  "scope": "No source changed. Previous semantic acceptance does not establish natural public serving."
+}

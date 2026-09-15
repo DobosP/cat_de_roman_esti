@@ -9,6 +9,7 @@ import { sound } from "../sound";
 import "../styles/alchimie-explore.css";
 
 const ACCENT = "#c5a0f0";
+const EMPTY_PAIR_FRESH_MS = 30_000;
 const normalize = (value: string) => value.normalize("NFD").replace(/\p{M}/gu, "").toLocaleLowerCase("ro-RO").trim();
 type Recovery = "changed" | "failed" | "invalid" | null;
 
@@ -18,6 +19,7 @@ export default function AlchimieExplore({ onExit }: {
 }) {
   const initialSave = useMemo(() => readExplorationSave(), []);
   const savedRaw = useRef(initialSave.raw);
+  const stateConfirmedAt = useRef(0);
   const generation = useRef(0);
   const flight = useRef(false);
   const [state, setState] = useState<ExplorationState | null>(null);
@@ -77,6 +79,7 @@ export default function AlchimieExplore({ onExit }: {
     }
     if (saved.kind === "saved") savedRaw.current = saved.raw;
     setStorageUnavailable(saved.kind === "unavailable");
+    stateConfirmedAt.current = performance.now();
     setState(fresh);
     setRecovery(null);
     return true;
@@ -170,19 +173,32 @@ export default function AlchimieExplore({ onExit }: {
   }, [state, locked, adopt]);
 
   const combine = useCallback((a: string, b: string, keyboard = false) => {
-    if (a === b || !state || [a, b].some((id) => !state.inventory.some((item) => item.id === id && item.status === "active"))) return;
+    if (a === b || !state || locked || flight.current || [a, b].some((id) => !state.inventory.some((item) => item.id === id && item.status === "active"))) return;
     const origin = document.activeElement;
+    // Local acknowledgments obey the same saved-collection ownership guard as requests.
+    const save = readExplorationSave();
+    if (save.kind !== "unavailable" && save.raw !== savedRaw.current) { setRecovery("changed"); return; }
+    const pairLabel = [a, b].map((id) => state.inventory.find((item) => item.id === id)?.label).join(" + ");
+    const tried = state.empty_pairs?.some(([left, right]) =>
+      (left === a && right === b) || (left === b && right === a));
+    // Revalidate older observations so a newly published recipe can be discovered.
+    if (tried && performance.now() - stateConfirmedAt.current < EMPTY_PAIR_FRESH_MS) {
+      setMessage(`${pairLabel}: ai încercat deja această pereche fără rezultat. Alege alt ingredient.`);
+      // No request disables this button; keep its existing focus without a deferred ref.
+      if (keyboard && origin instanceof HTMLElement) origin.scrollIntoView({ block: "center" });
+      return;
+    }
     void act((gameId) => explorationApi.combine(gameId, a, b), (fresh) => {
       const result = fresh as ExplorationResult;
       const carry = fresh.inventory.find((item) => result.discovered.some((entry) => entry.id === item.id) && item.status === "active");
       const next = carry?.id ?? (fresh.inventory.some((item) => item.id === a && item.status === "active") ? a : null);
       setSelected(next);
       setFreshIds([...result.discovered, ...(result.supplied ?? [])].map((item) => item.id));
-      setMessage(result.message + (carry ? ` ${carry.label} rămâne ales.` : ""));
+      setMessage((result.result === null ? `${pairLabel}: ` : "") + result.message + (carry ? ` ${carry.label} rămâne ales.` : ""));
       if (result.discovered.length) { setQuery(""); sound.playHop(); }
       if (origin instanceof HTMLElement && origin.matches(".alchemy-word")) pendingFocus.current = { origin, id: next, keyboard };
     });
-  }, [state, act]);
+  }, [state, locked, act]);
 
   const choose = useCallback((id: string, keyboard: boolean) => {
     if (locked || flight.current) return;
@@ -203,7 +219,7 @@ export default function AlchimieExplore({ onExit }: {
     // Keyboard activation must leave its focus visible. Centering clears the bench,
     // whose pinned height is bounded; pointer crafting keeps its browsing position.
     if (pending.keyboard) (target ?? library.current?.querySelector("h2"))?.scrollIntoView({ block: "center" });
-  }, [state, busy]);
+  }, [state, busy, message]);
 
   useEffect(() => {
     const escape = (event: KeyboardEvent) => {
@@ -219,6 +235,8 @@ export default function AlchimieExplore({ onExit }: {
     ? normalize(item.label).includes(normalizedQuery)
     : state.complete || showAll || item.status === "active" || freshIds.includes(item.id)) ?? [];
   const selectedItem = state?.inventory.find((item) => item.id === selected);
+  const emptyPartners = new Set((state?.empty_pairs ?? []).flatMap(([a, b]) =>
+    a === selected ? [b] : b === selected ? [a] : []));
   const goal = state?.goals.find((item) => item.id === state.goal_id);
   const journal = state?.inventory.filter((item) => item.parents !== null).slice().reverse() ?? [];
   const normalizedJournalQuery = normalize(journalQuery);
@@ -301,16 +319,17 @@ export default function AlchimieExplore({ onExit }: {
                     const hinted = state.hint?.pair?.some((entry) => entry.id === item.id) ?? false;
                     const isSelected = selected === item.id;
                     const fresh = freshIds.includes(item.id);
+                    const triedEmpty = !inactive && emptyPartners.has(item.id);
                     return <button key={item.id} ref={(node) => { if (node) buttons.current.set(item.id, node); else buttons.current.delete(item.id); }} type="button"
-                      className={`chip alchemy-word${isSelected ? " alchemy-word--selected" : ""}${fresh ? " alchemy-word--fresh" : ""}${hinted ? " alchemy-word--hint" : ""}${dropId === item.id ? " alchemy-word--drop" : ""}`}
-                      disabled={locked || inactive} aria-pressed={isSelected} aria-label={`${item.label}${inactive ? ", colecționat" : ""}`}
-                      title={inactive ? item.status === "final" ? "Colecționat: nu intră în alte rețete." : "Toate descoperirile cu acest cuvânt sunt deja în colecție." : item.description}
+                      className={`chip alchemy-word${isSelected ? " alchemy-word--selected" : ""}${fresh ? " alchemy-word--fresh" : ""}${hinted ? " alchemy-word--hint" : ""}${triedEmpty ? " alchemy-word--tried" : ""}${dropId === item.id ? " alchemy-word--drop" : ""}`}
+                      disabled={locked || inactive} aria-pressed={isSelected} aria-label={`${item.label}${inactive ? ", colecționat" : triedEmpty ? `, încercat fără rezultat cu ${selectedItem?.label}` : ""}`}
+                      title={inactive ? item.status === "final" ? "Colecționat: nu intră în alte rețete." : "Toate descoperirile cu acest cuvânt sunt deja în colecție." : triedEmpty ? `Încercat fără rezultat cu ${selectedItem?.label}. Alege altă pereche.` : item.description}
                       onClick={(event) => choose(item.id, event.detail === 0)} draggable={!locked && !inactive}
                       onDragStart={(event) => { if (locked || inactive || flight.current) { event.preventDefault(); return; } dragSource.current = { gameId: state.game_id, id: item.id }; event.dataTransfer.setData("text/plain", item.id); event.dataTransfer.effectAllowed = "copy"; }}
                       onDragOver={(event) => { if (!locked && !inactive && dragSource.current?.gameId === state.game_id && dragSource.current.id !== item.id) { event.preventDefault(); setDropId(item.id); event.dataTransfer.dropEffect = "copy"; } }}
                       onDragLeave={() => setDropId(null)} onDragEnd={() => { dragSource.current = null; setDropId(null); }}
                       onDrop={(event) => { event.preventDefault(); const source = dragSource.current; dragSource.current = null; setDropId(null); if (source?.gameId === state.game_id && source.id === event.dataTransfer.getData("text/plain")) combine(source.id, item.id); }}>
-                      <span className="alchemy-word-label">{item.label}</span>{(isSelected || fresh || inactive) && <span className="alchemy-word-meta" aria-hidden>{isSelected ? "✓ Ales" : fresh ? "✦ Nou" : "Colecționat"}</span>}
+                      <span className="alchemy-word-label">{item.label}</span>{(isSelected || fresh || inactive || triedEmpty) && <span className="alchemy-word-meta" aria-hidden>{isSelected ? "✓ Ales" : triedEmpty ? "Încercat" : fresh ? "✦ Nou" : "Colecționat"}</span>}
                     </button>;
                   })}
                   {items.length === 0 && <p className="alchemy-empty-inventory">{query ? "Niciun cuvânt găsit." : "Toate cuvintele sunt colecționate. Bifează „Toate” pentru a le vedea."}</p>}

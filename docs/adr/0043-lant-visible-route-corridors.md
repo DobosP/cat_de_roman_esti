@@ -1,7 +1,7 @@
 # ADR-0043: Lanț uses visible local route corridors
 
 Date: 2026-07-18
-Status: partially superseded by ADR-0062 for hint resets, ADR-0122 for choice selection and ADR-0149 for generic first hints
+Status: partially superseded by ADR-0062 for hint resets, ADR-0122 for choice selection ADR-0149 for generic first hints, and ADR-0153 for casual beginner sampling
 
 ## Decision
 

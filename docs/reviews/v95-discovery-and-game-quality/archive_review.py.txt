@@ -1,0 +1,32 @@
+from pathlib import Path
+import hashlib,gzip,json,subprocess
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+SCRATCH=Path(__file__).parent
+OUT=ROOT/'docs/reviews/v95-discovery-and-game-quality'
+BASE='cf6b28bc0d247be33e494be1395ca7d676a9f4b4'
+def sha(b):return hashlib.sha256(b).hexdigest()
+records=[]
+for path in sorted(SCRATCH.rglob('*')):
+ if not path.is_file():continue
+ rel=path.relative_to(SCRATCH)
+ if any(p.startswith(('venv314','pytest-','__pycache__','playwright')) or p in ('playwright','test-results') for p in rel.parts[:-1]):continue
+ if path.suffix not in ('.json','.py','.mjs','.md','.txt','.log','.png'):continue
+ blob=path.read_bytes();name=str(rel)
+ if path.suffix=='.py':name+='.txt'
+ archived=blob
+ # Preserve output exactly while avoiding terminal whitespace in source patches.
+ if path.suffix=='.log':name+='.gz';archived=gzip.compress(blob,mtime=0)
+ target=OUT/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(archived)
+ records.append({'source':str(rel),'source_size':len(blob),'sha256':sha(blob),'archive':name,'archive_size':len(archived),'archive_sha256':sha(archived),'encoding':'gzip' if name.endswith('.gz') else 'identity'})
+manifest={'kind':'v95-review-archive-v1','baseline_commit':BASE,'scope':'Exact author/reviewer sources, original failures and final checks. Python environments, test working directories and unbound browser traces are excluded.','files':records}
+(OUT/'archive-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
+changed=set(subprocess.check_output(['git','diff','--name-only','--no-renames','HEAD'],cwd=ROOT,text=True).splitlines())
+changed.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
+pins={};deleted=[]
+for rel in sorted(changed):
+ if not rel.startswith(('cat_de_roman_esti/','frontend/','scripts/','tests/')):continue
+ p=ROOT/rel
+ if p.is_file():pins[rel]=sha(p.read_bytes())
+ else:deleted.append(rel)
+(OUT/'gate-inputs.json').write_text(json.dumps({'baseline_commit':BASE,'sha256':pins,'deleted':deleted},indent=2)+'\n')
+print(json.dumps({'archived':len(records),'gate_inputs':len(pins),'deleted':len(deleted)},indent=2))

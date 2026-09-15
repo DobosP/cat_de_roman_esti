@@ -1,0 +1,24 @@
+import sys,json,os
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality');sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings');os.environ.setdefault('CAT_DEBUG','1')
+import django;django.setup()
+import critique_pack as c
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto
+p,s,st,r=c.load_all(c.PACKAGE_PACK,c.PACKAGE_KG)
+raw=[]
+for path in (ROOT/'docs/reviews').rglob('*.json'):
+ try:d=json.loads(path.read_text())
+ except:continue
+ if isinstance(d,dict):
+  for row in d.get('conexiuni',[]):
+   if isinstance(row,dict) and isinstance(row.get('groups'),list):raw.append((str(path.relative_to(ROOT)),row))
+for labels in [['Orez','Fasole','Mazăre','Arpacaș'],['Creion','Cuțit','Foarfecă','Sabie'],['Lingură','Pian','Vulpe','Cireașă'],['Mălai','Griș','Făină','Zahăr'],['Saltea','Pernă','Pătură','Cearșaf'],['Săpun','Detergent','Șampon','Pastă de dinți']]:
+ ids=[s.resolve(a) for a in labels];print('GROUP',labels,ids)
+ print('RAW',[(path,[g for g in row['groups'] if len(set(ids)&set(g['tiles']))>=3]) for path,row in raw if any(len(set(ids)&set(g['tiles']))>=3 for g in row['groups'])][:8])
+for label, guesses in [('Clește',['unealtă','ciocan','șurubelniță','cui','șurub','atelier','fier','foarfecă','a lucra']),('Penar',['școală','creion','pix','stilou','radieră','ghiozdan','caiet','elev']),('Tablă școlară',['școală','cretă','profesor','elev','caiet','creion','radieră','clasă']),('Aragaz',['bucătărie','cuptor','a găti','mâncare','cratiță','tigaie','foc','gaz'])]:
+ target=s.resolve(label);ss=contexto._build_session(target,'usor',None);sid=contexto.store.create(ss);cl=Client();steps=[]
+ for text in guesses:
+  resp=cl.post(f'/api/wordgames/contexto/games/{sid}/guess',data={'text':text},content_type='application/json');d=resp.json();steps.append((text,d.get('guess',d)))
+ print('TARGET',label,'reachable',ss.reachable,'responses',steps)

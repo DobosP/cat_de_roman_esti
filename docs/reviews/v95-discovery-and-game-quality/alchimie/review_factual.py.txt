@@ -1,0 +1,98 @@
+"""Independent factual judgments; inherits only byte-equivalent reviewed records."""
+import copy
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT = Path(__file__).resolve().parent
+sys.path[:0] = [str(ROOT), str(ROOT / 'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import mechanics_for
+
+REVIEWER = 'codex-v95-independent-world-factual'
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p): return json.loads(p.read_bytes())
+def write(p, v): p.write_bytes(B.json_bytes(v))
+prior_dir = ROOT / 'docs/reviews/v94-words-and-clearer-connections/alchimie'
+old = read(prior_dir / 'candidate.json')
+prior = read(prior_dir / 'factual-review.json')
+final = read(prior_dir / 'final-factual.json')
+old_audit = read(prior_dir / 'live-audit.json')
+assert sha(prior_dir / 'candidate.json') == prior['candidate_sha256'] == 'd6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188'
+assert final['audit_sha256'] == sha(prior_dir / 'live-audit.json')
+assert final['catalog_sha256'] == old_audit['catalog_sha256'] == '8b174e16edf6ad279f9fa6cc0328776cba033be0b177c849ad77d81ec603da89'
+assert final['reviewer'] == prior['reviewer']
+assert final['verdict'] == old_audit['verdict'] == prior['world_verdict'] == 'accept'
+assert old_audit['candidate_sha256'] == prior['candidate_sha256']
+candidate = read(OUT / 'candidate.json')
+raw = read(OUT / 'raw/proposals.json')
+assert (OUT / 'candidate.json').read_bytes() == B.json_bytes(B.candidate())
+assert sha(OUT / 'candidate.json') == 'c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801'
+old_concepts = {c['id']: c for c in old['concepts']}
+old_recipes = {r['id']: r for r in old['recipes']}
+concepts = {c['id']: c for c in candidate['concepts']}
+recipes = {r['id']: r for r in candidate['recipes']}
+prior_concepts = {c['id']: c for c in prior['concepts']}
+prior_recipes = {r['id']: r for r in prior['items']}
+assert len(old_concepts) == 242 and len(old_recipes) == 332
+assert set(prior_concepts) == set(old_concepts) and set(prior_recipes) == set(old_recipes)
+for key, old_row in old_concepts.items():
+    assert concepts[key] == old_row
+    assert prior_concepts[key]['verdict'] == 'accept'
+    assert prior_concepts[key]['concept_sha256'] == B.concept_digest(old_row)
+for key, old_row in old_recipes.items():
+    assert recipes[key] == old_row and prior_recipes[key]['verdict'] == 'accept'
+for key in ('world', 'unlocks', 'goals'):
+    assert candidate[key] == old[key]
+assert candidate['compatible_versions'][:-1] == old['compatible_versions']
+assert candidate['compatible_versions'][-1]['source_sha256'] == sha(prior_dir / 'candidate.json')
+assert candidate['compatible_versions'][-1]['mechanics'] == mechanics_for(old['world']['starter_ids'], {tuple(r['pair']): r['result'] for r in old['recipes']}, [(u['after_discoveries'], u['concept_ids']) for u in old['unlocks']])
+new_concepts = set(concepts) - set(old_concepts)
+new_recipes = set(recipes) - set(old_recipes)
+assert new_concepts == {v['id'] for v in raw['concepts'].values()}
+assert new_recipes == {v['id'] for v in raw['recipes']}
+assert len(new_concepts) == 5 and len(new_recipes) == 10
+
+WATER_SOURCE = 'https://ave-romania.ro/wp-content/uploads/2023/11/Ghid-de-retete-sanatoase.pdf'
+concept_reasons = {
+    'alw_food_negresa': 'The separately identified cocoa and chocolate cake bases in the two original recipes support tray baking and the ordinary Romanian cake label. Robert Eisler independently identifies the cake and square portions. No ethnic or origin claim is present.',
+    'alw_food_crema_zahar_ars': 'The original Bucate Aromate recipe mixes eggs with milk, pours the mixture into caramel, bakes in a water bath, then cools and inverts it. Gina Bradea independently documents the same familiar dessert. The definition describes custard, not pastry cream.',
+    'alw_food_budinca_paste': 'The two original recipes directly support sweet and savory baked pasta bound with eggs and dairy. PRO TV explicitly names its savory preparation budinca de paste. This makes the descriptive label accurate without implying all pasta with cheese is already pudding.',
+    'alw_food_pavlova': 'The original recipe bakes and cools the meringue base before whipped cream and fruit assembly. A Romanian publication from 2009 and PRO TV broadcast from September 2022 support established local exposure. The proposal makes no disputed country-of-origin claim.',
+    'alw_food_profiterol': 'Gina Bradea directly describes small baked choux shells, filling after cooling and chocolate sauce, with ice cream in the served version. A 2025 Pizza Hut Romania menu independently documents commercial use of the name. The definition remains distinct from an elongated eclair.',
+}
+recipe_reasons = {
+    'negresa-faina-cacao': 'The original cocoa cake recipe mixes flour and cocoa with sugar, water, oil and leavening before tray baking. The explanation accurately discloses the additional ingredients and cooking transformation.',
+    'negresa-ciocolata-unt': 'The source separately labels its chocolate-and-butter negresa base, with eggs, sugar and flour. The proposal represents that baked base; it does not claim the later cheesecake or raspberry additions are required.',
+    'crema-zahar-ars-caramel-ou': 'The source uses an uncooked egg-and-milk mixture over caramel in a vessel placed in water, followed by baking and cooling. Both chosen concepts and the disclosed milk match this process.',
+    'crema-zahar-ars-caramel-lapte': 'Milk and caramel form a factual alternate cue for the same custard. The explanation still explicitly supplies eggs, baking in a water bath, cooling and inversion; it never suggests milk alone sets the custard.',
+    'budinca-paste-branza-ou': 'The televised original preparation combines boiled pasta with cheese, egg and sour cream and bakes until set. Reusing cooked pasta with cheese then adding egg binding is consistent with the existing concept and the named pudding.',
+    'budinca-paste-stafide': 'Laura Laurentiu supports boiled pasta, sweet cheese, egg, sugar, raisins and baking. AVE Romania page 64 independently specifies water-soaked raisins in a baked pasta pudding. Water hydration is an explicitly supported alcohol-free variation, not a claim that the first source used water.',
+    'pavlova-bezea-frisca': 'The source finishes a baked, fully cooled meringue base with whipped cream and fruit. The explanation preserves the existing cooked meringue state and supplies the omitted fruit.',
+    'pavlova-bezea-fruct': 'Fresh fruit over whipped cream on cooled baked meringue is the source assembly. The second pair selects another defining component without converting finished meringue back into raw foam.',
+    'profiterol-oparit-inghetata': 'The original recipe bakes small choux mounds, cools and fills the shells, and serves them with ice cream and chocolate sauce. The explanation retains this order rather than filling raw dough or reshaping an eclair.',
+    'profiterol-oparit-ganache': 'The original chocolate sauce combines chocolate and whipping cream with butter, matching a fluid ganache. Baked and cooled filled shells are explicitly prepared before sauce is added; this is a supported serving variation.',
+}
+extra_concept_sources = {
+    'alw_food_negresa': ['https://www.roberteisler.ro/retete/prajitura-negresa-sau-brownie'],
+    'alw_food_crema_zahar_ars': ['https://pofta-buna.com/crema-zahar-ars-reteta-veche/'],
+    'alw_food_pavlova': ['https://www.protv.ro/emisiuni/vorbeste-lumea/clip/42035-tort-pavlova-un-desert-simplu-si-delicios'],
+    'alw_food_profiterol': ['https://prod-phd-cms.s3.eu-west-1.amazonaws.com/files/meniu-phphdphe-rev4-5-200801102025.pdf'],
+}
+new_c_rows = []
+for key in sorted(new_concepts):
+    c = concepts[key]
+    new_c_rows.append({'id': key, 'concept_sha256': B.concept_digest(c), 'verdict': 'accept', 'inherited': False, 'rationale': concept_reasons[key], 'sources': sorted(set(next(v['sources'] for v in raw['concepts'].values() if v['id'] == key) + extra_concept_sources.get(key, [])))})
+new_r_rows = []
+for key in sorted(new_recipes):
+    sources = list(recipes[key]['sources'])
+    if key == 'budinca-paste-stafide': sources.append(WATER_SOURCE)
+    new_r_rows.append({'id': key, 'verdict': 'accept', 'inherited': False, 'rationale': recipe_reasons[key], 'sources': sorted(set(sources))})
+raw_review = {'kind': 'v95-alchimie-raw-review', 'reviewer': REVIEWER, 'role': 'factual', 'candidate_sha256': sha(OUT / 'raw/proposals.json'), 'complete_candidate_sha256': sha(OUT / 'candidate.json'), 'concepts': new_c_rows, 'items': new_r_rows, 'world_verdict': 'accept', 'world_rationale': 'All five definitions and ten recipe ideas have independently checked source support. Prepared ingredient states and cooking/assembly stages are preserved. Additional water-hydration evidence supports the explicitly alcohol-free raisin wording.'}
+write(OUT / 'raw/factual-review.json', raw_review)
+full = {'kind': B.REVIEW_KIND, 'role': 'factual', 'reviewer': REVIEWER, 'candidate_sha256': sha(OUT / 'candidate.json'), 'world_verdict': 'accept', 'world_rationale': 'Exact comparison preserves all 242 previously reviewed concepts, 332 recipes, starters, supplies and goals, together with six old saved-book generations and an exact added V94 generation. Five source-backed preparations add ten truthful pair ideas and two first onward ingredient uses. This is factual editorial acceptance, not measured player enjoyment.', 'concepts': [copy.deepcopy(prior_concepts[c['id']]) if c['id'] in old_concepts else next(v for v in new_c_rows if v['id'] == c['id']) for c in candidate['concepts']], 'items': [copy.deepcopy(prior_recipes[c['id']]) if c['id'] in old_recipes else next(v for v in new_r_rows if v['id'] == c['id']) for c in candidate['recipes']], 'baseline_evidence': {'candidate_path': str((prior_dir / 'candidate.json').relative_to(ROOT)), 'candidate_sha256': sha(prior_dir / 'candidate.json'), 'factual_review_path': str((prior_dir / 'factual-review.json').relative_to(ROOT)), 'factual_review_sha256': sha(prior_dir / 'factual-review.json'), 'final_review_sha256': sha(prior_dir / 'final-factual.json'), 'live_audit_sha256': sha(prior_dir / 'live-audit.json'), 'inherited_concepts': 242, 'inherited_recipes': 332, 'old_records_and_judgments_exact': True, 'raw_candidate_sha256': sha(OUT / 'raw/proposals.json'), 'raw_review_sha256': sha(OUT / 'raw/factual-review.json')}}
+write(OUT / 'factual-review.json', full)
+write(OUT / 'independent-factual-check.json', {'kind': 'v95-independent-factual-check', 'reviewer': REVIEWER, 'passed': True, 'candidate_sha256': sha(OUT / 'candidate.json'), 'review_sha256': sha(OUT / 'factual-review.json'), 'review_source_sha256': sha(Path(__file__)), 'old_concepts_exact': 242, 'old_recipes_exact': 332, 'new_concepts': 5, 'new_recipes': 10, 'historical_save_generations': 7, 'preserved_bindings': {str(p.relative_to(ROOT)): sha(p) for p in [prior_dir / 'candidate.json', prior_dir / 'factual-review.json', prior_dir / 'final-factual.json', prior_dir / 'live-audit.json', ROOT / 'cat_de_roman_esti/fixtures/kg_sample.json', ROOT / 'docs/CRITIQUE_RUBRIC.md']}, 'unresolved_findings': []})
+print(json.dumps({'accepted_new_concepts': 5, 'accepted_new_recipes': 10, 'complete_concepts': len(full['concepts']), 'complete_recipes': len(full['items']), 'candidate_sha256': sha(OUT / 'candidate.json'), 'review_sha256': sha(OUT / 'factual-review.json')}))

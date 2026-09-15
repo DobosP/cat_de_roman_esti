@@ -1,0 +1,219 @@
+{
+  "kind": "v95-bounded-independent-closure-audit-v1",
+  "reviewer": "codex-v95-closure-auditor-world-factual-reviewer",
+  "checked_on": "2026-09-16",
+  "passed": true,
+  "role_disclosure": {
+    "world_factual_reviewer": true,
+    "authored_world_content": false,
+    "authored_empty_pair_ui_or_runtime": false,
+    "authored_lant_selector": false,
+    "authored_pack_or_quick_content": false
+  },
+  "checks": {
+    "world": {
+      "passed": true,
+      "catalog_sha256": "22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd",
+      "concepts": 247,
+      "recipes": 342,
+      "runtime_bindings": 9,
+      "final_review_identities": [
+        "codex-v95-independent-world-factual",
+        "codex-v95-independent-world-quality"
+      ]
+    },
+    "quick": {
+      "passed": true,
+      "catalog_sha256": "b166aa76e2746c5c2f1382889ede528cce25536fb5480c9d21b027cf65c5d319",
+      "authored": 81,
+      "runtime_bindings": 8,
+      "winning_replays": 81
+    },
+    "pack": {
+      "passed": true,
+      "old_records_exact": 705,
+      "new_approved_ids": [
+        "ct_viata_de_roman_374",
+        "ct_viata_de_roman_375",
+        "cx_viata_de_roman_372",
+        "lt_gastronomie_243",
+        "lt_gastronomie_244"
+      ],
+      "fresh_pending_dossiers_exact": 5,
+      "verdict_bindings": {
+        "cx_viata_de_roman_372": "sha256:64a1c3ef81894686e5fbfe98bfe86b210f0ab2345534d503f943060b27907865",
+        "ct_viata_de_roman_374": "sha256:1ab116033bc98f6ac4634013a703383fec648420e5bec957c83a510bf85d0939",
+        "ct_viata_de_roman_375": "sha256:750608d26ab9fdc00d20fec623ee426a471d62a83e22ec42929133c24a88f7d9",
+        "lt_gastronomie_243": "sha256:d7d6017dfb5cc2e4d7ff7470d23ec4f09812c40e01c162996728d7f88b5e5590",
+        "lt_gastronomie_244": "sha256:4fe5426f6a73e27a8faef8b4bb83d2a42a209fc18d68be4a65eec7d3ada87716"
+      }
+    },
+    "artifact_inverse": {
+      "passed": true,
+      "five_inverses_exact": {
+        "kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+        "games_pack.json": "7d28b9df887fe561150bc582f390df0dde4f8c292e5550055bbe84e9e8d90990",
+        "board_rankings_v37.json": "82f128edb3ccdd8208d41c43b7eb77df1e8d528d2aaea1fed5972712047255ed",
+        "derived_catalog_v38.json": "4088402b80b78946e6f9cb7ee5379c9c3f32438801611008f266101625bb428d",
+        "cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+      },
+      "ledger_unchanged": 105,
+      "rejected_242_still_reserved": true
+    },
+    "casual_lant": {
+      "passed": true,
+      "daily_same_inventory_comparisons": 56,
+      "casual_samples": 1024,
+      "wide_selections": 982,
+      "new_round_natural_seeds": {
+        "lt_gastronomie_243": 19,
+        "lt_gastronomie_244": 168
+      },
+      "source_assessment": "Conditional one-in-four retention applies only to initial narrow eligible easy casual picks. Daily branch consumes no new RNG; normal and hard return before new branch. Exclusion and eligible filtering remain in original picker. Route-quality floors, scoring and graph unchanged.",
+      "caveat": "Daily policy preserved for same inventory; content/ranking expansion can independently remap dates. A quarter is conditional retention, not overall narrow-board probability."
+    },
+    "publication": {
+      "main_head": "cf6b28bc0d247be33e494be1395ca7d676a9f4b4",
+      "main_clean": true,
+      "origin_main_matches": true,
+      "v95_origin_ref_present": false,
+      "v95_task_head": "cf6b28bc0d247be33e494be1395ca7d676a9f4b4"
+    },
+    "gui_empty_pairs": {
+      "passed": true,
+      "source_bindings_checked": 17,
+      "format_only_test_amendments": [
+        {
+          "path": "tests/test_alchimie_empty_pairs.py",
+          "reviewed_sha256": "061bb68ecc6200d64b0ee2a9da99d0545ec3fefb47643549ea11064e48e2184f",
+          "current_sha256": "966d5e637f4cbe4538dde6c53b0bd4ab6daf02bfe14e623c8bc46ab489bf5b1f",
+          "change": "Ruff wrapped one function signature onto three lines with trailing argument comma; reconstructed old bytes match the reviewed hash exactly. Test behavior unchanged.",
+          "independently_verified": true
+        }
+      ],
+      "scenarios": 7,
+      "served_asset_bindings": 4,
+      "screenshot_bindings": 3,
+      "content_at_feature_review": "V94 242/332, explicitly disclosed; final V95 integration separate",
+      "source_guarantees": [
+        "only owned distinct canonical actually failed pairs recorded",
+        "128 distinct entries with oldest eviction; duplicates do not refresh order",
+        "portable Progress excludes observations; create rejects extra fields",
+        "compatible world upgrade clears failures before craft",
+        "local fast path checks locks, in-flight state and saved pointer",
+        "30-second freshness renewed only by server state adoption; expired repeat reaches server",
+        "failure feedback names exact pair; marker includes visible text and accessible label"
+      ]
+    }
+  },
+  "findings": [
+    {
+      "check": "gui_empty_pairs",
+      "severity": "informational",
+      "status": "resolved",
+      "detail": "Source-review test pin predates a Ruff-only signature wrap. Reconstructed old bytes exactly match the old hash; current pin is recorded above. All implementation, browser, asset and screenshot bindings match."
+    }
+  ],
+  "excluded_claims": [
+    "Unfinished full Python/account/browser suites are not evaluated or claimed by this audit.",
+    "Final archive completeness and final STATUS/ADR/WORKLOG checks belong to the root integration pass.",
+    "No user enjoyment study or physical-device acceptance."
+  ],
+  "input_sha256": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd",
+    "scratch/alchimie/candidate.json": "c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801",
+    "scratch/alchimie/factual-review.json": "25184dd01b0cb146ee3dbeac5ccf78d54d460fd2bb7e7fa344ccccadc0aed815",
+    "scratch/alchimie/quality-review.json": "6a55275af36c446dfddfe47c85ef8067c1a4a91bb000aa4ee7792f76e6035357",
+    "scratch/alchimie/live-audit.json": "5f880186301d075a5481dfda8f465bf8e4b3dbe8e987a9db7175b9956861a9c7",
+    "scratch/alchimie/final-factual.json": "5056b627c8f14f7f29683e2e0677a234444824726a1f28ab33d0b7b5ffa2ba86",
+    "scratch/alchimie/final-quality.json": "5f75cd9a9466bdd40693e6a2a1b6b6162248c8981881b1e5b2961b597a62b8bd",
+    "scratch/alchimie/proposed-catalog.json": "22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "7e3e770f7788786948ee74e5c87c991d3b88bd1d34b4b082e918f68b391c3788",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/_session_endpoint.py": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+    "cat_de_roman_esti/web/urls.py": "ead8b6ca81be580a1006f81e14d106723e826d248117cea14ecc162a9768d61f",
+    "scripts/alchimie_discovery_recipe_source.py": "52be72944db03daccab79d198ec66a356af2b07c7790299669a528c3874386d4",
+    "scripts/build_alchimie_discovery_world.py": "d237e4d99d3f270283d0c971c947fed14067d0672fa0e8c554a626b7955b5550",
+    "scripts/audit_alchimie_discovery_world.py": "9967b1eaef1d2e6f9a95b38d828c265faa65963182fa0eeec9523151cfc2301e",
+    "docs/reviews/v94-words-and-clearer-connections/alchimie/candidate.json": "d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "b166aa76e2746c5c2f1382889ede528cce25536fb5480c9d21b027cf65c5d319",
+    "scratch/quick/candidate.json": "e0a745b1150a2060ee2a20719d3ebb79b0838e8db95b54bc2bfc7da5a5c2497b",
+    "scratch/quick/factual-review.json": "2f0070517aa972b060dcbdea0690210f4410b01098023222ca76eae274066a26",
+    "scratch/quick/quality-review.json": "80768bc6a28a5eeb7bd01b3ebca6c80a08b94be032536eb37c17a5a3e0ce2ed2",
+    "scratch/quick/live-audit.json": "76a5b11b054754025c57b42c33f5f0e512be13684e044edad40140a6b5b2bf79",
+    "scratch/quick/final-factual.json": "b70ca088462294c85f8ebd7260c6ae38f91a6b70a2fc8db7e36838a547b70e8e",
+    "scratch/quick/final-quality.json": "81ed950aa42358ce3146ad4a509c25461a2fd7fb415beed75f0479435b723f29",
+    "scratch/quick/catalog.json": "b166aa76e2746c5c2f1382889ede528cce25536fb5480c9d21b027cf65c5d319",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "e103186968f8b3f0110c0c6dbde692736526199d17bed42e78379019a62b4a22",
+    "cat_de_roman_esti/wordgames/intrusul.py": "e37056d451a9217501b92cb1eabfc7b99535b3f9270d96497d6ae852e8a0a82d",
+    "cat_de_roman_esti/wordgames/perechi.py": "36dfc64b921e73801853f302eac688405067fa6164691a10854a2ab00ced227c",
+    "cat_de_roman_esti/wordgames/quick_catalog.py": "b8b9e01fe4d70b8d93c3852382f4f1ffe2a62f9c9ef3ca1491a29572a55a29c1",
+    "scripts/audit_quick_content_v92.py": "47e49f6c4b01b6158fa4faaccfd2062dd5fd2d61ff26223b3801311ce25616d2",
+    "scripts/build_quick_content_v92.py": "6c3fdd4517b7581133396ccff9912f87d2455958850968974c874b93b69ebb21",
+    "scripts/quick_game_content_source_v92.py": "3b995b28d06cb3677da40a8e53d331448894964c64d987601c38fb396d79f5b5",
+    "scratch/quick/independent-final-recovery-audit.json": "1ceafbc25b9681b085b9aa49f6f81487418f8734ff50bb0b40e2f7f29d24b602",
+    "scratch/quick/independent-final-winning-audit.json": "76a5b11b054754025c57b42c33f5f0e512be13684e044edad40140a6b5b2bf79",
+    "scratch/quick/independent-final-factual-check.json": "f95dc40a682df4ba408a70f8866ae38a4194438721cf17ef2334f265c7e7bb69",
+    "cat_de_roman_esti/fixtures/games_pack.json": "27b1dba81a2e02d1e2616a1ad4e6eceefe12d189a86a0913c3655adee99bb3cf",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "scratch/pack/analyst.json": "60c2e9eef6cc36ac87f58c58bbe0aaf7d9f3d3b26c86cab1132a4425b3935638",
+    "scratch/pack/verifier.json": "eb55260532822876c63e9933b41c030558deda80f41181cfc0c4e53cb4d670ad",
+    "scratch/pack/verdicts/conexiuni_verdicts.json": "d8a9a9e1092e0de4c914877858b5a14ca7f684d0026bc1d21c7b58b0f615b34d",
+    "scratch/pack/verdicts/contexto_verdicts.json": "67215f63aa47e320bd071c6ccb5f76f3104c5a962c94b4d6abd5c0c7d0332f16",
+    "scratch/pack/verdicts/lant_verdicts.json": "2fa4583f0503870136e072b93b3feed2c605916642bc29df33acc35fc78240c6",
+    "scratch/pack/dossiers/cx_viata_de_roman_372.json": "48575e9369db86411c2ddb81e17b93e434ebac2505d34245ffae8dbad6a08b84",
+    "scratch/pack/verifier-dossiers/cx_viata_de_roman_372.json": "48575e9369db86411c2ddb81e17b93e434ebac2505d34245ffae8dbad6a08b84",
+    "scratch/pack/verdicts/dossiers/cx_viata_de_roman_372.json": "48575e9369db86411c2ddb81e17b93e434ebac2505d34245ffae8dbad6a08b84",
+    "scratch/pack/dossiers/ct_viata_de_roman_374.json": "c72f6e80e045e879a9f96c8527689220bc9e483d6b29e8613dcba6c354dbd7af",
+    "scratch/pack/verifier-dossiers/ct_viata_de_roman_374.json": "c72f6e80e045e879a9f96c8527689220bc9e483d6b29e8613dcba6c354dbd7af",
+    "scratch/pack/verdicts/dossiers/ct_viata_de_roman_374.json": "c72f6e80e045e879a9f96c8527689220bc9e483d6b29e8613dcba6c354dbd7af",
+    "scratch/pack/dossiers/ct_viata_de_roman_375.json": "64de8bd29ff9c01e69dd020de44ae063c2c98ae25a2cc7e31df8b8b8a729ebc1",
+    "scratch/pack/verifier-dossiers/ct_viata_de_roman_375.json": "64de8bd29ff9c01e69dd020de44ae063c2c98ae25a2cc7e31df8b8b8a729ebc1",
+    "scratch/pack/verdicts/dossiers/ct_viata_de_roman_375.json": "64de8bd29ff9c01e69dd020de44ae063c2c98ae25a2cc7e31df8b8b8a729ebc1",
+    "scratch/pack/dossiers/lt_gastronomie_243.json": "0c14a5aa2f8807a6ac5f0dcd590a9151396d66c92f1ca306022bb1a926f1307c",
+    "scratch/pack/verifier-dossiers/lt_gastronomie_243.json": "0c14a5aa2f8807a6ac5f0dcd590a9151396d66c92f1ca306022bb1a926f1307c",
+    "scratch/pack/verdicts/dossiers/lt_gastronomie_243.json": "0c14a5aa2f8807a6ac5f0dcd590a9151396d66c92f1ca306022bb1a926f1307c",
+    "scratch/pack/dossiers/lt_gastronomie_244.json": "cbb9a7544f6262112f240204c0b4222fb4e3971cd069f4c3418e30f7ec208e74",
+    "scratch/pack/verifier-dossiers/lt_gastronomie_244.json": "cbb9a7544f6262112f240204c0b4222fb4e3971cd069f4c3418e30f7ec208e74",
+    "scratch/pack/verdicts/dossiers/lt_gastronomie_244.json": "cbb9a7544f6262112f240204c0b4222fb4e3971cd069f4c3418e30f7ec208e74",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b4c32d0ff65e024e4bd2e292c03e5382f0927c7c388367bf1f80bd7a3c09a831",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "5e27495fcc34980ced41a7bbd5c0b61d703c459489d08d6b7322dac197fd7e96",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "docs/reviews/v95-discovery-and-game-quality/artifact-delta.json": "7672de9ef287a7808a12d77d11183b0b3741f6d969998ec026de9367f7fe47e1",
+    "tests/content_history.py": "ea629ee9ea4c779086c56967b3a6dd0bdf524c2481dcf7576c7e3e78e7e327a3",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "scratch/gui/independent-empty-pair-review.json": "7c0c426a8f956d1745a20bc8676fe8b6c962a6a068bdadae607fa59e4265c6d4",
+    "scratch/gui/independent-browser/review.json": "d9722c4c6b2cc581472d19180e88968ee20c696c89f9843879074f46bdd8737c",
+    "scratch/gui/independent-browser/probes.json": "84bd7d93025dade9e0f45898d930362524360e60d7fdbd8bc61871e7f2fa0d07",
+    "frontend/src/screens/AlchimieExplore.tsx": "b366dfce44ffbcf7516e2a0174e81fac28ad7040b85b94ad58b7645d6fd2f1b9",
+    "frontend/src/api/alchimieExplore.ts": "15a0a1208318968d2f4b3888167f2bdd71ac9247954c0916b8249134055cc55e",
+    "frontend/src/styles/alchimie-explore.css": "59b8c4788e7be48905c1579890a707f9f1b3b9c2b3b5ff4d63b44281594e8332",
+    "tests/test_alchimie_empty_pairs.py": "966d5e637f4cbe4538dde6c53b0bd4ab6daf02bfe14e623c8bc46ab489bf5b1f",
+    "scratch/pack/independent-selector-review.json": "916cb0324f5e641fcc816cd838103db172651446887e1f603a85cd3efbd4e7e6",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "scratch/pack/independent-final-api.json": "0cd53ac1546f6daa9087faad8875f58628b191d7b29e30a8d9bf1e2b1c873f95",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "cat_de_roman_esti/wordgames/_progress.py": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "scratch/pack/independent-final-api-resolution.json": "307c65ece0a172590e9c07a77b96bc89323968da50c01a6d28ecab5ae6b8504d",
+    "scratch/pack/independent-final-api-blocker.json": "d5ef7277f707dbd35cd1277989c5175127146c2649efef2d84d52466c761622e",
+    "scratch/pack/independent-final-api.log": "31b2db19e00093e9cd14d43b9d06ffa6946a62ffa48ec84686334c566c6b9fdc",
+    "scratch/pack/independent-final-api-final.log": "06f263d951ca8e6461d645756db2bb22ace9dbeca929d54ffa2627d89ce881c5",
+    "tests/test_v95_lant_selection.py": "84a9e54982a2ac0f8b7c428aebf0161ef51341032cec774075179993f46e474f",
+    "frontend/e2e/alchimie-empty-pairs.spec.mjs": "97be791393624943532abee170e4d6c42344be8df930feb300e81140b68a96d0",
+    "tests/test_v95_content_history.py": "c72451eebf2543c5f271043d9618323fb5cbfdfc1aeb631f07bf42064f549366",
+    "tests/test_v95_world_quality.py": "e362f6358ee5038a451344dcf3f238e9fb2a4134ffd58aeb2666522d9589d1e6",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "44011638be57a6b3e3c0355b63698ce4f0d08c3623a363ee19b1d76248ec6d31",
+    "cat_de_roman_esti/web/static/assets/index-Bg-dN5Dk.js": "fe8582acd872588420813d8f8dc98c312af7dfae70668ec5221aa2a03461e053",
+    "cat_de_roman_esti/web/static/assets/index-D9HNWgEs.css": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2",
+    "cat_de_roman_esti/web/static/assets/Alchimie-CS86scMF.js": "b5e37e65196d5565e46e448b56eebe030a369540495301ee05df7a6456d7bdba",
+    "cat_de_roman_esti/web/static/assets/Alchimie-C3_w2vL6.css": "e1c099a2852fb0203d08c357736c2dfb40ca0c2ef16eb812f8ee81b5da41bdfe",
+    "scratch/gui/independent-browser/baseline-mobile.png": "24323218ee419388700717f68d5e884be2917f7db1ec059193e67cf7e80037b0",
+    "scratch/gui/independent-browser/candidate-mobile.png": "1730baeea5c0253ce6282d4ecf7864fb2aaab33df46460b79531bf7896271a37",
+    "scratch/gui/independent-browser/narrow-keyboard.png": "82c832a5bab38ba5bf9fa40ff33b20b2546a4a8b094c31004d70152bb40866e0"
+  }
+}

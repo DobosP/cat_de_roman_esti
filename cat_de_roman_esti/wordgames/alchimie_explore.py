@@ -19,6 +19,8 @@ from ._session_endpoint import atomic_session
 from .discovery_world import MAX_CONCEPTS, DiscoveryWorld, Identifier, Record, Sha, get_world
 from .service import SessionCapacityError, SessionStore
 
+MAX_EMPTY_PAIRS = 128
+
 
 class Progress(Record):
     world_id: Identifier
@@ -50,6 +52,8 @@ class ExploreSession:
     revision: int = 0
     hint_pair: tuple[str, str] | None = None
     hint_stage: int = 0
+    # Observed failures only; never part of a portable discovery checkpoint.
+    empty_pairs: dict[tuple[str, str], None] = field(default_factory=dict)
 
     def award_supplies(self) -> list[str]:
         supplied = []
@@ -124,6 +128,7 @@ def state_payload(game_id: str, session: ExploreSession) -> dict:
     return {
         "game_id": game_id, "revision": session.revision, "mode": "explore",
         "compatible_recipe_hashes": list(world.compatible_versions),
+        "empty_pairs": [list(pair) for pair in session.empty_pairs],
         "world": {
             "id": world.id, "title": world.catalog.world.title,
             "description": world.catalog.world.description,
@@ -208,6 +213,8 @@ def _upgrade_session(session: ExploreSession) -> None:
     session.world, session.owned = fresh.world, fresh.owned
     session.discoveries, session.unlocked = fresh.discoveries, fresh.unlocked
     session.goal_id = fresh.goal_id
+    # A formerly empty pair can gain a recipe in a compatible new book.
+    session.empty_pairs.clear()
     # Existing hints remain valid because every previous pair/result is preserved.
     if session.hint_pair is None:
         session.hint_stage = 0  # A previously complete collection can now explore again.
@@ -267,9 +274,14 @@ class CombineExploreView(ContractAPIView):
     def post(self, request, game_id: str, session: ExploreSession):
         body = parse_body(request, PairBody)
         _upgrade_session(session)
-        result, new, supplies = session.craft(tuple(sorted((body.a, body.b))))
+        pair = tuple(sorted((body.a, body.b)))
+        result, new, supplies = session.craft(pair)
         session.revision += 1
         if result is None:
+            if pair not in session.empty_pairs:
+                if len(session.empty_pairs) >= MAX_EMPTY_PAIRS:
+                    session.empty_pairs.pop(next(iter(session.empty_pairs)))
+                session.empty_pairs[pair] = None
             message = "Perechea nu are încă o rețetă. Încearcă alt ingredient; nu pierzi nimic."
         elif new:
             message = f"Ai descoperit {session.world.concepts[result].label}!"

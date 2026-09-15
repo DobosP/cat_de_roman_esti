@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 
 from tests import content_history
-from tests.content_history import before_v94_artifact, before_v94_lant_ledger
+from tests.content_history import before_v94_artifact, before_v94_lant_ledger, before_v95_artifact
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = {
@@ -44,11 +44,13 @@ def digest(value, filename):
 
 @pytest.mark.parametrize("filename", BASELINE)
 def test_v94_inverse_restores_complete_c971846_bytes_without_mutating_input(filename):
-    current = read_current(filename)
-    untouched = deepcopy(current)
-    previous = before_v94_artifact(current, filename)
+    latest = read_current(filename)
+    untouched = deepcopy(latest)
+    previous = before_v94_artifact(latest, filename)
+    # Preserve the original V94 transition after verifying the complete V95 delta.
+    current = before_v95_artifact(latest, filename)
     assert digest(previous, filename) == BASELINE[filename]
-    assert current == untouched
+    assert latest == untouched
     if filename == "games_pack.json":
         assert sum(len(previous[g]) for g in ADDED) == 701
         for game, added in ADDED.items():
@@ -147,7 +149,7 @@ def test_v94_rejected_level_reserves_id_and_extends_the_exact_old_ledger():
     assert {row["id"] for row in critique_pack.load_lant_rejection_tombstones()} == set(
         live["items"],
     )
-    pack = read_current("games_pack.json")
+    pack = before_v95_artifact(read_current("games_pack.json"), "games_pack.json")
     assert pack["meta"]["id_high_water"]["lant"] == 242
     assert "lt_geografie_242" not in {row["id"] for row in pack["lant"]}
     assert pair not in [{"start": row["start"], "target": row["target"]}

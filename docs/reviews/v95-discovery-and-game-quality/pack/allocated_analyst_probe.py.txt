@@ -1,0 +1,60 @@
+"""Independent exact-allocated-dossier analyst probes. No approval or fixture mutation."""
+import hashlib,json,os,sys
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT=Path(__file__).resolve().parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from django.test import Client
+import critique_pack as C
+from cat_de_roman_esti.wordgames import conexiuni as X,contexto as T,lant as L
+IDS={'cx_viata_de_roman_372','ct_viata_de_roman_374','ct_viata_de_roman_375','lt_gastronomie_243','lt_gastronomie_244'}
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+pack,svc,strong,regions=C.load_all(C.PACKAGE_PACK,C.PACKAGE_KG)
+baseline={str(p.relative_to(ROOT)):sha(p) for p in [C.PACKAGE_PACK,C.PACKAGE_KG]}
+findings,_,selected=C.run(pack,svc,strong,regions,['conexiuni','contexto','lant'],{'pending'},IDS)
+assert {r['id'] for _,r,_ in selected}==IDS
+assert not [f for row in findings.values() for f in row['findings'] if f['level']=='FAIL']
+client=Client();out=[];bindings={}
+for game,row,lint in selected:
+ dossier=C.build_dossier(row,game,svc,strong,lint,regions)
+ stored=json.loads((OUT/'dossiers'/f"{row['id']}.json").read_bytes())
+ assert dossier==stored,row['id'];bindings[row['id']]=dossier['review_binding']
+ if game=='conexiuni':
+  ss=X.ConexiuniSession(groups=row['groups'],group_labels=row['group_labels'],order=row['order'],difficulty=row['difficulty'])
+  sid=X.store.create(ss);url=f'/api/wordgames/conexiuni/games/{sid}';initial=client.get(url).json();steps=[]
+  for members in row['groups'].values():
+   r=client.post(url+'/guess',{'ids':members},content_type='application/json');assert r.status_code==200;steps.append(r.json())
+  assert ss.won and ss.lives==4
+  out.append({'id':row['id'],'initial':initial,'solved':True,'lives':ss.lives,'steps':steps})
+ elif game=='contexto':
+  ss=T._build_session(row['target'],row['difficulty'],None);sid=T.store.create(ss);url=f'/api/wordgames/contexto/games/{sid}';steps=[]
+  guesses=(['școală','ghiozdan','rechizite','creion','stilou','pix','elev','penar'] if svc.label(row['target'])=='Penar' else ['metal','reparație','unealtă','scule','fier','ciocan','șurubelniță','atelier','foarfecă','clești'])
+  for text in guesses:
+   before=ss.attempts;r=client.post(url+'/guess',{'text':text},content_type='application/json');data=r.json();assert r.status_code==200
+   if not data['ok']:assert ss.attempts==before
+   steps.append({'input':text,'response':data})
+  assert ss.won
+  out.append({'id':row['id'],'target':svc.label(row['target']),'steps':steps,'reachable':ss.reachable,'responsive':sum(n for d,n in ss.dist_hist.items() if 1<=d<=5)})
+ else:
+  paths=dossier['representative_shortest_paths'];assert len(paths)==2;routes=[]
+  for path in paths:
+   ns=[n['id'] for n in path['nodes']]
+   ss=L.LantSession(start=row['start'],target=row['target'],optimal=row['optimal'],difficulty=row['difficulty'],chain=[row['start']]);sid=L.store.create(ss);url=f'/api/wordgames/lant/games/{sid}'
+   initial=client.get(url).json();steps=[]
+   for n in ns[1:]:
+    r=client.post(url+'/move',{'text':svc.label(n)},content_type='application/json');assert r.status_code==200 and r.json()['ok'];steps.append(r.json())
+   assert ss.won
+   routes.append({'labels':[svc.label(n) for n in ns],'initial':initial,'steps':steps})
+  out.append({'id':row['id'],'routes':routes})
+assert baseline=={str(p.relative_to(ROOT)):sha(p) for p in [C.PACKAGE_PACK,C.PACKAGE_KG]}
+report={'kind':'v95-independent-allocated-analyst-probes-v1','reviewer':'codex-v95-independent-world-quality','scope':'Exact pending allocated records, fresh BFF sessions; natural selection remains a post-promotion check.','input_ids':sorted(IDS),'source_bindings':baseline,'dossier_bindings':bindings,'findings':findings,'checks':out,'script_sha256':sha(Path(__file__))}
+(OUT/'allocated-analyst-probe.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+for r in out:
+ if 'target'in r:print(r['target'],[(x['input'],x['response'].get('guess',{}).get('rank') if x['response'].get('guess') else 'UNKNOWN') for x in r['steps']])
+ elif 'routes'in r:
+  for route in r['routes']:print(r['id'],route['labels'],'target description',route['initial'].get('target'),'captions',[(x['current'],x['path']) for x in route['steps']])
+ else:print(r['id'],'solved',r['solved'])
+print('Allocated dossier bindings and all five BFF probes pass.')

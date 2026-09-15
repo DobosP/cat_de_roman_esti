@@ -1,0 +1,29 @@
+Valid until: candidate bytes, KG, quick runtime or historical inventory change — then repeat affected checks and independent review.
+
+V95 author proposals, not acceptance. Eight boards introduce ten previously unused Intrusul words and twenty-three previously unused Perechi words. All sixteen Perechi pairs are new across the served collection and archived proposals. The author audit compares 409 served boards and 1,319 archived raw/accepted/final quick rows, including old drafts that never reached service. Every old authored record, payload and non-ranking score remains exact. No fixture or runtime pin was changed.
+
+The four Intrusul predicates deliberately distinguish usual function from incidental possibilities. The workshop trio comprises tools, while a dish sponge remains cleaning equipment even if used to wipe a workbench. Hand, finger and leg are body parts; the label does not falsely call the finger a limb. The tableware board gives a mild functional distinction: all four objects are containers, but a bucket is not ordinary tableware. Bucket, mop and detergent share floor washing; the label does not call the detergent a tool or demand detergent for every mop. Three additions qualify for the starter shelf. The tableware board passes the original preferred gate but is not starter eligible because the native Farfurie–Castron edge is absent. No edge or score was patched to change that result.
+
+The Perechi layouts separate two initially adjacent tool/environment pairs: Roabă–Grădină and Fierăstrău–copac must not be placed together, even though that arrangement passed the graph gate. It risks asking players to choose between two tools and two garden contexts. The final boards use them separately. Author rationale in each exact row discusses plausible human cross-associations beyond the zero native cross-strength: water/garden, dog/food, storage containers, and citrus/desert. None supplies a complete equally defensible alternate matching, but independent quality review is still required.
+
+The daughter/son pair describes relational terms, not a claim that the two must be siblings. A dog can guard a yard; the label does not prescribe an animal's living conditions. Picior is the ordinary whole-lower-limb sense, not the narrower foot-only sense. The Sun is a star. The Moon/night pair is an everyday association, not a claim that the Moon is invisible during daytime or visible every night. Butter belongs to a documented ordinary biscuit-salami recipe; dairy-free versions remain possible.
+
+Primary/source-backed author checks performed 2026-09-15:
+
+- DEX 2009 and other original dictionary entries mirrored by dexonline define clește as a gripping tool and veselă as table vessels. The sources attached to all four tool/household boards allow an independent reviewer to check every displayed lexical identity. Only links and original paraphrases are stored, never copied dictionary text.
+- [Vileda's own Turbo description](https://www.viledaromania.ro/turbo) confirms mop-and-bucket floor cleaning and permits a chosen cleaning solution. [Kärcher's own Romanian product sheet](https://s1.kaercher-media.com/documents/datasheets/cleaningagents/ro_RO/0.011-319.0_PI_ro_RO.pdf) explicitly describes detergent and water in a bucket with manual mop use. No product performance or dilution instructions appear in the game.
+- [Gardena's own saw catalog](https://www.gardena.com/ro/produse/copac-arbust-ingrijire/ferastraie-ferastrau-de-gradina) describes cutting trees/shrubs and handling cut branches. This grounds the saw/tree relation. It is not player advice to operate a saw.
+- [DEX câine](https://dexonline.ro/definitie/c%C3%A2ine/definitii), DEX 2009: domestic dog and guard function. [DEX gleznă](https://dexonline.ro/definitie/glezn%C4%83) defines the lower-limb region. The ghiozdan entry opened successfully through its ordinary definition URL; the later `/definitii` request failed, and is not cited as a successful access.
+- [NASA Sun facts](https://science.nasa.gov/sun/facts/) verifies the Sun's stellar identity. [The Romanian observatory's visitor guide](https://astro-urseanu.ro/ghidul-vizitatorului/) describes observations of the Moon on appropriate evenings. Guessed `/soarele/` and `/luna/` observatory pages failed and are excluded from candidate sources. No present observation schedule is embedded.
+- [Jamila's own biscuit-salami recipe](https://jamilacuisine.ro/salam-de-biscuiti-facut-in-casa-reteta-video/) lists butter. The author examined the redirected current page, not merely a generic recipe search result. This reference establishes one ordinary recipe, not universality.
+
+Author exclusions:
+
+- Săpun–Detergent–Șampon: only one strong native internal edge; no graph repair.
+- Fereastră–Oglindă–Lampă and Geacă–Cămașă–Haină: insufficient native trio structure.
+- Soare–Lună–Stea, Camion–Microbuz–Dubă, Acoperiș–Perete–Tavan and Foame–Sete–Oboseală: existing served Intrusul triples/three-word overlaps, so discarded.
+- Mazăre–Dovleac–Ridiche versus Piersică passed native mechanics but invites a culinary-versus-botanical fruit distinction and adds another easy produce taxonomy. It was discarded, not promoted by narrowing the explanation after play.
+- Cireașă–Căpșună–Strugure versus Zahăr was mechanically fresh, but another generic fruit board was less useful than functional household play; omitted.
+- Foame–A mânca, Sete–A bea, Picior–Pantof, Fierăstrău–Ramură, Lămâie–Ceai, Iaurt–Lapte, Vacă–Lapte, Ardei–Ardei umpluți, Dovleac–Plăcinte, Roabă–Curte and Examen–A învăța have no adequate native pair edge. They remain absent; intuitive real-world truth alone does not justify fabricating a graph connection.
+- Albină, Lână, Cerneală and Mănușă do not resolve to an existing graph identity. No node or alias was invented.
+- Găină–Ou is already used; no replay as new content.

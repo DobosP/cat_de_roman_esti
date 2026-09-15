@@ -1,0 +1,385 @@
+{
+  "scope": "Author API replay of every native shortest route, not independent review or public selection.",
+  "ladders": [
+    {
+      "start": "n_v84_food_cuptor",
+      "target": "n_v90_food_firimitura",
+      "routes": [
+        {
+          "ids": [
+            "n_v84_food_cuptor",
+            "n_v24_food_snack_biscuit",
+            "n_v90_food_firimitura"
+          ],
+          "labels": [
+            "Cuptor de bucătărie",
+            "Biscuit",
+            "Firimitură"
+          ],
+          "captions": [
+            "coace",
+            "poate lăsa bucățele mici la rupere sau consum"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v24_food_snack_biscuit",
+                "label": "Biscuit"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v84_food_cuptor",
+                  "label": "Cuptor de bucătărie"
+                },
+                {
+                  "id": "n_v24_food_snack_biscuit",
+                  "label": "Biscuit",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "casă",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Firimitură",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Salam de biscuiți",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Sandviș",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v90_food_firimitura",
+                "label": "Firimitură"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v84_food_cuptor",
+                  "label": "Cuptor de bucătărie"
+                },
+                {
+                  "id": "n_v24_food_snack_biscuit",
+                  "label": "Biscuit",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v90_food_firimitura",
+                  "label": "Firimitură",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_v84_food_cuptor",
+            "n_v4gas_paine",
+            "n_v90_food_firimitura"
+          ],
+          "labels": [
+            "Cuptor de bucătărie",
+            "Pâine",
+            "Firimitură"
+          ],
+          "captions": [
+            "coace",
+            "lasă bucățele mici când se taie sau se rupe"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v4gas_paine",
+                "label": "Pâine"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v84_food_cuptor",
+                  "label": "Cuptor de bucătărie"
+                },
+                {
+                  "id": "n_v4gas_paine",
+                  "label": "Pâine",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Firimitură",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Masa în familie",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Pâine de casă",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v90_food_firimitura",
+                "label": "Firimitură"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v84_food_cuptor",
+                  "label": "Cuptor de bucătărie"
+                },
+                {
+                  "id": "n_v4gas_paine",
+                  "label": "Pâine",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v90_food_firimitura",
+                  "label": "Firimitură",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "start": "n_v86_food_zahar_pudra",
+      "target": "n_v87_food_tort_diplomat",
+      "routes": [
+        {
+          "ids": [
+            "n_v86_food_zahar_pudra",
+            "n_v86_food_frisca",
+            "n_v87_food_tort_diplomat"
+          ],
+          "labels": [
+            "Zahăr pudră",
+            "Frișcă",
+            "Tort Diplomat"
+          ],
+          "captions": [
+            "îndulcește unele variante de",
+            "ingredient pentru crema din"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v86_food_frisca",
+                "label": "Frișcă"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v86_food_zahar_pudra",
+                  "label": "Zahăr pudră"
+                },
+                {
+                  "id": "n_v86_food_frisca",
+                  "label": "Frișcă",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Ecler",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Înghețată",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Savarină",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Tort Diplomat",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v87_food_tort_diplomat",
+                "label": "Tort Diplomat"
+              },
+              "relation": "parte și întreg",
+              "path": [
+                {
+                  "id": "n_v86_food_zahar_pudra",
+                  "label": "Zahăr pudră"
+                },
+                {
+                  "id": "n_v86_food_frisca",
+                  "label": "Frișcă",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v87_food_tort_diplomat",
+                  "label": "Tort Diplomat",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_v86_food_zahar_pudra",
+            "n_v87_food_piscot",
+            "n_v87_food_tort_diplomat"
+          ],
+          "labels": [
+            "Zahăr pudră",
+            "Pișcot",
+            "Tort Diplomat"
+          ],
+          "captions": [
+            "pudrează unele variante de",
+            "căptușește unele variante de"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v87_food_piscot",
+                "label": "Pișcot"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v86_food_zahar_pudra",
+                  "label": "Zahăr pudră"
+                },
+                {
+                  "id": "n_v87_food_piscot",
+                  "label": "Pișcot",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Tort Diplomat",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v87_food_tort_diplomat",
+                "label": "Tort Diplomat"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v86_food_zahar_pudra",
+                  "label": "Zahăr pudră"
+                },
+                {
+                  "id": "n_v87_food_piscot",
+                  "label": "Pișcot",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v87_food_tort_diplomat",
+                  "label": "Tort Diplomat",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

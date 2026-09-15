@@ -1,0 +1,35 @@
+{
+  "kind": "v95-independent-empty-pair-gui-review-v1",
+  "reviewer": "codex-v95-independent-world-quality",
+  "date": "2026-09-15",
+  "verdict": "accept",
+  "scope": "Final feature source plus seven fresh browser scenarios; both live preview worlds are still V94 content (242 concepts,332 recipes).",
+  "evidence_sha256": "84bd7d93025dade9e0f45898d930362524360e60d7fdbd8bc61871e7f2fa0d07",
+  "source_sha256": {
+    "frontend/src/screens/AlchimieExplore.tsx": "b366dfce44ffbcf7516e2a0174e81fac28ad7040b85b94ad58b7645d6fd2f1b9",
+    "frontend/src/api/alchimieExplore.ts": "15a0a1208318968d2f4b3888167f2bdd71ac9247954c0916b8249134055cc55e",
+    "frontend/src/styles/alchimie-explore.css": "59b8c4788e7be48905c1579890a707f9f1b3b9c2b3b5ff4d63b44281594e8332",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "7e3e770f7788786948ee74e5c87c991d3b88bd1d34b4b082e918f68b391c3788",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "44011638be57a6b3e3c0355b63698ce4f0d08c3623a363ee19b1d76248ec6d31"
+  },
+  "findings": [],
+  "player_outcome": "An observed empty combination becomes a dashed, text-labelled partner when its other ingredient is selected. The exact pair appears in feedback; repeating or reversing it within the fresh window keeps focus and adds no request or save mutation.",
+  "observations": [
+    "Baseline repeat sent two combine requests; candidate repeat sent one.",
+    "Inspected baseline/mobile and candidate/mobile screenshots: the new dashed marker remains distinct from selected and newly discovered styles; text and accessible name explicitly explain its meaning.",
+    "At320px and200% root text, marked labels and feedback wrap without horizontal or vertical clipping; keyboard focus is visible on the tried tile. Longer unrelated ingredient labels break across lines, a pre-existing layout characteristic rather than a new obstruction.",
+    "Keyboard Enter/Space, repeated identical acknowledgments and drag all retain the observed-pair safeguard. Choosing a different anchor removes unrelated marks.",
+    "Lost committed replies inherit failure memory only from recovery GET. Lost uncommitted requests produce no invented mark.",
+    "Reload preserves live observations. Expired-session restoration keeps the earned Aluat recipe and starts empty failure history.",
+    "Local acknowledgment at20seconds does not renew freshness; the retry at31seconds reaches the server.",
+    "No page errors in any fresh browser scenario."
+  ],
+  "limits": [
+    "Not human enjoyment testing or physical-device acceptance.",
+    "Failed-pair memory is deliberately session-local, capped128; portable saves keep successful discoveries only.",
+    "Previously observed failures may suppress a repeat for at most30seconds after successful state adoption; after that the server rechecks.",
+    "Actual compatible recipe addition and128-entry eviction were verified by the separate backend review, not fabricated as browser observations.",
+    "This feature review does not establish final V95 content installation or full-suite integration."
+  ]
+}

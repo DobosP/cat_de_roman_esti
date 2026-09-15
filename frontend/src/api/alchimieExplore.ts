@@ -35,6 +35,8 @@ export interface ExplorationState {
   } | null;
   progress: ExplorationProgress;
   compatible_recipe_hashes: string[];
+  /** Only pairs observed empty in this live session; older responses may omit it. */
+  empty_pairs?: [string, string][];
   unlocked: { id: string; title: string; after_discoveries: number }[];
   next_unlock: { title: string; after_discoveries: number; remaining: number } | null;
 }

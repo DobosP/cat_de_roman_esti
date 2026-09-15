@@ -1,0 +1,108 @@
+{
+ "id": "ct_viata_de_roman_375",
+ "game": "contexto",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "71c2289d1f27479aa4c40f202816ecc991642754060090ee6d5839a5fdf2a62d",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v32_workshop_hand_cleste",
+  "label": "Clește",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.91,
+  "degree": 2,
+  "incoming_degree": 5,
+  "description": "Unealtă cu două brațe, folosită pentru a prinde, îndoi sau tăia."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 5,
+  "sample": [
+   {
+    "id": "n_v24_action_routine_a_lucra",
+    "label": "A lucra"
+   },
+   {
+    "id": "n_v32_workshop_fastener_cui",
+    "label": "Cui"
+   },
+   {
+    "id": "n_v32_workshop_fastener_surub",
+    "label": "Șurub"
+   },
+   {
+    "id": "n_v32_workshop_hand_ciocan",
+    "label": "Ciocan"
+   },
+   {
+    "id": "n_v32_workshop_hand_surubelnita",
+    "label": "Șurubelniță"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2359,
+ "strong_neighbors": [
+  {
+   "id": "n_v24_action_routine_a_lucra",
+   "label": "A lucra",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.93,
+   "degree": 5,
+   "incoming_degree": 4,
+   "description": "Concept cotidian din grupul «rutina zilnică»: A lucra.",
+   "strength": 0.98
+  },
+  {
+   "id": "n_v32_workshop_fastener_cui",
+   "label": "Cui",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.92,
+   "degree": 2,
+   "incoming_degree": 3,
+   "description": "Piesă mică și ascuțită din metal, bătută cu ciocanul pentru a prinde obiecte.",
+   "strength": 0.97
+  },
+  {
+   "id": "n_v32_workshop_fastener_surub",
+   "label": "Șurub",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.92,
+   "degree": 2,
+   "incoming_degree": 3,
+   "description": "Piesă metalică filetată care prinde obiecte prin rotire.",
+   "strength": 0.95
+  },
+  {
+   "id": "n_v32_workshop_hand_ciocan",
+   "label": "Ciocan",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.94,
+   "degree": 2,
+   "incoming_degree": 3,
+   "description": "Unealtă cu mâner și cap greu, folosită pentru a bate cuie.",
+   "strength": 0.94
+  },
+  {
+   "id": "n_v32_workshop_hand_surubelnita",
+   "label": "Șurubelniță",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.93,
+   "degree": 2,
+   "incoming_degree": 2,
+   "description": "Unealtă folosită pentru a strânge sau desface șuruburi.",
+   "strength": 0.94
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:750608d26ab9fdc00d20fec623ee426a471d62a83e22ec42929133c24a88f7d9"
+}

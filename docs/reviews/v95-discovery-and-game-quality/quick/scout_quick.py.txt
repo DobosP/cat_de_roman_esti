@@ -1,0 +1,37 @@
+from pathlib import Path
+import json,sys,itertools
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog
+from cat_de_roman_esti.wordgames import quick_catalog as Q
+s=get_service();w=Q.graph_strengths(s);base=list(get_derived_catalog()._boards)
+archives=[]
+def walk(v,path):
+ if isinstance(v,dict):
+  if v.get('game') in ('intrusul','perechi') and isinstance(v.get('payload'),dict):
+   try: Q.visible_ids(v)
+   except (KeyError,TypeError):pass
+   else:archives.append((path,v))
+  for x in v.values():walk(x,path)
+ elif isinstance(v,list):
+  for x in v:walk(x,path)
+for p in sorted((ROOT/'docs/reviews').rglob('*.json')):
+ try:walk(json.loads(p.read_text()),str(p.relative_to(ROOT)))
+ except (ValueError,UnicodeError):pass
+rows=[{'game':b.game,'payload':b.payload} for b in base]+[r for _,r in archives]
+used={g:{i for b in base if b.game==g for i in Q.visible_ids({'game':b.game,'payload':b.payload})} for g in ('intrusul','perechi')}
+def pairs(labels):
+ for a,b in labels:
+  ids=[s.resolve(a),s.resolve(b)]
+  prior=[r for r in rows if r['game']=='perechi' and any(set(p['members'])==set(ids) for p in r['payload']['pairs'])]
+  print(a,'--',b,ids,w.get(frozenset(ids),0),'PRIOR',len(prior),'FRESH',[s.label(i) for i in ids if i not in used['perechi']])
+def intr(labels):
+ for names in labels:
+  ids=[s.resolve(x) for x in names]
+  prior=[r for r in rows if r['game']=='intrusul' and len(set(Q.visible_ids(r))&set(ids))>=3]
+  print(names,[w.get(frozenset(p),0) for p in itertools.combinations(ids[:3],2)],'CROSS',[w.get(frozenset((x,ids[3])),0) for x in ids[:3]],'PRIOR',len(prior),'FRESH',[s.label(i) for i in ids if i not in used['intrusul']])
+if __name__=='__main__':
+ intr([['Ciocan','Clește','Șurubelniță','Burete de vase'],['Mazăre','Dovleac','Ridiche','Piersică'],['Cireașă','Căpșună','Strugure','Zahăr'],['Farfurie','Castron','Cană','Găleată'],['Găleată','Mop','Detergent','Lampă'],['Mână','Deget','Picior','Mănușă'],['Furtună','Fulger','Tunet','Lună']])
+ pairs([('Foame','A mânca'),('Sete','A bea'),('Picior','Pantof'),('Dinte','Pastă de dinți'),('Câine','Pisică'),('Fierăstrău','Ramură'),('Lămâie','Ceai'),('Iaurt','Lapte'),('Miere','Albină'),('Oaie','Lână'),('Găină','Ou'),('Vacǎ','Lapte'),('Ardei','Ardei umpluți'),('Dovleac','Plăcinte'),('Roabă','Curte'),('Stilou','Cerneală'),('Examen','A învăța'),('Soare','Zi'),('Lună','Noapte'),('Geacă','Frig'),('Banană','Fruct')])
+ print('archive',len(archives))

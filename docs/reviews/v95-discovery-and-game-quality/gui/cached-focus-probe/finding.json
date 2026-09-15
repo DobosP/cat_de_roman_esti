@@ -1,0 +1,33 @@
+{
+  "kind": "v95-independent-cached-repeat-focus-finding-v1",
+  "reviewer": "codex-v95-independent-world-quality",
+  "date": "2026-09-16",
+  "severity": "minor reproducible keyboard recovery defect; no collection loss or extra mutation",
+  "verdict": "repair recommended before final UX acceptance",
+  "source_sha256": "b366dfce44ffbcf7516e2a0174e81fac28ad7040b85b94ad58b7645d6fd2f1b9",
+  "served_asset": "assets/Alchimie-CS86scMF.js",
+  "served_asset_sha256": "b5e37e65196d5565e46e448b56eebe030a369540495301ee05df7a6456d7bdba",
+  "reproduction": [
+    "Start fresh Alchimie on8150 at320px viewport.",
+    "Keyboard-select Făină, then Cheag alimentar to make one empty server attempt.",
+    "Press Enter twice more on Cheag alimentar; both local acknowledgments use the same feedback text.",
+    "Focus Apă and press Enter to try a different pair. Intercept that POST to lose either the committed or uncommitted response, allowing normal recovery GET.",
+    "Recovery correctly preserves or omits Aluat according to actual server outcome, but keyboard focus jumps backward to Cheag alimentar."
+  ],
+  "controls": {
+    "one_cached_retry_then_response_loss": "Focus lands on BODY, not Cheag; both committed and uncommitted variants reproduce the difference.",
+    "two_cached_then_normal_success": "Focus remains on the activated Apă button.",
+    "two_cached_then_ordinary_controls": "Escape, Tab/Enter to another anchor, search and choosing a result retain logical visible focus.",
+    "cached_retries_themselves": "Both remain focused, visible and request-free."
+  },
+  "explanation": "Source inspection plus the one-versus-two controlled probe supports a stale pendingFocus ref: the second identical setMessage can bail out, so no message/state/busy effect drains the queued ref. A later error-recovery render consumes it. This private-ref mechanism is a source-based inference; the backward focus jump is directly observed in DOM focus events.",
+  "evidence": {
+    "probe.mjs": "492d43651585e2bdb441998b85491ee2a7200069f5b8fe7cfdf542fb23b69669",
+    "results.json": "cb71fdef769c03754a158aa34a82835c7544d8d4fdd2685151df6ff60d8dfcb9",
+    "run.log": "7f778abbbaf3e82532a0ea9309561598db486e7ee858ddad3bd3af81f932550a",
+    "control-one-cached/probe.mjs": "e8642f5d66dcdbc91235d2e65b0c0948e7146378b35d144f91652291970e3d41",
+    "control-one-cached/results.json": "261411065ccae213d8cc95786377bd9f528cf85b959fb9392c05197f0f6c66e8",
+    "control-one-cached/run.log": "dc40f1bb7412876bd32eef4dc67856344d16646efe86357b1d334c4670fa989f"
+  },
+  "no_files_changed_outside_review_scratch": true
+}

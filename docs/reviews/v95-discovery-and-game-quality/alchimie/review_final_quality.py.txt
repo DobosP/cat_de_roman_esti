@@ -1,0 +1,44 @@
+"""Independently bind V95 world quality to the final catalog, current runtime and replay."""
+import hashlib,json,sys
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+OUT=Path(__file__).resolve().parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import build_alchimie_discovery_world as B
+import audit_alchimie_discovery_world as A
+from cat_de_roman_esti.wordgames.discovery_world import validate_world
+from cat_de_roman_esti.wordgames import alchimie_explore as E
+REVIEWER='codex-v95-independent-world-quality'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+cp=OUT/'proposed-catalog.json';ap=OUT/'live-audit.json';c=json.loads(cp.read_bytes());a=json.loads(ap.read_bytes())
+assert sha(cp)=='22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd'
+assert c==B.build_catalog(OUT/'candidate.json',OUT/'factual-review.json',OUT/'quality-review.json')
+assert c['candidate_sha256']=='c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801'
+assert a['catalog_sha256']==sha(cp) and a['candidate_sha256']==c['candidate_sha256']
+expected={p:sha(ROOT/p) for p in B.RUNTIME_SOURCES}
+assert len(a['runtime_sources'])==len(expected)
+assert {r['path']:r['sha256'] for r in a['runtime_sources']}==expected
+assert a==A.audit(cp)
+world=validate_world(c)
+session=E.ExploreSession(world=world,goal_id='ciocolata-dubai')
+session.owned.update(dict.fromkeys(world.catalog.world.starter_ids))
+order=[]
+while True:
+    pair=next((p for p,r in reversed(list(world.recipes.items())) if set(p)<=session.owned.keys() and r.result not in session.owned),None)
+    if pair is None:break
+    result,new,_=session.craft(pair)
+    assert new and result==world.recipes[pair].result
+    order.append(world.recipes[pair].id)
+state=E.state_payload('quality-final-independent',session)
+assert state['complete'] and len(session.owned)==247 and len(session.discoveries)==143
+assert all(g['completed'] for g in state['goals'])
+assert state['empty_pairs']==[] and 'empty_pairs' not in state['progress']
+for pair,r in world.recipes.items():
+    result,new,supplied=session.craft(pair)
+    assert result==r.result and not new and not supplied
+assert expected=={p:sha(ROOT/p) for p in B.RUNTIME_SOURCES}
+report={'kind':'alchimie-v95-independent-final-quality-check-v1','reviewer':REVIEWER,'catalog_sha256':sha(cp),'audit_sha256':sha(ap),'candidate_sha256':c['candidate_sha256'],'audit_reproduced_exactly':True,'current_runtime_bindings_checked':len(expected),'independent_reverse_recipe_order':order,'complete_concepts':len(session.owned),'complete_discoveries':len(session.discoveries),'all342_recipe_repeats_consistent':True,'goal_replays':len(a['goal_replays']),'save_generations':len(a['compatible_save_replays']),'save_prefixes':[x['prefixes_preserved'] for x in a['compatible_save_replays']],'empty_history_only_observed':True,'portable_checkpoint_excludes_empty_history':True,'reviewer_script_sha256':sha(Path(__file__)),'related_independent_gui_evidence_sha256':sha(OUT.parent/'gui/independent-browser/probes.json')}
+(OUT/'independent-final-quality-check.json').write_bytes(B.json_bytes(report))
+final={'kind':B.FINAL_REVIEW_KIND,'role':'quality','reviewer':REVIEWER,'catalog_sha256':sha(cp),'audit_sha256':sha(ap),'verdict':'accept','rationale':'The exact final catalog reproduces the complete independent semantic reviews for247 concepts and342 recipes. All nine current runtime bindings match; the supplied33 free/optional-goal audit replays reproduce exactly. Every historical prefix survives across seven older books, including all138 earned V94 discoveries. My independent reverse-recipe-order traversal with the late ciocolata-dubai goal reaches247 concepts and143 discoveries, completes all goals, and repeats all342 recipes consistently. All5new results retain2 routes and the2 former terminals retain onward uses. The additional factual source for water-soaked raisins does not alter mechanics or the reviewed preparation wording. Empty-pair memory remains confined to actually observed failures in the live session; no fabricated negative history or portable-save payload is inferred from full discovery. The separate fresh browser review verifies repeated-pair feedback, focus, recovery and bounded revalidation against the same feature sources. This is editorial/runtime acceptance; final assembled integration, physical-device acceptance and human enjoyment remain separate.'}
+(OUT/'final-quality.json').write_bytes(B.json_bytes(final))
+print(json.dumps({k:v for k,v in report.items() if k!='independent_reverse_recipe_order'},indent=2))

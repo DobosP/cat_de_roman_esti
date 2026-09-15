@@ -1,0 +1,93 @@
+"""Generate an exact five-artifact V95 inverse after root freezes reviewed content.
+
+Reads git cf6b28b and live fixtures. Writes only the specified evidence receipt;
+never rewrites source, current content pins, historical pins, or fixture data.
+"""
+from pathlib import Path
+from copy import deepcopy
+import argparse
+import hashlib
+import json
+import subprocess
+import sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v95-discovery-and-game-quality')
+BASELINE='cf6b28b'
+FILES={
+ 'kg_sample.json':'cat_de_roman_esti/fixtures/kg_sample.json',
+ 'games_pack.json':'cat_de_roman_esti/fixtures/games_pack.json',
+ 'board_rankings_v37.json':'cat_de_roman_esti/fixtures/board_rankings_v37.json',
+ 'derived_catalog_v38.json':'cat_de_roman_esti/fixtures/derived_catalog_v38.json',
+ 'cat_mobile_app_pack_contract.json':'tests/fixtures/cat_mobile_app_pack_contract.json',
+}
+EXPECTED_BEFORE={
+ 'kg_sample.json':'d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109',
+ 'games_pack.json':'7d28b9df887fe561150bc582f390df0dde4f8c292e5550055bbe84e9e8d90990',
+ 'board_rankings_v37.json':'82f128edb3ccdd8208d41c43b7eb77df1e8d528d2aaea1fed5972712047255ed',
+ 'derived_catalog_v38.json':'4088402b80b78946e6f9cb7ee5379c9c3f32438801611008f266101625bb428d',
+ 'cat_mobile_app_pack_contract.json':'5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f',
+}
+def sha(blob):return hashlib.sha256(blob).hexdigest()
+def encoded(value,name):return (json.dumps(value,ensure_ascii=False,indent=2 if name=='kg_sample.json' else 1)+'\n').encode()
+def main():
+ parser=argparse.ArgumentParser(description=__doc__)
+ parser.add_argument('--fixtures-final',action='store_true',required=True)
+ parser.add_argument('--approved-ids',type=Path,required=True)
+ parser.add_argument('--output',type=Path,required=True)
+ args=parser.parse_args()
+ added_spec=json.loads(args.approved_ids.read_bytes())
+ assert set(added_spec)=={'conexiuni','contexto','lant','alchimie'}
+ assert all(isinstance(ids,list) and len(ids)==len(set(ids)) for ids in added_spec.values())
+ approved={game:set(ids) for game,ids in added_spec.items()}
+ assert not approved['alchimie'] and all(approved[g] for g in ('conexiuni','contexto','lant'))
+ approved_all=set().union(*approved.values())
+ receipt={'schema_version':1,'baseline_commit':subprocess.check_output(['git','rev-parse',BASELINE],cwd=ROOT,text=True).strip(),'files':{}}
+ stats={}
+ for name,relative in FILES.items():
+  before_blob=subprocess.check_output(['git','show',BASELINE+':'+relative],cwd=ROOT)
+  after_blob=(ROOT/relative).read_bytes()
+  before=json.loads(before_blob);after=json.loads(after_blob)
+  assert sha(before_blob)==EXPECTED_BEFORE[name]
+  assert encoded(before,name)==before_blob and encoded(after,name)==after_blob
+  assert set(before)==set(after)
+  head=lambda v:{k:x for k,x in v.items() if not isinstance(x,list)}
+  item={'baseline_sha256':sha(before_blob),'after_sha256':sha(after_blob),'head_before':head(before),'head_after':head(after),'tables':{}}
+  for table,rows_before in before.items():
+   if not isinstance(rows_before,list):continue
+   rows_after=after[table];assert isinstance(rows_after,list)
+   old={r['id']:r for r in rows_before};new={r['id']:r for r in rows_after}
+   assert len(old)==len(rows_before) and len(new)==len(rows_after)
+   added=[r for r in rows_after if r['id'] not in old]
+   removed=[{'index':i,'row':r} for i,r in enumerate(rows_before) if r['id'] not in new]
+   changed={r['id']:{'before':r,'after':new[r['id']]} for r in rows_before if r['id'] in new and r!=new[r['id']]}
+   assert not removed
+   if name=='games_pack.json':
+    assert {r['id'] for r in added}==approved[table] and not changed
+    assert all(r['status']=='approved' for r in added)
+   elif name=='board_rankings_v37.json':
+    assert table=='boards' and {r['id'] for r in added}==approved_all
+    for change in changed.values():
+     assert set(change['before'])==set(change['after'])
+     assert {k for k in change['before'] if change['before'][k]!=change['after'][k]} <= {'rank','selection_weight'}
+   else:assert not added and not changed
+   after_old_order=[r['id'] for r in rows_after if r['id'] in old]
+   before_order=[r['id'] for r in rows_before]
+   item['tables'][table]={'added':added,'changed':changed,'removed':removed,'baseline_order':before_order if after_old_order!=before_order else None}
+  receipt['files'][name]=item
+  stats[name]={'before':item['baseline_sha256'],'after':item['after_sha256'],'tables':{t:{k:len(v[k]) for k in ['added','changed','removed']} for t,v in item['tables'].items()}}
+ target=args.output.resolve()
+ assert not target.is_relative_to(ROOT/'cat_de_roman_esti/fixtures')
+ assert not target.is_relative_to(ROOT/'tests/fixtures')
+ assert target.name=='artifact-delta.json'
+ target.parent.mkdir(parents=True,exist_ok=True)
+ blob=(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n').encode()
+ if target.exists():assert target.read_bytes()==blob,'Refuse replacement of different receipt'
+ target.write_bytes(blob)
+ sys.path.insert(0,str(ROOT))
+ from tests.content_history import _reverse_reviewed_delta
+ for name,relative in FILES.items():
+  current=json.loads((ROOT/relative).read_bytes());untouched=deepcopy(current)
+  restored=_reverse_reviewed_delta(current,name,target)
+  assert sha(encoded(restored,name))==EXPECTED_BEFORE[name]
+  assert current==untouched
+ print(json.dumps({'receipt_sha256':sha(blob),'byte_size':len(blob),'files':stats},indent=2))
+if __name__=='__main__':main()
