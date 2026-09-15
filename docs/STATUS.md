@@ -1,12 +1,12 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-15 — V93 words/game-quality session complete; all local integration gates green.
+Last verified: 2026-09-15 — V93 integrated on main; all local integration gates green.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- V93 uses `feat/v93-words-and-game-quality`, based on main `bf9d814`. The previous
-  V92 main push passed GitHub CI run 34933828378 on both Python versions and frontend.
+- V93 implementation `ba28be6` is integrated on main after `bf9d814`;
+  the owner authorized its publication and a fresh V94 content/game-quality session.
 - **13 new rounds/targets, ten Alchimie words and 21 recipes**: Conexiuni +1,
   Cald sau Rece +2, Lanț +2, Intrusul +4 and Perechi +4. New boards expose eleven
   previously unused Conexiuni words, fifteen Intrusul words and thirty Perechi words.
@@ -88,13 +88,13 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 - Independent GUI checks cover 320px/200% text, 117 earned recipes, ingredient/result search,
   zero API/save changes, selection/focus, long queries, empty recovery and 44px controls.
   No unresolved finding remains in that bounded review; human enjoyment is unmeasured.
-- Preview: **8150** serves V93; **8160** serves main for comparison. Browser origin 8150
-  is retained, supporting restoration of earlier Alchimie collections.
+- Preview origin **8150** is retained, supporting restoration of earlier Alchimie
+  collections. [V93 landing receipt](reviews/v93-words-and-game-quality/landing.json).
 
 ## Production and remaining work
 
 - Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`, deployed
-  2026-09-09. V93 stays in its task worktree; no push, main merge or deployment in this pass.
+  2026-09-09. V93 is integrated on main; production deployment is outside this landing.
 - Owner playtesting and physical-device acceptance remain. Aluat's bread approach is still
   lukewarm despite five strong direct ingredient/tool approaches. Further specific route
   captions and broader target-neighborhood calibration remain editorial work.

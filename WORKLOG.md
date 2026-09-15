@@ -913,3 +913,16 @@ V93 final integration: Python 3.12 and 3.14 each pass 2017 backend/53 account te
 486 browser and 212 native frontend checks pass. Validators, Ruff, frontend lint/build,
 docs and whitespace are green; initial bundle 119.22/120 KiB. Final inputs, original
 failed runs, corrected snapshots and full successful logs are bound by the V93 receipt.
+
+## V93 main landing and V94 authorization (2026-09-15)
+
+Valid until: later main integration changes these inputs — then treat as history.
+
+The owner requested “land v93 start v94”. V93 implementation ba28be6 is fast-forwarded
+from bf9d814 into local main. All 168 archived files, 43 changed gate inputs, nine
+current artifacts and six final logs match the completed green integration receipt.
+Landing notes change documentation only. The authorized main push is followed by
+remote verification, relocation of the port 8150 preview and cleanup limited to the
+verified V93 branch/worktree/scratch. Main then supplies the new V94 task baseline.
+The original V93 integration receipt retains its pre-landing scope as historical fact.
+Production remains anonymous V91; no deployment is included.
