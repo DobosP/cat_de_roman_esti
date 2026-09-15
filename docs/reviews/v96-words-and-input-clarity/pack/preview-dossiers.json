@@ -1,0 +1,443 @@
+{
+  "preview_v96_viata_de_roman_conexiuni_1": {
+    "id": "preview_v96_viata_de_roman_conexiuni_1",
+    "game": "conexiuni",
+    "category": "viata_de_roman",
+    "difficulty": "normal",
+    "status": "pending",
+    "record_sha256": "67ffae183fd5df09a7aefc806ed4f7e42445a446dc736346a48eca4f4e5e3087",
+    "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "lint_findings": [],
+    "fairness": {
+      "unfair_tiles": [],
+      "contested_tiles": [],
+      "engine_unfair_raw": 0
+    },
+    "groups": [
+      {
+        "label": "Părinți și bunici",
+        "members": [
+          {
+            "id": "n_v24_people_parents_mama",
+            "label": "Mamă",
+            "node_type": "concept",
+            "category": "societate",
+            "salience": 0.94,
+            "degree": 3,
+            "incoming_degree": 1,
+            "description": "Concept cotidian din grupul «părinți și copii mici»: Mamă."
+          },
+          {
+            "id": "n_v24_people_parents_tata",
+            "label": "Tată",
+            "node_type": "concept",
+            "category": "societate",
+            "salience": 0.94,
+            "degree": 2,
+            "incoming_degree": 2,
+            "description": "Concept cotidian din grupul «părinți și copii mici»: Tată."
+          },
+          {
+            "id": "n_v24_people_grandparents_bunic",
+            "label": "Bunic",
+            "node_type": "concept",
+            "category": "societate",
+            "salience": 0.9,
+            "degree": 2,
+            "incoming_degree": 2,
+            "description": "Concept cotidian din grupul «bunici și mătuși»: Bunic."
+          },
+          {
+            "id": "n_v24_people_grandparents_bunica",
+            "label": "Bunică",
+            "node_type": "concept",
+            "category": "societate",
+            "salience": 0.9,
+            "degree": 3,
+            "incoming_degree": 1,
+            "description": "Concept cotidian din grupul «bunici și mătuși»: Bunică."
+          }
+        ]
+      },
+      {
+        "label": "Băuturi",
+        "members": [
+          {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai",
+            "node_type": "concept",
+            "category": "gastronomie",
+            "salience": 0.87,
+            "degree": 5,
+            "incoming_degree": 2,
+            "description": "Concept cotidian din grupul «gustare simplă»: Ceai."
+          },
+          {
+            "id": "n_v3gas_cafea",
+            "label": "Cafea",
+            "node_type": "concept",
+            "category": "gastronomie",
+            "salience": 0.4239,
+            "degree": 8,
+            "incoming_degree": 9,
+            "description": "Băutură obținută din boabe de cafea prăjite și măcinate."
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "node_type": "concept",
+            "category": "gastronomie",
+            "salience": 0.9202,
+            "degree": 15,
+            "incoming_degree": 15,
+            "description": "Lichid alimentar folosit ca băutură și ingredient lactat."
+          },
+          {
+            "id": "n_v18gas_socata",
+            "label": "Socată",
+            "node_type": "concept",
+            "category": "gastronomie",
+            "salience": 0.58,
+            "degree": 4,
+            "incoming_degree": 4,
+            "description": "Băutură răcoritoare de casă din flori de soc, apă, zahăr și lămâie, preparată primăvara. Capătă un ușor acidulat natural după câteva zile la soare."
+          }
+        ]
+      },
+      {
+        "label": "Se deschid ca să treacă ceva",
+        "members": [
+          {
+            "id": "n_v24_home_surfaces_fereastra",
+            "label": "Fereastră",
+            "node_type": "concept",
+            "category": "viata_de_roman",
+            "salience": 0.84,
+            "degree": 2,
+            "incoming_degree": 2,
+            "description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră."
+          },
+          {
+            "id": "n_v4via_usa",
+            "label": "ușă",
+            "node_type": "concept",
+            "category": "viata_de_roman",
+            "salience": 0.6855,
+            "degree": 40,
+            "incoming_degree": 7,
+            "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință."
+          },
+          {
+            "id": "n_v24_body_face_gura",
+            "label": "Gură",
+            "node_type": "concept",
+            "category": "stiinta",
+            "salience": 0.93,
+            "degree": 4,
+            "incoming_degree": 4,
+            "description": "Concept cotidian din grupul «părți ale capului»: Gură."
+          },
+          {
+            "id": "n_v33_bathroom_fixture_robinet",
+            "label": "Robinet",
+            "node_type": "concept",
+            "category": "viata_de_roman",
+            "salience": 0.94,
+            "degree": 2,
+            "incoming_degree": 3,
+            "description": "Dispozitiv care deschide, oprește și reglează curgerea apei."
+          }
+        ]
+      },
+      {
+        "label": "Se ascut",
+        "members": [
+          {
+            "id": "n_v24_school_writing_creion",
+            "label": "Creion",
+            "node_type": "concept",
+            "category": "viata_de_roman",
+            "salience": 0.94,
+            "degree": 3,
+            "incoming_degree": 4,
+            "description": "Concept cotidian din grupul «obiecte pentru scris»: Creion."
+          },
+          {
+            "id": "n_v29_kitchen_table_cutit",
+            "label": "Cuțit",
+            "node_type": "concept",
+            "category": "gastronomie",
+            "salience": 0.92,
+            "degree": 3,
+            "incoming_degree": 1,
+            "description": "Unealtă cu lamă și mâner, folosită pentru a tăia alimente sau alte lucruri."
+          },
+          {
+            "id": "n_v4ist_sabie",
+            "label": "Sabie",
+            "node_type": "concept",
+            "category": "istorie",
+            "salience": 0.5912,
+            "degree": 4,
+            "incoming_degree": 4,
+            "description": "Armă albă folosită în lupte și simboluri militare istorice."
+          },
+          {
+            "id": "n_v32_workshop_cut_fierastrau",
+            "label": "Fierăstrău",
+            "node_type": "concept",
+            "category": "viata_de_roman",
+            "salience": 0.92,
+            "degree": 2,
+            "incoming_degree": 2,
+            "description": "Unealtă cu lamă dințată, folosită pentru a tăia lemn sau alte materiale."
+          }
+        ]
+      }
+    ],
+    "cross_group_strong_edges": [],
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "review_binding": "sha256:4f65b5366d969639032793af67d636e7c6b441f74e819560712f309ac7c84ad6"
+  },
+  "preview_v96_viata_de_roman_contexto_1": {
+    "id": "preview_v96_viata_de_roman_contexto_1",
+    "game": "contexto",
+    "category": "viata_de_roman",
+    "difficulty": "usor",
+    "status": "pending",
+    "record_sha256": "31cf7ebac5c2d52a6c82a4643e3213489fedebaad0164764bbd4c096940e7650",
+    "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "lint_findings": [],
+    "target": {
+      "id": "n_v24_home_textiles_covor",
+      "label": "Covor",
+      "node_type": "concept",
+      "category": "viata_de_roman",
+      "salience": 0.84,
+      "degree": 4,
+      "incoming_degree": 5,
+      "description": "Concept cotidian din grupul «textile din casă»: Covor."
+    },
+    "incoming_neighbor_floor": {
+      "minimum": 5,
+      "count": 5,
+      "sample": [
+        {
+          "id": "n_v24_home_bed_perna",
+          "label": "Pernă"
+        },
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v24_home_textiles_cearsaf",
+          "label": "Cearșaf"
+        },
+        {
+          "id": "n_v24_home_textiles_patura",
+          "label": "Pătură"
+        },
+        {
+          "id": "n_v4via_usa",
+          "label": "ușă"
+        }
+      ],
+      "sample_truncated": false,
+      "recognition_assessed": false
+    },
+    "reachable": 2353,
+    "strong_neighbors": [
+      {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă",
+        "node_type": "concept",
+        "category": "viata_de_roman",
+        "salience": 0.91,
+        "degree": 3,
+        "incoming_degree": 4,
+        "description": "Concept cotidian din grupul «obiecte pentru somn»: Pernă.",
+        "strength": 0.94
+      },
+      {
+        "id": "n_v24_home_surfaces_podea",
+        "label": "Podea",
+        "node_type": "concept",
+        "category": "viata_de_roman",
+        "salience": 0.84,
+        "degree": 7,
+        "incoming_degree": 2,
+        "description": "Concept cotidian din grupul «suprafețe și deschideri»: Podea.",
+        "strength": 0.94
+      },
+      {
+        "id": "n_v24_home_textiles_cearsaf",
+        "label": "Cearșaf",
+        "node_type": "concept",
+        "category": "viata_de_roman",
+        "salience": 0.84,
+        "degree": 3,
+        "incoming_degree": 2,
+        "description": "Concept cotidian din grupul «textile din casă»: Cearșaf.",
+        "strength": 0.9
+      },
+      {
+        "id": "n_v24_home_textiles_patura",
+        "label": "Pătură",
+        "node_type": "concept",
+        "category": "viata_de_roman",
+        "salience": 0.84,
+        "degree": 4,
+        "incoming_degree": 3,
+        "description": "Concept cotidian din grupul «textile din casă»: Pătură.",
+        "strength": 0.9
+      },
+      {
+        "id": "n_v4via_usa",
+        "label": "ușă",
+        "node_type": "concept",
+        "category": "viata_de_roman",
+        "salience": 0.6855,
+        "degree": 40,
+        "incoming_degree": 7,
+        "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință.",
+        "strength": 0.86
+      }
+    ],
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "review_binding": "sha256:3d5c4508c1df06ab1fdbdae6ccd3b1536c66ed3cf288967708a99fb25f462b0e"
+  },
+  "preview_v96_gastronomie_lant_1": {
+    "id": "preview_v96_gastronomie_lant_1",
+    "game": "lant",
+    "category": "gastronomie",
+    "difficulty": "usor",
+    "status": "pending",
+    "record_sha256": "78020e989fe0b59b88dee2ff87b0414c7638ed4859557a41e5c0efa2597a4311",
+    "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "lint_findings": [],
+    "display_rules_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "start": {
+      "id": "n_v85_food_vanilie",
+      "label": "Vanilie",
+      "node_type": "concept",
+      "category": "gastronomie",
+      "salience": 0.8,
+      "degree": 8,
+      "incoming_degree": 0,
+      "description": "Ingredient aromat din păstăile de vanilie, folosit la creme și alte deserturi."
+    },
+    "target": {
+      "id": "n_v2gas_branza",
+      "label": "Brânză",
+      "node_type": "concept",
+      "category": "gastronomie",
+      "salience": 0.9238,
+      "degree": 13,
+      "incoming_degree": 14,
+      "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+    },
+    "optimal": 2,
+    "branch_profile": {
+      "valid_first_hops": 2,
+      "narrowest_shortest_path_layer": 2,
+      "total_intermediate_shortest_path_nodes": 2
+    },
+    "representative_shortest_paths": [
+      {
+        "nodes": [
+          {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie"
+          },
+          {
+            "id": "n_gas_placinte_poale_brau",
+            "label": "Poale-n brâu"
+          },
+          {
+            "id": "n_v2gas_branza",
+            "label": "Brânză"
+          }
+        ],
+        "edges": [
+          {
+            "from": {
+              "id": "n_v85_food_vanilie",
+              "label": "Vanilie"
+            },
+            "to": {
+              "id": "n_gas_placinte_poale_brau",
+              "label": "Poale-n brâu"
+            },
+            "relation": "ingredient_variant",
+            "label": "aromatizează umpluturi de",
+            "display_label": "legătură directă",
+            "strength": 0.8
+          },
+          {
+            "from": {
+              "id": "n_gas_placinte_poale_brau",
+              "label": "Poale-n brâu"
+            },
+            "to": {
+              "id": "n_v2gas_branza",
+              "label": "Brânză"
+            },
+            "relation": "related_to",
+            "label": "umplutură cu brânză",
+            "display_label": "legătură directă",
+            "strength": 0.82
+          }
+        ]
+      },
+      {
+        "nodes": [
+          {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie"
+          },
+          {
+            "id": "n_v17gas_pasca",
+            "label": "Pască"
+          },
+          {
+            "id": "n_v2gas_branza",
+            "label": "Brânză"
+          }
+        ],
+        "edges": [
+          {
+            "from": {
+              "id": "n_v85_food_vanilie",
+              "label": "Vanilie"
+            },
+            "to": {
+              "id": "n_v17gas_pasca",
+              "label": "Pască"
+            },
+            "relation": "ingredient_variant",
+            "label": "aromatizează rețete de",
+            "display_label": "legătură directă",
+            "strength": 0.8
+          },
+          {
+            "from": {
+              "id": "n_v17gas_pasca",
+              "label": "Pască"
+            },
+            "to": {
+              "id": "n_v2gas_branza",
+              "label": "Brânză"
+            },
+            "relation": "related_to",
+            "label": "umplută cu brânză dulce",
+            "display_label": "legătură directă",
+            "strength": 0.75
+          }
+        ]
+      }
+    ],
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "review_binding": "sha256:cf0f5e526e6d951a57e9ddbd0dc538679030387012cbcce0e0c153d732e4662d"
+  }
+}

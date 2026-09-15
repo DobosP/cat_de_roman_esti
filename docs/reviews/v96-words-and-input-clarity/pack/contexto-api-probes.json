@@ -1,0 +1,126 @@
+{
+  "scope": "Author fixed-target API probes, not independent review or public selection.",
+  "targets": [
+    {
+      "target": "n_v24_home_textiles_covor",
+      "label": "Covor",
+      "incoming": [
+        {
+          "id": "n_v24_home_bed_perna",
+          "label": "Pernă"
+        },
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v24_home_textiles_cearsaf",
+          "label": "Cearșaf"
+        },
+        {
+          "id": "n_v24_home_textiles_patura",
+          "label": "Pătură"
+        },
+        {
+          "id": "n_v4via_usa",
+          "label": "ușă"
+        }
+      ],
+      "reachable": 2353,
+      "responsive": 844,
+      "steps": [
+        {
+          "text": "podea",
+          "guess": {
+            "id": "n_v24_home_surfaces_podea",
+            "label": "Podea",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "casă",
+          "guess": {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 2,
+            "rank": 11,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "pătură",
+          "guess": {
+            "id": "n_v24_home_textiles_patura",
+            "label": "Pătură",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "pernă",
+          "guess": {
+            "id": "n_v24_home_bed_perna",
+            "label": "Pernă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "a spăla",
+          "guess": {
+            "id": "n_v24_action_home_a_spala",
+            "label": "A spăla",
+            "distance": 2,
+            "rank": 8,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "aspirator",
+          "guess": {
+            "id": "n_v31_cleaning_floor_aspirator",
+            "label": "Aspirator",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "Covor",
+          "guess": {
+            "id": "n_v24_home_textiles_covor",
+            "label": "Covor",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 7
+          },
+          "won": true
+        }
+      ]
+    }
+  ]
+}

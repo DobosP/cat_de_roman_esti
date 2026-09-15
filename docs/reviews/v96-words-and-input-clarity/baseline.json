@@ -1,0 +1,65 @@
+{
+  "kind": "v96-start-baseline-v1",
+  "baseline_commit": "14577863038378c734c7b2e0e8b33ea8158f318b",
+  "implementation_commit": "085e792162530f915ce1f2e02eaf67638fca2708",
+  "branch": "feat/v96-words-and-input-clarity",
+  "stage": "initial authoring and critique; no approved V96 serving changes",
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "b166aa76e2746c5c2f1382889ede528cce25536fb5480c9d21b027cf65c5d319",
+    "cat_de_roman_esti/fixtures/games_pack.json": "27b1dba81a2e02d1e2616a1ad4e6eceefe12d189a86a0913c3655adee99bb3cf",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b4c32d0ff65e024e4bd2e292c03e5382f0927c7c388367bf1f80bd7a3c09a831",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "5e27495fcc34980ced41a7bbd5c0b61d703c459489d08d6b7322dac197fd7e96",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "d7b6fb1545efcdd13d96856cd0c0a3e75eca3d9071d60f4be0e7da7e1bf930b7"
+  },
+  "prior_local_verification": {
+    "backend_python312": 2191,
+    "backend_python314": 2191,
+    "accounts_each": 53,
+    "browser": 528,
+    "frontend_native": 212
+  },
+  "v95_cleanup": {
+    "main": "14577863038378c734c7b2e0e8b33ea8158f318b",
+    "origin_main": "14577863038378c734c7b2e0e8b33ea8158f318b",
+    "ancestor_verified": true,
+    "main_and_v95_clean": true,
+    "v95_origin_branch_exists": false,
+    "v95_processes": [],
+    "preview_ports_on_main": [
+      8150,
+      8160
+    ],
+    "archive_files_verified": 253,
+    "gate_inputs_verified": 46,
+    "artifacts_verified": 10,
+    "evidence_pins_verified": 12,
+    "cleanup_authorized_by_verified_landing": true,
+    "v95_worktree_removed": true,
+    "v95_local_branch_removed": true,
+    "v95_scratch_removed": true
+  },
+  "previews": [
+    {
+      "port": 8150,
+      "pid": 408100,
+      "cwd": "/home/dobo/work/cat_de_roman_esti"
+    },
+    {
+      "port": 8160,
+      "pid": 408101,
+      "cwd": "/home/dobo/work/cat_de_roman_esti"
+    }
+  ],
+  "candidate_gate_required": true,
+  "v95_github_ci": {
+    "id": 35026423470,
+    "conclusion": "success",
+    "url": "https://github.com/DobosP/cat_de_roman_esti/actions/runs/35026423470",
+    "receipt_sha256": "0964c9e9d55f71e8b37a8d44720037181fa42bc73ea3533825d019eeaf8d1d38"
+  }
+}

@@ -1,0 +1,34 @@
+import sys,json,os
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');sys.path[:0]=[str(R),str(R/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings');os.environ.setdefault('CAT_DEBUG','1')
+import django;django.setup()
+import critique_pack as c
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto,lant
+p,s,st,r=c.load_all(c.PACKAGE_PACK,c.PACKAGE_KG)
+raw={g:[] for g in ['conexiuni','contexto','lant']}
+for path in (R/'docs/reviews').rglob('*.json'):
+ try:d=json.loads(path.read_bytes())
+ except:continue
+ if isinstance(d,dict):
+  for game in raw:
+   rows=d.get(game,[])
+   if isinstance(rows,list):
+    for row in rows:
+     if isinstance(row,dict) and ('groups' in row if game=='conexiuni' else 'target' in row):raw[game].append((str(path),row))
+for labels in [['Fereastră','Carte','Gură','Robinet'],['Lapte','Iaurt','Smântână','Brânză'],['Pătură','Cearșaf','Haină','Prosop'],['Chec','Pandișpan','Brioșă','Pișcot'],['Mamă','Tată','Bunic','Bunică'],['Ceai','Cafea','Lapte','Socată'],['Geacă','Ghiozdan','Penar','Pantaloni']]:
+ ids=[s.resolve(x) for x in labels];quads=[]
+ for source,rows in [('pack',p['conexiuni']),('tombs',c.load_rejection_tombstones()),('raw',[v for _,v in raw['conexiuni']])]:
+  overlap=[]
+  for row in rows:
+   groups=list(row['groups'].values()) if isinstance(row['groups'],dict) else [g['tiles'] for g in row['groups']]
+   for q in groups:
+    if len(set(ids)&set(q))>=3:overlap.append([s.label(x) for x in q])
+  if overlap:quads.append((source,overlap[:2]))
+ print('GROUP',labels,ids,'overlap',quads)
+for label,guesses in [('Făină',['pâine','grâu','cereală','aluat','cozonac','a găti','griș','mălai','zahăr']),('Covor',['podea','casă','mobilă','textil','pătură','pernă','a spăla','aspirator']),('Turtă dulce',['prăjitură','dulce','desert','miere','scorțișoară','Crăciun','cozonac','biscuit'])]:
+ target=s.resolve(label);ss=contexto._build_session(target,'normal',None);sid=contexto.store.create(ss);cl=Client();steps=[]
+ for guess in guesses:
+  resp=cl.post(f'/api/wordgames/contexto/games/{sid}/guess',data={'text':guess},content_type='application/json');d=resp.json();steps.append((guess,d.get('guess',{}).get('rank'),d.get('guess',{}).get('temperature'),d.get('message')))
+ print('TARGET',label,'rawmatches',[path for path,row in raw['contexto'] if row['target']==target],steps)

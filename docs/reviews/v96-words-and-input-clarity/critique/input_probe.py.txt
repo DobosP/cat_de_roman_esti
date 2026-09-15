@@ -1,0 +1,34 @@
+"""Read-only V96 input coverage scout against landed V95 and fresh anonymous BFF sessions."""
+from pathlib import Path
+import json,hashlib,sys,urllib.request
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity')
+OUT=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service,normalize
+from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection
+s=get_service();kg=json.loads((ROOT/'cat_de_roman_esti/fixtures/kg_sample.json').read_text())
+words=['unealtă','unelte','sculă','scule','fier','rechizite','rechizită','rechizite școlare','metal','a repara','reparație','atelier','fierăstrău','clește','clesti','penar','creion','ghiozdan']
+coverage=[]
+for word in words:
+ exact=s.resolve(word);projection=resolve_projection(word)
+ surfaces=[{'id':n['id'],'label':n['label_ro'],'matches':[v for v in [n['label_ro'],*n.get('aliases',[])] if normalize(word) in normalize(v)]} for n in kg['kg_nodes'] if any(normalize(word) in normalize(v) for v in [n['label_ro'],*n.get('aliases',[])])]
+ coverage.append({'input':word,'exact_id':exact,'exact_label':s.label(exact) if exact else None,'projection':repr(projection) if projection else None,'fuzzy_resolver':s.resolve_fuzzy(word),'suggestions':s.suggest(word),'stored_surface_contains':surfaces})
+def req(url,data=None):
+ body=None if data is None else json.dumps(data).encode()
+ return json.load(urllib.request.urlopen(urllib.request.Request(url,data=body,headers={'Content-Type':'application/json'})))
+base='http://127.0.0.1:8150/api/wordgames/contexto/games';runs=[]
+for expected,seed,guesses in [('Clește',19,['unealtă','fier','scule','reparație','atelier','metal','ciocan','Clește']),('Penar',5,['rechizite','rechizită','rechizite școlare','școală','creion','Penar'])]:
+ create=base+f'?category=viata_de_roman&difficulty=usor&seed={seed}'
+ initial=req(create,{})
+ current=base+'/'+initial['game_id'];steps=[]
+ for text in guesses:
+  before=req(current)
+  result=req(current+'/guess',{'text':text})
+  after=req(current)
+  steps.append({'input':text,'response':result,'attempts_before':before['attempts'],'attempts_after':after['attempts'],'get_same_after_unknown': before==after if not result['ok'] else None})
+ assert result['won'] and after['target']['label']==expected
+ runs.append({'expected_target_confirmed_at_win':expected,'public_create':create,'initial':initial,'steps':steps})
+report={'kind':'v96-input-coverage-scout-v1','status':'research only; no aliases, KG nodes or runtime edits','baseline':'1457786','source_sha256':{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in ['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/wordgames/service.py','cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/contexto_projection.py','frontend/src/screens/CaldRece.tsx']},'coverage':coverage,'public_api_runs':runs,'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+(OUT/'input-probe.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+for run in runs:print(run['expected_target_confirmed_at_win'],[(x['input'],x['response'].get('message'),x['response'].get('suggestions'),x['attempts_after']) for x in run['steps']])
+print('Stored exact forms',[(x['input'],x['exact_label'],bool(x['projection'])) for x in coverage])

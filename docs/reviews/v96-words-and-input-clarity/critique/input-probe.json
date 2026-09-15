@@ -1,0 +1,932 @@
+{
+  "kind": "v96-input-coverage-scout-v1",
+  "status": "research only; no aliases, KG nodes or runtime edits",
+  "baseline": "1457786",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+    "frontend/src/screens/CaldRece.tsx": "aabf97f10d4241e7cd6f8e51eb550cf49c014784d758d526945ea9f81ea939b4"
+  },
+  "coverage": [
+    {
+      "input": "unealtă",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "unelte",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [
+        "Tunet",
+        "Sunet"
+      ],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "sculă",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "scule",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "fier",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [
+        "fluier"
+      ],
+      "stored_surface_contains": [
+        {
+          "id": "n_ftv_las_fierbinti",
+          "label": "Las Fierbinți",
+          "matches": [
+            "Las Fierbinți",
+            "serialul Las Fierbinți",
+            "Las Fierbinți serialul",
+            "Fierbinți la Pro TV"
+          ]
+        },
+        {
+          "id": "n_ftv_bobita",
+          "label": "Bobiță",
+          "matches": [
+            "Bobiță din Fierbinți",
+            "Bobiță din Las Fierbinți"
+          ]
+        },
+        {
+          "id": "n_ftv_celentano",
+          "label": "Celentano",
+          "matches": [
+            "Celentano din Fierbinți",
+            "Celentano din Las Fierbinți"
+          ]
+        },
+        {
+          "id": "n_ftv_fierbinti_sat",
+          "label": "Fierbinți",
+          "matches": [
+            "Fierbinți",
+            "satul Fierbinți",
+            "Fierbinți satul",
+            "satul din Las Fierbinți"
+          ]
+        },
+        {
+          "id": "n_gas_mamaliga",
+          "label": "Mămăligă",
+          "matches": [
+            "mălai fiert"
+          ]
+        },
+        {
+          "id": "n_gas_vin_fiert",
+          "label": "Vin fiert",
+          "matches": [
+            "Vin fiert",
+            "vinul fiert",
+            "vin fiert aromat",
+            "vin fiert cu mirodenii"
+          ]
+        },
+        {
+          "id": "n_v3gas_orez",
+          "label": "Orez",
+          "matches": [
+            "orez fiert"
+          ]
+        },
+        {
+          "id": "n_v11geo_portile_fier",
+          "label": "Porțile de Fier",
+          "matches": [
+            "Porțile de Fier",
+            "Barajul Porțile de Fier",
+            "Hidrocentrala Porțile de Fier",
+            "Porților de Fier"
+          ]
+        },
+        {
+          "id": "n_v32_workshop_cut_fierastrau",
+          "label": "Fierăstrău",
+          "matches": [
+            "Fierăstrău",
+            "fierăstrăul",
+            "fierăstraie",
+            "fierăstraiele",
+            "fierăstrăului",
+            "fierăstrăului de atelier",
+            "fierăstraielor de atelier"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "rechizite",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "rechizită",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "rechizite școlare",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "metal",
+      "exact_id": "n_v4sti_metal",
+      "exact_label": "metal",
+      "projection": null,
+      "fuzzy_resolver": "n_v4sti_metal",
+      "suggestions": [
+        "metal"
+      ],
+      "stored_surface_contains": [
+        {
+          "id": "n_v4sti_metal",
+          "label": "metal",
+          "matches": [
+            "metal",
+            "metalul",
+            "metale",
+            "metalele",
+            "metalului conductor",
+            "metalelor conductoare"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "a repara",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": "ProjectionTerm(surface='a repara', anchor_id='n_v32_workshop_hand_ciocan', domain='acțiuni cotidiene', rank_penalty=1, mapping_kind='explicit')",
+      "fuzzy_resolver": null,
+      "suggestions": [],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "reparație",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": null,
+      "fuzzy_resolver": null,
+      "suggestions": [
+        "pârâu"
+      ],
+      "stored_surface_contains": []
+    },
+    {
+      "input": "atelier",
+      "exact_id": null,
+      "exact_label": null,
+      "projection": "ProjectionTerm(surface='atelier', anchor_id='n_v4soc_munca', domain='muncă', rank_penalty=1, mapping_kind='domain_fallback')",
+      "fuzzy_resolver": null,
+      "suggestions": [],
+      "stored_surface_contains": [
+        {
+          "id": "n_v32_workshop_hand_ciocan",
+          "label": "Ciocan",
+          "matches": [
+            "ciocanului de atelier",
+            "ciocanelor de atelier"
+          ]
+        },
+        {
+          "id": "n_v32_workshop_fastener_cui",
+          "label": "Cui",
+          "matches": [
+            "cuiului de atelier",
+            "cuielor de atelier"
+          ]
+        },
+        {
+          "id": "n_v32_workshop_hand_surubelnita",
+          "label": "Șurubelniță",
+          "matches": [
+            "șurubelniței de atelier",
+            "șurubelnițelor de atelier"
+          ]
+        },
+        {
+          "id": "n_v32_workshop_fastener_surub",
+          "label": "Șurub",
+          "matches": [
+            "șurubului de atelier",
+            "șuruburilor de atelier"
+          ]
+        },
+        {
+          "id": "n_v32_workshop_hand_cleste",
+          "label": "Clește",
+          "matches": [
+            "cleștelui de atelier",
+            "cleștilor de atelier"
+          ]
+        },
+        {
+          "id": "n_v32_workshop_cut_fierastrau",
+          "label": "Fierăstrău",
+          "matches": [
+            "fierăstrăului de atelier",
+            "fierăstraielor de atelier"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "fierăstrău",
+      "exact_id": "n_v32_workshop_cut_fierastrau",
+      "exact_label": "Fierăstrău",
+      "projection": null,
+      "fuzzy_resolver": "n_v32_workshop_cut_fierastrau",
+      "suggestions": [
+        "Fierăstrău",
+        "Herăstrău",
+        "Fereastră"
+      ],
+      "stored_surface_contains": [
+        {
+          "id": "n_v32_workshop_cut_fierastrau",
+          "label": "Fierăstrău",
+          "matches": [
+            "Fierăstrău",
+            "fierăstrăul",
+            "fierăstrăului",
+            "fierăstrăului de atelier"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "clește",
+      "exact_id": "n_v32_workshop_hand_cleste",
+      "exact_label": "Clește",
+      "projection": null,
+      "fuzzy_resolver": "n_v32_workshop_hand_cleste",
+      "suggestions": [
+        "Clește"
+      ],
+      "stored_surface_contains": [
+        {
+          "id": "n_v32_workshop_hand_cleste",
+          "label": "Clește",
+          "matches": [
+            "Clește",
+            "cleștele",
+            "cleștelui",
+            "cleștelui de atelier"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "clesti",
+      "exact_id": "n_v32_workshop_hand_cleste",
+      "exact_label": "Clește",
+      "projection": null,
+      "fuzzy_resolver": "n_v32_workshop_hand_cleste",
+      "suggestions": [
+        "Clește"
+      ],
+      "stored_surface_contains": [
+        {
+          "id": "n_v32_workshop_hand_cleste",
+          "label": "Clește",
+          "matches": [
+            "clești",
+            "cleștii",
+            "cleștilor de atelier"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "penar",
+      "exact_id": "n_v23via_penar",
+      "exact_label": "Penar",
+      "projection": null,
+      "fuzzy_resolver": "n_v23via_penar",
+      "suggestions": [
+        "Penar",
+        "Petrache Poenaru",
+        "Pernă"
+      ],
+      "stored_surface_contains": [
+        {
+          "id": "n_v23via_penar",
+          "label": "Penar",
+          "matches": [
+            "Penar",
+            "penarul"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "creion",
+      "exact_id": "n_v24_school_writing_creion",
+      "exact_label": "Creion",
+      "projection": null,
+      "fuzzy_resolver": "n_v24_school_writing_creion",
+      "suggestions": [
+        "Creion"
+      ],
+      "stored_surface_contains": [
+        {
+          "id": "n_v24_school_writing_creion",
+          "label": "Creion",
+          "matches": [
+            "Creion",
+            "creionul"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "ghiozdan",
+      "exact_id": "n_v23via_ghiozdan",
+      "exact_label": "Ghiozdan",
+      "projection": null,
+      "fuzzy_resolver": "n_v23via_ghiozdan",
+      "suggestions": [
+        "Ghiozdan"
+      ],
+      "stored_surface_contains": [
+        {
+          "id": "n_v23via_ghiozdan",
+          "label": "Ghiozdan",
+          "matches": [
+            "Ghiozdan",
+            "ghiozdanul"
+          ]
+        }
+      ]
+    }
+  ],
+  "public_api_runs": [
+    {
+      "expected_target_confirmed_at_win": "Clește",
+      "public_create": "http://127.0.0.1:8150/api/wordgames/contexto/games?category=viata_de_roman&difficulty=usor&seed=19",
+      "initial": {
+        "game_id": "c01b71b2-985f-4fed-9104-1f7a74db31f7",
+        "attempts": 0,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2359,
+        "difficulty": "usor",
+        "guesses": [],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      },
+      "steps": [
+        {
+          "input": "unealtă",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 0,
+          "get_same_after_unknown": true
+        },
+        {
+          "input": "fier",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept. Poate cautai: fluier?",
+            "suggestions": [
+              "fluier"
+            ],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 0,
+          "get_same_after_unknown": true
+        },
+        {
+          "input": "scule",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 0,
+          "get_same_after_unknown": true
+        },
+        {
+          "input": "reparație",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept. Poate cautai: pârâu?",
+            "suggestions": [
+              "pârâu"
+            ],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 0,
+          "get_same_after_unknown": true
+        },
+        {
+          "input": "atelier",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "ctxp_7697a452c18fc6220fe0",
+              "label": "Atelier",
+              "distance": 4,
+              "rank": 99,
+              "temperature": "Caldut",
+              "closeness": 96,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "ctxp_7697a452c18fc6220fe0",
+                "label": "Atelier",
+                "distance": 4,
+                "rank": 99,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #99."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 1,
+          "get_same_after_unknown": null
+        },
+        {
+          "input": "metal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v4sti_metal",
+              "label": "metal",
+              "distance": 2,
+              "rank": 9,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "ctxp_7697a452c18fc6220fe0",
+                "label": "Atelier",
+                "distance": 4,
+                "rank": 99,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 90 locuri mai aproape.",
+              "rank_delta": 90
+            },
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 1,
+          "attempts_after": 2,
+          "get_same_after_unknown": null
+        },
+        {
+          "input": "ciocan",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v32_workshop_hand_ciocan",
+              "label": "Ciocan",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_v32_workshop_hand_ciocan",
+                "label": "Ciocan",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "ctxp_7697a452c18fc6220fe0",
+                "label": "Atelier",
+                "distance": 4,
+                "rank": 99,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 6 locuri mai aproape.",
+              "rank_delta": 6
+            },
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 2,
+          "attempts_after": 3,
+          "get_same_after_unknown": null
+        },
+        {
+          "input": "Clește",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v32_workshop_hand_cleste",
+              "label": "Clește",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v32_workshop_hand_cleste",
+                "label": "Clește",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v32_workshop_hand_ciocan",
+                "label": "Ciocan",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "ctxp_7697a452c18fc6220fe0",
+                "label": "Atelier",
+                "distance": 4,
+                "rank": 99,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 4,
+            "won": true,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 0,
+            "clue_available": false,
+            "target": {
+              "id": "n_v32_workshop_hand_cleste",
+              "label": "Clește",
+              "description": "Unealtă cu două brațe, folosită pentru a prinde, îndoi sau tăia."
+            },
+            "score": 820,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟩🟩🟩🎯\n4 incercari"
+          },
+          "attempts_before": 3,
+          "attempts_after": 4,
+          "get_same_after_unknown": null
+        }
+      ]
+    },
+    {
+      "expected_target_confirmed_at_win": "Penar",
+      "public_create": "http://127.0.0.1:8150/api/wordgames/contexto/games?category=viata_de_roman&difficulty=usor&seed=5",
+      "initial": {
+        "game_id": "faf06293-0e5d-4ab4-9258-df3261a28687",
+        "attempts": 0,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      },
+      "steps": [
+        {
+          "input": "rechizite",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2353,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 0,
+          "get_same_after_unknown": true
+        },
+        {
+          "input": "rechizită",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2353,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 0,
+          "get_same_after_unknown": true
+        },
+        {
+          "input": "rechizite școlare",
+          "response": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2353,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 0,
+          "get_same_after_unknown": true
+        },
+        {
+          "input": "școală",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v3soc_scoala",
+              "label": "Școală",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #2."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 0,
+          "attempts_after": 1,
+          "get_same_after_unknown": null
+        },
+        {
+          "input": "creion",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_writing_creion",
+              "label": "Creion",
+              "distance": 2,
+              "rank": 39,
+              "temperature": "Cald",
+              "closeness": 98,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_school_writing_creion",
+                "label": "Creion",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 37 locuri.",
+              "rank_delta": -37
+            },
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "attempts_before": 1,
+          "attempts_after": 2,
+          "get_same_after_unknown": null
+        },
+        {
+          "input": "Penar",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v23via_penar",
+              "label": "Penar",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_v23via_penar",
+                "label": "Penar",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v3soc_scoala",
+                "label": "Școală",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_school_writing_creion",
+                "label": "Creion",
+                "distance": 2,
+                "rank": 39,
+                "temperature": "Cald",
+                "closeness": 98,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": true,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 0,
+            "clue_available": false,
+            "target": {
+              "id": "n_v23via_penar",
+              "label": "Penar",
+              "description": "Etui pentru instrumentele de scris, întâlnit în mod obișnuit printre rechizitele unui elev."
+            },
+            "score": 880,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟩🟩🎯\n3 incercari"
+          },
+          "attempts_before": 2,
+          "attempts_after": 3,
+          "get_same_after_unknown": null
+        }
+      ]
+    }
+  ],
+  "script_sha256": "8535ee05a9200741089a3e615aa1d58d367a7e8eb3493a1267fd3eb43b8608ea"
+}

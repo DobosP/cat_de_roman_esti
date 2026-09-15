@@ -1,0 +1,3389 @@
+{
+  "kind": "v96-six-game-gui-kickoff-v1",
+  "status": "Critique evidence, not implementation or approval",
+  "baseline": "1457786",
+  "origin": "http://127.0.0.1:8150",
+  "source_sha256": {
+    "manifest": "d7b6fb1545efcdd13d96856cd0c0a3e75eca3d9071d60f4be0e7da7e1bf930b7",
+    "alchimieScreen": "f7180f1068c628aeb34a7f1b08da2d25578e0b4355aee00e20db6c185294a23e",
+    "contextoScreen": "aabf97f10d4241e7cd6f8e51eb550cf49c014784d758d526945ea9f81ea939b4"
+  },
+  "reports": [
+    {
+      "game": "intrusul",
+      "public_start": {
+        "key": "intrusul",
+        "path": "/intrusul",
+        "board": ".intrusul-grid",
+        "seed": 38
+      },
+      "initial": {
+        "game_id": "4bc01a31-e775-43d7-ae4e-c1b17a501fa2",
+        "tiles": [
+          {
+            "id": "n_v28_feeling_social_rusine",
+            "label": "Rușine"
+          },
+          {
+            "id": "n_v24_feeling_needs_oboseala",
+            "label": "Oboseală"
+          },
+          {
+            "id": "n_v24_feeling_needs_sete",
+            "label": "Sete"
+          },
+          {
+            "id": "n_v24_feeling_needs_foame",
+            "label": "Foame"
+          }
+        ],
+        "wrong_ids": [],
+        "attempts": 0,
+        "mistakes": 0,
+        "remaining_mistakes": 3,
+        "won": false,
+        "lost": false,
+        "difficulty": "usor",
+        "hints_used": 0,
+        "hint_available": false
+      },
+      "initialView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              18,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Rușine",
+            "aria": "Rușine",
+            "disabled": false,
+            "box": [
+              14,
+              148.390625,
+              176,
+              78
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Oboseală",
+            "aria": "Oboseală",
+            "disabled": false,
+            "box": [
+              200,
+              148.390625,
+              176,
+              78
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Sete",
+            "aria": "Sete",
+            "disabled": false,
+            "box": [
+              14,
+              236.390625,
+              176,
+              78
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Foame",
+            "aria": "Foame",
+            "disabled": false,
+            "box": [
+              200,
+              236.390625,
+              176,
+              78
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [],
+        "openDisclosures": []
+      },
+      "steps": [
+        {
+          "ok": true,
+          "correct": true,
+          "already_tried": false,
+          "message": "Exact — acesta este intrusul!",
+          "game_id": "4bc01a31-e775-43d7-ae4e-c1b17a501fa2",
+          "tiles": [
+            {
+              "id": "n_v28_feeling_social_rusine",
+              "label": "Rușine"
+            },
+            {
+              "id": "n_v24_feeling_needs_oboseala",
+              "label": "Oboseală"
+            },
+            {
+              "id": "n_v24_feeling_needs_sete",
+              "label": "Sete"
+            },
+            {
+              "id": "n_v24_feeling_needs_foame",
+              "label": "Foame"
+            }
+          ],
+          "wrong_ids": [],
+          "attempts": 1,
+          "mistakes": 0,
+          "remaining_mistakes": 3,
+          "won": true,
+          "lost": false,
+          "difficulty": "usor",
+          "hints_used": 0,
+          "hint_available": false,
+          "score": 1000,
+          "share": "cat_de_roman_esti · Intrusul\n🟩 1 încercări",
+          "solution": {
+            "intruder": {
+              "id": "n_v28_feeling_social_rusine",
+              "label": "Rușine"
+            },
+            "group": {
+              "label": "Stări care semnalează nevoi fiziologice",
+              "tiles": [
+                {
+                  "id": "n_v24_feeling_needs_foame",
+                  "label": "Foame"
+                },
+                {
+                  "id": "n_v24_feeling_needs_sete",
+                  "label": "Sete"
+                },
+                {
+                  "id": "n_v24_feeling_needs_oboseala",
+                  "label": "Oboseală"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "afterView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              18,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "📋 Copiază rezultatul",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              94,
+              535.59375,
+              202,
+              34
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Încă unul →",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              41.5,
+              581.59375,
+              124,
+              34
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Schimbă opțiunile",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              177.5,
+              581.59375,
+              171,
+              34
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Meniu",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              154,
+              627.59375,
+              82,
+              34
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [
+          "L-ai găsit!"
+        ],
+        "openDisclosures": []
+      },
+      "errors": []
+    },
+    {
+      "game": "perechi",
+      "public_start": {
+        "key": "perechi",
+        "path": "/perechi",
+        "board": ".perechi-grid",
+        "seed": 38
+      },
+      "initial": {
+        "game_id": "2d5afd84-99dd-4c56-8405-373d0b19daa2",
+        "tiles": [
+          {
+            "id": "n_v2spo_inot_sportiv",
+            "label": "Înot sportiv",
+            "solved": false
+          },
+          {
+            "id": "n_spt_columbia_romania_1994",
+            "label": "Columbia - România 1994",
+            "solved": false
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "solved": false
+          },
+          {
+            "id": "n_spt_generatia_de_aur",
+            "label": "Generația de Aur",
+            "solved": false
+          },
+          {
+            "id": "n_v2spo_turneu_grand_slam",
+            "label": "Turneu de Grand Slam",
+            "solved": false
+          },
+          {
+            "id": "n_spt_wimbledon",
+            "label": "Wimbledon",
+            "solved": false
+          },
+          {
+            "id": "n_spt_helmut_duckadam",
+            "label": "Helmut Duckadam",
+            "solved": false
+          },
+          {
+            "id": "n_spt_patru_penaltyuri",
+            "label": "Patru penalty-uri apărate",
+            "solved": false
+          }
+        ],
+        "solved_pairs": [],
+        "solved_count": 0,
+        "remaining_pairs": 4,
+        "mistakes": 0,
+        "remaining_mistakes": 6,
+        "actions": 0,
+        "hint_available": false,
+        "hints_used": 0,
+        "won": false,
+        "lost": false
+      },
+      "initialView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              18,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Înot sportiv",
+            "aria": "Înot sportiv",
+            "disabled": false,
+            "box": [
+              14,
+              182,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Columbia - România 1994",
+            "aria": "Columbia - România 1994",
+            "disabled": false,
+            "box": [
+              199.5,
+              182,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Recordul la 100 m liber din 2022",
+            "aria": "Recordul la 100 m liber din 2022",
+            "disabled": false,
+            "box": [
+              14,
+              263,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Generația de Aur",
+            "aria": "Generația de Aur",
+            "disabled": false,
+            "box": [
+              199.5,
+              263,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Turneu de Grand Slam",
+            "aria": "Turneu de Grand Slam",
+            "disabled": false,
+            "box": [
+              14,
+              344,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Wimbledon",
+            "aria": "Wimbledon",
+            "disabled": false,
+            "box": [
+              199.5,
+              344,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Helmut Duckadam",
+            "aria": "Helmut Duckadam",
+            "disabled": false,
+            "box": [
+              14,
+              425,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Patru penalty-uri apărate",
+            "aria": "Patru penalty-uri apărate",
+            "disabled": false,
+            "box": [
+              199.5,
+              425,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [],
+        "openDisclosures": []
+      },
+      "steps": [
+        {
+          "ok": true,
+          "correct": false,
+          "repeated": false,
+          "game_id": "2d5afd84-99dd-4c56-8405-373d0b19daa2",
+          "tiles": [
+            {
+              "id": "n_v2spo_inot_sportiv",
+              "label": "Înot sportiv",
+              "solved": false
+            },
+            {
+              "id": "n_spt_columbia_romania_1994",
+              "label": "Columbia - România 1994",
+              "solved": false
+            },
+            {
+              "id": "n_spt_record_100m_liber_2022",
+              "label": "Recordul la 100 m liber din 2022",
+              "solved": false
+            },
+            {
+              "id": "n_spt_generatia_de_aur",
+              "label": "Generația de Aur",
+              "solved": false
+            },
+            {
+              "id": "n_v2spo_turneu_grand_slam",
+              "label": "Turneu de Grand Slam",
+              "solved": false
+            },
+            {
+              "id": "n_spt_wimbledon",
+              "label": "Wimbledon",
+              "solved": false
+            },
+            {
+              "id": "n_spt_helmut_duckadam",
+              "label": "Helmut Duckadam",
+              "solved": false
+            },
+            {
+              "id": "n_spt_patru_penaltyuri",
+              "label": "Patru penalty-uri apărate",
+              "solved": false
+            }
+          ],
+          "solved_pairs": [],
+          "solved_count": 0,
+          "remaining_pairs": 4,
+          "mistakes": 1,
+          "remaining_mistakes": 5,
+          "actions": 1,
+          "hint_available": false,
+          "hints_used": 0,
+          "won": false,
+          "lost": false
+        }
+      ],
+      "afterView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              18,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Înot sportiv",
+            "aria": "Înot sportiv",
+            "disabled": false,
+            "box": [
+              14,
+              182,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Columbia - România 1994",
+            "aria": "Columbia - România 1994",
+            "disabled": false,
+            "box": [
+              199.5,
+              182,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Recordul la 100 m liber din 2022",
+            "aria": "Recordul la 100 m liber din 2022",
+            "disabled": false,
+            "box": [
+              14,
+              263,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Generația de Aur",
+            "aria": "Generația de Aur",
+            "disabled": false,
+            "box": [
+              199.5,
+              263,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Turneu de Grand Slam",
+            "aria": "Turneu de Grand Slam",
+            "disabled": false,
+            "box": [
+              14,
+              344,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Wimbledon",
+            "aria": "Wimbledon",
+            "disabled": false,
+            "box": [
+              199.5,
+              344,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Helmut Duckadam",
+            "aria": "Helmut Duckadam",
+            "disabled": false,
+            "box": [
+              14,
+              425,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Patru penalty-uri apărate",
+            "aria": "Patru penalty-uri apărate",
+            "disabled": false,
+            "box": [
+              199.5,
+              425,
+              176.5,
+              72
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [],
+        "openDisclosures": []
+      },
+      "errors": []
+    },
+    {
+      "game": "conexiuni",
+      "public_start": {
+        "key": "conexiuni",
+        "path": "/conexiuni",
+        "board": ".connections-grid",
+        "seed": 9,
+        "category": "viata_de_roman",
+        "difficulty": "normal"
+      },
+      "initial": {
+        "game_id": "bc303c7d-880b-4ec3-899f-e4da4ef76116",
+        "tiles": [
+          {
+            "id": "n_v24_nature_sky_soare",
+            "label": "Soare"
+          },
+          {
+            "id": "n_v33_electric_light_bec",
+            "label": "Bec"
+          },
+          {
+            "id": "n_v24_food_small_fruit_cireasa",
+            "label": "Cireașă"
+          },
+          {
+            "id": "n_v3muz_pian",
+            "label": "Pian"
+          },
+          {
+            "id": "n_v30_kitchen_utensil_lingura",
+            "label": "Lingură"
+          },
+          {
+            "id": "n_v17gas_dulceata",
+            "label": "Dulceață"
+          },
+          {
+            "id": "n_v24_weather_storm_fulger",
+            "label": "Fulger"
+          },
+          {
+            "id": "n_v33_forest_animal_vulpe",
+            "label": "Vulpe"
+          },
+          {
+            "id": "n_v84_food_arpacas",
+            "label": "Arpacaș"
+          },
+          {
+            "id": "n_gas_salata_vinete",
+            "label": "Salată de vinete"
+          },
+          {
+            "id": "n_v24_food_garden_veg_mazare",
+            "label": "Mazăre"
+          },
+          {
+            "id": "n_v4gas_fasole",
+            "label": "Fasole"
+          },
+          {
+            "id": "n_v3gas_orez",
+            "label": "Orez"
+          },
+          {
+            "id": "n_v24_food_breakfast_miere",
+            "label": "Miere"
+          },
+          {
+            "id": "n_v24_food_breakfast_unt",
+            "label": "Unt"
+          },
+          {
+            "id": "n_v24_home_appliances_lampa",
+            "label": "Lampă"
+          }
+        ],
+        "solved": [],
+        "solved_count": 0,
+        "remaining_groups": 4,
+        "lives": 4,
+        "mistakes": 0,
+        "won": false,
+        "lost": false,
+        "difficulty": "normal",
+        "clues_used": 0,
+        "clue_available": false,
+        "clues": [],
+        "board_category": "viata_de_roman"
+      },
+      "initialView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              17.5,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Soare",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              169,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Bec",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              106,
+              169,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cireașă",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              198,
+              169,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Pian",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              290,
+              169,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Lingură",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              243,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Dulceață",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              106,
+              243,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Fulger",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              198,
+              243,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Vulpe",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              290,
+              243,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Arpacaș",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              317,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Salată de vinete",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              106,
+              317,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Mazăre",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              198,
+              317,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Fasole",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              290,
+              317,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Orez",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              391,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Miere",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              106,
+              391,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Unt",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              198,
+              391,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Lampă",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              290,
+              391,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Amestecă",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              471,
+              115.328125,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Golește",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              137.328125,
+              471,
+              115.328125,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Verifică",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              260.65625,
+              471,
+              115.34375,
+              44
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [],
+        "openDisclosures": []
+      },
+      "steps": [
+        {
+          "ok": true,
+          "correct": false,
+          "one_away": false,
+          "game_id": "bc303c7d-880b-4ec3-899f-e4da4ef76116",
+          "tiles": [
+            {
+              "id": "n_v24_nature_sky_soare",
+              "label": "Soare"
+            },
+            {
+              "id": "n_v33_electric_light_bec",
+              "label": "Bec"
+            },
+            {
+              "id": "n_v24_food_small_fruit_cireasa",
+              "label": "Cireașă"
+            },
+            {
+              "id": "n_v3muz_pian",
+              "label": "Pian"
+            },
+            {
+              "id": "n_v30_kitchen_utensil_lingura",
+              "label": "Lingură"
+            },
+            {
+              "id": "n_v17gas_dulceata",
+              "label": "Dulceață"
+            },
+            {
+              "id": "n_v24_weather_storm_fulger",
+              "label": "Fulger"
+            },
+            {
+              "id": "n_v33_forest_animal_vulpe",
+              "label": "Vulpe"
+            },
+            {
+              "id": "n_v84_food_arpacas",
+              "label": "Arpacaș"
+            },
+            {
+              "id": "n_gas_salata_vinete",
+              "label": "Salată de vinete"
+            },
+            {
+              "id": "n_v24_food_garden_veg_mazare",
+              "label": "Mazăre"
+            },
+            {
+              "id": "n_v4gas_fasole",
+              "label": "Fasole"
+            },
+            {
+              "id": "n_v3gas_orez",
+              "label": "Orez"
+            },
+            {
+              "id": "n_v24_food_breakfast_miere",
+              "label": "Miere"
+            },
+            {
+              "id": "n_v24_food_breakfast_unt",
+              "label": "Unt"
+            },
+            {
+              "id": "n_v24_home_appliances_lampa",
+              "label": "Lampă"
+            }
+          ],
+          "solved": [],
+          "solved_count": 0,
+          "remaining_groups": 4,
+          "lives": 3,
+          "mistakes": 1,
+          "won": false,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": [],
+          "board_category": "viata_de_roman"
+        }
+      ],
+      "afterView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              17.5,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Soare",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              217,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Bec",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              106,
+              217,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cireașă",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              198,
+              217,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Pian",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              290,
+              217,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Lingură",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              291,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Dulceață",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              106,
+              291,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Fulger",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              198,
+              291,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Vulpe",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              290,
+              291,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Arpacaș",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              365,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Salată de vinete",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              106,
+              365,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Mazăre",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              198,
+              365,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Fasole",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              290,
+              365,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Orez",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              439,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Miere",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              106,
+              439,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Unt",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              198,
+              439,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Lampă",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              290,
+              439,
+              86,
+              68
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Amestecă",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              519,
+              115.328125,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Golește",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              137.328125,
+              519,
+              115.328125,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Verifică",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              260.65625,
+              519,
+              115.34375,
+              44
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [],
+        "openDisclosures": []
+      },
+      "errors": []
+    },
+    {
+      "game": "lant",
+      "public_start": {
+        "key": "lant",
+        "path": "/lant",
+        "board": ".lant-choice-grid",
+        "seed": 19,
+        "category": "gastronomie",
+        "difficulty": "usor"
+      },
+      "initial": {
+        "game_id": "7e1a1390-d545-44ca-a503-2bee5eb60b12",
+        "start": {
+          "id": "n_v84_food_cuptor",
+          "label": "Cuptor de bucătărie"
+        },
+        "target": {
+          "id": "n_v90_food_firimitura",
+          "label": "Firimitură",
+          "description": "Bucățică foarte mică desprinsă din pâine sau din alt aliment, de exemplu dintr-un biscuit."
+        },
+        "current": {
+          "id": "n_v84_food_cuptor",
+          "label": "Cuptor de bucătărie"
+        },
+        "path": [
+          {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie"
+          }
+        ],
+        "moves": 0,
+        "optimal": 2,
+        "won": false,
+        "difficulty": "usor",
+        "choices": [
+          {
+            "label": "Biscuit",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Cornulețe",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Cozonac",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Pâine",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Pandișpan",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Pișcot",
+            "relation": "legătură directă"
+          }
+        ],
+        "backtrack_recommended": false,
+        "board_category": "gastronomie"
+      },
+      "initialView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              18,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Biscuitlegătură directă",
+            "aria": "Salt la Biscuit: legătură directă",
+            "disabled": false,
+            "box": [
+              27,
+              299.8125,
+              164,
+              58
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cornulețelegătură directă",
+            "aria": "Salt la Cornulețe: legătură directă",
+            "disabled": false,
+            "box": [
+              199,
+              299.8125,
+              164,
+              58
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cozonaclegătură directă",
+            "aria": "Salt la Cozonac: legătură directă",
+            "disabled": false,
+            "box": [
+              27,
+              365.8125,
+              164,
+              58
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Pâinelegătură directă",
+            "aria": "Salt la Pâine: legătură directă",
+            "disabled": false,
+            "box": [
+              199,
+              365.8125,
+              164,
+              58
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Pandișpanlegătură directă",
+            "aria": "Salt la Pandișpan: legătură directă",
+            "disabled": false,
+            "box": [
+              27,
+              431.8125,
+              164,
+              58
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Pișcotlegătură directă",
+            "aria": "Salt la Pișcot: legătură directă",
+            "disabled": false,
+            "box": [
+              199,
+              431.8125,
+              164,
+              58
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Salt",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              313,
+              523.8125,
+              63,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "↶ Înapoi",
+            "aria": "Înapoi",
+            "disabled": true,
+            "box": [
+              14,
+              586.8125,
+              98,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "💡 Indiciu",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              120,
+              586.8125,
+              109,
+              44
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [],
+        "openDisclosures": []
+      },
+      "steps": [
+        {
+          "ok": true,
+          "current": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine"
+          },
+          "relation": "legătură directă",
+          "path": [
+            {
+              "id": "n_v84_food_cuptor",
+              "label": "Cuptor de bucătărie"
+            },
+            {
+              "id": "n_v4gas_paine",
+              "label": "Pâine",
+              "relation": "legătură directă"
+            }
+          ],
+          "moves": 1,
+          "won": false,
+          "choices": [
+            {
+              "label": "Firimitură",
+              "relation": "legătură directă"
+            },
+            {
+              "label": "Masa în familie",
+              "relation": "legătură directă"
+            },
+            {
+              "label": "Pâine de casă",
+              "relation": "legătură directă"
+            }
+          ],
+          "backtrack_recommended": false,
+          "progress": {
+            "kind": "closer",
+            "message": "Mai aproape de țintă."
+          }
+        },
+        {
+          "ok": true,
+          "current": {
+            "id": "n_v90_food_firimitura",
+            "label": "Firimitură"
+          },
+          "relation": "legătură directă",
+          "path": [
+            {
+              "id": "n_v84_food_cuptor",
+              "label": "Cuptor de bucătărie"
+            },
+            {
+              "id": "n_v4gas_paine",
+              "label": "Pâine",
+              "relation": "legătură directă"
+            },
+            {
+              "id": "n_v90_food_firimitura",
+              "label": "Firimitură",
+              "relation": "legătură directă"
+            }
+          ],
+          "moves": 2,
+          "won": true,
+          "choices": [],
+          "backtrack_recommended": false,
+          "progress": {
+            "kind": "won",
+            "message": "Ai ajuns la țintă!"
+          },
+          "score": 1000,
+          "share": "cat_de_roman_esti · Lantul Cuvintelor · Gastronomie\n🔗 2/2 mutari\n"
+        }
+      ],
+      "afterView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "✓Ai ajuns la țintă!",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              14,
+              8,
+              362,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              74,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "📋 Copiază rezultatul",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              94,
+              695.40625,
+              202,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Încă un lanț →",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              123.5,
+              751.40625,
+              143,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Schimbă opțiunile",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              62.5,
+              807.40625,
+              171,
+              44
+            ],
+            "inViewport": false
+          },
+          {
+            "text": "Meniu",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              245.5,
+              807.40625,
+              82,
+              44
+            ],
+            "inViewport": false
+          }
+        ],
+        "headings": [
+          "Lanț perfect!"
+        ],
+        "openDisclosures": []
+      },
+      "errors": []
+    },
+    {
+      "game": "contexto",
+      "public_start": {
+        "key": "contexto",
+        "path": "/cald-rece",
+        "seed": 19,
+        "category": "viata_de_roman",
+        "difficulty": "usor"
+      },
+      "initial": {
+        "game_id": "8f9b0f11-c60c-4234-ae28-431e22038826",
+        "attempts": 0,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2359,
+        "difficulty": "usor",
+        "guesses": [],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      },
+      "initialView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              22,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Ghicește",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              274,
+              127,
+              102,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Indiciu în 3",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              14,
+              217.1875,
+              177,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Răspuns",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              214,
+              369.1875,
+              147,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Începe alt joc",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              214,
+              425.1875,
+              147,
+              44
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [
+          "Cele mai apropiate cuvinte"
+        ],
+        "openDisclosures": []
+      },
+      "steps": [
+        {
+          "input": "unealtă",
+          "result": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "focus": {
+            "tag": "INPUT",
+            "label": "Concept de ghicit",
+            "text": ""
+          },
+          "visibleNotices": [
+            "⚠Nu cunosc acest concept"
+          ]
+        },
+        {
+          "input": "fier",
+          "result": {
+            "ok": false,
+            "message": "Nu cunosc acest concept. Poate cautai: fluier?",
+            "suggestions": [
+              "fluier"
+            ],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "focus": {
+            "tag": "INPUT",
+            "label": "Concept de ghicit",
+            "text": ""
+          },
+          "visibleNotices": [
+            "⚠Nu cunosc acest concept. Poate cautai: fluier?Ai vrut să scrii:fluier"
+          ]
+        },
+        {
+          "input": "scule",
+          "result": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "focus": {
+            "tag": "INPUT",
+            "label": "Concept de ghicit",
+            "text": ""
+          },
+          "visibleNotices": [
+            "⚠Nu cunosc acest concept"
+          ]
+        },
+        {
+          "input": "reparație",
+          "result": {
+            "ok": false,
+            "message": "Nu cunosc acest concept. Poate cautai: pârâu?",
+            "suggestions": [
+              "pârâu"
+            ],
+            "guesses": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2359,
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "focus": {
+            "tag": "INPUT",
+            "label": "Concept de ghicit",
+            "text": ""
+          },
+          "visibleNotices": [
+            "⚠Nu cunosc acest concept. Poate cautai: pârâu?Ai vrut să scrii:pârâu"
+          ]
+        },
+        {
+          "input": "metal",
+          "result": {
+            "ok": true,
+            "guess": {
+              "id": "n_v4sti_metal",
+              "label": "metal",
+              "distance": 2,
+              "rank": 9,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #9."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          },
+          "focus": {
+            "tag": "INPUT",
+            "label": "Concept de ghicit",
+            "text": ""
+          },
+          "visibleNotices": []
+        },
+        {
+          "input": "clește",
+          "result": {
+            "ok": true,
+            "guess": {
+              "id": "n_v32_workshop_hand_cleste",
+              "label": "Clește",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v32_workshop_hand_cleste",
+                "label": "Clește",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v4sti_metal",
+                "label": "metal",
+                "distance": 2,
+                "rank": 9,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 2,
+            "won": true,
+            "reachable_count": 2359,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 0,
+            "clue_available": false,
+            "target": {
+              "id": "n_v32_workshop_hand_cleste",
+              "label": "Clește",
+              "description": "Unealtă cu două brațe, folosită pentru a prinde, îndoi sau tăia."
+            },
+            "score": 940,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟩🎯\n2 incercari"
+          },
+          "focus": {
+            "tag": "BODY",
+            "label": null,
+            "text": "\n    ← IeșiCald sau ReceÎncercări2 încercăriGhiceșteUn număr mai mic = mai aproape. #1 este ținta.Op"
+          },
+          "visibleNotices": []
+        }
+      ],
+      "afterView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              14,
+              22,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Ghicește",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              274,
+              127,
+              102,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Răspuns",
+            "aria": null,
+            "disabled": true,
+            "box": [
+              29,
+              369.1875,
+              147,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Începe alt joc",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              29,
+              425.1875,
+              147,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Bune",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              29,
+              481.1875,
+              70.5,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Recente",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              105.5,
+              481.1875,
+              70.5,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "📋 Copiază rezultatul",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              94,
+              668.78125,
+              202,
+              34
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Încă unul →",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              41.5,
+              714.78125,
+              124,
+              34
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Schimbă opțiunile",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              177.5,
+              714.78125,
+              171,
+              34
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Meniu",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              154,
+              760.78125,
+              82,
+              34
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [
+          "Ai găsit conceptul!",
+          "Cele mai apropiate cuvinte"
+        ],
+        "openDisclosures": []
+      },
+      "errors": []
+    },
+    {
+      "game": "alchimie",
+      "committed": false,
+      "initialView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              18,
+              23.5,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "💡 O idee?",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              31,
+              407.53125,
+              115,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Făină",
+            "aria": "Făină",
+            "disabled": false,
+            "box": [
+              31,
+              552.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Apă",
+            "aria": "Apă",
+            "disabled": false,
+            "box": [
+              200,
+              552.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Lapte",
+            "aria": "Lapte",
+            "disabled": false,
+            "box": [
+              31,
+              624.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Sare",
+            "aria": "Sare",
+            "disabled": false,
+            "box": [
+              200,
+              624.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cheag alimentar",
+            "aria": "Cheag alimentar",
+            "disabled": false,
+            "box": [
+              31,
+              696.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Mălai",
+            "aria": "Mălai",
+            "disabled": false,
+            "box": [
+              200,
+              696.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cuptor de bucătărie",
+            "aria": "Cuptor de bucătărie",
+            "disabled": false,
+            "box": [
+              31,
+              768.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Ou",
+            "aria": "Ou",
+            "disabled": false,
+            "box": [
+              200,
+              768.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [
+          "Bucătăria românească",
+          "Cuvintele tale"
+        ],
+        "openDisclosures": []
+      },
+      "focusBefore": {
+        "tag": "BUTTON",
+        "label": "Apă",
+        "text": "Apă"
+      },
+      "focusAfterRecovery": {
+        "tag": "BODY",
+        "label": null,
+        "text": "\n    ← IeșiAlchimie8 / 247 cuvinteExploreazăProvocăriEXPLOREAZĂ ÎN RITMUL TĂUBucătăria româneascăDup"
+      },
+      "focusAfterTab": {
+        "tag": "BUTTON",
+        "label": "Lapte",
+        "text": "Lapte"
+      },
+      "recovered": {
+        "game_id": "df0592f8-789f-46b7-a147-b2b1027f5b3f",
+        "revision": 0,
+        "mode": "explore",
+        "compatible_recipe_hashes": [
+          "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+          "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+          "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+          "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+          "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+          "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+          "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74"
+        ],
+        "empty_pairs": [],
+        "world": {
+          "id": "bucataria-romaneasca-v1",
+          "title": "Bucătăria românească",
+          "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+          "total_concepts": 247,
+          "total_recipes": 342
+        },
+        "inventory": [
+          {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_apa",
+            "label": "Apă",
+            "description": "Lichid de băut și ingredient de bază în gătit.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "description": "Lichid alimentar folosit ca băutură și ingredient lactat.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_sare",
+            "label": "Sare",
+            "description": "Mineral alimentar folosit pentru gust și conservare.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cheag",
+            "label": "Cheag alimentar",
+            "description": "Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_malai",
+            "label": "Mălai",
+            "description": "Produs din măcinarea boabelor de porumb, folosit pentru mămăligă.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": false
+          },
+          {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "description": "Ingredient alimentar folosit la gătit, copt și preparate festive.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          }
+        ],
+        "discovered_count": 0,
+        "seed_count": 8,
+        "complete": false,
+        "goal_id": null,
+        "goals": [
+          {
+            "id": "paine",
+            "title": "Prima pâine",
+            "label": "Pâine",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "bulz",
+            "title": "Gust de stână",
+            "label": "Bulz",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "muraturi",
+            "title": "Cămara pentru iarnă",
+            "label": "Murături",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciorba-fasole",
+            "title": "O ciorbă de casă",
+            "label": "Ciorbă de fasole",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cozonac",
+            "title": "Cozonacul de sărbătoare",
+            "label": "Cozonac",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "papanasi",
+            "title": "Papanași pentru desert",
+            "label": "Papanași",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "inghetata",
+            "title": "Un desert rece",
+            "label": "Înghețată",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "diplomat",
+            "title": "Tortul de sărbătoare",
+            "label": "Tort Diplomat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sarmale",
+            "title": "Sarmale pentru masă",
+            "label": "Sarmale",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sandvis",
+            "title": "O gustare din ce ai descoperit",
+            "label": "Sandviș",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "clatite",
+            "title": "Clătite la tigaie",
+            "label": "Clătite",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pizza",
+            "title": "Pizza de casă",
+            "label": "Pizza",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "snitel",
+            "title": "Crusta crocantă",
+            "label": "Șnițel",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "zacusca",
+            "title": "Încă un borcan în cămară",
+            "label": "Zacuscă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "urda",
+            "title": "Din zer, o nouă brânză",
+            "label": "Urdă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mucenici",
+            "title": "Opturi dulci",
+            "label": "Mucenici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cornulete",
+            "title": "Cornulețe fragede",
+            "label": "Cornulețe",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "halva",
+            "title": "Dulce din semințe",
+            "label": "Halva",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "placinte",
+            "title": "Plăcinte dulci sau sărate",
+            "label": "Plăcinte",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pepene-murat",
+            "title": "Pepeni pentru cămara de iarnă",
+            "label": "Pepene murat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "branza-burduf",
+            "title": "Brânză frământată la stână",
+            "label": "Brânză de burduf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "langosi",
+            "title": "Turte calde cu usturoi",
+            "label": "Langoși",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "merdenea",
+            "title": "Foi fragede cu brânză",
+            "label": "Merdenea",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "savarina",
+            "title": "Frișcă și prăjitură însiropată",
+            "label": "Savarină",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ecler",
+            "title": "O nouă idee pentru crema de vanilie",
+            "label": "Ecler",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "chec",
+            "title": "Checul din tava de acasă",
+            "label": "Chec",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "briose",
+            "title": "Prăjituri în forme mici",
+            "label": "Brioșă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mici",
+            "title": "Mici pe grătar",
+            "label": "Mici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "oua-rosii",
+            "title": "Culori din coji de ceapă",
+            "label": "Ouă roșii",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "salata-boeuf",
+            "title": "Salata mesei de sărbătoare",
+            "label": "Salată de boeuf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sushi",
+            "title": "Orezul întâlnește peștele",
+            "label": "Sushi",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciocolata-dubai",
+            "title": "Fistic și ciocolată crocantă",
+            "label": "Ciocolata Dubai",
+            "completed": false,
+            "target_id": null
+          }
+        ],
+        "hint": null,
+        "unlocked": [],
+        "next_unlock": {
+          "title": "Se deschide cămara",
+          "after_discoveries": 3,
+          "remaining": 3
+        },
+        "progress": {
+          "world_id": "bucataria-romaneasca-v1",
+          "recipe_hash": "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+          "discoveries": []
+        }
+      },
+      "view": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              18,
+              23.5,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "💡 O idee?",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              31,
+              455.6875,
+              115,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Făină",
+            "aria": "Făină",
+            "disabled": false,
+            "box": [
+              31,
+              600.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Apă",
+            "aria": "Apă",
+            "disabled": false,
+            "box": [
+              200,
+              600.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Lapte",
+            "aria": "Lapte",
+            "disabled": false,
+            "box": [
+              31,
+              672.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Sare",
+            "aria": "Sare",
+            "disabled": false,
+            "box": [
+              200,
+              672.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cheag alimentar",
+            "aria": "Cheag alimentar",
+            "disabled": false,
+            "box": [
+              31,
+              744.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Mălai",
+            "aria": "Mălai",
+            "disabled": false,
+            "box": [
+              200,
+              744.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cuptor de bucătărie",
+            "aria": "Cuptor de bucătărie",
+            "disabled": false,
+            "box": [
+              31,
+              816.6875,
+              159,
+              62
+            ],
+            "inViewport": false
+          },
+          {
+            "text": "Ou",
+            "aria": "Ou",
+            "disabled": false,
+            "box": [
+              200,
+              816.6875,
+              159,
+              62
+            ],
+            "inViewport": false
+          }
+        ],
+        "headings": [
+          "Bucătăria românească",
+          "Cuvintele tale"
+        ],
+        "openDisclosures": []
+      }
+    },
+    {
+      "game": "alchimie",
+      "committed": true,
+      "initialView": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              18,
+              23.5,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "💡 O idee?",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              31,
+              407.53125,
+              115,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Făină",
+            "aria": "Făină",
+            "disabled": false,
+            "box": [
+              31,
+              552.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Apă",
+            "aria": "Apă",
+            "disabled": false,
+            "box": [
+              200,
+              552.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Lapte",
+            "aria": "Lapte",
+            "disabled": false,
+            "box": [
+              31,
+              624.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Sare",
+            "aria": "Sare",
+            "disabled": false,
+            "box": [
+              200,
+              624.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cheag alimentar",
+            "aria": "Cheag alimentar",
+            "disabled": false,
+            "box": [
+              31,
+              696.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Mălai",
+            "aria": "Mălai",
+            "disabled": false,
+            "box": [
+              200,
+              696.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cuptor de bucătărie",
+            "aria": "Cuptor de bucătărie",
+            "disabled": false,
+            "box": [
+              31,
+              768.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Ou",
+            "aria": "Ou",
+            "disabled": false,
+            "box": [
+              200,
+              768.53125,
+              159,
+              62
+            ],
+            "inViewport": true
+          }
+        ],
+        "headings": [
+          "Bucătăria românească",
+          "Cuvintele tale"
+        ],
+        "openDisclosures": []
+      },
+      "focusBefore": {
+        "tag": "BUTTON",
+        "label": "Apă",
+        "text": "Apă"
+      },
+      "focusAfterRecovery": {
+        "tag": "BODY",
+        "label": null,
+        "text": "\n    ← IeșiAlchimie9 / 247 cuvinteExploreazăProvocăriEXPLOREAZĂ ÎN RITMUL TĂUBucătăria româneascăDup"
+      },
+      "focusAfterTab": {
+        "tag": "BUTTON",
+        "label": "Lapte",
+        "text": "Lapte"
+      },
+      "recovered": {
+        "game_id": "c629c1dd-59f0-483f-97ac-dc55a5d5d545",
+        "revision": 1,
+        "mode": "explore",
+        "compatible_recipe_hashes": [
+          "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+          "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+          "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+          "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+          "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+          "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+          "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74"
+        ],
+        "empty_pairs": [],
+        "world": {
+          "id": "bucataria-romaneasca-v1",
+          "title": "Bucătăria românească",
+          "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+          "total_concepts": 247,
+          "total_recipes": 342
+        },
+        "inventory": [
+          {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_apa",
+            "label": "Apă",
+            "description": "Lichid de băut și ingredient de bază în gătit.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "description": "Lichid alimentar folosit ca băutură și ingredient lactat.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_sare",
+            "label": "Sare",
+            "description": "Mineral alimentar folosit pentru gust și conservare.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cheag",
+            "label": "Cheag alimentar",
+            "description": "Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_malai",
+            "label": "Mălai",
+            "description": "Produs din măcinarea boabelor de porumb, folosit pentru mămăligă.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "description": "Ingredient alimentar folosit la gătit, copt și preparate festive.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_aluat",
+            "label": "Aluat",
+            "description": "Amestec de făină și lichid din care se modelează pâine și alte preparate.",
+            "parents": [
+              {
+                "id": "n_v24_food_pantry_faina",
+                "label": "Făină"
+              },
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă"
+              }
+            ],
+            "explanation": "Făina amestecată și frământată cu apă formează un aluat simplu.",
+            "sources": [
+              "https://dexonline.ro/definitie/aluat/322624",
+              "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+            ],
+            "status": "active",
+            "ready": true
+          }
+        ],
+        "discovered_count": 1,
+        "seed_count": 8,
+        "complete": false,
+        "goal_id": null,
+        "goals": [
+          {
+            "id": "paine",
+            "title": "Prima pâine",
+            "label": "Pâine",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "bulz",
+            "title": "Gust de stână",
+            "label": "Bulz",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "muraturi",
+            "title": "Cămara pentru iarnă",
+            "label": "Murături",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciorba-fasole",
+            "title": "O ciorbă de casă",
+            "label": "Ciorbă de fasole",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cozonac",
+            "title": "Cozonacul de sărbătoare",
+            "label": "Cozonac",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "papanasi",
+            "title": "Papanași pentru desert",
+            "label": "Papanași",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "inghetata",
+            "title": "Un desert rece",
+            "label": "Înghețată",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "diplomat",
+            "title": "Tortul de sărbătoare",
+            "label": "Tort Diplomat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sarmale",
+            "title": "Sarmale pentru masă",
+            "label": "Sarmale",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sandvis",
+            "title": "O gustare din ce ai descoperit",
+            "label": "Sandviș",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "clatite",
+            "title": "Clătite la tigaie",
+            "label": "Clătite",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pizza",
+            "title": "Pizza de casă",
+            "label": "Pizza",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "snitel",
+            "title": "Crusta crocantă",
+            "label": "Șnițel",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "zacusca",
+            "title": "Încă un borcan în cămară",
+            "label": "Zacuscă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "urda",
+            "title": "Din zer, o nouă brânză",
+            "label": "Urdă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mucenici",
+            "title": "Opturi dulci",
+            "label": "Mucenici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cornulete",
+            "title": "Cornulețe fragede",
+            "label": "Cornulețe",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "halva",
+            "title": "Dulce din semințe",
+            "label": "Halva",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "placinte",
+            "title": "Plăcinte dulci sau sărate",
+            "label": "Plăcinte",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pepene-murat",
+            "title": "Pepeni pentru cămara de iarnă",
+            "label": "Pepene murat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "branza-burduf",
+            "title": "Brânză frământată la stână",
+            "label": "Brânză de burduf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "langosi",
+            "title": "Turte calde cu usturoi",
+            "label": "Langoși",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "merdenea",
+            "title": "Foi fragede cu brânză",
+            "label": "Merdenea",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "savarina",
+            "title": "Frișcă și prăjitură însiropată",
+            "label": "Savarină",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ecler",
+            "title": "O nouă idee pentru crema de vanilie",
+            "label": "Ecler",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "chec",
+            "title": "Checul din tava de acasă",
+            "label": "Chec",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "briose",
+            "title": "Prăjituri în forme mici",
+            "label": "Brioșă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mici",
+            "title": "Mici pe grătar",
+            "label": "Mici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "oua-rosii",
+            "title": "Culori din coji de ceapă",
+            "label": "Ouă roșii",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "salata-boeuf",
+            "title": "Salata mesei de sărbătoare",
+            "label": "Salată de boeuf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sushi",
+            "title": "Orezul întâlnește peștele",
+            "label": "Sushi",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciocolata-dubai",
+            "title": "Fistic și ciocolată crocantă",
+            "label": "Ciocolata Dubai",
+            "completed": false,
+            "target_id": null
+          }
+        ],
+        "hint": null,
+        "unlocked": [],
+        "next_unlock": {
+          "title": "Se deschide cămara",
+          "after_discoveries": 3,
+          "remaining": 2
+        },
+        "progress": {
+          "world_id": "bucataria-romaneasca-v1",
+          "recipe_hash": "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+          "discoveries": [
+            [
+              "n_v24_food_pantry_faina",
+              "n_v4gas_apa"
+            ]
+          ]
+        }
+      },
+      "view": {
+        "viewport": [
+          390,
+          844
+        ],
+        "documentWidth": 390,
+        "buttons": [
+          {
+            "text": "← Ieși",
+            "aria": "Ieși la lista de jocuri",
+            "disabled": false,
+            "box": [
+              18,
+              23.5,
+              64,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "💡 O idee?",
+            "aria": null,
+            "disabled": false,
+            "box": [
+              31,
+              455.6875,
+              115,
+              44
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Făină",
+            "aria": "Făină",
+            "disabled": false,
+            "box": [
+              31,
+              600.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Apă",
+            "aria": "Apă",
+            "disabled": false,
+            "box": [
+              200,
+              600.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Lapte",
+            "aria": "Lapte",
+            "disabled": false,
+            "box": [
+              31,
+              672.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Sare",
+            "aria": "Sare",
+            "disabled": false,
+            "box": [
+              200,
+              672.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cheag alimentar",
+            "aria": "Cheag alimentar",
+            "disabled": false,
+            "box": [
+              31,
+              744.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Mălai",
+            "aria": "Mălai",
+            "disabled": false,
+            "box": [
+              200,
+              744.6875,
+              159,
+              62
+            ],
+            "inViewport": true
+          },
+          {
+            "text": "Cuptor de bucătărie",
+            "aria": "Cuptor de bucătărie",
+            "disabled": false,
+            "box": [
+              31,
+              816.6875,
+              159,
+              62
+            ],
+            "inViewport": false
+          },
+          {
+            "text": "Ou",
+            "aria": "Ou",
+            "disabled": false,
+            "box": [
+              200,
+              816.6875,
+              159,
+              62
+            ],
+            "inViewport": false
+          },
+          {
+            "text": "Aluat",
+            "aria": "Aluat",
+            "disabled": false,
+            "box": [
+              31,
+              888.6875,
+              159,
+              62
+            ],
+            "inViewport": false
+          }
+        ],
+        "headings": [
+          "Bucătăria românească",
+          "Cuvintele tale",
+          "Făină + Apă → Aluat"
+        ],
+        "openDisclosures": []
+      }
+    }
+  ],
+  "script_sha256": "d3cb364f0ed16fde9cdbbb45b8a50b0c8aac3cd760767936b72f394cb810b2f2"
+}

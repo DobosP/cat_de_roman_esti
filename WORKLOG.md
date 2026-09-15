@@ -1035,3 +1035,26 @@ backend/53 accounts, and 212 native checks pass. The frontend-only focus correct
 independently bound without changing Python/data approvals. The landing record precedes
 the authorized main push. After remote proof, previews move off the task worktree and
 only verified-landed V95 work is cleaned. V96 starts separately; production stays V91.
+
+
+## V96 creation and critique kickoff (2026-09-16)
+
+Valid until: draft content or baseline bindings change — then repeat affected checks.
+
+After V95 was pushed to main 1457786, its verified task worktree, branch and scratch
+were removed and both preview origins were moved onto main. V96 starts separately in
+feat/v96-words-and-input-clarity. Its initial unapproved queue covers all six games:
+three pack proposals, two quick boards and two Alchimie concepts/five recipe ideas.
+Author probes record sources, full novelty and conditional playability, including the
+actual Lanț corridor preference. Chiftele marinate was excluded as an existing alias;
+the vegetable-patty sandwich generalization remains an explicit review question.
+
+A fresh all-game interface critique examines unknown-input feedback, recovery focus
+and earned relationship clarity. No serving, generator, fixture or test files change
+in this kickoff. The exact landed inventory remains the playable baseline; independent
+reviews and installation gates still precede any new served entry. Evidence lives in
+docs/reviews/v96-words-and-input-clarity/; current CI status belongs in STATUS.
+
+V95 GitHub CI 35026423470 completed successfully on main 1457786: both Python jobs
+and the full frontend/browser job pass. V96 kickoff archives 71 author/critique artifacts,
+with all ten served artifact hashes unchanged; docs and whitespace checks pass.

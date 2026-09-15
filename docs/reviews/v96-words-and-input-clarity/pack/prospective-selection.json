@@ -1,0 +1,177 @@
+{
+  "status": "UNAPPROVED V96 DRAFTS",
+  "scope": "Conditional author simulation of all 710 current records plus these three drafts under hypothetical approval. Only in-memory pack provider and score-input data are injected; actual weighted public selectors and corridor policy run unchanged. No session target, picker return value, fixture, score or runtime is forced. Real installed natural selection still requires independent approval, import, ranking and a final public replay.",
+  "source_bindings_unchanged": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "27b1dba81a2e02d1e2616a1ad4e6eceefe12d189a86a0913c3655adee99bb3cf",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b4c32d0ff65e024e4bd2e292c03e5382f0927c7c388367bf1f80bd7a3c09a831",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "5e27495fcc34980ced41a7bbd5c0b61d703c459489d08d6b7322dac197fd7e96",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d"
+  },
+  "candidate_files": {
+    "candidates/gastronomie/candidates.json": "6bb79e451c387053a2db60cb62897027d4aac829036028510754a6d0583b70ae",
+    "candidates/viata_de_roman/candidates.json": "56c595a4969e0c658d898e28688561558b50d19b91ffd63e6deeb12289611b5c"
+  },
+  "results": [
+    {
+      "preview_id": "preview_v96_viata_de_roman_conexiuni_1",
+      "natural_seed_inside_prospective_inventory": 6,
+      "public_create_url": "/api/wordgames/conexiuni/games?category=viata_de_roman&difficulty=normal&seed=6",
+      "rating": {
+        "id": "preview_v96_viata_de_roman_conexiuni_1",
+        "game": "conexiuni",
+        "status": "approved",
+        "romanian_familiarity": 81,
+        "play_quality": 100,
+        "pilot_score": 89,
+        "rank": 7,
+        "pilot_eligible": true,
+        "selection_weight": 5
+      },
+      "independent_review": false,
+      "currently_served": false,
+      "groups_solved": 4,
+      "won": true
+    },
+    {
+      "preview_id": "preview_v96_viata_de_roman_contexto_1",
+      "natural_seed_inside_prospective_inventory": 19,
+      "public_create_url": "/api/wordgames/contexto/games?category=viata_de_roman&difficulty=usor&seed=19",
+      "rating": {
+        "id": "preview_v96_viata_de_roman_contexto_1",
+        "game": "contexto",
+        "status": "approved",
+        "romanian_familiarity": 84,
+        "play_quality": 86,
+        "pilot_score": 85,
+        "rank": 68,
+        "pilot_eligible": true,
+        "selection_weight": 4
+      },
+      "independent_review": false,
+      "currently_served": false,
+      "opener_feedback": [
+        {
+          "text": "podea",
+          "guess": {
+            "id": "n_v24_home_surfaces_podea",
+            "label": "Podea",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "casă",
+          "guess": {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 2,
+            "rank": 11,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "aspirator",
+          "guess": {
+            "id": "n_v31_cleaning_floor_aspirator",
+            "label": "Aspirator",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "a spăla",
+          "guess": {
+            "id": "n_v24_action_home_a_spala",
+            "label": "A spăla",
+            "distance": 2,
+            "rank": 8,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "Covor",
+          "guess": {
+            "id": "n_v24_home_textiles_covor",
+            "label": "Covor",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 5
+          },
+          "won": true
+        }
+      ],
+      "won": true
+    },
+    {
+      "preview_id": "preview_v96_gastronomie_lant_1",
+      "natural_seed_inside_prospective_inventory": 6,
+      "public_create_url": "/api/wordgames/lant/games?category=gastronomie&difficulty=usor&seed=6",
+      "rating": {
+        "id": "preview_v96_gastronomie_lant_1",
+        "game": "lant",
+        "status": "approved",
+        "romanian_familiarity": 81,
+        "play_quality": 72,
+        "pilot_score": 77,
+        "rank": 36,
+        "pilot_eligible": true,
+        "selection_weight": 4
+      },
+      "independent_review": false,
+      "currently_served": false,
+      "corridor_profile": [
+        7,
+        7,
+        7
+      ],
+      "wide_beginner_preference": true,
+      "routes": [
+        {
+          "labels": [
+            "Vanilie",
+            "Poale-n brâu",
+            "Brânză"
+          ],
+          "captions": [
+            "aromatizează umpluturi de",
+            "umplutură cu brânză"
+          ],
+          "score": 1000
+        },
+        {
+          "labels": [
+            "Vanilie",
+            "Pască",
+            "Brânză"
+          ],
+          "captions": [
+            "aromatizează rețete de",
+            "umplută cu brânză dulce"
+          ],
+          "score": 1000
+        }
+      ],
+      "won": true
+    }
+  ]
+}

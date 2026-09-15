@@ -1,0 +1,6 @@
+exec(open('/home/dobo/work/_temp/feat__v96-words-and-input-clarity/pack/scout.py').read().split('for labels in')[0])
+GROUPS=[('Părinți și bunici',['Mamă','Tată','Bunic','Bunică']),('Băuturi',['Ceai','Cafea','Lapte','Socată']),('Se deschid',['Fereastră','ușă','Gură','Robinet']),('Se ascut',['Creion','Cuțit','Sabie','Fierăstrău'])]
+rec=dict(id='preview_v96_cx',difficulty='normal',category='viata_de_roman',status='pending',source='ai',groups={f'g{i}':[s.resolve(x) for x in labels] for i,(_,labels) in enumerate(GROUPS)},group_labels={f'g{i}':label for i,(label,_)in enumerate(GROUPS)})
+rec['order']=[n for g in rec['groups'].values() for n in g];p['conexiuni'].append(rec)
+f,_,selected=c.run(p,s,st,r,['conexiuni'],{'pending'},{rec['id']});print(json.dumps(f,ensure_ascii=False,indent=2))
+for game,rec,lint in selected:print(json.dumps(c.build_dossier(rec,game,s,st,lint,r),ensure_ascii=False,indent=2))

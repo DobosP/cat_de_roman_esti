@@ -1,0 +1,195 @@
+{
+  "scope": "Author API replay of every native shortest route, not independent review or public selection.",
+  "ladders": [
+    {
+      "start": "n_v85_food_vanilie",
+      "target": "n_v2gas_branza",
+      "routes": [
+        {
+          "ids": [
+            "n_v85_food_vanilie",
+            "n_gas_placinte_poale_brau",
+            "n_v2gas_branza"
+          ],
+          "labels": [
+            "Vanilie",
+            "Poale-n brâu",
+            "Brânză"
+          ],
+          "captions": [
+            "aromatizează umpluturi de",
+            "umplutură cu brânză"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_gas_placinte_poale_brau",
+                "label": "Poale-n brâu"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_vanilie",
+                  "label": "Vanilie"
+                },
+                {
+                  "id": "n_gas_placinte_poale_brau",
+                  "label": "Poale-n brâu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Brânză",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Papanași",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Plăcinte",
+                  "relation": "exemplu și categorie"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v2gas_branza",
+                "label": "Brânză"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_vanilie",
+                  "label": "Vanilie"
+                },
+                {
+                  "id": "n_gas_placinte_poale_brau",
+                  "label": "Poale-n brâu",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v2gas_branza",
+                  "label": "Brânză",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_v85_food_vanilie",
+            "n_v17gas_pasca",
+            "n_v2gas_branza"
+          ],
+          "labels": [
+            "Vanilie",
+            "Pască",
+            "Brânză"
+          ],
+          "captions": [
+            "aromatizează rețete de",
+            "umplută cu brânză dulce"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v17gas_pasca",
+                "label": "Pască"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_vanilie",
+                  "label": "Vanilie"
+                },
+                {
+                  "id": "n_v17gas_pasca",
+                  "label": "Pască",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Brânză",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Cozonac",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Masa de Paște",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v2gas_branza",
+                "label": "Brânză"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_vanilie",
+                  "label": "Vanilie"
+                },
+                {
+                  "id": "n_v17gas_pasca",
+                  "label": "Pască",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v2gas_branza",
+                  "label": "Brânză",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

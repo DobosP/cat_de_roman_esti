@@ -1,0 +1,155 @@
+"""V96 author kickoff: unapproved draft rows and proofs, no serving/source writes."""
+import copy
+import gzip
+import hashlib
+import itertools
+import json
+from pathlib import Path
+import sys
+
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity')
+OUT=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames import quick_catalog as Q
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog,load_derived_catalog
+from cat_de_roman_esti.wordgames.discovery_world import authored_snapshot
+from cat_de_roman_esti.wordgames.service import get_service,normalize
+from scripts import build_alchimie_discovery_world as B
+
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(n,v):(OUT/n).write_bytes(Q.json_bytes(v))
+svc=get_service();weights=Q.graph_strengths(svc)
+protected=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json',
+ 'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json','cat_de_roman_esti/fixtures/quick_games_v92.json',
+ 'scripts/alchimie_discovery_recipe_source.py','scripts/quick_game_content_source_v92.py']
+pins={p:sha(ROOT/p) for p in protected}
+world=read(ROOT/protected[2]);quick=read(ROOT/protected[3]);all_boards=get_derived_catalog()._boards
+assert len(world['concepts'])==247 and len(world['recipes'])==342
+assert len(quick['authored'])==81 and len(all_boards)==417
+ostropel='https://pofta-buna.com/ostropel-de-pui-reteta-clasica/'
+salad='https://www.lauraadamache.ro/2015/04/salata-de-fructe.html'
+veggie='https://danielaniculi.ro/2020/03/19/sandvis-vegan-sau-cum-sa-salvezi-prea-multa-quinoa-pusa-la-fiert/'
+sandwich='https://gourmandelle.com/ro/chiftle-prajite-cu-ciuperci/'
+concepts=[
+ {'id':'alw_food_ostropel','label':'Ostropel','description':'Mâncare din carne gătită cu usturoi și sos; aici varianta de pui cu roșii.','sources':[ostropel]},
+ {'id':'alw_food_salata_fructe','label':'Salată de fructe','description':'Desert rece din bucăți de fructe amestecate, servite simple, cu sirop sau cu frișcă.','sources':[salad]},
+]
+recipes=[
+ {'id':'ostropel-pui-usturoi','pair_labels':['Carne de pui','Usturoi'],'result_label':'Ostropel',
+  'explanation':'Puiul se rumenește ușor, apoi se gătește cu roșii și usturoi într-un sos pentru ostropel.', 'sources':[ostropel]},
+ {'id':'ostropel-pui-sos-rosii','pair_labels':['Carne de pui','Sos de roșii'],'result_label':'Ostropel',
+  'explanation':'Bucățile de pui rumenite se fierb blând în sos de roșii cu usturoi și condimente, până când carnea este gătită.', 'sources':[ostropel]},
+ {'id':'salata-fructe-cutit','pair_labels':['Fruct','Cuțit'],'result_label':'Salată de fructe',
+  'explanation':'Fructe diferite se curăță după nevoie, se taie în bucăți și se amestecă; salata se servește rece, simplă sau cu sirop.', 'sources':[salad]},
+ {'id':'salata-fructe-frisca','pair_labels':['Fruct','Frișcă'],'result_label':'Salată de fructe',
+  'explanation':'Fructele curățate și tăiate se amestecă, se răcesc și se servesc în cupe cu frișcă bătută.', 'sources':[salad]},
+ {'id':'sandvis-chiftele-legume','pair_labels':['Pâine','Chiftele de legume'],'result_label':'Sandviș',
+  'explanation':'Chiftelele de legume deja gătite se așază între felii de pâine, cu legume proaspete și un sos după gust.', 'sources':[veggie,sandwich]},
+]
+draft={'kind':'v96-alchimie-author-draft-v1','status':'unapproved','baseline_commit':'14577863038378c734c7b2e0e8b33ea8158f318b',
+       'baseline_world_sha256':pins[protected[2]],'concepts':concepts,'recipes':recipes}
+write('alchimie-draft.json',draft)
+labels={c['label']:c['id'] for c in world['concepts']}
+kg=read(ROOT/protected[0]);surfaces={normalize(s) for n in kg['kg_nodes'] for s in [n['label_ro'],*n.get('aliases',[])]}
+proposal=copy.deepcopy(world)
+for c in concepts:
+ assert normalize(c['label']) not in surfaces and c['label'] not in labels
+ labels[c['label']]=c['id']
+ proposal['concepts'].append({'id':c['id'],'label':c['label'],'description':c['description'],
+     'source':'authored:alchimie','redistributable':False,'origin':'authored','references':c['sources'],
+     'snapshot':authored_snapshot(c['id'],c['label'],c['description'],c['sources'])})
+for r in recipes:
+ proposal['recipes'].append({'id':r['id'],'pair':sorted(labels[n] for n in r['pair_labels']),
+     'result':labels[r['result_label']],'explanation':r['explanation'],'sources':r['sources']})
+metrics=B.audit(proposal)
+assert proposal['concepts'][:247]==world['concepts'] and proposal['recipes'][:342]==world['recipes']
+assert all(proposal[k]==world[k] for k in ['world','unlocks','goals','compatible_versions'])
+assert svc.resolve('Chiftele marinate')==svc.resolve('Chiftele')
+old_inputs={n for r in world['recipes'] for n in r['pair']}
+assert labels['Chiftele de legume'] not in old_inputs
+write('alchimie-scout-proof.json',{'status':'author checks only; no independent approval',
+ 'draft_sha256':sha(OUT/'alchimie-draft.json'),'baseline_world_sha256':pins[protected[2]],
+ 'old_concepts_exact':247,'old_recipes_exact':342,'unchanged_starters':8,'unchanged_later_supplies':96,
+ 'unchanged_supply_tiers':12,'unchanged_goals':32,'metrics_if_accepted':metrics,
+ 'concept_headroom_before':9,'concept_headroom_after':7,'new_labels_shadow_existing_surfaces':False,
+ 'new_onward_use_of_existing_leaf':'Chiftele de legume → Sandviș',
+ 'migration_requirement':'The final builder must append the exact V95 247-concept book as generation8 while retaining all7 existing generations. This draft does not manufacture compatibility approval.',
+ 'excluded_alias_collision':{'label':'Chiftele marinate','existing_id':svc.resolve('Chiftele marinate')},
+ 'note':'The full proposed world exists only in memory for deterministic closure; no approval-bearing catalog was emitted.'})
+
+def ids(words):
+ result=[svc.resolve(x) for x in words];assert all(result),words;return result
+quick_rows=[
+ {'id':'iq92_v96_weather','source_id':'aq92_v96_intrusul_weather','game':'intrusul','category':'stiinta','difficulty':'usor',
+  'payload':{'group_label':'Fenomene produse în atmosferă','members':ids(['Furtună','Fulger','Tunet']),'intruder':ids(['Lună'])[0]},
+  'rationale':'Furtuna, fulgerul și tunetul sunt fenomene atmosferice; Luna este un corp ceresc. Eticheta nu spune că fiecare furtună produce tunete sau că Luna este invizibilă ziua.',
+  'sources':['https://www.weather.gov/safety/lightning-science-thunder','https://forecast.weather.gov/glossary.php?word=lightning','https://science.nasa.gov/moon/facts/']},
+ {'id':'pq92_v96_nature_everyday','source_id':'aq92_v96_perechi_nature_everyday','game':'perechi','category':'viata_de_roman','difficulty':'usor',
+  'payload':{'pairs':[
+   {'group_label':'Parte a plantei și ramificația pe care poate crește','members':ids(['Frunză','Ramură'])},
+   {'group_label':'Animale domestice ținute frecvent pentru companie','members':ids(['Câine','Pisică'])},
+   {'group_label':'Aliment și categoria de alimente căreia îi aparține','members':ids(['Banană','Fruct'])},
+   {'group_label':'Cereală și produsul obținut prin măcinarea boabelor','members':ids(['Grâu','Făină'])},
+  ]},
+  'rationale':'Frunză–Ramură, Câine–Pisică, Banană–Fruct și Grâu–Făină au relații obișnuite distincte. Bananele și grâul provin din plante, dar nu pot înlocui perechea grâu–făină fără să lase un partener nepotrivit. Nu se afirmă că banana crește într-un copac sau că orice făină este din grâu.',
+  'sources':['https://dexonline.ro/definitie/frunz%C4%83','https://dexonline.ro/definitie/ramur%C4%83','https://dexonline.ro/definitie/c%C3%A2ine','https://dexonline.ro/definitie/pisic%C4%83','https://dexonline.ro/definitie/banan%C4%83','https://dexonline.ro/definitie/f%C4%83in%C4%83']},
+]
+write('quick-draft.json',{'kind':'v96-quick-author-draft-v1','status':'unapproved','baseline_commit':draft['baseline_commit'],
+                       'bindings':Q.bindings(live=True),'boards':quick_rows})
+archives=[];archive_files={}
+def collect(v,path):
+ if isinstance(v,dict):
+  if v.get('game') in ('intrusul','perechi') and isinstance(v.get('payload'),dict):
+   try:Q.visible_ids(v)
+   except (KeyError,TypeError):pass
+   else:archives.append((path,v));archive_files[path]=sha(ROOT/path)
+  for x in v.values():collect(x,path)
+ elif isinstance(v,list):
+  for x in v:collect(x,path)
+archive_paths=sorted((ROOT/'docs/reviews').rglob('*.json'))+sorted((ROOT/'docs/reviews').rglob('*.json.gz'))
+for p in archive_paths:
+ try:collect(json.loads(gzip.decompress(p.read_bytes())) if p.name.endswith('.gz') else read(p),str(p.relative_to(ROOT)))
+ except (ValueError,UnicodeError):pass
+served=[{'game':b.game,'payload':b.payload} for b in all_boards]
+checks=[]
+def matchings(vs):
+ if not vs:return 1
+ a,*tail=vs
+ return sum(matchings([n for n in tail if n!=b]) for b in tail if weights.get(frozenset((a,b)),0)>=.6)
+for row in quick_rows:
+ visible=Q.visible_ids(row);prior=[r for r in served if r['game']==row['game']]
+ history=[r for _,r in archives if r['game']==row['game']]
+ rating=Q.rate_board(row,svc,weights)
+ check={'id':row['id'],'rating':rating,'new_per_game_words':[svc.label(n) for n in visible if n not in {i for r in prior for i in Q.visible_ids(r)}],
+        'maximum_served_overlap':max(len(set(visible)&set(Q.visible_ids(r))) for r in prior),
+        'maximum_archived_overlap':max(len(set(visible)&set(Q.visible_ids(r))) for r in history)}
+ threshold=3 if row['game']=='intrusul' else 4
+ assert check['maximum_served_overlap']<threshold and check['maximum_archived_overlap']<threshold
+ if row['game']=='intrusul':
+  members=row['payload']['members'];odd=row['payload']['intruder']
+  check['inlier_strengths']=[weights[frozenset(p)] for p in itertools.combinations(members,2)]
+  check['outlier_strengths']=[weights.get(frozenset((n,odd)),0) for n in members]
+  assert min(check['inlier_strengths'])>=.6 and max(check['outlier_strengths'])==0
+ else:
+  pairs={frozenset(p['members']) for p in row['payload']['pairs']}
+  assert not pairs & {frozenset(p['members']) for r in prior+history for p in r['payload']['pairs']}
+  check['intended_strengths']=[weights[p] for p in pairs]
+  check['maximum_cross_strength']=max(weights.get(frozenset(p),0) for p in itertools.combinations(visible,2) if frozenset(p) not in pairs)
+  check['native_perfect_matchings']=matchings(visible)
+  assert check['native_perfect_matchings']==1 and check['maximum_cross_strength']==0
+ checks.append(check)
+ratings=Q.rated_boards(quick['authored']+quick_rows,load_derived_catalog(),svc)
+assert len(ratings)==83
+for old,new in zip(quick['boards'],ratings[:81],strict=True):
+ assert {k:v for k,v in old.items() if k not in ('standard_rank','starter_rank')}=={k:v for k,v in new.items() if k not in ('standard_rank','starter_rank')}
+write('quick-scout-proof.json',{'status':'author checks only; no independent approval','draft_sha256':sha(OUT/'quick-draft.json'),
+ 'served_core_boards_compared':336,'served_authored_boards_compared':81,'archived_rows_compared':len(archives),
+ 'archive_file_sha256':archive_files,'checks':checks,'old81_authored_payloads_and_scores_preserved':True,
+ 'all83_proposed_ratings_pass':True,'note':'V95 scout text had a weather-trio lead and banana/fruit lead, but neither was a served or raw candidate board; the complete new boards clear archived JSON candidate/rejection overlap checks.'})
+assert pins=={p:sha(ROOT/p) for p in protected}
+write('draft-freeze.json',{'kind':'v96-content-author-draft-freeze-v1','status':'unapproved; independent review queue only',
+ 'baseline_commit':draft['baseline_commit'],'protected_sources_unchanged':pins,
+ 'files':{name:sha(OUT/name) for name in ['author_drafts.py','alchimie-draft.json','alchimie-scout-proof.json','quick-draft.json','quick-scout-proof.json']}})
+print(json.dumps({'alchimie_new_words':2,'alchimie_new_recipes':5,'world_if_accepted':[249,347],
+                  'quick_new_boards':2,'archived_rows_compared':len(archives),'quick_checks':checks},ensure_ascii=False))
