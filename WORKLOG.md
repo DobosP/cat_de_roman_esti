@@ -971,3 +971,15 @@ V94 final integration is green: 2133 backend/53 accounts on each Python version,
 gates. Initial bundle 119.23/120 KiB. Exact 69 input files,227 archived evidence records,
 final 10 artifact pins and 12 final-evidence pins are bound by verification.json. The
 preview now serves V94 on 8150 and landed V93 on 8160. No V94 publication or deployment.
+
+## V94 main landing and V95 authorization (2026-09-15)
+
+Valid until: a later main landing changes these inputs — then treat as history.
+
+The owner requested landing V94 and starting V95. Main fast-forwards from c971846
+through implementation b75d68e. All 227 archived files, 69 gate inputs, ten artifact
+pins, twelve final-evidence pins and six final logs match the completed green receipt.
+The final post-amendment frontend lint log is also preserved. Landing documentation
+changes no runtime inputs. After the authorized push and remote proof, only the
+verified V94 branch/worktree/scratch are cleaned; the preview moves off its worktree.
+V95 starts in a new task worktree. Production remains anonymous V91.

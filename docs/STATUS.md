@@ -1,13 +1,14 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-15 — V94 complete; all local integration gates green.
+Last verified: 2026-09-15 — V94 integrated on main; all local integration gates green.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
 - V93 landed and was pushed to main at `c971846`; GitHub CI run 35011658720 passed.
   Its verified task branch/worktree/scratch were cleaned after preview relocation.
-- V94 uses `feat/v94-words-and-clearer-connections` from that main baseline.
+- V94 implementation `b75d68e` is integrated on main; the owner authorized its
+  publication and a fresh V95 content/game-quality session.
   **12 new rounds/targets, seven Alchimie words and 17 recipes**: Conexiuni +1,
   Cald sau Rece +2, Lanț +1, Intrusul +4 and Perechi +4. New boards expose twelve
   previously unused Conexiuni words, sixteen Intrusul words and twenty-three Perechi words.
@@ -90,13 +91,13 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 - Strict inverses preserve all five original core artifacts and the original 104-entry ledger;
   focused history checks 111 and historical-ledger checks 21 pass. Current target profiles add
   exactly two rows while all 259 old profiles remain exact; only Lanț's seed 38 snapshot changes.
-- Final V94 preview uses **8150**; **8160** serves landed V93 for comparison. The previous
-  8150 browser origin is retained, supporting restoration of earlier collections.
+- Preview origin **8150** is retained, supporting restoration of earlier collections.
+  [V94 landing receipt](reviews/v94-words-and-clearer-connections/landing.json).
 
 ## Production and remaining work
 
 - Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`, deployed
-  2026-09-09. V94 remains local; no V94 main merge, push or production deployment in this pass.
+  2026-09-09. V94 is integrated on main; production deployment is outside this landing.
 - Owner playtesting and physical-device acceptance remain. Existing Crucea Caraiman,
   museum/Dem/Ateneul description debt, Neagu labels, thin neighborhoods, unknown household
   forms and hidden-target/A5 holds stay explicit. New captions do not approve bad descriptions.
