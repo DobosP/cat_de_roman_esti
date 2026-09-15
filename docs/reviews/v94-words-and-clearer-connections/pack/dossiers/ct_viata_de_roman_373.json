@@ -1,0 +1,108 @@
+{
+ "id": "ct_viata_de_roman_373",
+ "game": "contexto",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "e002f01f2c4bf73ec0b45aad1730dd391fce409f6371c831b96602dad581cb03",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v24_school_assessment_tema_acasa",
+  "label": "Temă pentru acasă",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.88,
+  "degree": 3,
+  "incoming_degree": 5,
+  "description": "Concept cotidian din grupul «activități de evaluare»: Temă pentru acasă."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 5,
+  "sample": [
+   {
+    "id": "n_v23via_tabla_scolara",
+    "label": "Tablă școlară"
+   },
+   {
+    "id": "n_v24_action_routine_a_invata",
+    "label": "A învăța"
+   },
+   {
+    "id": "n_v24_school_classroom_lectie",
+    "label": "Lecție"
+   },
+   {
+    "id": "n_v24_school_writing_caiet",
+    "label": "Caiet"
+   },
+   {
+    "id": "n_v24_school_writing_creion",
+    "label": "Creion"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v24_action_routine_a_invata",
+   "label": "A învăța",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.93,
+   "degree": 2,
+   "incoming_degree": 4,
+   "description": "Concept cotidian din grupul «rutina zilnică»: A învăța.",
+   "strength": 0.94
+  },
+  {
+   "id": "n_v24_school_classroom_lectie",
+   "label": "Lecție",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.93,
+   "degree": 3,
+   "incoming_degree": 7,
+   "description": "Concept cotidian din grupul «sala de clasă»: Lecție.",
+   "strength": 0.94
+  },
+  {
+   "id": "n_v24_school_writing_caiet",
+   "label": "Caiet",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.94,
+   "degree": 6,
+   "incoming_degree": 1,
+   "description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+   "strength": 0.94
+  },
+  {
+   "id": "n_v24_school_writing_creion",
+   "label": "Creion",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.94,
+   "degree": 3,
+   "incoming_degree": 4,
+   "description": "Concept cotidian din grupul «obiecte pentru scris»: Creion.",
+   "strength": 0.94
+  },
+  {
+   "id": "n_v23via_tabla_scolara",
+   "label": "Tablă școlară",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.82,
+   "degree": 11,
+   "incoming_degree": 5,
+   "description": "Suprafață de scris folosită de profesor și elevi în sala de clasă, cu cretă sau markere.",
+   "strength": 0.86
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:bc95d19df5d81dd23ae69a44280b5ef9cd69a3eabbac7e0e8a4c136403ae6a39"
+}

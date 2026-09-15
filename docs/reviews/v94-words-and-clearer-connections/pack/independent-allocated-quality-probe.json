@@ -1,0 +1,1022 @@
+{
+  "kind": "v94-independent-allocated-pack-quality-probe-v1",
+  "candidate_files": {
+    "gastronomie": "154bdd982b2124f59fc2e9ced197ff1b300bbf5aa95951bc7604e57401f0c295",
+    "geografie": "b9472d1a8b6902fd8d2b70493e70830bdbb98347336e3aef34f1860b73901840",
+    "viata_de_roman": "15199e394fa0892619a96aabb091ecfe3806741ba490d4a029efcbdfaf4b20e1"
+  },
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "caption_runtime_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+  "findings": {
+    "lt_geografie_242": {
+      "game": "lant",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Sfinxul din Bucegi salience 0.50 < 0.60 (usor floor)"
+        }
+      ]
+    }
+  },
+  "dossiers": {
+    "cx_viata_de_roman_371": {
+      "id": "cx_viata_de_roman_371",
+      "game": "conexiuni",
+      "category": "viata_de_roman",
+      "difficulty": "normal",
+      "status": "pending",
+      "record_sha256": "9db609d667839a13a864d12cd4736a0e11cfb580580d170733d7986977e69d71",
+      "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+      "lint_findings": [],
+      "fairness": {
+        "unfair_tiles": [],
+        "contested_tiles": [],
+        "engine_unfair_raw": 0
+      },
+      "groups": [
+        {
+          "label": "Părți ale piciorului",
+          "members": [
+            {
+              "id": "n_v31_body_lower_calcai",
+              "label": "Călcâi",
+              "node_type": "concept",
+              "category": "stiinta",
+              "salience": 0.92,
+              "degree": 2,
+              "incoming_degree": 3,
+              "description": "Partea din spate a labei piciorului, pe care se sprijină corpul."
+            },
+            {
+              "id": "n_v31_body_lower_coapsa",
+              "label": "Coapsă",
+              "node_type": "concept",
+              "category": "stiinta",
+              "salience": 0.92,
+              "degree": 2,
+              "incoming_degree": 3,
+              "description": "Partea de sus a piciorului, între șold și genunchi."
+            },
+            {
+              "id": "n_v31_body_lower_gamba",
+              "label": "Gambă",
+              "node_type": "concept",
+              "category": "stiinta",
+              "salience": 0.92,
+              "degree": 2,
+              "incoming_degree": 3,
+              "description": "Partea piciorului dintre genunchi și gleznă."
+            },
+            {
+              "id": "n_v31_body_lower_genunchi",
+              "label": "Genunchi",
+              "node_type": "concept",
+              "category": "stiinta",
+              "salience": 0.94,
+              "degree": 2,
+              "incoming_degree": 3,
+              "description": "Articulație a piciorului care leagă coapsa de gambă și permite îndoirea."
+            }
+          ]
+        },
+        {
+          "label": "Publicații tipărite pe pagini",
+          "members": [
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte",
+              "node_type": "concept",
+              "category": "literatura",
+              "salience": 0.973,
+              "degree": 30,
+              "incoming_degree": 35,
+              "description": "Obiect tipărit sau digital care conține un text literar ori informativ."
+            },
+            {
+              "id": "n_v4lit_revista",
+              "label": "revistă",
+              "node_type": "concept",
+              "category": "literatura",
+              "salience": 0.4599,
+              "degree": 5,
+              "incoming_degree": 5,
+              "description": "Publicație periodică pentru texte, critică și cultură."
+            },
+            {
+              "id": "n_v4lit_ziar",
+              "label": "ziar",
+              "node_type": "concept",
+              "category": "literatura",
+              "salience": 0.2593,
+              "degree": 4,
+              "incoming_degree": 4,
+              "description": "Publicație periodică în care pot apărea texte literare."
+            },
+            {
+              "id": "n_v23via_abecedar",
+              "label": "Abecedar",
+              "node_type": "concept",
+              "category": "viata_de_roman",
+              "salience": 0.86,
+              "degree": 5,
+              "incoming_degree": 5,
+              "description": "Manual școlar folosit la începutul învățării cititului și scrisului, organizat în jurul literelor și al textelor scurte."
+            }
+          ]
+        },
+        {
+          "label": "Unități calendaristice",
+          "members": [
+            {
+              "id": "n_v4ist_secol",
+              "label": "Secol",
+              "node_type": "concept",
+              "category": "istorie",
+              "salience": 0.793,
+              "degree": 4,
+              "incoming_degree": 4,
+              "description": "Perioadă de o sută de ani folosită în datarea istorică."
+            },
+            {
+              "id": "n_v4ist_an",
+              "label": "An",
+              "node_type": "concept",
+              "category": "istorie",
+              "salience": 0.7417,
+              "degree": 5,
+              "incoming_degree": 9,
+              "description": "Unitate de timp folosită pentru datarea evenimentelor istorice."
+            },
+            {
+              "id": "n_v28_time_calendar_saptamana",
+              "label": "Săptămână",
+              "node_type": "concept",
+              "category": "societate",
+              "salience": 0.94,
+              "degree": 3,
+              "incoming_degree": 4,
+              "description": "Perioadă de șapte zile consecutive."
+            },
+            {
+              "id": "n_v28_time_calendar_luna_calendaristica",
+              "label": "Lună calendaristică",
+              "node_type": "concept",
+              "category": "societate",
+              "salience": 0.94,
+              "degree": 2,
+              "incoming_degree": 3,
+              "description": "Una dintre cele douăsprezece perioade ale anului calendaristic."
+            }
+          ]
+        },
+        {
+          "label": "Se bat la preparare sau curățare",
+          "members": [
+            {
+              "id": "n_v24_home_textiles_covor",
+              "label": "Covor",
+              "node_type": "concept",
+              "category": "viata_de_roman",
+              "salience": 0.84,
+              "degree": 4,
+              "incoming_degree": 5,
+              "description": "Concept cotidian din grupul «textile din casă»: Covor."
+            },
+            {
+              "id": "n_v86_food_albus",
+              "label": "Albuș",
+              "node_type": "concept",
+              "category": "gastronomie",
+              "salience": 0.8,
+              "degree": 5,
+              "incoming_degree": 2,
+              "description": "Partea transparentă a oului, care poate fi bătută spumă pentru unele preparate."
+            },
+            {
+              "id": "n_v86_food_frisca",
+              "label": "Frișcă",
+              "node_type": "concept",
+              "category": "gastronomie",
+              "salience": 0.85,
+              "degree": 4,
+              "incoming_degree": 6,
+              "description": "Smântână dulce aerată prin batere, folosită la umplerea și decorarea deserturilor."
+            },
+            {
+              "id": "n_v20gas_snitel",
+              "label": "Șnițel",
+              "node_type": "concept",
+              "category": "gastronomie",
+              "salience": 0.85,
+              "degree": 4,
+              "incoming_degree": 4,
+              "description": "Felie de carne (pui sau porc) trecută prin făină, ou și pesmet și prăjită, nelipsită din bucătăriile și cantinele românești. Se servește clasic cu piure sau cartofi prăjiți."
+            }
+          ]
+        }
+      ],
+      "cross_group_strong_edges": [],
+      "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "review_binding": "sha256:6c32edf8110f5904f48f0d8b2db90af2887d88a8265fcd9b69c94bad44971232"
+    },
+    "ct_gastronomie_372": {
+      "id": "ct_gastronomie_372",
+      "game": "contexto",
+      "category": "gastronomie",
+      "difficulty": "usor",
+      "status": "pending",
+      "record_sha256": "c582ef7c12f9447ed6fb8bb6e1b3c0e35e0fc9528ac9e40200304cf160931c1b",
+      "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+      "lint_findings": [],
+      "target": {
+        "id": "n_v11gas_ciorba_perisoare",
+        "label": "Ciorbă de perișoare",
+        "node_type": "concept",
+        "category": "gastronomie",
+        "salience": 0.86,
+        "degree": 5,
+        "incoming_degree": 5,
+        "description": "Ciorbă acrișoară cu perișoare de carne, clasic de restaurant și de casă."
+      },
+      "incoming_neighbor_floor": {
+        "minimum": 5,
+        "count": 5,
+        "sample": [
+          {
+            "id": "n_gas_leustean",
+            "label": "Leuștean"
+          },
+          {
+            "id": "n_v20gas_chiftele",
+            "label": "Chiftele"
+          },
+          {
+            "id": "n_v2gas_ciorba",
+            "label": "Ciorbă"
+          },
+          {
+            "id": "n_v3gas_orez",
+            "label": "Orez"
+          },
+          {
+            "id": "n_v4gas_carne",
+            "label": "Carne"
+          }
+        ],
+        "sample_truncated": false,
+        "recognition_assessed": false
+      },
+      "reachable": 2353,
+      "strong_neighbors": [
+        {
+          "id": "n_v2gas_ciorba",
+          "label": "Ciorbă",
+          "node_type": "concept",
+          "category": "gastronomie",
+          "salience": 0.8872,
+          "degree": 14,
+          "incoming_degree": 14,
+          "description": "Fel lichid acru sau dres, foarte prezent în bucătăria românească.",
+          "strength": 0.85
+        },
+        {
+          "id": "n_v20gas_chiftele",
+          "label": "Chiftele",
+          "node_type": "concept",
+          "category": "gastronomie",
+          "salience": 0.85,
+          "degree": 3,
+          "incoming_degree": 3,
+          "description": "Bile de carne tocată cu ceapă și verdeață, prăjite în ulei; în Moldova li se spune pârjoale. „Chiftelele marinate” în sos de roșii sunt un clasic al bucătăriei de casă.",
+          "strength": 0.7
+        },
+        {
+          "id": "n_gas_leustean",
+          "label": "Leuștean",
+          "node_type": "concept",
+          "category": "gastronomie",
+          "salience": 0.59,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Verdeață aromatică definitorie pentru multe ciorbe românești.",
+          "strength": 0.6
+        }
+      ],
+      "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "review_binding": "sha256:f2ae62d6c98edea2c6f1903f6ed2160cc3f6f1771384806765a4821b28957fc1"
+    },
+    "ct_viata_de_roman_373": {
+      "id": "ct_viata_de_roman_373",
+      "game": "contexto",
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "status": "pending",
+      "record_sha256": "e002f01f2c4bf73ec0b45aad1730dd391fce409f6371c831b96602dad581cb03",
+      "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+      "lint_findings": [],
+      "target": {
+        "id": "n_v24_school_assessment_tema_acasa",
+        "label": "Temă pentru acasă",
+        "node_type": "concept",
+        "category": "viata_de_roman",
+        "salience": 0.88,
+        "degree": 3,
+        "incoming_degree": 5,
+        "description": "Concept cotidian din grupul «activități de evaluare»: Temă pentru acasă."
+      },
+      "incoming_neighbor_floor": {
+        "minimum": 5,
+        "count": 5,
+        "sample": [
+          {
+            "id": "n_v23via_tabla_scolara",
+            "label": "Tablă școlară"
+          },
+          {
+            "id": "n_v24_action_routine_a_invata",
+            "label": "A învăța"
+          },
+          {
+            "id": "n_v24_school_classroom_lectie",
+            "label": "Lecție"
+          },
+          {
+            "id": "n_v24_school_writing_caiet",
+            "label": "Caiet"
+          },
+          {
+            "id": "n_v24_school_writing_creion",
+            "label": "Creion"
+          }
+        ],
+        "sample_truncated": false,
+        "recognition_assessed": false
+      },
+      "reachable": 2353,
+      "strong_neighbors": [
+        {
+          "id": "n_v24_action_routine_a_invata",
+          "label": "A învăța",
+          "node_type": "concept",
+          "category": "viata_de_roman",
+          "salience": 0.93,
+          "degree": 2,
+          "incoming_degree": 4,
+          "description": "Concept cotidian din grupul «rutina zilnică»: A învăța.",
+          "strength": 0.94
+        },
+        {
+          "id": "n_v24_school_classroom_lectie",
+          "label": "Lecție",
+          "node_type": "concept",
+          "category": "viata_de_roman",
+          "salience": 0.93,
+          "degree": 3,
+          "incoming_degree": 7,
+          "description": "Concept cotidian din grupul «sala de clasă»: Lecție.",
+          "strength": 0.94
+        },
+        {
+          "id": "n_v24_school_writing_caiet",
+          "label": "Caiet",
+          "node_type": "concept",
+          "category": "viata_de_roman",
+          "salience": 0.94,
+          "degree": 6,
+          "incoming_degree": 1,
+          "description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+          "strength": 0.94
+        },
+        {
+          "id": "n_v24_school_writing_creion",
+          "label": "Creion",
+          "node_type": "concept",
+          "category": "viata_de_roman",
+          "salience": 0.94,
+          "degree": 3,
+          "incoming_degree": 4,
+          "description": "Concept cotidian din grupul «obiecte pentru scris»: Creion.",
+          "strength": 0.94
+        },
+        {
+          "id": "n_v23via_tabla_scolara",
+          "label": "Tablă școlară",
+          "node_type": "concept",
+          "category": "viata_de_roman",
+          "salience": 0.82,
+          "degree": 11,
+          "incoming_degree": 5,
+          "description": "Suprafață de scris folosită de profesor și elevi în sala de clasă, cu cretă sau markere.",
+          "strength": 0.86
+        }
+      ],
+      "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "review_binding": "sha256:bc95d19df5d81dd23ae69a44280b5ef9cd69a3eabbac7e0e8a4c136403ae6a39"
+    },
+    "lt_gastronomie_241": {
+      "id": "lt_gastronomie_241",
+      "game": "lant",
+      "category": "gastronomie",
+      "difficulty": "usor",
+      "status": "pending",
+      "record_sha256": "1aa8ead90bbf78176f0fc08799da4d64c763adc35f0625239ce8da0539fa09ad",
+      "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+      "lint_findings": [],
+      "nondistinctive_region_links": {
+        "Sarmale": "linked to 2 regions (Moldova, Transilvania)"
+      },
+      "display_rules_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+      "start": {
+        "id": "n_v11gas_ciorba_perisoare",
+        "label": "Ciorbă de perișoare",
+        "node_type": "concept",
+        "category": "gastronomie",
+        "salience": 0.86,
+        "degree": 5,
+        "incoming_degree": 5,
+        "description": "Ciorbă acrișoară cu perișoare de carne, clasic de restaurant și de casă."
+      },
+      "target": {
+        "id": "n_gas_sarmale",
+        "label": "Sarmale",
+        "node_type": "concept",
+        "category": "gastronomie",
+        "salience": 0.9793,
+        "degree": 23,
+        "incoming_degree": 23,
+        "description": "Foi de varză sau viță umplute cu carne și orez, reper al meselor românești de sărbătoare."
+      },
+      "optimal": 2,
+      "branch_profile": {
+        "valid_first_hops": 2,
+        "narrowest_shortest_path_layer": 2,
+        "total_intermediate_shortest_path_nodes": 2
+      },
+      "representative_shortest_paths": [
+        {
+          "nodes": [
+            {
+              "id": "n_v11gas_ciorba_perisoare",
+              "label": "Ciorbă de perișoare"
+            },
+            {
+              "id": "n_v3gas_orez",
+              "label": "Orez"
+            },
+            {
+              "id": "n_gas_sarmale",
+              "label": "Sarmale"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v11gas_ciorba_perisoare",
+                "label": "Ciorbă de perișoare"
+              },
+              "to": {
+                "id": "n_v3gas_orez",
+                "label": "Orez"
+              },
+              "relation": "associated_with",
+              "label": "perișoarele conțin orez",
+              "display_label": "ciorbă și ingredient opțional",
+              "strength": 0.55
+            },
+            {
+              "from": {
+                "id": "n_v3gas_orez",
+                "label": "Orez"
+              },
+              "to": {
+                "id": "n_gas_sarmale",
+                "label": "Sarmale"
+              },
+              "relation": "part_of",
+              "label": "ingredient în",
+              "display_label": "sarmale și orezul din umplutură",
+              "strength": 0.84
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_v11gas_ciorba_perisoare",
+              "label": "Ciorbă de perișoare"
+            },
+            {
+              "id": "n_v4gas_carne",
+              "label": "Carne"
+            },
+            {
+              "id": "n_gas_sarmale",
+              "label": "Sarmale"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v11gas_ciorba_perisoare",
+                "label": "Ciorbă de perișoare"
+              },
+              "to": {
+                "id": "n_v4gas_carne",
+                "label": "Carne"
+              },
+              "relation": "associated_with",
+              "label": "perișoare din carne tocată",
+              "display_label": "ciorbă și carnea din perișoare",
+              "strength": 0.55
+            },
+            {
+              "from": {
+                "id": "n_v4gas_carne",
+                "label": "Carne"
+              },
+              "to": {
+                "id": "n_gas_sarmale",
+                "label": "Sarmale"
+              },
+              "relation": "part_of",
+              "label": "intră în umplutură",
+              "display_label": "sarmale și carnea din umplutură",
+              "strength": 0.83
+            }
+          ]
+        }
+      ],
+      "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "review_binding": "sha256:e64af047b81ab93948889ee21d8138d8c6b1b01a00532b135fe822fc73a6933b"
+    },
+    "lt_geografie_242": {
+      "id": "lt_geografie_242",
+      "game": "lant",
+      "category": "geografie",
+      "difficulty": "usor",
+      "status": "pending",
+      "record_sha256": "a23970fe742c5674a07bc3b5c3eda183f9f3e61355974d3a231daa31168af5b5",
+      "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+      "lint_findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Sfinxul din Bucegi salience 0.50 < 0.60 (usor floor)"
+        }
+      ],
+      "display_rules_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+      "start": {
+        "id": "n_v17geo_sfinxul_bucegi",
+        "label": "Sfinxul din Bucegi",
+        "node_type": "place",
+        "category": "geografie",
+        "salience": 0.5,
+        "degree": 4,
+        "incoming_degree": 4,
+        "description": "Formațiune stâncoasă naturală de pe platoul Bucegilor, la circa 2216 metri altitudine, care seamănă cu un chip uman. Modelată de vânt și îngheț, este înconjurată de numeroase legende."
+      },
+      "target": {
+        "id": "n_v20geo_crucea_caraiman",
+        "label": "Crucea Caraiman",
+        "node_type": "place",
+        "category": "geografie",
+        "salience": 0.7,
+        "degree": 3,
+        "incoming_degree": 2,
+        "description": "Monument de 28 de metri ridicat între 1926 și 1928 pe Șaua Caraiman, în Munții Bucegi, la 2291 m altitudine, în memoria eroilor din Primul Război Mondial. Este recunoscută drept cea mai înaltă cruce din lume amplasată pe un vârf montan."
+      },
+      "optimal": 2,
+      "branch_profile": {
+        "valid_first_hops": 2,
+        "narrowest_shortest_path_layer": 2,
+        "total_intermediate_shortest_path_nodes": 2
+      },
+      "representative_shortest_paths": [
+        {
+          "nodes": [
+            {
+              "id": "n_v17geo_sfinxul_bucegi",
+              "label": "Sfinxul din Bucegi"
+            },
+            {
+              "id": "n_bucegi",
+              "label": "Munții Bucegi"
+            },
+            {
+              "id": "n_v20geo_crucea_caraiman",
+              "label": "Crucea Caraiman"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v17geo_sfinxul_bucegi",
+                "label": "Sfinxul din Bucegi"
+              },
+              "to": {
+                "id": "n_bucegi",
+                "label": "Munții Bucegi"
+              },
+              "relation": "located_in",
+              "label": "pe platoul Bucegilor",
+              "display_label": "formațiune stâncoasă și munți",
+              "strength": 0.9
+            },
+            {
+              "from": {
+                "id": "n_bucegi",
+                "label": "Munții Bucegi"
+              },
+              "to": {
+                "id": "n_v20geo_crucea_caraiman",
+                "label": "Crucea Caraiman"
+              },
+              "relation": "located_in",
+              "label": "se află în",
+              "display_label": "monument și munții unde se află",
+              "strength": 0.95
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_v17geo_sfinxul_bucegi",
+              "label": "Sfinxul din Bucegi"
+            },
+            {
+              "id": "n_v17geo_babele",
+              "label": "Babele"
+            },
+            {
+              "id": "n_v20geo_crucea_caraiman",
+              "label": "Crucea Caraiman"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v17geo_sfinxul_bucegi",
+                "label": "Sfinxul din Bucegi"
+              },
+              "to": {
+                "id": "n_v17geo_babele",
+                "label": "Babele"
+              },
+              "relation": "associated_with",
+              "label": "vecin cu Babele",
+              "display_label": "formațiuni stâncoase vecine",
+              "strength": 0.88
+            },
+            {
+              "from": {
+                "id": "n_v17geo_babele",
+                "label": "Babele"
+              },
+              "to": {
+                "id": "n_v20geo_crucea_caraiman",
+                "label": "Crucea Caraiman"
+              },
+              "relation": "associated_with",
+              "label": "pe platoul Bucegilor, lângă",
+              "display_label": "stânci și monument din Bucegi",
+              "strength": 0.65
+            }
+          ]
+        }
+      ],
+      "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "review_binding": "sha256:31c5fd57edeb74888ae689ebcfc430d8dc4150d6bdb975dc7e9ec5719007adb3"
+    }
+  },
+  "probes": [
+    {
+      "id": "cx_viata_de_roman_371",
+      "all_four_groups_won": true,
+      "raw_unfair": 0
+    },
+    {
+      "id": "ct_gastronomie_372",
+      "incoming": [
+        "n_gas_leustean",
+        "n_v20gas_chiftele",
+        "n_v2gas_ciorba",
+        "n_v3gas_orez",
+        "n_v4gas_carne"
+      ],
+      "steps": [
+        {
+          "text": "masă",
+          "feedback": {
+            "id": "n_v4gas_masa",
+            "label": "Masă",
+            "distance": 3,
+            "rank": 100,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "mâncare",
+          "feedback": {
+            "id": "n_v4gas_mancare",
+            "label": "Mâncare",
+            "distance": 2,
+            "rank": 7,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "ciorbă",
+          "feedback": {
+            "id": "n_v2gas_ciorba",
+            "label": "Ciorbă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "supă",
+          "feedback": {
+            "id": "n_v4gas_supa",
+            "label": "Supă",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "carne",
+          "feedback": {
+            "id": "n_v4gas_carne",
+            "label": "Carne",
+            "distance": 1,
+            "rank": 5,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "orez",
+          "feedback": {
+            "id": "n_v3gas_orez",
+            "label": "Orez",
+            "distance": 1,
+            "rank": 5,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "leuștean",
+          "feedback": {
+            "id": "n_gas_leustean",
+            "label": "Leuștean",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 7
+          },
+          "won": false
+        },
+        {
+          "text": "chiftele",
+          "feedback": {
+            "id": "n_v20gas_chiftele",
+            "label": "Chiftele",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 8
+          },
+          "won": false
+        },
+        {
+          "text": "Ciorbă de perișoare",
+          "feedback": {
+            "id": "n_v11gas_ciorba_perisoare",
+            "label": "Ciorbă de perișoare",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 9
+          },
+          "won": true
+        }
+      ]
+    },
+    {
+      "id": "ct_viata_de_roman_373",
+      "incoming": [
+        "n_v23via_tabla_scolara",
+        "n_v24_action_routine_a_invata",
+        "n_v24_school_classroom_lectie",
+        "n_v24_school_writing_caiet",
+        "n_v24_school_writing_creion"
+      ],
+      "steps": [
+        {
+          "text": "școală",
+          "feedback": {
+            "id": "n_v3soc_scoala",
+            "label": "Școală",
+            "distance": 2,
+            "rank": 7,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "elev",
+          "feedback": {
+            "id": "n_v4soc_elev",
+            "label": "elev",
+            "distance": 3,
+            "rank": 28,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "profesor",
+          "feedback": {
+            "id": "n_v4per_profesor",
+            "label": "profesor",
+            "distance": 3,
+            "rank": 30,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "lecție",
+          "feedback": {
+            "id": "n_v24_school_classroom_lectie",
+            "label": "Lecție",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "caiet",
+          "feedback": {
+            "id": "n_v24_school_writing_caiet",
+            "label": "Caiet",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "creion",
+          "feedback": {
+            "id": "n_v24_school_writing_creion",
+            "label": "Creion",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "Temă pentru acasă",
+          "feedback": {
+            "id": "n_v24_school_assessment_tema_acasa",
+            "label": "Temă pentru acasă",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 7
+          },
+          "won": true
+        }
+      ]
+    },
+    {
+      "id": "lt_gastronomie_241",
+      "routes": [
+        {
+          "labels": [
+            "Ciorbă de perișoare",
+            "Orez",
+            "Sarmale"
+          ],
+          "steps": [
+            {
+              "label": "Orez",
+              "relation": "ciorbă și ingredient opțional",
+              "won": false
+            },
+            {
+              "label": "Sarmale",
+              "relation": "sarmale și orezul din umplutură",
+              "won": true
+            }
+          ]
+        },
+        {
+          "labels": [
+            "Ciorbă de perișoare",
+            "Carne",
+            "Sarmale"
+          ],
+          "steps": [
+            {
+              "label": "Carne",
+              "relation": "ciorbă și carnea din perișoare",
+              "won": false
+            },
+            {
+              "label": "Sarmale",
+              "relation": "sarmale și carnea din umplutură",
+              "won": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lt_geografie_242",
+      "routes": [
+        {
+          "labels": [
+            "Sfinxul din Bucegi",
+            "Munții Bucegi",
+            "Crucea Caraiman"
+          ],
+          "steps": [
+            {
+              "label": "Munții Bucegi",
+              "relation": "formațiune stâncoasă și munți",
+              "won": false
+            },
+            {
+              "label": "Crucea Caraiman",
+              "relation": "monument și munții unde se află",
+              "won": true
+            }
+          ]
+        },
+        {
+          "labels": [
+            "Sfinxul din Bucegi",
+            "Babele",
+            "Crucea Caraiman"
+          ],
+          "steps": [
+            {
+              "label": "Babele",
+              "relation": "formațiuni stâncoase vecine",
+              "won": false
+            },
+            {
+              "label": "Crucea Caraiman",
+              "relation": "stânci și monument din Bucegi",
+              "won": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": "Actual allocated pending records and reconstructed bound dossiers; fixed-content API replay, not public natural selection."
+}

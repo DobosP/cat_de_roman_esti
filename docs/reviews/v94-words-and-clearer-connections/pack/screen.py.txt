@@ -1,0 +1,19 @@
+import sys,json,copy,random
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections');sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import critique_pack as c
+p,s,st,r=c.load_all(c.PACKAGE_PACK,c.PACKAGE_KG)
+old=[]
+for path in (ROOT/'docs/reviews').rglob('candidates.json'):
+ try:d=json.loads(path.read_text())
+ except:continue
+ if isinstance(d,dict):
+  for row in d.get('conexiuni',[]):
+   if isinstance(row.get('groups'),list):old.append((str(path.relative_to(ROOT)),row))
+GROUPS=[('Se pot bate',['Covor','Albuș','Frișcă','Șnițel']),('Publicații tipărite pe pagini',['Carte','Revistă','Ziar','Abecedar']),('Părți ale piciorului',['Călcâi','Coapsă','Gambă','Genunchi']),('Unități calendaristice',['Secol','An','Săptămână','Lună calendaristică'])]
+for label,labels in GROUPS:
+ ids=[s.resolve(x) for x in labels];print(label,ids)
+ print('raw_overlap',[(path,row.get('groups')) for path,row in old if any(len(set(ids)&set(g['tiles']))>=3 for g in row['groups'])][:3])
+rec=dict(id='preview_v94_cx',difficulty='normal',category='viata_de_roman',status='pending',source='ai',groups={f'g{i}':[s.resolve(x) for x in labels] for i,(_,labels) in enumerate(GROUPS)},group_labels={f'g{i}':label for i,(label,_)in enumerate(GROUPS)})
+rec['order']=[n for g in rec['groups'].values() for n in g];p['conexiuni'].append(rec)
+f,_,_=c.run(p,s,st,r,['conexiuni'],{'pending'},{rec['id']});print(json.dumps(f,ensure_ascii=False,indent=2))

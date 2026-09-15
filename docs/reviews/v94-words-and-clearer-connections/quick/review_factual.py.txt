@@ -1,0 +1,27 @@
+from pathlib import Path
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from scripts import build_quick_content_v92 as B
+Q=B.Q
+prior_dir=ROOT/'docs/reviews/v93-words-and-game-quality/quick';prior=json.loads((prior_dir/'candidate.json').read_bytes());previous=json.loads((prior_dir/'factual-review.json').read_bytes());raw=json.loads((OUT/'raw-candidates.json').read_bytes());current=json.loads((OUT/'candidate.json').read_bytes())
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert sha(OUT/'candidate.json')=='17dcf3acbd054ef581c21c31ac0b72a25f01c1ad9178ef308932b9aed270fa41'
+assert previous['candidate_sha256']==sha(prior_dir/'candidate.json')
+old={r['id']:r for r in prior['boards']};new={r['id']:r for r in current['boards']};assert len(old)==65 and all(new[i]==row for i,row in old.items())
+assert {k:v for k,v in prior['bindings'].items() if k!='editorial_source_sha256'}=={k:v for k,v in current['bindings'].items() if k!='editorial_source_sha256'}
+notes={
+'iq92_v94_sleep':'Pat, Saltea and Pernă are familiar sleeping objects; Scaun is intended for sitting. Incidental sleeping in a chair does not change its normal function. No specialist or hidden sense is needed.',
+'iq92_v94_milling':'Făină, Mălai and Griș are cereal milling products; Drojdie is used for fermentation, not ground cereal. The ordinary ingredient senses distinguish the intruder, without falsely classifying every flour as wheat.',
+'iq92_v94_rooms':'Cameră, Sufragerie and Dormitor denote interior rooms in the household context. Curte denotes the outdoor yard. Both dining-room and living-room uses of Sufragerie satisfy the same predicate, so its known ambiguity does not affect this board.',
+'iq92_v94_writing':'Caiet, Creion and Pix are school writing supplies; Examen is an assessment rather than a stationery object. A notebook supports writing even though it is not an instrument that deposits ink.',
+'pq92_v94_everyday_01':'Homework is commonly written in a notebook; sleep provides rest for ordinary tiredness; pincers can remove a nail; sunflower seeds are a source of edible oil. The last claim does not say all oil is sunflower oil. These are direct, common task/tool/process relations.',
+'pq92_v94_everyday_02':'Sprânceană is the hair arch at the lower forehead above the eye. A saucepan can be heated on a stove, goats eat grass as one of their foods, and a calendar represents calendar months. The labels avoid an exclusive diet or celestial-moon sense.',
+'pq92_v94_everyday_03':'Opening and closing are opposites. Dr Oetker explicitly prepares vanilla custard for Cremșnit. A dish sponge washes a plate; fingers are terminal segments of a hand. The hand/finger pairing does not deny that toes also exist.',
+'pq92_v94_everyday_04':'The mouth participates in speech articulation; powdered sugar is finely milled sugar; whey separates from milk after curdling, as DEX explicitly defines. A garden hose and watering can are both used to water plants. No claim of exclusive source or sole speech organ is made.',
+}
+assert set(notes)==set(new)-set(old)=={r['id'] for r in raw['boards']}
+items=[{'id':r['id'],'verdict':'accept','rationale':notes[r['id']]+' Independent factual/recognition review, not a measured player-enjoyment study.','sources':r['sources']} for r in raw['boards']]
+rr={'kind':'v94-quick-raw-factual-v1','role':'factual','reviewer':'root-v94-factual','candidate_sha256':sha(OUT/'raw-candidates.json'),'reviewed_on':'2026-09-15','items':items};(OUT/'raw-factual-review.json').write_bytes(Q.json_bytes(rr))
+review={'kind':B.REVIEW_KIND,'role':'factual','reviewer':'root-v94-factual','candidate_sha256':sha(OUT/'candidate.json'),'items':previous['items']+items,'baseline_evidence':{'candidate_path':str((prior_dir/'candidate.json').relative_to(ROOT)),'candidate_sha256':sha(prior_dir/'candidate.json'),'factual_review_path':str((prior_dir/'factual-review.json').relative_to(ROOT)),'factual_review_sha256':sha(prior_dir/'factual-review.json'),'inherited_rows':65,'new_rows':8,'old_records_and_judgments_exact':True,'stable_kg_rubric_core_bindings':True,'raw_candidate_sha256':sha(OUT/'raw-candidates.json'),'raw_review_sha256':sha(OUT/'raw-factual-review.json')}}
+(OUT/'factual-review.json').write_bytes(Q.json_bytes(review));B.read_review(OUT/'factual-review.json','factual',sha(OUT/'candidate.json'),set(new));print('8 new quick factual judgments accepted;73 complete rows covered')

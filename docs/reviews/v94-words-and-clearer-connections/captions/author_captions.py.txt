@@ -1,0 +1,43 @@
+from pathlib import Path
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.lant_relations import REVIEWED_CAPTIONS,caption
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+S=get_service()
+academy='https://acad.ro/bdar/armembri.php'
+posthumous='https://acad.ro/membri_ar/doc/MembriAlesiPostMortem.pdf'
+junimea='https://www.muzeulliteraturiiiasi.ro/expozitii/amintiri-din-junimea/'
+leadership='https://www.convorbiri-literare.ro/copy-of-selectia-3'
+tourism='https://cjcluj.ro/turism/'
+gorge='https://clujtourism.ro/portfolio/cheile-turzii/'
+uprising='https://clujtourism.ro/portfolio/grupul-statuar-horea-closca-si-crisan-cluj/'
+specs=[
+('n_academia_romana','n_mihai_eminescu','academie și membru postum',[posthumous],'The Academy list records Eminescu as elected post mortem in1948. The qualifier prevents a claim of living membership.'),
+('n_academia_romana','n_titu_maiorescu','academie și membru fondator',[academy],'The Academy member register explicitly identifies Titu Liviu Maiorescu as a founding member,1867.'),
+('n_avram_iancu','n_muntii_apuseni','revoluționar și ținut natal',['https://muzee-rurale.cimec.ro/images/Ghidul-Muzeelor-2009.pdf','https://clujtourism.ro/portfolio/statuia-lui-avram-iancu-cluj/'],'The national museum guide locates his birth at Vidra, and his native Apuseni setting is documented in the local cultural record. This names origin rather than ownership of mountains.'),
+('n_cluj_napoca','n_transilvania','oraș și regiune',[tourism],'Cluj-Napoca is a city of Transylvania; pair wording remains truthful in either traversal direction.'),
+('n_cluj_napoca','n_v17geo_salina_turda','oraș și salină din apropiere',[tourism,'https://www.salinaturda.eu/en/access/'],'The mine is at Turda in Cluj county, near Cluj-Napoca rather than within the city. Nearby tourism is the existing edge meaning.'),
+('n_convorbiri_literare','n_mihai_eminescu','revistă și poet publicat',[junimea,'https://acad.ro/academica2002/rev2018/pag_acad2018_nr327_328_ian_feb.pdf'],'Eminescu published in the journal. The noun phrase identifies publication rather than contemporary staff membership.'),
+('n_convorbiri_literare','n_titu_maiorescu','revistă și îndrumător literar',[leadership],'The journal describes Maiorescu withdrawing from its leadership in1895. Literary guidance is precise without assigning the formal sole-editor title held by Negruzzi.'),
+('n_junimea','n_mihai_eminescu','societate literară și poet',[junimea],'The museum identifies Eminescu among writers who participated and read works at Junimea.'),
+('n_junimea','n_titu_maiorescu','societate literară și mentor',[junimea,leadership],'Maiorescu founded and mentored Junimea; the phrase identifies his specific literary role.'),
+('n_muntii_apuseni','n_v11ist_rascoala_1784','răscoală și ținutul ei',[uprising],'The county cultural account places the1784revolt in Transylvania with its Apuseni leaders/setting. The caption denotes a setting, not an exclusive location.'),
+('n_muntii_apuseni','n_v20geo_cheile_turzii','chei și munții din care fac parte',[gorge],'County tourism places Turda Gorge on the eastern edge of the Apuseni, in the Trascău group.'),
+('n_transilvania','n_v11ist_rascoala_1784','răscoală și regiune',[uprising],'The1784uprising occurred in Transylvania. This retains the original geographic assertion without reversing a verb.'),
+('n_v17geo_salina_turda','n_v20geo_cheile_turzii','obiective din zona Turda',[tourism,gorge],'Both attractions are in the Turda area; the label does not claim that the gorge is inside the salt mine or city.'),
+]
+rows=[]
+for a,b,label,sources,rationale in specs:
+ pair=tuple(sorted((a,b)));edge=S.link(a,b);reverse=S.link(b,a)
+ assert pair not in REVIEWED_CAPTIONS and edge and len(label)<=34
+ assert reverse and record_snapshot(edge)==record_snapshot(reverse)
+ rows.append({'pair':list(pair),'labels':[S.label(x) for x in pair],'caption':label,'old_display':caption(S,a,b),'edge_snapshot':record_snapshot(edge),'edge_sha256':digest(record_snapshot(edge)),'rationale':rationale,'sources':sources})
+paths=json.loads((ROOT/'docs/reviews/v93-words-and-game-quality/pack/lant-api-routes.json').read_bytes())['ladders']
+needed={tuple(sorted((a,b))) for l in paths for r in l['routes'] for a,b in zip(r['ids'],r['ids'][1:])}-set(REVIEWED_CAPTIONS)
+assert {tuple(r['pair']) for r in rows}==needed and len(rows)==13
+value={'kind':'lant-caption-author-candidates-v1','status':'unapproved','baseline':'c971846feac31e73c3a2a2593c66265f29603e58','runtime_source_sha256':hashlib.sha256((ROOT/'cat_de_roman_esti/wordgames/lant_relations.py').read_bytes()).hexdigest(),'kg_sha256':hashlib.sha256((ROOT/'cat_de_roman_esti/fixtures/kg_sample.json').read_bytes()).hexdigest(),'existing_reviewed_captions_preserved':80,'proposed_count':13,'captions':rows,'notes':['All existing80entries remain exact.','Every caption describes a pair and its exact current Edge snapshot; no graph or route change.','Proposed display text must receive independent factual and quality acceptance before installation.']}
+p=OUT/'candidates.json';p.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
+print('Frozen13caption proposals',hashlib.sha256(p.read_bytes()).hexdigest())

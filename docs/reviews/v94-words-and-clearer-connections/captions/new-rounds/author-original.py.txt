@@ -1,0 +1,30 @@
+from pathlib import Path
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.lant_relations import REVIEWED_CAPTIONS,caption
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+s=get_service();p=ROOT/'cat_de_roman_esti/wordgames/lant_relations.py'
+soup='https://www.barbatlacratita.ro/2010/10/ciorba-de-perisoare.html';sarmale='https://jamilacuisine.ro/sarmale-pas-cu-pas-reteta-video/';park='https://www.bucegipark.ro/ro/';plan='https://www.bucegipark.ro/media/public_docs/management_plan/10_Oct_2024/Planul_de_Management_al_Parcului_Natural_Bucegi__-_v.2011.pdf'
+specs=[
+('n_v11gas_ciorba_perisoare','n_v3gas_orez','ciorbă și ingredient opțional',[soup,'https://jamilacuisine.ro/ciorba-de-perisoare-reteta-video/'],'Rice is a documented common optional ingredient of the meatballs. The caption avoids making it compulsory in every version.'),
+('n_v11gas_ciorba_perisoare','n_v4gas_carne','ciorbă și carnea din perișoare',[soup],'The named soup uses meatballs made from minced meat; the noun phrase identifies that part of the preparation.'),
+('n_v3gas_orez','n_gas_sarmale','sarmale și orezul din umplutură',[sarmale],'The cited stuffed-cabbage preparation uses rice in the filling.'),
+('n_v4gas_carne','n_gas_sarmale','sarmale și carnea din umplutură',[sarmale],'The canonical displayed meat-filled dish uses minced meat. The caption does not claim every vegetarian variant contains meat.'),
+('n_v17geo_sfinxul_bucegi','n_bucegi','formațiune stâncoasă și munți',[park,plan],'The Sphinx is a natural rock formation in the Bucegi massif, not a built monument.'),
+('n_bucegi','n_v20geo_crucea_caraiman','monument și munții unde se află',[park,plan],'The Heroes Cross is a built memorial on Caraiman in the Bucegi Mountains.'),
+('n_v17geo_sfinxul_bucegi','n_v17geo_babele','formațiuni stâncoase vecine',[park,plan],'Babele and the Sphinx are neighboring natural rock formations on the plateau.'),
+('n_v17geo_babele','n_v20geo_crucea_caraiman','repere de pe platoul Bucegi',[park,plan],'The park plan places these visitor landmarks together along the plateau approach. This does not locate the monument on the Babele rocks or quantify walking distance.'),
+]
+rows=[]
+for a,b,label,urls,note in specs:
+ pair=tuple(sorted((a,b)));edge=s.link(a,b);reverse=s.link(b,a)
+ assert pair not in REVIEWED_CAPTIONS and edge and len(label)<=34
+ assert record_snapshot(edge)==record_snapshot(reverse)
+ rows.append({'pair':list(pair),'labels':[s.label(x) for x in pair],'caption':label,'old_display':caption(s,a,b),'edge_snapshot':record_snapshot(edge),'edge_sha256':digest(record_snapshot(edge)),'rationale':note,'sources':urls})
+routes=json.loads((OUT.parents[1]/'pack/lant-api-routes.json').read_bytes())['ladders'];wanted={tuple(sorted((a,b))) for l in routes for r in l['routes'] for a,b in zip(r['ids'],r['ids'][1:])}
+assert {tuple(r['pair']) for r in rows}==wanted and len(rows)==8
+(OUT/'baseline_lant_relations.py.txt').write_bytes(p.read_bytes())
+value={'kind':'lant-caption-author-candidates-v1','status':'unapproved','baseline':'c971846feac31e73c3a2a2593c66265f29603e58','runtime_source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'kg_sha256':hashlib.sha256((ROOT/'cat_de_roman_esti/fixtures/kg_sample.json').read_bytes()).hexdigest(),'existing_reviewed_captions_preserved':93,'proposed_count':8,'captions':rows,'notes':['Separate batch covers all8edges on the four new shortest routes.','Preserves the original80captions plus13already approved in V94.','Independent factual/quality approval required before installation.']}
+p=OUT/'candidates.json';p.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');print(hashlib.sha256(p.read_bytes()).hexdigest())

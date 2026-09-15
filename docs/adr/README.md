@@ -64,6 +64,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 
 | 0150 | [Expand vocabulary and clarify game controls](0150-expand-vocabulary-and-clarify-game-controls.md) | accepted |
 | 0151 | [Expand game vocabulary and search earned recipes](0151-expand-game-vocabulary-and-search-earned-recipes.md) | accepted |
+| 0152 | [Expand reviewed rounds and explain Lanț connections](0152-expand-reviewed-rounds-and-explain-lant-connections.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

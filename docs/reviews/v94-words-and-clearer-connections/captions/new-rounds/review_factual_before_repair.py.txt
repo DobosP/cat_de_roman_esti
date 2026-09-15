@@ -1,0 +1,57 @@
+"""Independent factual judgments by the Alchimie author, who did not author captions."""
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+D = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+from cat_de_roman_esti.wordgames.recipe_extensions import digest, record_snapshot
+from cat_de_roman_esti.wordgames.service import get_service
+
+path = D / 'candidates.json'
+sha = hashlib.sha256(path.read_bytes()).hexdigest()
+assert sha == 'c0cedbdf79ea4e528299ad4930a2e6f8f756731a881c17a3fc4eb1b3dd23d2dd'
+data = json.loads(path.read_bytes())
+service = get_service()
+park = 'https://www.bucegipark.ro/ro/'
+plan = 'https://www.bucegipark.ro/media/public_docs/management_plan/10_Oct_2024/Planul_de_Management_al_Parcului_Natural_Bucegi__-_v.2011.pdf'
+judgments = [
+    ('The first recipe includes rice in its meatballs; Jamila explicitly omits rice while allowing it as a variant. Optional is therefore accurate and avoids an unjustified universal ingredient claim.',
+     ['https://www.barbatlacratita.ro/2010/10/ciorba-de-perisoare.html', 'https://jamilacuisine.ro/ciorba-de-perisoare-reteta-video/']),
+    ('The recipe describes shaping minced meat into the soup meatballs. The caption correctly identifies meat within that preparation, rather than treating cooked fried chiftele as an input.',
+     ['https://www.barbatlacratita.ro/2010/10/ciorba-de-perisoare.html']),
+    ('Jamila lists rice and describes its preparation in the cabbage-roll filling. The caption accurately names a conventional filling component.',
+     ['https://jamilacuisine.ro/sarmale-pas-cu-pas-reteta-video/']),
+    ('The cited cabbage-roll recipe uses minced beef in its filling. The existing dish identity and caption denote this conventional preparation without asserting that all fasting variants contain meat.',
+     ['https://jamilacuisine.ro/sarmale-pas-cu-pas-reteta-video/']),
+    ('The park identifies Sfinx as an eroded natural rock formation in Bucegi. Its 2011 management plan places the Sfinx-Babele area within the massif. The caption does not imply human construction.', [park, plan]),
+    ('The administration lists the Heroes Cross as a historical attraction of Bucegi, and the management plan identifies the Caraiman monument approach. Monument and its mountains accurately expresses the geographic edge.', [park, plan]),
+    ('The park groups Sfinx and Babele as natural rock formations; the management plan names the Sfinx-Babele area and its sandstone plateau. Neighboring formations is an accurate local association.', [park, plan]),
+    ('The park plan, printed page 102 (PDF index 105), discusses Babele, Sfinx and the path toward Crucea Caraiman together in its heavily visited alpine landscape. The caption refers to recognizable landmarks of this plateau setting; it does not put the cross on the Babele rocks or assert an immediate distance.', [park, plan]),
+]
+assert len(judgments) == len(data['captions']) == 8
+items = []
+for row, (rationale, sources) in zip(data['captions'], judgments, strict=True):
+    a, b = row['pair']
+    edge = service.link(a, b)
+    reverse = service.link(b, a)
+    assert record_snapshot(edge) == row['edge_snapshot'] == record_snapshot(reverse)
+    assert digest(record_snapshot(edge)) == row['edge_sha256']
+    items.append({'pair': row['pair'], 'caption': row['caption'], 'edge_sha256': row['edge_sha256'],
+                  'verdict': 'accept', 'rationale': rationale, 'sources': sources,
+                  'both_directions_checked': True})
+result = {
+    'kind': 'lant-caption-review-v1', 'role': 'factual',
+    'reviewer': 'codex-v94-caption-factual-by-world-author', 'reviewed_on': '2026-09-15',
+    'candidate_sha256': sha, 'kg_sha256': data['kg_sha256'],
+    'runtime_source_sha256': data['runtime_source_sha256'], 'items': items,
+    'verdict': 'accept', 'coverage': {'proposed': 8, 'reviewed': 8, 'accepted': 8},
+    'notes': ['Reviewer did not author or install these captions.',
+              'Primary recipe pages, park administration and its 2011 management plan were independently retrieved.',
+              'PDF page numbering checked: printed page 102 is zero-index page 105.',
+              'No travel-duration, live access or itinerary safety assertion is present.'],
+}
+(D / 'factual-review.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+print(hashlib.sha256((D / 'factual-review.json').read_bytes()).hexdigest())

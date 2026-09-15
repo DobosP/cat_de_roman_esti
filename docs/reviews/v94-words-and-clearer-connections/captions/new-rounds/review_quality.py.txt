@@ -1,0 +1,36 @@
+"""Independent semantic and exact-edge review of the eight V94 route captions."""
+from pathlib import Path
+import hashlib
+import json
+import sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+from cat_de_roman_esti.wordgames.lant_relations import REVIEWED_CAPTIONS,caption
+p=OUT/'candidates.json';raw=json.loads(p.read_text());expected=sys.argv[1]
+assert hashlib.sha256(p.read_bytes()).hexdigest()==expected
+assert raw['captions'][-1]['caption']=='stânci și monument din Bucegi'
+s=get_service();paths=json.loads((OUT.parents[1]/'pack/lant-api-routes.json').read_text())
+edges={tuple(sorted(pair)) for g in paths['ladders'] for r in g['routes'] for pair in zip(r['ids'],r['ids'][1:])}
+proposed={tuple(r['pair']) for r in raw['captions']};assert proposed==edges-set(REVIEWED_CAPTIONS);assert len(REVIEWED_CAPTIONS)==93
+reasons=[
+ 'Rice is a recognizable shared ingredient and optional explicitly avoids claiming that every meatball-soup recipe must use it. The relation remains clear in reverse traversal.',
+ 'The phrase says where the meat belongs inside the dish: its meatballs. This explains the soup-to-ingredient jump instead of merely repeating that two concepts are connected.',
+ 'Naming rice as filling tells the player the actual culinary role linking these concepts. It is an ordinary recipe association and remains orientation-independent.',
+ 'The filling phrase identifies the canonical meat-filled preparation represented by this edge, without claiming that vegetarian variants cannot exist. The displayed relation is useful in either direction.',
+ 'Natural rock formation distinguishes the Sphinx from an artificially carved statue or the nearby built cross. Mountain context explains its link to Bucegi without reversing location.',
+ 'Built monument and mountain location are explicit. The noun phrase distinguishes the cross from the natural rock formations in the same route.',
+ 'Neighboring rock formations is a recognizable and specific relation. It explains why Babele and the Sphinx connect without turning one into the creator, container or synonym of the other.',
+ 'The repaired phrase identifies both the natural rocks and the built monument and their shared Bucegi setting. It avoids the unsupported precision of locating the cross literally on the plateau; the monument owner places it on the secondary Caraiman peak. This is clearer and accurate at the granularity of the existing association.'
+]
+items=[]
+for r,reason in zip(raw['captions'],reasons,strict=True):
+ a,b=r['pair'];assert len(r['caption'])<=34
+ for left,right in ((a,b),(b,a)):
+  e=s.link(left,right);assert e is not None and digest(record_snapshot(e))==r['edge_sha256'];assert caption(s,left,right)==r['old_display']
+ items.append({'pair':r['pair'],'caption':r['caption'],'verdict':'accept','rationale':reason,'sources':r['sources'],'edge_sha256':r['edge_sha256'],'both_directions_checked':True,'character_count':len(r['caption'])})
+review={'kind':'lant-caption-review-v1','role':'quality','reviewer':'codex-v94-independent-quality-scout','candidate_sha256':expected,'kg_sha256':raw['kg_sha256'],'runtime_source_sha256':raw['runtime_source_sha256'],'items':items,'checks':{'exact_source_edges':8,'bidirectional_snapshots':16,'all_old_captions_present':93,'route_coverage':'All eight uncaptained edges across the four V94 shortest routes.','maximum_caption_length':max(len(r['caption']) for r in raw['captions']),'resolved_findings':[{'pair':raw['captions'][-1]['pair'],'initial_finding_file':'initial-quality-finding.json','resolution':'Replaced the plateau-specific caption with rocks and monument sharing the Bucegi setting.'}],'unresolved_findings':[]},'limits':'Bounded semantic and exact-edge review. It does not establish human enjoyment or physical-device readability.'}
+(OUT/'quality-review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n')
+print('Accepted all eight repaired captions:',expected)

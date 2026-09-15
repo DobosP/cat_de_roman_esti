@@ -1,0 +1,72 @@
+"""Independently compare generated inverse outputs with the frozen Git baseline."""
+import hashlib
+import json
+from pathlib import Path
+import re
+import subprocess
+import sys
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+D = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+from tests.content_history import before_v94_artifact, before_v94_lant_ledger
+
+BASE = 'c971846feac31e73c3a2a2593c66265f29603e58'
+
+
+def sha(blob):
+    return hashlib.sha256(blob).hexdigest()
+
+
+def git_blob(relative):
+    return subprocess.check_output(['git', 'show', BASE + ':' + relative], cwd=ROOT)
+
+
+files = {}
+for name in ('kg_sample.json', 'games_pack.json', 'board_rankings_v37.json',
+             'derived_catalog_v38.json', 'cat_mobile_app_pack_contract.json'):
+    relative = ('tests/fixtures/' if name.startswith('cat_mobile')
+                else 'cat_de_roman_esti/fixtures/') + name
+    live = (ROOT / relative).read_bytes()
+    restored = before_v94_artifact(json.loads(live), name)
+    old = (json.dumps(restored, ensure_ascii=False, indent=2 if name == 'kg_sample.json' else 1) + '\n').encode()
+    assert old == git_blob(relative)
+    files[name] = {'current_sha256': sha(live), 'restored_sha256': sha(old),
+                   'restored_exact_git_baseline': True}
+relative = 'cat_de_roman_esti/fixtures/lant_rejection_tombstones.json'
+ledger = (ROOT / relative).read_bytes()
+restored = before_v94_lant_ledger(json.loads(ledger))
+old_ledger = (json.dumps(restored, ensure_ascii=False, indent=1) + '\n').encode()
+assert old_ledger == git_blob(relative)
+historical_pins = {}
+for path in sorted((ROOT / 'tests').glob('test_v*.py')):
+    if 'v49_lant_ledger_bytes' not in path.read_text() and path.name not in {
+        'test_v93_content_history.py', 'test_v93_world_quality.py',
+    }:
+        continue
+    relative = str(path.relative_to(ROOT))
+    old_source = git_blob(relative).decode()
+    old_pins = set(re.findall(r'[a-f0-9]{64}', old_source))
+    new_pins = set(re.findall(r'[a-f0-9]{64}', path.read_text()))
+    assert old_pins <= new_pins, relative
+    historical_pins[relative] = {'original_hash_literals_preserved': len(old_pins),
+                                  'current_source_sha256': sha(path.read_bytes())}
+logs = {p.name: sha(p.read_bytes()) for p in (
+    D / 'history-tests-final.log', D / 'historical-ledger-tests.log',
+    D / 'rejected-reimport-test.log',
+)}
+report = {
+    'kind': 'v94-history-exact-binding-check-v1', 'baseline_commit': BASE,
+    'receipt_sha256': sha((ROOT / 'docs/reviews/v94-words-and-clearer-connections/artifact-delta.json').read_bytes()),
+    'files': files,
+    'ledger': {'current_sha256': sha(ledger), 'restored_sha256': sha(old_ledger),
+               'previous_entries': 104, 'current_entries': 105,
+               'new_rejection': 'lt_geografie_242', 'restored_exact_git_baseline': True},
+    'historical_test_pins': historical_pins, 'logs': logs,
+    'checks': {'focused_history_tests': 111, 'historical_ledger_tests': 21,
+               'rejected_reimport_test': 1, 'ruff': 'pass'},
+    'scope': 'Machine binding verification of root-generated receipts and exact historical Git bytes; not a semantic self-review.',
+}
+(D / 'binding-report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+print(json.dumps({'files': len(files), 'historical_test_files': len(historical_pins),
+                  'report_sha256': sha((D / 'binding-report.json').read_bytes())}))

@@ -1,0 +1,298 @@
+{
+  "baseline": "f18b874",
+  "bindings": {
+    "core_catalog_sha256": "46360ac6a77fff6cdab2f86500dcadc348243f71bab71eea01111e76bf80f2c4",
+    "core_payload_sha256": "b78f069479f99741bf5187db638eebbc476eccf2d914c4a48b072b895446dc29",
+    "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "pack_sha256": "573e921cbe54cb482535584a22e55183c4b7add9b0a9a92a1400f9dae4fd01d8",
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+  },
+  "boards": [
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "intrusul",
+      "id": "iq92_v94_sleep",
+      "payload": {
+        "group_label": "Obiecte destinate somnului",
+        "intruder": "n_v24_home_seating_scaun",
+        "members": [
+          "n_v24_home_bed_pat",
+          "n_v24_home_bed_saltea",
+          "n_v24_home_bed_perna"
+        ]
+      },
+      "rationale": "Patul, salteaua și perna alcătuiesc locul obișnuit pentru dormit. Scaunul este mobilier pentru șezut; faptul că cineva poate ațipi pe un scaun nu îi schimbă destinația obișnuită.",
+      "source_id": "aq92_v94_intrusul_sleep",
+      "sources": [
+        "https://dexonline.ro/definitie/pat",
+        "https://dexonline.ro/definitie/saltea",
+        "https://dexonline.ro/definitie/pern%C4%83",
+        "https://dexonline.ro/definitie/scaun"
+      ]
+    },
+    {
+      "category": "gastronomie",
+      "difficulty": "usor",
+      "game": "intrusul",
+      "id": "iq92_v94_milling",
+      "payload": {
+        "group_label": "Produse obținute prin măcinarea cerealelor",
+        "intruder": "n_v84_food_drojdie",
+        "members": [
+          "n_v24_food_pantry_faina",
+          "n_v84_food_malai",
+          "n_v84_food_gris"
+        ]
+      },
+      "rationale": "Făina, mălaiul și grișul sunt produse de măcinare a cerealelor. Drojdia este un agent biologic de fermentare, nu cereale măcinate. Toate cele patru sunt ingrediente familiare de bucătărie.",
+      "source_id": "aq92_v94_intrusul_milling",
+      "sources": [
+        "https://dexonline.ro/definitie/f%C4%83in%C4%83",
+        "https://dexonline.ro/definitie/m%C4%83lai",
+        "https://dexonline.ro/definitie/gri%C8%99",
+        "https://dexonline.ro/definitie/drojdie"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "intrusul",
+      "id": "iq92_v94_rooms",
+      "payload": {
+        "group_label": "Încăperi din interiorul unei locuințe",
+        "intruder": "n_v24_home_outdoor_curte",
+        "members": [
+          "n_v24_home_rooms_camera",
+          "n_v24_home_rooms_sufragerie",
+          "n_v24_home_rooms_dormitor"
+        ]
+      },
+      "rationale": "Camera, sufrageria și dormitorul denumesc încăperi interioare. Curtea este un teren exterior din jurul locuinței. Sufragerie poate desemna camera de zi sau de luat masa: ambele sensuri satisfac exact acest predicat; nu este nevoie de un sens ascuns.",
+      "source_id": "aq92_v94_intrusul_rooms",
+      "sources": [
+        "https://dexonline.ro/definitie/camer%C4%83",
+        "https://dexonline.ro/definitie/sufragerie",
+        "https://dexonline.ro/definitie/dormitor",
+        "https://dexonline.ro/definitie/curte"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "intrusul",
+      "id": "iq92_v94_writing",
+      "payload": {
+        "group_label": "Rechizite folosite pentru scris",
+        "intruder": "n_v24_school_assessment_examen",
+        "members": [
+          "n_v24_school_writing_caiet",
+          "n_v24_school_writing_creion",
+          "n_v24_school_writing_pix"
+        ]
+      },
+      "rationale": "Caietul, creionul și pixul sunt obiecte de papetărie folosite pentru scris. Examenul este o verificare a cunoștințelor, nu un obiect de papetărie, chiar dacă unele examene sunt scrise.",
+      "source_id": "aq92_v94_intrusul_writing",
+      "sources": [
+        "https://dexonline.ro/definitie/caiet",
+        "https://dexonline.ro/definitie/creion",
+        "https://dexonline.ro/definitie/pix",
+        "https://dexonline.ro/definitie/examen",
+        "https://dexonline.ro/definitie/rechizite"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "perechi",
+      "id": "pq92_v94_everyday_01",
+      "payload": {
+        "pairs": [
+          {
+            "group_label": "Sarcină școlară și suportul pe care se scrie",
+            "members": [
+              "n_v24_school_writing_caiet",
+              "n_v24_school_assessment_tema_acasa"
+            ]
+          },
+          {
+            "group_label": "Stare de epuizare și odihna care o alină",
+            "members": [
+              "n_v24_feeling_needs_oboseala",
+              "n_v24_action_routine_a_dormi"
+            ]
+          },
+          {
+            "group_label": "Piesă de fixare și unealta cu care poate fi scoasă",
+            "members": [
+              "n_v32_workshop_fastener_cui",
+              "n_v32_workshop_hand_cleste"
+            ]
+          },
+          {
+            "group_label": "Produs alimentar și semințele din care se extrage",
+            "members": [
+              "n_v24_food_pantry_ulei",
+              "n_v85_food_seminte_floarea_soarelui"
+            ]
+          }
+        ]
+      },
+      "rationale": "Patru relații cotidiene distincte: Caiet — Temă pentru acasă (sarcină școlară și suportul pe care se scrie); Oboseală — A dormi (stare de epuizare și odihna care o alină); Cui — Clește (piesă de fixare și unealta cu care poate fi scoasă); Ulei — Semințe de floarea-soarelui (produs alimentar și semințele din care se extrage). Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.",
+      "source_id": "aq92_v94_perechi_everyday_01",
+      "sources": [
+        "https://dexonline.ro/definitie/caiet",
+        "https://dexonline.ro/definitie/oboseal%C4%83",
+        "https://dexonline.ro/definitie/cle%C8%99te",
+        "https://dexonline.ro/definitie/ulei",
+        "https://dexonline.ro/definitie/floarea-soarelui"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "perechi",
+      "id": "pq92_v94_everyday_02",
+      "payload": {
+        "pairs": [
+          {
+            "group_label": "Partea feței și arcul de peri de la baza ei",
+            "members": [
+              "n_v32_body_face_frunte",
+              "n_v32_body_face_spranceana"
+            ]
+          },
+          {
+            "group_label": "Vas de gătit și aparatul pe care se încălzește",
+            "members": [
+              "n_v88_kitchen_cratita",
+              "n_v24_home_appliances_aragaz"
+            ]
+          },
+          {
+            "group_label": "Animal erbivor și o hrană a lui",
+            "members": [
+              "n_v30_animal_farm_capra",
+              "n_v24_nature_plant_parts_iarba"
+            ]
+          },
+          {
+            "group_label": "Unitate a anului și instrumentul care o arată",
+            "members": [
+              "n_v28_time_calendar_luna_calendaristica",
+              "n_v29_time_calendar"
+            ]
+          }
+        ]
+      },
+      "rationale": "Patru relații cotidiene distincte: Frunte — Sprânceană (partea feței și arcul de peri de la baza ei); Cratiță — Aragaz (vas de gătit și aparatul pe care se încălzește); Capră — Iarbă (animal erbivor și o hrană a lui); Lună calendaristică — Calendar (unitate a anului și instrumentul care o arată). Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.",
+      "source_id": "aq92_v94_perechi_everyday_02",
+      "sources": [
+        "https://dexonline.ro/definitie/frunte",
+        "https://dexonline.ro/definitie/crati%C8%9B%C4%83",
+        "https://dexonline.ro/definitie/capr%C4%83",
+        "https://dexonline.ro/definitie/calendar",
+        "https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83",
+        "https://dexonline.ro/definitie/iarb%C4%83"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "perechi",
+      "id": "pq92_v94_everyday_03",
+      "payload": {
+        "pairs": [
+          {
+            "group_label": "Acțiuni cu sensuri opuse",
+            "members": [
+              "n_v24_action_home_a_deschide",
+              "n_v24_action_home_a_inchide"
+            ]
+          },
+          {
+            "group_label": "Umplutură și prăjitura care o conține",
+            "members": [
+              "n_v86_food_crema_vanilie",
+              "n_v87_food_cremsnit"
+            ]
+          },
+          {
+            "group_label": "Obiect de veselă și obiectul cu care se spală",
+            "members": [
+              "n_v30_kitchen_table_farfurie",
+              "n_v31_cleaning_dishes_burete_vase"
+            ]
+          },
+          {
+            "group_label": "Parte a corpului și unul dintre segmentele ei terminale",
+            "members": [
+              "n_v24_body_limbs_mana",
+              "n_v24_body_limbs_deget"
+            ]
+          }
+        ]
+      },
+      "rationale": "Patru relații cotidiene distincte: A deschide — A închide (acțiuni cu sensuri opuse); Cremă de vanilie — Cremșnit (umplutură și prăjitura care o conține); Farfurie — Burete de vase (obiect de veselă și obiectul cu care se spală); Mână — Deget (parte a corpului și unul dintre segmentele ei terminale). Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.",
+      "source_id": "aq92_v94_perechi_everyday_03",
+      "sources": [
+        "https://dexonline.ro/definitie/%C3%AEnchide",
+        "https://dexonline.ro/definitie/crem%C8%99nit",
+        "https://dexonline.ro/definitie/burete",
+        "https://dexonline.ro/definitie/deget",
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-cremsnit-crema-fiarta",
+        "https://dexonline.ro/definitie/farfurie"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "perechi",
+      "id": "pq92_v94_everyday_04",
+      "payload": {
+        "pairs": [
+          {
+            "group_label": "Organ al articulării și acțiunea de a rosti cuvinte",
+            "members": [
+              "n_v24_body_face_gura",
+              "n_v24_action_senses_a_vorbi"
+            ]
+          },
+          {
+            "group_label": "Ingredient dulce și forma lui fin măcinată",
+            "members": [
+              "n_v24_food_pantry_zahar",
+              "n_v86_food_zahar_pudra"
+            ]
+          },
+          {
+            "group_label": "Materia primă și lichidul separat la închegarea ei",
+            "members": [
+              "n_v4gas_lapte",
+              "n_v84_food_zer"
+            ]
+          },
+          {
+            "group_label": "Obiecte folosite la udarea plantelor",
+            "members": [
+              "n_v32_garden_water_furtun",
+              "n_v32_garden_water_stropitoare"
+            ]
+          }
+        ]
+      },
+      "rationale": "Patru relații cotidiene distincte: Gură — A vorbi (organ al articulării și acțiunea de a rosti cuvinte); Zahăr — Zahăr pudră (ingredient dulce și forma lui fin măcinată); Lapte — Zer (materia primă și lichidul separat la închegarea ei); Furtun de grădină — Stropitoare (obiecte folosite la udarea plantelor). Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.",
+      "source_id": "aq92_v94_perechi_everyday_04",
+      "sources": [
+        "https://dexonline.ro/definitie/vorbi",
+        "https://dexonline.ro/definitie/zah%C4%83r",
+        "https://dexonline.ro/definitie/zer",
+        "https://dexonline.ro/definitie/stropitoare",
+        "https://dexonline.ro/definitie/gur%C4%83",
+        "https://dexonline.ro/definitie/pudr%C4%83",
+        "https://dexonline.ro/definitie/furtun"
+      ]
+    }
+  ],
+  "kind": "quick-entry-candidates-v1"
+}

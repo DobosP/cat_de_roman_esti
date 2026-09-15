@@ -1,0 +1,115 @@
+"""Independent raw quality probes; in-memory sessions only, no content installation."""
+from pathlib import Path
+from copy import deepcopy
+import hashlib
+import json
+import os
+import sys
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+D = Path(__file__).resolve().parent
+sys.path[:0] = [str(ROOT), str(ROOT / 'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import conexiuni, contexto, lant
+import critique_pack as C
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def post(url, data):
+    response = Client().post(url, data, content_type='application/json')
+    assert response.status_code == 200, response.content
+    value = response.json()
+    assert value.get('ok'), value
+    return value
+
+
+pack, svc, strong, regions = C.load_all(C.PACKAGE_PACK, C.PACKAGE_KG)
+prospective = deepcopy(pack)
+records = []
+bindings = {}
+for path in sorted((D / 'candidates').glob('*/candidates.json')):
+    category = path.parent.name
+    bindings[category] = sha(path)
+    bundle = json.loads(path.read_bytes())
+    for game in ('conexiuni', 'contexto', 'lant'):
+        for i, raw in enumerate(bundle[game]):
+            row = deepcopy(raw)
+            row.update(id=f'independent_v94_{category}_{game}_{i}', category=category,
+                       status='pending', source='ai')
+            if game == 'conexiuni':
+                row['groups'] = {f'g{i}': g['tiles'] for i, g in enumerate(raw['groups'])}
+                row['group_labels'] = {f'g{i}': g['label'] for i, g in enumerate(raw['groups'])}
+                row['order'] = [n for g in row['groups'].values() for n in g]
+            elif game == 'lant':
+                row['optimal'] = svc.distance(row['start'], row['target'])
+            prospective[game].append(row)
+            records.append((game, row))
+requested = {r['id'] for _, r in records}
+findings, _, selected = C.run(prospective, svc, strong, regions,
+                             ['conexiuni', 'contexto', 'lant'], {'pending'}, requested)
+assert not [f for row in findings.values() for f in row['findings'] if f['level'] == 'FAIL']
+dossiers = {r['id']: C.build_dossier(r, game, svc, strong, lint, regions)
+            for game, r, lint in selected}
+probes = []
+for game, row in records:
+    if game == 'conexiuni':
+        session = conexiuni.ConexiuniSession(groups=row['groups'], order=row['order'],
+                                            group_labels=row['group_labels'])
+        sid = conexiuni.store.create(session)
+        opening = Client().get(f'/api/wordgames/conexiuni/games/{sid}').json()
+        assert opening['solved'] == []
+        for ids in reversed(list(row['groups'].values())):
+            state = post(f'/api/wordgames/conexiuni/games/{sid}/guess', {'ids': ids})
+        assert state['won'] and state['lives'] == 4
+        probes.append({'id': row['id'], 'all_four_groups_won': True,
+                       'raw_unfair': dossiers[row['id']]['fairness']['engine_unfair_raw']})
+    elif game == 'contexto':
+        target = row['target']
+        session = contexto._build_session(target, row['difficulty'], None)
+        sid = contexto.store.create(session)
+        guesses = (['masă', 'mâncare', 'ciorbă', 'supă', 'carne', 'orez', 'leuștean', 'chiftele']
+                   if 'ciorba' in target else ['școală', 'elev', 'profesor', 'lecție', 'caiet', 'creion'])
+        steps = []
+        for label in [*guesses, svc.label(target)]:
+            state = post(f'/api/wordgames/contexto/games/{sid}/guess', {'text': label})
+            steps.append({'text': label, 'feedback': state['guess'], 'won': state['won']})
+        assert steps[-1]['won']
+        probes.append({'id': row['id'], 'incoming': C.contexto_incoming_ids(svc, target), 'steps': steps})
+    else:
+        start, target = row['start'], row['target']
+        optimal, remaining = svc.distance(start, target), svc.distances_to(target)
+        paths = []
+        def walk(prefix):
+            if prefix[-1] == target:
+                paths.append(prefix)
+                return
+            for node in sorted(svc.neighbor_ids(prefix[-1])):
+                if remaining.get(node) == optimal - len(prefix):
+                    walk([*prefix, node])
+        walk([start])
+        replays = []
+        for path in paths:
+            session = lant.LantSession(start=start, target=target, optimal=optimal,
+                                       difficulty=row['difficulty'], chain=[start])
+            sid = lant.store.create(session)
+            steps = []
+            for node in path[1:]:
+                state = post(f'/api/wordgames/lant/games/{sid}/move', {'text': svc.label(node)})
+                steps.append({'label': svc.label(node), 'relation': state['relation'], 'won': state['won']})
+            assert session.won
+            replays.append({'labels': [svc.label(n) for n in path], 'steps': steps})
+        assert len(paths) == 2
+        probes.append({'id': row['id'], 'routes': replays})
+result = {'kind': 'v94-independent-raw-pack-quality-probe-v1', 'candidate_files': bindings,
+          'kg_sha256': sha(C.PACKAGE_KG), 'rubric_sha256': sha(ROOT / 'docs/CRITIQUE_RUBRIC.md'),
+          'caption_runtime_sha256': sha(ROOT / 'cat_de_roman_esti/wordgames/lant_relations.py'),
+          'findings': findings, 'dossiers': dossiers, 'probes': probes,
+          'scope': 'Raw fixed-content preview, no allocated IDs or public natural selection.'}
+(D / 'independent-quality-probe.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+print(json.dumps({'probe_sha256': sha(D / 'independent-quality-probe.json'), 'probes': len(probes)}, ensure_ascii=False))

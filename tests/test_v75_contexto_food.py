@@ -11,7 +11,12 @@ from pathlib import Path
 import pytest
 
 from cat_de_roman_esti.wordgames.packs import get_pack
-from tests.content_history import before_v80_derived, before_v80_pack, before_v80_rankings
+from tests.content_history import (
+    before_v80_derived,
+    before_v80_pack,
+    before_v80_rankings,
+    v49_lant_ledger_bytes,
+)
 from tests.content_scenarios import contexto_seed
 from tests.current_content import CURRENT_CONTENT
 
@@ -106,9 +111,10 @@ def test_derived_boards_kg_and_mobile_payloads_are_preserved() -> None:
         FIXTURES / "lant_rejection_tombstones.json":
             "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
     }
-    assert all(
-        hashlib.sha256(path.read_bytes()).hexdigest() == sha for path, sha in expected.items()
-    )
+    for path, sha in expected.items():
+        blob = (v49_lant_ledger_bytes(path) if path.name == "lant_rejection_tombstones.json"
+                else path.read_bytes())
+        assert hashlib.sha256(blob).hexdigest() == sha
 
 
 def test_five_candidate_dispositions_and_two_independent_promotions_are_bound() -> None:

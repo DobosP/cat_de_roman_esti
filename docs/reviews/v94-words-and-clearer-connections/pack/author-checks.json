@@ -1,0 +1,38 @@
+{
+  "status": "unapproved",
+  "baseline_commit": "f18b874",
+  "baseline_note": "V93 implementation f18b874; c971846 landing correction changes documents only.",
+  "baseline_artifacts_unchanged": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "573e921cbe54cb482535584a22e55183c4b7add9b0a9a92a1400f9dae4fd01d8",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109"
+  },
+  "author_source_sha256": "81a43fc41e268bdb3b34ba676b8c53cfd3139a6c475752492d7502d4ea6d44ad",
+  "counts": {
+    "conexiuni": 1,
+    "contexto": 2,
+    "lant": 2
+  },
+  "candidate_files": {
+    "candidates/gastronomie/candidates.json": "154bdd982b2124f59fc2e9ced197ff1b300bbf5aa95951bc7604e57401f0c295",
+    "candidates/geografie/candidates.json": "b9472d1a8b6902fd8d2b70493e70830bdbb98347336e3aef34f1860b73901840",
+    "candidates/viata_de_roman/candidates.json": "15199e394fa0892619a96aabb091ecfe3806741ba490d4a029efcbdfaf4b20e1"
+  },
+  "strict_preview_failures": 0,
+  "findings": {
+    "preview_v94_geografie_lant_1": {
+      "game": "lant",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Sfinxul din Bucegi salience 0.50 < 0.60 (usor floor)"
+        }
+      ]
+    }
+  },
+  "contexto_targets_solved": 2,
+  "lant_routes_solved": 4,
+  "preview_ids_are_not_allocated_pack_ids": true
+}

@@ -1,0 +1,800 @@
+{
+  "kind": "v94-independent-gui-probes-v1",
+  "reviewer": "codex-v94-independent-quality-scout",
+  "origin": "http://127.0.0.1:8153",
+  "passed": true,
+  "source_sha256": {
+    "frontend/src/screens/Lant.tsx": "06fd9517f48317ca92a510e423ca73e95521459db4301c7571b6cfb2a2641211",
+    "frontend/src/styles/lant.css": "3a513d553be807b1da2821f9d0c22a55ad510c7fc317b2a7a24ab42af4219ed7",
+    "frontend/src/styles/arcade.css": "26da2fb65b0ac0edcdd87204ff329a2dcd572edf240f19c2e0717b7cf235a93b",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "2b3f7acf89b17c555eac17477c3c17f704028a3ad73bd899de6398166b270fcd",
+    "cat_de_roman_esti/wordgames/lant.py": "1818ed57384d6f9b20359a21dfa8fdee585cc9a7712453f4699bddeecd13ff84",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "cat_de_roman_esti/fixtures/games_pack.json": "7d28b9df887fe561150bc582f390df0dde4f8c292e5550055bbe84e9e8d90990"
+  },
+  "served_asset_sha256": [
+    {
+      "file": "assets/index-J_99uYN0.js",
+      "sha256": "d923dff6e8573b854855b800a49f5df8f3cf97e1d364dd8bc4ad978bc464f6fd"
+    },
+    {
+      "file": "assets/index-D9HNWgEs.css",
+      "sha256": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2"
+    },
+    {
+      "file": "assets/Lant-DM8TuwD9.js",
+      "sha256": "e6ba3c419bf0b93ed3483a3e0660e318c8b7d2b6f2f4b15b9fdd94b03f5ace10"
+    },
+    {
+      "file": "assets/Lant-CNseb-Ny.css",
+      "sha256": "d349dabdc4e35cb8b69f58ac5e08b5dddd431217c074c218390fd131ec8e218f"
+    }
+  ],
+  "results": [
+    {
+      "id": "lt_geografie_239",
+      "query": {
+        "seed": 20,
+        "category": "geografie",
+        "difficulty": "usor"
+      },
+      "viewport": 320,
+      "root_font": "32px",
+      "keyboard_first_hop": true,
+      "readonly_focus_did_not_mutate_save_or_send_post": true,
+      "active_reload_preserved_path": true,
+      "undo_checked": false,
+      "terminal_path": [
+        {
+          "id": "n_cluj_napoca",
+          "label": "Cluj-Napoca"
+        },
+        {
+          "id": "n_v17geo_salina_turda",
+          "label": "Salina Turda",
+          "relation": "oraș și salină din apropiere"
+        },
+        {
+          "id": "n_v20geo_cheile_turzii",
+          "label": "Cheile Turzii",
+          "relation": "obiective din zona Turda"
+        },
+        {
+          "id": "n_muntii_apuseni",
+          "label": "Munții Apuseni",
+          "relation": "chei și munții din care fac parte"
+        }
+      ],
+      "geometry_after_first_hop": {
+        "viewport": 320,
+        "documentWidth": 320,
+        "fontSize": "32px",
+        "trail": {
+          "left": 29,
+          "right": 291,
+          "width": 262,
+          "scrollWidth": 262,
+          "height": 171,
+          "scrollHeight": 171
+        },
+        "children": [
+          {
+            "text": "Cluj-Napoca",
+            "left": 29,
+            "right": 222,
+            "top": 1170.484375,
+            "bottom": 1217.484375,
+            "width": 193,
+            "scrollWidth": 193,
+            "height": 47,
+            "scrollHeight": 47,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Cluj-Napoca",
+            "left": 29,
+            "right": 222,
+            "top": 1170.484375,
+            "bottom": 1217.484375,
+            "width": 191,
+            "scrollWidth": 191,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― oraș și salină din apropiere →Salina Turda",
+            "left": 29,
+            "right": 291,
+            "top": 1223.484375,
+            "bottom": 1335.484375,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 112,
+            "scrollHeight": 112,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― oraș și salină din apropiere →",
+            "left": 29,
+            "right": 291,
+            "top": 1223.484375,
+            "bottom": 1282.484375,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 59,
+            "scrollHeight": 59,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Salina Turda",
+            "left": 29,
+            "right": 218,
+            "top": 1288.484375,
+            "bottom": 1335.484375,
+            "width": 187,
+            "scrollWidth": 187,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          }
+        ]
+      },
+      "final_geometry": {
+        "viewport": 320,
+        "documentWidth": 320,
+        "fontSize": "32px",
+        "trail": {
+          "left": 29,
+          "right": 291,
+          "width": 262,
+          "scrollWidth": 262,
+          "height": 407,
+          "scrollHeight": 407
+        },
+        "children": [
+          {
+            "text": "Cluj-Napoca",
+            "left": 29,
+            "right": 222,
+            "top": 1200.5,
+            "bottom": 1247.5,
+            "width": 193,
+            "scrollWidth": 193,
+            "height": 47,
+            "scrollHeight": 47,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Cluj-Napoca",
+            "left": 29,
+            "right": 222,
+            "top": 1200.5,
+            "bottom": 1247.5,
+            "width": 191,
+            "scrollWidth": 191,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― oraș și salină din apropiere →Salina Turda",
+            "left": 29,
+            "right": 291,
+            "top": 1253.5,
+            "bottom": 1365.5,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 112,
+            "scrollHeight": 112,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― oraș și salină din apropiere →",
+            "left": 29,
+            "right": 291,
+            "top": 1253.5,
+            "bottom": 1312.5,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 59,
+            "scrollHeight": 59,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Salina Turda",
+            "left": 29,
+            "right": 219,
+            "top": 1318.5,
+            "bottom": 1365.5,
+            "width": 188,
+            "scrollWidth": 188,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― obiective din zona Turda →Cheile Turzii",
+            "left": 29,
+            "right": 291,
+            "top": 1371.5,
+            "bottom": 1483.5,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 112,
+            "scrollHeight": 112,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― obiective din zona Turda →",
+            "left": 29,
+            "right": 291,
+            "top": 1371.5,
+            "bottom": 1430.5,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 59,
+            "scrollHeight": 59,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Cheile Turzii",
+            "left": 29,
+            "right": 218,
+            "top": 1436.5,
+            "bottom": 1483.5,
+            "width": 187,
+            "scrollWidth": 187,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― chei și munții din care fac parte →Munții Apuseni",
+            "left": 29,
+            "right": 291,
+            "top": 1489.5,
+            "bottom": 1601.5,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 112,
+            "scrollHeight": 112,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― chei și munții din care fac parte →",
+            "left": 29,
+            "right": 291,
+            "top": 1489.5,
+            "bottom": 1548.5,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 59,
+            "scrollHeight": 59,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Munții Apuseni",
+            "left": 29,
+            "right": 253,
+            "top": 1554.5,
+            "bottom": 1601.5,
+            "width": 222,
+            "scrollWidth": 222,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          }
+        ]
+      },
+      "keyboard_focus": {
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      "post_requests": [
+        {
+          "path": "/api/wordgames/lant/games",
+          "body": null
+        },
+        {
+          "path": "/api/wordgames/lant/games/6db73115-2dc0-44dd-9d2b-f57b8450117a/move",
+          "body": "{\"text\":\"Salina Turda\"}"
+        },
+        {
+          "path": "/api/wordgames/lant/games/6db73115-2dc0-44dd-9d2b-f57b8450117a/move",
+          "body": "{\"text\":\"Cheile Turzii\"}"
+        },
+        {
+          "path": "/api/wordgames/lant/games/6db73115-2dc0-44dd-9d2b-f57b8450117a/move",
+          "body": "{\"text\":\"Munții Apuseni\"}"
+        }
+      ],
+      "screenshot": "final-independent-lt_geografie_239.png",
+      "screenshot_sha256": "07c3ef383a2ac1c11ac8d89fdff47afed512b4874cc93c3a818c19115d119ec5",
+      "page_errors": []
+    },
+    {
+      "id": "lt_literatura_240",
+      "query": {
+        "seed": 9,
+        "category": "literatura",
+        "difficulty": "usor"
+      },
+      "viewport": 320,
+      "root_font": "32px",
+      "keyboard_first_hop": true,
+      "readonly_focus_did_not_mutate_save_or_send_post": true,
+      "active_reload_preserved_path": true,
+      "undo_checked": true,
+      "terminal_path": [
+        {
+          "id": "n_mihai_eminescu",
+          "label": "Mihai Eminescu"
+        },
+        {
+          "id": "n_academia_romana",
+          "label": "Academia Română",
+          "relation": "academie și membru postum"
+        },
+        {
+          "id": "n_titu_maiorescu",
+          "label": "Titu Maiorescu",
+          "relation": "academie și membru fondator"
+        }
+      ],
+      "geometry_after_first_hop": {
+        "viewport": 320,
+        "documentWidth": 320,
+        "fontSize": "32px",
+        "trail": {
+          "left": 29,
+          "right": 291,
+          "width": 262,
+          "scrollWidth": 262,
+          "height": 204,
+          "scrollHeight": 204
+        },
+        "children": [
+          {
+            "text": "Mihai Eminescu",
+            "left": 29,
+            "right": 262,
+            "top": 1211.625,
+            "bottom": 1258.625,
+            "width": 233,
+            "scrollWidth": 233,
+            "height": 47,
+            "scrollHeight": 47,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Mihai Eminescu",
+            "left": 29,
+            "right": 262,
+            "top": 1211.625,
+            "bottom": 1258.625,
+            "width": 231,
+            "scrollWidth": 231,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― academie și membru postum →Academia Română",
+            "left": 29,
+            "right": 291,
+            "top": 1264.625,
+            "bottom": 1409.625,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 145,
+            "scrollHeight": 145,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― academie și membru postum →",
+            "left": 29,
+            "right": 291,
+            "top": 1264.625,
+            "bottom": 1323.625,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 59,
+            "scrollHeight": 59,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Academia Română",
+            "left": 29,
+            "right": 291,
+            "top": 1329.625,
+            "bottom": 1409.625,
+            "width": 260,
+            "scrollWidth": 260,
+            "height": 78,
+            "scrollHeight": 78,
+            "whiteSpace": "normal"
+          }
+        ]
+      },
+      "final_geometry": {
+        "viewport": 320,
+        "documentWidth": 320,
+        "fontSize": "32px",
+        "trail": {
+          "left": 29,
+          "right": 291,
+          "width": 262,
+          "scrollWidth": 262,
+          "height": 322,
+          "scrollHeight": 322
+        },
+        "children": [
+          {
+            "text": "Mihai Eminescu",
+            "left": 29,
+            "right": 262,
+            "top": 1178.640625,
+            "bottom": 1225.640625,
+            "width": 233,
+            "scrollWidth": 233,
+            "height": 47,
+            "scrollHeight": 47,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Mihai Eminescu",
+            "left": 29,
+            "right": 262,
+            "top": 1178.640625,
+            "bottom": 1225.640625,
+            "width": 231,
+            "scrollWidth": 231,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― academie și membru postum →Academia Română",
+            "left": 29,
+            "right": 291,
+            "top": 1231.640625,
+            "bottom": 1376.640625,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 145,
+            "scrollHeight": 145,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― academie și membru postum →",
+            "left": 29,
+            "right": 291,
+            "top": 1231.640625,
+            "bottom": 1290.640625,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 59,
+            "scrollHeight": 59,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Academia Română",
+            "left": 29,
+            "right": 291,
+            "top": 1296.640625,
+            "bottom": 1376.640625,
+            "width": 260,
+            "scrollWidth": 260,
+            "height": 78,
+            "scrollHeight": 78,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― academie și membru fondator →Titu Maiorescu",
+            "left": 29,
+            "right": 291,
+            "top": 1382.640625,
+            "bottom": 1494.640625,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 112,
+            "scrollHeight": 112,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― academie și membru fondator →",
+            "left": 29,
+            "right": 291,
+            "top": 1382.640625,
+            "bottom": 1441.640625,
+            "width": 262,
+            "scrollWidth": 262,
+            "height": 59,
+            "scrollHeight": 59,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Titu Maiorescu",
+            "left": 29,
+            "right": 252,
+            "top": 1447.640625,
+            "bottom": 1494.640625,
+            "width": 221,
+            "scrollWidth": 221,
+            "height": 45,
+            "scrollHeight": 45,
+            "whiteSpace": "normal"
+          }
+        ]
+      },
+      "keyboard_focus": {
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      "post_requests": [
+        {
+          "path": "/api/wordgames/lant/games",
+          "body": null
+        },
+        {
+          "path": "/api/wordgames/lant/games/7ba46b48-ed0e-4222-923d-816355b1f8fc/move",
+          "body": "{\"text\":\"Academia Română\"}"
+        },
+        {
+          "path": "/api/wordgames/lant/games/7ba46b48-ed0e-4222-923d-816355b1f8fc/undo",
+          "body": null
+        },
+        {
+          "path": "/api/wordgames/lant/games/7ba46b48-ed0e-4222-923d-816355b1f8fc/move",
+          "body": "{\"text\":\"Academia Română\"}"
+        },
+        {
+          "path": "/api/wordgames/lant/games/7ba46b48-ed0e-4222-923d-816355b1f8fc/move",
+          "body": "{\"text\":\"Titu Maiorescu\"}"
+        }
+      ],
+      "screenshot": "final-independent-lt_literatura_240.png",
+      "screenshot_sha256": "28f67ecd898716c1df6ffcb33e9581314a06f080f94014457bf25b6c7f2818f9",
+      "page_errors": []
+    },
+    {
+      "id": "lt_gastronomie_241",
+      "query": {
+        "seed": 5,
+        "category": "gastronomie",
+        "difficulty": "usor"
+      },
+      "viewport": 1280,
+      "root_font": "16px",
+      "keyboard_first_hop": true,
+      "readonly_focus_did_not_mutate_save_or_send_post": true,
+      "active_reload_preserved_path": true,
+      "undo_checked": false,
+      "terminal_path": [
+        {
+          "id": "n_v11gas_ciorba_perisoare",
+          "label": "Ciorbă de perișoare"
+        },
+        {
+          "id": "n_v3gas_orez",
+          "label": "Orez",
+          "relation": "ciorbă și ingredient opțional"
+        },
+        {
+          "id": "n_gas_sarmale",
+          "label": "Sarmale",
+          "relation": "sarmale și orezul din umplutură"
+        }
+      ],
+      "geometry_after_first_hop": {
+        "viewport": 1280,
+        "documentWidth": 1280,
+        "fontSize": "16px",
+        "trail": {
+          "left": 275,
+          "right": 1005,
+          "width": 730,
+          "scrollWidth": 730,
+          "height": 30,
+          "scrollHeight": 30
+        },
+        "children": [
+          {
+            "text": "Ciorbă de perișoare",
+            "left": 275,
+            "right": 427,
+            "top": 647.25,
+            "bottom": 677.25,
+            "width": 152,
+            "scrollWidth": 152,
+            "height": 30,
+            "scrollHeight": 30,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Ciorbă de perișoare",
+            "left": 275,
+            "right": 427,
+            "top": 647.25,
+            "bottom": 677.25,
+            "width": 150,
+            "scrollWidth": 150,
+            "height": 28,
+            "scrollHeight": 28,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― ciorbă și ingredient opțional →Orez",
+            "left": 433,
+            "right": 676.390625,
+            "top": 647.25,
+            "bottom": 677.25,
+            "width": 243,
+            "scrollWidth": 243,
+            "height": 30,
+            "scrollHeight": 30,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― ciorbă și ingredient opțional →",
+            "left": 433,
+            "right": 612.390625,
+            "top": 654.75,
+            "bottom": 669.75,
+            "width": 179,
+            "scrollWidth": 179,
+            "height": 15,
+            "scrollHeight": 15,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Orez",
+            "left": 618.390625,
+            "right": 676.390625,
+            "top": 647.25,
+            "bottom": 677.25,
+            "width": 56,
+            "scrollWidth": 56,
+            "height": 28,
+            "scrollHeight": 28,
+            "whiteSpace": "normal"
+          }
+        ]
+      },
+      "final_geometry": {
+        "viewport": 1280,
+        "documentWidth": 1280,
+        "fontSize": "16px",
+        "trail": {
+          "left": 275,
+          "right": 1005,
+          "width": 730,
+          "scrollWidth": 730,
+          "height": 30,
+          "scrollHeight": 30
+        },
+        "children": [
+          {
+            "text": "Ciorbă de perișoare",
+            "left": 275,
+            "right": 427,
+            "top": 927.84375,
+            "bottom": 957.84375,
+            "width": 152,
+            "scrollWidth": 152,
+            "height": 30,
+            "scrollHeight": 30,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Ciorbă de perișoare",
+            "left": 275,
+            "right": 427,
+            "top": 927.84375,
+            "bottom": 957.84375,
+            "width": 150,
+            "scrollWidth": 150,
+            "height": 28,
+            "scrollHeight": 28,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― ciorbă și ingredient opțional →Orez",
+            "left": 433,
+            "right": 675.390625,
+            "top": 927.84375,
+            "bottom": 957.84375,
+            "width": 242,
+            "scrollWidth": 242,
+            "height": 30,
+            "scrollHeight": 30,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― ciorbă și ingredient opțional →",
+            "left": 433,
+            "right": 612.390625,
+            "top": 935.34375,
+            "bottom": 950.34375,
+            "width": 179,
+            "scrollWidth": 179,
+            "height": 15,
+            "scrollHeight": 15,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Orez",
+            "left": 618.390625,
+            "right": 675.390625,
+            "top": 927.84375,
+            "bottom": 957.84375,
+            "width": 55,
+            "scrollWidth": 55,
+            "height": 28,
+            "scrollHeight": 28,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― sarmale și orezul din umplutură →Sarmale",
+            "left": 681.390625,
+            "right": 965.78125,
+            "top": 927.84375,
+            "bottom": 957.84375,
+            "width": 284,
+            "scrollWidth": 284,
+            "height": 30,
+            "scrollHeight": 30,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "― sarmale și orezul din umplutură →",
+            "left": 681.390625,
+            "right": 878.78125,
+            "top": 935.34375,
+            "bottom": 950.34375,
+            "width": 197,
+            "scrollWidth": 197,
+            "height": 15,
+            "scrollHeight": 15,
+            "whiteSpace": "normal"
+          },
+          {
+            "text": "Sarmale",
+            "left": 884.78125,
+            "right": 965.78125,
+            "top": 927.84375,
+            "bottom": 957.84375,
+            "width": 79,
+            "scrollWidth": 79,
+            "height": 28,
+            "scrollHeight": 28,
+            "whiteSpace": "normal"
+          }
+        ]
+      },
+      "keyboard_focus": {
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      "post_requests": [
+        {
+          "path": "/api/wordgames/lant/games",
+          "body": null
+        },
+        {
+          "path": "/api/wordgames/lant/games/2f7ca4a1-1bc2-49f6-b3fb-24357c8dfe10/move",
+          "body": "{\"text\":\"Orez\"}"
+        },
+        {
+          "path": "/api/wordgames/lant/games/2f7ca4a1-1bc2-49f6-b3fb-24357c8dfe10/move",
+          "body": "{\"text\":\"Sarmale\"}"
+        }
+      ],
+      "screenshot": "final-independent-lt_gastronomie_241.png",
+      "screenshot_sha256": "0bd398e51db0ac4c513b4b6937213f536d830c080fa880b7903480a623533c87",
+      "page_errors": []
+    }
+  ],
+  "script_sha256": "20515c51bddca684e67ebe4ebbb5bc4d305b33c5d251fe853ca132e946842170"
+}

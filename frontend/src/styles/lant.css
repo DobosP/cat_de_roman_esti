@@ -59,6 +59,25 @@
   line-height: 1.5;
 }
 
+.lant-screen .breadcrumb-trail {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
+.lant-screen .lant-trail-step {
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.lant-trail-relation,
+.lant-trail-step .chip {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 480px) {
   .lant-route {
     padding: 12px;

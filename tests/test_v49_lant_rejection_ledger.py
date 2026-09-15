@@ -15,6 +15,7 @@ from cat_de_roman_esti.wordgames.service import (
     DEFAULT_MAX_SESSIONS,
     DEFAULT_SESSION_TTL_SECONDS,
 )
+from tests.content_history import v49_lant_ledger_bytes
 from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -88,9 +89,10 @@ def test_v49_real_ledger_exactly_binds_the_104_v45_rejections() -> None:
     kept = {
         item_id for item_id, verdict in artifact["verdicts"].items() if verdict == "keep"
     }
-    data = _json(_LEDGER)
+    data = json.loads(v49_lant_ledger_bytes(_LEDGER))
     loaded = {
         row["id"]: row for row in critique_pack.load_lant_rejection_tombstones()
+        if row["id"] in data["items"]
     }
     runtime_ids = {row["id"] for row in _json(_PACKAGE_PACK)["lant"]}
 
@@ -117,7 +119,8 @@ def test_v49_real_ledger_exactly_binds_the_104_v45_rejections() -> None:
 
 
 def test_v49_real_ledger_pins_the_exact_v45_seed_provenance() -> None:
-    data = _json(_LEDGER)
+    ledger_blob = v49_lant_ledger_bytes(_LEDGER)
+    data = json.loads(ledger_blob)
     rejected_ids = sorted(data["items"])
     id_blob = ("\n".join(rejected_ids) + "\n").encode()
 
@@ -134,10 +137,11 @@ def test_v49_real_ledger_pins_the_exact_v45_seed_provenance() -> None:
         "initial_seed_pack_commit": _V45_PRE_APPLY_COMMIT,
     }
     assert _sha256(_V45_VERDICTS) == _V45_GATE_SHA256
-    assert _sha256(_LEDGER) == _V49_LEDGER_SHA256
+    assert hashlib.sha256(ledger_blob).hexdigest() == _V49_LEDGER_SHA256
     assert hashlib.sha256(id_blob).hexdigest() == _V45_REJECT_ID_SET_SHA256
     assert critique_pack.validate_lant_rejection_tombstones(data) == (
-        critique_pack.load_lant_rejection_tombstones(_LEDGER)
+        [row for row in critique_pack.load_lant_rejection_tombstones(_LEDGER)
+         if row["id"] in data["items"]]
     )
 
 
@@ -435,8 +439,9 @@ def test_v49_verified_candidate_preflight_aborts_before_rejected_pair_import(
 
 
 def test_v49_append_helper_binds_a_new_reject_without_rewriting_seed_meta() -> None:
-    original = _LEDGER.read_bytes()
-    original_meta = _json(_LEDGER)["meta"]
+    original = v49_lant_ledger_bytes(_LEDGER)
+    original_data = json.loads(original)
+    original_meta = original_data["meta"]
     record = {
         "id": "lt_test_rejected_pair_220",
         "category": "test",
@@ -468,7 +473,7 @@ def test_v49_append_helper_binds_a_new_reject_without_rewriting_seed_meta() -> N
         **pair,
     }
     assert {row["id"] for row in critique_pack.validate_lant_rejection_tombstones(data)} == (
-        {*_json(_LEDGER)["items"], record["id"]}
+        {*original_data["items"], record["id"]}
     )
 
 

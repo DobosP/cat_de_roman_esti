@@ -1,0 +1,50 @@
+"""Bind independent quality acceptance to the exact live proposal and replay."""
+import hashlib,json,sys
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import build_alchimie_discovery_world as B
+import audit_alchimie_discovery_world as A
+from cat_de_roman_esti.wordgames.discovery_world import validate_world
+from cat_de_roman_esti.wordgames import alchimie_explore as E
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+cp=OUT/'catalog.json';ap=OUT/'live-audit.json';c=json.loads(cp.read_bytes());a=json.loads(ap.read_bytes())
+assert sha(cp)=='8b174e16edf6ad279f9fa6cc0328776cba033be0b177c849ad77d81ec603da89'
+assert c==B.build_catalog(OUT/'candidate.json',OUT/'factual-review.json',OUT/'quality-review.json')
+assert c['candidate_sha256']=='d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188'
+assert sha(ap)=='68e4a92f3d947a52f7385057d63f7bfa4ce4cf934ec9888eea0a656c14b42eaa'
+assert a['catalog_sha256']==sha(cp) and a['candidate_sha256']==c['candidate_sha256']
+expected={p:sha(ROOT/p) for p in B.RUNTIME_SOURCES}
+assert len(a['runtime_sources'])==len(expected)
+assert {r['path']:r['sha256'] for r in a['runtime_sources']}==expected
+assert a==A.audit(cp)
+world=validate_world(c)
+# Independent traversal chooses reverse recipe order, with a late optional goal.
+session=E.ExploreSession(world=world,goal_id='ciocolata-dubai')
+session.owned.update(dict.fromkeys(world.catalog.world.starter_ids))
+order=[]
+while True:
+ pair=next((p for p,r in reversed(list(world.recipes.items())) if set(p)<=session.owned.keys() and r.result not in session.owned),None)
+ if pair is None:break
+ result,new,_=session.craft(pair);assert new and result==world.recipes[pair].result
+ order.append(world.recipes[pair].id)
+state=E.state_payload('quality-final-independent',session)
+assert state['complete'] and len(session.owned)==242 and len(session.discoveries)==138
+assert all(g['completed'] for g in state['goals'])
+for pair,r in world.recipes.items():
+ result,new,supplied=session.craft(pair)
+ assert result==r.result and not new and not supplied
+report={'kind':'alchimie-independent-final-quality-check-v1','reviewer':'codex-v94-independent-quality-scout',
+ 'catalog_sha256':sha(cp),'audit_sha256':sha(ap),'candidate_sha256':c['candidate_sha256'],
+ 'audit_reproduced_exactly':True,'current_runtime_bindings_checked':len(expected),
+ 'independent_reverse_recipe_order':order,'complete_concepts':len(session.owned),
+ 'complete_discoveries':len(session.discoveries),'all332_recipe_repeats_consistent':True,
+ 'checked_goal_replays':len(a['goal_replays']),'save_generations':len(a['compatible_save_replays']),
+ 'save_prefixes':[x['prefixes_preserved'] for x in a['compatible_save_replays']]}
+(OUT/'independent-final-quality-check.json').write_bytes(B.json_bytes(report))
+final={'kind':B.FINAL_REVIEW_KIND,'role':'quality','reviewer':'codex-v94-independent-quality-scout',
+ 'catalog_sha256':sha(cp),'audit_sha256':sha(ap),'verdict':'accept',
+ 'rationale':'The exact catalog reproduces the complete factual and independent quality reviews for 242 concepts and 332 recipes. All nine current runtime bindings match, and the supplied 33 free/optional-goal replay audit reproduces exactly. All saved prefixes survive across six older books, including all 131 discoveries from V93. An independent reverse-recipe-order traversal with the late ciocolata-dubai goal reaches all 242 words and 138 discoveries, completes every optional goal, and then repeats all 332 recipes consistently. Previously terminal compote and yogurt sauce gain uses; new pumpkin puree and fruit jelly become intermediates, with six of seven new results offering alternate entries. The actual proposal retains the reviewed cold-mash, cooked-pasta, baked-pumpkin and gently rewarmed-jelly explanations. No previous concept or recipe changed. This is bounded editorial and runtime acceptance; human enjoyment and physical-device acceptance remain separate.'}
+(OUT/'final-quality.json').write_bytes(B.json_bytes(final))
+print(json.dumps({k:v for k,v in report.items() if k!='independent_reverse_recipe_order'},indent=2))

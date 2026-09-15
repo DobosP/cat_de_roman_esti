@@ -1,0 +1,118 @@
+"""Independent V94 quick quality review; reviewer is not the quick content author."""
+from pathlib import Path
+import hashlib
+import itertools
+import json
+import sys
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+OUT = Path('/home/dobo/work/_temp/feat__v94-words-and-clearer-connections/quick')
+sys.path.insert(0, str(ROOT))
+from scripts import build_quick_content_v92 as B
+from cat_de_roman_esti.wordgames.derived_catalog import load_derived_catalog
+from cat_de_roman_esti.wordgames.service import get_service
+Q = B.Q
+sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+read = lambda p: json.loads(p.read_bytes())
+prior_dir = ROOT / 'docs/reviews/v93-words-and-game-quality/quick'
+prior = read(prior_dir / 'candidate.json')
+prior_review = read(prior_dir / 'quality-review.json')
+current = read(OUT / 'candidate.json')
+raw = read(OUT / 'raw-candidates.json')
+assert sha(OUT / 'candidate.json') == '17dcf3acbd054ef581c21c31ac0b72a25f01c1ad9178ef308932b9aed270fa41'
+assert sha(OUT / 'raw-candidates.json') == '2f66ffa349c51e0d8adddb79390b0b5246a68baf20f3a79b9bef5a9f2efd2bc5'
+old = {r['id']: r for r in prior['boards']}
+all_rows = {r['id']: r for r in current['boards']}
+assert len(old) == 65 and len(all_rows) == 73
+assert prior_review['candidate_sha256'] == sha(prior_dir / 'candidate.json')
+assert {r['id'] for r in prior_review['items']} == set(old)
+assert all(all_rows[ident] == row for ident, row in old.items())
+assert {k: current['bindings'][k] for k in ('kg_sha256','rubric_sha256','core_payload_sha256')} == {k: prior['bindings'][k] for k in ('kg_sha256','rubric_sha256','core_payload_sha256')}
+assert {r['id'] for r in raw['boards']} == set(all_rows) - set(old)
+assert all(all_rows[r['id']] == r for r in raw['boards'])
+assert current == B.candidate()
+assert Q.bindings(live=False) == {k: current['bindings'][k] for k in ('kg_sha256','rubric_sha256','core_payload_sha256')}
+assert all(raw['bindings'][k] == current['bindings'][k] for k in ('kg_sha256','rubric_sha256','core_payload_sha256'))
+svc, core = get_service(), load_derived_catalog()
+installed = read(Q.CATALOG_PATH)
+assert installed['authored'] == prior['boards']
+ratings = Q.rated_boards(current['boards'], core, svc)
+assert len(ratings) == 73
+assert [{k: v for k, v in r.items() if k not in ('standard_rank', 'starter_rank')} for r in ratings[:65]] == [{k: v for k, v in r.items() if k not in ('standard_rank', 'starter_rank')} for r in installed['boards']]
+base_rows = [{'game': b.game, 'payload': b.payload} for b in core._boards] + installed['authored']
+weights = Q.graph_strengths(svc)
+archives = []
+def collect(value, path):
+    if isinstance(value, dict):
+        if value.get('game') in ('intrusul', 'perechi') and isinstance(value.get('payload'), dict):
+            try:
+                Q.visible_ids(value)
+            except (KeyError, TypeError):
+                pass
+            else:
+                archives.append((path, value))
+        for part in value.values():
+            collect(part, path)
+    elif isinstance(value, list):
+        for part in value:
+            collect(part, path)
+for path in sorted((ROOT/'docs/reviews').rglob('*.json')):
+    try:
+        collect(read(path), str(path.relative_to(ROOT)))
+    except (ValueError, UnicodeError):
+        continue
+used_pairs = {frozenset(pair['members']) for row in base_rows if row['game']=='perechi' for pair in row['payload']['pairs']}
+checks, new_pairs = [], set()
+def count_matchings(vertices):
+    if not vertices:
+        return 1
+    first, *rest = vertices
+    return sum(count_matchings([x for x in rest if x != second]) for second in rest if weights.get(frozenset((first, second)), 0) >= .6)
+for row in raw['boards']:
+    game = row['game']
+    visible = Q.visible_ids(row)
+    same_game = [other for other in base_rows if other['game'] == game]
+    prior_visible = {n for other in same_game for n in Q.visible_ids(other)}
+    fresh = set(visible) - prior_visible
+    overlaps = [len(set(visible) & set(Q.visible_ids(other))) for other in same_game]
+    archive_same = [(path, other) for path, other in archives if other['game'] == game]
+    archive_matches = [(path, other.get('id')) for path, other in archive_same if len(set(visible)&set(Q.visible_ids(other))) >= (3 if game=='intrusul' else 4)]
+    assert not archive_matches
+    result = {'id': row['id'], 'new_visible_words': [svc.label(n) for n in sorted(fresh)], 'max_installed_overlap': max(overlaps), 'historical_reskins': archive_matches}
+    assert len(fresh) >= 3
+    if game == 'intrusul':
+        members, odd = row['payload']['members'], row['payload']['intruder']
+        assert not any(set(members) == set(other['payload']['members']) for _, other in archive_same)
+        result['inlier_edge_strengths'] = [weights.get(frozenset(pair), 0) for pair in itertools.combinations(members, 2)]
+        result['outlier_edge_strengths'] = [weights.get(frozenset((odd, n)), 0) for n in members]
+        assert min(result['inlier_edge_strengths']) >= .6 and max(result['outlier_edge_strengths']) == 0
+    else:
+        intended = {frozenset(pair['members']) for pair in row['payload']['pairs']}
+        assert not intended & (used_pairs | new_pairs)
+        assert not any(pair == frozenset(old_pair['members']) for pair in intended for _, other in archive_same for old_pair in other['payload']['pairs'])
+        new_pairs.update(intended)
+        result['intended_strengths'] = [weights.get(frozenset(pair), 0) for pair in sorted(tuple(sorted(pair)) for pair in intended)]
+        result['maximum_cross_strength'] = max(weights.get(frozenset(pair), 0) for pair in itertools.combinations(visible, 2) if frozenset(pair) not in intended)
+        result['native_perfect_matchings'] = count_matchings(visible)
+        assert result['native_perfect_matchings'] == 1 and result['maximum_cross_strength'] == 0
+    checks.append(result)
+reasons = {
+'iq92_v94_sleep': 'Accept easy. Pat, Saltea and Pernă are ordinary items specifically intended for sleeping; Scaun is intended for sitting. All are domestic objects, so the answer uses function rather than a change of topic. Falling asleep in a chair is possible, but it does not give that object the same normal design purpose. The specific sleep grouping is uniquely preferable to broad furniture or soft-item observations.',
+'iq92_v94_milling': 'Accept easy. Făină, Mălai and Griș are familiar products of milling cereals; Drojdie is a fermenting preparation. All four plausibly occur when cooking, and the shared milling process provides an exact distinction. Not every modern flour must be cereal flour, but the displayed everyday Făină identity is grain-derived flour. Yeast used with flour is an ingredient association, not a second milling classification.',
+'iq92_v94_rooms': 'Accept easy. Cameră, Sufragerie and Dormitor name interior rooms, while Curte is the outside yard. Cameră is the room sense naturally supplied by the other visible words; both ordinary dining-room and living-room senses of Sufragerie satisfy the same predicate. Therefore the prior Contexto sense problem does not affect this bounded grouping. A courtyard surrounded by buildings remains exterior rather than another furnished room.',
+'iq92_v94_writing': 'Accept easy. Caiet, Creion and Pix are concrete school stationery used for writing; Examen is an assessment. The phrase rechizite folosite pentru scris honestly includes a writing surface as well as implements, without pretending that the notebook writes by itself. Written examinations create a broad school connection but do not turn the event into an item of stationery. No alternate precise trio displaces the intended one.',
+'pq92_v94_everyday_01': 'Accept easy. Caiet–Temă pentru acasă, Oboseală–A dormi, Cui–Clește and Ulei–Semințe de floarea-soarelui have specific school, rest, tool and ingredient-source relationships. Study may cause fatigue, but pairing homework with fatigue strands notebook and sleeping. Lubricating pliers with oil would leave a nail and sunflower seeds without an equally specific partner. These are common words and four new pair identities, with no credible second complete partition.',
+'pq92_v94_everyday_02': 'Accept easy. Frunte–Sprânceană is a familiar positional body relation; Cratiță–Aragaz, Capră–Iarbă and Lună calendaristică–Calendar are immediate cooking, plant-food and time-display matches. The goat label explicitly says one food, avoiding an exclusive-diet claim. Forehead and eyebrow refer to distinct adjacent parts, not synonyms. Imagining a pot of herbs or seasonal grazing cannot complete a competing matching with the remaining body and calendar terms.',
+'pq92_v94_everyday_03': 'Accept easy. A deschide–A închide supplies a clear antonym anchor, followed by Cremă de vanilie–Cremșnit, Farfurie–Burete de vase and Mână–Deget. A hand can hold a sponge and a plate can hold cake, but those swaps strand a finger with cream or another equally weak leftover. The actual filling and cleaning-purpose pairs are more distinctive. The qualified dish-sponge label avoids the fungal meaning of burete; no hidden identity is needed to guess it.',
+'pq92_v94_everyday_04': 'Accept easy. Gură–A vorbi, Zahăr–Zahăr pudră, Lapte–Zer and Furtun de grădină–Stropitoare have clear bodily, ingredient-form, processing and watering relationships. The sugar and milk pairs are two distinct culinary relations, and swapping them would force sugar with whey merely because both can appear in food. The garden qualifier prevents an unrelated hose meaning. Zer is the least frequent word but remains ordinary Romanian food vocabulary, with milk as a direct strong anchor; it is not used as an obscure trick.'
+}
+assert set(reasons) == set(all_rows) - set(old)
+items = [{'id': r['id'], 'verdict': 'accept', 'rationale': reasons[r['id']], 'sources': []} for r in raw['boards']]
+identity = '/root/v94_pack_author'
+raw_review = {'kind': 'quick-content-review-v1', 'role': 'quality', 'reviewer': identity, 'candidate_sha256': sha(OUT/'raw-candidates.json'), 'items': items}
+(OUT/'raw-quality-review.json').write_bytes(Q.json_bytes(raw_review))
+evidence = {'kind': 'quick-independent-quality-mechanics-v1', 'reviewer': identity, 'checked_on': '2026-09-15', 'candidate_sha256': sha(OUT/'candidate.json'), 'raw_candidate_sha256': sha(OUT/'raw-candidates.json'), 'prior_candidate_sha256': sha(prior_dir/'candidate.json'), 'prior_quality_review_sha256': sha(prior_dir/'quality-review.json'), 'previous_65_records_exact': True, 'previous_65_quality_judgments_exact': True, 'previous_65_payloads_scores_exact_except_competition_ranks': True, 'kg_rubric_core_payload_bindings_exact': True, 'rated_boards_passed': len(ratings), 'archive_records_scanned': len(archives), 'new_intended_pairs': len(new_pairs), 'checks': checks, 'author_and_reviewer_distinct': True, 'scope': 'Independent semantic quality, inheritance, novelty and native mechanics. Final public API audit acceptance remains outstanding.'}
+(OUT/'quality-inheritance-and-mechanics.json').write_bytes(Q.json_bytes(evidence))
+review = {'kind': B.REVIEW_KIND, 'role': 'quality', 'reviewer': identity, 'candidate_sha256': sha(OUT/'candidate.json'), 'items': prior_review['items'] + items, 'baseline_evidence': {'candidate_path': str((prior_dir/'candidate.json').relative_to(ROOT)), 'candidate_sha256': sha(prior_dir/'candidate.json'), 'quality_review_path': str((prior_dir/'quality-review.json').relative_to(ROOT)), 'quality_review_sha256': sha(prior_dir/'quality-review.json'), 'inherited_rows': 65, 'new_rows': 8, 'raw_quality_review_sha256': sha(OUT/'raw-quality-review.json'), 'inheritance_and_mechanics_sha256': sha(OUT/'quality-inheritance-and-mechanics.json')}}
+(OUT/'quality-review.json').write_bytes(Q.json_bytes(review))
+B.read_review(OUT/'quality-review.json', 'quality', sha(OUT/'candidate.json'), set(all_rows))
+print(json.dumps({'accepted_new': 8, 'inherited_exact': 65, 'rated': len(ratings), 'novel_pairs': len(new_pairs), 'archive_rows': len(archives), 'quality_review_sha256': sha(OUT/'quality-review.json')}, indent=2))

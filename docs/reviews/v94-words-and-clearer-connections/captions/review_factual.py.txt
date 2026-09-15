@@ -1,0 +1,69 @@
+"""Independent factual judgments by the Alchimie author, who did not author captions."""
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+D = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+from cat_de_roman_esti.wordgames.recipe_extensions import digest, record_snapshot
+from cat_de_roman_esti.wordgames.service import get_service
+
+path = D / 'candidates.json'
+sha = hashlib.sha256(path.read_bytes()).hexdigest()
+assert sha == 'eb129bc088c20a498b0470484650177066fb382d84c845bf94067cb845ffce4f'
+data = json.loads(path.read_bytes())
+service = get_service()
+judgments = [
+    ('The Academy itself lists Mihai Eminescu among posthumously elected members, with election year 1948. The qualifier is factually necessary because his life ended in 1889.',
+     ['https://acad.ro/membri_ar/doc/MembriAlesiPostMortem.pdf']),
+    ('The Academy register identifies Titu Liviu Maiorescu as a founding member in 1867. The caption states the specific registered role without inferring sole founding responsibility.',
+     ['https://acad.ro/bdar/armembri.php']),
+    ('The Avram Iancu municipality identifies Vidra de Sus as his birthplace and describes his revolutionary organization. Vidra tourism locates this former municipality in the central Apuseni. Together these directly support a revolutionary and his native region; the statue page alone would not establish birthplace.',
+     ['https://primariaavramiancu.ro/info/prezentare/repere-istorice/', 'https://turismvidra.ro/date-generale/']),
+    ('The county council tourism account places its territory in Transylvania and discusses Cluj-Napoca as its principal city. The city development plan independently identifies Cluj-Napoca as a Transylvanian urban centre.',
+     ['https://cjcluj.ro/turism/', 'https://storage.primariaclujnapoca.ro/userfiles/files/Cluj-Napoca_PID_final.pdf']),
+    ('The salt mine operator gives both entrances in Turda. County tourism places Cluj-Napoca and Turda 35 km apart on a described visitor route. Nearby is supported; the caption correctly avoids saying that the mine lies within Cluj-Napoca.',
+     ['https://www.salinaturda.eu/en/access/', 'https://clujtourism.ro/ruta-bisericilor-fortificate/']),
+    ('The journal itself states in its June 1989 commemorative issue that much of Eminescu’s lifetime poetry appeared in its pages. This directly establishes a published poet, without assigning an editorial office.',
+     ['https://www.bibliotecadeva.ro/periodice/convorbiriliterare/1989/06/convorbiri_literare_1989_06_6.pdf']),
+    ('The journal’s historical essay describes Maiorescu withdrawing from its leadership in 1895 and his earlier circle of disciples. Literary guidance is a supported bounded description; it does not incorrectly assign the sole editor title.',
+     ['https://www.convorbiri-literare.ro/copy-of-selectia-3']),
+    ('The national literature museum explicitly names Eminescu among the writers who read work at Junimea meetings. Society and poet therefore describes the exact cultural association.',
+     ['https://www.muzeulliteraturiiiasi.ro/expozitii/amintiri-din-junimea/']),
+    ('The museum names Maiorescu among the founders and meeting hosts. The journal explicitly calls him Junimea’s mentor. The caption accurately names this role in the literary society.',
+     ['https://www.muzeulliteraturiiiasi.ro/expozitii/amintiri-din-junimea/', 'https://www.convorbiri-literare.ro/copy-of-selectia-3']),
+    ('The county account ties the 1784 uprising to the Romanian population of the Apuseni and its three leaders. The museum research paper explicitly describes the uprising as taking place in the Apuseni area. The caption names a setting and makes no exclusivity claim.',
+     ['https://clujtourism.ro/portfolio/grupul-statuar-horea-closca-si-crisan-cluj/', 'https://biblioteca-digitala.ro/reviste/sargetia/dl.asp?filename=18-19-Sargetia-Acta-Musei-Devensis-XVIII-XIX-1984-1985_045.pdf']),
+    ('The county tourism description explicitly places the gorge at the eastern edge of the Apuseni in the Trascău group. The geographical membership phrase is accurate in either direction.',
+     ['https://clujtourism.ro/portfolio/cheile-turzii/']),
+    ('County tourism dates the uprising led by Horea, Cloșca and Crișan to Transylvania in 1784. The region caption matches the historical setting without broadening it to all places.',
+     ['https://clujtourism.ro/portfolio/grupul-statuar-horea-closca-si-crisan-cluj/']),
+    ('The council groups the gorge and salt mine on its southern tourism route; the mine operator fixes its location in Turda and the county gorge entry places that attraction in the surrounding area. The caption states shared vicinity, not physical containment.',
+     ['https://cjcluj.ro/turism/', 'https://www.salinaturda.eu/en/access/', 'https://clujtourism.ro/portfolio/cheile-turzii/']),
+]
+assert len(judgments) == len(data['captions']) == 13
+items = []
+for row, (rationale, sources) in zip(data['captions'], judgments, strict=True):
+    a, b = row['pair']
+    edge = service.link(a, b)
+    reverse = service.link(b, a)
+    assert record_snapshot(edge) == row['edge_snapshot'] == record_snapshot(reverse)
+    assert digest(record_snapshot(edge)) == row['edge_sha256']
+    items.append({'pair': row['pair'], 'caption': row['caption'], 'edge_sha256': row['edge_sha256'],
+                  'verdict': 'accept', 'rationale': rationale, 'sources': sources,
+                  'both_directions_checked': True})
+result = {
+    'kind': 'lant-caption-review-v1', 'role': 'factual',
+    'reviewer': 'codex-v94-caption-factual-by-world-author', 'reviewed_on': '2026-09-15',
+    'candidate_sha256': sha, 'kg_sha256': data['kg_sha256'],
+    'runtime_source_sha256': data['runtime_source_sha256'], 'items': items,
+    'verdict': 'accept', 'coverage': {'proposed': 13, 'reviewed': 13, 'accepted': 13},
+    'notes': ['Reviewer did not author or install these captions.',
+              'Primary museum, journal, Academy and local-authority pages were independently retrieved.',
+              'Web open failures for several WordPress pages were resolved by direct HTTPS retrieval, not assumed to be factual failures.',
+              'Additional birthplace, distance and publication references strengthen the author’s source list.'],
+}
+(D / 'factual-review.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+print(hashlib.sha256((D / 'factual-review.json').read_bytes()).hexdigest())

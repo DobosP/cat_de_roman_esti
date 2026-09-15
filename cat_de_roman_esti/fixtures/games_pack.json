@@ -3,15 +3,15 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 241,
-   "contexto": 259,
-   "lant": 118,
+   "conexiuni": 242,
+   "contexto": 261,
+   "lant": 119,
    "alchimie": 83
   },
   "id_high_water": {
-   "conexiuni": 370,
-   "contexto": 371,
-   "lant": 240,
+   "conexiuni": 371,
+   "contexto": 373,
+   "lant": 242,
    "alchimie": 107
   }
  },
@@ -13752,6 +13752,63 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v31_body_lower_calcai",
+     "n_v31_body_lower_coapsa",
+     "n_v31_body_lower_gamba",
+     "n_v31_body_lower_genunchi"
+    ],
+    "g2": [
+     "n_v3lit_carte",
+     "n_v4lit_revista",
+     "n_v4lit_ziar",
+     "n_v23via_abecedar"
+    ],
+    "g3": [
+     "n_v4ist_secol",
+     "n_v4ist_an",
+     "n_v28_time_calendar_saptamana",
+     "n_v28_time_calendar_luna_calendaristica"
+    ],
+    "g4": [
+     "n_v24_home_textiles_covor",
+     "n_v86_food_albus",
+     "n_v86_food_frisca",
+     "n_v20gas_snitel"
+    ]
+   },
+   "group_labels": {
+    "g1": "Părți ale piciorului",
+    "g2": "Publicații tipărite pe pagini",
+    "g3": "Unități calendaristice",
+    "g4": "Se bat la preparare sau curățare"
+   },
+   "order": [
+    "n_v28_time_calendar_saptamana",
+    "n_v28_time_calendar_luna_calendaristica",
+    "n_v20gas_snitel",
+    "n_v86_food_albus",
+    "n_v24_home_textiles_covor",
+    "n_v4lit_ziar",
+    "n_v4ist_secol",
+    "n_v86_food_frisca",
+    "n_v31_body_lower_genunchi",
+    "n_v23via_abecedar",
+    "n_v31_body_lower_gamba",
+    "n_v31_body_lower_coapsa",
+    "n_v31_body_lower_calcai",
+    "n_v4lit_revista",
+    "n_v3lit_carte",
+    "n_v4ist_an"
+   ],
+   "id": "cx_viata_de_roman_371",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -14407,6 +14464,14 @@
    "difficulty": "usor",
    "target": "n_v20gas_cascaval",
    "id": "ct_gastronomie_371",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v11gas_ciorba_perisoare",
+   "id": "ct_gastronomie_372",
    "category": "gastronomie",
    "source": "ai",
    "status": "approved"
@@ -15826,6 +15891,14 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v24_school_assessment_tema_acasa",
+   "id": "ct_viata_de_roman_373",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "lant": [
@@ -16095,6 +16168,16 @@
    "target": "n_v87_food_cremsnit",
    "optimal": 2,
    "id": "lt_gastronomie_224",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_v11gas_ciorba_perisoare",
+   "target": "n_gas_sarmale",
+   "optimal": 2,
+   "id": "lt_gastronomie_241",
    "category": "gastronomie",
    "source": "ai",
    "status": "approved"

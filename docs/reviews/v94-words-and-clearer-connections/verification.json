@@ -1,0 +1,131 @@
+{
+  "kind": "v94-integration-v1",
+  "verified_on": "2026-09-15",
+  "baseline_commit": "c971846feac31e73c3a2a2593c66265f29603e58",
+  "branch": "feat/v94-words-and-clearer-connections",
+  "passed": true,
+  "new_rounds": {
+    "conexiuni": 1,
+    "contexto": 2,
+    "lant": 1,
+    "intrusul": 4,
+    "perechi": 4
+  },
+  "new_alchimie_words": 7,
+  "new_alchimie_recipes": 17,
+  "new_lant_captions": 21,
+  "new_shared_KG_nodes": 0,
+  "new_per_game_visible_words": {
+    "conexiuni": 12,
+    "intrusul": 16,
+    "perechi": 23
+  },
+  "checks": {
+    "backend_python312": {
+      "passed": 2133,
+      "log": "backend312.log",
+      "sha256": "02c6a8ce2a7078ff97c45e3616573e2cbeb936913caedb2d1686862dcab57b7d"
+    },
+    "backend_python314": {
+      "passed": 2133,
+      "log": "backend314.log",
+      "sha256": "e99c7eabb7733aec06e51d5124fc3b13a5a9433b2477febc93777537c1c3a3f7"
+    },
+    "accounts_python312": {
+      "passed": 53,
+      "log": "accounts312.log",
+      "sha256": "1f37d33739fd23f958aed25af6ae0ff2836d5b6b93beacd367a5a2bcbb533f9d"
+    },
+    "accounts_python314": {
+      "passed": 53,
+      "log": "accounts314.log",
+      "sha256": "f0908bd1a1681a8895a48f3de4822b76c38fd22315943842bd82be315d739518"
+    },
+    "browser_desktop_mobile": {
+      "passed": 510,
+      "log": "browser-tests.log",
+      "sha256": "1953df6be2eff41de747ca217fe3e951c8ecf9477ab17aa919e0ee5af6bbee3c"
+    },
+    "frontend_native": {
+      "passed": 212,
+      "log": "gui/frontend-tests.log",
+      "sha256": "71542f41845a1a056d3ac6dd22f59daa5fc2803fa49f66a3e7d035b35f9b5b28"
+    }
+  },
+  "other_green_gates": [
+    "fixture validator",
+    "pack validator",
+    "Ruff",
+    "frontend lint",
+    "frontend typecheck/build/bundle",
+    "documentation checker",
+    "staged whitespace check"
+  ],
+  "initial_gzip_kib": 119.23,
+  "initial_limit_kib": 120,
+  "gate_inputs": "gate-inputs.json",
+  "gate_inputs_sha256": "4697225116381d5ec9bc3ab40abd0edb91925bcc4b5ab3e682764348acbcb749",
+  "archive_manifest_sha256": "717f73c19ba71fa001f7b0b9e3d31b32ecf026e72e7b85f2174b51dd6f8cd72d",
+  "archived_files": 227,
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "7d28b9df887fe561150bc582f390df0dde4f8c292e5550055bbe84e9e8d90990",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "82f128edb3ccdd8208d41c43b7eb77df1e8d528d2aaea1fed5972712047255ed",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "4088402b80b78946e6f9cb7ee5379c9c3f32438801611008f266101625bb428d",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "6ca48cc452d33a150bad949ef09d5e624df349b5d19a2eeeb253a2d123cf4042",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "8b174e16edf6ad279f9fa6cc0328776cba033be0b177c849ad77d81ec603da89",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "2b3f7acf89b17c555eac17477c3c17f704028a3ad73bd899de6398166b270fcd"
+  },
+  "final_evidence_sha256": {
+    "alchimie/live-audit.json": "68e4a92f3d947a52f7385057d63f7bfa4ce4cf934ec9888eea0a656c14b42eaa",
+    "alchimie/final-factual.json": "92d7b0e3d2fafb509729c1c32d1dfbe6df1c18493c3a8432e63e4d9fb35470ea",
+    "alchimie/final-quality.json": "b6e81f9a4c2b50c771300044fd77e423dfa9f4074ac28ef57553e733f887b663",
+    "quick/live-audit.json": "5633e23cec409848724f97749be9942eed542df2dfc18b24ef31f2f23c95acd0",
+    "quick/final-factual.json": "f9cc0828d0804a82483c1494593f9cf530724bdca536906f05678b27b6ac1a36",
+    "quick/final-quality.json": "d3ddc3368ff9d877e5bf5d950d9a6c0c2d248552a65e3da1e976385181b252e6",
+    "pack/independent-final-api.json": "32fca2c55664ec668ad04adf1006165c128606f823aa370a302813bb31ec3f83",
+    "gui/final-independent-review.json": "29032ac1d382a8df42227a160ebe16724499532e4da2e8eee740e83f28f1f182",
+    "captions/installation.json": "8ad7781eebb3e411a4cac18885f4ecd80b57733fd9175217a060f547890f6e5b",
+    "captions/new-rounds/installation.json": "2af8dce675437a8f655785d015525074a37ea65dca1c8c9020ec6815a2cd11fb",
+    "artifact-delta.json": "803fd0860796c54159df54fd486c80c16d4e78f5133ee151162745c8569202a1",
+    "history/binding-report.json": "e25345cefe6775a6f1b438491f718be6fd8fed067faf6845ead87c3a3a431aa7"
+  },
+  "browser_expectation_amendment": "First full browser run:506passed,2oldPestofocus expectations failed after a new onward recipe made Pesto active. Test now verifies Pesto continuation and a separate deeper terminal Shawarma collection-focus fallback. Six focused cases and subsequent510-case full run pass. No application/data/approval input changed; the68prior gate inputs remain exact and one e2e testfile is added to the final69-file ledger.",
+  "rejected_new_round": "lt_geografie_242:public target description conflicts with monument owner; absent frompack and servedpool, reserved242ID and durable105thtombstone. Earlier approvals superseded by final analyst/verifier rejection.",
+  "preview": {
+    "port": 8150,
+    "branch": "feat/v94-words-and-clearer-connections",
+    "world_concepts": 242,
+    "world_recipes": 332,
+    "accounts_enabled": false,
+    "read_only_routes_passed": [
+      "/healthz",
+      "/api/health",
+      "/api/me",
+      "/api/manifest",
+      "/",
+      "/alchimie",
+      "/lant"
+    ],
+    "emitted_asset": "/assets/index-J_99uYN0.js",
+    "asset_sha256": "d923dff6e8573b854855b800a49f5df8f3cf97e1d364dd8bc4ad978bc464f6fd",
+    "asset_matches_worktree": true,
+    "comparison_main_port": 8160
+  },
+  "v93_landing": {
+    "main_commit": "c971846feac31e73c3a2a2593c66265f29603e58",
+    "pushed": true,
+    "ci_run": 35011658720,
+    "ci_conclusion": "success",
+    "verified_task_cleanup_complete": true
+  },
+  "limits": [
+    "No human enjoyment study",
+    "No physical-device acceptance",
+    "No V94 main merge,push or production deployment",
+    "No automatic next session"
+  ]
+}

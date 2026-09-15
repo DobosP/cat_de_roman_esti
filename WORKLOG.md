@@ -931,3 +931,43 @@ V93 landing audit checks 291 SHA bindings and all 168 archived scratch sources w
 mismatches or missing reviewed keepers. Final build log rounds initial gzip to119.23KiB,
 correcting the earlier119.22 figure in current STATUS/landing evidence; the original
 sealed integration receipt is retained. The120KiB budget remains green.
+
+## V94 words and clearer connections (2026-09-15)
+
+Valid until: the bound V94 inputs or verification change — then treat as history.
+
+The owner requested V93 landing and V94 continuation. V93 is published on main at
+c971846 with GitHub CI 35011658720 green and its verified task worktree/branch/scratch
+cleaned. V94 starts from that commit in its own task worktree.
+
+V94 accepts twelve new rounds/targets across five games plus seven Alchimie words and
+seventeen recipes. Conexiuni gains one household/wordplay board; Cald sau Rece adds
+Ciorbă de perișoare and Temă pentru acasă; Lanț adds a food bridge via rice or meat;
+Intrusul/Perechi gain four boards each. Alchimie reaches 242 concepts/332 recipes and 138
+craftable discoveries, with six prior saved books supported. All old content records
+and authored scores remain exact; shared KG vocabulary stays unchanged.
+
+Twenty-one independently reviewed captions explain relationships in both directions.
+Earned Lanț paths now wrap at 320px/200% text, preserving keyboard focus and actions.
+A separate reviewer verified the implementation author's scoped browser evidence.
+The proposed Sfinx→Crucea Caraiman level was rejected after actual GET/JSX verification
+showed its inaccurate target description was public. The rejected ID 242 is reserved
+and appended to the durable ledger; original 104 records and historical assertions stay
+exact. Correct geographic edge captions are independently accepted and do not approve
+that rejected round. Initial faulty assumptions and corrections remain in the archive.
+
+Both Python versions pass 2133 backend/53 account tests. The initial full browser run
+passed 506 and failed two old focus expectations: Pesto now has an onward recipe and
+correctly retains focus. The test now checks Pesto continuation and a separate deeper
+Lipie+Friptură→Șaorma terminal case to preserve collection-fallback coverage. All six
+focused keyboard cases pass; only test expectations changed, with no runtime/data edit.
+Final browser/full verification is recorded separately in STATUS and the integration receipt.
+
+Evidence: docs/reviews/v94-words-and-clearer-connections/ and ADR-0152. V94 publication,
+production deployment and another automatic version are outside this session.
+
+V94 final integration is green: 2133 backend/53 accounts on each Python version,
+510 browser and 212 native frontend checks, all validators/lint/build/docs/whitespace
+gates. Initial bundle 119.23/120 KiB. Exact 69 input files,227 archived evidence records,
+final 10 artifact pins and 12 final-evidence pins are bound by verification.json. The
+preview now serves V94 on 8150 and landed V93 on 8160. No V94 publication or deployment.

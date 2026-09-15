@@ -1,0 +1,286 @@
+{
+  "scope": "Author fixed-target API probes, not independent review or public selection.",
+  "targets": [
+    {
+      "target": "n_v11gas_ciorba_perisoare",
+      "label": "Ciorbă de perișoare",
+      "incoming": [
+        {
+          "id": "n_gas_leustean",
+          "label": "Leuștean"
+        },
+        {
+          "id": "n_v20gas_chiftele",
+          "label": "Chiftele"
+        },
+        {
+          "id": "n_v2gas_ciorba",
+          "label": "Ciorbă"
+        },
+        {
+          "id": "n_v3gas_orez",
+          "label": "Orez"
+        },
+        {
+          "id": "n_v4gas_carne",
+          "label": "Carne"
+        }
+      ],
+      "reachable": 2353,
+      "responsive": 1562,
+      "steps": [
+        {
+          "text": "mâncare",
+          "guess": {
+            "id": "n_v4gas_mancare",
+            "label": "Mâncare",
+            "distance": 2,
+            "rank": 7,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "ciorbă",
+          "guess": {
+            "id": "n_v2gas_ciorba",
+            "label": "Ciorbă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "supă",
+          "guess": {
+            "id": "n_v4gas_supa",
+            "label": "Supă",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "carne",
+          "guess": {
+            "id": "n_v4gas_carne",
+            "label": "Carne",
+            "distance": 1,
+            "rank": 5,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "orez",
+          "guess": {
+            "id": "n_v3gas_orez",
+            "label": "Orez",
+            "distance": 1,
+            "rank": 5,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "leuștean",
+          "guess": {
+            "id": "n_gas_leustean",
+            "label": "Leuștean",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "chiftele",
+          "guess": {
+            "id": "n_v20gas_chiftele",
+            "label": "Chiftele",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 7
+          },
+          "won": false
+        },
+        {
+          "text": "Ciorbă de perișoare",
+          "guess": {
+            "id": "n_v11gas_ciorba_perisoare",
+            "label": "Ciorbă de perișoare",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 8
+          },
+          "won": true
+        }
+      ]
+    },
+    {
+      "target": "n_v24_school_assessment_tema_acasa",
+      "label": "Temă pentru acasă",
+      "incoming": [
+        {
+          "id": "n_v23via_tabla_scolara",
+          "label": "Tablă școlară"
+        },
+        {
+          "id": "n_v24_action_routine_a_invata",
+          "label": "A învăța"
+        },
+        {
+          "id": "n_v24_school_classroom_lectie",
+          "label": "Lecție"
+        },
+        {
+          "id": "n_v24_school_writing_caiet",
+          "label": "Caiet"
+        },
+        {
+          "id": "n_v24_school_writing_creion",
+          "label": "Creion"
+        }
+      ],
+      "reachable": 2353,
+      "responsive": 1059,
+      "steps": [
+        {
+          "text": "școală",
+          "guess": {
+            "id": "n_v3soc_scoala",
+            "label": "Școală",
+            "distance": 2,
+            "rank": 7,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "elev",
+          "guess": {
+            "id": "n_v4soc_elev",
+            "label": "elev",
+            "distance": 3,
+            "rank": 28,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "profesor",
+          "guess": {
+            "id": "n_v4per_profesor",
+            "label": "profesor",
+            "distance": 3,
+            "rank": 30,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "caiet",
+          "guess": {
+            "id": "n_v24_school_writing_caiet",
+            "label": "Caiet",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "creion",
+          "guess": {
+            "id": "n_v24_school_writing_creion",
+            "label": "Creion",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "lecție",
+          "guess": {
+            "id": "n_v24_school_classroom_lectie",
+            "label": "Lecție",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "a învăța",
+          "guess": {
+            "id": "n_v24_action_routine_a_invata",
+            "label": "A învăța",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 7
+          },
+          "won": false
+        },
+        {
+          "text": "tablă școlară",
+          "guess": {
+            "id": "n_v23via_tabla_scolara",
+            "label": "Tablă școlară",
+            "distance": 1,
+            "rank": 6,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 8
+          },
+          "won": false
+        },
+        {
+          "text": "Temă pentru acasă",
+          "guess": {
+            "id": "n_v24_school_assessment_tema_acasa",
+            "label": "Temă pentru acasă",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 9
+          },
+          "won": true
+        }
+      ]
+    }
+  ]
+}

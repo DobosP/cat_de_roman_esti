@@ -1,0 +1,225 @@
+{
+  "kind": "v94-independent-final-pack-bff-audit-v1",
+  "reviewer": "v94-independent-pack-bff-quality-scout",
+  "method": "Seed discovery and winning/recovery replays both use real Django BFF requests with public category/difficulty/seed selection; private store read only confirms selected authored ID. No forced sessions, runtime edits, picker overrides or score changes.",
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "7d28b9df887fe561150bc582f390df0dde4f8c292e5550055bbe84e9e8d90990",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "82f128edb3ccdd8208d41c43b7eb77df1e8d528d2aaea1fed5972712047255ed",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "4088402b80b78946e6f9cb7ee5379c9c3f32438801611008f266101625bb428d",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/lant.py": "1818ed57384d6f9b20359a21dfa8fdee585cc9a7712453f4699bddeecd13ff84",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "cat_de_roman_esti/wordgames/_session_endpoint.py": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+    "cat_de_roman_esti/wordgames/_progress.py": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d"
+  },
+  "script_sha256": "e756cf325dc14562b71e491fa1698b41edd2a0769b455905c55b400dd53c546b",
+  "all_source_bindings_stable": true,
+  "seed_discovery_public_create_counts": {
+    "cx_viata_de_roman_371": 1,
+    "ct_gastronomie_372": 24,
+    "ct_viata_de_roman_373": 7,
+    "lt_gastronomie_241": 6
+  },
+  "separately_approved_captions_preserved": {
+    "baseline_entries_preserved": 80,
+    "approved_entries_present": 21,
+    "current_caption_count": 101,
+    "candidate_bindings": {
+      "captions/candidates.json": "eb129bc088c20a498b0470484650177066fb382d84c845bf94067cb845ffce4f",
+      "captions/new-rounds/candidates.json": "56d9dbb83e167484a1dacb639f9134b3af0d75e2479f1f3f8cc525fa5188a227"
+    }
+  },
+  "rejected_geography_absent_and_tombstoned": {
+    "record_sha256": "a23970fe742c5674a07bc3b5c3eda183f9f3e61355974d3a231daa31168af5b5",
+    "pair_sha256": "2b3185659e407d75fd4940708cf77460138141b9a67c952caf3e6ba6bf067401",
+    "review_binding": "sha256:31c5fd57edeb74888ae689ebcfc430d8dc4150d6bdb975dc7e9ec5719007adb3",
+    "source_gate_sha256": "bf30221d7d4f87c090d1f7c60c2d2e34dff2cabc3dde747e83c014c95f65047a",
+    "start": "n_v17geo_sfinxul_bucegi",
+    "target": "n_v20geo_crucea_caraiman"
+  },
+  "lant_id_high_water": 242,
+  "exact_new_approved_ids": [
+    "ct_gastronomie_372",
+    "ct_viata_de_roman_373",
+    "cx_viata_de_roman_371",
+    "lt_gastronomie_241"
+  ],
+  "all_four_approved_entries_naturally_served": true,
+  "all_unearned_private_keys_hidden": true,
+  "checks": [
+    {
+      "id": "cx_viata_de_roman_371",
+      "game": "conexiuni",
+      "public_create_url": "/api/wordgames/conexiuni/games?category=viata_de_roman&difficulty=normal&seed=0",
+      "seed": 0,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "wrong_attempts": 2,
+      "reordered_wrong_repeat_status": 409,
+      "repeat_wrong_free": true,
+      "unearned_group_labels_hidden": true,
+      "earned_clue_persists": true,
+      "unknown_tile_and_forged_solution_unchanged": true,
+      "terminal_get_and_rejected_replay_exact": true,
+      "final_score": 400,
+      "solved_groups": 4
+    },
+    {
+      "id": "ct_gastronomie_372",
+      "game": "contexto",
+      "public_create_url": "/api/wordgames/contexto/games?category=gastronomie&difficulty=usor&seed=23",
+      "seed": 23,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "target_hidden_until_win": true,
+      "unknown_blank_and_forged_target_unchanged": true,
+      "repeated_guess_free": true,
+      "earned_hint_persists": true,
+      "hint_session_is_separate_natural_selection": true,
+      "hint_preparation_guesses": [
+        "pian",
+        "munte",
+        "tren"
+      ],
+      "opener": "carne",
+      "opener_feedback": {
+        "id": "n_v4gas_carne",
+        "label": "Carne",
+        "distance": 1,
+        "rank": 5,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "final_attempts": 4,
+      "final_score": 700,
+      "terminal_get_and_rejected_replay_exact": true
+    },
+    {
+      "id": "ct_viata_de_roman_373",
+      "game": "contexto",
+      "public_create_url": "/api/wordgames/contexto/games?category=viata_de_roman&difficulty=usor&seed=6",
+      "seed": 6,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "target_hidden_until_win": true,
+      "unknown_blank_and_forged_target_unchanged": true,
+      "repeated_guess_free": true,
+      "earned_hint_persists": true,
+      "hint_session_is_separate_natural_selection": true,
+      "hint_preparation_guesses": [
+        "pian",
+        "munte",
+        "tren"
+      ],
+      "opener": "caiet",
+      "opener_feedback": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "final_attempts": 4,
+      "final_score": 700,
+      "terminal_get_and_rejected_replay_exact": true
+    },
+    {
+      "id": "lt_gastronomie_241",
+      "game": "lant",
+      "public_create_url": "/api/wordgames/lant/games?category=gastronomie&difficulty=usor&seed=5",
+      "seed": 5,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "public_target_allowed": true,
+      "unearned_full_route_hidden": true,
+      "unknown_forged_route_same_node_and_start_undo_unchanged": true,
+      "earned_hint_persists_without_get_escalation": true,
+      "moving_clears_hint": true,
+      "all_native_shortest_paths_completed": [
+        {
+          "labels": [
+            "Ciorbă de perișoare",
+            "Orez",
+            "Sarmale"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "captions": [
+            "ciorbă și ingredient opțional",
+            "sarmale și orezul din umplutură"
+          ],
+          "natural_seed": 5,
+          "final_get_replay_undo_stable": true
+        },
+        {
+          "labels": [
+            "Ciorbă de perișoare",
+            "Carne",
+            "Sarmale"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "captions": [
+            "ciorbă și carnea din perișoare",
+            "sarmale și carnea din umplutură"
+          ],
+          "natural_seed": 5,
+          "final_get_replay_undo_stable": true
+        }
+      ]
+    }
+  ],
+  "baseline_commit": "c971846",
+  "counts": {
+    "conexiuni": {
+      "before": 241,
+      "after": 242,
+      "added": 1
+    },
+    "contexto": {
+      "before": 259,
+      "after": 261,
+      "added": 2
+    },
+    "lant": {
+      "before": 118,
+      "after": 119,
+      "added": 1
+    },
+    "alchimie": {
+      "before": 83,
+      "after": 83,
+      "added": 0
+    }
+  },
+  "all_701_previous_pack_records_exact": {
+    "conexiuni": true,
+    "contexto": true,
+    "lant": true,
+    "alchimie": true
+  },
+  "pending_count": 8,
+  "total_pack_records": 705,
+  "limitations": [
+    "Automated BFF correctness does not establish human enjoyment or physical-device acceptance.",
+    "Quick-game supplement is outside this pack audit and may still be awaiting artifact rebind.",
+    "Lanț endpoints and earned local choices are public by design; full unearned route corridors remain hidden."
+  ]
+}

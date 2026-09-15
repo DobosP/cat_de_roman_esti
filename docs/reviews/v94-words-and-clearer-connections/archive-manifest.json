@@ -1,0 +1,1624 @@
+{
+  "kind": "v94-review-archive-v1",
+  "baseline_commit": "c971846feac31e73c3a2a2593c66265f29603e58",
+  "scope": "Exact author/reviewer artifacts, logs and bound final/before browser captures. Unbound intermediate screenshots and browser trace ZIPs are scratch diagnostics, not acceptance inputs.",
+  "files": [
+    {
+      "source": "captions/apply_captions.py",
+      "source_size": 2928,
+      "sha256": "84b742c819cf5dfbbb76461f356a6e8579aacc84f9c265d7d2b617020ac86dee",
+      "archive": "captions/apply_captions.py.txt",
+      "archive_size": 2928
+    },
+    {
+      "source": "captions/author_captions.py",
+      "source_size": 5454,
+      "sha256": "6cb12b31b8c83cb8cc11d6229893359b53eda4f8c35245a74f9f5cae9ae55810",
+      "archive": "captions/author_captions.py.txt",
+      "archive_size": 5454
+    },
+    {
+      "source": "captions/candidates.json",
+      "source_size": 13708,
+      "sha256": "eb129bc088c20a498b0470484650177066fb382d84c845bf94067cb845ffce4f",
+      "archive": "captions/candidates.json",
+      "archive_size": 13708
+    },
+    {
+      "source": "captions/existing-tests.log",
+      "source_size": 98,
+      "sha256": "f6e6b8418565fbd6476bef4cd4eea6509c221f48d795a78ffe3933df059705b7",
+      "archive": "captions/existing-tests.log",
+      "archive_size": 98
+    },
+    {
+      "source": "captions/factual-review.json",
+      "source_size": 9647,
+      "sha256": "9085be9a7bc15cebb4a128b16a292abdab48da6a2cf8a0feca709be50bdd05d0",
+      "archive": "captions/factual-review.json",
+      "archive_size": 9647
+    },
+    {
+      "source": "captions/final-tests.log",
+      "source_size": 99,
+      "sha256": "70742eda13c2f92bb0eb7f6b639096a874e057fc466af155b43740687a191401",
+      "archive": "captions/final-tests.log",
+      "archive_size": 99
+    },
+    {
+      "source": "captions/installation.json",
+      "source_size": 500,
+      "sha256": "8ad7781eebb3e411a4cac18885f4ecd80b57733fd9175217a060f547890f6e5b",
+      "archive": "captions/installation.json",
+      "archive_size": 500
+    },
+    {
+      "source": "captions/new-rounds/apply_captions.py",
+      "source_size": 2927,
+      "sha256": "29c68d1b106212d8c2606c9314c3839b2ff55091cbefa712c416a0edcf534510",
+      "archive": "captions/new-rounds/apply_captions.py.txt",
+      "archive_size": 2927
+    },
+    {
+      "source": "captions/new-rounds/author-original.py.txt",
+      "source_size": 3931,
+      "sha256": "20efe4fd1edea5236653e52385b74a279c59652d4771071fafe8cd5326839e5a",
+      "archive": "captions/new-rounds/author-original.py.txt",
+      "archive_size": 3931
+    },
+    {
+      "source": "captions/new-rounds/author_captions.py",
+      "source_size": 4045,
+      "sha256": "fa74fe7b4e76e3f85b91c015c8df3ca02fa0973b96c4fb71d43416a516001333",
+      "archive": "captions/new-rounds/author_captions.py.txt",
+      "archive_size": 4045
+    },
+    {
+      "source": "captions/new-rounds/baseline_lant_relations.py.txt",
+      "source_size": 18541,
+      "sha256": "8a1eef1da97335d3fd0ec5feb560952a82a92b43b6c6e4a9baba225724eae89e",
+      "archive": "captions/new-rounds/baseline_lant_relations.py.txt",
+      "archive_size": 18541
+    },
+    {
+      "source": "captions/new-rounds/candidates.json",
+      "source_size": 9097,
+      "sha256": "56d9dbb83e167484a1dacb639f9134b3af0d75e2479f1f3f8cc525fa5188a227",
+      "archive": "captions/new-rounds/candidates.json",
+      "archive_size": 9097
+    },
+    {
+      "source": "captions/new-rounds/factual-review.json",
+      "source_size": 6910,
+      "sha256": "bb02f673ac809e4b0c23594d94e6a2e58ecd7aa3c198e3dcb3fe1becc4f17bfe",
+      "archive": "captions/new-rounds/factual-review.json",
+      "archive_size": 6910
+    },
+    {
+      "source": "captions/new-rounds/initial-quality-finding.json",
+      "source_size": 1019,
+      "sha256": "e00557c1cf243f7b95b176ba1a9300eb9b81c3660fcb2c8024b25a36495c94fe",
+      "archive": "captions/new-rounds/initial-quality-finding.json",
+      "archive_size": 1019
+    },
+    {
+      "source": "captions/new-rounds/installation.json",
+      "source_size": 499,
+      "sha256": "2af8dce675437a8f655785d015525074a37ea65dca1c8c9020ec6815a2cd11fb",
+      "archive": "captions/new-rounds/installation.json",
+      "archive_size": 499
+    },
+    {
+      "source": "captions/new-rounds/original-candidates.json",
+      "source_size": 8974,
+      "sha256": "c0cedbdf79ea4e528299ad4930a2e6f8f756731a881c17a3fc4eb1b3dd23d2dd",
+      "archive": "captions/new-rounds/original-candidates.json",
+      "archive_size": 8974
+    },
+    {
+      "source": "captions/new-rounds/original-factual-review.json",
+      "source_size": 6405,
+      "sha256": "91c4738bc28570184d2e3fc48a636848aca87a22a0835391bd910cb98a971419",
+      "archive": "captions/new-rounds/original-factual-review.json",
+      "archive_size": 6405
+    },
+    {
+      "source": "captions/new-rounds/quality-review.json",
+      "source_size": 6889,
+      "sha256": "a08e1c764a4313913c3d0ca523fa3b08038df23eae392657f4c231dfbb12bf38",
+      "archive": "captions/new-rounds/quality-review.json",
+      "archive_size": 6889
+    },
+    {
+      "source": "captions/new-rounds/review_factual.py",
+      "source_size": 5370,
+      "sha256": "eb3ceea1469bbae896792e6310ec8377aa4d31cf8d28dac07c4125bb630c89d0",
+      "archive": "captions/new-rounds/review_factual.py.txt",
+      "archive_size": 5370
+    },
+    {
+      "source": "captions/new-rounds/review_factual_before_repair.py.txt",
+      "source_size": 4514,
+      "sha256": "72b59058ade4800b0e2a8b995fd470c97de99f977323d7aee7c7ecbce691eaf9",
+      "archive": "captions/new-rounds/review_factual_before_repair.py.txt",
+      "archive_size": 4514
+    },
+    {
+      "source": "captions/new-rounds/review_quality.py",
+      "source_size": 4165,
+      "sha256": "8cac55991d47cadfbe4f37e3b035dbc1285a064700155d131648df52618a948e",
+      "archive": "captions/new-rounds/review_quality.py.txt",
+      "archive_size": 4165
+    },
+    {
+      "source": "captions/new-tests.log",
+      "source_size": 60159,
+      "sha256": "1ac5e4abbf86f61eaf5f8332a43e64c624c560c5cebea105fd05f341f2fbc360",
+      "archive": "captions/new-tests.log",
+      "archive_size": 60159
+    },
+    {
+      "source": "captions/quality-review.json",
+      "source_size": 9015,
+      "sha256": "d840f0194efc0e56d8c64389a08dc4d466701436c65d627dad809e04a2699862",
+      "archive": "captions/quality-review.json",
+      "archive_size": 9015
+    },
+    {
+      "source": "captions/review_factual.py",
+      "source_size": 6556,
+      "sha256": "a0919cad20c8291cc3a693bd402ac0ca25ccb04b51bc3754dbfd1295d3b3532b",
+      "archive": "captions/review_factual.py.txt",
+      "archive_size": 6556
+    },
+    {
+      "source": "pack/allocated_quality_probe.py",
+      "source_size": 5489,
+      "sha256": "c253dac9b4917498c0242281179c281b9267ac56a9b38f4600a39009dfdca5a4",
+      "archive": "pack/allocated_quality_probe.py.txt",
+      "archive_size": 5489
+    },
+    {
+      "source": "pack/analyst.json",
+      "source_size": 6361,
+      "sha256": "7b6c110a281f1a5f50b55fb325e0494f4e82b960ac8b84b4dc523420d596fd57",
+      "archive": "pack/analyst.json",
+      "archive_size": 6361
+    },
+    {
+      "source": "pack/analyst_review.py",
+      "source_size": 6048,
+      "sha256": "d8f6ccd1a439e11182be6d9dcbb4701e6574ae7432445ea8f5d38ee0ce00d9fb",
+      "archive": "pack/analyst_review.py.txt",
+      "archive_size": 6048
+    },
+    {
+      "source": "pack/author-checks.json",
+      "source_size": 1443,
+      "sha256": "e89264c3f347e1cd43b9b546836a20d4b4c1eb6ceb6a3d5361f232529d009611",
+      "archive": "pack/author-checks.json",
+      "archive_size": 1443
+    },
+    {
+      "source": "pack/author-freeze.json",
+      "source_size": 1345,
+      "sha256": "eb17e5c7de272ccdc020925be39d9f82b987d9c01b191ea965515291b73059d9",
+      "archive": "pack/author-freeze.json",
+      "archive_size": 1345
+    },
+    {
+      "source": "pack/author-run.log",
+      "source_size": 1443,
+      "sha256": "e89264c3f347e1cd43b9b546836a20d4b4c1eb6ceb6a3d5361f232529d009611",
+      "archive": "pack/author-run.log",
+      "archive_size": 1443
+    },
+    {
+      "source": "pack/author_pack.py",
+      "source_size": 9680,
+      "sha256": "81a43fc41e268bdb3b34ba676b8c53cfd3139a6c475752492d7502d4ea6d44ad",
+      "archive": "pack/author_pack.py.txt",
+      "archive_size": 9680
+    },
+    {
+      "source": "pack/before-description-check/allocated_quality_probe.py",
+      "source_size": 5489,
+      "sha256": "c253dac9b4917498c0242281179c281b9267ac56a9b38f4600a39009dfdca5a4",
+      "archive": "pack/before-description-check/allocated_quality_probe.py.txt",
+      "archive_size": 5489
+    },
+    {
+      "source": "pack/before-description-check/analyst.json",
+      "source_size": 6385,
+      "sha256": "3ba72d5e7e812fada1b1104c6e1db53ff806c625c3bcb46b32cc598433c0799c",
+      "archive": "pack/before-description-check/analyst.json",
+      "archive_size": 6385
+    },
+    {
+      "source": "pack/before-description-check/analyst_review.py",
+      "source_size": 6026,
+      "sha256": "76eb8e4ec5b23368bb447712c5dd447dab21b66755c17042fab75538fc1a2fad",
+      "archive": "pack/before-description-check/analyst_review.py.txt",
+      "archive_size": 6026
+    },
+    {
+      "source": "pack/before-description-check/independent-allocated-quality-probe.json",
+      "source_size": 32164,
+      "sha256": "abeea12e33544e4f7685d2567c5702ef62bf365809d1526607b074a1771e5933",
+      "archive": "pack/before-description-check/independent-allocated-quality-probe.json",
+      "archive_size": 32164
+    },
+    {
+      "source": "pack/build-verdicts.log",
+      "source_size": 144,
+      "sha256": "5cb3581289a280a283d1c786f7d9bc4312c6d121566859476000bd4fd97b815e",
+      "archive": "pack/build-verdicts.log",
+      "archive_size": 144
+    },
+    {
+      "source": "pack/candidates/curation_report.txt",
+      "source_size": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "archive": "pack/candidates/curation_report.txt",
+      "archive_size": 1
+    },
+    {
+      "source": "pack/candidates/gastronomie/candidates.json",
+      "source_size": 308,
+      "sha256": "154bdd982b2124f59fc2e9ced197ff1b300bbf5aa95951bc7604e57401f0c295",
+      "archive": "pack/candidates/gastronomie/candidates.json",
+      "archive_size": 308
+    },
+    {
+      "source": "pack/candidates/gastronomie/verify_factual.json",
+      "source_size": 1873,
+      "sha256": "fa9ab076ae819e0e07ee989dae97466e00e0e567d19baa33159375dc376841e7",
+      "archive": "pack/candidates/gastronomie/verify_factual.json",
+      "archive_size": 1873
+    },
+    {
+      "source": "pack/candidates/gastronomie/verify_quality.json",
+      "source_size": 2426,
+      "sha256": "5299787eac7be2c7b03c4b2ed0a54fb94b3c151e1badaeb6f67c8270ece3f268",
+      "archive": "pack/candidates/gastronomie/verify_quality.json",
+      "archive_size": 2426
+    },
+    {
+      "source": "pack/candidates/geografie/candidates.json",
+      "source_size": 230,
+      "sha256": "b9472d1a8b6902fd8d2b70493e70830bdbb98347336e3aef34f1860b73901840",
+      "archive": "pack/candidates/geografie/candidates.json",
+      "archive_size": 230
+    },
+    {
+      "source": "pack/candidates/geografie/verify_factual.json",
+      "source_size": 1415,
+      "sha256": "d944eeeaff95851e2d47c90c169f372bf57ae14c8a032a1e19fe5aa87ccb4622",
+      "archive": "pack/candidates/geografie/verify_factual.json",
+      "archive_size": 1415
+    },
+    {
+      "source": "pack/candidates/geografie/verify_quality.json",
+      "source_size": 1781,
+      "sha256": "08ac1fbfd0f0856fb89d94054992dda002351b7b8bac647742fa96b0dc379cdc",
+      "archive": "pack/candidates/geografie/verify_quality.json",
+      "archive_size": 1781
+    },
+    {
+      "source": "pack/candidates/viata_de_roman/candidates.json",
+      "source_size": 1253,
+      "sha256": "15199e394fa0892619a96aabb091ecfe3806741ba490d4a029efcbdfaf4b20e1",
+      "archive": "pack/candidates/viata_de_roman/candidates.json",
+      "archive_size": 1253
+    },
+    {
+      "source": "pack/candidates/viata_de_roman/verify_factual.json",
+      "source_size": 2364,
+      "sha256": "82be47c0a4f5ef048456a5e0821bc2086ffabb57d3c702f7f03bd05a291c2010",
+      "archive": "pack/candidates/viata_de_roman/verify_factual.json",
+      "archive_size": 2364
+    },
+    {
+      "source": "pack/candidates/viata_de_roman/verify_quality.json",
+      "source_size": 3207,
+      "sha256": "9af14b08bf2be9a76dae9db2286e1c73173ac8fc459302594c8f5072a28d9d50",
+      "archive": "pack/candidates/viata_de_roman/verify_quality.json",
+      "archive_size": 3207
+    },
+    {
+      "source": "pack/claims-and-exclusions.md",
+      "source_size": 10170,
+      "sha256": "ba1052c1283139582229ffa3c739033e34bec2a8e2aedefaab0dd2d472f2353a",
+      "archive": "pack/claims-and-exclusions.md",
+      "archive_size": 10170
+    },
+    {
+      "source": "pack/contexto-api-probes.json",
+      "source_size": 7111,
+      "sha256": "b0fc78c938db62caf270d6eb968176a3c8360b1ec1b037a06d6fad1a4644d9cc",
+      "archive": "pack/contexto-api-probes.json",
+      "archive_size": 7111
+    },
+    {
+      "source": "pack/critique.log",
+      "source_size": 186,
+      "sha256": "a1f7408a616362e48333772cd421e35b0217788b1f4d90ec0b51f1e88ada150c",
+      "archive": "pack/critique.log",
+      "archive_size": 186
+    },
+    {
+      "source": "pack/derived.log",
+      "source_size": 165,
+      "sha256": "21929e317d7bf3959434fe1f4ed8c782eee34a8512b235a650f5cae0bd5a8865",
+      "archive": "pack/derived.log",
+      "archive_size": 165
+    },
+    {
+      "source": "pack/description-recheck.json",
+      "source_size": 2306,
+      "sha256": "7019865140aec9cfb0b399bdcd1dd2d7863d6d7fe059eb64b9aa5ae779d4df26",
+      "archive": "pack/description-recheck.json",
+      "archive_size": 2306
+    },
+    {
+      "source": "pack/description_recheck.py",
+      "source_size": 2546,
+      "sha256": "fa5e32ab4aa431621764f2955d4eb0f4309e85014c48b36c50d8913faad06495",
+      "archive": "pack/description_recheck.py.txt",
+      "archive_size": 2546
+    },
+    {
+      "source": "pack/dossiers/ct_gastronomie_372.json",
+      "source_size": 2285,
+      "sha256": "96090bbd0b19e264edeabfe5f5565247f2d079c01cb5e5b929817d2c608a371d",
+      "archive": "pack/dossiers/ct_gastronomie_372.json",
+      "archive_size": 2285
+    },
+    {
+      "source": "pack/dossiers/ct_viata_de_roman_373.json",
+      "source_size": 2908,
+      "sha256": "9b3d9231386f598d451d11a07c88b7272f275d390b63d13eec04b93c9f3e0c15",
+      "archive": "pack/dossiers/ct_viata_de_roman_373.json",
+      "archive_size": 2908
+    },
+    {
+      "source": "pack/dossiers/cx_viata_de_roman_371.json",
+      "source_size": 5728,
+      "sha256": "61786c2bab4e26a6fcd74397c49de59b59d933e39247260ecedf10fcc3dc9fb6",
+      "archive": "pack/dossiers/cx_viata_de_roman_371.json",
+      "archive_size": 5728
+    },
+    {
+      "source": "pack/dossiers/lt_gastronomie_241.json",
+      "source_size": 3309,
+      "sha256": "bd460722e5540432554f2fb76e9dc0836cb5d91606385a8fe2b6e967c79b1124",
+      "archive": "pack/dossiers/lt_gastronomie_241.json",
+      "archive_size": 3309
+    },
+    {
+      "source": "pack/dossiers/lt_geografie_242.json",
+      "source_size": 3678,
+      "sha256": "79cda89881738a1123b4bc7ee7c79fc24b57c36940927d1d80b43b109ab21d33",
+      "archive": "pack/dossiers/lt_geografie_242.json",
+      "archive_size": 3678
+    },
+    {
+      "source": "pack/import.log",
+      "source_size": 483,
+      "sha256": "f37c41a2b33dc5be8b4201f1d84901eac9a6834e2e95582083f4a05863df0af2",
+      "archive": "pack/import.log",
+      "archive_size": 483
+    },
+    {
+      "source": "pack/independent-allocated-quality-probe.json",
+      "source_size": 32164,
+      "sha256": "abeea12e33544e4f7685d2567c5702ef62bf365809d1526607b074a1771e5933",
+      "archive": "pack/independent-allocated-quality-probe.json",
+      "archive_size": 32164
+    },
+    {
+      "source": "pack/independent-final-api.json",
+      "source_size": 8775,
+      "sha256": "32fca2c55664ec668ad04adf1006165c128606f823aa370a302813bb31ec3f83",
+      "archive": "pack/independent-final-api.json",
+      "archive_size": 8775
+    },
+    {
+      "source": "pack/independent-final-api.log",
+      "source_size": 1987,
+      "sha256": "f59692861a9ff50514f83eb7ae5863dd788feb1d03b64d38b701483c46869253",
+      "archive": "pack/independent-final-api.log",
+      "archive_size": 1987
+    },
+    {
+      "source": "pack/independent-quality-probe.json",
+      "source_size": 32181,
+      "sha256": "703169e21122cc38a377ef43b240e35eb4529a5c9cab29b45642d54e4cdcce1c",
+      "archive": "pack/independent-quality-probe.json",
+      "archive_size": 32181
+    },
+    {
+      "source": "pack/independent_final_api.py",
+      "source_size": 14926,
+      "sha256": "e756cf325dc14562b71e491fa1698b41edd2a0769b455905c55b400dd53c546b",
+      "archive": "pack/independent_final_api.py.txt",
+      "archive_size": 14926
+    },
+    {
+      "source": "pack/lant-api-routes.json",
+      "source_size": 11428,
+      "sha256": "caae75a9ae4af8f9971e5c2eee3c071afb7685eb55c9c267047b600921842098",
+      "archive": "pack/lant-api-routes.json",
+      "archive_size": 11428
+    },
+    {
+      "source": "pack/node-edge-snapshots.json",
+      "source_size": 47737,
+      "sha256": "c9dc81dbe62f76006e391653a588087312b647bb4fbf76973280493a66b0b380",
+      "archive": "pack/node-edge-snapshots.json",
+      "archive_size": 47737
+    },
+    {
+      "source": "pack/preview-dossiers.json",
+      "source_size": 21712,
+      "sha256": "cc5840f2bc5557e0ed82df59cb6ef82cf35c67decec43ee35779a8f9e96f8a2c",
+      "archive": "pack/preview-dossiers.json",
+      "archive_size": 21712
+    },
+    {
+      "source": "pack/preview-records.json",
+      "source_size": 3292,
+      "sha256": "3267af1efae3ed2fe6f59e85604179cab8d19da5f4123b320388fdee9a1a4013",
+      "archive": "pack/preview-records.json",
+      "archive_size": 3292
+    },
+    {
+      "source": "pack/prior-raw-novelty.json",
+      "source_size": 2304,
+      "sha256": "51fc3f1b32c210cefd8510d5103a7a36b219f92cff761f30a892db93ce936a59",
+      "archive": "pack/prior-raw-novelty.json",
+      "archive_size": 2304
+    },
+    {
+      "source": "pack/promotion.log",
+      "source_size": 469,
+      "sha256": "d7ef534f4478b9077d44189710f1027576d64ab22e81a798528c553d036cc05b",
+      "archive": "pack/promotion.log",
+      "archive_size": 469
+    },
+    {
+      "source": "pack/public-description-rejection.json",
+      "source_size": 811,
+      "sha256": "6742ad9f339293f63ba114e89dd94ea119267a1126217e28c96b3276e1f87df0",
+      "archive": "pack/public-description-rejection.json",
+      "archive_size": 811
+    },
+    {
+      "source": "pack/quality_probe.py",
+      "source_size": 5813,
+      "sha256": "0058c5b2d305e7105e8d67c852a47c533d9262a90867b86fd7f6d66689fa911b",
+      "archive": "pack/quality_probe.py.txt",
+      "archive_size": 5813
+    },
+    {
+      "source": "pack/rank.log",
+      "source_size": 624,
+      "sha256": "0c893f205f3cf390fd7dfdaaa3374fc2d5d6238a1ee6db28819a95ed27920392",
+      "archive": "pack/rank.log",
+      "archive_size": 624
+    },
+    {
+      "source": "pack/review_factual.py",
+      "source_size": 5115,
+      "sha256": "e71cf293aa30dca91db02ccd3fad4c569ca63507e5719b603a1a7f787c7f6a37",
+      "archive": "pack/review_factual.py.txt",
+      "archive_size": 5115
+    },
+    {
+      "source": "pack/review_quality.py",
+      "source_size": 6710,
+      "sha256": "ba85ccfc7baa2441f83053d7173cf18f7883aa8a025fa92aa4bcd2fc91b9bb91",
+      "archive": "pack/review_quality.py.txt",
+      "archive_size": 6710
+    },
+    {
+      "source": "pack/root-factual-notes.json",
+      "source_size": 4385,
+      "sha256": "ce4bd36cd2a2c1a9764f795ab28afdde5f4256a1bda44da5e7c4437fe5053204",
+      "archive": "pack/root-factual-notes.json",
+      "archive_size": 4385
+    },
+    {
+      "source": "pack/screen.py",
+      "source_size": 1503,
+      "sha256": "1986513f157ecbb17eb6e8325829e0342a2afef4ea0d389eb67fa998a224e473",
+      "archive": "pack/screen.py.txt",
+      "archive_size": 1503
+    },
+    {
+      "source": "pack/unused-contexto.json",
+      "source_size": 357956,
+      "sha256": "87aad18d8adf5d9a4b3bca1b909147cdb98e26ebeb6929075422101f03c83f1f",
+      "archive": "pack/unused-contexto.json",
+      "archive_size": 357956
+    },
+    {
+      "source": "pack/verdicts/conexiuni_verdicts.json",
+      "source_size": 4470,
+      "sha256": "9ccffcdc84a54ddd30c72a0e9646e0e7aec27e9e32e9cf2e814ef9052c28c7dc",
+      "archive": "pack/verdicts/conexiuni_verdicts.json",
+      "archive_size": 4470
+    },
+    {
+      "source": "pack/verdicts/contexto_verdicts.json",
+      "source_size": 6118,
+      "sha256": "41d24e18233c3b7e01623def49f2365a7c7374e337b85e28ebe107a836c7d558",
+      "archive": "pack/verdicts/contexto_verdicts.json",
+      "archive_size": 6118
+    },
+    {
+      "source": "pack/verdicts/dossiers/ct_gastronomie_372.json",
+      "source_size": 2285,
+      "sha256": "96090bbd0b19e264edeabfe5f5565247f2d079c01cb5e5b929817d2c608a371d",
+      "archive": "pack/verdicts/dossiers/ct_gastronomie_372.json",
+      "archive_size": 2285
+    },
+    {
+      "source": "pack/verdicts/dossiers/ct_viata_de_roman_373.json",
+      "source_size": 2908,
+      "sha256": "9b3d9231386f598d451d11a07c88b7272f275d390b63d13eec04b93c9f3e0c15",
+      "archive": "pack/verdicts/dossiers/ct_viata_de_roman_373.json",
+      "archive_size": 2908
+    },
+    {
+      "source": "pack/verdicts/dossiers/cx_viata_de_roman_371.json",
+      "source_size": 5728,
+      "sha256": "61786c2bab4e26a6fcd74397c49de59b59d933e39247260ecedf10fcc3dc9fb6",
+      "archive": "pack/verdicts/dossiers/cx_viata_de_roman_371.json",
+      "archive_size": 5728
+    },
+    {
+      "source": "pack/verdicts/dossiers/lt_gastronomie_241.json",
+      "source_size": 3309,
+      "sha256": "bd460722e5540432554f2fb76e9dc0836cb5d91606385a8fe2b6e967c79b1124",
+      "archive": "pack/verdicts/dossiers/lt_gastronomie_241.json",
+      "archive_size": 3309
+    },
+    {
+      "source": "pack/verdicts/dossiers/lt_geografie_242.json",
+      "source_size": 3678,
+      "sha256": "79cda89881738a1123b4bc7ee7c79fc24b57c36940927d1d80b43b109ab21d33",
+      "archive": "pack/verdicts/dossiers/lt_geografie_242.json",
+      "archive_size": 3678
+    },
+    {
+      "source": "pack/verdicts/lant_verdicts.json",
+      "source_size": 6193,
+      "sha256": "bf30221d7d4f87c090d1f7c60c2d2e34dff2cabc3dde747e83c014c95f65047a",
+      "archive": "pack/verdicts/lant_verdicts.json",
+      "archive_size": 6193
+    },
+    {
+      "source": "pack/verifier-critique.log",
+      "source_size": 195,
+      "sha256": "5ddda29959d08c6570705774a00dce647fda2245dda4e8f331d7f17ce8db0112",
+      "archive": "pack/verifier-critique.log",
+      "archive_size": 195
+    },
+    {
+      "source": "pack/verifier-dossiers/ct_gastronomie_372.json",
+      "source_size": 2285,
+      "sha256": "96090bbd0b19e264edeabfe5f5565247f2d079c01cb5e5b929817d2c608a371d",
+      "archive": "pack/verifier-dossiers/ct_gastronomie_372.json",
+      "archive_size": 2285
+    },
+    {
+      "source": "pack/verifier-dossiers/ct_viata_de_roman_373.json",
+      "source_size": 2908,
+      "sha256": "9b3d9231386f598d451d11a07c88b7272f275d390b63d13eec04b93c9f3e0c15",
+      "archive": "pack/verifier-dossiers/ct_viata_de_roman_373.json",
+      "archive_size": 2908
+    },
+    {
+      "source": "pack/verifier-dossiers/cx_viata_de_roman_371.json",
+      "source_size": 5728,
+      "sha256": "61786c2bab4e26a6fcd74397c49de59b59d933e39247260ecedf10fcc3dc9fb6",
+      "archive": "pack/verifier-dossiers/cx_viata_de_roman_371.json",
+      "archive_size": 5728
+    },
+    {
+      "source": "pack/verifier-dossiers/lt_gastronomie_241.json",
+      "source_size": 3309,
+      "sha256": "bd460722e5540432554f2fb76e9dc0836cb5d91606385a8fe2b6e967c79b1124",
+      "archive": "pack/verifier-dossiers/lt_gastronomie_241.json",
+      "archive_size": 3309
+    },
+    {
+      "source": "pack/verifier-dossiers/lt_geografie_242.json",
+      "source_size": 3678,
+      "sha256": "79cda89881738a1123b4bc7ee7c79fc24b57c36940927d1d80b43b109ab21d33",
+      "archive": "pack/verifier-dossiers/lt_geografie_242.json",
+      "archive_size": 3678
+    },
+    {
+      "source": "pack/verifier.json",
+      "source_size": 6388,
+      "sha256": "e3f0e1aa79b55c2682788474d1947266340b345fa008dc792918df082b6a272c",
+      "archive": "pack/verifier.json",
+      "archive_size": 6388
+    },
+    {
+      "source": "quick/author-audit.json",
+      "source_size": 17837,
+      "sha256": "37f2b3e7b9a8bd174264cdd768f2cdeba7baa18608986ea547527f29a5893375",
+      "archive": "quick/author-audit.json",
+      "archive_size": 17837
+    },
+    {
+      "source": "quick/author-claims.json",
+      "source_size": 7971,
+      "sha256": "e2bd8ab1d14aeb3f755f2266a2017dc517ec678a2d76e19cfa9c23103d52c3a9",
+      "archive": "quick/author-claims.json",
+      "archive_size": 7971
+    },
+    {
+      "source": "quick/author-exclusions.json",
+      "source_size": 1268,
+      "sha256": "9a98d03c09b6ad918aab5df732ebb20feeee4a185e5fb576c8bb4ffa32a35c68",
+      "archive": "quick/author-exclusions.json",
+      "archive_size": 1268
+    },
+    {
+      "source": "quick/author-freeze.json",
+      "source_size": 717,
+      "sha256": "e2ebe7df4b53f42a9aef59a77b3c9d52205094911d4bd607f317199cf9d5f172",
+      "archive": "quick/author-freeze.json",
+      "archive_size": 717
+    },
+    {
+      "source": "quick/author_quick.py",
+      "source_size": 11364,
+      "sha256": "3cb3a90144d20e3622251bb906fef1f5ade73072e1012ccdc915383b9dad5009",
+      "archive": "quick/author_quick.py.txt",
+      "archive_size": 11364
+    },
+    {
+      "source": "quick/candidate.json",
+      "source_size": 100449,
+      "sha256": "17dcf3acbd054ef581c21c31ac0b72a25f01c1ad9178ef308932b9aed270fa41",
+      "archive": "quick/candidate.json",
+      "archive_size": 100449
+    },
+    {
+      "source": "quick/catalog.json",
+      "source_size": 340125,
+      "sha256": "6ca48cc452d33a150bad949ef09d5e624df349b5d19a2eeeb253a2d123cf4042",
+      "archive": "quick/catalog.json",
+      "archive_size": 340125
+    },
+    {
+      "source": "quick/factual-review.json",
+      "source_size": 74741,
+      "sha256": "9df60b25f83ef51184f0a67d27103f797f7bcfeb9348bdebfdd2b4139644ec38",
+      "archive": "quick/factual-review.json",
+      "archive_size": 74741
+    },
+    {
+      "source": "quick/final-factual.json",
+      "source_size": 709,
+      "sha256": "f9cc0828d0804a82483c1494593f9cf530724bdca536906f05678b27b6ac1a36",
+      "archive": "quick/final-factual.json",
+      "archive_size": 709
+    },
+    {
+      "source": "quick/final-quality.json",
+      "source_size": 1439,
+      "sha256": "d3ddc3368ff9d877e5bf5d950d9a6c0c2d248552a65e3da1e976385181b252e6",
+      "archive": "quick/final-quality.json",
+      "archive_size": 1439
+    },
+    {
+      "source": "quick/independent-final-quality.log",
+      "source_size": 247,
+      "sha256": "1ea3b803ce83e66eea82031037194e6225cad839cd6668707b373c4c2b718637",
+      "archive": "quick/independent-final-quality.log",
+      "archive_size": 247
+    },
+    {
+      "source": "quick/independent-final-recovery-audit.json",
+      "source_size": 7943,
+      "sha256": "9b7fadd4e678f071b8219f2b277da70ecbb8d06a5201268a9aea294fdfd805b7",
+      "archive": "quick/independent-final-recovery-audit.json",
+      "archive_size": 7943
+    },
+    {
+      "source": "quick/independent-final-winning-audit.json",
+      "source_size": 22676,
+      "sha256": "5633e23cec409848724f97749be9942eed542df2dfc18b24ef31f2f23c95acd0",
+      "archive": "quick/independent-final-winning-audit.json",
+      "archive_size": 22676
+    },
+    {
+      "source": "quick/live-audit.json",
+      "source_size": 22676,
+      "sha256": "5633e23cec409848724f97749be9942eed542df2dfc18b24ef31f2f23c95acd0",
+      "archive": "quick/live-audit.json",
+      "archive_size": 22676
+    },
+    {
+      "source": "quick/live-audit.log",
+      "source_size": 103,
+      "sha256": "17373b1fd5f673cee683f03080ec3782f0db58ad891cad6aaaa80aab8e2925d4",
+      "archive": "quick/live-audit.log",
+      "archive_size": 103
+    },
+    {
+      "source": "quick/quality-inheritance-and-mechanics.json",
+      "source_size": 4260,
+      "sha256": "269ff2fe6742e19126f01b50ba7975e6fc14c16bc0fa4dc8019c1f8fcab2e5ca",
+      "archive": "quick/quality-inheritance-and-mechanics.json",
+      "archive_size": 4260
+    },
+    {
+      "source": "quick/quality-review.json",
+      "source_size": 33098,
+      "sha256": "16bf8f4c47020b728de3a217d4700bf04b8dda11f019a4bf4c5883295a83c41f",
+      "archive": "quick/quality-review.json",
+      "archive_size": 33098
+    },
+    {
+      "source": "quick/quality-review.log",
+      "source_size": 204,
+      "sha256": "7206998c9f1f636a047a6a21f0b420cf43fbf1f1d24885e97c9fab12e2e3a79f",
+      "archive": "quick/quality-review.log",
+      "archive_size": 204
+    },
+    {
+      "source": "quick/raw-candidates.json",
+      "source_size": 12379,
+      "sha256": "2f66ffa349c51e0d8adddb79390b0b5246a68baf20f3a79b9bef5a9f2efd2bc5",
+      "archive": "quick/raw-candidates.json",
+      "archive_size": 12379
+    },
+    {
+      "source": "quick/raw-factual-review.json",
+      "source_size": 5851,
+      "sha256": "f2a6398a4369c2c360b5e16db70b82f998323a9d40b56b2400be4468fd64d09b",
+      "archive": "quick/raw-factual-review.json",
+      "archive_size": 5851
+    },
+    {
+      "source": "quick/raw-quality-review.json",
+      "source_size": 4781,
+      "sha256": "697a725fd83f6ec936ecaf5666dbafc6c5aecd6f47dfaf20075c0b88e6446123",
+      "archive": "quick/raw-quality-review.json",
+      "archive_size": 4781
+    },
+    {
+      "source": "quick/reference-fetch.json",
+      "source_size": 13405,
+      "sha256": "0e14c9ecebc786cfcf062eab31941cc2c98f1555570fa89461ae36e59fc2549c",
+      "archive": "quick/reference-fetch.json",
+      "archive_size": 13405
+    },
+    {
+      "source": "quick/review_factual.py",
+      "source_size": 4537,
+      "sha256": "ebef92febd02693c79bc6186a0427b15efcd16167303fde1894025bd3f4f5d5e",
+      "archive": "quick/review_factual.py.txt",
+      "archive_size": 4537
+    },
+    {
+      "source": "quick/review_final_quality.py",
+      "source_size": 10699,
+      "sha256": "4198383961ff3b85fef50e21e4a286095352e333c021b18b6e68078b6a3ff019",
+      "archive": "quick/review_final_quality.py.txt",
+      "archive_size": 10699
+    },
+    {
+      "source": "quick/review_quality_independent.py",
+      "source_size": 12131,
+      "sha256": "fd2a4c2b56171bc8771ff486677855739e7f7b0738a058c829d6f9efa19fa2f0",
+      "archive": "quick/review_quality_independent.py.txt",
+      "archive_size": 12131
+    },
+    {
+      "source": "alchimie/author-audit.json",
+      "source_size": 5573,
+      "sha256": "1bf4276a062bca3e1e21a9144c805aa785a707dd354feb62e1614f98145da06b",
+      "archive": "alchimie/author-audit.json",
+      "archive_size": 5573
+    },
+    {
+      "source": "alchimie/author-exclusions.json",
+      "source_size": 1240,
+      "sha256": "ac77bc54861fa90a55a5ee3517edceb85111bc0984e8d8e8b626907f868eab10",
+      "archive": "alchimie/author-exclusions.json",
+      "archive_size": 1240
+    },
+    {
+      "source": "alchimie/author-preservation-test.log",
+      "source_size": 98,
+      "sha256": "a132c74d7b7c74739e7571fb00cd0a8be848d9686b936586ce31a93451c151b2",
+      "archive": "alchimie/author-preservation-test.log",
+      "archive_size": 98
+    },
+    {
+      "source": "alchimie/author-preservation.json",
+      "source_size": 1859,
+      "sha256": "0dac50717abe3575746dade5d7347c7d0aeb97bdc64e9064260b05b719aaed83",
+      "archive": "alchimie/author-preservation.json",
+      "archive_size": 1859
+    },
+    {
+      "source": "alchimie/author-references.json",
+      "source_size": 2241,
+      "sha256": "8f1b2f3432cb4f851c20ebff6d7e1d766ec880f79c7586f10260869d1bdd0971",
+      "archive": "alchimie/author-references.json",
+      "archive_size": 2241
+    },
+    {
+      "source": "alchimie/author_source.py",
+      "source_size": 7061,
+      "sha256": "4bf225f4bb012e4a19fc445aab12ee1f7c99a4511746451587f3c4efd703189a",
+      "archive": "alchimie/author_source.py.txt",
+      "archive_size": 7061
+    },
+    {
+      "source": "alchimie/candidate.json",
+      "source_size": 596193,
+      "sha256": "d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188",
+      "archive": "alchimie/candidate.json",
+      "archive_size": 596193
+    },
+    {
+      "source": "alchimie/catalog.json",
+      "source_size": 606313,
+      "sha256": "8b174e16edf6ad279f9fa6cc0328776cba033be0b177c849ad77d81ec603da89",
+      "archive": "alchimie/catalog.json",
+      "archive_size": 606313
+    },
+    {
+      "source": "alchimie/factual-review.json",
+      "source_size": 296726,
+      "sha256": "f8b325e08284c1af9347bf08211e4398cc597e6af9c70f2eb505c0f901a1fc10",
+      "archive": "alchimie/factual-review.json",
+      "archive_size": 296726
+    },
+    {
+      "source": "alchimie/final-factual.json",
+      "source_size": 826,
+      "sha256": "92d7b0e3d2fafb509729c1c32d1dfbe6df1c18493c3a8432e63e4d9fb35470ea",
+      "archive": "alchimie/final-factual.json",
+      "archive_size": 826
+    },
+    {
+      "source": "alchimie/final-quality.json",
+      "source_size": 1304,
+      "sha256": "b6e81f9a4c2b50c771300044fd77e423dfa9f4074ac28ef57553e733f887b663",
+      "archive": "alchimie/final-quality.json",
+      "archive_size": 1304
+    },
+    {
+      "source": "alchimie/freeze_author.py",
+      "source_size": 8633,
+      "sha256": "1f3e9988178acde554940c1e55fd11e9cfb1079355bc086ef4746ba922d8c100",
+      "archive": "alchimie/freeze_author.py.txt",
+      "archive_size": 8633
+    },
+    {
+      "source": "alchimie/historical-world-tests.log",
+      "source_size": 181,
+      "sha256": "d0e9733c06e8a69fe4ca485aa1481a45e0431b20be6337093b1a89d487903295",
+      "archive": "alchimie/historical-world-tests.log",
+      "archive_size": 181
+    },
+    {
+      "source": "alchimie/independent-final-quality-check.json",
+      "source_size": 4058,
+      "sha256": "01c467496fe52b3477d5f9b7735d892d5248483b33108b2f808d7ade7f5a1a35",
+      "archive": "alchimie/independent-final-quality-check.json",
+      "archive_size": 4058
+    },
+    {
+      "source": "alchimie/independent-quality-check.json",
+      "source_size": 4186,
+      "sha256": "51817258ee41c7b22a5732a354f592726bc5977653a9d5aaba93650bf378cc07",
+      "archive": "alchimie/independent-quality-check.json",
+      "archive_size": 4186
+    },
+    {
+      "source": "alchimie/installed-world-tests.log",
+      "source_size": 99,
+      "sha256": "e03e48a755021c4a0f28b0c44f63143bc475e0d7c5ae0e56cbc7a7945ba2bb3d",
+      "archive": "alchimie/installed-world-tests.log",
+      "archive_size": 99
+    },
+    {
+      "source": "alchimie/live-audit.json",
+      "source_size": 134303,
+      "sha256": "68e4a92f3d947a52f7385057d63f7bfa4ce4cf934ec9888eea0a656c14b42eaa",
+      "archive": "alchimie/live-audit.json",
+      "archive_size": 134303
+    },
+    {
+      "source": "alchimie/proposal-audit.json",
+      "source_size": 5573,
+      "sha256": "1bf4276a062bca3e1e21a9144c805aa785a707dd354feb62e1614f98145da06b",
+      "archive": "alchimie/proposal-audit.json",
+      "archive_size": 5573
+    },
+    {
+      "source": "alchimie/quality-review.json",
+      "source_size": 332072,
+      "sha256": "756a89050f397bd7de38e1f0436166c21b6c91c1cef063e10492b360e43752d9",
+      "archive": "alchimie/quality-review.json",
+      "archive_size": 332072
+    },
+    {
+      "source": "alchimie/raw/candidates.json",
+      "source_size": 18889,
+      "sha256": "428c41970c7cb8ce2c88b7bc44dd9e4facf966e180f3e8cfcbfb8ab23794c2a6",
+      "archive": "alchimie/raw/candidates.json",
+      "archive_size": 18889
+    },
+    {
+      "source": "alchimie/raw/factual-review.json",
+      "source_size": 10837,
+      "sha256": "8b2ad7e8e461819034617ef8dda9dcc706386684393f7defde1248a8c7648a1c",
+      "archive": "alchimie/raw/factual-review.json",
+      "archive_size": 10837
+    },
+    {
+      "source": "alchimie/raw/quality-review.json",
+      "source_size": 12538,
+      "sha256": "984f775de7e6ed502e43ed5d0def6a5d7830077910ceadfbd5a1502ed6cbd95d",
+      "archive": "alchimie/raw/quality-review.json",
+      "archive_size": 12538
+    },
+    {
+      "source": "alchimie/review_factual.py",
+      "source_size": 8128,
+      "sha256": "d14d96200d73ceb03a80fcd844aba1941a7a5dd0ed506fc1e09b97ef34f1e5a2",
+      "archive": "alchimie/review_factual.py.txt",
+      "archive_size": 8128
+    },
+    {
+      "source": "alchimie/review_final_quality.py",
+      "source_size": 4222,
+      "sha256": "7f6b6c53a8693b3128d337ca462179c1c2a86dc1b6b560cef75b68febe114b37",
+      "archive": "alchimie/review_final_quality.py.txt",
+      "archive_size": 4222
+    },
+    {
+      "source": "alchimie/review_quality.py",
+      "source_size": 15219,
+      "sha256": "852b1b5584f7ee0f73ecd80961d506e51fe87bf68fd719dea782f449cd030721",
+      "archive": "alchimie/review_quality.py.txt",
+      "archive_size": 15219
+    },
+    {
+      "source": "history/approved-ids.json",
+      "source_size": 188,
+      "sha256": "b76f61ca1d4a242aaa76271e344b70088869e2b84bfb41a07f2ed0c87d88a159",
+      "archive": "history/approved-ids.json",
+      "archive_size": 188
+    },
+    {
+      "source": "history/binding-report.json",
+      "source_size": 7608,
+      "sha256": "e25345cefe6775a6f1b438491f718be6fd8fed067faf6845ead87c3a3a431aa7",
+      "archive": "history/binding-report.json",
+      "archive_size": 7608
+    },
+    {
+      "source": "history/build_v94_history_receipt.py",
+      "source_size": 5474,
+      "sha256": "a897e2956bf14029b6436a2e054a0b104f52e9ba1be3c8fd67962e9649bb93d0",
+      "archive": "history/build_v94_history_receipt.py.txt",
+      "archive_size": 5474
+    },
+    {
+      "source": "history/historical-ledger-tests.log",
+      "source_size": 99,
+      "sha256": "faff6a25acc07861d1ddfb5e0b023572a8fe86372394b59cf3d995f554e1ab88",
+      "archive": "history/historical-ledger-tests.log",
+      "archive_size": 99
+    },
+    {
+      "source": "history/history-tests-final.log",
+      "source_size": 181,
+      "sha256": "6a0a17e5e0af2a6921e689ce4f58a0859033bfbc7341cd99a4c4713b123f37de",
+      "archive": "history/history-tests-final.log",
+      "archive_size": 181
+    },
+    {
+      "source": "history/history-tests.log",
+      "source_size": 3546,
+      "sha256": "0bcf8ca2a488ce6e656bfb7985b0cc47035e1b1ab08309406c1b78bc21c01978",
+      "decoded_sha256": "45a4a8b7d1102052746d1bc6b2a0e100a50ad1d1b72816366c681040af6467d9",
+      "encoding": "gzip",
+      "archive": "history/history-tests.log.gz",
+      "archive_size": 1184
+    },
+    {
+      "source": "history/receipt-check.json",
+      "source_size": 2508,
+      "sha256": "33a1210ce5f4e4a7e6ddb62e5e2192333be51caec697ca084b44f323075ef08f",
+      "archive": "history/receipt-check.json",
+      "archive_size": 2508
+    },
+    {
+      "source": "history/rejected-reimport-test.log",
+      "source_size": 98,
+      "sha256": "f4c77b58e2280613a49ba18da1c4a02d440e862c49a6c8fe5daaf277333ff99d",
+      "archive": "history/rejected-reimport-test.log",
+      "archive_size": 98
+    },
+    {
+      "source": "history/verify_history_bindings.py",
+      "source_size": 3496,
+      "sha256": "1df9595d7f5ffb6833f1eed47bc0e408b5c85063c026d412d6ed7d2cf5a48e9a",
+      "archive": "history/verify_history_bindings.py.txt",
+      "archive_size": 3496
+    },
+    {
+      "source": "gui/alchimie-exploration-before.mjs",
+      "source_size": 25893,
+      "sha256": "00667ec670a3e54b48c2cba76101dc102d93076c6d83b15907e6c47ee84cf95c",
+      "archive": "gui/alchimie-exploration-before.mjs",
+      "archive_size": 25893
+    },
+    {
+      "source": "gui/final-independent-lt_gastronomie_241.png",
+      "source_size": 12112,
+      "sha256": "0bd398e51db0ac4c513b4b6937213f536d830c080fa880b7903480a623533c87",
+      "archive": "gui/final-independent-lt_gastronomie_241.png",
+      "archive_size": 12112
+    },
+    {
+      "source": "gui/final-independent-lt_geografie_239.png",
+      "source_size": 39182,
+      "sha256": "07c3ef383a2ac1c11ac8d89fdff47afed512b4874cc93c3a818c19115d119ec5",
+      "archive": "gui/final-independent-lt_geografie_239.png",
+      "archive_size": 39182
+    },
+    {
+      "source": "gui/final-independent-lt_literatura_240.png",
+      "source_size": 28631,
+      "sha256": "28f67ecd898716c1df6ffcb33e9581314a06f080f94014457bf25b6c7f2818f9",
+      "archive": "gui/final-independent-lt_literatura_240.png",
+      "archive_size": 28631
+    },
+    {
+      "source": "gui/final-independent-probe.log",
+      "source_size": 128,
+      "sha256": "ce98dd09979b7e4998b2c6eacdf7a429b6dad8f6ff8b3267bacf1f97a2ef15c1",
+      "archive": "gui/final-independent-probe.log",
+      "archive_size": 128
+    },
+    {
+      "source": "gui/final-independent-probe.mjs",
+      "source_size": 9680,
+      "sha256": "20515c51bddca684e67ebe4ebbb5bc4d305b33c5d251fe853ca132e946842170",
+      "archive": "gui/final-independent-probe.mjs",
+      "archive_size": 9680
+    },
+    {
+      "source": "gui/final-independent-probes.json",
+      "source_size": 23226,
+      "sha256": "79b36d2da7372f842ecca08985a06784aa66ff4c29672277c0c954be89156d22",
+      "archive": "gui/final-independent-probes.json",
+      "archive_size": 23226
+    },
+    {
+      "source": "gui/final-independent-review.json",
+      "source_size": 6851,
+      "sha256": "29032ac1d382a8df42227a160ebe16724499532e4da2e8eee740e83f28f1f182",
+      "archive": "gui/final-independent-review.json",
+      "archive_size": 6851
+    },
+    {
+      "source": "gui/final-independent-server.log",
+      "source_size": 275,
+      "sha256": "1bf3bf38d4a1b3879dc21db70b93bbd555816104a51aa9adbbe7149e0e24f688",
+      "archive": "gui/final-independent-server.log",
+      "archive_size": 275
+    },
+    {
+      "source": "gui/frontend-build.log",
+      "source_size": 3928,
+      "sha256": "f660c52f5a61cd3704f9b7eaff8cdf156bbd0df6692bd993b3206c125cb222cc",
+      "archive": "gui/frontend-build.log",
+      "archive_size": 3928
+    },
+    {
+      "source": "gui/frontend-lint.log",
+      "source_size": 53,
+      "sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "encoding": "gzip",
+      "archive": "gui/frontend-lint.log.gz",
+      "archive_size": 70
+    },
+    {
+      "source": "gui/frontend-tests.log",
+      "source_size": 18412,
+      "sha256": "71542f41845a1a056d3ac6dd22f59daa5fc2803fa49f66a3e7d035b35f9b5b28",
+      "archive": "gui/frontend-tests.log",
+      "archive_size": 18412
+    },
+    {
+      "source": "gui/independent/before-lt_geografie_239-choices-320-200.png",
+      "source_size": 170575,
+      "sha256": "356b611022ba39a2907444a538ffe13965a2c3aa72c73ee985056520644700c6",
+      "archive": "gui/independent/before-lt_geografie_239-choices-320-200.png",
+      "archive_size": 170575
+    },
+    {
+      "source": "gui/independent/before-lt_geografie_239-earned-320-200.png",
+      "source_size": 128172,
+      "sha256": "ba1269e03cbf6db28f3479a05aa8c130383477777ac097487e82d6276c6c86a3",
+      "archive": "gui/independent/before-lt_geografie_239-earned-320-200.png",
+      "archive_size": 128172
+    },
+    {
+      "source": "gui/independent/before-lt_geografie_239-hint-320-200.png",
+      "source_size": 146295,
+      "sha256": "5ab801d33342c0d3d3a1ad1ae27ce60120301556af016965bd1f691657e54bed",
+      "archive": "gui/independent/before-lt_geografie_239-hint-320-200.png",
+      "archive_size": 146295
+    },
+    {
+      "source": "gui/independent/before-lt_literatura_240-choices-320-200.png",
+      "source_size": 124036,
+      "sha256": "38c2846b3095d5c714f43b6ccf7d565956932c1a37ce385425cb46dfe294759f",
+      "archive": "gui/independent/before-lt_literatura_240-choices-320-200.png",
+      "archive_size": 124036
+    },
+    {
+      "source": "gui/independent/before-lt_literatura_240-earned-320-200.png",
+      "source_size": 123243,
+      "sha256": "deb932885d5ee5e97315250006b2c1b2143f6ceeb3a944ec967119c3adcd70fb",
+      "archive": "gui/independent/before-lt_literatura_240-earned-320-200.png",
+      "archive_size": 123243
+    },
+    {
+      "source": "gui/independent/before-lt_literatura_240-hint-320-200.png",
+      "source_size": 122762,
+      "sha256": "407ae9e3e321aebb2827addf50f20c582b57008967798e14bdcaea564104d328",
+      "archive": "gui/independent/before-lt_literatura_240-hint-320-200.png",
+      "archive_size": 122762
+    },
+    {
+      "source": "gui/independent/before-source-bindings.json",
+      "source_size": 1596,
+      "sha256": "8265b9993a22c5b923bd4f868739a88ee50766833ca6267317ad4ae1e5281477",
+      "archive": "gui/independent/before-source-bindings.json",
+      "archive_size": 1596
+    },
+    {
+      "source": "gui/independent/before.json",
+      "source_size": 2116,
+      "sha256": "5ddac876e2b58201005ca297f086b54790c531618e16a346c50cb24f0efd20b0",
+      "archive": "gui/independent/before.json",
+      "archive_size": 2116
+    },
+    {
+      "source": "gui/independent/capture-before.mjs",
+      "source_size": 3140,
+      "sha256": "55dc081eda37dc8293a67297bf8aa13986a8f463fb9677c6015b01009bf76806",
+      "archive": "gui/independent/capture-before.mjs",
+      "archive_size": 3140
+    },
+    {
+      "source": "gui/independent/critique.md",
+      "source_size": 3996,
+      "sha256": "b9dbfe5863fe5aa0e09dd21f33ff00a74c776b1930bdd0252705addddfe2d663",
+      "archive": "gui/independent/critique.md",
+      "archive_size": 3996
+    },
+    {
+      "source": "gui/independent/final-review.json",
+      "source_size": 8046,
+      "sha256": "0eb434fd19db22c1b5b7e16f11595dc95e684c6a63a7e3301f9e256def40674e",
+      "archive": "gui/independent/final-review.json",
+      "archive_size": 8046
+    },
+    {
+      "source": "gui/independent/lant-browser-initial.log",
+      "source_size": 33990,
+      "sha256": "aa036f13b29bf4a704bd5571ae988e3a9580b045b6a22a4062ff9b78c8f4084e",
+      "decoded_sha256": "d2f6e2ab8a169a9e26dfcd94d0ec78011439626d9e91a12fc3d86b15085f569e",
+      "encoding": "gzip",
+      "archive": "gui/independent/lant-browser-initial.log.gz",
+      "archive_size": 1995
+    },
+    {
+      "source": "gui/independent/lant-browser-verified.log",
+      "source_size": 4072,
+      "sha256": "62f8a5decfba0e9ead1d32dbd843d13a5e0492ea99c0e1b7068d94119eafed8e",
+      "archive": "gui/independent/lant-browser-verified.log",
+      "archive_size": 4072
+    },
+    {
+      "source": "gui/independent/lant-browser.log",
+      "source_size": 4072,
+      "sha256": "b0a06f6d5db63e53ffe556334a4028b7d2662b0906e7163a95e80c7ba381cc30",
+      "archive": "gui/independent/lant-browser.log",
+      "archive_size": 4072
+    },
+    {
+      "source": "gui/independent/playwright/.last-run.json",
+      "source_size": 934,
+      "sha256": "83464fc5a9e8ba2f1d1af1743bc88fe5d470f12010e27877768f33020a8ff7d4",
+      "archive": "gui/independent/playwright/.last-run.json",
+      "archive_size": 934
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-4d698-vive-earned-path-and-reload-desktop/error-context.md",
+      "source_size": 10066,
+      "sha256": "54c2296b70bf9a35aad2bfd2ec2e1420443eac37a8b40b8b73c8ca32dc3c2be5",
+      "decoded_sha256": "de2aeb71f2c73e50d9eaf3cff723086a8c1b16ad5e298e66c5f3fadcec0ff5e9",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-4d698-vive-earned-path-and-reload-desktop/error-context.md.gz",
+      "archive_size": 3436
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-4d698-vive-earned-path-and-reload-mobile/error-context.md",
+      "source_size": 10066,
+      "sha256": "54c2296b70bf9a35aad2bfd2ec2e1420443eac37a8b40b8b73c8ca32dc3c2be5",
+      "decoded_sha256": "de2aeb71f2c73e50d9eaf3cff723086a8c1b16ad5e298e66c5f3fadcec0ff5e9",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-4d698-vive-earned-path-and-reload-mobile/error-context.md.gz",
+      "archive_size": 3436
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-5e170-vive-earned-path-and-reload-desktop/error-context.md",
+      "source_size": 10065,
+      "sha256": "cfd4272635e4aeec990d2c199349f82a547d1496e8b2e9dd6c9f1a164d32c7ce",
+      "decoded_sha256": "f85ed80f38b99ad78f4ab5ba24b421dedb55fdd4ef745e4b571c609614eef468",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-5e170-vive-earned-path-and-reload-desktop/error-context.md.gz",
+      "archive_size": 3438
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-5e170-vive-earned-path-and-reload-mobile/error-context.md",
+      "source_size": 10065,
+      "sha256": "cfd4272635e4aeec990d2c199349f82a547d1496e8b2e9dd6c9f1a164d32c7ce",
+      "decoded_sha256": "f85ed80f38b99ad78f4ab5ba24b421dedb55fdd4ef745e4b571c609614eef468",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-5e170-vive-earned-path-and-reload-mobile/error-context.md.gz",
+      "archive_size": 3438
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-79de6-vive-earned-path-and-reload-desktop/error-context.md",
+      "source_size": 10959,
+      "sha256": "6c03027edc4ec88c3cbae1f2263c0253ebbc90a490ccdc93e9590ece5743407f",
+      "decoded_sha256": "5fe3199c5700fd7d8675418fc7a6fb9e8ae4224dba414984dde561e0ae7187e4",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-79de6-vive-earned-path-and-reload-desktop/error-context.md.gz",
+      "archive_size": 3924
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-79de6-vive-earned-path-and-reload-mobile/error-context.md",
+      "source_size": 10959,
+      "sha256": "6c03027edc4ec88c3cbae1f2263c0253ebbc90a490ccdc93e9590ece5743407f",
+      "decoded_sha256": "5fe3199c5700fd7d8675418fc7a6fb9e8ae4224dba414984dde561e0ae7187e4",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-79de6-vive-earned-path-and-reload-mobile/error-context.md.gz",
+      "archive_size": 3924
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-83be5-vive-earned-path-and-reload-desktop/error-context.md",
+      "source_size": 10065,
+      "sha256": "d37ec9a13baf9dd17aa240f2336f89515e8aae09eec6e128857e32bb64b1496a",
+      "decoded_sha256": "739bba75ca987e3d60ca65438d2d7ebcbed0f8d3dd2399350a56a99c02a6db77",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-83be5-vive-earned-path-and-reload-desktop/error-context.md.gz",
+      "archive_size": 3438
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-83be5-vive-earned-path-and-reload-mobile/error-context.md",
+      "source_size": 10065,
+      "sha256": "d37ec9a13baf9dd17aa240f2336f89515e8aae09eec6e128857e32bb64b1496a",
+      "decoded_sha256": "739bba75ca987e3d60ca65438d2d7ebcbed0f8d3dd2399350a56a99c02a6db77",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-83be5-vive-earned-path-and-reload-mobile/error-context.md.gz",
+      "archive_size": 3438
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-b6694-vive-earned-path-and-reload-desktop/error-context.md",
+      "source_size": 10065,
+      "sha256": "c65a12c0a6e9ec2b5d7e9e07b61fe03227bd5590d49d178942f56714eceb49a2",
+      "decoded_sha256": "e52061cb490326e6fcb9a435da23af58709bb7ca03a8561e56d5a42d61adbb0a",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-b6694-vive-earned-path-and-reload-desktop/error-context.md.gz",
+      "archive_size": 3438
+    },
+    {
+      "source": "gui/independent/playwright/lant-relationship-captions-b6694-vive-earned-path-and-reload-mobile/error-context.md",
+      "source_size": 10065,
+      "sha256": "c65a12c0a6e9ec2b5d7e9e07b61fe03227bd5590d49d178942f56714eceb49a2",
+      "decoded_sha256": "e52061cb490326e6fcb9a435da23af58709bb7ca03a8561e56d5a42d61adbb0a",
+      "encoding": "gzip",
+      "archive": "gui/independent/playwright/lant-relationship-captions-b6694-vive-earned-path-and-reload-mobile/error-context.md.gz",
+      "archive_size": 3438
+    },
+    {
+      "source": "gui/independent/playwright-final/.last-run.json",
+      "source_size": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "archive": "gui/independent/playwright-final/.last-run.json",
+      "archive_size": 45
+    },
+    {
+      "source": "gui/independent/playwright-verified/.last-run.json",
+      "source_size": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "archive": "gui/independent/playwright-verified/.last-run.json",
+      "archive_size": 45
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-desktop/choices.png",
+      "source_size": 396572,
+      "sha256": "a15ef694f3e9a2ffa0ce866d91177ef5576dacb8212159d001704f8e7fd00d44",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-desktop/choices.png",
+      "archive_size": 396572
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-desktop/earned-path.png",
+      "source_size": 337338,
+      "sha256": "413b445a6c2111504d35935077aafa4966f6f3cf480c69f06609f93afddba8b9",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-desktop/earned-path.png",
+      "archive_size": 337338
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-mobile/choices.png",
+      "source_size": 581828,
+      "sha256": "2673aeb21292f2a58ff871a1e4a3aa5c1d0ee996d81cf67293346985200b05ac",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-mobile/choices.png",
+      "archive_size": 581828
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-mobile/earned-path.png",
+      "source_size": 459396,
+      "sha256": "ed2e4150ac92d1038e9eda91f19373d5ca70f4679c37ffaebe7db8b6dbdeb105",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-mobile/earned-path.png",
+      "archive_size": 459396
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-4fb29-ersist-without-taking-a-hop-desktop/exact-hint.png",
+      "source_size": 347454,
+      "sha256": "a599616ad22efe4ebf66f623101f5ee231e128ff4050c8a79f1c4fbe16386b34",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-4fb29-ersist-without-taking-a-hop-desktop/exact-hint.png",
+      "archive_size": 347454
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-4fb29-ersist-without-taking-a-hop-mobile/exact-hint.png",
+      "source_size": 491195,
+      "sha256": "482e5bceebbd73f8fc0b939821fcb5712a450ffe764cba5a714aa0a9cce5cdb8",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-4fb29-ersist-without-taking-a-hop-mobile/exact-hint.png",
+      "archive_size": 491195
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-7ed52-vive-earned-path-and-reload-desktop/choices.png",
+      "source_size": 397525,
+      "sha256": "59aaadd77dfbee6dc76b671939cd3e7e0ae9870d7f2af235ae1452fdf5082666",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-7ed52-vive-earned-path-and-reload-desktop/choices.png",
+      "archive_size": 397525
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-7ed52-vive-earned-path-and-reload-desktop/earned-path.png",
+      "source_size": 336132,
+      "sha256": "a2d9f5fb6e3d3aafbec30e6f47cb297e5b05253289a0de75411bcfd279dcff92",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-7ed52-vive-earned-path-and-reload-desktop/earned-path.png",
+      "archive_size": 336132
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-7ed52-vive-earned-path-and-reload-mobile/choices.png",
+      "source_size": 595084,
+      "sha256": "f8a764afd2469c6ca1d6af1bc150ca34689cff664aa1248dca2c06479e4ae909",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-7ed52-vive-earned-path-and-reload-mobile/choices.png",
+      "archive_size": 595084
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-7ed52-vive-earned-path-and-reload-mobile/earned-path.png",
+      "source_size": 475801,
+      "sha256": "a839e986c83877768471215029bce05078046d8ec3f759598dc3b6d5b9893976",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-7ed52-vive-earned-path-and-reload-mobile/earned-path.png",
+      "archive_size": 475801
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-9d2cb-ersist-without-taking-a-hop-desktop/exact-hint.png",
+      "source_size": 344022,
+      "sha256": "fb3a0530704414bdc9786ec803905ddde23dd98ae1a441c0ace13945b4a5e487",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-9d2cb-ersist-without-taking-a-hop-desktop/exact-hint.png",
+      "archive_size": 344022
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-9d2cb-ersist-without-taking-a-hop-mobile/exact-hint.png",
+      "source_size": 457163,
+      "sha256": "4e92eb486400dc2e0b6ba93f06b823261b1c7f3f83e935d34ca24499dffc2b67",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-9d2cb-ersist-without-taking-a-hop-mobile/exact-hint.png",
+      "archive_size": 457163
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-9de65-ersist-without-taking-a-hop-desktop/exact-hint.png",
+      "source_size": 346351,
+      "sha256": "fc9046225220bf23cc0ced4f776250d34957bafc591c9c31598aab8279ad0cb0",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-9de65-ersist-without-taking-a-hop-desktop/exact-hint.png",
+      "archive_size": 346351
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-9de65-ersist-without-taking-a-hop-mobile/exact-hint.png",
+      "source_size": 471625,
+      "sha256": "3356287e4fc233391c77e30070348c30aad306b6471a85d89410a36af73f29dd",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-9de65-ersist-without-taking-a-hop-mobile/exact-hint.png",
+      "archive_size": 471625
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-b6694-vive-earned-path-and-reload-desktop/choices.png",
+      "source_size": 389296,
+      "sha256": "42d2ed5d3415db6f0efb2ae0abed5e3a2171d07bc3d6b55308a4ed399f980d24",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-b6694-vive-earned-path-and-reload-desktop/choices.png",
+      "archive_size": 389296
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-b6694-vive-earned-path-and-reload-desktop/earned-path.png",
+      "source_size": 335317,
+      "sha256": "2d478382aaa50fb8bc643d7bcffbb6d381dcf2d3cfc0949ae7ab2cf4fd0f92a8",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-b6694-vive-earned-path-and-reload-desktop/earned-path.png",
+      "archive_size": 335317
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-b6694-vive-earned-path-and-reload-mobile/choices.png",
+      "source_size": 490594,
+      "sha256": "4db823dae2b6a74e46f25a503d5218b34f1e23e21c77783bd46e28919a349312",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-b6694-vive-earned-path-and-reload-mobile/choices.png",
+      "archive_size": 490594
+    },
+    {
+      "source": "gui/independent/playwright-verified/lant-relationship-captions-b6694-vive-earned-path-and-reload-mobile/earned-path.png",
+      "source_size": 463756,
+      "sha256": "e149648803ff8eea17172cf90974f31b5bdb17c19484bbebaa791dd363515162",
+      "archive": "gui/independent/playwright-verified/lant-relationship-captions-b6694-vive-earned-path-and-reload-mobile/earned-path.png",
+      "archive_size": 463756
+    },
+    {
+      "source": "gui/keyboard-focus-expectation.json",
+      "source_size": 577,
+      "sha256": "f956d3916aef18e44ab9b7b022fcddf0bde89dd79944485a2c184e7e367fc7d7",
+      "archive": "gui/keyboard-focus-expectation.json",
+      "archive_size": 577
+    },
+    {
+      "source": "gui/npm-ci.log",
+      "source_size": 146,
+      "sha256": "05f54cc59de6fe99e724362af438c4c5e0230f420f1b770cf7a06e61414d6426",
+      "archive": "gui/npm-ci.log",
+      "archive_size": 146
+    },
+    {
+      "source": "gui/seeded-starts-before.json",
+      "source_size": 6698,
+      "sha256": "3d1a6d3d326f0221db7392876a0f26a6afbf8314eccf4bd91b579e7fb8052a97",
+      "archive": "gui/seeded-starts-before.json",
+      "archive_size": 6698
+    },
+    {
+      "source": "gui/seeded-starts-delta.json",
+      "source_size": 2590,
+      "sha256": "e3e5c09e6df690ac145936ec53916446d844de74c657497e5e35a95e29024ab1",
+      "archive": "gui/seeded-starts-delta.json",
+      "archive_size": 2590
+    },
+    {
+      "source": "content-delta.json",
+      "archive": "content-delta.json",
+      "source_size": 10356,
+      "archive_size": 10356,
+      "sha256": "31ff27dda4c6c06ceb806f12af2b5863da13b88f99caf5716eebc65e077a528e"
+    },
+    {
+      "source": "content-delta.txt",
+      "archive": "content-delta.txt",
+      "source_size": 1693,
+      "archive_size": 1693,
+      "sha256": "5b9c1f0665254c9a0e99bbedb2c338f1c80591f20f1a4093fb3c1f35dc7d2ba6"
+    },
+    {
+      "source": "contexto-profile-delta.json",
+      "archive": "contexto-profile-delta.json",
+      "source_size": 296,
+      "archive_size": 296,
+      "sha256": "182d9472ad56dbc8421840b2c109a2f8a933a4773c6b944b8e0ed0dbcb8f2352"
+    },
+    {
+      "source": "backend312.log",
+      "source_size": 2433,
+      "sha256": "02c6a8ce2a7078ff97c45e3616573e2cbeb936913caedb2d1686862dcab57b7d",
+      "archive": "backend312.log",
+      "archive_size": 2433
+    },
+    {
+      "source": "backend314.log",
+      "source_size": 2433,
+      "sha256": "e99c7eabb7733aec06e51d5124fc3b13a5a9433b2477febc93777537c1c3a3f7",
+      "archive": "backend314.log",
+      "archive_size": 2433
+    },
+    {
+      "source": "accounts312.log",
+      "source_size": 99,
+      "sha256": "1f37d33739fd23f958aed25af6ae0ff2836d5b6b93beacd367a5a2bcbb533f9d",
+      "archive": "accounts312.log",
+      "archive_size": 99
+    },
+    {
+      "source": "accounts314.log",
+      "source_size": 99,
+      "sha256": "f0908bd1a1681a8895a48f3de4822b76c38fd22315943842bd82be315d739518",
+      "archive": "accounts314.log",
+      "archive_size": 99
+    },
+    {
+      "source": "browser-tests.log",
+      "source_size": 83177,
+      "sha256": "1953df6be2eff41de747ca217fe3e951c8ecf9477ab17aa919e0ee5af6bbee3c",
+      "archive": "browser-tests.log",
+      "archive_size": 83177
+    },
+    {
+      "source": "browser-tests-initial.log",
+      "source_size": 89159,
+      "sha256": "6e76f1f425c0e12b1e31e455e9c185e6d576edcc8a57e878ccb7385c3f8bda08",
+      "decoded_sha256": "467ecbdb50a28e1b2474fbc21e4159deedecc609b9c065100eca7e4f3d635990",
+      "encoding": "gzip",
+      "archive": "browser-tests-initial.log.gz",
+      "archive_size": 14313
+    },
+    {
+      "source": "focus-tests.log",
+      "source_size": 2749,
+      "sha256": "3f8838efb8d95d2c405cd7a25fff880b08f6f7449f1373c361aa723c87fac832",
+      "archive": "focus-tests.log",
+      "archive_size": 2749
+    },
+    {
+      "source": "validate-kg.log",
+      "source_size": 1037,
+      "sha256": "dc95407dc1de1e997aa8884806809499916ddad7daf6c6473bbf1eb4af9129fa",
+      "archive": "validate-kg.log",
+      "archive_size": 1037
+    },
+    {
+      "source": "validate-pack.log",
+      "source_size": 228,
+      "sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "archive": "validate-pack.log",
+      "archive_size": 228
+    },
+    {
+      "source": "ruff.log",
+      "source_size": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "archive": "ruff.log",
+      "archive_size": 19
+    },
+    {
+      "source": "preview-check.json",
+      "source_size": 496,
+      "sha256": "dd2e215af27e638e2820bb12d08c8899d36ed4b9ddbfb85e8c57a302648b470d",
+      "archive": "preview-check.json",
+      "archive_size": 496
+    },
+    {
+      "source": "gate-inputs.json",
+      "source_size": 8717,
+      "sha256": "4697225116381d5ec9bc3ab40abd0edb91925bcc4b5ab3e682764348acbcb749",
+      "archive": "gate-inputs.json",
+      "archive_size": 8717
+    }
+  ]
+}

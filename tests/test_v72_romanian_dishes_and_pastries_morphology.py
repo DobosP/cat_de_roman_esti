@@ -11,6 +11,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.content_history import v49_lant_ledger_bytes
 from tests.current_content import CURRENT_CONTENT
 
 pytest.importorskip("django")
@@ -368,7 +369,8 @@ def test_v72_preserves_v71_selection_projection_topology_and_frozen_payloads() -
 
 def test_v72_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     checked_in = _json(_MOBILE_CONTRACT)
-    ledger = _json(_LEDGER)
+    ledger_blob = v49_lant_ledger_bytes(_LEDGER)
+    ledger = json.loads(ledger_blob)
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert _sha256(_MOBILE_CONTRACT) == _MOBILE_SHA256
@@ -388,5 +390,5 @@ def test_v72_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         "sha256:5ea700a00708cf799a4cad8dcc99c54cb6595f0e99c217b5d890b9a829195918"
     )
 
-    assert _sha256(_LEDGER) == _V49_LEDGER_SHA256
+    assert hashlib.sha256(ledger_blob).hexdigest() == _V49_LEDGER_SHA256
     assert ledger["meta"]["count"] == len(ledger["items"]) == 104

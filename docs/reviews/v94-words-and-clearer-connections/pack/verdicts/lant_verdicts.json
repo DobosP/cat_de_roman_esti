@@ -1,0 +1,109 @@
+{
+ "game": "lant",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_372",
+   "ct_viata_de_roman_373",
+   "cx_viata_de_roman_371",
+   "lt_gastronomie_241",
+   "lt_geografie_242"
+  ]
+ },
+ "verdicts": {
+  "lt_gastronomie_241": "promote",
+  "lt_geografie_242": "reject"
+ },
+ "perItem": [
+  {
+   "id": "lt_gastronomie_241",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:e64af047b81ab93948889ee21d8138d8c6b1b01a00532b135fe822fc73a6933b",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_gastronomie_241",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:e64af047b81ab93948889ee21d8138d8c6b1b01a00532b135fe822fc73a6933b",
+    "rationale": "Promote easy. The exact two-hop alternatives Ciorbă de perișoare→Orez→Sarmale and Ciorbă de perișoare→Carne→Sarmale bridge different familiar dishes through specific ingredients. Both first hops are credible and neither intermediate is compulsory. Fresh BFF replays complete both routes. The final display captions now explain optional rice, meatballs and the cabbage-roll filling; they remove the earlier generic presentation weakness and avoid imposing rice on every soup variant. Ingredient links are supported by original recipes and do not depend on a generic region or category-only chain. The short food arc matches easy. D1–D5 pass with no strict FAIL.",
+    "sources": [
+     "https://www.barbatlacratita.ro/2010/10/ciorba-de-perisoare.html",
+     "https://jamilacuisine.ro/ciorba-de-perisoare-reteta-video/",
+     "https://jamilacuisine.ro/sarmale-pas-cu-pas-reteta-video/"
+    ]
+   },
+   "verifier_review": {
+    "id": "lt_gastronomie_241",
+    "game": "lant",
+    "review_binding": "sha256:e64af047b81ab93948889ee21d8138d8c6b1b01a00532b135fe822fc73a6933b",
+    "verdict": "promote",
+    "rationale": "The two shortest routes connect meatball soup to stuffed cabbage through rice or meat. Both ingredients are independently documented in original recipes for the canonical dishes. Rice in meatballs is explicitly a variant; no pan-Romanian regional association or universal vegetarian/meat claim is made. Distinct endpoints and two ingredient choices form a legible food bridge. The new precise captions preserve those distinctions. The exact allocated-ID pending dossier was independently regenerated and byte-matches. All applicable recognition, predicate, novelty and B/C/D requirements were reviewed; current101-caption text is part of the dossier. This is an agent judgment, not a measured enjoyment study.",
+    "sources": [
+     "https://www.barbatlacratita.ro/2010/10/ciorba-de-perisoare.html",
+     "https://jamilacuisine.ro/sarmale-pas-cu-pas-reteta-video/"
+    ]
+   }
+  },
+  {
+   "id": "lt_geografie_242",
+   "game": "lant",
+   "final": "reject",
+   "analyst": "reject",
+   "verifier": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:31c5fd57edeb74888ae689ebcfc430d8dc4150d6bdb975dc7e9ec5719007adb3",
+   "policy": "reject-wins",
+   "analyst_review": {
+    "id": "lt_geografie_242",
+    "game": "lant",
+    "verdict": "reject",
+    "review_binding": "sha256:31c5fd57edeb74888ae689ebcfc430d8dc4150d6bdb975dc7e9ec5719007adb3",
+    "rationale": "Reject A4. The inherited target description is publicly served by GET /api/wordgames/lant/games/{id} and rendered in Lant.tsx, contrary to my initial assumption. My independent description-recheck.json (SHA7019865140aec9cfb0b399bdcd1dd2d7863d6d7fe059eb64b9aa5ae779d4df26) captures the actual response with 28 metres and Șaua Caraiman. The MApN monument owner identifies a selected secondary peak and 39.3 metres total including the base. These visible factual details cannot be treated as unused metadata. Although both short routes, endpoint recognition and all final captions are supported, that does not excuse the displayed description. Reject this new level without a shared-KG repair or replacement; the four other reviewed proposals stand. The prior analyst and probe are preserved under before-description-check. Separately reviewed edge captions remain factually sound and do not approve the rejected level.",
+    "sources": [
+     "https://www.bucegipark.ro/ro/",
+     "https://www.bucegipark.ro/media/public_docs/management_plan/10_Oct_2024/Planul_de_Management_al_Parcului_Natural_Bucegi__-_v.2011.pdf",
+     "https://reabilitare-crucea-caraiman.mapn.ro/pages/istoric"
+    ]
+   },
+   "verifier_review": {
+    "id": "lt_geografie_242",
+    "game": "lant",
+    "review_binding": "sha256:31c5fd57edeb74888ae689ebcfc430d8dc4150d6bdb975dc7e9ec5719007adb3",
+    "verdict": "reject",
+    "rationale": "A4 blocker: the existing target description is publicly serialized by lant.py and rendered by Lant.tsx, contrary to the initial analyst assumption. It places the memorial on Șaua Caraiman and gives28m; the monument owner MApN places it on the secondary2291m peak and records39.3m total including8.35m base. The visible geographic assertion is wrong and the dimension convention is unexplained. Clearer captions cannot make this new round factually acceptable. Reject this pending record without mutating existing KG or approved stock. The independently reviewed edge captions remain separate, factually supported display improvements.",
+    "sources": [
+     "https://reabilitare-crucea-caraiman.mapn.ro/pages/istoric"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 2,
+  "verified": 2,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v94-words-and-clearer-connections/pack/analyst.json",
+   "sha256": "sha256:7b6c110a281f1a5f50b55fb325e0494f4e82b960ac8b84b4dc523420d596fd57",
+   "reviewer": "v94-independent-pack-quality-world-author",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v94-words-and-clearer-connections/pack/verifier.json",
+   "sha256": "sha256:e3f0e1aa79b55c2682788474d1947266340b345fa008dc792918df082b6a272c",
+   "reviewer": "root-v94-factual",
+   "role": "verifier"
+  }
+ }
+}

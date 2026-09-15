@@ -1,0 +1,31 @@
+from pathlib import Path
+import ast,hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections');HERE=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+p=ROOT/'cat_de_roman_esti/wordgames/lant_relations.py';source=p.read_text();raw=(HERE/'candidates.json').read_bytes();candidate=json.loads(raw);sha=hashlib.sha256(raw).hexdigest()
+assert hashlib.sha256(p.read_bytes()).hexdigest()==candidate['runtime_source_sha256']
+expected={tuple(r['pair']):r for r in candidate['captions']};identities=[]
+for role in ('factual','quality'):
+ review=json.loads((HERE/(role+'-review.json')).read_bytes());assert review['role']==role and review['candidate_sha256']==sha
+ assert review['runtime_source_sha256']==candidate['runtime_source_sha256'] and review['kg_sha256']==candidate['kg_sha256']
+ identities.append(review['reviewer']);items=review['items'];assert len(items)==len(expected) and {tuple(x['pair']) for x in items}==set(expected)
+ for item in items:
+  proposed=expected[tuple(item['pair'])];assert item['verdict']=='accept' and item['caption']==proposed['caption'] and item['edge_sha256']==proposed['edge_sha256']
+assert len(set(identities))==2
+s=get_service()
+node=next(n.value.args[0] for n in ast.parse(source).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='REVIEWED_CAPTIONS' for t in n.targets))
+old=ast.literal_eval(node);updated=dict(old);assert len(old)==93
+for pair,r in expected.items():
+ assert pair not in old and 0<len(r['caption'])<=34
+ for a,b in (pair,tuple(reversed(pair))):assert digest(record_snapshot(s.link(a,b)))==r['edge_sha256']
+ updated[pair]=(r['edge_sha256'],r['caption'])
+lines=source.splitlines(keepends=True);newlines=['    {\n']
+for pair,(edge_sha,label) in sorted(updated.items()):
+ newlines.extend([f'        ({json.dumps(pair[0])}, {json.dumps(pair[1])}): (\n',f'            "{edge_sha}",\n',f'            {json.dumps(label,ensure_ascii=False)},\n','        ),\n'])
+newlines.append('    }\n');p.write_text(''.join(lines[:node.lineno-1]+newlines+lines[node.end_lineno:]))
+newnode=next(n.value.args[0] for n in ast.parse(p.read_text()).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='REVIEWED_CAPTIONS' for t in n.targets));installed=ast.literal_eval(newnode)
+assert len(installed)==101 and all(installed[k]==v for k,v in old.items())
+receipt={'candidate_sha256':sha,'installed_source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'previous_source_sha256':candidate['runtime_source_sha256'],'added':8,'prior_records_exact':93,'reviewers':identities,'both_directions_exact':16,'graph_changed':False}
+(HERE/'installation.json').write_text(json.dumps(receipt,indent=2)+'\n');print('Installed8independently reviewed captions;93priorentries exact')

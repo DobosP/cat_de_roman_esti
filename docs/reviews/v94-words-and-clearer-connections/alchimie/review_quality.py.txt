@@ -1,0 +1,113 @@
+"""Independent V94 world quality review; writes reviewer-owned evidence only."""
+from pathlib import Path
+from collections import Counter
+import copy
+import hashlib
+import json
+import sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import mechanics_for
+from cat_de_roman_esti.wordgames.service import normalize
+REVIEWER='codex-v94-independent-quality-scout'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def digest(v):return hashlib.sha256(B.json_bytes(v)).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(name,v):(OUT/name).write_bytes(B.json_bytes(v))
+base_dir=ROOT/'docs/reviews/v93-words-and-game-quality/alchimie'
+base=read(base_dir/'candidate.json');prior=read(base_dir/'quality-review.json');prior_final=read(base_dir/'final-quality.json');prior_audit=read(base_dir/'live-audit.json')
+assert sha(base_dir/'candidate.json')==prior['candidate_sha256']=='fd6d47853a424695d1c0ebf6c2a94b18196c9ce7e38560f4b7b4dcb1c4e6bbef'
+assert prior_final['audit_sha256']==sha(base_dir/'live-audit.json')
+assert prior_final['catalog_sha256']==prior_audit['catalog_sha256']=='14475e29c1c40888a762c1302170f658577ec58ea7e6db2b6fc2ac833c8f5e38'
+assert prior_final['verdict']=='accept' and prior_final['reviewer']==prior['reviewer']
+assert prior_audit['candidate_sha256']==prior['candidate_sha256'] and prior['world_verdict']=='accept'
+p=OUT/'candidate.json';candidate_sha=sha(p);c=read(p);raw=read(OUT/'raw/candidates.json')
+assert candidate_sha=='d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188'
+assert sha(OUT/'raw/candidates.json')=='428c41970c7cb8ce2c88b7bc44dd9e4facf966e180f3e8cfcbfb8ab23794c2a6'
+assert p.read_bytes()==B.json_bytes(B.candidate())
+assert raw['candidate_sha256']==candidate_sha
+old_c={x['id']:x for x in base['concepts']};old_r={x['id']:x for x in base['recipes']}
+concepts={x['id']:x for x in c['concepts']};recipes={x['id']:x for x in c['recipes']}
+old_cq={x['id']:x for x in prior['concepts']};old_rq={x['id']:x for x in prior['items']}
+assert len(old_c)==235 and len(old_r)==315
+assert set(old_cq)==set(old_c) and set(old_rq)==set(old_r)
+for i,x in old_c.items():assert concepts[i]==x and old_cq[i]['verdict']=='accept' and old_cq[i]['concept_sha256']==digest(x)
+for i,x in old_r.items():assert recipes[i]==x and old_rq[i]['verdict']=='accept'
+for key in ('world','unlocks','goals'):assert c[key]==base[key]
+assert c['compatible_versions'][:-1]==base['compatible_versions']
+assert c['compatible_versions'][-1]['source_sha256']==sha(base_dir/'candidate.json')
+assert c['compatible_versions'][-1]['mechanics']==mechanics_for(base['world']['starter_ids'],{tuple(r['pair']):r['result'] for r in base['recipes']},[(u['after_discoveries'],u['concept_ids']) for u in base['unlocks']])
+new_ids=set(concepts)-set(old_c);new_rids=set(recipes)-set(old_r)
+assert {x['id'] for x in raw['concepts']}==new_ids and {x['id'] for x in raw['recipes']}==new_rids
+kg=read(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json');aliases={normalize(t) for n in kg['kg_nodes'] for t in [n['label_ro'],*n.get('aliases',[])]}
+assert not {normalize(concepts[i]['label']) for i in new_ids}&aliases
+assert len({normalize(x['label']) for x in concepts.values()})==len(concepts)
+assert len({tuple(r['pair']) for r in recipes.values()})==len(recipes)
+assert all(set(r['pair'])<=set(concepts) and r['result'] not in r['pair'] for r in recipes.values())
+def closure(v):
+ owned=set(v['world']['starter_ids']);crafted=set();tiers=set();witness={i:[] for i in owned}
+ while True:
+  progress=False
+  for u in v['unlocks']:
+   if u['id'] not in tiers and len(crafted)>=u['after_discoveries']:
+    tiers.add(u['id']);owned.update(u['concept_ids']);progress=True
+    for i in u['concept_ids']:witness[i]=['supply:'+u['id']]
+  for r in v['recipes']:
+   if r['result'] not in owned and set(r['pair'])<=owned:
+    owned.add(r['result']);crafted.add(r['result']);progress=True
+    witness[r['result']]=list(dict.fromkeys(witness[r['pair'][0]]+witness[r['pair'][1]]+[r['id']]))
+  if not progress:break
+ assert owned=={x['id'] for x in v['concepts']}
+ return crafted,tiers,witness
+crafted,tiers,witness=closure(c);old_crafted,_,_=closure(base)
+all_inputs={n for r in c['recipes'] for n in r['pair']};old_inputs={n for r in base['recipes'] for n in r['pair']};new_inputs={n for i in new_rids for n in recipes[i]['pair']};alts=Counter(r['result'] for r in recipes.values())
+recipe_rationales={
+ 'tzatziki-iaurt-castravete':'Yogurt and cucumber are the defining recognizable base of this cold sauce. Draining, garlic, herbs and oil are disclosed; no cooking or hidden ingredient-state reversal is assumed. The original yogurt label remains accurate.',
+ 'tzatziki-sos-iaurt-castravete':'The existing thick yogurt-garlic sauce is a useful prepared intermediate rather than a synonym of tzatziki. Adding drained cucumber makes a distinct named sauce; the alternate plain-yogurt route avoids requiring one exact chain.',
+ 'cartofi-gratinati-smantana':'Potato plus sour cream gives an intuitive baked-dish direction. Boiling, slicing, layering with egg/cheese and oven browning are explicit; the selected raw potato is actually prepared, not silently treated as cooked.',
+ 'cartofi-gratinati-cascaval':'Cheese plus potato is a familiar gratin approach and a clear alternative to sour cream. The explanation names the remaining layers and baking, so two selected items are not misrepresented as the entire recipe.',
+ 'crochete-cartofi-pesmet':'Cold mash plus breadcrumbs is an inferable transformation into molded, breaded croquettes. The source explicitly reuses mash containing milk/butter and adds crumbs to bind it; shaping, coating and frying preserve the input state.',
+ 'crochete-cartofi-cascaval':'A cheese filling offers an understandable alternate route to potato croquettes. Cold mash, crumb binding, filled shaping and pané frying distinguish the result from merely serving mash with grated cheese.',
+ 'paste-pesto-sos':'Pesto plus already cooked pasta is a direct, satisfying finish. The text mixes the prepared pasta with sauce and reserved hot water; it does not roll or re-form cooked noodles.',
+ 'paste-pesto-busuioc':'Basil is a recognizable clue to pesto, while the explanation explicitly prepares a Sicilian tomato/herb/seed/cheese sauce before mixing it with cooked pasta. It is a broader optional route, not a claim that pasta sprinkled with a leaf alone becomes the full sauce.',
+ 'chiftele-peste-ou':'Fish and egg give an understandable binding direction for fish patties. Deboning, mincing, soaked bread, herbs, shaping and frying are explicit. One final pair is sufficient; the existing fish/crumb result is deliberately preserved.',
+ 'piure-dovleac-copt-unt':'Already baked pumpkin is mashed and enriched with butter, producing a distinct texture and useful ingredient. This reuses the cooked state honestly instead of presenting it as raw pumpkin.',
+ 'piure-dovleac-cratita':'Raw pumpkin plus a cooking pot offers another sensible route: cut, boil, drain and mash. The pot is operationally meaningful, and the draining instruction avoids a watery filling for later recipes.',
+ 'jeleu-compot-gelatina':'Compote liquid and gelatin make an intuitive chilled fruit jelly. Hydration, gentle dissolution without boiling and cooling are explicit. A former terminal compote gains a useful transformation without being conflated with jam.',
+ 'jeleu-fruct-gelatina':'Fruit juice and gelatin give a broadly inferable alternative. Boiling precedes cooling and gelatin addition; the text avoids boiling the gelatin itself. The defined result is a chilled gel, not confectionery candy.',
+ 'supa-crema-piure-dovleac':'Pumpkin mash plus soup is a natural savory continuation. Diluting, smoothing, heating and seasoning disclose the transformation to cream soup; the puree remains a cooked ingredient regardless of its earlier boiling/baking route.',
+ 'placinte-piure-dovleac':'Drained pumpkin mash is a plausible sweet filling for pastry. Sweetening, cinnamon, enclosing in dough and baking are disclosed. The already prepared mash has a second distinct destination beyond soup.',
+ 'tarta-aluat-jeleu':'The finished chilled jelly is deliberately softened with gentle heat, poured over fruit on a separately baked pastry base and chilled again. Unica step 5 explicitly reheats remaining jelly enough to flow. This preserves the selected set-gel state and makes a coherent onward use.',
+ 'cascaval-pane-pesmet':'Cheese plus breadcrumbs is a strong practical expectation. Chilling, flour, egg, a double crumb coat and frying are stated; the new route uses earned Pesmet to reach an existing recognizable dish.'
+}
+concept_rationales={
+ 'alw_food_cartofi_gratinati':'The familiar potato dish has a plain definition that explains gratination as layered ingredients browned in the oven; optional cheese/egg variants do not conceal different identities.',
+ 'alw_food_chiftele_peste':'The label transparently names the main ingredient and the familiar patty form. Deboned minced fish, binders and cooking distinguish it from whole breaded fish.',
+ 'alw_food_crochete_cartofi':'The culinary name is explained through molded mash, optional cheese filling and a crumb crust. It is a distinct payoff for potatoes and breadcrumbs, rather than renaming existing mash.',
+ 'alw_food_jeleu_fructe':'The definition explicitly selects chilled gelatin-set fruit juice/pulp. That preparation differs from existing compote, jam and candy and supports controlled reheating for a tart.',
+ 'alw_food_paste_pesto':'The name describes a familiar pasta dish with the existing pesto sauce. The definition preserves cooked pasta and explains the borrowed sauce name in Romanian.',
+ 'alw_food_piure_dovleac':'A descriptive everyday preparation with two understandable cooking routes and two onward uses. Cooked mashed pulp is distinct from raw pumpkin and baked pumpkin pieces.',
+ 'alw_food_tzatziki':'The borrowed name is made clear through thick yogurt, drained cucumber and garlic. A Romanian recipe published in 2018 and Olympus Romanian product copy show sustained ordinary cooking exposure; it is an optional discovery with inferable ingredients, not an obscure forced target.'
+}
+assert set(recipe_rationales)==new_rids and set(concept_rationales)==new_ids
+new_cq=[{'id':i,'concept_sha256':digest(concepts[i]),'verdict':'accept','inherited':False,'rationale':concept_rationales[i],'sources':concepts[i]['references']+(['https://www.olympusfoods.ro/produse/iaurt-cu-specific-grecesc/iaurt-specific-grecesc-2.html'] if i=='alw_food_tzatziki' else [])} for i in sorted(new_ids)]
+new_rq=[{'id':i,'verdict':'accept','rationale':recipe_rationales[i],'sources':recipes[i]['sources']} for i in sorted(new_rids)]
+world_rationale=('All 235 previous concepts and 315 recipes match the reviewed V93 candidate exactly, with prior quality/final/live-audit bindings verified before inheritance. The same eight starters, 96 supplies, 12 tiers and 32 optional goals reach all 242 concepts and 138 discoveries. Six of seven new results have two direct paths; fish patties retain one clear final pair instead of colliding with the existing fish-and-crumb recipe. Compote and yogurt sauce gain onward use; pumpkin puree and fruit jelly become new intermediates. Crafted intermediates increase from 57 to 61. Explanations preserve cooked pasta, cold mash, baked pumpkin and set jelly and disclose the preparation required between the two selected ingredients and result. Tzatziki is explained and supported by ordinary Romanian culinary exposure. No prior pair, alias or recipe is replaced, and capacity remains below 256 concepts/512 recipes. This is editorial quality acceptance, not factual-final or browser/human enjoyment acceptance.')
+review={'kind':B.REVIEW_KIND,'role':'quality','reviewer':REVIEWER,'candidate_sha256':candidate_sha,'world_verdict':'accept','world_rationale':world_rationale,'inherited_review_sha256':sha(base_dir/'quality-review.json'),'concepts':[],'items':[]}
+for i in sorted(concepts):
+ if i in old_c:
+  row=copy.deepcopy(old_cq[i]);row['inherited']=True;row['rationale']='Independent exact V93 record, concept digest and accepted prior judgment verified before inheritance. '+row['rationale']
+ else:row=next(x for x in new_cq if x['id']==i)
+ review['concepts'].append(row)
+for i in recipes:
+ if i in old_r:
+  row=copy.deepcopy(old_rq[i]);row['rationale']='Independent exact V93 recipe record and accepted prior judgment verified before inheritance. '+row['rationale']
+ else:row=next(x for x in new_rq if x['id']==i)
+ review['items'].append(row)
+write('quality-review.json',review);B.read_review(OUT/'quality-review.json','quality',candidate_sha,set(recipes),c['concepts'])
+write('raw/quality-review.json',{'kind':'alchimie-v94-new-content-quality-review-v1','role':'quality','reviewer':REVIEWER,'candidate_sha256':sha(OUT/'raw/candidates.json'),'complete_candidate_sha256':candidate_sha,'verdict':'accept','world_rationale':world_rationale,'concepts':new_cq,'items':new_rq})
+checks={'kind':'alchimie-v94-independent-quality-check-v1','reviewer':REVIEWER,'candidate_sha256':candidate_sha,'raw_candidate_sha256':sha(OUT/'raw/candidates.json'),'old_concepts_exact':len(old_c),'old_recipes_exact':len(old_r),'concepts':len(concepts),'recipes':len(recipes),'craftable_results':len(crafted),'starter_ids_unchanged':True,'supply_tiers_and_goals_unchanged':True,'supplies':sum(len(u['concept_ids']) for u in c['unlocks']),'compatible_generations':len(c['compatible_versions']),'formerly_terminal_reused':{i:concepts[i]['label'] for i in sorted((old_crafted-old_inputs)&new_inputs)},'crafted_intermediates':len(crafted&all_inputs),'terminal_results':len(crafted-all_inputs),'results_with_alternatives':sum(n>1 for n in alts.values()),'new_targets':{i:{'label':concepts[i]['label'],'direct_recipe_count':alts[i],'witness':witness[i]} for i in sorted(new_ids)},'new_pairs_unique':True,'new_alias_shadowing':False,'unresolved_findings':[],'source_checks':{'set_jelly_reheating':'https://retete.unica.ro/recipes/tarta-cu-fructe/ step 5; warmed enough to pour after an earlier layer has set.','tzatziki_recognition':['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/sos-tzatziki.html','https://www.olympusfoods.ro/produse/iaurt-cu-specific-grecesc/iaurt-specific-grecesc-2.html']},'bindings':{str(p.relative_to(ROOT)):sha(p) for p in [base_dir/'candidate.json',base_dir/'quality-review.json',base_dir/'final-quality.json',base_dir/'live-audit.json',ROOT/'cat_de_roman_esti/fixtures/kg_sample.json',ROOT/'docs/CRITIQUE_RUBRIC.md']},'reviewer_source_sha256':sha(Path(__file__)),'limits':['No final runtime-audit acceptance is inferred.','Five new results remain terminal; two become intermediates and two old terminals are reused.','One direct pair for fish patties is intentional; human enjoyment remains unmeasured.']}
+write('independent-quality-check.json',checks)
+print(json.dumps({k:v for k,v in checks.items() if k not in {'new_targets','bindings','source_checks','limits'}},ensure_ascii=False,indent=2))

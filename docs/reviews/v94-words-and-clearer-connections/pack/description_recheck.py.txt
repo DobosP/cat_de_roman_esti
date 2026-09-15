@@ -1,0 +1,44 @@
+"""Verify whether the suspect inherited target description reaches the player."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections')
+D = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import lant
+from cat_de_roman_esti.wordgames.service import get_service
+
+service = get_service()
+start, target = 'n_v17geo_sfinxul_bucegi', 'n_v20geo_crucea_caraiman'
+session = lant.LantSession(start=start, target=target, optimal=2, difficulty='usor', chain=[start])
+sid = lant.store.create(session)
+response = Client().get(f'/api/wordgames/lant/games/{sid}')
+assert response.status_code == 200
+state = response.json()
+assert state['target']['description'] == service.description(target)
+assert '28 de metri' in state['target']['description']
+assert 'Șaua Caraiman' in state['target']['description']
+ui_path = ROOT / 'frontend/src/screens/Lant.tsx'
+ui_source = ui_path.read_text()
+assert '<p className="muted lant-target-description">{state.target.description}</p>' in ui_source
+result = {
+    'kind': 'v94-independent-target-description-recheck-v1',
+    'reviewer': 'v94-independent-pack-quality-world-author',
+    'id': 'lt_geografie_242', 'endpoint': f'/api/wordgames/lant/games/{sid}',
+    'http_status': response.status_code, 'public_opening_payload': state,
+    'target_description_public': True, 'frontend_renders_target_description': True,
+    'runtime_sources': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                        for p in [ROOT / 'cat_de_roman_esti/wordgames/lant.py', ui_path]},
+    'owner_source': 'https://reabilitare-crucea-caraiman.mapn.ro/pages/istoric',
+    'finding': 'A4: the visible inherited description places the monument on Șaua Caraiman and states 28 metres. The monument owner identifies a selected secondary peak and 39.3 metres total, including the base. The initial analyst incorrectly assumed these details were not shown. Reject this new level without changing the shared KG.',
+    'scope': 'Fixed pending-level session used to inspect the public response; no claim of natural selection.',
+}
+(D / 'description-recheck.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+print(hashlib.sha256((D / 'description-recheck.json').read_bytes()).hexdigest())

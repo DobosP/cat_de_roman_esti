@@ -1,0 +1,86 @@
+{
+ "id": "ct_gastronomie_372",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "c582ef7c12f9447ed6fb8bb6e1b3c0e35e0fc9528ac9e40200304cf160931c1b",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v11gas_ciorba_perisoare",
+  "label": "Ciorbă de perișoare",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.86,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Ciorbă acrișoară cu perișoare de carne, clasic de restaurant și de casă."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 5,
+  "sample": [
+   {
+    "id": "n_gas_leustean",
+    "label": "Leuștean"
+   },
+   {
+    "id": "n_v20gas_chiftele",
+    "label": "Chiftele"
+   },
+   {
+    "id": "n_v2gas_ciorba",
+    "label": "Ciorbă"
+   },
+   {
+    "id": "n_v3gas_orez",
+    "label": "Orez"
+   },
+   {
+    "id": "n_v4gas_carne",
+    "label": "Carne"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v2gas_ciorba",
+   "label": "Ciorbă",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8872,
+   "degree": 14,
+   "incoming_degree": 14,
+   "description": "Fel lichid acru sau dres, foarte prezent în bucătăria românească.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v20gas_chiftele",
+   "label": "Chiftele",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Bile de carne tocată cu ceapă și verdeață, prăjite în ulei; în Moldova li se spune pârjoale. „Chiftelele marinate” în sos de roșii sunt un clasic al bucătăriei de casă.",
+   "strength": 0.7
+  },
+  {
+   "id": "n_gas_leustean",
+   "label": "Leuștean",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.59,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Verdeață aromatică definitorie pentru multe ciorbe românești.",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:f2ae62d6c98edea2c6f1903f6ed2160cc3f6f1771384806765a4821b28957fc1"
+}

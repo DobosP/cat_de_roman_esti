@@ -1,0 +1,385 @@
+{
+  "scope": "Author API replay of every native shortest route, not independent review or public selection.",
+  "ladders": [
+    {
+      "start": "n_v11gas_ciorba_perisoare",
+      "target": "n_gas_sarmale",
+      "routes": [
+        {
+          "ids": [
+            "n_v11gas_ciorba_perisoare",
+            "n_v3gas_orez",
+            "n_gas_sarmale"
+          ],
+          "labels": [
+            "Ciorbă de perișoare",
+            "Orez",
+            "Sarmale"
+          ],
+          "captions": [
+            "perișoarele conțin orez",
+            "ingredient în"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v3gas_orez",
+                "label": "Orez"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v11gas_ciorba_perisoare",
+                  "label": "Ciorbă de perișoare"
+                },
+                {
+                  "id": "n_v3gas_orez",
+                  "label": "Orez",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Ardei umpluți",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Sarmale",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Sushi",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_gas_sarmale",
+                "label": "Sarmale"
+              },
+              "relation": "parte și întreg",
+              "path": [
+                {
+                  "id": "n_v11gas_ciorba_perisoare",
+                  "label": "Ciorbă de perișoare"
+                },
+                {
+                  "id": "n_v3gas_orez",
+                  "label": "Orez",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_gas_sarmale",
+                  "label": "Sarmale",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_v11gas_ciorba_perisoare",
+            "n_v4gas_carne",
+            "n_gas_sarmale"
+          ],
+          "labels": [
+            "Ciorbă de perișoare",
+            "Carne",
+            "Sarmale"
+          ],
+          "captions": [
+            "perișoare din carne tocată",
+            "intră în umplutură"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v4gas_carne",
+                "label": "Carne"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v11gas_ciorba_perisoare",
+                  "label": "Ciorbă de perișoare"
+                },
+                {
+                  "id": "n_v4gas_carne",
+                  "label": "Carne",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Friptură",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Mici",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Sarmale",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_gas_sarmale",
+                "label": "Sarmale"
+              },
+              "relation": "parte și întreg",
+              "path": [
+                {
+                  "id": "n_v11gas_ciorba_perisoare",
+                  "label": "Ciorbă de perișoare"
+                },
+                {
+                  "id": "n_v4gas_carne",
+                  "label": "Carne",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_gas_sarmale",
+                  "label": "Sarmale",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "start": "n_v17geo_sfinxul_bucegi",
+      "target": "n_v20geo_crucea_caraiman",
+      "routes": [
+        {
+          "ids": [
+            "n_v17geo_sfinxul_bucegi",
+            "n_bucegi",
+            "n_v20geo_crucea_caraiman"
+          ],
+          "labels": [
+            "Sfinxul din Bucegi",
+            "Munții Bucegi",
+            "Crucea Caraiman"
+          ],
+          "captions": [
+            "pe platoul Bucegilor",
+            "se află în"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_bucegi",
+                "label": "Munții Bucegi"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v17geo_sfinxul_bucegi",
+                  "label": "Sfinxul din Bucegi"
+                },
+                {
+                  "id": "n_bucegi",
+                  "label": "Munții Bucegi",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Crucea Caraiman",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "munte",
+                  "relation": "exemplu și categorie"
+                },
+                {
+                  "label": "Valea Prahovei",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v20geo_crucea_caraiman",
+                "label": "Crucea Caraiman"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v17geo_sfinxul_bucegi",
+                  "label": "Sfinxul din Bucegi"
+                },
+                {
+                  "id": "n_bucegi",
+                  "label": "Munții Bucegi",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v20geo_crucea_caraiman",
+                  "label": "Crucea Caraiman",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_v17geo_sfinxul_bucegi",
+            "n_v17geo_babele",
+            "n_v20geo_crucea_caraiman"
+          ],
+          "labels": [
+            "Sfinxul din Bucegi",
+            "Babele",
+            "Crucea Caraiman"
+          ],
+          "captions": [
+            "vecin cu Babele",
+            "pe platoul Bucegilor, lângă"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v17geo_babele",
+                "label": "Babele"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v17geo_sfinxul_bucegi",
+                  "label": "Sfinxul din Bucegi"
+                },
+                {
+                  "id": "n_v17geo_babele",
+                  "label": "Babele",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Crucea Caraiman",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Munții Bucegi",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "stâncă",
+                  "relation": "exemplu și categorie"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v20geo_crucea_caraiman",
+                "label": "Crucea Caraiman"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v17geo_sfinxul_bucegi",
+                  "label": "Sfinxul din Bucegi"
+                },
+                {
+                  "id": "n_v17geo_babele",
+                  "label": "Babele",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v20geo_crucea_caraiman",
+                  "label": "Crucea Caraiman",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

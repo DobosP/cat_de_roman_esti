@@ -1,0 +1,80 @@
+{
+ "game": "conexiuni",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_372",
+   "ct_viata_de_roman_373",
+   "cx_viata_de_roman_371",
+   "lt_gastronomie_241",
+   "lt_geografie_242"
+  ]
+ },
+ "verdicts": {
+  "cx_viata_de_roman_371": "promote"
+ },
+ "perItem": [
+  {
+   "id": "cx_viata_de_roman_371",
+   "game": "conexiuni",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:6c32edf8110f5904f48f0d8b2db90af2887d88a8265fcd9b69c94bad44971232",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "cx_viata_de_roman_371",
+    "game": "conexiuni",
+    "verdict": "promote",
+    "review_binding": "sha256:6c32edf8110f5904f48f0d8b2db90af2887d88a8265fcd9b69c94bad44971232",
+    "rationale": "Promote normal. Re-reading all sixteen actual allocated identities confirms four defensible predicates: lower-limb parts in the everyday picior sense; printed publications including a primer; exact calendar intervals; and conventional preparation/cleaning uses of a bate. The final preparation wording accurately covers beating the meat while making schnitzel and whipping cream while making frișcă, despite the served nodes naming prepared foods. It does not invite arbitrary hitting of body parts. Book/primer hierarchy stays within one group and the playing-card sense does not create another complete partition. Calendar intervals are a precise class, not a vague collection of thematic abstractions. Three familiar anchors plus one shared-verb trick suit normal. Fresh reconstructed pending-inventory lints have zero contested/raw-unfair tiles and no strong cross-group edges or reuse FAIL. All four groups independently BFF-solve with four lives. B1–B9 pass.",
+    "sources": [
+     "https://dexonline.ro/definitie/bate/definitii",
+     "https://www.oetker-professional.ro/retete/tortul-padurea-neagra",
+     "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html"
+    ]
+   },
+   "verifier_review": {
+    "id": "cx_viata_de_roman_371",
+    "game": "conexiuni",
+    "review_binding": "sha256:6c32edf8110f5904f48f0d8b2db90af2887d88a8265fcd9b69c94bad44971232",
+    "verdict": "promote",
+    "rationale": "Coapsă, Gambă, Genunchi and Călcâi are parts of the lower limb in ordinary Romanian picior usage; a narrow medical foot-only reading is not the group meaning. Carte, Revistă, Ziar and Abecedar are printed publications in the displayed identities. Century, year, week and calendar month are calendar units. Carpet beating during cleaning, beating egg whites and cream during preparation, and flattening the meat when preparing schnitzel are ordinary documented household/cooking uses of a bate. The label explicitly locates the operation in preparation or cleaning, not violence or hitting the finished dish. The three anchor groups and shared-verb group have no equally defensible complete repartition; obscurity is not the difficulty mechanism. The exact allocated-ID pending dossier was independently regenerated and byte-matches. All applicable recognition, predicate, novelty and B/C/D requirements were reviewed; current101-caption text is part of the dossier. This is an agent judgment, not a measured enjoyment study.",
+    "sources": [
+     "https://dexonline.ro/definitie/picior",
+     "https://dexonline.ro/definitie/coaps%C4%83",
+     "https://dexonline.ro/definitie/abecedar",
+     "https://dexonline.ro/definitie/bate/definitii",
+     "https://www.oetker.ro/retete/r/tort-paula",
+     "https://www.oetker-professional.ro/retete/tortul-padurea-neagra",
+     "https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-de-porc.html"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 1,
+  "verified": 1,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v94-words-and-clearer-connections/pack/analyst.json",
+   "sha256": "sha256:7b6c110a281f1a5f50b55fb325e0494f4e82b960ac8b84b4dc523420d596fd57",
+   "reviewer": "v94-independent-pack-quality-world-author",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v94-words-and-clearer-connections/pack/verifier.json",
+   "sha256": "sha256:e3f0e1aa79b55c2682788474d1947266340b345fa008dc792918df082b6a272c",
+   "reviewer": "root-v94-factual",
+   "role": "verifier"
+  }
+ }
+}

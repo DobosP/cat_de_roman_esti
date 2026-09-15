@@ -1,0 +1,108 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_372",
+   "ct_viata_de_roman_373",
+   "cx_viata_de_roman_371",
+   "lt_gastronomie_241",
+   "lt_geografie_242"
+  ]
+ },
+ "verdicts": {
+  "ct_gastronomie_372": "promote",
+  "ct_viata_de_roman_373": "promote"
+ },
+ "perItem": [
+  {
+   "id": "ct_gastronomie_372",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:f2ae62d6c98edea2c6f1903f6ed2160cc3f6f1771384806765a4821b28957fc1",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_372",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:f2ae62d6c98edea2c6f1903f6ed2160cc3f6f1771384806765a4821b28957fc1",
+    "rationale": "Promote easy Ciorbă de perișoare. The actual allocated dossier retains a concrete familiar dish and five recognizable native predecessors: ciorbă, carne, orez, leuștean and chiftele. A fresh independent BFF replay returns hot for all five, plus mâncare at 7 and warm supă at 12. Masă remains only lukewarm at 100, so this is not a claim that every related opener is calibrated. The multiple strong ordinary food approaches satisfy C3/C4 nevertheless. Rice is an optional documented variant, while chiftele is a related minced preparation rather than a false fried ingredient. Long-standing recipe authors corroborate recognition and the target has a dominant sense. C1–C6 pass, no strict FAIL or duplicated target.",
+    "sources": [
+     "https://www.barbatlacratita.ro/2010/10/ciorba-de-perisoare.html",
+     "https://jamilacuisine.ro/ciorba-de-perisoare-reteta-video/"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_372",
+    "game": "contexto",
+    "review_binding": "sha256:f2ae62d6c98edea2c6f1903f6ed2160cc3f6f1771384806765a4821b28957fc1",
+    "verdict": "promote",
+    "rationale": "Ciorbă de perișoare is a concrete familiar Romanian soup. Independent original recipes from2010and2014 establish enduring household recognition. Meat and lovage are ingredients; rice is a common optional meatball ingredient, explicitly included by one author and discussed but omitted by Jamila. Chiftele is an association between minced-meat preparations, not a claim that fried patties are added to soup. Five real incoming neighbors give hot feedback; ordinary mâncare/ciorbă/supă approaches are useful. No new factual claim requires one universal recipe. The exact allocated-ID pending dossier was independently regenerated and byte-matches. All applicable recognition, predicate, novelty and B/C/D requirements were reviewed; current101-caption text is part of the dossier. This is an agent judgment, not a measured enjoyment study.",
+    "sources": [
+     "https://www.barbatlacratita.ro/2010/10/ciorba-de-perisoare.html",
+     "https://jamilacuisine.ro/ciorba-de-perisoare-reteta-video/"
+    ]
+   }
+  },
+  {
+   "id": "ct_viata_de_roman_373",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:bc95d19df5d81dd23ae69a44280b5ef9cd69a3eabbac7e0e8a4c136403ae6a39",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_viata_de_roman_373",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:bc95d19df5d81dd23ae69a44280b5ef9cd69a3eabbac7e0e8a4c136403ae6a39",
+    "rationale": "Promote easy Temă pentru acasă. The full phrase names the familiar assigned school task and avoids the polysemy of bare temă. Its original KG description is terse, but the ministry’s discussion independently establishes the ordinary task identity. The exact dossier contains five native incoming school associations, not projected or outgoing substitutes. My fresh replay gives school rank 7/hot, notebook, pencil and lesson rank 2/hot, and pupil/teacher ranks 28/30 warm. These are useful spontaneous approaches without an obscure dependency. Recognition is cross-generational and the game makes no legal homework-policy claim. C1–C6 pass; no strict FAIL.",
+    "sources": [
+     "https://www.edu.ro/press_rel_208_2025"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_viata_de_roman_373",
+    "game": "contexto",
+    "review_binding": "sha256:bc95d19df5d81dd23ae69a44280b5ef9cd69a3eabbac7e0e8a4c136403ae6a39",
+    "verdict": "promote",
+    "rationale": "Temă pentru acasă identifies the familiar assigned schoolwork task, not an abstract school category. The national education ministry uses the ordinary term for pupil assignments; notebooks, pencils, lessons and learning provide independent concrete classroom context and all five native predecessors are recognized. School, pupil and teacher guesses also give useful early feedback. The displayed task meaning makes no claim about current legal limits or required homework duration. The exact allocated-ID pending dossier was independently regenerated and byte-matches. All applicable recognition, predicate, novelty and B/C/D requirements were reviewed; current101-caption text is part of the dossier. This is an agent judgment, not a measured enjoyment study.",
+    "sources": [
+     "https://www.edu.ro/press_rel_208_2025",
+     "https://dexonline.ro/definitie/tem%C4%83",
+     "https://dexonline.ro/definitie/caiet"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 2,
+  "verified": 2,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v94-words-and-clearer-connections/pack/analyst.json",
+   "sha256": "sha256:7b6c110a281f1a5f50b55fb325e0494f4e82b960ac8b84b4dc523420d596fd57",
+   "reviewer": "v94-independent-pack-quality-world-author",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v94-words-and-clearer-connections/pack/verifier.json",
+   "sha256": "sha256:e3f0e1aa79b55c2682788474d1947266340b345fa008dc792918df082b6a272c",
+   "reviewer": "root-v94-factual",
+   "role": "verifier"
+  }
+ }
+}

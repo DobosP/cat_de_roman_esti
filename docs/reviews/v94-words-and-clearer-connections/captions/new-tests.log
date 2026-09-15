@@ -1,0 +1,888 @@
+.FFFFFFFFFFFFFFFFFFFFFFFFFF.................                             [100%]
+=================================== FAILURES ===================================
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_academia_romana+n_mihai_eminescu] _
+
+row = {'pair': ['n_academia_romana', 'n_mihai_eminescu'], 'labels': ['Academia Română', 'Mihai Eminescu'], 'caption': 'academie și membru postum', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/7208e8bb-2a1c-4f16-a6c5-e5fe3ba39fdc' + '/move'), {'text': 'Academia Română'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a3478f4a0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_academia_romana+n_titu_maiorescu] _
+
+row = {'pair': ['n_academia_romana', 'n_titu_maiorescu'], 'labels': ['Academia Română', 'Titu Maiorescu'], 'caption': 'academie și membru fondator', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/2642ec4a-8609-4180-ae2b-d5624c708519' + '/move'), {'text': 'Academia Română'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348772f0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_avram_iancu+n_muntii_apuseni] _
+
+row = {'pair': ['n_avram_iancu', 'n_muntii_apuseni'], 'labels': ['Avram Iancu', 'Munții Apuseni'], 'caption': 'revoluționar și ținut natal', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/f6355048-957f-4e5e-92c7-b5ae54fbf024' + '/move'), {'text': 'Avram Iancu'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348ccef0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_cluj_napoca+n_transilvania] _
+
+row = {'pair': ['n_cluj_napoca', 'n_transilvania'], 'labels': ['Cluj-Napoca', 'Transilvania'], 'caption': 'oraș și regiune', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/7dca805a-f62e-4003-9663-f2e2178d6854' + '/move'), {'text': 'Cluj-Napoca'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348f04a0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_cluj_napoca+n_v17geo_salina_turda] _
+
+row = {'pair': ['n_cluj_napoca', 'n_v17geo_salina_turda'], 'labels': ['Cluj-Napoca', 'Salina Turda'], 'caption': 'oraș și salină din apropiere', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/7814e42e-9759-46f5-93ec-3f9a1aae9a9a' + '/move'), {'text': 'Cluj-Napoca'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348f0f80>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_convorbiri_literare+n_mihai_eminescu] _
+
+row = {'pair': ['n_convorbiri_literare', 'n_mihai_eminescu'], 'labels': ['Convorbiri literare', 'Mihai Eminescu'], 'caption': 'revistă și poet publicat', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/62d29cd1-3fe1-48db-bd42-8dcedf92d570' + '/move'), {'text': 'Convorbiri literare'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34641ac0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_convorbiri_literare+n_titu_maiorescu] _
+
+row = {'pair': ['n_convorbiri_literare', 'n_titu_maiorescu'], 'labels': ['Convorbiri literare', 'Titu Maiorescu'], 'caption': 'revistă și îndrumător literar', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/f4457774-c1e2-40e4-88bd-8f1c6acebabe' + '/move'), {'text': 'Convorbiri literare'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348f09b0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_junimea+n_mihai_eminescu] _
+
+row = {'pair': ['n_junimea', 'n_mihai_eminescu'], 'labels': ['Junimea', 'Mihai Eminescu'], 'caption': 'societate literară și poet', 'old_display': 'parte și întreg', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/d94bfacc-e853-4718-b463-1ff4dbf3fef3' + '/move'), {'text': 'Junimea'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348cdd30>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_junimea+n_titu_maiorescu] _
+
+row = {'pair': ['n_junimea', 'n_titu_maiorescu'], 'labels': ['Junimea', 'Titu Maiorescu'], 'caption': 'societate literară și mentor', 'old_display': 'parte și întreg', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/310ce7e1-7905-412e-9bd4-b65fd418487e' + '/move'), {'text': 'Junimea'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348cfcb0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_muntii_apuseni+n_v11ist_rascoala_1784] _
+
+row = {'pair': ['n_muntii_apuseni', 'n_v11ist_rascoala_1784'], 'labels': ['Munții Apuseni', 'Răscoala 1784'], 'caption': 'răscoală și ținutul ei', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/cc6f095c-9a27-4467-bee1-6de5e88b90aa' + '/move'), {'text': 'Munții Apuseni'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34921550>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_muntii_apuseni+n_v20geo_cheile_turzii] _
+
+row = {'pair': ['n_muntii_apuseni', 'n_v20geo_cheile_turzii'], 'labels': ['Munții Apuseni', 'Cheile Turzii'], 'caption': 'chei și munții din care fac parte', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/e9e64e0e-b4a8-4f3d-8ba9-2e338e1d0fca' + '/move'), {'text': 'Munții Apuseni'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34877860>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_transilvania+n_v11ist_rascoala_1784] _
+
+row = {'pair': ['n_transilvania', 'n_v11ist_rascoala_1784'], 'labels': ['Transilvania', 'Răscoala 1784'], 'caption': 'răscoală și regiune', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/155527ba-80ff-4bcf-abdc-0f188a74695b' + '/move'), {'text': 'Transilvania'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a346726c0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_v17geo_salina_turda+n_v20geo_cheile_turzii] _
+
+row = {'pair': ['n_v17geo_salina_turda', 'n_v20geo_cheile_turzii'], 'labels': ['Salina Turda', 'Cheile Turzii'], 'caption': 'obiective din zona Turda', 'old_display': 'legătură directă', ...}
+reverse = False
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/16c79a38-48fe-4382-a3fb-e79ab8ad6fb7' + '/move'), {'text': 'Salina Turda'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34683fe0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_academia_romana+n_mihai_eminescu] _
+
+row = {'pair': ['n_academia_romana', 'n_mihai_eminescu'], 'labels': ['Academia Română', 'Mihai Eminescu'], 'caption': 'academie și membru postum', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/1ff362d6-2c00-47af-850d-d24d7b5bcc61' + '/move'), {'text': 'Mihai Eminescu'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a346719d0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_academia_romana+n_titu_maiorescu] _
+
+row = {'pair': ['n_academia_romana', 'n_titu_maiorescu'], 'labels': ['Academia Română', 'Titu Maiorescu'], 'caption': 'academie și membru fondator', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/bea11942-6765-4d9a-8677-431e53050ac1' + '/move'), {'text': 'Titu Maiorescu'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34680da0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_avram_iancu+n_muntii_apuseni] _
+
+row = {'pair': ['n_avram_iancu', 'n_muntii_apuseni'], 'labels': ['Avram Iancu', 'Munții Apuseni'], 'caption': 'revoluționar și ținut natal', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/b922a95d-f8ed-4c08-b461-28e8f64e9125' + '/move'), {'text': 'Munții Apuseni'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34640950>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_cluj_napoca+n_transilvania] _
+
+row = {'pair': ['n_cluj_napoca', 'n_transilvania'], 'labels': ['Cluj-Napoca', 'Transilvania'], 'caption': 'oraș și regiune', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/c7de4ec9-546b-4e3e-89f3-647dbb635595' + '/move'), {'text': 'Transilvania'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34682d50>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_cluj_napoca+n_v17geo_salina_turda] _
+
+row = {'pair': ['n_cluj_napoca', 'n_v17geo_salina_turda'], 'labels': ['Cluj-Napoca', 'Salina Turda'], 'caption': 'oraș și salină din apropiere', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/7e6b16cb-33f7-4412-861b-3f7c90ee86ac' + '/move'), {'text': 'Salina Turda'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34670e30>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_convorbiri_literare+n_mihai_eminescu] _
+
+row = {'pair': ['n_convorbiri_literare', 'n_mihai_eminescu'], 'labels': ['Convorbiri literare', 'Mihai Eminescu'], 'caption': 'revistă și poet publicat', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/d60c30f9-6909-4797-9529-1dff4a997fd5' + '/move'), {'text': 'Mihai Eminescu'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a34683140>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_convorbiri_literare+n_titu_maiorescu] _
+
+row = {'pair': ['n_convorbiri_literare', 'n_titu_maiorescu'], 'labels': ['Convorbiri literare', 'Titu Maiorescu'], 'caption': 'revistă și îndrumător literar', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/482c063b-d046-4a94-88fc-90b19e4c4fc5' + '/move'), {'text': 'Titu Maiorescu'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348ccb90>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_junimea+n_mihai_eminescu] _
+
+row = {'pair': ['n_junimea', 'n_mihai_eminescu'], 'labels': ['Junimea', 'Mihai Eminescu'], 'caption': 'societate literară și poet', 'old_display': 'parte și întreg', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/2cb7f118-9475-4ca3-92c9-af65f9e79898' + '/move'), {'text': 'Mihai Eminescu'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a39092b70>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_junimea+n_titu_maiorescu] _
+
+row = {'pair': ['n_junimea', 'n_titu_maiorescu'], 'labels': ['Junimea', 'Titu Maiorescu'], 'caption': 'societate literară și mentor', 'old_display': 'parte și întreg', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/81379641-955d-4172-9d6e-34d94b02f73f' + '/move'), {'text': 'Titu Maiorescu'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a348f1250>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_muntii_apuseni+n_v11ist_rascoala_1784] _
+
+row = {'pair': ['n_muntii_apuseni', 'n_v11ist_rascoala_1784'], 'labels': ['Munții Apuseni', 'Răscoala 1784'], 'caption': 'răscoală și ținutul ei', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/f7636ef5-d695-4355-a364-95c6020edbc6' + '/move'), {'text': 'Răscoala 1784'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a346fec60>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_muntii_apuseni+n_v20geo_cheile_turzii] _
+
+row = {'pair': ['n_muntii_apuseni', 'n_v20geo_cheile_turzii'], 'labels': ['Munții Apuseni', 'Cheile Turzii'], 'caption': 'chei și munții din care fac parte', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/78f8c26a-3472-4442-86b4-623883dee3bb' + '/move'), {'text': 'Cheile Turzii'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a347010d0>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_transilvania+n_v11ist_rascoala_1784] _
+
+row = {'pair': ['n_transilvania', 'n_v11ist_rascoala_1784'], 'labels': ['Transilvania', 'Răscoala 1784'], 'caption': 'răscoală și regiune', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/352d653b-a84f-49bc-9161-37cc57c0405f' + '/move'), {'text': 'Răscoala 1784'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a346fe420>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+_ test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_v17geo_salina_turda+n_v20geo_cheile_turzii] _
+
+row = {'pair': ['n_v17geo_salina_turda', 'n_v20geo_cheile_turzii'], 'labels': ['Salina Turda', 'Cheile Turzii'], 'caption': 'obiective din zona Turda', 'old_display': 'legătură directă', ...}
+reverse = True
+
+    @pytest.mark.parametrize("row", ROWS, ids=lambda row: "+".join(row["pair"]))
+    @pytest.mark.parametrize("reverse", [False, True])
+    def test_v94_relationship_is_earned_and_resumes_in_each_direction(row, reverse):
+        a, b = reversed(row["pair"]) if reverse else row["pair"]
+        service = get_service()
+        session = L.LantSession(start=a, target=b, optimal=1, chain=[a])
+        gid = L.store.create(session)
+        client = Client()
+        url = f"/api/wordgames/lant/games/{gid}"
+        try:
+            result = client.post(url + "/move", {"text": service.label(b)},
+                                 content_type="application/json")
+            assert result.status_code == 200
+            state = result.json()
+            assert state["won"] and state["score"] == 1000 and state["moves"] == 1
+            assert state["relation"] == row["caption"]
+            assert state["path"][-1]["relation"] == row["caption"]
+            fetched = client.get(url).json()
+            assert fetched["path"] == state["path"] and fetched["score"] == 1000
+            assert row["edge_sha256"] not in json.dumps(fetched)
+>           assert client.post(url + "/move", {"text": service.label(a)},
+                               content_type="application/json").status_code == 409
+E                              assert 200 == 409
+E                               +  where 200 = <Response status_code=200, "application/json">.status_code
+E                               +    where <Response status_code=200, "application/json"> = post(('/api/wordgames/lant/games/ab3ea372-9f2b-4bae-a7b9-791ce0ac9965' + '/move'), {'text': 'Cheile Turzii'}, content_type='application/json')
+E                               +      where post = <django.test.client.Client object at 0x771a346af770>.post
+
+tests/test_v94_lant_captions.py:74: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_academia_romana+n_mihai_eminescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_academia_romana+n_titu_maiorescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_avram_iancu+n_muntii_apuseni]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_cluj_napoca+n_transilvania]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_cluj_napoca+n_v17geo_salina_turda]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_convorbiri_literare+n_mihai_eminescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_convorbiri_literare+n_titu_maiorescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_junimea+n_mihai_eminescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_junimea+n_titu_maiorescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_muntii_apuseni+n_v11ist_rascoala_1784]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_muntii_apuseni+n_v20geo_cheile_turzii]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_transilvania+n_v11ist_rascoala_1784]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[False-n_v17geo_salina_turda+n_v20geo_cheile_turzii]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_academia_romana+n_mihai_eminescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_academia_romana+n_titu_maiorescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_avram_iancu+n_muntii_apuseni]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_cluj_napoca+n_transilvania]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_cluj_napoca+n_v17geo_salina_turda]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_convorbiri_literare+n_mihai_eminescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_convorbiri_literare+n_titu_maiorescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_junimea+n_mihai_eminescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_junimea+n_titu_maiorescu]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_muntii_apuseni+n_v11ist_rascoala_1784]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_muntii_apuseni+n_v20geo_cheile_turzii]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_transilvania+n_v11ist_rascoala_1784]
+FAILED tests/test_v94_lant_captions.py::test_v94_relationship_is_earned_and_resumes_in_each_direction[True-n_v17geo_salina_turda+n_v20geo_cheile_turzii]
+26 failed, 18 passed in 0.51s

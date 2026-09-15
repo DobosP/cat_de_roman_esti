@@ -1,0 +1,46 @@
+from pathlib import Path
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v94-words-and-clearer-connections');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from scripts import build_alchimie_discovery_world as B
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+prior_dir=ROOT/'docs/reviews/v93-words-and-game-quality/alchimie';prior=json.loads((prior_dir/'candidate.json').read_bytes());previous=json.loads((prior_dir/'factual-review.json').read_bytes());raw=json.loads((OUT/'raw/candidates.json').read_bytes());current=json.loads((OUT/'candidate.json').read_bytes())
+assert sha(OUT/'candidate.json')=='d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188'
+assert previous['candidate_sha256']==sha(prior_dir/'candidate.json')
+for key,count in [('concepts',235),('recipes',315)]:
+ old={r['id']:r for r in prior[key]};new={r['id']:r for r in current[key]};assert len(old)==count and all(new[i]==row for i,row in old.items())
+for key in ('world','unlocks','goals'):assert current[key]==prior[key]
+concept_notes={
+'alw_food_cartofi_gratinati':'Bucate Aromate documents layered cooked potatoes, cream, cheese and eggs, baked until browned. The definition allows variants and distinguishes gratinating from plain baked potatoes.',
+'alw_food_chiftele_peste':'Gina Bradea documents minced deboned fish, binding ingredients and herbs, shaped then fried or baked. The definition does not imply ready fried meatballs are raw fish.',
+'alw_food_crochete_cartofi':'Laura Laurentiu shapes cold mashed potato with breadcrumbs and cheese, then coats and fries. The named preparation is distinct from plain mash or roasted potatoes.',
+'alw_food_jeleu_fructe':'Dr Oetker uses fruit juice and gelatin to set a fruit jelly; Unica uses compote juice for the same kind of setting. The definition explicitly selects food gelatin instead of conflating all jam and jelly setting methods.',
+'alw_food_paste_pesto':'Both e-Retete originals combine cooked pasta with pesto; the Sicilian variation includes tomato, basil, seeds, cheese and oil. The definition allows aromatic-leaf sauce variants.',
+'alw_food_piure_dovleac':'The two original recipes document cooked pumpkin mashed after baking or boiling. Butter is an optional serving addition, and the purée also functions as an ingredient.',
+'alw_food_tzatziki':'The Romanian original recipe describes a cold yogurt/cucumber/garlic sauce with herbs and oil. It is a familiar named preparation in Romanian food use, without claiming Romanian origin.',
+}
+notes={
+'cartofi-gratinati-smantana':'The cited primary method layers preboiled potatoes and eggs with cheese and cream/egg sauce before oven browning. Necessary preparation is explicit beyond the two input words.',
+'cartofi-gratinati-cascaval':'The same original adds grated cașcaval between and above potato layers. The alternate pair retains cream, eggs and baking instead of treating grated cheese alone as gratinating.',
+'crochete-cartofi-pesmet':'The original mixes cold mash with breadcrumbs and grated cheese, shapes it and applies flour/egg/breadcrumb coating before frying. Prepared mash and crumbs are valid inputs.',
+'crochete-cartofi-cascaval':'The original wraps cheese sticks in the potato mixture before coating and frying. This is a separately legible entry through the filling ingredient.',
+'tzatziki-iaurt-castravete':'The original combines thick yogurt with grated drained cucumber, garlic, herbs and oil. The explanation retains drainage and seasoning; cucumber is not merely a garnish.',
+'tzatziki-sos-iaurt-castravete':'The existing garlic-yogurt sauce is a compatible prepared base. Adding drained cucumber gives that previously terminal discovery a factual onward preparation.',
+'paste-pesto-sos':'e-Retete mixes pesto into cooked pasta with reserved hot cooking water to distribute the sauce. Both inputs are already compatible prepared foods.',
+'paste-pesto-busuioc':'The separate Sicilian method blends basil with tomato, seeds, hard cheese and oil, then coats cooked pasta. The explanation explicitly makes pesto instead of calling plain basil a finished sauce.',
+'chiftele-peste-ou':'The primary fish-meatball recipe debones and minces fish with aromatics and binder, shapes and cooks it. Egg is a binding input, not an assertion that raw fish/egg are a ready dish.',
+'piure-dovleac-copt-unt':'Absolut Delicios mashes baked pumpkin and explicitly permits warming it with butter as a side. This reuses the already baked input coherently.',
+'piure-dovleac-cratita':'LaLena explicitly offers boiling pumpkin cubes in a saucepan, draining them thoroughly and mashing. This supports an alternate preparation from raw pumpkin.',
+'jeleu-compot-gelatina':'Unica hydrates gelatin in compote/fruit juice, heats without boiling and cools to set. The explanation captures these preparation steps and gives compote a useful onward role.',
+'jeleu-fruct-gelatina':'Dr Oetker heats fruit juice and combines it with separately hydrated/dissolved gelatin, then cools it. The explanation avoids boiling the gelatin itself.',
+'supa-crema-piure-dovleac':'Absolut Delicios explicitly describes using pumpkin purée for soup. Diluting, homogenizing, heating and seasoning with soup liquid is a coherent continuation.',
+'placinte-piure-dovleac':'Retete Practice explicitly describes using purée in pumpkin pies with sugar and cinnamon. The explanation specifies well-drained filling and baked dough, not raw dough consumption.',
+'tarta-aluat-jeleu':'Unica first bakes the tart shell and then pours jelly over fruit. Step5 explicitly warms remaining jelly so it flows, supporting reuse of already set jelly without inventing that physical step.',
+'cascaval-pane-pesmet':'Laura Laurentiu chills cheese slices, applies flour and egg, and repeats breadcrumb coating before frying. The explanation matches the double coating and keeps the existing result identity.',
+}
+assert set(notes)=={r['id'] for r in raw['recipes']};assert set(concept_notes)=={c['id'] for c in raw['concepts']}
+items=[{'id':r['id'],'verdict':'accept','inherited':False,'rationale':notes[r['id']],'sources':r['sources']} for r in raw['recipes']]
+concepts=[{'id':c['id'],'verdict':'accept','inherited':False,'concept_sha256':B.concept_digest(c),'rationale':concept_notes[c['id']],'sources':c['references']} for c in raw['concepts']]
+rr={'kind':'v94-world-raw-factual-v1','role':'factual','reviewer':'root-v94-factual','candidate_sha256':sha(OUT/'raw/candidates.json'),'reviewed_on':'2026-09-15','items':items,'concepts':concepts};(OUT/'raw/factual-review.json').write_bytes(B.json_bytes(rr))
+review={'kind':B.REVIEW_KIND,'role':'factual','reviewer':'root-v94-factual','candidate_sha256':sha(OUT/'candidate.json'),'world_verdict':'accept','world_rationale':'The exact previously reviewed world, starters, supply tiers and optional goals are retained. Seven new named preparations add factual alternate recipes and onward uses without changing existing identities or recipe records. All235priorconcepts and315recipes match the predecessor; six saved-book generations are retained. Original authored definitions retain source/provenance flags and do not claim Romanian origin for every dish. These are independent factual/recognition judgments, not human enjoyment measurements.','items':previous['items']+items,'concepts':previous['concepts']+concepts,'baseline_evidence':{'candidate_path':str((prior_dir/'candidate.json').relative_to(ROOT)),'candidate_sha256':sha(prior_dir/'candidate.json'),'factual_review_path':str((prior_dir/'factual-review.json').relative_to(ROOT)),'factual_review_sha256':sha(prior_dir/'factual-review.json'),'inherited_concepts':235,'inherited_recipes':315,'old_records_and_judgments_exact':True,'raw_candidate_sha256':sha(OUT/'raw/candidates.json'),'raw_review_sha256':sha(OUT/'raw/factual-review.json')}}
+(OUT/'factual-review.json').write_bytes(B.json_bytes(review));B.read_review(OUT/'factual-review.json','factual',sha(OUT/'candidate.json'),{r['id'] for r in current['recipes']},current['concepts']);print('7 new concepts/17recipes accepted;242concepts/332recipes completely covered')

@@ -1,0 +1,57 @@
+{
+  "kind": "v94-independent-target-description-recheck-v1",
+  "reviewer": "v94-independent-pack-quality-world-author",
+  "id": "lt_geografie_242",
+  "endpoint": "/api/wordgames/lant/games/b45da1dc-a2ba-44a3-8043-91c8a1ea4c76",
+  "http_status": 200,
+  "public_opening_payload": {
+    "game_id": "b45da1dc-a2ba-44a3-8043-91c8a1ea4c76",
+    "start": {
+      "id": "n_v17geo_sfinxul_bucegi",
+      "label": "Sfinxul din Bucegi"
+    },
+    "target": {
+      "id": "n_v20geo_crucea_caraiman",
+      "label": "Crucea Caraiman",
+      "description": "Monument de 28 de metri ridicat între 1926 și 1928 pe Șaua Caraiman, în Munții Bucegi, la 2291 m altitudine, în memoria eroilor din Primul Război Mondial. Este recunoscută drept cea mai înaltă cruce din lume amplasată pe un vârf montan."
+    },
+    "current": {
+      "id": "n_v17geo_sfinxul_bucegi",
+      "label": "Sfinxul din Bucegi"
+    },
+    "path": [
+      {
+        "id": "n_v17geo_sfinxul_bucegi",
+        "label": "Sfinxul din Bucegi"
+      }
+    ],
+    "moves": 0,
+    "optimal": 2,
+    "won": false,
+    "difficulty": "usor",
+    "choices": [
+      {
+        "label": "Babele",
+        "relation": "formațiuni stâncoase vecine"
+      },
+      {
+        "label": "Munții Bucegi",
+        "relation": "formațiune stâncoasă și munți"
+      },
+      {
+        "label": "stâncă",
+        "relation": "exemplu și categorie"
+      }
+    ],
+    "backtrack_recommended": false
+  },
+  "target_description_public": true,
+  "frontend_renders_target_description": true,
+  "runtime_sources": {
+    "cat_de_roman_esti/wordgames/lant.py": "1818ed57384d6f9b20359a21dfa8fdee585cc9a7712453f4699bddeecd13ff84",
+    "frontend/src/screens/Lant.tsx": "53da4a7eae3733c9e3c9b285a2a87a4bf2a02f5defbabd49f89aa2027c60a1f0"
+  },
+  "owner_source": "https://reabilitare-crucea-caraiman.mapn.ro/pages/istoric",
+  "finding": "A4: the visible inherited description places the monument on Șaua Caraiman and states 28 metres. The monument owner identifies a selected secondary peak and 39.3 metres total, including the base. The initial analyst incorrectly assumed these details were not shown. Reject this new level without changing the shared KG.",
+  "scope": "Fixed pending-level session used to inspect the public response; no claim of natural selection."
+}

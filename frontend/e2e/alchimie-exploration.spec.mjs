@@ -325,7 +325,8 @@ for (const [name, previous] of [["285-recipe", LARGE_CHECKPOINT], ["288-recipe",
 
 for (const example of [
   { prefix: 45, first: "Aluat", second: "Portocală", result: "Chec", focus: "Aluat" },
-  { prefix: 65, first: "Nucă", second: "Pătrunjel", result: "Pesto", focus: null },
+  { prefix: 65, first: "Nucă", second: "Pătrunjel", result: "Pesto", focus: "Pesto" },
+  { prefix: 85, first: "Lipie", second: "Friptură", result: "Șaorma cu de toate", focus: null },
 ]) {
   test(`deep keyboard crafting keeps ${example.focus ?? "the collection"} focus visible`, async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });

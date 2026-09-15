@@ -85,13 +85,13 @@ function Breadcrumb({ path }: { path: PathStep[] }) {
             initial={{ opacity: 0, scale: 0.8, y: -6 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 420, damping: 26 }}
-            className="row"
+            className="row lant-trail-step"
             style={{ gap: 6, alignItems: "center" }}
           >
             {i > 0 && (
               <span
-                className="faint"
-                style={{ fontSize: "0.7rem", whiteSpace: "nowrap" }}
+                className="faint lant-trail-relation"
+                style={{ fontSize: "0.7rem" }}
                 title={step.relation}
               >
                 ―{step.relation ? ` ${step.relation} →` : " →"}

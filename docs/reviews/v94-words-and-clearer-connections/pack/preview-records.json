@@ -1,0 +1,125 @@
+{
+  "status": "unapproved",
+  "records": [
+    {
+      "difficulty": "normal",
+      "groups": {
+        "g1": [
+          "n_v31_body_lower_calcai",
+          "n_v31_body_lower_coapsa",
+          "n_v31_body_lower_gamba",
+          "n_v31_body_lower_genunchi"
+        ],
+        "g2": [
+          "n_v3lit_carte",
+          "n_v4lit_revista",
+          "n_v4lit_ziar",
+          "n_v23via_abecedar"
+        ],
+        "g3": [
+          "n_v4ist_secol",
+          "n_v4ist_an",
+          "n_v28_time_calendar_saptamana",
+          "n_v28_time_calendar_luna_calendaristica"
+        ],
+        "g4": [
+          "n_v24_home_textiles_covor",
+          "n_v86_food_albus",
+          "n_v86_food_frisca",
+          "n_v20gas_snitel"
+        ]
+      },
+      "group_labels": {
+        "g1": "Părți ale piciorului",
+        "g2": "Publicații tipărite pe pagini",
+        "g3": "Unități calendaristice",
+        "g4": "Se bat la preparare sau curățare"
+      },
+      "order": [
+        "n_v4ist_an",
+        "n_v20gas_snitel",
+        "n_v31_body_lower_calcai",
+        "n_v28_time_calendar_saptamana",
+        "n_v4lit_revista",
+        "n_v86_food_frisca",
+        "n_v31_body_lower_genunchi",
+        "n_v24_home_textiles_covor",
+        "n_v4lit_ziar",
+        "n_v28_time_calendar_luna_calendaristica",
+        "n_v3lit_carte",
+        "n_v4ist_secol",
+        "n_v31_body_lower_coapsa",
+        "n_v31_body_lower_gamba",
+        "n_v86_food_albus",
+        "n_v23via_abecedar"
+      ],
+      "id": "preview_v94_viata_de_roman_conexiuni_1",
+      "category": "viata_de_roman",
+      "status": "pending",
+      "source": "ai"
+    },
+    {
+      "difficulty": "usor",
+      "target": "n_v11gas_ciorba_perisoare",
+      "id": "preview_v94_gastronomie_contexto_1",
+      "category": "gastronomie",
+      "status": "pending",
+      "source": "ai"
+    },
+    {
+      "difficulty": "usor",
+      "target": "n_v24_school_assessment_tema_acasa",
+      "id": "preview_v94_viata_de_roman_contexto_1",
+      "category": "viata_de_roman",
+      "status": "pending",
+      "source": "ai"
+    },
+    {
+      "difficulty": "usor",
+      "start": "n_v11gas_ciorba_perisoare",
+      "target": "n_gas_sarmale",
+      "optimal": 2,
+      "id": "preview_v94_gastronomie_lant_1",
+      "category": "gastronomie",
+      "status": "pending",
+      "source": "ai"
+    },
+    {
+      "difficulty": "usor",
+      "start": "n_v17geo_sfinxul_bucegi",
+      "target": "n_v20geo_crucea_caraiman",
+      "optimal": 2,
+      "id": "preview_v94_geografie_lant_1",
+      "category": "geografie",
+      "status": "pending",
+      "source": "ai"
+    }
+  ],
+  "refs": [
+    {
+      "category": "viata_de_roman",
+      "ref": "conexiuni[0]",
+      "preview_id": "preview_v94_viata_de_roman_conexiuni_1"
+    },
+    {
+      "category": "gastronomie",
+      "ref": "contexto[0]",
+      "preview_id": "preview_v94_gastronomie_contexto_1"
+    },
+    {
+      "category": "viata_de_roman",
+      "ref": "contexto[0]",
+      "preview_id": "preview_v94_viata_de_roman_contexto_1"
+    },
+    {
+      "category": "gastronomie",
+      "ref": "lant[0]",
+      "preview_id": "preview_v94_gastronomie_lant_1"
+    },
+    {
+      "category": "geografie",
+      "ref": "lant[0]",
+      "preview_id": "preview_v94_geografie_lant_1"
+    }
+  ]
+}

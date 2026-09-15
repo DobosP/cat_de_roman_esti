@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.content_history import v49_lant_ledger_bytes
 from tests.current_content import CURRENT_CONTENT
 
 pytest.importorskip("django")
@@ -468,7 +469,8 @@ def test_v51_preserves_topology_pack_rows_and_frozen_derived_boards() -> None:
 
 def test_v51_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     checked_in = _json(_MOBILE_CONTRACT)
-    ledger = _json(_LEDGER)
+    ledger_blob = v49_lant_ledger_bytes(_LEDGER)
+    ledger = json.loads(ledger_blob)
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert _MOBILE_CONTRACT.read_bytes() == (
@@ -479,7 +481,7 @@ def test_v51_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     )
     assert checked_in["manifest"]["counts"] == CURRENT_CONTENT.mobile_counts
 
-    assert _sha256(_LEDGER) == _V49_LEDGER_SHA256
+    assert hashlib.sha256(ledger_blob).hexdigest() == _V49_LEDGER_SHA256
     assert ledger["meta"]["count"] == len(ledger["items"]) == 104
     pack = _json(_PACKAGE_PACK)
     runtime_ids = {

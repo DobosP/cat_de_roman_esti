@@ -1,0 +1,139 @@
+{
+ "id": "lt_geografie_242",
+ "game": "lant",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "a23970fe742c5674a07bc3b5c3eda183f9f3e61355974d3a231daa31168af5b5",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Sfinxul din Bucegi salience 0.50 < 0.60 (usor floor)"
+  }
+ ],
+ "display_rules_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+ "start": {
+  "id": "n_v17geo_sfinxul_bucegi",
+  "label": "Sfinxul din Bucegi",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.5,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Formațiune stâncoasă naturală de pe platoul Bucegilor, la circa 2216 metri altitudine, care seamănă cu un chip uman. Modelată de vânt și îngheț, este înconjurată de numeroase legende."
+ },
+ "target": {
+  "id": "n_v20geo_crucea_caraiman",
+  "label": "Crucea Caraiman",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.7,
+  "degree": 3,
+  "incoming_degree": 2,
+  "description": "Monument de 28 de metri ridicat între 1926 și 1928 pe Șaua Caraiman, în Munții Bucegi, la 2291 m altitudine, în memoria eroilor din Primul Război Mondial. Este recunoscută drept cea mai înaltă cruce din lume amplasată pe un vârf montan."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v17geo_sfinxul_bucegi",
+     "label": "Sfinxul din Bucegi"
+    },
+    {
+     "id": "n_bucegi",
+     "label": "Munții Bucegi"
+    },
+    {
+     "id": "n_v20geo_crucea_caraiman",
+     "label": "Crucea Caraiman"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v17geo_sfinxul_bucegi",
+      "label": "Sfinxul din Bucegi"
+     },
+     "to": {
+      "id": "n_bucegi",
+      "label": "Munții Bucegi"
+     },
+     "relation": "located_in",
+     "label": "pe platoul Bucegilor",
+     "display_label": "formațiune stâncoasă și munți",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_bucegi",
+      "label": "Munții Bucegi"
+     },
+     "to": {
+      "id": "n_v20geo_crucea_caraiman",
+      "label": "Crucea Caraiman"
+     },
+     "relation": "located_in",
+     "label": "se află în",
+     "display_label": "monument și munții unde se află",
+     "strength": 0.95
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v17geo_sfinxul_bucegi",
+     "label": "Sfinxul din Bucegi"
+    },
+    {
+     "id": "n_v17geo_babele",
+     "label": "Babele"
+    },
+    {
+     "id": "n_v20geo_crucea_caraiman",
+     "label": "Crucea Caraiman"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v17geo_sfinxul_bucegi",
+      "label": "Sfinxul din Bucegi"
+     },
+     "to": {
+      "id": "n_v17geo_babele",
+      "label": "Babele"
+     },
+     "relation": "associated_with",
+     "label": "vecin cu Babele",
+     "display_label": "formațiuni stâncoase vecine",
+     "strength": 0.88
+    },
+    {
+     "from": {
+      "id": "n_v17geo_babele",
+      "label": "Babele"
+     },
+     "to": {
+      "id": "n_v20geo_crucea_caraiman",
+      "label": "Crucea Caraiman"
+     },
+     "relation": "associated_with",
+     "label": "pe platoul Bucegilor, lângă",
+     "display_label": "stânci și monument din Bucegi",
+     "strength": 0.65
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:31c5fd57edeb74888ae689ebcfc430d8dc4150d6bdb975dc7e9ec5719007adb3"
+}

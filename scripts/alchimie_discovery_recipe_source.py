@@ -1454,3 +1454,161 @@ RECIPE_SOURCES.update(
  'snitel-pesmet-pui': ['https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html'],
  'supa-taitei-paste': ['https://pastehutton.ro/retete-simple/']}
 )
+
+# V94: recognizable preparations with alternate approaches and onward uses.
+WORLD_CONCEPTS.update(
+{'Tzatziki': {'id': 'alw_food_tzatziki',
+              'description': 'Sos rece din iaurt gros, castravete bine scurs și usturoi, '
+                             'aromatizat cu verdețuri și puțin ulei.',
+              'sources': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/sos-tzatziki.html']},
+ 'Cartofi gratinați': {'id': 'alw_food_cartofi_gratinati',
+                       'description': 'Cartofi așezați în straturi cu smântână și, după variantă, '
+                                      'brânzeturi sau ouă, apoi rumeniți la cuptor.',
+                       'sources': ['https://bucate-aromate.ro/2021/01/cartofi-frantuzesti/']},
+ 'Crochete de cartofi': {'id': 'alw_food_crochete_cartofi',
+                         'description': 'Bucăți modelate din cartofi pasați, uneori umplute cu '
+                                        'brânză, învelite în pesmet și prăjite.',
+                         'sources': ['https://www.lauralaurentiu.ro/retete-culinare/aperitive/crochete-de-cartofi-umplute-cu-cascaval-reteta-video.html']},
+ 'Paste cu pesto': {'id': 'alw_food_paste_pesto',
+                    'description': 'Paste fierte amestecate cu pesto, un sos din frunze aromatice '
+                                   'mărunțite cu ulei și alte ingrediente.',
+                    'sources': ['https://www.e-retete.ro/retete/paste-cu-pesto',
+                                'https://www.e-retete.ro/retete/paste-cu-pesto-alla-siciliana']},
+ 'Chiftele de pește': {'id': 'alw_food_chiftele_peste',
+                       'description': 'Porții modelate din pește dezosat și tocat, cu ingrediente '
+                                      'de legare și verdețuri, apoi prăjite sau coapte.',
+                       'sources': ['https://pofta-buna.com/chiftele-de-peste-reteta-din-delta-dunarii/']},
+ 'Piure de dovleac': {'id': 'alw_food_piure_dovleac',
+                      'description': 'Pulpă de dovleac gătită și pasată, simplă sau cu unt, '
+                                     'folosită ca garnitură ori ca ingredient.',
+                      'sources': ['https://www.absolutdelicios.ro/2018/11/piure-de-dovleac-reteta-video.html',
+                                  'https://www.lalena.ro/reteta/1697/Piure-de-Dovleac-congelat/']},
+ 'Jeleu de fructe': {'id': 'alw_food_jeleu_fructe',
+                     'description': 'Preparat din suc sau pulpă de fructe închegată cu un '
+                                    'gelifiant; aici varianta răcită cu gelatină alimentară.',
+                     'sources': ['https://www.oetker.ro/retete/r/jeleu-de-fructe-de-padure',
+                                 'https://retete.unica.ro/recipes/tarta-cu-fructe/']}}
+)
+RECIPES.extend(
+[('tzatziki-iaurt-castravete',
+  'Iaurt',
+  'Castravete',
+  'Tzatziki',
+  'Castravetele ras și bine stors se amestecă în iaurt gros cu usturoi, mărar și puțin ulei '
+  'pentru tzatziki.'),
+ ('tzatziki-sos-iaurt-castravete',
+  'Sos de iaurt',
+  'Castravete',
+  'Tzatziki',
+  'Un sos gros de iaurt cu usturoi primește castravete ras și bine stors, mărar și puțin ulei, '
+  'devenind tzatziki.'),
+ ('cartofi-gratinati-smantana',
+  'Cartof',
+  'Smântână',
+  'Cartofi gratinați',
+  'Cartofii fierți și feliați se așază în straturi cu ouă fierte, brânzeturi și sos de smântână '
+  'cu ou; se rumenesc la cuptor.'),
+ ('cartofi-gratinati-cascaval',
+  'Cartof',
+  'Cașcaval',
+  'Cartofi gratinați',
+  'Cașcavalul ras acoperă straturile de cartofi fierți, ouă și smântână; vasul se coace până când '
+  'suprafața devine rumenă.'),
+ ('crochete-cartofi-pesmet',
+  'Piure de cartofi',
+  'Pesmet',
+  'Crochete de cartofi',
+  'Piureul rece se leagă cu pesmet și brânză rasă, se modelează, apoi se trece prin făină, ou și '
+  'pesmet și se prăjește.'),
+ ('crochete-cartofi-cascaval',
+  'Piure de cartofi',
+  'Cașcaval',
+  'Crochete de cartofi',
+  'Piureul rece, legat cu pesmet, învelește bucăți de cașcaval; crochetele se trec prin făină, ou '
+  'și pesmet, apoi se prăjesc.'),
+ ('paste-pesto-sos',
+  'Paste',
+  'Pesto',
+  'Paste cu pesto',
+  'Pesto se amestecă în pastele fierte, cu puțină apă fierbinte de la fierbere pentru a distribui '
+  'sosul.'),
+ ('paste-pesto-busuioc',
+  'Paste',
+  'Busuioc',
+  'Paste cu pesto',
+  'Busuiocul se mărunțește cu roșii, semințe, brânză tare și ulei într-un pesto sicilian, care se '
+  'amestecă apoi cu pastele fierte.'),
+ ('chiftele-peste-ou',
+  'pește',
+  'Ou',
+  'Chiftele de pește',
+  'Peștele dezosat se toacă cu ceapă, usturoi, pâine înmuiată și verdețuri; se leagă cu ou, se '
+  'modelează și se prăjește.'),
+ ('piure-dovleac-copt-unt',
+  'Dovleac copt',
+  'Unt',
+  'Piure de dovleac',
+  'Pulpa dovleacului copt se scoate din coajă, se pasează și se amestecă cu puțin unt pentru un '
+  'piure.'),
+ ('piure-dovleac-cratita',
+  'Dovleac',
+  'Cratiță',
+  'Piure de dovleac',
+  'Dovleacul curățat și tăiat se fierbe în cratiță până se înmoaie, apoi se scurge bine și se '
+  'pasează.'),
+ ('jeleu-compot-gelatina',
+  'Compot',
+  'Gelatină alimentară',
+  'Jeleu de fructe',
+  'Gelatina se hidratează în zeama compotului și se dizolvă prin încălzire blândă, fără fierbere; '
+  'amestecul se răcește până se încheagă.'),
+ ('jeleu-fruct-gelatina',
+  'Fruct',
+  'Gelatină alimentară',
+  'Jeleu de fructe',
+  'Sucul obținut din fructe se fierbe, apoi se răcorește; se adaugă gelatina hidratată și '
+  'dizolvată, iar amestecul se răcește până se încheagă.'),
+ ('supa-crema-piure-dovleac',
+  'Supă',
+  'Piure de dovleac',
+  'Supă cremă',
+  'Piureul de dovleac se subțiază cu supă, se omogenizează și se încălzește, apoi se asezonează '
+  'pentru o supă cremă.'),
+ ('placinte-piure-dovleac',
+  'Aluat',
+  'Piure de dovleac',
+  'Plăcinte',
+  'Piureul de dovleac bine scurs se îndulcește și se aromatizează cu scorțișoară; se închide în '
+  'foi de aluat și se coace în plăcinte.'),
+ ('tarta-aluat-jeleu',
+  'Aluat',
+  'Jeleu de fructe',
+  'Tartă',
+  'Aluatul fraged se coace ca bază de tartă; jeleul se înmoaie prin încălzire blândă, se toarnă '
+  'peste fructe pe bază și se răcește.'),
+ ('cascaval-pane-pesmet',
+  'Cașcaval',
+  'Pesmet',
+  'Cașcaval pane',
+  'Feliile de cașcaval bine răcite se acoperă cu făină, ou și două straturi de pesmet, apoi se '
+  'prăjesc până se rumenesc.')]
+)
+RECIPE_SOURCES.update(
+{'tzatziki-iaurt-castravete': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/sos-tzatziki.html'],
+ 'tzatziki-sos-iaurt-castravete': ['https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/sos-tzatziki.html'],
+ 'cartofi-gratinati-smantana': ['https://bucate-aromate.ro/2021/01/cartofi-frantuzesti/'],
+ 'cartofi-gratinati-cascaval': ['https://bucate-aromate.ro/2021/01/cartofi-frantuzesti/'],
+ 'crochete-cartofi-pesmet': ['https://www.lauralaurentiu.ro/retete-culinare/aperitive/crochete-de-cartofi-umplute-cu-cascaval-reteta-video.html'],
+ 'crochete-cartofi-cascaval': ['https://www.lauralaurentiu.ro/retete-culinare/aperitive/crochete-de-cartofi-umplute-cu-cascaval-reteta-video.html'],
+ 'paste-pesto-sos': ['https://www.e-retete.ro/retete/paste-cu-pesto'],
+ 'paste-pesto-busuioc': ['https://www.e-retete.ro/retete/paste-cu-pesto-alla-siciliana'],
+ 'chiftele-peste-ou': ['https://pofta-buna.com/chiftele-de-peste-reteta-din-delta-dunarii/'],
+ 'piure-dovleac-copt-unt': ['https://www.absolutdelicios.ro/2018/11/piure-de-dovleac-reteta-video.html'],
+ 'piure-dovleac-cratita': ['https://www.lalena.ro/reteta/1697/Piure-de-Dovleac-congelat/'],
+ 'jeleu-compot-gelatina': ['https://retete.unica.ro/recipes/tarta-cu-fructe/'],
+ 'jeleu-fruct-gelatina': ['https://www.oetker.ro/retete/r/jeleu-de-fructe-de-padure'],
+ 'supa-crema-piure-dovleac': ['https://www.absolutdelicios.ro/2018/11/piure-de-dovleac-reteta-video.html'],
+ 'placinte-piure-dovleac': ['https://www.retetepractice.ro/retete/piure-de-dovleac'],
+ 'tarta-aluat-jeleu': ['https://retete.unica.ro/recipes/tarta-cu-fructe/'],
+ 'cascaval-pane-pesmet': ['https://www.lauralaurentiu.ro/retete-culinare/aperitive/cascaval-pane-reteta-video.html']}
+)

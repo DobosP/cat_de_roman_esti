@@ -105,30 +105,30 @@ CURRENT_CONTENT = CurrentContentSnapshot(
             'd4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109'
         ),
         'cat_de_roman_esti/fixtures/games_pack.json': (
-            '573e921cbe54cb482535584a22e55183c4b7add9b0a9a92a1400f9dae4fd01d8'
+            '7d28b9df887fe561150bc582f390df0dde4f8c292e5550055bbe84e9e8d90990'
         ),
         'cat_de_roman_esti/fixtures/board_rankings_v37.json': (
-            '5e29e48a7d684d23d5532f38d80fb996c92d3474744b20a0159111ac7b41bc76'
+            '82f128edb3ccdd8208d41c43b7eb77df1e8d528d2aaea1fed5972712047255ed'
         ),
         'cat_de_roman_esti/fixtures/derived_catalog_v38.json': (
-            '46360ac6a77fff6cdab2f86500dcadc348243f71bab71eea01111e76bf80f2c4'
+            '4088402b80b78946e6f9cb7ee5379c9c3f32438801611008f266101625bb428d'
         ),
         'cat_de_roman_esti/fixtures/quick_games_v92.json': (
-            '04622c7dc0e7d38f68d949c03be349f716a99222d344eb60db6b96d560a6dc21'
+            '6ca48cc452d33a150bad949ef09d5e624df349b5d19a2eeeb253a2d123cf4042'
         ),
         'tests/fixtures/cat_mobile_app_pack_contract.json': (
             '5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f'
         ),
     }),
     payload_sha256=_frozen({
-        'ranking_rows': '148129a618c114cf265481173c165405f75aa031a2f22e239d933c5e5e80a4c2',
+        'ranking_rows': '58e7bbb7779dd5a076d2f97012dc8c56cf8c307b19aa133f11462366577797a6',
         'frozen_derived_boards': '1aa4138171644870f65ca1925f05c066f94e0dac087fd3682b5c374f225b86db',
         'kg_nodes_without_aliases': (
             '413ef622714003dfb7c0b4ff90a84d7c3f943ede2d62aee934385ed12eadd8c0'
         ),
         'kg_edges': '30d453ff93590332de7a10fa84f4dd3b614e54245ddfbbc1b3002e2e0e6af795',
         'kg_puzzles': '3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc',
-        'contexto_profile': 'b1abe04b91fcdf031368660c81d78cdde63bc5634bae82b5efe99bc2c984858e',
+        'contexto_profile': 'f24cbff4983f0086cac877628b047bc3bb68b31df0a5bff16c571dd32cc5b9ed',
         'alchimie_closure_profile': (
             '94eccce7dd6c9555afcc64566c5e5b82368fbfe746c1298f53a3e62681b27b32'
         ),
@@ -146,41 +146,41 @@ CURRENT_CONTENT = CurrentContentSnapshot(
         'puzzles': 180,
     }),
     pack_counts=_frozen({
-        'conexiuni': 241,
-        'contexto': 259,
-        'lant': 118,
+        'conexiuni': 242,
+        'contexto': 261,
+        'lant': 119,
         'alchimie': 83,
     }),
     pack_id_high_water=_frozen({
-        'conexiuni': 370,
-        'contexto': 371,
-        'lant': 240,
+        'conexiuni': 371,
+        'contexto': 373,
+        'lant': 242,
         'alchimie': 107,
     }),
     status_counts=_frozen({
-        'approved': 693,
+        'approved': 697,
         'pending': 8,
     }),
     game_inventory=_frozen({
-        'conexiuni': (241, 241, 0),
-        'contexto': (259, 257, 2),
-        'lant': (118, 115, 3),
+        'conexiuni': (242, 242, 0),
+        'contexto': (261, 259, 2),
+        'lant': (119, 116, 3),
         'alchimie': (83, 80, 3),
     }),
     ranking_counts=_frozen({
-        'total': 701,
-        'approved': 693,
-        'pilot_eligible': 531,
+        'total': 705,
+        'approved': 697,
+        'pilot_eligible': 535,
         'by_game': _frozen({
-            'conexiuni': 241,
-            'contexto': 259,
-            'lant': 118,
+            'conexiuni': 242,
+            'contexto': 261,
+            'lant': 119,
             'alchimie': 83,
         }),
         'eligible_by_game': _frozen({
-            'conexiuni': 83,
-            'contexto': 253,
-            'lant': 115,
+            'conexiuni': 84,
+            'contexto': 255,
+            'lant': 116,
             'alchimie': 80,
         }),
     }),
@@ -193,10 +193,10 @@ CURRENT_CONTENT = CurrentContentSnapshot(
         }
     ),
     quick_counts=_frozen({
-        "total": 401,
-        "by_game": _frozen({"intrusul": 218, "perechi": 183}),
-        "authored_by_game": _frozen({"intrusul": 35, "perechi": 30}),
-        "starter_by_game": _frozen({"intrusul": 53, "perechi": 51}),
+        "total": 409,
+        "by_game": _frozen({"intrusul": 222, "perechi": 187}),
+        "authored_by_game": _frozen({"intrusul": 39, "perechi": 34}),
+        "starter_by_game": _frozen({"intrusul": 57, "perechi": 55}),
     }),
     feedback_observations=_frozen({
         'food_responsive': 2306,
@@ -207,9 +207,9 @@ CURRENT_CONTENT = CurrentContentSnapshot(
         {"făină": 2, "ou": 7, "gem": 10, "dulceață": 9,
          "lapte": 34, "brânză": 41, "smântână": 28}
     ),
-    contexto_approved=257,
-    contexto_eligible=253,
-    contexto_id_high_water=371,
+    contexto_approved=259,
+    contexto_eligible=255,
+    contexto_id_high_water=373,
     projection_terms=464,
     projection_domains=26,
     legacy_feedback_proxies=71,

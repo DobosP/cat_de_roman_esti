@@ -1,0 +1,120 @@
+{
+  "bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v93-words-and-game-quality/alchimie/candidate.json": "fd6d47853a424695d1c0ebf6c2a94b18196c9ce7e38560f4b7b4dcb1c4e6bbef",
+    "docs/reviews/v93-words-and-game-quality/alchimie/final-quality.json": "46b17d44eaa3b6574399e6881ffe29791cdd2b46b2888746aaedcd7d626756c8",
+    "docs/reviews/v93-words-and-game-quality/alchimie/live-audit.json": "1960a690039f5f69b8827f80321683ad49e9fcfdfd863218ed3f7cb900136b76",
+    "docs/reviews/v93-words-and-game-quality/alchimie/quality-review.json": "71f0e989389cdaa1e2dcc917d5932b4743d5bc9d25697ae702d6db9cc7047325"
+  },
+  "candidate_sha256": "d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188",
+  "compatible_generations": 6,
+  "concepts": 242,
+  "craftable_results": 138,
+  "crafted_intermediates": 61,
+  "formerly_terminal_reused": {
+    "alw_food_sos_iaurt": "Sos de iaurt",
+    "n_v20gas_compot": "Compot"
+  },
+  "kind": "alchimie-v94-independent-quality-check-v1",
+  "limits": [
+    "No final runtime-audit acceptance is inferred.",
+    "Five new results remain terminal; two become intermediates and two old terminals are reused.",
+    "One direct pair for fish patties is intentional; human enjoyment remains unmeasured."
+  ],
+  "new_alias_shadowing": false,
+  "new_pairs_unique": true,
+  "new_targets": {
+    "alw_food_cartofi_gratinati": {
+      "direct_recipe_count": 2,
+      "label": "Cartofi gratinați",
+      "witness": [
+        "supply:cofetarie",
+        "supply:gustari",
+        "cartofi-gratinati-smantana"
+      ]
+    },
+    "alw_food_chiftele_peste": {
+      "direct_recipe_count": 1,
+      "label": "Chiftele de pește",
+      "witness": [
+        "supply:meniuri",
+        "chiftele-peste-ou"
+      ]
+    },
+    "alw_food_crochete_cartofi": {
+      "direct_recipe_count": 2,
+      "label": "Crochete de cartofi",
+      "witness": [
+        "aluat-apa",
+        "paine-cuptor",
+        "paine-prajita-cuptor",
+        "supply:meniuri",
+        "pesmet-paine-prajita-sucitor",
+        "supply:cofetarie",
+        "supply:gustari",
+        "piure-cartofi-unt",
+        "crochete-cartofi-pesmet"
+      ]
+    },
+    "alw_food_jeleu_fructe": {
+      "direct_recipe_count": 2,
+      "label": "Jeleu de fructe",
+      "witness": [
+        "supply:camara",
+        "compot-fruct",
+        "supply:sarbatoare",
+        "jeleu-compot-gelatina"
+      ]
+    },
+    "alw_food_paste_pesto": {
+      "direct_recipe_count": 2,
+      "label": "Paste cu pesto",
+      "witness": [
+        "supply:gradina",
+        "supply:cofetarie",
+        "pesto-patrunjel",
+        "paste-ou",
+        "paste-pesto-sos"
+      ]
+    },
+    "alw_food_piure_dovleac": {
+      "direct_recipe_count": 2,
+      "label": "Piure de dovleac",
+      "witness": [
+        "supply:traditii",
+        "dovleac-copt-cuptor",
+        "supply:cofetarie",
+        "piure-dovleac-copt-unt"
+      ]
+    },
+    "alw_food_tzatziki": {
+      "direct_recipe_count": 2,
+      "label": "Tzatziki",
+      "witness": [
+        "supply:gustari",
+        "supply:camara",
+        "tzatziki-iaurt-castravete"
+      ]
+    }
+  },
+  "old_concepts_exact": 235,
+  "old_recipes_exact": 315,
+  "raw_candidate_sha256": "428c41970c7cb8ce2c88b7bc44dd9e4facf966e180f3e8cfcbfb8ab23794c2a6",
+  "recipes": 332,
+  "results_with_alternatives": 92,
+  "reviewer": "codex-v94-independent-quality-scout",
+  "reviewer_source_sha256": "852b1b5584f7ee0f73ecd80961d506e51fe87bf68fd719dea782f449cd030721",
+  "source_checks": {
+    "set_jelly_reheating": "https://retete.unica.ro/recipes/tarta-cu-fructe/ step 5; warmed enough to pour after an earlier layer has set.",
+    "tzatziki_recognition": [
+      "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/sos-tzatziki.html",
+      "https://www.olympusfoods.ro/produse/iaurt-cu-specific-grecesc/iaurt-specific-grecesc-2.html"
+    ]
+  },
+  "starter_ids_unchanged": true,
+  "supplies": 96,
+  "supply_tiers_and_goals_unchanged": true,
+  "terminal_results": 77,
+  "unresolved_findings": []
+}

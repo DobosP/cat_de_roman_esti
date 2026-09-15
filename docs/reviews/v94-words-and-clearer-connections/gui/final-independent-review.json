@@ -1,0 +1,132 @@
+{
+  "kind": "v94-lant-final-independent-gui-review-v1",
+  "reviewer": "codex-v94-independent-quality-scout",
+  "checked_on": "2026-09-15",
+  "verdict": "accept",
+  "independence": {
+    "authored_wrapping_fix": false,
+    "authored_bounded_probe_script": true,
+    "authored_quick_game_content": true,
+    "prior_caption_quality_reviewer": true
+  },
+  "scope": "Independent source, visual and real-browser review of the narrow earned Lanț trail wrapping change. The code author already ran 22 tests; this review adds three independent journeys rather than repeating that suite.",
+  "source_sha256": {
+    "frontend/src/screens/Lant.tsx": "06fd9517f48317ca92a510e423ca73e95521459db4301c7571b6cfb2a2641211",
+    "frontend/src/styles/lant.css": "3a513d553be807b1da2821f9d0c22a55ad510c7fc317b2a7a24ab42af4219ed7",
+    "frontend/src/styles/arcade.css": "26da2fb65b0ac0edcdd87204ff329a2dcd572edf240f19c2e0717b7cf235a93b",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "2b3f7acf89b17c555eac17477c3c17f704028a3ad73bd899de6398166b270fcd",
+    "cat_de_roman_esti/wordgames/lant.py": "1818ed57384d6f9b20359a21dfa8fdee585cc9a7712453f4699bddeecd13ff84",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "cat_de_roman_esti/fixtures/games_pack.json": "7d28b9df887fe561150bc582f390df0dde4f8c292e5550055bbe84e9e8d90990"
+  },
+  "served_asset_sha256": [
+    {
+      "file": "assets/index-J_99uYN0.js",
+      "sha256": "d923dff6e8573b854855b800a49f5df8f3cf97e1d364dd8bc4ad978bc464f6fd"
+    },
+    {
+      "file": "assets/index-D9HNWgEs.css",
+      "sha256": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2"
+    },
+    {
+      "file": "assets/Lant-DM8TuwD9.js",
+      "sha256": "e6ba3c419bf0b93ed3483a3e0660e318c8b7d2b6f2f4b15b9fdd94b03f5ace10"
+    },
+    {
+      "file": "assets/Lant-CNseb-Ny.css",
+      "sha256": "d349dabdc4e35cb8b69f58ac5e08b5dddd431217c074c218390fd131ec8e218f"
+    }
+  ],
+  "evidence_sha256": {
+    "final-independent-probe.mjs": "20515c51bddca684e67ebe4ebbb5bc4d305b33c5d251fe853ca132e946842170",
+    "final-independent-probe.log": "ce98dd09979b7e4998b2c6eacdf7a429b6dad8f6ff8b3267bacf1f97a2ef15c1",
+    "final-independent-probes.json": "79b36d2da7372f842ecca08985a06784aa66ff4c29672277c0c954be89156d22",
+    "independent/final-review.json": "0eb434fd19db22c1b5b7e16f11595dc95e684c6a63a7e3301f9e256def40674e",
+    "independent/critique.md": "b9dbfe5863fe5aa0e09dd21f33ff00a74c776b1930bdd0252705addddfe2d663",
+    "independent/before.json": "5ddac876e2b58201005ca297f086b54790c531618e16a346c50cb24f0efd20b0",
+    "independent/before-lt_geografie_239-earned-320-200.png": "ba1269e03cbf6db28f3479a05aa8c130383477777ac097487e82d6276c6c86a3",
+    "independent/playwright-verified/lant-relationship-captions-4d698-vive-earned-path-and-reload-mobile/earned-path.png": "ed2e4150ac92d1038e9eda91f19373d5ca70f4679c37ffaebe7db8b6dbdeb105",
+    "final-independent-lt_geografie_239.png": "07c3ef383a2ac1c11ac8d89fdff47afed512b4874cc93c3a818c19115d119ec5",
+    "final-independent-lt_literatura_240.png": "28f67ecd898716c1df6ffcb33e9581314a06f080f94014457bf25b6c7f2818f9",
+    "final-independent-lt_gastronomie_241.png": "0bd398e51db0ac4c513b4b6937213f536d830c080fa880b7903480a623533c87"
+  },
+  "code_author_evidence_bindings_checked": {
+    "source_files": 12,
+    "screenshots": 24,
+    "logs_and_other_evidence": 6
+  },
+  "runtime_origin": "http://127.0.0.1:8153",
+  "probe_results": [
+    {
+      "id": "lt_geografie_239",
+      "viewport_width": 320,
+      "root_font": "32px",
+      "final_trail_client_width": 262,
+      "final_trail_scroll_width": 262,
+      "completed_moves": 3,
+      "undo_checked": false,
+      "keyboard_focus": {
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      "screenshot": "final-independent-lt_geografie_239.png"
+    },
+    {
+      "id": "lt_literatura_240",
+      "viewport_width": 320,
+      "root_font": "32px",
+      "final_trail_client_width": 262,
+      "final_trail_scroll_width": 262,
+      "completed_moves": 2,
+      "undo_checked": true,
+      "keyboard_focus": {
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      "screenshot": "final-independent-lt_literatura_240.png"
+    },
+    {
+      "id": "lt_gastronomie_241",
+      "viewport_width": 1280,
+      "root_font": "16px",
+      "final_trail_client_width": 730,
+      "final_trail_scroll_width": 730,
+      "completed_moves": 2,
+      "undo_checked": false,
+      "keyboard_focus": {
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      "screenshot": "final-independent-lt_gastronomie_241.png"
+    }
+  ],
+  "findings": [
+    {
+      "status": "resolved",
+      "issue": "A nowrap earned-history strip hid most of a completed route behind a scrollbar suppressed on narrow layouts.",
+      "evidence": "The inspected baseline image cuts off the first relationship. Independent final captures show complete Cluj–Salina–Cheile–Apuseni and Eminescu–Academia–Maiorescu routes at 320px with 32px root text, including the 33-character geography caption. All text wraps inside the 262px trail without internal horizontal or vertical clipping."
+    },
+    {
+      "status": "pass",
+      "check": "Source scope",
+      "evidence": "The screen diff only assigns dedicated step/relation classes and removes relation nowrap. Lanț-only wrapping, shrink bounds and word wrapping override the shared mobile strip. No action, state, focus ticket, persistence hook, score or semantic markup changed."
+    },
+    {
+      "status": "pass",
+      "check": "Keyboard and persistence",
+      "evidence": "Tab reached the trail and displayed a visible focus outline. ArrowRight did not send a request or alter local storage. Space activated a real first-hop choice once; Enter completed subsequent moves. Reload after an active first hop preserved the same game ID, path and move count with no POST. One literature journey also exercised undo and replay."
+    },
+    {
+      "status": "pass",
+      "check": "Terminal layout and behavior",
+      "evidence": "All three natural seeded journeys completed and terminal GET matched the displayed earned path. Both 320px/200% journeys and the 1280px desktop food route fit their containers. No page error was observed; the desktop trail retains a compact row."
+    }
+  ],
+  "unresolved_findings": [],
+  "limitations": [
+    "This is a bounded wrapping review, not a new whole-arcade usability assessment.",
+    "Two mobile text-scale cases and one desktop case do not establish every device/browser configuration.",
+    "Reduced-motion browser contexts were used in these independent probes; the code author’s separate 22-case run covers the normal configured contexts.",
+    "No human enjoyment or physical-device acceptance is inferred."
+  ]
+}
