@@ -1,0 +1,163 @@
+"""Author V93 quick candidates; never write a served fixture or a review verdict."""
+from pathlib import Path
+import hashlib
+import itertools
+import json
+import pprint
+import sys
+from urllib.parse import quote
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+OUT = Path(__file__).parent
+sys.path.insert(0, str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog, load_derived_catalog
+from cat_de_roman_esti.wordgames import quick_catalog as Q
+s = get_service()
+base = list(get_derived_catalog()._boards)
+w = Q.graph_strengths(s)
+rows = []
+def url(word):
+    return 'https://dexonline.ro/definitie/' + quote(word.lower())
+def intr(slug, members, intruder, label, why, category='viata_de_roman'):
+    rows.append({'id': 'iq92_v93_' + slug, 'game': 'intrusul',
+                 'source_id': 'aq92_v93_intrusul_' + slug,
+                 'category': category, 'difficulty': 'usor',
+                 'payload': {'members': [s.resolve(x) for x in members],
+                             'intruder': s.resolve(intruder), 'group_label': label},
+                 'sources': [url(x.removeprefix('A ')) for x in members + [intruder]],
+                 'rationale': why})
+intr('transport_stops', ['Gară', 'Aeroport', 'Stație'], 'Vapor',
+     'Locuri de oprire pentru mijloacele de transport',
+     'Gara, aeroportul și stația sunt locuri amenajate unde sosesc sau opresc mijloacele de transport. Vaporul este el însuși un mijloc de transport. Toate cuvintele aparțin temei călătoriei; soluția depinde de rol, nu de domeniu. Stație este folosit în sensul cotidian de stație de transport.')
+intr('food_actions', ['A mânca', 'A bea', 'A găti'], 'A citi',
+     'Acțiuni de preparare sau consum al hranei și băuturilor',
+     'Mâncatul și băutul înseamnă consum, iar gătitul pregătirea hranei. Cititul înseamnă descifrarea unui text. Toate cele patru opțiuni sunt verbe uzuale; faptul că se poate citi o rețetă nu transformă sensul verbului în preparare sau consum. A bea are aici sensul neutru, de a consuma un lichid.')
+intr('weather', ['Vânt', 'Nor', 'Ceață'], 'Noapte',
+     'Fenomene atmosferice',
+     'Vântul, norul și ceața descriu starea atmosferei. Noaptea este un interval al zilei, care poate avea oricare dintre aceste condiții meteo. Nu este nevoie de definiții științifice ascunse; diferența este vremea față de momentul zilei.', 'stiinta')
+intr('fruits', ['Banană', 'Portocală', 'Lămâie'], 'Morcov',
+     'Fructe comestibile',
+     'Banana, portocala și lămâia sunt fructe; morcovul consumat este o rădăcină. Toate patru sunt alimente vegetale familiare. Predicatul nu pretinde că banana este citrică și nu depinde de dulceața alimentului.', 'gastronomie')
+boards = [
+ [('Strugure', 'Stafide', 'Fruct și boabele lui uscate', 'stafidă'),
+  ('Pământ', 'Lopată', 'Material și unealta folosită la mutarea lui', 'lopată'),
+  ('Trotuar', 'stradă', 'Cale publică și partea ei pentru pietoni', 'trotuar'),
+  ('Gât', 'Cap', 'Partea corpului care susține capul', 'gât')],
+ [('Biscuit', 'Firimitură', 'Produs sfărâmicios și un fragment desprins din el', 'firimitură'),
+  ('Scaun', 'Taburet', 'Mobilier pentru șezut și varianta fără spătar', 'taburet'),
+  ('Săptămână', 'Weekend', 'Perioadă calendaristică și sfârșitul ei', 'weekend'),
+  ('Ciorbă', 'Castron', 'Preparat lichid și vasul în care se servește', 'castron')],
+ [('Noapte', 'A dormi', 'Moment obișnuit pentru somn și activitatea lui', 'dormi'),
+  ('Frigider', 'Congelator', 'Aparate care păstrează alimentele la rece', 'congelator'),
+  ('Gură', 'Buză', 'Orificiu al feței și marginea lui cărnoasă', 'buză'),
+  ('Haină', 'Scamă', 'Obiect textil și o fibră desprinsă din el', 'scamă')],
+ [('Grădină', 'Greblă', 'Loc cultivat și unealtă pentru adunat frunze', 'greblă'),
+  ('Covor', 'Aspirator', 'Obiect textil pentru podea și aparatul care îl curăță', 'aspirator'),
+  ('Mamă', 'Bebeluș', 'Părinte și copilul aflat la începutul vieții', 'bebeluș'),
+  ('Lup', 'pădure', 'Animal sălbatic și un habitat al lui', 'lup')],
+]
+for ix, pairs in enumerate(boards, 1):
+    rows.append({'id': f'pq92_v93_everyday_{ix:02}', 'game': 'perechi',
+                 'source_id': f'aq92_v93_perechi_everyday_{ix:02}',
+                 'category': 'viata_de_roman', 'difficulty': 'usor',
+                 'payload': {'pairs': [{'members': [s.resolve(a), s.resolve(b)], 'group_label': label}
+                                       for a, b, label, _ in pairs]},
+                 'sources': [url(term) for _, _, _, term in pairs],
+                 'rationale': 'Patru relații cotidiene distincte: ' + '; '.join(
+                     f'{a} — {b} ({label.lower()})' for a, b, label, _ in pairs)
+                 + '. Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.'})
+rows[-2]['sources'] += ['https://support.electrolux.ro/support-articles/article/cum-se-pstreaz-alimentele-in-frigider-i-congelator']
+rows[-1]['sources'] += ['https://www.gardena.com/ro/produse/sol-teren/combisystem/grebla-de-mana-combisystem/967093801.html', 'https://www.electrolux.ro/vacuums-home-comfort/vacuum-cleaners/vacuum-cleaners/', 'https://wwf.ro/ce-facem/specii/lupul/']
+assert all(all(Q.visible_ids(r)) for r in rows)
+raw = {'kind': 'quick-entry-candidates-v1', 'baseline': 'bf9d814',
+       'bindings': Q.bindings(live=True), 'boards': rows}
+(OUT / 'raw-candidates.json').write_bytes(Q.json_bytes(raw))
+# Historical draft/rejected material remains novelty debt, independent of served scope.
+archived=[]
+def visit(v, path):
+    if isinstance(v, dict):
+        if v.get('game') in ('intrusul', 'perechi') and isinstance(v.get('payload'), dict):
+            try:
+                Q.visible_ids(v)
+            except (KeyError, TypeError):
+                pass
+            else:
+                archived.append((path, v))
+        for vv in v.values():visit(vv, path)
+    elif isinstance(v, list):
+        for vv in v:visit(vv,path)
+for p in sorted((ROOT / 'docs/reviews').rglob('*.json')):
+    try:visit(json.loads(p.read_text()), str(p.relative_to(ROOT)))
+    except (ValueError, UnicodeError):pass
+used={g:{i for b in base if b.game==g for i in Q.visible_ids({'game':b.game, 'payload':b.payload})}
+      for g in ('intrusul','perechi')}
+old_pairs={frozenset(p['members']) for b in base if b.game=='perechi' for p in b.payload['pairs']}
+old_trios={frozenset(b.payload['members']) for b in base if b.game=='intrusul'}
+seen_pairs=set(); results=[]
+for r in rows:
+    ids=Q.visible_ids(r); visible=set(ids); g=r['game']; fresh=visible-used[g]
+    rating=Q.rate_board(r,s,w)
+    comparison=[b for b in base if b.game==g]
+    max_overlap=max(len(visible & set(Q.visible_ids({'game':b.game,'payload':b.payload}))) for b in comparison)
+    archived_same=[(path,a) for path,a in archived if a['game']==g]
+    matches=[{'path': path, 'id': a.get('id'), 'overlap': len(visible & set(Q.visible_ids(a)))}
+             for path,a in archived_same if len(visible & set(Q.visible_ids(a))) >= (3 if g=='intrusul' else 4)]
+    assert not matches, matches
+    assert len(fresh)>=2
+    detail={}
+    if g=='intrusul':
+        m=r['payload']['members']; intruder=r['payload']['intruder']
+        assert frozenset(m) not in old_trios
+        assert all(frozenset(m) != frozenset(a['payload']['members']) for _,a in archived_same)
+        detail={'inside_strengths':[w.get(frozenset(p),0) for p in itertools.combinations(m,2)],
+                'intruder_strengths':[w.get(frozenset((x,intruder)),0) for x in m]}
+    else:
+        pairs=[frozenset(p['members']) for p in r['payload']['pairs']]
+        for pair in pairs:
+            assert pair not in old_pairs and pair not in seen_pairs
+            seen_pairs.add(pair)
+            assert not [(path,a.get('id')) for path,a in archived_same
+                        if any(frozenset(p['members'])==pair for p in a['payload']['pairs'])]
+        edges=[p for p in itertools.combinations(ids,2) if w.get(frozenset(p),0)>=.6]
+        def matchings(remaining):
+            if not remaining:return [[]]
+            a=remaining[0];solutions=[]
+            for b in remaining[1:]:
+                if w.get(frozenset((a,b)),0)>=.6:
+                    for rest in matchings([i for i in remaining if i not in (a,b)]):
+                        solutions.append([(a,b)]+rest)
+            return solutions
+        detail={'intended_strengths':[w.get(p,0) for p in pairs],
+                'maximum_cross_strength':max(w.get(frozenset(p),0) for p in itertools.combinations(ids,2) if frozenset(p) not in pairs),
+                'native_perfect_matchings':len(matchings(ids))}
+        assert detail['native_perfect_matchings']==1
+    results.append({'id':r['id'],'visible_labels':[s.node(i).label_ro for i in ids],
+                    'new_visible_labels':[s.node(i).label_ro for i in sorted(fresh)],
+                    'new_visible_count':len(fresh), 'maximum_existing_board_overlap':max_overlap,
+                    'archived_reskin_matches':matches, 'mechanics':detail,'rating':rating})
+source=ROOT/'scripts/quick_game_content_source_v92.py'
+original=source.read_text()
+marker='\n\n# V93: fresh everyday words, pending independent candidate and final live-audit reviews.\n'
+if marker in original:original=original.split(marker)[0]
+source.write_text(original+marker+'BOARDS += '+pprint.pformat(tuple(rows), width=99, sort_dicts=False)+'\n')
+from scripts import quick_game_content_source_v92 as S
+assert len(S.candidate_boards())==65
+# Mechanical replay includes the complete supplement; original records stay exact.
+prior=json.loads((ROOT/'cat_de_roman_esti/fixtures/quick_games_v92.json').read_text())
+assert S.candidate_boards()[:57]==prior['authored']
+rated=Q.rated_boards(S.candidate_boards(),load_derived_catalog(),s)
+ignore={'standard_rank','starter_rank'}
+assert [{k:v for k,v in r.items() if k not in ignore} for r in rated[:57]] == [
+        {k:v for k,v in r.items() if k not in ignore} for r in prior['boards']]
+from scripts.build_quick_content_v92 import candidate
+(OUT/'candidate.json').write_bytes(Q.json_bytes(candidate()))
+audit={'kind':'quick-author-audit-v1','candidate_sha256':hashlib.sha256((OUT/'raw-candidates.json').read_bytes()).hexdigest(),
+       'complete_candidate_sha256':hashlib.sha256((OUT/'candidate.json').read_bytes()).hexdigest(),
+       'baseline':'bf9d814','current_board_count':len(base),'new_intended_pairs':len(seen_pairs),
+       'original_authored_records_exact':57,'original_payloads_and_scores_exact':57,
+       'archive_records_scanned':len(archived),'new_words_by_game':{
+          g:len({n for r in rows if r['game']==g for n in Q.visible_ids(r)}-used[g]) for g in used},
+       'results':results}
+(OUT/'author-audit.json').write_bytes(Q.json_bytes(audit))
+print(json.dumps({k:v for k,v in audit.items() if k!='results'},ensure_ascii=False,indent=2))
+print([(r['id'],a['new_visible_count'],a['rating']['standard_score']) for r,a in zip(rows,results)])

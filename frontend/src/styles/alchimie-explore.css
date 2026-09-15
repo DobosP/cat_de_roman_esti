@@ -46,10 +46,16 @@
 .alchemy-explore-recovery p { font-size: .85rem; line-height: 1.5; }
 .alchemy-save-note, .alchemy-explore-complete { margin: 0; padding: 12px; background: #29213a; border-radius: 10px; color: #f0dfad; font-size: .8rem; line-height: 1.5; }
 .alchemy-journal-entry { padding-bottom: 12px; border-bottom: 1px solid #42374f; }
+.alchemy-journal-tools { display: grid; gap: 8px; min-width: 0; }
+.alchemy-journal-tools label, .alchemy-journal-tools p { margin: 0; color: var(--alchemy-muted); font-size: .8rem; line-height: 1.5; }
+.alchemy-journal-tools .field { width: 100%; min-width: 0; min-height: 44px; }
+.alchemy-journal-tools .alchemy-clear-search { justify-self: start; }
+.alchemy-explore-journal > summary { flex-wrap: wrap; }
+.alchemy-journal-query { flex-basis: 100%; min-width: 0; overflow-wrap: anywhere; font-size: .78rem; font-weight: 400; line-height: 1.5; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 .alchemy-journal-entry:last-child { padding-bottom: 0; border-bottom: 0; }
 .alchemy-journal-entry h3 { margin: 0 0 7px; color: #eeeaf8; font-size: .86rem; line-height: 1.5; }
 .alchemy-journal-entry p { margin: 0; color: var(--alchemy-muted); font-size: .8rem; line-height: 1.5; }
-.alchemy-journal-entry summary { display: flex; align-items: center; cursor: pointer; font-size: .75rem; color: #d2b9eb; }
+.alchemy-journal-entry summary { display: flex; min-height: 44px; align-items: center; cursor: pointer; font-size: .75rem; color: #d2b9eb; }
 .alchemy-journal-entry a { display: inline-flex; min-height: 44px; align-items: center; color: #dfc2ff; }
 .alchemy-screen.alchemy-explore-screen .alchemy-menu-content > p { margin: 0; font-size: .84rem; color: var(--alchemy-muted); line-height: 1.5; }
 .alchemy-explore-screen select:focus-visible, .alchemy-modes a:focus-visible { outline: 3px solid #e2bbff; outline-offset: 3px; }

@@ -1,0 +1,49 @@
+"""Bind independent quality acceptance to the exact live proposal and replay."""
+import hashlib,json,sys
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import build_alchimie_discovery_world as B
+import audit_alchimie_discovery_world as A
+from cat_de_roman_esti.wordgames.discovery_world import validate_world
+from cat_de_roman_esti.wordgames import alchimie_explore as E
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+cp=OUT/'catalog.json';ap=OUT/'live-audit.json';c=json.loads(cp.read_bytes());a=json.loads(ap.read_bytes())
+assert sha(cp)=='14475e29c1c40888a762c1302170f658577ec58ea7e6db2b6fc2ac833c8f5e38'
+assert c==B.build_catalog(OUT/'candidate.json',OUT/'factual-review.json',OUT/'quality-review.json')
+assert c['candidate_sha256']=='fd6d47853a424695d1c0ebf6c2a94b18196c9ce7e38560f4b7b4dcb1c4e6bbef'
+assert a['catalog_sha256']==sha(cp) and a['candidate_sha256']==c['candidate_sha256']
+expected={p:sha(ROOT/p) for p in B.RUNTIME_SOURCES}
+assert len(a['runtime_sources'])==len(expected)
+assert {r['path']:r['sha256'] for r in a['runtime_sources']}==expected
+assert a==A.audit(cp)
+world=validate_world(c)
+# Independent traversal chooses reverse recipe order, with a late optional goal.
+session=E.ExploreSession(world=world,goal_id='ciocolata-dubai')
+session.owned.update(dict.fromkeys(world.catalog.world.starter_ids))
+order=[]
+while True:
+ pair=next((p for p,r in reversed(list(world.recipes.items())) if set(p)<=session.owned.keys() and r.result not in session.owned),None)
+ if pair is None:break
+ result,new,_=session.craft(pair);assert new and result==world.recipes[pair].result
+ order.append(world.recipes[pair].id)
+state=E.state_payload('quality-final-independent',session)
+assert state['complete'] and len(session.owned)==235 and len(session.discoveries)==131
+assert all(g['completed'] for g in state['goals'])
+for pair,r in world.recipes.items():
+ result,new,supplied=session.craft(pair)
+ assert result==r.result and not new and not supplied
+report={'kind':'alchimie-independent-final-quality-check-v1','reviewer':'/root/v93_quick_author',
+ 'catalog_sha256':sha(cp),'audit_sha256':sha(ap),'candidate_sha256':c['candidate_sha256'],
+ 'audit_reproduced_exactly':True,'current_runtime_bindings_checked':len(expected),
+ 'independent_reverse_recipe_order':order,'complete_concepts':len(session.owned),
+ 'complete_discoveries':len(session.discoveries),'all315_recipe_repeats_consistent':True,
+ 'checked_goal_replays':len(a['goal_replays']),'save_generations':len(a['compatible_save_replays']),
+ 'save_prefixes':[x['prefixes_preserved'] for x in a['compatible_save_replays']]}
+(OUT/'independent-final-quality-check.json').write_bytes(B.json_bytes(report))
+final={'kind':B.FINAL_REVIEW_KIND,'role':'quality','reviewer':'/root/v93_quick_author',
+ 'catalog_sha256':sha(cp),'audit_sha256':sha(ap),'verdict':'accept',
+ 'rationale':'Exact proposal reproduces the complete independent semantic reviews for 235 concepts and315 recipes. All current runtime hashes, including the corrected session03 baseline audit path, match. The supplied33 free/optional-goal replay audit reproduces exactly and preserves every39/58/117/117/121 saved prefix across five older books. An independent reverse-order traversal with the late ciocolata-dubai goal reaches all235 words and131 discoveries; all315 subsequent recipe repetitions remain consistent. Four previous terminal dishes gain reuse, Pesmet becomes an ingredient, and nine new results have alternative entries. The repaired cooked-noodle wording survives in the actual catalog and audit. Source/license snapshots and old records retain their reviewed definitions. This is editorial and runtime acceptance, not a human enjoyment claim.'}
+(OUT/'final-quality.json').write_bytes(B.json_bytes(final))
+print(json.dumps({k:v for k,v in report.items() if k!='independent_reverse_recipe_order'},indent=2))

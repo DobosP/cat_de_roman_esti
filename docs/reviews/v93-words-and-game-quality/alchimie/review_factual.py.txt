@@ -1,0 +1,64 @@
+from pathlib import Path
+import json,hashlib,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+OUT=Path('/home/dobo/work/_temp/feat__v93-words-and-game-quality/alchimie')
+sys.path.insert(0,str(ROOT))
+from scripts import build_alchimie_discovery_world as B
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+prior_dir=ROOT/'docs/reviews/v92-session03-vocabulary-and-interface/alchimie'
+prior=json.loads((prior_dir/'candidate.json').read_bytes())
+previous=json.loads((prior_dir/'factual-review.json').read_bytes())
+current=json.loads((OUT/'candidate.json').read_bytes())
+raw=json.loads((OUT/'raw/candidates.json').read_bytes())
+assert sha(OUT/'candidate.json')=='fd6d47853a424695d1c0ebf6c2a94b18196c9ce7e38560f4b7b4dcb1c4e6bbef'
+assert previous['candidate_sha256']==sha(prior_dir/'candidate.json')
+for key,count in [('concepts',225),('recipes',294)]:
+ old={r['id']:r for r in prior[key]};new={r['id']:r for r in current[key]}
+ assert len(old)==count and all(new[i]==r for i,r in old.items())
+for key in ('world','starters','unlocks','goals'):
+ if key in prior:assert current[key]==prior[key]
+concept_notes={
+'alw_food_oua_umplute':'The original e-Retete preparation uses boiled egg halves and a yolk/pate/mayonnaise filling. The definition describes the dish without asserting one compulsory filling.',
+'alw_food_musaca':'Adygio documents layered potatoes and minced meat baked together; Unilever separately documents the mashed-potato variant. The definition accommodates both ordinary forms.',
+'alw_food_clatite_gratinate':'Gina Bradea explicitly calls the filled, sauced oven-baked pancakes gratinate. The new term denotes an additional preparation rather than a renamed plain pancake.',
+'alw_food_galuste_prune':'Laura Laurentiu documents the potato-dough and cooked-dough plum dumplings separately, including boiling and sweet browned breadcrumbs. The definition avoids requiring potato in every variant.',
+'alw_food_milkshake':'The 2010 named-author banana recipe and Kitchen Affair ice-cream version establish two milk-based blended drink variants. The original definition covers either familiar preparation.',
+'alw_food_bruschete':'Diva in Bucatarie documents toasted bread with garlic, olive oil and tomato topping. The definition preserves the named appetizer and does not label it traditional Romanian cuisine.',
+'alw_food_salata_paste':'e-Retete and Mega Image document pasta combined with vegetables as a salad, including grilled vegetables. The definition allows cooling and additional dressing or cheese.',
+'alw_food_budinca_paine':'Laura Laurentiu lists bread, milk, egg, sugar and raisins and bakes the mixture. The definition preserves custard setting and does not equate soaking alone with the finished pudding.',
+'alw_food_pesmet':'Good Food distinguishes dried fine breadcrumbs and rolling-pin crushing; Laura Laurentiu uses them for breading meat. The definition distinguishes this prepared ingredient from arbitrary fresh crumbs.',
+'alw_food_supa_taitei':'Hutton explicitly adds separately boiled thin noodles to hot soup. The corrected definition allows this common serving method and avoids reshaping already cooked pasta.',
+}
+notes={
+'oua-umplute-maioneza':'The e-Retete method boils the eggs, removes the yolks and makes a creamy filling with mayonnaise before filling the whites. The pair captures recognizable essentials.',
+'oua-umplute-pate':'The same primary method explicitly includes pate in the yolk filling. The explanation retains mayonnaise and filling the boiled whites rather than implying uncooked eggs.',
+'musaca-cartof-carne':'Adygio combines sliced potatoes and cooked minced pork filling in baked layers. The explanation states cooking, layering and the oven, making the two-input abstraction honest.',
+'musaca-piure-carne':'Unilever makes a minced-beef ragu and alternates it with mashed potato and vegetables before gratinating. This supports the alternate mash route.',
+'clatite-gratinate-smantana':'Gina Bradea uses filled pancakes, cream and egg before baking. The explanation keeps the filling and oven step explicit; cream is not treated as sufficient without preparation.',
+'clatite-gratinate-cuptor':'The same primary recipe finishes assembled filled pancakes in the oven. This uses the existing cooked pancakes as an intermediate and identifies the additional sauce.',
+'galuste-prune-cartof':'Laura Laurentiu makes plum dumplings using cooked-potato dough, then boils and coats them in sweet breadcrumbs. The potato/plum pairing is a familiar preparation, not raw mixing.',
+'galuste-prune-oparit':'The separate original recipe uses cooked semolina dough, flour and eggs around plums, then boiling and breadcrumbs. The explanation names the suitable dough variant.',
+'milkshake-inghetata-lapte':'Kitchen Affair blends milk with vanilla ice cream and optional fruit. Ice cream is genuinely reused in a distinct drink; the recipe does not introduce a nutritional claim.',
+'milkshake-banana-lapte':'The replacement named-author 2010 recipe blends ripe banana and milk. Unsupported frozen-banana/spice wording was removed with the retired redirecting reference.',
+'bruschete-paine-prajita-rosie':'The primary Diva in Bucatarie recipe tops toasted garlic bread with chopped tomatoes and oil. The input already toasted bread is compatible with that sequence.',
+'bruschete-paine-rosie':'The same primary recipe toasts the bread before the tomato topping. This alternate plain-bread input explicitly includes toasting, preserving the named preparation.',
+'salata-paste-legume':'The e-Retete original uses cooked pasta and vegetables, with oil and seasonings, as pasta salad. The explanation specifies the cooked/cooled preparation.',
+'salata-paste-legume-gratar':'Mega Image publishes a pasta salad with grilled vegetables and parmesan. This supports a meaningful onward use of already grilled vegetables.',
+'budinca-paine-lapte':'The original bread pudding combines milk, eggs and bread before baking. The explanation keeps egg, sweetening and setting explicit beyond the two selected inputs.',
+'budinca-paine-stafide':'The same original includes raisins mixed through bread and a milk/egg custard before baking. The alternate pair preserves those necessary preparation steps.',
+'pesmet-paine-prajita-sucitor':'Good Food explicitly supports crushing dried bread using a rolling pin. Drying and cooling are stated, so ordinary moist toast is not mistaken for ready dry crumbs.',
+'pesmet-crutoane-sucitor':'Dry croutons are toasted bread pieces; crushing them finely follows the primary dry-breadcrumb method. The explanation accurately retains any original seasoning.',
+'snitel-pesmet-carne':'Laura Laurentiu documents thin meat covered with flour, egg and breadcrumbs before frying. The explanation includes the full breading sequence and keeps the existing Schnitzel result.',
+'snitel-pesmet-pui':'The cited original specifically uses chicken breast with flour, egg and breadcrumbs. The new prepared ingredient supplies a grounded alternative to the existing recipe.',
+'supa-taitei-paste':'The Hutton manufacturer recipe boils thin noodles separately before adding hot soup. The corrected explanation reuses already cooked pasta; it no longer stretches or cuts cooked pasta into a dough.',
+}
+assert set(concept_notes)=={r['id'] for r in raw['concepts']}
+assert set(notes)=={r['id'] for r in raw['recipes']}
+items=[{'id':r['id'],'inherited':False,'verdict':'accept','rationale':notes[r['id']],'sources':r['sources']} for r in raw['recipes']]
+concepts=[{'id':c['id'],'inherited':False,'concept_sha256':B.concept_digest(c),'verdict':'accept','rationale':concept_notes[c['id']],'sources':c['references']} for c in raw['concepts']]
+raw_review={'kind':'v93-world-raw-factual-review-v1','role':'factual','reviewer':'root-v93-factual','candidate_sha256':sha(OUT/'raw/candidates.json'),'concepts':concepts,'items':items,'reviewed_on':'2026-09-15'}
+(OUT/'raw/factual-review.json').write_bytes(B.json_bytes(raw_review))
+review={'kind':B.REVIEW_KIND,'role':'factual','reviewer':'root-v93-factual','candidate_sha256':sha(OUT/'candidate.json'),'world_verdict':'accept','world_rationale':'The exact previously reviewed world, supplies and optional goals remain. Ten familiar kitchen discoveries add grounded preparation variants and reuse existing results. All225priorconceptsand294recipes retain full records; five existing saved-book generations remain representable. New definitions are original authored world-local descriptions with references and unchanged provenance fields. Judgments concern factual plausibility and familiarity, not measured human enjoyment.','items':previous['items']+items,'concepts':previous['concepts']+concepts,'baseline_evidence':{'candidate_path':str((prior_dir/'candidate.json').relative_to(ROOT)),'candidate_sha256':sha(prior_dir/'candidate.json'),'factual_review_path':str((prior_dir/'factual-review.json').relative_to(ROOT)),'factual_review_sha256':sha(prior_dir/'factual-review.json'),'inherited_concepts':225,'inherited_recipes':294,'exact_old_records_and_judgments_preserved':True,'raw_candidate_sha256':sha(OUT/'raw/candidates.json'),'raw_review_sha256':sha(OUT/'raw/factual-review.json')}}
+(OUT/'factual-review.json').write_bytes(B.json_bytes(review))
+B.read_review(OUT/'factual-review.json','factual',sha(OUT/'candidate.json'),{r['id'] for r in current['recipes']},current['concepts'])
+print('Independent factual review:10new concepts/21recipes accepted;235concepts/315recipes complete and valid')

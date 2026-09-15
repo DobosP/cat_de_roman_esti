@@ -1,0 +1,65 @@
+from pathlib import Path
+import pprint
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+S = {
+ 'eggs': 'https://www.e-retete.ro/retete/oua-umplute',
+ 'musaca': 'https://jamilacuisine.ro/musaca-de-cartofi-reteta-video/',
+ 'mash': 'https://www.unileverfoodsolutions.ro/reteta/musaca-cu-piure-de-cartofi-dovlecei-si-ragu-de-vita-R90010786.html',
+ 'crepes': 'https://pofta-buna.com/clatite-cu-branza-dulce-de-vaci-si-smantana-la-cuptor/',
+ 'plums': 'https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/galuste-gomboti-cu-prune-de-post.html',
+ 'choux': 'https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/gomboti-cu-prune-cu-aluat-oparit.html',
+ 'shake': 'https://www.kitchenaffair.ro/retete/milkshake-capsuni/',
+ 'banana': 'https://www.philips.ro/c-m-ho/in-bucataria-philips/retete/bauturi-si-inghetata/milkshake-cu-banane-si-miere',
+ 'bruschete': 'https://www.youtube.com/watch?v=7c_FVObuWds',
+ 'salad': 'https://www.e-retete.ro/retete/salata-de-paste-cu-legume',
+ 'grill': 'https://www.mega-image.ro/recipes/recipeDetails/Salata-de-paste-cu-legume-la-gratar-si-parmezan/r/R20163',
+ 'pudding': 'https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/budinca-de-paine-cu-unt-si-caramel.html',
+ 'breadcrumbs': 'https://www.bbcgoodfood.com/howto/guide/how-make-breadcrumbs',
+ 'schnitzel': 'https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html',
+ 'soup': 'https://jamilacuisine.ro/supa-de-pui-cu-taietei-de-casa-video/',
+}
+concept_rows = [
+ ('Ouă umplute', 'oua_umplute', 'Jumătăți de ou fiert cu albușurile umplute cu o pastă din gălbenușuri, maioneză și alte ingrediente, precum pateul.', ['eggs']),
+ ('Musaca', 'musaca', 'Preparat copt în straturi de cartofi sau alte legume și o umplutură, adesea din carne tocată; există și variante cu piure.', ['musaca', 'mash']),
+ ('Clătite gratinate', 'clatite_gratinate', 'Clătite umplute, așezate într-un vas și rumenite la cuptor sub un sos; umplutura poate fi dulce sau sărată.', ['crepes']),
+ ('Găluște cu prune', 'galuste_prune', 'Desert din prune învelite în aluat, fierte și tăvălite în pesmet rumenit și îndulcit; aluatul poate conține cartofi.', ['plums', 'choux']),
+ ('Milkshake', 'milkshake', 'Băutură rece și spumoasă obținută prin mixarea laptelui cu înghețată ori fructe și alte arome.', ['shake', 'banana']),
+ ('Bruschete', 'bruschete', 'Felii de pâine prăjită, frecate de obicei cu usturoi și stropite cu ulei; pot fi acoperite cu roșii și alte ingrediente.', ['bruschete']),
+ ('Salată de paste', 'salata_paste', 'Paste fierte și răcorite, amestecate cu legume și un dressing, uneori și cu brânză sau alte ingrediente.', ['salad', 'grill']),
+ ('Budincă de pâine', 'budinca_paine', 'Desert copt din bucăți de pâine înmuiate într-un amestec de lapte, ou și zahăr, cu arome sau fructe uscate.', ['pudding']),
+ ('Pesmet', 'pesmet', 'Pâine uscată și mărunțită, folosită pentru cruste, umpluturi și tăvălirea unor preparate.', ['breadcrumbs', 'schnitzel']),
+ ('Supă cu tăiței', 'supa_taitei', 'Supă în care se fierb tăiței subțiri, adesea pregătită cu carne de pasăre și legume.', ['soup']),
+]
+concepts = {label: {'id': 'alw_food_' + slug, 'description': description, 'sources': [S[x] for x in refs]} for label, slug, description, refs in concept_rows}
+rows = [
+ ('oua-umplute-maioneza', 'Ou fiert', 'Maioneză', 'Ouă umplute', 'Ouăle fierte tari se taie în jumătăți; gălbenușurile se amestecă cu maioneză și condimente, apoi pasta umple albușurile.', 'eggs'),
+ ('oua-umplute-pate', 'Ou fiert', 'Pate', 'Ouă umplute', 'Gălbenușurile ouălor fierte se freacă cu pate și puțină maioneză; pasta se pune în jumătățile de albuș.', 'eggs'),
+ ('musaca-cartof-carne', 'Cartof', 'Carne tocată', 'Musaca', 'Cartofii pregătiți în felii se alternează cu carne tocată gătită cu ceapă și roșii, apoi musacaua se coace la cuptor.', 'musaca'),
+ ('musaca-piure-carne', 'Piure de cartofi', 'Carne tocată', 'Musaca', 'Straturile de piure și carne tocată gătită cu legume se așază într-un vas și se rumenesc la cuptor.', 'mash'),
+ ('clatite-gratinate-smantana', 'Clătite', 'Smântână', 'Clătite gratinate', 'Clătitele umplute cu brânză se acoperă cu smântână amestecată cu ou, apoi se rumenesc la cuptor.', 'crepes'),
+ ('clatite-gratinate-cuptor', 'Clătite', 'Cuptor de bucătărie', 'Clătite gratinate', 'Clătitele se umplu cu brânză, se acoperă cu un sos de smântână și ou, apoi se dau la cuptor pentru gratinare.', 'crepes'),
+ ('galuste-prune-cartof', 'Prună', 'Cartof', 'Găluște cu prune', 'Cartofii fierți și pasați se leagă cu făină într-un aluat care învelește prunele; găluștele se fierb și se tăvălesc în pesmet dulce.', 'plums'),
+ ('galuste-prune-oparit', 'Prună', 'Aluat opărit', 'Găluște cu prune', 'Un aluat opărit potrivit pentru găluște, cu griș, făină și ou, învelește prunele; după fierbere, găluștele se tăvălesc în pesmet dulce.', 'choux'),
+ ('milkshake-inghetata-lapte', 'Înghețată', 'Lapte', 'Milkshake', 'Înghețata se mixează cu lapte rece până devine o băutură cremoasă; se pot adăuga căpșuni sau alte arome.', 'shake'),
+ ('milkshake-banana-lapte', 'Banană', 'Lapte', 'Milkshake', 'Banana feliată și congelată se mixează cu lapte rece; mierea sau scorțișoara pot aromatiza băutura.', 'banana'),
+ ('bruschete-paine-prajita-rosie', 'Pâine prăjită', 'Roșie', 'Bruschete', 'Feliile de pâine prăjită se freacă cu usturoi și se acoperă cu roșii tocate, ulei și busuioc.', 'bruschete'),
+ ('bruschete-paine-rosie', 'Pâine', 'Roșie', 'Bruschete', 'Pâinea se taie în felii și se prăjește, apoi se freacă cu usturoi și se acoperă cu roșii tocate și ulei.', 'bruschete'),
+ ('salata-paste-legume', 'Paste', 'Legume', 'Salată de paste', 'Pastele fierte și răcorite se amestecă cu legume tăiate și un dressing, pentru o salată de paste.', 'salad'),
+ ('salata-paste-legume-gratar', 'Paste', 'Legume la grătar', 'Salată de paste', 'Pastele fierte se amestecă cu legume făcute la grătar, ulei și verdețuri; salata se poate servi după răcorire.', 'grill'),
+ ('budinca-paine-lapte', 'Pâine', 'Lapte', 'Budincă de pâine', 'Bucățile de pâine se înmoaie în lapte amestecat cu ou, zahăr și arome, apoi se coc până când compoziția se încheagă.', 'pudding'),
+ ('budinca-paine-stafide', 'Pâine', 'Stafide', 'Budincă de pâine', 'Pâinea cu stafide se îmbibă într-un amestec de lapte, ou și zahăr, apoi se coace într-un vas uns cu unt.', 'pudding'),
+ ('pesmet-paine-prajita-sucitor', 'Pâine prăjită', 'Sucitor', 'Pesmet', 'Pâinea prăjită, uscată bine și răcită, se zdrobește fin cu sucitorul, de pildă într-o pungă, pentru pesmet.', 'breadcrumbs'),
+ ('pesmet-crutoane-sucitor', 'Crutoane', 'Sucitor', 'Pesmet', 'Crutoanele uscate și răcite se zdrobesc fin cu sucitorul; dacă au fost condimentate, pesmetul păstrează acele arome.', 'breadcrumbs'),
+ ('snitel-pesmet-carne', 'Pesmet', 'Carne', 'Șnițel', 'Feliile subțiri de carne se trec prin făină, ou și pesmet, apoi se prăjesc pentru a obține șnițel pane.', 'schnitzel'),
+ ('snitel-pesmet-pui', 'Pesmet', 'Carne de pui', 'Șnițel', 'Feliile subțiri de piept de pui se acoperă cu făină, ou și pesmet, apoi se prăjesc până se gătesc și se rumenesc.', 'schnitzel'),
+ ('supa-taitei-paste', 'Supă', 'Paste', 'Supă cu tăiței', 'Pastele de casă se întind și se taie în tăiței subțiri, apoi se fierb în supă; se adaugă verdeață după gust.', 'soup'),
+]
+recipes = [row[:5] for row in rows]
+refs = {row[0]: [S[row[5]]] for row in rows}
+p = ROOT / 'scripts/alchimie_discovery_recipe_source.py'
+with p.open('a') as f:
+ f.write('\n# V93: familiar new preparations, alternate paths and useful dry-bread reuse.\n')
+ f.write('WORLD_CONCEPTS.update(\n' + pprint.pformat(concepts, width=99, sort_dicts=False) + '\n)\n')
+ f.write('RECIPES.extend(\n' + pprint.pformat(recipes, width=99, sort_dicts=False) + '\n)\n')
+ f.write('RECIPE_SOURCES.update(\n' + pprint.pformat(refs, width=99, sort_dicts=False) + '\n)\n')

@@ -84,6 +84,28 @@ _V92_SESSION03_ADDED_IDS = {
 }
 
 
+
+_V93_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v93-words-and-game-quality/artifact-delta.json"
+)
+_V93_RECEIPT_SHA256 = "4fad0ef7db0131ed1e74bd881506dc2b9d86e6b09bc5c6832ba19f29292518f5"
+_V93_BASELINE = {
+    "kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "games_pack.json": "02b966eacaa851a9b20c4f36e0ee50c217e49670553da462313b16830b2c13e6",
+    "board_rankings_v37.json": "e467823999d6b20bd0abeb6a41ceb239faaf7c600afe7d9df3adfc65daad3b12",
+    "derived_catalog_v38.json": "de2f46a72c23e5ecbd496d3a4314a48f0d4f636b71aa5ba4662bccc837298449",
+    "cat_mobile_app_pack_contract.json": (
+        "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+    ),
+}
+_V93_ADDED_IDS = {
+    "conexiuni": {"cx_viata_de_roman_370"},
+    "contexto": {"ct_gastronomie_370", "ct_gastronomie_371"},
+    "lant": {"lt_geografie_239", "lt_literatura_240"},
+    "alchimie": set(),
+}
+
+
 # The V92 expansion adds exactly 4 Conexiuni, 8 Contexto and 13 Lanț records.
 # Pin complete current bytes before peeling it; never replace historical wave hashes.
 _V92_ARTIFACT_HASHES = {
@@ -302,6 +324,7 @@ def before_v92_entry_session_artifact(current: dict, filename: str) -> dict:
 
 def before_v92_session03_artifact(current: dict, filename: str) -> dict:
     """Restore exact 0b51e03 bytes before any older content inverse runs."""
+    current = before_v93_artifact(current, filename)
     receipt_blob = _V92_SESSION03_RECEIPT.read_bytes()
     assert hashlib.sha256(receipt_blob).hexdigest() == _V92_SESSION03_RECEIPT_SHA256
     receipt = json.loads(receipt_blob)
@@ -332,6 +355,40 @@ def before_v92_session03_artifact(current: dict, filename: str) -> dict:
         else:
             assert not changes["added"] and not changes["changed"]
     return _reverse_bound_delta(current, filename, _V92_SESSION03_RECEIPT)
+
+
+def before_v93_artifact(current: dict, filename: str) -> dict:
+    """Restore exact bf9d814 bytes before any historical content inverse runs."""
+    receipt_blob = _V93_RECEIPT.read_bytes()
+    assert hashlib.sha256(receipt_blob).hexdigest() == _V93_RECEIPT_SHA256
+    receipt = json.loads(receipt_blob)
+    assert receipt["baseline_commit"] == "bf9d8145f2797b7e1ea125531f81a98d2ff6098c"
+    files = receipt["files"]
+    assert set(files) == set(_V93_BASELINE)
+    assert filename in _V93_BASELINE
+    artifact = files[filename]
+    assert artifact["baseline_sha256"] == _V93_BASELINE[filename]
+    expected_ids = set().union(*_V93_ADDED_IDS.values())
+    assert len(expected_ids) == 5
+    for table, changes in artifact["tables"].items():
+        assert not changes["removed"]
+        if filename == "games_pack.json":
+            assert table in _V93_ADDED_IDS
+            assert {row["id"] for row in changes["added"]} == _V93_ADDED_IDS[table]
+            assert all(row["status"] == "approved" for row in changes["added"])
+            assert not changes["changed"]
+        elif filename == "board_rankings_v37.json":
+            assert table == "boards"
+            assert {row["id"] for row in changes["added"]} == expected_ids
+            for change in changes["changed"].values():
+                before, after = change["before"], change["after"]
+                assert set(before) == set(after)
+                assert {key for key in before if before[key] != after[key]} <= {
+                    "rank", "selection_weight",
+                }
+        else:
+            assert not changes["added"] and not changes["changed"]
+    return _reverse_bound_delta(current, filename, _V93_RECEIPT)
 
 
 def before_v91_artifact(current: dict, filename: str) -> dict:

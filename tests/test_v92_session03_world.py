@@ -11,12 +11,15 @@ import pytest
 from django.test import Client
 
 from cat_de_roman_esti.wordgames import alchimie_explore as E
-from cat_de_roman_esti.wordgames.discovery_world import get_world
+from cat_de_roman_esti.wordgames.discovery_world import validate_world
 from cat_de_roman_esti.wordgames.service import SessionStore, get_service
 from scripts import build_alchimie_discovery_world as B
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "/api/alchimie/explore"
+ARCHIVE = ROOT / "docs/reviews/v92-session03-vocabulary-and-interface/alchimie"
+ARCHIVE_SHA256 = "e77e18626d928b58448869fd444a2623c72209450ef2e4a9effcffcb22fa42e8"
+CATALOG_SHA256 = "b9ff7122f6499d4eea365cc6292249744e34c6576f5f16ca694d9644c19c327f"
 PREVIOUS = ROOT / "docs/reviews/v92-entry-creation-and-gui/alchimie/candidate.json"
 PREVIOUS_SHA256 = "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da"
 NEW_WORDS = {
@@ -39,10 +42,45 @@ HISTORY = [
 
 @pytest.fixture
 def world(monkeypatch):
-    world = get_world()
+    # Keep the completed V92 session exactly testable after newer world expansions.
+    world = validate_world(historical_catalog())
+    monkeypatch.setattr(E, "get_world", lambda: world)
     assert len(world.concepts) == 225 and len(world.recipes) == 294
     monkeypatch.setattr(E, "store", SessionStore())
     return world
+
+
+def session03_candidate():
+    blob = (ARCHIVE / "candidate.json").read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == ARCHIVE_SHA256
+    return json.loads(blob)
+
+
+def historical_catalog():
+    """Reconstruct the exact served V92 bytes from its bound original reviews."""
+    catalog = session03_candidate()
+    reviews = []
+    for role in ("factual", "quality"):
+        blob = (ARCHIVE / f"{role}-review.json").read_bytes()
+        review = json.loads(blob)
+        assert review["candidate_sha256"] == ARCHIVE_SHA256
+        assert review["role"] == role and review["world_verdict"] == "accept"
+        assert {row["id"] for row in review["items"]} == {
+            row["id"] for row in catalog["recipes"]
+        }
+        assert all(row["verdict"] == "accept" for row in review["items"])
+        if role == "factual":
+            rows = {row["id"]: row for row in review["items"]}
+            for recipe in catalog["recipes"]:
+                recipe["sources"] = sorted(set(rows[recipe["id"]]["sources"]))
+        reviews.append({"role": role, "reviewer": review["reviewer"],
+                        "candidate_sha256": ARCHIVE_SHA256,
+                        "sha256": hashlib.sha256(blob).hexdigest()})
+    catalog.pop("kind")
+    catalog["candidate_sha256"] = ARCHIVE_SHA256
+    catalog["reviews"] = reviews
+    assert hashlib.sha256(B.json_bytes(catalog)).hexdigest() == CATALOG_SHA256
+    return catalog
 
 
 def previous():
@@ -78,8 +116,10 @@ def complete_old_checkpoint(version):
     }, owned
 
 
-def test_four_new_words_preserve_complete_previous_editorial_records_and_bounds():
-    old, current = previous(), B.candidate()
+def test_four_new_words_preserve_complete_previous_editorial_records_and_bounds(monkeypatch):
+    old, current = previous(), session03_candidate()
+    monkeypatch.setattr(B, "BASELINE", PREVIOUS)
+    monkeypatch.setattr(B, "BASELINE_SHA", PREVIOUS_SHA256)
     assert len(old["concepts"]) == 221 and len(old["recipes"]) == 288
     old_concepts = {row["id"]: row for row in old["concepts"]}
     new_concepts = {row["id"]: row for row in current["concepts"]}
@@ -104,7 +144,7 @@ def test_four_new_words_preserve_complete_previous_editorial_records_and_bounds(
 
 
 def test_new_words_are_craftable_local_definitions_with_preparation_sources(world):
-    candidate = B.candidate()
+    candidate = session03_candidate()
     concepts = {row["id"]: row for row in candidate["concepts"]}
     recipes = {row["id"]: row for row in candidate["recipes"]}
     supplies = {cid for unlock in world.catalog.unlocks for cid in unlock.concept_ids}

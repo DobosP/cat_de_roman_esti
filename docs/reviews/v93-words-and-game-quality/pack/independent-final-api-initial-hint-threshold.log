@@ -1,0 +1,14 @@
+2026-09-15 13:13:22,907 WARNING django.request: Bad Request: /api/wordgames/conexiuni/games/1a721646-ada4-4591-90a2-16f21f77610e/guess
+2026-09-15 13:13:22,907 WARNING django.request: Bad Request: /api/wordgames/conexiuni/games/1a721646-ada4-4591-90a2-16f21f77610e/clue
+2026-09-15 13:13:22,908 WARNING django.request: Conflict: /api/wordgames/conexiuni/games/1a721646-ada4-4591-90a2-16f21f77610e/guess
+2026-09-15 13:13:22,911 WARNING django.request: Bad Request: /api/wordgames/conexiuni/games/1a721646-ada4-4591-90a2-16f21f77610e/guess
+2026-09-15 13:13:22,943 WARNING django.request: Bad Request: /api/wordgames/contexto/games/baedd773-3d48-4ebd-975b-762bf2144487/guess
+2026-09-15 13:13:22,944 WARNING django.request: Bad Request: /api/wordgames/contexto/games/baedd773-3d48-4ebd-975b-762bf2144487/clue
+Traceback (most recent call last):
+  File "/home/dobo/work/_temp/feat__v93-words-and-game-quality/pack/independent_final_api.py", line 90, in <module>
+    clue=post(client,base+'/clue');secret_hidden(clue);earned=get(client,base);secret_hidden(earned);assert earned['clues_used']==1 and get(client,base)==earned
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dobo/work/_temp/feat__v93-words-and-game-quality/pack/independent_final_api.py", line 31, in post
+    response=client.post(url,payload or {},content_type='application/json');assert response.status_code==status,(url,response.status_code,response.content)
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('/api/wordgames/contexto/games/baedd773-3d48-4ebd-975b-762bf2144487/clue', 400, b'{"detail":"Mai incearca 2 concepte inainte de indiciu."}')

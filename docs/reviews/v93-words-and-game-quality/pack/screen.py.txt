@@ -1,0 +1,18 @@
+import sys,copy,json,random
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality');sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import critique_pack as c
+from cat_de_roman_esti.wordgames.packs import validate_payload
+p,s,st,r=c.load_all(c.PACKAGE_PACK,c.PACKAGE_KG)
+groups=[('Rude de sex feminin',['Mamă','Fiică','Soră','Bunică']),('Pot avea coroană',['Rege','regină','Dinte','copac']),('Absorb lichide',['Prosop','Mop','Burete de vase','Hârtie igienică']),('Apă lichidă sau înghețată în atmosferă',['Ploaie','Nor','Grindină','Ceață'])]
+rec=dict(id='preview_v93_cx',difficulty='usor',category='viata_de_roman',status='pending',source='ai',groups={f'g{i}':[s.resolve(x) for x in labels] for i,(_,labels) in enumerate(groups)},group_labels={f'g{i}':label for i,(label,_)in enumerate(groups)})
+rec['order']=[n for g in rec['groups'].values() for n in g]
+print('validate',validate_payload(rec,'conexiuni',s));p['conexiuni'].append(rec)
+f,_,_=c.run(p,s,st,r,['conexiuni'],{'pending'},{rec['id']}); print(json.dumps(f,ensure_ascii=False,indent=2))
+old=[]
+for path in (ROOT/'docs/reviews').rglob('candidates.json'):
+ try:d=json.loads(path.read_text())
+ except:continue
+ if isinstance(d,dict):old.extend(d.get('conexiuni',[]))
+print('raw_max_quad',max(len(set(g)&set(z['tiles'])) for g in rec['groups'].values() for row in old for z in row['groups']))
+print('raw_max_board',max(len(set(rec['order'])&{n for z in row['groups'] for n in z['tiles']}) for row in old))

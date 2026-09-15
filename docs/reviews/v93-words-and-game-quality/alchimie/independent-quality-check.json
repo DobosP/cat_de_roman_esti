@@ -1,0 +1,152 @@
+{
+  "all_new_pairs_ingredients_naturally_reachable": true,
+  "baseline_candidate_sha256": "e77e18626d928b58448869fd444a2623c72209450ef2e4a9effcffcb22fa42e8",
+  "candidate_sha256": "fd6d47853a424695d1c0ebf6c2a94b18196c9ce7e38560f4b7b4dcb1c4e6bbef",
+  "compatible_generations": 5,
+  "concepts": 235,
+  "craftable_results": 131,
+  "crafted_intermediates": 57,
+  "formerly_terminal_reused": {
+    "alw_food_crutoane": "Crutoane",
+    "alw_food_legume_gratar": "Legume la grătar",
+    "n_v3gas_clatite": "Clătite",
+    "n_v3gas_inghetata": "Înghețată"
+  },
+  "kind": "alchimie-v93-independent-quality-check-v1",
+  "limits": [
+    "Pair abstractions omit some ingredients and work; every new explanation discloses the relevant preparation.",
+    "Nine of ten new results have two direct paths; Supă cu tăiței intentionally retains one legible final pair.",
+    "Nine new results remain terminal; four former terminal discoveries gain use and Pesmet becomes an intermediate.",
+    "No physical-device or human enjoyment acceptance is inferred."
+  ],
+  "manual_quality_findings": [
+    {
+      "final_explanation": "Pastele fierte, alese sub formă de tăiței subțiri, se adaugă în supa fierbinte; se încălzesc împreună și se presară verdeață după gust.",
+      "id": "supa-taitei-paste",
+      "initial_issue": "Initial text stretched and cut an already boiled Paste concept. Author was asked to describe selecting thin noodles and adding them to soup.",
+      "resolution": "Final text reviewed below before acceptance."
+    }
+  ],
+  "new_recipe_pairs_unique": true,
+  "new_targets": {
+    "alw_food_bruschete": {
+      "direct_recipe_count": 2,
+      "label": "Bruschete",
+      "witness": [
+        "aluat-apa",
+        "paine-cuptor",
+        "paine-prajita-cuptor",
+        "supply:pranz",
+        "bruschete-paine-prajita-rosie"
+      ]
+    },
+    "alw_food_budinca_paine": {
+      "direct_recipe_count": 2,
+      "label": "Budincă de pâine",
+      "witness": [
+        "aluat-apa",
+        "paine-cuptor",
+        "budinca-paine-lapte"
+      ]
+    },
+    "alw_food_clatite_gratinate": {
+      "direct_recipe_count": 2,
+      "label": "Clătite gratinate",
+      "witness": [
+        "supply:cofetarie",
+        "supply:gustari",
+        "aluat-apa",
+        "clatite-tigaie",
+        "clatite-gratinate-smantana"
+      ]
+    },
+    "alw_food_galuste_prune": {
+      "direct_recipe_count": 2,
+      "label": "Găluște cu prune",
+      "witness": [
+        "supply:traditii",
+        "supply:gustari",
+        "galuste-prune-cartof"
+      ]
+    },
+    "alw_food_milkshake": {
+      "direct_recipe_count": 2,
+      "label": "Milkshake",
+      "witness": [
+        "supply:camara",
+        "caramel-apa",
+        "supply:cofetarie",
+        "sos-caramel-smantana",
+        "frisca-mixer",
+        "inghetata-sos-caramel",
+        "milkshake-inghetata-lapte"
+      ]
+    },
+    "alw_food_musaca": {
+      "direct_recipe_count": 2,
+      "label": "Musaca",
+      "witness": [
+        "supply:baze",
+        "supply:pranz",
+        "carne-cutit",
+        "supply:gustari",
+        "musaca-cartof-carne"
+      ]
+    },
+    "alw_food_oua_umplute": {
+      "direct_recipe_count": 2,
+      "label": "Ouă umplute",
+      "witness": [
+        "supply:sarbatoare",
+        "supply:brutarie",
+        "maioneza-galbenus",
+        "ou-fiert-apa",
+        "oua-umplute-maioneza"
+      ]
+    },
+    "alw_food_pesmet": {
+      "direct_recipe_count": 2,
+      "label": "Pesmet",
+      "witness": [
+        "aluat-apa",
+        "paine-cuptor",
+        "paine-prajita-cuptor",
+        "supply:meniuri",
+        "pesmet-paine-prajita-sucitor"
+      ]
+    },
+    "alw_food_salata_paste": {
+      "direct_recipe_count": 2,
+      "label": "Salată de paste",
+      "witness": [
+        "paste-ou",
+        "supply:camara",
+        "salata-paste-legume"
+      ]
+    },
+    "alw_food_supa_taitei": {
+      "direct_recipe_count": 1,
+      "label": "Supă cu tăiței",
+      "witness": [
+        "paste-ou",
+        "supply:camara",
+        "supa-legume",
+        "supa-taitei-paste"
+      ]
+    }
+  },
+  "old_concepts_exact": 225,
+  "old_recipes_exact": 294,
+  "opening_recipes": 9,
+  "prior_audit_sha256": "e3875b8cd19c361ed033c0a043c0a61d5e5cfc128240579794d0b049e8cc6122",
+  "prior_compatible_generations_exact": 4,
+  "prior_final_quality_sha256": "3a89a7021245f7aa59f002d8970626f5f93aa9350cc91d91bddb91a550fa9a8a",
+  "prior_quality_sha256": "6ed2ea2447d96b6450bf40956eb9b7b1e56ee6890ee959a7f9a6b5e7db41e641",
+  "raw_candidate_sha256": "3008b704b45ed67a1eda018348a83be09dd4044b7c3a155ec7b07557c7be35b8",
+  "recipes": 315,
+  "reviewer": "/root/v93_quick_author",
+  "starter_ids_unchanged": true,
+  "supplies": 96,
+  "supply_tiers_and_goals_unchanged": true,
+  "terminal_results": 74
+}

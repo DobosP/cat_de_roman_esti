@@ -1,0 +1,701 @@
+{
+  "scope": "Author API replay of every native shortest route, not independent review or public selection.",
+  "ladders": [
+    {
+      "start": "n_cluj_napoca",
+      "target": "n_muntii_apuseni",
+      "routes": [
+        {
+          "ids": [
+            "n_cluj_napoca",
+            "n_transilvania",
+            "n_avram_iancu",
+            "n_muntii_apuseni"
+          ],
+          "labels": [
+            "Cluj-Napoca",
+            "Transilvania",
+            "Avram Iancu",
+            "Munții Apuseni"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_transilvania",
+                "label": "Transilvania"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_transilvania",
+                  "label": "Transilvania",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Avram Iancu",
+                  "relation": "regiune și revoluționar"
+                },
+                {
+                  "label": "Castelul Bran",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Răscoala 1784",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_avram_iancu",
+                "label": "Avram Iancu"
+              },
+              "relation": "regiune și revoluționar",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_transilvania",
+                  "label": "Transilvania",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_avram_iancu",
+                  "label": "Avram Iancu",
+                  "relation": "regiune și revoluționar"
+                }
+              ],
+              "moves": 2,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Erou",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Munții Apuseni",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Revoluție",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_muntii_apuseni",
+                "label": "Munții Apuseni"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_transilvania",
+                  "label": "Transilvania",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_avram_iancu",
+                  "label": "Avram Iancu",
+                  "relation": "regiune și revoluționar"
+                },
+                {
+                  "id": "n_muntii_apuseni",
+                  "label": "Munții Apuseni",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 3,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 3/3 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_cluj_napoca",
+            "n_transilvania",
+            "n_v11ist_rascoala_1784",
+            "n_muntii_apuseni"
+          ],
+          "labels": [
+            "Cluj-Napoca",
+            "Transilvania",
+            "Răscoala 1784",
+            "Munții Apuseni"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_transilvania",
+                "label": "Transilvania"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_transilvania",
+                  "label": "Transilvania",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Avram Iancu",
+                  "relation": "regiune și revoluționar"
+                },
+                {
+                  "label": "Castelul Bran",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Răscoala 1784",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v11ist_rascoala_1784",
+                "label": "Răscoala 1784"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_transilvania",
+                  "label": "Transilvania",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v11ist_rascoala_1784",
+                  "label": "Răscoala 1784",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Erou",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Munții Apuseni",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Răscoală",
+                  "relation": "exemplu și categorie"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_muntii_apuseni",
+                "label": "Munții Apuseni"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_transilvania",
+                  "label": "Transilvania",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v11ist_rascoala_1784",
+                  "label": "Răscoala 1784",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_muntii_apuseni",
+                  "label": "Munții Apuseni",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 3,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 3/3 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_cluj_napoca",
+            "n_v17geo_salina_turda",
+            "n_v20geo_cheile_turzii",
+            "n_muntii_apuseni"
+          ],
+          "labels": [
+            "Cluj-Napoca",
+            "Salina Turda",
+            "Cheile Turzii",
+            "Munții Apuseni"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v17geo_salina_turda",
+                "label": "Salina Turda"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_v17geo_salina_turda",
+                  "label": "Salina Turda",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Cheile Turzii",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Sare",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Transilvania",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v20geo_cheile_turzii",
+                "label": "Cheile Turzii"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_v17geo_salina_turda",
+                  "label": "Salina Turda",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v20geo_cheile_turzii",
+                  "label": "Cheile Turzii",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Cheile Bicazului",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Munții Apuseni",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "stâncă",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_muntii_apuseni",
+                "label": "Munții Apuseni"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_cluj_napoca",
+                  "label": "Cluj-Napoca"
+                },
+                {
+                  "id": "n_v17geo_salina_turda",
+                  "label": "Salina Turda",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v20geo_cheile_turzii",
+                  "label": "Cheile Turzii",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_muntii_apuseni",
+                  "label": "Munții Apuseni",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 3,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 3/3 mutari\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "start": "n_mihai_eminescu",
+      "target": "n_titu_maiorescu",
+      "routes": [
+        {
+          "ids": [
+            "n_mihai_eminescu",
+            "n_academia_romana",
+            "n_titu_maiorescu"
+          ],
+          "labels": [
+            "Mihai Eminescu",
+            "Academia Română",
+            "Titu Maiorescu"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_academia_romana",
+                "label": "Academia Română"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_mihai_eminescu",
+                  "label": "Mihai Eminescu"
+                },
+                {
+                  "id": "n_academia_romana",
+                  "label": "Academia Română",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "DOOM",
+                  "relation": "creator și operă"
+                },
+                {
+                  "label": "Nicolae Iorga",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "label": "Titu Maiorescu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_titu_maiorescu",
+                "label": "Titu Maiorescu"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_mihai_eminescu",
+                  "label": "Mihai Eminescu"
+                },
+                {
+                  "id": "n_academia_romana",
+                  "label": "Academia Română",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_titu_maiorescu",
+                  "label": "Titu Maiorescu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_mihai_eminescu",
+            "n_convorbiri_literare",
+            "n_titu_maiorescu"
+          ],
+          "labels": [
+            "Mihai Eminescu",
+            "Convorbiri literare",
+            "Titu Maiorescu"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_convorbiri_literare",
+                "label": "Convorbiri literare"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_mihai_eminescu",
+                  "label": "Mihai Eminescu"
+                },
+                {
+                  "id": "n_convorbiri_literare",
+                  "label": "Convorbiri literare",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Junimea",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "revistă",
+                  "relation": "exemplu și categorie"
+                },
+                {
+                  "label": "Titu Maiorescu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_titu_maiorescu",
+                "label": "Titu Maiorescu"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_mihai_eminescu",
+                  "label": "Mihai Eminescu"
+                },
+                {
+                  "id": "n_convorbiri_literare",
+                  "label": "Convorbiri literare",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_titu_maiorescu",
+                  "label": "Titu Maiorescu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_mihai_eminescu",
+            "n_junimea",
+            "n_titu_maiorescu"
+          ],
+          "labels": [
+            "Mihai Eminescu",
+            "Junimea",
+            "Titu Maiorescu"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_junimea",
+                "label": "Junimea"
+              },
+              "relation": "parte și întreg",
+              "path": [
+                {
+                  "id": "n_mihai_eminescu",
+                  "label": "Mihai Eminescu"
+                },
+                {
+                  "id": "n_junimea",
+                  "label": "Junimea",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Cenaclu literar",
+                  "relation": "exemplu și categorie"
+                },
+                {
+                  "label": "Convorbiri literare",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Titu Maiorescu",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_titu_maiorescu",
+                "label": "Titu Maiorescu"
+              },
+              "relation": "parte și întreg",
+              "path": [
+                {
+                  "id": "n_mihai_eminescu",
+                  "label": "Mihai Eminescu"
+                },
+                {
+                  "id": "n_junimea",
+                  "label": "Junimea",
+                  "relation": "parte și întreg"
+                },
+                {
+                  "id": "n_titu_maiorescu",
+                  "label": "Titu Maiorescu",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

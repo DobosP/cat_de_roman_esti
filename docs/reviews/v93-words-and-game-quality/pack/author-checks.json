@@ -1,0 +1,55 @@
+{
+  "status": "unapproved",
+  "baseline_commit": "bf9d814",
+  "baseline_artifacts_unchanged": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "02b966eacaa851a9b20c4f36e0ee50c217e49670553da462313b16830b2c13e6",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109"
+  },
+  "author_source_sha256": "1312e7f8424f85cacdf483dfcbaa947601bf86cb884b00a19c7e30caec76c10e",
+  "counts": {
+    "conexiuni": 1,
+    "contexto": 2,
+    "lant": 2
+  },
+  "candidate_files": {
+    "candidates/gastronomie/candidates.json": "9745fd33cd81bbbbc1cd3dad8f01f488eff6c1fc8e846ec81dbf8ca89c7075d5",
+    "candidates/geografie/candidates.json": "a04a26c9ddea02121a131c3ccedaf83141f64315cdc924b74f209e0a8d07a3fe",
+    "candidates/literatura/candidates.json": "a31813312b48aa5106f71473a1b264bd87ede0077d2f1abe4236e74d9384fb68",
+    "candidates/viata_de_roman/candidates.json": "dfd142d24f818c54bc201c73f736ccd4e0e69b2232afef025f1d3f749add4f21"
+  },
+  "strict_preview_failures": 0,
+  "findings": {
+    "preview_v93_geografie_lant_1": {
+      "game": "lant",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Cluj-Napoca salience 0.50 < 0.60 (usor floor)"
+        },
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Munții Apuseni salience 0.37 < 0.60 (usor floor)"
+        }
+      ]
+    },
+    "preview_v93_literatura_lant_1": {
+      "game": "lant",
+      "status": "pending",
+      "difficulty": "usor",
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Titu Maiorescu salience 0.30 < 0.60 (usor floor)"
+        }
+      ]
+    }
+  },
+  "contexto_targets_solved": 2,
+  "lant_routes_solved": 6,
+  "preview_ids_are_not_allocated_pack_ids": true
+}

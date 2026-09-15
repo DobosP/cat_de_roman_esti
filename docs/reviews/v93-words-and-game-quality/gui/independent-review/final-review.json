@@ -1,0 +1,27 @@
+{
+  "kind": "v93-independent-gui-review-v1",
+  "reviewer": "/root/v93_pack_author",
+  "reviewed_on": "2026-09-15",
+  "verdict": "accept",
+  "rationale": "Local earned-recipe filtering is accurate, accent/case tolerant and isolated from game selection, API calls and saved progress. Fresh journals expose no unearned rows. Keyboard reset/Escape retain selection and focus, all measured journal/source controls reach44px, 320px with200%text has no horizontal overflow, and the long-query collapsed summary now stays within two lines while preserving the full editable query. Cald sau Rece visibly describes harder associations rather than obscure concepts. This is bounded automated browser/code/visual evidence, not a human enjoyment or physical-device study.",
+  "world_concepts": 235,
+  "earned_checkpoint_rows": 117,
+  "source_hashes": {
+    "frontend/src/screens/AlchimieExplore.tsx": "e04850698189b82db7afa3bf8b26b78ef4178d30492e46f25ea72e710c22bbd9",
+    "frontend/src/screens/CaldRece.tsx": "aabf97f10d4241e7cd6f8e51eb550cf49c014784d758d526945ea9f81ea939b4",
+    "frontend/src/styles/alchimie-explore.css": "ccdef901070e157fe3d105fbdc2b0d8f421efff849375d1c13c2a33d78049e3e",
+    "frontend/e2e/alchimie-journal-search.spec.mjs": "2edcc48ec29d1eac4fc6bf332e6c913fae47d4f433ac699df7bdddea5463bd5a",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "0c2c895a965ff244469dabf8b32679d314fda991c89daaa04d881b13a9e994af"
+  },
+  "evidence_sha256": {
+    "browser-review.json": "64264b9e96eba2538a70fe041eb4135178168808e43ad87d74076f0ae260da80",
+    "code-and-visual-review.md": "b02939b91c71342a0026e1432091b53ce1b7c5efa6269b5797c4364bf8878e0e",
+    "journal-long-query-320-200pct.png": "a954254507bfa18e68b0864ac4d4702b9ecf411b4a0e180a93b6bf9223813192",
+    "journal-results-320-200pct.png": "0485a589f82ef6cdb15e1d26318cfe0badc399f619761ced371086cf68d1cf50",
+    "review_gui.mjs": "26d7fa3dad27d7c3fee3e50a51908c496bbb677d5a35a4c08206d1b8a83e7ad6"
+  },
+  "resolved_findings": [
+    "Long pasted queries previously made the closed journal summary excessively tall; final CSS clamps only the visible preview to two lines."
+  ],
+  "unresolved_findings": []
+}

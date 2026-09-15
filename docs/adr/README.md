@@ -63,6 +63,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0149 | [Review new levels and keep crafting feedback visible](0149-review-new-levels-and-keep-crafting-feedback-visible.md) | accepted; extended by 0150 |
 
 | 0150 | [Expand vocabulary and clarify game controls](0150-expand-vocabulary-and-clarify-game-controls.md) | accepted |
+| 0151 | [Expand game vocabulary and search earned recipes](0151-expand-game-vocabulary-and-search-earned-recipes.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

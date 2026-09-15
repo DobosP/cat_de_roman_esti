@@ -1,0 +1,108 @@
+{
+ "id": "ct_gastronomie_370",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "b2cdd0fdbcb142fc553e93ff50d01959fe5de717176c69ce03cb8d318cb5cd52",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v84_food_aluat",
+  "label": "Aluat",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.85,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Amestec de făină și lichid din care se modelează pâine și alte preparate."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 5,
+  "sample": [
+   {
+    "id": "n_v24_food_pantry_faina",
+    "label": "Făină"
+   },
+   {
+    "id": "n_v4gas_apa",
+    "label": "Apă"
+   },
+   {
+    "id": "n_v84_food_drojdie",
+    "label": "Drojdie"
+   },
+   {
+    "id": "n_v84_food_sucitor",
+    "label": "Sucitor"
+   },
+   {
+    "id": "n_v86_kitchen_mixer",
+    "label": "Mixer de bucătărie"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v24_food_pantry_faina",
+   "label": "Făină",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.88,
+   "degree": 12,
+   "incoming_degree": 6,
+   "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v4gas_apa",
+   "label": "Apă",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.968,
+   "degree": 24,
+   "incoming_degree": 20,
+   "description": "Lichid de băut și ingredient de bază în gătit.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v84_food_drojdie",
+   "label": "Drojdie",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 5,
+   "incoming_degree": 0,
+   "description": "Preparat de panificație care ajută aluatul să dospească.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v84_food_sucitor",
+   "label": "Sucitor",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 4,
+   "incoming_degree": 0,
+   "description": "Unealtă de bucătărie care întinde foile de aluat.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v86_kitchen_mixer",
+   "label": "Mixer de bucătărie",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 4,
+   "incoming_degree": 1,
+   "description": "Aparat electric cu palete sau accesorii pentru amestecarea și baterea ingredientelor.",
+   "strength": 0.8
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:8163c16c717f4176a8dd89829d37907d25bbb6dcd06321128d1327c312792812"
+}

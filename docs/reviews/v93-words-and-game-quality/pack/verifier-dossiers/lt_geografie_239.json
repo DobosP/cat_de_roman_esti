@@ -1,0 +1,180 @@
+{
+ "id": "lt_geografie_239",
+ "game": "lant",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "0ac66b7517743d8c7a02a6a565464bd1e0fa8d5d03eedb1906ea639fbddb3f14",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Cluj-Napoca salience 0.50 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Munții Apuseni salience 0.37 < 0.60 (usor floor)"
+  }
+ ],
+ "display_rules_sha256": "c74d52eda142c2a99da407f35265f808879e7fce565e373e9c926b7b7b06f287",
+ "start": {
+  "id": "n_cluj_napoca",
+  "label": "Cluj-Napoca",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.4989,
+  "degree": 21,
+  "incoming_degree": 21,
+  "description": "Oraș important din Transilvania, pe Someș."
+ },
+ "target": {
+  "id": "n_muntii_apuseni",
+  "label": "Munții Apuseni",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.3706,
+  "degree": 11,
+  "incoming_degree": 11,
+  "description": "Grupa montana din Carpatii Occidentali, cunoscuta pentru pesteri si Tara Motilor."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 5
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca"
+    },
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania"
+    },
+    {
+     "id": "n_avram_iancu",
+     "label": "Avram Iancu"
+    },
+    {
+     "id": "n_muntii_apuseni",
+     "label": "Munții Apuseni"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_cluj_napoca",
+      "label": "Cluj-Napoca"
+     },
+     "to": {
+      "id": "n_transilvania",
+      "label": "Transilvania"
+     },
+     "relation": "located_in",
+     "label": "are orașul",
+     "display_label": "legătură directă",
+     "strength": 0.75
+    },
+    {
+     "from": {
+      "id": "n_transilvania",
+      "label": "Transilvania"
+     },
+     "to": {
+      "id": "n_avram_iancu",
+      "label": "Avram Iancu"
+     },
+     "relation": "located_in",
+     "label": "a condus revolutia in",
+     "display_label": "regiune și revoluționar",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_avram_iancu",
+      "label": "Avram Iancu"
+     },
+     "to": {
+      "id": "n_muntii_apuseni",
+      "label": "Munții Apuseni"
+     },
+     "relation": "located_in",
+     "label": "originar din",
+     "display_label": "legătură directă",
+     "strength": 0.7
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca"
+    },
+    {
+     "id": "n_v17geo_salina_turda",
+     "label": "Salina Turda"
+    },
+    {
+     "id": "n_v20geo_cheile_turzii",
+     "label": "Cheile Turzii"
+    },
+    {
+     "id": "n_muntii_apuseni",
+     "label": "Munții Apuseni"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_cluj_napoca",
+      "label": "Cluj-Napoca"
+     },
+     "to": {
+      "id": "n_v17geo_salina_turda",
+      "label": "Salina Turda"
+     },
+     "relation": "related_to",
+     "label": "aproape de Cluj-Napoca",
+     "display_label": "legătură directă",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_v17geo_salina_turda",
+      "label": "Salina Turda"
+     },
+     "to": {
+      "id": "n_v20geo_cheile_turzii",
+      "label": "Cheile Turzii"
+     },
+     "relation": "associated_with",
+     "label": "ambele lângă Turda",
+     "display_label": "legătură directă",
+     "strength": 0.7
+    },
+    {
+     "from": {
+      "id": "n_v20geo_cheile_turzii",
+      "label": "Cheile Turzii"
+     },
+     "to": {
+      "id": "n_muntii_apuseni",
+      "label": "Munții Apuseni"
+     },
+     "relation": "located_in",
+     "label": "se află în",
+     "display_label": "legătură directă",
+     "strength": 0.9
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:2352fa193068f714eab64949c036697658935083e2ab5a816576efdfc2f6963e"
+}

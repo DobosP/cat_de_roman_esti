@@ -1,0 +1,109 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_370",
+   "ct_gastronomie_371",
+   "cx_viata_de_roman_370",
+   "lt_geografie_239",
+   "lt_literatura_240"
+  ]
+ },
+ "verdicts": {
+  "ct_gastronomie_370": "promote",
+  "ct_gastronomie_371": "promote"
+ },
+ "perItem": [
+  {
+   "id": "ct_gastronomie_370",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:8163c16c717f4176a8dd89829d37907d25bbb6dcd06321128d1327c312792812",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_370",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:8163c16c717f4176a8dd89829d37907d25bbb6dcd06321128d1327c312792812",
+    "rationale": "Promote easy Aluat. The freshly reconstructed allocated dossier retains the recognizable flour-and-liquid preparation and all five concrete native predecessors: Făină, Apă, Drojdie, Sucitor and Mixer de bucătărie. The set gives ingredient and tool routes; none is an alias added to satisfy a count. Independent current-source API probes put flour and the other direct neighbors at rank2/distance1 before the exact target wins. Pâine remains only rank107/distance3, so I do not claim all obvious guesses are well calibrated. A naive flour opener is nevertheless strong and recognizable. Current primary baking instructions confirm flour/liquid/yeast and kneading; the target requires no specialist knowledge. No duplicate target or strict FAIL. C1–C6 pass.",
+    "sources": [
+     "https://www.oetker.ro/retete/r/pizza",
+     "https://dexonline.ro/definitie/aluat"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_370",
+    "game": "contexto",
+    "review_binding": "sha256:8163c16c717f4176a8dd89829d37907d25bbb6dcd06321128d1327c312792812",
+    "verdict": "promote",
+    "rationale": "Aluat is a concrete familiar flour-and-liquid preparation. Its five existing incoming ingredients/tools are factual: flour, water, yeast, rolling pin and kitchen mixer. Dr Oetker illustrates flour/liquid/yeast with mechanical kneading; dictionary meaning supplies the independent lexical signal. Not every dough requires yeast. The naive flour opener is direct/hot; bread being only lukewarm is retained as a limitation, not concealed. No specialist or regional knowledge is required. Exact allocated pending dossier was regenerated independently and byte-matches the reviewed batch. Full applicable A1–A7 and B/C/D criteria were considered. Recognition and useful choices, not numerical solvability alone, support this verdict. Existing captions stay neutral and content topology is unchanged. This agent judgment is not a human playtest.",
+    "sources": [
+     "https://www.oetker.ro/retete/r/pizza",
+     "https://dexonline.ro/definitie/aluat"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_371",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:5ba57eb040c337143c3e1b4a740546f0ec31d0c276f9a2cfac3e619ddd2150cf",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_371",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:5ba57eb040c337143c3e1b4a740546f0ec31d0c276f9a2cfac3e619ddd2150cf",
+    "rationale": "Promote easy Cașcaval. The allocated dossier preserves all five native food/process predecessors and the same everyday food identity. Own current-source probes give Brânză and Cașcaval pane rank2, Pizza/Parizer rank5 and ordinary Lapte rank11/distance2, so different spontaneous food guesses provide a clear gradient. Cheag alimentar is the less spontaneous fifth predecessor, but is a real recognizable cheesemaking ingredient beside four familiar foods, not obscure trivia supporting the target. The dominant sense is the food in this category despite colloquial slang. Producer material corroborates everyday recognition; knowledge of the separately fact-checked Săveni designation is not needed to solve. No strict FAIL or target duplicate; C1–C6 pass.",
+    "sources": [
+     "https://www.napolact.ro/cascaval"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_371",
+    "game": "contexto",
+    "review_binding": "sha256:5ba57eb040c337143c3e1b4a740546f0ec31d0c276f9a2cfac3e619ddd2150cf",
+    "verdict": "promote",
+    "rationale": "Cașcaval is a familiar semi-hard cheese, with ordinary milk/cheese/pizza/sandwich associations. Napolact and Hochland are independent Romanian producer signals of ordinary food use. Cașcaval de Săveni PGI in the existing description is independently verified by EU Implementing Regulation2021/657 and the Commission Romanian notice; this does not grant PGI to generic cașcaval. Familiarity does not depend on knowing that designation. The live direct cheese and two-hop milk approaches are meaningful. Exact allocated pending dossier was regenerated independently and byte-matches the reviewed batch. Full applicable A1–A7 and B/C/D criteria were considered. Recognition and useful choices, not numerical solvability alone, support this verdict. Existing captions stay neutral and content topology is unchanged. This agent judgment is not a human playtest.",
+    "sources": [
+     "https://www.napolact.ro/cascaval",
+     "https://hochland.ro/produse/",
+     "https://eur-lex.europa.eu/legal-content/RO/TXT/?uri=CELEX%3A32021R0657",
+     "https://romania.representation.ec.europa.eu/stiri-evenimente-si-resurse-pentru-presa/stiri/cascavalul-de-saveni-produs-cu-indicatie-geografica-protejata-ue-2021-04-22_ro"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 2,
+  "verified": 2,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v93-words-and-game-quality/pack/analyst.json",
+   "sha256": "sha256:5e4b216096c2b7f6516b2651d0152d3c072f0ad327d6d885ea25538aa70ee16c",
+   "reviewer": "v93-independent-pack-quality-world-author",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v93-words-and-game-quality/pack/verifier.json",
+   "sha256": "sha256:78e2c517489c11c7205a92d42fa9ccda4b998c47c913dd790bb8d9732c7b140f",
+   "reviewer": "root-v93-factual",
+   "role": "verifier"
+  }
+ }
+}

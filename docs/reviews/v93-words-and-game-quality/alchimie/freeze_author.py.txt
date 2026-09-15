@@ -1,0 +1,48 @@
+import json, hashlib
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+D=Path('/home/dobo/work/_temp/feat__v93-words-and-game-quality/alchimie')
+def read(p): return json.loads(p.read_bytes())
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def out(p,x):p.write_text(json.dumps(x,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
+old_path=R/'docs/reviews/v92-session03-vocabulary-and-interface/alchimie/candidate.json'
+old=read(old_path);new=read(D/'candidate.json'); labels={c['id']:c['label'] for c in new['concepts']}
+oldc={c['id']:c for c in old['concepts']};oldr={r['id']:r for r in old['recipes']}
+newc={c['id']:c for c in new['concepts']};newr={r['id']:r for r in new['recipes']}
+addedc=[c for c in new['concepts'] if c['id'] not in oldc]
+addedr=[r for r in new['recipes'] if r['id'] not in oldr]
+assert all(newc[k]==v for k,v in oldc.items()) and all(newr[k]==v for k,v in oldr.items())
+for k in ('world','unlocks','goals'): assert new[k]==old[k]
+assert new['compatible_versions'][:-1]==old['compatible_versions']
+assert new['compatible_versions'][-1]['source_sha256']==sha(old_path)
+oldcrafted={r['result'] for r in oldr.values()};oldused={c for r in oldr.values() for c in r['pair']}
+newcrafted={r['result'] for r in newr.values()};newused={c for r in newr.values() for c in r['pair']}
+newterm=newcrafted-newused;oldterm=oldcrafted-oldused
+rationales={
+ 'oua-umplute': 'Recognizable filled-egg preparation reuses a boiled egg and either familiar creamy filling.',
+ 'musaca': 'Distinct layered baked dish links minced meat to sliced potatoes or the already crafted mash.',
+ 'clatite-gratinate': 'Reuses terminal pancakes through a disclosed filling and oven finish; both tool and sauce routes name the extra preparation.',
+ 'galuste-prune': 'Familiar dumpling dessert offers potato and choux-dough routes supported by separate preparations, with boiling and sweet crumbs explicit.',
+ 'milkshake': 'A familiar drink gives terminal ice cream another use; a separately documented banana route offers a different entry.',
+ 'bruschete': 'The toasted-tomato appetizer has a prepared-toast route and an explicit toasting-from-bread route.',
+ 'salata-paste': 'Cold pasta salad differs from the served hot sauced pasta; grilled vegetables regain utility through an alternative route.',
+ 'budinca-paine': 'Recognizable custard-baked reuse of bread; both milk and raisins disclose the indispensable egg-and-oven steps.',
+ 'pesmet': 'A recognizable prepared ingredient, distinct from arbitrary fresh crumbs, reconnects dried bread and terminal croutons to breaded meat.',
+ 'snitel-pesmet': 'The new dry breadcrumbs provide two exact familiar breading pairs, preserving every old shortcut and scored outcome.',
+ 'supa-taitei': 'Soup and thin pasta form an ordinary named soup; no second arbitrary pair is added only to inflate alternatives.',
+}
+raw={'kind':'alchimie-new-words-author-candidates-v1','status':'unapproved','baseline':'bf9d814','baseline_candidate_sha256':sha(old_path),'candidate_sha256':sha(D/'candidate.json'),'concepts':addedc,'recipes':[]}
+for r in addedr:
+ prefix=next(k for k in rationales if r['id'].startswith(k))
+ raw['recipes'].append({**r,'rationale':rationales[prefix],'labels':{'pair':[labels[x] for x in r['pair']],'result':labels[r['result']]}})
+out(D/'raw/candidates.json',raw)
+proof={'kind':'alchimie-v93-author-preservation-v1','baseline_commit':'bf9d814','baseline_candidate_path':str(old_path.relative_to(R)),'baseline_candidate_sha256':sha(old_path),'candidate_sha256':sha(D/'candidate.json'),'previous_concepts_exact':len(oldc),'previous_recipes_exact':len(oldr),'world_unlocked_tiers_and_goals_exact':True,'previous_compatible_versions_exact':4,'new_compatible_versions':5,'new_concepts':len(addedc),'new_recipes':len(addedr),'shared_kg_sha256':sha(R/'cat_de_roman_esti/fixtures/kg_sample.json'),'installed_world_sha256_unchanged':sha(R/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json'),'formerly_terminal_reused':{i:labels[i] for i in sorted(oldterm & newused)},'new_terminal_results':{i:labels[i] for i in sorted(newterm-oldterm)},'crafted_intermediates_before':len(oldcrafted & oldused),'crafted_intermediates_after':len(newcrafted & newused),'new_recipe_paths_per_result':{labels[i]:sum(r['result']==i for r in addedr) for i in sorted(newcrafted-oldcrafted)},'notes':['Author verification only; no independent verdict implied.','All definitions are original world-local authored records; no reference license is inferred.','One new result has one direct recipe but multiple existing routes to both components.','All old concept and recipe records, including text and references, compare exactly.']}
+out(D/'author-preservation.json',proof)
+out(D/'author-exclusions.json',{'kind':'alchimie-v93-author-exclusions-v1','status':'not proposed','items':[
+ {'idea':'Chiftele marinate','reason':'The exact normalized phrase is an existing KG alias of Chiftele. A new world-local identity would shadow it. The shared graph is not changed to rescue this candidate.'},
+ {'idea':'Orez prăjit from Pilaf de legume and Tigaie','reason':'A cooked pilaf does not reliably have the dry-grain texture implied by fried rice. Excluded rather than treating every finished rice dish as interchangeable.'},
+ {'idea':'Lasagna from existing Paste cu sos de roșii and Sos de brânză','reason':'Existing cooked pasta and cheese sauce do not specifically establish lasagna sheets and layering. The shortcut would be hard to predict.'},
+ {'idea':'Pesmet from Mixer de bucătărie','reason':'The current mixer definition promises beating/mixing attachments, not a chopping blade. The actual existing rolling pin provides the supported dry-bread crushing route.'},
+ {'idea':'Second direct recipe for Supă cu tăiței','reason':'No equally clear unoccupied pair was found. Existing upstream pasta and soup recipes already provide multiple routes; no forced second pair was added.'}
+]})
+print(json.dumps({'candidate_sha256':sha(D/'candidate.json'),'raw_sha256':sha(D/'raw/candidates.json'),'new_concepts':[c['label'] for c in addedc],'preserved_concepts':len(oldc),'preserved_recipes':len(oldr),'reused_terminals':proof['formerly_terminal_reused']},ensure_ascii=False))

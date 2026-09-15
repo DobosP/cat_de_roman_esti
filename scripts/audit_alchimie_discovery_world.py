@@ -31,7 +31,7 @@ RUNTIME_SOURCES = (
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/build_alchimie_discovery_world.py",
     "scripts/audit_alchimie_discovery_world.py",
-    "docs/reviews/v92-entry-creation-and-gui/alchimie/candidate.json",
+    "docs/reviews/v92-session03-vocabulary-and-interface/alchimie/candidate.json",
 )
 
 

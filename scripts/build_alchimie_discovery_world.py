@@ -36,8 +36,8 @@ from cat_de_roman_esti.wordgames.service import normalize  # noqa: E402
 CATALOG = ROOT / "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json"
 REVIEW_KIND = "alchimie-discovery-world-review-v1"
 FINAL_REVIEW_KIND = "alchimie-discovery-world-final-v1"
-BASELINE = ROOT / "docs/reviews/v92-entry-creation-and-gui/alchimie/candidate.json"
-BASELINE_SHA = "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da"
+BASELINE = ROOT / "docs/reviews/v92-session03-vocabulary-and-interface/alchimie/candidate.json"
+BASELINE_SHA = "e77e18626d928b58448869fd444a2623c72209450ef2e4a9effcffcb22fa42e8"
 RUNTIME_SOURCES = (
     "cat_de_roman_esti/wordgames/discovery_world.py",
     "cat_de_roman_esti/wordgames/alchimie_explore.py",
@@ -47,7 +47,7 @@ RUNTIME_SOURCES = (
     "scripts/build_alchimie_discovery_world.py",
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/audit_alchimie_discovery_world.py",
-    "docs/reviews/v92-entry-creation-and-gui/alchimie/candidate.json",
+    "docs/reviews/v92-session03-vocabulary-and-interface/alchimie/candidate.json",
 )
 
 
@@ -101,7 +101,7 @@ def compatible_versions(artifact: dict) -> list[dict]:
                              [(u["after_discoveries"], u["concept_ids"]) for u in value["unlocks"]])
     old = mechanics(previous)
     # The newest reviewed candidate already binds its full older compatibility history.
-    # Carry it forward so adding a third book does not strand saves from either predecessor.
+    # Carry every generation forward so new discoveries never strand older collections.
     versions = copy.deepcopy(previous.get("compatible_versions", []))
     if mechanics_hash(old) != mechanics_hash(mechanics(artifact)):
         versions.append({"world_id": previous["world"]["id"], "recipe_hash": mechanics_hash(old),

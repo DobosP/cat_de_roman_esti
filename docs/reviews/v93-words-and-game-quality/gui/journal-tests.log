@@ -1,0 +1,29 @@
+
+Running 14 tests using 2 workers
+
+(node:34681) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34682) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] /home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django/core/handlers/asgi.py:336: Warning: StreamingHttpResponse must consume synchronous iterators in order to serve them asynchronously. Use an asynchronous iterator instead.
+[WebServer]   async for part in content:
+  ✓   2 [desktop] › e2e/alchimie-library-recovery.spec.mjs:12:3 › a closed search recovers in one action at 320px without losing the chosen word (959ms)
+  ✓   1 [desktop] › e2e/alchimie-journal-search.spec.mjs:27:1 › earned recipes can be found by result or ingredient without accents (1.4s)
+  ✓   3 [desktop] › e2e/alchimie-library-recovery.spec.mjs:12:3 › a closed search recovers in one action at 390px without losing the chosen word (1.4s)
+  ✓   4 [desktop] › e2e/alchimie-journal-search.spec.mjs:46:1 › empty journal search recovers in one action and keeps the crafting selection (1.7s)
+  ✓   6 [desktop] › e2e/alchimie-journal-search.spec.mjs:74:1 › a fresh journal exposes no unearned recipes or search controls (713ms)
+(node:35183) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [desktop] › e2e/alchimie-library-recovery.spec.mjs:47:1 › a completed collection shows every earned word, searches locally and preserves its journal (2.5s)
+  ✓   7 [mobile] › e2e/alchimie-journal-search.spec.mjs:27:1 › earned recipes can be found by result or ingredient without accents (1.5s)
+  ✓   8 [desktop] › e2e/alchimie-library-recovery.spec.mjs:91:1 › search reset keeps keyboard recovery visible in a short viewport with doubled text (695ms)
+(node:35406) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [mobile] › e2e/alchimie-library-recovery.spec.mjs:12:3 › a closed search recovers in one action at 320px without losing the chosen word (1.0s)
+  ✓   9 [mobile] › e2e/alchimie-journal-search.spec.mjs:46:1 › empty journal search recovers in one action and keeps the crafting selection (1.6s)
+  ✓  11 [mobile] › e2e/alchimie-library-recovery.spec.mjs:12:3 › a closed search recovers in one action at 390px without losing the chosen word (1.0s)
+  ✓  12 [mobile] › e2e/alchimie-journal-search.spec.mjs:74:1 › a fresh journal exposes no unearned recipes or search controls (778ms)
+  ✓  13 [mobile] › e2e/alchimie-library-recovery.spec.mjs:47:1 › a completed collection shows every earned word, searches locally and preserves its journal (2.8s)
+  ✓  14 [mobile] › e2e/alchimie-library-recovery.spec.mjs:91:1 › search reset keeps keyboard recovery visible in a short viewport with doubled text (942ms)
+
+  14 passed (13.0s)

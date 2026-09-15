@@ -1,0 +1,112 @@
+{
+ "game": "lant",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_370",
+   "ct_gastronomie_371",
+   "cx_viata_de_roman_370",
+   "lt_geografie_239",
+   "lt_literatura_240"
+  ]
+ },
+ "verdicts": {
+  "lt_geografie_239": "promote",
+  "lt_literatura_240": "promote"
+ },
+ "perItem": [
+  {
+   "id": "lt_geografie_239",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:2352fa193068f714eab64949c036697658935083e2ab5a816576efdfc2f6963e",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_geografie_239",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:2352fa193068f714eab64949c036697658935083e2ab5a816576efdfc2f6963e",
+    "rationale": "Promote easy Cluj-Napoca→Munții Apuseni. Fresh allocated evidence has three moves, two valid first hops and a minimum shortest layer of two nodes. The Transilvania→Avram Iancu/history family and Salina Turda→Cheile Turzii tourist-geography family are materially different choices; the additional1784route is not falsely counted as a new family. Own API replay completed all three actual shortest paths. Municipal/county tourism confirms the geographic anchor; nearby Salina Turda is not claimed to be inside Cluj-Napoca. Both endpoints are ordinary school geography, so stored0.50/0.37 salience warnings do not make them obscure. The city-to-mountains arc is legible, with no profession-only chain or forced intermediate. Current generic captions remain a known presentation limitation. D1–D5 pass, no strict FAIL.",
+    "sources": [
+     "https://clujtourism.ro/portfolio/cheile-turzii/"
+    ]
+   },
+   "verifier_review": {
+    "id": "lt_geografie_239",
+    "game": "lant",
+    "review_binding": "sha256:2352fa193068f714eab64949c036697658935083e2ab5a816576efdfc2f6963e",
+    "verdict": "promote",
+    "rationale": "Cluj-Napoca and the Apuseni are recognizable Romanian geography. County tourism jointly locates Turda salt mine and Turda Gorge in the local tourist geography and places the gorge on the eastern Apuseni edge. Cluj-Napoca to Salina Turda is a nearby county tourist connection, not a claim the mine is inside the city. The other routes traverse Transylvania and its1848leader Avram Iancu or the1784revolt with their Apuseni setting. Distinct geographic and historical first choices remain; their low stored salience is not obscurity. Existing neutral relationship captions make no false city containment claim. Exact allocated pending dossier was regenerated independently and byte-matches the reviewed batch. Full applicable A1–A7 and B/C/D criteria were considered. Recognition and useful choices, not numerical solvability alone, support this verdict. Existing captions stay neutral and content topology is unchanged. This agent judgment is not a human playtest.",
+    "sources": [
+     "https://cjcluj.ro/turism/",
+     "https://clujtourism.ro/portfolio/cheile-turzii/",
+     "https://www.salinaturda.eu/en/access/",
+     "https://clujtourism.ro/zone-turistice/"
+    ]
+   }
+  },
+  {
+   "id": "lt_literatura_240",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:a4fb7a8a16ae4d7c903b9d17aaccdbc1c0bace479865067e082d6c0e29554297",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_literatura_240",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:a4fb7a8a16ae4d7c903b9d17aaccdbc1c0bace479865067e082d6c0e29554297",
+    "rationale": "Promote easy Mihai Eminescu→Titu Maiorescu. Rebuilt allocated dossier retains the three two-hop alternatives through Junimea, Convorbiri literare and Academia Română, without a common intermediate. Society membership/mentorship, publication and Academy recognition are concrete cultural associations, not three copies of generic profession taxonomy. Both endpoints belong to core Romanian school literature despite Maiorescu0.30 salience. I tried to refute the existing periodical leadership edge: the journal’s own Nicolae Scurtu essay explicitly describes Maiorescu withdrawing from leadership in1895. This supports broad intellectual leadership, while National Library evidence keeps Negruzzi’s formal editorial directorship distinct. The actual neutral caption makes no sole-director or simultaneous-membership claim; Eminescu’s Academy recognition was posthumous. All three routes independently API-complete with current semantics. D1–D5 pass and no strict FAIL.",
+    "sources": [
+     "https://www.convorbiri-literare.ro/copy-of-selectia-3",
+     "https://oldsite.bibnat.ro/Evenimente-culturale-s108-ev469-ro.htm"
+    ]
+   },
+   "verifier_review": {
+    "id": "lt_literatura_240",
+    "game": "lant",
+    "review_binding": "sha256:a4fb7a8a16ae4d7c903b9d17aaccdbc1c0bace479865067e082d6c0e29554297",
+    "verdict": "promote",
+    "rationale": "Eminescu and Maiorescu are school-canon literary figures. The Iași national literary museum verifies Junimea participation and publication context. The journal itself explicitly describes Maiorescu withdrawing from its leadership in1895, resolving the adversarial concern about the existing broad a condus revista edge. This supports intellectual/editorial leadership, not a claim that he was sole formal redactor/director instead of Iacob Negruzzi. Academy membership is a valid third relation but Eminescu membership is posthumous; simultaneous membership is not claimed. Two distinctive Junimea/journal routes remain legible without knowing the less obvious Academy alternative. Exact allocated pending dossier was regenerated independently and byte-matches the reviewed batch. Full applicable A1–A7 and B/C/D criteria were considered. Recognition and useful choices, not numerical solvability alone, support this verdict. Existing captions stay neutral and content topology is unchanged. This agent judgment is not a human playtest.",
+    "sources": [
+     "https://www.muzeulliteraturiiiasi.ro/expozitii/amintiri-din-junimea/",
+     "https://www.convorbiri-literare.ro/copy-of-selectia-3",
+     "https://acad.ro/membri_ar/doc/MembriAlesiPostMortem.pdf",
+     "https://acad.ro/academica2002/rev2018/pag_acad2018_nr327_328_ian_feb.pdf",
+     "https://m.edituracorint.ro/manual/limba-si-literatura-romana-x-iancu.pdf"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 2,
+  "verified": 2,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v93-words-and-game-quality/pack/analyst.json",
+   "sha256": "sha256:5e4b216096c2b7f6516b2651d0152d3c072f0ad327d6d885ea25538aa70ee16c",
+   "reviewer": "v93-independent-pack-quality-world-author",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v93-words-and-game-quality/pack/verifier.json",
+   "sha256": "sha256:78e2c517489c11c7205a92d42fa9ccda4b998c47c913dd790bb8d9732c7b140f",
+   "reviewer": "root-v93-factual",
+   "role": "verifier"
+  }
+ }
+}

@@ -1,0 +1,247 @@
+{
+  "scope": "Author fixed-target API probes, not independent review or public selection.",
+  "targets": [
+    {
+      "target": "n_v84_food_aluat",
+      "label": "Aluat",
+      "incoming": [
+        {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină"
+        },
+        {
+          "id": "n_v4gas_apa",
+          "label": "Apă"
+        },
+        {
+          "id": "n_v84_food_drojdie",
+          "label": "Drojdie"
+        },
+        {
+          "id": "n_v84_food_sucitor",
+          "label": "Sucitor"
+        },
+        {
+          "id": "n_v86_kitchen_mixer",
+          "label": "Mixer de bucătărie"
+        }
+      ],
+      "reachable": 2353,
+      "responsive": 1487,
+      "steps": [
+        {
+          "text": "pâine",
+          "guess": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine",
+            "distance": 3,
+            "rank": 107,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "făină",
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "apă",
+          "guess": {
+            "id": "n_v4gas_apa",
+            "label": "Apă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "drojdie",
+          "guess": {
+            "id": "n_v84_food_drojdie",
+            "label": "Drojdie",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "sucitor",
+          "guess": {
+            "id": "n_v84_food_sucitor",
+            "label": "Sucitor",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "mixer de bucătărie",
+          "guess": {
+            "id": "n_v86_kitchen_mixer",
+            "label": "Mixer de bucătărie",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "Aluat",
+          "guess": {
+            "id": "n_v84_food_aluat",
+            "label": "Aluat",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 7
+          },
+          "won": true
+        }
+      ]
+    },
+    {
+      "target": "n_v20gas_cascaval",
+      "label": "Cașcaval",
+      "incoming": [
+        {
+          "id": "n_gas_cascaval_pane",
+          "label": "Cașcaval pane"
+        },
+        {
+          "id": "n_v20gas_parizer",
+          "label": "Parizer"
+        },
+        {
+          "id": "n_v2gas_branza",
+          "label": "Brânză"
+        },
+        {
+          "id": "n_v3gas_pizza",
+          "label": "Pizza"
+        },
+        {
+          "id": "n_v84_food_cheag",
+          "label": "Cheag alimentar"
+        }
+      ],
+      "reachable": 2353,
+      "responsive": 1424,
+      "steps": [
+        {
+          "text": "brânză",
+          "guess": {
+            "id": "n_v2gas_branza",
+            "label": "Brânză",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "lapte",
+          "guess": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "distance": 2,
+            "rank": 11,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "pizza",
+          "guess": {
+            "id": "n_v3gas_pizza",
+            "label": "Pizza",
+            "distance": 1,
+            "rank": 5,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "parizer",
+          "guess": {
+            "id": "n_v20gas_parizer",
+            "label": "Parizer",
+            "distance": 1,
+            "rank": 5,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "cașcaval pane",
+          "guess": {
+            "id": "n_gas_cascaval_pane",
+            "label": "Cașcaval pane",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "cheag alimentar",
+          "guess": {
+            "id": "n_v84_food_cheag",
+            "label": "Cheag alimentar",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "Cașcaval",
+          "guess": {
+            "id": "n_v20gas_cascaval",
+            "label": "Cașcaval",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 7
+          },
+          "won": true
+        }
+      ]
+    }
+  ]
+}

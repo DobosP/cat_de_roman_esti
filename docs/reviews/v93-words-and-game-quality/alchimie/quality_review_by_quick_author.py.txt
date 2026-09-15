@@ -1,0 +1,169 @@
+"""Independent V93 world editorial quality review by the quick-game author.
+
+Only writes reviewer-owned evidence. Run only after source repairs are re-frozen.
+"""
+from pathlib import Path
+from collections import Counter
+import copy
+import hashlib
+import json
+import sys
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+OUT = Path(__file__).parent
+sys.path[:0] = [str(ROOT), str(ROOT/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import mechanics_for, mechanics_hash
+REVIEWER='/root/v93_quick_author'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def digest(v):return hashlib.sha256(B.json_bytes(v)).hexdigest()
+def write(name,v):(OUT/name).write_bytes(B.json_bytes(v))
+base_dir=ROOT/'docs/reviews/v92-session03-vocabulary-and-interface/alchimie'
+base=json.loads((base_dir/'candidate.json').read_bytes())
+prior=json.loads((base_dir/'quality-review.json').read_bytes())
+prior_final=json.loads((base_dir/'final-quality.json').read_bytes())
+prior_audit=json.loads((base_dir/'live-audit.json').read_bytes())
+assert sha(base_dir/'candidate.json') == prior['candidate_sha256'] == 'e77e18626d928b58448869fd444a2623c72209450ef2e4a9effcffcb22fa42e8'
+assert prior_final['audit_sha256']==sha(base_dir/'live-audit.json')
+assert prior_final['catalog_sha256']==prior_audit['catalog_sha256']=='b9ff7122f6499d4eea365cc6292249744e34c6576f5f16ca694d9644c19c327f'
+assert prior_final['verdict']=='accept' and prior_final['reviewer']==prior['reviewer']
+assert prior_audit['candidate_sha256']==prior['candidate_sha256']
+assert prior['world_verdict']=='accept'
+p=OUT/'candidate.json';candidate_sha=sha(p);c=json.loads(p.read_bytes())
+assert candidate_sha=='fd6d47853a424695d1c0ebf6c2a94b18196c9ce7e38560f4b7b4dcb1c4e6bbef'
+assert p.read_bytes()==B.json_bytes(B.candidate())
+raw=json.loads((OUT/'raw/candidates.json').read_bytes())
+assert raw['candidate_sha256']==candidate_sha
+old_concepts={x['id']:x for x in base['concepts']};old_recipes={x['id']:x for x in base['recipes']}
+concepts={x['id']:x for x in c['concepts']};recipes={x['id']:x for x in c['recipes']}
+old_cq={x['id']:x for x in prior['concepts']};old_rq={x['id']:x for x in prior['items']}
+assert set(old_cq)==set(old_concepts) and set(old_rq)==set(old_recipes)
+for i,x in old_concepts.items():
+    assert concepts[i]==x
+    assert old_cq[i]['verdict']=='accept' and old_cq[i]['concept_sha256']==digest(x)
+for i,x in old_recipes.items():
+    assert recipes[i]==x and old_rq[i]['verdict']=='accept'
+for field in ('world','unlocks','goals'):
+    assert c[field]==base[field]
+assert c['compatible_versions'][:-1]==base['compatible_versions']
+assert c['compatible_versions'][-1]['source_sha256']==sha(base_dir/'candidate.json')
+assert c['compatible_versions'][-1]['mechanics']==mechanics_for(
+    base['world']['starter_ids'],{tuple(r['pair']):r['result'] for r in base['recipes']},
+    [(u['after_discoveries'],u['concept_ids']) for u in base['unlocks']])
+# Independent closure and natural path witnesses, without consulting author metrics.
+def walk(v):
+    owned=set(v['world']['starter_ids']);crafted=set();tiers=set();witness={i:[] for i in owned};moves=[]
+    while True:
+        progress=False
+        for u in v['unlocks']:
+            if u['id'] not in tiers and len(crafted)>=u['after_discoveries']:
+                tiers.add(u['id']);owned.update(u['concept_ids'])
+                for i in u['concept_ids']:witness[i]=['supply:'+u['id']]
+                progress=True
+        for r in v['recipes']:
+            if r['result'] not in owned and set(r['pair'])<=owned:
+                owned.add(r['result']);crafted.add(r['result']);moves.append(r['id'])
+                witness[r['result']]=list(dict.fromkeys(witness[r['pair'][0]]+witness[r['pair'][1]]+[r['id']]))
+                progress=True
+        if not progress:break
+    assert owned=={x['id'] for x in v['concepts']}
+    return owned,crafted,tiers,witness,moves
+_, crafted, tiers, witness,moves=walk(c)
+_, oldcrafted, _, _,_=walk(base)
+new_ids=set(concepts)-set(old_concepts);new_rids=set(recipes)-set(old_recipes)
+new_inputs={n for i in new_rids for n in recipes[i]['pair']}
+old_inputs={n for r in base['recipes'] for n in r['pair']}
+all_inputs={n for r in c['recipes'] for n in r['pair']}
+formerly_terminal=(oldcrafted-old_inputs)&new_inputs
+alts=Counter(r['result'] for r in c['recipes'])
+checks={'kind':'alchimie-v93-independent-quality-check-v1','reviewer':REVIEWER,
+        'candidate_sha256':candidate_sha,'raw_candidate_sha256':sha(OUT/'raw/candidates.json'),
+        'baseline_candidate_sha256':sha(base_dir/'candidate.json'),
+        'prior_quality_sha256':sha(base_dir/'quality-review.json'),
+        'prior_final_quality_sha256':sha(base_dir/'final-quality.json'),
+        'prior_audit_sha256':sha(base_dir/'live-audit.json'),
+        'old_concepts_exact':len(old_concepts),'old_recipes_exact':len(old_recipes),
+        'concepts':len(concepts),'recipes':len(recipes),'craftable_results':len(crafted),
+        'starter_ids_unchanged':True,'supply_tiers_and_goals_unchanged':True,
+        'supplies':sum(len(x['concept_ids']) for x in c['unlocks']),
+        'opening_recipes':sum(set(r['pair'])<=set(c['world']['starter_ids']) for r in c['recipes']),
+        'compatible_generations':len(c['compatible_versions']),
+        'prior_compatible_generations_exact':len(base['compatible_versions']),
+        'formerly_terminal_reused':{i:concepts[i]['label'] for i in sorted(formerly_terminal)},
+        'crafted_intermediates':len(crafted&all_inputs),'terminal_results':len(crafted-all_inputs),
+        'new_targets':{i:{'label':concepts[i]['label'],'direct_recipe_count':alts[i],'witness':witness[i]}
+                       for i in sorted(new_ids)},
+        'new_recipe_pairs_unique':len({tuple(recipes[i]['pair']) for i in new_rids})==len(new_rids),
+        'all_new_pairs_ingredients_naturally_reachable':all(set(recipes[i]['pair']) <= set(concepts) for i in new_rids),
+        'manual_quality_findings':[{'id':'supa-taitei-paste','initial_issue':'Initial text stretched and cut an already boiled Paste concept. Author was asked to describe selecting thin noodles and adding them to soup.','resolution':'Final text reviewed below before acceptance.'}],
+        'limits':['Pair abstractions omit some ingredients and work; every new explanation discloses the relevant preparation.','Nine of ten new results have two direct paths; Supă cu tăiței intentionally retains one legible final pair.','Nine new results remain terminal; four former terminal discoveries gain use and Pesmet becomes an intermediate.','No physical-device or human enjoyment acceptance is inferred.']}
+recipe_rationales={
+'oua-umplute-maioneza':'Maioneză plus an already boiled egg is an immediate appetizer association. Halving, removing yolks, mixing and refilling are explicit; no raw-egg shortcut. Pate is a distinct alternative filling route.',
+'oua-umplute-pate':'Pate provides a recognizable savory egg filling. The text discloses boiled eggs, yolks and a little mayonnaise rather than asserting two ingredients alone finish the dish. The mayonnaise route remains an equally natural alternative.',
+'musaca-cartof-carne':'Minced meat and sliced potato suggest a familiar layered baked main dish. Cooking meat and potatoes, layering and baking are explicit; the mashed-potato route admits an already crafted intermediate.',
+'musaca-piure-carne':'Uses an already prepared mash as the potato layer with cooked minced meat. The baked layered outcome is distinct from serving plain meat beside mash; explanation supplies that defining transformation.',
+'clatite-gratinate-smantana':'Pancakes plus sour cream plausibly lead to an oven-finished version. Cheese filling, egg sauce and browning are named, so the existing plain pancake state is genuinely reused.',
+'clatite-gratinate-cuptor':'The oven is a strong operational clue for gratinated pancakes. Text states that pancakes are filled and sauced before gratinating; this is a preparation sequence within the established two-item abstraction.',
+'galuste-prune-cartof':'Plums and potato dough identify familiar gomboți. Potato preparation, flour binding, wrapping, boiling and sweet crumbs are explicit, avoiding the misleading idea that raw potato plus fruit alone becomes dessert.',
+'galuste-prune-oparit':'The optional scalded-dough route is less obvious than potato but purposeful and consistent with the current Aluat opărit definition. Semolina/flour/egg formulation and boiling distinguish dumpling dough from simply baking choux pastry.',
+'milkshake-inghetata-lapte':'Ice cream mixed with milk is a very legible cold-drink transformation and gives ice cream onward use. Mixing and optional fruit are explicit; result is distinct from the frozen parent.',
+'milkshake-banana-lapte':'Banana plus milk is an approachable alternative drink pairing. Cold mixing is disclosed; this is a flavored milk drink, with no competing smoothie label in the world. Source-repair text must remain consistent with the final preparation.',
+'bruschete-paine-prajita-rosie':'Already toasted bread plus tomato strongly suggests bruschetta. Garlic and oil topping are disclosed; source concept toast keeps its prepared state.',
+'bruschete-paine-rosie':'Untoasted bread provides a forgiving alternative entry to the same appetizer. Toasting is explicitly performed before topping; no stale prepared-state assumption. It is slightly broader than the toast route but still inferable.',
+'salata-paste-legume':'Pasta plus vegetables gives a familiar complete dish. Boiling then cooling and dressing distinguish this cold salad from the existing hot sauced pasta variants.',
+'salata-paste-legume-gratar':'Reuses grilled vegetables as a salad component with pasta. The vegetables retain their cooked state and the optional cooling finish is explicit; a clear alternative to the raw vegetable route.',
+'budinca-paine-lapte':'Bread with milk is a recognizable foundation for baked bread pudding. Egg, sugar, soaking and baking are explicit. This is a named reuse of bread rather than an arbitrary new bread synonym.',
+'budinca-paine-stafide':'Raisins provide a plausible sweet-bread-pudding direction and a distinct route from milk. Mandatory milk/egg mixture and baking are disclosed. Less direct than bread plus milk, but legitimate optional experimentation rather than a forced path.',
+'pesmet-paine-prajita-sucitor':'Dry toasted bread plus a crushing tool is a highly inferable route to breadcrumbs. Fully drying and cooling are explicit, so crisp toast is not treated as already dry fine crumbs. New ingredient has onward use.',
+'pesmet-crutoane-sucitor':'Already dried croutons can be crushed into seasoned breadcrumbs. This reuses a former terminal result and preserves its optional seasoning; no stale text or result renaming.',
+'snitel-pesmet-carne':'Breadcrumbs and meat identify breaded schnitzel. Thin slices, flour, egg coating and frying are disclosed; new Pesmet joins an existing recognizable result without changing prior shortcuts.',
+'snitel-pesmet-pui':'Chicken plus breadcrumbs is a specific and familiar schnitzel route. Preparation explicitly cooks thin chicken slices after flour/egg/crumb coating. The general-meat route broadens entry without arbitrary duplication.',
+'supa-taitei-paste':'Soup plus thin noodle-shaped pasta is the most direct final pair for noodle soup. One final route is sufficient because both components already have accessible routes; adding an unrelated second pair would weaken the concept. Final explanation must preserve the prepared pasta state.',
+}
+concept_rationales={
+'alw_food_bruschete':'Familiar restaurant/home appetizer. Plain Romanian definition explains the borrowed name through toasted bread and toppings; distinct from a generic sandwich and from bare toast.',
+'alw_food_budinca_paine':'A plainly named baked bread dessert, with milk/egg soaking and baking defined. Recognition is supported by the familiar component words even for a player who has not cooked it.',
+'alw_food_clatite_gratinate':'Descriptive extension of familiar pancakes. Definition explains gratination through filled pancakes, sauce and oven browning, so the culinary term does not require prior specialist knowledge.',
+'alw_food_galuste_prune':'Recognizable Romanian home dessert with an honest broad definition covering potato and scalded dough. Fruit filling, boiling and sweet crumbs distinguish it from other dumplings.',
+'alw_food_milkshake':'Common borrowed menu term for a cold blended milk drink. Description explains it in Romanian and admits both ice-cream and fruit variants without claiming a traditional Romanian origin.',
+'alw_food_musaca':'Recognizable layered baked dish with a definition broad enough for slices and mash. A strong distinct culinary payoff for minced meat and potatoes.',
+'alw_food_oua_umplute':'Familiar appetizer with an immediately descriptive Romanian name. Definition explicitly begins with boiled egg halves and yolk filling, matching both recipes.',
+'alw_food_pesmet':'Everyday ingredient with a useful role: drying/crushing bread and coating schnitzel. Definition distinguishes it from existing Firimitură and prevents a low-value synonym addition.',
+'alw_food_salata_paste':'Ordinary recognizable dish, explicitly cooled/dressed. Defined preparation distinguishes it from the existing hot pasta dishes; grilled vegetables get a useful second role.',
+'alw_food_supa_taitei':'Very familiar soup named by its distinguishing ingredient. Thin noodles and optional poultry/vegetables define it clearly; no new specialist ingredient is forced.',
+}
+assert new_rids==set(recipe_rationales) and new_ids==set(concept_rationales)
+# Fail rather than silently approving an unfixed state inconsistency.
+assert 'se întind și se taie' not in recipes['supa-taitei-paste']['explanation']
+check_recipe=recipes['supa-taitei-paste'];checks['manual_quality_findings'][0]['final_explanation']=check_recipe['explanation']
+new_concept_rows=[{'id':i,'concept_sha256':digest(concepts[i]),'verdict':'accept','inherited':False,
+                  'rationale':concept_rationales[i],'sources':concepts[i].get('references',[])} for i in sorted(new_ids)]
+new_recipe_rows=[{'id':i,'verdict':'accept','rationale':recipe_rationales[i],
+                 'sources':recipes[i]['sources']} for i in sorted(new_rids)]
+world_rationale=('Independent comparison preserves all 225 old concept records and 294 recipe records exactly; prior quality, final-review and live-audit bindings were checked. '
+                 'Eight familiar starters, 96 later supplies, 12 supply tiers and 32 optional goals remain exact, and all 235 concepts/131 discoveries are reachable. '
+                 'All ten additions are recognizable dishes or ingredients, with nine offering two direct entries. Nine new dishes are terminal, but four prior terminals are reused and Pesmet becomes an intermediate. '
+                 'New explanations disclose heating, filling, cooling or blending rather than pretending two selected items are a complete cooking recipe. '
+                 'The noodle-soup prepared-state inconsistency was reported to the author and its final correction reviewed. New pairs neither overwrite old pairs nor form a noisy universal-combination rule. '
+                 'This is independent editorial quality approval; factual source acceptance and final live-audit acceptance remain separate gates.')
+review={'kind':B.REVIEW_KIND,'role':'quality','reviewer':REVIEWER,'candidate_sha256':candidate_sha,
+        'world_verdict':'accept','world_rationale':world_rationale,
+        'inherited_review_sha256':sha(base_dir/'quality-review.json'),
+        'concepts':[], 'items':[]}
+for i in sorted(concepts):
+    if i in old_concepts:
+        row=copy.deepcopy(old_cq[i]);row['inherited']=True
+        row['rationale']='Independent exact record/hash and accepted prior review check against the 225-concept V92 baseline. '+row['rationale']
+    else:row=next(x for x in new_concept_rows if x['id']==i)
+    review['concepts'].append(row)
+for i in recipes:
+    if i in old_recipes:
+        row=copy.deepcopy(old_rq[i]);row['rationale']='Independent exact recipe-record comparison with reviewed V92 baseline. '+row['rationale']
+    else:row=next(x for x in new_recipe_rows if x['id']==i)
+    review['items'].append(row)
+write('quality-review.json',review)
+B.read_review(OUT/'quality-review.json','quality',candidate_sha,set(recipes),c['concepts'])
+write('raw/quality-review.json',{'kind':'alchimie-v93-new-content-quality-review-v1','role':'quality','reviewer':REVIEWER,
+      'candidate_sha256':sha(OUT/'raw/candidates.json'),'complete_candidate_sha256':candidate_sha,
+      'verdict':'accept','world_rationale':world_rationale,'concepts':new_concept_rows,'items':new_recipe_rows})
+write('independent-quality-check.json',checks)
+print(json.dumps({k:v for k,v in checks.items() if k not in ('new_targets','manual_quality_findings','limits')},ensure_ascii=False,indent=2))

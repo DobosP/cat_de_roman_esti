@@ -26,6 +26,8 @@ export default function AlchimieExplore({ onExit }: {
   const [storageUnavailable, setStorageUnavailable] = useState(initialSave.kind === "unavailable");
   const [selected, setSelected] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [journalQuery, setJournalQuery] = useState("");
+  const journalSearch = useRef<HTMLInputElement>(null);
   const [showAll, setShowAll] = useState(false);
   const [freshIds, setFreshIds] = useState<string[]>([]);
   const [message, setMessage] = useState("");
@@ -219,6 +221,10 @@ export default function AlchimieExplore({ onExit }: {
   const selectedItem = state?.inventory.find((item) => item.id === selected);
   const goal = state?.goals.find((item) => item.id === state.goal_id);
   const journal = state?.inventory.filter((item) => item.parents !== null).slice().reverse() ?? [];
+  const normalizedJournalQuery = normalize(journalQuery);
+  const journalResults = journal.filter((item) => !normalizedJournalQuery ||
+    [item.label, ...(item.parents?.map((parent) => parent.label) ?? [])]
+      .some((label) => normalize(label).includes(normalizedJournalQuery)));
 
   const recoveryNotice = recovery && (
     <div className="alchemy-explore-recovery" role="alert">
@@ -311,8 +317,21 @@ export default function AlchimieExplore({ onExit }: {
                 </div>
               </section>
             </div>
-            <details className="alchemy-menu alchemy-explore-journal"><summary>Rețetele mele · {journal.length}</summary><div className="alchemy-menu-content">
-              {journal.length === 0 ? <p className="alchemy-inventory-note">Prima rețetă apare aici când creezi un cuvânt nou.</p> : journal.map((item) => <article key={item.id} className="alchemy-journal-entry"><h3>{item.parents?.[0].label} + {item.parents?.[1].label} → {item.label}</h3><p>{item.explanation}</p>{item.sources.length > 0 && <details><summary>Surse</summary><ul>{item.sources.map((source, index) => <li key={source}><a href={source} target="_blank" rel="noreferrer">Sursa {index + 1}</a></li>)}</ul></details>}</article>)}
+            <details className="alchemy-menu alchemy-explore-journal"><summary>Rețetele mele · {journal.length}{journalQuery && <span className="alchemy-journal-query">Căutare: {journalQuery}</span>}</summary><div className="alchemy-menu-content">
+              {journal.length > 0 && <div className="alchemy-journal-tools">
+                <label htmlFor="alchemy-journal-search">Caută un rezultat sau un ingredient</label>
+                <input ref={journalSearch} id="alchemy-journal-search" type="search" className="field"
+                  value={journalQuery} onChange={(event) => setJournalQuery(event.target.value)}
+                  onKeyDown={(event) => { if (event.key === "Escape" && journalQuery) { event.preventDefault(); setJournalQuery(""); } }}
+                  placeholder="De exemplu: făină" aria-label="Caută în rețetele mele"
+                  aria-describedby="alchemy-journal-count" autoComplete="off" spellCheck={false} />
+                {journalQuery && <Button variant="secondary" className="alchemy-clear-search"
+                  onClick={() => { setJournalQuery(""); journalSearch.current?.focus({ preventScroll: true }); }}>Șterge căutarea din rețete</Button>}
+                <p id="alchemy-journal-count" role="status">{journalQuery ? `${journalResults.length} din ${journal.length} rețete găsite` : "Doar rețetele pe care le-ai descoperit."}</p>
+              </div>}
+              {journal.length === 0 ? <p className="alchemy-inventory-note">Prima rețetă apare aici când creezi un cuvânt nou.</p>
+                : journalResults.length === 0 ? <p className="alchemy-inventory-note">Nicio rețetă găsită. Încearcă alt cuvânt sau șterge căutarea.</p>
+                  : journalResults.map((item) => <article key={item.id} className="alchemy-journal-entry"><h3>{item.parents?.[0].label} + {item.parents?.[1].label} → {item.label}</h3><p>{item.explanation}</p>{item.sources.length > 0 && <details><summary>Surse</summary><ul>{item.sources.map((source, index) => <li key={source}><a href={source} target="_blank" rel="noreferrer">Sursa {index + 1}</a></li>)}</ul></details>}</article>)}
             </div></details>
             <details className="alchemy-menu"><summary>Cum explorezi</summary><div className="alchemy-menu-content"><p>{state.world.description}</p><p>Atinge două cuvinte sau trage unul peste altul. O pereche are aceeași rețetă indiferent de obiectivul ales.</p><p>Nu toate perechile au o rețetă. Încercările nu te costă nimic. Cere o idee pentru un rezultat apropiat, apoi perechea exactă dacă ai nevoie.</p><p>Cuvintele fără descoperiri noi sunt păstrate în „Toate”. Rețetele găsite apar în jurnal. Proviziile noi se deschid automat pe măsură ce descoperi.</p><p>Colecția se salvează în acest browser. Ștergerea datelor browserului șterge și salvarea locală.</p></div></details>
           </>

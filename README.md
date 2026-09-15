@@ -8,7 +8,7 @@ own reviewed vocabulary and recipe catalog. All six are **server-authoritative**
 the Django BFF validates every move and hides the answers.
 
 - **Alchimie** — explore a saved Romanian kitchen collection with consistent recipes
-  and optional goals, or play short scored target challenges ([ADR-0147](docs/adr/0147-grow-alchimie-with-reviewed-vocabulary.md)).
+  and optional goals, search your earned recipes, or play short scored target challenges ([ADR-0151](docs/adr/0151-expand-game-vocabulary-and-search-earned-recipes.md)).
 - **Intrusul** — tap the one word that does not belong with the other three.
 - **Perechi** — match eight words into four hidden semantic pairs.
 - **Conexiuni** *(à la NYT Connections)* — group 16 concepts into 4 hidden categories,

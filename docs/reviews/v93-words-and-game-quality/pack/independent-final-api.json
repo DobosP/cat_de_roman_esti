@@ -1,0 +1,250 @@
+{
+  "kind": "v93-independent-final-pack-bff-audit-v1",
+  "reviewer": "v93-independent-pack-quality-world-author",
+  "method": "Real Django BFF requests with public category/difficulty/seed selection; private store read only confirms selected authored ID. No forced sessions, runtime edits, picker overrides or score changes.",
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "573e921cbe54cb482535584a22e55183c4b7add9b0a9a92a1400f9dae4fd01d8",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "5e29e48a7d684d23d5532f38d80fb996c92d3474744b20a0159111ac7b41bc76",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "46360ac6a77fff6cdab2f86500dcadc348243f71bab71eea01111e76bf80f2c4",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/lant.py": "1818ed57384d6f9b20359a21dfa8fdee585cc9a7712453f4699bddeecd13ff84",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "c74d52eda142c2a99da407f35265f808879e7fce565e373e9c926b7b7b06f287",
+    "cat_de_roman_esti/wordgames/_session_endpoint.py": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+    "cat_de_roman_esti/wordgames/_progress.py": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+  },
+  "script_sha256": "192eaf6e63e78881eb7ec754b9548ed303738bde225f52b49a45494673baa1f8",
+  "all_source_bindings_stable": true,
+  "all_five_approved_entries_naturally_served": true,
+  "all_unearned_private_keys_hidden": true,
+  "checks": [
+    {
+      "id": "cx_viata_de_roman_370",
+      "game": "conexiuni",
+      "public_create_url": "/api/wordgames/conexiuni/games?category=viata_de_roman&difficulty=normal&seed=5",
+      "seed": 5,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "wrong_attempts": 2,
+      "reordered_wrong_repeat_status": 409,
+      "repeat_wrong_free": true,
+      "unearned_group_labels_hidden": true,
+      "earned_clue_persists": true,
+      "unknown_tile_and_forged_solution_unchanged": true,
+      "terminal_get_and_rejected_replay_exact": true,
+      "final_score": 400,
+      "solved_groups": 4
+    },
+    {
+      "id": "ct_gastronomie_370",
+      "game": "contexto",
+      "public_create_url": "/api/wordgames/contexto/games?category=gastronomie&difficulty=usor&seed=46",
+      "seed": 46,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "target_hidden_until_win": true,
+      "unknown_blank_and_forged_target_unchanged": true,
+      "repeated_guess_free": true,
+      "earned_hint_persists": true,
+      "hint_session_is_separate_natural_selection": true,
+      "hint_preparation_guesses": [
+        "pâine",
+        "pizza",
+        "lapte"
+      ],
+      "opener": "făină",
+      "opener_feedback": {
+        "id": "n_v24_food_pantry_faina",
+        "label": "Făină",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "final_attempts": 4,
+      "final_score": 700,
+      "terminal_get_and_rejected_replay_exact": true
+    },
+    {
+      "id": "ct_gastronomie_371",
+      "game": "contexto",
+      "public_create_url": "/api/wordgames/contexto/games?category=gastronomie&difficulty=usor&seed=20",
+      "seed": 20,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "target_hidden_until_win": true,
+      "unknown_blank_and_forged_target_unchanged": true,
+      "repeated_guess_free": true,
+      "earned_hint_persists": true,
+      "hint_session_is_separate_natural_selection": true,
+      "hint_preparation_guesses": [
+        "pâine",
+        "pizza",
+        "lapte"
+      ],
+      "opener": "lapte",
+      "opener_feedback": {
+        "id": "n_v4gas_lapte",
+        "label": "Lapte",
+        "distance": 2,
+        "rank": 11,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "final_attempts": 4,
+      "final_score": 700,
+      "terminal_get_and_rejected_replay_exact": true
+    },
+    {
+      "id": "lt_geografie_239",
+      "game": "lant",
+      "public_create_url": "/api/wordgames/lant/games?category=geografie&difficulty=usor&seed=20",
+      "seed": 20,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "public_target_allowed": true,
+      "unearned_full_route_hidden": true,
+      "unknown_forged_route_same_node_and_start_undo_unchanged": true,
+      "earned_hint_persists_without_get_escalation": true,
+      "moving_clears_hint": true,
+      "all_native_shortest_paths_completed": [
+        {
+          "labels": [
+            "Cluj-Napoca",
+            "Transilvania",
+            "Avram Iancu",
+            "Munții Apuseni"
+          ],
+          "moves": 3,
+          "score": 1000,
+          "natural_seed": 20,
+          "final_get_replay_undo_stable": true
+        },
+        {
+          "labels": [
+            "Cluj-Napoca",
+            "Transilvania",
+            "Răscoala 1784",
+            "Munții Apuseni"
+          ],
+          "moves": 3,
+          "score": 1000,
+          "natural_seed": 20,
+          "final_get_replay_undo_stable": true
+        },
+        {
+          "labels": [
+            "Cluj-Napoca",
+            "Salina Turda",
+            "Cheile Turzii",
+            "Munții Apuseni"
+          ],
+          "moves": 3,
+          "score": 1000,
+          "natural_seed": 20,
+          "final_get_replay_undo_stable": true
+        }
+      ]
+    },
+    {
+      "id": "lt_literatura_240",
+      "game": "lant",
+      "public_create_url": "/api/wordgames/lant/games?category=literatura&difficulty=usor&seed=9",
+      "seed": 9,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "public_target_allowed": true,
+      "unearned_full_route_hidden": true,
+      "unknown_forged_route_same_node_and_start_undo_unchanged": true,
+      "earned_hint_persists_without_get_escalation": true,
+      "moving_clears_hint": true,
+      "all_native_shortest_paths_completed": [
+        {
+          "labels": [
+            "Mihai Eminescu",
+            "Academia Română",
+            "Titu Maiorescu"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "natural_seed": 9,
+          "final_get_replay_undo_stable": true
+        },
+        {
+          "labels": [
+            "Mihai Eminescu",
+            "Convorbiri literare",
+            "Titu Maiorescu"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "natural_seed": 9,
+          "final_get_replay_undo_stable": true
+        },
+        {
+          "labels": [
+            "Mihai Eminescu",
+            "Junimea",
+            "Titu Maiorescu"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "natural_seed": 9,
+          "final_get_replay_undo_stable": true
+        }
+      ]
+    }
+  ],
+  "baseline_commit": "bf9d814",
+  "counts": {
+    "conexiuni": {
+      "before": 240,
+      "after": 241,
+      "added": 1
+    },
+    "contexto": {
+      "before": 257,
+      "after": 259,
+      "added": 2
+    },
+    "lant": {
+      "before": 116,
+      "after": 118,
+      "added": 2
+    },
+    "alchimie": {
+      "before": 83,
+      "after": 83,
+      "added": 0
+    }
+  },
+  "all_696_previous_pack_records_exact": {
+    "conexiuni": true,
+    "contexto": true,
+    "lant": true,
+    "alchimie": true
+  },
+  "pending_count": 8,
+  "total_pack_records": 701,
+  "limitations": [
+    "Automated BFF correctness does not establish human enjoyment or physical-device acceptance.",
+    "Quick-game supplement is outside this pack audit and may still be awaiting artifact rebind.",
+    "Lanț endpoints and earned local choices are public by design; full unearned route corridors remain hidden."
+  ]
+}

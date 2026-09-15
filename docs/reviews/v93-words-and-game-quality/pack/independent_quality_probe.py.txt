@@ -1,0 +1,55 @@
+import json, hashlib, os, sys, copy
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality');D=Path('/home/dobo/work/_temp/feat__v93-words-and-game-quality/pack')
+sys.path[:0]=[str(R),str(R/'scripts')];os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+import critique_pack as C
+from cat_de_roman_esti.wordgames import contexto,lant,conexiuni
+from django.test import Client
+pack,svc,strong,regions=C.load_all(C.PACKAGE_PACK,C.PACKAGE_KG)
+preview=copy.deepcopy(pack);records=[];bindings={}
+for p in sorted((D/'candidates').glob('*/candidates.json')):
+ bindings[p.parent.name]=hashlib.sha256(p.read_bytes()).hexdigest()
+ raw=json.loads(p.read_bytes())
+ for game in ('conexiuni','contexto','lant'):
+  for ix,row in enumerate(raw[game]):
+   rec=copy.deepcopy(row);rec.update(id=f'quality_probe_{p.parent.name}_{game}_{ix}',category=p.parent.name,status='pending',source='ai')
+   if game=='conexiuni':
+    rec['groups']={f'g{i}':g['tiles'] for i,g in enumerate(row['groups'])};rec['group_labels']={f'g{i}':g['label'] for i,g in enumerate(row['groups'])};rec['order']=[n for g in row['groups'] for n in g['tiles']]
+   if game=='lant':rec['optimal']=svc.distance(rec['start'],rec['target'])
+   preview[game].append(rec);records.append((game,rec))
+findings,_,selected=C.run(preview,svc,strong,regions,['conexiuni','contexto','lant'],{'pending'},{r['id'] for _,r in records})
+assert not [f for row in findings.values() for f in row['findings'] if f['level']=='FAIL']
+dossiers={r['id']:C.build_dossier(r,g,svc,strong,lint,regions) for g,r,lint in selected}
+report={'reviewer':'v93-independent-pack-quality-world-author','candidate_sha256':bindings,'kg_sha256':hashlib.sha256(C.PACKAGE_KG.read_bytes()).hexdigest(),'pack_sha256':hashlib.sha256(C.PACKAGE_PACK.read_bytes()).hexdigest(),'findings':findings,'dossiers':dossiers,'api':[]}
+c=Client()
+for game,r in records:
+ result={'id':r['id'],'game':game}
+ if game=='contexto':
+  sess=contexto._build_session(r['target'],'usor',None);sid=contexto.store.create(sess)
+  guesses=['pâine','făină','drojdie','apă','sucitor','mixer de bucătărie'] if svc.label(r['target'])=='Aluat' else ['lapte','brânză','pizza','parizer','cașcaval pane','cheag alimentar']
+  result['guesses']=[]
+  for guess in guesses+[svc.label(r['target'])]:
+   response=c.post(f'/api/wordgames/contexto/games/{sid}/guess',{'text':guess},content_type='application/json');state=response.json();assert response.status_code==200 and state['ok'];result['guesses'].append({'text':guess,'guess':state['guess'],'won':state['won']})
+  assert state['won']
+  result['incoming']=[svc.label(n) for n in C.contexto_incoming_ids(svc,r['target'])]
+ elif game=='lant':
+  distances=svc.distances_to(r['target']);paths=[]
+  def walk(path):
+   if path[-1]==r['target']:paths.append(path);return
+   for n in sorted(svc.neighbor_ids(path[-1])):
+    if distances.get(n)==distances[path[-1]]-1:walk(path+[n])
+  walk([r['start']]);result['routes']=[]
+  for path in paths:
+   sess=lant.LantSession(start=r['start'],target=r['target'],optimal=r['optimal'],difficulty=r['difficulty'],chain=[r['start']]);sid=lant.store.create(sess)
+   for n in path[1:]:
+    response=c.post(f'/api/wordgames/lant/games/{sid}/move',{'text':svc.label(n)},content_type='application/json');assert response.status_code==200 and response.json()['ok']
+   assert sess.won;result['routes'].append([svc.label(n) for n in path])
+ else:
+  sess=conexiuni.ConexiuniSession(groups=r['groups'],order=r['order'],group_labels=r['group_labels']);sid=conexiuni.store.create(sess)
+  for tiles in r['groups'].values():
+   response=c.post(f'/api/wordgames/conexiuni/games/{sid}/guess',{'ids':tiles},content_type='application/json');assert response.status_code==200,response.content
+  assert sess.won;result['won']=True
+ report['api'].append(result)
+(D/'independent-quality-probe.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'records':len(records),'api_results':report['api']},ensure_ascii=False))

@@ -1,0 +1,164 @@
+"""Author V93 pack-only proposals and reproducible in-memory checks. No approval or fixture writes."""
+import copy
+import hashlib
+import json
+import os
+import random
+import sys
+from pathlib import Path
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+OUT = Path(__file__).resolve().parent
+sys.path[:0] = [str(ROOT), str(ROOT / 'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cat_de_roman_esti.web.settings')
+os.environ.setdefault('CAT_DEBUG', '1')
+import django
+django.setup()
+import critique_pack as critique
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto, lant
+from cat_de_roman_esti.wordgames.packs import validate_payload
+
+pack, svc, strong, regions = critique.load_all(critique.PACKAGE_PACK, critique.PACKAGE_KG)
+BASELINE = 'bf9d814'
+GAMES = ('nodes', 'edges', 'conexiuni', 'contexto', 'lant', 'alchimie')
+GROUPS = [
+    ('Denumesc rude de sex feminin', ['Mamă', 'Fiică', 'Soră', 'Bunică']),
+    ('Pot avea coroană', ['Rege', 'regină', 'Dinte', 'copac']),
+    ('Obiecte casnice absorbante', ['Prosop', 'Mop', 'Burete de vase', 'Hârtie igienică']),
+    ('Apă lichidă sau înghețată în atmosferă', ['Ploaie', 'Nor', 'Grindină', 'Ceață']),
+]
+TARGETS = [
+    ('Aluat', ['pâine', 'făină', 'apă', 'drojdie', 'sucitor', 'mixer de bucătărie']),
+    ('Cașcaval', ['brânză', 'lapte', 'pizza', 'parizer', 'cașcaval pane', 'cheag alimentar']),
+]
+LADDERS = [('Cluj-Napoca', 'Munții Apuseni', 'usor'), ('Mihai Eminescu', 'Titu Maiorescu', 'usor')]
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+def write(name, value):
+    path = OUT / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n')
+
+def ids(labels):
+    out = [svc.resolve(a) for a in labels]
+    assert all(out), labels
+    return out
+
+def main():
+    baseline_hashes = {str(p.relative_to(ROOT)): sha(p) for p in [critique.PACKAGE_PACK, critique.PACKAGE_KG]}
+    bundles, records, refs = {}, [], []
+    def add(category, game, raw):
+        bundle = bundles.setdefault(category, {key: [] for key in GAMES})
+        ref = f'{game}[{len(bundle[game])}]'
+        bundle[game].append(raw)
+        rec = copy.deepcopy(raw)
+        ident = f'preview_v93_{category}_{game}_{len(bundle[game])}'
+        if game == 'conexiuni':
+            rec['groups'] = {f'g{i + 1}': g['tiles'] for i, g in enumerate(raw['groups'])}
+            rec['group_labels'] = {f'g{i + 1}': g['label'] for i, g in enumerate(raw['groups'])}
+            rec['order'] = [n for g in rec['groups'].values() for n in g]
+            random.Random(ident).shuffle(rec['order'])
+        if game == 'lant':
+            rec['optimal'] = svc.distance(rec['start'], rec['target'])
+        rec.update(id=ident, category=category, status='pending', source='ai')
+        assert not validate_payload(rec, game, svc), (ident, validate_payload(rec, game, svc))
+        records.append((game, rec))
+        refs.append({'category': category, 'ref': ref, 'preview_id': ident})
+    add('viata_de_roman', 'conexiuni', {'difficulty': 'normal', 'groups': [{'label': label, 'tiles': ids(labels)} for label, labels in GROUPS]})
+    for label, _ in TARGETS:
+        target = ids([label])[0]
+        assert target not in {r['target'] for r in pack['contexto']}
+        add(svc.node(target).category, 'contexto', {'difficulty': 'usor', 'target': target})
+    used_pairs = {(r['start'], r['target']) for r in pack['lant']}
+    rejected_pairs = {(r['start'], r['target']) for r in critique.load_lant_rejection_tombstones()}
+    for a, b, difficulty in LADDERS:
+        start, target = ids([a, b])
+        assert (start, target) not in used_pairs | rejected_pairs
+        assert (target, start) not in used_pairs | rejected_pairs
+        add(svc.node(start).category, 'lant', {'difficulty': difficulty, 'start': start, 'target': target})
+    preview = copy.deepcopy(pack)
+    for game, rec in records:
+        preview[game].append(rec)
+    requested = {r['id'] for _, r in records}
+    findings, _, selected = critique.run(preview, svc, strong, regions, ['conexiuni', 'contexto', 'lant'], {'pending'}, requested)
+    fails = [f for row in findings.values() for f in row['findings'] if f['level'] == 'FAIL']
+    assert not fails, fails
+    prior_raw = []
+    prior_sources = []
+    for path in sorted((ROOT / 'docs/reviews').rglob('candidates.json')):
+        try:
+            data = json.loads(path.read_text())
+        except (ValueError, OSError):
+            continue
+        if isinstance(data, dict):
+            cx = data.get('conexiuni', [])
+            if cx:
+                prior_raw.extend(cx)
+                prior_sources.append({'path': str(path.relative_to(ROOT)), 'sha256': sha(path)})
+    raw_checks = []
+    for game, rec in records:
+        if game != 'conexiuni':
+            continue
+        quads = [set(g) for g in rec['groups'].values()]
+        maximum_quad = max(len(a & set(g['tiles'])) for a in quads for row in prior_raw for g in row['groups'])
+        maximum_board = max(len(set(rec['order']) & {n for g in row['groups'] for n in g['tiles']}) for row in prior_raw)
+        assert maximum_quad < 3 and maximum_board < 8
+        served = {n for row in pack['conexiuni'] for g in row['groups'].values() for n in g}
+        fresh = [svc.label(n) for n in sorted(set(rec['order']) - served)]
+        raw_checks.append({'preview_id': rec['id'], 'prior_raw_boards_compared': len(prior_raw), 'maximum_quad_overlap': maximum_quad, 'maximum_board_overlap': maximum_board, 'fresh_visible_words': fresh})
+    for category, bundle in sorted(bundles.items()):
+        write(f'candidates/{category}/candidates.json', bundle)
+    write('preview-records.json', {'status': 'unapproved', 'records': [r for _, r in records], 'refs': refs})
+    write('preview-dossiers.json', {rec['id']: critique.build_dossier(rec, game, svc, strong, lint, regions) for game, rec, lint in selected})
+    write('prior-raw-novelty.json', {'sources': prior_sources, 'checks': raw_checks})
+    client, probes, routes_report = Client(), [], []
+    for label, guesses in TARGETS:
+        target = ids([label])[0]
+        session = contexto._build_session(target, 'usor', None)
+        sid = contexto.store.create(session)
+        steps = []
+        for guess in [*guesses, label]:
+            resp = client.post(f'/api/wordgames/contexto/games/{sid}/guess', data={'text': guess}, content_type='application/json')
+            data = resp.json()
+            assert resp.status_code == 200 and data.get('ok'), (label, guess, data)
+            steps.append({'text': guess, 'guess': data['guess'], 'won': data['won']})
+        assert steps[-1]['won']
+        incoming = critique.contexto_incoming_ids(svc, target)
+        probes.append({'target': target, 'label': label, 'incoming': [{'id': n, 'label': svc.label(n)} for n in incoming], 'reachable': session.reachable, 'responsive': sum(n for d, n in session.dist_hist.items() if 1 <= d <= 5), 'steps': steps})
+    for a, b, difficulty in LADDERS:
+        start, target = ids([a, b])
+        optimal = svc.distance(start, target)
+        to_target = svc.distances_to(target)
+        paths = []
+        def walk(path):
+            if path[-1] == target:
+                paths.append(path)
+                return
+            for n in sorted(svc.neighbor_ids(path[-1])):
+                if to_target.get(n) == optimal - len(path):
+                    walk([*path, n])
+        walk([start])
+        replay = []
+        for path in paths:
+            session = lant.LantSession(start=start, target=target, optimal=optimal, difficulty=difficulty, chain=[start])
+            sid, actions = lant.store.create(session), []
+            for node in path[1:]:
+                resp = client.post(f'/api/wordgames/lant/games/{sid}/move', data={'text': svc.label(node)}, content_type='application/json')
+                data = resp.json()
+                assert resp.status_code == 200 and data.get('ok'), (a, b, data)
+                actions.append(data)
+            assert session.won
+            replay.append({'ids': path, 'labels': [svc.label(n) for n in path], 'actions': actions})
+        routes_report.append({'start': start, 'target': target, 'routes': replay})
+    write('contexto-api-probes.json', {'scope': 'Author fixed-target API probes, not independent review or public selection.', 'targets': probes})
+    write('lant-api-routes.json', {'scope': 'Author API replay of every native shortest route, not independent review or public selection.', 'ladders': routes_report})
+    assert baseline_hashes == {str(p.relative_to(ROOT)): sha(p) for p in [critique.PACKAGE_PACK, critique.PACKAGE_KG]}
+    report = {'status': 'unapproved', 'baseline_commit': BASELINE, 'baseline_artifacts_unchanged': baseline_hashes, 'author_source_sha256': sha(__file__), 'counts': {g: sum(kind == g for kind, _ in records) for g in ('conexiuni', 'contexto', 'lant')}, 'candidate_files': {str(p.relative_to(OUT)): sha(p) for p in sorted((OUT/'candidates').glob('*/candidates.json'))}, 'strict_preview_failures': 0, 'findings': findings, 'contexto_targets_solved': len(probes), 'lant_routes_solved': sum(len(r['routes']) for r in routes_report), 'preview_ids_are_not_allocated_pack_ids': True}
+    write('author-checks.json', report)
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+
+if __name__ == '__main__':
+    main()

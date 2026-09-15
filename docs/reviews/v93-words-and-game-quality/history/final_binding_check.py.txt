@@ -1,0 +1,40 @@
+import json,hashlib,subprocess,os,sys
+from pathlib import Path
+from copy import deepcopy
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+sys.path.insert(0,str(ROOT))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from tests.content_history import before_v93_artifact,before_v92_session03_artifact,before_v92_entry_session_artifact,before_v92_artifact,before_v91_artifact
+from tests.test_v92_session03_world import historical_catalog
+root=ROOT;scratch=Path(__file__).parent
+files={'kg_sample.json':'cat_de_roman_esti/fixtures/kg_sample.json','games_pack.json':'cat_de_roman_esti/fixtures/games_pack.json','board_rankings_v37.json':'cat_de_roman_esti/fixtures/board_rankings_v37.json','derived_catalog_v38.json':'cat_de_roman_esti/fixtures/derived_catalog_v38.json','cat_mobile_app_pack_contract.json':'tests/fixtures/cat_mobile_app_pack_contract.json'}
+sha=lambda blob:hashlib.sha256(blob).hexdigest()
+encode=lambda obj,name:(json.dumps(obj,ensure_ascii=False,indent=2 if name=='kg_sample.json' else 1)+'\n').encode()
+receipt_path=root/'docs/reviews/v93-words-and-game-quality/artifact-delta.json';receipt=json.loads(receipt_path.read_bytes());assert sha(receipt_path.read_bytes())=='4fad0ef7db0131ed1e74bd881506dc2b9d86e6b09bc5c6832ba19f29292518f5'
+results=[]
+for name,path in files.items():
+ current=json.loads((root/path).read_bytes());untouched=deepcopy(current)
+ restored=before_v93_artifact(current,name)
+ actual_before=subprocess.check_output(['git','show','bf9d814:'+path],cwd=ROOT)
+ assert encode(restored,name)==actual_before
+ assert sha((root/path).read_bytes())==receipt['files'][name]['after_sha256']
+ chains={label:sha(encode(fun(current,name),name)) for label,fun in [('before_v93',before_v93_artifact),('before_session03',before_v92_session03_artifact),('before_session02',before_v92_entry_session_artifact),('before_v92',before_v92_artifact),('before_v91',before_v91_artifact)]}
+ assert current==untouched
+ results.append({'file':name,'all_historical_guards_pass':True,'hashes':chains})
+changed=subprocess.check_output(['git','diff','--name-only','bf9d814','--','docs/reviews'],cwd=ROOT,text=True).splitlines()
+assert not [x for x in changed if not x.startswith('docs/reviews/v93-words-and-game-quality/')],changed
+for previous in ['v92-session03-vocabulary-and-interface/artifact-delta.json','v92-session03-vocabulary-and-interface/alchimie/candidate.json','v92-session03-vocabulary-and-interface/alchimie/factual-review.json','v92-session03-vocabulary-and-interface/alchimie/quality-review.json','v92-session03-vocabulary-and-interface/alchimie/live-audit.json','v92-session03-vocabulary-and-interface/alchimie/final-quality.json']:
+ path='docs/reviews/'+previous
+ assert (root/path).read_bytes()==subprocess.check_output(['git','show','bf9d814:'+path],cwd=ROOT)
+world_dir=Path('/home/dobo/work/_temp/feat__v93-words-and-game-quality/alchimie')
+world_blob=(root/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json').read_bytes()
+assert world_blob==(world_dir/'catalog.json').read_bytes()
+assert sha(world_blob)=='14475e29c1c40888a762c1302170f658577ec58ea7e6db2b6fc2ac833c8f5e38'
+from scripts import build_alchimie_discovery_world as B
+B.confirm_final_reviews(json.loads(world_blob),world_dir/'live-audit.json',world_dir/'final-factual.json',world_dir/'final-quality.json')
+assert sha(B.json_bytes(historical_catalog()))=='b9ff7122f6499d4eea365cc6292249744e34c6576f5f16ca694d9644c19c327f'
+report={'kind':'v93-independent-history-final-binding-check-v1','receipt_sha256':sha(receipt_path.read_bytes()),'five_complete_bf9d814_artifacts_restored':True,'old_archives_unmodified':True,'historical_world_225_catalog_sha256':'b9ff7122f6499d4eea365cc6292249744e34c6576f5f16ca694d9644c19c327f','installed_world_matches_final_reviews':True,'current_world_sha256':sha(world_blob),'current_world_final_gate_passes':True,'files':results}
+(scratch/'final-binding-check.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({k:v for k,v in report.items() if k!='files'},indent=2))

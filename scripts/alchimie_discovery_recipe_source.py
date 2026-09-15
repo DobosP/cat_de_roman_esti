@@ -1255,3 +1255,202 @@ RECIPE_SOURCES.update(
      'zacusca-ardei-copti': ['https://www.lauralaurentiu.ro/retete-culinare/conserve/zacusca-de-vinete.html'],
      'supa-crema-dovleac-copt': ['https://www.retetelemeledragi.com/2024/11/supa-crema-de-dovleac-copt.html/']}
 )
+
+# V93: familiar new preparations, alternate paths and useful dry-bread reuse.
+WORLD_CONCEPTS.update(
+{'Ouă umplute': {'id': 'alw_food_oua_umplute',
+                 'description': 'Jumătăți de ou fiert cu albușurile umplute cu o pastă din '
+                                'gălbenușuri, maioneză și alte ingrediente, precum pateul.',
+                 'sources': ['https://www.e-retete.ro/retete/oua-umplute']},
+ 'Musaca': {'id': 'alw_food_musaca',
+            'description': 'Preparat copt în straturi de cartofi sau alte legume și o umplutură, '
+                           'adesea din carne tocată; există și variante cu piure.',
+            'sources': ['https://adygio.com/musaca-de-cartofi-cu-carne-tocata-de-porc/',
+                        'https://www.unileverfoodsolutions.ro/reteta/musaca-cu-piure-de-cartofi-dovlecei-si-ragu-de-vita-R90010786.html']},
+ 'Clătite gratinate': {'id': 'alw_food_clatite_gratinate',
+                       'description': 'Clătite umplute, așezate într-un vas și rumenite la cuptor '
+                                      'sub un sos; umplutura poate fi dulce sau sărată.',
+                       'sources': ['https://pofta-buna.com/clatite-cu-branza-dulce-de-vaci-si-smantana-la-cuptor/']},
+ 'Găluște cu prune': {'id': 'alw_food_galuste_prune',
+                      'description': 'Desert din prune învelite în aluat, fierte și tăvălite în '
+                                     'pesmet rumenit și îndulcit; aluatul poate conține cartofi.',
+                      'sources': ['https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/galuste-gomboti-cu-prune-de-post.html',
+                                  'https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/gomboti-cu-prune-cu-aluat-oparit.html']},
+ 'Milkshake': {'id': 'alw_food_milkshake',
+               'description': 'Băutură rece și spumoasă obținută prin mixarea laptelui cu '
+                              'înghețată ori fructe și alte arome.',
+               'sources': ['https://www.kitchenaffair.ro/retete/milkshake-capsuni/',
+                           'https://www.gustos.ro/retete-culinare/milkshake-cu-banane.html']},
+ 'Bruschete': {'id': 'alw_food_bruschete',
+               'description': 'Felii de pâine prăjită, frecate de obicei cu usturoi și stropite '
+                              'cu ulei; pot fi acoperite cu roșii și alte ingrediente.',
+               'sources': ['https://divainbucatarie.ro/2011/03/27/bruschete-cu-rosii/']},
+ 'Salată de paste': {'id': 'alw_food_salata_paste',
+                     'description': 'Paste fierte și răcorite, amestecate cu legume și un '
+                                    'dressing, uneori și cu brânză sau alte ingrediente.',
+                     'sources': ['https://www.e-retete.ro/retete/salata-de-paste-cu-legume',
+                                 'https://www.mega-image.ro/recipes/recipeDetails/Salata-de-paste-cu-legume-la-gratar-si-parmezan/r/R20163']},
+ 'Budincă de pâine': {'id': 'alw_food_budinca_paine',
+                      'description': 'Desert copt din bucăți de pâine înmuiate într-un amestec de '
+                                     'lapte, ou și zahăr, cu arome sau fructe uscate.',
+                      'sources': ['https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/budinca-de-paine-cu-unt-si-caramel.html']},
+ 'Pesmet': {'id': 'alw_food_pesmet',
+            'description': 'Pâine uscată și mărunțită, folosită pentru cruste, umpluturi și '
+                           'tăvălirea unor preparate.',
+            'sources': ['https://www.bbcgoodfood.com/howto/guide/how-make-breadcrumbs',
+                        'https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html']},
+ 'Supă cu tăiței': {'id': 'alw_food_supa_taitei',
+                    'description': 'Supă cu paste sub formă de tăiței subțiri, adesea pregătită cu '
+                                   'carne de pasăre și legume.',
+                    'sources': ['https://pastehutton.ro/retete-simple/']}}
+)
+RECIPES.extend(
+[('oua-umplute-maioneza',
+  'Ou fiert',
+  'Maioneză',
+  'Ouă umplute',
+  'Ouăle fierte tari se taie în jumătăți; gălbenușurile se amestecă cu maioneză și condimente, '
+  'apoi pasta umple albușurile.'),
+ ('oua-umplute-pate',
+  'Ou fiert',
+  'Pate',
+  'Ouă umplute',
+  'Gălbenușurile ouălor fierte se freacă cu pate și puțină maioneză; pasta se pune în jumătățile '
+  'de albuș.'),
+ ('musaca-cartof-carne',
+  'Cartof',
+  'Carne tocată',
+  'Musaca',
+  'Cartofii pregătiți în felii se alternează cu carne tocată gătită cu ceapă și roșii, apoi '
+  'musacaua se coace la cuptor.'),
+ ('musaca-piure-carne',
+  'Piure de cartofi',
+  'Carne tocată',
+  'Musaca',
+  'Straturile de piure și carne tocată gătită cu legume se așază într-un vas și se rumenesc la '
+  'cuptor.'),
+ ('clatite-gratinate-smantana',
+  'Clătite',
+  'Smântână',
+  'Clătite gratinate',
+  'Clătitele umplute cu brânză se acoperă cu smântână amestecată cu ou, apoi se rumenesc la '
+  'cuptor.'),
+ ('clatite-gratinate-cuptor',
+  'Clătite',
+  'Cuptor de bucătărie',
+  'Clătite gratinate',
+  'Clătitele se umplu cu brânză, se acoperă cu un sos de smântână și ou, apoi se dau la cuptor '
+  'pentru gratinare.'),
+ ('galuste-prune-cartof',
+  'Prună',
+  'Cartof',
+  'Găluște cu prune',
+  'Cartofii fierți și pasați se leagă cu făină într-un aluat care învelește prunele; găluștele se '
+  'fierb și se tăvălesc în pesmet dulce.'),
+ ('galuste-prune-oparit',
+  'Prună',
+  'Aluat opărit',
+  'Găluște cu prune',
+  'Un aluat opărit potrivit pentru găluște, cu griș, făină și ou, învelește prunele; după '
+  'fierbere, găluștele se tăvălesc în pesmet dulce.'),
+ ('milkshake-inghetata-lapte',
+  'Înghețată',
+  'Lapte',
+  'Milkshake',
+  'Înghețata se mixează cu lapte rece până devine o băutură cremoasă; se pot adăuga căpșuni sau '
+  'alte arome.'),
+ ('milkshake-banana-lapte',
+  'Banană',
+  'Lapte',
+  'Milkshake',
+  'Banana bine coaptă se taie în bucăți și se mixează cu lapte rece până când '
+  'băutura devine omogenă și spumoasă.'),
+ ('bruschete-paine-prajita-rosie',
+  'Pâine prăjită',
+  'Roșie',
+  'Bruschete',
+  'Feliile de pâine prăjită se freacă cu usturoi și se acoperă cu roșii tocate, ulei și busuioc.'),
+ ('bruschete-paine-rosie',
+  'Pâine',
+  'Roșie',
+  'Bruschete',
+  'Pâinea se taie în felii și se prăjește, apoi se freacă cu usturoi și se acoperă cu roșii '
+  'tocate și ulei.'),
+ ('salata-paste-legume',
+  'Paste',
+  'Legume',
+  'Salată de paste',
+  'Pastele fierte și răcorite se amestecă cu legume tăiate și un dressing, pentru o salată de '
+  'paste.'),
+ ('salata-paste-legume-gratar',
+  'Paste',
+  'Legume la grătar',
+  'Salată de paste',
+  'Pastele fierte se amestecă cu legume făcute la grătar, ulei și verdețuri; salata se poate '
+  'servi după răcorire.'),
+ ('budinca-paine-lapte',
+  'Pâine',
+  'Lapte',
+  'Budincă de pâine',
+  'Bucățile de pâine se înmoaie în lapte amestecat cu ou, zahăr și arome, apoi se coc până când '
+  'compoziția se încheagă.'),
+ ('budinca-paine-stafide',
+  'Pâine',
+  'Stafide',
+  'Budincă de pâine',
+  'Pâinea cu stafide se îmbibă într-un amestec de lapte, ou și zahăr, apoi se coace într-un vas '
+  'uns cu unt.'),
+ ('pesmet-paine-prajita-sucitor',
+  'Pâine prăjită',
+  'Sucitor',
+  'Pesmet',
+  'Pâinea prăjită, uscată bine și răcită, se zdrobește fin cu sucitorul, de pildă într-o pungă, '
+  'pentru pesmet.'),
+ ('pesmet-crutoane-sucitor',
+  'Crutoane',
+  'Sucitor',
+  'Pesmet',
+  'Crutoanele uscate și răcite se zdrobesc fin cu sucitorul; dacă au fost condimentate, pesmetul '
+  'păstrează acele arome.'),
+ ('snitel-pesmet-carne',
+  'Pesmet',
+  'Carne',
+  'Șnițel',
+  'Feliile subțiri de carne se trec prin făină, ou și pesmet, apoi se prăjesc pentru a obține '
+  'șnițel pane.'),
+ ('snitel-pesmet-pui',
+  'Pesmet',
+  'Carne de pui',
+  'Șnițel',
+  'Feliile subțiri de piept de pui se acoperă cu făină, ou și pesmet, apoi se prăjesc până se '
+  'gătesc și se rumenesc.'),
+ ('supa-taitei-paste',
+  'Supă',
+  'Paste',
+  'Supă cu tăiței',
+  'Pastele fierte, alese sub formă de tăiței subțiri, se adaugă în supa fierbinte; '
+  'se încălzesc împreună și se presară verdeață după gust.')]
+)
+RECIPE_SOURCES.update(
+{'oua-umplute-maioneza': ['https://www.e-retete.ro/retete/oua-umplute'],
+ 'oua-umplute-pate': ['https://www.e-retete.ro/retete/oua-umplute'],
+ 'musaca-cartof-carne': ['https://adygio.com/musaca-de-cartofi-cu-carne-tocata-de-porc/'],
+ 'musaca-piure-carne': ['https://www.unileverfoodsolutions.ro/reteta/musaca-cu-piure-de-cartofi-dovlecei-si-ragu-de-vita-R90010786.html'],
+ 'clatite-gratinate-smantana': ['https://pofta-buna.com/clatite-cu-branza-dulce-de-vaci-si-smantana-la-cuptor/'],
+ 'clatite-gratinate-cuptor': ['https://pofta-buna.com/clatite-cu-branza-dulce-de-vaci-si-smantana-la-cuptor/'],
+ 'galuste-prune-cartof': ['https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/galuste-gomboti-cu-prune-de-post.html'],
+ 'galuste-prune-oparit': ['https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/gomboti-cu-prune-cu-aluat-oparit.html'],
+ 'milkshake-inghetata-lapte': ['https://www.kitchenaffair.ro/retete/milkshake-capsuni/'],
+ 'milkshake-banana-lapte': ['https://www.gustos.ro/retete-culinare/milkshake-cu-banane.html'],
+ 'bruschete-paine-prajita-rosie': ['https://divainbucatarie.ro/2011/03/27/bruschete-cu-rosii/'],
+ 'bruschete-paine-rosie': ['https://divainbucatarie.ro/2011/03/27/bruschete-cu-rosii/'],
+ 'salata-paste-legume': ['https://www.e-retete.ro/retete/salata-de-paste-cu-legume'],
+ 'salata-paste-legume-gratar': ['https://www.mega-image.ro/recipes/recipeDetails/Salata-de-paste-cu-legume-la-gratar-si-parmezan/r/R20163'],
+ 'budinca-paine-lapte': ['https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/budinca-de-paine-cu-unt-si-caramel.html'],
+ 'budinca-paine-stafide': ['https://www.lauralaurentiu.ro/retete-culinare/deserturi-dulciuri-de-casa/budinca-de-paine-cu-unt-si-caramel.html'],
+ 'pesmet-paine-prajita-sucitor': ['https://www.bbcgoodfood.com/howto/guide/how-make-breadcrumbs'],
+ 'pesmet-crutoane-sucitor': ['https://www.bbcgoodfood.com/howto/guide/how-make-breadcrumbs'],
+ 'snitel-pesmet-carne': ['https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html'],
+ 'snitel-pesmet-pui': ['https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/snitel-din-piept-de-pui-in-pesmet-reteta-simpla.html'],
+ 'supa-taitei-paste': ['https://pastehutton.ro/retete-simple/']}
+)

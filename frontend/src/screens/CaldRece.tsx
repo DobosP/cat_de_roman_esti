@@ -57,7 +57,7 @@ const DIFFICULTY_LABEL: Record<Difficulty, string> = {
 const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
   { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "recomandat" },
   { id: "normal", label: "Normal", hint: "echilibrat" },
-  { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "concept mai rar" },
+  { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "asocieri mai dificile" },
 ];
 
 type GuessRecovery = {

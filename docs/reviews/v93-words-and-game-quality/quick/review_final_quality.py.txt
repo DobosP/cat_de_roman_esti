@@ -1,0 +1,136 @@
+"""Independent exact final quick audit and eight recovery journeys; no fixture writes."""
+import hashlib
+import json
+import os
+import sys
+from pathlib import Path
+from unittest.mock import patch
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+OUT=Path('/home/dobo/work/_temp/feat__v93-words-and-game-quality/quick')
+sys.path.insert(0,str(ROOT))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+os.environ.setdefault('CAT_DEBUG','1')
+import django
+django.setup()
+import logging
+logging.getLogger("django.request").setLevel(logging.CRITICAL)
+from django.test import Client
+from scripts import audit_quick_content_v92 as A, build_quick_content_v92 as B
+from cat_de_roman_esti.wordgames import intrusul as I, perechi as P
+from cat_de_roman_esti.wordgames.derived_catalog import DerivedCatalog, load_derived_catalog
+Q=B.Q
+logging.disable(logging.WARNING)
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+read=lambda p:json.loads(p.read_bytes())
+expected_catalog='04622c7dc0e7d38f68d949c03be349f716a99222d344eb60db6b96d560a6dc21'
+assert sha(OUT/'catalog.json')==expected_catalog
+catalog=read(OUT/'catalog.json');audit=read(OUT/'live-audit.json')
+assert audit['catalog_sha256']==expected_catalog
+assert audit['candidate_sha256']==catalog['candidate_sha256']
+assert audit['bindings']==Q.bindings(live=True)
+assert audit['runtime_sources']==B.runtime_source_hashes()
+assert catalog==B.build_catalog(OUT/'candidate.json',OUT/'factual-review.json',OUT/'quality-review.json')
+replayed=A.audit(OUT/'catalog.json')
+assert replayed==audit
+(OUT/'independent-final-winning-audit.json').write_bytes(Q.json_bytes(replayed))
+base=load_derived_catalog()
+additions=Q.validate_catalog(catalog,base)
+combined=DerivedCatalog([*base._boards,*additions])
+raw=read(OUT/'raw-candidates.json')
+new_source_ids={r['source_id'] for r in raw['boards']}
+seeds={r['id']:r['public_seed'] for r in audit['replays']}
+results=[]
+
+def no_secrets(state,board):
+    assert not {board._catalog_id,board._source_id}&A.all_strings(state)
+
+def hidden_labels(state,labels):
+    assert not labels&A.all_strings(state)
+    assert 'solution' not in state and 'score' not in state
+
+for board in additions:
+    if board._source_id not in new_source_ids:
+        continue
+    module=I if board.game=='intrusul' else P
+    client=Client();url=f'/api/wordgames/{board.game}/games';gid=None
+    with patch.object(module,'_catalog_or_503',return_value=combined):
+        try:
+            response=client.post(f'{url}?seed={seeds[board._catalog_id]}&category={board.category}')
+            assert response.status_code==200
+            state=response.json();gid=state['game_id'];endpoint=f'{url}/{gid}'
+            assert module.store.get(gid).catalog_id==board._catalog_id
+            no_secrets(state,board)
+            start=client.get(endpoint).json();assert state==start
+            def request(action,data=None,status=200):
+                response=client.post(endpoint+'/'+action,data=data or {},content_type='application/json')
+                assert response.status_code==status,(board._source_id,action,response.status_code,response.content)
+                result=response.json();no_secrets(result,board);return result
+            def unchanged_failure(action,data=None):
+                before=client.get(endpoint).json()
+                request(action,data,status=400)
+                after=client.get(endpoint).json()
+                assert before==after
+            unchanged_failure('hint')
+            events=[]
+            if board.game=='intrusul':
+                label=board.payload['group_label'];hidden_labels(start,{label})
+                wrong=board.payload['members'][0]
+                step=request('guess',{'id':wrong})
+                assert not step['correct'] and step['mistakes']==1 and step['attempts']==1 and step['hint_available']
+                hidden_labels(step,{label})
+                earned=client.get(endpoint).json();assert earned['wrong_ids']==[wrong] and earned['mistakes']==1
+                repeat=request('guess',{'id':wrong})
+                assert repeat['already_tried'] and repeat['mistakes']==1 and repeat['attempts']==1
+                assert client.get(endpoint).json()==earned
+                hinted=request('hint');assert hinted['hints_used']==1 and 'clue' in hinted
+                assert 'solution' not in hinted and 'score' not in hinted
+                saved_hint=client.get(endpoint).json();assert saved_hint['clue']==hinted['clue']
+                unchanged_failure('hint')
+                repeat=request('guess',{'id':wrong});assert repeat['already_tried'] and repeat['mistakes']==1
+                assert client.get(endpoint).json()==saved_hint
+                won=request('guess',{'id':board.payload['intruder']})
+                assert won['won'] and won['score']==650
+                unchanged_failure('guess',{'id':board.payload['intruder']});unchanged_failure('hint')
+                terminal=client.get(endpoint).json();assert terminal['won'] and terminal['score']==650
+                events=['premature_hint_rejected_without_mutation','wrong_tap_costs_once','GET_restores_wrong_tap','repeat_wrong_free','one_hint_reveals_only_requested_group','GET_retains_hint','repeated_hint_rejected_without_mutation','repeat_wrong_after_hint_free','win_650','terminal_actions_rejected_without_mutation','terminal_GET_650']
+            else:
+                pairs=board.payload['pairs'];labels={p['group_label'] for p in pairs};hidden_labels(start,labels)
+                first_wrong=[pairs[0]['members'][0],pairs[1]['members'][0]]
+                step=request('match',{'ids':first_wrong});assert not step['correct'] and step['mistakes']==1 and step['actions']==1
+                hidden_labels(step,labels);earned=client.get(endpoint).json();assert earned['mistakes']==1 and earned['actions']==1
+                repeat=request('match',{'ids':list(reversed(first_wrong))});assert repeat['repeated'] and repeat['mistakes']==1 and repeat['actions']==1
+                assert client.get(endpoint).json()==earned
+                unchanged_failure('hint')
+                second_wrong=[pairs[0]['members'][0],pairs[2]['members'][0]]
+                second=request('match',{'ids':second_wrong});assert second['mistakes']==2 and second['actions']==2 and second['hint_available']
+                hinted=request('hint');assert hinted['hints_used']==1
+                hint_label=hinted['hint']['label'];assert hint_label in labels
+                hidden_labels(hinted,labels-{hint_label})
+                hint_state=client.get(endpoint).json();assert hint_state['hint']==hinted['hint'] and hint_state['mistakes']==2
+                unchanged_failure('hint')
+                solved=set()
+                for index,pair in enumerate(pairs):
+                    won=request('match',{'ids':list(pair['members'])});assert won['correct'] and won['solved_count']==index+1
+                    solved.add(pair['group_label'])
+                    if index<3:
+                        hidden_labels(won,labels-solved-{hint_label})
+                        before=client.get(endpoint).json();assert before['solved_count']==index+1
+                        unchanged_failure('match',{'ids':list(reversed(pair['members']))})
+                    else:
+                        assert won['won'] and won['score']==650
+                unchanged_failure('match',{'ids':list(pairs[0]['members'])});unchanged_failure('hint')
+                terminal=client.get(endpoint).json();assert terminal['won'] and terminal['score']==650
+                events=['premature_hint_rejected_without_mutation','wrong_pair_costs_once','GET_restores_wrong_state','reversed_repeat_free','hint_after_one_mistake_rejected_without_mutation','second_wrong_unlocks_one_hint','only_hinted_pair_revealed','GET_retains_hint','repeated_hint_rejected_without_mutation','unsolved_labels_remain_hidden','GET_retains_partial_matches','repeat_solved_pair_rejected_without_mutation','win_650','terminal_actions_rejected_without_mutation','terminal_GET_650']
+            no_secrets(terminal,board)
+            results.append({'id':board._catalog_id,'source_id':board._source_id,'game':board.game,'public_seed':seeds[board._catalog_id],'checks':events,'final_score':650,'private_ids_hidden':True})
+        finally:
+            if gid:
+                module.store.delete(gid)
+assert len(results)==8
+assert sha(OUT/'catalog.json')==expected_catalog
+assert audit['runtime_sources']==B.runtime_source_hashes() and audit['bindings']==Q.bindings(live=True)
+receipt={'kind':'quick-independent-recovery-audit-v1','reviewer':'/root/v93_pack_author','catalog_sha256':expected_catalog,'audit_sha256':sha(OUT/'live-audit.json'),'passed':True,'winning_replays_exact':65,'core_boards_preserved':336,'bindings':Q.bindings(live=True),'runtime_sources':B.runtime_source_hashes(),'results':results,'scope':'Actual server API with the reviewed candidate catalog injected at its ordinary selector boundary; fresh public seeds choose every board, no serving or runtime edit.'}
+(OUT/'independent-final-recovery-audit.json').write_bytes(Q.json_bytes(receipt))
+review={'kind':B.FINAL_KIND,'role':'quality','reviewer':'/root/v93_pack_author','catalog_sha256':expected_catalog,'audit_sha256':sha(OUT/'live-audit.json'),'verdict':'accept','rationale':'Accept the exact 65-board proposal. Independently rebuilt the candidate/review intersection, verified all current live bindings and eight runtime source hashes, and reproduced the complete supplied natural-public-seed winning audit exactly: 65 wins at 1000 with hidden answers and terminal GET retained, preserving all 336 core boards. Additional independent server journeys cover all 8 new boards: wrong actions cost once, identical/reversed repeats are free, premature/repeated hints and solved/terminal actions fail without mutation, GET preserves wrong/hinted/partially solved state, only explicitly hinted or earned pair labels become visible, and final wins retain 650 after expected penalties. No runtime evidence overturns the eight fresh semantic judgments or the 57 exact inherited judgments. Final combined counts are 218 Intrusul and 183 Perechi. No serving edits or package writes by this reviewer.','independent_recovery_audit_sha256':sha(OUT/'independent-final-recovery-audit.json'),'independent_winning_audit_sha256':sha(OUT/'independent-final-winning-audit.json')}
+(OUT/'final-quality.json').write_bytes(Q.json_bytes(review))
+print(json.dumps({'winning_replays':65,'new_recovery_journeys':8,'final_quality_sha256':sha(OUT/'final-quality.json'),'recovery_audit_sha256':sha(OUT/'independent-final-recovery-audit.json')},indent=2))

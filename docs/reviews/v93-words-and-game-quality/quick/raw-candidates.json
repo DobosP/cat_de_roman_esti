@@ -1,0 +1,293 @@
+{
+  "baseline": "bf9d814",
+  "bindings": {
+    "core_catalog_sha256": "de2f46a72c23e5ecbd496d3a4314a48f0d4f636b71aa5ba4662bccc837298449",
+    "core_payload_sha256": "b78f069479f99741bf5187db638eebbc476eccf2d914c4a48b072b895446dc29",
+    "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "pack_sha256": "02b966eacaa851a9b20c4f36e0ee50c217e49670553da462313b16830b2c13e6",
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+  },
+  "boards": [
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "intrusul",
+      "id": "iq92_v93_transport_stops",
+      "payload": {
+        "group_label": "Locuri de oprire pentru mijloacele de transport",
+        "intruder": "n_v28_transport_water_vapor",
+        "members": [
+          "n_v24_transport_terminals_gara",
+          "n_v24_transport_terminals_aeroport",
+          "n_v24_transport_terminals_statie"
+        ]
+      },
+      "rationale": "Gara, aeroportul și stația sunt locuri amenajate unde sosesc sau opresc mijloacele de transport. Vaporul este el însuși un mijloc de transport. Toate cuvintele aparțin temei călătoriei; soluția depinde de rol, nu de domeniu. Stație este folosit în sensul cotidian de stație de transport.",
+      "source_id": "aq92_v93_intrusul_transport_stops",
+      "sources": [
+        "https://dexonline.ro/definitie/gar%C4%83",
+        "https://dexonline.ro/definitie/aeroport",
+        "https://dexonline.ro/definitie/sta%C8%9Bie",
+        "https://dexonline.ro/definitie/vapor"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "intrusul",
+      "id": "iq92_v93_food_actions",
+      "payload": {
+        "group_label": "Acțiuni de preparare sau consum al hranei și băuturilor",
+        "intruder": "n_v24_action_language_a_citi",
+        "members": [
+          "n_v24_action_food_a_manca",
+          "n_v24_action_food_a_bea",
+          "n_v24_action_food_a_gati"
+        ]
+      },
+      "rationale": "Mâncatul și băutul înseamnă consum, iar gătitul pregătirea hranei. Cititul înseamnă descifrarea unui text. Toate cele patru opțiuni sunt verbe uzuale; faptul că se poate citi o rețetă nu transformă sensul verbului în preparare sau consum. A bea are aici sensul neutru, de a consuma un lichid.",
+      "source_id": "aq92_v93_intrusul_food_actions",
+      "sources": [
+        "https://dexonline.ro/definitie/m%C3%A2nca",
+        "https://dexonline.ro/definitie/bea",
+        "https://dexonline.ro/definitie/g%C4%83ti",
+        "https://dexonline.ro/definitie/citi"
+      ]
+    },
+    {
+      "category": "stiinta",
+      "difficulty": "usor",
+      "game": "intrusul",
+      "id": "iq92_v93_weather",
+      "payload": {
+        "group_label": "Fenomene atmosferice",
+        "intruder": "n_v29_time_daily_noapte",
+        "members": [
+          "n_v24_weather_air_vant",
+          "n_v24_weather_air_nor",
+          "n_v24_weather_air_ceata"
+        ]
+      },
+      "rationale": "Vântul, norul și ceața descriu starea atmosferei. Noaptea este un interval al zilei, care poate avea oricare dintre aceste condiții meteo. Nu este nevoie de definiții științifice ascunse; diferența este vremea față de momentul zilei.",
+      "source_id": "aq92_v93_intrusul_weather",
+      "sources": [
+        "https://dexonline.ro/definitie/v%C3%A2nt",
+        "https://dexonline.ro/definitie/nor",
+        "https://dexonline.ro/definitie/cea%C8%9B%C4%83",
+        "https://dexonline.ro/definitie/noapte"
+      ]
+    },
+    {
+      "category": "gastronomie",
+      "difficulty": "usor",
+      "game": "intrusul",
+      "id": "iq92_v93_fruits",
+      "payload": {
+        "group_label": "Fructe comestibile",
+        "intruder": "n_v24_food_salad_veg_morcov",
+        "members": [
+          "n_v24_food_imported_fruit_banana",
+          "n_v24_food_imported_fruit_portocala",
+          "n_v24_food_imported_fruit_lamaie"
+        ]
+      },
+      "rationale": "Banana, portocala și lămâia sunt fructe; morcovul consumat este o rădăcină. Toate patru sunt alimente vegetale familiare. Predicatul nu pretinde că banana este citrică și nu depinde de dulceața alimentului.",
+      "source_id": "aq92_v93_intrusul_fruits",
+      "sources": [
+        "https://dexonline.ro/definitie/banan%C4%83",
+        "https://dexonline.ro/definitie/portocal%C4%83",
+        "https://dexonline.ro/definitie/l%C4%83m%C3%A2ie",
+        "https://dexonline.ro/definitie/morcov"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "perechi",
+      "id": "pq92_v93_everyday_01",
+      "payload": {
+        "pairs": [
+          {
+            "group_label": "Fruct și boabele lui uscate",
+            "members": [
+              "n_v24_food_small_fruit_strugure",
+              "n_v85_food_stafide"
+            ]
+          },
+          {
+            "group_label": "Material și unealta folosită la mutarea lui",
+            "members": [
+              "n_v24_nature_world_pamant",
+              "n_v32_garden_soil_lopata"
+            ]
+          },
+          {
+            "group_label": "Cale publică și partea ei pentru pietoni",
+            "members": [
+              "n_v29_city_street_trotuar",
+              "n_v4geo_strada"
+            ]
+          },
+          {
+            "group_label": "Partea corpului care susține capul",
+            "members": [
+              "n_v29_body_upper_gat",
+              "n_v24_body_face_cap"
+            ]
+          }
+        ]
+      },
+      "rationale": "Patru relații cotidiene distincte: Strugure — Stafide (fruct și boabele lui uscate); Pământ — Lopată (material și unealta folosită la mutarea lui); Trotuar — stradă (cale publică și partea ei pentru pietoni); Gât — Cap (partea corpului care susține capul). Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.",
+      "source_id": "aq92_v93_perechi_everyday_01",
+      "sources": [
+        "https://dexonline.ro/definitie/stafid%C4%83",
+        "https://dexonline.ro/definitie/lopat%C4%83",
+        "https://dexonline.ro/definitie/trotuar",
+        "https://dexonline.ro/definitie/g%C3%A2t"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "perechi",
+      "id": "pq92_v93_everyday_02",
+      "payload": {
+        "pairs": [
+          {
+            "group_label": "Produs sfărâmicios și un fragment desprins din el",
+            "members": [
+              "n_v24_food_snack_biscuit",
+              "n_v90_food_firimitura"
+            ]
+          },
+          {
+            "group_label": "Mobilier pentru șezut și varianta fără spătar",
+            "members": [
+              "n_v24_home_seating_scaun",
+              "n_v88_home_taburet"
+            ]
+          },
+          {
+            "group_label": "Perioadă calendaristică și sfârșitul ei",
+            "members": [
+              "n_v28_time_calendar_saptamana",
+              "n_v29_time_weekly_weekend"
+            ]
+          },
+          {
+            "group_label": "Preparat lichid și vasul în care se servește",
+            "members": [
+              "n_v2gas_ciorba",
+              "n_v30_kitchen_table_castron"
+            ]
+          }
+        ]
+      },
+      "rationale": "Patru relații cotidiene distincte: Biscuit — Firimitură (produs sfărâmicios și un fragment desprins din el); Scaun — Taburet (mobilier pentru șezut și varianta fără spătar); Săptămână — Weekend (perioadă calendaristică și sfârșitul ei); Ciorbă — Castron (preparat lichid și vasul în care se servește). Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.",
+      "source_id": "aq92_v93_perechi_everyday_02",
+      "sources": [
+        "https://dexonline.ro/definitie/firimitur%C4%83",
+        "https://dexonline.ro/definitie/taburet",
+        "https://dexonline.ro/definitie/weekend",
+        "https://dexonline.ro/definitie/castron"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "perechi",
+      "id": "pq92_v93_everyday_03",
+      "payload": {
+        "pairs": [
+          {
+            "group_label": "Moment obișnuit pentru somn și activitatea lui",
+            "members": [
+              "n_v29_time_daily_noapte",
+              "n_v24_action_routine_a_dormi"
+            ]
+          },
+          {
+            "group_label": "Aparate care păstrează alimentele la rece",
+            "members": [
+              "n_v24_home_appliances_frigider",
+              "n_v86_kitchen_congelator"
+            ]
+          },
+          {
+            "group_label": "Orificiu al feței și marginea lui cărnoasă",
+            "members": [
+              "n_v24_body_face_gura",
+              "n_v32_body_face_buza"
+            ]
+          },
+          {
+            "group_label": "Obiect textil și o fibră desprinsă din el",
+            "members": [
+              "n_v29_clothing_everyday_haina",
+              "n_v90_textile_scama"
+            ]
+          }
+        ]
+      },
+      "rationale": "Patru relații cotidiene distincte: Noapte — A dormi (moment obișnuit pentru somn și activitatea lui); Frigider — Congelator (aparate care păstrează alimentele la rece); Gură — Buză (orificiu al feței și marginea lui cărnoasă); Haină — Scamă (obiect textil și o fibră desprinsă din el). Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.",
+      "source_id": "aq92_v93_perechi_everyday_03",
+      "sources": [
+        "https://dexonline.ro/definitie/dormi",
+        "https://dexonline.ro/definitie/congelator",
+        "https://dexonline.ro/definitie/buz%C4%83",
+        "https://dexonline.ro/definitie/scam%C4%83",
+        "https://support.electrolux.ro/support-articles/article/cum-se-pstreaz-alimentele-in-frigider-i-congelator"
+      ]
+    },
+    {
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "game": "perechi",
+      "id": "pq92_v93_everyday_04",
+      "payload": {
+        "pairs": [
+          {
+            "group_label": "Loc cultivat și unealtă pentru adunat frunze",
+            "members": [
+              "n_v24_home_outdoor_gradina",
+              "n_v32_garden_soil_grebla"
+            ]
+          },
+          {
+            "group_label": "Obiect textil pentru podea și aparatul care îl curăță",
+            "members": [
+              "n_v24_home_textiles_covor",
+              "n_v31_cleaning_floor_aspirator"
+            ]
+          },
+          {
+            "group_label": "Părinte și copilul aflat la începutul vieții",
+            "members": [
+              "n_v24_people_parents_mama",
+              "n_v24_people_parents_bebelus"
+            ]
+          },
+          {
+            "group_label": "Animal sălbatic și un habitat al lui",
+            "members": [
+              "n_v33_forest_animal_lup",
+              "n_v4geo_padure"
+            ]
+          }
+        ]
+      },
+      "rationale": "Patru relații cotidiene distincte: Grădină — Greblă (loc cultivat și unealtă pentru adunat frunze); Covor — Aspirator (obiect textil pentru podea și aparatul care îl curăță); Mamă — Bebeluș (părinte și copilul aflat la începutul vieții); Lup — pădure (animal sălbatic și un habitat al lui). Fiecare pereche este nouă în catalogul Perechi. Nu există muchii native încrucișate între perechi; vocabularul este familiar și sensurile sunt cele concrete, uzuale.",
+      "source_id": "aq92_v93_perechi_everyday_04",
+      "sources": [
+        "https://dexonline.ro/definitie/grebl%C4%83",
+        "https://dexonline.ro/definitie/aspirator",
+        "https://dexonline.ro/definitie/bebelu%C8%99",
+        "https://dexonline.ro/definitie/lup",
+        "https://www.gardena.com/ro/produse/sol-teren/combisystem/grebla-de-mana-combisystem/967093801.html",
+        "https://www.electrolux.ro/vacuums-home-comfort/vacuum-cleaners/vacuum-cleaners/",
+        "https://wwf.ro/ce-facem/specii/lupul/"
+      ]
+    }
+  ],
+  "kind": "quick-entry-candidates-v1"
+}

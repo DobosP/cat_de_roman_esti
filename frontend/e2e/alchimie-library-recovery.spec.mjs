@@ -21,7 +21,7 @@ for (const width of [320, 390]) {
     await page.locator(".alchemy-library-tools > summary").click();
     await page.getByRole("searchbox", { name: "Caută în colecție" }).fill("zzzz");
     await page.locator(".alchemy-library-tools > summary").click();
-    await expect(page.getByRole("searchbox")).not.toBeVisible();
+    await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).not.toBeVisible();
     await expect(page.getByText("Niciun cuvânt găsit.", { exact: true })).toBeVisible();
     const savedBefore = await page.evaluate((key) => localStorage.getItem(key), SAVE);
     const reset = page.getByRole("button", { name: "Șterge căutarea", exact: true });
@@ -77,7 +77,7 @@ test("a completed collection shows every earned word, searches locally and prese
   await expect(page.getByRole("button", { name: "💡 O idee?", exact: true })).toHaveCount(0);
   const savedBefore = await page.evaluate((key) => localStorage.getItem(key), SAVE);
   await page.locator(".alchemy-library-tools > summary").click();
-  await page.getByRole("searchbox").fill("zzzz");
+  await page.getByRole("searchbox", { name: "Caută în colecție" }).fill("zzzz");
   await page.locator(".alchemy-library-tools > summary").click();
   await page.getByRole("button", { name: "Șterge căutarea", exact: true }).click();
   await expect(page.locator(".alchemy-word")).toHaveCount(state.inventory.length);
@@ -94,7 +94,7 @@ test("search reset keeps keyboard recovery visible in a short viewport with doub
   await page.getByRole("button", { name: "Începe explorarea →" }).click();
   await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
   await page.locator(".alchemy-library-tools > summary").click();
-  await page.getByRole("searchbox").fill("zzzz");
+  await page.getByRole("searchbox", { name: "Caută în colecție" }).fill("zzzz");
   await page.locator(".alchemy-library-tools > summary").click();
   const reset = page.getByRole("button", { name: "Șterge căutarea", exact: true });
   await reset.focus();

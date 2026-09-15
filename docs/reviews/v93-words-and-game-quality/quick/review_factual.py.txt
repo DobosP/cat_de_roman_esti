@@ -1,0 +1,38 @@
+from pathlib import Path
+import json,hashlib,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v93-words-and-game-quality')
+OUT=Path('/home/dobo/work/_temp/feat__v93-words-and-game-quality/quick')
+sys.path.insert(0,str(ROOT))
+from scripts import build_quick_content_v92 as B
+Q = B.Q
+prior_dir=ROOT/'docs/reviews/v92-session03-vocabulary-and-interface/quick'
+prior=json.loads((prior_dir/'candidate.json').read_bytes())
+previous_review=json.loads((prior_dir/'factual-review.json').read_bytes())
+current=json.loads((OUT/'candidate.json').read_bytes())
+raw=json.loads((OUT/'raw-candidates.json').read_bytes())
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert sha(OUT/'candidate.json')=='bb94553dac27d1406b59444490e6271bfbecf7f6486fdc14c87069ad85a03c2d'
+assert previous_review['candidate_sha256']==sha(prior_dir/'candidate.json')
+old={r['id']:r for r in prior['boards']};new={r['id']:r for r in current['boards']}
+assert len(old)==57 and all(new[i]==row for i,row in old.items())
+assert {k:v for k,v in prior['bindings'].items() if k!='editorial_source_sha256'}=={k:v for k,v in current['bindings'].items() if k!='editorial_source_sha256'}
+reasons={
+'iq92_v93_transport_stops':'Gară, Aeroport and Stație name transport stopping facilities in the displayed ordinary senses; Vapor is a vehicle. The label does not claim that every station is a railway terminus. All are common travel vocabulary, with no obscure or regional identity needed.',
+'iq92_v93_food_actions':'A mânca and A bea consume food or liquid; A găti prepares food; A citi reads text. The explicit preparation-or-consumption predicate covers the three food verbs honestly. Reading a recipe is an incidental situation, not the lexical meaning of reading. Drinking has its neutral liquid sense; no alcohol claim is embedded.',
+'iq92_v93_weather':'Vânt, Nor and Ceață describe atmospheric conditions, whereas Noapte is a time interval. The weather members need no specialist taxonomy to distinguish from night. Ordinary science vocabulary and dictionary senses support recognition.',
+'iq92_v93_fruits':'Banană, Portocală and Lămâie are edible fruits; Morcov names the familiar edible root. The predicate avoids falsely treating banana as citrus or equating all fruit with sweetness. Common grocery vocabulary, with no specialist botanical exception required.',
+'pq92_v93_everyday_01':'Stafide are dried grape berries. Lopată is a tool for moving earth, as the tightened label says. Trotuar is the pedestrian part of a public road. Gât supports Cap. These four explicit everyday relationships are factual; no metaphorical sense or regional association is necessary.',
+'pq92_v93_everyday_02':'A biscuit can shed a firimitură; a taburet is a seat without a back; weekend is the end-of-week interval; soup is commonly served in a castron. None of the labels claims exclusivity outside this board. Exact standard dictionary senses distinguish the intended pairs.',
+'pq92_v93_everyday_03':'Night is a usual time for sleeping, not the only possible time. Frigider and Congelator both keep food cold at different temperatures. Buză is the fleshy edge of Gură; a scamă is a detached textile fibre. These are ordinary concrete senses; no misleading identity or absolute timing claim remains.',
+'pq92_v93_everyday_04':'Gardena documents leaf gathering with the garden rake; a vacuum cleans a carpet; a mother is a parent and a baby is an early-life child. WWF confirms forest habitat for Romanian wolves; the label says one habitat, not an exclusive habitat. The four claims are familiar and factual without hidden species trivia.',
+}
+assert set(reasons)==set(new)-set(old)=={r['id'] for r in raw['boards']}
+items=[]
+for row in raw['boards']:
+    items.append({'id':row['id'],'verdict':'accept','rationale':reasons[row['id']]+' Independent agent factual/recognition judgment; not a measured human enjoyment result.','sources':row['sources']})
+raw_review={'kind':'quick-raw-factual-review-v1','role':'factual','reviewer':'root-v93-factual','candidate_sha256':sha(OUT/'raw-candidates.json'),'reviewed_on':'2026-09-15','items':items}
+(OUT/'raw-factual-review.json').write_bytes(Q.json_bytes(raw_review))
+review={'kind':B.REVIEW_KIND,'role':'factual','reviewer':'root-v93-factual','candidate_sha256':sha(OUT/'candidate.json'),'items':previous_review['items']+items,'baseline_evidence':{'candidate_path':str((prior_dir/'candidate.json').relative_to(ROOT)),'candidate_sha256':sha(prior_dir/'candidate.json'),'factual_review_path':str((prior_dir/'factual-review.json').relative_to(ROOT)),'factual_review_sha256':sha(prior_dir/'factual-review.json'),'inherited_rows':57,'new_rows':8,'exact_old_rows_and_judgments_preserved':True,'stable_kg_rubric_core_payload_bindings':True,'raw_candidate_sha256':sha(OUT/'raw-candidates.json'),'raw_review_sha256':sha(OUT/'raw-factual-review.json')}}
+(OUT/'factual-review.json').write_bytes(Q.json_bytes(review))
+B.read_review(OUT/'factual-review.json','factual',sha(OUT/'candidate.json'),set(new))
+print('Independent factual review: all8new accepted,57unchanged inherited;65complete bound judgments valid')

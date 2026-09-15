@@ -1,0 +1,117 @@
+{
+  "kind": "v93-integration-v1",
+  "verified_on": "2026-09-15",
+  "baseline_commit": "bf9d8145f2797b7e1ea125531f81a98d2ff6098c",
+  "branch": "feat/v93-words-and-game-quality",
+  "passed": true,
+  "new_rounds": {
+    "conexiuni": 1,
+    "contexto": 2,
+    "lant": 2,
+    "intrusul": 4,
+    "perechi": 4
+  },
+  "new_alchimie_words": 10,
+  "new_alchimie_recipes": 21,
+  "new_shared_KG_nodes": 0,
+  "new_per_game_visible_words": {
+    "conexiuni": 11,
+    "intrusul": 15,
+    "perechi": 30
+  },
+  "checks": {
+    "backend_python312": {
+      "passed": 2017,
+      "log": "backend312.log",
+      "sha256": "93d38d89eca4cc1bef42db0d41314209d9759f8a8b0b560ca240a933fc23196f"
+    },
+    "backend_python314": {
+      "passed": 2017,
+      "log": "backend314.log",
+      "sha256": "8d0a74abf52fa5e5e1e72119d21aab6abb734b2e2ef590e2dd7df97d0df8bc8e"
+    },
+    "accounts_python312": {
+      "passed": 53,
+      "log": "accounts312.log",
+      "sha256": "dc3b9d0e807dd4faef58a85291904e356d557e325e512e032513862fd8151a9b"
+    },
+    "accounts_python314": {
+      "passed": 53,
+      "log": "accounts314.log",
+      "sha256": "c3844cc7e9747c2cb80dafa6fac3212754a433b0a52bd14c55c12a43e946633f"
+    },
+    "browser_desktop_mobile": {
+      "passed": 486,
+      "log": "browser-tests.log",
+      "sha256": "fe068d49668b4a8c30249d3af76306fbbf6099704cf621d7921507171ed1117e"
+    },
+    "frontend_native": {
+      "passed": 212,
+      "log": "gui/frontend-tests.log",
+      "sha256": "f8d9d0f1a3340456c69ab1a2c59a946e3a46e4783bfb69de23d765fa61115a97"
+    }
+  },
+  "other_green_gates": [
+    "fixture validator",
+    "pack validator",
+    "Ruff",
+    "frontend lint",
+    "frontend typecheck/build/bundle",
+    "documentation checker",
+    "staged whitespace check"
+  ],
+  "initial_gzip_kib": 119.22,
+  "initial_limit_kib": 120,
+  "gate_inputs": "gate-inputs.json",
+  "gate_inputs_sha256": "23ab9edc9c8fe122c473360a3a90b93ce28a4457b5e117873b4e462569ff12f9",
+  "archive_manifest_sha256": "a04b49c181ec519f31d036d943f62015ef5919bce61227717ce4afcef7df7663",
+  "archived_files": 168,
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "573e921cbe54cb482535584a22e55183c4b7add9b0a9a92a1400f9dae4fd01d8",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "5e29e48a7d684d23d5532f38d80fb996c92d3474744b20a0159111ac7b41bc76",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "46360ac6a77fff6cdab2f86500dcadc348243f71bab71eea01111e76bf80f2c4",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "04622c7dc0e7d38f68d949c03be349f716a99222d344eb60db6b96d560a6dc21",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "14475e29c1c40888a762c1302170f658577ec58ea7e6db2b6fc2ac833c8f5e38",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "0c2c895a965ff244469dabf8b32679d314fda991c89daaa04d881b13a9e994af"
+  },
+  "initial_failures": "Both Python versions:2016passed/1staleContextoprofile snapshot. Browser:484passed/2staleLanțseed38snapshots. Exact old profile and five other seeded games preserved; two current snapshots updated. Serving source/data and semantic/final approvals unchanged. Initial logs and explicit before/after proofs preserved.",
+  "preview": {
+    "port": 8150,
+    "world_concepts": 235,
+    "world_recipes": 315,
+    "new_session_inventory": 8,
+    "accounts_enabled": false,
+    "read_only_routes_passed": [
+      "/healthz",
+      "/api/health",
+      "/api/me",
+      "/api/manifest",
+      "/",
+      "/alchimie"
+    ],
+    "asset_matches_worktree": true,
+    "emitted_asset": "/assets/index-D36186rM.js",
+    "asset_sha256": "d446741169169571872d55d1ce3b0c6824b4775da28e654e0e25ea0bd046fd6a",
+    "comparison_main_port": 8160
+  },
+  "limits": [
+    "No human enjoyment study",
+    "No physical-device acceptance",
+    "No main merge, push or deployment",
+    "No automatic next session"
+  ],
+  "final_evidence_sha256": {
+    "alchimie/live-audit.json": "1960a690039f5f69b8827f80321683ad49e9fcfdfd863218ed3f7cb900136b76",
+    "alchimie/final-factual.json": "3ed42b21fa04d29af5b7483313f4cb878448833100ec7888a33f0614acc9193c",
+    "alchimie/final-quality.json": "46b17d44eaa3b6574399e6881ffe29791cdd2b46b2888746aaedcd7d626756c8",
+    "quick/live-audit.json": "91e557afa4889abb7ee9e0b530d41f35729cbb7bd8d78824dad848700dc9e58f",
+    "quick/final-factual.json": "f7d18de5d01134dcb91533a23ede457baff6f884c9d23ea55327a72e2db292f7",
+    "quick/final-quality.json": "627a9efdf45aa9e128e8907ce88f30737b4108816ef28ada46d75580b726e236",
+    "pack/independent-final-api.json": "66b830794cc796b7590c377281d37b423e674e4ceb0f170d05f0c277116e28c8",
+    "gui/independent-review/final-review.json": "e98b09fa89b37400499a8c6d388a92a9a374057df4a00987f0e73c6ee2186e58",
+    "artifact-delta.json": "4fad0ef7db0131ed1e74bd881506dc2b9d86e6b09bc5c6832ba19f29292518f5"
+  }
+}

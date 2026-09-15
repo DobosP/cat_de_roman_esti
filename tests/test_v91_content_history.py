@@ -18,6 +18,7 @@ from tests.content_history import (
     before_v92_artifact,
     before_v92_entry_session_artifact,
     before_v92_session03_artifact,
+    before_v93_artifact,
 )
 from tests.current_content import CURRENT_CONTENT
 
@@ -270,13 +271,14 @@ def test_session_three_inverse_restores_complete_0b51e03_bytes(filename):
     directory = "tests/fixtures" if filename.startswith("cat_mobile") else (
         "cat_de_roman_esti/fixtures"
     )
-    current = read(ROOT / directory / filename)
-    untouched = deepcopy(current)
-    restored = before_v92_session03_artifact(current, filename)
+    live = read(ROOT / directory / filename)
+    current = before_v93_artifact(live, filename)
+    untouched = deepcopy(live)
+    restored = before_v92_session03_artifact(live, filename)
     indent = 2 if filename == "kg_sample.json" else 1
     blob = (json.dumps(restored, ensure_ascii=False, indent=indent) + "\n").encode()
     assert hashlib.sha256(blob).hexdigest() == V92_SESSION_TWO[filename]
-    assert current == untouched
+    assert live == untouched
     if filename == "games_pack.json":
         expected = {
             "conexiuni": {"cx_viata_de_roman_369"},
@@ -325,7 +327,11 @@ def test_session_three_receipt_cannot_rebind_modified_artifacts(tmp_path, monkey
     from tests import content_history
 
     filename = "games_pack.json"
-    current = read(ROOT / "cat_de_roman_esti/fixtures" / filename)
+    current = before_v93_artifact(
+        read(ROOT / "cat_de_roman_esti/fixtures" / filename), filename,
+    )
+    # Isolate the V92 receipt guard after validating and peeling the newer wave.
+    monkeypatch.setattr(content_history, "before_v93_artifact", lambda value, _: value)
     current["meta"]["unreviewed"] = True
     receipt = read(content_history._V92_SESSION03_RECEIPT)
     blob = (json.dumps(current, ensure_ascii=False, indent=1) + "\n").encode()

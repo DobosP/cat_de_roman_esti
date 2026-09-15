@@ -866,3 +866,50 @@ branches/worktrees/scratch directories after remote/ancestry checks. The existin
 previews on ports 8150 and 8160 now run from main; route/asset smoke checks pass. Production remains anonymous V91; no deployment or
 automatic fourth creation session is included. Remote CI follows the main push and
 is not represented as already complete in this pre-push evidence receipt.
+
+## V93 words and game quality (2026-09-15)
+
+Valid until: the bound V93 inputs or integrated verification change — then treat as history.
+
+The owner requested a fresh content/quality session after the green V92 main landing.
+V93 starts from bf9d814 in feat/v93-words-and-game-quality and adds thirteen reviewed
+rounds/targets across the other five games, plus ten new Alchimie words and 21 recipes.
+The world reaches 235 concepts/315 recipes/131 discoveries with nine more results offering
+alternate recipes, four formerly terminal discoveries gaining onward use, and all five
+prior saved-book generations preserved. All 696 old pack records, 336 core quick boards and
+57 prior authored quick payloads/scores remain exact. Shared KG vocabulary is unchanged.
+
+The growing earned-recipe journal gains local result/ingredient search, visible reset,
+keyboard recovery, a two-line closed query preview and 44px source controls. Selection,
+saved progress and answer privacy remain intact. Cald sau Rece's hard-mode wording now
+describes harder associations. Independent mobile/browser review accepted the final UI.
+
+Five pack entries pass raw review, actual pending dossiers and separate analyst/verifier
+promotion. All naturally serve through public seed/category/difficulty selection. Both
+catalogs rebuild from their complete independent reviews and pass exact final live-audit
+acceptances; 65 quick winning journeys plus eight added wrong/repeat/hint/GET journeys
+pass. The questioned Maiorescu leadership relationship is supported by the journal's
+own history; it is distinguished from a formal sole-editor title. Recipe references and
+an already-cooked-noodle explanation were corrected before final approval.
+
+The first full runs exposed current snapshots affected by catalog growth: both Python
+versions passed 2016 tests with one outdated Contexto profile hash; browser passed 484 with
+two Lanț initial-snapshot assertions. Exactly 257 old target profiles retain their original
+hash; the two new targets account for the added profile rows. Only Lanț's current seed 38
+snapshot changes among the six games, and its original fixture is archived. The focused
+profile and ten Lanț lifecycle checks pass after test-only corrections. Final full-run
+results are recorded in STATUS and the integration receipt, separately from these first runs.
+
+The exact five-core-artifact inverse restores bf9d814 before every earlier historical
+check. Original V92 world 225/294/121 assertions reconstruct the exact original catalog.
+The review archive preserves candidates, exclusions, reviewer identities, source references,
+GUI captures, original logs and encoded/decoded file hashes. See
+[the V93 review](docs/reviews/v93-words-and-game-quality/README.md) and
+[ADR-0151](docs/adr/0151-expand-game-vocabulary-and-search-earned-recipes.md).
+Production remains anonymous V91; no main merge, push, deployment or automatic next session
+is included. V93 preview uses 8150; main comparison uses 8160.
+
+V93 final integration: Python 3.12 and 3.14 each pass 2017 backend/53 account tests;
+486 browser and 212 native frontend checks pass. Validators, Ruff, frontend lint/build,
+docs and whitespace are green; initial bundle 119.22/120 KiB. Final inputs, original
+failed runs, corrected snapshots and full successful logs are bound by the V93 receipt.
