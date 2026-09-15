@@ -1,12 +1,12 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-15 — V92 vocabulary session 03; all local integration gates green.
+Last verified: 2026-09-15 — V92 integrated on main; Python 3.12/3.14 and frontend gates green.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- The owner requested another vocabulary/interface session. This bounded V92 pass uses
-  `feat/v92-entry-creation-03`, based on completed `0b51e03`; no automatic fourth session.
+- All three V92 sessions are integrated on main through implementation `d52f4b4`.
+  Together they add 92 rounds/targets across five games and Alchimie's discovery world.
 - **11 new rounds/targets, four Alchimie words and six recipes**: Conexiuni +1, Cald sau
   Rece +2, Lanț +2, Intrusul +3 and Perechi +3. New boards use six words absent from the
   previous Conexiuni pack, ten from Intrusul and twenty from Perechi’s fixed catalogs.
@@ -34,7 +34,7 @@ Last verified: 2026-09-15 — V92 vocabulary session 03; all local integration g
   selection/mistake overlap at 320px and enlarged text. Contexto/Lanț controls now meet 44px.
   Intrusul/Perechi keep their efficient tap loops. Previous focus/ownership guards remain.
 - Decision/evidence: [ADR-0150](adr/0150-expand-vocabulary-and-clarify-game-controls.md),
-  [vocabulary/interface review](reviews/v92-session 03-vocabulary-and-interface/README.md).
+  [vocabulary/interface review](reviews/v92-session03-vocabulary-and-interface/README.md).
 
 ## Inventory and invariants
 
@@ -74,9 +74,9 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Verification
 
-- Python 3.12 backend **1968 pass**, browser **480 pass**, frontend native **212 pass**,
-  accounts **53 pass**. Ruff, whitespace, docs, both content validators and frontend
-  lint/typecheck/build GREEN at **119.22/120 KiB** initial gzip. Python 3.14 not rerun.
+- Python 3.12 and fresh constrained Python 3.14 each pass **1968 backend/53 accounts**;
+  browser **480 pass**, frontend native **212 pass**. Ruff, whitespace, docs, both content
+  validators and frontend lint/typecheck/build GREEN at **119.22/120 KiB** initial gzip.
 - Historical/world focused checks **173 pass**. The exact five-artifact inverse preserves
   original historical hashes and assertions. New-world checks cover all four saved books,
   retained journals, repeat/resume behavior and rejection of forged historical recipes.
@@ -89,11 +89,13 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
   evidence, not human enjoyment or physical-device acceptance.
 - [Final verification](reviews/v92-session03-vocabulary-and-interface/verification.json)
   binds the current artifacts. Preview uses **8150**, preserving the previous browser origin.
+- [Main landing evidence](reviews/v92-main-landing/README.md) adds the Python 3.14 results
+  and records verification of 400 current/archived bindings with zero mismatches.
 
 ## Production and remaining work
 
 - Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`, deployed
-  2026-09-09. V92 has not been pushed or deployed; current work stays in its task worktree.
+  2026-09-09. V92 is integrated on main; production deployment is outside this landing.
 - Owner playtesting, physical-device acceptance and broader calibration remain. Further
   specific captions, stronger target neighborhoods and dish reuse remain editorial work.
 - The prior 17-entry queue remains linked as unapproved history; overlaps are not counted

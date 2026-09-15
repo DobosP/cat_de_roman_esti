@@ -1,0 +1,53 @@
+
+> cat-de-roman-esti-frontend@0.1.0 test:e2e
+> playwright test e2e/alchimie-exploration.spec.mjs --workers=4
+
+
+Running 22 tests using 2 workers
+
+(node:1725699) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1725700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] /home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django/core/handlers/asgi.py:336: Warning: StreamingHttpResponse must consume synchronous iterators in order to serve them asynchronously. Use an asynchronous iterator instead.
+[WebServer]   async for part in content:
+[WebServer] Not Found: /api/alchimie/explore/expired-exploration-session
+[WebServer] 2026-09-13 09:51:10,923 WARNING django.request: Not Found: /api/alchimie/explore/expired-exploration-session
+[WebServer] Not Found: /api/alchimie/explore/expired-exploration-session
+[WebServer] 2026-09-13 09:51:11,024 WARNING django.request: Not Found: /api/alchimie/explore/expired-exploration-session
+  ✓   2 [desktop] › e2e/alchimie-exploration.spec.mjs:66:1 › exploration is the clean default, saves discoveries, searches accents and restores expired sessions (2.2s)
+  ✓   1 [mobile] › e2e/alchimie-exploration.spec.mjs:66:1 › exploration is the clean default, saves discoveries, searches accents and restores expired sessions (2.5s)
+  ✓   3 [desktop] › e2e/alchimie-exploration.spec.mjs:97:1 › optional goal completion keeps exploration playable and pantry gifts arrive automatically (1.1s)
+  ✓   4 [mobile] › e2e/alchimie-exploration.spec.mjs:97:1 › optional goal completion keeps exploration playable and pantry gifts arrive automatically (1.2s)
+  ✓   5 [desktop] › e2e/alchimie-exploration.spec.mjs:122:1 › dragging a suggested word onto its partner crafts directly (817ms)
+  ✓   6 [mobile] › e2e/alchimie-exploration.spec.mjs:122:1 › dragging a suggested word onto its partner crafts directly (942ms)
+  ✓   7 [desktop] › e2e/alchimie-exploration.spec.mjs:132:1 › a lost combine response reconciles once without submitting the recipe twice (773ms)
+  ✓   8 [mobile] › e2e/alchimie-exploration.spec.mjs:132:1 › a lost combine response reconciles once without submitting the recipe twice (930ms)
+  ✓   9 [desktop] › e2e/alchimie-exploration.spec.mjs:150:1 › failed recovery blocks mutations until the authoritative collection reloads (846ms)
+  ✓  10 [mobile] › e2e/alchimie-exploration.spec.mjs:150:1 › failed recovery blocks mutations until the authoritative collection reloads (990ms)
+  ✓  11 [desktop] › e2e/alchimie-exploration.spec.mjs:166:1 › a second tab cannot overwrite newer saved progress (1.7s)
+  ✓  13 [desktop] › e2e/alchimie-exploration.spec.mjs:181:1 › a malformed local checkpoint stays preserved with visible recovery (635ms)
+  ✓  12 [mobile] › e2e/alchimie-exploration.spec.mjs:166:1 › a second tab cannot overwrite newer saved progress (1.9s)
+  ✓  15 [mobile] › e2e/alchimie-exploration.spec.mjs:181:1 › a malformed local checkpoint stays preserved with visible recovery (793ms)
+[WebServer] Not Found: /api/alchimie/explore/expired-exploration-session
+[WebServer] 2026-09-13 09:51:18,161 WARNING django.request: Not Found: /api/alchimie/explore/expired-exploration-session
+[WebServer] Conflict: /api/alchimie/explore
+[WebServer] 2026-09-13 09:51:18,167 WARNING django.request: Conflict: /api/alchimie/explore
+  ✓  14 [desktop] › e2e/alchimie-exploration.spec.mjs:191:1 › a checkpoint from a different recipe book is retained when restore is rejected (1.3s)
+[WebServer] Not Found: /api/alchimie/explore/expired-original-kitchen-session
+[WebServer] 2026-09-13 09:51:19,080 WARNING django.request: Not Found: /api/alchimie/explore/expired-original-kitchen-session
+[WebServer] Not Found: /api/alchimie/explore/expired-exploration-session
+[WebServer] 2026-09-13 09:51:19,263 WARNING django.request: Not Found: /api/alchimie/explore/expired-exploration-session
+[WebServer] Conflict: /api/alchimie/explore
+[WebServer] 2026-09-13 09:51:19,269 WARNING django.request: Conflict: /api/alchimie/explore
+  ✓  16 [mobile] › e2e/alchimie-exploration.spec.mjs:191:1 › a checkpoint from a different recipe book is retained when restore is rejected (1.4s)
+  ✓  17 [desktop] › e2e/alchimie-exploration.spec.mjs:207:1 › the original kitchen collection upgrades without losing recipes, pantry supplies or its chosen goal (1.9s)
+[WebServer] Not Found: /api/alchimie/explore/expired-original-kitchen-session
+[WebServer] 2026-09-13 09:51:20,340 WARNING django.request: Not Found: /api/alchimie/explore/expired-original-kitchen-session
+  ✓  18 [mobile] › e2e/alchimie-exploration.spec.mjs:207:1 › the original kitchen collection upgrades without losing recipes, pantry supplies or its chosen goal (2.1s)
+  ✓  19 [desktop] › e2e/alchimie-exploration.spec.mjs:243:1 › the daily circuit opens scored challenges while the arcade card opens exploration (2.8s)
+  ✓  20 [mobile] › e2e/alchimie-exploration.spec.mjs:243:1 › the daily circuit opens scored challenges while the arcade card opens exploration (2.9s)
+  ✓  21 [desktop] › e2e/alchimie-exploration.spec.mjs:253:1 › exploration intro, active collection and earned recipes are accessible (3.7s)
+  ✓  22 [mobile] › e2e/alchimie-exploration.spec.mjs:253:1 › exploration intro, active collection and earned recipes are accessible (4.0s)
+
+  22 passed (21.1s)

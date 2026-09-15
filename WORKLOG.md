@@ -841,3 +841,28 @@ Valid until: V92 integration — then treat as history.
   review inputs, independent audits and final file ledger. Human/player/device acceptance
   remains unrun. The candidate ledger is sealed at `48cd5b8`; later landing notes are
   documentation only. V90 evidence stays in its historical review folder.
+
+## V92 main landing (2026-09-15)
+
+Valid until: a later main landing changes these inputs — then treat as history.
+
+The owner requested landing all completed work. Main fast-forwards from `6208eae`
+through ten V92 implementation commits to `d52f4b4`, covering the Alchimie GUI/content
+rebuild and two subsequent all-game entry/interface sessions. V92 adds 92 reviewed
+rounds/targets across the other five games and a persistent Alchimie world with
+225 concepts, 294 recipes, 121 craftable discoveries and 32 optional goals.
+
+Python 3.12 and fresh constrained 3.14 each pass 1968 backend/53 account tests;
+212 native frontend and 480 browser checks pass. Both validators, Ruff, frontend
+lint/typecheck/build and the 119.22/120 KiB bundle gate are green. Independent audit
+checks 400 current/archive bindings with zero mismatches. The exact Perechi privacy
+log and 22 earlier verification-bound logs are preserved at their exact hashes before
+scratch cleanup, and the broken status review link is fixed.
+The closure changes documentation/evidence only. See
+[main landing evidence](docs/reviews/v92-main-landing/README.md).
+
+The authorized landing publishes main and cleans only the three verified V92 task
+branches/worktrees/scratch directories after remote/ancestry checks. The existing
+previews on ports 8150 and 8160 now run from main; route/asset smoke checks pass. Production remains anonymous V91; no deployment or
+automatic fourth creation session is included. Remote CI follows the main push and
+is not represented as already complete in this pre-push evidence receipt.

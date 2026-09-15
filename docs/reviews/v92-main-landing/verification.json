@@ -1,0 +1,179 @@
+{
+  "kind": "v92-main-landing-v1",
+  "verified_on": "2026-09-15",
+  "previous_main": "6208eae22429d9b976a7c88477913010997eb3de",
+  "implementation_commit": "d52f4b4ba6125073a7dc13f84cc1c6ac50abadb0",
+  "implementation_commits": [
+    "e609de69ee0bfc6456d3de644a59ca7d4150cc1b",
+    "f57162d84d549a259f991feb0fdea0ae90198d2f",
+    "e46bf3da621a43e19bc79f71ff7a4f223afa3a0f",
+    "c0f3945b593b86fba2962463a8f77d5b0fc8e9da",
+    "225776600a69fcc5157881f74b03158a2d0f9d00",
+    "8f97bd92b96f5cadb0f17be2123054a221fdb9c5",
+    "75584bf9ef0b8dac6d309fc4e447851c4ff07750",
+    "c0ead5eb524fe40ec4a1760488badec395c0ae0c",
+    "0b51e03c983bcbfc042807b4eb97e59a8a9e7781",
+    "d52f4b4ba6125073a7dc13f84cc1c6ac50abadb0"
+  ],
+  "python314": "3.14.6, fresh environment installed with constraints.txt and .[dev,web]",
+  "checks": {
+    "backend314": {
+      "passed": 1968,
+      "log": "backend314.log",
+      "sha256": "a53decbc8faea794178cc32e6d390e246ea0f9fd53a5962e09ceca7c0a6074f8"
+    },
+    "accounts314": {
+      "passed": 53,
+      "log": "accounts314.log",
+      "sha256": "1db485894dc459b48fcde7a4feb26229ef91935a012032cb8bf84df03f9cbd8c"
+    }
+  },
+  "additional_python314_gates": [
+    "fixture validator GREEN (0 errors)",
+    "games pack GREEN",
+    "Ruff: All checks passed!"
+  ],
+  "existing_verification": "../v92-session03-vocabulary-and-interface/verification.json",
+  "independent_binding_audit": {
+    "checked": 400,
+    "mismatches": 0
+  },
+  "preserved_evidence": {
+    "path": "../v92-session03-vocabulary-and-interface/perechi-recheck.log",
+    "sha256": "f5cf750b8c23c70a3a20a99944239a504d11f3d4d877117f0cb3cf2552abeba0"
+  },
+  "scope": "Main landing of the three completed V92 sessions; documentation-only closure after d52f4b4.",
+  "remote_ci_at_receipt_creation": "Not yet triggered; this receipt records completed local gates.",
+  "production_changed": false,
+  "additional_preserved_historical_logs": [
+    {
+      "path": "docs/reviews/v92-all-games-content/frontend-tests.log",
+      "sha256": "d538781453231152fa266755a9e112f03aaa02224c0953750d11b7e10488073a",
+      "existing_receipt": "docs/reviews/v92-all-games-content/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-all-games-content/focused-tests.log",
+      "sha256": "8ed3a811f3e62f4a07cc1fe7c19a09961371e79e430cdae321b756b69d4bc552",
+      "existing_receipt": "docs/reviews/v92-all-games-content/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-entry-creation-and-gui/regressions-fixed.log",
+      "sha256": "b7a65d03fc9be0a129b8d794c09c7e6c5d7e14abd4a3a58f8ea267362caa6f2d",
+      "existing_receipt": "docs/reviews/v92-entry-creation-and-gui/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-session03-vocabulary-and-interface/world-final-tests.log",
+      "sha256": "963daac61855056f76391fc16c8dd5d7f44c0a02954e76bf266a21c61720def7",
+      "existing_receipt": "docs/reviews/v92-session03-vocabulary-and-interface/historical-verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-session03-vocabulary-and-interface/history-final-tests.log",
+      "sha256": "986f1ee532c0997be4603071692959770d24209e8e6ae575e148b5940e9f2b3e",
+      "existing_receipt": "docs/reviews/v92-session03-vocabulary-and-interface/historical-verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-session03-vocabulary-and-interface/current-pin-tests.log",
+      "sha256": "ae2604274a833403d5a93d1b2dcea196bb9d11ba794c12f5c389cb0ec08875ba",
+      "existing_receipt": "docs/reviews/v92-session03-vocabulary-and-interface/historical-verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-more-concepts/backend-full.log",
+      "sha256": "75f6c05f9581024c7551c9099169ea9ca6b7ddfe7258417da1ee684fb0e45f89",
+      "existing_receipt": "docs/reviews/v92-alchimie-more-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-more-concepts/accounts.log",
+      "sha256": "326a1c068ae5696a810ee7600a41be770628168bc86f889e44beebeaf78216ae",
+      "existing_receipt": "docs/reviews/v92-alchimie-more-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-more-concepts/focused-final.log",
+      "sha256": "1239c1661c91419b475e15cfb60605cdbf3a82c45154a2a260d0dbbdc8f18cff",
+      "existing_receipt": "docs/reviews/v92-alchimie-more-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-more-concepts/browser-focused.log",
+      "sha256": "728b4691d3e98f8e54692a826b2c811bc34587080392a842d51d29eb04ecadb2",
+      "existing_receipt": "docs/reviews/v92-alchimie-more-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-more-concepts/browser-full.log",
+      "sha256": "4c2d21ea7c3e712bc36d43880f2bb9609b85fc3892ad0fd0e5fe83c91874e036",
+      "existing_receipt": "docs/reviews/v92-alchimie-more-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-large-concepts/backend-full.log",
+      "sha256": "83b5601547487c853b5126b24709e7192f0fec58abc2e7cf54251212b5923629",
+      "existing_receipt": "docs/reviews/v92-alchimie-large-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-large-concepts/accounts.log",
+      "sha256": "cce489e6f1e92dbe543899cd46b0ad282c9d15912e87e095de45dad1574a6ae4",
+      "existing_receipt": "docs/reviews/v92-alchimie-large-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-large-concepts/focused-final.log",
+      "sha256": "3b3a2bd3cc89e6f79d6d76363ba2c97d9e185324966a696e41635f5d555c4686",
+      "existing_receipt": "docs/reviews/v92-alchimie-large-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-large-concepts/browser-focused-final.log",
+      "sha256": "593e8eb330665bc8a6854af6c83ac2b39a9f10b2839594a5b9de74302f320ec9",
+      "existing_receipt": "docs/reviews/v92-alchimie-large-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-large-concepts/browser-final.log",
+      "sha256": "43e624728e39530bda6d53f4fbc7b784af6eed5bf030eb864b0fce503b3f8fbb",
+      "existing_receipt": "docs/reviews/v92-alchimie-large-concepts/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-discovery-world/backend-full.log",
+      "sha256": "5147095b21da3e531740655d709be48198e99a7f453b289b54dd3d0e7ce9148b",
+      "existing_receipt": "docs/reviews/v92-alchimie-discovery-world/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-discovery-world/accounts.log",
+      "sha256": "c953724a521766dbcb36aab09a7e0babdf39dad4fddcec4843e9983235df6a0b",
+      "existing_receipt": "docs/reviews/v92-alchimie-discovery-world/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-discovery-world/frontend-native.log",
+      "sha256": "21bf6773a7594c9eab8b0db152cf889555f349defa0325cd898df65bbe24e96d",
+      "existing_receipt": "docs/reviews/v92-alchimie-discovery-world/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-discovery-world/frontend-lint.log.gz",
+      "sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "existing_receipt": "docs/reviews/v92-alchimie-discovery-world/verification.json",
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "encoding": "gzip (lossless; original trailing blank line retained)"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-discovery-world/frontend-build-final.log",
+      "sha256": "3e79d578d8e859ecfb1151f75e47cb44a93287cf12a6717c3f81562ed6f61f61",
+      "existing_receipt": "docs/reviews/v92-alchimie-discovery-world/verification.json"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-discovery-world/browser-full.log",
+      "sha256": "5c49a1f54d20617f91c2f8d78226e5282132ee10c23239847bc7b5148d907600",
+      "existing_receipt": "docs/reviews/v92-alchimie-discovery-world/verification.json"
+    }
+  ],
+  "preview_relocation": {
+    "ports": [
+      8150,
+      8160
+    ],
+    "cwd": "shared main checkout",
+    "passed_routes": [
+      "/healthz",
+      "/api/health",
+      "/api/me",
+      "/api/manifest",
+      "/",
+      "/alchimie"
+    ],
+    "accounts_enabled": false,
+    "emitted_asset_matches_main": true
+  }
+}
