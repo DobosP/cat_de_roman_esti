@@ -6,10 +6,10 @@ Last verified: 2026-09-17 — V96 landed; V97 compatibility and content drafting
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
 - V95 landed on main `1457786`; [GitHub CI 35026423470 passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35026423470).
-- V96 is landed and pushed on main `36db143` (implementation `57d5bcc`).
+- V96 is landed and pushed on main `fd3ca7c` after a test-only CI correction (implementation `57d5bcc`).
   [GitHub CI 35155920107](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35155920107)
   passed both backend jobs; one of 540 browser cases hit a test-interception race.
-  A V96 correction is being verified separately. Its original verified worktree was cleaned.
+  The test-only correction is published; fresh CI is running. Its original worktree was cleaned.
 - V97 starts locally in `feat/v97-discovery-continuity-and-new-words`. Saved-book
   compatibility design, fresh content and twelve earned-caption drafts are recorded.
   All new proposals remain unapproved; the served inventory below remains landed V96.
@@ -73,6 +73,8 @@ empty pairs per session; quick supplements ≤256 boards/2 MiB. Recipes/routes/a
 - Python 3.12 and 3.14 each pass **2236 backend/53 account tests**; browser **540 pass**,
   native frontend **212 pass**. Both validators, Ruff, frontend lint/typecheck/build, docs
   and whitespace pass. Initial gzip **119.23/120 KiB**.
+- [CI correction](reviews/v96-words-and-input-clarity/ci-recovery/README.md): persistent
+  interception preserves the tested recovery read; 30 mobile repeats and 12 cases pass.
 - [Final integration receipt](reviews/v96-words-and-input-clarity/integration/verification.json)
   binds assembled inputs, exact artifacts, final approvals and preserved initial failures.
 - World lane: 36 wave/history and 136 catalog/exploration checks pass; final audit covers

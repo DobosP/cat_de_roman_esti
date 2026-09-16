@@ -1,0 +1,27 @@
+import hashlib,json,zipfile
+from pathlib import Path
+O=Path(__file__).parent;R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/fix__v96-ci-keyboard-recovery')
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+traces=[]
+for p in sorted((O/'original-repeat-output').rglob('trace.zip')):
+ rows=[];abort=[];api=[]
+ with zipfile.ZipFile(p) as z:
+  for name in z.namelist():
+   if name.endswith('.network'):
+    for line in z.read(name).decode().splitlines():
+     x=json.loads(line).get('snapshot',{});r=x.get('request',{});u=r.get('url','')
+     if '/api/alchimie/explore' in u:
+      rows.append({'stream':name,'method':r.get('method'),'path':u.split('8154')[-1],'status':x.get('response',{}).get('status'),'failure':x.get('response',{}).get('_failureText'),'started':x.get('_monotonicTime'),'duration':x.get('time')})
+   if name.endswith('.trace'):
+    for line in z.read(name).decode().splitlines():
+     x=json.loads(line)
+     if x.get('type')=='before' and x.get('method')=='abort':abort.append({'call_id':x['callId'],'started':x['startTime']})
+     if x.get('type')=='after' and any(a['call_id']==x.get('callId') for a in abort):
+      next(a for a in abort if a['call_id']==x['callId'])['ended']=x['endTime']
+     if x.get('type')=='before' and x.get('title') in ['Click','Focus','Press "Enter"']:api.append({'title':x['title'],'time':x['startTime'],'locator':x.get('subtitle')})
+  post200=any(r['method']=='POST' and r['path'].endswith('/combine') and r['status']==200 for r in rows)
+  get_pending=any(r['method']=='GET' and '/expired' not in r['path'] and r['status']==-1 for r in rows)
+  traces.append({'trace_path':str(p.relative_to(O)),'trace_sha256':sha(p),'committed_combine_200':post200,'recovery_get_started_but_no_response':get_pending,'network_sequence':rows,'abort':abort,'ui_events':api})
+report={'kind':'v96-ci-independent-diagnosis-v1','reviewer':'codex-v96-world-independent','test_source_sha256':sha(R/'frontend/e2e/v96-input-and-focus.spec.mjs'),'application_source_sha256':sha(R/'frontend/src/screens/AlchimieExplore.tsx'),'manifest_sha256':sha(R/'cat_de_roman_esti/web/static/.vite/manifest.json'),'playwright_core_source_sha256':sha(R/'frontend/node_modules/playwright-core/lib/coreBundle.js'),'original_repeat_log_sha256':sha(O/'original-repeat.log'),'run_result':{'passed':7,'failed':2,'interrupted':1,'not_run':10},'observations':['Both reproduced failures deliver Enter, commit a combine through route.fetch with HTTP200 and abort the browser response as intended.','The application immediately starts the authoritative recovery GET. The GET remains pending without headers or failure until timeout; UI remains busy.','This rules out missing keyboard activation, lost selection or no recovery request for these reproductions.','Installed Playwright _onRoute removes a times-limited handler before handle completes, then asynchronously changes interception patterns once the last handler returns. The Chromium implementation toggles Fetch.disable and cache state.'],'diagnosis':'A race while removing the final one-shot network handler is the leading explanation, not yet proven causal until a stable-handler controlled rerun.','proposed_bounded_fix':'Keep the interception handler registered until test-context teardown. Fail exactly one matching combine using an explicit boolean; continue subsequent requests. Keep response waiters registered before activation and explicitly verify backend commit. Scrolling/readiness assertions may strengthen keyboard intent but do not explain this traced failure.','no_product_or_test_edits_by_reviewer':True,'traces':traces}
+(O/'diagnosis.json').write_text(json.dumps(report,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+print(json.dumps({'traces':len(traces),'committed_and_get_pending':sum(t['committed_combine_200'] and t['recovery_get_started_but_no_response'] for t in traces),'receipt_sha256':sha(O/'diagnosis.json')}))

@@ -76,10 +76,20 @@ test("a lost final craft restores collection focus when both inputs are depleted
   const restored = response(page, BASE);
   await page.reload();
   const state = await (await restored).json();
+  let combineRequests = 0;
+  let recoveryReads = 0;
+  page.on("request", request => {
+    if (request.method() === "GET" && new URL(request.url()).pathname === `${BASE}/${state.game_id}`) recoveryReads += 1;
+  });
+  // Keep interception active while abort triggers GET: removing the final one-shot
+  // route can race Chromium's interception teardown and strand that recovery read.
   await page.route(`**${BASE}/${state.game_id}/combine`, async route => {
-    await route.fetch();
+    combineRequests += 1;
+    if (combineRequests !== 1) { await route.continue(); return; }
+    const committed = await route.fetch();
+    expect(committed.status()).toBe(200);
     await route.abort("failed");
-  }, { times: 1 });
+  });
   await word(page, "Lipie").click();
   await word(page, "Friptură").focus();
   const recovered = response(page, `${BASE}/${state.game_id}`, "GET");
@@ -87,4 +97,6 @@ test("a lost final craft restores collection focus when both inputs are depleted
   const fresh = await (await recovered).json();
   expect(fresh.inventory.some(i => i.label === "Șaorma cu de toate")).toBe(true);
   await expect(page.getByRole("region", { name: "Colecția ta" })).toBeFocused();
+  expect(combineRequests).toBe(1);
+  expect(recoveryReads).toBe(1);
 });

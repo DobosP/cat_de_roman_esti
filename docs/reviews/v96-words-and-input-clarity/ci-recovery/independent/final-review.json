@@ -1,0 +1,56 @@
+{
+  "causal_limit": "The paired runs strongly support the final-interceptor teardown race as the test failure mechanism. They do not constitute an upstream-confirmed Chromium/Playwright bug diagnosis or guarantee zero future browser flakes.",
+  "empirical_results": {
+    "all_v96_desktop_mobile_passes": 12,
+    "fixed_mobile_consecutive_passes": 30,
+    "fixed_mobile_seconds": 48.4,
+    "original_failed": 2,
+    "original_interrupted": 1,
+    "original_not_run": 10,
+    "original_passed": 7
+  },
+  "evidence": {
+    "diagnosis.json": "f0231821793eb46f0f888041123994fc127d71d2747607e5ce495cb92407f7da",
+    "fixed-all-cases.log": "2e849902f74be5a13debd9d1077051dd3131baa38172a6545431de984c870c18",
+    "fixed-input-pins.json": "51bd021501362f107695fd970d91d3b7f41e5f6880bc4e16917a38b723040d33",
+    "fixed-repeat.log": "d691b33ab86fba4903dc4f82f8511f1412fc0071afda47f389bb8e01b9e7933b",
+    "original-repeat.log": "b012eab1b55e6336bf9f2eeb40f57eacaf896582c735b4f3f34bf27138631499",
+    "trace_diagnosis.py": "418a0c489a60130439566a71138fed2f4107210a814c5e42f6c0efef174947b2"
+  },
+  "kind": "v96-ci-independent-fix-review-v1",
+  "product_and_dependency_bytes_unchanged": {
+    "cat_de_roman_esti/web/static/.vite/manifest.json": true,
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": true,
+    "frontend/package-lock.json": true,
+    "frontend/src/screens/AlchimieExplore.tsx": true
+  },
+  "review_findings": [
+    "Only the deep lost-final-craft test retains its network handler until context teardown. A manual counter aborts exactly one combine and lets later combines continue.",
+    "The test still uses the same keyboard activation, original earned-result assertion and collection-focus assertion. It adds a backendHTTP200 commit check and exactly-one-combine/exactly-one-GET checks.",
+    "No application code, scrolling synchronization, artificial wait, timeout increase or retry policy changed.",
+    "Original failure traces prove successful combine commit and immediate recoveryGET that then remained pending; keyboard delivery was not missing.",
+    "Playwright1.63.0 installed source expires a times-limited handler before handling it, then asynchronously updates interception patterns when the last handler finishes. Its Chromium implementation sends Fetch.disable while changing interception state. Keeping the handler avoids that teardown during recovery."
+  ],
+  "reviewer": "codex-v96-world-independent",
+  "selected_original_failure_traces": [
+    {
+      "bytes": 1309997,
+      "path": "original-repeat-output/v96-input-and-focus-a-lost-63363-en-both-inputs-are-depleted-mobile-repeat4/trace.zip",
+      "sha256": "da6ee52286f43e90e36a99ec918bb674be4184f726239d22906ebc576b1ea1ab"
+    },
+    {
+      "bytes": 1320219,
+      "path": "original-repeat-output/v96-input-and-focus-a-lost-63363-en-both-inputs-are-depleted-mobile-repeat6/trace.zip",
+      "sha256": "cbc927635cb31cfa86f6c9d22e25b41637fa73d1466bace68153a0e14a522b36"
+    }
+  ],
+  "tested_bindings": {
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "ec5724d7afb7f49ae6ad367648676a071f0d0751b82d27ae39278e98fde0004d",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "frontend/e2e/v96-input-and-focus.spec.mjs": "82a7c850e48b9b9b92370e6c30c7b9c3bbe0d229be59acad9852e8d73d0cbd3d",
+    "frontend/package-lock.json": "6096da09dd512d336c7c16c9b6ac075378b73be1a5ee10fced2de1e63c434761",
+    "frontend/src/screens/AlchimieExplore.tsx": "af90894a6646eac7afa8e76b8daf7f293b83f199c58a5cb912ea84154d97ab5c"
+  },
+  "unresolved_findings": [],
+  "verdict": "accept"
+}

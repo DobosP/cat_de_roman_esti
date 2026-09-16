@@ -1,0 +1,257 @@
+{
+  "application_source_sha256": "af90894a6646eac7afa8e76b8daf7f293b83f199c58a5cb912ea84154d97ab5c",
+  "diagnosis": "A race while removing the final one-shot network handler is the leading explanation, not yet proven causal until a stable-handler controlled rerun.",
+  "kind": "v96-ci-independent-diagnosis-v1",
+  "manifest_sha256": "ec5724d7afb7f49ae6ad367648676a071f0d0751b82d27ae39278e98fde0004d",
+  "no_product_or_test_edits_by_reviewer": true,
+  "observations": [
+    "Both reproduced failures deliver Enter, commit a combine through route.fetch with HTTP200 and abort the browser response as intended.",
+    "The application immediately starts the authoritative recovery GET. The GET remains pending without headers or failure until timeout; UI remains busy.",
+    "This rules out missing keyboard activation, lost selection or no recovery request for these reproductions.",
+    "Installed Playwright _onRoute removes a times-limited handler before handle completes, then asynchronously changes interception patterns once the last handler returns. The Chromium implementation toggles Fetch.disable and cache state."
+  ],
+  "original_repeat_log_sha256": "b012eab1b55e6336bf9f2eeb40f57eacaf896582c735b4f3f34bf27138631499",
+  "playwright_core_source_sha256": "549070af3acabb3efcc4f55bfe6210f9f7c2fcf633cf7eaa59bfe60719969171",
+  "proposed_bounded_fix": "Keep the interception handler registered until test-context teardown. Fail exactly one matching combine using an explicit boolean; continue subsequent requests. Keep response waiters registered before activation and explicitly verify backend commit. Scrolling/readiness assertions may strengthen keyboard intent but do not explain this traced failure.",
+  "reviewer": "codex-v96-world-independent",
+  "run_result": {
+    "failed": 2,
+    "interrupted": 1,
+    "not_run": 10,
+    "passed": 7
+  },
+  "test_source_sha256": "4346b27dd71cec0627d02e51b0c6c0d579c08b302900cbe4dfab0bbfa36c0493",
+  "traces": [
+    {
+      "abort": [
+        {
+          "call_id": "call@38",
+          "ended": 9128.279,
+          "started": 9127.253
+        }
+      ],
+      "committed_combine_200": true,
+      "network_sequence": [
+        {
+          "duration": 7.3790000000000004,
+          "failure": null,
+          "method": "GET",
+          "path": "/api/alchimie/explore/expired-221-concept-kitchen-session",
+          "started": 8860.808,
+          "status": 404,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 18.323999999999998,
+          "failure": null,
+          "method": "POST",
+          "path": "/api/alchimie/explore",
+          "started": 8868.953,
+          "status": 200,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 26.28399999999965,
+          "failure": "net::ERR_FAILED",
+          "method": "POST",
+          "path": "/api/alchimie/explore/2d90033b-4ce7-406c-aba5-a50306e193da/combine",
+          "started": 9102.638,
+          "status": -1,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": -1,
+          "failure": null,
+          "method": "GET",
+          "path": "/api/alchimie/explore/2d90033b-4ce7-406c-aba5-a50306e193da",
+          "started": 9129.059,
+          "status": -1,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 17.436000000001513,
+          "failure": null,
+          "method": "POST",
+          "path": "/api/alchimie/explore/2d90033b-4ce7-406c-aba5-a50306e193da/combine",
+          "started": 9106.801,
+          "status": 200,
+          "stream": "0-trace.network"
+        }
+      ],
+      "recovery_get_started_but_no_response": true,
+      "trace_path": "original-repeat-output/v96-input-and-focus-a-lost-63363-en-both-inputs-are-depleted-mobile-repeat4/trace.zip",
+      "trace_sha256": "da6ee52286f43e90e36a99ec918bb674be4184f726239d22906ebc576b1ea1ab",
+      "ui_events": [
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Lipie(?:,|$)/ })",
+          "time": 8937.008,
+          "title": "Click"
+        },
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Friptură(?:,|$)/ })",
+          "time": 9068.474,
+          "title": "Focus"
+        },
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Friptură(?:,|$)/ })",
+          "time": 9087.458,
+          "title": "Press \"Enter\""
+        }
+      ]
+    },
+    {
+      "abort": [
+        {
+          "call_id": "call@38",
+          "ended": 56141.258,
+          "started": 56140.322
+        }
+      ],
+      "committed_combine_200": true,
+      "network_sequence": [
+        {
+          "duration": 4.792,
+          "failure": null,
+          "method": "GET",
+          "path": "/api/alchimie/explore/expired-221-concept-kitchen-session",
+          "started": 55934.92,
+          "status": 404,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 12.324,
+          "failure": null,
+          "method": "POST",
+          "path": "/api/alchimie/explore",
+          "started": 55940.514,
+          "status": 200,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 25.993000000002212,
+          "failure": "net::ERR_FAILED",
+          "method": "POST",
+          "path": "/api/alchimie/explore/393170b4-66b8-4d69-9ccb-ccbe9104fefc/combine",
+          "started": 56116.237,
+          "status": -1,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": -1,
+          "failure": null,
+          "method": "GET",
+          "path": "/api/alchimie/explore/393170b4-66b8-4d69-9ccb-ccbe9104fefc",
+          "started": 56142.496,
+          "status": -1,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 17.81300000000192,
+          "failure": null,
+          "method": "POST",
+          "path": "/api/alchimie/explore/393170b4-66b8-4d69-9ccb-ccbe9104fefc/combine",
+          "started": 56119.3,
+          "status": 200,
+          "stream": "0-trace.network"
+        }
+      ],
+      "recovery_get_started_but_no_response": true,
+      "trace_path": "original-repeat-output/v96-input-and-focus-a-lost-63363-en-both-inputs-are-depleted-mobile-repeat6/trace.zip",
+      "trace_sha256": "cbc927635cb31cfa86f6c9d22e25b41637fa73d1466bace68153a0e14a522b36",
+      "ui_events": [
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Lipie(?:,|$)/ })",
+          "time": 55980.573,
+          "title": "Click"
+        },
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Friptură(?:,|$)/ })",
+          "time": 56091.88,
+          "title": "Focus"
+        },
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Friptură(?:,|$)/ })",
+          "time": 56103.305,
+          "title": "Press \"Enter\""
+        }
+      ]
+    },
+    {
+      "abort": [
+        {
+          "call_id": "call@38",
+          "ended": 105079.039,
+          "started": 105078.486
+        }
+      ],
+      "committed_combine_200": true,
+      "network_sequence": [
+        {
+          "duration": 6.591,
+          "failure": null,
+          "method": "GET",
+          "path": "/api/alchimie/explore/expired-221-concept-kitchen-session",
+          "started": 104820.778,
+          "status": 404,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 21.523999999999997,
+          "failure": null,
+          "method": "POST",
+          "path": "/api/alchimie/explore",
+          "started": 104830.028,
+          "status": 200,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 25.177999999999884,
+          "failure": "net::ERR_FAILED",
+          "method": "POST",
+          "path": "/api/alchimie/explore/11204318-d389-422a-b6f7-78dbee1954b3/combine",
+          "started": 105054.947,
+          "status": -1,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": -1,
+          "failure": null,
+          "method": "GET",
+          "path": "/api/alchimie/explore/11204318-d389-422a-b6f7-78dbee1954b3",
+          "started": 105080.485,
+          "status": -1,
+          "stream": "1-trace.network"
+        },
+        {
+          "duration": 16.2329999999929,
+          "failure": null,
+          "method": "POST",
+          "path": "/api/alchimie/explore/11204318-d389-422a-b6f7-78dbee1954b3/combine",
+          "started": 105059.315,
+          "status": 200,
+          "stream": "0-trace.network"
+        }
+      ],
+      "recovery_get_started_but_no_response": true,
+      "trace_path": "original-repeat-output/v96-input-and-focus-a-lost-63363-en-both-inputs-are-depleted-mobile-repeat9/trace.zip",
+      "trace_sha256": "54e764e907de70f952b734e3732f772820939523ce2dece6c684d1866ae83c1a",
+      "ui_events": [
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Lipie(?:,|$)/ })",
+          "time": 104885.915,
+          "title": "Click"
+        },
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Friptură(?:,|$)/ })",
+          "time": 105021.266,
+          "title": "Focus"
+        },
+        {
+          "locator": "locator('.alchemy-inventory-grid').getByRole('button', { name: /^Friptură(?:,|$)/ })",
+          "time": 105038.311,
+          "title": "Press \"Enter\""
+        }
+      ]
+    }
+  ]
+}
