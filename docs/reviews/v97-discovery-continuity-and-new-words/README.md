@@ -65,3 +65,7 @@ serving artifacts. Prototype checks are evidence for design review, not a releas
 V97 also incorporates the subsequent [V96 test-only CI correction](../v96-words-and-input-clarity/ci-recovery/README.md)
 at main `fd3ca7c`. All ten baseline application/data artifact pins remain unchanged, so
 the earlier frozen content and compatibility proposals remain bound to their original baseline.
+
+[An additional inherited-code confidence run](ci-followup/confidence-review.json) passed
+120 V96 browser cases (60 desktop/60 mobile) without further changes. This tests the
+landed V96 correction; it is not V97 implementation or content approval.

@@ -1,0 +1,38 @@
+{
+  "bindings": {
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "ec5724d7afb7f49ae6ad367648676a071f0d0751b82d27ae39278e98fde0004d",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/contexto.py": "cae2e1115491ba5cf6438de5dac7a2689087e1c13fa80efcc86e35acef9d1101",
+    "frontend/e2e/v96-input-and-focus.spec.mjs": "82a7c850e48b9b9b92370e6c30c7b9c3bbe0d229be59acad9852e8d73d0cbd3d",
+    "frontend/package-lock.json": "6096da09dd512d336c7c16c9b6ac075378b73be1a5ee10fced2de1e63c434761",
+    "frontend/src/screens/AlchimieExplore.tsx": "af90894a6646eac7afa8e76b8daf7f293b83f199c58a5cb912ea84154d97ab5c"
+  },
+  "changes_made": [],
+  "commit": "9181cb23f3f55c35f573df633a54fdb1d1cd5b49",
+  "draft_manifest_untouched": true,
+  "evidence": {
+    "input-pins.json": "770c4898180e34df5092f1a8f94f91a892fefc926074e4574c13896fca5f916d",
+    "npm-ci.log": "da68658a58402877195f736178d6c1492617ae6078c53633423a7715665089af",
+    "repeat-all.log": "2d8bc6e3e11e5eff6ed8e731bfdc19d383f28770cc5f1e03b0eacb1b9415a3c4"
+  },
+  "kind": "v96-inherited-ci-fix-confidence-v1",
+  "limitations": "Finite repeat evidence cannot guarantee absence of future flakes. Replacement remote CI remains a separate gate.",
+  "recommendation": "No further code or test changes recommended from this confidence run. The remaining one-shot scenarios did not reproduce the deep-case failure.",
+  "results": {
+    "contexto_input_cases": 20,
+    "desktop": 60,
+    "failures": 0,
+    "mobile": 60,
+    "one_shot_committed_uncommitted_cases": 80,
+    "pending_get_reproductions": 0,
+    "persistent_deep_recovery_cases": 20,
+    "repeats_per_case": 10,
+    "reported_duration": "1.9m",
+    "total": 120
+  },
+  "reviewer": "codex-v96-world-independent",
+  "scope": "Inherited V96 test-only correction in V97 kickoff checkout; not V97 runtime implementation or content approval.",
+  "test_sha256": "82a7c850e48b9b9b92370e6c30c7b9c3bbe0d229be59acad9852e8d73d0cbd3d",
+  "verdict": "pass",
+  "worktree_clean_after": true
+}
