@@ -1,0 +1,65 @@
+"""Author-only conditional selection proof; raw candidates remain unapproved/uninstalled."""
+import copy,hashlib,json,os,sys
+from pathlib import Path
+from unittest.mock import patch
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');O=Path(__file__).resolve().parent
+sys.path[:0]=[str(R),str(R/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings');os.environ.setdefault('CAT_DEBUG','1')
+import django;django.setup()
+import critique_pack as C,rank_games_pack as K
+from django.test import Client
+from cat_de_roman_esti.wordgames import conexiuni,contexto,lant,packs
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+bound=['cat_de_roman_esti/fixtures/'+n for n in ['kg_sample.json','games_pack.json','board_rankings_v37.json','derived_catalog_v38.json']]+['cat_de_roman_esti/wordgames/'+n for n in ['packs.py','conexiuni.py','contexto.py','lant.py']]
+bindings={n:sha(R/n) for n in bound}
+base,svc,strong,regions=C.load_all(C.PACKAGE_PACK,C.PACKAGE_KG)
+records=json.loads((O/'preview-records.json').read_bytes())['records'];dossiers=json.loads((O/'preview-dossiers.json').read_bytes());rows=copy.deepcopy(json.loads((R/'cat_de_roman_esti/fixtures/board_rankings_v37.json').read_bytes())['boards']);prospective=copy.deepcopy(base)
+specs=[]
+for pending in records:
+ game=next(g for g in ['conexiuni','contexto','lant'] if f'_{g}_' in pending['id']);rec=copy.deepcopy(pending);rec['status']='approved'
+ dossier=dossiers[rec['id']];familiarity=K.romanian_familiarity(game,dossier,lambda n:K._service_salience(svc,n));quality=K.play_quality(game,rec,dossier,lambda a,b:K._service_edge_strength(svc,a,b))
+ eligible=K._pilot_eligible(rec,game,dossier,svc,K._owner_demotions());assert eligible
+ rows.append({'id':rec['id'],'game':game,'status':'approved','romanian_familiarity':familiarity,'play_quality':quality,'pilot_score':K._bounded_score(.6*familiarity+.4*quality),'rank':0,'pilot_eligible':eligible,'selection_weight':1})
+ prospective[game].append(rec);specs.append((game,rec))
+with patch.object(K,'_score_rows',return_value=(rows,prospective)):
+ ranking=K.generate_rankings()
+preview=packs.GamesPack(packs._parse_items(prospective,{r['id']:r for r in ranking['boards']}),ranked=True)
+results=[]
+for game,rec in specs:
+ module={'conexiuni':conexiuni,'contexto':contexto,'lant':lant}[game];client=Client();rating=next(r for r in ranking['boards'] if r['id']==rec['id'])
+ with patch.object(module,'get_pack',return_value=preview):
+  for seed in range(3000):
+   url=f"/api/wordgames/{game}/games?category={rec['category']}&difficulty={rec['difficulty']}&seed={seed}"
+   response=client.post(url,{},content_type='application/json');assert response.status_code==200,response.content
+   state=response.json();sid=state['game_id'];session=module.store.get(sid)
+   if session.pack_id==rec['id']:break
+   module.store.delete(sid)
+  else:raise AssertionError('prospective candidate never chosen')
+  endpoint=f'/api/wordgames/{game}/games/{sid}'
+  def post(action,payload):
+   response=client.post(endpoint+'/'+action,payload,content_type='application/json');assert response.status_code==200,response.content;return response.json()
+  result={'preview_id':rec['id'],'natural_seed_inside_prospective_inventory':seed,'public_create_url':url,'rating':rating,'independent_review':False,'currently_served':False}
+  if game=='conexiuni':
+   for group in rec['groups'].values():state=post('guess',{'ids':group});assert state['correct']
+   assert state['won'];result['groups_solved']=4
+  elif game=='contexto':
+   steps=[]
+   for text in ['casă','cheie','fereastră','a deschide','uși']:
+    state=post('guess',{'text':text});steps.append({'text':text,'guess':state.get('guess'),'won':state['won']})
+   assert state['won'];result['opener_feedback']=steps
+  else:
+   result['corridor_profile']=lant._corridor_profile(rec['start'],rec['target'],rec['optimal']);item=next(i for i in preview.pool('lant') if i.id==rec['id']);result['wide_beginner_preference']=lant._is_wide_beginner_item(item)
+   assert result['wide_beginner_preference']
+   routes=[]
+   for mid in svc.neighbor_ids(rec['start']):
+    if svc.distance(mid,rec['target'])!=1:continue
+    if routes:
+     response=client.post(url,{},content_type='application/json');state=response.json();sid=state['game_id'];endpoint=f'/api/wordgames/{game}/games/{sid}';assert module.store.get(sid).pack_id==rec['id']
+    path=[rec['start'],mid,rec['target']]
+    for n in path[1:]:state=post('move',{'text':svc.label(n)});assert state['ok']
+    assert state['won'];routes.append({'labels':[svc.label(n) for n in path],'captions':[step['relation'] for step in state['path'][1:]],'raw_edge_captions':[svc.link_label(a,b) for a,b in zip(path,path[1:])],'score':state['score']});module.store.delete(sid)
+   assert len(routes)==2;result['routes']=routes
+  result['won']=state['won'];results.append(result);module.store.delete(sid)
+assert bindings=={n:sha(R/n) for n in bound}
+(O/'prospective-selection.json').write_text(json.dumps({'status':'UNAPPROVED V97 DRAFTS','scope':'Conditional author simulation of all 713 current records plus these three drafts under hypothetical approval. Only in-memory pack provider and score-input data are injected; actual weighted public selectors and corridor policy run unchanged. No session target, picker return value, fixture, score or runtime is forced. Real installed natural selection still requires independent approval, import, ranking and a final public replay.','source_bindings_unchanged':bindings,'candidate_files':{str(p.relative_to(O)):sha(p) for p in sorted((O/'candidates').glob('*/candidates.json'))},'results':results},ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(results,ensure_ascii=False,indent=2))

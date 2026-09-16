@@ -1,0 +1,14 @@
+exec(open('/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/pack/scout.py').read().split('for n in k')[0])
+cl=Client()
+for label,guesses in [('Muzeu',['artă','cultură','istorie','tablou','pictură','expoziție','galerie','muzeul satului','Antipa','Brukenthal']),('Ceapă',['legume','mâncare','salată','supă','usturoi','morcov','sarmale','zacuscă']),('Buletin',['act','identitate','document','pașaport','cetățenie','CNP','poliție','permis de conducere']),('ușă',['casă','intrare','cheie','fereastră','cameră','a deschide','interfon','baie'])]:
+ target=s.resolve(label);ss=contexto._build_session(target,'usor',None);sid=contexto.store.create(ss);steps=[]
+ for text in guesses:
+  out=cl.post(f'/api/wordgames/contexto/games/{sid}/guess',{'text':text},content_type='application/json').json();steps.append((text,out.get('guess',{}).get('rank'),out.get('guess',{}).get('temperature'),out.get('ok')))
+ print('TARGET',label,'previousraw',[path for path,row in raw['contexto'] if row['target']==target],steps,'description',s.node(target).description)
+for a,b in [('Scorțișoară','Măr'),('Cacao','Lapte'),('Brânză','Stafide'),('Mălai','Brânză'),('Albuș','Frișcă'),('Cuptor de bucătărie','Dulceață'),('Fasole','Ceapă'),('Frigider','Ou'),('Praf','Cuptor de bucătărie'),('Făină','Frișcă'),('Ou','Tort Diplomat'),('Zahăr','Măr')]:
+ start,target=s.resolve(a),s.resolve(b);distance=s.distance(start,target)
+ if distance!=2:print('ROUTE',a,b,'distance',distance);continue
+ mids=[n for n in s.neighbor_ids(start) if s.distance(n,target)==1]
+ pairs=p['lant']+C.load_lant_rejection_tombstones()+[row for _,row in raw['lant']]
+ used=any({x['start'],x['target']}=={start,target} for x in pairs)
+ print('ROUTE',a,b,'mids',[s.label(n) for n in mids],'used',used,'profile',lant._corridor_profile(start,target,2))

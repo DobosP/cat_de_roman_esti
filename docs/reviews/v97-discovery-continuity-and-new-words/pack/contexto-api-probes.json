@@ -1,0 +1,147 @@
+{
+  "scope": "Author fixed-target API probes, not independent review or public selection.",
+  "targets": [
+    {
+      "target": "n_v4via_usa",
+      "label": "ușă",
+      "incoming": [
+        {
+          "id": "n_v2via_casa_parinteasca",
+          "label": "Casa părintească"
+        },
+        {
+          "id": "n_v4soc_casa",
+          "label": "casă"
+        },
+        {
+          "id": "n_v4via_baie",
+          "label": "baie"
+        },
+        {
+          "id": "n_v4via_cheie",
+          "label": "cheie"
+        },
+        {
+          "id": "n_vdr_cheia_de_la_gat",
+          "label": "Cheia de la gât"
+        },
+        {
+          "id": "n_vdr_interfon",
+          "label": "Interfonul"
+        },
+        {
+          "id": "n_vdr_scara_blocului",
+          "label": "Scara blocului"
+        }
+      ],
+      "reachable": 2353,
+      "responsive": 1902,
+      "steps": [
+        {
+          "text": "casă",
+          "guess": {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "cheie",
+          "guess": {
+            "id": "n_v4via_cheie",
+            "label": "cheie",
+            "distance": 1,
+            "rank": 7,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "fereastră",
+          "guess": {
+            "id": "n_v24_home_surfaces_fereastra",
+            "label": "Fereastră",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "cameră",
+          "guess": {
+            "id": "n_v24_home_rooms_camera",
+            "label": "Cameră",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "a deschide",
+          "guess": {
+            "id": "n_v24_action_home_a_deschide",
+            "label": "A deschide",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "won": false
+        },
+        {
+          "text": "interfon",
+          "guess": {
+            "id": "n_vdr_interfon",
+            "label": "Interfonul",
+            "distance": 1,
+            "rank": 6,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 6
+          },
+          "won": false
+        },
+        {
+          "text": "baie",
+          "guess": {
+            "id": "n_v4via_baie",
+            "label": "baie",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 7
+          },
+          "won": false
+        },
+        {
+          "text": "ușă",
+          "guess": {
+            "id": "n_v4via_usa",
+            "label": "ușă",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 8
+          },
+          "won": true
+        }
+      ]
+    }
+  ]
+}

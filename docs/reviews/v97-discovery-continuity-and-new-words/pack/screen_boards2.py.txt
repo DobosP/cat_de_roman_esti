@@ -1,0 +1,23 @@
+exec(open('/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/pack/scout.py').read().split('for n in k')[0])
+import copy,itertools
+options=[('Rude de sex masculin',['Tată','Frate','Unchi','Nepot']),('Pe față, în pereche',['Obraz','Nară','Sprânceană','Pleoapă']),('Se îmbracă',['Haină','Cămașă','Pantaloni','Rochie']),('Se conectează la priză',['Frigider','Mixer de bucătărie','Congelator','Lampă']),('Pe cer',['Lună','Nor','Curcubeu','Fulger']),('Se bat',['Covor','Ou','Fasole','Frișcă']),('Pot fi electrice',['Chitară','Tren','Cuptor de bucătărie','Bicicletă']),('Transportă mărfuri',['Camion','Vapor','Roabă','Tren']),('Se umplu în rețete',['Ardei','Gogoși','Clătite','Ou'])]
+valid=[]
+for title,labels in options:
+ ids=[s.resolve(x) for x in labels]
+ if not all(ids):print('MISSING',title,labels,ids);continue
+ overlaps=[]
+ for scope,rs in [('served',p['conexiuni']),('rejected',C.load_rejection_tombstones()),('raw',[row for _,row in raw['conexiuni']])]:
+  for row in rs:
+   groups=list(row['groups'].values()) if isinstance(row['groups'],dict) else [g['tiles'] for g in row['groups']]
+   for group in groups:
+    if len(set(ids)&set(group))>=3:overlaps.append((scope,[s.label(n) for n in group]))
+ print('GROUP',title,'OVERLAP',overlaps[:2])
+ if not overlaps:valid.append((title,ids))
+for idx,groups in enumerate(itertools.combinations(valid,4)):
+ rec=dict(id=f'preview_v97_cx_{idx}',difficulty='normal',category='viata_de_roman',status='pending',source='ai',groups={f'g{i}':ids for i,(_,ids) in enumerate(groups)},group_labels={f'g{i}':title for i,(title,_)in enumerate(groups)})
+ rec['order']=[n for q in rec['groups'].values() for n in q]
+ if len(set(rec['order']))!=16:continue
+ preview=copy.deepcopy(p);preview['conexiuni'].append(rec)
+ f,_,selected=C.run(preview,s,st,r,['conexiuni'],{'pending'},{rec['id']})
+ fails=[x for v in f.values() for x in v['findings'] if x['level']=='FAIL']
+ print('BOARD',[title for title,_ in groups],'FAIL',fails)

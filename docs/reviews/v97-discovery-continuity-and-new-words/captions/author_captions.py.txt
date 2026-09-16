@@ -1,0 +1,48 @@
+"""V97 caption drafting only. Exact snapshots; no graph or caption-registry writes."""
+from pathlib import Path
+import hashlib,json,subprocess,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+from cat_de_roman_esti.wordgames import lant_relations as L,quick_catalog as Q
+svc=get_service()
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(n,v):(OUT/n).write_bytes(Q.json_bytes(v))
+protected=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/wordgames/lant_relations.py','cat_de_roman_esti/wordgames/lant.py','cat_de_roman_esti/wordgames/service.py','docs/CRITIQUE_RUBRIC.md']
+pins={p:sha(ROOT/p) for p in protected};baseline=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+oven='https://media3.bsh-group.com/Documents/9001253126_A.pdf';crumb='https://dexonline.ro/definitie/firimitur%C4%83';diplomat='https://www.roberteisler.ro/retete/tort-diplomat';poale='https://www.lauralaurentiu.ro/retete-culinare/patiserie/branzoaice-reteta-video-placinte-poale-n-brau.html';pasca='https://www.lauralaurentiu.ro/retete-culinare/patiserie/pasca-traditionala-cu-branza-dulce.html'
+spec=[
+('lt_gastronomie_243','Cuptor de bucătărie','Pâine','cuptor și pâine coaptă',oven,'Manufacturer oven tables include bread baking; no temperature advice is imported.'),
+('lt_gastronomie_243','Pâine','Firimitură','pâine și bucățele desprinse',crumb,'Ordinary crumb meaning directly includes detached bread pieces.'),
+('lt_gastronomie_243','Cuptor de bucătărie','Biscuit','cuptor și biscuiți copți',oven,'Manufacturer oven tables include biscuits; the caption expresses appliance and baked food.'),
+('lt_gastronomie_243','Biscuit','Firimitură','biscuit și bucățele desprinse',crumb,'The general food-fragment sense covers biscuit pieces without claiming every bite sheds crumbs.'),
+('lt_gastronomie_244','Zahăr pudră','Frișcă','frișcă și îndulcitor opțional',diplomat,'The decoration combines cream with powdered sugar; sweetness is explicitly optional.'),
+('lt_gastronomie_244','Frișcă','Tort Diplomat','tort și frișca din cremă',diplomat,'Whipped cream is incorporated into this cake filling.'),
+('lt_gastronomie_244','Zahăr pudră','Pișcot','pișcot și zahăr de presărat',diplomat,'Ladyfingers are dusted before baking; this describes a supported variant.'),
+('lt_gastronomie_244','Pișcot','Tort Diplomat','tort și margine cu pișcoturi',diplomat,'Ladyfingers line the cake rings in this version, not every possible recipe.'),
+('lt_gastronomie_245','Vanilie','Poale-n brâu','plăcintă și aromă de vanilie',poale,'Vanilla flavors the cheese filling in this published version.'),
+('lt_gastronomie_245','Poale-n brâu','Brânză','plăcintă și umplutură de brânză',poale,'Cheese filling is enclosed in the folded pastry.'),
+('lt_gastronomie_245','Vanilie','Pască','pască și aromă de vanilie',pasca,'The traditional cheese version includes vanilla in dough and filling.'),
+('lt_gastronomie_245','Pască','Brânză','pască și umplutură de brânză',pasca,'This dough-based Easter pastry contains a sweet cheese filling; other versions exist.'),
+]
+pack=read(ROOT/protected[1]);kg=read(ROOT/protected[0]);raw_edges={r['id']:r for r in kg['kg_edges']} if 'kg_edges' in kg else {r['id']:r for r in kg['kg_links']}
+rows=[];visible=set();seen=set()
+for board,a_label,b_label,text,url,reason in spec:
+ a,b=svc.resolve(a_label),svc.resolve(b_label);assert a and b
+ pair=tuple(sorted((a,b)));assert pair not in seen and pair not in L.REVIEWED_CAPTIONS;seen.add(pair)
+ forward=svc.link(a,b);assert forward is not None and not forward.is_distractor
+ back=svc.link(b,a);snapshot=record_snapshot(forward);bound=digest(snapshot)
+ assert len(text)<=L.MAX_CAPTION_LENGTH and text.strip()==text
+ assert (back is not None)==forward.bidirectional
+ if back is not None:assert digest(record_snapshot(back))==bound
+ visible.update((a,b));r={'id':'v97_caption_'+forward.id,'status':'unapproved','board_id':board,'pair':list(pair),'pair_labels':[svc.label(n) for n in pair],'caption':text,'caption_length':len(text),'edge_snapshot':snapshot,'edge_snapshot_sha256':bound,'raw_kg_edge_snapshot':raw_edges[forward.id],'raw_kg_edge_sha256':digest(raw_edges[forward.id]),'sources':[url],'author_rationale':reason,'orientation_review':{'forward':{'from':a,'to':b,'graph_allows':True,'current_caption':L.caption(svc,a,b),'proposed_caption':text},'reverse':{'from':b,'to':a,'graph_allows':back is not None,'current_caption':L.caption(svc,b,a),'proposed_caption_if_existing_edge':text if back is not None else None},'wording_direction_independent':True,'reason':'Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.'}}
+ rows.append(r)
+assert len(rows)==12 and sum(r['edge_snapshot']['bidirectional'] for r in rows)==2
+boards={r['id']:r for r in pack['lant'] if r['id'] in {s[0] for s in spec}};assert len(boards)==3
+write('drafts.json',{'kind':'v97-earned-lant-caption-drafts-v1','status':'unapproved','baseline_commit':baseline,'bindings':pins,'caption_length_limit':L.MAX_CAPTION_LENGTH,'existing_caption_count_unchanged':len(L.REVIEWED_CAPTIONS),'scope':'Twelve existing edges on the two representative shortest paths of each V95/V96 food round. No graph, route, runtime or caption registry changes. Captions remain earned-only if a later reviewed implementation is accepted.','boards':boards,'items':rows,'withheld':[],'remaining_review_questions':['Independent factual and editorial acceptance of all twelve complete edge snapshots and short noun phrases.','Confirm that the five ingredient-variant captions are read as supported recipe relationships, not universal ingredient requirements.','Verify actual earned-path API and GET display at320px/200% without exposing future steps or hints.','On implementation, retain all101 existing captions exactly, both-direction truth for the2 bidirectional cheese edges, and neutral fallback for any changed edge snapshot.']})
+write('node-snapshots.json',{n:record_snapshot(svc.node(n)) for n in sorted(visible)})
+assert pins=={p:sha(ROOT/p) for p in protected}
+write('author-freeze.json',{'kind':'v97-caption-author-freeze-v1','status':'unapproved','baseline_commit':baseline,'protected_sources_unchanged':pins,'items':12,'allowed_direction_previews':14,'reverse_traversal_withheld_for_directed_edges':10,'existing_captions_unchanged':len(L.REVIEWED_CAPTIONS),'files':{n:sha(OUT/n) for n in ['author_captions.py','drafts.json','node-snapshots.json']}})
+print(json.dumps({'draft_sha256':sha(OUT/'drafts.json'),'items':12,'allowed_directions':14,'max_caption_length':max(len(s[3]) for s in spec),'unchanged_existing_captions':len(L.REVIEWED_CAPTIONS)},indent=2))

@@ -1097,3 +1097,28 @@ twelve final-evidence pins. All local gates pass: 2236 backend/53 accounts on ea
 The landing record precedes the authorized push. After remote proof, both previews move
 off the task worktree before verified V96 cleanup. V97 starts separately, with a required
 saved-book compatibility design before further recipe expansion. Production stays V91.
+
+
+## V97 compatibility, content and caption kickoff (2026-09-17)
+
+Valid until: baseline or proposal bytes change — then repeat affected checks.
+
+V96 was pushed on main 36db143 after all local gates passed; its verified branch/worktree
+and scratch were cleaned after both previews moved to main. V97 starts separately in
+feat/v97-discovery-continuity-and-new-words. It records three curated round drafts,
+two quick-board drafts, two Alchimie concepts/four recipes and twelve earned-caption
+proposals. All remain unapproved and no serving files or limits change.
+
+The compatibility design measures the existing eight-book registry and recommends
+reviewing a bounded 16-book registry plus generator byte guard, retaining 2 MiB. Its isolated
+prototype round-trips nine rule sets, checks 1,009 earned prefixes and rejects 315 newer-recipe
+forgeries. A reference encoding is smaller but needs a format migration. Projections are
+not a guarantee that arbitrary larger future books fit. Alchimie installation remains
+contingent on compatibility work and independent review.
+
+Author review revised a facial-part count claim and a potentially ambiguous quick pair;
+original quick evidence is preserved. Cacao→Lapte's Chec bridge means serving together,
+not a claimed ingredient. Twelve caption drafts retain exact edge/direction snapshots;
+ten unsupported reverse traversals are withheld. The kickoff archive contains 65 bound
+files. All ten landed serving-artifact pins remain exact; docs/whitespace checks apply,
+with no unnecessary application-suite rerun for this authoring-only change.

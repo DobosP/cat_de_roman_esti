@@ -1,0 +1,69 @@
+"""V97 unapproved author drafts; no runtime, editorial generator or fixture writes."""
+from pathlib import Path
+import gzip,hashlib,itertools,json,subprocess,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames import quick_catalog as Q
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog,load_derived_catalog
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.recipe_extensions import record_snapshot
+svc=get_service();weights=Q.graph_strengths(svc)
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(n,v):(OUT/n).write_bytes(Q.json_bytes(v))
+protected=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/fixtures/quick_games_v92.json','cat_de_roman_esti/fixtures/derived_catalog_v38.json','scripts/quick_game_content_source_v92.py','cat_de_roman_esti/wordgames/quick_catalog.py','cat_de_roman_esti/wordgames/lant_relations.py']
+pins={p:sha(ROOT/p) for p in protected};base=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+quick=read(ROOT/protected[2]);all_boards=get_derived_catalog()._boards
+assert len(quick['authored'])==83 and len(all_boards)==419
+
+def ids(labels):
+ out=[svc.resolve(s) for s in labels];assert all(out),labels;return out
+rows=[{'id':'iq92_v97_relatives','source_id':'aq92_v97_intrusul_relatives','game':'intrusul','category':'viata_de_roman','difficulty':'usor','payload':{'group_label':'Denumiri de rude','members':ids(['Frate','Soră','Unchi']),'intruder':ids(['Vecin'])[0]},'rationale':'Frate, soră și unchi denumesc relații de rudenie. Vecin numește apropierea locuinței, nu rudenia. O rudă poate locui alături, dar acest fapt nu transformă termenul vecin într-o denumire de rudă. Sunt folosite sensurile obișnuite ale identităților native, nu sensurile figurate sau religioase.','sources':['https://dexonline.ro/definitie/frate','https://dexonline.ro/definitie/sor%C4%83','https://dexonline.ro/definitie/unchi','https://dexonline.ro/definitie/vecin']},
+{'id':'pq92_v97_home_and_city','source_id':'aq92_v97_perechi_home_and_city','game':'perechi','category':'viata_de_roman','difficulty':'usor','payload':{'pairs':[
+ {'group_label':'Elemente care delimitează o cameră','members':ids(['Perete','Tavan'])},
+ {'group_label':'Mijloace de transport urban pe șine','members':ids(['Metrou','Tramvai'])},
+ {'group_label':'Acțiune și încăperea destinată preparării hranei','members':ids(['A găti','Bucătărie'])},
+ {'group_label':'Evaluare școlară și unitate de studiu','members':ids(['Examen','Lecție'])}]},
+'rationale':'Patru asocieri concrete: Perete–Tavan, Metrou–Tramvai, A găti–Bucătărie și Examen–Lecție. Lecțiile oferă conținut de învățat pentru o evaluare, fără a afirma că orice lecție este urmată de examen. Cele două vehicule sunt singurele mijloace de transport de pe tablă, iar peretele și tavanul sunt singurele elemente de construcție. Încăperea pentru gătit se leagă de acțiunea de preparare a hranei, nu de sensul reflexiv al împodobirii. Cuvintele denumesc sensurile obișnuite, nu toate sensurile figurate.','sources':['https://dexonline.ro/definitie/perete/definitii','https://dexonline.ro/definitie/tavan','https://dexonline.ro/definitie/metrou','https://dexonline.ro/definitie/tramvai','https://dexonline.ro/definitie/g%C4%83ti/definitii','https://dexonline.ro/definitie/buc%C4%83t%C4%83rie','https://dexonline.ro/definitie/examen','https://dexonline.ro/definitie/lec%C8%9Bie']}]
+write('candidates.json',{'kind':'v97-quick-author-draft-v1','status':'unapproved','baseline_commit':base,'bindings':Q.bindings(live=True),'boards':rows})
+archives=[];archive_files={}
+def collect(v,path):
+ if isinstance(v,dict):
+  if v.get('game') in ('intrusul','perechi') and isinstance(v.get('payload'),dict):
+   try:Q.visible_ids(v)
+   except (KeyError,TypeError):pass
+   else:archives.append((path,v));archive_files[path]=sha(ROOT/path)
+  for x in v.values():collect(x,path)
+ elif isinstance(v,list):
+  for x in v:collect(x,path)
+for p in sorted((ROOT/'docs/reviews').rglob('*.json'))+sorted((ROOT/'docs/reviews').rglob('*.json.gz')):
+ try:collect(json.loads(gzip.decompress(p.read_bytes())) if p.name.endswith('.gz') else read(p),str(p.relative_to(ROOT)))
+ except (ValueError,UnicodeError):pass
+served=[{'game':b.game,'payload':b.payload} for b in all_boards]
+def matchings(vs):
+ if not vs:return 1
+ a,*tail=vs
+ return sum(matchings([n for n in tail if n!=b]) for b in tail if weights.get(frozenset((a,b)),0)>=.6)
+checks=[]
+for row in rows:
+ visible=Q.visible_ids(row);prior=[r for r in served if r['game']==row['game']];history=[r for _,r in archives if r['game']==row['game']]
+ rating=Q.rate_board(row,svc,weights)
+ check={'id':row['id'],'rating':rating,'new_per_game_words':[svc.label(n) for n in visible if n not in {i for r in prior for i in Q.visible_ids(r)}],'maximum_served_overlap':max(len(set(visible)&set(Q.visible_ids(r))) for r in prior),'maximum_archived_overlap':max(len(set(visible)&set(Q.visible_ids(r))) for r in history)}
+ threshold=3 if row['game']=='intrusul' else 4
+ assert check['maximum_served_overlap']<threshold and check['maximum_archived_overlap']<threshold,check
+ if row['game']=='intrusul':
+  members=row['payload']['members'];odd=row['payload']['intruder'];check['inlier_strengths']=[weights[frozenset(p)] for p in itertools.combinations(members,2)];check['outlier_strengths']=[weights.get(frozenset((n,odd)),0) for n in members]
+  assert min(check['inlier_strengths'])>=.6 and max(check['outlier_strengths'])==0
+ else:
+  pairs={frozenset(p['members']) for p in row['payload']['pairs']};assert not pairs & {frozenset(p['members']) for r in prior+history for p in r['payload']['pairs']}
+  check['intended_strengths']=[weights[frozenset(p['members'])] for p in row['payload']['pairs']];check['maximum_cross_strength']=max(weights.get(frozenset(p),0) for p in itertools.combinations(visible,2) if frozenset(p) not in pairs);check['native_perfect_matchings']=matchings(visible)
+  assert check['native_perfect_matchings']==1 and check['maximum_cross_strength']==0
+ checks.append(check)
+ratings=Q.rated_boards(quick['authored']+rows,load_derived_catalog(),svc);assert len(ratings)==85
+for old,new in zip(quick['boards'],ratings[:83],strict=True):assert {k:v for k,v in old.items() if k not in ('standard_rank','starter_rank')}=={k:v for k,v in new.items() if k not in ('standard_rank','starter_rank')}
+write('author-proof.json',{'status':'unapproved author checks only; no independent review or installation','candidate_sha256':sha(OUT/'candidates.json'),'served_core_compared':336,'served_authored_compared':83,'served_total_compared':419,'archived_rows_compared':len(archives),'archive_file_sha256':archive_files,'checks':checks,'old83_authored_payloads_and_nonranking_scores_exact':True,'all85_proposed_ratings_pass':True,'notes':['Candidate novelty includes compressed archived JSON and all supported raw/served/rejected quick records.','The scorer/native unique matching is evidence, not a semantic approval.','No forced score, starter override, fixture or generator change.']})
+visible={n for row in rows for n in Q.visible_ids(row)}
+write('node-snapshots.json',{n:record_snapshot(svc.node(n)) for n in sorted(visible)})
+assert pins=={p:sha(ROOT/p) for p in protected}
+write('author-freeze.json',{'kind':'v97-quick-author-freeze-v1','status':'unapproved','baseline_commit':base,'protected_sources_unchanged':pins,'files':{n:sha(OUT/n) for n in ['author_quick.py','candidates.json','author-proof.json','node-snapshots.json']},'remaining_review_questions':['Independent factual and quality review of both full rows and displayed native descriptions.','Verify the relatives predicate concerns term meanings even though an actual relative may also live nearby.','Try alternate human-semantic pairings among household, transport and school words; native matching uniqueness alone is insufficient.','If approved later, repeat final starter selection and wrong/repeat/hint/GET recovery against the actual catalog.']})
+print(json.dumps({'candidate_sha256':sha(OUT/'candidates.json'),'archived_rows_compared':len(archives),'checks':checks},ensure_ascii=False,indent=2))
