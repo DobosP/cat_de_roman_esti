@@ -1083,3 +1083,17 @@ original recipe; no vegan claim is made. Generic Lanț captions remain a future 
 All eight historical-book slots are now occupied: V97 must address compatibility before
 adding recipes. Final assembled counts, checks and publication proof belong in STATUS
 and docs/reviews/v96-words-and-input-clarity/integration/verification.json.
+
+
+## V96 main landing and V97 authorization (2026-09-17)
+
+Valid until: a later landing changes these inputs — then treat as history.
+
+The owner requested landing V96 and starting V97. Main fast-forwards from 1457786 through
+kickoff 15e7561 and completed implementation 57d5bcc. The final integration receipt verifies
+183 archived records, 43 changed inputs, 14 removed assets, ten installed-artifact pins and
+twelve final-evidence pins. All local gates pass: 2236 backend/53 accounts on each Python,
+540 browser, 212 native, validators, lint, build, bundle119.23/120 KiB, docs and whitespace.
+The landing record precedes the authorized push. After remote proof, both previews move
+off the task worktree before verified V96 cleanup. V97 starts separately, with a required
+saved-book compatibility design before further recipe expansion. Production stays V91.
