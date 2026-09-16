@@ -1,0 +1,113 @@
+from pathlib import Path
+import hashlib,json,re
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');SRC=Path(__file__).parent;OUT=ROOT/'docs/reviews/v96-words-and-input-clarity/integration';BASE='14577863038378c734c7b2e0e8b33ea8158f318b'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def count(log):
+ text=(SRC/log).read_text();assert not re.search(r'\b[1-9]\d* failed\b',text),log
+ m=re.search(r'(\d+) passed',text);assert m,log;return int(m[1])
+checks={}
+for key,log,n in [('backend312','backend312.log',2236),('backend314','backend314.log',2236),('accounts312','accounts312.log',53),('accounts314','accounts314.log',53),('browser','browser-tests.log',540)]:
+ assert count(log)==n;(checks.update({key:{'passed':n,'log':log+'.gz','sha256':sha(OUT/(log+'.gz'))}}))
+assert 'pass 212' in (SRC/'gui/frontend-tests.log').read_text()
+checks['frontend_native']={'passed':212,'log':'gui/frontend-tests.log.gz','sha256':sha(OUT/'gui/frontend-tests.log.gz')}
+for log,marker in [('ruff.log','All checks passed!'),('validate-pack.log','games pack GREEN'),('validate-kg.log','GREEN'),('gui/frontend-build.log','119.23 KiB  total')]:assert marker in (SRC/log).read_text(),log
+prior=json.loads((ROOT/'docs/reviews/v95-discovery-and-game-quality/verification.json').read_bytes());pins={p:sha(ROOT/p) for p in prior['artifact_sha256']}
+evidence=['alchimie/final-factual.json','alchimie/final-quality.json','alchimie/live-audit.json','alchimie/installation-receipt.json','alchimie/independent-ui-review.json','quick/final-factual.json','quick/final-quality.json','quick/live-audit.json','quick/installation-receipt.json','pack/independent-final-api.json','closure-audit.json','preview-check.json']
+record={'kind':'v96-complete-integration-v1','date':'2026-09-17','baseline_commit':BASE,'passed':True,'checks':checks,'artifact_sha256':pins,'final_evidence_sha256':{p:sha(OUT/p) for p in evidence},'artifact_delta_sha256':sha(OUT.parent/'artifact-delta.json'),'archive_manifest_sha256':sha(OUT/'archive-manifest.json'),'archive_records':len(json.loads((OUT/'archive-manifest.json').read_bytes())['files']),'gate_inputs_sha256':sha(OUT/'gate-inputs.json'),'additions':{'conexiuni':1,'contexto':1,'lant':1,'intrusul':1,'perechi':1,'alchimie_concepts':2,'alchimie_recipes':5},'fresh_per_game_words':{'conexiuni':7,'intrusul':3,'perechi':4},'new_shared_KG_nodes':0,'other_gates':['fixture validator','pack validator','Ruff','frontend lint/typecheck/build','docs','staged whitespace'],'initial_gzip_kib':119.23,'initial_limit_kib':120,'initial_failures_preserved':['Tests during pack/rank/history transition fail closed on stale pins; final assembled inputs pass.','Similarity-only advice suppressed Nuci/Prafzz; refined rule retains useful spelling while rejecting unrelated aliases.','Visible-message browser assertion initially matched hidden announcer too; scoped locator resolves test ambiguity.','World restoration test initially treated dynamic ingredient availability as immutable; earned journal preservation assertion corrected.','Old sandwich-source excerpt did not establish assembly; direct original recipe checked with no vegan claim.'],'remaining':['Human enjoyment and physical-device acceptance unverified.','Generic earned Lanț captions remain a later review queue.','All eight historical-book slots are occupied; design compatibility before further recipe changes.'],'publication':{'v96_landed':False,'v96_pushed':False,'owner_authorized_landing_and_v97_start':True,'production_changed':False}}
+(OUT/'verification.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
+status='''# Status — cat_de_roman_esti
+
+Last verified: 2026-09-17 — V96 complete local candidate; all integration gates green.
+
+## Current state
+
+- Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
+- V95 landed on main `1457786`; [GitHub CI35026423470 passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35026423470).
+- The owner authorized V96 landing and V97 startup. V96's initial draft-only commit
+  `15e7561` is now completed with independently reviewed content and interface fixes.
+- **Five new rounds/targets, two Alchimie concepts and five recipes**: one each for
+  Conexiuni, Cald sau Rece, Lanț, Intrusul and Perechi. Fresh per-game exposures are
+  seven Conexiuni words, three Intrusul words and four Perechi words; shared KG is exact.
+- New Conexiuni groups cover parents/grandparents, drinks, opening for passage and
+  sharpening. Covor has useful floor/home/vacuum-cleaner openers. Lanț connects
+  Vanilie→Brânză through Poale-n brâu or Pască with a wide beginner corridor.
+- Alchimie: **249 concepts, 347 recipes,145 discoveries**. Ostropel and Salată de fructe
+  each have two recipes; Chiftele de legume gains an onward Sandviș route. Alternatives
+  grow97→99, intermediates63→64. Both new results are terminal.
+- Every prior247concept/342recipe record is exact. Eight starters,96supplies,twelve tiers
+  and32goals remain exact. Eight historical saved books preserve all earned progress.
+  The existing eight-book limit is now full: settle compatibility before further recipes.
+- Unsupported Cald sau Rece input explicitly costs no attempt. Advisory spelling uses
+  conservative displayed-label checks; Nuci/Prafzz help remains, while fier→fluier and
+  reparație→pârâu are withheld. Exact/fuzzy resolution, projections, scoring and privacy
+  stay unchanged; this adds no synonyms or missing vocabulary.
+- Alchimie lost-response GET recovery restores a usable activated word or collection
+  fallback, respecting focus moved elsewhere, save ownership and generation checks.
+  Mutations are never replayed; cached retries retain V95's synchronous focus handling.
+- Decision/evidence: [ADR-0154](adr/0154-expand-content-and-clarify-input-recovery.md),
+  [V96 final review](reviews/v96-words-and-input-clarity/README.md).
+
+## Inventory and invariants
+
+| Game | Total | Approved | Pending | Runtime eligible/preferred |
+|---|---:|---:|---:|---|
+| Conexiuni | 244 | 244 | 0 | 86 eligible |
+| Cald sau Rece | 264 | 262 | 2 | 258 eligible |
+| Lanțul Cuvintelor | 122 | 119 | 3 | 119 eligible |
+| Alchimie | 83 | 80 | 3 | 80 eligible |
+| Intrusul | 227 | 227 | 0 | 188 preferred |
+| Perechi | 192 | 192 | 0 | 152 preferred |
+
+Pack **713 =705 approved +8 pending**, with543eligible records. All710prior pack records,
+336core quick boards and81authored payloads/scores stay exact. The supplement now has83
+boards; both additions qualify as starters. Starter shelves:61Intrusul/60Perechi.
+All105Lanț rejection records and101custom captions remain exact; ranking metadata recomputes.
+KG/mobile: `fixture-v90-household-discovery`, **2416nodes/9459links/8641forms/180puzzles**.
+Sessions retain7200-second sliding TTL,1000entries/game,locks,64KiB requests and bounded
+histories/caches. Exploration stays≤256concepts/512recipes/256saved crafts, with128observed
+empty pairs per session; quick supplements≤256boards/2MiB. Recipes/routes/answers stay private.
+
+## Current artifact pins
+
+'''
+for rel,h in pins.items():status+=f'- {Path(rel).name}: `{h}`\n'
+status+='''
+## Verification
+
+- Python3.12 and3.14 each pass **2236backend/53account tests**; browser **540pass**,
+  native frontend **212pass**. Both validators,Ruff,frontend lint/typecheck/build,docs
+  and whitespace pass. Initial gzip **119.23/120KiB**.
+- [Final integration receipt](reviews/v96-words-and-input-clarity/integration/verification.json)
+  binds assembled inputs, exact artifacts, final approvals and preserved initial failures.
+- World lane:36wave/history and136catalog/exploration checks pass; final audit covers
+  all347recipes,33free/goal runs and eight historical books. Old247/342records are exact.
+- Quick:83natural winning replays plus both new recovery/starter journeys pass; all81
+  prior authored payloads/scores and 336 core boards remain exact.
+- All three pack additions select and win through public requests, including both Lanț
+  routes and wrong/repeat/hint/GET recovery. The strict five-artifact inverse restores
+  exact1457786bytes; all263previous target profiles remain exact. Only Lanț's browser
+  seeded start changes.
+- Input review:174focused feedback cases, independent60-case backend pass and12fresh
+  desktop/mobile focus/input journeys pass. Independent closure binds artifacts and code.
+- Preview8150 serves V96's249/347world;8160 retains V95's247/342world until landing.
+
+## Production and remaining work
+
+- Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`.
+  V96 landing/V97 startup are authorized; deployment is separate.
+- V97 must design saved-book compatibility before further Alchimie recipe changes.
+  More specific earned Lanț captions, missing common words and target calibration remain.
+- Existing Caraiman/museum/Dem/Ateneul description debt, Neagu labels and pending A5
+  holds remain. No earlier queue is silently approved. Human playtesting and device
+  acceptance remain; accounts stay off until DEPLOY gates pass.
+
+## Doc map
+
+- README/AGENTS:orientation;agent-map/agent-testing:routes/gates.
+- ADRs(newest0154),reviews and WORKLOG:decisions,evidence and history.
+'''
+# Space count prose, leaving hashes and identifiers intact.
+for a,b in [('CI350','CI 350'),('recipes,145','recipes, 145'),('grow97','grow 97'),('intermediates63','intermediates 63'),('prior247concept','prior 247 concept'),('/342recipe','/342 recipe'),('starters,96supplies,twelve','starters, 96 supplies, twelve'),('and32goals','and 32 goals'),('=705','= 705'),('+8','+ 8'),('with543eligible','with 543 eligible'),('All710prior','All 710 prior'),('336core','336 core'),('and81authored','and 81 authored'),('has83','has 83'),('shelves:61Intrusul/60Perechi','shelves: 61 Intrusul/60 Perechi'),('All105Lanț','All 105 Lanț'),('and101custom','and 101 custom'),('2416nodes/9459links/8641forms/180puzzles','2416 nodes/9459 links/8641 forms/180 puzzles'),('retain7200','retain 7200'),('TTL,1000entries/game,locks,64KiB','TTL, 1000 entries/game, locks, 64 KiB'),('stays≤256concepts/512recipes/256saved','stays ≤256 concepts/512 recipes/256 saved'),('with128observed','with 128 observed'),('supplements≤256boards/2MiB','supplements ≤256 boards/2 MiB'),('Python3.12 and3.14','Python 3.12 and 3.14'),('2236backend/53account','2236 backend/53 account'),('540pass','540 pass'),('212pass','212 pass'),('validators,Ruff,frontend','validators, Ruff, frontend'),('build,docs','build, docs'),('120KiB','120 KiB'),('lane:36wave','lane: 36 wave'),('and136catalog','and 136 catalog'),('all347recipes,33free','all 347 recipes, 33 free'),('Old247/342records','Old 247/342 records'),('Quick:83natural','Quick: 83 natural'),('all81','all 81'),('and336core','and 336 core'),('exact1457786bytes','exact 1457786 bytes'),('all263previous','all 263 previous'),('review:174focused','review: 174 focused'),('independent60-case','independent 60-case'),('and12fresh','and 12 fresh'),('Preview8150','Preview 8150'),("V96's249/347world;8160","V96's 249/347 world; 8160"),("V95's247/342world","V95's 247/342 world"),('README/AGENTS:orientation;agent-map/agent-testing:routes/gates','README/AGENTS: orientation; agent-map/agent-testing: routes/gates'),('ADRs(newest0154),reviews','ADRs (newest 0154), reviews'),('WORKLOG:decisions,evidence','WORKLOG: decisions, evidence')]:status=status.replace(a,b)
+assert len(status.splitlines())<=120
+(ROOT/'docs/STATUS.md').write_text(status)
+print({'checks':{k:v['passed'] for k,v in checks.items()},'status_lines':len(status.splitlines()),'archive_records':record['archive_records']})

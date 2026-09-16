@@ -1,0 +1,36 @@
+from pathlib import Path
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from scripts import build_quick_content_v92 as B
+from cat_de_roman_esti.wordgames.service import get_service
+Q=B.Q;IDENTITY='/root/v96_quick'
+def read(p):return json.loads(p.read_bytes())
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def write(n,v):(OUT/n).write_bytes(Q.json_bytes(v))
+prior=ROOT/'docs/reviews/v95-discovery-and-game-quality/quick'
+old=read(prior/'candidate.json');old_review=read(prior/'factual-review.json');old_catalog=read(prior/'catalog.json')
+full=read(OUT/'candidate.json');raw=read(OUT/'raw-candidates.json')
+assert full==B.candidate() and len(full['boards'])==83
+assert full['boards'][:81]==old['boards']==old_catalog['authored']
+assert full['boards'][81:]==raw['boards']
+assert (OUT/'raw-candidates.json').read_bytes()==(ROOT/'docs/reviews/v96-words-and-input-clarity/content/quick-draft.json').read_bytes()
+assert old_review['candidate_sha256']==sha(prior/'candidate.json')
+assert next(r['sha256'] for r in old_catalog['reviews'] if r['role']=='factual')==sha(prior/'factual-review.json')
+assert {r['id'] for r in old_review['items']}=={r['id'] for r in old['boards']}
+assert all(r['verdict']=='accept' and r['sources'] for r in old_review['items'])
+for key in ('kg_sha256','rubric_sha256','core_payload_sha256'):
+ assert full['bindings'][key]==old['bindings'][key]==raw['bindings'][key]==Q.bindings(live=False)[key]
+reasons={
+'iq92_v96_weather':('The original DEX/MDA dictionary senses locate a storm in atmospheric disturbance; NWS describes lightning as an electrical discharge through air and thunder as the resulting sound. NASA identifies the Moon as Earth’s natural satellite. The shared predicate therefore applies to all three phenomena and excludes the celestial body. It does not imply every storm has thunder or that the Moon is part of Earth’s atmosphere. Ordinary unqualified weather senses match the stored descriptions.',[
+'https://dexonline.ro/definitie/furtun%C4%83','https://www.weather.gov/safety/lightning-science-thunder','https://forecast.weather.gov/glossary.php?word=lightning','https://science.nasa.gov/moon/facts/']),
+'pq92_v96_nature_everyday':('Named dictionary definitions support a leaf as a plant organ, a branch as a stem ramification, banana as a fruit, and flour as milled cereal grain. The qualified leaf/branch label states a possible growing position, not a universal attachment rule. Cat and dog have familiar domestic senses and the European Commission explicitly treats both as companion animals. Wheat/flour states one ordinary production relation, without asserting all flour is wheat or classifying a banana plant as a tree. The native descriptions retain these ordinary senses.',[
+'https://dexonline.ro/definitie/frunz%C4%83','https://dexonline.ro/definitie/ramur%C4%83','https://dexonline.ro/definitie/c%C3%A2ine','https://dexonline.ro/definitie/pisic%C4%83','https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets_en','https://dexonline.ro/definitie/banan%C4%83','https://dexonline.ro/definitie/f%C4%83in%C4%83'])}
+items=[{'id':r['id'],'verdict':'accept','rationale':reasons[r['id']][0],'sources':reasons[r['id']][1]} for r in raw['boards']]
+svc=get_service();nodes={n:{'label':svc.label(n),'description':svc.node(n).description} for n in sorted({n for r in raw['boards'] for n in Q.visible_ids(r)})}
+write('factual-source-checks.json',{'kind':'quick-independent-factual-source-checks-v1','reviewer':IDENTITY,'checked_on':'2026-09-17','candidate_sha256':sha(OUT/'candidate.json'),'raw_candidate_sha256':sha(OUT/'raw-candidates.json'),'previous_candidate_sha256':sha(prior/'candidate.json'),'previous_factual_review_sha256':sha(prior/'factual-review.json'),'previous_catalog_sha256':sha(prior/'catalog.json'),'previous_81_records_exact':True,'previous_81_judgments_inherited_exactly':True,'kg_rubric_core_payload_bindings_exact':True,'new_rows_checked':2,'new_visible_nodes':nodes,'source_checks':items,'source_access_notes':['Original dictionary entries were read by paragraph after broad find hits exposed unrelated historical expressions. Only ordinary senses are relevant.','European Commission pet movement page redirects to the live-animal-movements page; only the explicit classification of dogs and cats as pets was used, not legal guidance.'],'scope':'Independent source verification and prior-review inheritance, not a final API or enjoyment claim.'})
+write('raw-factual-review.json',{'kind':B.REVIEW_KIND,'role':'factual','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'raw-candidates.json'),'items':items})
+write('factual-review.json',{'kind':B.REVIEW_KIND,'role':'factual','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'candidate.json'),'items':old_review['items']+items,'baseline_evidence':{'candidate_path':str((prior/'candidate.json').relative_to(ROOT)),'candidate_sha256':sha(prior/'candidate.json'),'factual_review_path':str((prior/'factual-review.json').relative_to(ROOT)),'factual_review_sha256':sha(prior/'factual-review.json'),'inherited_rows':81,'new_rows':2,'raw_factual_review_sha256':sha(OUT/'raw-factual-review.json'),'source_checks_sha256':sha(OUT/'factual-source-checks.json')}})
+B.read_review(OUT/'factual-review.json','factual',sha(OUT/'candidate.json'),{r['id'] for r in full['boards']})
+B.read_review(OUT/'raw-factual-review.json','factual',sha(OUT/'raw-candidates.json'),set(reasons))
+print(json.dumps({'accepted_new':2,'inherited_exact':81,'candidate_sha256':sha(OUT/'candidate.json'),'factual_sha256':sha(OUT/'factual-review.json')}))

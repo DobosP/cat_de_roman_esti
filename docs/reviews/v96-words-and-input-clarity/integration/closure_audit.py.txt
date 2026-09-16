@@ -1,0 +1,131 @@
+"""Read-only assembled V96 binding audit; prior review roles are disclosed."""
+from pathlib import Path
+from copy import deepcopy
+import gzip,hashlib,json,re,subprocess,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+from scripts import build_alchimie_discovery_world as W,build_quick_content_v92 as Q,critique_pack as C,apply_rereview as G
+from cat_de_roman_esti.wordgames import discovery_world as D
+from cat_de_roman_esti.wordgames.derived_catalog import load_derived_catalog,get_derived_catalog,DEFAULT_DERIVED_CATALOG_SHA256
+from cat_de_roman_esti.wordgames.service import get_service
+from tests.content_history import before_v96_artifact,_V96_RECEIPT
+from tests.current_content import CURRENT_CONTENT
+BASE='14577863038378c734c7b2e0e8b33ea8158f318b'
+KICK='15e7561'
+def sha(b):return hashlib.sha256(b).hexdigest()
+def file_sha(p):return sha(p.read_bytes())
+def read(p):return json.loads(p.read_bytes())
+def oldbytes(p,ref=BASE):return subprocess.check_output(['git','show',f'{ref}:{p}'],cwd=ROOT)
+def check(c,message):
+ if not c:raise AssertionError(message)
+checks={};source_hashes={};evidence_hashes={}
+for lane,builder,proposal in [('alchimie',W,'proposed-catalog.json'),('quick',Q,'catalog.json')]:
+ d=OUT/lane;c=builder.build_catalog(d/'candidate.json',d/'factual-review.json',d/'quality-review.json')
+ blob=builder.json_bytes(c) if lane=='alchimie' else builder.Q.json_bytes(c)
+ installed=builder.CATALOG if lane=='alchimie' else builder.Q.CATALOG_PATH
+ check((d/proposal).read_bytes()==blob==installed.read_bytes(),lane+' exact reviewed installed bytes')
+ builder.confirm_final_reviews(c,d/'live-audit.json',d/'final-factual.json',d/'final-quality.json')
+ check(c['reviews'][0]['reviewer']!=c['reviews'][1]['reviewer'],lane+' two semantic reviewers')
+ sources=builder.RUNTIME_SOURCES
+ for p in sources:source_hashes[p]=file_sha(ROOT/p)
+ receipt=read(d/'installation-receipt.json')
+ if lane=='alchimie':
+  for key,n in [('candidate_sha256','candidate.json'),('final_factual_sha256','final-factual.json'),('final_quality_sha256','final-quality.json'),('live_audit_sha256','live-audit.json')]:check(receipt[key]==file_sha(d/n),key)
+  check(receipt['installed_sha256']==file_sha(installed) and receipt['guarded_cli_write'],lane+' installreceipt')
+  world=D.validate_world(c);check(len(world.concepts)==249 and len(world.recipes)==347,'world counts')
+  check(len(c['compatible_versions'])==8,'world save generations')
+ else:
+  check(builder.Q.CATALOG_SHA256==file_sha(installed)==receipt['catalog_sha256'],'quick runtime pin')
+  for n,h in receipt['bound_inputs'].items():check(file_sha(d/n)==h,'quick receipt '+n)
+  check(receipt['runtime_sources']==builder.runtime_source_hashes() and receipt['bindings']==builder.Q.bindings(live=True),'quick receipt live bindings')
+  check(len(c['authored'])==len(c['boards'])==83,'quick count')
+  check(get_derived_catalog().counts()=={'intrusul':227,'perechi':192},'served quick counts')
+ for n in ('candidate.json','factual-review.json','quality-review.json',proposal,'live-audit.json','final-factual.json','final-quality.json','installation-receipt.json'):evidence_hashes[lane+'/'+n]=file_sha(d/n)
+ checks[lane]={'guarded_rebuild_exact':True,'current_final_approvals_exact':True,'reviewers':[r['reviewer'] for r in c['reviews']],'runtime_source_bindings':len(sources),'installed_sha256':file_sha(installed)}
+pack_path=ROOT/'cat_de_roman_esti/fixtures/games_pack.json';pack=read(pack_path);prior=json.loads(oldbytes(str(pack_path.relative_to(ROOT))))
+allocated=read(OUT/'pack/allocated-ids.json');ids=set().union(*(set(x) for x in allocated.values()))
+check(len(ids)==3 and sum(len(pack[g]) for g in C.GAME_KINDS)==713,'pack total713')
+for game in C.GAME_KINDS:
+ old={r['id']:r for r in prior[game]};new={r['id']:r for r in pack[game]}
+ check(all(new[i]==r for i,r in old.items()),game+' prior unchanged')
+ check(set(new)-set(old)==set(allocated[game]),game+' exact new ids')
+ check(all(new[i]['status']=='approved' for i in allocated[game]),game+' promoted')
+rank=read(ROOT/'cat_de_roman_esti/fixtures/board_rankings_v37.json')
+check(len(rank['boards'])==713 and sum(r['pilot_eligible'] for r in rank['boards'])==543,'rank count and eligible')
+check(rank['meta']['pack_sha256']==file_sha(pack_path),'rank pack binding')
+check(DEFAULT_DERIVED_CATALOG_SHA256==file_sha(ROOT/'cat_de_roman_esti/fixtures/derived_catalog_v38.json'),'derived runtime pin')
+check(len(load_derived_catalog()._boards)==336,'core derived boards')
+ledger_path=ROOT/'cat_de_roman_esti/fixtures/lant_rejection_tombstones.json';ledger=read(ledger_path)
+check(ledger_path.read_bytes()==oldbytes(str(ledger_path.relative_to(ROOT))) and len(ledger['items'])==105,'105 old ledger items exact')
+checks['inventory']={'pack_records':713,'rank_records':713,'eligible':543,'previous_pack_records_exact':710,'core_quick_boards':336,'rejection_ledger_items_exact':105}
+# Recreate the three exact pending records and independently recompute dossier content.
+pending=deepcopy(pack)
+for game in C.GAME_KINDS:
+ for row in pending[game]:
+  if row['id'] in ids:row['status']='pending'
+_,svc,strong,regions=C.load_all(C.PACKAGE_PACK,C.PACKAGE_KG)
+_,_,selected=C.run(pending,svc,strong,regions,list(C.GAME_KINDS),{'pending'},ids)
+check(not C.selection_errors(pending,list(C.GAME_KINDS),{'pending'},ids,selected),'selected exact batch')
+bindings={};dossiers={}
+for game,row,findings in selected:
+ check(not any(f['level']=='FAIL' for f in findings),'pending strict findings')
+ regenerated=C.build_dossier(row,game,svc,strong,findings,regions);p=OUT/'pack/dossiers'/f"{row['id']}.json"
+ check(regenerated==read(p),row['id']+' full frozen pending dossier exact')
+ for sub in ('verifier-dossiers','verdicts/dossiers'):check(regenerated==read(OUT/'pack'/sub/p.name),row['id']+' reviewer dossier exact')
+ bindings[row['id']]=regenerated['review_binding'];dossiers[row['id']]={'record_sha256':regenerated['record_sha256'],'review_binding':regenerated['review_binding'],'dossier_sha256':file_sha(p)}
+all_verdicts={}
+for game in ('conexiuni','contexto','lant'):
+ p=OUT/'pack/verdicts'/f'{game}_verdicts.json';data=read(p);verdicts,batch,bound=G.validated_artifact(data,game,p)
+ check(set(batch['input_ids'])==ids and batch['version']==2,'full V2 batch')
+ check(set(verdicts)==set(allocated[game]) and all(v=='promote' for v in verdicts.values()),game+' approved verdicts')
+ check(all(bindings[i]==h for i,h in bound.items()),game+' rebuilt dossier bindings')
+ roles=data['provenance'];check(roles['analyst']['reviewer']!=roles['verifier']['reviewer'],'independent pack role identities')
+ for role in ('analyst','verifier'):
+  origin=Path(roles[role]['path']);check(roles[role]['sha256']=='sha256:'+file_sha(origin),'pack provenance bytes')
+  evidence_hashes['pack/'+origin.name]=file_sha(origin)
+ all_verdicts.update(verdicts);evidence_hashes['pack/verdicts/'+p.name]=file_sha(p)
+check(set(all_verdicts)==ids,'complete approved batch')
+checks['pack_gate']={'version':2,'full_batch':sorted(ids),'all_three_artifacts_valid':True,'all_pending_dossiers_reproduced_exactly':True,'dossiers':dossiers}
+files={'kg_sample.json':'cat_de_roman_esti/fixtures/kg_sample.json','games_pack.json':'cat_de_roman_esti/fixtures/games_pack.json','board_rankings_v37.json':'cat_de_roman_esti/fixtures/board_rankings_v37.json','derived_catalog_v38.json':'cat_de_roman_esti/fixtures/derived_catalog_v38.json','cat_mobile_app_pack_contract.json':'tests/fixtures/cat_mobile_app_pack_contract.json'}
+inverses={}
+for name,relative in files.items():
+ current=read(ROOT/relative);untouched=deepcopy(current);restored=before_v96_artifact(current,name)
+ blob=(json.dumps(restored,ensure_ascii=False,indent=2 if name=='kg_sample.json' else 1)+'\n').encode()
+ check(blob==oldbytes(relative),'exact inverse bytes '+name);check(current==untouched,'nonmutating inverse '+name)
+ inverses[name]={'current_sha256':file_sha(ROOT/relative),'baseline_sha256':sha(blob),'exact_git_bytes':True};source_hashes[relative]=file_sha(ROOT/relative)
+checks['history']={'baseline_commit':BASE,'five_exact_nonmutating_inverses':inverses,'receipt_sha256':file_sha(_V96_RECEIPT)}
+# Kickoff is history and must remain untouched, including gzip identity/decoded pins.
+archive=ROOT/'docs/reviews/v96-words-and-input-clarity';manifest=read(archive/'archive-manifest.json')
+check(manifest['kind']=='v96-kickoff-draft-archive-v1','original kickoff manifest')
+for r in manifest['files']:
+ b=(archive/r['archive']).read_bytes();check(sha(b)==r['archive_sha256'] and len(b)==r['archive_size'],'kickoff archive '+r['archive'])
+ decoded=gzip.decompress(b) if r['encoding']=='gzip' else b
+ check(sha(decoded)==r['source_sha256'] and len(decoded)==r['source_size'],'kickoff decoded '+r['archive'])
+tracked=subprocess.check_output(['git','ls-tree','-r','--name-only',KICK,'docs/reviews/v96-words-and-input-clarity'],cwd=ROOT,text=True).splitlines()
+kickoff_readme='docs/reviews/v96-words-and-input-clarity/README.md'
+for p in tracked:
+ target=archive/'kickoff-README.md' if p==kickoff_readme else ROOT/p
+ check(target.read_bytes()==oldbytes(p,KICK),'kickoff git bytes preserved '+p)
+checks['kickoff_history']={'manifest_records':len(manifest['files']),'all_archive_and_decoded_pins_exact':True,'kickoff_tracked_files_preserved':len(tracked),'original_files_unchanged_in_place':len(tracked)-1,'original_overview_preserved_at':'docs/reviews/v96-words-and-input-clarity/kickoff-README.md','original_overview_sha256':file_sha(archive/'kickoff-README.md'),'intentional_overview_amendment':'The current README.md is the final integration overview. Its exact original kickoff bytes are preserved at kickoff-README.md; all other original tracked kickoff files remain unchanged in place.','kickoff_commit':subprocess.check_output(['git','rev-parse',KICK],cwd=ROOT,text=True).strip(),'archive_manifest_sha256':file_sha(archive/'archive-manifest.json')}
+# Read-only receipt revalidation of final pack API evidence.
+final_pack=read(OUT/'pack/independent-final-api.json')
+for p,h in final_pack['source_bindings'].items():check(file_sha(ROOT/p)==h,'final API source '+p);source_hashes[p]=h
+check(final_pack['script_sha256']==file_sha(OUT/'pack/independent_final_api.py'),'final pack audit script binding')
+check(final_pack['all_three_approved_entries_naturally_served'] and set(final_pack['exact_new_approved_ids'])==ids,'pack final natural serve')
+evidence_hashes['pack/independent-final-api.json']=file_sha(OUT/'pack/independent-final-api.json')
+# Restore only known advisory edits to prove the rest of Contexto byte-for-byte unchanged.
+p='cat_de_roman_esti/wordgames/contexto.py';s=(ROOT/p).read_text();reconstructed=s.replace('from difflib import SequenceMatcher\n','').replace('    normalize,\n','')
+reconstructed=re.sub(r'\n\ndef _advisory_spelling_matches\(.*?\n\n(?=\nGAME_KEY)', '', reconstructed, flags=re.S)
+reconstructed=reconstructed.replace('if key in seen_suggestions or not _advisory_spelling_matches(text, label):','if key in seen_suggestions:')
+reconstructed=reconstructed.replace('            message = (\n                "Cuvântul nu este încă în vocabularul jocului. "\n                "Nu ai pierdut nicio încercare."\n            )','            message = "Nu cunosc acest concept"\n            if suggestions:\n                message = f"Nu cunosc acest concept. Poate cautai: {suggestions[0]}?"')
+check(reconstructed.encode()==oldbytes(p),'only advisory Contexto code changed')
+unchanged=['cat_de_roman_esti/wordgames/service.py','cat_de_roman_esti/wordgames/contexto_projection.py','cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/alchimie_explore.py','frontend/src/explorationSave.ts']
+for p in unchanged:check((ROOT/p).read_bytes()==oldbytes(p),'unchanged resolver/scoring/save source '+p);source_hashes[p]=file_sha(ROOT/p)
+for p,h in CURRENT_CONTENT.artifact_sha256.items():check(file_sha(ROOT/p)==h,'current artifact expectation '+p)
+checks['contexto_review']={'only_unknown_advisory_filter_and_message_changed':True,'exact_resolver_fuzzy_confirmation_projection_scoring_unchanged':True,'unknown_guesses_return_before_attempt_mutation':True,'target_and_proxy_exclusions_run_before_advisory_filter':True,'source_review':'A normalized one-substitution or adjacent-swap match, complete displayed word plus1/2 trailing keystrokes, or SequenceMatcher similarity at least0.82 keeps familiar spelling corrections; distant displayed labels are removed only after target/proxy suppression; exact surfaces, aliases, projection resolution, confident correction tokens, target typo wins and scored accepted guesses keep prior code bytes. Frontend uses neutral spelling-option copy. This is source/binding review; full browser and backend integration are separate.'}
+checks['alchimie_recovery_review']={'generation_and_game_id_checked_before_callback':True,'save_ownership_and_successful_adoption_required':True,'mutation_never_replayed_on_recovery':True,'onRecovered_only_from_successful_authoritative_GET':True,'inactive_fallback_id_rejected':True,'moved_user_focus_preserved':True,'detached_disabled_origin_falls_back_to_active_word_or_collection':True,'keyboard_scroll_only':True,'source_review':'act retains locked/flight/collection-ownership guard, captures epoch/gameId, checks both on mutation and GET replies, and invokes onRecovered only after adopt saves against current generation/ownership. combine stores focus only for an actual inventory-word origin, and its fallback ID must still be active in the fresh inventory. The unchanged layout effect waits for busy=false, refuses to steal focus moved elsewhere, and checks connected/enabled origin before trying a fallback or collection. Existing save implementation and backend are byte-identical toV95.'}
+for p in ['frontend/src/screens/AlchimieExplore.tsx','frontend/src/screens/CaldRece.tsx','frontend/e2e/v96-input-and-focus.spec.mjs','tests/test_v96_input_clarity.py','cat_de_roman_esti/web/static/.vite/manifest.json','tests/current_content.py','tests/content_history.py']:source_hashes[p]=file_sha(ROOT/p)
+checks['integration_receipts']={'world_and_quick_install_receipts_revalidated':True,'final_pack_api_source_bindings_revalidated':len(final_pack['source_bindings']),'current_content_artifact_pins_exact':len(CURRENT_CONTENT.artifact_sha256)}
+report={'kind':'v96-assembled-closure-binding-audit-v1','reviewer':'/root/v96_quick','date':'2026-09-17','passed':True,'scope':'Read-only final assembled artifact, reviewer binding and source-flow audit. Prior role: this agent authored the quick editorial-source extension from frozen drafts, independently fact-reviewed quick content and quality-reviewed the Alchimie world. This is not a new independent semantic vote. Full suites are running separately; no duplicate full test run here.','checks':checks,'source_hashes':source_hashes,'evidence_hashes':evidence_hashes,'audit_script_sha256':file_sha(Path(__file__)),'findings':[],'resolved_audit_attempts':[{'event':'Initial closure source reconstruction stopped after concurrent advisory-helper refinement','result':'Updated audit to inspect final helper; earlier artifact/history/archive checks had passed','type':'stale audit expectation, not an application failure'}],'caveats':['Full backend/accounts/native/browser gates and final docs/archive closure are owned by root and not claimed complete by this receipt.','World compatible-history count is8 at the existing schema limit; a next world-graph expansion requires a backward-compatible history design, not silently dropping old saves.','Both new Alchimie discoveries are terminal; one prior vegetable-patty result gains an onward sandwich use.','Contexto unknown household vocabulary remains unknown, with free attempts and more relevant advisory labels; the filter does not add synonyms or improve rank calibration.','Lanț captions remain generic and no automated audit proves human enjoyment or physical-device acceptance.','Original kickoff artifacts remain explicitly unapproved historical drafts; final installed approvals are the separate integration artifacts.']}
+(OUT/'closure-audit.json').write_text(json.dumps(report,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+print(json.dumps({'passed':True,'checks':list(checks),'source_hashes':len(source_hashes),'evidence_hashes':len(evidence_hashes),'receipt_sha256':file_sha(OUT/'closure-audit.json')},indent=2))

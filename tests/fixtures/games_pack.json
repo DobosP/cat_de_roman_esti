@@ -3,15 +3,15 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 243,
-   "contexto": 263,
-   "lant": 121,
+   "conexiuni": 244,
+   "contexto": 264,
+   "lant": 122,
    "alchimie": 83
   },
   "id_high_water": {
-   "conexiuni": 372,
-   "contexto": 375,
-   "lant": 244,
+   "conexiuni": 373,
+   "contexto": 376,
+   "lant": 245,
    "alchimie": 107
   }
  },
@@ -13866,6 +13866,63 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v24_people_parents_mama",
+     "n_v24_people_parents_tata",
+     "n_v24_people_grandparents_bunic",
+     "n_v24_people_grandparents_bunica"
+    ],
+    "g2": [
+     "n_v24_food_snack_ceai",
+     "n_v3gas_cafea",
+     "n_v4gas_lapte",
+     "n_v18gas_socata"
+    ],
+    "g3": [
+     "n_v24_home_surfaces_fereastra",
+     "n_v4via_usa",
+     "n_v24_body_face_gura",
+     "n_v33_bathroom_fixture_robinet"
+    ],
+    "g4": [
+     "n_v24_school_writing_creion",
+     "n_v29_kitchen_table_cutit",
+     "n_v4ist_sabie",
+     "n_v32_workshop_cut_fierastrau"
+    ]
+   },
+   "group_labels": {
+    "g1": "Părinți și bunici",
+    "g2": "Băuturi",
+    "g3": "Se deschid ca să treacă ceva",
+    "g4": "Se ascut"
+   },
+   "order": [
+    "n_v24_body_face_gura",
+    "n_v33_bathroom_fixture_robinet",
+    "n_v32_workshop_cut_fierastrau",
+    "n_v29_kitchen_table_cutit",
+    "n_v24_school_writing_creion",
+    "n_v4gas_lapte",
+    "n_v24_home_surfaces_fereastra",
+    "n_v4ist_sabie",
+    "n_v24_people_grandparents_bunica",
+    "n_v18gas_socata",
+    "n_v24_people_grandparents_bunic",
+    "n_v24_people_parents_tata",
+    "n_v24_people_parents_mama",
+    "n_v3gas_cafea",
+    "n_v24_food_snack_ceai",
+    "n_v4via_usa"
+   ],
+   "id": "cx_viata_de_roman_373",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -15972,6 +16029,14 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v24_home_textiles_covor",
+   "id": "ct_viata_de_roman_376",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "lant": [
@@ -16271,6 +16336,16 @@
    "target": "n_v87_food_tort_diplomat",
    "optimal": 2,
    "id": "lt_gastronomie_244",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_v85_food_vanilie",
+   "target": "n_v2gas_branza",
+   "optimal": 2,
+   "id": "lt_gastronomie_245",
    "category": "gastronomie",
    "source": "ai",
    "status": "approved"

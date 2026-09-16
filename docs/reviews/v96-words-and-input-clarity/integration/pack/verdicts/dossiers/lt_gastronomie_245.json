@@ -1,0 +1,133 @@
+{
+ "id": "lt_gastronomie_245",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "7fb2595eb165baba21bf05075a6fa289e4ee4fae3c60a305d93e231856b20208",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+ "start": {
+  "id": "n_v85_food_vanilie",
+  "label": "Vanilie",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.8,
+  "degree": 8,
+  "incoming_degree": 0,
+  "description": "Ingredient aromat din păstăile de vanilie, folosit la creme și alte deserturi."
+ },
+ "target": {
+  "id": "n_v2gas_branza",
+  "label": "Brânză",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9238,
+  "degree": 13,
+  "incoming_degree": 14,
+  "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v85_food_vanilie",
+     "label": "Vanilie"
+    },
+    {
+     "id": "n_gas_placinte_poale_brau",
+     "label": "Poale-n brâu"
+    },
+    {
+     "id": "n_v2gas_branza",
+     "label": "Brânză"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v85_food_vanilie",
+      "label": "Vanilie"
+     },
+     "to": {
+      "id": "n_gas_placinte_poale_brau",
+      "label": "Poale-n brâu"
+     },
+     "relation": "ingredient_variant",
+     "label": "aromatizează umpluturi de",
+     "display_label": "legătură directă",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_gas_placinte_poale_brau",
+      "label": "Poale-n brâu"
+     },
+     "to": {
+      "id": "n_v2gas_branza",
+      "label": "Brânză"
+     },
+     "relation": "related_to",
+     "label": "umplutură cu brânză",
+     "display_label": "legătură directă",
+     "strength": 0.82
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v85_food_vanilie",
+     "label": "Vanilie"
+    },
+    {
+     "id": "n_v17gas_pasca",
+     "label": "Pască"
+    },
+    {
+     "id": "n_v2gas_branza",
+     "label": "Brânză"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v85_food_vanilie",
+      "label": "Vanilie"
+     },
+     "to": {
+      "id": "n_v17gas_pasca",
+      "label": "Pască"
+     },
+     "relation": "ingredient_variant",
+     "label": "aromatizează rețete de",
+     "display_label": "legătură directă",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v17gas_pasca",
+      "label": "Pască"
+     },
+     "to": {
+      "id": "n_v2gas_branza",
+      "label": "Brânză"
+     },
+     "relation": "related_to",
+     "label": "umplută cu brânză dulce",
+     "display_label": "legătură directă",
+     "strength": 0.75
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:7c78f0e319ce663a805483c9955a837d2edd4083cc184822a183202942ac03b4"
+}

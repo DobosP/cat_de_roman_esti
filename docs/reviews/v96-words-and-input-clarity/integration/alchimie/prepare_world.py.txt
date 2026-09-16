@@ -1,0 +1,21 @@
+import hashlib,json,pprint
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity')
+O=Path(__file__).parent
+raw=(R/'docs/reviews/v96-words-and-input-clarity/content/alchimie-draft.json').read_bytes()
+(O/'raw/proposals.json').write_bytes(raw)
+d=json.loads(raw)
+p=R/'scripts/alchimie_discovery_recipe_source.py'
+s=p.read_text()
+assert '# V96:' not in s
+s+='\n# V96: familiar dishes and one onward use for cooked vegetable patties.\n'
+s+='WORLD_CONCEPTS.update(\n'+pprint.pformat({c['label']:{k:v for k,v in c.items() if k!='label'} for c in d['concepts']},width=96,sort_dicts=False)+'\n)\n'
+s+='RECIPES.extend(\n'+pprint.pformat([(r['id'],*r['pair_labels'],r['result_label'],r['explanation']) for r in d['recipes']],width=96,sort_dicts=False)+'\n)\n'
+s+='RECIPE_SOURCES.update(\n'+pprint.pformat({r['id']:r['sources'] for r in d['recipes']},width=96,sort_dicts=False)+'\n)\n'
+p.write_text(s)
+old='docs/reviews/v94-words-and-clearer-connections/alchimie/candidate.json'
+new='docs/reviews/v95-discovery-and-game-quality/alchimie/candidate.json'
+h=hashlib.sha256((R/new).read_bytes()).hexdigest()
+for name in ['build_alchimie_discovery_world.py','audit_alchimie_discovery_world.py']:
+ p=R/'scripts'/name;s=p.read_text();assert old in s;s=s.replace(old,new).replace('d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188',h);p.write_text(s)
+print(h)

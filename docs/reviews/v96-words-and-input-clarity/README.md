@@ -1,73 +1,93 @@
-Valid until: draft content or the baseline changes — then repeat affected checks.
+Valid until: bound content, runtime or interface inputs change — then repeat affected checks.
 
-V96 starts from landed V95 main `14577863038378c734c7b2e0e8b33ea8158f318b` after the
-owner asked to land V95 and start the next version. [V95 CI passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35026423470).
-This is an initial creation and
-critique session. Drafts are unapproved and do not change the served inventory.
+V96 completes the drafts started at `15e7561`, from landed V95 main `1457786`.
+The owner requested landing V96 and starting V97. Current verification/publication state
+belongs in [STATUS](../../STATUS.md); [ADR-0154](../../adr/0154-expand-content-and-clarify-input-recovery.md)
+records the implementation decisions. Original kickoff drafts, source notes and critique
+remain historical evidence; their unapproved status describes that earlier stage.
 
-The starting inventory is 710 curated pack records, 417 quick boards and an Alchimie
-world with 247 concepts, 342 recipes and 143 discoveries. All previous review gates,
-wording/source checks, saved-progress guarantees and capacity limits still apply.
-Only nine Alchimie concept slots remain below the existing 256-concept limit.
-
-The content work starts with concrete drafts for Conexiuni, Cald sau Rece and Lanț,
-plus Alchimie recipes/concepts and new Intrusul/Perechi boards. Novelty checks include
-served content, previous raw proposals and durable rejection records. Natural selection
-and actual displayed descriptions matter alongside mathematical solvability.
-
-The interface critique focuses on two remaining observed issues: ordinary guesses that
-Cald sau Rece does not recognize, and keyboard focus returning to the page body after
-some Alchimie recovery paths. The latter predates the V95 stale-focus fix. Candidate
-improvements need fresh interaction evidence and a comparison with relevant official
-interfaces/rules before implementation choices are settled.
-
-## Initial content queue
-
-| Game | Unapproved draft |
+| Game | Accepted V96 additions |
 |---|---|
-| Conexiuni | Parents/grandparents, drinks, purpose-qualified opening and sharpening groups |
-| Cald sau Rece | Covor, with floor, home and vacuum-cleaner opener checks |
+| Conexiuni | One normal board: parents/grandparents, drinks, opening for passage and sharpening |
+| Cald sau Rece | Covor, with useful floor/home/vacuum-cleaner approaches |
 | Lanț | Vanilie → Brânză through Poale-n brâu or Pască |
-| Alchimie | Ostropel and Salată de fructe, two routes each; one proposed onward Sandviș recipe |
+| Alchimie | Ostropel and Salată de fructe, two recipes each; an onward vegetable-patty sandwich recipe |
 | Intrusul | Atmospheric phenomena versus the Moon |
 | Perechi | Leaf–branch, dog–cat, banana–fruit and wheat–flour |
 
-[Pack authoring](pack/README.md) records source checks, novelty and conditional selection.
-Those in-memory playthroughs do not establish installed serving or independent approval.
-[World/quick authoring](content/draft-notes.md) records two concepts and five recipes,
-plus one board for each quick game. Chiftele marinate was excluded because it already
-resolves to the existing Chiftele identity. The vegetable-patty sandwich generalization
-still needs independent factual review. The new world would require an eighth saved-book
-compatibility generation and would retain seven free concept slots.
+## Content and preservation
 
-These drafts must pass separate factual/quality reviews and final runtime audits before serving.
-Current publication and verification state belongs in [STATUS](../../STATUS.md).
+Three pack drafts passed independent factual/quality review, pending staging, exact
+allocated-ID judgments and strict promotion. [Final public playthroughs](integration/pack/independent-final-api.json)
+select all three normally and win, including both Lanț routes, with wrong/repeat/hint/GET
+recovery checks. The new Lanț round has a wide beginner corridor; its captions remain
+generic. No private edge explanation was mistaken for displayed text. Covor's missing
+mobilă/textil/parchet/mochetă guesses remain vocabulary debt, not invented aliases.
 
+The pack has 713 records, 705 approved and eight unchanged pending, with 543 eligible.
+All 710 previous records are exact. Conexiuni gains seven per-game word exposures.
+The 105 rejected Lanț records, 101 custom captions and shared KG remain exact.
 
-## Interface queue
+[Quick installation](integration/quick/installation-receipt.json) preserves all 336 core
+boards and 81 previous authored records/scores. The supplement now has 83 boards:
+227 Intrusul and 192 Perechi in total. Both additions qualify as starters; fresh word
+exposures are three Intrusul and four Perechi. Independent final audits cover all 83
+winning replays and wrong/repeat/hint/GET recovery plus natural starter selection for
+the additions. These are per-game exposures, not new shared KG nodes.
 
-[The fresh critique](critique/README.md) compares all six games with relevant official
-interfaces/rules and records three priorities:
+[Alchimie installation](integration/alchimie/installation-receipt.json) grows 247→249
+concepts, 342→347 recipes and 143→145 discoveries. Alternative-result count grows 97→99;
+intermediates 63→64. Chiftele de legume gains an onward use; both new results are terminal.
+Every old concept/recipe and the eight starters, 96 supplies, twelve tiers and 32 goals
+remain exact. Eight historical saved books retain earned progress.
 
-1. Say clearly that unsupported Cald sau Rece words cost no attempt, and avoid weak
-   spelling suggestions that imply an unrelated intended word.
-2. Restore deliberate keyboard focus after Alchimie reconciles a lost response.
-3. Add independently reviewed descriptions for the eight earned links in V95's new
-   Lanț rounds, without revealing later steps.
+Review found that an earlier Gourmandelle excerpt did not substantiate sandwich assembly.
+The final factual reviewer directly inspected Daniela Niculi's original cooked-patty and
+bread assembly; Gourmandelle is retained only for cooking support. The original recipe's
+vegan title conflicts with eggs/dairy in its body, so the game makes no vegan claim.
+Chiftele marinate remains excluded because it shadows an existing KG alias.
 
-All six mobile starts already keep their main controls visible. The critique does not
-justify another general menu rebuild. Missing vocabulary cannot be repaired by mapping
-unrelated words to existing identities. Browser emulation is not physical-device or
-human-enjoyment acceptance.
+The existing eight-compatible-book limit is now full. V97 must settle a compatibility
+design before further recipe changes; old saves cannot be dropped or limits silently raised.
 
-## Evidence and continuation
+## Input and recovery
 
-[Baseline receipt](baseline.json) binds the ten unchanged landed artifacts and verified
-V95 cleanup. [Archive manifest](archive-manifest.json) binds the draft and critique files.
-[Kickoff verification](kickoff-verification.json) confirms those bytes and unchanged serving artifacts.
-Next work is independent raw review, resolution of the documented source/wording questions,
-and concrete implementation of the selected interface improvement. No pending draft is
-silently treated as approved, and no V96 branch publication is authorized by this kickoff.
+Unknown Cald sau Rece guesses now clearly say that the word is outside the game's
+vocabulary and no attempt was lost. Advisory spelling variants fill/focus the field;
+they do not submit. Additional displayed-label checks reject remote alias-based matches
+such as fier→fluier and reparație→pârâu. Exact meanings, confident corrections, reviewed
+projections, ranking, scoring and target/proxy privacy are unchanged.
 
-[V95 publication verification](v95-ci.json) records all three successful GitHub jobs on
-the landed main commit. V96 remains local and its drafts remain unapproved.
+The initial similarity-only rule also removed useful Nuci and Prafzz suggestions. The
+refined rule retains one substitution, adjacent transposition, an entire displayed word
+plus one/two trailing keystrokes, or normalized similarity of at least 0.82. All 174
+focused input/feedback cases pass; original failures and their resolution are preserved.
+The filter can still withhold a useful alias-based hint, an explicit conservative tradeoff.
+
+Alchimie restores the activated usable ingredient after a lost combine response is read
+back successfully. When inputs are depleted, focus moves to the collection. A player who
+moved focus elsewhere keeps it. Focus queues only after successful adoption, retaining
+save-ownership, game/generation and request-lock checks. Mutations are never replayed,
+and V95's cached acknowledgments retain synchronous centering.
+
+[Independent UI review](integration/alchimie/independent-ui-review.json) records 60 backend
+cases, 12 desktop/mobile journeys and direct API probes over both new and preserved
+suggestions. It checks committed/uncommitted response loss, moved focus, depleted inputs
+and 320px doubled text. An initial test matched the visible message and hidden announcer;
+the corrected locator targets the visible card. Browser evidence does not establish
+physical-device acceptance or human enjoyment.
+
+## Evidence
+
+[Five core artifact inverses](artifact-delta.json) restore exact V95 bytes before historical
+checks. [Target-profile proof](integration/contexto-profile-delta.json) preserves all 263
+old profiles and adds only Covor. The browser seed snapshot changes only Lanț.
+[Closure audit](integration/closure-audit.json) checks catalogs, approvals, runtime bindings,
+three V2 dossier reconstructions, historical preservation and unchanged kickoff evidence.
+
+[Integration archive](integration/archive-manifest.json) records exact source/archive
+bytes, with lossless compressed logs and Python scripts retained as text. Environments,
+browser caches and unbound trace ZIPs remain scratch. [Final verification](integration/verification.json)
+records the assembled tests and exact installed artifacts. [Initial kickoff verification](kickoff-verification.json)
+and [original archive](archive-manifest.json) remain separate from final acceptance.
+Production remains the existing anonymous V91 deployment; landing is not deployment.

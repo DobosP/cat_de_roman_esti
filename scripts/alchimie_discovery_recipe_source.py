@@ -1712,3 +1712,53 @@ RECIPE_SOURCES.update(
  'profiterol-oparit-inghetata': ['https://pofta-buna.com/profiterol-cu-inghetata-frisca-si-ciocolata/'],
  'profiterol-oparit-ganache': ['https://pofta-buna.com/profiterol-cu-inghetata-frisca-si-ciocolata/']}
 )
+
+# V96: familiar dishes and one onward use for cooked vegetable patties.
+WORLD_CONCEPTS.update(
+{'Ostropel': {'description': 'Mâncare din carne gătită cu usturoi și sos; aici varianta de pui '
+                             'cu roșii.',
+              'id': 'alw_food_ostropel',
+              'sources': ['https://pofta-buna.com/ostropel-de-pui-reteta-clasica/']},
+ 'Salată de fructe': {'description': 'Desert rece din bucăți de fructe amestecate, servite '
+                                     'simple, cu sirop sau cu frișcă.',
+                      'id': 'alw_food_salata_fructe',
+                      'sources': ['https://www.lauraadamache.ro/2015/04/salata-de-fructe.html']}}
+)
+RECIPES.extend(
+[('ostropel-pui-usturoi',
+  'Carne de pui',
+  'Usturoi',
+  'Ostropel',
+  'Puiul se rumenește ușor, apoi se gătește cu roșii și usturoi într-un sos pentru ostropel.'),
+ ('ostropel-pui-sos-rosii',
+  'Carne de pui',
+  'Sos de roșii',
+  'Ostropel',
+  'Bucățile de pui rumenite se fierb blând în sos de roșii cu usturoi și condimente, până când '
+  'carnea este gătită.'),
+ ('salata-fructe-cutit',
+  'Fruct',
+  'Cuțit',
+  'Salată de fructe',
+  'Fructe diferite se curăță după nevoie, se taie în bucăți și se amestecă; salata se servește '
+  'rece, simplă sau cu sirop.'),
+ ('salata-fructe-frisca',
+  'Fruct',
+  'Frișcă',
+  'Salată de fructe',
+  'Fructele curățate și tăiate se amestecă, se răcesc și se servesc în cupe cu frișcă bătută.'),
+ ('sandvis-chiftele-legume',
+  'Pâine',
+  'Chiftele de legume',
+  'Sandviș',
+  'Chiftelele de legume deja gătite se așază între felii de pâine, cu legume proaspete și un '
+  'sos după gust.')]
+)
+RECIPE_SOURCES.update(
+{'ostropel-pui-usturoi': ['https://pofta-buna.com/ostropel-de-pui-reteta-clasica/'],
+ 'ostropel-pui-sos-rosii': ['https://pofta-buna.com/ostropel-de-pui-reteta-clasica/'],
+ 'salata-fructe-cutit': ['https://www.lauraadamache.ro/2015/04/salata-de-fructe.html'],
+ 'salata-fructe-frisca': ['https://www.lauraadamache.ro/2015/04/salata-de-fructe.html'],
+ 'sandvis-chiftele-legume': ['https://danielaniculi.ro/2020/03/19/sandvis-vegan-sau-cum-sa-salvezi-prea-multa-quinoa-pusa-la-fiert/',
+                             'https://gourmandelle.com/ro/chiftle-prajite-cu-ciuperci/']}
+)

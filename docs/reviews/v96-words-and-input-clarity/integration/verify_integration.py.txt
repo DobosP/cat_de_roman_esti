@@ -1,0 +1,17 @@
+from pathlib import Path
+import gzip,hashlib,json
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');SRC=Path(__file__).parent;OUT=ROOT/'docs/reviews/v96-words-and-input-clarity/integration'
+def sha(b):return hashlib.sha256(b).hexdigest()
+r=json.loads((OUT/'verification.json').read_bytes());assert r['passed']
+m=json.loads((OUT/'archive-manifest.json').read_bytes());assert sha((OUT/'archive-manifest.json').read_bytes())==r['archive_manifest_sha256']
+for x in m['files']:
+ b=(OUT/x['archive']).read_bytes();assert sha(b)==x['archive_sha256'] and len(b)==x['archive_size'];raw=gzip.decompress(b) if x['encoding']=='gzip' else b;assert sha(raw)==x['source_sha256'] and len(raw)==x['source_size'];assert raw==(SRC/x['source']).read_bytes(),x['source']
+assert len(m['files'])==r['archive_records']
+g=json.loads((OUT/'gate-inputs.json').read_bytes());assert sha((OUT/'gate-inputs.json').read_bytes())==r['gate_inputs_sha256']
+for rel,h in g['sha256'].items():assert sha((ROOT/rel).read_bytes())==h,rel
+for rel in g['deleted']:assert not (ROOT/rel).exists(),rel
+for rel,h in r['artifact_sha256'].items():assert sha((ROOT/rel).read_bytes())==h,rel
+for rel,h in r['final_evidence_sha256'].items():assert sha((OUT/rel).read_bytes())==h,rel
+for x in r['checks'].values():assert sha((OUT/x['log']).read_bytes())==x['sha256']
+assert sha((OUT.parent/'artifact-delta.json').read_bytes())==r['artifact_delta_sha256']
+print({'passed':True,'archive_records':len(m['files']),'gate_inputs':len(g['sha256']),'deleted':len(g['deleted']),'artifact_pins':len(r['artifact_sha256']),'final_evidence_pins':len(r['final_evidence_sha256'])})

@@ -1,0 +1,72 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_viata_de_roman_376",
+   "cx_viata_de_roman_373",
+   "lt_gastronomie_245"
+  ]
+ },
+ "verdicts": {
+  "ct_viata_de_roman_376": "promote"
+ },
+ "perItem": [
+  {
+   "id": "ct_viata_de_roman_376",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:92fd9d1fbd1994bc14fb51a392fd978737bb41e9371e59b509cc29507af4ccb9",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_viata_de_roman_376",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:92fd9d1fbd1994bc14fb51a392fd978737bb41e9371e59b509cc29507af4ccb9",
+    "rationale": "Promote easy with disclosed dictionary gaps. C1/C2: Covor is a concrete universally familiar household textile, supported by older DLRLC/DEX and the current Romanian IKEA catalog. C3: five distinct native incoming nodes are Pernă, Podea, Cearșaf, Pătură and ușă, all recognizable; reachable2353 also clears the graph floor. C4: independently repeated actual BFF guesses give casă11 at2hops, podea2, pernă2, aspirator3, pătură4 and a spăla8, several strong early routes. Cameră22 is warm rather than falsely called within2hops. Mobilă, textil, parchet and mochetă are unknown and free; these material gaps remain recorded, while hot house/floor/cleaning guesses make the target fair. C5: the household textile is the dominant standalone sense, despite figurative compounds. C6: salience0.84 fits easy recognition. Public definition is sparse but accurately identifies the household-textile context. Recognized plural covoare wins. No graph/ranking repair or synthetic predecessor supplies this pass. Exact dossier and rubric binding read; no strict warning/failure.",
+    "sources": [
+     "https://dexonline.ro/definitie/covor",
+     "https://www.ikea.com/ro/ro/cat/covoare-mari-medii-10692/"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_viata_de_roman_376",
+    "game": "contexto",
+    "review_binding": "sha256:92fd9d1fbd1994bc14fb51a392fd978737bb41e9371e59b509cc29507af4ccb9",
+    "verdict": "promote",
+    "rationale": "Promote the exact allocated pending record under A1-A7/C1-C6. Covor has a dominant concrete household meaning across older dictionary and current manufacturer evidence. All five native incoming words are recognizable. Floor, vacuum cleaner and home supply obvious useful openers in the frozen BFF evidence; mobile/textile unknown-word debt does not erase the useful paths. No material or origin claim is inserted into its actual modest description. Novelty covers previous raw targets as well as served stock. The independent verifier regenerated the exact dossier and inspected all public descriptions and displayed route captions. The Lanț endpoint definitions and traditional pastry meanings agree with independently opened original recipe/bakery sources; generic captions remain a presentation limitation. Covor has five real recognizable incoming nodes and broad hot openers. Conexiuni public identities fit the same explicit predicates, including both point sharpening and edge sharpening; zero raw unfairness is supporting evidence, not the semantic verdict. Full raw/served/rejected novelty remains clear. No A5 hold or generic-region claim is introduced.",
+    "sources": [
+     "https://dexonline.ro/definitie/covor",
+     "https://www.ikea.com/ro/ro/cat/covoare-mari-medii-10692/"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 1,
+  "verified": 1,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v96-words-and-input-clarity/integration/pack/analyst.json",
+   "sha256": "sha256:71fa70c6138efcc57ab8ddfc23de1bf58333654ab17b5f01744ed417668885ee",
+   "reviewer": "/root/v96_pack",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v96-words-and-input-clarity/integration/pack/verifier.json",
+   "sha256": "sha256:76d6cf52c9cb5f18b57a76969192e4101ba7e09b1d0d9c7a7639006b67b4ceb9",
+   "reviewer": "root-v96-pack-quality",
+   "role": "verifier"
+  }
+ }
+}

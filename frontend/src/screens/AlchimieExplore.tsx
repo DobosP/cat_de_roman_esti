@@ -139,6 +139,7 @@ export default function AlchimieExplore({ onExit }: {
   const act = useCallback(async (
     operation: (gameId: string) => Promise<ExplorationState>,
     onSuccess?: (fresh: ExplorationState) => void,
+    onRecovered?: (fresh: ExplorationState) => void,
   ) => {
     if (!state || flight.current || locked) return;
     const save = readExplorationSave();
@@ -163,6 +164,7 @@ export default function AlchimieExplore({ onExit }: {
           setSelected(fresh.hint?.pair?.[0].id ?? null);
           setFreshIds([]);
           setMessage("Colecție sincronizată. Poți continua.");
+          onRecovered?.(fresh);
         }
       } catch {
         if (generation.current === epoch) setRecovery("failed");
@@ -197,6 +199,11 @@ export default function AlchimieExplore({ onExit }: {
       setMessage((result.result === null ? `${pairLabel}: ` : "") + result.message + (carry ? ` ${carry.label} rămâne ales.` : ""));
       if (result.discovered.length) { setQuery(""); sound.playHop(); }
       if (origin instanceof HTMLElement && origin.matches(".alchemy-word")) pendingFocus.current = { origin, id: next, keyboard };
+    }, (fresh) => {
+      if (origin instanceof HTMLElement && origin.matches(".alchemy-word")) {
+        const next = fresh.inventory.some((item) => item.id === a && item.status === "active") ? a : null;
+        pendingFocus.current = { origin, id: next, keyboard };
+      }
     });
   }, [state, locked, act]);
 

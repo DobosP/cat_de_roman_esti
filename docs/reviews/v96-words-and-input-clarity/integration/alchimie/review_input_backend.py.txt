@@ -1,0 +1,48 @@
+"""Independent API probes for V96 advisory filtering, without modifying runtime."""
+import hashlib,json,logging,os,sys
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');O=Path(__file__).parent
+sys.path.insert(0,str(R));os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings');os.environ.setdefault('CAT_DEBUG','1')
+import django
+django.setup();logging.disable(logging.WARNING)
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto as C
+from cat_de_roman_esti.wordgames.service import get_service,SessionStore
+svc=get_service();C.store=SessionStore();client=Client();results=[]
+def create(target):return '/api/wordgames/contexto/games/'+C.store.create(C._build_session(target,'usor',None))
+def guess(url,text):
+ r=client.post(url+'/guess',{'text':text},content_type='application/json');assert r.status_code==200,r.content;return r.json()
+url=create('n_v32_workshop_hand_cleste');s=guess(url,'metal');assert s['ok'] and s['attempts']==1
+before=client.get(url).json()
+for text in ['fier','FIER','reparație','reparatie','unealtă','scule','rechizite','zzqqxz']:
+ for _ in range(2):
+  r=guess(url,text);assert not r['ok'] and r['attempts']==1 and r['guesses']==before['guesses']
+  assert not r.get('needs_confirmation') and 'Nu ai pierdut nicio încercare' in r['message']
+  assert not {'fluier','pârâu'}&set(r['suggestions'])
+  assert 'target_id' not in r and 'anchor_id' not in str(r)
+  assert client.get(url).json()==before
+ results.append({'typed':text,'free_repeats':2,'suggestions':r['suggestions'],'state_unchanged':True})
+assert guess(url,'clești')['won']
+# Find actual advisory typo that still survives the conservative label-distance filter.
+for nid in svc.all_ids():
+ label=svc.label(nid);mid=len(label)//2;typo=label[:mid]+label[mid+2:]
+ if 8<=len(label)<=10 and svc.resolve(typo) is None and svc.resolve_fuzzy(typo) is None and label in svc.suggest(typo):break
+else:raise AssertionError('no real advisory candidate')
+url=create('n_v32_workshop_hand_cleste');r=guess(url,typo);assert not r['ok'] and r['attempts']==0 and label in r['suggestions']
+results.append({'kind':'retained_close_spelling','typed':typo,'suggested':label,'attempts':0})
+url=create(nid);r=guess(url,typo);assert not r['ok'] and r['attempts']==0 and label not in r['suggestions'] and 'target_id' not in r
+results.append({'kind':'secret_advisory_hidden','target':label,'typed':typo,'attempts':0})
+for typed, expected in [('nuci', 'Nucă'), ('prafzz', 'Praf'), ('burttă', 'Burtă')]:
+ url=create('n_v32_workshop_hand_cleste');before=client.get(url).json();r=guess(url,typed)
+ assert not r['ok'] and r['attempts']==0 and expected in r['suggestions']
+ assert client.get(url).json()==before
+ results.append({'kind':'retained_short_or_extra_key_advisory','typed':typed,'expected':expected,'free':True})
+for target in ['n_v81_food_pantry_nuca','n_v24_food_breakfast_miere']:
+ url=create(target);r=guess(url,'nuci');assert not r['ok'] and 'Nucă' not in r['suggestions'] and r['attempts']==0
+ results.append({'kind':'short_advisory_secret_or_proxy_hidden','target_id':target,'typed':'nuci','attempts':0})
+assert not C._advisory_spelling_matches('fier','fluier')
+assert not C._advisory_spelling_matches('reparație','pârâu')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+pins={str(p.relative_to(R)):sha(p) for p in [R/'cat_de_roman_esti/wordgames/contexto.py',R/'cat_de_roman_esti/wordgames/service.py',R/'cat_de_roman_esti/wordgames/contexto_projection.py',R/'cat_de_roman_esti/wordgames/contexto_feedback.py',R/'cat_de_roman_esti/fixtures/games_pack.json',R/'cat_de_roman_esti/fixtures/kg_sample.json']}
+(O/'independent-input-api-probes.json').write_text(json.dumps({'passed':True,'reviewer':'codex-v96-world-independent-ui','bindings':pins,'source_sha256':sha(Path(__file__)),'results':results,'alias_win':'clești'},ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+print(json.dumps({'passed':True,'unknown_forms':8,'advisory_retained':label,'target_suggestion_hidden':True,'alias_win':True}))

@@ -1,0 +1,2626 @@
+{
+  "reviewer": "/root/v96_pack",
+  "method": "Fresh BFF replay of fixed allocated pending records. No natural-selection claim; final approved public replay remains required.",
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "bb7d8c9908edab8297890438048df868a840eb5525df61fbc29b4a6ef160b3e3",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/wordgames/contexto.py": "1c5db4faa1e1b5558fcae9957327f395e7f1f049ea6ec8a1af1c9f049dd00cdc",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1"
+  },
+  "script_sha256": "b79e62392d744169efd6afd280377732ffec2b266deb522084248789e2d35887",
+  "checks": [
+    {
+      "id": "cx_viata_de_roman_373",
+      "review_binding": "sha256:c639cb31b03daae4d18c697f48b3d36d93561dec11981b6f922579eb26b0628e",
+      "initial": {
+        "game_id": "ca7d6f61-363a-46f4-87cf-4701fef78421",
+        "tiles": [
+          {
+            "id": "n_v24_body_face_gura",
+            "label": "Gură"
+          },
+          {
+            "id": "n_v33_bathroom_fixture_robinet",
+            "label": "Robinet"
+          },
+          {
+            "id": "n_v32_workshop_cut_fierastrau",
+            "label": "Fierăstrău"
+          },
+          {
+            "id": "n_v29_kitchen_table_cutit",
+            "label": "Cuțit"
+          },
+          {
+            "id": "n_v24_school_writing_creion",
+            "label": "Creion"
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte"
+          },
+          {
+            "id": "n_v24_home_surfaces_fereastra",
+            "label": "Fereastră"
+          },
+          {
+            "id": "n_v4ist_sabie",
+            "label": "Sabie"
+          },
+          {
+            "id": "n_v24_people_grandparents_bunica",
+            "label": "Bunică"
+          },
+          {
+            "id": "n_v18gas_socata",
+            "label": "Socată"
+          },
+          {
+            "id": "n_v24_people_grandparents_bunic",
+            "label": "Bunic"
+          },
+          {
+            "id": "n_v24_people_parents_tata",
+            "label": "Tată"
+          },
+          {
+            "id": "n_v24_people_parents_mama",
+            "label": "Mamă"
+          },
+          {
+            "id": "n_v3gas_cafea",
+            "label": "Cafea"
+          },
+          {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai"
+          },
+          {
+            "id": "n_v4via_usa",
+            "label": "ușă"
+          }
+        ],
+        "solved": [],
+        "solved_count": 0,
+        "remaining_groups": 4,
+        "lives": 4,
+        "mistakes": 0,
+        "won": false,
+        "lost": false,
+        "difficulty": "normal",
+        "clues_used": 0,
+        "clue_available": false,
+        "clues": []
+      },
+      "steps": [
+        {
+          "ok": true,
+          "correct": true,
+          "category": {
+            "key": "g1",
+            "label": "Părinți și bunici"
+          },
+          "game_id": "ca7d6f61-363a-46f4-87cf-4701fef78421",
+          "tiles": [
+            {
+              "id": "n_v24_body_face_gura",
+              "label": "Gură"
+            },
+            {
+              "id": "n_v33_bathroom_fixture_robinet",
+              "label": "Robinet"
+            },
+            {
+              "id": "n_v32_workshop_cut_fierastrau",
+              "label": "Fierăstrău"
+            },
+            {
+              "id": "n_v29_kitchen_table_cutit",
+              "label": "Cuțit"
+            },
+            {
+              "id": "n_v24_school_writing_creion",
+              "label": "Creion"
+            },
+            {
+              "id": "n_v4gas_lapte",
+              "label": "Lapte"
+            },
+            {
+              "id": "n_v24_home_surfaces_fereastra",
+              "label": "Fereastră"
+            },
+            {
+              "id": "n_v4ist_sabie",
+              "label": "Sabie"
+            },
+            {
+              "id": "n_v18gas_socata",
+              "label": "Socată"
+            },
+            {
+              "id": "n_v3gas_cafea",
+              "label": "Cafea"
+            },
+            {
+              "id": "n_v24_food_snack_ceai",
+              "label": "Ceai"
+            },
+            {
+              "id": "n_v4via_usa",
+              "label": "ușă"
+            }
+          ],
+          "solved": [
+            {
+              "key": "g1",
+              "label": "Părinți și bunici",
+              "tiles": [
+                {
+                  "id": "n_v24_people_parents_mama",
+                  "label": "Mamă"
+                },
+                {
+                  "id": "n_v24_people_parents_tata",
+                  "label": "Tată"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunic",
+                  "label": "Bunic"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunica",
+                  "label": "Bunică"
+                }
+              ]
+            }
+          ],
+          "solved_count": 1,
+          "remaining_groups": 3,
+          "lives": 4,
+          "mistakes": 0,
+          "won": false,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": []
+        },
+        {
+          "ok": true,
+          "correct": true,
+          "category": {
+            "key": "g2",
+            "label": "Băuturi"
+          },
+          "game_id": "ca7d6f61-363a-46f4-87cf-4701fef78421",
+          "tiles": [
+            {
+              "id": "n_v24_body_face_gura",
+              "label": "Gură"
+            },
+            {
+              "id": "n_v33_bathroom_fixture_robinet",
+              "label": "Robinet"
+            },
+            {
+              "id": "n_v32_workshop_cut_fierastrau",
+              "label": "Fierăstrău"
+            },
+            {
+              "id": "n_v29_kitchen_table_cutit",
+              "label": "Cuțit"
+            },
+            {
+              "id": "n_v24_school_writing_creion",
+              "label": "Creion"
+            },
+            {
+              "id": "n_v24_home_surfaces_fereastra",
+              "label": "Fereastră"
+            },
+            {
+              "id": "n_v4ist_sabie",
+              "label": "Sabie"
+            },
+            {
+              "id": "n_v4via_usa",
+              "label": "ușă"
+            }
+          ],
+          "solved": [
+            {
+              "key": "g1",
+              "label": "Părinți și bunici",
+              "tiles": [
+                {
+                  "id": "n_v24_people_parents_mama",
+                  "label": "Mamă"
+                },
+                {
+                  "id": "n_v24_people_parents_tata",
+                  "label": "Tată"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunic",
+                  "label": "Bunic"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunica",
+                  "label": "Bunică"
+                }
+              ]
+            },
+            {
+              "key": "g2",
+              "label": "Băuturi",
+              "tiles": [
+                {
+                  "id": "n_v24_food_snack_ceai",
+                  "label": "Ceai"
+                },
+                {
+                  "id": "n_v3gas_cafea",
+                  "label": "Cafea"
+                },
+                {
+                  "id": "n_v4gas_lapte",
+                  "label": "Lapte"
+                },
+                {
+                  "id": "n_v18gas_socata",
+                  "label": "Socată"
+                }
+              ]
+            }
+          ],
+          "solved_count": 2,
+          "remaining_groups": 2,
+          "lives": 4,
+          "mistakes": 0,
+          "won": false,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": []
+        },
+        {
+          "ok": true,
+          "correct": true,
+          "category": {
+            "key": "g3",
+            "label": "Se deschid ca să treacă ceva"
+          },
+          "game_id": "ca7d6f61-363a-46f4-87cf-4701fef78421",
+          "tiles": [
+            {
+              "id": "n_v32_workshop_cut_fierastrau",
+              "label": "Fierăstrău"
+            },
+            {
+              "id": "n_v29_kitchen_table_cutit",
+              "label": "Cuțit"
+            },
+            {
+              "id": "n_v24_school_writing_creion",
+              "label": "Creion"
+            },
+            {
+              "id": "n_v4ist_sabie",
+              "label": "Sabie"
+            }
+          ],
+          "solved": [
+            {
+              "key": "g1",
+              "label": "Părinți și bunici",
+              "tiles": [
+                {
+                  "id": "n_v24_people_parents_mama",
+                  "label": "Mamă"
+                },
+                {
+                  "id": "n_v24_people_parents_tata",
+                  "label": "Tată"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunic",
+                  "label": "Bunic"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunica",
+                  "label": "Bunică"
+                }
+              ]
+            },
+            {
+              "key": "g2",
+              "label": "Băuturi",
+              "tiles": [
+                {
+                  "id": "n_v24_food_snack_ceai",
+                  "label": "Ceai"
+                },
+                {
+                  "id": "n_v3gas_cafea",
+                  "label": "Cafea"
+                },
+                {
+                  "id": "n_v4gas_lapte",
+                  "label": "Lapte"
+                },
+                {
+                  "id": "n_v18gas_socata",
+                  "label": "Socată"
+                }
+              ]
+            },
+            {
+              "key": "g3",
+              "label": "Se deschid ca să treacă ceva",
+              "tiles": [
+                {
+                  "id": "n_v24_home_surfaces_fereastra",
+                  "label": "Fereastră"
+                },
+                {
+                  "id": "n_v4via_usa",
+                  "label": "ușă"
+                },
+                {
+                  "id": "n_v24_body_face_gura",
+                  "label": "Gură"
+                },
+                {
+                  "id": "n_v33_bathroom_fixture_robinet",
+                  "label": "Robinet"
+                }
+              ]
+            }
+          ],
+          "solved_count": 3,
+          "remaining_groups": 1,
+          "lives": 4,
+          "mistakes": 0,
+          "won": false,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": []
+        },
+        {
+          "ok": true,
+          "correct": true,
+          "category": {
+            "key": "g4",
+            "label": "Se ascut"
+          },
+          "game_id": "ca7d6f61-363a-46f4-87cf-4701fef78421",
+          "tiles": [
+            {
+              "id": "n_v24_body_face_gura",
+              "label": "Gură"
+            },
+            {
+              "id": "n_v33_bathroom_fixture_robinet",
+              "label": "Robinet"
+            },
+            {
+              "id": "n_v32_workshop_cut_fierastrau",
+              "label": "Fierăstrău"
+            },
+            {
+              "id": "n_v29_kitchen_table_cutit",
+              "label": "Cuțit"
+            },
+            {
+              "id": "n_v24_school_writing_creion",
+              "label": "Creion"
+            },
+            {
+              "id": "n_v4gas_lapte",
+              "label": "Lapte"
+            },
+            {
+              "id": "n_v24_home_surfaces_fereastra",
+              "label": "Fereastră"
+            },
+            {
+              "id": "n_v4ist_sabie",
+              "label": "Sabie"
+            },
+            {
+              "id": "n_v24_people_grandparents_bunica",
+              "label": "Bunică"
+            },
+            {
+              "id": "n_v18gas_socata",
+              "label": "Socată"
+            },
+            {
+              "id": "n_v24_people_grandparents_bunic",
+              "label": "Bunic"
+            },
+            {
+              "id": "n_v24_people_parents_tata",
+              "label": "Tată"
+            },
+            {
+              "id": "n_v24_people_parents_mama",
+              "label": "Mamă"
+            },
+            {
+              "id": "n_v3gas_cafea",
+              "label": "Cafea"
+            },
+            {
+              "id": "n_v24_food_snack_ceai",
+              "label": "Ceai"
+            },
+            {
+              "id": "n_v4via_usa",
+              "label": "ușă"
+            }
+          ],
+          "solved": [
+            {
+              "key": "g1",
+              "label": "Părinți și bunici",
+              "tiles": [
+                {
+                  "id": "n_v24_people_parents_mama",
+                  "label": "Mamă"
+                },
+                {
+                  "id": "n_v24_people_parents_tata",
+                  "label": "Tată"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunic",
+                  "label": "Bunic"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunica",
+                  "label": "Bunică"
+                }
+              ]
+            },
+            {
+              "key": "g2",
+              "label": "Băuturi",
+              "tiles": [
+                {
+                  "id": "n_v24_food_snack_ceai",
+                  "label": "Ceai"
+                },
+                {
+                  "id": "n_v3gas_cafea",
+                  "label": "Cafea"
+                },
+                {
+                  "id": "n_v4gas_lapte",
+                  "label": "Lapte"
+                },
+                {
+                  "id": "n_v18gas_socata",
+                  "label": "Socată"
+                }
+              ]
+            },
+            {
+              "key": "g3",
+              "label": "Se deschid ca să treacă ceva",
+              "tiles": [
+                {
+                  "id": "n_v24_home_surfaces_fereastra",
+                  "label": "Fereastră"
+                },
+                {
+                  "id": "n_v4via_usa",
+                  "label": "ușă"
+                },
+                {
+                  "id": "n_v24_body_face_gura",
+                  "label": "Gură"
+                },
+                {
+                  "id": "n_v33_bathroom_fixture_robinet",
+                  "label": "Robinet"
+                }
+              ]
+            },
+            {
+              "key": "g4",
+              "label": "Se ascut",
+              "tiles": [
+                {
+                  "id": "n_v24_school_writing_creion",
+                  "label": "Creion"
+                },
+                {
+                  "id": "n_v29_kitchen_table_cutit",
+                  "label": "Cuțit"
+                },
+                {
+                  "id": "n_v4ist_sabie",
+                  "label": "Sabie"
+                },
+                {
+                  "id": "n_v32_workshop_cut_fierastrau",
+                  "label": "Fierăstrău"
+                }
+              ]
+            }
+          ],
+          "solved_count": 4,
+          "remaining_groups": 0,
+          "lives": 4,
+          "mistakes": 0,
+          "won": true,
+          "lost": false,
+          "difficulty": "normal",
+          "clues_used": 0,
+          "clue_available": false,
+          "clues": [],
+          "score": 1000,
+          "share": "cat_de_roman_esti · Conexiuni · 0 greseli\n🟩🟩🟩🟩\n🟦🟦🟦🟦\n🟪🟪🟪🟪\n🟧🟧🟧🟧",
+          "solution": [
+            {
+              "key": "g1",
+              "label": "Părinți și bunici",
+              "tiles": [
+                {
+                  "id": "n_v24_people_parents_mama",
+                  "label": "Mamă"
+                },
+                {
+                  "id": "n_v24_people_parents_tata",
+                  "label": "Tată"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunic",
+                  "label": "Bunic"
+                },
+                {
+                  "id": "n_v24_people_grandparents_bunica",
+                  "label": "Bunică"
+                }
+              ]
+            },
+            {
+              "key": "g2",
+              "label": "Băuturi",
+              "tiles": [
+                {
+                  "id": "n_v24_food_snack_ceai",
+                  "label": "Ceai"
+                },
+                {
+                  "id": "n_v3gas_cafea",
+                  "label": "Cafea"
+                },
+                {
+                  "id": "n_v4gas_lapte",
+                  "label": "Lapte"
+                },
+                {
+                  "id": "n_v18gas_socata",
+                  "label": "Socată"
+                }
+              ]
+            },
+            {
+              "key": "g3",
+              "label": "Se deschid ca să treacă ceva",
+              "tiles": [
+                {
+                  "id": "n_v24_home_surfaces_fereastra",
+                  "label": "Fereastră"
+                },
+                {
+                  "id": "n_v4via_usa",
+                  "label": "ușă"
+                },
+                {
+                  "id": "n_v24_body_face_gura",
+                  "label": "Gură"
+                },
+                {
+                  "id": "n_v33_bathroom_fixture_robinet",
+                  "label": "Robinet"
+                }
+              ]
+            },
+            {
+              "key": "g4",
+              "label": "Se ascut",
+              "tiles": [
+                {
+                  "id": "n_v24_school_writing_creion",
+                  "label": "Creion"
+                },
+                {
+                  "id": "n_v29_kitchen_table_cutit",
+                  "label": "Cuțit"
+                },
+                {
+                  "id": "n_v4ist_sabie",
+                  "label": "Sabie"
+                },
+                {
+                  "id": "n_v32_workshop_cut_fierastrau",
+                  "label": "Fierăstrău"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "fairness": {
+        "unfair_tiles": [],
+        "contested_tiles": [],
+        "engine_unfair_raw": 0
+      }
+    },
+    {
+      "id": "ct_viata_de_roman_376",
+      "review_binding": "sha256:92fd9d1fbd1994bc14fb51a392fd978737bb41e9371e59b509cc29507af4ccb9",
+      "steps": [
+        {
+          "input": "casă",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v4soc_casa",
+              "label": "casă",
+              "distance": 2,
+              "rank": 11,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #11."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "cameră",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_rooms_camera",
+              "label": "Cameră",
+              "distance": 3,
+              "rank": 22,
+              "temperature": "Cald",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 11 locuri.",
+              "rank_delta": -11
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "input": "podea",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_surfaces_podea",
+              "label": "Podea",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 9 locuri mai aproape.",
+              "rank_delta": 9
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "pernă",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_bed_perna",
+              "label": "Pernă",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "same",
+              "message": "La fel de aproape ca încercarea trecută.",
+              "rank_delta": 0
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "pătură",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_textiles_patura",
+              "label": "Pătură",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 5,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 2 locuri.",
+              "rank_delta": -2
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "cearșaf",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_textiles_cearsaf",
+              "label": "Cearșaf",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 6
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 6,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "same",
+              "message": "La fel de aproape ca încercarea trecută.",
+              "rank_delta": 0
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "ușă",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v4via_usa",
+              "label": "ușă",
+              "distance": 1,
+              "rank": 6,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 7
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 7,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 2 locuri.",
+              "rank_delta": -2
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "aspirator",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_floor_aspirator",
+              "label": "Aspirator",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 8
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 8,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "warmer",
+              "message": "Mai cald cu 3 locuri.",
+              "rank_delta": 3
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "a spăla",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_action_home_a_spala",
+              "label": "A spăla",
+              "distance": 2,
+              "rank": 8,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 9
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 9,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 5 locuri.",
+              "rank_delta": -5
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "mobilă",
+          "response": {
+            "ok": false,
+            "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+            "suggestions": [],
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 9,
+            "won": false,
+            "reachable_count": 2353,
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "textil",
+          "response": {
+            "ok": false,
+            "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+            "suggestions": [],
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 9,
+            "won": false,
+            "reachable_count": 2353,
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "parchet",
+          "response": {
+            "ok": false,
+            "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+            "suggestions": [],
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 9,
+            "won": false,
+            "reachable_count": 2353,
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "mochetă",
+          "response": {
+            "ok": false,
+            "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+            "suggestions": [],
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 9,
+            "won": false,
+            "reachable_count": 2353,
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "pian",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v3muz_pian",
+              "label": "Pian",
+              "distance": 5,
+              "rank": 294,
+              "temperature": "Rece",
+              "closeness": 88,
+              "attempt_number": 10
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v3muz_pian",
+                "label": "Pian",
+                "distance": 5,
+                "rank": 294,
+                "temperature": "Rece",
+                "closeness": 88,
+                "attempt_number": 10
+              }
+            ],
+            "attempts": 10,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 286 locuri.",
+              "rank_delta": -286
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "munte",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v2geo_munte",
+              "label": "munte",
+              "distance": 6,
+              "rank": 1627,
+              "temperature": "Foarte rece",
+              "closeness": 31,
+              "attempt_number": 11
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v3muz_pian",
+                "label": "Pian",
+                "distance": 5,
+                "rank": 294,
+                "temperature": "Rece",
+                "closeness": 88,
+                "attempt_number": 10
+              },
+              {
+                "id": "n_v2geo_munte",
+                "label": "munte",
+                "distance": 6,
+                "rank": 1627,
+                "temperature": "Foarte rece",
+                "closeness": 31,
+                "attempt_number": 11
+              }
+            ],
+            "attempts": 11,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 1333 locuri.",
+              "rank_delta": -1333
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "tren",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_transport_rail_tren",
+              "label": "Tren",
+              "distance": 6,
+              "rank": 1156,
+              "temperature": "Foarte rece",
+              "closeness": 51,
+              "attempt_number": 12
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v3muz_pian",
+                "label": "Pian",
+                "distance": 5,
+                "rank": 294,
+                "temperature": "Rece",
+                "closeness": 88,
+                "attempt_number": 10
+              },
+              {
+                "id": "n_v24_transport_rail_tren",
+                "label": "Tren",
+                "distance": 6,
+                "rank": 1156,
+                "temperature": "Foarte rece",
+                "closeness": 51,
+                "attempt_number": 12
+              },
+              {
+                "id": "n_v2geo_munte",
+                "label": "munte",
+                "distance": 6,
+                "rank": 1627,
+                "temperature": "Foarte rece",
+                "closeness": 31,
+                "attempt_number": 11
+              }
+            ],
+            "attempts": 12,
+            "won": false,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "warmer",
+              "message": "Mai cald cu 471 locuri.",
+              "rank_delta": 471
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "category"
+          }
+        },
+        {
+          "input": "covoare",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_textiles_covor",
+              "label": "Covor",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 13
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_textiles_covor",
+                "label": "Covor",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 13
+              },
+              {
+                "id": "n_v24_home_bed_perna",
+                "label": "Pernă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 8
+              },
+              {
+                "id": "n_v24_home_textiles_cearsaf",
+                "label": "Cearșaf",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 6
+              },
+              {
+                "id": "n_v24_home_textiles_patura",
+                "label": "Pătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4via_usa",
+                "label": "ușă",
+                "distance": 1,
+                "rank": 6,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 7
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 2,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 9
+              },
+              {
+                "id": "n_v4soc_casa",
+                "label": "casă",
+                "distance": 2,
+                "rank": 11,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_rooms_camera",
+                "label": "Cameră",
+                "distance": 3,
+                "rank": 22,
+                "temperature": "Cald",
+                "closeness": 99,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v3muz_pian",
+                "label": "Pian",
+                "distance": 5,
+                "rank": 294,
+                "temperature": "Rece",
+                "closeness": 88,
+                "attempt_number": 10
+              },
+              {
+                "id": "n_v24_transport_rail_tren",
+                "label": "Tren",
+                "distance": 6,
+                "rank": 1156,
+                "temperature": "Foarte rece",
+                "closeness": 51,
+                "attempt_number": 12
+              },
+              {
+                "id": "n_v2geo_munte",
+                "label": "munte",
+                "distance": 6,
+                "rank": 1627,
+                "temperature": "Foarte rece",
+                "closeness": 31,
+                "attempt_number": 11
+              }
+            ],
+            "attempts": 13,
+            "won": true,
+            "reachable_count": 2353,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 0,
+            "clue_available": false,
+            "target": {
+              "id": "n_v24_home_textiles_covor",
+              "label": "Covor",
+              "description": "Concept cotidian din grupul «textile din casă»: Covor."
+            },
+            "score": 280,
+            "share": "cat_de_roman_esti · Cald sau Rece\n🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟧🟨🎯\n13 incercari"
+          }
+        }
+      ],
+      "target_description": "Concept cotidian din grupul «textile din casă»: Covor.",
+      "incoming": {
+        "minimum": 5,
+        "count": 5,
+        "sample": [
+          {
+            "id": "n_v24_home_bed_perna",
+            "label": "Pernă"
+          },
+          {
+            "id": "n_v24_home_surfaces_podea",
+            "label": "Podea"
+          },
+          {
+            "id": "n_v24_home_textiles_cearsaf",
+            "label": "Cearșaf"
+          },
+          {
+            "id": "n_v24_home_textiles_patura",
+            "label": "Pătură"
+          },
+          {
+            "id": "n_v4via_usa",
+            "label": "ușă"
+          }
+        ],
+        "sample_truncated": false,
+        "recognition_assessed": false
+      }
+    },
+    {
+      "id": "lt_gastronomie_245",
+      "review_binding": "sha256:7c78f0e319ce663a805483c9955a837d2edd4083cc184822a183202942ac03b4",
+      "routes": [
+        {
+          "labels": [
+            "Vanilie",
+            "Poale-n brâu",
+            "Brânză"
+          ],
+          "initial": {
+            "game_id": "ea770a0f-d057-4e7c-bc01-547c7bb1ec7a",
+            "start": {
+              "id": "n_v85_food_vanilie",
+              "label": "Vanilie"
+            },
+            "target": {
+              "id": "n_v2gas_branza",
+              "label": "Brânză",
+              "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+            },
+            "current": {
+              "id": "n_v85_food_vanilie",
+              "label": "Vanilie"
+            },
+            "path": [
+              {
+                "id": "n_v85_food_vanilie",
+                "label": "Vanilie"
+              }
+            ],
+            "moves": 0,
+            "optimal": 2,
+            "won": false,
+            "difficulty": "usor",
+            "choices": [
+              {
+                "label": "Cozonac",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cremă de vanilie",
+                "relation": "parte și întreg"
+              },
+              {
+                "label": "Pască",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Poale-n brâu",
+                "relation": "legătură directă"
+              }
+            ],
+            "backtrack_recommended": false
+          },
+          "steps": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_gas_placinte_poale_brau",
+                "label": "Poale-n brâu"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_vanilie",
+                  "label": "Vanilie"
+                },
+                {
+                  "id": "n_gas_placinte_poale_brau",
+                  "label": "Poale-n brâu",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Brânză",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Papanași",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Plăcinte",
+                  "relation": "exemplu și categorie"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v2gas_branza",
+                "label": "Brânză"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_vanilie",
+                  "label": "Vanilie"
+                },
+                {
+                  "id": "n_gas_placinte_poale_brau",
+                  "label": "Poale-n brâu",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v2gas_branza",
+                  "label": "Brânză",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ],
+          "final": {
+            "game_id": "ea770a0f-d057-4e7c-bc01-547c7bb1ec7a",
+            "start": {
+              "id": "n_v85_food_vanilie",
+              "label": "Vanilie"
+            },
+            "target": {
+              "id": "n_v2gas_branza",
+              "label": "Brânză",
+              "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+            },
+            "current": {
+              "id": "n_v2gas_branza",
+              "label": "Brânză"
+            },
+            "path": [
+              {
+                "id": "n_v85_food_vanilie",
+                "label": "Vanilie"
+              },
+              {
+                "id": "n_gas_placinte_poale_brau",
+                "label": "Poale-n brâu",
+                "relation": "legătură directă"
+              },
+              {
+                "id": "n_v2gas_branza",
+                "label": "Brânză",
+                "relation": "legătură directă"
+              }
+            ],
+            "moves": 2,
+            "optimal": 2,
+            "won": true,
+            "difficulty": "usor",
+            "choices": [],
+            "backtrack_recommended": false,
+            "score": 1000,
+            "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+          }
+        },
+        {
+          "labels": [
+            "Vanilie",
+            "Pască",
+            "Brânză"
+          ],
+          "initial": {
+            "game_id": "c8e91237-bce3-4521-a8aa-07409e308efd",
+            "start": {
+              "id": "n_v85_food_vanilie",
+              "label": "Vanilie"
+            },
+            "target": {
+              "id": "n_v2gas_branza",
+              "label": "Brânză",
+              "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+            },
+            "current": {
+              "id": "n_v85_food_vanilie",
+              "label": "Vanilie"
+            },
+            "path": [
+              {
+                "id": "n_v85_food_vanilie",
+                "label": "Vanilie"
+              }
+            ],
+            "moves": 0,
+            "optimal": 2,
+            "won": false,
+            "difficulty": "usor",
+            "choices": [
+              {
+                "label": "Cozonac",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Cremă de vanilie",
+                "relation": "parte și întreg"
+              },
+              {
+                "label": "Pască",
+                "relation": "legătură directă"
+              },
+              {
+                "label": "Poale-n brâu",
+                "relation": "legătură directă"
+              }
+            ],
+            "backtrack_recommended": false
+          },
+          "steps": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v17gas_pasca",
+                "label": "Pască"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_vanilie",
+                  "label": "Vanilie"
+                },
+                {
+                  "id": "n_v17gas_pasca",
+                  "label": "Pască",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Brânză",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Cozonac",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Masa de Paște",
+                  "relation": "parte și întreg"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v2gas_branza",
+                "label": "Brânză"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_vanilie",
+                  "label": "Vanilie"
+                },
+                {
+                  "id": "n_v17gas_pasca",
+                  "label": "Pască",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v2gas_branza",
+                  "label": "Brânză",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ],
+          "final": {
+            "game_id": "c8e91237-bce3-4521-a8aa-07409e308efd",
+            "start": {
+              "id": "n_v85_food_vanilie",
+              "label": "Vanilie"
+            },
+            "target": {
+              "id": "n_v2gas_branza",
+              "label": "Brânză",
+              "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+            },
+            "current": {
+              "id": "n_v2gas_branza",
+              "label": "Brânză"
+            },
+            "path": [
+              {
+                "id": "n_v85_food_vanilie",
+                "label": "Vanilie"
+              },
+              {
+                "id": "n_v17gas_pasca",
+                "label": "Pască",
+                "relation": "legătură directă"
+              },
+              {
+                "id": "n_v2gas_branza",
+                "label": "Brânză",
+                "relation": "legătură directă"
+              }
+            ],
+            "moves": 2,
+            "optimal": 2,
+            "won": true,
+            "difficulty": "usor",
+            "choices": [],
+            "backtrack_recommended": false,
+            "score": 1000,
+            "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+          }
+        }
+      ],
+      "corridor_profile": [
+        7,
+        7,
+        7
+      ]
+    }
+  ]
+}

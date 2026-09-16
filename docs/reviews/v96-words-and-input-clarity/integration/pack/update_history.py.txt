@@ -1,0 +1,56 @@
+"""Add outer V96 reviewed inverse while preserving every original historical pin."""
+from pathlib import Path
+import hashlib,json
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');p=R/'tests/content_history.py';s=p.read_text();rp=R/'docs/reviews/v96-words-and-input-clarity/artifact-delta.json';receipt=json.loads(rp.read_bytes())
+start=s.index('_V95_RECEIPT =');end=s.index('\n\n# The V92 expansion',start)
+block=s[start:end].replace('V95','V96').replace('v95-discovery-and-game-quality','v96-words-and-input-clarity')
+block=block.replace('7672de9ef287a7808a12d77d11183b0b3741f6d969998ec026de9367f7fe47e1',hashlib.sha256(rp.read_bytes()).hexdigest())
+old=json.loads((R/'docs/reviews/v95-discovery-and-game-quality/artifact-delta.json').read_bytes())
+for filename,part in receipt['files'].items():block=block.replace(old['files'][filename]['baseline_sha256'],part['baseline_sha256'])
+block=block.replace('cx_viata_de_roman_372','cx_viata_de_roman_373').replace('{"ct_viata_de_roman_374", "ct_viata_de_roman_375"}','{"ct_viata_de_roman_376"}').replace('{"lt_gastronomie_243", "lt_gastronomie_244"}','{"lt_gastronomie_245"}')
+s=s[:end]+'\n\n'+block+s[end:]
+start=s.index('def before_v95_artifact(');end=s.index('\n\ndef before_v94_lant_ledger',start)
+func=s[start:end].replace('v95','v96').replace('V95','V96').replace('cf6b28b bytes before evaluating the original V94 transition','1457786 bytes before evaluating the original V95 transition').replace('cf6b28bc0d247be33e494be1395ca7d676a9f4b4','14577863038378c734c7b2e0e8b33ea8158f318b').replace('len(expected_ids) == 5','len(expected_ids) == 3').replace('["lant"] == 244','["lant"] == 245')
+s=s[:end]+'\n\n'+func+s[end:]
+needle='''def before_v95_artifact(current: dict, filename: str) -> dict:
+    """Restore complete cf6b28b bytes before evaluating the original V94 transition."""
+'''
+assert s.count(needle)==1;s=s.replace(needle,needle+'    current = before_v96_artifact(current, filename)\n')
+p.write_text(s)
+test=R/'tests/test_v95_content_history.py';t=test.read_text()
+t=t.replace('from tests.content_history import before_v95_artifact','from tests.content_history import before_v95_artifact, before_v96_artifact')
+t=t.replace('''    current = read_current(filename)
+    untouched = deepcopy(current)
+    previous = before_v95_artifact(current, filename)
+    assert digest(previous, filename) == BASELINE[filename]
+    assert current == untouched
+''','''    latest = read_current(filename)
+    untouched = deepcopy(latest)
+    previous = before_v95_artifact(latest, filename)
+    current = before_v96_artifact(latest, filename)
+    assert digest(previous, filename) == BASELINE[filename]
+    assert latest == untouched
+''')
+t=t.replace('    pack = read_current("games_pack.json")\n','    pack = before_v96_artifact(read_current("games_pack.json"), "games_pack.json")\n')
+test.write_text(t)
+# Derive V96 tests from original V95 assertions, with this transition's exact expected data.
+u=(R/'tests/test_v95_content_history.py').read_text()
+u=u.replace('V95','V96').replace('V94','V95').replace('v95','v96').replace('cf6b28b','1457786')
+u=u.replace('from tests.content_history import before_v96_artifact, before_v96_artifact','from tests.content_history import before_v96_artifact')
+u=u.replace('''    latest = read_current(filename)
+    untouched = deepcopy(latest)
+    previous = before_v96_artifact(latest, filename)
+    current = before_v96_artifact(latest, filename)
+    assert digest(previous, filename) == BASELINE[filename]
+    assert latest == untouched
+''','''    current = read_current(filename)
+    untouched = deepcopy(current)
+    previous = before_v96_artifact(current, filename)
+    assert digest(previous, filename) == BASELINE[filename]
+    assert current == untouched
+''')
+for filename,part in receipt['files'].items():u=u.replace(old['files'][filename]['baseline_sha256'],part['baseline_sha256'])
+u=u.replace('cx_viata_de_roman_372','cx_viata_de_roman_373').replace('{"ct_viata_de_roman_374", "ct_viata_de_roman_375"}','{"ct_viata_de_roman_376"}').replace('{"lt_gastronomie_243", "lt_gastronomie_244"}','{"lt_gastronomie_245"}').replace('lt_gastronomie_243','lt_gastronomie_245')
+u=u.replace('== 705','== 710').replace('["lant"] == 244','["lant"] == 245').replace('    pack = before_v96_artifact(read_current("games_pack.json"), "games_pack.json")\n','    pack = read_current("games_pack.json")\n')
+(R/'tests/test_v96_content_history.py').write_text(u)
+print('V96 strict outer adapter and tests added; original V95 assertions compare restored V95 bytes.')

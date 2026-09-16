@@ -1,0 +1,40 @@
+from pathlib import Path
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from scripts import build_quick_content_v92 as B
+from cat_de_roman_esti.wordgames.derived_catalog import load_derived_catalog
+from cat_de_roman_esti.wordgames.service import get_service
+Q=B.Q
+IDENTITY='/root/v96_quick'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(n,v):(OUT/n).write_bytes(Q.json_bytes(v))
+current=B.build_catalog(OUT/'candidate.json',OUT/'factual-review.json',OUT/'quality-review.json')
+assert Q.json_bytes(current)==(OUT/'catalog.json').read_bytes()
+assert Q.CATALOG_SHA256==sha(OUT/'catalog.json')
+factual=read(OUT/'factual-review.json');audit=read(OUT/'live-audit.json')
+assert factual['reviewer']==IDENTITY
+assert audit['kind']==B.AUDIT_KIND and audit['passed']
+assert audit['catalog_sha256']==sha(OUT/'catalog.json')
+assert audit['candidate_sha256']==sha(OUT/'candidate.json')
+assert audit['bindings']==Q.bindings(live=True)==current['bindings']
+assert audit['runtime_sources']==B.runtime_source_hashes()
+assert audit['core_boards_preserved']
+assert audit['base_counts']=={'intrusul':183,'perechi':153}
+assert audit['combined_counts']=={'intrusul':227,'perechi':192}
+assert len(audit['replays'])==len(current['boards'])==len(current['authored'])==83
+assert {r['id'] for r in audit['replays']}=={r['id'] for r in current['boards']}
+assert all(r['score']==1000 and r['hidden_answers_preserved'] and r['terminal_get_preserved'] for r in audit['replays'])
+previous=read(ROOT/'docs/reviews/v95-discovery-and-game-quality/quick/catalog.json')
+assert current['authored'][:81]==previous['authored']
+for before,after in zip(previous['boards'],current['boards'][:81],strict=True):
+ assert {k:v for k,v in before.items() if k not in ('standard_rank','starter_rank')}=={k:v for k,v in after.items() if k not in ('standard_rank','starter_rank')}
+base=load_derived_catalog();Q.validate_catalog(current,base,get_service())
+new_source_ids={r['source_id'] for r in read(OUT/'raw-candidates.json')['boards']}
+new=[r for r in current['boards'] if r['source_id'] in new_source_ids]
+assert len(new)==2 and all(r['starter_eligible'] for r in new)
+evidence={'kind':'quick-independent-final-factual-check-v1','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'candidate.json'),'catalog_sha256':sha(OUT/'catalog.json'),'audit_sha256':sha(OUT/'live-audit.json'),'factual_review_sha256':sha(OUT/'factual-review.json'),'runtime_sources':B.runtime_source_hashes(),'bindings':Q.bindings(live=True),'natural_public_seed_wins':83,'core_boards_exact':336,'prior_authored_records_exact':81,'prior_payload_scores_exact_except_competition_ranks':True,'checked_new_factual_rows':2,'new_starter_eligible':2,'combined_counts':audit['combined_counts'],'passed':True}
+write('independent-final-factual-check.json',evidence)
+write('final-factual.json',{'kind':B.FINAL_KIND,'role':'factual','reviewer':IDENTITY,'catalog_sha256':sha(OUT/'catalog.json'),'audit_sha256':sha(OUT/'live-audit.json'),'verdict':'accept','rationale':'The exact83-board proposal reproduces both complete independent semantic reviews. All2 new ordinary meanings and source-backed predicates remain exact;81 prior authored records, payloads and non-ranking scores remain exact, and336 core boards remain intact. Current graph/rubric/pack/derived and runtime bindings match the final live audit. All83 authored boards naturally select and win through the API with hidden identifiers/answers and terminal GET preservation. Both new rows retain native starter eligibility without score overrides. This accepts factual meanings and artifact integrity, not measured enjoyment.','independent_check_sha256':sha(OUT/'independent-final-factual-check.json')})
+print(json.dumps({'catalog_sha256':sha(OUT/'catalog.json'),'audit_sha256':sha(OUT/'live-audit.json'),'final_factual_sha256':sha(OUT/'final-factual.json')}))

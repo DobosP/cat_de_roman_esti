@@ -1,0 +1,24 @@
+{
+  "candidate_sha256": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+  "final_factual_sha256": "bd530f2efdae2f5c517ddf0079d9e986621549bf91d6b2431d6e043cdaea4046",
+  "final_quality_sha256": "f24d872a0a2951c0d0bc7f5cf5787977362282056f343b56754c638c3699183b",
+  "guarded_cli_write": true,
+  "installed_sha256": "356270c25d61f16cac3fdb59efa1e0399b18606ee796d498f132a92ad3c9d5c4",
+  "live_audit_sha256": "c7bc726525d0cf23e42146125304d969653f990a4d62c1ac482e5dee0cefb20c",
+  "new": {
+    "concepts": 2,
+    "recipes": 5
+  },
+  "next_wave_constraint": "Compatible saved-book history is at existing maximum8. A subsequent recipe graph change needs an explicitly designed backward-compatible history approach before generation; no history discarded and no limits changed.",
+  "old_records_exact": {
+    "concepts": 247,
+    "recipes": 342
+  },
+  "tests": {
+    "historical_v95_cases": 20,
+    "initial_failure_log_sha256": "fedfb89f6c7f3167e78d553b2d1b62ed53873ca801d17728ca90a2dcf4302cc6",
+    "initial_failure_resolution": "New test incorrectly treated dynamic ready/status inventory fields as immutable; narrowed assertion to every earned journal field while retaining exact restoration inventory assertion.",
+    "pass_log_sha256": "12a9a4a8915fb8d2bb5b4227220247cde267c1a0620203589fe47280d5be4a7f",
+    "v96_cases": 16
+  }
+}

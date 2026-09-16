@@ -117,7 +117,7 @@ def test_unknown_concept_not_counted() -> None:
     assert res.status_code == 200
     body = res.json()
     assert body["ok"] is False
-    assert body["message"] == "Nu cunosc acest concept"
+    assert "Nu ai pierdut nicio încercare" in body["message"]
     assert body["attempts"] == 0
 
 
@@ -1285,6 +1285,7 @@ def test_unknown_guess_returns_fuzzy_suggestions_and_stays_uncounted() -> None:
         and 6 <= len(svc.label(nid)) <= 10
         and svc.resolve(_heavy_typo(svc.label(nid))) is None
         and svc.resolve_fuzzy(_heavy_typo(svc.label(nid))) is None
+        and len(svc.label(nid)) >= 8
         and svc.label(nid) in svc.suggest(_heavy_typo(svc.label(nid)))
     )
     label = svc.label(concept)
@@ -1296,7 +1297,7 @@ def test_unknown_guess_returns_fuzzy_suggestions_and_stays_uncounted() -> None:
     assert body["ok"] is False
     assert body["attempts"] == 0  # unresolved guesses never count (pinned)
     assert label in body["suggestions"]
-    assert "Poate cautai" in body["message"]
+    assert "Nu ai pierdut nicio încercare" in body["message"]
 
 
 def test_fuzzy_suggestions_never_leak_the_target_label() -> None:
@@ -1318,6 +1319,7 @@ def test_fuzzy_suggestions_never_leak_the_target_label() -> None:
         if 6 <= len(svc.label(nid)) <= 10
         and svc.resolve(_heavy_typo(svc.label(nid))) is None
         and svc.resolve_fuzzy(_heavy_typo(svc.label(nid))) is None
+        and len(svc.label(nid)) >= 8
         and svc.label(nid) in svc.suggest(_heavy_typo(svc.label(nid)))
     )
     target_label = svc.label(target)

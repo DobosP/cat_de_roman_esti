@@ -20,6 +20,7 @@ import hashlib
 import random
 from bisect import bisect_left
 from dataclasses import dataclass, field
+from difflib import SequenceMatcher
 from enum import StrEnum
 
 from django.urls import path
@@ -57,7 +58,26 @@ from .service import (
     daily_seed,
     get_service,
     is_reviewed_unresolved_spelling,
+    normalize,
 )
+
+
+def _advisory_spelling_matches(text: str, label: str) -> bool:
+    """Retain clear spelling variants, not remote matches through an unrelated alias."""
+    typed, shown = normalize(text), normalize(label)
+    if len(typed) == len(shown):
+        different = [i for i, (a, b) in enumerate(zip(typed, shown, strict=True)) if a != b]
+        if len(different) <= 1:
+            return True
+        if len(different) == 2:
+            a, b = different
+            if b == a + 1 and typed[a] == shown[b] and typed[b] == shown[a]:
+                return True
+    # A complete known word followed by one/two extra keystrokes remains useful help.
+    if len(shown) >= 3 and typed.startswith(shown) and 1 <= len(typed) - len(shown) <= 2:
+        return True
+    return SequenceMatcher(None, typed, shown).ratio() >= 0.82
+
 
 GAME_KEY = "contexto"
 _DIFFICULTIES = ("usor", "normal", "greu")
@@ -953,15 +973,16 @@ class GuessView(ContractAPIView):
             seen_suggestions: set[str] = set()
             for label in [*projected_suggestions, *kg_suggestions]:
                 key = label.casefold()
-                if key in seen_suggestions:
+                if key in seen_suggestions or not _advisory_spelling_matches(text, label):
                     continue
                 seen_suggestions.add(key)
                 suggestions.append(label)
                 if len(suggestions) == 3:
                     break
-            message = "Nu cunosc acest concept"
-            if suggestions:
-                message = f"Nu cunosc acest concept. Poate cautai: {suggestions[0]}?"
+            message = (
+                "Cuvântul nu este încă în vocabularul jocului. "
+                "Nu ai pierdut nicio încercare."
+            )
             return Response(
                 {
                     "ok": False,

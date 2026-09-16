@@ -1,0 +1,74 @@
+{
+  "candidate_sha256": "3f2d62bf1ca2199019bd88c0d09c5692af28e546816cf0c6173f66b216130e89",
+  "complete_candidate_sha256": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+  "concepts": [
+    {
+      "concept_sha256": "c63b886ed840ff47324c22ccbb56c769fd630a70f07bd423bf993fa1e80fe722",
+      "id": "alw_food_ostropel",
+      "inherited": false,
+      "rationale": "The primary cook documents chicken with tomato sauce and garlic. The definition explicitly limits this world to that familiar variant, without asserting that every ostropel contains tomatoes.",
+      "sources": [
+        "https://pofta-buna.com/ostropel-de-pui-reteta-clasica/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "concept_sha256": "affd64ca201d4bcf29efa40078f59c402700820bc1d191b09e070ad522ea793f",
+      "id": "alw_food_salata_fructe",
+      "inherited": false,
+      "rationale": "The primary author prepares mixed cut fruit and cools it, with syrup and optional whipped cream. The short definition accurately identifies a cold fruit dessert rather than implying cooking.",
+      "sources": [
+        "https://www.lauraadamache.ro/2015/04/salata-de-fructe.html"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "items": [
+    {
+      "id": "ostropel-pui-usturoi",
+      "rationale": "Chicken and garlic cue a recognizable ostropel. The source lightly browns chicken, cooks it through, and adds tomato and garlic sauce; the explanation retains those necessary cooking stages.",
+      "sources": [
+        "https://pofta-buna.com/ostropel-de-pui-reteta-clasica/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "ostropel-pui-sos-rosii",
+      "rationale": "The alternate pairing names chicken and its tomato sauce; the explanation supplies characteristic garlic and thorough cooking. It does not suggest that raw chicken and finished sauce are ready to serve.",
+      "sources": [
+        "https://pofta-buna.com/ostropel-de-pui-reteta-clasica/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "salata-fructe-cutit",
+      "rationale": "The tool pairing truthfully represents cutting and assembling different fruits. The source peels, cuts and mixes fruit before chilling, so the explanation avoids pretending that one whole fruit alone is a salad.",
+      "sources": [
+        "https://www.lauraadamache.ro/2015/04/salata-de-fructe.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "salata-fructe-frisca",
+      "rationale": "Whipped cream is an explicitly optional serving choice in the primary recipe. The caption still requires cleaned, cut, mixed and chilled fruit; it does not conflate this cold dessert with a baked fruit cake.",
+      "sources": [
+        "https://www.lauraadamache.ro/2015/04/salata-de-fructe.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "sandvis-chiftele-legume",
+      "rationale": "Niculi assembles baked vegetable patties with bread, greens and sauce. Gourmandelle independently supports cooking vegetarian patties first. The caption names already cooked patties and makes no vegan claim, avoiding the misleading title of the first source.",
+      "sources": [
+        "https://danielaniculi.ro/2020/03/19/sandvis-vegan-sau-cum-sa-salvezi-prea-multa-quinoa-pusa-la-fiert/",
+        "https://gourmandelle.com/ro/chiftle-prajite-cu-ciuperci/"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "kind": "v96-alchimie-raw-review-v1",
+  "reviewer": "codex-v96-world-factual",
+  "role": "factual",
+  "world_rationale": "Both new definitions and all five preparation ideas agree with live primary-source instructions checked 2026-09-17. The sandwich source title claims vegan despite eggs/dairy in its body; the game makes no such claim.",
+  "world_verdict": "accept"
+}

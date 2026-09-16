@@ -1,0 +1,24 @@
+from pathlib import Path
+import hashlib,gzip,json,subprocess
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');SRC=Path(__file__).parent;OUT=ROOT/'docs/reviews/v96-words-and-input-clarity/integration';OUT.mkdir(exist_ok=True)
+def sha(b):return hashlib.sha256(b).hexdigest()
+rows=[]
+for p in sorted(SRC.rglob('*')):
+ if not p.is_file():continue
+ rel=p.relative_to(SRC)
+ if any(x.startswith(('venv314','pytest-','__pycache__')) or x in {'tmp','node_modules'} for x in rel.parts[:-1]):continue
+ if any(x.startswith('playwright') or x == 'catalog-explore-tests' for x in rel.parts[:-1]):continue
+ if p.suffix not in {'.json','.py','.mjs','.md','.txt','.log','.png'}:continue
+ if p.name.startswith('preview') and p.suffix=='.log':continue
+ raw=p.read_bytes();name=str(rel)+('.txt' if p.suffix=='.py' else '');blob=raw
+ if p.suffix=='.log' or p.name=='error-context.md':name+='.gz';blob=gzip.compress(raw,mtime=0)
+ dst=OUT/name;dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(blob)
+ rows.append({'source':str(rel),'source_size':len(raw),'source_sha256':sha(raw),'archive':name,'archive_size':len(blob),'archive_sha256':sha(blob),'encoding':'gzip' if name.endswith('.gz') else 'identity'})
+(OUT/'archive-manifest.json').write_text(json.dumps({'kind':'v96-integration-archive-v1','baseline_commit':'14577863038378c734c7b2e0e8b33ea8158f318b','files':rows},ensure_ascii=False,indent=2)+'\n')
+changed=set(subprocess.check_output(['git','diff','--name-only','--no-renames','1457786'],cwd=ROOT,text=True).splitlines())|set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines());pins={};deleted=[]
+for rel in sorted(changed):
+ if not rel.startswith(('cat_de_roman_esti/','frontend/','scripts/','tests/')):continue
+ p=ROOT/rel
+ if p.exists():pins[rel]=sha(p.read_bytes())
+ else:deleted.append(rel)
+(OUT/'gate-inputs.json').write_text(json.dumps({'baseline_commit':'14577863038378c734c7b2e0e8b33ea8158f318b','sha256':pins,'deleted':deleted},indent=2)+'\n');print({'files':len(rows),'inputs':len(pins),'deleted':len(deleted)})

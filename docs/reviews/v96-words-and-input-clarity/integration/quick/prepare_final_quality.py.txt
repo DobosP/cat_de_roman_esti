@@ -1,0 +1,50 @@
+from pathlib import Path
+p=Path(__file__).parent/'review_final_quality.py';s=p.read_text()
+s=s.replace('V95','V96').replace('eight recovery journeys','two recovery journeys').replace('feat__v95-discovery-and-game-quality','feat__v96-words-and-input-clarity').replace("/quick')","/integration/quick')")
+s=s.replace('b166aa76e2746c5c2f1382889ede528cce25536fb5480c9d21b027cf65c5d319','75e052c7cb1595bc77a6181bed734893f3d1dc6b0c6fa6c7bb05a91a6a1119d7')
+s=s.replace("== 81","== 83").replace("==81","==83").replace("'intrusul': 226, 'perechi': 191","'intrusul': 227, 'perechi': 192").replace('assert len(results)==8','assert len(results)==2')
+start=s.index('# The functional tableware clue')
+end=s.index("assert sha(OUT/'catalog.json')==expected_catalog",start)
+s=s[:start]+'''# Both additions must be naturally reachable through the real starter API.
+starter_results=[]
+for board in additions:
+    if board._source_id not in new_source_ids:
+        continue
+    module=I if board.game=='intrusul' else P
+    assert next(r['starter_eligible'] for r in catalog['boards'] if r['source_id']==board._source_id)
+    client=Client();url=f'/api/wordgames/{board.game}/games'
+    with patch.object(module,'_catalog_or_503',return_value=combined):
+        for seed in range(2000):
+            response=client.post(f'{url}?starter=1&seed={seed}&category={board.category}')
+            assert response.status_code==200,response.content
+            state=response.json();gid=state['game_id']
+            if module.store.get(gid).catalog_id!=board._catalog_id:
+                module.store.delete(gid)
+                continue
+            endpoint=f'{url}/{gid}'
+            no_secrets(state,board)
+            if board.game=='intrusul':
+                response=client.post(endpoint+'/guess',{'id':board.payload['intruder']},content_type='application/json')
+                assert response.status_code==200
+                terminal=response.json()
+            else:
+                for pair in board.payload['pairs']:
+                    response=client.post(endpoint+'/match',{'ids':pair['members']},content_type='application/json')
+                    assert response.status_code==200
+                terminal=response.json()
+            assert terminal['won'] and terminal['score']==1000
+            assert client.get(endpoint).json()['score']==1000
+            no_secrets(terminal,board)
+            starter_results.append({'id':board._catalog_id,'public_seed':seed,'starter':1,'category':board.category,'won':True,'score':1000})
+            module.store.delete(gid)
+            break
+        else:
+            raise AssertionError('new starter never selected')
+assert len(starter_results)==2
+''' +s[end:]
+s=s.replace("'/root/v95_pack_author'","'codex-v96-world-quick-quality'").replace("'winning_replays_exact':81","'winning_replays_exact':83").replace("'results':results,","'results':results,'starter_results':starter_results,")
+a=s.index("'rationale':'Accept the exact")
+b=s.index("','independent_recovery_audit_sha256'",a)
+s=s[:a]+"'rationale':'Accept the exact83-board catalog. Independently reproduced every supplied public-seed winning audit, all current live bindings and runtime hashes, and the complete semantic-review intersection. Both new boards additionally pass wrong/repeated-action, hint privacy, GET recovery, solved/terminal rejection and score650 recovery journeys. Each is naturally selected using starter=1 with a public seed and wins at1000, preserving the starter gate. All336 core boards and81 inherited authored records remain exact except competition ranking positions. The atmospheric group and four everyday pairs remain uniquely defensible after runtime play. Final combined counts227Intrusul/192Perechi. No fixture write by this reviewer.'"+s[b+1:]
+s=s.replace("'winning_replays':81,'new_recovery_journeys':8","'winning_replays':83,'new_recovery_journeys':2,'starter_wins':len(starter_results)")
+p.write_text(s)

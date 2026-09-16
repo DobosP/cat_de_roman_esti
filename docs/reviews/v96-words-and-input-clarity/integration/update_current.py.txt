@@ -1,0 +1,18 @@
+from pathlib import Path
+import hashlib,json,subprocess
+from cat_de_roman_esti.wordgames.service import get_service
+from tests.current_content import CURRENT_CONTENT as C
+root=Path.cwd();out=Path(__file__).parent
+old=json.loads(subprocess.check_output(['git','show','1457786:cat_de_roman_esti/fixtures/games_pack.json']))
+pack=json.loads((root/'cat_de_roman_esti/fixtures/games_pack.json').read_bytes());rank=json.loads((root/'cat_de_roman_esti/fixtures/board_rankings_v37.json').read_bytes())
+svc=get_service();profile=lambda p:{r['id']:sorted(svc.distances_to(r['target']).items()) for r in p['contexto']}
+a,b=profile(old),profile(pack);digest=lambda v:hashlib.sha256(json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+assert digest(a)==C.contexto_profile_sha256
+assert all(b[k]==v for k,v in a.items()) and set(b)-set(a)=={'ct_viata_de_roman_376'}
+(out/'contexto-profile-delta.json').write_text(json.dumps({'before':digest(a),'after':digest(b),'preserved':len(a),'added':{k:b[k] for k in b if k not in a},'all_previous_exact':True},ensure_ascii=False,indent=2)+'\n')
+p=root/'tests/current_content.py';s=p.read_text()
+for rel,h in C.artifact_sha256.items():s=s.replace(h,hashlib.sha256((root/rel).read_bytes()).hexdigest())
+s=s.replace(C.ranking_rows_sha256,hashlib.sha256((json.dumps(rank['boards'],ensure_ascii=False,indent=1)+'\n').encode()).hexdigest()).replace(C.contexto_profile_sha256,digest(b))
+changes={"'conexiuni': 243":"'conexiuni': 244","'contexto': 263":"'contexto': 264","'lant': 121":"'lant': 122","'conexiuni': 372":"'conexiuni': 373","'contexto': 375":"'contexto': 376","'lant': 244":"'lant': 245","'approved': 702":"'approved': 705","(243, 243, 0)":"(244, 244, 0)","(263, 261, 2)":"(264, 262, 2)","(121, 118, 3)":"(122, 119, 3)","'total': 710":"'total': 713","'pilot_eligible': 540":"'pilot_eligible': 543","'conexiuni': 85":"'conexiuni': 86","'contexto': 257":"'contexto': 258","'lant': 118":"'lant': 119",'"total": 417':'"total": 419','"intrusul": 226, "perechi": 191':'"intrusul": 227, "perechi": 192','"intrusul": 43, "perechi": 38':'"intrusul": 44, "perechi": 39','"intrusul": 60, "perechi": 59':'"intrusul": 61, "perechi": 60','contexto_approved=261':'contexto_approved=262','contexto_eligible=257':'contexto_eligible=258','contexto_id_high_water=375':'contexto_id_high_water=376'}
+for a,b in changes.items():assert a in s,a;s=s.replace(a,b)
+p.write_text(s);print('Updated current expectations with exact263oldprofile proof')

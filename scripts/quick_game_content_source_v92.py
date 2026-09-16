@@ -2279,3 +2279,44 @@ BOARDS += ({'id': 'iq92_v95_workshop',
                'obișnuită de salam de biscuiți, fără pretenția că orice variantă conține lactate. '
                'Cele două citrice rămân perechea distinctă; nu sunt ingrediente obligatorii ale '
                'desertului.'})
+
+# V96: atmospheric phenomena and four familiar natural-world associations.
+BOARDS += ({'category': 'stiinta',
+  'difficulty': 'usor',
+  'game': 'intrusul',
+  'id': 'iq92_v96_weather',
+  'payload': {'group_label': 'Fenomene produse în atmosferă',
+              'intruder': 'n_v24_nature_sky_luna',
+              'members': ['n_v24_weather_storm_furtuna',
+                          'n_v24_weather_storm_fulger',
+                          'n_v24_weather_storm_tunet']},
+  'rationale': 'Furtuna, fulgerul și tunetul sunt fenomene atmosferice; Luna este un corp '
+               'ceresc. Eticheta nu spune că fiecare furtună produce tunete sau că Luna este '
+               'invizibilă ziua.',
+  'source_id': 'aq92_v96_intrusul_weather',
+  'sources': ['https://www.weather.gov/safety/lightning-science-thunder',
+              'https://forecast.weather.gov/glossary.php?word=lightning',
+              'https://science.nasa.gov/moon/facts/']},
+ {'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'game': 'perechi',
+  'id': 'pq92_v96_nature_everyday',
+  'payload': {'pairs': [{'group_label': 'Parte a plantei și ramificația pe care poate crește',
+                         'members': ['n_v4sti_frunza', 'n_v24_nature_plant_parts_ramura']},
+                        {'group_label': 'Animale domestice ținute frecvent pentru companie',
+                         'members': ['n_v29_animal_pets_caine', 'n_v29_animal_pets_pisica']},
+                        {'group_label': 'Aliment și categoria de alimente căreia îi aparține',
+                         'members': ['n_v24_food_imported_fruit_banana', 'n_v4gas_fruct']},
+                        {'group_label': 'Cereală și produsul obținut prin măcinarea boabelor',
+                         'members': ['n_v84_food_grau', 'n_v24_food_pantry_faina']}]},
+  'rationale': 'Frunză–Ramură, Câine–Pisică, Banană–Fruct și Grâu–Făină au relații obișnuite '
+               'distincte. Bananele și grâul provin din plante, dar nu pot înlocui perechea '
+               'grâu–făină fără să lase un partener nepotrivit. Nu se afirmă că banana crește '
+               'într-un copac sau că orice făină este din grâu.',
+  'source_id': 'aq92_v96_perechi_nature_everyday',
+  'sources': ['https://dexonline.ro/definitie/frunz%C4%83',
+              'https://dexonline.ro/definitie/ramur%C4%83',
+              'https://dexonline.ro/definitie/c%C3%A2ine',
+              'https://dexonline.ro/definitie/pisic%C4%83',
+              'https://dexonline.ro/definitie/banan%C4%83',
+              'https://dexonline.ro/definitie/f%C4%83in%C4%83']})

@@ -1,0 +1,81 @@
+"""Independent V96 quick quality judgments and exhaustive native partition checks."""
+from pathlib import Path
+import gzip,hashlib,itertools,json,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');O=Path(__file__).parent
+sys.path.insert(0,str(R))
+from scripts import build_quick_content_v92 as B
+from cat_de_roman_esti.wordgames.derived_catalog import load_derived_catalog
+from cat_de_roman_esti.wordgames.service import get_service
+Q=B.Q;J='codex-v96-world-quick-quality'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(p,v):p.write_bytes(Q.json_bytes(v))
+P=R/'docs/reviews/v95-discovery-and-game-quality/quick'
+old=read(P/'candidate.json');prior=read(P/'quality-review.json');final=read(P/'final-quality.json');old_audit=read(P/'live-audit.json')
+assert prior['candidate_sha256']==sha(P/'candidate.json')
+assert final['audit_sha256']==sha(P/'live-audit.json') and final['catalog_sha256']==old_audit['catalog_sha256']
+assert final['reviewer']==prior['reviewer'] and final['verdict']=='accept'
+c=read(O/'candidate.json');raw=read(O/'raw-candidates.json');installed=read(Q.CATALOG_PATH)
+old_rows={r['id']:r for r in old['boards']};rows={r['id']:r for r in c['boards']}
+assert len(old_rows)==81 and len(rows)==83 and installed['authored']==old['boards']
+assert all(rows[k]==v for k,v in old_rows.items())
+assert {r['id'] for r in prior['items']}==set(old_rows)
+assert {r['id'] for r in raw['boards']}==set(rows)-set(old_rows)
+assert all(rows[r['id']]==r for r in raw['boards']) and c==B.candidate()
+assert Q.bindings(live=False)=={k:c['bindings'][k] for k in ('kg_sha256','rubric_sha256','core_payload_sha256')}
+assert all(c['bindings'][k]==old['bindings'][k] for k in ('kg_sha256','rubric_sha256','core_payload_sha256'))
+svc=get_service();core=load_derived_catalog();weights=Q.graph_strengths(svc)
+ratings=Q.rated_boards(c['boards'],core,svc)
+assert [{k:v for k,v in r.items() if k not in ('standard_rank','starter_rank')} for r in ratings[:81]]==[{k:v for k,v in r.items() if k not in ('standard_rank','starter_rank')} for r in installed['boards']]
+base=[{'game':b.game,'payload':b.payload} for b in core._boards]+installed['authored'];archives=[];files=[]
+def collect(v,path):
+ if isinstance(v,dict):
+  if v.get('game') in ('intrusul','perechi') and isinstance(v.get('payload'),dict):
+   try:Q.visible_ids(v)
+   except (KeyError,TypeError):pass
+   else:archives.append((path,v))
+  for x in v.values():collect(x,path)
+ elif isinstance(v,list):
+  for x in v:collect(x,path)
+for p in sorted((R/'docs/reviews').rglob('*')):
+ if 'v96-words-and-input-clarity' in p.parts or not p.is_file() or not (p.name.endswith('.json') or p.name.endswith('.json.gz')):continue
+ try:v=json.loads(gzip.decompress(p.read_bytes()) if p.name.endswith('.gz') else p.read_bytes())
+ except (ValueError,OSError,UnicodeError):continue
+ before=len(archives);collect(v,str(p.relative_to(R)))
+ if len(archives)>before:files.append({'path':str(p.relative_to(R)),'sha256':sha(p),'records':len(archives)-before})
+def matchings(v):
+ if not v:return 1
+ first,*rest=v
+ return sum(matchings([x for x in rest if x!=second]) for second in rest if weights.get(frozenset((first,second)),0)>=.6)
+checks=[]
+for row in raw['boards']:
+ game=row['game'];visible=Q.visible_ids(row);same=[x for x in base if x['game']==game];historic=[(p,x) for p,x in archives if x['game']==game]
+ fresh=set(visible)-{n for x in same for n in Q.visible_ids(x)}
+ overlaps=[len(set(visible)&set(Q.visible_ids(x))) for x in same]
+ historical_max=max(len(set(visible)&set(Q.visible_ids(x))) for _,x in historic)
+ assert max(overlaps)<=1 and historical_max<=1
+ result={'id':row['id'],'fresh_words':[svc.label(n) for n in sorted(fresh)],'max_served_overlap':max(overlaps),'max_historical_overlap':historical_max,'starter_eligible':next(x['starter_eligible'] for x in ratings if x['source_id']==row['source_id'])}
+ assert result['starter_eligible']
+ if game=='intrusul':
+  members=row['payload']['members'];odd=row['payload']['intruder']
+  result['inlier_strengths']=[weights.get(frozenset(p),0) for p in itertools.combinations(members,2)]
+  result['odd_strengths']=[weights.get(frozenset((odd,n)),0) for n in members]
+  assert min(result['inlier_strengths'])>=.6 and max(result['odd_strengths'])==0 and len(fresh)==3
+ else:
+  intended={frozenset(p['members']) for p in row['payload']['pairs']}
+  assert not intended&{frozenset(p['members']) for _,x in historic for p in x['payload']['pairs']}
+  result['intended_strengths']=[weights.get(frozenset(p['members']),0) for p in row['payload']['pairs']]
+  result['max_cross_strength']=max(weights.get(frozenset(p),0) for p in itertools.combinations(visible,2) if frozenset(p) not in intended)
+  result['native_matchings']=matchings(visible)
+  assert result['native_matchings']==1 and result['max_cross_strength']==0 and len(fresh)==4
+ checks.append(result)
+reasons={
+'iq92_v96_weather':'Accept easy. Storm, lightning and thunder are familiar atmospheric phenomena; the Moon is an astronomical body beyond the atmosphere. The exact group label avoids claiming that every storm includes thunder or that the Moon cannot appear during daytime. Lightning and thunder are related but remain separate visual and sound phenomena, each satisfying the same predicate. A broad sky theme includes all four, yet does not defeat the narrower, uniquely defensible atmospheric trio. NWS explains thunder as atmospheric air expansion; NASA identifies the Moon as a natural satellite.',
+'pq92_v96_nature_everyday':'Accept easy. Dog-cat provides an immediate familiar-pet anchor, wheat-flour a recognizable milling relation, banana-fruit a food classification, and leaf-branch a plant attachment. Leaf and fruit can both associate with a branch, but swapping them leaves banana with leaf, which has no equally direct meaning. Wheat is a plant and flour a food, yet alternative taxonomy swaps leave the plant-part pair unmatched. The qualifying labels avoid saying all leaves grow on branches or all flour comes from wheat. No specialist or culture-specific knowledge is required; exactly one complete human and native matching is defensible.'}
+items=[{'id':r['id'],'verdict':'accept','rationale':reasons[r['id']],'sources':[]} for r in raw['boards']]
+write(O/'raw-quality-review.json',{'kind':B.REVIEW_KIND,'role':'quality','reviewer':J,'candidate_sha256':sha(O/'raw-candidates.json'),'items':items})
+proof={'kind':'v96-quick-independent-quality-v1','reviewer':J,'date':'2026-09-17','candidate_sha256':sha(O/'candidate.json'),'previous_candidate_sha256':sha(P/'candidate.json'),'previous_quality_review_sha256':sha(P/'quality-review.json'),'old_81_records_judgments_payloads_scores_exact':True,'same_kg_rubric_core_payload':True,'archived_records_scanned':len(archives),'archive_files':files,'novel_pairs':4,'checks':checks,'current_wave_drafts_excluded_from_historical_inventory':True,'inherited_unselected_leads_disclosed':'V95 scout text mentioned storm trio and banana/fruit as unselected ideas; neither was a rejected or served board.','outstanding':'Final catalog and API recovery review.'}
+write(O/'quality-inheritance-and-mechanics.json',proof)
+write(O/'quality-review.json',{'kind':B.REVIEW_KIND,'role':'quality','reviewer':J,'candidate_sha256':sha(O/'candidate.json'),'items':prior['items']+items,'baseline_evidence':{'candidate_sha256':sha(P/'candidate.json'),'quality_review_sha256':sha(P/'quality-review.json'),'inherited_rows':81,'new_rows':2,'raw_review_sha256':sha(O/'raw-quality-review.json'),'proof_sha256':sha(O/'quality-inheritance-and-mechanics.json')}})
+B.read_review(O/'quality-review.json','quality',sha(O/'candidate.json'),set(rows))
+print(json.dumps({'passed':True,'inherited':81,'new':2,'archive_records':len(archives),'candidate_sha256':sha(O/'candidate.json'),'quality_review_sha256':sha(O/'quality-review.json'),'checks':checks},ensure_ascii=False))

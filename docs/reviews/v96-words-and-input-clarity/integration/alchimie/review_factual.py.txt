@@ -1,0 +1,50 @@
+"""Independent review of frozen V96 drafts; exact V95 judgments inherited explicitly."""
+import copy,hashlib,json,sys
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');O=Path(__file__).parent
+sys.path[:0]=[str(R),str(R/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import mechanics_for
+J='codex-v96-world-factual'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(p,v):p.write_bytes(B.json_bytes(v))
+P=R/'docs/reviews/v95-discovery-and-game-quality/alchimie'
+old=read(P/'candidate.json');prior=read(P/'factual-review.json');final=read(P/'final-factual.json');audit=read(P/'live-audit.json')
+assert sha(P/'candidate.json')==prior['candidate_sha256']=='c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801'
+assert final['audit_sha256']==sha(P/'live-audit.json')
+assert final['catalog_sha256']==audit['catalog_sha256']=='22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd'
+assert final['reviewer']==prior['reviewer'] and final['verdict']==audit['verdict']==prior['world_verdict']=='accept'
+c=read(O/'candidate.json');raw=read(O/'raw/proposals.json')
+assert (O/'candidate.json').read_bytes()==B.json_bytes(B.candidate())
+cs={x['id']:x for x in c['concepts']};rs={x['id']:x for x in c['recipes']}
+ocs={x['id']:x for x in old['concepts']};ors={x['id']:x for x in old['recipes']}
+pc={x['id']:x for x in prior['concepts']};pr={x['id']:x for x in prior['items']}
+assert len(ocs)==247 and len(ors)==342
+assert set(pc)==set(ocs) and set(pr)==set(ors)
+for k,v in ocs.items():assert cs[k]==v and pc[k]['verdict']=='accept' and pc[k]['concept_sha256']==B.concept_digest(v)
+for k,v in ors.items():assert rs[k]==v and pr[k]['verdict']=='accept'
+for k in ['world','unlocks','goals']:assert c[k]==old[k]
+assert c['compatible_versions'][:-1]==old['compatible_versions'] and len(c['compatible_versions'])==8
+assert c['compatible_versions'][-1]['source_sha256']==sha(P/'candidate.json')
+assert c['compatible_versions'][-1]['mechanics']==mechanics_for(old['world']['starter_ids'],{tuple(r['pair']):r['result'] for r in old['recipes']},[(u['after_discoveries'],u['concept_ids']) for u in old['unlocks']])
+assert set(cs)-set(ocs)=={r['id'] for r in raw['concepts']}
+assert set(rs)-set(ors)=={r['id'] for r in raw['recipes']}
+cr={
+'alw_food_ostropel':'The primary cook documents chicken with tomato sauce and garlic. The definition explicitly limits this world to that familiar variant, without asserting that every ostropel contains tomatoes.',
+'alw_food_salata_fructe':'The primary author prepares mixed cut fruit and cools it, with syrup and optional whipped cream. The short definition accurately identifies a cold fruit dessert rather than implying cooking.'}
+rr={
+'ostropel-pui-usturoi':'Chicken and garlic cue a recognizable ostropel. The source lightly browns chicken, cooks it through, and adds tomato and garlic sauce; the explanation retains those necessary cooking stages.',
+'ostropel-pui-sos-rosii':'The alternate pairing names chicken and its tomato sauce; the explanation supplies characteristic garlic and thorough cooking. It does not suggest that raw chicken and finished sauce are ready to serve.',
+'salata-fructe-cutit':'The tool pairing truthfully represents cutting and assembling different fruits. The source peels, cuts and mixes fruit before chilling, so the explanation avoids pretending that one whole fruit alone is a salad.',
+'salata-fructe-frisca':'Whipped cream is an explicitly optional serving choice in the primary recipe. The caption still requires cleaned, cut, mixed and chilled fruit; it does not conflate this cold dessert with a baked fruit cake.',
+'sandvis-chiftele-legume':'Niculi assembles baked vegetable patties with bread, greens and sauce. Gourmandelle independently supports cooking vegetarian patties first. The caption names already cooked patties and makes no vegan claim, avoiding the misleading title of the first source.'}
+newc=[{'id':r['id'],'concept_sha256':B.concept_digest(cs[r['id']]),'verdict':'accept','rationale':cr[r['id']],'sources':r['sources'],'inherited':False} for r in raw['concepts']]
+newr=[{'id':r['id'],'verdict':'accept','rationale':rr[r['id']],'sources':r['sources']} for r in raw['recipes']]
+raw_review={'kind':'v96-alchimie-raw-review-v1','role':'factual','reviewer':J,'candidate_sha256':sha(O/'raw/proposals.json'),'complete_candidate_sha256':sha(O/'candidate.json'),'concepts':newc,'items':newr,'world_verdict':'accept','world_rationale':'Both new definitions and all five preparation ideas agree with live primary-source instructions checked 2026-09-17. The sandwich source title claims vegan despite eggs/dairy in its body; the game makes no such claim.'}
+write(O/'raw/factual-review.json',raw_review)
+full={'kind':B.REVIEW_KIND,'role':'factual','reviewer':J,'candidate_sha256':sha(O/'candidate.json'),'world_verdict':'accept','world_rationale':'Exact V95 concept and recipe identity permits explicit inheritance of247concept/342recipe factual judgments. Two familiar foods add five source-backed preparation ideas. The eight historical books, fixed supplies and optional goals remain preserved; bounded closure reaches249 concepts and145 crafted discoveries. This is factual acceptance, not measured enjoyment.','concepts':[copy.deepcopy(pc[r['id']]) if r['id'] in pc else next(x for x in newc if x['id']==r['id']) for r in c['concepts']],'items':[copy.deepcopy(pr[r['id']]) if r['id'] in pr else next(x for x in newr if x['id']==r['id']) for r in c['recipes']],'baseline_evidence':{'candidate_sha256':sha(P/'candidate.json'),'factual_review_sha256':sha(P/'factual-review.json'),'final_review_sha256':sha(P/'final-factual.json'),'live_audit_sha256':sha(P/'live-audit.json'),'inherited_concepts':247,'inherited_recipes':342,'old_records_and_judgments_exact':True,'raw_candidate_sha256':sha(O/'raw/proposals.json'),'raw_review_sha256':sha(O/'raw/factual-review.json')}}
+write(O/'factual-review.json',full)
+B.read_review(O/'factual-review.json','factual',sha(O/'candidate.json'),set(rs),c['concepts'])
+write(O/'independent-factual-check.json',{'passed':True,'reviewer':J,'checked_date':'2026-09-17','candidate_sha256':sha(O/'candidate.json'),'review_sha256':sha(O/'factual-review.json'),'review_source_sha256':sha(Path(__file__)),'old_concepts_exact':247,'old_recipes_exact':342,'new_concepts':2,'new_recipes':5,'historical_save_generations':8,'source_urls':sorted({s for r in raw['recipes'] for s in r['sources']}),'source_title_caveat':'Niculi title says vegan, body contains eggs/feta/yogurt; reviewed game recipe deliberately makes no vegan claim.','unresolved_findings':[]})
+print(json.dumps({'candidate_sha256':sha(O/'candidate.json'),'factual_review_sha256':sha(O/'factual-review.json'),'concepts':249,'recipes':347}))

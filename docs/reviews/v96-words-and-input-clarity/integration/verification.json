@@ -1,0 +1,111 @@
+{
+  "kind": "v96-complete-integration-v1",
+  "date": "2026-09-17",
+  "baseline_commit": "14577863038378c734c7b2e0e8b33ea8158f318b",
+  "passed": true,
+  "checks": {
+    "backend312": {
+      "passed": 2236,
+      "log": "backend312.log.gz",
+      "sha256": "e49e6af46bd4782c2a08acd1c50ea7c3352b5f97716eec8037541f87ddcb944f"
+    },
+    "backend314": {
+      "passed": 2236,
+      "log": "backend314.log.gz",
+      "sha256": "e2bba0d40321628b781d085e476f530388c7bf560c8c8fec5f9cf7e0bffcc90e"
+    },
+    "accounts312": {
+      "passed": 53,
+      "log": "accounts312.log.gz",
+      "sha256": "a1323a03a51d3aca88992f417ae4012e164c87d52b6e27ccd69b4361bfb439c7"
+    },
+    "accounts314": {
+      "passed": 53,
+      "log": "accounts314.log.gz",
+      "sha256": "1206f3a025807084a1e5347c25d8616a068170e607e4baa33733b987d6c583a5"
+    },
+    "browser": {
+      "passed": 540,
+      "log": "browser-tests.log.gz",
+      "sha256": "17e64571707aa96e57ccbbbac7e2778db6ac9d8035dc7256e795529fe5cc8364"
+    },
+    "frontend_native": {
+      "passed": 212,
+      "log": "gui/frontend-tests.log.gz",
+      "sha256": "09aa00e4ffe178624f1c5809b902db8d04c1ab387a3f5d352b4b18688806eb76"
+    }
+  },
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "356270c25d61f16cac3fdb59efa1e0399b18606ee796d498f132a92ad3c9d5c4",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "75e052c7cb1595bc77a6181bed734893f3d1dc6b0c6fa6c7bb05a91a6a1119d7",
+    "cat_de_roman_esti/fixtures/games_pack.json": "f2538a91726da87a519f8efac5d3a9993a8a23445879af817f08bdabd478e307",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "bee608938a113922842ec987bf44269ae086f45aaeb9c54f68e39c8f160bd9d3",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "9c46598b19acd30e82cf7bf542c82b8fcfe5039f607bc689ef27a98e78e3d76c",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "ec5724d7afb7f49ae6ad367648676a071f0d0751b82d27ae39278e98fde0004d"
+  },
+  "final_evidence_sha256": {
+    "alchimie/final-factual.json": "bd530f2efdae2f5c517ddf0079d9e986621549bf91d6b2431d6e043cdaea4046",
+    "alchimie/final-quality.json": "f24d872a0a2951c0d0bc7f5cf5787977362282056f343b56754c638c3699183b",
+    "alchimie/live-audit.json": "c7bc726525d0cf23e42146125304d969653f990a4d62c1ac482e5dee0cefb20c",
+    "alchimie/installation-receipt.json": "b410daa3e12955be5a22e0e90c19e01a17fa21ca5816109ac72ae0cdadea94da",
+    "alchimie/independent-ui-review.json": "afa3abeb20185f747e7a80f6bb6aa3c67aa473147e8991b735bc7eb061c58410",
+    "quick/final-factual.json": "140c2cfc3bef558f03e5b10f34de01599452f0b79f425d414eda74b21b70496a",
+    "quick/final-quality.json": "325af5cb762bde5b4de13bc552f8ac34d19e4dddccc03cba0a8cb3b41d13efc5",
+    "quick/live-audit.json": "9f252e6beca8dd51720d7cc85168a9e82fcf4f80b978a17ba1f9ba774aeca7a1",
+    "quick/installation-receipt.json": "6409443df6763d938871b7b8887ca8710f5ee4918ed362fc8011cb355a96bbf4",
+    "pack/independent-final-api.json": "9a59c321b43a8f2ee98ed0ddf5f62b89f7ea02d4bfb7ff51cb28958091f9fb33",
+    "closure-audit.json": "15de1c0166f170333fd5e6292608030a263cfcd30b15c728cdde17ab53e07b22",
+    "preview-check.json": "fc21012cf0cb9ab9f845819118a001405bf92ea59a40eb8c0e8cf5c22940140e"
+  },
+  "artifact_delta_sha256": "703f7da7adb78213c2958eb45f4769122a8bb3020312bf45d5f89708b6305666",
+  "archive_manifest_sha256": "4ebb6bb7faab8a060ea1367b6b3c851aac98317b3771f67b6cc2f5d4b5b251ae",
+  "archive_records": 183,
+  "gate_inputs_sha256": "64576ec1a744ec75c6ebff0b999a13505b9945c1bf42b5bea54fdeb98c614b21",
+  "additions": {
+    "conexiuni": 1,
+    "contexto": 1,
+    "lant": 1,
+    "intrusul": 1,
+    "perechi": 1,
+    "alchimie_concepts": 2,
+    "alchimie_recipes": 5
+  },
+  "fresh_per_game_words": {
+    "conexiuni": 7,
+    "intrusul": 3,
+    "perechi": 4
+  },
+  "new_shared_KG_nodes": 0,
+  "other_gates": [
+    "fixture validator",
+    "pack validator",
+    "Ruff",
+    "frontend lint/typecheck/build",
+    "docs",
+    "staged whitespace"
+  ],
+  "initial_gzip_kib": 119.23,
+  "initial_limit_kib": 120,
+  "initial_failures_preserved": [
+    "Tests during pack/rank/history transition fail closed on stale pins; final assembled inputs pass.",
+    "Similarity-only advice suppressed Nuci/Prafzz; refined rule retains useful spelling while rejecting unrelated aliases.",
+    "Visible-message browser assertion initially matched hidden announcer too; scoped locator resolves test ambiguity.",
+    "World restoration test initially treated dynamic ingredient availability as immutable; earned journal preservation assertion corrected.",
+    "Old sandwich-source excerpt did not establish assembly; direct original recipe checked with no vegan claim."
+  ],
+  "remaining": [
+    "Human enjoyment and physical-device acceptance unverified.",
+    "Generic earned Lanț captions remain a later review queue.",
+    "All eight historical-book slots are occupied; design compatibility before further recipe changes."
+  ],
+  "publication": {
+    "v96_landed": false,
+    "v96_pushed": false,
+    "owner_authorized_landing_and_v97_start": true,
+    "production_changed": false
+  }
+}

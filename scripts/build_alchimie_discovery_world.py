@@ -36,8 +36,8 @@ from cat_de_roman_esti.wordgames.service import normalize  # noqa: E402
 CATALOG = ROOT / "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json"
 REVIEW_KIND = "alchimie-discovery-world-review-v1"
 FINAL_REVIEW_KIND = "alchimie-discovery-world-final-v1"
-BASELINE = ROOT / "docs/reviews/v94-words-and-clearer-connections/alchimie/candidate.json"
-BASELINE_SHA = "d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188"
+BASELINE = ROOT / "docs/reviews/v95-discovery-and-game-quality/alchimie/candidate.json"
+BASELINE_SHA = "c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801"
 RUNTIME_SOURCES = (
     "cat_de_roman_esti/wordgames/discovery_world.py",
     "cat_de_roman_esti/wordgames/alchimie_explore.py",
@@ -47,7 +47,7 @@ RUNTIME_SOURCES = (
     "scripts/build_alchimie_discovery_world.py",
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/audit_alchimie_discovery_world.py",
-    "docs/reviews/v94-words-and-clearer-connections/alchimie/candidate.json",
+    "docs/reviews/v95-discovery-and-game-quality/alchimie/candidate.json",
 )
 
 

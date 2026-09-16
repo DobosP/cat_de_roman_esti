@@ -1,0 +1,27 @@
+"""Reproduce final catalog and all current runtime checks before factual approval."""
+import hashlib,json,sys
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');O=Path(__file__).parent
+sys.path[:0]=[str(R),str(R/'scripts')]
+import build_alchimie_discovery_world as B
+import audit_alchimie_discovery_world as A
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+p=O/'proposed-catalog.json';c=read(p);f=read(O/'factual-review.json');q=read(O/'quality-review.json');a=read(O/'live-audit.json')
+assert f['reviewer']=='codex-v96-world-factual' and f['reviewer']!=q['reviewer']
+assert p.read_bytes()==B.json_bytes(B.build_catalog(O/'candidate.json',O/'factual-review.json',O/'quality-review.json'))
+assert a==A.audit(p) and a['catalog_sha256']==sha(p)
+for source in a['runtime_sources']:assert source['sha256']==sha(R/source['path'])
+old_path=R/'docs/reviews/v95-discovery-and-game-quality/alchimie/proposed-catalog.json'
+assert sha(old_path)=='22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd'
+old=read(old_path)
+for field in ('concepts','recipes'):
+ now={x['id']:x for x in c[field]}
+ assert all(now[x['id']]==x for x in old[field])
+assert len(old['concepts'])==247 and len(old['recipes'])==342
+assert len(a['goal_replays'])==33 and len(a['compatible_save_replays'])==8
+assert a['compatible_save_replays'][-1]['previous_owned']==247 and a['compatible_save_replays'][-1]['prefixes_preserved']==143
+final={'kind':B.FINAL_REVIEW_KIND,'role':'factual','reviewer':f['reviewer'],'catalog_sha256':sha(p),'audit_sha256':sha(O/'live-audit.json'),'verdict':'accept','rationale':'Reproduced exact249-concept/347-recipe catalog from complete factual and independent quality reviews, retaining all247 prior concepts and342 prior installed recipes. Reproduced the full live audit against all nine current source bindings:347 recipes,33 goal/free traversals and every earned prefix across eight prior saved books, including143 entries from V95. New definitions and five preparation ideas retain checked primary evidence. The sandwich is supported directly by Niculi body text; Gourmandelle only corroborates cooked patties, and neither game definition nor caption claims vegan status. Limits remain256/512 and save history8. No unresolved factual or restoration issue remains; human enjoyment remains unmeasured.'}
+(O/'final-factual.json').write_bytes(B.json_bytes(final))
+(O/'final-factual-check.json').write_bytes(B.json_bytes({'passed':True,'catalog_sha256':sha(p),'audit_sha256':sha(O/'live-audit.json'),'reproduced_live_audit_exact':True,'old_installed_concepts_exact':247,'old_installed_recipes_exact':342,'current_runtime_sources':len(a['runtime_sources']),'goal_replays':33,'save_generations':8,'v95_earned_entries_preserved':143,'source_sha256':sha(Path(__file__))}))
+print(json.dumps({'catalog_sha256':sha(p),'audit_sha256':sha(O/'live-audit.json'),'final_review_sha256':sha(O/'final-factual.json')}))

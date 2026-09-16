@@ -12,14 +12,16 @@ import pytest
 from django.test import Client
 
 from cat_de_roman_esti.wordgames import alchimie_explore as E
-from cat_de_roman_esti.wordgames.discovery_world import MAX_CONCEPTS, get_world
+from cat_de_roman_esti.wordgames.discovery_world import MAX_CONCEPTS, validate_world
 from cat_de_roman_esti.wordgames.service import SessionStore, get_service
-from scripts import build_alchimie_discovery_world as B
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "/api/alchimie/explore"
 PREVIOUS = ROOT / "docs/reviews/v94-words-and-clearer-connections/alchimie/candidate.json"
 PREVIOUS_SHA = "d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188"
+ARCHIVE = ROOT / "docs/reviews/v95-discovery-and-game-quality/alchimie"
+ARCHIVE_SHA = "c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801"
+CATALOG_SHA = "22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd"
 NEW_WORDS = {
     "alw_food_negresa": "Negresă",
     "alw_food_crema_zahar_ars": "Cremă de zahăr ars",
@@ -47,7 +49,10 @@ NEW_RECIPES = (
 
 @pytest.fixture
 def world(monkeypatch):
-    world = get_world()
+    blob = (ARCHIVE / "proposed-catalog.json").read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == CATALOG_SHA
+    world = validate_world(json.loads(blob))
+    monkeypatch.setattr(E, "get_world", lambda: world)
     assert len(world.concepts) == 247 and len(world.recipes) == 342
     monkeypatch.setattr(E, "store", SessionStore())
     return world
@@ -85,7 +90,9 @@ def craft(state, world, recipe_id):
 def test_author_candidate_preserves_v94_and_reuses_two_previous_leaves():
     blob = PREVIOUS.read_bytes()
     assert hashlib.sha256(blob).hexdigest() == PREVIOUS_SHA
-    old, current = json.loads(blob), B.candidate()
+    current_blob = (ARCHIVE / "candidate.json").read_bytes()
+    assert hashlib.sha256(current_blob).hexdigest() == ARCHIVE_SHA
+    old, current = json.loads(blob), json.loads(current_blob)
     old_concepts = {c["id"]: c for c in old["concepts"]}
     new_concepts = {c["id"]: c for c in current["concepts"]}
     assert len(old_concepts) == 242

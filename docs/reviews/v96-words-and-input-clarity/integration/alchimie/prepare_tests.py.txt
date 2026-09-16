@@ -1,0 +1,7 @@
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity')
+p=R/'tests/test_v95_world_quality.py';s=p.read_text();s=s.replace('MAX_CONCEPTS, get_world','MAX_CONCEPTS, validate_world').replace('from scripts import build_alchimie_discovery_world as B\n','')
+s=s.replace('NEW_WORDS = {','ARCHIVE = ROOT / "docs/reviews/v95-discovery-and-game-quality/alchimie"\nARCHIVE_SHA = "c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801"\nCATALOG_SHA = "22137b51f6ba642704e1ca3eeee75fa466c70bd983977269dede09d8ce2f31bd"\nNEW_WORDS = {')
+s=s.replace('    world = get_world()','    blob = (ARCHIVE / "proposed-catalog.json").read_bytes()\n    assert hashlib.sha256(blob).hexdigest() == CATALOG_SHA\n    world = validate_world(json.loads(blob))\n    monkeypatch.setattr(E, "get_world", lambda: world)')
+s=s.replace('    old, current = json.loads(blob), B.candidate()','    current_blob = (ARCHIVE / "candidate.json").read_bytes()\n    assert hashlib.sha256(current_blob).hexdigest() == ARCHIVE_SHA\n    old, current = json.loads(blob), json.loads(current_blob)')
+p.write_text(s)

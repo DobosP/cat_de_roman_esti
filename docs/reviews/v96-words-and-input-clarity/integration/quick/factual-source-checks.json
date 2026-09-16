@@ -1,0 +1,96 @@
+{
+  "candidate_sha256": "40697770cc0888323b1f9b4845c743dd4f9956a18e0d3476248b33a1ef7f89c3",
+  "checked_on": "2026-09-17",
+  "kg_rubric_core_payload_bindings_exact": true,
+  "kind": "quick-independent-factual-source-checks-v1",
+  "new_rows_checked": 2,
+  "new_visible_nodes": {
+    "n_v24_food_imported_fruit_banana": {
+      "description": "Concept cotidian din grupul «fructe din magazin»: Banană.",
+      "label": "Banană"
+    },
+    "n_v24_food_pantry_faina": {
+      "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+      "label": "Făină"
+    },
+    "n_v24_nature_plant_parts_ramura": {
+      "description": "Concept cotidian din grupul «plante și părțile lor»: Ramură.",
+      "label": "Ramură"
+    },
+    "n_v24_nature_sky_luna": {
+      "description": "Concept cotidian din grupul «corpuri văzute pe cer»: Lună.",
+      "label": "Lună"
+    },
+    "n_v24_weather_storm_fulger": {
+      "description": "Concept cotidian din grupul «fenomene de furtună»: Fulger.",
+      "label": "Fulger"
+    },
+    "n_v24_weather_storm_furtuna": {
+      "description": "Concept cotidian din grupul «fenomene de furtună»: Furtună.",
+      "label": "Furtună"
+    },
+    "n_v24_weather_storm_tunet": {
+      "description": "Concept cotidian din grupul «fenomene de furtună»: Tunet.",
+      "label": "Tunet"
+    },
+    "n_v29_animal_pets_caine": {
+      "description": "Animal domestic ținut adesea lângă oameni, cunoscut pentru lătrat.",
+      "label": "Câine"
+    },
+    "n_v29_animal_pets_pisica": {
+      "description": "Animal domestic agil, cunoscut pentru tors și pentru vânătoarea șoarecilor.",
+      "label": "Pisică"
+    },
+    "n_v4gas_fruct": {
+      "description": "Parte comestibilă a plantelor, consumată proaspătă sau în deserturi.",
+      "label": "Fruct"
+    },
+    "n_v4sti_frunza": {
+      "description": "Organ al plantei care produce hrană prin fotosinteză.",
+      "label": "frunză"
+    },
+    "n_v84_food_grau": {
+      "description": "Cereală ale cărei boabe sunt măcinate pentru făină și griș.",
+      "label": "Grâu"
+    }
+  },
+  "previous_81_judgments_inherited_exactly": true,
+  "previous_81_records_exact": true,
+  "previous_candidate_sha256": "e0a745b1150a2060ee2a20719d3ebb79b0838e8db95b54bc2bfc7da5a5c2497b",
+  "previous_catalog_sha256": "b166aa76e2746c5c2f1382889ede528cce25536fb5480c9d21b027cf65c5d319",
+  "previous_factual_review_sha256": "2f0070517aa972b060dcbdea0690210f4410b01098023222ca76eae274066a26",
+  "raw_candidate_sha256": "7bc64a9f5e361f2dc42e46108e9117d42f55d3f2c6d69a7144981ecb215b915d",
+  "reviewer": "/root/v96_quick",
+  "scope": "Independent source verification and prior-review inheritance, not a final API or enjoyment claim.",
+  "source_access_notes": [
+    "Original dictionary entries were read by paragraph after broad find hits exposed unrelated historical expressions. Only ordinary senses are relevant.",
+    "European Commission pet movement page redirects to the live-animal-movements page; only the explicit classification of dogs and cats as pets was used, not legal guidance."
+  ],
+  "source_checks": [
+    {
+      "id": "iq92_v96_weather",
+      "rationale": "The original DEX/MDA dictionary senses locate a storm in atmospheric disturbance; NWS describes lightning as an electrical discharge through air and thunder as the resulting sound. NASA identifies the Moon as Earth’s natural satellite. The shared predicate therefore applies to all three phenomena and excludes the celestial body. It does not imply every storm has thunder or that the Moon is part of Earth’s atmosphere. Ordinary unqualified weather senses match the stored descriptions.",
+      "sources": [
+        "https://dexonline.ro/definitie/furtun%C4%83",
+        "https://www.weather.gov/safety/lightning-science-thunder",
+        "https://forecast.weather.gov/glossary.php?word=lightning",
+        "https://science.nasa.gov/moon/facts/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "pq92_v96_nature_everyday",
+      "rationale": "Named dictionary definitions support a leaf as a plant organ, a branch as a stem ramification, banana as a fruit, and flour as milled cereal grain. The qualified leaf/branch label states a possible growing position, not a universal attachment rule. Cat and dog have familiar domestic senses and the European Commission explicitly treats both as companion animals. Wheat/flour states one ordinary production relation, without asserting all flour is wheat or classifying a banana plant as a tree. The native descriptions retain these ordinary senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/frunz%C4%83",
+        "https://dexonline.ro/definitie/ramur%C4%83",
+        "https://dexonline.ro/definitie/c%C3%A2ine",
+        "https://dexonline.ro/definitie/pisic%C4%83",
+        "https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets_en",
+        "https://dexonline.ro/definitie/banan%C4%83",
+        "https://dexonline.ro/definitie/f%C4%83in%C4%83"
+      ],
+      "verdict": "accept"
+    }
+  ]
+}

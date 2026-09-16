@@ -956,7 +956,7 @@ export default function CaldRece({
                 </span>
                 {recovery.choices.length > 0 ? (
                   <div className="row wrap" style={{ gap: 8 }}>
-                    <span className="faint">Ai vrut să scrii:</span>
+                    <span className="faint">Variante de scriere:</span>
                     {recovery.choices.map((choice) => (
                       <Button
                         key={choice}

@@ -1,0 +1,75 @@
+{
+  "candidate_sha256": "3f2d62bf1ca2199019bd88c0d09c5692af28e546816cf0c6173f66b216130e89",
+  "complete_candidate_sha256": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+  "concepts": [
+    {
+      "concept_sha256": "c63b886ed840ff47324c22ccbb56c769fd630a70f07bd423bf993fa1e80fe722",
+      "id": "alw_food_ostropel",
+      "inherited": false,
+      "rationale": "A familiar named Romanian home-cooked dish, with an ordinary dictionary sense documented before the present recipe. The short definition names cooked meat, garlic and sauce, explicitly qualifying the tomato/chicken version so white versions are not denied. It is distinct from generic roast meat or plain tomato sauce and introduces no forced new goal.",
+      "sources": [
+        "https://pofta-buna.com/ostropel-de-pui-reteta-clasica/",
+        "https://dexonline.ro/definitie/ostropel"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "concept_sha256": "affd64ca201d4bcf29efa40078f59c402700820bc1d191b09e070ad522ea793f",
+      "id": "alw_food_salata_fructe",
+      "inherited": false,
+      "rationale": "The descriptive name immediately explains a cold mixture of cut fruit, distinct from the existing savoury salad identity. The original Romanian recipe cuts multiple fruits and offers whipped cream as optional. This is ordinary dessert vocabulary and does not require knowing a specialist name or accepting an alcohol-dependent dressing.",
+      "sources": [
+        "https://www.lauraadamache.ro/2015/04/salata-de-fructe.html"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "items": [
+    {
+      "id": "ostropel-pui-sos-rosii",
+      "rationale": "Chicken with already prepared tomato sauce is a second plausible route. Browning, garlic, seasoning and continued cooking are explicit, so the existing sauce identity remains prepared while the chicken reaches the finished-dish state.",
+      "sources": [
+        "https://pofta-buna.com/ostropel-de-pui-reteta-clasica/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "ostropel-pui-usturoi",
+      "rationale": "Chicken and garlic is a strong first experiment toward ostropel. The explanation explicitly adds tomatoes and cooking; it does not promise that raw chicken and garlic alone are a ready dish. The prepared result is consistent with the qualified tomato version.",
+      "sources": [
+        "https://pofta-buna.com/ostropel-de-pui-reteta-clasica/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "salata-fructe-cutit",
+      "rationale": "The tool route is inferable: a knife suggests cutting and mixing fruit. The wording explicitly uses different fruits rather than pretending one cut piece is a mixed salad. Preparation and cold service are disclosed without requiring another new ingredient.",
+      "sources": [
+        "https://www.lauraadamache.ro/2015/04/salata-de-fructe.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "salata-fructe-frisca",
+      "rationale": "Fruit plus whipped cream leads naturally to a familiar cup dessert. Cutting, mixing and chilling precede service, so the existing ready whipped-cream state is respected. The alternative ingredient route makes discovery forgiving without changing the result.",
+      "sources": [
+        "https://www.lauraadamache.ro/2015/04/salata-de-fructe.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "sandvis-chiftele-legume",
+      "rationale": "Bread around already cooked vegetable patties is a direct, ordinary sandwich assembly. It gives the formerly terminal patties an onward use without reverting them into raw batter. Garnishes remain optional additions and the result remains the existing sandwich, avoiding a duplicate named burger concept.",
+      "sources": [
+        "https://danielaniculi.ro/2020/03/19/sandvis-vegan-sau-cum-sa-salvezi-prea-multa-quinoa-pusa-la-fiert/",
+        "https://gourmandelle.com/ro/chiftle-prajite-cu-ciuperci/"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "kind": "alchimie-v96-new-content-quality-review-v1",
+  "reviewer": "/root/v96_quick",
+  "role": "quality",
+  "verdict": "accept",
+  "world_rationale": "All247 old concepts and342 recipes exactly preserve the earlier accepted content and prior candidate/final/audit bindings. Two familiar new preparations each offer two understandable routes, while cooked vegetable patties gain an onward sandwich use. Independent closure reaches249 concepts and145 discoveries with unchanged8 starters,96 supplies,12 tiers and32 goals; all8 prior book generations remain mechanically bound. There are99 alternative results and64 crafted intermediates. All5 new pairs are unique and all old outcomes remain exact. New labels have no shared-KG alias collision, and capacity remains249/256 concepts and347/512 recipes. Both new results are terminal; the added onward-use depth comes from one old result. No claim of measured player enjoyment or installed API acceptance is made here."
+}

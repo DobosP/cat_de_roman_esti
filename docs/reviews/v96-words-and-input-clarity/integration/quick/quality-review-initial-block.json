@@ -1,0 +1,7 @@
+{
+  "observed_failure": "ValueError: derived catalog: pack_sha256 source drift",
+  "cause": "Pack lane had updated pack while rankings/derived regeneration was in flight.",
+  "action": "Waited for final pack/rank/derived, then reran identical independent mechanics/novelty review successfully.",
+  "original_stderr_location": "Tool output of initial invocation; initial redirected stdout file is empty.",
+  "final_log_sha256": "3673b043a18181dfd01aa5303b59cdc6ecae7112be89d32286ff0c7f89cd8d6e"
+}

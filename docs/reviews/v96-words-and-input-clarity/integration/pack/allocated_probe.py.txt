@@ -1,0 +1,42 @@
+"""Independent allocated V96 mechanics; fixed pending records, not selection proof."""
+from pathlib import Path
+import hashlib,json,os,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');O=Path(__file__).resolve().parent
+sys.path[:0]=[str(R),str(R/'scripts')];os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import conexiuni as X,contexto as T,lant as L
+from cat_de_roman_esti.wordgames.service import get_service
+svc=get_service();client=Client();pack=json.loads((R/'cat_de_roman_esti/fixtures/games_pack.json').read_bytes());ids=json.loads((O/'allocated-ids.json').read_bytes());result=[]
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+bound=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','docs/CRITIQUE_RUBRIC.md','cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/lant.py','cat_de_roman_esti/wordgames/lant_relations.py','cat_de_roman_esti/wordgames/conexiuni.py']
+pins={p:sha(R/p) for p in bound}
+def post(url,payload):
+ r=client.post(url,payload,content_type='application/json');assert r.status_code==200,r.content;return r.json()
+for game in ['conexiuni','contexto','lant']:
+ row=next(r for r in pack[game] if r['id']==ids[game][0]);assert row['status']=='pending'
+ dossier=json.loads((O/'dossiers'/f"{row['id']}.json").read_bytes());out={'id':row['id'],'review_binding':dossier['review_binding']}
+ if game=='conexiuni':
+  s=X.ConexiuniSession(groups=row['groups'],group_labels=row['group_labels'],order=row['order'],difficulty=row['difficulty']);sid=X.store.create(s);url=f'/api/wordgames/{game}/games/{sid}'
+  first=client.get(url).json();assert not first.get('solution');steps=[]
+  for group in row['groups'].values():steps.append(post(url+'/guess',{'ids':group}))
+  assert s.won and s.lives==4;out.update(initial=first,steps=steps,fairness=dossier['fairness'])
+ elif game=='contexto':
+  s=T._build_session(row['target'],row['difficulty'],None);sid=T.store.create(s);url=f'/api/wordgames/{game}/games/{sid}';steps=[]
+  for q in ['casă','cameră','podea','pernă','pătură','cearșaf','ușă','aspirator','a spăla','mobilă','textil','parchet','mochetă','pian','munte','tren','covoare']:
+   attempts=s.attempts;p=post(url+'/guess',{'text':q})
+   if not p['ok']:assert s.attempts==attempts
+   steps.append({'input':q,'response':p})
+  assert s.won;out.update(steps=steps,target_description=svc.node(row['target']).description,incoming=dossier['incoming_neighbor_floor'])
+ else:
+  routes=[]
+  for route in dossier['representative_shortest_paths']:
+   s=L.LantSession(start=row['start'],target=row['target'],optimal=row['optimal'],difficulty=row['difficulty'],chain=[row['start']]);sid=L.store.create(s);url=f'/api/wordgames/{game}/games/{sid}';first=client.get(url).json();steps=[]
+   for node in route['nodes'][1:]:steps.append(post(url+'/move',{'text':node['label']}))
+   assert s.won and steps[-1]['score']==1000
+   final=client.get(url).json();routes.append({'labels':[n['label'] for n in route['nodes']],'initial':first,'steps':steps,'final':final})
+  assert len(routes)==2;out.update(routes=routes,corridor_profile=L._corridor_profile(row['start'],row['target'],row['optimal']))
+ result.append(out)
+assert pins=={p:sha(R/p) for p in bound},'Concurrent runtime edits require re-run'
+(O/'allocated-probe.json').write_text(json.dumps({'reviewer':'/root/v96_pack','method':'Fresh BFF replay of fixed allocated pending records. No natural-selection claim; final approved public replay remains required.','source_bindings':pins,'script_sha256':sha(__file__),'checks':result},ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'all_passed':True,'checks':len(result),'conexiuni_fairness':result[0]['fairness'],'contexto':[{ 'input':r['input'],'ok':r['response']['ok'],'guess':r['response'].get('guess')} for r in result[1]['steps']],'lant_routes':[[r['labels'],[s.get('relation') for s in r['final']['path'][1:]]] for r in result[2]['routes']]},ensure_ascii=False,indent=2))

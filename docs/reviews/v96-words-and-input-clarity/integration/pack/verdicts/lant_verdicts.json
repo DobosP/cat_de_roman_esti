@@ -1,0 +1,74 @@
+{
+ "game": "lant",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_viata_de_roman_376",
+   "cx_viata_de_roman_373",
+   "lt_gastronomie_245"
+  ]
+ },
+ "verdicts": {
+  "lt_gastronomie_245": "promote"
+ },
+ "perItem": [
+  {
+   "id": "lt_gastronomie_245",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:7c78f0e319ce663a805483c9955a837d2edd4083cc184822a183202942ac03b4",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_gastronomie_245",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:7c78f0e319ce663a805483c9955a837d2edd4083cc184822a183202942ac03b4",
+    "rationale": "Promote easy. D1: vanilla and cheese are ordinary independently recognizable ingredients and their public descriptions are accurate. D2: vanilla-flavored cheese fillings in Poale-n brâu and Pască are directly supported by original recipe and bakery-product sources; this is an ingredient-to-pastry-to-ingredient discovery, not generic cuisine taxonomy. D3: each of two separate intermediates completes a shortest route, so neither is a compulsory choke point; the broader beginner corridor is7/7/7. D4: two hops with familiar pastries fit easy, though not every regional recipe uses vanilla. D5: connecting aroma and dairy through a remembered baked dish gives a concrete satisfying bridge. Actual BFF replay wins both paths at1000 and confirms the public caption on all four steps remains legătură directă; richer variant-aware raw wording is metadata, not displayed copy. That generic wording is a presentation limitation but does not make these familiar links false. Stored Pască description describes the traditional round cheese/raisin enriched-dough version and a documented church-blessing custom, allowing modern variants; Poale-n brâu pastry identity is accurate. No exclusive-region claim, new caption, graph mutation or novelty resurrection. Full exact dossiers and actual endpoint/intermediate descriptions checked.",
+    "sources": [
+     "https://andreeachinesefood.ro/2020/12/poale-n-brau/?print=pdf",
+     "https://painplaisir.ro/collections/ceva-bun-dulce/products/poale-n-brau",
+     "https://www.homecookingadventure.com/ro/pasca-traditionala-cu-branza-dulce-si-stafide/",
+     "https://doxologia.ro/de-ce-facem-pasca-de-invierea-domnului-pasca-dulcele-invierii"
+    ]
+   },
+   "verifier_review": {
+    "id": "lt_gastronomie_245",
+    "game": "lant",
+    "review_binding": "sha256:7c78f0e319ce663a805483c9955a837d2edd4083cc184822a183202942ac03b4",
+    "verdict": "promote",
+    "rationale": "Promote the exact allocated pending record under A1-A7/D1-D5. Vanilla and cheese are ordinary independent endpoints; Poale-n brâu and Pască are recognizable separate shortest intermediates. Both original recipes and the bakery ingredient list document cheese fillings and vanilla, with variant language appropriate to the first step. The path discovers a food-preparation bridge rather than relying on a generic national or regional connection. Two shortest paths plus a width-seven corridor give meaningful beginner choice; actual descriptions and generic earned captions contain no conflicting factual assertion. Author conditional public selection is evidence of prospective reachability, not installed approval. The independent verifier regenerated the exact dossier and inspected all public descriptions and displayed route captions. The Lanț endpoint definitions and traditional pastry meanings agree with independently opened original recipe/bakery sources; generic captions remain a presentation limitation. Covor has five real recognizable incoming nodes and broad hot openers. Conexiuni public identities fit the same explicit predicates, including both point sharpening and edge sharpening; zero raw unfairness is supporting evidence, not the semantic verdict. Full raw/served/rejected novelty remains clear. No A5 hold or generic-region claim is introduced.",
+    "sources": [
+     "https://painplaisir.ro/collections/ceva-bun-dulce/products/poale-n-brau",
+     "https://www.homecookingadventure.com/ro/pasca-traditionala-cu-branza-dulce-si-stafide/"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 1,
+  "verified": 1,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v96-words-and-input-clarity/integration/pack/analyst.json",
+   "sha256": "sha256:71fa70c6138efcc57ab8ddfc23de1bf58333654ab17b5f01744ed417668885ee",
+   "reviewer": "/root/v96_pack",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v96-words-and-input-clarity/integration/pack/verifier.json",
+   "sha256": "sha256:76d6cf52c9cb5f18b57a76969192e4101ba7e09b1d0d9c7a7639006b67b4ceb9",
+   "reviewer": "root-v96-pack-quality",
+   "role": "verifier"
+  }
+ }
+}

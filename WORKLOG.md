@@ -1058,3 +1058,28 @@ docs/reviews/v96-words-and-input-clarity/; current CI status belongs in STATUS.
 V95 GitHub CI 35026423470 completed successfully on main 1457786: both Python jobs
 and the full frontend/browser job pass. V96 kickoff archives 71 author/critique artifacts,
 with all ten served artifact hashes unchanged; docs and whitespace checks pass.
+
+## V96 content and input/focus integration (2026-09-17)
+
+Valid until: bound content/runtime/GUI changes — then repeat affected checks.
+
+The owner requested landing V96 and starting V97. The prior V96 commit contained only
+unapproved drafts and critique, so this session completes the actual content and GUI
+outcomes before landing. Three pack entries, two quick boards and two Alchimie concepts/
+five recipes pass the independent gates. All 710 old pack records, 81 authored quick
+payloads/scores, 247 world concepts and 342 recipes remain exact; eight historical books
+retain earned progress. Shared KG, rejection ledger and 101 custom captions are unchanged.
+
+Unknown-word feedback now explains that no attempt was spent and offers conservative
+advisory spelling variants. The first similarity-only filter removed Nuci/Prafzz advice;
+the refined spelling checks restore those useful cases without leaking hidden targets.
+All 174 targeted input/feedback cases pass. Alchimie reconciled response loss now restores
+usable-word/collection focus while respecting focus moved elsewhere and save ownership.
+The initial browser locator matched both visible and hidden feedback; it was scoped to
+the visible card. Independent final review passes 60 backend and 12 browser cases.
+
+The sandwich source discrepancy is preserved and resolved against a directly inspected
+original recipe; no vegan claim is made. Generic Lanț captions remain a future queue.
+All eight historical-book slots are now occupied: V97 must address compatibility before
+adding recipes. Final assembled counts, checks and publication proof belong in STATUS
+and docs/reviews/v96-words-and-input-clarity/integration/verification.json.

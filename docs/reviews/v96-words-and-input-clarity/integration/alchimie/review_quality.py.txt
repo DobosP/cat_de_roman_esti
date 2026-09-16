@@ -1,0 +1,82 @@
+from pathlib import Path
+from collections import Counter
+import copy,hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v96-words-and-input-clarity');OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import mechanics_for
+from cat_de_roman_esti.wordgames.service import normalize
+IDENTITY='/root/v96_quick'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(n,v):(OUT/n).write_bytes(B.json_bytes(v))
+prior_dir=ROOT/'docs/reviews/v95-discovery-and-game-quality/alchimie'
+old=read(prior_dir/'candidate.json');prior=read(prior_dir/'quality-review.json');final=read(prior_dir/'final-quality.json');audit=read(prior_dir/'live-audit.json')
+c=read(OUT/'candidate.json');raw=read(OUT/'raw/proposals.json')
+assert (OUT/'candidate.json').read_bytes()==B.json_bytes(B.candidate())
+assert prior['candidate_sha256']==sha(prior_dir/'candidate.json')==audit['candidate_sha256']
+assert final['audit_sha256']==sha(prior_dir/'live-audit.json')
+assert final['catalog_sha256']==audit['catalog_sha256']==sha(prior_dir/'proposed-catalog.json')
+assert final['verdict']==prior['world_verdict']==audit['verdict']=='accept'
+assert final['reviewer']==prior['reviewer']!=IDENTITY
+for key in ('kg_sha256','rubric_sha256'): assert c['bindings'][key]==old['bindings'][key]==B.bindings()[key]
+old_c,old_r=({r['id']:r for r in old[k]} for k in ('concepts','recipes'))
+cs,rs=({r['id']:r for r in c[k]} for k in ('concepts','recipes'))
+pc,pr=({r['id']:r for r in prior[k]} for k in ('concepts','items'))
+assert len(old_c)==247 and len(old_r)==342 and len(cs)==249 and len(rs)==347
+assert set(old_c)==set(pc) and set(old_r)==set(pr)
+for i,r in old_c.items(): assert cs[i]==r and pc[i]['verdict']=='accept' and pc[i]['concept_sha256']==B.concept_digest(r)
+for i,r in old_r.items(): assert rs[i]==r and pr[i]['verdict']=='accept'
+for key in ('world','unlocks','goals'):assert c[key]==old[key]
+assert c['compatible_versions'][:-1]==old['compatible_versions'] and len(c['compatible_versions'])==8
+assert c['compatible_versions'][-1]['source_sha256']==sha(prior_dir/'candidate.json')
+assert c['compatible_versions'][-1]['mechanics']==mechanics_for(old['world']['starter_ids'],{tuple(r['pair']):r['result'] for r in old['recipes']},[(u['after_discoveries'],u['concept_ids']) for u in old['unlocks']])
+newc=set(cs)-set(old_c);newr=set(rs)-set(old_r)
+assert newc=={r['id'] for r in raw['concepts']} and newr=={r['id'] for r in raw['recipes']}
+assert len({tuple(r['pair']) for r in rs.values()})==len(rs)
+kg=read(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')
+surfaces={normalize(v) for n in kg['kg_nodes'] for v in [n['label_ro'],*n.get('aliases',[])]}
+assert not surfaces & {normalize(cs[i]['label']) for i in newc}
+assert len({normalize(r['label']) for r in cs.values()})==len(cs)
+def closure(v):
+ owned=set(v['world']['starter_ids']);crafted=set();tiers=set();witness={i:[] for i in owned}
+ while True:
+  before=(len(owned),len(tiers))
+  for u in v['unlocks']:
+   if u['id'] not in tiers and len(crafted)>=u['after_discoveries']:
+    tiers.add(u['id']);owned.update(u['concept_ids']);witness.update({i:['supply:'+u['id']] for i in u['concept_ids']})
+  for r in v['recipes']:
+   if r['result'] not in owned and set(r['pair'])<=owned:
+    owned.add(r['result']);crafted.add(r['result']);witness[r['result']]=list(dict.fromkeys(witness[r['pair'][0]]+witness[r['pair'][1]]+[r['id']]))
+  if before==(len(owned),len(tiers)):break
+ assert owned=={r['id'] for r in v['concepts']}
+ return crafted,witness
+crafted,witness=closure(c);oldcrafted,_=closure(old)
+inputs={i for r in rs.values() for i in r['pair']};oldinputs={i for r in old_r.values() for i in r['pair']}
+alts=Counter(r['result'] for r in rs.values())
+concept_reasons={
+'alw_food_ostropel':'A familiar named Romanian home-cooked dish, with an ordinary dictionary sense documented before the present recipe. The short definition names cooked meat, garlic and sauce, explicitly qualifying the tomato/chicken version so white versions are not denied. It is distinct from generic roast meat or plain tomato sauce and introduces no forced new goal.',
+'alw_food_salata_fructe':'The descriptive name immediately explains a cold mixture of cut fruit, distinct from the existing savoury salad identity. The original Romanian recipe cuts multiple fruits and offers whipped cream as optional. This is ordinary dessert vocabulary and does not require knowing a specialist name or accepting an alcohol-dependent dressing.'}
+recipe_reasons={
+'ostropel-pui-usturoi':'Chicken and garlic is a strong first experiment toward ostropel. The explanation explicitly adds tomatoes and cooking; it does not promise that raw chicken and garlic alone are a ready dish. The prepared result is consistent with the qualified tomato version.',
+'ostropel-pui-sos-rosii':'Chicken with already prepared tomato sauce is a second plausible route. Browning, garlic, seasoning and continued cooking are explicit, so the existing sauce identity remains prepared while the chicken reaches the finished-dish state.',
+'salata-fructe-cutit':'The tool route is inferable: a knife suggests cutting and mixing fruit. The wording explicitly uses different fruits rather than pretending one cut piece is a mixed salad. Preparation and cold service are disclosed without requiring another new ingredient.',
+'salata-fructe-frisca':'Fruit plus whipped cream leads naturally to a familiar cup dessert. Cutting, mixing and chilling precede service, so the existing ready whipped-cream state is respected. The alternative ingredient route makes discovery forgiving without changing the result.',
+'sandvis-chiftele-legume':'Bread around already cooked vegetable patties is a direct, ordinary sandwich assembly. It gives the formerly terminal patties an onward use without reverting them into raw batter. Garnishes remain optional additions and the result remains the existing sandwich, avoiding a duplicate named burger concept.'}
+assert set(concept_reasons)==newc and set(recipe_reasons)==newr
+newcq=[{'id':i,'concept_sha256':B.concept_digest(cs[i]),'inherited':False,'verdict':'accept','rationale':concept_reasons[i],'sources':cs[i]['references']+(['https://dexonline.ro/definitie/ostropel'] if i=='alw_food_ostropel' else [])} for i in sorted(newc)]
+newrq=[{'id':i,'verdict':'accept','rationale':recipe_reasons[i],'sources':rs[i]['sources']} for i in sorted(newr)]
+rationale='All247 old concepts and342 recipes exactly preserve the earlier accepted content and prior candidate/final/audit bindings. Two familiar new preparations each offer two understandable routes, while cooked vegetable patties gain an onward sandwich use. Independent closure reaches249 concepts and145 discoveries with unchanged8 starters,96 supplies,12 tiers and32 goals; all8 prior book generations remain mechanically bound. There are99 alternative results and64 crafted intermediates. All5 new pairs are unique and all old outcomes remain exact. New labels have no shared-KG alias collision, and capacity remains249/256 concepts and347/512 recipes. Both new results are terminal; the added onward-use depth comes from one old result. No claim of measured player enjoyment or installed API acceptance is made here.'
+concept_reviews=[]
+for i in sorted(cs):
+ row=copy.deepcopy(pc[i]) if i in pc else next(r for r in newcq if r['id']==i)
+ if i in pc:row['inherited']=True
+ concept_reviews.append(row)
+review={'kind':B.REVIEW_KIND,'role':'quality','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'candidate.json'),'world_verdict':'accept','world_rationale':rationale,'inherited_review_sha256':sha(prior_dir/'quality-review.json'),'concepts':concept_reviews,'items':[copy.deepcopy(pr[i]) if i in pr else next(r for r in newrq if r['id']==i) for i in rs]}
+write('quality-review.json',review)
+B.read_review(OUT/'quality-review.json','quality',sha(OUT/'candidate.json'),set(rs),c['concepts'])
+write('raw/quality-review.json',{'kind':'alchimie-v96-new-content-quality-review-v1','role':'quality','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'raw/proposals.json'),'complete_candidate_sha256':sha(OUT/'candidate.json'),'verdict':'accept','world_rationale':rationale,'concepts':newcq,'items':newrq})
+report={'kind':'alchimie-v96-independent-quality-check-v1','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'candidate.json'),'raw_sha256':sha(OUT/'raw/proposals.json'),'old_concepts_exact':len(old_c),'old_recipes_exact':len(old_r),'concepts':len(cs),'recipes':len(rs),'craftable_results':len(crafted),'compatible_generations':len(c['compatible_versions']),'formerly_terminal_reused':{i:cs[i]['label'] for i in sorted((oldcrafted-oldinputs)&inputs)},'crafted_intermediates':len(crafted&inputs),'terminal_results':len(crafted-inputs),'results_with_alternatives':sum(n>1 for n in alts.values()),'new_results':{i:{'label':cs[i]['label'],'direct_recipes':alts[i],'witness':witness[i]} for i in sorted(newc)},'unresolved_findings':[],'preserved_bindings':{str(p.relative_to(ROOT)):sha(p) for p in [prior_dir/'candidate.json',prior_dir/'quality-review.json',prior_dir/'final-quality.json',prior_dir/'live-audit.json',ROOT/'cat_de_roman_esti/fixtures/kg_sample.json',ROOT/'docs/CRITIQUE_RUBRIC.md']},'review_source_sha256':sha(Path(__file__)),'limits':['Final installation/replay requires another bound review.','Both new discoveries are terminal; one previous terminal gains an onward use.','No physical-device or player-enjoyment evidence.']}
+assert len(crafted)==145 and len(crafted&inputs)==64 and sum(n>1 for n in alts.values())==99
+write('independent-quality-check.json',report)
+print(json.dumps({k:v for k,v in report.items() if k not in ('new_results','preserved_bindings')},ensure_ascii=False))

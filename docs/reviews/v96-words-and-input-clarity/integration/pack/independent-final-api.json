@@ -1,0 +1,314 @@
+{
+  "kind": "v96-independent-final-pack-bff-audit-v1",
+  "reviewer": "/root/v96_pack",
+  "method": "Seed discovery and winning/recovery replays use real Django BFF requests with public category/difficulty/seed selection; private store reads only confirm selected authored ID. No forced sessions, picker overrides, runtime edits or score changes.",
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "f2538a91726da87a519f8efac5d3a9993a8a23445879af817f08bdabd478e307",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "bee608938a113922842ec987bf44269ae086f45aaeb9c54f68e39c8f160bd9d3",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "9c46598b19acd30e82cf7bf542c82b8fcfe5039f607bc689ef27a98e78e3d76c",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "cat_de_roman_esti/wordgames/contexto.py": "cae2e1115491ba5cf6438de5dac7a2689087e1c13fa80efcc86e35acef9d1101",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "cat_de_roman_esti/wordgames/_session_endpoint.py": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+    "cat_de_roman_esti/wordgames/_progress.py": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d"
+  },
+  "script_sha256": "0dd9a5f5fe77370fffe1f2d856ddfdb51746bb29ee6cd5c5607a0e8b42bfe1e8",
+  "all_source_bindings_stable": true,
+  "seed_discovery_public_create_counts": {
+    "cx_viata_de_roman_373": 7,
+    "ct_viata_de_roman_376": 20,
+    "lt_gastronomie_245": 7
+  },
+  "display_rules_and_rejection_ledger_unchanged_from_main": true,
+  "exact_new_approved_ids": [
+    "ct_viata_de_roman_376",
+    "cx_viata_de_roman_373",
+    "lt_gastronomie_245"
+  ],
+  "all_three_approved_entries_naturally_served": true,
+  "all_unearned_private_keys_hidden": true,
+  "checks": [
+    {
+      "id": "cx_viata_de_roman_373",
+      "game": "conexiuni",
+      "public_create_url": "/api/wordgames/conexiuni/games?category=viata_de_roman&difficulty=normal&seed=6",
+      "seed": 6,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "initial_public_state": {
+        "game_id": "cefb67fb-a4a2-4057-942a-a4ed5f7e62a9",
+        "tiles": [
+          {
+            "id": "n_v24_body_face_gura",
+            "label": "Gură"
+          },
+          {
+            "id": "n_v33_bathroom_fixture_robinet",
+            "label": "Robinet"
+          },
+          {
+            "id": "n_v32_workshop_cut_fierastrau",
+            "label": "Fierăstrău"
+          },
+          {
+            "id": "n_v29_kitchen_table_cutit",
+            "label": "Cuțit"
+          },
+          {
+            "id": "n_v24_school_writing_creion",
+            "label": "Creion"
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte"
+          },
+          {
+            "id": "n_v24_home_surfaces_fereastra",
+            "label": "Fereastră"
+          },
+          {
+            "id": "n_v4ist_sabie",
+            "label": "Sabie"
+          },
+          {
+            "id": "n_v24_people_grandparents_bunica",
+            "label": "Bunică"
+          },
+          {
+            "id": "n_v18gas_socata",
+            "label": "Socată"
+          },
+          {
+            "id": "n_v24_people_grandparents_bunic",
+            "label": "Bunic"
+          },
+          {
+            "id": "n_v24_people_parents_tata",
+            "label": "Tată"
+          },
+          {
+            "id": "n_v24_people_parents_mama",
+            "label": "Mamă"
+          },
+          {
+            "id": "n_v3gas_cafea",
+            "label": "Cafea"
+          },
+          {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai"
+          },
+          {
+            "id": "n_v4via_usa",
+            "label": "ușă"
+          }
+        ],
+        "solved": [],
+        "solved_count": 0,
+        "remaining_groups": 4,
+        "lives": 4,
+        "mistakes": 0,
+        "won": false,
+        "lost": false,
+        "difficulty": "normal",
+        "clues_used": 0,
+        "clue_available": false,
+        "clues": [],
+        "board_category": "viata_de_roman"
+      },
+      "wrong_attempts": 2,
+      "reordered_wrong_repeat_status": 409,
+      "repeat_wrong_free": true,
+      "unearned_group_labels_hidden": true,
+      "earned_clue_persists": true,
+      "unknown_tile_and_forged_solution_unchanged": true,
+      "terminal_get_and_rejected_replay_exact": true,
+      "final_score": 400,
+      "solved_groups": 4
+    },
+    {
+      "id": "ct_viata_de_roman_376",
+      "game": "contexto",
+      "public_create_url": "/api/wordgames/contexto/games?category=viata_de_roman&difficulty=usor&seed=19",
+      "seed": 19,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "initial_public_state": {
+        "game_id": "d57f5e1d-2f81-459d-94c8-24ad7be25763",
+        "attempts": 0,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      },
+      "target_hidden_until_win": true,
+      "unknown_blank_and_forged_target_unchanged": true,
+      "repeated_guess_free": true,
+      "earned_hint_persists": true,
+      "hint_session_is_separate_natural_selection": true,
+      "hint_preparation_guesses": [
+        "pian",
+        "munte",
+        "tren"
+      ],
+      "opener": "podea",
+      "opener_feedback": {
+        "id": "n_v24_home_surfaces_podea",
+        "label": "Podea",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "final_attempts": 4,
+      "final_score": 700,
+      "terminal_get_and_rejected_replay_exact": true
+    },
+    {
+      "id": "lt_gastronomie_245",
+      "game": "lant",
+      "public_create_url": "/api/wordgames/lant/games?category=gastronomie&difficulty=usor&seed=6",
+      "seed": 6,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "initial_public_state": {
+        "game_id": "3c9e9803-f48a-421d-897f-4e49ff5117cc",
+        "start": {
+          "id": "n_v85_food_vanilie",
+          "label": "Vanilie"
+        },
+        "target": {
+          "id": "n_v2gas_branza",
+          "label": "Brânză",
+          "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+        },
+        "current": {
+          "id": "n_v85_food_vanilie",
+          "label": "Vanilie"
+        },
+        "path": [
+          {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie"
+          }
+        ],
+        "moves": 0,
+        "optimal": 2,
+        "won": false,
+        "difficulty": "usor",
+        "choices": [
+          {
+            "label": "Cozonac",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Cremă de vanilie",
+            "relation": "parte și întreg"
+          },
+          {
+            "label": "Pască",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Poale-n brâu",
+            "relation": "legătură directă"
+          }
+        ],
+        "backtrack_recommended": false,
+        "board_category": "gastronomie"
+      },
+      "public_target_allowed": true,
+      "unearned_full_route_hidden": true,
+      "unknown_forged_route_same_node_and_start_undo_unchanged": true,
+      "earned_hint_persists_without_get_escalation": true,
+      "moving_clears_hint": true,
+      "all_native_shortest_paths_completed": [
+        {
+          "labels": [
+            "Vanilie",
+            "Poale-n brâu",
+            "Brânză"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "captions": [
+            "legătură directă",
+            "legătură directă"
+          ],
+          "natural_seed": 6,
+          "final_get_replay_undo_stable": true
+        },
+        {
+          "labels": [
+            "Vanilie",
+            "Pască",
+            "Brânză"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "captions": [
+            "legătură directă",
+            "legătură directă"
+          ],
+          "natural_seed": 6,
+          "final_get_replay_undo_stable": true
+        }
+      ]
+    }
+  ],
+  "baseline_commit": "1457786",
+  "counts": {
+    "conexiuni": {
+      "before": 243,
+      "after": 244,
+      "added": 1
+    },
+    "contexto": {
+      "before": 263,
+      "after": 264,
+      "added": 1
+    },
+    "lant": {
+      "before": 121,
+      "after": 122,
+      "added": 1
+    },
+    "alchimie": {
+      "before": 83,
+      "after": 83,
+      "added": 0
+    }
+  },
+  "all_710_previous_pack_records_exact": {
+    "conexiuni": true,
+    "contexto": true,
+    "lant": true,
+    "alchimie": true
+  },
+  "pending_count": 8,
+  "total_pack_records": 713,
+  "limitations": [
+    "Automated BFF correctness does not establish human enjoyment or physical-device acceptance.",
+    "Quick-game supplement is outside this pack audit.",
+    "Lanț endpoints and earned local choices are public; unearned full route corridors stay hidden.",
+    "All four new Lanț route steps retain generic direct-link labels; raw variant-aware wording is not presented as player-visible copy.",
+    "Covor retains explicitly documented unknown mobilă, textil, parchet and mochetă vocabulary gaps from allocated analyst probes."
+  ]
+}
