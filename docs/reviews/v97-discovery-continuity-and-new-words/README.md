@@ -61,3 +61,7 @@ implementation, final audits and integration checks remain before V97 is release
 
 [Kickoff verification](kickoff-verification.json) checks exact archive bytes and unchanged
 serving artifacts. Prototype checks are evidence for design review, not a release gate.
+
+V97 also incorporates the subsequent [V96 test-only CI correction](../v96-words-and-input-clarity/ci-recovery/README.md)
+at main `fd3ca7c`. All ten baseline application/data artifact pins remain unchanged, so
+the earlier frozen content and compatibility proposals remain bound to their original baseline.

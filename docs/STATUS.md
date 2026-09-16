@@ -7,9 +7,9 @@ Last verified: 2026-09-17 — V96 landed; V97 compatibility and content drafting
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
 - V95 landed on main `1457786`; [GitHub CI 35026423470 passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35026423470).
 - V96 is landed and pushed on main `fd3ca7c` after a test-only CI correction (implementation `57d5bcc`).
-  [GitHub CI 35155920107](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35155920107)
-  passed both backend jobs; one of 540 browser cases hit a test-interception race.
-  The test-only correction is published; fresh CI is running. Its original worktree was cleaned.
+  [GitHub CI 35158602720](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35158602720)
+  is running after the reproduced test-only interception correction. All local gates pass.
+  The original release and correction worktrees were cleaned after verified publication.
 - V97 starts locally in `feat/v97-discovery-continuity-and-new-words`. Saved-book
   compatibility design, fresh content and twelve earned-caption drafts are recorded.
   All new proposals remain unapproved; the served inventory below remains landed V96.
