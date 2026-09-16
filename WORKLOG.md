@@ -1137,3 +1137,8 @@ no timeout increase, retry or sleep was added. Independent review passes 30 cons
 mobile repeats and all 12 V96 cases. Native 212/lint/build pass, bundle 119.23 KiB. The receipt
 binds the sole changed test and all 42 unchanged previous inputs; original integration
 proof remains historical. Fresh CI follows this authorized V96 landing correction.
+
+V96 correction main fd3ca7c passed GitHub CI 35158602720, including the complete browser
+job and both backend jobs. Additional inherited-code confidence testing passed 120 cases
+without changes. V97 retains 65 frozen proposal files and all ten unchanged application/
+data pins; proposals remain unapproved and the existing eight-book runtime bound remains.

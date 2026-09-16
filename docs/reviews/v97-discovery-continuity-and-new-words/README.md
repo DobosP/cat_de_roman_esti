@@ -69,3 +69,7 @@ the earlier frozen content and compatibility proposals remain bound to their ori
 [An additional inherited-code confidence run](ci-followup/confidence-review.json) passed
 120 V96 browser cases (60 desktop/60 mobile) without further changes. This tests the
 landed V96 correction; it is not V97 implementation or content approval.
+
+V96 main `fd3ca7c` has [successful GitHub CI](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35158602720).
+The [final CI receipt](v96-ci.json) is distinct from the [initial failed run](v96-ci-initial-failure.json).
+V97 remains a local proposal session; its content, captions and compatibility change are not installed.

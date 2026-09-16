@@ -8,7 +8,7 @@ Last verified: 2026-09-17 — V96 landed; V97 compatibility and content drafting
 - V95 landed on main `1457786`; [GitHub CI 35026423470 passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35026423470).
 - V96 is landed and pushed on main `fd3ca7c` after a test-only CI correction (implementation `57d5bcc`).
   [GitHub CI 35158602720](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35158602720)
-  is running after the reproduced test-only interception correction. All local gates pass.
+  passed after the reproduced test-only interception correction. All local gates pass.
   The original release and correction worktrees were cleaned after verified publication.
 - V97 starts locally in `feat/v97-discovery-continuity-and-new-words`. Saved-book
   compatibility design, fresh content and twelve earned-caption drafts are recorded.
