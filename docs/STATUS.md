@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-17 — V96 integrated on main; all local integration gates green.
+Last verified: 2026-09-17 — V96 integrated on main; local gates green; CI test-harness correction verified.
 
 ## Current state
 
@@ -68,6 +68,9 @@ empty pairs per session; quick supplements ≤256 boards/2 MiB. Recipes/routes/a
 - Python 3.12 and 3.14 each pass **2236 backend/53 account tests**; browser **540 pass**,
   native frontend **212 pass**. Both validators, Ruff, frontend lint/typecheck/build, docs
   and whitespace pass. Initial gzip **119.23/120 KiB**.
+- [CI correction](reviews/v96-words-and-input-clarity/ci-recovery/README.md): the first GitHub
+  run passed both backend jobs and 539/540 browser cases. A reproduced one-shot network
+  interception race is corrected in the test only; 30 mobile repeats and 12 focused cases pass.
 - [Final integration receipt](reviews/v96-words-and-input-clarity/integration/verification.json)
   binds assembled inputs, exact artifacts, final approvals and preserved initial failures.
 - World lane: 36 wave/history and 136 catalog/exploration checks pass; final audit covers

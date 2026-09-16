@@ -1097,3 +1097,18 @@ twelve final-evidence pins. All local gates pass: 2236 backend/53 accounts on ea
 The landing record precedes the authorized push. After remote proof, both previews move
 off the task worktree before verified V96 cleanup. V97 starts separately, with a required
 saved-book compatibility design before further recipe expansion. Production stays V91.
+
+
+## V96 CI interception correction (2026-09-17)
+
+Valid until: bound test or browser interception behavior changes — then repeat checks.
+
+GitHub 35155920107 passed both backend jobs and 539/540 browser cases. Local repetition
+reproduced the final mobile case twice. The trace proves POST 200 commit followed by a
+pending GET during one-shot route removal. A persistent handler with a manual first-call
+abort avoids the teardown race, retaining the original keyboard/result/focus assertions
+and adding exactly-one-mutation/read checks. No product/data/assets/dependencies changed;
+no timeout increase, retry or sleep was added. Independent review passes 30 consecutive
+mobile repeats and all 12 V96 cases. Native 212/lint/build pass, bundle 119.23 KiB. The receipt
+binds the sole changed test and all 42 unchanged previous inputs; original integration
+proof remains historical. Fresh CI follows this authorized V96 landing correction.
