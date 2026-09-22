@@ -2320,3 +2320,54 @@ BOARDS += ({'category': 'stiinta',
               'https://dexonline.ro/definitie/pisic%C4%83',
               'https://dexonline.ro/definitie/banan%C4%83',
               'https://dexonline.ro/definitie/f%C4%83in%C4%83']})
+
+# V97: ordinary kinship terms and separate home, rail and school associations.
+BOARDS += ({'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'game': 'intrusul',
+  'id': 'iq92_v97_relatives',
+  'payload': {'group_label': 'Denumiri de rude',
+              'intruder': 'n_v2via_vecini',
+              'members': ['n_v24_people_relatives_frate',
+                          'n_v24_people_relatives_sora',
+                          'n_v24_people_relatives_unchi']},
+  'rationale': 'Frate, soră și unchi denumesc relații de rudenie. Vecin numește apropierea '
+               'locuinței, nu rudenia. O rudă poate locui alături, dar acest fapt nu '
+               'transformă termenul vecin într-o denumire de rudă. Sunt folosite sensurile '
+               'obișnuite ale identităților native, nu sensurile figurate sau religioase.',
+  'source_id': 'aq92_v97_intrusul_relatives',
+  'sources': ['https://dexonline.ro/definitie/frate',
+              'https://dexonline.ro/definitie/sor%C4%83',
+              'https://dexonline.ro/definitie/unchi',
+              'https://dexonline.ro/definitie/vecin']},
+ {'category': 'viata_de_roman',
+  'difficulty': 'usor',
+  'game': 'perechi',
+  'id': 'pq92_v97_home_and_city',
+  'payload': {'pairs': [{'group_label': 'Elemente care delimitează o cameră',
+                         'members': ['n_v24_home_structure_perete',
+                                     'n_v24_home_structure_tavan']},
+                        {'group_label': 'Mijloace de transport urban pe șine',
+                         'members': ['n_v24_transport_rail_metrou',
+                                     'n_v24_transport_rail_tramvai']},
+                        {'group_label': 'Acțiune și încăperea destinată preparării hranei',
+                         'members': ['n_v24_action_food_a_gati', 'n_v4gas_bucatarie']},
+                        {'group_label': 'Evaluare școlară și unitate de studiu',
+                         'members': ['n_v24_school_assessment_examen',
+                                     'n_v24_school_classroom_lectie']}]},
+  'rationale': 'Patru asocieri concrete: Perete–Tavan, Metrou–Tramvai, A găti–Bucătărie și '
+               'Examen–Lecție. Lecțiile oferă conținut de învățat pentru o evaluare, fără a '
+               'afirma că orice lecție este urmată de examen. Cele două vehicule sunt '
+               'singurele mijloace de transport de pe tablă, iar peretele și tavanul sunt '
+               'singurele elemente de construcție. Încăperea pentru gătit se leagă de acțiunea '
+               'de preparare a hranei, nu de sensul reflexiv al împodobirii. Cuvintele '
+               'denumesc sensurile obișnuite, nu toate sensurile figurate.',
+  'source_id': 'aq92_v97_perechi_home_and_city',
+  'sources': ['https://dexonline.ro/definitie/perete/definitii',
+              'https://dexonline.ro/definitie/tavan',
+              'https://dexonline.ro/definitie/metrou',
+              'https://dexonline.ro/definitie/tramvai',
+              'https://dexonline.ro/definitie/g%C4%83ti/definitii',
+              'https://dexonline.ro/definitie/buc%C4%83t%C4%83rie',
+              'https://dexonline.ro/definitie/examen',
+              'https://dexonline.ro/definitie/lec%C8%9Bie']})

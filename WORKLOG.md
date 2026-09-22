@@ -1142,3 +1142,35 @@ V96 correction main fd3ca7c passed GitHub CI 35158602720, including the complete
 job and both backend jobs. Additional inherited-code confidence testing passed 120 cases
 without changes. V97 retains 65 frozen proposal files and all ten unchanged application/
 data pins; proposals remain unapproved and the existing eight-book runtime bound remains.
+
+## V97 Linux resumption (2026-09-22)
+
+Valid until: candidate inputs change — then repeat affected verification.
+
+The owner requested testing and continuing version work from the latest documentation
+and Windows handoff. Local and remote main match fd3ca7c. The existing V97 worktree at
+442dd7c contains uncommitted, reviewed content and an unfinished release verification.
+Its 65 kickoff and 139 lane archive records, 27 initial gate hashes and inherited content
+remain exact. No arcade-specific new Windows skill was located; its name/path remains
+an explicit clarification, and no unsourced skill instructions are claimed adopted.
+
+The inherited browser run had 485 passes and 67 failures. The browser still accepted
+only eight historical recipe hashes while V97 served nine under a reviewed limit of
+sixteen. Matching that bound fixes fresh collection updates without changing the
+64 KiB save or 256 craft caps. Native checks cover nine/sixteen histories, the actual
+bundled catalog and rejection of seventeen. All 84 affected Alchimie journeys pass.
+
+A separate Lanț mobile failure occurs when the temporary outer notice row shrinks by
+56 px and moves a partly clipped persistent replay error entirely above the viewport.
+A one-time layout scroll reveals the full paragraph without moving focus. All 26
+shared start/replay journeys pass, and real-clock geometry confirms both error and retry
+remain visible. An initial stronger focus assertion raced the pending disabled render;
+the corrected test waits for that actual state before measuring focus. Original errors,
+logs and before/after evidence are preserved in the V97 resumption review.
+
+Independent review accepts the two fixes and verifies final source/static bindings.
+The complete assembled matrices pass: 2329 backend/53 accounts on each Python, 214 native
+frontend and 552 real-browser cases (two workers, zero retries). All validators, lint, build,
+docs and whitespace checks pass at 119.23/120 KiB. The exact integration receipt binds 522
+inputs and retains the earlier failures. This pickup does not merge, push, deploy or restart
+the loop; V97 remains a verified task-branch candidate.

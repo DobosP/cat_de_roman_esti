@@ -154,6 +154,14 @@ REVIEWED_CAPTIONS = MappingProxyType(
             "fe5fbe7135dfcd54a82a63fef5b9c9ce36e1e99d653e337f91b1f29ef4d50539",
             "emisiune și post TV",
         ),
+        ("n_gas_placinte_poale_brau", "n_v2gas_branza"): (
+            "11fd5b31c8dc53a24e5a8510b104ac7e251913cd135a444762e1f3674b60a11d",
+            "plăcintă și umplutură de brânză",
+        ),
+        ("n_gas_placinte_poale_brau", "n_v85_food_vanilie"): (
+            "8da4ba575c82d9630c614542a52618c6de948e97bf685ccf869383ecbaec6b54",
+            "plăcintă și aromă de vanilie",
+        ),
         ("n_gas_sarmale", "n_v3gas_orez"): (
             "3a70a5d35de090740d12f9933c619883de83c1586af4613fdfa31defd7168e89",
             "sarmale și orezul din umplutură",
@@ -370,6 +378,14 @@ REVIEWED_CAPTIONS = MappingProxyType(
             "d0e13a6d83b04571140a94095a4b77629a2f39db8ac6d44b104d56a887d8b805",
             "ciorbă și carnea din perișoare",
         ),
+        ("n_v17gas_pasca", "n_v2gas_branza"): (
+            "5d0ab3103ffafb9bb8ceb437b589e0b1fe506a8e9bc6fb9bd67ad8110a8d5924",
+            "pască și umplutură de brânză",
+        ),
+        ("n_v17gas_pasca", "n_v85_food_vanilie"): (
+            "efe3858dc0d5b792326c78c0f321c461f16d8d8c23666b8b3c8c55352b1321a1",
+            "pască și aromă de vanilie",
+        ),
         ("n_v17geo_aeroportul_otopeni", "n_v2sti_avion"): (
             "9ee9fb16bcc893a3add9b315840a646a4b2edce2a5dc707514873251fd9960ea",
             "avion și aeroport",
@@ -414,13 +430,45 @@ REVIEWED_CAPTIONS = MappingProxyType(
             "7248dee307657c4be52b3da207b9cc4521385fe0a683556c347ae162cb38ac35",
             "zahăr și formă măcinată",
         ),
+        ("n_v24_food_snack_biscuit", "n_v84_food_cuptor"): (
+            "ef26c0c388e1c0e973311e802a72a8a68c9fe96a8b5dcc0d569fe2649155fbc5",
+            "cuptor și biscuiți copți",
+        ),
+        ("n_v24_food_snack_biscuit", "n_v90_food_firimitura"): (
+            "2cea5133d564d78610f4948ead10fdede52d5a0d0a48a7ed467ac1a9838b2674",
+            "biscuit și bucățele desprinse",
+        ),
+        ("n_v4gas_paine", "n_v84_food_cuptor"): (
+            "7fbb959dea82f68c3951c0c17aeefb4eebf00746d2ea42d505ecf972744cc67d",
+            "cuptor și pâine coaptă",
+        ),
+        ("n_v4gas_paine", "n_v90_food_firimitura"): (
+            "45eb8429ce1f32dce4e5bf402e61f652efac3451519052171a16978b5f460c5e",
+            "pâine și bucățele desprinse",
+        ),
         ("n_v86_food_crema_vanilie", "n_v87_food_cremsnit"): (
             "e016e4794c3c48ebf8cfb3581452c2508cb74b05b30f1682236bfac5d6e00cb9",
             "prăjitură și umplutură",
         ),
+        ("n_v86_food_frisca", "n_v86_food_zahar_pudra"): (
+            "48feda733ce0739d13b0458caaad82b2ec801f10e52bc32cdfe3573602807d2c",
+            "frișcă și îndulcitor opțional",
+        ),
+        ("n_v86_food_frisca", "n_v87_food_tort_diplomat"): (
+            "04a7be12c1fb9a689ab2266e5404855c0bb1537cbfd91ab215d1c18a9e0d11aa",
+            "tort și frișca din cremă",
+        ),
         ("n_v86_food_zahar_pudra", "n_v87_food_cremsnit"): (
             "0f6375bcdec5eddb1dec28d902552826a37f9969f2eb64bb3ccfe7094fd20e95",
             "prăjitură și pudră dulce",
+        ),
+        ("n_v86_food_zahar_pudra", "n_v87_food_piscot"): (
+            "6037c540b23886196b80006de4b424d85b3065dd91e82f1f1a0aa07ffed34b74",
+            "pișcot și zahăr de presărat",
+        ),
+        ("n_v87_food_piscot", "n_v87_food_tort_diplomat"): (
+            "9dc08ffe90fc0d66318750013f6b86fbc20ffa160ddfba6ae7d5e7aeb14388bd",
+            "tort și margine cu pișcoturi",
         ),
     }
 )

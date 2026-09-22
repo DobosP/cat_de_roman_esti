@@ -1,0 +1,96 @@
+"""Root factual review and exact-bound caption installation, 2026-09-17."""
+from pathlib import Path
+import ast
+import hashlib
+import json
+import sys
+import subprocess
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words')
+HERE = Path(__file__).parent
+sys.path.insert(0, str(ROOT))
+from cat_de_roman_esti.wordgames.recipe_extensions import digest, record_snapshot
+from cat_de_roman_esti.wordgames.service import get_service
+
+raw = (HERE / 'drafts.json').read_bytes()
+draft = json.loads(raw)
+sha = hashlib.sha256(raw).hexdigest()
+runtime_path = 'cat_de_roman_esti/wordgames/lant_relations.py'
+kg_path = 'cat_de_roman_esti/fixtures/kg_sample.json'
+path = ROOT / runtime_path
+source = path.read_text()
+pack_path = 'cat_de_roman_esti/fixtures/games_pack.json'
+for name, expected in draft['bindings'].items():
+    bound = subprocess.check_output(['git', 'show', f'fd3ca7c:{name}'], cwd=ROOT) if name == pack_path else (ROOT / name).read_bytes()
+    assert hashlib.sha256(bound).hexdigest() == expected, name
+pack = json.loads((ROOT / pack_path).read_bytes())
+current_boards = {row['id']: row for row in pack['lant']}
+assert all(current_boards[key] == value for key, value in draft['boards'].items())
+service = get_service()
+kg = json.loads((ROOT / kg_path).read_bytes())
+edges = {edge['id']: edge for edge in kg['kg_edges']}
+notes = [
+    'Manufacturer oven manual contains bread baking programs and tables (pages 30-32, 43). This supports the appliance-to-bread cooking relation without importing temperature advice.',
+    'DEX 2009 defines a crumb first through small bread fragments after cutting or tearing; the caption expresses that ordinary meaning.',
+    'Manufacturer oven manual explicitly lists biscuit baking (page 31). The caption describes a supported method, not an exclusive recipe.',
+    'DEX 2009 also extends crumb to very small food fragments. A biscuit fragment fits that sense; no new graph direction is inferred.',
+    'Robert Eisler includes powdered sugar in the whipped-cream decoration but uses whipped cream separately in the filling. Optional correctly avoids claiming all cream is sweetened.',
+    'Robert Eisler mixes whipped cream into the Diplomat filling. The caption identifies its documented role in this cake.',
+    'Robert Eisler instructs dusting the ladyfinger mixture with powdered sugar before baking. The text names dusting rather than asserting a mandatory ingredient.',
+    'Robert Eisler forms ladyfingers into the cake perimeter. This is a documented version, not a definition of all Diplomat constructions.',
+    'Laura Laurențiu includes vanilla extract in the dough and cheese filling of poale-n brâu. Flavoring is a precise, variant-compatible description.',
+    'Laura Laurențiu gives a cheese filling for poale-n brâu. The existing two-way material relation is truthful in either traversal.',
+    'Laura Laurențiu includes vanilla extract in the traditional cheese pască dough and filling. The caption describes aroma without a universal ingredient rule.',
+    'Laura Laurențiu lists cheese as the principal filling of the traditional pască version. This supports the existing two-way filling relation.',
+]
+items = []
+allowed = withheld = 0
+for row, note in zip(draft['items'], notes, strict=True):
+    edge = row['edge_snapshot']
+    assert edges[edge['id']] == row['raw_kg_edge_snapshot']
+    assert digest(edges[edge['id']]) == row['raw_kg_edge_sha256']
+    assert digest(edge) == row['edge_snapshot_sha256']
+    for orientation in ('forward', 'reverse'):
+        check = row['orientation_review'][orientation]
+        link = service.link(check['from'], check['to'])
+        assert (link is not None) == check['graph_allows']
+        if link:
+            assert record_snapshot(link) == edge
+            allowed += 1
+        else:
+            withheld += 1
+    items.append({'id': row['id'], 'pair': row['pair'], 'caption': row['caption'], 'edge_sha256': row['edge_snapshot_sha256'], 'verdict': 'accept', 'rationale': note, 'sources': row['sources'], 'both_directions_checked': True, 'graph_allows_reverse': edge['bidirectional'], 'character_count': len(row['caption'])})
+assert (allowed, withheld) == (14, 10)
+review = {'kind': 'lant-caption-review-v1', 'role': 'factual', 'reviewer': '/root', 'checked_on': '2026-09-17', 'candidate_sha256': sha, 'kg_sha256': draft['bindings'][kg_path], 'runtime_source_sha256': draft['bindings'][runtime_path], 'items': items, 'checks': {'allowed_directions': allowed, 'withheld_reverse_directions': withheld, 'live_primary_sources_read': True, 'unresolved_findings': []}}
+(HERE / 'factual-review.json').write_text(json.dumps(review, ensure_ascii=False, indent=2) + '\n')
+expected = {tuple(row['pair']): row for row in draft['items']}
+identities = []
+for role in ('factual', 'quality'):
+    receipt = json.loads((HERE / f'{role}-review.json').read_bytes())
+    assert receipt['role'] == role and receipt['candidate_sha256'] == sha
+    assert receipt['kg_sha256'] == draft['bindings'][kg_path]
+    assert receipt['runtime_source_sha256'] == draft['bindings'][runtime_path]
+    identities.append(receipt['reviewer'])
+    assert len(receipt['items']) == len(expected)
+    assert {tuple(row['pair']) for row in receipt['items']} == set(expected)
+    for row in receipt['items']:
+        proposed = expected[tuple(row['pair'])]
+        assert row['verdict'] == 'accept' and row['caption'] == proposed['caption']
+        assert row['edge_sha256'] == proposed['edge_snapshot_sha256']
+assert len(set(identities)) == 2
+node = next(n.value.args[0] for n in ast.parse(source).body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'REVIEWED_CAPTIONS' for t in n.targets))
+old = ast.literal_eval(node)
+assert len(old) == 101
+updated = dict(old)
+for pair, row in expected.items():
+    assert pair not in old and 0 < len(row['caption']) <= 34
+    updated[pair] = (row['edge_snapshot_sha256'], row['caption'])
+lines = source.splitlines(keepends=True)
+replacement = ['    {\n']
+for pair, (edge_sha, caption) in sorted(updated.items()):
+    replacement.extend([f'        ({json.dumps(pair[0])}, {json.dumps(pair[1])}): (\n', f'            "{edge_sha}",\n', f'            {json.dumps(caption, ensure_ascii=False)},\n', '        ),\n'])
+replacement.append('    }\n')
+path.write_text(''.join(lines[:node.lineno - 1] + replacement + lines[node.end_lineno:]))
+receipt = {'candidate_sha256': sha, 'previous_source_sha256': draft['bindings'][runtime_path], 'installed_source_sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'added': 12, 'total': 113, 'prior_records_exact': 101, 'allowed_directions': allowed, 'withheld_reverse_directions': withheld, 'reviewers': identities, 'graph_changed': False}
+(HERE / 'installation.json').write_text(json.dumps(receipt, indent=2) + '\n')
+print(json.dumps(receipt))

@@ -1,0 +1,34 @@
+"""Independent raw factual review of the frozen V97 author drafts."""
+from pathlib import Path
+import hashlib,json,shutil
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words')
+O=Path(__file__).resolve().parent
+A=R/'docs/reviews/v97-discovery-continuity-and-new-words/pack'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+notes={
+ 'viata_de_roman':{
+  'conexiuni[0]':'All sixteen actual node labels/descriptions and four proposed predicates were inspected. Male relatives are literal everyday kinship roles, including both nephew and grandson senses of Nepot. Four facial parts have accurate descriptions; Pleoapă does not promise exactly two eyelids per person. Familiar recipes specifically stuff peppers, eggs, doughnuts and crepes, without asserting every serving is filled. Filling a kitchen oven with dishes is not making it a stuffed food. Manufacturer/operator documentation establishes electric variants of guitars, trains, ovens and bicycles without claiming all examples are electric. Other displayed foods and body parts do not have conventional electric product variants. Older dictionary entries, established home recipes and current Romanian products/transport corroborate cross-generational recognition. Several inherited Concept cotidian definitions are sparse but accurate. No copied recipes, special equipment knowledge or adult framing supplies the puzzle. Sources: https://dexonline.ro/definitie/nepot ; https://dexonline.ro/definitie/pleoap%C4%83 ; https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/ardei-umpluti.html ; https://www.barbatlacratita.ro/2016/04/gogosi-cu-gem.html ; https://www.youtube.com/watch?v=Ed7U7N_44nA ; https://retetepentrutoategusturile.ro/reteta-clasica-de-clatite-umplute-cu-dulceata ; https://www.fender.com/collections/electric-guitars ; https://support.decathlon.ro/biciclete-cu-asistenta-electrica-suport-tehnic-decathlon ; https://www.cfrcalatori.ro/comunicate/cfr-calatori-va-circula-din-20-noiembrie-cu-primul-tren-electric-nou-din-romania-rama-electrica-alstom-coradia-stream/ ; https://media3.bosch-home.com/Documents/specsheet/ro-RO/HBG7742B1.pdf',
+  'contexto[0]':'Ușă is a concrete universally recognizable entrance closure. Its actual displayed definition correctly identifies the movable element at a room or dwelling entrance; dictionary definitions allow the doorway/assembly as closely related senses, not unrelated target ambiguity. DLRLC/DEX and the current Romanian PORTA interior-door catalog independently establish old and current everyday use. The seven native predecessors and hot house/key/bathroom/intercom approaches need allocated-ID replay before final approval. Intrare is an unchanged unknown-word gap, which must remain disclosed and uncharged. Sources: https://dexonline.ro/definitie/u%C8%99%C4%83 ; https://portadoors.com/ro/c/usi-interior-ro/'},
+ 'gastronomie':{
+  'lant[0]':'Cacao and Lapte are independently familiar ingredients; their actual displayed descriptions are accurate. Both intermediate definitions were read: Înghețată allows milk or water bases, while Chec explicitly permits plain/cocoa/fruit variants. Current producer Ciao Amore lists cocoa and milk in a chocolate ice cream; original e-Retete 2009 independently documents the same ingredient association across time. The latter recipe includes rum, but no alcohol-dependent association, wording or play value is imported; the producer example supplies the same route without it. Laura Laurentiu directly recommends cake alongside milk and offers a cocoa version. That proves Chec→Lapte as serving together, not a silently changed ingredient assertion. Dairy-free ice cream and non-cocoa cakes do not invalidate qualified variants. Root is independently reviewing proposed earned captions; this factual review does not claim those drafts already display. Final BFF replay must inspect actual captions after their freeze. Sources: https://ciaoamore.ro/produse/inghetata-pentru-retail/gelato-pahar-retail/ ; https://www.e-retete.ro/retete/inghetata-cu-ciocolata ; https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/chec-pufos-si-economic-cu-cacao-reteta-video.html'}
+}
+freeze=json.loads((A/'author-freeze.json').read_bytes())
+snapshot=json.loads((A/'node-edge-snapshots.json').read_bytes())
+kg_path=R/'cat_de_roman_esti/fixtures/kg_sample.json'
+assert sha(kg_path)==snapshot['kg_sha256']
+kg=json.loads(kg_path.read_bytes())
+for table,reference in [('kg_nodes',snapshot['nodes']),('kg_edges',snapshot['edges'])]:
+ actual={row['id']:row for row in kg[table]}
+ assert all(actual[row['id']]==row for row in reference)
+for category,refs in notes.items():
+ source=A/'candidates'/category/'candidates.json'
+ assert sha(source)==freeze['files'][f'candidates/{category}/candidates.json']
+ target=O/'candidates'/category;target.mkdir(parents=True,exist_ok=True)
+ if (target/'candidates.json').exists():assert (target/'candidates.json').read_bytes()==source.read_bytes()
+ else:shutil.copyfile(source,target/'candidates.json')
+ raw=json.loads(source.read_bytes());assert not raw['nodes'] and not raw['edges']
+ actual=[f'{g}[{i}]' for g in ['conexiuni','contexto','lant','alchimie'] for i,_ in enumerate(raw[g])]
+ assert set(actual)==set(refs)
+ result={'category':category,'candidate_sha256':'sha256:'+sha(source),'reviewer':'/root/v97_pack','reviewed_refs':actual,'coverage_note':'Independent factual and recognition review of every frozen raw reference and actual descriptions, with live original sources. Separate raw quality and final allocated dossiers remain required.','issues':[{'ref':ref,'severity':'note','issue':refs[ref]} for ref in actual]}
+ (target/'verify_factual.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'reviewer':'/root/v97_pack','raw_refs':3,'review_files':{str(p.relative_to(O)):sha(p) for p in sorted((O/'candidates').glob('*/*.json'))},'source_access_limits':['The filled-egg original YouTube description and crepe author search excerpt were available, but direct opens failed. Other originals opened successfully.','Jamila chocolate-ice-cream page now omits explicit cacao quantities; its tag alone was not counted as the cocoa proof. Independent producer ingredients and 2009 original recipe supply that proof.'],'remaining':['Root raw quality','Caption freeze','Allocated-ID analyst and verifier','Approved natural-selection and recovery audit']},ensure_ascii=False,indent=2))

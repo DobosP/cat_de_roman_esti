@@ -1,1 +1,0 @@
-import{d as e}from"./useSavedGameResume-Ej9lE_d_.js";import{w as t}from"./index-D9P6HVNQ.js";var n=t();function r({game:t,children:r}){return(0,n.jsxs)(`details`,{className:`game-options`,children:[(0,n.jsx)(`summary`,{children:`Opțiuni de joc`}),(0,n.jsxs)(`div`,{className:`game-options-content`,children:[r,(0,n.jsx)(e,{game:t})]})]})}export{r as t};

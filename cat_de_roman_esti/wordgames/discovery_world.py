@@ -21,6 +21,7 @@ MAX_CONCEPTS = 256
 MAX_RECIPES = 512
 MAX_SUPPLIES = 96
 MAX_SUPPLY_TIERS = 12
+MAX_COMPATIBLE_VERSIONS = 16
 MAX_CATALOG_BYTES = 2 * 1024 * 1024
 Identifier = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=160)]
 Text = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=2000)]
@@ -112,7 +113,9 @@ class Catalog(BaseModel):
     candidate_sha256: Sha
     bindings: dict[str, Sha]
     reviews: list[Review] = Field(min_length=2, max_length=2)
-    compatible_versions: list[CompatibleVersion] = Field(default_factory=list, max_length=8)
+    compatible_versions: list[CompatibleVersion] = Field(
+        default_factory=list, max_length=MAX_COMPATIBLE_VERSIONS,
+    )
 
 
 def mechanics_for(starters, recipes, unlocks) -> dict:

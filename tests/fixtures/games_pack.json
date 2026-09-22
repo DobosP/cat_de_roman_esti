@@ -3,15 +3,15 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 244,
-   "contexto": 264,
-   "lant": 122,
+   "conexiuni": 245,
+   "contexto": 265,
+   "lant": 123,
    "alchimie": 83
   },
   "id_high_water": {
-   "conexiuni": 373,
-   "contexto": 376,
-   "lant": 245,
+   "conexiuni": 374,
+   "contexto": 377,
+   "lant": 246,
    "alchimie": 107
   }
  },
@@ -13923,6 +13923,63 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v24_people_parents_tata",
+     "n_v24_people_relatives_frate",
+     "n_v24_people_relatives_unchi",
+     "n_v24_people_descendants_nepot"
+    ],
+    "g2": [
+     "n_v32_body_face_obraz",
+     "n_v32_body_face_nara",
+     "n_v32_body_face_spranceana",
+     "n_v32_body_face_pleoapa"
+    ],
+    "g3": [
+     "n_v24_food_salad_veg_ardei",
+     "n_v17gas_gogosi",
+     "n_v3gas_clatite",
+     "n_v4gas_ou"
+    ],
+    "g4": [
+     "n_v3muz_chitara",
+     "n_v24_transport_rail_tren",
+     "n_v84_food_cuptor",
+     "n_v24_transport_personal_bicicleta"
+    ]
+   },
+   "group_labels": {
+    "g1": "Rude de sex masculin",
+    "g2": "Părți ale feței",
+    "g3": "Se umplu în rețete",
+    "g4": "Au variante electrice"
+   },
+   "order": [
+    "n_v3gas_clatite",
+    "n_v4gas_ou",
+    "n_v24_transport_personal_bicicleta",
+    "n_v24_transport_rail_tren",
+    "n_v3muz_chitara",
+    "n_v32_body_face_spranceana",
+    "n_v24_food_salad_veg_ardei",
+    "n_v84_food_cuptor",
+    "n_v24_people_descendants_nepot",
+    "n_v32_body_face_pleoapa",
+    "n_v24_people_relatives_unchi",
+    "n_v24_people_relatives_frate",
+    "n_v24_people_parents_tata",
+    "n_v32_body_face_nara",
+    "n_v32_body_face_obraz",
+    "n_v17gas_gogosi"
+   ],
+   "id": "cx_viata_de_roman_374",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -16037,6 +16094,14 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v4via_usa",
+   "id": "ct_viata_de_roman_377",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "lant": [
@@ -16346,6 +16411,16 @@
    "target": "n_v2gas_branza",
    "optimal": 2,
    "id": "lt_gastronomie_245",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_v85_food_cacao",
+   "target": "n_v4gas_lapte",
+   "optimal": 2,
+   "id": "lt_gastronomie_246",
    "category": "gastronomie",
    "source": "ai",
    "status": "approved"

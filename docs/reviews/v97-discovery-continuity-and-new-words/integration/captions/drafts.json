@@ -1,0 +1,813 @@
+{
+  "baseline_commit": "36db143ff9a5070e2a85a8176e24de2d6036ea01",
+  "bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "f2538a91726da87a519f8efac5d3a9993a8a23445879af817f08bdabd478e307",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+  },
+  "boards": {
+    "lt_gastronomie_243": {
+      "category": "gastronomie",
+      "difficulty": "usor",
+      "id": "lt_gastronomie_243",
+      "optimal": 2,
+      "source": "ai",
+      "start": "n_v84_food_cuptor",
+      "status": "approved",
+      "target": "n_v90_food_firimitura"
+    },
+    "lt_gastronomie_244": {
+      "category": "gastronomie",
+      "difficulty": "usor",
+      "id": "lt_gastronomie_244",
+      "optimal": 2,
+      "source": "ai",
+      "start": "n_v86_food_zahar_pudra",
+      "status": "approved",
+      "target": "n_v87_food_tort_diplomat"
+    },
+    "lt_gastronomie_245": {
+      "category": "gastronomie",
+      "difficulty": "usor",
+      "id": "lt_gastronomie_245",
+      "optimal": 2,
+      "source": "ai",
+      "start": "n_v85_food_vanilie",
+      "status": "approved",
+      "target": "n_v2gas_branza"
+    }
+  },
+  "caption_length_limit": 34,
+  "existing_caption_count_unchanged": 101,
+  "items": [
+    {
+      "author_rationale": "Manufacturer oven tables include bread baking; no temperature advice is imported.",
+      "board_id": "lt_gastronomie_243",
+      "caption": "cuptor și pâine coaptă",
+      "caption_length": 22,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v4gas_paine",
+        "facets": {},
+        "id": "de8585",
+        "is_distractor": false,
+        "label_ro": "coace",
+        "redistributable": false,
+        "relation": "used_to_cook",
+        "source": "",
+        "src_id": "n_v84_food_cuptor",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "7fbb959dea82f68c3951c0c17aeefb4eebf00746d2ea42d505ecf972744cc67d",
+      "id": "v97_caption_de8585",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v84_food_cuptor",
+          "graph_allows": true,
+          "proposed_caption": "cuptor și pâine coaptă",
+          "to": "n_v4gas_paine"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v4gas_paine",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v84_food_cuptor"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v4gas_paine",
+        "n_v84_food_cuptor"
+      ],
+      "pair_labels": [
+        "Pâine",
+        "Cuptor de bucătărie"
+      ],
+      "raw_kg_edge_sha256": "f42173002c4efca4104ec469d51051d7166c7785173631b2cffa1e89a1c7ba89",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v4gas_paine",
+        "id": "de8585",
+        "is_distractor": 0,
+        "label_ro": "coace",
+        "relation": "used_to_cook",
+        "src_id": "n_v84_food_cuptor",
+        "strength": 0.8
+      },
+      "sources": [
+        "https://media3.bsh-group.com/Documents/9001253126_A.pdf"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "Ordinary crumb meaning directly includes detached bread pieces.",
+      "board_id": "lt_gastronomie_243",
+      "caption": "pâine și bucățele desprinse",
+      "caption_length": 27,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v90_food_firimitura",
+        "facets": {},
+        "id": "de8787",
+        "is_distractor": false,
+        "label_ro": "lasă bucățele mici când se taie sau se rupe",
+        "redistributable": false,
+        "relation": "crumbles_into",
+        "source": "",
+        "src_id": "n_v4gas_paine",
+        "strength": 0.85,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "45eb8429ce1f32dce4e5bf402e61f652efac3451519052171a16978b5f460c5e",
+      "id": "v97_caption_de8787",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v4gas_paine",
+          "graph_allows": true,
+          "proposed_caption": "pâine și bucățele desprinse",
+          "to": "n_v90_food_firimitura"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v90_food_firimitura",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v4gas_paine"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v4gas_paine",
+        "n_v90_food_firimitura"
+      ],
+      "pair_labels": [
+        "Pâine",
+        "Firimitură"
+      ],
+      "raw_kg_edge_sha256": "9e0a78520cb948b3c03b26dd5f25e34cb03215e83e79162219670a1629fcd496",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v90_food_firimitura",
+        "id": "de8787",
+        "is_distractor": 0,
+        "label_ro": "lasă bucățele mici când se taie sau se rupe",
+        "relation": "crumbles_into",
+        "src_id": "n_v4gas_paine",
+        "strength": 0.85
+      },
+      "sources": [
+        "https://dexonline.ro/definitie/firimitur%C4%83"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "Manufacturer oven tables include biscuits; the caption expresses appliance and baked food.",
+      "board_id": "lt_gastronomie_243",
+      "caption": "cuptor și biscuiți copți",
+      "caption_length": 24,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v24_food_snack_biscuit",
+        "facets": {},
+        "id": "de8703",
+        "is_distractor": false,
+        "label_ro": "coace",
+        "redistributable": false,
+        "relation": "preparation_tool",
+        "source": "",
+        "src_id": "n_v84_food_cuptor",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "ef26c0c388e1c0e973311e802a72a8a68c9fe96a8b5dcc0d569fe2649155fbc5",
+      "id": "v97_caption_de8703",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v84_food_cuptor",
+          "graph_allows": true,
+          "proposed_caption": "cuptor și biscuiți copți",
+          "to": "n_v24_food_snack_biscuit"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v24_food_snack_biscuit",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v84_food_cuptor"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v24_food_snack_biscuit",
+        "n_v84_food_cuptor"
+      ],
+      "pair_labels": [
+        "Biscuit",
+        "Cuptor de bucătărie"
+      ],
+      "raw_kg_edge_sha256": "70dbb13e5c55dcdfa9601dfc3845e540f6c04b51f930e1697049e2493f785ec8",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v24_food_snack_biscuit",
+        "id": "de8703",
+        "is_distractor": 0,
+        "label_ro": "coace",
+        "relation": "preparation_tool",
+        "src_id": "n_v84_food_cuptor",
+        "strength": 0.8
+      },
+      "sources": [
+        "https://media3.bsh-group.com/Documents/9001253126_A.pdf"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "The general food-fragment sense covers biscuit pieces without claiming every bite sheds crumbs.",
+      "board_id": "lt_gastronomie_243",
+      "caption": "biscuit și bucățele desprinse",
+      "caption_length": 29,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v90_food_firimitura",
+        "facets": {},
+        "id": "de8788",
+        "is_distractor": false,
+        "label_ro": "poate lăsa bucățele mici la rupere sau consum",
+        "redistributable": false,
+        "relation": "crumbles_into",
+        "source": "",
+        "src_id": "n_v24_food_snack_biscuit",
+        "strength": 0.85,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "2cea5133d564d78610f4948ead10fdede52d5a0d0a48a7ed467ac1a9838b2674",
+      "id": "v97_caption_de8788",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v24_food_snack_biscuit",
+          "graph_allows": true,
+          "proposed_caption": "biscuit și bucățele desprinse",
+          "to": "n_v90_food_firimitura"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v90_food_firimitura",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v24_food_snack_biscuit"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v24_food_snack_biscuit",
+        "n_v90_food_firimitura"
+      ],
+      "pair_labels": [
+        "Biscuit",
+        "Firimitură"
+      ],
+      "raw_kg_edge_sha256": "84737ec2fcc434d69f66ef90f0b12af9cf455b2d3edfc1a605cb575e8715a886",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v90_food_firimitura",
+        "id": "de8788",
+        "is_distractor": 0,
+        "label_ro": "poate lăsa bucățele mici la rupere sau consum",
+        "relation": "crumbles_into",
+        "src_id": "n_v24_food_snack_biscuit",
+        "strength": 0.85
+      },
+      "sources": [
+        "https://dexonline.ro/definitie/firimitur%C4%83"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "The decoration combines cream with powdered sugar; sweetness is explicitly optional.",
+      "board_id": "lt_gastronomie_244",
+      "caption": "frișcă și îndulcitor opțional",
+      "caption_length": 29,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v86_food_frisca",
+        "facets": {},
+        "id": "de8668",
+        "is_distractor": false,
+        "label_ro": "îndulcește unele variante de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v86_food_zahar_pudra",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "48feda733ce0739d13b0458caaad82b2ec801f10e52bc32cdfe3573602807d2c",
+      "id": "v97_caption_de8668",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v86_food_zahar_pudra",
+          "graph_allows": true,
+          "proposed_caption": "frișcă și îndulcitor opțional",
+          "to": "n_v86_food_frisca"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v86_food_frisca",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v86_food_zahar_pudra"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v86_food_frisca",
+        "n_v86_food_zahar_pudra"
+      ],
+      "pair_labels": [
+        "Frișcă",
+        "Zahăr pudră"
+      ],
+      "raw_kg_edge_sha256": "e736e73256a30eb7eef20d2caca01789fb45437ac20c075af3b9dc8b58e032bc",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v86_food_frisca",
+        "id": "de8668",
+        "is_distractor": 0,
+        "label_ro": "îndulcește unele variante de",
+        "relation": "ingredient_variant",
+        "src_id": "n_v86_food_zahar_pudra",
+        "strength": 0.8
+      },
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "Whipped cream is incorporated into this cake filling.",
+      "board_id": "lt_gastronomie_244",
+      "caption": "tort și frișca din cremă",
+      "caption_length": 24,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v87_food_tort_diplomat",
+        "facets": {},
+        "id": "de8723",
+        "is_distractor": false,
+        "label_ro": "ingredient pentru crema din",
+        "redistributable": false,
+        "relation": "part_of",
+        "source": "",
+        "src_id": "n_v86_food_frisca",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "04a7be12c1fb9a689ab2266e5404855c0bb1537cbfd91ab215d1c18a9e0d11aa",
+      "id": "v97_caption_de8723",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "parte și întreg",
+          "from": "n_v86_food_frisca",
+          "graph_allows": true,
+          "proposed_caption": "tort și frișca din cremă",
+          "to": "n_v87_food_tort_diplomat"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v87_food_tort_diplomat",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v86_food_frisca"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v86_food_frisca",
+        "n_v87_food_tort_diplomat"
+      ],
+      "pair_labels": [
+        "Frișcă",
+        "Tort Diplomat"
+      ],
+      "raw_kg_edge_sha256": "ced44a5e7116944cbe30c0cd67e4861ea586df3ee801eabc34000f2922d21de6",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v87_food_tort_diplomat",
+        "id": "de8723",
+        "is_distractor": 0,
+        "label_ro": "ingredient pentru crema din",
+        "relation": "part_of",
+        "src_id": "n_v86_food_frisca",
+        "strength": 0.8
+      },
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "Ladyfingers are dusted before baking; this describes a supported variant.",
+      "board_id": "lt_gastronomie_244",
+      "caption": "pișcot și zahăr de presărat",
+      "caption_length": 27,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v87_food_piscot",
+        "facets": {},
+        "id": "de8730",
+        "is_distractor": false,
+        "label_ro": "pudrează unele variante de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v86_food_zahar_pudra",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "6037c540b23886196b80006de4b424d85b3065dd91e82f1f1a0aa07ffed34b74",
+      "id": "v97_caption_de8730",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v86_food_zahar_pudra",
+          "graph_allows": true,
+          "proposed_caption": "pișcot și zahăr de presărat",
+          "to": "n_v87_food_piscot"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v87_food_piscot",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v86_food_zahar_pudra"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v86_food_zahar_pudra",
+        "n_v87_food_piscot"
+      ],
+      "pair_labels": [
+        "Zahăr pudră",
+        "Pișcot"
+      ],
+      "raw_kg_edge_sha256": "075c935f573d57dd91b8b7018fdc8872952233a3316afc7df825fae69d0b8999",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v87_food_piscot",
+        "id": "de8730",
+        "is_distractor": 0,
+        "label_ro": "pudrează unele variante de",
+        "relation": "ingredient_variant",
+        "src_id": "n_v86_food_zahar_pudra",
+        "strength": 0.8
+      },
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "Ladyfingers line the cake rings in this version, not every possible recipe.",
+      "board_id": "lt_gastronomie_244",
+      "caption": "tort și margine cu pișcoturi",
+      "caption_length": 28,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v87_food_tort_diplomat",
+        "facets": {},
+        "id": "de8722",
+        "is_distractor": false,
+        "label_ro": "căptușește unele variante de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v87_food_piscot",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "9dc08ffe90fc0d66318750013f6b86fbc20ffa160ddfba6ae7d5e7aeb14388bd",
+      "id": "v97_caption_de8722",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v87_food_piscot",
+          "graph_allows": true,
+          "proposed_caption": "tort și margine cu pișcoturi",
+          "to": "n_v87_food_tort_diplomat"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v87_food_tort_diplomat",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v87_food_piscot"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v87_food_piscot",
+        "n_v87_food_tort_diplomat"
+      ],
+      "pair_labels": [
+        "Pișcot",
+        "Tort Diplomat"
+      ],
+      "raw_kg_edge_sha256": "9558f965128e8129631a4fac83703cc416ef5afa065fb2988baa4de828000edd",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v87_food_tort_diplomat",
+        "id": "de8722",
+        "is_distractor": 0,
+        "label_ro": "căptușește unele variante de",
+        "relation": "ingredient_variant",
+        "src_id": "n_v87_food_piscot",
+        "strength": 0.8
+      },
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "Vanilla flavors the cheese filling in this published version.",
+      "board_id": "lt_gastronomie_245",
+      "caption": "plăcintă și aromă de vanilie",
+      "caption_length": 28,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_gas_placinte_poale_brau",
+        "facets": {},
+        "id": "de8632",
+        "is_distractor": false,
+        "label_ro": "aromatizează umpluturi de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v85_food_vanilie",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "8da4ba575c82d9630c614542a52618c6de948e97bf685ccf869383ecbaec6b54",
+      "id": "v97_caption_de8632",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v85_food_vanilie",
+          "graph_allows": true,
+          "proposed_caption": "plăcintă și aromă de vanilie",
+          "to": "n_gas_placinte_poale_brau"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_gas_placinte_poale_brau",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v85_food_vanilie"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_gas_placinte_poale_brau",
+        "n_v85_food_vanilie"
+      ],
+      "pair_labels": [
+        "Poale-n brâu",
+        "Vanilie"
+      ],
+      "raw_kg_edge_sha256": "f51d835c6296089ea8600e152b9fa3d952aa1248e1353f69c60a314e9e3b2479",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_gas_placinte_poale_brau",
+        "id": "de8632",
+        "is_distractor": 0,
+        "label_ro": "aromatizează umpluturi de",
+        "relation": "ingredient_variant",
+        "src_id": "n_v85_food_vanilie",
+        "strength": 0.8
+      },
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/branzoaice-reteta-video-placinte-poale-n-brau.html"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "Cheese filling is enclosed in the folded pastry.",
+      "board_id": "lt_gastronomie_245",
+      "caption": "plăcintă și umplutură de brânză",
+      "caption_length": 31,
+      "edge_snapshot": {
+        "bidirectional": true,
+        "dst_id": "n_v2gas_branza",
+        "facets": {},
+        "id": "de1563",
+        "is_distractor": false,
+        "label_ro": "umplutură cu brânză",
+        "redistributable": false,
+        "relation": "related_to",
+        "source": "",
+        "src_id": "n_gas_placinte_poale_brau",
+        "strength": 0.82,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "11fd5b31c8dc53a24e5a8510b104ac7e251913cd135a444762e1f3674b60a11d",
+      "id": "v97_caption_de1563",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_gas_placinte_poale_brau",
+          "graph_allows": true,
+          "proposed_caption": "plăcintă și umplutură de brânză",
+          "to": "n_v2gas_branza"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "legătură directă",
+          "from": "n_v2gas_branza",
+          "graph_allows": true,
+          "proposed_caption_if_existing_edge": "plăcintă și umplutură de brânză",
+          "to": "n_gas_placinte_poale_brau"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_gas_placinte_poale_brau",
+        "n_v2gas_branza"
+      ],
+      "pair_labels": [
+        "Poale-n brâu",
+        "Brânză"
+      ],
+      "raw_kg_edge_sha256": "dbbab365a5310c63ab130511dc3557ef583919ddbe58801424f717cf4acf643a",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 1,
+        "dst_id": "n_v2gas_branza",
+        "id": "de1563",
+        "is_distractor": 0,
+        "label_ro": "umplutură cu brânză",
+        "relation": "related_to",
+        "src_id": "n_gas_placinte_poale_brau",
+        "strength": 0.82
+      },
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/branzoaice-reteta-video-placinte-poale-n-brau.html"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "The traditional cheese version includes vanilla in dough and filling.",
+      "board_id": "lt_gastronomie_245",
+      "caption": "pască și aromă de vanilie",
+      "caption_length": 25,
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v17gas_pasca",
+        "facets": {},
+        "id": "de8631",
+        "is_distractor": false,
+        "label_ro": "aromatizează rețete de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v85_food_vanilie",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "efe3858dc0d5b792326c78c0f321c461f16d8d8c23666b8b3c8c55352b1321a1",
+      "id": "v97_caption_de8631",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v85_food_vanilie",
+          "graph_allows": true,
+          "proposed_caption": "pască și aromă de vanilie",
+          "to": "n_v17gas_pasca"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "",
+          "from": "n_v17gas_pasca",
+          "graph_allows": false,
+          "proposed_caption_if_existing_edge": null,
+          "to": "n_v85_food_vanilie"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v17gas_pasca",
+        "n_v85_food_vanilie"
+      ],
+      "pair_labels": [
+        "Pască",
+        "Vanilie"
+      ],
+      "raw_kg_edge_sha256": "8867f6ca4e68280ec73a4995e812ddc7ea7fcf0079021ce3a29d82362a2be38e",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 0,
+        "dst_id": "n_v17gas_pasca",
+        "id": "de8631",
+        "is_distractor": 0,
+        "label_ro": "aromatizează rețete de",
+        "relation": "ingredient_variant",
+        "src_id": "n_v85_food_vanilie",
+        "strength": 0.8
+      },
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/pasca-traditionala-cu-branza-dulce.html"
+      ],
+      "status": "unapproved"
+    },
+    {
+      "author_rationale": "This dough-based Easter pastry contains a sweet cheese filling; other versions exist.",
+      "board_id": "lt_gastronomie_245",
+      "caption": "pască și umplutură de brânză",
+      "caption_length": 28,
+      "edge_snapshot": {
+        "bidirectional": true,
+        "dst_id": "n_v2gas_branza",
+        "facets": {},
+        "id": "de5529",
+        "is_distractor": false,
+        "label_ro": "umplută cu brânză dulce",
+        "redistributable": false,
+        "relation": "related_to",
+        "source": "",
+        "src_id": "n_v17gas_pasca",
+        "strength": 0.75,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "5d0ab3103ffafb9bb8ceb437b589e0b1fe506a8e9bc6fb9bd67ad8110a8d5924",
+      "id": "v97_caption_de5529",
+      "orientation_review": {
+        "forward": {
+          "current_caption": "legătură directă",
+          "from": "n_v17gas_pasca",
+          "graph_allows": true,
+          "proposed_caption": "pască și umplutură de brânză",
+          "to": "n_v2gas_branza"
+        },
+        "reason": "Noun phrase describes the pair without a directional verb. Directed links retain their existing forward-only traversal; no reverse link is invented.",
+        "reverse": {
+          "current_caption": "legătură directă",
+          "from": "n_v2gas_branza",
+          "graph_allows": true,
+          "proposed_caption_if_existing_edge": "pască și umplutură de brânză",
+          "to": "n_v17gas_pasca"
+        },
+        "wording_direction_independent": true
+      },
+      "pair": [
+        "n_v17gas_pasca",
+        "n_v2gas_branza"
+      ],
+      "pair_labels": [
+        "Pască",
+        "Brânză"
+      ],
+      "raw_kg_edge_sha256": "14d4131d01ee5d8bfc5a6c7d174bc2d548267ae3d25e6d995f6d3f2afcc545d9",
+      "raw_kg_edge_snapshot": {
+        "bidirectional": 1,
+        "dst_id": "n_v2gas_branza",
+        "id": "de5529",
+        "is_distractor": 0,
+        "label_ro": "umplută cu brânză dulce",
+        "relation": "related_to",
+        "src_id": "n_v17gas_pasca",
+        "strength": 0.75
+      },
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/pasca-traditionala-cu-branza-dulce.html"
+      ],
+      "status": "unapproved"
+    }
+  ],
+  "kind": "v97-earned-lant-caption-drafts-v1",
+  "remaining_review_questions": [
+    "Independent factual and editorial acceptance of all twelve complete edge snapshots and short noun phrases.",
+    "Confirm that the five ingredient-variant captions are read as supported recipe relationships, not universal ingredient requirements.",
+    "Verify actual earned-path API and GET display at320px/200% without exposing future steps or hints.",
+    "On implementation, retain all101 existing captions exactly, both-direction truth for the2 bidirectional cheese edges, and neutral fallback for any changed edge snapshot."
+  ],
+  "scope": "Twelve existing edges on the two representative shortest paths of each V95/V96 food round. No graph, route, runtime or caption registry changes. Captions remain earned-only if a later reviewed implementation is accepted.",
+  "status": "unapproved",
+  "withheld": []
+}

@@ -1,0 +1,19 @@
+from pathlib import Path
+from collections import Counter
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from scripts import build_quick_content_v92 as B
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog
+Q=B.Q
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+c=read(OUT/'catalog.json');a=read(OUT/'live-audit.json');f=read(OUT/'independent-final-factual-check.json');quality=read(OUT/'independent-final-recovery-audit.json')
+assert sha(Q.CATALOG_PATH)==sha(OUT/'catalog.json')==Q.CATALOG_SHA256
+B.confirm_final_reviews(c,OUT/'live-audit.json',OUT/'final-factual.json',OUT/'final-quality.json')
+served=get_derived_catalog();assert served.counts()=={'intrusul':228,'perechi':193}
+assert len(served._boards)==421 and len(c['authored'])==85
+paths=['candidate.json','raw-candidates.json','catalog.json','factual-review.json','quality-review.json','final-factual.json','final-quality.json','live-audit.json','independent-final-winning-audit.json','independent-final-factual-check.json','independent-final-recovery-audit.json','author-preservation.json','factual-source-checks.json','quality-inheritance-and-mechanics.json']
+counts={'total':len(served._boards),'by_game':served.counts(),'authored':len(c['boards']),'authored_by_game':dict(Counter(r['game'] for r in c['boards'])),'starter_by_game':dict(Counter(b.game for b in served._boards if b._starter_eligible))}
+receipt={'kind':'v97-quick-guarded-installation-v1','passed':True,'installed_exact_proposal':True,'candidate_sha256':sha(OUT/'candidate.json'),'catalog_sha256':Q.CATALOG_SHA256,'authored':85,'counts':served.counts(),'core_boards_preserved':336,'prior_authored_records_and_nonranking_scores_exact':83,'natural_starter_eligible_new':2,'natural_public_seed_wins':85,'recovery_journeys':2,'starter_api_wins':2,'runtime_sources':B.runtime_source_hashes(),'bindings':Q.bindings(live=True),'bound_inputs':{n:sha(OUT/n) for n in paths}}
+(OUT/'installation-receipt.json').write_bytes(Q.json_bytes(receipt));(OUT/'installed-counts.json').write_bytes(Q.json_bytes(counts));print(json.dumps(counts))

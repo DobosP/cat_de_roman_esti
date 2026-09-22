@@ -36,13 +36,26 @@ async function scoreState(page) {
   return page.evaluate((key) => localStorage.getItem(key), SCORE_KEY);
 }
 
+async function assertWholeNoticeVisible(page) {
+  await expect.poll(() => notice(page).evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    const scroller = element.closest(".screen-pad").getBoundingClientRect();
+    return rect.top >= Math.max(0, scroller.top) - 1 &&
+      rect.bottom <= Math.min(globalThis.innerHeight, scroller.bottom) + 1 &&
+      rect.left >= Math.max(0, scroller.left) - 1 &&
+      rect.right <= Math.min(globalThis.innerWidth, scroller.right) + 1;
+  }), { message: "the complete persistent error must stay inside the game scrollport" }).toBe(true);
+}
+
 async function assertPersistentFailure(page) {
   await expect(notice(page)).toBeVisible();
   await expect(notice(page)).toContainText("Am păstrat opțiunile alese.");
   await expect(notice(page)).not.toContainText(/503|SQL|server|private-diagnostic/);
+  await assertWholeNoticeVisible(page);
   await page.clock.fastForward(4000); // The old toast expired after 3.6 seconds.
   await expect(notice(page)).toBeVisible();
   await expect(notice(page)).toBeInViewport();
+  await assertWholeNoticeVisible(page);
   await page.screenshot({ path: test.info().outputPath("persistent-failure.png"), fullPage: true });
 }
 
@@ -118,12 +131,22 @@ for (const game of games) {
       return false;
     })).toBe(true);
 
-    await failNextCreate(page, game);
+    const failedReplay = await failNextCreate(page, game, true);
     const failedResponse = createResponse(page, game);
     await replay.click();
+    await failedReplay.requested;
+    const pendingReplay = page.getByRole("button", { name: "Se pregătește…", exact: true });
+    await expect(pendingReplay).toBeDisabled();
+    // Wait for the browser's ordinary disabled-button blur before measuring
+    // whether revealing the error changes focus; the request can precede render.
+    await expect.poll(() => pendingReplay.evaluate((button) => globalThis.document.activeElement !== button)).toBe(true);
+    const focusWhilePending = await page.evaluateHandle(() => globalThis.document.activeElement);
+    failedReplay.release();
     const failed = await failedResponse;
     expect(failed.status()).toBe(503);
     await assertPersistentFailure(page);
+    expect(await page.evaluate((previous) => globalThis.document.activeElement === previous, focusWhilePending)).toBe(true);
+    await focusWhilePending.dispose();
     await expect(copy).toBeVisible();
     await expect(replay).toBeEnabled();
     await expect(replay).toBeInViewport();

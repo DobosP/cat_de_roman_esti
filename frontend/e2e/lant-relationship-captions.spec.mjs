@@ -10,6 +10,9 @@ const cases = [
   { id: "lt_geografie_239", nouns: /oraș|regiune|salină|chei|revoluționar|răscoală|munți|Turda/ },
   { id: "lt_literatura_240", nouns: /poet|scriitor|revistă|societate|academie|fondator|postum/ },
   { id: "lt_gastronomie_241", nouns: /ciorbă|perișoare|sarmale|orez|carne|umplutură/ },
+  { id: "lt_gastronomie_243", nouns: /cuptor|pâine|biscuit|bucățele/, via: ["Pâine", "Biscuit"], hints: false },
+  { id: "lt_gastronomie_244", nouns: /frișcă|îndulcitor|tort|pișcot|zahăr/, via: ["Frișcă", "Pișcot"], hints: false },
+  { id: "lt_gastronomie_245", nouns: /plăcintă|pască|vanilie|brânză/, via: ["Poale-n brâu", "Pască"], hints: false },
 ].map((item) => ({
   ...item,
   journey: JSON.parse(execFileSync("python3", [helper, item.id], {
@@ -72,6 +75,10 @@ async function fits(page) {
 }
 
 for (const item of cases) {
+  if (item.via) {
+    item.journey.routes = item.journey.routes.filter((route) => item.via.includes(route[1].label));
+    if (item.journey.routes.length !== 2) throw new Error(`Missing reviewed food routes for ${item.id}`);
+  }
   for (const [index, route] of item.journey.routes.entries()) {
     test(`${item.id} route ${index + 1}: meaningful choices survive earned path and reload`, async ({ page, request }) => {
       let state = await begin(page, item);
@@ -145,7 +152,7 @@ for (const item of cases) {
     });
   }
 
-  test(`${item.id}: noun-bearing hints persist without taking a hop`, async ({ page, request }) => {
+  if (item.hints !== false) test(`${item.id}: noun-bearing hints persist without taking a hop`, async ({ page, request }) => {
     const initial = await begin(page, item);
     const id = initial.game_id;
     async function ask() {

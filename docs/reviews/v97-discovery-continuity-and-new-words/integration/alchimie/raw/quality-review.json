@@ -1,0 +1,66 @@
+{
+  "candidate_sha256": "e827415edc74cf03eb850ddfe649a280c615032d246c543394909a6ca0bf74c4",
+  "complete_candidate_sha256": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4",
+  "concepts": [
+    {
+      "concept_sha256": "a6cc8d38a5be14cf4e8a1973f57b4423c676da3062af6d3686ade51fa6fb38cb",
+      "id": "alw_food_mancare_spanac",
+      "inherited": false,
+      "rationale": "The name distinguishes a cooked dish from the existing raw spinach ingredient. The definition explicitly limits the represented version to a creamy milk, flour and garlic preparation. Laura Sava’s 2010 recipe and childhood account support its ordinary family-cooking familiarity; other ways to cook spinach are not denied.",
+      "sources": [
+        "https://www.laurasava.ro/spanac-cu-lapte/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "concept_sha256": "7fad83267b4e1ea4f2dcf488b2cef783f89769a7d24c7f80eac75b11288a0ce4",
+      "id": "alw_food_supa_rosii",
+      "inherited": false,
+      "rationale": "The descriptive name is immediately understandable as tomato-based soup, distinct from the generic soup already present. Two Romanian recipe authors document ordinary home cooking, with Jamila recalling repeated childhood meals. Rice is qualified as optional in the definition rather than made part of all tomato soup. This is familiar food vocabulary, not a specialist name.",
+      "sources": [
+        "https://jamilacuisine.ro/supa-de-rosii-cu-orez-reteta-video/",
+        "https://prajituricisialtele.ro/2020/08/10/supa-de-rosii-cu-orez/"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "items": [
+    {
+      "id": "mancare-spanac-lapte",
+      "rationale": "Milk makes a second intuitive route to creamy spinach. The explanation supplies flour, oil and garlic and says the spinach is already cooked, drained and chopped before warming it in sauce. It does not confuse milk with cream or offer an uncooked mixture.",
+      "sources": [
+        "https://www.laurasava.ro/spanac-cu-lapte/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "mancare-spanac-usturoi",
+      "rationale": "Garlic is a characteristic flavor cue for the represented spinach preparation. Blanching, draining, chopping and cooking in milk sauce are explicit, preserving the difference between the raw leaf ingredient and the finished dish.",
+      "sources": [
+        "https://www.laurasava.ro/spanac-cu-lapte/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "supa-rosii-orez",
+      "rationale": "Tomato and rice form a plausible second opening using familiar pantry ingredients. Separate rice cooking and the cooked vegetable base are explicit. The outcome remains the same broad soup concept rather than a near-duplicate rice variant.",
+      "sources": [
+        "https://prajituricisialtele.ro/2020/08/10/supa-de-rosii-cu-orez/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "supa-rosii-supa",
+      "rationale": "Tomato plus an existing soup base is a direct, inferable route toward tomato soup. The explanation includes aromatic vegetables, rice and boiling, so it respects the base’s prepared state rather than pretending these two visible items alone are a complete recipe.",
+      "sources": [
+        "https://jamilacuisine.ro/supa-de-rosii-cu-orez-reteta-video/"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "kind": "alchimie-v97-new-content-quality-review-v1",
+  "reviewer": "/root/v97_quick",
+  "role": "quality",
+  "verdict": "accept",
+  "world_rationale": "All 249 earlier concepts and 347 recipes exactly preserve the prior accepted content and evidence bindings. Two familiar savory dishes each provide two plausible pair routes; shared KG identities, 8 starters, 96 supplies, 12 tiers and 32 goals stay exact. Independent closure reaches all 251 concepts and 147 discoveries. Both new discoveries are terminal and no earlier terminal gains an onward use; this wave improves variety and successful pair coverage, not crafting depth. All 9 previous books remain mechanically bound. The explicit 16-book limit and unchanged 2 MiB cap are assessed separately in the compatibility implementation review; final installation needs its independent replay review."
+}

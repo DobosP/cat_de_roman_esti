@@ -1,0 +1,310 @@
+{
+  "kind": "v97-independent-final-pack-bff-audit-v1",
+  "reviewer": "/root/v97_pack",
+  "method": "Seed discovery and winning/recovery replays use real Django BFF requests with public category/difficulty/seed selection; private store reads only confirm selected authored ID. No forced sessions, picker overrides, runtime edits or score changes.",
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "23421501b0e4bc391a62d25a577ed9d08c935a9eb48a550ab0e5b2f0e8367acb",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fe88e7265c68a79884eabb257912630722980dccd7238f3a834c6796aa65b400",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "cat_de_roman_esti/wordgames/contexto.py": "cae2e1115491ba5cf6438de5dac7a2689087e1c13fa80efcc86e35acef9d1101",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+    "cat_de_roman_esti/wordgames/_session_endpoint.py": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+    "cat_de_roman_esti/wordgames/_progress.py": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d"
+  },
+  "script_sha256": "9e200f42734b5914d879c93aee5cd84942788d30e4d6a17570c896b2b344c198",
+  "all_source_bindings_stable": true,
+  "seed_discovery_public_create_counts": {
+    "cx_viata_de_roman_374": 6,
+    "ct_viata_de_roman_377": 24,
+    "lt_gastronomie_246": 1
+  },
+  "caption_rules_hash_bound_and_rejection_ledger_unchanged_from_main": true,
+  "exact_new_approved_ids": [
+    "ct_viata_de_roman_377",
+    "cx_viata_de_roman_374",
+    "lt_gastronomie_246"
+  ],
+  "all_three_approved_entries_naturally_served": true,
+  "all_unearned_private_keys_hidden": true,
+  "checks": [
+    {
+      "id": "cx_viata_de_roman_374",
+      "game": "conexiuni",
+      "public_create_url": "/api/wordgames/conexiuni/games?category=viata_de_roman&difficulty=normal&seed=5",
+      "seed": 5,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "initial_public_state": {
+        "game_id": "e60fef31-6f4d-49c2-a94a-a5caf527a9e4",
+        "tiles": [
+          {
+            "id": "n_v3gas_clatite",
+            "label": "Clătite"
+          },
+          {
+            "id": "n_v4gas_ou",
+            "label": "Ou"
+          },
+          {
+            "id": "n_v24_transport_personal_bicicleta",
+            "label": "Bicicletă"
+          },
+          {
+            "id": "n_v24_transport_rail_tren",
+            "label": "Tren"
+          },
+          {
+            "id": "n_v3muz_chitara",
+            "label": "Chitară"
+          },
+          {
+            "id": "n_v32_body_face_spranceana",
+            "label": "Sprânceană"
+          },
+          {
+            "id": "n_v24_food_salad_veg_ardei",
+            "label": "Ardei"
+          },
+          {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie"
+          },
+          {
+            "id": "n_v24_people_descendants_nepot",
+            "label": "Nepot"
+          },
+          {
+            "id": "n_v32_body_face_pleoapa",
+            "label": "Pleoapă"
+          },
+          {
+            "id": "n_v24_people_relatives_unchi",
+            "label": "Unchi"
+          },
+          {
+            "id": "n_v24_people_relatives_frate",
+            "label": "Frate"
+          },
+          {
+            "id": "n_v24_people_parents_tata",
+            "label": "Tată"
+          },
+          {
+            "id": "n_v32_body_face_nara",
+            "label": "Nară"
+          },
+          {
+            "id": "n_v32_body_face_obraz",
+            "label": "Obraz"
+          },
+          {
+            "id": "n_v17gas_gogosi",
+            "label": "Gogoși"
+          }
+        ],
+        "solved": [],
+        "solved_count": 0,
+        "remaining_groups": 4,
+        "lives": 4,
+        "mistakes": 0,
+        "won": false,
+        "lost": false,
+        "difficulty": "normal",
+        "clues_used": 0,
+        "clue_available": false,
+        "clues": [],
+        "board_category": "viata_de_roman"
+      },
+      "wrong_attempts": 2,
+      "reordered_wrong_repeat_status": 409,
+      "repeat_wrong_free": true,
+      "unearned_group_labels_hidden": true,
+      "earned_clue_persists": true,
+      "unknown_tile_and_forged_solution_unchanged": true,
+      "terminal_get_and_rejected_replay_exact": true,
+      "final_score": 400,
+      "solved_groups": 4
+    },
+    {
+      "id": "ct_viata_de_roman_377",
+      "game": "contexto",
+      "public_create_url": "/api/wordgames/contexto/games?category=viata_de_roman&difficulty=usor&seed=23",
+      "seed": 23,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "initial_public_state": {
+        "game_id": "2282ab69-54a2-4a06-97c9-60237d1ac16b",
+        "attempts": 0,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      },
+      "target_hidden_until_win": true,
+      "unknown_blank_and_forged_target_unchanged": true,
+      "repeated_guess_free": true,
+      "earned_hint_persists": true,
+      "hint_session_is_separate_natural_selection": true,
+      "hint_preparation_guesses": [
+        "pian",
+        "munte",
+        "tren"
+      ],
+      "opener": "casă",
+      "opener_feedback": {
+        "id": "n_v4soc_casa",
+        "label": "casă",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "final_attempts": 4,
+      "final_score": 700,
+      "terminal_get_and_rejected_replay_exact": true
+    },
+    {
+      "id": "lt_gastronomie_246",
+      "game": "lant",
+      "public_create_url": "/api/wordgames/lant/games?category=gastronomie&difficulty=usor&seed=0",
+      "seed": 0,
+      "natural_selection_confirmed_by_private_session_id": true,
+      "pilot_eligible": true,
+      "initial_get_and_repeat_get_exact": true,
+      "forced_session_or_picker_patch": false,
+      "initial_public_state": {
+        "game_id": "248c3010-ced5-4b0a-9260-8e599f5c7713",
+        "start": {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao"
+        },
+        "target": {
+          "id": "n_v4gas_lapte",
+          "label": "Lapte",
+          "description": "Lichid alimentar folosit ca băutură și ingredient lactat."
+        },
+        "current": {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao"
+        },
+        "path": [
+          {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao"
+          }
+        ],
+        "moves": 0,
+        "optimal": 2,
+        "won": false,
+        "difficulty": "usor",
+        "choices": [
+          {
+            "label": "Chec",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Ciocolată",
+            "relation": "legătură directă"
+          },
+          {
+            "label": "Înghețată",
+            "relation": "legătură directă"
+          }
+        ],
+        "backtrack_recommended": false,
+        "board_category": "gastronomie"
+      },
+      "public_target_allowed": true,
+      "unearned_full_route_hidden": true,
+      "unknown_forged_route_same_node_and_start_undo_unchanged": true,
+      "earned_hint_persists_without_get_escalation": true,
+      "moving_clears_hint": true,
+      "all_native_shortest_paths_completed": [
+        {
+          "labels": [
+            "Cacao",
+            "Înghețată",
+            "Lapte"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "captions": [
+            "legătură directă",
+            "legătură directă"
+          ],
+          "natural_seed": 0,
+          "final_get_replay_undo_stable": true
+        },
+        {
+          "labels": [
+            "Cacao",
+            "Chec",
+            "Lapte"
+          ],
+          "moves": 2,
+          "score": 1000,
+          "captions": [
+            "legătură directă",
+            "legătură directă"
+          ],
+          "natural_seed": 0,
+          "final_get_replay_undo_stable": true
+        }
+      ]
+    }
+  ],
+  "baseline_commit": "fd3ca7c",
+  "counts": {
+    "conexiuni": {
+      "before": 244,
+      "after": 245,
+      "added": 1
+    },
+    "contexto": {
+      "before": 264,
+      "after": 265,
+      "added": 1
+    },
+    "lant": {
+      "before": 122,
+      "after": 123,
+      "added": 1
+    },
+    "alchimie": {
+      "before": 83,
+      "after": 83,
+      "added": 0
+    }
+  },
+  "all_713_previous_pack_records_exact": {
+    "conexiuni": true,
+    "contexto": true,
+    "lant": true,
+    "alchimie": true
+  },
+  "pending_count": 8,
+  "total_pack_records": 716,
+  "limitations": [
+    "Automated BFF correctness does not establish human enjoyment or physical-device acceptance.",
+    "Quick-game supplement is outside this pack audit.",
+    "Lanț endpoints and earned local choices are public; unearned full route corridors stay hidden.",
+    "Actual earned Lanț captions remain generic for all four new-route steps and match the reviewed dossier. Twelve V97 captions improve earlier rounds; no unearned route is exposed.",
+    "Ușă retains disclosed unknown intrare, toc, balama and lemn vocabulary; all are free."
+  ]
+}

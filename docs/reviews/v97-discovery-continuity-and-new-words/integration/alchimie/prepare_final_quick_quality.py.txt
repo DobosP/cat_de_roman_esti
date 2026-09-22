@@ -1,0 +1,9 @@
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words')
+O=Path('/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/integration/quick')
+s=(R/'docs/reviews/v96-words-and-input-clarity/integration/quick/review_final_quality.py.txt').read_text()
+s=s.replace('feat__v96-words-and-input-clarity','feat__v97-discovery-continuity-and-new-words').replace('75e052c7cb1595bc77a6181bed734893f3d1dc6b0c6fa6c7bb05a91a6a1119d7','804fcf446487e9925158598c4663f0d61f4508574ad14b2fc4e93a5ba8fe6803')
+s=s.replace("len(catalog['authored']) == 83","len(catalog['authored']) == 85").replace("len(audit['replays']) == 83","len(audit['replays']) == 85").replace("{'intrusul': 227, 'perechi': 192}","{'intrusul': 228, 'perechi': 193}")
+s=s.replace('codex-v96-world-quick-quality','codex-v97-world-quick-quality').replace("'winning_replays_exact':83","'winning_replays_exact':85").replace("'winning_replays':83","'winning_replays':85")
+s=s.replace('exact83-board','exact 85-board').replace('All336 core boards and81 inherited authored records','All 336 core boards and 83 inherited authored records').replace('The atmospheric group and four everyday pairs remain uniquely defensible after runtime play. Final combined counts227Intrusul/192Perechi.','The three kinship terms versus Vecini remain clear at reveal; the room structures, rail vehicles, cooking room and lesson-assessment associations form a defensible complete matching after runtime play. Final combined counts: 228 Intrusul and 193 Perechi.')
+(O/'review_final_quality.py').write_text(s)

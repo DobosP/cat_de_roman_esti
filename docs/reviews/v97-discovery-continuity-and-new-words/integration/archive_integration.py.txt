@@ -1,0 +1,197 @@
+"""Archive explicitly completed V97 evidence without traversing test/cache trees.
+
+Initial run: python archive_integration.py
+Final run: python archive_integration.py --lanes alchimie quick pack captions gui --include-root
+The caller must finish the selected lanes/gates before running. Root-level logs are
+opt-in because they may still be running. To preserve a Playwright error context,
+first copy that single chosen Markdown file into a review lane with a filename
+ending in error-context.md; result trees themselves are never traversed.
+"""
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words')
+SOURCE = Path(__file__).resolve().parent
+REVIEW = ROOT / 'docs/reviews/v97-discovery-continuity-and-new-words'
+OUTPUT = REVIEW / 'integration'
+SELF = Path(__file__).resolve()
+BASELINE = 'fd3ca7c'
+ALLOWED_LANES = {'alchimie', 'quick', 'pack', 'captions', 'gui'}
+TEXT_SUFFIXES = {'.json', '.py', '.mjs', '.js', '.ts', '.tsx', '.sh', '.md', '.txt', '.log', '.yaml', '.yml'}
+GENERATED_ROOT_NAMES = {'archive-manifest.json', 'gate-inputs.json', 'archive-report.json', 'archive.log'}
+MAX_FILE_BYTES = 4 * 1024 * 1024
+MAX_TOTAL_BYTES = 64 * 1024 * 1024
+
+
+def sha(blob):
+    return hashlib.sha256(blob).hexdigest()
+
+
+def write_json(path, value):
+    write_bytes(path, (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode())
+
+
+def write_bytes(path, blob):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + '.archive-tmp')
+    assert not path.is_symlink() and not temporary.is_symlink()
+    temporary.write_bytes(blob)
+    temporary.replace(path)
+
+
+def relative_path(value):
+    path = Path(value)
+    assert not path.is_absolute() and '..' not in path.parts, value
+    return path
+
+
+def stable_read(path, limit=MAX_FILE_BYTES):
+    assert path.is_file() and not path.is_symlink(), path
+    before = path.stat()
+    assert before.st_size <= limit, f'File exceeds archive size bound: {path}'
+    blob = path.read_bytes()
+    after = path.stat()
+    assert (before.st_ino, before.st_size, before.st_mtime_ns) == (after.st_ino, after.st_size, after.st_mtime_ns), f'File changed while reading: {path}'
+    assert len(blob) == after.st_size
+    return blob
+
+
+def blocked_directory(path):
+    name = path.name.casefold()
+    return (
+        path.is_symlink()
+        or name.startswith(('.', '__pycache__', 'pytest', 'venv'))
+        or name in {'node_modules', 'tmp', 'temp', 'cache', 'caches', 'test-results', 'catalog-explore-tests'}
+        or 'playwright' in name
+        or name.endswith(('browser-output', 'browser-results', 'test-results'))
+        or (path / 'pyvenv.cfg').is_file()
+    )
+
+
+def validate_kickoff():
+    manifest_path = REVIEW / 'archive-manifest.json'
+    manifest_blob = stable_read(manifest_path)
+    proof = json.loads(stable_read(REVIEW / 'kickoff-verification.json'))
+    assert sha(manifest_blob) == proof['archive_manifest_sha256']
+    manifest = json.loads(manifest_blob)
+    assert len(manifest['files']) == proof['archive_records']
+    seen = set()
+    for row in manifest['files']:
+        relative = relative_path(row['archive'])
+        assert str(relative) not in seen
+        seen.add(str(relative))
+        encoded = stable_read(REVIEW / relative)
+        assert len(encoded) == row['archive_size'] and sha(encoded) == row['archive_sha256']
+        assert row['encoding'] in {'identity', 'gzip'}
+        decoded = gzip.decompress(encoded) if row['encoding'] == 'gzip' else encoded
+        assert len(decoded) == row['source_size'] and sha(decoded) == row['source_sha256']
+    assert 'README.md' not in seen and 'pack/README.md' in seen
+    return {
+        'archive_records': len(seen),
+        'archive_manifest_sha256': sha(manifest_blob),
+        'all_encoded_and_decoded_hashes_exact': True,
+        'readme_scope': {
+            'README.md': 'Top-level narrative is outside the kickoff manifest; root may replace it for the completed release. No manifest exception or hash rewrite is needed.',
+            'pack/README.md': 'Pinned kickoff evidence; must remain exact. Put completed pack discussion in the top-level or integration narrative.',
+        },
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--lanes', nargs='+', default=['alchimie', 'quick', 'pack', 'captions'], choices=sorted(ALLOWED_LANES))
+    parser.add_argument('--include-root', action='store_true', help='Also archive completed root-level gate logs/scripts/receipts.')
+    args = parser.parse_args()
+    lanes = sorted(set(args.lanes))
+    assert SOURCE.name == 'integration' and SOURCE.parent.name == 'feat__v97-discovery-continuity-and-new-words'
+    assert not OUTPUT.is_relative_to(SOURCE) and not SOURCE.is_relative_to(OUTPUT)
+    kickoff = validate_kickoff()
+    baseline = subprocess.check_output(['git', 'rev-parse', BASELINE], cwd=ROOT, text=True).strip()
+    selected = {SELF}
+    excluded = []
+    for lane in lanes:
+        start = SOURCE / lane
+        assert start.is_dir() and not start.is_symlink(), start
+        for directory, directories, files in os.walk(start, topdown=True, followlinks=False):
+            parent = Path(directory)
+            keep = []
+            for name in sorted(directories):
+                child = parent / name
+                if blocked_directory(child):
+                    excluded.append(str(child.relative_to(SOURCE)))
+                else:
+                    keep.append(name)
+            directories[:] = keep
+            for name in sorted(files):
+                path = parent / name
+                if not name.startswith('.') and path.suffix in TEXT_SUFFIXES and not path.is_symlink():
+                    selected.add(path)
+    if args.include_root:
+        for path in SOURCE.iterdir():
+            if path.is_file() and not path.is_symlink() and not path.name.startswith('.') and path.suffix in TEXT_SUFFIXES and path.name not in GENERATED_ROOT_NAMES:
+                if not (path.name.startswith('preview') and path.suffix == '.log'):
+                    selected.add(path)
+    selected = sorted(selected, key=lambda p: str(p.relative_to(SOURCE)))
+    previous_path = OUTPUT / 'archive-manifest.json'
+    if previous_path.exists():
+        previous = json.loads(stable_read(previous_path))
+        missing = {row['source'] for row in previous['files']} - {str(p.relative_to(SOURCE)) for p in selected}
+        assert not missing, f'Rerun with the previous lanes/root scope; refusing to orphan archived evidence: {sorted(missing)}'
+    prepared = []
+    names = set()
+    total = 0
+    for path in selected:
+        relative = path.relative_to(SOURCE)
+        assert relative.parts[0] in ALLOWED_LANES or len(relative.parts) == 1
+        raw = stable_read(path)
+        total += len(raw)
+        assert total <= MAX_TOTAL_BYTES, 'Archive exceeds total size bound'
+        name = str(relative) + ('.txt' if path.suffix in {'.py', '.mjs', '.js', '.ts', '.tsx', '.sh'} else '')
+        compressed = path.suffix == '.log' or path.name.endswith('error-context.md')
+        encoded = gzip.compress(raw, mtime=0) if compressed else raw
+        if compressed:
+            name += '.gz'
+        assert name not in names and name not in {'archive-manifest.json', 'gate-inputs.json'}
+        names.add(name)
+        row = {'source': str(relative), 'source_size': len(raw), 'source_sha256': sha(raw), 'archive': name, 'archive_size': len(encoded), 'archive_sha256': sha(encoded), 'encoding': 'gzip' if compressed else 'identity'}
+        prepared.append((path, raw, encoded, row))
+    for path, raw, _, _ in prepared:
+        assert stable_read(path) == raw, f'Selected evidence changed during preparation: {path}'
+    changed = set(subprocess.check_output(['git', 'diff', '--name-only', '--no-renames', '-z', BASELINE], cwd=ROOT).decode().split('\0'))
+    changed |= set(subprocess.check_output(['git', 'ls-files', '--others', '--exclude-standard', '-z'], cwd=ROOT).decode().split('\0'))
+    pins = {}
+    sizes = {}
+    deleted = []
+    for relative in sorted(changed):
+        if not relative.startswith(('cat_de_roman_esti/', 'frontend/', 'scripts/', 'tests/')):
+            continue
+        path = ROOT / relative_path(relative)
+        if path.exists():
+            blob = stable_read(path, limit=16 * 1024 * 1024)
+            pins[relative] = sha(blob)
+            sizes[relative] = len(blob)
+        else:
+            deleted.append(relative)
+    for _, _, encoded, row in prepared:
+        write_bytes(OUTPUT / relative_path(row['archive']), encoded)
+    manifest = {'kind': 'v97-integration-archive-v1', 'baseline_commit': baseline, 'scope': {'completed_lanes': lanes, 'completed_root_files_included': args.include_root, 'pruned_directories': sorted(excluded), 'allowed_suffixes': sorted(TEXT_SUFFIXES), 'file_byte_bound': MAX_FILE_BYTES, 'total_byte_bound': MAX_TOTAL_BYTES, 'script_snapshot_once': 'archive_integration.py.txt'}, 'kickoff_verification': kickoff, 'files': [item[3] for item in prepared]}
+    write_json(OUTPUT / 'archive-manifest.json', manifest)
+    write_json(OUTPUT / 'gate-inputs.json', {'kind': 'v97-mutable-gate-inputs-v1', 'baseline_commit': baseline, 'sha256': pins, 'bytes': sizes, 'deleted': deleted, 'note': 'Mutable integration snapshot of changed app/frontend/scripts/tests only; rerun after any code, generated asset or fixture change.'})
+    for _, raw, _, row in prepared:
+        archived = stable_read(OUTPUT / row['archive'])
+        assert sha(archived) == row['archive_sha256'] and len(archived) == row['archive_size']
+        decoded = gzip.decompress(archived) if row['encoding'] == 'gzip' else archived
+        assert decoded == raw
+    assert validate_kickoff() == kickoff
+    print(json.dumps({'archive_files': len(prepared), 'source_bytes': total, 'archive_bytes': sum(len(item[2]) for item in prepared), 'mutable_gate_inputs': len(pins), 'deleted_gate_inputs': len(deleted), 'kickoff_records_verified': kickoff['archive_records'], 'completed_lanes': lanes, 'completed_root_files_included': args.include_root, 'archive_manifest_sha256': sha(stable_read(OUTPUT / 'archive-manifest.json')), 'gate_inputs_sha256': sha(stable_read(OUTPUT / 'gate-inputs.json')), 'readme_scope': kickoff['readme_scope']}, ensure_ascii=False, indent=2))
+
+
+if __name__ == '__main__':
+    main()

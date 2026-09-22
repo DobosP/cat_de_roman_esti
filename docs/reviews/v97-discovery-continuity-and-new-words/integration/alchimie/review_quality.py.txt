@@ -1,0 +1,79 @@
+from pathlib import Path
+from collections import Counter
+import copy,hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import mechanics_for
+from cat_de_roman_esti.wordgames.service import normalize
+IDENTITY='/root/v97_quick'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(n,v):(OUT/n).write_bytes(B.json_bytes(v))
+prior_dir=ROOT/'docs/reviews/v96-words-and-input-clarity/integration/alchimie'
+old=read(prior_dir/'candidate.json');prior=read(prior_dir/'quality-review.json');final=read(prior_dir/'final-quality.json');audit=read(prior_dir/'live-audit.json')
+c=read(OUT/'candidate.json');raw=read(OUT/'raw/proposals.json')
+assert (OUT/'candidate.json').read_bytes()==B.json_bytes(B.candidate())
+assert prior['candidate_sha256']==sha(prior_dir/'candidate.json')==audit['candidate_sha256']
+assert final['audit_sha256']==sha(prior_dir/'live-audit.json')
+assert final['catalog_sha256']==audit['catalog_sha256']==sha(prior_dir/'proposed-catalog.json')
+assert final['verdict']==prior['world_verdict']==audit['verdict']=='accept'
+assert final['reviewer']==prior['reviewer']!=IDENTITY
+for key in ('kg_sha256','rubric_sha256'):assert c['bindings'][key]==old['bindings'][key]==B.bindings()[key]
+old_c,old_r=({r['id']:r for r in old[k]} for k in ('concepts','recipes'))
+cs,rs=({r['id']:r for r in c[k]} for k in ('concepts','recipes'))
+pc,pr=({r['id']:r for r in prior[k]} for k in ('concepts','items'))
+assert (len(old_c),len(old_r),len(cs),len(rs))==(249,347,251,351)
+assert set(old_c)==set(pc) and set(old_r)==set(pr)
+for i,r in old_c.items():assert cs[i]==r and pc[i]['verdict']=='accept' and pc[i]['concept_sha256']==B.concept_digest(r)
+for i,r in old_r.items():assert rs[i]==r and pr[i]['verdict']=='accept'
+for key in ('world','unlocks','goals'):assert c[key]==old[key]
+assert c['compatible_versions'][:-1]==old['compatible_versions'] and len(c['compatible_versions'])==9
+assert c['compatible_versions'][-1]['source_sha256']==sha(prior_dir/'candidate.json')
+assert c['compatible_versions'][-1]['mechanics']==mechanics_for(old['world']['starter_ids'],{tuple(r['pair']):r['result'] for r in old['recipes']},[(u['after_discoveries'],u['concept_ids']) for u in old['unlocks']])
+newc=set(cs)-set(old_c);newr=set(rs)-set(old_r)
+assert newc=={r['id'] for r in raw['concepts']} and newr=={r['id'] for r in raw['recipes']}
+assert len({tuple(r['pair']) for r in rs.values()})==len(rs)
+kg=read(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json');surfaces={normalize(v) for n in kg['kg_nodes'] for v in [n['label_ro'],*n.get('aliases',[])]}
+assert not surfaces & {normalize(cs[i]['label']) for i in newc}
+assert len({normalize(r['label']) for r in cs.values()})==len(cs)
+def closure(v):
+ owned=set(v['world']['starter_ids']);crafted=set();tiers=set();witness={i:[] for i in owned}
+ while True:
+  before=(len(owned),len(tiers))
+  for u in v['unlocks']:
+   if u['id'] not in tiers and len(crafted)>=u['after_discoveries']:
+    tiers.add(u['id']);owned.update(u['concept_ids']);witness.update({i:['supply:'+u['id']] for i in u['concept_ids']})
+  for r in v['recipes']:
+   if r['result'] not in owned and set(r['pair'])<=owned:
+    owned.add(r['result']);crafted.add(r['result']);witness[r['result']]=list(dict.fromkeys(witness[r['pair'][0]]+witness[r['pair'][1]]+[r['id']]))
+  if before==(len(owned),len(tiers)):break
+ assert owned=={r['id'] for r in v['concepts']}
+ return crafted,witness
+crafted,witness=closure(c);oldcrafted,_=closure(old)
+inputs={i for r in rs.values() for i in r['pair']};oldinputs={i for r in old_r.values() for i in r['pair']};alts=Counter(r['result'] for r in rs.values())
+concept_reasons={
+'alw_food_supa_rosii':'The descriptive name is immediately understandable as tomato-based soup, distinct from the generic soup already present. Two Romanian recipe authors document ordinary home cooking, with Jamila recalling repeated childhood meals. Rice is qualified as optional in the definition rather than made part of all tomato soup. This is familiar food vocabulary, not a specialist name.',
+'alw_food_mancare_spanac':'The name distinguishes a cooked dish from the existing raw spinach ingredient. The definition explicitly limits the represented version to a creamy milk, flour and garlic preparation. Laura Sava’s 2010 recipe and childhood account support its ordinary family-cooking familiarity; other ways to cook spinach are not denied.'}
+recipe_reasons={
+'supa-rosii-supa':'Tomato plus an existing soup base is a direct, inferable route toward tomato soup. The explanation includes aromatic vegetables, rice and boiling, so it respects the base’s prepared state rather than pretending these two visible items alone are a complete recipe.',
+'supa-rosii-orez':'Tomato and rice form a plausible second opening using familiar pantry ingredients. Separate rice cooking and the cooked vegetable base are explicit. The outcome remains the same broad soup concept rather than a near-duplicate rice variant.',
+'mancare-spanac-usturoi':'Garlic is a characteristic flavor cue for the represented spinach preparation. Blanching, draining, chopping and cooking in milk sauce are explicit, preserving the difference between the raw leaf ingredient and the finished dish.',
+'mancare-spanac-lapte':'Milk makes a second intuitive route to creamy spinach. The explanation supplies flour, oil and garlic and says the spinach is already cooked, drained and chopped before warming it in sauce. It does not confuse milk with cream or offer an uncooked mixture.'}
+assert set(concept_reasons)==newc and set(recipe_reasons)==newr
+newcq=[{'id':i,'concept_sha256':B.concept_digest(cs[i]),'inherited':False,'verdict':'accept','rationale':concept_reasons[i],'sources':cs[i]['references']} for i in sorted(newc)]
+newrq=[{'id':i,'verdict':'accept','rationale':recipe_reasons[i],'sources':rs[i]['sources']} for i in sorted(newr)]
+rationale='All 249 earlier concepts and 347 recipes exactly preserve the prior accepted content and evidence bindings. Two familiar savory dishes each provide two plausible pair routes; shared KG identities, 8 starters, 96 supplies, 12 tiers and 32 goals stay exact. Independent closure reaches all 251 concepts and 147 discoveries. Both new discoveries are terminal and no earlier terminal gains an onward use; this wave improves variety and successful pair coverage, not crafting depth. All 9 previous books remain mechanically bound. The explicit 16-book limit and unchanged 2 MiB cap are assessed separately in the compatibility implementation review; final installation needs its independent replay review.'
+concept_reviews=[]
+for i in sorted(cs):
+ row=copy.deepcopy(pc[i]) if i in pc else next(r for r in newcq if r['id']==i)
+ if i in pc:row['inherited']=True
+ concept_reviews.append(row)
+review={'kind':B.REVIEW_KIND,'role':'quality','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'candidate.json'),'world_verdict':'accept','world_rationale':rationale,'inherited_review_sha256':sha(prior_dir/'quality-review.json'),'concepts':concept_reviews,'items':[copy.deepcopy(pr[i]) if i in pr else next(r for r in newrq if r['id']==i) for i in rs]}
+write('quality-review.json',review)
+B.read_review(OUT/'quality-review.json','quality',sha(OUT/'candidate.json'),set(rs),c['concepts'])
+write('raw/quality-review.json',{'kind':'alchimie-v97-new-content-quality-review-v1','role':'quality','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'raw/proposals.json'),'complete_candidate_sha256':sha(OUT/'candidate.json'),'verdict':'accept','world_rationale':rationale,'concepts':newcq,'items':newrq})
+report={'kind':'alchimie-v97-independent-quality-check-v1','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'candidate.json'),'raw_sha256':sha(OUT/'raw/proposals.json'),'old_concepts_exact':len(old_c),'old_recipes_exact':len(old_r),'concepts':len(cs),'recipes':len(rs),'craftable_results':len(crafted),'compatible_generations':len(c['compatible_versions']),'formerly_terminal_reused':{i:cs[i]['label'] for i in sorted((oldcrafted-oldinputs)&inputs)},'crafted_intermediates':len(crafted&inputs),'terminal_results':len(crafted-inputs),'results_with_alternatives':sum(n>1 for n in alts.values()),'new_results':{i:{'label':cs[i]['label'],'direct_recipes':alts[i],'witness':witness[i]} for i in sorted(newc)},'unresolved_findings':[],'preserved_bindings':{str(p.relative_to(ROOT)):sha(p) for p in [prior_dir/'candidate.json',prior_dir/'quality-review.json',prior_dir/'final-quality.json',prior_dir/'live-audit.json',ROOT/'cat_de_roman_esti/fixtures/kg_sample.json',ROOT/'docs/CRITIQUE_RUBRIC.md']},'review_source_sha256':sha(Path(__file__)),'limits':['Final installation/replay requires another bound review.','Both new discoveries are terminal and no previous terminal gains onward use.','No physical-device or player-enjoyment evidence.']}
+assert len(crafted)==147 and len(crafted&inputs)==64 and sum(n>1 for n in alts.values())==101
+write('independent-quality-check.json',report)
+print(json.dumps({k:v for k,v in report.items() if k not in ('new_results','preserved_bindings')},ensure_ascii=False))

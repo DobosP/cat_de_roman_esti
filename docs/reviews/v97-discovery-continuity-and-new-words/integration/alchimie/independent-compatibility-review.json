@@ -1,0 +1,41 @@
+{
+  "candidate_sha256": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4",
+  "checks": {
+    "actual_history_count": 9,
+    "candidate_bytes": 808760,
+    "exact_byte_limit": 2097152,
+    "integrity_mutation_cases": 6,
+    "multibyte_excess_rejected": true,
+    "oversized_write_modes_preserve_destinations": [
+      "candidate",
+      "proposal",
+      "install"
+    ],
+    "seventeenth_rejected_no_eviction": true,
+    "targeted_pytest_log_sha256": "b156e9922f76d25723911762a7fc411b0a8aeb840a9069496bef64f6b3877445",
+    "targeted_pytest_passed": 69,
+    "valid_synthetic_history_counts": [
+      8,
+      9,
+      16
+    ]
+  },
+  "kind": "v97-independent-compatibility-implementation-review-v1",
+  "limits": [
+    "The count limit increases resource allowance but remains finite; a seventeenth historical book requires another explicit design change.",
+    "No asynchronous session or public proof schemas were changed. Actual nine-book restore and full live replay are assessed in the final audit."
+  ],
+  "rationale": "The runtime and generator use the same finite 16-book constant and preserve complete prior mechanics. No oldest-book eviction or arbitrary recipe-hash acceptance is added. Existing canonical hash, unchanged world, starter, recipe-result, supplies and reachability checks remain. The generator checks actual UTF-8 bytes before candidate, proposal or package writes; the runtime retains its stat/read 2 MiB guards. Proof length, graph content, session and empty-pair bounds are unchanged.",
+  "review_source_sha256": "7d43cd4ffea4a7824f90b56df5403379f3a091f96d9fdde106a3ea985e4636b2",
+  "reviewer": "/root/v97_quick",
+  "source_sha256": {
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "cbbc98d1fe076d002e06d71e8b8881a4b950e4510879e309fa12f106070983da",
+    "scripts/build_alchimie_discovery_world.py": "ed96709b82fdaaf3150b6797454929204192108aa358ca593a01bfa69ab57dee",
+    "tests/test_alchimie_empty_pairs.py": "966d5e637f4cbe4538dde6c53b0bd4ab6daf02bfe14e623c8bc46ab489bf5b1f",
+    "tests/test_alchimie_explore.py": "3ec019164f2c75cc9eb98e4fd5875802be0b1e3ee92f6aa3e769ae07aa78e301",
+    "tests/test_v97_world_compatibility.py": "7e30e3cf6029fd40b3cc8e2f4728db0239ef721b266c4b75a9053fcccacb0468"
+  },
+  "unresolved_findings": [],
+  "verdict": "accept"
+}

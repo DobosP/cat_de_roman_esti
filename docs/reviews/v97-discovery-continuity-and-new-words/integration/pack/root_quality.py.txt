@@ -1,0 +1,21 @@
+from pathlib import Path
+import hashlib
+import json
+
+out = Path(__file__).parent
+notes = {
+    'viata_de_roman': [
+        ('conexiuni[0]', 'A1-A7/B1-B9 accept for pending staging. Masculine kin and facial parts offer two clear anchor groups. Nepot has two usual kinship senses, both masculine, so neither creates an exception. The filled-food category explicitly says recipes, covering familiar filled peppers, doughnuts, crepes and eggs without implying all variants are filled. Oven is an appliance, not another stuffed food. Electric versions link guitar, train, oven and bicycle through a recognizable property; the wording does not claim all versions use electricity. All sixteen are familiar concepts; no entity-type shortcut or incidental national theme supplies a rival fourth tile. Normal difficulty suits the two broad property groups. Existing strict/raw evidence shows no unfair or contested tile; full candidate/served/tombstone novelty is still required at allocation.', ['https://dexonline.ro/definitie/nepot', 'https://www.lauralaurentiu.ro/retete-culinare/retete-mancare/ardei-umpluti.html', 'https://media3.bsh-group.com/Documents/9001253126_A.pdf']),
+        ('contexto[0]', 'A1-A7/C1-C6 accept for pending staging. Ușă has a dominant ordinary household meaning and an appropriately modest description. Seven real incoming links provide enough ordinary recognition. House, bathroom, intercom and key give independently plausible openers; window, room and opening remain usable. Unknown intrare is documented vocabulary debt rather than a fabricated synonym or an automatic rejection where several obvious openers work. Plural uși is a valid winning form. Easy difficulty is supported by the concrete target and existing graph ranks; final installed public guesses and recovery remain required.', ['https://dexonline.ro/definitie/u%C8%99%C4%83', 'https://www.portadoors.com/ro/c/usi-interior-ro/']),
+    ],
+    'gastronomie': [
+        ('lant[0]', 'A1-A7/D1-D5 accept for pending staging. Cocoa and milk are familiar distinct endpoints. Ice cream and cocoa cake give two independently recognizable shortest routes in a width-seven corridor. Cocoa can flavor the documented ice cream variant; cocoa cake may be served with milk. The latter edge means served together, not a universal milk ingredient claim. Neither route depends on geographic trivia or a generic national association. Both endpoints are fresh for this game; the existing pair ledger has no duplicate or reverse pair. Easy difficulty is plausible with two concrete food intermediates. Final runtime selection, truthful earned captions, and recovery must be rechecked after allocation.', ['https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/chec-pufos-si-economic-cu-cacao-reteta-video.html', 'https://jamilacuisine.ro/inghetata-de-ciocolata-reteta-video/']),
+    ],
+}
+for category, rows in notes.items():
+    path = out / 'candidates' / category / 'candidates.json'
+    data = json.loads(path.read_bytes())
+    assert {f'{game}[{i}]' for game in ('conexiuni', 'contexto', 'lant', 'alchimie') for i, _ in enumerate(data[game])} == {row[0] for row in rows}
+    review = {'category': category, 'candidate_sha256': 'sha256:' + hashlib.sha256(path.read_bytes()).hexdigest(), 'reviewer': 'root-v97-pack-quality', 'coverage_note': 'Independent raw semantic and rubric review of frozen labels, descriptions, categories and paths. Keep authorizes pending staging only; final allocated verification remains required.', 'instances': [{'ref': ref, 'verdict': 'keep', 'note': note, 'sources': sources} for ref, note, sources in rows]}
+    (path.parent / 'verify_quality.json').write_text(json.dumps(review, ensure_ascii=False, indent=2) + '\n')
+print('Three exact-bound independent raw quality judgments written')

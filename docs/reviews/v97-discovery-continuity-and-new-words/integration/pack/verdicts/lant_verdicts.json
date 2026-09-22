@@ -1,0 +1,73 @@
+{
+ "game": "lant",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_viata_de_roman_377",
+   "cx_viata_de_roman_374",
+   "lt_gastronomie_246"
+  ]
+ },
+ "verdicts": {
+  "lt_gastronomie_246": "promote"
+ },
+ "perItem": [
+  {
+   "id": "lt_gastronomie_246",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:ec0932fd977cfc7b13509eaffb41a19bcb4d84216923899648c0e50bda91fdb4",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_gastronomie_246",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:ec0932fd977cfc7b13509eaffb41a19bcb4d84216923899648c0e50bda91fdb4",
+    "rationale": "Promote easy. D1: Cacao and Lapte are independently familiar ingredients with accurate actual public descriptions. D2: cocoa-flavored ice cream made with milk and cocoa cake served with milk are concrete source-supported associations. The cake/milk native edge is serving together, not relabeled as an ingredient claim. Ice cream definition permits water or milk bases and cake definition permits plain/cocoa/fruit variants, so alternative recipes are not falsely excluded. D3: two distinct shortest intermediates, Înghețată and Chec, provide credible choice and neither is a compulsory choke point; the wider beginner corridor is7/7/7. D4: two hops through common desserts fit easy; low inherited ice-cream salience is not mistaken for actual obscurity. D5: moving from cocoa flavor to milk through a familiar dessert gives a nameable bridge, despite endpoint affinity already suggesting cocoa milk directly. Both fixed pending BFF routes win at1000. All four actual displayed route captions remain legătură directă under the final V97 caption registry; the twelve new captions cover earlier rounds, so no false improvement claim is made for this new board. The generic labels limit explanatory richness but the associations remain recognizable. Sources independently document current producer cocoa/milk ice cream and original cake-with-milk serving. No graph mutation, regional exclusivity or revived rejected pair.",
+    "sources": [
+     "https://ciaoamore.ro/produse/inghetata-pentru-retail/gelato-pahar-retail/",
+     "https://www.e-retete.ro/retete/inghetata-cu-ciocolata",
+     "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/chec-pufos-si-economic-cu-cacao-reteta-video.html"
+    ]
+   },
+   "verifier_review": {
+    "id": "lt_gastronomie_246",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:ec0932fd977cfc7b13509eaffb41a19bcb4d84216923899648c0e50bda91fdb4",
+    "rationale": "Promote under A1-A7/D1-D5. Independently regenerated dossier binds the final caption runtime and honest endpoint descriptions. Cocoa and milk are familiar; ice cream and cake offer two distinct shortest dessert routes within the seven-wide beginner corridor. I opened the current Ciao Amore producer ingredients, which explicitly contain cocoa and milk, and Laura Laurențiu’s original cake page, which recommends serving cake with milk. The cake edge means serving together, even where a particular recipe also uses milk inside. Variant definitions are retained; no universal recipe claim or obligatory single bridge is made. Two hops and recognizable intermediates justify easy. All four new-round captions remain generic, which limits explanation but does not falsify the associations. The twelve newly improved captions apply to earlier rounds. Both endpoints and pair pass prior raw/served/tombstone novelty. Final approved public selection and recovery remain required.",
+    "sources": [
+     "https://ciaoamore.ro/produse/inghetata-pentru-retail/gelato-pahar-retail/",
+     "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/chec-pufos-si-economic-cu-cacao-reteta-video.html"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 1,
+  "verified": 1,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/integration/pack/analyst.json",
+   "sha256": "sha256:be0aac08d8d7f62a74d9af566abf0905c67333cb699fde2201aa65963a8d4144",
+   "reviewer": "/root/v97_pack",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/integration/pack/verifier.json",
+   "sha256": "sha256:9f7604c566faf5125691d7f1c314f04ea5f85a7781205d4bf1b600042881c20e",
+   "reviewer": "root-v97-pack-quality",
+   "role": "verifier"
+  }
+ }
+}

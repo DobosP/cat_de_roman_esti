@@ -1,0 +1,15 @@
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words')
+O=Path('/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/integration/quick')
+s=(R/'docs/reviews/v96-words-and-input-clarity/integration/quick/review_quality.py.txt').read_text()
+s=s.replace('Independent V96','Independent V97').replace('feat__v96-words-and-input-clarity','feat__v97-discovery-continuity-and-new-words').replace('codex-v96-world-quick-quality','codex-v97-world-quick-quality').replace("docs/reviews/v95-discovery-and-game-quality/quick","docs/reviews/v96-words-and-input-clarity/integration/quick")
+s=s.replace('len(old_rows)==81 and len(rows)==83','len(old_rows)==83 and len(rows)==85').replace('ratings[:81]','ratings[:83]').replace("'v96-words-and-input-clarity' in p.parts","'v97-discovery-continuity-and-new-words' in p.parts")
+s=s.replace('max(overlaps)<=1 and historical_max<=1','max(overlaps)==0 and historical_max==0').replace('len(fresh)==3','len(fresh)==4').replace('result[\'max_cross_strength\']==0 and len(fresh)==4','result[\'max_cross_strength\']==0 and len(fresh)==8')
+a=s.index('reasons={');b=s.index('\nitems=',a)
+s=s[:a]+'''reasons={
+'iq92_v97_relatives':'Accept easy. Frate, Soră and Unchi are direct kinship terms, whereas the actual displayed Vecini describes residence nearby. Real people may occupy both roles, but the category explicitly asks what the words denote. Figurative brotherhood cannot turn all three kinship labels into residence labels. All four are familiar, their native descriptions agree, and the singular versus plural display does not change the common meaning. No specialist knowledge or hidden location context is needed.',
+'pq92_v97_home_and_city':'Accept easy. Perete–Tavan is an immediate structural anchor; Metrou–Tramvai is the only pair of vehicles and both use urban rails. A găti directly matches the room for food preparation. Examen–Lecție relates assessment to taught material without implying every lesson ends in an exam. Kitchen also has walls and a ceiling, but pairing it with either strands cooking or leaves the other structural part without an equally direct mate. Generic lessons about cooking or railway exams require invented scenarios, not ordinary direct meanings. No clothing cue invites the dressing sense of găti. Exactly one complete native matching and one defensible ordinary-language partition remain.'}''' + s[b:]
+s=s.replace("'v96-quick-independent-quality-v1'","'v97-quick-independent-quality-v1'").replace("'old_81_records_judgments_payloads_scores_exact'","'old_83_records_judgments_payloads_scores_exact'")
+s=s.replace("'inherited_unselected_leads_disclosed':'V95 scout text mentioned storm trio and banana/fruit as unselected ideas; neither was a rejected or served board.'","'superseded_current_wave_author_draft':'An earlier V97 clothing pair was replaced before this frozen candidate; it is preserved in the author archive and excluded only as a current-wave superseded draft.'")
+s=s.replace("'inherited_rows':81","'inherited_rows':83").replace("'inherited':81","'inherited':83")
+(O/'review_quality.py').write_text(s)

@@ -1,0 +1,17 @@
+from pathlib import Path
+import hashlib,json,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');O=Path(__file__).parent
+sys.path[:0]=[str(R),str(R/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import get_world,MAX_CATALOG_BYTES,MAX_COMPATIBLE_VERSIONS
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+world=get_world();candidate=json.loads((O/'candidate.json').read_bytes());old=json.loads(B.BASELINE.read_bytes())
+assert B.CATALOG.read_bytes()==(O/'proposed-catalog.json').read_bytes()
+assert '59 passed' in (O/'installed-world-tests.log').read_text()
+B.confirm_final_reviews(json.loads(B.CATALOG.read_bytes()),O/'live-audit.json',O/'final-factual.json',O/'final-quality.json')
+for field in ('concepts','recipes'):
+ before={r['id']:r for r in old[field]};after={r['id']:r for r in candidate[field]}
+ assert all(after[k]==v for k,v in before.items())
+assert candidate['compatible_versions'][:-1]==old['compatible_versions']
+receipt={'kind':'v97-alchimie-guarded-install-v1','installed':True,'catalog_path':str(B.CATALOG.relative_to(R)),'catalog_sha256':sha(B.CATALOG),'catalog_bytes':B.CATALOG.stat().st_size,'candidate_sha256':sha(O/'candidate.json'),'recipe_hash':world.recipe_hash,'maximum_compatible_versions':MAX_COMPATIBLE_VERSIONS,'maximum_catalog_bytes':MAX_CATALOG_BYTES,'semantic_and_final_review_inputs':{n:sha(O/n) for n in ['factual-review.json','quality-review.json','live-audit.json','final-factual.json','final-quality.json']},'preserved_concepts':249,'preserved_recipes':347,'concepts':len(world.concepts),'recipes':len(world.recipes),'compatible_versions':len(world.catalog.compatible_versions),'all_prior_8_histories_exact':True,'goal_supply_starter_changes':False,'initial_test_note':'Unknown hash correctly returned existing409 conflict; new test initially expected400. Corrected assertion only, preserved initial58pass1failure log.','final_tests':{'passed':59,'log_sha256':sha(O/'installed-world-tests.log')},'source':{'script_sha256':sha(Path(__file__))}}
+(O/'installation-receipt.json').write_bytes(B.json_bytes(receipt));print(json.dumps(receipt))

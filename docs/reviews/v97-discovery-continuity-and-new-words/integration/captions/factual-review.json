@@ -1,0 +1,221 @@
+{
+  "kind": "lant-caption-review-v1",
+  "role": "factual",
+  "reviewer": "/root",
+  "checked_on": "2026-09-17",
+  "candidate_sha256": "610f5c85a282a0af6e7d8a9e04829665a6d58a3cdeda38154837e74b7feb72e0",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "runtime_source_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+  "items": [
+    {
+      "id": "v97_caption_de8585",
+      "pair": [
+        "n_v4gas_paine",
+        "n_v84_food_cuptor"
+      ],
+      "caption": "cuptor și pâine coaptă",
+      "edge_sha256": "7fbb959dea82f68c3951c0c17aeefb4eebf00746d2ea42d505ecf972744cc67d",
+      "verdict": "accept",
+      "rationale": "Manufacturer oven manual contains bread baking programs and tables (pages 30-32, 43). This supports the appliance-to-bread cooking relation without importing temperature advice.",
+      "sources": [
+        "https://media3.bsh-group.com/Documents/9001253126_A.pdf"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 22
+    },
+    {
+      "id": "v97_caption_de8787",
+      "pair": [
+        "n_v4gas_paine",
+        "n_v90_food_firimitura"
+      ],
+      "caption": "pâine și bucățele desprinse",
+      "edge_sha256": "45eb8429ce1f32dce4e5bf402e61f652efac3451519052171a16978b5f460c5e",
+      "verdict": "accept",
+      "rationale": "DEX 2009 defines a crumb first through small bread fragments after cutting or tearing; the caption expresses that ordinary meaning.",
+      "sources": [
+        "https://dexonline.ro/definitie/firimitur%C4%83"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 27
+    },
+    {
+      "id": "v97_caption_de8703",
+      "pair": [
+        "n_v24_food_snack_biscuit",
+        "n_v84_food_cuptor"
+      ],
+      "caption": "cuptor și biscuiți copți",
+      "edge_sha256": "ef26c0c388e1c0e973311e802a72a8a68c9fe96a8b5dcc0d569fe2649155fbc5",
+      "verdict": "accept",
+      "rationale": "Manufacturer oven manual explicitly lists biscuit baking (page 31). The caption describes a supported method, not an exclusive recipe.",
+      "sources": [
+        "https://media3.bsh-group.com/Documents/9001253126_A.pdf"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 24
+    },
+    {
+      "id": "v97_caption_de8788",
+      "pair": [
+        "n_v24_food_snack_biscuit",
+        "n_v90_food_firimitura"
+      ],
+      "caption": "biscuit și bucățele desprinse",
+      "edge_sha256": "2cea5133d564d78610f4948ead10fdede52d5a0d0a48a7ed467ac1a9838b2674",
+      "verdict": "accept",
+      "rationale": "DEX 2009 also extends crumb to very small food fragments. A biscuit fragment fits that sense; no new graph direction is inferred.",
+      "sources": [
+        "https://dexonline.ro/definitie/firimitur%C4%83"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 29
+    },
+    {
+      "id": "v97_caption_de8668",
+      "pair": [
+        "n_v86_food_frisca",
+        "n_v86_food_zahar_pudra"
+      ],
+      "caption": "frișcă și îndulcitor opțional",
+      "edge_sha256": "48feda733ce0739d13b0458caaad82b2ec801f10e52bc32cdfe3573602807d2c",
+      "verdict": "accept",
+      "rationale": "Robert Eisler includes powdered sugar in the whipped-cream decoration but uses whipped cream separately in the filling. Optional correctly avoids claiming all cream is sweetened.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 29
+    },
+    {
+      "id": "v97_caption_de8723",
+      "pair": [
+        "n_v86_food_frisca",
+        "n_v87_food_tort_diplomat"
+      ],
+      "caption": "tort și frișca din cremă",
+      "edge_sha256": "04a7be12c1fb9a689ab2266e5404855c0bb1537cbfd91ab215d1c18a9e0d11aa",
+      "verdict": "accept",
+      "rationale": "Robert Eisler mixes whipped cream into the Diplomat filling. The caption identifies its documented role in this cake.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 24
+    },
+    {
+      "id": "v97_caption_de8730",
+      "pair": [
+        "n_v86_food_zahar_pudra",
+        "n_v87_food_piscot"
+      ],
+      "caption": "pișcot și zahăr de presărat",
+      "edge_sha256": "6037c540b23886196b80006de4b424d85b3065dd91e82f1f1a0aa07ffed34b74",
+      "verdict": "accept",
+      "rationale": "Robert Eisler instructs dusting the ladyfinger mixture with powdered sugar before baking. The text names dusting rather than asserting a mandatory ingredient.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 27
+    },
+    {
+      "id": "v97_caption_de8722",
+      "pair": [
+        "n_v87_food_piscot",
+        "n_v87_food_tort_diplomat"
+      ],
+      "caption": "tort și margine cu pișcoturi",
+      "edge_sha256": "9dc08ffe90fc0d66318750013f6b86fbc20ffa160ddfba6ae7d5e7aeb14388bd",
+      "verdict": "accept",
+      "rationale": "Robert Eisler forms ladyfingers into the cake perimeter. This is a documented version, not a definition of all Diplomat constructions.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 28
+    },
+    {
+      "id": "v97_caption_de8632",
+      "pair": [
+        "n_gas_placinte_poale_brau",
+        "n_v85_food_vanilie"
+      ],
+      "caption": "plăcintă și aromă de vanilie",
+      "edge_sha256": "8da4ba575c82d9630c614542a52618c6de948e97bf685ccf869383ecbaec6b54",
+      "verdict": "accept",
+      "rationale": "Laura Laurențiu includes vanilla extract in the dough and cheese filling of poale-n brâu. Flavoring is a precise, variant-compatible description.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/branzoaice-reteta-video-placinte-poale-n-brau.html"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 28
+    },
+    {
+      "id": "v97_caption_de1563",
+      "pair": [
+        "n_gas_placinte_poale_brau",
+        "n_v2gas_branza"
+      ],
+      "caption": "plăcintă și umplutură de brânză",
+      "edge_sha256": "11fd5b31c8dc53a24e5a8510b104ac7e251913cd135a444762e1f3674b60a11d",
+      "verdict": "accept",
+      "rationale": "Laura Laurențiu gives a cheese filling for poale-n brâu. The existing two-way material relation is truthful in either traversal.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/branzoaice-reteta-video-placinte-poale-n-brau.html"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": true,
+      "character_count": 31
+    },
+    {
+      "id": "v97_caption_de8631",
+      "pair": [
+        "n_v17gas_pasca",
+        "n_v85_food_vanilie"
+      ],
+      "caption": "pască și aromă de vanilie",
+      "edge_sha256": "efe3858dc0d5b792326c78c0f321c461f16d8d8c23666b8b3c8c55352b1321a1",
+      "verdict": "accept",
+      "rationale": "Laura Laurențiu includes vanilla extract in the traditional cheese pască dough and filling. The caption describes aroma without a universal ingredient rule.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/pasca-traditionala-cu-branza-dulce.html"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 25
+    },
+    {
+      "id": "v97_caption_de5529",
+      "pair": [
+        "n_v17gas_pasca",
+        "n_v2gas_branza"
+      ],
+      "caption": "pască și umplutură de brânză",
+      "edge_sha256": "5d0ab3103ffafb9bb8ceb437b589e0b1fe506a8e9bc6fb9bd67ad8110a8d5924",
+      "verdict": "accept",
+      "rationale": "Laura Laurențiu lists cheese as the principal filling of the traditional pască version. This supports the existing two-way filling relation.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/pasca-traditionala-cu-branza-dulce.html"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": true,
+      "character_count": 28
+    }
+  ],
+  "checks": {
+    "allowed_directions": 14,
+    "withheld_reverse_directions": 10,
+    "live_primary_sources_read": true,
+    "unresolved_findings": []
+  }
+}

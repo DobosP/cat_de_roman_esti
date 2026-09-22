@@ -3,6 +3,8 @@ import type { ExplorationProgress, ExplorationState } from "./api/alchimieExplor
 export const EXPLORATION_SAVE_KEY = "cat_alchimie_exploration_v1";
 const MAX_SAVE_BYTES = 64 * 1024;
 const MAX_DISCOVERIES = 256;
+// Match the bounded server history in wordgames/discovery_world.py.
+const MAX_COMPATIBLE_VERSIONS = 16;
 const encoder = new TextEncoder();
 type SaveStorage = Pick<Storage, "getItem" | "setItem">;
 
@@ -49,7 +51,7 @@ export function readExplorationSave(storage: SaveStorage | null = browserStorage
       (value.needs_restore !== undefined && typeof value.needs_restore !== "boolean") ||
       !validId(value.progress?.world_id) || !/^[a-f0-9]{64}$/.test(value.progress.recipe_hash) ||
       (value.compatible_recipe_hashes !== undefined && (
-        !Array.isArray(value.compatible_recipe_hashes) || value.compatible_recipe_hashes.length > 8 ||
+        !Array.isArray(value.compatible_recipe_hashes) || value.compatible_recipe_hashes.length > MAX_COMPATIBLE_VERSIONS ||
         new Set(value.compatible_recipe_hashes).size !== value.compatible_recipe_hashes.length ||
         value.compatible_recipe_hashes.some((hash) => typeof hash !== "string" || !/^[a-f0-9]{64}$/.test(hash) || hash === value.progress.recipe_hash)
       )) ||

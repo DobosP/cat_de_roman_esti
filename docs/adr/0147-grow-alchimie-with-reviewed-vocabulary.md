@@ -1,6 +1,7 @@
 # ADR-0147: Grow Alchimie with reviewed vocabulary
 
-- Status: accepted
+- Status: partially superseded by [ADR-0155](0155-preserve-discovery-history-and-explain-food-links.md)
+  for the historical-book limit; other decisions remain accepted.
 - Date: 2026-09-13
 - Partially supersedes: [ADR-0146](0146-expand-alchimie-and-preserve-collections.md), for
   the content inventory, collection limits and single-predecessor generation workflow.

@@ -1,75 +1,80 @@
-Valid until: baseline or draft inputs change — then repeat affected checks.
+Valid until: reviewed content or implementation inputs change — then repeat affected checks.
 
-V97 starts from landed V96 `36db143ff9a5070e2a85a8176e24de2d6036ea01` after the owner
-requested the V96 landing and a new version. This is initial design/authoring, not a
-completed release or content approval. Serving code and fixtures remain landed V96.
+V97 completes the owner-requested content and game-quality session from landed V96
+`fd3ca7c78b6bee774c283d873d400abf4a8e7d65`. Five new rounds/targets, two Alchimie
+preparations with four recipes, and twelve clearer Lanț captions passed independent
+review and guarded installation. Current release and landing state belongs in
+[STATUS](../../STATUS.md); production deployment is separate.
 
-The Alchimie world has 249 concepts, 347 recipes and all eight allowed historical-book
-slots occupied. A compatibility design must precede another recipe generation. Preserve
-every old hash and recipe restriction; measure size/cost and review any proposed new
-bound explicitly. No old collection may be discarded and no cap changes silently.
+The [original kickoff](kickoff-README.md) remains preserved. Its initial `36db143`
+baseline has identical content/runtime bytes to `fd3ca7c`; the intervening V96 change
+corrected a browser interception test. All 65 records in the original
+[archive manifest](archive-manifest.json) remain exact. Original drafts and conditional
+probes are historical authoring evidence, not the final approval receipts below.
 
-In parallel, new drafts cover Conexiuni, Cald sau Rece, Lanț, Intrusul and Perechi,
-with source checks, full novelty and native playability. Alchimie concept/recipe drafts
-are contingent on compatibility work. Earned Lanț caption drafts explain existing
-connections, stay truthful in both directions and remain bound to exact edge snapshots.
-None of these drafts is installed or independently approved by this kickoff.
+## Reviewed additions
 
-Current status belongs in [STATUS](../../STATUS.md). The baseline, draft queue and
-review evidence are recorded here as the session starts. Production remains separate.
-
-## Initial proposal queue
-
-| Game | Unapproved draft |
+| Game | Installed addition |
 |---|---|
-| Conexiuni | Family roles, facial parts, filled dishes and electrical variants |
-| Cald sau Rece | ușă, with seven native incoming guesses and useful home/key/window approaches |
-| Lanț | Cacao→Lapte through Înghețată or Chec |
-| Alchimie | Supă de roșii and Mâncare de spanac, two routes each |
+| Conexiuni | Male family roles, facial parts, filled recipes and electric variants |
+| Cald sau Rece | ușă; seven native predecessors, useful home/bathroom/intercom/key openers |
+| Lanț | Cacao→Lapte through Înghețată or Chec; both shortest routes win |
+| Alchimie | Supă de roșii and Mâncare de spanac, two recipes each |
 | Intrusul | Frate/Soră/Unchi versus Vecin |
 | Perechi | Perete–Tavan, Metrou–Tramvai, A găti–Bucătărie, Examen–Lecție |
 
-[Pack notes](pack/README.md) distinguish conditional in-memory selection from actual
-installed content. Chec→Lapte is supported as serving together, not an ingredient claim.
-[Quick notes](quick/source-notes.md) preserve an earlier clothing-pair draft that could
-create an alternative partition through the dressing sense of găti; it was replaced
-before the final author freeze. Native uniqueness alone is not semantic approval.
+The pack now has 716 records: 708 approved and eight earlier pending holds. All 713
+previous records are exact. Conexiuni gains nine fresh per-game exposures; Intrusul
+gains four and Perechi eight. These are new uses of existing KG words, not new graph
+nodes. All 264 earlier Contexto distance profiles and all 105 rejection-ledger records
+remain exact. The [five-artifact inverse](artifact-delta.json) restores exact V96 bytes.
 
-## Compatibility and connection wording
+The quick catalog has 421 boards, including 85 authored boards. All 83 previous
+authored records/scores and all 336 core boards remain exact. Both new boards qualify
+as starters. Independent public replays cover all 85 wins plus the new starter,
+wrong-answer, repeat, hint and GET recovery journeys.
 
-[Compatibility design](alchimie/compatibility-design.md) recommends reviewing an explicit
-8→16 historical-book bound while retaining the 2 MiB artifact cap and adding a generator
-byte guard. It measures the current catalog at 749,055 bytes; nine full histories project
-815,543 bytes and sixteen at current-book size project 1,280,959 bytes. These estimates
-are not a promise that arbitrary future larger books fit. A smaller reference encoding
-would require a format migration and is retained as an alternative.
+## Saved progress and clearer connections
 
-The isolated prototype checks 1,009 earned prefixes across all nine rule sets and rejects
-315 newer-recipe forgeries. It changes no deployed model, limit or generator. The proposed
-world additions remain contingent on compatibility implementation and independent review.
-[Alchimie sources](alchimie/sources.md) document the recipe and recognition screening.
+Alchimie now has 251 concepts, 351 recipes and 147 discoveries. All 249 earlier concepts
+and 347 recipes remain exact. Nine complete historical books preserve earned progress;
+the finite limit increases from eight to sixteen under [ADR-0155](../../adr/0155-preserve-discovery-history-and-explain-food-links.md).
+The 2 MiB cap remains and is checked before generator writes. The installed artifact is
+818,957 bytes. No history is evicted; all other capacities remain unchanged.
 
-[Caption notes](captions/source-notes.md) propose twelve concise phrases for the existing
-V95/V96 food routes, bound to full edge snapshots. Fourteen allowed direction previews
-are checked; ten reverse traversals are withheld because their edges are directed. All
-101 existing approved captions remain exact. These are drafts, not new displayed text.
+The final world audit covers 351 recipes, 33 free/goal runs and 1,009 saved prefixes
+across all nine histories. It rejects 347 attempts to claim newer recipes under old
+books. Independent tests exercise sixteen valid histories, reject a seventeenth and
+check the exact byte boundary without replacing existing files.
 
-[Baseline receipt](baseline.json) records landed V96 and verified cleanup. The
-[archive manifest](archive-manifest.json) preserves only each lane's frozen evidence,
-excluding caches and temporary test directories. Independent factual/quality approval,
-implementation, final audits and integration checks remain before V97 is release ready.
+Twelve reviewed food captions explain the two representative routes in each earlier
+round `lt_gastronomie_243`, `244` and `245`. All 101 earlier captions stay exact. The
+phrases bind complete edge snapshots; fourteen existing directions display them and
+ten nonexistent reverse directions stay unavailable. Recipe variants and optional
+ingredients remain qualified. Browser checks cover choices, keyboard use, earned paths,
+GET/reload and 320px screens with doubled text.
 
-[Kickoff verification](kickoff-verification.json) checks exact archive bytes and unchanged
-serving artifacts. Prototype checks are evidence for design review, not a release gate.
+## Evidence and limits
 
-V97 also incorporates the subsequent [V96 test-only CI correction](../v96-words-and-input-clarity/ci-recovery/README.md)
-at main `fd3ca7c`. All ten baseline application/data artifact pins remain unchanged, so
-the earlier frozen content and compatibility proposals remain bound to their original baseline.
+Final factual/quality receipts, allocated analyst/verifier dossiers, guarded installation
+receipts and public API audits are archived under [integration](integration/archive-manifest.json).
+Integration test counts and exact gate inputs are recorded in
+[verification.json](integration/verification.json). Initial failed development assertions
+remain archived alongside their corrections; they are not reported as passing checks.
 
-[An additional inherited-code confidence run](ci-followup/confidence-review.json) passed
-120 V96 browser cases (60 desktop/60 mobile) without further changes. This tests the
-landed V96 correction; it is not V97 implementation or content approval.
+Four plausible Ușă guesses—intrare, toc, balama and lemn—are still missing vocabulary;
+they cost no attempt. The new Cacao→Lapte round still has four generic captions.
+Chec→Lapte is supported as serving together, not asserted as a universal ingredient.
+Both new Alchimie dishes are terminal; five concept slots remain under the existing
+bound. These are concrete V98 review priorities. No older pending queue is silently
+approved, and automated journeys do not establish human enjoyment.
 
-V96 main `fd3ca7c` has [successful GitHub CI](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35158602720).
-The [final CI receipt](v96-ci.json) is distinct from the [initial failed run](v96-ci-initial-failure.json).
-V97 remains a local proposal session; its content, captions and compatibility change are not installed.
+## Linux resumption and final verification
+
+The September 22 pickup found the earlier root integration unfinished: its browser run had
+485 passes and 67 failures. The reviewed content remains exact. [Resumption evidence](resumption/README.md)
+records the browser history-bound fix and one-time persistent-error reveal, including
+preserved failures and independent review. The final assembled candidate passes 2329
+backend/53 accounts on both Python versions, 214 native frontend and 552 browser checks.
+The old static-caption receipt remains historical; the complete current browser suite
+covers the rebuilt assets. V97 is verified locally and remains unlanded.

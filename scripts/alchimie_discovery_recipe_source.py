@@ -1762,3 +1762,48 @@ RECIPE_SOURCES.update(
  'sandvis-chiftele-legume': ['https://danielaniculi.ro/2020/03/19/sandvis-vegan-sau-cum-sa-salvezi-prea-multa-quinoa-pusa-la-fiert/',
                              'https://gourmandelle.com/ro/chiftle-prajite-cu-ciuperci/']}
 )
+
+# V97: two familiar cooked vegetable dishes with two preparation cues each.
+WORLD_CONCEPTS.update(
+{'Mâncare de spanac': {'description': 'Preparat din spanac gătit și mărunțit; aici varianta '
+                                      'cremoasă cu lapte, făină și usturoi.',
+                       'id': 'alw_food_mancare_spanac',
+                       'sources': ['https://www.laurasava.ro/spanac-cu-lapte/']},
+ 'Supă de roșii': {'description': 'Supă în care roșiile dau gustul și culoarea de bază, pregătită '
+                                  'cu apă sau supă și uneori cu orez.',
+                   'id': 'alw_food_supa_rosii',
+                   'sources': ['https://jamilacuisine.ro/supa-de-rosii-cu-orez-reteta-video/',
+                               'https://prajituricisialtele.ro/2020/08/10/supa-de-rosii-cu-orez/']}}
+)
+RECIPES.extend(
+[('supa-rosii-supa',
+  'Roșie',
+  'Supă',
+  'Supă de roșii',
+  'Roșiile se gătesc cu ceapă, usturoi și supă de bază; se adaugă puțin orez și se fierbe până '
+  'când acesta este gătit.'),
+ ('supa-rosii-orez',
+  'Roșie',
+  'Orez',
+  'Supă de roșii',
+  'Roșiile se fierb cu apă și legume călite, apoi se pasează; orezul fiert separat se adaugă la '
+  'final, împreună cu busuioc.'),
+ ('mancare-spanac-usturoi',
+  'Spanac',
+  'Usturoi',
+  'Mâncare de spanac',
+  'Spanacul opărit și scurs se toacă, apoi se gătește într-un sos de lapte și făină cu usturoi, '
+  'până devine cremos.'),
+ ('mancare-spanac-lapte',
+  'Spanac',
+  'Lapte',
+  'Mâncare de spanac',
+  'Laptele se adaugă treptat peste făina amestecată cu ulei și usturoi; în sos se încălzește '
+  'spanacul deja fiert, scurs și tocat.')]
+)
+RECIPE_SOURCES.update(
+{'mancare-spanac-lapte': ['https://www.laurasava.ro/spanac-cu-lapte/'],
+ 'mancare-spanac-usturoi': ['https://www.laurasava.ro/spanac-cu-lapte/'],
+ 'supa-rosii-orez': ['https://prajituricisialtele.ro/2020/08/10/supa-de-rosii-cu-orez/'],
+ 'supa-rosii-supa': ['https://jamilacuisine.ro/supa-de-rosii-cu-orez-reteta-video/']}
+)
