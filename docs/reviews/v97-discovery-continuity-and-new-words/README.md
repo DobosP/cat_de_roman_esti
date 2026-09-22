@@ -78,3 +78,11 @@ preserved failures and independent review. The final assembled candidate passes 
 backend/53 accounts on both Python versions, 214 native frontend and 552 browser checks.
 The old static-caption receipt remains historical; the complete current browser suite
 covers the rebuilt assets. V97 is verified locally and remains unlanded.
+
+## Local landing (2026-09-23)
+
+V97 application and evidence commit `f783a97e6eabaf59cd6360853723956b58a5aac6`
+is merged into local main. The owner confirmed starting V98 afterward. The earlier
+candidate publication flags describe their capture time; [landing.json](landing.json)
+records the actual local merge and unchanged verified inputs. No push or deployment
+is included. Only this merged task's worktree, branch and scratch are cleaned.

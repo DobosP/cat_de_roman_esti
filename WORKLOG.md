@@ -1174,3 +1174,20 @@ frontend and 552 real-browser cases (two workers, zero retries). All validators,
 docs and whitespace checks pass at 119.23/120 KiB. The exact integration receipt binds 522
 inputs and retains the earlier failures. This pickup does not merge, push, deploy or restart
 the loop; V97 remains a verified task-branch candidate.
+
+## V97 local landing and V98 authorization (2026-09-23)
+
+Valid until: a later version changes the baseline — then treat as history.
+
+The owner confirmed landing V97 into local main and starting V98. Main fast-forwarded
+from fd3ca7c to verified implementation/evidence f783a97. All522 tested inputs and16
+archived green gate receipts were rechecked exactly before the merge. The complete
+2329 backend/53 account tests per Python,214 native and552 browser checks remain valid;
+no source, data or test changed. These landing notes are documentation only.
+
+V98 starts separately from this landing around the documented missing door-neighborhood
+vocabulary, clearer Cacao→Lapte associations and onward uses for the terminal Alchimie
+dishes. It must preserve old saves, game bounds and independent content review. The
+specific Windows skill is still unidentified; current repository workflow applies.
+No remote push, deployment or recurring loop is authorized by this local transition.
+Cleanup is limited to this verified-merged V97 worktree, branch and matching scratch.

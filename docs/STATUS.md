@@ -1,12 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-22 — V97 candidate verified locally on Linux; not yet landed.
+Last verified: 2026-09-23 — V97 landed locally; V98 startup authorized.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- Local and remote main are V96 `fd3ca7c`; CI 35158602720 passed after the test-only
-  interception correction. V97 remains in `feat/v97-discovery-continuity-and-new-words`.
+- Local main now contains verified V97 `f783a97`, following V96 `fd3ca7c`.
+  Remote main remains at the last observed V96 revision; no push is part of this landing.
+  The owner confirmed local V97 landing followed by V98 startup on September 23.
 - The September 22 owner request resumes testing and version work from current docs and
   the Windows handoff. The existing V97 candidate is preserved. No arcade-specific new
   skill page was found locally; the exact skill name/path remains a clarification.
@@ -89,9 +90,9 @@ empty pairs/session; quick supplements≤256 boards/2 MiB. Recipes/routes/answer
 ## Production and next work
 
 - Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`.
-  Today's work does not deploy, push, merge or restart the recurring loop; shared main is clean.
-- V97 is verified on its local task branch. Clarify the next-version scope and specific
-  Windows skill reference before further version work. Ușă still
+  V97 is landed locally. V98 startup is authorized; no push, deployment or loop restart.
+- Start V98 from the landed V97 baseline using current repository guidance. The specific
+  Windows skill remains unidentified and is not claimed applied. Ușă still
   lacks intrare/toc/balama/lemn; the new Cacao→Lapte round still has four generic captions.
   Both new dishes need useful onward uses; only five concept slots remain under the bound.
 - Earlier Caraiman/museum/Dem/Ateneul descriptions, Neagu labels and pending A5 holds stay
