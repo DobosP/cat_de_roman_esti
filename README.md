@@ -142,6 +142,8 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 ## Docs
 
 - [`docs/STATUS.md`](docs/STATUS.md) — current truth: state, pins, verification record, next actions.
+- [`romanian-game-content`](.agents/skills/romanian-game-content/SKILL.md) — repository skill for
+  refinement and experimental concept discovery; workflow: [ADR-0155](docs/adr/0155-two-track-content-growth.md).
 - [`docs/BETA_CANDIDATE.md`](docs/BETA_CANDIDATE.md) — anonymous-beta evidence, bounded quality waves, outstanding gates and Romanian-player playtest protocol.
 - [`AGENTS.md`](AGENTS.md) — operating contract for agent sessions (Claude Code and Codex).
 - [`docs/agent-map.md`](docs/agent-map.md) — entry points, task routes, do-not-load list.

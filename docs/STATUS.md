@@ -1,10 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-17 — V96 integrated on main; local gates green; CI test-harness correction verified.
+Last verified: 2026-09-22 — content skill and docs checked; V96 runtime evidence below is from 2026-09-17.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
+- Repo-local [content skill](../.agents/skills/romanian-game-content/SKILL.md) adds refinement plus
+  experimental discovery feeding a durable research pool ([ADR-0155](adr/0155-two-track-content-growth.md)).
+  This is workflow documentation only; no content wave, fixture or runtime change.
 - V95 landed on main `1457786`; [GitHub CI 35026423470 passed](https://github.com/DobosP/cat_de_roman_esti/actions/runs/35026423470).
 - V96 implementation `57d5bcc` is integrated on main after completing its earlier
   draft-only kickoff. The owner authorized its publication and V97 startup.
@@ -65,6 +68,11 @@ empty pairs per session; quick supplements ≤256 boards/2 MiB. Recipes/routes/a
 
 ## Verification
 
+- 2026-09-22: `quick_validate.py .agents/skills/romanian-game-content` passes; UI metadata,
+  changed-document links and line budgets pass. `check_docs.py .`: 33 files, zero findings;
+  `git diff --cached --check` passes. Independent dry runs cover joint expansion, research-only
+  Alchimie and stale-source adoption; three pass. Runtime checks were not rerun for docs-only changes.
+- The following runtime results are the retained V96 evidence from 2026-09-17.
 - Python 3.12 and 3.14 each pass **2236 backend/53 account tests**; browser **540 pass**,
   native frontend **212 pass**. Both validators, Ruff, frontend lint/typecheck/build, docs
   and whitespace pass. Initial gzip **119.23/120 KiB**.
@@ -99,4 +107,4 @@ empty pairs per session; quick supplements ≤256 boards/2 MiB. Recipes/routes/a
 ## Doc map
 
 - README/AGENTS: orientation; agent-map/agent-testing: routes/gates.
-- ADRs (newest 0154), reviews and WORKLOG: decisions, evidence and history.
+- ADRs (newest 0155), reviews and WORKLOG: decisions, evidence and history.
