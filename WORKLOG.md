@@ -1191,3 +1191,19 @@ dishes. It must preserve old saves, game bounds and independent content review. 
 specific Windows skill is still unidentified; current repository workflow applies.
 No remote push, deployment or recurring loop is authorized by this local transition.
 Cleanup is limited to this verified-merged V97 worktree, branch and matching scratch.
+
+## V98 kickoff (2026-09-23)
+
+Valid until: content or runtime proposals change the bound baseline — then repeat checks.
+
+V98 starts on feat/v98-meaningful-connections from landed V97 commit240c459. The kickoff
+captures34 fresh public BFF requests across all six scored games, the Ușă target and
+exploration progress restoration, cleaning all nine sessions. Five unsupported door
+surfaces remain free and unchanged.59 focused compatibility/caption/input checks pass.
+
+Four exact edge-bound caption drafts and three zero-new-concept recipe research ideas
+are preserved as unreviewed. Next: independently validate vocabulary senses and sources,
+prepared-dish transformations and full-board candidates; advance the generator's historical
+baseline only with the exact reviewed V97 archive. All96 supplies are occupied and only
+five world concept slots remain. No concepts, aliases, links, recipes or rounds are
+installed by this kickoff. V97 cleanup is complete; no push, deployment or loop restart.

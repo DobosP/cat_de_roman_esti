@@ -1,13 +1,15 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-23 — V97 landed locally; V98 startup authorized.
+Last verified: 2026-09-23 — V97 landed locally; V98 kickoff and baseline checks complete.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
 - Local main now contains verified V97 `f783a97`, following V96 `fd3ca7c`.
   Remote main remains at the last observed V96 revision; no push is part of this landing.
-  The owner confirmed local V97 landing followed by V98 startup on September 23.
+  V98 is active on `feat/v98-meaningful-connections`, from landing commit `240c459`.
+  Its four caption drafts and three recipe ideas remain unreviewed; no V98 data changes.
+  Kickoff: 34 fresh BFF requests and 59 focused checks pass, with all baseline pins exact.
 - The September 22 owner request resumes testing and version work from current docs and
   the Windows handoff. The existing V97 candidate is preserved. No arcade-specific new
   skill page was found locally; the exact skill name/path remains a clarification.
@@ -31,7 +33,7 @@ Last verified: 2026-09-23 — V97 landed locally; V98 startup authorized.
 - Twelve reviewed food captions clarify routes in three earlier Lanț rounds. All 101
   earlier captions remain exact; fourteen existing directions get text and ten nonexistent
   reverse directions remain unavailable. Optional recipe ingredients stay qualified.
-- Decisions/evidence: ADR0155 and `docs/reviews/v97-discovery-continuity-and-new-words/`.
+- Decisions/evidence: ADR-0155, V97 review and [V98 kickoff](reviews/v98-meaningful-connections/README.md).
 
 ## Inventory and invariants
 
@@ -91,8 +93,8 @@ empty pairs/session; quick supplements≤256 boards/2 MiB. Recipes/routes/answer
 
 - Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`.
   V97 is landed locally. V98 startup is authorized; no push, deployment or loop restart.
-- Start V98 from the landed V97 baseline using current repository guidance. The specific
-  Windows skill remains unidentified and is not claimed applied. Ușă still
+- Continue the V98 kickoff under ADR-0113 and current review rules. The specific Windows
+  skill remains unidentified and is not claimed applied. Ușă still
   lacks intrare/toc/balama/lemn; the new Cacao→Lapte round still has four generic captions.
   Both new dishes need useful onward uses; only five concept slots remain under the bound.
 - Earlier Caraiman/museum/Dem/Ateneul descriptions, Neagu labels and pending A5 holds stay

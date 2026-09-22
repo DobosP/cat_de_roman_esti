@@ -1,0 +1,209 @@
+{
+  "kind": "v98-unreviewed-caption-and-continuation-scout",
+  "baseline_commit": "240c4591f31c1b8bec59fb5680d4e66f5f0788fe",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "cbbc98d1fe076d002e06d71e8b8881a4b950e4510879e309fa12f106070983da"
+  },
+  "captions": [
+    {
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v3gas_inghetata",
+        "facets": {},
+        "id": "de8627",
+        "is_distractor": false,
+        "label_ro": "aromatizează unele sortimente de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v85_food_cacao",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "634c2004dbe7abbcecd214f310d8c057873726f1de435b5c1836f7abbff0b287",
+      "pair": [
+        "n_v3gas_inghetata",
+        "n_v85_food_cacao"
+      ],
+      "labels": [
+        "Cacao",
+        "Înghețată"
+      ],
+      "current_caption": "legătură directă",
+      "draft_caption": "înghețată cu aromă de cacao",
+      "draft_characters": 27,
+      "reverse_allowed": false,
+      "reverse_caption": "",
+      "review_status": "unreviewed"
+    },
+    {
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v87_food_chec",
+        "facets": {},
+        "id": "de8710",
+        "is_distractor": false,
+        "label_ro": "aromatizează unele variante de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v85_food_cacao",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "525d8b206c853cdb4acdaf85474d587024293e5f0554cae3bb646b90236366b9",
+      "pair": [
+        "n_v85_food_cacao",
+        "n_v87_food_chec"
+      ],
+      "labels": [
+        "Cacao",
+        "Chec"
+      ],
+      "current_caption": "legătură directă",
+      "draft_caption": "chec în variantă cu cacao",
+      "draft_characters": 25,
+      "reverse_allowed": false,
+      "reverse_caption": "",
+      "review_status": "unreviewed"
+    },
+    {
+      "edge_snapshot": {
+        "bidirectional": true,
+        "dst_id": "n_v4gas_lapte",
+        "facets": {},
+        "id": "de5087",
+        "is_distractor": false,
+        "label_ro": "făcută din lapte",
+        "redistributable": false,
+        "relation": "associated_with",
+        "source": "",
+        "src_id": "n_v3gas_inghetata",
+        "strength": 0.55,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "3fc4b91979241a9a91db8d92681f466c2eb096ee65e8be10721029e634584492",
+      "pair": [
+        "n_v3gas_inghetata",
+        "n_v4gas_lapte"
+      ],
+      "labels": [
+        "Înghețată",
+        "Lapte"
+      ],
+      "current_caption": "legătură directă",
+      "draft_caption": "înghețată în variantă cu lapte",
+      "draft_characters": 30,
+      "reverse_allowed": true,
+      "reverse_caption": "legătură directă",
+      "review_status": "unreviewed"
+    },
+    {
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v4gas_lapte",
+        "facets": {},
+        "id": "de8745",
+        "is_distractor": false,
+        "label_ro": "se poate servi cu",
+        "redistributable": false,
+        "relation": "served_together",
+        "source": "",
+        "src_id": "n_v87_food_chec",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "1f15d8efa05c4228798f5e49b814b53fc363042492d6df0b3324c4977dc2e7f9",
+      "pair": [
+        "n_v4gas_lapte",
+        "n_v87_food_chec"
+      ],
+      "labels": [
+        "Chec",
+        "Lapte"
+      ],
+      "current_caption": "legătură directă",
+      "draft_caption": "chec servit alături de lapte",
+      "draft_characters": 28,
+      "reverse_allowed": false,
+      "reverse_caption": "",
+      "review_status": "unreviewed"
+    }
+  ],
+  "onward_recipe_research_candidates": [
+    {
+      "scout_id": "soup-tomato-cream",
+      "pair": [
+        "alw_food_supa_rosii",
+        "n_v20gas_smantana"
+      ],
+      "pair_labels": [
+        "Supă de roșii",
+        "Smântână"
+      ],
+      "result": "alw_food_supa_crema",
+      "result_label": "Supă cremă",
+      "pair_already_installed": false,
+      "concepts_to_add": 0,
+      "review_status": "unreviewed",
+      "evidence_needed": "A source showing prepared tomato soup becomes a smooth cream soup with fermented cream; a topping alone is insufficient.",
+      "pitfall": "Existing soup may contain rice; blending and texture must be substantiated. Fermented cream differs from sweet whipping cream."
+    },
+    {
+      "scout_id": "soup-spinach-broth",
+      "pair": [
+        "alw_food_mancare_spanac",
+        "n_v4gas_supa"
+      ],
+      "pair_labels": [
+        "Mâncare de spanac",
+        "Supă"
+      ],
+      "result": "alw_food_supa_crema",
+      "result_label": "Supă cremă",
+      "pair_already_installed": false,
+      "concepts_to_add": 0,
+      "review_status": "unreviewed",
+      "evidence_needed": "A source reusing the already cooked creamy spinach preparation with soup and any required homogenization.",
+      "pitfall": "Milk, flour and garlic in the existing preparation cannot disappear. Raw spinach recipes do not substantiate this reuse."
+    },
+    {
+      "scout_id": "tart-creamed-spinach",
+      "pair": [
+        "alw_food_foietaj",
+        "alw_food_mancare_spanac"
+      ],
+      "pair_labels": [
+        "Foietaj",
+        "Mâncare de spanac"
+      ],
+      "result": "alw_food_tarta",
+      "result_label": "Tartă",
+      "pair_already_installed": false,
+      "concepts_to_add": 0,
+      "review_status": "unreviewed",
+      "evidence_needed": "A source for the exact creamy cooked spinach preparation in an open puff-pastry tart, including binding and baking.",
+      "pitfall": "Raw spinach-and-cheese pie is insufficient; wet cooked filling may require steps that weaken the proposed pair."
+    }
+  ],
+  "world": {
+    "concepts": 251,
+    "recipes": 351,
+    "historical_books": 9,
+    "supplies_used": 96,
+    "supplies_max": 96,
+    "outgoing_recipe_uses": {
+      "alw_food_supa_rosii": 0,
+      "alw_food_mancare_spanac": 0
+    }
+  },
+  "limits": [
+    "No web source check or independent factual/quality approval has occurred for these drafts.",
+    "The existing kitchen mixer is a mixing/beating tool, not a blender. A new tool requires reachability/supply design; all96 supply slots are already used.",
+    "The five remaining world concept slots are separate from the shared KG vocabulary budget.",
+    "Masă in this KG means a meal; do not treat it as furniture."
+  ]
+}
