@@ -93,7 +93,7 @@ _atomic_session = atomic_session(lambda: store, "Joc inexistent")
 
 
 def _concept(node_id: str) -> dict[str, str]:
-    return {"id": node_id, "label": get_service().label(node_id)}
+    return {"id": node_id, "label": get_service().display_label(node_id)}
 
 
 def _clue(session: IntrusulSession) -> dict[str, str]:
@@ -108,7 +108,7 @@ def _share(session: IntrusulSession) -> str:
     if session.category:
         header += f" · {category_label(session.category)}"
     result = "🟩" if session.won else "🟥"
-    detail = f"{session.attempts} încercări"
+    detail = f"{session.attempts} {'încercare' if session.attempts == 1 else 'încercări'}"
     if session.hint_used:
         detail += " · indiciu"
     lines = [header, f"{result} {detail}"]

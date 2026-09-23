@@ -92,7 +92,7 @@ def _pair_payload(pair: Pair) -> dict:
     svc = get_service()
     return {
         "tiles": [
-            {"id": node_id, "label": svc.label(node_id)} for node_id in pair.members
+            {"id": node_id, "label": svc.display_label(node_id)} for node_id in pair.members
         ],
         "label": pair.label,
     }
@@ -105,7 +105,8 @@ def _score(session: PerechiSession) -> int:
 
 
 def _share(session: PerechiSession) -> str:
-    header = f"cat_de_roman_esti · Perechi · {session.mistakes} greseli"
+    mistakes = "greșeală" if session.mistakes == 1 else "greșeli"
+    header = f"cat_de_roman_esti · Perechi · {session.mistakes} {mistakes}"
     if session.hints_used:
         header += " · indiciu"
     if session.daily:
@@ -133,7 +134,7 @@ def _state(game_id: str, session: PerechiSession) -> dict:
         "tiles": [
             {
                 "id": node_id,
-                "label": svc.label(node_id),
+                "label": svc.display_label(node_id),
                 "solved": any(
                     index in solved and node_id in pair.members
                     for index, pair in enumerate(session.pairs)
@@ -273,9 +274,9 @@ class CreateGameView(ContractAPIView):
         starter_value = query_int(request, "starter")
         previous_game_id = query_str(request, "previous_game_id")
         if category is not None and not is_known(category):
-            raise http_error(400, "Categorie necunoscuta.")
+            raise http_error(400, "Categorie necunoscută.")
         if starter_value not in (None, 0, 1):
-            raise http_error(400, "starter trebuie sa fie 0 sau 1.")
+            raise http_error(400, "starter trebuie să fie 0 sau 1.")
         starter = starter_value == 1
 
         if daily:
@@ -295,7 +296,7 @@ class CreateGameView(ContractAPIView):
                 previous_game_id=previous_game_id,
             )
         if board is None:
-            raise http_error(503, "Nu exista jocuri Perechi pentru filtrul ales.")
+            raise http_error(503, "Nu există jocuri Perechi pentru filtrul ales.")
         session = _session_from_board(
             board,
             rng,
@@ -328,10 +329,10 @@ class MatchView(ContractAPIView):
         body = parse_body(request, MatchBody)
         ids = body.ids or []
         if len(ids) != 2 or len(set(ids)) != 2:
-            raise http_error(400, "Alege exact doua concepte distincte")
+            raise http_error(400, "Alege exact două concepte distincte")
         board_ids = set(session.order)
         if any(node_id not in board_ids for node_id in ids):
-            raise http_error(400, "Concept care nu e pe tabla")
+            raise http_error(400, "Concept care nu e pe tablă")
         solved_ids = {
             node_id for index in session.solved for node_id in session.pairs[index].members
         }
@@ -398,7 +399,7 @@ class HintView(ContractAPIView):
         if session.hints_used >= MAX_HINTS:
             raise http_error(400, "Indiciul a fost deja folosit")
         if session.mistakes < MIN_HINT_MISTAKES:
-            raise http_error(400, "Indiciul se deschide dupa doua greseli.")
+            raise http_error(400, "Indiciul se deschide după două greșeli.")
         unresolved = [index for index in range(PAIR_COUNT) if index not in session.solved]
         session.hinted_pair = unresolved[0]
         session.hints_used += 1

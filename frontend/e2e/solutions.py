@@ -63,6 +63,8 @@ def solution(game: str, pack_id: str | None = None, daily: str | None = None) ->
     if pack_id is not None and session.pack_id != pack_id:
         raise ValueError(f"public seed selected {session.pack_id}, expected {pack_id}")
     svc = get_service()
+    # Tiles carry the served display label; Alchimie inventory labels stay raw.
+    label = svc.label if game == "alchimie" else svc.display_label
     steps = []
     hint_setup = None
 
@@ -70,7 +72,7 @@ def solution(game: str, pack_id: str | None = None, daily: str | None = None) ->
         payload = {"id": ids[0]} if game == "intrusul" else {"ids": ids}
         if game == "alchimie":
             payload = dict(zip(("a", "b"), ids, strict=True))
-        steps.append({"action": action, "labels": [svc.label(i) for i in ids],
+        steps.append({"action": action, "labels": [label(i) for i in ids],
                       "payload": payload})
 
     if game == "intrusul":
@@ -109,16 +111,16 @@ def solution(game: str, pack_id: str | None = None, daily: str | None = None) ->
         raise ValueError(f"unknown game: {game}")
     practice = steps[0]
     if game == "intrusul":
-        practice = {"action": "guess", "labels": [svc.label(session.members[0])],
+        practice = {"action": "guess", "labels": [label(session.members[0])],
                     "payload": {"id": session.members[0]}}
     elif game == "perechi":
         ids = [session.pairs[0].members[0], session.pairs[1].members[0]]
-        practice = {"action": "match", "labels": [svc.label(i) for i in ids],
+        practice = {"action": "match", "labels": [label(i) for i in ids],
                     "payload": {"ids": ids}}
     elif game == "conexiuni":
         groups = list(session.groups.values())
         ids = [*groups[0][:3], groups[1][0]]
-        practice = {"action": "guess", "labels": [svc.label(i) for i in ids],
+        practice = {"action": "guess", "labels": [label(i) for i in ids],
                     "payload": {"ids": ids}}
     elif game == "contexto":
         node = next(n for n in svc.predecessor_ids(session.target)

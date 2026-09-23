@@ -637,7 +637,7 @@ def _build_session(
             if svc.degree(nid) >= SEED_MIN_DEGREE and _in_scope(nid)
         ]
     if category is not None and len(pool) < seed_min:
-        raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
+        raise http_error(503, "Nu există încă jocuri pentru această categorie.")
 
     def _finish(seeds: list[str], target: str) -> AlchimieSession | None:
         projection = _build_playable_recipe_projection(seeds, target, category)
@@ -709,7 +709,7 @@ def _build_session(
     ]
     if not deep:
         if category is not None:
-            raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
+            raise http_error(503, "Nu există încă jocuri pentru această categorie.")
         raise http_error(500, "Nu am putut genera un joc solvabil.")
     rng.shuffle(deep)
     for target in deep:
@@ -718,7 +718,7 @@ def _build_session(
             return session
     raise http_error(
         503,
-        f"Nu exista inca o tinta rezolvabila in cel mult {ALCHIMIE_MAX_ACTIONS} mutari.",
+        f"Nu există încă o țintă rezolvabilă în cel mult {ALCHIMIE_MAX_ACTIONS} mutări.",
     )
 
 
@@ -866,7 +866,8 @@ def _share_line(session: AlchimieSession) -> str:
         header += f" · {category_label(session.category)}"
     lines = [
         header,
-        f"⚗️ {session.moves} combinatii · {session.score} pct {medal}",
+        f"⚗️ {session.moves} {'combinație' if session.moves == 1 else 'combinații'} · "
+        f"{session.score} pct {medal}",
     ]
     if session.hints_used:
         lines.append(f"💡 x{session.hints_used}")
@@ -953,7 +954,7 @@ class CreateGameView(ContractAPIView):
         if difficulty not in DIFFICULTIES:
             difficulty = DEFAULT_DIFFICULTY
         if category is not None and not is_known(category):
-            raise http_error(400, "Categorie necunoscuta.")
+            raise http_error(400, "Categorie necunoscută.")
         if daily:
             rng = random.Random(daily_seed(daily, GAME_KEY))
             curated = get_pack().pick_daily(
@@ -1031,13 +1032,13 @@ class CombineView(ContractAPIView):
             payload["already_tried"] = (
                 bool(a and b and a != b) and _pair_key(a, b) in session.attempted_pairs
             )
-            payload["message"] = "Jocul s-a terminat — ai craftat deja tinta."
+            payload["message"] = "Jocul s-a terminat — ai obținut deja ținta."
             return Response(payload)
 
         if a not in session.owned or b not in session.owned:
-            raise http_error(400, "Ambele concepte trebuie sa fie in inventar.")
+            raise http_error(400, "Ambele concepte trebuie să fie în inventar.")
         if a == b:
-            raise http_error(400, "Alege doua concepte diferite.")
+            raise http_error(400, "Alege două concepte diferite.")
 
         pair = _pair_key(a, b)
         if pair in session.attempted_pairs:
@@ -1089,7 +1090,7 @@ class CombineView(ContractAPIView):
             if whisper:
                 message += f" {whisper}"
         elif session.target in discovered:
-            message = f"Ai descoperit tinta: {svc.label(session.target)}!"
+            message = f"Ai descoperit ținta: {svc.label(session.target)}!"
         elif len(discovered) == 1:
             message = f"Ai descoperit: {svc.label(discovered[0])}."
         else:  # The explicit projection permits at most two tied/paired results.
@@ -1120,7 +1121,7 @@ class HintGameView(ContractAPIView):
             raise http_error(400, "Jocul s-a terminat deja.")
         if session.fruitless_streak < NUDGE_AFTER_FRUITLESS:
             need = NUDGE_AFTER_FRUITLESS - session.fruitless_streak
-            raise http_error(400, f"Mai incearca {need} combinatii inainte de un indiciu.")
+            raise http_error(400, f"Mai încearcă {need} combinații înainte de un indiciu.")
         pair = _useful_pair(session)
         session.fruitless_streak = 0
         if pair is None:

@@ -537,7 +537,7 @@ def test_win_includes_score_and_share() -> None:
     assert body["score"] == 940
     share = body["share"]
     assert "Cald sau Rece" in share
-    assert "2 incercari" in share
+    assert "2 încercări" in share
     # one emoji square per guess + the bullseye for the win
     assert "🎯" in share
     lines = share.splitlines()

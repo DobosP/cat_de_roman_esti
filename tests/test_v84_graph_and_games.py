@@ -239,7 +239,10 @@ def test_source_only_forms_cannot_reverse_an_edge_but_the_authored_direction_wor
         for form in FORMS[slug][1]:
             result = _post(client, url + "/move", text=form)
             assert result["ok"] is False
-            assert result["last_error"] == "Nu exista o legatura directa"
+            assert result["last_error"] == (
+                f"{svc.label(owner)} nu are o legătură directă cu {svc.label(destination)}. "
+                "Alege un cuvânt din listă sau cere un indiciu."
+            )
         assert client.get(url).json()["moves"] == 0
     finally:
         L.store.delete(gid)
