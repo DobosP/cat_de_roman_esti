@@ -81,14 +81,15 @@ test("a denied-storage chunk failure offers home and explicit reload without los
 
 test("a slowly failing chunk reloads once then exposes recovery on the next document", async ({ page }) => {
   await page.route(chunk, async (route) => {
-    // Exceed the previous 10-second marker expiry on BOTH documents.
-    await new Promise((resolve) => setTimeout(resolve, 11_000));
+    // A short real delay keeps each failure slow on BOTH documents; the unit test
+    // expires every mocked timer to cover a marker-expiry regression.
+    await new Promise((resolve) => setTimeout(resolve, 300));
     await route.abort("failed");
   });
   const navigations = documentRequests(page);
   await page.goto("/");
   await page.getByRole("button", { name: /^Joacă Intrusul —/ }).click();
-  await expect(page.getByRole("heading", { name: failureTitle, exact: true })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole("heading", { name: failureTitle, exact: true })).toBeVisible();
   expect(navigations).toHaveLength(2);
   expect(await page.evaluate((key) => sessionStorage.getItem(key), recoveryKey)).toBe("/intrusul");
   const suppressed = await page.evaluate(() => Array.from({ length: 3 }, () => {
@@ -101,16 +102,17 @@ test("a slowly failing chunk reloads once then exposes recovery on the next docu
 });
 
 
-test("an AccountBar chunk failure also reaches a readable bounded recovery screen", async ({ page }) => {
+test("an AccountBar chunk failure leaves Home usable", async ({ page }) => {
   await denySessionStorage(page, true);
   await page.route("**/assets/AccountBar-*.js", (route) => route.abort("failed"));
   const navigations = documentRequests(page);
+  // Assert only after the rejected import has reached an error boundary.
+  const caught = page.waitForEvent("console", (message) =>
+    message.type() === "error" && message.text().includes("AccountBar-"));
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: failureTitle, exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Reîncarcă pagina", exact: true })).toBeEnabled();
-  expect(navigations).toHaveLength(1);
-  await page.unroute("**/assets/AccountBar-*.js");
-  await page.getByRole("button", { name: "Reîncarcă pagina", exact: true }).click();
+  await caught;
   await expect(page.locator(".games-grid .game-card")).toHaveCount(6);
-  expect(navigations).toHaveLength(2);
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: /^Nu am putut încărca/ })).toHaveCount(0);
+  expect(navigations).toHaveLength(1);
 });
