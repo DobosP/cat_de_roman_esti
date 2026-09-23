@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-23 — V1 hardened as local 1.0.1; physical-device and human testing next.
+Last verified: 2026-09-23 — V1.0.1 published to origin main; physical-device and human testing next.
 
 ## Current state
 
@@ -93,7 +93,10 @@ Unrevealed answers, recipe maps and routes stay private.
 
 - Last recorded production: anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`
   (no live production recheck in this task).
-  No push, deployment, accounts activation or recurring loop restart is part of V1/1.0.1.
+- Origin `main` was published on 2026-09-23 at the owner's request: a fast-forward from
+  `b25c949` through V99, V1 and V1.0.1 (merge `8e66ec0`) plus this record. The GitHub CI
+  result is separate from the local gates above. No deployment, accounts activation or
+  recurring loop restart is part of V1/1.0.1.
 - Next: a same-Wi-Fi phone/desktop session with the tester guide, including an iPhone
   (Safari/WebKit is untested), an Android phone and enlarged text. Accounts stay off.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing

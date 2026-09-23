@@ -1277,3 +1277,6 @@ validators, Ruff, docs and whitespace, one all-green 622/622 Playwright run (Edg
 Pixel 7 emulation, no retries) and an isolated 1.0.1 wheel smoke on Python 3.12.13. The
 tester guide gains a same-Wi-Fi phone setup. No fixture changed; nothing was pushed or
 deployed.
+
+Published to origin `main` on 2026-09-23 at the owner's request (fast-forward from
+`b25c949`, including V99, V1 and V1.0.1). Not deployed; the GitHub CI result is separate.
