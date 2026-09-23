@@ -1207,3 +1207,18 @@ prepared-dish transformations and full-board candidates; advance the generator's
 baseline only with the exact reviewed V97 archive. All96 supplies are occupied and only
 five world concept slots remain. No concepts, aliases, links, recipes or rounds are
 installed by this kickoff. V97 cleanup is complete; no push, deployment or loop restart.
+
+## V97 and V98 kickoff published (2026-09-23)
+
+Valid until: a later origin/main update changes these refs — then treat as history.
+
+The owner explicitly requested landing the work on origin main. Remote main was refreshed
+at fd3ca7c with no divergence. Independent preflight rechecked all16 V97 green gate logs,
+522 current application inputs and the V98 kickoff's59 tests/34 requests/17 pins/five archives.
+Only11 documentation/evidence files differed from already landed V97. Main fast-forwarded
+to7c00ae7 and pushed normally; git ls-remote confirmed the exact full kickoff commit.
+
+This publishes V97's completed implementation and V98's startup documentation/drafts.
+It does not install V98 content, deploy production or restart the loop. The merged kickoff
+task branch/worktree/scratch is cleaned; future implementation starts from published main.
+GitHub CI is triggered by the push; its remote result is separate from bound local gates.

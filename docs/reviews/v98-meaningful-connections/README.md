@@ -75,3 +75,13 @@ The kickoff passes 59 focused compatibility, caption and unknown-input tests. Ex
 and log hashes are in [kickoff-verification.json](kickoff-verification.json). The raw
 capture scripts and logs are preserved for reproduction. Production remains anonymous
 V91. Local landing means merge to main; no push, deployment or recurring loop is started.
+
+## Publication (2026-09-23)
+
+The owner subsequently requested landing this work on origin/main. Verified V97 and the
+V98 kickoff were pushed together; remote main was read back at exact commit
+`7c00ae78ad14d263b475b3740fbb53a8e87f688a`. [publication.json](publication.json)
+records the boundary and unchanged verification. The kickoff branch/worktree is retired
+after its verified merge; further V98 implementation uses a fresh task worktree. These
+remain unreviewed drafts, not a completed V98 release. Production and the paused loop
+are unchanged. Earlier no-push statements describe the kickoff's original local scope.
