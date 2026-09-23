@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-22",
+  "reviewer": "v97_resume_fix_review",
+  "verdict": "accept",
+  "findings": [],
+  "scope": "Read-only independent source review and raw receipt verification; no test/build/browser actions by reviewer.",
+  "source_sha256": {
+    "frontend/src/explorationSave.ts": "206a31cad9ff7d046c87c788bb83ecfbeefee97c602cd72a0b4d074334ecbbe1",
+    "frontend/tests/exploration-save.test.mjs": "0493926335b2b1da04d360d215425d1a592d4e3c63f448cdaf25b7ff1f5a750a",
+    "frontend/src/components/StartFailureNotice.tsx": "4513533c61a95b3fbeaab67baeb5f43d94752d93e4474c92a42d996ee5f6b5f4",
+    "frontend/e2e/start-failure.spec.mjs": "897b14fbbf75b5a81fc454395902a12436aed9bfe29980dea1ede7ff78c7fdf5"
+  },
+  "receipt_checks": {
+    "final_source_static_bindings": 34,
+    "evidence_hashes": 87,
+    "mismatches": 0,
+    "browser_passed": 26,
+    "browser_failures": 0
+  },
+  "contracts": [
+    "Browser compatibility limit 16 matches the reviewed backend. Lowercase unique hashes, 64 KiB save size, 256 discoveries, ownership checks and private-data exclusions remain intact.",
+    "The layout effect reveals the paragraph once when failure appears inside its scroll container; it does not move focus or replay mutations.",
+    "The focus test waits for the actual pending disabled render and native blur, then checks that revealing the error causes no additional focus movement."
+  ],
+  "geometry_note": "Equal coordinates across all three clock modes refer to the settled phase. In clock-settled mode, the earlier after-four-seconds phase still has a 56 px toast and the corrected notice is visible at y64.41–134.41. The real-clock settled comparison moves the notice from y−70.59–−0.59 to y8.41–78.41."
+}

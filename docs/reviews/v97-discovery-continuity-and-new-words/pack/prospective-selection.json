@@ -1,0 +1,185 @@
+{
+  "status": "UNAPPROVED V97 DRAFTS",
+  "scope": "Conditional author simulation of all 713 current records plus these three drafts under hypothetical approval. Only in-memory pack provider and score-input data are injected; actual weighted public selectors and corridor policy run unchanged. No session target, picker return value, fixture, score or runtime is forced. Real installed natural selection still requires independent approval, import, ranking and a final public replay.",
+  "source_bindings_unchanged": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "f2538a91726da87a519f8efac5d3a9993a8a23445879af817f08bdabd478e307",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "bee608938a113922842ec987bf44269ae086f45aaeb9c54f68e39c8f160bd9d3",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "9c46598b19acd30e82cf7bf542c82b8fcfe5039f607bc689ef27a98e78e3d76c",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "cat_de_roman_esti/wordgames/contexto.py": "cae2e1115491ba5cf6438de5dac7a2689087e1c13fa80efcc86e35acef9d1101",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d"
+  },
+  "candidate_files": {
+    "candidates/gastronomie/candidates.json": "07f60d0b48ca43f7e8cd3067a69578a95dacbf7e18109932a7c31ae65848e6e0",
+    "candidates/viata_de_roman/candidates.json": "06a9574b27b541be9f91692728359e90d08c786541ef0b94a62e5815b0e750cc"
+  },
+  "results": [
+    {
+      "preview_id": "preview_v97_viata_de_roman_conexiuni_1",
+      "natural_seed_inside_prospective_inventory": 5,
+      "public_create_url": "/api/wordgames/conexiuni/games?category=viata_de_roman&difficulty=normal&seed=5",
+      "rating": {
+        "id": "preview_v97_viata_de_roman_conexiuni_1",
+        "game": "conexiuni",
+        "status": "approved",
+        "romanian_familiarity": 88,
+        "play_quality": 100,
+        "pilot_score": 93,
+        "rank": 4,
+        "pilot_eligible": true,
+        "selection_weight": 5
+      },
+      "independent_review": false,
+      "currently_served": false,
+      "groups_solved": 4,
+      "won": true
+    },
+    {
+      "preview_id": "preview_v97_viata_de_roman_contexto_1",
+      "natural_seed_inside_prospective_inventory": 23,
+      "public_create_url": "/api/wordgames/contexto/games?category=viata_de_roman&difficulty=usor&seed=23",
+      "rating": {
+        "id": "preview_v97_viata_de_roman_contexto_1",
+        "game": "contexto",
+        "status": "approved",
+        "romanian_familiarity": 70,
+        "play_quality": 88,
+        "pilot_score": 77,
+        "rank": 125,
+        "pilot_eligible": true,
+        "selection_weight": 3
+      },
+      "independent_review": false,
+      "currently_served": false,
+      "opener_feedback": [
+        {
+          "text": "casă",
+          "guess": {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "won": false
+        },
+        {
+          "text": "cheie",
+          "guess": {
+            "id": "n_v4via_cheie",
+            "label": "cheie",
+            "distance": 1,
+            "rank": 7,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "won": false
+        },
+        {
+          "text": "fereastră",
+          "guess": {
+            "id": "n_v24_home_surfaces_fereastra",
+            "label": "Fereastră",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "won": false
+        },
+        {
+          "text": "a deschide",
+          "guess": {
+            "id": "n_v24_action_home_a_deschide",
+            "label": "A deschide",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "won": false
+        },
+        {
+          "text": "uși",
+          "guess": {
+            "id": "n_v4via_usa",
+            "label": "ușă",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 5
+          },
+          "won": true
+        }
+      ],
+      "won": true
+    },
+    {
+      "preview_id": "preview_v97_gastronomie_lant_1",
+      "natural_seed_inside_prospective_inventory": 0,
+      "public_create_url": "/api/wordgames/lant/games?category=gastronomie&difficulty=usor&seed=0",
+      "rating": {
+        "id": "preview_v97_gastronomie_lant_1",
+        "game": "lant",
+        "status": "approved",
+        "romanian_familiarity": 81,
+        "play_quality": 69,
+        "pilot_score": 76,
+        "rank": 38,
+        "pilot_eligible": true,
+        "selection_weight": 4
+      },
+      "independent_review": false,
+      "currently_served": false,
+      "corridor_profile": [
+        7,
+        7,
+        7
+      ],
+      "wide_beginner_preference": true,
+      "routes": [
+        {
+          "labels": [
+            "Cacao",
+            "Înghețată",
+            "Lapte"
+          ],
+          "captions": [
+            "legătură directă",
+            "legătură directă"
+          ],
+          "raw_edge_captions": [
+            "aromatizează unele sortimente de",
+            "făcută din lapte"
+          ],
+          "score": 1000
+        },
+        {
+          "labels": [
+            "Cacao",
+            "Chec",
+            "Lapte"
+          ],
+          "captions": [
+            "legătură directă",
+            "legătură directă"
+          ],
+          "raw_edge_captions": [
+            "aromatizează unele variante de",
+            "se poate servi cu"
+          ],
+          "score": 1000
+        }
+      ],
+      "won": true
+    }
+  ]
+}

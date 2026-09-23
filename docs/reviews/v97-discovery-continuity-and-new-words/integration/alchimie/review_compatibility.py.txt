@@ -1,0 +1,30 @@
+from pathlib import Path
+import hashlib,json,sys,os
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames import discovery_world as D,alchimie_explore as E
+from unittest.mock import patch
+from pydantic import ValidationError
+
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+c=json.loads((OUT/'candidate.json').read_bytes());assert B.MAX_COMPATIBLE_VERSIONS==D.MAX_COMPATIBLE_VERSIONS==16
+assert (D.MAX_CONCEPTS,D.MAX_RECIPES,D.MAX_SUPPLIES,D.MAX_SUPPLY_TIERS,D.MAX_CATALOG_BYTES,E.MAX_EMPTY_PAIRS)==(256,512,96,12,2097152,128)
+# Exercise generated encoded output at the strict boundary, independently of schema allowances.
+value={'padding':''};value['padding']='x'*(D.MAX_CATALOG_BYTES-len(B.json_bytes(value)));assert len(B.catalog_bytes(value))==2097152
+value['padding']+='ș'
+try:B.catalog_bytes(value)
+except ValueError as exc:assert str(exc)=='catalog too large'
+else:raise AssertionError('oversized UTF-8 bytes accepted')
+assert len(c['compatible_versions'])==9 and len({r['recipe_hash'] for r in c['compatible_versions']})==9
+for count in (17,100):
+ extra={'world_id':'a','recipe_hash':'0'*64,'source_sha256':'0'*64,'mechanics':{'starters':['a','b'],'recipes':[{'pair':['a','b'],'result':'c'},{'pair':['a','c'],'result':'d'}],'unlocks':[]}}
+ try:D.Catalog.model_validate({'compatible_versions':[extra]*count})
+ except ValidationError as exc:assert any(e['loc']==('compatible_versions',) and e['type']=='too_long' for e in exc.errors())
+ else:raise AssertionError('version shape count accepted')
+paths=['cat_de_roman_esti/wordgames/discovery_world.py','cat_de_roman_esti/wordgames/alchimie_explore.py','scripts/build_alchimie_discovery_world.py','tests/test_v97_world_compatibility.py','tests/test_alchimie_explore.py','tests/test_alchimie_empty_pairs.py']
+report={'kind':'v97-independent-compatibility-implementation-review-v1','reviewer':'/root/v97_quick','candidate_sha256':sha(OUT/'candidate.json'),'verdict':'accept','source_sha256':{p:sha(ROOT/p) for p in paths},'rationale':'The runtime and generator use the same finite 16-book constant and preserve complete prior mechanics. No oldest-book eviction or arbitrary recipe-hash acceptance is added. Existing canonical hash, unchanged world, starter, recipe-result, supplies and reachability checks remain. The generator checks actual UTF-8 bytes before candidate, proposal or package writes; the runtime retains its stat/read 2 MiB guards. Proof length, graph content, session and empty-pair bounds are unchanged.','checks':{'targeted_pytest_passed':69,'targeted_pytest_log_sha256':sha(OUT/'independent-compatibility-tests.log'),'valid_synthetic_history_counts':[8,9,16],'seventeenth_rejected_no_eviction':True,'integrity_mutation_cases':6,'oversized_write_modes_preserve_destinations':['candidate','proposal','install'],'exact_byte_limit':2097152,'multibyte_excess_rejected':True,'actual_history_count':9,'candidate_bytes':(OUT/'candidate.json').stat().st_size},'limits':['The count limit increases resource allowance but remains finite; a seventeenth historical book requires another explicit design change.','No asynchronous session or public proof schemas were changed. Actual nine-book restore and full live replay are assessed in the final audit.'],'unresolved_findings':[],'review_source_sha256':sha(Path(__file__))}
+(OUT/'independent-compatibility-review.json').write_bytes(B.json_bytes(report));print(json.dumps({'verdict':'accept','targeted_tests':69,'candidate_bytes':report['checks']['candidate_bytes'],'review_sha256':sha(OUT/'independent-compatibility-review.json')}))

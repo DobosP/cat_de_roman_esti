@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 
 from tests import content_history
-from tests.content_history import before_v96_artifact
+from tests.content_history import before_v96_artifact, before_v97_artifact
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = {
@@ -44,11 +44,12 @@ def digest(value, filename):
 
 @pytest.mark.parametrize("filename", BASELINE)
 def test_v96_inverse_restores_complete_1457786_bytes_without_mutating_input(filename):
-    current = read_current(filename)
-    untouched = deepcopy(current)
-    previous = before_v96_artifact(current, filename)
+    latest = read_current(filename)
+    untouched = deepcopy(latest)
+    previous = before_v96_artifact(latest, filename)
+    current = before_v97_artifact(latest, filename)
     assert digest(previous, filename) == BASELINE[filename]
-    assert current == untouched
+    assert latest == untouched
     if filename == "games_pack.json":
         assert sum(len(previous[g]) for g in ADDED) == 710
         for game, added in ADDED.items():
@@ -126,7 +127,7 @@ def test_v96_keeps_v94_rejection_ledger_exact_and_caraiman_absent():
     ledger = json.loads(blob)
     assert ledger["meta"]["count"] == len(ledger["items"]) == 105
     assert "lt_geografie_242" in ledger["items"]
-    pack = read_current("games_pack.json")
+    pack = before_v97_artifact(read_current("games_pack.json"), "games_pack.json")
     assert pack["meta"]["id_high_water"]["lant"] == 245
     assert "lt_geografie_242" not in {row["id"] for row in pack["lant"]}
     pair = {key: ledger["items"]["lt_geografie_242"][key] for key in ("start", "target")}

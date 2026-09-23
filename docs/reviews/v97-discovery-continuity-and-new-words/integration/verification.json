@@ -1,0 +1,473 @@
+{
+  "kind": "v97-complete-integration-v2",
+  "date": "2026-09-22",
+  "baseline_commit": "fd3ca7c78b6bee774c283d873d400abf4a8e7d65",
+  "inherited_worktree_head": "442dd7cbd2ac9b2c72a3a2fcaf1c3effce55e60d",
+  "passed": true,
+  "checks": {
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 0.48,
+      "log_sha256": "90b535ab9acc5114085858b9c98c4f3c599c5af44656da0ccb67d2d13f4958e2",
+      "tail": [
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ],
+      "archive": {
+        "path": "resumption/gates/fixture.log.gz",
+        "sha256": "35bbb015b9302f4dbd6ab1cfc050a3dbce3421f78248f19c75fdf28c4548ef07",
+        "decoded_sha256": "90b535ab9acc5114085858b9c98c4f3c599c5af44656da0ccb67d2d13f4958e2",
+        "gzip_mtime": 0
+      }
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 14.16,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ],
+      "archive": {
+        "path": "resumption/gates/pack.log.gz",
+        "sha256": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4",
+        "decoded_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+        "gzip_mtime": 0
+      }
+    },
+    "v97-targeted": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts=",
+        "tests/test_v97_content_history.py",
+        "tests/test_v97_lant_captions.py",
+        "tests/test_v97_world_compatibility.py",
+        "tests/test_v97_world_quality.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 12.1,
+      "log_sha256": "d6c3c7950ff79dec0cf3b4edc614ef6e7c393cd944766d6ee56ea6b1ac195335",
+      "tail": [
+        "........................................................................ [ 77%]",
+        ".....................                                                    [100%]",
+        "93 passed in 9.24s"
+      ],
+      "archive": {
+        "path": "resumption/gates/v97-targeted.log.gz",
+        "sha256": "facea52ce0722f4b1df49bb48c68f6e3661602b9faceedb9b2227687143e4a38",
+        "decoded_sha256": "d6c3c7950ff79dec0cf3b4edc614ef6e7c393cd944766d6ee56ea6b1ac195335",
+        "gzip_mtime": 0
+      }
+    },
+    "frontend-native-final": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 1.7,
+      "log_sha256": "1f077ad46272e7f1b7b0212ca6140c9b22c542ddda326f719ff30b299bd4d89a",
+      "tail": [
+        "✔ meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px (0.601191ms)",
+        "✔ optional account controls stay outside the initial bundle graph (0.147907ms)",
+        "ℹ tests 214",
+        "ℹ suites 0",
+        "ℹ pass 214",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 1289.595675"
+      ],
+      "archive": {
+        "path": "resumption/gates/frontend-native-final.log.gz",
+        "sha256": "aa5bf932a57355e229523b2f4ed06d2d7552c10b8f3b0df9a43530a8b4da3c2f",
+        "decoded_sha256": "1f077ad46272e7f1b7b0212ca6140c9b22c542ddda326f719ff30b299bd4d89a",
+        "gzip_mtime": 0
+      }
+    },
+    "frontend-lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 16.21,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ],
+      "archive": {
+        "path": "resumption/gates/frontend-lint.log.gz",
+        "sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+        "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+        "gzip_mtime": 0
+      }
+    },
+    "frontend-typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 7.72,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ],
+      "archive": {
+        "path": "resumption/gates/frontend-typecheck.log.gz",
+        "sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05",
+        "decoded_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+        "gzip_mtime": 0
+      }
+    },
+    "frontend-build": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 9.37,
+      "log_sha256": "57613a64e5afcac6a68af7a3254a1c67a918dc7da1c4e165feef35c59a6d4b7f",
+      "tail": [
+        "✓ built in 995ms",
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.69 KiB  assets/index-C5r7lqzR.js",
+        "     8.53 KiB  assets/index-D9HNWgEs.css",
+        "   119.23 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "archive": {
+        "path": "resumption/gates/frontend-build.log.gz",
+        "sha256": "ab7d74be75b99afce14a263922aa108bdfdfc22996729a5c3ff652e37dd120a5",
+        "decoded_sha256": "57613a64e5afcac6a68af7a3254a1c67a918dc7da1c4e165feef35c59a6d4b7f",
+        "gzip_mtime": 0
+      }
+    },
+    "frontend-bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.32,
+      "log_sha256": "5d4731aebb4888bb3c884f3e866ecd3c387e27e493902692612faae30b4f55bc",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.69 KiB  assets/index-C5r7lqzR.js",
+        "     8.53 KiB  assets/index-D9HNWgEs.css",
+        "   119.23 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "archive": {
+        "path": "resumption/gates/frontend-bundle.log.gz",
+        "sha256": "def22c2c2e70a31f16f7100a9bf3b2f356539bf58ff5b2abeabc917cd224ef82",
+        "decoded_sha256": "5d4731aebb4888bb3c884f3e866ecd3c387e27e493902692612faae30b4f55bc",
+        "gzip_mtime": 0
+      }
+    },
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 1662.87,
+      "log_sha256": "3ee96d7905cf26e1305c2b0851e305d500d893b2a5c77d291c136e4a3388464e",
+      "tail": [
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 80%]",
+        "........................................................................ [ 83%]",
+        "........................................................................ [ 86%]",
+        "........................................................................ [ 89%]",
+        "........................................................................ [ 92%]",
+        "........................................................................ [ 95%]",
+        "........................................................................ [ 98%]",
+        ".........................                                                [100%]",
+        "2329 passed in 1659.51s (0:27:39)"
+      ],
+      "archive": {
+        "path": "resumption/gates/backend312.log.gz",
+        "sha256": "1fb14aa60aa7e40423bf4a1fc228cd3ad8f431d1f873f0eab35bea9c8a866d6d",
+        "decoded_sha256": "3ee96d7905cf26e1305c2b0851e305d500d893b2a5c77d291c136e4a3388464e",
+        "gzip_mtime": 0
+      }
+    },
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts=",
+        "tests/accounts"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 7.22,
+      "log_sha256": "7f99e1c913ded2b00e2117abe467f4f73b1fda7cab4a7c7714e751520c1d3b39",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 5.48s"
+      ],
+      "archive": {
+        "path": "resumption/gates/accounts312.log.gz",
+        "sha256": "b48edccc0152ab115e11126b69451259bea79ddb0f022ff08dc138bc70f857a9",
+        "decoded_sha256": "7f99e1c913ded2b00e2117abe467f4f73b1fda7cab4a7c7714e751520c1d3b39",
+        "gzip_mtime": 0
+      }
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/integration/venv314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 1240.58,
+      "log_sha256": "0e7d210dbdec04437729f141666c0cf2b276c30c58e3cf3cc050868729008f2d",
+      "tail": [
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 80%]",
+        "........................................................................ [ 83%]",
+        "........................................................................ [ 86%]",
+        "........................................................................ [ 89%]",
+        "........................................................................ [ 92%]",
+        "........................................................................ [ 95%]",
+        "........................................................................ [ 98%]",
+        ".........................                                                [100%]",
+        "2329 passed in 1236.37s (0:20:36)"
+      ],
+      "archive": {
+        "path": "resumption/gates/backend314.log.gz",
+        "sha256": "eee29bc92128253de908191a4c6482cd64449aa89c1480800cc0526babd74d04",
+        "decoded_sha256": "0e7d210dbdec04437729f141666c0cf2b276c30c58e3cf3cc050868729008f2d",
+        "gzip_mtime": 0
+      }
+    },
+    "accounts314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/integration/venv314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts=",
+        "tests/accounts"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 8.86,
+      "log_sha256": "14bfa1fa6d8887ac8e65b2ea869720ef5c267472946aa11423ad4d8b92d8fb85",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 6.53s"
+      ],
+      "archive": {
+        "path": "resumption/gates/accounts314.log.gz",
+        "sha256": "7ad15be0404c291b0c62355e9411f6e21a72096dd3708c056fbe96bc841daad0",
+        "decoded_sha256": "14bfa1fa6d8887ac8e65b2ea869720ef5c267472946aa11423ad4d8b92d8fb85",
+        "gzip_mtime": 0
+      }
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e",
+        "--",
+        "--workers=2"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 865.0,
+      "log_sha256": "553fa37b7843a64b0803463f84d0b05a44ff57a80779f4009587c497b9b55c31",
+      "tail": [
+        "[WebServer] 2026-09-22 13:45:04,958 WARNING django.request: Not Found: /api/alchimie/explore/expired-221-concept-kitchen-session",
+        "  ✓  547 [mobile] › e2e/v96-input-and-focus.spec.mjs:69:1 › a lost final craft restores collection focus when both inputs are depleted (1.8s)",
+        "  ✓  537 [mobile] › e2e/resume-recovery.spec.mjs:152:3 › V74 saved-game recovery › a queued terminal score keeps every saved game recoverable until its write finishes (18.6s)",
+        "  ✓  548 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 200 response cannot displace another tab's game (1.6s)",
+        "  ✓  549 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 404 response cannot displace another tab's game (1.6s)",
+        "  ✓  550 [mobile] › e2e/resume-recovery.spec.mjs:248:3 › V74 saved-game recovery › an unmounted resume cannot finish a newer route's create loading (1.7s)",
+        "  ✓  551 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (2.3s)",
+        "  ✓  552 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (1.5s)",
+        "",
+        "  552 passed (14.4m)"
+      ],
+      "archive": {
+        "path": "resumption/gates/browser.log.gz",
+        "sha256": "39b99144feaf340da09c707201d9d064c7749b70d434faf6f3aa9d39e53a433b",
+        "decoded_sha256": "553fa37b7843a64b0803463f84d0b05a44ff57a80779f4009587c497b9b55c31",
+        "gzip_mtime": 0
+      }
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 0.04,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ],
+      "archive": {
+        "path": "resumption/gates/final-ruff.log.gz",
+        "sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+        "decoded_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "gzip_mtime": 0
+      }
+    },
+    "docs": {
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 0.07,
+      "log_sha256": "043503da57fb01161cf1ee20be1f12d0d9ee298f2327413e8b391af07f2fe440",
+      "tail": [
+        "## stale model terms",
+        "(none)",
+        "",
+        "## retired ops verbs",
+        "(none)",
+        "",
+        "## orphan docs",
+        "(none)"
+      ],
+      "archive": {
+        "path": "resumption/gates/final-docs.log.gz",
+        "sha256": "5c8b95aae0e5dc01df540b5344b6fe415611047e0ddbf5682420f13c5f9b4c9d",
+        "decoded_sha256": "043503da57fb01161cf1ee20be1f12d0d9ee298f2327413e8b391af07f2fe440",
+        "gzip_mtime": 0
+      }
+    },
+    "whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words",
+      "exit_code": 0,
+      "elapsed_seconds": 0.08,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tail": [],
+      "archive": {
+        "path": "resumption/gates/final-whitespace.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "gzip_mtime": 0
+      }
+    }
+  },
+  "inputs_sha256": "251986be120f516f1a90ebe8f7802b8a3ac3f9e447a9d5168a7d8fc153cc11c4",
+  "input_count": 522,
+  "input_scope": "All inherited backend/data/scripts/tests unchanged during fresh matrices. Final browser covers the amended frontend and rebuilt assets. Exact per-file input bindings are in ../resumption/final-inputs.json.",
+  "content": {
+    "new_rounds": 5,
+    "alchimie_concepts": 2,
+    "alchimie_recipes": 4,
+    "revised_lant_captions": 12,
+    "new_shared_KG_nodes": 0
+  },
+  "fresh_outcomes": {
+    "backend312": 2329,
+    "backend314": 2329,
+    "accounts_each": 53,
+    "frontend_native": 214,
+    "browser": 552,
+    "browser_workers": 2,
+    "browser_retries": 0,
+    "focused_v97_backend": 93,
+    "focused_alchimie_browser": 84,
+    "focused_start_replay_browser": 26
+  },
+  "initial_failures": [
+    "Inherited full browser run:485passed/67failed;66 Alchimie failures traced to the stale browser8-history bound and1 mobileLanț failure to toast-row collapse.",
+    "A stronger focus assertion initially raced the pending disabled render:24passed/2failed; synchronized setup then26passed. Product code and final static assets did not change during that test correction.",
+    "A first focused lint check found browser globals in test callbacks; qualified globals fixed those errors. Original logs retained."
+  ],
+  "review_evidence": {
+    "kickoff_archive_sha256": "a7a1e80f7acd917f4a0eb941f52fc70dd6912815d59c4c92b51ddfed95c720b5",
+    "inherited_integration_archive_sha256": "dd1a13426fbb929e19e6f153735d814407c159d1d71f395d6ce8228e2af7f152",
+    "resumption_archive_sha256": "ccf2aa18bc2b849ff2429dc56ce8aa7b69fe8fe5f873a48ad5166fb04c85a02d",
+    "independent_fix_review_sha256": "809c4de0d04b6ae97dcd4acf057b2efd5838805e2339dcdc9c55d530b5daeb96"
+  },
+  "remaining": [
+    "Specific Windows skill name/path was not located; user clarification pending.",
+    "Human enjoyment and physical-device acceptance remain unverified.",
+    "Future review:missing Ușă vocabulary,four new-route captions,onward uses for terminal dishes and five remaining world concept slots."
+  ],
+  "publication": {
+    "merged": false,
+    "pushed": false,
+    "deployed": false,
+    "loop_restarted": false
+  }
+}

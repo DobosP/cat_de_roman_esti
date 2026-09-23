@@ -1,0 +1,74 @@
+"""Independent V97 caption implementation closure; never changes serving sources."""
+from pathlib import Path
+import ast,hashlib,json,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');O=Path(__file__).parent
+sys.path.insert(0,str(R))
+from cat_de_roman_esti.wordgames.lant_relations import REVIEWED_CAPTIONS,caption
+from cat_de_roman_esti.wordgames.recipe_extensions import record_snapshot,digest
+from cat_de_roman_esti.wordgames.service import get_service
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+read=lambda p:json.loads(p.read_bytes())
+draft=read(O/'drafts.json');installed=read(O/'installation.json')
+assert sha(O/'drafts.json')==installed['candidate_sha256']=='610f5c85a282a0af6e7d8a9e04829665a6d58a3cdeda38154837e74b7feb72e0'
+base=O/'baseline_lant_relations.py';runtime=R/'cat_de_roman_esti/wordgames/lant_relations.py'
+assert sha(base)==installed['previous_source_sha256']=='04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1'
+assert sha(runtime)==installed['installed_source_sha256']
+def registry(tree):
+ return next(n.value.args[0] for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='REVIEWED_CAPTIONS' for t in n.targets))
+oldtree=ast.parse(base.read_bytes());newtree=ast.parse(runtime.read_bytes())
+oldnode,newnode=registry(oldtree),registry(newtree)
+old,new=ast.literal_eval(oldnode),ast.literal_eval(newnode)
+assert len(old)==101 and len(new)==113 and dict(REVIEWED_CAPTIONS)==new
+assert all(new[k]==v for k,v in old.items())
+oldnode.keys=newnode.keys=[];oldnode.values=newnode.values=[]
+assert ast.dump(oldtree)==ast.dump(newtree), 'Non-registry runtime change'
+rows={tuple(r['pair']):r for r in draft['items']}
+assert set(new)-set(old)==set(rows) and len(rows)==12
+reviewers=[]
+for role in ('factual','quality'):
+ review=read(O/f'{role}-review.json');reviewers.append(review['reviewer'])
+ assert review['role']==role and review['candidate_sha256']==sha(O/'drafts.json')
+ assert review['kg_sha256']==sha(R/'cat_de_roman_esti/fixtures/kg_sample.json')
+ assert review['runtime_source_sha256']==sha(base)
+ assert len(review['items'])==12 and {tuple(r['pair']) for r in review['items']}==set(rows)
+ for r in review['items']:
+  candidate=rows[tuple(r['pair'])]
+  assert r['verdict']=='accept' and r['caption']==candidate['caption']
+  assert new[tuple(r['pair'])]==(r['edge_sha256'],r['caption'])
+assert reviewers==installed['reviewers'] and len(set(reviewers))==2
+svc=get_service();allowed=0;withheld=0
+for row in rows.values():
+ for direction in ('forward','reverse'):
+  oriented=row['orientation_review'][direction];a,b=oriented['from'],oriented['to'];edge=svc.link(a,b)
+  assert bool(edge)==oriented['graph_allows']
+  if edge:
+   assert record_snapshot(edge)==row['edge_snapshot']
+   assert digest(record_snapshot(edge))==row['edge_snapshot_sha256']
+   assert caption(svc,a,b)==row['caption'];allowed+=1
+  else:assert caption(svc,a,b)=='';withheld+=1
+assert (allowed,withheld)==(14,10)
+assert '105 passed' in (O/'independent-backend-tests.log').read_text()
+assert '12 passed (36.1s)' in (O/'independent-browser-tests.log').read_text()
+adr=R/'docs/adr/0155-preserve-discovery-history-and-explain-food-links.md'
+assert 'at most twelve\nstarters' in adr.read_text()
+paths=[
+'cat_de_roman_esti/wordgames/lant_relations.py','cat_de_roman_esti/wordgames/lant.py',
+'cat_de_roman_esti/wordgames/recipe_extensions.py','cat_de_roman_esti/wordgames/service.py',
+'cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json',
+'frontend/src/screens/Lant.tsx','frontend/src/styles/lant.css',
+'frontend/e2e/lant-relationship-captions.spec.mjs','frontend/e2e/lant_caption_seeds.py',
+'frontend/e2e/games.mjs','frontend/playwright.config.mjs',
+'cat_de_roman_esti/web/static/.vite/manifest.json',
+'cat_de_roman_esti/wordgames/discovery_world.py',
+'scripts/build_alchimie_discovery_world.py','tests/test_v97_lant_captions.py',
+ 'tests/test_v94_lant_captions.py','tests/test_lant_relation_captions.py',
+'docs/adr/0155-preserve-discovery-history-and-explain-food-links.md',
+'docs/adr/0146-expand-alchimie-and-preserve-collections.md',
+'docs/adr/0147-grow-alchimie-with-reviewed-vocabulary.md','docs/adr/README.md']
+missing=[p for p in paths if not (R/p).is_file()]
+assert not missing,missing
+receipt={'kind':'v97-caption-independent-implementation-review-v1','reviewer':'/root/v97_world','reviewed_on':'2026-09-17','verdict':'accept','source_sha256':{p:sha(R/p) for p in paths},'evidence_sha256':{n:sha(O/n) for n in ['drafts.json','factual-review.json','quality-review.json','baseline_lant_relations.py','review_and_apply.py','installation.json','independent-backend-tests.log','independent-browser-tests.log']},'checks':{'prior_captions_exact':101,'added':12,'current':113,'allowed_directions':14,'withheld_reverse_directions':10,'registry_only_runtime_change':True,'full_source_edge_fingerprints_checked':True,'semantic_roles_distinct':True,'backend_passed':105,'browser_passed':12,'desktop_routes':6,'mobile_320px_200percent_routes':6,'keyboard_navigation_reload_and_completed_path':True,'horizontal_overflow_checks_passed':True},'resolved_findings':[{'issue':'ADR initially described eight starters as a bound, but the schema maximum is twelve and the authored inventory is eight.','resolution':'Root corrected the ADR to separate the twelve-starter bound from eight unchanged starters; corrected bytes are pinned.'}],'initial_test_evidence':'Root initial caption test expected won/path in an invalid-move response; actual API supplies them through GET. The root corrected its assertion and preserved the initial log. No runtime adjustment was needed.','limitations':['The six selected food routes do not represent every possible shortest route or every hint. Generic captions remain for other edges; new cases deliberately do not assert that all hints receive new wording.','At 320 px with 200 percent text, inherited two-column choices break some labels midword and require substantial scrolling. Captions remain readable and tests pass; a future GUI pass should evaluate a single column at enlarged text sizes.','No measured human-enjoyment claim. Existing primary-source semantic judgments are verified as exact distinct approvals, not represented as a fresh factual literature review.'],'unresolved_blocking_findings':[],'review_script_sha256':sha(Path(__file__))}
+images=sorted((O/'independent-browser-output').rglob('*.png'))
+receipt['screenshots']=[{'path':str(p.relative_to(O)),'sha256':sha(p)} for p in images]
+(O/'independent-implementation-review.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'verdict':'accept','backend_passed':105,'browser_passed':12,'receipt_sha256':sha(O/'independent-implementation-review.json'),'source_bindings':len(paths),'screenshots':len(images)}))

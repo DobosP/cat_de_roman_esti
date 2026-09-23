@@ -1,0 +1,81 @@
+"""Supplemental author evidence: frozen proposals, history, types, live BFF openers. Never promotes content."""
+import hashlib,json,sys,os
+from dataclasses import asdict
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words')
+OUT=Path(__file__).resolve().parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings');os.environ.setdefault('CAT_DEBUG','1')
+import django;django.setup()
+import critique_pack as c
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto
+p,s,st,r=c.load_all(c.PACKAGE_PACK,c.PACKAGE_KG)
+sha=lambda path:hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def dump(n,v):(OUT/n).write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+records=json.loads((OUT/'preview-records.json').read_text())['records']
+raw={g:[] for g in ['conexiuni','contexto','lant']};sources=[]
+for path in sorted((ROOT/'docs/reviews').rglob('*.json')):
+ try:data=json.loads(path.read_text())
+ except (ValueError,OSError):continue
+ if not isinstance(data,dict):continue
+ counts={}
+ for g in raw:
+  rows=data.get(g,[])
+  if not isinstance(rows,list):continue
+  for row in rows:
+   if not isinstance(row,dict):continue
+   if g=='conexiuni' and isinstance(row.get('groups'),list) and all(isinstance(x,dict) and 'tiles' in x for x in row['groups']):raw[g].append((str(path.relative_to(ROOT)),row));counts[g]=counts.get(g,0)+1
+   elif g=='contexto' and isinstance(row.get('target'),str):raw[g].append((str(path.relative_to(ROOT)),row));counts[g]=counts.get(g,0)+1
+   elif g=='lant' and isinstance(row.get('start'),str) and isinstance(row.get('target'),str):raw[g].append((str(path.relative_to(ROOT)),row));counts[g]=counts.get(g,0)+1
+ if counts:sources.append({'path':str(path.relative_to(ROOT)),'sha256':sha(path),'counts':counts})
+novel=[]
+for rec in records:
+ if rec['id'].split('_')[-2]=='conexiuni':
+  quads=[set(q) for q in rec['groups'].values()];tiles=set(rec['order']);scope=[]
+  for label,rs in [('all_served_pack',p['conexiuni']),('durable_rejected_tombstones',c.load_rejection_tombstones()),('all_archived_raw',[row for _,row in raw['conexiuni']])]:
+   boards=[list(x['groups'].values()) if isinstance(x['groups'],dict) else [g['tiles'] for g in x['groups']] for x in rs]
+   mg=max((len(a&set(b)) for a in quads for groups in boards for b in groups),default=0)
+   mb=max((len(tiles&{n for g in groups for n in g}) for groups in boards),default=0)
+   assert mg<3 and mb<8,(label,mg,mb)
+   scope.append({'scope':label,'boards_compared':len(boards),'maximum_group_overlap':mg,'maximum_board_overlap':mb})
+  used={n for row in p['conexiuni'] for q in row['groups'].values() for n in q}
+  novel.append({'id':rec['id'],'scopes':scope,'new_per_game_words':[s.label(n) for n in sorted(tiles-used)]})
+ elif 'contexto' in rec['id']:
+  matches=[path for path,row in raw['contexto'] if row['target']==rec['target']]
+  assert not matches,matches
+  assert all(row['target']!=rec['target'] for row in p['contexto'])
+  novel.append({'id':rec['id'],'served_targets_compared':len(p['contexto']),'archived_raw_targets_compared':len(raw['contexto']),'raw_matches':matches,'fresh_target':s.label(rec['target'])})
+ else:
+  pair={rec['start'],rec['target']};tombs=c.load_lant_rejection_tombstones()
+  matches=[path for path,row in raw['lant'] if {row['start'],row['target']}==pair]
+  assert not matches,matches
+  assert all({row['start'],row['target']}!=pair for row in p['lant']+tombs)
+  oldend={row[k] for row in p['lant'] for k in ['start','target']}
+  novel.append({'id':rec['id'],'served_pairs_compared':len(p['lant']),'durable_rejected_pairs_compared':len(tombs),'archived_raw_pairs_compared':len(raw['lant']),'both_directions_checked':True,'raw_matches':matches,'fresh_endpoints':[s.label(n) for n in pair-oldend]})
+dump('full-novelty.json',{'scope':'All supported archived JSON candidate arrays, entire current pack and durable tombstones. Repeated historical files are counted separately; no candidate is approved by this report.','sources':sources,'checks':novel})
+roles=[];used=set()
+for rec in records:
+ row={'id':rec['id'],'roles':[]}
+ if 'conexiuni' in rec['id']:
+  for gid,ids in rec['groups'].items():
+   row['roles'].append({'role':rec['group_labels'][gid],'ids':ids,'types':[s.node(n).node_type for n in ids]});used.update(ids)
+ elif 'contexto' in rec['id']:
+  n=rec['target'];native=c.contexto_incoming_ids(s,n);row['roles']=[{'role':'target','id':n,'type':s.node(n).node_type,'description':s.node(n).description},{'role':'unique native incoming guesses','ids':native,'labels':[s.label(x) for x in native]}];used.update([n,*native]);assert len(native)>=5
+ else:
+  for k in ['start','target']:
+   n=rec[k];row['roles'].append({'role':k,'id':n,'type':s.node(n).node_type,'description':s.node(n).description});used.add(n)
+ roles.append(row)
+for entry in json.loads((OUT/'lant-api-routes.json').read_text())['ladders']:
+ for pa in entry['routes']:used.update(pa['ids'])
+kg=json.loads(c.PACKAGE_KG.read_text());dump('typed-role-checks.json',{'scope':'Author type/role evidence; independent semantic judgment still required.','records':roles})
+dump('node-edge-snapshots.json',{'kg_sha256':sha(c.PACKAGE_KG),'nodes':[n for n in kg['kg_nodes'] if n['id'] in used],'edges':[e for e in kg['kg_edges'] if e['src_id'] in used and e['dst_id'] in used]})
+cl=Client();probes=[]
+for label,guesses in [('ușă',['casă','intrare','cheie','fereastră','cameră','a deschide','interfon','baie']),('Aragaz',['bucătărie','a găti','foc','gaz','cuptor','cratiță','tigaie','frigider']),('Dulceață',['fruct','dulce','desert','prună','căpșună','zahăr','borcan','gem']),('Salată de vinete',['vinete','legume','pâine','ceapă','ulei','maioneză']),('Buletin',['act','identitate','document','pașaport','CNP']),('Ceapă',['legume','mâncare','salată','supă','usturoi','morcov']),('Muzeu',['artă','istorie','pictură','expoziție','galerie','Antipa'])]:
+ target=s.resolve(label);session=contexto._build_session(target,'usor',None);sid=contexto.store.create(session);steps=[]
+ for text in guesses+[label]:
+  resp=cl.post(f'/api/wordgames/contexto/games/{sid}/guess',data={'text':text},content_type='application/json');d=resp.json();steps.append({'text':text,'http_status':resp.status_code,'ok':d.get('ok'),'guess':d.get('guess'),'message':d.get('message'),'attempts':d['attempts'],'won':d['won']})
+ assert steps[-1]['won']
+ probes.append({'label':label,'included':label == 'ușă','steps':steps})
+dump('broad-opener-probes.json',{'scope':'Actual BFF fixed-target POST guesses, including all negative/unknown obvious openers. No natural selection claim.','targets':probes})
+print(json.dumps({'novelty':novel,'candidate_hashes':{str(x.relative_to(OUT)):sha(x) for x in sorted((OUT/'candidates').glob('*/candidates.json'))}},ensure_ascii=False,indent=2))

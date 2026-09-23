@@ -1,0 +1,32 @@
+import gzip,hashlib,json,subprocess,time
+from pathlib import Path
+ROOT=Path("/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words")
+OUT=Path("/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/resumption-2026-09-22")
+REVIEW=ROOT/"docs/reviews/v97-discovery-continuity-and-new-words"
+PY="/home/dobo/work/cat_de_roman_esti/.venv/bin/python"
+sha=lambda b:hashlib.sha256(b).hexdigest()
+def write(p,d):p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n")
+keys=["fixture","pack","v97-targeted","frontend-native-final","frontend-lint","frontend-typecheck","frontend-build","frontend-bundle","backend312","accounts312","backend314","accounts314","browser"]
+checks={}
+raw=REVIEW/"resumption/gates";raw.mkdir(exist_ok=True)
+def archive(name,r):
+ b=(OUT/(name+".log")).read_bytes();assert sha(b)==r["log_sha256"]
+ z=gzip.compress(b,mtime=0);p=raw/(name+".log.gz");p.write_bytes(z)
+ r["archive"]={"path":str(p.relative_to(REVIEW)),"sha256":sha(z),"decoded_sha256":sha(b),"gzip_mtime":0};return r
+for name in keys:
+ r=json.loads((OUT/(name+".json")).read_bytes());assert r["exit_code"]==0,(name,r)
+ checks[name]=archive(name,r)
+inputs=json.loads((OUT/"final-inputs.json").read_bytes())
+for name,h in inputs["sha256"].items():assert sha((ROOT/name).read_bytes())==h,name
+(REVIEW/"resumption/final-inputs.json").write_bytes((OUT/"final-inputs.json").read_bytes())
+result={"kind":"v97-complete-integration-v2","date":"2026-09-22","baseline_commit":"fd3ca7c78b6bee774c283d873d400abf4a8e7d65","inherited_worktree_head":"442dd7cbd2ac9b2c72a3a2fcaf1c3effce55e60d","passed":False,"checks":checks,"inputs_sha256":sha((OUT/"final-inputs.json").read_bytes()),"input_count":len(inputs["sha256"]),"input_scope":"All inherited backend/data/scripts/tests unchanged during fresh matrices. Final browser covers the amended frontend and rebuilt assets. Exact per-file input bindings are in ../resumption/final-inputs.json.","content":{"new_rounds":5,"alchimie_concepts":2,"alchimie_recipes":4,"revised_lant_captions":12,"new_shared_KG_nodes":0},"fresh_outcomes":{"backend312":2329,"backend314":2329,"accounts_each":53,"frontend_native":214,"browser":552,"browser_workers":2,"browser_retries":0,"focused_v97_backend":93,"focused_alchimie_browser":84,"focused_start_replay_browser":26},"initial_failures":["Inherited full browser run:485passed/67failed;66 Alchimie failures traced to the stale browser8-history bound and1 mobileLanț failure to toast-row collapse.","A stronger focus assertion initially raced the pending disabled render:24passed/2failed; synchronized setup then26passed. Product code and final static assets did not change during that test correction.","A first focused lint check found browser globals in test callbacks; qualified globals fixed those errors. Original logs retained."],"review_evidence":{"kickoff_archive_sha256":sha((REVIEW/"archive-manifest.json").read_bytes()),"inherited_integration_archive_sha256":sha((REVIEW/"integration/archive-manifest.json").read_bytes()),"resumption_archive_sha256":sha((REVIEW/"resumption/development-archive.json").read_bytes()),"independent_fix_review_sha256":sha((REVIEW/"resumption/independent-review.json").read_bytes())},"remaining":["Specific Windows skill name/path was not located; user clarification pending.","Human enjoyment and physical-device acceptance remain unverified.","Future review:missing Ușă vocabulary,four new-route captions,onward uses for terminal dishes and five remaining world concept slots."],"publication":{"merged":False,"pushed":False,"deployed":False,"loop_restarted":False}}
+write(REVIEW/"integration/verification.json",result)
+subprocess.run(["git","add","-A"],cwd=ROOT,check=True)
+for name,cmd in [("ruff",[PY,"-m","ruff","check"]),("docs",["python3","/home/dobo/work/agent-ops/scripts/check_docs.py","."]),("whitespace",["git","diff","HEAD","--check"])]:
+ log=OUT/("final-"+name+".log");start=time.monotonic()
+ p=subprocess.run(cmd,cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);log.write_bytes(p.stdout)
+ r={"command":cmd,"cwd":str(ROOT),"exit_code":p.returncode,"elapsed_seconds":round(time.monotonic()-start,2),"log_sha256":sha(p.stdout),"tail":p.stdout.decode(errors="replace").splitlines()[-8:]}
+ write(log.with_suffix(".json"),r);assert p.returncode==0,(name,r)
+ checks[name]=archive("final-"+name,r)
+result["passed"]=True;result["checks"]=checks;write(REVIEW/"integration/verification.json",result)
+print("GREEN",len(checks),"gates",len(inputs["sha256"]),"fixed inputs")

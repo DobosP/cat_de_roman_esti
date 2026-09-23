@@ -1,0 +1,195 @@
+{
+  "scope": "Author API replay of every native shortest route, not independent review or public selection.",
+  "ladders": [
+    {
+      "start": "n_v85_food_cacao",
+      "target": "n_v4gas_lapte",
+      "routes": [
+        {
+          "ids": [
+            "n_v85_food_cacao",
+            "n_v3gas_inghetata",
+            "n_v4gas_lapte"
+          ],
+          "labels": [
+            "Cacao",
+            "Înghețată",
+            "Lapte"
+          ],
+          "captions": [
+            "legătură directă",
+            "legătură directă"
+          ],
+          "raw_edge_captions": [
+            "aromatizează unele sortimente de",
+            "făcută din lapte"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v3gas_inghetata",
+                "label": "Înghețată"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_cacao",
+                  "label": "Cacao"
+                },
+                {
+                  "id": "n_v3gas_inghetata",
+                  "label": "Înghețată",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Clătite",
+                  "relation": "legătură directă"
+                },
+                {
+                  "label": "Desert",
+                  "relation": "exemplu și categorie"
+                },
+                {
+                  "label": "Lapte",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v4gas_lapte",
+                "label": "Lapte"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_cacao",
+                  "label": "Cacao"
+                },
+                {
+                  "id": "n_v3gas_inghetata",
+                  "label": "Înghețată",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v4gas_lapte",
+                  "label": "Lapte",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        },
+        {
+          "ids": [
+            "n_v85_food_cacao",
+            "n_v87_food_chec",
+            "n_v4gas_lapte"
+          ],
+          "labels": [
+            "Cacao",
+            "Chec",
+            "Lapte"
+          ],
+          "captions": [
+            "legătură directă",
+            "legătură directă"
+          ],
+          "raw_edge_captions": [
+            "aromatizează unele variante de",
+            "se poate servi cu"
+          ],
+          "actions": [
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v87_food_chec",
+                "label": "Chec"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_cacao",
+                  "label": "Cacao"
+                },
+                {
+                  "id": "n_v87_food_chec",
+                  "label": "Chec",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 1,
+              "won": false,
+              "choices": [
+                {
+                  "label": "Lapte",
+                  "relation": "legătură directă"
+                }
+              ],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "closer",
+                "message": "Mai aproape de țintă."
+              }
+            },
+            {
+              "ok": true,
+              "current": {
+                "id": "n_v4gas_lapte",
+                "label": "Lapte"
+              },
+              "relation": "legătură directă",
+              "path": [
+                {
+                  "id": "n_v85_food_cacao",
+                  "label": "Cacao"
+                },
+                {
+                  "id": "n_v87_food_chec",
+                  "label": "Chec",
+                  "relation": "legătură directă"
+                },
+                {
+                  "id": "n_v4gas_lapte",
+                  "label": "Lapte",
+                  "relation": "legătură directă"
+                }
+              ],
+              "moves": 2,
+              "won": true,
+              "choices": [],
+              "backtrack_recommended": false,
+              "progress": {
+                "kind": "won",
+                "message": "Ai ajuns la țintă!"
+              },
+              "score": 1000,
+              "share": "cat_de_roman_esti · Lantul Cuvintelor\n🔗 2/2 mutari\n"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -11,9 +11,8 @@ import pytest
 from django.test import Client
 
 from cat_de_roman_esti.wordgames import alchimie_explore as E
-from cat_de_roman_esti.wordgames.discovery_world import MAX_CONCEPTS, MAX_RECIPES, get_world
+from cat_de_roman_esti.wordgames.discovery_world import MAX_CONCEPTS, MAX_RECIPES, validate_world
 from cat_de_roman_esti.wordgames.service import SessionStore, get_service
-from scripts import build_alchimie_discovery_world as B
 from tests.test_v95_world_quality import HISTORY as OLD_HISTORY
 from tests.test_v95_world_quality import checkpoint
 
@@ -21,6 +20,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "/api/alchimie/explore"
 PREVIOUS = ROOT / "docs/reviews/v95-discovery-and-game-quality/alchimie/candidate.json"
 PREVIOUS_SHA = "c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801"
+ARCHIVE = ROOT / "docs/reviews/v96-words-and-input-clarity/integration/alchimie"
+ARCHIVE_SHA = "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496"
+CATALOG_SHA = "356270c25d61f16cac3fdb59efa1e0399b18606ee796d498f132a92ad3c9d5c4"
 NEW_WORDS = {"alw_food_ostropel": "Ostropel", "alw_food_salata_fructe": "Salată de fructe"}
 NEW_RECIPES = ("ostropel-pui-usturoi", "ostropel-pui-sos-rosii",
                "salata-fructe-cutit", "salata-fructe-frisca", "sandvis-chiftele-legume")
@@ -29,7 +31,10 @@ HISTORY = [*OLD_HISTORY, (247, 143, PREVIOUS_SHA)]
 
 @pytest.fixture
 def world(monkeypatch):
-    world = get_world()
+    blob = (ARCHIVE / "proposed-catalog.json").read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == CATALOG_SHA
+    world = validate_world(json.loads(blob))
+    monkeypatch.setattr(E, "get_world", lambda: world)
     assert len(world.concepts) == 249 and len(world.recipes) == 347
     monkeypatch.setattr(E, "store", SessionStore())
     return world
@@ -48,7 +53,9 @@ def recipe_pair(world, recipe_id):
 def test_v96_preserves_complete_records_and_reconnects_one_leaf():
     blob = PREVIOUS.read_bytes()
     assert hashlib.sha256(blob).hexdigest() == PREVIOUS_SHA
-    old, current = json.loads(blob), B.candidate()
+    current_blob = (ARCHIVE / "candidate.json").read_bytes()
+    assert hashlib.sha256(current_blob).hexdigest() == ARCHIVE_SHA
+    old, current = json.loads(blob), json.loads(current_blob)
     old_concepts = {r["id"]: r for r in old["concepts"]}
     concepts = {r["id"]: r for r in current["concepts"]}
     old_recipes = {r["id"]: r for r in old["recipes"]}

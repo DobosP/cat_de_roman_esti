@@ -1,18 +1,18 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-09-09
+Last verified: 2026-09-22
 
 ## Environment
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
   pytest-django). It is gitignored and lives only in the shared checkout.
 - From a task worktree, prefix every command with `PYTHONPATH=.`.
-- V91 integration uses Python 3.12.3 and a fresh constrained Python 3.14.6 environment;
+- V97 integration uses Python 3.12.3 and a fresh constrained Python 3.14.6 environment;
   exact completed gate results belong in [STATUS](STATUS.md).
 - Fresh venv: `pip install -c constraints.txt -e ".[dev,web]"` (ci.yml:48).
 - Never use the `romania_scraper` venv: it has no Django, so collection gives 7 errors and only
   402 of 898 tests (verified 2026-09-05).
 - Frontend needs Node 24 (ci.yml:76). Verify both `node -v` and `npm -v`; the candidate
-  clean install used Node 24.20.0/npm 11.19.0. The host npm 9 shim omitted a Rolldown binding.
+  clean install used Node 24.21.0/npm 11.19.0. The host npm 9 shim omitted a Rolldown binding.
 
 Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
 

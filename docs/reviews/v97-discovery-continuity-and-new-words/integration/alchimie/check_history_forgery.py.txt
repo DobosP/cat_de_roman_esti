@@ -1,0 +1,28 @@
+from pathlib import Path
+import hashlib,json,sys,os
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');O=Path(__file__).parent
+sys.path.insert(0,str(R));os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from cat_de_roman_esti.wordgames import alchimie_explore as E
+from cat_de_roman_esti.wordgames.discovery_world import validate_world
+from tests.test_v95_world_quality import checkpoint
+from cat_de_roman_esti.web.http import ApiHttpError
+p=O/'proposed-catalog.json';world=validate_world(json.loads(p.read_bytes()));rows=[]
+for version in world.catalog.compatible_versions:
+ progress,owned=checkpoint(version)
+ before=json.dumps(progress,sort_keys=True)
+ oldpairs={tuple(r.pair) for r in version.mechanics.recipes}
+ attempts=[]
+ for pair,recipe in world.recipes.items():
+  if pair in oldpairs or not set(pair)<=owned:continue
+  forged={**progress,'discoveries':[*progress['discoveries'],list(pair)]}
+  try:E.restore_session(world,E.Progress(**forged))
+  except ApiHttpError as exc:
+   assert exc.status_code == 400
+   attempts.append(recipe.id)
+  else:raise AssertionError(('accepted new pair with old hash',version.recipe_hash,recipe.id))
+ assert json.dumps(progress,sort_keys=True)==before
+ rows.append({'recipe_hash':version.recipe_hash,'source_sha256':version.source_sha256,'earned':len(progress['discoveries']),'newer_pair_forgeries_rejected':attempts})
+result={'kind':'v97-complete-historical-forgery-check-v1','catalog_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'runtime_sha256':hashlib.sha256((R/'cat_de_roman_esti/wordgames/discovery_world.py').read_bytes()).hexdigest(),'explore_sha256':hashlib.sha256((R/'cat_de_roman_esti/wordgames/alchimie_explore.py').read_bytes()).hexdigest(),'histories':rows,'rejections':sum(len(r['newer_pair_forgeries_rejected']) for r in rows),'old_checkpoints_unmutated':True,'passed':True}
+(O/'historical-forgery-check.json').write_text(json.dumps(result,indent=2)+'\n')
+print(json.dumps({'passed':True,'histories':len(rows),'rejections':result['rejections']}))

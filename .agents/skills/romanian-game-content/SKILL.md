@@ -7,7 +7,7 @@ description: Refine and expand the six cat_de_roman_esti Romanian word games thr
 
 Improve the six games through two connected tracks: **refinement** delivers reviewed
 player improvements; **discovery** explores broadly and supplies a pool that refinement
-can select from. The operating decision is [ADR-0155](../../../docs/adr/0155-two-track-content-growth.md).
+can select from. The operating decision is [ADR-0156](../../../docs/adr/0156-two-track-content-growth.md).
 
 ## Orient and bound the work
 

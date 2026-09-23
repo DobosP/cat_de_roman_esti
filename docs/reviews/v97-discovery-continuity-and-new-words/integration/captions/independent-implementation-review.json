@@ -1,0 +1,120 @@
+{
+  "kind": "v97-caption-independent-implementation-review-v1",
+  "reviewer": "/root/v97_world",
+  "reviewed_on": "2026-09-17",
+  "verdict": "accept",
+  "source_sha256": {
+    "cat_de_roman_esti/wordgames/lant_relations.py": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "cat_de_roman_esti/wordgames/recipe_extensions.py": "138a48aa48390161270ecb76d4c3c6a43971c3600b66d84c782998fafb1afd79",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "frontend/src/screens/Lant.tsx": "06fd9517f48317ca92a510e423ca73e95521459db4301c7571b6cfb2a2641211",
+    "frontend/src/styles/lant.css": "3a513d553be807b1da2821f9d0c22a55ad510c7fc317b2a7a24ab42af4219ed7",
+    "frontend/e2e/lant-relationship-captions.spec.mjs": "90ae1ad4a76612f261939bf84f9afa4531fc537cdeccb24c0a5f11a41e1f342b",
+    "frontend/e2e/lant_caption_seeds.py": "edaf948d23655ad6680c973b0299d1ee5917b4330cd0e818223c83aa40b84a25",
+    "frontend/e2e/games.mjs": "3f4b3289ccd1eeb448847d24de1652250c29633603217fb097f2f5c3ede3c911",
+    "frontend/playwright.config.mjs": "4dcad7d73cdc4e10133afaa143417621ce5a445978c30740dad08fbfabcc0541",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "ec5724d7afb7f49ae6ad367648676a071f0d0751b82d27ae39278e98fde0004d",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "cbbc98d1fe076d002e06d71e8b8881a4b950e4510879e309fa12f106070983da",
+    "scripts/build_alchimie_discovery_world.py": "ed96709b82fdaaf3150b6797454929204192108aa358ca593a01bfa69ab57dee",
+    "tests/test_v97_lant_captions.py": "f180d2dbc2d5032301fd86f3e6d108459a08ad41fefc2c63aeefdbe11f23dac2",
+    "tests/test_v94_lant_captions.py": "59d646c8ae622c188aa6aedd155bb7ed229ec2696f9a20fe747e7648993fa60f",
+    "tests/test_lant_relation_captions.py": "3e6f8ce70f2483ad367859bd56695e840ae5c22c5a25a6bb683aa8047ec1685b",
+    "docs/adr/0155-preserve-discovery-history-and-explain-food-links.md": "9de979ce99595760a03910c256d3ce79a4fb13b1668d3067bacae3f5a0b7d3a6",
+    "docs/adr/0146-expand-alchimie-and-preserve-collections.md": "9346532972f7888d10426b3eeeb7bed71c21b134f95d0e54654456fb6ea617f0",
+    "docs/adr/0147-grow-alchimie-with-reviewed-vocabulary.md": "4157da5f747700c1814f303c3987bd48a48f3da184a898477ea1e00aeae42a1e",
+    "docs/adr/README.md": "d79d6f12a3c4d9f1cd9688dd73b86de6d595c496e211c6bad35868d3464f45ae"
+  },
+  "evidence_sha256": {
+    "drafts.json": "610f5c85a282a0af6e7d8a9e04829665a6d58a3cdeda38154837e74b7feb72e0",
+    "factual-review.json": "30b0df271f2be248c71b3a91d5e13943a5bbfb8487c7b474e9c97b245ef776b5",
+    "quality-review.json": "6ce2eed924bb6c0903286349d51a8b3a0327c2f2fd7a55a82d399707565fa3f0",
+    "baseline_lant_relations.py": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1",
+    "review_and_apply.py": "4e56c45063d5fcb629f7997350fad2c86449442b3f1cd97ac2980ab3fd307fb3",
+    "installation.json": "960192ce7dfd6e669ba577b26905392800d49df8324a16ba2e53ba6abaa1ad46",
+    "independent-backend-tests.log": "9216c67baba3a21c406fecaa05355b6768b8e0d369e4f766210baf79412c2ef4",
+    "independent-browser-tests.log": "f0399c3ad792e7829295e368b12ffbcb3803f37fae495065245d0b158d47001d"
+  },
+  "checks": {
+    "prior_captions_exact": 101,
+    "added": 12,
+    "current": 113,
+    "allowed_directions": 14,
+    "withheld_reverse_directions": 10,
+    "registry_only_runtime_change": true,
+    "full_source_edge_fingerprints_checked": true,
+    "semantic_roles_distinct": true,
+    "backend_passed": 105,
+    "browser_passed": 12,
+    "desktop_routes": 6,
+    "mobile_320px_200percent_routes": 6,
+    "keyboard_navigation_reload_and_completed_path": true,
+    "horizontal_overflow_checks_passed": true
+  },
+  "resolved_findings": [
+    {
+      "issue": "ADR initially described eight starters as a bound, but the schema maximum is twelve and the authored inventory is eight.",
+      "resolution": "Root corrected the ADR to separate the twelve-starter bound from eight unchanged starters; corrected bytes are pinned."
+    }
+  ],
+  "initial_test_evidence": "Root initial caption test expected won/path in an invalid-move response; actual API supplies them through GET. The root corrected its assertion and preserved the initial log. No runtime adjustment was needed.",
+  "limitations": [
+    "The six selected food routes do not represent every possible shortest route or every hint. Generic captions remain for other edges; new cases deliberately do not assert that all hints receive new wording.",
+    "At 320 px with 200 percent text, inherited two-column choices break some labels midword and require substantial scrolling. Captions remain readable and tests pass; a future GUI pass should evaluate a single column at enlarged text sizes.",
+    "No measured human-enjoyment claim. Existing primary-source semantic judgments are verified as exact distinct approvals, not represented as a fresh factual literature review."
+  ],
+  "unresolved_blocking_findings": [],
+  "review_script_sha256": "cf5a8110017747ce4518b9df3c44f393171e21b343a5584bdc7ce25e26b7b337",
+  "screenshots": [
+    {
+      "path": "independent-browser-output/lant-relationship-captions-538db-vive-earned-path-and-reload-desktop/choices.png",
+      "sha256": "761a5bc0b13b42a5b355b6f8e3259aa0d7c35f3f0386c2bf773f099677d6c0b2"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-538db-vive-earned-path-and-reload-desktop/earned-path.png",
+      "sha256": "f0d0801b46aad10423a8723afc4fa88def656d3743a1b3d304c9d0028e5f9c27"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-538db-vive-earned-path-and-reload-mobile/choices.png",
+      "sha256": "984fd86415a7d10bbdd25ae38f6e0f27563f70bc6b969f8ae9e52ac1f60a7345"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-538db-vive-earned-path-and-reload-mobile/earned-path.png",
+      "sha256": "27e57c48052420427c21f9ce279ddf47c2219b01b97ea76c4bae2cd2c07e905e"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-af68c-vive-earned-path-and-reload-desktop/choices.png",
+      "sha256": "9ee7ed390945be33b15ded9d914d0a983a8aa9d9fbabceb5620e23f6d8dfeb37"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-af68c-vive-earned-path-and-reload-desktop/earned-path.png",
+      "sha256": "e12ceb204c575d8f6bb38fa7bad41a677d313e77a79a6a6fd369146f261d8b64"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-af68c-vive-earned-path-and-reload-mobile/choices.png",
+      "sha256": "9a9ddf18f95ac0a8ebcaf2e82b7c518f0792f8fb890d53f507fb78eb5e21136b"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-af68c-vive-earned-path-and-reload-mobile/earned-path.png",
+      "sha256": "f0c70c59b414df670ca0cf81952c5252a69d3a768bb1179241bd6574e2a0b4fd"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-f7425-vive-earned-path-and-reload-desktop/choices.png",
+      "sha256": "d5b8a9c7f9f3e5b65fce78c6e4e9d302d5fc76f520ff0cb2f6dc4aad54deaaa8"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-f7425-vive-earned-path-and-reload-desktop/earned-path.png",
+      "sha256": "2a4a530973ba554e7fbda208b2cea25cfb08f17297d66b499c7ede2d49d60964"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-f7425-vive-earned-path-and-reload-mobile/choices.png",
+      "sha256": "40804d089e3bc3748a4ababf8ec20b00fff2923381e60b9bd31d26d903f741d0"
+    },
+    {
+      "path": "independent-browser-output/lant-relationship-captions-f7425-vive-earned-path-and-reload-mobile/earned-path.png",
+      "sha256": "5ab03f96f419109f9a8cc07ebd1e8f3641b425f93f6845d2dce42ae8f760d2fc"
+    }
+  ]
+}

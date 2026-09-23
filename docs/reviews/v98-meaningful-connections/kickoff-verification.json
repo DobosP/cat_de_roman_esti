@@ -1,0 +1,84 @@
+{
+  "date": "2026-09-23",
+  "kind": "v98-kickoff-verification",
+  "baseline_commit": "240c4591f31c1b8bec59fb5680d4e66f5f0788fe",
+  "scope": "Version startup only; no approved content or runtime edits. V97 full matrix stays historical at its unchanged code/data inputs.",
+  "fresh_bff_requests": 34,
+  "sessions_deleted": 9,
+  "focused_tests": 59,
+  "focused_command": [
+    "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "tests/test_v97_world_compatibility.py",
+    "tests/test_v97_lant_captions.py",
+    "tests/test_v96_input_clarity.py"
+  ],
+  "focused_exit_code": 0,
+  "baseline_sha256": "bab9a04f879217c5f42d81c61ceb2856207677ca1e64fed93ebd2c97bfb5d0c4",
+  "scout_sha256": "975fe157acc1f246b05b4138097102676c013392f3250fabff81fe3a5260e764",
+  "unchanged_pins": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "23421501b0e4bc391a62d25a577ed9d08c935a9eb48a550ab0e5b2f0e8367acb",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fe88e7265c68a79884eabb257912630722980dccd7238f3a834c6796aa65b400",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "804fcf446487e9925158598c4663f0d61f4508574ad14b2fc4e93a5ba8fe6803",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/contexto.py": "cae2e1115491ba5cf6438de5dac7a2689087e1c13fa80efcc86e35acef9d1101",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "cbbc98d1fe076d002e06d71e8b8881a4b950e4510879e309fa12f106070983da",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+    "frontend/src/explorationSave.ts": "206a31cad9ff7d046c87c788bb83ecfbeefee97c602cd72a0b4d074334ecbbe1",
+    "frontend/src/components/StartFailureNotice.tsx": "4513533c61a95b3fbeaab67baeb5f43d94752d93e4474c92a42d996ee5f6b5f4",
+    "scripts/build_alchimie_discovery_world.py": "ed96709b82fdaaf3150b6797454929204192108aa358ca593a01bfa69ab57dee",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+  },
+  "archive": [
+    {
+      "path": "capture_baseline.py.gz",
+      "archive_sha256": "2388ecd6f6d0c620d0c38fbde833d5497117d5572b1ec7165c7a80532613ec94",
+      "decoded_sha256": "1d3440888030250c3b67c60aef5a49e449ef5ebd0e58ca7b6529e886dead024f",
+      "decoded_bytes": 5916,
+      "gzip_mtime": 0
+    },
+    {
+      "path": "baseline.log.gz",
+      "archive_sha256": "7f4e41ff238ba509aab3dde1a7dff2795a6d8f0e3de2b03449e4fe0de7e13c4c",
+      "decoded_sha256": "4615a2ef503f6d3d45357e606f26f5c461fbf54467006ba4d8d0aa80702cec4b",
+      "decoded_bytes": 135,
+      "gzip_mtime": 0
+    },
+    {
+      "path": "capture_scout.py.gz",
+      "archive_sha256": "fb80d7a1e45ca9554bed4e6b53568002cd27a27a595768d9dec507ac53d49b35",
+      "decoded_sha256": "032cf8bc9d6aee83a5507449fbc874279daaf50db4621fc7c4fff17b5a893bd7",
+      "decoded_bytes": 4406,
+      "gzip_mtime": 0
+    },
+    {
+      "path": "scout.log.gz",
+      "archive_sha256": "085a07016dcb007426df1120b0a1f1b549e9d300ee7fbd2922c210c9f5ea87d6",
+      "decoded_sha256": "65e5e48ed79b4f22c6e3ba31bf27a0bc786c060c4c438935e1da6443b6dc20ef",
+      "decoded_bytes": 119,
+      "gzip_mtime": 0
+    },
+    {
+      "path": "kickoff-tests.log.gz",
+      "archive_sha256": "92564aa4c19ff38dacb015d26085c03fa1951815920cf5707207a771c43a6532",
+      "decoded_sha256": "594257192ecef7980dd335e92a762b85a2fcdc758cf7fa3a409eaa80184ab884",
+      "decoded_bytes": 99,
+      "gzip_mtime": 0
+    }
+  ],
+  "candidate_counts": {
+    "draft_captions": 4,
+    "recipe_research_ideas": 3,
+    "approved_additions": 0
+  }
+}

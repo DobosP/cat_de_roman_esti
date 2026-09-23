@@ -1,0 +1,51 @@
+"""Add the strict outer V97 inverse without replacing original historical pins."""
+from pathlib import Path
+import hashlib,json,subprocess
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words')
+O=Path(__file__).resolve().parent
+receipt_path=R/'docs/reviews/v97-discovery-continuity-and-new-words/artifact-delta.json'
+receipt=json.loads(receipt_path.read_bytes())
+ids=json.loads((O/'allocated-ids.json').read_bytes())
+assert ids=={'conexiuni':['cx_viata_de_roman_374'],'contexto':['ct_viata_de_roman_377'],'lant':['lt_gastronomie_246'],'alchimie':[]}
+old=json.loads((R/'docs/reviews/v96-words-and-input-clarity/artifact-delta.json').read_bytes())
+p=R/'tests/content_history.py';s=p.read_text()
+assert '_V97_RECEIPT' not in s
+start=s.index('_V96_RECEIPT =');end=s.index('\n\n# The V92 expansion',start)
+block=s[start:end].replace('V96','V97').replace('v96-words-and-input-clarity','v97-discovery-continuity-and-new-words')
+block=block.replace(hashlib.sha256((R/'docs/reviews/v96-words-and-input-clarity/artifact-delta.json').read_bytes()).hexdigest(),hashlib.sha256(receipt_path.read_bytes()).hexdigest())
+for filename,item in receipt['files'].items():block=block.replace(old['files'][filename]['baseline_sha256'],item['baseline_sha256'])
+for a,b in [('cx_viata_de_roman_373','cx_viata_de_roman_374'),('ct_viata_de_roman_376','ct_viata_de_roman_377'),('lt_gastronomie_245','lt_gastronomie_246')]:block=block.replace(a,b)
+s=s[:end]+'\n\n'+block+s[end:]
+start=s.index('def before_v96_artifact(');end=s.index('\n\ndef before_v94_lant_ledger',start)
+func=s[start:end].replace('v96','v97').replace('V96','V97').replace('1457786 bytes before evaluating the original V95 transition','fd3ca7c bytes before evaluating the original V96 transition').replace('14577863038378c734c7b2e0e8b33ea8158f318b',subprocess.check_output(['git','rev-parse','fd3ca7c'],cwd=R,text=True).strip()).replace('["lant"] == 245','["lant"] == 246')
+s=s[:end]+'\n\n'+func+s[end:]
+needle='''def before_v96_artifact(current: dict, filename: str) -> dict:
+    """Restore complete 1457786 bytes before evaluating the original V95 transition."""
+'''
+assert s.count(needle)==1
+s=s.replace(needle,needle+'    current = before_v97_artifact(current, filename)\n')
+p.write_text(s)
+test=R/'tests/test_v96_content_history.py';original=test.read_text();t=original
+t=t.replace('from tests.content_history import before_v96_artifact','from tests.content_history import before_v96_artifact, before_v97_artifact')
+needle='''    current = read_current(filename)
+    untouched = deepcopy(current)
+    previous = before_v96_artifact(current, filename)
+    assert digest(previous, filename) == BASELINE[filename]
+    assert current == untouched
+'''
+assert t.count(needle)==1
+t=t.replace(needle,'''    latest = read_current(filename)
+    untouched = deepcopy(latest)
+    previous = before_v96_artifact(latest, filename)
+    current = before_v97_artifact(latest, filename)
+    assert digest(previous, filename) == BASELINE[filename]
+    assert latest == untouched
+''')
+t=t.replace('    pack = read_current("games_pack.json")\n','    pack = before_v97_artifact(read_current("games_pack.json"), "games_pack.json")\n')
+test.write_text(t)
+u=original.replace('V96','V97').replace('V95','V96').replace('v96','v97').replace('1457786','fd3ca7c')
+for filename,item in receipt['files'].items():u=u.replace(old['files'][filename]['baseline_sha256'],item['baseline_sha256'])
+for a,b in [('cx_viata_de_roman_373','cx_viata_de_roman_374'),('ct_viata_de_roman_376','ct_viata_de_roman_377'),('lt_gastronomie_245','lt_gastronomie_246')]:u=u.replace(a,b)
+u=u.replace('== 710','== 713').replace('["lant"] == 245','["lant"] == 246')
+(R/'tests/test_v97_content_history.py').write_text(u)
+print('V97 outer inverse added; every original V96 hash/count assertion preserved over reconstructed V96 bytes.')

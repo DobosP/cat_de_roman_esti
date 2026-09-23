@@ -1,0 +1,24 @@
+from pathlib import Path
+import json,os,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');sys.path[:0]=[str(R),str(R/'scripts')];os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+import critique_pack as C
+from cat_de_roman_esti.wordgames import contexto,lant
+from django.test import Client
+p,s,st,r=C.load_all(C.PACKAGE_PACK,C.PACKAGE_KG)
+raw={g:[] for g in ['conexiuni','contexto','lant']}
+for path in sorted((R/'docs/reviews').rglob('*.json')):
+ try:d=json.loads(path.read_bytes())
+ except:continue
+ if isinstance(d,dict):
+  for game in raw:
+   rows=d.get(game,[])
+   if isinstance(rows,list):
+    for row in rows:
+     if isinstance(row,dict) and ('groups' in row if game=='conexiuni' else isinstance(row.get('target'),str)):raw[game].append((str(path),row))
+used={row['target'] for row in p['contexto']}|{row['target'] for _,row in raw['contexto']}
+k=json.loads(C.PACKAGE_KG.read_bytes())
+for n in k['kg_nodes']:
+ if n['id'] not in used and n.get('salience',0)>=.65 and n.get('node_type')=='concept':
+  incoming=C.contexto_incoming_ids(s,n['id'])
+  if len(incoming)>=5:print(n['label_ro'],len(incoming),[s.label(x) for x in incoming][:12])

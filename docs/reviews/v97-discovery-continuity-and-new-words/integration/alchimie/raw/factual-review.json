@@ -1,0 +1,66 @@
+{
+  "candidate_sha256": "e827415edc74cf03eb850ddfe649a280c615032d246c543394909a6ca0bf74c4",
+  "complete_candidate_sha256": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4",
+  "concepts": [
+    {
+      "concept_sha256": "7fad83267b4e1ea4f2dcf488b2cef783f89769a7d24c7f80eac75b11288a0ce4",
+      "id": "alw_food_supa_rosii",
+      "inherited": false,
+      "rationale": "Two independent original recipes use tomatoes as the main flavour and colour, with water or chicken broth and rice. The definition permits these variants without claiming that all tomato soups require rice.",
+      "sources": [
+        "https://jamilacuisine.ro/supa-de-rosii-cu-orez-reteta-video/",
+        "https://prajituricisialtele.ro/2020/08/10/supa-de-rosii-cu-orez/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "concept_sha256": "a6cc8d38a5be14cf4e8a1973f57b4423c676da3062af6d3686ade51fa6fb38cb",
+      "id": "alw_food_mancare_spanac",
+      "inherited": false,
+      "rationale": "Laura Sava explicitly cooks chopped spinach in milk, flour and garlic sauce. The definition identifies this particular creamy variant, while another established original author confirms the familiar cooked spinach and garlic dish using cooking cream.",
+      "sources": [
+        "https://www.laurasava.ro/spanac-cu-lapte/"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "items": [
+    {
+      "id": "supa-rosii-supa",
+      "rationale": "Jamila lists tomatoes, onion, garlic, rice and chicken soup base, with cooking time and text explaining broth and rice thickening. The short caption describes cooking these ingredients without claiming that a bare two-ingredient mixture is sufficient; the linked video was not separately watched.",
+      "sources": [
+        "https://jamilacuisine.ro/supa-de-rosii-cu-orez-reteta-video/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "supa-rosii-orez",
+      "rationale": "Dana Burlacu boils tomatoes in water, adds sauteed onion and carrot, blends, and adds separately cooked rice at the end. The draft preserves that order and the author’s basil serving choice.",
+      "sources": [
+        "https://prajituricisialtele.ro/2020/08/10/supa-de-rosii-cu-orez/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "mancare-spanac-usturoi",
+      "rationale": "Laura Sava boils, drains and chops spinach, then combines it with a cooked milk-and-flour sauce containing briefly heated garlic. Both the chosen cue and the caption retain the complete preparation, not raw spinach mixed with garlic.",
+      "sources": [
+        "https://www.laurasava.ro/spanac-cu-lapte/"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "id": "mancare-spanac-lapte",
+      "rationale": "The same primary recipe adds milk gradually to flour and oil after warming garlic, then combines the sauce with the prepared spinach. The caption accurately distinguishes milk sauce from cream and names prior boiling, draining and chopping.",
+      "sources": [
+        "https://www.laurasava.ro/spanac-cu-lapte/"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "kind": "v97-alchimie-raw-review-v1",
+  "reviewer": "codex-v97-world-factual",
+  "role": "factual",
+  "world_rationale": "Live primary recipe text checked 2026-09-17 supports both familiar dishes and their four cooking cues. The spinach definition deliberately specifies the milk variant. No copied article text, new supplies or ingredient substitutions.",
+  "world_verdict": "accept"
+}

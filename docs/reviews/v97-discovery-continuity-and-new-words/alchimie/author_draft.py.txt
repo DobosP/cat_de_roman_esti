@@ -1,0 +1,58 @@
+"""Unapproved V97 world words; author screening only, no production mutation."""
+import copy,gzip,hashlib,json,sys
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');O=Path(__file__).parent
+sys.path.insert(0,str(R))
+from cat_de_roman_esti.wordgames.discovery_world import authored_snapshot
+from cat_de_roman_esti.wordgames.service import get_service,normalize
+from scripts import build_alchimie_discovery_world as B
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(n,v):(O/n).write_bytes(B.json_bytes(v))
+protected=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json','cat_de_roman_esti/fixtures/quick_games_v92.json','scripts/alchimie_discovery_recipe_source.py','scripts/build_alchimie_discovery_world.py','cat_de_roman_esti/wordgames/discovery_world.py','cat_de_roman_esti/wordgames/alchimie_explore.py']
+pins={f:sha(R/f) for f in protected};world=read(R/protected[2]);svc=get_service()
+tomato='https://jamilacuisine.ro/supa-de-rosii-cu-orez-reteta-video/'
+rice='https://prajituricisialtele.ro/2020/08/10/supa-de-rosii-cu-orez/'
+spinach='https://www.laurasava.ro/spanac-cu-lapte/'
+concepts=[{'id':'alw_food_supa_rosii','label':'Supă de roșii','description':'Supă în care roșiile dau gustul și culoarea de bază, pregătită cu apă sau supă și uneori cu orez.','sources':[tomato,rice]}, {'id':'alw_food_mancare_spanac','label':'Mâncare de spanac','description':'Preparat din spanac gătit și mărunțit; aici varianta cremoasă cu lapte, făină și usturoi.','sources':[spinach]}]
+recipes=[{'id':'supa-rosii-supa','pair_labels':['Roșie','Supă'],'result_label':'Supă de roșii','explanation':'Roșiile se gătesc cu ceapă, usturoi și supă de bază; se adaugă puțin orez și se fierbe până când acesta este gătit.','sources':[tomato]}, {'id':'supa-rosii-orez','pair_labels':['Roșie','Orez'],'result_label':'Supă de roșii','explanation':'Roșiile se fierb cu apă și legume călite, apoi se pasează; orezul fiert separat se adaugă la final, împreună cu busuioc.','sources':[rice]}, {'id':'mancare-spanac-usturoi','pair_labels':['Spanac','Usturoi'],'result_label':'Mâncare de spanac','explanation':'Spanacul opărit și scurs se toacă, apoi se gătește într-un sos de lapte și făină cu usturoi, până devine cremos.','sources':[spinach]}, {'id':'mancare-spanac-lapte','pair_labels':['Spanac','Lapte'],'result_label':'Mâncare de spanac','explanation':'Laptele se adaugă treptat peste făina amestecată cu ulei și usturoi; în sos se încălzește spanacul deja fiert, scurs și tocat.','sources':[spinach]}]
+draft={'kind':'v97-alchimie-author-draft-v1','status':'unapproved','baseline_commit':'36db143ff9a5070e2a85a8176e24de2d6036ea01','baseline_world_sha256':pins[protected[2]],'contingent_on':'An explicit reviewed saved-book compatibility change before a ninth history. Current eight-book runtime/generator remain unchanged.','concepts':concepts,'recipes':recipes}
+write('proposal.json',draft)
+labels={c['label']:c['id'] for c in world['concepts']};normal_ids={normalize(k):v for k,v in labels.items()}
+kg=read(R/protected[0]);surfaces={normalize(s) for n in kg['kg_nodes'] for s in [n['label_ro'],*n.get('aliases',[])]}
+proposal=copy.deepcopy(world)
+for c in concepts:
+ assert normalize(c['label']) not in surfaces and normalize(c['label']) not in normal_ids and svc.resolve(c['label']) is None
+ labels[c['label']]=c['id'];proposal['concepts'].append({'id':c['id'],'label':c['label'],'description':c['description'],'source':'authored:alchimie','redistributable':False,'origin':'authored','references':c['sources'],'snapshot':authored_snapshot(c['id'],c['label'],c['description'],c['sources'])})
+pairs={tuple(r['pair']) for r in world['recipes']};newpairs=[]
+for r in recipes:
+ pair=tuple(sorted(labels[n] for n in r['pair_labels']));assert pair not in pairs and pair not in newpairs;newpairs.append(pair)
+ proposal['recipes'].append({'id':r['id'],'pair':list(pair),'result':labels[r['result_label']],'explanation':r['explanation'],'sources':r['sources']})
+assert proposal['concepts'][:249]==world['concepts'] and proposal['recipes'][:347]==world['recipes']
+assert all(proposal[k]==world[k] for k in ['world','unlocks','goals','compatible_versions'])
+metrics=B.audit(proposal);assert metrics['concepts']==251 and metrics['recipes']==351 and metrics['discoverable_results']==147
+# Archive scan includes raw proposals, served candidates/catalogs and compressed JSON.
+archive_files=[];label_hits=[];pair_hits=[];pair_records=0
+wanted={normalize(c['label']) for c in concepts}
+def scan(v,path):
+ global pair_records
+ if isinstance(v,str):
+  if normalize(v) in wanted:label_hits.append({'path':path,'value':v})
+ elif isinstance(v,list):
+  for part in v:scan(part,path)
+ elif isinstance(v,dict):
+  for field in ['pair','pair_labels']:
+   pair=v.get(field)
+   if isinstance(pair,list) and len(pair)==2 and all(isinstance(x,str) for x in pair):
+    pair_records+=1
+    ids=tuple(sorted(normal_ids.get(normalize(x),x) for x in pair))
+    if ids in newpairs:pair_hits.append({'path':path,'recipe_id':v.get('id'),'pair':pair})
+  for k,part in v.items():scan(k,path);scan(part,path)
+for p in sorted((R/'docs/reviews').rglob('*')):
+ if not p.is_file() or 'v97-discovery-continuity-and-new-words' in p.parts or not(p.name.endswith('.json') or p.name.endswith('.json.gz')):continue
+ try:v=json.loads(gzip.decompress(p.read_bytes()) if p.name.endswith('.gz') else p.read_bytes())
+ except (ValueError,OSError,UnicodeError):continue
+ archive_files.append({'path':str(p.relative_to(R)),'sha256':sha(p)});scan(v,str(p.relative_to(R)))
+assert not label_hits and not pair_hits
+write('author-proof.json',{'kind':'v97-world-author-proof-v1','status':'author-screened-only-unapproved','proposal_sha256':sha(O/'proposal.json'),'preserved_source_artifact_bindings':pins,'old_records_exact':{'concepts':249,'recipes':347},'unchanged':{'starters':8,'later_supplies':96,'supply_tiers':12,'goals':32,'historical_books_in_runtime':8,'max_concepts':256,'max_recipes':512},'metrics_if_later_approved':metrics,'new_pairs':newpairs,'new_labels_shadow_kg_or_aliases':False,'archival_novelty':{'files':archive_files,'recipe_pair_records_examined':pair_records,'label_matches':label_hits,'pair_matches':pair_hits},'limitations':['Both proposed results are terminal: this adds two familiar preparations and four successful pairs, not deeper onward crafting.','No full candidate or approval-bearing catalog is generated; closure object exists only in memory and retains old history solely for author mechanics measurement.','New recipe graph requires a ninth historical book and is intentionally blocked by existing schema/generator until a compatibility design is reviewed.'],'excluded_leads':[{'pair':['Carne de pui','Smântână'],'candidate':'Ciulama de pui','reason':'Pair already yields Ciorbă rădăuțeană; never overwrite existing recipe.'},{'pair':['Spanac','Smântână'],'reason':'Existing Smântână is fermented; source used cooking cream. Chose milk route backed by original2010 recipe instead of blurring ingredient identity.'}], 'no_repository_source_or_fixture_edits':all(sha(R/f)==h for f,h in pins.items())})
+print(json.dumps({'proposal_sha256':sha(O/'proposal.json'),'concepts_if_approved':251,'recipes_if_approved':351,'discoveries_if_approved':147,'novel_pairs':4,'archive_files':len(archive_files),'archive_pairs':pair_records,'history_limit_unchanged':8},indent=2))

@@ -1,0 +1,30 @@
+from pathlib import Path
+import hashlib,json,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');O=Path(__file__).parent
+sys.path[:0]=[str(R),str(R/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import validate_world,MAX_CATALOG_BYTES
+J='codex-v97-world-factual'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+a=read(O/'live-audit.json');c=read(O/'proposed-catalog.json');review=read(O/'factual-review.json');proof=read(O/'historical-forgery-check.json')
+assert review['reviewer']==J
+assert B.json_bytes(B.build_catalog(O/'candidate.json',O/'factual-review.json',O/'quality-review.json'))==(O/'proposed-catalog.json').read_bytes()
+assert a['catalog_sha256']==proof['catalog_sha256']==sha(O/'proposed-catalog.json')
+assert a['verdict']=='accept' and all(a['checks'].values())
+assert {x['path'] for x in a['runtime_sources']}==set(B.RUNTIME_SOURCES)
+for x in a['runtime_sources']:assert sha(R/x['path'])==x['sha256']
+world=validate_world(c)
+assert len(a['goal_replays'])==33 and all(x['complete'] and x['all_recipes_consistent'] and x['replayed_discoveries']==147 for x in a['goal_replays'])
+assert len(a['compatible_save_replays'])==9 and sum(x['prefixes_preserved'] for x in a['compatible_save_replays'])==1009
+assert all(x['all_earned_concepts_preserved'] for x in a['compatible_save_replays'])
+assert a['metrics']['concepts']==251 and a['metrics']['recipes']==351
+assert proof['passed'] and proof['rejections']==347 and len(proof['histories'])==9
+assert proof['runtime_sha256']==sha(R/'cat_de_roman_esti/wordgames/discovery_world.py')
+assert proof['explore_sha256']==sha(R/'cat_de_roman_esti/wordgames/alchimie_explore.py')
+assert len((O/'proposed-catalog.json').read_bytes())<MAX_CATALOG_BYTES
+result={'kind':B.FINAL_REVIEW_KIND,'role':'factual','reviewer':J,'catalog_sha256':sha(O/'proposed-catalog.json'),'audit_sha256':sha(O/'live-audit.json'),'verdict':'accept','rationale':'The catalog reproduces the separately reviewed candidate and exact source bindings. All 351 recipe records agree with factual acceptance; 33 goal-independent live replays earn all 147 discoveries. Nine historical books preserve all 1,009 earned prefixes, while 347 newer-pair forgeries are rejected under their old fingerprints. The two new terminal vegetable dishes have explicit cooking steps and original source references. The actual serialized artifact fits the unchanged 2 MiB budget; no older rules, supplies, goals, concepts or recipes are discarded.'}
+(O/'final-factual.json').write_bytes(B.json_bytes(result))
+check={'passed':True,'reviewer':J,'catalog_sha256':result['catalog_sha256'],'audit_sha256':result['audit_sha256'],'final_review_sha256':sha(O/'final-factual.json'),'source_sha256':sha(Path(__file__)),'catalog_bytes':(O/'proposed-catalog.json').stat().st_size,'catalog_byte_limit':MAX_CATALOG_BYTES,'recipe_hash':world.recipe_hash,'histories':9,'prefixes':1009,'forgeries_rejected':347,'metrics':a['metrics']}
+(O/'final-factual-check.json').write_bytes(B.json_bytes(check))
+print(json.dumps(check))

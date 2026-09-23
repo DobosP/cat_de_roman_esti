@@ -1,0 +1,2858 @@
+{
+  "date": "2026-09-23",
+  "baseline_commit": "240c4591f31c1b8bec59fb5680d4e66f5f0788fe",
+  "kind": "v98-kickoff-baseline",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "23421501b0e4bc391a62d25a577ed9d08c935a9eb48a550ab0e5b2f0e8367acb",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fe88e7265c68a79884eabb257912630722980dccd7238f3a834c6796aa65b400",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "804fcf446487e9925158598c4663f0d61f4508574ad14b2fc4e93a5ba8fe6803",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/contexto.py": "cae2e1115491ba5cf6438de5dac7a2689087e1c13fa80efcc86e35acef9d1101",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "cbbc98d1fe076d002e06d71e8b8881a4b950e4510879e309fa12f106070983da",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+    "frontend/src/explorationSave.ts": "206a31cad9ff7d046c87c788bb83ecfbeefee97c602cd72a0b4d074334ecbbe1",
+    "frontend/src/components/StartFailureNotice.tsx": "4513533c61a95b3fbeaab67baeb5f43d94752d93e4474c92a42d996ee5f6b5f4",
+    "scripts/build_alchimie_discovery_world.py": "ed96709b82fdaaf3150b6797454929204192108aa358ca593a01bfa69ab57dee",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+  },
+  "requests": 34,
+  "sessions_cleaned": 9,
+  "response_scope": "Complete response objects with random game_id normalized; request URLs use SESSION placeholders. In-process Django BFF, not a browser or human playtest.",
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/wordgames/alchimie/games?seed=38&difficulty=usor",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 6,
+          "depleted": 0,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 0,
+        "attempted_count": 0,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 9,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/alchimie/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 6,
+          "depleted": 0,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 0,
+        "attempted_count": 0,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 9,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/intrusul/games?seed=38&difficulty=usor&starter=1",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "tiles": [
+          {
+            "id": "n_v28_feeling_social_rusine",
+            "label": "Rușine"
+          },
+          {
+            "id": "n_v24_feeling_needs_oboseala",
+            "label": "Oboseală"
+          },
+          {
+            "id": "n_v24_feeling_needs_sete",
+            "label": "Sete"
+          },
+          {
+            "id": "n_v24_feeling_needs_foame",
+            "label": "Foame"
+          }
+        ],
+        "wrong_ids": [],
+        "attempts": 0,
+        "mistakes": 0,
+        "remaining_mistakes": 3,
+        "won": false,
+        "lost": false,
+        "difficulty": "usor",
+        "hints_used": 0,
+        "hint_available": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/intrusul/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "tiles": [
+          {
+            "id": "n_v28_feeling_social_rusine",
+            "label": "Rușine"
+          },
+          {
+            "id": "n_v24_feeling_needs_oboseala",
+            "label": "Oboseală"
+          },
+          {
+            "id": "n_v24_feeling_needs_sete",
+            "label": "Sete"
+          },
+          {
+            "id": "n_v24_feeling_needs_foame",
+            "label": "Foame"
+          }
+        ],
+        "wrong_ids": [],
+        "attempts": 0,
+        "mistakes": 0,
+        "remaining_mistakes": 3,
+        "won": false,
+        "lost": false,
+        "difficulty": "usor",
+        "hints_used": 0,
+        "hint_available": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/perechi/games?seed=38&difficulty=usor&starter=1",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "tiles": [
+          {
+            "id": "n_v2spo_inot_sportiv",
+            "label": "Înot sportiv",
+            "solved": false
+          },
+          {
+            "id": "n_spt_columbia_romania_1994",
+            "label": "Columbia - România 1994",
+            "solved": false
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "solved": false
+          },
+          {
+            "id": "n_spt_generatia_de_aur",
+            "label": "Generația de Aur",
+            "solved": false
+          },
+          {
+            "id": "n_v2spo_turneu_grand_slam",
+            "label": "Turneu de Grand Slam",
+            "solved": false
+          },
+          {
+            "id": "n_spt_wimbledon",
+            "label": "Wimbledon",
+            "solved": false
+          },
+          {
+            "id": "n_spt_helmut_duckadam",
+            "label": "Helmut Duckadam",
+            "solved": false
+          },
+          {
+            "id": "n_spt_patru_penaltyuri",
+            "label": "Patru penalty-uri apărate",
+            "solved": false
+          }
+        ],
+        "solved_pairs": [],
+        "solved_count": 0,
+        "remaining_pairs": 4,
+        "mistakes": 0,
+        "remaining_mistakes": 6,
+        "actions": 0,
+        "hint_available": false,
+        "hints_used": 0,
+        "won": false,
+        "lost": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/perechi/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "tiles": [
+          {
+            "id": "n_v2spo_inot_sportiv",
+            "label": "Înot sportiv",
+            "solved": false
+          },
+          {
+            "id": "n_spt_columbia_romania_1994",
+            "label": "Columbia - România 1994",
+            "solved": false
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "solved": false
+          },
+          {
+            "id": "n_spt_generatia_de_aur",
+            "label": "Generația de Aur",
+            "solved": false
+          },
+          {
+            "id": "n_v2spo_turneu_grand_slam",
+            "label": "Turneu de Grand Slam",
+            "solved": false
+          },
+          {
+            "id": "n_spt_wimbledon",
+            "label": "Wimbledon",
+            "solved": false
+          },
+          {
+            "id": "n_spt_helmut_duckadam",
+            "label": "Helmut Duckadam",
+            "solved": false
+          },
+          {
+            "id": "n_spt_patru_penaltyuri",
+            "label": "Patru penalty-uri apărate",
+            "solved": false
+          }
+        ],
+        "solved_pairs": [],
+        "solved_count": 0,
+        "remaining_pairs": 4,
+        "mistakes": 0,
+        "remaining_mistakes": 6,
+        "actions": 0,
+        "hint_available": false,
+        "hints_used": 0,
+        "won": false,
+        "lost": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/conexiuni/games?seed=38&difficulty=usor",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "tiles": [
+          {
+            "id": "n_v42vdr_maxi_taxi",
+            "label": "Maxi-taxi"
+          },
+          {
+            "id": "n_v42vdr_stampila",
+            "label": "Ștampila"
+          },
+          {
+            "id": "n_v42vdr_cutia_biscuiti",
+            "label": "Cutia de biscuiți cu ață"
+          },
+          {
+            "id": "n_vdr_punga_cu_pungi",
+            "label": "Punga cu pungi"
+          },
+          {
+            "id": "n_vdr_descurcare_romaneasca",
+            "label": "Descurcăreala de zi cu zi"
+          },
+          {
+            "id": "n_v42vdr_se_rezolva",
+            "label": "Se rezolvă"
+          },
+          {
+            "id": "n_v3via_coada",
+            "label": "Coada"
+          },
+          {
+            "id": "n_v3via_sacosa",
+            "label": "Sacoșa"
+          },
+          {
+            "id": "n_v42vdr_autostopul",
+            "label": "Autostopul"
+          },
+          {
+            "id": "n_v42vdr_reveniti_maine",
+            "label": "Reveniți mâine"
+          },
+          {
+            "id": "n_vdr_lasa_ca_merge",
+            "label": "Lasă că merge și așa"
+          },
+          {
+            "id": "n_v42vdr_las_ca_stiu_eu",
+            "label": "Știu eu pe cineva"
+          },
+          {
+            "id": "n_v42vdr_personal_cfr",
+            "label": "Trenul personal"
+          },
+          {
+            "id": "n_v3via_naveta",
+            "label": "Naveta"
+          },
+          {
+            "id": "n_v3via_dosar_sina",
+            "label": "Dosar cu șină"
+          },
+          {
+            "id": "n_vdr_borcane_zacusca",
+            "label": "Borcanele de zacuscă"
+          }
+        ],
+        "solved": [],
+        "solved_count": 0,
+        "remaining_groups": 4,
+        "lives": 4,
+        "mistakes": 0,
+        "won": false,
+        "lost": false,
+        "difficulty": "usor",
+        "clues_used": 0,
+        "clue_available": false,
+        "clues": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/conexiuni/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "tiles": [
+          {
+            "id": "n_v42vdr_maxi_taxi",
+            "label": "Maxi-taxi"
+          },
+          {
+            "id": "n_v42vdr_stampila",
+            "label": "Ștampila"
+          },
+          {
+            "id": "n_v42vdr_cutia_biscuiti",
+            "label": "Cutia de biscuiți cu ață"
+          },
+          {
+            "id": "n_vdr_punga_cu_pungi",
+            "label": "Punga cu pungi"
+          },
+          {
+            "id": "n_vdr_descurcare_romaneasca",
+            "label": "Descurcăreala de zi cu zi"
+          },
+          {
+            "id": "n_v42vdr_se_rezolva",
+            "label": "Se rezolvă"
+          },
+          {
+            "id": "n_v3via_coada",
+            "label": "Coada"
+          },
+          {
+            "id": "n_v3via_sacosa",
+            "label": "Sacoșa"
+          },
+          {
+            "id": "n_v42vdr_autostopul",
+            "label": "Autostopul"
+          },
+          {
+            "id": "n_v42vdr_reveniti_maine",
+            "label": "Reveniți mâine"
+          },
+          {
+            "id": "n_vdr_lasa_ca_merge",
+            "label": "Lasă că merge și așa"
+          },
+          {
+            "id": "n_v42vdr_las_ca_stiu_eu",
+            "label": "Știu eu pe cineva"
+          },
+          {
+            "id": "n_v42vdr_personal_cfr",
+            "label": "Trenul personal"
+          },
+          {
+            "id": "n_v3via_naveta",
+            "label": "Naveta"
+          },
+          {
+            "id": "n_v3via_dosar_sina",
+            "label": "Dosar cu șină"
+          },
+          {
+            "id": "n_vdr_borcane_zacusca",
+            "label": "Borcanele de zacuscă"
+          }
+        ],
+        "solved": [],
+        "solved_count": 0,
+        "remaining_groups": 4,
+        "lives": 4,
+        "mistakes": 0,
+        "won": false,
+        "lost": false,
+        "difficulty": "usor",
+        "clues_used": 0,
+        "clue_available": false,
+        "clues": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games?seed=38&difficulty=usor",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 0,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [],
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 0,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [],
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/lant/games?seed=38&difficulty=usor",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "start": {
+          "id": "n_spt_wimbledon",
+          "label": "Wimbledon"
+        },
+        "target": {
+          "id": "n_spt_nastase_numarul_1",
+          "label": "Primul număr 1 ATP",
+          "description": "Ilie Năstase a fost primul lider al clasamentului computerizat ATP, în 1973."
+        },
+        "current": {
+          "id": "n_spt_wimbledon",
+          "label": "Wimbledon"
+        },
+        "path": [
+          {
+            "id": "n_spt_wimbledon",
+            "label": "Wimbledon"
+          }
+        ],
+        "moves": 0,
+        "optimal": 2,
+        "won": false,
+        "difficulty": "usor",
+        "choices": [
+          {
+            "label": "Tenis",
+            "relation": "exemplu și categorie"
+          },
+          {
+            "label": "Turneu de Grand Slam",
+            "relation": "exemplu și categorie"
+          },
+          {
+            "label": "Wimbledon 2019",
+            "relation": "parte și întreg"
+          }
+        ],
+        "backtrack_recommended": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/lant/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "start": {
+          "id": "n_spt_wimbledon",
+          "label": "Wimbledon"
+        },
+        "target": {
+          "id": "n_spt_nastase_numarul_1",
+          "label": "Primul număr 1 ATP",
+          "description": "Ilie Năstase a fost primul lider al clasamentului computerizat ATP, în 1973."
+        },
+        "current": {
+          "id": "n_spt_wimbledon",
+          "label": "Wimbledon"
+        },
+        "path": [
+          {
+            "id": "n_spt_wimbledon",
+            "label": "Wimbledon"
+          }
+        ],
+        "moves": 0,
+        "optimal": 2,
+        "won": false,
+        "difficulty": "usor",
+        "choices": [
+          {
+            "label": "Tenis",
+            "relation": "exemplu și categorie"
+          },
+          {
+            "label": "Turneu de Grand Slam",
+            "relation": "exemplu și categorie"
+          },
+          {
+            "label": "Wimbledon 2019",
+            "relation": "parte și întreg"
+          }
+        ],
+        "backtrack_recommended": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games?seed=23&difficulty=usor&category=viata_de_roman",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 0,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games/SESSION/guess",
+      "input": {
+        "text": "casă"
+      },
+      "status": 200,
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "n_v4soc_casa",
+          "label": "casă",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2353,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games/SESSION/guess",
+      "input": {
+        "text": "intrare"
+      },
+      "status": 200,
+      "response": {
+        "ok": false,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "suggestions": [
+          "Întrebare"
+        ],
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2353,
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games/SESSION/guess",
+      "input": {
+        "text": "toc"
+      },
+      "status": 200,
+      "response": {
+        "ok": false,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "suggestions": [],
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2353,
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games/SESSION/guess",
+      "input": {
+        "text": "toc de ușă"
+      },
+      "status": 200,
+      "response": {
+        "ok": false,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "suggestions": [],
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2353,
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games/SESSION/guess",
+      "input": {
+        "text": "balama"
+      },
+      "status": 200,
+      "response": {
+        "ok": false,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "suggestions": [],
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2353,
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games/SESSION/guess",
+      "input": {
+        "text": "lemn"
+      },
+      "status": 200,
+      "response": {
+        "ok": false,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "suggestions": [],
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2353,
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wordgames/contexto/games/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "attempts": 1,
+        "won": false,
+        "gave_up": false,
+        "reachable_count": 2353,
+        "difficulty": "usor",
+        "guesses": [
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "clues_used": 0,
+        "clue_available": false,
+        "board_category": "viata_de_roman"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/wordgames/contexto/games/SESSION/guess",
+      "input": {
+        "text": "ușă"
+      },
+      "status": 200,
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "n_v4via_usa",
+          "label": "ușă",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 2
+        },
+        "guesses": [
+          {
+            "id": "n_v4via_usa",
+            "label": "ușă",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 2
+          },
+          {
+            "id": "n_v4soc_casa",
+            "label": "casă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 2,
+        "won": true,
+        "reachable_count": 2353,
+        "feedback": {
+          "kind": "found",
+          "message": "Exact — ai găsit răspunsul!"
+        },
+        "clues_used": 0,
+        "clue_available": false,
+        "target": {
+          "id": "n_v4via_usa",
+          "label": "ușă",
+          "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință."
+        },
+        "score": 940,
+        "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟩🎯\n2 incercari"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/alchimie/explore",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "revision": 0,
+        "mode": "explore",
+        "compatible_recipe_hashes": [
+          "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+          "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+          "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+          "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+          "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+          "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+          "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+          "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+          "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4"
+        ],
+        "empty_pairs": [],
+        "world": {
+          "id": "bucataria-romaneasca-v1",
+          "title": "Bucătăria românească",
+          "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+          "total_concepts": 251,
+          "total_recipes": 351
+        },
+        "inventory": [
+          {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_apa",
+            "label": "Apă",
+            "description": "Lichid de băut și ingredient de bază în gătit.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "description": "Lichid alimentar folosit ca băutură și ingredient lactat.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_sare",
+            "label": "Sare",
+            "description": "Mineral alimentar folosit pentru gust și conservare.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cheag",
+            "label": "Cheag alimentar",
+            "description": "Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_malai",
+            "label": "Mălai",
+            "description": "Produs din măcinarea boabelor de porumb, folosit pentru mămăligă.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": false
+          },
+          {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "description": "Ingredient alimentar folosit la gătit, copt și preparate festive.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          }
+        ],
+        "discovered_count": 0,
+        "seed_count": 8,
+        "complete": false,
+        "goal_id": null,
+        "goals": [
+          {
+            "id": "paine",
+            "title": "Prima pâine",
+            "label": "Pâine",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "bulz",
+            "title": "Gust de stână",
+            "label": "Bulz",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "muraturi",
+            "title": "Cămara pentru iarnă",
+            "label": "Murături",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciorba-fasole",
+            "title": "O ciorbă de casă",
+            "label": "Ciorbă de fasole",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cozonac",
+            "title": "Cozonacul de sărbătoare",
+            "label": "Cozonac",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "papanasi",
+            "title": "Papanași pentru desert",
+            "label": "Papanași",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "inghetata",
+            "title": "Un desert rece",
+            "label": "Înghețată",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "diplomat",
+            "title": "Tortul de sărbătoare",
+            "label": "Tort Diplomat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sarmale",
+            "title": "Sarmale pentru masă",
+            "label": "Sarmale",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sandvis",
+            "title": "O gustare din ce ai descoperit",
+            "label": "Sandviș",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "clatite",
+            "title": "Clătite la tigaie",
+            "label": "Clătite",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pizza",
+            "title": "Pizza de casă",
+            "label": "Pizza",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "snitel",
+            "title": "Crusta crocantă",
+            "label": "Șnițel",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "zacusca",
+            "title": "Încă un borcan în cămară",
+            "label": "Zacuscă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "urda",
+            "title": "Din zer, o nouă brânză",
+            "label": "Urdă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mucenici",
+            "title": "Opturi dulci",
+            "label": "Mucenici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cornulete",
+            "title": "Cornulețe fragede",
+            "label": "Cornulețe",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "halva",
+            "title": "Dulce din semințe",
+            "label": "Halva",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "placinte",
+            "title": "Plăcinte dulci sau sărate",
+            "label": "Plăcinte",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pepene-murat",
+            "title": "Pepeni pentru cămara de iarnă",
+            "label": "Pepene murat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "branza-burduf",
+            "title": "Brânză frământată la stână",
+            "label": "Brânză de burduf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "langosi",
+            "title": "Turte calde cu usturoi",
+            "label": "Langoși",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "merdenea",
+            "title": "Foi fragede cu brânză",
+            "label": "Merdenea",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "savarina",
+            "title": "Frișcă și prăjitură însiropată",
+            "label": "Savarină",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ecler",
+            "title": "O nouă idee pentru crema de vanilie",
+            "label": "Ecler",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "chec",
+            "title": "Checul din tava de acasă",
+            "label": "Chec",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "briose",
+            "title": "Prăjituri în forme mici",
+            "label": "Brioșă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mici",
+            "title": "Mici pe grătar",
+            "label": "Mici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "oua-rosii",
+            "title": "Culori din coji de ceapă",
+            "label": "Ouă roșii",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "salata-boeuf",
+            "title": "Salata mesei de sărbătoare",
+            "label": "Salată de boeuf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sushi",
+            "title": "Orezul întâlnește peștele",
+            "label": "Sushi",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciocolata-dubai",
+            "title": "Fistic și ciocolată crocantă",
+            "label": "Ciocolata Dubai",
+            "completed": false,
+            "target_id": null
+          }
+        ],
+        "hint": null,
+        "unlocked": [],
+        "next_unlock": {
+          "title": "Se deschide cămara",
+          "after_discoveries": 3,
+          "remaining": 3
+        },
+        "progress": {
+          "world_id": "bucataria-romaneasca-v1",
+          "recipe_hash": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "discoveries": []
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/alchimie/explore/SESSION/combine",
+      "input": {
+        "a": "n_v24_food_pantry_faina",
+        "b": "n_v4gas_apa"
+      },
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "revision": 1,
+        "mode": "explore",
+        "compatible_recipe_hashes": [
+          "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+          "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+          "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+          "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+          "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+          "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+          "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+          "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+          "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4"
+        ],
+        "empty_pairs": [],
+        "world": {
+          "id": "bucataria-romaneasca-v1",
+          "title": "Bucătăria românească",
+          "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+          "total_concepts": 251,
+          "total_recipes": 351
+        },
+        "inventory": [
+          {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_apa",
+            "label": "Apă",
+            "description": "Lichid de băut și ingredient de bază în gătit.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "description": "Lichid alimentar folosit ca băutură și ingredient lactat.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_sare",
+            "label": "Sare",
+            "description": "Mineral alimentar folosit pentru gust și conservare.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cheag",
+            "label": "Cheag alimentar",
+            "description": "Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_malai",
+            "label": "Mălai",
+            "description": "Produs din măcinarea boabelor de porumb, folosit pentru mămăligă.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "description": "Ingredient alimentar folosit la gătit, copt și preparate festive.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_aluat",
+            "label": "Aluat",
+            "description": "Amestec de făină și lichid din care se modelează pâine și alte preparate.",
+            "parents": [
+              {
+                "id": "n_v24_food_pantry_faina",
+                "label": "Făină"
+              },
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă"
+              }
+            ],
+            "explanation": "Făina amestecată și frământată cu apă formează un aluat simplu.",
+            "sources": [
+              "https://dexonline.ro/definitie/aluat/322624",
+              "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+            ],
+            "status": "active",
+            "ready": true
+          }
+        ],
+        "discovered_count": 1,
+        "seed_count": 8,
+        "complete": false,
+        "goal_id": null,
+        "goals": [
+          {
+            "id": "paine",
+            "title": "Prima pâine",
+            "label": "Pâine",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "bulz",
+            "title": "Gust de stână",
+            "label": "Bulz",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "muraturi",
+            "title": "Cămara pentru iarnă",
+            "label": "Murături",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciorba-fasole",
+            "title": "O ciorbă de casă",
+            "label": "Ciorbă de fasole",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cozonac",
+            "title": "Cozonacul de sărbătoare",
+            "label": "Cozonac",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "papanasi",
+            "title": "Papanași pentru desert",
+            "label": "Papanași",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "inghetata",
+            "title": "Un desert rece",
+            "label": "Înghețată",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "diplomat",
+            "title": "Tortul de sărbătoare",
+            "label": "Tort Diplomat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sarmale",
+            "title": "Sarmale pentru masă",
+            "label": "Sarmale",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sandvis",
+            "title": "O gustare din ce ai descoperit",
+            "label": "Sandviș",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "clatite",
+            "title": "Clătite la tigaie",
+            "label": "Clătite",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pizza",
+            "title": "Pizza de casă",
+            "label": "Pizza",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "snitel",
+            "title": "Crusta crocantă",
+            "label": "Șnițel",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "zacusca",
+            "title": "Încă un borcan în cămară",
+            "label": "Zacuscă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "urda",
+            "title": "Din zer, o nouă brânză",
+            "label": "Urdă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mucenici",
+            "title": "Opturi dulci",
+            "label": "Mucenici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cornulete",
+            "title": "Cornulețe fragede",
+            "label": "Cornulețe",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "halva",
+            "title": "Dulce din semințe",
+            "label": "Halva",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "placinte",
+            "title": "Plăcinte dulci sau sărate",
+            "label": "Plăcinte",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pepene-murat",
+            "title": "Pepeni pentru cămara de iarnă",
+            "label": "Pepene murat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "branza-burduf",
+            "title": "Brânză frământată la stână",
+            "label": "Brânză de burduf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "langosi",
+            "title": "Turte calde cu usturoi",
+            "label": "Langoși",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "merdenea",
+            "title": "Foi fragede cu brânză",
+            "label": "Merdenea",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "savarina",
+            "title": "Frișcă și prăjitură însiropată",
+            "label": "Savarină",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ecler",
+            "title": "O nouă idee pentru crema de vanilie",
+            "label": "Ecler",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "chec",
+            "title": "Checul din tava de acasă",
+            "label": "Chec",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "briose",
+            "title": "Prăjituri în forme mici",
+            "label": "Brioșă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mici",
+            "title": "Mici pe grătar",
+            "label": "Mici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "oua-rosii",
+            "title": "Culori din coji de ceapă",
+            "label": "Ouă roșii",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "salata-boeuf",
+            "title": "Salata mesei de sărbătoare",
+            "label": "Salată de boeuf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sushi",
+            "title": "Orezul întâlnește peștele",
+            "label": "Sushi",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciocolata-dubai",
+            "title": "Fistic și ciocolată crocantă",
+            "label": "Ciocolata Dubai",
+            "completed": false,
+            "target_id": null
+          }
+        ],
+        "hint": null,
+        "unlocked": [],
+        "next_unlock": {
+          "title": "Se deschide cămara",
+          "after_discoveries": 3,
+          "remaining": 2
+        },
+        "progress": {
+          "world_id": "bucataria-romaneasca-v1",
+          "recipe_hash": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "discoveries": [
+            [
+              "n_v24_food_pantry_faina",
+              "n_v4gas_apa"
+            ]
+          ]
+        },
+        "message": "Ai descoperit Aluat!",
+        "discovered": [
+          {
+            "id": "n_v84_food_aluat",
+            "label": "Aluat"
+          }
+        ],
+        "result": {
+          "id": "n_v84_food_aluat",
+          "label": "Aluat"
+        },
+        "supplied": [],
+        "already_known": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/alchimie/explore/SESSION",
+      "input": null,
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "revision": 1,
+        "mode": "explore",
+        "compatible_recipe_hashes": [
+          "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+          "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+          "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+          "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+          "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+          "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+          "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+          "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+          "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4"
+        ],
+        "empty_pairs": [],
+        "world": {
+          "id": "bucataria-romaneasca-v1",
+          "title": "Bucătăria românească",
+          "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+          "total_concepts": 251,
+          "total_recipes": 351
+        },
+        "inventory": [
+          {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_apa",
+            "label": "Apă",
+            "description": "Lichid de băut și ingredient de bază în gătit.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "description": "Lichid alimentar folosit ca băutură și ingredient lactat.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_sare",
+            "label": "Sare",
+            "description": "Mineral alimentar folosit pentru gust și conservare.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cheag",
+            "label": "Cheag alimentar",
+            "description": "Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_malai",
+            "label": "Mălai",
+            "description": "Produs din măcinarea boabelor de porumb, folosit pentru mămăligă.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "description": "Ingredient alimentar folosit la gătit, copt și preparate festive.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_aluat",
+            "label": "Aluat",
+            "description": "Amestec de făină și lichid din care se modelează pâine și alte preparate.",
+            "parents": [
+              {
+                "id": "n_v24_food_pantry_faina",
+                "label": "Făină"
+              },
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă"
+              }
+            ],
+            "explanation": "Făina amestecată și frământată cu apă formează un aluat simplu.",
+            "sources": [
+              "https://dexonline.ro/definitie/aluat/322624",
+              "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+            ],
+            "status": "active",
+            "ready": true
+          }
+        ],
+        "discovered_count": 1,
+        "seed_count": 8,
+        "complete": false,
+        "goal_id": null,
+        "goals": [
+          {
+            "id": "paine",
+            "title": "Prima pâine",
+            "label": "Pâine",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "bulz",
+            "title": "Gust de stână",
+            "label": "Bulz",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "muraturi",
+            "title": "Cămara pentru iarnă",
+            "label": "Murături",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciorba-fasole",
+            "title": "O ciorbă de casă",
+            "label": "Ciorbă de fasole",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cozonac",
+            "title": "Cozonacul de sărbătoare",
+            "label": "Cozonac",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "papanasi",
+            "title": "Papanași pentru desert",
+            "label": "Papanași",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "inghetata",
+            "title": "Un desert rece",
+            "label": "Înghețată",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "diplomat",
+            "title": "Tortul de sărbătoare",
+            "label": "Tort Diplomat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sarmale",
+            "title": "Sarmale pentru masă",
+            "label": "Sarmale",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sandvis",
+            "title": "O gustare din ce ai descoperit",
+            "label": "Sandviș",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "clatite",
+            "title": "Clătite la tigaie",
+            "label": "Clătite",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pizza",
+            "title": "Pizza de casă",
+            "label": "Pizza",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "snitel",
+            "title": "Crusta crocantă",
+            "label": "Șnițel",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "zacusca",
+            "title": "Încă un borcan în cămară",
+            "label": "Zacuscă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "urda",
+            "title": "Din zer, o nouă brânză",
+            "label": "Urdă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mucenici",
+            "title": "Opturi dulci",
+            "label": "Mucenici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cornulete",
+            "title": "Cornulețe fragede",
+            "label": "Cornulețe",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "halva",
+            "title": "Dulce din semințe",
+            "label": "Halva",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "placinte",
+            "title": "Plăcinte dulci sau sărate",
+            "label": "Plăcinte",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pepene-murat",
+            "title": "Pepeni pentru cămara de iarnă",
+            "label": "Pepene murat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "branza-burduf",
+            "title": "Brânză frământată la stână",
+            "label": "Brânză de burduf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "langosi",
+            "title": "Turte calde cu usturoi",
+            "label": "Langoși",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "merdenea",
+            "title": "Foi fragede cu brânză",
+            "label": "Merdenea",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "savarina",
+            "title": "Frișcă și prăjitură însiropată",
+            "label": "Savarină",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ecler",
+            "title": "O nouă idee pentru crema de vanilie",
+            "label": "Ecler",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "chec",
+            "title": "Checul din tava de acasă",
+            "label": "Chec",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "briose",
+            "title": "Prăjituri în forme mici",
+            "label": "Brioșă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mici",
+            "title": "Mici pe grătar",
+            "label": "Mici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "oua-rosii",
+            "title": "Culori din coji de ceapă",
+            "label": "Ouă roșii",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "salata-boeuf",
+            "title": "Salata mesei de sărbătoare",
+            "label": "Salată de boeuf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sushi",
+            "title": "Orezul întâlnește peștele",
+            "label": "Sushi",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciocolata-dubai",
+            "title": "Fistic și ciocolată crocantă",
+            "label": "Ciocolata Dubai",
+            "completed": false,
+            "target_id": null
+          }
+        ],
+        "hint": null,
+        "unlocked": [],
+        "next_unlock": {
+          "title": "Se deschide cămara",
+          "after_discoveries": 3,
+          "remaining": 2
+        },
+        "progress": {
+          "world_id": "bucataria-romaneasca-v1",
+          "recipe_hash": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "discoveries": [
+            [
+              "n_v24_food_pantry_faina",
+              "n_v4gas_apa"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/alchimie/explore",
+      "input": {
+        "progress": {
+          "world_id": "bucataria-romaneasca-v1",
+          "recipe_hash": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "discoveries": [
+            [
+              "n_v24_food_pantry_faina",
+              "n_v4gas_apa"
+            ]
+          ]
+        },
+        "goal_id": null
+      },
+      "status": 200,
+      "response": {
+        "game_id": "normalized-ephemeral-session",
+        "revision": 0,
+        "mode": "explore",
+        "compatible_recipe_hashes": [
+          "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+          "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+          "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+          "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+          "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+          "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+          "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+          "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+          "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4"
+        ],
+        "empty_pairs": [],
+        "world": {
+          "id": "bucataria-romaneasca-v1",
+          "title": "Bucătăria românească",
+          "description": "Descoperă ingrediente și preparate, apoi folosește-le în combinații noi. Perechile surprind ideea unui preparat, nu întreaga rețetă de gătit.",
+          "total_concepts": 251,
+          "total_recipes": 351
+        },
+        "inventory": [
+          {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_apa",
+            "label": "Apă",
+            "description": "Lichid de băut și ingredient de bază în gătit.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "description": "Lichid alimentar folosit ca băutură și ingredient lactat.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_sare",
+            "label": "Sare",
+            "description": "Mineral alimentar folosit pentru gust și conservare.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cheag",
+            "label": "Cheag alimentar",
+            "description": "Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_malai",
+            "label": "Mălai",
+            "description": "Produs din măcinarea boabelor de porumb, folosit pentru mămăligă.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "description": "Ingredient alimentar folosit la gătit, copt și preparate festive.",
+            "parents": null,
+            "explanation": null,
+            "sources": [],
+            "status": "active",
+            "ready": true
+          },
+          {
+            "id": "n_v84_food_aluat",
+            "label": "Aluat",
+            "description": "Amestec de făină și lichid din care se modelează pâine și alte preparate.",
+            "parents": [
+              {
+                "id": "n_v24_food_pantry_faina",
+                "label": "Făină"
+              },
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă"
+              }
+            ],
+            "explanation": "Făina amestecată și frământată cu apă formează un aluat simplu.",
+            "sources": [
+              "https://dexonline.ro/definitie/aluat/322624",
+              "https://www.oetker.ro/retete/r/cozonac-moldovenesc-cu-nuca"
+            ],
+            "status": "active",
+            "ready": true
+          }
+        ],
+        "discovered_count": 1,
+        "seed_count": 8,
+        "complete": false,
+        "goal_id": null,
+        "goals": [
+          {
+            "id": "paine",
+            "title": "Prima pâine",
+            "label": "Pâine",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "bulz",
+            "title": "Gust de stână",
+            "label": "Bulz",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "muraturi",
+            "title": "Cămara pentru iarnă",
+            "label": "Murături",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciorba-fasole",
+            "title": "O ciorbă de casă",
+            "label": "Ciorbă de fasole",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cozonac",
+            "title": "Cozonacul de sărbătoare",
+            "label": "Cozonac",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "papanasi",
+            "title": "Papanași pentru desert",
+            "label": "Papanași",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "inghetata",
+            "title": "Un desert rece",
+            "label": "Înghețată",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "diplomat",
+            "title": "Tortul de sărbătoare",
+            "label": "Tort Diplomat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sarmale",
+            "title": "Sarmale pentru masă",
+            "label": "Sarmale",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sandvis",
+            "title": "O gustare din ce ai descoperit",
+            "label": "Sandviș",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "clatite",
+            "title": "Clătite la tigaie",
+            "label": "Clătite",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pizza",
+            "title": "Pizza de casă",
+            "label": "Pizza",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "snitel",
+            "title": "Crusta crocantă",
+            "label": "Șnițel",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "zacusca",
+            "title": "Încă un borcan în cămară",
+            "label": "Zacuscă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "urda",
+            "title": "Din zer, o nouă brânză",
+            "label": "Urdă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mucenici",
+            "title": "Opturi dulci",
+            "label": "Mucenici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "cornulete",
+            "title": "Cornulețe fragede",
+            "label": "Cornulețe",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "halva",
+            "title": "Dulce din semințe",
+            "label": "Halva",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "placinte",
+            "title": "Plăcinte dulci sau sărate",
+            "label": "Plăcinte",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "pepene-murat",
+            "title": "Pepeni pentru cămara de iarnă",
+            "label": "Pepene murat",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "branza-burduf",
+            "title": "Brânză frământată la stână",
+            "label": "Brânză de burduf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "langosi",
+            "title": "Turte calde cu usturoi",
+            "label": "Langoși",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "merdenea",
+            "title": "Foi fragede cu brânză",
+            "label": "Merdenea",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "savarina",
+            "title": "Frișcă și prăjitură însiropată",
+            "label": "Savarină",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ecler",
+            "title": "O nouă idee pentru crema de vanilie",
+            "label": "Ecler",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "chec",
+            "title": "Checul din tava de acasă",
+            "label": "Chec",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "briose",
+            "title": "Prăjituri în forme mici",
+            "label": "Brioșă",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "mici",
+            "title": "Mici pe grătar",
+            "label": "Mici",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "oua-rosii",
+            "title": "Culori din coji de ceapă",
+            "label": "Ouă roșii",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "salata-boeuf",
+            "title": "Salata mesei de sărbătoare",
+            "label": "Salată de boeuf",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "sushi",
+            "title": "Orezul întâlnește peștele",
+            "label": "Sushi",
+            "completed": false,
+            "target_id": null
+          },
+          {
+            "id": "ciocolata-dubai",
+            "title": "Fistic și ciocolată crocantă",
+            "label": "Ciocolata Dubai",
+            "completed": false,
+            "target_id": null
+          }
+        ],
+        "hint": null,
+        "unlocked": [],
+        "next_unlock": {
+          "title": "Se deschide cămara",
+          "after_discoveries": 3,
+          "remaining": 2
+        },
+        "progress": {
+          "world_id": "bucataria-romaneasca-v1",
+          "recipe_hash": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "discoveries": [
+            [
+              "n_v24_food_pantry_faina",
+              "n_v4gas_apa"
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "door": {
+    "node": {
+      "id": "n_v4via_usa",
+      "node_type": "concept",
+      "label_ro": "ușă",
+      "category": "viata_de_roman",
+      "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință.",
+      "salience": 0.6855,
+      "difficulty_tier": "easy",
+      "degree": 42,
+      "aliases": [
+        "uși",
+        "ușile"
+      ]
+    },
+    "public_seed": 23,
+    "missing_inputs": [
+      {
+        "word": "intrare",
+        "accepted": false,
+        "attempts_before": 1,
+        "attempts_after": 1,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare."
+      },
+      {
+        "word": "toc",
+        "accepted": false,
+        "attempts_before": 1,
+        "attempts_after": 1,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare."
+      },
+      {
+        "word": "toc de ușă",
+        "accepted": false,
+        "attempts_before": 1,
+        "attempts_after": 1,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare."
+      },
+      {
+        "word": "balama",
+        "accepted": false,
+        "attempts_before": 1,
+        "attempts_after": 1,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare."
+      },
+      {
+        "word": "lemn",
+        "accepted": false,
+        "attempts_before": 1,
+        "attempts_after": 1,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare."
+      }
+    ],
+    "valid_control": "casă",
+    "winning_control": "ușă"
+  },
+  "world": {
+    "concepts": 251,
+    "recipes": 351,
+    "histories": 9,
+    "max_concepts": 256,
+    "max_recipes": 512,
+    "max_histories": 16,
+    "max_bytes": 2097152,
+    "bytes": 818957
+  },
+  "pack_counts": {
+    "conexiuni": 245,
+    "contexto": 265,
+    "lant": 123,
+    "alchimie": 83
+  },
+  "candidate_mutations": 0
+}

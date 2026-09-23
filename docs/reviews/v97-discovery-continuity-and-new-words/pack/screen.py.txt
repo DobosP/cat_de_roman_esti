@@ -1,0 +1,16 @@
+exec(open('/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/pack/scout.py').read().split('for n in k')[0])
+GROUPS=[('Au dinți',['Pieptene','Fierăstrău','Furculiță','om']),('Pot fi bătute',['Covor','Ou','Fasole','Tobă']),('Au foi',['Carte','Caiet','Varză','Plăcintă']),('Au mâner',['Cană','Tigaie','Ciocan','ușă']),('Se pot toca',['Ceapă','Varză','Carne','Vinete']),('Se ung pe pâine',['Unt','Icre','Salată de vinete','Cremă de ciocolată']),('Se cântă la ele',['Pian','Chitară','Vioară','Fluier']),('Pot fi electrice',['Chitară','Tren','Cuptor de bucătărie','Bicicletă']),('Se umplu în rețete',['Ardei','Gogoși','Clătite','Ou'])]
+for title,labels in GROUPS:
+ ids=[s.resolve(n) for n in labels];maximum=[]
+ for scope,rs in [('served',p['conexiuni']),('rejected',C.load_rejection_tombstones()),('raw',[row for _,row in raw['conexiuni']])]:
+  for row in rs:
+   groups=list(row['groups'].values()) if isinstance(row['groups'],dict) else [g['tiles'] for g in row['groups']]
+   for group in groups:
+    if len(set(ids)&set(group))>=3:maximum.append((scope,[s.label(n) for n in group]))
+ print('GROUP',title,labels,ids,'FAIL',maximum[:5])
+cl=Client()
+for label,guesses in [('Aragaz',['bucătărie','a găti','foc','gaz','cuptor','cratiță','tigaie','frigider','mâncare']),('Dulceață',['fruct','dulce','desert','prună','căpșună','zahăr','borcan','gem','pâine','clătite']),('Salată de vinete',['vinete','legume','pâine','ceapă','ulei','maioneză','roșie','salată'])]:
+ target=s.resolve(label);ss=contexto._build_session(target,'usor',None);sid=contexto.store.create(ss);steps=[]
+ for text in guesses:
+  out=cl.post(f'/api/wordgames/contexto/games/{sid}/guess',{'text':text},content_type='application/json').json();steps.append((text,out.get('guess',{}).get('rank'),out.get('guess',{}).get('temperature'),out.get('ok')))
+ print('TARGET',label,'previousraw',[path for path,row in raw['contexto'] if row['target']==target],steps)

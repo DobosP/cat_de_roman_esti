@@ -1,0 +1,181 @@
+{
+  "baseline_commit": "36db143ff9a5070e2a85a8176e24de2d6036ea01",
+  "encoding_roundtrip_all9_mechanics_exact": true,
+  "guards": {
+    "generator": "invalid compatible history",
+    "prototype_mutations": {
+      "changed_hash": "rejected",
+      "changed_world": "rejected",
+      "duplicate_recipe": "rejected",
+      "missing_recipe": "rejected",
+      "unknown_recipe": "rejected",
+      "unknown_supply": "rejected"
+    },
+    "runtime_schema": "rejects ninth version"
+  },
+  "kind": "v97-history-design-prototype-v1",
+  "limits": {
+    "catalog_bytes": 2097152,
+    "concepts": 256,
+    "existing_histories": 8,
+    "proposed_small_limit": 16,
+    "recipes": 512
+  },
+  "measurements": {
+    "current_validation_ms_median_5_warm_runs": 10.703685999942536,
+    "existing8_full_history": {
+      "compact_bytes": 188758,
+      "gzip_pretty_bytes": 22713,
+      "pretty_bytes": 363050
+    },
+    "full16_size_only": {
+      "compact_bytes": 708198,
+      "gzip_pretty_bytes": 105793,
+      "pretty_bytes": 1280959
+    },
+    "installed_catalog": {
+      "compact_bytes": 453582,
+      "gzip_pretty_bytes": 73716,
+      "pretty_bytes": 749055
+    },
+    "installed_raw_bytes": 749055,
+    "next9_full_catalog_size_only": {
+      "compact_bytes": 485409,
+      "gzip_pretty_bytes": 77619,
+      "pretty_bytes": 815543
+    },
+    "next9_full_history": {
+      "compact_bytes": 220585,
+      "gzip_pretty_bytes": 26545,
+      "pretty_bytes": 424326
+    },
+    "next9_reference_catalog_size_only": {
+      "compact_bytes": 310962,
+      "gzip_pretty_bytes": 54027,
+      "pretty_bytes": 429210
+    },
+    "next9_reference_history": {
+      "compact_bytes": 46136,
+      "gzip_pretty_bytes": 3961,
+      "pretty_bytes": 68955
+    },
+    "reference16_size_only": {
+      "compact_bytes": 359304,
+      "gzip_pretty_bytes": 54802,
+      "pretty_bytes": 505769
+    }
+  },
+  "prototype_scope": "Reference-codec proof and existing-runtime replays only; no production schema modification, no new catalog approval, no runtime cap change.",
+  "replays": [
+    {
+      "index": 0,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 58,
+      "owned": 75,
+      "prefixes_preserved": 39,
+      "recipe_count": 57,
+      "recipe_hash": "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+      "source_sha256": "559abb0b475665f73b010b1a0acdc7650576d829819a50a2e99bdd50700f8fae",
+      "supply_tiers": 4
+    },
+    {
+      "index": 1,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 61,
+      "owned": 111,
+      "prefixes_preserved": 58,
+      "recipe_count": 116,
+      "recipe_hash": "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+      "source_sha256": "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209",
+      "supply_tiers": 6
+    },
+    {
+      "index": 2,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 52,
+      "owned": 221,
+      "prefixes_preserved": 117,
+      "recipe_count": 285,
+      "recipe_hash": "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+      "source_sha256": "da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a",
+      "supply_tiers": 12
+    },
+    {
+      "index": 3,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 49,
+      "owned": 221,
+      "prefixes_preserved": 117,
+      "recipe_count": 288,
+      "recipe_hash": "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+      "source_sha256": "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+      "supply_tiers": 12
+    },
+    {
+      "index": 4,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 46,
+      "owned": 225,
+      "prefixes_preserved": 121,
+      "recipe_count": 294,
+      "recipe_hash": "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+      "source_sha256": "e77e18626d928b58448869fd444a2623c72209450ef2e4a9effcffcb22fa42e8",
+      "supply_tiers": 12
+    },
+    {
+      "index": 5,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 29,
+      "owned": 235,
+      "prefixes_preserved": 131,
+      "recipe_count": 315,
+      "recipe_hash": "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+      "source_sha256": "fd6d47853a424695d1c0ebf6c2a94b18196c9ce7e38560f4b7b4dcb1c4e6bbef",
+      "supply_tiers": 12
+    },
+    {
+      "index": 6,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 15,
+      "owned": 242,
+      "prefixes_preserved": 138,
+      "recipe_count": 332,
+      "recipe_hash": "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+      "source_sha256": "d6432638a94e1ec2a422ec5ed54b060309fa1bb2cfdc1660fa8c4a8d90365188",
+      "supply_tiers": 12
+    },
+    {
+      "index": 7,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 5,
+      "owned": 247,
+      "prefixes_preserved": 143,
+      "recipe_count": 342,
+      "recipe_hash": "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+      "source_sha256": "c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801",
+      "supply_tiers": 12
+    },
+    {
+      "index": 8,
+      "mechanics_exact": true,
+      "newer_recipe_forgeries_rejected": 0,
+      "owned": 249,
+      "prefixes_preserved": 145,
+      "recipe_count": 347,
+      "recipe_hash": "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4",
+      "source_sha256": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+      "supply_tiers": 12
+    }
+  ],
+  "size_projection_note": "Nine-book catalog includes its own current hash and16-book projections repeat entries; these are measurement-only objects, never validated or installable. Actual ninth history requires a genuinely new separately reviewed recipe hash.",
+  "source_bindings": {
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "7e3e770f7788786948ee74e5c87c991d3b88bd1d34b4b082e918f68b391c3788",
+    "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+    "scripts/build_alchimie_discovery_world.py": "fe60f438a7d7b1139a07585db302850bcf73b9994e3c4b13beaddc84cafafc04"
+  },
+  "status": "proposal-not-runtime",
+  "total_future_recipe_forgeries_rejected": 315,
+  "total_prefixes_checked": 1009,
+  "world_sha256": "356270c25d61f16cac3fdb59efa1e0399b18606ee796d498f132a92ad3c9d5c4"
+}

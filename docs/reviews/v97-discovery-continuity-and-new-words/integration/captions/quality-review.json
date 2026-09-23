@@ -1,0 +1,227 @@
+{
+  "candidate_sha256": "610f5c85a282a0af6e7d8a9e04829665a6d58a3cdeda38154837e74b7feb72e0",
+  "checked_on": "2026-09-17",
+  "checks": {
+    "all_old_captions_present": 101,
+    "allowed_directions": 14,
+    "direction_checks": 24,
+    "exact_source_edges": 12,
+    "maximum_caption_length": 31,
+    "recipe_variant_scope_checked": true,
+    "route_coverage": "Two representative shortest routes for each of three existing food rounds, not all possible routes.",
+    "unresolved_findings": [],
+    "withheld_reverse_directions": 10
+  },
+  "items": [
+    {
+      "both_directions_checked": true,
+      "caption": "cuptor și pâine coaptă",
+      "character_count": 22,
+      "edge_sha256": "7fbb959dea82f68c3951c0c17aeefb4eebf00746d2ea42d505ecf972744cc67d",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8585",
+      "pair": [
+        "n_v4gas_paine",
+        "n_v84_food_cuptor"
+      ],
+      "rationale": "The appliance and baked-food nouns make the oven-to-bread step immediately legible. This is a common use of an oven, without asserting that every bread must be baked in this particular appliance.",
+      "sources": [
+        "https://media3.bsh-group.com/Documents/9001253126_A.pdf"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "pâine și bucățele desprinse",
+      "character_count": 27,
+      "edge_sha256": "45eb8429ce1f32dce4e5bf402e61f652efac3451519052171a16978b5f460c5e",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8787",
+      "pair": [
+        "n_v4gas_paine",
+        "n_v90_food_firimitura"
+      ],
+      "rationale": "Detached small pieces explain the bread-to-crumb step in ordinary Romanian. The phrase describes the relation without saying every cut necessarily produces crumbs.",
+      "sources": [
+        "https://dexonline.ro/definitie/firimitur%C4%83"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "cuptor și biscuiți copți",
+      "character_count": 24,
+      "edge_sha256": "ef26c0c388e1c0e973311e802a72a8a68c9fe96a8b5dcc0d569fe2649155fbc5",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8703",
+      "pair": [
+        "n_v24_food_snack_biscuit",
+        "n_v84_food_cuptor"
+      ],
+      "rationale": "The caption identifies an ordinary biscuit preparation method and distinguishes the oven from an ingredient. No reverse traversal or exclusive cooking method is implied.",
+      "sources": [
+        "https://media3.bsh-group.com/Documents/9001253126_A.pdf"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "biscuit și bucățele desprinse",
+      "character_count": 29,
+      "edge_sha256": "2cea5133d564d78610f4948ead10fdede52d5a0d0a48a7ed467ac1a9838b2674",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8788",
+      "pair": [
+        "n_v24_food_snack_biscuit",
+        "n_v90_food_firimitura"
+      ],
+      "rationale": "The small-fragment meaning of crumb covers a broken biscuit. This is a specific material relation, not merely two foods, and the wording does not require crumbs from every bite.",
+      "sources": [
+        "https://dexonline.ro/definitie/firimitur%C4%83"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "frișcă și îndulcitor opțional",
+      "character_count": 29,
+      "edge_sha256": "48feda733ce0739d13b0458caaad82b2ec801f10e52bc32cdfe3573602807d2c",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8668",
+      "pair": [
+        "n_v86_food_frisca",
+        "n_v86_food_zahar_pudra"
+      ],
+      "rationale": "Optional is a necessary qualifier here: unsweetened whipped cream exists. Naming a sweetener explains powdered sugar’s role without making it part of the definition of whipped cream.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "tort și frișca din cremă",
+      "character_count": 24,
+      "edge_sha256": "04a7be12c1fb9a689ab2266e5404855c0bb1537cbfd91ab215d1c18a9e0d11aa",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8723",
+      "pair": [
+        "n_v86_food_frisca",
+        "n_v87_food_tort_diplomat"
+      ],
+      "rationale": "The filling role is more informative than part and whole. The displayed cake identity makes the ordinary Diplomat cream association specific; the phrase is not a claim about every kind of cake.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "pișcot și zahăr de presărat",
+      "character_count": 27,
+      "edge_sha256": "6037c540b23886196b80006de4b424d85b3065dd91e82f1f1a0aa07ffed34b74",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8730",
+      "pair": [
+        "n_v86_food_zahar_pudra",
+        "n_v87_food_piscot"
+      ],
+      "rationale": "Sugar for dusting identifies its purpose rather than claiming it is an obligatory ladyfinger ingredient. The documented dusted version supplies a plausible earned connection.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "tort și margine cu pișcoturi",
+      "character_count": 28,
+      "edge_sha256": "9dc08ffe90fc0d66318750013f6b86fbc20ffa160ddfba6ae7d5e7aeb14388bd",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8722",
+      "pair": [
+        "n_v87_food_piscot",
+        "n_v87_food_tort_diplomat"
+      ],
+      "rationale": "A ladyfinger rim is a documented Diplomat construction and gives the player a visible structural reason for the step. The pair phrase names this supported preparation, without defining all Diplomat variants as identical.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/tort-diplomat"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "plăcintă și aromă de vanilie",
+      "character_count": 28,
+      "edge_sha256": "8da4ba575c82d9630c614542a52618c6de948e97bf685ccf869383ecbaec6b54",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8632",
+      "pair": [
+        "n_gas_placinte_poale_brau",
+        "n_v85_food_vanilie"
+      ],
+      "rationale": "Vanilla aroma describes a familiar sweet-cheese pastry variation. It avoids suggesting that vanilla alone creates the pastry or that every recipe must use it.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/branzoaice-reteta-video-placinte-poale-n-brau.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "plăcintă și umplutură de brânză",
+      "character_count": 31,
+      "edge_sha256": "11fd5b31c8dc53a24e5a8510b104ac7e251913cd135a444762e1f3674b60a11d",
+      "graph_allows_reverse": true,
+      "id": "v97_caption_de1563",
+      "pair": [
+        "n_gas_placinte_poale_brau",
+        "n_v2gas_branza"
+      ],
+      "rationale": "The cheese filling is a clear ordinary reason for the pastry link. The noun phrase remains true when the existing bidirectional edge is traversed from cheese to pastry.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/branzoaice-reteta-video-placinte-poale-n-brau.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "pască și aromă de vanilie",
+      "character_count": 25,
+      "edge_sha256": "efe3858dc0d5b792326c78c0f321c461f16d8d8c23666b8b3c8c55352b1321a1",
+      "graph_allows_reverse": false,
+      "id": "v97_caption_de8631",
+      "pair": [
+        "n_v17gas_pasca",
+        "n_v85_food_vanilie"
+      ],
+      "rationale": "Vanilla supplies an understandable flavor association in the traditional cheese pască version. Neither universal ingredient necessity nor an entire recipe is stated.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/pasca-traditionala-cu-branza-dulce.html"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "pască și umplutură de brânză",
+      "character_count": 28,
+      "edge_sha256": "5d0ab3103ffafb9bb8ceb437b589e0b1fe506a8e9bc6fb9bd67ad8110a8d5924",
+      "graph_allows_reverse": true,
+      "id": "v97_caption_de5529",
+      "pair": [
+        "n_v17gas_pasca",
+        "n_v2gas_branza"
+      ],
+      "rationale": "Cheese filling identifies the traditional dough-based pască version represented by this edge. The phrase remains intelligible in both existing directions and does not assert that other pască variants do not exist.",
+      "sources": [
+        "https://www.lauralaurentiu.ro/retete-culinare/patiserie/pasca-traditionala-cu-branza-dulce.html"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "kind": "lant-caption-review-v1",
+  "limits": "Independent semantic, source-scope and complete-edge review. Final earned-only API display, recovery and narrow-screen readability require separate implementation checks.",
+  "reviewer": "/root/v97_quick",
+  "role": "quality",
+  "runtime_source_sha256": "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1"
+}

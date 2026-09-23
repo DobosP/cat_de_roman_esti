@@ -143,7 +143,7 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 
 - [`docs/STATUS.md`](docs/STATUS.md) — current truth: state, pins, verification record, next actions.
 - [`romanian-game-content`](.agents/skills/romanian-game-content/SKILL.md) — repository skill for
-  refinement and experimental concept discovery; workflow: [ADR-0155](docs/adr/0155-two-track-content-growth.md).
+  refinement and experimental concept discovery; workflow: [ADR-0156](docs/adr/0156-two-track-content-growth.md).
 - [`docs/BETA_CANDIDATE.md`](docs/BETA_CANDIDATE.md) — anonymous-beta evidence, bounded quality waves, outstanding gates and Romanian-player playtest protocol.
 - [`AGENTS.md`](AGENTS.md) — operating contract for agent sessions (Claude Code and Codex).
 - [`docs/agent-map.md`](docs/agent-map.md) — entry points, task routes, do-not-load list.
@@ -172,6 +172,6 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
 - [`frontend/README.md`](frontend/README.md) — SPA develop/build/layout.
 - History (never edited): [`docs/adr/`](docs/adr/) decision records (0001 = arcade pivot, no
-  graph UI; newest 0140) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
+  graph UI; newest 0155) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
   [`docs/handoffs/`](docs/handoffs/) dated records · [`docs/archive/`](docs/archive/)
   superseded snapshots.

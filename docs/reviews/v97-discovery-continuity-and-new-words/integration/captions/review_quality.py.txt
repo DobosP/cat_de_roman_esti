@@ -1,0 +1,38 @@
+from pathlib import Path
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames import quick_catalog as Q,lant_relations as L
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+P=ROOT/'docs/reviews/v97-discovery-continuity-and-new-words/captions/drafts.json'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+d=json.loads(P.read_bytes());svc=get_service()
+reasons={
+'de8585':'The appliance and baked-food nouns make the oven-to-bread step immediately legible. This is a common use of an oven, without asserting that every bread must be baked in this particular appliance.',
+'de8787':'Detached small pieces explain the bread-to-crumb step in ordinary Romanian. The phrase describes the relation without saying every cut necessarily produces crumbs.',
+'de8703':'The caption identifies an ordinary biscuit preparation method and distinguishes the oven from an ingredient. No reverse traversal or exclusive cooking method is implied.',
+'de8788':'The small-fragment meaning of crumb covers a broken biscuit. This is a specific material relation, not merely two foods, and the wording does not require crumbs from every bite.',
+'de8668':'Optional is a necessary qualifier here: unsweetened whipped cream exists. Naming a sweetener explains powdered sugar’s role without making it part of the definition of whipped cream.',
+'de8723':'The filling role is more informative than part and whole. The displayed cake identity makes the ordinary Diplomat cream association specific; the phrase is not a claim about every kind of cake.',
+'de8730':'Sugar for dusting identifies its purpose rather than claiming it is an obligatory ladyfinger ingredient. The documented dusted version supplies a plausible earned connection.',
+'de8722':'A ladyfinger rim is a documented Diplomat construction and gives the player a visible structural reason for the step. The pair phrase names this supported preparation, without defining all Diplomat variants as identical.',
+'de8632':'Vanilla aroma describes a familiar sweet-cheese pastry variation. It avoids suggesting that vanilla alone creates the pastry or that every recipe must use it.',
+'de1563':'The cheese filling is a clear ordinary reason for the pastry link. The noun phrase remains true when the existing bidirectional edge is traversed from cheese to pastry.',
+'de8631':'Vanilla supplies an understandable flavor association in the traditional cheese pască version. Neither universal ingredient necessity nor an entire recipe is stated.',
+'de5529':'Cheese filling identifies the traditional dough-based pască version represented by this edge. The phrase remains intelligible in both existing directions and does not assert that other pască variants do not exist.'}
+assert len(d['items'])==12 and len(L.REVIEWED_CAPTIONS)==101
+kg=json.loads((ROOT/'cat_de_roman_esti/fixtures/kg_sample.json').read_bytes());raw={e['id']:e for e in kg['kg_edges']};items=[];directions=0
+for r in d['items']:
+ edge=r['edge_snapshot'];a,b=edge['src_id'],edge['dst_id'];live=svc.link(a,b)
+ assert record_snapshot(live)==edge and digest(edge)==r['edge_snapshot_sha256']
+ assert raw[live.id]==r['raw_kg_edge_snapshot'] and digest(raw[live.id])==r['raw_kg_edge_sha256']
+ assert tuple(r['pair']) not in L.REVIEWED_CAPTIONS and len(r['caption'])<=L.MAX_CAPTION_LENGTH
+ reverse=svc.link(b,a);assert (reverse is not None)==edge['bidirectional']
+ if reverse is not None: assert record_snapshot(reverse)==edge
+ directions+=1+int(reverse is not None)
+ items.append({'id':r['id'],'pair':r['pair'],'caption':r['caption'],'verdict':'accept','rationale':reasons[live.id],'sources':r['sources'],'edge_sha256':digest(edge),'both_directions_checked':True,'graph_allows_reverse':reverse is not None,'character_count':len(r['caption'])})
+assert directions==14
+result={'kind':'lant-caption-review-v1','role':'quality','reviewer':'/root/v97_quick','candidate_sha256':sha(P),'kg_sha256':sha(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json'),'runtime_source_sha256':sha(ROOT/'cat_de_roman_esti/wordgames/lant_relations.py'),'checked_on':'2026-09-17','items':items,'checks':{'exact_source_edges':12,'direction_checks':24,'allowed_directions':14,'withheld_reverse_directions':10,'all_old_captions_present':101,'maximum_caption_length':max(len(r['caption']) for r in items),'recipe_variant_scope_checked':True,'route_coverage':'Two representative shortest routes for each of three existing food rounds, not all possible routes.','unresolved_findings':[]},'limits':'Independent semantic, source-scope and complete-edge review. Final earned-only API display, recovery and narrow-screen readability require separate implementation checks.'}
+(OUT/'quality-review.json').write_bytes(Q.json_bytes(result))
+print(json.dumps({'accepted':12,'candidate_sha256':sha(P),'review_sha256':sha(OUT/'quality-review.json')}))

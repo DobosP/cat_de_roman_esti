@@ -1,0 +1,71 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_viata_de_roman_377",
+   "cx_viata_de_roman_374",
+   "lt_gastronomie_246"
+  ]
+ },
+ "verdicts": {
+  "ct_viata_de_roman_377": "promote"
+ },
+ "perItem": [
+  {
+   "id": "ct_viata_de_roman_377",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:1fce92209339897a50f8b1fced521c8df7c74106102cc186381c5cbce71b9a67",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_viata_de_roman_377",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:1fce92209339897a50f8b1fced521c8df7c74106102cc186381c5cbce71b9a67",
+    "rationale": "Promote easy with disclosed vocabulary gaps. C1/C2: Ușă is a concrete, universally familiar entrance closure; original DLRLC/DEX definitions and current Romanian manufacturer use provide independent old/current evidence. C3: seven unique native predecessors are Casa părintească, casă, baie, cheie, Cheia de la gât, Interfonul and Scara blocului. All are recognizable; the count exceeds five without projected guesses, and reachable2353 clears the engine floor. C4: independent BFF probes give casă rank2, baie3, interfon6, cheie7, plus cameră/fereastră/a deschide rank10 within2hops. Projected clanță ranks3, but is supplementary and is not counted toward the native predecessor floor. Bloc is warm at48 despite2hops; it is not mislabeled hot. Intrare, toc, balama and lemn are unknown and cost no attempts; these broad vocabulary limitations are real, but multiple obvious home/access openers are strong. C5: the physical door/doorway assembly is the dominant ordinary sense, with no competing unrelated sense needed. C6: salience0.6855 clears the easy recognition band. Actual public definition is accurate; plural uși wins. No added alias, edge or synthetic predecessor. Strict dossier has no findings. Natural public selection and hint/recovery checks remain after approval.",
+    "sources": [
+     "https://dexonline.ro/definitie/u%C8%99%C4%83",
+     "https://portadoors.com/ro/c/usi-interior-ro/"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_viata_de_roman_377",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:1fce92209339897a50f8b1fced521c8df7c74106102cc186381c5cbce71b9a67",
+    "rationale": "Promote under A1-A7/C1-C6. Independently regenerated dossier shows seven real recognizable incoming nodes and an accurate ordinary door definition; dictionary primary entries confirm the dominant meaning and plural uși. Casa părintească, casă, baie, cheie, Cheia de la gât, Interfonul and Scara blocului meet the native floor without counting projected clanță. The actual allocated BFF probe offers obvious hot openers casă2, baie3, interfon6 and cheie7; window, room and opening remain useful at10. This gives an approachable easy round. Intrare, toc, balama and lemn remain unknown and uncharged, a real vocabulary limitation reserved for a later word expansion. I do not relabel these missing words as synonyms already accepted. No new aliases, synthetic edges, private rank leakage or unresolved A5 issue is introduced.",
+    "sources": [
+     "https://dexonline.ro/definitie/u%C8%99%C4%83"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 1,
+  "verified": 1,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/integration/pack/analyst.json",
+   "sha256": "sha256:be0aac08d8d7f62a74d9af566abf0905c67333cb699fde2201aa65963a8d4144",
+   "reviewer": "/root/v97_pack",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/feat__v97-discovery-continuity-and-new-words/integration/pack/verifier.json",
+   "sha256": "sha256:9f7604c566faf5125691d7f1c314f04ea5f85a7781205d4bf1b600042881c20e",
+   "reviewer": "root-v97-pack-quality",
+   "role": "verifier"
+  }
+ }
+}

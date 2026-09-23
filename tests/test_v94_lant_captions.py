@@ -25,6 +25,18 @@ ROWS = [row for directory, _ in BATCHES
 
 
 def test_v94_caption_approvals_bind_exact_additions_and_preserve_all_old_records():
+    # Reconstruct the exact landed V94 registry; later additions must preserve it.
+    prior = (ROOT / "docs/reviews/v97-discovery-continuity-and-new-words/integration"
+             "/captions/baseline_lant_relations.py.txt").read_bytes()
+    assert hashlib.sha256(prior).hexdigest() == (
+        "04196f152d541ec4175cf007c62fbfa338bd82b4b87428438bc05a765d7401b1"
+    )
+    registry_node = next(n.value.args[0] for n in ast.parse(prior).body
+                         if isinstance(n, ast.Assign) and any(
+                             isinstance(t, ast.Name) and t.id == "REVIEWED_CAPTIONS"
+                             for t in n.targets))
+    historical = ast.literal_eval(registry_node)
+    assert all(REVIEWED_CAPTIONS[pair] == value for pair, value in historical.items())
     raw = (REVIEW / "candidates.json").read_bytes()
     assert hashlib.sha256(raw).hexdigest() == CANDIDATE_SHA
     candidate = json.loads(raw)
@@ -34,9 +46,9 @@ def test_v94_caption_approvals_bind_exact_additions_and_preserve_all_old_records
                 if isinstance(n, ast.Assign) and any(
                     isinstance(t, ast.Name) and t.id == "REVIEWED_CAPTIONS" for t in n.targets))
     old = ast.literal_eval(node)
-    assert len(old) == 80 and len(REVIEWED_CAPTIONS) == 101
-    assert all(REVIEWED_CAPTIONS[pair] == value for pair, value in old.items())
-    assert set(REVIEWED_CAPTIONS) - set(old) == {tuple(row["pair"]) for row in ROWS}
+    assert len(old) == 80 and len(historical) == 101
+    assert all(historical[pair] == value for pair, value in old.items())
+    assert set(historical) - set(old) == {tuple(row["pair"]) for row in ROWS}
     for directory, candidate_sha in BATCHES:
         raw = (directory / "candidates.json").read_bytes()
         assert hashlib.sha256(raw).hexdigest() == candidate_sha

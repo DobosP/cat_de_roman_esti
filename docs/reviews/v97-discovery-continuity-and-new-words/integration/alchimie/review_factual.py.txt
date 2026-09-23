@@ -1,0 +1,49 @@
+"""Independent factual judgments for the two frozen V97 drafts."""
+from pathlib import Path
+from copy import deepcopy
+import hashlib,json,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');O=Path(__file__).parent
+sys.path[:0]=[str(R),str(R/'scripts')]
+import build_alchimie_discovery_world as B
+from cat_de_roman_esti.wordgames.discovery_world import mechanics_for
+J='codex-v97-world-factual'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p):return json.loads(p.read_bytes())
+def write(p,v):p.write_bytes(B.json_bytes(v))
+P=R/'docs/reviews/v96-words-and-input-clarity/integration/alchimie'
+old=read(P/'candidate.json');prior=read(P/'factual-review.json');final=read(P/'final-factual.json');audit=read(P/'live-audit.json')
+assert sha(P/'candidate.json')==prior['candidate_sha256']==B.BASELINE_SHA
+assert final['audit_sha256']==sha(P/'live-audit.json')
+assert final['catalog_sha256']==audit['catalog_sha256']==sha(P/'proposed-catalog.json')
+assert final['reviewer']==prior['reviewer'] and final['verdict']==audit['verdict']==prior['world_verdict']=='accept'
+c=read(O/'candidate.json');raw=read(O/'raw/proposals.json')
+assert (O/'candidate.json').read_bytes()==B.json_bytes(B.candidate())
+cs={x['id']:x for x in c['concepts']};rs={x['id']:x for x in c['recipes']}
+ocs={x['id']:x for x in old['concepts']};ors={x['id']:x for x in old['recipes']}
+pc={x['id']:x for x in prior['concepts']};pr={x['id']:x for x in prior['items']}
+assert len(ocs)==249 and len(ors)==347 and set(pc)==set(ocs) and set(pr)==set(ors)
+for k,v in ocs.items():assert cs[k]==v and pc[k]['verdict']=='accept' and pc[k]['concept_sha256']==B.concept_digest(v)
+for k,v in ors.items():assert rs[k]==v and pr[k]['verdict']=='accept'
+for k in ['world','unlocks','goals']:assert c[k]==old[k]
+for k in ['kg_sha256','rubric_sha256']:assert c['bindings'][k]==old['bindings'][k]
+assert c['compatible_versions'][:-1]==old['compatible_versions'] and len(c['compatible_versions'])==9
+assert c['compatible_versions'][-1]['source_sha256']==sha(P/'candidate.json')
+assert c['compatible_versions'][-1]['mechanics']==mechanics_for(old['world']['starter_ids'],{tuple(r['pair']):r['result'] for r in old['recipes']},[(u['after_discoveries'],u['concept_ids']) for u in old['unlocks']])
+assert set(cs)-set(ocs)=={r['id'] for r in raw['concepts']} and set(rs)-set(ors)=={r['id'] for r in raw['recipes']}
+cr={
+'alw_food_supa_rosii':'Two independent original recipes use tomatoes as the main flavour and colour, with water or chicken broth and rice. The definition permits these variants without claiming that all tomato soups require rice.',
+'alw_food_mancare_spanac':'Laura Sava explicitly cooks chopped spinach in milk, flour and garlic sauce. The definition identifies this particular creamy variant, while another established original author confirms the familiar cooked spinach and garlic dish using cooking cream.'}
+rr={
+'supa-rosii-supa':'Jamila lists tomatoes, onion, garlic, rice and chicken soup base, with cooking time and text explaining broth and rice thickening. The short caption describes cooking these ingredients without claiming that a bare two-ingredient mixture is sufficient; the linked video was not separately watched.',
+'supa-rosii-orez':'Dana Burlacu boils tomatoes in water, adds sauteed onion and carrot, blends, and adds separately cooked rice at the end. The draft preserves that order and the author’s basil serving choice.',
+'mancare-spanac-usturoi':'Laura Sava boils, drains and chops spinach, then combines it with a cooked milk-and-flour sauce containing briefly heated garlic. Both the chosen cue and the caption retain the complete preparation, not raw spinach mixed with garlic.',
+'mancare-spanac-lapte':'The same primary recipe adds milk gradually to flour and oil after warming garlic, then combines the sauce with the prepared spinach. The caption accurately distinguishes milk sauce from cream and names prior boiling, draining and chopping.'}
+newc=[{'id':r['id'],'concept_sha256':B.concept_digest(cs[r['id']]),'verdict':'accept','rationale':cr[r['id']],'sources':r['sources'],'inherited':False} for r in raw['concepts']]
+newr=[{'id':r['id'],'verdict':'accept','rationale':rr[r['id']],'sources':r['sources']} for r in raw['recipes']]
+raw_review={'kind':'v97-alchimie-raw-review-v1','role':'factual','reviewer':J,'candidate_sha256':sha(O/'raw/proposals.json'),'complete_candidate_sha256':sha(O/'candidate.json'),'concepts':newc,'items':newr,'world_verdict':'accept','world_rationale':'Live primary recipe text checked 2026-09-17 supports both familiar dishes and their four cooking cues. The spinach definition deliberately specifies the milk variant. No copied article text, new supplies or ingredient substitutions.'}
+write(O/'raw/factual-review.json',raw_review)
+full={'kind':B.REVIEW_KIND,'role':'factual','reviewer':J,'candidate_sha256':sha(O/'candidate.json'),'world_verdict':'accept','world_rationale':'All 249 V96 concepts and 347 recipes, their exact archived factual judgments, unchanged KG/rubric, starting inventory, supplies and goals permit explicit inheritance. Two terminal dishes add four truthful preparations. Nine complete historical books are preserved; closure reaches 251 concepts and 147 discoveries. The independently reviewed compatibility implementation retains all bounds except the explicit sixteen-book allowance. No claim of measured enjoyment or increased onward crafting.','concepts':[deepcopy(pc[r['id']]) if r['id'] in pc else next(x for x in newc if x['id']==r['id']) for r in c['concepts']],'items':[deepcopy(pr[r['id']]) if r['id'] in pr else next(x for x in newr if x['id']==r['id']) for r in c['recipes']],'baseline_evidence':{'candidate_sha256':sha(P/'candidate.json'),'factual_review_sha256':sha(P/'factual-review.json'),'final_review_sha256':sha(P/'final-factual.json'),'live_audit_sha256':sha(P/'live-audit.json'),'inherited_concepts':249,'inherited_recipes':347,'old_records_and_judgments_exact':True,'raw_candidate_sha256':sha(O/'raw/proposals.json'),'raw_review_sha256':sha(O/'raw/factual-review.json')}}
+write(O/'factual-review.json',full)
+B.read_review(O/'factual-review.json','factual',sha(O/'candidate.json'),set(rs),c['concepts'])
+write(O/'independent-factual-check.json',{'passed':True,'reviewer':J,'checked_date':'2026-09-17','candidate_sha256':sha(O/'candidate.json'),'review_sha256':sha(O/'factual-review.json'),'review_source_sha256':sha(Path(__file__)),'old_concepts_exact':249,'old_recipes_exact':347,'new_concepts':2,'new_recipes':4,'historical_save_generations':9,'source_urls':sorted({s for r in raw['recipes'] for s in r['sources']}|{'https://retetefeldefel.ro/spanac-cu-smantana-si-usturoi/'}),'limitations':['Jamila embedded video not watched; original ingredient list, cooking time and explanatory article read.','Cream spinach variant used only as recognition corroboration, not milk-recipe support.'],'unresolved_findings':[]})
+print(json.dumps({'candidate_sha256':sha(O/'candidate.json'),'factual_review_sha256':sha(O/'factual-review.json'),'concepts':251,'recipes':351}))

@@ -21,6 +21,8 @@ from content_file_transaction import atomic_write  # noqa: E402
 
 from cat_de_roman_esti.graph import Node  # noqa: E402
 from cat_de_roman_esti.wordgames.discovery_world import (  # noqa: E402
+    MAX_CATALOG_BYTES,
+    MAX_COMPATIBLE_VERSIONS,
     MAX_CONCEPTS,
     MAX_RECIPES,
     MAX_SUPPLIES,
@@ -36,8 +38,8 @@ from cat_de_roman_esti.wordgames.service import normalize  # noqa: E402
 CATALOG = ROOT / "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json"
 REVIEW_KIND = "alchimie-discovery-world-review-v1"
 FINAL_REVIEW_KIND = "alchimie-discovery-world-final-v1"
-BASELINE = ROOT / "docs/reviews/v95-discovery-and-game-quality/alchimie/candidate.json"
-BASELINE_SHA = "c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801"
+BASELINE = ROOT / "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json"
+BASELINE_SHA = "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496"
 RUNTIME_SOURCES = (
     "cat_de_roman_esti/wordgames/discovery_world.py",
     "cat_de_roman_esti/wordgames/alchimie_explore.py",
@@ -47,7 +49,7 @@ RUNTIME_SOURCES = (
     "scripts/build_alchimie_discovery_world.py",
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/audit_alchimie_discovery_world.py",
-    "docs/reviews/v95-discovery-and-game-quality/alchimie/candidate.json",
+    "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json",
 )
 
 
@@ -67,6 +69,13 @@ def json_bytes(value: object) -> bytes:
 
 def concept_digest(value: dict) -> str:
     return hashlib.sha256(json_bytes(value)).hexdigest()
+
+
+def catalog_bytes(value: dict) -> bytes:
+    """Apply the serving byte budget before any candidate or catalog write."""
+    data = json_bytes(value)
+    require(len(data) <= MAX_CATALOG_BYTES, "catalog too large")
+    return data
 
 
 def bindings() -> dict:
@@ -106,7 +115,8 @@ def compatible_versions(artifact: dict) -> list[dict]:
     if mechanics_hash(old) != mechanics_hash(mechanics(artifact)):
         versions.append({"world_id": previous["world"]["id"], "recipe_hash": mechanics_hash(old),
                          "source_sha256": BASELINE_SHA, "mechanics": old})
-    require(len(versions) <= 8 and len({v["recipe_hash"] for v in versions}) == len(versions),
+    require(len(versions) <= MAX_COMPATIBLE_VERSIONS
+            and len({v["recipe_hash"] for v in versions}) == len(versions),
             "invalid compatible history")
     return versions
 
@@ -404,21 +414,22 @@ def main() -> int:
                 "candidate generation cannot publish")
         value = candidate()
         require(args.candidate.resolve() != CATALOG.resolve(), "candidate cannot replace package")
-        atomic_write(args.candidate, json_bytes(value))
+        atomic_write(args.candidate, catalog_bytes(value))
     else:
         require(args.factual_review is not None and args.quality_review is not None,
                 "two complete bound reviews required")
         value = build_catalog(args.candidate, args.factual_review, args.quality_review)
+        data = catalog_bytes(value)
         if args.proposal:
             require(args.proposal.resolve() != CATALOG.resolve(), "use --write to publish")
-            atomic_write(args.proposal, json_bytes(value))
+            atomic_write(args.proposal, data)
         if args.write:
             require(args.live_audit is not None and args.final_factual_review is not None
                     and args.final_quality_review is not None,
                     "package write requires live audit and two final reviews")
             confirm_final_reviews(value, args.live_audit, args.final_factual_review,
                                   args.final_quality_review)
-            atomic_write(CATALOG, json_bytes(value))
+            atomic_write(CATALOG, data)
     result = audit(value)
     if args.audit:
         atomic_write(args.audit, json_bytes(result))

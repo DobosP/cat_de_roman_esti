@@ -1,0 +1,19 @@
+from pathlib import Path
+import hashlib, json, pprint
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words')
+O=Path(__file__).parent
+raw=(R/'docs/reviews/v97-discovery-continuity-and-new-words/alchimie/proposal.json').read_bytes()
+(O/'raw/proposals.json').write_bytes(raw)
+d=json.loads(raw)
+p=R/'scripts/alchimie_discovery_recipe_source.py'
+s=p.read_text()
+assert '# V97:' not in s
+s+='\n# V97: two familiar cooked vegetable dishes with two preparation cues each.\nWORLD_CONCEPTS.update(\n'+pprint.pformat({c['label']:{k:v for k,v in c.items() if k!='label'} for c in d['concepts']},width=100,sort_dicts=True)+'\n)\nRECIPES.extend(\n'+pprint.pformat([(r['id'],*r['pair_labels'],r['result_label'],r['explanation']) for r in d['recipes']],width=100)+'\n)\nRECIPE_SOURCES.update(\n'+pprint.pformat({r['id']:r['sources'] for r in d['recipes']},width=100)+'\n)\n'
+p.write_text(s)
+old='docs/reviews/v95-discovery-and-game-quality/alchimie/candidate.json'
+new='docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json'
+for rel in ['scripts/build_alchimie_discovery_world.py','scripts/audit_alchimie_discovery_world.py']:
+ p=R/rel;s=p.read_text().replace(old,new)
+ if 'build_' in rel:s=s.replace('c86748941134ea7dc1e6b7869b4f970c5839f0f39f44f68c661e61476332e801',hashlib.sha256((R/new).read_bytes()).hexdigest())
+ p.write_text(s)
+print(hashlib.sha256((R/new).read_bytes()).hexdigest())

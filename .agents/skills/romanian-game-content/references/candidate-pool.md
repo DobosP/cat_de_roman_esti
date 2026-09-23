@@ -1,7 +1,7 @@
 # Durable discovery pool
 
 Use this reference when discovery produces research or refinement selects it. The format is
-an editorial convention defined by [ADR-0155](../../../../docs/adr/0155-two-track-content-growth.md),
+an editorial convention defined by [ADR-0156](../../../../docs/adr/0156-two-track-content-growth.md),
 not an enforced runtime schema or a substitute for existing review artifacts.
 
 ## Storage

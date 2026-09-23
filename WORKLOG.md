@@ -1099,6 +1099,31 @@ off the task worktree before verified V96 cleanup. V97 starts separately, with a
 saved-book compatibility design before further recipe expansion. Production stays V91.
 
 
+## V97 compatibility, content and caption kickoff (2026-09-17)
+
+Valid until: baseline or proposal bytes change — then repeat affected checks.
+
+V96 was pushed on main 36db143 after all local gates passed; its verified branch/worktree
+and scratch were cleaned after both previews moved to main. V97 starts separately in
+feat/v97-discovery-continuity-and-new-words. It records three curated round drafts,
+two quick-board drafts, two Alchimie concepts/four recipes and twelve earned-caption
+proposals. All remain unapproved and no serving files or limits change.
+
+The compatibility design measures the existing eight-book registry and recommends
+reviewing a bounded 16-book registry plus generator byte guard, retaining 2 MiB. Its isolated
+prototype round-trips nine rule sets, checks 1,009 earned prefixes and rejects 315 newer-recipe
+forgeries. A reference encoding is smaller but needs a format migration. Projections are
+not a guarantee that arbitrary larger future books fit. Alchimie installation remains
+contingent on compatibility work and independent review.
+
+Author review revised a facial-part count claim and a potentially ambiguous quick pair;
+original quick evidence is preserved. Cacao→Lapte's Chec bridge means serving together,
+not a claimed ingredient. Twelve caption drafts retain exact edge/direction snapshots;
+ten unsupported reverse traversals are withheld. The kickoff archive contains 65 bound
+files. All ten landed serving-artifact pins remain exact; docs/whitespace checks apply,
+with no unnecessary application-suite rerun for this authoring-only change.
+
+
 ## V96 CI interception correction (2026-09-17)
 
 Valid until: bound test or browser interception behavior changes — then repeat checks.
@@ -1112,3 +1137,88 @@ no timeout increase, retry or sleep was added. Independent review passes 30 cons
 mobile repeats and all 12 V96 cases. Native 212/lint/build pass, bundle 119.23 KiB. The receipt
 binds the sole changed test and all 42 unchanged previous inputs; original integration
 proof remains historical. Fresh CI follows this authorized V96 landing correction.
+
+V96 correction main fd3ca7c passed GitHub CI 35158602720, including the complete browser
+job and both backend jobs. Additional inherited-code confidence testing passed 120 cases
+without changes. V97 retains 65 frozen proposal files and all ten unchanged application/
+data pins; proposals remain unapproved and the existing eight-book runtime bound remains.
+
+## V97 Linux resumption (2026-09-22)
+
+Valid until: candidate inputs change — then repeat affected verification.
+
+The owner requested testing and continuing version work from the latest documentation
+and Windows handoff. Local and remote main match fd3ca7c. The existing V97 worktree at
+442dd7c contains uncommitted, reviewed content and an unfinished release verification.
+Its 65 kickoff and 139 lane archive records, 27 initial gate hashes and inherited content
+remain exact. No arcade-specific new Windows skill was located; its name/path remains
+an explicit clarification, and no unsourced skill instructions are claimed adopted.
+
+The inherited browser run had 485 passes and 67 failures. The browser still accepted
+only eight historical recipe hashes while V97 served nine under a reviewed limit of
+sixteen. Matching that bound fixes fresh collection updates without changing the
+64 KiB save or 256 craft caps. Native checks cover nine/sixteen histories, the actual
+bundled catalog and rejection of seventeen. All 84 affected Alchimie journeys pass.
+
+A separate Lanț mobile failure occurs when the temporary outer notice row shrinks by
+56 px and moves a partly clipped persistent replay error entirely above the viewport.
+A one-time layout scroll reveals the full paragraph without moving focus. All 26
+shared start/replay journeys pass, and real-clock geometry confirms both error and retry
+remain visible. An initial stronger focus assertion raced the pending disabled render;
+the corrected test waits for that actual state before measuring focus. Original errors,
+logs and before/after evidence are preserved in the V97 resumption review.
+
+Independent review accepts the two fixes and verifies final source/static bindings.
+The complete assembled matrices pass: 2329 backend/53 accounts on each Python, 214 native
+frontend and 552 real-browser cases (two workers, zero retries). All validators, lint, build,
+docs and whitespace checks pass at 119.23/120 KiB. The exact integration receipt binds 522
+inputs and retains the earlier failures. This pickup does not merge, push, deploy or restart
+the loop; V97 remains a verified task-branch candidate.
+
+## V97 local landing and V98 authorization (2026-09-23)
+
+Valid until: a later version changes the baseline — then treat as history.
+
+The owner confirmed landing V97 into local main and starting V98. Main fast-forwarded
+from fd3ca7c to verified implementation/evidence f783a97. All522 tested inputs and16
+archived green gate receipts were rechecked exactly before the merge. The complete
+2329 backend/53 account tests per Python,214 native and552 browser checks remain valid;
+no source, data or test changed. These landing notes are documentation only.
+
+V98 starts separately from this landing around the documented missing door-neighborhood
+vocabulary, clearer Cacao→Lapte associations and onward uses for the terminal Alchimie
+dishes. It must preserve old saves, game bounds and independent content review. The
+specific Windows skill is still unidentified; current repository workflow applies.
+No remote push, deployment or recurring loop is authorized by this local transition.
+Cleanup is limited to this verified-merged V97 worktree, branch and matching scratch.
+
+## V98 kickoff (2026-09-23)
+
+Valid until: content or runtime proposals change the bound baseline — then repeat checks.
+
+V98 starts on feat/v98-meaningful-connections from landed V97 commit240c459. The kickoff
+captures34 fresh public BFF requests across all six scored games, the Ușă target and
+exploration progress restoration, cleaning all nine sessions. Five unsupported door
+surfaces remain free and unchanged.59 focused compatibility/caption/input checks pass.
+
+Four exact edge-bound caption drafts and three zero-new-concept recipe research ideas
+are preserved as unreviewed. Next: independently validate vocabulary senses and sources,
+prepared-dish transformations and full-board candidates; advance the generator's historical
+baseline only with the exact reviewed V97 archive. All96 supplies are occupied and only
+five world concept slots remain. No concepts, aliases, links, recipes or rounds are
+installed by this kickoff. V97 cleanup is complete; no push, deployment or loop restart.
+
+## V97 and V98 kickoff published (2026-09-23)
+
+Valid until: a later origin/main update changes these refs — then treat as history.
+
+The owner explicitly requested landing the work on origin main. Remote main was refreshed
+at fd3ca7c with no divergence. Independent preflight rechecked all16 V97 green gate logs,
+522 current application inputs and the V98 kickoff's59 tests/34 requests/17 pins/five archives.
+Only11 documentation/evidence files differed from already landed V97. Main fast-forwarded
+to7c00ae7 and pushed normally; git ls-remote confirmed the exact full kickoff commit.
+
+This publishes V97's completed implementation and V98's startup documentation/drafts.
+It does not install V98 content, deploy production or restart the loop. The merged kickoff
+task branch/worktree/scratch is cleaned; future implementation starts from published main.
+GitHub CI is triggered by the push; its remote result is separate from bound local gates.

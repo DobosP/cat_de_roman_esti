@@ -1,0 +1,37 @@
+from pathlib import Path
+import hashlib,json,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');OUT=Path(__file__).parent
+sys.path.insert(0,str(ROOT))
+from scripts import build_quick_content_v92 as B
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.recipe_extensions import record_snapshot
+Q=B.Q;IDENTITY='/root/v97_quick'
+def read(p):return json.loads(p.read_bytes())
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def write(n,v):(OUT/n).write_bytes(Q.json_bytes(v))
+prior=ROOT/'docs/reviews/v96-words-and-input-clarity/integration/quick'
+old=read(prior/'candidate.json');old_review=read(prior/'factual-review.json');old_catalog=read(prior/'catalog.json')
+full=read(OUT/'candidate.json');raw=read(OUT/'raw-candidates.json')
+assert full==B.candidate() and len(full['boards'])==85
+assert full['boards'][:83]==old['boards']==old_catalog['authored']
+assert full['boards'][83:]==raw['boards']
+assert (OUT/'raw-candidates.json').read_bytes()==(ROOT/'docs/reviews/v97-discovery-continuity-and-new-words/quick/candidates.json').read_bytes()
+assert old_review['candidate_sha256']==sha(prior/'candidate.json')
+assert next(r['sha256'] for r in old_catalog['reviews'] if r['role']=='factual')==sha(prior/'factual-review.json')
+assert {r['id'] for r in old_review['items']}=={r['id'] for r in old['boards']}
+assert all(r['verdict']=='accept' and r['sources'] for r in old_review['items'])
+for key in ('kg_sha256','rubric_sha256','core_payload_sha256'):
+ assert full['bindings'][key]==old['bindings'][key]==raw['bindings'][key]==Q.bindings(live=False)[key]
+reasons={
+'iq92_v97_relatives':'Original DEX and MDA definitions identify brother, sister and uncle by family relationships, while neighbor identifies nearby residence. The label concerns the meanings of the displayed terms, so an uncle who happens to live next door does not create another correct answer. The native plural Vecini is preserved and matches that residential sense. Familial readings of Frate and Soră match their stored descriptions; religious or figurative senses do not change the intended ordinary category.',
+'pq92_v97_home_and_city':'Named dictionary senses support wall and ceiling as room boundaries, metro and tram as urban rail transport, cooking as food preparation and kitchen as its designated room, examination as knowledge assessment and lesson as a teaching or study unit. None of the captions asserts that every metro is underground or that every lesson requires an examination. A kitchen has walls and a ceiling, and one can take cooking lessons, but switching either of those pairs strands another word; there is no second comparably ordinary complete matching. The earlier clothing-based draft was excluded because a dressing sense of găti created a real cross-reading; that pair is absent from these final bytes.'}
+items=[{'id':r['id'],'verdict':'accept','rationale':reasons[r['id']],'sources':r['sources']} for r in raw['boards']]
+svc=get_service();nodes={n:record_snapshot(svc.node(n)) for n in sorted({n for r in raw['boards'] for n in Q.visible_ids(r)})}
+assert nodes==read(ROOT/'docs/reviews/v97-discovery-continuity-and-new-words/quick/node-snapshots.json')
+write('factual-source-checks.json',{'kind':'quick-independent-factual-source-checks-v1','reviewer':IDENTITY,'checked_on':'2026-09-17','candidate_sha256':sha(OUT/'candidate.json'),'raw_candidate_sha256':sha(OUT/'raw-candidates.json'),'previous_candidate_sha256':sha(prior/'candidate.json'),'previous_factual_review_sha256':sha(prior/'factual-review.json'),'previous_catalog_sha256':sha(prior/'catalog.json'),'previous_83_records_exact':True,'previous_83_judgments_inherited_exactly':True,'kg_rubric_core_payload_bindings_exact':True,'new_rows_checked':2,'new_visible_nodes':nodes,'source_checks':items,'source_access_notes':['Read original DEX/MDA/DLRLC meanings on all twelve linked entries on 2026-09-17. Only ordinary senses matching native descriptions are used.','The direct metrou find for urban returned no hit, so the actual DEX paragraph was opened and confirms urban rail with underground, elevated and surface variants.','Perete and găti use their readable /definitii routes. Lecție includes both the lesson period and assigned material to study.'],'semantic_partition_review':['Relatives: all four terms denote people; plural Vecini is a surface clue, but the honest kinship distinction independently picks that same intruder.','Perechi: construction, rail, culinary action/location, and school assessment/study are separate relationships. The kitchen construction overlap or cooking lesson association cannot produce a defensible full alternate matching.','No claim of universal exam-after-each-lesson, underground-only metro, or mutually exclusive real-world family and residence roles.'],'scope':'Independent factual and semantic review plus exact inherited evidence; final API/starter/recovery checks are separate.'})
+write('raw-factual-review.json',{'kind':B.REVIEW_KIND,'role':'factual','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'raw-candidates.json'),'items':items})
+write('factual-review.json',{'kind':B.REVIEW_KIND,'role':'factual','reviewer':IDENTITY,'candidate_sha256':sha(OUT/'candidate.json'),'items':old_review['items']+items,'baseline_evidence':{'candidate_path':str((prior/'candidate.json').relative_to(ROOT)),'candidate_sha256':sha(prior/'candidate.json'),'factual_review_path':str((prior/'factual-review.json').relative_to(ROOT)),'factual_review_sha256':sha(prior/'factual-review.json'),'inherited_rows':83,'new_rows':2,'raw_factual_review_sha256':sha(OUT/'raw-factual-review.json'),'source_checks_sha256':sha(OUT/'factual-source-checks.json')}})
+B.read_review(OUT/'factual-review.json','factual',sha(OUT/'candidate.json'),{r['id'] for r in full['boards']})
+B.read_review(OUT/'raw-factual-review.json','factual',sha(OUT/'raw-candidates.json'),set(reasons))
+write('author-preservation.json',{'kind':'v97-quick-source-preservation-v1','candidate_sha256':sha(OUT/'candidate.json'),'raw_candidate_sha256':sha(OUT/'raw-candidates.json'),'prior_authored_exact':83,'new_boards':2,'editorial_source_sha256':sha(B.SOURCE_PATH),'candidate_equals_builder':True,'unchanged_bindings':{k:full['bindings'][k] for k in ('kg_sha256','rubric_sha256','core_payload_sha256')}})
+print(json.dumps({'accepted_new':2,'inherited_exact':83,'candidate_sha256':sha(OUT/'candidate.json'),'factual_sha256':sha(OUT/'factual-review.json')}))

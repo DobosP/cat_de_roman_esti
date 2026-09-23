@@ -224,10 +224,50 @@ test("legacy saves remain readable while compatibility metadata stays bounded an
   delete legacy.compatible_recipe_hashes;
   store.setItem(key, JSON.stringify(legacy));
   assert.equal(read(store).kind, "saved");
-  for (const compatible_recipe_hashes of [null, {}, ["x"], [HASH], ["b".repeat(64), "b".repeat(64)], Array.from({ length: 9 }, (_, i) => String(i).repeat(64))]) {
+  for (const compatible_recipe_hashes of [null, {}, ["x"], [HASH], ["b".repeat(64), "b".repeat(64)], Array.from({ length: 17 }, (_, i) => i.toString(16).padStart(64, "0"))]) {
     store.setItem(key, JSON.stringify({ ...legacy, compatible_recipe_hashes }));
     assert.equal(read(store).kind, "invalid");
   }
+});
+
+test("nine through sixteen compatible books remain usable after the first owned save", async () => {
+  for (const count of [9, 16]) {
+    const store = storage();
+    const compatible_recipe_hashes = Array.from({ length: count }, (_, i) => i.toString(16).padStart(64, "0"));
+    const initial = state({ revision: 0, compatible_recipe_hashes, progress: { ...state().progress, discoveries: [] } });
+    const created = await save(initial, null, store, null);
+    assert.equal(created.kind, "saved");
+    assert.equal(read(store).kind, "saved");
+    const advanced = state({ compatible_recipe_hashes });
+    const updated = await save(advanced, created.raw, store, null);
+    assert.equal(updated.kind, "saved");
+    const restored = read(store);
+    assert.equal(restored.kind, "saved");
+    assert.equal(restored.value.game_id, initial.game_id);
+    assert.equal(restored.value.revision, advanced.revision);
+    assert.deepEqual(restored.value.progress, advanced.progress);
+    assert.deepEqual(restored.value.compatible_recipe_hashes, compatible_recipe_hashes);
+  }
+});
+
+test("the bundled world's compatibility metadata survives an owned update and reload", async () => {
+  const catalog = JSON.parse(readFileSync(new URL("../../cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json", import.meta.url), "utf8"));
+  const compatible_recipe_hashes = catalog.compatible_versions.map((version) => version.recipe_hash);
+  const store = storage();
+  const initial = state({ revision: 0, compatible_recipe_hashes, progress: { ...state().progress, discoveries: [] } });
+  const created = await save(initial, null, store, null);
+  assert.equal(created.kind, "saved");
+  assert.equal(read(store).kind, "saved");
+  const advanced = state({ compatible_recipe_hashes });
+  const updated = await save(advanced, created.raw, store, null);
+  assert.equal(updated.kind, "saved");
+  const restored = read(store);
+  assert.equal(restored.kind, "saved");
+  assert.equal(restored.value.revision, advanced.revision);
+  assert.deepEqual(restored.value.progress, advanced.progress);
+  assert.deepEqual(restored.value.compatible_recipe_hashes, compatible_recipe_hashes);
+  assert.equal(restored.value.compatible_versions, undefined);
+  assert.equal(restored.value.recipes, undefined);
 });
 
 test("unavailable storage reports explicitly without crashing play", async () => {

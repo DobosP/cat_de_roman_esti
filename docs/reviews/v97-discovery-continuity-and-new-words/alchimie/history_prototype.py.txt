@@ -1,0 +1,95 @@
+"""Read-only measurement and scratch reference codec; never generates serving content."""
+import copy,gzip,hashlib,json,os,statistics,sys,time
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v97-discovery-continuity-and-new-words');O=Path(__file__).parent
+sys.path.insert(0,str(R));os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from pydantic import ValidationError
+from cat_de_roman_esti.wordgames import discovery_world as W,alchimie_explore as E
+from scripts import build_alchimie_discovery_world as B
+P=R/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json';raw=P.read_bytes();current=json.loads(raw);world=W.validate_world(current)
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+def compact(v):return json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+def pretty(v):return B.json_bytes(v)
+def size(v):
+ b=pretty(v);return {'pretty_bytes':len(b),'compact_bytes':len(compact(v)),'gzip_pretty_bytes':len(gzip.compress(b,mtime=0))}
+versions=current['compatible_versions'];ninth={'world_id':world.id,'recipe_hash':world.recipe_hash,'source_sha256':sha(R/'docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json'),'mechanics':world.mechanics}
+all_versions=versions+[ninth]
+# Freeze currently known recipe identity and current unlock identity; no future inference.
+by_id={r['id']:r for r in current['recipes']};by_pair={tuple(r['pair']):r for r in current['recipes']}
+unlocks={u['id']:{'after':u['after_discoveries'],'concepts':sorted(u['concept_ids'])} for u in current['unlocks']}
+def encode(version):
+ m=version['mechanics'];recipe_ids=[];unlock_ids=[]
+ assert m['starters']==sorted(current['world']['starter_ids'])
+ for r in m['recipes']:
+  now=by_pair[tuple(r['pair'])];assert now['result']==r['result'];recipe_ids.append(now['id'])
+ for u in m['unlocks']:
+  matches=[k for k,v in unlocks.items() if v==u];assert len(matches)==1;unlock_ids+=matches
+ return {k:copy.deepcopy(version[k]) for k in ('world_id','recipe_hash','source_sha256')}|{'recipe_ids':sorted(recipe_ids),'unlock_ids':sorted(unlock_ids)}
+def decode(entry):
+ assert set(entry)=={'world_id','recipe_hash','source_sha256','recipe_ids','unlock_ids'}
+ assert entry['world_id']==world.id
+ for field,table in [('recipe_ids',by_id),('unlock_ids',unlocks)]:
+  values=entry[field];assert isinstance(values,list) and values==sorted(set(values)) and all(v in table for v in values)
+ mechanics=W.mechanics_for(current['world']['starter_ids'],{tuple(by_id[r]['pair']):by_id[r]['result'] for r in entry['recipe_ids']},[(unlocks[u]['after'],unlocks[u]['concepts']) for u in entry['unlock_ids']])
+ assert W.mechanics_hash(mechanics)==entry['recipe_hash']
+ return {k:copy.deepcopy(entry[k]) for k in ('world_id','recipe_hash','source_sha256')}|{'mechanics':mechanics}
+encoded=[encode(v) for v in all_versions]
+assert [decode(v) for v in encoded]==all_versions
+# Codec does not change any historical allowed pair or supply schedule.
+replays=[]
+for index,version in enumerate(all_versions):
+ restored_mechanics=decode(encoded[index])['mechanics'];assert restored_mechanics==version['mechanics']
+ owned=set(restored_mechanics['starters']);discoveries=[];prefixes=0
+ while True:
+  r=next((r for r in restored_mechanics['recipes'] if set(r['pair'])<=owned and r['result'] not in owned),None)
+  if r is None:break
+  discoveries.append(r['pair']);owned.add(r['result'])
+  for u in restored_mechanics['unlocks']:
+   if len(discoveries)>=u['after']:owned.update(u['concepts'])
+  session=E.restore_session(world,E.Progress(world_id=world.id,recipe_hash=version['recipe_hash'],discoveries=discoveries))
+  assert owned<=session.owned.keys() and session.discoveries==[tuple(p) for p in discoveries];prefixes+=1
+ # Pair supplied by a newer book is absent from exact historical rule set.
+ forbidden=[r for p,r in world.recipes.items() if list(p) not in [v['pair'] for v in restored_mechanics['recipes']] and set(p)<=owned]
+ rejected=0
+ if index<len(versions):
+  for r in forbidden:
+   pair=next(p for p,x in world.recipes.items() if x.id==r.id)
+   try:E.restore_session(world,E.Progress(world_id=world.id,recipe_hash=version['recipe_hash'],discoveries=discoveries+[list(pair)]))
+   except Exception as e:
+    assert getattr(e,'status_code',None)==400;rejected+=1
+   else:raise AssertionError('new pair was accepted under an old hash')
+ replays.append({'index':index,'recipe_hash':version['recipe_hash'],'source_sha256':version['source_sha256'],'recipe_count':len(restored_mechanics['recipes']),'supply_tiers':len(restored_mechanics['unlocks']),'owned':len(owned),'prefixes_preserved':prefixes,'newer_recipe_forgeries_rejected':rejected,'mechanics_exact':True})
+mutations={}
+for name,mutate in [('unknown_recipe',lambda e:e['recipe_ids'].append('unknown-recipe')),('duplicate_recipe',lambda e:e['recipe_ids'].append(e['recipe_ids'][0])),('missing_recipe',lambda e:e['recipe_ids'].pop()),('changed_hash',lambda e:e.update(recipe_hash='0'*64)),('changed_world',lambda e:e.update(world_id='other')),('unknown_supply',lambda e:e['unlock_ids'].append('unknown'))]:
+ bad=copy.deepcopy(encoded[0]);mutate(bad)
+ try:decode(bad)
+ except (AssertionError,KeyError):mutations[name]='rejected'
+ else:raise AssertionError(name)
+# Real schema and generator remain blocked at 9: we do not patch around them.
+nine=copy.deepcopy(current);nine['compatible_versions']=all_versions
+try:W.Catalog.model_validate(nine)
+except ValidationError as e:
+ assert any(x['loc']==('compatible_versions',) and x['type']=='too_long' for x in e.errors());schema_guard='rejects ninth version'
+else:raise AssertionError('existing schema accepted nine')
+# A constructed new recipe idea makes the builder append to the exact V96 archive.
+future=copy.deepcopy(current);future['recipes'].append({'id':'scratch-probe','pair':sorted([next(c['id'] for c in current['concepts'] if c['label']=='Spanac'),next(c['id'] for c in current['concepts'] if c['label']=='Lapte')]),'result':'scratch-probe-result'})
+old_baseline,old_sha=B.BASELINE,B.BASELINE_SHA
+B.BASELINE=R/'docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json';B.BASELINE_SHA=sha(B.BASELINE)
+try:
+ try:B.compatible_versions(future)
+ except ValueError as e:assert str(e)=='invalid compatible history';builder_guard=str(e)
+ else:raise AssertionError('existing builder accepted nine')
+finally:B.BASELINE,B.BASELINE_SHA=old_baseline,old_sha
+# Size-only future capacity projection. Repeated books here are NOT valid catalogs.
+sixteen_size=copy.deepcopy(current);sixteen_size['compatible_versions']=all_versions+[copy.deepcopy(ninth) for _ in range(7)]
+compact_history={'format':'recipe-references-v1','versions':encoded}
+compact_size=copy.deepcopy(current);compact_size.pop('compatible_versions');compact_size['compatibility_history']=compact_history
+compact16_size=copy.deepcopy(compact_size);compact16_size['compatibility_history']['versions']+= [copy.deepcopy(encoded[-1]) for _ in range(7)]
+times=[]
+for _ in range(5):
+ start=time.perf_counter();W.validate_world(current);times.append((time.perf_counter()-start)*1000)
+result={'kind':'v97-history-design-prototype-v1','status':'proposal-not-runtime','baseline_commit':'36db143ff9a5070e2a85a8176e24de2d6036ea01','world_sha256':sha(P),'source_bindings':{f:sha(R/f) for f in ['cat_de_roman_esti/wordgames/discovery_world.py','cat_de_roman_esti/wordgames/alchimie_explore.py','scripts/build_alchimie_discovery_world.py','docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json']},'limits':{'concepts':W.MAX_CONCEPTS,'recipes':W.MAX_RECIPES,'catalog_bytes':W.MAX_CATALOG_BYTES,'existing_histories':8,'proposed_small_limit':16},'measurements':{'installed_catalog':size(current),'installed_raw_bytes':len(raw),'existing8_full_history':size(versions),'next9_full_history':size(all_versions),'next9_reference_history':size(compact_history),'next9_full_catalog_size_only':size(nine),'next9_reference_catalog_size_only':size(compact_size),'full16_size_only':size(sixteen_size),'reference16_size_only':size(compact16_size),'current_validation_ms_median_5_warm_runs':statistics.median(times)},'guards':{'runtime_schema':schema_guard,'generator':builder_guard,'prototype_mutations':mutations},'replays':replays,'total_prefixes_checked':sum(x['prefixes_preserved'] for x in replays),'total_future_recipe_forgeries_rejected':sum(x['newer_recipe_forgeries_rejected'] for x in replays),'encoding_roundtrip_all9_mechanics_exact':True,'size_projection_note':'Nine-book catalog includes its own current hash and16-book projections repeat entries; these are measurement-only objects, never validated or installable. Actual ninth history requires a genuinely new separately reviewed recipe hash.','prototype_scope':'Reference-codec proof and existing-runtime replays only; no production schema modification, no new catalog approval, no runtime cap change.'}
+(O/'history-prototype-proof.json').write_bytes(pretty(result));(O/'history-reference-prototype.json').write_bytes(pretty(compact_history))
+print(json.dumps({k:v for k,v in result.items() if k in ['measurements','total_prefixes_checked','total_future_recipe_forgeries_rejected','guards']},indent=2))
