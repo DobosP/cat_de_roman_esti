@@ -56,10 +56,9 @@ test("Perechi moves focus only when a focused solved tile disappears", () => {
   assert.match(perechi, /if \(fresh\.won \|\| fresh\.lost\) \{[\s\S]*?kind: "result"/);
   assert.match(perechi, /queueFocusAfterUpdate\(result, ids\)/);
   assert.match(perechi, /tileRefs\.current\.get\(pending\.id\)/);
-  assert.match(
-    perechi,
-    /resultFocusRef\.current\?\.querySelector<HTMLButtonElement>\("button:not\(:disabled\)"\)/,
-  );
+  assert.match(perechi, /pending\.kind === "result"\s*\? resultFocusRef\.current\s*:/);
+  assert.match(perechi, /<div ref=\{resultFocusRef\} tabIndex=\{-1\}>/);
+  assert.doesNotMatch(perechi, /resultFocusRef\.current\?\.querySelector/);
   assert.match(perechi, /target\.focus\(\)/);
 });
 

@@ -426,7 +426,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge
               label="GREȘELI"
-              value={`${state.remaining_mistakes} rămase`}
+              value={`${state.remaining_mistakes} ${state.remaining_mistakes === 1 ? "rămasă" : "rămase"}`}
               accent={DEF.accent}
             />
           </Hud>

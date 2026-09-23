@@ -145,7 +145,21 @@ export async function solve(page, game, steps, options = {}) {
     }
     if (game.key === "perechi" && options.keyboard) {
       if (result.won) {
-        await expect(page.getByRole("button", { name: /^Încă unul →$/ })).toBeFocused();
+        const heading = page.getByRole("heading", { name: "Toate se potrivesc!" });
+        const resultContainer = page.locator('div[tabindex="-1"]').filter({ has: heading });
+        await expect(resultContainer).toBeFocused();
+        // One extra Enter on the focused result must not start a new round.
+        let creates = 0;
+        const countCreate = (request) => {
+          if (request.method() === "POST" &&
+            new URL(request.url()).pathname === `/api/wordgames/${game.key}/games`) creates += 1;
+        };
+        page.on("request", countCreate);
+        await page.keyboard.press("Enter");
+        await page.waitForTimeout(500);
+        page.off("request", countCreate);
+        expect(creates).toBe(0);
+        await expect(heading).toBeVisible();
       } else {
         const split = result.tiles.findIndex((tile) => tile.id === step.payload.ids[1]) + 1;
         const next = [...result.tiles.slice(split), ...result.tiles.slice(0, split)]
