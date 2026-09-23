@@ -1121,7 +1121,8 @@ class HintGameView(ContractAPIView):
             raise http_error(400, "Jocul s-a terminat deja.")
         if session.fruitless_streak < NUDGE_AFTER_FRUITLESS:
             need = NUDGE_AFTER_FRUITLESS - session.fruitless_streak
-            raise http_error(400, f"Mai încearcă {need} combinații înainte de un indiciu.")
+            noun = "combinație" if need == 1 else "combinații"
+            raise http_error(400, f"Mai încearcă {need} {noun} înainte de un indiciu.")
         pair = _useful_pair(session)
         session.fruitless_streak = 0
         if pair is None:

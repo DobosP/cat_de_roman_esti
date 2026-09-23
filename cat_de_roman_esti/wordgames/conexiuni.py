@@ -661,7 +661,7 @@ class ClueView(ContractAPIView):
             need = needed - session.mistakes
             raise http_error(
                 400,
-                f"Mai greșește {need} încercări înainte de indiciu.",
+                f"Indiciul apare după încă {need} {'greșeală' if need == 1 else 'greșeli'}.",
             )
 
         clue_payload = _next_clue(session)

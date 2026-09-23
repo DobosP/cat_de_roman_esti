@@ -58,32 +58,32 @@ GAMES = [
     {
         "key": "alchimie",
         "label": "Alchimie",
-        "blurb": "Combina doua concepte ca sa descoperi unul nou — pana ajungi la tinta.",
+        "blurb": "Combină două concepte ca să descoperi unul nou — până ajungi la țintă.",
     },
     {
         "key": "intrusul",
         "label": "Intrusul",
-        "blurb": "Gaseste cuvantul care nu se potriveste cu celelalte trei.",
+        "blurb": "Găsește cuvântul care nu se potrivește cu celelalte trei.",
     },
     {
         "key": "perechi",
         "label": "Perechi",
-        "blurb": "Potriveste cele opt cuvinte in patru perechi cu sens.",
+        "blurb": "Potrivește cele opt cuvinte în patru perechi cu sens.",
     },
     {
         "key": "conexiuni",
         "label": "Conexiuni",
-        "blurb": "Grupeaza cele 16 concepte in cele 4 categorii ascunse, cate 4 fiecare.",
+        "blurb": "Grupează cele 16 concepte în cele 4 categorii ascunse, câte 4 fiecare.",
     },
     {
         "key": "contexto",
         "label": "Cald sau Rece",
-        "blurb": "Ghiceste conceptul secret; fiecare incercare iti spune cat de aproape esti.",
+        "blurb": "Ghicește conceptul secret; fiecare încercare îți spune cât de aproape ești.",
     },
     {
         "key": "lant",
-        "label": "Lantul Cuvintelor",
-        "blurb": "Scrie un concept legat de cel curent si sari din cuvant in cuvant pana la tinta.",
+        "label": "Lanțul Cuvintelor",
+        "blurb": "Scrie un concept legat de cel curent și sari din cuvânt în cuvânt până la țintă.",
     },
 ]
 

@@ -122,12 +122,14 @@ export default function Home({
       try {
         const outcome = importScores(await file.text());
         setBoard(scoreBoard());
-        onToast(
-          `Importat: ${outcome.entries} rezultate în ${outcome.games} jocuri.`,
-          "success",
-        );
+        const entries = `${outcome.entries} ${outcome.entries === 1 ? "rezultat" : "rezultate"}`;
+        const games = `${outcome.games} ${outcome.games === 1 ? "joc" : "jocuri"}`;
+        onToast(`Importat: ${entries} în ${games}.`, "success");
       } catch (err) {
-        onToast(err instanceof Error ? err.message : "Import invalid.", "error");
+        onToast(
+          err instanceof Error ? err.message : "Fișierul ales nu este un export de istoric valid.",
+          "error",
+        );
       }
     },
     [onToast],

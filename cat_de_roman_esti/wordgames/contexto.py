@@ -1100,7 +1100,7 @@ class ClueView(ContractAPIView):
             need = MIN_CLUE_ATTEMPTS - session.attempts
             raise http_error(
                 400,
-                f"Mai încearcă {need} concepte înainte de indiciu.",
+                f"Mai încearcă {need} {'concept' if need == 1 else 'concepte'} înainte de indiciu.",
             )
         if not session.clue_revealed and session.category is None:
             clue_kind = "category"

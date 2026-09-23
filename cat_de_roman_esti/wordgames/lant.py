@@ -846,11 +846,12 @@ class MoveView(ContractAPIView):
         if guess == prev:
             return Response({"ok": False, "last_error": f"{understood}Ești deja aici."})
         if svc.link(prev, guess) is None:
+            # Some KG labels are lowercase common nouns; the sentence still starts capitalised.
             return Response(
                 {
                     "ok": False,
                     "last_error": (
-                        f"{understood}{svc.label(guess)} nu are o legătură directă cu "
+                        f"{understood}{svc.display_label(guess)} nu are o legătură directă cu "
                         f"{svc.label(prev)}. Alege un cuvânt din listă sau cere un indiciu."
                     ),
                 }

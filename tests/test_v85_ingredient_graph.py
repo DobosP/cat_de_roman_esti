@@ -437,7 +437,7 @@ def test_source_only_ingredient_forms_cannot_reverse_an_authored_link(slug):
             body = _post(client, url + "/move", text=form)
             assert body["ok"] is False
             assert body["last_error"] == (
-                f"{svc.label(ingredient)} nu are o legătură directă cu {svc.label(product)}. "
+                f"{svc.display_label(ingredient)} nu are o legătură directă cu {svc.label(product)}. "
                 "Alege un cuvânt din listă sau cere un indiciu."
             )
             state = client.get(url).json()

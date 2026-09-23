@@ -254,7 +254,7 @@ def test_all_41_v86_links_keep_their_exact_historical_direction_contract(monkeyp
                     assert body["relation"] == relation_caption(svc, source, destination)
                 else:
                     assert body["last_error"] == (
-                        f"{svc.label(destination)} nu are o legătură directă cu "
+                        f"{svc.display_label(destination)} nu are o legătură directă cu "
                         f"{svc.label(source)}. Alege un cuvânt din listă sau cere un indiciu."
                     )
             finally:

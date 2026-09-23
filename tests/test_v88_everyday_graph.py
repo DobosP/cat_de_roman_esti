@@ -253,7 +253,7 @@ def test_each_new_direction_is_playable_and_reverse_moves_need_their_own_reviewe
                 assert body["relation"] == relation_caption(svc, source, destination)
             else:
                 assert body["last_error"] == (
-                    f"{svc.label(destination)} nu are o legătură directă cu "
+                    f"{svc.display_label(destination)} nu are o legătură directă cu "
                     f"{svc.label(source)}. Alege un cuvânt din listă sau cere un indiciu."
                 )
         finally:

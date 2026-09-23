@@ -72,7 +72,7 @@ class CreateSubmissionView(ContractAPIView):
             raise http_error(413, "Propunerea este prea mare.")
         client = str(request.META.get("REMOTE_ADDR") or "unknown")
         if _throttled(client):
-            raise http_error(429, "Prea multe propuneri; incearca mai tarziu.")
+            raise http_error(429, "Prea multe propuneri; încearcă mai târziu.")
 
         body = parse_body(request, SubmissionBody)
         if body.game not in GAME_KINDS:
@@ -104,7 +104,7 @@ class CreateSubmissionView(ContractAPIView):
             with (queue_dir / QUEUE_FILENAME).open("a", encoding="utf-8") as fh:
                 fh.write(line + "\n")
         except OSError:
-            raise http_error(503, "Nu am putut salva propunerea; incearca mai tarziu.") from None
+            raise http_error(503, "Nu am putut salva propunerea; încearcă mai târziu.") from None
 
         return Response(
             {

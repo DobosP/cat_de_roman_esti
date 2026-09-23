@@ -293,6 +293,11 @@ absent until win/loss. A correct guess also returns its earned `{key,label}` in
 `category`. Re-submitting the same four ids in another order returns HTTP 409 and leaves
 lives, mistakes, clues, score, and history unchanged.
 
+Since 1.0.1, Conexiuni, Intrusul and Perechi tile/concept `label`s are display-cased: the
+first letter is upper-case unless the name is an intentionally lowercase brand (for
+example `dexonline`, `eMAG`). They can therefore differ in case from `kg_nodes.label_ro`;
+clients submit ids, never labels, so matching is unaffected.
+
 ## 6. Public app-pack fixture for roedu-mobile
 
 `scripts/export_mobile_app_pack.py` exports a deterministic, public-only app-pack snapshot
