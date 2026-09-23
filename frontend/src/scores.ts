@@ -251,9 +251,11 @@ function buildScoreUpdate(
       outcome: { isBest: false, isPuzzleBest: false, prev, prevPuzzle: null },
     };
   }
-  const isBest = prev === null || score > prev.score;
+  // A 0-point finish is a loss (or a win with every penalty spent): history, never a record.
+  const isBest = score > 0 && (prev === null || score > prev.score);
   const prevPuzzle = puzzleKey ? (rec.puzzles?.[puzzleKey] ?? null) : null;
-  const isPuzzleBest = puzzleKey !== null && (prevPuzzle === null || score > prevPuzzle.score);
+  const isPuzzleBest =
+    score > 0 && puzzleKey !== null && (prevPuzzle === null || score > prevPuzzle.score);
   rec.played += 1;
   rec.recent = [entry, ...rec.recent].slice(0, RECENT_CAP);
   if (!entry.daily) {
@@ -394,17 +396,21 @@ export interface ImportOutcome {
   entries: number;
 }
 
+const INVALID_IMPORT_MESSAGE = "Fișierul ales nu este un export de istoric valid.";
+
 export function importScores(raw: string): ImportOutcome {
   let parsed: unknown;
   try {
     parsed = JSON.parse(raw);
   } catch {
-    throw new Error("Fisierul nu este JSON valid.");
+    throw new Error(INVALID_IMPORT_MESSAGE);
   }
 
   const incoming = normalizeBoard(
     isRecord(parsed) && isRecord(parsed.games) ? parsed.games : parsed,
   );
+  // Valid JSON of the wrong shape must not report "Importat: 0 rezultate în 0 jocuri."
+  if (Object.keys(incoming).length === 0) throw new Error(INVALID_IMPORT_MESSAGE);
   const existingRaw = loadRaw();
   const current = normalizeBoard(existingRaw);
   // Snapshot the local streak before merging. If this device has legacy daily rows but
@@ -519,14 +525,16 @@ function normalizeBoard(value: unknown): Board {
       const entry = normalizeEntry(rawEntry);
       if (entry && key.trim()) puzzles[key] = { ...entry, puzzleKey: key };
     }
-    const best = normalizeEntry(rawRec.best) ?? bestOf([...recent, ...Object.values(puzzles)]);
+    // A saved 0-point best (older builds recorded losses) is dropped; history keeps it.
+    const stored = normalizeEntry(rawRec.best);
+    const best = stored && stored.score > 0 ? stored : bestOf([...recent, ...Object.values(puzzles)]);
     // Old exports may only have `completedNonDaily`, or no progress markers at all.
     // Infer bounded progress from distinct retained normal entries. A legacy boolean
     // with no surviving entry means one unknown/lost attempt, never an assumed win.
     const retained = uniqueEntries([
       ...recent,
       ...Object.values(puzzles),
-      ...(best ? [best] : []),
+      ...(stored ? [stored] : []),
     ]);
     const retainedNonDaily = retained.filter((entry) => !entry.daily);
     const hasStoredProgress =
@@ -723,9 +731,10 @@ function isNonNegativeInteger(value: unknown): value is number {
   return typeof value === "number" && Number.isInteger(value) && value >= 0;
 }
 
+/** Highest-scoring entry; a score of 0 or less is never a record. */
 function bestOf(entries: Array<ScoreEntry | null | undefined>): ScoreEntry | null {
   return entries
-    .filter((x): x is ScoreEntry => Boolean(x))
+    .filter((x): x is ScoreEntry => Boolean(x && x.score > 0))
     .sort((a, b) => b.score - a.score || b.at - a.at)[0] ?? null;
 }
 
