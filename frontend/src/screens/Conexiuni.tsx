@@ -265,7 +265,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
     const detail = state.won
-      ? `${state.mistakes} greșeli`
+      ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
       : `pierdut · ${state.mistakes} greșeli`;
     let current = true;
     void recordOnce(state.game_id, state.score, detail, {
@@ -865,7 +865,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               startFailed={startFailed}
               actionsBusy={loading}
               icon={state.won ? "🎉" : "💔"}
-              title={state.won ? "Ai găsit toate grupurile!" : "Ai rămas fără vieți."}
+              title={state.won ? "Ai găsit toate grupurile!" : "Nu mai ai greșeli disponibile."}
               accent={DEF.accent}
               won={state.won}
               score={state.score}

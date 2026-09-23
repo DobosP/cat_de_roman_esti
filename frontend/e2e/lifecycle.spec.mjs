@@ -35,7 +35,7 @@ async function visibleProgress(page, game, state) {
   const value = game.key === "alchimie" ? String(state.moves) :
     game.key === "lant" ? `${state.moves} ${state.moves === 1 ? "mutare" : "mutări"}` :
     game.key === "contexto" ? `${state.attempts} ${state.attempts === 1 ? "încercare" : "încercări"}` :
-    `${state.remaining_mistakes} rămase`;
+    `${state.remaining_mistakes} ${state.remaining_mistakes === 1 ? "rămasă" : "rămase"}`;
   await expect(page.locator(".hud .stat-badge").filter({
     has: page.locator(".stat-badge-label", { hasText: label }),
   }).locator(".stat-badge-value")).toHaveText(value);
@@ -127,3 +127,20 @@ for (const game of games) {
     });
   });
 }
+
+test("intrusul names the last remaining mistake in the singular", async ({ page }) => {
+  const game = games.find(({ key }) => key === "intrusul");
+  await deterministicStarts(page, game);
+  const initial = await start(page, game);
+  const intruder = solution(game).steps[0].payload.id;
+  let state = initial;
+  for (const tile of initial.tiles.filter(({ id }) => id !== intruder).slice(0, 2)) {
+    const response = await act(page, game, { action: "guess", labels: [tile.label], payload: { id: tile.id } });
+    expect(response.status()).toBe(200);
+    state = await response.json();
+  }
+  expect(state.remaining_mistakes).toBe(1);
+  expect(state.lost).toBe(false);
+  await visibleProgress(page, game, state);
+  await expect(page.locator(".hud .stat-badge-value", { hasText: "1 rămasă" })).toBeVisible();
+});

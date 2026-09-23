@@ -167,7 +167,7 @@ for (const lost of [false, true]) {
     const committed = await loseCommittedResponse(page, initial.game_id, "guess");
     expect((await guess(page, initial.game_id, lost ? wrong(3) : steps()[3])).status()).toBe(503);
     await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-    await expect(page.getByText(lost ? "Ai rămas fără vieți." : "Ai găsit toate grupurile!", { exact: true })).toBeVisible();
+    await expect(page.getByText(lost ? "Nu mai ai greșeli disponibile." : "Ai găsit toate grupurile!", { exact: true })).toBeVisible();
     await expect.poll(() => played(page)).toBe(1);
     await expect.poll(() => remembered(page)).toBeNull();
     const server = await (await request.get(gameURL(game, initial.game_id))).json();
@@ -177,7 +177,7 @@ for (const lost of [false, true]) {
     expect(server.score).toBe(committed().score);
     expect(server.solution).toHaveLength(4);
     expect(counts).toEqual({ reads: 1, mutations: 1 });
-    await expect(page.getByText(lost ? "Ai rămas fără vieți." : "Ai găsit toate grupurile!", { exact: true }).locator("../..")).toHaveCSS("opacity", "1");
+    await expect(page.getByText(lost ? "Nu mai ai greșeli disponibile." : "Ai găsit toate grupurile!", { exact: true }).locator("../..")).toHaveCSS("opacity", "1");
     await page.getByRole("button", { name: "Copiază rezultatul" }).scrollIntoViewIfNeeded();
     await expect(page.getByText("Joc reluat.", { exact: true })).toHaveCount(0);
     await page.screenshot({ path: test.info().outputPath(`recovered-${lost ? "loss" : "win"}.png`) });

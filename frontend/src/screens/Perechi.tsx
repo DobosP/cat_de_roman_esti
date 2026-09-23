@@ -150,7 +150,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     }
     const target =
       pending.kind === "result"
-        ? resultFocusRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)")
+        ? resultFocusRef.current
         : tileRefs.current.get(pending.id);
     if (!target) return;
     target.focus();
@@ -387,7 +387,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         } else {
           setFeedback(
             result.lost
-              ? "S-au terminat încercările. Îți arăt perechile."
+              ? "Ai folosit toate greșelile permise. Îți arăt perechile."
               : "Nu încă. Încearcă altă combinație.",
           );
           sound.playError();
@@ -529,7 +529,7 @@ export default function Perechi({ onExit, onToast }: Props) {
             <StatBadge label="PERECHI" value={`${state.solved_count}/4`} accent={DEF.accent} />
             <StatBadge
               label="GREȘELI"
-              value={`${state.remaining_mistakes} rămase`}
+              value={`${state.remaining_mistakes} ${state.remaining_mistakes === 1 ? "rămasă" : "rămase"}`}
               accent={DEF.accent}
             />
           </Hud>
@@ -656,7 +656,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         {!finished && <GameOptions game={GAME_KEY} />}
 
         {finished && state.solution && (
-          <div ref={resultFocusRef}>
+          <div ref={resultFocusRef} tabIndex={-1}>
             <ResultCard
               startFailed={startFailed}
               icon={state.won ? "✨" : "🧠"}
