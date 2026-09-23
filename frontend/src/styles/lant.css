@@ -84,3 +84,20 @@
     column-gap: 8px;
   }
 }
+
+/* Stack the position above the target on narrow screens, so long words keep a full line.
+   em follows the browser text-size setting. */
+@media (max-width: 24em) {
+  .lant-route {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lant-target {
+    text-align: left;
+  }
+
+  .lant-route-arrow {
+    transform: rotate(90deg);
+    justify-self: start;
+  }
+}

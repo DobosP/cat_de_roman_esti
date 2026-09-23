@@ -87,7 +87,7 @@ test("inventory uses touch-sized tiles and two columns on mobile", () => {
   for (const [, minHeight] of tileRules) assert.ok(Number(minHeight) >= 44);
   assert.match(
     css,
-    /@media \(max-width: 640px\)[\s\S]*?\.alchemy-inventory-grid[\s\S]*?repeat\(2, minmax\(0, 1fr\)\)/,
+    /@media \(max-width: 640px\)[\s\S]*?\.alchemy-inventory-grid \{ grid-template-columns: repeat\(auto-fit, minmax\(min\(100%, max\(7rem, calc\(\(100% - 10px\) \/ 2\)\)\), 1fr\)\)/,
   );
 });
 
