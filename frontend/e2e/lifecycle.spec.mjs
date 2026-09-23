@@ -31,9 +31,9 @@ async function visibleProgress(page, game, state) {
     return;
   }
   const label = game.key === "alchimie" ? /^Combinații$/i :
-    game.key === "lant" ? /^Mutări$/i : game.derived ? /^Greșeli$/i : /^Încercări$/i;
+    game.key === "lant" ? /^Salturi$/i : game.derived ? /^Greșeli$/i : /^Încercări$/i;
   const value = game.key === "alchimie" ? String(state.moves) :
-    game.key === "lant" ? `${state.moves} ${state.moves === 1 ? "mutare" : "mutări"}` :
+    game.key === "lant" ? `${state.moves} ${state.moves === 1 ? "salt" : "salturi"}` :
     game.key === "contexto" ? `${state.attempts} ${state.attempts === 1 ? "încercare" : "încercări"}` :
     `${state.remaining_mistakes} rămase`;
   await expect(page.locator(".hud .stat-badge").filter({
