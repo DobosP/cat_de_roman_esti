@@ -19,9 +19,9 @@ const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export function solution(game) {
   // Named semantic journeys and the general seed-38 journey must never share a cache entry.
-  const fixtureKey = `${game.key}:${game.packId ?? "seed-38"}`;
+  const fixtureKey = `${game.key}:${game.packId ?? "seed-38"}${game.daily ? `:daily-${game.daily}` : ""}`;
   if (!fixtures.has(fixtureKey)) {
-    const args = [script, game.key, ...(game.packId ? [game.packId] : [])];
+    const args = [script, game.key, ...(game.packId ? [game.packId] : []), ...(game.daily ? [`--daily=${game.daily}`] : [])];
     fixtures.set(fixtureKey, JSON.parse(execFileSync("python3", args, {
       cwd: root, env: { ...process.env, PYTHONPATH: root }, encoding: "utf8",
     })));

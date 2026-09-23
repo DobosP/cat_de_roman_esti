@@ -31,7 +31,7 @@ import { bestScore } from "../scores";
 import { gameByKey } from "../games";
 import { categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
-import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import "../styles/lant.css";
 
 const GAME_KEY = "lant";
@@ -210,6 +210,7 @@ export default function Lant({
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const exitSafely = useCallback(() => {
@@ -964,7 +965,7 @@ export default function Lant({
           <p className="muted lant-round-details">
             De la <strong>{state.start.label}</strong> la <strong>{state.target.label}</strong>.
             {" "}Drumul optim: {state.optimal} salturi{overPar > 0 ? ` · ${overPar} peste optim` : ""}.
-            {state.daily ? ` Provocarea zilei: ${state.daily}.` : ""}
+            {state.daily ? ` Provocarea zilei: ${formatDayKey(state.daily)}.` : ""}
             {state.board_category ? ` Categoria: ${categoryLabel(state.board_category)}.` : ""}
           </p>
           <strong>Drumul tău</strong>

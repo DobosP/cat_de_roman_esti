@@ -68,3 +68,9 @@ export function todayLocal(): string {
   const day = String(d.getDate()).padStart(2, "0");
   return `${d.getFullYear()}-${m}-${day}`;
 }
+
+/** A YYYY-MM-DD day key as Romanian readers write it (dd.mm.yyyy); keep the raw key for seeds and URLs. */
+export function formatDayKey(key: string): string {
+  const [y, m, d] = key.split("-");
+  return `${d}.${m}.${y}`;
+}
