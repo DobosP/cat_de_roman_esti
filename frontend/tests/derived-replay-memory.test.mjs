@@ -99,3 +99,18 @@ test("malformed and future-version documents fail safely without being overwritt
   assert.equal(replay.lastDerivedReplayId("intrusul"), null);
   assert.equal(storage.getItem(STORAGE_KEY), future);
 });
+
+test("denied storage getter leaves anonymous replay playable without erasing memory", (t) => {
+  storage.setItem(STORAGE_KEY, "existing replay memory");
+  const descriptor = Object.getOwnPropertyDescriptor(globalThis, "localStorage");
+  Object.defineProperty(globalThis, "localStorage", {
+    configurable: true,
+    get() { throw new DOMException("Storage denied", "SecurityError"); },
+  });
+  t.after(() => Object.defineProperty(globalThis, "localStorage", descriptor));
+
+  assert.equal(replay.lastDerivedReplayId("intrusul"), null);
+  assert.doesNotThrow(() => replay.rememberDerivedReplayId("intrusul", "completed-session"));
+  assert.equal(replay.lastDerivedReplayId("perechi"), null);
+  assert.equal(storage.getItem(STORAGE_KEY), "existing replay memory");
+});

@@ -1,0 +1,73 @@
+import os,sys,json,hashlib
+from pathlib import Path
+from types import MappingProxyType,SimpleNamespace
+from dataclasses import replace
+root=Path(sys.argv[1]);os.chdir(root);sys.path[:0]=[str(root),str(root/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from django.test import Client,override_settings
+from cat_de_roman_esti.wordgames import lant,lant_relations as lr,packs
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.recipe_extensions import digest,record_snapshot
+import critique_pack as cp
+out=root/'docs/reviews/v1-testing-release/content/reconsideration'
+proposal=root/'docs/reviews/v1-testing-release/content/lt211-caption-proposal.json'
+p=json.loads(proposal.read_bytes()); svc=get_service(); pack,s,strong,regions=cp.load_all(cp.PACKAGE_PACK,cp.PACKAGE_KG)
+board=next(x for x in pack['lant'] if x['id']=='lt_viata_de_roman_211')
+def session(start=None,target=None,optimal=None):
+ a=start or board['start'];return lant.LantSession(start=a,target=target or board['target'],optimal=optimal or board['optimal'],difficulty=board['difficulty'],category=board['category'],pack_id=board['id'],chain=[a])
+r={'kind':'lt211-independent-quality-runtime-probe-v1','candidate_sha256':hashlib.sha256(proposal.read_bytes()).hexdigest(),'bindings':{k:hashlib.sha256(Path(k).read_bytes()).hexdigest() for k in p['bindings']},'baseline_choices':lant._visible_choices(session()),'baseline_routes':cp.representative_shortest_paths(s,board['start'],board['target'],board['optimal']),'six_directions':[],'routes':[]}
+original=lr.REVIEWED_CAPTIONS; additions={tuple(x['pair']):(x['edge_snapshot_sha256'],x['caption']) for x in p['items']}
+assert not set(original)&set(additions);lr.REVIEWED_CAPTIONS=MappingProxyType(dict(original)|additions)
+try:
+ r['original_caption_count']=len(original);r['temporary_caption_count']=len(lr.REVIEWED_CAPTIONS);r['all_original_entries_unchanged']=all(lr.REVIEWED_CAPTIONS[k]==v for k,v in original.items())
+ r['proposed_choices']=lant._visible_choices(session());r['proposed_routes']=cp.representative_shortest_paths(s,board['start'],board['target'],board['optimal'])
+ with override_settings(ALLOWED_HOSTS=['testserver','localhost']):
+  c=Client()
+  for x in p['items']:
+   for direction,o in x['orientation_review'].items():
+    a,b=o['from'],o['to'];edge=svc.link(a,b);actualsha=digest(record_snapshot(edge));expected=x['caption'] if actualsha==x['edge_snapshot_sha256'] else 'legătură directă';assert lr.caption(svc,a,b)==expected
+    gid=lant.store.create(session(a,b,1));url=f'/api/wordgames/lant/games/{gid}'
+    try:
+     before=c.get(url).json();response=c.post(url+'/move',{'text':svc.label(b)},content_type='application/json');state=response.json();after=c.get(url).json()
+     assert response.status_code==200 and state['won'] and state['score']==1000 and state['relation']==expected and after['path']==state['path'] and after['moves']==1
+     assert x['edge_snapshot_sha256'] not in json.dumps(after)
+     r['six_directions'].append({'id':x['id'],'direction':direction,'from':a,'to':b,'actual_edge_id':edge.id,'actual_edge_sha256':actualsha,'proposed_digest_matches':actualsha==x['edge_snapshot_sha256'],'actual_caption':expected,'won':state['won'],'score':state['score'],'get_restores_path':True})
+    finally:lant.store.delete(gid)
+   a,b=x['orientation_review']['forward']['from'],x['orientation_review']['forward']['to'];edge=svc.link(a,b);changed=replace(edge,label_ro='unreviewed replacement',relation='related_to');assert lr.caption(SimpleNamespace(link=lambda *_:changed),a,b)=='legătură directă';assert lr.caption(SimpleNamespace(link=lambda *_:None),a,b)==''
+  for via in ['Carte','copil']:
+   gid=lant.store.create(session());url=f'/api/wordgames/lant/games/{gid}'
+   try:
+    start=c.get(url).json();assert {'Carte','copil'}<={x['label'] for x in start['choices']}
+    for invalid in ['zzzzzzzzzz','Ghiozdan']:
+     assert not c.post(url+'/move',{'text':invalid},content_type='application/json').json()['ok'];assert c.get(url).json()['path']==start['path']
+    frames=[]
+    for n,label in enumerate([via,'Capra cu trei iezi'],1):
+     state=c.post(url+'/move',{'text':label},content_type='application/json').json();assert state['ok'] and state['moves']==n and state['path'][-1]['relation']!='legătură directă'
+     fetched=c.get(url).json();assert fetched['path']==state['path'] and fetched['moves']==n
+     if n==1:
+      repeat=c.post(url+'/move',{'text':label},content_type='application/json').json();assert not repeat['ok'];assert c.get(url).json()['path']==state['path']
+     frames.append({'moves':n,'path':state['path'],'won':state['won'],'choices':state.get('choices')})
+    assert state['won'] and state['score']==1000;r['routes'].append({'via':via,'frames':frames,'score':state['score'],'wrong_repeat_and_GET_stable':True})
+   finally:lant.store.delete(gid)
+  gid=lant.store.create(session());url=f'/api/wordgames/lant/games/{gid}'
+  try:
+   start=c.get(url).json();hint=c.post(url+'/hint').json();after=c.get(url).json();assert hint['stage']=='direction' and hint['relation']!='legătură directă' and after['earned_hint']==hint and after['moves']==0 and after['path']==start['path'];r['hint']=hint
+  finally:lant.store.delete(gid)
+finally:lr.REVIEWED_CAPTIONS=original
+r['mapping_restored']=lr.REVIEWED_CAPTIONS is original
+r['branch_profile']=packs.lant_branch_profile(s,board['start'],board['target'],board['optimal'])
+r['exact_other_pack_pairs']=[x['id'] for x in pack['lant'] if x['id']!=board['id'] and (x['start'],x['target'])==(board['start'],board['target'])]
+r['exact_rejected_pairs']=[x['id'] for x in cp.load_lant_rejection_tombstones() if (x['start'],x['target'])==(board['start'],board['target'])]
+family={board['start'],board['target'],'n_v3lit_carte','n_v4soc_copil'}
+r['nearby_approved']=[];r['approved_with_both_intermediates']=[]
+for x in pack['lant']:
+ if x['status']!='approved':continue
+ paths=cp.representative_shortest_paths(s,x['start'],x['target'],x['optimal']);nodes={n['id'] for path in paths for n in path['nodes']};shared=family&nodes
+ if len(shared)>=2:r['nearby_approved'].append({'id':x['id'],'start':s.label(x['start']),'target':s.label(x['target']),'shared_family':sorted(shared),'paths':paths})
+ intermediates={n['id'] for path in paths for n in path['nodes'][1:-1]}
+ if {'n_v3lit_carte','n_v4soc_copil'}<=intermediates:r['approved_with_both_intermediates'].append(x['id'])
+r['approved_same_start']=[x['id'] for x in pack['lant'] if x['status']=='approved' and x['start']==board['start']]
+r['scope']='Private synthetic sessions with temporary caption mapping. No natural selection, fixture/source writes or player testing.'
+(out/'lt211-quality-runtime-probe.json').write_bytes((json.dumps(r,ensure_ascii=False,indent=2)+'\n').encode())
+print(json.dumps({k:r[k] for k in ['candidate_sha256','original_caption_count','temporary_caption_count','mapping_restored','branch_profile','exact_other_pack_pairs','exact_rejected_pairs','approved_with_both_intermediates','approved_same_start','proposed_choices','hint']},ensure_ascii=False));print('nearby',[x['id'] for x in r['nearby_approved']]);print('directions',len(r['six_directions']),'routes',len(r['routes']))

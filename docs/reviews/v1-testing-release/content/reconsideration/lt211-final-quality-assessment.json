@@ -1,0 +1,133 @@
+{
+  "kind": "lt211-final-installed-gameplay-quality-v1",
+  "reviewer": "/root/v1_held_audit",
+  "role": "analyst",
+  "checked_on": "2026-09-23",
+  "id": "lt_viata_de_roman_211",
+  "review_binding": "sha256:070e0a0eedbc512af15c384fa1e0d8c63e3200e95db93ffa55a6bf7988827ff3",
+  "dossier_sha256": "3bf752ac774ee362d45d1a0e5927dd994458be5213399181cdec238c326f77b0",
+  "kg_sha256": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+  "record_sha256": "00c700668e8398ebaddde73520b6e9166dec8242054b5a49f52b6dfbf8433c55",
+  "display_rules_sha256": "e7b2f429a01d513b3138b04533ed16ccdd0cfdf5bf4caa88ce83c51765d9097c",
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "caption_candidate_sha256": "4f4e36af80bb232d77b60ec8711f9351f67b9ed49d6fb893420000c2cda35d5a",
+  "analyst_verdict": "promote",
+  "criteria": [
+    {
+      "criterion": "A1",
+      "score": 4,
+      "passes": true,
+      "rationale": "Ghiozdan, Carte and copil are ordinary vocabulary; Capra cu trei iezi is a widely published Creangă tale presented in child-oriented editions. No obscure bridge is required."
+    },
+    {
+      "criterion": "A2",
+      "score": 4,
+      "passes": true,
+      "rationale": "Schoolbag use and family/primary-school reading are active, cross-generational contexts. Dictionary records and current children editions support continuity, not measured familiarity for every age."
+    },
+    {
+      "criterion": "A3",
+      "score": 4,
+      "passes": true,
+      "rationale": "Category viața de român and the three captions accurately describe a schoolbag, its carried book/user, and a story in child editions. No claim of school curriculum or universal suitability is embedded."
+    },
+    {
+      "criterion": "A4",
+      "score": 4,
+      "passes": true,
+      "rationale": "Container/use links are dictionary-supported; children editions are directly published by Litera and corroborated by indexed Sigma text. No new unsupported graph claim is needed."
+    },
+    {
+      "criterion": "A5",
+      "score": 4,
+      "passes": true,
+      "rationale": "This is the existing1875 literary-work node; no adult-film framing, profanity, alcohol or historical humor. Story violence is not described or needed in gameplay. Nearby approved boards overlap by two concepts but differ materially in start and bridge semantics."
+    },
+    {
+      "criterion": "A6",
+      "score": 3,
+      "passes": true,
+      "rationale": "Freshness is modest but sufficient for one easy board: no exact directed pair elsewhere in current pack or105tombstones, no approved Ghiozdan start and no sampled approved board with both Carte/copil intermediates. Two nearby approved Creangă boards share Carte/Capra; avoid promoting the near-identical pending Abecedar diamond as a numerical companion."
+    },
+    {
+      "criterion": "A7",
+      "score": 3,
+      "passes": true,
+      "rationale": "Ghiozdan containment and schoolchild use are definitional relations, not arbitrary national/region co-occurrence. The final book/work and child-edition links apply to many children stories but are specific checkable relationships for this named work; neither entire route depends solely on taxonomy."
+    },
+    {
+      "criterion": "D1",
+      "score": 4,
+      "passes": true,
+      "rationale": "Both endpoints independently have high ordinary recognition: everyday school object and named canonical story. Current salience0.84/0.92 supports but does not prove recognition."
+    },
+    {
+      "criterion": "D2",
+      "score": 4,
+      "passes": true,
+      "rationale": "Under the proposed captions, Ghiozdan→Carte→Capra describes a carried book then its story; Ghiozdan→copil→Capra describes the schoolchild user then a story in child editions. Both are interpretable without internal beginner_diamond or vague co-occurrence labels."
+    },
+    {
+      "criterion": "D3",
+      "score": 4,
+      "passes": true,
+      "rationale": "Actual current runtime exposes both shortest first hops alongside Caiet. Profile2/2/2 means no shared one-node intermediate choke point. Content vs user are meaningfully different choices even though both reach the same familiar story."
+    },
+    {
+      "criterion": "D4",
+      "score": 4,
+      "passes": true,
+      "rationale": "Two steps and common visible alternatives fit usor. No author name, literary date or specialist plot recall is required. Direct target move remains illegal and the path uses the existing directed graph."
+    },
+    {
+      "criterion": "D5",
+      "score": 3,
+      "passes": true,
+      "rationale": "An everyday carried object reaches a named story via either the book or its reader. The arc is small but satisfying as a beginner lesson in associations; it is not evidence of a deep or difficult puzzle."
+    }
+  ],
+  "supplemental_scoring_note": "Current CRITIQUE_RUBRIC.md has named kill criteria rather than numeric thresholds. These explicit1–5 reviewer scores supplement those criteria:1unacceptable,2needs repair,3adequate,4strong,5exceptional. Every applicable A/D criterion must independently pass; averaging cannot erase a failure. Scores below apply only to the proposed explained routes, not unchanged baseline.",
+  "minimum_supplemental_score": 3,
+  "installed_evidence": {
+    "exact_current_binding_rebuilt": true,
+    "lint_findings": [],
+    "branch_profile": {
+      "valid_first_hops": 2,
+      "narrowest_shortest_path_layer": 2,
+      "total_intermediate_shortest_path_nodes": 2
+    },
+    "all_representative_path_display_labels": [
+      [
+        "carte purtată în ghiozdan",
+        "poveste și carte"
+      ],
+      [
+        "ghiozdan folosit de școlari",
+        "poveste în ediții pentru copii"
+      ]
+    ],
+    "both_shortest_hops_visible": true,
+    "final_kg_focused_test_command": "python -X utf8 -B -m pytest tests/test_v1_lant_captions.py -q -p no:cacheprovider",
+    "final_kg_focused_result": "13 passed",
+    "original_117_caption_mappings_unchanged": true,
+    "reverse_Carte_Ghiozdan": "Different de7579 still allowed and displays neutral fallback; not part of either forward shortest route."
+  },
+  "sources": [
+    {
+      "url": "https://dexonline.ro/definitie/ghiozdan",
+      "access": "direct page reopened",
+      "finding": "DEX2009 and MDA2 link schoolchildren, their bags and carried books; DLRLC documents the long-standing schoolchild sense. Used as semantic support, not a readership survey."
+    },
+    {
+      "url": "https://www.litera.ro/capra-cu-trei-iezi",
+      "access": "direct publisher page reopened",
+      "finding": "Specific Ion Creangă edition; children category, age bands5–7 and7–9, ISBN978-997-574-311-2. Supports a bounded edition claim."
+    },
+    {
+      "url": "https://editurasigma.ro/product/capra-cu-trei-iezi-carte-uriasa/",
+      "access": "direct open failed; current indexed primary publisher text read",
+      "finding": "Adapted shorter story, beginning-reader/primary-school use, 4–9-year audience and 2006 edition metadata. Treated as bounded corroboration; not claimed as a successful direct fetch."
+    }
+  ],
+  "limits": "Exact final installed graph/display reviewed, but this is one independent analyst vote only. No fixture promotion, natural selector test, browser layout signoff or human enjoyment claim is made here. Keep baseline-analyst keep file as historical pre-repair judgment; do not mix it into the final one-item batch."
+}

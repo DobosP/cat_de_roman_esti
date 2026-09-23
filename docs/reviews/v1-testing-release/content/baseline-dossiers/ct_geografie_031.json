@@ -1,0 +1,74 @@
+{
+  "id": "ct_geografie_031",
+  "game": "contexto",
+  "category": "geografie",
+  "difficulty": "greu",
+  "status": "approved",
+  "record_sha256": "56af62c4f5c452780136086042a530c01862f553745f0e567a86928caaa4f44e",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Peștera Scărișoara salience 0.18 < 0.20 (greu floor)"
+    },
+    {
+      "check": "contexto_incoming_floor",
+      "level": "WARN",
+      "detail": "2 unique existing non-distractor incoming neighbors < 5, excluding the target itself (ids: n_speologie, n_v2geo_pestera); five recognizable predecessors are impossible; recognition still requires independent review"
+    }
+  ],
+  "target": {
+    "id": "n_pestera_scarisoara",
+    "label": "Peștera Scărișoara",
+    "node_type": "place",
+    "category": "geografie",
+    "salience": 0.1819,
+    "degree": 4,
+    "incoming_degree": 2,
+    "description": "Pestera din Muntii Apuseni care adaposteste unul dintre cei mai mari ghetari subterani din Europa."
+  },
+  "incoming_neighbor_floor": {
+    "minimum": 5,
+    "count": 2,
+    "sample": [
+      {
+        "id": "n_speologie",
+        "label": "Speologie"
+      },
+      {
+        "id": "n_v2geo_pestera",
+        "label": "peșteră"
+      }
+    ],
+    "sample_truncated": false,
+    "recognition_assessed": false
+  },
+  "reachable": 2353,
+  "strong_neighbors": [
+    {
+      "id": "n_v2geo_pestera",
+      "label": "peșteră",
+      "node_type": "concept",
+      "category": "geografie",
+      "salience": 0.5211,
+      "degree": 4,
+      "incoming_degree": 4,
+      "description": "Cavitate naturală subterană, formată de obicei în calcar.",
+      "strength": 0.95
+    },
+    {
+      "id": "n_speologie",
+      "label": "Speologie",
+      "node_type": "concept",
+      "category": "stiinta",
+      "salience": 0.2735,
+      "degree": 10,
+      "incoming_degree": 10,
+      "description": "Stiinta care studiaza pesterile si mediul subteran.",
+      "strength": 0.72
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:5e2872bbf1cbe6796c17fd380e9ded14ce4178ec4111f627cdfd6a5cf945d647"
+}

@@ -28,6 +28,8 @@ SOURCE_PATH = Path(S.__file__).resolve()
 RUNTIME_SOURCES = (
     "cat_de_roman_esti/wordgames/quick_catalog.py",
     "cat_de_roman_esti/wordgames/derived_catalog.py",
+    "cat_de_roman_esti/wordgames/release_reserve.py",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json",
     "cat_de_roman_esti/wordgames/intrusul.py",
     "cat_de_roman_esti/wordgames/perechi.py",
     "cat_de_roman_esti/wordgames/service.py",

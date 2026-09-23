@@ -1,0 +1,250 @@
+{
+  "id": "cx_literatura_044",
+  "game": "conexiuni",
+  "category": "literatura",
+  "difficulty": "greu",
+  "status": "approved",
+  "record_sha256": "9a6b3d3d094d1af4915fbf719776a4133f57699fda3020f0fa39038d6bdbdd41",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "mirrored_groups",
+      "level": "WARN",
+      "detail": "\"Operă -> autor de manual\" <-> \"Autorii lor\" are in >=3-way strong correspondence"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Atelierul limbii\" mixes node_types 3+1: Gramatică[concept], Ortografie[concept], Diacritice[concept], DEX[work]"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Critici și filologi\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_127)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Atelierul limbii\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_127)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [],
+    "engine_unfair_raw": 8
+  },
+  "groups": [
+    {
+      "label": "Operă -> autor de manual",
+      "members": [
+        {
+          "id": "n_baltagul",
+          "label": "Baltagul",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.1632,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Roman de Mihail Sadoveanu (1930)."
+        },
+        {
+          "id": "n_morometii",
+          "label": "Moromeții",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.3058,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Roman de Marin Preda despre lumea satului romanesc."
+        },
+        {
+          "id": "n_plumb",
+          "label": "Plumb",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2557,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Poezie simbolista emblematica a lui George Bacovia."
+        },
+        {
+          "id": "n_cuvinte_potrivite",
+          "label": "Cuvinte potrivite",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.15,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Volum de debut al lui Tudor Arghezi (1927)."
+        }
+      ]
+    },
+    {
+      "label": "Autorii lor",
+      "members": [
+        {
+          "id": "n_mihail_sadoveanu",
+          "label": "Mihail Sadoveanu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.4275,
+          "degree": 12,
+          "incoming_degree": 12,
+          "description": "Prozator roman, autor de romane istorice si rurale."
+        },
+        {
+          "id": "n_marin_preda",
+          "label": "Marin Preda",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.2502,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Romancier roman din perioada postbelica."
+        },
+        {
+          "id": "n_george_bacovia",
+          "label": "George Bacovia",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.2573,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Poet roman, principal reprezentant al simbolismului."
+        },
+        {
+          "id": "n_tudor_arghezi",
+          "label": "Tudor Arghezi",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.3154,
+          "degree": 7,
+          "incoming_degree": 6,
+          "description": "Poet roman, innoitor al limbajului poetic."
+        }
+      ]
+    },
+    {
+      "label": "Critici și filologi",
+      "members": [
+        {
+          "id": "n_titu_maiorescu",
+          "label": "Titu Maiorescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.3023,
+          "degree": 9,
+          "incoming_degree": 8,
+          "description": "Critic literar, mentor al Junimii."
+        },
+        {
+          "id": "n_eugen_lovinescu",
+          "label": "Eugen Lovinescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.1799,
+          "degree": 7,
+          "incoming_degree": 6,
+          "description": "Critic literar, teoretician al modernismului interbelic."
+        },
+        {
+          "id": "n_george_calinescu",
+          "label": "George Călinescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.1971,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Critic si istoric literar roman (1899-1965), autor al Istoriei literaturii romane de la origini pana in prezent."
+        },
+        {
+          "id": "n_bogdan_petriceicu_hasdeu",
+          "label": "Bogdan Petriceicu Hasdeu",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.192,
+          "degree": 5,
+          "incoming_degree": 3,
+          "description": "Filolog si istoric (1838-1907), pionier al lingvisticii romanesti, autor al dictionarului Etymologicum Magnum Romaniae."
+        }
+      ]
+    },
+    {
+      "label": "Atelierul limbii",
+      "members": [
+        {
+          "id": "n_gramatica",
+          "label": "Gramatică",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.617,
+          "degree": 25,
+          "incoming_degree": 28,
+          "description": "Studiul structurii limbii: morfologie si sintaxa."
+        },
+        {
+          "id": "n_ortografie",
+          "label": "Ortografie",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.4096,
+          "degree": 18,
+          "incoming_degree": 18,
+          "description": "Ansamblul regulilor de scriere corecta a unei limbi."
+        },
+        {
+          "id": "n_diacritice",
+          "label": "Diacritice",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.2036,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Semnele speciale ale romanei: a-breve, a-circumflex, i-circumflex, s-virgula, t-virgula."
+        },
+        {
+          "id": "n_dex",
+          "label": "DEX",
+          "node_type": "work",
+          "category": "limba",
+          "salience": 0.3724,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Dictionarul explicativ al limbii romane, lucrare de referinta a Academiei."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "Marin Preda",
+      "a_group": "Autorii lor",
+      "b": "Moromeții",
+      "b_group": "Operă -> autor de manual",
+      "strength": 0.92
+    },
+    {
+      "a": "Baltagul",
+      "a_group": "Operă -> autor de manual",
+      "b": "Mihail Sadoveanu",
+      "b_group": "Autorii lor",
+      "strength": 0.9
+    },
+    {
+      "a": "George Bacovia",
+      "a_group": "Autorii lor",
+      "b": "Plumb",
+      "b_group": "Operă -> autor de manual",
+      "strength": 0.9
+    },
+    {
+      "a": "Cuvinte potrivite",
+      "a_group": "Operă -> autor de manual",
+      "b": "Tudor Arghezi",
+      "b_group": "Autorii lor",
+      "strength": 0.85
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:68c60088470b97e172839c575dc55b82d48bd6df10270631436bd289fb2fed47"
+}

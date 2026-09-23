@@ -1,0 +1,188 @@
+{
+  "kind": "v1-exact-factual-repair-review-v1",
+  "role": "factual",
+  "reviewer": "/root/v1_ux_audit",
+  "candidate_author": "/root/v1_board_audit",
+  "candidate_sha256": "18c9d50981c9b6cb4288f928174ba0f4dfafd798ef846dd2361a22193f488717",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "checked_on": "2026-09-23",
+  "verdict": "accept",
+  "items": [
+    {
+      "id": "n_v20geo_crucea_caraiman",
+      "verdict": "accept",
+      "before_record_sha256": "83aaac0f039c597bfcee4e466be1af18b215c893fd9d68ca8a784379c9726e94",
+      "after_record_sha256": "150e870bb923d54a76200fb07bab9fe7e8dfbdb604a992e9112eb7c0d33d5e60",
+      "rationale": "The monument owner explicitly supports the 1926–1928 construction, memorial purpose, selected 2,291 m southeast peak and total 39.3 m including the base. I checked the counterexample in the same source: the 2,325 m main summit was rejected, so the proposed wording must not be paraphrased as the main summit. It correctly drops the old saddle and ambiguous 28 m claims.",
+      "sources": [
+        "https://reabilitare-crucea-caraiman.mapn.ro/pages/istoric"
+      ]
+    },
+    {
+      "id": "n_v17art_muzeul_satului",
+      "verdict": "accept",
+      "before_record_sha256": "bfb0ec3bf88087fdbcf99dfae3fb73bcb64b3ec0fb05435bc176e6abcc17f607",
+      "after_record_sha256": "cf7ea537fe88643d5386c72b2d082c7b490f0be7d49826f28eab57255d74c71e",
+      "rationale": "The museum history supports Bucharest, the open-air format, Gusti’s organising role, May 1936 opening and transferred houses, annexes, churches and installations. It distinguishes building counts from household complexes, which refutes the earlier hundreds-of-households wording. The replacement makes no inflated count or sole-founder claim.",
+      "sources": [
+        "https://muzeul-satului.ro/despre-noi/istoric-muzeul-satului/"
+      ]
+    },
+    {
+      "id": "n_ateneul_roman",
+      "verdict": "accept",
+      "before_record_sha256": "301b91e9cbec0210e323b26c8f5f7d0d5293c64316ffe6d4cac2a650d66c65d4",
+      "after_record_sha256": "63727fd6ee3555bc3e600d29ec48a359abe33ecc2ca32c08785a037e404ef1dd",
+      "rationale": "The institution confirms the building inauguration in 1888, its Philharmonic seat and hosting of Enescu festival events. I checked the 1889 concert-hall completion counterexample: the proposed text explicitly refers to the building, not a hall inaugurated in 1888. The principal-stage claim is removed rather than replaced with another unsupported ranking.",
+      "sources": [
+        "https://filarmonicaenescu.ro/ro/istoric-ateneul-roman"
+      ]
+    },
+    {
+      "id": "de1218",
+      "verdict": "accept",
+      "before_record_sha256": "b7e2461032b30bd80a6a3d958b35e05e8ab7af95a8e79ef59b8def38c94ea928",
+      "after_record_sha256": "68a655cf1e88f612e9f1332c68aebafa794e2eaa58bd829ce7628bf6df6c9970",
+      "rationale": "The IHF June 2025 first-person career retrospective establishes that Neagu played women’s handball and had finished her official playing career. Historical a jucat is true without asserting current active employment. The sport identity remains intact.",
+      "sources": [
+        "https://www.ihf.info/member-federations/romania/5081/news/221881"
+      ]
+    },
+    {
+      "id": "de2664",
+      "verdict": "accept",
+      "before_record_sha256": "a0060283afc32e77eab926740704e67c74f072a33715d858ea381a1b98da0110",
+      "after_record_sha256": "3546e9189179dd5f4844155087ff4fc23cee064689ae6c4e7b972a32e836271b",
+      "rationale": "The EHF team page explicitly places Neagu’s national-team farewell after the 2023 World Championship. The IHF retrospective independently describes Romania appearances. Past-tense national participation is supported; it does not confuse national retirement with the later club career end.",
+      "sources": [
+        "https://ehfeuro.eurohandball.com/women/2024/teams/details/_PR8E6ta0rFX3LlXN90QeA/Romania/",
+        "https://www.ihf.info/member-federations/romania/5081/news/221881"
+      ]
+    },
+    {
+      "id": "de2665",
+      "verdict": "accept",
+      "before_record_sha256": "3e822c5007554f9d71dc1d32634cd1aa86e1648dc3576b283087c8c0fc29b2ce",
+      "after_record_sha256": "5dc4a8a687cf163745f878e0619c4bdbf9d3d29a0e3219cae3a1f9df29a0f52f",
+      "rationale": "The IHF retrospective describes club play for Oltchim and Buducnost and the end of her official career. A separate EHF post-retirement interview with her CSM teammate corroborates retired status. Historical club participation is accurate; no club membership or endpoint is newly invented.",
+      "sources": [
+        "https://www.ihf.info/member-federations/romania/5081/news/221881",
+        "https://www.eurohandball.com/en/news/en/elizabeth-omoregie-i-never-want-to-score-the-most-goals/"
+      ]
+    },
+    {
+      "id": "de427",
+      "verdict": "accept",
+      "before_record_sha256": "cc6487d0c40c91ca1d59524bf0d11fadff31ae0599cca342a314f4f6f6c6f331",
+      "after_record_sha256": null,
+      "rationale": "Accept deletion of an unsupported strong casting assertion. I independently checked the licensed CINEPUB film presentation and UCIN film entry plus Dem’s UCIN filmography: they do not establish this casting link and consistently identify other actors. The actor filmography positively supports the B.D. control instead. I do not claim to have watched the full film credits, and absence from a short principal-cast list alone would not prove a universal negative. Under A4, this unverified strong gameplay link should not survive as a generic related_to relabel.",
+      "sources": [
+        "https://cinepub.ro/movie/operatiunea-monstrul-1976-film-comedie-online/",
+        "https://aarc.ro/newfilm/film/operaiunea-monstrul-1975",
+        "https://www.aarc.ro/personalitate/view/dem-radulescu"
+      ]
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "de1220",
+      "verdict": "preserve",
+      "record_sha256": "c57a7b2efbf2812ba5559de254f7ad809372b68363142f1adeabea6ed47f0f3d",
+      "rationale": "este sportivă describes athletic identity, not current professional employment; preserve.",
+      "sources": [
+        "https://www.ihf.info/member-federations/romania/5081/news/221881"
+      ]
+    },
+    {
+      "id": "de1219",
+      "verdict": "preserve",
+      "record_sha256": "c1fda7222163c95a12edba4475fb75f1d95c0247cb548d7a1d3a84f32712fa38",
+      "rationale": "a jucat în is already historical; preserve.",
+      "sources": [
+        "https://www.ihf.info/member-federations/romania/5081/news/221881"
+      ]
+    },
+    {
+      "id": "de6523",
+      "verdict": "preserve",
+      "record_sha256": "bad6314c30d0565b82f1e48e8d99ede185ec48a46d2533b70a57cd9bb7e07877",
+      "rationale": "a jucat la is already historical for CSM București; preserve.",
+      "sources": [
+        "https://ehfec.eurohandball.com/men/2024-25/news/en/neagu-to-bid-farewell-at-end-of-202425-season/"
+      ]
+    },
+    {
+      "id": "de409",
+      "verdict": "preserve",
+      "record_sha256": "0e9bab3f52e03af678ae8f93e58323547cb702c20feb8a738089af6dc030a8c5",
+      "rationale": "B.D. casting link verified in UCIN actor filmography; preserve.",
+      "sources": [
+        "https://www.aarc.ro/personalitate/view/dem-radulescu"
+      ]
+    },
+    {
+      "id": "n_ftv_dem_radulescu",
+      "verdict": "preserve",
+      "record_sha256": "c0b2ba438b65bae71df66778241b12af17f0d405e23a3e089754b8eb7586176c",
+      "rationale": "Current description of comedy actor and B.D. is supported; no node-description repair.",
+      "sources": [
+        "https://www.aarc.ro/personalitate/view/dem-radulescu"
+      ]
+    }
+  ],
+  "record_checks": {
+    "candidate_exact_sha_verified": true,
+    "all_seven_before_records_equal_current_fixture": true,
+    "all_before_and_after_record_digests_recomputed": true,
+    "six_replacements_change_only_declared_field": true,
+    "sole_removal_exact_id": "de427"
+  },
+  "source_access": [
+    {
+      "url": "https://reabilitare-crucea-caraiman.mapn.ro/pages/istoric",
+      "access": "full page opened and relevant paragraphs read"
+    },
+    {
+      "url": "https://muzeul-satului.ro/despre-noi/istoric-muzeul-satului/",
+      "access": "full page opened and relevant paragraphs read"
+    },
+    {
+      "url": "https://filarmonicaenescu.ro/ro/istoric-ateneul-roman",
+      "access": "full page opened and relevant paragraphs read"
+    },
+    {
+      "url": "https://www.ihf.info/member-federations/romania/5081/news/221881",
+      "access": "full page opened and relevant paragraphs read"
+    },
+    {
+      "url": "https://ehfeuro.eurohandball.com/women/2024/teams/details/_PR8E6ta0rFX3LlXN90QeA/Romania/",
+      "access": "full page opened and relevant paragraphs read"
+    },
+    {
+      "url": "https://cinepub.ro/movie/operatiunea-monstrul-1976-film-comedie-online/",
+      "access": "full page opened and relevant paragraphs read"
+    },
+    {
+      "url": "https://aarc.ro/newfilm/film/operaiunea-monstrul-1975",
+      "access": "direct page open returned internal retrieval error; indexed result contained film cast or actor filmography and was read; not represented as full-page access"
+    },
+    {
+      "url": "https://www.aarc.ro/personalitate/view/dem-radulescu",
+      "access": "direct page open returned internal retrieval error; indexed result contained film cast or actor filmography and was read; not represented as full-page access"
+    },
+    {
+      "url": "https://www.eurohandball.com/en/news/en/elizabeth-omoregie-i-never-want-to-score-the-most-goals/",
+      "access": "official search result read; post-retirement teammate statement corroborates CSM and 2025 retirement"
+    },
+    {
+      "url": "https://ehfec.eurohandball.com/men/2024-25/news/en/neagu-to-bid-farewell-at-end-of-202425-season/",
+      "access": "official search result read; national/club distinction and CSM since 2017/18"
+    }
+  ],
+  "limits": [
+    "Factual acceptance of these exact seven repairs only. It does not approve affected boards, restore rejected candidates, or waive source, quality, topology, compatibility or runtime gates.",
+    "Dem casting deletion removes an unsupported gameplay assertion; no film-frame or complete end-credit inspection is claimed.",
+    "All inherited pending A5/editorial holds remain separate and unapproved.",
+    "No served fixture, source generator or proposal was edited by this reviewer."
+  ]
+}

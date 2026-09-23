@@ -1,0 +1,349 @@
+{
+  "id": "cx_istorie_115",
+  "game": "conexiuni",
+  "category": "istorie",
+  "difficulty": "usor",
+  "status": "approved",
+  "record_sha256": "ac4f7e9f4b18e940c68b428008f4036053257871ce0196fae8d1c9f72f90fa35",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "label_self_leak",
+      "level": "WARN",
+      "detail": "group label \"Dacia antică\" repeats member(s): Dacia"
+    },
+    {
+      "check": "mirrored_groups",
+      "level": "WARN",
+      "detail": "\"Dacia antică\" <-> \"Manualul romanizării\" are in >=3-way strong correspondence"
+    },
+    {
+      "check": "mirrored_groups",
+      "level": "WARN",
+      "detail": "\"Roma în poveste\" <-> \"Manualul romanizării\" are in >=3-way strong correspondence"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Manualul romanizării\" mixes node_types 2+2: Colonizarea romană[event], Substratul dacic[concept], Etnogeneza românească[concept], Războaiele daco-romane[event]"
+    },
+    {
+      "check": "label_self_leak",
+      "level": "WARN",
+      "detail": "group label \"Dacia pe șosea și în industrie\" repeats member(s): Industrie"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Dacia antică\" reuses an inventory/selected quad (also in: cx_istorie_030)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Roma în poveste\" reuses an inventory/selected quad (also in: cx_istorie_030)"
+    },
+    {
+      "check": "board_reskin",
+      "level": "WARN",
+      "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_istorie_030 (8), cx_viata_de_roman_236 (8)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [
+      "Limba latină"
+    ],
+    "engine_unfair_raw": 3
+  },
+  "groups": [
+    {
+      "label": "Dacia antică",
+      "members": [
+        {
+          "id": "n_dacia",
+          "label": "Dacia",
+          "node_type": "place",
+          "category": "istorie",
+          "salience": 0.6911,
+          "degree": 17,
+          "incoming_degree": 17,
+          "description": "Regat antic locuit de geto-daci, cucerit de Imperiul Roman."
+        },
+        {
+          "id": "n_geto_daci",
+          "label": "Geto-dacii",
+          "node_type": "concept",
+          "category": "istorie",
+          "salience": 0.4377,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Populații antice din spațiul carpato-danubian; Burebista a reunit multe comunități geto-dace într-un regat în secolul I î.Hr."
+        },
+        {
+          "id": "n_burebista",
+          "label": "Burebista",
+          "node_type": "person",
+          "category": "istorie",
+          "salience": 0.1581,
+          "degree": 3,
+          "incoming_degree": 3,
+          "description": "Rege dac care a unificat triburile geto-dace (sec. I i.Hr.)."
+        },
+        {
+          "id": "n_decebal",
+          "label": "Decebal",
+          "node_type": "person",
+          "category": "istorie",
+          "salience": 0.5361,
+          "degree": 8,
+          "incoming_degree": 7,
+          "description": "Ultimul rege al Daciei, infrant de romani in 106."
+        }
+      ]
+    },
+    {
+      "label": "Roma în poveste",
+      "members": [
+        {
+          "id": "n_traian",
+          "label": "Traian",
+          "node_type": "person",
+          "category": "istorie",
+          "salience": 0.3048,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Imparat roman care a cucerit Dacia (101-106)."
+        },
+        {
+          "id": "n_imperiul_roman",
+          "label": "Imperiul Roman",
+          "node_type": "org",
+          "category": "istorie",
+          "salience": 0.5073,
+          "degree": 12,
+          "incoming_degree": 11,
+          "description": "Imperiul antic care a cucerit si colonizat Dacia."
+        },
+        {
+          "id": "n_columna_traian",
+          "label": "Columna lui Traian",
+          "node_type": "work",
+          "category": "istorie",
+          "salience": 0.2482,
+          "degree": 11,
+          "incoming_degree": 10,
+          "description": "Monument roman care infatiseaza razboaiele cu dacii."
+        },
+        {
+          "id": "n_limba_latina",
+          "label": "Limba latină",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.4299,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Limba antica din care provine limba romana si celelalte limbi romanice."
+        }
+      ]
+    },
+    {
+      "label": "Manualul romanizării",
+      "members": [
+        {
+          "id": "n_colonizarea_romana",
+          "label": "Colonizarea romană",
+          "node_type": "event",
+          "category": "istorie",
+          "salience": 0.3,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Aducerea de coloniști romani în Dacia după cucerirea din 106, motor al romanizării."
+        },
+        {
+          "id": "n_substrat_dacic",
+          "label": "Substratul dacic",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.2198,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Element lingvistic traco-dac mostenit in romana, vizibil in cuvinte ca brad, mal, copac."
+        },
+        {
+          "id": "n_etnogeneza_romaneasca",
+          "label": "Etnogeneza românească",
+          "node_type": "concept",
+          "category": "istorie",
+          "salience": 0.3094,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Proces istoric îndelungat de formare a comunităților romanice estice, prin interacțiunea populațiilor locale cu lumea romană și cu migrațiile ulterioare."
+        },
+        {
+          "id": "n_razboaiele_daco_romane",
+          "label": "Războaiele daco-romane",
+          "node_type": "event",
+          "category": "istorie",
+          "salience": 0.379,
+          "degree": 10,
+          "incoming_degree": 11,
+          "description": "Conflictele dintre Dacia si Roma (101-102, 105-106)."
+        }
+      ]
+    },
+    {
+      "label": "Dacia pe șosea și în industrie",
+      "members": [
+        {
+          "id": "n_socx_automobile_dacia",
+          "label": "Automobile Dacia",
+          "node_type": "org",
+          "category": "societate",
+          "salience": 0.3544,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Constructor auto românesc lansat la Mioveni/Pitești, devenit marcă de export."
+        },
+        {
+          "id": "n_vdr_dacia_1310",
+          "label": "Dacia 1310",
+          "node_type": "concept",
+          "category": "viata_de_roman",
+          "salience": 0.9329,
+          "degree": 16,
+          "incoming_degree": 16,
+          "description": "Model de autoturism produs la Mioveni, foarte prezent pe șoselele românești înainte de 2000."
+        },
+        {
+          "id": "n_socx_pitesti",
+          "label": "Pitești",
+          "node_type": "place",
+          "category": "societate",
+          "salience": 0.2259,
+          "degree": 7,
+          "incoming_degree": 8,
+          "description": "Oraș argeșean asociat puternic cu industria auto Dacia."
+        },
+        {
+          "id": "n_v2soc_industrie",
+          "label": "Industrie",
+          "node_type": "concept",
+          "category": "societate",
+          "salience": 0.7888,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Producție de bunuri prin fabrici, uzine și tehnologii specializate."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "Decebal",
+      "a_group": "Dacia antică",
+      "b": "Războaiele daco-romane",
+      "b_group": "Manualul romanizării",
+      "strength": 0.88
+    },
+    {
+      "a": "Războaiele daco-romane",
+      "a_group": "Manualul romanizării",
+      "b": "Traian",
+      "b_group": "Roma în poveste",
+      "strength": 0.85
+    },
+    {
+      "a": "Columna lui Traian",
+      "a_group": "Roma în poveste",
+      "b": "Dacia",
+      "b_group": "Dacia antică",
+      "strength": 0.84
+    },
+    {
+      "a": "Dacia",
+      "a_group": "Dacia antică",
+      "b": "Războaiele daco-romane",
+      "b_group": "Manualul romanizării",
+      "strength": 0.8
+    },
+    {
+      "a": "Etnogeneza românească",
+      "a_group": "Manualul romanizării",
+      "b": "Geto-dacii",
+      "b_group": "Dacia antică",
+      "strength": 0.8
+    },
+    {
+      "a": "Imperiul Roman",
+      "a_group": "Roma în poveste",
+      "b": "Războaiele daco-romane",
+      "b_group": "Manualul romanizării",
+      "strength": 0.8
+    },
+    {
+      "a": "Dacia",
+      "a_group": "Dacia antică",
+      "b": "Imperiul Roman",
+      "b_group": "Roma în poveste",
+      "strength": 0.75
+    },
+    {
+      "a": "Etnogeneza românească",
+      "a_group": "Manualul romanizării",
+      "b": "Imperiul Roman",
+      "b_group": "Roma în poveste",
+      "strength": 0.75
+    },
+    {
+      "a": "Colonizarea romană",
+      "a_group": "Manualul romanizării",
+      "b": "Imperiul Roman",
+      "b_group": "Roma în poveste",
+      "strength": 0.7
+    },
+    {
+      "a": "Columna lui Traian",
+      "a_group": "Roma în poveste",
+      "b": "Războaiele daco-romane",
+      "b_group": "Manualul romanizării",
+      "strength": 0.7
+    },
+    {
+      "a": "Etnogeneza românească",
+      "a_group": "Manualul romanizării",
+      "b": "Limba latină",
+      "b_group": "Roma în poveste",
+      "strength": 0.7
+    },
+    {
+      "a": "Geto-dacii",
+      "a_group": "Dacia antică",
+      "b": "Substratul dacic",
+      "b_group": "Manualul romanizării",
+      "strength": 0.7
+    },
+    {
+      "a": "Colonizarea romană",
+      "a_group": "Manualul romanizării",
+      "b": "Dacia",
+      "b_group": "Dacia antică",
+      "strength": 0.65
+    },
+    {
+      "a": "Colonizarea romană",
+      "a_group": "Manualul romanizării",
+      "b": "Traian",
+      "b_group": "Roma în poveste",
+      "strength": 0.6
+    },
+    {
+      "a": "Dacia",
+      "a_group": "Dacia antică",
+      "b": "Substratul dacic",
+      "b_group": "Manualul romanizării",
+      "strength": 0.6
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:1527bb817bf3a2e931594c66cff85dd5f347668c6b506a7229aa6951b987d8b3"
+}

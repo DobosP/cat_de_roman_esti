@@ -1,0 +1,231 @@
+{
+  "id": "cx_limba_122",
+  "game": "conexiuni",
+  "category": "limba",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "1b9519183e889210f2a8a0566c93b8bee351f77d3b028e005e105f849a703bbb",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "board_type_shortcut",
+      "level": "WARN",
+      "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Varietăți ale românei\" reuses an inventory/selected quad (also in: cx_limba_035, cx_limba_189)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Straturi din istoria vocabularului\" reuses an inventory/selected quad (also in: cx_limba_189)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Istorici și filologi ai limbii\" reuses an inventory/selected quad (also in: cx_istorie_186, cx_limba_037, cx_societate_152)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Titluri literare care par termeni de limbă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_limba_262, cx_personalitati_215)"
+    },
+    {
+      "check": "board_reskin",
+      "level": "WARN",
+      "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_limba_189 (8)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [],
+    "engine_unfair_raw": 0
+  },
+  "groups": [
+    {
+      "label": "Varietăți ale românei",
+      "members": [
+        {
+          "id": "n_aromana",
+          "label": "Aromână",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.2947,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Dialect (sau limba) romanica vorbita de aromani in sudul Dunarii."
+        },
+        {
+          "id": "n_meglenoromana",
+          "label": "Meglenoromână",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.1662,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Dialect istoric al romanei vorbit in regiunea Meglen (Grecia/Macedonia)."
+        },
+        {
+          "id": "n_istroromana",
+          "label": "Istroromână",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.1505,
+          "degree": 3,
+          "incoming_degree": 3,
+          "description": "Dialect romanesc pe cale de disparitie vorbit in peninsula Istria, Croatia."
+        },
+        {
+          "id": "n_dialectul_dacoroman",
+          "label": "Dialectul dacoromân",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.1783,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Principalul dialect al limbii romane, vorbit la nordul Dunarii."
+        }
+      ]
+    },
+    {
+      "label": "Straturi din istoria vocabularului",
+      "members": [
+        {
+          "id": "n_limba_latina",
+          "label": "Limba latină",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.4299,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Limba antica din care provine limba romana si celelalte limbi romanice."
+        },
+        {
+          "id": "n_substrat_dacic",
+          "label": "Substratul dacic",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.2198,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Element lingvistic traco-dac mostenit in romana, vizibil in cuvinte ca brad, mal, copac."
+        },
+        {
+          "id": "n_imprumuturi_slave",
+          "label": "Împrumuturile slave",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.1758,
+          "degree": 7,
+          "incoming_degree": 6,
+          "description": "Strat lexical de origine slava intrat in romana incepand cu secolul al IX-lea, ca prieten, dragoste, munca."
+        },
+        {
+          "id": "n_neologisme_franceze",
+          "label": "Neologismele franceze",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.2284,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Imprumuturi lexicale din franceza patrunse in romana mai ales in sec. XIX, in epoca modernizarii."
+        }
+      ]
+    },
+    {
+      "label": "Istorici și filologi ai limbii",
+      "members": [
+        {
+          "id": "n_bogdan_petriceicu_hasdeu",
+          "label": "Bogdan Petriceicu Hasdeu",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.192,
+          "degree": 5,
+          "incoming_degree": 3,
+          "description": "Filolog si istoric (1838-1907), pionier al lingvisticii romanesti, autor al dictionarului Etymologicum Magnum Romaniae."
+        },
+        {
+          "id": "n_sextil_puscariu",
+          "label": "Sextil Pușcariu",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.2137,
+          "degree": 4,
+          "incoming_degree": 3,
+          "description": "Lingvist (1877-1948), coordonator al dictionarului-tezaur al limbii romane si al Atlasului lingvistic roman."
+        },
+        {
+          "id": "n_dimitrie_cantemir",
+          "label": "Dimitrie Cantemir",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.2896,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Domnitor al Moldovei si carturar (1673-1723), autor de opere istorice si lingvistice, membru al Academiei din Berlin."
+        },
+        {
+          "id": "n_ion_heliade_radulescu",
+          "label": "Ion Heliade Rădulescu",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.2993,
+          "degree": 6,
+          "incoming_degree": 3,
+          "description": "Scriitor si filolog (1802-1872), primul presedinte al Academiei Romane, promotor al alfabetului latin."
+        }
+      ]
+    },
+    {
+      "label": "Titluri literare care par termeni de limbă",
+      "members": [
+        {
+          "id": "n_cuvinte_potrivite",
+          "label": "Cuvinte potrivite",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.15,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Volum de debut al lui Tudor Arghezi (1927)."
+        },
+        {
+          "id": "n_o_scrisoare_pierduta",
+          "label": "O scrisoare pierdută",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.6344,
+          "degree": 15,
+          "incoming_degree": 15,
+          "description": "Comedie de I.L. Caragiale (1884), satira a vietii politice romanesti."
+        },
+        {
+          "id": "n_amintiri_copilarie",
+          "label": "Amintiri din copilărie",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2998,
+          "degree": 12,
+          "incoming_degree": 12,
+          "description": "Opera autobiografica de Ion Creanga."
+        },
+        {
+          "id": "n_luceafarul",
+          "label": "Luceafărul",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.4767,
+          "degree": 10,
+          "incoming_degree": 10,
+          "description": "Poem romantic de Mihai Eminescu."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:3ce18c4d8b2255118d400508d1f90f8d5d074e1a2b23ba4cbfa57c1d9a77c946"
+}

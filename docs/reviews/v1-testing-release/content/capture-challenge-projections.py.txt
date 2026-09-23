@@ -1,0 +1,16 @@
+import json,sys,os
+from pathlib import Path
+root=Path.cwd();sys.path.insert(0,str(root));os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from scripts import critique_pack as C
+from scripts.audit_alchimie_projections import build_artifact
+p,s,strong,regions=C.load_all(C.PACKAGE_PACK,C.PACKAGE_KG)
+r=json.loads((root/'cat_de_roman_esti/fixtures/board_rankings_v37.json').read_bytes())
+ids=sorted(x['id'] for x in r['boards'] if x['game']=='alchimie' and x['pilot_eligible'])
+_,_,selected=C.run(p,s,strong,regions,['alchimie'],{'approved'},set(ids))
+d=Path('C:/Users/Paul Work/work/_temp/v1-testing-release/challenge-dossiers');d.mkdir(parents=True,exist_ok=True)
+for game,rec,findings in selected:
+ (d/(rec['id']+'.json')).write_text(json.dumps(C.build_dossier(rec,game,s,strong,findings,regions),ensure_ascii=False,indent=1)+'\n',encoding='utf-8',newline='\n')
+a=build_artifact(ids,d,status='approved')
+path=root/'docs/reviews/v1-testing-release/content/baseline-challenge-projections.json'
+path.write_text(json.dumps(a,ensure_ascii=False,indent=1)+'\n',encoding='utf-8',newline='\n');print(json.dumps(a['summary']))

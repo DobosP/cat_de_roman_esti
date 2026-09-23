@@ -1,0 +1,946 @@
+{
+  "kind": "v1-selection-reserve-quality-review-v1",
+  "role": "quality",
+  "reviewer": "/root/v1_held_audit",
+  "author_of_proposals": "/root/v1_board_audit",
+  "checked_on": "2026-09-23",
+  "candidate_sha256": "e02b1a624fb7df8edfbcf507a8c9d7bcfb39510cba771d9b3d660430b2360de4",
+  "alchimie_candidate_sha256": "bcf35794a43f437f78d420b34a0e4ae44e1accd76c7eddde46a4bdf9e33728e6",
+  "bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fe88e7265c68a79884eabb257912630722980dccd7238f3a834c6796aa65b400",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "804fcf446487e9925158598c4663f0d61f4508574ad14b2fc4e93a5ba8fe6803",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "23421501b0e4bc391a62d25a577ed9d08c935a9eb48a550ab0e5b2f0e8367acb",
+    "cat_de_roman_esti/wordgames/alchimie.py": "e7684a500a6c8bcea5edac249b49921ce10a8d405b5c43a87eb777f6779b69c9",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "e19a1913ba4e0bd3e822c2202717fc64a55ea5a11883cf3c15af08d5632ba9f2",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+  },
+  "counts": {
+    "contexto": 4,
+    "conexiuni": 4,
+    "intrusul": 2,
+    "perechi": 1,
+    "alchimie": 12
+  },
+  "items": [
+    {
+      "id": "ct_geografie_030",
+      "game": "contexto",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "0df4ca293befa88ec8f595f4df92acdc4613c5f4b3a729af023e2cb5ad261f58",
+      "rationale": "Accept this exact reserve. Lacul Roșu has 1 distinct native direct incoming cues, confirmed independently. This misses the unchanged five-neighbor C3 floor; broad reachable stock and an obvious opener cannot supply the missing alternative approaches. The target identity/fame is not rejected. Preserve the approved archival row and require a truthful neighborhood/feedback repair before serving again.",
+      "independent_metrics": {
+        "incoming_count": 1,
+        "incoming": [
+          {
+            "id": "n_cheile_bicazului",
+            "label": "Cheile Bicazului"
+          }
+        ],
+        "minimum": 5
+      },
+      "sources": []
+    },
+    {
+      "id": "ct_geografie_031",
+      "game": "contexto",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "56af62c4f5c452780136086042a530c01862f553745f0e567a86928caaa4f44e",
+      "rationale": "Accept this exact reserve. Peștera Scărișoara has 2 distinct native direct incoming cues, confirmed independently. This misses the unchanged five-neighbor C3 floor; broad reachable stock and an obvious opener cannot supply the missing alternative approaches. The target identity/fame is not rejected. Preserve the approved archival row and require a truthful neighborhood/feedback repair before serving again.",
+      "independent_metrics": {
+        "incoming_count": 2,
+        "incoming": [
+          {
+            "id": "n_speologie",
+            "label": "Speologie"
+          },
+          {
+            "id": "n_v2geo_pestera",
+            "label": "peșteră"
+          }
+        ],
+        "minimum": 5
+      },
+      "sources": []
+    },
+    {
+      "id": "ct_istorie_309",
+      "game": "contexto",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "b5e01c5ad57f5ef26e484ad6ff267738e65b428fa445035474c9e97f925a44c3",
+      "rationale": "Accept this exact reserve. Abdicarea Regelui Mihai has 4 distinct native direct incoming cues, confirmed independently. This misses the unchanged five-neighbor C3 floor; broad reachable stock and an obvious opener cannot supply the missing alternative approaches. The target identity/fame is not rejected. Preserve the approved archival row and require a truthful neighborhood/feedback repair before serving again.",
+      "independent_metrics": {
+        "incoming_count": 4,
+        "incoming": [
+          {
+            "id": "n_comunismul_in_romania",
+            "label": "Comunismul în România"
+          },
+          {
+            "id": "n_mihai_i",
+            "label": "Mihai I"
+          },
+          {
+            "id": "n_v3ist_monarhie",
+            "label": "Monarhie"
+          },
+          {
+            "id": "n_v4ist_republica",
+            "label": "Republică"
+          }
+        ],
+        "minimum": 5
+      },
+      "sources": []
+    },
+    {
+      "id": "ct_muzica_070",
+      "game": "contexto",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "36b4826003404d3a297795fa87bd636019a9fd62d4027c31001153f45c72de8e",
+      "rationale": "Accept this exact reserve. B.U.G. Mafia has 4 distinct native direct incoming cues, confirmed independently. This misses the unchanged five-neighbor C3 floor; broad reachable stock and an obvious opener cannot supply the missing alternative approaches. The target identity/fame is not rejected. Preserve the approved archival row and require a truthful neighborhood/feedback repair before serving again.",
+      "independent_metrics": {
+        "incoming_count": 4,
+        "incoming": [
+          {
+            "id": "n_muz_dupa_blocuri",
+            "label": "După blocuri"
+          },
+          {
+            "id": "n_muz_hip_hop_ro",
+            "label": "Hip-hop românesc"
+          },
+          {
+            "id": "n_muz_parazitii",
+            "label": "Paraziții"
+          },
+          {
+            "id": "n_v2muz_rap_romanesc",
+            "label": "Rap românesc"
+          }
+        ],
+        "minimum": 5
+      },
+      "sources": []
+    },
+    {
+      "id": "cx_istorie_115",
+      "game": "conexiuni",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "ac4f7e9f4b18e940c68b428008f4036053257871ce0196fae8d1c9f72f90fa35",
+      "rationale": "Accept this exact reserve. Dacia antică, Roma în poveste and Manualul romanizării overlap by subject instead of defining three exclusive properties: Traian, war, colonization and the column participate in the same story. Two multi-pair mirrors strengthen that entanglement. A catch-all Dacia/road/industry group adds a city and generic industry, so the easy player has to infer editorial bundles. This is a combined B1/B5/B7 defect, not a mirror warning alone.",
+      "independent_metrics": {
+        "fresh_findings": [
+          {
+            "check": "label_self_leak",
+            "level": "WARN",
+            "detail": "group label \"Dacia antică\" repeats member(s): Dacia"
+          },
+          {
+            "check": "mirrored_groups",
+            "level": "WARN",
+            "detail": "\"Dacia antică\" <-> \"Manualul romanizării\" are in >=3-way strong correspondence"
+          },
+          {
+            "check": "mirrored_groups",
+            "level": "WARN",
+            "detail": "\"Roma în poveste\" <-> \"Manualul romanizării\" are in >=3-way strong correspondence"
+          },
+          {
+            "check": "type_coherence",
+            "level": "WARN",
+            "detail": "group \"Manualul romanizării\" mixes node_types 2+2: Colonizarea romană[event], Substratul dacic[concept], Etnogeneza românească[concept], Războaiele daco-romane[event]"
+          },
+          {
+            "check": "label_self_leak",
+            "level": "WARN",
+            "detail": "group label \"Dacia pe șosea și în industrie\" repeats member(s): Industrie"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Dacia antică\" reuses an inventory/selected quad (also in: cx_istorie_030)"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Roma în poveste\" reuses an inventory/selected quad (also in: cx_istorie_030)"
+          },
+          {
+            "check": "board_reskin",
+            "level": "WARN",
+            "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_istorie_030 (8), cx_viata_de_roman_236 (8)"
+          }
+        ],
+        "groups": {
+          "g1": [
+            "Dacia",
+            "Geto-dacii",
+            "Burebista",
+            "Decebal"
+          ],
+          "g2": [
+            "Traian",
+            "Imperiul Roman",
+            "Columna lui Traian",
+            "Limba latină"
+          ],
+          "g3": [
+            "Colonizarea romană",
+            "Substratul dacic",
+            "Etnogeneza românească",
+            "Războaiele daco-romane"
+          ],
+          "g4": [
+            "Automobile Dacia",
+            "Dacia 1310",
+            "Pitești",
+            "Industrie"
+          ]
+        }
+      },
+      "sources": []
+    },
+    {
+      "id": "cx_literatura_040",
+      "game": "conexiuni",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "ddae825f85d642290520ff1e812b1a94c1c1915032be7f496e75df048a822458",
+      "rationale": "Accept this exact reserve. Four canonical novels align one-to-one with four authors. More decisively, the last mixed title/plot predicate makes Moara cu noroc fit only by an unbounded danger interpretation; many displayed novels involve danger, while Baltagul also satisfies canonical-novel membership. The film node Pădurea spânzuraților adds a concealed medium distinction. B1/B3/B5 are not resolved by familiar names.",
+      "independent_metrics": {
+        "fresh_findings": [
+          {
+            "check": "mirrored_groups",
+            "level": "WARN",
+            "detail": "\"Romane canonice\" <-> \"Autorii acestor romane\" are in >=3-way strong correspondence"
+          },
+          {
+            "check": "type_coherence",
+            "level": "WARN",
+            "detail": "group \"Cercuri și publicații literare\" mixes node_types 3+1: Junimea[org], Convorbiri literare[work], Sburătorul[org], ASTRA[org]"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Romane canonice\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_263)"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Autorii acestor romane\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_041)"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Cercuri și publicații literare\" reuses an inventory/selected quad (also in: cx_literatura_041)"
+          },
+          {
+            "check": "member_overuse",
+            "level": "WARN",
+            "detail": "projected approved-batch use exceeds 8: Ion (roman) (9), Junimea (9), Moromeții (13)"
+          }
+        ],
+        "groups": {
+          "g1": [
+            "Ion (roman)",
+            "Moromeții",
+            "Ultima noapte de dragoste, întâia noapte de război",
+            "Enigma Otiliei"
+          ],
+          "g2": [
+            "Liviu Rebreanu",
+            "Marin Preda",
+            "Camil Petrescu",
+            "George Călinescu"
+          ],
+          "g3": [
+            "Junimea",
+            "Convorbiri literare",
+            "Sburătorul",
+            "ASTRA"
+          ],
+          "g4": [
+            "Plumb",
+            "Baltagul",
+            "Moara cu noroc",
+            "Pădurea spânzuraților (film)"
+          ]
+        }
+      },
+      "sources": []
+    },
+    {
+      "id": "cx_literatura_044",
+      "game": "conexiuni",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "9a6b3d3d094d1af4915fbf719776a4133f57699fda3020f0fa39038d6bdbdd41",
+      "rationale": "Accept this exact reserve. Four named works and exactly their four authors form the explicit B5 mirror. Labels Operă -> autor de manual / Autorii lor state a correspondence exercise rather than independent connection predicates, while Atelierul limbii combines three abstractions and a dictionary with no strict trick. Recognizable authors are retained in the KG and appropriate pair boards; this exclusion addresses complete board construction.",
+      "independent_metrics": {
+        "fresh_findings": [
+          {
+            "check": "mirrored_groups",
+            "level": "WARN",
+            "detail": "\"Operă -> autor de manual\" <-> \"Autorii lor\" are in >=3-way strong correspondence"
+          },
+          {
+            "check": "type_coherence",
+            "level": "WARN",
+            "detail": "group \"Atelierul limbii\" mixes node_types 3+1: Gramatică[concept], Ortografie[concept], Diacritice[concept], DEX[work]"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Critici și filologi\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_127)"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Atelierul limbii\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_127)"
+          },
+          {
+            "check": "member_overuse",
+            "level": "WARN",
+            "detail": "projected approved-batch use exceeds 8: DEX (12), Moromeții (13)"
+          }
+        ],
+        "groups": {
+          "g1": [
+            "Baltagul",
+            "Moromeții",
+            "Plumb",
+            "Cuvinte potrivite"
+          ],
+          "g2": [
+            "Mihail Sadoveanu",
+            "Marin Preda",
+            "George Bacovia",
+            "Tudor Arghezi"
+          ],
+          "g3": [
+            "Titu Maiorescu",
+            "Eugen Lovinescu",
+            "George Călinescu",
+            "Bogdan Petriceicu Hasdeu"
+          ],
+          "g4": [
+            "Gramatică",
+            "Ortografie",
+            "Diacritice",
+            "DEX"
+          ]
+        }
+      },
+      "sources": []
+    },
+    {
+      "id": "cx_literatura_127",
+      "game": "conexiuni",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "25fdc7b66406ae38190f645dca98826a44eee3802075ebb7e8418f3a5fc4314c",
+      "rationale": "Accept this exact reserve. Critici care mută canonul includes a generic role among three people; Cenacluri, reviste și orbită literară includes a generic cenacle alongside named organizations/publication. These umbrella members are not the same relation type promised by the labels, and corresponding society/critic links create a second source of entanglement. B1/B5/B6 justify this board-specific decision; no blanket literary exclusion.",
+      "independent_metrics": {
+        "fresh_findings": [
+          {
+            "check": "mirrored_groups",
+            "level": "WARN",
+            "detail": "\"Cenacluri, reviste și orbită literară\" <-> \"Critici care mută canonul\" are in >=3-way strong correspondence"
+          },
+          {
+            "check": "type_coherence",
+            "level": "WARN",
+            "detail": "group \"Critici care mută canonul\" mixes node_types 3+1: Titu Maiorescu[person], Eugen Lovinescu[person], George Călinescu[person], Critic literar[concept]"
+          },
+          {
+            "check": "type_coherence",
+            "level": "WARN",
+            "detail": "group \"Norma limbii scrise\" mixes node_types 3+1: Limba română literară[concept], DEX[work], Diacritice[concept], Ortografie[concept]"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Curente literare de recunoscut rapid\" reuses an inventory/selected quad (also in: cx_literatura_039, cx_literatura_041)"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Cenacluri, reviste și orbită literară\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_040, cx_literatura_041, cx_literatura_264)"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Critici care mută canonul\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_044, cx_literatura_198)"
+          },
+          {
+            "check": "duplicate_groups",
+            "level": "WARN",
+            "detail": "group \"Norma limbii scrise\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_044)"
+          },
+          {
+            "check": "board_reskin",
+            "level": "WARN",
+            "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_literatura_041 (8), cx_literatura_194 (8)"
+          },
+          {
+            "check": "member_overuse",
+            "level": "WARN",
+            "detail": "projected approved-batch use exceeds 8: DEX (12), Junimea (9)"
+          }
+        ],
+        "groups": {
+          "g1": [
+            "Romantism",
+            "Realism",
+            "Simbolism",
+            "Modernism"
+          ],
+          "g2": [
+            "Junimea",
+            "Convorbiri literare",
+            "Sburătorul",
+            "Cenaclu literar"
+          ],
+          "g3": [
+            "Titu Maiorescu",
+            "Eugen Lovinescu",
+            "George Călinescu",
+            "Critic literar"
+          ],
+          "g4": [
+            "Limba română literară",
+            "DEX",
+            "Diacritice",
+            "Ortografie"
+          ]
+        }
+      },
+      "sources": []
+    },
+    {
+      "id": "vi_378ad9cdd501f86abd67",
+      "game": "intrusul",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "0c3235e8e015d9cf7635d74d17c3aaf67bf8c4e298ec02d420e943613e0c529d",
+      "rationale": "Accept exact-ID reserve until an independently reviewed explanation repair. Latinitate pe limbă presents Dacian substrate as Latin ancestry, whereas the dictionary and existing node distinguish indigenous remnants. The outsider or pairing may be structurally unambiguous; the earned explanation is still misleading. Reserve only this payload, not every variant from cx_geografie_028.",
+      "independent_metrics": {
+        "contains_dacian_substrate": true,
+        "description": "Element lingvistic traco-dac mostenit in romana, vizibil in cuvinte ca brad, mal, copac.",
+        "frozen_record_exact": true
+      },
+      "sources": [
+        "https://dexonline.ro/definitie/substrat"
+      ]
+    },
+    {
+      "id": "vi_06bcabf817432f4e240e",
+      "game": "intrusul",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "1c45b97d0124f017d804b911bfe090f0b19ad12a14cabe6d368ed86dbcd60a86",
+      "rationale": "Accept exact-ID reserve until an independently reviewed explanation repair. Latinitate pe limbă presents Dacian substrate as Latin ancestry, whereas the dictionary and existing node distinguish indigenous remnants. The outsider or pairing may be structurally unambiguous; the earned explanation is still misleading. Reserve only this payload, not every variant from cx_geografie_028.",
+      "independent_metrics": {
+        "contains_dacian_substrate": true,
+        "description": "Element lingvistic traco-dac mostenit in romana, vizibil in cuvinte ca brad, mal, copac.",
+        "frozen_record_exact": true
+      },
+      "sources": [
+        "https://dexonline.ro/definitie/substrat"
+      ]
+    },
+    {
+      "id": "vp_f38da34a014335d1c2a5",
+      "game": "perechi",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "f74cf33d9724d4b85e82841bfa7630eab0b9bbc99004626765bddabedf0913c0",
+      "rationale": "Accept exact-ID reserve until an independently reviewed explanation repair. Latinitate pe limbă presents Dacian substrate as Latin ancestry, whereas the dictionary and existing node distinguish indigenous remnants. The outsider or pairing may be structurally unambiguous; the earned explanation is still misleading. Reserve only this payload, not every variant from cx_geografie_028.",
+      "independent_metrics": {
+        "contains_dacian_substrate": true,
+        "description": "Element lingvistic traco-dac mostenit in romana, vizibil in cuvinte ca brad, mal, copac.",
+        "frozen_record_exact": true
+      },
+      "sources": [
+        "https://dexonline.ro/definitie/substrat"
+      ]
+    },
+    {
+      "id": "al_gastronomie_024",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "16be9aa4df46d12404bcb48079d69f6ee5be45835ba9ada3cabe0c81a561d74b",
+      "rationale": "Accept this exact reserve. Legume + Roșie gives Salată de vinete/Zacuscă; two results from the same try are not two independent opening choices. Broad vegetable-plus-member reasoning also cannot make the five other seeds feel useful. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_v4gas_legume",
+              "label": "Legume"
+            },
+            "right": {
+              "id": "n_v4gas_rosie",
+              "label": "Roșie"
+            },
+            "results": [
+              {
+                "id": "n_gas_salata_vinete",
+                "label": "Salată de vinete"
+              },
+              {
+                "id": "n_gas_zacusca",
+                "label": "Zacuscă"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "1d7452915c23440d9232eb0c9c57bef25d1a70e9729055dd0818615cd65ec6a8",
+        "route_count": 3,
+        "par": 2
+      },
+      "sources": []
+    },
+    {
+      "id": "al_gastronomie_025",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "0e4e8a56b0514b28b2a175f6029ae7b7d7265883cc5f1fea1ccd2495d8d8a28b",
+      "rationale": "Accept this exact reserve. Sosuri + Cartofi prăjiți is the sole productive pair. Mici and Șaorma are alternate outputs of that one pair, so they do not meet E2. A familiar mustard goal does not supply a second discoverable opener. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_v2gas_sosuri",
+              "label": "Sosuri"
+            },
+            "right": {
+              "id": "n_v3gas_cartofi_prajiti",
+              "label": "Cartofi prăjiți"
+            },
+            "results": [
+              {
+                "id": "n_gas_mici",
+                "label": "Mici"
+              },
+              {
+                "id": "n_gas_saorma_de_toate",
+                "label": "Șaorma cu de toate"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "5ce03eca559a52c5643e615a741e9aac3b902bbb8247e42d01325a8950d70a05",
+        "route_count": 4,
+        "par": 2
+      },
+      "sources": []
+    },
+    {
+      "id": "al_gastronomie_028",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "46653baf1ec51f522cb5558c071c1fdad454599883f918fe3302e090e90375b9",
+      "rationale": "Accept this exact reserve. Masa de Crăciun + Fruct is the sole opening toward a herb target. The other feast foods cannot start progress, leaving a forced and indirect first guess. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_gas_masa_craciun",
+              "label": "Masa de Crăciun"
+            },
+            "right": {
+              "id": "n_v4gas_fruct",
+              "label": "Fruct"
+            },
+            "results": [
+              {
+                "id": "n_gas_cozonac",
+                "label": "Cozonac"
+              },
+              {
+                "id": "n_gas_mese_sarbatori",
+                "label": "Mese de sărbători"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "afbe87ee45853a8b7a1b181b7499b220ae0ee0b32cf5acfaed47cdd31bce6434",
+        "route_count": 2,
+        "par": 4
+      },
+      "sources": []
+    },
+    {
+      "id": "al_istorie_034",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "67b9166c557d5ea4cc7d75c67ad42b8f8ce0cc55d2d60510495e53bcd5f02f11",
+      "rationale": "Accept this exact reserve. Istorie + Ruină yields Dacia through one broad association. One branch point after this forced opening cannot create a second useful initial decision. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_v4ist_istorie",
+              "label": "Istorie"
+            },
+            "right": {
+              "id": "n_v4ist_ruina",
+              "label": "Ruină"
+            },
+            "results": [
+              {
+                "id": "n_dacia",
+                "label": "Dacia"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "5d1c55052e5e6581cf902ea71cc06621bf2dd4648d457c7d124d20385afc51c9",
+        "route_count": 4,
+        "par": 2
+      },
+      "sources": []
+    },
+    {
+      "id": "al_istorie_039",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "e51de62c8e6e96aceed82df6950d5b1308c3d38f62da064d39b09e86a8050fd9",
+      "rationale": "Accept this exact reserve. Castel + Strămoș is the only successful start; the leap to Transilvania is generic and the hard band should not depend on finding the single permitted pair. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_v4ist_castel",
+              "label": "Castel"
+            },
+            "right": {
+              "id": "n_v4ist_stramos",
+              "label": "Strămoș"
+            },
+            "results": [
+              {
+                "id": "n_transilvania",
+                "label": "Transilvania"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "ea8cf5a2d8e73dd060e35b97c17657b5d80d81d0a8c11e4e787b03b4cbc38c22",
+        "route_count": 4,
+        "par": 6
+      },
+      "sources": []
+    },
+    {
+      "id": "al_meme_net_060",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "cb3a71e1f816a187df06b7f74784190da310ca30e20c500f2a75d3b88abd8f08",
+      "rationale": "Accept this exact reserve. Repost + Scroll infinit alone produces TikTok România/Feed online. Two outputs from one digital-behaviour pair do not create multiple initial approaches, even on greu. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_v3mem_repost",
+              "label": "Repost"
+            },
+            "right": {
+              "id": "n_v3mem_scroll_infinit",
+              "label": "Scroll infinit"
+            },
+            "results": [
+              {
+                "id": "n_net_tiktok_ro",
+                "label": "TikTok România"
+              },
+              {
+                "id": "n_v2mem_feed_online",
+                "label": "Feed online"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "b3dcd7104788978a822822e88057d86eff4caa3be2bfea2700732011bf552e5d",
+        "route_count": 4,
+        "par": 3
+      },
+      "sources": []
+    },
+    {
+      "id": "al_muzica_064",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "347919040b73dab5362506dd342e8be1bae542ff49d970d6f4acc2caf5044051",
+      "rationale": "Accept this exact reserve. Holograf + Trupă pop alone yields the generic Trupă. This category restatement is a weak sole entrance, and the remaining initial combinations cannot advance. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_muz_holograf",
+              "label": "Holograf"
+            },
+            "right": {
+              "id": "n_v2muz_trupa_pop",
+              "label": "Trupă pop"
+            },
+            "results": [
+              {
+                "id": "n_v4muz_trupa",
+                "label": "Trupă"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "af821b02a322dbe00eaea4fc70ec3a8198de4fa07e1ffe4d1ddcc91ead7d48f8",
+        "route_count": 4,
+        "par": 4
+      },
+      "sources": []
+    },
+    {
+      "id": "al_personalitati_068",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "0490fc4684eab7216a5508a3c2a25155d8dac7b67ac0fb9897e5f876fec56a50",
+      "rationale": "Accept this exact reserve. Eugen Ionescu + Filozofie alone gives Emil Cioran. This underdetermined named-person association makes the forced opener especially unsuitable for easy play. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_eugen_ionescu",
+              "label": "Eugen Ionescu"
+            },
+            "right": {
+              "id": "n_filozofie",
+              "label": "Filozofie"
+            },
+            "results": [
+              {
+                "id": "n_emil_cioran",
+                "label": "Emil Cioran"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "e07594fdc57104e1b5652c87d425b65a02fcd784fa66c64cacdfa1d7b0c9c11e",
+        "route_count": 3,
+        "par": 2
+      },
+      "sources": []
+    },
+    {
+      "id": "al_personalitati_071",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "f5e9c739d147c7f454a2a3c3b6e18800eb38901c135af885ba4b7c68b0731fa0",
+      "rationale": "Accept this exact reserve. Societatea Națiunilor + Nicolae Titulescu is a credible historical opening, but credibility of one pair does not cure absence of the required second. Preserve its valid relationship while reserving this whole challenge. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_perx_liga_natiunilor",
+              "label": "Societatea Națiunilor"
+            },
+            "right": {
+              "id": "n_perx_nicolae_titulescu",
+              "label": "Nicolae Titulescu"
+            },
+            "results": [
+              {
+                "id": "n_perx_diplomatie",
+                "label": "Diplomație"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "327a492a32701d77809fcaa083813d0787f158c34667467ed58345f5df1d0347",
+        "route_count": 1,
+        "par": 2
+      },
+      "sources": []
+    },
+    {
+      "id": "al_personalitati_072",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "9a3482a40fcf743016434ae6781654b101136410765fd82ba9ea16a2420875b6",
+      "rationale": "Accept this exact reserve. Casa regală + Memorii has a plausible Regina Maria/book association. Nevertheless it is the only opening; more downstream routes cannot compensate for the initial forced guess. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_v2per_casa_regala",
+              "label": "Casa regală"
+            },
+            "right": {
+              "id": "n_v2per_memorii",
+              "label": "Memorii"
+            },
+            "results": [
+              {
+                "id": "n_perx_memorii_regina_maria",
+                "label": "Povestea vieții mele"
+              },
+              {
+                "id": "n_perx_regina_maria",
+                "label": "Regina Maria"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "33c232be89d7236c06d0928b1e52d29ef375ca20ced1b210111dd954078c0b23",
+        "route_count": 1,
+        "par": 6
+      },
+      "sources": []
+    },
+    {
+      "id": "al_societate_080",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "e0cfeb7bfc4b8e7f84db1f42d66d9e7a26367804e7822f11b9956a2c6040629f",
+      "rationale": "Accept this exact reserve. România + Industria românească alone produces Leul românesc. The generic national association supplies only one opening and gives no independent way to start toward Municipiu. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_romania_stat",
+              "label": "România"
+            },
+            "right": {
+              "id": "n_socx_industria_romaneasca",
+              "label": "Industria românească"
+            },
+            "results": [
+              {
+                "id": "n_leul_romanesc",
+                "label": "Leul românesc"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "2b9c67a566e78d62a62a5aceb5ab983102bd60fa1cda13be7c0d964460364de1",
+        "route_count": 4,
+        "par": 5
+      },
+      "sources": []
+    },
+    {
+      "id": "al_societate_081",
+      "game": "alchimie",
+      "verdict": "accept",
+      "action": "reserve_from_new_selection",
+      "record_sha256": "143e60795bfb0cdbb34f10f5f22bfd82c44093e2d2cb1511bfd71072c3f8fe7e",
+      "rationale": "Accept this exact reserve. Stat + bani alone produces Banca Națională/Impozit. Those outputs share one productive pair, leaving no second starting strategy toward Universitate. The live private book, not generic KG closure, fails the same E2 floor used for pending content. This is a scored challenge only; exploration recipes/books remain unrelated.",
+      "independent_metrics": {
+        "opening_pairs": [
+          {
+            "left": {
+              "id": "n_v2soc_stat",
+              "label": "Stat"
+            },
+            "right": {
+              "id": "n_v4soc_bani",
+              "label": "bani"
+            },
+            "results": [
+              {
+                "id": "n_bnr",
+                "label": "Banca Națională a României"
+              },
+              {
+                "id": "n_v3soc_impozit",
+                "label": "Impozit"
+              }
+            ]
+          }
+        ],
+        "opening_count": 1,
+        "minimum": 2,
+        "projection_sha256": "3c0ea41ac5ba138cf62ba0f464a0ccabb6ff9572d7ca1c2687d702bcf0146a47",
+        "route_count": 1,
+        "par": 6
+      },
+      "sources": []
+    }
+  ],
+  "negative_controls": {
+    "quick_id": "vi_71e487036cbba4014f67",
+    "record_sha256": "de962554a9ea5a2dd878703cb71b397d1c3d8581bbf0cf282b8ea05db98b269c",
+    "members": [
+      "n_alfabetul_latin",
+      "n_limba_latina",
+      "n_limba_romana"
+    ],
+    "contains_dacian_substrate": false,
+    "remains_in_exact_reserve_simulated_pool": true,
+    "simulated_seeded_selection": {
+      "seed": 2,
+      "category": "geografie",
+      "difficulty": "greu",
+      "catalog_id": "vi_71e487036cbba4014f67"
+    },
+    "limits": "In-memory catalog exclusion simulation only; root must verify installed API starter/free/daily/fallback paths.",
+    "warning_only_stock_not_reserved": [
+      "cx_literatura_041"
+    ],
+    "warning_policy": "A warning count alone is not an exclusion rule; all four Conexiuni judgments above name concrete player-facing predicate/mirror defects."
+  },
+  "integration_obligations": [
+    "Preserve raw approved records, stable IDs, valid graph relations and frozen core payload bytes; store exact reviewed selection restrictions.",
+    "Remove reserved pack records from new category, difficulty, seeded and daily selection without reviving them through mined/legacy fallback. An unavailable category is preferable to an unreviewed widening.",
+    "Filter the three quick IDs at a common bounded selection boundary used by starter, free, daily and fallback; source-wide exclusion would wrongly remove the verified negative control.",
+    "Verify existing saved/active sessions follow explicit compatibility rules and private answers remain private; selection restriction alone is not a score or history rewrite.",
+    "Regenerate current-bound rankings/catalog wrapper as required and rerun after the factual graph repair. No factual or quality review is silently transferred to changed records.",
+    "Human mixed-age enjoyment remains unmeasured; these precise defects warrant finite editorial reserve but do not certify all remaining inventory."
+  ],
+  "source_checks": [
+    {
+      "url": "https://dexonline.ro/definitie/substrat",
+      "access": "opened",
+      "checked_on": "2026-09-23",
+      "note": "DEX2009/MDA2 indigenous-language remnants support distinction from adopted Latin-derived language. No source corpus copied."
+    }
+  ]
+}

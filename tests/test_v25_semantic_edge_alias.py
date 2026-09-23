@@ -216,6 +216,7 @@ def test_v25_review_items_remain_playable_in_the_current_pack():
         "ct_gastronomie_300",
         "ct_literatura_298",
         "ct_viata_de_roman_299",
+        "lt_viata_de_roman_211",  # V1: the reviewed route and captions now pass.
     }
     for item_id in set(DATA.REVIEW_ITEM_IDS) - _RETIRED_REVIEW_IDS:
         game, record = records[item_id]

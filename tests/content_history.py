@@ -8,6 +8,30 @@ from collections import Counter
 from copy import deepcopy
 from pathlib import Path
 
+_V1_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-testing-release/artifact-delta.json"
+)
+_V1_RECEIPT_SHA256 = "e0d40083ff1e3ba2316ff723cc5e0661e42e2247c78b64676e6c34d956570776"
+_V1_BASELINE = {
+    "kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "board_rankings_v37.json": "23421501b0e4bc391a62d25a577ed9d08c935a9eb48a550ab0e5b2f0e8367acb",
+    "derived_catalog_v38.json": "fe88e7265c68a79884eabb257912630722980dccd7238f3a834c6796aa65b400",
+    "cat_mobile_app_pack_contract.json": (
+        "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+    ),
+}
+_V1_AFTER = {
+    "kg_sample.json": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "board_rankings_v37.json": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc",
+    "derived_catalog_v38.json": "bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4",
+    "cat_mobile_app_pack_contract.json": (
+        "82304733284ca62245e0d2ac0abb7b81c991ed1857ca904c990116c5bce280b4"
+    ),
+}
+
+
 _RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v80-clatite-target/artifact-delta.json"
 )
@@ -592,8 +616,25 @@ def before_v96_artifact(current: dict, filename: str) -> dict:
     return _reverse_bound_delta(current, filename, _V96_RECEIPT)
 
 
+def before_v1_artifact(current: dict, filename: str) -> dict:
+    """Reconstruct exact cc0a6a4 bytes using only the reviewed, pinned V1 delta."""
+    blob = _V1_RECEIPT.read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == _V1_RECEIPT_SHA256
+    receipt = json.loads(blob)
+    assert receipt["baseline_commit"] == "cc0a6a490f4a37f6f94b59cf9a84eb760cb3a401"
+    files = receipt["files"]
+    assert set(files) == set(_V1_BASELINE) == set(_V1_AFTER)
+    assert filename in files
+    for name, artifact in files.items():
+        assert artifact["baseline_sha256"] == _V1_BASELINE[name]
+        assert artifact["after_sha256"] == _V1_AFTER[name]
+        assert all(not change["added"] for change in artifact["tables"].values())
+    return _reverse_bound_delta(current, filename, _V1_RECEIPT)
+
+
 def before_v97_artifact(current: dict, filename: str) -> dict:
     """Restore complete fd3ca7c bytes before evaluating the original V96 transition."""
+    current = before_v1_artifact(current, filename)
     blob = _V97_RECEIPT.read_bytes()
     assert hashlib.sha256(blob).hexdigest() == _V97_RECEIPT_SHA256
     receipt = json.loads(blob)

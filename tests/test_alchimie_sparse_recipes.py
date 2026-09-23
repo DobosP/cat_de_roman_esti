@@ -21,6 +21,7 @@ from cat_de_roman_esti.wordgames import alchimie as A  # noqa: E402
 from cat_de_roman_esti.wordgames.packs import CuratedItem, get_pack  # noqa: E402
 from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 from tests.content_history import (  # noqa: E402
+    before_v1_artifact,
     before_v88_fixture,
     before_v88_pack,
     before_v91_artifact,
@@ -82,27 +83,29 @@ def v87_projection_snapshot():
 
 @pytest.fixture(scope="module")
 def v90_projection_snapshot(approved_projections):
-    """Restore only the reviewed Sport seeds; preserve the complete V90 contract."""
+    """Restore the reviewed graph and Sport seeds for the exact V90 contract."""
     fixtures = Path(__file__).resolve().parents[1] / "cat_de_roman_esti/fixtures"
-    graph = json.loads((fixtures / "kg_sample.json").read_bytes())
-    assert before_v91_artifact(graph, "kg_sample.json") == graph
+    current_graph = json.loads((fixtures / "kg_sample.json").read_bytes())
+    graph = before_v91_artifact(current_graph, "kg_sample.json")
+    assert graph == before_v1_artifact(current_graph, "kg_sample.json")
     current = json.loads((fixtures / "games_pack.json").read_bytes())
     previous = before_v91_artifact(current, "games_pack.json")
     before = {row["id"]: row for row in previous["alchimie"]}
     after = {row["id"]: row for row in current["alchimie"]}
     assert before.keys() == after.keys()
     assert [key for key in before if before[key] != after[key]] == ["al_sport_083"]
-    record = before["al_sport_083"]
-    old_projection = A._build_recipe_projection(
-        record["seeds"], record["target"], record["category"],
-    )
-    assert old_projection is not None
+    svc = WordGameService(Graph.from_records(graph["kg_nodes"], graph["kg_edges"]))
     rows, minima = [], []
-    for item, projection in approved_projections[0]:
-        if item.id == "al_sport_083":
-            projection = old_projection
-        rows.append(_projection_row(item, projection))
-        minima.extend(A._route_quality(route)[0] for route in projection.routes)
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(A, "get_service", lambda: svc)
+        for item, _current_projection in approved_projections[0]:
+            record = before[item.id]
+            projection = A._build_recipe_projection(
+                record["seeds"], record["target"], record["category"],
+            )
+            assert projection is not None
+            rows.append(_projection_row(item, projection))
+            minima.extend(A._route_quality(route)[0] for route in projection.routes)
     return rows, minima
 
 

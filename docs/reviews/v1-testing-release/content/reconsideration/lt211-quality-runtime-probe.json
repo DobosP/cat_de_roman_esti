@@ -1,0 +1,761 @@
+{
+  "kind": "lt211-independent-quality-runtime-probe-v1",
+  "candidate_sha256": "4f4e36af80bb232d77b60ec8711f9351f67b9ed49d6fb893420000c2cda35d5a",
+  "bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v1-testing-release/content/reconsideration/shortlist.json": "749cf5f68a29e3a65a85cf7b36eacee6e13c8cc1f4a3fb651d6e648249b7fd6c"
+  },
+  "baseline_choices": [
+    {
+      "label": "Caiet",
+      "relation": "legătură directă"
+    },
+    {
+      "label": "Carte",
+      "relation": "legătură directă"
+    },
+    {
+      "label": "copil",
+      "relation": "legătură directă"
+    }
+  ],
+  "baseline_routes": [
+    {
+      "nodes": [
+        {
+          "id": "n_v23via_ghiozdan",
+          "label": "Ghiozdan"
+        },
+        {
+          "id": "n_v3lit_carte",
+          "label": "Carte"
+        },
+        {
+          "id": "n_v23lit_capra_cu_trei_iezi",
+          "label": "Capra cu trei iezi"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_v23via_ghiozdan",
+            "label": "Ghiozdan"
+          },
+          "to": {
+            "id": "n_v3lit_carte",
+            "label": "Carte"
+          },
+          "relation": "beginner_diamond",
+          "label": "două drumuri spre lecție",
+          "display_label": "legătură directă",
+          "strength": 0.93
+        },
+        {
+          "from": {
+            "id": "n_v3lit_carte",
+            "label": "Carte"
+          },
+          "to": {
+            "id": "n_v23lit_capra_cu_trei_iezi",
+            "label": "Capra cu trei iezi"
+          },
+          "relation": "is_a",
+          "label": "apare în cărți pentru copii",
+          "display_label": "poveste și carte",
+          "strength": 0.82
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "n_v23via_ghiozdan",
+          "label": "Ghiozdan"
+        },
+        {
+          "id": "n_v4soc_copil",
+          "label": "copil"
+        },
+        {
+          "id": "n_v23lit_capra_cu_trei_iezi",
+          "label": "Capra cu trei iezi"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_v23via_ghiozdan",
+            "label": "Ghiozdan"
+          },
+          "to": {
+            "id": "n_v4soc_copil",
+            "label": "copil"
+          },
+          "relation": "related_to",
+          "label": "folosit de elevi",
+          "display_label": "legătură directă",
+          "strength": 0.82
+        },
+        {
+          "from": {
+            "id": "n_v4soc_copil",
+            "label": "copil"
+          },
+          "to": {
+            "id": "n_v23lit_capra_cu_trei_iezi",
+            "label": "Capra cu trei iezi"
+          },
+          "relation": "related_to",
+          "label": "lectură cunoscută copiilor",
+          "display_label": "legătură directă",
+          "strength": 0.84
+        }
+      ]
+    }
+  ],
+  "six_directions": [
+    {
+      "id": "v1_caption_de8091",
+      "direction": "forward",
+      "from": "n_v23via_ghiozdan",
+      "to": "n_v3lit_carte",
+      "actual_edge_id": "de8091",
+      "actual_edge_sha256": "bc3a4ebf9364a6267a65f2c80997fc8a7f8ce81455595c33e445e05369789231",
+      "proposed_digest_matches": true,
+      "actual_caption": "carte purtată în ghiozdan",
+      "won": true,
+      "score": 1000,
+      "get_restores_path": true
+    },
+    {
+      "id": "v1_caption_de8091",
+      "direction": "reverse",
+      "from": "n_v3lit_carte",
+      "to": "n_v23via_ghiozdan",
+      "actual_edge_id": "de7579",
+      "actual_edge_sha256": "821ba15729a335a5a67353eee740628534682b47a321a7eced35a2fa57953a62",
+      "proposed_digest_matches": false,
+      "actual_caption": "legătură directă",
+      "won": true,
+      "score": 1000,
+      "get_restores_path": true
+    },
+    {
+      "id": "v1_caption_de7580",
+      "direction": "forward",
+      "from": "n_v23via_ghiozdan",
+      "to": "n_v4soc_copil",
+      "actual_edge_id": "de7580",
+      "actual_edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+      "proposed_digest_matches": true,
+      "actual_caption": "ghiozdan folosit de școlari",
+      "won": true,
+      "score": 1000,
+      "get_restores_path": true
+    },
+    {
+      "id": "v1_caption_de7580",
+      "direction": "reverse",
+      "from": "n_v4soc_copil",
+      "to": "n_v23via_ghiozdan",
+      "actual_edge_id": "de7580",
+      "actual_edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+      "proposed_digest_matches": true,
+      "actual_caption": "ghiozdan folosit de școlari",
+      "won": true,
+      "score": 1000,
+      "get_restores_path": true
+    },
+    {
+      "id": "v1_caption_de7521",
+      "direction": "forward",
+      "from": "n_v4soc_copil",
+      "to": "n_v23lit_capra_cu_trei_iezi",
+      "actual_edge_id": "de7521",
+      "actual_edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+      "proposed_digest_matches": true,
+      "actual_caption": "poveste în ediții pentru copii",
+      "won": true,
+      "score": 1000,
+      "get_restores_path": true
+    },
+    {
+      "id": "v1_caption_de7521",
+      "direction": "reverse",
+      "from": "n_v23lit_capra_cu_trei_iezi",
+      "to": "n_v4soc_copil",
+      "actual_edge_id": "de7521",
+      "actual_edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+      "proposed_digest_matches": true,
+      "actual_caption": "poveste în ediții pentru copii",
+      "won": true,
+      "score": 1000,
+      "get_restores_path": true
+    }
+  ],
+  "routes": [
+    {
+      "via": "Carte",
+      "frames": [
+        {
+          "moves": 1,
+          "path": [
+            {
+              "id": "n_v23via_ghiozdan",
+              "label": "Ghiozdan"
+            },
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte",
+              "relation": "carte purtată în ghiozdan"
+            }
+          ],
+          "won": false,
+          "choices": [
+            {
+              "label": "A citi",
+              "relation": "legătură directă"
+            },
+            {
+              "label": "Abecedar",
+              "relation": "exemplu și categorie"
+            },
+            {
+              "label": "Capra cu trei iezi",
+              "relation": "poveste și carte"
+            },
+            {
+              "label": "Lecție",
+              "relation": "legătură directă"
+            }
+          ]
+        },
+        {
+          "moves": 2,
+          "path": [
+            {
+              "id": "n_v23via_ghiozdan",
+              "label": "Ghiozdan"
+            },
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte",
+              "relation": "carte purtată în ghiozdan"
+            },
+            {
+              "id": "n_v23lit_capra_cu_trei_iezi",
+              "label": "Capra cu trei iezi",
+              "relation": "poveste și carte"
+            }
+          ],
+          "won": true,
+          "choices": []
+        }
+      ],
+      "score": 1000,
+      "wrong_repeat_and_GET_stable": true
+    },
+    {
+      "via": "copil",
+      "frames": [
+        {
+          "moves": 1,
+          "path": [
+            {
+              "id": "n_v23via_ghiozdan",
+              "label": "Ghiozdan"
+            },
+            {
+              "id": "n_v4soc_copil",
+              "label": "copil",
+              "relation": "ghiozdan folosit de școlari"
+            }
+          ],
+          "won": false,
+          "choices": [
+            {
+              "label": "Alocația de stat pentru copii",
+              "relation": "legătură directă"
+            },
+            {
+              "label": "Câine",
+              "relation": "legătură directă"
+            },
+            {
+              "label": "Capra cu trei iezi",
+              "relation": "poveste în ediții pentru copii"
+            },
+            {
+              "label": "Jocuri de copilărie",
+              "relation": "legătură directă"
+            },
+            {
+              "label": "Pisică",
+              "relation": "legătură directă"
+            },
+            {
+              "label": "Trotuar",
+              "relation": "legătură directă"
+            }
+          ]
+        },
+        {
+          "moves": 2,
+          "path": [
+            {
+              "id": "n_v23via_ghiozdan",
+              "label": "Ghiozdan"
+            },
+            {
+              "id": "n_v4soc_copil",
+              "label": "copil",
+              "relation": "ghiozdan folosit de școlari"
+            },
+            {
+              "id": "n_v23lit_capra_cu_trei_iezi",
+              "label": "Capra cu trei iezi",
+              "relation": "poveste în ediții pentru copii"
+            }
+          ],
+          "won": true,
+          "choices": []
+        }
+      ],
+      "score": 1000,
+      "wrong_repeat_and_GET_stable": true
+    }
+  ],
+  "original_caption_count": 117,
+  "temporary_caption_count": 120,
+  "all_original_entries_unchanged": true,
+  "proposed_choices": [
+    {
+      "label": "Caiet",
+      "relation": "legătură directă"
+    },
+    {
+      "label": "Carte",
+      "relation": "carte purtată în ghiozdan"
+    },
+    {
+      "label": "copil",
+      "relation": "ghiozdan folosit de școlari"
+    }
+  ],
+  "proposed_routes": [
+    {
+      "nodes": [
+        {
+          "id": "n_v23via_ghiozdan",
+          "label": "Ghiozdan"
+        },
+        {
+          "id": "n_v3lit_carte",
+          "label": "Carte"
+        },
+        {
+          "id": "n_v23lit_capra_cu_trei_iezi",
+          "label": "Capra cu trei iezi"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_v23via_ghiozdan",
+            "label": "Ghiozdan"
+          },
+          "to": {
+            "id": "n_v3lit_carte",
+            "label": "Carte"
+          },
+          "relation": "beginner_diamond",
+          "label": "două drumuri spre lecție",
+          "display_label": "carte purtată în ghiozdan",
+          "strength": 0.93
+        },
+        {
+          "from": {
+            "id": "n_v3lit_carte",
+            "label": "Carte"
+          },
+          "to": {
+            "id": "n_v23lit_capra_cu_trei_iezi",
+            "label": "Capra cu trei iezi"
+          },
+          "relation": "is_a",
+          "label": "apare în cărți pentru copii",
+          "display_label": "poveste și carte",
+          "strength": 0.82
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "n_v23via_ghiozdan",
+          "label": "Ghiozdan"
+        },
+        {
+          "id": "n_v4soc_copil",
+          "label": "copil"
+        },
+        {
+          "id": "n_v23lit_capra_cu_trei_iezi",
+          "label": "Capra cu trei iezi"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_v23via_ghiozdan",
+            "label": "Ghiozdan"
+          },
+          "to": {
+            "id": "n_v4soc_copil",
+            "label": "copil"
+          },
+          "relation": "related_to",
+          "label": "folosit de elevi",
+          "display_label": "ghiozdan folosit de școlari",
+          "strength": 0.82
+        },
+        {
+          "from": {
+            "id": "n_v4soc_copil",
+            "label": "copil"
+          },
+          "to": {
+            "id": "n_v23lit_capra_cu_trei_iezi",
+            "label": "Capra cu trei iezi"
+          },
+          "relation": "related_to",
+          "label": "lectură cunoscută copiilor",
+          "display_label": "poveste în ediții pentru copii",
+          "strength": 0.84
+        }
+      ]
+    }
+  ],
+  "hint": {
+    "hint": null,
+    "remaining": 2,
+    "alternatives": 2,
+    "stage": "direction",
+    "relation": "carte purtată în ghiozdan",
+    "message": "Direcție: caută o legătură „carte purtată în ghiozdan”."
+  },
+  "mapping_restored": true,
+  "branch_profile": [
+    2,
+    2,
+    2
+  ],
+  "exact_other_pack_pairs": [],
+  "exact_rejected_pairs": [],
+  "nearby_approved": [
+    {
+      "id": "lt_literatura_230",
+      "start": "Ion Creangă",
+      "target": "Carte",
+      "shared_family": [
+        "n_v23lit_capra_cu_trei_iezi",
+        "n_v3lit_carte"
+      ],
+      "paths": [
+        {
+          "nodes": [
+            {
+              "id": "n_ion_creanga",
+              "label": "Ion Creangă"
+            },
+            {
+              "id": "n_v23lit_capra_cu_trei_iezi",
+              "label": "Capra cu trei iezi"
+            },
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_ion_creanga",
+                "label": "Ion Creangă"
+              },
+              "to": {
+                "id": "n_v23lit_capra_cu_trei_iezi",
+                "label": "Capra cu trei iezi"
+              },
+              "relation": "created_by",
+              "label": "scrisă de",
+              "display_label": "autor și poveste",
+              "strength": 0.96
+            },
+            {
+              "from": {
+                "id": "n_v23lit_capra_cu_trei_iezi",
+                "label": "Capra cu trei iezi"
+              },
+              "to": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "relation": "is_a",
+              "label": "apare în cărți pentru copii",
+              "display_label": "poveste și carte",
+              "strength": 0.82
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_ion_creanga",
+              "label": "Ion Creangă"
+            },
+            {
+              "id": "n_v23lit_povestea_porcului",
+              "label": "Povestea porcului"
+            },
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_ion_creanga",
+                "label": "Ion Creangă"
+              },
+              "to": {
+                "id": "n_v23lit_povestea_porcului",
+                "label": "Povestea porcului"
+              },
+              "relation": "created_by",
+              "label": "scrisă de",
+              "display_label": "autor și poveste",
+              "strength": 0.96
+            },
+            {
+              "from": {
+                "id": "n_v23lit_povestea_porcului",
+                "label": "Povestea porcului"
+              },
+              "to": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "relation": "is_a",
+              "label": "apare în cărți de povești",
+              "display_label": "poveste și carte",
+              "strength": 0.8
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_ion_creanga",
+              "label": "Ion Creangă"
+            },
+            {
+              "id": "n_v23lit_punguta_cu_doi_bani",
+              "label": "Punguța cu doi bani"
+            },
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_ion_creanga",
+                "label": "Ion Creangă"
+              },
+              "to": {
+                "id": "n_v23lit_punguta_cu_doi_bani",
+                "label": "Punguța cu doi bani"
+              },
+              "relation": "created_by",
+              "label": "scrisă de",
+              "display_label": "autor și poveste",
+              "strength": 0.96
+            },
+            {
+              "from": {
+                "id": "n_v23lit_punguta_cu_doi_bani",
+                "label": "Punguța cu doi bani"
+              },
+              "to": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "relation": "is_a",
+              "label": "apare în cărți pentru copii",
+              "display_label": "poveste și carte",
+              "strength": 0.82
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lt_literatura_236",
+      "start": "Capra cu trei iezi",
+      "target": "Amintiri din copilărie",
+      "shared_family": [
+        "n_v23lit_capra_cu_trei_iezi",
+        "n_v3lit_carte"
+      ],
+      "paths": [
+        {
+          "nodes": [
+            {
+              "id": "n_v23lit_capra_cu_trei_iezi",
+              "label": "Capra cu trei iezi"
+            },
+            {
+              "id": "n_ion_creanga",
+              "label": "Ion Creangă"
+            },
+            {
+              "id": "n_amintiri_copilarie",
+              "label": "Amintiri din copilărie"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v23lit_capra_cu_trei_iezi",
+                "label": "Capra cu trei iezi"
+              },
+              "to": {
+                "id": "n_ion_creanga",
+                "label": "Ion Creangă"
+              },
+              "relation": "created_by",
+              "label": "scrisă de",
+              "display_label": "autor și poveste",
+              "strength": 0.96
+            },
+            {
+              "from": {
+                "id": "n_ion_creanga",
+                "label": "Ion Creangă"
+              },
+              "to": {
+                "id": "n_amintiri_copilarie",
+                "label": "Amintiri din copilărie"
+              },
+              "relation": "created_by",
+              "label": "a scris",
+              "display_label": "creator și operă",
+              "strength": 0.9
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_v23lit_capra_cu_trei_iezi",
+              "label": "Capra cu trei iezi"
+            },
+            {
+              "id": "n_v3lit_poveste",
+              "label": "Poveste"
+            },
+            {
+              "id": "n_amintiri_copilarie",
+              "label": "Amintiri din copilărie"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v23lit_capra_cu_trei_iezi",
+                "label": "Capra cu trei iezi"
+              },
+              "to": {
+                "id": "n_v3lit_poveste",
+                "label": "Poveste"
+              },
+              "relation": "is_a",
+              "label": "este poveste",
+              "display_label": "exemplu și categorie",
+              "strength": 0.9
+            },
+            {
+              "from": {
+                "id": "n_v3lit_poveste",
+                "label": "Poveste"
+              },
+              "to": {
+                "id": "n_amintiri_copilarie",
+                "label": "Amintiri din copilărie"
+              },
+              "relation": "related_to",
+              "label": "amintiri povestite",
+              "display_label": "legătură directă",
+              "strength": 0.72
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_v23lit_capra_cu_trei_iezi",
+              "label": "Capra cu trei iezi"
+            },
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte"
+            },
+            {
+              "id": "n_amintiri_copilarie",
+              "label": "Amintiri din copilărie"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v23lit_capra_cu_trei_iezi",
+                "label": "Capra cu trei iezi"
+              },
+              "to": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "relation": "is_a",
+              "label": "apare în cărți pentru copii",
+              "display_label": "poveste și carte",
+              "strength": 0.82
+            },
+            {
+              "from": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "to": {
+                "id": "n_amintiri_copilarie",
+                "label": "Amintiri din copilărie"
+              },
+              "relation": "related_to",
+              "label": "volum de proză",
+              "display_label": "legătură directă",
+              "strength": 0.76
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_with_both_intermediates": [],
+  "approved_same_start": [],
+  "scope": "Private synthetic sessions with temporary caption mapping. No natural selection, fixture/source writes or player testing."
+}

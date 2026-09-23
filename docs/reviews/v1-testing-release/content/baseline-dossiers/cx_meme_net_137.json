@@ -1,0 +1,292 @@
+{
+  "id": "cx_meme_net_137",
+  "game": "conexiuni",
+  "category": "meme_net",
+  "difficulty": "greu",
+  "status": "approved",
+  "record_sha256": "a5f906ce310f381b9cd2d8a90ff8e8fbc05fa19639feeb65608062016eb10e9f",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Decor de fotbal românesc\" mixes node_types 3+1: Tricolorii[concept], Generația de Aur[concept], Stadionul Ghencea[place], Stadion de fotbal[concept]"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Momente care se repovestesc\" mixes node_types 3+1: Finala de la Sevilla[event], Columbia - România 1994[event], România - Argentina 1994[event], Primul 10 perfect[concept]"
+    },
+    {
+      "check": "mirrored_groups",
+      "level": "WARN",
+      "detail": "\"Momente care se repovestesc\" <-> \"Nume transformate în mit sportiv\" are in >=3-way strong correspondence"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Nume transformate în mit sportiv\" mixes node_types 3+1: Gheorghe Hagi[person], Regele fotbalului românesc[concept], Nadia Comăneci[person], Simona Halep[person]"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Nume transformate în mit sportiv\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_005, cx_personalitati_060, cx_personalitati_144, cx_personalitati_210)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [
+      "Regele fotbalului românesc"
+    ],
+    "engine_unfair_raw": 6
+  },
+  "groups": [
+    {
+      "label": "Decor de fotbal românesc",
+      "members": [
+        {
+          "id": "n_spt_tricolorii",
+          "label": "Tricolorii",
+          "node_type": "concept",
+          "category": "sport",
+          "salience": 0.8296,
+          "degree": 29,
+          "incoming_degree": 30,
+          "description": "Porecla echipei naționale a României, folosită mai ales în fotbal."
+        },
+        {
+          "id": "n_spt_generatia_de_aur",
+          "label": "Generația de Aur",
+          "node_type": "concept",
+          "category": "sport",
+          "salience": 0.9638,
+          "degree": 15,
+          "incoming_degree": 17,
+          "description": "Nucleul naționalei de fotbal care a dus România în sferturile Mondialului din 1994."
+        },
+        {
+          "id": "n_spt_stadionul_ghencea",
+          "label": "Stadionul Ghencea",
+          "node_type": "place",
+          "category": "sport",
+          "salience": 0.5283,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Arena asociată istoric cu Steaua București și cu mari seri ale fotbalului românesc."
+        },
+        {
+          "id": "n_v2spo_stadion_fotbal",
+          "label": "Stadion de fotbal",
+          "node_type": "concept",
+          "category": "sport",
+          "salience": 0.838,
+          "degree": 9,
+          "incoming_degree": 10,
+          "description": "Arenă cu teren, porți și tribune pentru meciuri de fotbal."
+        }
+      ]
+    },
+    {
+      "label": "Momente care se repovestesc",
+      "members": [
+        {
+          "id": "n_spt_finala_sevilla_1986",
+          "label": "Finala de la Sevilla",
+          "node_type": "event",
+          "category": "sport",
+          "salience": 0.9378,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Finala Steaua - Barcelona din 1986, decisă la loviturile de departajare."
+        },
+        {
+          "id": "n_spt_columbia_romania_1994",
+          "label": "Columbia - România 1994",
+          "node_type": "event",
+          "category": "sport",
+          "salience": 0.7754,
+          "degree": 9,
+          "incoming_degree": 9,
+          "description": "Meciul câștigat cu 3-1, celebru pentru golul spectaculos al lui Gheorghe Hagi."
+        },
+        {
+          "id": "n_spt_romania_argentina_1994",
+          "label": "România - Argentina 1994",
+          "node_type": "event",
+          "category": "sport",
+          "salience": 0.9456,
+          "degree": 9,
+          "incoming_degree": 9,
+          "description": "Victoria cu 3-2 din optimile Mondialului, unul dintre cele mai iubite meciuri ale României."
+        },
+        {
+          "id": "n_spt_nadia_zecele_perfect",
+          "label": "Primul 10 perfect",
+          "node_type": "concept",
+          "category": "sport",
+          "salience": 0.9484,
+          "degree": 9,
+          "incoming_degree": 9,
+          "description": "Nota 10 obținută de Nadia Comăneci la Montreal 1976, premieră olimpică în gimnastică."
+        }
+      ]
+    },
+    {
+      "label": "Nume transformate în mit sportiv",
+      "members": [
+        {
+          "id": "n_gheorghe_hagi",
+          "label": "Gheorghe Hagi",
+          "node_type": "person",
+          "category": "personalitati",
+          "salience": 0.5607,
+          "degree": 25,
+          "incoming_degree": 26,
+          "description": "Fotbalist roman, supranumit Regele."
+        },
+        {
+          "id": "n_spt_regele_fotbalului",
+          "label": "Regele fotbalului românesc",
+          "node_type": "concept",
+          "category": "sport",
+          "salience": 0.857,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Supranumele lui Gheorghe Hagi, cel mai cunoscut lider al Generației de Aur."
+        },
+        {
+          "id": "n_nadia_comaneci",
+          "label": "Nadia Comăneci",
+          "node_type": "person",
+          "category": "personalitati",
+          "salience": 0.6128,
+          "degree": 18,
+          "incoming_degree": 18,
+          "description": "Gimnasta romana, primul 10 perfect olimpic."
+        },
+        {
+          "id": "n_simona_halep",
+          "label": "Simona Halep",
+          "node_type": "person",
+          "category": "personalitati",
+          "salience": 0.5055,
+          "degree": 15,
+          "incoming_degree": 15,
+          "description": "Fostă jucătoare română de tenis, lideră mondială WTA și campioană la Roland Garros 2018 și Wimbledon 2019; s-a retras în 2025."
+        }
+      ]
+    },
+    {
+      "label": "Galeria din secțiunea de comentarii",
+      "members": [
+        {
+          "id": "n_net_comentarii_online",
+          "label": "Comentarii online",
+          "node_type": "concept",
+          "category": "meme_net",
+          "salience": 0.6434,
+          "degree": 24,
+          "incoming_degree": 24,
+          "description": "Subsolul internetului unde românii explică, corectează, ironizează și fac poante."
+        },
+        {
+          "id": "n_v2mem_public_online",
+          "label": "Public online",
+          "node_type": "concept",
+          "category": "meme_net",
+          "salience": 0.8619,
+          "degree": 30,
+          "incoming_degree": 30,
+          "description": "Audiența care urmărește, comentează și distribuie conținut pe internet."
+        },
+        {
+          "id": "n_net_reactie_video",
+          "label": "Video de reacție",
+          "node_type": "concept",
+          "category": "meme_net",
+          "salience": 0.5217,
+          "degree": 15,
+          "incoming_degree": 15,
+          "description": "Clip în care creatorul comentează alt conținut, iar expresia feței devine parte din poantă."
+        },
+        {
+          "id": "n_net_umor_autoironic",
+          "label": "Umor autoironic românesc",
+          "node_type": "concept",
+          "category": "meme_net",
+          "salience": 0.7551,
+          "degree": 15,
+          "incoming_degree": 15,
+          "description": "Felul blând-acid prin care românii râd de propriile improvizații și obiceiuri."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "Nadia Comăneci",
+      "a_group": "Nume transformate în mit sportiv",
+      "b": "Primul 10 perfect",
+      "b_group": "Momente care se repovestesc",
+      "strength": 0.98
+    },
+    {
+      "a": "Gheorghe Hagi",
+      "a_group": "Nume transformate în mit sportiv",
+      "b": "Generația de Aur",
+      "b_group": "Decor de fotbal românesc",
+      "strength": 0.94
+    },
+    {
+      "a": "România - Argentina 1994",
+      "a_group": "Momente care se repovestesc",
+      "b": "Tricolorii",
+      "b_group": "Decor de fotbal românesc",
+      "strength": 0.92
+    },
+    {
+      "a": "Gheorghe Hagi",
+      "a_group": "Nume transformate în mit sportiv",
+      "b": "Columbia - România 1994",
+      "b_group": "Momente care se repovestesc",
+      "strength": 0.9
+    },
+    {
+      "a": "Columbia - România 1994",
+      "a_group": "Momente care se repovestesc",
+      "b": "Regele fotbalului românesc",
+      "b_group": "Nume transformate în mit sportiv",
+      "strength": 0.84
+    },
+    {
+      "a": "Columbia - România 1994",
+      "a_group": "Momente care se repovestesc",
+      "b": "Generația de Aur",
+      "b_group": "Decor de fotbal românesc",
+      "strength": 0.82
+    },
+    {
+      "a": "Generația de Aur",
+      "a_group": "Decor de fotbal românesc",
+      "b": "Regele fotbalului românesc",
+      "b_group": "Nume transformate în mit sportiv",
+      "strength": 0.82
+    },
+    {
+      "a": "Gheorghe Hagi",
+      "a_group": "Nume transformate în mit sportiv",
+      "b": "România - Argentina 1994",
+      "b_group": "Momente care se repovestesc",
+      "strength": 0.82
+    },
+    {
+      "a": "Gheorghe Hagi",
+      "a_group": "Nume transformate în mit sportiv",
+      "b": "Tricolorii",
+      "b_group": "Decor de fotbal românesc",
+      "strength": 0.82
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:3ba1bc13c5fa0fd80fefb244ea0e3d299f2c46b718959a03f5c495f33b16dc05"
+}

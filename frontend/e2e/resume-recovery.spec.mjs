@@ -175,7 +175,16 @@ test.describe("V74 saved-game recovery", () => {
         await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
       }
 
-      await player.getByRole("button", { name: "Schimbă opțiunile" }).click();
+      if (game.derived) {
+        await expect(player.getByRole("button", { name: "Schimbă opțiunile" })).toHaveCount(0);
+        await player.getByRole("button", { name: "Meniu" }).click();
+        await expect(player).toHaveURL(/\/$/);
+        expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+          .toBe(terminal.game_id);
+        await player.goto(game.path);
+      } else {
+        await player.getByRole("button", { name: "Schimbă opțiunile" }).click();
+      }
       expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(terminal.game_id);
       await player.reload();

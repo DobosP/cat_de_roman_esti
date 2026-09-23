@@ -2,6 +2,8 @@ import { test, expect } from "@playwright/test";
 import { games, gameURL, deterministicStarts, solution, start, tabTo, openAlchemyDisclosure } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "alchimie");
+// These focus/empty-pair scenarios require the original football-board topology.
+const footballGame = { ...game, packId: "al_sport_083" };
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const inventory = (page) => page.locator(game.board);
 const ingredient = (page, label) => inventory(page).getByRole("button", {
@@ -157,8 +159,9 @@ for (const keyboard of [false, true]) {
 }
 
 test("keyboard discovery moves focus from a removed ingredient to the carried word", async ({ page }) => {
-  const initial = await start(page, game);
-  const [first, second] = solution(game).steps[0].labels;
+  await deterministicStarts(page, footballGame);
+  const initial = await start(page, footballGame);
+  const [first, second] = solution(footballGame).steps[0].labels;
   await tabTo(page, ingredient(page, first));
   await page.keyboard.press("Enter");
   await tabTo(page, ingredient(page, second));
@@ -175,8 +178,9 @@ test("keyboard discovery moves focus from a removed ingredient to the carried wo
 });
 
 test("a delayed discovery preserves focus moved to another control while the combine is pending", async ({ page }) => {
-  const initial = await start(page, game);
-  const [first, second] = solution(game).steps[0].labels;
+  await deterministicStarts(page, footballGame);
+  const initial = await start(page, footballGame);
+  const [first, second] = solution(footballGame).steps[0].labels;
   let release;
   let entered;
   const held = new Promise((resolve) => { release = resolve; });
@@ -207,9 +211,10 @@ test("a delayed discovery preserves focus moved to another control while the com
 });
 
 test("an empty reaction keeps the anchor, blocks the same partner and retries another in one tap", async ({ page, request }) => {
-  const initial = await start(page, game);
+  await deterministicStarts(page, footballGame);
+  const initial = await start(page, footballGame);
   const posts = combineTraffic(page, initial.game_id);
-  const [failed, changed] = solution(game).hint_setup;
+  const [failed, changed] = solution(footballGame).hint_setup;
   expect(changed.a).toBe(failed.a);
   const label = (id) => initial.inventory.find((item) => item.id === id).label;
   await ingredient(page, label(failed.a)).click();
@@ -236,9 +241,10 @@ test("an empty reaction keeps the anchor, blocks the same partner and retries an
 });
 
 test("rapid partner taps send one combine while the response is pending", async ({ page }) => {
-  const initial = await start(page, game);
+  await deterministicStarts(page, footballGame);
+  const initial = await start(page, footballGame);
   const posts = combineTraffic(page, initial.game_id);
-  const [first, second] = solution(game).steps[0].labels;
+  const [first, second] = solution(footballGame).steps[0].labels;
   const third = initial.inventory.find((item) => ![first, second].includes(item.label));
   let release;
   let entered;
@@ -259,7 +265,7 @@ test("rapid partner taps send one combine while the response is pending", async 
     await ingredient(page, second).dispatchEvent("click");
     await ingredient(page, third.label).dispatchEvent("click");
     await page.keyboard.press("Enter");
-    expect(posts).toEqual([solution(game).steps[0].payload]);
+    expect(posts).toEqual([solution(footballGame).steps[0].payload]);
   } finally {
     release();
   }

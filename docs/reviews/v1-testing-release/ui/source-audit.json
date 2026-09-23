@@ -1,0 +1,85 @@
+{
+  "baseline": "cc0a6a490f4a37f6f94b59cf9a84eb760cb3a401",
+  "scope": "Read-only source audit followed by authorized V1 UI changes. Runtime verification is still pending in the assembled V1 worktree.",
+  "sources": [
+    {
+      "url": "https://wafflegame.net/",
+      "checked_on": "2026-09-23",
+      "verified": "Official live page: a concise objective, in-play remaining-move feedback, How to play, explicit retry and next actions, and local statistics continuity.",
+      "applied": "Keep help close to play, use truthful mistake labels, and make the next round the primary result action. This is an interaction inference, not copied branding."
+    },
+    {
+      "url": "https://hints.littlealchemy2.com/",
+      "checked_on": "2026-09-23",
+      "verified": "Official hints: two-item exploration, no exploration penalty, items with no further use can be hidden, and optional progress-based hints.",
+      "applied": "Preserve Alchimie free exploration and already-earned journal; do not add setup or compulsory objectives. Keep rules distinct from paid/earned hints."
+    }
+  ],
+  "unavailable_sources": [
+    {
+      "url": "https://www.nytimes.com/games/connections",
+      "status": "Blocked by retrieval; no visual or interaction inspection claimed."
+    },
+    {
+      "url": "https://contexto.me/",
+      "status": "Retrieval returned only JavaScript-required placeholder; no interface inspection claimed."
+    }
+  ],
+  "implemented_findings": [
+    {
+      "id": "daily-circuit-start",
+      "priority": "P1",
+      "baseline_location": "frontend/src/screens/Home.tsx:88; frontend/src/components/GameIntro.tsx:134; frontend/src/scores.ts buildDailyCircuit",
+      "problem": "Daily circuit links opened normal game setup, whose primary action started free play. Free results do not advance the daily circuit.",
+      "change": "Carry challenge=daily through route; promote explicit daily start in shared intro, retain free alternative and existing saved-game resume. No automatic POST."
+    },
+    {
+      "id": "mistake-budget",
+      "priority": "P2",
+      "baseline_location": "frontend/src/screens/Intrusul.tsx:428; frontend/src/screens/Perechi.tsx:521",
+      "problem": "remaining_mistakes shown as attempts, although successful guesses do not consume this budget.",
+      "change": "Label GREȘELI with unchanged server count."
+    },
+    {
+      "id": "direct-help",
+      "priority": "P2",
+      "baseline_location": "frontend/src/components/GameOptions.tsx:11; frontend/src/screens/Alchimie.tsx:1090",
+      "problem": "Rules required opening options then opening rules. For quick games options contained nothing else.",
+      "change": "Expose one direct rules disclosure below play; keep additional options separate and only present when needed. Exploration already has direct help."
+    },
+    {
+      "id": "result-next-round",
+      "priority": "P2",
+      "baseline_location": "frontend/src/components/ResultCard.tsx:147; frontend/src/screens/Intrusul.tsx:539; frontend/src/screens/Perechi.tsx:664",
+      "problem": "Copy result was primary/first; quick-game change-options only returned to an identical intro with no adjustable options.",
+      "change": "Replay first and primary, copy secondary, remove empty quick-game options action. Do not auto-replay."
+    },
+    {
+      "id": "lobby-choice",
+      "priority": "P2",
+      "baseline_location": "frontend/src/screens/Home.tsx:169",
+      "problem": "Six progress controls preceded the six actual descriptive game cards on a fresh visit.",
+      "change": "Game cards precede daily circuit and records."
+    },
+    {
+      "id": "daily-tooltip",
+      "priority": "P3",
+      "baseline_location": "frontend/src/components/GameIntro.tsx:143",
+      "problem": "Shared daily tooltip referred to chosen difficulty even in quick games that have none.",
+      "change": "Use mode-appropriate descriptions without claiming nonexistent controls."
+    }
+  ],
+  "six_game_map": {
+    "alchimie": "Default exploration remains penalty-free, tap-tap crafting and optional goals. Challenge setup has easy default and collapsed customization. Challenge rules flattened; exploration direct help kept. Collection recovery, ownership and bounds untouched.",
+    "intrusul": "Easy starter preserved; direct one-tap answer and unlocked hint preserved. Direct rules, truthful mistakes, no empty result options; replay first. Daily circuit intent fixed.",
+    "perechi": "Tap first/re-tap cancel/tap second submit, board focus and paid hint unchanged. Same rules/mistake/result/daily improvements as Intrusul.",
+    "conexiuni": "Easy default, four-selection verification, one-away guidance, clear selection/shuffle and staged clue logic preserved. Direct rules, replay first, daily circuit intent fixed.",
+    "contexto": "Easy default, rank explanation, unknown-word recovery, progressive clues and reveal confirmation preserved. Direct rules, replay first, daily circuit intent fixed.",
+    "lant": "Easy default, visible legal choices, typed alternative, undo, persistent earned captions/hints preserved. Direct rules, replay first, daily circuit intent fixed."
+  },
+  "verification_design": {
+    "new_browser_tests": "frontend/e2e/v1-testing-ux.spec.mjs: 11 tests per desktop/mobile project; six daily starts, lobby order, saved-game protection, two quick replays, successful pair preserving mistakes.",
+    "adapted_browser_tests": "Existing rules, keyboard focus, hint recovery, queued score/resume and quick-phone layout tests adapted without deleting ownership, network or persistence assertions.",
+    "unverified": "Physical-device testing and human fun/accessibility acceptance are not implied by source audit."
+  }
+}

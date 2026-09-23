@@ -59,9 +59,8 @@ test("mobile layout wraps status and keeps category rails compact with 44px targ
 });
 
 test("Romanian labels wrap on a responsive Connections board and long paths scroll", () => {
+  // conexiuni-simpler-ui.spec.mjs checks real word bounds at normal and doubled text.
   assert.doesNotMatch(conexiuni, /gridTemplateColumns/);
-  assert.match(conexiuniCss, /\.connections-screen \.connections-grid \{\s*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
-  assert.doesNotMatch(conexiuniCss, /\.connections-grid \{[^}]*grid-template-columns: repeat\([123],/);
   assert.match(conexiuniCss, /\.connection-tile \{[^}]*?overflow-wrap: anywhere;[^}]*?white-space: normal/);
   assert.match(conexiuniCss, /@media \(max-width: 640px\)[\s\S]*?\.connection-tile \{[^}]*?min-height: 68px/);
   assert.match(lant, /className="row wrap breadcrumb-trail"/);

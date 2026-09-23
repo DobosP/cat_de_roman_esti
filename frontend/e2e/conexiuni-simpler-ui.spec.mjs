@@ -94,9 +94,9 @@ test("four selections need explicit verification while shuffle and clear never s
   await expect(page.locator(`${game.board} button`)).toHaveCount(12);
 });
 
-test("long Romanian words remain readable at 320 pixels and doubled text without horizontal scrolling", async ({ page }) => {
+test("long Romanian words remain readable at 320 pixels and doubled text without horizontal scrolling", async ({ page, request }) => {
   await page.setViewportSize({ width: 320, height: 844 });
-  await start(page, game);
+  const initial = await start(page, game);
   // Presentation stress only: game state and server responses stay unchanged.
   await page.evaluate(() => {
     globalThis.document.documentElement.style.fontSize = "200%";
@@ -109,18 +109,36 @@ test("long Romanian words remain readable at 320 pixels and doubled text without
     pageWidth: globalThis.document.documentElement.scrollWidth,
     width: globalThis.innerWidth, contentWidth: screen.scrollWidth, clientWidth: screen.clientWidth,
     tiles: [...screen.querySelectorAll(".connection-tile")].map((button) => ({
+      x: button.getBoundingClientRect().x,
       width: button.clientWidth, contentWidth: button.scrollWidth,
       height: button.clientHeight, contentHeight: button.scrollHeight,
       fontSize: Number.parseFloat(globalThis.getComputedStyle(button).fontSize),
     })),
+    readableWords: ["Tradiții", "României", "viața"].map((word) => {
+      const button = [...screen.querySelectorAll(".connection-tile")].find((tile) => tile.textContent.includes(word));
+      const range = globalThis.document.createRange();
+      const offset = button.firstChild.textContent.indexOf(word);
+      range.setStart(button.firstChild, offset);
+      range.setEnd(button.firstChild, offset + word.length);
+      return { word, tile: button.getBoundingClientRect().toJSON(),
+        fragments: [...range.getClientRects()].map((rect) => rect.toJSON()) };
+    }),
   }));
   expect(metrics.pageWidth).toBeLessThanOrEqual(metrics.width);
   expect(metrics.contentWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
+  expect(new Set(metrics.tiles.map(({ x }) => Math.round(x))).size).toBe(2);
+  for (const { word, tile, fragments } of metrics.readableWords) {
+    expect(fragments, `${word} must fit without splitting its letters across lines`).toHaveLength(1);
+    expect(fragments[0].left).toBeGreaterThanOrEqual(tile.left);
+    expect(fragments[0].right).toBeLessThanOrEqual(tile.right);
+  }
   for (const tile of metrics.tiles) {
+    expect(tile.width).toBeGreaterThanOrEqual(130);
     expect(tile.fontSize).toBeGreaterThanOrEqual(24);
     expect(tile.contentWidth).toBeLessThanOrEqual(tile.width + 1);
     expect(tile.contentHeight).toBeLessThanOrEqual(tile.height + 1);
   }
+  await test.info().attach("doubled-text-board", { body: await page.screenshot(), contentType: "image/png" });
   const shuffle = page.getByRole("button", { name: "Amestecă", exact: true });
   await shuffle.scrollIntoViewIfNeeded();
   for (const name of ["Amestecă", "Golește", "Verifică"]) {
@@ -130,6 +148,7 @@ test("long Romanian words remain readable at 320 pixels and doubled text without
     expect(bounds.x).toBeGreaterThanOrEqual(0);
     expect(bounds.x + bounds.width).toBeLessThanOrEqual(320);
   }
+  expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(initial);
   await test.info().attach("doubled-text-geometry", { body: JSON.stringify(metrics, null, 2), contentType: "application/json" });
   await test.info().attach("doubled-text-actions", { body: await page.screenshot(), contentType: "image/png" });
 });

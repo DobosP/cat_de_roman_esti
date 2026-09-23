@@ -1,0 +1,47 @@
+import json, os, sys, pathlib, hashlib, subprocess, collections
+root=pathlib.Path(sys.argv[1]); os.chdir(root); sys.path[:0]=[str(root),str(root/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+import critique_pack as cp
+from cat_de_roman_esti.wordgames import lant, packs
+from audit_alchimie_projections import build_artifact
+out=root/'docs/reviews/v1-testing-release/content/reconsideration'; out.mkdir(parents=True,exist_ok=True)
+def write(path,data):path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes((json.dumps(data,ensure_ascii=False,indent=2)+'\n').encode())
+p,s,st,reg=cp.load_all(cp.PACKAGE_PACK,cp.PACKAGE_KG)
+probe={'kind':'v1-held-content-current-runtime-diagnostics','baseline_commit':'cc0a6a4','pending_lant':[],'archived_contexto':[],'archived_lant':[]}
+for x in p['lant']:
+ if x['status']!='pending':continue
+ session=lant.LantSession(start=x['start'],target=x['target'],optimal=x['optimal'],difficulty=x['difficulty'],category=x['category'],pack_id=x['id'],chain=[x['start']])
+ paths=cp.representative_shortest_paths(s,x['start'],x['target'],x['optimal'])
+ choices=lant._visible_choices(session)
+ first={r['nodes'][1]['id'] for r in paths}
+ probe['pending_lant'].append({'id':x['id'],'choices':choices,'shortest_first_hops':sorted(first),'visible_shortest':sorted(first & set(lant._visible_choice_nodes(session))),'routes':paths,'quality_note':'Diagnostic session constructed from unserved pending record. This is not natural approved-stock selection.'})
+for wave in ['v47-contexto-pending-gate','v89-feedback-and-conexiuni-recovery/final-gate']:
+ gate=json.loads((root/'docs/reviews'/wave/'contexto_verdicts.json').read_bytes())
+ for item in gate['perItem']:
+  if item['final']!='reject':continue
+  d=json.loads((root/'docs/reviews'/wave/'dossiers'/f"{item['id']}.json").read_bytes());target=d['target']['id'];incoming=cp.contexto_incoming_ids(s,target)
+  probe['archived_contexto'].append({'id':item['id'],'label':s.label(target),'target':target,'current_incoming_count':len(incoming),'incoming':[{'id':n,'label':s.label(n)} for n in sorted(incoming)],'current_approved_same_target':[r['id'] for r in p['contexto'] if r['target']==target and r['status']=='approved'],'original_failure_modes':item.get('failure_modes'),'original_reason':item.get('reasoning') or item['analyst_review']['rationale'],'original_gate':str(pathlib.Path('docs/reviews')/wave/'contexto_verdicts.json')})
+oldpack=json.loads(subprocess.check_output(['git','show','246e8577412831405c67bfd6e8843121d8309cd0:cat_de_roman_esti/fixtures/games_pack.json']))
+records={r['id']:r for r in oldpack['lant']}
+ledger=cp.load_lant_rejection_tombstones()
+for item in ledger:
+ x=records.get(item['id'])
+ if x is None:
+  dpath=root/'docs/reviews/v94-words-and-clearer-connections/pack/verdicts/dossiers'/f"{item['id']}.json"
+  if not dpath.exists():dpath=next((root/'docs/reviews/v94-words-and-clearer-connections/pack').rglob(f"{item['id']}.json"))
+  d=json.loads(dpath.read_bytes());x={'id':item['id'],'status':'pending','source':'ai','category':d['category'],'difficulty':d['difficulty'],'start':item['start'],'target':item['target'],'optimal':d['optimal']}
+ errors=packs.validate_payload(x,'lant',s);dist=s.distances_to(x['target']).get(x['start']);profile=packs.lant_branch_profile(s,x['start'],x['target'],x['optimal'])
+ probe['archived_lant'].append({'id':x['id'],'start':s.label(x['start']),'target':s.label(x['target']),'current_payload_errors':errors,'current_distance':dist,'original_optimal':x['optimal'],'current_branch_profile':profile,'exact_directed_pair_tombstone':True,'disposition':'retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair'})
+archive=json.loads((root/'docs/reviews/v48-alchimie-pending-gate/projection-audit.json').read_bytes())
+records={r['id']:r['source_record'] for r in archive['items'] if r['id']!='al_literatura_097'}
+adir=out/'alchimie-archive-current-dossiers'
+for x in records.values():write(adir/f"{x['id']}.json",cp.build_dossier(x,'alchimie',s,st,[],reg))
+audit=build_artifact(sorted(records),adir,source_records=records,source_pack_sha256=hashlib.sha256(cp.PACKAGE_PACK.read_bytes()).hexdigest())
+audit['audit_usage']='Read-only current-runtime reconstruction of 20 archived source records: 17 rejected and 3 pending. Not a gate or recommendation.'
+write(out/'alchimie-archive-current-projection.json',audit)
+oldby={r['id']:r for r in archive['items']}
+probe['archived_alchimie']=[{'id':r['id'],'target':r['target'],'opening_pairs':r['projected_opening_pair_count'],'route_count':r['route_count'],'exact_action_par':r['exact_action_par'],'projection_unchanged_from_v48':r['projection_sha256']==oldby[r['id']]['projection_sha256'],'bounds':r['bounds']} for r in audit['items']]
+probe['totals']={'rejected_lant':len(probe['archived_lant']),'rejected_lant_current_payload_invalid':sum(bool(r['current_payload_errors']) for r in probe['archived_lant']),'rejected_contexto':len(probe['archived_contexto']),'archived_alchimie_rebuilt':len(audit['items']),'alchimie_projection_unchanged':sum(r['projection_unchanged_from_v48'] for r in probe['archived_alchimie'])}
+write(out/'runtime-diagnostics.json',probe)
+print(json.dumps(probe['totals'],ensure_ascii=False)); print(json.dumps(probe['pending_lant'],ensure_ascii=False))

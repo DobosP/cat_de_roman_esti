@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 
 from tests import content_history
-from tests.content_history import before_v97_artifact
+from tests.content_history import before_v1_artifact, before_v97_artifact
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = {
@@ -44,11 +44,12 @@ def digest(value, filename):
 
 @pytest.mark.parametrize("filename", BASELINE)
 def test_v97_inverse_restores_complete_fd3ca7c_bytes_without_mutating_input(filename):
-    current = read_current(filename)
-    untouched = deepcopy(current)
-    previous = before_v97_artifact(current, filename)
+    latest = read_current(filename)
+    untouched = deepcopy(latest)
+    previous = before_v97_artifact(latest, filename)
+    current = before_v1_artifact(latest, filename)
     assert digest(previous, filename) == BASELINE[filename]
-    assert current == untouched
+    assert latest == untouched
     if filename == "games_pack.json":
         assert sum(len(previous[g]) for g in ADDED) == 713
         for game, added in ADDED.items():

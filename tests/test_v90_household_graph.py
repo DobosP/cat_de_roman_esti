@@ -130,7 +130,7 @@ def test_five_exact_v89_artifacts_reconstruct_without_accepting_unreviewed_rows(
     )
     assert current == json.loads(blob)
     assert blob == (ROOT / "tests/fixtures" / filename).read_bytes()
-    assert _sha(blob) == CURRENT_CONTENT.artifact_sha256[str(path.relative_to(ROOT))]
+    assert _sha(blob) == CURRENT_CONTENT.artifact_sha256[path.relative_to(ROOT).as_posix()]
     receipt = _read(REVIEW / "artifact-delta.json")
     assert receipt["baseline_commit"] == "190d7fdb86487c641d8a781ef7a5ce21f2b98031"
     assert receipt["files"][filename]["baseline_sha256"] == BASELINE[filename]
@@ -164,9 +164,10 @@ def test_old659_pack_records_83_alchimie_100_lant_and_336_derived_rows_remain_ex
     assert len(derived["boards"]) == 336
 
 
-def test_all_old_native_owners_forms_edges_and_puzzles_survive():
-    current = _read(FIXTURES / "kg_sample.json")
-    baseline = history.before_v90_fixture(current)
+def test_v90_preserves_old_native_owners_forms_edges_and_puzzles():
+    latest = _read(FIXTURES / "kg_sample.json")
+    baseline = history.before_v90_fixture(latest)
+    current = history.before_v91_artifact(latest, "kg_sample.json")
     assert len(current["kg_nodes"]) - len(baseline["kg_nodes"]) == 3
     assert len(current["kg_edges"]) - len(baseline["kg_edges"]) == 17
     assert current["kg_puzzles"] == baseline["kg_puzzles"]

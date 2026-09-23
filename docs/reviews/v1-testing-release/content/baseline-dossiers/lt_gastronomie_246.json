@@ -1,0 +1,133 @@
+{
+  "id": "lt_gastronomie_246",
+  "game": "lant",
+  "category": "gastronomie",
+  "difficulty": "usor",
+  "status": "approved",
+  "record_sha256": "1de67ebbfdae2baee42cd7281b0af423f3ef6af21276dded0228d6bab735d161",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [],
+  "display_rules_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+  "start": {
+    "id": "n_v85_food_cacao",
+    "label": "Cacao",
+    "node_type": "concept",
+    "category": "gastronomie",
+    "salience": 0.85,
+    "degree": 7,
+    "incoming_degree": 0,
+    "description": "Pudră alimentară obținută din boabe de cacao, folosită în deserturi și băuturi."
+  },
+  "target": {
+    "id": "n_v4gas_lapte",
+    "label": "Lapte",
+    "node_type": "concept",
+    "category": "gastronomie",
+    "salience": 0.9202,
+    "degree": 15,
+    "incoming_degree": 15,
+    "description": "Lichid alimentar folosit ca băutură și ingredient lactat."
+  },
+  "optimal": 2,
+  "branch_profile": {
+    "valid_first_hops": 2,
+    "narrowest_shortest_path_layer": 2,
+    "total_intermediate_shortest_path_nodes": 2
+  },
+  "representative_shortest_paths": [
+    {
+      "nodes": [
+        {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao"
+        },
+        {
+          "id": "n_v3gas_inghetata",
+          "label": "Înghețată"
+        },
+        {
+          "id": "n_v4gas_lapte",
+          "label": "Lapte"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao"
+          },
+          "to": {
+            "id": "n_v3gas_inghetata",
+            "label": "Înghețată"
+          },
+          "relation": "ingredient_variant",
+          "label": "aromatizează unele sortimente de",
+          "display_label": "înghețată cu aromă de cacao",
+          "strength": 0.8
+        },
+        {
+          "from": {
+            "id": "n_v3gas_inghetata",
+            "label": "Înghețată"
+          },
+          "to": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte"
+          },
+          "relation": "associated_with",
+          "label": "făcută din lapte",
+          "display_label": "înghețată în variantă cu lapte",
+          "strength": 0.55
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao"
+        },
+        {
+          "id": "n_v87_food_chec",
+          "label": "Chec"
+        },
+        {
+          "id": "n_v4gas_lapte",
+          "label": "Lapte"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao"
+          },
+          "to": {
+            "id": "n_v87_food_chec",
+            "label": "Chec"
+          },
+          "relation": "ingredient_variant",
+          "label": "aromatizează unele variante de",
+          "display_label": "chec în variantă cu cacao",
+          "strength": 0.8
+        },
+        {
+          "from": {
+            "id": "n_v87_food_chec",
+            "label": "Chec"
+          },
+          "to": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte"
+          },
+          "relation": "served_together",
+          "label": "se poate servi cu",
+          "display_label": "chec servit alături de lapte",
+          "strength": 0.8
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:6cad2ce32562da3628b14f7b372d70282c72420419034581cc18dbfdbba3e32f"
+}

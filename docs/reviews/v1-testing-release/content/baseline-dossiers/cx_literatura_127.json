@@ -1,0 +1,298 @@
+{
+  "id": "cx_literatura_127",
+  "game": "conexiuni",
+  "category": "literatura",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "25fdc7b66406ae38190f645dca98826a44eee3802075ebb7e8418f3a5fc4314c",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "mirrored_groups",
+      "level": "WARN",
+      "detail": "\"Cenacluri, reviste și orbită literară\" <-> \"Critici care mută canonul\" are in >=3-way strong correspondence"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Critici care mută canonul\" mixes node_types 3+1: Titu Maiorescu[person], Eugen Lovinescu[person], George Călinescu[person], Critic literar[concept]"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Norma limbii scrise\" mixes node_types 3+1: Limba română literară[concept], DEX[work], Diacritice[concept], Ortografie[concept]"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Curente literare de recunoscut rapid\" reuses an inventory/selected quad (also in: cx_literatura_039, cx_literatura_041)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Cenacluri, reviste și orbită literară\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_040, cx_literatura_041, cx_literatura_264)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Critici care mută canonul\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_044, cx_literatura_198)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Norma limbii scrise\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_044)"
+    },
+    {
+      "check": "board_reskin",
+      "level": "WARN",
+      "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_literatura_041 (8), cx_literatura_194 (8)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [],
+    "engine_unfair_raw": 3
+  },
+  "groups": [
+    {
+      "label": "Curente literare de recunoscut rapid",
+      "members": [
+        {
+          "id": "n_romantism",
+          "label": "Romantism",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.3622,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Curent literar din secolul al XIX-lea."
+        },
+        {
+          "id": "n_realism",
+          "label": "Realism",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.5798,
+          "degree": 19,
+          "incoming_degree": 19,
+          "description": "Curent literar centrat pe reprezentarea obiectiva a realitatii."
+        },
+        {
+          "id": "n_simbolism",
+          "label": "Simbolism",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.2745,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Curent literar de la cumpana secolelor XIX-XX."
+        },
+        {
+          "id": "n_modernism",
+          "label": "Modernism",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.4869,
+          "degree": 25,
+          "incoming_degree": 24,
+          "description": "Curent literar interbelic de innoire a expresiei."
+        }
+      ]
+    },
+    {
+      "label": "Cenacluri, reviste și orbită literară",
+      "members": [
+        {
+          "id": "n_junimea",
+          "label": "Junimea",
+          "node_type": "org",
+          "category": "literatura",
+          "salience": 0.5031,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Societate literara de la Iasi."
+        },
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2907,
+          "degree": 12,
+          "incoming_degree": 12,
+          "description": "Revista a societatii Junimea."
+        },
+        {
+          "id": "n_sburatorul",
+          "label": "Sburătorul",
+          "node_type": "org",
+          "category": "literatura",
+          "salience": 0.2537,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Cenaclu si revista literara conduse de Eugen Lovinescu."
+        },
+        {
+          "id": "n_v2lit_cenaclu_literar",
+          "label": "Cenaclu literar",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.3538,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Grup sau cerc în care se citesc și se discută texte literare."
+        }
+      ]
+    },
+    {
+      "label": "Critici care mută canonul",
+      "members": [
+        {
+          "id": "n_titu_maiorescu",
+          "label": "Titu Maiorescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.3023,
+          "degree": 9,
+          "incoming_degree": 8,
+          "description": "Critic literar, mentor al Junimii."
+        },
+        {
+          "id": "n_eugen_lovinescu",
+          "label": "Eugen Lovinescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.1799,
+          "degree": 7,
+          "incoming_degree": 6,
+          "description": "Critic literar, teoretician al modernismului interbelic."
+        },
+        {
+          "id": "n_george_calinescu",
+          "label": "George Călinescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.1971,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Critic si istoric literar roman (1899-1965), autor al Istoriei literaturii romane de la origini pana in prezent."
+        },
+        {
+          "id": "n_v2lit_critic_literar",
+          "label": "Critic literar",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.4365,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Autor care analizează și interpretează literatura."
+        }
+      ]
+    },
+    {
+      "label": "Norma limbii scrise",
+      "members": [
+        {
+          "id": "n_limba_literara",
+          "label": "Limba română literară",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.4707,
+          "degree": 11,
+          "incoming_degree": 13,
+          "description": "Varianta standardizata, normata a limbii romane, folosita in scoala, administratie si literatura."
+        },
+        {
+          "id": "n_dex",
+          "label": "DEX",
+          "node_type": "work",
+          "category": "limba",
+          "salience": 0.3724,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Dictionarul explicativ al limbii romane, lucrare de referinta a Academiei."
+        },
+        {
+          "id": "n_diacritice",
+          "label": "Diacritice",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.2036,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Semnele speciale ale romanei: a-breve, a-circumflex, i-circumflex, s-virgula, t-virgula."
+        },
+        {
+          "id": "n_ortografie",
+          "label": "Ortografie",
+          "node_type": "concept",
+          "category": "limba",
+          "salience": 0.4096,
+          "degree": 18,
+          "incoming_degree": 18,
+          "description": "Ansamblul regulilor de scriere corecta a unei limbi."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "Junimea",
+      "a_group": "Cenacluri, reviste și orbită literară",
+      "b": "Titu Maiorescu",
+      "b_group": "Critici care mută canonul",
+      "strength": 0.9
+    },
+    {
+      "a": "Eugen Lovinescu",
+      "a_group": "Critici care mută canonul",
+      "b": "Cenaclu literar",
+      "b_group": "Cenacluri, reviste și orbită literară",
+      "strength": 0.86
+    },
+    {
+      "a": "Eugen Lovinescu",
+      "a_group": "Critici care mută canonul",
+      "b": "Sburătorul",
+      "b_group": "Cenacluri, reviste și orbită literară",
+      "strength": 0.84
+    },
+    {
+      "a": "Titu Maiorescu",
+      "a_group": "Critici care mută canonul",
+      "b": "Cenaclu literar",
+      "b_group": "Cenacluri, reviste și orbită literară",
+      "strength": 0.78
+    },
+    {
+      "a": "Eugen Lovinescu",
+      "a_group": "Critici care mută canonul",
+      "b": "Modernism",
+      "b_group": "Curente literare de recunoscut rapid",
+      "strength": 0.7
+    },
+    {
+      "a": "Junimea",
+      "a_group": "Cenacluri, reviste și orbită literară",
+      "b": "Critic literar",
+      "b_group": "Critici care mută canonul",
+      "strength": 0.68
+    },
+    {
+      "a": "Sburătorul",
+      "a_group": "Cenacluri, reviste și orbită literară",
+      "b": "Critic literar",
+      "b_group": "Critici care mută canonul",
+      "strength": 0.62
+    },
+    {
+      "a": "Convorbiri literare",
+      "a_group": "Cenacluri, reviste și orbită literară",
+      "b": "Titu Maiorescu",
+      "b_group": "Critici care mută canonul",
+      "strength": 0.6
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:1cd1b0a5ff67000bf26194fd2438983ac129de1d15f05ca0b80a75d1b6964a6f"
+}

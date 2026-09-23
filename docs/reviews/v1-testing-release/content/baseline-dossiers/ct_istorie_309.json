@@ -1,0 +1,99 @@
+{
+  "id": "ct_istorie_309",
+  "game": "contexto",
+  "category": "istorie",
+  "difficulty": "greu",
+  "status": "approved",
+  "record_sha256": "b5e01c5ad57f5ef26e484ad6ff267738e65b428fa445035474c9e97f925a44c3",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "contexto_incoming_floor",
+      "level": "WARN",
+      "detail": "4 unique existing non-distractor incoming neighbors < 5, excluding the target itself (ids: n_comunismul_in_romania, n_mihai_i, n_v3ist_monarhie, n_v4ist_republica); five recognizable predecessors are impossible; recognition still requires independent review"
+    }
+  ],
+  "target": {
+    "id": "n_v20ist_abdicarea_regelui_mihai",
+    "label": "Abdicarea Regelui Mihai",
+    "node_type": "event",
+    "category": "istorie",
+    "salience": 0.7,
+    "degree": 4,
+    "incoming_degree": 4,
+    "description": "La 30 decembrie 1947, regele Mihai I a fost forțat de guvernul comunist să abdice, iar în aceeași zi a fost proclamată Republica Populară Română. Evenimentul a marcat sfârșitul monarhiei în România."
+  },
+  "incoming_neighbor_floor": {
+    "minimum": 5,
+    "count": 4,
+    "sample": [
+      {
+        "id": "n_comunismul_in_romania",
+        "label": "Comunismul în România"
+      },
+      {
+        "id": "n_mihai_i",
+        "label": "Mihai I"
+      },
+      {
+        "id": "n_v3ist_monarhie",
+        "label": "Monarhie"
+      },
+      {
+        "id": "n_v4ist_republica",
+        "label": "Republică"
+      }
+    ],
+    "sample_truncated": false,
+    "recognition_assessed": false
+  },
+  "reachable": 2353,
+  "strong_neighbors": [
+    {
+      "id": "n_mihai_i",
+      "label": "Mihai I",
+      "node_type": "person",
+      "category": "istorie",
+      "salience": 0.3436,
+      "degree": 14,
+      "incoming_degree": 15,
+      "description": "Ultimul rege al Romaniei (1927-1930, 1940-1947), nepot al lui Ferdinand I.",
+      "strength": 0.95
+    },
+    {
+      "id": "n_comunismul_in_romania",
+      "label": "Comunismul în România",
+      "node_type": "concept",
+      "category": "istorie",
+      "salience": 0.5259,
+      "degree": 35,
+      "incoming_degree": 36,
+      "description": "Regimul comunist instaurat dupa 1947, condus in final de Nicolae Ceausescu pana in 1989.",
+      "strength": 0.85
+    },
+    {
+      "id": "n_v3ist_monarhie",
+      "label": "Monarhie",
+      "node_type": "concept",
+      "category": "istorie",
+      "salience": 0.2785,
+      "degree": 6,
+      "incoming_degree": 6,
+      "description": "Formă de guvernare în care șeful statului este monarh.",
+      "strength": 0.8
+    },
+    {
+      "id": "n_v4ist_republica",
+      "label": "Republică",
+      "node_type": "concept",
+      "category": "istorie",
+      "salience": 0.5894,
+      "degree": 5,
+      "incoming_degree": 5,
+      "description": "Formă de stat fără monarh, condusă prin instituții politice.",
+      "strength": 0.7
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:0476a8e239a924fd4e6939c024b66258b5b31bd2068ec90efa901b5322bca1e2"
+}

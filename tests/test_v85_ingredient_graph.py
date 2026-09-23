@@ -25,6 +25,7 @@ from cat_de_roman_esti.wordgames.lant_relations import caption as relation_capti
 from cat_de_roman_esti.wordgames.packs import get_pack  # noqa: E402
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
 from tests.content_history import (  # noqa: E402
+    before_v1_artifact,
     before_v85_fixture,
     before_v85_projection_rows,
     before_v86_fixture,
@@ -153,6 +154,7 @@ def test_exact_reviewed_concepts_forms_and_graph_records_are_served():
 
 def test_full_v84_graph_reconstructs_and_every_old_exact_owner_is_preserved():
     current = _json(FIXTURE)
+    pre_v1 = before_v1_artifact(current, "kg_sample.json")
     v85 = before_v86_fixture(current)
     baseline = before_v85_fixture(current)
     encoded = (json.dumps(baseline, ensure_ascii=False, indent=2) + "\n").encode()
@@ -166,7 +168,8 @@ def test_full_v84_graph_reconstructs_and_every_old_exact_owner_is_preserved():
     assert len(v85["kg_edges"]) - len(baseline["kg_edges"]) == 40
     assert current["kg_puzzles"] == baseline["kg_puzzles"]
     assert not any(edge["id"] == "de5559" for edge in current["kg_edges"])
-    assert all(edge in current["kg_edges"] for edge in baseline["kg_edges"]
+    # The exact V1 inverse checks its reviewed repairs before old-edge preservation.
+    assert all(edge in pre_v1["kg_edges"] for edge in baseline["kg_edges"]
                if edge["id"] != "de5559")
     before_edge = next(edge for edge in baseline["kg_edges"] if edge["id"] == "de5559")
     after_edge = next(edge for edge in current["kg_edges"] if (

@@ -1,0 +1,229 @@
+{
+  "id": "cx_muzica_205",
+  "game": "conexiuni",
+  "category": "muzica",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "8a59749cb3c25b12f6d25a48b70903effe34cd4370f4058ed527415fe59980c8",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "board_type_shortcut",
+      "level": "WARN",
+      "detail": "all four groups are node-type homogeneous and expose 4 distinct group types"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Nume de trupă/proiect care par din alt raft\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_053, cx_muzica_055)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Piese care par vreme, casă sau dermatologie\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_limba_123, cx_muzica_139)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Festivaluri cu titlu de fantasy\" reuses an inventory/selected quad (also in: cx_geografie_252, cx_muzica_138)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [],
+    "engine_unfair_raw": 1
+  },
+  "groups": [
+    {
+      "label": "Nume de trupă/proiect care par din alt raft",
+      "members": [
+        {
+          "id": "n_muz_cargo",
+          "label": "Cargo",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.6834,
+          "degree": 10,
+          "incoming_degree": 10,
+          "description": "Trupă românească de rock din Timișoara, celebră pentru piesa „Ploaia”."
+        },
+        {
+          "id": "n_muz_iris",
+          "label": "Iris",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.5511,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Trupă românească de rock, cunoscută pentru balade și concerte de arenă."
+        },
+        {
+          "id": "n_muz_phoenix",
+          "label": "Phoenix",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.6918,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Trupă românească de rock, reper al folk-rockului și al mitologiei muzicale autohtone."
+        },
+        {
+          "id": "n_muz_ozone",
+          "label": "O-Zone",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.883,
+          "degree": 12,
+          "incoming_degree": 11,
+          "description": "Trio pop din Republica Moldova care a dus „Dragostea din tei” în topuri internaționale."
+        }
+      ]
+    },
+    {
+      "label": "Piese care par vreme, casă sau dermatologie",
+      "members": [
+        {
+          "id": "n_muz_hot_inna",
+          "label": "Hot",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.6032,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Single Inna din 2008, piesă dance care a deschis succesul ei internațional."
+        },
+        {
+          "id": "n_muz_acasa_smiley",
+          "label": "Acasă",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.4383,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Piesă Smiley din 2013, devenită refren pop românesc foarte recognoscibil."
+        },
+        {
+          "id": "n_muz_ploaia_cargo",
+          "label": "Ploaia",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.3862,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Baladă rock Cargo, una dintre cele mai cântate piese românești de chitară."
+        },
+        {
+          "id": "n_muz_sub_pielea_mea",
+          "label": "Sub pielea mea",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.4839,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Piesă Carla’s Dreams din 2016, cunoscută și ca „Sub pielea mea | #eroina\" — hit masiv pe YouTube."
+        }
+      ]
+    },
+    {
+      "label": "Festivaluri cu titlu de fantasy",
+      "members": [
+        {
+          "id": "n_muz_untold",
+          "label": "Untold",
+          "node_type": "event",
+          "category": "muzica",
+          "salience": 0.8746,
+          "degree": 12,
+          "incoming_degree": 12,
+          "description": "Festival muzical major organizat la Cluj-Napoca, cu artiști EDM și pop internaționali."
+        },
+        {
+          "id": "n_muz_neversea",
+          "label": "Neversea",
+          "node_type": "event",
+          "category": "muzica",
+          "salience": 0.729,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+        },
+        {
+          "id": "n_muz_electric_castle",
+          "label": "Electric Castle",
+          "node_type": "event",
+          "category": "muzica",
+          "salience": 0.6862,
+          "degree": 9,
+          "incoming_degree": 9,
+          "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy."
+        },
+        {
+          "id": "n_muz_cerbul_de_aur",
+          "label": "Cerbul de Aur",
+          "node_type": "event",
+          "category": "muzica",
+          "salience": 0.7305,
+          "degree": 15,
+          "incoming_degree": 15,
+          "description": "Festival-concurs muzical de la Brașov, lansat în perioada televiziunii clasice."
+        }
+      ]
+    },
+    {
+      "label": "Cuvinte mici, muzică mare",
+      "members": [
+        {
+          "id": "n_v4muz_nota",
+          "label": "Notă",
+          "node_type": "concept",
+          "category": "muzica",
+          "salience": 0.4647,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Semn sau sunet muzical cu înălțime și durată."
+        },
+        {
+          "id": "n_v4muz_acord",
+          "label": "Acord",
+          "node_type": "concept",
+          "category": "muzica",
+          "salience": 0.4114,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Mai multe note cântate simultan, formând armonie."
+        },
+        {
+          "id": "n_v4muz_refren",
+          "label": "Refren",
+          "node_type": "concept",
+          "category": "muzica",
+          "salience": 0.7691,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Parte repetată a unei piese, ușor de ținut minte."
+        },
+        {
+          "id": "n_v3muz_ritm",
+          "label": "Ritm",
+          "node_type": "concept",
+          "category": "muzica",
+          "salience": 0.5481,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Succesiunea accentelor și duratelor care dă mișcare muzicii."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "Cargo",
+      "a_group": "Nume de trupă/proiect care par din alt raft",
+      "b": "Ploaia",
+      "b_group": "Piese care par vreme, casă sau dermatologie",
+      "strength": 0.84
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:8f7da883d8c675b8ce4835fa631d4b8c3337d285ca4881cc22e2940df57120b7"
+}

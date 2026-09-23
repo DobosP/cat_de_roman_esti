@@ -425,7 +425,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge
-              label="ÎNCERCĂRI"
+              label="GREȘELI"
               value={`${state.remaining_mistakes} rămase`}
               accent={DEF.accent}
             />
@@ -536,11 +536,6 @@ export default function Intrusul({ onExit, onToast }: Props) {
             onCopy={copyShare}
             onReplay={() => void start({ previousGameId: state.game_id })}
             replayLabel={state.daily ? "Joacă liber →" : undefined}
-            onOptions={() => {
-              if (startInFlight.current) return;
-              actionOwner.invalidate();
-              setState(null);
-            }}
             onExit={exitSafely}
           >
             <div className="intrusul-solution">

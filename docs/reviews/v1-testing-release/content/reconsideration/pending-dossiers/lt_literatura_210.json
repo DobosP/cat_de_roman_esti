@@ -1,0 +1,133 @@
+{
+ "id": "lt_literatura_210",
+ "game": "lant",
+ "category": "literatura",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "ef88da8808ad300dc8f74365105da92fee4b03e62ed738fa1a665c1beed21354",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+ "start": {
+  "id": "n_v23via_abecedar",
+  "label": "Abecedar",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.86,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Manual școlar folosit la începutul învățării cititului și scrisului, organizat în jurul literelor și al textelor scurte."
+ },
+ "target": {
+  "id": "n_v23lit_praslea_cel_voinic",
+  "label": "Prâslea cel voinic și merele de aur",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.82,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Basm popular cules de Petre Ispirescu, în care fiul cel mic al împăratului urmărește hoții merelor de aur."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v23via_abecedar",
+     "label": "Abecedar"
+    },
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_v23lit_praslea_cel_voinic",
+     "label": "Prâslea cel voinic și merele de aur"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23via_abecedar",
+      "label": "Abecedar"
+     },
+     "to": {
+      "id": "n_v3lit_carte",
+      "label": "Carte"
+     },
+     "relation": "is_a",
+     "label": "este carte pentru învățarea cititului",
+     "display_label": "exemplu și categorie",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v3lit_carte",
+      "label": "Carte"
+     },
+     "to": {
+      "id": "n_v23lit_praslea_cel_voinic",
+      "label": "Prâslea cel voinic și merele de aur"
+     },
+     "relation": "is_a",
+     "label": "apare în culegeri de basme",
+     "display_label": "exemplu și categorie",
+     "strength": 0.8
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v23via_abecedar",
+     "label": "Abecedar"
+    },
+    {
+     "id": "n_v4soc_copil",
+     "label": "copil"
+    },
+    {
+     "id": "n_v23lit_praslea_cel_voinic",
+     "label": "Prâslea cel voinic și merele de aur"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23via_abecedar",
+      "label": "Abecedar"
+     },
+     "to": {
+      "id": "n_v4soc_copil",
+      "label": "copil"
+     },
+     "relation": "related_to",
+     "label": "prima carte de citire a copilului",
+     "display_label": "legătură directă",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_v4soc_copil",
+      "label": "copil"
+     },
+     "to": {
+      "id": "n_v23lit_praslea_cel_voinic",
+      "label": "Prâslea cel voinic și merele de aur"
+     },
+     "relation": "related_to",
+     "label": "basm cunoscut copiilor",
+     "display_label": "legătură directă",
+     "strength": 0.82
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:049fdfaa9b61bcccb4c24427ebc0f92d4ce06bfccefcd02c7f440664650d8ca6"
+}

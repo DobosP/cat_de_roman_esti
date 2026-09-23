@@ -26,7 +26,7 @@ from cat_de_roman_esti.wordgames.packs import (
     lant_branch_profile,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, normalize
-from tests.content_history import before_v84_fixture, before_v84_pack
+from tests.content_history import before_v1_artifact, before_v84_fixture, before_v84_pack
 from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -142,11 +142,12 @@ def _reachable_locally(start: str, adjacency: dict[str, set[str]]) -> frozenset[
     return frozenset(seen)
 
 
-def _critique_report(ids: set[str] | None) -> tuple[int, int, int, str]:
-    pack, svc, strong, regions = critique_pack.load_all(
-        critique_pack.PACKAGE_PACK,
-        critique_pack.PACKAGE_KG,
-    )
+def _critique_report(
+    ids: set[str] | None,
+    pack_path: Path = _PACKAGE_PACK,
+    kg_path: Path = _PACKAGE_KG,
+) -> tuple[int, int, int, str]:
+    pack, svc, strong, regions = critique_pack.load_all(pack_path, kg_path)
     games = list(critique_pack.GAME_KINDS)
     items, pack_findings, selected = critique_pack.run(
         pack,
@@ -426,7 +427,7 @@ def test_v33_replay_is_rejected_without_mutating_transaction_files():
     assert {path: path.read_bytes() for path in APPLIER.TRANSACTION_FILES} == before
 
 
-def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
+def test_v33_keeps_curated_pack_and_historical_critique_reports_stable(tmp_path: Path):
     package_blob = _PACKAGE_PACK.read_bytes()
     pack = _pack()
     statuses = Counter(
@@ -443,7 +444,8 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         for game in ("conexiuni", "contexto", "lant", "alchimie")
     } == CURRENT_CONTENT.pack_counts
     # ADR-0068 promotes two bound Contexto targets; V47 promotes one more; V48 promotes
-    # one Alchimie board, archives 17 rejects, and retains three A5 holds.
+    # one Alchimie board, archives 17 rejects, and retains three A5 holds. V1
+    # independently promotes LT211, leaving the other two Lanț holds pending.
     assert statuses == CURRENT_CONTENT.status_counts
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     v48_audit = json.loads(_V48_AUDIT.read_text(encoding="utf-8"))
@@ -479,18 +481,42 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         "cx_societate_294",
         "cx_societate_295",
     } | _V48_REVIEW_ITEM_IDS
-    pending_review_ids = set(DATA.REVIEW_ITEM_IDS) - resolved_review_ids
+    historical_pending_ids = set(DATA.REVIEW_ITEM_IDS) - resolved_review_ids
+    assert historical_pending_ids == {
+        "lt_literatura_210", "lt_stiinta_216", "lt_viata_de_roman_211",
+    }
+    pending_review_ids = historical_pending_ids - {"lt_viata_de_roman_211"}
+    assert {
+        record["id"] for record in pack["lant"] if record["status"] == "pending"
+    } == pending_review_ids
     assert _critique_report(pending_review_ids) == (
-        3,
+        2,
         0,
         0,
         _EXACT_REVIEW_REPORT_SHA256,
     )
     assert _critique_report(None) == (
-        8,
+        7,
         0,
         81,
         _FULL_PENDING_REPORT_SHA256,
+    )
+
+    # Preserve the original three-hold and eight-pending report pins on their
+    # exact pre-V1 pack and graph, rather than changing historical evidence.
+    historical_paths = []
+    for filename, current in (("games_pack.json", pack), ("kg_sample.json", _fixture())):
+        path = tmp_path / filename
+        path.write_text(
+            json.dumps(before_v1_artifact(current, filename), ensure_ascii=False),
+            encoding="utf-8",
+        )
+        historical_paths.append(path)
+    assert _critique_report(historical_pending_ids, *historical_paths) == (
+        3, 0, 0, _EXACT_REVIEW_REPORT_SHA256,
+    )
+    assert _critique_report(None, *historical_paths) == (
+        8, 0, 81, _FULL_PENDING_REPORT_SHA256,
     )
 
 

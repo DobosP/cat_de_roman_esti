@@ -35,7 +35,22 @@ def test_v99_installs_only_independently_reviewed_additions():
     assert len(previous) == 113
     assert all(REVIEWED_CAPTIONS[pair] == value for pair, value in previous.items())
     expected = {tuple(row["pair"]): row for row in ROWS}
-    assert set(REVIEWED_CAPTIONS) - set(previous) == set(expected)
+    # V99's exact four-addition claim binds its complete pre-V1 registry.
+    historical = (
+        ROOT / "docs/reviews/v1-testing-release/content/baseline_lant_relations.py.txt"
+    ).read_bytes()
+    assert hashlib.sha256(historical).hexdigest() == (
+        "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81"
+    )
+    historical_registry = next(n.value.args[0] for n in ast.parse(historical).body
+                               if isinstance(n, ast.Assign) and any(
+                                   isinstance(t, ast.Name) and t.id == "REVIEWED_CAPTIONS"
+                                   for t in n.targets))
+    after_v99 = ast.literal_eval(historical_registry)
+    assert len(after_v99) == 117
+    assert all(after_v99[pair] == value for pair, value in previous.items())
+    assert set(after_v99) - set(previous) == set(expected)
+    assert all(REVIEWED_CAPTIONS[pair] == value for pair, value in after_v99.items())
     identities = set()
     for role in ("factual", "quality"):
         review = json.loads((REVIEW / f"{role}-review.json").read_bytes())

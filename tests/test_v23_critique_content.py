@@ -76,6 +76,7 @@ def test_v23_items_reflect_the_later_bound_content_gates():
         "ct_literatura_298",
         "ct_viata_de_roman_299",
         "al_literatura_097",
+        "lt_viata_de_roman_211",  # V1: independently reviewed beginner-route promotion.
     }
     assert {
         item_id for item_id, item in records.items() if item["status"] == "approved"

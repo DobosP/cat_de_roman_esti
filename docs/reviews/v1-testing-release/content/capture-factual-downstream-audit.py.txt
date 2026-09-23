@@ -1,0 +1,350 @@
+"""Bounded independent runtime graph-impact comparison, no served-file writes."""
+import copy
+import gzip
+import hashlib
+import itertools
+import json
+import os
+import sys
+import time
+import subprocess
+import tempfile
+from collections import Counter, deque
+from functools import lru_cache
+from pathlib import Path
+from unittest.mock import patch
+
+ROOT = Path.cwd()
+SCRATCH = Path(r'C:\Users\Paul Work\work\_temp\v1-testing-release')
+OUT = ROOT / 'docs/reviews/v1-testing-release/content'
+sys.path.insert(0, str(ROOT))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from cat_de_roman_esti.graph import Graph
+from cat_de_roman_esti.wordgames.service import WordGameService
+from cat_de_roman_esti.wordgames import alchimie as A, contexto as C, lant as L, packs as P
+from cat_de_roman_esti.wordgames import discovery_world as D, recipe_extensions as R
+from scripts.audit_alchimie_discovery_world import audit as world_audit
+from scripts import build_derived_catalog_v38 as B
+
+started = time.monotonic()
+def digest(value):
+    if not isinstance(value, bytes):
+        value = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()
+    return hashlib.sha256(value).hexdigest()
+def archive(name):
+    return gzip.decompress((OUT / name).read_bytes())
+def write(name, value):
+    (OUT / name).write_bytes((json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode())
+def progress(label):
+    print(f'{label}: {time.monotonic()-started:.2f}s', flush=True)
+base_blob = archive('kg-before-v1.json.gz')
+candidate_path = SCRATCH / 'v1-reviewed-kg-candidate.json'
+if not candidate_path.exists():
+    candidate_path = ROOT / 'cat_de_roman_esti/fixtures/kg_sample.json'
+new_blob = candidate_path.read_bytes()
+assert digest(base_blob) == 'd4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109'
+assert digest(new_blob) == '1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64'
+base, new = json.loads(base_blob), json.loads(new_blob)
+pack_blob = archive('games_pack.json.before-v1.gz')
+pack = json.loads(pack_blob)
+rank_blob = archive('board_rankings_v37.json.before-v1.gz')
+ranks = {r['id']: r for r in json.loads(rank_blob)['boards']}
+quick_blobs = {name: archive(name+'.before-v1.gz') for name in ('derived_catalog_v38.json', 'quick_games_v92.json')}
+quick = [row for blob in quick_blobs.values() for row in json.loads(blob)['boards']]
+# Immutable baseline catalogs keep reruns independent of subsequent snapshot refreshes.
+BASELINE_COMMIT = 'cc0a6a490f4a37f6f94b59cf9a84eb760cb3a401'
+isolated_catalogs = tempfile.TemporaryDirectory(prefix='v1-downstream-catalogs-')
+def baseline_catalog(name):
+    blob = subprocess.run(['git', '-c', 'core.autocrlf=false', 'show',
+        f'{BASELINE_COMMIT}:cat_de_roman_esti/fixtures/{name}'], cwd=ROOT,
+        check=True, capture_output=True).stdout
+    path = Path(isolated_catalogs.name) / name
+    path.write_bytes(blob)
+    return path, blob
+world_path, world_blob = baseline_catalog('alchimie_discovery_world_v92.json')
+ext_path, ext_blob = baseline_catalog('alchimie_recipe_extensions_v92.json')
+R.CATALOG_PATH = ext_path
+extension = json.loads(ext_blob)
+
+def service(raw):
+    s = WordGameService(Graph.from_records(raw['kg_nodes'], raw['kg_edges']))
+    s.link = lru_cache(maxsize=20000)(s.link)
+    s.neighbor_ids = lru_cache(maxsize=3000)(s.neighbor_ids)
+    s.distances_to = lru_cache(maxsize=512)(s.distances_to)
+    s.weighted_distances_to = lru_cache(maxsize=300)(s.weighted_distances_to)
+    s.distances_from = lru_cache(maxsize=160)(s.distances_from)
+    return s
+svcs = [service(base), service(new)]
+control = copy.deepcopy(base)
+control['kg_edges'] = [e for e in control['kg_edges'] if e['id'] != 'de427']
+cs = service(control)
+assert cs._adj == svcs[1]._adj and cs._fwd_cost == svcs[1]._fwd_cost
+assert set(svcs[0].all_ids()) == set(svcs[1].all_ids())
+node_ids = svcs[0].all_ids()
+removed = next(e for e in base['kg_edges'] if e['id'] == 'de427')
+endpoints = {removed['src_id'], removed['dst_id']}
+progress('isolated services ready')
+
+cald = []
+for rec in pack['contexto']:
+    target = rec['target']
+    profiles = []
+    for svc in svcs:
+        with patch.object(C, 'get_service', new=lambda: svc):
+            session = C._build_session(target, rec['difficulty'], None)
+        hops = svc.distances_to(target)
+        weights = svc.weighted_distances_to(target)
+        feedback = {}
+        for nid in node_ids:
+            score = C._score_feedback(svc, session, nid, distances=hops)
+            feedback[nid] = (score.rank,
+                C.temperature_for(session, score.feedback_distance, score.weighted_distance, rank_override=score.rank),
+                C.closeness_for(session, score.feedback_distance, score.weighted_distance, rank_override=score.rank))
+        profiles.append((hops, weights, feedback))
+    h0,w0,f0 = profiles[0]; h1,w1,f1 = profiles[1]
+    dh = [n for n in node_ids if h0.get(n) != h1.get(n)]
+    dw = [n for n in node_ids if abs(w0.get(n, 1e9)-w1.get(n, 1e9)) > 1e-12]
+    df = [n for n in node_ids if f0[n] != f1[n]]
+    row = {'id':rec['id'],'target':target,'status':rec['status'],
+           'hop_changes':len(dh),'weighted_changes':len(dw),'feedback_changes':len(df),
+           'rank_changes':sum(f0[n][0]!=f1[n][0] for n in node_ids),
+           'temperature_changes':sum(f0[n][1]!=f1[n][1] for n in node_ids),
+           'closeness_changes':sum(f0[n][2]!=f1[n][2] for n in node_ids),
+           'reachable_before':len(h0),'reachable_after':len(h1),
+           'responsive_before':sum(1<=d<=5 for d in h0.values()),
+           'responsive_after':sum(1<=d<=5 for d in h1.values()),
+           'incoming_before':len(svcs[0]._rev_adj[target]),'incoming_after':len(svcs[1]._rev_adj[target]),
+           'baseline_errors':P.validate_payload(rec,'contexto',svcs[0]),
+           'candidate_errors':P.validate_payload(rec,'contexto',svcs[1])}
+    if df or dh or dw:
+        row['samples'] = [{'guess':n,'hop_before':h0.get(n),'hop_after':h1.get(n),
+                          'weighted_before':w0.get(n),'weighted_after':w1.get(n),
+                          'feedback_before':f0[n],'feedback_after':f1[n]}
+                         for n in sorted(set(dh+dw+df),key=lambda n:(n not in endpoints,n))[:4]]
+    cald.append(row)
+progress('all Cald targets and native guess feedback compared')
+
+# A structural shortest-path DAG and par+2 corridor capture every eligible route node/edge.
+# Menus are compared at the start and for one deterministic shortest prefix to each corridor node.
+def bfs_chains(svc, start):
+    parents={start:None}; queue=deque([start])
+    while queue:
+        cur=queue.popleft()
+        for nxt in sorted(svc._adj[cur]):
+            if nxt not in parents: parents[nxt]=cur; queue.append(nxt)
+    chains={}
+    for nid in parents:
+        path=[]; cur=nid
+        while cur is not None: path.append(cur); cur=parents[cur]
+        chains[nid]=list(reversed(path))
+    return chains
+
+def lant_profile(svc, rec):
+    start,target=rec['start'],rec['target']
+    forward=svc.distances_from(start); reverse=svc.distances_to(target)
+    optimal=reverse.get(start)
+    strict={n for n,d in forward.items() if n in reverse and d+reverse[n]==optimal}
+    corridor={n for n,d in forward.items() if n in reverse and d+reverse[n]<=optimal+2}
+    edges={(a,b) for a in strict for b in svc._adj[a] if b in strict and forward[a]+1==forward[b]}
+    chains=bfs_chains(svc,start)
+    menus={}
+    with patch.object(L,'get_service',new=lambda: svc):
+        for n in sorted(corridor-{target}):
+            session=L.LantSession(start,target,optimal,rec['difficulty'],chain=chains[n],category=rec['category'],pack_id=rec['id'])
+            menus[n]={'chain':chains[n],'nodes':L._visible_choice_nodes(session),'choices':L._visible_choices(session)}
+        profiles=L._compute_route_profiles(svc,start,target,optimal,slack=2)
+    return {'optimal':optimal,'strict':strict,'corridor':corridor,'edges':edges,'menus':menus,
+            'profiles':profiles,'errors':P.validate_payload(rec,'lant',svc)}
+
+lant=[]
+for rec in pack['lant']:
+    a,b=[lant_profile(s,rec) for s in svcs]
+    keys=set(a['menus'])|set(b['menus'])
+    changed=[n for n in sorted(keys) if a['menus'].get(n)!=b['menus'].get(n)]
+    removed_hops=sorted(a['edges']-b['edges'])
+    item={'id':rec['id'],'status':rec['status'],'optimal_before':a['optimal'],'optimal_after':b['optimal'],
+          'profiles_before':a['profiles'],'profiles_after':b['profiles'],
+          'strict_nodes_before':len(a['strict']),'strict_nodes_after':len(b['strict']),
+          'strict_edges_before':len(a['edges']),'strict_edges_after':len(b['edges']),
+          'strict_removed_edges':removed_hops,'strict_added_edges':sorted(b['edges']-a['edges']),
+          'corridor_nodes_before':len(a['corridor']),'corridor_nodes_after':len(b['corridor']),
+          'menu_states_compared':len(keys),'changed_menu_states':len(changed),
+          'opening_menu_changed':rec['start'] in changed,
+          'removed_edge_on_shortest_route':any(set(pair)==endpoints for pair in a['edges']),
+          'baseline_errors':a['errors'],'candidate_errors':b['errors']}
+    if changed:
+        item['menu_samples']=[{'current':n,'before':a['menus'].get(n),'after':b['menus'].get(n)} for n in changed[:3]]
+    lant.append(item)
+progress('all Lant structural routes and bounded corridor menus compared')
+
+alchimie=[]
+for rec in pack['alchimie']:
+    if rec['status']!='approved':continue
+    variants=[]
+    for svc in svcs:
+        with patch.object(A,'get_service',new=lambda: svc):
+            core=A._build_recipe_projection(rec['seeds'],rec['target'],rec['category'])
+            playable=A._build_playable_recipe_projection(rec['seeds'],rec['target'],rec['category'])
+        assert core is not None and playable is not None
+        structural=lambda p:R.core_record(rec['seeds'],rec['target'],rec['category'],p.recipes,p.routes,p.par)
+        openings=[pair for pair,results in playable.recipes.items() if set(pair)<=set(rec['seeds']) and set(results)-set(rec['seeds'])]
+        dependencies=[]
+        for pair,results in playable.recipes.items():
+            for result in results:
+                for parent in pair:
+                    edge=svc.link(parent,result)
+                    if edge and edge.id=='de427':dependencies.append({'pair':list(pair),'result':result})
+        variants.append({'core':structural(core),'playable':structural(playable),'openings':openings,
+                         'dependencies':dependencies,'errors':P.validate_payload(rec,'alchimie',svc)})
+    a,b=variants
+    ar={tuple(r['pair']):r['results'] for r in a['playable']['recipes']}
+    br={tuple(r['pair']):r['results'] for r in b['playable']['recipes']}
+    lost=[{'pair':list(p),'results':ar[p]} for p in sorted(ar) if br.get(p)!=ar[p]]
+    gained=[{'pair':list(p),'results':br[p]} for p in sorted(br) if ar.get(p)!=br[p]]
+    alchimie.append({'id':rec['id'],'eligible_before':ranks[rec['id']]['pilot_eligible'],
+                    'core_unchanged':a['core']==b['core'],'playable_unchanged':a['playable']==b['playable'],
+                    'core_before_sha256':digest(a['core']),'core_after_sha256':digest(b['core']),
+                    'playable_before_sha256':digest(a['playable']),'playable_after_sha256':digest(b['playable']),
+                    'par_before':a['playable']['par'],'par_after':b['playable']['par'],
+                    'opening_pairs_before':len(a['openings']),'opening_pairs_after':len(b['openings']),
+                    'recipe_pairs_before':len(ar),'recipe_pairs_after':len(br),
+                    'lost_recipes':lost,'gained_recipes':gained,'removed_edge_dependencies':a['dependencies'],
+                    'baseline_errors':a['errors'],'candidate_errors':b['errors']})
+progress('all approved challenge core/playable projections compared')
+
+extension_mismatch=[]
+for board in extension['boards']:
+    bad_nodes=[];bad_edges=[]
+    for nid,snapshot in board['nodes'].items():
+        assert R.record_snapshot(svcs[0].node(nid))==snapshot
+        if R.record_snapshot(svcs[1].node(nid))!=snapshot:
+            bad_nodes.append({'id':nid,'fields':sorted(k for k in snapshot if snapshot[k]!=R.record_snapshot(svcs[1].node(nid))[k])})
+    for eid,snapshot in board['edges'].items():
+        old=svcs[0].link(snapshot['src_id'],snapshot['dst_id']); assert R.record_snapshot(old)==snapshot
+        current=svcs[1].link(snapshot['src_id'],snapshot['dst_id'])
+        if current is None or R.record_snapshot(current)!=snapshot:
+            bad_edges.append({'id':eid,'fields':sorted(k for k in snapshot if current is None or snapshot[k]!=R.record_snapshot(current)[k])})
+    if bad_nodes or bad_edges:extension_mismatch.append({'id':board['id'],'nodes':bad_nodes,'edges':bad_edges,'lost_additions':board['additions']})
+
+strengths=[]
+for kg in (base,new):
+    strength={}
+    for e in kg['kg_edges']:
+        if not e.get('is_distractor'):
+            pair=frozenset((e['src_id'],e['dst_id'])); strength[pair]=max(strength.get(pair,0),e['strength'])
+    strengths.append(strength)
+quick_rows=[]
+for rec in quick:
+    p=rec['payload'];game=rec['game']
+    ids=([*p['members'],p['intruder']] if game=='intrusul' else [n for pair in p['pairs'] for n in pair['members']])
+    outcomes=[]
+    for svc,strength in zip(svcs,strengths):
+        errors=[]
+        if len(ids)!=len(set(ids)):errors.append('duplicate visible ID')
+        if any(not svc.exists(n) for n in ids):errors.append('unknown visible ID')
+        if game=='intrusul':
+            if len({svc.node(n).node_type for n in ids})!=1:errors.append('node-type shortcut')
+            if sum(strength.get(frozenset(x),0)>=.6 for x in itertools.combinations(p['members'],2))<2:errors.append('weak trio')
+            if any(strength.get(frozenset((n,p['intruder'])),0)>0 for n in p['members']):errors.append('intruder graph link')
+        else:
+            pairs={frozenset(x['members']) for x in p['pairs']}
+            if any(strength.get(x,0)<.6 for x in pairs):errors.append('weak intended pair')
+            if any(strength.get(frozenset(x),0)>=.6 for x in itertools.combinations(ids,2) if frozenset(x) not in pairs):errors.append('strong competing pair')
+        outcomes.append(errors)
+    changes=[list(x) for x in itertools.combinations(ids,2) if strengths[0].get(frozenset(x),0)!=strengths[1].get(frozenset(x),0)]
+    quick_rows.append({'id':rec['id'],'game':game,'baseline_errors':outcomes[0],'candidate_errors':outcomes[1],
+                       'changed_visible_strength_pairs':changes,'contains_removed_endpoints':endpoints<=set(ids)})
+# Independently regenerate the frozen 336-board derived inventory with both graphs.
+records=[r for r in pack['conexiuni'] if r['id'] in B._V38_SOURCE_SNAPSHOT]
+derived=[]
+for kg,svc in zip((base,new),svcs):
+    strengths,linked=B._edge_maps(kg)
+    intrusul=B._intrusul_candidates(records,svc,strengths,linked)
+    perechi=B._perechi_candidates(records,svc,strengths)
+    derived.append({'raw_intrusul':len(intrusul),'raw_perechi':len(perechi),
+                    'boards':B._rank_and_cap([*intrusul,*perechi])})
+assert derived[0]==derived[1]
+
+progress('quick strength gates and extension snapshots compared')
+
+world_results=[]
+for svc in svcs:
+    with patch.object(D,'get_service',new=lambda: svc):
+        world_results.append(world_audit(world_path))
+assert world_results[0]==world_results[1]
+world=world_results[1]
+conexiuni=[]
+for rec in pack['conexiuni']:
+    a,b=[P.validate_payload(rec,'conexiuni',s) for s in svcs]
+    conexiuni.append({'id':rec['id'],'status':rec['status'],'baseline_errors':a,'candidate_errors':b})
+progress('world every recipe/goal/save prefix and Conexiuni payloads checked')
+
+changed_cald=[r for r in cald if r['hop_changes'] or r['weighted_changes'] or r['feedback_changes']]
+changed_lant=[r for r in lant if r['optimal_before']!=r['optimal_after'] or r['profiles_before']!=r['profiles_after'] or r['changed_menu_states']]
+changed_al=[r for r in alchimie if not r['playable_unchanged']]
+new_e2=[r['id'] for r in alchimie if r['opening_pairs_before']>=A.MIN_OPENING_PAIRS and r['opening_pairs_after']<A.MIN_OPENING_PAIRS]
+result={'kind':'v1-factual-downstream-audit-v1','auditor':'/root/v1_ux_audit','checked_on':'2026-09-23',
+    'status':'hold_for_recipe_snapshot_carry_forward' if extension_mismatch else 'accept_graph_impact',
+    'inputs':{'baseline_kg_sha256':digest(base_blob),'candidate_kg_sha256':digest(new_blob),
+              'pack_sha256':digest(pack_blob),'rankings_sha256':digest(rank_blob),
+              'quick_sha256':{k:digest(v) for k,v in quick_blobs.items()},
+              'world_sha256':digest(world_blob),'recipe_extensions_sha256':digest(ext_blob)},
+    'runtime_sources':{p:digest((ROOT/p).read_bytes()) for p in [
+        'cat_de_roman_esti/wordgames/service.py','cat_de_roman_esti/wordgames/contexto.py',
+        'cat_de_roman_esti/wordgames/lant.py','cat_de_roman_esti/wordgames/lant_relations.py',
+        'cat_de_roman_esti/wordgames/alchimie.py','cat_de_roman_esti/wordgames/recipe_extensions.py',
+        'cat_de_roman_esti/wordgames/discovery_world.py','scripts/audit_alchimie_discovery_world.py']},
+    'attribution':{'only_topology_change':'remove false bidirectional casting edge de427',
+                   'counterfactual':'Baseline minus de427 has exactly candidate traversal adjacency and weighted costs; other six edits are metadata only.',
+                   'removed_edge':removed,'all_nodes_and_aliases_preserved':True,
+                   'interpretation':'Cald rank shifts on unchanged raw distances are distribution effects of the removed edge, not unrelated topology changes.'},
+    'summary':{'cald_targets':len(cald),'native_guesses_per_target':len(node_ids),'changed_cald_profiles':len(changed_cald),
+               'cald_hop_changes':sum(r['hop_changes'] for r in cald),'cald_weighted_changes':sum(r['weighted_changes'] for r in cald),
+               'cald_feedback_changes':sum(r['feedback_changes'] for r in cald),'cald_temperature_changes':sum(r['temperature_changes'] for r in cald),
+               'cald_reachability_changes':sum(r['reachable_before']!=r['reachable_after'] for r in cald),
+               'lant_boards':len(lant),'changed_lant_profiles_or_menus':len(changed_lant),
+               'lant_optimal_changes':sum(r['optimal_before']!=r['optimal_after'] for r in lant),
+               'lant_opening_menu_changes':sum(r['opening_menu_changed'] for r in lant),
+               'lant_menu_states':sum(r['menu_states_compared'] for r in lant),
+               'approved_alchimie':len(alchimie),'changed_alchimie_cores':sum(not r['core_unchanged'] for r in alchimie),
+               'changed_alchimie_playable_books':len(changed_al),'new_alchimie_e2_failures':new_e2,
+               'lost_extension_additions':sum(len(r['lost_additions']) for r in extension_mismatch),
+               'quick_boards':len(quick_rows),'quick_payload_strength_failures':sum(bool(r['candidate_errors']) for r in quick_rows),
+               'quick_strength_changed_boards':sum(bool(r['changed_visible_strength_pairs']) for r in quick_rows),
+               'world_exact_replay_unchanged':True,'conexiuni_boards':len(conexiuni),
+               'new_pack_payload_failures':sum(bool(set(r['candidate_errors'])-set(r['baseline_errors'])) for r in cald+lant+alchimie+conexiuni)},
+    'cald':{'changed_targets':changed_cald,'unchanged_target_ids':[r['id'] for r in cald if r not in changed_cald],
+            'incoming_below_five':[r['id'] for r in cald if r['incoming_after']<5]},
+    'lant':{'changed_boards':changed_lant,'unchanged_ids':[r['id'] for r in lant if r not in changed_lant],
+            'removed_edge_shortest_route_boards':[r['id'] for r in lant if r['removed_edge_on_shortest_route']]},
+    'alchimie':{'items':alchimie,'snapshot_mismatches':extension_mismatch,
+                'removed_edge_recipe_boards':[r['id'] for r in alchimie if r['removed_edge_dependencies']]},
+    'quick':{'by_game':dict(Counter(r['game'] for r in quick_rows)),
+             'failing_or_changed_boards':[r for r in quick_rows if r['baseline_errors'] or r['candidate_errors'] or r['changed_visible_strength_pairs']],
+             'removed_edge_visible_endpoint_boards':[r['id'] for r in quick_rows if r['contains_removed_endpoints']],
+             'payload_inventory_sha256':digest([{'id':r['id'],'payload':r['payload']} for r in quick]),
+             'frozen_regeneration':{'raw_intrusul_before_after':[x['raw_intrusul'] for x in derived],
+                                    'raw_perechi_before_after':[x['raw_perechi'] for x in derived],
+                                    'selected_before_after':[len(x['boards']) for x in derived],
+                                    'exact_board_rows_unchanged':derived[0]==derived[1]},
+             'binding_action':'Rebuild graph/pack/ranking digest bindings using existing generators; this audit does not install or reapprove boards.'},
+    'world':{'metrics':world['metrics'],'checks':world['checks'],'goal_replays':world['goal_replays'],
+             'compatible_save_replays':world['compatible_save_replays'],'full_audit_sha256':digest(world),
+             'all_recipe_rows_unchanged':world_results[0]['recipes']==world_results[1]['recipes']},
+    'conexiuni':{'new_payload_errors':[r for r in conexiuni if set(r['candidate_errors'])-set(r['baseline_errors'])]},
+    'required_actions':['Refresh the exact affected recipe extension snapshots through a supported reviewed generator; preserve core recipes, all addition identities, outputs, strengths, and recipe hashes.',
+                        'Rebuild required quick and ranked pack bindings after the integrated KG/selection work.'],
+    'limits':['Mechanical downstream comparison is not a new human fun/familiarity review.',
+              'Cald checks every KG-native guess and reviewed native proxy scorer; projection-only vocabulary is not separately enumerated.',
+              'Lant route DAG/corridor membership covers all shortest/par+2 structural routes. Menus use one deterministic shortest prefix per corridor node, not every cyclic player history.',
+              'Candidate does not include later recipe-snapshot refresh or selection/ranking changes. Those need separate exact review and integrated validation.',
+              'No source, served fixture, review approval, session store, or save limit was modified.'],
+    'elapsed_seconds':round(time.monotonic()-started,3)}
+assert len(cald)==265 and len(lant)==123 and len(alchimie)==80 and len(quick)==421
+assert world_path.read_bytes()==world_blob and ext_path.read_bytes()==ext_blob
+# Rerun output is scratch evidence; do not overwrite a completed durable review.
+(SCRATCH / 'factual-downstream-audit-rerun.json').write_bytes((json.dumps(result,ensure_ascii=False,indent=2)+'\n').encode())
+
+print(json.dumps(result['summary'],ensure_ascii=False),flush=True)

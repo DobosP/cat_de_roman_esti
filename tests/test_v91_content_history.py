@@ -11,8 +11,9 @@ from pathlib import Path
 
 import pytest
 
+from cat_de_roman_esti.graph import Graph
 from cat_de_roman_esti.wordgames import alchimie
-from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.service import WordGameService
 from tests.content_history import (
     before_v91_artifact,
     before_v92_artifact,
@@ -64,7 +65,7 @@ def test_exact_v90_artifact_inverse_rejects_unreviewed_changes(filename):
     restored_blob = (json.dumps(restored, ensure_ascii=False, indent=indent) + "\n").encode()
     assert hashlib.sha256(restored_blob).hexdigest() == BASELINE[filename]
     assert hashlib.sha256(blob).hexdigest() == CURRENT_CONTENT.artifact_sha256[
-        str(path.relative_to(ROOT))
+        path.relative_to(ROOT).as_posix()
     ]
     assert current == json.loads(blob)
     assert blob == (ROOT / "tests/fixtures" / filename).read_bytes()
@@ -100,12 +101,18 @@ def test_only_reviewed_sport_seeds_change_and_all_other660_records_remain_exact(
     assert current["meta"] == previous["meta"]
 
 
-def test_live83_recipe_books_match_exact_reviewed_candidate():
+def test_historical83_recipe_books_match_exact_reviewed_candidate(monkeypatch):
     expected = json.loads(gzip.decompress(
         (REVIEW / "content/all-83-books-candidate.json.gz").read_bytes(),
     ))
-    pack = read(ROOT / "cat_de_roman_esti/fixtures/games_pack.json")
-    svc = get_service()
+    pack = before_v92_artifact(
+        read(ROOT / "cat_de_roman_esti/fixtures/games_pack.json"), "games_pack.json",
+    )
+    kg = before_v92_artifact(
+        read(ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"), "kg_sample.json",
+    )
+    svc = WordGameService(Graph.from_records(kg["kg_nodes"], kg["kg_edges"]))
+    monkeypatch.setattr(alchimie, "get_service", lambda: svc)
 
     def recipe(step):
         pair, outputs = step

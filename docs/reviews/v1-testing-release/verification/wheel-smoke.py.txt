@@ -1,0 +1,48 @@
+from pathlib import Path
+import hashlib,json
+import django
+import cat_de_roman_esti as package
+installed=Path('wheel-install-release').resolve()
+assert Path(package.__file__).resolve().is_relative_to(installed)
+assert package.__version__=='1.0.0'
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames.packs import get_pack
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog
+from cat_de_roman_esti.wordgames.release_reserve import get_reserve
+client=Client()
+assert client.get('/api/health').status_code==200
+home=client.get('/')
+assert home.status_code==200
+html=b''.join(home.streaming_content) if home.streaming else home.content
+home.close()
+static=installed/'cat_de_roman_esti/web/static'
+manifest=json.loads((static/'.vite/manifest.json').read_bytes())
+entry=manifest['index.html']['file']
+assert entry in html.decode()
+asset=client.get('/'+entry)
+assert asset.status_code==200
+asset.close()
+rounds=[]
+for game in ('alchimie','intrusul','perechi','conexiuni','contexto','lant'):
+    response=client.post(f'/api/wordgames/{game}/games?seed=38&difficulty=usor')
+    assert response.status_code==200,(game,response.status_code)
+    state=response.json()
+    assert client.get(f'/api/wordgames/{game}/games/{state["game_id"]}').status_code==200
+    assert 'recipes' not in state and 'routes' not in state
+    rounds.append({'game':game,'created':True,'restored':True})
+pack=get_pack()
+counts={g:pack.selectable_count(g) for g in ('conexiuni','contexto','lant','alchimie')}
+assert counts=={'conexiuni':83,'contexto':255,'lant':121,'alchimie':68}
+quick=get_derived_catalog()
+quick_counts={g:len(quick.pool(g)) for g in ('intrusul','perechi')}
+assert quick_counts=={'intrusul':226,'perechi':192}
+reserve=get_reserve(); assert len(reserve.pack)==20 and len(reserve.quick)==3
+source=Path(r'C:\Users\Paul Work\work\_worktrees\cat_de_roman_esti\codex__v1-testing-release')
+expected={p.relative_to(source/'cat_de_roman_esti/web/static').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (source/'cat_de_roman_esti/web/static').rglob('*') if p.is_file()}
+actual={p.relative_to(static).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in static.rglob('*') if p.is_file()}
+assert actual==expected
+wheel=Path('wheels-release/cat_de_roman_esti-1.0.0-py3-none-any.whl')
+report={'kind':'v1-installed-wheel-smoke-v1','version':package.__version__,'package_loaded_from_isolated_install':True,'source_reviews_absent_from_install':not(installed/'docs/reviews').exists(),'wheel_sha256':hashlib.sha256(wheel.read_bytes()).hexdigest(),'wheel_bytes':wheel.stat().st_size,'static_files_match_source':len(actual),'entry':entry,'curated_counts':counts,'quick_selectable_counts':quick_counts,'games':rounds,'manifest_sha256':hashlib.sha256((static/'.vite/manifest.json').read_bytes()).hexdigest()}
+Path('wheel-smoke.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+print(json.dumps(report))

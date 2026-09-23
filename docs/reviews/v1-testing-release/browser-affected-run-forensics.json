@@ -1,0 +1,108 @@
+{
+  "kind": "v1-affected-browser-run-forensics-v1",
+  "valid_until": "The serial affected-scope rerun completes; then this document is historical failure evidence, not the current release gate.",
+  "author": "/root/v1_board_audit",
+  "method": "Read existing log, error contexts and trace archives only. No new runtime commands or tests; no app, fixture, static or test edits during this forensic capture.",
+  "evidence_root": "C:\\Users\\Paul Work\\work\\_temp\\v1-testing-release",
+  "run": {
+    "log": {
+      "path": "browser-parallel-scope.log",
+      "sha256": "f030578e5e9c677ae05c21aae85aa00c7c5e3d7a1d100b0f5430d6071df062ae",
+      "bytes": 43013,
+      "preservation": "Immutable copy of the failed136/6 run, saved before browser-final-scope.log was reused for the serial rerun."
+    },
+    "passed": 136,
+    "failed": 6,
+    "total": 142,
+    "duration": "9.0m",
+    "status": "Failed run retained; the serial all142 rerun is a separate release gate."
+  },
+  "traces": {
+    "empty_reply": {
+      "path": "browser-final-scope-results/alchimie-empty-pairs-lost--02bf6-ly-trusts-only-recovery-GET-desktop/trace.zip",
+      "sha256": "3466b6e73a38423d3a6da68c3e9f578a94a499ce55560d60211e949177b52459",
+      "bytes": 1496597
+    },
+    "desktop_caption": {
+      "path": "browser-final-scope-results/lant-relationship-captions-f7425-vive-earned-path-and-reload-desktop/trace.zip",
+      "sha256": "12520d826770d06d93837512459d81b99872385f9f22e0621379f8ce30efeca6",
+      "bytes": 2283225
+    },
+    "v96_begin": {
+      "path": "browser-final-scope-results/v96-input-and-focus-recove-187a4-ing-restores-activated-word-desktop/trace.zip",
+      "sha256": "f10d782f0bb1f5dd8e7de3e86c9a4dee339384631115bff5128a8a7cd6af8154",
+      "bytes": 505312
+    },
+    "closed_browser": {
+      "path": "browser-final-scope-results/lant-action-recovery-a-lat-e7948-r-clear-another-tab-s-round-mobile/trace.zip",
+      "sha256": "4cd0e811dbbd7615b184d41fb02c325ebc70354653f41bf7c79a238028360854",
+      "bytes": 16651
+    },
+    "mobile_caption": {
+      "path": "browser-final-scope-results/lant-relationship-captions-356ce-vive-earned-path-and-reload-mobile/trace.zip",
+      "sha256": "42864c8ff7dbf48322816bae906931bab2525ee594d495d2386ef74f70174e26",
+      "bytes": 16610
+    }
+  },
+  "findings": [
+    {
+      "case": "desktop lt_gastronomie_244 route1: meaningful choices survive earned path and reload",
+      "trace": "desktop_caption",
+      "observed": "Move and saved-path GET returned200. After page.reload, Lant, auth, scoreSync, saved-game hook, category/options chunks and fonts failed with net::ERR_INSUFFICIENT_RESOURCES; the accessible route-error recovery UI rendered. The missing .lant-current assertion failed while this UI was shown.",
+      "classification": "Confirmed browser resource failure during reload, not evidence of incorrect captions or lost server state.",
+      "action": "Rerun unchanged captions test serially; no app or caption patch justified."
+    },
+    {
+      "case": "mobile lt_literatura_240 route3: meaningful choices survive earned path and reload",
+      "trace": "mobile_caption",
+      "observed": "All test-body steps completed, including final earned-path focus/scroll and earned-captions attachment at377378.089ms. Context teardown started377386.598ms and timed out422393.840ms. Browser logs then show invalid IPC message and forced process termination.",
+      "classification": "Browser context teardown failure after successful assertions; no failed caption or gameplay assertion.",
+      "action": "Rerun unchanged test serially."
+    },
+    {
+      "case": "desktop a lost final craft restores collection focus when both inputs are depleted",
+      "trace": null,
+      "observed": "Log records test duration0ms and worker process exited unexpectedly (code=3221226505, signal=null), with no application assertion or native stack.",
+      "classification": "Worker process crash. Exact cause is unproven by this log; co-occurring resource failures do not establish a specific native cause.",
+      "action": "Rerun unchanged case serially; retain log as evidence."
+    },
+    {
+      "case": "desktop recovery of uncommitted crafting restores activated word",
+      "trace": "v96_begin",
+      "observed": "Timeout occurred inside begin(), waiting for initial exploration POST while the start-button input was stalled. Trace contains no exploration-create or combine request. The combine interception handler is registered only after begin() returns; it was never reached. Context teardown also timed out.",
+      "classification": "Startup/browser input stall before the recovery scenario, independently identified by held reviewer and confirmed from trace/source order. No evidence against focus recovery or the retained interceptor.",
+      "action": "Rerun unchanged V96 test serially; no recovery-source or V96 test patch justified."
+    },
+    {
+      "case": "mobile a late404 read cannot adopt or clear another tab's round",
+      "trace": "closed_browser",
+      "observed": "Both awaited response and click failed with Target page, context or browser has been closed; the load-current-game button had resolved and begun its click.",
+      "classification": "Browser/context closure; original ownership assertion was not reached. Exact closure cause is unproven.",
+      "action": "Rerun unchanged case serially."
+    },
+    {
+      "case": "desktop lost committed empty reply trusts only recovery GET",
+      "trace": "empty_reply",
+      "observed": "Injected server commit returned200; browser combine was aborted with net::ERR_FAILED. Immediate recovery GET began35288.452ms and remained without status/response until timeout. The earlier pair still used a final times:1 interceptor; this matches the previously reviewed harness race.",
+      "classification": "Remaining one-shot test-interception stall; no empty_pairs or selection assertion reached.",
+      "action": "Separately authorized extension retains interception, explicitly aborts only first POST, and asserts commit200 plus exactly1POST/1GET. Original empty_pairs/partner-marker assertions and timeout are preserved. No app change. See recovery-harness-review.json and independent harness review."
+    }
+  ],
+  "limits": [
+    "This failed run is not a green release gate. All142 affected cases still require the serial rerun.",
+    "Existing evidence distinguishes confirmed resource errors from unproven native crash causes; no speculative production patch or timeout relaxation is proposed."
+  ],
+  "capture_bindings": {
+    "frontend\\e2e\\alchimie-empty-pairs.spec.mjs": "a8b4d3214a1c605258fb079c2e401307cee922063b27ffced4568abbe7bdf306",
+    "frontend\\e2e\\v96-input-and-focus.spec.mjs": "8c94e95b8f894894f9f955d6e9c6bce7d9f408dceeacf2fb130232b128e0da22",
+    "frontend\\e2e\\lant-relationship-captions.spec.mjs": "90ae1ad4a76612f261939bf84f9afa4531fc537cdeccb24c0a5f11a41e1f342b",
+    "frontend\\e2e\\lant-action-recovery.spec.mjs": "851978a536bbed5a504d4d148002ba8e437539ff30bf9164c745d33bae2ed3e9",
+    "cat_de_roman_esti\\web\\static\\.vite\\manifest.json": "732a064089604de84f9b238f540c6e4ebaee0cf795812bbcfe4f6fd2c4e4ee3d"
+  },
+  "harness_evidence": {
+    "path": "recovery-harness-review.json",
+    "sha256": "ed8e8d8f4b0d5e7abc7aea6823ec02c50691e164a9bde33f4734e54523c4f8c5",
+    "note": "Updated after the failed run for the separately authorized two-case extension; run source before extension is preserved as recovery-harness-before-extension-alchimie-empty-pairs.spec.mjs."
+  },
+  "source_mutation": "None in this forensic capture; capture bindings verified unchanged before and after writing this JSON."
+}

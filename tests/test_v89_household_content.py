@@ -61,7 +61,7 @@ def test_complete_v88_artifacts_reconstruct_and_reject_any_unreviewed_change(fil
     )
     assert current == json.loads(blob), "history restoration must not mutate current content"
     assert blob == (ROOT / "tests/fixtures" / filename).read_bytes()
-    assert _sha(blob) == CURRENT_CONTENT.artifact_sha256[str(path.relative_to(ROOT))]
+    assert _sha(blob) == CURRENT_CONTENT.artifact_sha256[path.relative_to(ROOT).as_posix()]
     receipt = _read(REVIEW / "artifact-delta.json")
     assert receipt["baseline_commit"] == "b614bfe735a27b9703025420daf603118f6a7f74"
     assert receipt["files"][filename]["baseline_sha256"] == BASELINE[filename]

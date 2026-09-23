@@ -1,0 +1,292 @@
+{
+  "id": "al_istorie_035",
+  "game": "alchimie",
+  "category": "istorie",
+  "difficulty": "usor",
+  "status": "approved",
+  "record_sha256": "7966c39af40aa5d516893b740397e8e41e6521ff9f58a49b9887cfbe97842bce",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Constantin Brâncoveanu salience 0.29 < 0.60 (usor floor)"
+    }
+  ],
+  "target": {
+    "id": "n_istx_constantin_brancoveanu",
+    "label": "Constantin Brâncoveanu",
+    "node_type": "person",
+    "category": "istorie",
+    "salience": 0.2866,
+    "degree": 7,
+    "incoming_degree": 7,
+    "description": "Domn al Țării Românești între 1688 și 1714, asociat cu stilul brâncovenesc și martiriul de la Istanbul."
+  },
+  "seeds": [
+    {
+      "id": "n_v2ist_capitala_istorica",
+      "label": "Capitală istorică",
+      "node_type": "concept",
+      "category": "istorie",
+      "salience": 0.2213,
+      "degree": 4,
+      "incoming_degree": 4,
+      "description": "Oraș cu rol politic major într-o epocă istorică."
+    },
+    {
+      "id": "n_iancu_de_hunedoara",
+      "label": "Iancu de Hunedoara",
+      "node_type": "person",
+      "category": "istorie",
+      "salience": 0.2436,
+      "degree": 6,
+      "incoming_degree": 6,
+      "description": "Voievod al Transilvaniei si comandant militar, aparator antiotoman in sec. al XV-lea."
+    },
+    {
+      "id": "n_vlad_tepes",
+      "label": "Vlad Țepeș",
+      "node_type": "person",
+      "category": "istorie",
+      "salience": 0.5744,
+      "degree": 13,
+      "incoming_degree": 13,
+      "description": "Domnitor al Tarii Romanesti, cunoscut pentru lupta cu otomanii."
+    },
+    {
+      "id": "n_istx_batalia_calugareni",
+      "label": "Bătălia de la Călugăreni",
+      "node_type": "event",
+      "category": "istorie",
+      "salience": 0.1712,
+      "degree": 4,
+      "incoming_degree": 4,
+      "description": "Confruntare din 1595 între Mihai Viteazul și otomani, reper al campaniei antiotomane."
+    },
+    {
+      "id": "n_principatele_unite",
+      "label": "Principatele Unite",
+      "node_type": "org",
+      "category": "istorie",
+      "salience": 0.37,
+      "degree": 8,
+      "incoming_degree": 8,
+      "description": "Statul format in 1859 prin unirea Moldovei cu Tara Romaneasca sub Alexandru Ioan Cuza."
+    },
+    {
+      "id": "n_razboiul_independenta_1877",
+      "label": "Războiul de Independență 1877",
+      "node_type": "event",
+      "category": "istorie",
+      "salience": 0.2886,
+      "degree": 9,
+      "incoming_degree": 10,
+      "description": "Razboiul prin care Romania si-a castigat independenta."
+    }
+  ],
+  "target_depth": 2,
+  "craft_profile": {
+    "opening_pairs": 9,
+    "closure_size": 145,
+    "target_generation": 2
+  },
+  "productive_openings": [
+    {
+      "pair": [
+        {
+          "id": "n_iancu_de_hunedoara",
+          "label": "Iancu de Hunedoara"
+        },
+        {
+          "id": "n_vlad_tepes",
+          "label": "Vlad Țepeș"
+        }
+      ],
+      "result_count": 4,
+      "results": [
+        {
+          "id": "n_v2ist_domnitor",
+          "label": "Domnitor"
+        },
+        {
+          "id": "n_imperiul_otoman",
+          "label": "Imperiul Otoman"
+        },
+        {
+          "id": "n_v4ist_castel",
+          "label": "Castel"
+        },
+        {
+          "id": "n_evul_mediu_romanesc",
+          "label": "Evul Mediu românesc"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_istx_batalia_calugareni",
+          "label": "Bătălia de la Călugăreni"
+        },
+        {
+          "id": "n_vlad_tepes",
+          "label": "Vlad Țepeș"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_tara_romaneasca",
+          "label": "Țara Românească"
+        },
+        {
+          "id": "n_imperiul_otoman",
+          "label": "Imperiul Otoman"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_iancu_de_hunedoara",
+          "label": "Iancu de Hunedoara"
+        },
+        {
+          "id": "n_istx_batalia_calugareni",
+          "label": "Bătălia de la Călugăreni"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_imperiul_otoman",
+          "label": "Imperiul Otoman"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_iancu_de_hunedoara",
+          "label": "Iancu de Hunedoara"
+        },
+        {
+          "id": "n_razboiul_independenta_1877",
+          "label": "Războiul de Independență 1877"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_imperiul_otoman",
+          "label": "Imperiul Otoman"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_istx_batalia_calugareni",
+          "label": "Bătălia de la Călugăreni"
+        },
+        {
+          "id": "n_principatele_unite",
+          "label": "Principatele Unite"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_tara_romaneasca",
+          "label": "Țara Românească"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_istx_batalia_calugareni",
+          "label": "Bătălia de la Călugăreni"
+        },
+        {
+          "id": "n_razboiul_independenta_1877",
+          "label": "Războiul de Independență 1877"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_imperiul_otoman",
+          "label": "Imperiul Otoman"
+        }
+      ]
+    }
+  ],
+  "minimum_action_recipe": [
+    {
+      "pair": [
+        {
+          "id": "n_iancu_de_hunedoara",
+          "label": "Iancu de Hunedoara"
+        },
+        {
+          "id": "n_vlad_tepes",
+          "label": "Vlad Țepeș"
+        }
+      ],
+      "result_count": 4,
+      "results": [
+        {
+          "id": "n_imperiul_otoman",
+          "label": "Imperiul Otoman"
+        },
+        {
+          "id": "n_v2ist_domnitor",
+          "label": "Domnitor"
+        },
+        {
+          "id": "n_v4ist_castel",
+          "label": "Castel"
+        },
+        {
+          "id": "n_evul_mediu_romanesc",
+          "label": "Evul Mediu românesc"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_imperiul_otoman",
+          "label": "Imperiul Otoman"
+        },
+        {
+          "id": "n_v2ist_domnitor",
+          "label": "Domnitor"
+        }
+      ],
+      "result_count": 4,
+      "results": [
+        {
+          "id": "n_istx_constantin_brancoveanu",
+          "label": "Constantin Brâncoveanu"
+        },
+        {
+          "id": "n_stefan_cel_mare",
+          "label": "Ștefan cel Mare"
+        },
+        {
+          "id": "n_mircea_cel_batran",
+          "label": "Mircea cel Bătrân"
+        },
+        {
+          "id": "n_istx_petru_rares",
+          "label": "Petru Rareș"
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:5b27b161d0763a7a6db0606ea9a17216af4d39bc5a2c4715fb7eba39d3f8c563"
+}

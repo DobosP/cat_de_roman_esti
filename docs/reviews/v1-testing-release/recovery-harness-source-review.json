@@ -1,0 +1,88 @@
+{
+  "archive_metadata": {
+    "extension_before_source": {
+      "path": "scratch/recovery-harness-before-extension-alchimie-empty-pairs.spec.mjs",
+      "sha256": "3968b19c4d4a405f8e241295ca52283ea9edc0546defe82c4f1b4d634b3a376d"
+    },
+    "previous_author_evidence": {
+      "path": "scratch/recovery-harness-review.before-extension.json",
+      "sha256": "ddc396a41b675d14ab24ea8ef08936d4ed41151faf3724a8c8bf3f29c0323225",
+      "status": "Historical author packet bound by previous independent review."
+    },
+    "previous_review": {
+      "path": "docs/reviews/v1-testing-release/recovery-harness-source-review.before-extension.json",
+      "sha256": "2f484121c3f1a6dccc4d6b4da23272b05c67b354e6945bad0cc7582215eb6345",
+      "status": "Historical six-case source review. Preserved byte-for-byte; its earlier source and evidence bindings are not current."
+    },
+    "valid_until": "The final affected browser matrix supersedes this source-only review runtime-pending status; bindings remain historical evidence for their exact bytes."
+  },
+  "author": "/root/v1_board_audit",
+  "author_evidence_sha256": "ed8e8d8f4b0d5e7abc7aea6823ec02c50691e164a9bde33f4734e54523c4f8c5",
+  "before_bindings": {
+    "frontend/e2e/alchimie-empty-pairs.spec.mjs": "d4c9a7cf24c9dab5dde105eebfdd39ae5a42f5725f6207732f2dacd31b1a7ab7",
+    "frontend/e2e/v96-input-and-focus.spec.mjs": "82a7c850e48b9b9b92370e6c30c7b9c3bbe0d229be59acad9852e8d73d0cbd3d"
+  },
+  "bindings": {
+    "frontend/e2e/alchimie-empty-pairs.spec.mjs": "a8b4d3214a1c605258fb079c2e401307cee922063b27ffced4568abbe7bdf306",
+    "frontend/e2e/v96-input-and-focus.spec.mjs": "8c94e95b8f894894f9f955d6e9c6bce7d9f408dceeacf2fb130232b128e0da22"
+  },
+  "independent_evidence": {
+    "affected_matrix_failure_classification": [
+      {
+        "observation": "The then-unchanged one-shot case received server combine HTTP 200. Browser abort completed at 35284.175 ms; recovery GET began at 35288.452 ms and remained without response/status until the 45-second timeout. Failure preceded empty_pairs and tried-marker assertions. This supports extending the same narrowly bounded interception-lifecycle repair; it does not establish the exact browser-internal cause.",
+        "project": "desktop",
+        "test": "lost committed empty reply trusts only recovery GET",
+        "trace_sha256": "3466b6e73a38423d3a6da68c3e9f578a94a499ce55560d60211e949177b52459"
+      },
+      {
+        "observation": "Stopped in begin(), while clicking the exploration start button. Only /api/me GET 200 was present; no explore POST, combine, recovery GET, or scenario route registration occurred. This failure did not exercise the revised V96 handler and supplies no evidence for changing its source. No explicit pageerror/crash event in this trace; resource/input-stall cause remains unproven from this trace alone.",
+        "project": "desktop",
+        "test": "recovery of uncommitted crafting restores activated word",
+        "trace_sha256": "f10d782f0bb1f5dd8e7de3e86c9a4dee339384631115bff5128a8a7cd6af8154"
+      }
+    ],
+    "existing_precedent": "The unchanged final V96 depleted-input recovery case already retains the route, aborts once, continues later requests, and asserts one combine plus one GET.",
+    "extension_diff": "Compared exact pre-extension backup (3968b19c...) with current source. Sole diff is within the earlier two parameterized empty-reply cases: retained route, first-request abort guard, committed HTTP 200 assertion, and one combine/one recovery GET assertions. Every original expectation and action remains.",
+    "framework_inspection": "Read installed Playwright Page._onRoute. It removes expiring handlers, awaits handler.handle, then starts an interception-pattern update without awaiting it when no handlers remain. This supports the documented overlap mechanism; it does not prove the exact Chromium-internal stalled state.",
+    "original_failure_traces": [
+      {
+        "independent_observation": "Network archive shows the failed browser combine and an immediate GET with response status/time still -1. Committed mobile case also has the server-side POST result 200.",
+        "project": "desktop",
+        "test": "identical cached retries cannot restore stale focus after a lost uncommitted craft",
+        "trace_sha256": "93b6972e0d2a83bb821842d7b69bf40924bea5e280f55cf5c291415b19f08564"
+      },
+      {
+        "independent_observation": "Network archive shows the failed browser combine and an immediate GET with response status/time still -1. Committed mobile case also has the server-side POST result 200.",
+        "project": "mobile",
+        "test": "recovery of committed crafting respects moved focus",
+        "trace_sha256": "5ed798ce204671a0e34f8479345e25f3b504c7b9d1e437fd09a40bb5334b13a2"
+      }
+    ],
+    "original_repeat_log_sha256": "b46f698818c388fb5a543972b49766c0d572f937f1b51c3dae25b339e4464742",
+    "original_repeat_result": "10 passed / 2 failed, consistent with the author report"
+  },
+  "kind": "v1-independent-recovery-harness-source-review-v1",
+  "limits": [
+    "Reviewed the original and extension diffs, exact snapshots, original network archives and repeat log, the two affected-matrix failure traces, and installed framework source. No new browser execution was performed by this reviewer.",
+    "The transport-stall diagnosis is supported by the failure location and interception lifecycle, but the underlying browser implementation cause remains unproven.",
+    "Root must record passing affected scenarios against the final rebuilt application before treating runtime verification as complete."
+  ],
+  "preserved_invariants": [
+    "Committed versus uncommitted discoveries and real authoritative recovery payloads.",
+    "Repeated local cached acknowledgments; no stale focus restoration.",
+    "Moved focus ownership versus activated-word focus restoration.",
+    "Recovery message, usable inventory, 320px doubled-text bounds and visible focused word.",
+    "Original test names, parameter variants, expectations and timeouts; no skip, retry or timeout extension.",
+    "Earlier empty-reply pair still requires the real recovery payload empty_pairs length to be one only when the injected server mutation committed, and the selected partner tried marker to match that authoritative result."
+  ],
+  "rationale": "Retaining the combine interceptor until page teardown prevents the last one-shot handler from being removed at the moment the application issues recovery GET. It still commits the injected action only in committed scenarios and aborts the first browser response exactly once. Subsequent requests are continued rather than silently swallowed and now fail the explicit one-request count if the application replays a mutation. The GET is real and its authoritative inventory remains the basis of every existing focus and discovery assertion. This is a narrow harness repair rather than a change to application behavior or success criteria. The two-case extension applies that same behavior to the remaining earlier empty-reply recovery tests after a matching pending-GET failure. It preserves committed/uncommitted authoritative empty-pair truth and partner styling, while making duplicate client mutation or recovery reads explicit failures.",
+  "remaining_source_blockers": [],
+  "reviewer": "/root/v1_held_audit",
+  "runtime_status": "pending_root_serial_final_affected_matrix; preceding concurrent run was 136/142 and is not a green runtime result",
+  "scope": "Eight parameterized scenarios only: earlier two lost empty-reply cases and final two cached-focus lost-craft cases in alchimie-empty-pairs, plus first four committed-by-moved-focus cases in v96. The extension changes only the earlier empty-reply pair; V96 and the original six-case patch remain unchanged. No production or timeout change.",
+  "strengthened_invariants": [
+    "Committed injection must receive server HTTP 200 before its browser response is aborted.",
+    "Exactly one intercepted combine request and one same-session browser recovery GET."
+  ],
+  "verdict": "accept_test_harness_change_runtime_pending"
+}

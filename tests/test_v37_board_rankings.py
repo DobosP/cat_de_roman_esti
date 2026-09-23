@@ -681,8 +681,12 @@ def test_shipped_ranked_inventory_exposes_reserves_but_never_selects_them():
                         assert daily is None
 
     # ADR-0066/0067 reserves stay hidden by the picker. The strict rebuild restored
-    # science/normal through cx_stiinta_356; no weak board was forced into the others.
+    # science/normal through cx_stiinta_356; ADR-0158 also reserves three Alchimie
+    # shelves with one-opening boards. No weak board is forced into empty shelves.
     assert empty_eligible_shelves == {
+        ("alchimie", "personalitati", "greu"),
+        ("alchimie", "personalitati", "usor"),
+        ("alchimie", "societate", "greu"),
         ("conexiuni", "arta_cultura", "greu"),
         ("conexiuni", "arta_cultura", "usor"),
         ("conexiuni", "film_tv", "usor"),

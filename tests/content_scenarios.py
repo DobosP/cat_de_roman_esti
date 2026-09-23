@@ -22,3 +22,17 @@ def contexto_seed(target: str, *, difficulty: str, category: str = "gastronomie"
         if item is not None and item.payload["target"] == target:
             return seed
     raise AssertionError(f"No public seed found for selectable target {target!r}")
+
+
+def alchimie_seed(board_id: str, *, difficulty: str, category: str) -> int:
+    """Find a public seed for an exact named challenge without bypassing eligibility."""
+    from cat_de_roman_esti.wordgames.packs import get_pack
+
+    pack = get_pack()
+    for seed in range(1000):
+        item = pack.pick_seeded(
+            "alchimie", random.Random(seed), category=category, difficulty=difficulty,
+        )
+        if item is not None and item.id == board_id:
+            return seed
+    raise AssertionError(f"No public seed found for selectable challenge {board_id!r}")

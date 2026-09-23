@@ -1,0 +1,114 @@
+{
+  "kind": "lant-caption-review-v1",
+  "role": "factual",
+  "reviewer": "/root",
+  "checked_on": "2026-09-23",
+  "candidate_sha256": "4f4e36af80bb232d77b60ec8711f9351f67b9ed49d6fb893420000c2cda35d5a",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "runtime_source_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+  "items": [
+    {
+      "id": "v1_caption_de8091",
+      "pair": [
+        "n_v23via_ghiozdan",
+        "n_v3lit_carte"
+      ],
+      "caption": "carte purtată în ghiozdan",
+      "edge_sha256": "bc3a4ebf9364a6267a65f2c80997fc8a7f8ce81455595c33e445e05369789231",
+      "verdict": "accept",
+      "rationale": "DEX 2009 and MDA2 definitions independently read at dexonline describe schoolchildren carrying books in this object. The phrase names ordinary carried-book use without requiring every book to fit. It is truthful as an unordered pair, but reverse traversal uses a different edge and retains its existing fallback.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghiozdan"
+      ],
+      "orientation_checks": [
+        {
+          "direction": "forward",
+          "from": "n_v23via_ghiozdan",
+          "to": "n_v3lit_carte",
+          "selected_edge_id": "de8091",
+          "selected_edge_sha256": "bc3a4ebf9364a6267a65f2c80997fc8a7f8ce81455595c33e445e05369789231",
+          "reviewed_caption_applies": true
+        },
+        {
+          "direction": "reverse",
+          "from": "n_v3lit_carte",
+          "to": "n_v23via_ghiozdan",
+          "selected_edge_id": "de7579",
+          "selected_edge_sha256": "821ba15729a335a5a67353eee740628534682b47a321a7eced35a2fa57953a62",
+          "reviewed_caption_applies": false
+        }
+      ],
+      "character_count": 25
+    },
+    {
+      "id": "v1_caption_de7580",
+      "pair": [
+        "n_v23via_ghiozdan",
+        "n_v4soc_copil"
+      ],
+      "caption": "ghiozdan folosit de școlari",
+      "edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+      "verdict": "accept",
+      "rationale": "The dictionary definition independently identifies school use. Schoolchildren qualifies a subset of children without asserting that every child attends school or owns a bag. The noun phrase remains true in both existing traversals.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghiozdan"
+      ],
+      "orientation_checks": [
+        {
+          "direction": "forward",
+          "from": "n_v23via_ghiozdan",
+          "to": "n_v4soc_copil",
+          "selected_edge_id": "de7580",
+          "selected_edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+          "reviewed_caption_applies": true
+        },
+        {
+          "direction": "reverse",
+          "from": "n_v4soc_copil",
+          "to": "n_v23via_ghiozdan",
+          "selected_edge_id": "de7580",
+          "selected_edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+          "reviewed_caption_applies": true
+        }
+      ],
+      "character_count": 27
+    },
+    {
+      "id": "v1_caption_de7521",
+      "pair": [
+        "n_v23lit_capra_cu_trei_iezi",
+        "n_v4soc_copil"
+      ],
+      "caption": "poveste în ediții pentru copii",
+      "edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+      "verdict": "accept",
+      "rationale": "Litera independently lists an actual Ion Creanga edition, ISBN 978-997-574-311-2, as children's literature for ages 5–7 and 7–9. This supports the existence of child-directed editions, not universal suitability of every telling or the horror film adaptation.",
+      "sources": [
+        "https://www.litera.ro/capra-cu-trei-iezi"
+      ],
+      "orientation_checks": [
+        {
+          "direction": "forward",
+          "from": "n_v4soc_copil",
+          "to": "n_v23lit_capra_cu_trei_iezi",
+          "selected_edge_id": "de7521",
+          "selected_edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+          "reviewed_caption_applies": true
+        },
+        {
+          "direction": "reverse",
+          "from": "n_v23lit_capra_cu_trei_iezi",
+          "to": "n_v4soc_copil",
+          "selected_edge_id": "de7521",
+          "selected_edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+          "reviewed_caption_applies": true
+        }
+      ],
+      "character_count": 30
+    }
+  ],
+  "limits": [
+    "Publisher evidence verifies child-directed editions, not a general child-suitability recommendation.",
+    "Original author orientation claim was corrected after independent runtime inspection; reverse Carte to Ghiozdan uses de7579 and remains fallback."
+  ]
+}

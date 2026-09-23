@@ -26,7 +26,8 @@
   width: min(100%, 820px);
   align-self: center;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Preserve familiar columns until text needs wider cards. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(8.5rem, calc((100% - 9px) / 2))), 1fr));
   gap: 9px;
 }
 
@@ -145,7 +146,7 @@
 
 @media (min-width: 760px) {
   .perechi-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, max(8.5rem, calc((100% - 27px) / 4))), 1fr));
   }
 }
 

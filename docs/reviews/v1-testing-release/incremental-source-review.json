@@ -1,0 +1,23 @@
+{
+  "bindings": {
+    "frontend/e2e/start-failure.spec.mjs": "fd07c9f668548fecf55c20f05a8ae1ae1a675629c47977ee1b95ebe8c3ee02c9",
+    "frontend/src/components/StartFailureNotice.tsx": "4513533c61a95b3fbeaab67baeb5f43d94752d93e4474c92a42d996ee5f6b5f4",
+    "frontend/src/screens/Alchimie.tsx": "4f99c2a4ffacef36b17a4a6e98c0436c465fd4fbe06b97ee15b3791d6b8f77f1"
+  },
+  "exact_delta_proof": "Moving only the notice from after .alchemy-menu back to before GameHelp reproduces the entire previously reviewed Alchimie source hash exactly.",
+  "integration_obligations": [
+    "Refresh the recipe live-audit runtime binding and both independent final reviews: the recipe catalog and all deterministic gameplay results remain subject to exact comparison.",
+    "Rebuild and re-smoke the wheel/static bundle. Earlier compiled-asset fingerprints describe the previous build, although the six storage/recovery source files are unchanged.",
+    "Root/UX own the focused browser execution and final matrix; this source review does not assert their final results."
+  ],
+  "kind": "v1-incremental-independent-source-review-v1",
+  "previous_alchimie_sha256": "25f733e213bcf81436327c98db1fbd091fe4f501d6c8e928ad4bddd8d08aa2e2",
+  "previous_recovery_review_sha256": "3da8cd538142919ede9861901773a63d4f2fef208382061d4476aa83f0094519",
+  "prior_six_recovery_source_bindings_unchanged": true,
+  "rationale": "The persistent failure notice remains outside the disclosure and now sits immediately after the menu containing the live retry controls. The unchanged notice effect reveals the message by scrolling without moving focus. The existing !won/startFailed conditions, start handler, pending-action guards, selected ingredient, round pointer and score logic are untouched. A failed start therefore retains the current round and retry choices while the error and retry are adjacent.",
+  "regression_review": "The test keeps the original persistent-error and retry viewport assertions, old-session equality, selected ingredient, score preservation, no old-round mutations and eventual successful retry. It additionally waits for ordinary disabled-button blur, verifies the entire retry button against viewport and scrollport bounds, and asserts that revealing the error does not change the pending element of focus. These are stronger assertions rather than a relaxed visibility expectation.",
+  "remaining_actionable_findings": [],
+  "reviewer": "/root/v1_held_audit",
+  "scope": "Only relocation of the live Alchimie StartFailureNotice and its strengthened regression assertions. Source review only; no broad regression run.",
+  "verdict": "accept"
+}

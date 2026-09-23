@@ -1,0 +1,3067 @@
+{
+  "kind": "v1-held-content-current-runtime-diagnostics",
+  "baseline_commit": "cc0a6a4",
+  "pending_lant": [
+    {
+      "id": "lt_literatura_210",
+      "choices": [
+        {
+          "label": "Carte",
+          "relation": "exemplu și categorie"
+        },
+        {
+          "label": "copil",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Școală",
+          "relation": "parte și întreg"
+        }
+      ],
+      "shortest_first_hops": [
+        "n_v3lit_carte",
+        "n_v4soc_copil"
+      ],
+      "visible_shortest": [
+        "n_v3lit_carte",
+        "n_v4soc_copil"
+      ],
+      "routes": [
+        {
+          "nodes": [
+            {
+              "id": "n_v23via_abecedar",
+              "label": "Abecedar"
+            },
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte"
+            },
+            {
+              "id": "n_v23lit_praslea_cel_voinic",
+              "label": "Prâslea cel voinic și merele de aur"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v23via_abecedar",
+                "label": "Abecedar"
+              },
+              "to": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "relation": "is_a",
+              "label": "este carte pentru învățarea cititului",
+              "display_label": "exemplu și categorie",
+              "strength": 0.9
+            },
+            {
+              "from": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "to": {
+                "id": "n_v23lit_praslea_cel_voinic",
+                "label": "Prâslea cel voinic și merele de aur"
+              },
+              "relation": "is_a",
+              "label": "apare în culegeri de basme",
+              "display_label": "exemplu și categorie",
+              "strength": 0.8
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_v23via_abecedar",
+              "label": "Abecedar"
+            },
+            {
+              "id": "n_v4soc_copil",
+              "label": "copil"
+            },
+            {
+              "id": "n_v23lit_praslea_cel_voinic",
+              "label": "Prâslea cel voinic și merele de aur"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v23via_abecedar",
+                "label": "Abecedar"
+              },
+              "to": {
+                "id": "n_v4soc_copil",
+                "label": "copil"
+              },
+              "relation": "related_to",
+              "label": "prima carte de citire a copilului",
+              "display_label": "legătură directă",
+              "strength": 0.86
+            },
+            {
+              "from": {
+                "id": "n_v4soc_copil",
+                "label": "copil"
+              },
+              "to": {
+                "id": "n_v23lit_praslea_cel_voinic",
+                "label": "Prâslea cel voinic și merele de aur"
+              },
+              "relation": "related_to",
+              "label": "basm cunoscut copiilor",
+              "display_label": "legătură directă",
+              "strength": 0.82
+            }
+          ]
+        }
+      ],
+      "quality_note": "Diagnostic session constructed from unserved pending record. This is not natural approved-stock selection."
+    },
+    {
+      "id": "lt_stiinta_216",
+      "choices": [
+        {
+          "label": "A bea",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "aer",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Burete de vase",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Ciorbă",
+          "relation": "parte și întreg"
+        },
+        {
+          "label": "Găleată",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Ploaie",
+          "relation": "legătură directă"
+        }
+      ],
+      "shortest_first_hops": [
+        "n_v24_weather_precipitation_ploaie",
+        "n_v4sti_aer"
+      ],
+      "visible_shortest": [
+        "n_v24_weather_precipitation_ploaie",
+        "n_v4sti_aer"
+      ],
+      "routes": [
+        {
+          "nodes": [
+            {
+              "id": "n_v4gas_apa",
+              "label": "Apă"
+            },
+            {
+              "id": "n_v24_weather_precipitation_ploaie",
+              "label": "Ploaie"
+            },
+            {
+              "id": "n_v24_weather_air_nor",
+              "label": "Nor"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v4gas_apa",
+                "label": "Apă"
+              },
+              "to": {
+                "id": "n_v24_weather_precipitation_ploaie",
+                "label": "Ploaie"
+              },
+              "relation": "beginner_diamond",
+              "label": "două drumuri prin vreme",
+              "display_label": "legătură directă",
+              "strength": 0.93
+            },
+            {
+              "from": {
+                "id": "n_v24_weather_precipitation_ploaie",
+                "label": "Ploaie"
+              },
+              "to": {
+                "id": "n_v24_weather_air_nor",
+                "label": "Nor"
+              },
+              "relation": "beginner_diamond",
+              "label": "două drumuri prin vreme",
+              "display_label": "legătură directă",
+              "strength": 0.93
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_v4gas_apa",
+              "label": "Apă"
+            },
+            {
+              "id": "n_v4sti_aer",
+              "label": "aer"
+            },
+            {
+              "id": "n_v24_weather_air_nor",
+              "label": "Nor"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v4gas_apa",
+                "label": "Apă"
+              },
+              "to": {
+                "id": "n_v4sti_aer",
+                "label": "aer"
+              },
+              "relation": "beginner_diamond",
+              "label": "două drumuri prin vreme",
+              "display_label": "legătură directă",
+              "strength": 0.93
+            },
+            {
+              "from": {
+                "id": "n_v4sti_aer",
+                "label": "aer"
+              },
+              "to": {
+                "id": "n_v24_weather_air_nor",
+                "label": "Nor"
+              },
+              "relation": "beginner_entry",
+              "label": "duce la",
+              "display_label": "legătură directă",
+              "strength": 0.86
+            }
+          ]
+        }
+      ],
+      "quality_note": "Diagnostic session constructed from unserved pending record. This is not natural approved-stock selection."
+    },
+    {
+      "id": "lt_viata_de_roman_211",
+      "choices": [
+        {
+          "label": "Caiet",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Carte",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "copil",
+          "relation": "legătură directă"
+        }
+      ],
+      "shortest_first_hops": [
+        "n_v3lit_carte",
+        "n_v4soc_copil"
+      ],
+      "visible_shortest": [
+        "n_v3lit_carte",
+        "n_v4soc_copil"
+      ],
+      "routes": [
+        {
+          "nodes": [
+            {
+              "id": "n_v23via_ghiozdan",
+              "label": "Ghiozdan"
+            },
+            {
+              "id": "n_v3lit_carte",
+              "label": "Carte"
+            },
+            {
+              "id": "n_v23lit_capra_cu_trei_iezi",
+              "label": "Capra cu trei iezi"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan"
+              },
+              "to": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "relation": "beginner_diamond",
+              "label": "două drumuri spre lecție",
+              "display_label": "legătură directă",
+              "strength": 0.93
+            },
+            {
+              "from": {
+                "id": "n_v3lit_carte",
+                "label": "Carte"
+              },
+              "to": {
+                "id": "n_v23lit_capra_cu_trei_iezi",
+                "label": "Capra cu trei iezi"
+              },
+              "relation": "is_a",
+              "label": "apare în cărți pentru copii",
+              "display_label": "poveste și carte",
+              "strength": 0.82
+            }
+          ]
+        },
+        {
+          "nodes": [
+            {
+              "id": "n_v23via_ghiozdan",
+              "label": "Ghiozdan"
+            },
+            {
+              "id": "n_v4soc_copil",
+              "label": "copil"
+            },
+            {
+              "id": "n_v23lit_capra_cu_trei_iezi",
+              "label": "Capra cu trei iezi"
+            }
+          ],
+          "edges": [
+            {
+              "from": {
+                "id": "n_v23via_ghiozdan",
+                "label": "Ghiozdan"
+              },
+              "to": {
+                "id": "n_v4soc_copil",
+                "label": "copil"
+              },
+              "relation": "related_to",
+              "label": "folosit de elevi",
+              "display_label": "legătură directă",
+              "strength": 0.82
+            },
+            {
+              "from": {
+                "id": "n_v4soc_copil",
+                "label": "copil"
+              },
+              "to": {
+                "id": "n_v23lit_capra_cu_trei_iezi",
+                "label": "Capra cu trei iezi"
+              },
+              "relation": "related_to",
+              "label": "lectură cunoscută copiilor",
+              "display_label": "legătură directă",
+              "strength": 0.84
+            }
+          ]
+        }
+      ],
+      "quality_note": "Diagnostic session constructed from unserved pending record. This is not natural approved-stock selection."
+    }
+  ],
+  "archived_contexto": [
+    {
+      "id": "ct_gastronomie_301",
+      "label": "Morcov",
+      "target": "n_v24_food_salad_veg_morcov",
+      "current_incoming_count": 2,
+      "incoming": [
+        {
+          "id": "n_v4gas_legume",
+          "label": "Legume"
+        },
+        {
+          "id": "n_v4gas_mancare",
+          "label": "Mâncare"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3"
+      ],
+      "original_reason": "Morcov is common, concrete, and unambiguous, but only Legume and Mâncare are direct predecessors. Two direct neighbors cannot clear the literal five-neighbor C3 release floor; Iepure is only Rece and no projection or proxy repairs the sparse target neighborhood.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_limba_307",
+      "label": "A citi",
+      "target": "n_v24_action_language_a_citi",
+      "current_incoming_count": 3,
+      "incoming": [
+        {
+          "id": "n_v24_action_language_a_spune",
+          "label": "A spune"
+        },
+        {
+          "id": "n_v3lim_limba",
+          "label": "Limbă"
+        },
+        {
+          "id": "n_v3lit_carte",
+          "label": "Carte"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C1",
+        "C3"
+      ],
+      "original_reason": "A citi is a familiar action with well-covered inflections and Carte as an obvious opener, but the strict target ontology excludes verbs and its three direct predecessors also miss C3.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_societate_179",
+      "label": "Drepturile omului",
+      "target": "n_drepturile_omului",
+      "current_incoming_count": 13,
+      "incoming": [
+        {
+          "id": "n_consiliul_europei",
+          "label": "Consiliul Europei"
+        },
+        {
+          "id": "n_constitutia",
+          "label": "Constituția României"
+        },
+        {
+          "id": "n_conventia_drepturilor_omului",
+          "label": "Convenția Europeană a Drepturilor Omului"
+        },
+        {
+          "id": "n_democratie",
+          "label": "Democrație"
+        },
+        {
+          "id": "n_drepturi_fundamentale",
+          "label": "Drepturi fundamentale"
+        },
+        {
+          "id": "n_onu",
+          "label": "ONU"
+        },
+        {
+          "id": "n_uniunea_europeana",
+          "label": "Uniunea Europeană"
+        },
+        {
+          "id": "n_v11fil_colectiv",
+          "label": "Colectiv"
+        },
+        {
+          "id": "n_v11soc_securitatea",
+          "label": "Securitatea"
+        },
+        {
+          "id": "n_v2soc_drepturi_civile",
+          "label": "Drepturi civile"
+        },
+        {
+          "id": "n_v4soc_copil",
+          "label": "copil"
+        },
+        {
+          "id": "n_v4soc_familie",
+          "label": "familie"
+        },
+        {
+          "id": "n_v4soc_pacient",
+          "label": "pacient"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C1"
+      ],
+      "original_reason": "Drepturile omului is recognizable and densely connected, but it is an abstract legal framework rather than a concrete, spontaneously nameable secret. A civics vocabulary field does not rescue the hard C1 failure.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_societate_256",
+      "label": "Recensământul populației",
+      "target": "n_recensamant",
+      "current_incoming_count": 7,
+      "incoming": [
+        {
+          "id": "n_comuna",
+          "label": "Comuna"
+        },
+        {
+          "id": "n_judet",
+          "label": "Județ"
+        },
+        {
+          "id": "n_minoritati_nationale",
+          "label": "Minoritățile naționale"
+        },
+        {
+          "id": "n_romania_stat",
+          "label": "România"
+        },
+        {
+          "id": "n_v11soc_cnp",
+          "label": "CNP"
+        },
+        {
+          "id": "n_v2soc_stat",
+          "label": "Stat"
+        },
+        {
+          "id": "n_v3soc_populatie",
+          "label": "Populație"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C1"
+      ],
+      "original_reason": "Recensământul populației is the rubric's explicit canonical C1 kill: a record/meta-process rather than a concrete secret. Populație and Stat are warm, but difficulty cannot come from asking the player to name an institutional phrase.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_societate_303",
+      "label": "familie",
+      "target": "n_v4soc_familie",
+      "current_incoming_count": 11,
+      "incoming": [
+        {
+          "id": "n_cetatean",
+          "label": "Cetățean"
+        },
+        {
+          "id": "n_drepturile_omului",
+          "label": "Drepturile omului"
+        },
+        {
+          "id": "n_v11fil_pozitia_copilului",
+          "label": "Poziția copilului"
+        },
+        {
+          "id": "n_v11soc_diaspora",
+          "label": "Diaspora"
+        },
+        {
+          "id": "n_v21soc_alocatia_de_stat",
+          "label": "Alocația de stat pentru copii"
+        },
+        {
+          "id": "n_v29_time_weekly_weekend",
+          "label": "Weekend"
+        },
+        {
+          "id": "n_v2via_masa_in_familie",
+          "label": "Masa în familie"
+        },
+        {
+          "id": "n_v2via_rude",
+          "label": "Rude"
+        },
+        {
+          "id": "n_v2via_sarbatori_familie",
+          "label": "Sărbători în familie"
+        },
+        {
+          "id": "n_v3soc_populatie",
+          "label": "Populație"
+        },
+        {
+          "id": "n_v4soc_copil",
+          "label": "copil"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3-legibility"
+      ],
+      "original_reason": "Familie is common and numerically dense, so the inventory verifier proposed promotion. The gameplay analyst found the decisive counterexample: Mamă, Tată, Bunică, Bunic, Frate, and Soră all rank 2,079/2,288 and read Înghețat while Weekend and broad civic abstractions are one-hop hot. That misleading core gradient blocks unanimous promotion and fail-closed synthesis rejects the exact record.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_societate_305",
+      "label": "Farmacie",
+      "target": "n_v24_places_public_farmacie",
+      "current_incoming_count": 2,
+      "incoming": [
+        {
+          "id": "n_v24_places_public_parc",
+          "label": "Parc"
+        },
+        {
+          "id": "n_v4soc_magazin",
+          "label": "magazin"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3"
+      ],
+      "original_reason": "Farmacie has six safe non-winning medical projections and therefore obvious openers, but its only direct KG predecessors are the generic place siblings Parc and Magazin. Projection rank-2 hints cannot substitute for the literal five-neighbor C3 target floor.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_stiinta_104",
+      "label": "Sonicitate",
+      "target": "n_sonicitate",
+      "current_incoming_count": 4,
+      "incoming": [
+        {
+          "id": "n_gogu_constantinescu",
+          "label": "Gogu Constantinescu"
+        },
+        {
+          "id": "n_stilou_rezervor",
+          "label": "Stiloul cu rezervor"
+        },
+        {
+          "id": "n_stix_mecanica_fluidelor",
+          "label": "Mecanica fluidelor"
+        },
+        {
+          "id": "n_v2sti_fizica",
+          "label": "Fizică"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C1",
+        "C2",
+        "C3",
+        "C6"
+      ],
+      "original_reason": "Sonicitate is the rubric's canonical obscure meta-concept kill, has only four direct predecessors, and is the batch's sole salience warning at 0.152 below the greu floor of 0.20. Fizică being warm cannot turn obscurity into fair difficulty.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_stiinta_306",
+      "label": "Ploaie",
+      "target": "n_v24_weather_precipitation_ploaie",
+      "current_incoming_count": 3,
+      "incoming": [
+        {
+          "id": "n_v24_weather_air_nor",
+          "label": "Nor"
+        },
+        {
+          "id": "n_v4gas_apa",
+          "label": "Apă"
+        },
+        {
+          "id": "n_v4sti_aer",
+          "label": "aer"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3",
+        "lexical-collision"
+      ],
+      "original_reason": "Ploaie is universal and Nor/Apă are obvious openers, but three direct predecessors fail C3. Its natural definite form ploaia already resolves to the served Cargo song node, so it cannot safely be added as a weather alias or projection.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_viata_de_roman_302",
+      "label": "Frigider",
+      "target": "n_v24_home_appliances_frigider",
+      "current_incoming_count": 3,
+      "incoming": [
+        {
+          "id": "n_v24_home_appliances_lampa",
+          "label": "Lampă"
+        },
+        {
+          "id": "n_v4gas_bucatarie",
+          "label": "Bucătărie"
+        },
+        {
+          "id": "n_v4via_usa",
+          "label": "ușă"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3"
+      ],
+      "original_reason": "Frigider is concrete and Bucătărie is an obvious opener, but its three direct predecessors include generic Lampă and Ușă. Congelator supplies one non-winning projected hint; the current target still misses the C3 density and legibility bar.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_viata_de_roman_304",
+      "label": "Creion",
+      "target": "n_v24_school_writing_creion",
+      "current_incoming_count": 4,
+      "incoming": [
+        {
+          "id": "n_v23via_ghiozdan",
+          "label": "Ghiozdan"
+        },
+        {
+          "id": "n_v24_school_supplies_radiera",
+          "label": "Radieră"
+        },
+        {
+          "id": "n_v24_school_writing_caiet",
+          "label": "Caiet"
+        },
+        {
+          "id": "n_v88_school_compas",
+          "label": "Compas"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3"
+      ],
+      "original_reason": "Creion is concrete and Radieră/Caiet/Ghiozdan are excellent openers, but the exact target has only those three direct predecessors and no target-anchored projection or proxy. It remains a strong future repair candidate, not a release candidate.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_viata_de_roman_352",
+      "label": "Făraș",
+      "target": "n_v31_cleaning_floor_faras",
+      "current_incoming_count": 5,
+      "incoming": [
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v31_cleaning_floor_aspirator",
+          "label": "Aspirator"
+        },
+        {
+          "id": "n_v88_cleaning_matura",
+          "label": "Mătură"
+        },
+        {
+          "id": "n_v90_food_firimitura",
+          "label": "Firimitură"
+        },
+        {
+          "id": "n_v90_household_praf",
+          "label": "Praf"
+        }
+      ],
+      "current_approved_same_target": [
+        "ct_viata_de_roman_355"
+      ],
+      "original_failure_modes": null,
+      "original_reason": "Exact imported dossier has zero lint findings and its KG, rubric and record bindings are verified against current pending state. Zero deterministic findings cannot waive ADR-0071 or C3. My earlier raw keep was staging only and incorrectly treated the incoming/outgoing union as the five-neighbor floor; the original artifact is preserved and this final review corrects that interpretation. Reject ct_viata_de_roman_352 under C3: the dossier has only three direct recognizable predecessors, Podea, Aspirator and Mătură. Its five distinct adjacent objects include outgoing-only Mop and Burete de vase; those do not supply two more incoming cues. The separate exact Praf repair and several same-Podea-proxy guesses give useful hot feedback but ADR-0071 explicitly forbids substituting such a cluster for five direct predecessors. C1/C2/C5/C6 otherwise pass: Făraș is a concrete ordinary dustpan, dominant household sense, salience 0.90; old CADE and current Leifheit use support easy recognition without pretending to measure population knowledge. C4 has actual Mătură #4, Casă #9 and Praf/Podea #2 approaches,2,343 reachable / 250 responsive; the safe clue/repeat/resume/plural-win journey passes. A1–A7 otherwise show no adult, regional, stereotype or prior-target duplicate trigger. Nineteen of 33 deliberately broad surfaces remain unknown, including Gunoi/Murdărie/Pardoseală. Familiarity, one good dust route and successful technical completion cannot cure C3. Rejection removes this pending round through the supported apply tool; preserve its exact dossier and final judgment and require a reviewed topology repair before a future proposal. No graph padding is requested.",
+      "original_gate": "docs\\reviews\\v89-feedback-and-conexiuni-recovery\\final-gate\\contexto_verdicts.json"
+    },
+    {
+      "id": "ct_viata_de_roman_354",
+      "label": "Aspirator",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "current_incoming_count": 8,
+      "incoming": [
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v24_home_textiles_covor",
+          "label": "Covor"
+        },
+        {
+          "id": "n_v31_cleaning_floor_mop",
+          "label": "Mop"
+        },
+        {
+          "id": "n_v3sti_electricitate",
+          "label": "Electricitate"
+        },
+        {
+          "id": "n_v88_cleaning_matura",
+          "label": "Mătură"
+        },
+        {
+          "id": "n_v90_food_firimitura",
+          "label": "Firimitură"
+        },
+        {
+          "id": "n_v90_household_praf",
+          "label": "Praf"
+        },
+        {
+          "id": "n_v90_textile_scama",
+          "label": "Scamă"
+        }
+      ],
+      "current_approved_same_target": [
+        "ct_viata_de_roman_356"
+      ],
+      "original_failure_modes": null,
+      "original_reason": "Exact imported dossier has zero lint findings and its KG, rubric and record bindings are verified against current pending state. Zero deterministic findings cannot waive ADR-0071 or C3. My earlier raw keep was staging only and incorrectly treated the incoming/outgoing union as the five-neighbor floor; the original artifact is preserved and this final review corrects that interpretation. Reject ct_viata_de_roman_354 under C3: only three direct recognizable predecessors appear in the current directed dossier, Podea, Mop and Mătură. Outgoing-only Făraș and Burete de vase made the earlier adjacent-object count five; they cannot replace missing direct predecessors. Neither the Praf exact surface policy nor several Podea proxies constitutes new KG neighbors. C1/C2/C5/C6 otherwise pass for the ordinary household dust/floor/carpet appliance: DEX 1998 and current Kärcher usage support recognition, domestic sense dominates despite qualified industrial/nasal variants, salience 0.94. C4 has actual Casă #12/warm, Covor #36/warm, Mătură #4/hot and Praf/Podea #2/hot;2,343 reachable / 358 responsive and the clue/repeat/resume/plural-win journey pass. A1–A7 otherwise show no adult, stereotype, region or existing-target duplicate trigger. Electricitate #378/cold, Apă #9/hot and unknown Filtru/Sac/Păr de animale remain quality costs; water is not claimed as universal for dry vacuums. The good dust route does not satisfy the absent C3 topology. Supported reject removes this pending record; preserve immutable review evidence and require a separately reviewed topology repair before any future target proposal.",
+      "original_gate": "docs\\reviews\\v89-feedback-and-conexiuni-recovery\\final-gate\\contexto_verdicts.json"
+    }
+  ],
+  "archived_lant": [
+    {
+      "id": "lt_arta_cultura_156",
+      "start": "Masa de Crăciun",
+      "target": "Masa Tăcerii",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 5,
+      "original_optimal": 5,
+      "current_branch_profile": [
+        1,
+        1,
+        4
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_arta_cultura_158",
+      "start": "Moromeții",
+      "target": "Cinematografia românească",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_arta_cultura_159",
+      "start": "Carol I",
+      "target": "Ateneul Român",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_film_tv_008",
+      "start": "Celentano",
+      "target": "4 luni, 3 săptămâni și 2 zile",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_film_tv_010",
+      "start": "Andreea Marin",
+      "target": "Filantropica",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_film_tv_012",
+      "start": "Isoscel",
+      "target": "Filantropica",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_film_tv_097",
+      "start": "Las Fierbinți",
+      "target": "Marin Preda",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_film_tv_100",
+      "start": "Pro TV",
+      "target": "Revelionul la televizor",
+      "current_payload_errors": [],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        9,
+        3,
+        12
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_film_tv_101",
+      "start": "Vacanța Mare",
+      "target": "Teo, Vio și Costel",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_film_tv_102",
+      "start": "Nea Mărin Miliardar",
+      "target": "Mici",
+      "current_payload_errors": [
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        2,
+        1,
+        3
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_film_tv_160",
+      "start": "Andra",
+      "target": "La Măruță",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_013",
+      "start": "Covrigi de Buzău",
+      "target": "Marea Unire 1918",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_014",
+      "start": "Papanași",
+      "target": "Moldova",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_016",
+      "start": "Ciorbă de burtă",
+      "target": "Bucovina",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_019",
+      "start": "Șorici",
+      "target": "Vin fiert",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_103",
+      "start": "Ciorbă rădăuțeană",
+      "target": "Mănăstirea Voroneț",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_104",
+      "start": "Zacuscă",
+      "target": "Punga cu pungi",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_106",
+      "start": "Pălincă",
+      "target": "Munții Apuseni",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_108",
+      "start": "Borș",
+      "target": "Prut",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_164",
+      "start": "Limba română",
+      "target": "Mămăligă",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_165",
+      "start": "Chefi la cuțite",
+      "target": "Șaorma cu de toate",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_212",
+      "start": "Bucătărie",
+      "target": "Morcov",
+      "current_payload_errors": [],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_gastronomie_218",
+      "start": "Ciorbă",
+      "target": "Morcov",
+      "current_payload_errors": [],
+      "current_distance": 4,
+      "original_optimal": 4,
+      "current_branch_profile": [
+        6,
+        2,
+        16
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_geografie_020",
+      "start": "Arad",
+      "target": "Cluj-Napoca",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_geografie_024",
+      "start": "Anghel Saligny",
+      "target": "Sfântu Gheorghe (braț)",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_geografie_026",
+      "start": "Sinaia",
+      "target": "Lacul Vidraru",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_geografie_167",
+      "start": "Finala de la Sevilla",
+      "target": "București",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_geografie_242",
+      "start": "Sfinxul din Bucegi",
+      "target": "Crucea Caraiman",
+      "current_payload_errors": [],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_istorie_027",
+      "start": "Decebal",
+      "target": "Columna lui Traian",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_istorie_031",
+      "start": "Burebista",
+      "target": "Traian",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        4
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_istorie_113",
+      "start": "Alba Iulia",
+      "target": "Tratatul de la Trianon",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_istorie_116",
+      "start": "Regina Maria",
+      "target": "Societatea Națiunilor",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_035",
+      "start": "Pronume",
+      "target": "Caz gramatical",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_037",
+      "start": "Aromână",
+      "target": "Substratul dacic",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_038",
+      "start": "Folclor românesc",
+      "target": "Dor",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_039",
+      "start": "Neologismele franceze",
+      "target": "Școala Ardeleană",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_117",
+      "start": "Mămăligă",
+      "target": "Păpușoi",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_118",
+      "start": "Școala Ardeleană",
+      "target": "Limba română literară",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_119",
+      "start": "Nae Cațavencu",
+      "target": "Expresie idiomatică",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 4,
+      "original_optimal": 4,
+      "current_branch_profile": [
+        1,
+        1,
+        4
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_120",
+      "start": "Miorița",
+      "target": "Vorbire populară",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_121",
+      "start": "Oracolul școlar",
+      "target": "Ortografie",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_174",
+      "start": "Columna lui Traian",
+      "target": "Limba latină",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_175",
+      "start": "Memă românească",
+      "target": "Vorbire populară",
+      "current_payload_errors": [
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        5,
+        1,
+        6
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_limba_176",
+      "start": "Brevetul francez al stiloului",
+      "target": "Neologismele franceze",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_literatura_042",
+      "start": "Ghiță",
+      "target": "Junimea",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_literatura_043",
+      "start": "Ultima noapte de dragoste, întâia noapte de război",
+      "target": "Sburătorul",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_literatura_045",
+      "start": "Convorbiri literare",
+      "target": "Sărmanul Dionis",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_literatura_046",
+      "start": "Ion Barbu",
+      "target": "Ultima noapte de dragoste, întâia noapte de război",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_literatura_124",
+      "start": "Alfabetul chirilic românesc",
+      "target": "Mihai Eminescu",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_literatura_125",
+      "start": "Ploaia",
+      "target": "Plumb",
+      "current_payload_errors": [
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 5,
+      "original_optimal": 5,
+      "current_branch_profile": [
+        3,
+        1,
+        14
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_literatura_177",
+      "start": "Luceafărul",
+      "target": "Junimea",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_meme_net_050",
+      "start": "Zaiafet",
+      "target": "Ghiță Ciobanul",
+      "current_payload_errors": [],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        2,
+        2,
+        5
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_meme_net_053",
+      "start": "Teo, Vio și Costel",
+      "target": "F.O.C.A. din RObotzi",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_meme_net_054",
+      "start": "Unboxing românesc",
+      "target": "Lasă că merge și așa",
+      "current_payload_errors": [],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        3,
+        2,
+        5
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_meme_net_130",
+      "start": "Generația de Aur",
+      "target": "Replică memorabilă",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 4,
+      "original_optimal": 4,
+      "current_branch_profile": [
+        1,
+        1,
+        11
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_meme_net_133",
+      "start": "A da cu mucii-n fasole",
+      "target": "Comentarii online",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_muzica_056",
+      "start": "Dragostea din tei",
+      "target": "Sub pielea mea",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_muzica_057",
+      "start": "Florin Salam",
+      "target": "Undeva-n Balcani",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_muzica_059",
+      "start": "După blocuri",
+      "target": "Vara nu dorm",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_muzica_061",
+      "start": "Phoenix",
+      "target": "Maria Tănase",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_muzica_138",
+      "start": "Florin Salam",
+      "target": "Mici",
+      "current_payload_errors": [
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 4,
+      "original_optimal": 4,
+      "current_branch_profile": [
+        2,
+        1,
+        7
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_muzica_140",
+      "start": "Ploaia",
+      "target": "Doina",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_muzica_183",
+      "start": "Neversea",
+      "target": "Vama Veche",
+      "current_payload_errors": [],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_062",
+      "start": "Cumințenia Pământului",
+      "target": "Paris",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_063",
+      "start": "Masa Tăcerii",
+      "target": "Oedipe",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_064",
+      "start": "Balcic",
+      "target": "Tratatul de la Trianon",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        4
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_065",
+      "start": "Bizanț după Bizanț",
+      "target": "Generația interbelică",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_068",
+      "start": "Rapsodiile Române",
+      "target": "Marea Unire 1918",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_142",
+      "start": "Poarta Sărutului",
+      "target": "George Enescu",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_144",
+      "start": "Castelul Pelișor",
+      "target": "Nicolae Titulescu",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_145",
+      "start": "Oedipe",
+      "target": "Angela Gheorghiu",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_146",
+      "start": "Moartea domnului Lăzărescu",
+      "target": "Liviu Ciulei",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_147",
+      "start": "Dadaism",
+      "target": "Mircea Eliade",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_148",
+      "start": "Podul de la Cernavodă",
+      "target": "Henri Coandă",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_personalitati_187",
+      "start": "Regina Maria",
+      "target": "Maria Tănase",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_societate_072",
+      "start": "Școala Ardeleană",
+      "target": "Universitatea din București",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        4
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_societate_073",
+      "start": "Automobile Dacia",
+      "target": "Leul românesc",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_societate_074",
+      "start": "Combinatul siderurgic Galați",
+      "target": "Banca Națională a României",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_societate_153",
+      "start": "Uzinele Reșița",
+      "target": "Anghel Saligny",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_societate_192",
+      "start": "Scara blocului",
+      "target": "Parlamentul României",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_societate_193",
+      "start": "Dacia",
+      "target": "Automobile Dacia",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_societate_195",
+      "start": "Mici",
+      "target": "Alegeri",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_sport_078",
+      "start": "Marea Neagră",
+      "target": "Wimbledon 2019",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_sport_079",
+      "start": "Delta Dunării",
+      "target": "Cinci inele olimpice",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_sport_154",
+      "start": "București",
+      "target": "Finala de la Sevilla",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_sport_199",
+      "start": "Stadionul Ghencea",
+      "target": "Finala de la Sevilla",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_081",
+      "start": "Traian Vuia",
+      "target": "Efectul Coandă",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_084",
+      "start": "Ion Barbu",
+      "target": "Gheorghe Țițeica",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_155",
+      "start": "Aeroportul Băneasa Aurel Vlaicu",
+      "target": "Efectul Coandă",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_157",
+      "start": "Scriere",
+      "target": "Stiloul cu rezervor",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 4,
+      "original_optimal": 4,
+      "current_branch_profile": [
+        1,
+        1,
+        4
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_159",
+      "start": "Peștera Scărișoara",
+      "target": "Emil Racoviță",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_160",
+      "start": "Premiul Nobel",
+      "target": "Ribozom",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_200",
+      "start": "Caloriferul rece",
+      "target": "căldură",
+      "current_payload_errors": [],
+      "current_distance": 5,
+      "original_optimal": 5,
+      "current_branch_profile": [
+        4,
+        2,
+        14
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_202",
+      "start": "David Popovici",
+      "target": "Mecanica fluidelor",
+      "current_payload_errors": [],
+      "current_distance": 5,
+      "original_optimal": 5,
+      "current_branch_profile": [
+        2,
+        2,
+        27
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_204",
+      "start": "Luceafărul",
+      "target": "Gravitație",
+      "current_payload_errors": [
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 5,
+      "original_optimal": 5,
+      "current_branch_profile": [
+        2,
+        1,
+        8
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_215",
+      "start": "om",
+      "target": "Nas",
+      "current_payload_errors": [],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_stiinta_219",
+      "start": "corp",
+      "target": "Zăpadă",
+      "current_payload_errors": [],
+      "current_distance": 4,
+      "original_optimal": 4,
+      "current_branch_profile": [
+        4,
+        2,
+        9
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_viata_de_roman_087",
+      "start": "Guma Turbo",
+      "target": "Dacia",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_viata_de_roman_090",
+      "start": "Mărțișor",
+      "target": "Sarmalele de Crăciun",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_viata_de_roman_091",
+      "start": "Caloriferul rece",
+      "target": "Mirosul de cozonac",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_viata_de_roman_093",
+      "start": "Vecinul cu bormașina",
+      "target": "Punga cu pungi",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_viata_de_roman_206",
+      "start": "Lapte și corn",
+      "target": "Mihai Eminescu",
+      "current_payload_errors": [
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)"
+      ],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_viata_de_roman_213",
+      "start": "Ghiozdan",
+      "target": "Lecție",
+      "current_payload_errors": [],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        4,
+        4,
+        4
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_viata_de_roman_214",
+      "start": "baie",
+      "target": "Cameră",
+      "current_payload_errors": [],
+      "current_distance": 2,
+      "original_optimal": 2,
+      "current_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    },
+    {
+      "id": "lt_viata_de_roman_217",
+      "start": "Scaun",
+      "target": "Dormitor",
+      "current_payload_errors": [],
+      "current_distance": 3,
+      "original_optimal": 3,
+      "current_branch_profile": [
+        3,
+        3,
+        6
+      ],
+      "exact_directed_pair_tombstone": true,
+      "disposition": "retain_rejection_debt; numeric eligibility alone cannot reopen exact rejected pair"
+    }
+  ],
+  "archived_alchimie": [
+    {
+      "id": "al_arta_cultura_015",
+      "target": {
+        "id": "n_v2art_sculptura_romaneasca",
+        "label": "Sculptură românească"
+      },
+      "opening_pairs": 1,
+      "route_count": 1,
+      "exact_action_par": 2,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": false
+      }
+    },
+    {
+      "id": "al_film_tv_022",
+      "target": {
+        "id": "n_v3fil_subtitrare",
+        "label": "Subtitrare"
+      },
+      "opening_pairs": 5,
+      "route_count": 4,
+      "exact_action_par": 2,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_gastronomie_026",
+      "target": {
+        "id": "n_gas_paine_de_casa",
+        "label": "Pâine de casă"
+      },
+      "opening_pairs": 4,
+      "route_count": 4,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_gastronomie_030",
+      "target": {
+        "id": "n_gas_lebar",
+        "label": "Lebăr"
+      },
+      "opening_pairs": 2,
+      "route_count": 2,
+      "exact_action_par": 6,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_geografie_032",
+      "target": {
+        "id": "n_subcarpatii",
+        "label": "Subcarpații"
+      },
+      "opening_pairs": 1,
+      "route_count": 4,
+      "exact_action_par": 2,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": false
+      }
+    },
+    {
+      "id": "al_limba_047",
+      "target": {
+        "id": "n_v4lim_timp_verbal",
+        "label": "Timp verbal"
+      },
+      "opening_pairs": 1,
+      "route_count": 1,
+      "exact_action_par": 6,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": false
+      }
+    },
+    {
+      "id": "al_literatura_051",
+      "target": {
+        "id": "n_v2lit_sat_romanesc",
+        "label": "Sat românesc"
+      },
+      "opening_pairs": 3,
+      "route_count": 4,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_muzica_065",
+      "target": {
+        "id": "n_muz_ploaia_cargo",
+        "label": "Ploaia"
+      },
+      "opening_pairs": 4,
+      "route_count": 4,
+      "exact_action_par": 2,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_personalitati_070",
+      "target": {
+        "id": "n_v2per_casa_regala",
+        "label": "Casa regală"
+      },
+      "opening_pairs": 1,
+      "route_count": 1,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": false
+      }
+    },
+    {
+      "id": "al_societate_076",
+      "target": {
+        "id": "n_uniunea_europeana",
+        "label": "Uniunea Europeană"
+      },
+      "opening_pairs": 3,
+      "route_count": 4,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_viata_de_roman_092",
+      "target": {
+        "id": "n_vdr_vara_la_bunici",
+        "label": "Vara la bunici"
+      },
+      "opening_pairs": 1,
+      "route_count": 4,
+      "exact_action_par": 2,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": false
+      }
+    },
+    {
+      "id": "al_viata_de_roman_094",
+      "target": {
+        "id": "n_v3via_facturi",
+        "label": "Facturi"
+      },
+      "opening_pairs": 1,
+      "route_count": 4,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": false
+      }
+    },
+    {
+      "id": "al_viata_de_roman_095",
+      "target": {
+        "id": "n_vdr_gospodaria_bunicilor",
+        "label": "Gospodăria bunicilor"
+      },
+      "opening_pairs": 1,
+      "route_count": 4,
+      "exact_action_par": 6,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": false
+      }
+    },
+    {
+      "id": "al_viata_de_roman_098",
+      "target": {
+        "id": "n_v23via_telefonul_fara_fir",
+        "label": "Telefonul fără fir"
+      },
+      "opening_pairs": 2,
+      "route_count": 3,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_viata_de_roman_099",
+      "target": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+      },
+      "opening_pairs": 3,
+      "route_count": 3,
+      "exact_action_par": 2,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_viata_de_roman_100",
+      "target": {
+        "id": "n_v24_home_seating_fotoliu",
+        "label": "Fotoliu"
+      },
+      "opening_pairs": 3,
+      "route_count": 3,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_viata_de_roman_101",
+      "target": {
+        "id": "n_v24_home_rooms_sufragerie",
+        "label": "Sufragerie"
+      },
+      "opening_pairs": 3,
+      "route_count": 3,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_viata_de_roman_102",
+      "target": {
+        "id": "n_v24_school_assessment_examen",
+        "label": "Examen"
+      },
+      "opening_pairs": 3,
+      "route_count": 2,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_viata_de_roman_103",
+      "target": {
+        "id": "n_v24_school_assessment_catalog_scolar",
+        "label": "Catalog școlar"
+      },
+      "opening_pairs": 3,
+      "route_count": 2,
+      "exact_action_par": 4,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    },
+    {
+      "id": "al_viata_de_roman_104",
+      "target": {
+        "id": "n_v24_home_textiles_covor",
+        "label": "Covor"
+      },
+      "opening_pairs": 2,
+      "route_count": 2,
+      "exact_action_par": 3,
+      "projection_unchanged_from_v48": true,
+      "bounds": {
+        "declared_par_matches_exact": true,
+        "projection_par_matches_exact": true,
+        "route_limit": true,
+        "recipe_pair_limit": true,
+        "projected_concept_limit": true,
+        "result_per_pair_limit": true,
+        "e2_live_opening_floor": true
+      }
+    }
+  ],
+  "totals": {
+    "rejected_lant": 105,
+    "rejected_lant_current_payload_invalid": 91,
+    "rejected_contexto": 12,
+    "archived_alchimie_rebuilt": 20,
+    "alchimie_projection_unchanged": 20
+  }
+}

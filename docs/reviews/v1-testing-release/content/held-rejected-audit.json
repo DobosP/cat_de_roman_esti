@@ -1,0 +1,2671 @@
+{
+  "kind": "v1-held-rejected-content-reassessment-v1",
+  "checked_on": "2026-09-23",
+  "baseline_commit": "cc0a6a4",
+  "author": "/root/v1_held_audit",
+  "scope": "Read-only re-evaluation for mixed-age phone/desktop V1 testing. Covers all current durable tombstones, final retired pack gates, pending8, V99 research12 and V98 recipe drafts3. Does not claim every historical raw idea ever authored was individually rejudged.",
+  "counts": {
+    "pending": 8,
+    "a5_pending": 5,
+    "final_rejected_records": 256,
+    "conexiuni_tombstones": 122,
+    "lant_tombstones": 105,
+    "contexto_archived_rejects": 12,
+    "alchimie_archived_rejects": 17,
+    "rejected_targets_already_reintroduced_as_reviewed_successors": 2,
+    "v99_research": 12,
+    "v99_researched": 8,
+    "v99_held": 4,
+    "v98_recipe_drafts": 3,
+    "approved_by_this_audit": 0
+  },
+  "bound_inputs": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/content-pool/v99-everyday-spaces/pool.json": "af9dae42a7d7d880d73709438d1cc7ed3b4e8a00e64f6d93b1cf4a61797061c3",
+    "docs/reviews/v98-meaningful-connections/unreviewed-scout.json": "975fe157acc1f246b05b4138097102676c013392f3250fabff81fe3a5260e764"
+  },
+  "pending": [
+    {
+      "id": "ct_meme_net_238",
+      "game": "contexto",
+      "source_record_sha256": "aeae46af1f3138f3326ea3b3603a441f123ade9b6215a1ff1007b51eacae788d",
+      "current_review_binding": "sha256:1c362d4bdf615755dcd0c9b4ed1b85a3ec3797c920f221f8db129bd3de3dce1d",
+      "deterministic_findings": [],
+      "disposition": "retain_pending",
+      "reason": "Eight incoming cues pass C3; profanity-derived framing and uncertain cross-generational C2 recognition remain poor mixed-age release choices. No new recognition evidence cures that limitation.",
+      "a5_boundary": true
+    },
+    {
+      "id": "ct_societate_257",
+      "game": "contexto",
+      "source_record_sha256": "b25520d6c5c8b0ea9cf27494e76e6e8b56a3727c0da05143f7fe25f93e66b4e3",
+      "current_review_binding": "sha256:8881ca6832b49faae8a1ab0a1088585c4bbbc94ffba5d2f10172d1f262bd4017",
+      "deterministic_findings": [],
+      "disposition": "retain_pending",
+      "reason": "Thirteen incoming cues do not cure abstract-category C1 failure; served Industria românească remains a near-duplicate. No new distinct player benefit.",
+      "a5_boundary": true
+    },
+    {
+      "id": "lt_literatura_210",
+      "game": "lant",
+      "source_record_sha256": "ef88da8808ad300dc8f74365105da92fee4b03e62ed738fa1a665c1beed21354",
+      "current_review_binding": "sha256:049fdfaa9b61bcccb4c24427ebc0f92d4ce06bfccefcd02c7f440664650d8ca6",
+      "deterministic_findings": [],
+      "disposition": "retain_pending",
+      "reason": "Both shortest first hops are now visible and D3 numerically passes. Four generic captions and the same Carte/copil diamond as lt_viata_de_roman_211 still need comparative D2/D5/A6 review. Do not promote both merely for volume.",
+      "a5_boundary": false
+    },
+    {
+      "id": "lt_stiinta_216",
+      "game": "lant",
+      "source_record_sha256": "8d322960074c732eaea5795e7e5aa6dd2ab3529171fd5eee650895cc639b0556",
+      "current_review_binding": "sha256:906d742a5e05a4eea4c00a8796dfdcd4554cb8e2b45ed58eb3935260f4280285",
+      "deterministic_findings": [],
+      "disposition": "retain_pending",
+      "reason": "Two visible shortest openings and width two pass, but all four displayed route captions remain generic. Apă→aer requires an honest water-vapour relationship, not an invented universal material conversion; exact edge-bound source/caption review remains necessary.",
+      "a5_boundary": false
+    },
+    {
+      "id": "lt_viata_de_roman_211",
+      "game": "lant",
+      "source_record_sha256": "00c700668e8398ebaddde73520b6e9166dec8242054b5a49f52b6dfbf8433c55",
+      "current_review_binding": "sha256:fc68fade4964088cd777d72fd524a2d99f07b4ecd6b0ec3b39bf2f1fc87da2fd",
+      "deterministic_findings": [],
+      "disposition": "shortlist_for_bounded_repair",
+      "reason": "The original zero-shortest-opening blocker is resolved: Carte and copil are both visible. Three of four route captions remain generic, so require precise pair captions and independent full D1–D5/freshness review before any promotion. Strongest single reconsideration candidate, not approved by this audit.",
+      "a5_boundary": false
+    },
+    {
+      "id": "al_gastronomie_026",
+      "game": "alchimie",
+      "source_record_sha256": "e1197928db929ba04c2f1a8fef7d094ead5834ea7cf33127cd41a76cf5e26cad",
+      "current_review_binding": "sha256:cc998fc9b10256a978a49286cbb67bd72b9b962e85556b0f173e7d22558d1774",
+      "deterministic_findings": [],
+      "disposition": "retain_pending",
+      "reason": "Current sparse recipe projection is byte-structurally unchanged from V48: every useful target route consumes Țuică. A5 remains explicit, and E1/E3 mixed filler/arbitrary bread accompaniment independently fail quality.",
+      "a5_boundary": true
+    },
+    {
+      "id": "al_gastronomie_030",
+      "game": "alchimie",
+      "source_record_sha256": "af4bab1a723cc1921a4d143896d94a3c02b0cf88871948b1015434b93d540374",
+      "current_review_binding": "sha256:d0a3907b5b74e7fb61bcd303f2512793477ac69fc65f9bc5425b2ea77be0826e",
+      "deterministic_findings": [],
+      "disposition": "retain_pending",
+      "reason": "Current sparse projection unchanged: Vin fiert is required. A5 plus generic six-action meals-to-meat chain/E3 remain; world exploration additions do not repair this separate scored challenge.",
+      "a5_boundary": true
+    },
+    {
+      "id": "al_viata_de_roman_092",
+      "game": "alchimie",
+      "source_record_sha256": "75d003bf6589b4eee9c558329caf131ee93111da1eee2337052a65091fc42d15",
+      "current_review_binding": "sha256:5c5e9a6b1ddebd220755ef4b65466b0d23937ea4d7f14c7294b3c5e52eaf98d0",
+      "deterministic_findings": [],
+      "disposition": "retain_pending",
+      "reason": "Current sparse projection unchanged: every route begins with Țuica de casă and only one live opening exists. A5/E2 plus winter-Ignat-to-summer association/E3/E4 remain.",
+      "a5_boundary": true
+    }
+  ],
+  "durable_ledgers": [
+    {
+      "game": "conexiuni",
+      "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+      "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+      "schema_validated_by": "scripts/critique_pack.py:load_rejection_tombstones",
+      "count": 122,
+      "source_gate_counts": {
+        "57674ee7b7b24e82dd77353f53c5c8cac22de88160628331170f7ec488d61204": 41,
+        "38cdb6d71bf78473f105b8677ab4b065cd2c03dec8ac5bb356a48c45fa66f522": 2,
+        "36dbae35bcfc53dc115acc47d61632b8a025002938106a16d2db00576e6f678e": 79
+      },
+      "same_id_in_runtime": [],
+      "same_directed_pair_in_runtime": [],
+      "records": [
+        {
+          "id": "cx_arta_cultura_006",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_096",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_158",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_316",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_317",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_318",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_319",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_320",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_321",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_322",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_arta_cultura_323",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_010",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_015",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_097",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_098",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_164",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_166",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_168",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_246",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_324",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_325",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_326",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_film_tv_327",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_018",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_020",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_021",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_103",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_172",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_248",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_292",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_328",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_329",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_330",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_gastronomie_331",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_geografie_001",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_geografie_113",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_geografie_180",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_geografie_253",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_geografie_332",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_geografie_333",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_geografie_334",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_geografie_335",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_istorie_114",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_istorie_116",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_istorie_119",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_istorie_185",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_istorie_256",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_limba_036",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_limba_261",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_literatura_129",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_literatura_197",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_046",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_052",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_134",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_136",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_200",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_202",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_203",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_268",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_meme_net_269",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_054",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_056",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_058",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_140",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_142",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_206",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_271",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_272",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_muzica_274",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_personalitati_061",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_personalitati_147",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_personalitati_148",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_personalitati_336",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_personalitati_337",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_personalitati_338",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_personalitati_360",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_069",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_150",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_218",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_219",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_221",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_279",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_294",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_295",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_340",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_341",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_342",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_343",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_344",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_345",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_346",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_societate_347",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_071",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_158",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_223",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_281",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_348",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_349",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_350",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_351",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_352",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_353",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_354",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_sport_361",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_stiinta_166",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_stiinta_229",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_stiinta_230",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_stiinta_231",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_stiinta_357",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_stiinta_358",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_stiinta_359",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_085",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_086",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_168",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_171",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_172",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_233",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_234",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_235",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_237",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_291",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        },
+        {
+          "id": "cx_viata_de_roman_293",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact rejected groups remain blocked by A6, including unchanged three-of-four groups and half-board reskins; no individually rewritten board or fresh independent partition/freshness evidence was supplied."
+        }
+      ]
+    },
+    {
+      "game": "lant",
+      "path": "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+      "sha256": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+      "schema_validated_by": "scripts/critique_pack.py:load_lant_rejection_tombstones",
+      "count": 105,
+      "source_gate_counts": {
+        "4e976a185b27ccee2737542ed8321c6664b7b8c974ae8e793076571964af4458": 104,
+        "bf30221d7d4f87c090d1f7c60c2d2e34dff2cabc3dde747e83c014c95f65047a": 1
+      },
+      "same_id_in_runtime": [],
+      "same_directed_pair_in_runtime": [],
+      "records": [
+        {
+          "id": "lt_arta_cultura_156",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_arta_cultura_158",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_arta_cultura_159",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_film_tv_008",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_film_tv_010",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_film_tv_012",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_film_tv_097",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_film_tv_100",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_film_tv_101",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_film_tv_102",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_film_tv_160",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_013",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_014",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_016",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_019",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_103",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_104",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_106",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_108",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_164",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_165",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_212",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_gastronomie_218",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_geografie_020",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_geografie_024",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_geografie_026",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_geografie_167",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_geografie_242",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_istorie_027",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_istorie_031",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_istorie_113",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_istorie_116",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_035",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_037",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_038",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_039",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_117",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_118",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_119",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_120",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_121",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_174",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_175",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_limba_176",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_literatura_042",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_literatura_043",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_literatura_045",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_literatura_046",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_literatura_124",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_literatura_125",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_literatura_177",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_meme_net_050",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_meme_net_053",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_meme_net_054",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_meme_net_130",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_meme_net_133",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_muzica_056",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_muzica_057",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_muzica_059",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_muzica_061",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_muzica_138",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_muzica_140",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_muzica_183",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_062",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_063",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_064",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_065",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_068",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_142",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_144",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_145",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_146",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_147",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_148",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_personalitati_187",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_societate_072",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_societate_073",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_societate_074",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_societate_153",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_societate_192",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_societate_193",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_societate_195",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_sport_078",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_sport_079",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_sport_154",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_sport_199",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_081",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_084",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_155",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_157",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_159",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_160",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_200",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_202",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_204",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_215",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_stiinta_219",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_viata_de_roman_087",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_viata_de_roman_090",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_viata_de_roman_091",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_viata_de_roman_093",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_viata_de_roman_206",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_viata_de_roman_213",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_viata_de_roman_214",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        },
+        {
+          "id": "lt_viata_de_roman_217",
+          "disposition": "retain_rejection_debt",
+          "reason": "Exact directed pair remains rejection debt. Current structural diagnostics are recorded separately; numerical repair cannot revoke prior semantic/factual rejection."
+        }
+      ]
+    }
+  ],
+  "archived_contexto": [
+    {
+      "id": "ct_gastronomie_301",
+      "label": "Morcov",
+      "target": "n_v24_food_salad_veg_morcov",
+      "current_incoming_count": 2,
+      "incoming": [
+        {
+          "id": "n_v4gas_legume",
+          "label": "Legume"
+        },
+        {
+          "id": "n_v4gas_mancare",
+          "label": "Mâncare"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3"
+      ],
+      "original_reason": "Morcov is common, concrete, and unambiguous, but only Legume and Mâncare are direct predecessors. Two direct neighbors cannot clear the literal five-neighbor C3 release floor; Iepure is only Rece and no projection or proxy repairs the sparse target neighborhood.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "Current direct incoming count still fails C3; exact original quality/identity reasons remain recorded above."
+    },
+    {
+      "id": "ct_limba_307",
+      "label": "A citi",
+      "target": "n_v24_action_language_a_citi",
+      "current_incoming_count": 3,
+      "incoming": [
+        {
+          "id": "n_v24_action_language_a_spune",
+          "label": "A spune"
+        },
+        {
+          "id": "n_v3lim_limba",
+          "label": "Limbă"
+        },
+        {
+          "id": "n_v3lit_carte",
+          "label": "Carte"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C1",
+        "C3"
+      ],
+      "original_reason": "A citi is a familiar action with well-covered inflections and Carte as an obvious opener, but the strict target ontology excludes verbs and its three direct predecessors also miss C3.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "Current direct incoming count still fails C3; exact original quality/identity reasons remain recorded above."
+    },
+    {
+      "id": "ct_societate_179",
+      "label": "Drepturile omului",
+      "target": "n_drepturile_omului",
+      "current_incoming_count": 13,
+      "incoming": [
+        {
+          "id": "n_consiliul_europei",
+          "label": "Consiliul Europei"
+        },
+        {
+          "id": "n_constitutia",
+          "label": "Constituția României"
+        },
+        {
+          "id": "n_conventia_drepturilor_omului",
+          "label": "Convenția Europeană a Drepturilor Omului"
+        },
+        {
+          "id": "n_democratie",
+          "label": "Democrație"
+        },
+        {
+          "id": "n_drepturi_fundamentale",
+          "label": "Drepturi fundamentale"
+        },
+        {
+          "id": "n_onu",
+          "label": "ONU"
+        },
+        {
+          "id": "n_uniunea_europeana",
+          "label": "Uniunea Europeană"
+        },
+        {
+          "id": "n_v11fil_colectiv",
+          "label": "Colectiv"
+        },
+        {
+          "id": "n_v11soc_securitatea",
+          "label": "Securitatea"
+        },
+        {
+          "id": "n_v2soc_drepturi_civile",
+          "label": "Drepturi civile"
+        },
+        {
+          "id": "n_v4soc_copil",
+          "label": "copil"
+        },
+        {
+          "id": "n_v4soc_familie",
+          "label": "familie"
+        },
+        {
+          "id": "n_v4soc_pacient",
+          "label": "pacient"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C1"
+      ],
+      "original_reason": "Drepturile omului is recognizable and densely connected, but it is an abstract legal framework rather than a concrete, spontaneously nameable secret. A civics vocabulary field does not rescue the hard C1 failure.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "The original concrete-nameable-target/recognition failure remains; larger global reach does not cure target ontology."
+    },
+    {
+      "id": "ct_societate_256",
+      "label": "Recensământul populației",
+      "target": "n_recensamant",
+      "current_incoming_count": 7,
+      "incoming": [
+        {
+          "id": "n_comuna",
+          "label": "Comuna"
+        },
+        {
+          "id": "n_judet",
+          "label": "Județ"
+        },
+        {
+          "id": "n_minoritati_nationale",
+          "label": "Minoritățile naționale"
+        },
+        {
+          "id": "n_romania_stat",
+          "label": "România"
+        },
+        {
+          "id": "n_v11soc_cnp",
+          "label": "CNP"
+        },
+        {
+          "id": "n_v2soc_stat",
+          "label": "Stat"
+        },
+        {
+          "id": "n_v3soc_populatie",
+          "label": "Populație"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C1"
+      ],
+      "original_reason": "Recensământul populației is the rubric's explicit canonical C1 kill: a record/meta-process rather than a concrete secret. Populație and Stat are warm, but difficulty cannot come from asking the player to name an institutional phrase.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "The original concrete-nameable-target/recognition failure remains; larger global reach does not cure target ontology."
+    },
+    {
+      "id": "ct_societate_303",
+      "label": "familie",
+      "target": "n_v4soc_familie",
+      "current_incoming_count": 11,
+      "incoming": [
+        {
+          "id": "n_cetatean",
+          "label": "Cetățean"
+        },
+        {
+          "id": "n_drepturile_omului",
+          "label": "Drepturile omului"
+        },
+        {
+          "id": "n_v11fil_pozitia_copilului",
+          "label": "Poziția copilului"
+        },
+        {
+          "id": "n_v11soc_diaspora",
+          "label": "Diaspora"
+        },
+        {
+          "id": "n_v21soc_alocatia_de_stat",
+          "label": "Alocația de stat pentru copii"
+        },
+        {
+          "id": "n_v29_time_weekly_weekend",
+          "label": "Weekend"
+        },
+        {
+          "id": "n_v2via_masa_in_familie",
+          "label": "Masa în familie"
+        },
+        {
+          "id": "n_v2via_rude",
+          "label": "Rude"
+        },
+        {
+          "id": "n_v2via_sarbatori_familie",
+          "label": "Sărbători în familie"
+        },
+        {
+          "id": "n_v3soc_populatie",
+          "label": "Populație"
+        },
+        {
+          "id": "n_v4soc_copil",
+          "label": "copil"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3-legibility"
+      ],
+      "original_reason": "Familie is common and numerically dense, so the inventory verifier proposed promotion. The gameplay analyst found the decisive counterexample: Mamă, Tată, Bunică, Bunic, Frate, and Soră all rank 2,079/2,288 and read Înghețat while Weekend and broad civic abstractions are one-hop hot. That misleading core gradient blocks unanimous promotion and fail-closed synthesis rejects the exact record.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "Familie has eleven incoming links, but the original core-family gradient problem needs actual feedback repair; no new pair/target-specific evidence establishes it resolved.",
+      "current_native_probe": [
+        {
+          "text": "mamă",
+          "resolved": "n_v24_people_parents_mama",
+          "score": {
+            "anchor_id": "n_v24_people_parents_mama",
+            "distance": 5,
+            "weighted_distance": 6.460000000000001,
+            "rank": 2127,
+            "feedback_distance": 5
+          },
+          "reachable": 2353
+        },
+        {
+          "text": "tată",
+          "resolved": "n_v24_people_parents_tata",
+          "score": {
+            "anchor_id": "n_v24_people_parents_tata",
+            "distance": 5,
+            "weighted_distance": 6.460000000000001,
+            "rank": 2127,
+            "feedback_distance": 5
+          },
+          "reachable": 2353
+        },
+        {
+          "text": "bunică",
+          "resolved": "n_v24_people_grandparents_bunica",
+          "score": {
+            "anchor_id": "n_v24_people_grandparents_bunica",
+            "distance": 5,
+            "weighted_distance": 6.460000000000001,
+            "rank": 2127,
+            "feedback_distance": 5
+          },
+          "reachable": 2353
+        },
+        {
+          "text": "bunic",
+          "resolved": "n_v24_people_grandparents_bunic",
+          "score": {
+            "anchor_id": "n_v24_people_grandparents_bunic",
+            "distance": 5,
+            "weighted_distance": 6.460000000000001,
+            "rank": 2127,
+            "feedback_distance": 5
+          },
+          "reachable": 2353
+        },
+        {
+          "text": "frate",
+          "resolved": "n_v24_people_relatives_frate",
+          "score": {
+            "anchor_id": "n_v24_people_relatives_frate",
+            "distance": 5,
+            "weighted_distance": 6.460000000000001,
+            "rank": 2127,
+            "feedback_distance": 5
+          },
+          "reachable": 2353
+        },
+        {
+          "text": "soră",
+          "resolved": "n_v24_people_relatives_sora",
+          "score": {
+            "anchor_id": "n_v24_people_relatives_sora",
+            "distance": 5,
+            "weighted_distance": 6.460000000000001,
+            "rank": 2127,
+            "feedback_distance": 5
+          },
+          "reachable": 2353
+        },
+        {
+          "text": "weekend",
+          "resolved": "n_v29_time_weekly_weekend",
+          "score": {
+            "anchor_id": "n_v29_time_weekly_weekend",
+            "distance": 1,
+            "weighted_distance": 1.0899999999999999,
+            "rank": 3,
+            "feedback_distance": 1
+          },
+          "reachable": 2353
+        }
+      ]
+    },
+    {
+      "id": "ct_societate_305",
+      "label": "Farmacie",
+      "target": "n_v24_places_public_farmacie",
+      "current_incoming_count": 2,
+      "incoming": [
+        {
+          "id": "n_v24_places_public_parc",
+          "label": "Parc"
+        },
+        {
+          "id": "n_v4soc_magazin",
+          "label": "magazin"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3"
+      ],
+      "original_reason": "Farmacie has six safe non-winning medical projections and therefore obvious openers, but its only direct KG predecessors are the generic place siblings Parc and Magazin. Projection rank-2 hints cannot substitute for the literal five-neighbor C3 target floor.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "Current direct incoming count still fails C3; exact original quality/identity reasons remain recorded above."
+    },
+    {
+      "id": "ct_stiinta_104",
+      "label": "Sonicitate",
+      "target": "n_sonicitate",
+      "current_incoming_count": 4,
+      "incoming": [
+        {
+          "id": "n_gogu_constantinescu",
+          "label": "Gogu Constantinescu"
+        },
+        {
+          "id": "n_stilou_rezervor",
+          "label": "Stiloul cu rezervor"
+        },
+        {
+          "id": "n_stix_mecanica_fluidelor",
+          "label": "Mecanica fluidelor"
+        },
+        {
+          "id": "n_v2sti_fizica",
+          "label": "Fizică"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C1",
+        "C2",
+        "C3",
+        "C6"
+      ],
+      "original_reason": "Sonicitate is the rubric's canonical obscure meta-concept kill, has only four direct predecessors, and is the batch's sole salience warning at 0.152 below the greu floor of 0.20. Fizică being warm cannot turn obscurity into fair difficulty.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "Current direct incoming count still fails C3; exact original quality/identity reasons remain recorded above."
+    },
+    {
+      "id": "ct_stiinta_306",
+      "label": "Ploaie",
+      "target": "n_v24_weather_precipitation_ploaie",
+      "current_incoming_count": 3,
+      "incoming": [
+        {
+          "id": "n_v24_weather_air_nor",
+          "label": "Nor"
+        },
+        {
+          "id": "n_v4gas_apa",
+          "label": "Apă"
+        },
+        {
+          "id": "n_v4sti_aer",
+          "label": "aer"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3",
+        "lexical-collision"
+      ],
+      "original_reason": "Ploaie is universal and Nor/Apă are obvious openers, but three direct predecessors fail C3. Its natural definite form ploaia already resolves to the served Cargo song node, so it cannot safely be added as a weather alias or projection.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "Current direct incoming count still fails C3; exact original quality/identity reasons remain recorded above."
+    },
+    {
+      "id": "ct_viata_de_roman_302",
+      "label": "Frigider",
+      "target": "n_v24_home_appliances_frigider",
+      "current_incoming_count": 3,
+      "incoming": [
+        {
+          "id": "n_v24_home_appliances_lampa",
+          "label": "Lampă"
+        },
+        {
+          "id": "n_v4gas_bucatarie",
+          "label": "Bucătărie"
+        },
+        {
+          "id": "n_v4via_usa",
+          "label": "ușă"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3"
+      ],
+      "original_reason": "Frigider is concrete and Bucătărie is an obvious opener, but its three direct predecessors include generic Lampă and Ușă. Congelator supplies one non-winning projected hint; the current target still misses the C3 density and legibility bar.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "Current direct incoming count still fails C3; exact original quality/identity reasons remain recorded above."
+    },
+    {
+      "id": "ct_viata_de_roman_304",
+      "label": "Creion",
+      "target": "n_v24_school_writing_creion",
+      "current_incoming_count": 4,
+      "incoming": [
+        {
+          "id": "n_v23via_ghiozdan",
+          "label": "Ghiozdan"
+        },
+        {
+          "id": "n_v24_school_supplies_radiera",
+          "label": "Radieră"
+        },
+        {
+          "id": "n_v24_school_writing_caiet",
+          "label": "Caiet"
+        },
+        {
+          "id": "n_v88_school_compas",
+          "label": "Compas"
+        }
+      ],
+      "current_approved_same_target": [],
+      "original_failure_modes": [
+        "C3"
+      ],
+      "original_reason": "Creion is concrete and Radieră/Caiet/Ghiozdan are excellent openers, but the exact target has only those three direct predecessors and no target-anchored projection or proxy. It remains a strong future repair candidate, not a release candidate.",
+      "original_gate": "docs\\reviews\\v47-contexto-pending-gate\\contexto_verdicts.json",
+      "disposition": "retain_rejected",
+      "reason": "Creion improved from three to four incoming neighbors, still below five. A new factual relation cannot be invented to hit the count."
+    },
+    {
+      "id": "ct_viata_de_roman_352",
+      "label": "Făraș",
+      "target": "n_v31_cleaning_floor_faras",
+      "current_incoming_count": 5,
+      "incoming": [
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v31_cleaning_floor_aspirator",
+          "label": "Aspirator"
+        },
+        {
+          "id": "n_v88_cleaning_matura",
+          "label": "Mătură"
+        },
+        {
+          "id": "n_v90_food_firimitura",
+          "label": "Firimitură"
+        },
+        {
+          "id": "n_v90_household_praf",
+          "label": "Praf"
+        }
+      ],
+      "current_approved_same_target": [
+        "ct_viata_de_roman_355"
+      ],
+      "original_failure_modes": null,
+      "original_reason": "Exact imported dossier has zero lint findings and its KG, rubric and record bindings are verified against current pending state. Zero deterministic findings cannot waive ADR-0071 or C3. My earlier raw keep was staging only and incorrectly treated the incoming/outgoing union as the five-neighbor floor; the original artifact is preserved and this final review corrects that interpretation. Reject ct_viata_de_roman_352 under C3: the dossier has only three direct recognizable predecessors, Podea, Aspirator and Mătură. Its five distinct adjacent objects include outgoing-only Mop and Burete de vase; those do not supply two more incoming cues. The separate exact Praf repair and several same-Podea-proxy guesses give useful hot feedback but ADR-0071 explicitly forbids substituting such a cluster for five direct predecessors. C1/C2/C5/C6 otherwise pass: Făraș is a concrete ordinary dustpan, dominant household sense, salience 0.90; old CADE and current Leifheit use support easy recognition without pretending to measure population knowledge. C4 has actual Mătură #4, Casă #9 and Praf/Podea #2 approaches,2,343 reachable / 250 responsive; the safe clue/repeat/resume/plural-win journey passes. A1–A7 otherwise show no adult, regional, stereotype or prior-target duplicate trigger. Nineteen of 33 deliberately broad surfaces remain unknown, including Gunoi/Murdărie/Pardoseală. Familiarity, one good dust route and successful technical completion cannot cure C3. Rejection removes this pending round through the supported apply tool; preserve its exact dossier and final judgment and require a reviewed topology repair before a future proposal. No graph padding is requested.",
+      "original_gate": "docs\\reviews\\v89-feedback-and-conexiuni-recovery\\final-gate\\contexto_verdicts.json",
+      "disposition": "already_repaired_under_new_id",
+      "reason": "Original sparse-neighbor blocker changed in V90 and a separately reviewed successor is already served. Do not resurrect duplicate retired IDs."
+    },
+    {
+      "id": "ct_viata_de_roman_354",
+      "label": "Aspirator",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "current_incoming_count": 8,
+      "incoming": [
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v24_home_textiles_covor",
+          "label": "Covor"
+        },
+        {
+          "id": "n_v31_cleaning_floor_mop",
+          "label": "Mop"
+        },
+        {
+          "id": "n_v3sti_electricitate",
+          "label": "Electricitate"
+        },
+        {
+          "id": "n_v88_cleaning_matura",
+          "label": "Mătură"
+        },
+        {
+          "id": "n_v90_food_firimitura",
+          "label": "Firimitură"
+        },
+        {
+          "id": "n_v90_household_praf",
+          "label": "Praf"
+        },
+        {
+          "id": "n_v90_textile_scama",
+          "label": "Scamă"
+        }
+      ],
+      "current_approved_same_target": [
+        "ct_viata_de_roman_356"
+      ],
+      "original_failure_modes": null,
+      "original_reason": "Exact imported dossier has zero lint findings and its KG, rubric and record bindings are verified against current pending state. Zero deterministic findings cannot waive ADR-0071 or C3. My earlier raw keep was staging only and incorrectly treated the incoming/outgoing union as the five-neighbor floor; the original artifact is preserved and this final review corrects that interpretation. Reject ct_viata_de_roman_354 under C3: only three direct recognizable predecessors appear in the current directed dossier, Podea, Mop and Mătură. Outgoing-only Făraș and Burete de vase made the earlier adjacent-object count five; they cannot replace missing direct predecessors. Neither the Praf exact surface policy nor several Podea proxies constitutes new KG neighbors. C1/C2/C5/C6 otherwise pass for the ordinary household dust/floor/carpet appliance: DEX 1998 and current Kärcher usage support recognition, domestic sense dominates despite qualified industrial/nasal variants, salience 0.94. C4 has actual Casă #12/warm, Covor #36/warm, Mătură #4/hot and Praf/Podea #2/hot;2,343 reachable / 358 responsive and the clue/repeat/resume/plural-win journey pass. A1–A7 otherwise show no adult, stereotype, region or existing-target duplicate trigger. Electricitate #378/cold, Apă #9/hot and unknown Filtru/Sac/Păr de animale remain quality costs; water is not claimed as universal for dry vacuums. The good dust route does not satisfy the absent C3 topology. Supported reject removes this pending record; preserve immutable review evidence and require a separately reviewed topology repair before any future target proposal.",
+      "original_gate": "docs\\reviews\\v89-feedback-and-conexiuni-recovery\\final-gate\\contexto_verdicts.json",
+      "disposition": "already_repaired_under_new_id",
+      "reason": "Original sparse-neighbor blocker changed in V90 and a separately reviewed successor is already served. Do not resurrect duplicate retired IDs."
+    }
+  ],
+  "archived_alchimie": [
+    {
+      "id": "al_arta_cultura_015",
+      "failure_modes": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "original_reason": "Only Artă + Fotografie is productive in the live projection. The repeated Artă taxonomy step makes Sculptură românească arbitrary, while the remaining seeds are filler.",
+      "current": {
+        "id": "al_arta_cultura_015",
+        "target": {
+          "id": "n_v2art_sculptura_romaneasca",
+          "label": "Sculptură românească"
+        },
+        "opening_pairs": 1,
+        "route_count": 1,
+        "exact_action_par": 2,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": false
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_film_tv_022",
+      "failure_modes": [
+        "E3"
+      ],
+      "original_reason": "Five live openings and a familiar target made the verifier positive, but the gameplay review found Televiziune + Film underdetermines Subtitrare among many equally plausible film/TV crafts. Reject wins without unanimity.",
+      "current": {
+        "id": "al_film_tv_022",
+        "target": {
+          "id": "n_v3fil_subtitrare",
+          "label": "Subtitrare"
+        },
+        "opening_pairs": 5,
+        "route_count": 4,
+        "exact_action_par": 2,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_geografie_032",
+      "failure_modes": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "original_reason": "The only live opener is cătun + pârâu → Carpați, a generic and unintuitive association. Loose seed coherence and a low-salience target reinforce the hard E2 failure.",
+      "current": {
+        "id": "al_geografie_032",
+        "target": {
+          "id": "n_subcarpatii",
+          "label": "Subcarpații"
+        },
+        "opening_pairs": 1,
+        "route_count": 4,
+        "exact_action_par": 2,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": false
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_limba_047",
+      "failure_modes": [
+        "E1",
+        "E2",
+        "E3",
+        "E5"
+      ],
+      "original_reason": "Only Frază + Dialog opens the one six-action route. Dor, Grai, and Dicționar are dead filler in the private recipe book, leaving a long linear taxonomy exercise rather than meaningful choice.",
+      "current": {
+        "id": "al_limba_047",
+        "target": {
+          "id": "n_v4lim_timp_verbal",
+          "label": "Timp verbal"
+        },
+        "opening_pairs": 1,
+        "route_count": 1,
+        "exact_action_par": 6,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": false
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_literatura_051",
+      "failure_modes": [
+        "E1",
+        "E3"
+      ],
+      "original_reason": "The verifier found four plausible school-canon routes, but the gameplay reviewer found jurnal and Ghiță Pristanda unused and Sat românesc an uneven generic setting reached through author/work/category leaps. Reject wins without unanimity.",
+      "current": {
+        "id": "al_literatura_051",
+        "target": {
+          "id": "n_v2lit_sat_romanesc",
+          "label": "Sat românesc"
+        },
+        "opening_pairs": 3,
+        "route_count": 4,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_muzica_065",
+      "failure_modes": [
+        "E1",
+        "E3"
+      ],
+      "original_reason": "Rock românesc + Trupă rock cannot distinguish the particular Cargo song Ploaia from countless songs or bands. No Cargo-specific ingredient enters the minimum route.",
+      "current": {
+        "id": "al_muzica_065",
+        "target": {
+          "id": "n_muz_ploaia_cargo",
+          "label": "Ploaia"
+        },
+        "opening_pairs": 4,
+        "route_count": 4,
+        "exact_action_par": 2,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_personalitati_070",
+      "failure_modes": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "original_reason": "The sole opening Nicolae Titulescu + biografie → Regina Maria is not an intuitive distinctive association. Most seeds are filler for a forced biography chain.",
+      "current": {
+        "id": "al_personalitati_070",
+        "target": {
+          "id": "n_v2per_casa_regala",
+          "label": "Casa regală"
+        },
+        "opening_pairs": 1,
+        "route_count": 1,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": false
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_societate_076",
+      "failure_modes": [
+        "E1",
+        "E3"
+      ],
+      "original_reason": "The verifier accepted the civic State/România route, but the gameplay reviewer found copil and Universitatea filler and the generic taxonomy insufficiently specific to make Uniunea Europeană a satisfying easy craft. Reject wins without unanimity.",
+      "current": {
+        "id": "al_societate_076",
+        "target": {
+          "id": "n_uniunea_europeana",
+          "label": "Uniunea Europeană"
+        },
+        "opening_pairs": 3,
+        "route_count": 4,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_094",
+      "failure_modes": [
+        "E1",
+        "E2"
+      ],
+      "original_reason": "The Bloc → Viața la bloc → Întreținere/Apometre → Facturi route is repairable, but only Bloc + Termopanele is live initially. The literal two-opening E2 floor blocks release.",
+      "current": {
+        "id": "al_viata_de_roman_094",
+        "target": {
+          "id": "n_v3via_facturi",
+          "label": "Facturi"
+        },
+        "opening_pairs": 1,
+        "route_count": 4,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": false
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_095",
+      "failure_modes": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "original_reason": "Only Naveta + Piața opens a six-action route through generic shopping, car, and package concepts. Caloriferul rece and Cheia de la gât are filler and the target is not inferable.",
+      "current": {
+        "id": "al_viata_de_roman_095",
+        "target": {
+          "id": "n_vdr_gospodaria_bunicilor",
+          "label": "Gospodăria bunicilor"
+        },
+        "opening_pairs": 1,
+        "route_count": 4,
+        "exact_action_par": 6,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": false
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_098",
+      "failure_modes": [
+        "A6",
+        "E3",
+        "E4"
+      ],
+      "original_reason": "The childhood-game seeds and two openings are strong, but generic Jocuri de copilărie + Copilăria anilor 90 cannot distinguish Telefonul fără fir from many sibling games. It also recycles a served nostalgia cluster.",
+      "current": {
+        "id": "al_viata_de_roman_098",
+        "target": {
+          "id": "n_v23via_telefonul_fara_fir",
+          "label": "Telefonul fără fir"
+        },
+        "opening_pairs": 2,
+        "route_count": 3,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_099",
+      "failure_modes": [
+        "A6",
+        "E1",
+        "E3"
+      ],
+      "original_reason": "This is one of six 5/7–6/7 seed-template reskins. School items are filler and Dormitor + ușă → Pernă uses ușă as a magic transformer.",
+      "current": {
+        "id": "al_viata_de_roman_099",
+        "target": {
+          "id": "n_v24_home_bed_perna",
+          "label": "Pernă"
+        },
+        "opening_pairs": 3,
+        "route_count": 3,
+        "exact_action_par": 2,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_100",
+      "failure_modes": [
+        "A6",
+        "E1",
+        "E3"
+      ],
+      "original_reason": "This is one of six 5/7–6/7 seed-template reskins. School items are filler and repeated +ușă crafts arbitrarily extend Pernă to Fotoliu.",
+      "current": {
+        "id": "al_viata_de_roman_100",
+        "target": {
+          "id": "n_v24_home_seating_fotoliu",
+          "label": "Fotoliu"
+        },
+        "opening_pairs": 3,
+        "route_count": 3,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_101",
+      "failure_modes": [
+        "A6",
+        "E1",
+        "E3"
+      ],
+      "original_reason": "This is one of six 5/7–6/7 seed-template reskins. School items are filler and repeated +ușă crafts arbitrarily transform Pat into Pernă, Fotoliu, then Sufragerie.",
+      "current": {
+        "id": "al_viata_de_roman_101",
+        "target": {
+          "id": "n_v24_home_rooms_sufragerie",
+          "label": "Sufragerie"
+        },
+        "opening_pairs": 3,
+        "route_count": 3,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_102",
+      "failure_modes": [
+        "A6",
+        "E1"
+      ],
+      "original_reason": "The Temă + Lecție → Examen route is a strong repair nucleus, but A dormi, Pat, and ușă are irrelevant home leftovers and the board is a 6/7 template reskin.",
+      "current": {
+        "id": "al_viata_de_roman_102",
+        "target": {
+          "id": "n_v24_school_assessment_examen",
+          "label": "Examen"
+        },
+        "opening_pairs": 3,
+        "route_count": 2,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_103",
+      "failure_modes": [
+        "A6",
+        "E1",
+        "E3"
+      ],
+      "original_reason": "The school route is repairable, but A dormi, Sufragerie, and ușă are filler, the final Examen + Temă → Catalog școlar step is loose, and the board is a 6/7 template reskin.",
+      "current": {
+        "id": "al_viata_de_roman_103",
+        "target": {
+          "id": "n_v24_school_assessment_catalog_scolar",
+          "label": "Catalog școlar"
+        },
+        "opening_pairs": 3,
+        "route_count": 2,
+        "exact_action_par": 4,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    },
+    {
+      "id": "al_viata_de_roman_104",
+      "failure_modes": [
+        "A6",
+        "E1",
+        "E3"
+      ],
+      "original_reason": "This is one of six 5/7–6/7 seed-template reskins. School seeds are filler in a home-object board and Dormitor → Pernă → Covor again relies on arbitrary +ușă transformations.",
+      "current": {
+        "id": "al_viata_de_roman_104",
+        "target": {
+          "id": "n_v24_home_textiles_covor",
+          "label": "Covor"
+        },
+        "opening_pairs": 2,
+        "route_count": 2,
+        "exact_action_par": 3,
+        "projection_unchanged_from_v48": true,
+        "bounds": {
+          "declared_par_matches_exact": true,
+          "projection_par_matches_exact": true,
+          "route_limit": true,
+          "recipe_pair_limit": true,
+          "projected_concept_limit": true,
+          "result_per_pair_limit": true,
+          "e2_live_opening_floor": true
+        }
+      },
+      "disposition": "retain_rejected",
+      "reason": "Exact current sparse recipe projection matches the rejected V48 projection; recipe-world growth did not repair this scored-board path, seed filler or freshness defect."
+    }
+  ],
+  "diagnostic_summary": {
+    "rejected_lant": 105,
+    "rejected_lant_current_payload_invalid": 91,
+    "rejected_contexto": 12,
+    "archived_alchimie_rebuilt": 20,
+    "alchimie_projection_unchanged": 20
+  },
+  "runtime_diagnostics": "reconsideration/runtime-diagnostics.json",
+  "alchimie_projection": "reconsideration/alchimie-archive-current-projection.json",
+  "research_pool": [
+    {
+      "id": "v99-everyday-intrare",
+      "revision": 1,
+      "state_retained": "held",
+      "label_ro": "Intrare",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Hold: the physical-access sense is plausible, but its separation from Ușă and the input experience are unresolved.",
+      "remaining_risks": [
+        "Polysemy conflicts with C5 for a target.",
+        "New shared node versus carefully scoped accepted form is unresolved.",
+        "A dictionary synonym in one context does not license equivalent graph identity."
+      ],
+      "next_action": "Refinement should decide whether a qualified label such as Intrare în casă is nameable, preserve Ușă wins, and test likely typed guesses before selecting a graph proposal.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-toc-usa",
+      "revision": 1,
+      "state_retained": "researched",
+      "label_ro": "Toc de ușă",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Research retained: identity and concrete frame sense are supported; game selection and input quality still need review.",
+      "remaining_risks": [
+        "Qualified label is safer but less spontaneous than toc.",
+        "No target incoming floor or route alternatives have been measured."
+      ],
+      "next_action": "Prioritize a narrow Ușă guess/feedback proposal, review bare toc ambiguity, and measure all affected Contexto profiles.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-balama",
+      "revision": 1,
+      "state_retained": "researched",
+      "label_ro": "Balama",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Research retained: the door-hinge concept is distinct and supported; assess actual game benefit before selection.",
+      "remaining_risks": [
+        "Mechanism is shared by many objects; distinguish specific useful links from generic hubs.",
+        "No aliases such as șarnieră or țâțână are granted by this pool."
+      ],
+      "next_action": "Review everyday recognition of singular/plural forms, source exact cupboard use if proposed, and audit graph impact before selection.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-clanta",
+      "revision": 1,
+      "state_retained": "researched",
+      "label_ro": "Clanță",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Research retained; concrete relation supported, current familiarity evidence has a dating limitation.",
+      "remaining_risks": [
+        "The figurative pejorative sense should never drive child-facing play.",
+        "Not all doors have a press-down handle; describe typical use, not universality.",
+        "Current source publication date remains unresolved."
+      ],
+      "next_action": "Find a dated current independent usage signal, then compare a door guess proposal with alternative pairings; retain physical sense only.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-lemn",
+      "revision": 1,
+      "state_retained": "researched",
+      "label_ro": "Lemn",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Research retained: strong ordinary material evidence; usefulness and topology impact remain design questions.",
+      "remaining_risks": [
+        "Broad material relations can distort many old target distances.",
+        "Do not infer every furniture item is wood or conflate solid wood with all composites.",
+        "Alchimie capacity/reachability would be a separate task."
+      ],
+      "next_action": "Select a small claim-specific neighborhood, measure old feedback profiles and route quality, and reject links that only make arbitrary material hubs.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-sticla",
+      "revision": 1,
+      "state_retained": "held",
+      "label_ro": "Sticlă",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Hold: material/container input boundary remains unresolved despite a supported material definition.",
+      "remaining_risks": [
+        "Bare label fails a confident single-sense target proposal.",
+        "Sticlă is not a synonym of the entire Fereastră or Oglindă object.",
+        "Rejected Conexiuni board cx_arta_cultura_317 includes Icoane pe sticlă; any reused quad must retain that novelty debt."
+      ],
+      "next_action": "Evaluate a qualified material label and input treatment, then recheck recognition and any proposed window relation; do not repurpose a bottle sense.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-perdea",
+      "revision": 1,
+      "state_retained": "researched",
+      "label_ro": "Perdea",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Research retained: household sense and placement supported; complete pairing/route design remains open.",
+      "remaining_risks": [
+        "Window exclusivity would be dishonest.",
+        "Perdea forestieră or de fum must not contaminate household feedback.",
+        "Plain textile-category groups risk rubric B6 generic filler."
+      ],
+      "next_action": "Test the Perdea—Fereastră pairing adversarially with door alternatives and investigate draperie before any alias proposal.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-masa-bucatarie",
+      "revision": 1,
+      "state_retained": "held",
+      "label_ro": "Masă de bucătărie",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Hold: a distinct furniture sense is useful, but input ownership and player-visible disambiguation require explicit reviewed design.",
+      "remaining_risks": [
+        "Bare masă/mese/mesele are owned by n_v4gas_masa and must remain meal inputs.",
+        "Qualified label could feel artificial or unnecessarily narrow.",
+        "No owner approval to revise existing identity is implied."
+      ],
+      "next_action": "Preserve n_v4gas_masa and its aliases; evaluate a separately named furniture concept with wrong/repeat/win regression probes before selection.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-ac-cusut",
+      "revision": 1,
+      "state_retained": "held",
+      "label_ro": "Ac de cusut",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Hold: the qualified tool sense is distinct, but bare-ac ownership and recognition checks block selection.",
+      "remaining_risks": [
+        "normalize('ac') equals normalize('AC'), already owned by air conditioner n_v20via_aer_conditionat.",
+        "Generic needle senses are not interchangeable.",
+        "Needle/thread pairing cannot be treated as a crafting recipe without an explicit result and reviewed world design."
+      ],
+      "next_action": "Keep AC bound to air conditioner. Review a qualified-only needle input plan and gather a dated current independent recognition signal before any adoption.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-ata",
+      "revision": 1,
+      "state_retained": "researched",
+      "label_ro": "Ață",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Research retained: sewing sense and independent selective-olympiad exposure supported; pairing uniqueness and needle dependency remain open.",
+      "remaining_risks": [
+        "Bare material/category links can become generic filler.",
+        "The needle dependency is held for AC input collision.",
+        "No new Alchimie result or recipe is proposed."
+      ],
+      "next_action": "Review qualified Ac de cusut dependency first or design a separately sourced clothing association that does not require it.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-nasture",
+      "revision": 1,
+      "state_retained": "researched",
+      "label_ro": "Nasture",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Research retained: familiar component with a specific shirt association, but pair uniqueness is untested.",
+      "remaining_risks": [
+        "Decorative buttons do not always close an item.",
+        "Do not conflate buttons with electronic Buton if such a concept is later added.",
+        "A repair action does not automatically define a crafting result."
+      ],
+      "next_action": "Source the intended shirt repair precisely, then author a complete pairing/outsider board with competing garments checked.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    },
+    {
+      "id": "v99-everyday-fermoar",
+      "revision": 1,
+      "state_retained": "researched",
+      "label_ro": "Fermoar",
+      "exact_qualified_label_resolves_now": null,
+      "original_decision": "Research retained: definition and selective-olympiad exposure supported; the most useful exact object pairing is still unsourced.",
+      "remaining_risks": [
+        "Fermoar—Ghiozdan claim is explicitly unverified.",
+        "Nasture and Fermoar both close many garments, causing competing pairings.",
+        "Closing mechanisms are not manufacturing recipes."
+      ],
+      "next_action": "Find an original school-backpack or garment source for the chosen relation, then test complete board ambiguity before selecting a graph/puzzle proposal.",
+      "disposition": "retain_research_not_playable",
+      "reason": "No changed identity/runtime dependency or exact independently reviewed graph/game proposal clears the recorded risks. Research is not rejected stock, approval, or a new playable concept."
+    }
+  ],
+  "recipe_drafts": [
+    {
+      "scout_id": "soup-tomato-cream",
+      "pair": [
+        "alw_food_supa_rosii",
+        "n_v20gas_smantana"
+      ],
+      "pair_labels": [
+        "Supă de roșii",
+        "Smântână"
+      ],
+      "result": "alw_food_supa_crema",
+      "result_label": "Supă cremă",
+      "pair_already_installed": false,
+      "concepts_to_add": 0,
+      "review_status": "unreviewed",
+      "evidence_needed": "A source showing prepared tomato soup becomes a smooth cream soup with fermented cream; a topping alone is insufficient.",
+      "pitfall": "Existing soup may contain rice; blending and texture must be substantiated. Fermented cream differs from sweet whipping cream.",
+      "disposition": "retain_unreviewed_research",
+      "reason": "The exact prepared-input transformation remains unsubstantiated; related recipes do not discharge the named pitfall. No review or installation rail has been completed."
+    },
+    {
+      "scout_id": "soup-spinach-broth",
+      "pair": [
+        "alw_food_mancare_spanac",
+        "n_v4gas_supa"
+      ],
+      "pair_labels": [
+        "Mâncare de spanac",
+        "Supă"
+      ],
+      "result": "alw_food_supa_crema",
+      "result_label": "Supă cremă",
+      "pair_already_installed": false,
+      "concepts_to_add": 0,
+      "review_status": "unreviewed",
+      "evidence_needed": "A source reusing the already cooked creamy spinach preparation with soup and any required homogenization.",
+      "pitfall": "Milk, flour and garlic in the existing preparation cannot disappear. Raw spinach recipes do not substantiate this reuse.",
+      "disposition": "retain_unreviewed_research",
+      "reason": "The exact prepared-input transformation remains unsubstantiated; related recipes do not discharge the named pitfall. No review or installation rail has been completed."
+    },
+    {
+      "scout_id": "tart-creamed-spinach",
+      "pair": [
+        "alw_food_foietaj",
+        "alw_food_mancare_spanac"
+      ],
+      "pair_labels": [
+        "Foietaj",
+        "Mâncare de spanac"
+      ],
+      "result": "alw_food_tarta",
+      "result_label": "Tartă",
+      "pair_already_installed": false,
+      "concepts_to_add": 0,
+      "review_status": "unreviewed",
+      "evidence_needed": "A source for the exact creamy cooked spinach preparation in an open puff-pastry tart, including binding and baking.",
+      "pitfall": "Raw spinach-and-cheese pie is insufficient; wet cooked filling may require steps that weaken the proposed pair.",
+      "disposition": "retain_unreviewed_research",
+      "reason": "The exact prepared-input transformation remains unsubstantiated; related recipes do not discharge the named pitfall. No review or installation rail has been completed."
+    }
+  ],
+  "source_checks": [
+    {
+      "url": "https://dexonline.ro/definitie/ghiozdan",
+      "checked_on": "2026-09-23",
+      "access": "opened",
+      "supports": "Dictionary transports-books-and-notebooks sense supports Ghiozdan–Carte and schoolchild use. A wording source, not full board approval."
+    },
+    {
+      "url": "https://editurasigma.ro/product/capra-cu-trei-iezi-carte-uriasa/",
+      "checked_on": "2026-09-23",
+      "access": "search excerpt available; direct open failed",
+      "supports": "Publisher excerpt presents an adapted beginner-reader edition; only preliminary source lead, not claimed full-page verification."
+    },
+    {
+      "url": "https://jamilacuisine.ro/supa-crema-de-rosii-coapte-reteta-video/",
+      "checked_on": "2026-09-23",
+      "access": "search full-text extraction",
+      "supports": "Roasted vegetables must be puréed; uses cooking cream. Does not demonstrate that existing tomato soup plus fermented cream alone becomes the intended cream soup."
+    },
+    {
+      "url": "https://www.nestle.ro/nutritie/retete/supa-crema-de-spanac",
+      "checked_on": "2026-09-23",
+      "access": "opened",
+      "supports": "New soup preparation uses spinach, milk, potatoes and other ingredients. Does not substantiate reusing the exact already-cooked milk/flour/garlic dish."
+    },
+    {
+      "url": "https://ralucabrezniceanu.ro/2018/04/placinta-cu-spanac-in-foietaj/",
+      "checked_on": "2026-09-23",
+      "access": "search excerpt only",
+      "supports": "Spinach puff pastry example includes feta-like cheese; does not establish the exact prepared creamed-spinach open tart. Lead only."
+    }
+  ],
+  "other_author_screening_archives": [
+    {
+      "path": "docs/reviews/v88-cross-game-quality/author-screening/conexiuni-rejected-crossfit.json.gz",
+      "drafts": 1,
+      "reason_retained": "Geometry-kit predicate crossfits writing tools. Full board remains ambiguous; these are author holds, not extra final rejected pack IDs."
+    },
+    {
+      "path": "docs/reviews/v92-entry-creation-and-gui/pack/author/rejected-conexiuni-drafts/candidates.json",
+      "drafts": 2,
+      "reason_retained": "Two author drafts failed A6: draft0 repeats four exact/three-of-four quads from rejected cx_gastronomie_328, cx_viata_de_roman_293 and291; draft1 repeats three members of rejected cx_gastronomie_331. Those tombstones are still active.",
+      "evidence": "docs/reviews/v92-entry-creation-and-gui/pack/author/rejected-conexiuni-drafts/preview-lints.json"
+    },
+    {
+      "path": "docs/reviews/v94-words-and-clearer-connections/pack/public-description-rejection.json",
+      "drafts": 1,
+      "already_counted_in_lant_tombstones": "lt_geografie_242",
+      "reason_retained": "Baseline Caraiman public description still carries summit/dimension error; proposed V1 correction would change this fact, but exact pair remains rejected debt and is not automatically reinstated."
+    }
+  ],
+  "limitations": [
+    "No final promotion artifact was authored or applied.",
+    "Current deterministic eight-pending pass proves only lint solvability.",
+    "91 of105 rejected Lanț records still fail current payload validation; remaining14 are not semantic approvals.",
+    "All20 rebuilt old Alchimie projections (17rejects+3holds) remain exactly structurally unchanged.",
+    "Source absence in a bounded search is not proof that no qualifying source exists.",
+    "Human enjoyment and mixed-age recognition remain to be tested with people."
+  ]
+}

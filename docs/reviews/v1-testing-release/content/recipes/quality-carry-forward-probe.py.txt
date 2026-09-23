@@ -1,0 +1,66 @@
+import os,sys,json,hashlib,collections
+from pathlib import Path
+root=Path(sys.argv[1]);os.chdir(root);sys.path[:0]=[str(root),str(root/'scripts')]
+from scripts import build_alchimie_recipe_extensions as B
+from cat_de_roman_esti.wordgames import alchimie as A,recipe_extensions as R
+from cat_de_roman_esti.wordgames.packs import get_pack
+from cat_de_roman_esti.wordgames.service import get_service
+p=root/'docs/reviews/v1-testing-release/content/recipes';cpath=p/'candidates.json';ppath=p/'carry-forward-provenance.json'
+h=lambda x:hashlib.sha256(x.read_bytes()).hexdigest();read=lambda x:json.loads(x.read_bytes())
+c,author=read(cpath),read(ppath)
+assert h(cpath)=='adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366';assert h(ppath)=='df3a1d7db21253cf2edc5e7217c7c84e8721a5709b87fac5b42df631b090600a'
+for value in c['bindings'].values():assert h(root/value['path'])==value['sha256']
+inputs=author['historical_inputs']
+for value in inputs.values():assert h(root/value['path'])==value['sha256']
+old=read(root/inputs['candidates']['path']);oldcat=read(root/inputs['published_catalog']['path']);oldq=read(root/inputs['quality_review']['path']);oldf=read(root/inputs['factual_review']['path']);qby={x['id']:x for x in oldq['items']};fby={x['id']:x for x in oldf['items']};oldby={x['id']:x for x in old['candidates']};oldboards={b['id']:b for b in oldcat['boards']};oldarchive={b['id']:b for b in old['boards']}
+assert oldcat['candidate_sha256']==h(root/inputs['candidates']['path']);assert oldq['candidate_sha256']==oldf['candidate_sha256']==oldcat['candidate_sha256'];assert next(r for r in oldcat['semantic_reviews'] if r['role']=='quality')['sha256']==inputs['quality_review']['sha256'];assert next(r for r in oldcat['semantic_reviews'] if r['role']=='factual')['sha256']==inputs['factual_review']['sha256']
+published={a['candidate_id']:(b,a) for b in oldcat['boards'] for a in b['additions']};currentids={x['id'] for x in c['candidates']};assert len(published)==50 and len(currentids)==len(c['candidates'])==49;assert set(published)-currentids=={'alrecipe-al_istorie_034-b6fa248bd5858176'}
+svc=get_service();pack=get_pack();eligible={i.id:i for i in pack.pool('alchimie') if not pack.ranked or i._pilot_eligible};assert len(eligible)==68 and {b['id'] for b in c['boards']}==set(eligible)
+cores={};coreproof=[]
+for b in c['boards']:
+ item=eligible[b['id']];projection=A._build_recipe_projection(item.payload['seeds'],item.payload['target'],item.category);assert projection is not None
+ labelled=B._labelled_core(svc,projection,item.payload['seeds'],item.payload['target']);assert labelled==b['before_core'] and R.digest(labelled)==b['before_core_sha256'];assert b['source_record_sha256']==R.digest(b['source_record']);assert b['before_core']==oldarchive[b['id']]['before_core']
+ core=R.core_record(item.payload['seeds'],item.payload['target'],item.category,projection.recipes,projection.routes,projection.par);cores[b['id']]=(core,projection)
+ coreproof.append({'id':b['id'],'labelled_core_sha256':R.digest(labelled),'core_sha256':R.digest(core),'same_as_original_v92_labelled_core':True,'par':projection.par,'recipe_count':len(projection.recipes)})
+metadata=[];boardproof=[]
+for bid in sorted({x['board_id'] for x in c['candidates']}):
+ ob=oldboards[bid];core,pr=cores[bid];assert ob['core']==core and ob['core_sha256']==R.digest(core);assert ob['entry_sha256']==R.digest({k:v for k,v in ob.items() if k!='entry_sha256'})
+ ns={n:R.record_snapshot(svc.node(n)) for n in ob['nodes']};es={}
+ for pair,outputs in pr.recipes.items():
+  for parent in pair:
+   for output in outputs:
+    edge=svc.link(parent,output);es[edge.id]=R.record_snapshot(edge)
+ additions=[x for x in c['candidates'] if x['board_id']==bid]
+ for x in additions:
+  for parent in [n['id'] for n in x['pair']]:
+   edge=svc.link(parent,x['result']['id']);es[edge.id]=R.record_snapshot(edge)
+ assert set(es)==set(ob['edges'])
+ change={'board_id':bid};nodechanges=[];edgechanges=[]
+ for nid,before in ob['nodes'].items():
+  after=ns[nid]
+  if before!=after:nodechanges.append({'id':nid,'before':before,'after':after,'fields':sorted(k for k in before if before[k]!=after[k])})
+ for eid,before in ob['edges'].items():
+  after=es[eid]
+  if before!=after:edgechanges.append({'id':eid,'before':before,'after':after,'fields':sorted(k for k in before if before[k]!=after[k])})
+ if nodechanges:change['nodes']=nodechanges
+ if edgechanges:change['edges']=edgechanges
+ if nodechanges or edgechanges:metadata.append(change)
+ # Replay actual old loader behavior, without editing its catalog file.
+ active=R.extend_recipes(svc,core['seeds'],core['target'],core['category'],pr.recipes,pr.routes,pr.par)
+ dormant=sum(tuple(n['id'] for n in x['pair']) not in active for x in additions)
+ boardproof.append({'id':bid,'core_sha256':R.digest(core),'published_entry_sha256':ob['entry_sha256'],'current_node_snapshots_sha256':R.digest(ns),'current_edge_snapshots_sha256':R.digest(es),'current_selected_edge_ids_unchanged':True,'candidate_count':len(additions),'currently_inactive_old_additions':dormant,'metadata_changes':bool(nodechanges or edgechanges)})
+assert metadata==author['metadata_changes'];assert sum(x['currently_inactive_old_additions'] for x in boardproof)==7
+rows=[]
+for x in c['candidates']:
+ cid=x['id']; oldrow=oldby[cid]; changed_fields=sorted(k for k in x.keys()|oldrow.keys() if x.get(k)!=oldrow.get(k)); assert not changed_fields or changed_fields==['alternative_candidate_ids_for_same_pair','candidate_sha256']; assert not changed_fields or (x['alternative_candidate_ids_for_same_pair']==[] and all(a not in currentids and qby[a]['verdict']==fby[a]['verdict']=='reject' for a in oldrow['alternative_candidate_ids_for_same_pair']));assert x['candidate_sha256']==R.digest({k:v for k,v in x.items() if k!='candidate_sha256'});assert qby[cid]['verdict']==fby[cid]['verdict']=='accept';ob,addition=published[cid];pair=[n['id'] for n in x['pair']];result=x['result']['id'];assert x['board_id']==ob['id'] and pair==addition['pair'] and result==addition['result'] and oldrow['candidate_sha256']==addition['candidate_sha256'];assert [e['runtime_edge']['id'] for e in x['edges']]==addition['edge_ids']
+ for parent,archivededge in zip(pair,x['edges'],strict=True):assert R.record_snapshot(svc.link(parent,result))==archivededge['runtime_edge']
+ core,pr=cores[x['board_id']];assert tuple(pair) not in pr.recipes and result in svc.common_neighbors(*pair,category=core['category'])
+ rows.append({'id':cid,'board_id':x['board_id'],'pair':pair,'result':result,'exact_original_candidate_unchanged':not changed_fields,'changed_fields':changed_fields,'historical_candidate_sha256':oldrow['candidate_sha256'],'previously_rejected_alternative_ids':oldrow['alternative_candidate_ids_for_same_pair'] if changed_fields else [],'candidate_sha256':x['candidate_sha256'],'prior_quality_item_sha256':R.digest(qby[cid]),'prior_factual_item_sha256':R.digest(fby[cid]),'published_pair_result_identity_equal':True,'selected_recipe_edge_snapshots_unchanged':True,'core_identity_unchanged':True})
+proof={'kind':'v1-alchimie-extension-independent-quality-carry-forward-proof-v1','reviewer':'/root/v1_held_audit','candidate_sha256':h(cpath),'author_provenance_sha256':h(ppath),'historical_inputs':inputs,'current_bindings':c['bindings'],'counts':{'old_published_additions':50,'retained_additions':49,'affected_boards':len(boardproof),'eligible_cores':len(coreproof),'changed_candidate_rows':sum(bool(r['changed_fields']) for r in rows),'changed_gameplay_identities':0,'changed_core_topologies':0,'metadata_refresh_boards':len(metadata),'old_additions_disabled_by_exact_metadata_checks':7,'fresh_web_investigations':0},'excluded':author['excluded'],'core_replays':coreproof,'metadata_changes':metadata,'board_comparisons':boardproof,'items':rows,'method':'Independently checked originalV92/current47exactrow equality plus2changed competitor-list/selfdigest records (both original rejected alternatives remain excluded),49exactgameplayidentities, both oldaccepted judgments and published catalog hashes,50minus1reservedexactIDs,68currenteligible nativecore projections equal original labelledcores,27fullpublishedcore identities, allselected recipe/coreedge IDs and current snapshots. Computed three metadata-only changes directly and matched authorprovenance; actual oldloader disables7additions as expected.','limits':'Historical semantic and factual source judgments are explicitly inherited on unchanged recipe identities, not49newsource investigations. Three metadata corrections independently reviewed earlier in this release do not alter recipe meaning. Independent current factual approval, final native live replay and bound final quality review still required before package write.'}
+(p/'quality-carry-forward-proof.json').write_bytes(B.catalog_bytes(proof))
+notes={'al_arta_cultura_016':'The Ateneul description is corrected to building/concert venue; the retained Hurezi+Mănăstire→Stilul brâncovenesc recipe does not depend on Ateneul being the principal festival stage. Core and recipe edges remain identical.','al_film_tv_020':'Operațiunea Monstrul degree drops8→7 after removal of the false Dem edge. The three retained medium recipes use Trailer/dramă/ecran→Film, without that actor assertion; all their edges and the core are unchanged.','al_sport_083':'The retained three openings combine named clubs to Club sportiv. The core Neagu edge changes only present to past tense, keeping her historical sport association truthful; no retained recipe depends on active-player status.'}
+review={'kind':B.REVIEW_KIND,'role':'quality','reviewer':'/root/v1_held_audit','candidate_sha256':h(cpath),'baseline_evidence':{'original_quality_reviewer':oldq['reviewer'],'original_quality_review_sha256':inputs['quality_review']['sha256'],'original_published_catalog_sha256':inputs['published_catalog']['sha256'],'independent_proof_sha256':h(p/'quality-carry-forward-proof.json'),'inheritance':'49existingaccepted recipe identities; no49freshwebreviews. Currentqualityacceptance follows independent exactevidence comparison and re-evaluation of the three exposed metadata corrections.'},'items':[]}
+for x in c['candidates']:
+ review['items'].append({'id':x['id'],'verdict':'accept','rationale':'Accept carry-forward after independent identity/core/selected-edge comparison. Inherited V92 semantic reason: '+qby[x['id']]['rationale']+' '+('Current competitor list is empty only because both historical rejected named-sea alternatives are outside this carry-forward batch; their A7 rejection remains justified and the accepted general litoral result is unchanged. ' if x['id'] in {'alrecipe-al_geografie_033-bb8bfcd0955f704f','alrecipe-al_geografie_033-c76764dae62d17b1'} else '')+notes.get(x['board_id'],'No board-level metadata changed; the same bounded association remains intelligible and adds a previously accepted alternative without new concepts or core replacement.'),'sources':qby[x['id']]['sources']})
+(p/'quality-review.json').write_bytes(B.catalog_bytes(review));B.read_review(p/'quality-review.json','quality',h(cpath),currentids);(p/'quality-carry-forward-probe.py.txt').write_bytes(Path(__file__).read_bytes())
+print(json.dumps(proof['counts']));print('quality',h(p/'quality-review.json'));print('proof',h(p/'quality-carry-forward-proof.json'))

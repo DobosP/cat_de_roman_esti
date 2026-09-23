@@ -882,7 +882,9 @@ def test_real_rejection_tombstones_are_valid_and_not_runtime_boards(loaded):
 
 def test_pending_lant_runtime_failures_are_critique_gate_failures(loaded):
     pack, svc, strong, regions = loaded
-    valid = next(item for item in pack["lant"] if item["id"] == "lt_viata_de_roman_211")
+    # V1 promoted this board; explicitly test the pending gate with a local copy.
+    valid = {**next(item for item in pack["lant"]
+                    if item["id"] == "lt_viata_de_roman_211"), "status": "pending"}
     invalid = {
         **valid,
         "id": "lt_pending_invalid",
@@ -892,7 +894,9 @@ def test_pending_lant_runtime_failures_are_critique_gate_failures(loaded):
         "target": "n_masa_tacerii",
         "optimal": 5,
     }
-    pack = {**pack, "lant": [*pack["lant"], invalid]}
+    pack = {**pack, "lant": [
+        *(valid if item["id"] == valid["id"] else item for item in pack["lant"]), invalid,
+    ]}
 
     items, _, selected = critique_pack.run(
         pack,

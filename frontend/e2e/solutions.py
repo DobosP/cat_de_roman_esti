@@ -30,9 +30,26 @@ from django.test import Client  # noqa: E402
 from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
 
 
-def solution(game: str) -> dict:
+def solution(game: str, pack_id: str | None = None) -> dict:
     module = importlib.import_module(f"cat_de_roman_esti.wordgames.{game}")
     query = {"seed": "38", "difficulty": "usor"}
+    if pack_id is not None:
+        if game != "alchimie":
+            raise ValueError("named browser fixtures currently support Alchimie only")
+        from cat_de_roman_esti.wordgames.packs import get_pack
+        from tests.content_scenarios import alchimie_seed
+
+        items = [item for item in get_pack().pool(game) if item.id == pack_id]
+        if len(items) != 1:
+            raise ValueError(f"named browser fixture requires approved challenge {pack_id}")
+        item = items[0]
+        query = {
+            "seed": str(alchimie_seed(
+                pack_id, difficulty=item.difficulty, category=item.category,
+            )),
+            "difficulty": item.difficulty,
+            "category": item.category,
+        }
     if game in {"intrusul", "perechi"}:
         query["starter"] = "1"
     response = Client().post(f"/api/wordgames/{game}/games?{urlencode(query)}")
@@ -40,6 +57,8 @@ def solution(game: str) -> dict:
         raise ValueError(f"{game} create failed: {response.status_code}")
     initial = response.json()
     session = module.store.get(initial["game_id"])
+    if pack_id is not None and session.pack_id != pack_id:
+        raise ValueError(f"public seed selected {session.pack_id}, expected {pack_id}")
     svc = get_service()
     steps = []
     hint_setup = None
@@ -106,6 +125,8 @@ def solution(game: str) -> dict:
     result = {"initial": initial, "steps": steps, "practice": practice}
     if hint_setup is not None:
         result["hint_setup"] = hint_setup
+    if pack_id is not None:
+        result.update(pack_id=pack_id, query=query)
     return result
 
 
@@ -114,7 +135,8 @@ if __name__ == "__main__":
         games = ("alchimie", "intrusul", "perechi", "conexiuni", "contexto", "lant")
         starts = {game: solution(game)["initial"] for game in games}
         Path(__file__).with_name("seeded-starts.json").write_text(
-            json.dumps(starts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(starts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
     else:
-        print(json.dumps(solution(sys.argv[1]), ensure_ascii=False))
+        print(json.dumps(solution(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None),
+                         ensure_ascii=False))

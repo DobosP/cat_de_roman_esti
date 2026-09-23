@@ -70,6 +70,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0155 | [Preserve discovery history and explain food links](0155-preserve-discovery-history-and-explain-food-links.md) | accepted |
 | 0156 | [Refine content and maintain an experimental discovery pool](0156-two-track-content-growth.md) | accepted |
 | 0157 | [Start V99 with reviewed route explanations and a discovery pool](0157-start-v99-refinement-and-discovery.md) | accepted |
+| 0158 | [Prepare V1 for mixed-age phone and desktop testing](0158-v1-testing-release.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

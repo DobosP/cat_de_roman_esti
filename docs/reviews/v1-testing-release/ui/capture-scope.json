@@ -1,0 +1,19 @@
+{
+  "kind": "v1-ui-capture-scope-v1",
+  "captures": {
+    "home-1280.png": "Actual lobby; desktop viewport. Earlier V1 build before the isolated recovery fixes; Home source unchanged.",
+    "home-390.png": "Actual lobby; phone viewport. Earlier V1 build before the isolated recovery fixes; Home source unchanged.",
+    "*-320-readable.png": "Injected long Romanian presentation labels at 320px and doubled root text. Layout stress cases, not real approved board contents.",
+    "alchimie-retry-*.png": "Actual final retry-visibility regression test with intentionally mocked create503; real retained game, score and retry control.",
+    "lant-current-position-desktop.png": "Actual final serial paused-animation regression; seeded game reached its winning position after one lost reply and one recovery GET. Animation resumed for the screenshot; emulated viewport.",
+    "lant-current-position-mobile.png": "Actual final serial paused-animation regression; seeded game reached its winning position after one lost reply and one recovery GET. Animation resumed for the screenshot; emulated viewport."
+  },
+  "browser": "Microsoft Edge on Windows, emulated viewports",
+  "physical_devices_tested": false,
+  "limits": "Screenshots supplement assertions; they do not establish usability across mixed ages or physical devices.",
+  "sha256": {
+    "lant-current-position-desktop.png": "ae0122e8175aea3030bc63e17c5695a965622a6810854a5aefdaa978fb2c6953",
+    "lant-current-position-mobile.png": "e6d443b1f35937602c61ed1663906b864c1fc11f16031b6d6e2267bb34aa592c"
+  },
+  "final_manifest_sha256": "732a064089604de84f9b238f540c6e4ebaee0cf795812bbcfe4f6fd2c4e4ee3d"
+}

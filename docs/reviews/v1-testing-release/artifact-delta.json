@@ -1,0 +1,2416 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "cc0a6a490f4a37f6f94b59cf9a84eb760cb3a401",
+  "scope": "Exact reviewed V1 graph metadata/false-edge repair, one promotion, finite bundled reserve and generated sidecars. Raw frozen336 quick payloads are unchanged.",
+  "review_bindings": {
+    "content/factual-repair-proposal.json": "18c9d50981c9b6cb4288f928174ba0f4dfafd798ef846dd2361a22193f488717",
+    "content/factual-repair-factual-review.json": "f4a0e004a2c5f81b08cc1cc9c784dd2b4f4b04e41f2cc33a8722ba37d4a029b7",
+    "content/factual-repair-quality-review.json": "de0abf05b5a042ba4de9a82710c6609221b02b1b7ee19c01cdc58ae74221e84a",
+    "content/selection-reserve-proposal.json": "e02b1a624fb7df8edfbcf507a8c9d7bcfb39510cba771d9b3d660430b2360de4",
+    "content/alchimie-reserve-proposal.json": "bcf35794a43f437f78d420b34a0e4ae44e1accd76c7eddde46a4bdf9e33728e6",
+    "content/selection-reserve-quality-review.json": "54980fe74ac512b431eed9c8f3e3390c53e40a16a3efc1ad7fd207a528178758",
+    "content/reconsideration/lt211-final-analyst.json": "ce293a935bdbf0b030018a44c8cdb740e40a1cf7428f9ca5d049dbeb564de7b5",
+    "content/reconsideration/lt211-final-quality-assessment.json": "caffebcc408d30949a8e9272843fb06aae3f91de9c306750af2106a8abe990af",
+    "content/reconsideration/final-verifier.json": "c03d2d15c27a0562737b5ed52f8973031f9adc9e50bd258dff71c8aa57acf064"
+  },
+  "generator": {
+    "path": "docs/reviews/v1-testing-release/capture-artifact-delta.py.txt",
+    "sha256": "44ea6862410e7e40669b450a9c26fc5826c816f8ab299a19fe928daa78de4706"
+  },
+  "files": {
+    "kg_sample.json": {
+      "baseline_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+      "after_sha256": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+      "head_before": {
+        "meta": {
+          "build_version": "fixture-v90-household-discovery",
+          "generated_at": "2026-06-21T00:00:00Z",
+          "note": "v90: three household/food concepts, ten grammatical forms and seventeen directed links.",
+          "counts": {
+            "nodes": 2416,
+            "edges": 9459,
+            "puzzles": 180,
+            "by_category": {
+              "arta_cultura": 128,
+              "film_tv": 157,
+              "gastronomie": 260,
+              "geografie": 164,
+              "istorie": 148,
+              "limba": 149,
+              "literatura": 143,
+              "meme_net": 158,
+              "muzica": 146,
+              "personalitati": 129,
+              "societate": 197,
+              "sport": 160,
+              "stiinta": 191,
+              "viata_de_roman": 286
+            },
+            "puzzles_by_cat_diff": {
+              "arta_cultura/easy": 6,
+              "arta_cultura/hard": 6,
+              "film_tv/easy": 6,
+              "film_tv/hard": 6,
+              "gastronomie/easy": 6,
+              "gastronomie/hard": 6,
+              "geografie/easy": 6,
+              "geografie/hard": 6,
+              "istorie/easy": 6,
+              "istorie/hard": 6,
+              "limba/easy": 6,
+              "limba/hard": 6,
+              "literatura/easy": 6,
+              "literatura/hard": 6,
+              "meme_net/easy": 6,
+              "meme_net/hard": 6,
+              "mixed/easy": 6,
+              "mixed/hard": 6,
+              "muzica/easy": 6,
+              "muzica/hard": 6,
+              "personalitati/easy": 6,
+              "personalitati/hard": 6,
+              "societate/easy": 6,
+              "societate/hard": 6,
+              "sport/easy": 6,
+              "sport/hard": 6,
+              "stiinta/easy": 6,
+              "stiinta/hard": 6,
+              "viata_de_roman/easy": 6,
+              "viata_de_roman/hard": 6
+            }
+          }
+        }
+      },
+      "head_after": {
+        "meta": {
+          "build_version": "fixture-v1-reviewed-content",
+          "generated_at": "2026-06-21T00:00:00Z",
+          "note": "V1: three reviewed description corrections, three historical Cristina Neagu relationship labels, and removal of one unsupported casting link. All 180 existing puzzles are preserved and validated without regeneration.",
+          "counts": {
+            "nodes": 2416,
+            "edges": 9458,
+            "puzzles": 180,
+            "by_category": {
+              "arta_cultura": 128,
+              "film_tv": 157,
+              "gastronomie": 260,
+              "geografie": 164,
+              "istorie": 148,
+              "limba": 149,
+              "literatura": 143,
+              "meme_net": 158,
+              "muzica": 146,
+              "personalitati": 129,
+              "societate": 197,
+              "sport": 160,
+              "stiinta": 191,
+              "viata_de_roman": 286
+            },
+            "puzzles_by_cat_diff": {
+              "arta_cultura/easy": 6,
+              "arta_cultura/hard": 6,
+              "film_tv/easy": 6,
+              "film_tv/hard": 6,
+              "gastronomie/easy": 6,
+              "gastronomie/hard": 6,
+              "geografie/easy": 6,
+              "geografie/hard": 6,
+              "istorie/easy": 6,
+              "istorie/hard": 6,
+              "limba/easy": 6,
+              "limba/hard": 6,
+              "literatura/easy": 6,
+              "literatura/hard": 6,
+              "meme_net/easy": 6,
+              "meme_net/hard": 6,
+              "mixed/easy": 6,
+              "mixed/hard": 6,
+              "muzica/easy": 6,
+              "muzica/hard": 6,
+              "personalitati/easy": 6,
+              "personalitati/hard": 6,
+              "societate/easy": 6,
+              "societate/hard": 6,
+              "sport/easy": 6,
+              "sport/hard": 6,
+              "stiinta/easy": 6,
+              "stiinta/hard": 6,
+              "viata_de_roman/easy": 6,
+              "viata_de_roman/hard": 6
+            }
+          }
+        }
+      },
+      "tables": {
+        "kg_nodes": {
+          "added": [],
+          "removed": [],
+          "changed": {
+            "n_ateneul_roman": {
+              "before": {
+                "id": "n_ateneul_roman",
+                "node_type": "place",
+                "label_ro": "Ateneul Român",
+                "category": "arta_cultura",
+                "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu.",
+                "salience": 0.6749,
+                "difficulty_tier": "easy",
+                "degree": 23,
+                "aliases": [
+                  "Ateneul",
+                  "Ateneul din București",
+                  "sala Ateneului Român",
+                  "Ateneul Român București",
+                  "Ateneului Român"
+                ]
+              },
+              "after": {
+                "id": "n_ateneul_roman",
+                "node_type": "place",
+                "label_ro": "Ateneul Român",
+                "category": "arta_cultura",
+                "description": "Clădire de concerte din București, inaugurată în 1888 și sediu al Filarmonicii „George Enescu”. Găzduiește concerte ale Festivalului „George Enescu”.",
+                "salience": 0.6749,
+                "difficulty_tier": "easy",
+                "degree": 23,
+                "aliases": [
+                  "Ateneul",
+                  "Ateneul din București",
+                  "sala Ateneului Român",
+                  "Ateneul Român București",
+                  "Ateneului Român"
+                ]
+              }
+            },
+            "n_ftv_operatiunea_monstrul": {
+              "before": {
+                "id": "n_ftv_operatiunea_monstrul",
+                "node_type": "work",
+                "label_ro": "Operațiunea Monstrul",
+                "category": "film_tv",
+                "description": "Comedie românească din 1976 cu Toma Caragiu, Octavian Cotescu și Marin Moraru.",
+                "salience": 0.4983,
+                "difficulty_tier": "medium",
+                "degree": 8,
+                "aliases": [
+                  "filmul Operațiunea Monstrul",
+                  "Operațiunea Monstrul filmul",
+                  "Operațiunea Monstrul 1976"
+                ]
+              },
+              "after": {
+                "id": "n_ftv_operatiunea_monstrul",
+                "node_type": "work",
+                "label_ro": "Operațiunea Monstrul",
+                "category": "film_tv",
+                "description": "Comedie românească din 1976 cu Toma Caragiu, Octavian Cotescu și Marin Moraru.",
+                "salience": 0.4983,
+                "difficulty_tier": "medium",
+                "degree": 7,
+                "aliases": [
+                  "filmul Operațiunea Monstrul",
+                  "Operațiunea Monstrul filmul",
+                  "Operațiunea Monstrul 1976"
+                ]
+              }
+            },
+            "n_ftv_dem_radulescu": {
+              "before": {
+                "id": "n_ftv_dem_radulescu",
+                "node_type": "person",
+                "label_ro": "Dem Rădulescu",
+                "category": "film_tv",
+                "description": "Actor român de comedie, figură centrală în filmele Brigada Diverse.",
+                "salience": 0.8647,
+                "difficulty_tier": "easy",
+                "degree": 11,
+                "aliases": [
+                  "Dem Rădulescu actorul",
+                  "Rădulescu Dem",
+                  "Bibanu"
+                ]
+              },
+              "after": {
+                "id": "n_ftv_dem_radulescu",
+                "node_type": "person",
+                "label_ro": "Dem Rădulescu",
+                "category": "film_tv",
+                "description": "Actor român de comedie, figură centrală în filmele Brigada Diverse.",
+                "salience": 0.8647,
+                "difficulty_tier": "easy",
+                "degree": 10,
+                "aliases": [
+                  "Dem Rădulescu actorul",
+                  "Rădulescu Dem",
+                  "Bibanu"
+                ]
+              }
+            },
+            "n_v17art_muzeul_satului": {
+              "before": {
+                "id": "n_v17art_muzeul_satului",
+                "node_type": "org",
+                "label_ro": "Muzeul Național al Satului „Dimitrie Gusti”",
+                "category": "arta_cultura",
+                "description": "Muzeu în aer liber din București, întins pe malul lacului Herăstrău, cu sute de gospodării țărănești autentice strămutate din toată țara. A fost fondat în 1936 de sociologul Dimitrie Gusti.",
+                "salience": 0.62,
+                "difficulty_tier": "medium",
+                "degree": 7,
+                "aliases": [
+                  "Muzeul Satului",
+                  "Muzeul Satului București"
+                ]
+              },
+              "after": {
+                "id": "n_v17art_muzeul_satului",
+                "node_type": "org",
+                "label_ro": "Muzeul Național al Satului „Dimitrie Gusti”",
+                "category": "arta_cultura",
+                "description": "Muzeu în aer liber din București, deschis în 1936 la inițiativa sociologului Dimitrie Gusti. Prezintă case, anexe gospodărești, biserici și instalații tradiționale aduse din sate din România.",
+                "salience": 0.62,
+                "difficulty_tier": "medium",
+                "degree": 7,
+                "aliases": [
+                  "Muzeul Satului",
+                  "Muzeul Satului București"
+                ]
+              }
+            },
+            "n_v20geo_crucea_caraiman": {
+              "before": {
+                "id": "n_v20geo_crucea_caraiman",
+                "node_type": "place",
+                "label_ro": "Crucea Caraiman",
+                "category": "geografie",
+                "description": "Monument de 28 de metri ridicat între 1926 și 1928 pe Șaua Caraiman, în Munții Bucegi, la 2291 m altitudine, în memoria eroilor din Primul Război Mondial. Este recunoscută drept cea mai înaltă cruce din lume amplasată pe un vârf montan.",
+                "salience": 0.7,
+                "difficulty_tier": "easy",
+                "degree": 3,
+                "aliases": [
+                  "Crucea Eroilor",
+                  "Crucea Eroilor Neamului",
+                  "Crucea de pe Caraiman",
+                  "Crucii Caraiman"
+                ]
+              },
+              "after": {
+                "id": "n_v20geo_crucea_caraiman",
+                "node_type": "place",
+                "label_ro": "Crucea Caraiman",
+                "category": "geografie",
+                "description": "Monument dedicat eroilor români din Primul Război Mondial, ridicat între 1926 și 1928 pe vârful de 2.291 m al masivului Caraiman, în Munții Bucegi. Are o înălțime totală de 39,3 m, inclusiv soclul.",
+                "salience": 0.7,
+                "difficulty_tier": "easy",
+                "degree": 3,
+                "aliases": [
+                  "Crucea Eroilor",
+                  "Crucea Eroilor Neamului",
+                  "Crucea de pe Caraiman",
+                  "Crucii Caraiman"
+                ]
+              }
+            }
+          },
+          "baseline_order": null
+        },
+        "kg_edges": {
+          "added": [],
+          "removed": [
+            {
+              "index": 829,
+              "row": {
+                "id": "de427",
+                "src_id": "n_ftv_operatiunea_monstrul",
+                "dst_id": "n_ftv_dem_radulescu",
+                "relation": "related_to",
+                "label_ro": "a jucat în",
+                "strength": 0.86,
+                "is_distractor": 0,
+                "bidirectional": 1
+              }
+            }
+          ],
+          "changed": {
+            "de1218": {
+              "before": {
+                "id": "de1218",
+                "src_id": "n_spt_cristina_neagu",
+                "dst_id": "n_spt_handbal_feminin",
+                "relation": "is_a",
+                "label_ro": "joacă",
+                "strength": 0.94,
+                "is_distractor": 0,
+                "bidirectional": 1
+              },
+              "after": {
+                "id": "de1218",
+                "src_id": "n_spt_cristina_neagu",
+                "dst_id": "n_spt_handbal_feminin",
+                "relation": "is_a",
+                "label_ro": "a jucat",
+                "strength": 0.94,
+                "is_distractor": 0,
+                "bidirectional": 1
+              }
+            },
+            "de2664": {
+              "before": {
+                "id": "de2664",
+                "src_id": "n_spt_cristina_neagu",
+                "dst_id": "n_v2spo_echipa_nationala",
+                "relation": "related_to",
+                "label_ro": "joacă pentru România",
+                "strength": 0.82,
+                "is_distractor": 0,
+                "bidirectional": 1
+              },
+              "after": {
+                "id": "de2664",
+                "src_id": "n_spt_cristina_neagu",
+                "dst_id": "n_v2spo_echipa_nationala",
+                "relation": "related_to",
+                "label_ro": "a jucat pentru România",
+                "strength": 0.82,
+                "is_distractor": 0,
+                "bidirectional": 1
+              }
+            },
+            "de2665": {
+              "before": {
+                "id": "de2665",
+                "src_id": "n_spt_cristina_neagu",
+                "dst_id": "n_v2spo_club_sportiv",
+                "relation": "related_to",
+                "label_ro": "joacă la cluburi",
+                "strength": 0.68,
+                "is_distractor": 0,
+                "bidirectional": 1
+              },
+              "after": {
+                "id": "de2665",
+                "src_id": "n_spt_cristina_neagu",
+                "dst_id": "n_v2spo_club_sportiv",
+                "relation": "related_to",
+                "label_ro": "a jucat la cluburi",
+                "strength": 0.68,
+                "is_distractor": 0,
+                "bidirectional": 1
+              }
+            }
+          },
+          "baseline_order": null
+        },
+        "kg_puzzles": {
+          "added": [],
+          "removed": [],
+          "changed": {},
+          "baseline_order": null
+        }
+      }
+    },
+    "games_pack.json": {
+      "baseline_sha256": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+      "after_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "head_before": {
+        "meta": {
+          "pack_version": 1,
+          "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
+          "counts": {
+            "conexiuni": 245,
+            "contexto": 265,
+            "lant": 123,
+            "alchimie": 83
+          },
+          "id_high_water": {
+            "conexiuni": 374,
+            "contexto": 377,
+            "lant": 246,
+            "alchimie": 107
+          }
+        }
+      },
+      "head_after": {
+        "meta": {
+          "pack_version": 1,
+          "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
+          "counts": {
+            "conexiuni": 245,
+            "contexto": 265,
+            "lant": 123,
+            "alchimie": 83
+          },
+          "id_high_water": {
+            "conexiuni": 374,
+            "contexto": 377,
+            "lant": 246,
+            "alchimie": 107
+          }
+        }
+      },
+      "tables": {
+        "conexiuni": {
+          "added": [],
+          "removed": [],
+          "changed": {},
+          "baseline_order": null
+        },
+        "contexto": {
+          "added": [],
+          "removed": [],
+          "changed": {},
+          "baseline_order": null
+        },
+        "lant": {
+          "added": [],
+          "removed": [],
+          "changed": {
+            "lt_viata_de_roman_211": {
+              "before": {
+                "difficulty": "usor",
+                "start": "n_v23via_ghiozdan",
+                "target": "n_v23lit_capra_cu_trei_iezi",
+                "optimal": 2,
+                "id": "lt_viata_de_roman_211",
+                "category": "viata_de_roman",
+                "source": "ai",
+                "status": "pending"
+              },
+              "after": {
+                "difficulty": "usor",
+                "start": "n_v23via_ghiozdan",
+                "target": "n_v23lit_capra_cu_trei_iezi",
+                "optimal": 2,
+                "id": "lt_viata_de_roman_211",
+                "category": "viata_de_roman",
+                "source": "ai",
+                "status": "approved"
+              }
+            }
+          },
+          "baseline_order": null
+        },
+        "alchimie": {
+          "added": [],
+          "removed": [],
+          "changed": {},
+          "baseline_order": null
+        }
+      }
+    },
+    "board_rankings_v37.json": {
+      "baseline_sha256": "23421501b0e4bc391a62d25a577ed9d08c935a9eb48a550ab0e5b2f0e8367acb",
+      "after_sha256": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc",
+      "head_before": {
+        "meta": {
+          "schema_version": 1,
+          "pack_sha256": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+          "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+          "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+          "counts": {
+            "total": 716,
+            "approved": 708,
+            "pilot_eligible": 546,
+            "by_game": {
+              "conexiuni": 245,
+              "contexto": 265,
+              "lant": 123,
+              "alchimie": 83
+            },
+            "eligible_by_game": {
+              "conexiuni": 87,
+              "contexto": 259,
+              "lant": 120,
+              "alchimie": 80
+            }
+          }
+        }
+      },
+      "head_after": {
+        "meta": {
+          "schema_version": 1,
+          "pack_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+          "kg_sha256": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+          "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+          "counts": {
+            "total": 716,
+            "approved": 709,
+            "pilot_eligible": 527,
+            "by_game": {
+              "conexiuni": 245,
+              "contexto": 265,
+              "lant": 123,
+              "alchimie": 83
+            },
+            "eligible_by_game": {
+              "conexiuni": 83,
+              "contexto": 255,
+              "lant": 121,
+              "alchimie": 68
+            }
+          }
+        }
+      },
+      "tables": {
+        "boards": {
+          "added": [],
+          "removed": [],
+          "changed": {
+            "cx_stiinta_310": {
+              "before": {
+                "id": "cx_stiinta_310",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 75,
+                "play_quality": 87,
+                "pilot_score": 80,
+                "rank": 19,
+                "pilot_eligible": true,
+                "selection_weight": 5
+              },
+              "after": {
+                "id": "cx_stiinta_310",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 75,
+                "play_quality": 87,
+                "pilot_score": 80,
+                "rank": 19,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              }
+            },
+            "cx_sport_075": {
+              "before": {
+                "id": "cx_sport_075",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 65,
+                "play_quality": 74,
+                "pilot_score": 69,
+                "rank": 43,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              },
+              "after": {
+                "id": "cx_sport_075",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 65,
+                "play_quality": 74,
+                "pilot_score": 69,
+                "rank": 43,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              }
+            },
+            "cx_gastronomie_105": {
+              "before": {
+                "id": "cx_gastronomie_105",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 69,
+                "play_quality": 47,
+                "pilot_score": 60,
+                "rank": 81,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "cx_gastronomie_105",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 69,
+                "play_quality": 47,
+                "pilot_score": 60,
+                "rank": 82,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "cx_film_tv_009": {
+              "before": {
+                "id": "cx_film_tv_009",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 58,
+                "play_quality": 61,
+                "pilot_score": 59,
+                "rank": 82,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "cx_film_tv_009",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 58,
+                "play_quality": 63,
+                "pilot_score": 60,
+                "rank": 81,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "cx_geografie_303": {
+              "before": {
+                "id": "cx_geografie_303",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 41,
+                "play_quality": 87,
+                "pilot_score": 59,
+                "rank": 84,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "cx_geografie_303",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 41,
+                "play_quality": 87,
+                "pilot_score": 59,
+                "rank": 84,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              }
+            },
+            "cx_limba_192": {
+              "before": {
+                "id": "cx_limba_192",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 47,
+                "play_quality": 77,
+                "pilot_score": 59,
+                "rank": 85,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "cx_limba_192",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 47,
+                "play_quality": 77,
+                "pilot_score": 59,
+                "rank": 85,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              }
+            },
+            "cx_literatura_266": {
+              "before": {
+                "id": "cx_literatura_266",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 40,
+                "play_quality": 87,
+                "pilot_score": 59,
+                "rank": 86,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "cx_literatura_266",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 40,
+                "play_quality": 87,
+                "pilot_score": 59,
+                "rank": 86,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              }
+            },
+            "cx_societate_278": {
+              "before": {
+                "id": "cx_societate_278",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 53,
+                "play_quality": 55,
+                "pilot_score": 54,
+                "rank": 110,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "cx_societate_278",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 53,
+                "play_quality": 55,
+                "pilot_score": 54,
+                "rank": 110,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              }
+            },
+            "cx_istorie_255": {
+              "before": {
+                "id": "cx_istorie_255",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 41,
+                "play_quality": 71,
+                "pilot_score": 53,
+                "rank": 113,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "cx_istorie_255",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 41,
+                "play_quality": 71,
+                "pilot_score": 53,
+                "rank": 113,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              }
+            },
+            "cx_istorie_181": {
+              "before": {
+                "id": "cx_istorie_181",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 41,
+                "play_quality": 67,
+                "pilot_score": 51,
+                "rank": 123,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "cx_istorie_181",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 41,
+                "play_quality": 67,
+                "pilot_score": 51,
+                "rank": 123,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              }
+            },
+            "cx_istorie_115": {
+              "before": {
+                "id": "cx_istorie_115",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 40,
+                "play_quality": 32,
+                "pilot_score": 37,
+                "rank": 185,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "cx_istorie_115",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 40,
+                "play_quality": 32,
+                "pilot_score": 37,
+                "rank": 185,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "cx_literatura_127": {
+              "before": {
+                "id": "cx_literatura_127",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 34,
+                "play_quality": 40,
+                "pilot_score": 36,
+                "rank": 188,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "cx_literatura_127",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 34,
+                "play_quality": 40,
+                "pilot_score": 36,
+                "rank": 188,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "cx_literatura_044": {
+              "before": {
+                "id": "cx_literatura_044",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 28,
+                "play_quality": 46,
+                "pilot_score": 35,
+                "rank": 194,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "cx_literatura_044",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 28,
+                "play_quality": 46,
+                "pilot_score": 35,
+                "rank": 194,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "cx_literatura_040": {
+              "before": {
+                "id": "cx_literatura_040",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 26,
+                "play_quality": 39,
+                "pilot_score": 31,
+                "rank": 204,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "cx_literatura_040",
+                "game": "conexiuni",
+                "status": "approved",
+                "romanian_familiarity": 26,
+                "play_quality": 39,
+                "pilot_score": 31,
+                "rank": 204,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "ct_viata_de_roman_364": {
+              "before": {
+                "id": "ct_viata_de_roman_364",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 85,
+                "play_quality": 89,
+                "pilot_score": 87,
+                "rank": 54,
+                "pilot_eligible": true,
+                "selection_weight": 5
+              },
+              "after": {
+                "id": "ct_viata_de_roman_364",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 85,
+                "play_quality": 89,
+                "pilot_score": 87,
+                "rank": 54,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              }
+            },
+            "ct_gastronomie_372": {
+              "before": {
+                "id": "ct_gastronomie_372",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 84,
+                "play_quality": 71,
+                "pilot_score": 79,
+                "rank": 107,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              },
+              "after": {
+                "id": "ct_gastronomie_372",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 84,
+                "play_quality": 71,
+                "pilot_score": 79,
+                "rank": 107,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              }
+            },
+            "ct_literatura_228": {
+              "before": {
+                "id": "ct_literatura_228",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 81,
+                "play_quality": 76,
+                "pilot_score": 79,
+                "rank": 108,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              },
+              "after": {
+                "id": "ct_literatura_228",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 81,
+                "play_quality": 76,
+                "pilot_score": 79,
+                "rank": 108,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              }
+            },
+            "ct_arta_cultura_007": {
+              "before": {
+                "id": "ct_arta_cultura_007",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 61,
+                "play_quality": 84,
+                "pilot_score": 70,
+                "rank": 160,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "ct_arta_cultura_007",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 61,
+                "play_quality": 84,
+                "pilot_score": 70,
+                "rank": 160,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              }
+            },
+            "ct_gastronomie_328": {
+              "before": {
+                "id": "ct_gastronomie_328",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 55,
+                "play_quality": 92,
+                "pilot_score": 70,
+                "rank": 161,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "ct_gastronomie_328",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 55,
+                "play_quality": 92,
+                "pilot_score": 70,
+                "rank": 161,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              }
+            },
+            "ct_geografie_034": {
+              "before": {
+                "id": "ct_geografie_034",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 64,
+                "play_quality": 78,
+                "pilot_score": 70,
+                "rank": 162,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "ct_geografie_034",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 64,
+                "play_quality": 78,
+                "pilot_score": 70,
+                "rank": 162,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              }
+            },
+            "ct_muzica_070": {
+              "before": {
+                "id": "ct_muzica_070",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 64,
+                "play_quality": 70,
+                "pilot_score": 66,
+                "rank": 186,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "ct_muzica_070",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 64,
+                "play_quality": 70,
+                "pilot_score": 66,
+                "rank": 186,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "ct_istorie_309": {
+              "before": {
+                "id": "ct_istorie_309",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 63,
+                "play_quality": 63,
+                "pilot_score": 63,
+                "rank": 202,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "ct_istorie_309",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 63,
+                "play_quality": 63,
+                "pilot_score": 63,
+                "rank": 202,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "ct_societate_090": {
+              "before": {
+                "id": "ct_societate_090",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 42,
+                "play_quality": 91,
+                "pilot_score": 62,
+                "rank": 213,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "ct_societate_090",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 42,
+                "play_quality": 91,
+                "pilot_score": 62,
+                "rank": 213,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              }
+            },
+            "ct_stiinta_106": {
+              "before": {
+                "id": "ct_stiinta_106",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 46,
+                "play_quality": 87,
+                "pilot_score": 62,
+                "rank": 214,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "ct_stiinta_106",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 46,
+                "play_quality": 87,
+                "pilot_score": 62,
+                "rank": 214,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              }
+            },
+            "ct_geografie_031": {
+              "before": {
+                "id": "ct_geografie_031",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 24,
+                "play_quality": 43,
+                "pilot_score": 32,
+                "rank": 264,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "ct_geografie_031",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 24,
+                "play_quality": 43,
+                "pilot_score": 32,
+                "rank": 264,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "ct_geografie_030": {
+              "before": {
+                "id": "ct_geografie_030",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 18,
+                "play_quality": 29,
+                "pilot_score": 22,
+                "rank": 265,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "ct_geografie_030",
+                "game": "contexto",
+                "status": "approved",
+                "romanian_familiarity": 18,
+                "play_quality": 29,
+                "pilot_score": 22,
+                "rank": 265,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "lt_viata_de_roman_211": {
+              "before": {
+                "id": "lt_viata_de_roman_211",
+                "game": "lant",
+                "status": "pending",
+                "romanian_familiarity": 88,
+                "play_quality": 73,
+                "pilot_score": 82,
+                "rank": 12,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "lt_viata_de_roman_211",
+                "game": "lant",
+                "status": "approved",
+                "romanian_familiarity": 88,
+                "play_quality": 73,
+                "pilot_score": 82,
+                "rank": 12,
+                "pilot_eligible": true,
+                "selection_weight": 5
+              }
+            },
+            "al_gastronomie_025": {
+              "before": {
+                "id": "al_gastronomie_025",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 69,
+                "play_quality": 89,
+                "pilot_score": 77,
+                "rank": 8,
+                "pilot_eligible": true,
+                "selection_weight": 5
+              },
+              "after": {
+                "id": "al_gastronomie_025",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 69,
+                "play_quality": 89,
+                "pilot_score": 77,
+                "rank": 8,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_gastronomie_024": {
+              "before": {
+                "id": "al_gastronomie_024",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 66,
+                "play_quality": 90,
+                "pilot_score": 76,
+                "rank": 11,
+                "pilot_eligible": true,
+                "selection_weight": 5
+              },
+              "after": {
+                "id": "al_gastronomie_024",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 66,
+                "play_quality": 90,
+                "pilot_score": 76,
+                "rank": 11,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_societate_081": {
+              "before": {
+                "id": "al_societate_081",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 66,
+                "play_quality": 82,
+                "pilot_score": 72,
+                "rank": 16,
+                "pilot_eligible": true,
+                "selection_weight": 5
+              },
+              "after": {
+                "id": "al_societate_081",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 66,
+                "play_quality": 82,
+                "pilot_score": 72,
+                "rank": 16,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_geografie_031": {
+              "before": {
+                "id": "al_geografie_031",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 58,
+                "play_quality": 91,
+                "pilot_score": 71,
+                "rank": 18,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              },
+              "after": {
+                "id": "al_geografie_031",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 58,
+                "play_quality": 91,
+                "pilot_score": 71,
+                "rank": 18,
+                "pilot_eligible": true,
+                "selection_weight": 5
+              }
+            },
+            "al_istorie_034": {
+              "before": {
+                "id": "al_istorie_034",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 52,
+                "play_quality": 94,
+                "pilot_score": 69,
+                "rank": 26,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              },
+              "after": {
+                "id": "al_istorie_034",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 52,
+                "play_quality": 94,
+                "pilot_score": 69,
+                "rank": 26,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_muzica_064": {
+              "before": {
+                "id": "al_muzica_064",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 63,
+                "play_quality": 76,
+                "pilot_score": 68,
+                "rank": 33,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              },
+              "after": {
+                "id": "al_muzica_064",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 63,
+                "play_quality": 76,
+                "pilot_score": 68,
+                "rank": 33,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_limba_042": {
+              "before": {
+                "id": "al_limba_042",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 52,
+                "play_quality": 89,
+                "pilot_score": 67,
+                "rank": 35,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "al_limba_042",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 52,
+                "play_quality": 89,
+                "pilot_score": 67,
+                "rank": 35,
+                "pilot_eligible": true,
+                "selection_weight": 4
+              }
+            },
+            "al_meme_net_060": {
+              "before": {
+                "id": "al_meme_net_060",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 50,
+                "play_quality": 89,
+                "pilot_score": 66,
+                "rank": 39,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "al_meme_net_060",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 50,
+                "play_quality": 89,
+                "pilot_score": 66,
+                "rank": 39,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_societate_080": {
+              "before": {
+                "id": "al_societate_080",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 50,
+                "play_quality": 89,
+                "pilot_score": 66,
+                "rank": 42,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "al_societate_080",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 50,
+                "play_quality": 89,
+                "pilot_score": 66,
+                "rank": 42,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_gastronomie_028": {
+              "before": {
+                "id": "al_gastronomie_028",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 54,
+                "play_quality": 80,
+                "pilot_score": 64,
+                "rank": 49,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              },
+              "after": {
+                "id": "al_gastronomie_028",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 54,
+                "play_quality": 80,
+                "pilot_score": 64,
+                "rank": 49,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_personalitati_006": {
+              "before": {
+                "id": "al_personalitati_006",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 43,
+                "play_quality": 96,
+                "pilot_score": 64,
+                "rank": 51,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "al_personalitati_006",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 43,
+                "play_quality": 96,
+                "pilot_score": 64,
+                "rank": 51,
+                "pilot_eligible": true,
+                "selection_weight": 3
+              }
+            },
+            "al_istorie_039": {
+              "before": {
+                "id": "al_istorie_039",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 49,
+                "play_quality": 82,
+                "pilot_score": 62,
+                "rank": 55,
+                "pilot_eligible": true,
+                "selection_weight": 2
+              },
+              "after": {
+                "id": "al_istorie_039",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 49,
+                "play_quality": 82,
+                "pilot_score": 62,
+                "rank": 55,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_personalitati_071": {
+              "before": {
+                "id": "al_personalitati_071",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 34,
+                "play_quality": 92,
+                "pilot_score": 57,
+                "rank": 72,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "al_personalitati_071",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 34,
+                "play_quality": 92,
+                "pilot_score": 57,
+                "rank": 72,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_personalitati_068": {
+              "before": {
+                "id": "al_personalitati_068",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 35,
+                "play_quality": 85,
+                "pilot_score": 55,
+                "rank": 77,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "al_personalitati_068",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 35,
+                "play_quality": 85,
+                "pilot_score": 55,
+                "rank": 77,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            },
+            "al_personalitati_072": {
+              "before": {
+                "id": "al_personalitati_072",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 33,
+                "play_quality": 79,
+                "pilot_score": 51,
+                "rank": 82,
+                "pilot_eligible": true,
+                "selection_weight": 1
+              },
+              "after": {
+                "id": "al_personalitati_072",
+                "game": "alchimie",
+                "status": "approved",
+                "romanian_familiarity": 33,
+                "play_quality": 79,
+                "pilot_score": 51,
+                "rank": 82,
+                "pilot_eligible": false,
+                "selection_weight": 1
+              }
+            }
+          },
+          "baseline_order": [
+            "cx_viata_de_roman_363",
+            "cx_viata_de_roman_362",
+            "cx_viata_de_roman_370",
+            "cx_viata_de_roman_374",
+            "cx_stiinta_311",
+            "cx_stiinta_309",
+            "cx_viata_de_roman_371",
+            "cx_viata_de_roman_373",
+            "cx_viata_de_roman_365",
+            "cx_viata_de_roman_369",
+            "cx_viata_de_roman_367",
+            "cx_limba_364",
+            "cx_viata_de_roman_368",
+            "cx_viata_de_roman_372",
+            "cx_viata_de_roman_366",
+            "cx_stiinta_356",
+            "cx_gastronomie_300",
+            "cx_film_tv_167",
+            "cx_stiinta_310",
+            "cx_arta_cultura_162",
+            "cx_stiinta_308",
+            "cx_gastronomie_299",
+            "cx_sport_156",
+            "cx_film_tv_243",
+            "cx_gastronomie_298",
+            "cx_limba_306",
+            "cx_gastronomie_173",
+            "cx_gastronomie_297",
+            "cx_gastronomie_301",
+            "cx_viata_de_roman_313",
+            "cx_sport_355",
+            "cx_gastronomie_296",
+            "cx_geografie_305",
+            "cx_limba_307",
+            "cx_personalitati_339",
+            "cx_viata_de_roman_288",
+            "cx_viata_de_roman_312",
+            "cx_sport_222",
+            "cx_sport_226",
+            "cx_muzica_205",
+            "cx_muzica_143",
+            "cx_sport_073",
+            "cx_sport_075",
+            "cx_viata_de_roman_314",
+            "cx_viata_de_roman_315",
+            "cx_geografie_179",
+            "cx_muzica_055",
+            "cx_istorie_118",
+            "cx_meme_net_267",
+            "cx_personalitati_213",
+            "cx_societate_220",
+            "cx_sport_074",
+            "cx_sport_160",
+            "cx_meme_net_045",
+            "cx_gastronomie_019",
+            "cx_sport_284",
+            "cx_gastronomie_171",
+            "cx_geografie_252",
+            "cx_meme_net_048",
+            "cx_muzica_053",
+            "cx_sport_077",
+            "cx_sport_157",
+            "cx_meme_net_201",
+            "cx_societate_290",
+            "cx_stiinta_227",
+            "cx_arta_cultura_240",
+            "cx_film_tv_011",
+            "cx_film_tv_013",
+            "cx_gastronomie_250",
+            "cx_geografie_302",
+            "cx_muzica_209",
+            "cx_arta_cultura_005",
+            "cx_arta_cultura_007",
+            "cx_arta_cultura_161",
+            "cx_geografie_304",
+            "cx_literatura_194",
+            "cx_societate_155",
+            "cx_sport_076",
+            "cx_sport_225",
+            "cx_viata_de_roman_236",
+            "cx_gastronomie_105",
+            "cx_film_tv_009",
+            "cx_film_tv_101",
+            "cx_geografie_303",
+            "cx_limba_192",
+            "cx_literatura_266",
+            "cx_muzica_138",
+            "cx_film_tv_165",
+            "cx_limba_187",
+            "cx_meme_net_204",
+            "cx_viata_de_roman_238",
+            "cx_istorie_034",
+            "cx_limba_260",
+            "cx_literatura_128",
+            "cx_meme_net_137",
+            "cx_muzica_208",
+            "cx_film_tv_008",
+            "cx_film_tv_244",
+            "cx_literatura_043",
+            "cx_personalitati_277",
+            "cx_sport_282",
+            "cx_limba_038",
+            "cx_personalitati_059",
+            "cx_personalitati_145",
+            "cx_arta_cultura_091",
+            "cx_istorie_001",
+            "cx_istorie_183",
+            "cx_muzica_273",
+            "cx_personalitati_214",
+            "cx_societate_278",
+            "cx_geografie_028",
+            "cx_geografie_177",
+            "cx_istorie_255",
+            "cx_limba_188",
+            "cx_personalitati_210",
+            "cx_arta_cultura_241",
+            "cx_gastronomie_170",
+            "cx_gastronomie_249",
+            "cx_muzica_057",
+            "cx_personalitati_275",
+            "cx_sport_283",
+            "cx_arta_cultura_239",
+            "cx_istorie_181",
+            "cx_arta_cultura_159",
+            "cx_film_tv_014",
+            "cx_geografie_178",
+            "cx_personalitati_063",
+            "cx_personalitati_064",
+            "cx_viata_de_roman_084",
+            "cx_viata_de_roman_089",
+            "cx_viata_de_roman_170",
+            "cx_arta_cultura_094",
+            "cx_gastronomie_174",
+            "cx_istorie_030",
+            "cx_istorie_117",
+            "cx_istorie_182",
+            "cx_personalitati_144",
+            "cx_societate_065",
+            "cx_stiinta_167",
+            "cx_viata_de_roman_090",
+            "cx_limba_122",
+            "cx_literatura_198",
+            "cx_literatura_264",
+            "cx_muzica_141",
+            "cx_societate_217",
+            "cx_sport_161",
+            "cx_arta_cultura_003",
+            "cx_literatura_193",
+            "cx_muzica_207",
+            "cx_personalitati_062",
+            "cx_personalitati_276",
+            "cx_istorie_184",
+            "cx_sport_072",
+            "cx_stiinta_083",
+            "cx_viata_de_roman_289",
+            "cx_stiinta_081",
+            "cx_gastronomie_247",
+            "cx_literatura_126",
+            "cx_meme_net_199",
+            "cx_personalitati_060",
+            "cx_stiinta_165",
+            "cx_viata_de_roman_173",
+            "cx_limba_121",
+            "cx_societate_152",
+            "cx_viata_de_roman_088",
+            "cx_film_tv_169",
+            "cx_geografie_109",
+            "cx_istorie_029",
+            "cx_limba_037",
+            "cx_meme_net_270",
+            "cx_personalitati_212",
+            "cx_societate_280",
+            "cx_viata_de_roman_169",
+            "cx_film_tv_245",
+            "cx_gastronomie_102",
+            "cx_literatura_131",
+            "cx_societate_216",
+            "cx_geografie_110",
+            "cx_literatura_263",
+            "cx_meme_net_050",
+            "cx_meme_net_132",
+            "cx_stiinta_164",
+            "cx_stiinta_285",
+            "cx_gastronomie_104",
+            "cx_istorie_115",
+            "cx_film_tv_012",
+            "cx_limba_189",
+            "cx_literatura_127",
+            "cx_meme_net_047",
+            "cx_societate_070",
+            "cx_arta_cultura_092",
+            "cx_film_tv_099",
+            "cx_limba_262",
+            "cx_literatura_044",
+            "cx_meme_net_049",
+            "cx_literatura_041",
+            "cx_literatura_265",
+            "cx_stiinta_232",
+            "cx_stiinta_163",
+            "cx_arta_cultura_004",
+            "cx_arta_cultura_163",
+            "cx_limba_125",
+            "cx_limba_123",
+            "cx_literatura_040",
+            "cx_muzica_139",
+            "cx_societate_068",
+            "cx_stiinta_286",
+            "cx_arta_cultura_160",
+            "cx_istorie_257",
+            "cx_personalitati_211",
+            "cx_film_tv_100",
+            "cx_gastronomie_106",
+            "cx_istorie_186",
+            "cx_societate_154",
+            "cx_geografie_025",
+            "cx_istorie_033",
+            "cx_istorie_258",
+            "cx_literatura_039",
+            "cx_stiinta_079",
+            "cx_stiinta_228",
+            "cx_arta_cultura_242",
+            "cx_geografie_175",
+            "cx_stiinta_287",
+            "cx_geografie_251",
+            "cx_limba_190",
+            "cx_literatura_196",
+            "cx_limba_259",
+            "cx_personalitati_215",
+            "cx_societate_151",
+            "cx_societate_153",
+            "cx_societate_066",
+            "cx_geografie_023",
+            "cx_literatura_042",
+            "cx_geografie_254",
+            "cx_stiinta_162",
+            "cx_geografie_024",
+            "cx_istorie_032",
+            "cx_societate_067",
+            "cx_stiinta_078",
+            "cx_limba_124",
+            "cx_stiinta_080",
+            "cx_stiinta_082",
+            "cx_geografie_026",
+            "cx_geografie_111",
+            "cx_limba_035",
+            "ct_gastronomie_300",
+            "ct_gastronomie_321",
+            "ct_stiinta_265",
+            "ct_gastronomie_021",
+            "ct_gastronomie_318",
+            "ct_meme_net_157",
+            "ct_viata_de_roman_112",
+            "ct_viata_de_roman_193",
+            "ct_gastronomie_336",
+            "ct_muzica_067",
+            "ct_societate_296",
+            "ct_sport_091",
+            "ct_sport_314",
+            "ct_viata_de_roman_356",
+            "ct_gastronomie_342",
+            "ct_gastronomie_360",
+            "ct_sport_181",
+            "ct_sport_317",
+            "ct_viata_de_roman_375",
+            "ct_gastronomie_024",
+            "ct_gastronomie_128",
+            "ct_gastronomie_319",
+            "ct_gastronomie_327",
+            "ct_meme_net_059",
+            "ct_sport_259",
+            "ct_sport_315",
+            "ct_viata_de_roman_111",
+            "ct_viata_de_roman_273",
+            "ct_viata_de_roman_353",
+            "ct_viata_de_roman_355",
+            "ct_film_tv_011",
+            "ct_gastronomie_346",
+            "ct_stiinta_264",
+            "ct_viata_de_roman_109",
+            "ct_viata_de_roman_114",
+            "ct_viata_de_roman_274",
+            "ct_viata_de_roman_373",
+            "ct_gastronomie_019",
+            "ct_gastronomie_341",
+            "ct_gastronomie_351",
+            "ct_muzica_068",
+            "ct_viata_de_roman_299",
+            "ct_film_tv_359",
+            "ct_gastronomie_020",
+            "ct_gastronomie_026",
+            "ct_gastronomie_129",
+            "ct_gastronomie_325",
+            "ct_gastronomie_344",
+            "ct_gastronomie_347",
+            "ct_gastronomie_370",
+            "ct_literatura_298",
+            "ct_meme_net_158",
+            "ct_sport_183",
+            "ct_viata_de_roman_364",
+            "ct_film_tv_016",
+            "ct_limba_223",
+            "ct_muzica_245",
+            "ct_muzica_366",
+            "ct_viata_de_roman_110",
+            "ct_viata_de_roman_275",
+            "ct_gastronomie_023",
+            "ct_gastronomie_127",
+            "ct_gastronomie_323",
+            "ct_meme_net_159",
+            "ct_meme_net_238",
+            "ct_muzica_164",
+            "ct_sport_094",
+            "ct_viata_de_roman_376",
+            "ct_gastronomie_324",
+            "ct_muzica_071",
+            "ct_muzica_073",
+            "ct_muzica_311",
+            "ct_sport_092",
+            "ct_sport_093",
+            "ct_viata_de_roman_374",
+            "ct_film_tv_357",
+            "ct_gastronomie_320",
+            "ct_gastronomie_322",
+            "ct_gastronomie_350",
+            "ct_sport_362",
+            "ct_viata_de_roman_108",
+            "ct_gastronomie_330",
+            "ct_gastronomie_349",
+            "ct_gastronomie_371",
+            "ct_geografie_134",
+            "ct_limba_147",
+            "ct_meme_net_297",
+            "ct_film_tv_012",
+            "ct_gastronomie_345",
+            "ct_gastronomie_348",
+            "ct_meme_net_063",
+            "ct_meme_net_162",
+            "ct_muzica_165",
+            "ct_sport_262",
+            "ct_sport_316",
+            "ct_film_tv_124",
+            "ct_gastronomie_022",
+            "ct_gastronomie_335",
+            "ct_limba_145",
+            "ct_literatura_051",
+            "ct_muzica_243",
+            "ct_personalitati_172",
+            "ct_sport_263",
+            "ct_stiinta_267",
+            "ct_viata_de_roman_197",
+            "ct_film_tv_358",
+            "ct_gastronomie_372",
+            "ct_literatura_228",
+            "ct_literatura_231",
+            "ct_meme_net_061",
+            "ct_muzica_074",
+            "ct_muzica_241",
+            "ct_muzica_244",
+            "ct_personalitati_075",
+            "ct_sport_261",
+            "ct_film_tv_013",
+            "ct_gastronomie_332",
+            "ct_gastronomie_361",
+            "ct_meme_net_062",
+            "ct_muzica_163",
+            "ct_personalitati_076",
+            "ct_muzica_168",
+            "ct_societate_290",
+            "ct_stiinta_189",
+            "ct_viata_de_roman_377",
+            "ct_arta_cultura_010",
+            "ct_gastronomie_331",
+            "ct_gastronomie_334",
+            "ct_meme_net_064",
+            "ct_meme_net_160",
+            "ct_gastronomie_329",
+            "ct_istorie_001",
+            "ct_literatura_156",
+            "ct_societate_175",
+            "ct_societate_257",
+            "ct_literatura_232",
+            "ct_meme_net_060",
+            "ct_meme_net_236",
+            "ct_personalitati_367",
+            "ct_viata_de_roman_107",
+            "ct_gastronomie_333",
+            "ct_istorie_038",
+            "ct_istorie_139",
+            "ct_meme_net_066",
+            "ct_societate_084",
+            "ct_arta_cultura_120",
+            "ct_gastronomie_338",
+            "ct_istorie_041",
+            "ct_personalitati_171",
+            "ct_gastronomie_025",
+            "ct_gastronomie_337",
+            "ct_geografie_001",
+            "ct_geografie_214",
+            "ct_literatura_052",
+            "ct_literatura_369",
+            "ct_personalitati_173",
+            "ct_societate_083",
+            "ct_sport_095",
+            "ct_viata_de_roman_363",
+            "ct_arta_cultura_007",
+            "ct_gastronomie_328",
+            "ct_geografie_034",
+            "ct_istorie_039",
+            "ct_istorie_308",
+            "ct_arta_cultura_117",
+            "ct_gastronomie_131",
+            "ct_gastronomie_132",
+            "ct_geografie_028",
+            "ct_societate_085",
+            "ct_viata_de_roman_198",
+            "ct_gastronomie_343",
+            "ct_istorie_042",
+            "ct_limba_044",
+            "ct_muzica_167",
+            "ct_stiinta_190",
+            "ct_arta_cultura_116",
+            "ct_gastronomie_326",
+            "ct_gastronomie_339",
+            "ct_geografie_032",
+            "ct_istorie_040",
+            "ct_muzica_312",
+            "ct_societate_087",
+            "ct_sport_184",
+            "ct_stiinta_295",
+            "ct_istorie_144",
+            "ct_muzica_070",
+            "ct_arta_cultura_004",
+            "ct_film_tv_203",
+            "ct_geografie_136",
+            "ct_literatura_057",
+            "ct_societate_294",
+            "ct_arta_cultura_118",
+            "ct_istorie_036",
+            "ct_limba_148",
+            "ct_literatura_054",
+            "ct_muzica_072",
+            "ct_societate_086",
+            "ct_societate_293",
+            "ct_film_tv_017",
+            "ct_film_tv_202",
+            "ct_gastronomie_130",
+            "ct_istorie_309",
+            "ct_limba_043",
+            "ct_limba_224",
+            "ct_personalitati_174",
+            "ct_arta_cultura_006",
+            "ct_arta_cultura_009",
+            "ct_film_tv_014",
+            "ct_gastronomie_340",
+            "ct_istorie_143",
+            "ct_limba_045",
+            "ct_literatura_053",
+            "ct_societate_090",
+            "ct_stiinta_106",
+            "ct_limba_046",
+            "ct_istorie_368",
+            "ct_literatura_230",
+            "ct_societate_088",
+            "ct_arta_cultura_194",
+            "ct_geografie_365",
+            "ct_muzica_313",
+            "ct_societate_178",
+            "ct_stiinta_099",
+            "ct_stiinta_191",
+            "ct_stiinta_266",
+            "ct_arta_cultura_008",
+            "ct_film_tv_015",
+            "ct_muzica_069",
+            "ct_societate_089",
+            "ct_stiinta_268",
+            "ct_arta_cultura_005",
+            "ct_geografie_027",
+            "ct_geografie_033",
+            "ct_istorie_142",
+            "ct_literatura_058",
+            "ct_sport_097",
+            "ct_arta_cultura_119",
+            "ct_limba_226",
+            "ct_personalitati_082",
+            "ct_limba_048",
+            "ct_limba_049",
+            "ct_literatura_056",
+            "ct_stiinta_103",
+            "ct_viata_de_roman_113",
+            "ct_arta_cultura_003",
+            "ct_istorie_310",
+            "ct_limba_047",
+            "ct_film_tv_126",
+            "ct_limba_149",
+            "ct_sport_096",
+            "ct_stiinta_105",
+            "ct_film_tv_018",
+            "ct_geografie_029",
+            "ct_geografie_137",
+            "ct_geografie_138",
+            "ct_societate_291",
+            "ct_stiinta_101",
+            "ct_limba_050",
+            "ct_stiinta_100",
+            "ct_istorie_037",
+            "ct_stiinta_102",
+            "ct_societate_292",
+            "ct_limba_150",
+            "ct_geografie_031",
+            "ct_geografie_030",
+            "lt_gastronomie_163",
+            "lt_viata_de_roman_205",
+            "lt_meme_net_129",
+            "lt_sport_233",
+            "lt_film_tv_223",
+            "lt_meme_net_127",
+            "lt_sport_232",
+            "lt_stiinta_201",
+            "lt_stiinta_216",
+            "lt_literatura_230",
+            "lt_viata_de_roman_209",
+            "lt_viata_de_roman_211",
+            "lt_gastronomie_243",
+            "lt_literatura_210",
+            "lt_muzica_060",
+            "lt_geografie_225",
+            "lt_meme_net_128",
+            "lt_meme_net_179",
+            "lt_muzica_134",
+            "lt_personalitati_186",
+            "lt_film_tv_161",
+            "lt_gastronomie_241",
+            "lt_geografie_166",
+            "lt_arta_cultura_094",
+            "lt_film_tv_007",
+            "lt_film_tv_099",
+            "lt_gastronomie_018",
+            "lt_gastronomie_221",
+            "lt_gastronomie_224",
+            "lt_gastronomie_244",
+            "lt_gastronomie_245",
+            "lt_literatura_231",
+            "lt_muzica_137",
+            "lt_personalitati_143",
+            "lt_sport_196",
+            "lt_stiinta_235",
+            "lt_gastronomie_246",
+            "lt_meme_net_049",
+            "lt_societate_194",
+            "lt_sport_234",
+            "lt_istorie_172",
+            "lt_viata_de_roman_165",
+            "lt_istorie_001",
+            "lt_muzica_139",
+            "lt_personalitati_188",
+            "lt_sport_076",
+            "lt_sport_197",
+            "lt_viata_de_roman_088",
+            "lt_viata_de_roman_207",
+            "lt_gastronomie_220",
+            "lt_geografie_228",
+            "lt_istorie_170",
+            "lt_muzica_141",
+            "lt_societate_150",
+            "lt_viata_de_roman_089",
+            "lt_film_tv_098",
+            "lt_geografie_227",
+            "lt_istorie_171",
+            "lt_literatura_236",
+            "lt_muzica_058",
+            "lt_viata_de_roman_094",
+            "lt_arta_cultura_005",
+            "lt_gastronomie_105",
+            "lt_muzica_135",
+            "lt_arta_cultura_006",
+            "lt_istorie_229",
+            "lt_sport_077",
+            "lt_gastronomie_017",
+            "lt_viata_de_roman_208",
+            "lt_geografie_109",
+            "lt_stiinta_156",
+            "lt_literatura_240",
+            "lt_istorie_238",
+            "lt_gastronomie_222",
+            "lt_meme_net_131",
+            "lt_arta_cultura_093",
+            "lt_arta_cultura_237",
+            "lt_literatura_122",
+            "lt_arta_cultura_092",
+            "lt_film_tv_011",
+            "lt_muzica_055",
+            "lt_personalitati_067",
+            "lt_sport_080",
+            "lt_gastronomie_107",
+            "lt_geografie_226",
+            "lt_istorie_029",
+            "lt_personalitati_190",
+            "lt_geografie_110",
+            "lt_sport_198",
+            "lt_arta_cultura_157",
+            "lt_geografie_001",
+            "lt_istorie_028",
+            "lt_gastronomie_015",
+            "lt_geografie_168",
+            "lt_stiinta_082",
+            "lt_arta_cultura_004",
+            "lt_limba_036",
+            "lt_stiinta_083",
+            "lt_geografie_239",
+            "lt_istorie_111",
+            "lt_istorie_114",
+            "lt_stiinta_203",
+            "lt_arta_cultura_003",
+            "lt_personalitati_149",
+            "lt_arta_cultura_095",
+            "lt_arta_cultura_096",
+            "lt_limba_034",
+            "lt_literatura_041",
+            "lt_societate_071",
+            "lt_geografie_022",
+            "lt_geografie_023",
+            "lt_literatura_123",
+            "lt_personalitati_191",
+            "lt_literatura_044",
+            "lt_geografie_025",
+            "lt_istorie_112",
+            "lt_literatura_047",
+            "lt_stiinta_086",
+            "lt_societate_070",
+            "lt_istorie_032",
+            "lt_limba_033",
+            "lt_geografie_021",
+            "lt_societate_075",
+            "al_film_tv_106",
+            "al_gastronomie_107",
+            "al_literatura_097",
+            "al_sport_084",
+            "al_viata_de_roman_096",
+            "al_gastronomie_010",
+            "al_viata_de_roman_090",
+            "al_gastronomie_025",
+            "al_viata_de_roman_091",
+            "al_viata_de_roman_092",
+            "al_gastronomie_024",
+            "al_sport_085",
+            "al_gastronomie_029",
+            "al_stiinta_088",
+            "al_muzica_062",
+            "al_societate_081",
+            "al_stiinta_087",
+            "al_geografie_031",
+            "al_muzica_063",
+            "al_muzica_066",
+            "al_film_tv_021",
+            "al_societate_077",
+            "al_sport_083",
+            "al_viata_de_roman_093",
+            "al_gastronomie_027",
+            "al_istorie_034",
+            "al_literatura_049",
+            "al_meme_net_057",
+            "al_gastronomie_026",
+            "al_istorie_036",
+            "al_limba_046",
+            "al_meme_net_058",
+            "al_muzica_064",
+            "al_arta_cultura_014",
+            "al_limba_042",
+            "al_meme_net_056",
+            "al_meme_net_059",
+            "al_societate_074",
+            "al_meme_net_060",
+            "al_muzica_061",
+            "al_muzica_067",
+            "al_societate_080",
+            "al_sport_086",
+            "al_film_tv_019",
+            "al_literatura_052",
+            "al_societate_078",
+            "al_arta_cultura_012",
+            "al_film_tv_023",
+            "al_gastronomie_028",
+            "al_limba_014",
+            "al_personalitati_006",
+            "al_limba_048",
+            "al_arta_cultura_016",
+            "al_istorie_037",
+            "al_istorie_039",
+            "al_istorie_041",
+            "al_meme_net_055",
+            "al_stiinta_089",
+            "al_arta_cultura_017",
+            "al_geografie_033",
+            "al_literatura_054",
+            "al_film_tv_020",
+            "al_gastronomie_030",
+            "al_limba_044",
+            "al_literatura_050",
+            "al_societate_079",
+            "al_limba_043",
+            "al_istorie_038",
+            "al_stiinta_009",
+            "al_arta_cultura_008",
+            "al_limba_045",
+            "al_personalitati_071",
+            "al_societate_075",
+            "al_istorie_001",
+            "al_arta_cultura_013",
+            "al_geografie_002",
+            "al_personalitati_068",
+            "al_societate_007",
+            "al_stiinta_008",
+            "al_istorie_035",
+            "al_literatura_005",
+            "al_personalitati_072",
+            "al_societate_017"
+          ]
+        }
+      }
+    },
+    "derived_catalog_v38.json": {
+      "baseline_sha256": "fe88e7265c68a79884eabb257912630722980dccd7238f3a834c6796aa65b400",
+      "after_sha256": "bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4",
+      "head_before": {
+        "meta": {
+          "schema_version": 1,
+          "formula_version": "v38-derived-1",
+          "pack_sha256": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+          "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+          "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+          "v37_rankings_sha256": "23421501b0e4bc391a62d25a577ed9d08c935a9eb48a550ab0e5b2f0e8367acb",
+          "counts": {
+            "total": 336,
+            "by_game": {
+              "intrusul": 183,
+              "perechi": 153
+            },
+            "sources_by_game": {
+              "intrusul": 66,
+              "perechi": 51
+            },
+            "starter_by_game": {
+              "intrusul": 24,
+              "perechi": 26
+            }
+          }
+        }
+      },
+      "head_after": {
+        "meta": {
+          "schema_version": 1,
+          "formula_version": "v38-derived-1",
+          "pack_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+          "kg_sha256": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+          "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+          "v37_rankings_sha256": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc",
+          "counts": {
+            "total": 336,
+            "by_game": {
+              "intrusul": 183,
+              "perechi": 153
+            },
+            "sources_by_game": {
+              "intrusul": 66,
+              "perechi": 51
+            },
+            "starter_by_game": {
+              "intrusul": 24,
+              "perechi": 26
+            }
+          }
+        }
+      },
+      "tables": {
+        "boards": {
+          "added": [],
+          "removed": [],
+          "changed": {},
+          "baseline_order": null
+        }
+      }
+    },
+    "cat_mobile_app_pack_contract.json": {
+      "baseline_sha256": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+      "after_sha256": "82304733284ca62245e0d2ac0abb7b81c991ed1857ca904c990116c5bce280b4",
+      "head_before": {
+        "contract": "cat_de_roman_esti.mobile_app_pack.v1",
+        "manifest": {
+          "app": "cat_de_roman_esti",
+          "schema_version": 1,
+          "manifest_version": 1,
+          "build_version": "fixture-v90-household-discovery",
+          "generated_at": "2026-06-21T00:00:00Z",
+          "content_hash": "sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a24ea61de3",
+          "counts": {
+            "nodes": 2416,
+            "edges": 9459,
+            "puzzles": 180
+          }
+        }
+      },
+      "head_after": {
+        "contract": "cat_de_roman_esti.mobile_app_pack.v1",
+        "manifest": {
+          "app": "cat_de_roman_esti",
+          "schema_version": 1,
+          "manifest_version": 1,
+          "build_version": "fixture-v1-reviewed-content",
+          "generated_at": "2026-06-21T00:00:00Z",
+          "content_hash": "sha256:b673caa14e7b6635fb8d7f283c2e0a4f8dbb9667450746ce9cdf0081dc8fd310",
+          "counts": {
+            "nodes": 2416,
+            "edges": 9458,
+            "puzzles": 180
+          }
+        }
+      },
+      "tables": {
+        "kg_nodes": {
+          "added": [],
+          "removed": [],
+          "changed": {},
+          "baseline_order": null
+        },
+        "kg_edges": {
+          "added": [],
+          "removed": [
+            {
+              "index": 4146,
+              "row": {
+                "id": "de427",
+                "src_id": "n_ftv_operatiunea_monstrul",
+                "dst_id": "n_ftv_dem_radulescu"
+              }
+            }
+          ],
+          "changed": {},
+          "baseline_order": null
+        },
+        "kg_puzzles": {
+          "added": [],
+          "removed": [],
+          "changed": {},
+          "baseline_order": null
+        }
+      }
+    }
+  }
+}

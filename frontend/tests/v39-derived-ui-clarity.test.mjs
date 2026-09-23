@@ -13,7 +13,7 @@ const resultCard = read("../src/components/ResultCard.tsx");
 test("Intrusul HUD omits source difficulty that does not describe puzzle state", () => {
   assert.doesNotMatch(intrusul, /DIFFICULTY_LABEL/);
   assert.doesNotMatch(intrusul, /label="NIVEL"/);
-  assert.match(intrusul, /label="ÎNCERCĂRI"/);
+  assert.match(intrusul, /label="GREȘELI"/);
   assert.match(intrusul, /state\.daily && <StatBadge label="ZILNIC"/);
 });
 

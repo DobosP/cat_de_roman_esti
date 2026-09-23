@@ -1,0 +1,56 @@
+{
+  "kind": "v1-finite-reconsideration-shortlist",
+  "baseline_commit": "cc0a6a4",
+  "selected_for_possible_repair": [
+    "lt_viata_de_roman_211"
+  ],
+  "approved": [],
+  "reason": "Original opening visibility hold demonstrably resolved. One easy everyday-to-story route may add useful beginner variety after three exact captions and full independent gate; no quota.",
+  "source_record": {
+    "difficulty": "usor",
+    "start": "n_v23via_ghiozdan",
+    "target": "n_v23lit_capra_cu_trei_iezi",
+    "optimal": 2,
+    "id": "lt_viata_de_roman_211",
+    "category": "viata_de_roman",
+    "source": "ai",
+    "status": "pending"
+  },
+  "required_caption_pairs": [
+    {
+      "from": "n_v23via_ghiozdan",
+      "to": "n_v3lit_carte",
+      "fact": "a schoolbag carries books",
+      "current": "legătură directă"
+    },
+    {
+      "from": "n_v23via_ghiozdan",
+      "to": "n_v4soc_copil",
+      "fact": "schoolchildren use a schoolbag",
+      "current": "legătură directă"
+    },
+    {
+      "from": "n_v4soc_copil",
+      "to": "n_v23lit_capra_cu_trei_iezi",
+      "fact": "the named Creangă tale has child-reader editions; retain qualified wording",
+      "current": "legătură directă"
+    }
+  ],
+  "existing_reviewed_pair": "Carte—Capra cu trei iezi: poveste și carte",
+  "comparative_review": {
+    "other_pending": "lt_literatura_210 uses same two intermediate nodes; prefer at most one rather than repeat identical diamond.",
+    "approved_overlap": [
+      "lt_literatura_230 Ion Creangă→Carte",
+      "lt_literatura_236 Capra cu trei iezi→Amintiri din copilărie"
+    ],
+    "finding": "No approved representative shortest-route sample includes both Carte and copil and no approved board starts Ghiozdan or Abecedar. Sample is not proof of no unenumerated route overlap."
+  },
+  "required_rail": [
+    "Author separate exact edge-snapshot-bound caption proposal; factual and quality reviewers distinct from author; test supported orientations and no graph edits.",
+    "After any accepted caption installation, rebuild exact one-ID pending dossier because display_rules_sha256 changes.",
+    "For this already-pending unchanged record, no import is needed. Obtain fresh independent analyst and adversarial verifier per ADR0104; exact input_ids and dossier binding.",
+    "Build scripts/build_review_artifact.py --analyst ... --verifier ... --dossiers ... --out ...; apply scripts/apply_rereview.py only if two promote verdicts and all strict gates pass.",
+    "Validate fixture/pack; supported ranking/derived/mobile refresh; preserve frozen336boards and all rejections; prove natural selection and full wrong/repeat/hint/GET/two-route wins."
+  ],
+  "fallback": "If independent D2/D5/freshness review rejects or scope is not worthwhile, retain original pending board and ship zero board promotions. V1 stability is the objective."
+}

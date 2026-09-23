@@ -1,0 +1,56 @@
+import os,sys,json,gzip,hashlib,itertools,collections
+from pathlib import Path
+root=Path(sys.argv[1]);scratch=Path(sys.argv[2]);os.chdir(root);sys.path[:0]=[str(root),str(root/'scripts')]
+from cat_de_roman_esti.data import load_fixture
+from cat_de_roman_esti.wordgames.service import WordGameService,get_service
+from cat_de_roman_esti.wordgames.recipe_extensions import record_snapshot
+from cat_de_roman_esti.wordgames import quick_catalog as Q
+from cat_de_roman_esti.wordgames.derived_catalog import load_derived_catalog
+from cat_de_roman_esti.wordgames.release_reserve import load_reserve
+from scripts import build_quick_content_v92 as B
+base=root/'docs/reviews/v1-testing-release/content';out=base/'quick';historical=root/'docs/reviews/v97-discovery-continuity-and-new-words/integration/quick'
+def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def read(path):return json.loads(path.read_bytes())
+def write(path,value):path.write_bytes(Q.json_bytes(value))
+newpath=out/'candidate.json';oldpath=historical/'candidate.json';oldcatpath=historical/'catalog.json';oldqpath=historical/'quality-review.json'
+new,old,oldcat,prior=map(read,[newpath,oldpath,oldcatpath,oldqpath])
+assert sha(newpath)=='efa071d9c8c17899cb123fb0a3cdb8c67741ec38982b45df1599d915be5d73f0'
+assert new==B.candidate() and newpath.read_bytes()==Q.json_bytes(B.candidate())
+assert old['boards']==new['boards']==oldcat['authored'];assert len(new['boards'])==85
+assert oldcat['candidate_sha256']==prior['candidate_sha256']==sha(oldpath)
+assert next(x for x in oldcat['reviews'] if x['role']=='quality')['sha256']==sha(oldqpath)
+assert prior['role']=='quality' and len(prior['items'])==85 and all(x['verdict']=='accept' for x in prior['items'])
+assert not oldcat['excluded']
+assert set(new['bindings'])==set(old['bindings']) and [k for k in new['bindings'] if new['bindings'][k]!=old['bindings'][k]]==['kg_sha256']
+beforebytes=gzip.decompress((base/'kg-before-v1.json.gz').read_bytes());assert hashlib.sha256(beforebytes).hexdigest()==old['bindings']['kg_sha256'];beforepath=scratch/'quick-quality-baseline-kg.json';beforepath.write_bytes(beforebytes)
+s0=WordGameService(load_fixture(beforepath).graph);s1=get_service();assert sha(Q.DEFAULT_FIXTURE)==new['bindings']['kg_sha256']
+nodes={n for row in new['boards'] for n in Q.visible_ids(row)};snap0={n:record_snapshot(s0.node(n)) for n in sorted(nodes)};snap1={n:record_snapshot(s1.node(n)) for n in sorted(nodes)};assert oldcat['nodes']==snap0==snap1
+strength0,strength1=Q.graph_strengths(s0),Q.graph_strengths(s1)
+basecatalog=load_derived_catalog();rated0=Q.rated_boards(old['boards'],basecatalog,s0);rated1=Q.rated_boards(new['boards'],basecatalog,s1);assert oldcat['boards']==rated0==rated1
+corebefore=json.loads(gzip.decompress((base/'derived_catalog_v38.json.before-v1.gz').read_bytes()));corenow=read(Q.DEFAULT_DERIVED_CATALOG);assert corebefore['boards']==corenow['boards'] and len(corenow['boards'])==336
+edges0={e.id:record_snapshot(e) for e in s0.graph.edges};edges1={e.id:record_snapshot(e) for e in s1.graph.edges};changededges=sorted(k for k in edges0.keys()|edges1.keys() if edges0.get(k)!=edges1.get(k))
+priorby={x['id']:x for x in prior['items']};ratedby={r['source_id']:r for r in rated1}
+assert set(priorby)=={x['id'] for x in new['boards']}
+def matching_count(ids):
+ if not ids:return 1
+ a,*rest=ids
+ return sum(matching_count([x for x in rest if x!=b]) for b in rest if strength1.get(frozenset((a,b)),0)>=.6)
+proofrows=[]
+for row in new['boards']:
+ ids=Q.visible_ids(row);ns=set(ids);es0=[v for k,v in sorted(edges0.items()) if v['src_id'] in ns and v['dst_id'] in ns];es1=[v for k,v in sorted(edges1.items()) if v['src_id'] in ns and v['dst_id'] in ns];assert es0==es1
+ pairs=[{'pair':list(pair),'strength':strength1.get(frozenset(pair),0)} for pair in itertools.combinations(sorted(ns),2)];assert all(strength0.get(frozenset(x['pair']),0)==x['strength'] for x in pairs)
+ incident=[k for k in changededges if any((v and (v['src_id'] in ns or v['dst_id'] in ns)) for v in [edges0.get(k),edges1.get(k)])]
+ if row['game']=='perechi':assert matching_count(sorted(ns))==1;solver={'strong_edge_perfect_matchings':1}
+ else:
+  possible=[outlier for outlier in ns if all(frozenset((outlier,n)) not in strength1 for n in ns-{outlier}) and sum(strength1.get(frozenset(pair),0)>=.6 for pair in itertools.combinations(ns-{outlier},2))>=2]
+  assert possible==[row['payload']['intruder']];solver={'unique_native_intruder':possible[0]}
+ proofrows.append({'id':row['id'],'game':row['game'],'source_id':row['source_id'],'runtime_id':ratedby[row['source_id']]['id'],'authored_record_sha256':Q.digest(row),'payload_sha256':Q.digest(row['payload']),'inherited_review_item_sha256':Q.digest(priorby[row['id']]),'visible_node_count':len(ns),'visible_node_snapshots_sha256':Q.digest({n:snap1[n] for n in sorted(ns)}),'on_board_edge_count':len(es1),'on_board_edge_snapshots_sha256':Q.digest(es1),'on_board_strengths':pairs,'before_after_authored_equal':True,'before_after_nodes_equal':True,'before_after_edges_equal':True,'before_after_strengths_equal':True,'before_after_rating_equal':True,'external_incident_changed_edge_ids':incident,'native_gate_and_unique_answer':solver})
+res=load_reserve();reserveids={x[0] for x in res.quick};authoredids={r['id'] for r in rated1};assert not reserveids&authoredids
+proof={'kind':'v1-quick-quality-independent-carry-forward-proof-v1','reviewer':'/root/v1_held_audit','checked_on':'2026-09-23','candidate_sha256':sha(newpath),'historical':{'candidate_path':str(oldpath.relative_to(root)).replace('\\','/'),'candidate_sha256':sha(oldpath),'catalog_path':str(oldcatpath.relative_to(root)).replace('\\','/'),'catalog_sha256':sha(oldcatpath),'quality_review_path':str(oldqpath.relative_to(root)).replace('\\','/'),'quality_review_sha256':sha(oldqpath),'quality_reviewer':prior['reviewer'],'graph_sha256':old['bindings']['kg_sha256'],'source_review_all85_accept':True},'current_bindings':new['bindings'],'binding_fields_changed':['kg_sha256'],'counts':{'boards':85,'by_game':dict(collections.Counter(r['game'] for r in new['boards'])),'visible_nodes':len(nodes),'unchanged_frozen_core_boards':336,'changed_authored_records':0,'changed_visible_nodes':0,'changed_on_board_edges':0,'changed_on_board_strengths':0,'changed_rated_records':0,'new_semantic_reviews':0,'external_incident_change_board_count':sum(bool(x['external_incident_changed_edge_ids']) for x in proofrows)},'external_edge_changes':[{ 'id':k,'before_sha256':Q.digest(edges0[k]),'after_sha256':Q.digest(edges1[k]) if k in edges1 else None} for k in changededges],'reserved_quick_ids':sorted(reserveids),'authored_reserved_overlap':[],'items':proofrows,'method':'Independently loaded full archived and current graphs, compared exact85authored rows and322visible snapshots, compared every within-board edge including direction/default fields and all pair-strength maxima, regenerated full native ratings both times, enumerated unique native solutions and read all historical item rationales. Catalog binds the exact prior quality-review bytes. Only global KG binding changes. A changed edge incident to a displayed node but leaving the board is recorded explicitly, not falsely claimed absent.','limits':'Historical semantic/source judgments are inherited, not85freshwebchecks or anewhumanplaytest. Current factual reviewer is separate. Final catalog/liveAPI replay and independent final bound reviews remain required before package install; no runtime or fixture mutation performed.'}
+write(out/'quality-carry-forward-proof.json',proof)
+review={'kind':B.REVIEW_KIND,'role':'quality','reviewer':'/root/v1_held_audit','candidate_sha256':sha(newpath),'baseline_evidence':{'kind':'explicit_unchanged_semantic_judgment_inheritance','candidate_sha256':sha(oldpath),'catalog_sha256':sha(oldcatpath),'quality_review_sha256':sha(oldqpath),'quality_reviewer':prior['reviewer'],'inherited_rows':85,'new_rows':0,'proof_sha256':sha(out/'quality-carry-forward-proof.json'),'source_limit':'No claim of reopening85historicalsource sets; semantic judgments carried forward only after exact row/node/on-boardedge/strength/rating invariance and current native gates.'},'items':[]}
+for row in new['boards']:
+ prev=priorby[row['id']];review['items'].append({'id':row['id'],'verdict':'accept','rationale':'Accept unchanged carry-forward. Independently verified the exact authored row, displayed-node snapshots, all within-board edge snapshots/strengths and current native rating/unique-answer gates. Inherited V97 semantic rationale, not a fresh source recheck: '+prev['rationale'],'sources':prev['sources']})
+write(out/'quality-review.json',review);B.read_review(out/'quality-review.json','quality',sha(newpath),set(priorby))
+(out/'quality-carry-forward-probe.py.txt').write_bytes(Path(__file__).read_bytes())
+print(json.dumps(proof['counts'],ensure_ascii=False));print('quality-review',sha(out/'quality-review.json'));print('proof',sha(out/'quality-carry-forward-proof.json'));print('incident',[(x['id'],x['external_incident_changed_edge_ids']) for x in proofrows if x['external_incident_changed_edge_ids']])

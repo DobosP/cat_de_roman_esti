@@ -1,0 +1,125 @@
+"""Independent closure of V1 retained challenge books; never install fixtures."""
+import gzip
+import hashlib
+import json
+import os
+import sys
+import tempfile
+import time
+from pathlib import Path
+from unittest.mock import patch
+
+ROOT = Path.cwd()
+sys.path.insert(0, str(ROOT))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from tests import test_v1_recipe_refresh as T
+from cat_de_roman_esti.wordgames import alchimie as A, recipe_extensions as R
+from cat_de_roman_esti.wordgames.service import SessionStore
+
+CONTENT = ROOT / 'docs/reviews/v1-testing-release/content'
+REVIEW = CONTENT / 'recipes'
+started = time.monotonic()
+def sha(blob):return hashlib.sha256(blob).hexdigest()
+def read(path):return json.loads(path.read_bytes())
+relative_inputs = [
+ 'cat_de_roman_esti/fixtures/kg_sample.json', 'cat_de_roman_esti/fixtures/games_pack.json',
+ 'cat_de_roman_esti/fixtures/board_rankings_v37.json', 'cat_de_roman_esti/fixtures/release_reserve_v1.json',
+ 'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json', 'docs/CRITIQUE_RUBRIC.md',
+ 'cat_de_roman_esti/wordgames/alchimie.py', 'cat_de_roman_esti/wordgames/recipe_extensions.py',
+ 'cat_de_roman_esti/wordgames/service.py', 'cat_de_roman_esti/wordgames/packs.py',
+ 'cat_de_roman_esti/wordgames/discovery_world.py', 'cat_de_roman_esti/wordgames/alchimie_explore.py',
+ 'scripts/build_alchimie_recipe_extensions.py', 'scripts/audit_alchimie_recipe_freedom.py',
+ 'tests/test_v1_recipe_refresh.py',
+]
+relative_inputs += ['docs/reviews/v1-testing-release/content/'+p for p in [
+ 'factual-downstream-audit.json', 'kg-before-v1.json.gz', 'games_pack.json.before-v1.gz',
+ 'alchimie-reserve-proposal.json', 'selection-reserve-quality-review.json',
+ 'recipes/before-v1-catalog.json.gz', 'recipes/candidates.json', 'recipes/catalog.json',
+ 'recipes/factual-review.json', 'recipes/quality-review.json', 'recipes/live-audit.json',
+ 'recipes/carry-forward-provenance.json', 'recipes/capture-downstream-closure.py.txt',
+]]
+inputs = {relative:(ROOT/relative).read_bytes() for relative in relative_inputs}
+assert sha((REVIEW/'catalog.json').read_bytes()) == 'c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661'
+with tempfile.TemporaryDirectory(prefix='v1-recipe-closure-') as directory:
+    scratch=Path(directory)
+    c=T.prepare_comparison(scratch)
+    T.test_all_68_retained_books_are_byte_equivalent_to_baseline(c)
+    T.test_retained_identities_bind_current_sources_and_document_one_withdrawal(c)
+    for bid,count in T.AFFECTED.items():
+        T.test_old_snapshots_disable_only_additions_and_refreshed_books_restore_them(c,bid,count)
+    for bid,nid,eid,field in [
+        ('al_arta_cultura_016','n_ateneul_roman',None,'description'),
+        ('al_film_tv_020','n_ftv_operatiunea_monstrul',None,'degree'),
+        ('al_sport_083',None,'de1218','label_ro'),
+    ]:
+        T.test_restamped_tampered_snapshot_still_fails_closed(c,scratch,bid,nid,eid,field)
+    for source in ('kg','pack','rubric'):
+        T.test_current_builder_rejects_stale_source_binding_even_with_restamped_reviews(scratch,source)
+    wins=[]; restored=[]
+    with patch.object(A,'get_service',new=lambda:c.services[1]), \
+         patch.object(A,'store',SessionStore(ttl_seconds=7200,max_sessions=1000)), \
+         patch.object(R,'CATALOG_PATH',c.catalog_path):
+        for bid in sorted(c.items):wins.append(T.api_win(c,bid))
+        for board in c.catalog['boards']:
+            if board['id'] in T.AFFECTED:
+                for addition in board['additions']:
+                    restored.append(T.api_win(c,board['id'],required_addition=addition))
+    assert len(wins)==68 and len(restored)==7
+    old_ids,new_ids=T.identities(c.old_catalog),T.identities(c.catalog)
+    withdrawn=[{'candidate_id':cid,**value} for cid,value in old_ids.items() if cid not in new_ids]
+    rows=[]
+    for bid in sorted(c.items):
+        a,b=c.before[bid],c.after[bid];seeds=set(c.records[bid]['seeds'])
+        rows.append({'id':bid,'baseline_book_sha256':sha(a['bytes']),'candidate_book_sha256':sha(b['bytes']),
+          'book_bytes_equal':a['bytes']==b['bytes'],'par':b['live'].par,'recipes':len(b['live'].recipes),
+          'stored_routes':len(b['live'].routes),'productive_openings':sum(set(p)<=seeds and bool(set(v)-seeds) for p,v in b['live'].recipes.items())})
+    old_raw=json.loads(gzip.decompress((CONTENT/'games_pack.json.before-v1.gz').read_bytes()))
+    new_raw=read(ROOT/'cat_de_roman_esti/fixtures/games_pack.json')
+    assert old_raw['alchimie']==new_raw['alchimie']
+    previous=read(CONTENT/'factual-downstream-audit.json')
+    world_sha=sha((ROOT/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json').read_bytes())
+    assert world_sha==previous['inputs']['world_sha256']
+    for relative in ('cat_de_roman_esti/wordgames/alchimie.py','cat_de_roman_esti/wordgames/recipe_extensions.py',
+                     'cat_de_roman_esti/wordgames/discovery_world.py','cat_de_roman_esti/wordgames/service.py'):
+        assert sha((ROOT/relative).read_bytes())==previous['runtime_sources'][relative]
+    live_audit=read(REVIEW/'live-audit.json')
+    assert live_audit['proposed_catalog_sha256']==sha((REVIEW/'catalog.json').read_bytes())
+    assert len(live_audit['boards'])==80 and live_audit['totals']['after']['recipes']==603
+    for relative,blob in inputs.items():assert (ROOT/relative).read_bytes()==blob,relative
+    report={
+      'kind':'v1-recipe-downstream-closure-v1','reviewer':'/root/v1_ux_audit','checked_on':'2026-09-23',
+      'verdict':'accept_retained_challenge_scope','subject':'exact proposal catalog, not an installation action',
+      'catalog_sha256':sha((REVIEW/'catalog.json').read_bytes()),'candidate_sha256':c.catalog['candidate_sha256'],
+      'baseline_kg_sha256':c.baseline_kg_sha,'kg_sha256':c.kg_sha,
+      'baseline_extension_catalog_sha256':sha(gzip.decompress((REVIEW/'before-v1-catalog.json.gz').read_bytes())),
+      'input_sha256':{relative:sha(blob) for relative,blob in inputs.items()},
+      'summary':{'raw_alchimie_records':len(old_raw['alchimie']),'approved_archived_records':80,
+        'selectable_records':68,'release_reserved_records':12,'retained_books_byte_equal':68,
+        'retained_book_recipes':sum(r['recipes'] for r in rows),'public_api_wins_at_par':68,
+        'restored_addition_api_wins':7,'baseline_extension_boards':28,'candidate_extension_boards':27,
+        'baseline_extension_additions':50,'candidate_extension_additions':49,'new_e2_failures':0,
+        'all_80_raw_auditor_recipes':603,'archived_single_opening_records':12},
+      'comparison_method':'Byte comparison of deterministic canonical UTF-8 JSON containing seeds, target, category, recipe pair/results, complete stored routes, and par. All68 baseline books use exact archived KG plus archived original extensions; candidate books use the current KG plus the proposal catalog.',
+      'book_comparisons':rows,'public_api_journeys':wins,'restored_addition_journeys':restored,
+      'identity_preservation':{'retained_candidate_ids':sorted(new_ids),'all_retained_pair_result_edge_identities_equal':True,
+        'withdrawn_historical_additions':withdrawn,'reason':'The sole withdrawn addition belongs to release-reserved al_istorie_034. It remains in the exact baseline archive; this does not remove any addition from the68 selectable boards.',
+        'reserved_board_ids':sorted(c.reserved),'all83_raw_alchimie_records_preserved_exactly':True},
+      'negative_controls':{'old_snapshots_disable_exactly_seven_additions_on_three_boards':True,
+        'restamped_description_degree_and_label_snapshots_fail_closed':True,
+        'restamped_reviews_cannot_approve_stale_kg_pack_or_rubric_bindings':True},
+      'world_and_history':{'evidence_mode':'carry forward exact unchanged catalog and checked runtime source bindings from prior independent replay',
+        'world_sha256':world_sha,'concepts':previous['world']['metrics']['concepts'],
+        'recipes':previous['world']['metrics']['recipes'],'compatible_versions':len(previous['world']['compatible_save_replays']),
+        'preserved_historical_prefixes':sum(x['prefixes_preserved'] for x in previous['world']['compatible_save_replays']),
+        'full_prior_replay_sha256':previous['world']['full_audit_sha256'],'recipe_rows_and_concept_snapshots_unchanged':True},
+      'closure_of_original_hold':'The original audit required seven collateral recipe additions to be preserved. This exact proposal restores those seven and all68 selectable books. The explicit reviewed selection reserve intentionally excludes12 archived boards; al_istorie_034 loses its sole extension only outside selectable stock. The original80-book evidence remains unchanged.',
+      'limits':['API selectors are pinned to each exact reviewed board for exhaustive coverage; this does not replace natural-selection browser tests.',
+        'API calls use the real Django create/combine routes in an isolated process with a fresh bounded7200-second/1000-session store.',
+        'This report reviews the proposal. Root still owns final independent review approvals, installation and the served-catalog regression.',
+        'No runtime source or served fixture was modified; no human enjoyment claim.'],
+      'elapsed_seconds':round(time.monotonic()-started,3),
+    }
+    (REVIEW/'downstream-closure.json').write_bytes((json.dumps(report,ensure_ascii=False,indent=2)+'\n').encode())
+    print(json.dumps({'sha256':sha((REVIEW/'downstream-closure.json').read_bytes()),'summary':report['summary'],'elapsed_seconds':report['elapsed_seconds']}),flush=True)

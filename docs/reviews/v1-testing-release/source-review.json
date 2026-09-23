@@ -1,0 +1,65 @@
+{
+  "baseline": "cc0a6a4",
+  "checked_on": "2026-09-23",
+  "findings": [
+    {
+      "affected_original_source_sha256": "1e777dacd160f905579cedbd34014a6ba9b010bc93f1b3270ae647ff71d2025a",
+      "call_site": "frontend/src/main.tsx:15",
+      "closure_requirement": "Independent review of the frozen fix and regression results; append closure without erasing this finding.",
+      "description": "The default parameter reads globalThis.sessionStorage outside the guarded body. A denied getter throws SecurityError before listener registration and before createRoot, leaving the app unmounted. This is an existing release-readiness defect observed during the bounded review, not a claim that the V1 UI diff introduced it.",
+      "file": "frontend/src/releaseRecovery.mjs",
+      "id": "V1-BOOTSTRAP-STORAGE-GETTER",
+      "line": 18,
+      "owner": "/root/v1_board_audit",
+      "priority": 2,
+      "reproduction": "Independently imported installReleaseRecovery, installed a configurable sessionStorage getter that throws DOMException SecurityError, and invoked with stub target/location/schedule while omitting storage. Observed SecurityError; listener registered=false. Existing normal-storage tests did not cover this boundary.",
+      "required_remediation": "Obtain browser storage inside a guarded lookup, preserve bootstrap with unavailable storage, and test the denied-getter path plus repeated preload-error handling. Regenerate the SPA after the source fix.",
+      "status": "confirmed_remediation_pending"
+    }
+  ],
+  "kind": "v1-independent-bounded-source-review-v1",
+  "limits": [
+    "This finite review did not investigate every historical source file or claim browser coverage; the separate browser matrix remains required.",
+    "No installed fixtures, application source, or frontend assets were edited by this review.",
+    "Catalog and reserve judgments retain their explicit bundled-release selection boundary; raw inventory and selectable stock differ.",
+    "Compiled assets must be rebuilt after any final recovery source edit."
+  ],
+  "other_actionable_findings": [],
+  "related_reviews": [
+    "content/selection-reserve-implementation-review.json",
+    "content/quick/final-quality.json",
+    "content/recipes/final-quality.json"
+  ],
+  "reviewed_changed_files": {
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "dffe5d7cb469a0aa316bf1c65ee3da07a33649033b23bea1b70771ee2fd8e553",
+    "cat_de_roman_esti/wordgames/quick_catalog.py": "e61d5b8da79ca880dde68d2b8d609405addc2e71db80567338282d0a78170294",
+    "frontend/src/components/GameIntro.tsx": "7de261785a4992d381af6fbf39bf36eb3fbb6447c9c6174dbf3f247da9258054",
+    "frontend/src/components/GameOptions.tsx": "517f9a67a1dc6a9d94ebe8d95ffe716462e2ad0dd0ac1c91a89e4449a19fa561",
+    "frontend/src/components/ResultCard.tsx": "51c31ded5491a5fde750dc3a0e1372a9d0f54186d67894a4f342e2512b37a5b7",
+    "frontend/src/release.ts": "8352032b5075e851be9a6f98e1a093653ba52cd245dae2e03d485027a15e6be3",
+    "frontend/src/screens/Alchimie.tsx": "25f733e213bcf81436327c98db1fbd091fe4f501d6c8e928ad4bddd8d08aa2e2",
+    "frontend/src/screens/Home.tsx": "bd364e70af7b290818b08478c764a71bbf892f182267c0dc9e99214980d66345",
+    "frontend/src/screens/Intrusul.tsx": "5f236156bcfffb50e7205e5b5d4260f416889db588ac1f09b44093b370a8b0d7",
+    "frontend/src/screens/Perechi.tsx": "c1e334412ddd384ce1a212e0442fe08e7e490ac59afd18dece6383771528b2f6",
+    "frontend/src/styles/conexiuni.css": "c9aed3e8733bc2fb2514fe5882bf65f5d3ec7a0302381dbbeb78f09599116183",
+    "frontend/src/styles/intrusul.css": "0d098db220f2279b1af45f7361227874b232beb44deac6ee84ddc454907fb7c8",
+    "frontend/src/styles/perechi.css": "52d0d8deafb8461549abdb26b3979f6d7ca71b38622383cb8116b53860ade5ff",
+    "pyproject.toml": "004b8b9f35b387cf82638575f0436e6134aa97348dab77bc8dbcc706dff655ed",
+    "scripts/export_mobile_app_pack.py": "01fce7873275e4e6d234d244e2302e9e54c9b1e82f8e10ac27315e692c8422db"
+  },
+  "reviewer": "/root/v1_held_audit",
+  "scope": "Bounded source review of changed start/replay/help flows, daily navigation intent and saved-round precedence, native details/focus accessibility, responsive tile changes, and catalog/package source coupling. Independent runtime probes and prior content reviews are cited separately; this is not a full application security or accessibility certification.",
+  "status": "one_confirmed_bug_remediation_pending",
+  "supporting_source_context": {
+    "frontend/src/components/GameHelp.tsx": "b9bc13aedea46aa8272811efbe03b20565576baaaee8030e66464803babad486",
+    "frontend/src/components/GameSetupOptions.tsx": "0c1429636cc92da7cf5526091c5796d5dfce5e806c098e7c880e051fe4212ca9",
+    "frontend/src/components/StartFailureNotice.tsx": "4513533c61a95b3fbeaab67baeb5f43d94752d93e4474c92a42d996ee5f6b5f4",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "frontend/src/main.tsx": "19397e62132ca9285f3aec0abe327eee936dc56593aceccecd10d150a9fa383c",
+    "frontend/src/releaseRecovery.mjs": "7476d40b8552e33edca809e1661f51becf91dddcb7466f26114c14a74ea92287",
+    "frontend/src/savedGameResume.mjs": "4c5a64e59da67cdf08e1870de9063ac9c5004e134f6d84397fdf89e7a3f0f0d3",
+    "frontend/src/styles/game-options.css": "a13df5b45d2f71e40871698cc04e8c6260824f40b878d4e728e941eb935e17d5",
+    "frontend/tests/release-recovery.test.mjs": "d60607171f0179f7581d427f75f9157a7bfb3eb1c24d173b719c44c19c4c37da"
+  }
+}

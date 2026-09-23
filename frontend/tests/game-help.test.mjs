@@ -47,9 +47,11 @@ test("rules use a closed native disclosure with no session or clue side effects"
   assert.doesNotMatch(component, /\bopen=|useEffect|useState|fetch|Api|onClick|localStorage/);
   assert.match(component, /Citirea regulilor nu folosește un indiciu și nu schimbă scorul/);
   const options = read("../src/components/GameOptions.tsx");
+  assert.match(options, /children &&/);
   assert.match(options, /<details className="game-options">/);
   assert.match(options, /<summary>Opțiuni de joc<\/summary>/);
   assert.match(options, /<GameHelp game=\{game\} \/>/);
+  assert.ok(options.indexOf("<GameHelp") < options.indexOf('<details className="game-options">'));
   assert.doesNotMatch(options, /\bopen=|useEffect|useState|fetch|Api|onClick|localStorage/);
 });
 

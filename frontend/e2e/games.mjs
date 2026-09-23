@@ -18,21 +18,25 @@ const script = fileURLToPath(new URL("./solutions.py", import.meta.url));
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export function solution(game) {
-  if (!fixtures.has(game.key)) {
-    fixtures.set(game.key, JSON.parse(execFileSync("python3", [script, game.key], {
+  // Named semantic journeys and the general seed-38 journey must never share a cache entry.
+  const fixtureKey = `${game.key}:${game.packId ?? "seed-38"}`;
+  if (!fixtures.has(fixtureKey)) {
+    const args = [script, game.key, ...(game.packId ? [game.packId] : [])];
+    fixtures.set(fixtureKey, JSON.parse(execFileSync("python3", args, {
       cwd: root, env: { ...process.env, PYTHONPATH: root }, encoding: "utf8",
     })));
   }
-  return fixtures.get(game.key);
+  return fixtures.get(fixtureKey);
 }
 
 export const activeKey = (game) => `cat_active_game_v1_${game.key}`;
 export const gameURL = (game, id) => `/api/wordgames/${game.key}/games/${id}`;
 
 export async function deterministicStarts(page, game) {
+  const query = game.packId ? solution(game).query : { seed: "38" };
   await page.route(`**/api/wordgames/${game.key}/games?*`, async (route) => {
     const url = new URL(route.request().url());
-    url.searchParams.set("seed", "38");
+    for (const [name, value] of Object.entries(query)) url.searchParams.set(name, String(value));
     await route.continue({ url: url.toString() });
   });
 }
@@ -65,6 +69,10 @@ export async function openAlchemyDisclosure(page, selector, { keyboard = false }
 }
 
 export async function openGameOptions(page, game, { keyboard = false, setup = false } = {}) {
+  if (game.derived && !setup) {
+    await expect(page.locator(".game-help > summary")).toBeVisible();
+    return;
+  }
   if (game.key === "alchimie") {
     return openAlchemyDisclosure(page, setup ? ".alchemy-setup-options" : ".alchemy-menu", { keyboard });
   }
@@ -137,7 +145,7 @@ export async function solve(page, game, steps, options = {}) {
     }
     if (game.key === "perechi" && options.keyboard) {
       if (result.won) {
-        await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeFocused();
+        await expect(page.getByRole("button", { name: /^Încă unul →$/ })).toBeFocused();
       } else {
         const split = result.tiles.findIndex((tile) => tile.id === step.payload.ids[1]) + 1;
         const next = [...result.tiles.slice(split), ...result.tiles.slice(0, split)]

@@ -3,7 +3,6 @@ import test from "node:test";
 
 import {
   RELEASE_RECOVERY_KEY,
-  RELEASE_RECOVERY_RESET_MS,
   installReleaseRecovery,
 } from "../src/releaseRecovery.mjs";
 
@@ -91,15 +90,20 @@ test("the loop guard follows client-side navigation before a lazy import fails",
   assert.equal(app.reloads(), 1);
 });
 
-test("a successful reloaded bundle clears the loop guard after a bounded delay", () => {
-  const page = "/intrusul?daily=2026-07-30";
-  const app = harness(page);
-  installReleaseRecovery(app);
-
-  assert.equal(app.scheduled.length, 1);
-  assert.equal(app.scheduled[0].delay, RELEASE_RECOVERY_RESET_MS);
-  app.scheduled[0].callback();
-  assert.equal(app.values.has(RELEASE_RECOVERY_KEY), false);
+test("a slow failed chunk cannot outlive the guard and reload every document", () => {
+  let marker = null;
+  let reloads = 0;
+  for (let document = 0; document < 4; document += 1) {
+    const app = harness(marker);
+    installReleaseRecovery(app);
+    // Simulate every scheduled timeout expiring before a slow request fails.
+    for (const timer of app.scheduled) timer.callback();
+    app.dispatch();
+    reloads += app.reloads();
+    marker = app.values.get(RELEASE_RECOVERY_KEY);
+  }
+  assert.equal(reloads, 1);
+  assert.equal(marker, "/intrusul?daily=2026-07-30");
 });
 
 test("cleanup removes the global listener", () => {
@@ -109,4 +113,76 @@ test("cleanup removes the global listener", () => {
   app.dispatch();
   assert.equal(app.prevented(), 0);
   assert.equal(app.reloads(), 0);
+});
+
+test("a denied default sessionStorage getter cannot abort application startup", (t) => {
+  const descriptor = Object.getOwnPropertyDescriptor(globalThis, "sessionStorage");
+  Object.defineProperty(globalThis, "sessionStorage", {
+    configurable: true,
+    get() { throw new DOMException("Storage denied", "SecurityError"); },
+  });
+  t.after(() => {
+    if (descriptor) Object.defineProperty(globalThis, "sessionStorage", descriptor);
+    else delete globalThis.sessionStorage;
+  });
+
+  for (let document = 0; document < 3; document += 1) {
+    const app = harness();
+    delete app.storage;
+    let cleanup;
+    assert.doesNotThrow(() => { cleanup = installReleaseRecovery(app); });
+    app.dispatch();
+    app.dispatch();
+    assert.equal(app.prevented(), 0, "the failed import must reach its error boundary");
+    assert.equal(app.reloads(), 0, "no durable marker means no safe automatic reload");
+    cleanup();
+  }
+});
+
+for (const failure of ["getItem", "setItem", "silentWrite", "readBack"]) {
+  test(`denied or ineffective storage (${failure}) cannot start a reload loop`, () => {
+    const app = harness();
+    let reads = 0;
+    app.storage = {
+      getItem() {
+        reads += 1;
+        if (failure === "getItem" || (failure === "readBack" && reads >= 2)) {
+          throw new DOMException("Storage denied", "SecurityError");
+        }
+        return null;
+      },
+      setItem() {
+        if (failure === "setItem") throw new DOMException("Storage denied", "SecurityError");
+      },
+    };
+    assert.doesNotThrow(() => installReleaseRecovery(app));
+    for (let attempt = 0; attempt < 4; attempt += 1) app.dispatch();
+    assert.equal(app.prevented(), 0);
+    assert.equal(app.reloads(), 0);
+  });
+}
+
+test("a pending reload stays bounded even if the persisted marker is removed", () => {
+  const app = harness();
+  installReleaseRecovery(app);
+  app.dispatch();
+  app.values.clear();
+  app.dispatch();
+  assert.equal(app.reloads(), 1);
+  assert.equal(app.prevented(), 2);
+});
+
+test("the durable marker prevents recovery from looping across documents", () => {
+  const initial = harness();
+  installReleaseRecovery(initial);
+  initial.dispatch();
+  assert.equal(initial.reloads(), 1);
+
+  const reloaded = harness(initial.values.get(RELEASE_RECOVERY_KEY));
+  installReleaseRecovery(reloaded);
+  reloaded.dispatch();
+  reloaded.dispatch();
+  assert.equal(reloaded.reloads(), 0);
+  assert.equal(reloaded.prevented(), 0);
+  assert.equal(reloaded.scheduled.length, 0);
 });

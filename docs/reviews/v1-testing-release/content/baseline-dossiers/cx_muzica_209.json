@@ -1,0 +1,265 @@
+{
+  "id": "cx_muzica_209",
+  "game": "conexiuni",
+  "category": "muzica",
+  "difficulty": "greu",
+  "status": "approved",
+  "record_sha256": "421890c69deac9e1da7bb485e5136e521dd16911dfdf79f129d76c26fba188ae",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Moldova a intrat în refren\" mixes node_types 2+2: O-Zone[org], Carla's Dreams[org], Dragostea din tei[work], Sub pielea mea[work]"
+    },
+    {
+      "check": "mirrored_groups",
+      "level": "WARN",
+      "detail": "\"Canale unde ajunge cântecul înainte să devină meme\" <-> \"Prezentatori TV, nu artiștii din primul grup\" are in >=3-way strong correspondence"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Artiști pop cu viață de prime-time\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_055, cx_muzica_143)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Moldova a intrat în refren\" reuses an inventory/selected quad (also in: cx_muzica_055)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Canale unde ajunge cântecul înainte să devină meme\" reuses an inventory/selected quad (also in: cx_arta_cultura_162, cx_film_tv_169, cx_societate_155)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Prezentatori TV, nu artiștii din primul grup\" reuses an inventory/selected quad (also in: cx_film_tv_012, cx_film_tv_014, cx_film_tv_169)"
+    },
+    {
+      "check": "board_reskin",
+      "level": "WARN",
+      "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_169 (8)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [],
+    "engine_unfair_raw": 2
+  },
+  "groups": [
+    {
+      "label": "Artiști pop cu viață de prime-time",
+      "members": [
+        {
+          "id": "n_muz_andra",
+          "label": "Andra",
+          "node_type": "person",
+          "category": "muzica",
+          "salience": 0.8183,
+          "degree": 9,
+          "incoming_degree": 9,
+          "description": "Cântăreață română pop, prezentă constant în radio, televiziune și concerte mari."
+        },
+        {
+          "id": "n_muz_delia",
+          "label": "Delia",
+          "node_type": "person",
+          "category": "muzica",
+          "salience": 0.7656,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Cântăreață română pop, cunoscută pentru voce, show-uri TV și hituri radio."
+        },
+        {
+          "id": "n_muz_smiley",
+          "label": "Smiley",
+          "node_type": "person",
+          "category": "muzica",
+          "salience": 0.7677,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Cântăreț și producător român, figură majoră a popului radio și TV."
+        },
+        {
+          "id": "n_ftv_stefan_banica_jr",
+          "label": "Ștefan Bănică Jr.",
+          "node_type": "person",
+          "category": "film_tv",
+          "salience": 0.5253,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Actor și cântăreț român, interpretul lui Mihai în filmul Liceenii."
+        }
+      ]
+    },
+    {
+      "label": "Moldova a intrat în refren",
+      "members": [
+        {
+          "id": "n_muz_ozone",
+          "label": "O-Zone",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.883,
+          "degree": 12,
+          "incoming_degree": 11,
+          "description": "Trio pop din Republica Moldova care a dus „Dragostea din tei” în topuri internaționale."
+        },
+        {
+          "id": "n_muz_carlas_dreams",
+          "label": "Carla's Dreams",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.5445,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Proiect muzical din Republica Moldova, cunoscut pentru imaginea mascată și pop alternativ."
+        },
+        {
+          "id": "n_muz_dragostea_din_tei",
+          "label": "Dragostea din tei",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.9519,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Hit O-Zone din 2003, cunoscut global prin refrenul „nu mă, nu mă iei”."
+        },
+        {
+          "id": "n_muz_sub_pielea_mea",
+          "label": "Sub pielea mea",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.4839,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Piesă Carla’s Dreams din 2016, cunoscută și ca „Sub pielea mea | #eroina\" — hit masiv pe YouTube."
+        }
+      ]
+    },
+    {
+      "label": "Canale unde ajunge cântecul înainte să devină meme",
+      "members": [
+        {
+          "id": "n_ftv_pro_tv",
+          "label": "Pro TV",
+          "node_type": "org",
+          "category": "film_tv",
+          "salience": 0.9055,
+          "degree": 26,
+          "incoming_degree": 26,
+          "description": "Post TV comercial românesc, important pentru seriale și divertisment pop."
+        },
+        {
+          "id": "n_ftv_antena_1",
+          "label": "Antena 1",
+          "node_type": "org",
+          "category": "film_tv",
+          "salience": 0.8169,
+          "degree": 20,
+          "incoming_degree": 20,
+          "description": "Post TV comercial românesc cu divertisment, reality-show-uri și concursuri."
+        },
+        {
+          "id": "n_ftv_tvr",
+          "label": "TVR",
+          "node_type": "org",
+          "category": "film_tv",
+          "salience": 0.876,
+          "degree": 20,
+          "incoming_degree": 20,
+          "description": "Televiziunea publică din România, reper istoric pentru emisiuni și filme TV."
+        },
+        {
+          "id": "n_ftv_kanal_d",
+          "label": "Kanal D",
+          "node_type": "org",
+          "category": "film_tv",
+          "salience": 0.4413,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Post TV comercial din România, cunoscut pentru divertisment și reality-show-uri."
+        }
+      ]
+    },
+    {
+      "label": "Prezentatori TV, nu artiștii din primul grup",
+      "members": [
+        {
+          "id": "n_ftv_andreea_marin",
+          "label": "Andreea Marin",
+          "node_type": "person",
+          "category": "film_tv",
+          "salience": 0.5127,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Prezentatoare TV asociată puternic cu emisiunea Surprize, surprize."
+        },
+        {
+          "id": "n_ftv_teo_trandafir",
+          "label": "Teo Trandafir",
+          "node_type": "person",
+          "category": "film_tv",
+          "salience": 0.4251,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Prezentatoare și realizatoare TV română, reper al talk-show-ului autohton."
+        },
+        {
+          "id": "n_ftv_catalin_maruta",
+          "label": "Cătălin Măruță",
+          "node_type": "person",
+          "category": "film_tv",
+          "salience": 0.584,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Prezentator TV român care a prezentat emisiunea La Măruță la Pro TV între 2007 și 2026."
+        },
+        {
+          "id": "n_ftv_virgil_iantu",
+          "label": "Virgil Ianțu",
+          "node_type": "person",
+          "category": "film_tv",
+          "salience": 0.278,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Prezentator TV cunoscut ca gazdă a emisiunii Vrei să fii milionar?."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "Cătălin Măruță",
+      "a_group": "Prezentatori TV, nu artiștii din primul grup",
+      "b": "Pro TV",
+      "b_group": "Canale unde ajunge cântecul înainte să devină meme",
+      "strength": 0.86
+    },
+    {
+      "a": "Andreea Marin",
+      "a_group": "Prezentatori TV, nu artiștii din primul grup",
+      "b": "TVR",
+      "b_group": "Canale unde ajunge cântecul înainte să devină meme",
+      "strength": 0.84
+    },
+    {
+      "a": "Kanal D",
+      "a_group": "Canale unde ajunge cântecul înainte să devină meme",
+      "b": "Teo Trandafir",
+      "b_group": "Prezentatori TV, nu artiștii din primul grup",
+      "strength": 0.78
+    },
+    {
+      "a": "Cătălin Măruță",
+      "a_group": "Prezentatori TV, nu artiștii din primul grup",
+      "b": "Andra",
+      "b_group": "Artiști pop cu viață de prime-time",
+      "strength": 0.62
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:178546386c073d9ce35950a61dc0ae8c8179f7754f0f8cea4b31f5c4911ffc24"
+}

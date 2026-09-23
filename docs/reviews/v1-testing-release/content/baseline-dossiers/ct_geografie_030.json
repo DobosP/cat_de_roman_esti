@@ -1,0 +1,59 @@
+{
+  "id": "ct_geografie_030",
+  "game": "contexto",
+  "category": "geografie",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "0df4ca293befa88ec8f595f4df92acdc4613c5f4b3a729af023e2cb5ad261f58",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Lacul Roșu salience 0.16 < 0.35 (normal floor)"
+    },
+    {
+      "check": "contexto_incoming_floor",
+      "level": "WARN",
+      "detail": "1 unique existing non-distractor incoming neighbors < 5, excluding the target itself (ids: n_cheile_bicazului); five recognizable predecessors are impossible; recognition still requires independent review"
+    }
+  ],
+  "target": {
+    "id": "n_lacul_rosu",
+    "label": "Lacul Roșu",
+    "node_type": "place",
+    "category": "geografie",
+    "salience": 0.1576,
+    "degree": 2,
+    "incoming_degree": 1,
+    "description": "Lac de baraj natural din judetul Harghita, format in 1837, situat langa Cheile Bicazului."
+  },
+  "incoming_neighbor_floor": {
+    "minimum": 5,
+    "count": 1,
+    "sample": [
+      {
+        "id": "n_cheile_bicazului",
+        "label": "Cheile Bicazului"
+      }
+    ],
+    "sample_truncated": false,
+    "recognition_assessed": false
+  },
+  "reachable": 2353,
+  "strong_neighbors": [
+    {
+      "id": "n_cheile_bicazului",
+      "label": "Cheile Bicazului",
+      "node_type": "place",
+      "category": "geografie",
+      "salience": 0.2664,
+      "degree": 8,
+      "incoming_degree": 8,
+      "description": "Defileu spectaculos în Carpații Orientali.",
+      "strength": 0.93
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:435fd70d459582f632caa1dbd4c761b7edd9a37cb8b7633ad005bf8cd631a0a8"
+}

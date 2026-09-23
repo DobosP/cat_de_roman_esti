@@ -1,11 +1,11 @@
 {
   "meta": {
-    "build_version": "fixture-v90-household-discovery",
+    "build_version": "fixture-v1-reviewed-content",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "v90: three household/food concepts, ten grammatical forms and seventeen directed links.",
+    "note": "V1: three reviewed description corrections, three historical Cristina Neagu relationship labels, and removal of one unsupported casting link. All 180 existing puzzles are preserved and validated without regeneration.",
     "counts": {
       "nodes": 2416,
-      "edges": 9459,
+      "edges": 9458,
       "puzzles": 180,
       "by_category": {
         "arta_cultura": 128,
@@ -4000,7 +4000,7 @@
       "node_type": "place",
       "label_ro": "Ateneul Român",
       "category": "arta_cultura",
-      "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu.",
+      "description": "Clădire de concerte din București, inaugurată în 1888 și sediu al Filarmonicii „George Enescu”. Găzduiește concerte ale Festivalului „George Enescu”.",
       "salience": 0.6749,
       "difficulty_tier": "easy",
       "degree": 23,
@@ -5714,7 +5714,7 @@
       "description": "Comedie românească din 1976 cu Toma Caragiu, Octavian Cotescu și Marin Moraru.",
       "salience": 0.4983,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 7,
       "aliases": [
         "filmul Operațiunea Monstrul",
         "Operațiunea Monstrul filmul",
@@ -5759,7 +5759,7 @@
       "description": "Actor român de comedie, figură centrală în filmele Brigada Diverse.",
       "salience": 0.8647,
       "difficulty_tier": "easy",
-      "degree": 11,
+      "degree": 10,
       "aliases": [
         "Dem Rădulescu actorul",
         "Rădulescu Dem",
@@ -23127,7 +23127,7 @@
       "node_type": "org",
       "label_ro": "Muzeul Național al Satului „Dimitrie Gusti”",
       "category": "arta_cultura",
-      "description": "Muzeu în aer liber din București, întins pe malul lacului Herăstrău, cu sute de gospodării țărănești autentice strămutate din toată țara. A fost fondat în 1936 de sociologul Dimitrie Gusti.",
+      "description": "Muzeu în aer liber din București, deschis în 1936 la inițiativa sociologului Dimitrie Gusti. Prezintă case, anexe gospodărești, biserici și instalații tradiționale aduse din sate din România.",
       "salience": 0.62,
       "difficulty_tier": "medium",
       "degree": 7,
@@ -28056,7 +28056,7 @@
       "node_type": "place",
       "label_ro": "Crucea Caraiman",
       "category": "geografie",
-      "description": "Monument de 28 de metri ridicat între 1926 și 1928 pe Șaua Caraiman, în Munții Bucegi, la 2291 m altitudine, în memoria eroilor din Primul Război Mondial. Este recunoscută drept cea mai înaltă cruce din lume amplasată pe un vârf montan.",
+      "description": "Monument dedicat eroilor români din Primul Război Mondial, ridicat între 1926 și 1928 pe vârful de 2.291 m al masivului Caraiman, în Munții Bucegi. Are o înălțime totală de 39,3 m, inclusiv soclul.",
       "salience": 0.7,
       "difficulty_tier": "easy",
       "degree": 3,
@@ -45884,16 +45884,6 @@
       "bidirectional": 1
     },
     {
-      "id": "de427",
-      "src_id": "n_ftv_operatiunea_monstrul",
-      "dst_id": "n_ftv_dem_radulescu",
-      "relation": "related_to",
-      "label_ro": "a jucat în",
-      "strength": 0.86,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
       "id": "de428",
       "src_id": "n_ftv_operatiunea_monstrul",
       "dst_id": "n_ftv_marin_moraru",
@@ -53788,7 +53778,7 @@
       "src_id": "n_spt_cristina_neagu",
       "dst_id": "n_spt_handbal_feminin",
       "relation": "is_a",
-      "label_ro": "joacă",
+      "label_ro": "a jucat",
       "strength": 0.94,
       "is_distractor": 0,
       "bidirectional": 1
@@ -68918,7 +68908,7 @@
       "src_id": "n_spt_cristina_neagu",
       "dst_id": "n_v2spo_echipa_nationala",
       "relation": "related_to",
-      "label_ro": "joacă pentru România",
+      "label_ro": "a jucat pentru România",
       "strength": 0.82,
       "is_distractor": 0,
       "bidirectional": 1
@@ -68928,7 +68918,7 @@
       "src_id": "n_spt_cristina_neagu",
       "dst_id": "n_v2spo_club_sportiv",
       "relation": "related_to",
-      "label_ro": "joacă la cluburi",
+      "label_ro": "a jucat la cluburi",
       "strength": 0.68,
       "is_distractor": 0,
       "bidirectional": 1

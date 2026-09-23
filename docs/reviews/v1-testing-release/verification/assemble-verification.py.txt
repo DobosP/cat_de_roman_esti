@@ -1,0 +1,204 @@
+from pathlib import Path
+import datetime, gzip, hashlib, json, re, shutil, subprocess, sys
+import xml.etree.ElementTree as ET
+root, scratch = map(Path, sys.argv[1:3])
+review = root / 'docs/reviews/v1-testing-release'
+evidence = review / 'verification'
+evidence.mkdir(exist_ok=True)
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def write_json(path, value):
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
+
+logs = [
+    'backend-full.log', 'backend-final.log', 'accounts-final.log',
+    'browser-full.log', 'browser-parallel-interrupted.log', 'browser-parallel-scope.log', 'browser-final.log', 'browser-final-scope.log', 'lant-current-position-before.log', 'alchimie-semantic-browser.log',
+    'lifecycle-browser.log', 'release-recovery-browser-initial.log',
+    'release-recovery-browser-final.log', 'release-recovery-frontend-tests.log',
+    'browser-v1-ux-final.log', 'ux-readable-cards.log',
+    'fixture-final.log', 'pack-final.log', 'ruff-final.log',
+    'frontend-final-tests.log', 'frontend-final-build.log', 'frontend-final-lint.log', 'frontend-lint-memory-interrupted.log',
+    'start-failure-final.log', 'static-final.log', 'docs-final.log', 'whitespace-final.log',
+    'wheel-build-final.log', 'wheel-install-final.log', 'wheel-smoke.json', 'before-lant-wheel-smoke.json', 'recovery-harness-review.json', 'empty-pairs-original-repro.log',
+    'recovery-harness-review.before-extension.json',
+    'recovery-harness-original-alchimie-empty-pairs.spec.mjs',
+    'recovery-harness-original-v96-input-and-focus.spec.mjs',
+    'recovery-harness-before-extension-alchimie-empty-pairs.spec.mjs',
+    'linux-copy.log', 'v91-sport-seed-tests.log', 'current-pool-regressions.log',
+    'recipe-installed-tests.log', 'recipe-installed-final-tests.log', 'recipe-downstream-closure.log', 'recipe-downstream-closure-final.log',
+]
+for name in logs:
+    if not (scratch / name).is_file():
+        raise SystemExit('Missing completed evidence: ' + name)
+    if name.endswith('.log'):
+        (evidence / (name + '.gz')).write_bytes(gzip.compress((scratch/name).read_bytes(), mtime=0))
+    else:
+        shutil.copyfile(scratch / name, evidence / name)
+for name in ('linux-source-copy.json', 'backend-final.xml'):
+    target = evidence / (name + '.gz')
+    target.write_bytes(gzip.compress((scratch / name).read_bytes(), mtime=0))
+shutil.copyfile(scratch / 'playwright.config.mjs', evidence / 'playwright.config.mjs.txt')
+shutil.copyfile(scratch / 'wheel-smoke-final.py', evidence / 'wheel-smoke.py.txt')
+shutil.copyfile(Path(__file__), evidence / 'assemble-verification.py.txt')
+trace_paths = {
+    'alchimie-cached-recovery-before.zip': 'browser-final-clean-results/alchimie-empty-pairs-ident-de8b6-er-a-lost-uncommitted-craft-desktop/trace.zip',
+    'lant-stale-position-before.zip': 'browser-final-clean-results/lant-action-recovery-a-los-73945-ords-it-once-without-replay-desktop/trace.zip',
+    'alchimie-committed-recovery-before.zip': 'browser-final-clean-results/v96-input-and-focus-recove-02525-afting-respects-moved-focus-mobile/trace.zip',
+    'lant-paused-animation-before.zip': 'lant-current-position-before-results/lant-current-position-lant-abebc-animation-frames-are-paused-desktop/trace.zip',
+}
+(evidence / 'traces').mkdir(exist_ok=True)
+for name, relative in trace_paths.items():
+    shutil.copyfile(scratch / relative, evidence / 'traces' / name)
+
+
+forensics = json.loads((review/'browser-affected-run-forensics.json').read_bytes())
+assert sha(scratch/forensics['run']['log']['path']) == forensics['run']['log']['sha256']
+for name, row in forensics['traces'].items():
+    trace = scratch/row['path']
+    assert sha(trace) == row['sha256']
+    shutil.copyfile(trace, evidence/'traces'/('resource-scope-' + name + '.zip'))
+
+backend = ET.parse(scratch / 'backend-final.xml').getroot()
+suites = list(backend.iter('testsuite'))
+backend_totals = {key: sum(int(s.attrib.get(key, '0')) for s in suites)
+                  for key in ('tests', 'errors', 'failures', 'skipped')}
+assert backend_totals['tests'] == 2446 and not any(backend_totals[k] for k in ('errors', 'failures', 'skipped')), backend_totals
+browser_log = (scratch / 'browser-final.log').read_text(encoding='utf-8-sig')
+scope_log = (scratch / 'browser-final-scope.log').read_text(encoding='utf-8-sig')
+browser = re.search(r'^\s+(\d+) passed \(([^\n]+)\)', browser_log, re.M)
+scope = re.search(r'^\s+(\d+) passed \(([^\n]+)\)', scope_log, re.M)
+assert browser and scope and not re.search(r'^\s+\d+ failed', scope_log, re.M)
+def browser_cases(log):
+    cases = {}
+    for line in log.splitlines():
+        line = re.sub(r'\x1b\[[0-9;]*m', '', line)
+        match = re.match(r'^\s+(ok|x)\s+\d+\s+\[([^]]+)\]\s+›\s+(?:frontend[\\/])?e2e[\\/](.+?\.spec\.mjs):\d+:\d+\s+›\s+(.*?)\s+\([^)]*\)\s*$', line)
+        if match:
+            status, project, file, title = match.groups()
+            cases[f'[{project}] {file} > {title}'] = status
+    return cases
+full_cases, scope_cases = browser_cases(browser_log), browser_cases(scope_log)
+assert len(full_cases) == 586, len(full_cases)
+assert len(scope_cases) == int(scope[1]) and all(v=='ok' for v in scope_cases.values())
+failed_cases = {key for key, value in full_cases.items() if value != 'ok'}
+assert failed_cases and all(any(name in key for name in ('lant-action-recovery.spec.mjs', 'alchimie-empty-pairs.spec.mjs', 'v96-input-and-focus.spec.mjs')) for key in failed_cases), failed_cases
+assert failed_cases <= scope_cases.keys(), failed_cases
+impacted_cases = {key for key in full_cases if re.search('lant|alchimie-empty-pairs|v96-input-and-focus', key, re.I)}
+assert impacted_cases <= scope_cases.keys(), impacted_cases - scope_cases.keys()
+assert sum('lant-current-position.spec.mjs' in key for key in scope_cases) == 2
+final_cases = {**full_cases, **scope_cases}
+assert len(final_cases) == 588 and all(value=='ok' for value in final_cases.values())
+write_json(evidence/'browser-case-coverage.json', {'full_run_cases': full_cases, 'final_scope_cases': scope_cases, 'repaired_failure_ids': sorted(failed_cases), 'all_588_cases_green_after_scope_recheck': True})
+unit_log = (scratch / 'frontend-final-tests.log').read_text(encoding='utf-8-sig')
+unit = re.search(r'^(?:#|ℹ) pass (\d+)', unit_log, re.M)
+assert unit and int(unit[1]) == 224
+assert re.search(r'^(?:#|ℹ) fail 0$', unit_log, re.M)
+assert re.search(r'^(?:#|ℹ) skipped 0$', unit_log, re.M)
+assert re.search(r'^(?:#|ℹ) cancelled 0$', unit_log, re.M)
+accounts_log = (scratch / 'accounts-final.log').read_text(encoding='utf-8-sig')
+assert '53 passed' in accounts_log
+assert 'FATAL ERROR' not in (scratch/'frontend-final-lint.log').read_text(encoding='utf-8-sig')
+assert 'All checks passed!' in (scratch/'ruff-final.log').read_text(encoding='utf-8-sig')
+assert 'GREEN: fixture is valid (0 errors)' in (scratch/'fixture-final.log').read_text(encoding='utf-8-sig')
+assert 'games pack GREEN' in (scratch/'pack-final.log').read_text(encoding='utf-8-sig')
+assert 'dead_links=0 stale_terms=0 retired_verbs=0 orphans=0' in (scratch/'docs-final.log').read_text(encoding='utf-8-sig')
+
+inventory = subprocess.check_output(['git', '-c', 'core.autocrlf=false', 'ls-files', '--cached', '--others', '--exclude-standard', '-z'], cwd=root).decode().split('\0')
+inputs = {}
+for name in sorted(set(inventory)):
+    path = root / name
+    if path.is_file() and (name.startswith(('cat_de_roman_esti/', 'frontend/', 'tests/', 'scripts/')) or name in ('.gitattributes', 'pyproject.toml', 'constraints.txt', 'requirements.txt', 'setup.cfg')):
+        inputs[name] = sha(path)
+input_bytes = (json.dumps(inputs, indent=2) + '\n').encode()
+(evidence/'final-inputs.json.gz').write_bytes(gzip.compress(input_bytes, mtime=0))
+copy = json.loads((scratch/'linux-source-copy.json').read_bytes())['files']
+copy_differences = [{'path': name, 'backend_copy_sha256': copy.get(name), 'final_sha256': digest}
+                    for name, digest in inputs.items() if copy.get(name) != digest]
+removed_copy_inputs = [name for name in copy if name.startswith(('cat_de_roman_esti/', 'frontend/', 'tests/', 'scripts/')) and name not in inputs]
+assert all((row['path']=='.gitattributes' or row['path'].startswith(('frontend/', 'cat_de_roman_esti/web/static/'))) for row in copy_differences), copy_differences
+assert all(name.startswith('cat_de_roman_esti/web/static/') for name in removed_copy_inputs), removed_copy_inputs
+wheel = json.loads((scratch/'wheel-smoke.json').read_bytes())
+manifest = root/'cat_de_roman_esti/web/static/.vite/manifest.json'
+assert wheel['manifest_sha256'] == sha(manifest)
+
+report = {
+    'kind': 'v1-release-verification-v1',
+    'valid_until': 'Any change to the bound source, tests, content or generated assets; then treat this record as history.',
+    'verified_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    'release': 'V1', 'package_version': '1.0.0', 'internal_wave': 'V100',
+    'baseline_commit': 'cc0a6a490f4a37f6f94b59cf9a84eb760cb3a401',
+    'audience': 'Mixed ages, phones and desktop',
+    'result': 'green_local_testing_release',
+    'publication': {'pushed': False, 'deployed': False, 'accounts_activated': False},
+    'environments': {
+        'backend_full': 'WSL Ubuntu, Python 3.14.4, constrained dev+web; full suite in byte-verified Linux-local source copy',
+        'native': 'Windows Python 3.12.14, constrained dev+web',
+        'frontend': 'Windows Node 24.19.0, npm 11.19.0, Playwright 1.63.0, Microsoft Edge',
+        'browser_projects': ['Desktop Chrome emulation using Edge', 'Pixel 7 emulation using Edge'],
+        'physical_devices_tested': False,
+    },
+    'gates': {
+        'backend': {'command': 'PYTHONPATH=<verified-source> CAT_ACCOUNTS_ENABLED=0 <python> -m pytest -q -o addopts= --junitxml=<scratch>/backend-final.xml', **backend_totals},
+        'accounts': {'command': 'CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=<verified-source> <python> -m pytest -q -o addopts= tests/accounts', 'passed': 53},
+        'browser': {
+            'final_distinct_cases_verified': len(final_cases),
+            'full_matrix_before_last_label_fix': {'passed': int(browser[1]), 'failed': len(failed_cases), 'total': len(full_cases), 'duration': browser[2], 'manifest_sha256': 'd73ec574c4b6c5d5d3a9d9e17d05676b7809bbe7dff1d0da1581992eac0a6045', 'command': 'CDR_E2E_PORT=8188 playwright test --config=<scratch>/playwright.config.mjs --workers=2 --output=<scratch>/browser-final-clean-results'},
+            'final_impacted_matrix': {'passed': int(scope[1]), 'failed': 0, 'duration': scope[2], 'command': "CDR_E2E_PORT=8193 playwright test --config=<scratch>/playwright.config.mjs --workers=1 --grep 'lant|alchimie-empty-pairs|v96-input-and-focus|plays a real seeded round|release-recovery-storage'", 'coverage': 'Every Lanț case, both affected Alchimie recovery specs, all six game lifecycle smoke journeys, chunk/storage recovery, and two new deterministic paused-animation regressions'},
+            'retries': 0,
+            'resolution': 'The full run exposed a real stale current-position label after a recovered Lanț win. Only its animated wrapper was replaced by direct rendering from state; no gameplay/session/score change. The new regression demonstrably fails against the old bundle. Simulated lost-craft cases additionally stalled on GET during one-shot interception teardown. Eight cases now use the established stable retained-interceptor pattern, with one fault and one recovery read asserted; application crafting code is unchanged. Independent reviews and the final affected-case pass close every full-run failure. This is composed coverage, not a claim of one all-green 588-case invocation.',
+        },
+        'frontend_unit': {'command': 'npm test', 'passed': int(unit[1]), 'failed': 0},
+        'frontend_lint': 'npm run lint: passed',
+        'frontend_build': 'npm run build: TypeScript, Vite and initial bundle budget passed',
+        'content': ['scripts/validate_fixture.py: GREEN, zero errors', 'scripts/validate_games_pack.py: GREEN'],
+        'python_lint': 'python -m ruff check: passed',
+        'whitespace': 'git -c core.autocrlf=false diff --cached --check: passed; exact archive bytes preserved with scoped CRLF-aware attributes',
+        'documentation': 'check_docs.py: dead_links=0 stale_terms=0 retired_verbs=0 orphans=0',
+        'wheel': wheel,
+    },
+    'source_binding': {
+        'final_inputs_raw_json_sha256': hashlib.sha256(input_bytes).hexdigest(),
+        'final_inputs_count': len(inputs),
+        'backend_copy_manifest_sha256': sha(scratch/'linux-source-copy.json'),
+        'backend_python_scripts_tests_and_content_equal_final': True,
+        'final_non_backend_changes_since_backend_copy': copy_differences,
+        'superseded_static_files_in_backend_copy': removed_copy_inputs,
+        'review_documents_refreshed_after_copy': 'Recipe live audit and both final reviews/closure refreshed for Alchimie-only frontend placement; unchanged API recipe behavior rechecked by 13 native tests.',
+        'final_static_assets_rechecked_by': ['full browser matrix plus final impacted-case matrix', 'native static cache tests', 'isolated final wheel smoke'],
+    },
+    'preserved_intermediate_failures': [
+        {'log': 'verification/browser-parallel-scope.log.gz', 'passed': 136, 'failed': 6, 'resolution': 'Two-worker affected-case run encountered verified ERR_INSUFFICIENT_RESOURCES on reload, a completed test body followed by teardown timeout, a worker exit with no application assertion, and startup/closed-browser failures. An older simulated empty-craft case also reproduced the one-shot interception GET stall and received the same retained-interceptor repair. The identical final affected matrix ran serially with no retries or widened timeout; browser-affected-run-forensics.json records trace-backed classification.'},
+        {'log': 'verification/frontend-lint-memory-interrupted.log.gz', 'resolution': 'Concurrent Node lint exited on host allocation failure; same unchanged lint command rerun after browser workers stop. No application or lint limits changed.'},
+        {'log': 'verification/browser-parallel-interrupted.log.gz', 'resolution': 'Four-worker attempt interrupted after a timeout and a concurrent audit-helper MemoryError. Final complete run uses two workers with the same assertions/timeouts and no retries.'},
+        {'log': 'verification/backend-full.log.gz', 'passed': 2400, 'failed': 44, 'errors': 3,
+         'resolution': 'Historical tests reconstruct exact historical fixtures; current expectations follow independently reviewed V1 deltas; named football tests select their board through public options. Original hashes, quality gates and bounds remain. Initial failure-heavy WSL/NTFS run also raised ENOMEM reads; final unchanged full suite runs from byte-verified Linux-local copy.'},
+        {'log': 'verification/browser-full.log.gz', 'passed': 570, 'failed': 16,
+         'resolution': 'Fourteen failures were fixed test assumptions for named football boards and remaining-mistake labels; two exposed Alchimie retry scrolling, repaired without removing the viewport invariant. A fresh full matrix plus the final affected-case matrix close these failures, as enumerated in browser-case-coverage.json.'},
+        {'log': 'verification/release-recovery-browser-initial.log.gz',
+         'resolution': 'Storage getter failures during startup and slow chunk reload loops repaired; native and desktop/mobile recovery checks pass.'},
+    ],
+    'independent_reviews': {
+        'content': 'Bound factual/quality proposals and carry-forward approvals under content/.',
+        'runtime_storage_recovery': 'source-review.json and source-review-closure.json; final retry placement separately approved in incremental-source-review.json',
+        'packaging': {'reviewer': '/root/v1_board_audit', 'result': 'All96 package files match final WT:52 Python,14fixtureJSON,30static; all RECORD hashes/sizes valid; no obsolete entry;347 backend Python/tests/scripts/data files identical to tested Linux copy.'},
+        'resource_forensics': 'browser-affected-run-forensics.json; serial affected-case pass closes required rerun',
+        'recovery_harness': 'recovery-harness-source-review.json; original repeated failures and trace timelines retained, without widening timeouts or weakening state/focus assertions',
+        'lant_current_position': 'lant-current-position-source-review.json approves only direct label rendering; final browser coverage closes its explicitly pending runtime check',
+        'archive_line_endings': {'reviewer': '/root/v1_held_audit', 'result': 'Scoped -text preserves exact approved bytes; 14 CRLF files had no actual trailing whitespace; checks still reject genuine spaces/tabs/blank EOF.'},
+        'compatibility_tests': {'reviewer': '/root/v1_board_audit', 'result': 'No blockers in sparse V90, V85/V86, V91 sport, critique/V37/V44 compatibility changes. Old pins and live safety assertions preserved. Named E2E helper was authored by that reviewer and is excluded from independent signoff.'},
+    },
+    'limits': [
+        'Mechanical stock audit covers all stored boards; independent editorial review is sampled (38 pack, 27 quick, 16 exploration recipes).',
+        'Curated selectable counts do not include existing on-demand fallback generators.',
+        'Technical checks do not establish human enjoyment or suitability of every concept for every age.',
+        'Physical phones, non-Chromium browsers, human test sessions, production deployment and live production verification were not performed.',
+        'Native full backend collection has an existing Unix resource-module limitation; complete suite ran under Linux with no skipped tests.',
+    ],
+    'archive_path_mapping': {'scratch_harness_snapshots': 'Exact basename preserved under verification/; original absolute scratch paths are historical provenance.', 'old_author_packet_browser_final_scope_log': 'The failed 136/6 run was renamed browser-parallel-scope.log before the final serial run; its immutable SHA is bound in browser-affected-run-forensics.json.', 'forensic_traces': 'Original trace paths map to verification/traces/resource-scope-<trace-key>.zip with matching SHA256.'},
+    'evidence_format': 'Logs and large manifests are gzip-compressed with mtime0; decompression restores exact original bytes, including terminal whitespace.',
+    'evidence_sha256': {p.relative_to(evidence).as_posix(): sha(p) for p in sorted(evidence.rglob('*')) if p.is_file()},
+}
+write_json(review/'verification.json', report)
+print(json.dumps({'backend': backend_totals, 'browser_distinct_verified': len(final_cases), 'browser_final_scope_passed': int(scope[1]), 'frontend_passed': int(unit[1]), 'inputs': len(inputs), 'verification_sha256': sha(review/'verification.json')}, indent=2))

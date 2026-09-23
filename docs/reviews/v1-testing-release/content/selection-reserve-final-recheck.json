@@ -1,0 +1,50 @@
+{
+  "bindings": {
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "dffe5d7cb469a0aa316bf1c65ee3da07a33649033b23bea1b70771ee2fd8e553",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/release_reserve.py": "2b8ea60ec60a4c4590a1a1931954a08d7adb6f2769092876e6b8d7dca66a9f03",
+    "pyproject.toml": "004b8b9f35b387cf82638575f0436e6134aa97348dab77bc8dbcc706dff655ed",
+    "scripts/build_release_reserve_v1.py": "1103cc1fa935d2966f5217bd91f703fbbe40f43d23ac70f6967d393fffd1b9e3",
+    "scripts/rank_games_pack.py": "7dcb071b8d1624bfd8bfe0d4f6bfa2f30ea44062fe900744a8e8957ef37e02b5",
+    "tests/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "tests/test_v1_release_reserve.py": "ed494dfb645166b9a7ee6c420ed8c5c36c790ce284e9a60aefa48d39f5b95d20"
+  },
+  "changes_since_earlier_review": {
+    "cat_de_roman_esti/wordgames/derived_catalog.py": {
+      "after_sha256": "dffe5d7cb469a0aa316bf1c65ee3da07a33649033b23bea1b70771ee2fd8e553",
+      "before_sha256": "0a0d9783c23e47323ac402c0e0cd2794ccac65b907cd05693587dd7e92c300fb",
+      "independently_verified_delta": "Only DEFAULT_DERIVED_CATALOG_SHA256 changes to the final reviewed derived artifact; reversing that literal restores the earlier reviewed file hash exactly."
+    },
+    "tests/test_v1_release_reserve.py": {
+      "after_sha256": "ed494dfb645166b9a7ee6c420ed8c5c36c790ce284e9a60aefa48d39f5b95d20",
+      "before_sha256": "1e0e5b7be83f647c32c9f695c4f89a70dbccbde9601100bf796d13616e46d31b",
+      "independently_verified_delta": "Only module docstring changes every new-selection path to bundled selection; reversing that text restores the earlier reviewed file hash exactly."
+    }
+  },
+  "checked_on": "2026-09-23",
+  "earlier_review": "docs/reviews/v1-testing-release/content/selection-reserve-implementation-review.json",
+  "earlier_review_sha256": "5f74dec798e6184f1a912e7895672c8eb7891122c7b7bbc1d1ce93a30d038ea5",
+  "independent_tests": {
+    "command": "python -X utf8 -B -m pytest tests/test_v1_release_reserve.py -q -p no:cacheprovider --basetemp <verified task scratch directory> --tb=short",
+    "environment_note": "The first default-temp run hit sandbox PermissionError during tmp_path setup. A fresh, verified directory beneath the task scratch root resolved this; the full narrow suite then passed.",
+    "result": "23 passed; process exit 0"
+  },
+  "installed_content_bindings": {
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "85c89ec82d27a19ba619604ed3c47b09e3bb18e1718343db6d56c03b0999761c"
+  },
+  "kind": "v1-selection-reserve-independent-final-recheck-v1",
+  "limits": [
+    "No runtime logic or fixture mutation performed by this recheck.",
+    "The earlier accepted custom-pack/unranked override boundary and process cache/restart requirements still apply.",
+    "This is a finite implementation recheck, not a wheel/browser/full-suite result."
+  ],
+  "rationale": "The original implementation rationale remains intact. All unchanged files retain exact earlier hashes; the two finite changes were independently reduced to the final catalog pin and scope-accurate test documentation. All 23 focused reserve tests pass against the currently installed V1 content. This closure refreshes source/test bindings without broadening the accepted custom-pack or cache-reload scope.",
+  "reviewer": "/root/v1_held_audit",
+  "verdict": "accept_with_explicit_bundled_release_scope"
+}

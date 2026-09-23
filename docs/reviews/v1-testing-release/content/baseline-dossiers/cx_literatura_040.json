@@ -1,0 +1,262 @@
+{
+  "id": "cx_literatura_040",
+  "game": "conexiuni",
+  "category": "literatura",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "ddae825f85d642290520ff1e812b1a94c1c1915032be7f496e75df048a822458",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "mirrored_groups",
+      "level": "WARN",
+      "detail": "\"Romane canonice\" <-> \"Autorii acestor romane\" are in >=3-way strong correspondence"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Cercuri și publicații literare\" mixes node_types 3+1: Junimea[org], Convorbiri literare[work], Sburătorul[org], ASTRA[org]"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Romane canonice\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_263)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Autorii acestor romane\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_041)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Cercuri și publicații literare\" reuses an inventory/selected quad (also in: cx_literatura_041)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [],
+    "engine_unfair_raw": 8
+  },
+  "groups": [
+    {
+      "label": "Romane canonice",
+      "members": [
+        {
+          "id": "n_ion_roman",
+          "label": "Ion (roman)",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2578,
+          "degree": 9,
+          "incoming_degree": 9,
+          "description": "Roman realist de Liviu Rebreanu (1920) despre taranul ardelean."
+        },
+        {
+          "id": "n_morometii",
+          "label": "Moromeții",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.3058,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Roman de Marin Preda despre lumea satului romanesc."
+        },
+        {
+          "id": "n_ultima_noapte",
+          "label": "Ultima noapte de dragoste, întâia noapte de război",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2077,
+          "degree": 6,
+          "incoming_degree": 5,
+          "description": "Roman modernist publicat in 1930 de Camil Petrescu, roman al experientei si al analizei psihologice."
+        },
+        {
+          "id": "n_enigma_otiliei",
+          "label": "Enigma Otiliei",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.1809,
+          "degree": 4,
+          "incoming_degree": 3,
+          "description": "Roman realist de tip balzacian publicat in 1938 de George Calinescu."
+        }
+      ]
+    },
+    {
+      "label": "Autorii acestor romane",
+      "members": [
+        {
+          "id": "n_liviu_rebreanu",
+          "label": "Liviu Rebreanu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.3766,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Romancier roman, intemeietor al romanului realist obiectiv."
+        },
+        {
+          "id": "n_marin_preda",
+          "label": "Marin Preda",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.2502,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Romancier roman din perioada postbelica."
+        },
+        {
+          "id": "n_camil_petrescu",
+          "label": "Camil Petrescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.3502,
+          "degree": 8,
+          "incoming_degree": 9,
+          "description": "Scriitor roman (1894-1957), prozator modernist si teoretician al romanului de analiza psihologica."
+        },
+        {
+          "id": "n_george_calinescu",
+          "label": "George Călinescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.1971,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Critic si istoric literar roman (1899-1965), autor al Istoriei literaturii romane de la origini pana in prezent."
+        }
+      ]
+    },
+    {
+      "label": "Cercuri și publicații literare",
+      "members": [
+        {
+          "id": "n_junimea",
+          "label": "Junimea",
+          "node_type": "org",
+          "category": "literatura",
+          "salience": 0.5031,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Societate literara de la Iasi."
+        },
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2907,
+          "degree": 12,
+          "incoming_degree": 12,
+          "description": "Revista a societatii Junimea."
+        },
+        {
+          "id": "n_sburatorul",
+          "label": "Sburătorul",
+          "node_type": "org",
+          "category": "literatura",
+          "salience": 0.2537,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Cenaclu si revista literara conduse de Eugen Lovinescu."
+        },
+        {
+          "id": "n_astra",
+          "label": "ASTRA",
+          "node_type": "org",
+          "category": "societate",
+          "salience": 0.1834,
+          "degree": 6,
+          "incoming_degree": 7,
+          "description": "Asociatiunea Transilvana pentru Literatura Romana si Cultura Poporului Roman, infiintata in 1861 la Sibiu."
+        }
+      ]
+    },
+    {
+      "label": "Titluri cu metal, armă sau primejdie",
+      "members": [
+        {
+          "id": "n_plumb",
+          "label": "Plumb",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2557,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Poezie simbolista emblematica a lui George Bacovia."
+        },
+        {
+          "id": "n_baltagul",
+          "label": "Baltagul",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.1632,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Roman de Mihail Sadoveanu (1930)."
+        },
+        {
+          "id": "n_moara_cu_noroc",
+          "label": "Moara cu noroc",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2856,
+          "degree": 10,
+          "incoming_degree": 10,
+          "description": "Nuvela realista de Ioan Slavici (1881)."
+        },
+        {
+          "id": "n_padurea_spanzuratilor_film",
+          "label": "Pădurea spânzuraților (film)",
+          "node_type": "work",
+          "category": "arta_cultura",
+          "salience": 0.2304,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Film romanesc regizat de Liviu Ciulei dupa romanul lui Liviu Rebreanu, premiat pentru regie la Cannes in 1965."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "Ion (roman)",
+      "a_group": "Romane canonice",
+      "b": "Liviu Rebreanu",
+      "b_group": "Autorii acestor romane",
+      "strength": 0.92
+    },
+    {
+      "a": "Marin Preda",
+      "a_group": "Autorii acestor romane",
+      "b": "Moromeții",
+      "b_group": "Romane canonice",
+      "strength": 0.92
+    },
+    {
+      "a": "Camil Petrescu",
+      "a_group": "Autorii acestor romane",
+      "b": "Ultima noapte de dragoste, întâia noapte de război",
+      "b_group": "Romane canonice",
+      "strength": 0.9
+    },
+    {
+      "a": "Enigma Otiliei",
+      "a_group": "Romane canonice",
+      "b": "George Călinescu",
+      "b_group": "Autorii acestor romane",
+      "strength": 0.9
+    },
+    {
+      "a": "Liviu Rebreanu",
+      "a_group": "Autorii acestor romane",
+      "b": "Pădurea spânzuraților (film)",
+      "b_group": "Titluri cu metal, armă sau primejdie",
+      "strength": 0.9
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:002e48671f3fbf9636c0e38f6182f4646243071c9ab4f613c4490a86f8897ca6"
+}

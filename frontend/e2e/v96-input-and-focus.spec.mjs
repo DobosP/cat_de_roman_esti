@@ -18,11 +18,20 @@ for (const committed of [false, true]) for (const moved of [false, true]) {
     const state = await begin(page);
     let release;
     const gate = new Promise(resolve => { release = resolve; });
+    let combineRequests = 0;
+    let recoveryReads = 0;
+    page.on("request", request => {
+      if (request.method() === "GET" && new URL(request.url()).pathname === `${BASE}/${state.game_id}`) recoveryReads += 1;
+    });
+    // Retain the interceptor through recovery, matching the depleted-input case
+    // below; removing the final one-shot route can strand the immediate GET.
     await page.route(`**${BASE}/${state.game_id}/combine`, async route => {
-      if (committed) await route.fetch();
+      combineRequests += 1;
+      if (combineRequests !== 1) { await route.continue(); return; }
+      if (committed) expect((await route.fetch()).status()).toBe(200);
       await gate;
       await route.abort("failed");
-    }, { times: 1 });
+    });
     await word(page, "Făină").click();
     await word(page, "Apă").focus();
     const post = page.waitForRequest(r => r.url().endsWith("/combine"));
@@ -42,6 +51,8 @@ for (const committed of [false, true]) for (const moved of [false, true]) {
       expect(box.y).toBeGreaterThanOrEqual(0);
       expect(box.y + box.height).toBeLessThanOrEqual(844);
     }
+    expect(combineRequests).toBe(1);
+    expect(recoveryReads).toBe(1);
   });
 }
 

@@ -6,6 +6,7 @@
 // global key listener (which used to collide across screens).
 
 import type { ReactNode } from "react";
+import { useLocation } from "react-router-dom";
 import { m } from "framer-motion";
 import { Badge, Button } from "@roedu/ui";
 import type { ScoreEntry } from "../scores";
@@ -61,6 +62,10 @@ export function GameIntro({
   /** Persistent recovery for a saved game that could not safely be adopted. */
   resumeRecovery?: ResumeRecoveryNotice | null;
 }) {
+  const location = useLocation();
+  // The circuit carries intent only. A saved round still resumes normally and
+  // creating a daily round always requires the player's explicit start action.
+  const dailyFirst = Boolean(onDaily) && new URLSearchParams(location.search).get("challenge") === "daily";
   return (
     <m.div
       className="card game-intro"
@@ -112,17 +117,17 @@ export function GameIntro({
 
       <StartFailureNotice failed={startFailed} />
       <div className="row center wrap game-intro-actions" style={{ gap: 12, marginTop: 6 }}>
-        <Button autoFocus onClick={onStart} disabled={starting} size="lg">
-          {startLabel}
+        <Button autoFocus onClick={dailyFirst ? onDaily : onStart} disabled={starting} size="lg">
+          {dailyFirst ? "Joacă provocarea zilei" : startLabel}
         </Button>
         {onDaily && (
           <Button
             variant="secondary"
-            onClick={onDaily}
+            onClick={dailyFirst ? onStart : onDaily}
             disabled={starting}
-            title="Aceeași provocare pentru toată lumea, la dificultatea aleasă. Categoria se aplică doar jocurilor libere."
+            title={dailyFirst ? "Un joc nou, în afara circuitului zilnic." : "Provocare zilnică. Categoria se aplică doar jocurilor libere."}
           >
-            <span aria-hidden>📅</span> {dailyLabel}
+            {!dailyFirst && <span aria-hidden>📅</span>} {dailyFirst ? "Joacă liber" : dailyLabel}
           </Button>
         )}
       </div>

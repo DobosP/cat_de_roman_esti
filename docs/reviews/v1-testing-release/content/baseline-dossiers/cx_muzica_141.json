@@ -1,0 +1,269 @@
+{
+  "id": "cx_muzica_141",
+  "game": "conexiuni",
+  "category": "muzica",
+  "difficulty": "greu",
+  "status": "approved",
+  "record_sha256": "cefde86c54618c5a4489a6abb64317cf2bd8fe230ae3557d5751d3b7f3851422",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Rap/hip-hop de cartier\" mixes node_types 3+1: B.U.G. Mafia[org], Paraziții[org], La Familia[org], Puya[person]"
+    },
+    {
+      "check": "mirrored_groups",
+      "level": "WARN",
+      "detail": "\"Rap/hip-hop de cartier\" <-> \"Titluri rap cu drum prin oraș\" are in >=3-way strong correspondence"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Decorul de bloc\" mixes node_types 2+2: Blocul[place], Cartier[concept], Scara blocului[place], Viața la bloc[concept]"
+    },
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Urban radio, nu doar rap pur\" mixes node_types 3+1: Smiley[person], Connect-R[person], Guess Who[person], Carla's Dreams[org]"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Rap/hip-hop de cartier\" reuses an inventory/selected quad (also in: cx_muzica_053)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Decorul de bloc\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_207)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [
+      "Puya"
+    ],
+    "engine_unfair_raw": 5
+  },
+  "groups": [
+    {
+      "label": "Rap/hip-hop de cartier",
+      "members": [
+        {
+          "id": "n_muz_bug_mafia",
+          "label": "B.U.G. Mafia",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.641,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Trupă românească de hip-hop, asociată cu soundul dur de cartier din anii 1990 și 2000."
+        },
+        {
+          "id": "n_muz_parazitii",
+          "label": "Paraziții",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.5001,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Trupă românească de hip-hop, cunoscută pentru texte directe și satiră urbană."
+        },
+        {
+          "id": "n_muz_la_familia",
+          "label": "La Familia",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.3013,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Trupă românească de hip-hop fondată de Cheloo, Șișu și Puya, reper al rapului de cartier."
+        },
+        {
+          "id": "n_muz_puya",
+          "label": "Puya",
+          "node_type": "person",
+          "category": "muzica",
+          "salience": 0.5151,
+          "degree": 6,
+          "incoming_degree": 6,
+          "description": "Rapper român, membru La Familia și artist solo cu hituri pop-rap."
+        }
+      ]
+    },
+    {
+      "label": "Titluri rap cu drum prin oraș",
+      "members": [
+        {
+          "id": "n_muz_dupa_blocuri",
+          "label": "După blocuri",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.2583,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Piesă B.U.G. Mafia, emblematică pentru imaginarul hip-hop de cartier."
+        },
+        {
+          "id": "n_muz_bagabontii_99",
+          "label": "Bagabonții '99",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.2239,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Piesă Paraziții, reper de atitudine pentru hip-hopul românesc de la finalul anilor 1990."
+        },
+        {
+          "id": "n_muz_oriunde_te_vei_afla",
+          "label": "Oriunde te vei afla",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.2143,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Piesă La Familia, cunoscută pentru tonul sentimental din rapul românesc."
+        },
+        {
+          "id": "n_muz_undeva_n_balcani",
+          "label": "Undeva-n Balcani",
+          "node_type": "work",
+          "category": "muzica",
+          "salience": 0.358,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Piesă Puya din 2009, hit pop-rap cu autoironie balcanică."
+        }
+      ]
+    },
+    {
+      "label": "Decorul de bloc",
+      "members": [
+        {
+          "id": "n_vdr_bloc",
+          "label": "Blocul",
+          "node_type": "place",
+          "category": "viata_de_roman",
+          "salience": 0.9526,
+          "degree": 19,
+          "incoming_degree": 19,
+          "description": "Clădire de locuințe colective, reper al urbanizării românești de după 1960."
+        },
+        {
+          "id": "n_v2via_cartier",
+          "label": "Cartier",
+          "node_type": "concept",
+          "category": "viata_de_roman",
+          "salience": 0.831,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Zonă urbană de locuire, cu blocuri, alei, parcări și vecini."
+        },
+        {
+          "id": "n_vdr_scara_blocului",
+          "label": "Scara blocului",
+          "node_type": "place",
+          "category": "viata_de_roman",
+          "salience": 0.8591,
+          "degree": 12,
+          "incoming_degree": 12,
+          "description": "Spațiul comun unde se întâlnesc cutiile poștale, ecoul și anunțurile vecinilor."
+        },
+        {
+          "id": "n_vdr_viata_la_bloc",
+          "label": "Viața la bloc",
+          "node_type": "concept",
+          "category": "viata_de_roman",
+          "salience": 0.9723,
+          "degree": 24,
+          "incoming_degree": 24,
+          "description": "Rutina scării, vecinii, avizierul și micile reguli nescrise ale locuirii la bloc."
+        }
+      ]
+    },
+    {
+      "label": "Urban radio, nu doar rap pur",
+      "members": [
+        {
+          "id": "n_muz_smiley",
+          "label": "Smiley",
+          "node_type": "person",
+          "category": "muzica",
+          "salience": 0.7677,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Cântăreț și producător român, figură majoră a popului radio și TV."
+        },
+        {
+          "id": "n_muz_connect_r",
+          "label": "Connect-R",
+          "node_type": "person",
+          "category": "muzica",
+          "salience": 0.2977,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Artist român pop și dancehall, cunoscut pentru hitul de vară „Vara nu dorm”."
+        },
+        {
+          "id": "n_muz_guess_who",
+          "label": "Guess Who",
+          "node_type": "person",
+          "category": "muzica",
+          "salience": 0.4138,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Rapper român cunoscut pentru piese pop-rap și colaborări radio."
+        },
+        {
+          "id": "n_muz_carlas_dreams",
+          "label": "Carla's Dreams",
+          "node_type": "org",
+          "category": "muzica",
+          "salience": 0.5445,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Proiect muzical din Republica Moldova, cunoscut pentru imaginea mascată și pop alternativ."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "B.U.G. Mafia",
+      "a_group": "Rap/hip-hop de cartier",
+      "b": "După blocuri",
+      "b_group": "Titluri rap cu drum prin oraș",
+      "strength": 0.82
+    },
+    {
+      "a": "Puya",
+      "a_group": "Rap/hip-hop de cartier",
+      "b": "Undeva-n Balcani",
+      "b_group": "Titluri rap cu drum prin oraș",
+      "strength": 0.78
+    },
+    {
+      "a": "Bagabonții '99",
+      "a_group": "Titluri rap cu drum prin oraș",
+      "b": "Paraziții",
+      "b_group": "Rap/hip-hop de cartier",
+      "strength": 0.76
+    },
+    {
+      "a": "Guess Who",
+      "a_group": "Urban radio, nu doar rap pur",
+      "b": "Puya",
+      "b_group": "Rap/hip-hop de cartier",
+      "strength": 0.76
+    },
+    {
+      "a": "La Familia",
+      "a_group": "Rap/hip-hop de cartier",
+      "b": "Oriunde te vei afla",
+      "b_group": "Titluri rap cu drum prin oraș",
+      "strength": 0.74
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:fd7db2732f6f4f4a71f8922ca9538374203c8ff17f757829bf2af4b7b5c467e8"
+}

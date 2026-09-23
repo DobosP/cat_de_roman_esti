@@ -139,9 +139,14 @@ def test_reconstructed_v86_graph_matches_its_exact_independent_preparation_revie
 
 
 def test_complete_v85_graph_and_every_old_native_owner_reconstruct_exactly():
-    from tests.content_history import before_v86_fixture, before_v87_fixture
+    from tests.content_history import (
+        before_v1_artifact,
+        before_v86_fixture,
+        before_v87_fixture,
+    )
 
     current = _json(FIXTURE)
+    pre_v1 = before_v1_artifact(current, "kg_sample.json")
     v86 = before_v87_fixture(current)
     baseline = before_v86_fixture(current)
     encoded = (json.dumps(baseline, ensure_ascii=False, indent=2) + "\n").encode()
@@ -150,9 +155,10 @@ def test_complete_v85_graph_and_every_old_native_owner_reconstruct_exactly():
     assert len(v86["kg_nodes"]) - len(baseline["kg_nodes"]) == 9
     assert len(v86["kg_edges"]) - len(baseline["kg_edges"]) == 41
     assert current["kg_puzzles"] == baseline["kg_puzzles"]
-    assert all(edge in current["kg_edges"] for edge in baseline["kg_edges"])
+    # Restore only the bound V1 corrections for these historical record comparisons.
+    assert all(edge in pre_v1["kg_edges"] for edge in baseline["kg_edges"])
     old_nodes = {node["id"]: node for node in baseline["kg_nodes"]}
-    new_nodes = {node["id"]: node for node in current["kg_nodes"]}
+    new_nodes = {node["id"]: node for node in pre_v1["kg_nodes"]}
     for node_id, old in old_nodes.items():
         assert {k: v for k, v in old.items() if k != "degree"} == {
             k: v for k, v in new_nodes[node_id].items() if k != "degree"

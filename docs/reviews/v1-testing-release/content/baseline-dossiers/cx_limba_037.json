@@ -1,0 +1,266 @@
+{
+  "id": "cx_limba_037",
+  "game": "conexiuni",
+  "category": "limba",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "73f5f59fb4d33c5b688f4c2582016dcb02dda977dd31e71ec0ed44b8100bc3ac",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "board_type_shortcut",
+      "level": "WARN",
+      "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Cărturari legați direct de limbă\" reuses an inventory/selected quad (also in: cx_istorie_186, cx_limba_122, cx_societate_152)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Societăți și foruri culturale\" reuses an inventory/selected quad (also in: cx_societate_066)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [],
+    "engine_unfair_raw": 10
+  },
+  "groups": [
+    {
+      "label": "Cărturari legați direct de limbă",
+      "members": [
+        {
+          "id": "n_dimitrie_cantemir",
+          "label": "Dimitrie Cantemir",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.2896,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Domnitor al Moldovei si carturar (1673-1723), autor de opere istorice si lingvistice, membru al Academiei din Berlin."
+        },
+        {
+          "id": "n_ion_heliade_radulescu",
+          "label": "Ion Heliade Rădulescu",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.2993,
+          "degree": 6,
+          "incoming_degree": 3,
+          "description": "Scriitor si filolog (1802-1872), primul presedinte al Academiei Romane, promotor al alfabetului latin."
+        },
+        {
+          "id": "n_bogdan_petriceicu_hasdeu",
+          "label": "Bogdan Petriceicu Hasdeu",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.192,
+          "degree": 5,
+          "incoming_degree": 3,
+          "description": "Filolog si istoric (1838-1907), pionier al lingvisticii romanesti, autor al dictionarului Etymologicum Magnum Romaniae."
+        },
+        {
+          "id": "n_sextil_puscariu",
+          "label": "Sextil Pușcariu",
+          "node_type": "person",
+          "category": "limba",
+          "salience": 0.2137,
+          "degree": 4,
+          "incoming_degree": 3,
+          "description": "Lingvist (1877-1948), coordonator al dictionarului-tezaur al limbii romane si al Atlasului lingvistic roman."
+        }
+      ]
+    },
+    {
+      "label": "Societăți și foruri culturale",
+      "members": [
+        {
+          "id": "n_scoala_ardeleana",
+          "label": "Școala Ardeleană",
+          "node_type": "org",
+          "category": "limba",
+          "salience": 0.3418,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Miscare culturala iluminista din Transilvania (sec. XVIII-XIX) ce a sustinut originea latina a limbii romane."
+        },
+        {
+          "id": "n_academia_romana",
+          "label": "Academia Română",
+          "node_type": "org",
+          "category": "societate",
+          "salience": 0.7002,
+          "degree": 33,
+          "incoming_degree": 38,
+          "description": "Cel mai inalt for de stiinta si cultura din Romania, infiintat in 1866."
+        },
+        {
+          "id": "n_astra",
+          "label": "ASTRA",
+          "node_type": "org",
+          "category": "societate",
+          "salience": 0.1834,
+          "degree": 6,
+          "incoming_degree": 7,
+          "description": "Asociatiunea Transilvana pentru Literatura Romana si Cultura Poporului Roman, infiintata in 1861 la Sibiu."
+        },
+        {
+          "id": "n_junimea",
+          "label": "Junimea",
+          "node_type": "org",
+          "category": "literatura",
+          "salience": 0.5031,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Societate literara de la Iasi."
+        }
+      ]
+    },
+    {
+      "label": "Opere și publicații",
+      "members": [
+        {
+          "id": "n_dex",
+          "label": "DEX",
+          "node_type": "work",
+          "category": "limba",
+          "salience": 0.3724,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Dictionarul explicativ al limbii romane, lucrare de referinta a Academiei."
+        },
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2907,
+          "degree": 12,
+          "incoming_degree": 12,
+          "description": "Revista a societatii Junimea."
+        },
+        {
+          "id": "n_cuvinte_potrivite",
+          "label": "Cuvinte potrivite",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.15,
+          "degree": 5,
+          "incoming_degree": 5,
+          "description": "Volum de debut al lui Tudor Arghezi (1927)."
+        },
+        {
+          "id": "n_luceafarul",
+          "label": "Luceafărul",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.4767,
+          "degree": 10,
+          "incoming_degree": 10,
+          "description": "Poem romantic de Mihai Eminescu."
+        }
+      ]
+    },
+    {
+      "label": "Autori cu stil imediat recognoscibil",
+      "members": [
+        {
+          "id": "n_ion_luca_caragiale",
+          "label": "I.L. Caragiale",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.5625,
+          "degree": 21,
+          "incoming_degree": 21,
+          "description": "Dramaturg roman, maestru al comediei, membru al Junimii."
+        },
+        {
+          "id": "n_ion_creanga",
+          "label": "Ion Creangă",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.5583,
+          "degree": 19,
+          "incoming_degree": 18,
+          "description": "Scriitor roman, autor al Amintirilor din copilarie."
+        },
+        {
+          "id": "n_tudor_arghezi",
+          "label": "Tudor Arghezi",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.3154,
+          "degree": 7,
+          "incoming_degree": 6,
+          "description": "Poet roman, innoitor al limbajului poetic."
+        },
+        {
+          "id": "n_nichita_stanescu",
+          "label": "Nichita Stănescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.2694,
+          "degree": 8,
+          "incoming_degree": 10,
+          "description": "Poet roman neomodernist (1933-1983), autor al volumului Necuvintele."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "Convorbiri literare",
+      "a_group": "Opere și publicații",
+      "b": "Junimea",
+      "b_group": "Societăți și foruri culturale",
+      "strength": 0.92
+    },
+    {
+      "a": "Cuvinte potrivite",
+      "a_group": "Opere și publicații",
+      "b": "Tudor Arghezi",
+      "b_group": "Autori cu stil imediat recognoscibil",
+      "strength": 0.85
+    },
+    {
+      "a": "Academia Română",
+      "a_group": "Societăți și foruri culturale",
+      "b": "Ion Heliade Rădulescu",
+      "b_group": "Cărturari legați direct de limbă",
+      "strength": 0.75
+    },
+    {
+      "a": "Academia Română",
+      "a_group": "Societăți și foruri culturale",
+      "b": "DEX",
+      "b_group": "Opere și publicații",
+      "strength": 0.7
+    },
+    {
+      "a": "Ion Creangă",
+      "a_group": "Autori cu stil imediat recognoscibil",
+      "b": "Junimea",
+      "b_group": "Societăți și foruri culturale",
+      "strength": 0.65
+    },
+    {
+      "a": "Academia Română",
+      "a_group": "Societăți și foruri culturale",
+      "b": "Bogdan Petriceicu Hasdeu",
+      "b_group": "Cărturari legați direct de limbă",
+      "strength": 0.6
+    },
+    {
+      "a": "I.L. Caragiale",
+      "a_group": "Autori cu stil imediat recognoscibil",
+      "b": "Junimea",
+      "b_group": "Societăți și foruri culturale",
+      "strength": 0.6
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:5759bffe983c2fb23a0b1c4ce789aee02377e14a96e813f8639d4e2edb339858"
+}

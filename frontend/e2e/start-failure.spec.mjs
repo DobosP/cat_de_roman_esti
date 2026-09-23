@@ -191,6 +191,7 @@ test("alchimie retains its live round and blocks actions while another round is 
   const held = new Promise((resolve) => { release = resolve; });
   const requested = new Promise((resolve) => { entered = resolve; });
   const oldMutations = [];
+  let focusWhilePending;
   page.on("request", (req) => {
     if (req.method() === "POST" && new URL(req.url()).pathname.startsWith(`${gameURL(game, initial.game_id)}/`)) {
       oldMutations.push(req.url());
@@ -217,6 +218,8 @@ test("alchimie retains its live round and blocks actions while another round is 
       .toBe(initial.game_id);
     expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(initial);
     expect(oldMutations).toEqual([]);
+    await expect.poll(() => another.evaluate((button) => globalThis.document.activeElement !== button)).toBe(true);
+    focusWhilePending = await page.evaluateHandle(() => globalThis.document.activeElement);
   } finally {
     release();
   }
@@ -224,6 +227,16 @@ test("alchimie retains its live round and blocks actions while another round is 
   await assertPersistentFailure(page);
   await expect(another).toBeEnabled();
   await expect(another).toBeInViewport();
+  await expect.poll(() => another.evaluate((button) => {
+    const rect = button.getBoundingClientRect();
+    const scroller = button.closest(".screen-pad").getBoundingClientRect();
+    return rect.top >= Math.max(0, scroller.top) - 1 &&
+      rect.bottom <= Math.min(globalThis.innerHeight, scroller.bottom) + 1 &&
+      rect.left >= Math.max(0, scroller.left) - 1 &&
+      rect.right <= Math.min(globalThis.innerWidth, scroller.right) + 1;
+  }), { message: "the entire retry button must remain beside the visible error" }).toBe(true);
+  expect(await page.evaluate((previous) => globalThis.document.activeElement === previous, focusWhilePending)).toBe(true);
+  await focusWhilePending.dispose();
   await expect(partner).toBeEnabled();
   await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(1);
   expect(await scoreState(page)).toBe(originalScores);

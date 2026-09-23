@@ -31,7 +31,7 @@ async function visibleProgress(page, game, state) {
     return;
   }
   const label = game.key === "alchimie" ? /^Combinații$/i :
-    game.key === "lant" ? /^Mutări$/i : /^Încercări$/i;
+    game.key === "lant" ? /^Mutări$/i : game.derived ? /^Greșeli$/i : /^Încercări$/i;
   const value = game.key === "alchimie" ? String(state.moves) :
     game.key === "lant" ? `${state.moves} ${state.moves === 1 ? "mutare" : "mutări"}` :
     game.key === "contexto" ? `${state.attempts} ${state.attempts === 1 ? "încercare" : "încercări"}` :

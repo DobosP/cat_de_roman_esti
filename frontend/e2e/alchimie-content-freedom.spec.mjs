@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { games, deterministicStarts, start } from "./games.mjs";
 
-const game = games.find(({ key }) => key === "alchimie");
+// These recipes belong to this reviewed challenge, regardless of pool ordering.
+const game = { ...games.find(({ key }) => key === "alchimie"), packId: "al_sport_083" };
 const word = (page, label) => page.locator(game.board).getByRole("button", {
   name: new RegExp(`^${label}(?:,|$)`),
 });

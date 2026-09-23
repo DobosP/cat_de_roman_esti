@@ -1,0 +1,133 @@
+{
+ "id": "lt_stiinta_216",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "8d322960074c732eaea5795e7e5aa6dd2ab3529171fd5eee650895cc639b0556",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+ "start": {
+  "id": "n_v4gas_apa",
+  "label": "Apă",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.968,
+  "degree": 24,
+  "incoming_degree": 20,
+  "description": "Lichid de băut și ingredient de bază în gătit."
+ },
+ "target": {
+  "id": "n_v24_weather_air_nor",
+  "label": "Nor",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.88,
+  "degree": 3,
+  "incoming_degree": 3,
+  "description": "Concept cotidian din grupul «vreme în atmosferă»: Nor."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_v24_weather_precipitation_ploaie",
+     "label": "Ploaie"
+    },
+    {
+     "id": "n_v24_weather_air_nor",
+     "label": "Nor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "to": {
+      "id": "n_v24_weather_precipitation_ploaie",
+      "label": "Ploaie"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin vreme",
+     "display_label": "legătură directă",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v24_weather_precipitation_ploaie",
+      "label": "Ploaie"
+     },
+     "to": {
+      "id": "n_v24_weather_air_nor",
+      "label": "Nor"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin vreme",
+     "display_label": "legătură directă",
+     "strength": 0.93
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_v4sti_aer",
+     "label": "aer"
+    },
+    {
+     "id": "n_v24_weather_air_nor",
+     "label": "Nor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "to": {
+      "id": "n_v4sti_aer",
+      "label": "aer"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin vreme",
+     "display_label": "legătură directă",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v4sti_aer",
+      "label": "aer"
+     },
+     "to": {
+      "id": "n_v24_weather_air_nor",
+      "label": "Nor"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "display_label": "legătură directă",
+     "strength": 0.86
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:906d742a5e05a4eea4c00a8796dfdcd4554cb8e2b45ed58eb3935260f4280285"
+}

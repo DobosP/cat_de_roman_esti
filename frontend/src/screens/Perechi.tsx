@@ -518,7 +518,7 @@ export default function Perechi({ onExit, onToast }: Props) {
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge label="PERECHI" value={`${state.solved_count}/4`} accent={DEF.accent} />
             <StatBadge
-              label="ÎNCERCĂRI"
+              label="GREȘELI"
               value={`${state.remaining_mistakes} rămase`}
               accent={DEF.accent}
             />
@@ -661,11 +661,6 @@ export default function Perechi({ onExit, onToast }: Props) {
               onCopy={copyShare}
               onReplay={() => void start({ previousGameId: state.game_id })}
               replayLabel={state.daily ? "Joacă liber →" : undefined}
-              onOptions={() => {
-                if (startInFlight.current) return;
-                actionOwner.invalidate();
-                setState(null);
-              }}
               onExit={exitSafely}
             >
               <div className="perechi-solution">

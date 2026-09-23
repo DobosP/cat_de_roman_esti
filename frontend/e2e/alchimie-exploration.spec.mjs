@@ -363,8 +363,8 @@ for (const example of [
 test("the daily circuit opens scored challenges while the arcade card opens exploration", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Deschide Alchimie — neterminat azi", exact: true }).click();
-  await expect(page).toHaveURL(/\/alchimie\?mode=challenges$/);
-  await expect(page.getByRole("button", { name: "Provocarea zilei", exact: true })).toBeVisible();
+  await expect(page).toHaveURL(/\/alchimie\?mode=challenges&challenge=daily$/);
+  await expect(page.getByRole("button", { name: "Joacă provocarea zilei", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Ieși la lista de jocuri", exact: true }).click();
   await page.getByRole("button", { name: /^Joacă Alchimie —/ }).click();
   await expect(page.getByRole("button", { name: "Începe explorarea →" })).toBeVisible();

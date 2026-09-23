@@ -1,0 +1,144 @@
+{
+  "id": "lt_societate_075",
+  "game": "lant",
+  "category": "societate",
+  "difficulty": "usor",
+  "status": "approved",
+  "record_sha256": "e7fddc7a6e0fd112f8bbd21908f0df9addd9ddee10a8fb819989e7c3bd38c1c6",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Convenția Europeană a Drepturilor Omului salience 0.17 < 0.60 (usor floor)"
+    },
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Avocatul Poporului salience 0.17 < 0.60 (usor floor)"
+    }
+  ],
+  "display_rules_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+  "start": {
+    "id": "n_conventia_drepturilor_omului",
+    "label": "Convenția Europeană a Drepturilor Omului",
+    "node_type": "work",
+    "category": "societate",
+    "salience": 0.1692,
+    "degree": 4,
+    "incoming_degree": 4,
+    "description": "Tratat al Consiliului Europei pentru protectia drepturilor omului, ratificat de Romania in 1994."
+  },
+  "target": {
+    "id": "n_avocatul_poporului",
+    "label": "Avocatul Poporului",
+    "node_type": "org",
+    "category": "societate",
+    "salience": 0.1672,
+    "degree": 5,
+    "incoming_degree": 5,
+    "description": "Institutie de tip ombudsman care apara drepturile si libertatile cetatenilor fata de autoritati."
+  },
+  "optimal": 2,
+  "branch_profile": {
+    "valid_first_hops": 2,
+    "narrowest_shortest_path_layer": 2,
+    "total_intermediate_shortest_path_nodes": 2
+  },
+  "representative_shortest_paths": [
+    {
+      "nodes": [
+        {
+          "id": "n_conventia_drepturilor_omului",
+          "label": "Convenția Europeană a Drepturilor Omului"
+        },
+        {
+          "id": "n_v2soc_drepturi_civile",
+          "label": "Drepturi civile"
+        },
+        {
+          "id": "n_avocatul_poporului",
+          "label": "Avocatul Poporului"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_conventia_drepturilor_omului",
+            "label": "Convenția Europeană a Drepturilor Omului"
+          },
+          "to": {
+            "id": "n_v2soc_drepturi_civile",
+            "label": "Drepturi civile"
+          },
+          "relation": "related_to",
+          "label": "consacră drepturi",
+          "display_label": "legătură directă",
+          "strength": 0.78
+        },
+        {
+          "from": {
+            "id": "n_v2soc_drepturi_civile",
+            "label": "Drepturi civile"
+          },
+          "to": {
+            "id": "n_avocatul_poporului",
+            "label": "Avocatul Poporului"
+          },
+          "relation": "related_to",
+          "label": "apără drepturi",
+          "display_label": "legătură directă",
+          "strength": 0.82
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "n_conventia_drepturilor_omului",
+          "label": "Convenția Europeană a Drepturilor Omului"
+        },
+        {
+          "id": "n_drepturi_fundamentale",
+          "label": "Drepturi fundamentale"
+        },
+        {
+          "id": "n_avocatul_poporului",
+          "label": "Avocatul Poporului"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_conventia_drepturilor_omului",
+            "label": "Convenția Europeană a Drepturilor Omului"
+          },
+          "to": {
+            "id": "n_drepturi_fundamentale",
+            "label": "Drepturi fundamentale"
+          },
+          "relation": "related_to",
+          "label": "protejeaza",
+          "display_label": "legătură directă",
+          "strength": 0.72
+        },
+        {
+          "from": {
+            "id": "n_drepturi_fundamentale",
+            "label": "Drepturi fundamentale"
+          },
+          "to": {
+            "id": "n_avocatul_poporului",
+            "label": "Avocatul Poporului"
+          },
+          "relation": "related_to",
+          "label": "apara",
+          "display_label": "legătură directă",
+          "strength": 0.72
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:dc59072f5f1657ee84a950289c9d838ec4c20b4860bded0025df6070807ea330"
+}

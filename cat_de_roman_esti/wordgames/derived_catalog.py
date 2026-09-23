@@ -27,6 +27,7 @@ from .packs import (
     DIFFICULTIES,
     normalized_text_sha256,
 )
+from .release_reserve import quick_is_reserved
 
 DERIVED_GAMES = ("intrusul", "perechi")
 PACK_DIR = Path(__file__).resolve().parent.parent / "fixtures"
@@ -38,7 +39,7 @@ MAX_VARIANTS_PER_SOURCE = 3
 _PREFERRED_STANDARD_SCORE = 55
 # Updated only with a reviewed, generator-produced bundled artifact.
 DEFAULT_DERIVED_CATALOG_SHA256 = (
-    "fe88e7265c68a79884eabb257912630722980dccd7238f3a834c6796aa65b400"
+    "bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4"
 )
 
 _META_FIELDS = {
@@ -164,7 +165,8 @@ class DerivedCatalog:
         exclude_source_ids: set[str] | None = None,
         starter: bool = False,
     ) -> list[DerivedBoard]:
-        pool = [board for board in self._boards if board.game == game]
+        pool = [board for board in self._boards
+                if board.game == game and not quick_is_reserved(board)]
         if category is not None:
             pool = [board for board in pool if board.category == category]
         if difficulty is not None:
@@ -176,7 +178,9 @@ class DerivedCatalog:
         return pool
 
     def counts(self) -> dict[str, int]:
-        return {game: len(self.pool(game)) for game in DERIVED_GAMES}
+        # Stored inventory remains complete; pool() reports what can be newly selected.
+        return {game: sum(board.game == game for board in self._boards)
+                for game in DERIVED_GAMES}
 
     @staticmethod
     def _by_source(pool: list[DerivedBoard]) -> list[tuple[str, list[DerivedBoard]]]:

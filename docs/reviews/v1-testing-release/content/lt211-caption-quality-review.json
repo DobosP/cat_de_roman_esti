@@ -1,0 +1,201 @@
+{
+  "kind": "lant-caption-review-v1",
+  "role": "quality",
+  "reviewer": "/root/v1_held_audit",
+  "checked_on": "2026-09-23",
+  "candidate_sha256": "4f4e36af80bb232d77b60ec8711f9351f67b9ed49d6fb893420000c2cda35d5a",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "runtime_source_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+  "bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v1-testing-release/content/reconsideration/shortlist.json": "749cf5f68a29e3a65a85cf7b36eacee6e13c8cc1f4a3fb651d6e648249b7fd6c"
+  },
+  "items": [
+    {
+      "id": "v1_caption_de8091",
+      "pair": [
+        "n_v23via_ghiozdan",
+        "n_v3lit_carte"
+      ],
+      "caption": "carte purtată în ghiozdan",
+      "character_count": 25,
+      "edge_sha256": "bc3a4ebf9364a6267a65f2c80997fc8a7f8ce81455595c33e445e05369789231",
+      "both_directions_checked": true,
+      "graph_allows_reverse": true,
+      "verdict": "accept",
+      "rationale": "Accept the exact forward-bound noun phrase. Ordinary Romanian identifies the physical carrier/content relationship, distinct from the alternative schoolchild route. It means a book being carried in a schoolbag, not that every book is a schoolbook. Runtime Ghiozdan→Carte selects de8091 and shows this wording; Carte→Ghiozdan selects different de7579 and correctly retains legătură directă. This five-of-six display scope is explicit in the revised packet and does not impair the proposed board’s forward shortest route.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghiozdan"
+      ]
+    },
+    {
+      "id": "v1_caption_de7580",
+      "pair": [
+        "n_v23via_ghiozdan",
+        "n_v4soc_copil"
+      ],
+      "caption": "ghiozdan folosit de școlari",
+      "character_count": 27,
+      "edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+      "both_directions_checked": true,
+      "graph_allows_reverse": true,
+      "verdict": "accept",
+      "rationale": "Accept. Școlari narrows the connection to the familiar school-age use of the bag; it does not claim every child attends school or every child carries one. The readable noun phrase names an object/user association without pretending the reverse traversal reverses a verb. It remains true and displays identically over the exact bidirectional de7580 snapshot. This route offers a person-centered alternative to the contained book.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghiozdan"
+      ]
+    },
+    {
+      "id": "v1_caption_de7521",
+      "pair": [
+        "n_v23lit_capra_cu_trei_iezi",
+        "n_v4soc_copil"
+      ],
+      "caption": "poveste în ediții pentru copii",
+      "character_count": 30,
+      "edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+      "both_directions_checked": true,
+      "graph_allows_reverse": true,
+      "verdict": "accept",
+      "rationale": "Accept. În ediții pentru copii limits the statement to child-oriented editions of the specified Creangă story, rather than claiming every adaptation or the adult film suits all ages. Ediții is slightly more abstract than carte but ordinary Romanian, and the neighboring familiar title makes the meaning clear. No plot violence is described or used as a game mechanism. Both directions use the same de7521 snapshot and wording. This supplies the previously missing nameable relation from copil to the target.",
+      "sources": [
+        "https://www.litera.ro/capra-cu-trei-iezi",
+        "https://editurasigma.ro/product/capra-cu-trei-iezi-carte-uriasa/"
+      ]
+    }
+  ],
+  "checks": {
+    "all_existing_117_strings_read": true,
+    "existing_character_range": [
+      12,
+      33
+    ],
+    "proposed_character_lengths": [
+      25,
+      27,
+      30
+    ],
+    "maximum_supported": 34,
+    "style_comparison": "Existing entries use short noun phrases such as poveste și carte, cuptor și pâine coaptă and chec servit alături de lapte. Proposed strings preserve that pattern and explain three separate concrete relations instead of repeating generic association. None changes any of the 117 existing entries.",
+    "temporary_mapping": {
+      "before": 117,
+      "after": 120,
+      "all_existing_entries_identical": true,
+      "restored_after_probe": true
+    },
+    "six_direction_probe": [
+      {
+        "id": "v1_caption_de8091",
+        "direction": "forward",
+        "from": "n_v23via_ghiozdan",
+        "to": "n_v3lit_carte",
+        "actual_edge_id": "de8091",
+        "actual_edge_sha256": "bc3a4ebf9364a6267a65f2c80997fc8a7f8ce81455595c33e445e05369789231",
+        "proposed_digest_matches": true,
+        "actual_caption": "carte purtată în ghiozdan",
+        "won": true,
+        "score": 1000,
+        "get_restores_path": true
+      },
+      {
+        "id": "v1_caption_de8091",
+        "direction": "reverse",
+        "from": "n_v3lit_carte",
+        "to": "n_v23via_ghiozdan",
+        "actual_edge_id": "de7579",
+        "actual_edge_sha256": "821ba15729a335a5a67353eee740628534682b47a321a7eced35a2fa57953a62",
+        "proposed_digest_matches": false,
+        "actual_caption": "legătură directă",
+        "won": true,
+        "score": 1000,
+        "get_restores_path": true
+      },
+      {
+        "id": "v1_caption_de7580",
+        "direction": "forward",
+        "from": "n_v23via_ghiozdan",
+        "to": "n_v4soc_copil",
+        "actual_edge_id": "de7580",
+        "actual_edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+        "proposed_digest_matches": true,
+        "actual_caption": "ghiozdan folosit de școlari",
+        "won": true,
+        "score": 1000,
+        "get_restores_path": true
+      },
+      {
+        "id": "v1_caption_de7580",
+        "direction": "reverse",
+        "from": "n_v4soc_copil",
+        "to": "n_v23via_ghiozdan",
+        "actual_edge_id": "de7580",
+        "actual_edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+        "proposed_digest_matches": true,
+        "actual_caption": "ghiozdan folosit de școlari",
+        "won": true,
+        "score": 1000,
+        "get_restores_path": true
+      },
+      {
+        "id": "v1_caption_de7521",
+        "direction": "forward",
+        "from": "n_v4soc_copil",
+        "to": "n_v23lit_capra_cu_trei_iezi",
+        "actual_edge_id": "de7521",
+        "actual_edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+        "proposed_digest_matches": true,
+        "actual_caption": "poveste în ediții pentru copii",
+        "won": true,
+        "score": 1000,
+        "get_restores_path": true
+      },
+      {
+        "id": "v1_caption_de7521",
+        "direction": "reverse",
+        "from": "n_v23lit_capra_cu_trei_iezi",
+        "to": "n_v4soc_copil",
+        "actual_edge_id": "de7521",
+        "actual_edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+        "proposed_digest_matches": true,
+        "actual_caption": "poveste în ediții pentru copii",
+        "won": true,
+        "score": 1000,
+        "get_restores_path": true
+      }
+    ],
+    "both_full_routes_optimal_score": 1000,
+    "wrong_unknown_repeat_move_and_get_checks": "passed for both routes",
+    "earned_hint_restores_without_move": true,
+    "changed_edge_and_missing_edge_fallback": "all three candidates passed",
+    "baseline_board_both_visible_first_hops": [
+      "Carte",
+      "copil"
+    ],
+    "retained_unreviewed_choice": {
+      "label": "Caiet",
+      "relation": "legătură directă"
+    },
+    "runtime_evidence": "docs/reviews/v1-testing-release/content/reconsideration/lt211-quality-runtime-probe.json"
+  },
+  "source_checks": [
+    {
+      "url": "https://dexonline.ro/definitie/ghiozdan",
+      "access": "direct page reopened",
+      "finding": "DEX2009 and MDA2 link schoolchildren, their bags and carried books; DLRLC documents the long-standing schoolchild sense. Used as semantic support, not a readership survey."
+    },
+    {
+      "url": "https://www.litera.ro/capra-cu-trei-iezi",
+      "access": "direct publisher page reopened",
+      "finding": "Specific Ion Creangă edition; children category, age bands5–7 and7–9, ISBN978-997-574-311-2. Supports a bounded edition claim."
+    },
+    {
+      "url": "https://editurasigma.ro/product/capra-cu-trei-iezi-carte-uriasa/",
+      "access": "direct open failed; current indexed primary publisher text read",
+      "finding": "Adapted shorter story, beginning-reader/primary-school use, 4–9-year audience and 2006 edition metadata. Treated as bounded corroboration; not claimed as a successful direct fetch."
+    }
+  ],
+  "limits": "Independent acceptance of the exact revised three-caption proposal, not installation or board promotion. Private in-memory sessions exercised API behavior; no fixture/source edits, natural selection, browser-size checks, human enjoyment or universal age-suitability claim. All six allowed directions were inspected, but only five match proposed caption snapshots. The different reverse de7579 edge retains neutral fallback. Final graph, installed captions and independent board gate must still be verified."
+}

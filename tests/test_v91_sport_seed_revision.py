@@ -6,7 +6,7 @@ import copy
 import gzip
 import json
 import shutil
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import pytest
 
@@ -25,13 +25,19 @@ def _historical_alchimie_source():
     return raw
 
 
-def _write(path, value):
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+def _write(path, value, *, indent=1):
+    path.write_bytes((json.dumps(value, ensure_ascii=False, indent=indent) + "\n").encode())
 
 
 @pytest.fixture
-def isolated(tmp_path):
+def isolated(tmp_path, monkeypatch):
     """Reconstruct frozen V90 bytes after V91 as well; never mutate served fixtures."""
+    # The frozen migration's review keys are POSIX relative paths on every host.
+    # Preserve that representation without changing its original source or bindings.
+    for name in ("PACK_PATHS", "KG_PATHS"):
+        monkeypatch.setattr(migration, name, tuple(
+            PurePosixPath(path.as_posix()) for path in getattr(migration, name)
+        ))
     for relative in {*migration.SOURCE_BINDINGS, *map(str, migration.KG_PATHS)}:
         destination = tmp_path / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -44,8 +50,16 @@ def isolated(tmp_path):
     for name in (*migration.INPUT_SHA256, "quality-review.json", "factual-review.json"):
         shutil.copyfile(migration.ROOT / migration.REVIEW_DIR / name, review_dir / name)
     proposal = json.loads((review_dir / "replacement-proposal.json").read_bytes())
-    # Peel all three exact V92 content sessions and the V91 seed revision before applying
-    # the frozen migration again. Neither later additions nor their counts enter it.
+    # Peel the pinned later content deltas from both graph and pack before applying
+    # the frozen migration again. Its original review hashes remain authoritative.
+    kg = before_v91_artifact(
+        json.loads((tmp_path / migration.KG_PATHS[0]).read_bytes()), "kg_sample.json"
+    )
+    for relative in migration.KG_PATHS:
+        _write(tmp_path / relative, kg, indent=2)
+    assert migration._sha((tmp_path / migration.KG_PATHS[0]).read_bytes()) == (
+        migration.SOURCE_BINDINGS[str(migration.KG_PATHS[0])]
+    )
     pack = before_v91_artifact(
         json.loads((tmp_path / migration.PACK_PATHS[0]).read_bytes()), "games_pack.json"
     )

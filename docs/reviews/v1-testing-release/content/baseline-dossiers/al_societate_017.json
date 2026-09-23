@@ -1,0 +1,296 @@
+{
+  "id": "al_societate_017",
+  "game": "alchimie",
+  "category": "societate",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "2f3710388abffde0425338d9bacab00e9546ae6f396317ddb5ae023a138b6572",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Cetățenie salience 0.15 < 0.35 (normal floor)"
+    }
+  ],
+  "target": {
+    "id": "n_cetatenie",
+    "label": "Cetățenie",
+    "node_type": "concept",
+    "category": "societate",
+    "salience": 0.151,
+    "degree": 6,
+    "incoming_degree": 6,
+    "description": "Legatura juridica si politica intre o persoana si statul roman."
+  },
+  "seeds": [
+    {
+      "id": "n_v2soc_drepturi_civile",
+      "label": "Drepturi civile",
+      "node_type": "concept",
+      "category": "societate",
+      "salience": 0.6946,
+      "degree": 13,
+      "incoming_degree": 13,
+      "description": "Drepturi ale cetățenilor în raport cu statul și societatea."
+    },
+    {
+      "id": "n_drepturile_omului",
+      "label": "Drepturile omului",
+      "node_type": "concept",
+      "category": "societate",
+      "salience": 0.4899,
+      "degree": 12,
+      "incoming_degree": 13,
+      "description": "Drepturi fundamentale garantate fiecarei persoane, protejate de Constitutie si tratate internationale."
+    },
+    {
+      "id": "n_drepturi_fundamentale",
+      "label": "Drepturi fundamentale",
+      "node_type": "concept",
+      "category": "societate",
+      "salience": 0.3466,
+      "degree": 12,
+      "incoming_degree": 12,
+      "description": "Drepturile si libertatile cetatenilor garantate de Constitutie."
+    },
+    {
+      "id": "n_vot",
+      "label": "Drept de vot",
+      "node_type": "concept",
+      "category": "societate",
+      "salience": 0.346,
+      "degree": 11,
+      "incoming_degree": 11,
+      "description": "Dreptul cetățenilor de a alege, exercitat prin vot sau sufragiu."
+    },
+    {
+      "id": "n_cetatean",
+      "label": "Cetățean",
+      "node_type": "concept",
+      "category": "societate",
+      "salience": 0.3826,
+      "degree": 23,
+      "incoming_degree": 23,
+      "description": "Persoana care detine cetatenia romana, cu drepturi si obligatii civice."
+    },
+    {
+      "id": "n_conventia_drepturilor_omului",
+      "label": "Convenția Europeană a Drepturilor Omului",
+      "node_type": "work",
+      "category": "societate",
+      "salience": 0.1692,
+      "degree": 4,
+      "incoming_degree": 4,
+      "description": "Tratat al Consiliului Europei pentru protectia drepturilor omului, ratificat de Romania in 1994."
+    }
+  ],
+  "target_depth": 2,
+  "craft_profile": {
+    "opening_pairs": 11,
+    "closure_size": 136,
+    "target_generation": 2
+  },
+  "productive_openings": [
+    {
+      "pair": [
+        {
+          "id": "n_drepturi_fundamentale",
+          "label": "Drepturi fundamentale"
+        },
+        {
+          "id": "n_v2soc_drepturi_civile",
+          "label": "Drepturi civile"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_constitutia",
+          "label": "Constituția României"
+        },
+        {
+          "id": "n_v3soc_protest",
+          "label": "Protest"
+        },
+        {
+          "id": "n_avocatul_poporului",
+          "label": "Avocatul Poporului"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_cetatean",
+          "label": "Cetățean"
+        },
+        {
+          "id": "n_drepturi_fundamentale",
+          "label": "Drepturi fundamentale"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_v4soc_parinte",
+          "label": "părinte"
+        },
+        {
+          "id": "n_avocatul_poporului",
+          "label": "Avocatul Poporului"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_cetatean",
+          "label": "Cetățean"
+        },
+        {
+          "id": "n_drepturile_omului",
+          "label": "Drepturile omului"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_v4soc_familie",
+          "label": "familie"
+        },
+        {
+          "id": "n_v4soc_pacient",
+          "label": "pacient"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_cetatean",
+          "label": "Cetățean"
+        },
+        {
+          "id": "n_v2soc_drepturi_civile",
+          "label": "Drepturi civile"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_minoritati_nationale",
+          "label": "Minoritățile naționale"
+        },
+        {
+          "id": "n_avocatul_poporului",
+          "label": "Avocatul Poporului"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_drepturi_fundamentale",
+          "label": "Drepturi fundamentale"
+        },
+        {
+          "id": "n_drepturile_omului",
+          "label": "Drepturile omului"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_constitutia",
+          "label": "Constituția României"
+        },
+        {
+          "id": "n_consiliul_europei",
+          "label": "Consiliul Europei"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_drepturile_omului",
+          "label": "Drepturile omului"
+        },
+        {
+          "id": "n_v2soc_drepturi_civile",
+          "label": "Drepturi civile"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_constitutia",
+          "label": "Constituția României"
+        },
+        {
+          "id": "n_democratie",
+          "label": "Democrație"
+        }
+      ]
+    }
+  ],
+  "minimum_action_recipe": [
+    {
+      "pair": [
+        {
+          "id": "n_drepturi_fundamentale",
+          "label": "Drepturi fundamentale"
+        },
+        {
+          "id": "n_v2soc_drepturi_civile",
+          "label": "Drepturi civile"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_constitutia",
+          "label": "Constituția României"
+        },
+        {
+          "id": "n_v3soc_protest",
+          "label": "Protest"
+        },
+        {
+          "id": "n_avocatul_poporului",
+          "label": "Avocatul Poporului"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_cetatean",
+          "label": "Cetățean"
+        },
+        {
+          "id": "n_constitutia",
+          "label": "Constituția României"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_cetatenie",
+          "label": "Cetățenie"
+        },
+        {
+          "id": "n_v2soc_stat",
+          "label": "Stat"
+        },
+        {
+          "id": "n_minoritati_nationale",
+          "label": "Minoritățile naționale"
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:5df37020a2985223ad34833a0fa323bfd043af5bcb39637c310caf7c56e1cd10"
+}

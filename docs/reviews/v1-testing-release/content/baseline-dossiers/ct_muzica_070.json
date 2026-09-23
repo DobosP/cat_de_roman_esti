@@ -1,0 +1,99 @@
+{
+  "id": "ct_muzica_070",
+  "game": "contexto",
+  "category": "muzica",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "36b4826003404d3a297795fa87bd636019a9fd62d4027c31001153f45c72de8e",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "contexto_incoming_floor",
+      "level": "WARN",
+      "detail": "4 unique existing non-distractor incoming neighbors < 5, excluding the target itself (ids: n_muz_dupa_blocuri, n_muz_hip_hop_ro, n_muz_parazitii, n_v2muz_rap_romanesc); five recognizable predecessors are impossible; recognition still requires independent review"
+    }
+  ],
+  "target": {
+    "id": "n_muz_bug_mafia",
+    "label": "B.U.G. Mafia",
+    "node_type": "org",
+    "category": "muzica",
+    "salience": 0.641,
+    "degree": 4,
+    "incoming_degree": 4,
+    "description": "Trupă românească de hip-hop, asociată cu soundul dur de cartier din anii 1990 și 2000."
+  },
+  "incoming_neighbor_floor": {
+    "minimum": 5,
+    "count": 4,
+    "sample": [
+      {
+        "id": "n_muz_dupa_blocuri",
+        "label": "După blocuri"
+      },
+      {
+        "id": "n_muz_hip_hop_ro",
+        "label": "Hip-hop românesc"
+      },
+      {
+        "id": "n_muz_parazitii",
+        "label": "Paraziții"
+      },
+      {
+        "id": "n_v2muz_rap_romanesc",
+        "label": "Rap românesc"
+      }
+    ],
+    "sample_truncated": false,
+    "recognition_assessed": false
+  },
+  "reachable": 2353,
+  "strong_neighbors": [
+    {
+      "id": "n_muz_hip_hop_ro",
+      "label": "Hip-hop românesc",
+      "node_type": "concept",
+      "category": "muzica",
+      "salience": 0.845,
+      "degree": 19,
+      "incoming_degree": 19,
+      "description": "Rap românesc de cartier, cu texte sociale și refrene intrate în cultura urbană.",
+      "strength": 0.9
+    },
+    {
+      "id": "n_v2muz_rap_romanesc",
+      "label": "Rap românesc",
+      "node_type": "concept",
+      "category": "muzica",
+      "salience": 0.9132,
+      "degree": 15,
+      "incoming_degree": 15,
+      "description": "Rap autohton cu texte urbane, sociale sau radio-friendly.",
+      "strength": 0.9
+    },
+    {
+      "id": "n_muz_dupa_blocuri",
+      "label": "După blocuri",
+      "node_type": "work",
+      "category": "muzica",
+      "salience": 0.2583,
+      "degree": 4,
+      "incoming_degree": 4,
+      "description": "Piesă B.U.G. Mafia, emblematică pentru imaginarul hip-hop de cartier.",
+      "strength": 0.82
+    },
+    {
+      "id": "n_muz_parazitii",
+      "label": "Paraziții",
+      "node_type": "org",
+      "category": "muzica",
+      "salience": 0.5001,
+      "degree": 4,
+      "incoming_degree": 4,
+      "description": "Trupă românească de hip-hop, cunoscută pentru texte directe și satiră urbană.",
+      "strength": 0.75
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:e3eee669cbc7834f94235c93c7cb89d2d43d68362a04d398efaf1a4540ec5fa7"
+}

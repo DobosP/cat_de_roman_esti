@@ -1,0 +1,1705 @@
+{
+  "author": "/root/v1_board_audit",
+  "candidate_sha256": "adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366",
+  "current_bindings": {
+    "catalog_builder": {
+      "path": "scripts/build_alchimie_recipe_extensions.py",
+      "sha256": "874286c4f26d1b05964b611f91ebb3bc4b524abfca7837c710fec78cecd9ec69"
+    },
+    "core_runtime": {
+      "path": "cat_de_roman_esti/wordgames/alchimie.py",
+      "sha256": "e7684a500a6c8bcea5edac249b49921ce10a8d405b5c43a87eb777f6779b69c9"
+    },
+    "extensions_runtime": {
+      "path": "cat_de_roman_esti/wordgames/recipe_extensions.py",
+      "sha256": "138a48aa48390161270ecb76d4c3c6a43971c3600b66d84c782998fafb1afd79"
+    },
+    "graph_runtime": {
+      "path": "cat_de_roman_esti/graph.py",
+      "sha256": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0"
+    },
+    "kg": {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64"
+    },
+    "pack": {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+    },
+    "packs_runtime": {
+      "path": "cat_de_roman_esti/wordgames/packs.py",
+      "sha256": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db"
+    },
+    "rankings": {
+      "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+      "sha256": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc"
+    },
+    "release_reserve": {
+      "path": "cat_de_roman_esti/fixtures/release_reserve_v1.json",
+      "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    },
+    "rubric": {
+      "path": "docs/CRITIQUE_RUBRIC.md",
+      "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+    },
+    "service_runtime": {
+      "path": "cat_de_roman_esti/wordgames/service.py",
+      "sha256": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+    }
+  },
+  "excluded": [
+    {
+      "board_id": "al_istorie_034",
+      "id": "alrecipe-al_istorie_034-b6fa248bd5858176",
+      "pair": [
+        "n_dacia",
+        "n_razboaiele_daco_romane"
+      ],
+      "reason": "board reserved from V1 selection",
+      "result": "n_sarmizegetusa"
+    }
+  ],
+  "historical_inputs": {
+    "candidates": {
+      "path": "docs/reviews/v92-alchimie-recipe-freedom/candidates.json",
+      "sha256": "b2197f1350be7238988cc97bc3bf104b7d39ba2ffe17b43fdfbc04c05f65d795"
+    },
+    "factual_review": {
+      "path": "docs/reviews/v92-alchimie-recipe-freedom/reviews/factual-review.json",
+      "sha256": "2635faae56b20f8b82dbad02429b2fbba4116121f340c98d6c220bcec4f8bd69"
+    },
+    "published_catalog": {
+      "path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+      "sha256": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301"
+    },
+    "quality_review": {
+      "path": "docs/reviews/v92-alchimie-recipe-freedom/reviews/quality-review.json",
+      "sha256": "2a90cdbd687a7ed2dafb46b80e139f52c6081c9fd417d4f1c964a5e6a1f5378a"
+    }
+  },
+  "items": [
+    {
+      "board_id": "al_arta_cultura_008",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "e6b06f79eb207f54743ba3ce5cb1142332d1268d61fbae32767c7813480a82e7",
+      "historical_candidate_sha256": "e6b06f79eb207f54743ba3ce5cb1142332d1268d61fbae32767c7813480a82e7",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_008-52c19b929e8b58a4",
+          "rationale": "A1/A3/E2: the named collection and Sucevița are both explicitly monastic referents; their common class Mănăstire is honest and easy to recognize. No new historical attribution is implied.",
+          "sources": [
+            "https://whc.unesco.org/en/list/598/documents"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_008-52c19b929e8b58a4",
+          "rationale": "The named monastery belongs to the displayed monastery collection; the shared class is recognizable and exact.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_008-52c19b929e8b58a4",
+      "pair": [
+        "n_manastiri_pictate_bucovina",
+        "n_sucevita"
+      ],
+      "published_board_entry_sha256": "9a02d22c32c7716a89501a295b58e2a6715c755ca2c62ecf3c4fe7a708f94f85",
+      "result": "n_v2art_manastire"
+    },
+    {
+      "board_id": "al_arta_cultura_008",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "073e8e6d5660d26d3870d3ea6c38fba862134d0713e35b150dad6fea86219f44",
+      "historical_candidate_sha256": "073e8e6d5660d26d3870d3ea6c38fba862134d0713e35b150dad6fea86219f44",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_008-6a85794eaee6a351",
+          "rationale": "A1/A3/E2: a collection of painted monasteries and Voroneț give the same recognizable monastic class. This is a truthful shared-type opening rather than an invented regional product.",
+          "sources": [
+            "https://whc.unesco.org/en/list/598/documents"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_008-6a85794eaee6a351",
+          "rationale": "Voroneț and the named painted-monastery collection share the literal monastery class.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_008-6a85794eaee6a351",
+      "pair": [
+        "n_manastiri_pictate_bucovina",
+        "n_voronet"
+      ],
+      "published_board_entry_sha256": "9a02d22c32c7716a89501a295b58e2a6715c755ca2c62ecf3c4fe7a708f94f85",
+      "result": "n_v2art_manastire"
+    },
+    {
+      "board_id": "al_arta_cultura_008",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "e9c5f9ea2983a4c42a8780fb60772e9710b1148c992e5ff83e740039265f3068",
+      "historical_candidate_sha256": "e9c5f9ea2983a4c42a8780fb60772e9710b1148c992e5ff83e740039265f3068",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_008-8b6c73c0ca4a1594",
+          "rationale": "A1/A3/E2: Sucevița and Voroneț are two actual monasteries, so their common class is a clear, factual opening.",
+          "sources": [
+            "https://whc.unesco.org/en/list/598/documents"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_008-8b6c73c0ca4a1594",
+          "rationale": "Two named monasteries cleanly yield their shared class; this is the clearest missing opening on this board.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_008-8b6c73c0ca4a1594",
+      "pair": [
+        "n_sucevita",
+        "n_voronet"
+      ],
+      "published_board_entry_sha256": "9a02d22c32c7716a89501a295b58e2a6715c755ca2c62ecf3c4fe7a708f94f85",
+      "result": "n_v2art_manastire"
+    },
+    {
+      "board_id": "al_arta_cultura_013",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "339b035a3eb793f436e3711cd28ae383272f99622e08db4435916b5017f093d7",
+      "historical_candidate_sha256": "339b035a3eb793f436e3711cd28ae383272f99622e08db4435916b5017f093d7",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_013-6a7ca188569f44ac",
+          "rationale": "A1/A3/E2: the KG explicitly means Brâncuși's sculpture series, and drawing is another visual-art form; Artă plastică is their honest common field. Museum and Romanian cultural programming independently support that sculptural referent.",
+          "sources": [
+            "https://www.moma.org/slideshows/337",
+            "https://www.icr.ro/pagini/recital-cameral-maiastra-hommage-a-brancusi-si-expozitie-de-fotografie-dedicata-ansamblului-monumental-calea-eroilor-de-la-targu-jiu"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_013-6a7ca188569f44ac",
+          "rationale": "Sculpture and drawing are recognizable visual-art practices; Artă plastică is their honest shared field.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_013-6a7ca188569f44ac",
+      "pair": [
+        "n_artx_pasarea_maiastra",
+        "n_v3art_desen"
+      ],
+      "published_board_entry_sha256": "b6ead680b1e2b41f38a7d3813cf9794754d6b8850e12846adb603f59a3cad8f6",
+      "result": "n_arta_plastica"
+    },
+    {
+      "board_id": "al_arta_cultura_014",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "a916c41898e66a2f5107cfeea3a1096d6c6f0b955afb61fc8c0703889742ca55",
+      "historical_candidate_sha256": "a916c41898e66a2f5107cfeea3a1096d6c6f0b955afb61fc8c0703889742ca55",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_014-23d573855f4c9fd9",
+          "rationale": "A1/A3/E2: Miorița is a canonical Romanian folk ballad, so specifying Folclor through that named example as Folclor românesc is meaningful and does not invent a region-specific origin.",
+          "sources": [
+            "https://dexonline.ro/definitie/miori%C8%9Ba/689838"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_014-23d573855f4c9fd9",
+          "rationale": "Miorița is a specific Romanian folkloric work, so it supplies the national qualifier absent from Folclor alone.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_014-23d573855f4c9fd9",
+      "pair": [
+        "n_artx_miorita",
+        "n_v4art_folclor"
+      ],
+      "published_board_entry_sha256": "4113dcfd6f300bf9d8fa97d462ba4000a39be1afdbe0f7f019787f6e67c66952",
+      "result": "n_folclor_romanesc"
+    },
+    {
+      "board_id": "al_arta_cultura_014",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "cdc3260078e023472d9883fc0b3b7748ec4f42c6d6ace18195bef8c7db4d8cf9",
+      "historical_candidate_sha256": "cdc3260078e023472d9883fc0b3b7748ec4f42c6d6ace18195bef8c7db4d8cf9",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_014-4c40357eabe090ef",
+          "rationale": "A1/A3/E2: Miorița and Călușarii are two recognizable Romanian folkloric forms, one narrative and one performative; the common umbrella Folclor românesc is honest.",
+          "sources": [
+            "https://ich.unesco.org/en/RL/calus-ritual-00090"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_014-4c40357eabe090ef",
+          "rationale": "Miorița and Călușarii are distinct recognizable Romanian folkloric expressions; their shared folklore umbrella is honest.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_014-4c40357eabe090ef",
+      "pair": [
+        "n_artx_miorita",
+        "n_calusarii"
+      ],
+      "published_board_entry_sha256": "4113dcfd6f300bf9d8fa97d462ba4000a39be1afdbe0f7f019787f6e67c66952",
+      "result": "n_folclor_romanesc"
+    },
+    {
+      "board_id": "al_arta_cultura_014",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "e9c866ff303e37403e17ffd66afddf0a0333cc9a85cb9ea26457bca3d9aeebbb",
+      "historical_candidate_sha256": "e9c866ff303e37403e17ffd66afddf0a0333cc9a85cb9ea26457bca3d9aeebbb",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_014-a3650529b4580ef7",
+          "rationale": "A1/A3/E2: Călușarii supplies a named Romanian ritual to specialize the general Folclor input. UNESCO documents the ritual as Romanian heritage; this does not claim exclusive ownership against related Balkan practices.",
+          "sources": [
+            "https://ich.unesco.org/en/RL/calus-ritual-00090"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_014-a3650529b4580ef7",
+          "rationale": "Călușarii is specifically a Romanian folkloric dance, so combining it with Folclor reasonably yields Folclor românesc.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_014-a3650529b4580ef7",
+      "pair": [
+        "n_calusarii",
+        "n_v4art_folclor"
+      ],
+      "published_board_entry_sha256": "4113dcfd6f300bf9d8fa97d462ba4000a39be1afdbe0f7f019787f6e67c66952",
+      "result": "n_folclor_romanesc"
+    },
+    {
+      "board_id": "al_arta_cultura_016",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "89f8dc0e40dd6160edf01a42765856f896969d752fc60958c3e41ab614d2e571",
+      "historical_candidate_sha256": "89f8dc0e40dd6160edf01a42765856f896969d752fc60958c3e41ab614d2e571",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_016-df72f2d42cb1eabd",
+          "rationale": "A1/A4/E3: Hurezi is specifically a leading example of Brâncovenesc architecture; the monastery context makes that architectural attribution inferable. UNESCO and a Romanian art-historian interview corroborate the distinctive connection.",
+          "sources": [
+            "https://whc.unesco.org/en/list/597",
+            "https://www.rri.ro/panoramice/club-cultura/stilul-brancovenesc-id587773.html"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_016-df72f2d42cb1eabd",
+          "rationale": "Hurezi is a canonical monument of the Brâncovenesc style; adding the monastery class supports its characteristic architecture.",
+          "sources": [
+            "https://whc.unesco.org/en/list/597",
+            "https://www.cimec.ro/Monumente/unesco/UNESCOen/Album/Horezu/Horezu/Horezu.htm"
+          ],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_016-df72f2d42cb1eabd",
+      "pair": [
+        "n_horezu",
+        "n_v2art_manastire"
+      ],
+      "published_board_entry_sha256": "a621a2f529afd4a19615267d1d42082dca801cd79400586ddd38d0327bc2c09f",
+      "result": "n_constantin_brancoveanu_stil"
+    },
+    {
+      "board_id": "al_arta_cultura_017",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "bc1adee0fdb39d330bb28c9ced1dd0d27d0aa59b7ae3a4f232e0faf1170692f5",
+      "historical_candidate_sha256": "bc1adee0fdb39d330bb28c9ced1dd0d27d0aa59b7ae3a4f232e0faf1170692f5",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_arta_cultura_017-b0d5443676082705",
+          "rationale": "A3/E3: visual art combined with a museum context reasonably gives a gallery, a space where visual works are displayed. The output names the combined function rather than a random named institution.",
+          "sources": [
+            "https://dexonline.ro/definitie/galerie/466861"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_arta_cultura_017-b0d5443676082705",
+          "rationale": "Visual arts and museum exhibition space naturally suggest a gallery; this is a familiar bounded spatial/art association.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_arta_cultura_017-b0d5443676082705",
+      "pair": [
+        "n_arta_plastica",
+        "n_v2art_muzeu"
+      ],
+      "published_board_entry_sha256": "d4d78cc0fcb782d2c47ad031c98be766909cc12152c0b561876552524fc9a718",
+      "result": "n_v3art_galerie_arta"
+    },
+    {
+      "board_id": "al_film_tv_020",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "9603d6d00ae98c36de788dc450221dd8b4195ef7869cfbf123c1c3ed3245b46d",
+      "historical_candidate_sha256": "9603d6d00ae98c36de788dc450221dd8b4195ef7869cfbf123c1c3ed3245b46d",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_film_tv_020-149912f45a31b25d",
+          "rationale": "E2/A3: a dramatic genre plus a trailer is a recognizable cinematic combination yielding the general Film concept. It makes no claim about a specific title or cast.",
+          "sources": [
+            "https://dictionary.cambridge.org/us/dictionary/english/trailer",
+            "https://dictionary.cambridge.org/dictionary/english/drama",
+            "https://dexonline.ro/definitie/film/871607"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_film_tv_020-149912f45a31b25d",
+          "rationale": "A drama is a film genre and a trailer promotes a film; their familiar common medium is Film.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_film_tv_020-149912f45a31b25d",
+      "pair": [
+        "n_v3fil_trailer",
+        "n_v4fil_drama"
+      ],
+      "published_board_entry_sha256": "cf75a96a9743d301b1bae12f354beef9ecf6013e962b32ac8a8ce7277265bfe7",
+      "result": "n_v3fil_film"
+    },
+    {
+      "board_id": "al_film_tv_020",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "0d11b55d4cfe62a0a89637e1e78085a47d68884e495599ee53a36b09d977f2d1",
+      "historical_candidate_sha256": "0d11b55d4cfe62a0a89637e1e78085a47d68884e495599ee53a36b09d977f2d1",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_film_tv_020-7b734fe0bab5c288",
+          "rationale": "E2/A3: a trailer displayed on a screen gives a clear cinema-oriented opening to Film, without requiring an obscure title or unsupported factual relation.",
+          "sources": [
+            "https://dictionary.cambridge.org/us/dictionary/english/trailer",
+            "https://dexonline.ro/definitie/film/871607"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_film_tv_020-7b734fe0bab5c288",
+          "rationale": "A trailer promotes a film and a screen displays it; the result connects their ordinary functions.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_film_tv_020-7b734fe0bab5c288",
+      "pair": [
+        "n_v3fil_trailer",
+        "n_v4fil_ecran"
+      ],
+      "published_board_entry_sha256": "cf75a96a9743d301b1bae12f354beef9ecf6013e962b32ac8a8ce7277265bfe7",
+      "result": "n_v3fil_film"
+    },
+    {
+      "board_id": "al_film_tv_020",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "1746e3ac2258d82ca9d41a943e5a597a2715823c81d48e90ea9da0b2935ec637",
+      "historical_candidate_sha256": "1746e3ac2258d82ca9d41a943e5a597a2715823c81d48e90ea9da0b2935ec637",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_film_tv_020-f6efc18f7a771723",
+          "rationale": "E2/A3: dramatic storytelling plus a screen gives a legible Film result; the screen supplies the medium that generic decor would not.",
+          "sources": [
+            "https://dictionary.cambridge.org/dictionary/english/drama",
+            "https://dexonline.ro/definitie/film/871607"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_film_tv_020-f6efc18f7a771723",
+          "rationale": "Screen plus dramatic genre gives the familiar film medium without requiring a particular title.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_film_tv_020-f6efc18f7a771723",
+      "pair": [
+        "n_v4fil_drama",
+        "n_v4fil_ecran"
+      ],
+      "published_board_entry_sha256": "cf75a96a9743d301b1bae12f354beef9ecf6013e962b32ac8a8ce7277265bfe7",
+      "result": "n_v3fil_film"
+    },
+    {
+      "board_id": "al_film_tv_021",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "1dfdc21013eba0524c4ec6ec3e30e8c40596675f9946cf319353c9dcae4db68f",
+      "historical_candidate_sha256": "1dfdc21013eba0524c4ec6ec3e30e8c40596675f9946cf319353c9dcae4db68f",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_film_tv_021-49df1a5700159b30",
+          "rationale": "A3/E3: a television programme and the television medium naturally point to its viewer, Spectator. This is an ordinary audience-role association, not a specific unsupported person.",
+          "sources": [
+            "https://dexonline.ro/definitie/telespectator"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_film_tv_021-49df1a5700159b30",
+          "rationale": "A television program and its television medium naturally identify the person watching; spectator is a familiar role, not an arbitrary named person.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_film_tv_021-49df1a5700159b30",
+      "pair": [
+        "n_v2fil_emisiune_tv",
+        "n_v2fil_televiziune"
+      ],
+      "published_board_entry_sha256": "3a69c5c006f32110d28bdb5527d2a63ac2ebbd8bc9718311baa365df84ac974d",
+      "result": "n_v4fil_spectator"
+    },
+    {
+      "board_id": "al_film_tv_021",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "d2aa1026259dab0906196c07822e81ab33ca84c039323a47649473eb8a7ef977",
+      "historical_candidate_sha256": "d2aa1026259dab0906196c07822e81ab33ca84c039323a47649473eb8a7ef977",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_film_tv_021-e99d50c411c9eae8",
+          "rationale": "A3/E2: a named live-action film and an animated-film form can share the broader Film class. Read as the established animated-work sense, this is a clear common-medium opening.",
+          "sources": [
+            "https://voyo.protv.ro/landing-page/1980-b-d-la-munte-si-la-mare"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_film_tv_021-e99d50c411c9eae8",
+          "rationale": "The named comedy and an animated film can share the Film medium; their different styles do not change that literal category.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_film_tv_021-e99d50c411c9eae8",
+      "pair": [
+        "n_ftv_bd_la_munte_si_la_mare",
+        "n_v4fil_desen_animat"
+      ],
+      "published_board_entry_sha256": "3a69c5c006f32110d28bdb5527d2a63ac2ebbd8bc9718311baa365df84ac974d",
+      "result": "n_v3fil_film"
+    },
+    {
+      "board_id": "al_film_tv_023",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "b654071251bda2b79d6a19b52184a3509dc79bda3ebcf6929034ac4669248bfa",
+      "historical_candidate_sha256": "b654071251bda2b79d6a19b52184a3509dc79bda3ebcf6929034ac4669248bfa",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_film_tv_023-1a2911a5ae48c1fe",
+          "rationale": "A1/A3/E2: Mugur Mihăescu and Tamara Buciuceanu-Botez are two established actors; their common occupational class is a truthful recognizable opening.",
+          "sources": [
+            "https://voyo.protv.ro/landing-page/3785-vacanta-mare"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_film_tv_023-1a2911a5ae48c1fe",
+          "rationale": "Both named performers are actors; the shared occupation gives a direct, recognizable opening.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_film_tv_023-1a2911a5ae48c1fe",
+      "pair": [
+        "n_ftv_mugur_mihaescu",
+        "n_ftv_tamara_buciuceanu_botez"
+      ],
+      "published_board_entry_sha256": "8103015e37f824546e6359df728f0abb13dcbbaa4f2d99709a953191879f7de3",
+      "result": "n_v2fil_actor"
+    },
+    {
+      "board_id": "al_film_tv_106",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "b8e4fbb091a13cf01932e7846cca73f620bb0777b0c877f081cdaadecaa6547e",
+      "historical_candidate_sha256": "b8e4fbb091a13cf01932e7846cca73f620bb0777b0c877f081cdaadecaa6547e",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_film_tv_106-81a79e92140edbc2",
+          "rationale": "A1/A4/E2: the two named programmes have a real shared broadcaster, Pro TV. Current programme/distribution pages support the connection without asserting that either has always aired exclusively there.",
+          "sources": [
+            "https://voyo.protv.ro/landing-page/3785-vacanta-mare",
+            "https://www.protv.ro/emisiuni/vocea-romaniei"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_film_tv_106-81a79e92140edbc2",
+          "rationale": "The two named entertainment programs share an actual, recognizable broadcaster; different broadcast periods do not imply simultaneity.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_film_tv_106-81a79e92140edbc2",
+      "pair": [
+        "n_ftv_vacanta_mare",
+        "n_v11fil_vocea_romaniei"
+      ],
+      "published_board_entry_sha256": "57ebd189bee1f00a674348338ba1998195bd489c0121844786711cae743870d6",
+      "result": "n_ftv_pro_tv"
+    },
+    {
+      "board_id": "al_gastronomie_029",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "0a182ac82b37f9c62ba8caabf2b96304e91ff297a99ff700aebb4492b81df13f",
+      "historical_candidate_sha256": "0a182ac82b37f9c62ba8caabf2b96304e91ff297a99ff700aebb4492b81df13f",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_gastronomie_029-271020625db2d988",
+          "rationale": "A3/E3: mici and friptură give two familiar foods with a conventional shared grilling method. Grătar is a plausible common cooking context, without claiming every roast must be grilled.",
+          "sources": [
+            "https://dexonline.ro/definitie/mititel",
+            "https://dexonline.ro/definitie/friptur%C4%83"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_gastronomie_029-271020625db2d988",
+          "rationale": "Mici and steak share a familiar grilling method; Grătar is a plausible common preparation context.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_gastronomie_029-271020625db2d988",
+      "pair": [
+        "n_gas_mici",
+        "n_v3gas_friptura"
+      ],
+      "published_board_entry_sha256": "1671d7dca45e76e349bbf5964021230bb0c34b1bcd52a04d722c6b71cfaca32c",
+      "result": "n_v2gas_gratar"
+    },
+    {
+      "board_id": "al_geografie_002",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "46c570337941cd0a0b5ec3bfa6805f133ef320158a27b7e1af14de126a143c77",
+      "historical_candidate_sha256": "46c570337941cd0a0b5ec3bfa6805f133ef320158a27b7e1af14de126a143c77",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_geografie_002-7ee5c60ea63d8208",
+          "rationale": "A1/A4/E3: the Bâlea/Făgăraș pairing specifically locates the famous Transfăgărășan mountain road; the county tourism authority directly documents all three together.",
+          "sources": [
+            "https://www.sibiu-turism.ro/Ce-vedem-Destinatii-Destinatii-montane-Transfagarasan-Balea-Lac1.aspx"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_geografie_002-7ee5c60ea63d8208",
+          "rationale": "Bâlea Lake and the Făgăraș Mountains are distinctive geographic anchors for Transfăgărășan, not generic road associations.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_geografie_002-7ee5c60ea63d8208",
+      "pair": [
+        "n_lacul_balea",
+        "n_muntii_fagaras"
+      ],
+      "published_board_entry_sha256": "da47c907e40062e7bdef89a24d456b7b52fd8fa44b7e7a7d969df92d61a81410",
+      "result": "n_transfagarasan"
+    },
+    {
+      "board_id": "al_geografie_031",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "fd932312698bddc38aaaebec700b3dd0af0e24b2c42ddd8d286593f2ff87018d",
+      "historical_candidate_sha256": "fd932312698bddc38aaaebec700b3dd0af0e24b2c42ddd8d286593f2ff87018d",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_geografie_031-ae2b5902f1639453",
+          "rationale": "A3/E3: Constanța plus the seaside supplies a concrete coastal setting for a beach. This is an ordinary geographic synthesis, not an unsupported named-beach attribution.",
+          "sources": [
+            "https://rowater.ro/activitatea-institutiei/proiecte/proiecte-in-curs-de-implementare/reducerea-si-reabilitarea-zonei-costiere/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_geografie_031-ae2b5902f1639453",
+          "rationale": "Constanța and litoral make a beach a direct, familiar coastal result without singling out an obscure beach.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_geografie_031-ae2b5902f1639453",
+      "pair": [
+        "n_constanta",
+        "n_v2geo_litoral"
+      ],
+      "published_board_entry_sha256": "ee6c0847cf18dda91eb02dbb1d7e594121547d1d0c270585fd0c4ee100b77239",
+      "result": "n_v4geo_plaja"
+    },
+    {
+      "board_id": "al_geografie_031",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "93ae82e3a1a7e5f89fe90efbee74203e7515587b5d88935150a50b41e801f17a",
+      "historical_candidate_sha256": "93ae82e3a1a7e5f89fe90efbee74203e7515587b5d88935150a50b41e801f17a",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_geografie_031-d22705a52fcd5a2b",
+          "rationale": "A3/E2: a named sea plus a peninsula supplies a genuine coastal-landform relation, making Litoral a sensible general result. It does not invent a named peninsula.",
+          "sources": [
+            "https://dexonline.ro/definitie/peninsul%C4%83",
+            "https://dexonline.ro/definitie/litoral"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_geografie_031-d22705a52fcd5a2b",
+          "rationale": "A sea and a peninsula are ordinary coastal-geography cues; litoral is their coherent shared setting.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_geografie_031-d22705a52fcd5a2b",
+      "pair": [
+        "n_marea_neagra",
+        "n_v4geo_peninsula"
+      ],
+      "published_board_entry_sha256": "ee6c0847cf18dda91eb02dbb1d7e594121547d1d0c270585fd0c4ee100b77239",
+      "result": "n_v2geo_litoral"
+    },
+    {
+      "board_id": "al_geografie_033",
+      "changed_candidate_fields": [
+        "alternative_candidate_ids_for_same_pair",
+        "candidate_sha256"
+      ],
+      "current_candidate_sha256": "4c0d9e8fa3416440a44ebd2ca518a45d2edd7e6b09b345188a7f69f242c55f1c",
+      "historical_candidate_sha256": "0f5ba160fa13697108e0e4bfbe6a8a118fdc8ba56741b15dfc82227130d16590",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_geografie_033-bb8bfcd0955f704f",
+          "rationale": "A3/E2: Dobrogea supplies an actual coastal region and sand a shore material; the general Litoral output is plausible without inventing a particular beach or claiming all sand is coastal. Select this over the named-sea competitor.",
+          "sources": [
+            "https://rowater.ro/activitatea-institutiei/proiecte/proiecte-in-curs-de-implementare/reducerea-si-reabilitarea-zonei-costiere/",
+            "https://dexonline.ro/definitie/litoral"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_geografie_033-bb8bfcd0955f704f",
+          "rationale": "Dobrogea supplies a real coastal region and sand directly supports litoral. Prefer this geographic surface to the competing named sea.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_geografie_033-bb8bfcd0955f704f",
+      "pair": [
+        "n_dobrogea",
+        "n_v4geo_nisip"
+      ],
+      "published_board_entry_sha256": "912e604b7a742185866bf2a4d7f5f7b862cdd1828b099090cd8861e105ee8a81",
+      "result": "n_v2geo_litoral"
+    },
+    {
+      "board_id": "al_geografie_033",
+      "changed_candidate_fields": [
+        "alternative_candidate_ids_for_same_pair",
+        "candidate_sha256"
+      ],
+      "current_candidate_sha256": "794cbec3ccc6f5dbdd9475e441a54dbac576cec08e80c993547189e1a4bdab31",
+      "historical_candidate_sha256": "9d8cf46f492f3f3165a7f958773595610accc10e2d4aaa72e0fef3dd46f720f1",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_geografie_033-c76764dae62d17b1",
+          "rationale": "A3/E2: a coastal cliff and sand are two concrete shore features, so their shared environment Litoral is inferable. Reject the competing unexplained Black Sea name.",
+          "sources": [
+            "https://dexonline.ro/definitie/falez%C4%83",
+            "https://dexonline.ro/definitie/litoral",
+            "https://rowater.ro/activitatea-institutiei/proiecte/proiecte-in-curs-de-implementare/reducerea-si-reabilitarea-zonei-costiere/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_geografie_033-c76764dae62d17b1",
+          "rationale": "A coastal cliff and deposited sand directly describe litoral; this common landform setting is more inferable than a particular sea.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_geografie_033-c76764dae62d17b1",
+      "pair": [
+        "n_v4geo_faleza",
+        "n_v4geo_nisip"
+      ],
+      "published_board_entry_sha256": "912e604b7a742185866bf2a4d7f5f7b862cdd1828b099090cd8861e105ee8a81",
+      "result": "n_v2geo_litoral"
+    },
+    {
+      "board_id": "al_istorie_001",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "20dd42b8848eeaf1b2293c26a839d63120e1f11a5292c9e5f8b9f91c5d15d340",
+      "historical_candidate_sha256": "20dd42b8848eeaf1b2293c26a839d63120e1f11a5292c9e5f8b9f91c5d15d340",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_001-018ce4c23d6e8f19",
+          "rationale": "A1/A4/E3: the exact wars node means the 101–102 and 105–106 Roman campaigns, in which Decebal led the Dacian side. Geto-dacii identifies that side and makes the ruler a distinctive historical result.",
+          "sources": [
+            "https://cimec.ro/id-01-arheologie/situri-arheologice-22/cetatile-dacice-din-muntii-orastiei/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_001-018ce4c23d6e8f19",
+          "rationale": "The Dacian people and the Daco-Roman wars point to their well-known king and wartime leader Decebal.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_001-018ce4c23d6e8f19",
+      "pair": [
+        "n_geto_daci",
+        "n_razboaiele_daco_romane"
+      ],
+      "published_board_entry_sha256": "8c9de468208f6ba6e277cfd972d0d5b9d5a303956c7dcb7242628477ff5775ff",
+      "result": "n_decebal"
+    },
+    {
+      "board_id": "al_istorie_035",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "205dfa1524d12783d5d10f6abda9ba48b3ddb5ab6d32e8c825f6ec238b9e1b98",
+      "historical_candidate_sha256": "205dfa1524d12783d5d10f6abda9ba48b3ddb5ab6d32e8c825f6ec238b9e1b98",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_035-148141c6e6a57495",
+          "rationale": "A1/A4/E2: the 1877 conflict and Vlad Țepeș have a specific shared opposing power, the Ottoman Empire. The result does not imply that Vlad participated in the nineteenth-century war.",
+          "sources": [
+            "https://www.mnir.ro/125-de-ani-de-la-proclamarea-independentei/",
+            "https://muzeulnationaljournal.ro/?articol=206074-kazikli-voyvoda-in-izvoarele-narative-otomane-incercare-de-sistematizare-a-perceptiei-lui-vlad-tepes-in-imperiul-otoman-kazikli-voyvoda-in-the-ottoman-narrative-sources-attempt-at-systematising-the-perception-of-vlad-the-impaler-in-the-ottoman-empire"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_035-148141c6e6a57495",
+          "rationale": "Vlad Țepeș and the 1877 independence war share the Ottoman adversary in different periods; the recipe does not claim the events were simultaneous.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_035-148141c6e6a57495",
+      "pair": [
+        "n_razboiul_independenta_1877",
+        "n_vlad_tepes"
+      ],
+      "published_board_entry_sha256": "3042b2b0612f0711f94894dd7c6287b95b64e27e4c99258caea3b1710ea00d50",
+      "result": "n_imperiul_otoman"
+    },
+    {
+      "board_id": "al_istorie_035",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "360e6d3f87cabba207945af65f23e6b1168f317224b6142605ae605fed31e502",
+      "historical_candidate_sha256": "360e6d3f87cabba207945af65f23e6b1168f317224b6142605ae605fed31e502",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_035-4a6467e958c6feb7",
+          "rationale": "A1/A4/E2: Wallachia was a constituent of the United Principalities and the principality ruled by Vlad Țepeș. These two concrete historical relations identify the same territory rather than generic Romanian co-occurrence.",
+          "sources": [
+            "https://www.mnir.ro/unirea-principatelor-1/",
+            "https://muzeulnationaljournal.ro/?articol=206074-kazikli-voyvoda-in-izvoarele-narative-otomane-incercare-de-sistematizare-a-perceptiei-lui-vlad-tepes-in-imperiul-otoman-kazikli-voyvoda-in-the-ottoman-narrative-sources-attempt-at-systematising-the-perception-of-vlad-the-impaler-in-the-ottoman-empire"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_035-4a6467e958c6feb7",
+          "rationale": "Wallachia is both Vlad Țepeș’s principality and a constituent of the United Principalities; the same named polity anchors both clues.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_035-4a6467e958c6feb7",
+      "pair": [
+        "n_principatele_unite",
+        "n_vlad_tepes"
+      ],
+      "published_board_entry_sha256": "3042b2b0612f0711f94894dd7c6287b95b64e27e4c99258caea3b1710ea00d50",
+      "result": "n_tara_romaneasca"
+    },
+    {
+      "board_id": "al_istorie_035",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "af19e69e797796aaa2d23d034f9180e93d9a1c7380ebf7786fef3f33134e9f1d",
+      "historical_candidate_sha256": "af19e69e797796aaa2d23d034f9180e93d9a1c7380ebf7786fef3f33134e9f1d",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_035-5f3ec4be108338c6",
+          "rationale": "A1/A4/E2: Călugăreni and the independence war have a real common Ottoman opponent. This connects separate conflicts without conflating their dates or commanders.",
+          "sources": [
+            "https://gmr.mapn.ro/webroot/fileslib/upload/files/arhiva%20GMR/2017%20gmr/2017/1%202017%20gmr/revista_1_internet%202017.pdf",
+            "https://www.mnir.ro/125-de-ani-de-la-proclamarea-independentei/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_035-5f3ec4be108338c6",
+          "rationale": "Both named conflicts were fought against Ottoman power; the shared adversary is concrete and historically legible.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_035-5f3ec4be108338c6",
+      "pair": [
+        "n_istx_batalia_calugareni",
+        "n_razboiul_independenta_1877"
+      ],
+      "published_board_entry_sha256": "3042b2b0612f0711f94894dd7c6287b95b64e27e4c99258caea3b1710ea00d50",
+      "result": "n_imperiul_otoman"
+    },
+    {
+      "board_id": "al_istorie_035",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "3e380d422bf6366f2302cea30d3443a7f4716eb8de4c6b0b41498bd5429f447a",
+      "historical_candidate_sha256": "3e380d422bf6366f2302cea30d3443a7f4716eb8de4c6b0b41498bd5429f447a",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_035-9312dad6df475e93",
+          "rationale": "A1/A4/E2: Iancu's anti-Ottoman campaigns and the 1877 conflict identify the same opposing empire; no claim places Iancu in the later war.",
+          "sources": [
+            "https://biblioteca-digitala.ro/reviste/Analele-Banatului/01-Analele-Banatului-arheologie-istorie-vol-I-1981_8.pdf",
+            "https://www.mnir.ro/125-de-ani-de-la-proclamarea-independentei/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_035-9312dad6df475e93",
+          "rationale": "The historical leader and the later independence war share an actual Ottoman opponent; this expresses a common adversary across time.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_035-9312dad6df475e93",
+      "pair": [
+        "n_iancu_de_hunedoara",
+        "n_razboiul_independenta_1877"
+      ],
+      "published_board_entry_sha256": "3042b2b0612f0711f94894dd7c6287b95b64e27e4c99258caea3b1710ea00d50",
+      "result": "n_imperiul_otoman"
+    },
+    {
+      "board_id": "al_istorie_035",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "b1196bc19184d9b069de00664976cd7332f15288f03ff18bf61ac302cd133d4c",
+      "historical_candidate_sha256": "b1196bc19184d9b069de00664976cd7332f15288f03ff18bf61ac302cd133d4c",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_035-ef0a104c82d657a4",
+          "rationale": "A1/A4/E2: Iancu's campaigns and Călugăreni share the Ottoman opponent. This is a named historical intersection, not a false claim that Iancu fought at Călugăreni.",
+          "sources": [
+            "https://biblioteca-digitala.ro/reviste/Analele-Banatului/01-Analele-Banatului-arheologie-istorie-vol-I-1981_8.pdf",
+            "https://gmr.mapn.ro/webroot/fileslib/upload/files/arhiva%20GMR/2017%20gmr/2017/1%202017%20gmr/revista_1_internet%202017.pdf"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_035-ef0a104c82d657a4",
+          "rationale": "Iancu de Hunedoara and the Călugăreni battle have a recognizable shared Ottoman-adversary connection.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_035-ef0a104c82d657a4",
+      "pair": [
+        "n_iancu_de_hunedoara",
+        "n_istx_batalia_calugareni"
+      ],
+      "published_board_entry_sha256": "3042b2b0612f0711f94894dd7c6287b95b64e27e4c99258caea3b1710ea00d50",
+      "result": "n_imperiul_otoman"
+    },
+    {
+      "board_id": "al_istorie_041",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "ef9edd945fe8689bcef4d5a5095882578ecb79db67ac29dc5b71c51c1f38dbd5",
+      "historical_candidate_sha256": "ef9edd945fe8689bcef4d5a5095882578ecb79db67ac29dc5b71c51c1f38dbd5",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_041-3861fabfa59948a6",
+          "rationale": "A4/A7/E3: 1859 supplies historic Moldavia and Cucuteni supplies its actual northeastern archaeological region. The shared Moldova result is geographic, not a claim that the Neolithic culture belonged to the later principality; public museum history and modern heritage records support recognition.",
+          "sources": [
+            "https://www.mnir.ro/unirea-principatelor-1/",
+            "https://whc.unesco.org/en/tentativelists/7009/",
+            "https://ghidulmuzeelor.cimec.ro/id.asp?-muzeul-sitului-arheologic-cucuteni-iasi=&k=404"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_041-3861fabfa59948a6",
+          "rationale": "The 1859 union and Cucuteni’s geographic area share historical Moldova; the result is the regional intersection, not a claim that the events were contemporary.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_041-3861fabfa59948a6",
+      "pair": [
+        "n_mica_unire_1859",
+        "n_v17ist_cultura_cucuteni"
+      ],
+      "published_board_entry_sha256": "4ba1d25caa1088f33704bbea3b79501b7175dcc39540ed6e25c2d0a6827f3158",
+      "result": "n_moldova"
+    },
+    {
+      "board_id": "al_istorie_041",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "c7ac0d4ba3125acf1aada1a32ba78792a55042f1c7d0490ed1ed62743a9e62c0",
+      "historical_candidate_sha256": "c7ac0d4ba3125acf1aada1a32ba78792a55042f1c7d0490ed1ed62743a9e62c0",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_041-467e3999b13b8d6a",
+          "rationale": "A4/A7/E3: Vaslui and the Romanian Cucuteni archaeological context specifically overlap in historic Moldavia. The recipe does not restrict the wider Cucuteni–Trypillia culture exclusively to Moldova.",
+          "sources": [
+            "https://www.muzeu-vaslui.ro/index.php/acasa/istoria-muzeului",
+            "https://whc.unesco.org/en/tentativelists/7009/",
+            "https://www.rri.ro/panoramice/enciclopedia-rri/cultura-cucuteni-id588213.html"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_041-467e3999b13b8d6a",
+          "rationale": "Cucuteni’s region and the Vaslui battle site share Moldova, giving complementary archaeological and historical geography cues.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_041-467e3999b13b8d6a",
+      "pair": [
+        "n_v17ist_cultura_cucuteni",
+        "n_vaslui"
+      ],
+      "published_board_entry_sha256": "4ba1d25caa1088f33704bbea3b79501b7175dcc39540ed6e25c2d0a6827f3158",
+      "result": "n_moldova"
+    },
+    {
+      "board_id": "al_istorie_041",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "cc59f41f2fdd57ce952592b23ca76e357efa1ed2e04838cfa135be4867a28e97",
+      "historical_candidate_sha256": "cc59f41f2fdd57ce952592b23ca76e357efa1ed2e04838cfa135be4867a28e97",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_041-4f553c48ba3e2205",
+          "rationale": "A1/A4/E3: the 1859 union and Vaslui identify Moldova through two concrete national-history events. Both are direct historical geographic connections.",
+          "sources": [
+            "https://www.mnir.ro/unirea-principatelor-1/",
+            "https://www.muzeu-vaslui.ro/index.php/acasa/istoria-muzeului"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_041-4f553c48ba3e2205",
+          "rationale": "The union includes Moldova and Vaslui lies in historical Moldova; their common polity/region is legible.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_041-4f553c48ba3e2205",
+      "pair": [
+        "n_mica_unire_1859",
+        "n_vaslui"
+      ],
+      "published_board_entry_sha256": "4ba1d25caa1088f33704bbea3b79501b7175dcc39540ed6e25c2d0a6827f3158",
+      "result": "n_moldova"
+    },
+    {
+      "board_id": "al_istorie_041",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "ff4e192fa01f542e25ece08cd6a2cfe78ff6d27ee6c035579c0b5f3b1cf4b3f8",
+      "historical_candidate_sha256": "ff4e192fa01f542e25ece08cd6a2cfe78ff6d27ee6c035579c0b5f3b1cf4b3f8",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_041-c1f379b6d0a804c6",
+          "rationale": "A1/A4/E3: Ștefan's reign and the Vaslui battle both directly identify the historic Moldavian principality; the museum explicitly explains that setting.",
+          "sources": [
+            "https://www.muzeu-vaslui.ro/index.php/acasa/istoria-muzeului",
+            "https://www.muzeu-vaslui.ro/index.php/evenimente/anunturi-importante-comunicate-de-presa"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_041-c1f379b6d0a804c6",
+          "rationale": "Ștefan’s principality and the location of the Vaslui battle clearly converge on Moldova.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_041-c1f379b6d0a804c6",
+      "pair": [
+        "n_stefan_cel_mare",
+        "n_vaslui"
+      ],
+      "published_board_entry_sha256": "4ba1d25caa1088f33704bbea3b79501b7175dcc39540ed6e25c2d0a6827f3158",
+      "result": "n_moldova"
+    },
+    {
+      "board_id": "al_istorie_041",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "362a4b1c16a1ea6d2d82cf25a4574aeb9b271dbbf20af054241488eb41c324dd",
+      "historical_candidate_sha256": "362a4b1c16a1ea6d2d82cf25a4574aeb9b271dbbf20af054241488eb41c324dd",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_041-c3ccda2bba00a757",
+          "rationale": "A4/A7/E3: Ștefan's historic principality overlaps geographically with Romanian Cucuteni sites. Treat as shared region, never a chronological link between the medieval ruler and Neolithic culture.",
+          "sources": [
+            "https://www.muzeu-vaslui.ro/index.php/acasa/istoria-muzeului",
+            "https://whc.unesco.org/en/tentativelists/7009/",
+            "https://ghidulmuzeelor.cimec.ro/id.asp?-muzeul-sitului-arheologic-cucuteni-iasi=&k=404"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_041-c3ccda2bba00a757",
+          "rationale": "Ștefan’s historical principality and the Cucuteni region share Moldova; this is geographic association rather than temporal equivalence.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_041-c3ccda2bba00a757",
+      "pair": [
+        "n_stefan_cel_mare",
+        "n_v17ist_cultura_cucuteni"
+      ],
+      "published_board_entry_sha256": "4ba1d25caa1088f33704bbea3b79501b7175dcc39540ed6e25c2d0a6827f3158",
+      "result": "n_moldova"
+    },
+    {
+      "board_id": "al_istorie_041",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "aa791665949807d82277a0d70d251cc15e87deccee8edcb6ab7fccf5ea07ba66",
+      "historical_candidate_sha256": "aa791665949807d82277a0d70d251cc15e87deccee8edcb6ab7fccf5ea07ba66",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_istorie_041-d459ff49861a8dcc",
+          "rationale": "A1/A4/E3: Ștefan's principality and one of the two participants in the 1859 union are the same historic Moldova. Distinct dates remain separate.",
+          "sources": [
+            "https://www.mnir.ro/unirea-principatelor-1/",
+            "https://www.muzeu-vaslui.ro/index.php/acasa/istoria-muzeului"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_istorie_041-d459ff49861a8dcc",
+          "rationale": "Ștefan’s principality is the Moldovan constituent of the 1859 union; both references give a concrete historical region.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_istorie_041-d459ff49861a8dcc",
+      "pair": [
+        "n_mica_unire_1859",
+        "n_stefan_cel_mare"
+      ],
+      "published_board_entry_sha256": "4ba1d25caa1088f33704bbea3b79501b7175dcc39540ed6e25c2d0a6827f3158",
+      "result": "n_moldova"
+    },
+    {
+      "board_id": "al_limba_043",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "100121a6f2eba54a9a10bb16195bcf20ee073a4abd55eade268f9ffcff87f22b",
+      "historical_candidate_sha256": "100121a6f2eba54a9a10bb16195bcf20ee073a4abd55eade268f9ffcff87f22b",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_limba_043-e9cbf7fd96e634d8",
+          "rationale": "A1/A4/E3: Latin combined with the language/family context plausibly yields the Romance languages derived from it. This is a standard school linguistic relationship, not an invented regional association.",
+          "sources": [
+            "https://dexonline.ro/definitie/romanic"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_limba_043-e9cbf7fd96e634d8",
+          "rationale": "Latin plus language naturally evokes the familiar school-canon Romance-language family; the low salience score is not evidence of actual obscurity.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_limba_043-e9cbf7fd96e634d8",
+      "pair": [
+        "n_limba_latina",
+        "n_v3lim_limba"
+      ],
+      "published_board_entry_sha256": "a0616d2f6538d2750be9a08e29ecbf5f024fd950aff9dea7ae7c78563962c3d8",
+      "result": "n_limbile_romanice"
+    },
+    {
+      "board_id": "al_literatura_005",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "0ae8e1df4c0cab1c6d3eba316e8ef926063220fa41e1cddefb0329fe33243e7e",
+      "historical_candidate_sha256": "0ae8e1df4c0cab1c6d3eba316e8ef926063220fa41e1cddefb0329fe33243e7e",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_literatura_005-7a2b0077f486cfd9",
+          "rationale": "A1/A4/E2: Iași and Eminescu have a distinctive common Junimea connection, documented through the society's house and the poet's participation in the museum's original exhibits.",
+          "sources": [
+            "https://www.muzeulliteraturiiiasi.ro/expozitii/amintiri-din-junimea/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_literatura_005-7a2b0077f486cfd9",
+          "rationale": "Iași and Eminescu have a specific school-canon Junimea association, giving a meaningful alternative to the existing literary opening.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_literatura_005-7a2b0077f486cfd9",
+      "pair": [
+        "n_iasi",
+        "n_mihai_eminescu"
+      ],
+      "published_board_entry_sha256": "6aaac86d45c8ccbd38885cc3402c297b5aec192443856dad807db77ef687332c",
+      "result": "n_junimea"
+    },
+    {
+      "board_id": "al_literatura_054",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "3bb359a469cf8cef35e12845a01ab1b214a223aa4b77a20c857913a356658668",
+      "historical_candidate_sha256": "3bb359a469cf8cef35e12845a01ab1b214a223aa4b77a20c857913a356658668",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_literatura_054-71d8e4d22e0fd986",
+          "rationale": "A1/A3/E2: Stănescu and Alecsandri are two established lyric poets, so their shared creative form Poezie lirică is honest. This states a common output domain without treating either person as a poem.",
+          "sources": [
+            "https://www.icr.ro/bruxelles/tara-mea-de-glorii-tara-mea-de-dor-spectacol-de-poezie-si-muzica-romaneasca/fr"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_literatura_054-71d8e4d22e0fd986",
+          "rationale": "Both recognized poets wrote lyric poetry; their shared literary form gives a coherent opening despite different periods.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_literatura_054-71d8e4d22e0fd986",
+      "pair": [
+        "n_nichita_stanescu",
+        "n_vasile_alecsandri"
+      ],
+      "published_board_entry_sha256": "2c55a8ba12b071368e5b3d1ae228a537ec24b212ccdf7f0ade898bad3a883a61",
+      "result": "n_v2lit_poezie_lirica"
+    },
+    {
+      "board_id": "al_literatura_097",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "a2a471760ec3a34c3a01233bfd9461a85022d1804612b1dc12f0ffb6ce9566c8",
+      "historical_candidate_sha256": "a2a471760ec3a34c3a01233bfd9461a85022d1804612b1dc12f0ffb6ce9566c8",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_literatura_097-ca5999c028901700",
+          "rationale": "A1/A3/E2: the two familiar Creangă narratives are actual stories; Poveste is their direct common class. Current children's theatre programming independently maintains both recognizable titles.",
+          "sources": [
+            "https://teatrulioncreanga.ro/stiri/primavara-incepe-cu-o-noua-editie-luna-lui-ion-creanga-povesti-si-amintiri-din-copilarie/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_literatura_097-ca5999c028901700",
+          "rationale": "Both familiar works are stories, so Poveste is an exact and beginner-friendly shared class.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_literatura_097-ca5999c028901700",
+      "pair": [
+        "n_v23lit_punguta_cu_doi_bani",
+        "n_v23lit_ursul_pacalit_de_vulpe"
+      ],
+      "published_board_entry_sha256": "7afa780de3783f53d5f16d0dacb00ffd7a778dce92de825cb6c751be1fef6b15",
+      "result": "n_v3lit_poveste"
+    },
+    {
+      "board_id": "al_meme_net_057",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "7d3e82969d554fc8c681bc062d388371f880a1562e8c6ba832729b13f7610db2",
+      "historical_candidate_sha256": "7d3e82969d554fc8c681bc062d388371f880a1562e8c6ba832729b13f7610db2",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_meme_net_057-9c6f7e23358b6241",
+          "rationale": "A1/A3/E2: the named Dorel character supplies a recognizable specifically Romanian meme to specialize Memă. Creator testimony and independent national reporting document its cultural afterlife. Its advertising origin involved alcohol, but this exact triple and inspected core recipe book contain no drink, brand or drinking-dependent step, so A5 does not automatically apply to the origin alone.",
+          "sources": [
+            "https://www.iqads.ro/articol/39768/folclorul-din-reclame-cum-a-aparut-dorel-codin-caradimu-am-facut-echipe-de",
+            "https://stirileprotv.ro/divers/dorel-a-lovit-din-nou-metoda-prin-care-un-muncitor-a-fixat-un-stalp-de-iluminat-care-fusese-lovit-de-o-camioneta.html"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_meme_net_057-9c6f7e23358b6241",
+          "rationale": "Dorel is a specifically recognizable Romanian meme character, so the national meme class is anchored by the named example.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_meme_net_057-9c6f7e23358b6241",
+      "pair": [
+        "n_net_dorel",
+        "n_v4mem_mema"
+      ],
+      "published_board_entry_sha256": "2a8e3d0bd45fba7eb32ca9ba306a7d48cb83e3fb9273a913b177688494c07e2f",
+      "result": "n_net_meme_romanesc"
+    },
+    {
+      "board_id": "al_muzica_063",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "f9199aff01909cf586ca1b23a76874de00344a705d7ca74c7affb4619ae73233",
+      "historical_candidate_sha256": "f9199aff01909cf586ca1b23a76874de00344a705d7ca74c7affb4619ae73233",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_muzica_063-f46b39c98d4c9960",
+          "rationale": "A1/A4/E2: the KG means the band Vama Veche, not the village. The Romanian band plus a rock musical form makes Rock românesc a coherent specialization; historical band material and a national broadcaster's performance record support recognition.",
+          "sources": [
+            "https://www.protv.ro/articol/69531-peste-2-6-milioane-de-romani-au-urmarit-vamafest-primul-festival-digital-al-unei-trupe-din-romania",
+            "https://vamaveche.net/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_muzica_063-f46b39c98d4c9960",
+          "rationale": "In the musical board the Vama Veche band plus a rock ballad supports Romanian rock; the musical input resolves the place/band ambiguity.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_muzica_063-f46b39c98d4c9960",
+      "pair": [
+        "n_muz_vama_veche",
+        "n_v2muz_balada_rock"
+      ],
+      "published_board_entry_sha256": "a86239b93af2fd3cec2cf1b554ad3c7e80f09d9a4a1a639c0f2762f7af44250f",
+      "result": "n_muz_rock_ro"
+    },
+    {
+      "board_id": "al_personalitati_006",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "8736c6760e837e28380daa3da1bcbe024e53b1d95cb00ca9cfca22d7238d1870",
+      "historical_candidate_sha256": "8736c6760e837e28380daa3da1bcbe024e53b1d95cb00ca9cfca22d7238d1870",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_personalitati_006-05d70b1015299ff5",
+          "rationale": "A1/A4/E2: Paris and Târgu Jiu provide a distinctive biographic/work-location intersection for Brâncuși. The museum's Paris career material and UNESCO's named ensemble corroborate the two sides.",
+          "sources": [
+            "https://boutique.centrepompidou.fr/fr/product/34202-brancusi-catalogue-de-exposition.html",
+            "https://whc.unesco.org/en/list/1473"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_personalitati_006-05d70b1015299ff5",
+          "rationale": "Paris and Târgu Jiu form a distinctive, widely taught Brâncuși biography-and-artwork connection.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_personalitati_006-05d70b1015299ff5",
+      "pair": [
+        "n_paris",
+        "n_targu_jiu"
+      ],
+      "published_board_entry_sha256": "45808a7ce6040f1da8a8b8c6d8e096a14a4df93a699e4a4e979f70b67510f290",
+      "result": "n_constantin_brancusi"
+    },
+    {
+      "board_id": "al_personalitati_006",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "ba46b0fe986376c53d7b635d41a137327575464021bd52d8f445e82dc37dd428",
+      "historical_candidate_sha256": "ba46b0fe986376c53d7b635d41a137327575464021bd52d8f445e82dc37dd428",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_personalitati_006-46ced8f4e0747830",
+          "rationale": "A1/A4/E2: sculpture plus Târgu Jiu points directly to Brâncuși's iconic monumental ensemble. This is a specific creator/place relation, not generic national co-occurrence.",
+          "sources": [
+            "https://whc.unesco.org/en/list/1473"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_personalitati_006-46ced8f4e0747830",
+          "rationale": "Sculpture and Târgu Jiu strongly identify Brâncuși’s renowned ensemble; this is a particularly intuitive missing opening.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_personalitati_006-46ced8f4e0747830",
+      "pair": [
+        "n_sculptura",
+        "n_targu_jiu"
+      ],
+      "published_board_entry_sha256": "45808a7ce6040f1da8a8b8c6d8e096a14a4df93a699e4a4e979f70b67510f290",
+      "result": "n_constantin_brancusi"
+    },
+    {
+      "board_id": "al_sport_083",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "fedd64160b21259f461448c698f991daa83bff8cfcce0de47a083818e32b45be",
+      "historical_candidate_sha256": "fedd64160b21259f461448c698f991daa83bff8cfcce0de47a083818e32b45be",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_sport_083-0579a2e817b3f1f4",
+          "rationale": "A1/A3/E2: Dinamo București and CFR Cluj are actual sports clubs, so Club sportiv is their honest shared class. No club/person or national-team type mixing is involved.",
+          "sources": [
+            "https://www.csdinamo.eu/",
+            "https://suporter.cfr1907.ro/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_sport_083-0579a2e817b3f1f4",
+          "rationale": "Both named football clubs are sports clubs; the same literal category should work for this previously omitted pair.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_sport_083-0579a2e817b3f1f4",
+      "pair": [
+        "n_v11spo_dinamo_bucuresti",
+        "n_v18spo_cfr_cluj"
+      ],
+      "published_board_entry_sha256": "06fc7df85d9d30418f7d73641a4c751b4cbad4c78c59efc724e1101a4818617f",
+      "result": "n_v2spo_club_sportiv"
+    },
+    {
+      "board_id": "al_sport_083",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "44c9583b2d9e452fa800dcfb530c04b743af80e95530ff214f28d581fb9bd593",
+      "historical_candidate_sha256": "44c9583b2d9e452fa800dcfb530c04b743af80e95530ff214f28d581fb9bd593",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_sport_083-36a787c3d5e29dae",
+          "rationale": "A1/A3/E2: Dinamo and Rapid are two established sports clubs; their common organizational class is an intuitive factual opening.",
+          "sources": [
+            "https://www.csdinamo.eu/",
+            "https://www.fcrapid.ro/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_sport_083-36a787c3d5e29dae",
+          "rationale": "Dinamo and Rapid are both sports clubs, so their shared category is a direct and consistent opening.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_sport_083-36a787c3d5e29dae",
+      "pair": [
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti"
+      ],
+      "published_board_entry_sha256": "06fc7df85d9d30418f7d73641a4c751b4cbad4c78c59efc724e1101a4818617f",
+      "result": "n_v2spo_club_sportiv"
+    },
+    {
+      "board_id": "al_sport_083",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "2f64eb7c9aa7b8296fefe6f0ff373732e0a5d4a61a0d27faf27e4fce3602a811",
+      "historical_candidate_sha256": "2f64eb7c9aa7b8296fefe6f0ff373732e0a5d4a61a0d27faf27e4fce3602a811",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_sport_083-bfb3e8b4f2e07b93",
+          "rationale": "A1/A3/E2: CFR Cluj and FCSB are actual football clubs within the broader sports-club class. Their official club pages support the classification.",
+          "sources": [
+            "https://suporter.cfr1907.ro/",
+            "https://www.fcsb.ro/ro/club/"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_sport_083-bfb3e8b4f2e07b93",
+          "rationale": "CFR Cluj and FCSB are sports clubs; this closes an especially visible inconsistency between equivalent starting-club pairs.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_sport_083-bfb3e8b4f2e07b93",
+      "pair": [
+        "n_v18spo_cfr_cluj",
+        "n_v18spo_fcsb"
+      ],
+      "published_board_entry_sha256": "06fc7df85d9d30418f7d73641a4c751b4cbad4c78c59efc724e1101a4818617f",
+      "result": "n_v2spo_club_sportiv"
+    },
+    {
+      "board_id": "al_stiinta_008",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "c79937af3ddb87ce0b356e86225cc13f08a2a6383bd3efe9040d3f492bfded19",
+      "historical_candidate_sha256": "c79937af3ddb87ce0b356e86225cc13f08a2a6383bd3efe9040d3f492bfded19",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_stiinta_008-6f1bf3883209b8dd",
+          "rationale": "A4/E3: Palade plus cell is a distinctive route to the ribosome, historically called Palade's granules. Nobel's original award account and Romanian school teaching independently corroborate the relationship; recognition rests on school terminology rather than the KG weight.",
+          "sources": [
+            "https://www.nobelprize.org/prizes/medicine/1974/press-release/1000/",
+            "https://lrmd.ro/wp-content/uploads/2023/09/Utilizarea-tehnologiilor-digitale-in-biologie_Suport-de-curs.pdf",
+            "https://www.digi24.ro/stiri/sci-tech/natura-si-mediu/digicult-george-emil-palade-savantul-roman-de-nobel-un-geniu-al-biologiei-celulare-145113"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_stiinta_008-6f1bf3883209b8dd",
+          "rationale": "Palade’s distinctive ribosome research plus a cell supplies the missing specific clue; the biological term is school-level despite its low KG salience.",
+          "sources": [
+            "https://www.nobelprize.org/prizes/medicine/1974/press-release/1000/"
+          ],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_stiinta_008-6f1bf3883209b8dd",
+      "pair": [
+        "n_george_palade",
+        "n_v2sti_celula"
+      ],
+      "published_board_entry_sha256": "24f10e5f5513752370dd06097f8151c26d074ee20d280f9881c7ad3461600585",
+      "result": "n_ribozom"
+    },
+    {
+      "board_id": "al_stiinta_008",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "663959932b6283a75259f01b11aaeb195f7d5bf7c07f6ae678570fede8ddfc19",
+      "historical_candidate_sha256": "663959932b6283a75259f01b11aaeb195f7d5bf7c07f6ae678570fede8ddfc19",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_stiinta_008-e33f480433dad310",
+          "rationale": "A1/A4/E2: cell biology plus the Nobel Prize is a recognizable Romanian science route to Palade, a founding figure honored for cell organization research. This is a documented award/field intersection, without claiming he was the sole international laureate.",
+          "sources": [
+            "https://www.nobelprize.org/prizes/medicine/1974/press-release/1000/",
+            "https://www.digi24.ro/stiri/sci-tech/natura-si-mediu/digicult-george-emil-palade-savantul-roman-de-nobel-un-geniu-al-biologiei-celulare-145113"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_stiinta_008-e33f480433dad310",
+          "rationale": "Cell biology and the Nobel distinction strongly evoke the prominent Romanian cell biologist Palade; this uses his documented specialty and award, not nationality alone.",
+          "sources": [
+            "https://www.nobelprize.org/prizes/medicine/1974/press-release/1000/"
+          ],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_stiinta_008-e33f480433dad310",
+      "pair": [
+        "n_biologie_celulara",
+        "n_premiul_nobel"
+      ],
+      "published_board_entry_sha256": "24f10e5f5513752370dd06097f8151c26d074ee20d280f9881c7ad3461600585",
+      "result": "n_george_palade"
+    },
+    {
+      "board_id": "al_stiinta_089",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "3f6894b550c72eaaf70866cf71fcd75d2883ddc9e247b4393d43aff04827f103",
+      "historical_candidate_sha256": "3f6894b550c72eaaf70866cf71fcd75d2883ddc9e247b4393d43aff04827f103",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_stiinta_089-84c874fc6c13d095",
+          "rationale": "A3/E2: science applied to an insect gives the familiar study-of-living-things field Biologie. Both inputs contribute a clear subject/domain idea without inventing a named scientist.",
+          "sources": [
+            "https://dexonline.ro/definitie/biologie",
+            "https://dexonline.ro/definitie/insect%C4%83"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_stiinta_089-84c874fc6c13d095",
+          "rationale": "Insects are living organisms and science points to their study; Biology is a direct and familiar disciplinary result.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_stiinta_089-84c874fc6c13d095",
+      "pair": [
+        "n_v2sti_stiinta",
+        "n_v4sti_insecta"
+      ],
+      "published_board_entry_sha256": "f609741a6a9150bcf58e9025bc1052b967fc73d4c716ffa9f3115b63c16dcb65",
+      "result": "n_v2sti_biologie"
+    },
+    {
+      "board_id": "al_viata_de_roman_096",
+      "changed_candidate_fields": [],
+      "current_candidate_sha256": "b88b37712b5dfa799bbcf5fac95f66d49aa50799ea2206c1e817729d1a9596c4",
+      "historical_candidate_sha256": "b88b37712b5dfa799bbcf5fac95f66d49aa50799ea2206c1e817729d1a9596c4",
+      "historical_judgments_only_not_current_approval": {
+        "factual": {
+          "id": "alrecipe-al_viata_de_roman_096-7189d7ebb5172e52",
+          "rationale": "A1/A3/E3: key plus the explicit childhood-era context can evoke the familiar key-worn-at-the-neck custom. First-person reminiscences support the association; the recipe must not claim that every Romanian child had this experience.",
+          "sources": [
+            "https://www.protv.ro/articol/2494-cristina-jurca-in-cautarea-amintirilor-din-prima-zi-de-scoala",
+            "https://ana-s-beautyblog.blogspot.com/2012/06/generatia-cu-cheia-la-gat-ro-only.html"
+          ],
+          "verdict": "accept"
+        },
+        "quality": {
+          "id": "alrecipe-al_viata_de_roman_096-7189d7ebb5172e52",
+          "rationale": "A key and the named 1990s childhood context evoke the recognizable key-worn-at-the-neck practice; it is a specific contextual form, not an arbitrary household object.",
+          "sources": [],
+          "verdict": "accept"
+        }
+      },
+      "id": "alrecipe-al_viata_de_roman_096-7189d7ebb5172e52",
+      "pair": [
+        "n_v4via_cheie",
+        "n_vdr_copilaria_anilor_90"
+      ],
+      "published_board_entry_sha256": "7e47eb8a0e11f498c2c1958c284e81a6b4c445ac1fe769dafd13108cc2d222b7",
+      "result": "n_vdr_cheia_de_la_gat"
+    }
+  ],
+  "kind": "v1-alchimie-extension-carry-forward-provenance-v1",
+  "metadata_changes": [
+    {
+      "board_id": "al_arta_cultura_016",
+      "nodes": [
+        {
+          "after": {
+            "aliases": [
+              "Ateneul",
+              "Ateneul din București",
+              "sala Ateneului Român",
+              "Ateneul Român București",
+              "Ateneului Român"
+            ],
+            "category": "arta_cultura",
+            "degree": 23,
+            "description": "Clădire de concerte din București, inaugurată în 1888 și sediu al Filarmonicii „George Enescu”. Găzduiește concerte ale Festivalului „George Enescu”.",
+            "difficulty_tier": "easy",
+            "facets": {},
+            "id": "n_ateneul_roman",
+            "label_ro": "Ateneul Român",
+            "node_type": "place",
+            "redistributable": false,
+            "salience": 0.6749,
+            "source": "",
+            "tags": []
+          },
+          "before": {
+            "aliases": [
+              "Ateneul",
+              "Ateneul din București",
+              "sala Ateneului Român",
+              "Ateneul Român București",
+              "Ateneului Român"
+            ],
+            "category": "arta_cultura",
+            "degree": 23,
+            "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu.",
+            "difficulty_tier": "easy",
+            "facets": {},
+            "id": "n_ateneul_roman",
+            "label_ro": "Ateneul Român",
+            "node_type": "place",
+            "redistributable": false,
+            "salience": 0.6749,
+            "source": "",
+            "tags": []
+          },
+          "fields": [
+            "description"
+          ],
+          "id": "n_ateneul_roman"
+        }
+      ]
+    },
+    {
+      "board_id": "al_film_tv_020",
+      "nodes": [
+        {
+          "after": {
+            "aliases": [
+              "filmul Operațiunea Monstrul",
+              "Operațiunea Monstrul filmul",
+              "Operațiunea Monstrul 1976"
+            ],
+            "category": "film_tv",
+            "degree": 7,
+            "description": "Comedie românească din 1976 cu Toma Caragiu, Octavian Cotescu și Marin Moraru.",
+            "difficulty_tier": "medium",
+            "facets": {},
+            "id": "n_ftv_operatiunea_monstrul",
+            "label_ro": "Operațiunea Monstrul",
+            "node_type": "work",
+            "redistributable": false,
+            "salience": 0.4983,
+            "source": "",
+            "tags": []
+          },
+          "before": {
+            "aliases": [
+              "filmul Operațiunea Monstrul",
+              "Operațiunea Monstrul filmul",
+              "Operațiunea Monstrul 1976"
+            ],
+            "category": "film_tv",
+            "degree": 8,
+            "description": "Comedie românească din 1976 cu Toma Caragiu, Octavian Cotescu și Marin Moraru.",
+            "difficulty_tier": "medium",
+            "facets": {},
+            "id": "n_ftv_operatiunea_monstrul",
+            "label_ro": "Operațiunea Monstrul",
+            "node_type": "work",
+            "redistributable": false,
+            "salience": 0.4983,
+            "source": "",
+            "tags": []
+          },
+          "fields": [
+            "degree"
+          ],
+          "id": "n_ftv_operatiunea_monstrul"
+        }
+      ]
+    },
+    {
+      "board_id": "al_sport_083",
+      "edges": [
+        {
+          "after": {
+            "bidirectional": true,
+            "dst_id": "n_spt_handbal_feminin",
+            "facets": {},
+            "id": "de1218",
+            "is_distractor": false,
+            "label_ro": "a jucat",
+            "redistributable": false,
+            "relation": "is_a",
+            "source": "",
+            "src_id": "n_spt_cristina_neagu",
+            "strength": 0.94,
+            "tags": []
+          },
+          "before": {
+            "bidirectional": true,
+            "dst_id": "n_spt_handbal_feminin",
+            "facets": {},
+            "id": "de1218",
+            "is_distractor": false,
+            "label_ro": "joacă",
+            "redistributable": false,
+            "relation": "is_a",
+            "source": "",
+            "src_id": "n_spt_cristina_neagu",
+            "strength": 0.94,
+            "tags": []
+          },
+          "fields": [
+            "label_ro"
+          ],
+          "id": "de1218"
+        }
+      ]
+    }
+  ],
+  "status": "author_evidence_not_independent_approval",
+  "summary": {
+    "affected_boards": 27,
+    "candidate_triples": 49,
+    "core_topology_identity_drift": [],
+    "eligible_cores": 68,
+    "excluded_historical_additions": 1
+  }
+}

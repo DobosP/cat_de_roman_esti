@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 from tests.content_history import (
+    before_v1_artifact,
     before_v88_fixture,
     before_v89_pack,
     before_v89_rankings,
@@ -206,7 +207,14 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
     }
     assert len(v89_targets) == 236
     assert historical_targets < v89_targets and v89_targets - historical_targets == {mop}
-    assert v89_targets <= targets
+    before_v1_rankings = before_v1_artifact(rankings, "board_rankings_v37.json")
+    before_v1_targets = {
+        target_by_id[row["id"]] for row in before_v1_rankings["boards"]
+        if row["game"] == "contexto" and row["pilot_eligible"]
+    }
+    assert v89_targets <= before_v1_targets
+    reserved = {"ct_geografie_030", "ct_geografie_031", "ct_istorie_309", "ct_muzica_070"}
+    assert targets == before_v1_targets - {target_by_id[item_id] for item_id in reserved}
     svc = get_service()
     live_fixture = _json(_PACKAGE_KG)
     fixture = before_v90_fixture(live_fixture)

@@ -11,7 +11,7 @@ from pathlib import Path
 from cat_de_roman_esti.data import load_fixture
 from cat_de_roman_esti.wordgames.packs import validate_payload
 from cat_de_roman_esti.wordgames.service import WordGameService
-from tests.content_history import before_v84_pack
+from tests.content_history import before_v1_artifact, before_v84_pack
 from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -39,6 +39,7 @@ _KEPT = {
     "lt_stiinta_216",
     "lt_viata_de_roman_211",
 }
+_V1_PROMOTED = {"lt_viata_de_roman_211"}
 
 
 def _json(path: Path) -> dict:
@@ -105,7 +106,7 @@ def test_v45_deterministic_gate_exposes_the_91_runtime_failures() -> None:
     assert not (failed_records & _KEPT)
 
 
-def test_v45_pack_keeps_only_the_three_unanimous_repair_holds() -> None:
+def test_v45_holds_remain_archived_and_only_reviewed_v1_board_is_promoted() -> None:
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
     pack = _json(_PACKAGE_PACK)
     verdicts = _json(_VERDICTS)["verdicts"]
@@ -121,10 +122,32 @@ def test_v45_pack_keeps_only_the_three_unanimous_repair_holds() -> None:
     assert pack["meta"]["id_high_water"]["lant"] == CURRENT_CONTENT.pack_id_high_water["lant"]
     assert Counter(record["status"] for record in lant.values()) == {
         "approved": CURRENT_CONTENT.game_inventory["lant"][1],
-        "pending": 3,
+        "pending": 2,
     }
     assert statuses == CURRENT_CONTENT.status_counts
-    assert {item_id for item_id, record in lant.items() if record["status"] == "pending"} == _KEPT
+    assert {
+        item_id for item_id, record in lant.items() if record["status"] == "pending"
+    } == _KEPT - _V1_PROMOTED
+    historical_lant = {
+        record["id"]: record
+        for record in before_v1_artifact(pack, "games_pack.json")["lant"]
+    }
+    assert {
+        item_id for item_id, record in historical_lant.items()
+        if record["status"] == "pending"
+    } == _KEPT
+    assert {
+        item_id for item_id in _KEPT if lant[item_id]["status"] == "approved"
+    } == _V1_PROMOTED
+    for item_id in _KEPT:
+        assert lant[item_id] == {
+            **historical_lant[item_id],
+            "status": "approved" if item_id in _V1_PROMOTED else "pending",
+        }
+    v1_verdicts = _json(_ROOT / (
+        "docs/reviews/v1-testing-release/content/reconsideration/verdicts/lant_verdicts.json"
+    ))
+    assert v1_verdicts["verdicts"] == {"lt_viata_de_roman_211": "promote"}
     assert not {
         item_id for item_id, verdict in verdicts.items() if verdict == "reject"
     } & set(lant)
@@ -138,7 +161,14 @@ def test_v45_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     rankings = _json(_PACKAGE_RANKINGS)
     assert rankings['meta']['counts'] == CURRENT_CONTENT.ranking_counts
     ranked = {row["id"]: row for row in rankings["boards"]}
-    assert all(ranked[item_id]["pilot_eligible"] is False for item_id in _KEPT)
+    assert {
+        item_id for item_id in _KEPT if ranked[item_id]["pilot_eligible"]
+    } == _V1_PROMOTED
+    historical_ranked = {
+        row["id"]: row
+        for row in before_v1_artifact(rankings, "board_rankings_v37.json")["boards"]
+    }
+    assert all(historical_ranked[item_id]["pilot_eligible"] is False for item_id in _KEPT)
 
     assert _PACKAGE_DERIVED.read_bytes() == _TEST_DERIVED.read_bytes()
     derived = _json(_PACKAGE_DERIVED)

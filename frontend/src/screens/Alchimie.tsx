@@ -1020,7 +1020,7 @@ function AlchimieChallenge({
 
         </div>
 
-        {!won && <StartFailureNotice failed={startFailed} />}
+        <GameHelp game={GAME_KEY} />
         <details className="alchemy-menu" open={menuOpen} onToggle={(event) => setMenuOpen(event.currentTarget.open)}>
           <summary>Opțiuni de joc</summary>
           <div className="alchemy-menu-content">
@@ -1087,8 +1087,6 @@ function AlchimieChallenge({
               </details>
             )}
 
-            <GameHelp game={GAME_KEY} />
-
             {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
             {!won && (
               <>
@@ -1129,6 +1127,7 @@ function AlchimieChallenge({
 
           </div>
         </details>
+        {!won && <StartFailureNotice failed={startFailed} />}
 
         {/* Win banner */}
         <AnimatePresence>

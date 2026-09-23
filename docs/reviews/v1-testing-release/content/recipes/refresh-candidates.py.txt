@@ -1,0 +1,262 @@
+"""Author existing approved recipe identities against an explicitly frozen V1 input.
+
+This creates candidate/provenance documents only. It never creates a review or writes
+live fixtures. Run with the repo's constrained interpreter, --repo and all three
+current byte SHA-256 values. Independent reviews and the existing catalog builder
+remain mandatory after this authoring step.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--repo', type=Path, required=True)
+for name in ('pack', 'kg', 'rankings'):
+    parser.add_argument('--' + name + '-sha', required=True)
+args = parser.parse_args()
+ROOT = args.repo.resolve()
+sys.path.insert(0, str(ROOT))
+from scripts import build_alchimie_recipe_extensions as B
+from cat_de_roman_esti.wordgames import recipe_extensions as R
+from cat_de_roman_esti.wordgames import alchimie as A
+from cat_de_roman_esti.wordgames.packs import get_pack
+from cat_de_roman_esti.wordgames.service import get_service
+
+OUT = ROOT / 'docs/reviews/v1-testing-release/content/recipes'
+OLD = ROOT / 'docs/reviews/v92-alchimie-recipe-freedom'
+
+
+def require(test, message):
+    if not test:
+        raise ValueError(message)
+
+
+def read(path):
+    return json.loads(path.read_bytes())
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def binding(path):
+    return {'path': path.relative_to(ROOT).as_posix(), 'sha256': sha(path)}
+
+
+def labels(nid):
+    node = service.node(nid)
+    return {'id': nid, 'label': node.label_ro, 'category': node.category}
+
+
+def edges_for(pair, result):
+    answer = []
+    for parent in pair:
+        edge = service.link(parent, result)
+        require(edge is not None, f'missing current edge: {parent} -> {result}')
+        raw = raw_edges[edge.id]
+        answer.append({'parent': labels(parent), 'result': labels(result),
+                       'runtime_edge': R.record_snapshot(edge), 'fixture_edge': raw,
+                       'fixture_edge_sha256': R.digest(raw)})
+    return answer
+
+
+source_paths = {
+    'pack': ROOT / 'cat_de_roman_esti/fixtures/games_pack.json',
+    'kg': ROOT / 'cat_de_roman_esti/fixtures/kg_sample.json',
+    'rankings': ROOT / 'cat_de_roman_esti/fixtures/board_rankings_v37.json',
+    'rubric': ROOT / 'docs/CRITIQUE_RUBRIC.md',
+    'core_runtime': ROOT / 'cat_de_roman_esti/wordgames/alchimie.py',
+    'packs_runtime': ROOT / 'cat_de_roman_esti/wordgames/packs.py',
+    'service_runtime': ROOT / 'cat_de_roman_esti/wordgames/service.py',
+    'graph_runtime': ROOT / 'cat_de_roman_esti/graph.py',
+    'extensions_runtime': ROOT / 'cat_de_roman_esti/wordgames/recipe_extensions.py',
+    'catalog_builder': ROOT / 'scripts/build_alchimie_recipe_extensions.py',
+    'release_reserve': ROOT / 'cat_de_roman_esti/fixtures/release_reserve_v1.json',
+}
+for name in ('pack', 'kg', 'rankings'):
+    require(sha(source_paths[name]) == getattr(args, name + '_sha'), f'unfrozen {name}')
+initial_bindings = {name: binding(path) for name, path in source_paths.items()}
+historical_paths = {
+    'candidates': OLD / 'candidates.json',
+    'factual_review': OLD / 'reviews/factual-review.json',
+    'quality_review': OLD / 'reviews/quality-review.json',
+    'published_catalog': ROOT / 'cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json',
+}
+historical = {name: binding(path) for name, path in historical_paths.items()}
+require(historical['candidates']['sha256'] ==
+        'b2197f1350be7238988cc97bc3bf104b7d39ba2ffe17b43fdfbc04c05f65d795',
+        'historical candidate bytes changed')
+require(historical['published_catalog']['sha256'] ==
+        'ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301',
+        'published historical catalog changed before authoring')
+old = read(historical_paths['candidates'])
+catalog = read(historical_paths['published_catalog'])
+R.validate_catalog(catalog)
+require(catalog['candidate_sha256'] == historical['candidates']['sha256'],
+        'historical catalog candidate binding')
+old_candidates = {c['id']: c for c in old['candidates']}
+old_boards = {b['id']: b for b in old['boards']}
+judgments = {}
+for role in ('factual', 'quality'):
+    review = B.read_review(historical_paths[role + '_review'], role,
+                          historical['candidates']['sha256'], set(old_candidates))
+    expected = next(r for r in catalog['semantic_reviews'] if r['role'] == role)
+    require(review['_source_sha256'] == expected['sha256']
+            and review['reviewer'] == expected['reviewer'], 'historical review mismatch')
+    judgments[role] = {r['id']: r for r in review['items']}
+
+service = get_service()
+pack = get_pack()
+require(pack.ranked, 'ranked bundled source is required')
+eligible = {p.id: p for p in pack.pool('alchimie') if p._pilot_eligible}
+require(len(eligible) == 68, 'expected complete V1 set of 68 eligible Alchimie cores')
+raw_kg = read(source_paths['kg'])
+raw_edges = {e['id']: e for e in raw_kg['kg_edges']}
+raw_pack = read(source_paths['pack'])
+raw_records = {r['id']: r for r in raw_pack['alchimie']}
+boards, current_cores = [], {}
+for bid, item in sorted(eligible.items()):
+    seeds, target = item.payload['seeds'], item.payload['target']
+    projection = A._build_recipe_projection(seeds, target, item.category)
+    require(projection is not None, f'{bid}: current core unavailable')
+    labelled = B._labelled_core(service, projection, seeds, target)
+    require(old_boards[bid]['before_core'] == labelled,
+            f'{bid}: core topology or identity drift needs separate authoring')
+    core = R.core_record(seeds, target, item.category, projection.recipes,
+                         projection.routes, projection.par)
+    nodes = {n['id']: R.record_snapshot(service.node(n['id']))
+             for n in labelled['concepts']}
+    edges = {}
+    for pair, outputs in projection.recipes.items():
+        for result in outputs:
+            for edge in edges_for(pair, result):
+                snap = edge['runtime_edge']
+                edges[snap['id']] = snap
+    board = {
+        'id': bid, 'category': item.category, 'difficulty': item.difficulty,
+        'target': labels(target), 'par': projection.par,
+        'seeds': [labels(n) for n in seeds],
+        'source_record': raw_records[bid],
+        'source_record_sha256': R.digest(raw_records[bid]),
+        'before_core': labelled, 'before_core_sha256': R.digest(labelled),
+        'runtime_nodes': nodes, 'runtime_core_edges': edges,
+    }
+    boards.append(board)
+    current_cores[bid] = (board, core, projection)
+
+candidates, provenance, excluded, metadata_changes = [], [], [], []
+for old_board in catalog['boards']:
+    bid = old_board['id']
+    for addition in old_board['additions']:
+        cid = addition['candidate_id']
+        original = old_candidates[cid]
+        require(all(judgments[role][cid]['verdict'] == 'accept'
+                    for role in ('factual', 'quality')), f'{cid}: not historically accepted')
+        require(original['candidate_sha256'] == addition['candidate_sha256']
+                and R.digest({k: v for k, v in original.items()
+                              if k != 'candidate_sha256'}) == original['candidate_sha256'],
+                f'{cid}: historical candidate altered')
+        identity = {'board_id': bid, 'pair': addition['pair'], 'result': addition['result']}
+        require(cid == f'alrecipe-{bid}-{R.digest(identity)[:16]}'
+                and [n['id'] for n in original['pair']] == addition['pair']
+                and original['result']['id'] == addition['result'], f'{cid}: identity changed')
+        if bid not in eligible:
+            excluded.append({'id': cid, **identity, 'reason': 'board reserved from V1 selection'})
+            continue
+        board, core, projection = current_cores[bid]
+        require(old_board['core'] == core, f'{bid}: shipped core topology drift')
+        pair, result = addition['pair'], addition['result']
+        require(tuple(pair) not in projection.recipes, f'{cid}: no longer absent')
+        require(result in service.common_neighbors(*pair, category=core['category']),
+                f'{cid}: no longer a current scoped neighbor')
+        current = copy.deepcopy(original)
+        current.update({
+            'status': 'unreviewed_candidate',
+            'target': board['target'], 'par': board['par'], 'seeds': board['seeds'],
+            'pair': [labels(n) for n in pair], 'result': labels(result),
+            'edges': edges_for(pair, result),
+            'before_core_sha256': board['before_core_sha256'],
+            'alternative_candidate_ids_for_same_pair': [],
+        })
+        require([e['runtime_edge']['id'] for e in current['edges']] == addition['edge_ids'],
+                f'{cid}: selected edge identity drift')
+        current['minimum_edge_strength'] = min(e['runtime_edge']['strength']
+                                               for e in current['edges'])
+        current['candidate_sha256'] = R.digest({k: v for k, v in current.items()
+                                               if k != 'candidate_sha256'})
+        candidates.append(current)
+        provenance.append({
+            'id': cid, **identity, 'historical_candidate_sha256': original['candidate_sha256'],
+            'current_candidate_sha256': current['candidate_sha256'],
+            'published_board_entry_sha256': old_board['entry_sha256'],
+            'changed_candidate_fields': [k for k in sorted(current)
+                                         if original.get(k) != current[k]],
+            'historical_judgments_only_not_current_approval': {
+                role: judgments[role][cid] for role in ('factual', 'quality')},
+        })
+    if bid in eligible:
+        board, _, _ = current_cores[bid]
+        current_edges = dict(board['runtime_core_edges'])
+        for candidate in candidates:
+            if candidate['board_id'] == bid:
+                current_edges.update({e['runtime_edge']['id']: e['runtime_edge']
+                                      for e in candidate['edges']})
+        changes = {}
+        for kind, original, fresh in (
+            ('nodes', old_board['nodes'], board['runtime_nodes']),
+            ('edges', old_board['edges'], current_edges),
+        ):
+            require(set(original) == set(fresh), f'{bid}: {kind} identity drift')
+            for key in sorted(original):
+                if original[key] != fresh[key]:
+                    changes.setdefault(kind, []).append({
+                        'id': key, 'before': original[key], 'after': fresh[key],
+                        'fields': [f for f in sorted(fresh[key])
+                                   if original[key].get(f) != fresh[key][f]],
+                    })
+        if changes:
+            metadata_changes.append({'board_id': bid, **changes})
+
+candidates.sort(key=lambda c: c['id'])
+require(len(candidates) == 49 and len(excluded) == 1
+        and excluded[0]['board_id'] == 'al_istorie_034', 'unexpected carry-forward scope')
+require(len({c['id'] for c in candidates}) == len(candidates), 'duplicate candidate')
+require({name: binding(path) for name, path in source_paths.items()} == initial_bindings,
+        'source changed during candidate authoring')
+artifact = {
+    'schema': 'alchimie-bounded-completion-candidates-v1',
+    'status': 'awaiting_independent_current_reviews_not_content_approval',
+    'author': '/root/v1_board_audit', 'baseline_commit': 'cc0a6a4',
+    'bindings': initial_bindings,
+    'generator': {'path': 'docs/reviews/v1-testing-release/content/recipes/refresh-candidates.py.txt',
+                  'sha256': sha(Path(__file__))},
+    'rules': {**old['rules'], 'carry_forward': 'Only exact identities in the previously published '
+              'catalog and its two accepted historical judgments; no new or previously rejected '
+              'triples. Historical verdicts confer no current approval.'},
+    'summary': {'eligible_cores': len(boards), 'candidate_triples': len(candidates),
+                'affected_boards': len({c['board_id'] for c in candidates}),
+                'excluded_historical_additions': len(excluded),
+                'core_topology_identity_drift': []},
+    'boards': boards, 'candidates': candidates,
+}
+blob = B.catalog_bytes(artifact)
+proof = {
+    'kind': 'v1-alchimie-extension-carry-forward-provenance-v1',
+    'status': 'author_evidence_not_independent_approval', 'author': '/root/v1_board_audit',
+    'candidate_sha256': hashlib.sha256(blob).hexdigest(),
+    'historical_inputs': historical, 'current_bindings': initial_bindings,
+    'summary': artifact['summary'], 'excluded': excluded,
+    'metadata_changes': metadata_changes, 'items': sorted(provenance, key=lambda r: r['id']),
+}
+OUT.mkdir(parents=True, exist_ok=True)
+B.atomic_write(OUT / 'candidates.json', blob)
+B.atomic_write(OUT / 'carry-forward-provenance.json', B.catalog_bytes(proof))
+print(json.dumps({'candidate_sha256': proof['candidate_sha256'],
+                  'provenance_sha256': sha(OUT / 'carry-forward-provenance.json'),
+                  'summary': artifact['summary'],
+                  'changed_boards': [r['board_id'] for r in metadata_changes]}, indent=2))

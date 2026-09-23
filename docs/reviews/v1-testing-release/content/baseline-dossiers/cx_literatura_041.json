@@ -1,0 +1,274 @@
+{
+  "id": "cx_literatura_041",
+  "game": "conexiuni",
+  "category": "literatura",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "d06a4c1a98442e817d47c97d13c70de51ad5efe8c00bcf82aaf95f03dc30d861",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "type_coherence",
+      "level": "WARN",
+      "detail": "group \"Motoare ale vieții literare\" mixes node_types 3+1: Junimea[org], Sburătorul[org], Convorbiri literare[work], ASTRA[org]"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Poeți de secol XX\" reuses an inventory/selected quad (also in: cx_literatura_193)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Prozatori realiști\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_040)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Motoare ale vieții literare\" reuses an inventory/selected quad (also in: cx_literatura_040)"
+    },
+    {
+      "check": "duplicate_groups",
+      "level": "WARN",
+      "detail": "group \"Curente de manual\" reuses an inventory/selected quad (also in: cx_literatura_039, cx_literatura_127)"
+    },
+    {
+      "check": "board_reskin",
+      "level": "WARN",
+      "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_literatura_127 (8), cx_literatura_194 (8)"
+    }
+  ],
+  "fairness": {
+    "unfair_tiles": [],
+    "contested_tiles": [],
+    "engine_unfair_raw": 10
+  },
+  "groups": [
+    {
+      "label": "Poeți de secol XX",
+      "members": [
+        {
+          "id": "n_tudor_arghezi",
+          "label": "Tudor Arghezi",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.3154,
+          "degree": 7,
+          "incoming_degree": 6,
+          "description": "Poet roman, innoitor al limbajului poetic."
+        },
+        {
+          "id": "n_george_bacovia",
+          "label": "George Bacovia",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.2573,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Poet roman, principal reprezentant al simbolismului."
+        },
+        {
+          "id": "n_lucian_blaga",
+          "label": "Lucian Blaga",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.4473,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Poet si filosof roman, reprezentant al modernismului interbelic."
+        },
+        {
+          "id": "n_ion_barbu",
+          "label": "Ion Barbu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.2608,
+          "degree": 6,
+          "incoming_degree": 5,
+          "description": "Poet modernist si matematician (1895-1961), autor al volumului Joc secund."
+        }
+      ]
+    },
+    {
+      "label": "Prozatori realiști",
+      "members": [
+        {
+          "id": "n_ioan_slavici",
+          "label": "Ioan Slavici",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.2244,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Prozator roman ardelean, autor al nuvelei Moara cu noroc."
+        },
+        {
+          "id": "n_liviu_rebreanu",
+          "label": "Liviu Rebreanu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.3766,
+          "degree": 11,
+          "incoming_degree": 11,
+          "description": "Romancier roman, intemeietor al romanului realist obiectiv."
+        },
+        {
+          "id": "n_marin_preda",
+          "label": "Marin Preda",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.2502,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Romancier roman din perioada postbelica."
+        },
+        {
+          "id": "n_george_calinescu",
+          "label": "George Călinescu",
+          "node_type": "person",
+          "category": "literatura",
+          "salience": 0.1971,
+          "degree": 4,
+          "incoming_degree": 4,
+          "description": "Critic si istoric literar roman (1899-1965), autor al Istoriei literaturii romane de la origini pana in prezent."
+        }
+      ]
+    },
+    {
+      "label": "Motoare ale vieții literare",
+      "members": [
+        {
+          "id": "n_junimea",
+          "label": "Junimea",
+          "node_type": "org",
+          "category": "literatura",
+          "salience": 0.5031,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Societate literara de la Iasi."
+        },
+        {
+          "id": "n_sburatorul",
+          "label": "Sburătorul",
+          "node_type": "org",
+          "category": "literatura",
+          "salience": 0.2537,
+          "degree": 8,
+          "incoming_degree": 8,
+          "description": "Cenaclu si revista literara conduse de Eugen Lovinescu."
+        },
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare",
+          "node_type": "work",
+          "category": "literatura",
+          "salience": 0.2907,
+          "degree": 12,
+          "incoming_degree": 12,
+          "description": "Revista a societatii Junimea."
+        },
+        {
+          "id": "n_astra",
+          "label": "ASTRA",
+          "node_type": "org",
+          "category": "societate",
+          "salience": 0.1834,
+          "degree": 6,
+          "incoming_degree": 7,
+          "description": "Asociatiunea Transilvana pentru Literatura Romana si Cultura Poporului Roman, infiintata in 1861 la Sibiu."
+        }
+      ]
+    },
+    {
+      "label": "Curente de manual",
+      "members": [
+        {
+          "id": "n_romantism",
+          "label": "Romantism",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.3622,
+          "degree": 13,
+          "incoming_degree": 13,
+          "description": "Curent literar din secolul al XIX-lea."
+        },
+        {
+          "id": "n_realism",
+          "label": "Realism",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.5798,
+          "degree": 19,
+          "incoming_degree": 19,
+          "description": "Curent literar centrat pe reprezentarea obiectiva a realitatii."
+        },
+        {
+          "id": "n_simbolism",
+          "label": "Simbolism",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.2745,
+          "degree": 7,
+          "incoming_degree": 7,
+          "description": "Curent literar de la cumpana secolelor XIX-XX."
+        },
+        {
+          "id": "n_modernism",
+          "label": "Modernism",
+          "node_type": "concept",
+          "category": "literatura",
+          "salience": 0.4869,
+          "degree": 25,
+          "incoming_degree": 24,
+          "description": "Curent literar interbelic de innoire a expresiei."
+        }
+      ]
+    }
+  ],
+  "cross_group_strong_edges": [
+    {
+      "a": "George Bacovia",
+      "a_group": "Poeți de secol XX",
+      "b": "Simbolism",
+      "b_group": "Curente de manual",
+      "strength": 0.86
+    },
+    {
+      "a": "Ioan Slavici",
+      "a_group": "Prozatori realiști",
+      "b": "Realism",
+      "b_group": "Curente de manual",
+      "strength": 0.8
+    },
+    {
+      "a": "Liviu Rebreanu",
+      "a_group": "Prozatori realiști",
+      "b": "Realism",
+      "b_group": "Curente de manual",
+      "strength": 0.8
+    },
+    {
+      "a": "Ion Barbu",
+      "a_group": "Poeți de secol XX",
+      "b": "Modernism",
+      "b_group": "Curente de manual",
+      "strength": 0.78
+    },
+    {
+      "a": "Lucian Blaga",
+      "a_group": "Poeți de secol XX",
+      "b": "Modernism",
+      "b_group": "Curente de manual",
+      "strength": 0.78
+    },
+    {
+      "a": "Modernism",
+      "a_group": "Curente de manual",
+      "b": "Tudor Arghezi",
+      "b_group": "Poeți de secol XX",
+      "strength": 0.6
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:e21b5efb128be90281f90207fc756c689b8996d93bf083afd7c02dedf2717b00"
+}

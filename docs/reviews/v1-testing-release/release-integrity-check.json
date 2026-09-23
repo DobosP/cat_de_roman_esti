@@ -1,0 +1,50 @@
+{
+  "kind": "v1-final-release-integrity-check-v1",
+  "valid_until": "Any change to the verified source or evidence; then treat as history.",
+  "checked_at_utc": "2026-09-23T12:15:50.190341+00:00",
+  "verification_sha256": "ce3d0461d5a74e1161923e28c9fa5d488b15ba433e305655d73adf6b41b730bd",
+  "author": "/root",
+  "independent_reviewer": "/root/v1_held_audit",
+  "independent_method": "Read-only exact digest checks and fresh parsing of archived logs/JUnit; no tests rerun and no edits by reviewer.",
+  "result": "no_blockers_ready_for_local_merge",
+  "final_source_inputs_exact": 539,
+  "archived_evidence_files_exact": 60,
+  "staged_review_files_byte_exact_before_this_record": 209,
+  "backend": {
+    "passed": 2446,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "accounts_passed": 53,
+  "frontend_passed": 224,
+  "browser": {
+    "full_matrix": {
+      "passed": 583,
+      "failed": 3,
+      "distinct": 586
+    },
+    "final_serial_scope": {
+      "passed": 142,
+      "failed": 0
+    },
+    "all_full_matrix_failures_closed": true,
+    "distinct_union_verified": 588,
+    "coverage": "Composed runs, not one all-green 588-case invocation.",
+    "retries": 0,
+    "timeouts_unchanged": true
+  },
+  "review_closures": {
+    "recovery_harness_source_review_sha256": "64e5c06e697a98156b5c1c579f5f315d18cfa81e53fb92ef2d489d56fd65fe8e",
+    "runtime_pending_checks_closed_by_final_serial_scope": true,
+    "original_review_bytes_preserved": true,
+    "historical_author_packets_and_source_snapshots_preserved": true,
+    "gzip_restores_original_logs": true,
+    "trace_hashes_verified": true
+  },
+  "publication": {
+    "push": false,
+    "deployment": false,
+    "accounts_activation": false
+  }
+}

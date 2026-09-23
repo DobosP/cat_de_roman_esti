@@ -1,0 +1,8 @@
+import { defineConfig } from 'C:/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v1-testing-release/frontend/node_modules/@playwright/test/index.mjs';
+import original from 'C:/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v1-testing-release/frontend/playwright.config.mjs';
+export default defineConfig({ ...original,
+ testDir: 'C:/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v1-testing-release/frontend/e2e',
+ outputDir: 'C:/Users/Paul Work/work/_temp/v1-testing-release/browser-results',
+ projects: original.projects.map(p => ({...p, use: {...p.use, channel: 'msedge'}})),
+ webServer: {...original.webServer, command: '"C:/Users/Paul Work/work/_temp/v1-testing-release/venv/Scripts/python.exe" -m cat_de_roman_esti.web --host 127.0.0.1 --port ' + (process.env.CDR_E2E_PORT || 8138) + ' --log-level warning'}
+});

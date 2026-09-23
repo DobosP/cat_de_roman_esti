@@ -1,0 +1,56 @@
+{
+  "kind": "v1-selection-reserve-independent-implementation-review-v1",
+  "reviewer": "/root/v1_held_audit",
+  "checked_on": "2026-09-23",
+  "verdict": "accept_with_explicit_bundled_release_scope",
+  "scope_decision": "Root explicitly retained deliberate unranked/custom-pack compatibility and will state bundled release selection scope in ADR/docs. No new runtime custom-pack restriction is authorized.",
+  "bindings": {
+    "cat_de_roman_esti/wordgames/release_reserve.py": "2b8ea60ec60a4c4590a1a1931954a08d7adb6f2769092876e6b8d7dca66a9f03",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "0a0d9783c23e47323ac402c0e0cd2794ccac65b907cd05693587dd7e92c300fb",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "scripts/build_release_reserve_v1.py": "1103cc1fa935d2966f5217bd91f703fbbe40f43d23ac70f6967d393fffd1b9e3",
+    "scripts/rank_games_pack.py": "7dcb071b8d1624bfd8bfe0d4f6bfa2f30ea44062fe900744a8e8957ef37e02b5",
+    "tests/test_v1_release_reserve.py": "1e0e5b7be83f647c32c9f695c4f89a70dbccbde9601100bf796d13616e46d31b",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "tests/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "pyproject.toml": "004b8b9f35b387cf82638575f0436e6134aa97348dab77bc8dbcc706dff655ed"
+  },
+  "checks": [
+    {
+      "area": "Independent finite provenance",
+      "result": "accept",
+      "detail": "Builder pins both candidate packet SHA256s and distinct quality reviewer SHA256; requires exact23unique IDs, accept+reserve_from_new_selection per item, matching game/rawrecord digest, current single exact record and approved status for20pack rows. Runtime64KiB-bounded manifest has its own pin and validates20pack/3quick schema; packaged runtime does not need review docs."
+    },
+    {
+      "area": "Pack inventory and default selection",
+      "result": "accept for bundled pack/graph with freshly generated ranking sidecar",
+      "detail": "Owner reserve follows existing demotion sidecar model. Every reserved raw approved record is checked at ranking generation; pilot_eligible false excludes seeded/daily/history paths while pool/counts retain archival approved inventory. Independent fresh-ranking test passed all20records and shelf/history permutations."
+    },
+    {
+      "area": "Quick selection identity",
+      "result": "accept",
+      "detail": "All3 exact quick definitions filter centrally in pool before starter/free/daily/empty-history fallbacks. Gameplay digest includes ID,game,source,category,difficulty,payload and excludes scoring estimates, so ranking changes cannot revive the same board. Different payload sharing only ID remains selectable. Negative control vi_71e487036cbba4014f67 remains available."
+    },
+    {
+      "area": "Inventory reporting",
+      "result": "accept",
+      "detail": "DerivedCatalog.counts now explicitly counts stored boards (228Intrusul/193Perechi); selectable pool has226/192 after exact exclusions. Preferred score55+ shelf188/153. Parent release reports must label stored and selectable separately."
+    },
+    {
+      "area": "Override boundary",
+      "result": "known accepted limitation",
+      "detail": "An unchanged copy of games_pack at a custom path loads unranked; exact reserved al_gastronomie_024 was selected in gastronomie/usor at seed1. CAT_KG_FIXTURE override also follows documented neutral selector behavior. Therefore these20pack reserves protect the bundled release configuration, not every operator-supplied pack/graph. This is not reachable via ordinary player query parameters and is not an authorization boundary."
+    },
+    {
+      "area": "Package and reload",
+      "result": "configuration inspection accepted; final wheel smoke remains release check",
+      "detail": "Setuptools package discovery includes release_reserve.py and fixtures/*.json includes manifest. Runtime source imports no scripts/review docs. get_reserve caches one immutable ReleaseReserve; get_pack/get_derived_catalog also cache process state. Deploy as one release and restart processes; clearing only catalog cache is not an atomic hot reload. No new unbounded cache/session state."
+    }
+  ],
+  "independent_tests": {
+    "tests/test_v1_release_reserve.py -k not_fresh_rankings": "22 passed",
+    "tests/test_v1_release_reserve.py -k fresh_rankings": "1 passed",
+    "scratch_override_probe": "Read-only source plus one scratch pack copy; no fixture writes"
+  },
+  "limits": "Review binds the listed bytes, not future edits. Bundled rankings still require final regeneration after one-board promotion. Existing session restoration/history behavior and final wheel/browser/end-to-end release verification belong to root integration."
+}

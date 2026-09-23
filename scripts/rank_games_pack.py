@@ -33,6 +33,7 @@ from cat_de_roman_esti.wordgames.packs import (  # noqa: E402
     STATUSES,
     validate_payload,
 )
+from cat_de_roman_esti.wordgames.release_reserve import validate_pack_reserve  # noqa: E402
 from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 from scripts import critique_pack  # noqa: E402
 
@@ -356,10 +357,12 @@ _CONTEXTO_DEMOTIONS_PATH = (
 _CONTEXTO_IMPACT_RESERVE_PATH = (
     _REPO_ROOT / "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json"
 )
+_RELEASE_RESERVE_PATH = _REPO_ROOT / "cat_de_roman_esti/fixtures/release_reserve_v1.json"
 _DEMOTION_PATHS = (
     _DEMOTIONS_PATH,
     _CONTEXTO_DEMOTIONS_PATH,
     _CONTEXTO_IMPACT_RESERVE_PATH,
+    _RELEASE_RESERVE_PATH,
 )
 
 
@@ -370,10 +373,14 @@ def _owner_demotions() -> frozenset[str]:
     """
     combined: set[str] = set()
     for path in _DEMOTION_PATHS:
-        data = json.loads(path.read_text(encoding="utf-8"))
-        ids = {str(item) for item in data["ids"]}
-        if len(ids) != int(data["meta"]["count"]):
-            raise ValueError(f"{path.name}: meta.count does not match ids")
+        if path == _RELEASE_RESERVE_PATH:
+            pack = json.loads(critique_pack.PACKAGE_PACK.read_bytes())
+            ids = set(validate_pack_reserve(pack))
+        else:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            ids = {str(item) for item in data["ids"]}
+            if len(ids) != int(data["meta"]["count"]):
+                raise ValueError(f"{path.name}: meta.count does not match ids")
         overlap = combined & ids
         if overlap:
             raise ValueError(f"{path.name}: duplicate demotion ids: {sorted(overlap)}")

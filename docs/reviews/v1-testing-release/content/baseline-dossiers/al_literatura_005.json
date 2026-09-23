@@ -1,0 +1,300 @@
+{
+  "id": "al_literatura_005",
+  "game": "alchimie",
+  "category": "literatura",
+  "difficulty": "normal",
+  "status": "approved",
+  "record_sha256": "cac39167d6ab4458cc67d2db548ff9ee57893e08e61de11fbc6ff70d03fe2ad4",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Titu Maiorescu salience 0.30 < 0.35 (normal floor)"
+    }
+  ],
+  "target": {
+    "id": "n_titu_maiorescu",
+    "label": "Titu Maiorescu",
+    "node_type": "person",
+    "category": "literatura",
+    "salience": 0.3023,
+    "degree": 9,
+    "incoming_degree": 8,
+    "description": "Critic literar, mentor al Junimii."
+  },
+  "seeds": [
+    {
+      "id": "n_mihai_eminescu",
+      "label": "Mihai Eminescu",
+      "node_type": "person",
+      "category": "literatura",
+      "salience": 0.8268,
+      "degree": 24,
+      "incoming_degree": 24,
+      "description": "Poet roman, autor al poemului Luceafarul."
+    },
+    {
+      "id": "n_ion_creanga",
+      "label": "Ion Creangă",
+      "node_type": "person",
+      "category": "literatura",
+      "salience": 0.5583,
+      "degree": 19,
+      "incoming_degree": 18,
+      "description": "Scriitor roman, autor al Amintirilor din copilarie."
+    },
+    {
+      "id": "n_ion_luca_caragiale",
+      "label": "I.L. Caragiale",
+      "node_type": "person",
+      "category": "literatura",
+      "salience": 0.5625,
+      "degree": 21,
+      "incoming_degree": 21,
+      "description": "Dramaturg roman, maestru al comediei, membru al Junimii."
+    },
+    {
+      "id": "n_ioan_slavici",
+      "label": "Ioan Slavici",
+      "node_type": "person",
+      "category": "literatura",
+      "salience": 0.2244,
+      "degree": 8,
+      "incoming_degree": 8,
+      "description": "Prozator roman ardelean, autor al nuvelei Moara cu noroc."
+    },
+    {
+      "id": "n_convorbiri_literare",
+      "label": "Convorbiri literare",
+      "node_type": "work",
+      "category": "literatura",
+      "salience": 0.2907,
+      "degree": 12,
+      "incoming_degree": 12,
+      "description": "Revista a societatii Junimea."
+    },
+    {
+      "id": "n_iasi",
+      "label": "Iași",
+      "node_type": "place",
+      "category": "geografie",
+      "salience": 0.5139,
+      "degree": 20,
+      "incoming_degree": 19,
+      "description": "Oras din Moldova, fosta capitala a Principatului Moldovei si important centru cultural."
+    }
+  ],
+  "target_depth": 2,
+  "craft_profile": {
+    "opening_pairs": 15,
+    "closure_size": 138,
+    "target_generation": 2
+  },
+  "productive_openings": [
+    {
+      "pair": [
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare"
+        },
+        {
+          "id": "n_mihai_eminescu",
+          "label": "Mihai Eminescu"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_v20lit_scrisoarea_iii",
+          "label": "Scrisoarea III"
+        },
+        {
+          "id": "n_v21lit_floare_albastra",
+          "label": "Floare albastră"
+        },
+        {
+          "id": "n_junimea",
+          "label": "Junimea"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_ion_creanga",
+          "label": "Ion Creangă"
+        },
+        {
+          "id": "n_mihai_eminescu",
+          "label": "Mihai Eminescu"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_v3lit_scriitor",
+          "label": "Scriitor"
+        },
+        {
+          "id": "n_v2lit_basm_cult",
+          "label": "Basm cult"
+        },
+        {
+          "id": "n_junimea",
+          "label": "Junimea"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare"
+        },
+        {
+          "id": "n_ion_creanga",
+          "label": "Ion Creangă"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_junimea",
+          "label": "Junimea"
+        },
+        {
+          "id": "n_litx_povestea_lui_harap_alb",
+          "label": "Povestea lui Harap-Alb"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare"
+        },
+        {
+          "id": "n_ion_luca_caragiale",
+          "label": "I.L. Caragiale"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_junimea",
+          "label": "Junimea"
+        },
+        {
+          "id": "n_v4lit_ziar",
+          "label": "ziar"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_ioan_slavici",
+          "label": "Ioan Slavici"
+        },
+        {
+          "id": "n_ion_creanga",
+          "label": "Ion Creangă"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_v2lit_sat_romanesc",
+          "label": "Sat românesc"
+        },
+        {
+          "id": "n_junimea",
+          "label": "Junimea"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_ioan_slavici",
+          "label": "Ioan Slavici"
+        },
+        {
+          "id": "n_ion_luca_caragiale",
+          "label": "I.L. Caragiale"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_realism",
+          "label": "Realism"
+        },
+        {
+          "id": "n_junimea",
+          "label": "Junimea"
+        }
+      ]
+    }
+  ],
+  "minimum_action_recipe": [
+    {
+      "pair": [
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare"
+        },
+        {
+          "id": "n_ion_creanga",
+          "label": "Ion Creangă"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_junimea",
+          "label": "Junimea"
+        },
+        {
+          "id": "n_litx_povestea_lui_harap_alb",
+          "label": "Povestea lui Harap-Alb"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_convorbiri_literare",
+          "label": "Convorbiri literare"
+        },
+        {
+          "id": "n_junimea",
+          "label": "Junimea"
+        }
+      ],
+      "result_count": 4,
+      "results": [
+        {
+          "id": "n_titu_maiorescu",
+          "label": "Titu Maiorescu"
+        },
+        {
+          "id": "n_v4lit_revista",
+          "label": "revistă"
+        },
+        {
+          "id": "n_v2lit_critic_literar",
+          "label": "Critic literar"
+        },
+        {
+          "id": "n_v2lit_cenaclu_literar",
+          "label": "Cenaclu literar"
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:5133b1d4bc12603d834d0b16fa606221b259d70c4261d486d256f964327cf8b6"
+}

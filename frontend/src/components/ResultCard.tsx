@@ -144,14 +144,14 @@ export function ResultCard({
 
       <StartFailureNotice failed={startFailed} reserveSpace={Boolean(onReplay)} />
       <div className="row center wrap" style={{ gap: 12, marginTop: 12, position: "relative" }}>
-        {shareText && onCopy && (
-          <Button onClick={onCopy} disabled={actionsBusy}>
-            <span aria-hidden>📋</span> Copiază rezultatul
+        {onReplay && (
+          <Button onClick={onReplay} disabled={actionsBusy}>
+            {actionsBusy ? "Se pregătește…" : replayLabel}
           </Button>
         )}
-        {onReplay && (
-          <Button variant="secondary" onClick={onReplay} disabled={actionsBusy}>
-            {actionsBusy ? "Se pregătește…" : replayLabel}
+        {shareText && onCopy && (
+          <Button variant="secondary" onClick={onCopy} disabled={actionsBusy}>
+            <span aria-hidden>📋</span> Copiază rezultatul
           </Button>
         )}
         {onOptions && (

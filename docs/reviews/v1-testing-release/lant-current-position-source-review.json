@@ -1,0 +1,33 @@
+{
+  "author": "/root/v1_ux_audit",
+  "baseline_source_sha256": "06fd9517f48317ca92a510e423ca73e95521459db4301c7571b6cfb2a2641211",
+  "bindings": {
+    "frontend/e2e/lant-action-recovery.spec.mjs": "851978a536bbed5a504d4d148002ba8e437539ff30bf9164c745d33bae2ed3e9",
+    "frontend/e2e/lant-current-position.spec.mjs": "3e20730988c5b6e57237449297f2b0ebe71c3be4a65b23c145e981457caba53e",
+    "frontend/src/screens/Lant.tsx": "ebefff6f6e86e1897ba79848c4d3cbabd42821e460c3e44b132397663a9608d8"
+  },
+  "exact_delta_proof": "Independently replaced the single baseline AnimatePresence/m.div current-label block with the proposed plain styled div in memory; the result equals every byte of the current Lant.tsx file. No other source difference exists.",
+  "kind": "v1-lant-current-position-independent-source-review-v1",
+  "limits": [
+    "This accepts the source and test design only; it does not assert that the new runtime tests have passed.",
+    "No graph, content, fixture, source, or test edits were made by this reviewer."
+  ],
+  "new_regression_review": [
+    "Uses the real deterministic game and real move requests; does not fabricate a winning state.",
+    "Pauses browser animation frames after initial readiness, advances non-winning hops, commits the final winning move on the server, then returns a synthetic 503 to exercise authoritative GET recovery.",
+    "Checks one mutation and one recovery read, server won and exact move count, the server current label visible at opacity one, and exactly one current-position word while animation frames remain paused.",
+    "Resumes time only after current-position assertions, then verifies visible result rendering. The former rendering race therefore cannot be hidden by waiting for animation completion."
+  ],
+  "preserved_regression": "The existing lant-action-recovery.spec.mjs bytes exactly match baseline cc0a6a4. Its lost-winning-hop test still checks recovery without replay, current-label visibility, one recorded play, saved-pointer clearing and no extra play after reload.",
+  "rationale": "Current position is authoritative gameplay information. Rendering state.current.label directly removes its dependence on a decorative exit animation while preserving the same class, win color, surrounding section, target description and label text. The removed wrapper contains no interaction or accessibility role. State adoption, action ownership, network recovery, score recording, hints, breadcrumbs, target, input focus and controls are untouched.",
+  "remaining_source_blockers": [],
+  "reported_failure": "Root reported that a recovered winning response had correct server current target and score, while the current-position label retained an obsolete concept for more than ten seconds behind AnimatePresence mode=wait. The browser trace itself is author/root evidence, not a new independent reproduction in this review.",
+  "required_follow_up": [
+    "Run the new deterministic desktop/mobile regression and unchanged affected recovery tests against the rebuilt SPA.",
+    "Complete native/frontend checks and bind regenerated static assets and wheel smoke evidence before final runtime approval."
+  ],
+  "reviewer": "/root/v1_held_audit",
+  "runtime_status": "pending",
+  "scope": "Read-only independent review of the current-position JSX rendering change and added deterministic browser regression. No build or browser/native matrix was run for this increment.",
+  "verdict": "accept_source_diff_runtime_verification_pending"
+}

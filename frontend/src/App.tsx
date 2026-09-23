@@ -8,6 +8,7 @@ import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-
 import { AnimatePresence, domAnimation, LazyMotion, m, MotionConfig } from "framer-motion";
 import { ToastStack, type ToastData, type ToastKind } from "@roedu/ui";
 import Home from "./screens/Home";
+import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
 
 // Home is the only screen every visitor needs. Each game is deliberately loaded
 // on first play so low-end devices do not parse all six game engines up front.
@@ -68,6 +69,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <LazyMotion features={domAnimation} strict>
+        <RouteErrorBoundary pathname={location.pathname}>
         <div className="app-shell">
           <Suspense fallback={null}>
             <AccountBar />
@@ -156,6 +158,7 @@ export default function App() {
           </AnimatePresence>
           </div>
         </div>
+        </RouteErrorBoundary>
       </LazyMotion>
     </MotionConfig>
   );

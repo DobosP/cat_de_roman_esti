@@ -1,0 +1,423 @@
+{
+  "kind": "v1-release-verification-v1",
+  "valid_until": "Any change to the bound source, tests, content or generated assets; then treat this record as history.",
+  "verified_at_utc": "2026-09-23T12:13:04.393968+00:00",
+  "release": "V1",
+  "package_version": "1.0.0",
+  "internal_wave": "V100",
+  "baseline_commit": "cc0a6a490f4a37f6f94b59cf9a84eb760cb3a401",
+  "audience": "Mixed ages, phones and desktop",
+  "result": "green_local_testing_release",
+  "publication": {
+    "pushed": false,
+    "deployed": false,
+    "accounts_activated": false
+  },
+  "environments": {
+    "backend_full": "WSL Ubuntu, Python 3.14.4, constrained dev+web; full suite in byte-verified Linux-local source copy",
+    "native": "Windows Python 3.12.14, constrained dev+web",
+    "frontend": "Windows Node 24.19.0, npm 11.19.0, Playwright 1.63.0, Microsoft Edge",
+    "browser_projects": [
+      "Desktop Chrome emulation using Edge",
+      "Pixel 7 emulation using Edge"
+    ],
+    "physical_devices_tested": false
+  },
+  "gates": {
+    "backend": {
+      "command": "PYTHONPATH=<verified-source> CAT_ACCOUNTS_ENABLED=0 <python> -m pytest -q -o addopts= --junitxml=<scratch>/backend-final.xml",
+      "tests": 2446,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "accounts": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=<verified-source> <python> -m pytest -q -o addopts= tests/accounts",
+      "passed": 53
+    },
+    "browser": {
+      "final_distinct_cases_verified": 588,
+      "full_matrix_before_last_label_fix": {
+        "passed": 583,
+        "failed": 3,
+        "total": 586,
+        "duration": "19.9m",
+        "manifest_sha256": "d73ec574c4b6c5d5d3a9d9e17d05676b7809bbe7dff1d0da1581992eac0a6045",
+        "command": "CDR_E2E_PORT=8188 playwright test --config=<scratch>/playwright.config.mjs --workers=2 --output=<scratch>/browser-final-clean-results"
+      },
+      "final_impacted_matrix": {
+        "passed": 142,
+        "failed": 0,
+        "duration": "8.7m",
+        "command": "CDR_E2E_PORT=8193 playwright test --config=<scratch>/playwright.config.mjs --workers=1 --grep 'lant|alchimie-empty-pairs|v96-input-and-focus|plays a real seeded round|release-recovery-storage'",
+        "coverage": "Every Lanț case, both affected Alchimie recovery specs, all six game lifecycle smoke journeys, chunk/storage recovery, and two new deterministic paused-animation regressions"
+      },
+      "retries": 0,
+      "resolution": "The full run exposed a real stale current-position label after a recovered Lanț win. Only its animated wrapper was replaced by direct rendering from state; no gameplay/session/score change. The new regression demonstrably fails against the old bundle. Simulated lost-craft cases additionally stalled on GET during one-shot interception teardown. Eight cases now use the established stable retained-interceptor pattern, with one fault and one recovery read asserted; application crafting code is unchanged. Independent reviews and the final affected-case pass close every full-run failure. This is composed coverage, not a claim of one all-green 588-case invocation."
+    },
+    "frontend_unit": {
+      "command": "npm test",
+      "passed": 224,
+      "failed": 0
+    },
+    "frontend_lint": "npm run lint: passed",
+    "frontend_build": "npm run build: TypeScript, Vite and initial bundle budget passed",
+    "content": [
+      "scripts/validate_fixture.py: GREEN, zero errors",
+      "scripts/validate_games_pack.py: GREEN"
+    ],
+    "python_lint": "python -m ruff check: passed",
+    "whitespace": "git -c core.autocrlf=false diff --cached --check: passed; exact archive bytes preserved with scoped CRLF-aware attributes",
+    "documentation": "check_docs.py: dead_links=0 stale_terms=0 retired_verbs=0 orphans=0",
+    "wheel": {
+      "kind": "v1-installed-wheel-smoke-v1",
+      "version": "1.0.0",
+      "package_loaded_from_isolated_install": true,
+      "source_reviews_absent_from_install": true,
+      "wheel_sha256": "5dc4ee48f9299264bc157af76ad5d8fe34f7e6132673387c88d020bcdf841636",
+      "wheel_bytes": 1385310,
+      "static_files_match_source": 30,
+      "entry": "assets/index-DCM7j0JY.js",
+      "curated_counts": {
+        "conexiuni": 83,
+        "contexto": 255,
+        "lant": 121,
+        "alchimie": 68
+      },
+      "quick_selectable_counts": {
+        "intrusul": 226,
+        "perechi": 192
+      },
+      "games": [
+        {
+          "game": "alchimie",
+          "created": true,
+          "restored": true
+        },
+        {
+          "game": "intrusul",
+          "created": true,
+          "restored": true
+        },
+        {
+          "game": "perechi",
+          "created": true,
+          "restored": true
+        },
+        {
+          "game": "conexiuni",
+          "created": true,
+          "restored": true
+        },
+        {
+          "game": "contexto",
+          "created": true,
+          "restored": true
+        },
+        {
+          "game": "lant",
+          "created": true,
+          "restored": true
+        }
+      ],
+      "manifest_sha256": "732a064089604de84f9b238f540c6e4ebaee0cf795812bbcfe4f6fd2c4e4ee3d"
+    }
+  },
+  "source_binding": {
+    "final_inputs_raw_json_sha256": "b935ff2bf75e0a58b2e6dccbb5ed6a5613c88666427ce6c97fff639fa1001742",
+    "final_inputs_count": 539,
+    "backend_copy_manifest_sha256": "40a9859ad2e98346596fcdb5931c1082297b684a10ce7b64251eb75c48c814c1",
+    "backend_python_scripts_tests_and_content_equal_final": true,
+    "final_non_backend_changes_since_backend_copy": [
+      {
+        "path": ".gitattributes",
+        "backend_copy_sha256": "80abf9c50d35604125a7cd7feccb9ecd9dc3cbb0164c7476dc54bdb484512088",
+        "final_sha256": "be5e242d8cf3014371608017566bdb722530f8894eaa2ee0ae8b198972677f4e"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/.vite/manifest.json",
+        "backend_copy_sha256": "a88184465402e2eb0d9ae1fbe9cb434ada0863d8d09547166313d77f77758dfb",
+        "final_sha256": "732a064089604de84f9b238f540c6e4ebaee0cf795812bbcfe4f6fd2c4e4ee3d"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/AccountBar-CPD4D1sy.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "bcfbb3191fe389bdf902e1aade7bdcead57251bd5c3ad68df0b87129cfed696a"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/Alchimie-Bqu5A5dE.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "73f5156451b85840dd92c1912896e9cadbb91568ac7bb38012f858789bba805e"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/CaldRece-Ckr5Th6l.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "70159b4d31cbb5e45cd6fa05acfdd42bc4da850c797fa176444b37483704a86d"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/CategoryPicker-gbTd1JL1.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "0b6ca501b63d6166621f3578c1e993030c7c673b454e9183121108c9bc0902e5"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/Conexiuni-thYt3R-F.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "0ccb17c7be39d90db47d3aaea55fd3c58110925b29ca142ecf83a5ecc136bbe0"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/GameOptions-BylFY4vT.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "137d43ff8eb64e48933ac4b8c49f018492e3a2255a1a0719be3e0fd7f781064c"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/GameSetupOptions-DicyYnhk.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "b37878f232d904dcc7d3e1ebaacd528d0a189431d76db0554add0910e7cb500e"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/Intrusul-BjY3oeWX.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "ad92be7240c4320e539b45e7aab34b7256a4f986a5e7a4ecbb68d9eb1b71bfdf"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/Lant-B6MWWBjK.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "63c6a06d390d03aca0a065acc16006488b1a61fd7d28b4cee5bff5fdfe92e2df"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/Perechi-jlrZGVBe.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "8ae325656724ee0ee26a7ef1c301804cad7bcc0207646bc3255ad2100fba357d"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/Ranking-JL11HDwI.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "212e8f57d6446a2e35a47c33d78871e8585701916a1126e049c526c5abc07c25"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/index-DCM7j0JY.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "7a930188b2f09d5c00b51d473aa613b9e75fba5848beea5de8cb854aa837fce5"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/scoreSync-xKeiRTD3.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "2a6329d60842ae5436b86989dd8703461200bfabca006d965c7a51aceee71de6"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/assets/useSavedGameResume-CvR6oUD9.js",
+        "backend_copy_sha256": null,
+        "final_sha256": "322f585497ef386ec1172a895eba57512498993b9bd7202a4bd9a936b24287ea"
+      },
+      {
+        "path": "cat_de_roman_esti/web/static/index.html",
+        "backend_copy_sha256": "0f81fd3316a542eb14a0f424132867c10083cee0625ffff42e659e199ea68908",
+        "final_sha256": "07ba137791c3fada679dc0f9f2e5920b7d15633dc308674170764cf47266c355"
+      },
+      {
+        "path": "frontend/e2e/alchimie-content-freedom.spec.mjs",
+        "backend_copy_sha256": "b2b9673635e5cfb9fd7ecc55bc5ff28efe7b4a2b99b1d79ac82048cb26c88f5e",
+        "final_sha256": "f8cfe8cb3878b1d6295daa75d00cfb6fd77537e73c7ea55a6114a8a199a4696a"
+      },
+      {
+        "path": "frontend/e2e/alchimie-empty-pairs.spec.mjs",
+        "backend_copy_sha256": "d4c9a7cf24c9dab5dde105eebfdd39ae5a42f5725f6207732f2dacd31b1a7ab7",
+        "final_sha256": "a8b4d3214a1c605258fb079c2e401307cee922063b27ffced4568abbe7bdf306"
+      },
+      {
+        "path": "frontend/e2e/alchimie-workbench.spec.mjs",
+        "backend_copy_sha256": "747ed073223964f9baf4294925c9999d7527838b15db834641cc090a8c60db0f",
+        "final_sha256": "28fcd1d314967093e7c8f287257ee4b5df01cebe975435af2e842b3d1f105e73"
+      },
+      {
+        "path": "frontend/e2e/games.mjs",
+        "backend_copy_sha256": "3f916a4cce345a1e3ec4d2667e8886dc8dd6f11750b6fcaa8f7a268ae4eceb5c",
+        "final_sha256": "653ccb35f598ffd3db8163ebb7458d6221bb42f6d4cc7843034f46e0be7722bf"
+      },
+      {
+        "path": "frontend/e2e/lant-current-position.spec.mjs",
+        "backend_copy_sha256": null,
+        "final_sha256": "3e20730988c5b6e57237449297f2b0ebe71c3be4a65b23c145e981457caba53e"
+      },
+      {
+        "path": "frontend/e2e/lifecycle.spec.mjs",
+        "backend_copy_sha256": "bc481bee20ef9e81c1767a7d59f014e46fb42f7e4410d8c833432ca1faf60bfd",
+        "final_sha256": "35ae4211252b5828c4d192983949fbebb1f7391554e6def99b70806e4d83116c"
+      },
+      {
+        "path": "frontend/e2e/solutions.py",
+        "backend_copy_sha256": "aac2d36163828262d9eba3b8229096ad4cfcfee3e06e562a3c555a512a919afe",
+        "final_sha256": "b255f28244c9e4c5ad1cc0bb82c27ca055c2ffdfd49bba8aa6056f04edd57b62"
+      },
+      {
+        "path": "frontend/e2e/start-failure.spec.mjs",
+        "backend_copy_sha256": "897b14fbbf75b5a81fc454395902a12436aed9bfe29980dea1ede7ff78c7fdf5",
+        "final_sha256": "fd07c9f668548fecf55c20f05a8ae1ae1a675629c47977ee1b95ebe8c3ee02c9"
+      },
+      {
+        "path": "frontend/e2e/v96-input-and-focus.spec.mjs",
+        "backend_copy_sha256": "82a7c850e48b9b9b92370e6c30c7b9c3bbe0d229be59acad9852e8d73d0cbd3d",
+        "final_sha256": "8c94e95b8f894894f9f955d6e9c6bce7d9f408dceeacf2fb130232b128e0da22"
+      },
+      {
+        "path": "frontend/src/screens/Alchimie.tsx",
+        "backend_copy_sha256": "25f733e213bcf81436327c98db1fbd091fe4f501d6c8e928ad4bddd8d08aa2e2",
+        "final_sha256": "4f99c2a4ffacef36b17a4a6e98c0436c465fd4fbe06b97ee15b3791d6b8f77f1"
+      },
+      {
+        "path": "frontend/src/screens/Lant.tsx",
+        "backend_copy_sha256": "06fd9517f48317ca92a510e423ca73e95521459db4301c7571b6cfb2a2641211",
+        "final_sha256": "ebefff6f6e86e1897ba79848c4d3cbabd42821e460c3e44b132397663a9608d8"
+      }
+    ],
+    "superseded_static_files_in_backend_copy": [
+      "cat_de_roman_esti/web/static/assets/AccountBar-zw5SPjE0.js",
+      "cat_de_roman_esti/web/static/assets/Alchimie-CSQk2iUv.js",
+      "cat_de_roman_esti/web/static/assets/CaldRece-07JIb_hw.js",
+      "cat_de_roman_esti/web/static/assets/CategoryPicker-DCVSUyXi.js",
+      "cat_de_roman_esti/web/static/assets/Conexiuni-TOajbKS5.js",
+      "cat_de_roman_esti/web/static/assets/GameOptions-DqsJytyi.js",
+      "cat_de_roman_esti/web/static/assets/GameSetupOptions-BzWlG7wF.js",
+      "cat_de_roman_esti/web/static/assets/Intrusul-DkWqxuMv.js",
+      "cat_de_roman_esti/web/static/assets/Lant-CDl3KyJf.js",
+      "cat_de_roman_esti/web/static/assets/Perechi-K1XlrPPe.js",
+      "cat_de_roman_esti/web/static/assets/Ranking-CUuzS_9_.js",
+      "cat_de_roman_esti/web/static/assets/index-BO-FZg-D.js",
+      "cat_de_roman_esti/web/static/assets/scoreSync-D41kP5Cb.js",
+      "cat_de_roman_esti/web/static/assets/useSavedGameResume-DRR5a1HS.js"
+    ],
+    "review_documents_refreshed_after_copy": "Recipe live audit and both final reviews/closure refreshed for Alchimie-only frontend placement; unchanged API recipe behavior rechecked by 13 native tests.",
+    "final_static_assets_rechecked_by": [
+      "full browser matrix plus final impacted-case matrix",
+      "native static cache tests",
+      "isolated final wheel smoke"
+    ]
+  },
+  "preserved_intermediate_failures": [
+    {
+      "log": "verification/browser-parallel-scope.log.gz",
+      "passed": 136,
+      "failed": 6,
+      "resolution": "Two-worker affected-case run encountered verified ERR_INSUFFICIENT_RESOURCES on reload, a completed test body followed by teardown timeout, a worker exit with no application assertion, and startup/closed-browser failures. An older simulated empty-craft case also reproduced the one-shot interception GET stall and received the same retained-interceptor repair. The identical final affected matrix ran serially with no retries or widened timeout; browser-affected-run-forensics.json records trace-backed classification."
+    },
+    {
+      "log": "verification/frontend-lint-memory-interrupted.log.gz",
+      "resolution": "Concurrent Node lint exited on host allocation failure; same unchanged lint command rerun after browser workers stop. No application or lint limits changed."
+    },
+    {
+      "log": "verification/browser-parallel-interrupted.log.gz",
+      "resolution": "Four-worker attempt interrupted after a timeout and a concurrent audit-helper MemoryError. Final complete run uses two workers with the same assertions/timeouts and no retries."
+    },
+    {
+      "log": "verification/backend-full.log.gz",
+      "passed": 2400,
+      "failed": 44,
+      "errors": 3,
+      "resolution": "Historical tests reconstruct exact historical fixtures; current expectations follow independently reviewed V1 deltas; named football tests select their board through public options. Original hashes, quality gates and bounds remain. Initial failure-heavy WSL/NTFS run also raised ENOMEM reads; final unchanged full suite runs from byte-verified Linux-local copy."
+    },
+    {
+      "log": "verification/browser-full.log.gz",
+      "passed": 570,
+      "failed": 16,
+      "resolution": "Fourteen failures were fixed test assumptions for named football boards and remaining-mistake labels; two exposed Alchimie retry scrolling, repaired without removing the viewport invariant. A fresh full matrix plus the final affected-case matrix close these failures, as enumerated in browser-case-coverage.json."
+    },
+    {
+      "log": "verification/release-recovery-browser-initial.log.gz",
+      "resolution": "Storage getter failures during startup and slow chunk reload loops repaired; native and desktop/mobile recovery checks pass."
+    }
+  ],
+  "independent_reviews": {
+    "content": "Bound factual/quality proposals and carry-forward approvals under content/.",
+    "runtime_storage_recovery": "source-review.json and source-review-closure.json; final retry placement separately approved in incremental-source-review.json",
+    "packaging": {
+      "reviewer": "/root/v1_board_audit",
+      "result": "All96 package files match final WT:52 Python,14fixtureJSON,30static; all RECORD hashes/sizes valid; no obsolete entry;347 backend Python/tests/scripts/data files identical to tested Linux copy."
+    },
+    "resource_forensics": "browser-affected-run-forensics.json; serial affected-case pass closes required rerun",
+    "recovery_harness": "recovery-harness-source-review.json; original repeated failures and trace timelines retained, without widening timeouts or weakening state/focus assertions",
+    "lant_current_position": "lant-current-position-source-review.json approves only direct label rendering; final browser coverage closes its explicitly pending runtime check",
+    "archive_line_endings": {
+      "reviewer": "/root/v1_held_audit",
+      "result": "Scoped -text preserves exact approved bytes; 14 CRLF files had no actual trailing whitespace; checks still reject genuine spaces/tabs/blank EOF."
+    },
+    "compatibility_tests": {
+      "reviewer": "/root/v1_board_audit",
+      "result": "No blockers in sparse V90, V85/V86, V91 sport, critique/V37/V44 compatibility changes. Old pins and live safety assertions preserved. Named E2E helper was authored by that reviewer and is excluded from independent signoff."
+    }
+  },
+  "limits": [
+    "Mechanical stock audit covers all stored boards; independent editorial review is sampled (38 pack, 27 quick, 16 exploration recipes).",
+    "Curated selectable counts do not include existing on-demand fallback generators.",
+    "Technical checks do not establish human enjoyment or suitability of every concept for every age.",
+    "Physical phones, non-Chromium browsers, human test sessions, production deployment and live production verification were not performed.",
+    "Native full backend collection has an existing Unix resource-module limitation; complete suite ran under Linux with no skipped tests."
+  ],
+  "archive_path_mapping": {
+    "scratch_harness_snapshots": "Exact basename preserved under verification/; original absolute scratch paths are historical provenance.",
+    "old_author_packet_browser_final_scope_log": "The failed 136/6 run was renamed browser-parallel-scope.log before the final serial run; its immutable SHA is bound in browser-affected-run-forensics.json.",
+    "forensic_traces": "Original trace paths map to verification/traces/resource-scope-<trace-key>.zip with matching SHA256."
+  },
+  "evidence_format": "Logs and large manifests are gzip-compressed with mtime0; decompression restores exact original bytes, including terminal whitespace.",
+  "evidence_sha256": {
+    "accounts-final.log.gz": "90487d6ac5424dd61b1c7c49bb4c3fec5a2e9f8cea7cbf4f79ff5d48b6a45c5c",
+    "alchimie-semantic-browser.log.gz": "4ac20f8b24215fd2f4bf46bf95b98d7c81dfcf71cf2fcc2349679494151e5f72",
+    "assemble-verification.py.txt": "395847813cb844d8cb656fef6c6f3a8ea03fa1a0ad5bea810f346fad0790cd66",
+    "backend-final.log.gz": "d294faef0cd03a3451d61bde46fd1042b28dca2c74daaaff63897636b9b4059e",
+    "backend-final.xml.gz": "03bb15de2e9245c5868c0eac00cad48f1ef5ca4583e46c18838c87c8c0e371f2",
+    "backend-full.log.gz": "07d377fd46c8f048d36984a295b1db1e4cd3a86a0207013a15739649c687a6a8",
+    "before-lant-wheel-smoke.json": "b8d3dae70df3b72c8025787dee346264211587e00ab6911480d3b20da079b3f6",
+    "browser-case-coverage.json": "39ae1da87a98c4136f717556d1dcd99594cbc6e3ce3dc416e633c9c6f181bea3",
+    "browser-final-scope.log.gz": "44553ec0b5005c59feab0f4b6d3828800ba6a11e2a88b11f91a01f8e882cfd35",
+    "browser-final.log.gz": "6dbec79e171d6031d2570cf13cdfa891cb845e81368124cb3cb76a261b6bb45c",
+    "browser-full.log.gz": "b670034b3d607726248d195d4936d3fd2668f445f1245c2b7c329d2b6825e29b",
+    "browser-parallel-interrupted.log.gz": "04404ae212ed01c5bcab11539652cfa0cb08172d8fba10050a3cf1251c4c3b64",
+    "browser-parallel-scope.log.gz": "d60c37fe1697f89afa52d50ef3f35dbeaa7260e28fd545d00d1c386ae35431d1",
+    "browser-v1-ux-final.log.gz": "d2ddee4c6c3b6239d9149ebec345aefe058c614e7ba663131c2b07054fde2587",
+    "current-pool-regressions.log.gz": "52b3ab7306d76c895e0e71e4fa91b37987509a180f22be01b38f488f06f63682",
+    "docs-final.log.gz": "d9af06bc8627dfa369115ea5edbcd83db414d2d2f85e7f75e4047c3cccdee1a0",
+    "empty-pairs-original-repro.log.gz": "172af1e0d13841454f26446d1aae96e0f092dc9cb451d96a8ce1d37b512eeefe",
+    "final-inputs.json.gz": "de998c97580e21bc53b0d747c4fef6f165f9d14a1f4e3d2b6a0fedd6d3cf4859",
+    "fixture-final.log.gz": "a5a3d9649bba08d65e61a06386b3ab311d4dd116f00a906bf61531ac3aed8ebb",
+    "frontend-final-build.log.gz": "8380b2aa110d4cf84ba53e37dca2d45adb261c50608effe4d3e98024984a5f70",
+    "frontend-final-lint.log.gz": "4161b3be4e830d95d5fea6cf7053f458de3592c531daac1226478450a8b89e6a",
+    "frontend-final-tests.log.gz": "1f428037bbd6ceb06ad69485acc36b74ab3246b284d96ca3ca039c968b97df3f",
+    "frontend-lint-memory-interrupted.log.gz": "8f6324c2af93366fa05c360562402bb2c4b54448cd704b19eb3361a7d676d6d7",
+    "lant-current-position-before.log.gz": "44a8f7d07672519f0f0493ce79839dcd56091333aeff025ce40da79da5627cc9",
+    "lifecycle-browser.log.gz": "5a6eeb89a7511ef1ccdb4be39c11253219e1ee56a6c11f108d854cd5c029781f",
+    "linux-copy.log.gz": "2aa6664d38fb017a1a9518ce4199e11d379ca7b9ff390c4804413daf284da9a1",
+    "linux-source-copy.json.gz": "a20f8142dfbe9df97c764ade03e705c68179b6bc52cd1eed526f96fb83fe182b",
+    "pack-final.log.gz": "81ca4dfc1d8923a47149c03f03796657a21c5d1c7f2c5a3e308b702536689bc6",
+    "playwright.config.mjs.txt": "8365692d4f2bad8f4c45f64a78ac057f920f7b2e6107bfc9d7773706713f8d86",
+    "recipe-downstream-closure-final.log.gz": "a93a6ed1483e27bb4813331b242bd3865e94833567cf33ce093d928c9322a546",
+    "recipe-downstream-closure.log.gz": "a7f1c8c5bcd0d92567ebcb8aeaa163ff9ea4378fa0cb117d659cea17ac353434",
+    "recipe-installed-final-tests.log.gz": "40071fe1fc17c52f799ecd3047f6f49155c66c0c51d8e1b857f0c4f483acd73e",
+    "recipe-installed-tests.log.gz": "9eec8678df0feb880ce87daaa2f63bc26aabd21ac78c2499ae82420099408890",
+    "recovery-harness-before-extension-alchimie-empty-pairs.spec.mjs": "3968b19c4d4a405f8e241295ca52283ea9edc0546defe82c4f1b4d634b3a376d",
+    "recovery-harness-original-alchimie-empty-pairs.spec.mjs": "d4c9a7cf24c9dab5dde105eebfdd39ae5a42f5725f6207732f2dacd31b1a7ab7",
+    "recovery-harness-original-v96-input-and-focus.spec.mjs": "82a7c850e48b9b9b92370e6c30c7b9c3bbe0d229be59acad9852e8d73d0cbd3d",
+    "recovery-harness-review.before-extension.json": "ddc396a41b675d14ab24ea8ef08936d4ed41151faf3724a8c8bf3f29c0323225",
+    "recovery-harness-review.json": "ed8e8d8f4b0d5e7abc7aea6823ec02c50691e164a9bde33f4734e54523c4f8c5",
+    "release-recovery-browser-final.log.gz": "42e7ec113c067f37fbcd83055084731c6009d51d4e16d73bb999cfa8f8780d67",
+    "release-recovery-browser-initial.log.gz": "9ba4839ecaa26e094562b268c3ddce4c4968ef851e408b725015b28c0dc90c6e",
+    "release-recovery-frontend-tests.log.gz": "4b3ab4bf878aaf5c13d71a5bd097248fee1a1db7a5ffe85e1bea540e944c6fbf",
+    "ruff-final.log.gz": "6907f34c82deb8a688eb1658e87fcdbb33e1cfd89fabe0c681fe5186b5ecb153",
+    "start-failure-final.log.gz": "be9e533d8a6b1274427f1c20663438cca077d1d783a438a03865e1607e9dd895",
+    "static-final.log.gz": "7fb9323cab263b52fea62fbe397cd1764c54439814573b315b3cec54431de68c",
+    "traces/alchimie-cached-recovery-before.zip": "93b6972e0d2a83bb821842d7b69bf40924bea5e280f55cf5c291415b19f08564",
+    "traces/alchimie-committed-recovery-before.zip": "5ed798ce204671a0e34f8479345e25f3b504c7b9d1e437fd09a40bb5334b13a2",
+    "traces/lant-paused-animation-before.zip": "7b20f7791796a9b89b5a3e1f1b77e3b278f15db8bf0577835a4a3cb0fbc8be44",
+    "traces/lant-stale-position-before.zip": "49f23949a7d48c6f9131c248dd95adb3715325592c31b6f017158a00ab1db51f",
+    "traces/resource-scope-closed_browser.zip": "4cd0e811dbbd7615b184d41fb02c325ebc70354653f41bf7c79a238028360854",
+    "traces/resource-scope-desktop_caption.zip": "12520d826770d06d93837512459d81b99872385f9f22e0621379f8ce30efeca6",
+    "traces/resource-scope-empty_reply.zip": "3466b6e73a38423d3a6da68c3e9f578a94a499ce55560d60211e949177b52459",
+    "traces/resource-scope-mobile_caption.zip": "42864c8ff7dbf48322816bae906931bab2525ee594d495d2386ef74f70174e26",
+    "traces/resource-scope-v96_begin.zip": "f10d782f0bb1f5dd8e7de3e86c9a4dee339384631115bff5128a8a7cd6af8154",
+    "ux-readable-cards.log.gz": "bce908399ab5ce44798841e88e526eb0488864dba1c5695940a4072d5b0e8a6b",
+    "v91-sport-seed-tests.log.gz": "c4352667eed1b253331c001d70c1bd17bee555b1b16f791f0089d43f8805fad4",
+    "wheel-build-final.log.gz": "ece0fca3c5254e326f35f7b8be4a0ae4399d8bf69b1e39624499904553ee0491",
+    "wheel-install-final.log.gz": "d6e4a91fa33e3d2b00de7578bb4d3fd58c3ce71c43c0600cd5c56bc04948c04d",
+    "wheel-smoke.json": "ff1b936a34137397038e44c52d3e828dadc155e420c1be2c8f3468469ba30d03",
+    "wheel-smoke.py.txt": "435c7809e8fd69435d28c58d74ff2ac8565997071639a5466399b8c4df03ed3f",
+    "whitespace-final.log.gz": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+  }
+}

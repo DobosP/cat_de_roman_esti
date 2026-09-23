@@ -1,0 +1,1529 @@
+{
+  "kind": "v1-recipe-downstream-closure-v1",
+  "reviewer": "/root/v1_ux_audit",
+  "checked_on": "2026-09-23",
+  "verdict": "accept_retained_challenge_scope",
+  "subject": "exact proposal catalog, not an installation action",
+  "catalog_sha256": "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661",
+  "candidate_sha256": "adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366",
+  "baseline_kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "kg_sha256": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+  "baseline_extension_catalog_sha256": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+  "input_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/wordgames/alchimie.py": "e7684a500a6c8bcea5edac249b49921ce10a8d405b5c43a87eb777f6779b69c9",
+    "cat_de_roman_esti/wordgames/recipe_extensions.py": "138a48aa48390161270ecb76d4c3c6a43971c3600b66d84c782998fafb1afd79",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/discovery_world.py": "cbbc98d1fe076d002e06d71e8b8881a4b950e4510879e309fa12f106070983da",
+    "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+    "scripts/build_alchimie_recipe_extensions.py": "874286c4f26d1b05964b611f91ebb3bc4b524abfca7837c710fec78cecd9ec69",
+    "scripts/audit_alchimie_recipe_freedom.py": "e7851e546306819c6bb0573041bf85f4a941caad13ef3f534ed9023320dcb1cd",
+    "tests/test_v1_recipe_refresh.py": "0fca0e7584e6105bbec6666d6bca0dfd5e02ab239e99eb77a84661d67edf55a3",
+    "docs/reviews/v1-testing-release/content/factual-downstream-audit.json": "f0f5a1f01c74a4a20e40726400ce552d87729eb76556cb81e930d1e68c110460",
+    "docs/reviews/v1-testing-release/content/kg-before-v1.json.gz": "b0cfac884d0d02d5218456fca77c0b91e1135238de2d5dde35f6636f78efcbf6",
+    "docs/reviews/v1-testing-release/content/games_pack.json.before-v1.gz": "e51248262f5c88ec2c0d16244ac6382493a223cf8eed2408272a0ec7bd56ea71",
+    "docs/reviews/v1-testing-release/content/alchimie-reserve-proposal.json": "bcf35794a43f437f78d420b34a0e4ae44e1accd76c7eddde46a4bdf9e33728e6",
+    "docs/reviews/v1-testing-release/content/selection-reserve-quality-review.json": "54980fe74ac512b431eed9c8f3e3390c53e40a16a3efc1ad7fd207a528178758",
+    "docs/reviews/v1-testing-release/content/recipes/before-v1-catalog.json.gz": "4715d77d77ec81a8718d702508e50bc4a72421a9eac8fbf961de86d738511514",
+    "docs/reviews/v1-testing-release/content/recipes/candidates.json": "adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366",
+    "docs/reviews/v1-testing-release/content/recipes/catalog.json": "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661",
+    "docs/reviews/v1-testing-release/content/recipes/factual-review.json": "bbf106d08e7ea887d0a19c0a876dfa0c3a49547e0b02c8ce8c43656d7d7926b9",
+    "docs/reviews/v1-testing-release/content/recipes/quality-review.json": "f08e80ddecf9c247b311e9b7d2063506aba3dd99c1f9de39b56b11b30f711f09",
+    "docs/reviews/v1-testing-release/content/recipes/live-audit.json": "9e90f5fc20f93e68786507dd563367e0c8b6de07066b29277913224154b85d19",
+    "docs/reviews/v1-testing-release/content/recipes/carry-forward-provenance.json": "df3a1d7db21253cf2edc5e7217c7c84e8721a5709b87fac5b42df631b090600a",
+    "docs/reviews/v1-testing-release/content/recipes/capture-downstream-closure.py.txt": "e203b6917545f3757d01365e2d0284cfa30f83a4e7f8e17c97da075bc325623c"
+  },
+  "summary": {
+    "raw_alchimie_records": 83,
+    "approved_archived_records": 80,
+    "selectable_records": 68,
+    "release_reserved_records": 12,
+    "retained_books_byte_equal": 68,
+    "retained_book_recipes": 521,
+    "public_api_wins_at_par": 68,
+    "restored_addition_api_wins": 7,
+    "baseline_extension_boards": 28,
+    "candidate_extension_boards": 27,
+    "baseline_extension_additions": 50,
+    "candidate_extension_additions": 49,
+    "new_e2_failures": 0,
+    "all_80_raw_auditor_recipes": 603,
+    "archived_single_opening_records": 12
+  },
+  "comparison_method": "Byte comparison of deterministic canonical UTF-8 JSON containing seeds, target, category, recipe pair/results, complete stored routes, and par. All68 baseline books use exact archived KG plus archived original extensions; candidate books use the current KG plus the proposal catalog.",
+  "book_comparisons": [
+    {
+      "id": "al_arta_cultura_008",
+      "baseline_book_sha256": "643932dd88465c2e980addeacff16108efca98baf98094de2f0f953d399da2fa",
+      "candidate_book_sha256": "643932dd88465c2e980addeacff16108efca98baf98094de2f0f953d399da2fa",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 5,
+      "stored_routes": 1,
+      "productive_openings": 4
+    },
+    {
+      "id": "al_arta_cultura_012",
+      "baseline_book_sha256": "97a073751159366375d43c7bbd06f3599acf15dd591597fa03befec127332f42",
+      "candidate_book_sha256": "97a073751159366375d43c7bbd06f3599acf15dd591597fa03befec127332f42",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_arta_cultura_013",
+      "baseline_book_sha256": "a206aef20af19775b0eb08ace057517be2929cfd2c78228463186ae0b60ac0b7",
+      "candidate_book_sha256": "a206aef20af19775b0eb08ace057517be2929cfd2c78228463186ae0b60ac0b7",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 2,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_arta_cultura_014",
+      "baseline_book_sha256": "81542949a9d0f63bb12cf0baddc9702ee9f074671dc26fef5827f1d2b4ce3869",
+      "candidate_book_sha256": "81542949a9d0f63bb12cf0baddc9702ee9f074671dc26fef5827f1d2b4ce3869",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 6
+    },
+    {
+      "id": "al_arta_cultura_016",
+      "baseline_book_sha256": "8037678771044ce86d3c7b0f75764dbf703d9468ca2cbbd16f1430b3a5adb1fc",
+      "candidate_book_sha256": "8037678771044ce86d3c7b0f75764dbf703d9468ca2cbbd16f1430b3a5adb1fc",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_arta_cultura_017",
+      "baseline_book_sha256": "67462a717d42b15b87da8c771e4059b744cd1e952e490b68c72393759eced662",
+      "candidate_book_sha256": "67462a717d42b15b87da8c771e4059b744cd1e952e490b68c72393759eced662",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_film_tv_019",
+      "baseline_book_sha256": "c4d3abffb87404db92784622616579da818b1f1e7feaeed1e6c7580fefd649dd",
+      "candidate_book_sha256": "c4d3abffb87404db92784622616579da818b1f1e7feaeed1e6c7580fefd649dd",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 9,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_film_tv_020",
+      "baseline_book_sha256": "f25aa8765520a12e1e14b653ee5c7c39ec25729030a5045b0e2a00f0445afcb1",
+      "candidate_book_sha256": "f25aa8765520a12e1e14b653ee5c7c39ec25729030a5045b0e2a00f0445afcb1",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 10,
+      "stored_routes": 4,
+      "productive_openings": 8
+    },
+    {
+      "id": "al_film_tv_021",
+      "baseline_book_sha256": "ca366e0958258c38086fbfc7be72e179d7e87715f5207da90898f20b52c6335e",
+      "candidate_book_sha256": "ca366e0958258c38086fbfc7be72e179d7e87715f5207da90898f20b52c6335e",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 5
+    },
+    {
+      "id": "al_film_tv_023",
+      "baseline_book_sha256": "0d9273a56ef14e10c6525af99d15e842292c0fe1625925488826b372773b2f61",
+      "candidate_book_sha256": "0d9273a56ef14e10c6525af99d15e842292c0fe1625925488826b372773b2f61",
+      "book_bytes_equal": true,
+      "par": 6,
+      "recipes": 7,
+      "stored_routes": 1,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_film_tv_106",
+      "baseline_book_sha256": "dfda065a0d65ed323fca1527e66895bb1a53a5c04eb21aa952f6c97b143852c9",
+      "candidate_book_sha256": "dfda065a0d65ed323fca1527e66895bb1a53a5c04eb21aa952f6c97b143852c9",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 9,
+      "stored_routes": 4,
+      "productive_openings": 4
+    },
+    {
+      "id": "al_gastronomie_010",
+      "baseline_book_sha256": "9acfd8c880a1b1a2a1f987a224605739c3318705d028037c69e23a9880c9fae2",
+      "candidate_book_sha256": "9acfd8c880a1b1a2a1f987a224605739c3318705d028037c69e23a9880c9fae2",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 2,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_gastronomie_027",
+      "baseline_book_sha256": "3c0dc7c2a373b367d8d737e87c7eff733c8abe277dfef492b1f710eb6157f101",
+      "candidate_book_sha256": "3c0dc7c2a373b367d8d737e87c7eff733c8abe277dfef492b1f710eb6157f101",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 10,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_gastronomie_029",
+      "baseline_book_sha256": "19e32e5ddc04393bc64b28922658cea0e5e53a3233247197f9058756df514560",
+      "candidate_book_sha256": "19e32e5ddc04393bc64b28922658cea0e5e53a3233247197f9058756df514560",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 10,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_gastronomie_107",
+      "baseline_book_sha256": "eda0c55346922b4a3027478a2932b7d1a68957de7df0dd23ac05520be942fb90",
+      "candidate_book_sha256": "eda0c55346922b4a3027478a2932b7d1a68957de7df0dd23ac05520be942fb90",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 5,
+      "stored_routes": 3,
+      "productive_openings": 4
+    },
+    {
+      "id": "al_geografie_002",
+      "baseline_book_sha256": "0d903519f5d4668c61b26b8a28c74eb7797e8843e7d4955e2693f0b256bb11e7",
+      "candidate_book_sha256": "0d903519f5d4668c61b26b8a28c74eb7797e8843e7d4955e2693f0b256bb11e7",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_geografie_031",
+      "baseline_book_sha256": "7c897fee2b07c8c1de5d4ae51caf0af40d1d469423bb4fe4e3b0fc530cc09d63",
+      "candidate_book_sha256": "7c897fee2b07c8c1de5d4ae51caf0af40d1d469423bb4fe4e3b0fc530cc09d63",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 5
+    },
+    {
+      "id": "al_geografie_033",
+      "baseline_book_sha256": "b10cce083783cd267949e0f37d14efc8ad3ccf1f344290a42c226e4a6b41a5dc",
+      "candidate_book_sha256": "b10cce083783cd267949e0f37d14efc8ad3ccf1f344290a42c226e4a6b41a5dc",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_istorie_001",
+      "baseline_book_sha256": "366d3946fcdd9476f37c12444d2b5bddde9b652accc79295d250c7559f91cca5",
+      "candidate_book_sha256": "366d3946fcdd9476f37c12444d2b5bddde9b652accc79295d250c7559f91cca5",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 9,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_istorie_035",
+      "baseline_book_sha256": "26d65222dcc6aa0d7aa1860cad2b4ff01b55a5b3d8536eb6800752d05373bd12",
+      "candidate_book_sha256": "26d65222dcc6aa0d7aa1860cad2b4ff01b55a5b3d8536eb6800752d05373bd12",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 13,
+      "stored_routes": 4,
+      "productive_openings": 8
+    },
+    {
+      "id": "al_istorie_036",
+      "baseline_book_sha256": "4bb1079ae1edb6ecf00fefd33441920304b3dcf72018e478c1b8d4aed9eb4e47",
+      "candidate_book_sha256": "4bb1079ae1edb6ecf00fefd33441920304b3dcf72018e478c1b8d4aed9eb4e47",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 2,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_istorie_037",
+      "baseline_book_sha256": "87a1164a376dfbb3050ee6a5e093d6d35748b93e9074b941cf0bd3e2fbd04e3e",
+      "candidate_book_sha256": "87a1164a376dfbb3050ee6a5e093d6d35748b93e9074b941cf0bd3e2fbd04e3e",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_istorie_038",
+      "baseline_book_sha256": "7d4f62a5bf93a6578e6f7b428fe2bb556540fa1d6dc104a42e6292d1a181ed25",
+      "candidate_book_sha256": "7d4f62a5bf93a6578e6f7b428fe2bb556540fa1d6dc104a42e6292d1a181ed25",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 11,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_istorie_041",
+      "baseline_book_sha256": "64eeb92419cf82b36ca6e54469ba9d65933e6d605ebe9c9e75f7748902e552ae",
+      "candidate_book_sha256": "64eeb92419cf82b36ca6e54469ba9d65933e6d605ebe9c9e75f7748902e552ae",
+      "book_bytes_equal": true,
+      "par": 5,
+      "recipes": 24,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_limba_014",
+      "baseline_book_sha256": "0de3cbe8b571ea538c66c7a52501c692fef475e497fd05f1e70952462efb609c",
+      "candidate_book_sha256": "0de3cbe8b571ea538c66c7a52501c692fef475e497fd05f1e70952462efb609c",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_limba_042",
+      "baseline_book_sha256": "691293f026305424da5809c97534758f64131f6e3c6ca0494a3648d38471527d",
+      "candidate_book_sha256": "691293f026305424da5809c97534758f64131f6e3c6ca0494a3648d38471527d",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_limba_043",
+      "baseline_book_sha256": "45b63468597a203ff9d9ed9e8d8b760bb8e3174f2b5df96d2a8ae7a2f0396d5b",
+      "candidate_book_sha256": "45b63468597a203ff9d9ed9e8d8b760bb8e3174f2b5df96d2a8ae7a2f0396d5b",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 11,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_limba_044",
+      "baseline_book_sha256": "c287dca6e2634ec9d9e9920e7e3b055ec8b7c19873c7adab0f593cbeb913c0ab",
+      "candidate_book_sha256": "c287dca6e2634ec9d9e9920e7e3b055ec8b7c19873c7adab0f593cbeb913c0ab",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 5,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_limba_045",
+      "baseline_book_sha256": "163799d61db2902c2caeb6e9165d8889f3f645c40a3e9c5d8ee5ebdb41bba662",
+      "candidate_book_sha256": "163799d61db2902c2caeb6e9165d8889f3f645c40a3e9c5d8ee5ebdb41bba662",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_limba_046",
+      "baseline_book_sha256": "19aa6ce8adfb7009920c309eb31fcc111b5b59f5383698ae314d7cafd80e146c",
+      "candidate_book_sha256": "19aa6ce8adfb7009920c309eb31fcc111b5b59f5383698ae314d7cafd80e146c",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_limba_048",
+      "baseline_book_sha256": "014e4c1876239b967d1afd0c691ac09a9ab6351fb4536716166f3052dedf4cb5",
+      "candidate_book_sha256": "014e4c1876239b967d1afd0c691ac09a9ab6351fb4536716166f3052dedf4cb5",
+      "book_bytes_equal": true,
+      "par": 5,
+      "recipes": 10,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_literatura_005",
+      "baseline_book_sha256": "fd7b069f18e5b03cda3cc23def99287a86657211569a37f148b3f29b0552377b",
+      "candidate_book_sha256": "fd7b069f18e5b03cda3cc23def99287a86657211569a37f148b3f29b0552377b",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 5
+    },
+    {
+      "id": "al_literatura_049",
+      "baseline_book_sha256": "e52148abe6ae6af0d1de47521a205300519df16322e117f6ad9a31c3acb40cad",
+      "candidate_book_sha256": "e52148abe6ae6af0d1de47521a205300519df16322e117f6ad9a31c3acb40cad",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_literatura_050",
+      "baseline_book_sha256": "22188d8a5645a275f739947f470719ba30b20ac254fefdb9492f9f4ce3e8b8dd",
+      "candidate_book_sha256": "22188d8a5645a275f739947f470719ba30b20ac254fefdb9492f9f4ce3e8b8dd",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_literatura_052",
+      "baseline_book_sha256": "79e9f1b43273b260aa639e38d08965fd0171d7c936a2292806f67e13342e8ff7",
+      "candidate_book_sha256": "79e9f1b43273b260aa639e38d08965fd0171d7c936a2292806f67e13342e8ff7",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_literatura_054",
+      "baseline_book_sha256": "0fd13c75696a45c6857010cb79950a985d5dec3a24480f2a741c35bb1327f924",
+      "candidate_book_sha256": "0fd13c75696a45c6857010cb79950a985d5dec3a24480f2a741c35bb1327f924",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 10,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_literatura_097",
+      "baseline_book_sha256": "2eec819361a5044e0c24f213d344872607f1a1eb76b9bc363de15a9a859f17d7",
+      "candidate_book_sha256": "2eec819361a5044e0c24f213d344872607f1a1eb76b9bc363de15a9a859f17d7",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 4
+    },
+    {
+      "id": "al_meme_net_055",
+      "baseline_book_sha256": "c89272b0a28fad66676d4f293cde0cb809cc600adb5449d1e28806c7686ee9e2",
+      "candidate_book_sha256": "c89272b0a28fad66676d4f293cde0cb809cc600adb5449d1e28806c7686ee9e2",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_meme_net_056",
+      "baseline_book_sha256": "7faafef08fb910018cd1649266350fbefc7ab1cd7747ac6f1f1869831627f54a",
+      "candidate_book_sha256": "7faafef08fb910018cd1649266350fbefc7ab1cd7747ac6f1f1869831627f54a",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 9,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_meme_net_057",
+      "baseline_book_sha256": "6056dfcf25311104ffe818530524efbca414910baff1839b2deb74757618027f",
+      "candidate_book_sha256": "6056dfcf25311104ffe818530524efbca414910baff1839b2deb74757618027f",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 4
+    },
+    {
+      "id": "al_meme_net_058",
+      "baseline_book_sha256": "98c8d31c5437f097e4921e52c307443512ec7d5a2d0681235a92e78a2c80d12d",
+      "candidate_book_sha256": "98c8d31c5437f097e4921e52c307443512ec7d5a2d0681235a92e78a2c80d12d",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_meme_net_059",
+      "baseline_book_sha256": "66ea55541778f2506543c83cb2782128fa3f94a70ef5d30928a6fff3c0704cd6",
+      "candidate_book_sha256": "66ea55541778f2506543c83cb2782128fa3f94a70ef5d30928a6fff3c0704cd6",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_muzica_061",
+      "baseline_book_sha256": "7009afa18fb97cfb3f88bcb2a0d7b7f518aa40050133c2c5a18779c1c2bac891",
+      "candidate_book_sha256": "7009afa18fb97cfb3f88bcb2a0d7b7f518aa40050133c2c5a18779c1c2bac891",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_muzica_062",
+      "baseline_book_sha256": "607d676436554ea85185cc714496241ec5f49d9e7abab41ed3b056910dfe88a3",
+      "candidate_book_sha256": "607d676436554ea85185cc714496241ec5f49d9e7abab41ed3b056910dfe88a3",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_muzica_063",
+      "baseline_book_sha256": "f9e11dd9d8221105aaf0aea3ceec1780f45d4e2e5cca4a8f18614bcc80dd2ae4",
+      "candidate_book_sha256": "f9e11dd9d8221105aaf0aea3ceec1780f45d4e2e5cca4a8f18614bcc80dd2ae4",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_muzica_066",
+      "baseline_book_sha256": "1a7e1e492d40529ba77286a9a73d96dea67ab5033b54d5e05f50ff472f9de40f",
+      "candidate_book_sha256": "1a7e1e492d40529ba77286a9a73d96dea67ab5033b54d5e05f50ff472f9de40f",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 3,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_muzica_067",
+      "baseline_book_sha256": "138baa804b5d56c46cebcc14e6dbe9fec9f9d7c8216e9aa5a29ac7a008df9cc6",
+      "candidate_book_sha256": "138baa804b5d56c46cebcc14e6dbe9fec9f9d7c8216e9aa5a29ac7a008df9cc6",
+      "book_bytes_equal": true,
+      "par": 5,
+      "recipes": 9,
+      "stored_routes": 3,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_personalitati_006",
+      "baseline_book_sha256": "e721e4522e25746dd561d71c2c36f4b0d84272a2c2584713f0ff2011bf3cdfd3",
+      "candidate_book_sha256": "e721e4522e25746dd561d71c2c36f4b0d84272a2c2584713f0ff2011bf3cdfd3",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 3,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_societate_007",
+      "baseline_book_sha256": "d1f1411681498737d3bc01f9e9a95c150070345efb9424f98e034737d6b484be",
+      "candidate_book_sha256": "d1f1411681498737d3bc01f9e9a95c150070345efb9424f98e034737d6b484be",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 4,
+      "stored_routes": 3,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_societate_017",
+      "baseline_book_sha256": "cc7f1e3a24077d8dee707a3e8f7fb984c5814085bd9a40113da4b134114cc734",
+      "candidate_book_sha256": "cc7f1e3a24077d8dee707a3e8f7fb984c5814085bd9a40113da4b134114cc734",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 5,
+      "stored_routes": 4,
+      "productive_openings": 4
+    },
+    {
+      "id": "al_societate_074",
+      "baseline_book_sha256": "9cdb7c9c30b261a71cd01217f8de038a19dcc3c8daa73058d7369b793423140f",
+      "candidate_book_sha256": "9cdb7c9c30b261a71cd01217f8de038a19dcc3c8daa73058d7369b793423140f",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_societate_075",
+      "baseline_book_sha256": "81f3a72a18c5f8418de1680b0d806493c1997ae946f09676f19e09d87be2f90e",
+      "candidate_book_sha256": "81f3a72a18c5f8418de1680b0d806493c1997ae946f09676f19e09d87be2f90e",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_societate_077",
+      "baseline_book_sha256": "9790f3998ed45fd205c9602b1171425b30560c156f4cede128e48d20856ba477",
+      "candidate_book_sha256": "9790f3998ed45fd205c9602b1171425b30560c156f4cede128e48d20856ba477",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_societate_078",
+      "baseline_book_sha256": "bf44d8e02ab31d43d99869d501a2c79344b555b32892b82c3b0f2024bc7f147c",
+      "candidate_book_sha256": "bf44d8e02ab31d43d99869d501a2c79344b555b32892b82c3b0f2024bc7f147c",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 10,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_societate_079",
+      "baseline_book_sha256": "5c5d2aa2fee49fa7c9dae8cb573198fb40c6ce4be04e83b3bb07a98600e3c2c7",
+      "candidate_book_sha256": "5c5d2aa2fee49fa7c9dae8cb573198fb40c6ce4be04e83b3bb07a98600e3c2c7",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_sport_083",
+      "baseline_book_sha256": "16041d27602dd74caca44f18ad5a9c5092fadc19f5b495278f14c04f7dcf9e25",
+      "candidate_book_sha256": "16041d27602dd74caca44f18ad5a9c5092fadc19f5b495278f14c04f7dcf9e25",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 9,
+      "stored_routes": 4,
+      "productive_openings": 7
+    },
+    {
+      "id": "al_sport_084",
+      "baseline_book_sha256": "7f9e9265ae780992ab8ec2b89c07bf3fa60125c5fff155f5e6776da0e47aa08d",
+      "candidate_book_sha256": "7f9e9265ae780992ab8ec2b89c07bf3fa60125c5fff155f5e6776da0e47aa08d",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_sport_085",
+      "baseline_book_sha256": "1d8dc859c05214f828345825d899c2b5f7b8c19e822b455a52fb06fa242bed1c",
+      "candidate_book_sha256": "1d8dc859c05214f828345825d899c2b5f7b8c19e822b455a52fb06fa242bed1c",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_sport_086",
+      "baseline_book_sha256": "6e24e077aea8e77849e01b5e537e99477016575bc1f4d06262cad0b3226c191d",
+      "candidate_book_sha256": "6e24e077aea8e77849e01b5e537e99477016575bc1f4d06262cad0b3226c191d",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_stiinta_008",
+      "baseline_book_sha256": "48d3afbea3a8935b96d74a69946f1ebeed0a2114fd23181c06bc7f8ee1d68112",
+      "candidate_book_sha256": "48d3afbea3a8935b96d74a69946f1ebeed0a2114fd23181c06bc7f8ee1d68112",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 9,
+      "stored_routes": 4,
+      "productive_openings": 4
+    },
+    {
+      "id": "al_stiinta_009",
+      "baseline_book_sha256": "37212f4e6a89a51f262b1f4f00a8eb4cc217ddccd0504e0a3222372842023430",
+      "candidate_book_sha256": "37212f4e6a89a51f262b1f4f00a8eb4cc217ddccd0504e0a3222372842023430",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 3,
+      "stored_routes": 2,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_stiinta_087",
+      "baseline_book_sha256": "a2b19b34e4c46dc283ff430676118c120b98e927e5af4415f5652dfe31ec479b",
+      "candidate_book_sha256": "a2b19b34e4c46dc283ff430676118c120b98e927e5af4415f5652dfe31ec479b",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 4
+    },
+    {
+      "id": "al_stiinta_088",
+      "baseline_book_sha256": "d4b88c4658fe965ff4e99e51c3a01f86a3beda640690488ed56603fd12889b6a",
+      "candidate_book_sha256": "d4b88c4658fe965ff4e99e51c3a01f86a3beda640690488ed56603fd12889b6a",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 6,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_stiinta_089",
+      "baseline_book_sha256": "049ae6c7c3b48b0a84fff72232eaed1f37f498ffc3e9fad524632c606f1ed5a4",
+      "candidate_book_sha256": "049ae6c7c3b48b0a84fff72232eaed1f37f498ffc3e9fad524632c606f1ed5a4",
+      "book_bytes_equal": true,
+      "par": 3,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_viata_de_roman_090",
+      "baseline_book_sha256": "66e9eee7396bb5aeaf6cefffcc55a0f26d6e7fb0ca19b4501c4c9588454b0141",
+      "candidate_book_sha256": "66e9eee7396bb5aeaf6cefffcc55a0f26d6e7fb0ca19b4501c4c9588454b0141",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 8,
+      "stored_routes": 4,
+      "productive_openings": 2
+    },
+    {
+      "id": "al_viata_de_roman_091",
+      "baseline_book_sha256": "78a186abb9f619416f7da1302c629ba8480f9016fdd88db40648a6f7fb29f2b1",
+      "candidate_book_sha256": "78a186abb9f619416f7da1302c629ba8480f9016fdd88db40648a6f7fb29f2b1",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 4,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_viata_de_roman_093",
+      "baseline_book_sha256": "0f5e8370a645129dc4182bfe8eaf4f464db01d1de7167f9eb38f47b48728b560",
+      "candidate_book_sha256": "0f5e8370a645129dc4182bfe8eaf4f464db01d1de7167f9eb38f47b48728b560",
+      "book_bytes_equal": true,
+      "par": 2,
+      "recipes": 7,
+      "stored_routes": 3,
+      "productive_openings": 3
+    },
+    {
+      "id": "al_viata_de_roman_096",
+      "baseline_book_sha256": "34f9955ec9ac206bf7130ad72da088dd09bd41f453a4c4067cb972308e33e670",
+      "candidate_book_sha256": "34f9955ec9ac206bf7130ad72da088dd09bd41f453a4c4067cb972308e33e670",
+      "book_bytes_equal": true,
+      "par": 5,
+      "recipes": 12,
+      "stored_routes": 2,
+      "productive_openings": 2
+    }
+  ],
+  "public_api_journeys": [
+    {
+      "id": "al_arta_cultura_008",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_arta_cultura_012",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_arta_cultura_013",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_arta_cultura_014",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_arta_cultura_016",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_arta_cultura_017",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_film_tv_019",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_film_tv_020",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_film_tv_021",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_film_tv_023",
+      "moves": 6,
+      "par": 6,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_film_tv_106",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_gastronomie_010",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_gastronomie_027",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_gastronomie_029",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_gastronomie_107",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_geografie_002",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_geografie_031",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_geografie_033",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_istorie_001",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_istorie_035",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_istorie_036",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_istorie_037",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_istorie_038",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_istorie_041",
+      "moves": 5,
+      "par": 5,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_limba_014",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_limba_042",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_limba_043",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_limba_044",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_limba_045",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_limba_046",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_limba_048",
+      "moves": 5,
+      "par": 5,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_literatura_005",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_literatura_049",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_literatura_050",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_literatura_052",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_literatura_054",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_literatura_097",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_meme_net_055",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_meme_net_056",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_meme_net_057",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_meme_net_058",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_meme_net_059",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_muzica_061",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_muzica_062",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_muzica_063",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_muzica_066",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_muzica_067",
+      "moves": 5,
+      "par": 5,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_personalitati_006",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_societate_007",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_societate_017",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_societate_074",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_societate_075",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_societate_077",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_societate_078",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_societate_079",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_sport_083",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_sport_084",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_sport_085",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_sport_086",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_stiinta_008",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_stiinta_009",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_stiinta_087",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_stiinta_088",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_stiinta_089",
+      "moves": 3,
+      "par": 3,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_viata_de_roman_090",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_viata_de_roman_091",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_viata_de_roman_093",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    },
+    {
+      "id": "al_viata_de_roman_096",
+      "moves": 5,
+      "par": 5,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": null
+    }
+  ],
+  "restored_addition_journeys": [
+    {
+      "id": "al_arta_cultura_016",
+      "moves": 3,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": "alrecipe-al_arta_cultura_016-df72f2d42cb1eabd"
+    },
+    {
+      "id": "al_film_tv_020",
+      "moves": 3,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": "alrecipe-al_film_tv_020-149912f45a31b25d"
+    },
+    {
+      "id": "al_film_tv_020",
+      "moves": 3,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": "alrecipe-al_film_tv_020-7b734fe0bab5c288"
+    },
+    {
+      "id": "al_film_tv_020",
+      "moves": 3,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": "alrecipe-al_film_tv_020-f6efc18f7a771723"
+    },
+    {
+      "id": "al_sport_083",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": "alrecipe-al_sport_083-36a787c3d5e29dae"
+    },
+    {
+      "id": "al_sport_083",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": "alrecipe-al_sport_083-0579a2e817b3f1f4"
+    },
+    {
+      "id": "al_sport_083",
+      "moves": 2,
+      "par": 2,
+      "won": true,
+      "target_hidden_until_win": true,
+      "recipes_private": true,
+      "restored_candidate_id": "alrecipe-al_sport_083-bfb3e8b4f2e07b93"
+    }
+  ],
+  "identity_preservation": {
+    "retained_candidate_ids": [
+      "alrecipe-al_arta_cultura_008-52c19b929e8b58a4",
+      "alrecipe-al_arta_cultura_008-6a85794eaee6a351",
+      "alrecipe-al_arta_cultura_008-8b6c73c0ca4a1594",
+      "alrecipe-al_arta_cultura_013-6a7ca188569f44ac",
+      "alrecipe-al_arta_cultura_014-23d573855f4c9fd9",
+      "alrecipe-al_arta_cultura_014-4c40357eabe090ef",
+      "alrecipe-al_arta_cultura_014-a3650529b4580ef7",
+      "alrecipe-al_arta_cultura_016-df72f2d42cb1eabd",
+      "alrecipe-al_arta_cultura_017-b0d5443676082705",
+      "alrecipe-al_film_tv_020-149912f45a31b25d",
+      "alrecipe-al_film_tv_020-7b734fe0bab5c288",
+      "alrecipe-al_film_tv_020-f6efc18f7a771723",
+      "alrecipe-al_film_tv_021-49df1a5700159b30",
+      "alrecipe-al_film_tv_021-e99d50c411c9eae8",
+      "alrecipe-al_film_tv_023-1a2911a5ae48c1fe",
+      "alrecipe-al_film_tv_106-81a79e92140edbc2",
+      "alrecipe-al_gastronomie_029-271020625db2d988",
+      "alrecipe-al_geografie_002-7ee5c60ea63d8208",
+      "alrecipe-al_geografie_031-ae2b5902f1639453",
+      "alrecipe-al_geografie_031-d22705a52fcd5a2b",
+      "alrecipe-al_geografie_033-bb8bfcd0955f704f",
+      "alrecipe-al_geografie_033-c76764dae62d17b1",
+      "alrecipe-al_istorie_001-018ce4c23d6e8f19",
+      "alrecipe-al_istorie_035-148141c6e6a57495",
+      "alrecipe-al_istorie_035-4a6467e958c6feb7",
+      "alrecipe-al_istorie_035-5f3ec4be108338c6",
+      "alrecipe-al_istorie_035-9312dad6df475e93",
+      "alrecipe-al_istorie_035-ef0a104c82d657a4",
+      "alrecipe-al_istorie_041-3861fabfa59948a6",
+      "alrecipe-al_istorie_041-467e3999b13b8d6a",
+      "alrecipe-al_istorie_041-4f553c48ba3e2205",
+      "alrecipe-al_istorie_041-c1f379b6d0a804c6",
+      "alrecipe-al_istorie_041-c3ccda2bba00a757",
+      "alrecipe-al_istorie_041-d459ff49861a8dcc",
+      "alrecipe-al_limba_043-e9cbf7fd96e634d8",
+      "alrecipe-al_literatura_005-7a2b0077f486cfd9",
+      "alrecipe-al_literatura_054-71d8e4d22e0fd986",
+      "alrecipe-al_literatura_097-ca5999c028901700",
+      "alrecipe-al_meme_net_057-9c6f7e23358b6241",
+      "alrecipe-al_muzica_063-f46b39c98d4c9960",
+      "alrecipe-al_personalitati_006-05d70b1015299ff5",
+      "alrecipe-al_personalitati_006-46ced8f4e0747830",
+      "alrecipe-al_sport_083-0579a2e817b3f1f4",
+      "alrecipe-al_sport_083-36a787c3d5e29dae",
+      "alrecipe-al_sport_083-bfb3e8b4f2e07b93",
+      "alrecipe-al_stiinta_008-6f1bf3883209b8dd",
+      "alrecipe-al_stiinta_008-e33f480433dad310",
+      "alrecipe-al_stiinta_089-84c874fc6c13d095",
+      "alrecipe-al_viata_de_roman_096-7189d7ebb5172e52"
+    ],
+    "all_retained_pair_result_edge_identities_equal": true,
+    "withdrawn_historical_additions": [
+      {
+        "candidate_id": "alrecipe-al_istorie_034-b6fa248bd5858176",
+        "board_id": "al_istorie_034",
+        "pair": [
+          "n_dacia",
+          "n_razboaiele_daco_romane"
+        ],
+        "result": "n_sarmizegetusa",
+        "edge_ids": [
+          "ae3",
+          "de678"
+        ]
+      }
+    ],
+    "reason": "The sole withdrawn addition belongs to release-reserved al_istorie_034. It remains in the exact baseline archive; this does not remove any addition from the68 selectable boards.",
+    "reserved_board_ids": [
+      "al_gastronomie_024",
+      "al_gastronomie_025",
+      "al_gastronomie_028",
+      "al_istorie_034",
+      "al_istorie_039",
+      "al_meme_net_060",
+      "al_muzica_064",
+      "al_personalitati_068",
+      "al_personalitati_071",
+      "al_personalitati_072",
+      "al_societate_080",
+      "al_societate_081"
+    ],
+    "all83_raw_alchimie_records_preserved_exactly": true
+  },
+  "negative_controls": {
+    "old_snapshots_disable_exactly_seven_additions_on_three_boards": true,
+    "restamped_description_degree_and_label_snapshots_fail_closed": true,
+    "restamped_reviews_cannot_approve_stale_kg_pack_or_rubric_bindings": true
+  },
+  "world_and_history": {
+    "evidence_mode": "carry forward exact unchanged catalog and checked runtime source bindings from prior independent replay",
+    "world_sha256": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+    "concepts": 251,
+    "recipes": 351,
+    "compatible_versions": 9,
+    "preserved_historical_prefixes": 1009,
+    "full_prior_replay_sha256": "b998bef009228e1914bbbffbbbdb5bc9a8b5e26421b2b394d20c3690050e9960",
+    "recipe_rows_and_concept_snapshots_unchanged": true
+  },
+  "closure_of_original_hold": "The original audit required seven collateral recipe additions to be preserved. This exact proposal restores those seven and all68 selectable books. The explicit reviewed selection reserve intentionally excludes12 archived boards; al_istorie_034 loses its sole extension only outside selectable stock. The original80-book evidence remains unchanged.",
+  "limits": [
+    "API selectors are pinned to each exact reviewed board for exhaustive coverage; this does not replace natural-selection browser tests.",
+    "API calls use the real Django create/combine routes in an isolated process with a fresh bounded7200-second/1000-session store.",
+    "This report reviews the proposal. Root still owns final independent review approvals, installation and the served-catalog regression.",
+    "No runtime source or served fixture was modified; no human enjoyment claim."
+  ],
+  "elapsed_seconds": 38.078
+}

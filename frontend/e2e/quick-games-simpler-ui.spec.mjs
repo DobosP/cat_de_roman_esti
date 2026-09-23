@@ -28,7 +28,8 @@ for (const game of quickGames) {
     await deterministicStarts(page, game);
     await start(page, game);
     await expect(page.locator(".screen")).toHaveCSS("opacity", "1");
-    await expect(page.locator(".game-options")).not.toHaveAttribute("open");
+    await expect(page.locator(".game-options")).toHaveCount(0);
+    await expect(page.locator(".game-help")).not.toHaveAttribute("open");
     await expect(page.locator(`${game.board} button`)).toHaveCount(game.key === "intrusul" ? 4 : 8);
     await expect(page.locator(`.${game.key}-actions button`)).toHaveCount(0);
     for (const tile of await page.locator(`${game.board} button`).all()) {
@@ -41,13 +42,64 @@ for (const game of quickGames) {
     expect(await page.evaluate(() => globalThis.document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
   });
 
+  test(`${game.key} widens cards for enlarged text while preserving normal phone and desktop columns`, async ({ page, request }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await deterministicStarts(page, game);
+    const initial = await start(page, game);
+    // Presentation stress uses a normal-length word; no board or response mutation.
+    await page.locator(`${game.board} button strong`).first().evaluate((label) => { label.textContent = "Columbia"; });
+    for (const { width, scale, columns } of [
+      { width: 390, scale: 1, columns: 2 },
+      { width: 320, scale: 2, columns: 1 },
+      { width: 1280, scale: 1, columns: 4 },
+      { width: 1280, scale: 2, columns: 2 },
+    ]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.evaluate((scale) => { globalThis.document.documentElement.style.fontSize = `${scale * 100}%`; }, scale);
+      await page.evaluate(async () => {
+        await globalThis.document.fonts.ready;
+        await Promise.all(globalThis.document.getAnimations().filter((animation) =>
+          Number.isFinite(animation.effect?.getComputedTiming().endTime),
+        ).map((animation) => animation.finished.catch(() => {})));
+      });
+      const metrics = await page.locator(game.board).evaluate((board) => {
+        const buttons = [...board.querySelectorAll("button")];
+        const label = buttons[0].querySelector("strong");
+        const range = globalThis.document.createRange();
+        range.selectNodeContents(label);
+        return {
+          pageWidth: globalThis.document.documentElement.scrollWidth,
+          tiles: buttons.map((tile) => ({ rect: tile.getBoundingClientRect().toJSON(),
+            width: tile.clientWidth, contentWidth: tile.scrollWidth,
+            height: tile.clientHeight, contentHeight: tile.scrollHeight })),
+          fragments: [...range.getClientRects()].map((rect) => rect.toJSON()),
+          fontSize: Number.parseFloat(globalThis.getComputedStyle(label).fontSize),
+        };
+      });
+      expect(new Set(metrics.tiles.map(({ rect }) => Math.round(rect.x))).size, `${width}px / ${scale * 100}% text`).toBe(columns);
+      expect(metrics.pageWidth).toBeLessThanOrEqual(width);
+      expect(metrics.fragments, "Columbia must remain a readable word").toHaveLength(1);
+      expect(metrics.fragments[0].left).toBeGreaterThanOrEqual(metrics.tiles[0].rect.left);
+      expect(metrics.fragments[0].right).toBeLessThanOrEqual(metrics.tiles[0].rect.right);
+      for (const tile of metrics.tiles) {
+        expect(tile.contentWidth).toBeLessThanOrEqual(tile.width + 1);
+        expect(tile.contentHeight).toBeLessThanOrEqual(tile.height + 1);
+      }
+      if (scale === 2) {
+        expect(metrics.fontSize).toBeGreaterThanOrEqual(27);
+        expect(metrics.tiles[0].width).toBeGreaterThanOrEqual(250);
+        if (width === 320) await test.info().attach("readable-doubled-text-cards", { body: await page.screenshot(), contentType: "image/png" });
+      }
+    }
+    expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(initial);
+  });
+
   test(`${game.key} makes an unlocked hint explicit, priced and persistent`, async ({ page, request }, testInfo) => {
     const { initial, hint } = await prepareHint(page, request, game);
     const mutations = [];
     page.on("request", (request) => {
       if (request.method() === "POST" && new URL(request.url()).pathname.startsWith(`${gameURL(game, initial.game_id)}/`)) mutations.push(request.url());
     });
-    await activate(page.locator(".game-options > summary"), testInfo);
     await activate(page.locator(".game-help > summary"), testInfo);
     expect(mutations).toHaveLength(0);
     const response = page.waitForResponse((response) => response.request().method() === "POST" &&
@@ -83,7 +135,7 @@ for (const game of quickGames) {
     expect(mutations).toHaveLength(1);
   });
 
-  test(`${game.key} preserves options focus while a keyboard hint response is held`, async ({ page, request }) => {
+  test(`${game.key} preserves rules focus while a keyboard hint response is held`, async ({ page, request }) => {
     const { initial, hint } = await prepareHint(page, request, game);
     let release;
     let entered;
@@ -99,10 +151,10 @@ for (const game of quickGames) {
       await hint.focus();
       await page.keyboard.press("Enter");
       await requested;
-      const options = page.locator(".game-options > summary");
+      const options = page.locator(".game-help > summary");
       await options.focus();
       await page.keyboard.press("Enter");
-      await expect(page.locator(".game-options")).toHaveAttribute("open", "");
+      await expect(page.locator(".game-help")).toHaveAttribute("open", "");
       await expect(options).toBeFocused();
       release();
       await expect(hint).toHaveCount(0);

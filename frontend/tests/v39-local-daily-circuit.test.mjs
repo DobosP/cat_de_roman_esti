@@ -146,7 +146,7 @@ test("Home renders local-only circuit actions and keeps completed rows read-only
 
   const circuitMarkup = homeSource.slice(
     homeSource.indexOf('<section className="card daily-circuit"'),
-    homeSource.indexOf('<div className="games-grid">'),
+    homeSource.indexOf('        {playedTotal === 0'),
   );
   const helperSource = scoreSource.slice(
     scoreSource.indexOf("export function buildDailyCircuit"),

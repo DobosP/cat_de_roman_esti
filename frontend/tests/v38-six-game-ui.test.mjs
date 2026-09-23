@@ -70,15 +70,13 @@ test("personalized starts and replay fatigue use only non-daily query inputs", (
   assert.doesNotMatch(replayMemory, /sourceId|catalogId|solution/);
 });
 
-test("both boards are tap-first, compact and responsive from tiny phones to desktop", () => {
-  for (const [screen, css, grid] of [
-    [intrusul, intrusulCss, "intrusul-grid"],
-    [perechi, perechiCss, "perechi-grid"],
+test("both boards remain tap-first with touch-sized controls", () => {
+  for (const [screen, css] of [
+    [intrusul, intrusulCss],
+    [perechi, perechiCss],
   ]) {
+    // Actual normal/enlarged column geometry is covered in quick-games-simpler-ui.spec.mjs.
     assert.doesNotMatch(screen, /draggable=|onDrag|onDrop/);
-    assert.match(css, new RegExp(`\\.${grid} \\{[\\s\\S]*?repeat\\(2, minmax\\(0, 1fr\\)\\)`));
-    assert.match(css, new RegExp(`@media \\(min-width: 760px\\)[\\s\\S]*?\\.${grid} \\{[^}]*repeat\\(4, minmax\\(0, 1fr\\)\\)`));
-    assert.doesNotMatch(css, new RegExp(`\\.${grid} \\{[^}]*grid-template-columns: minmax\\(0, 1fr\\)`));
     assert.match(css, /@media \(max-width: 339px\)[\s\S]*?min-height: 64px/);
     assert.match(css, /min-height: 44px/);
   }

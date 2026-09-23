@@ -7,7 +7,6 @@
 // sessionStorage marker prevents a genuinely broken deployment from looping.
 
 export const RELEASE_RECOVERY_KEY = "cat_release_recovery_v1";
-export const RELEASE_RECOVERY_RESET_MS = 10_000;
 
 function pageKey(location) {
   return `${location.pathname}${location.search}${location.hash}`;
@@ -15,42 +14,45 @@ function pageKey(location) {
 
 export function installReleaseRecovery({
   target = globalThis.window,
-  storage = globalThis.sessionStorage,
+  storage,
   location = globalThis.location,
-  schedule = globalThis.setTimeout.bind(globalThis),
 } = {}) {
-  const loadedPageKey = pageKey(location);
-
-  try {
-    if (storage.getItem(RELEASE_RECOVERY_KEY) === loadedPageKey) {
-      schedule(() => {
-        try {
-          if (storage.getItem(RELEASE_RECOVERY_KEY) === loadedPageKey) {
-            storage.removeItem(RELEASE_RECOVERY_KEY);
-          }
-        } catch {
-          // Storage is best-effort; a successful current bundle needs no recovery.
-        }
-      }, RELEASE_RECOVERY_RESET_MS);
+  // Even reading window.sessionStorage can throw before any Storage method runs.
+  if (storage === undefined) {
+    try {
+      storage = globalThis.sessionStorage;
+    } catch {
+      // Startup must work when the browser denies access to storage entirely.
     }
-  } catch {
-    // Safari private mode and hardened browsers may deny sessionStorage.
   }
+  // Retain one last-failed-page string for this tab session. A timer cannot prove
+  // that a pending lazy chunk loaded: clearing the marker would let slow failures
+  // reload every new document. Explicit reload and navigation remain available.
+  let reloadRequested = false;
 
   const recover = (event) => {
-    event.preventDefault();
+    if (reloadRequested) {
+      event.preventDefault();
+      return;
+    }
     const failedPageKey = pageKey(location);
-    let shouldReload = true;
+    let shouldReload = false;
     try {
       if (storage.getItem(RELEASE_RECOVERY_KEY) === failedPageKey) {
         shouldReload = false;
       } else {
         storage.setItem(RELEASE_RECOVERY_KEY, failedPageKey);
+        shouldReload = storage.getItem(RELEASE_RECOVERY_KEY) === failedPageKey;
       }
     } catch {
-      // Without storage, a single reload is still the most useful recovery.
+      // An in-memory guard disappears on reload. Without a durable marker, a
+      // broken chunk would therefore cause an endless cross-document reload loop.
     }
-    if (shouldReload) location.reload();
+    if (shouldReload) {
+      event.preventDefault();
+      reloadRequested = true;
+      location.reload();
+    }
   };
 
   target.addEventListener("vite:preloadError", recover);

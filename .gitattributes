@@ -6,3 +6,7 @@ docs/reviews/v99-refinement-and-discovery/**/*.cjs text eol=lf
 docs/reviews/v99-refinement-and-discovery/**/*.md text eol=lf
 docs/content-pool/v99-everyday-spaces/pool.json text eol=lf
 docs/reviews/v99-refinement-and-discovery/**/*.log text eol=lf
+
+# V1 evidence binds original bytes, including native-generator CRLF records.
+# Preserve review digests on all hosts while checking actual trailing whitespace.
+docs/reviews/v1-testing-release/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

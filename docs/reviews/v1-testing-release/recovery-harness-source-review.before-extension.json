@@ -1,0 +1,55 @@
+{
+  "author": "/root/v1_board_audit",
+  "author_evidence_sha256": "ddc396a41b675d14ab24ea8ef08936d4ed41151faf3724a8c8bf3f29c0323225",
+  "before_bindings": {
+    "frontend/e2e/alchimie-empty-pairs.spec.mjs": "d4c9a7cf24c9dab5dde105eebfdd39ae5a42f5725f6207732f2dacd31b1a7ab7",
+    "frontend/e2e/v96-input-and-focus.spec.mjs": "82a7c850e48b9b9b92370e6c30c7b9c3bbe0d229be59acad9852e8d73d0cbd3d"
+  },
+  "bindings": {
+    "frontend/e2e/alchimie-empty-pairs.spec.mjs": "3968b19c4d4a405f8e241295ca52283ea9edc0546defe82c4f1b4d634b3a376d",
+    "frontend/e2e/v96-input-and-focus.spec.mjs": "8c94e95b8f894894f9f955d6e9c6bce7d9f408dceeacf2fb130232b128e0da22"
+  },
+  "independent_evidence": {
+    "existing_precedent": "The unchanged final V96 depleted-input recovery case already retains the route, aborts once, continues later requests, and asserts one combine plus one GET.",
+    "framework_inspection": "Read installed Playwright Page._onRoute. It removes expiring handlers, awaits handler.handle, then starts an interception-pattern update without awaiting it when no handlers remain. This supports the documented overlap mechanism; it does not prove the exact Chromium-internal stalled state.",
+    "original_failure_traces": [
+      {
+        "independent_observation": "Network archive shows the failed browser combine and an immediate GET with response status/time still -1. Committed mobile case also has the server-side POST result 200.",
+        "project": "desktop",
+        "test": "identical cached retries cannot restore stale focus after a lost uncommitted craft",
+        "trace_sha256": "93b6972e0d2a83bb821842d7b69bf40924bea5e280f55cf5c291415b19f08564"
+      },
+      {
+        "independent_observation": "Network archive shows the failed browser combine and an immediate GET with response status/time still -1. Committed mobile case also has the server-side POST result 200.",
+        "project": "mobile",
+        "test": "recovery of committed crafting respects moved focus",
+        "trace_sha256": "5ed798ce204671a0e34f8479345e25f3b504c7b9d1e437fd09a40bb5334b13a2"
+      }
+    ],
+    "original_repeat_log_sha256": "b46f698818c388fb5a543972b49766c0d572f937f1b51c3dae25b339e4464742",
+    "original_repeat_result": "10 passed / 2 failed, consistent with the author report"
+  },
+  "kind": "v1-independent-recovery-harness-source-review-v1",
+  "limits": [
+    "Reviewed diffs, original snapshots, two existing network archives, original repetition log and local framework source; no new browser execution was performed by this reviewer.",
+    "The transport-stall diagnosis is supported by the failure location and interception lifecycle, but the underlying browser implementation cause remains unproven.",
+    "Root must record passing affected scenarios against the final rebuilt application before treating runtime verification as complete."
+  ],
+  "preserved_invariants": [
+    "Committed versus uncommitted discoveries and real authoritative recovery payloads.",
+    "Repeated local cached acknowledgments; no stale focus restoration.",
+    "Moved focus ownership versus activated-word focus restoration.",
+    "Recovery message, usable inventory, 320px doubled-text bounds and visible focused word.",
+    "Original test names, parameter variants, expectations and timeouts; no skip, retry or timeout extension."
+  ],
+  "rationale": "Retaining the combine interceptor until page teardown prevents the last one-shot handler from being removed at the moment the application issues recovery GET. It still commits the injected action only in committed scenarios and aborts the first browser response exactly once. Subsequent requests are continued rather than silently swallowed and now fail the explicit one-request count if the application replays a mutation. The GET is real and its authoritative inventory remains the basis of every existing focus and discovery assertion. This is a narrow harness repair rather than a change to application behavior or success criteria.",
+  "remaining_source_blockers": [],
+  "reviewer": "/root/v1_held_audit",
+  "runtime_status": "pending_root_final_affected_matrix",
+  "scope": "Six parameterized scenarios only: final two cached-focus lost-craft cases in alchimie-empty-pairs, and first four committed-by-moved-focus cases in v96. The earlier empty-reply tests and V96 final-craft precedent remain unchanged. No production or timeout change.",
+  "strengthened_invariants": [
+    "Committed injection must receive server HTTP 200 before its browser response is aborted.",
+    "Exactly one intercepted combine request and one same-session browser recovery GET."
+  ],
+  "verdict": "accept_test_harness_change_runtime_pending"
+}

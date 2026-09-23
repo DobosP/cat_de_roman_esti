@@ -1,0 +1,86 @@
+{
+  "kind": "v1-recovery-interceptor-harness-review-v1",
+  "author": "/root/v1_board_audit",
+  "classification": "Reproduced browser-test transport/interception stall; no evidence of an application focus or reconciliation defect.",
+  "initial_failures": [
+    {
+      "test": "identical cached retries cannot restore stale focus after a lost uncommitted craft",
+      "project": "desktop",
+      "failed_await": "alchimie-empty-pairs.spec.mjs original line162 recovery GET response",
+      "timeline_ms": {
+        "combine_started": 144814.273,
+        "test_abort_started": 144817.313,
+        "test_abort_completed": 144819.953,
+        "recovery_get_started": 144822.519
+      },
+      "combine_result": "net::ERR_FAILED",
+      "recovery_get_result": "pending without response/status until 45-second test timeout",
+      "evidence": "browser-final-clean-results/alchimie-empty-pairs-ident-de8b6-er-a-lost-uncommitted-craft-desktop/trace.zip"
+    },
+    {
+      "test": "recovery of committed crafting respects moved focus",
+      "project": "mobile",
+      "failed_await": "v96-input-and-focus.spec.mjs original line33 recovery GET response",
+      "timeline_ms": {
+        "browser_combine_started": 1142068.522,
+        "server_commit_started": 1142074.956,
+        "server_commit_duration": 27.251,
+        "test_abort_started": 1142119.019,
+        "recovery_get_started": 1142123.421
+      },
+      "server_commit_status": 200,
+      "browser_combine_result": "net::ERR_FAILED",
+      "recovery_get_result": "pending without response/status until 45-second test timeout",
+      "evidence": "browser-final-clean-results/v96-input-and-focus-recove-02525-afting-respects-moved-focus-mobile/trace.zip"
+    }
+  ],
+  "local_framework_evidence": {
+    "path": "frontend/node_modules/playwright-core/lib/coreBundle.js",
+    "lines": "61428-61446",
+    "behavior": "Page._onRoute removes the final times:1 handler, awaits abort handler completion, then fire-and-forgets an interception-pattern update; app recovery GET can overlap that transition. Trace alone does not identify the exact Chromium-internal stalled state."
+  },
+  "existing_test_precedent": {
+    "path": "frontend/e2e/v96-input-and-focus.spec.mjs",
+    "original_lines": "83-104",
+    "test": "a lost final craft restores collection focus when both inputs are depleted",
+    "behavior": "Retains combine interceptor through recovery, explicitly aborts once, continues later requests and asserts exactly one combine plus one recovery read."
+  },
+  "changes": {
+    "frontend/e2e/alchimie-empty-pairs.spec.mjs": {
+      "before_sha256": "d4c9a7cf24c9dab5dde105eebfdd39ae5a42f5725f6207732f2dacd31b1a7ab7",
+      "after_sha256": "3968b19c4d4a405f8e241295ca52283ea9edc0546defe82c4f1b4d634b3a376d",
+      "original_backup": "C:\\Users\\Paul Work\\work\\_temp\\v1-testing-release\\recovery-harness-original-alchimie-empty-pairs.spec.mjs"
+    },
+    "frontend/e2e/v96-input-and-focus.spec.mjs": {
+      "before_sha256": "82a7c850e48b9b9b92370e6c30c7b9c3bbe0d229be59acad9852e8d73d0cbd3d",
+      "after_sha256": "8c94e95b8f894894f9f955d6e9c6bce7d9f408dceeacf2fb130232b128e0da22",
+      "original_backup": "C:\\Users\\Paul Work\\work\\_temp\\v1-testing-release\\recovery-harness-original-v96-input-and-focus.spec.mjs"
+    }
+  },
+  "scope": "Only final two parametrized cached-focus cases in alchimie-empty-pairs and first four parametrized focus-recovery cases in v96. No production source, static, session, transport, timeout or content changes.",
+  "preserved_assertions": [
+    "Committed versus uncommitted discovery truth",
+    "Repeated local cached acknowledgments and activated focus",
+    "Recovery message and usable inventory",
+    "Moved-focus ownership versus restored activated word",
+    "320px doubled-text geometry and visible focused word",
+    "Existing 45000ms test timeout"
+  ],
+  "added_assertions": [
+    "Exactly one browser combine request",
+    "Exactly one recovery GET request",
+    "Committed injection receives HTTP200 before its browser response is dropped"
+  ],
+  "original_reproduction": {
+    "command": "playwright test e2e/alchimie-empty-pairs.spec.mjs --grep \"identical cached retries\" --repeat-each 3 --workers 2",
+    "passed": 10,
+    "failed": 2,
+    "duration": "1.1m",
+    "log": "empty-pairs-original-repro.log",
+    "artifacts": "empty-pairs-original-repro-results",
+    "failures": "Committed variant on desktop and mobile; both repeat traces show browser POST aborted, server commit200 and recoveryGET pending, with no focus assertion reached."
+  },
+  "fixed_verification": {
+    "status": "Awaiting root final affected-spec matrix after UX final label build; no fixed browser result claimed yet."
+  }
+}

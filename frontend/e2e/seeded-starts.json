@@ -2,14 +2,24 @@
   "alchimie": {
     "target": {
       "id": null,
-      "label": "Liga Campionilor la handbal",
-      "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+      "label": "virus",
+      "description": "Agent infecțios microscopic care se reproduce în celule vii.",
       "revealed": false
     },
     "inventory": [
       {
-        "id": "n_spt_cristina_neagu",
-        "label": "Cristina Neagu",
+        "id": "n_stilou_rezervor",
+        "label": "Stiloul cu rezervor",
+        "parents": null,
+        "links": [],
+        "recent": true,
+        "useful": false,
+        "ready": false,
+        "depleted": true
+      },
+      {
+        "id": "n_v4sti_ureche",
+        "label": "ureche",
         "parents": null,
         "links": [],
         "recent": true,
@@ -18,8 +28,8 @@
         "depleted": false
       },
       {
-        "id": "n_v2spo_echipa_nationala",
-        "label": "Echipă națională",
+        "id": "n_gheorghe_marinescu",
+        "label": "Gheorghe Marinescu",
         "parents": null,
         "links": [],
         "recent": true,
@@ -28,8 +38,8 @@
         "depleted": false
       },
       {
-        "id": "n_v11spo_dinamo_bucuresti",
-        "label": "Dinamo București",
+        "id": "n_v3sti_experiment",
+        "label": "Experiment",
         "parents": null,
         "links": [],
         "recent": true,
@@ -38,8 +48,8 @@
         "depleted": false
       },
       {
-        "id": "n_v11spo_rapid_bucuresti",
-        "label": "Rapid București",
+        "id": "n_v3sti_microscop",
+        "label": "Microscop",
         "parents": null,
         "links": [],
         "recent": true,
@@ -48,29 +58,19 @@
         "depleted": false
       },
       {
-        "id": "n_v18spo_fcsb",
-        "label": "FCSB",
+        "id": "n_v4sti_foc",
+        "label": "foc",
         "parents": null,
         "links": [],
         "recent": true,
-        "useful": true,
-        "ready": true,
-        "depleted": false
-      },
-      {
-        "id": "n_v18spo_cfr_cluj",
-        "label": "CFR Cluj",
-        "parents": null,
-        "links": [],
-        "recent": true,
-        "useful": true,
-        "ready": true,
-        "depleted": false
+        "useful": false,
+        "ready": false,
+        "depleted": true
       }
     ],
     "inventory_summary": {
-      "active": 6,
-      "depleted": 0,
+      "active": 4,
+      "depleted": 2,
       "total": 6
     },
     "discovered_count": 0,
@@ -84,11 +84,11 @@
     "hint_stage": "output",
     "hint_available": false,
     "recipe_summary": {
-      "pairs": 9,
+      "pairs": 7,
       "routes": 4,
-      "max_results": 1
+      "max_results": 2
     },
-    "board_category": "sport"
+    "board_category": "stiinta"
   },
   "intrusul": {
     "tiles": [
@@ -176,68 +176,68 @@
   "conexiuni": {
     "tiles": [
       {
-        "id": "n_v42vdr_maxi_taxi",
-        "label": "Maxi-taxi"
+        "id": "n_v42vdr_babele",
+        "label": "Zilele Babelor"
       },
       {
-        "id": "n_v42vdr_stampila",
-        "label": "Ștampila"
+        "id": "n_v42vdr_8_martie",
+        "label": "8 Martie"
       },
       {
-        "id": "n_v42vdr_cutia_biscuiti",
-        "label": "Cutia de biscuiți cu ață"
+        "id": "n_v42vdr_iepurasul",
+        "label": "Iepurașul de Paște"
       },
       {
-        "id": "n_vdr_punga_cu_pungi",
-        "label": "Punga cu pungi"
+        "id": "n_v42vdr_ciocnitul_oualor",
+        "label": "Ciocnitul ouălor"
       },
       {
-        "id": "n_vdr_descurcare_romaneasca",
-        "label": "Descurcăreala de zi cu zi"
+        "id": "n_v42vdr_ursul_obicei",
+        "label": "Jocul ursului"
       },
       {
-        "id": "n_v42vdr_se_rezolva",
-        "label": "Se rezolvă"
+        "id": "n_v42vdr_sorcova",
+        "label": "Sorcova"
       },
       {
-        "id": "n_v3via_coada",
-        "label": "Coada"
+        "id": "n_v42vdr_nasii",
+        "label": "Nașii"
       },
       {
-        "id": "n_v3via_sacosa",
-        "label": "Sacoșa"
+        "id": "n_v42vdr_slujba_inviere",
+        "label": "Slujba de Înviere"
       },
       {
-        "id": "n_v42vdr_autostopul",
-        "label": "Autostopul"
+        "id": "n_v42vdr_vopsitul_oualor",
+        "label": "Vopsitul ouălor"
       },
       {
-        "id": "n_v42vdr_reveniti_maine",
-        "label": "Reveniți mâine"
+        "id": "n_v42vdr_darul",
+        "label": "Darul de nuntă"
       },
       {
-        "id": "n_vdr_lasa_ca_merge",
-        "label": "Lasă că merge și așa"
+        "id": "n_martisor",
+        "label": "Mărțișor"
       },
       {
-        "id": "n_v42vdr_las_ca_stiu_eu",
-        "label": "Știu eu pe cineva"
+        "id": "n_v42vdr_ghiocel",
+        "label": "Ghiocelul"
       },
       {
-        "id": "n_v42vdr_personal_cfr",
-        "label": "Trenul personal"
+        "id": "n_v42vdr_furatul_miresei",
+        "label": "Furatul miresei"
       },
       {
-        "id": "n_v3via_naveta",
-        "label": "Naveta"
+        "id": "n_vdr_plugusorul",
+        "label": "Plugușorul"
       },
       {
-        "id": "n_v3via_dosar_sina",
-        "label": "Dosar cu șină"
+        "id": "n_v42vdr_capra",
+        "label": "Jocul caprei"
       },
       {
-        "id": "n_vdr_borcane_zacusca",
-        "label": "Borcanele de zacuscă"
+        "id": "n_v42vdr_dansul_gainii",
+        "label": "Dansul găinii"
       }
     ],
     "solved": [],

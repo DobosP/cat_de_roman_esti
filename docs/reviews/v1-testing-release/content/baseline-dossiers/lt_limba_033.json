@@ -1,0 +1,147 @@
+{
+  "id": "lt_limba_033",
+  "game": "lant",
+  "category": "limba",
+  "difficulty": "usor",
+  "status": "approved",
+  "record_sha256": "3b0c8c95852bb896fad5c5b1ced50ee178c51414b7854f428393914896f2b5ac",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Păpușoi salience 0.20 < 0.60 (usor floor)"
+    },
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Barabulă salience 0.18 < 0.60 (usor floor)"
+    }
+  ],
+  "nondistinctive_region_links": {
+    "Barabulă": "linked to 2 regions (Bucovina, Moldova)"
+  },
+  "display_rules_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+  "start": {
+    "id": "n_lbax_regionalism_papusoi",
+    "label": "Păpușoi",
+    "node_type": "concept",
+    "category": "limba",
+    "salience": 0.2041,
+    "degree": 5,
+    "incoming_degree": 4,
+    "description": "Regionalism moldovenesc pentru porumb; apare des în vorbirea populară și în literatură."
+  },
+  "target": {
+    "id": "n_lbax_regionalism_barabula",
+    "label": "Barabulă",
+    "node_type": "concept",
+    "category": "limba",
+    "salience": 0.1804,
+    "degree": 5,
+    "incoming_degree": 3,
+    "description": "Regionalism pentru cartof, asociat mai ales cu Moldova și Bucovina."
+  },
+  "optimal": 2,
+  "branch_profile": {
+    "valid_first_hops": 2,
+    "narrowest_shortest_path_layer": 2,
+    "total_intermediate_shortest_path_nodes": 2
+  },
+  "representative_shortest_paths": [
+    {
+      "nodes": [
+        {
+          "id": "n_lbax_regionalism_papusoi",
+          "label": "Păpușoi"
+        },
+        {
+          "id": "n_lbax_regionalisme",
+          "label": "Regionalisme"
+        },
+        {
+          "id": "n_lbax_regionalism_barabula",
+          "label": "Barabulă"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_lbax_regionalism_papusoi",
+            "label": "Păpușoi"
+          },
+          "to": {
+            "id": "n_lbax_regionalisme",
+            "label": "Regionalisme"
+          },
+          "relation": "same_category",
+          "label": "include",
+          "display_label": "legătură directă",
+          "strength": 0.84
+        },
+        {
+          "from": {
+            "id": "n_lbax_regionalisme",
+            "label": "Regionalisme"
+          },
+          "to": {
+            "id": "n_lbax_regionalism_barabula",
+            "label": "Barabulă"
+          },
+          "relation": "same_category",
+          "label": "include",
+          "display_label": "legătură directă",
+          "strength": 0.82
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "n_lbax_regionalism_papusoi",
+          "label": "Păpușoi"
+        },
+        {
+          "id": "n_v2lim_grai",
+          "label": "Grai"
+        },
+        {
+          "id": "n_lbax_regionalism_barabula",
+          "label": "Barabulă"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_lbax_regionalism_papusoi",
+            "label": "Păpușoi"
+          },
+          "to": {
+            "id": "n_v2lim_grai",
+            "label": "Grai"
+          },
+          "relation": "part_of",
+          "label": "cuvânt de grai",
+          "display_label": "parte și întreg",
+          "strength": 0.76
+        },
+        {
+          "from": {
+            "id": "n_v2lim_grai",
+            "label": "Grai"
+          },
+          "to": {
+            "id": "n_lbax_regionalism_barabula",
+            "label": "Barabulă"
+          },
+          "relation": "part_of",
+          "label": "cuvânt de grai",
+          "display_label": "parte și întreg",
+          "strength": 0.76
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:b146e9942b862a0d65a439af0aa6d880a1dcf53fd26f1fa308380cb3dd6496ff"
+}

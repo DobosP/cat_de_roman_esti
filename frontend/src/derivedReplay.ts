@@ -49,8 +49,8 @@ function normalizeIds(value: unknown): ReplayIds {
 }
 
 function read(): { ids: ReplayIds; migrate: boolean } {
-  if (typeof localStorage === "undefined") return { ids: {}, migrate: false };
   try {
+    if (typeof localStorage === "undefined") return { ids: {}, migrate: false };
     const parsed: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
     if (
       isRecord(parsed) &&
@@ -71,12 +71,12 @@ function read(): { ids: ReplayIds; migrate: boolean } {
 }
 
 function write(ids: ReplayIds): void {
-  if (typeof localStorage === "undefined") return;
   const document: StoredReplayIds = {
     version: STORAGE_VERSION,
     ids: normalizeIds(ids),
   };
   try {
+    if (typeof localStorage === "undefined") return;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(document));
   } catch {
     // Replay diversity is best-effort when browser storage is unavailable.

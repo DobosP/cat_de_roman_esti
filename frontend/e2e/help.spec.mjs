@@ -1,15 +1,16 @@
 import { test, expect } from "@playwright/test";
 import { GAME_HELP } from "../src/gameHelp.mjs";
-import { games, gameURL, deterministicStarts, tabTo, start, act, solution, openAlchemyDisclosure, openGameOptions } from "./games.mjs";
+import { games, gameURL, deterministicStarts, tabTo, start, act, solution, openAlchemyDisclosure } from "./games.mjs";
 
 for (const game of games) {
   test(`${game.key} rules preserve the round and focused choices`, async ({ page, request }, testInfo) => {
     await deterministicStarts(page, game);
     const initial = await start(page, game);
-    await openGameOptions(page, game);
     const help = page.locator("details.game-help");
     const toggle = help.locator("summary");
     await expect(help).not.toHaveAttribute("open");
+    await expect(toggle).toBeVisible();
+    expect(await help.evaluate((element) => element.parentElement.closest("details"))).toBeNull();
 
     // A ready selection used to make global Enter handlers consume the help key.
     const selectedCount = { alchimie: 1, conexiuni: 4, perechi: 1 }[game.key] ?? 0;
@@ -44,6 +45,8 @@ for (const game of games) {
     if (keyboard) await page.keyboard.press("Space");
     else await toggle.click();
     await expect(help).not.toHaveAttribute("open");
+    await expect(toggle).toBeVisible();
+    expect(await help.evaluate((element) => element.parentElement.closest("details"))).toBeNull();
     expect(posts).toEqual([]);
     if (selectedCount) {
       await expect(page.locator(game.board).locator('[aria-pressed="true"]')).toHaveCount(selectedCount);

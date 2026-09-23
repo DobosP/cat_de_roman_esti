@@ -73,10 +73,18 @@ test("GET reload and goal changes preserve observations without blocking a valid
 for (const committed of [false, true]) {
   test(`lost ${committed ? "committed" : "uncommitted"} empty reply trusts only recovery GET`, async ({ page }) => {
     const state = await begin(page);
+    let combineRequests = 0;
+    let recoveryReads = 0;
+    page.on("request", (request) => {
+      if (request.method() === "GET" && new URL(request.url()).pathname === `${BASE}/${state.game_id}`) recoveryReads += 1;
+    });
+    // Retain interception while the immediate recovery GET is in flight.
     await page.route(`**${BASE}/${state.game_id}/combine`, async (route) => {
-      if (committed) await route.fetch();
+      combineRequests += 1;
+      if (combineRequests !== 1) { await route.continue(); return; }
+      if (committed) expect((await route.fetch()).status()).toBe(200);
       await route.abort("failed");
-    }, { times: 1 });
+    });
     await word(page, "Făină").click();
     const recovered = reply(page, `${BASE}/${state.game_id}`, "GET");
     await word(page, "Cheag alimentar").click();
@@ -85,6 +93,8 @@ for (const committed of [false, true]) {
     await word(page, "Făină").click();
     if (committed) await expect(word(page, "Cheag alimentar")).toHaveClass(/alchemy-word--tried/);
     else await expect(word(page, "Cheag alimentar")).not.toHaveClass(/alchemy-word--tried/);
+    expect(combineRequests).toBe(1);
+    expect(recoveryReads).toBe(1);
   });
 }
 
@@ -155,10 +165,19 @@ for (const committed of [false, true]) {
     await expect(page.getByText(/ai încercat deja această pereche/)).toBeVisible();
     await tried.press("Enter");
     await expect(tried).toBeFocused();
+    let combineRequests = 0;
+    let recoveryReads = 0;
+    page.on("request", (request) => {
+      if (request.method() === "GET" && new URL(request.url()).pathname === `${BASE}/${state.game_id}`) recoveryReads += 1;
+    });
+    // Keep interception active through the immediate recovery GET, as in the
+    // depleted-input recovery case: final one-shot teardown can strand that read.
     await page.route(`**${BASE}/${state.game_id}/combine`, async (route) => {
-      if (committed) await route.fetch();
+      combineRequests += 1;
+      if (combineRequests !== 1) { await route.continue(); return; }
+      if (committed) expect((await route.fetch()).status()).toBe(200);
       await route.abort("failed");
-    }, { times: 1 });
+    });
     const recovered = reply(page, `${BASE}/${state.game_id}`, "GET");
     await word(page, "Apă").focus();
     await word(page, "Apă").press("Enter");
@@ -167,5 +186,7 @@ for (const committed of [false, true]) {
     await expect(page.getByText("Colecție sincronizată. Poți continua.")).toBeVisible();
     await expect(tried).not.toBeFocused();
     await expect(word(page, "Făină")).toBeEnabled();
+    expect(combineRequests).toBe(1);
+    expect(recoveryReads).toBe(1);
   });
 }

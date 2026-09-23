@@ -665,19 +665,12 @@ export default function Lant({
         <section className="card lant-route" aria-label="Poziția și ținta">
           <div className="lant-current">
             <span className="faint">EȘTI ACUM LA</span>
-            <AnimatePresence mode="wait">
-              <m.div
-                key={state.current.id}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.15 }}
-                className="lant-route-word"
-                style={{ color: won ? TARGET_COLOR : DEF.accent }}
-              >
-                {state.current.label}
-              </m.div>
-            </AnimatePresence>
+            <div
+              className="lant-route-word"
+              style={{ color: won ? TARGET_COLOR : DEF.accent }}
+            >
+              {state.current.label}
+            </div>
           </div>
           <span className="lant-route-arrow muted" aria-hidden>→</span>
           <div className="lant-target">

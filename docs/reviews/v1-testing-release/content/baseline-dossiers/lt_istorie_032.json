@@ -1,0 +1,144 @@
+{
+  "id": "lt_istorie_032",
+  "game": "lant",
+  "category": "istorie",
+  "difficulty": "usor",
+  "status": "approved",
+  "record_sha256": "11b189e34e29a176aaf4b0d6f8bfc92f0ee2e15c1b476bf10ef830e86cda8243",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Mircea cel Bătrân salience 0.26 < 0.60 (usor floor)"
+    },
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Bătălia de la Călugăreni salience 0.17 < 0.60 (usor floor)"
+    }
+  ],
+  "display_rules_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+  "start": {
+    "id": "n_mircea_cel_batran",
+    "label": "Mircea cel Bătrân",
+    "node_type": "person",
+    "category": "istorie",
+    "salience": 0.2628,
+    "degree": 7,
+    "incoming_degree": 7,
+    "description": "Domn al Tarii Romanesti (1386-1418), cunoscut pentru rezistenta antiotomana."
+  },
+  "target": {
+    "id": "n_istx_batalia_calugareni",
+    "label": "Bătălia de la Călugăreni",
+    "node_type": "event",
+    "category": "istorie",
+    "salience": 0.1712,
+    "degree": 4,
+    "incoming_degree": 4,
+    "description": "Confruntare din 1595 între Mihai Viteazul și otomani, reper al campaniei antiotomane."
+  },
+  "optimal": 2,
+  "branch_profile": {
+    "valid_first_hops": 2,
+    "narrowest_shortest_path_layer": 2,
+    "total_intermediate_shortest_path_nodes": 2
+  },
+  "representative_shortest_paths": [
+    {
+      "nodes": [
+        {
+          "id": "n_mircea_cel_batran",
+          "label": "Mircea cel Bătrân"
+        },
+        {
+          "id": "n_tara_romaneasca",
+          "label": "Țara Românească"
+        },
+        {
+          "id": "n_istx_batalia_calugareni",
+          "label": "Bătălia de la Călugăreni"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_mircea_cel_batran",
+            "label": "Mircea cel Bătrân"
+          },
+          "to": {
+            "id": "n_tara_romaneasca",
+            "label": "Țara Românească"
+          },
+          "relation": "related_to",
+          "label": "a domnit în",
+          "display_label": "legătură directă",
+          "strength": 0.88
+        },
+        {
+          "from": {
+            "id": "n_tara_romaneasca",
+            "label": "Țara Românească"
+          },
+          "to": {
+            "id": "n_istx_batalia_calugareni",
+            "label": "Bătălia de la Călugăreni"
+          },
+          "relation": "located_in",
+          "label": "are loc în",
+          "display_label": "legătură directă",
+          "strength": 0.76
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "n_mircea_cel_batran",
+          "label": "Mircea cel Bătrân"
+        },
+        {
+          "id": "n_imperiul_otoman",
+          "label": "Imperiul Otoman"
+        },
+        {
+          "id": "n_istx_batalia_calugareni",
+          "label": "Bătălia de la Călugăreni"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_mircea_cel_batran",
+            "label": "Mircea cel Bătrân"
+          },
+          "to": {
+            "id": "n_imperiul_otoman",
+            "label": "Imperiul Otoman"
+          },
+          "relation": "related_to",
+          "label": "a luptat cu",
+          "display_label": "legătură directă",
+          "strength": 0.7
+        },
+        {
+          "from": {
+            "id": "n_imperiul_otoman",
+            "label": "Imperiul Otoman"
+          },
+          "to": {
+            "id": "n_istx_batalia_calugareni",
+            "label": "Bătălia de la Călugăreni"
+          },
+          "relation": "related_to",
+          "label": "luptă cu otomanii",
+          "display_label": "legătură directă",
+          "strength": 0.82
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:03378f8171a7019863901d6a8e19a1631b986dc914fe58c9b4ffc1e9110a459d"
+}

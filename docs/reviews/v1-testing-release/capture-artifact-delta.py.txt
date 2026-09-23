@@ -1,0 +1,145 @@
+"""Capture exact reviewed V1 artifact deltas against immutable cc0a6a4 Git blobs.
+
+Run with constrained Python: capture-artifact-delta.py.txt --repo <worktree>.
+Writes review evidence only; rejects any unlisted semantic delta or source drift.
+"""
+from __future__ import annotations
+import argparse
+import hashlib
+import json
+import subprocess
+from pathlib import Path
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--repo', type=Path, required=True)
+args = parser.parse_args()
+ROOT = args.repo.resolve()
+BASE = 'cc0a6a490f4a37f6f94b59cf9a84eb760cb3a401'
+REVIEW = ROOT / 'docs/reviews/v1-testing-release'
+PATHS = {
+    name: ('tests/fixtures/' if name.startswith('cat_mobile') else
+           'cat_de_roman_esti/fixtures/') + name
+    for name in ('kg_sample.json', 'games_pack.json', 'board_rankings_v37.json',
+                 'derived_catalog_v38.json', 'cat_mobile_app_pack_contract.json')
+}
+EXPECTED = {
+    'kg_sample.json': '1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64',
+    'games_pack.json': 'e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8',
+    'board_rankings_v37.json': 'bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc',
+    'derived_catalog_v38.json': 'bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4',
+    'cat_mobile_app_pack_contract.json': '82304733284ca62245e0d2ac0abb7b81c991ed1857ca904c990116c5bce280b4',
+}
+NODE_FIELDS = {
+    'n_v20geo_crucea_caraiman': {'description'},
+    'n_ateneul_roman': {'description'}, 'n_v17art_muzeul_satului': {'description'},
+    'n_ftv_dem_radulescu': {'degree'}, 'n_ftv_operatiunea_monstrul': {'degree'},
+}
+EDGE_IDS = {'de1218', 'de2664', 'de2665'}
+GAMES = ('conexiuni', 'contexto', 'lant', 'alchimie')
+
+
+def sha(blob):
+    return hashlib.sha256(blob).hexdigest()
+
+
+def dump(value, indent=2):
+    return (json.dumps(value, ensure_ascii=False, indent=indent) + '\n').encode('utf-8')
+
+
+def fields(change):
+    before, after = change['before'], change['after']
+    assert set(before) == set(after)
+    return {key for key in before if before[key] != after[key]}
+
+
+files = {}
+for filename, relative in PATHS.items():
+    before_blob = subprocess.check_output(
+        ['git', '-c', 'core.autocrlf=false', 'show', BASE + ':' + relative], cwd=ROOT)
+    after_blob = (ROOT / relative).read_bytes()
+    assert sha(after_blob) == EXPECTED[filename], 'unfrozen ' + filename
+    before, after = json.loads(before_blob), json.loads(after_blob)
+    indent = 2 if filename == 'kg_sample.json' else 1
+    assert dump(before, indent) == before_blob and dump(after, indent) == after_blob
+    assert set(before) == set(after)
+    tables = {}
+    for table, rows in before.items():
+        if not isinstance(rows, list):
+            continue
+        latest = after[table]
+        old = {r['id']: r for r in rows}
+        new = {r['id']: r for r in latest}
+        assert len(old) == len(rows) and len(new) == len(latest)
+        added = [r for r in latest if r['id'] not in old]
+        removed = [{'index': i, 'row': r} for i, r in enumerate(rows) if r['id'] not in new]
+        changed = {r['id']: {'before': r, 'after': new[r['id']]}
+                   for r in rows if r['id'] in new and r != new[r['id']]}
+        old_common = [r['id'] for r in rows if r['id'] in new]
+        new_common = [r['id'] for r in latest if r['id'] in old]
+        tables[table] = {
+            'added': added, 'removed': removed, 'changed': changed,
+            'baseline_order': [r['id'] for r in rows] if old_common != new_common else None,
+        }
+        assert not added
+        if filename == 'kg_sample.json':
+            if table == 'kg_nodes':
+                assert not removed and {nid: fields(c) for nid, c in changed.items()} == NODE_FIELDS
+                for nid in ('n_ftv_dem_radulescu', 'n_ftv_operatiunea_monstrul'):
+                    assert changed[nid]['before']['degree'] - 1 == changed[nid]['after']['degree']
+            elif table == 'kg_edges':
+                assert [r['row']['id'] for r in removed] == ['de427']
+                assert set(changed) == EDGE_IDS
+                assert all(fields(c) == {'label_ro'} for c in changed.values())
+            else:
+                assert table == 'kg_puzzles' and not removed and not changed
+        elif filename == 'games_pack.json':
+            assert table in GAMES and not removed
+            assert set(changed) == ({'lt_viata_de_roman_211'} if table == 'lant' else set())
+            for c in changed.values():
+                assert fields(c) == {'status'} and c['before']['status'] == 'pending'
+                assert c['after']['status'] == 'approved'
+        elif filename == 'board_rankings_v37.json':
+            assert table == 'boards' and not removed
+            assert all(fields(c) <= {'status', 'pilot_eligible', 'play_quality', 'pilot_score',
+                                      'rank', 'selection_weight'} for c in changed.values())
+            holds = set(json.loads((ROOT / 'cat_de_roman_esti/fixtures/release_reserve_v1.json')
+                                   .read_bytes())['ids'])
+            assert {k for k,c in changed.items() if c['before']['pilot_eligible']
+                    and not c['after']['pilot_eligible']} == holds
+            assert {k for k,c in changed.items() if not c['before']['pilot_eligible']
+                    and c['after']['pilot_eligible']} == {'lt_viata_de_roman_211'}
+        elif filename == 'derived_catalog_v38.json':
+            assert table == 'boards' and not removed and not changed and rows == latest
+        else:
+            assert filename == 'cat_mobile_app_pack_contract.json' and not changed
+            assert [r['row']['id'] for r in removed] == (['de427'] if table == 'kg_edges' else [])
+    files[filename] = {
+        'baseline_sha256': sha(before_blob), 'after_sha256': sha(after_blob),
+        'head_before': {k: v for k,v in before.items() if not isinstance(v,list)},
+        'head_after': {k: v for k,v in after.items() if not isinstance(v,list)},
+        'tables': tables,
+    }
+review_paths = [
+    'content/factual-repair-proposal.json', 'content/factual-repair-factual-review.json',
+    'content/factual-repair-quality-review.json', 'content/selection-reserve-proposal.json',
+    'content/alchimie-reserve-proposal.json', 'content/selection-reserve-quality-review.json',
+    'content/reconsideration/lt211-final-analyst.json',
+    'content/reconsideration/lt211-final-quality-assessment.json',
+    'content/reconsideration/final-verifier.json',
+]
+receipt = {
+    'schema_version': 1, 'baseline_commit': BASE,
+    'scope': 'Exact reviewed V1 graph metadata/false-edge repair, one promotion, finite '
+             'bundled reserve and generated sidecars. Raw frozen336 quick payloads are unchanged.',
+    'review_bindings': {p: sha((REVIEW / p).read_bytes()) for p in review_paths},
+    'generator': {'path': 'docs/reviews/v1-testing-release/capture-artifact-delta.py.txt',
+                  'sha256': sha(Path(__file__).read_bytes())},
+    'files': files,
+}
+assert all(sha((ROOT / path).read_bytes()) == EXPECTED[name] for name,path in PATHS.items())
+blob = dump(receipt)
+(REVIEW / 'artifact-delta.json').write_bytes(blob)
+print(json.dumps({'receipt_sha256': sha(blob), 'files': {
+    name: {'before': data['baseline_sha256'], 'after': data['after_sha256'],
+           'changed_rows': {table: len(delta['changed']) for table,delta in data['tables'].items()}}
+    for name,data in files.items()}}, indent=2))

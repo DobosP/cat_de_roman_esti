@@ -34,8 +34,8 @@ function prefersReducedMotion(): boolean {
  * gentle hint (they can still flip it on; the flip is then persisted).
  */
 function readInitialMuted(): boolean {
-  if (typeof localStorage === "undefined") return false;
   try {
+    if (typeof localStorage === "undefined") return false;
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === "1") return true;
     if (stored === "0") return false;

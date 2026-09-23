@@ -1,0 +1,332 @@
+{
+  "id": "al_personalitati_072",
+  "game": "alchimie",
+  "category": "personalitati",
+  "difficulty": "greu",
+  "status": "approved",
+  "record_sha256": "9a3482a40fcf743016434ae6781654b101136410765fd82ba9ea16a2420875b6",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [],
+  "target": {
+    "id": "n_perx_romania_interbelica",
+    "label": "România interbelică",
+    "node_type": "concept",
+    "category": "personalitati",
+    "salience": 0.3964,
+    "degree": 7,
+    "incoming_degree": 7,
+    "description": "România dintre cele două războaie mondiale, perioadă de afirmare culturală și diplomatică."
+  },
+  "seeds": [
+    {
+      "id": "n_v2per_casa_regala",
+      "label": "Casa regală",
+      "node_type": "concept",
+      "category": "personalitati",
+      "salience": 0.5463,
+      "degree": 10,
+      "incoming_degree": 10,
+      "description": "Familia și instituția monarhică a României moderne."
+    },
+    {
+      "id": "n_premiul_nobel",
+      "label": "Premiul Nobel",
+      "node_type": "concept",
+      "category": "stiinta",
+      "salience": 0.382,
+      "degree": 6,
+      "incoming_degree": 6,
+      "description": "Distinctie internationala anuala; George Emil Palade a primit Nobelul pentru Medicina in 1974."
+    },
+    {
+      "id": "n_v2per_scriitor_nobel",
+      "label": "Scriitor Nobel",
+      "node_type": "concept",
+      "category": "personalitati",
+      "salience": 0.2163,
+      "degree": 2,
+      "incoming_degree": 2,
+      "description": "Autor laureat cu Premiul Nobel, de obicei pentru literatură."
+    },
+    {
+      "id": "n_v2per_memorii",
+      "label": "Memorii",
+      "node_type": "concept",
+      "category": "personalitati",
+      "salience": 0.189,
+      "degree": 3,
+      "incoming_degree": 3,
+      "description": "Scrieri autobiografice despre viața și epoca autorului."
+    },
+    {
+      "id": "n_emigratie_romaneasca",
+      "label": "Emigrația românească",
+      "node_type": "concept",
+      "category": "personalitati",
+      "salience": 0.2335,
+      "degree": 12,
+      "incoming_degree": 13,
+      "description": "Fenomenul plecarii unor mari personalitati romane in strainatate, mai ales spre Franta si SUA."
+    }
+  ],
+  "target_depth": 6,
+  "craft_profile": {
+    "opening_pairs": 6,
+    "closure_size": 97,
+    "target_generation": 5
+  },
+  "productive_openings": [
+    {
+      "pair": [
+        {
+          "id": "n_emigratie_romaneasca",
+          "label": "Emigrația românească"
+        },
+        {
+          "id": "n_premiul_nobel",
+          "label": "Premiul Nobel"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_v20per_elie_wiesel",
+          "label": "Elie Wiesel"
+        },
+        {
+          "id": "n_herta_muller",
+          "label": "Herta Muller"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_v2per_casa_regala",
+          "label": "Casa regală"
+        },
+        {
+          "id": "n_v2per_memorii",
+          "label": "Memorii"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_perx_regina_maria",
+          "label": "Regina Maria"
+        },
+        {
+          "id": "n_perx_memorii_regina_maria",
+          "label": "Povestea vieții mele"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_emigratie_romaneasca",
+          "label": "Emigrația românească"
+        },
+        {
+          "id": "n_v2per_memorii",
+          "label": "Memorii"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_v20per_elie_wiesel",
+          "label": "Elie Wiesel"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_emigratie_romaneasca",
+          "label": "Emigrația românească"
+        },
+        {
+          "id": "n_v2per_scriitor_nobel",
+          "label": "Scriitor Nobel"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_herta_muller",
+          "label": "Herta Muller"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_premiul_nobel",
+          "label": "Premiul Nobel"
+        },
+        {
+          "id": "n_v2per_memorii",
+          "label": "Memorii"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_v20per_elie_wiesel",
+          "label": "Elie Wiesel"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_premiul_nobel",
+          "label": "Premiul Nobel"
+        },
+        {
+          "id": "n_v2per_scriitor_nobel",
+          "label": "Scriitor Nobel"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_herta_muller",
+          "label": "Herta Muller"
+        }
+      ]
+    }
+  ],
+  "minimum_action_recipe": [
+    {
+      "pair": [
+        {
+          "id": "n_v2per_casa_regala",
+          "label": "Casa regală"
+        },
+        {
+          "id": "n_v2per_memorii",
+          "label": "Memorii"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_perx_memorii_regina_maria",
+          "label": "Povestea vieții mele"
+        },
+        {
+          "id": "n_perx_regina_maria",
+          "label": "Regina Maria"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_perx_memorii_regina_maria",
+          "label": "Povestea vieții mele"
+        },
+        {
+          "id": "n_perx_regina_maria",
+          "label": "Regina Maria"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_v4per_biografie",
+          "label": "biografie"
+        },
+        {
+          "id": "n_v4per_regina",
+          "label": "regină"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_emigratie_romaneasca",
+          "label": "Emigrația românească"
+        },
+        {
+          "id": "n_v4per_biografie",
+          "label": "biografie"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_emil_cioran",
+          "label": "Emil Cioran"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_emigratie_romaneasca",
+          "label": "Emigrația românească"
+        },
+        {
+          "id": "n_emil_cioran",
+          "label": "Emil Cioran"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_eugen_ionescu",
+          "label": "Eugen Ionescu"
+        },
+        {
+          "id": "n_paris",
+          "label": "Paris"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_emil_cioran",
+          "label": "Emil Cioran"
+        },
+        {
+          "id": "n_eugen_ionescu",
+          "label": "Eugen Ionescu"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_generatia_interbelica",
+          "label": "Generația interbelică"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_generatia_interbelica",
+          "label": "Generația interbelică"
+        },
+        {
+          "id": "n_v4per_regina",
+          "label": "regină"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_perx_romania_interbelica",
+          "label": "România interbelică"
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:8b94ef54fb9c9709ffd09b16c149136020ad551c1d7af905e03cfa22794cac6c"
+}

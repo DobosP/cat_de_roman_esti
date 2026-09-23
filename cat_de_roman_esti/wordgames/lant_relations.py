@@ -486,6 +486,18 @@ REVIEWED_CAPTIONS = MappingProxyType(
             "1f15d8efa05c4228798f5e49b814b53fc363042492d6df0b3324c4977dc2e7f9",
             "chec servit alături de lapte",
         ),
+        ('n_v23via_ghiozdan', 'n_v3lit_carte'): (
+            "bc3a4ebf9364a6267a65f2c80997fc8a7f8ce81455595c33e445e05369789231",
+            "carte purtată în ghiozdan",
+        ),
+        ('n_v23via_ghiozdan', 'n_v4soc_copil'): (
+            "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+            "ghiozdan folosit de școlari",
+        ),
+        ('n_v23lit_capra_cu_trei_iezi', 'n_v4soc_copil'): (
+            "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+            "poveste în ediții pentru copii",
+        ),
     }
 )
 

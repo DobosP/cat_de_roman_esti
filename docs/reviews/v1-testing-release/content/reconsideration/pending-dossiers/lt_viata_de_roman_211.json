@@ -1,0 +1,133 @@
+{
+ "id": "lt_viata_de_roman_211",
+ "game": "lant",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "00c700668e8398ebaddde73520b6e9166dec8242054b5a49f52b6dfbf8433c55",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+ "start": {
+  "id": "n_v23via_ghiozdan",
+  "label": "Ghiozdan",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.84,
+  "degree": 11,
+  "incoming_degree": 5,
+  "description": "Geantă purtată pe spate în care elevii își duc la școală manualele, caietele și rechizitele."
+ },
+ "target": {
+  "id": "n_v23lit_capra_cu_trei_iezi",
+  "label": "Capra cu trei iezi",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.92,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Poveste publicată de Ion Creangă în 1875, despre o capră, cei trei iezi ai ei și lupul care încearcă să intre în casă."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v23via_ghiozdan",
+     "label": "Ghiozdan"
+    },
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23via_ghiozdan",
+      "label": "Ghiozdan"
+     },
+     "to": {
+      "id": "n_v3lit_carte",
+      "label": "Carte"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri spre lecție",
+     "display_label": "legătură directă",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v3lit_carte",
+      "label": "Carte"
+     },
+     "to": {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "label": "Capra cu trei iezi"
+     },
+     "relation": "is_a",
+     "label": "apare în cărți pentru copii",
+     "display_label": "poveste și carte",
+     "strength": 0.82
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v23via_ghiozdan",
+     "label": "Ghiozdan"
+    },
+    {
+     "id": "n_v4soc_copil",
+     "label": "copil"
+    },
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23via_ghiozdan",
+      "label": "Ghiozdan"
+     },
+     "to": {
+      "id": "n_v4soc_copil",
+      "label": "copil"
+     },
+     "relation": "related_to",
+     "label": "folosit de elevi",
+     "display_label": "legătură directă",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_v4soc_copil",
+      "label": "copil"
+     },
+     "to": {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "label": "Capra cu trei iezi"
+     },
+     "relation": "related_to",
+     "label": "lectură cunoscută copiilor",
+     "display_label": "legătură directă",
+     "strength": 0.84
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:fc68fade4964088cd777d72fd524a2d99f07b4ecd6b0ec3b39bf2f1fc87da2fd"
+}

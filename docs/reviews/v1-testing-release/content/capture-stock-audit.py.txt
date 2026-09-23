@@ -1,0 +1,80 @@
+import collections
+import hashlib
+import itertools
+import json
+import os
+import sys
+from pathlib import Path
+
+ROOT = Path.cwd()
+sys.path.insert(0, str(ROOT))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from scripts import critique_pack as C
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog
+from cat_de_roman_esti.wordgames.packs import load_pack
+from scripts.audit_alchimie_discovery_world import audit as audit_world
+
+OUT=ROOT/'docs/reviews/v1-testing-release/content'
+OUT.mkdir(parents=True, exist_ok=True)
+DOSSIERS=OUT/'baseline-dossiers'
+DOSSIERS.mkdir(exist_ok=True)
+def save(path, value):
+ path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+def sha(path):
+ return hashlib.sha256(path.read_bytes().replace(b'\r\n',b'\n')).hexdigest()
+p,svc,strong,regions=C.load_all(C.PACKAGE_PACK,C.PACKAGE_KG)
+flags,packflags,selected=C.run(p,svc,strong,regions,list(C.GAME_KINDS),{'approved','pending'},None)
+rank=json.loads((ROOT/'cat_de_roman_esti/fixtures/board_rankings_v37.json').read_bytes())
+ranks={r['id']:r for r in rank['boards']}
+items=[]
+for game,rec,findings in selected:
+ items.append({'id':rec['id'],'game':game,'status':rec['status'],'eligible':ranks[rec['id']]['pilot_eligible'],'pilot_score':ranks[rec['id']]['pilot_score'],'findings':findings})
+for status, eligible in [('approved',False),('approved',True),('pending',False)]:
+ rows=[r for r in items if r['status']==status and (not eligible or r['eligible'])]
+ print(status,eligible,len(rows),sum(bool(r['findings']) for r in rows),sum(f['level']=='FAIL' for r in rows for f in r['findings']))
+review_ids={
+'cx_istorie_115','cx_limba_037','cx_limba_122','cx_literatura_040','cx_literatura_041','cx_literatura_044','cx_literatura_127','cx_meme_net_137','cx_muzica_141','cx_muzica_205','cx_muzica_209','cx_film_tv_244',
+'ct_geografie_030','ct_geografie_031','ct_istorie_309','ct_muzica_070','ct_limba_150','ct_societate_292',
+'lt_geografie_021','lt_societate_075','lt_limba_033','lt_istorie_032','lt_gastronomie_246',
+'al_personalitati_072','al_societate_017','al_istorie_035','al_literatura_005'}
+for game,rec,findings in selected:
+ if rec['id'] in review_ids:save(DOSSIERS/(rec['id']+'.json'),C.build_dossier(rec,game,svc,strong,findings,regions))
+pack=load_pack()
+assert sum(len(pack.pool(g)) for g in C.GAME_KINDS)==708
+catalog=get_derived_catalog()
+kg=json.loads(C.PACKAGE_KG.read_bytes())
+edges=kg['kg_edges']
+strength={}
+for e in edges:
+ if not e.get('is_distractor'):
+  key=frozenset((e['src_id'],e['dst_id']));strength[key]=max(strength.get(key,0),e['strength'])
+quick=[]
+for b in catalog._boards:
+ pl=b.payload
+ ids=([*pl['members'],pl['intruder']] if b.game=='intrusul' else [n for x in pl['pairs'] for n in x['members']])
+ failures=[]
+ if len(ids)!=len(set(ids)):failures.append('duplicate visible ID')
+ if b.game=='intrusul':
+  if len({svc.node(n).node_type for n in ids})!=1:failures.append('node-type shortcut')
+  if sum(strength.get(frozenset(x),0)>=.6 for x in itertools.combinations(pl['members'],2))<2:failures.append('weak trio')
+  if any(strength.get(frozenset((n,pl['intruder'])),0)>0 for n in pl['members']):failures.append('intruder graph link')
+ else:
+  pairs={frozenset(x['members']) for x in pl['pairs']}
+  if any(strength.get(x,0)<.6 for x in pairs):failures.append('weak intended pair')
+  if any(strength.get(frozenset(x),0)>=.6 for x in itertools.combinations(ids,2) if frozenset(x) not in pairs):failures.append('strong competing pair')
+ quick.append({'id':b._catalog_id,'game':b.game,'source':b._source_id,'preferred':b._standard_score>=55,'starter_eligible':b._starter_eligible,'standard_score':b._standard_score,'findings':failures})
+print('quick',len(quick),'mechanical findings',sum(bool(r['findings']) for r in quick))
+world=audit_world(ROOT/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json')
+save(OUT/'baseline-world-replay.json',world)
+print('world',world['metrics'])
+summary={
+ 'kind':'v1-current-stock-audit-v1','baseline':'cc0a6a4','auditor':'/root/v1_board_audit','checked_on':'2026-09-23','status':'in_progress_not_approval',
+ 'sources':{str(path.relative_to(ROOT)).replace('\\','/'):sha(path) for path in [C.PACKAGE_KG,C.PACKAGE_PACK,ROOT/'docs/CRITIQUE_RUBRIC.md',ROOT/'cat_de_roman_esti/fixtures/board_rankings_v37.json',ROOT/'cat_de_roman_esti/fixtures/derived_catalog_v38.json',ROOT/'cat_de_roman_esti/fixtures/quick_games_v92.json',ROOT/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json']},
+ 'hash_convention':'sha256 canonical LF bytes, preserving all other content',
+ 'machine_scope':{'pack':{'total':len(items),'approved':sum(x['status']=='approved' for x in items),'pending':sum(x['status']=='pending' for x in items),'eligible':sum(x['eligible'] for x in items),'approved_fail_findings':sum(f['level']=='FAIL' for r in items if r['status']=='approved' for f in r['findings']),'eligible_fail_findings':sum(f['level']=='FAIL' for r in items if r['eligible'] for f in r['findings']),'eligible_flagged_items':sum(r['eligible'] and bool(r['findings']) for r in items),'by_game':rank['meta']['counts']['by_game'],'eligible_by_game':rank['meta']['counts']['eligible_by_game']},'quick':{'total':len(quick),'preferred':sum(x['preferred'] for x in quick),'by_game':catalog.counts(),'preferred_by_game':{g:sum(x['game']==g and x['preferred'] for x in quick) for g in ['intrusul','perechi']},'structural_failures':sum(bool(x['findings']) for x in quick),'note':'preferred shelf falls back to lower-rated stock when a strict filter has no preferred rows; counts are not proof that lower stock is unreachable'},'exploration':world['metrics']},
+ 'pack_machine_items':items,'quick_machine_items':quick,'pack_wide_findings':packflags,
+ 'editorial_coverage':{'dossier_ids':sorted(review_ids),'note':'Risk-prioritized sample; machine-wide sweep is not exhaustive semantic or familiarity review.'},
+ 'editorial_findings':[],'negative_controls':[],'limits':['No human or physical-device acceptance','No review status, runtime, or fixture mutation','A numeric score or valid KG edge does not prove semantic quality','All proposed exclusions and repairs require separate independent quality/factual review before installation']}
+save(OUT/'current-stock-audit.json',summary)

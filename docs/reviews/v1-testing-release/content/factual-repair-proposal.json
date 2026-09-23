@@ -1,0 +1,368 @@
+{
+  "kind": "v1-exact-factual-repair-proposal-v1",
+  "baseline": "cc0a6a4",
+  "author": "/root/v1_board_audit",
+  "date": "2026-09-23",
+  "status": "proposal_not_approval",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "record_hash_convention": "UTF-8 JSON ensure_ascii=false sort_keys=true separators comma/colon",
+  "changes": [
+    {
+      "id": "n_v20geo_crucea_caraiman",
+      "kind": "node",
+      "operation": "replace_field",
+      "field": "description",
+      "before": {
+        "id": "n_v20geo_crucea_caraiman",
+        "node_type": "place",
+        "label_ro": "Crucea Caraiman",
+        "category": "geografie",
+        "description": "Monument de 28 de metri ridicat între 1926 și 1928 pe Șaua Caraiman, în Munții Bucegi, la 2291 m altitudine, în memoria eroilor din Primul Război Mondial. Este recunoscută drept cea mai înaltă cruce din lume amplasată pe un vârf montan.",
+        "salience": 0.7,
+        "difficulty_tier": "easy",
+        "degree": 3,
+        "aliases": [
+          "Crucea Eroilor",
+          "Crucea Eroilor Neamului",
+          "Crucea de pe Caraiman",
+          "Crucii Caraiman"
+        ]
+      },
+      "before_record_sha256": "83aaac0f039c597bfcee4e466be1af18b215c893fd9d68ca8a784379c9726e94",
+      "after": {
+        "id": "n_v20geo_crucea_caraiman",
+        "node_type": "place",
+        "label_ro": "Crucea Caraiman",
+        "category": "geografie",
+        "description": "Monument dedicat eroilor români din Primul Război Mondial, ridicat între 1926 și 1928 pe vârful de 2.291 m al masivului Caraiman, în Munții Bucegi. Are o înălțime totală de 39,3 m, inclusiv soclul.",
+        "salience": 0.7,
+        "difficulty_tier": "easy",
+        "degree": 3,
+        "aliases": [
+          "Crucea Eroilor",
+          "Crucea Eroilor Neamului",
+          "Crucea de pe Caraiman",
+          "Crucii Caraiman"
+        ]
+      },
+      "after_record_sha256": "150e870bb923d54a76200fb07bab9fe7e8dfbdb604a992e9112eb7c0d33d5e60",
+      "rationale": "Replace wrong saddle location and ambiguous height; retain the memorial identity and dates without an unnecessary world-record claim.",
+      "source_refs": [
+        "caraiman_owner"
+      ],
+      "verdict": "proposed_requires_independent_review"
+    },
+    {
+      "id": "n_v17art_muzeul_satului",
+      "kind": "node",
+      "operation": "replace_field",
+      "field": "description",
+      "before": {
+        "id": "n_v17art_muzeul_satului",
+        "node_type": "org",
+        "label_ro": "Muzeul Național al Satului „Dimitrie Gusti”",
+        "category": "arta_cultura",
+        "description": "Muzeu în aer liber din București, întins pe malul lacului Herăstrău, cu sute de gospodării țărănești autentice strămutate din toată țara. A fost fondat în 1936 de sociologul Dimitrie Gusti.",
+        "salience": 0.62,
+        "difficulty_tier": "medium",
+        "degree": 7,
+        "aliases": [
+          "Muzeul Satului",
+          "Muzeul Satului București"
+        ]
+      },
+      "before_record_sha256": "bfb0ec3bf88087fdbcf99dfae3fb73bcb64b3ec0fb05435bc176e6abcc17f607",
+      "after": {
+        "id": "n_v17art_muzeul_satului",
+        "node_type": "org",
+        "label_ro": "Muzeul Național al Satului „Dimitrie Gusti”",
+        "category": "arta_cultura",
+        "description": "Muzeu în aer liber din București, deschis în 1936 la inițiativa sociologului Dimitrie Gusti. Prezintă case, anexe gospodărești, biserici și instalații tradiționale aduse din sate din România.",
+        "salience": 0.62,
+        "difficulty_tier": "medium",
+        "degree": 7,
+        "aliases": [
+          "Muzeul Satului",
+          "Muzeul Satului București"
+        ]
+      },
+      "after_record_sha256": "cf7ea537fe88643d5386c72b2d082c7b490f0be7d49826f28eab57255d74c71e",
+      "rationale": "Remove unsupported count of complete households while naming what the museum actually displays.",
+      "source_refs": [
+        "museum_history"
+      ],
+      "verdict": "proposed_requires_independent_review"
+    },
+    {
+      "id": "n_ateneul_roman",
+      "kind": "node",
+      "operation": "replace_field",
+      "field": "description",
+      "before": {
+        "id": "n_ateneul_roman",
+        "node_type": "place",
+        "label_ro": "Ateneul Român",
+        "category": "arta_cultura",
+        "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu.",
+        "salience": 0.6749,
+        "difficulty_tier": "easy",
+        "degree": 23,
+        "aliases": [
+          "Ateneul",
+          "Ateneul din București",
+          "sala Ateneului Român",
+          "Ateneul Român București",
+          "Ateneului Român"
+        ]
+      },
+      "before_record_sha256": "301b91e9cbec0210e323b26c8f5f7d0d5293c64316ffe6d4cac2a650d66c65d4",
+      "after": {
+        "id": "n_ateneul_roman",
+        "node_type": "place",
+        "label_ro": "Ateneul Român",
+        "category": "arta_cultura",
+        "description": "Clădire de concerte din București, inaugurată în 1888 și sediu al Filarmonicii „George Enescu”. Găzduiește concerte ale Festivalului „George Enescu”.",
+        "salience": 0.6749,
+        "difficulty_tier": "easy",
+        "degree": 23,
+        "aliases": [
+          "Ateneul",
+          "Ateneul din București",
+          "sala Ateneului Român",
+          "Ateneul Român București",
+          "Ateneului Român"
+        ]
+      },
+      "after_record_sha256": "63727fd6ee3555bc3e600d29ec48a359abe33ecc2ca32c08785a037e404ef1dd",
+      "rationale": "Remove unsupported principal-stage claim; distinguish building inauguration from 1889 completion of the concert hall.",
+      "source_refs": [
+        "athenaeum_owner"
+      ],
+      "verdict": "proposed_requires_independent_review"
+    },
+    {
+      "id": "de1218",
+      "kind": "edge",
+      "operation": "replace_field",
+      "field": "label_ro",
+      "before": {
+        "id": "de1218",
+        "src_id": "n_spt_cristina_neagu",
+        "dst_id": "n_spt_handbal_feminin",
+        "relation": "is_a",
+        "label_ro": "joacă",
+        "strength": 0.94,
+        "is_distractor": 0,
+        "bidirectional": 1
+      },
+      "before_record_sha256": "b7e2461032b30bd80a6a3d958b35e05e8ab7af95a8e79ef59b8def38c94ea928",
+      "after": {
+        "id": "de1218",
+        "src_id": "n_spt_cristina_neagu",
+        "dst_id": "n_spt_handbal_feminin",
+        "relation": "is_a",
+        "label_ro": "a jucat",
+        "strength": 0.94,
+        "is_distractor": 0,
+        "bidirectional": 1
+      },
+      "after_record_sha256": "68a655cf1e88f612e9f1332c68aebafa794e2eaa58bd829ce7628bf6df6c9970",
+      "rationale": "Current plays wording contradicts completed retirement; no endpoint, strength, direction, or relation-type change.",
+      "source_refs": [
+        "neagu_ihf_final"
+      ],
+      "verdict": "proposed_requires_independent_review"
+    },
+    {
+      "id": "de2664",
+      "kind": "edge",
+      "operation": "replace_field",
+      "field": "label_ro",
+      "before": {
+        "id": "de2664",
+        "src_id": "n_spt_cristina_neagu",
+        "dst_id": "n_v2spo_echipa_nationala",
+        "relation": "related_to",
+        "label_ro": "joacă pentru România",
+        "strength": 0.82,
+        "is_distractor": 0,
+        "bidirectional": 1
+      },
+      "before_record_sha256": "a0060283afc32e77eab926740704e67c74f072a33715d858ea381a1b98da0110",
+      "after": {
+        "id": "de2664",
+        "src_id": "n_spt_cristina_neagu",
+        "dst_id": "n_v2spo_echipa_nationala",
+        "relation": "related_to",
+        "label_ro": "a jucat pentru România",
+        "strength": 0.82,
+        "is_distractor": 0,
+        "bidirectional": 1
+      },
+      "after_record_sha256": "3546e9189179dd5f4844155087ff4fc23cee064689ae6c4e7b972a32e836271b",
+      "rationale": "National-team retirement occurred in 2023; historical label matches existing endpoint relation.",
+      "source_refs": [
+        "neagu_ehf_national",
+        "neagu_ihf_final"
+      ],
+      "verdict": "proposed_requires_independent_review"
+    },
+    {
+      "id": "de2665",
+      "kind": "edge",
+      "operation": "replace_field",
+      "field": "label_ro",
+      "before": {
+        "id": "de2665",
+        "src_id": "n_spt_cristina_neagu",
+        "dst_id": "n_v2spo_club_sportiv",
+        "relation": "related_to",
+        "label_ro": "joacă la cluburi",
+        "strength": 0.68,
+        "is_distractor": 0,
+        "bidirectional": 1
+      },
+      "before_record_sha256": "3e822c5007554f9d71dc1d32634cd1aa86e1648dc3576b283087c8c0fc29b2ce",
+      "after": {
+        "id": "de2665",
+        "src_id": "n_spt_cristina_neagu",
+        "dst_id": "n_v2spo_club_sportiv",
+        "relation": "related_to",
+        "label_ro": "a jucat la cluburi",
+        "strength": 0.68,
+        "is_distractor": 0,
+        "bidirectional": 1
+      },
+      "after_record_sha256": "5dc4a8a687cf163745f878e0619c4bdbf9d3d29a0e3219cae3a1f9df29a0f52f",
+      "rationale": "Career ended in 2025; preserve broad club identity while fixing active present tense.",
+      "source_refs": [
+        "neagu_ihf_final"
+      ],
+      "verdict": "proposed_requires_independent_review"
+    },
+    {
+      "id": "de427",
+      "kind": "edge",
+      "operation": "remove_exact_record",
+      "before": {
+        "id": "de427",
+        "src_id": "n_ftv_operatiunea_monstrul",
+        "dst_id": "n_ftv_dem_radulescu",
+        "relation": "related_to",
+        "label_ro": "a jucat în",
+        "strength": 0.86,
+        "is_distractor": 0,
+        "bidirectional": 1
+      },
+      "before_record_sha256": "cc6487d0c40c91ca1d59524bf0d11fadff31ae0599cca342a314f4f6f6c6f331",
+      "after": null,
+      "rationale": "False casting link between Operațiunea Monstrul and Dem Rădulescu. Relabeling it as a generic relationship would retain misleading strong gameplay feedback. Remove through complete-record REMOVE_EDGES rail and assess all downstream stock.",
+      "source_refs": [
+        "monster_licensed_film",
+        "monster_ucin",
+        "dem_ucin"
+      ],
+      "verdict": "proposed_requires_independent_review"
+    }
+  ],
+  "sources": [
+    {
+      "id": "caraiman_owner",
+      "url": "https://reabilitare-crucea-caraiman.mapn.ro/pages/istoric",
+      "publisher": "Ministerul Apărării Naționale, monument restoration owner",
+      "checked_on": "2026-09-23",
+      "access": "full page opened",
+      "supports": "Construction 1926–1928; selected 2291 m peak on the southeast slope instead of the 2325 m main summit; 39.3 m total height including 8.35 m base.",
+      "countercheck": "Does not call the site Șaua Caraiman. The old 28 m figure has no measurement convention; replace with explicit total, not a silently mixed base/structure measurement."
+    },
+    {
+      "id": "museum_history",
+      "url": "https://muzeul-satului.ro/despre-noi/istoric-muzeul-satului/",
+      "publisher": "Muzeul Național al Satului Dimitrie Gusti",
+      "checked_on": "2026-09-23",
+      "access": "full page opened, history paragraphs 158–183",
+      "supports": "Open-air museum in Bucharest; research led by sociologist Dimitrie Gusti; opened May 1936; transferred houses, annexes, churches and traditional installations.",
+      "countercheck": "Distinguishes complexes from individual constructions; historical 223 constructions included 40 houses and 165 annexes. No support for hundreds of complete households. New description avoids a changeable count."
+    },
+    {
+      "id": "athenaeum_owner",
+      "url": "https://filarmonicaenescu.ro/ro/istoric-ateneul-roman",
+      "publisher": "Filarmonica George Enescu",
+      "checked_on": "2026-09-23",
+      "access": "full page opened",
+      "supports": "Athenaeum building inaugurated in 1888, Bucharest location, Philharmonic seat, hosts George Enescu Festival and Competition.",
+      "countercheck": "Concert hall finished in 1889. Proposed wording says building inaugurated in 1888. Institution does not establish exclusive/principal festival stage."
+    },
+    {
+      "id": "neagu_ihf_final",
+      "url": "https://www.ihf.info/member-federations/romania/5081/news/221881",
+      "publisher": "International Handball Federation",
+      "published": "2025-06-03",
+      "checked_on": "2026-09-23",
+      "access": "full page opened",
+      "supports": "Neagu had played the last official match of her career; farewell gala scheduled for June 8, 2025. Supports historical tense of playing handball and club links."
+    },
+    {
+      "id": "neagu_ehf_national",
+      "url": "https://ehfeuro.eurohandball.com/women/2024/teams/details/_PR8E6ta0rFX3LlXN90QeA/Romania/",
+      "publisher": "European Handball Federation",
+      "checked_on": "2026-09-23",
+      "access": "search result with complete relevant paragraph",
+      "supports": "Neagu said goodbye to the national team after the 2023 World Championship. Distinguishes national-team retirement from final club retirement in 2025."
+    },
+    {
+      "id": "monster_licensed_film",
+      "url": "https://cinepub.ro/movie/operatiunea-monstrul-1976-film-comedie-online/",
+      "publisher": "CINEPUB licensed film presentation, credits acknowledging UCIN and Arhiva Națională de Film",
+      "checked_on": "2026-09-23",
+      "access": "page content supplied by search",
+      "supports": "Cast and character summary name Toma Caragiu, Marin Moraru, Octavian Cotescu, Alexandru Manolescu, Ovidiu Schumacher and others. Dem Rădulescu absent."
+    },
+    {
+      "id": "monster_ucin",
+      "url": "https://aarc.ro/newfilm/film/operaiunea-monstrul-1975",
+      "publisher": "Aarc / Uniunea Cineaștilor din România",
+      "checked_on": "2026-09-23",
+      "access": "search result supplies cast; direct open returned an internal fetch error",
+      "supports": "Principal actors Toma Caragiu, Octavian Cotescu, Marin Moraru; their characters Dumitru, Eugen, Corneliu. Corroborates licensed-film cast."
+    },
+    {
+      "id": "dem_ucin",
+      "url": "https://www.aarc.ro/personalitate/view/dem-radulescu",
+      "publisher": "Aarc / Uniunea Cineaștilor din România",
+      "checked_on": "2026-09-23",
+      "access": "search result supplies extensive filmography",
+      "supports": "Filmography lists Dem as Steriade in the B.D. films, not Operațiunea Monstrul; preserves de409 as a positive control. The proposed removal does not alter his valid actor description."
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "de1220",
+      "reason": "este sportivă describes athletic identity, not current professional employment; preserve."
+    },
+    {
+      "id": "de1219",
+      "reason": "a jucat în is already historical; preserve."
+    },
+    {
+      "id": "de6523",
+      "reason": "a jucat la is already historical for CSM București; preserve."
+    },
+    {
+      "id": "de409",
+      "reason": "B.D. casting link verified in UCIN actor filmography; preserve."
+    },
+    {
+      "id": "n_ftv_dem_radulescu",
+      "reason": "Current description of comedy actor and B.D. is supported; no node-description repair."
+    }
+  ],
+  "installation_requirements": [
+    "Distinct factual and quality review of exact seven changes before installation.",
+    "No IDs, labels, senses, aliases or topology changes except removal of exact de427.",
+    "Use rollback-protected supported transaction; add complete before-record assertions for metadata updates if no current rail exists. Current Batch supports complete REMOVE_EDGES but not metadata updates.",
+    "Rebuild/rebind validators, rankings, frozen quick identity payloads, discovery snapshots, app-pack contract and affected caption digests; retain historical review bytes.",
+    "Compare graph reachability/feedback, all affected pack and quick boards, sparse Alchimie projection and historical progress.",
+    "Do not revive rejected rounds solely because their metadata blocker was corrected."
+  ]
+}

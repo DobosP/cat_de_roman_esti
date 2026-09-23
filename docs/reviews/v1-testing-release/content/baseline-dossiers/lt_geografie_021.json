@@ -1,0 +1,144 @@
+{
+  "id": "lt_geografie_021",
+  "game": "lant",
+  "category": "geografie",
+  "difficulty": "usor",
+  "status": "approved",
+  "record_sha256": "4ac147496922ea3fce05185eae90fb22ce749200e4dc51ff9f0f2406a6af8b8b",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Lacul Bâlea salience 0.17 < 0.60 (usor floor)"
+    },
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Vârful Moldoveanu salience 0.27 < 0.60 (usor floor)"
+    }
+  ],
+  "display_rules_sha256": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+  "start": {
+    "id": "n_lacul_balea",
+    "label": "Lacul Bâlea",
+    "node_type": "place",
+    "category": "geografie",
+    "salience": 0.1697,
+    "degree": 4,
+    "incoming_degree": 4,
+    "description": "Lac glaciar din Făgăraș, capătul Transfăgărășanului."
+  },
+  "target": {
+    "id": "n_varful_moldoveanu",
+    "label": "Vârful Moldoveanu",
+    "node_type": "place",
+    "category": "geografie",
+    "salience": 0.2679,
+    "degree": 6,
+    "incoming_degree": 4,
+    "description": "Cel mai înalt vârf din România (2544 m), în Făgăraș."
+  },
+  "optimal": 2,
+  "branch_profile": {
+    "valid_first_hops": 2,
+    "narrowest_shortest_path_layer": 2,
+    "total_intermediate_shortest_path_nodes": 2
+  },
+  "representative_shortest_paths": [
+    {
+      "nodes": [
+        {
+          "id": "n_lacul_balea",
+          "label": "Lacul Bâlea"
+        },
+        {
+          "id": "n_muntii_fagaras",
+          "label": "Munții Făgăraș"
+        },
+        {
+          "id": "n_varful_moldoveanu",
+          "label": "Vârful Moldoveanu"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_lacul_balea",
+            "label": "Lacul Bâlea"
+          },
+          "to": {
+            "id": "n_muntii_fagaras",
+            "label": "Munții Făgăraș"
+          },
+          "relation": "located_in",
+          "label": "în Făgăraș",
+          "display_label": "legătură directă",
+          "strength": 0.9
+        },
+        {
+          "from": {
+            "id": "n_muntii_fagaras",
+            "label": "Munții Făgăraș"
+          },
+          "to": {
+            "id": "n_varful_moldoveanu",
+            "label": "Vârful Moldoveanu"
+          },
+          "relation": "located_in",
+          "label": "are vârful",
+          "display_label": "legătură directă",
+          "strength": 0.9
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "n_lacul_balea",
+          "label": "Lacul Bâlea"
+        },
+        {
+          "id": "n_transfagarasan",
+          "label": "Transfăgărășan"
+        },
+        {
+          "id": "n_varful_moldoveanu",
+          "label": "Vârful Moldoveanu"
+        }
+      ],
+      "edges": [
+        {
+          "from": {
+            "id": "n_lacul_balea",
+            "label": "Lacul Bâlea"
+          },
+          "to": {
+            "id": "n_transfagarasan",
+            "label": "Transfăgărășan"
+          },
+          "relation": "related_to",
+          "label": "trece pe lângă",
+          "display_label": "legătură directă",
+          "strength": 0.86
+        },
+        {
+          "from": {
+            "id": "n_transfagarasan",
+            "label": "Transfăgărășan"
+          },
+          "to": {
+            "id": "n_varful_moldoveanu",
+            "label": "Vârful Moldoveanu"
+          },
+          "relation": "related_to",
+          "label": "in apropierea",
+          "display_label": "legătură directă",
+          "strength": 0.45
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:1184dc6c500dbf50f564716b88216d0fdf2c8ebe0df6a03bd01329b991c48bbb"
+}

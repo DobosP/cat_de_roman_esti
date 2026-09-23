@@ -6,12 +6,14 @@ import "../styles/game-options.css";
 /** Optional tools stay available without occupying the main play area. */
 export function GameOptions({ game, children }: { game: GameKey; children?: ReactNode }) {
   return (
-    <details className="game-options">
-      <summary>Opțiuni de joc</summary>
-      <div className="game-options-content">
-        {children}
-        <GameHelp game={game} />
-      </div>
-    </details>
+    <>
+      <GameHelp game={game} />
+      {children && (
+        <details className="game-options">
+          <summary>Opțiuni de joc</summary>
+          <div className="game-options-content">{children}</div>
+        </details>
+      )}
+    </>
   );
 }

@@ -1,0 +1,92 @@
+{
+  "id": "ct_societate_292",
+  "game": "contexto",
+  "category": "societate",
+  "difficulty": "greu",
+  "status": "approved",
+  "record_sha256": "b71c84a480f91907034c99bf4983028f75a09a0e2099e20ef5695d4a1a650ad4",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Avocatul Poporului salience 0.17 < 0.20 (greu floor)"
+    }
+  ],
+  "target": {
+    "id": "n_avocatul_poporului",
+    "label": "Avocatul Poporului",
+    "node_type": "org",
+    "category": "societate",
+    "salience": 0.1672,
+    "degree": 5,
+    "incoming_degree": 5,
+    "description": "Institutie de tip ombudsman care apara drepturile si libertatile cetatenilor fata de autoritati."
+  },
+  "incoming_neighbor_floor": {
+    "minimum": 5,
+    "count": 5,
+    "sample": [
+      {
+        "id": "n_cetatean",
+        "label": "Cetățean"
+      },
+      {
+        "id": "n_constitutia",
+        "label": "Constituția României"
+      },
+      {
+        "id": "n_drepturi_fundamentale",
+        "label": "Drepturi fundamentale"
+      },
+      {
+        "id": "n_v2soc_drepturi_civile",
+        "label": "Drepturi civile"
+      },
+      {
+        "id": "n_v2soc_institutie",
+        "label": "Instituție"
+      }
+    ],
+    "sample_truncated": false,
+    "recognition_assessed": false
+  },
+  "reachable": 2353,
+  "strong_neighbors": [
+    {
+      "id": "n_v2soc_drepturi_civile",
+      "label": "Drepturi civile",
+      "node_type": "concept",
+      "category": "societate",
+      "salience": 0.6946,
+      "degree": 13,
+      "incoming_degree": 13,
+      "description": "Drepturi ale cetățenilor în raport cu statul și societatea.",
+      "strength": 0.82
+    },
+    {
+      "id": "n_v2soc_institutie",
+      "label": "Instituție",
+      "node_type": "concept",
+      "category": "societate",
+      "salience": 0.8071,
+      "degree": 27,
+      "incoming_degree": 27,
+      "description": "Organizație cu rol public, administrativ, educațional sau civic.",
+      "strength": 0.76
+    },
+    {
+      "id": "n_drepturi_fundamentale",
+      "label": "Drepturi fundamentale",
+      "node_type": "concept",
+      "category": "societate",
+      "salience": 0.3466,
+      "degree": 12,
+      "incoming_degree": 12,
+      "description": "Drepturile si libertatile cetatenilor garantate de Constitutie.",
+      "strength": 0.72
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:4cb841a2c7af04d37fab293153b8fe67e4e9d96ea7ce51b855b64d55de28b418"
+}

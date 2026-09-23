@@ -26,7 +26,7 @@ def main(argv: list[str] | None = None) -> int:
     payload = mobile_app_pack_snapshot()
     text = json.dumps(payload, ensure_ascii=False, indent=1, sort_keys=False) + "\n"
     if args:
-        Path(args[0]).write_text(text, encoding="utf-8")
+        Path(args[0]).write_text(text, encoding="utf-8", newline="\n")
     else:
         print(text, end="")
     return 0

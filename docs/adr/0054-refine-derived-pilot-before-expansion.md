@@ -1,7 +1,7 @@
 # ADR-0054: Refine the two derived games before expanding the arcade
 
 Date: 2026-07-23
-Status: partially superseded by ADR-0121 for exact labels and ADR-0148 for catalog expansion; selection rules retained
+Status: partially superseded by ADR-0121 for exact labels ADR-0148 for catalog expansion, and ADR-0158 for exact reviewed selection exclusions
 
 ## Decision
 

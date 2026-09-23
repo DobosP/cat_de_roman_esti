@@ -1,16 +1,21 @@
 """Player-facing freedom: coherent alternate pairs, exact goals and free misses."""
 
 from itertools import combinations
+from urllib.parse import urlencode
 
 from django.test import Client
 
 from cat_de_roman_esti.wordgames import alchimie as A
 from cat_de_roman_esti.wordgames.packs import get_pack
+from tests.content_scenarios import alchimie_seed
 
 
-def create():
+def create(*, seed=38, category=None):
     client = Client()
-    response = client.post("/api/wordgames/alchimie/games?seed=38&difficulty=usor")
+    query = {"seed": seed, "difficulty": "usor"}
+    if category is not None:
+        query["category"] = category
+    response = client.post(f"/api/wordgames/alchimie/games?{urlencode(query)}")
     assert response.status_code == 200
     state = response.json()
     return client, state, A.store.get(state["game_id"])
@@ -61,8 +66,10 @@ def test_hints_and_extra_successful_crafts_keep_their_documented_costs():
 
 def test_all_football_club_pairs_share_the_same_club_result():
     names = ("Dinamo București", "Rapid București", "FCSB", "CFR Cluj")
+    seed = alchimie_seed("al_sport_083", difficulty="usor", category="sport")
     for left, right in combinations(names, 2):
-        client, initial, _session = create()
+        client, initial, session = create(seed=seed, category="sport")
+        assert session.pack_id == "al_sport_083"
         inventory = {item["label"]: item["id"] for item in initial["inventory"]}
         reply = combine(client, initial["game_id"], (inventory[left], inventory[right]))
         assert {item["label"] for item in reply["discovered"]} == {"Club sportiv"}

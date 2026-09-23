@@ -1,0 +1,671 @@
+{
+  "kind": "v1-live-alchimie-reserve-proposal-v1",
+  "baseline": "cc0a6a4",
+  "author": "/root/v1_board_audit",
+  "date": "2026-09-23",
+  "status": "author_proposal_requires_independent_quality_review",
+  "audit": {
+    "path": "baseline-challenge-projections.json",
+    "sha256": "ec2e72d870a3f298b2c952d3417a8e2426ce058f592850e0602597c3146d3fec",
+    "records": 80,
+    "opening_floor_failures": 12,
+    "all_other_bounds_pass": true
+  },
+  "items": [
+    {
+      "id": "al_gastronomie_024",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "usor",
+        "seeds": [
+          "n_v4gas_legume",
+          "n_v4gas_dulce",
+          "n_v4gas_rosie",
+          "n_gas_varza_a_la_cluj",
+          "n_gas_placinte_poale_brau",
+          "n_gas_telemea",
+          "n_gas_bors"
+        ],
+        "target": "n_v2gas_aperitiv",
+        "target_depth": 2,
+        "id": "al_gastronomie_024",
+        "category": "gastronomie",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "16be9aa4df46d12404bcb48079d69f6ee5be45835ba9ada3cabe0c81a561d74b",
+      "review_binding": "sha256:ccef9c5da4954ca1e4259c92dabad41d727aadd541c8d0128d069d5f0473258a",
+      "projection_sha256": "1d7452915c23440d9232eb0c9c57bef25d1a70e9729055dd0818615cd65ec6a8",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_v4gas_legume",
+            "label": "Legume"
+          },
+          "right": {
+            "id": "n_v4gas_rosie",
+            "label": "Roșie"
+          },
+          "results": [
+            {
+              "id": "n_gas_salata_vinete",
+              "label": "Salată de vinete"
+            },
+            {
+              "id": "n_gas_zacusca",
+              "label": "Zacuscă"
+            }
+          ]
+        }
+      ],
+      "route_count": 3,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_gastronomie_025",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "usor",
+        "seeds": [
+          "n_v3gas_cartofi_prajiti",
+          "n_v2gas_branza",
+          "n_v2gas_sosuri",
+          "n_gas_bucovina_gastronomica",
+          "n_gas_caltabos",
+          "n_gas_branza_smantana"
+        ],
+        "target": "n_gas_mustar",
+        "target_depth": 2,
+        "id": "al_gastronomie_025",
+        "category": "gastronomie",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "0e4e8a56b0514b28b2a175f6029ae7b7d7265883cc5f1fea1ccd2495d8d8a28b",
+      "review_binding": "sha256:881792c5d6ee139577f59b10ae0b95b9d67a388b88f49ca8695d7867ddba430d",
+      "projection_sha256": "5ce03eca559a52c5643e615a741e9aac3b902bbb8247e42d01325a8950d70a05",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_v2gas_sosuri",
+            "label": "Sosuri"
+          },
+          "right": {
+            "id": "n_v3gas_cartofi_prajiti",
+            "label": "Cartofi prăjiți"
+          },
+          "results": [
+            {
+              "id": "n_gas_mici",
+              "label": "Mici"
+            },
+            {
+              "id": "n_gas_saorma_de_toate",
+              "label": "Șaorma cu de toate"
+            }
+          ]
+        }
+      ],
+      "route_count": 4,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_gastronomie_028",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "normal",
+        "seeds": [
+          "n_gas_bors",
+          "n_gas_ciorba_burta",
+          "n_gas_piftie",
+          "n_gas_caltabos",
+          "n_gas_masa_craciun",
+          "n_v4gas_fruct"
+        ],
+        "target": "n_gas_cimbru",
+        "target_depth": 4,
+        "id": "al_gastronomie_028",
+        "category": "gastronomie",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "46653baf1ec51f522cb5558c071c1fdad454599883f918fe3302e090e90375b9",
+      "review_binding": "sha256:d2039539b17c5b3e63351c9dff5659da6ca2ea7ef1d1fe66e0bbd4c26d0cad66",
+      "projection_sha256": "afbe87ee45853a8b7a1b181b7499b220ae0ee0b32cf5acfaed47cdd31bce6434",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_gas_masa_craciun",
+            "label": "Masa de Crăciun"
+          },
+          "right": {
+            "id": "n_v4gas_fruct",
+            "label": "Fruct"
+          },
+          "results": [
+            {
+              "id": "n_gas_cozonac",
+              "label": "Cozonac"
+            },
+            {
+              "id": "n_gas_mese_sarbatori",
+              "label": "Mese de sărbători"
+            }
+          ]
+        }
+      ],
+      "route_count": 2,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_istorie_034",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "usor",
+        "seeds": [
+          "n_vlad_tepes",
+          "n_v2ist_razboi",
+          "n_v4ist_erou",
+          "n_v4ist_istorie",
+          "n_v4ist_ruina",
+          "n_v4ist_stramos"
+        ],
+        "target": "n_sarmizegetusa",
+        "target_depth": 2,
+        "id": "al_istorie_034",
+        "category": "istorie",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "67b9166c557d5ea4cc7d75c67ad42b8f8ce0cc55d2d60510495e53bcd5f02f11",
+      "review_binding": "sha256:3898daad520dadc6320acf03f42163ca3b856fe8c6f4861b60fe9c865530ecc3",
+      "projection_sha256": "5d1c55052e5e6581cf902ea71cc06621bf2dd4648d457c7d124d20385afc51c9",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_v4ist_istorie",
+            "label": "Istorie"
+          },
+          "right": {
+            "id": "n_v4ist_ruina",
+            "label": "Ruină"
+          },
+          "results": [
+            {
+              "id": "n_dacia",
+              "label": "Dacia"
+            }
+          ]
+        }
+      ],
+      "route_count": 4,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_istorie_039",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "greu",
+        "seeds": [
+          "n_v3ist_monarhie",
+          "n_v4ist_popor",
+          "n_v4ist_stramos",
+          "n_v4ist_tron",
+          "n_v4ist_castel"
+        ],
+        "target": "n_v4ist_legenda",
+        "target_depth": 6,
+        "id": "al_istorie_039",
+        "category": "istorie",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "e51de62c8e6e96aceed82df6950d5b1308c3d38f62da064d39b09e86a8050fd9",
+      "review_binding": "sha256:6361317e61834d13a75c4b25be38f22499a7e932661d485f5f4e4aabff39a2ca",
+      "projection_sha256": "ea8cf5a2d8e73dd060e35b97c17657b5d80d81d0a8c11e4e787b03b4cbc38c22",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_v4ist_castel",
+            "label": "Castel"
+          },
+          "right": {
+            "id": "n_v4ist_stramos",
+            "label": "Strămoș"
+          },
+          "results": [
+            {
+              "id": "n_transilvania",
+              "label": "Transilvania"
+            }
+          ]
+        }
+      ],
+      "route_count": 4,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_meme_net_060",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "greu",
+        "seeds": [
+          "n_v3mem_scroll_infinit",
+          "n_net_standup_ro",
+          "n_v3mem_repost",
+          "n_v2mem_personaj_memetic",
+          "n_net_unboxing_ro"
+        ],
+        "target": "n_v4mem_trend",
+        "target_depth": 3,
+        "id": "al_meme_net_060",
+        "category": "meme_net",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "cb3a71e1f816a187df06b7f74784190da310ca30e20c500f2a75d3b88abd8f08",
+      "review_binding": "sha256:f1335ef6b2ffb3d15b3142c6da1a1f45f72cfb3cc9109bc5c506bd9736f2aa72",
+      "projection_sha256": "b3dcd7104788978a822822e88057d86eff4caa3be2bfea2700732011bf552e5d",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_v3mem_repost",
+            "label": "Repost"
+          },
+          "right": {
+            "id": "n_v3mem_scroll_infinit",
+            "label": "Scroll infinit"
+          },
+          "results": [
+            {
+              "id": "n_net_tiktok_ro",
+              "label": "TikTok România"
+            },
+            {
+              "id": "n_v2mem_feed_online",
+              "label": "Feed online"
+            }
+          ]
+        }
+      ],
+      "route_count": 4,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_muzica_064",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "normal",
+        "seeds": [
+          "n_muz_vali_vijelie",
+          "n_muz_sub_pielea_mea",
+          "n_muz_holograf",
+          "n_muz_manele",
+          "n_muz_refren_viral",
+          "n_v2muz_trupa_pop",
+          "n_muz_ozone"
+        ],
+        "target": "n_v4muz_rock",
+        "target_depth": 4,
+        "id": "al_muzica_064",
+        "category": "muzica",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "347919040b73dab5362506dd342e8be1bae542ff49d970d6f4acc2caf5044051",
+      "review_binding": "sha256:7e7e0c6ec16506317032c6e40bba74429b3c139e21e4d1c416cd30060bc5cc68",
+      "projection_sha256": "af821b02a322dbe00eaea4fc70ec3a8198de4fa07e1ffe4d1ddcc91ead7d48f8",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_muz_holograf",
+            "label": "Holograf"
+          },
+          "right": {
+            "id": "n_v2muz_trupa_pop",
+            "label": "Trupă pop"
+          },
+          "results": [
+            {
+              "id": "n_v4muz_trupa",
+              "label": "Trupă"
+            }
+          ]
+        }
+      ],
+      "route_count": 4,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_personalitati_068",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "usor",
+        "seeds": [
+          "n_perx_memorii_regina_maria",
+          "n_filozofie",
+          "n_v2per_memorii",
+          "n_v4per_biografie",
+          "n_v4per_regina",
+          "n_eugen_ionescu"
+        ],
+        "target": "n_generatia_interbelica",
+        "target_depth": 2,
+        "id": "al_personalitati_068",
+        "category": "personalitati",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "0490fc4684eab7216a5508a3c2a25155d8dac7b67ac0fb9897e5f876fec56a50",
+      "review_binding": "sha256:a6f5a9256e6f2cc1f6666e1a157a39c3f7963b07852560db2e25af0d9460b53e",
+      "projection_sha256": "e07594fdc57104e1b5652c87d425b65a02fcd784fa66c64cacdfa1d7b0c9c11e",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_eugen_ionescu",
+            "label": "Eugen Ionescu"
+          },
+          "right": {
+            "id": "n_filozofie",
+            "label": "Filozofie"
+          },
+          "results": [
+            {
+              "id": "n_emil_cioran",
+              "label": "Emil Cioran"
+            }
+          ]
+        }
+      ],
+      "route_count": 3,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_personalitati_071",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "normal",
+        "seeds": [
+          "n_v3per_politician",
+          "n_angela_gheorghiu",
+          "n_perx_scoala_romaneasca_istorie",
+          "n_perx_liga_natiunilor",
+          "n_perx_nicolae_titulescu"
+        ],
+        "target": "n_v2per_diplomat",
+        "target_depth": 2,
+        "id": "al_personalitati_071",
+        "category": "personalitati",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "f5e9c739d147c7f454a2a3c3b6e18800eb38901c135af885ba4b7c68b0731fa0",
+      "review_binding": "sha256:7548a3ebbcda9bfd58207a3f8951c1795e5733aff3b04c5e172b0001efcb8572",
+      "projection_sha256": "327a492a32701d77809fcaa083813d0787f158c34667467ed58345f5df1d0347",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_perx_liga_natiunilor",
+            "label": "Societatea Națiunilor"
+          },
+          "right": {
+            "id": "n_perx_nicolae_titulescu",
+            "label": "Nicolae Titulescu"
+          },
+          "results": [
+            {
+              "id": "n_perx_diplomatie",
+              "label": "Diplomație"
+            }
+          ]
+        }
+      ],
+      "route_count": 1,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_personalitati_072",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "greu",
+        "seeds": [
+          "n_v2per_casa_regala",
+          "n_premiul_nobel",
+          "n_v2per_scriitor_nobel",
+          "n_v2per_memorii",
+          "n_emigratie_romaneasca"
+        ],
+        "target": "n_perx_romania_interbelica",
+        "target_depth": 6,
+        "id": "al_personalitati_072",
+        "category": "personalitati",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "9a3482a40fcf743016434ae6781654b101136410765fd82ba9ea16a2420875b6",
+      "review_binding": "sha256:8b94ef54fb9c9709ffd09b16c149136020ad551c1d7af905e03cfa22794cac6c",
+      "projection_sha256": "33c232be89d7236c06d0928b1e52d29ef375ca20ced1b210111dd954078c0b23",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_v2per_casa_regala",
+            "label": "Casa regală"
+          },
+          "right": {
+            "id": "n_v2per_memorii",
+            "label": "Memorii"
+          },
+          "results": [
+            {
+              "id": "n_perx_memorii_regina_maria",
+              "label": "Povestea vieții mele"
+            },
+            {
+              "id": "n_perx_regina_maria",
+              "label": "Regina Maria"
+            }
+          ]
+        }
+      ],
+      "route_count": 1,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_societate_080",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "greu",
+        "seeds": [
+          "n_v2soc_alegeri",
+          "n_socx_automobile_dacia",
+          "n_v4soc_serviciu",
+          "n_socx_industria_romaneasca",
+          "n_romania_stat"
+        ],
+        "target": "n_municipiu",
+        "target_depth": 5,
+        "id": "al_societate_080",
+        "category": "societate",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "e0cfeb7bfc4b8e7f84db1f42d66d9e7a26367804e7822f11b9956a2c6040629f",
+      "review_binding": "sha256:5e67f2a877b5fdda9e55dd179f9150de82c61b9c9e77222f9a98872074200d94",
+      "projection_sha256": "2b9c67a566e78d62a62a5aceb5ab983102bd60fa1cda13be7c0d964460364de1",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_romania_stat",
+            "label": "România"
+          },
+          "right": {
+            "id": "n_socx_industria_romaneasca",
+            "label": "Industria românească"
+          },
+          "results": [
+            {
+              "id": "n_leul_romanesc",
+              "label": "Leul românesc"
+            }
+          ]
+        }
+      ],
+      "route_count": 4,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    },
+    {
+      "id": "al_societate_081",
+      "game": "alchimie",
+      "action": "reserve_from_new_selection",
+      "record": {
+        "difficulty": "greu",
+        "seeds": [
+          "n_societatea_civila",
+          "n_v4soc_comunitate",
+          "n_v4soc_parinte",
+          "n_v2soc_stat",
+          "n_v4soc_bani"
+        ],
+        "target": "n_v2soc_universitate",
+        "target_depth": 6,
+        "id": "al_societate_081",
+        "category": "societate",
+        "source": "ai",
+        "status": "approved"
+      },
+      "record_sha256": "143e60795bfb0cdbb34f10f5f22bfd82c44093e2d2cb1511bfd71072c3f8fe7e",
+      "review_binding": "sha256:8e3b474a34a95ceb4e2ba51618cca20665fd607ca8481692d5b203ea9e95c391",
+      "projection_sha256": "3c0ea41ac5ba138cf62ba0f464a0ccabb6ff9572d7ca1c2687d702bcf0146a47",
+      "current_eligible": true,
+      "criteria": [
+        "E2"
+      ],
+      "live_opening_pair_count": 1,
+      "live_opening_pairs": [
+        {
+          "left": {
+            "id": "n_v2soc_stat",
+            "label": "Stat"
+          },
+          "right": {
+            "id": "n_v4soc_bani",
+            "label": "bani"
+          },
+          "results": [
+            {
+              "id": "n_bnr",
+              "label": "Banca Națională a României"
+            },
+            {
+              "id": "n_v3soc_impozit",
+              "label": "Impozit"
+            }
+          ]
+        }
+      ],
+      "route_count": 1,
+      "rationale": "The complete live sparse projection exposes only one productive opening from the shown seeds. Current rubric E2 requires at least two intuitive productive openings. More openings in the generic KG dossier do not exist in the actual served recipe space. Keep archive record and reserve from V1 selection until an independently reviewed seed/recipe repair restores honest choice.",
+      "status": "proposed_not_reviewed"
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "al_istorie_035",
+      "opening_pairs": 8,
+      "reason": "Low salience or generic graph closure size alone is not a defect; the actual sparse projection has multiple productive openings and a bounded, inspectable bridge."
+    },
+    {
+      "id": "al_literatura_005",
+      "opening_pairs": 5,
+      "reason": "Low salience or generic graph closure size alone is not a defect; the actual sparse projection has multiple productive openings and a bounded, inspectable bridge."
+    },
+    {
+      "id": "al_societate_017",
+      "opening_pairs": 4,
+      "reason": "Low salience or generic graph closure size alone is not a defect; the actual sparse projection has multiple productive openings and a bounded, inspectable bridge."
+    }
+  ],
+  "installation_requirements": [
+    "Separate independent quality judgment before any selection change.",
+    "Same exact-ID owner-reserve rail as other pack stock; keep approved records and recipes archived unchanged.",
+    "Recheck final graph projections after the de427 removal and metadata changes.",
+    "Do not claim these graphs are unsolvable; the defect is a forced initial move and insufficient live choice."
+  ]
+}

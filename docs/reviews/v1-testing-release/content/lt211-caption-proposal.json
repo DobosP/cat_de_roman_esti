@@ -1,0 +1,303 @@
+{
+  "kind": "v1-lant-caption-candidate-v1",
+  "baseline_commit": "cc0a6a4",
+  "author": "/root/v1_board_audit",
+  "checked_on": "2026-09-23",
+  "status": "proposal_requires_independent_factual_and_quality_review",
+  "bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v1-testing-release/content/reconsideration/shortlist.json": "749cf5f68a29e3a65a85cf7b36eacee6e13c8cc1f4a3fb651d6e648249b7fd6c"
+  },
+  "items": [
+    {
+      "id": "v1_caption_de8091",
+      "pair": [
+        "n_v23via_ghiozdan",
+        "n_v3lit_carte"
+      ],
+      "labels": [
+        "Ghiozdan",
+        "Carte"
+      ],
+      "caption": "carte purtată în ghiozdan",
+      "characters": 25,
+      "previous_caption": "legătură directă",
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v3lit_carte",
+        "facets": {},
+        "id": "de8091",
+        "is_distractor": false,
+        "label_ro": "două drumuri spre lecție",
+        "redistributable": false,
+        "relation": "beginner_diamond",
+        "source": "",
+        "src_id": "n_v23via_ghiozdan",
+        "strength": 0.93,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "bc3a4ebf9364a6267a65f2c80997fc8a7f8ce81455595c33e445e05369789231",
+      "source_refs": [
+        "ghiozdan_dex"
+      ],
+      "orientation_review": {
+        "forward": {
+          "from": "n_v23via_ghiozdan",
+          "to": "n_v3lit_carte",
+          "graph_allows": true,
+          "truth": "Neutral phrase describes the pair, not an asserted subject/verb traversal.",
+          "selected_edge_snapshot": {
+            "bidirectional": false,
+            "dst_id": "n_v3lit_carte",
+            "facets": {},
+            "id": "de8091",
+            "is_distractor": false,
+            "label_ro": "două drumuri spre lecție",
+            "redistributable": false,
+            "relation": "beginner_diamond",
+            "source": "",
+            "src_id": "n_v23via_ghiozdan",
+            "strength": 0.93,
+            "tags": []
+          },
+          "selected_edge_sha256": "bc3a4ebf9364a6267a65f2c80997fc8a7f8ce81455595c33e445e05369789231",
+          "reviewed_caption_applies": true,
+          "expected_display_after_install": "carte purtată în ghiozdan"
+        },
+        "reverse": {
+          "from": "n_v3lit_carte",
+          "to": "n_v23via_ghiozdan",
+          "graph_allows": true,
+          "truth": "Identical neutral phrase remains true; no reversed container/user/authorship assertion.",
+          "selected_edge_snapshot": {
+            "bidirectional": true,
+            "dst_id": "n_v3lit_carte",
+            "facets": {},
+            "id": "de7579",
+            "is_distractor": false,
+            "label_ro": "conține cărți și manuale",
+            "redistributable": false,
+            "relation": "related_to",
+            "source": "",
+            "src_id": "n_v23via_ghiozdan",
+            "strength": 0.82,
+            "tags": []
+          },
+          "selected_edge_sha256": "821ba15729a335a5a67353eee740628534682b47a321a7eced35a2fa57953a62",
+          "reviewed_caption_applies": false,
+          "expected_display_after_install": "legătură directă",
+          "binding_note": "A different existing edge wins runtime selection in this direction. The one-snapshot registry must retain fallback; this proposal does not authorize a new snapshot or a registry redesign."
+        }
+      },
+      "negative_control": "Changing any part of the complete edge snapshot must restore fallback; missing edge yields no caption. No graph edit or new reverse hop."
+    },
+    {
+      "id": "v1_caption_de7580",
+      "pair": [
+        "n_v23via_ghiozdan",
+        "n_v4soc_copil"
+      ],
+      "labels": [
+        "Ghiozdan",
+        "copil"
+      ],
+      "caption": "ghiozdan folosit de școlari",
+      "characters": 27,
+      "previous_caption": "legătură directă",
+      "edge_snapshot": {
+        "bidirectional": true,
+        "dst_id": "n_v4soc_copil",
+        "facets": {},
+        "id": "de7580",
+        "is_distractor": false,
+        "label_ro": "folosit de elevi",
+        "redistributable": false,
+        "relation": "related_to",
+        "source": "",
+        "src_id": "n_v23via_ghiozdan",
+        "strength": 0.82,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+      "source_refs": [
+        "ghiozdan_dex"
+      ],
+      "orientation_review": {
+        "forward": {
+          "from": "n_v23via_ghiozdan",
+          "to": "n_v4soc_copil",
+          "graph_allows": true,
+          "truth": "Neutral phrase describes the pair, not an asserted subject/verb traversal.",
+          "selected_edge_snapshot": {
+            "bidirectional": true,
+            "dst_id": "n_v4soc_copil",
+            "facets": {},
+            "id": "de7580",
+            "is_distractor": false,
+            "label_ro": "folosit de elevi",
+            "redistributable": false,
+            "relation": "related_to",
+            "source": "",
+            "src_id": "n_v23via_ghiozdan",
+            "strength": 0.82,
+            "tags": []
+          },
+          "selected_edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+          "reviewed_caption_applies": true,
+          "expected_display_after_install": "ghiozdan folosit de școlari"
+        },
+        "reverse": {
+          "from": "n_v4soc_copil",
+          "to": "n_v23via_ghiozdan",
+          "graph_allows": true,
+          "truth": "Identical neutral phrase remains true; no reversed container/user/authorship assertion.",
+          "selected_edge_snapshot": {
+            "bidirectional": true,
+            "dst_id": "n_v4soc_copil",
+            "facets": {},
+            "id": "de7580",
+            "is_distractor": false,
+            "label_ro": "folosit de elevi",
+            "redistributable": false,
+            "relation": "related_to",
+            "source": "",
+            "src_id": "n_v23via_ghiozdan",
+            "strength": 0.82,
+            "tags": []
+          },
+          "selected_edge_sha256": "6f05ac021f730b3d668df39fa9cc889b49028744ab8e9ebda92646da1a383b31",
+          "reviewed_caption_applies": true,
+          "expected_display_after_install": "ghiozdan folosit de școlari"
+        }
+      },
+      "negative_control": "Changing any part of the complete edge snapshot must restore fallback; missing edge yields no caption. No graph edit or new reverse hop."
+    },
+    {
+      "id": "v1_caption_de7521",
+      "pair": [
+        "n_v23lit_capra_cu_trei_iezi",
+        "n_v4soc_copil"
+      ],
+      "labels": [
+        "copil",
+        "Capra cu trei iezi"
+      ],
+      "caption": "poveste în ediții pentru copii",
+      "characters": 30,
+      "previous_caption": "legătură directă",
+      "edge_snapshot": {
+        "bidirectional": true,
+        "dst_id": "n_v4soc_copil",
+        "facets": {},
+        "id": "de7521",
+        "is_distractor": false,
+        "label_ro": "lectură cunoscută copiilor",
+        "redistributable": false,
+        "relation": "related_to",
+        "source": "",
+        "src_id": "n_v23lit_capra_cu_trei_iezi",
+        "strength": 0.84,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+      "source_refs": [
+        "creanga_litera",
+        "creanga_sigma"
+      ],
+      "orientation_review": {
+        "forward": {
+          "from": "n_v4soc_copil",
+          "to": "n_v23lit_capra_cu_trei_iezi",
+          "graph_allows": true,
+          "truth": "Neutral phrase describes the pair, not an asserted subject/verb traversal.",
+          "selected_edge_snapshot": {
+            "bidirectional": true,
+            "dst_id": "n_v4soc_copil",
+            "facets": {},
+            "id": "de7521",
+            "is_distractor": false,
+            "label_ro": "lectură cunoscută copiilor",
+            "redistributable": false,
+            "relation": "related_to",
+            "source": "",
+            "src_id": "n_v23lit_capra_cu_trei_iezi",
+            "strength": 0.84,
+            "tags": []
+          },
+          "selected_edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+          "reviewed_caption_applies": true,
+          "expected_display_after_install": "poveste în ediții pentru copii"
+        },
+        "reverse": {
+          "from": "n_v23lit_capra_cu_trei_iezi",
+          "to": "n_v4soc_copil",
+          "graph_allows": true,
+          "truth": "Identical neutral phrase remains true; no reversed container/user/authorship assertion.",
+          "selected_edge_snapshot": {
+            "bidirectional": true,
+            "dst_id": "n_v4soc_copil",
+            "facets": {},
+            "id": "de7521",
+            "is_distractor": false,
+            "label_ro": "lectură cunoscută copiilor",
+            "redistributable": false,
+            "relation": "related_to",
+            "source": "",
+            "src_id": "n_v23lit_capra_cu_trei_iezi",
+            "strength": 0.84,
+            "tags": []
+          },
+          "selected_edge_sha256": "33ffd16d8b938e8bfd3ede3b52d5c4cb08978ba66f8dcee3cb15bcf3e2bc374f",
+          "reviewed_caption_applies": true,
+          "expected_display_after_install": "poveste în ediții pentru copii"
+        }
+      },
+      "negative_control": "Changing any part of the complete edge snapshot must restore fallback; missing edge yields no caption. No graph edit or new reverse hop."
+    }
+  ],
+  "sources": [
+    {
+      "id": "ghiozdan_dex",
+      "url": "https://dexonline.ro/definitie/ghiozdan",
+      "publisher": "DEX 2009 and MDA2 2010 reproduced by dexonline",
+      "access": "full page opened 2026-09-23",
+      "claim": "Schoolchildren use the object to carry schoolbooks and notebooks; establishes the bag/book and schoolchild/bag relationships.",
+      "qualification": "Does not say every child attends school or that every child owns a bag. The caption names school use without requiring a universal claim."
+    },
+    {
+      "id": "creanga_litera",
+      "url": "https://www.litera.ro/capra-cu-trei-iezi",
+      "publisher": "Editura Litera",
+      "access": "full page opened 2026-09-23",
+      "claim": "Printed illustrated Ion Creangă edition, ISBN 978-997-574-311-2, listed under children’s books and ages 5–7 and 7–9. Establishes child-directed editions of this tale.",
+      "qualification": "Specific edition evidence does not establish appropriateness of every adaptation or a universal age recommendation. Caption says editions for children."
+    },
+    {
+      "id": "creanga_sigma",
+      "url": "https://editurasigma.ro/product/capra-cu-trei-iezi-carte-uriasa/",
+      "publisher": "Editura Sigma",
+      "access": "search result includes product description/categories; direct open returned internal fetch error",
+      "claim": "Publisher markets a large-format children’s edition in primary/preparatory/class1/class2 categories. Corroborating lead; Litera full-page evidence is sufficient for the narrow editions claim."
+    }
+  ],
+  "scope": {
+    "caption_additions": 3,
+    "before_registry_count": 117,
+    "after_registry_count_if_accepted": 120,
+    "graph_nodes_added": 0,
+    "graph_edges_added": 0,
+    "rounds_promoted": 0
+  },
+  "player_outcome": "Make both already-existing Ghiozdan→Capra cu trei iezi paths understandable: through a carried book or through the schoolchild who reads a children’s edition. The existing Carte↔Capra caption poveste și carte stays exact. Familiar school objects create an everyday-to-story bridge for first-time mixed-age players.",
+  "caveats": [
+    "This packet approves neither the pending round nor its difficulty/freshness; author cannot approve own text.",
+    "The tale node is the 1875 literary work, not the adult horror film adaptation. No adaptation substitution or plot excerpt is added.",
+    "The prior pending blocker was missing opening visibility. Current shortlist says visibility repaired, but final runtime must prove both public first choices, both wins, hints, wrong/repeat guesses and GET recovery.",
+    "After caption acceptance and installation, rebuild exact pending dossier against final graph/rubric/runtime; then obtain independent analyst/verifier and supported promote gate.",
+    "Keep all117 existing caption mappings exact and all earlier pending/rejected histories.",
+    "The runtime-selected Carte→Ghiozdan edge is de7579, not forward de8091. Both directions are legal, but only Ghiozdan→Carte receives this exact de8091-bound caption; reverse keeps legătură directă. Wording truth and snapshot applicability are separate assertions."
+  ]
+}

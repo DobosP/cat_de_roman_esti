@@ -1222,3 +1222,37 @@ This publishes V97's completed implementation and V98's startup documentation/dr
 It does not install V98 content, deploy production or restart the loop. The merged kickoff
 task branch/worktree/scratch is cleaned; future implementation starts from published main.
 GitHub CI is triggered by the push; its remote result is separate from bound local gates.
+## V1 testing release (internal V100, 2026-09-23)
+
+Valid until: a change to the bound V1 source or content — then treat as history.
+
+The owner requested V100 as **V1 / 1.0.0** for mixed ages on phones and desktop.
+The interface puts game choices first, exposes help directly, removes empty options,
+clarifies remaining mistakes and makes replay primary. Enlarged word cards reflow
+at 320 px. Denied browser storage, repeated slow chunk failures and Alchimie failed
+new-round recovery now preserve a usable interface and saved play. Lanț current-position
+text updates directly from authoritative state even when animation frames are paused.
+
+Independent content reviews led to seven exact factual corrections, a finite reserve
+of 20 pack and three quick boards, and fresh promotion of only the held Ghiozdan →
+Capra cu trei iezi board. All 256 historical rejections and seven other pending boards
+remain held. The 85 authored and 336 frozen quick payloads remain exact. All 68
+selectable Alchimie books retain their 521 recipes/routes/par; the exploration world
+remains 251 concepts/351 recipes with nine historical books and 1009 saved prefixes.
+
+The historical tests reconstruct their exact prior fixtures; original approval and
+hash contracts remain intact. Complete gate results, the failed intermediate runs,
+source-copy boundaries and the isolated wheel smoke live in the
+[V1 verification](docs/reviews/v1-testing-release/verification.json). Editorial sampling
+and browser emulation are explicitly distinguished from full mechanical validation
+and human/physical-device testing. The [Romanian guide](docs/TESTARE_V1.md) provides
+an all-six-game session and specific feedback prompts. Decision: [ADR-0158](docs/adr/0158-v1-testing-release.md).
+No origin push, deployment, accounts activation or recurring loop restart is included.
+
+V1 release gate completed locally on 2026-09-23: 2446 backend, 53 accounts and
+224 frontend checks passed. Browser evidence covers 588 distinct cases through
+a full matrix plus 142 final affected-case checks; no retries or widened timeouts.
+Both validators, Ruff, frontend lint/build, docs, whitespace and isolated 1.0.0 wheel
+smoke passed. The release remains anonymous and is ready for mixed-age physical
+phone/desktop playtesting; no push or deployment was performed. Exact evidence is
+in `docs/reviews/v1-testing-release/verification.json`.

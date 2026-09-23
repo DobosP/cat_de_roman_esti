@@ -1,0 +1,73 @@
+{
+  "author_browser_evidence_independently_inspected": {
+    "author": "/root/v1_board_audit",
+    "coverage": [
+      "denied localStorage and sessionStorage startup plus six games and Alchimie exploration",
+      "saved Intrusul round retained through failed import, home navigation and explicit reload without a new create",
+      "11-second aborted chunk on both documents yields one automatic reload then recovery",
+      "failed AccountBar import yields readable bounded recovery and explicit reload succeeds"
+    ],
+    "log_sha256": "9fb781da14ae7c84288738f9add01e729a340e4e741dce1937ace7429a403df4",
+    "result": "8 passed across desktop and mobile"
+  },
+  "bindings": {
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "a88184465402e2eb0d9ae1fbe9cb434ada0863d8d09547166313d77f77758dfb",
+    "cat_de_roman_esti/web/static/assets/index-BO-FZg-D.js": "3c7490221d97352b1d8890c23ed1c03d785b254b24354b22261fb1819b35e1e9",
+    "frontend/e2e/release-recovery-storage.spec.mjs": "bb37bd0473c17155796fa28abcf0df7ebb774695aeadc96af7df2d11a5e32955",
+    "frontend/src/App.tsx": "1daf48536e9f8cce1b5b2a5e1949b4cd09b071033b997725be30c94626e58d01",
+    "frontend/src/components/RouteErrorBoundary.tsx": "b5a40f7e2dfb63c0ea6c65e2913081e3893ae2f28a83111b373e45ae3cc0037b",
+    "frontend/src/derivedReplay.ts": "e31f8695fd6f0240884addefef574d63b02161874f41c198acf053787d2d185a",
+    "frontend/src/main.tsx": "19397e62132ca9285f3aec0abe327eee936dc56593aceccecd10d150a9fa383c",
+    "frontend/src/releaseRecovery.d.mts": "45caffc29d0ea9e03aeba2b83da403f73891cf164ec29eceb54e3350f5dd1d8e",
+    "frontend/src/releaseRecovery.mjs": "b049d637ff7074ebcf065a70fe72dc8dd8ee64726d8c700a4743dfef441cde8c",
+    "frontend/src/sound.ts": "5710dc9cc051fa7e4e7f3407d0e198529de128c85b83792456aa6d59bb272742",
+    "frontend/tests/derived-replay-memory.test.mjs": "a750d4c510f47e54e840408f2fdc11fd9a6862da4286aefb7b5d1fc75d9fe6bd",
+    "frontend/tests/release-recovery.test.mjs": "b45d17b96c944f2ed2f7aecdeb05e9b321ab82ad30f29da3378c2fcd84f41ec8",
+    "frontend/tests/sound-storage.test.mjs": "80b609747b725cf0f9e9fe38c29331abc7786831133809264f62fbc9c6438941"
+  },
+  "checked_on": "2026-09-23",
+  "earlier_review": "docs/reviews/v1-testing-release/source-review.json",
+  "earlier_review_sha256": "25e937be5301488abe3dd20b892ac1bbef09f582da819554b96f50f9ebee5f1f",
+  "findings_closed": [
+    {
+      "id": "V1-BOOTSTRAP-STORAGE-GETTER",
+      "resolution": "Default storage lookup now occurs inside try. Getter denial, throwing methods, silent writes and failed readback produce no automatic reload and leave the rejected lazy import visible to the error boundary. Independent denied-getter regressions pass."
+    },
+    {
+      "id": "V1-RECOVERY-SLOW-FAILURE-LOOP",
+      "original_evidence": "During review of the first remediation, independently simulated four documents where the 10-second marker-removal callback ran before preloadError; reload count increased 1,2,3,4. The timer did not establish successful lazy loading.",
+      "resolution": "Timer/reset export removed. One last-failed-page marker persists for the tab session and same-document reloadRequested suppresses duplicate reloads. Independent four-document delayed-failure regression passes with total reloads=1."
+    },
+    {
+      "id": "V1-ADJACENT-LOCAL-STORAGE-GETTERS",
+      "reported_by": "/root/v1_board_audit",
+      "resolution": "Independent source diff confirms sound initialization and derived replay now evaluate typeof localStorage inside their existing guards. Import-time sound preference and read/write replay tests independently pass with denied getters; existing sound/replay semantics remain intact."
+    }
+  ],
+  "independent_tests": {
+    "command": "node --test tests/release-recovery.test.mjs tests/derived-replay-memory.test.mjs tests/sound-storage.test.mjs",
+    "counts": {
+      "derived_replay": 5,
+      "release_recovery": 11,
+      "sound_storage": 2
+    },
+    "result": "18 passed, 0 failed; exit 0"
+  },
+  "kind": "v1-independent-source-review-closure-v1",
+  "limits": [
+    "Browser cases were authored and executed by the board agent; I independently inspected their test code and completed log rather than claiming a second browser execution.",
+    "The source review is bounded to recovery and the earlier listed UI intent/accessibility/runtime coupling changes; it is not a general application certification.",
+    "The guard stores only the last failed page and deliberately does not promise an automatic retry on every subsequent deployment within the same tab. Explicit reload remains available.",
+    "Future source or bundle changes require renewed binding; root owns the final complete regression matrix."
+  ],
+  "remaining_actionable_findings": [],
+  "reviewed_behavior": [
+    "AccountBar and all routed lazy screens share the root boundary, so uncanceled preload failures reach readable UI rather than an unmounted root.",
+    "Failure heading receives focus; explicit reload can clear a cached React lazy rejection; navigation to a different pathname resets the boundary.",
+    "Recovery writes only its own session marker. Saved-round localStorage keys and server sessions are not cleared or replaced.",
+    "No automatic reload occurs without a verifiably persisted marker. Repeated slow failures at the same page remain bounded across documents; user-directed navigation/reload remains available.",
+    "Compiled entry and manifest match the author-frozen build hashes."
+  ],
+  "reviewer": "/root/v1_held_audit",
+  "verdict": "accept_frozen_recovery_changes_within_reviewed_scope"
+}

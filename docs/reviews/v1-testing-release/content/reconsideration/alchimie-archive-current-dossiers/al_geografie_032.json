@@ -1,0 +1,260 @@
+{
+  "id": "al_geografie_032",
+  "game": "alchimie",
+  "category": "geografie",
+  "difficulty": "normal",
+  "status": "pending",
+  "record_sha256": "d2a84c2c9e8958e585d101bb97f56b1dc19fff8c733cab07e4a470bcb0c80a22",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [],
+  "target": {
+    "id": "n_subcarpatii",
+    "label": "Subcarpații",
+    "node_type": "place",
+    "category": "geografie",
+    "salience": 0.2224,
+    "degree": 7,
+    "incoming_degree": 7,
+    "description": "Trepta de relief deluros situata la exteriorul Carpatilor, intre munti si campie."
+  },
+  "seeds": [
+    {
+      "id": "n_v2geo_lac",
+      "label": "lac",
+      "node_type": "concept",
+      "category": "geografie",
+      "salience": 0.8211,
+      "degree": 10,
+      "incoming_degree": 10,
+      "description": "Întindere naturală sau artificială de apă stătătoare."
+    },
+    {
+      "id": "n_geox_deva",
+      "label": "Deva",
+      "node_type": "place",
+      "category": "geografie",
+      "salience": 0.1637,
+      "degree": 4,
+      "incoming_degree": 4,
+      "description": "Municipiu din Hunedoara, aproape de valea Mureșului și de cetatea de pe deal."
+    },
+    {
+      "id": "n_v4geo_catun",
+      "label": "cătun",
+      "node_type": "concept",
+      "category": "geografie",
+      "salience": 0.274,
+      "degree": 3,
+      "incoming_degree": 3,
+      "description": "Așezare rurală foarte mică, mai redusă decât un sat."
+    },
+    {
+      "id": "n_v4geo_strada",
+      "label": "stradă",
+      "node_type": "concept",
+      "category": "geografie",
+      "salience": 0.8788,
+      "degree": 7,
+      "incoming_degree": 11,
+      "description": "Cale urbană de circulație mărginită de clădiri."
+    },
+    {
+      "id": "n_muntenia",
+      "label": "Muntenia",
+      "node_type": "place",
+      "category": "geografie",
+      "salience": 0.403,
+      "degree": 14,
+      "incoming_degree": 15,
+      "description": "Regiune istorică din sudul României (Țara Românească)."
+    },
+    {
+      "id": "n_v2geo_drum_montan",
+      "label": "drum montan",
+      "node_type": "concept",
+      "category": "geografie",
+      "salience": 0.5181,
+      "degree": 10,
+      "incoming_degree": 10,
+      "description": "Șosea sau traseu rutier care traversează zone de munte."
+    },
+    {
+      "id": "n_v4geo_parau",
+      "label": "pârâu",
+      "node_type": "concept",
+      "category": "geografie",
+      "salience": 0.6763,
+      "degree": 3,
+      "incoming_degree": 3,
+      "description": "Curs mic de apă curgătoare."
+    }
+  ],
+  "target_depth": 2,
+  "craft_profile": {
+    "opening_pairs": 7,
+    "closure_size": 145,
+    "target_generation": 2
+  },
+  "productive_openings": [
+    {
+      "pair": [
+        {
+          "id": "n_geox_deva",
+          "label": "Deva"
+        },
+        {
+          "id": "n_v4geo_catun",
+          "label": "cătun"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_v2geo_oras",
+          "label": "oraș"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_geox_deva",
+          "label": "Deva"
+        },
+        {
+          "id": "n_v4geo_strada",
+          "label": "stradă"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_v2geo_oras",
+          "label": "oraș"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_muntenia",
+          "label": "Muntenia"
+        },
+        {
+          "id": "n_v4geo_strada",
+          "label": "stradă"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_bucuresti",
+          "label": "București"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_v2geo_drum_montan",
+          "label": "drum montan"
+        },
+        {
+          "id": "n_v2geo_lac",
+          "label": "lac"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_geox_lacul_vidraru",
+          "label": "Lacul Vidraru"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_v2geo_drum_montan",
+          "label": "drum montan"
+        },
+        {
+          "id": "n_v4geo_parau",
+          "label": "pârâu"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_cheile_bicazului",
+          "label": "Cheile Bicazului"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_v4geo_catun",
+          "label": "cătun"
+        },
+        {
+          "id": "n_v4geo_parau",
+          "label": "pârâu"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_carpati",
+          "label": "Carpați"
+        }
+      ]
+    }
+  ],
+  "minimum_action_recipe": [
+    {
+      "pair": [
+        {
+          "id": "n_v4geo_catun",
+          "label": "cătun"
+        },
+        {
+          "id": "n_v4geo_parau",
+          "label": "pârâu"
+        }
+      ],
+      "result_count": 1,
+      "results": [
+        {
+          "id": "n_carpati",
+          "label": "Carpați"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_carpati",
+          "label": "Carpați"
+        },
+        {
+          "id": "n_muntenia",
+          "label": "Muntenia"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_subcarpatii",
+          "label": "Subcarpații"
+        },
+        {
+          "id": "n_bucegi",
+          "label": "Munții Bucegi"
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:f4b3d62f389ee20a4af833cf9674ab4f7ae5120c57c3f4c3587954077ff38a13"
+}
