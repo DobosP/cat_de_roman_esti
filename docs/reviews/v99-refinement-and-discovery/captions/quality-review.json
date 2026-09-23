@@ -1,0 +1,100 @@
+{
+  "candidate_sha256": "1c735c02e88809cc325a64f0a426925814d2b985776d04a0beb9a14274589324",
+  "checked_on": "2026-09-23",
+  "checks": {
+    "all_old_captions_present": 113,
+    "allowed_directions": 5,
+    "bff_requests": 38,
+    "bound_input_files_verified": 5,
+    "candidate_binding_verified": true,
+    "caption_character_counts": [
+      27,
+      25,
+      30,
+      28
+    ],
+    "changed_edge_fallback_checks": 4,
+    "direction_checks": 8,
+    "earned_path_and_get_checks": "Every allowed single-edge move returned the exact candidate caption, a one-hop win and a matching GET path. All three forbidden reverses failed without a move or path change. Each two-hop route retained its exact earned relations across GET, and completed states had no further choices. Edge snapshot hashes were absent from checked GET responses.",
+    "exact_source_edges": 4,
+    "hint_checks": "On each two-hop route, first hint returned stage direction, hint null and a relation already present among opening visible choices. GET preserved that earned hint without advancing moves or path. The caption addition is expected to change the opening hint from the generic-caption alternatives stage to the existing direction stage; this was observed in the proposed in-memory run, not an installed build.",
+    "maximum_caption_length": 30,
+    "not_performed": [
+      "Independent live factual-source review; handled by a separate reviewer and not assumed accepted.",
+      "Final installed mapping/API regression and natural round-selection check.",
+      "Browser rendering, keyboard use, narrow-screen layout and human enjoyment/playtest."
+    ],
+    "preservation_scope": "Actual check of the current 113-entry mapping and an additive in-memory proposed mapping. Four new, noncolliding pairs yield 117 entries; every old key and value remains exact. This is not verification of a future installation.",
+    "probe_execution": "Python 3.12 with -B and the task worktree on PYTHONPATH; Django in-process Client. Existing code and fixture loaded, REVIEWED_CAPTIONS temporarily replaced in process with an additive MappingProxyType and restored in finally. Ten temporary sessions deleted. All five bound input file hashes checked before and after; no runtime, fixture or test file written.",
+    "recipe_variant_scope_checked": true,
+    "romanian_readability_review": "Each caption uses ordinary Romanian food terms, diacritics and a compact noun phrase. Ingredient versions remain qualified, and serving accompaniment is distinct from recipe composition. No phrase contains a third hidden concept or states that a displayed local connection is the only winning route.",
+    "route_coverage": "Both current shortest two-hop routes were enumerated from current directed adjacency and played through with the proposed mapping held only in memory: Cacao→Înghețată→Lapte and Cacao→Chec→Lapte. Each won in two moves with score 1000.",
+    "unresolved_findings": [],
+    "visible_choice_checks": "At Cacao, both Chec and Înghețată were visible with their proposed first-hop captions. The third visible choice was Ciocolată with the unchanged generic caption. Every choice payload contained only label and relation. Neither final-hop caption appeared in the initial response; the initial earned path held only Cacao.",
+    "withheld_reverse_directions": 3
+  },
+  "items": [
+    {
+      "both_directions_checked": true,
+      "caption": "înghețată cu aromă de cacao",
+      "character_count": 27,
+      "edge_sha256": "634c2004dbe7abbcecd214f310d8c057873726f1de435b5c1836f7abbff0b287",
+      "graph_allows_reverse": false,
+      "id": "v99_caption_de8627",
+      "pair": [
+        "n_v3gas_inghetata",
+        "n_v85_food_cacao"
+      ],
+      "rationale": "The restrictive noun phrase names cocoa-flavoured ice cream as a version of the destination, so the cocoa-to-ice-cream association is legible without defining every ice cream as containing cocoa. Both named concepts are ordinary Romanian food vocabulary; the caption introduces no additional intermediate or future route step. The existing forward edge accepts it and the missing reverse still returns no caption and rejects the hop. This is a quality judgment of wording and graph fit, not independent acceptance of the culinary evidence.",
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "chec în variantă cu cacao",
+      "character_count": 25,
+      "edge_sha256": "525d8b206c853cdb4acdaf85474d587024293e5f0554cae3bb646b90236366b9",
+      "graph_allows_reverse": false,
+      "id": "v99_caption_de8710",
+      "pair": [
+        "n_v85_food_cacao",
+        "n_v87_food_chec"
+      ],
+      "rationale": "The explicit qualifier în variantă cu cacao preserves the ingredient-variant scope: it identifies cocoa cake without suggesting that every chec contains cocoa. The short phrase tells a player why Chec is a meaningful first hop from Cacao and stays distinct from the ice-cream route. The existing forward edge accepts it and the absent reverse remains unavailable. Factual source acceptance is separate.",
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "înghețată în variantă cu lapte",
+      "character_count": 30,
+      "edge_sha256": "3fc4b91979241a9a91db8d92681f466c2eb096ee65e8be10721029e634584492",
+      "graph_allows_reverse": true,
+      "id": "v99_caption_de5087",
+      "pair": [
+        "n_v3gas_inghetata",
+        "n_v4gas_lapte"
+      ],
+      "rationale": "The explicit qualifier în variantă cu lapte avoids universalising milk as a requirement for all ice cream. The noun phrase describes the same milk-based ice-cream version when read from either Înghețată or Lapte; it does not invert a verb or assert that milk itself is ice cream. Both graph-supported directions were exercised. It explains the final ingredient association on the ice-cream route without adding a route or exposing a later step at the opening. Culinary source acceptance remains independent.",
+      "verdict": "accept"
+    },
+    {
+      "both_directions_checked": true,
+      "caption": "chec servit alături de lapte",
+      "character_count": 28,
+      "edge_sha256": "1f15d8efa05c4228798f5e49b814b53fc363042492d6df0b3324c4977dc2e7f9",
+      "graph_allows_reverse": false,
+      "id": "v99_caption_de8745",
+      "pair": [
+        "n_v4gas_lapte",
+        "n_v87_food_chec"
+      ],
+      "rationale": "Servit alături de describes a serving arrangement and clearly distinguishes milk as an accompaniment from an ingredient in the cake. As a noun phrase it names one supported way of serving chec; it does not say that cake must always be served with milk. This supplies an understandable final hop on the alternative cake route. Only Chec-to-Lapte is legal and the reverse was rejected with an empty caption. Whether the specific serving claim is source-supported is reserved to the factual review.",
+      "verdict": "accept"
+    }
+  ],
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "kind": "lant-caption-review-v1",
+  "limits": "Independent quality acceptance of the exact four-caption proposal. Structural and API observations came from a temporary in-memory additive mapping over the bound current runtime, not installation. Acceptance does not establish culinary facts, final browser layout, natural selection or human enjoyment; distinct factual approval and final integration checks remain required.",
+  "reviewer": "/root/v99_caption_quality",
+  "role": "quality",
+  "runtime_source_sha256": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d"
+}

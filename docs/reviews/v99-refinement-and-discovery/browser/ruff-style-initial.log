@@ -1,0 +1,103 @@
+E501 Line too long (109 > 100)
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:14:101
+   |
+12 | out = Path(__file__).resolve().parent
+13 | root = out.parents[3]
+14 | node = Path(r"C:\Users\Paul Work\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe")
+   |                                                                                                     ^^^^^^^^^
+15 | modules = node.parent.parent / "node_modules"
+16 | python = Path(r"C:\Users\Paul Work\work\_temp\v99-refinement-discovery\venv\Scripts\python.exe")
+   |
+
+E501 Line too long (369 > 100)
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:22:101
+   |
+20 | …
+21 | …
+22 | …, "cat_de_roman_esti/fixtures/kg_sample.json", "cat_de_roman_esti/fixtures/games_pack.json", "frontend/src/screens/Lant.tsx", "docs/reviews/v99-refinement-and-discovery/captions/proposal.json", "docs/reviews/v99-refinement-and-discovery/captions/implementation-review.json"]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+23 | …i/web/static").rglob("*")) if p.is_file()]
+24 | …
+   |
+
+E501 Line too long (137 > 100)
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:23:101
+   |
+21 | …
+22 | ….py", "cat_de_roman_esti/wordgames/lant.py", "cat_de_roman_esti/fixtures/kg_sample.json", "cat_de_roman_esti/fixtures/games_pack.json…
+23 | …) for p in sorted((root / "cat_de_roman_esti/web/static").rglob("*")) if p.is_file()]
+   |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+24 | …gest()
+25 | …
+   |
+
+E731 Do not assign a `lambda` expression, use a `def`
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:24:1
+   |
+22 | known = ["cat_de_roman_esti/wordgames/lant_relations.py", "cat_de_roman_esti/wordgames/lant.py", "cat_de_roman_esti/fixtures/kg_sample…
+23 | known += [str(p.relative_to(root)).replace("\\", "/") for p in sorted((root / "cat_de_roman_esti/web/static").rglob("*")) if p.is_file…
+24 | sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+25 | bindings = {p: sha(root / p) for p in known}
+26 | env = dict(os.environ, PYTHONPATH=str(root), PYTHONDONTWRITEBYTECODE="1", PYTHONIOENCODING="utf-8", CAT_DEBUG="1", CAT_ACCOUNTS_ENABLE…
+   |
+help: Rewrite `sha` as a `def`
+
+E501 Line too long (212 > 100)
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:26:101
+   |
+24 | …
+25 | …
+26 | …="utf-8", CAT_DEBUG="1", CAT_ACCOUNTS_ENABLED="0", CAT_KG_FIXTURE=str(root / "cat_de_roman_esti/fixtures/kg_sample.json"))
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+27 | …
+28 | …
+   |
+
+E501 Line too long (255 > 100)
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:31:101
+   |
+29 | …
+30 | …
+31 | …"127.0.0.1", "--port", str(port), "--log-level", "warning"], cwd=root, env=env, stdout=log, stderr=subprocess.STDOUT, creationflags=subprocess.CREATE_NO_WINDOW)
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+32 | …
+33 | …
+   |
+
+B007 Loop control variable `attempt` not used within loop body
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:32:13
+   |
+30 |     with (scratch / "browser-server.log").open("w", encoding="utf-8") as log:
+31 |         server = subprocess.Popen([str(python), "-B", "-m", "cat_de_roman_esti.web", "--host", "127.0.0.1", "--port", str(port), "--lo…
+32 |         for attempt in range(100):
+   |             ^^^^^^^
+33 |             if server.poll() is not None:
+34 |                 raise RuntimeError("Temporary BFF exited before readiness")
+   |
+help: Rename unused `attempt` to `_attempt`
+
+E501 Line too long (210 > 100)
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:43:101
+   |
+41 | …
+42 | …
+43 | …=root, env=env, capture_output=True, text=True, encoding="utf-8", timeout=180, creationflags=subprocess.CREATE_NO_WINDOW)
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+44 | …8")
+45 | …
+   |
+
+E501 Line too long (114 > 100)
+  --> docs\reviews\v99-refinement-and-discovery\browser\run.py:60:101
+   |
+58 |     result["bindings_unchanged"] = bindings == {p: sha(root / p) for p in known}
+59 |     result["script_bindings"] = {p.name: sha(p) for p in [out / "run.py", out / "probe.cjs"]}
+60 |     (out / "run-receipt.json").write_text(json.dumps(result, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+   |                                                                                                     ^^^^^^^^^^^^^^
+61 | if result.get("node_exit_code"):
+62 |     sys.exit(result["node_exit_code"])
+   |
+
+Found 9 errors.
+No fixes available (2 hidden fixes can be enabled with the `--unsafe-fixes` option).

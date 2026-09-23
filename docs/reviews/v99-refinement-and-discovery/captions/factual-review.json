@@ -1,0 +1,142 @@
+{
+  "kind": "lant-caption-review-v1",
+  "role": "factual",
+  "reviewer": "/root/v99_caption_factual",
+  "checked_on": "2026-09-23",
+  "candidate_sha256": "1c735c02e88809cc325a64f0a426925814d2b985776d04a0beb9a14274589324",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "runtime_source_sha256": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+  "items": [
+    {
+      "id": "v99_caption_de8627",
+      "pair": [
+        "n_v3gas_inghetata",
+        "n_v85_food_cacao"
+      ],
+      "caption": "înghețată cu aromă de cacao",
+      "edge_sha256": "634c2004dbe7abbcecd214f310d8c057873726f1de435b5c1836f7abbff0b287",
+      "verdict": "accept",
+      "rationale": "Accept as a named cocoa-flavored ice-cream variant. The Cuisinart recipe uses cocoa powder in its chocolate ice cream; JamilaCuisine independently includes cocoa in the mixture. Gourmandelle explicitly assigns the chocolate flavor to cocoa. The noun phrase selects that flavor and does not claim that all ice cream contains cocoa, or that cocoa is an artificial flavoring. Only Cacao to Inghetata is traversable; the absent reverse must stay unavailable.",
+      "sources": [
+        "https://www.cuisinart.360.ro/assets/files/products/fdb_1741785197_icem10-manual-de-utilizare.pdf",
+        "https://jamilacuisine.ro/inghetata-de-ciocolata-reteta-video/",
+        "https://gourmandelle.com/ro/inghetata-de-casa-cu-ciocolata/"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 27
+    },
+    {
+      "id": "v99_caption_de8710",
+      "pair": [
+        "n_v85_food_cacao",
+        "n_v87_food_chec"
+      ],
+      "caption": "chec în variantă cu cacao",
+      "edge_sha256": "525d8b206c853cdb4acdaf85474d587024293e5f0554cae3bb646b90236366b9",
+      "verdict": "accept",
+      "rationale": "JamilaCuisine includes cocoa in its chec recipe and explicitly permits omitting it. The qualifier in varianta therefore preserves the optional nature of cocoa instead of making it definitional for all chec. Only Cacao to Chec is traversable; the pair wording does not authorize the reverse.",
+      "sources": [
+        "https://jamilacuisine.ro/chec-pufos-cu-cacao-reteta-video/"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 25
+    },
+    {
+      "id": "v99_caption_de5087",
+      "pair": [
+        "n_v3gas_inghetata",
+        "n_v4gas_lapte"
+      ],
+      "caption": "înghețată în variantă cu lapte",
+      "edge_sha256": "3fc4b91979241a9a91db8d92681f466c2eb096ee65e8be10721029e634584492",
+      "verdict": "accept",
+      "rationale": "The Cuisinart vanilla and chocolate ice-cream recipes and JamilaCuisine chocolate ice cream use milk. Gourmandelle supplies a concrete dairy-free counterexample, so in varianta cu lapte is necessary and factually accurate. The same noun phrase remains true for both existing traversals: it names a milk-containing version without asserting that milk is made from ice cream.",
+      "sources": [
+        "https://www.cuisinart.360.ro/assets/files/products/fdb_1741785197_icem10-manual-de-utilizare.pdf",
+        "https://jamilacuisine.ro/inghetata-de-ciocolata-reteta-video/",
+        "https://gourmandelle.com/ro/inghetata-de-casa-cu-ciocolata/"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": true,
+      "character_count": 30
+    },
+    {
+      "id": "v99_caption_de8745",
+      "pair": [
+        "n_v4gas_lapte",
+        "n_v87_food_chec"
+      ],
+      "caption": "chec servit alături de lapte",
+      "edge_sha256": "1f15d8efa05c4228798f5e49b814b53fc363042492d6df0b3324c4977dc2e7f9",
+      "verdict": "accept",
+      "rationale": "JamilaCuisine describes eating slices of chec alongside a glass of milk; its separate cherry-chec recipe also lists milk as an accompaniment. This supports a serving option, not a required ingredient, universal custom or exclusive pairing. The phrase describes chec served that way. Only Chec to Lapte is traversable; no reverse edge is inferred.",
+      "sources": [
+        "https://jamilacuisine.ro/chec-pufos-cu-cacao-reteta-video/",
+        "https://jamilacuisine.ro/chec-cu-visine-marmorat-pufos-si-plin-de-aroma-reteta-video/"
+      ],
+      "both_directions_checked": true,
+      "graph_allows_reverse": false,
+      "character_count": 28
+    }
+  ],
+  "checks": {
+    "allowed_directions": 5,
+    "withheld_reverse_directions": 3,
+    "actual_graph_edge_snapshots_match": true,
+    "live_primary_sources_read": true,
+    "reviewed_runtime_contract": "caption first requires service.link(a,b), then matches the unordered pair and full edge digest. service.link delegates to directed non-distractor graph.edge_between.",
+    "unresolved_findings": [],
+    "scope_limit": "Factual acceptance of the four exact caption strings only; independent quality review and installation checks remain separate."
+  },
+  "source_checks": [
+    {
+      "url": "https://www.cuisinart.360.ro/assets/files/products/fdb_1741785197_icem10-manual-de-utilizare.pdf",
+      "source_type": "Cuisinart ICEM10 Romanian appliance manual hosted by its Romanian distributor",
+      "accessed_on": "2026-09-23",
+      "location": "PDF page 8 of 13, printed page 4; vanilla and chocolate ice-cream recipes",
+      "evidence": "Both recipes include whole milk; the chocolate recipe mixes cocoa powder into the ice-cream base.",
+      "inspection": "PDF extracted text inspected. Screenshot attempt failed with cache miss; no visual inspection is claimed."
+    },
+    {
+      "url": "https://jamilacuisine.ro/inghetata-de-ciocolata-reteta-video/",
+      "source_type": "Original JamilaCuisine recipe",
+      "accessed_on": "2026-09-23",
+      "location": "Ingredients and recipe discussion",
+      "evidence": "Its chocolate ice-cream ingredients separately include milk and cocoa.",
+      "limit": "The article also generalizes that creme anglaise underlies every ice cream; that overclaim is not adopted and is contradicted by the dairy-free source."
+    },
+    {
+      "url": "https://gourmandelle.com/ro/inghetata-de-casa-cu-ciocolata/",
+      "source_type": "Original Gourmandelle recipe",
+      "accessed_on": "2026-09-23",
+      "location": "Ingredient notes and dairy-free FAQ",
+      "evidence": "Cocoa supplies the chocolate flavor in a frozen-banana version expressly made without dairy.",
+      "limit": "Supports a cocoa flavor and the milk-optional counterexample, not a claim about all ice cream."
+    },
+    {
+      "url": "https://jamilacuisine.ro/chec-pufos-cu-cacao-reteta-video/",
+      "source_type": "Original JamilaCuisine recipe",
+      "accessed_on": "2026-09-23",
+      "location": "Ingredients, childhood-serving paragraph and final variation paragraph",
+      "evidence": "Cocoa appears in the ingredient list, may be omitted, and the author describes cake slices eaten with a glass of milk.",
+      "limit": "This establishes an optional cocoa variant and an observed serving option, not universal composition or serving practice."
+    },
+    {
+      "url": "https://jamilacuisine.ro/chec-cu-visine-marmorat-pufos-si-plin-de-aroma-reteta-video/",
+      "source_type": "Original JamilaCuisine recipe",
+      "accessed_on": "2026-09-23",
+      "location": "Section about slicing the finished cake",
+      "evidence": "The author lists milk among the beverages that can accompany the cake.",
+      "limit": "Additional recipe evidence from the same author; not counted as an independent publisher."
+    },
+    {
+      "url": "https://corinaureche.ro/inghetata-de-ciocolata/",
+      "source_type": "Original recipe lead",
+      "accessed_on": "2026-09-23",
+      "inspection": "Open failed with a timeout.",
+      "used_for_verdict": false
+    }
+  ]
+}

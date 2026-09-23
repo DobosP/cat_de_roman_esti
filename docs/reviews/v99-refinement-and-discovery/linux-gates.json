@@ -1,0 +1,116 @@
+{
+  "kind": "v99-linux-backend-gates-v1",
+  "worktree": "C:\\Users\\Paul Work\\work\\_worktrees\\cat_de_roman_esti\\codex__v99-refinement-discovery",
+  "linux_worktree": "/mnt/c/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v99-refinement-discovery",
+  "linux_interpreter": "/mnt/c/Users/Paul Work/work/_temp/v99-refinement-discovery/linux-venv/bin/python",
+  "distribution": "Ubuntu",
+  "started_at": "2026-09-23T08:31:38.886760+00:00",
+  "steps": [
+    {
+      "name": "install",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--",
+        "env",
+        "PYTHONPATH=/mnt/c/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v99-refinement-discovery",
+        "/mnt/c/Users/Paul Work/work/_temp/v99-refinement-discovery/linux-venv/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "-c",
+        "constraints.txt",
+        "-e",
+        ".[dev,web]"
+      ],
+      "cwd": "C:\\Users\\Paul Work\\work\\_worktrees\\cat_de_roman_esti\\codex__v99-refinement-discovery",
+      "log_path": "C:\\Users\\Paul Work\\work\\_temp\\v99-refinement-discovery\\linux-install.log",
+      "started_at": "2026-09-23T08:31:39.010032+00:00",
+      "status": "passed",
+      "exit_code": 0,
+      "ended_at": "2026-09-23T08:38:01.409635+00:00",
+      "last_lines": [
+        "Successfully built cat-de-roman-esti",
+        "Installing collected packages: whitenoise, urllib3, uritemplate, typing-extensions, sqlparse, ruff, rpds-py, PyYAML, pyjwt, pygments, pycparser, psycopg-binary, psycopg, pluggy, packaging, oauthlib, iniconfig, inflection, idna, h11, click, charset_normalizer, certifi, cat-de-roman-esti, attrs, asgiref, annotated-types, uvicorn, typing-inspection, requests, referencing, pytest, pydantic-core, django, cffi, pytest-django, pydantic, jsonschema-specifications, djangorestframework, django-cors-headers, django-allauth, dj-database-url, cryptography, jsonschema, drf-spectacular",
+        "  Attempting uninstall: cat-de-roman-esti",
+        "    Found existing installation: cat-de-roman-esti 0.1.0",
+        "    Not uninstalling cat-de-roman-esti at /mnt/c/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v99-refinement-discovery, outside environment /mnt/c/Users/Paul Work/work/_temp/v99-refinement-discovery/linux-venv",
+        "    Can't uninstall 'cat-de-roman-esti'. No files were found to uninstall.",
+        "",
+        "Successfully installed PyYAML-6.0.3 annotated-types-0.7.0 asgiref-3.11.1 attrs-26.1.0 cat-de-roman-esti-0.1.0 certifi-2026.6.17 cffi-2.1.0 charset_normalizer-3.4.9 click-8.4.2 cryptography-49.0.0 dj-database-url-3.1.2 django-5.2.16 django-allauth-65.18.0 django-cors-headers-4.9.0 djangorestframework-3.17.1 drf-spectacular-0.30.0 h11-0.16.0 idna-3.18 inflection-0.5.1 iniconfig-2.3.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 oauthlib-3.3.1 packaging-26.3 pluggy-1.6.0 psycopg-3.3.4 psycopg-binary-3.3.4 pycparser-3.0 pydantic-2.13.4 pydantic-core-2.46.4 pygments-2.21.0 pyjwt-2.13.0 pytest-9.1.1 pytest-django-4.14.0 referencing-0.37.0 requests-2.34.2 rpds-py-2026.6.3 ruff-0.16.8 sqlparse-0.5.5 typing-extensions-4.16.0 typing-inspection-0.4.2 uritemplate-4.2.0 urllib3-2.7.0 uvicorn-0.51.0 whitenoise-6.12.0"
+      ]
+    },
+    {
+      "name": "backend",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--",
+        "env",
+        "PYTHONPATH=/mnt/c/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v99-refinement-discovery",
+        "/mnt/c/Users/Paul Work/work/_temp/v99-refinement-discovery/linux-venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "C:\\Users\\Paul Work\\work\\_worktrees\\cat_de_roman_esti\\codex__v99-refinement-discovery",
+      "log_path": "C:\\Users\\Paul Work\\work\\_temp\\v99-refinement-discovery\\linux-backend.log",
+      "started_at": "2026-09-23T08:38:01.420438+00:00",
+      "status": "passed",
+      "exit_code": 0,
+      "ended_at": "2026-09-23T08:50:13.469931+00:00",
+      "last_lines": [
+        "........................................................................ [ 82%]",
+        "........................................................................ [ 85%]",
+        "........................................................................ [ 89%]",
+        "........................................................................ [ 92%]",
+        "........................................................................ [ 95%]",
+        "........................................................................ [ 98%]",
+        ".........................................                                [100%]",
+        "2345 passed in 720.00s (0:11:59)"
+      ]
+    },
+    {
+      "name": "accounts",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--",
+        "env",
+        "PYTHONPATH=/mnt/c/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v99-refinement-discovery",
+        "CAT_ACCOUNTS_ENABLED=1",
+        "CAT_DEBUG=1",
+        "/mnt/c/Users/Paul Work/work/_temp/v99-refinement-discovery/linux-venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts=",
+        "tests/accounts"
+      ],
+      "cwd": "C:\\Users\\Paul Work\\work\\_worktrees\\cat_de_roman_esti\\codex__v99-refinement-discovery",
+      "log_path": "C:\\Users\\Paul Work\\work\\_temp\\v99-refinement-discovery\\linux-accounts.log",
+      "started_at": "2026-09-23T08:50:13.482033+00:00",
+      "status": "passed",
+      "exit_code": 0,
+      "ended_at": "2026-09-23T08:50:52.552403+00:00",
+      "last_lines": [
+        "COMMAND [\"wsl.exe\", \"-d\", \"Ubuntu\", \"--\", \"env\", \"PYTHONPATH=/mnt/c/Users/Paul Work/work/_worktrees/cat_de_roman_esti/codex__v99-refinement-discovery\", \"CAT_ACCOUNTS_ENABLED=1\", \"CAT_DEBUG=1\", \"/mnt/c/Users/Paul Work/work/_temp/v99-refinement-discovery/linux-venv/bin/python\", \"-m\", \"pytest\", \"-q\", \"-o\", \"addopts=\", \"tests/accounts\"]",
+        "CWD C:\\Users\\Paul Work\\work\\_worktrees\\cat_de_roman_esti\\codex__v99-refinement-discovery",
+        ".....................................................                    [100%]",
+        "53 passed in 24.20s"
+      ]
+    }
+  ],
+  "interpreter_check": {
+    "exit_code": 0,
+    "output": "Python 3.14.4"
+  },
+  "status": "passed",
+  "ended_at": "2026-09-23T08:50:52.560111+00:00"
+}

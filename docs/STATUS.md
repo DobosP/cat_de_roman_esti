@@ -1,39 +1,32 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-23 — origin V97/V98 reconciled with the local content skill; V99 requested.
+Last verified: 2026-09-23 — origin reconciled; V99 first refinement/discovery batch verified locally.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- Verified V97 `f783a97` and V98 kickoff `7c00ae7` are published on origin/main.
-  Remote main was read back at the exact kickoff commit after the successful push.
-  V98 implementation remains future work; its kickoff task is merged and being cleaned.
-  Its four caption drafts and three recipe ideas remain unreviewed; no V98 data changes.
-  Kickoff: 34 fresh BFF requests and 59 focused checks pass, with all baseline pins exact.
-- The September 22 owner request resumes testing and version work from current docs and
-  the Windows handoff. The existing V97 candidate is preserved. No arcade-specific new
-  skill page was found locally; the exact skill name/path remains a clarification.
-- V97 adds five rounds/targets: one each for Conexiuni, Cald sau Rece, Lanț, Intrusul and
-  Perechi. Fresh per-game exposures are nine Conexiuni words, four Intrusul and eight
-  Perechi words, all using existing shared KG nodes.
-- Ușă has seven native predecessors and useful home/bathroom/intercom/key openers.
-  Lanț connects Cacao→Lapte through Înghețată or Chec. Conexiuni covers family roles,
-  facial parts, filled recipes and electric variants; quick games add family/neighborhood
-  discrimination and four reviewed everyday pairs.
-- Alchimie adds Supă de roșii and Mâncare de spanac with two recipes each: **251 concepts,
-  351 recipes,147 discoveries**. All 249 old concepts/347 recipes and eight starters,
-  96 supplies, twelve tiers/32 goals remain exact. Both new results are terminal.
-- Nine complete historical books are retained; the bounded compatibility list grows
-  eight→sixteen with a pre-write 2 MiB guard, under ADR-0155. Nothing is evicted. The
-  browser now uses the same 16-history limit: its old 8 limit broke the next write of a
-  fresh ninth-book collection. Tests cover 9/16 updates, current catalog and 17 rejection.
-- A failed start/replay now reveals its full persistent error once inside the existing
-  scrollport without changing focus. This prevents an expiring outertoast notification
-  from moving the error above the visible game. Mutations are never replayed.
-- Twelve reviewed food captions clarify routes in three earlier Lanț rounds. All 101
-  earlier captions remain exact; fourteen existing directions get text and ten nonexistent
-  reverse directions remain unavailable. Optional recipe ingredients stay qualified.
-- Decisions/evidence: ADR-0155, V97 review and [V98 kickoff](reviews/v98-meaningful-connections/README.md).
+- Origin/main `b25c949` includes verified V97 and the V98 kickoff. Local reconciliation
+  `af5981a` preserves both that history and the repository content skill under ADR-0156.
+  Published ADR-0155 remains intact; the previously unpublished skill decision is ADR-0156.
+- The owner requested V99 using the [Romanian game content skill](../.agents/skills/romanian-game-content/SKILL.md).
+  Its first bounded batch follows both refinement and experimental discovery tracks.
+- Four independently accepted Lanț captions explain Cacao→Lapte through Înghețată or
+  Chec: cocoa variants, milk-based ice cream and cake served with milk. All 113 older
+  captions remain exact; 117 now have reviewed text. Five supported traversal directions
+  retain truthful wording; three absent reverse directions remain unavailable.
+- Existing hint selection can now show a meaningful direction hint from an already visible
+  opening choice. No hidden continuation, route answer or edge digest becomes public.
+- The [discovery pool](content-pool/v99-everyday-spaces/pool.json) records 12 proposed new
+  shared concepts: eight researched and four held. None is selected, approved or installed.
+  Intrare, Sticlă, Masă de bucătărie and Ac de cusut need further sense/input work.
+  Masă retains its meal sense; bare ac still belongs to the existing AC air-conditioner alias.
+- V99 changes no graph, forms, rounds, recipe, ranking, frontend bundle or session limits.
+  The first batch is complete; broader V99 expansion remains open.
+  The V98 kickoff remains historical input, not a completed V98 implementation.
+- Decisions/evidence: [ADR-0157](adr/0157-start-v99-refinement-and-discovery.md),
+  [V99 review](reviews/v99-refinement-and-discovery/README.md),
+  [V97 review](reviews/v97-discovery-continuity-and-new-words/README.md),
+  [V98 kickoff](reviews/v98-meaningful-connections/README.md).
 
 ## Inventory and invariants
 
@@ -46,13 +39,15 @@ Last verified: 2026-09-23 — origin V97/V98 reconciled with the local content s
 | Intrusul | 228 | 228 | 0 | 189 preferred |
 | Perechi | 193 | 193 | 0 | 153 preferred |
 
-Pack **716 = 708 approved + 8 pending**, 546 eligible. All 713 previous records remain exact.
-Quick supplement 85; all 83 previous authored records/scores and 336 core boards remain exact.
-All 105 Lanț rejections, 264 prior Contexto profiles and shared KG/mobile bytes stay exact.
-KG: `fixture-v90-household-discovery`,2416 nodes/9459 links/8641 forms/180 puzzles.
-Sessions retain 7200-second sliding TTL, 1000 entries/game,locks,64 KiB requests and bounded
-histories/caches. Exploration stays≤256 concepts/512 recipes/256 saved crafts,128 observed
-empty pairs/session; quick supplements≤256 boards/2 MiB. Recipes/routes/answers stay private.
+Pack **716 = 708 approved + 8 pending**, 546 eligible. Every baseline record remains exact.
+Quick supplement 85; 336 frozen core boards remain exact. All 105 Lanț rejections remain.
+KG: `fixture-v90-household-discovery`, 2416 nodes/9459 links/8641 forms/180 puzzles.
+Alchimie exploration: **251 concepts/351 recipes/147 discoveries**, 96 supplies, 12 tiers,
+32 goals, nine retained historical books. Both server/browser allow sixteen histories with
+pre-write 2 MiB bounds under ADR-0155; all earlier earned collections remain supported.
+Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB requests.
+Exploration stays ≤256 concepts/512 recipes/256 saved crafts and 128 observed empty pairs;
+quick supplements ≤256 boards/2 MiB. Recipes/routes/answers stay private.
 
 ## Current artifact pins
 
@@ -68,41 +63,32 @@ empty pairs/session; quick supplements≤256 boards/2 MiB. Recipes/routes/answer
 
 ## Verification
 
-- Origin reconciliation: skill validator, 33-file docs gate and whitespace pass. Runtime,
-  fixtures, frontend, scripts and tests are byte-exact to origin `b25c949`; no runtime edits.
-- Final assembled gates are GREEN: **2329 backend/53 account tests on Python 3.12 and
-  Python 3.14; 214 native frontend/552 browser checks**, two browser workers and zero retries.
-  Validators, Ruff, frontend lint/typecheck/build,docs and whitespace pass; gzip 119.23/120 KiB.
-- Independent resumption audit verifies all 65 kickoff/139 integration archive records,
-  mirrors, earlier content preservation and distinct factual/quality approval bindings.
-  No missing approval was found. Nine complete historical books retain earned progress.
-- The original browser run: 485 pass/67 fail is preserved. 66 Alchimie failures came from
-  the browser eight-history limit; one Lanț mobile replay error escaped view after toast expiry.
-  Focused correction checks pass 93 V97 backend, 19 save-validation, 84 Alchimie browser and
-  26 shared start/replay cases. Real-clock geometry confirms the notice and retry stay visible.
-- Two new focus assertions initially sampled before the disabled pending render; waiting
-  for that state resolves the test race. The original 24 pass/2 fail and earlier lint failure
-  are retained. No timeout increase, retry or product behavior was used to hide a failure.
-- Independent fix review verifies 34 source/static bindings and 87 evidence hashes with no
-  mismatch. The final 552-case suite covers every game and the rebuilt caption screens.
-- Inherited backend/data/scripts/tests remain exact through today's frontend corrections;
-  the final receipt binds 522 candidate inputs plus archived raw logs and historical reviews.
-  Evidence: reviews/v97-discovery-continuity-and-new-words/integration/verification.json.
-- Human enjoyment and physical-device acceptance remain unrun. The local skill has now been
-  reconciled with origin; prior runtime results above remain V97 evidence, not V99 results.
+- V99: **2345 backend / 53 accounts on WSL Python 3.14.4** and 173 targeted
+  checks on native Python 3.12.14 pass. Four focused Edge journeys pass at desktop and
+  320px/200% text; fourteen geometry checks and six reload recoveries pass.
+- Both content validators, whole-repo Ruff, skill, docs and whitespace gates pass.
+  Exact commands, logs and bindings: [verification](reviews/v99-refinement-and-discovery/verification.json).
+- Independent factual/quality reviewers accepted the exact four captions. A separate
+  implementation audit verifies historical preservation, digest guards and hint privacy.
+  The discovery audit checks research boundaries and three source classes, without promotion.
+- Native Windows full-suite collection fails on the pre-existing Unix-only `resource` import;
+  the unchanged complete suite passes in WSL. The initial failure remains in the archive.
+- Inherited V97 evidence: 2329 backend/53 accounts on Python 3.12 and 3.14,
+  214 frontend/552 browser checks. These are V97 results, not fresh V99 matrix claims.
+- Human enjoyment and physical-device acceptance remain unrun.
 
 ## Production and next work
 
 - Production remains anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`.
-  V97 and the V98 kickoff are published. No deployment or recurring loop restart.
-- The owner requested V99 using the repository skill. V98 drafts remain unreviewed inputs
-  for the new work; no completed V98 implementation is claimed. Ușă still lacks
-  intrare/toc/balama/lemn; the Cacao→Lapte round still has four generic captions.
-  Both new dishes need useful onward uses; only five concept slots remain under the bound.
+  No push, deployment or recurring loop restart is part of this V99 request.
+- Select a small, exact revision set from the pool for independent graph and game-specific
+  review. Research states alone grant no approval; all new playable concepts still need gates.
+  Ușă still lacks intrare/toc/balama/lemn. Alchimie has five spare concept slots; its two V97
+  dishes remain terminal and the three V98 continuation ideas remain unreviewed.
 - Earlier Caraiman/museum/Dem/Ateneul descriptions, Neagu labels and pending A5 holds stay
-  open. Human playtesting/device acceptance remain unrun; accounts stay off until DEPLOY gates.
+  open. Accounts stay off until DEPLOY gates; human playtesting remains outstanding.
 
 ## Doc map
 
 - README/AGENTS: orientation; agent-map/agent-testing: routes/gates.
-- ADRs (newest 0156), reviews and WORKLOG: decisions, evidence and history.
+- ADRs (newest 0157), reviews and WORKLOG: decisions, evidence and history.

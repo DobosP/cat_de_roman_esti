@@ -1,0 +1,81 @@
+{
+  "canonical_scripts": {
+    "probe.cjs": "07587f9be08e1ac02c8bbb658d48141af87f3a41be8710e1d4075b1d29656e45",
+    "run.py": "ccc887082e5de7a020c13aa68869541bfe0ce5d13768605cee4ba4e2d47ae035"
+  },
+  "checked_on": "2026-09-23",
+  "input_binding_updates": [
+    {
+      "current_sha256": "df56dc863eac947e5d6ddb09c7b83a96f89fd95044cdefb7781bed0fe908d7f6",
+      "executed_input_sha256": "db9712289d5d9c7b3d3be6da531fd3e6bef5e4ce195d3607a91a7118ba9a30fa",
+      "path": "docs/reviews/v99-refinement-and-discovery/captions/implementation-review.json",
+      "reason": "Root-recorded LF normalization and dependent digest rebind only."
+    }
+  ],
+  "kind": "v99-browser-evidence-normalization-v1",
+  "original_text_artifacts": {
+    "probe-result.json": {
+      "crlf_lines": 0,
+      "sha256": "bc8f2b3f973e610676f4fce2bd3e648aaa31bfb08836235aca8b196d619d9799"
+    },
+    "probe.cjs": {
+      "crlf_lines": 123,
+      "sha256": "7146c58ffeca5f45424392f062600996876da538d2e4b522bebc325731b705de"
+    },
+    "run-receipt.json": {
+      "crlf_lines": 50,
+      "sha256": "f14c04230d2935eafcf150002514f323d00700190d859c75f58d7982696545db"
+    },
+    "run.py": {
+      "crlf_lines": 62,
+      "sha256": "e0ee6f97c530be9211b2980868b930b75e2bbc0d80d76c89a3ec020606e2fe6d"
+    },
+    "verification.json": {
+      "crlf_lines": 220,
+      "sha256": "8ca86fc44a295b9afdd8461e782dd30e95b3dac1b481b43fa78189318445807e"
+    }
+  },
+  "purpose": "Canonical UTF-8 LF browser evidence and style-clean helper source. Browser outcomes and product behavior are unchanged; originally executed script hashes and subsequent style transformation are recorded.",
+  "reason": "Line endings, evidence references and the documented style-only Python helper transformation changed after the passing browser run. Normalised helper AST equivalence was checked; application source and static assets remain exact.",
+  "rerun_required": false,
+  "root_normalization_receipt": {
+    "path": "docs/reviews/v99-refinement-and-discovery/line-ending-normalization.json",
+    "sha256": "152c24335317a0d6042d1c189b075742ff378c6612176d7fa1f2183661ae8812"
+  },
+  "style_transformations": [
+    {
+      "after_sha256": "ccc887082e5de7a020c13aa68869541bfe0ce5d13768605cee4ba4e2d47ae035",
+      "before_sha256": "a08292af513672112e838eead31892f13e7ab82684c0cab5d4de9a166eadfceb",
+      "behavior_changed": false,
+      "changes": [
+        "Wrap long expressions and the Node path without changing their values.",
+        "Replace the assigned SHA-256 lambda with an equivalent single-return named function.",
+        "Rename unused loop variable attempt to _attempt."
+      ],
+      "checked_on": "2026-09-23",
+      "equivalence_check": "Python ASTs are identical after normalising the new sha function back to the original lambda assignment and renaming _attempt back to attempt. All path constants, subprocess arguments, environment values, timeouts, I/O and cleanup statements are preserved.",
+      "lint_after": {
+        "archived_log": "ruff-style-check.log",
+        "command": "python -B -m ruff check --no-cache",
+        "exit_code": 0,
+        "result": "All checks passed!",
+        "scope": "whole repository",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "lint_before": {
+        "archived_log": "ruff-style-initial.log",
+        "errors": 9,
+        "original_raw_sha256": "96e9465b26d5943fa360a2999c66f25c7909be45ba39c5872e4daded955b6127",
+        "rule_counts": {
+          "B007": 1,
+          "E501": 7,
+          "E731": 1
+        },
+        "sha256": "da29c2910859a6814e98c45c740b6ea13b1beb31f8252540e8310f80c19e58a7"
+      },
+      "path": "run.py",
+      "ui_evidence": "Original first-run four-case browser result remains applicable; originally executed script SHA-256 is retained separately in run-receipt.json.",
+      "ui_rerun": false
+    }
+  ]
+}

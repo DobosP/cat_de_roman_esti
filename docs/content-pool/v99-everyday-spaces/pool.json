@@ -1,0 +1,1953 @@
+{
+  "schema_version": 1,
+  "theme": "v99-everyday-spaces",
+  "research_scope": {
+    "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+    "checked_on": "2026-09-23",
+    "candidate_budget": 12,
+    "tracks": [
+      "door parts/access",
+      "home materials/furnishings",
+      "textile repair"
+    ],
+    "purpose": "Discover useful everyday shared vocabulary; retain blocked senses and incomplete game ideas without promotion.",
+    "installed_delta": {
+      "new_shared_concepts": 0,
+      "new_world_concepts": 0,
+      "accepted_forms": 0,
+      "relations": 0,
+      "rounds": 0
+    },
+    "state_counts": {
+      "researched": 8,
+      "held": 4,
+      "ready_for_refinement": 0,
+      "selected_for_refinement": 0,
+      "integrated": 0,
+      "rejected": 0
+    }
+  },
+  "baseline_evidence": {
+    "kg": {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "git_blob": "4f11363cd6ad6f82ffc2a0263839c47d6e732aae",
+      "nodes": 2416,
+      "edges": 9459,
+      "forms": 8641
+    },
+    "world": {
+      "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "concepts": 251,
+      "recipes": 351
+    },
+    "current_rejection_inventories": [
+      {
+        "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+        "git_blob": "8e3c9759c30c34d901ae8fe01536830c2217cc33"
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+        "git_blob": "6fde71e66c6f34ed5a6c37787cb997a0311a4cdf"
+      }
+    ],
+    "additional_prior_rejection_checks": [
+      "docs/reviews/v88-cross-game-quality/author-screening/conexiuni-rejected-crossfit.json.gz",
+      "docs/reviews/v92-entry-creation-and-gui/pack/author/rejected-conexiuni-drafts/candidates.json",
+      "docs/reviews/v94-words-and-clearer-connections/pack/public-description-rejection.json"
+    ],
+    "method": "Parsed structured JSON; normalized candidate labels and 34 qualified/inflected forms against every KG label/alias, and candidate labels against all current world concept labels. Searched current tombstones and the listed archived rejection files as normalized strings; manually assessed Sticlă's related artwork hit. No blanket historical novelty or per-game exposure claim.",
+    "prior_wave": "docs/reviews/v98-meaningful-connections/README.md",
+    "limitations": [
+      "Twelve absent shared senses are research candidates, not twelve shipped words or rounds.",
+      "No native topology, accepted-form transaction, complete board, save migration, factual gate, independent quality gate or human playtest was performed.",
+      "Pre-2010 dictionaries count as one lexical/history signal family; different definitions on dexonline are not treated as independent public-recognition signals.",
+      "Commercial sources and paid media are marked and are not substitutes for independent recognition.",
+      "No new world concept is proposed because free concept slots alone do not establish reachable design."
+    ],
+    "shared_adoption_constraints": [
+      "Any adoption needs a separate reviewed shared-graph transaction and the intended game's own raw factual/quality and final bound review rail. This pool is not importer input.",
+      "Recheck baseline identities and topology before selection. No edge, reverse traversal, incoming neighbor count, game eligibility, alias, recipe or round is installed here.",
+      "Runtime invariants: 7200-second sliding TTL, 1000 sessions/game, 64 KiB requests. Alchimie remains 251/256 concepts, 351/512 recipes, 96 occupied supplies, 12 occupied tiers, 256 saved crafts, 16 historical books and 2 MiB pre-write guard; world adoption would need a separate reachability and compatibility design.",
+      "Preserve n_v4gas_masa as meal and n_v86_kitchen_mixer as mixing/beating appliance, never furniture or blender."
+    ]
+  },
+  "source_access_limitations": [
+    {
+      "url": "https://www.manuale.edituracorint.ro/2024/educatie_tehnologica_VII.pdf",
+      "status": "search snippet seen; full PDF fetch failed",
+      "effect": "Not used to support any record claim."
+    },
+    {
+      "url": "https://www.edituraaramis.ro/image/catalog/CLASA%207%202024/ETAP%207_2024_OK.pdf",
+      "status": "full fetch failed: content too large",
+      "effect": "Not used to support any record claim."
+    },
+    {
+      "url": "https://portal.eduhr.ro/wp-content/uploads/2021/11/A803.pdf",
+      "status": "search snippet seen; full fetch failed",
+      "effect": "Not used to support any record claim."
+    },
+    {
+      "url": "https://www.manual.digital/91905.pdf",
+      "status": "search snippet seen; full fetch failed",
+      "effect": "Not used to support any record claim."
+    }
+  ],
+  "records": [
+    {
+      "id": "v99-everyday-intrare",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Intrare",
+      "sense": "Locul fizic de acces din exterior într-o locuință; nu acțiunea, permisiunea, strada sau ușa ca panou.",
+      "category": "door_access",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v4via_usa",
+          "n_v4soc_casa"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Sense/input design remains blocked as described below."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "intrare",
+          "intrări",
+          "intrarea"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v4via_usa",
+          "n_v4soc_casa"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": "V98 README already lists intrare as unreviewed research; this is new research evidence, not a newly discovered backlog idea."
+      },
+      "player_benefit": "Investigate a natural Ușă guess without silently turning a place of access into a winning alias for the door.",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Intrare, loc fizic",
+          "predicate": "desemnează",
+          "object": "locul prin care se trece din afară înăuntru",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "sense_overlap",
+          "subject": "Intrare, folosire contextuală",
+          "predicate": "poate desemna prin metonimie",
+          "object": "ușă",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ],
+          "notes": "The synonym entry explicitly gives contextual ușă; this prevents a blanket claim that the words never overlap."
+        },
+        {
+          "id": "association",
+          "subject": "Ușă, panou mobil",
+          "predicate": "poate închide",
+          "object": "o intrare într-o locuință",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary",
+            "media"
+          ],
+          "notes": "Exact KG direction, strength and usefulness remain untested."
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/intrare",
+          "title": "dexonline: intrare (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 separates action, place, permission and other senses; the synonym section also gives contextual ușă."
+        },
+        {
+          "id": "media",
+          "url": "https://www.digi24.ro/stiri/actualitate/social/orasul-din-romania-in-care-esti-amendat-daca-nu-ai-numarul-apartamentului-pe-usa-2924209",
+          "title": "Digi24, 10 September 2024: numărul apartamentului pe ușă",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "Ordinary use of ușa de la intrare supports current household-language recognition; legal claims are outside this record."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal only after sense review",
+        "signals": [
+          "Pre-2010 DEX entry",
+          "2024 national-media household usage"
+        ],
+        "assessment": "Recognizable word, but bare label does not select the intended concrete sense.",
+        "missing": "No human guess test or dominant-sense measurement."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Cald sau Rece",
+          "proposal": "Probe intrare as a nonwinning guess toward existing Ușă after a separately reviewed graph proposal.",
+          "counterexample": "Doorless openings and street-name Intrarea also fit the bare word; never add it automatically as an Ușă alias."
+        }
+      ],
+      "risks": [
+        "Polysemy conflicts with C5 for a target.",
+        "New shared node versus carefully scoped accepted form is unresolved.",
+        "A dictionary synonym in one context does not license equivalent graph identity."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Hold: the physical-access sense is plausible, but its separation from Ușă and the input experience are unresolved.",
+      "next_action": "Refinement should decide whether a qualified label such as Intrare în casă is nameable, preserve Ușă wins, and test likely typed guesses before selecting a graph proposal.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> held",
+          "reason": "Hold: the physical-access sense is plausible, but its separation from Ușă and the input experience are unresolved.",
+          "evidence_refs": [
+            "dictionary",
+            "media"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-toc-usa",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Toc de ușă",
+      "sense": "Cadrul fix în care se montează ușa; nu toc de pantof, toc de scris ori toc pentru obiecte.",
+      "category": "door_parts",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v4via_usa",
+          "n_v24_home_surfaces_fereastra"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Research classification only; not approval."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "toc de ușă",
+          "tocul ușii",
+          "tocuri de ușă"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v4via_usa",
+          "n_v24_home_surfaces_fereastra"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": "V98 had already named toc de ușă/toc as unreviewed inputs."
+      },
+      "player_benefit": "Make a familiar named door part available for research into useful guesses and legible component steps.",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Intrusul"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Toc de ușă",
+          "predicate": "este",
+          "object": "cadrul fix pentru montarea ușii",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary",
+            "retail"
+          ]
+        },
+        {
+          "id": "not_synonym",
+          "subject": "Toc de ușă",
+          "predicate": "este distinct de",
+          "object": "panoul mobil Ușă",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ],
+          "notes": "Part/frame and door are separate objects; no winning synonym proposed."
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/toc",
+          "title": "dexonline: toc (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX defines the construction frame separately from writing-tool, case and shoe senses."
+        },
+        {
+          "id": "media",
+          "url": "https://www.digi24.ro/stiri/actualitate/social/care-este-cel-mai-indicat-loc-din-casa-pentru-a-te-adaposti-in-caz-de-cutremur-cat-de-sigur-este-tocul-usii-potrivit-inginerilor-3706593",
+          "title": "Digi24, 4 April 2026: tocul ușii",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "The ordinary phrase appears in a current national-media headline and discussion. Used only for recognition; do not import earthquake-safety advice or a safe-place association."
+        },
+        {
+          "id": "retail",
+          "url": "https://www.hornbach.ro/p/balamale-usa-pentru-stanga-hettich-95x45mm-negru/10712824/",
+          "title": "HORNBACH România: Hettich door hinge",
+          "accessed_on": "2026-09-23",
+          "kind": "retail_product",
+          "access": "page_text_verified",
+          "notes": "Current Romanian door-hinge product explicitly describes fixing the hinge to the door edge/frame. Commercial corroboration of concrete use, not an independent broad-audience recognition survey."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal; qualified label",
+        "signals": [
+          "DEX 2009 plus older lexical entries",
+          "2026 national-media headline",
+          "Current Romanian retail use"
+        ],
+        "assessment": "Independent lexical and public-use signals support familiarity of the qualified phrase; no population recognition gate is claimed.",
+        "missing": "Human spontaneous naming and bare toc handling."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Cald sau Rece",
+          "proposal": "Test toc de ușă as an intuitive nonwinning Ușă guess after graph review.",
+          "counterexample": "Bare toc may mean shoe heel; never accept it automatically."
+        },
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Intrusul",
+          "proposal": "Compare Toc de ușă, Balama, Clanță versus Nasture under a precise ordinary hinged-door assembly predicate.",
+          "counterexample": "This is an incomplete authored-board proposal requiring novelty and one-outsider review; do not claim all three are metal."
+        }
+      ],
+      "risks": [
+        "Qualified label is safer but less spontaneous than toc.",
+        "No target incoming floor or route alternatives have been measured."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Research retained: identity and concrete frame sense are supported; game selection and input quality still need review.",
+      "next_action": "Prioritize a narrow Ușă guess/feedback proposal, review bare toc ambiguity, and measure all affected Contexto profiles.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> researched",
+          "reason": "Research retained: identity and concrete frame sense are supported; game selection and input quality still need review.",
+          "evidence_refs": [
+            "dictionary",
+            "media",
+            "retail"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-balama",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Balama",
+      "sense": "Piesă articulată care permite rotirea unei uși sau a unui panou; exclus sensul figurat al articulațiilor corpului.",
+      "category": "door_parts",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v4via_usa",
+          "n_v24_home_storage_dulap",
+          "n_v24_home_surfaces_fereastra"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Research classification only; not approval."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "balama",
+          "balamale",
+          "balamaua"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v4via_usa",
+          "n_v24_home_storage_dulap",
+          "n_v24_home_surfaces_fereastra"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": "V98 already named balama as an unreviewed candidate."
+      },
+      "player_benefit": "Research an everyday mechanism that could explain door and cupboard associations more clearly.",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Intrusul"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Balama, piesă de feronerie",
+          "predicate": "permite",
+          "object": "mișcarea de deschidere/închidere prin rotire a unui panou",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary",
+            "retail"
+          ]
+        },
+        {
+          "id": "scope",
+          "subject": "Balama",
+          "predicate": "nu este exclusivă",
+          "object": "ușilor de locuință",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ],
+          "notes": "Window and lid uses prevent a uniquely-door pairing claim."
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/balama",
+          "title": "dexonline: balama (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 describes an articulated fitting for doors/windows; older dictionaries and literary examples also attest it."
+        },
+        {
+          "id": "retail",
+          "url": "https://www.hornbach.ro/p/balamale-usa-pentru-stanga-hettich-95x45mm-negru/10712824/",
+          "title": "HORNBACH România: Hettich door hinge",
+          "accessed_on": "2026-09-23",
+          "kind": "retail_product",
+          "access": "page_text_verified",
+          "notes": "Current Romanian door-hinge product explicitly describes fixing the hinge to the door edge/frame. Commercial corroboration of concrete use, not an independent broad-audience recognition survey."
+        },
+        {
+          "id": "media",
+          "url": "https://hotnews.ro/la-scurt-timp-de-la-lansare-samsung-opreste-vanzarea-unuia-dintre-telefoanele-sale-revolutionare-2196844",
+          "title": "HotNews, 18 March 2026: telefon cu două balamale",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "The hinge word is used in mainstream technology news. Supports living vocabulary, not specifically familiarity with door hardware."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal",
+        "signals": [
+          "Pre-2010 dictionaries/literary examples",
+          "2026 national-media usage in a different hinged object",
+          "Current door retail usage"
+        ],
+        "assessment": "Evidence spans older language and present use; some readers may know plural balamale first.",
+        "missing": "Cross-generational spontaneous recognition and correct singular input."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Lanțul Cuvintelor",
+          "proposal": "Investigate Ușă—Balama—Dulap as a factual association arc, only after sourcing the cupboard application and reviewing both intended directions.",
+          "counterexample": "The sketch is not a route; no such edges or alternative-path claim is installed."
+        },
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Intrusul",
+          "proposal": "May join Toc de ușă and Clanță in the qualified door-assembly prototype.",
+          "counterexample": "Fereastră would be a competing object using hinges, so do not use it as a false outsider."
+        }
+      ],
+      "risks": [
+        "Mechanism is shared by many objects; distinguish specific useful links from generic hubs.",
+        "No aliases such as șarnieră or țâțână are granted by this pool."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Research retained: the door-hinge concept is distinct and supported; assess actual game benefit before selection.",
+      "next_action": "Review everyday recognition of singular/plural forms, source exact cupboard use if proposed, and audit graph impact before selection.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> researched",
+          "reason": "Research retained: the door-hinge concept is distinct and supported; assess actual game benefit before selection.",
+          "evidence_refs": [
+            "dictionary",
+            "retail",
+            "media"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-clanta",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Clanță",
+      "sense": "Mânerul care acționează mecanismul de închidere/deschidere al unei uși; exclus sensul figurat peiorativ.",
+      "category": "door_parts",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v4via_usa"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Research classification only; not approval."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "clanță",
+          "clanțe"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v4via_usa"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": ""
+      },
+      "player_benefit": "Add a concrete familiar door-action idea to research, with a clearer association than a generic household label.",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Intrusul"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Clanță, mâner de ușă",
+          "predicate": "acționează",
+          "object": "mecanismul ușii prin apăsare",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "scope",
+          "subject": "Clanță",
+          "predicate": "nu este sinonim automat pentru",
+          "object": "orice mâner sau încuietoare",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ],
+          "notes": "The specific functional definition does not cover every handle or lock."
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/clan%C8%9B%C4%83",
+          "title": "dexonline: clanță (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 gives the physical handle/function and separately a pejorative figurative sense."
+        },
+        {
+          "id": "historical_media",
+          "url": "https://stirileprotv.ro/show-buzz/film-tv/conacul-de-la-stefanesti-locatie-speciala-in-aniela.html",
+          "title": "Știrile ProTV, 7 August 2009: conacul din Aniela",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "Mentions preserved old door handles as ordinary house details. Original 2009 publication, not the site's 2025 update, supplies pre-2010 use."
+        },
+        {
+          "id": "media",
+          "url": "https://stirileprotv.ro/divers/greseli-pe-care-le-faci-cand-faci-curat-ce-obiceiuri-iti-pot-afecta-sanatatea.html",
+          "title": "Știrile ProTV: Greșeli pe care le faci când faci curat",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "page_text_verified",
+          "notes": "Uses clanțe alongside switches and remote controls as familiar household surfaces. Publication date was not exposed in fetched text; do not treat crawl/update time as proof of a recent publication. No health advice is adopted."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal",
+        "signals": [
+          "Dictionary physical sense",
+          "2009 mainstream house description",
+          "Independently fetched ProTV household-use text of unverified publication date"
+        ],
+        "assessment": "Ordinary physical meaning has independent usage support; no recent-date claim is based on a crawler timestamp.",
+        "missing": "Dated national usage within five years or another current section-F signal; human recognition."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Cald sau Rece",
+          "proposal": "Test clanță as an obvious door-directed opener after a supported graph change.",
+          "counterexample": "It must not win an Ușă round merely because it is a door component."
+        },
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Perechi",
+          "proposal": "Candidate pair Clanță—Ușă; inspect the full eight-tile board for Balama/Toc de ușă alternatives.",
+          "counterexample": "Putting all door parts on a one-to-one board would create competing matches."
+        }
+      ],
+      "risks": [
+        "The figurative pejorative sense should never drive child-facing play.",
+        "Not all doors have a press-down handle; describe typical use, not universality.",
+        "Current source publication date remains unresolved."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Research retained; concrete relation supported, current familiarity evidence has a dating limitation.",
+      "next_action": "Find a dated current independent usage signal, then compare a door guess proposal with alternative pairings; retain physical sense only.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> researched",
+          "reason": "Research retained; concrete relation supported, current familiarity evidence has a dating limitation.",
+          "evidence_refs": [
+            "dictionary",
+            "historical_media",
+            "media"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-lemn",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Lemn",
+      "sense": "Materialul provenit din părțile lemnoase ale arborilor, folosit între altele la construcții și mobilier.",
+      "category": "home_materials",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v4geo_padure",
+          "n_v4via_usa",
+          "n_v24_home_storage_dulap",
+          "n_v24_home_seating_scaun"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Research classification only; not approval."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "lemn",
+          "lemne",
+          "lemnul"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v4geo_padure",
+          "n_v4via_usa",
+          "n_v24_home_storage_dulap",
+          "n_v24_home_seating_scaun"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": "V98 already named lemn as an unreviewed Ușă guess."
+      },
+      "player_benefit": "Investigate a missing everyday material that could connect recognizable home objects to nature without obscure endpoints.",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Lemn, material",
+          "predicate": "provine din",
+          "object": "țesutul lemnos al plantelor/arborilor",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "furniture",
+          "subject": "Lemn, material",
+          "predicate": "poate fi folosit pentru",
+          "object": "mobilier",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "school",
+            "media"
+          ]
+        },
+        {
+          "id": "door",
+          "subject": "Lemn, material",
+          "predicate": "poate fi folosit pentru",
+          "object": "uși",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "retail"
+          ],
+          "notes": "Some doors are wood; no assertion that every door or cupboard is solid wood."
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/lemn",
+          "title": "dexonline: lemn (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 distinguishes plant tissue/material, cut pieces and old tree sense."
+        },
+        {
+          "id": "school",
+          "url": "https://isj.sv.edu.ro/ONETEH/images/docs/VII_PS_ETAP_subiect.pdf",
+          "title": "Ministerul Educației și Cercetării: Olimpiada Tehnologii, clasa a VII-a, 24 aprilie 2025",
+          "accessed_on": "2026-09-23",
+          "kind": "school_document",
+          "access": "page_text_verified",
+          "notes": "2025 grade-VII national technology olympiad, pages 2–3: textile accessories and wooden-table work. Selective competition exposure, not universal recognition."
+        },
+        {
+          "id": "media",
+          "url": "https://www.digi24.ro/digieconomic/companii/ikea-sunt-implicati-in-distrugerea-padurilor-din-romania-greenpeace-15615",
+          "title": "Digi Economic, 10 April 2024: lemn și mobilier",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "Uses wood/furniture production in a national economic report. Recognition/use evidence only; this record does not adopt the reported allegations."
+        },
+        {
+          "id": "retail",
+          "url": "https://www.hornbach.ro/p/balamale-usa-pentru-stanga-hettich-95x45mm-negru/10712824/",
+          "title": "HORNBACH România: Hettich door hinge",
+          "accessed_on": "2026-09-23",
+          "kind": "retail_product",
+          "access": "page_text_verified",
+          "notes": "Current Romanian door-hinge product explicitly describes fixing the hinge to the door edge/frame. Commercial corroboration of concrete use, not an independent broad-audience recognition survey."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal; easy familiarity is a hypothesis",
+        "signals": [
+          "Pre-2010 dictionary",
+          "2025 grade-VII national technology olympiad",
+          "2024 national-media material use"
+        ],
+        "assessment": "Broad, concrete material vocabulary is well attested. Generic material salience still needs game-specific judgment.",
+        "missing": "Human opener observations and native graph eligibility."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Lanțul Cuvintelor",
+          "proposal": "Research Pădure—Lemn—Ușă with a genuine alternative via a sourced furniture relation.",
+          "counterexample": "No path is established by this sketch; a shared material alone may be a dull generic bridge."
+        },
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Cald sau Rece",
+          "proposal": "Prefer testing Lemn as an available guess before proposing it as a target.",
+          "counterexample": "Zero candidate incoming edges exist at baseline; the five-predecessor floor is not met by this research."
+        }
+      ],
+      "risks": [
+        "Broad material relations can distort many old target distances.",
+        "Do not infer every furniture item is wood or conflate solid wood with all composites.",
+        "Alchimie capacity/reachability would be a separate task."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Research retained: strong ordinary material evidence; usefulness and topology impact remain design questions.",
+      "next_action": "Select a small claim-specific neighborhood, measure old feedback profiles and route quality, and reject links that only make arbitrary material hubs.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> researched",
+          "reason": "Research retained: strong ordinary material evidence; usefulness and topology impact remain design questions.",
+          "evidence_refs": [
+            "dictionary",
+            "school",
+            "media",
+            "retail"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-sticla",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Sticlă",
+      "sense": "Materialul solid amorf folosit de exemplu la geamuri; exclus recipientul numit sticlă.",
+      "category": "home_materials",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v24_home_surfaces_fereastra",
+          "n_v24_home_surfaces_oglinda",
+          "n_v20art_icoane_pe_sticla"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Sense/input design remains blocked as described below."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "sticlă",
+          "sticle",
+          "sticlei"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v24_home_surfaces_fereastra",
+          "n_v24_home_surfaces_oglinda",
+          "n_v20art_icoane_pe_sticla"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": "No exact normalized candidate collision. The only matching token in Conexiuni tombstones is n_v20art_icoane_pe_sticla in cx_arta_cultura_317, a related artwork concept rather than this material; no matching Lanț candidate identity."
+      },
+      "player_benefit": "Research an everyday material while keeping bottle guesses and glass material distinct.",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Sticlă, material",
+          "predicate": "este",
+          "object": "material solid amorf, transparent, translucid sau opac",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "window",
+          "subject": "Sticlă, material",
+          "predicate": "se folosește la",
+          "object": "geamuri",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary",
+            "media"
+          ]
+        },
+        {
+          "id": "counterexample",
+          "subject": "Sticlă, forma necalificată",
+          "predicate": "poate desemna",
+          "object": "recipient pentru lichide",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/sticl%C4%83",
+          "title": "dexonline: sticlă (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX separates material from container senses; transparency is not universal."
+        },
+        {
+          "id": "media",
+          "url": "https://hotnews.ro/cele-mai-comune-mituri-despre-consumul-de-energie-si-ce-spun-specialistii-despre-ele-2122699",
+          "title": "HotNews: mituri despre consumul de energie",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "The retrieved passage names window panes made of glass. Current public usage is supportive, but publication date and sponsorship were not independently resolved."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "undecided until label/sense policy",
+        "signals": [
+          "Pre-2010 dictionary",
+          "Current indexed Romanian window discussion"
+        ],
+        "assessment": "Both material and container are familiar; familiarity does not resolve which one a player intends.",
+        "missing": "Dominant-sense and bottle/material input tests; dated independent recognition check."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Lanțul Cuvintelor",
+          "proposal": "Explore a glass-material step toward Fereastră only after sense-specific relations are reviewed.",
+          "counterexample": "A bottle-based guess must not silently become a window-material guess."
+        }
+      ],
+      "risks": [
+        "Bare label fails a confident single-sense target proposal.",
+        "Sticlă is not a synonym of the entire Fereastră or Oglindă object.",
+        "Rejected Conexiuni board cx_arta_cultura_317 includes Icoane pe sticlă; any reused quad must retain that novelty debt."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Hold: material/container input boundary remains unresolved despite a supported material definition.",
+      "next_action": "Evaluate a qualified material label and input treatment, then recheck recognition and any proposed window relation; do not repurpose a bottle sense.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> held",
+          "reason": "Hold: material/container input boundary remains unresolved despite a supported material definition.",
+          "evidence_refs": [
+            "dictionary",
+            "media"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-perdea",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Perdea",
+      "sense": "Obiect textil atârnat la fereastră sau ușă pentru decor, intimitate ori filtrarea luminii; exclus perdea forestieră/de fum.",
+      "category": "home_furnishings",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v24_home_surfaces_fereastra",
+          "n_v4via_usa",
+          "n_v24_home_textiles_cearsaf",
+          "n_v24_home_textiles_covor"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Research classification only; not approval."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "perdea",
+          "perdele",
+          "perdeaua"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v24_home_surfaces_fereastra",
+          "n_v4via_usa",
+          "n_v24_home_textiles_cearsaf",
+          "n_v24_home_textiles_covor"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": ""
+      },
+      "player_benefit": "Research a recognizable furnishing spanning household vocabulary and textiles.",
+      "games": [
+        "Perechi",
+        "Lanțul Cuvintelor",
+        "Cald sau Rece"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Perdea, obiect textil",
+          "predicate": "se atârnă la",
+          "object": "fereastră sau ușă",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary",
+            "media"
+          ]
+        },
+        {
+          "id": "purpose",
+          "subject": "Perdea, obiect textil",
+          "predicate": "poate servi pentru",
+          "object": "decor, intimitate sau controlul luminii",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/perdea",
+          "title": "dexonline: perdea (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 defines the furnishing and records figurative/other senses; doors are included, so window-only exclusivity is false."
+        },
+        {
+          "id": "media",
+          "url": "https://www.digi24.ro/stiri/externe/ue/perdele-exterioare-copaci-artificiali-si-jungla-mobila-cum-incearca-o-tara-din-europa-sa-invinga-canicula-fara-aer-conditionat-3826295",
+          "title": "Digi24, 22 June 2026: perdele la ferestre",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "Current national-media text uses curtain/window vocabulary without explaining the object. Used for recognition and window placement only, not thermal-performance advice."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal",
+        "signals": [
+          "Pre-2010 dictionary",
+          "2026 national-media usage"
+        ],
+        "assessment": "Textile furnishing sense looks familiar; that inference still needs a player test.",
+        "missing": "Spontaneous naming and curtain/drapery distinction."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Perechi",
+          "proposal": "Candidate pair Perdea—Fereastră.",
+          "counterexample": "The same sources allow curtains at doors, so a board containing Ușă can have another valid match."
+        },
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Lanțul Cuvintelor",
+          "proposal": "Research a furnishing/textile bridge; do not assert a full path or replace textile material evidence with co-occurrence.",
+          "counterexample": "A curtain is not automatically the same concept as Draperie, Cearșaf or Covor."
+        }
+      ],
+      "risks": [
+        "Window exclusivity would be dishonest.",
+        "Perdea forestieră or de fum must not contaminate household feedback.",
+        "Plain textile-category groups risk rubric B6 generic filler."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Research retained: household sense and placement supported; complete pairing/route design remains open.",
+      "next_action": "Test the Perdea—Fereastră pairing adversarially with door alternatives and investigate draperie before any alias proposal.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> researched",
+          "reason": "Research retained: household sense and placement supported; complete pairing/route design remains open.",
+          "evidence_refs": [
+            "dictionary",
+            "media"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-masa-bucatarie",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Masă de bucătărie",
+      "sense": "Piesa de mobilier cu blat folosită într-o bucătărie; distinctă de masa ca prilej de a mânca.",
+      "category": "home_furnishings",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v4gas_masa",
+          "n_v4gas_bucatarie",
+          "n_v24_home_seating_scaun"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Sense/input design remains blocked as described below."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "masă de bucătărie",
+          "mese de bucătărie"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v4gas_masa",
+          "n_v4gas_bucatarie",
+          "n_v24_home_seating_scaun"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": "Verified existing collision only for bare Masă and its meal-owned forms; no exact collision for Masă de bucătărie. V98 explicitly forbids repurposing Masă.",
+        "excluded_surface_collisions": [
+          {
+            "surface": "masă",
+            "normalized": "masa",
+            "existing_id": "n_v4gas_masa",
+            "matched_form": "Masă",
+            "action": "Preserve meal sense and meal-owned plural forms."
+          }
+        ]
+      },
+      "player_benefit": "Cover a conspicuous furniture sense without changing the established meal concept.",
+      "games": [
+        "Perechi",
+        "Lanțul Cuvintelor"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Masă, piesă de mobilier",
+          "predicate": "are",
+          "object": "suprafață susținută pentru a așeza obiecte, mânca sau lucra",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "distinct_sense",
+          "subject": "Masă, piesă de mobilier",
+          "predicate": "este un sens diferit de",
+          "object": "masă, mâncare sau prilej de a mânca",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "kitchen_use",
+          "subject": "Masă, piesă de mobilier",
+          "predicate": "poate fi folosită ca",
+          "object": "suprafață de lucru într-o bucătărie",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "retail"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/mas%C4%83",
+          "title": "dexonline: masă (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX separates furniture uses from meal uses. DOOM lists the same inflected forms, so morphology alone cannot separate them."
+        },
+        {
+          "id": "school",
+          "url": "https://isj.sv.edu.ro/ONETEH/images/docs/VII_PS_ETAP_subiect.pdf",
+          "title": "Ministerul Educației și Cercetării: Olimpiada Tehnologii, clasa a VII-a, 24 aprilie 2025",
+          "accessed_on": "2026-09-23",
+          "kind": "school_document",
+          "access": "page_text_verified",
+          "notes": "2025 grade-VII national technology olympiad, pages 2–3: textile accessories and wooden-table work. Selective competition exposure, not universal recognition."
+        },
+        {
+          "id": "retail",
+          "url": "https://www.ikea.com/ro/ro/cat/mese-consola-16246/",
+          "title": "IKEA România: mese consolă",
+          "accessed_on": "2026-09-23",
+          "kind": "retail_category",
+          "access": "search_result_text_verified",
+          "notes": "The Romanian furniture page explicitly discusses a table used for kitchen work. Product/usage evidence, not proof every kitchen table serves all functions."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal only with clear qualified label",
+        "signals": [
+          "Pre-2010 dictionary",
+          "2025 grade-VII national technology olympiad task about a wooden table",
+          "Current Romanian furniture retail usage"
+        ],
+        "assessment": "The object is familiar; the proposed qualifier's spontaneous nameability is untested.",
+        "missing": "How players distinguish furniture from the existing meal label."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Perechi",
+          "proposal": "Explore Masă de bucătărie—Scaun as an everyday furniture association.",
+          "counterexample": "Scaun also naturally accompanies many other furniture types, and the existing Masă tile means meal. Never swap its meaning to force this pair."
+        }
+      ],
+      "risks": [
+        "Bare masă/mese/mesele are owned by n_v4gas_masa and must remain meal inputs.",
+        "Qualified label could feel artificial or unnecessarily narrow.",
+        "No owner approval to revise existing identity is implied."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Keep the existing meal node and its forms unchanged."
+        ]
+      },
+      "decision": "Hold: a distinct furniture sense is useful, but input ownership and player-visible disambiguation require explicit reviewed design.",
+      "next_action": "Preserve n_v4gas_masa and its aliases; evaluate a separately named furniture concept with wrong/repeat/win regression probes before selection.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> held",
+          "reason": "Hold: a distinct furniture sense is useful, but input ownership and player-visible disambiguation require explicit reviewed design.",
+          "evidence_refs": [
+            "dictionary",
+            "school",
+            "retail"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-ac-cusut",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Ac de cusut",
+      "sense": "Ustensila ascuțită prevăzută cu ureche pentru trecerea firului la cusut; exclus ac medical, ac de conifer și acronimul AC.",
+      "category": "textile_repair",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v20via_aer_conditionat",
+          "n_v29_clothing_everyday_camasa",
+          "n_v29_clothing_everyday_haina"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Sense/input design remains blocked as described below."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "ac de cusut",
+          "ace de cusut",
+          "acul de cusut"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v20via_aer_conditionat",
+          "n_v29_clothing_everyday_camasa",
+          "n_v29_clothing_everyday_haina"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": "Exact query ac matches alias AC of n_v20via_aer_conditionat; qualified forms have no collision. Do not silently steal or delete that alias.",
+        "excluded_surface_collisions": [
+          {
+            "surface": "ac",
+            "normalized": "ac",
+            "existing_id": "n_v20via_aer_conditionat",
+            "matched_form": "AC",
+            "action": "Preserve owner; no bare ac alias proposed."
+          }
+        ]
+      },
+      "player_benefit": "Research a familiar repair tool and a natural needle/thread association while protecting the existing AC alias.",
+      "games": [
+        "Perechi",
+        "Lanțul Cuvintelor"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Ac de cusut",
+          "predicate": "permite trecerea",
+          "object": "firului prin material la cusut",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "pair_use",
+          "subject": "Ac de cusut",
+          "predicate": "se folosește împreună cu",
+          "object": "ață",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary",
+            "media",
+            "retail"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/ac",
+          "title": "dexonline: ac (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 defines the sewing tool and several other needle senses; no general ac alias is justified."
+        },
+        {
+          "id": "media",
+          "url": "https://stirileprotv.ro/stiri/social/idei-pentru-cadouri-de-craciun-2017.html",
+          "title": "Știrile ProTV: Idei pentru cadouri de Crăciun 2017",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "Reports a maker using needle and thread for a necklace. Independent Romanian usage, but 2017 lies outside the rubric's five-year national-media window and is not specifically a clothing-repair demonstration."
+        },
+        {
+          "id": "retail",
+          "url": "https://www.bubufabrics.ro/haberdashery/7727",
+          "title": "Bubufabrics România: mercerie",
+          "accessed_on": "2026-09-23",
+          "kind": "retail_category",
+          "access": "search_result_text_verified",
+          "notes": "Current retail explanation distinguishes needles, thread, buttons and zippers. Corroborates living use of the words; promotional copy is not a recognition gate."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal, qualified label",
+        "signals": [
+          "Pre-2010 dictionary",
+          "Independent 2017 Romanian media use",
+          "Current Romanian retail use"
+        ],
+        "assessment": "The phrase is familiar in practical contexts, but a recent independent section-F signal for this exact sense is still missing.",
+        "missing": "Current general-school or recent national-media evidence and human bare-ac input behavior."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Perechi",
+          "proposal": "Candidate pair Ac de cusut—Ață.",
+          "counterexample": "Ață also pairs naturally with Nasture and Cămașă; full-board competing matches must be assessed."
+        }
+      ],
+      "risks": [
+        "normalize('ac') equals normalize('AC'), already owned by air conditioner n_v20via_aer_conditionat.",
+        "Generic needle senses are not interchangeable.",
+        "Needle/thread pairing cannot be treated as a crafting recipe without an explicit result and reviewed world design."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Preserve bare AC ownership and verify qualified needle inputs."
+        ]
+      },
+      "decision": "Hold: the qualified tool sense is distinct, but bare-ac ownership and recognition checks block selection.",
+      "next_action": "Keep AC bound to air conditioner. Review a qualified-only needle input plan and gather a dated current independent recognition signal before any adoption.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> held",
+          "reason": "Hold: the qualified tool sense is distinct, but bare-ac ownership and recognition checks block selection.",
+          "evidence_refs": [
+            "dictionary",
+            "media",
+            "retail"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-ata",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Ață",
+      "sense": "Fir subțire folosit la cusut; exclus ață dentară, sfoară și sensuri figurate.",
+      "category": "textile_repair",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v29_clothing_everyday_camasa",
+          "n_v29_clothing_everyday_haina"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Research classification only; not approval."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "ață",
+          "ațe",
+          "ață de cusut"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v29_clothing_everyday_camasa",
+          "n_v29_clothing_everyday_haina"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": ""
+      },
+      "player_benefit": "Research a common repair material that connects concrete hand skills to existing clothing words.",
+      "games": [
+        "Perechi",
+        "Lanțul Cuvintelor"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Ață, fir de cusut",
+          "predicate": "este folosită la",
+          "object": "cusut",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "use",
+          "subject": "Ață, fir de cusut",
+          "predicate": "se folosește împreună cu",
+          "object": "ac de cusut",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary",
+            "media"
+          ]
+        },
+        {
+          "id": "school_use",
+          "subject": "Ață de cusut",
+          "predicate": "apare în",
+          "object": "olimpiada națională de educație tehnologică pentru clasa a VII-a din 2025",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "school"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/a%C8%9B%C4%83",
+          "title": "dexonline: ață (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 supports thin sewing thread; the many idioms and other fiber meanings are not proposed as aliases or edges."
+        },
+        {
+          "id": "school",
+          "url": "https://isj.sv.edu.ro/ONETEH/images/docs/VII_PS_ETAP_subiect.pdf",
+          "title": "Ministerul Educației și Cercetării: Olimpiada Tehnologii, clasa a VII-a, 24 aprilie 2025",
+          "accessed_on": "2026-09-23",
+          "kind": "school_document",
+          "access": "page_text_verified",
+          "notes": "2025 grade-VII national technology olympiad, pages 2–3: textile accessories and wooden-table work. Selective competition exposure, not universal recognition."
+        },
+        {
+          "id": "media",
+          "url": "https://stirileprotv.ro/stiri/social/idei-pentru-cadouri-de-craciun-2017.html",
+          "title": "Știrile ProTV: Idei pentru cadouri de Crăciun 2017",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "Reports a maker using needle and thread for a necklace. Independent Romanian usage, but 2017 lies outside the rubric's five-year national-media window and is not specifically a clothing-repair demonstration."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal",
+        "signals": [
+          "Pre-2010 dictionary",
+          "2025 grade-VII national technology olympiad",
+          "Independent 2017 media use"
+        ],
+        "assessment": "Two independent signal families support familiar practical vocabulary; selective olympiad participation is not population-wide recognition.",
+        "missing": "Human spontaneous naming and current young-player repair familiarity."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Perechi",
+          "proposal": "Candidate Ac de cusut—Ață, with clothing/button competitors explicitly screened.",
+          "counterexample": "If Cămașă, Nasture and Fermoar also appear, many tool/material-to-garment pairings may be reasonable."
+        },
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Lanțul Cuvintelor",
+          "proposal": "Research a specific sewing relation linking thread to a garment after sourcing the exact action.",
+          "counterexample": "Do not use the vague predicate țin de croitorie as sufficient route evidence."
+        }
+      ],
+      "risks": [
+        "Bare material/category links can become generic filler.",
+        "The needle dependency is held for AC input collision.",
+        "No new Alchimie result or recipe is proposed."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Ac de cusut is held for the AC alias conflict; dependent pair design remains blocked."
+        ]
+      },
+      "decision": "Research retained: sewing sense and independent selective-olympiad exposure supported; pairing uniqueness and needle dependency remain open.",
+      "next_action": "Review qualified Ac de cusut dependency first or design a separately sourced clothing association that does not require it.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> researched",
+          "reason": "Research retained: sewing sense and independent selective-olympiad exposure supported; pairing uniqueness and needle dependency remain open.",
+          "evidence_refs": [
+            "dictionary",
+            "school",
+            "media"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-nasture",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Nasture",
+      "sense": "Piesă mică de închidere ori ornament pe îmbrăcăminte; aici interesul principal este nasturele de cămașă.",
+      "category": "textile_repair",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v29_clothing_everyday_camasa",
+          "n_v29_clothing_everyday_haina",
+          "n_v24_home_bed_perna"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Research classification only; not approval."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "nasture",
+          "nasturi",
+          "nasturele"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v29_clothing_everyday_camasa",
+          "n_v29_clothing_everyday_haina",
+          "n_v24_home_bed_perna"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": ""
+      },
+      "player_benefit": "Research a recognizable missing part of an already familiar shirt and a concrete small repair action.",
+      "games": [
+        "Perechi",
+        "Intrusul",
+        "Lanțul Cuvintelor"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Nasture",
+          "predicate": "poate închide sau decora",
+          "object": "obiecte de îmbrăcăminte",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "shirt",
+          "subject": "Nasture",
+          "predicate": "se întâlnește în mod obișnuit la",
+          "object": "cămașă",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "media"
+          ],
+          "notes": "Typical shirt feature, not universal."
+        },
+        {
+          "id": "repair",
+          "subject": "Nasture de îmbrăcăminte",
+          "predicate": "poate fi înlocuit de",
+          "object": "croitor",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "repair_media"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/nasture",
+          "title": "dexonline: nasture (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 records clothing closure/ornament and multiple materials; not every button is plastic or fastening-only."
+        },
+        {
+          "id": "school",
+          "url": "https://isj.sv.edu.ro/ONETEH/images/docs/VII_PS_ETAP_subiect.pdf",
+          "title": "Ministerul Educației și Cercetării: Olimpiada Tehnologii, clasa a VII-a, 24 aprilie 2025",
+          "accessed_on": "2026-09-23",
+          "kind": "school_document",
+          "access": "page_text_verified",
+          "notes": "2025 grade-VII national technology olympiad, pages 2–3: textile accessories and wooden-table work. Selective competition exposure, not universal recognition."
+        },
+        {
+          "id": "media",
+          "url": "https://www.digi24.ro/stiri/actualitate/social/p-sfaturi-pentru-a-arata-bine-intr-o-camasa-2115103",
+          "title": "Digi24, 2022: sfaturi pentru cămașă (P)",
+          "accessed_on": "2026-09-23",
+          "kind": "advertorial",
+          "access": "search_result_text_verified",
+          "notes": "Discusses shirt buttons directly. Marked advertorial, so not counted as independent editorial recognition evidence."
+        },
+        {
+          "id": "repair_media",
+          "url": "https://www.digi24.ro/magazin/stil-de-viata/moda/cum-transformi-un-costum-ieftin-in-unul-asemanator-cu-cele-scumpe-1107389",
+          "title": "Digi24, 2019: transformarea unui costum",
+          "accessed_on": "2026-09-23",
+          "kind": "national_media",
+          "access": "search_result_text_verified",
+          "notes": "Mentions a tailor replacing buttons. Supports replaceability but lies outside the five-year media window."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal",
+        "signals": [
+          "Pre-2010 dictionary",
+          "2025 grade-VII national technology olympiad"
+        ],
+        "assessment": "Dictionary and selective-olympiad evidence support familiarity; the 2022 paid article is only concrete usage corroboration.",
+        "missing": "Human recognition and board-specific guessing; no source-count approval."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Perechi",
+          "proposal": "Candidate Nasture—Cămașă.",
+          "counterexample": "Haină, Pantaloni and textile furnishings can also carry buttons; a board must not pretend the link is exclusive."
+        },
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Intrusul",
+          "proposal": "Possible outsider against Toc de ușă, Balama, Clanță under a literal ordinary hinged-door assembly predicate.",
+          "counterexample": "Still needs exact trio novelty and all alternate-predicate checks."
+        }
+      ],
+      "risks": [
+        "Decorative buttons do not always close an item.",
+        "Do not conflate buttons with electronic Buton if such a concept is later added.",
+        "A repair action does not automatically define a crafting result."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Research retained: familiar component with a specific shirt association, but pair uniqueness is untested.",
+      "next_action": "Source the intended shirt repair precisely, then author a complete pairing/outsider board with competing garments checked.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> researched",
+          "reason": "Research retained: familiar component with a specific shirt association, but pair uniqueness is untested.",
+          "evidence_refs": [
+            "dictionary",
+            "school",
+            "media",
+            "repair_media"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v99-everyday-fermoar",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+      "checked_on": "2026-09-23",
+      "label_ro": "Fermoar",
+      "sense": "Dispozitiv de închidere cu două șiruri de dinți/piese care se îmbină prin deplasarea unui cursor.",
+      "category": "textile_repair",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [
+          "n_v30_clothing_everyday_pantaloni",
+          "n_v29_clothing_everyday_haina",
+          "n_v23via_ghiozdan"
+        ],
+        "assessment": "Proposed distinct sense absent from exact normalized current KG labels/aliases and current world labels; no concept has been added.",
+        "qualification": "Research classification only; not approval."
+      },
+      "identity_checks": {
+        "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; matches wordgames.service.normalize",
+        "checked_forms": [
+          "fermoar",
+          "fermoare",
+          "fermoarul"
+        ],
+        "kg_exact_label_alias_matches": [],
+        "world_exact_label_matches": [],
+        "nearby_existing_ids": [
+          "n_v30_clothing_everyday_pantaloni",
+          "n_v29_clothing_everyday_haina",
+          "n_v23via_ghiozdan"
+        ],
+        "prior_pool": "No docs/content-pool directory existed at this baseline.",
+        "prior_rejections": "Current Conexiuni and Lanț tombstone inventories plus V88 rejected-crossfit, V92 rejected-Conexiuni drafts, V94 public-description rejection were searched as normalized structured strings. No candidate identity rejection found. This is not exhaustive approval of every future board overlap.",
+        "notes": ""
+      },
+      "player_benefit": "Research a familiar alternative clothing closure that supports practical vocabulary and careful contrasting predicates.",
+      "games": [
+        "Perechi",
+        "Intrusul",
+        "Lanțul Cuvintelor"
+      ],
+      "claims": [
+        {
+          "id": "definition",
+          "subject": "Fermoar",
+          "predicate": "închide prin îmbinare glisantă",
+          "object": "două șiruri de piese/dinți",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "use",
+          "subject": "Fermoar",
+          "predicate": "poate închide",
+          "object": "îmbrăcăminte și genți",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "dictionary"
+          ]
+        },
+        {
+          "id": "school_use",
+          "subject": "Fermoare",
+          "predicate": "apar în",
+          "object": "olimpiada națională de educație tehnologică pentru clasa a VII-a din 2025",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "supported",
+          "source_refs": [
+            "school"
+          ]
+        },
+        {
+          "id": "backpack",
+          "subject": "Fermoar",
+          "predicate": "închide în mod tipic",
+          "object": "Ghiozdan, n_v23via_ghiozdan",
+          "direction": "subject_to_object; research semantics only, not a proposed runtime edge",
+          "evidence_state": "unverified",
+          "source_refs": [],
+          "notes": "Plausible future association, but no exact school-backpack source was verified in this bounded research."
+        }
+      ],
+      "sources": [
+        {
+          "id": "dictionary",
+          "url": "https://dexonline.ro/definitie/fermoar",
+          "title": "dexonline: fermoar (credited dictionary entries)",
+          "accessed_on": "2026-09-23",
+          "kind": "lexical_reference",
+          "access": "page_text_verified",
+          "notes": "DEX 2009 gives zipper closure on clothing/bags and a secondary clasp sense; DLRM 1958 supplies older attestation."
+        },
+        {
+          "id": "school",
+          "url": "https://isj.sv.edu.ro/ONETEH/images/docs/VII_PS_ETAP_subiect.pdf",
+          "title": "Ministerul Educației și Cercetării: Olimpiada Tehnologii, clasa a VII-a, 24 aprilie 2025",
+          "accessed_on": "2026-09-23",
+          "kind": "school_document",
+          "access": "page_text_verified",
+          "notes": "2025 grade-VII national technology olympiad, pages 2–3: textile accessories and wooden-table work. Selective competition exposure, not universal recognition."
+        },
+        {
+          "id": "retail",
+          "url": "https://www.bubufabrics.ro/haberdashery/7727",
+          "title": "Bubufabrics România: mercerie",
+          "accessed_on": "2026-09-23",
+          "kind": "retail_category",
+          "access": "search_result_text_verified",
+          "notes": "Current retail explanation distinguishes needles, thread, buttons and zippers. Corroborates living use of the words; promotional copy is not a recognition gate."
+        }
+      ],
+      "recognition": {
+        "intended_difficulty": "normal",
+        "signals": [
+          "Pre-2010 dictionary",
+          "2025 grade-VII national technology olympiad",
+          "Current Romanian retail category"
+        ],
+        "assessment": "Selective-olympiad and lexical evidence support a recognizable fastening object; actual recall has not been tested.",
+        "missing": "Human recognition, exact garment/backpack pairing evidence."
+      },
+      "play_sketches": [
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Perechi",
+          "proposal": "Investigate Fermoar—Ghiozdan only after sourcing the actual backpack closure and checking competitors.",
+          "counterexample": "Clothing, bags and some pillow covers can all use zippers; this is not an exclusive relation."
+        },
+        {
+          "status": "unverified_editorial_prototype",
+          "game": "Intrusul",
+          "proposal": "Compare closure mechanisms only with a predicate separating a whole garment from fastening parts.",
+          "counterexample": "A simple 3-parts/1-garment type shortcut may be too trivial; do not ship that sketch without quality review."
+        }
+      ],
+      "risks": [
+        "Fermoar—Ghiozdan claim is explicitly unverified.",
+        "Nasture and Fermoar both close many garments, causing competing pairings.",
+        "Closing mechanisms are not manufacturing recipes."
+      ],
+      "dependencies": {
+        "shared_constraints_ref": "#/baseline_evidence/shared_adoption_constraints",
+        "record_specific": [
+          "Review exact proposed neighborhood/board before any selection."
+        ]
+      },
+      "decision": "Research retained: definition and selective-olympiad exposure supported; the most useful exact object pairing is still unsourced.",
+      "next_action": "Find an original school-backpack or garment source for the chosen relation, then test complete board ambiguity before selecting a graph/puzzle proposal.",
+      "history": [
+        {
+          "revision": 1,
+          "date": "2026-09-23",
+          "actor": "Codex discovery researcher /root/v99_discovery",
+          "transition": "idea -> researched",
+          "reason": "Research retained: definition and selective-olympiad exposure supported; the most useful exact object pairing is still unsourced.",
+          "evidence_refs": [
+            "dictionary",
+            "school",
+            "retail"
+          ]
+        }
+      ]
+    }
+  ]
+}

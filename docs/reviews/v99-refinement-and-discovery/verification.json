@@ -1,0 +1,230 @@
+{
+  "kind": "v99-first-batch-verification-v1",
+  "checked_on": "2026-09-23",
+  "status": "green",
+  "baseline_commit": "af5981a580ab629ec8de29fd50657a9850404085",
+  "origin_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+  "scope": "Four reviewed captions and a research-only 12-concept pool; broader V99 expansion remains open.",
+  "environment": {
+    "windows_python": "3.12.14",
+    "linux_python": "3.14.4",
+    "linux_distribution": "WSL Ubuntu",
+    "dependency_install": "pip install -c constraints.txt -e .[dev,web]",
+    "frontend": "Existing origin source/static retained; no frontend rebuild"
+  },
+  "gates": [
+    {
+      "name": "native focused backend",
+      "command": "python -m pytest -q -o addopts= tests/test_v99_lant_captions.py tests/test_v97_lant_captions.py tests/test_v94_lant_captions.py tests/test_wordgames_lant.py",
+      "passed": 173,
+      "exit_code": 0
+    },
+    {
+      "name": "complete backend and accounts",
+      "command_record": "linux-gates.json",
+      "status": "passed"
+    },
+    {
+      "name": "fixture",
+      "command": "python scripts/validate_fixture.py",
+      "result": "GREEN: fixture is valid (0 errors)"
+    },
+    {
+      "name": "pack",
+      "command": "python scripts/validate_games_pack.py",
+      "result": "games pack GREEN"
+    },
+    {
+      "name": "lint",
+      "command": "python -m ruff check",
+      "result": "All checks passed!"
+    },
+    {
+      "name": "docs",
+      "command": "python ../agent-ops/scripts/check_docs.py .",
+      "result": "files=33 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0"
+    },
+    {
+      "name": "skill",
+      "command": "quick_validate.py .agents/skills/romanian-game-content",
+      "result": "Skill is valid!"
+    },
+    {
+      "name": "whitespace",
+      "command": "git -c core.autocrlf=false diff --cached --check",
+      "exit_code": 0
+    },
+    {
+      "name": "browser",
+      "record": "browser/verification.json",
+      "journeys_passed": 4,
+      "geometry_snapshots": 14,
+      "reload_recoveries": 6,
+      "hint_recoveries": 2
+    }
+  ],
+  "preserved_failures": [
+    {
+      "name": "native Windows complete backend collection",
+      "exit_code": 2,
+      "reason": "Existing Unix-only resource import in runtime measurement script; unchanged complete suite passes on Linux. No tests skipped or assertions weakened."
+    },
+    {
+      "name": "archived browser helper lint",
+      "result": "Nine formatting/style findings corrected; original output and executed-script digests retained. No product code affected."
+    }
+  ],
+  "content_delta": {
+    "shared_concepts": 0,
+    "accepted_forms": 0,
+    "links": 0,
+    "rounds": 0,
+    "world_concepts": 0,
+    "world_recipes": 0,
+    "per_game_fresh_word_exposures": 0,
+    "reviewed_captions_added": 4,
+    "reviewed_captions_preserved": 113,
+    "pool_proposals": 12,
+    "pool_researched": 8,
+    "pool_held": 4,
+    "pool_selected": 0,
+    "pool_integrated": 0
+  },
+  "unchanged_data_pins": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "23421501b0e4bc391a62d25a577ed9d08c935a9eb48a550ab0e5b2f0e8367acb",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fe88e7265c68a79884eabb257912630722980dccd7238f3a834c6796aa65b400",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "804fcf446487e9925158598c4663f0d61f4508574ad14b2fc4e93a5ba8fe6803",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+  },
+  "logs": [
+    {
+      "archive": "logs/windows-focused.log.gz",
+      "sha256": "796d7febe3385107bf15da240d025b1f6fe0d4cf16507c48400558bbc7d9274c",
+      "raw_sha256": "54a83944a97a411601333457018e2b8a8dba2a541a389ab2854c0ec1c0678be6",
+      "raw_bytes": 276
+    },
+    {
+      "archive": "logs/windows-full-collection-failure.log.gz",
+      "sha256": "e17a03ca4251a3bd8e22de1da59e1047b9d65cbc930752112213c770ec335edc",
+      "raw_sha256": "60bd3bc04acb84d639a2108ac9e6b0f5192a2be1cc082c1cecf6a35002a4cb50",
+      "raw_bytes": 1101
+    },
+    {
+      "archive": "logs/fixture.log.gz",
+      "sha256": "7a3ffa98e2b09c4ff75b3adef5899c572d6084cf7e271cf41a2b545a55a3cb54",
+      "raw_sha256": "987a3a949c60bb0cd9615f57f78d771f8e0ddf358a5fe1854f1e1909a1c0b67e",
+      "raw_bytes": 1056
+    },
+    {
+      "archive": "logs/pack.log.gz",
+      "sha256": "81ca4dfc1d8923a47149c03f03796657a21c5d1c7f2c5a3e308b702536689bc6",
+      "raw_sha256": "16710e4122d19201ef95a6ddfeb8b68e74cde90b7453c48e02f56144ff78eb41",
+      "raw_bytes": 237
+    },
+    {
+      "archive": "logs/ruff-final.log.gz",
+      "sha256": "6907f34c82deb8a688eb1658e87fcdbb33e1cfd89fabe0c681fe5186b5ecb153",
+      "raw_sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "raw_bytes": 20
+    },
+    {
+      "archive": "logs/ruff-browser-helper-initial.log.gz",
+      "sha256": "70e0758d6901588c0061fae62d6cd8d55a7249ac92be4e7361cf8cae4d4c7dec",
+      "raw_sha256": "96e9465b26d5943fa360a2999c66f25c7909be45ba39c5872e4daded955b6127",
+      "raw_bytes": 5296
+    },
+    {
+      "archive": "logs/content-delta.log.gz",
+      "sha256": "b53abc5b84debeb1ebbaf199b79dfffff0b8abf74154b8cbc26cfa9df6a91d5d",
+      "raw_sha256": "cd72b59e4022f4d5828318498d24012030092c9257fa825883ece24f91214ab2",
+      "raw_bytes": 1716
+    },
+    {
+      "archive": "logs/linux-backend.log.gz",
+      "sha256": "ee903697ec28a846e312960a3c9a4a32dd110fd600ae9ac55fca06bb01ec5fd9",
+      "raw_sha256": "72649453b3a8ff377459a5886c889d4297556438e5369c6a5d121ed49450d3bc",
+      "raw_bytes": 3040
+    },
+    {
+      "archive": "logs/linux-accounts.log.gz",
+      "sha256": "8d6e5df77873cb9f9b9cb8bf403edad591bd8e717c9e9b774f0d70e92b96b2c0",
+      "raw_sha256": "92c41ab237352cda5b4bd5361aca130e012284e4902f41a063a943903ce70117",
+      "raw_bytes": 526
+    },
+    {
+      "archive": "logs/docs.log.gz",
+      "sha256": "38ee1c4108289e8bdb7bdb0433e792e04c46a0f04a5a00454734a114e6114f0f",
+      "raw_sha256": "f21682884e2faa602e21d24b43905a3c5967c3465623fcfa0a16c814a9b3fabf",
+      "raw_bytes": 277
+    },
+    {
+      "archive": "logs/skill.log.gz",
+      "sha256": "c0191f29a6bab36223b4857a411299569789badf8f80cd8fd0cc6756db1799f1",
+      "raw_sha256": "6cf9e7f0d34ccd36dbd28f270cd28dd04277b2e1516bd4333ce7bb501d7b18d4",
+      "raw_bytes": 17
+    },
+    {
+      "archive": "logs/whitespace.log.gz",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0
+    }
+  ],
+  "input_bindings": {
+    ".agents/skills/romanian-game-content/references/candidate-pool.md": "3d057476e7f72abe4c07c2c1bd90142d69151b210e678506bb71fbece919a759",
+    ".agents/skills/romanian-game-content/SKILL.md": "7f6f95fc9d1324a3ae53a5267ea58f4e8a413549d33aa34fef7f973cf5f5463f",
+    ".gitattributes": "80abf9c50d35604125a7cd7feccb9ecd9dc3cbb0164c7476dc54bdb484512088",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+    "constraints.txt": "067137a6a9163cddac46b91c2b123060ff0e28aaced2cef754be8409bf980e91",
+    "docs/adr/0157-start-v99-refinement-and-discovery.md": "25636a960ed80400a7707b989a32adc8d084d074c32d18e88275a784bdcb2e37",
+    "docs/adr/README.md": "c634caff76ab3ee6b6c9027877bf3d7c5c2cb0d8377225e00df0bfef60937d94",
+    "docs/content-pool/v99-everyday-spaces/pool.json": "af9dae42a7d7d880d73709438d1cc7ed3b4e8a00e64f6d93b1cf4a61797061c3",
+    "docs/reviews/v99-refinement-and-discovery/baseline.json": "f1b080ebb4fe440cc0baa6e9e688e551b16e667c909ab2a186be43f2f567a5b4",
+    "docs/reviews/v99-refinement-and-discovery/browser/mobile320-text200-chec.png": "db669275c64c744cddf66f237b5e61df8576f14ce9980ea421ebfd538e8b005c",
+    "docs/reviews/v99-refinement-and-discovery/browser/mobile320-text200-inghetata.png": "cac6426d978a47b605ae0917135fe748c8cfdb79c795ba99f35a5069b8a7fe40",
+    "docs/reviews/v99-refinement-and-discovery/browser/normalization.json": "53fbacdb618362c3d795cd9a1991b54bfd22488fceb50613b90755dc5a3a4978",
+    "docs/reviews/v99-refinement-and-discovery/browser/probe-result.json": "bc8f2b3f973e610676f4fce2bd3e648aaa31bfb08836235aca8b196d619d9799",
+    "docs/reviews/v99-refinement-and-discovery/browser/probe.cjs": "07587f9be08e1ac02c8bbb658d48141af87f3a41be8710e1d4075b1d29656e45",
+    "docs/reviews/v99-refinement-and-discovery/browser/ruff-style-check.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "docs/reviews/v99-refinement-and-discovery/browser/ruff-style-initial.log": "da29c2910859a6814e98c45c740b6ea13b1beb31f8252540e8310f80c19e58a7",
+    "docs/reviews/v99-refinement-and-discovery/browser/run-receipt.json": "eb2889e769de619158bf020139f28b67f4f4d13ae21e1e3aac7cab61b7b2b2df",
+    "docs/reviews/v99-refinement-and-discovery/browser/run.py": "ccc887082e5de7a020c13aa68869541bfe0ce5d13768605cee4ba4e2d47ae035",
+    "docs/reviews/v99-refinement-and-discovery/browser/verification.json": "47fa91b72821b5dee8055dace9b2bac49e7f75b624ee5a6921e33ecfa6f83c88",
+    "docs/reviews/v99-refinement-and-discovery/captions/baseline_lant_relations.py.txt": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+    "docs/reviews/v99-refinement-and-discovery/captions/factual-review.json": "08bd70d8583a471fd17556ac8ffae155fc534fc29db395addeed26f1b5296efd",
+    "docs/reviews/v99-refinement-and-discovery/captions/implementation-review.json": "df56dc863eac947e5d6ddb09c7b83a96f89fd95044cdefb7781bed0fe908d7f6",
+    "docs/reviews/v99-refinement-and-discovery/captions/installation.json": "c2642123cc32f3e1df347366dc6dcd48f24d65b9b06efb92ea427051a5c29645",
+    "docs/reviews/v99-refinement-and-discovery/captions/proposal.json": "1c735c02e88809cc325a64f0a426925814d2b985776d04a0beb9a14274589324",
+    "docs/reviews/v99-refinement-and-discovery/captions/quality-review.json": "53112fafc344daa8d0e1649fc4b93755a4ecf5457ca85896cb4e170946404737",
+    "docs/reviews/v99-refinement-and-discovery/discovery-audit.json": "b73d8dcbd7d0f6d7011879d67793b90343d99956143d4c220e3be949eb1e2bd2",
+    "docs/reviews/v99-refinement-and-discovery/line-ending-normalization.json": "152c24335317a0d6042d1c189b075742ff378c6612176d7fa1f2183661ae8812",
+    "docs/reviews/v99-refinement-and-discovery/linux-gates.json": "9864f9a321451cda2c3c06939ea7cfbc38e39055525527c803c8e33a0966fea3",
+    "docs/reviews/v99-refinement-and-discovery/logs/content-delta.log.gz": "b53abc5b84debeb1ebbaf199b79dfffff0b8abf74154b8cbc26cfa9df6a91d5d",
+    "docs/reviews/v99-refinement-and-discovery/logs/docs.log.gz": "38ee1c4108289e8bdb7bdb0433e792e04c46a0f04a5a00454734a114e6114f0f",
+    "docs/reviews/v99-refinement-and-discovery/logs/fixture.log.gz": "7a3ffa98e2b09c4ff75b3adef5899c572d6084cf7e271cf41a2b545a55a3cb54",
+    "docs/reviews/v99-refinement-and-discovery/logs/linux-accounts.log.gz": "8d6e5df77873cb9f9b9cb8bf403edad591bd8e717c9e9b774f0d70e92b96b2c0",
+    "docs/reviews/v99-refinement-and-discovery/logs/linux-backend.log.gz": "ee903697ec28a846e312960a3c9a4a32dd110fd600ae9ac55fca06bb01ec5fd9",
+    "docs/reviews/v99-refinement-and-discovery/logs/pack.log.gz": "81ca4dfc1d8923a47149c03f03796657a21c5d1c7f2c5a3e308b702536689bc6",
+    "docs/reviews/v99-refinement-and-discovery/logs/ruff-browser-helper-initial.log.gz": "70e0758d6901588c0061fae62d6cd8d55a7249ac92be4e7361cf8cae4d4c7dec",
+    "docs/reviews/v99-refinement-and-discovery/logs/ruff-final.log.gz": "6907f34c82deb8a688eb1658e87fcdbb33e1cfd89fabe0c681fe5186b5ecb153",
+    "docs/reviews/v99-refinement-and-discovery/logs/skill.log.gz": "c0191f29a6bab36223b4857a411299569789badf8f80cd8fd0cc6756db1799f1",
+    "docs/reviews/v99-refinement-and-discovery/logs/whitespace.log.gz": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+    "docs/reviews/v99-refinement-and-discovery/logs/windows-focused.log.gz": "796d7febe3385107bf15da240d025b1f6fe0d4cf16507c48400558bbc7d9274c",
+    "docs/reviews/v99-refinement-and-discovery/logs/windows-full-collection-failure.log.gz": "e17a03ca4251a3bd8e22de1da59e1047b9d65cbc930752112213c770ec335edc",
+    "docs/reviews/v99-refinement-and-discovery/README.md": "2c90194fb8de905af073af52e01547eab8e7735802245bad5dc942c642ef8980",
+    "docs/STATUS.md": "a154742fb1e8bbf09792f96a3a4d9b7872132acae53c37a0dcf63e7354239436",
+    "pyproject.toml": "149e803d0eb836c61c838367e2bc8b1cb2ed88132f7667293b0945523eb9fbeb",
+    "tests/test_v97_lant_captions.py": "8343f846054a0f961136d739fccae070b86b544d6a40cb7a6e69a2da6d7b13cc",
+    "tests/test_v99_lant_captions.py": "06980da560800615520525b4e76187bb18412b380b4041a364e3e78ce4d87371"
+  },
+  "limits": [
+    "Human enjoyment and physical-device acceptance unrun.",
+    "V97 full frontend/browser and earlier dual-Python matrix are inherited evidence, not fresh V99 results.",
+    "No push, deployment or recurring automation performed."
+  ]
+}

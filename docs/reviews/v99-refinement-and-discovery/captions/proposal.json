@@ -1,0 +1,176 @@
+{
+  "baseline_commit": "af5981a580ab629ec8de29fd50657a9850404085",
+  "bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v98-meaningful-connections/unreviewed-scout.json": "975fe157acc1f246b05b4138097102676c013392f3250fabff81fe3a5260e764"
+  },
+  "checked_on": "2026-09-23",
+  "items": [
+    {
+      "caption": "înghețată cu aromă de cacao",
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v3gas_inghetata",
+        "facets": {},
+        "id": "de8627",
+        "is_distractor": false,
+        "label_ro": "aromatizează unele sortimente de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v85_food_cacao",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "634c2004dbe7abbcecd214f310d8c057873726f1de435b5c1836f7abbff0b287",
+      "id": "v99_caption_de8627",
+      "labels": [
+        "Cacao",
+        "Înghețată"
+      ],
+      "orientation_review": {
+        "forward": {
+          "from": "n_v85_food_cacao",
+          "graph_allows": true,
+          "to": "n_v3gas_inghetata"
+        },
+        "reverse": {
+          "from": "n_v3gas_inghetata",
+          "graph_allows": false,
+          "to": "n_v85_food_cacao"
+        }
+      },
+      "pair": [
+        "n_v3gas_inghetata",
+        "n_v85_food_cacao"
+      ],
+      "previous_caption": "legătură directă"
+    },
+    {
+      "caption": "chec în variantă cu cacao",
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v87_food_chec",
+        "facets": {},
+        "id": "de8710",
+        "is_distractor": false,
+        "label_ro": "aromatizează unele variante de",
+        "redistributable": false,
+        "relation": "ingredient_variant",
+        "source": "",
+        "src_id": "n_v85_food_cacao",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "525d8b206c853cdb4acdaf85474d587024293e5f0554cae3bb646b90236366b9",
+      "id": "v99_caption_de8710",
+      "labels": [
+        "Cacao",
+        "Chec"
+      ],
+      "orientation_review": {
+        "forward": {
+          "from": "n_v85_food_cacao",
+          "graph_allows": true,
+          "to": "n_v87_food_chec"
+        },
+        "reverse": {
+          "from": "n_v87_food_chec",
+          "graph_allows": false,
+          "to": "n_v85_food_cacao"
+        }
+      },
+      "pair": [
+        "n_v85_food_cacao",
+        "n_v87_food_chec"
+      ],
+      "previous_caption": "legătură directă"
+    },
+    {
+      "caption": "înghețată în variantă cu lapte",
+      "edge_snapshot": {
+        "bidirectional": true,
+        "dst_id": "n_v4gas_lapte",
+        "facets": {},
+        "id": "de5087",
+        "is_distractor": false,
+        "label_ro": "făcută din lapte",
+        "redistributable": false,
+        "relation": "associated_with",
+        "source": "",
+        "src_id": "n_v3gas_inghetata",
+        "strength": 0.55,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "3fc4b91979241a9a91db8d92681f466c2eb096ee65e8be10721029e634584492",
+      "id": "v99_caption_de5087",
+      "labels": [
+        "Înghețată",
+        "Lapte"
+      ],
+      "orientation_review": {
+        "forward": {
+          "from": "n_v3gas_inghetata",
+          "graph_allows": true,
+          "to": "n_v4gas_lapte"
+        },
+        "reverse": {
+          "from": "n_v4gas_lapte",
+          "graph_allows": true,
+          "to": "n_v3gas_inghetata"
+        }
+      },
+      "pair": [
+        "n_v3gas_inghetata",
+        "n_v4gas_lapte"
+      ],
+      "previous_caption": "legătură directă"
+    },
+    {
+      "caption": "chec servit alături de lapte",
+      "edge_snapshot": {
+        "bidirectional": false,
+        "dst_id": "n_v4gas_lapte",
+        "facets": {},
+        "id": "de8745",
+        "is_distractor": false,
+        "label_ro": "se poate servi cu",
+        "redistributable": false,
+        "relation": "served_together",
+        "source": "",
+        "src_id": "n_v87_food_chec",
+        "strength": 0.8,
+        "tags": []
+      },
+      "edge_snapshot_sha256": "1f15d8efa05c4228798f5e49b814b53fc363042492d6df0b3324c4977dc2e7f9",
+      "id": "v99_caption_de8745",
+      "labels": [
+        "Chec",
+        "Lapte"
+      ],
+      "orientation_review": {
+        "forward": {
+          "from": "n_v87_food_chec",
+          "graph_allows": true,
+          "to": "n_v4gas_lapte"
+        },
+        "reverse": {
+          "from": "n_v4gas_lapte",
+          "graph_allows": false,
+          "to": "n_v87_food_chec"
+        }
+      },
+      "pair": [
+        "n_v4gas_lapte",
+        "n_v87_food_chec"
+      ],
+      "previous_caption": "legătură directă"
+    }
+  ],
+  "kind": "v99-lant-caption-candidate-v1",
+  "origin_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+  "scope": "Four Cacao-to-Lapte route explanations; no graph, ranking, scoring, reverse-edge or session changes. Candidate only until independent factual and quality reviews accept."
+}

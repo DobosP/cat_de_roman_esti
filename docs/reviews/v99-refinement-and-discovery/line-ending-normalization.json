@@ -1,0 +1,65 @@
+{
+  "kind": "v99-evidence-serialization-v1",
+  "checked_on": "2026-09-23",
+  "purpose": "Canonical LF serialization for Git whitespace gate and cross-platform hash stability; JSON judgments unchanged; dependent file hashes rebound. No code, tests, proposal, pool or source evidence changes.",
+  "files": [
+    {
+      "path": "docs/reviews/v99-refinement-and-discovery/captions/factual-review.json",
+      "before_sha256": "decf1097c070a096294ba0ec8267cfcf45147aba525dfa30c55d598deb402828",
+      "after_sha256": "08bd70d8583a471fd17556ac8ffae155fc534fc29db395addeed26f1b5296efd",
+      "crlf_lines_normalized": 142,
+      "dependent_digest_updates": [],
+      "judgment_or_candidate_changes": false
+    },
+    {
+      "path": "docs/reviews/v99-refinement-and-discovery/captions/quality-review.json",
+      "before_sha256": "17a5a1637b350d04297847dcf92b8b6575d2339f5a8da25367d5a18dbe67e288",
+      "after_sha256": "53112fafc344daa8d0e1649fc4b93755a4ecf5457ca85896cb4e170946404737",
+      "crlf_lines_normalized": 100,
+      "dependent_digest_updates": [],
+      "judgment_or_candidate_changes": false
+    },
+    {
+      "path": "docs/reviews/v99-refinement-and-discovery/discovery-audit.json",
+      "before_sha256": "299a13f8c3d57eaee4e7654fb84a2d7b8f718b8d5929cf7a4c9ab4d687ea4ae3",
+      "after_sha256": "b73d8dcbd7d0f6d7011879d67793b90343d99956143d4c220e3be949eb1e2bd2",
+      "crlf_lines_normalized": 211,
+      "dependent_digest_updates": [],
+      "judgment_or_candidate_changes": false
+    },
+    {
+      "path": "docs/reviews/v99-refinement-and-discovery/captions/installation.json",
+      "before_sha256": "f6144334ec66f5d601d2851d8e19052174dca06213b353dadf377c29eb55eb1a",
+      "after_sha256": "c2642123cc32f3e1df347366dc6dcd48f24d65b9b06efb92ea427051a5c29645",
+      "crlf_lines_normalized": 0,
+      "dependent_digest_updates": [
+        {
+          "before": "decf1097c070a096294ba0ec8267cfcf45147aba525dfa30c55d598deb402828",
+          "after": "08bd70d8583a471fd17556ac8ffae155fc534fc29db395addeed26f1b5296efd"
+        },
+        {
+          "before": "17a5a1637b350d04297847dcf92b8b6575d2339f5a8da25367d5a18dbe67e288",
+          "after": "53112fafc344daa8d0e1649fc4b93755a4ecf5457ca85896cb4e170946404737"
+        }
+      ],
+      "judgment_or_candidate_changes": false
+    },
+    {
+      "path": "docs/reviews/v99-refinement-and-discovery/captions/implementation-review.json",
+      "before_sha256": "db9712289d5d9c7b3d3be6da531fd3e6bef5e4ce195d3607a91a7118ba9a30fa",
+      "after_sha256": "df56dc863eac947e5d6ddb09c7b83a96f89fd95044cdefb7781bed0fe908d7f6",
+      "crlf_lines_normalized": 73,
+      "dependent_digest_updates": [
+        {
+          "before": "decf1097c070a096294ba0ec8267cfcf45147aba525dfa30c55d598deb402828",
+          "after": "08bd70d8583a471fd17556ac8ffae155fc534fc29db395addeed26f1b5296efd"
+        },
+        {
+          "before": "17a5a1637b350d04297847dcf92b8b6575d2339f5a8da25367d5a18dbe67e288",
+          "after": "53112fafc344daa8d0e1649fc4b93755a4ecf5457ca85896cb4e170946404737"
+        }
+      ],
+      "judgment_or_candidate_changes": false
+    }
+  ]
+}

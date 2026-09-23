@@ -1,0 +1,231 @@
+{
+  "artifact_bindings": {
+    "mobile320-text200-chec.png": "db669275c64c744cddf66f237b5e61df8576f14ce9980ea421ebfd538e8b005c",
+    "mobile320-text200-inghetata.png": "cac6426d978a47b605ae0917135fe748c8cfdb79c795ba99f35a5069b8a7fe40",
+    "normalization.json": "53fbacdb618362c3d795cd9a1991b54bfd22488fceb50613b90755dc5a3a4978",
+    "probe-result.json": "bc8f2b3f973e610676f4fce2bd3e648aaa31bfb08836235aca8b196d619d9799",
+    "probe.cjs": "07587f9be08e1ac02c8bbb658d48141af87f3a41be8710e1d4075b1d29656e45",
+    "ruff-style-check.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "ruff-style-initial.log": "da29c2910859a6814e98c45c740b6ea13b1beb31f8252540e8310f80c19e58a7",
+    "run-receipt.json": "eb2889e769de619158bf020139f28b67f4f4d13ae21e1e3aac7cab61b7b2b2df",
+    "run.py": "ccc887082e5de7a020c13aa68869541bfe0ce5d13768605cee4ba4e2d47ae035"
+  },
+  "browser": {
+    "automation": "bundled Playwright, absolute module import",
+    "channel": "msedge",
+    "engine": "system Microsoft Edge",
+    "headless": true,
+    "version": "153.0.4234.48"
+  },
+  "cases": [
+    {
+      "font_size": "16px",
+      "hint": {
+        "already_visible": true,
+        "recovered_moves": 0,
+        "relation": "chec în variantă cu cacao",
+        "stage": "direction"
+      },
+      "id": "desktop1280-inghetata",
+      "keyboard": "Tab/Space to start, hint, first hop, options and trail; focused textbox with Lapte + Enter for final hop",
+      "moves": 2,
+      "page_errors": [],
+      "post_actions": [
+        "hint",
+        "move",
+        "move"
+      ],
+      "reloads": 2,
+      "route": [
+        "Cacao",
+        "Înghețată",
+        "Lapte"
+      ],
+      "score": 1000,
+      "status": "pass",
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    },
+    {
+      "font_size": "16px",
+      "hint": null,
+      "id": "desktop1280-chec",
+      "keyboard": "Tab/Space to start, hint, first hop, options and trail; focused textbox with Lapte + Enter for final hop",
+      "moves": 2,
+      "page_errors": [],
+      "post_actions": [
+        "move",
+        "move"
+      ],
+      "reloads": 1,
+      "route": [
+        "Cacao",
+        "Chec",
+        "Lapte"
+      ],
+      "score": 1000,
+      "status": "pass",
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    },
+    {
+      "font_size": "32px",
+      "hint": {
+        "already_visible": true,
+        "recovered_moves": 0,
+        "relation": "chec în variantă cu cacao",
+        "stage": "direction"
+      },
+      "id": "mobile320-text200-inghetata",
+      "keyboard": "Tab/Space to start, hint, first hop, options and trail; focused textbox with Lapte + Enter for final hop",
+      "moves": 2,
+      "page_errors": [],
+      "post_actions": [
+        "hint",
+        "move",
+        "move"
+      ],
+      "reloads": 2,
+      "route": [
+        "Cacao",
+        "Înghețată",
+        "Lapte"
+      ],
+      "score": 1000,
+      "status": "pass",
+      "viewport": {
+        "height": 900,
+        "width": 320
+      }
+    },
+    {
+      "font_size": "32px",
+      "hint": null,
+      "id": "mobile320-text200-chec",
+      "keyboard": "Tab/Space to start, hint, first hop, options and trail; focused textbox with Lapte + Enter for final hop",
+      "moves": 2,
+      "page_errors": [],
+      "post_actions": [
+        "move",
+        "move"
+      ],
+      "reloads": 1,
+      "route": [
+        "Cacao",
+        "Chec",
+        "Lapte"
+      ],
+      "score": 1000,
+      "status": "pass",
+      "viewport": {
+        "height": 900,
+        "width": 320
+      }
+    }
+  ],
+  "checked_on": "2026-09-23T08:31:41.732Z",
+  "checks": {
+    "archived_helper_style": {
+      "behavior_changed": false,
+      "original_ruff_errors_preserved": 9,
+      "ui_rerun": false,
+      "whole_repo_ruff": "All checks passed!"
+    },
+    "failed_cases": 0,
+    "first_hint": "Desktop and 320 px/200% text ice-cream journeys each requested one direction-stage hint. Its relation was already among visible opening choices; hint was null and reload retained zero moves.",
+    "frontend_rebuilt": false,
+    "geometry_result": "Every checked phase had document width equal to viewport width (1280 or 320). All checked choice buttons, hint panels, trail groups, trail steps/relations/chips and input fields stayed within horizontal bounds, with zero internal horizontal overflow. Mobile computed html font size was 32px.",
+    "geometry_snapshots": 14,
+    "get_and_reload": "Four earned first-step paths survived direct GET and browser reload at one move; two first hints survived reload at zero moves. Browser reload added no POST actions or replacement game creation. Final GET matched each two-move earned path.",
+    "initial_and_onward_captions": "Both reviewed first-hop captions were present in visible choice buttons. Each selected route showed the exact second caption beside Lapte, and its earned trail retained both captions after winning. Future-step captions were absent from the initial response.",
+    "keyboard_and_input": "All four journeys reached and activated start, first-hop choices, options and the earned trail with Tab/Space. The final hop used the focused text input with Lapte and Enter. Hint controls were also reached and activated by keyboard in the two ice-cream journeys.",
+    "natural_selection": "Each isolated browser context used the real create endpoint with seed=0, category=gastronomie and difficulty=usor. Only the request query was made deterministic; no game state, response body, runtime or fixture was mocked.",
+    "own_temporary_bff_terminated": true,
+    "page_errors": 0,
+    "passed_cases": 4,
+    "screenshots_inspected": 2,
+    "source_and_static_bound_files_unchanged": 37
+  },
+  "findings": [],
+  "first_run": true,
+  "input_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "83d42d77377860aca2516296ea23030db3fafbeaab066a5188377215dc61c304",
+    "cat_de_roman_esti/web/static/assets/AccountBar-CVba6bUU.js": "1a295bd9f103072cc0a11dfbb4f93c4fe870204fa051211624ba5b87330e8d64",
+    "cat_de_roman_esti/web/static/assets/Alchimie-C3_w2vL6.css": "e1c099a2852fb0203d08c357736c2dfb40ca0c2ef16eb812f8ee81b5da41bdfe",
+    "cat_de_roman_esti/web/static/assets/Alchimie-Cxhq_GgV.js": "f16eb71311eda5ef2aec1b6ae87e41058a9bf0262b75655027af38397f725495",
+    "cat_de_roman_esti/web/static/assets/CaldRece-7pygeNk_.js": "cede7ded8a0bc38fe8a393bfba163e9db5521fb393322bcd950892f197eaa0ad",
+    "cat_de_roman_esti/web/static/assets/CaldRece-B885PE19.css": "b9713b5c0854630c4740d176340c7feae25cc55564bbffff06a1adcfe930679d",
+    "cat_de_roman_esti/web/static/assets/CategoryPicker-C9OUJydU.js": "8828eb22b3ad6e3c420272eb752775f49edf16b8e4433a9dc7f1ffb993629346",
+    "cat_de_roman_esti/web/static/assets/Conexiuni-BWRoQO9R.css": "fe3207b27a2fa141e12775993f1afc7f3abc53aa3fa807f815115a2b1c95848d",
+    "cat_de_roman_esti/web/static/assets/Conexiuni-DtUYQhzL.js": "553f5b95b831c813fb25b4c1bfe8fad5713b6567b89b26d5ce67ba1d7d6ce385",
+    "cat_de_roman_esti/web/static/assets/GameOptions-BpDc5Db6.js": "ac0fa33431efb4fba94145925df8a0e967ecc44cf9bade83a0baea3a4a91b65b",
+    "cat_de_roman_esti/web/static/assets/GameOptions-CEWYWGsz.css": "cbe029df658db3187af13ffc55d388268d410c9483521d550222bc48d4240bbd",
+    "cat_de_roman_esti/web/static/assets/GameSetupOptions-DUlUtLJB.js": "2e489fe9de10aeff881650a43cf48ead61344cfbd3fd23e463eeaf3077c77e2d",
+    "cat_de_roman_esti/web/static/assets/Intrusul-CIdg1NQ7.js": "3f35d6ce5485c540bb264ad71f3386e130979f804a24c566736b424b246707bf",
+    "cat_de_roman_esti/web/static/assets/Intrusul-D1oQwidZ.css": "1e0b55a6598522c4bdad5be4a828735927dc9c1d128883747b9e04fde99720fa",
+    "cat_de_roman_esti/web/static/assets/Lant-BscvYcuB.js": "187d1e1f679e8eb34641d91de3c843e564fc2c44884f38f6bc42f5171db41c9a",
+    "cat_de_roman_esti/web/static/assets/Lant-CNseb-Ny.css": "d349dabdc4e35cb8b69f58ac5e08b5dddd431217c074c218390fd131ec8e218f",
+    "cat_de_roman_esti/web/static/assets/Perechi-CzJd_7kp.js": "fd8c0b9552d0d7a49191592e6f829d7598480b16d962d476277a17eb0b67ac96",
+    "cat_de_roman_esti/web/static/assets/Perechi-Dnjh2U--.css": "2de43ed085e42e4c193dd2a3bd7a23ede64ec5688c7b8fd3dc88d6bbe5620a3d",
+    "cat_de_roman_esti/web/static/assets/Ranking-Bzr9Glvf.js": "a53bef16ce46784c8980cef9046d6da83d75b69a598de33725529a7472a14342",
+    "cat_de_roman_esti/web/static/assets/auth-BQkoQX_A.js": "ee61fc763443c23091582de09978fcc1382b27c066e60eab8eebcfce65eaa8f3",
+    "cat_de_roman_esti/web/static/assets/derivedReplay-BkW_Ev1N.js": "c4043b79927c87e6b88f99ca3c248f4b97a72f6cc328b4f0957a7348c9e4e195",
+    "cat_de_roman_esti/web/static/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+    "cat_de_roman_esti/web/static/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+    "cat_de_roman_esti/web/static/assets/index-C5r7lqzR.js": "0fab271c24f9d11552d8e0843e16bc538b92dafa49ae30b56194009806fc0adc",
+    "cat_de_roman_esti/web/static/assets/index-D9HNWgEs.css": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2",
+    "cat_de_roman_esti/web/static/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+    "cat_de_roman_esti/web/static/assets/inter-latin-wght-normal-Dx4kXJAl.woff2": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+    "cat_de_roman_esti/web/static/assets/scoreSync-UELuTMXv.js": "9bad1e3d0195d82fd67dc49d389c617640077d0cfb04fd79f6be9f70b2ecb05e",
+    "cat_de_roman_esti/web/static/assets/useSavedGameResume-32L7Z3BO.js": "3c1802460b58f987f7376209b15273d8243c3679842dac2600dd6f2c2119ed07",
+    "cat_de_roman_esti/web/static/index.html": "a6c74a2601cc508e01eeba99c67ba83ef407c521c5f15d725675211dc53272b7",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+    "docs/reviews/v99-refinement-and-discovery/captions/implementation-review.json": "df56dc863eac947e5d6ddb09c7b83a96f89fd95044cdefb7781bed0fe908d7f6",
+    "docs/reviews/v99-refinement-and-discovery/captions/proposal.json": "1c735c02e88809cc325a64f0a426925814d2b985776d04a0beb9a14274589324",
+    "docs/reviews/v99-refinement-and-discovery/line-ending-normalization.json": "152c24335317a0d6042d1c189b075742ff378c6612176d7fa1f2183661ae8812",
+    "frontend/src/screens/Lant.tsx": "06fd9517f48317ca92a510e423ca73e95521459db4301c7571b6cfb2a2641211"
+  },
+  "kind": "v99-lant-caption-browser-verification-v1",
+  "limits": "A bounded real-browser regression of the four installed captions, two routes and associated recovery behavior. This is viewport/text-size emulation in headless Edge, not a physical mobile device, other browsers, screen-reader audit or human enjoyment test. The 14 geometry observations cover the visible caption/input elements at the recorded phases, not every application surface.",
+  "post_run_normalization": "Browser scripts and JSON use canonical UTF-8 LF. The raw run retains executed-script digests. run.py subsequently received the style-only transformation recorded in normalization.json; normalised AST equivalence and whole-repository Ruff pass were verified. The first-run browser evidence remains unchanged; current artifact digests are rebound here.",
+  "reproduction": {
+    "command": "C:\\Users\\Paul Work\\work\\_temp\\v99-refinement-discovery\\venv\\Scripts\\python.exe -B docs/reviews/v99-refinement-and-discovery/browser/run.py",
+    "process_cleanup": "run.py allocates a free loopback port and starts its own Python BFF via Popen with CREATE_NO_WINDOW. It terminates and waits for only that process in finally; the browser and isolated contexts are closed by probe.cjs.",
+    "raw_results": [
+      "probe-result.json",
+      "run-receipt.json"
+    ],
+    "scratch_logs": [
+      "C:\\Users\\Paul Work\\work\\_temp\\v99-refinement-discovery\\browser-server.log",
+      "C:\\Users\\Paul Work\\work\\_temp\\v99-refinement-discovery\\browser-node.log"
+    ],
+    "working_directory": "C:\\Users\\Paul Work\\work\\_worktrees\\cat_de_roman_esti\\codex__v99-refinement-discovery"
+  },
+  "reviewer": "/root/v99_caption_quality",
+  "screenshots": [
+    {
+      "height": 900,
+      "inspected_via": "functions view_image",
+      "path": "mobile320-text200-inghetata.png",
+      "sha256": "cac6426d978a47b605ae0917135fe748c8cfdb79c795ba99f35a5069b8a7fe40",
+      "visual_result": "The complete earned Cacao-to-Lapte trail is legible at 320 px and 200% text. Both relation captions wrap within their container, with all three concept chips visible and no horizontal clipping. The focus outline encloses the trail. Transient resumed/win notices remain visible at the top; they do not cover the reviewed captions.",
+      "width": 320
+    },
+    {
+      "height": 900,
+      "inspected_via": "functions view_image",
+      "path": "mobile320-text200-chec.png",
+      "sha256": "db669275c64c744cddf66f237b5e61df8576f14ce9980ea421ebfd538e8b005c",
+      "visual_result": "The complete earned Cacao-to-Lapte trail is legible at 320 px and 200% text. Both relation captions wrap within their container, with all three concept chips visible and no horizontal clipping. The focus outline encloses the trail. Transient resumed/win notices remain visible at the top; they do not cover the reviewed captions.",
+      "width": 320
+    }
+  ],
+  "verdict": "accept"
+}

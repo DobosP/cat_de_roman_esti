@@ -1,0 +1,211 @@
+{
+  "kind": "discovery-pool-audit-v1",
+  "reviewer": "/root/v99_caption_factual",
+  "checked_on": "2026-09-23",
+  "pool_path": "docs/content-pool/v99-everyday-spaces/pool.json",
+  "pool_sha256": "af9dae42a7d7d880d73709438d1cc7ed3b4e8a00e64f6d93b1cf4a61797061c3",
+  "pool_baseline_commit": "b25c94959908ac856d69ab93deb700af2e8ded9c",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "scope": {
+    "type": "bounded independent research-record audit; not full factual approval",
+    "records_inspected": 12,
+    "source_families_sampled": [
+      "credited dictionary entry",
+      "original national technology olympiad paper",
+      "retailer hardware product description"
+    ],
+    "not_performed": [
+      "Full live verification of every cited URL or every recognition claim",
+      "Full semantic synonym search or independent historical tombstone audit",
+      "Board authoring, native-topology tests or playtests",
+      "Shared-graph or per-game adoption gates"
+    ]
+  },
+  "checks": {
+    "schema_version": 1,
+    "record_ids_unique": true,
+    "source_ids_unique_within_record": true,
+    "claim_and_history_source_refs_resolve": true,
+    "supported_claims_have_source_refs": true,
+    "source_access_dates_consistent": true,
+    "record_revisions": {
+      "1": 12
+    },
+    "actual_state_counts": {
+      "researched": 8,
+      "held": 4,
+      "ready_for_refinement": 0,
+      "selected_for_refinement": 0,
+      "integrated": 0,
+      "rejected": 0
+    },
+    "actual_novelty_kind_counts": {
+      "new_shared_concept": 12
+    },
+    "novelty_interpretation": "Twelve proposed shared senses classified for research; neither twelve adopted concepts nor twelve verified ready candidates.",
+    "claim_evidence_counts": {
+      "supported": 31,
+      "unverified": 1
+    },
+    "unverified_claim": "v99-everyday-fermoar/backpack",
+    "reported_source_access_counts": {
+      "page_text_verified": 21,
+      "search_result_text_verified": 14
+    },
+    "source_access_limit": "Only the three sampled URLs below were independently reopened in this audit. Search-result access is explicitly distinguished in the pool and is not upgraded to full-page verification.",
+    "form_identity_method": "Compared all 34 checked forms and every proposed label against the loaded KG label/alias index using wordgames.service.normalize.",
+    "checked_form_count": 34,
+    "exact_candidate_label_or_form_collisions": 0,
+    "nearby_novelty_existing_ids_all_resolve": true,
+    "kg_git_blob": "4f11363cd6ad6f82ffc2a0263839c47d6e732aae",
+    "current_kg_equals_pool_baseline_kg_blob": true,
+    "excluded_collision_verification": [
+      {
+        "surface": "masă",
+        "existing_id": "n_v4gas_masa",
+        "meaning": "meal",
+        "existing_forms": [
+          "Masă",
+          "mese",
+          "mesele"
+        ],
+        "pool_state": "held"
+      },
+      {
+        "surface": "ac",
+        "existing_id": "n_v20via_aer_conditionat",
+        "matched_form": "AC",
+        "meaning": "air conditioner",
+        "pool_state": "held"
+      }
+    ],
+    "handoff_records": 0,
+    "integration_records": 0,
+    "declared_installed_delta": {
+      "new_shared_concepts": 0,
+      "new_world_concepts": 0,
+      "accepted_forms": 0,
+      "relations": 0,
+      "rounds": 0
+    },
+    "lifecycle_assessment": "The researched state retains evidence and explicit uncertainty; held records name unresolved sense/input dependencies. No record uses an installation approval state. Researched Ață still records its held needle dependency and does not claim the pairing is ready."
+  },
+  "sampled_sources": [
+    {
+      "url": "https://dexonline.ro/definitie/sticl%C4%83",
+      "pool_record": "v99-everyday-sticla",
+      "pool_source_id": "dictionary",
+      "accessed_on": "2026-09-23",
+      "access": "page_text_read",
+      "original_attribution": "DEX 2009 entry as reproduced and credited by dexonline",
+      "claims_checked": [
+        "definition",
+        "window",
+        "counterexample"
+      ],
+      "actual_evidence": "The entry distinguishes glass material, window panes and liquid containers, and includes opaque glass.",
+      "result": "supports sampled claims and the material/container hold",
+      "limit": "The dictionary does not establish which sense a player intends or settle the alias policy."
+    },
+    {
+      "url": "https://isj.sv.edu.ro/ONETEH/images/docs/VII_PS_ETAP_subiect.pdf",
+      "pool_records": [
+        "v99-everyday-ata",
+        "v99-everyday-nasture",
+        "v99-everyday-fermoar",
+        "v99-everyday-lemn",
+        "v99-everyday-masa-bucatarie"
+      ],
+      "pool_source_id": "school",
+      "accessed_on": "2026-09-23",
+      "access": "PDF extracted text read; screenshot attempts returned cache miss",
+      "original_attribution": "Ministerul Educatiei si Cercetarii, national technology olympiad, grade VII, 24 April 2025",
+      "location": "Page 1 header; page 2 Subject II.A.1; page 3 Subject III opening text",
+      "actual_evidence": "The competition paper names sewing thread, buttons and zippers, then asks about making a wooden small table.",
+      "result": "supports lexical school exposure and the wooden-furniture example",
+      "limit": "Selective olympiad participation is not universal school exposure, population recognition, proof of a kitchen-specific table, or a completed section-F gate. No table-cell interpretation or visual inspection is claimed."
+    },
+    {
+      "url": "https://www.hornbach.ro/p/balamale-usa-pentru-stanga-hettich-95x45mm-negru/10712824/",
+      "pool_records": [
+        "v99-everyday-toc-usa",
+        "v99-everyday-balama",
+        "v99-everyday-lemn"
+      ],
+      "pool_source_id": "retail",
+      "accessed_on": "2026-09-23",
+      "access": "page_text_read",
+      "original_attribution": "HORNBACH Romanian product description for a Hettich door hinge",
+      "location": "Product description and wood-door compatibility answer",
+      "actual_evidence": "The retailer describes fastening the hinge to the door edge and frame, controlled opening/closing, and use with wooden doors.",
+      "result": "supports a concrete hinge/frame application and the existence of wooden doors",
+      "limit": "Commercial product evidence does not prove broad recognition, exclusivity to doors, or properties of every door."
+    }
+  ],
+  "findings": [
+    {
+      "id": "DA-01",
+      "severity": "minor",
+      "status": "resolved_before_final_audit",
+      "path": "records[v99-everyday-ata].recognition.signals",
+      "finding": "The phrase 2025 grade-VII national exam can be read as the general national assessment. The cited source is the national technology olympiad, a selective competition.",
+      "recommended_action": "Use 2025 grade-VII national technology olympiad paper. Preserve the existing limitation that this does not show population-wide recognition.",
+      "blocks_research_retention": false,
+      "required_before_readiness": "Wording correction satisfied. Recognition and all other adoption checks remain open.",
+      "resolution": "Verified the corrected signal now names the 2025 grade-VII national technology olympiad. All five affected source notes explicitly limit this to selective competition exposure; the two school_use claims now name the olympiad."
+    },
+    {
+      "id": "DA-02",
+      "severity": "adoption_constraint",
+      "status": "already_preserved_in_pool",
+      "records": [
+        "v99-everyday-masa-bucatarie",
+        "v99-everyday-ac-cusut",
+        "v99-everyday-intrare",
+        "v99-everyday-sticla"
+      ],
+      "finding": "Qualified labels avoid exact index collisions but do not solve likely player inputs. Bare masa belongs to the meal node and ac normalizes to the existing AC alias; intrare and sticla still have unresolved sense overlap.",
+      "recommended_action": "Keep these held until separately reviewed disambiguation and input behavior preserve existing identities. Do not count morphology or a qualified spelling as an adopted new concept."
+    },
+    {
+      "id": "DA-03",
+      "severity": "adoption_constraint",
+      "status": "already_preserved_in_pool",
+      "records": [
+        "v99-everyday-toc-usa",
+        "v99-everyday-balama",
+        "v99-everyday-clanta",
+        "v99-everyday-perdea",
+        "v99-everyday-ata",
+        "v99-everyday-nasture",
+        "v99-everyday-fermoar"
+      ],
+      "finding": "Door parts do not apply to every door; curtains also occur at doors; hinges occur outside household doors. Needle/thread/button/zipper/garment sketches can generate competing valid pairings. The school source proves word exposure rather than unique pairings.",
+      "recommended_action": "Require exact scoped relations and complete-board counterexample checks during refinement. Preserve Fermoar-Ghiozdan as unverified and retain the held needle dependency."
+    },
+    {
+      "id": "DA-04",
+      "severity": "scope_limit",
+      "status": "explicitly_unverified_by_this_audit",
+      "finding": "No material contradiction was found in the three sampled source classes. That result cannot certify all 31 supported annotations, all historical-rejection checks, all recognition assessments, or the semantic novelty of twelve senses.",
+      "recommended_action": "Reopen material primary sources, redo sense/alias and novelty checks, and use independent factual and quality reviewers for any exact selected revision."
+    }
+  ],
+  "conclusion": "Research-only pool is consistent with its stated 8 researched/4 held counts and zero adoption. The minor source-label finding was corrected and independently rechecked; no sampled factual contradiction requires deleting research.",
+  "adoption_boundary": {
+    "research_is_not_promotion": true,
+    "no_record_approved_for_adoption_by_this_audit": true,
+    "required": "Selection must freeze a reviewed record revision and exact dependencies, then create a separate candidate proposal for the shared-graph transaction and affected game-specific review rails. Pool hashes, research annotations and this sampled audit are not importer approval artifacts.",
+    "unchanged_inputs": "The auditor did not modify the pool, KG, runtime, aliases, fixtures or any game record."
+  },
+  "finding_resolution_history": [
+    {
+      "checked_on": "2026-09-23",
+      "finding": "DA-01",
+      "initial_pool_sha256": "6dff798234e946f22fe6bc6dca0674e041443cbfce3eef56e4bbec56edcfd35e",
+      "corrected_pool_sha256": "af9dae42a7d7d880d73709438d1cc7ed3b4e8a00e64f6d93b1cf4a61797061c3",
+      "change": "Author narrowed school-source notes, recognition labels and two education-exposure predicates to the selective national technology olympiad. The auditor re-read all five school-source records and revalidated source references and lifecycle counts.",
+      "record_revision_note": "This remains the initial unselected pool draft at revision 1; the before/after exact pool hashes here preserve the review correction. Any later selected-record change must follow the pool contract revision and snapshot rules."
+    }
+  ]
+}

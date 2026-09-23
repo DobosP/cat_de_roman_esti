@@ -1,0 +1,382 @@
+{
+  "kind": "v99-caption-browser-probe-v1",
+  "checked_on": "2026-09-23T08:31:41.732Z",
+  "browser": "msedge",
+  "cases": [
+    {
+      "id": "desktop1280-inghetata",
+      "mobile": false,
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "route": [
+        "Cacao",
+        "Înghețată",
+        "Lapte"
+      ],
+      "captions": [
+        "înghețată cu aromă de cacao",
+        "înghețată în variantă cu lapte"
+      ],
+      "geometry": [
+        {
+          "phase": "opening",
+          "viewport": 1280,
+          "document": 1280,
+          "fontSize": "16px",
+          "checked_elements": 7,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "hint-restored",
+          "viewport": 1280,
+          "document": 1280,
+          "fontSize": "16px",
+          "checked_elements": 8,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "earned-first-step-restored",
+          "viewport": 1280,
+          "document": 1280,
+          "fontSize": "16px",
+          "checked_elements": 10,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "won-earned-trail",
+          "viewport": 1280,
+          "document": 1280,
+          "fontSize": "16px",
+          "checked_elements": 9,
+          "max_internal_overflow": 0
+        }
+      ],
+      "errors": [],
+      "status": "pass",
+      "initial_choices": [
+        {
+          "label": "Chec",
+          "relation": "chec în variantă cu cacao"
+        },
+        {
+          "label": "Ciocolată",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Înghețată",
+          "relation": "înghețată cu aromă de cacao"
+        }
+      ],
+      "hint": {
+        "stage": "direction",
+        "relation": "chec în variantă cu cacao",
+        "already_visible": true,
+        "recovered_moves": 0
+      },
+      "moves": 2,
+      "score": 1000,
+      "path": [
+        {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao"
+        },
+        {
+          "id": "n_v3gas_inghetata",
+          "label": "Înghețată",
+          "relation": "înghețată cu aromă de cacao"
+        },
+        {
+          "id": "n_v4gas_lapte",
+          "label": "Lapte",
+          "relation": "înghețată în variantă cu lapte"
+        }
+      ],
+      "post_actions": [
+        "hint",
+        "move",
+        "move"
+      ],
+      "create_requests": 1,
+      "reloads": 2,
+      "keyboard": "Tab/Space to start, hint, first hop, options and trail; focused textbox with Lapte + Enter for final hop"
+    },
+    {
+      "id": "desktop1280-chec",
+      "mobile": false,
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "route": [
+        "Cacao",
+        "Chec",
+        "Lapte"
+      ],
+      "captions": [
+        "chec în variantă cu cacao",
+        "chec servit alături de lapte"
+      ],
+      "geometry": [
+        {
+          "phase": "opening",
+          "viewport": 1280,
+          "document": 1280,
+          "fontSize": "16px",
+          "checked_elements": 7,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "earned-first-step-restored",
+          "viewport": 1280,
+          "document": 1280,
+          "fontSize": "16px",
+          "checked_elements": 8,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "won-earned-trail",
+          "viewport": 1280,
+          "document": 1280,
+          "fontSize": "16px",
+          "checked_elements": 9,
+          "max_internal_overflow": 0
+        }
+      ],
+      "errors": [],
+      "status": "pass",
+      "initial_choices": [
+        {
+          "label": "Chec",
+          "relation": "chec în variantă cu cacao"
+        },
+        {
+          "label": "Ciocolată",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Înghețată",
+          "relation": "înghețată cu aromă de cacao"
+        }
+      ],
+      "moves": 2,
+      "score": 1000,
+      "path": [
+        {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao"
+        },
+        {
+          "id": "n_v87_food_chec",
+          "label": "Chec",
+          "relation": "chec în variantă cu cacao"
+        },
+        {
+          "id": "n_v4gas_lapte",
+          "label": "Lapte",
+          "relation": "chec servit alături de lapte"
+        }
+      ],
+      "post_actions": [
+        "move",
+        "move"
+      ],
+      "create_requests": 1,
+      "reloads": 1,
+      "keyboard": "Tab/Space to start, hint, first hop, options and trail; focused textbox with Lapte + Enter for final hop"
+    },
+    {
+      "id": "mobile320-text200-inghetata",
+      "mobile": true,
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "route": [
+        "Cacao",
+        "Înghețată",
+        "Lapte"
+      ],
+      "captions": [
+        "înghețată cu aromă de cacao",
+        "înghețată în variantă cu lapte"
+      ],
+      "geometry": [
+        {
+          "phase": "opening",
+          "viewport": 320,
+          "document": 320,
+          "fontSize": "32px",
+          "checked_elements": 7,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "hint-restored",
+          "viewport": 320,
+          "document": 320,
+          "fontSize": "32px",
+          "checked_elements": 8,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "earned-first-step-restored",
+          "viewport": 320,
+          "document": 320,
+          "fontSize": "32px",
+          "checked_elements": 10,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "won-earned-trail",
+          "viewport": 320,
+          "document": 320,
+          "fontSize": "32px",
+          "checked_elements": 9,
+          "max_internal_overflow": 0
+        }
+      ],
+      "errors": [],
+      "status": "pass",
+      "initial_choices": [
+        {
+          "label": "Chec",
+          "relation": "chec în variantă cu cacao"
+        },
+        {
+          "label": "Ciocolată",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Înghețată",
+          "relation": "înghețată cu aromă de cacao"
+        }
+      ],
+      "hint": {
+        "stage": "direction",
+        "relation": "chec în variantă cu cacao",
+        "already_visible": true,
+        "recovered_moves": 0
+      },
+      "moves": 2,
+      "score": 1000,
+      "path": [
+        {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao"
+        },
+        {
+          "id": "n_v3gas_inghetata",
+          "label": "Înghețată",
+          "relation": "înghețată cu aromă de cacao"
+        },
+        {
+          "id": "n_v4gas_lapte",
+          "label": "Lapte",
+          "relation": "înghețată în variantă cu lapte"
+        }
+      ],
+      "post_actions": [
+        "hint",
+        "move",
+        "move"
+      ],
+      "create_requests": 1,
+      "reloads": 2,
+      "keyboard": "Tab/Space to start, hint, first hop, options and trail; focused textbox with Lapte + Enter for final hop"
+    },
+    {
+      "id": "mobile320-text200-chec",
+      "mobile": true,
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "route": [
+        "Cacao",
+        "Chec",
+        "Lapte"
+      ],
+      "captions": [
+        "chec în variantă cu cacao",
+        "chec servit alături de lapte"
+      ],
+      "geometry": [
+        {
+          "phase": "opening",
+          "viewport": 320,
+          "document": 320,
+          "fontSize": "32px",
+          "checked_elements": 7,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "earned-first-step-restored",
+          "viewport": 320,
+          "document": 320,
+          "fontSize": "32px",
+          "checked_elements": 8,
+          "max_internal_overflow": 0
+        },
+        {
+          "phase": "won-earned-trail",
+          "viewport": 320,
+          "document": 320,
+          "fontSize": "32px",
+          "checked_elements": 9,
+          "max_internal_overflow": 0
+        }
+      ],
+      "errors": [],
+      "status": "pass",
+      "initial_choices": [
+        {
+          "label": "Chec",
+          "relation": "chec în variantă cu cacao"
+        },
+        {
+          "label": "Ciocolată",
+          "relation": "legătură directă"
+        },
+        {
+          "label": "Înghețată",
+          "relation": "înghețată cu aromă de cacao"
+        }
+      ],
+      "moves": 2,
+      "score": 1000,
+      "path": [
+        {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao"
+        },
+        {
+          "id": "n_v87_food_chec",
+          "label": "Chec",
+          "relation": "chec în variantă cu cacao"
+        },
+        {
+          "id": "n_v4gas_lapte",
+          "label": "Lapte",
+          "relation": "chec servit alături de lapte"
+        }
+      ],
+      "post_actions": [
+        "move",
+        "move"
+      ],
+      "create_requests": 1,
+      "reloads": 1,
+      "keyboard": "Tab/Space to start, hint, first hop, options and trail; focused textbox with Lapte + Enter for final hop"
+    }
+  ],
+  "screenshots": [
+    "mobile320-text200-inghetata.png",
+    "mobile320-text200-chec.png"
+  ],
+  "limitations": [
+    "Headless system Edge and emulated viewport/text sizing; no physical-device or human enjoyment test."
+  ],
+  "browser_version": "153.0.4234.48",
+  "status": "pass"
+}

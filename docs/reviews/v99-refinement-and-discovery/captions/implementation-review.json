@@ -1,0 +1,73 @@
+{
+  "baseline_commit": "af5981a580ab629ec8de29fd50657a9850404085",
+  "bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "4162c8db2205ac4f250e29e6e94ec1e0212036d6c38de5660991a8bd010204de",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/lant.py": "aa4bc1845aaa2fda30a6ddad62669ad2800260c1db93c249c6544262351aa85d",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "5d250a4314955713739411f997054fc3869b62e393a54930a6f194a45eeaba81",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "docs/reviews/v99-refinement-and-discovery/captions/baseline_lant_relations.py.txt": "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d",
+    "docs/reviews/v99-refinement-and-discovery/captions/factual-review.json": "08bd70d8583a471fd17556ac8ffae155fc534fc29db395addeed26f1b5296efd",
+    "docs/reviews/v99-refinement-and-discovery/captions/proposal.json": "1c735c02e88809cc325a64f0a426925814d2b985776d04a0beb9a14274589324",
+    "docs/reviews/v99-refinement-and-discovery/captions/quality-review.json": "53112fafc344daa8d0e1649fc4b93755a4ecf5457ca85896cb4e170946404737",
+    "tests/test_v97_lant_captions.py": "8343f846054a0f961136d739fccae070b86b544d6a40cb7a6e69a2da6d7b13cc",
+    "tests/test_v99_lant_captions.py": "06980da560800615520525b4e76187bb18412b380b4041a364e3e78ce4d87371"
+  },
+  "checked_on": "2026-09-23",
+  "checks": {
+    "approval_binding": "The installed V99 test passes exact proposal SHA, baseline-runtime SHA, KG binding, both distinct reviewer identities, four exact reviewed pairs, accept verdicts, caption text, edge hashes and runtime tuple equality. The original factual/quality reviews are preserved and individually hash-bound here.",
+    "baseline_vs_installed_api_probe": {
+      "first_hint_after": "direction",
+      "first_hint_before": "alternatives",
+      "hint_scope": "The installed hint has null hint and uses a relation already present in the visible choices. GET retains the earned hint without a hop. Neither final-hop caption appears in the opening or its hint-restored GET, and candidate edge hashes are absent. Visible choices retain only label and relation fields.",
+      "initial_state_comparison": "Baseline and installed create responses are identical after normalising random game_id and the two changed opening caption strings. Choice labels, order, score metadata, target, current node and earned path are unchanged.",
+      "mapping_restored_after_probe": true,
+      "naturally_selected_round": "lt_gastronomie_246",
+      "requests": 6,
+      "temporary_sessions_deleted": 2
+    },
+    "direction_and_digest_guards": "Installed tests exercise all eight orientations: five actual edges produce the exact reviewed caption and one-hop win; three absent reverses fail without moves/path advancement and return an empty caption. Four changed-edge and four missing-edge cases cannot retain reviewed wording. The caption function still checks service.link before considering the unordered pair and verifies the full edge digest.",
+    "historical_test_review": "The old exact-total assertion is relocated to a byte-pinned 113-entry historical registry, whose 101-entry baseline plus exact twelve V97 additions is still asserted. All 113 historical entries must equal the live mapping; the V97 review/caption/edge checks remain live. Every other part of the V97 test module is AST-identical to baseline. The current V99 test separately rejects any live mapping additions outside the exact four accepted pairs.",
+    "input_hashes_unchanged_after_checks": true,
+    "mutation_probes": [
+      "Historical test rejects a changed pre-V97 caption.",
+      "Historical test rejects a removed V97 caption.",
+      "V99 installation test rejects a changed approved V99 caption.",
+      "V99 installation test rejects an extra unreviewed pair."
+    ],
+    "preservation": {
+      "baseline_archive_byte_exact_to_git": true,
+      "every_old_key_and_value_exact": true,
+      "installed_entries": 117,
+      "new_key_set_equals_proposal": true,
+      "new_pairs": 4,
+      "old_entries": 113
+    },
+    "public_routes": "The two public seed=0, gastronomie, usor tests naturally select lt_gastronomie_246, expose both reviewed opening choices and win Cacao→Înghețată→Lapte and Cacao→Chec→Lapte at two moves/1000. Unknown/current-node/repeated-node inputs fail and GET preserves earned moves and paths.",
+    "runtime_change": "AST comparison against the baseline becomes identical after substituting only the baseline REVIEWED_CAPTIONS dictionary into the current source. Thus the executable runtime change is exactly the four proposed dictionary additions; caption lookup/fallback and all other code remain unchanged.",
+    "unchanged_baseline_bytes": [
+      "cat_de_roman_esti/wordgames/lant.py",
+      "cat_de_roman_esti/wordgames/service.py",
+      "cat_de_roman_esti/fixtures/kg_sample.json",
+      "cat_de_roman_esti/fixtures/games_pack.json"
+    ]
+  },
+  "findings": [],
+  "kind": "lant-caption-implementation-review-v1",
+  "limits": "This accepts the installed caption implementation and focused regression coverage at these exact hashes. No full-suite duplicate, live browser rendering, keyboard/narrow-screen check or human playtest was performed by this reviewer. Factual source research remains the separate bound factual review; this review checks its identity and installation binding, not an independent re-fetch of sources.",
+  "review_scope": [
+    "Complete tracked diff against af5981a for lant_relations.py and test_v97_lant_captions.py; complete new test_v99_lant_captions.py read because the new file was not included in the tracked diff.",
+    "Installed four-caption registry, exact historical preservation, independent approval bindings, directed edges, public route selection, earned path/GET behavior, privacy and first-hint behavior.",
+    "No code, source fixture, test, proposal or original factual/quality review edited by this implementation reviewer."
+  ],
+  "reviewer": "/root/v99_caption_quality",
+  "role": "independent-implementation",
+  "validation": {
+    "additional_probe": "Read-only Python -B script compared baseline/current ASTs and bytes, exercised four failing preservation mutations in memory, and compared baseline versus installed natural-create/hint/GET behavior in six Django Client requests. Assertions passed, mappings restored, sessions deleted and bound file hashes unchanged.",
+    "command": "PYTHONPATH=. C:\\Users\\Paul Work\\work\\_temp\\v99-refinement-discovery\\venv\\Scripts\\python.exe -B -m pytest -p no:cacheprovider -o addopts='' tests/test_v97_lant_captions.py tests/test_v99_lant_captions.py -q",
+    "exit_code": 0,
+    "git_mode": "git -c core.autocrlf=false used for diff and baseline reads.",
+    "result": "53 passed in 2.99s"
+  },
+  "verdict": "accept"
+}

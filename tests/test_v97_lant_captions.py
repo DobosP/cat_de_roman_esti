@@ -32,10 +32,21 @@ def test_v97_exact_caption_approvals_preserve_101_previous_records():
                 if isinstance(n, ast.Assign) and any(
                     isinstance(t, ast.Name) and t.id == 'REVIEWED_CAPTIONS' for t in n.targets))
     old = ast.literal_eval(node)
-    assert len(old) == 101 and len(REVIEWED_CAPTIONS) == 113
-    assert all(REVIEWED_CAPTIONS[pair] == value for pair, value in old.items())
+    # Reconstruct the exact V97 registry, allowing independently reviewed later additions.
+    prior = (ROOT / "docs/reviews/v99-refinement-and-discovery/captions"
+             "/baseline_lant_relations.py.txt").read_bytes()
+    assert hashlib.sha256(prior).hexdigest() == (
+        "56b84f8c970d11a527cac5dfb12aa9201d46b70d0f7df94a48c19efd46c64e2d"
+    )
+    registry = next(n.value.args[0] for n in ast.parse(prior).body
+                    if isinstance(n, ast.Assign) and any(
+                        isinstance(t, ast.Name) and t.id == "REVIEWED_CAPTIONS" for t in n.targets))
+    historical = ast.literal_eval(registry)
+    assert len(old) == 101 and len(historical) == 113
+    assert all(historical[pair] == value for pair, value in old.items())
+    assert all(REVIEWED_CAPTIONS[pair] == value for pair, value in historical.items())
     expected = {tuple(row['pair']): row for row in ROWS}
-    assert set(REVIEWED_CAPTIONS) - set(old) == set(expected)
+    assert set(historical) - set(old) == set(expected)
     reviewers = []
     for role in ('factual', 'quality'):
         review = json.loads((REVIEW / f'{role}-review.json').read_bytes())

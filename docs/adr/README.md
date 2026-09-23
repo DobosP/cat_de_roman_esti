@@ -69,6 +69,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0154 | [Expand V96 content and clarify input recovery](0154-expand-content-and-clarify-input-recovery.md) | accepted |
 | 0155 | [Preserve discovery history and explain food links](0155-preserve-discovery-history-and-explain-food-links.md) | accepted |
 | 0156 | [Refine content and maintain an experimental discovery pool](0156-two-track-content-growth.md) | accepted |
+| 0157 | [Start V99 with reviewed route explanations and a discovery pool](0157-start-v99-refinement-and-discovery.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially
