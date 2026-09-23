@@ -1,6 +1,6 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-09-22
+Last verified: 2026-09-23
 
 ## Environment
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
@@ -13,6 +13,13 @@ Last verified: 2026-09-22
   402 of 898 tests (verified 2026-09-05).
 - Frontend needs Node 24 (ci.yml:76). Verify both `node -v` and `npm -v`; the candidate
   clean install used Node 24.21.0/npm 11.19.0. The host npm 9 shim omitted a Rolldown binding.
+- Windows host (`<checkout>\.venv\Scripts\python.exe`): run targeted tests natively with `PYTHONUTF8=1`.
+  The full suite imports the Unix `resource` module (scripts/measure_wordgames_runtime.py), so run it
+  under WSL from a Linux-local copy with a constrained Linux venv. Node 22.23/npm 10.9 rebuilt the
+  committed V1 bundle byte-for-byte (2026-09-23); CI stays on Node 24.
+- Windows browser gate: Playwright with `channel: 'msedge'` (no browser download) via a scratch
+  wrapper config; e2e helpers run `python3`, so put a venv whose Scripts dir holds a `python3.exe`
+  copy first on `PATH` and set `PYTHONUTF8=1` (cp1252 cannot print ș/ț).
 
 Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
 
