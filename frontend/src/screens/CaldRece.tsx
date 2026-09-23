@@ -39,7 +39,7 @@ import {
 import { gameByKey } from "../games";
 import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
-import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import "../styles/contexto.css";
 
 const GAME_KEY = "contexto";
@@ -248,6 +248,7 @@ export default function CaldRece({
     isTerminal: isTerminalResume,
     setPending: setBusy,
     onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
@@ -823,7 +824,7 @@ export default function CaldRece({
                 label="Mod"
                 value={
                   state?.daily
-                    ? `📅 ${state.daily}`
+                    ? `📅 ${formatDayKey(state.daily)}`
                     : DIFFICULTY_LABEL[state?.difficulty ?? difficulty]
                 }
                 accent={DEF.accent}

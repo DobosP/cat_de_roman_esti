@@ -65,11 +65,11 @@ test("Perechi moves focus only when a focused solved tile disappears", () => {
 
 test("daily derived results identify free play while normal replay keeps its default", () => {
   for (const screen of [intrusul, perechi]) {
-    assert.match(screen, /replayLabel=\{state\.daily \? "Joacă liber →" : undefined\}/);
     assert.match(
       screen,
-      /onReplay=\{\(\) => void start\(\{ previousGameId: state\.game_id \}\)\}/,
+      /replayLabel=\{state\.daily \? "Joacă liber →" : offerDaily \? "Joacă provocarea zilei →" : undefined\}/,
     );
+    assert.match(screen, /: \(\) => void start\(\{ previousGameId: state\.game_id \}\)\n\s*\}/);
   }
   assert.match(resultCard, /replayLabel = "Încă unul →"/);
 });

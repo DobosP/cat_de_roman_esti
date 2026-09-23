@@ -36,7 +36,7 @@ import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { bestScore } from "../scores";
 import { gameByKey } from "../games";
-import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "conexiuni";
 const DEF = gameByKey("conexiuni");
@@ -193,6 +193,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
@@ -825,7 +826,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         <GameOptions game={GAME_KEY}>
           <div className="row wrap" style={{ gap: 8 }}>
             {state.daily && (
-              <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />
+              <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} title="Provocarea zilei" />
             )}
             <StatBadge label="DIFICULTATE" value={DIFF_LABEL[state.difficulty]} accent={DEF.accent} />
             {state.board_category && (

@@ -6,9 +6,9 @@
 // global key listener (which used to collide across screens).
 
 import type { ReactNode } from "react";
-import { useLocation } from "react-router-dom";
 import { m } from "framer-motion";
 import { Badge, Button } from "@roedu/ui";
+import { useDailyIntent } from "../hooks/useDailyIntent";
 import type { ScoreEntry } from "../scores";
 import { PlayGuide, type PlayGuideStep } from "./PlayGuide";
 import { StartFailureNotice } from "./StartFailureNotice";
@@ -62,10 +62,15 @@ export function GameIntro({
   /** Persistent recovery for a saved game that could not safely be adopted. */
   resumeRecovery?: ResumeRecoveryNotice | null;
 }) {
-  const location = useLocation();
+  const intent = useDailyIntent();
   // The circuit carries intent only. A saved round still resumes normally and
-  // creating a daily round always requires the player's explicit start action.
-  const dailyFirst = Boolean(onDaily) && new URLSearchParams(location.search).get("challenge") === "daily";
+  // creating a daily round always requires the player's explicit start action,
+  // which also uses up the intent so a later return here leads with free play.
+  const dailyFirst = Boolean(onDaily) && intent.active;
+  const consumeThen = (action?: () => void) => () => {
+    intent.consume();
+    action?.();
+  };
   return (
     <m.div
       className="card game-intro"
@@ -117,13 +122,13 @@ export function GameIntro({
 
       <StartFailureNotice failed={startFailed} />
       <div className="row center wrap game-intro-actions" style={{ gap: 12, marginTop: 6 }}>
-        <Button autoFocus onClick={dailyFirst ? onDaily : onStart} disabled={starting} size="lg">
+        <Button autoFocus onClick={consumeThen(dailyFirst ? onDaily : onStart)} disabled={starting} size="lg">
           {dailyFirst ? "Joacă provocarea zilei" : startLabel}
         </Button>
         {onDaily && (
           <Button
             variant="secondary"
-            onClick={dailyFirst ? onStart : onDaily}
+            onClick={consumeThen(dailyFirst ? onStart : onDaily)}
             disabled={starting}
             title={dailyFirst ? "Un joc nou, în afara circuitului zilnic." : "Provocare zilnică. Categoria se aplică doar jocurilor libere."}
           >

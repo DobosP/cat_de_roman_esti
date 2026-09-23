@@ -164,7 +164,7 @@ test("the diploma stamp renders only once the circuit is 6/6", () => {
     homeSource.indexOf("</section>", homeSource.indexOf("circuit.completed === 6 &&")),
   );
   assert.match(diplomaBlock, /🏆 Diplomă de român/);
-  assert.match(diplomaBlock, /formatDiplomaDate\(today\)/);
+  assert.match(diplomaBlock, /formatDayKey\(today\)/);
   assert.match(diplomaBlock, /Ai închis circuitul de azi: \{circuit\.total\} puncte\./);
   assert.match(diplomaBlock, /handleDiplomaShare/);
 });

@@ -27,7 +27,7 @@ import {
   type GameScoreEntry,
   type ScoreEntry,
 } from "../scores";
-import { appUrl, copyResult, todayLocal } from "../share";
+import { appUrl, copyResult, formatDayKey, todayLocal } from "../share";
 
 type HistoryTab = "top" | "today" | "recent";
 
@@ -306,7 +306,7 @@ export default function Home({
           {circuit.completed === 6 && (
             <div className="col daily-circuit-diploma">
               <strong>
-                🏆 Diplomă de român — {formatDiplomaDate(today)}
+                🏆 Diplomă de român — {formatDayKey(today)}
               </strong>
               <p className="muted">Ai închis circuitul de azi: {circuit.total} puncte.</p>
               <Button variant="secondary" size="sm" onClick={handleDiplomaShare}>
@@ -490,9 +490,4 @@ function formatWhen(ms: number): string {
 
 function isStarterGame(key: GameKey): key is DerivedStarterGame {
   return key === "intrusul" || key === "perechi";
-}
-
-function formatDiplomaDate(day: string): string {
-  const [y, m, d] = day.split("-");
-  return `${d}.${m}.${y}`;
 }

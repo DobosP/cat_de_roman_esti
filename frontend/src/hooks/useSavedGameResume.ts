@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ApiError } from "../api/client";
 import type { ActiveGameMemo } from "./useActiveGame";
+import { useDailyIntent } from "./useDailyIntent";
 import {
   createSavedGameResume,
   subscribeSavedGameResume,
@@ -23,6 +24,8 @@ interface SavedGameResumeOptions<T> {
   isTerminal: (state: T) => boolean;
   setPending: (pending: boolean) => void;
   onResume: (state: T, detail: { gameId: string; terminal: boolean }) => void;
+  /** A circuit visit (`?challenge=daily`) resumed an unfinished free round instead. */
+  onDailyBypassed?: () => void;
 }
 
 /** Resume one saved server session without owning any game-specific screen state. */
@@ -32,10 +35,22 @@ export function useSavedGameResume<T>({
   isTerminal,
   setPending,
   onResume,
+  onDailyBypassed,
 }: SavedGameResumeOptions<T>): SavedGameResumeControl {
   const [generation, setGeneration] = useState(0);
   const [recovery, setRecovery] = useState<ResumeRecovery | null>(null);
   const unsubscribeRef = useRef<(() => void) | null>(null);
+  const dailyIntent = useDailyIntent();
+  // Read at resume time without resubscribing: the callbacks change every render.
+  const dailyResumeRef = useRef<(daily: boolean, terminal: boolean) => void>(() => {});
+  useEffect(() => {
+    dailyResumeRef.current = (daily, terminal) => {
+      if (!dailyIntent.active) return;
+      // A resumed daily fulfils the circuit intent; a free round keeps it for later.
+      if (daily) dailyIntent.consume();
+      else if (!terminal) onDailyBypassed?.();
+    };
+  });
   const attempt = useMemo(
     () =>
       createSavedGameResume({
@@ -55,6 +70,7 @@ export function useSavedGameResume<T>({
         onResume: (state, detail) => {
           setRecovery(null);
           onResume(state, detail);
+          dailyResumeRef.current(Boolean((state as { daily?: unknown }).daily), detail.terminal);
         },
         onTransientError: () => setRecovery({ kind: "failed" }),
         onSuperseded: (hasCurrent) => setRecovery({ kind: "changed", hasCurrent }),

@@ -30,7 +30,7 @@ from django.test import Client  # noqa: E402
 from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
 
 
-def solution(game: str, pack_id: str | None = None) -> dict:
+def solution(game: str, pack_id: str | None = None, daily: str | None = None) -> dict:
     module = importlib.import_module(f"cat_de_roman_esti.wordgames.{game}")
     query = {"seed": "38", "difficulty": "usor"}
     if pack_id is not None:
@@ -50,6 +50,9 @@ def solution(game: str, pack_id: str | None = None) -> dict:
             "difficulty": item.difficulty,
             "category": item.category,
         }
+    if daily is not None:
+        # The server derives a daily's seed from the day, so the browser's seed is ignored.
+        query["daily"] = daily
     if game in {"intrusul", "perechi"}:
         query["starter"] = "1"
     response = Client().post(f"/api/wordgames/{game}/games?{urlencode(query)}")
@@ -138,5 +141,8 @@ if __name__ == "__main__":
             json.dumps(starts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
     else:
-        print(json.dumps(solution(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None),
+        flags = [arg for arg in sys.argv[2:] if arg.startswith("--daily=")]
+        daily = flags[0].split("=", 1)[1] if flags else None
+        rest = [arg for arg in sys.argv[1:] if arg not in flags]
+        print(json.dumps(solution(rest[0], rest[1] if len(rest) > 1 else None, daily),
                          ensure_ascii=False))

@@ -63,7 +63,7 @@ test("personalized starts and replay fatigue use only non-daily query inputs", (
       /if \(!state\.daily\) rememberDerivedReplayId\(GAME_KEY, state\.game_id\)/,
     );
     assert.match(screen, /onDaily=\{\(\) => void start\(\{ daily: todayLocal\(\) \}\)\}/);
-    assert.match(screen, /onReplay=\{\(\) => void start\(\{ previousGameId: state\.game_id \}\)\}/);
+    assert.match(screen, /: \(\) => void start\(\{ previousGameId: state\.game_id \}\)\n\s*\}/);
   }
   assert.match(replayMemory, /const GAMES:[^=]+ = \["intrusul", "perechi"\]/);
   assert.match(replayMemory, /const MAX_SESSION_ID_LENGTH = 128/);
