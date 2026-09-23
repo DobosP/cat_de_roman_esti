@@ -15,7 +15,7 @@ test("Cald sau Rece labels the next server-authored clue stage", () => {
   assert.match(screen, /const clueActionLabel = state\?\.clue_available/);
   assert.match(screen, /state\.next_clue_kind === "warmer"/);
   assert.match(screen, /\? "Mai cald"\s*: "Indiciu"/);
-  assert.match(screen, /`Indiciu în \$\{clueCountdown\}`/);
+  assert.match(screen, /`Indiciu după \$\{clueCountdown\} \$\{clueCountdown === 1 \? "încercare" : "încercări"\}`/);
   assert.match(screen, /Arată un cuvânt sigur mai cald/);
   assert.match(screen, /Nu mai există un indiciu sigur/);
   assert.match(screen, /const res = await contextoApi\.requestClue\(state\.game_id\)/);

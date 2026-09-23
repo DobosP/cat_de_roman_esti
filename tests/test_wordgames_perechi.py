@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import itertools
 import json
+import random
 import threading
 from collections.abc import Iterator
 from dataclasses import replace
@@ -457,6 +458,8 @@ def test_perfect_win_score_terminal_solution_answer_free_share_and_progress_reco
     assert all(pair.label not in result["share"] for pair in session.pairs)
     assert all(tile["label"] not in result["share"] for tile in result["tiles"])
     assert "Perechi" in result["share"]
+    assert "· 0 greșeli" in result["share"]
+    assert "· 1 greșeală" in P._share(replace(session, mistakes=1))
     after_terminal = _post_json(
         client,
         f"{BASE}/games/{gid}/match",
@@ -593,3 +596,26 @@ def test_all_borrowed_capacity_returns_503(monkeypatch: pytest.MonkeyPatch) -> N
         blocked = client.post(f"{BASE}/games?seed=31")
         assert blocked.status_code == 503
         assert len(limited) == 1
+
+
+def test_every_selectable_board_serves_uppercase_initial_tiles() -> None:
+    from cat_de_roman_esti.wordgames.service import LOWERCASE_DISPLAY_LABELS
+
+    pool = get_derived_catalog().pool(P.GAME_KEY)
+    assert pool
+    for board in pool:
+        session = P._session_from_board(
+            board,
+            random.Random(0),
+            daily=None,
+            requested_category=None,
+            previous_ring=(),
+        )
+        labels = [tile["label"] for tile in P._state("g", session)["tiles"]]
+        for pair in session.pairs:
+            labels += [tile["label"] for tile in P._pair_payload(pair)["tiles"]]
+        for label in labels:
+            assert not label[:1].islower() or label in LOWERCASE_DISPLAY_LABELS, (
+                board._catalog_id,
+                label,
+            )

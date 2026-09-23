@@ -446,7 +446,7 @@ def share_line(session: ContextoSession) -> str:
     lines = [
         header,
         trail,
-        f"{session.attempts} incercari",
+        f"{session.attempts} {'încercare' if session.attempts == 1 else 'încercări'}",
     ]
     if session.clues_used:
         lines.append(f"indiciu x{session.clues_used}")
@@ -560,7 +560,7 @@ def _pick_target(
     rng = random.Random(seed)
     candidates = _difficulty_pool(svc, difficulty, category)
     if category is not None and not candidates:
-        raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
+        raise http_error(503, "Nu există încă jocuri pentru această categorie.")
     # Deterministic ordering: for daily/seeded runs the pool order is fixed, then a
     # seeded shuffle picks within it -> same date+difficulty => same target.
     candidates = list(candidates)
@@ -583,7 +583,7 @@ def _pick_target(
         best_in_cat = max(candidates, key=lambda n: len(svc.distances_to(n)))
         if len(svc.distances_to(best_in_cat)) >= MIN_REACHABLE:
             return _build_session(best_in_cat, difficulty, daily, category=category)
-        raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
+        raise http_error(503, "Nu există încă jocuri pentru această categorie.")
     # Last resort: nothing in this tier met even the reachability floor — take the
     # most inbound-reachable node so we still return a solvable game.
     best = max(svc.all_ids(), key=lambda n: len(svc.distances_to(n)))
@@ -840,7 +840,7 @@ class CreateGameView(ContractAPIView):
         if difficulty not in _DIFFICULTIES:
             difficulty = _DEFAULT_DIFFICULTY
         if category is not None and not is_known(category):
-            raise http_error(400, "Categorie necunoscuta.")
+            raise http_error(400, "Categorie necunoscută.")
         if daily is not None:
             seed = daily_seed(daily, GAME_KEY)
             curated = get_pack().pick_daily(
@@ -1100,7 +1100,7 @@ class ClueView(ContractAPIView):
             need = MIN_CLUE_ATTEMPTS - session.attempts
             raise http_error(
                 400,
-                f"Mai incearca {need} concepte inainte de indiciu.",
+                f"Mai încearcă {need} {'concept' if need == 1 else 'concepte'} înainte de indiciu.",
             )
         if not session.clue_revealed and session.category is None:
             clue_kind = "category"
@@ -1111,7 +1111,7 @@ class ClueView(ContractAPIView):
             clue = _warmer_clue_candidate(session)
             if clue is None:
                 session.warm_clue_exhausted = True
-                raise http_error(400, "Nu mai exista un indiciu sigur mai cald.")
+                raise http_error(400, "Nu mai există un indiciu sigur mai cald.")
             clue_kind = "warmer"
             session.warm_clue = clue
             session.clues_used += 1

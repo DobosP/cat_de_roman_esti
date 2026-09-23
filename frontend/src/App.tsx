@@ -9,6 +9,7 @@ import { AnimatePresence, domAnimation, LazyMotion, m, MotionConfig } from "fram
 import { ToastStack, type ToastData, type ToastKind } from "@roedu/ui";
 import Home from "./screens/Home";
 import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
+import { OptionalChromeBoundary } from "./components/OptionalChromeBoundary";
 
 // Home is the only screen every visitor needs. Each game is deliberately loaded
 // on first play so low-end devices do not parse all six game engines up front.
@@ -71,9 +72,11 @@ export default function App() {
       <LazyMotion features={domAnimation} strict>
         <RouteErrorBoundary pathname={location.pathname}>
         <div className="app-shell">
-          <Suspense fallback={null}>
-            <AccountBar />
-          </Suspense>
+          <OptionalChromeBoundary>
+            <Suspense fallback={null}>
+              <AccountBar />
+            </Suspense>
+          </OptionalChromeBoundary>
           <div className="app-notices">
             <ToastStack toasts={toasts} onDismiss={dismissToast} />
           </div>

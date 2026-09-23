@@ -23,14 +23,15 @@ import { ResultCard } from "../components/ResultCard";
 import { nextActiveTileId } from "../perechiFocus.mjs";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
+import { useDailyIntent } from "../hooks/useDailyIntent";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import {
   lastDerivedReplayId,
   rememberDerivedReplayId,
 } from "../derivedReplay";
-import { bestScore, needsDerivedStarter } from "../scores";
-import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import { bestScore, buildDailyCircuit, needsDerivedStarter, scoreBoard } from "../scores";
+import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
 import "../styles/perechi.css";
 
@@ -97,6 +98,15 @@ export default function Perechi({ onExit, onToast }: Props) {
   const actionsLocked = !isPresent || loading || busy || actionSync !== null;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
+  const dailyIntent = useDailyIntent();
+  // A circuit visit that resumed a free round offers today's unfinished daily next.
+  const dailyPending = useMemo(
+    () => !buildDailyCircuit(scoreBoard(), todayLocal()).games.find((g) => g.game === GAME_KEY)?.completed,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state],
+  );
+  const [dailyRetry, setDailyRetry] = useState(false);
+  const offerDaily = (dailyIntent.active || dailyRetry) && dailyPending && state?.daily !== todayLocal();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const starterVisible = useMemo(() => needsDerivedStarter(GAME_KEY), [state]);
   const exitSafely = useCallback(() => {
@@ -141,7 +151,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     }
     const target =
       pending.kind === "result"
-        ? resultFocusRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)")
+        ? resultFocusRef.current
         : tileRefs.current.get(pending.id);
     if (!target) return;
     target.focus();
@@ -166,6 +176,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
@@ -188,6 +199,7 @@ export default function Perechi({ onExit, onToast }: Props) {
       try {
         const fresh = await perechiApi.create(opts);
         setState(fresh);
+        setDailyRetry(false);
         setActionSync(null);
         setBusy(false);
         active.remember(fresh.game_id);
@@ -377,7 +389,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         } else {
           setFeedback(
             result.lost
-              ? "S-au terminat încercările. Îți arăt perechile."
+              ? "Ai folosit toate greșelile permise. Îți arăt perechile."
               : "Nu încă. Încearcă altă combinație.",
           );
           sound.playError();
@@ -515,11 +527,11 @@ export default function Perechi({ onExit, onToast }: Props) {
       <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
         <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
           <Hud>
-            {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
+            {state.daily && <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} />}
             <StatBadge label="PERECHI" value={`${state.solved_count}/4`} accent={DEF.accent} />
             <StatBadge
               label="GREȘELI"
-              value={`${state.remaining_mistakes} rămase`}
+              value={`${state.remaining_mistakes} ${state.remaining_mistakes === 1 ? "rămasă" : "rămase"}`}
               accent={DEF.accent}
             />
           </Hud>
@@ -646,7 +658,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         {!finished && <GameOptions game={GAME_KEY} />}
 
         {finished && state.solution && (
-          <div ref={resultFocusRef}>
+          <div ref={resultFocusRef} tabIndex={-1}>
             <ResultCard
               startFailed={startFailed}
               icon={state.won ? "✨" : "🧠"}
@@ -659,8 +671,16 @@ export default function Perechi({ onExit, onToast }: Props) {
               actionsBusy={loading}
               shareText={sharePayload}
               onCopy={copyShare}
-              onReplay={() => void start({ previousGameId: state.game_id })}
-              replayLabel={state.daily ? "Joacă liber →" : undefined}
+              onReplay={
+                offerDaily
+                  ? () => {
+                      setDailyRetry(true);
+                      dailyIntent.consume();
+                      void start({ daily: todayLocal() });
+                    }
+                  : () => void start({ previousGameId: state.game_id })
+              }
+              replayLabel={offerDaily ? "Joacă provocarea zilei →" : state.daily ? "Joacă liber →" : undefined}
               onExit={exitSafely}
             >
               <div className="perechi-solution">

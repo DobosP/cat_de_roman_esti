@@ -10,6 +10,7 @@ import { AnimatePresence, m } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
 import { GameShell } from "../components/GameShell";
 import { GameIntro } from "../components/GameIntro";
+import { GameHelp } from "../components/GameHelp";
 import { GameOptions } from "../components/GameOptions";
 import { GameSetupOptions } from "../components/GameSetupOptions";
 import { Hud, StatBadge } from "../components/Hud";
@@ -39,7 +40,7 @@ import {
 import { gameByKey } from "../games";
 import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
-import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import "../styles/contexto.css";
 
 const GAME_KEY = "contexto";
@@ -219,7 +220,7 @@ export default function CaldRece({
   const best = bestScore(GAME_KEY);
 
   const applyResumedGame = useCallback(
-    (saved: ContextoState, { terminal }: { terminal: boolean }) => {
+    (saved: ContextoState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
       actionOwner.invalidate();
       unconfirmedAction.current = false;
       setActionSync(null);
@@ -237,7 +238,8 @@ export default function CaldRece({
       setIsPuzzleRecord(false);
       setShowIntro(false);
       window.setTimeout(() => inputRef.current?.focus(), 0);
-      if (!terminal) onToast("Joc reluat.", "info");
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
     },
     [actionOwner, onToast],
   );
@@ -248,6 +250,7 @@ export default function CaldRece({
     isTerminal: isTerminalResume,
     setPending: setBusy,
     onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
@@ -631,7 +634,7 @@ export default function CaldRece({
       ? "Mai cald"
       : "Indiciu"
     : clueCountdown > 0
-      ? `Indiciu în ${clueCountdown}`
+      ? `Indiciu după ${clueCountdown} ${clueCountdown === 1 ? "încercare" : "încercări"}`
       : "Indiciu";
   // The most recently played guess (may sort anywhere in the list) — surfaced as an
   // explicit verdict so feedback is always visible, not buried by best-first sorting.
@@ -808,22 +811,26 @@ export default function CaldRece({
                     ? "Arată un cuvânt sigur mai cald"
                     : "Arată categoria conceptului secret"
                   : clueCountdown > 0
-                    ? `Disponibil după încă ${clueCountdown} încercări`
+                    ? `Disponibil după încă ${clueCountdown} ${clueCountdown === 1 ? "încercare" : "încercări"}`
                     : "Nu mai există un indiciu sigur"
               }
             >
               {clueActionLabel}
             </Button>
-            <span id="contexto-clue-cost" className="faint contexto-clue-cost">−120 puncte / indiciu</span>
+            <span id="contexto-clue-cost" className="faint contexto-clue-cost">
+              {!state?.clue_available && clueCountdown === 0
+                ? "Nu mai sunt indicii pentru această rundă."
+                : "−120 puncte / indiciu"}
+            </span>
           </div>}
 
-          <GameOptions game={GAME_KEY}>
+          <GameOptions game={GAME_KEY} help={false}>
             <div className="row wrap" style={{ gap: 8 }}>
               <StatBadge
                 label="Mod"
                 value={
                   state?.daily
-                    ? `📅 ${state.daily}`
+                    ? `📅 ${formatDayKey(state.daily)}`
                     : DIFFICULTY_LABEL[state?.difficulty ?? difficulty]
                 }
                 accent={DEF.accent}
@@ -846,7 +853,7 @@ export default function CaldRece({
               aria-expanded={confirmReveal}
               aria-controls="contexto-reveal-confirmation"
             >
-              Răspuns
+              Arată răspunsul
             </Button>
             <Button
               type="button"
@@ -924,6 +931,7 @@ export default function CaldRece({
 
           </GameOptions>
         </div>
+        <GameHelp game={GAME_KEY} />
 
         <span
           className="visually-hidden"

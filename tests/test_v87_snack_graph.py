@@ -227,7 +227,10 @@ def test_all_50_reviewed_directions_work_and_their_unreviewed_reverses_do_not():
                 if valid:
                     assert body["relation"] == relation_caption(svc, source, destination)
                 else:
-                    assert body["last_error"] == "Nu exista o legatura directa"
+                    assert body["last_error"] == (
+                        f"{svc.display_label(destination)} nu are o legătură directă cu "
+                        f"{svc.label(source)}. Alege un cuvânt din listă sau cere un indiciu."
+                    )
             finally:
                 L.store.delete(gid)
 

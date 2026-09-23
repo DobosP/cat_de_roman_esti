@@ -7,7 +7,7 @@ in-memory semantic graph, and runs a "semantic network hop" game in the terminal
 
 from __future__ import annotations
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 from .engine import HopGame, HopResult
 from .graph import Edge, Graph, Node

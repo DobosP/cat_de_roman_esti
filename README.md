@@ -1,9 +1,8 @@
 # cat_de_roman_esti
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
-(**2,416 concepts / 9,459 links / 8,641 typed aliases / 180 puzzles**,
-`fixture-v90-household-discovery` — generated hashes and gate state are
-recorded in `docs/STATUS.md`; no graph visualization). Alchimie exploration also has its
+(current counts, fixture version, generated hashes and gate state are recorded in
+`docs/STATUS.md`; no graph visualization). Alchimie exploration also has its
 own reviewed vocabulary and recipe catalog. All six are **server-authoritative**:
 the Django BFF validates every move and hides the answers.
 
@@ -142,6 +141,8 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 ## Docs
 
 - [`docs/STATUS.md`](docs/STATUS.md) — current truth: state, pins, verification record, next actions.
+- [`docs/TESTARE_V1.md`](docs/TESTARE_V1.md) — Romanian V1 tester guide: six-game session, feedback form,
+  same-Wi-Fi phone setup for the organizer.
 - [`romanian-game-content`](.agents/skills/romanian-game-content/SKILL.md) — repository skill for
   refinement and experimental concept discovery; workflow: [ADR-0156](docs/adr/0156-two-track-content-growth.md).
 - [`docs/BETA_CANDIDATE.md`](docs/BETA_CANDIDATE.md) — anonymous-beta evidence, bounded quality waves, outstanding gates and Romanian-player playtest protocol.
@@ -172,6 +173,6 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
 - [`frontend/README.md`](frontend/README.md) — SPA develop/build/layout.
 - History (never edited): [`docs/adr/`](docs/adr/) decision records (0001 = arcade pivot, no
-  graph UI; newest 0155) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
+  graph UI; newest in [`docs/adr/README.md`](docs/adr/README.md)) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
   [`docs/handoffs/`](docs/handoffs/) dated records · [`docs/archive/`](docs/archive/)
   superseded snapshots.

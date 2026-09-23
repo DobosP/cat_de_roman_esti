@@ -31,7 +31,7 @@ import { bestScore } from "../scores";
 import { gameByKey } from "../games";
 import { categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
-import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, formatDayKey, roNoun, stableKey, todayLocal } from "../share";
 import "../styles/lant.css";
 
 const GAME_KEY = "lant";
@@ -185,7 +185,7 @@ export default function Lant({
   }, [state, puzzleKey]);
 
   const applyResumedGame = useCallback(
-    (fresh: LantState, { terminal }: { terminal: boolean }) => {
+    (fresh: LantState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
       actionOwner.invalidate();
       pendingActionFocus.current = null;
       setActionSync(null);
@@ -199,7 +199,8 @@ export default function Lant({
       setStartFailed(false);
       setState(fresh);
       setText("");
-      if (!terminal) onToast("Joc reluat.", "info");
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
     },
     [actionOwner, onToast],
   );
@@ -210,11 +211,29 @@ export default function Lant({
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const exitSafely = useCallback(() => {
     if (!startInFlight.current) onExit();
   }, [onExit]);
+
+  // Giving up forgets only a settled live board: an uncertain move keeps its pointer
+  // so ordinary saved-game recovery can still reconcile it.
+  const abandonChain = useCallback(() => {
+    if (startInFlight.current || actionOwner.hasPending() || actionSync) return;
+    actionOwner.invalidate();
+    cancelResume();
+    dismissRecovery();
+    if (state) active.forgetIfCurrent(state.game_id);
+    setHint(null);
+    setProgress(null);
+    setRecovery(null);
+    setScored(null);
+    setText("");
+    pendingActionFocus.current = null;
+    setState(null);
+  }, [active, state, actionOwner, actionSync, cancelResume, dismissRecovery]);
 
   const start = useCallback(
     async (opts?: { difficulty?: Difficulty; daily?: string }) => {
@@ -256,7 +275,7 @@ export default function Lant({
   useEffect(() => {
     if (!state?.won || state.score === undefined) return;
     const score = state.score;
-    const detail = `${state.moves}/${state.optimal} mutări${
+    const detail = `${state.moves}/${state.optimal} salturi${
       state.daily ? ` · ${state.daily}` : ""
     }`;
     let current = true;
@@ -599,10 +618,10 @@ export default function Lant({
                 </Button>
                 {showHow && (
                   <ul id="lant-intro-disclosure" className="lant-intro-disclosure faint">
-                    <li>Salturile afișate amestecă drumul optim cu ocoluri sigure.</li>
+                    <li>Salturile afișate amestecă drumul cel mai scurt cu ocoluri sigure.</li>
                     <li>Înapoi e gratuit și nelimitat.</li>
                     <li>Poți scrie orice concept legat — nu doar din listă.</li>
-                    <li>Limită: 64 de mutări pe lanț.</li>
+                    <li>Limită: 64 de salturi pe lanț.</li>
                   </ul>
                 )}
               </div>
@@ -654,16 +673,16 @@ export default function Lant({
         <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={creating}>
           <Hud>
             <StatBadge
-              label="MUTĂRI"
-              value={`${state.moves} ${state.moves === 1 ? "mutare" : "mutări"}`}
+              label="SALTURI"
+              value={`${state.moves} ${roNoun(state.moves, "salt", "salturi")}`}
               accent={DEF.accent}
-              title="Mutări făcute"
+              title="Salturi făcute"
             />
           </Hud>
         </GameShell>
 
         <section className="card lant-route" aria-label="Poziția și ținta">
-          <div className="lant-current">
+          <div className="lant-current" aria-live={won ? "off" : "polite"} aria-atomic="true">
             <span className="faint">EȘTI ACUM LA</span>
             <div
               className="lant-route-word"
@@ -752,8 +771,8 @@ export default function Lant({
             replayLabel="Încă un lanț →"
           >
             Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}
-            în <strong style={{ color: "var(--text)" }}>{state.moves}</strong> salturi (optim{" "}
-            {state.optimal}).
+            în <strong style={{ color: "var(--text)" }}>{state.moves}</strong>{" "}
+            {roNoun(state.moves, "salt", "salturi")} (drumul cel mai scurt: {state.optimal}).
             {recovery?.message ? (
               <span className="muted" style={{ display: "block", marginTop: 8 }}>
                 <span aria-hidden="true" style={{ marginRight: 6 }}>
@@ -918,7 +937,7 @@ export default function Lant({
                       <span className="muted">
                         {hintRemaining <= 1
                           ? "Ești la un pas de țintă!"
-                          : `${hintRemaining} salturi până la țintă`}
+                          : `${hintRemaining} ${roNoun(hintRemaining, "salt", "salturi")} până la țintă`}
                       </span>
                     )}
                     {hint.alternatives_choices?.length ? (
@@ -963,12 +982,24 @@ export default function Lant({
         <GameOptions game="lant">
           <p className="muted lant-round-details">
             De la <strong>{state.start.label}</strong> la <strong>{state.target.label}</strong>.
-            {" "}Drumul optim: {state.optimal} salturi{overPar > 0 ? ` · ${overPar} peste optim` : ""}.
-            {state.daily ? ` Provocarea zilei: ${state.daily}.` : ""}
+            {" "}Drumul cel mai scurt: {state.optimal} {roNoun(state.optimal, "salt", "salturi")}{overPar > 0 ? ` · ai făcut ${overPar} ${roNoun(overPar, "salt", "salturi")} în plus` : ""}.
+            {state.daily ? ` Provocarea zilei: ${formatDayKey(state.daily)}.` : ""}
             {state.board_category ? ` Categoria: ${categoryLabel(state.board_category)}.` : ""}
           </p>
           <strong>Drumul tău</strong>
           <Breadcrumb path={state.path} />
+          {!state.won && (
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={abandonChain}
+              disabled={busy || creating || actionSync !== null}
+              title="Renunță la acest lanț și alege altul"
+            >
+              Începe alt lanț
+            </Button>
+          )}
         </GameOptions>
       </div>
     </div>

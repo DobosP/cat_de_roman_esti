@@ -30,7 +30,7 @@ from django.test import Client  # noqa: E402
 from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
 
 
-def solution(game: str, pack_id: str | None = None) -> dict:
+def solution(game: str, pack_id: str | None = None, daily: str | None = None) -> dict:
     module = importlib.import_module(f"cat_de_roman_esti.wordgames.{game}")
     query = {"seed": "38", "difficulty": "usor"}
     if pack_id is not None:
@@ -50,6 +50,9 @@ def solution(game: str, pack_id: str | None = None) -> dict:
             "difficulty": item.difficulty,
             "category": item.category,
         }
+    if daily is not None:
+        # The server derives a daily's seed from the day, so the browser's seed is ignored.
+        query["daily"] = daily
     if game in {"intrusul", "perechi"}:
         query["starter"] = "1"
     response = Client().post(f"/api/wordgames/{game}/games?{urlencode(query)}")
@@ -60,6 +63,8 @@ def solution(game: str, pack_id: str | None = None) -> dict:
     if pack_id is not None and session.pack_id != pack_id:
         raise ValueError(f"public seed selected {session.pack_id}, expected {pack_id}")
     svc = get_service()
+    # Tiles carry the served display label; Alchimie inventory labels stay raw.
+    label = svc.label if game == "alchimie" else svc.display_label
     steps = []
     hint_setup = None
 
@@ -67,7 +72,7 @@ def solution(game: str, pack_id: str | None = None) -> dict:
         payload = {"id": ids[0]} if game == "intrusul" else {"ids": ids}
         if game == "alchimie":
             payload = dict(zip(("a", "b"), ids, strict=True))
-        steps.append({"action": action, "labels": [svc.label(i) for i in ids],
+        steps.append({"action": action, "labels": [label(i) for i in ids],
                       "payload": payload})
 
     if game == "intrusul":
@@ -106,16 +111,16 @@ def solution(game: str, pack_id: str | None = None) -> dict:
         raise ValueError(f"unknown game: {game}")
     practice = steps[0]
     if game == "intrusul":
-        practice = {"action": "guess", "labels": [svc.label(session.members[0])],
+        practice = {"action": "guess", "labels": [label(session.members[0])],
                     "payload": {"id": session.members[0]}}
     elif game == "perechi":
         ids = [session.pairs[0].members[0], session.pairs[1].members[0]]
-        practice = {"action": "match", "labels": [svc.label(i) for i in ids],
+        practice = {"action": "match", "labels": [label(i) for i in ids],
                     "payload": {"ids": ids}}
     elif game == "conexiuni":
         groups = list(session.groups.values())
         ids = [*groups[0][:3], groups[1][0]]
-        practice = {"action": "guess", "labels": [svc.label(i) for i in ids],
+        practice = {"action": "guess", "labels": [label(i) for i in ids],
                     "payload": {"ids": ids}}
     elif game == "contexto":
         node = next(n for n in svc.predecessor_ids(session.target)
@@ -138,5 +143,8 @@ if __name__ == "__main__":
             json.dumps(starts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
     else:
-        print(json.dumps(solution(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None),
+        flags = [arg for arg in sys.argv[2:] if arg.startswith("--daily=")]
+        daily = flags[0].split("=", 1)[1] if flags else None
+        rest = [arg for arg in sys.argv[1:] if arg not in flags]
+        print(json.dumps(solution(rest[0], rest[1] if len(rest) > 1 else None, daily),
                          ensure_ascii=False))

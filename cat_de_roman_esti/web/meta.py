@@ -13,9 +13,11 @@ from django.http import HttpRequest, JsonResponse
 from drf_spectacular.utils import extend_schema
 from rest_framework.response import Response
 
+from .. import __version__
 from ..data import fixture_manifest
 from ..wordgames.categories import CATEGORIES
 from ..wordgames.packs import DIFFICULTIES, GAME_KINDS, GamesPack, get_pack
+from ..wordgames.release_reserve import get_reserve
 from ..wordgames.service import get_service
 from .http import ContractAPIView
 
@@ -56,32 +58,32 @@ GAMES = [
     {
         "key": "alchimie",
         "label": "Alchimie",
-        "blurb": "Combina doua concepte ca sa descoperi unul nou — pana ajungi la tinta.",
+        "blurb": "Combină două concepte ca să descoperi unul nou — până ajungi la țintă.",
     },
     {
         "key": "intrusul",
         "label": "Intrusul",
-        "blurb": "Gaseste cuvantul care nu se potriveste cu celelalte trei.",
+        "blurb": "Găsește cuvântul care nu se potrivește cu celelalte trei.",
     },
     {
         "key": "perechi",
         "label": "Perechi",
-        "blurb": "Potriveste cele opt cuvinte in patru perechi cu sens.",
+        "blurb": "Potrivește cele opt cuvinte în patru perechi cu sens.",
     },
     {
         "key": "conexiuni",
         "label": "Conexiuni",
-        "blurb": "Grupeaza cele 16 concepte in cele 4 categorii ascunse, cate 4 fiecare.",
+        "blurb": "Grupează cele 16 concepte în cele 4 categorii ascunse, câte 4 fiecare.",
     },
     {
         "key": "contexto",
         "label": "Cald sau Rece",
-        "blurb": "Ghiceste conceptul secret; fiecare incercare iti spune cat de aproape esti.",
+        "blurb": "Ghicește conceptul secret; fiecare încercare îți spune cât de aproape ești.",
     },
     {
         "key": "lant",
-        "label": "Lantul Cuvintelor",
-        "blurb": "Scrie un concept legat de cel curent si sari din cuvant in cuvant pana la tinta.",
+        "label": "Lanțul Cuvintelor",
+        "blurb": "Scrie un concept legat de cel curent și sari din cuvânt în cuvânt până la țintă.",
     },
 ]
 
@@ -96,10 +98,13 @@ def warm() -> None:
     """Eagerly build the KG service + manifest (fail fast on a broken fixture).
 
     Called from asgi.py/wsgi.py so the first request doesn't pay the load — the
-    Django twin of what ``create_app()`` did at construction time.
+    Django twin of what ``create_app()`` did at construction time. The packaged
+    release reserve is checked too, so a broken reserve stops startup; the derived
+    catalog is not warmed, keeping its faults per-game 503s.
     """
     get_service()
     _manifest_payload()
+    get_reserve()
 
 
 class HealthView(ContractAPIView):
@@ -109,6 +114,7 @@ class HealthView(ContractAPIView):
         return Response(
             {
                 "ok": True,
+                "version": __version__,
                 "source": "offline",
                 "concepts": len(svc.all_ids()),
                 "games": GAMES,

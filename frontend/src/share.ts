@@ -68,3 +68,21 @@ export function todayLocal(): string {
   const day = String(d.getDate()).padStart(2, "0");
   return `${d.getFullYear()}-${m}-${day}`;
 }
+
+/** A YYYY-MM-DD day key as Romanian readers write it (dd.mm.yyyy); keep the raw key for seeds and URLs. */
+export function formatDayKey(key: string): string {
+  const [y, m, d] = key.split("-");
+  return `${d}.${m}.${y}`;
+}
+
+/** Stored score details keep raw day keys (dedupe compares stored text); show them as dd.mm.yyyy. */
+export function displayDetail(detail: string): string {
+  return detail.replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, "$3.$2.$1");
+}
+
+/** The noun after a Romanian count: 1 salt, 3 salturi, 20 de salturi. */
+export function roNoun(n: number, one: string, many: string): string {
+  if (n === 1) return one;
+  const tail = Math.abs(n) % 100;
+  return tail >= 20 || (tail === 0 && n !== 0) ? `de ${many}` : many;
+}

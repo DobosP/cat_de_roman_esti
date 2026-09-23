@@ -14,8 +14,11 @@
 .connections-screen .connections-coach .next-move-progress { display: block; font-size: 0.8rem; }
 .connections-screen .connections-coach-action { display: flex; flex-direction: column; gap: 5px; align-items: center; }
 .connections-lives-label { font-size: 0.67rem; color: var(--text-dim); }
-/* Let enlarged text trade columns for readable words, with at most four columns. */
-.connections-screen .connections-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, max(4rem, calc((100% - 24px) / 4))), 1fr)); }
+/* Enlarged text trades columns for readable words in whole steps only (4, 2, 1), so the
+   sixteen tiles never leave a ragged row. Steps fit 4rem tiles plus the gap in effect. */
+.connections-screen .game-container { container-type: inline-size; }
+.connections-screen .connections-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@container (width >= calc(16rem + 24px)) { .connections-screen .connections-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .connections-screen .connection-tile { min-width: 0; overflow-wrap: anywhere; white-space: normal; border-radius: 10px; }
 .connections-screen .connections-actions { padding: 0; background: none; backdrop-filter: none; }
 .connections-screen .game-action-buttons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px !important; }
@@ -25,7 +28,9 @@
 .connections-hint-status { margin: 0; font-size: 0.74rem; text-align: center; color: var(--text-dim); }
 .connections-screen .roedu-btn:focus-visible { outline: 3px solid var(--game-conexiuni); outline-offset: 2px; }
 @media (max-width: 640px) {
-  .connections-screen .connections-grid { gap: 6px !important; grid-template-columns: repeat(auto-fit, minmax(min(100%, max(4rem, calc((100% - 18px) / 4))), 1fr)); }
+  .connections-screen .connections-grid { gap: 6px !important; }
+  @container (width < calc(8rem + 6px)) { .connections-screen .connections-grid { grid-template-columns: minmax(0, 1fr); } }
+  @container (width >= calc(16rem + 18px)) { .connections-screen .connections-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .connections-screen .connection-tile { padding: 10px 4px !important; min-height: 68px !important; font-size: 0.76rem !important; }
   .connections-screen .connections-coach.next-move { grid-template-columns: minmax(0, 1fr) auto; padding: 8px; gap: 8px; }
   .connections-screen .connections-coach .next-move-action { grid-column: 1 / -1; justify-self: end; }

@@ -102,10 +102,10 @@ test("Lanț intro discloses the corridor/detour mix, free undo, free typing, and
   assert.match(screen, /onClick=\{\(\) => setShowHow\(\(v\) => !v\)\}/);
   assert.match(screen, /Cum funcționează/);
   assert.match(screen, /showHow && \(/);
-  assert.match(screen, /amestecă drumul optim cu ocoluri sigure/);
+  assert.match(screen, /amestecă drumul cel mai scurt cu ocoluri sigure/);
   assert.match(screen, /Înapoi e gratuit și nelimitat/);
   assert.match(screen, /Poți scrie orice concept legat/);
-  assert.match(screen, /64 de mutări pe lanț/);
+  assert.match(screen, /64 de salturi pe lanț/);
 });
 
 test("Lanț renders progressive direction, alternatives, and one-hop help", () => {
@@ -156,4 +156,30 @@ test("Lanț spelling recovery fills focus only fine pointers; exact hint choices
     screen,
     /onClick=\{\(\) => \{\s+if \(hint\.hint\) void submit\(/,
   );
+});
+
+test("Lanț give-up forgets only a settled live board and reopens the intro", () => {
+  const handler = screen.match(/const abandonChain = useCallback\(\(\) => \{[\s\S]*?\n {2}\}, \[/);
+  assert.ok(handler);
+  const body = handler[0];
+  assert.match(body, /if \(startInFlight\.current \|\| actionOwner\.hasPending\(\) \|\| actionSync\) return;/);
+  assert.ok(body.indexOf("return;") < body.indexOf("active.forgetIfCurrent(state.game_id)"),
+    "an uncertain action keeps its pointer for saved-game recovery");
+  assert.match(body, /actionOwner\.invalidate\(\);\s*cancelResume\(\);\s*dismissRecovery\(\);/);
+  assert.match(body, /pendingActionFocus\.current = null;\s*setState\(null\);/);
+  const options = screen.slice(screen.indexOf('<GameOptions game="lant">'), screen.indexOf("</GameOptions>"));
+  assert.match(options, /\{!state\.won && \(/);
+  assert.match(options, /onClick=\{abandonChain\}/);
+  assert.match(options, /disabled=\{busy \|\| creating \|\| actionSync !== null\}/);
+  assert.match(options, /title="Renunță la acest lanț și alege altul"/);
+  assert.match(options, /Începe alt lanț/);
+});
+
+test("Lanț announces the new position and counts jumps with one word", () => {
+  assert.match(screen, /<div className="lant-current" aria-live=\{won \? "off" : "polite"\} aria-atomic="true">/);
+  assert.match(screen, /label="SALTURI"/);
+  assert.match(screen, /roNoun\(state\.moves, "salt", "salturi"\)/);
+  assert.match(screen, /\(drumul cel mai scurt: \{state\.optimal\}\)/);
+  assert.match(screen, /`\$\{state\.moves\}\/\$\{state\.optimal\} salturi/);
+  assert.doesNotMatch(screen, /mutări|MUTĂRI|\(optim/);
 });

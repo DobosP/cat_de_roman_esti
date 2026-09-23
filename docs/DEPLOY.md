@@ -48,6 +48,10 @@ stateless app container + Caddy TLS, no Postgres, no Google OAuth, no PII. This 
 fastest, lowest-compliance path to a public URL — use it first, and flip to the accounts
 stack (below) only once its go-live checklist is done.
 
+This "v1" names the first anonymous public launch; it is not the V1 (1.0.x) testing
+release. For a same-Wi-Fi phone playtest served from the organizer's own computer (no
+hosted server), see [TESTARE_V1](TESTARE_V1.md).
+
 **1. Provision the server** — same as [section 1](#1-provision-the-server-hetzner) below
 (Hetzner CX22, EU location, Docker + Compose plugin, clone the repo).
 

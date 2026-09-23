@@ -56,20 +56,19 @@ test("Perechi moves focus only when a focused solved tile disappears", () => {
   assert.match(perechi, /if \(fresh\.won \|\| fresh\.lost\) \{[\s\S]*?kind: "result"/);
   assert.match(perechi, /queueFocusAfterUpdate\(result, ids\)/);
   assert.match(perechi, /tileRefs\.current\.get\(pending\.id\)/);
-  assert.match(
-    perechi,
-    /resultFocusRef\.current\?\.querySelector<HTMLButtonElement>\("button:not\(:disabled\)"\)/,
-  );
+  assert.match(perechi, /pending\.kind === "result"\s*\? resultFocusRef\.current\s*:/);
+  assert.match(perechi, /<div ref=\{resultFocusRef\} tabIndex=\{-1\}>/);
+  assert.doesNotMatch(perechi, /resultFocusRef\.current\?\.querySelector/);
   assert.match(perechi, /target\.focus\(\)/);
 });
 
 test("daily derived results identify free play while normal replay keeps its default", () => {
   for (const screen of [intrusul, perechi]) {
-    assert.match(screen, /replayLabel=\{state\.daily \? "Joacă liber →" : undefined\}/);
     assert.match(
       screen,
-      /onReplay=\{\(\) => void start\(\{ previousGameId: state\.game_id \}\)\}/,
+      /replayLabel=\{offerDaily \? "Joacă provocarea zilei →" : state\.daily \? "Joacă liber →" : undefined\}/,
     );
+    assert.match(screen, /: \(\) => void start\(\{ previousGameId: state\.game_id \}\)\n\s*\}/);
   }
   assert.match(resultCard, /replayLabel = "Încă unul →"/);
 });

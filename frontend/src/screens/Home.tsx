@@ -27,7 +27,7 @@ import {
   type GameScoreEntry,
   type ScoreEntry,
 } from "../scores";
-import { appUrl, copyResult, todayLocal } from "../share";
+import { appUrl, copyResult, displayDetail, formatDayKey, roNoun, todayLocal } from "../share";
 
 type HistoryTab = "top" | "today" | "recent";
 
@@ -122,12 +122,14 @@ export default function Home({
       try {
         const outcome = importScores(await file.text());
         setBoard(scoreBoard());
-        onToast(
-          `Importat: ${outcome.entries} rezultate în ${outcome.games} jocuri.`,
-          "success",
-        );
+        const entries = `${outcome.entries} ${roNoun(outcome.entries, "rezultat", "rezultate")}`;
+        const games = `${outcome.games} ${roNoun(outcome.games, "joc", "jocuri")}`;
+        onToast(`Importat: ${entries} în ${games}.`, "success");
       } catch (err) {
-        onToast(err instanceof Error ? err.message : "Import invalid.", "error");
+        onToast(
+          err instanceof Error ? err.message : "Fișierul ales nu este un export de istoric valid.",
+          "error",
+        );
       }
     },
     [onToast],
@@ -306,7 +308,7 @@ export default function Home({
           {circuit.completed === 6 && (
             <div className="col daily-circuit-diploma">
               <strong>
-                🏆 Diplomă de român — {formatDiplomaDate(today)}
+                🏆 Diplomă de român — {formatDayKey(today)}
               </strong>
               <p className="muted">Ai închis circuitul de azi: {circuit.total} puncte.</p>
               <Button variant="secondary" size="sm" onClick={handleDiplomaShare}>
@@ -441,7 +443,7 @@ function HistoryRows({ rows, empty }: { rows: GameScoreEntry[]; empty: string })
             <div className="col" style={{ gap: 2, minWidth: 0 }}>
               <strong>{GAME_TITLES[entry.game as GameKey] ?? entry.game}</strong>
               <span className="muted" style={{ fontSize: "0.84rem" }}>
-                {entry.detail}
+                {displayDetail(entry.detail)}
               </span>
             </div>
           </div>
@@ -470,7 +472,7 @@ function ScoreLine({
   return (
     <div className="row spread" style={{ gap: 8, alignItems: "baseline" }}>
       <span className="muted" style={{ fontSize: "0.82rem" }}>
-        {entry.detail}
+        {displayDetail(entry.detail)}
       </span>
       <strong style={{ color: accent, fontVariantNumeric: "tabular-nums" }}>
         {entry.score}
@@ -490,9 +492,4 @@ function formatWhen(ms: number): string {
 
 function isStarterGame(key: GameKey): key is DerivedStarterGame {
   return key === "intrusul" || key === "perechi";
-}
-
-function formatDiplomaDate(day: string): string {
-  const [y, m, d] = day.split("-");
-  return `${d}.${m}.${y}`;
 }

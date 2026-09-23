@@ -183,8 +183,14 @@
   .alchemy-craft-prompt { font-size: 0.86rem; }
   .alchemy-inventory-panel { padding: 12px 14px 14px; gap: 8px; }
   .alchemy-panel-heading h3 { font-size: 1rem; }
-  .alchemy-screen .alchemy-inventory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* Two columns at default text; enlarged text drops the list to one column for whole words. */
+  .alchemy-screen .alchemy-inventory-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, max(7rem, calc((100% - 10px) / 2))), 1fr)); }
   .alchemy-screen .alchemy-inventory-grid > .alchemy-word { min-height: 62px; padding: 10px; }
+}
+/* Enlarged phone text: whole words beat a second column. Just under 20em, so a 320px phone
+   at default text keeps two columns and all eight starting words above the fold. */
+@media (max-width: 19.9em) {
+  .alchemy-screen .alchemy-inventory-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   .alchemy-game *, .alchemy-game *::before, .alchemy-game *::after { scroll-behavior: auto; animation: none !important; transition: none !important; }

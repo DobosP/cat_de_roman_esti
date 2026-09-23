@@ -1256,3 +1256,24 @@ Both validators, Ruff, frontend lint/build, docs, whitespace and isolated 1.0.0 
 smoke passed. The release remains anonymous and is ready for mixed-age physical
 phone/desktop playtesting; no push or deployment was performed. Exact evidence is
 in `docs/reviews/v1-testing-release/verification.json`.
+
+## V1.0.1 hardening (2026-09-23)
+
+Valid until: a change to the reviewed 1.0.1 source — then treat as history.
+
+An independent review of V1 `2ba8a8b` raised 55 findings; 51 survived adversarial
+verification. Eight work packages (records, board columns, daily intent, app-shell
+recovery, quick-game copy, Lanț/Cald sau Rece controls, backend strings and casing,
+release plumbing) were built in separate worktrees, each approved by an independent
+reviewer, then merged. An integration review confirmed 14 small follow-ups; 13 were fixed
+and the allowlist regression guard is deferred. 42 original findings are fixed; nine
+content or selection items are deferred to one reviewed content wave. Decision:
+[ADR-0159](docs/adr/0159-v1-0-1-testing-hardening.md); evidence:
+[review](docs/reviews/v1-0-1-hardening/README.md).
+
+Gates on the final source: 2466 backend and 53 accounts tests (WSL, Python 3.14.4), 240
+frontend unit tests, lint/typecheck/build (119.78 of 120.0 KiB initial gzip), both content
+validators, Ruff, docs and whitespace, one all-green 622/622 Playwright run (Edge desktop +
+Pixel 7 emulation, no retries) and an isolated 1.0.1 wheel smoke on Python 3.12.13. The
+tester guide gains a same-Wi-Fi phone setup. No fixture changed; nothing was pushed or
+deployed.

@@ -35,7 +35,7 @@ import { CategoryPicker } from "../components/CategoryPicker";
 import { AlchimieModes } from "../components/AlchimieModes";
 import AlchimieExplore from "./AlchimieExplore";
 import { readExplorationSave } from "../explorationSave";
-import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import "../styles/alchimie.css";
 
 const GAME_KEY = "alchimie";
@@ -183,7 +183,7 @@ function AlchimieChallenge({
   }, []);
 
   const applyResumedGame = useCallback(
-    (s: AlchimieState, { terminal }: { terminal: boolean }) => {
+    (s: AlchimieState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
       actionOwner.invalidate();
       setActionSync(null);
       setBusy(false);
@@ -193,7 +193,8 @@ function AlchimieChallenge({
       setCategory(s.board_category ?? null);
       setIsRecord(false);
       setIsPuzzleRecord(false);
-      if (!terminal) onToast("Joc reluat.", "info");
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
     },
     [actionOwner, applyAuthoritativeState, onToast],
   );
@@ -204,6 +205,7 @@ function AlchimieChallenge({
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const exitSafely = useCallback(() => {
@@ -743,7 +745,7 @@ function AlchimieChallenge({
               <span className="alchemy-eyebrow">{won ? "ȚINTA FĂURITĂ" : "SCOPUL TĂU · CREEAZĂ"}</span>
               <span className="alchemy-theme">
                 {state.board_category && `${categoryLabel(state.board_category)} · `}{DIFFICULTY_LABEL[state.difficulty]}
-                {state.daily && ` · ${state.daily}`}
+                {state.daily && ` · ${formatDayKey(state.daily)}`}
               </span>
             </div>
             <h2>{state.target.label}</h2>

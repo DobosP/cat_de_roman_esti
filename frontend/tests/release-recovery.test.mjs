@@ -10,7 +10,6 @@ function harness(initialMarker = null) {
   const values = new Map();
   if (initialMarker !== null) values.set(RELEASE_RECOVERY_KEY, initialMarker);
   const listeners = new Map();
-  const scheduled = [];
   let reloads = 0;
   let prevented = 0;
 
@@ -41,7 +40,6 @@ function harness(initialMarker = null) {
       reloads += 1;
     },
   };
-  const schedule = (callback, delay) => scheduled.push({ callback, delay });
   const dispatch = () =>
     listeners.get("vite:preloadError")?.({
       preventDefault() {
@@ -53,9 +51,7 @@ function harness(initialMarker = null) {
     target,
     storage,
     location,
-    schedule,
     dispatch,
-    scheduled,
     values,
     reloads: () => reloads,
     prevented: () => prevented,
@@ -90,15 +86,17 @@ test("the loop guard follows client-side navigation before a lazy import fails",
   assert.equal(app.reloads(), 1);
 });
 
-test("a slow failed chunk cannot outlive the guard and reload every document", () => {
+test("a slow failed chunk cannot outlive the guard and reload every document", (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
   let marker = null;
   let reloads = 0;
   for (let document = 0; document < 4; document += 1) {
     const app = harness(marker);
     installReleaseRecovery(app);
-    // Simulate every scheduled timeout expiring before a slow request fails.
-    for (const timer of app.scheduled) timer.callback();
+    // Expire every timeout before the slow request fails and before the reload.
+    t.mock.timers.runAll();
     app.dispatch();
+    t.mock.timers.runAll();
     reloads += app.reloads();
     marker = app.values.get(RELEASE_RECOVERY_KEY);
   }
@@ -172,7 +170,8 @@ test("a pending reload stays bounded even if the persisted marker is removed", (
   assert.equal(app.prevented(), 2);
 });
 
-test("the durable marker prevents recovery from looping across documents", () => {
+test("the durable marker prevents recovery from looping across documents", (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
   const initial = harness();
   installReleaseRecovery(initial);
   initial.dispatch();
@@ -184,5 +183,6 @@ test("the durable marker prevents recovery from looping across documents", () =>
   reloaded.dispatch();
   assert.equal(reloaded.reloads(), 0);
   assert.equal(reloaded.prevented(), 0);
-  assert.equal(reloaded.scheduled.length, 0);
+  t.mock.timers.runAll();
+  assert.equal(reloaded.values.get(RELEASE_RECOVERY_KEY), "/intrusul?daily=2026-07-30");
 });

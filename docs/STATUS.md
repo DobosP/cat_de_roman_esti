@@ -1,17 +1,24 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-23 — V1 local testing release verified; physical-device and human testing next.
+Last verified: 2026-09-23 — V1 hardened as local 1.0.1; physical-device and human testing next.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- The owner requested internal V100 as a testing release named **V1**, package **1.0.0**,
-  for mixed ages on phones and desktop. Baseline: V99 `cc0a6a4`, after origin reconciliation.
-- V1 puts game choices first, carries daily-circuit intent into an explicit daily start,
-  exposes rules directly, removes empty options, clarifies remaining mistakes and makes
-  replay the primary result action. Enlarged text reflows word cards at 320 px.
-- Guarded storage reads keep startup/play working when browser storage is denied.
-  Failed game downloads show explicit recovery; one persisted marker prevents reload loops.
+- The owner requested internal V100 as a testing release named **V1** for mixed ages on
+  phones and desktop. Package **1.0.1** (lobby badge **V1.0.1**) hardens the V1 1.0.0
+  release `2ba8a8b` after an independent review; decision [ADR-0159](adr/0159-v1-0-1-testing-hardening.md).
+- 1.0.1: a 0-point loss is never a record; circuit daily intent is single-use (one resume
+  notice; Intrusul/Perechi results offer the pending daily); Conexiuni/Intrusul/Perechi
+  boards step 4/2/1 columns only; Lanț stacks its route on phones and Alchimie keeps long
+  words whole on enlarged text. Lanț has "Începe alt lanț", an announced position and
+  "salturi"; Cald sau Rece shows "Arată răspunsul" and rules below play.
+- 1.0.1: a failed optional AccountBar renders nothing instead of a game error; the reserve
+  loads at startup and reserve drift returns the game's JSON 503; `/` revalidates on
+  every load; `/api/health` reports `version`. Quick-game tiles are display-capitalised
+  (reviewed lowercase allowlist); server copy has diacritics and correct plurals.
+- V1 1.0.0 put game choices first, exposed rules directly, removed empty options and made
+  replay primary; guarded storage reads and one persisted reload marker keep startup usable.
 - Seven independently reviewed factual repairs correct Caraiman, Village Museum,
   Athenaeum, three Neagu labels and one false Operațiunea Monstrul–Dem Rădulescu edge.
   Every original KG puzzle, concept and accepted form remains.
@@ -27,7 +34,8 @@ Last verified: 2026-09-23 — V1 local testing release verified; physical-device
 - The repository [content skill](../.agents/skills/romanian-game-content/SKILL.md) retains
   conservative refinement and experimental discovery as separate tracks.
 - Decision/evidence: [ADR-0158](adr/0158-v1-testing-release.md),
-  [release review](reviews/v1-testing-release/README.md), [Romanian tester guide](TESTARE_V1.md).
+  [release review](reviews/v1-testing-release/README.md), [ADR-0159](adr/0159-v1-0-1-testing-hardening.md),
+  [Romanian tester guide](TESTARE_V1.md) (now with a same-Wi-Fi phone setup and known limits).
 
 ## Inventory and invariants
 
@@ -68,36 +76,35 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Verification
 
-- Complete backend: **2446 passed**, plus **53 accounts checks**; frontend: **224 passed**.
-- Browser coverage: **588 distinct cases verified** across the full 586-case run
-  (583 passed/3 failures subsequently resolved) and the final **142/142** affected-case
-  run, serial, no retries. This is composed coverage, not one all-green 588-case run.
-- Frontend lint/build, both validators, Ruff, docs and whitespace gates pass. The isolated
-  1.0.0 wheel creates and resumes all six games and carries all 30 exact static assets.
-  Commands, source bindings and intermediate failures: [verification](reviews/v1-testing-release/verification.json).
-- Both content validators and whole-repo Ruff pass. Installed recipe regression:
-  13 passes, including all 68 board API wins and seven restored-addition journeys.
-- Independent quick audit: all 85 authored boards naturally select, win and resume.
-  The graph audit covers every pack record and Cald target/guess; editorial review is
-  explicitly sampled, not a claim of full independent editorial approval.
-- Removing the false casting edge changes two raw Cald similarities, 275 resulting ranks
-  and one temperature; all are attributed to that correction. Lanț shortest routes/par
-  remain exact; 30 deeper menu states across 17 boards lose the false hop or its prefixes.
-- Native Windows full-suite collection has the existing Unix-only `resource` limitation;
-  the unchanged complete suite runs under WSL. Human enjoyment and physical-device
-  acceptance remain unrun; browser emulation does not substitute for those tests.
+- 1.0.1 (2026-09-23): complete backend **2466 passed** + **53 accounts** (WSL, Python 3.14.4,
+  constrained); frontend unit **240 passed**, lint, typecheck, build (initial gzip 119.78 of
+  120.0 KiB); both validators, Ruff, reserve builder, docs check and whitespace pass.
+- 1.0.1 browser: one all-green full Playwright run, **622/622** (desktop + Pixel 7 emulation,
+  Microsoft Edge on Windows, 2 workers, no retries). An earlier full run's single Lanț
+  late-404 failure did not recur in 200/200 repeated recovery cases (host under load).
+- 1.0.1 isolated wheel (Python 3.12.13): version and `/api/health` 1.0.1, revalidated shell,
+  all 30 static files exact, six games create and resume, curated counts unchanged.
+- V1 1.0.0 gates (2446 backend, 224 frontend, 588 composed browser cases, factual audits,
+  recipe and quick-board replays) stay in the [verification](reviews/v1-testing-release/verification.json) record.
+- The complete suite needs WSL (Unix `resource` import); human enjoyment, physical devices
+  and Safari/WebKit remain untested; browser emulation does not substitute for them.
 
 ## Production and next work
 
 - Last recorded production: anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`
   (no live production recheck in this task).
-  No push, deployment, accounts activation or recurring loop restart is part of V1.
-- Gather mixed-age phone/desktop feedback with the tester guide; local release gates
-  are complete. Accounts stay off until DEPLOY gates. Research pools remain separate.
-- Remaining content constraints include the held Familie gradient, generic/single-route
-  pending boards and exploration's five spare concept slots; no broad growth was forced.
+  No push, deployment, accounts activation or recurring loop restart is part of V1/1.0.1.
+- Next: a same-Wi-Fi phone/desktop session with the tester guide, including an iPhone
+  (Safari/WebKit is untested), an Android phone and enlarged text. Accounts stay off.
+- Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
+  diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
+  casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
+  Limbă/Geografie Greu shelves, label spellings (Herta Müller, Mica Unire 1859).
+- Known limits: Alchimie Greu starts on shelves without a curated board can take seconds
+  (a time cap would break deterministic dailies); older stored score details keep ISO dates
+  but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 
 ## Doc map
 
 - README/AGENTS: orientation; agent-map/agent-testing: routes/gates.
-- ADRs (newest 0158), reviews and WORKLOG: decisions, evidence and history.
+- ADRs (newest 0159), reviews and WORKLOG: decisions, evidence and history.

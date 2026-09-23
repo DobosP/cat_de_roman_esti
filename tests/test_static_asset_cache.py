@@ -40,6 +40,22 @@ def test_tracked_vite_asset_gets_immutable_response_cache() -> None:
     assert "max-age=315360000" in response.headers["Cache-Control"]
 
 
+@override_settings(DEBUG=False)
+def test_spa_shell_revalidates_while_hashed_assets_stay_immutable() -> None:
+    client = Client()
+    root = client.get("/")
+    assert root.status_code == 200
+    assert "max-age=0" in root.headers["Cache-Control"]
+    deep = client.get("/alchimie")
+    assert deep.status_code == 200
+    assert "no-cache" in deep.headers["Cache-Control"]
+    asset = next((settings.STATIC_DIR / "assets").glob("index-*.js"))
+    hashed = client.get(f"/assets/{asset.name}")
+    assert hashed.status_code == 200
+    assert "immutable" in hashed.headers["Cache-Control"]
+    assert "max-age=315360000" in hashed.headers["Cache-Control"]
+
+
 def test_positive_request_limit_environment(monkeypatch) -> None:
     monkeypatch.setenv("TEST_CAT_REQUEST_BYTES", "32768")
     assert _env_positive_int("TEST_CAT_REQUEST_BYTES", 1) == 32768

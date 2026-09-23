@@ -36,7 +36,7 @@ import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { bestScore } from "../scores";
 import { gameByKey } from "../games";
-import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "conexiuni";
 const DEF = gameByKey("conexiuni");
@@ -167,7 +167,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, []);
 
   const applyResumedGame = useCallback(
-    (s: ConexiuniState, { terminal }: { terminal: boolean }) => {
+    (s: ConexiuniState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
       actionOwner.invalidate();
       setActionSync(null);
       setBusy(false);
@@ -182,7 +182,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       setHint(null);
       setShuffleNonce(0);
       setShake(0);
-      if (!terminal) onToast("Joc reluat.", "info");
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
     },
     [actionOwner, onToast],
   );
@@ -193,6 +194,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
@@ -264,7 +266,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
     const detail = state.won
-      ? `${state.mistakes} greșeli`
+      ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
       : `pierdut · ${state.mistakes} greșeli`;
     let current = true;
     void recordOnce(state.game_id, state.score, detail, {
@@ -825,7 +827,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         <GameOptions game={GAME_KEY}>
           <div className="row wrap" style={{ gap: 8 }}>
             {state.daily && (
-              <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />
+              <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} title="Provocarea zilei" />
             )}
             <StatBadge label="DIFICULTATE" value={DIFF_LABEL[state.difficulty]} accent={DEF.accent} />
             {state.board_category && (
@@ -864,7 +866,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               startFailed={startFailed}
               actionsBusy={loading}
               icon={state.won ? "🎉" : "💔"}
-              title={state.won ? "Ai găsit toate grupurile!" : "Ai rămas fără vieți."}
+              title={state.won ? "Ai găsit toate grupurile!" : "Nu mai ai greșeli disponibile."}
               accent={DEF.accent}
               won={state.won}
               score={state.score}

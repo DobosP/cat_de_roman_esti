@@ -1,7 +1,7 @@
 # ADR-0158: Prepare V1 for mixed-age phone and desktop testing
 
 Date: 2026-09-23
-Status: accepted
+Status: accepted; partially amended by [ADR-0159](0159-v1-0-1-testing-hardening.md) (lobby label, word-grid reflow)
 
 ## Context
 

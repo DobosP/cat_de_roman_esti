@@ -46,8 +46,8 @@ test("Lanț reports its optimal benchmark without inventing distance after detou
   assert.match(lant, /return state\.moves - state\.optimal/);
   const options = lant.slice(lant.indexOf('<GameOptions game="lant">'), lant.indexOf("</GameOptions>"));
   assert.match(options, /De la <strong>\{state\.start\.label\}<\/strong> la <strong>\{state\.target\.label\}/);
-  assert.match(options, /Drumul optim: \{state\.optimal\} salturi/);
-  assert.match(options, /overPar > 0 \? ` · \$\{overPar\} peste optim` : ""/);
+  assert.match(options, /Drumul cel mai scurt: \{state\.optimal\} \{roNoun\(state\.optimal, "salt", "salturi"\)\}/);
+  assert.match(options, /overPar > 0 \? ` · ai făcut \$\{overPar\} \$\{roNoun\(overPar, "salt", "salturi"\)\} în plus` : ""/);
   assert.match(lant, /const hintRemaining = hint\?\.remaining \?\? null/);
 });
 
