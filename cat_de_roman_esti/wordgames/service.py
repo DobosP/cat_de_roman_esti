@@ -83,6 +83,13 @@ def is_reviewed_unresolved_spelling(text: str) -> bool:
     return " ".join(spelling.split()) in _REVIEWED_UNRESOLVED_SPELLINGS
 
 
+# KG labels whose lowercase first letter is the name's own spelling. Every other
+# served quick-game tile starts uppercase, so casing never hints at a group.
+LOWERCASE_DISPLAY_LABELS: frozenset[str] = frozenset(
+    {"dexonline", "eMAG", "hi5", "iRaphahell", "iUmor", "r/Romania", "vladmnt", "wrs"}
+)
+
+
 @dataclass
 class WordGameService:
     """Read-only operations over one KG, shared by every word game."""
@@ -134,6 +141,13 @@ class WordGameService:
     def label(self, node_id: str) -> str:
         n = self.graph.node(node_id)
         return n.label_ro if n else node_id
+
+    def display_label(self, node_id: str) -> str:
+        """Tile label with an uppercase first letter, unless the name is allowlisted."""
+        label = self.label(node_id)
+        if not label or label in LOWERCASE_DISPLAY_LABELS:
+            return label
+        return label[0].upper() + label[1:]
 
     def description(self, node_id: str) -> str:
         n = self.graph.node(node_id)

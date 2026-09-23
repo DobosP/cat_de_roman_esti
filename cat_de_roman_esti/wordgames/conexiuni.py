@@ -175,7 +175,7 @@ def _choose_categories(rng: random.Random, difficulty: str) -> tuple[str, ...]:
     if n == 0:
         raise http_error(
             503,
-            "Nu exista suficiente categorii pentru un joc.",
+            "Nu există suficiente categorii pentru un joc.",
         )
     third = max(1, n // 3)
     if difficulty == "usor":
@@ -312,7 +312,7 @@ def _pick_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
         return best
     raise http_error(
         503,
-        "Nu am putut genera o tabla valida; reincearca.",
+        "Nu am putut genera o tablă validă; reîncearcă.",
     )
 
 
@@ -325,7 +325,7 @@ def _tiles(session: ConexiuniSession, *, include_solved: bool = False) -> list[d
         for nid in session.groups[cat]
     }
     return [
-        {"id": nid, "label": svc.label(nid)}
+        {"id": nid, "label": svc.display_label(nid)}
         for nid in session.order
         if include_solved or nid not in solved_ids
     ]
@@ -341,7 +341,7 @@ def _solved_groups(session: ConexiuniSession) -> list[dict]:
                 "key": cat,
                 "label": _group_label(session, cat),
                 "tiles": [
-                    {"id": nid, "label": svc.label(nid)} for nid in session.groups[cat]
+                    {"id": nid, "label": svc.display_label(nid)} for nid in session.groups[cat]
                 ],
             }
         )
@@ -373,7 +373,7 @@ def _full_solution(session: ConexiuniSession, *, reveal: bool) -> list[dict]:
                 "key": cat,
                 "label": _group_label(session, cat),
                 "tiles": [
-                    {"id": nid, "label": svc.label(nid)} for nid in session.groups[cat]
+                    {"id": nid, "label": svc.display_label(nid)} for nid in session.groups[cat]
                 ],
             }
         )
@@ -399,7 +399,7 @@ def _share(session: ConexiuniSession) -> str:
     header = "cat_de_roman_esti · Conexiuni · "
     if session.category:
         header += f"{category_label(session.category)} · "
-    header += f"{session.mistakes} greseli"
+    header += f"{session.mistakes} {'greșeală' if session.mistakes == 1 else 'greșeli'}"
     if session.clues_used:
         header += f" · indiciu x{session.clues_used}"
     if session.daily:
@@ -459,7 +459,7 @@ def _next_clue(session: ConexiuniSession) -> dict[str, str]:
     pattern = _label_pattern(_group_label(session, cat))
     return {
         "pattern": pattern,
-        "message": f"Un grup ramas are eticheta: {pattern}.",
+        "message": f"Numele unui grup rămas: {pattern} (fiecare _ este o literă lipsă).",
     }
 
 
@@ -530,7 +530,7 @@ class CreateGameView(ContractAPIView):
         if difficulty not in DIFFICULTIES:
             difficulty = "normal"
         if category is not None and not is_known(category):
-            raise http_error(400, "Categorie necunoscuta.")
+            raise http_error(400, "Categorie necunoscută.")
         if daily:
             rng = random.Random(daily_seed(daily, GAME_KEY))
             curated = get_pack().pick_daily(
@@ -548,7 +548,7 @@ class CreateGameView(ContractAPIView):
         if curated is not None:
             session = _session_from_curated(curated, daily, category)
         elif category is not None:
-            raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
+            raise http_error(503, "Nu există încă jocuri pentru această categorie.")
         else:
             session = _pick_board(rng, difficulty)
             session.daily = daily
@@ -585,7 +585,7 @@ class GuessView(ContractAPIView):
         board_ids = set(session.order)
         for nid in ids:
             if nid not in board_ids:
-                raise http_error(400, "Concept care nu e pe tabla")
+                raise http_error(400, "Concept care nu e pe tablă")
             if nid in solved_ids:
                 raise http_error(400, "Concept deja rezolvat")
 
@@ -661,7 +661,7 @@ class ClueView(ContractAPIView):
             need = needed - session.mistakes
             raise http_error(
                 400,
-                f"Mai greseste {need} incercari inainte de indiciu.",
+                f"Mai greșește {need} încercări înainte de indiciu.",
             )
 
         clue_payload = _next_clue(session)

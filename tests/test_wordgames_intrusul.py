@@ -309,6 +309,7 @@ def test_first_try_score_third_wrong_loss_and_terminal_guards(
     first_url = f"{BASE}/games/{first['game_id']}"
     won = _post(client, f"{first_url}/guess", {"id": first_session.intruder}).json()
     assert won["score"] == 1_000
+    assert won["share"].splitlines()[1] == "🟩 1 încercare"
     assert recorded[-1] == (intrusul.GAME_KEY, first_session.source_id)
     assert _post(client, f"{first_url}/guess", {"id": first_session.intruder}).status_code == 400
     assert _post(client, f"{first_url}/hint").status_code == 400
@@ -324,6 +325,7 @@ def test_first_try_score_third_wrong_loss_and_terminal_guards(
     lost = responses[-1]
     assert lost["attempts"] == lost["mistakes"] == 3
     assert lost["remaining_mistakes"] == 0 and lost["score"] == 0
+    assert lost["share"].splitlines()[1] == "🟥 3 încercări"
     assert lost["solution"]["intruder"]["id"] == lost_session.intruder
     assert "îți arăt intrusul" in lost["message"]
     assert recorded[-1] == (intrusul.GAME_KEY, lost_session.source_id)
@@ -396,3 +398,24 @@ def test_openapi_operation_ids_are_stable() -> None:
     }
     for path, (method, operation_id) in expected.items():
         assert schema["paths"][path][method]["operationId"] == operation_id
+
+
+def test_every_selectable_board_serves_uppercase_initial_tiles() -> None:
+    from cat_de_roman_esti.wordgames.service import LOWERCASE_DISPLAY_LABELS
+
+    pool = get_derived_catalog().pool(intrusul.GAME_KEY)
+    assert pool
+    for board in pool:
+        session = intrusul._build_session(
+            board,
+            random.Random(0),
+            daily=None,
+            requested_category=None,
+            previous_ring=(),
+        )
+        for tile in intrusul._state("g", session)["tiles"]:
+            label = tile["label"]
+            assert not label[:1].islower() or label in LOWERCASE_DISPLAY_LABELS, (
+                board._catalog_id,
+                label,
+            )

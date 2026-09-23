@@ -1,4 +1,4 @@
-"""Offline, deterministic tests for the Lantul Cuvintelor word-ladder game."""
+"""Offline, deterministic tests for the Lanțul Cuvintelor word-ladder game."""
 
 from __future__ import annotations
 
@@ -16,6 +16,13 @@ from cat_de_roman_esti.wordgames.lant import LantSession, store
 from cat_de_roman_esti.wordgames.service import get_service
 
 c = Client()
+
+
+def _no_link(guess: str, current: str) -> str:
+    return (
+        f"{guess} nu are o legătură directă cu {current}. "
+        "Alege un cuvânt din listă sau cere un indiciu."
+    )
 
 SEED = 7
 
@@ -190,7 +197,7 @@ def test_non_neighbor_rejected():
     assert res.status_code == 200
     body = res.json()
     assert body["ok"] is False
-    assert body["last_error"] == "Nu exista o legatura directa"
+    assert body["last_error"] == _no_link(game["target"]["label"], game["start"]["label"])
 
 
 def test_undo_does_not_go_below_start():
@@ -238,9 +245,9 @@ def test_win_includes_score_and_share():
     assert body["score"] >= 100
     assert "share" in body
     share = body["share"]
-    assert "Lantul Cuvintelor" in share
+    assert "Lanțul Cuvintelor" in share
     assert "🔗" in share
-    assert f"{body['moves']}/{game['optimal']} mutari" in share
+    assert f"{body['moves']}/{game['optimal']} salturi" in share
 
     # Final GET state also surfaces score + share.
     final = c.get(f"/api/wordgames/lant/games/{game['game_id']}").json()
@@ -667,7 +674,7 @@ def test_staying_put_rejected():
     )
     body = res.json()
     assert body["ok"] is False
-    assert body["last_error"] == "Esti deja aici"
+    assert body["last_error"] == "Ești deja aici."
 
 
 def test_move_on_won_game_is_idempotent():
@@ -780,7 +787,7 @@ def test_two_node_revisit_cycle_caps_then_undo_reopens_play(monkeypatch):
     assert won["won"] is True
     assert won["moves"] == lant._MAX_MOVES
     assert won["score"] == lant._score_for(lant._MAX_MOVES, session.optimal)
-    assert f"{lant._MAX_MOVES}/{session.optimal} mutari" in won["share"]
+    assert f"{lant._MAX_MOVES}/{session.optimal} salturi" in won["share"]
 
 
 def test_move_cap_bounds_full_state_and_repeated_rejections(monkeypatch):
@@ -1132,7 +1139,7 @@ def test_unknown_move_offers_fuzzy_suggestions():
         content_type="application/json",
     ).json()
     assert body["ok"] is False
-    assert "Poate cautai" in body["last_error"]
+    assert "Poate căutai" in body["last_error"]
     assert label in body["suggestions"]
 
 
@@ -1231,7 +1238,7 @@ def test_move_typo_of_a_non_neighbor_names_the_correction():
     ).json()
     assert body["ok"] is False
     assert body["last_error"] == (
-        f"Am înțeles: {svc.label(nid)}. Nu exista o legatura directa"
+        f"Am înțeles: {svc.label(nid)}. {_no_link(svc.label(nid), svc.label(cur))}"
     )
     # A rejected correction changes nothing.
     assert c.get(f"/api/wordgames/lant/games/{gid}").json()["moves"] == 0
@@ -1342,8 +1349,10 @@ def test_concurrent_competing_hops_preserve_one_legal_chain(monkeypatch):
     assert session.moves == 1
     assert len(session.chain) == 2
     assert svc.link(session.chain[0], session.chain[1]) is not None
-    rejected = next(body for _label, body in responses if not body["ok"])
-    assert rejected["last_error"] == "Nu exista o legatura directa"
+    rejected_label, rejected = next(item for item in responses if not item[1]["ok"])
+    assert rejected["last_error"] == _no_link(
+        svc.label(svc.resolve(rejected_label)), svc.label(session.chain[1])
+    )
 
 
 def test_easy_moves_expose_only_coarse_direction_and_a_bounded_undo_signal(monkeypatch):

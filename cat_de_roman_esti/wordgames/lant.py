@@ -125,10 +125,10 @@ def _score_for(moves: int, optimal: int) -> int:
 
 
 def _share_line(moves: int, optimal: int, daily: str | None, category: str | None = None) -> str:
-    header = "cat_de_roman_esti · Lantul Cuvintelor"
+    header = "cat_de_roman_esti · Lanțul Cuvintelor"
     if category:
         header += f" · {category_label(category)}"
-    return f"{header}\n🔗 {moves}/{optimal} mutari\n{daily or ''}"
+    return f"{header}\n🔗 {moves}/{optimal} salturi\n{daily or ''}"
 
 
 @dataclass
@@ -658,7 +658,7 @@ def _pick_pair(
         candidates = [nid for nid in pool if svc.degree(nid) >= 1]
     if not candidates:
         if category is not None:
-            raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
+            raise http_error(503, "Nu există încă jocuri pentru această categorie.")
         raise http_error(503, "Graful nu are noduri jucabile.")
     sal_floor = _SALIENCE_FLOOR.get(difficulty, 0.0)
     if sal_floor:
@@ -719,8 +719,8 @@ def _pick_pair(
         return fallback
 
     if category is not None:
-        raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
-    raise http_error(503, "Nu am putut genera un lant valid; reincearca.")
+        raise http_error(503, "Nu există încă jocuri pentru această categorie.")
+    raise http_error(503, "Nu am putut genera un lanț valid; reîncearcă.")
 
 
 # --------------------------------------------------------------------- endpoints
@@ -740,7 +740,7 @@ class CreateGameView(ContractAPIView):
         if difficulty not in _DIFFICULTY_BANDS:
             difficulty = _DEFAULT_DIFFICULTY
         if category is not None and not is_known(category):
-            raise http_error(400, "Categorie necunoscuta.")
+            raise http_error(400, "Categorie necunoscută.")
         lo, hi = _DIFFICULTY_BANDS[difficulty]
         if daily is not None:
             seed = daily_seed(daily, GAME_KEY)
@@ -835,7 +835,7 @@ class MoveView(ContractAPIView):
             suggestions = svc.suggest(body.text)
             last_error = "Nu cunosc acest concept"
             if suggestions:
-                last_error = f"Nu cunosc acest concept. Poate cautai: {suggestions[0]}?"
+                last_error = f"Nu cunosc acest concept. Poate căutai: {suggestions[0]}?"
             return Response(
                 {"ok": False, "last_error": last_error, "suggestions": suggestions}
             )
@@ -844,10 +844,16 @@ class MoveView(ContractAPIView):
         # blames the corrected concept and not the player's raw typo.
         understood = f"Am înțeles: {svc.label(guess)}. " if corrected else ""
         if guess == prev:
-            return Response({"ok": False, "last_error": f"{understood}Esti deja aici"})
+            return Response({"ok": False, "last_error": f"{understood}Ești deja aici."})
         if svc.link(prev, guess) is None:
             return Response(
-                {"ok": False, "last_error": f"{understood}Nu exista o legatura directa"}
+                {
+                    "ok": False,
+                    "last_error": (
+                        f"{understood}{svc.label(guess)} nu are o legătură directă cu "
+                        f"{svc.label(prev)}. Alege un cuvânt din listă sau cere un indiciu."
+                    ),
+                }
             )
 
         session.chain.append(guess)
@@ -961,7 +967,7 @@ class HintView(ContractAPIView):
     def post(self, request, game_id: str, session: LantSession):
         if session.won:
             return _earned_hint_response(
-                session, {"hint": None, "message": "Ai ajuns deja la tinta."}
+                session, {"hint": None, "message": "Ai ajuns deja la țintă."}
             )
         if session.moves >= _MAX_MOVES:
             return _earned_hint_response(
@@ -1002,7 +1008,10 @@ class HintView(ContractAPIView):
                     )
             return _earned_hint_response(
                 session,
-                {"hint": None, "message": "Nicio scurtatura de aici — incearca sa revii."}
+                {
+                    "hint": None,
+                    "message": "Nicio scurtătură de aici — încearcă să revii cu Înapoi.",
+                },
             )
 
         shortest = _shortest_hops(session, dist_to_target)

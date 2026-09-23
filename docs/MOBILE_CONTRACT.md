@@ -274,10 +274,10 @@ look like:
 ```json
 {
   "ok": true,
-  "clue": { "pattern": "L_________", "message": "Un grup ramas are eticheta: L_________." },
+  "clue": { "pattern": "L_________", "message": "Numele unui grup rămas: L_________ (fiecare _ este o literă lipsă)." },
   "clues_used": 1,
   "clue_available": false,
-  "clues": [{ "pattern": "L_________", "message": "Un grup ramas are eticheta: L_________." }]
+  "clues": [{ "pattern": "L_________", "message": "Numele unui grup rămas: L_________ (fiecare _ este o literă lipsă)." }]
 }
 ```
 

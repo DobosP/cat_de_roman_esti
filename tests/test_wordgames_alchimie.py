@@ -186,7 +186,7 @@ def test_winning_play_through(client: Client) -> None:
     # On win the target id + description are revealed.
     assert state["target"]["revealed"] is True
     assert state["target"]["id"] is not None
-    assert "tinta" in state["message"].lower()
+    assert "ținta" in state["message"].lower()
     # Discovered concepts carry their two parents (the WHY).
     crafted = [i for i in state["inventory"] if i["parents"] is not None]
     assert crafted
@@ -349,7 +349,8 @@ def test_win_includes_score_and_share(client: Client) -> None:
     assert 100 <= state["score"] <= 1000
     share = state["share"]
     assert "Alchimie" in share
-    assert "combinatii" in share
+    moves = state["moves"]
+    assert f"{moves} {'combinație' if moves == 1 else 'combinații'}" in share
     assert "⚗️" in share
 
 

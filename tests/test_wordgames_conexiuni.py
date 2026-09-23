@@ -190,7 +190,7 @@ def test_correct_group_reveals_only_the_earned_category() -> None:
         {
             "key": cat,
             "label": _group_label(session, cat),
-            "tiles": [{"id": nid, "label": svc.label(nid)} for nid in members],
+            "tiles": [{"id": nid, "label": svc.display_label(nid)} for nid in members],
         }
     ]
     public_strings = _strings(body)
@@ -315,7 +315,7 @@ def test_winning_playthrough_score_and_share() -> None:
     assert last["score"] == 1000
     assert "share" in last
     assert "Conexiuni" in last["share"]
-    assert "0 greseli" in last["share"]
+    assert "0 greșeli" in last["share"]
     assert "solution" in last
     assert len(last["solution"]) == 4
     # cannot guess after the game is over
@@ -507,7 +507,7 @@ def test_score_and_share_reflect_two_clue_penalties() -> None:
     assert last["won"] is True
     assert last["score"] == 50  # three mistakes (750 pts) + two clue penalties (200 pts)
     assert last["share"].startswith("cat_de_roman_esti · Conexiuni · ")
-    assert "3 greseli" in last["share"]
+    assert "3 greșeli" in last["share"]
     assert "indiciu x2" in last["share"]
 
 
@@ -684,4 +684,54 @@ def test_share_grid_has_one_row_per_guess() -> None:
     # header + one row per guess (1 wrong + 4 correct = 5 rows)
     body_rows = [ln for ln in share.split("\n")[1:] if ln.strip()]
     assert len(body_rows) == 5
-    assert "1 greseli" in share
+    assert "1 greșeală" in share
+
+
+def _served_labels(session) -> list[str]:
+    from cat_de_roman_esti.wordgames.conexiuni import _full_solution, _tiles
+
+    labels = [tile["label"] for tile in _tiles(session, include_solved=True)]
+    for group in _full_solution(session, reveal=True):
+        labels.extend(tile["label"] for tile in group["tiles"])
+    return labels
+
+
+def test_display_label_allowlist_names_real_lowercase_kg_labels() -> None:
+    from cat_de_roman_esti.wordgames.service import LOWERCASE_DISPLAY_LABELS, get_service
+
+    svc = get_service()
+    by_label = {svc.label(nid): nid for nid in svc.all_ids()}
+    for name in LOWERCASE_DISPLAY_LABELS:
+        assert name in by_label, name
+        assert svc.display_label(by_label[name]) == name
+    assert svc.display_label(by_label["potecă"]) == "Potecă"
+    assert svc.label(by_label["potecă"]) == "potecă"
+
+
+def test_every_eligible_curated_board_serves_uppercase_initial_tiles() -> None:
+    from cat_de_roman_esti.wordgames.conexiuni import GAME_KEY, _session_from_curated
+    from cat_de_roman_esti.wordgames.packs import get_pack
+    from cat_de_roman_esti.wordgames.service import LOWERCASE_DISPLAY_LABELS
+
+    pack = get_pack()
+    pool = pack.pool(GAME_KEY)
+    if pack.ranked:
+        pool = [item for item in pool if item._pilot_eligible]
+    assert pool
+    for item in pool:
+        for label in _served_labels(_session_from_curated(item, None, None)):
+            assert not label[:1].islower() or label in LOWERCASE_DISPLAY_LABELS, (
+                item.id,
+                label,
+            )
+
+
+def test_casing_no_longer_marks_the_walkable_paths_group() -> None:
+    from cat_de_roman_esti.wordgames.conexiuni import GAME_KEY, _session_from_curated
+    from cat_de_roman_esti.wordgames.packs import get_pack
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    item = next(i for i in get_pack().pool(GAME_KEY) if i.id == "cx_viata_de_roman_367")
+    session = _session_from_curated(item, None, None)
+    assert any(get_service().label(nid)[:1].islower() for nid in session.order)
+    assert not any(label[:1].islower() for label in _served_labels(session))
