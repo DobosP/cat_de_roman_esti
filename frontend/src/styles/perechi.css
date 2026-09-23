@@ -26,8 +26,8 @@
   width: min(100%, 820px);
   align-self: center;
   display: grid;
-  /* Preserve familiar columns until text needs wider cards. */
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(8.5rem, calc((100% - 9px) / 2))), 1fr));
+  /* Enlarged text trades columns in whole steps only (4, 2, 1), never a ragged row. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 9px;
 }
 
@@ -144,9 +144,22 @@
   color: var(--perechi-accent);
 }
 
-@media (min-width: 760px) {
+/* Steps fit 8.5rem cards plus the 9px gap; four columns wait for a desktop viewport. */
+.perechi-game .game-container {
+  container-type: inline-size;
+}
+
+@container (width < calc(17rem + 9px)) {
   .perechi-grid {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, max(8.5rem, calc((100% - 27px) / 4))), 1fr));
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 760px) {
+  @container (width >= calc(34rem + 27px)) {
+    .perechi-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 }
 
