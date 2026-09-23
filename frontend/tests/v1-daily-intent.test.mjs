@@ -64,9 +64,20 @@ test("GameIntro consumes the intent from both start buttons and swaps only their
 
 test("resuming a saved free round from the circuit tells the player the daily still waits", () => {
   assert.match(resume, /onDailyBypassed\?: \(\) => void;/);
-  assert.match(resume, /if \(!dailyIntent\.active\) return;/);
-  assert.match(resume, /if \(daily\) dailyIntent\.consume\(\);\s*else if \(!terminal\) onDailyBypassed\?\.\(\);/);
-  assert.match(resume, /dailyResumeRef\.current\(Boolean\(\(state as \{ daily\?: unknown \}\)\.daily\), detail\.terminal\);/);
+  assert.match(resume, /if \(!dailyIntent\.active\) return false;/);
+  // Only today's daily uses up the intent; an older day's daily keeps it silently.
+  assert.match(
+    resume,
+    /if \(daily === todayLocal\(\)\) dailyIntent\.consume\(\);\s*else if \(!daily && !terminal && onDailyBypassed\) \{\s*onDailyBypassed\(\);\s*return true;/,
+  );
+  // The bypass is decided first so the screen can skip its own "Joc reluat." toast.
+  assert.match(
+    resume,
+    /const bypassed = dailyResumeRef\.current\(\(state as \{ daily\?: unknown \}\)\.daily, detail\.terminal\);\s*onResume\(state, \{ \.\.\.detail, bypassed \}\);/,
+  );
+  for (const name of ["Alchimie", "CaldRece", "Conexiuni", "Lant"]) {
+    assert.match(screens[name], /if \(!terminal && !bypassed\) onToast\("Joc reluat\.", "info"\);/, name);
+  }
   for (const [name, screen] of Object.entries(screens)) {
     assert.match(
       screen,
@@ -84,19 +95,32 @@ test("Intrusul and Perechi free results lead back to today's unfinished circuit 
       /!buildDailyCircuit\(scoreBoard\(\), todayLocal\(\)\)\.games\.find\(\(g\) => g\.game === GAME_KEY\)\?\.completed/,
       name,
     );
-    assert.match(screen, /const offerDaily = dailyIntent\.active && dailyPending && !state\?\.daily;/, name);
+    // The latch keeps the offer after a failed create; a started round clears it.
     assert.match(
       screen,
-      /offerDaily\s*\? \(\) => \{\s*dailyIntent\.consume\(\);\s*void start\(\{ daily: todayLocal\(\) \}\);\s*\}/,
+      /const offerDaily = \(dailyIntent\.active \|\| dailyRetry\) && dailyPending && state\?\.daily !== todayLocal\(\);/,
       name,
     );
-    assert.match(screen, /offerDaily \? "Joacă provocarea zilei →" : undefined/, name);
+    assert.match(
+      screen,
+      /offerDaily\s*\? \(\) => \{\s*setDailyRetry\(true\);\s*dailyIntent\.consume\(\);\s*void start\(\{ daily: todayLocal\(\) \}\);\s*\}/,
+      name,
+    );
+    assert.match(screen, /setState\(fresh\);\s*setDailyRetry\(false\);/, name);
+    assert.match(screen, /replayLabel=\{offerDaily \? "Joacă provocarea zilei →" : state\.daily \? "Joacă liber →" : undefined\}/, name);
   }
 });
 
 test("daily badges show the Romanian dd.mm.yyyy date while seeds keep the raw key", async () => {
-  const { formatDayKey } = await importTs(read("../src/share.ts"));
+  const { displayDetail, formatDayKey, roNoun } = await importTs(read("../src/share.ts"));
   assert.equal(formatDayKey("2026-09-23"), "23.09.2026");
+  // Stored details keep raw keys for dedupe; history and records show them as dd.mm.yyyy.
+  assert.equal(displayDetail("4/3 salturi · 2026-09-23"), "4/3 salturi · 23.09.2026");
+  assert.equal(displayDetail("câștigat · 3 greșeli"), "câștigat · 3 greșeli");
+  assert.deepEqual(
+    [1, 2, 19, 20, 64, 100, 101, 120].map((n) => `${n} ${roNoun(n, "salt", "salturi")}`),
+    ["1 salt", "2 salturi", "19 salturi", "20 de salturi", "64 de salturi", "100 de salturi", "101 salturi", "120 de salturi"],
+  );
   assert.match(screens.Intrusul, /label="ZILNIC" value=\{formatDayKey\(state\.daily\)\}/);
   assert.match(screens.Perechi, /label="ZILNIC" value=\{formatDayKey\(state\.daily\)\}/);
   assert.match(screens.Conexiuni, /label="ZILNIC" value=\{formatDayKey\(state\.daily\)\}/);

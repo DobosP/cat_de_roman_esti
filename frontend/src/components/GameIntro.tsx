@@ -10,6 +10,7 @@ import { m } from "framer-motion";
 import { Badge, Button } from "@roedu/ui";
 import { useDailyIntent } from "../hooks/useDailyIntent";
 import type { ScoreEntry } from "../scores";
+import { displayDetail } from "../share";
 import { PlayGuide, type PlayGuideStep } from "./PlayGuide";
 import { StartFailureNotice } from "./StartFailureNotice";
 
@@ -139,7 +140,7 @@ export function GameIntro({
 
       {best && (
         <p className="faint" style={{ margin: 0, fontSize: "0.82rem" }}>
-          Recordul tău: <strong style={{ color: accent }}>{best.score}</strong> · {best.detail}
+          Recordul tău: <strong style={{ color: accent }}>{best.score}</strong> · {displayDetail(best.detail)}
         </p>
       )}
     </m.div>

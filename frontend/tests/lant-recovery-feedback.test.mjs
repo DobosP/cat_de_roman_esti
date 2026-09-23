@@ -102,7 +102,7 @@ test("Lanț intro discloses the corridor/detour mix, free undo, free typing, and
   assert.match(screen, /onClick=\{\(\) => setShowHow\(\(v\) => !v\)\}/);
   assert.match(screen, /Cum funcționează/);
   assert.match(screen, /showHow && \(/);
-  assert.match(screen, /amestecă drumul optim cu ocoluri sigure/);
+  assert.match(screen, /amestecă drumul cel mai scurt cu ocoluri sigure/);
   assert.match(screen, /Înapoi e gratuit și nelimitat/);
   assert.match(screen, /Poți scrie orice concept legat/);
   assert.match(screen, /64 de salturi pe lanț/);
@@ -178,7 +178,7 @@ test("Lanț give-up forgets only a settled live board and reopens the intro", ()
 test("Lanț announces the new position and counts jumps with one word", () => {
   assert.match(screen, /<div className="lant-current" aria-live=\{won \? "off" : "polite"\} aria-atomic="true">/);
   assert.match(screen, /label="SALTURI"/);
-  assert.match(screen, /state\.moves === 1 \? "salt" : "salturi"/);
+  assert.match(screen, /roNoun\(state\.moves, "salt", "salturi"\)/);
   assert.match(screen, /\(drumul cel mai scurt: \{state\.optimal\}\)/);
   assert.match(screen, /`\$\{state\.moves\}\/\$\{state\.optimal\} salturi/);
   assert.doesNotMatch(screen, /mutări|MUTĂRI|\(optim/);

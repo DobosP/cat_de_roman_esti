@@ -220,7 +220,7 @@ export default function CaldRece({
   const best = bestScore(GAME_KEY);
 
   const applyResumedGame = useCallback(
-    (saved: ContextoState, { terminal }: { terminal: boolean }) => {
+    (saved: ContextoState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
       actionOwner.invalidate();
       unconfirmedAction.current = false;
       setActionSync(null);
@@ -238,7 +238,8 @@ export default function CaldRece({
       setIsPuzzleRecord(false);
       setShowIntro(false);
       window.setTimeout(() => inputRef.current?.focus(), 0);
-      if (!terminal) onToast("Joc reluat.", "info");
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
     },
     [actionOwner, onToast],
   );

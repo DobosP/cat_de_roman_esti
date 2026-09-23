@@ -167,7 +167,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, []);
 
   const applyResumedGame = useCallback(
-    (s: ConexiuniState, { terminal }: { terminal: boolean }) => {
+    (s: ConexiuniState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
       actionOwner.invalidate();
       setActionSync(null);
       setBusy(false);
@@ -182,7 +182,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       setHint(null);
       setShuffleNonce(0);
       setShake(0);
-      if (!terminal) onToast("Joc reluat.", "info");
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
     },
     [actionOwner, onToast],
   );

@@ -103,3 +103,16 @@ test("an unusable import file throws one plain Romanian message and changes noth
   }
   assert.equal(storage.getItem(SCORE_KEY), before);
 });
+
+test("a lost daily stays counted in the circuit after many later plays", () => {
+  const day = "2026-09-23";
+  const loss = scores.recordScore("conexiuni", 0, "pierdut", { puzzleKey: `daily-${day}`, daily: day });
+  assert.equal(loss.isBest, false);
+  assert.equal(loss.isPuzzleBest, false);
+  for (let i = 0; i < 60; i += 1) {
+    scores.recordScore("conexiuni", 500, "câștigat", { puzzleKey: `free-${i}` });
+  }
+  const row = scores.buildDailyCircuit(scores.scoreBoard(), day).games.find((g) => g.game === "conexiuni");
+  assert.equal(row.completed, true);
+  assert.equal(row.score, 0);
+});

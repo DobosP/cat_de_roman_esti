@@ -111,7 +111,8 @@ export default function Intrusul({ onExit, onToast }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [state],
   );
-  const offerDaily = dailyIntent.active && dailyPending && !state?.daily;
+  const [dailyRetry, setDailyRetry] = useState(false);
+  const offerDaily = (dailyIntent.active || dailyRetry) && dailyPending && state?.daily !== todayLocal();
   const exitSafely = useCallback(() => {
     if (startInFlight.current) return;
     actionOwner.invalidate();
@@ -160,6 +161,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       try {
         const fresh = await intrusulApi.create(opts);
         setState(fresh);
+        setDailyRetry(false);
         setActionSync(null);
         setBusy(false);
         active.remember(fresh.game_id);
@@ -547,12 +549,13 @@ export default function Intrusul({ onExit, onToast }: Props) {
             onReplay={
               offerDaily
                 ? () => {
+                    setDailyRetry(true);
                     dailyIntent.consume();
                     void start({ daily: todayLocal() });
                   }
                 : () => void start({ previousGameId: state.game_id })
             }
-            replayLabel={state.daily ? "Joacă liber →" : offerDaily ? "Joacă provocarea zilei →" : undefined}
+            replayLabel={offerDaily ? "Joacă provocarea zilei →" : state.daily ? "Joacă liber →" : undefined}
             onExit={exitSafely}
           >
             <div className="intrusul-solution">

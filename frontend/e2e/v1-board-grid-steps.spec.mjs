@@ -73,8 +73,9 @@ test("Lanț stacks the route on narrow text-constrained screens so long words st
   // Presentation stress with real KG labels; no board or response mutation.
   const words = page.locator(".lant-route .lant-route-word");
   await words.first().evaluate((word) => { word.textContent = "Transfăgărășan"; });
-  await words.last().evaluate((word) => { word.textContent = "Tradiționalism"; });
-  for (const [width, px, stacked] of [[320, 16, true], [390, 24, true], [390, 16, false], [1280, 16, false]]) {
+  await words.last().evaluate((word) => { word.textContent = "Teleenciclopedia"; });
+  // Every phone stacks (30em is 480px at default text); desktop keeps the three-track route.
+  for (const [width, px, stacked] of [[320, 16, true], [390, 16, true], [412, 24, true], [390, 24, true], [1280, 16, false]]) {
     await layout(page, width, px);
     const tracks = await page.locator(".lant-route").evaluate((route) =>
       globalThis.getComputedStyle(route).gridTemplateColumns.split(" ").length);
@@ -90,7 +91,10 @@ test("Alchimie inventory keeps long words whole on phones and desktop", async ({
   await start(page, alchimie);
   const label = page.locator(`${alchimie.board} .alchemy-word-label`).first();
   // Real KG labels; two columns stay at default phone text, enlarged text drops to one.
-  for (const [width, px, word] of [[320, 16, "Electricitate"], [390, 24, "Transfăgărășan"], [1280, 16, "Transfăgărășan"]]) {
+  for (const [width, px, word] of [
+    [320, 16, "Electricitate"], [360, 16, "Electricitate"], [360, 20, "Cinematografia"],
+    [412, 24, "Cinematografia"], [390, 24, "Transfăgărășan"], [1280, 16, "Transfăgărășan"],
+  ]) {
     await label.evaluate((node, text) => { node.textContent = text; }, word);
     await layout(page, width, px);
     expect(await linesOf(label), `${width}px / ${px}px text`).toBe(1);

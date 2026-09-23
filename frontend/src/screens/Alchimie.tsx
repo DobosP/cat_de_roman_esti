@@ -183,7 +183,7 @@ function AlchimieChallenge({
   }, []);
 
   const applyResumedGame = useCallback(
-    (s: AlchimieState, { terminal }: { terminal: boolean }) => {
+    (s: AlchimieState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
       actionOwner.invalidate();
       setActionSync(null);
       setBusy(false);
@@ -193,7 +193,8 @@ function AlchimieChallenge({
       setCategory(s.board_category ?? null);
       setIsRecord(false);
       setIsPuzzleRecord(false);
-      if (!terminal) onToast("Joc reluat.", "info");
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
     },
     [actionOwner, applyAuthoritativeState, onToast],
   );

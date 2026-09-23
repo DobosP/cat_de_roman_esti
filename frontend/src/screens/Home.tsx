@@ -27,7 +27,7 @@ import {
   type GameScoreEntry,
   type ScoreEntry,
 } from "../scores";
-import { appUrl, copyResult, formatDayKey, todayLocal } from "../share";
+import { appUrl, copyResult, displayDetail, formatDayKey, roNoun, todayLocal } from "../share";
 
 type HistoryTab = "top" | "today" | "recent";
 
@@ -122,8 +122,8 @@ export default function Home({
       try {
         const outcome = importScores(await file.text());
         setBoard(scoreBoard());
-        const entries = `${outcome.entries} ${outcome.entries === 1 ? "rezultat" : "rezultate"}`;
-        const games = `${outcome.games} ${outcome.games === 1 ? "joc" : "jocuri"}`;
+        const entries = `${outcome.entries} ${roNoun(outcome.entries, "rezultat", "rezultate")}`;
+        const games = `${outcome.games} ${roNoun(outcome.games, "joc", "jocuri")}`;
         onToast(`Importat: ${entries} în ${games}.`, "success");
       } catch (err) {
         onToast(
@@ -443,7 +443,7 @@ function HistoryRows({ rows, empty }: { rows: GameScoreEntry[]; empty: string })
             <div className="col" style={{ gap: 2, minWidth: 0 }}>
               <strong>{GAME_TITLES[entry.game as GameKey] ?? entry.game}</strong>
               <span className="muted" style={{ fontSize: "0.84rem" }}>
-                {entry.detail}
+                {displayDetail(entry.detail)}
               </span>
             </div>
           </div>
@@ -472,7 +472,7 @@ function ScoreLine({
   return (
     <div className="row spread" style={{ gap: 8, alignItems: "baseline" }}>
       <span className="muted" style={{ fontSize: "0.82rem" }}>
-        {entry.detail}
+        {displayDetail(entry.detail)}
       </span>
       <strong style={{ color: accent, fontVariantNumeric: "tabular-nums" }}>
         {entry.score}

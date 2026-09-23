@@ -267,7 +267,9 @@ function buildScoreUpdate(
     if (entry.score > 0) rec.nonDailyWon = true;
   }
   if (isBest) rec.best = entry;
-  if (puzzleKey && isPuzzleBest) {
+  // A first daily attempt keeps its puzzle row even at 0 points, so the daily circuit
+  // still counts it after later plays push it out of `recent`; it is never a record.
+  if (puzzleKey && (isPuzzleBest || (entry.daily && prevPuzzle === null))) {
     rec.puzzles = { ...(rec.puzzles ?? {}), [puzzleKey]: entry };
     rec.puzzles = capPuzzles(rec.puzzles);
   }

@@ -66,7 +66,7 @@ test("daily derived results identify free play while normal replay keeps its def
   for (const screen of [intrusul, perechi]) {
     assert.match(
       screen,
-      /replayLabel=\{state\.daily \? "Joacă liber →" : offerDaily \? "Joacă provocarea zilei →" : undefined\}/,
+      /replayLabel=\{offerDaily \? "Joacă provocarea zilei →" : state\.daily \? "Joacă liber →" : undefined\}/,
     );
     assert.match(screen, /: \(\) => void start\(\{ previousGameId: state\.game_id \}\)\n\s*\}/);
   }

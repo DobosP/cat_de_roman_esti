@@ -31,7 +31,7 @@ import { bestScore } from "../scores";
 import { gameByKey } from "../games";
 import { categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
-import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, formatDayKey, roNoun, stableKey, todayLocal } from "../share";
 import "../styles/lant.css";
 
 const GAME_KEY = "lant";
@@ -185,7 +185,7 @@ export default function Lant({
   }, [state, puzzleKey]);
 
   const applyResumedGame = useCallback(
-    (fresh: LantState, { terminal }: { terminal: boolean }) => {
+    (fresh: LantState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
       actionOwner.invalidate();
       pendingActionFocus.current = null;
       setActionSync(null);
@@ -199,7 +199,8 @@ export default function Lant({
       setStartFailed(false);
       setState(fresh);
       setText("");
-      if (!terminal) onToast("Joc reluat.", "info");
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
     },
     [actionOwner, onToast],
   );
@@ -617,7 +618,7 @@ export default function Lant({
                 </Button>
                 {showHow && (
                   <ul id="lant-intro-disclosure" className="lant-intro-disclosure faint">
-                    <li>Salturile afișate amestecă drumul optim cu ocoluri sigure.</li>
+                    <li>Salturile afișate amestecă drumul cel mai scurt cu ocoluri sigure.</li>
                     <li>Înapoi e gratuit și nelimitat.</li>
                     <li>Poți scrie orice concept legat — nu doar din listă.</li>
                     <li>Limită: 64 de salturi pe lanț.</li>
@@ -673,7 +674,7 @@ export default function Lant({
           <Hud>
             <StatBadge
               label="SALTURI"
-              value={`${state.moves} ${state.moves === 1 ? "salt" : "salturi"}`}
+              value={`${state.moves} ${roNoun(state.moves, "salt", "salturi")}`}
               accent={DEF.accent}
               title="Salturi făcute"
             />
@@ -771,7 +772,7 @@ export default function Lant({
           >
             Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}
             în <strong style={{ color: "var(--text)" }}>{state.moves}</strong>{" "}
-            {state.moves === 1 ? "salt" : "salturi"} (drumul cel mai scurt: {state.optimal}).
+            {roNoun(state.moves, "salt", "salturi")} (drumul cel mai scurt: {state.optimal}).
             {recovery?.message ? (
               <span className="muted" style={{ display: "block", marginTop: 8 }}>
                 <span aria-hidden="true" style={{ marginRight: 6 }}>
@@ -936,7 +937,7 @@ export default function Lant({
                       <span className="muted">
                         {hintRemaining <= 1
                           ? "Ești la un pas de țintă!"
-                          : `${hintRemaining} salturi până la țintă`}
+                          : `${hintRemaining} ${roNoun(hintRemaining, "salt", "salturi")} până la țintă`}
                       </span>
                     )}
                     {hint.alternatives_choices?.length ? (
@@ -981,7 +982,7 @@ export default function Lant({
         <GameOptions game="lant">
           <p className="muted lant-round-details">
             De la <strong>{state.start.label}</strong> la <strong>{state.target.label}</strong>.
-            {" "}Drumul optim: {state.optimal} salturi{overPar > 0 ? ` · ${overPar} peste optim` : ""}.
+            {" "}Drumul cel mai scurt: {state.optimal} {roNoun(state.optimal, "salt", "salturi")}{overPar > 0 ? ` · ai făcut ${overPar} ${roNoun(overPar, "salt", "salturi")} în plus` : ""}.
             {state.daily ? ` Provocarea zilei: ${formatDayKey(state.daily)}.` : ""}
             {state.board_category ? ` Categoria: ${categoryLabel(state.board_category)}.` : ""}
           </p>

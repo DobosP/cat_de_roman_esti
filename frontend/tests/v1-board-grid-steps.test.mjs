@@ -36,9 +36,10 @@ test("quick games keep two columns below a desktop viewport", () => {
 
 test("Lant stacks its route and Alchimie trades inventory columns for whole long words", () => {
   const lant = read("../src/styles/lant.css");
-  assert.match(lant, /@media \(max-width: 24em\) \{\s*\.lant-route \{\s*grid-template-columns: minmax\(0, 1fr\);/);
-  assert.match(lant, /@media \(max-width: 24em\)[\s\S]*?\.lant-route-arrow \{\s*transform: rotate\(90deg\);\s*justify-self: start;/);
+  assert.match(lant, /@media \(max-width: 30em\) \{\s*\.lant-route \{\s*grid-template-columns: minmax\(0, 1fr\);/);
+  assert.match(lant, /@media \(max-width: 30em\)[\s\S]*?\.lant-route-arrow \{\s*transform: rotate\(90deg\);\s*justify-self: start;/);
   const alchimie = read("../src/styles/alchimie.css");
+  assert.match(alchimie, /@media \(max-width: 19\.9em\) \{\s*\.alchemy-screen \.alchemy-inventory-grid \{ grid-template-columns: minmax\(0, 1fr\); \}/);
   assert.match(alchimie, /@media \(max-width: 640px\)[\s\S]*?\.alchemy-inventory-grid \{ grid-template-columns: repeat\(auto-fit, minmax\(min\(100%, max\(7rem, calc\(\(100% - 10px\) \/ 2\)\)\), 1fr\)\); \}/);
   assert.doesNotMatch(alchimie, /hyphens:/);
 });
