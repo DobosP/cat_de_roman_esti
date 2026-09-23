@@ -27,7 +27,7 @@ from .packs import (
     DIFFICULTIES,
     normalized_text_sha256,
 )
-from .release_reserve import quick_is_reserved
+from .release_reserve import get_reserve, quick_is_reserved
 
 DERIVED_GAMES = ("intrusul", "perechi")
 PACK_DIR = Path(__file__).resolve().parent.parent / "fixtures"
@@ -664,4 +664,7 @@ def load_derived_catalog(
 def get_derived_catalog() -> DerivedCatalog:
     from .quick_catalog import extend_catalog
 
+    # Resolve the release reserve here so drift fails inside the games' guarded
+    # catalog load (JSON 503), not later in pool() as an unhandled 500.
+    get_reserve()
     return extend_catalog(load_derived_catalog())

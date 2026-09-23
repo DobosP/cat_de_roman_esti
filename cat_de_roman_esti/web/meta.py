@@ -13,9 +13,11 @@ from django.http import HttpRequest, JsonResponse
 from drf_spectacular.utils import extend_schema
 from rest_framework.response import Response
 
+from .. import __version__
 from ..data import fixture_manifest
 from ..wordgames.categories import CATEGORIES
 from ..wordgames.packs import DIFFICULTIES, GAME_KINDS, GamesPack, get_pack
+from ..wordgames.release_reserve import get_reserve
 from ..wordgames.service import get_service
 from .http import ContractAPIView
 
@@ -96,10 +98,13 @@ def warm() -> None:
     """Eagerly build the KG service + manifest (fail fast on a broken fixture).
 
     Called from asgi.py/wsgi.py so the first request doesn't pay the load — the
-    Django twin of what ``create_app()`` did at construction time.
+    Django twin of what ``create_app()`` did at construction time. The packaged
+    release reserve is checked too, so a broken reserve stops startup; the derived
+    catalog is not warmed, keeping its faults per-game 503s.
     """
     get_service()
     _manifest_payload()
+    get_reserve()
 
 
 class HealthView(ContractAPIView):
@@ -109,6 +114,7 @@ class HealthView(ContractAPIView):
         return Response(
             {
                 "ok": True,
+                "version": __version__,
                 "source": "offline",
                 "concepts": len(svc.all_ids()),
                 "games": GAMES,
