@@ -134,7 +134,8 @@ def main() -> None:
              "runtime manifest pin differs")
     if args.write:
         write_copies(expected)
-    _require(all(p.read_bytes() == expected for p in COPIES), "stale artifact copies")
+    _require(all(p.read_bytes().replace(b"\r\n", b"\n") == expected for p in COPIES),
+             "stale artifact copies")
     for path in COPIES:
         reserve.load_reserve(path)
     print("release reserve GREEN: 20 pack / 3 quick, archived records unchanged")

@@ -280,6 +280,9 @@ def _vite_asset_is_immutable(path: str, url: str) -> bool:
 
 
 WHITENOISE_IMMUTABLE_FILE_TEST = _vite_asset_is_immutable
+# Everything else, including the SPA shell at "/", revalidates on every load
+# (ETag/Last-Modified keep that cheap) so a redeploy is picked up at once.
+WHITENOISE_MAX_AGE = 0
 
 # WhiteNoise serves the built SPA from the URL root; deep links fall through to
 # the SPA catch-all view.

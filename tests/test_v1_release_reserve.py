@@ -21,6 +21,7 @@ from cat_de_roman_esti.wordgames.derived_catalog import (
 from cat_de_roman_esti.wordgames.packs import DEFAULT_PACK, GAME_KINDS, load_pack
 from scripts import build_release_reserve_v1 as builder
 from scripts import rank_games_pack as ranking
+from tests.current_content import CURRENT_CONTENT
 
 CONTROL = "vi_71e487036cbba4014f67"
 
@@ -215,12 +216,14 @@ def test_game_level_history_and_starter_fallback_cannot_resurrect_reserve(
 
 def test_combined_inventory_distinguishes_storage_from_selection() -> None:
     catalog = get_derived_catalog()
-    assert catalog.counts() == {"intrusul": 228, "perechi": 193}
-    assert {game: len(catalog.pool(game)) for game in catalog.counts()} == {
-        "intrusul": 226, "perechi": 192,
-    }
+    assert catalog.counts() == CURRENT_CONTENT.quick_counts["by_game"]
+    assert {game: len(catalog.pool(game)) for game in catalog.counts()} == (
+        CURRENT_CONTENT.quick_selectable_counts["by_game"]
+    )
     assert {game: sum(b._standard_score >= 55 for b in catalog.pool(game))
-            for game in catalog.counts()} == {"intrusul": 188, "perechi": 153}
+            for game in catalog.counts()} == (
+        CURRENT_CONTENT.quick_selectable_counts["preferred_by_game"]
+    )
     assert CONTROL in {b._catalog_id for b in catalog.pool("intrusul")}
 
 

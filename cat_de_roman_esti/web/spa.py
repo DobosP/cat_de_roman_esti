@@ -9,6 +9,7 @@ never get here — urls.py routes them to the JSON 404 first.
 from __future__ import annotations
 
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.utils.cache import patch_cache_control
 
 from .settings import STATIC_DIR
 
@@ -54,7 +55,10 @@ def spa_index(request: HttpRequest, *args, **kwargs) -> HttpResponse:
         return HttpResponse(status=404)
     index_html = STATIC_DIR / "index.html"
     if index_html.exists():
-        return HttpResponse(index_html.read_bytes(), content_type="text/html; charset=utf-8")
+        # Deep links share the shell's revalidate-always policy (settings.py).
+        response = HttpResponse(index_html.read_bytes(), content_type="text/html; charset=utf-8")
+        patch_cache_control(response, no_cache=True)
+        return response
     # No build: only the root gets the friendly placeholder (FastAPI-era behavior);
     # everything else is a plain JSON 404.
     if request.path in ("", "/"):
