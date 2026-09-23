@@ -4,10 +4,10 @@ import { GameHelp } from "./GameHelp";
 import "../styles/game-options.css";
 
 /** Optional tools stay available without occupying the main play area. */
-export function GameOptions({ game, children }: { game: GameKey; children?: ReactNode }) {
+export function GameOptions({ game, help = true, children }: { game: GameKey; help?: boolean; children?: ReactNode }) {
   return (
     <>
-      <GameHelp game={game} />
+      {help && <GameHelp game={game} />}
       {children && (
         <details className="game-options">
           <summary>Opțiuni de joc</summary>

@@ -61,15 +61,28 @@ test("the guess form exposes the paid clue while optional controls stay in the m
   assert.ok(form > hudEnd);
   assert.ok(actions > form);
   assert.match(screen, /\{clueActionLabel\}/);
-  assert.match(screen, /`Indiciu în \$\{clueCountdown\}`/);
+  assert.match(screen, /`Indiciu după \$\{clueCountdown\} \$\{clueCountdown === 1 \? "încercare" : "încercări"\}`/);
   assert.match(screen, /aria-describedby="contexto-clue-cost"/);
   assert.match(screen, /−120 puncte \/ indiciu/);
-  const options = screen.match(/<GameOptions game=\{GAME_KEY\}>[\s\S]*?<\/GameOptions>/);
+  const options = screen.match(/<GameOptions game=\{GAME_KEY\} help=\{false\}>[\s\S]*?<\/GameOptions>/);
   assert.ok(options);
   assert.match(options[0], /onClick=\{requestRevealConfirmation\}/);
   assert.match(options[0], /onClick=\{showOptions\}/);
   assert.match(options[0], /aria-label="Ordinea încercărilor"/);
   assert.match(css, /\.contexto-action-row \.roedu-btn,[\s\S]*?min-height: 44px/);
+});
+
+test("rules sit below the clue/options row and exhausted clues explain themselves", () => {
+  const tools = screen.indexOf('<div className="contexto-tools">');
+  const toolsEnd = screen.indexOf("</GameOptions>", tools);
+  const help = screen.indexOf("<GameHelp game={GAME_KEY} />");
+  assert.ok(tools > 0 && toolsEnd > tools);
+  assert.ok(help > toolsEnd, "DOM order equals visual order: clue | options, then full-width rules");
+  assert.match(screen, /<GameOptions game=\{GAME_KEY\} help=\{false\}>/);
+  assert.match(screen, /!state\?\.clue_available && clueCountdown === 0\s*\? "Nu mai sunt indicii pentru această rundă\."\s*: "−120 puncte \/ indiciu"/);
+  assert.match(screen, /`Disponibil după încă \$\{clueCountdown\} \$\{clueCountdown === 1 \? "încercare" : "încercări"\}`/);
+  assert.match(screen, />\s*Arată răspunsul\s*<\/Button>/);
+  assert.doesNotMatch(screen, />\s*Răspuns\s*</);
 });
 
 test("reveal requires an inline confirmation and the first tap cannot call giveup", () => {

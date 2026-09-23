@@ -130,7 +130,7 @@ test("a lost give-up response reveals only the server's terminal answer without 
   const counts = traffic(page, initial.game_id);
   await loseCommittedResponse(page, initial.game_id, "giveup");
   await openGameOptions(page, game);
-  await page.getByRole("button", { name: "Răspuns", exact: true }).click();
+  await page.getByRole("button", { name: "Arată răspunsul", exact: true }).click();
   const failed = responseFor(page, initial.game_id, "giveup");
   await page.getByRole("button", { name: "Da, arată", exact: true }).click();
   expect((await failed).status()).toBe(503);
