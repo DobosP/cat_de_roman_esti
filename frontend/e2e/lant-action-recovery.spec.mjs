@@ -157,7 +157,7 @@ test("a lost undo restores the earlier position and discards help earned at the 
   await page.getByRole("button", { name: "Înapoi", exact: true }).click();
   expect((await response).status()).toBe(503);
   await expect(field(page)).toBeEnabled();
-  await expect(page.locator(".hud")).toContainText("0 mutări");
+  await expect(page.locator(".hud")).toContainText("0 salturi");
   await expect(page.locator(".lant-hint-panel")).toHaveCount(0);
   const server = await (await request.get(gameURL(game, initial.game_id))).json();
   expect(server.current).toEqual(initial.current);
@@ -199,7 +199,7 @@ test("failed verification locks mutations and its persistent retry only reads", 
   await expect(field(page)).toBeEnabled();
   await expect(field(page)).toHaveValue("");
   await expect(verify(page)).toHaveCount(0);
-  await expect(page.locator(".hud")).toContainText("1 mutare");
+  await expect(page.locator(".hud")).toContainText("1 salt");
   expect(counts).toEqual({ reads: 2, mutations: 1 });
   const server = await (await request.get(gameURL(game, initial.game_id))).json();
   expect(server.moves).toBe(1);
@@ -249,7 +249,7 @@ for (const missing of [false, true]) {
     await currentGame(page).click();
     expect((await loaded).status()).toBe(200);
     await expect(field(page)).toBeEnabled();
-    await expect(page.locator(".hud")).toContainText("0 mutări");
+    await expect(page.locator(".hud")).toContainText("0 salturi");
     expect(await remembered(page)).toBe(newer.game_id);
     expect(await played(page)).toBe(0);
     await other.close();
@@ -275,7 +275,7 @@ test("leaving during recovery preserves the old pointer and a late callback cann
   const oldCompleted = responseFor(page, initial.game_id, "", "GET");
   held.release();
   await oldCompleted;
-  await expect(page.locator(".hud")).toContainText("0 mutări");
+  await expect(page.locator(".hud")).toContainText("0 salturi");
   await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toHaveCount(0);
   expect(await remembered(page)).toBe(newer.game_id);
   expect(await played(page)).toBe(0);

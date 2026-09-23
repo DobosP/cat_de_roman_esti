@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, deterministicStarts, gameURL, start } from "./games.mjs";
+import { games, activeKey, deterministicStarts, gameURL, start } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
 const hints = (page) => page.getByRole("button", { name: /💡 (?:Indiciu|Mai clar)/ });
@@ -148,4 +148,25 @@ test("keyboard focus follows a consumed hint to a usable next word on either poi
   const moved = await (await nextResponse).json();
   expect(moved.ok).toBe(true);
   expect(moved.moves).toBe(2);
+});
+
+test("'Începe alt lanț' abandons the board and re-entering opens the intro, not the old board", async ({ page }) => {
+  const initial = await start(page, game);
+  await expect(page.getByRole("button", { name: "Începe alt lanț", exact: true })).toBeHidden();
+  await page.locator(".game-options > summary").click();
+  const giveUp = page.getByRole("button", { name: "Începe alt lanț", exact: true });
+  await expect(giveUp).toHaveAttribute("title", "Renunță la acest lanț și alege altul");
+  await tapOrClick(giveUp);
+  const play = page.getByRole("button", { name: /^Joacă(?: →)?$/ });
+  await expect(play).toBeEnabled();
+  expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBeNull();
+  let reads = 0;
+  page.on("request", (request) => {
+    if (request.method() === "GET" && new URL(request.url()).pathname === gameURL(game, initial.game_id)) reads += 1;
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: /^Joacă Lanțul Cuvintelor —/ }).click();
+  await expect(play).toBeEnabled();
+  await expect(page.locator(game.board)).toHaveCount(0);
+  expect(reads).toBe(0);
 });

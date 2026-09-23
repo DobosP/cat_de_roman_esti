@@ -19,12 +19,12 @@ test("one start reaches the guess field with setup and secondary tools tucked aw
   await expect(field(page)).toBeInViewport();
   expect((await field(page).boundingBox()).y).toBeLessThan(280);
   await expect(page.locator(".game-options")).not.toHaveAttribute("open", "");
-  await expect(page.getByRole("button", { name: "Răspuns", exact: true })).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "Arată răspunsul", exact: true })).not.toBeVisible();
   await expect(page.getByRole("button", { name: "Recente", exact: true })).not.toBeVisible();
   await expect(page.locator("#contexto-rank-guide")).toHaveText("Un număr mai mic = mai aproape. #1 este ținta.");
   await expect(page.getByRole("button", { name: "Cum citesc #?", exact: true })).toHaveCount(0);
   await expect(page.locator("#contexto-clue-cost")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Indiciu în 3", exact: true }))
+  await expect(page.getByRole("button", { name: "Indiciu după 3 încercări", exact: true }))
     .toHaveAccessibleDescription("−120 puncte / indiciu");
 });
 
@@ -85,7 +85,7 @@ test("the options menu preserves explicit reveal confirmation and optional recen
     .toHaveText(latest.guess.label);
   await page.getByRole("button", { name: "Bune", exact: true }).click();
   await expect(page.locator("#contexto-guess-list .contexto-guess-row strong")).toHaveText(rankOrder);
-  await page.getByRole("button", { name: "Răspuns", exact: true }).click();
+  await page.getByRole("button", { name: "Arată răspunsul", exact: true }).click();
   const cancel = page.getByRole("button", { name: "Nu", exact: true });
   await expect(cancel).toBeFocused();
   await expect(cancel).toBeInViewport();
@@ -112,7 +112,7 @@ test("the guess field and reveal confirmation stay usable at 320px with a short 
   expect(overflow.scroll).toBeLessThanOrEqual(overflow.client + 1);
   await options(page).click();
   await expect(page.getByRole("button", { name: "Începe alt joc", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Răspuns", exact: true }).click();
+  await page.getByRole("button", { name: "Arată răspunsul", exact: true }).click();
   const cancel = page.getByRole("button", { name: "Nu", exact: true });
   await expect(cancel).toBeFocused();
   await expect(cancel).toBeInViewport();
@@ -121,4 +121,46 @@ test("the guess field and reveal confirmation stay usable at 320px with a short 
     scroll: element.scrollWidth, client: element.clientWidth,
   }));
   expect(expandedOverflow.scroll).toBeLessThanOrEqual(expandedOverflow.client + 1);
+});
+
+test("rules open full width below the clue button and 'Opțiuni de joc' stays beside it", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await start(page, game);
+  const clue = page.locator(".contexto-action-row");
+  const summary = options(page);
+  const help = page.locator(".contexto-screen details.game-help");
+  await help.locator("summary").click();
+  await expect(help).toHaveAttribute("open", "");
+  const [clueBox, optionsBox, helpBox, toolsBox] = await Promise.all([
+    clue.boundingBox(), summary.boundingBox(), help.boundingBox(), page.locator(".contexto-tools").boundingBox(),
+  ]);
+  await test.info().attach("help-layout", {
+    body: JSON.stringify({ clueBox, optionsBox, helpBox, toolsBox }, null, 2), contentType: "application/json",
+  });
+  expect(Math.abs(optionsBox.y - clueBox.y)).toBeLessThan(2);
+  expect(optionsBox.x).toBeGreaterThan(clueBox.x + clueBox.width);
+  expect(helpBox.y).toBeGreaterThanOrEqual(Math.max(clueBox.y + clueBox.height, optionsBox.y + optionsBox.height));
+  expect(Math.abs(helpBox.width - toolsBox.width)).toBeLessThan(2);
+});
+
+test("the clue countdown label fits its half of the row at 320px", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  await start(page, game);
+  const clue = page.getByRole("button", { name: "Indiciu după 3 încercări", exact: true });
+  await expect(clue).toBeVisible();
+  const fit = await clue.evaluate((element) => {
+    const range = globalThis.document.createRange();
+    range.selectNodeContents(element);
+    const box = element.getBoundingClientRect();
+    const text = range.getBoundingClientRect();
+    return {
+      scroll: element.scrollWidth, client: element.clientWidth, height: box.height,
+      textInside: text.left >= box.left && text.right <= box.right && text.top >= box.top && text.bottom <= box.bottom,
+    };
+  });
+  await test.info().attach("clue-fit", { body: JSON.stringify(fit, null, 2), contentType: "application/json" });
+  // The longer label may wrap to two lines, but it stays inside the unchanged 44px target.
+  expect(fit.scroll).toBeLessThanOrEqual(fit.client + 1);
+  expect(fit.textInside).toBe(true);
+  expect(fit.height).toBeLessThanOrEqual(45);
 });

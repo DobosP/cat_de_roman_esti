@@ -217,6 +217,23 @@ export default function Lant({
     if (!startInFlight.current) onExit();
   }, [onExit]);
 
+  // Giving up forgets only a settled live board: an uncertain move keeps its pointer
+  // so ordinary saved-game recovery can still reconcile it.
+  const abandonChain = useCallback(() => {
+    if (startInFlight.current || actionOwner.hasPending() || actionSync) return;
+    actionOwner.invalidate();
+    cancelResume();
+    dismissRecovery();
+    if (state) active.forgetIfCurrent(state.game_id);
+    setHint(null);
+    setProgress(null);
+    setRecovery(null);
+    setScored(null);
+    setText("");
+    pendingActionFocus.current = null;
+    setState(null);
+  }, [active, state, actionOwner, actionSync, cancelResume, dismissRecovery]);
+
   const start = useCallback(
     async (opts?: { difficulty?: Difficulty; daily?: string }) => {
       if (startInFlight.current) return;
@@ -257,7 +274,7 @@ export default function Lant({
   useEffect(() => {
     if (!state?.won || state.score === undefined) return;
     const score = state.score;
-    const detail = `${state.moves}/${state.optimal} mutări${
+    const detail = `${state.moves}/${state.optimal} salturi${
       state.daily ? ` · ${state.daily}` : ""
     }`;
     let current = true;
@@ -603,7 +620,7 @@ export default function Lant({
                     <li>Salturile afișate amestecă drumul optim cu ocoluri sigure.</li>
                     <li>Înapoi e gratuit și nelimitat.</li>
                     <li>Poți scrie orice concept legat — nu doar din listă.</li>
-                    <li>Limită: 64 de mutări pe lanț.</li>
+                    <li>Limită: 64 de salturi pe lanț.</li>
                   </ul>
                 )}
               </div>
@@ -655,16 +672,16 @@ export default function Lant({
         <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={creating}>
           <Hud>
             <StatBadge
-              label="MUTĂRI"
-              value={`${state.moves} ${state.moves === 1 ? "mutare" : "mutări"}`}
+              label="SALTURI"
+              value={`${state.moves} ${state.moves === 1 ? "salt" : "salturi"}`}
               accent={DEF.accent}
-              title="Mutări făcute"
+              title="Salturi făcute"
             />
           </Hud>
         </GameShell>
 
         <section className="card lant-route" aria-label="Poziția și ținta">
-          <div className="lant-current">
+          <div className="lant-current" aria-live={won ? "off" : "polite"} aria-atomic="true">
             <span className="faint">EȘTI ACUM LA</span>
             <div
               className="lant-route-word"
@@ -753,8 +770,8 @@ export default function Lant({
             replayLabel="Încă un lanț →"
           >
             Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}
-            în <strong style={{ color: "var(--text)" }}>{state.moves}</strong> salturi (optim{" "}
-            {state.optimal}).
+            în <strong style={{ color: "var(--text)" }}>{state.moves}</strong>{" "}
+            {state.moves === 1 ? "salt" : "salturi"} (drumul cel mai scurt: {state.optimal}).
             {recovery?.message ? (
               <span className="muted" style={{ display: "block", marginTop: 8 }}>
                 <span aria-hidden="true" style={{ marginRight: 6 }}>
@@ -970,6 +987,18 @@ export default function Lant({
           </p>
           <strong>Drumul tău</strong>
           <Breadcrumb path={state.path} />
+          {!state.won && (
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={abandonChain}
+              disabled={busy || creating || actionSync !== null}
+              title="Renunță la acest lanț și alege altul"
+            >
+              Începe alt lanț
+            </Button>
+          )}
         </GameOptions>
       </div>
     </div>
