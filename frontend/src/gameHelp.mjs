@@ -7,7 +7,7 @@ export const GAME_HELP = {
   },
   intrusul: {
     goal: "Trei cuvinte au o legătură comună. Alege-l pe al patrulea, care nu aparține acelui grup.",
-    feedback: "Un cuvânt marcat „ține de grup” este exclus dintre răspunsuri. Repetarea lui nu consumă o încercare.",
+    feedback: "Un cuvânt marcat „ține de grup” este exclus dintre răspunsuri. Dacă îl atingi din nou, nu se socotește greșeală.",
     recovery: "După prima greșeală, indiciul arată legătura celor trei. La final poți vedea grupul complet.",
   },
   perechi: {
@@ -23,11 +23,11 @@ export const GAME_HELP = {
   contexto: {
     goal: "Ghicește conceptul secret după sens. Cuvintele înrudite te pot apropia, dar câștigi când găsești ținta.",
     feedback: "#1 este ținta. Un număr mai mic înseamnă mai aproape; compară ultima încercare cu cea mai bună.",
-    recovery: "Un cuvânt nerecunoscut nu consumă o încercare. Alege o sugestie, încearcă altă formulare sau cere un indiciu.",
+    recovery: "Un cuvânt nerecunoscut nu consumă o încercare. Alege o sugestie, încearcă altă formulare sau cere un indiciu. Poți vedea oricând răspunsul din „Opțiuni de joc” → „Arată răspunsul”.",
   },
   lant: {
     goal: "Ajungi de la start la țintă prin concepte legate direct. Citește relația afișată lângă fiecare salt.",
     feedback: "Un salt valid poate apropia sau ocoli ținta. Urmărește mesajul de progres, nu doar faptul că mutarea a fost acceptată.",
-    recovery: "Poți scrie alt concept legat de cel curent. Dacă te îndepărtezi, Înapoi este gratuit; indiciul te poate reorienta.",
+    recovery: "Poți scrie alt concept legat de cel curent. Dacă te îndepărtezi, Înapoi este gratuit; indiciul te poate reorienta. Poți renunța oricând din „Opțiuni de joc” → „Începe alt lanț”.",
   },
 };
