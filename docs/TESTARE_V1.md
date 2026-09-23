@@ -98,8 +98,10 @@ python -m cat_de_roman_esti.web --host 0.0.0.0 --port 8000
 Află adresa calculatorului în rețea (`ipconfig` pe Windows, `ip addr` pe Linux) și
 deschide pe telefoane `http://<adresa>:8000`. Verifică insigna versiunii. Folosește
 doar o rețea Wi-Fi privată, de încredere; dacă Windows întreabă, permite accesul doar
-pentru rețele private. Lasă `CAT_ACCOUNTS_ENABLED` nesetat. Dacă ai setat `CAT_DOMAIN`
-sau `CAT_ALLOWED_HOSTS`, adaugă adresa calculatorului în `CAT_ALLOWED_HOSTS`. Telefoanele
+pentru rețele private. Lasă nesetate `CAT_ACCOUNTS_ENABLED`, `CAT_DOMAIN` și
+`CAT_ALLOWED_HOSTS`. Dacă trebuie să păstrezi `CAT_DOMAIN` sau `CAT_ALLOWED_HOSTS`, pune
+în `CAT_ALLOWED_HOSTS` toate adresele folosite, de exemplu
+`192.168.1.20,127.0.0.1,localhost`. Telefoanele
 conectate prin date mobile nu pot ajunge la această adresă.
 
 Include în test cel puțin un iPhone (Safari), un telefon Android și un participant

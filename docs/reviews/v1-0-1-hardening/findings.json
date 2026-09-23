@@ -1,0 +1,728 @@
+{
+ "kind": "v1-0-1-hardening-review-v1",
+ "base": "2ba8a8b",
+ "review_findings_total": 55,
+ "survived_verification": 51,
+ "refuted": [
+  "The daily-first intro drops the 'category applies only to free play' note while the category picker stays visible",
+  "At 360 px the daily circuit and its progress sit roughly two screens below the fold, with no cue above it",
+  "Lanț caption 'poveste în ediții pentru copii' (Capra cu trei iezi ↔ copil) is stilted, and the plain 'poveste pentru copii' is fully supported",
+  "The reserve's 'Dacian substrate is not Latin ancestry' rule was not applied to the served Conexiuni board cx_viata_de_roman_236 ('Romanitate fără motor')"
+ ],
+ "findings": [
+  {
+   "n": 0,
+   "dimension": "lobby-daily-flow",
+   "severity": "major",
+   "verified_severity": [
+    "minor",
+    "minor"
+   ],
+   "title": "Daily intent in the URL is never cleared, so after a finished daily the intro's main button replays that same daily",
+   "package": "WP3",
+   "disposition": "fixed"
+  },
+  {
+   "n": 1,
+   "dimension": "lobby-daily-flow",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "A circuit link silently resumes a saved free round, and Intrusul/Perechi then offer no way to reach the daily",
+   "package": "WP3",
+   "disposition": "fixed"
+  },
+  {
+   "n": 2,
+   "dimension": "recovery-storage",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "A failed AccountBar chunk blanks the whole arcade, and neither 'Înapoi la jocuri' nor choosing another game brings it back",
+   "package": "WP4",
+   "disposition": "fixed"
+  },
+  {
+   "n": 3,
+   "dimension": "recovery-storage",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "'Înapoi la jocuri' does nothing when the failure happened on '/', and the copy blames a game",
+   "package": "WP4",
+   "disposition": "fixed"
+  },
+  {
+   "n": 4,
+   "dimension": "recovery-storage",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The inline h1 ref callback pulls focus back to the heading on every re-render while the error screen is shown",
+   "package": "WP4",
+   "disposition": "fixed"
+  },
+  {
+   "n": 5,
+   "dimension": "a11y-mobile-layout",
+   "severity": "major",
+   "verified_severity": [
+    "major",
+    "major"
+   ],
+   "title": "New auto-fit word grids produce ragged 3-column boards (Conexiuni 3/3/3/3/3/1, Intrusul 3/1, Perechi 3/3/2) at intermediate text sizes and on narrow viewports",
+   "package": "WP2",
+   "disposition": "fixed"
+  },
+  {
+   "n": 6,
+   "dimension": "a11y-mobile-layout",
+   "severity": "major",
+   "verified_severity": [
+    "major",
+    "minor"
+   ],
+   "title": "Cald sau Rece: 'Reguli și ajutor' now opens inside a half-width grid cell (177px on a 390px phone, 463px tall) and pushes 'Opțiuni de joc' onto a new row",
+   "package": "WP6",
+   "disposition": "fixed"
+  },
+  {
+   "n": 7,
+   "dimension": "a11y-mobile-layout",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Lanț route words and Alchimie inventory labels still break mid-word on phones; V1's long-word fix covered only three games",
+   "package": "WP2",
+   "disposition": "fixed (completed in integration polish)"
+  },
+  {
+   "n": 8,
+   "dimension": "a11y-mobile-layout",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Lanț's new current position is never announced to screen readers (no live region; the progress status omits the word and is absent on Greu and after Back/sync)",
+   "package": "WP6",
+   "disposition": "fixed"
+  },
+  {
+   "n": 9,
+   "dimension": "a11y-mobile-layout",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Mistake-budget copy: '1 rămase' is ungrammatical, and the wording differs across Intrusul/Perechi, Conexiuni and help/feedback text",
+   "package": "WP5",
+   "disposition": "fixed"
+  },
+  {
+   "n": 10,
+   "dimension": "backend-reserve",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Release-reserve failures show up only on game start, as an HTML 500 on every new Intrusul/Perechi game, instead of failing at startup or returning the existing JSON 503",
+   "package": "WP8",
+   "disposition": "fixed"
+  },
+  {
+   "n": 11,
+   "dimension": "backend-reserve",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Reserving the only curated Alchimie Societate/Greu boards (and Personalități Ușor/Greu) sends those choices to the slow on-demand generator: up to about 12 s to start a round",
+   "package": "WP9",
+   "disposition": "deferred"
+  },
+  {
+   "n": 12,
+   "dimension": "content-repairs",
+   "severity": "major",
+   "verified_severity": [
+    "minor",
+    "minor"
+   ],
+   "title": "Hundreds of served descriptions and edge labels have no diacritics, and 'roman' (Roman or novel) is used where 'român' (Romanian) is meant. This includes the repaired Ateneul node's own direct edges.",
+   "package": "WP9",
+   "disposition": "deferred"
+  },
+  {
+   "n": 13,
+   "dimension": "content-repairs",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The repaired Ateneul description opens with the unidiomatic 'Clădire de concerte'",
+   "package": "WP9/orchestrator",
+   "disposition": "deferred"
+  },
+  {
+   "n": 14,
+   "dimension": "content-stock-spotcheck",
+   "severity": "major",
+   "verified_severity": [
+    "major",
+    "minor"
+   ],
+   "title": "Target descriptions typed without diacritics are shown to players, and some change meaning (for example \"Sculptor roman\" and \"statul roman\")",
+   "package": "WP9",
+   "disposition": "deferred"
+  },
+  {
+   "n": 15,
+   "dimension": "content-stock-spotcheck",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "False KG casting edge \"Toma Caragiu a jucat în Reconstituirea\" appears as a Lanț opening choice",
+   "package": "WP9/orchestrator",
+   "disposition": "deferred"
+  },
+  {
+   "n": 16,
+   "dimension": "content-stock-spotcheck",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Lanț lt_personalitati_186 (usor, top selection weight) can only be solved through generic nodes \"bărbat\", \"carieră\" or \"om\"",
+   "package": "WP9/orchestrator",
+   "disposition": "deferred"
+  },
+  {
+   "n": 17,
+   "dimension": "content-stock-spotcheck",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Inconsistent tile capitalization gives away Conexiuni groups and Intrusul answers",
+   "package": "WP7",
+   "disposition": "fixed"
+  },
+  {
+   "n": 18,
+   "dimension": "content-stock-spotcheck",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Conexiuni Limbă·Greu and Geografie·Greu each hold a single eligible board, and that board is off-theme",
+   "package": "WP9/orchestrator",
+   "disposition": "deferred"
+  },
+  {
+   "n": 19,
+   "dimension": "content-stock-spotcheck",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Label spelling errors on eligible boards: missing diacritics in cx_istorie_001 group labels, \"Mică Unire 1859\" and \"Herta Muller\"",
+   "package": "WP9/orchestrator",
+   "disposition": "deferred"
+  },
+  {
+   "n": 20,
+   "dimension": "content-stock-spotcheck",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Server hint and feedback strings shown in the UI are missing diacritics (the Conexiuni clue appears whenever a clue is used)",
+   "package": "WP7",
+   "disposition": "fixed"
+  },
+  {
+   "n": 21,
+   "dimension": "tester-guide-docs",
+   "severity": "major",
+   "verified_severity": [
+    "minor",
+    "minor"
+   ],
+   "title": "No working path for the next step, physical-device testing: the guide offers only localhost or a full VPS deploy, but a LAN launch already works with zero env vars",
+   "package": "WP9",
+   "disposition": "fixed"
+  },
+  {
+   "n": 22,
+   "dimension": "tester-guide-docs",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The 'Reguli și ajutor' and 'încearcă un indiciu' instructions do not match Alchimie exploration or the hint gating in most games",
+   "package": "WP9",
+   "disposition": "fixed"
+  },
+  {
+   "n": 23,
+   "dimension": "tester-guide-docs",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The claim 'colecția Alchimie are propriul mecanism de salvare' is misleading: the collection is only in this browser and cannot be exported",
+   "package": "WP9",
+   "disposition": "fixed"
+  },
+  {
+   "n": 24,
+   "dimension": "tester-guide-docs",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The feedback template lacks fields the prose asks for (text zoom, optional age band) and has an incomplete mode list; no guidance on who sends feedback for children",
+   "package": "WP9",
+   "disposition": "fixed"
+  },
+  {
+   "n": 25,
+   "dimension": "tester-guide-docs",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "No iPhone/Safari (WebKit) coverage exists, and the guide does not ask the organizer to include one",
+   "package": "WP9",
+   "disposition": "fixed"
+  },
+  {
+   "n": 26,
+   "dimension": "tester-guide-docs",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Guide wording does not match the exact UI labels (circuit, Export, words vs concepts) and uses jargon unsuitable for children and seniors",
+   "package": "WP9",
+   "disposition": "fixed"
+  },
+  {
+   "n": 27,
+   "dimension": "tester-guide-docs",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Import error toast is missing a diacritic and uses jargon",
+   "package": "WP1",
+   "disposition": "fixed"
+  },
+  {
+   "n": 28,
+   "dimension": "tester-guide-docs",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "README is stale: no link to the tester guide, wrong newest ADR and wrong graph counts and fixture version",
+   "package": "WP9",
+   "disposition": "fixed"
+  },
+  {
+   "n": 29,
+   "dimension": "tester-guide-docs",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "agent-testing.md does not describe the environment V1 was actually verified on",
+   "package": "WP9",
+   "disposition": "fixed"
+  },
+  {
+   "n": 30,
+   "dimension": "tests-quality",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "After finishing the daily, the start screen still offers the same daily as the main button because nothing removes ?challenge=daily from the URL, and no test covers this",
+   "package": "WP3",
+   "disposition": "fixed"
+  },
+  {
+   "n": 31,
+   "dimension": "tests-quality",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "If the optional AccountBar chunk fails to load, all of Home is replaced by 'Nu am putut încărca jocul.', its 'Înapoi la jocuri' link does nothing on '/', and an e2e test locks this behavior in",
+   "package": "WP4",
+   "disposition": "fixed"
+  },
+  {
+   "n": 32,
+   "dimension": "tests-quality",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "test_v1_release_reserve repeats the current quick-board counts as literals, bypassing ADR-0116's shared snapshot that test_v1_content_history already checks",
+   "package": "WP8",
+   "disposition": "fixed"
+  },
+  {
+   "n": 33,
+   "dimension": "tests-quality",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "New V1 history tests tie review claims made at the V1 release to live content, the same pattern V1 itself had to fix in test_v99_lant_captions.py",
+   "package": "WP9/orchestrator",
+   "disposition": "deferred"
+  },
+  {
+   "n": 34,
+   "dimension": "tests-quality",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "With replay now the first result button, Perechi moves keyboard focus onto 'Încă unul →' after the final pair, so one extra Enter throws away the result and starts a new round",
+   "package": "WP5",
+   "disposition": "fixed"
+  },
+  {
+   "n": 35,
+   "dimension": "tests-quality",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The slow-chunk e2e test deliberately waits 11 s of real time twice, leaving little margin against its 30 s expect and 45 s test limits and adding about 45 s to every CI run",
+   "package": "WP4",
+   "disposition": "fixed"
+  },
+  {
+   "n": 36,
+   "dimension": "tests-quality",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The e2e test for the swapped buttons never clicks 'Joacă liber', so wiring both buttons to the daily would still pass",
+   "package": "WP3",
+   "disposition": "fixed"
+  },
+  {
+   "n": 37,
+   "dimension": "tests-quality",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "In the 'slow failed chunk' unit test, the loop that 'expires every scheduled timeout' now does nothing",
+   "package": "WP4",
+   "disposition": "fixed"
+  },
+  {
+   "n": 38,
+   "dimension": "first-minute-ux",
+   "severity": "major",
+   "verified_severity": [
+    "major",
+    "major"
+   ],
+   "title": "A first-ever loss (0 points) shows '★ Record!', plays the record sound, and later shows as 'Recordul tău: 0 · pierdut'",
+   "package": "WP1",
+   "disposition": "fixed"
+  },
+  {
+   "n": 39,
+   "dimension": "first-minute-ux",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Lanț error messages shown to players are missing diacritics, and the most common one does not say what to do next",
+   "package": "WP7",
+   "disposition": "fixed"
+  },
+  {
+   "n": 40,
+   "dimension": "first-minute-ux",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Conexiuni hint text says 'ramas' without its diacritic, and its underscore letter pattern has no explanation",
+   "package": "WP7",
+   "disposition": "fixed"
+  },
+  {
+   "n": 41,
+   "dimension": "first-minute-ux",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Singular/plural mismatches players will see: 'GREȘELI 1 rămase', history '1 greșeli', tooltip 'după încă 1 încercări'",
+   "package": "WP5",
+   "disposition": "fixed"
+  },
+  {
+   "n": 42,
+   "dimension": "first-minute-ux",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Lanț has no way to give up or start another board mid-round: 'Ieși' then re-entering reopens the same board",
+   "package": "WP6",
+   "disposition": "fixed"
+  },
+  {
+   "n": 43,
+   "dimension": "first-minute-ux",
+   "severity": "minor",
+   "verified_severity": [
+    "minor"
+   ],
+   "title": "Cald sau Rece: the only way to give up, 'Răspuns', is hidden in a collapsed menu, has an unclear label, and help does not mention it",
+   "package": "WP6",
+   "disposition": "fixed"
+  },
+  {
+   "n": 44,
+   "dimension": "first-minute-ux",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The mistake budget has different names across screens: greșeli / încercări / vieți",
+   "package": "WP5",
+   "disposition": "fixed"
+  },
+  {
+   "n": 45,
+   "dimension": "first-minute-ux",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Lanț calls the same thing 'mutări' in the HUD and 'salturi' elsewhere, and the result line uses the terse jargon '(optim N)'",
+   "package": "WP6",
+   "disposition": "fixed"
+  },
+  {
+   "n": 46,
+   "dimension": "first-minute-ux",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Copied result texts are missing diacritics and singular forms ('1 încercări', 'greseli', 'Lantul Cuvintelor', 'mutari'), and the score-import error says 'Fisierul'",
+   "package": "WP1",
+   "disposition": "fixed (share/copy diacritics); ratio wording kept"
+  },
+  {
+   "n": 47,
+   "dimension": "first-minute-ux",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "Daily-challenge badges show a raw ISO date ('ZILNIC 2026-09-23') instead of Romanian date format",
+   "package": "WP3",
+   "disposition": "fixed (completed in integration polish)"
+  },
+  {
+   "n": 48,
+   "dimension": "release-plumbing",
+   "severity": "minor",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The version is hand-copied into five places with no test tying them together, and neither the lobby badge nor any endpoint shows the exact build",
+   "package": "WP8",
+   "disposition": "fixed"
+  },
+  {
+   "n": 49,
+   "dimension": "release-plumbing",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The CRLF-tolerant release reserve fails the builder's own check mode on a Windows autocrlf checkout",
+   "package": "WP8",
+   "disposition": "fixed"
+  },
+  {
+   "n": 50,
+   "dimension": "release-plumbing",
+   "severity": "polish",
+   "verified_severity": [
+    "polish"
+   ],
+   "title": "The SPA shell at \"/\" is cacheable for 60 s (public) while deep links get no Cache-Control, so the shell's cache policy is inconsistent after a redeploy",
+   "package": "WP8",
+   "disposition": "fixed"
+  }
+ ],
+ "deferred_reasons": [
+  {
+   "title": "Hundreds of served descriptions and edge labels have no diacritics, and 'roman' (Roman or novel) is used where 'român' (Romanian) is meant. This includes the repaired Ateneul node's own direct edges. / Target descriptions typed without diacritics are shown to players, and some change meaning (for example \"Sculptor roman\" and \"statul roman\")",
+   "reason": "Any kg_sample.json byte change invalidates kg_sha256, which is pinned in board_rankings_v37 (the loader fails closed), derived_catalog_v38, quick_games_v92, alchimie_recipe_extensions_v92, tests/current_content.py, content_history.py and STATUS. It also needs a new sibling of apply_v1_factual_repairs.py, which is pinned to the pre-V1 baseline, plus editorial review, because 'roman' is correct for Traian, Columna, Dacia, and for novels. WP9 adds a known-limit line so testers do not spend feedback on it. Next content wave: an orthography-only batch over the roughly 82 eligible target nodes, gated by normalize(new)==normalize(old), with a non-failing validator warning. The edge labels matter less; only Alchimie why-links show raw label_ro."
+  },
+  {
+   "title": "False KG casting edge \"Toma Caragiu a jucat în Reconstituirea\" appears as a Lanț opening choice",
+   "reason": "The factual error is real, but removing de451 alone turns validate_games_pack RED: lt_arta_cultura_095 falls to one first-hop choice, below LANT_MIN_FIRST_HOP_CHOICES=2. It needs a bound proposal that removes the edge and demotes the board, independent review and the full rebinding cascade. Do it first in the next content wave. Low traffic: salience 0.23 and one eligible Lanț board."
+  },
+  {
+   "title": "Lanț lt_personalitati_186 (usor, top selection weight) can only be solved through generic nodes \"bărbat\", \"carieră\" or \"om\"",
+   "reason": "The fix is exclusion from selection. The sealed V1 reserve manifest pins count==20, its digest and independent-review bindings (release_reserve.py:13/74/83), so the alternative is Paul's owner-demotion list. Both need ranking regeneration. This is a content-selection decision for the next wave, not a code hardening item."
+  },
+  {
+   "title": "Conexiuni Limbă·Greu and Geografie·Greu each hold a single eligible board, and that board is off-theme",
+   "reason": "Reserving or recategorising cx_limba_192 and cx_geografie_179 changes the sealed reserve or pack records. That needs review, count and constant changes, ranking regeneration and an ADR addendum. WP9 documents single-board shelves as a known limit. Batch it with the other selection holds in the next content wave."
+  },
+  {
+   "title": "The repaired Ateneul description opens with the unidiomatic 'Clădire de concerte'",
+   "reason": "Polish only. It needs a KG edit with the full rebinding cascade. Batch it with the diacritics wave, using 'Sală de concerte din București, sediul Filarmonicii „George Enescu”…' without the year."
+  },
+  {
+   "title": "Label spelling errors on eligible boards: missing diacritics in cx_istorie_001 group labels, \"Mică Unire 1859\" and \"Herta Muller\"",
+   "reason": "The group labels have an existing PackLabelCorrection rail, but it still changes games_pack.json and the derived catalogs. The KG relabels (use 'Mica Unire 1859' and 'Herta Müller', without the old-form aliases, because alias_unique would reject them) need the KG transaction. Batch with the content wave."
+  },
+  {
+   "title": "Alchimie Greu on-demand generator latency (code bound)",
+   "reason": "A wall-clock bound breaks deterministic dailies. An attempt-count bound changes which boards seeded dailies produce, and generator tests may pin them. Hiding shelves with zero curated boards is a product change. For V1.0.1 it is documented only (WP9). My measurement shows other players' creates slow to at most 1.7 s during a 14 s start; they are not blocked. Revisit with a deterministic attempt cap plus a 'se pregătește jocul…' hint."
+  },
+  {
+   "title": "New V1 history tests tie review claims made at the V1 release to live content, the same pattern V1 itself had to fix in test_v99_lant_captions.py",
+   "reason": "Developer-only, with no tester impact. The next content wave is the first change that will trip these tests, so the hash-pinned post-V1 snapshot refactor belongs there (captions registry snapshot, evidence-derived retained ids, review-time shas instead of live re-hashing)."
+  },
+  {
+   "title": "Resumed free round from circuit: persistent in-board notice (beyond the WP3 toast)",
+   "reason": "WP3 ships a transient toast plus the Intrusul/Perechi daily result action, which closes the dead end. A persistent notice needs a shared UI slot in all six screens. Revisit if testers still misreport the mode."
+  },
+  {
+   "title": "Conexiuni hint: lowercasing joining words in the letter pattern",
+   "reason": "Rejected rather than deferred. It changes the pattern payload and hides the capitals of proper nouns. The explanatory text in WP7 addresses the confusion."
+  }
+ ],
+ "integration_review": [
+  {
+   "dimension": "screens-interplay",
+   "title": "Result-card daily offer drops the intent before the create succeeds, so the retry after a failure starts a free round",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "screens-interplay",
+   "title": "A resumed daily from an earlier day uses up today's circuit intent",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "screens-interplay",
+   "title": "The bypass notice and \"Joc reluat.\" appear as two stacked toasts in four games",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "shell-scores-grids",
+   "title": "A 0-point daily run is now kept only in the 50-entry `recent` list, so enough same-day replays drop it from the daily circuit and the 'daily done' check",
+   "status": "confirmed",
+   "verified_severity": "minor"
+  },
+  {
+   "dimension": "shell-scores-grids",
+   "title": "RouteErrorBoundary checks the game prefix case-sensitively, but React Router matches routes case-insensitively",
+   "status": "refuted",
+   "verified_severity": "none"
+  },
+  {
+   "dimension": "backend-integration",
+   "title": "The new tile-casing tests always pass, so nothing guards the lowercase allowlist against new brand or username labels",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "backend-integration",
+   "title": "submissions.py was only partly fixed and still returns Romanian without diacritics",
+   "status": "refuted",
+   "verified_severity": "none"
+  },
+  {
+   "dimension": "copy-and-guide",
+   "title": "Changed count strings leave out the 'de' Romanian requires for numbers of 20 or more (import toast, Lanț salturi)",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "copy-and-guide",
+   "title": "Lanț still says 'mutare' in the help every tester opens, despite the one-word-for-jumps change",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "copy-and-guide",
+   "title": "Saved score details still show ISO dates in the lobby history while every badge now shows dd.mm.yyyy",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "copy-and-guide",
+   "title": "The guide's CAT_ALLOWED_HOSTS advice can lock the organizer out of 127.0.0.1 when only CAT_DOMAIN was set",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "copy-and-guide",
+   "title": "STATUS.md still describes package 1.0.0 at HEAD; the ADR-0159/STATUS update is uncommitted",
+   "status": "confirmed",
+   "verified_severity": "minor"
+  },
+  {
+   "dimension": "copy-and-guide",
+   "title": "Lanț options panel and result card use different names for the shortest path",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "copy-and-guide",
+   "title": "DEPLOY note says the same-Wi-Fi playtest runs 'without a server'",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "completeness",
+   "title": "Long words still break mid-word on phones in Alchimie inventory and the Lanț route (#7 only partly fixed), and the new e2e test avoids the failing cases",
+   "status": "confirmed",
+   "verified_severity": "minor"
+  },
+  {
+   "dimension": "completeness",
+   "title": "History and record lines still show the raw ISO date for daily wins in Alchimie, Cald sau Rece and Lanț (#47 WP3 spec item 5 not done)",
+   "status": "confirmed",
+   "verified_severity": "polish"
+  },
+  {
+   "dimension": "completeness",
+   "title": "Lanț copied result and history detail still use an unexplained '4/3 salturi' ratio (#46 partly fixed)",
+   "status": "refuted",
+   "verified_severity": "none"
+  }
+ ]
+}
