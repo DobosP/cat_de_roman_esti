@@ -240,8 +240,8 @@ def test_source_only_forms_cannot_reverse_an_edge_but_the_authored_direction_wor
             result = _post(client, url + "/move", text=form)
             assert result["ok"] is False
             assert result["last_error"] == (
-                f"{svc.display_label(owner)} nu are o legătură directă cu {svc.label(destination)}. "
-                "Alege un cuvânt din listă sau cere un indiciu."
+                f"{svc.display_label(owner)} nu are o legătură directă cu "
+                f"{svc.label(destination)}. Alege un cuvânt din listă sau cere un indiciu."
             )
         assert client.get(url).json()["moves"] == 0
     finally:
