@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-23 — V1.0.1 published to origin main; physical-device and human testing next.
+Last verified: 2026-09-26 — V1.0.1 deployed to anonymous production; physical-device and human testing next.
 
 ## Current state
 
@@ -91,12 +91,16 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Production and next work
 
-- Last recorded production: anonymous V91 `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`
-  (no live production recheck in this task).
+- Production: anonymous V1.0.1 `e29fb0f63df8f3fe4678b1ae8882b6712ba993be`, deployed
+  2026-09-26 at the owner's request (GitHub CI green on that commit). Image tag
+  `release-e29fb0f63df8`; rollback image `rollback-13e49b2c1148` (V91) stays on the host.
+  Build 54 s while V91 served; recreate gave ~3 s of 502s (7/126 polls), then 200s.
+- Post-deploy smoke: `/api/health` 1.0.1/2416 concepts, manifest
+  `fixture-v1-reviewed-content` 2416/9458/180, accounts off, 14 categories, all six game
+  starts 200, `/` `max-age=0`, legal pages filled; container healthy, 0 restarts, no 5xx.
 - Origin `main` was published on 2026-09-23 at the owner's request: a fast-forward from
-  `b25c949` through V99, V1 and V1.0.1 (merge `8e66ec0`) plus this record. The GitHub CI
-  result is separate from the local gates above. No deployment, accounts activation or
-  recurring loop restart is part of V1/1.0.1.
+  `b25c949` through V99, V1 and V1.0.1 (merge `8e66ec0`). Accounts activation and
+  recurring loop restart remain outside V1/1.0.1.
 - Next: a same-Wi-Fi phone/desktop session with the tester guide, including an iPhone
   (Safari/WebKit is untested), an Android phone and enlarged text. Accounts stay off.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
