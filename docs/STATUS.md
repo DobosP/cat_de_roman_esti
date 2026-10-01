@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-26 — V1.0.1 deployed to anonymous production; physical-device and human testing next.
+Last verified: 2026-10-01 — Go Intrusul pilot qualified locally; anonymous production remains V1.0.1.
 
 ## Current state
 
@@ -76,18 +76,22 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Verification
 
-- 1.0.1 (2026-09-23): complete backend **2466 passed** + **53 accounts** (WSL, Python 3.14.4,
-  constrained); frontend unit **240 passed**, lint, typecheck, build (initial gzip 119.78 of
-  120.0 KiB); both validators, Ruff, reserve builder, docs check and whitespace pass.
-- 1.0.1 browser: one all-green full Playwright run, **622/622** (desktop + Pixel 7 emulation,
-  Microsoft Edge on Windows, 2 workers, no retries). An earlier full run's single Lanț
-  late-404 failure did not recur in 200/200 repeated recovery cases (host under load).
-- 1.0.1 isolated wheel (Python 3.12.13): version and `/api/health` 1.0.1, revalidated shell,
-  all 30 static files exact, six games create and resume, curated counts unchanged.
-- V1 1.0.0 gates (2446 backend, 224 frontend, 588 composed browser cases, factual audits,
-  recipe and quick-board replays) stay in the [verification](reviews/v1-testing-release/verification.json) record.
-- The complete suite needs WSL (Unix `resource` import); human enjoyment, physical devices
-  and Safari/WebKit remain untested; browser emulation does not substitute for them.
+- 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
+  (119.78/120 KiB gzip), validators, reserve builder, docs and whitespace; **622/622** browser
+  cases (Edge desktop/Pixel 7, no retries), plus 200 repeated Lanț recovery cases pass.
+- Isolated 3.12.13 wheel: version/health 1.0.1, 30 static files exact, six creates/resumes.
+  V1 receipts: [1.0.0](reviews/v1-testing-release/verification.json), [1.0.1](reviews/v1-0-1-hardening/README.md).
+- Physical devices and Safari/WebKit remain untested; Windows full suite requires WSL.
+
+## Go migration pilot
+
+- [ADR-0160](adr/0160-start-go-backend-with-native-intrusul.md): native Intrusul; other games Python.
+  Pinned private content, deterministic selection, TTL/LRU/atomic actions, 64 KiB; loopback gateway.
+- Local 2026-10-01: **2838 HTTP responses** matched Django; 1269 seeded/235 daily vectors,
+  Go race/vet, Unicode-15 checks, **2466 existing backend + 2 export / 53 accounts**, validators,
+  Ruff/docs/whitespace pass. Real local gateway: SPA + all six game creates 200; no deployment.
+- Pilot peak RSS **16.0 MiB Go / 100.9 MiB Python**; different retained data/test harnesses,
+  not full-port savings. [Guide and receipt](GO_BACKEND.md); hosted Go CI is not claimed.
 
 ## Production and next work
 
@@ -113,5 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/agent-testing: routes/gates.
-- ADRs (newest 0159), reviews and WORKLOG: decisions, evidence and history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0160), reviews/WORKLOG: history.

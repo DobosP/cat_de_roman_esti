@@ -1280,3 +1280,25 @@ deployed.
 
 Published to origin `main` on 2026-09-23 at the owner's request (fast-forward from
 `b25c949`, including V99, V1 and V1.0.1). Not deployed; the GitHub CI result is separate.
+
+## Initial Go Intrusul port (2026-10-01)
+
+Valid until: the next change to this pilot, its Python oracle, content or workload.
+
+Owner requested beginning the Go backend port for future inexpensive scaling.
+[ADR-0160](docs/adr/0160-start-go-backend-with-native-intrusul.md) introduces a complete
+anonymous Intrusul backend with private digest-bound reviewed content, Python-compatible
+MT19937/BLAKE2b selection, bounded pinned sessions, HTTP validation and an optional
+verified anonymous loopback gateway. Frontend and production configuration are untouched.
+An independent review found export-integrity, chunked-body, malformed-query, Unicode,
+CORS and line-ending compatibility defects; all were fixed before the final gates.
+
+Existing backend 2466 passed (1385.59 s under host load), new export tests 2 passed,
+accounts 53 passed. Go race/vet, both content validators, content freshness, Ruff,
+docs and whitespace passed. Golden selectors: 1269 seeded and 235 daily cases;
+2838 HTTP responses matched the real Django oracle, normalizing only session UUIDs.
+Real loopback Go/Python gateway served the SPA and all six game creates at 200.
+Local pilot peak RSS 16.0 MiB Go / 100.9 MiB Python; the differing retained data and
+harnesses prohibit full-arcade capacity/cost claims. [Receipt](docs/reviews/go-backend-pilot/verification.json).
+Hosted Go CI, remote publication, production replacement and accounts activation are
+not claimed. Other game routes remain Python; Rust evaluation targets graph/recipe work.

@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-01",
+  "valid_until": "a change to the pilot, Python oracle, content artifacts or measured workload",
+  "base_commit": "6252245",
+  "go_toolchain": "1.27.1",
+  "python_runtime": "3.12.3",
+  "unicode_reference": "15.0.0",
+  "gates": {
+    "existing_backend_passed": 2466,
+    "new_export_tests_passed": 2,
+    "accounts_passed": 53,
+    "seeded_selection_vectors": 1269,
+    "daily_vectors": 235,
+    "go_race": "passed",
+    "go_vet": "passed",
+    "content_validators": "passed",
+    "content_freshness": "passed",
+    "ruff": "passed",
+    "docs": "passed"
+  },
+  "benchmark": {
+    "scope": "local sequential Go httptest vs Django TestClient; Intrusul only; no listener/TLS/concurrency",
+    "matched_responses": 2838,
+    "python": {
+      "samples": 2337,
+      "median_us": 584.869,
+      "p95_us": 1011.896
+    },
+    "go": {
+      "samples": 2337,
+      "median_us": 61.819,
+      "p95_us": 114.161
+    },
+    "python_peak_rss_bytes": 105848832,
+    "go_peak_rss_bytes": 16760832,
+    "limitations": "Go contains only Intrusul content, Python loads the shared full graph; proxy mode retains both runtimes; not full-port savings or capacity proof"
+  },
+  "gateway_smoke": {
+    "scope": "real loopback Go gateway + Python ASGI; no deployment",
+    "spa_status": 200,
+    "advertised_games": 6,
+    "game_create_status": {
+      "intrusul": 200,
+      "perechi": 200,
+      "conexiuni": 200,
+      "contexto": 200,
+      "lant": 200,
+      "alchimie": 200
+    },
+    "native_game": "intrusul",
+    "python_games": 5
+  },
+  "deployment": "unchanged; local smoke only",
+  "hosted_go_ci": "not run; workflow added"
+}
