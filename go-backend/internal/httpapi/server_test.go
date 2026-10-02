@@ -66,12 +66,12 @@ func TestRemainingRoutesDelegateWithoutNativeGameLeaks(t *testing.T) {
 	calls := 0
 	s.proxy.Transport = transportFunc(func(r *http.Request) (*http.Response, error) {
 		calls++
-		if r.URL.Path != "/api/wordgames/perechi/games" || r.URL.RawQuery != "seed=17" {
+		if r.URL.Path != "/api/legacy-check" || r.URL.RawQuery != "seed=17" {
 			t.Fatalf("proxy changed route: %s", r.URL)
 		}
 		return &http.Response{StatusCode: 200, Header: make(http.Header), Body: io.NopCloser(strings.NewReader(`{"legacy":true}`))}, nil
 	})
-	r := httptest.NewRequest("POST", "/api/wordgames/perechi/games?seed=17", nil)
+	r := httptest.NewRequest("POST", "/api/legacy-check?seed=17", nil)
 	w := httptest.NewRecorder()
 	s.ServeHTTP(w, r)
 	if w.Code != 200 || w.Body.String() != `{"legacy":true}` || calls != 1 {

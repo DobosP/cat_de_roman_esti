@@ -1,6 +1,6 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-09-23
+Last verified: 2026-10-03
 
 ## Environment
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
@@ -40,6 +40,8 @@ Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
 
 `pyproject.toml` sets `addopts = "-q"`, so a passing run prints dots only; add `-o addopts=""` when you
 need the `N passed` summary line to paste into the verification record.
+
+Native Go/Rust commands and standalone browser qualification: [NATIVE_BACKENDS](NATIVE_BACKENDS.md).
 
 ## Before commit
 1. Run `git diff --check`.

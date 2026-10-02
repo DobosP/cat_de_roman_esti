@@ -1302,3 +1302,39 @@ Local pilot peak RSS 16.0 MiB Go / 100.9 MiB Python; the differing retained data
 harnesses prohibit full-arcade capacity/cost claims. [Receipt](docs/reviews/go-backend-pilot/verification.json).
 Hosted Go CI, remote publication, production replacement and accounts activation are
 not claimed. Other game routes remain Python; Rust evaluation targets graph/recipe work.
+
+## Complete anonymous native implementations (2026-10-02/03)
+
+Valid until: the recorded implementation or verification artifacts change — then requalify.
+
+Extended the initial Intrusul pilot into standalone Go and Rust servers for every
+anonymous game, native fallback generators, Alchimie exploration and historical
+restores, metadata/OpenAPI, runtime legal configuration and the compiled SPA.
+Production and other repositories remain unchanged; accounts and optional submissions
+remain Python features. Decision: ADR-0161.
+
+The first full browser run found an existing frontend clock/lock race. A claim
+could capture time before another tab committed a newer receipt and then discard
+that receipt after waiting for the shared lock. Sampling time inside the transaction
+fixes the defect; reversed queued callbacks provide a deterministic regression.
+The frontend was regenerated through the normal build, with 241 cases and its
+119.78/120.0 KiB budget passing.
+
+Initial resource measurement showed the native transport/Intrusul path improved,
+but the mixed creation path had CPU/allocation regressions. Measurements and source review
+identified repeated route-quality sorting work, string-based graph traversal and
+retained per-target string maps. Follow-up retains indexed graph traversal with
+precomputed edge costs, shared dense Contexto profiles, decorated recipe sorting
+and compact temporary search states. Rust pack selectors borrow the shared catalog;
+Conexiuni initializes fallback rankings lazily. Contract goldens protect each change.
+Final resource and browser receipts are in docs/reviews/native-backends/.
+
+Final 2026-10-03 qualification: Go race/vet; Rust fmt/strict Clippy/55 tests; 1207
+HTTP oracle responses and 622/622 browser cases per runtime; 61 targeted Python and
+241 frontend cases; export/validators/Ruff/docs/whitespace pass. Final resource
+receipts contain 27 matched runs per workload at concurrency 1/8/32. In the six-game
+creation mix at concurrency 8, both native backends use about 70% less CPU than
+Python; peak RSS reductions are about 49% Go / 71% Rust. Go has lower creation p95;
+Rust has the smaller memory footprint. Container execution is not qualified locally
+after repeated official-registry layer stalls; CI contains build/smoke checks.
+No remote publication or deployment followed.

@@ -1,7 +1,7 @@
 # ADR-0160 — Begin the Go backend with a native Intrusul migration pilot
 
 Date: 2026-10-01
-Status: accepted
+Status: partially superseded by ADR-0161 (standalone six-game implementation; safeguards retained)
 
 ## Decision
 

@@ -1,0 +1,1629 @@
+{
+  "schema_version": 1,
+  "started_utc": "2026-10-02T20:36:54+00:00",
+  "status": "failed",
+  "mode": "real loopback HTTP; standalone backends; anonymous creates",
+  "workload": "creates",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "backend_cpu_affinity": [
+    0,
+    2
+  ],
+  "client_cpu_affinity": [
+    4,
+    6,
+    8,
+    10
+  ],
+  "flows_per_run": 600,
+  "repeats": 3,
+  "concurrency_levels": [
+    1,
+    8,
+    32
+  ],
+  "daily_every": 5,
+  "cpu_tick_seconds": 0.01,
+  "toolchains": {
+    "go": "Go 1.27.1 CGO_ENABLED=0 trimpath -s -w GOMAXPROCS=2",
+    "rust": "Rust 1.98.1 release thin-LTO Tokio 2 workers and 2 blocking threads",
+    "python": "Python 3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]"
+  },
+  "content_export_sha256": "f2f8a629f3366a8da6984f608d01dd2ef2354f6de857f0db8b1268047fb6de88",
+  "content_hash": "sha256:45cffff4729eb237009e59bb44dce390f883b692269b75207ed6cd9ab8faa4f8",
+  "native_binaries": {
+    "go": {
+      "path": "/home/dobo/work/_temp/go-backend-pilot/release/cat-server",
+      "sha256": "ae7a5cfe360aa9aaa17455a7b3908706ff128c883022884f011d2a52eaec68e6",
+      "bytes": 15458464
+    },
+    "rust": {
+      "path": "/home/dobo/work/_temp/go-backend-pilot/rust-target/release/cat-rust-server",
+      "sha256": "ed79e124e66584f46d2b7de43ec64d4e281d67ac9db30a35ef3d20edbc249747",
+      "bytes": 12318536
+    }
+  },
+  "notes": [
+    "One create per flow; equal-weight six-game rotation, usor/normal/greu; curated unscoped selection, no gameplay mutations.",
+    "Identical measured seed sequence, content manifest, CPUs and client checks for every target; full normalized response traces must match.",
+    "All three target orders rotate across repeats; every run uses a new backend process without a Python proxy for native servers.",
+    "Warmup and startup are excluded from elapsed time and backend CPU. Worker HTTP connections remain open into measurement.",
+    "Backend affinity is reset by taskset; client threads inherit the separately reported client affinity. On a host with only two allowed CPUs they share.",
+    "Backend CPU is /proc/pid/stat utime+stime; parent/client CPU is reported separately and excluded.",
+    "Idle RSS is after warmup; sampled peak is measurement-only; process lifetime HWM also includes startup/warmup.",
+    "Latency measures complete HTTP response transfer before client JSON decoding; percentiles use nearest rank.",
+    "Fixed-load throughput may be limited by this client or other host activity; it is not maximum server capacity.",
+    "All three processes load the full six-game graph and bounded sessions; native servers have no Python upstream.",
+    "These measurements establish neither hosting-plan capacity nor percentage hosting savings."
+  ],
+  "runs": [
+    {
+      "pid": 632182,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 13.989344427000105,
+      "sessions_per_second": 42.88978680387419,
+      "requests_per_second": 42.88978680387419,
+      "backend_cpu_seconds": 18.07,
+      "backend_cpu_seconds_per_session": 0.030116666666666667,
+      "client_cpu_seconds": 0.33367985,
+      "idle_rss_bytes": 256204800,
+      "peak_sampled_rss_bytes": 289570816,
+      "process_lifetime_hwm_bytes": 289181696,
+      "rss_sample_count": 1365,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 0.337735,
+        "p95_ms": 23.111383,
+        "p99_ms": 494.353724,
+        "max_ms": 4556.293187
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 0.337735,
+          "p95_ms": 23.111383,
+          "p99_ms": 494.353724,
+          "max_ms": 4556.293187
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 0.337735,
+        "p95_ms": 23.111383,
+        "p99_ms": 494.353724,
+        "max_ms": 4556.293187
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "go",
+      "concurrency": 1,
+      "repeat": 1,
+      "position_in_rotated_order": 1,
+      "loadavg_before": [
+        7.908203125,
+        7.63525390625,
+        7.2919921875
+      ],
+      "loadavg_after": [
+        7.96533203125,
+        7.66845703125,
+        7.30859375
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r1-go.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/release/cat-server",
+        "-listen",
+        "127.0.0.1:36621"
+      ]
+    },
+    {
+      "pid": 633001,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 17.862713167999573,
+      "sessions_per_second": 33.58952217151866,
+      "requests_per_second": 33.58952217151866,
+      "backend_cpu_seconds": 17.66,
+      "backend_cpu_seconds_per_session": 0.029433333333333332,
+      "client_cpu_seconds": 0.41131204,
+      "idle_rss_bytes": 365838336,
+      "peak_sampled_rss_bytes": 365842432,
+      "process_lifetime_hwm_bytes": 365842432,
+      "rss_sample_count": 1743,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 0.573489,
+        "p95_ms": 32.586414,
+        "p99_ms": 636.612688,
+        "max_ms": 4520.727077
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 0.573489,
+          "p95_ms": 32.586414,
+          "p99_ms": 636.612688,
+          "max_ms": 4520.727077
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 0.573489,
+        "p95_ms": 32.586414,
+        "p99_ms": 636.612688,
+        "max_ms": 4520.727077
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "rust",
+      "concurrency": 1,
+      "repeat": 1,
+      "position_in_rotated_order": 2,
+      "loadavg_before": [
+        7.96533203125,
+        7.66845703125,
+        7.30859375
+      ],
+      "loadavg_after": [
+        7.60302734375,
+        7.607421875,
+        7.2958984375
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r1-rust.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/rust-target/release/cat-rust-server",
+        "--listen",
+        "127.0.0.1:50525"
+      ]
+    },
+    {
+      "pid": 633834,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 9.148340767999798,
+      "sessions_per_second": 65.58566358817268,
+      "requests_per_second": 65.58566358817268,
+      "backend_cpu_seconds": 9.11,
+      "backend_cpu_seconds_per_session": 0.015183333333333332,
+      "client_cpu_seconds": 0.2726797810000001,
+      "idle_rss_bytes": 123961344,
+      "peak_sampled_rss_bytes": 213082112,
+      "process_lifetime_hwm_bytes": 212684800,
+      "rss_sample_count": 894,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 1.744624,
+        "p95_ms": 20.246454,
+        "p99_ms": 261.853563,
+        "max_ms": 1918.540769
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 1.744624,
+          "p95_ms": 20.246454,
+          "p99_ms": 261.853563,
+          "max_ms": 1918.540769
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 1.744624,
+        "p95_ms": 20.246454,
+        "p99_ms": 261.853563,
+        "max_ms": 1918.540769
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "python",
+      "concurrency": 1,
+      "repeat": 1,
+      "position_in_rotated_order": 3,
+      "loadavg_before": [
+        7.60302734375,
+        7.607421875,
+        7.2958984375
+      ],
+      "loadavg_after": [
+        7.51708984375,
+        7.587890625,
+        7.29248046875
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r1-python.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "uvicorn",
+        "cat_de_roman_esti.web.asgi:application",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "54317",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-level",
+        "warning",
+        "--lifespan",
+        "off"
+      ]
+    },
+    {
+      "pid": 635411,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 18.40377602799981,
+      "sessions_per_second": 32.60200510412374,
+      "requests_per_second": 32.60200510412374,
+      "backend_cpu_seconds": 18.169999999999998,
+      "backend_cpu_seconds_per_session": 0.03028333333333333,
+      "client_cpu_seconds": 0.4230863010000001,
+      "idle_rss_bytes": 365813760,
+      "peak_sampled_rss_bytes": 365826048,
+      "process_lifetime_hwm_bytes": 365826048,
+      "rss_sample_count": 1800,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 0.583827,
+        "p95_ms": 35.365845,
+        "p99_ms": 627.613243,
+        "max_ms": 4489.627184
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 0.583827,
+          "p95_ms": 35.365845,
+          "p99_ms": 627.613243,
+          "max_ms": 4489.627184
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 0.583827,
+        "p95_ms": 35.365845,
+        "p99_ms": 627.613243,
+        "max_ms": 4489.627184
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "rust",
+      "concurrency": 1,
+      "repeat": 2,
+      "position_in_rotated_order": 1,
+      "loadavg_before": [
+        7.51708984375,
+        7.587890625,
+        7.29248046875
+      ],
+      "loadavg_after": [
+        7.6044921875,
+        7.599609375,
+        7.3017578125
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r2-rust.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/rust-target/release/cat-rust-server",
+        "--listen",
+        "127.0.0.1:33479"
+      ]
+    },
+    {
+      "pid": 637428,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 9.802631717000622,
+      "sessions_per_second": 61.208052829264716,
+      "requests_per_second": 61.208052829264716,
+      "backend_cpu_seconds": 9.770000000000001,
+      "backend_cpu_seconds_per_session": 0.016283333333333337,
+      "client_cpu_seconds": 0.315338157,
+      "idle_rss_bytes": 128667648,
+      "peak_sampled_rss_bytes": 227622912,
+      "process_lifetime_hwm_bytes": 227876864,
+      "rss_sample_count": 956,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 1.861833,
+        "p95_ms": 20.294034,
+        "p99_ms": 289.37958,
+        "max_ms": 2046.755913
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 1.861833,
+          "p95_ms": 20.294034,
+          "p99_ms": 289.37958,
+          "max_ms": 2046.755913
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 1.861833,
+        "p95_ms": 20.294034,
+        "p99_ms": 289.37958,
+        "max_ms": 2046.755913
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "python",
+      "concurrency": 1,
+      "repeat": 2,
+      "position_in_rotated_order": 2,
+      "loadavg_before": [
+        7.6044921875,
+        7.599609375,
+        7.3017578125
+      ],
+      "loadavg_after": [
+        7.3896484375,
+        7.552734375,
+        7.29052734375
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r2-python.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "uvicorn",
+        "cat_de_roman_esti.web.asgi:application",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "44447",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-level",
+        "warning",
+        "--lifespan",
+        "off"
+      ]
+    },
+    {
+      "pid": 638889,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 14.097088812999573,
+      "sessions_per_second": 42.56197914045292,
+      "requests_per_second": 42.56197914045292,
+      "backend_cpu_seconds": 18.330000000000002,
+      "backend_cpu_seconds_per_session": 0.030550000000000004,
+      "client_cpu_seconds": 0.35617518800000014,
+      "idle_rss_bytes": 252243968,
+      "peak_sampled_rss_bytes": 288813056,
+      "process_lifetime_hwm_bytes": 288210944,
+      "rss_sample_count": 1373,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 0.320132,
+        "p95_ms": 24.723049,
+        "p99_ms": 473.945249,
+        "max_ms": 4547.839049
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 0.320132,
+          "p95_ms": 24.723049,
+          "p99_ms": 473.945249,
+          "max_ms": 4547.839049
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 0.320132,
+        "p95_ms": 24.723049,
+        "p99_ms": 473.945249,
+        "max_ms": 4547.839049
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "go",
+      "concurrency": 1,
+      "repeat": 2,
+      "position_in_rotated_order": 3,
+      "loadavg_before": [
+        7.3896484375,
+        7.552734375,
+        7.29052734375
+      ],
+      "loadavg_after": [
+        7.25439453125,
+        7.51025390625,
+        7.2802734375
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r2-go.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/release/cat-server",
+        "-listen",
+        "127.0.0.1:46435"
+      ]
+    },
+    {
+      "pid": 640028,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 9.590274574999967,
+      "sessions_per_second": 62.563380777864964,
+      "requests_per_second": 62.563380777864964,
+      "backend_cpu_seconds": 9.54,
+      "backend_cpu_seconds_per_session": 0.015899999999999997,
+      "client_cpu_seconds": 0.29724398600000024,
+      "idle_rss_bytes": 124911616,
+      "peak_sampled_rss_bytes": 219136000,
+      "process_lifetime_hwm_bytes": 219279360,
+      "rss_sample_count": 937,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 1.874461,
+        "p95_ms": 19.126746,
+        "p99_ms": 271.190963,
+        "max_ms": 1988.575212
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 1.874461,
+          "p95_ms": 19.126746,
+          "p99_ms": 271.190963,
+          "max_ms": 1988.575212
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 1.874461,
+        "p95_ms": 19.126746,
+        "p99_ms": 271.190963,
+        "max_ms": 1988.575212
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "python",
+      "concurrency": 1,
+      "repeat": 3,
+      "position_in_rotated_order": 1,
+      "loadavg_before": [
+        7.25439453125,
+        7.51025390625,
+        7.2802734375
+      ],
+      "loadavg_after": [
+        7.5234375,
+        7.5595703125,
+        7.298828125
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r3-python.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "uvicorn",
+        "cat_de_roman_esti.web.asgi:application",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "39173",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-level",
+        "warning",
+        "--lifespan",
+        "off"
+      ]
+    },
+    {
+      "pid": 640823,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 14.57524612599991,
+      "sessions_per_second": 41.165685629808735,
+      "requests_per_second": 41.165685629808735,
+      "backend_cpu_seconds": 18.94,
+      "backend_cpu_seconds_per_session": 0.031566666666666666,
+      "client_cpu_seconds": 0.38026265000000015,
+      "idle_rss_bytes": 253890560,
+      "peak_sampled_rss_bytes": 284614656,
+      "process_lifetime_hwm_bytes": 284147712,
+      "rss_sample_count": 1419,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 0.347622,
+        "p95_ms": 23.236133,
+        "p99_ms": 431.105281,
+        "max_ms": 4484.629977
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 0.347622,
+          "p95_ms": 23.236133,
+          "p99_ms": 431.105281,
+          "max_ms": 4484.629977
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 0.347622,
+        "p95_ms": 23.236133,
+        "p99_ms": 431.105281,
+        "max_ms": 4484.629977
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "go",
+      "concurrency": 1,
+      "repeat": 3,
+      "position_in_rotated_order": 2,
+      "loadavg_before": [
+        7.5234375,
+        7.5595703125,
+        7.298828125
+      ],
+      "loadavg_after": [
+        8.1962890625,
+        7.71142578125,
+        7.353515625
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r3-go.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/release/cat-server",
+        "-listen",
+        "127.0.0.1:46169"
+      ]
+    },
+    {
+      "pid": 641868,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 18.230665610999495,
+      "sessions_per_second": 32.911579467399655,
+      "requests_per_second": 32.911579467399655,
+      "backend_cpu_seconds": 17.979999999999997,
+      "backend_cpu_seconds_per_session": 0.029966666666666662,
+      "client_cpu_seconds": 0.47594444000000014,
+      "idle_rss_bytes": 365780992,
+      "peak_sampled_rss_bytes": 365789184,
+      "process_lifetime_hwm_bytes": 365789184,
+      "rss_sample_count": 1774,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 0.603164,
+        "p95_ms": 32.142311,
+        "p99_ms": 647.715696,
+        "max_ms": 4521.830513
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 0.603164,
+          "p95_ms": 32.142311,
+          "p99_ms": 647.715696,
+          "max_ms": 4521.830513
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 0.603164,
+        "p95_ms": 32.142311,
+        "p99_ms": 647.715696,
+        "max_ms": 4521.830513
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "rust",
+      "concurrency": 1,
+      "repeat": 3,
+      "position_in_rotated_order": 3,
+      "loadavg_before": [
+        8.1962890625,
+        7.71142578125,
+        7.353515625
+      ],
+      "loadavg_after": [
+        8.65380859375,
+        7.8447265625,
+        7.4052734375
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c1-r3-rust.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/rust-target/release/cat-rust-server",
+        "--listen",
+        "127.0.0.1:58863"
+      ]
+    },
+    {
+      "pid": 642905,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 10.18846838599984,
+      "sessions_per_second": 58.890107646059036,
+      "requests_per_second": 58.890107646059036,
+      "backend_cpu_seconds": 18.28,
+      "backend_cpu_seconds_per_session": 0.03046666666666667,
+      "client_cpu_seconds": 0.34931762499999985,
+      "idle_rss_bytes": 400957440,
+      "peak_sampled_rss_bytes": 612540416,
+      "process_lifetime_hwm_bytes": 612540416,
+      "rss_sample_count": 991,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 19.92491,
+        "p95_ms": 338.800705,
+        "p99_ms": 1149.552469,
+        "max_ms": 4457.99017
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 19.92491,
+          "p95_ms": 338.800705,
+          "p99_ms": 1149.552469,
+          "max_ms": 4457.99017
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 19.92491,
+        "p95_ms": 338.800705,
+        "p99_ms": 1149.552469,
+        "max_ms": 4457.99017
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "rust",
+      "concurrency": 8,
+      "repeat": 1,
+      "position_in_rotated_order": 1,
+      "loadavg_before": [
+        8.65380859375,
+        7.8447265625,
+        7.4052734375
+      ],
+      "loadavg_after": [
+        9.09423828125,
+        7.9833984375,
+        7.45849609375
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r1-rust.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/rust-target/release/cat-rust-server",
+        "--listen",
+        "127.0.0.1:52199"
+      ]
+    },
+    {
+      "pid": 643798,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 9.584255488999588,
+      "sessions_per_second": 62.60267171390153,
+      "requests_per_second": 62.60267171390153,
+      "backend_cpu_seconds": 9.629999999999999,
+      "backend_cpu_seconds_per_session": 0.01605,
+      "client_cpu_seconds": 0.3091550180000002,
+      "idle_rss_bytes": 173826048,
+      "peak_sampled_rss_bytes": 339075072,
+      "process_lifetime_hwm_bytes": 338800640,
+      "rss_sample_count": 937,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 46.000812,
+        "p95_ms": 424.073431,
+        "p99_ms": 695.733665,
+        "max_ms": 3028.819361
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 46.000812,
+          "p95_ms": 424.073431,
+          "p99_ms": 695.733665,
+          "max_ms": 3028.819361
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 46.000812,
+        "p95_ms": 424.073431,
+        "p99_ms": 695.733665,
+        "max_ms": 3028.819361
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "python",
+      "concurrency": 8,
+      "repeat": 1,
+      "position_in_rotated_order": 2,
+      "loadavg_before": [
+        9.09423828125,
+        7.9833984375,
+        7.45849609375
+      ],
+      "loadavg_after": [
+        9.00537109375,
+        8.0009765625,
+        7.4697265625
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r1-python.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "uvicorn",
+        "cat_de_roman_esti.web.asgi:application",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "42305",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-level",
+        "warning",
+        "--lifespan",
+        "off"
+      ]
+    },
+    {
+      "pid": 644985,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 12.446324368000205,
+      "sessions_per_second": 48.207003309556534,
+      "requests_per_second": 48.207003309556534,
+      "backend_cpu_seconds": 22.79,
+      "backend_cpu_seconds_per_session": 0.037983333333333334,
+      "client_cpu_seconds": 0.3488740729999993,
+      "idle_rss_bytes": 247910400,
+      "peak_sampled_rss_bytes": 697188352,
+      "process_lifetime_hwm_bytes": 696877056,
+      "rss_sample_count": 1219,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 18.735408,
+        "p95_ms": 107.516946,
+        "p99_ms": 1945.191827,
+        "max_ms": 8921.751833
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 18.735408,
+          "p95_ms": 107.516946,
+          "p99_ms": 1945.191827,
+          "max_ms": 8921.751833
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 18.735408,
+        "p95_ms": 107.516946,
+        "p99_ms": 1945.191827,
+        "max_ms": 8921.751833
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "go",
+      "concurrency": 8,
+      "repeat": 1,
+      "position_in_rotated_order": 3,
+      "loadavg_before": [
+        9.00537109375,
+        8.0009765625,
+        7.4697265625
+      ],
+      "loadavg_after": [
+        9.06494140625,
+        8.06591796875,
+        7.49951171875
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r1-go.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/release/cat-server",
+        "-listen",
+        "127.0.0.1:56629"
+      ]
+    },
+    {
+      "pid": 645884,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 10.463603588000296,
+      "sessions_per_second": 57.341621837440634,
+      "requests_per_second": 57.341621837440634,
+      "backend_cpu_seconds": 10.41,
+      "backend_cpu_seconds_per_session": 0.01735,
+      "client_cpu_seconds": 0.3020963950000004,
+      "idle_rss_bytes": 172785664,
+      "peak_sampled_rss_bytes": 345329664,
+      "process_lifetime_hwm_bytes": 345780224,
+      "rss_sample_count": 1026,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 57.79894,
+        "p95_ms": 383.421229,
+        "p99_ms": 617.607778,
+        "max_ms": 2977.514774
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 57.79894,
+          "p95_ms": 383.421229,
+          "p99_ms": 617.607778,
+          "max_ms": 2977.514774
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 57.79894,
+        "p95_ms": 383.421229,
+        "p99_ms": 617.607778,
+        "max_ms": 2977.514774
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "python",
+      "concurrency": 8,
+      "repeat": 2,
+      "position_in_rotated_order": 1,
+      "loadavg_before": [
+        9.06494140625,
+        8.06591796875,
+        7.49951171875
+      ],
+      "loadavg_after": [
+        9.21533203125,
+        8.13037109375,
+        7.52685546875
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r2-python.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "uvicorn",
+        "cat_de_roman_esti.web.asgi:application",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "53321",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-level",
+        "warning",
+        "--lifespan",
+        "off"
+      ]
+    },
+    {
+      "pid": 647260,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 11.972516277000068,
+      "sessions_per_second": 50.11477839062424,
+      "requests_per_second": 50.11477839062424,
+      "backend_cpu_seconds": 21.96,
+      "backend_cpu_seconds_per_session": 0.0366,
+      "client_cpu_seconds": 0.3704025660000001,
+      "idle_rss_bytes": 249769984,
+      "peak_sampled_rss_bytes": 629055488,
+      "process_lifetime_hwm_bytes": 628703232,
+      "rss_sample_count": 1168,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 17.495284,
+        "p95_ms": 91.565375,
+        "p99_ms": 1850.075626,
+        "max_ms": 8692.671384
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 17.495284,
+          "p95_ms": 91.565375,
+          "p99_ms": 1850.075626,
+          "max_ms": 8692.671384
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 17.495284,
+        "p95_ms": 91.565375,
+        "p99_ms": 1850.075626,
+        "max_ms": 8692.671384
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "go",
+      "concurrency": 8,
+      "repeat": 2,
+      "position_in_rotated_order": 2,
+      "loadavg_before": [
+        9.21533203125,
+        8.13037109375,
+        7.52685546875
+      ],
+      "loadavg_after": [
+        9.14892578125,
+        8.17236328125,
+        7.55078125
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r2-go.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/release/cat-server",
+        "-listen",
+        "127.0.0.1:33415"
+      ]
+    },
+    {
+      "pid": 648347,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 9.89291169399985,
+      "sessions_per_second": 60.649485061501764,
+      "requests_per_second": 60.649485061501764,
+      "backend_cpu_seconds": 18.16,
+      "backend_cpu_seconds_per_session": 0.030266666666666667,
+      "client_cpu_seconds": 0.3186104890000001,
+      "idle_rss_bytes": 400822272,
+      "peak_sampled_rss_bytes": 658849792,
+      "process_lifetime_hwm_bytes": 658849792,
+      "rss_sample_count": 965,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 18.301488,
+        "p95_ms": 417.535161,
+        "p99_ms": 1120.212713,
+        "max_ms": 4550.772366
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 18.301488,
+          "p95_ms": 417.535161,
+          "p99_ms": 1120.212713,
+          "max_ms": 4550.772366
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 18.301488,
+        "p95_ms": 417.535161,
+        "p99_ms": 1120.212713,
+        "max_ms": 4550.772366
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "rust",
+      "concurrency": 8,
+      "repeat": 2,
+      "position_in_rotated_order": 3,
+      "loadavg_before": [
+        9.14892578125,
+        8.17236328125,
+        7.55078125
+      ],
+      "loadavg_after": [
+        9.5263671875,
+        8.283203125,
+        7.59326171875
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r2-rust.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/rust-target/release/cat-rust-server",
+        "--listen",
+        "127.0.0.1:51639"
+      ]
+    },
+    {
+      "pid": 649458,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 12.115925178999532,
+      "sessions_per_second": 49.521599971579285,
+      "requests_per_second": 49.521599971579285,
+      "backend_cpu_seconds": 22.4,
+      "backend_cpu_seconds_per_session": 0.03733333333333333,
+      "client_cpu_seconds": 0.38758972600000074,
+      "idle_rss_bytes": 244301824,
+      "peak_sampled_rss_bytes": 629006336,
+      "process_lifetime_hwm_bytes": 628355072,
+      "rss_sample_count": 1179,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 18.770736,
+        "p95_ms": 112.787859,
+        "p99_ms": 1842.862392,
+        "max_ms": 8733.82112
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 18.770736,
+          "p95_ms": 112.787859,
+          "p99_ms": 1842.862392,
+          "max_ms": 8733.82112
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 18.770736,
+        "p95_ms": 112.787859,
+        "p99_ms": 1842.862392,
+        "max_ms": 8733.82112
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "go",
+      "concurrency": 8,
+      "repeat": 3,
+      "position_in_rotated_order": 1,
+      "loadavg_before": [
+        9.5263671875,
+        8.283203125,
+        7.59326171875
+      ],
+      "loadavg_after": [
+        10.80224609375,
+        8.64208984375,
+        7.72314453125
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r3-go.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/release/cat-server",
+        "-listen",
+        "127.0.0.1:60803"
+      ]
+    },
+    {
+      "pid": 650475,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 9.90772039500007,
+      "sessions_per_second": 60.5588345329961,
+      "requests_per_second": 60.5588345329961,
+      "backend_cpu_seconds": 18.41,
+      "backend_cpu_seconds_per_session": 0.030683333333333333,
+      "client_cpu_seconds": 0.3256804329999996,
+      "idle_rss_bytes": 400916480,
+      "peak_sampled_rss_bytes": 660783104,
+      "process_lifetime_hwm_bytes": 660783104,
+      "rss_sample_count": 965,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 19.661009,
+        "p95_ms": 447.685455,
+        "p99_ms": 1118.232535,
+        "max_ms": 4669.571369
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 19.661009,
+          "p95_ms": 447.685455,
+          "p99_ms": 1118.232535,
+          "max_ms": 4669.571369
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 19.661009,
+        "p95_ms": 447.685455,
+        "p99_ms": 1118.232535,
+        "max_ms": 4669.571369
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "rust",
+      "concurrency": 8,
+      "repeat": 3,
+      "position_in_rotated_order": 2,
+      "loadavg_before": [
+        10.80224609375,
+        8.64208984375,
+        7.72314453125
+      ],
+      "loadavg_after": [
+        10.0634765625,
+        8.5546875,
+        7.70458984375
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r3-rust.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/_temp/go-backend-pilot/rust-target/release/cat-rust-server",
+        "--listen",
+        "127.0.0.1:50387"
+      ]
+    },
+    {
+      "pid": 651952,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 24,
+      "elapsed_seconds": 9.937597754000308,
+      "sessions_per_second": 60.37676457154591,
+      "requests_per_second": 60.37676457154591,
+      "backend_cpu_seconds": 9.99,
+      "backend_cpu_seconds_per_session": 0.01665,
+      "client_cpu_seconds": 0.32290316699999977,
+      "idle_rss_bytes": 171683840,
+      "peak_sampled_rss_bytes": 326201344,
+      "process_lifetime_hwm_bytes": 325603328,
+      "rss_sample_count": 971,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 42.322794,
+        "p95_ms": 463.827352,
+        "p99_ms": 695.919324,
+        "max_ms": 2858.798245
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 42.322794,
+          "p95_ms": 463.827352,
+          "p99_ms": 695.919324,
+          "max_ms": 2858.798245
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 42.322794,
+        "p95_ms": 463.827352,
+        "p99_ms": 695.919324,
+        "max_ms": 2858.798245
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "python",
+      "concurrency": 8,
+      "repeat": 3,
+      "position_in_rotated_order": 3,
+      "loadavg_before": [
+        10.0634765625,
+        8.5546875,
+        7.70458984375
+      ],
+      "loadavg_after": [
+        11.07177734375,
+        8.88037109375,
+        7.826171875
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c8-r3-python.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "uvicorn",
+        "cat_de_roman_esti.web.asgi:application",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "52281",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-level",
+        "warning",
+        "--lifespan",
+        "off"
+      ]
+    },
+    {
+      "pid": 653995,
+      "flows": 600,
+      "requests": 600,
+      "warmup_flows": 32,
+      "elapsed_seconds": 11.123156081000161,
+      "sessions_per_second": 53.94152483618209,
+      "requests_per_second": 53.94152483618209,
+      "backend_cpu_seconds": 10.98,
+      "backend_cpu_seconds_per_session": 0.0183,
+      "client_cpu_seconds": 0.370470858,
+      "idle_rss_bytes": 270901248,
+      "peak_sampled_rss_bytes": 422166528,
+      "process_lifetime_hwm_bytes": 421933056,
+      "rss_sample_count": 1085,
+      "rss_sample_interval_seconds": 0.01,
+      "latency": {
+        "count": 600,
+        "p50_ms": 542.208739,
+        "p95_ms": 1332.886603,
+        "p99_ms": 1526.288101,
+        "max_ms": 4548.211822
+      },
+      "action_latency": {
+        "create": {
+          "count": 600,
+          "p50_ms": 542.208739,
+          "p95_ms": 1332.886603,
+          "p99_ms": 1526.288101,
+          "max_ms": 4548.211822
+        }
+      },
+      "journey_latency": {
+        "count": 600,
+        "p50_ms": 542.208739,
+        "p95_ms": 1332.886603,
+        "p99_ms": 1526.288101,
+        "max_ms": 4548.211822
+      },
+      "new_connections_during_measurement": 0,
+      "normalized_responses_sha256": "aefe584a4935a2c327149c9ffcc350897a689e0dc8bc056af71a63639e932db7",
+      "target": "python",
+      "concurrency": 32,
+      "repeat": 1,
+      "position_in_rotated_order": 1,
+      "loadavg_before": [
+        11.07177734375,
+        8.88037109375,
+        7.826171875
+      ],
+      "loadavg_after": [
+        9.8798828125,
+        8.72265625,
+        7.791015625
+      ],
+      "log": "/home/dobo/work/_temp/go-backend-pilot/rust-comparison/20261002T203654-568535/c32-r1-python.log",
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,2",
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "uvicorn",
+        "cat_de_roman_esti.web.asgi:application",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "56403",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-level",
+        "warning",
+        "--lifespan",
+        "off"
+      ]
+    }
+  ],
+  "error": "TimeoutError: timed out",
+  "finished_utc": "2026-10-02T20:41:37+00:00",
+  "summary": [
+    {
+      "target": "go",
+      "concurrency": 1,
+      "repeats": 3,
+      "sessions_per_second": {
+        "median": 42.56197914045292,
+        "min": 41.165685629808735,
+        "max": 42.88978680387419
+      },
+      "requests_per_second": {
+        "median": 42.56197914045292,
+        "min": 41.165685629808735,
+        "max": 42.88978680387419
+      },
+      "backend_cpu_seconds_per_session": {
+        "median": 0.030550000000000004,
+        "min": 0.030116666666666667,
+        "max": 0.031566666666666666
+      },
+      "idle_rss_bytes": {
+        "median": 253890560,
+        "min": 252243968,
+        "max": 256204800
+      },
+      "peak_sampled_rss_bytes": {
+        "median": 288813056,
+        "min": 284614656,
+        "max": 289570816
+      },
+      "request_latency_ms": {
+        "p50": 0.337735,
+        "p95": 23.236133,
+        "p99": 473.945249
+      }
+    },
+    {
+      "target": "go",
+      "concurrency": 8,
+      "repeats": 3,
+      "sessions_per_second": {
+        "median": 49.521599971579285,
+        "min": 48.207003309556534,
+        "max": 50.11477839062424
+      },
+      "requests_per_second": {
+        "median": 49.521599971579285,
+        "min": 48.207003309556534,
+        "max": 50.11477839062424
+      },
+      "backend_cpu_seconds_per_session": {
+        "median": 0.03733333333333333,
+        "min": 0.0366,
+        "max": 0.037983333333333334
+      },
+      "idle_rss_bytes": {
+        "median": 247910400,
+        "min": 244301824,
+        "max": 249769984
+      },
+      "peak_sampled_rss_bytes": {
+        "median": 629055488,
+        "min": 629006336,
+        "max": 697188352
+      },
+      "request_latency_ms": {
+        "p50": 18.735408,
+        "p95": 107.516946,
+        "p99": 1850.075626
+      }
+    },
+    {
+      "target": "python",
+      "concurrency": 1,
+      "repeats": 3,
+      "sessions_per_second": {
+        "median": 62.563380777864964,
+        "min": 61.208052829264716,
+        "max": 65.58566358817268
+      },
+      "requests_per_second": {
+        "median": 62.563380777864964,
+        "min": 61.208052829264716,
+        "max": 65.58566358817268
+      },
+      "backend_cpu_seconds_per_session": {
+        "median": 0.015899999999999997,
+        "min": 0.015183333333333332,
+        "max": 0.016283333333333337
+      },
+      "idle_rss_bytes": {
+        "median": 124911616,
+        "min": 123961344,
+        "max": 128667648
+      },
+      "peak_sampled_rss_bytes": {
+        "median": 219136000,
+        "min": 213082112,
+        "max": 227622912
+      },
+      "request_latency_ms": {
+        "p50": 1.861833,
+        "p95": 20.246454,
+        "p99": 271.190963
+      }
+    },
+    {
+      "target": "python",
+      "concurrency": 8,
+      "repeats": 3,
+      "sessions_per_second": {
+        "median": 60.37676457154591,
+        "min": 57.341621837440634,
+        "max": 62.60267171390153
+      },
+      "requests_per_second": {
+        "median": 60.37676457154591,
+        "min": 57.341621837440634,
+        "max": 62.60267171390153
+      },
+      "backend_cpu_seconds_per_session": {
+        "median": 0.01665,
+        "min": 0.01605,
+        "max": 0.01735
+      },
+      "idle_rss_bytes": {
+        "median": 172785664,
+        "min": 171683840,
+        "max": 173826048
+      },
+      "peak_sampled_rss_bytes": {
+        "median": 339075072,
+        "min": 326201344,
+        "max": 345329664
+      },
+      "request_latency_ms": {
+        "p50": 46.000812,
+        "p95": 424.073431,
+        "p99": 695.733665
+      }
+    },
+    {
+      "target": "python",
+      "concurrency": 32,
+      "repeats": 1,
+      "sessions_per_second": {
+        "median": 53.94152483618209,
+        "min": 53.94152483618209,
+        "max": 53.94152483618209
+      },
+      "requests_per_second": {
+        "median": 53.94152483618209,
+        "min": 53.94152483618209,
+        "max": 53.94152483618209
+      },
+      "backend_cpu_seconds_per_session": {
+        "median": 0.0183,
+        "min": 0.0183,
+        "max": 0.0183
+      },
+      "idle_rss_bytes": {
+        "median": 270901248,
+        "min": 270901248,
+        "max": 270901248
+      },
+      "peak_sampled_rss_bytes": {
+        "median": 422166528,
+        "min": 422166528,
+        "max": 422166528
+      },
+      "request_latency_ms": {
+        "p50": 542.208739,
+        "p95": 1332.886603,
+        "p99": 1526.288101
+      }
+    },
+    {
+      "target": "rust",
+      "concurrency": 1,
+      "repeats": 3,
+      "sessions_per_second": {
+        "median": 32.911579467399655,
+        "min": 32.60200510412374,
+        "max": 33.58952217151866
+      },
+      "requests_per_second": {
+        "median": 32.911579467399655,
+        "min": 32.60200510412374,
+        "max": 33.58952217151866
+      },
+      "backend_cpu_seconds_per_session": {
+        "median": 0.029966666666666662,
+        "min": 0.029433333333333332,
+        "max": 0.03028333333333333
+      },
+      "idle_rss_bytes": {
+        "median": 365813760,
+        "min": 365780992,
+        "max": 365838336
+      },
+      "peak_sampled_rss_bytes": {
+        "median": 365826048,
+        "min": 365789184,
+        "max": 365842432
+      },
+      "request_latency_ms": {
+        "p50": 0.583827,
+        "p95": 32.586414,
+        "p99": 636.612688
+      }
+    },
+    {
+      "target": "rust",
+      "concurrency": 8,
+      "repeats": 3,
+      "sessions_per_second": {
+        "median": 60.5588345329961,
+        "min": 58.890107646059036,
+        "max": 60.649485061501764
+      },
+      "requests_per_second": {
+        "median": 60.5588345329961,
+        "min": 58.890107646059036,
+        "max": 60.649485061501764
+      },
+      "backend_cpu_seconds_per_session": {
+        "median": 0.03046666666666667,
+        "min": 0.030266666666666667,
+        "max": 0.030683333333333333
+      },
+      "idle_rss_bytes": {
+        "median": 400916480,
+        "min": 400822272,
+        "max": 400957440
+      },
+      "peak_sampled_rss_bytes": {
+        "median": 658849792,
+        "min": 612540416,
+        "max": 660783104
+      },
+      "request_latency_ms": {
+        "p50": 19.661009,
+        "p95": 417.535161,
+        "p99": 1120.212713
+      }
+    }
+  ]
+}

@@ -1,10 +1,9 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-01 — Go Intrusul pilot qualified locally; anonymous production remains V1.0.1.
+Last verified: 2026-10-03 — standalone native qualification; anonymous production remains V1.0.1.
 
 ## Current state
 
-- Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
 - The owner requested internal V100 as a testing release named **V1** for mixed ages on
   phones and desktop. Package **1.0.1** (lobby badge **V1.0.1**) hardens the V1 1.0.0
   release `2ba8a8b` after an independent review; decision [ADR-0159](adr/0159-v1-0-1-testing-hardening.md).
@@ -17,11 +16,6 @@ Last verified: 2026-10-01 — Go Intrusul pilot qualified locally; anonymous pro
   loads at startup and reserve drift returns the game's JSON 503; `/` revalidates on
   every load; `/api/health` reports `version`. Quick-game tiles are display-capitalised
   (reviewed lowercase allowlist); server copy has diacritics and correct plurals.
-- V1 1.0.0 put game choices first, exposed rules directly, removed empty options and made
-  replay primary; guarded storage reads and one persisted reload marker keep startup usable.
-- Seven independently reviewed factual repairs correct Caraiman, Village Museum,
-  Athenaeum, three Neagu labels and one false Operațiunea Monstrul–Dem Rădulescu edge.
-  Every original KG puzzle, concept and accepted form remains.
 - Three reviewed captions explain the held Ghiozdan→Capra cu trei iezi board. Fresh
   independent analyst/verifier gates promote that single board; both natural routes win.
   All 117 earlier captions remain exact; 120 caption entries now have reviewed text.
@@ -52,8 +46,8 @@ Pack **716 = 709 approved + 7 pending**, 527 eligible. Quick **421 stored / 418 
 341 preferred, starter pools 62/61. The 85 authored and 336 frozen quick payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
 KG: `fixture-v1-reviewed-content`, 2416 nodes/9458 links/8641 forms/180 puzzles.
-Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books
-retain their 521 recipes, routes and par. One former addition belongs to a reserved board.
+Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
+521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration remains **251 concepts/351 recipes/147 discoveries**, 96 supplies, 12 tiers,
 32 goals, nine historical books and 1009 verified saved prefixes.
 Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB requests.
@@ -83,15 +77,21 @@ Unrevealed answers, recipe maps and routes stay private.
   V1 receipts: [1.0.0](reviews/v1-testing-release/verification.json), [1.0.1](reviews/v1-0-1-hardening/README.md).
 - Physical devices and Safari/WebKit remain untested; Windows full suite requires WSL.
 
-## Go migration pilot
+## Native Go and Rust implementations
 
-- [ADR-0160](adr/0160-start-go-backend-with-native-intrusul.md): native Intrusul; other games Python.
-  Pinned private content, deterministic selection, TTL/LRU/atomic actions, 64 KiB; loopback gateway.
-- Local 2026-10-01: **2838 HTTP responses** matched Django; 1269 seeded/235 daily vectors,
-  Go race/vet, Unicode-15 checks, **2466 existing backend + 2 export / 53 accounts**, validators,
-  Ruff/docs/whitespace pass. Real local gateway: SPA + all six game creates 200; no deployment.
-- Pilot peak RSS **16.0 MiB Go / 100.9 MiB Python**; different retained data/test harnesses,
-  not full-port savings. [Guide and receipt](GO_BACKEND.md); hosted Go CI is not claimed.
+- [ADR-0161](adr/0161-complete-anonymous-native-backends.md) extends ADR-0160 to two standalone
+  anonymous servers: all six games and mining, Alchimie exploration/restores, metadata/OpenAPI,
+  legal pages and the compiled SPA. Both embed one private schema-2 export; no Python serving runtime.
+- Local qualification: **1207 HTTP responses per runtime** match Django; curated/mined/daily,
+  Unicode/fuzzy graph, full scored games and all nine exploration histories match frozen references.
+  Go race/vet and Rust fmt/strict Clippy/**55 tests** pass; export freshness, validators and Ruff pass.
+- Fixed a shared frontend score-receipt race found by the Go two-tab browser gate: transaction time
+  is sampled after Web Lock acquisition. **241 frontend cases**, lint/typecheck/build pass (119.78 KiB).
+- **622/622 browser cases per runtime** pass; same-CPU HTTP [receipts](reviews/native-backends/README.md).
+  Build/run/containers/CI: [guide](NATIVE_BACKENDS.md). Hosted CI and deployment are not claimed.
+- Accounts/OAuth/account scores and enabled submissions remain Python features; native startup
+  refuses activation. Sources/world are immutable startup snapshots; source changes require a rebuild.
+  Sessions remain process-local; replicas need affinity. No production or other repository change.
 
 ## Production and next work
 
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0160), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0161), reviews/WORKLOG: history.

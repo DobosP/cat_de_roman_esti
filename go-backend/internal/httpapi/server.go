@@ -1,4 +1,4 @@
-// Package httpapi preserves the anonymous Intrusul API during the staged Go port.
+// Package httpapi serves the anonymous six-game arcade and exploration API.
 package httpapi
 
 import (
@@ -14,8 +14,14 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie_explore"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/conexiuni"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contexto"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/intrusul"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/lant"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/perechi"
 )
 
 const prefix = "/api/wordgames/intrusul/games"
@@ -24,13 +30,27 @@ const MaxRequestBytes = 64 * 1024
 var localOrigin = regexp.MustCompile(`^http://(localhost|127\.0\.0\.1)(:\d+)?$`)
 
 type Server struct {
-	game    *intrusul.Service
-	content *content.Content
-	proxy   *httputil.ReverseProxy
+	game       *intrusul.Service
+	content    *content.Content
+	proxy      *httputil.ReverseProxy
+	StaticRoot string
+	perechi    *perechi.Service
+	conexiuni  *conexiuni.Service
+	contexto   *contexto.Service
+	lant       *lant.Service
+	alchimie   *alchimie.Service
+	explorer   *alchimie_explore.Service
 }
 
 func New(c *content.Content, upstream *url.URL) *Server {
 	s := &Server{game: intrusul.New(c), content: c}
+	s.StaticRoot = defaultStaticRoot()
+	s.perechi = perechi.New(c)
+	s.conexiuni = conexiuni.New(c)
+	s.contexto = contexto.New(c)
+	s.lant = lant.New(c)
+	s.alchimie = alchimie.New(c)
+	s.explorer = alchimie_explore.New(c)
 	if upstream != nil {
 		s.proxy = httputil.NewSingleHostReverseProxy(upstream)
 		s.proxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
@@ -78,7 +98,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		r.Body = io.NopCloser(bytes.NewReader(raw))
 	}
-	if strings.HasPrefix(r.URL.Path, "/api/wordgames/intrusul") || s.proxy == nil {
+	if strings.HasPrefix(r.URL.Path, "/api/wordgames/") || strings.HasPrefix(r.URL.Path, "/api/alchimie/") || s.proxy == nil {
 		w.Header().Add("Vary", "origin")
 		if origin := r.Header.Get("Origin"); localOrigin.MatchString(origin) {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
@@ -94,14 +114,16 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if r.URL.Path == "/healthz" {
-		if r.Method != "GET" && r.Method != "HEAD" {
-			write(w, r, 405, map[string]any{"detail": "Method Not Allowed"})
-			return
-		}
 		write(w, r, 200, map[string]any{"ok": true})
 		return
 	}
 	if !strings.HasPrefix(r.URL.Path, "/api/wordgames/intrusul") {
+		if s.arcade(w, r) {
+			return
+		}
+		if s.website(w, r) {
+			return
+		}
 		if s.proxy != nil {
 			s.proxy.ServeHTTP(w, r)
 			return
@@ -183,26 +205,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) standalone(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" && r.Method != "HEAD" {
-		if r.URL.Path == "/api/health" || r.URL.Path == "/api/manifest" || r.URL.Path == "/api/me" {
-			write(w, r, 405, map[string]any{"detail": "Method Not Allowed"})
-			return
-		}
-	}
-	switch r.URL.Path {
-	case "/api/health":
-		write(w, r, 200, map[string]any{"ok": true, "version": s.content.AppVersion, "source": "offline", "concepts": len(s.content.Labels), "games": []map[string]string{{"key": "intrusul", "label": "Intrusul", "blurb": "Găsește cuvântul care nu se potrivește cu celelalte trei."}}, "runtime": "go-pilot"})
-	case "/api/manifest":
-		write(w, r, 200, s.content.Manifest)
-	case "/api/me":
-		write(w, r, 200, map[string]any{"accounts_enabled": false, "authenticated": false, "user": nil, "donate_url": ""})
-	default:
-		if strings.HasPrefix(r.URL.Path, "/api/wordgames/") {
-			write(w, r, 503, map[string]any{"detail": "Game not yet ported; configure the anonymous Python upstream"})
-		} else {
-			write(w, r, 404, map[string]any{"detail": "Not Found"})
-		}
-	}
+	write(w, r, 404, map[string]any{"detail": "Not Found"})
 }
 
 func last(q url.Values, key string) string {
@@ -295,7 +298,7 @@ func queryInt(q url.Values, key string) (*big.Int, map[string]any) {
 	fail := func() (*big.Int, map[string]any) {
 		return nil, map[string]any{"detail": []map[string]any{{"type": "int_parsing", "loc": []string{"query", key}, "msg": "Input should be a valid integer, unable to parse string as an integer", "input": raw}}}
 	}
-	text := []rune(strings.TrimFunc(raw, pySpace))
+	text := []rune(strings.TrimFunc(raw, unicode.IsSpace))
 	var b strings.Builder
 	count := 0
 	for i, r := range text {

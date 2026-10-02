@@ -1,8 +1,9 @@
-// cat-server is an anonymous, opt-in migration pilot. Default binding is loopback.
+// cat-server serves the complete anonymous arcade. Default binding is loopback.
 package main
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	"encoding/json"
 	"flag"
@@ -30,16 +31,19 @@ func main() {
 	flag.Parse()
 	for _, name := range []string{"CAT_KG_FIXTURE", "CAT_GAMES_PACK", "CAT_BOARD_RANKINGS"} {
 		if os.Getenv(name) != "" {
-			log.Fatal("Go pilot requires bundled content without source overrides")
+			log.Fatal("Go backend requires bundled content without source overrides")
 		}
 	}
 	for _, v := range []string{"1", "true", "yes", "on"} {
 		if strings.ToLower(strings.TrimSpace(os.Getenv("CAT_ACCOUNTS_ENABLED"))) == v {
-			log.Fatal("Go pilot requires accounts OFF")
+			log.Fatal("Go backend requires accounts OFF")
 		}
 	}
+	if os.Getenv("CAT_SUBMISSIONS_DIR") != "" {
+		log.Fatal("Go backend does not support CAT_SUBMISSIONS_DIR; use Python for enabled submissions")
+	}
 	if limit := os.Getenv("CAT_MAX_REQUEST_BYTES"); limit != "" && limit != "65536" {
-		log.Fatal("Go pilot requires the default CAT_MAX_REQUEST_BYTES budget")
+		log.Fatal("Go backend requires the default CAT_MAX_REQUEST_BYTES budget")
 	}
 	c, err := content.Load()
 	if err != nil {
@@ -76,7 +80,7 @@ func main() {
 			log.Print(err)
 		}
 	}()
-	log.Printf("Go pilot %s: native Intrusul; listen %s", c.AppVersion, *addr)
+	log.Printf("Go arcade %s: all six games and exploration; listen %s", c.AppVersion, *addr)
 	if err = server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
@@ -97,7 +101,7 @@ func checkUpstream(target *url.URL, c *content.Content) error {
 		}
 		if path == "/api/me" {
 			if enabled, ok := body["accounts_enabled"].(bool); !ok || enabled || body["authenticated"] != false || body["user"] != nil {
-				return fmt.Errorf("Go pilot refuses an accounts-enabled upstream")
+				return fmt.Errorf("Go backend refuses an accounts-enabled upstream")
 			}
 		} else {
 			if body["content_hash"] != c.Manifest["content_hash"] || body["build_version"] != c.Manifest["build_version"] {
@@ -136,7 +140,9 @@ func replayRequests(handler http.Handler) error {
 		elapsed := time.Since(start).Nanoseconds()
 		var body any
 		if response.Body.Len() > 0 {
-			if err := json.Unmarshal(response.Body.Bytes(), &body); err != nil {
+			decoder := json.NewDecoder(bytes.NewReader(response.Body.Bytes()))
+			decoder.UseNumber()
+			if err := decoder.Decode(&body); err != nil {
 				return err
 			}
 		}

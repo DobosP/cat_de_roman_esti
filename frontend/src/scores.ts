@@ -175,11 +175,13 @@ export async function recordScoreCompletionOnce(
 ): Promise<RecordOutcome | null> {
   const storage = runtime.storage === undefined ? browserStorage() : runtime.storage;
   const locks = runtime.locks === undefined ? browserLocks() : runtime.locks;
-  const now = Number.isFinite(runtime.now) ? Math.max(0, runtime.now ?? 0) : Date.now();
   const receiptGame = normalizeReceiptGame(game);
   const receiptId = normalizeReceiptId(gameId);
 
   const transaction = () => {
+    // Another tab can acquire first while this claim waits; compare its receipt
+    // against the commit-time clock rather than this invocation's older time.
+    const now = Number.isFinite(runtime.now) ? Math.max(0, runtime.now ?? 0) : Date.now();
     if (!storage || !receiptGame || !receiptId) {
       return recordScore(game, score, detail, options);
     }

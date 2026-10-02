@@ -1,0 +1,27 @@
+# syntax=docker/dockerfile:1
+# Build from the repository root: docker build -f rust-backend/Dockerfile .
+FROM rust:1.98.1-bookworm AS build
+WORKDIR /build
+# Rust embeds the same reviewed export and Unicode-decimal table as Go.
+COPY go-backend/ ./go-backend/
+COPY rust-backend/ ./rust-backend/
+WORKDIR /build/rust-backend
+RUN cargo build --locked --release --bin cat-rust-server
+
+FROM debian:bookworm-slim AS runtime
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --gid 10001 app \
+    && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
+WORKDIR /app
+COPY --from=build /build/rust-backend/target/release/cat-rust-server /usr/local/bin/cat-rust-server
+COPY cat_de_roman_esti/web/static/ ./cat_de_roman_esti/web/static/
+ENV CAT_ACCOUNTS_ENABLED=0
+USER 10001:10001
+EXPOSE 8080
+STOPSIGNAL SIGTERM
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+    CMD ["curl", "--fail", "--silent", "--show-error", "--output", "/dev/null", "--max-time", "3", "http://127.0.0.1:8080/api/health"]
+ENTRYPOINT ["/usr/local/bin/cat-rust-server"]
+CMD ["--listen", "0.0.0.0:8080"]

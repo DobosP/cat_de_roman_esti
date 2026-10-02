@@ -72,7 +72,8 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0157 | [Start V99 with reviewed route explanations and a discovery pool](0157-start-v99-refinement-and-discovery.md) | accepted |
 | 0158 | [Prepare V1 for mixed-age phone and desktop testing](0158-v1-testing-release.md) | accepted (amended by 0159) |
 | 0159 | [Harden V1 as 1.0.1 before physical-device testing](0159-v1-0-1-testing-hardening.md) | accepted |
-| 0160 | [Begin the Go backend with native Intrusul](0160-start-go-backend-with-native-intrusul.md) | accepted |
+| 0160 | [Begin the Go backend with native Intrusul](0160-start-go-backend-with-native-intrusul.md) | partially superseded by 0161 |
+| 0161 | [Complete anonymous Go and Rust backends](0161-complete-anonymous-native-backends.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

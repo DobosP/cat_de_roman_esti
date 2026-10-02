@@ -44,11 +44,14 @@ yarn-error.log*
 # --- Local env / secrets (compose injects these at runtime instead) ---
 .env
 .env.local
+.env.*
 *.local
 
 # --- Screenshots / scratch / docs not needed at runtime ---
 frontend/screenshots/
 screenshots/
+**/test-results/
+rust-backend/target/
 docs/
 scripts/
 

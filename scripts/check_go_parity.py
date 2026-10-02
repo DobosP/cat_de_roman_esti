@@ -1,8 +1,8 @@
-"""Differentially replay anonymous Intrusul HTTP journeys against Django and Go.
+"""Differentially replay anonymous arcade HTTP journeys against Django and native servers.
 
 No network listener, database, production service or account is used. Only random
 session IDs are normalized. --benchmark adds aggregate local timings/peak memory,
-not a full-arcade capacity claim. The Go executable must be built beforehand.
+not a full-arcade capacity claim. The native executable must be built beforehand.
 """
 
 from __future__ import annotations
@@ -12,6 +12,7 @@ import json
 import logging
 import os
 import resource
+import select
 import subprocess
 import time
 from pathlib import Path
@@ -24,6 +25,7 @@ BASE = "/api/wordgames/intrusul/games"
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--binary", type=Path, required=True)
+    parser.add_argument("--runtime", choices=("go", "rust"), default="go")
     parser.add_argument("--benchmark", action="store_true")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
@@ -49,6 +51,25 @@ def main() -> int:
         text=True,
         encoding="utf-8",
     )
+    replay_buffer = bytearray()
+
+    def replay_line() -> bytes:
+        assert child.stdout is not None
+        deadline = time.monotonic() + 60
+        while b"\n" not in replay_buffer:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0 or not select.select([child.stdout], [], [], remaining)[0]:
+                raise TimeoutError(f"{args.runtime} replay response exceeded 60 seconds")
+            chunk = os.read(child.stdout.fileno(), 65536)
+            if not chunk:
+                return bytes(replay_buffer)
+            replay_buffer.extend(chunk)
+            if len(replay_buffer) > 16 * 1024 * 1024:
+                raise AssertionError("Replay response exceeded 16 MiB")
+        line, _, remaining = replay_buffer.partition(b"\n")
+        replay_buffer[:] = remaining
+        return bytes(line)
+
     aliases: dict[str, str] = {}
     times_python: list[int] = []
     times_go: list[int] = []
@@ -70,13 +91,19 @@ def main() -> int:
         split = urlsplit(path)
         mapped_path = split.path
         for python_id, go_id in aliases.items():
+            mapped_path = mapped_path.replace(
+                "%" + format(ord(python_id[0]), "02x") + python_id[1:],
+                "%" + format(ord(go_id[0]), "02x") + go_id[1:],
+            )
             mapped_path = mapped_path.replace(python_id, go_id)
         query = split.query
         if "previous_game_id" in query:
-            query = urlencode([
-                (key, aliases.get(value, value))
-                for key, value in parse_qsl(query, keep_blank_values=True)
-            ])
+            query = urlencode(
+                [
+                    (key, aliases.get(value, value))
+                    for key, value in parse_qsl(query, keep_blank_values=True)
+                ]
+            )
         go_path = urlunsplit(("", "", mapped_path, query, ""))
         assert child.stdin is not None and child.stdout is not None
         child.stdin.write(json.dumps({"method": method, "path": go_path, "body": raw}) + "\n")
@@ -84,18 +111,22 @@ def main() -> int:
         started = time.perf_counter_ns()
         response = client.generic(method, path, data=raw.encode(), content_type="application/json")
         elapsed = time.perf_counter_ns() - started
-        line = child.stdout.readline()
+        line = replay_line()
         if not line:
-            raise AssertionError(f"Go replay exited during {method} {path}")
+            raise AssertionError(f"Native replay exited during {method} {path}")
         native = json.loads(line)
         expected = None if not response.content else response.json()
-        if response.status_code == 200 and isinstance(expected, dict) and "game_id" in expected:
+        if (
+            response.status_code == native["status"] == 200
+            and isinstance(expected, dict)
+            and "game_id" in expected
+        ):
             aliases[expected["game_id"]] = native["body"]["game_id"]
         if response.status_code != native["status"] or normalize(expected) != normalize(
             native["body"]
         ):
             raise AssertionError(
-                f"Parity mismatch: {method} {path} body={raw!r}\n"
+                f"Parity mismatch: {method} {path} (native {go_path}) body={raw!r}\n"
                 f"Python {response.status_code}: {normalize(expected)!r}\n"
                 f"Go {native['status']}: {normalize(native['body'])!r}"
             )
@@ -123,6 +154,9 @@ def main() -> int:
             "seed=\U00011bf1",
             "seed=\U0001e5f1",
             "seed=1_234",
+            "seed=%1c17%1f",
+            "seed=%c2%8517%c2%85",
+            "seed=%0017",
             "seed=%20%2B12%20",
             "seed=3&seed=8",
             "seed=bad",
@@ -150,6 +184,7 @@ def main() -> int:
             ("GET", BASE + "/missing/unknown"),
         ):
             request(method, path, "{}")
+        request("POST", "/api/wordgames/intrusul/%67ames?seed=17")
         # Exercise every distinct gameplay state with the real oracle's private answer.
         for seed in range(20):
             game = request("POST", f"{BASE}?seed={seed}")
@@ -166,6 +201,8 @@ def main() -> int:
                 "{}",
                 '{"id":null}',
                 '{"id":12}',
+                '{"id":18446744073709551617}',
+                '{"id":' + "9" * 500 + "}",
                 '{"id":[]}',
                 '{"id":{}}',
                 '{"id":true}',
@@ -181,6 +218,13 @@ def main() -> int:
             ):
                 request("POST", f"{BASE}/{sid}/guess", raw)
             request("POST", f"{BASE}/{sid}/guess", '{"id":"unknown"}')
+            request(
+                "POST",
+                f"{BASE}/{sid}/guess",
+                '{"id":"unknown","extra":' + "[" * 150 + "0" + "]" * 150 + "}",
+            )
+            encoded_id = "%" + format(ord(sid[0]), "02x") + sid[1:]
+            request("GET", f"{BASE}/{encoded_id}")
             wrong = session.members[0]
             request("POST", f"{BASE}/{sid}/guess", json.dumps({"id": wrong}))
             request("POST", f"{BASE}/{sid}/guess", json.dumps({"id": wrong}))
@@ -206,6 +250,106 @@ def main() -> int:
         request("POST", f"{BASE}?daily=2026-10-01")
         game = request("POST", f"{BASE}?seed=7")
         request("POST", f"{BASE}/{game['game_id']}/guess", " " * (64 * 1024 + 1))
+        # Qualify the actual HTTP boundary for every other native engine, not only
+        # direct service goldens. Seeded sessions use the oracle's private state to
+        # drive complete games; no answer is exposed by a native response.
+        from collections import deque
+
+        from cat_de_roman_esti.wordgames import (
+            alchimie,
+            conexiuni,
+            contexto,
+            lant,
+            perechi,
+        )
+        from cat_de_roman_esti.wordgames.service import get_service
+
+        for path in ("/api/health", "/api/manifest", "/api/categories", "/api/me"):
+            request("GET", path)
+        for module in (perechi, conexiuni, contexto, lant, alchimie):
+            base = f"/api/wordgames/{module.GAME_KEY}/games"
+            for query in (
+                "seed=bad&category=unknown",
+                "seed=17&category=unknown&starter=bad",
+                "seed=17&category=",
+                "seed=17&difficulty=",
+                "seed=17&difficulty=invalid",
+                "seed=17&daily=",
+                "seed=17&starter=2",
+                "seed=17&starter=bad",
+            ):
+                request("POST", f"{base}?{query}")
+            for method, suffix in (
+                ("GET", ""),
+                ("POST", "/missing"),
+                ("GET", "/missing"),
+                ("GET", "/missing/unknown"),
+            ):
+                request(method, base + suffix, "{}")
+            for seed, difficulty in ((7, "usor"), (17, "normal"), (31, "greu")):
+                created = request("POST", f"{base}?seed={seed}&difficulty={difficulty}")
+                sid = created["game_id"]
+                session = module.store.get(sid)
+                assert session is not None
+                path = f"{base}/{sid}"
+                request("GET", path)
+                if module is perechi:
+                    action, field = "match", "ids"
+                    answers = [{"ids": list(pair.members)} for pair in session.pairs]
+                elif module is conexiuni:
+                    action, field = "guess", "ids"
+                    answers = [{"ids": ids} for ids in session.groups.values()]
+                elif module is contexto:
+                    action, field = "guess", "text"
+                    answers = [{"text": session.target}]
+                    request("POST", path + "/clue")
+                    request("POST", path + "/guess", '{"text":"cuvantxyz"}')
+                elif module is lant:
+                    action, field = "move", "text"
+                    graph = get_service().graph
+                    todo = deque([(session.start, [])])
+                    seen = {session.start}
+                    while todo:
+                        node, route = todo.popleft()
+                        if node == session.target:
+                            answers = [{"text": step} for step in route]
+                            break
+                        for neighbor in graph.neighbors(node, include_distractors=False):
+                            node_id = neighbor.node.id
+                            if node_id not in seen:
+                                seen.add(node_id)
+                                todo.append((node_id, [*route, node_id]))
+                    else:
+                        raise AssertionError("oracle Lanț has no route")
+                    request("POST", path + "/hint")
+                else:
+                    action, field = "combine", "a"
+                    answers = [{"a": pair[0], "b": pair[1]} for pair, _ in session.routes[0]]
+                    request("POST", path + "/reset")
+                for raw in (
+                    "",
+                    "null",
+                    "[]",
+                    "{}",
+                    json.dumps({field: None}),
+                    json.dumps({field: 18446744073709551617}),
+                ):
+                    request("POST", path + "/" + action, raw)
+                for body in answers:
+                    request("POST", path + "/" + action, json.dumps(body))
+                request("GET", path)
+                request("POST", path + "/" + action, "{malformed")
+        for raw in ("", "null", "[]", '{"extra":1}', '{"progress":1}', '{"goal_id":"missing"}'):
+            request("POST", "/api/alchimie/explore", raw)
+        explore = request("POST", "/api/alchimie/explore", "{}")
+        eid = explore["game_id"]
+        for op, body in (
+            ("hint", ""),
+            ("goal", '{"goal_id":null}'),
+            ("combine", '{"a":"missing","b":"missing"}'),
+        ):
+            request("POST", f"/api/alchimie/explore/{eid}/{op}", body)
+        request("GET", f"/api/alchimie/explore/{eid}")
         if args.benchmark:
             for seed in range(1000):
                 game = request("POST", f"{BASE}?seed={seed}")
@@ -218,9 +362,16 @@ def main() -> int:
                 child.wait(timeout=10)
             except subprocess.TimeoutExpired:
                 child.terminate()
-                child.wait(timeout=10)
-    assert child.returncode == 0, f"Go replay exit {child.returncode}"
-    print(f"Intrusul HTTP parity: {count} responses matched (only session IDs normalized)")
+                try:
+                    child.wait(timeout=10)
+                except subprocess.TimeoutExpired:
+                    child.kill()
+                    child.wait(timeout=10)
+    assert child.returncode == 0, f"Native replay exit {child.returncode}"
+    print(
+        f"{args.runtime} arcade HTTP parity: {count} responses matched "
+        "(only session IDs normalized)"
+    )
     if args.benchmark:
 
         def percentiles(values: list[int]) -> dict:
@@ -233,16 +384,16 @@ def main() -> int:
 
         report = {
             "scope": (
-                "local sequential Go httptest vs Django TestClient; Intrusul only; "
+                "local sequential native replay recorder vs Django TestClient; arcade; "
                 "no listener/TLS/concurrency"
             ),
             "matched_responses": count,
             "python": percentiles(times_python),
-            "go": percentiles(times_go),
+            args.runtime: percentiles(times_go),
             "python_peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024,
-            "go_peak_rss_bytes": go_peak,
+            f"{args.runtime}_peak_rss_bytes": go_peak,
             "limitations": (
-                "Go contains only Intrusul content, Python loads the shared full graph; "
+                "Native servers load the full arcade export; replay harnesses differ; "
                 "proxy mode retains both runtimes; not full-port savings or capacity proof"
             ),
         }

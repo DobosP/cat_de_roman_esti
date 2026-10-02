@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "source_sha256": "d6eb6c769b319e37fa0d1261659ca3f813f2a749d45bbbcbe14c26a86e918c4a",
+  "cases": [
+    {
+      "name": "default",
+      "operator": "",
+      "contact": "",
+      "version": "2026-07-09",
+      "age": 16,
+      "privacy": "be6b1b1a58be8a60acbf57f4f762fe46362cbd27d6b1e3d689665edcf290334d",
+      "terms": "f01ae89c9f2df8b49474537e44a9e8b6d170d11f0fe44ad229b7ce9218305076"
+    },
+    {
+      "name": "both",
+      "operator": " Asociația Test ",
+      "contact": " privacy@example.ro ",
+      "version": "2026-07-09",
+      "age": 16,
+      "privacy": "7b76857119d66fbc5996d8ee9e6e952ad639021aebbbc52b30d8ed6e003f4868",
+      "terms": "c87a6a4309ba357d55b95c4b41532350fa6dac5cc9c315e8a1741c89906d2249"
+    },
+    {
+      "name": "operator-only",
+      "operator": "\u001c Asociația Test  ",
+      "contact": "",
+      "version": "2026-07-09",
+      "age": 16,
+      "privacy": "9ec90d9950f848f2d557a162224210c595da8f263aa80bd10ec9ea5b1468a625",
+      "terms": "f01ae89c9f2df8b49474537e44a9e8b6d170d11f0fe44ad229b7ce9218305076"
+    },
+    {
+      "name": "contact-only",
+      "operator": "",
+      "contact": " privacy@example.ro ",
+      "version": "2026-07-09",
+      "age": 16,
+      "privacy": "db4c8a28b09635f8ecd030d162958f5bc76f0453b7ffc2552df05c5481479fb7",
+      "terms": "f01ae89c9f2df8b49474537e44a9e8b6d170d11f0fe44ad229b7ce9218305076"
+    },
+    {
+      "name": "escaped",
+      "operator": " Asociația \"A\" & B's <Club> ",
+      "contact": " contact\"x'y<&@example.ro ",
+      "version": "2026-07-09",
+      "age": 16,
+      "privacy": "f7df819c35da4c22448fe7ccbd227fe0b693ab811518d1b5593c9fd27f387317",
+      "terms": "c87a6a4309ba357d55b95c4b41532350fa6dac5cc9c315e8a1741c89906d2249"
+    },
+    {
+      "name": "no-version",
+      "operator": "Asociația Test",
+      "contact": "privacy@example.ro",
+      "version": "",
+      "age": 16,
+      "privacy": "6a3d9ae09184f0dc27745ed124e265446b2be2ad4eaa7e1df6bde60ab1b1b09e",
+      "terms": "91249da997d42a713d5811497d7ee51e8e1f8b4b0f2f82144b28351d190cfe17"
+    },
+    {
+      "name": "changed-version-account-age",
+      "operator": "Asociația Test",
+      "contact": "privacy@example.ro",
+      "version": "review-$V1",
+      "age": 18,
+      "privacy": "3d306773dc3bfed48a6c28b8bd25fae3715b2f2668d263c473cac0966d958905",
+      "terms": "51a65a9965b920263eff0bdecad760615e7466ff4b351aff33c3f41252a28032"
+    }
+  ],
+  "placeholder_sha256": "afc0305e946dd50071d039065b2bbd2ac2dcc1d4b1e7baa99b252e0965fb0b92"
+}

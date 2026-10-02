@@ -89,6 +89,37 @@ test("one shared lock records concurrent claims for one terminal session once", 
   assert.deepEqual(new Set(locks.names), new Set(["cat_wordgame_scores_v1_transaction"]));
 });
 
+test("queued completions use the lock-time clock when tabs acquire out of call order", async (t) => {
+  const queued = [];
+  const locks = {
+    request(_name, callback) {
+      return new Promise((resolve, reject) => {
+        queued.push(() => Promise.resolve().then(callback).then(resolve, reject));
+      });
+    },
+  };
+  let clock = NOW;
+  t.mock.method(Date, "now", () => clock);
+  const gameId = "11111111-1111-1111-1111-111111111111";
+  const claim = () => scores.recordScoreCompletionOnce(
+    "contexto", gameId, 700, "terminat contexto", {}, { storage, locks },
+  );
+
+  const earlier = claim();
+  clock += 1;
+  const later = claim();
+  await queued[1]();
+  clock += 1;
+  await queued[0]();
+  const outcomes = await Promise.all([earlier, later]);
+
+  assert.equal(outcomes.filter(Boolean).length, 1);
+  assert.equal(scores.timesPlayed("contexto"), 1);
+  assert.equal(scores.recentScores("contexto").length, 1);
+  assert.equal(storage.writes, 1);
+  assert.deepEqual(receipts().contexto, [{ id: gameId, at: NOW + 1 }]);
+});
+
 test("different completed IDs and different games each record under the shared lock", async () => {
   const locks = new SerialLocks();
   const outcomes = await Promise.all([

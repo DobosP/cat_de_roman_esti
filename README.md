@@ -140,7 +140,7 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 
 ## Docs
 
-- [`docs/GO_BACKEND.md`](docs/GO_BACKEND.md) — native Go Intrusul pilot, local gateway, parity gates and Rust evaluation.
+- [`docs/GO_BACKEND.md`](docs/GO_BACKEND.md) — Go/Rust migration decision, guarded gateway and verification history.
 - [`docs/STATUS.md`](docs/STATUS.md) — current truth: state, pins, verification record, next actions.
 - [`docs/TESTARE_V1.md`](docs/TESTARE_V1.md) — Romanian V1 tester guide: six-game session, feedback form,
   same-Wi-Fi phone setup for the organizer.

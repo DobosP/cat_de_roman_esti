@@ -1,0 +1,86 @@
+{
+  "verified_date": "2026-10-03",
+  "scope": "complete standalone anonymous arcade; six native games and generators, exploration/restores, metadata/legal/static SPA",
+  "content_export": {
+    "schema": 2,
+    "bytes": 7230307,
+    "reference": "Python 3.12 / Unicode 15.0.0"
+  },
+  "go": {
+    "race": "passed all packages",
+    "vet": "passed",
+    "http_reference_responses": 1207,
+    "browser_passed": 622,
+    "browser_retries": 0,
+    "browser_minutes": 10.6
+  },
+  "rust": {
+    "unit_tests_passed": 55,
+    "fmt": "passed",
+    "clippy": "all targets, warnings denied, passed",
+    "http_reference_responses": 1207,
+    "browser_passed": 622,
+    "browser_retries": 0,
+    "browser_minutes": 9.8
+  },
+  "frontend": {
+    "cases_passed": 241,
+    "lint": "passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "initial_gzip_KiB": 119.78,
+    "budget_KiB": 120.0
+  },
+  "python": {
+    "targeted_tests_passed": 61,
+    "ruff": "passed",
+    "export_freshness": "passed",
+    "fixture_validator": "zero errors",
+    "pack_validator": "passed"
+  },
+  "website": {
+    "legal_configurations": 7,
+    "pages_matching_python_bytes": 14,
+    "root_html_regression": "passed both",
+    "methods_cache_ranges_redirects": "passed"
+  },
+  "performance_reports": [
+    "http-creates.json",
+    "http-journeys.json"
+  ],
+  "container_local_verification": "not qualified; official registry layer download repeatedly stalled and task-owned pull was cancelled; build/smoke checks are in CI",
+  "publication": {
+    "pushed": false,
+    "deployed": false,
+    "production_changed": false
+  },
+  "outside_scope": [
+    "accounts/OAuth",
+    "authenticated saved scores and public leaderboard",
+    "enabled submissions",
+    "other repositories"
+  ],
+  "known_limits": [
+    "process-local sessions require replica affinity and expire on restart",
+    "private content/world are startup snapshots, rebuild on changes",
+    "precompressed static variants and all DRF negotiation variants are not qualified",
+    "physical devices and Safari/WebKit are not qualified"
+  ],
+  "mixed_create_result_c8": {
+    "go": {
+      "cpu_ms": 4.816666666666667,
+      "peak_rss_bytes": 173789184,
+      "request_p95_ms": 39.837282
+    },
+    "python": {
+      "cpu_ms": 16.25,
+      "peak_rss_bytes": 343613440,
+      "request_p95_ms": 371.788634
+    },
+    "rust": {
+      "cpu_ms": 4.983333333333333,
+      "peak_rss_bytes": 99868672,
+      "request_p95_ms": 128.931897
+    }
+  }
+}

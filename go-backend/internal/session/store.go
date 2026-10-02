@@ -32,13 +32,18 @@ type Store[T any] struct {
 	mu      sync.Mutex
 	entries map[string]*entry[T]
 	lru     *list.List
-	ttl     time.Duration
+	ttl     float64 // Seconds, retaining Python-compatible fractional environment values.
 	max     int
 	now     func() time.Time
 }
 
 func New[T any]() *Store[T] {
-	store, _ := NewWithOptions[T](DefaultTTL, DefaultMaxSessions, time.Now)
+	config, err := configFromEnv()
+	if err != nil {
+		panic(err)
+	} // Like Python's import-time configuration, fail before serving.
+	store, _ := NewWithOptions[T](DefaultTTL, config.MaxSessions, time.Now)
+	store.ttl = config.TTLSeconds
 	return store
 }
 
@@ -49,7 +54,7 @@ func NewWithOptions[T any](ttl time.Duration, max int, now func() time.Time) (*S
 	if ttl < 0 || max < 0 || now == nil {
 		return nil, errors.New("invalid session store configuration")
 	}
-	return &Store[T]{entries: make(map[string]*entry[T]), lru: list.New(), ttl: ttl, max: max, now: now}, nil
+	return &Store[T]{entries: make(map[string]*entry[T]), lru: list.New(), ttl: ttl.Seconds(), max: max, now: now}, nil
 }
 
 func uuid() (string, error) {
@@ -87,7 +92,7 @@ func (s *Store[T]) purge(now time.Time) int {
 		entry := item.Value.(*entry[T])
 		// Access times are ordered by LRU. Skip old pinned entries, but stop as
 		// soon as a live timestamp means every later entry is younger too.
-		if now.Sub(entry.lastAccess) <= s.ttl {
+		if now.Sub(entry.lastAccess).Seconds() <= s.ttl {
 			break
 		}
 		if entry.borrowers == 0 {
