@@ -91,7 +91,7 @@ Cât de român ești? — Go anonymous arcade
   ./run.sh [run]   Build Go (and SPA if missing), then serve on localhost:8000.
   ./run.sh dev     Go API + Vite frontend development server; rerun after Go edits.
   ./run.sh docker  Build and run the canonical Go image; no Python serving runtime.
-  ./run.sh build   Build the SPA and Go executable, then exit.
+  ./run.sh build   Rebuild the SPA and Go executable, then exit.
   ./run.sh help    Show this help.
 
 PORT defaults to 8000; HOST defaults to 127.0.0.1. A busy port fails explicitly.
@@ -104,7 +104,7 @@ case "${1:-run}" in
   run|"") cmd_run ;;
   dev) cmd_dev ;;
   docker) cmd_docker ;;
-  build) ensure_frontend; build_backend ;;
+  build) build_frontend; build_backend ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
 esac

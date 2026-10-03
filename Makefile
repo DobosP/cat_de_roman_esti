@@ -3,7 +3,7 @@
 #   make run      build Go + SPA if missing, then serve the anonymous arcade
 #   make dev      Vite frontend reload + Go API (restart after Go edits)
 #   make docker   docker build + run the production image
-#   make build    ensure the compiled SPA + build the Go executable
+#   make build    rebuild the compiled SPA + Go executable
 #   make help     list targets
 #
 # Pass listener settings through as usual, e.g.: make run PORT=9000
@@ -20,7 +20,7 @@ dev: ## Vite frontend reload + Go API (restart after Go edits)
 docker: ## docker build + run the production image
 	./run.sh docker
 
-build: ## Ensure the compiled SPA and build the Go executable
+build: ## Rebuild the compiled SPA and Go executable
 	./run.sh build
 
 help: ## Show this help
