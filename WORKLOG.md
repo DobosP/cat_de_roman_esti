@@ -1355,3 +1355,11 @@ image sha256:1863f43c5e8ff38feb898f2138ea81a6b720a9f36dae3aeb7822e5ce4aaa3eaa,
 retained as release-e29fb0f63df8; Caddy and both certificate/config volumes stay unchanged.
 The Go profile preserves Caddy's app:8000 upstream and removes obsolete Python/source
 variables. Release candidate image/CI/public proof follows after qualification.
+
+Go deployed 2026-10-03; final proof recorded 2026-10-04. Main was fast-forwarded and
+pushed to ca61b5d34236 after green GitHub run 37150262141. Final image 7663bff4c2e6,
+tag release-ca61b5d34236: healthy, zero restarts, nonroot/read-only, cat-server-only,
+no Python interpreter/application sources. Public 151-request smoke completed all six
+games, restored exploration and verified 28 assets/gates. Caddy and volumes are unchanged;
+Python rollback-e29fb0f63df8 and previous Compose are retained. Details are in
+docs/reviews/go-production. The external Python smoke client is not serving code.

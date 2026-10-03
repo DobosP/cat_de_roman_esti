@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-03 — Go selected for production; deployment qualification in progress.
+Last verified: 2026-10-04 — Go-only backend merged, published and deployed; anonymous V1.0.1.
 
 ## Current state
 
@@ -74,7 +74,6 @@ Unrevealed answers, recipe maps and routes stay private.
   (119.78/120 KiB gzip), validators, reserve builder, docs and whitespace; **622/622** browser
   cases (Edge desktop/Pixel 7, no retries), plus 200 repeated Lanț recovery cases pass.
   V1 receipts: [1.0.0](reviews/v1-testing-release/verification.json), [1.0.1](reviews/v1-0-1-hardening/README.md).
-- Physical devices/Safari remain untested; Windows full suite requires WSL.
 
 ## Selected Go backend
 
@@ -87,7 +86,7 @@ Unrevealed answers, recipe maps and routes stay private.
 - Fixed a shared frontend score-receipt race found by the Go two-tab browser gate: transaction time
   is sampled after Web Lock acquisition. **241 frontend cases**, lint/typecheck/build pass (119.78 KiB).
 - **622/622 browser cases per runtime** pass; same-CPU HTTP [receipts](reviews/native-backends/README.md).
-  Build/run/CI: [guide](NATIVE_BACKENDS.md); Go rollout checks are in progress.
+  Build/run/CI: [guide](NATIVE_BACKENDS.md); Go production [proof](reviews/go-production/README.md) passes.
 - Accounts/OAuth/account scores and enabled submissions remain Python features; native startup
   refuses activation. Sources/world are immutable startup snapshots; source changes require a rebuild.
   Sessions remain process-local; replicas need affinity. Python is content/reference tooling;
@@ -95,16 +94,17 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Production and next work
 
-- Production: anonymous V1.0.1 `e29fb0f63df8f3fe4678b1ae8882b6712ba993be`, deployed
-  2026-09-26 at the owner's request (GitHub CI green on that commit). Image tag
-  `release-e29fb0f63df8`; rollback image `rollback-13e49b2c1148` (V91) stays on the host.
-  Build 54 s while V91 served; recreate gave ~3 s of 502s (7/126 polls), then 200s.
-- Post-deploy smoke: `/api/health` 1.0.1/2416 concepts, manifest
-  `fixture-v1-reviewed-content` 2416/9458/180, accounts off, 14 categories, all six game
-  starts 200, `/` `max-age=0`, legal pages filled; container healthy, 0 restarts, no 5xx.
-- Go production replacement, main merge and publication are owner-authorized on 2026-10-03.
-  Preserve exact Python release/Caddy volumes during candidate build; swap only the app.
-  Account activation and recurring loop restart remain outside this deployment.
+- Production: anonymous V1.0.1 **Go** `ca61b5d3423692dc43824279a5eadfc339edd71b`, deployed
+  2026-10-03; [GitHub CI green](https://github.com/DobosP/cat_de_roman_esti/actions/runs/37150262141).
+  Main merged/published; image `release-ca61b5d34236`, healthy/0 restarts, UID10001/read-only.
+- Exact candidate/public: **151 requests each**, six completed games, exploration restore,
+  28 asset byte/cache/HEAD proofs; header `X-Cat-Runtime: go`, no Python process/files/interpreter.
+  Full manifest/categories, legal configuration and account/submission refusals pass.
+- Caddy/certificates/volumes preserved; only app replaced. Python image `rollback-e29fb0f63df8`
+  and its old profile remain for rollback; original V91 rollback is also retained.
+- Live memory snapshot 46.87 MiB Go / previous105.6 MiB Python; image156MB /397MB;
+  snapshots are not capacity/billing promises. [Rollout receipt](reviews/go-production/README.md).
+- Account activation and recurring loop restart remain outside this deployment.
 - Next: a same-Wi-Fi phone/desktop session with the tester guide, including an iPhone
   (Safari/WebKit is untested), an Android phone and enlarged text. Accounts stay off.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
