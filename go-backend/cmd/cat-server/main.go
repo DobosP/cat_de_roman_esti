@@ -8,61 +8,33 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io"
 	"log"
-	"net"
 	"net/http"
 	"net/http/httptest"
-	"net/url"
 	"os"
 	"os/signal"
 	"strings"
 	"syscall"
 	"time"
+	"unicode"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/session"
 )
 
 func main() {
 	addr := flag.String("listen", "127.0.0.1:8081", "HTTP bind address")
-	upstream := flag.String("python-upstream", "", "optional anonymous Python backend, numeric loopback HTTP only")
 	replay := flag.Bool("replay", false, "offline JSON-lines HTTP request replay on stdin/stdout")
 	flag.Parse()
-	for _, name := range []string{"CAT_KG_FIXTURE", "CAT_GAMES_PACK", "CAT_BOARD_RANKINGS"} {
-		if os.Getenv(name) != "" {
-			log.Fatal("Go backend requires bundled content without source overrides")
-		}
-	}
-	for _, v := range []string{"1", "true", "yes", "on"} {
-		if strings.ToLower(strings.TrimSpace(os.Getenv("CAT_ACCOUNTS_ENABLED"))) == v {
-			log.Fatal("Go backend requires accounts OFF")
-		}
-	}
-	if os.Getenv("CAT_SUBMISSIONS_DIR") != "" {
-		log.Fatal("Go backend does not support CAT_SUBMISSIONS_DIR; use Python for enabled submissions")
-	}
-	if limit := os.Getenv("CAT_MAX_REQUEST_BYTES"); limit != "" && limit != "65536" {
-		log.Fatal("Go backend requires the default CAT_MAX_REQUEST_BYTES budget")
+	if err := validateRuntimeEnvironment(); err != nil {
+		log.Fatal(err)
 	}
 	c, err := content.Load()
 	if err != nil {
 		log.Fatal(err)
 	}
-	var target *url.URL
-	if *upstream != "" {
-		target, err = url.Parse(*upstream)
-		if err != nil || target.Scheme != "http" || target.User != nil || !net.ParseIP(target.Hostname()).IsLoopback() || target.RawQuery != "" || target.Fragment != "" || target.Path != "" {
-			log.Fatal("Python upstream must be numeric loopback HTTP without credentials/path/query")
-		}
-		if *replay {
-			log.Fatal("replay is offline; Python upstream is unavailable")
-		}
-		if err = checkUpstream(target, c); err != nil {
-			log.Fatal(err)
-		}
-	}
-	handler := httpapi.New(c, target)
+	handler := httpapi.New(c)
 	if *replay {
 		if err = replayRequests(handler); err != nil {
 			log.Fatal(err)
@@ -86,30 +58,36 @@ func main() {
 	}
 }
 
-func checkUpstream(target *url.URL, c *content.Content) error {
-	client := &http.Client{Timeout: 5 * time.Second, CheckRedirect: func(r *http.Request, via []*http.Request) error { return http.ErrUseLastResponse }}
-	for _, path := range []string{"/api/me", "/api/manifest"} {
-		resp, err := client.Get(target.String() + path)
-		if err != nil {
-			return fmt.Errorf("anonymous upstream probe failed: %w", err)
-		}
-		var body map[string]any
-		err = json.NewDecoder(io.LimitReader(resp.Body, 64*1024)).Decode(&body)
-		resp.Body.Close()
-		if err != nil || resp.StatusCode != 200 {
-			return fmt.Errorf("anonymous upstream probe failed")
-		}
-		if path == "/api/me" {
-			if enabled, ok := body["accounts_enabled"].(bool); !ok || enabled || body["authenticated"] != false || body["user"] != nil {
-				return fmt.Errorf("Go backend refuses an accounts-enabled upstream")
-			}
-		} else {
-			if body["content_hash"] != c.Manifest["content_hash"] || body["build_version"] != c.Manifest["build_version"] {
-				return fmt.Errorf("Python upstream content differs from the embedded Go export")
-			}
+// Deployment supports the anonymous compiled-data runtime. Reject activation
+// of dormant features rather than silently proxying requests to another runtime.
+func validateRuntimeEnvironment() error {
+	for _, name := range []string{"CAT_KG_FIXTURE", "CAT_GAMES_PACK", "CAT_BOARD_RANKINGS"} {
+		if os.Getenv(name) != "" {
+			return fmt.Errorf("%s is not supported: Go uses the sealed bundled content", name)
 		}
 	}
-	return nil
+	for _, value := range []string{"1", "true", "yes", "on"} {
+		if strings.ToLower(strings.TrimFunc(os.Getenv("CAT_ACCOUNTS_ENABLED"), func(r rune) bool { return unicode.IsSpace(r) || r >= 0x1c && r <= 0x1f })) == value {
+			return fmt.Errorf("CAT_ACCOUNTS_ENABLED must remain off for the anonymous Go runtime")
+		}
+	}
+	if os.Getenv("CAT_SUBMISSIONS_DIR") != "" {
+		return fmt.Errorf("CAT_SUBMISSIONS_DIR is not supported by the anonymous Go runtime")
+	}
+	if limit, defined := os.LookupEnv("CAT_MAX_REQUEST_BYTES"); defined {
+		cfg, err := session.ParseConfig(nil, &limit)
+		if err != nil || cfg.MaxSessions != 65536 {
+			return fmt.Errorf("CAT_MAX_REQUEST_BYTES must retain the 65536-byte budget")
+		}
+	}
+	optional := func(name string) *string {
+		if value, ok := os.LookupEnv(name); ok {
+			return &value
+		}
+		return nil
+	}
+	_, err := session.ParseConfig(optional("CAT_SESSION_TTL_SECONDS"), optional("CAT_MAX_SESSIONS_PER_GAME"))
+	return err
 }
 
 func replayRequests(handler http.Handler) error {

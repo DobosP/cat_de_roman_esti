@@ -4,7 +4,7 @@ A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in
 `docs/STATUS.md`; no graph visualization). Alchimie exploration also has its
 own reviewed vocabulary and recipe catalog. All six are **server-authoritative**:
-the Django BFF validates every move and hides the answers.
+the Go server validates every move and hides the answers.
 
 - **Alchimie** — explore a saved Romanian kitchen collection with consistent recipes
   and optional goals, search your earned recipes, or play short scored target challenges ([ADR-0151](docs/adr/0151-expand-game-vocabulary-and-search-earned-recipes.md)).
@@ -24,8 +24,10 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
 ## Stack
 
-- **Python >= 3.11**; the CLI is stdlib-only; the web app needs the `web` extra (Django 5.2 +
-  DRF + uvicorn, pinned by `constraints.txt`).
+- **Go** serves the anonymous web app (module minimum 1.26; qualified compiler 1.27.1).
+- **Python** retains the stdlib terminal CLI, content tooling and Django reference tests;
+  native content export uses Python 3.12 / Unicode 15.0.0. Reference web dependencies
+  are pinned by `constraints.txt`. Rust remains a retained research implementation.
 - Frontend: React 19.2 + Vite 8.1 + TypeScript, Node 24 — see [`frontend/README.md`](frontend/README.md).
 - Vendored stdlib HTTP client (`roedu_client.py`, urllib) for the RO-EDU data platform.
 - Dev tooling: `pytest` + `ruff` (line-length 100, select E,F,I,UP,B).
@@ -55,66 +57,56 @@ offline fixture.
 
 ## Run (web app)
 
-The animated SPA + Django BFF play **fully offline** against the bundled fixture — no
-server, no API key. Pick whichever of the three paths suits you.
+The compiled SPA and Go server play fully offline against the reviewed embedded
+content. The Go runtime serves all six games and Alchimie exploration without a
+Python server. Build and deployment details are in
+[`docs/NATIVE_BACKENDS.md`](docs/NATIVE_BACKENDS.md); current qualification is in
+[`docs/STATUS.md`](docs/STATUS.md).
 
 ### One command (local)
 
-```bash
-pip install -c constraints.txt -e ".[dev,web]"   # backend + web extra, pinned
-./run.sh            # builds the SPA if missing, then serves the BFF
-# open the printed URL, e.g. http://127.0.0.1:8000
-```
-
-On the fleet laptop: `CDR_PYTHON=~/work/cat_de_roman_esti/.venv/bin/python ./run.sh` —
-run.sh's default interpreter (run.sh:26) has no Django.
-
-`./run.sh` (or `make run`) builds the React SPA into `cat_de_roman_esti/web/static`
-only if the build is missing, then boots the BFF on port **8000** (auto-falling back to
-the next free port if 8000 is taken) and prints the URL. Override the port with
-`PORT=9000 ./run.sh`.
-
-### Dev (hot-reload)
+Install the qualified Go 1.27.1 compiler, then:
 
 ```bash
-./run.sh dev        # or: make dev
-# open http://localhost:5173  (Vite proxies /api -> the uvicorn BFF)
+./run.sh
+# open http://127.0.0.1:8000
 ```
 
-Runs the Vite dev server (hot SPA) **and** `uvicorn --reload` (hot API) together. Open
-the **Vite** URL (`:5173`) for the live UI; it proxies `/api` to the BFF on `:8000`.
+The launcher builds Go with an incremental cache under `~/work/_temp/` and builds
+React only when its compiled bundle is missing. Node 24 is needed for that frontend
+build. `PORT=9000 ./run.sh` changes the listener; a busy port fails explicitly.
+Python remains a content-production and reference-test dependency.
 
-### Docker (build + run)
+### Frontend development
 
 ```bash
-./run.sh docker                       # build the image + run it, or:
-docker compose up --build             # same, via compose
-# open http://localhost:8000
+./run.sh dev
+# open http://localhost:5173
 ```
 
-Multi-stage build: stage 1 (`node:24-slim`) builds the SPA; stage 2 (`python:3.12-slim`)
-`pip install`s the package with its `web` extra and runs `uvicorn` as a non-root user on
-port **8000**. `docker compose down` stops it. Override the host port with
-`PORT=9000 docker compose up`.
+Vite reloads frontend changes and proxies `/api` to Go on `127.0.0.1:8000`.
+Restart the command after backend changes. `make run`, `make dev` and `make build`
+wrap the same Go launcher.
 
-### Live server (optional env)
-
-By default the web app is offline. To point it at a live `ro_data_server`, set these
-**before** running any of the paths above (the BFF reads them server-side; the API key
-never reaches the browser, and an unreachable/unhealthy server **fails soft** back to
-the offline fixture):
-
-| Env var          | Default            | Meaning                                        |
-| ---------------- | ------------------ | ---------------------------------------------- |
-| `ROEDU_API_URL`  | _(unset = offline)_| Base URL of the live `ro_data_server`.         |
-| `ROEDU_API_KEY`  | `cat-de-roman-dev` | API key for the live server.                   |
-| `PORT`           | `8000`             | Port the BFF binds (host port for Docker).     |
-| `HOST`           | `127.0.0.1`        | Bind host for the local launcher.              |
+### Docker
 
 ```bash
-ROEDU_API_URL=http://localhost:8077 ROEDU_API_KEY=cat-de-roman-dev ./run.sh
-# or with compose: ROEDU_API_URL=... docker compose up --build
+./run.sh docker
+# or:
+docker compose up --build
+# open http://127.0.0.1:8000
 ```
+
+The canonical Dockerfile builds the SPA with Node and the backend with Go. Its
+nonroot runtime contains the executable, compiled static files and an HTTP health
+probe; it contains no Python server. Local and anonymous-production Compose use
+this image, a read-only application filesystem and container port 8000, matching
+Caddy. Change the local published port with `PORT=9000 docker compose up`.
+
+The active runtime is anonymous; accounts and enabled submissions remain off.
+`Dockerfile.python-reference` and `docker-compose.prod.yml` retain the dormant
+Python accounts-staging path separately. They do not select the anonymous release
+or activate accounts automatically.
 
 ## Tests & lint
 
@@ -140,7 +132,7 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 
 ## Docs
 
-- [`docs/GO_BACKEND.md`](docs/GO_BACKEND.md) — Go/Rust migration decision, guarded gateway and verification history.
+- [`docs/GO_BACKEND.md`](docs/GO_BACKEND.md) — Go serving runtime, retained Rust research and verification history.
 - [`docs/STATUS.md`](docs/STATUS.md) — current truth: state, pins, verification record, next actions.
 - [`docs/TESTARE_V1.md`](docs/TESTARE_V1.md) — Romanian V1 tester guide: six-game session, feedback form,
   same-Wi-Fi phone setup for the organizer.

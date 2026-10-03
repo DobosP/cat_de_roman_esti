@@ -1338,3 +1338,20 @@ Python; peak RSS reductions are about 49% Go / 71% Rust. Go has lower creation p
 Rust has the smaller memory footprint. Container execution is not qualified locally
 after repeated official-registry layer stalls; CI contains build/smoke checks.
 No remote publication or deployment followed.
+
+## Owner-selected Go rollout (2026-10-03)
+
+Valid until: this release candidate or deployment proof changes — then requalify.
+
+The owner selected Go, requested main merge/publication and deployment. Canonical
+Docker/local/anonymous launch now executes Go only, with no Python interpreter,
+Django/uvicorn, upstream proxy or Rust process in the active runtime. The compiled
+frontend is built with Node; Python validators/export/reference and dormant accounts
+remain outside the selected image. Existing legal/donation/session settings are
+preserved; accounts/submissions stay off. ADR-0162 records the selection.
+
+Pre-rollout host inventory confirms the current healthy Python release e29fb0f63df8,
+image sha256:1863f43c5e8ff38feb898f2138ea81a6b720a9f36dae3aeb7822e5ce4aaa3eaa,
+retained as release-e29fb0f63df8; Caddy and both certificate/config volumes stay unchanged.
+The Go profile preserves Caddy's app:8000 upstream and removes obsolete Python/source
+variables. Release candidate image/CI/public proof follows after qualification.

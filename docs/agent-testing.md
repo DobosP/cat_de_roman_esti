@@ -3,6 +3,8 @@
 Last verified: 2026-10-03
 
 ## Environment
+- Production/local server: Go 1.27.1, canonical `run.sh`/Dockerfile; see [NATIVE_BACKENDS](NATIVE_BACKENDS.md).
+- Python commands below are content/reference/dormant-account gates, not the serving runtime.
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
   pytest-django). It is gitignored and lives only in the shared checkout.
 - From a task worktree, prefix every command with `PYTHONPATH=.`.
@@ -35,7 +37,7 @@ Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
 | Lint | `<interp> -m ruff check` | `All checks passed!` |
 | Whitespace | `git diff --check` | no output |
 | Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | build lands `cat_de_roman_esti/web/static/index.html` (ci.yml:92-95) |
-| Browser | `cd frontend && npm run test:e2e` (after build + `npx playwright install chromium`) | six real-backend games, desktop + mobile; Python web runtime on `PATH`; optional `CDR_E2E_PORT` |
+| Browser | `cd frontend && npm run test:e2e` (after build + `npx playwright install chromium`) | six real-backend games, desktop + mobile; Go binary built plus Python fixture oracle on `PATH`; optional `CDR_E2E_PORT` |
 | Docs | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 
 `pyproject.toml` sets `addopts = "-q"`, so a passing run prints dots only; add `-o addopts=""` when you

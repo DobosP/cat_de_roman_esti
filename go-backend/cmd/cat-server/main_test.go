@@ -1,47 +1,37 @@
 package main
 
 import (
-	"io"
-	"net/http"
-	"net/url"
 	"strings"
 	"testing"
-
-	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 )
 
-type transportFunc func(*http.Request) (*http.Response, error)
-
-func (f transportFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
-
-func TestUpstreamMustBeAnonymousAndContentEquivalent(t *testing.T) {
-	c, err := content.Load()
-	if err != nil {
+func TestAnonymousRuntimeConfigurationFailsClosed(t *testing.T) {
+	names := []string{"CAT_KG_FIXTURE", "CAT_GAMES_PACK", "CAT_BOARD_RANKINGS", "CAT_ACCOUNTS_ENABLED", "CAT_SUBMISSIONS_DIR", "CAT_MAX_REQUEST_BYTES", "CAT_SESSION_TTL_SECONDS", "CAT_MAX_SESSIONS_PER_GAME"}
+	for _, name := range names {
+		t.Setenv(name, "")
+	}
+	t.Setenv("CAT_MAX_REQUEST_BYTES", "65536")
+	t.Setenv("CAT_SESSION_TTL_SECONDS", "7200")
+	t.Setenv("CAT_MAX_SESSIONS_PER_GAME", "1000")
+	if err := validateRuntimeEnvironment(); err != nil {
 		t.Fatal(err)
 	}
-	target, _ := url.Parse("http://127.0.0.1:8000")
-	original := http.DefaultTransport
-	defer func() { http.DefaultTransport = original }()
-	for _, tc := range []struct {
-		name, me, manifest string
-		valid              bool
-	}{
-		{"valid", `{"accounts_enabled":false,"authenticated":false,"user":null}`, `{"content_hash":"` + c.Manifest["content_hash"].(string) + `","build_version":"` + c.Manifest["build_version"].(string) + `"}`, true},
-		{"accounts", `{"accounts_enabled":true}`, `{}`, false},
-		{"incomplete", `{"accounts_enabled":false}`, `{}`, false},
-		{"drift", `{"accounts_enabled":false,"authenticated":false,"user":null}`, `{"content_hash":"other"}`, false},
-	} {
-		t.Run(tc.name, func(t *testing.T) {
-			http.DefaultTransport = transportFunc(func(r *http.Request) (*http.Response, error) {
-				body := tc.me
-				if r.URL.Path == "/api/manifest" {
-					body = tc.manifest
-				}
-				return &http.Response{StatusCode: 200, Header: make(http.Header), Body: io.NopCloser(strings.NewReader(body))}, nil
-			})
-			if err := checkUpstream(target, c); (err == nil) != tc.valid {
-				t.Fatalf("upstream gate: %v", err)
+	for _, c := range []struct{ name, value string }{{"CAT_ACCOUNTS_ENABLED", "1"}, {"CAT_ACCOUNTS_ENABLED", " YES "}, {"CAT_ACCOUNTS_ENABLED", "\x1cYES\x1f"}, {"CAT_SUBMISSIONS_DIR", "synthetic-submissions"}, {"CAT_KG_FIXTURE", "synthetic.json"}, {"CAT_GAMES_PACK", "synthetic.json"}, {"CAT_BOARD_RANKINGS", "synthetic.json"}, {"CAT_MAX_REQUEST_BYTES", "4096"}, {"CAT_SESSION_TTL_SECONDS", "NaN"}, {"CAT_SESSION_TTL_SECONDS", "0"}, {"CAT_MAX_SESSIONS_PER_GAME", "0"}} {
+		t.Run(c.name+"-"+c.value, func(t *testing.T) {
+			t.Setenv(c.name, c.value)
+			err := validateRuntimeEnvironment()
+			if err == nil || !strings.Contains(err.Error(), c.name) {
+				t.Fatalf("configuration notrefused byname: %v", err)
+			}
+			if strings.Contains(err.Error(), c.value) && c.value != "0" {
+				t.Fatal("configuration error exposed value")
 			}
 		})
+	}
+	t.Setenv("CAT_MAX_REQUEST_BYTES", " +٦٥٥٣٦ ")
+	t.Setenv("CAT_SESSION_TTL_SECONDS", "0.25")
+	t.Setenv("CAT_MAX_SESSIONS_PER_GAME", "3")
+	if err := validateRuntimeEnvironment(); err != nil {
+		t.Fatal("supportedsessionconfigrefused")
 	}
 }

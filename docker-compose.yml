@@ -1,12 +1,4 @@
-# docker-compose.yml — one service for the cat_de_roman_esti web app.
-#
-#   docker compose up --build      # build + run, then open http://localhost:8000
-#   docker compose down            # stop + remove
-#
-# By default the app plays fully OFFLINE against the bundled fixture (no ROEDU_API_URL).
-# To point it at a live ro_data_server, uncomment the env vars below (or set them in a
-# .env file / your shell — compose substitutes ${VAR} from the environment).
-
+# Default local Go anonymous arcade. No database, Python server or submissions.
 services:
   app:
     build:
@@ -14,46 +6,25 @@ services:
       dockerfile: Dockerfile
     image: cat-de-roman-esti:latest
     container_name: cat-de-roman-esti
-    # Map host:container. Override the host port with `PORT=9000 docker compose up`.
     ports:
-      - "${PORT:-8000}:8000"
+      - "127.0.0.1:${PORT:-8000}:8000"
     environment:
-      # The app binds this port inside the container (Dockerfile CMD honors it).
       PORT: "8000"
-      # Offline bundle: the curated kg_sample.json is the canonical shipped KG — the
-      # games pack references its node ids, so pointing anywhere else empties every
-      # category's curated games. kg_real.json is a stale thin corpus export (932
-      # nodes / 135 edges); only swap it back once the corpus lane regenerates it AND
-      # the pack is rebuilt against it (scripts/gen_real_fixture.py).
-      CAT_KG_FIXTURE: "${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_sample.json}"
-      # --- Live RO-EDU server (OPTIONAL) ---------------------------------------
-      # Leave BOTH unset/commented for offline fixture play (the default).
-      # ROEDU_API_URL passthrough: if set in your shell/.env it is forwarded; the
-      # `:-` defaults keep these empty (offline) when unset.
-      ROEDU_API_URL: "${ROEDU_API_URL:-}"
-      ROEDU_API_KEY: "${ROEDU_API_KEY:-cat-de-roman-dev}"
-      # --- User-submitted games (OPTIONAL, ADR-0011) ---------------------------
-      # Points at the mounted volume below so POST /api/submissions persists its
-      # pending queue across restarts. Unset to disable the endpoint (503).
-      CAT_SUBMISSIONS_DIR: "${CAT_SUBMISSIONS_DIR:-/data/submissions}"
-      # Low-resource launch bounds (ADR-0020). Raise only after measuring real load.
+      CAT_ACCOUNTS_ENABLED: "0"
+      CAT_CONSENT_VERSION: "${CAT_CONSENT_VERSION:-2026-07-09}"
+      CAT_DONATE_URL: "${CAT_DONATE_URL:-}"
+      CAT_LEGAL_OPERATOR: "${CAT_LEGAL_OPERATOR:-}"
+      CAT_LEGAL_CONTACT_EMAIL: "${CAT_LEGAL_CONTACT_EMAIL:-}"
       CAT_SESSION_TTL_SECONDS: "${CAT_SESSION_TTL_SECONDS:-7200}"
       CAT_MAX_SESSIONS_PER_GAME: "${CAT_MAX_SESSIONS_PER_GAME:-1000}"
       CAT_MAX_REQUEST_BYTES: "${CAT_MAX_REQUEST_BYTES:-65536}"
-    volumes:
-      - submissions:/data/submissions
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
     restart: unless-stopped
-    # Surface the image's own HEALTHCHECK to `docker compose ps`.
     healthcheck:
-      test:
-        - "CMD"
-        - "python"
-        - "-c"
-        - "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health',timeout=3).status==200 else 1)"
+      test: ["CMD", "curl", "--fail", "--silent", "--show-error", "--output", "/dev/null", "--max-time", "3", "http://127.0.0.1:8000/api/health"]
       interval: 30s
       timeout: 5s
       retries: 3
-      start_period: 10s
-
-volumes:
-  submissions:
+      start_period: 20s

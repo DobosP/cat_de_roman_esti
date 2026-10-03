@@ -5,6 +5,11 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 const port = Number(process.env.CDR_E2E_PORT || 8138);
 if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error("Invalid CDR_E2E_PORT");
 const baseURL = `http://127.0.0.1:${port}`;
+const binary = fileURLToPath(new URL("../build/cat-server", import.meta.url))
+  + (process.platform === "win32" ? ".exe" : "");
+const quotedBinary = process.platform === "win32"
+  ? `"${binary}"`
+  : `'${binary.replaceAll("'", "'\\''")}'`;
 
 export default defineConfig({
   testDir: "./e2e",
@@ -28,7 +33,7 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    command: `python3 -m cat_de_roman_esti.web --host 127.0.0.1 --port ${port} --log-level warning`,
+    command: `${quotedBinary} -listen 127.0.0.1:${port}`,
     cwd: root,
     url: `${baseURL}/api/health`,
     reuseExistingServer: false,
@@ -36,7 +41,7 @@ export default defineConfig({
     env: {
       PYTHONPATH: root,
       CAT_ACCOUNTS_ENABLED: "0",
-      CAT_DEBUG: "1",
+      CAT_DEBUG: "0",
       ROEDU_API_URL: "",
       ROEDU_API_KEY: "",
     },

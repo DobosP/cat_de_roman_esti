@@ -1,26 +1,26 @@
 # Makefile — thin wrappers over ./run.sh for the cat_de_roman_esti web app.
 #
-#   make run      build SPA if missing, then serve the BFF (offline by default)
-#   make dev      vite dev + uvicorn --reload (hot-reload)
+#   make run      build Go + SPA if missing, then serve the anonymous arcade
+#   make dev      Vite frontend reload + Go API (restart after Go edits)
 #   make docker   docker build + run the production image
-#   make build    build the SPA into cat_de_roman_esti/web/static
+#   make build    ensure the compiled SPA + build the Go executable
 #   make help     list targets
 #
-# Pass env through as usual, e.g.:  make run PORT=9000 ROEDU_API_URL=http://localhost:8077
+# Pass listener settings through as usual, e.g.: make run PORT=9000
 
 .PHONY: run dev docker build help
 .DEFAULT_GOAL := help
 
-run: ## Build SPA if missing, then serve the BFF (offline fixture by default)
+run: ## Build Go + SPA if missing, then serve the anonymous arcade
 	./run.sh run
 
-dev: ## Vite dev server + uvicorn --reload for hot-reload development
+dev: ## Vite frontend reload + Go API (restart after Go edits)
 	./run.sh dev
 
 docker: ## docker build + run the production image
 	./run.sh docker
 
-build: ## Build the SPA into cat_de_roman_esti/web/static
+build: ## Ensure the compiled SPA and build the Go executable
 	./run.sh build
 
 help: ## Show this help

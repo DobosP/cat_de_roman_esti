@@ -1,6 +1,6 @@
 # docker-compose.anon.yml — cât-de-român-ești ANONYMOUS ARCADE production stack (v1 launch).
 #
-#   Caddy (TLS/proxy)  ──►  app (Django/uvicorn, single process)
+#   Caddy (TLS/proxy)  ──►  app (Go, single process, compiled SPA)
 #
 # No Postgres, no Google OAuth, no PII: the app is stateless (progress lives in the
 # browser) and the stack persists zero user data.
@@ -22,14 +22,9 @@ services:
       dockerfile: Dockerfile
     image: cat-de-roman-esti:latest
     environment:
-      DJANGO_SETTINGS_MODULE: cat_de_roman_esti.web.settings
       PORT: "8000"
       CAT_ACCOUNTS_ENABLED: "0"
-      CAT_DEBUG: "0"
       CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.anon}
-      CAT_SECRET_KEY: ${CAT_SECRET_KEY:-}
-      CAT_KG_FIXTURE: ${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_sample.json}
-      CAT_HSTS_SECONDS: ${CAT_HSTS_SECONDS:-0}
       CAT_CONSENT_VERSION: ${CAT_CONSENT_VERSION:-2026-07-09}
       CAT_DONATE_URL: ${CAT_DONATE_URL:-}
       CAT_LEGAL_OPERATOR: ${CAT_LEGAL_OPERATOR:-}
@@ -41,6 +36,9 @@ services:
       # keeps POST /api/submissions disabled (503) so the stack stores zero user data.
     expose:
       - "8000" # reachable only by Caddy over the compose network (no host port)
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
     restart: unless-stopped
 
   caddy:

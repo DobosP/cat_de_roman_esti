@@ -1,7 +1,7 @@
 # ADR-0161 — Complete anonymous Go and Rust backends for comparison
 
 Date: 2026-10-02
-Status: accepted
+Status: partially superseded by ADR-0162 (Go production selection; comparative implementation/evidence retained)
 
 ## Decision
 

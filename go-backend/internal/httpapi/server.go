@@ -7,7 +7,6 @@ import (
 	"io"
 	"math/big"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"regexp"
 	"strings"
@@ -30,20 +29,20 @@ const MaxRequestBytes = 64 * 1024
 var localOrigin = regexp.MustCompile(`^http://(localhost|127\.0\.0\.1)(:\d+)?$`)
 
 type Server struct {
-	game       *intrusul.Service
-	content    *content.Content
-	proxy      *httputil.ReverseProxy
-	StaticRoot string
-	perechi    *perechi.Service
-	conexiuni  *conexiuni.Service
-	contexto   *contexto.Service
-	lant       *lant.Service
-	alchimie   *alchimie.Service
-	explorer   *alchimie_explore.Service
+	game         *intrusul.Service
+	content      *content.Content
+	StaticRoot   string
+	allowedHosts []string
+	perechi      *perechi.Service
+	conexiuni    *conexiuni.Service
+	contexto     *contexto.Service
+	lant         *lant.Service
+	alchimie     *alchimie.Service
+	explorer     *alchimie_explore.Service
 }
 
-func New(c *content.Content, upstream *url.URL) *Server {
-	s := &Server{game: intrusul.New(c), content: c}
+func New(c *content.Content) *Server {
+	s := &Server{game: intrusul.New(c), content: c, allowedHosts: configuredHosts()}
 	s.StaticRoot = defaultStaticRoot()
 	s.perechi = perechi.New(c)
 	s.conexiuni = conexiuni.New(c)
@@ -51,12 +50,6 @@ func New(c *content.Content, upstream *url.URL) *Server {
 	s.lant = lant.New(c)
 	s.alchimie = alchimie.New(c)
 	s.explorer = alchimie_explore.New(c)
-	if upstream != nil {
-		s.proxy = httputil.NewSingleHostReverseProxy(upstream)
-		s.proxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-			write(w, r, 503, map[string]any{"detail": "Python backend unavailable"})
-		}
-	}
 	return s
 }
 
@@ -71,6 +64,7 @@ func write(w http.ResponseWriter, r *http.Request, status int, body any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.Header().Set("Referrer-Policy", "same-origin")
+	w.Header().Set("Cross-Origin-Opener-Policy", "same-origin")
 	if status == 413 {
 		w.Header().Set("Cache-Control", "no-store")
 	}
@@ -81,6 +75,7 @@ func write(w http.ResponseWriter, r *http.Request, status int, body any) {
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("X-Cat-Runtime", "go")
 	if r.ContentLength > MaxRequestBytes {
 		write(w, r, 413, map[string]any{"detail": "Request body too large"})
 		return
@@ -98,7 +93,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		r.Body = io.NopCloser(bytes.NewReader(raw))
 	}
-	if strings.HasPrefix(r.URL.Path, "/api/wordgames/") || strings.HasPrefix(r.URL.Path, "/api/alchimie/") || s.proxy == nil {
+	{
 		w.Header().Add("Vary", "origin")
 		if origin := r.Header.Get("Origin"); localOrigin.MatchString(origin) {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
@@ -113,6 +108,10 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
+	if !validHost(r.Host, s.allowedHosts) {
+		websiteBytes(w, r, 400, "text/html; charset=utf-8", []byte(badHostHTML))
+		return
+	}
 	if r.URL.Path == "/healthz" {
 		write(w, r, 200, map[string]any{"ok": true})
 		return
@@ -122,10 +121,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if s.website(w, r) {
-			return
-		}
-		if s.proxy != nil {
-			s.proxy.ServeHTTP(w, r)
 			return
 		}
 		s.standalone(w, r)

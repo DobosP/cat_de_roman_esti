@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-03 — standalone native qualification; anonymous production remains V1.0.1.
+Last verified: 2026-10-03 — Go selected for production; deployment qualification in progress.
 
 ## Current state
 
@@ -73,25 +73,25 @@ Unrevealed answers, recipe maps and routes stay private.
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
   (119.78/120 KiB gzip), validators, reserve builder, docs and whitespace; **622/622** browser
   cases (Edge desktop/Pixel 7, no retries), plus 200 repeated Lanț recovery cases pass.
-- Isolated 3.12.13 wheel: version/health 1.0.1, 30 static files exact, six creates/resumes.
   V1 receipts: [1.0.0](reviews/v1-testing-release/verification.json), [1.0.1](reviews/v1-0-1-hardening/README.md).
-- Physical devices and Safari/WebKit remain untested; Windows full suite requires WSL.
+- Physical devices/Safari remain untested; Windows full suite requires WSL.
 
-## Native Go and Rust implementations
+## Selected Go backend
 
-- [ADR-0161](adr/0161-complete-anonymous-native-backends.md) extends ADR-0160 to two standalone
-  anonymous servers: all six games and mining, Alchimie exploration/restores, metadata/OpenAPI,
-  legal pages and the compiled SPA. Both embed one private schema-2 export; no Python serving runtime.
+- [ADR-0162](adr/0162-select-go-production-backend.md): owner-selected Go-only production runtime;
+  six games/mining, exploration/restores, metadata/OpenAPI, legal pages and SPA are native Go.
+  Canonical launcher/Docker/anonymous profile have no Python serving process or fallback.
 - Local qualification: **1207 HTTP responses per runtime** match Django; curated/mined/daily,
   Unicode/fuzzy graph, full scored games and all nine exploration histories match frozen references.
   Go race/vet and Rust fmt/strict Clippy/**55 tests** pass; export freshness, validators and Ruff pass.
 - Fixed a shared frontend score-receipt race found by the Go two-tab browser gate: transaction time
   is sampled after Web Lock acquisition. **241 frontend cases**, lint/typecheck/build pass (119.78 KiB).
 - **622/622 browser cases per runtime** pass; same-CPU HTTP [receipts](reviews/native-backends/README.md).
-  Build/run/containers/CI: [guide](NATIVE_BACKENDS.md). Hosted CI and deployment are not claimed.
+  Build/run/CI: [guide](NATIVE_BACKENDS.md); Go rollout checks are in progress.
 - Accounts/OAuth/account scores and enabled submissions remain Python features; native startup
   refuses activation. Sources/world are immutable startup snapshots; source changes require a rebuild.
-  Sessions remain process-local; replicas need affinity. No production or other repository change.
+  Sessions remain process-local; replicas need affinity. Python is content/reference tooling;
+  Rust is manual research; other repositories are unchanged.
 
 ## Production and next work
 
@@ -102,9 +102,9 @@ Unrevealed answers, recipe maps and routes stay private.
 - Post-deploy smoke: `/api/health` 1.0.1/2416 concepts, manifest
   `fixture-v1-reviewed-content` 2416/9458/180, accounts off, 14 categories, all six game
   starts 200, `/` `max-age=0`, legal pages filled; container healthy, 0 restarts, no 5xx.
-- Origin `main` was published on 2026-09-23 at the owner's request: a fast-forward from
-  `b25c949` through V99, V1 and V1.0.1 (merge `8e66ec0`). Accounts activation and
-  recurring loop restart remain outside V1/1.0.1.
+- Go production replacement, main merge and publication are owner-authorized on 2026-10-03.
+  Preserve exact Python release/Caddy volumes during candidate build; swap only the app.
+  Account activation and recurring loop restart remain outside this deployment.
 - Next: a same-Wi-Fi phone/desktop session with the tester guide, including an iPhone
   (Safari/WebKit is untested), an Android phone and enlarged text. Accounts stay off.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0161), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0162), reviews/WORKLOG: history.

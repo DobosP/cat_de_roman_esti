@@ -7,8 +7,11 @@ Two shippable shapes:
 | **Anonymous arcade** | `CAT_ACCOUNTS_ENABLED=0` (default) | Stateless, no DB, progress in the browser | Minimal — no accounts/PII |
 | **Accounts + Google login** | `CAT_ACCOUNTS_ENABLED=1` | Postgres + sessions + Google login + private score copy | Full child-data stack (below) |
 
-This document covers publishing the **accounts** stack on a single EU VPS (Hetzner), fronted
-by Cloudflare, with TLS via Caddy. The anonymous arcade is a subset (skip Postgres/OAuth).
+The selected production backend is Go ([ADR-0162](adr/0162-select-go-production-backend.md)).
+The root Dockerfile and anonymous Compose profile serve all gameplay and site routes
+without Python or a Rust process. Content authoring/validation and the Python reference
+remain outside the runtime image. Accounts/OAuth are a dormant Python reference using
+`Dockerfile.python-reference`; their later sections do not describe the Go release.
 
 **Product model.** The game is **always free to play without an account.** With current
 consent, signing in can do two private things; Google name/email are never published. The
@@ -66,8 +69,8 @@ and Postgres entirely — this mode needs neither.
 ```bash
 cd ~/cat_de_roman_esti
 cp .env.anon.example .env.anon
-# Fill in: CAT_DOMAIN, TLS_EMAIL (CAT_SECRET_KEY optional — settings only enforce it
-# when CAT_ACCOUNTS_ENABLED=1).
+# Fill in: CAT_DOMAIN, TLS_EMAIL and the public legal fields. Existing secret files stay private.
+# Go does not require CAT_SECRET_KEY, a database or live fixture overrides.
 docker compose -f docker-compose.anon.yml --env-file .env.anon up -d --build
 docker compose -f docker-compose.anon.yml logs -f app   # watch boot (no migrations to run)
 ```
@@ -86,16 +89,18 @@ curl -fsS -X POST "https://<CAT_DOMAIN>/api/wordgames/perechi/games?seed=38"
 `curated` is raw approved inventory, not a runtime-playability promise. Four easy Conexiuni
 themes are intentionally false in `available_by_difficulty`; the picker hides them. If every
 category shows `node_count: 0`, or every nested availability flag is false, the app loaded
-the wrong KG fixture — `CAT_KG_FIXTURE` must point at the curated `kg_sample.json` (the
-default); the games pack's node ids do not exist in other fixtures.
+a mismatched release. Go embeds the reviewed fixture/export; rebuild after approved
+content changes. The anonymous Go profile does not forward `CAT_KG_FIXTURE` or live
+RO-EDU variables, so a stale host variable cannot silently replace the graph.
 
 `/api/health` does not instantiate the derived catalog. The two POST probes are mandatory:
 both must return 200 after every deploy, or Intrusul/Perechi may be unavailable despite a
 healthy container.
 
 **Single-process constraint** still applies: game sessions live in memory
-(`SessionStore`), so the app must stay one process (see the
-[note below](#single-process-constraint)) — do not add extra workers.
+(`SessionStore`), so the app remains one Go process (see the
+[note below](#single-process-constraint)). Multiple replicas require session affinity
+or shared atomic session storage.
 
 **No user data is persisted.** `docker-compose.anon.yml` deliberately has no `db` service
 and no `CAT_SUBMISSIONS_DIR`/submissions volume — `POST /api/submissions` returns 503 in
@@ -184,8 +189,8 @@ curl -fsS https://<CAT_DOMAIN>/api/me            # {"accounts_enabled": true, "a
 ### Single-process constraint
 
 Game sessions live in memory (`SessionStore`), so the app **must stay one process** (the
-image runs a single uvicorn worker — keep it that way). If real load arrives, move session
-state to Redis before scaling out.
+Go image runs one server process). Add replicas only after session affinity or shared
+transactional state is designed and verified.
 
 ## 5. Backups
 
@@ -195,6 +200,17 @@ state to Redis before scaling out.
 - `pgdata` + `submissions` are named volumes — include them in host-level backups too.
 
 ## 6. Updates
+
+For the selected anonymous Go deployment, preserve the running image and Caddy volumes,
+then build a named candidate while the old app serves. Verify the candidate through
+its own temporary loopback port: HTML MIME/cache, manifest/categories, anonymous mode,
+legal notices, all six create/resume/action paths and exploration restore. Inspect its
+process and absence of Python executables/modules; `X-Cat-Runtime: go` is the public
+operational identity. Recreate only `app` with `--no-deps`, then repeat public probes.
+Keep the previous Compose file with its previous image tag for rollback; a Python
+rollback image must not be launched with the new Go environment/command. Do not change
+Caddy, its certificates, DNS, account flags or volumes during this app replacement.
+
 
 Before either stack rebuilds `latest`, preserve the running app image under the recorded
 known-good release. Docker may discard the prior untagged image after replacement:
@@ -213,7 +229,8 @@ git pull
 docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
 ```
 
-Migrations run on boot. Roll back by checking out the recorded commit and either restoring
+The Go anonymous image runs no migrations; the dormant Python accounts reference does.
+Roll back by checking out the recorded commit and either restoring
 the preserved image tag or rebuilding that commit. Never use `down -v` or a Docker prune:
 the Caddy TLS volumes and other apps on the shared host are outside this rollout's scope.
 

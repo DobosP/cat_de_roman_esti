@@ -14,6 +14,12 @@ on:
     branches: ["**"]
   pull_request:
     branches: ["**"]
+  workflow_dispatch:
+    inputs:
+      run_rust:
+        description: Run retained Rust research qualification (not the selected release runtime)
+        type: boolean
+        default: false
 
 # A newer push to the same ref cancels the older in-flight run.
 concurrency:
@@ -53,12 +59,12 @@ jobs:
         run: CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o ../build/cat-server ./cmd/cat-server
       - name: Differential HTTP journeys against Django
         run: PYTHONPATH=. python scripts/check_go_parity.py --binary build/cat-server
-      - name: Build standalone nonroot container
-        run: docker build -f go-backend/Dockerfile -t cat-native-go:ci .
-      - name: Verify standalone container
+      - name: Build canonical Go release container
+        run: docker build -f Dockerfile -t cat-native-go:ci .
+      - name: Verify canonical Go container
         run: |
           test "$(docker image inspect --format '{{.Config.User}}' cat-native-go:ci)" = "10001:10001"
-          container=$(docker run -d --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1::8080 cat-native-go:ci)
+          container=$(docker run -d --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1::8000 cat-native-go:ci)
           trap 'docker rm -f "$container" >/dev/null' EXIT
           for attempt in $(seq 1 60); do
             status=$(docker inspect --format '{{.State.Health.Status}}' "$container")
@@ -66,7 +72,7 @@ jobs:
             sleep 1
           done
           test "$status" = healthy
-          address=$(docker port "$container" 8080/tcp)
+          address=$(docker port "$container" 8000/tcp)
           curl --fail --silent "http://$address/" | python -c 'import sys; assert "<!doctype html>" in sys.stdin.read().lower()'
           curl --fail --silent -X POST "http://$address/api/wordgames/intrusul/games?seed=17" | python -c 'import json,sys; d=json.load(sys.stdin); assert len(d["tiles"])==4 and not d["won"]'
           docker exec "$container" sh -c '! command -v python && ! command -v python3'
@@ -77,7 +83,8 @@ jobs:
           retention-days: 7
 
   native-rust:
-    name: Rust anonymous arcade
+    name: Rust research (manual)
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_rust }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -126,20 +133,10 @@ jobs:
           path: rust-backend/target/release/cat-rust-server
           retention-days: 7
 
-  native-browser:
-    name: Native browser (${{ matrix.runtime }})
-    needs: [native-go, native-rust]
+  native-go-browser:
+    name: Selected Go browser
+    needs: [native-go]
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - runtime: go
-            directory: build
-            binary: build/cat-server
-          - runtime: rust
-            directory: rust-backend/target/release
-            binary: rust-backend/target/release/cat-rust-server
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -154,10 +151,10 @@ jobs:
         run: python -m pip install -c constraints.txt -e ".[web]"
       - uses: actions/download-artifact@v4
         with:
-          name: cat-native-${{ matrix.runtime }}
-          path: ${{ matrix.directory }}
+          name: cat-native-go
+          path: build
       - name: Restore native executable permission
-        run: chmod +x "${{ matrix.binary }}"
+        run: chmod +x build/cat-server
       - name: Install and build current SPA
         working-directory: frontend
         run: |
@@ -168,11 +165,52 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Standalone native game journeys (desktop + mobile)
         working-directory: frontend
-        run: npx playwright test --config playwright.${{ matrix.runtime }}.config.mjs
+        run: npm run test:e2e
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: native-browser-failures-${{ matrix.runtime }}
+          name: native-browser-failures-go
+          path: frontend/test-results/
+          retention-days: 7
+
+  native-rust-browser:
+    name: Rust research browser (manual)
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_rust }}
+    needs: [native-rust]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install offline fixture oracle
+        run: python -m pip install -c constraints.txt -e ".[web]"
+      - uses: actions/download-artifact@v4
+        with:
+          name: cat-native-rust
+          path: rust-backend/target/release
+      - name: Restore native executable permission
+        run: chmod +x rust-backend/target/release/cat-rust-server
+      - name: Install and build current SPA
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+      - name: Install browser
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
+      - name: Retained Rust journeys (desktop + mobile)
+        working-directory: frontend
+        run: npx playwright test --config playwright.rust.config.mjs
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: native-browser-failures-rust
           path: frontend/test-results/
           retention-days: 7
 
@@ -182,7 +220,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # 3.12 = the deploy runtime; 3.14 = newest Django 5.2-supported Python.
+        # 3.12 = Unicode-15 producer/reference; 3.14 = Python compatibility lane.
         python-version: ["3.12", "3.14"]
     steps:
       - uses: actions/checkout@v4
@@ -245,23 +283,3 @@ jobs:
           npm run build
           test -f ../cat_de_roman_esti/web/static/index.html
           ls ../cat_de_roman_esti/web/static/assets/*.js >/dev/null
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install offline browser-test backend
-        run: python -m pip install -c ../constraints.txt -e "..[web]"
-
-      - name: Install browser
-        run: npx playwright install --with-deps chromium
-
-      - name: Real game journeys (desktop + mobile emulation)
-        run: npm run test:e2e
-
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: browser-failures
-          path: frontend/test-results/
-          retention-days: 7

@@ -2,13 +2,13 @@
 
 ## Project summary
 - Purpose: Romanian word-game arcade — six server-authoritative text games (Alchimie, Intrusul,
-  Perechi, Conexiuni, Cald sau Rece, Lanțul Cuvintelor; README.md:9-18) served by a Django BFF
+  Perechi, Conexiuni, Cald sau Rece, Lanțul Cuvintelor; README.md:9-18) served by the Go backend (Django retained as a reference)
   (`cat_de_roman_esti/web/`) + React SPA (`frontend/`) over the bundled Romanian KG build
   `cat_de_roman_esti/fixtures/kg_sample.json` (data.py:27); the terminal CLI `cat-de-roman` (pyproject.toml:44)
   is the original semantic-hop game. Word-game/session behavior stays bounded, deterministic, test-covered.
-- Main runtime: Python ≥ 3.11 (pyproject.toml:9); deploy 3.12, CI 3.12 + 3.14 (ci.yml:34); Node 24
-  for the SPA (ci.yml:76). The CLI is stdlib-only; the web app needs the `web` extra pinned via
-  `constraints.txt` (pyproject.toml:17-40).
+- Main server: Go (`go-backend/`, qualified 1.27.1), standard-library-only; Node 24 builds the SPA.
+  Python 3.12/Unicode 15 validates and exports content and runs the differential reference;
+  Python CLI/dormant accounts remain reference tools. Production selection: ADR-0162.
 - Status source: `docs/STATUS.md`.
 
 ## Fleet context
@@ -53,8 +53,8 @@
 - Lint: `<interpreter> -m ruff check` · Whitespace: `git diff --check`
 - Frontend, only when `frontend/` changes: `cd frontend && npm ci && npm test && npm run lint && npm run build`
   (ci.yml:84-95); commit the regenerated `cat_de_roman_esti/web/static` + `.vite/manifest.json` with it (ADR-0020).
-- Run the app on this host: `CDR_PYTHON=~/work/cat_de_roman_esti/.venv/bin/python ./run.sh` (run.sh:26 defaults to
-  the romania_scraper venv).
+- Run the app: `./run.sh`; Go gates: `cd go-backend && go test -race ./... && go vet ./...`.
+  Runtime/release commands: `docs/NATIVE_BACKENDS.md`; deploy: `docs/DEPLOY.md`.
 
 ## Safety
 - Never read or print secret values; names only: `ROEDU_API_URL`, `ROEDU_API_KEY` (`.env.example`); values deploy per agent-ops ADR-0027.

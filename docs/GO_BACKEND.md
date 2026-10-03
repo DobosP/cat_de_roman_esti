@@ -9,7 +9,7 @@ Go now serves all six games, native fallback generation, Alchimie exploration an
 historical restores, metadata/OpenAPI, legal pages and the existing SPA/static
 bundle. Rust implements the same boundary. Both need no Python runtime for serving
 the anonymous release. Accounts and the optional submissions queue remain disabled.
-The deployed Python V1.0.1 release has not changed.
+Current rollout state is recorded in STATUS.
 
 Build/run, Docker, CI and browser instructions are in
 [Native backends](NATIVE_BACKENDS.md). Current qualification and performance evidence
@@ -18,7 +18,10 @@ The original narrower experiment's [receipt](reviews/go-backend-pilot/verificati
 is history: its 16 MiB Go footprint used only Intrusul data and cannot describe this
 complete port.
 
-The optional `-python-upstream http://127.0.0.1:8000` flag retains the guarded
-anonymous loopback gateway for unknown legacy routes. All known game/site paths
-remain native. The gateway validates the upstream manifest and refuses accounts;
-its combined heaps are outside the standalone benchmark.
+The initial loopback gateway in ADR-0160 is historical. The selected Go server has
+no Python upstream flag or reverse proxy; unknown API paths return native 404s.
+
+The production selection and user-authorized deployment are now
+[ADR-0162](adr/0162-select-go-production-backend.md). Go is the canonical runtime;
+the guarded Python gateway described above is historical and has been removed.
+Python remains a build/reference tool, and Rust remains comparative research.

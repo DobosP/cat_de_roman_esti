@@ -1,7 +1,10 @@
 # Native anonymous backends
 
 The native implementation and its qualification are tracked in [STATUS](STATUS.md).
-The migration decision is [ADR-0161](adr/0161-complete-anonymous-native-backends.md).
+The comparison decision is [ADR-0161](adr/0161-complete-anonymous-native-backends.md);
+Go production selection is [ADR-0162](adr/0162-select-go-production-backend.md).
+Canonical local/production launch uses Go via `run.sh` and the root Dockerfile.
+The runtime is Python-free; Python content/reference tools run outside it.
 
 Both `go-backend/cmd/cat-server` and `rust-backend` serve the six anonymous games,
 Alchimie exploration, the existing compiled SPA, category/manifest/OpenAPI responses
@@ -9,8 +12,7 @@ and the anonymous legal pages. Gameplay runs without a Python server or upstream
 Python remains the content producer and the reference used by development tests.
 
 Accounts, OAuth, account scores and enabled submissions are outside these native
-servers. `CAT_ACCOUNTS_ENABLED=1` and a nonempty `CAT_SUBMISSIONS_DIR` are refused. The production deployment and its
-accounts activation checklist remain in [DEPLOY](DEPLOY.md).
+servers. `CAT_ACCOUNTS_ENABLED=1` and a nonempty `CAT_SUBMISSIONS_DIR` are refused. The deployment runbook and dormant accounts-reference gates remain in [DEPLOY](DEPLOY.md).
 
 ## Build locally
 

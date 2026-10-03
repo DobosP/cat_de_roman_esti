@@ -1,4 +1,5 @@
-# docker-compose.prod.yml — cât-de-român-ești production stack (accounts + Google login).
+# NONDEFAULT reference-only accounts staging stack (Python + Google login).
+# Anonymous production uses docker-compose.anon.yml and the canonical Go image.
 #
 #   Caddy (TLS/proxy)  ──►  app (Django/uvicorn, single process)  ──►  db (Postgres)
 #
@@ -31,8 +32,8 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
-    image: cat-de-roman-esti:latest
+      dockerfile: Dockerfile.python-reference
+    image: cat-de-roman-esti:python-reference
     depends_on:
       db:
         condition: service_healthy
