@@ -47,7 +47,7 @@ type Content struct {
 	PackRanked             bool              `json:"pack_ranked"`
 	NormalizationMap       map[string]string `json:"normalization_map"`
 	AccentNormalizationMap map[string]string `json:"accent_normalization_map"`
-	CasefoldMap map[string]string `json:"casefold_map"`
+	CasefoldMap            map[string]string `json:"casefold_map"`
 	NormalizedIndex        map[string]string `json:"normalized_index"`
 	ContextoData           map[string]any    `json:"contexto_data"`
 	LantCaptions           map[string]string `json:"lant_captions"`

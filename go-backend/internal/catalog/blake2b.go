@@ -1,6 +1,5 @@
 package catalog
 
-
 import (
 	"encoding/binary"
 	"math/bits"

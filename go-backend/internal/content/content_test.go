@@ -11,7 +11,12 @@ func TestEmbeddedContentFailsClosed(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	intrusul:=0;for _,b:=range c.Boards{if b.Game=="intrusul"{intrusul++}}
+	intrusul := 0
+	for _, b := range c.Boards {
+		if b.Game == "intrusul" {
+			intrusul++
+		}
+	}
 	if intrusul != 226 {
 		t.Fatalf("reviewed Intrusul pool drift: %d", len(c.Boards))
 	}
