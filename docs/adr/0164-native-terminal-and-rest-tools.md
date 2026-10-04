@@ -35,3 +35,11 @@ the independent contract fixture. Focused vet passes. Full native content/export
 and browser qualification is still required before retiring any legacy required path.
 Commands and current receipts: [native tooling guide](../NATIVE_TOOLCHAIN.md) and
 [STATUS](../STATUS.md). Accounts/proposals remain off in production; no deploy or push.
+
+## Compatibility qualification amendment — 2026-10-05
+
+ADR-0165 records the independent review follow-up: the original health-only offline
+fallback is retained; a healthy server's subsequent content/provenance refusal remains
+an error. Empty categories retain original selection behavior without a panic. Literal
+Unicode line/paragraph separators use the independent mobile UTF-8 hash contract; literal
+backslash escape text remains exact. New independent vectors cover these corrections.

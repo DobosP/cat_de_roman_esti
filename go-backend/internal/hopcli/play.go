@@ -12,9 +12,7 @@ import (
 func Categories(b *Bundle) []string {
 	seen := map[string]bool{}
 	for _, p := range b.Puzzles {
-		if p.Category != "" {
-			seen[p.Category] = true
-		}
+		seen[p.Category] = true
 	}
 	out := []string{}
 	for c := range seen {

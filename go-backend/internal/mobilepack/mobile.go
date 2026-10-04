@@ -24,7 +24,7 @@ func canonical(v any) ([]byte, error) {
 	if err := e.Encode(v); err != nil {
 		return nil, err
 	}
-	return bytes.TrimSuffix(b.Bytes(), []byte{'\n'}), nil
+	return literalSeparators(bytes.TrimSuffix(b.Bytes(), []byte{'\n'})), nil
 }
 func Build(raw roeduclient.Bundle) (map[string]any, error) {
 	nodes, edges, puzzles := []map[string]string{}, []map[string]string{}, []map[string]string{}
@@ -91,4 +91,28 @@ func Bytes(raw roeduclient.Bundle) ([]byte, error) {
 		return nil, err
 	}
 	return b.Bytes(), nil
+}
+
+// Preserve the independent Python/JavaScript literal UTF-8 hash contract without
+// corrupting strings containing a literal backslash followed by u2028/u2029.
+func literalSeparators(raw []byte) []byte {
+	out := make([]byte, 0, len(raw))
+	for i := 0; i < len(raw); i++ {
+		if raw[i] == '\\' && i+1 < len(raw) {
+			if i+5 < len(raw) && raw[i+1] == 'u' && (string(raw[i+2:i+6]) == "2028" || string(raw[i+2:i+6]) == "2029") {
+				if raw[i+5] == '8' {
+					out = append(out, 0xe2, 0x80, 0xa8)
+				} else {
+					out = append(out, 0xe2, 0x80, 0xa9)
+				}
+				i += 5
+				continue
+			}
+			out = append(out, raw[i], raw[i+1])
+			i++
+			continue
+		}
+		out = append(out, raw[i])
+	}
+	return out
 }

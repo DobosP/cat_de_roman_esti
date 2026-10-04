@@ -52,3 +52,23 @@ func TestProjectionHashStableAndPrivateHelpersExcluded(t *testing.T) {
 		t.Fatal("hash ignored public content")
 	}
 }
+
+func TestIndependentLiteralUTF8SeparatorHash(t *testing.T) {
+	raw := roeduclient.Bundle{Nodes: []roeduclient.Record{{"id": "n", "label_ro": "A\u2028B\u2029C"}}}
+	built, err := Build(raw)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Frozen independently by Node crypto + JSON.stringify of the public projection.
+	if built["manifest"].(map[string]any)["content_hash"] != "sha256:1dd97b0dfcef6fe430a2dd9653218791b986cb56ba2021122244aa9638800b46" {
+		t.Fatal("literal separators differ from independent JS hash", built["manifest"])
+	}
+	encoded, err := canonical(map[string]string{"label": `literal \u2028 \u2029`})
+	if err != nil {
+		t.Fatal(err)
+	}
+	var round map[string]string
+	if json.Unmarshal(encoded, &round) != nil || round["label"] != `literal \u2028 \u2029` {
+		t.Fatal("literal escape text damaged", string(encoded))
+	}
+}

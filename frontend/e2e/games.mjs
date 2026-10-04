@@ -1,7 +1,6 @@
-import { execFileSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
 import { readFileSync } from "node:fs";
 import { expect } from "@playwright/test";
+import { nativePlan } from "./native-plan.mjs";
 
 export const games = [
   { key: "alchimie", path: "/alchimie?mode=challenges", board: ".alchemy-inventory-grid" },
@@ -13,18 +12,14 @@ export const games = [
 ];
 const fixtures = new Map();
 export const seededStarts = JSON.parse(readFileSync(new URL("./seeded-starts.json", import.meta.url), "utf8"));
-const root = fileURLToPath(new URL("../../", import.meta.url));
-const script = fileURLToPath(new URL("./solutions.py", import.meta.url));
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export function solution(game) {
   // Named semantic journeys and the general seed-38 journey must never share a cache entry.
   const fixtureKey = `${game.key}:${game.packId ?? "seed-38"}${game.daily ? `:daily-${game.daily}` : ""}`;
   if (!fixtures.has(fixtureKey)) {
-    const args = [script, game.key, ...(game.packId ? [game.packId] : []), ...(game.daily ? [`--daily=${game.daily}`] : [])];
-    fixtures.set(fixtureKey, JSON.parse(execFileSync("python3", args, {
-      cwd: root, env: { ...process.env, PYTHONPATH: root }, encoding: "utf8",
-    })));
+    const args = [game.key, ...(game.packId ? [game.packId] : []), ...(game.daily ? [`--daily=${game.daily}`] : [])];
+    fixtures.set(fixtureKey, nativePlan(args));
   }
   return fixtures.get(fixtureKey);
 }

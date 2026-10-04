@@ -19,7 +19,11 @@ func run() error {
 	root := flag.String("root", "..", "repository root")
 	category := flag.String("category", "", "game category")
 	difficulty := flag.String("difficulty", "", "easy or hard")
-	base := flag.String("api-url", "http://127.0.0.1:8077", "RO-EDU base URL")
+	defaultBase := os.Getenv("ROEDU_API_URL")
+	if defaultBase == "" {
+		defaultBase = "http://127.0.0.1:8077"
+	}
+	base := flag.String("api-url", defaultBase, "RO-EDU base URL")
 	list := flag.Bool("list", false, "list categories/puzzles")
 	flag.Parse()
 	if flag.NArg() != 0 {
@@ -27,6 +31,9 @@ func run() error {
 	}
 	if *difficulty != "" && *difficulty != "easy" && *difficulty != "hard" {
 		return fmt.Errorf("difficulty must be easy or hard")
+	}
+	if *fixture == "" {
+		*fixture = filepath.Join(*root, "cat_de_roman_esti/fixtures/kg_sample.json")
 	}
 	var b *hopcli.Bundle
 	var err error
@@ -42,11 +49,11 @@ func run() error {
 		}
 		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
 		defer cancel()
-		raw, e := c.Load(ctx, *category, *difficulty)
-		if e != nil {
-			return e
+		var fallback bool
+		b, fallback, err = hopcli.LoadOnline(ctx, c, *fixture, *category, *difficulty)
+		if fallback {
+			fmt.Fprintln(os.Stderr, "! server health unavailable; using the offline fixture")
 		}
-		b, err = hopcli.Parse(raw)
 	}
 	if err != nil {
 		return err

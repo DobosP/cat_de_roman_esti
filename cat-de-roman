@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Original semantic-hop terminal play, built and executed natively.
+set -euo pipefail
+terminal_repository="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+terminal_scratch="${CDR_TOOLCHAIN_SCRATCH:-$HOME/work/_temp/adhoc-cat-terminal-$(date +%Y%m%d)}"
+terminal_scratch="$(realpath -m "$terminal_scratch")"
+case "$terminal_scratch" in "$(realpath -m "$HOME/work/_temp")/"*) ;; *) printf 'Terminal build scratch must be under ~/work/_temp/\n' >&2; exit 2;; esac
+mkdir -p "$terminal_scratch/bin" "$terminal_scratch/go-cache" "$terminal_scratch/go-tmp"
+GOMAXPROCS=2 GOFLAGS=-p=2 GOCACHE="$terminal_scratch/go-cache" GOTMPDIR="$terminal_scratch/go-tmp" \
+ CGO_ENABLED=0 go -C "$terminal_repository/go-backend" build -trimpath -o "$terminal_scratch/bin/cat-de-roman" ./cmd/cat-hop
+exec "$terminal_scratch/bin/cat-de-roman" --root "$terminal_repository" "$@"

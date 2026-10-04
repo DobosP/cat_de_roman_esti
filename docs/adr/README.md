@@ -76,7 +76,8 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0161 | [Complete anonymous Go and Rust backends](0161-complete-anonymous-native-backends.md) | partially superseded by 0162 |
 | 0162 | [Select Go for the production arcade](0162-select-go-production-backend.md) | accepted; account boundary amended by 0163 |
 | 0163 | [Complete native Go accounts and serving](0163-complete-native-go-accounts.md) | accepted; offline tools amended by 0164; activation gated |
-| 0164 | [Native terminal, REST and mobile tools](0164-native-terminal-and-rest-tools.md) | accepted; broader tooling qualification in progress |
+| 0164 | [Native terminal, REST and mobile tools](0164-native-terminal-and-rest-tools.md) | accepted; qualification extended by 0165 |
+| 0165 | [Native source build and independent qualification](0165-native-source-build-and-qualification.md) | accepted; full operator integration in progress |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

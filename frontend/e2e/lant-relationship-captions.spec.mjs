@@ -1,11 +1,8 @@
-import { execFileSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
 import { test, expect } from "@playwright/test";
+import { nativePlan } from "./native-plan.mjs";
 import { games, gameURL, start, tabTo } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
-const root = fileURLToPath(new URL("../../", import.meta.url));
-const helper = fileURLToPath(new URL("./lant_caption_seeds.py", import.meta.url));
 const cases = [
   { id: "lt_geografie_239", nouns: /oraș|regiune|salină|chei|revoluționar|răscoală|munți|Turda/ },
   { id: "lt_literatura_240", nouns: /poet|scriitor|revistă|societate|academie|fondator|postum/ },
@@ -15,9 +12,7 @@ const cases = [
   { id: "lt_gastronomie_245", nouns: /plăcintă|pască|vanilie|brânză/, via: ["Poale-n brâu", "Pască"], hints: false },
 ].map((item) => ({
   ...item,
-  journey: JSON.parse(execFileSync("python3", [helper, item.id], {
-    cwd: root, env: { ...process.env, PYTHONPATH: root }, encoding: "utf8",
-  })),
+  journey: nativePlan(["--caption", item.id]),
 }));
 
 const responseFor = (page, id, action) => page.waitForResponse((response) =>

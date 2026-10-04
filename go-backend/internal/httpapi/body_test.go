@@ -1,36 +1,35 @@
 package httpapi
 
 import (
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
 	"net/http/httptest"
 	"os"
 	"reflect"
-	"regexp"
 	"strings"
 	"testing"
 )
 
 // One independently captured Python corpus qualifies both native validators.
 func TestFrozenPythonBodyModels(t *testing.T) {
-	source, err := os.ReadFile("../../../rust-backend/src/validation.rs")
+	source, err := os.ReadFile("../../../testdata/http/python-body-models.json")
 	if err != nil {
 		t.Fatal(err)
 	}
-	literal := regexp.MustCompile(`(?s)serde_json::from_str\(\s*r###"(.*?)"###\s*\)`).FindSubmatch(source)
-	if len(literal) != 2 {
-		t.Fatal("Python model reference vectors unavailable")
+	if fmt.Sprintf("%x", sha256.Sum256(source)) != "20748c9e111b54d0e0de6efeef476b77afc7b91bb71144b0aa8194f524e7ca40" {
+		t.Fatal("independent Python body corpus digest drift")
 	}
 	var cases []struct {
 		Kind, Model, Raw string
 		Error            any
 	}
-	if err = json.Unmarshal(literal[1], &cases); err != nil {
+	if err = json.Unmarshal(source, &cases); err != nil {
 		t.Fatal(err)
 	}
 	if len(cases) != 32 {
-		t.Fatalf("expected32Pythonmodelvectors,got%d", len(cases))
+		t.Fatalf("expected 32 Python model vectors, got %d", len(cases))
 	}
 	for index, row := range cases {
 		t.Run(fmt.Sprintf("%02d-%s", index, row.Kind), func(t *testing.T) {

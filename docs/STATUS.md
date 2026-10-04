@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-05 — native terminal/REST/mobile tooling stage; production remains anonymous V1.0.1.
+Last verified: 2026-10-05 — staged native source/tooling qualification; production remains anonymous V1.0.1.
 
 ## Current state
 
@@ -80,9 +80,8 @@ Unrevealed answers, recipe maps and routes stay private.
 - [ADR-0162](adr/0162-select-go-production-backend.md): owner-selected Go-only production runtime;
   six games/mining, exploration/restores, metadata/OpenAPI, legal pages and SPA are native Go.
   Canonical launcher/Docker/anonymous profile have no Python serving process or fallback.
-- Local qualification: **1207 HTTP responses per runtime** match Django; curated/mined/daily,
-  Unicode/fuzzy graph, full scored games and all nine exploration histories match frozen references.
-  Go race/vet and Rust fmt/strict Clippy/**55 tests** pass; export freshness, validators and Ruff pass.
+- Serving qualification: **1207 HTTP responses/runtime** match Django; all games and nine histories
+  match frozen references. Prior Go race/vet and retained Rust **55 tests** pass (linked proof).
 - Fixed a shared frontend score-receipt race found by the Go two-tab browser gate: transaction time
   is sampled after Web Lock acquisition. **241 frontend cases**, lint/typecheck/build pass (119.78 KiB).
 - **622/622 browser cases per runtime** pass; same-CPU HTTP [receipts](reviews/native-backends/README.md).
@@ -103,9 +102,10 @@ Unrevealed answers, recipe maps and routes stay private.
 - UID10001/read-only, healthy/zero restarts; fixedPCRE2 and zero fixableHIGH/CRITICAL image gate.
   Caddy/certificates/volumes preserved; previousGo+Python rollback profiles retained.
   [Complete rollout proof](reviews/go-completion/README.md). No provider/minor activation.
-- Native terminal/REST/mobile stage [ADR-0164](adr/0164-native-terminal-and-rest-tools.md):
-  Go 1.27.1 race/vet pass; 180 frozen terminal puzzles solve at par; mobile contract matches.
-  REST synthetic refusal/caps/snapshot/legal tests pass; broader tooling gates remain in progress.
+- Native source/tooling stage [ADR-0165](adr/0165-native-source-build-and-qualification.md):
+  exact eight-source export, 180 terminal paths, 32 neutral body cases and 1009 saved prefixes pass.
+  Native compiled parity 1207/1207, synthetic smoke151/28asset proofs, REST/mobile/docs race/vet pass.
+  Explicit synthetic-PG account/HTTP and shared auth gates pass; full operator/browser gate in progress.
 - Accounts/submissions remain off under go-live gates; recurring content loop remains outside rollout.
 - Next: same-Wi-Fi phone/desktop testing, iPhone (Safari/WebKit untested), Android and enlarged text.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
@@ -115,7 +115,6 @@ Unrevealed answers, recipe maps and routes stay private.
 - Known limits: Alchimie Greu starts on shelves without a curated board can take seconds
   (a time cap would break deterministic dailies); older stored score details keep ISO dates
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
-
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0164), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0165), reviews/WORKLOG: history.

@@ -18,7 +18,11 @@ FROM golang:1.27.1-bookworm AS backend
 WORKDIR /build/go-backend
 COPY shared-go/authcore/ /build/shared-go/authcore/
 COPY go-backend/ ./
-RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/cat-server ./cmd/cat-server
+COPY cat_de_roman_esti/fixtures/ /build/cat_de_roman_esti/fixtures/
+COPY tests/fixtures/kg_sample.json tests/fixtures/games_pack.json /build/tests/fixtures/
+COPY docs/CRITIQUE_RUBRIC.md /build/docs/CRITIQUE_RUBRIC.md
+RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-content export --root .. --check
+RUN CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 go build -trimpath -ldflags="-s -w" -o /out/cat-server ./cmd/cat-server
 
 FROM debian:bookworm-slim AS runtime
 RUN apt-get update \

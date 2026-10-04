@@ -1,0 +1,160 @@
+package httpgolden
+
+import (
+	"bytes"
+	"compress/gzip"
+	"context"
+	"crypto/sha256"
+	_ "embed"
+	"encoding/json"
+	"fmt"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"io"
+	"reflect"
+	"sort"
+	"strings"
+	"time"
+)
+
+//go:embed testdata/python-http-parity.json.gz
+var frozen []byte
+
+const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
+const MaxCorpusBytes = 32 * 1024 * 1024
+const MaxCases = 4096
+
+type Case struct {
+	Request Request `json:"request"`
+	Status  int     `json:"status"`
+	Body    any     `json:"body"`
+}
+type Corpus struct {
+	SchemaVersion int               `json:"schema_version"`
+	Reference     string            `json:"reference"`
+	Sources       map[string]string `json:"sources"`
+	Cases         []Case            `json:"cases"`
+}
+type Report struct {
+	OK                 bool              `json:"ok"`
+	Mode               string            `json:"mode"`
+	Requests           int               `json:"requests"`
+	Reference          string            `json:"reference,omitempty"`
+	ElapsedSeconds     float64           `json:"elapsed_seconds"`
+	ContentHash        string            `json:"content_hash,omitempty"`
+	GamesCompleted     int               `json:"games_completed,omitempty"`
+	ExplorationRestore bool              `json:"exploration_restore,omitempty"`
+	AssetsVerified     int               `json:"assets_verified,omitempty"`
+	LegalSHA256        map[string]string `json:"legal_sha256,omitempty"`
+	AccountsEnabled    bool              `json:"accounts_enabled"`
+}
+
+func ReadCorpus(r io.Reader, compressed bool) (*Corpus, error) {
+	if compressed {
+		z, err := gzip.NewReader(r)
+		if err != nil {
+			return nil, err
+		}
+		defer z.Close()
+		r = z
+	}
+	raw, err := io.ReadAll(io.LimitReader(r, MaxCorpusBytes+1))
+	if err != nil {
+		return nil, err
+	}
+	if len(raw) > MaxCorpusBytes {
+		return nil, fmt.Errorf("corpus byte budget exceeded")
+	}
+	var c Corpus
+	d := json.NewDecoder(bytes.NewReader(raw))
+	d.UseNumber()
+	d.DisallowUnknownFields()
+	if err = d.Decode(&c); err != nil {
+		return nil, err
+	}
+	var extra any
+	if d.Decode(&extra) != io.EOF {
+		return nil, fmt.Errorf("trailing corpus JSON")
+	}
+	if c.SchemaVersion != 1 || c.Reference == "" || len(c.Cases) < 1 || len(c.Cases) > MaxCases || len(c.Sources) < 8 {
+		return nil, fmt.Errorf("incomplete source-bound corpus")
+	}
+	return &c, nil
+}
+func Frozen() (*Corpus, error) {
+	if fmt.Sprintf("%x", sha256.Sum256(frozen)) != FrozenSHA256 {
+		return nil, fmt.Errorf("independent HTTP corpus digest drift")
+	}
+	c, err := ReadCorpus(bytes.NewReader(frozen), true)
+	if err == nil && len(c.Cases) != 1207 {
+		return nil, fmt.Errorf("expected 1207 independent HTTP cases")
+	}
+	return c, err
+}
+func replace(text string, aliases map[string]string) string {
+	keys := []string{}
+	for k := range aliases {
+		keys = append(keys, k)
+	}
+	sort.Slice(keys, func(i, j int) bool { return len(keys[i]) > len(keys[j]) })
+	for _, k := range keys {
+		v := aliases[k]
+		text = strings.ReplaceAll(text, fmt.Sprintf("%%%02x", k[0])+k[1:], fmt.Sprintf("%%%02x", v[0])+v[1:])
+		text = strings.ReplaceAll(text, k, v)
+	}
+	return text
+}
+func normalized(v any, aliases map[string]string) any {
+	switch x := v.(type) {
+	case string:
+		return replace(x, aliases)
+	case map[string]any:
+		y := map[string]any{}
+		for k, v := range x {
+			y[k] = normalized(v, aliases)
+		}
+		return y
+	case []any:
+		y := make([]any, len(x))
+		for i, v := range x {
+			y[i] = normalized(v, aliases)
+		}
+		return y
+	}
+	return v
+}
+func Replay(ctx context.Context, client *Client, c *Corpus, data *content.Content) (Report, error) {
+	start := time.Now()
+	if !reflect.DeepEqual(c.Sources, data.Sources) {
+		return Report{}, fmt.Errorf("reference source digest binding differs from current reviewed export")
+	}
+	aliases := map[string]string{}
+	reverse := map[string]string{}
+	for index, row := range c.Cases {
+		request := row.Request
+		request.Path = replace(request.Path, aliases)
+		request.Body = replace(request.Body, aliases)
+		got, err := client.Do(ctx, request)
+		if err != nil {
+			return Report{}, fmt.Errorf("case %d: %w", index, err)
+		}
+		if row.Status == 200 && got.Status == 200 {
+			expected, eok := row.Body.(map[string]any)
+			actual, aok := got.Body.(map[string]any)
+			if eok && aok {
+				eid, _ := expected["game_id"].(string)
+				aid, _ := actual["game_id"].(string)
+				if eid != "" && aid != "" {
+					if old, ok := aliases[eid]; ok && old != aid {
+						return Report{}, fmt.Errorf("case %d: session identity changed", index)
+					}
+					aliases[eid] = aid
+					reverse[aid] = eid
+				}
+			}
+		}
+		if row.Status != got.Status || !reflect.DeepEqual(row.Body, normalized(got.Body, reverse)) {
+			return Report{}, fmt.Errorf("independent HTTP reference mismatch at case %d (%s %s), expected status %d, got %d", index, request.Method, strings.Split(row.Request.Path, "?")[0], row.Status, got.Status)
+		}
+	}
+	return Report{OK: true, Mode: "golden_replay", Requests: len(c.Cases), Reference: c.Reference, ElapsedSeconds: time.Since(start).Seconds(), ContentHash: data.Manifest["content_hash"].(string)}, nil
+}

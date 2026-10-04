@@ -1,7 +1,7 @@
 # ADR-0162 — Select Go for the production anonymous arcade
 
 Date: 2026-10-03
-Status: accepted; optional native account boundary amended by ADR-0163
+Status: accepted; account boundary amended by ADR-0163; source build/qualification amended by ADR-0165
 
 ## Decision and authorization
 

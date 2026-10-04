@@ -1,12 +1,15 @@
 import { defineConfig, devices } from "@playwright/test";
 import { fileURLToPath } from "node:url";
+import { isAbsolute } from "node:path";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const port = Number(process.env.CDR_E2E_PORT || 8138);
 if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error("Invalid CDR_E2E_PORT");
 const baseURL = `http://127.0.0.1:${port}`;
-const binary = fileURLToPath(new URL("../build/cat-server", import.meta.url))
-  + (process.platform === "win32" ? ".exe" : "");
+const binary = process.env.CDR_NATIVE_BINARY
+  || fileURLToPath(new URL("../build/cat-server", import.meta.url))
+    + (process.platform === "win32" ? ".exe" : "");
+if (!isAbsolute(binary)) throw new Error("CDR_NATIVE_BINARY must be an absolute path");
 const quotedBinary = process.platform === "win32"
   ? `"${binary}"`
   : `'${binary.replaceAll("'", "'\\''")}'`;
@@ -39,7 +42,6 @@ export default defineConfig({
     reuseExistingServer: false,
     timeout: 120_000,
     env: {
-      PYTHONPATH: root,
       CAT_ACCOUNTS_ENABLED: "0",
       CAT_DEBUG: "0",
       ROEDU_API_URL: "",

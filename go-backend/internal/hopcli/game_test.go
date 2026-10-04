@@ -163,3 +163,11 @@ func TestScoreFloorAndMissingEndpoints(t *testing.T) {
 		t.Fatal("missing target accepted")
 	}
 }
+
+func TestEmptyCategoryCannotPanicSelection(t *testing.T) {
+	b := synthetic(t)
+	cats := Categories(b)
+	if len(cats) != 1 || cats[0] != "" {
+		t.Fatal(cats)
+	}
+}
