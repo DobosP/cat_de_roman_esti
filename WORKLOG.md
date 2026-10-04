@@ -1418,3 +1418,20 @@ CVE-2026-103111 in libpcre2-8-0,10.42-1+deb12u1→10.42-1+deb12u2. Runtime expli
 refreshes that existing package; no Go/frontend/game content changes. Debian primary
 source: https://security-tracker.debian.org/tracker/CVE-2026-103111. Final rebuilt image
 must pass the same HIGH/CRITICAL ignore-unfixed gate before the anonymous rollout.
+
+## 2026-10-04 — Complete Go serving landed and anonymous rollout verified
+
+Valid until: this deployment/image/profile changes — then requalify.
+
+Codeabe9337 was fast-forwarded/pushed to main after exact-head CI37208742166 completed
+successfully (nativeaccounts/Go, frontend, bothPythonoracles and selectedGobrowser).
+The local622-case browser suite also passed. The compiled/scanned image was exported
+locally so the small VPS did no source build, then checksum/rootfs/ELF qualified alongside
+the old app. After candidate151-request proof, onlyapp was replaced; public151-request
+proof passes allsixgames, explorationrestore,28assets and disabledaccounts/proposals.
+Healthy/zero restarts, UID10001/read-only/noPython, fixedPCRE12u2; nofixableHIGHCRITICAL
+Trivy findings. Image IDs normalize acrossDocker versions butall7rootfsdiffIDs andELF
+match. Exact receipts/rollback pointers are in docs/reviews/go-completion. Both oldGo
+and oldPython rollbacks remain, and Caddy/certificates/volumes are unchanged. No provider,
+minors, newpersistence or account/proposal activation. Social remains PR101 pending the
+required human auth/privacy/safety review.

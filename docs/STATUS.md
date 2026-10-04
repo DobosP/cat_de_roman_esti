@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-04 — anonymous Go V1.0.1 live; complete native account candidate under qualification.
+Last verified: 2026-10-04 — complete Go serving merged/published/deployed; anonymous V1.0.1.
 
 ## Current state
 
@@ -94,17 +94,17 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Production and next work
 
-- Production: anonymous V1.0.1 **Go** `ca61b5d3423692dc43824279a5eadfc339edd71b`, deployed
-  2026-10-03; [GitHub CI green](https://github.com/DobosP/cat_de_roman_esti/actions/runs/37150262141).
-  Main merged/published; image `release-ca61b5d34236`, healthy/0 restarts, UID10001/read-only.
-- Exact candidate/public: **151 requests each**, six completed games, exploration restore,
-  28 asset byte/cache/HEAD proofs; header `X-Cat-Runtime: go`, no Python process/files/interpreter.
-  Full manifest/categories, legal configuration and account/submission refusals pass.
-- Caddy/certificates/volumes preserved; only app replaced. Python image `rollback-e29fb0f63df8`
-  and its old profile remain for rollback; original V91 rollback is also retained.
-- Live memory snapshot 46.87 MiB Go / previous105.6 MiB Python; image156MB /397MB;
-  snapshots are not capacity/billing promises. [Rollout receipt](reviews/go-production/README.md).
-- Account activation and recurring loop restart remain outside this deployment.
+- Production: anonymous V1.0.1 **Go** `abe933779f04c46a32ff0194b5111e68086ba93f`, deployed
+  2026-10-04 after all required [CI37208742166](https://github.com/DobosP/cat_de_roman_esti/actions/runs/37208742166) jobs passed.
+  Native account/proposal code is shipped dormant; no Python serving runtime.
+- Local **622/622 browser**,242 frontend assertions, account/game concurrency/race/vet and
+  **1207 HTTP parity** pass. Candidate/public **151 requests each**, six games/exploration,
+ 28 asset/cache/HEAD proofs pass; current content/legal configuration and accountsoff verified.
+- UID10001/read-only, healthy/zero restarts; fixedPCRE2 and zero fixableHIGH/CRITICAL image gate.
+  Caddy/certificates/volumes preserved; previousGo+Python rollback profiles retained.
+  [Complete rollout proof](reviews/go-completion/README.md). No provider/minor activation.
+- Earlier memory snapshot46.87MiBGo/105.6MiBPython is history, not a billing/capacity promise.
+- Accounts/submissions remain off under go-live gates; recurring content loop remains outside rollout.
 - Next: a same-Wi-Fi phone/desktop session with the tester guide, including an iPhone
   (Safari/WebKit is untested), an Android phone and enlarged text. Accounts stay off.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
