@@ -76,6 +76,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0161 | [Complete anonymous Go and Rust backends](0161-complete-anonymous-native-backends.md) | partially superseded by 0162 |
 | 0162 | [Select Go for the production arcade](0162-select-go-production-backend.md) | accepted; account boundary amended by 0163 |
 | 0163 | [Complete native Go accounts and serving](0163-complete-native-go-accounts.md) | accepted; activation gated |
+| 0164 | [Run GitHub Actions on demand](0164-manual-github-actions.md) | accepted; owner request 2026-10-04 |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

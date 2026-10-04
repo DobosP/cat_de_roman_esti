@@ -2,6 +2,12 @@
 
 Last verified: 2026-10-04 — complete Go serving merged/published/deployed; anonymous V1.0.1.
 
+- **GitHub Actions (Last verified: 2026-10-04):** owner-requested on-demand policy,
+  [ADR-0164](adr/0164-manual-github-actions.md). Workflows use `workflow_dispatch`; automatic
+  push/PR/label/schedule runs are removed. Existing jobs, inputs, and safety gates
+  remain. Workflow YAML, manual inputs, job dependencies, and permission preservation
+  were checked; this configuration edit does not refresh application test results.
+
 ## Current state
 
 - The owner requested internal V100 as a testing release named **V1** for mixed ages on
