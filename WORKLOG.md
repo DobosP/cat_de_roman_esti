@@ -1412,3 +1412,9 @@ profile was deployed. The image initializes a private UID10001 proposal-volume d
 anonymous mode remains read-only and proposals/account flags off. Local622/622 browser
 qualification completed without skips/retries/flaky cases; CI native/frontend/3.12/3.14
 jobs pass, selected browser CI remains in progress.
+
+Official checksum-verified Trivy0.75 fresh image scans found one fixable HIGH OS issue:
+CVE-2026-103111 in libpcre2-8-0,10.42-1+deb12u1→10.42-1+deb12u2. Runtime explicitly
+refreshes that existing package; no Go/frontend/game content changes. Debian primary
+source: https://security-tracker.debian.org/tracker/CVE-2026-103111. Final rebuilt image
+must pass the same HIGH/CRITICAL ignore-unfixed gate before the anonymous rollout.
