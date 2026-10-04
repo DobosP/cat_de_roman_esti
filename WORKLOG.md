@@ -1435,3 +1435,23 @@ match. Exact receipts/rollback pointers are in docs/reviews/go-completion. Both 
 and oldPython rollbacks remain, and Caddy/certificates/volumes are unchanged. No provider,
 minors, newpersistence or account/proposal activation. Social remains PR101 pending the
 required human auth/privacy/safety review.
+
+## 2026-10-04 — Canonical documentation aligned after complete Go landing
+
+Valid until: the native runtime/launch contract changes — then requalify.
+
+The owner approved both origin/main landings and complete native documentation. This
+docs-only continuation starts from Cat main8200daa in an isolated task worktree. README,
+agent entry points/testing, native/deployment/API/frontend/tester guides now identify Go
+1.27.1 as the complete serving path, with PostgreSQL/shared-auth account and HTTP release
+gates first. Native account Compose profiles are distinguished from the explicitly retained
+Python reference/rollback profile. The terminal semantic-hop CLI and Python content/export/
+differential tooling remain legitimate separate tools; frontend React/TypeScript remains
+JavaScript and its tracked bundle was not rebuilt. Entry-point/Caddy comments were aligned
+without runtime/config changes. Native accounts/proposals/provider/minor activation remains
+off publicly; no deployment, credentials, content or production flags were touched.
+
+Verification: canonical command/flag/profile descriptions checked against native CLI source,
+`./run.sh help` and Compose files. `check_docs.py .` reports files38/dead_links0/stale_terms0/
+retired_verbs0/orphans0; `git diff --check` is clean. Budgets: AGENTS80/STATUS120/agent-map49/
+agent-testing71 lines. No native behavior or game/asset generation changed.

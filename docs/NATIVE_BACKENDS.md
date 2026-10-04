@@ -53,8 +53,22 @@ Open the matching loopback address. Every game and exploration request is native
 `/api/health` reports the same content version and six-game inventory. The private
 embedded content export must never be copied into the public static directory.
 
-## Containers
+## Canonical Go container
 
+Build the root Dockerfile for local, anonymous-production and optional native-account
+profiles. It builds frontend JavaScript with Node and the server with Go, serves on
+container port 8000, and contains no Python interpreter. Anonymous publication and
+account activation are described in [DEPLOY](DEPLOY.md).
+
+```bash
+docker build -t cat-de-roman-esti:local .
+docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
+  -p 127.0.0.1:8000:8000 -e CAT_ACCOUNTS_ENABLED=0 cat-de-roman-esti:local
+```
+
+## Retained native comparison containers
+
+The following Go/Rust comparison images are separate from canonical Compose.
 Build with the **repository root** as Docker context. The runtime stages contain
 the executable, its operating-system dependencies and the tracked compiled SPA.
 They run as UID/GID **10001**, listen on container port **8080**, support a read-only
@@ -127,7 +141,16 @@ Supply the registered `CAT_DATABASE_URL` through the secret bundle and set
 `CAT_ACCOUNTS_ENABLED=1` only in an approved development/test or go-live environment.
 Run `cat-server -migrate -listen 127.0.0.1:8000` against the explicit database;
 anonymous mode requires no database. The optional Compose override is
-`docker-compose.accounts.yml`, with production activation gated in DEPLOY.md.
+`docker-compose.accounts.yml` layered on `docker-compose.yml`; `docker-compose.prod.yml`
+is the standalone native account/Caddy/PostgreSQL profile. Production activation is
+gated in [DEPLOY](DEPLOY.md); the public anonymous deployment enables neither.
+
+The CLI exposes `-listen`, `-migrate` and offline `-replay` JSON-lines HTTP requests;
+`-migrate` applies the native account schema only when accounts are enabled, then serves.
+There is no Python management-command dependency or automatic account activation.
+Anonymous mode needs no database or migration. PostgreSQL uses a bounded four-connection
+pool and statement deadlines; credentials are supplied externally, never in documented
+command arguments.
 
 Native account details and migration/rollback expectations:
 [accounts README](../go-backend/internal/accounts/README.md), [shared identity](../shared-go/authcore/README.md).

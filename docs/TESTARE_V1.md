@@ -77,11 +77,11 @@ Alchimie. O filă privată sau ștergerea datelor browserului pierde colecția.
 
 ### Pe același calculator
 
-Dintr-un mediu Python pregătit conform [README](../README.md), rulează din rădăcina
-repozitoriului:
+Cu Go 1.27.1 pregătit conform [README](../README.md), rulează din rădăcina
+repozitoriului; Node 24 este necesar doar dacă pachetul frontend trebuie construit:
 
 ```console
-python -m cat_de_roman_esti.web --host 127.0.0.1 --port 8000
+./run.sh
 ```
 
 Deschide `http://127.0.0.1:8000`. Această adresă nu funcționează de pe alte dispozitive.
@@ -92,7 +92,7 @@ Pornește serverul pe toate interfețele și lasă-l pornit toată sesiunea; joc
 desfășurare sunt ținute în memoria serverului și se pierd la repornire:
 
 ```console
-python -m cat_de_roman_esti.web --host 0.0.0.0 --port 8000
+HOST=0.0.0.0 PORT=8000 ./run.sh
 ```
 
 Află adresa calculatorului în rețea (`ipconfig` pe Windows, `ip addr` pe Linux) și

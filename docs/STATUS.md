@@ -103,7 +103,7 @@ Unrevealed answers, recipe maps and routes stay private.
 - UID10001/read-only, healthy/zero restarts; fixedPCRE2 and zero fixableHIGH/CRITICAL image gate.
   Caddy/certificates/volumes preserved; previousGo+Python rollback profiles retained.
   [Complete rollout proof](reviews/go-completion/README.md). No provider/minor activation.
-- Earlier memory snapshot46.87MiBGo/105.6MiBPython is history, not a billing/capacity promise.
+- Native Go docs/run/DB/account gates are aligned (2026-10-04); Python is CLI/content/oracle only.
 - Accounts/submissions remain off under go-live gates; recurring content loop remains outside rollout.
 - Next: a same-Wi-Fi phone/desktop session with the tester guide, including an iPhone
   (Safari/WebKit is untested), an Android phone and enlarged text. Accounts stay off.

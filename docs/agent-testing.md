@@ -2,70 +2,70 @@
 
 Last verified: 2026-10-04
 
-## Environment
-- Production/local server: Go 1.27.1, canonical `run.sh`/Dockerfile; see [NATIVE_BACKENDS](NATIVE_BACKENDS.md).
-- Python commands below are offline content/reference gates, not the serving runtime.
-- Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
-  pytest-django). It is gitignored and lives only in the shared checkout.
-- From a task worktree, prefix every command with `PYTHONPATH=.`.
-- V97 integration uses Python 3.12.3 and a fresh constrained Python 3.14.6 environment;
-  exact completed gate results belong in [STATUS](STATUS.md).
-- Fresh venv: `pip install -c constraints.txt -e ".[dev,web]"` (ci.yml:48).
-- Never use the `romania_scraper` venv: it has no Django, so collection gives 7 errors and only
-  402 of 898 tests (verified 2026-09-05).
-- Frontend needs Node 24 (ci.yml:76). Verify both `node -v` and `npm -v`; the candidate
-  clean install used Node 24.21.0/npm 11.19.0. The host npm 9 shim omitted a Rolldown binding.
-- Windows host (`<checkout>\.venv\Scripts\python.exe`): run targeted tests natively with `PYTHONUTF8=1`.
-  The full suite imports the Unix `resource` module (scripts/measure_wordgames_runtime.py), so run it
-  under WSL from a Linux-local copy with a constrained Linux venv. Node 22.23/npm 10.9 rebuilt the
-  committed V1 bundle byte-for-byte (2026-09-23); CI stays on Node 24.
-- Windows browser gate: Playwright with `channel: 'msedge'` (no browser download) via a scratch
-  wrapper config; e2e helpers run `python3`, so put a venv whose Scripts dir holds a `python3.exe`
-  copy first on `PATH` and set `PYTHONUTF8=1` (cp1252 cannot print ș/ț).
+## Native serving gates
 
-Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
+Go 1.27.1 serves the arcade, accounts and proposals; `run.sh`/root Dockerfile are canonical.
+[ADR-0162](adr/0162-select-go-production-backend.md) and [ADR-0163](adr/0163-complete-native-go-accounts.md)
+record the runtime boundaries. Python commands below are offline content/reference gates.
 
-## Commands
 | Scope | Command | Expected |
 |---|---|---|
-| Word-game sessions | `PYTHONPATH=. <interp> -m pytest tests/test_wordgames_session_store.py -q` | `16 passed` |
-| KG/app-pack contract | `PYTHONPATH=. <interp> -m pytest tests/test_app_pack_contract.py tests/test_data_client.py -q` | `23 passed` |
-| Full backend | `PYTHONPATH=. <interp> -m pytest -q` | Current totals in [STATUS](STATUS.md); several minutes, depending on load |
-| Accounts suite | `CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <interp> -m pytest -q tests/accounts` | `53 passed` |
-| Fixture gate | `<interp> scripts/validate_fixture.py` | `GREEN: fixture is valid (0 errors)` |
-| Pack gate | `<interp> scripts/validate_games_pack.py` | `games pack GREEN` |
-| Lint | `<interp> -m ruff check` | `All checks passed!` |
-| Whitespace | `git diff --check` | no output |
-| Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | build lands `cat_de_roman_esti/web/static/index.html` (ci.yml:92-95) |
-| Browser | `cd frontend && npm run test:e2e` (after build + `npx playwright install chromium`) | six real-backend games, desktop + mobile; Go binary built plus Python fixture oracle on `PATH`; optional `CDR_E2E_PORT` |
+| Native backend | `go -C go-backend test -race ./... && go -C go-backend vet ./...` | all hermetic game/HTTP/content contracts pass |
+| Shared native identity | `go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...` | crypto/session/provider fixtures pass |
+| Native account release | `go -C go-backend test -race ./internal/accounts -accounts.database <disposable-dsn>` | real PostgreSQL migration/consent/erasure contracts pass |
+| Native combined HTTP release | `go -C go-backend test -race ./internal/httpapi -arcade.database <disposable-dsn>` | real signup/consent/game ownership/credit/erase races pass |
+| Native content freshness | `PYTHONPATH=. <interp> scripts/export_go_content.py --check` | sealed export matches reviewed source |
+| Differential HTTP | `PYTHONPATH=. <interp> scripts/check_go_parity.py --binary <native-binary>` | current response parity in [STATUS](STATUS.md) |
+| Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | tracked `web/static` bundle; no frontend language migration |
+| Browser | `cd frontend && npm run test:e2e` after build/browser setup | Go server; six real game journeys desktop/mobile; offline Python answer helpers |
 | Docs | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
+| Whitespace | `git diff --check` | no output |
 
-`pyproject.toml` sets `addopts = "-q"`, so a passing run prints dots only; add `-o addopts=""` when you
-need the `N passed` summary line to paste into the verification record.
+Native PG gates require an explicit disposable fixture, never a live or production DSN.
+Default Go runs skip those tests without the flags and cannot establish release qualification.
+Provider tests use local mocks only. Production accounts/proposals remain gated off.
+Build/runtime/container and retained Rust research commands: [NATIVE_BACKENDS](NATIVE_BACKENDS.md).
 
-Native Go/Rust commands and standalone browser qualification: [NATIVE_BACKENDS](NATIVE_BACKENDS.md).
+## Offline content/reference environment
+
+`<interp>` is `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12/Unicode 15 export).
+The venv is gitignored in the shared checkout; from a worktree set `PYTHONPATH=.`.
+A fresh reference venv uses `pip install -c constraints.txt -e ".[dev,web]"`.
+Django/pytest-django support the offline oracle, not the selected serving process.
+Do not use the `romania_scraper` venv: its missing Django gives incomplete collection.
+Other supported Python versions test the retained implementation without regenerating the export.
+
+| Scope | Command | Expected |
+|---|---|---|
+| Reference sessions | `PYTHONPATH=. <interp> -m pytest tests/test_wordgames_session_store.py -q` | `16 passed` |
+| KG/app-pack reference | `PYTHONPATH=. <interp> -m pytest tests/test_app_pack_contract.py tests/test_data_client.py -q` | `23 passed` |
+| Full offline reference/content | `PYTHONPATH=. <interp> -m pytest -q` | totals in [STATUS](STATUS.md); timing is load-sensitive |
+| Reference accounts | `CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <interp> -m pytest -q tests/accounts` | `53 passed`; no production activation |
+| Fixture | `<interp> scripts/validate_fixture.py` | `GREEN: fixture is valid (0 errors)` |
+| Pack | `<interp> scripts/validate_games_pack.py` | `games pack GREEN` |
+| Reference/content lint | `<interp> -m ruff check` | `All checks passed!` |
+
+`pyproject.toml` adds `-q`; use `-o addopts=""` when recording assertion totals.
+Node 24 is the qualified frontend build environment; verify `node -v`/`npm -v` before use.
+Playwright setup uses `npx playwright install chromium`; `CDR_E2E_PORT` and
+`CDR_E2E_OUTPUT_DIR` scope the local server and scratch receipts. Only test helpers invoke Python.
+Windows targeted reference tests use `PYTHONUTF8=1`; the full Unix `resource`-using suite needs WSL.
+For Windows Edge browser fixtures, make a reference `python3.exe` available on `PATH`.
 
 ## Before commit
-1. Run `git diff --check`.
-2. Run targeted pytest for changed word-game/session code.
-3. Run frontend build/test only when frontend files are touched; a frontend source change also commits the
-   regenerated `cat_de_roman_esti/web/static` bundle and `.vite/manifest.json` (ADR-0020). Backend-only
-   changes must not regenerate that bundle.
-4. Record the exact commands and results in the `docs/STATUS.md` verification record (`TASK_RESULT.md` is retired).
 
-## Known flaky / blocked
-- `tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast` asserts
-  `elapsed < 45.0` (line 293) and is load-sensitive: on 2026-09-05 it passed inside the full suite at host load
-  average ≈ 28 and failed alone at 49.0 s at load ≈ 39. Check `uptime` and re-run on a quieter host before
-  treating a failure as a regression; no assertion other than the timing one fails.
-- `tests/accounts/` is collect-ignored unless `CAT_ACCOUNTS_ENABLED=1` (pyproject.toml:75-77).
+1. Run docs/whitespace gates; documentation-only changes need no game or asset rebuild.
+2. Native behavior changes run focused Go race/vet and applicable PG/HTTP release lanes.
+3. Content changes run validators, export freshness and independent review/reference gates.
+4. Frontend JS/TS/CSS changes run frontend/build/browser gates and commit regenerated
+   `web/static` plus `.vite/manifest.json` (ADR-0020); backend/docs-only edits do not regenerate it.
+5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
 
-Current content expectations and named-round fixtures: see
-[ADR-0116](adr/0116-share-current-content-test-expectations.md), `tests/current_content.py`
-and `tests/content_scenarios.py`. Historical review and reconstruction pins remain separate.
+## Known load-sensitive reference check
 
-Native account release lanes require an explicit disposable PostgreSQL DSN:
-`go -C go-backend test -race ./internal/accounts -accounts.database <fixture>` and
-`go -C go-backend test -race ./internal/httpapi -arcade.database <fixture>`.
-Also run `go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...`.
-Provider fixtures are local only; production accounts/submissions remain gated off.
+`tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast`
+asserts a 45-second wall-clock bound. Check host load and repeat on a quiet host before
+classifying an isolated timing failure as a regression; do not weaken its assertion.
+Reference `tests/accounts/` collection requires `CAT_ACCOUNTS_ENABLED=1`.
+Current content expectations: [ADR-0116](adr/0116-share-current-content-test-expectations.md),
+`tests/current_content.py` and `tests/content_scenarios.py`; historical pins remain separate.

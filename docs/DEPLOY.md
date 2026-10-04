@@ -5,13 +5,16 @@ Two shippable shapes:
 | Mode | Flag | What it is | Compliance |
 | --- | --- | --- | --- |
 | **Anonymous arcade** | `CAT_ACCOUNTS_ENABLED=0` (default) | Stateless, no DB, progress in the browser | Minimal — no accounts/PII |
-| **Accounts + Google login** | `CAT_ACCOUNTS_ENABLED=1` | Postgres + sessions + Google login + private score copy | Full child-data stack (below) |
+| **Optional native accounts** | `CAT_ACCOUNTS_ENABLED=1` | PostgreSQL + password/Google/Facebook sessions + consent/private score copy | Full child-data stack (below) |
 
 The selected production backend is Go ([ADR-0162](adr/0162-select-go-production-backend.md)).
 The root Dockerfile and anonymous Compose profile serve all gameplay and site routes
 without Python or a Rust process. Content authoring/validation and the Python reference
-remain outside the runtime image. Accounts/OAuth have a dormant native Go implementation using
-`Dockerfile.python-reference`; their later sections do not describe the Go release.
+remain outside the runtime image. Native accounts/OAuth use the same Go image through
+`docker-compose.prod.yml` or the optional `docker-compose.accounts.yml` override
+([ADR-0163](adr/0163-complete-native-go-accounts.md)); those profiles are not activated publicly.
+`Dockerfile.python-reference`, `docker-compose.python-reference.yml` and the Python
+entrypoint are reference/rollback artifacts only.
 
 **Product model.** The game is **always free to play without an account.** With current
 consent, signing in can do two private things; Google name/email are never published. The
@@ -31,7 +34,7 @@ An account can also **appear on the public ranking** (`/clasament`) with a chose
 history never feeds public standings. Visibility requires current consent plus an explicit
 `show_on_ranking` opt-in, which defaults to private. Money comes from **donations**: set
 `CAT_DONATE_URL` and a "Donează" button shows in both modes (real provider/ONG page is an
-owner task). An under-16 Google/allauth user and profile can exist, but a sticky parental hold
+owner task). An under-16 provider-linked native user/profile can exist, but a sticky parental hold
 blocks score-copy, repeat, and verified-record writes plus ranking visibility. Letting minors
 rank (pseudonymously, with verifiable parental consent) is a **new DPIA** — see
 `docs/compliance/`.
@@ -146,7 +149,7 @@ Pick your host, e.g. `joc.<yourdomain>.ro`, and set it as `CAT_DOMAIN`.
 1. Cloudflare → DNS → add an **A record** `joc` → your server's IPv4, **Proxy status: DNS only
    (grey cloud)**.
 2. Caddy 2.11 will obtain a Let's Encrypt certificate automatically on first boot (uses
-   `TLS_EMAIL`) and applies `CAT_MAX_REQUEST_BYTES` before proxying a body to Django.
+   `TLS_EMAIL`) and applies `CAT_MAX_REQUEST_BYTES` before proxying a body to the Go application.
 
 **Production (recommended — keeps Cloudflare WAF/DDoS in front):**
 1. Set the `joc` record to **Proxied (orange cloud)**; SSL/TLS mode **Full (strict)**.
@@ -172,8 +175,9 @@ Pick your host, e.g. `joc.<yourdomain>.ro`, and set it as `CAT_DOMAIN`.
 ```bash
 cd ~/cat_de_roman_esti
 cp .env.prod.example .env.prod
-# Fill in: CAT_DOMAIN, TLS_EMAIL, CAT_SECRET_KEY (python -c "import secrets;print(secrets.token_urlsafe(64))"),
-#          POSTGRES_PASSWORD, GOOGLE_OAUTH_CLIENT_ID/SECRET.
+# Supply registered names via the fleet secret delivery path: CAT_DOMAIN, TLS_EMAIL,
+# POSTGRES_PASSWORD and optional GOOGLE_OAUTH_CLIENT_ID/SECRET or FACEBOOK_OAUTH_CLIENT_ID/SECRET.
+# Native opaque sessions do not require the legacy CAT_SECRET_KEY; never print secret values.
 docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
 docker compose -f docker-compose.prod.yml logs -f app   # watch migrations + boot
 ```
@@ -264,8 +268,9 @@ The accounts stack must not serve real users until these are done (see `docs/com
       consent; if under-16 players should rank, complete a new DPIA + parental-consent flow.
 - [ ] **Donations**: `CAT_DONATE_URL` points at the real donation page (Stripe link /
       redirecționează.ro / ONG page); the receiving entity + tax treatment confirmed.
-- [ ] `manage.py check --deploy` clean; secure cookies, CSRF, rate-limit on `/accounts/*` and
-      `/api/me/*` confirmed; no OAuth tokens logged.
+- [ ] Native account/combined HTTP PostgreSQL race gates and shared-auth race/vet pass
+      with explicit disposable fixtures; configured HTTPS origin/callbacks, secure cookies,
+      same-origin CSRF and database-backed auth attempt limits are verified. No OAuth tokens logged.
 - [ ] Backup taken **and a restore drill proven**.
 
 Only after all boxes: set the `joc` DNS live, publish the Google OAuth consent screen, and

@@ -1,4 +1,4 @@
-# Mobile API contract — cat_de_roman_esti BFF
+# Mobile API contract — native Go serving
 
 This is the contract a **generated mobile client** (Track A: Expo / React Native + TS)
 depends on. It is additive over the existing `/api/wordgames/*` routes — no route paths,
@@ -8,8 +8,9 @@ or methods changed. Conexiuni's earned-group semantics are defined by
 
 ## 1. Stable OpenAPI operationIds
 
-The app pins operationIds via `@extend_schema(operation_id=...)` on every DRF view
-(drf-spectacular; see `cat_de_roman_esti/wordgames/*.py`) to `<tag>_<endpoint-name>`, e.g. `contexto_guess`, `alchimie_combine`, `lant_move`,
+The Go server serves the frozen, parity-checked OpenAPI schema from the reviewed content
+export (`go-backend/internal/httpapi`). The retained Django offline oracle originally pins
+operationIds via `@extend_schema(operation_id=...)` to `<tag>_<endpoint-name>`, e.g. `contexto_guess`, `alchimie_combine`, `lant_move`,
 `conexiuni_guess`, `conexiuni_clue`, `meta_manifest`. A generated TS client turns these into method names
 (`contextoGuess`, …). Unlike a framework default, they do **not** bake in the HTTP path, so a
 route refactor never churns the client surface. The full expected set is asserted in
@@ -37,7 +38,8 @@ existing deterministic miner inside the requested theme, while Conexiuni returns
 themed-unavailable 503. A successful response must never borrow an unscoped board and
 relabel it as `board_category`.
 
-Export the schema for client generation (deterministic, offline — no server/live data):
+The native server exposes `GET /openapi.json`; client generation can also use the
+retained deterministic offline schema exporter (no serving process or live data):
 
 ```bash
 python scripts/export_openapi.py openapi.json   # or print to stdout with no arg
@@ -47,10 +49,10 @@ python scripts/export_openapi.py openapi.json   # or print to stdout with no arg
 ## 2. Trust manifest — `GET /api/manifest`
 
 Lets a mobile app verify its **bundled offline KG copy** is in sync with the server and pick
-the right generated types. The V72 worktree targets the following build version; generated
-hashes and verification state are recorded in `docs/STATUS.md`. This alias-only snapshot has
-8,450 typed aliases and does not change the manifest shape or mobile behavior. The endpoint
-is deterministic and side-effect-free (`data.fixture_manifest`):
+the right generated types. The following V72 payload is a historical shape example, not the current build pin;
+current hashes/counts belong to `docs/STATUS.md` and the native response. The endpoint is
+deterministic and side-effect-free (`go-backend/internal/content`); the retained Python
+`data.fixture_manifest` is its offline oracle:
 
 ```json
 {

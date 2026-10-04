@@ -24,7 +24,9 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
 ## Stack
 
-- **Go** serves the anonymous web app (module minimum 1.26; qualified compiler 1.27.1).
+- **Go 1.27.1** serves the six games, exploration, site/API routes, optional PostgreSQL
+  accounts and private pending proposals ([ADR-0162](docs/adr/0162-select-go-production-backend.md),
+  [ADR-0163](docs/adr/0163-complete-native-go-accounts.md)). Accounts/proposals remain off publicly.
 - **Python** retains the stdlib terminal CLI, content tooling and Django reference tests;
   native content export uses Python 3.12 / Unicode 15.0.0. Reference web dependencies
   are pinned by `constraints.txt`. Rust remains a retained research implementation.
@@ -58,8 +60,9 @@ offline fixture.
 ## Run (web app)
 
 The compiled SPA and Go server play fully offline against the reviewed embedded
-content. The Go runtime serves all six games and Alchimie exploration without a
-Python server. Build and deployment details are in
+content. The Go runtime serves all six games and Alchimie exploration, with optional native
+accounts and pending proposals, without a Python server. The React/TypeScript frontend
+remains JavaScript in the browser. Build and deployment details are in
 [`docs/NATIVE_BACKENDS.md`](docs/NATIVE_BACKENDS.md); current qualification is in
 [`docs/STATUS.md`](docs/STATUS.md).
 
@@ -103,26 +106,31 @@ probe; it contains no Python server. Local and anonymous-production Compose use
 this image, a read-only application filesystem and container port 8000, matching
 Caddy. Change the local published port with `PORT=9000 docker compose up`.
 
-The active runtime is anonymous; accounts and enabled submissions remain off.
-`Dockerfile.python-reference` and `docker-compose.prod.yml` retain the dormant
-Python accounts-staging path separately. They do not select the anonymous release
-or activate accounts automatically.
+The public runtime is anonymous; accounts and submissions remain off. Native account
+staging uses the canonical Go image through `docker-compose.accounts.yml` or
+`docker-compose.prod.yml`; activation still requires the [go-live gates](docs/DEPLOY.md).
+`Dockerfile.python-reference` and `docker-compose.python-reference.yml` are explicitly
+retained reference/rollback artifacts, outside the active serving path.
 
 ## Tests & lint
 
 The CI gate set (`.github/workflows/ci.yml`), runnable locally:
 
 ```bash
-python scripts/validate_fixture.py                       # KG fixture content gate
+go -C go-backend test -race ./... && go -C go-backend vet ./...
+go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...
+python scripts/validate_fixture.py                       # offline KG content gate
 python scripts/validate_games_pack.py                    # curated pack content gate
 ruff check                                               # lint
-pytest -q                                                # backend (accounts off)
+pytest -q                                                # offline differential/content oracle
 CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 pytest -q tests/accounts
 ( cd frontend && npm test && npm run lint && npm run build )
 ```
 
-Tests run entirely against a fake in-process client / the bundled fixture — **no live
-server required**. Interpreter and expected outputs: [`docs/agent-testing.md`](docs/agent-testing.md).
+Game/content tests use bundled fixtures and local fake providers, with no live upstream.
+Native account and combined HTTP release gates also require an explicit disposable
+PostgreSQL fixture; ordinary Go runs skip those contracts when no DSN is supplied.
+Commands and expected outputs: [`docs/agent-testing.md`](docs/agent-testing.md).
 
 ## Contributing
 

@@ -4,7 +4,9 @@
 > semantic-hop game** (`cli.py` + `engine.py`). The **web product is the text
 > word-game arcade** (`/api/wordgames/*`, no graph UI) — see
 > [`adr/0001-pivot-to-word-game-arcade.md`](adr/0001-pivot-to-word-game-arcade.md)
-> and [`STATUS.md`](STATUS.md).
+> and [`STATUS.md`](STATUS.md). Native web serving, accounts and proposals are documented
+> in [`NATIVE_BACKENDS.md`](NATIVE_BACKENDS.md) and [`GO_BACKEND.md`](GO_BACKEND.md);
+> this Python terminal-game model is not the web deployment entry point.
 
 A thin, stdlib-only consumer of the Romanian KG products. It builds an in-memory
 semantic graph from served records and runs a terminal "semantic network hop" game.

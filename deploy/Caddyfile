@@ -2,7 +2,7 @@
 # docker-compose.anon.yml).
 #
 # Terminates TLS for $CAT_DOMAIN and proxies to the app container. Caddy sets
-# X-Forwarded-Proto, which Django reads via SECURE_PROXY_SSL_HEADER.
+# X-Forwarded-Proto for the native application. Account origins use the canonical CAT_DOMAIN.
 #
 # TLS options (see docs/DEPLOY.md):
 #   • Quick start — Cloudflare DNS-only (grey cloud): Caddy obtains its own Let's Encrypt

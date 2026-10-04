@@ -7,9 +7,11 @@ requested both complete anonymous implementations; the resulting scope is
 
 Go now serves all six games, native fallback generation, Alchimie exploration and
 historical restores, metadata/OpenAPI, legal pages and the existing SPA/static
-bundle. Rust implements the same boundary. Both need no Python runtime for serving
-the anonymous release. Accounts and the optional submissions queue remain disabled.
-Current rollout state is recorded in STATUS.
+bundle. Go also implements optional native PostgreSQL accounts and bounded private pending
+proposals ([ADR-0163](adr/0163-complete-native-go-accounts.md)). Those activation flags stay
+off publicly; the frontend remains React/TypeScript/JavaScript. Rust retains the anonymous
+research boundary. Neither native serving implementation needs Python; current rollout
+state is recorded in [STATUS](STATUS.md).
 
 Build/run, Docker, CI and browser instructions are in
 [Native backends](NATIVE_BACKENDS.md). Current qualification and performance evidence

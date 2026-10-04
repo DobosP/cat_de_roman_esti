@@ -5,7 +5,7 @@ visualization — the old force-graph SPA was removed 2026-06-22, see
 `../docs/adr/0001-pivot-to-word-game-arcade.md`).
 
 Six word games over the Romanian concept graph, all **server-authoritative**: the
-Django BFF owns the KG, validates every move, and hides answers under
+Go backend owns the sealed reviewed content, validates every move, and hides answers under
 `/api/wordgames/*`; the SPA only renders responses. No API key, no game logic, and
 no secrets ever live in the client.
 
@@ -16,12 +16,13 @@ npm install
 npm run dev          # Vite dev server on http://localhost:5173
 ```
 
-`/api/*` is proxied to the BFF at `http://127.0.0.1:8000` (so SPA + API share an
-origin). Start the BFF first, e.g. from the repo root:
+`/api/*` is proxied to Go at `http://127.0.0.1:8000` (so SPA + API share an
+origin). Start the native server first, or use the combined launcher from the repo root:
 
 ```bash
-make dev             # vite + uvicorn --reload together
-# or just the BFF:  python -m cat_de_roman_esti.web --port 8000
+make dev             # Go API + Vite frontend development
+# API only: ./run.sh
+# Restart after Go changes; Vite reloads frontend changes.
 ```
 
 ## Build
@@ -34,16 +35,19 @@ npm run build        # typecheck + Vite build + initial-transfer/font gates
 ```
 
 `vite build` emits the static SPA into `../cat_de_roman_esti/web/static`
-(`build.outDir`, `emptyOutDir: true`) — exactly where Django/WhiteNoise serves it.
+(`build.outDir`, `emptyOutDir: true`) — the tracked bundle served by the Go runtime.
+The browser implementation remains React/TypeScript/JavaScript; the backend migration
+does not convert that frontend to Go.
 The post-build check follows recursive static imports in Vite's manifest, enforces
 the 120 KiB initial JS/CSS gzip ceiling, and verifies that only Latin + Latin
-Extended Fredoka/Inter fonts shipped (ADR-0020). If the build is absent the BFF
+Extended Fredoka/Inter fonts shipped (ADR-0020). If the build is absent the native backend
 serves a "run npm run build" placeholder instead of 500-ing.
 
 ## Layout
 
 Browser journeys follow [ADR-0098](../docs/adr/0098-protect-real-browser-game-journeys.md).
-With Python web dependencies available as `python3`, run:
+The canonical runner builds/starts Go. Python web dependencies available as `python3`
+provide only offline fixture-answer helpers. Run:
 
 ```bash
 npm ci
@@ -52,7 +56,7 @@ npm run build
 npm run test:e2e
 ```
 
-The runner starts its own offline anonymous BFF on port 8138 (`CDR_E2E_PORT` overrides it). On the fleet host, put
+The runner starts its own native anonymous Go server on port 8138 (`CDR_E2E_PORT` overrides it). On the fleet host, put
 the project `.venv/bin` and the Node 24 runtime first on `PATH`. Failure artifacts live
 in ignored `test-results/`; `CDR_E2E_OUTPUT_DIR` can redirect them. The frozen public
 seeded starts are in `e2e/seeded-starts.json`; regenerate only after an intentional,
@@ -124,6 +128,6 @@ src/
   8.63, and TypeScript 5.9; TypeScript 7 is not yet in typescript-eslint's peer range.
 - Per ADR-0020, frontend source changes include the matching tracked `web/static`
   bundle and `.vite/manifest.json`; backend-only changes leave that bundle alone.
-- The BFF also exposes `GET /api/health` and `GET /api/manifest` (offline-KG trust
+- The Go backend also exposes `GET /api/health` and `GET /api/manifest` (offline-KG trust
   manifest with stable OpenAPI operationIds) — the mobile client contract lives in
   `../docs/MOBILE_CONTRACT.md`.

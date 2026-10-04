@@ -2,13 +2,13 @@
 
 ## Project summary
 - Purpose: Romanian word-game arcade — six server-authoritative text games (Alchimie, Intrusul,
-  Perechi, Conexiuni, Cald sau Rece, Lanțul Cuvintelor; README.md:9-18) served by the Go backend (Django retained as a reference)
-  (`cat_de_roman_esti/web/`) + React SPA (`frontend/`) over the bundled Romanian KG build
+  Perechi, Conexiuni, Cald sau Rece, Lanțul Cuvintelor) served by `go-backend/` + React/TypeScript
+  SPA (`frontend/`) over the bundled Romanian KG build; `cat_de_roman_esti/web/` is an offline oracle
   `cat_de_roman_esti/fixtures/kg_sample.json` (data.py:27); the terminal CLI `cat-de-roman` (pyproject.toml:44)
   is the original semantic-hop game. Word-game/session behavior stays bounded, deterministic, test-covered.
 - Main server: Go (`go-backend/`, qualified 1.27.1), native pgx/shared auth; Node 24 builds the SPA.
   Python 3.12/Unicode 15 validates and exports content and runs the differential reference;
-  Python CLI/accounts remain offline reference tools. Production selection: ADR-0162/0163.
+  The Python terminal CLI remains a separate play mode; Django web/accounts are offline oracles. ADR-0162/0163.
 - Status source: `docs/STATUS.md`.
 
 ## Fleet context
@@ -41,10 +41,11 @@
 5. Task-specific service/test files; never the whole app, no large build artifacts or pasted source dumps.
 
 ## Commands
-- Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12, Django + pytest-django installed;
+- Native serving gates: `go -C go-backend test -race ./... && go -C go-backend vet ./...`; shared auth:
+  `go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...`; explicit PG lanes: agent-testing.
+- Offline content/reference interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12, Django + pytest-django installed;
   gitignored, lives only in the shared checkout). From a task worktree prefix `PYTHONPATH=.`. Do NOT use the
   `romania_scraper` venv: it has no Django — `pytest --co` = 7 collection errors, 402/898 tests (verified 2026-09-05).
-- Install into a fresh venv: `pip install -c constraints.txt -e ".[dev,web]"` (ci.yml:48)
 - Targeted test: `PYTHONPATH=. ~/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_wordgames_session_store.py -q` → 16 passed
 - Full suite: same interpreter, `-m pytest -q` (current result in `docs/STATUS.md`; load-sensitive); accounts suite:
   `CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 <interpreter> -m pytest -q tests/accounts` (ci.yml:61)
@@ -53,8 +54,7 @@
 - Lint: `<interpreter> -m ruff check` · Whitespace: `git diff --check`
 - Frontend, only when `frontend/` changes: `cd frontend && npm ci && npm test && npm run lint && npm run build`
   (ci.yml:84-95); commit the regenerated `cat_de_roman_esti/web/static` + `.vite/manifest.json` with it (ADR-0020).
-- Run the app: `./run.sh`; Go gates: `cd go-backend && go test -race ./... && go vet ./...`.
-  Runtime/release commands: `docs/NATIVE_BACKENDS.md`; deploy: `docs/DEPLOY.md`.
+- Run the Go app: `./run.sh`; runtime/release: `docs/NATIVE_BACKENDS.md`; deploy: `docs/DEPLOY.md`.
 
 ## Safety
 - Never read or print secret values; names only: `ROEDU_API_URL`, `ROEDU_API_KEY` (`.env.example`); values deploy per agent-ops ADR-0027.

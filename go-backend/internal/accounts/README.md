@@ -5,7 +5,9 @@ by the SPA. Login identity comes from `shared-go/authcore`; this package control
 current policy acceptance, a sticky below-threshold age hold, private progress,
 explicit public nicknames and erasure. Login never grants age or consent status.
 
-Startup calls `Migrate`, `NewStore`, `authcore.New`, then `New`. Migration creates
+The `CAT_ACCOUNTS_ENABLED=1` CLI path opens the explicitly configured PostgreSQL database.
+With `-migrate`, it calls `Migrate` before `NewStore`, `authcore.New` and `New`; without
+that flag the schema must already exist. Anonymous startup uses no database. Migration creates
 `cat_native_*` tables and imports the existing `auth_user`, allauth provider IDs
 and account records once under an advisory lock. Password hashes and numeric
 user IDs remain usable. Existing Django sessions are retired; migrated users
@@ -59,3 +61,11 @@ The combined real HTTP fixture gate is
 `go test -race ./internal/httpapi -args -arcade.database=<disposable-connection>`.
 It covers native signup/login, consent/opt-in, terminal score provenance, independent
 private-score JSON export, ownership/claim races, logout/re-login and erasure.
+
+CLI/profile operations are documented in [NATIVE_BACKENDS](../../../docs/NATIVE_BACKENDS.md)
+and [DEPLOY](../../../docs/DEPLOY.md). `CAT_DATABASE_URL` (or the compatibility
+`DATABASE_URL`) is supplied externally; the pool is bounded to four connections.
+`CAT_DOMAIN` selects the HTTPS account origin; only `CAT_DEBUG=1` permits a loopback
+development origin without that domain. Google/Facebook adapters are conditional on
+configured provider credentials and use the preserved `/accounts/<provider>/login/callback/`
+paths. None of these flags activates production accounts without the go-live gates.
