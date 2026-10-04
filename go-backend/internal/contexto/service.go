@@ -68,6 +68,7 @@ type warmClue struct {
 	Rank  int
 }
 type game struct {
+	CuratedID                                string
 	Target, Difficulty, Category             string
 	Daily                                    *string
 	Profile                                  *profile
@@ -156,6 +157,10 @@ func (s *Service) build(target, difficulty string, daily *string, category strin
 	return &game{Target: target, Difficulty: difficulty, Daily: daily, Category: category, Profile: s.profile(target), Guesses: map[string]*record{}, Order: []string{}}
 }
 func (s *Service) Create(seed *big.Int, difficulty string, daily *string, category string) (map[string]any, *gameapi.Error) {
+	return s.CreateWithExclusions(seed, difficulty, daily, category, nil)
+}
+
+func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *string, category string, extraExcludeIDs map[string]bool) (map[string]any, *gameapi.Error) {
 	if difficulty != "usor" && difficulty != "greu" {
 		difficulty = "normal"
 	}
@@ -168,6 +173,7 @@ func (s *Service) Create(seed *big.Int, difficulty string, daily *string, catego
 		seed = new(big.Int).SetUint64(catalog.DailySeed(*daily, "contexto"))
 		chosen = s.pack.PickDaily("contexto", *daily, o)
 	} else {
+		o.ExcludeIDs = extraExcludeIDs
 		chosen = s.pack.PickSeeded("contexto", pyrandom.New(seed), o)
 	}
 	target := ""
@@ -238,6 +244,9 @@ func (s *Service) Create(seed *big.Int, difficulty string, daily *string, catego
 		}
 	}
 	state := s.build(target, difficulty, daily, category)
+	if chosen != nil {
+		state.CuratedID = chosen.ID
+	}
 	body := s.state("", state)
 	id, err := s.store.Create(state)
 	if err != nil {
@@ -245,6 +254,22 @@ func (s *Service) Create(seed *big.Int, difficulty string, daily *string, catego
 	}
 	body["game_id"] = id
 	return body, nil
+}
+
+// Progress reveals only the stable curated id and a terminal server score.
+// Mined targets and answers are never account-linked persistence keys.
+func (s *Service) Progress(id string) (curatedID string, finished, won bool, score int, found bool) {
+	score = -1
+	found, _ = s.store.Transaction(id, func(v *game) error {
+		curatedID = v.CuratedID
+		finished = v.Won || v.GaveUp
+		won = v.Won
+		if won {
+			score = max(50, 1000-60*(max(1, v.Attempts)-1)-120*v.Clues)
+		}
+		return nil
+	})
+	return
 }
 func (s *Service) action(id string, fn func(*game) (map[string]any, *gameapi.Error)) (map[string]any, *gameapi.Error) {
 	var body map[string]any

@@ -1,4 +1,4 @@
-# Native anonymous backends
+# Native Go backend and anonymous Rust reference
 
 The native implementation and its qualification are tracked in [STATUS](STATUS.md).
 The comparison decision is [ADR-0161](adr/0161-complete-anonymous-native-backends.md);
@@ -11,14 +11,17 @@ Alchimie exploration, the existing compiled SPA, category/manifest/OpenAPI respo
 and the anonymous legal pages. Gameplay runs without a Python server or upstream.
 Python remains the content producer and the reference used by development tests.
 
-Accounts, OAuth, account scores and enabled submissions are outside these native
-servers. `CAT_ACCOUNTS_ENABLED=1` and a nonempty `CAT_SUBMISSIONS_DIR` are refused. The deployment runbook and dormant accounts-reference gates remain in [DEPLOY](DEPLOY.md).
+Go now includes optional PostgreSQL-backed password/Google/Facebook accounts, consent,
+private score copies, server-verified ranking, curated history and bounded pending
+submissions. [ADR-0163](adr/0163-complete-native-go-accounts.md) records that completion.
+Rust remains the anonymous reference; Python remains offline content/reference tooling.
+Production account activation still requires the [DEPLOY](DEPLOY.md) go-live checklist.
 
 ## Build locally
 
-The Go module minimum is 1.26; the qualified compiler is **Go 1.27.1**. The Rust
+The Go module and qualified compiler are **Go 1.27.1**. The Rust
 package minimum is 1.98; the qualified compiler is **Rust 1.98.1**. Rust dependencies
-are resolved by the checked-in `Cargo.lock`. The Go backend uses the standard library.
+are resolved by the checked-in `Cargo.lock`. The Go serving layer uses the standard library, pgx and the shared authentication core.
 
 Run from the repository root. This example keeps generated artifacts in the task's
 workspace scratch directory:
@@ -117,3 +120,29 @@ Resource measurements and capacity limits depend on the workload. The HTTP bench
 in `scripts/benchmark_native_http.py` separates backend CPU/RSS from client costs and
 compares fresh processes on identical CPU affinity. Its fixed-load throughput does
 not establish a hosting-plan capacity or percentage hosting saving.
+
+## Optional native accounts and pending proposals
+
+Supply the registered `CAT_DATABASE_URL` through the secret bundle and set
+`CAT_ACCOUNTS_ENABLED=1` only in an approved development/test or go-live environment.
+Run `cat-server -migrate -listen 127.0.0.1:8000` against the explicit database;
+anonymous mode requires no database. The optional Compose override is
+`docker-compose.accounts.yml`, with production activation gated in DEPLOY.md.
+
+Native account details and migration/rollback expectations:
+[accounts README](../go-backend/internal/accounts/README.md), [shared identity](../shared-go/authcore/README.md).
+Registered callback paths remain `/accounts/google/login/callback/` and the Facebook
+analogue. Actual provider app acceptance is a separate integration gate. Authenticated
+game writes require same-origin CSRF; the existing client sends that proof and credentials.
+Games bound to an account cannot be read/modified/credited by other accounts. An anonymous
+session can be claimed once through an authenticated guarded action; erasure removes
+identity/progress and leaves a bounded owner-free seal until expiry.
+
+`CAT_SUBMISSIONS_DIR` enables only bounded validated private pending JSONL proposals:
+no publication/promotion, no symlink-following, bounded body/file/quota and whitelisted
+reviewed-content payloads. Production leaves this unset and accounts off.
+
+Release tests supply separate explicit PostgreSQL flags:
+`go -C go-backend test -race ./internal/accounts -accounts.database <disposable-dsn>`
+and `go -C go-backend test -race ./internal/httpapi -arcade.database <disposable-dsn>`.
+Default race runs skip database contracts and cannot substitute for these gates.

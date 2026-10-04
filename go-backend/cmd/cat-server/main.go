@@ -1,4 +1,4 @@
-// cat-server serves the complete anonymous arcade. Default binding is loopback.
+// cat-server serves the native arcade and optional PostgreSQL accounts.
 package main
 
 import (
@@ -16,7 +16,6 @@ import (
 	"strings"
 	"syscall"
 	"time"
-	"unicode"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
@@ -25,6 +24,7 @@ import (
 
 func main() {
 	addr := flag.String("listen", "127.0.0.1:8081", "HTTP bind address")
+	migrate := flag.Bool("migrate", false, "apply native account schema to configured PostgreSQL")
 	replay := flag.Bool("replay", false, "offline JSON-lines HTTP request replay on stdin/stdout")
 	flag.Parse()
 	if err := validateRuntimeEnvironment(); err != nil {
@@ -35,6 +35,13 @@ func main() {
 		log.Fatal(err)
 	}
 	handler := httpapi.New(c)
+	bootCtx, bootCancel := context.WithTimeout(context.Background(), 30*time.Second)
+	closeAccounts, err := enableAccounts(bootCtx, handler, *addr, *migrate)
+	bootCancel()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer closeAccounts()
 	if *replay {
 		if err = replayRequests(handler); err != nil {
 			log.Fatal(err)
@@ -58,21 +65,15 @@ func main() {
 	}
 }
 
-// Deployment supports the anonymous compiled-data runtime. Reject activation
-// of dormant features rather than silently proxying requests to another runtime.
+// Source overrides must be validated/exported before building the sealed release.
 func validateRuntimeEnvironment() error {
 	for _, name := range []string{"CAT_KG_FIXTURE", "CAT_GAMES_PACK", "CAT_BOARD_RANKINGS"} {
 		if os.Getenv(name) != "" {
 			return fmt.Errorf("%s is not supported: Go uses the sealed bundled content", name)
 		}
 	}
-	for _, value := range []string{"1", "true", "yes", "on"} {
-		if strings.ToLower(strings.TrimFunc(os.Getenv("CAT_ACCOUNTS_ENABLED"), func(r rune) bool { return unicode.IsSpace(r) || r >= 0x1c && r <= 0x1f })) == value {
-			return fmt.Errorf("CAT_ACCOUNTS_ENABLED must remain off for the anonymous Go runtime")
-		}
-	}
-	if os.Getenv("CAT_SUBMISSIONS_DIR") != "" {
-		return fmt.Errorf("CAT_SUBMISSIONS_DIR is not supported by the anonymous Go runtime")
+	if accountsEnabled() && os.Getenv("CAT_DATABASE_URL") == "" && os.Getenv("DATABASE_URL") == "" {
+		return fmt.Errorf("CAT_ACCOUNTS_ENABLED requires CAT_DATABASE_URL")
 	}
 	if limit, defined := os.LookupEnv("CAT_MAX_REQUEST_BYTES"); defined {
 		cfg, err := session.ParseConfig(nil, &limit)

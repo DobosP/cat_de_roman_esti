@@ -1363,3 +1363,45 @@ no Python interpreter/application sources. Public 151-request smoke completed al
 games, restored exploration and verified 28 assets/gates. Caddy and volumes are unchanged;
 Python rollback-e29fb0f63df8 and previous Compose are retained. Details are in
 docs/reviews/go-production. The external Python smoke client is not serving code.
+
+## 2026-10-04 — Complete native account/proposal serving candidate
+
+Valid until: this candidate or its qualification contract changes — then requalify.
+
+The owner selected Go for both arcade and Social serving. Native PostgreSQL accounts,
+password/Google/Facebook adapters, current consent/sticky minor hold, private score
+copies, verified public bests, explicit nicknames, curated played-key history and erasure
+now complement all six games, exploration, metadata/legal/static serving. The shared
+MIT identity module is canonical under shared-go/authcore, with a hash-verified portable
+Social copy. Existing user/password/provider/score/history data imports once without
+resetting; old Django sessions retire and users sign in again. Production flags stay off.
+
+Combined native HTTP regressions exercise actual signup/login, consent-before-credit,
+explicit public alias opt-in, server-terminal bests, no uploaded browser-score promotion,
+self-scoped JSON score export, curated Conexiuni history/exclusion, logout/relogin ownership,
+erasure and terminal/erase/first-claim races. Ownership stores only hashes of game handles,
+serializes one first claimant, denies other/anonymous access to bound games and retains an
+owner-free seal after erasure. Bound6000 rows, TTL2x configured game lifetime/min1minute/
+max1year at startup. Full HTTP PostgreSQL race gate74.456s, five new combined lifecycle tests;
+account PostgreSQL race4.194s; focused lifecycle/race34.236s and cap/expiry6.864s; vet clean.
+
+Authenticated game transport sends same-origin credentials and native CSRF through the
+actual shared frontend client; anonymous gameplay remains independent. Direct execution
+of every frontend file runs242 assertions, all green; lint/typecheck/build pass, initial
+bundle119.78/120KiB. Node's file-isolated runner here only reports38 file-level results,
+so the direct assertion receipts avoid conflating file counts with assertion coverage.
+
+Four native pending-proposal handlers match33 independent Python validation vectors,
+with whitelisted reviewed-content facts, private0600 writes, rooted symlink refusal,
+32MiB bounds and per-peer/global quota. They do not publish/promote content. Content
+validators/export freshness pass;1207 anonymous HTTP responses match Django after final
+ownership integration, with only opaque session IDs normalized. Bounded local release
+smoke completes six games/exploration restore and verifies28 assets in151 requests.
+
+Source/imported-package govulncheck1.8 reports no called/imported findings. An unused
+unmaintained x/crypto/openpgp module advisory has no fix and is not imported or called.
+Symbol-retained same-source audit binaries qualify linked symbols; stripped release
+analysis falls back to module metadata and its wildcard warnings are reported separately.
+Docker/Go-module/CI paths now include native account/shared-core dependencies and license
+notice. Python remains offline content/reference tooling; Rust remains anonymous research.
+This record precedes final browser/CI/public rollout proof; no new production activation.

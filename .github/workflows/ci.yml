@@ -31,8 +31,19 @@ permissions:
 
 jobs:
   native-go:
-    name: Go anonymous arcade
+    name: Go arcade and native accounts
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16.14-bookworm
+        env:
+          POSTGRES_DB: cat_native_test
+          POSTGRES_USER: fixture
+          POSTGRES_PASSWORD: disposable-ci-fixture
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U fixture -d cat_native_test"
+          --health-interval 5s --health-timeout 3s --health-retries 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -57,6 +68,12 @@ jobs:
       - name: Build standalone native binary
         working-directory: go-backend
         run: CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o ../build/cat-server ./cmd/cat-server
+      - name: Qualify native account database and shared authentication
+        run: |
+          go -C shared-go/authcore test -race ./...
+          go -C shared-go/authcore vet ./...
+          go -C go-backend test -race ./internal/accounts -accounts.database 'postgres://fixture:disposable-ci-fixture@127.0.0.1:5432/cat_native_test?sslmode=disable'
+          go -C go-backend test -race ./internal/httpapi -arcade.database 'postgres://fixture:disposable-ci-fixture@127.0.0.1:5432/cat_native_test?sslmode=disable'
       - name: Differential HTTP journeys against Django
         run: PYTHONPATH=. python scripts/check_go_parity.py --binary build/cat-server
       - name: Build canonical Go release container

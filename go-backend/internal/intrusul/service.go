@@ -328,3 +328,18 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 		return body, nil
 	})
 }
+
+// Progress exposes only server-authored terminal bookkeeping, never solutions.
+func (s *Service) Progress(id string) (string, bool, bool, int, bool) {
+	finished, won, result, found := false, false, -1, false
+	s.action(id, func(game *gameSession) (map[string]any, *Error) {
+		found = true
+		finished = game.won || game.lost
+		won = game.won
+		if finished {
+			result = game.score()
+		}
+		return nil, nil
+	})
+	return "", finished, won, result, found
+}

@@ -6,9 +6,9 @@
   (`cat_de_roman_esti/web/`) + React SPA (`frontend/`) over the bundled Romanian KG build
   `cat_de_roman_esti/fixtures/kg_sample.json` (data.py:27); the terminal CLI `cat-de-roman` (pyproject.toml:44)
   is the original semantic-hop game. Word-game/session behavior stays bounded, deterministic, test-covered.
-- Main server: Go (`go-backend/`, qualified 1.27.1), standard-library-only; Node 24 builds the SPA.
+- Main server: Go (`go-backend/`, qualified 1.27.1), native pgx/shared auth; Node 24 builds the SPA.
   Python 3.12/Unicode 15 validates and exports content and runs the differential reference;
-  Python CLI/dormant accounts remain reference tools. Production selection: ADR-0162.
+  Python CLI/accounts remain offline reference tools. Production selection: ADR-0162/0163.
 - Status source: `docs/STATUS.md`.
 
 ## Fleet context

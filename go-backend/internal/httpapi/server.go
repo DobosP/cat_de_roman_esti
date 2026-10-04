@@ -10,9 +10,11 @@ import (
 	"net/url"
 	"regexp"
 	"strings"
+	"time"
 	"unicode"
 	"unicode/utf8"
 
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie_explore"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/conexiuni"
@@ -21,6 +23,7 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/intrusul"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/lant"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/perechi"
+	"github.com/DobosP/cat_de_roman_esti/shared-go/authcore"
 )
 
 const prefix = "/api/wordgames/intrusul/games"
@@ -29,16 +32,22 @@ const MaxRequestBytes = 64 * 1024
 var localOrigin = regexp.MustCompile(`^http://(localhost|127\.0\.0\.1)(:\d+)?$`)
 
 type Server struct {
-	game         *intrusul.Service
-	content      *content.Content
-	StaticRoot   string
-	allowedHosts []string
-	perechi      *perechi.Service
-	conexiuni    *conexiuni.Service
-	contexto     *contexto.Service
-	lant         *lant.Service
-	alchimie     *alchimie.Service
-	explorer     *alchimie_explore.Service
+	submissions         submissionQueue
+	Accounts            *accounts.Service
+	Auth                *authcore.Service
+	authMux             *http.ServeMux
+	authOrigin          string
+	accountGameLifetime time.Duration
+	game                *intrusul.Service
+	content             *content.Content
+	StaticRoot          string
+	allowedHosts        []string
+	perechi             *perechi.Service
+	conexiuni           *conexiuni.Service
+	contexto            *contexto.Service
+	lant                *lant.Service
+	alchimie            *alchimie.Service
+	explorer            *alchimie_explore.Service
 }
 
 func New(c *content.Content) *Server {
@@ -74,7 +83,7 @@ func write(w http.ResponseWriter, r *http.Request, status int, body any) {
 	}
 }
 
-func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (s *Server) serveHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-Cat-Runtime", "go")
 	if r.ContentLength > MaxRequestBytes {
 		write(w, r, 413, map[string]any{"detail": "Request body too large"})
@@ -95,7 +104,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	{
 		w.Header().Add("Vary", "origin")
-		if origin := r.Header.Get("Origin"); localOrigin.MatchString(origin) {
+		if origin := r.Header.Get("Origin"); localOrigin.MatchString(origin) && (s.Auth == nil || origin == s.authOrigin) {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
 			w.Header().Set("Access-Control-Allow-Credentials", "true")
 			if r.Method == "OPTIONS" && r.Header.Get("Access-Control-Request-Method") != "" {

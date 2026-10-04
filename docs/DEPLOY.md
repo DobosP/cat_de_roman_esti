@@ -10,7 +10,7 @@ Two shippable shapes:
 The selected production backend is Go ([ADR-0162](adr/0162-select-go-production-backend.md)).
 The root Dockerfile and anonymous Compose profile serve all gameplay and site routes
 without Python or a Rust process. Content authoring/validation and the Python reference
-remain outside the runtime image. Accounts/OAuth are a dormant Python reference using
+remain outside the runtime image. Accounts/OAuth have a dormant native Go implementation using
 `Dockerfile.python-reference`; their later sections do not describe the Go release.
 
 **Product model.** The game is **always free to play without an account.** With current
@@ -229,7 +229,8 @@ git pull
 docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
 ```
 
-The Go anonymous image runs no migrations; the dormant Python accounts reference does.
+The Go anonymous image runs no migrations. The optional native account profile applies explicit
+Go migrations against PostgreSQL; activation still requires the go-live checklist.
 Roll back by checking out the recorded commit and either restoring
 the preserved image tag or rebuilding that commit. Never use `down -v` or a Docker prune:
 the Caddy TLS volumes and other apps on the shared host are outside this rollout's scope.

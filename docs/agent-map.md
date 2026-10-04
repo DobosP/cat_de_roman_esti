@@ -1,7 +1,7 @@
 # Agent Map — cat_de_roman_esti
 
 ## What this repo owns
-- Romanian-language app/game behavior: the six-game arcade (Django BFF + React SPA) and the terminal CLI hop game.
+- Romanian-language app/game behavior: the six-game arcade (Go backend + React SPA; Django offline oracle) and the terminal CLI hop game.
 - Word-game session services and their tests.
 - The curated content pipeline: fixtures, generation/validation scripts, and per-wave review evidence.
 
@@ -9,7 +9,8 @@
 | Area | Path | Notes |
 |---|---|---|
 | Word games | `cat_de_roman_esti/wordgames/` | `service.py` owns sessions; one module per game (alchimie, conexiuni, contexto, intrusul, lant, perechi); `packs.py` loads the curated pack. |
-| BFF | `cat_de_roman_esti/web/` | `settings.py`, `urls.py`, `http.py`, `legal.py`, `spa.py`; run with `python -m cat_de_roman_esti.web`. |
+| Native HTTP | `go-backend/internal/httpapi`, `cmd/cat-server` | Games, accounts, proposals, metadata/legal/static serving; Go-only runtime. |
+| Accounts/auth | `go-backend/internal/accounts`, `shared-go/authcore` | Durable identity/consent/private progress; providers conditional; off in production. |
 | CLI | `cat_de_roman_esti/cli.py`, `engine.py`, `graph.py`, `data.py` | Original semantic-hop game (`docs/ARCHITECTURE.md`). |
 | Served KG build | `cat_de_roman_esti/fixtures/kg_sample.json` | V90 build; integration/landing state in STATUS. `kg_real.json` is a thin corpus export, **not** the served graph (data.py:27,34-36). |
 | Curated pack | `cat_de_roman_esti/fixtures/games_pack.json` | Four pack games; Intrusul/Perechi come from `derived_catalog_v38.json`. |

@@ -1,0 +1,15 @@
+# Optional native PostgreSQL accounts. Production activation follows docs/DEPLOY.md.
+# A separate fixture/development database can use an externally supplied DATABASE_URL.
+services:
+  app:
+    command: ["sh", "-c", "exec cat-server -listen 0.0.0.0:8000 -migrate"]
+    environment:
+      CAT_ACCOUNTS_ENABLED: "1"
+      CAT_DATABASE_URL: "${CAT_DATABASE_URL:?Supply the native account PostgreSQL URL through SOPS}"
+      CAT_DOMAIN: "${CAT_DOMAIN:?Supply the canonical HTTPS domain}"
+      GOOGLE_OAUTH_CLIENT_ID: "${GOOGLE_OAUTH_CLIENT_ID:-}"
+      GOOGLE_OAUTH_CLIENT_SECRET: "${GOOGLE_OAUTH_CLIENT_SECRET:-}"
+      FACEBOOK_OAUTH_CLIENT_ID: "${FACEBOOK_OAUTH_CLIENT_ID:-}"
+      FACEBOOK_OAUTH_CLIENT_SECRET: "${FACEBOOK_OAUTH_CLIENT_SECRET:-}"
+      FACEBOOK_API_VERSION: "${FACEBOOK_API_VERSION:-}"
+      CAT_MIN_SELF_CONSENT_AGE: "${CAT_MIN_SELF_CONSENT_AGE:-16}"

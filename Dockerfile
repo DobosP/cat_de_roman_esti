@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-# Canonical anonymous release: freshly compiled SPA + Go-only serving runtime.
+# Canonical release: freshly compiled SPA and native Go games/accounts serving.
 FROM node:24-slim AS frontend
 WORKDIR /build
 COPY frontend/package.json frontend/package-lock.json ./frontend/
@@ -16,6 +16,7 @@ RUN npm run build \
 
 FROM golang:1.27.1-bookworm AS backend
 WORKDIR /build/go-backend
+COPY shared-go/authcore/ /build/shared-go/authcore/
 COPY go-backend/ ./
 RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/cat-server ./cmd/cat-server
 
@@ -27,6 +28,7 @@ RUN apt-get update \
     && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
 WORKDIR /app
 COPY --from=backend /out/cat-server /usr/local/bin/cat-server
+COPY shared-go/authcore/LICENSE /usr/share/doc/cat-authcore/LICENSE
 COPY --from=frontend /build/cat_de_roman_esti/web/static/ ./cat_de_roman_esti/web/static/
 ENV CAT_ACCOUNTS_ENABLED=0 PORT=8000
 USER 10001:10001

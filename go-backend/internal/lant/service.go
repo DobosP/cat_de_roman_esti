@@ -17,6 +17,7 @@ import (
 )
 
 type game struct {
+	CuratedID                           string
 	Start, Target, Difficulty, Category string
 	Daily                               *string
 	Optimal                             int
@@ -358,11 +359,16 @@ func (s *Service) wide(item *content.PackItem) bool {
 	return p[0] >= 3 && p[1] >= 3
 }
 func (s *Service) curated(rng *pyrandom.Random, daily *string, category, difficulty string) *content.PackItem {
+	return s.curatedWithExclusions(rng, daily, category, difficulty, nil)
+}
+
+func (s *Service) curatedWithExclusions(rng *pyrandom.Random, daily *string, category, difficulty string, extraExcludeIDs map[string]bool) *content.PackItem {
 	o := pack.PickOptions{Category: category, Difficulty: difficulty}
 	var picked *content.PackItem
 	if daily != nil {
 		picked = s.pack.PickDaily("lant", *daily, o)
 	} else {
+		o.ExcludeIDs = extraExcludeIDs
 		picked = s.pack.PickSeeded("lant", rng, o)
 	}
 	if picked == nil || difficulty != "usor" || s.wide(picked) {
@@ -380,6 +386,15 @@ func (s *Service) curated(rng *pyrandom.Random, daily *string, category, difficu
 			}
 		}
 		pool = eligible
+		if len(pool) == 0 && daily == nil && len(extraExcludeIDs) > 0 {
+			base := o
+			base.ExcludeIDs = nil
+			for _, p := range s.pack.Pool("lant", base) {
+				if p.PilotEligible {
+					pool = append(pool, p)
+				}
+			}
+		}
 	}
 	minimum := min(3, len(pool))
 	if daily != nil && category == "" {
@@ -507,6 +522,10 @@ func (s *Service) mine(rng *pyrandom.Random, category, difficulty string) (pair,
 	return pair{}, fail(503, "Nu am putut genera un lanț valid; reîncearcă.")
 }
 func (s *Service) Create(seed *big.Int, difficulty string, daily *string, category string) (map[string]any, *gameapi.Error) {
+	return s.CreateWithExclusions(seed, difficulty, daily, category, nil)
+}
+
+func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *string, category string, extraExcludeIDs map[string]bool) (map[string]any, *gameapi.Error) {
 	if difficulty != "usor" && difficulty != "greu" {
 		difficulty = "normal"
 	}
@@ -517,7 +536,7 @@ func (s *Service) Create(seed *big.Int, difficulty string, daily *string, catego
 		seed = new(big.Int).SetUint64(catalog.DailySeed(*daily, "lant"))
 	}
 	rng := pyrandom.New(seed)
-	picked := s.curated(rng, daily, category, difficulty)
+	picked := s.curatedWithExclusions(rng, daily, category, difficulty, extraExcludeIDs)
 	var p pair
 	if picked != nil {
 		p = pair{start: picked.Payload["start"].(string), target: picked.Payload["target"].(string), optimal: int(picked.Payload["optimal"].(float64))}
@@ -529,6 +548,9 @@ func (s *Service) Create(seed *big.Int, difficulty string, daily *string, catego
 		}
 	}
 	v := &game{Start: p.start, Target: p.target, Optimal: p.optimal, Difficulty: difficulty, Daily: daily, Category: category, Chain: []string{p.start}}
+	if picked != nil {
+		v.CuratedID = picked.ID
+	}
 	out := s.state("", v)
 	id, err := s.store.Create(v)
 	if err != nil {
@@ -536,6 +558,20 @@ func (s *Service) Create(seed *big.Int, difficulty string, daily *string, catego
 	}
 	out["game_id"] = id
 	return out, nil
+}
+
+func (s *Service) Progress(id string) (curatedID string, finished, won bool, terminalScore int, found bool) {
+	terminalScore = -1
+	found, _ = s.store.Transaction(id, func(v *game) error {
+		curatedID = v.CuratedID
+		finished = v.Won
+		won = v.Won
+		if won {
+			terminalScore = score(v)
+		}
+		return nil
+	})
+	return
 }
 func (s *Service) Get(id string) (map[string]any, *gameapi.Error) {
 	return s.action(id, func(v *game) (map[string]any, *gameapi.Error) { return s.state(id, v), nil })

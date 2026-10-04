@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Default Go anonymous arcade launcher; Python remains an offline content/test tool.
+# Native Go arcade launcher; Python remains an offline content/test tool.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -95,7 +95,9 @@ Cât de român ești? — Go anonymous arcade
   ./run.sh help    Show this help.
 
 PORT defaults to 8000; HOST defaults to 127.0.0.1. A busy port fails explicitly.
-Gameplay uses the reviewed embedded content. Accounts remain unsupported.
+Gameplay uses the reviewed embedded content. Native accounts are optional:
+CAT_ACCOUNTS_ENABLED=1 requires PostgreSQL and an explicit schema migration.
+Google/Facebook buttons appear only when their provider is configured.
 Generated Go binaries/caches live under ~/work/_temp/adhoc-cat-native-YYYYMMDD/.
 HELP
 }

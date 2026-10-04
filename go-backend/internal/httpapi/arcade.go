@@ -78,13 +78,13 @@ func (s *Server) arcade(w http.ResponseWriter, r *http.Request) bool {
 			}
 			body, e = s.perechi.Create(seed, daily, category, last(q, "previous_game_id"), starter != nil && starter.Sign() != 0)
 		case "conexiuni":
-			body, e = s.conexiuni.Create(seed, daily, category, difficulty)
+			body, e = s.conexiuni.CreateWithExclusions(seed, daily, category, difficulty, s.exclusions(r, "conexiuni"))
 		case "contexto":
-			body, e = s.contexto.Create(seed, difficulty, dailyPtr, category)
+			body, e = s.contexto.CreateWithExclusions(seed, difficulty, dailyPtr, category, s.exclusions(r, "contexto"))
 		case "lant":
-			body, e = s.lant.Create(seed, difficulty, dailyPtr, category)
+			body, e = s.lant.CreateWithExclusions(seed, difficulty, dailyPtr, category, s.exclusions(r, "lant"))
 		case "alchimie":
-			body, e = s.alchimie.Create(seed, daily, category, difficulty)
+			body, e = s.alchimie.CreateWithExclusions(seed, daily, category, difficulty, s.exclusions(r, "alchimie"))
 		}
 		done()
 		return true

@@ -74,7 +74,8 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0159 | [Harden V1 as 1.0.1 before physical-device testing](0159-v1-0-1-testing-hardening.md) | accepted |
 | 0160 | [Begin the Go backend with native Intrusul](0160-start-go-backend-with-native-intrusul.md) | partially superseded by 0161 |
 | 0161 | [Complete anonymous Go and Rust backends](0161-complete-anonymous-native-backends.md) | partially superseded by 0162 |
-| 0162 | [Select Go for the production arcade](0162-select-go-production-backend.md) | accepted |
+| 0162 | [Select Go for the production arcade](0162-select-go-production-backend.md) | accepted; account boundary amended by 0163 |
+| 0163 | [Complete native Go accounts and serving](0163-complete-native-go-accounts.md) | accepted; activation gated |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import {
   type AuthUser,
   deleteAccount,
-  loginWithGoogle,
   logout,
   submitConsent,
   updateProfile,
@@ -59,9 +58,9 @@ function AccountSection({
 }) {
   if (!me.authenticated || !me.user) {
     return (
-      <button type="button" className="account-btn account-btn--google" onClick={loginWithGoogle}>
-        Intră cu Google
-      </button>
+      <a className="account-btn" href="/accounts/login/">
+        Intră în cont
+      </a>
     );
   }
   const user = me.user;

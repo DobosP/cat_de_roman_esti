@@ -1,10 +1,10 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-10-03
+Last verified: 2026-10-04
 
 ## Environment
 - Production/local server: Go 1.27.1, canonical `run.sh`/Dockerfile; see [NATIVE_BACKENDS](NATIVE_BACKENDS.md).
-- Python commands below are content/reference/dormant-account gates, not the serving runtime.
+- Python commands below are offline content/reference gates, not the serving runtime.
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
   pytest-django). It is gitignored and lives only in the shared checkout.
 - From a task worktree, prefix every command with `PYTHONPATH=.`.
@@ -63,3 +63,9 @@ Native Go/Rust commands and standalone browser qualification: [NATIVE_BACKENDS](
 Current content expectations and named-round fixtures: see
 [ADR-0116](adr/0116-share-current-content-test-expectations.md), `tests/current_content.py`
 and `tests/content_scenarios.py`. Historical review and reconstruction pins remain separate.
+
+Native account release lanes require an explicit disposable PostgreSQL DSN:
+`go -C go-backend test -race ./internal/accounts -accounts.database <fixture>` and
+`go -C go-backend test -race ./internal/httpapi -arcade.database <fixture>`.
+Also run `go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...`.
+Provider fixtures are local only; production accounts/submissions remain gated off.

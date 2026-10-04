@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-04 — Go-only backend merged, published and deployed; anonymous V1.0.1.
+Last verified: 2026-10-04 — anonymous Go V1.0.1 live; complete native account candidate under qualification.
 
 ## Current state
 
@@ -87,10 +87,10 @@ Unrevealed answers, recipe maps and routes stay private.
   is sampled after Web Lock acquisition. **241 frontend cases**, lint/typecheck/build pass (119.78 KiB).
 - **622/622 browser cases per runtime** pass; same-CPU HTTP [receipts](reviews/native-backends/README.md).
   Build/run/CI: [guide](NATIVE_BACKENDS.md); Go production [proof](reviews/go-production/README.md) passes.
-- Accounts/OAuth/account scores and enabled submissions remain Python features; native startup
-  refuses activation. Sources/world are immutable startup snapshots; source changes require a rebuild.
-  Sessions remain process-local; replicas need affinity. Python is content/reference tooling;
-  Rust is manual research; other repositories are unchanged.
+- [ADR-0163](adr/0163-complete-native-go-accounts.md): optional accounts/OAuth/consent/private
+  progress/verified rankings/curated history/erasure and pending proposals are now native Go.
+  Username/password and configured Google/Facebook adapters use the shared MIT auth core.
+  Production flags remain off. Sources/world require rebuild; engine replicas still need affinity.
 
 ## Production and next work
 
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0162), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0163), reviews/WORKLOG: history.

@@ -21,6 +21,7 @@ import (
 
 type Error = gameapi.Error
 type gameSession struct {
+	curatedID                   string
 	groups                      map[string][]string
 	order, solved               []string
 	lives, mistakes             int
@@ -308,6 +309,10 @@ func curated(item *content.PackItem, daily, category string) (*gameSession, *Err
 	return newSession(groups, order, item.Difficulty, daily, category, labels), nil
 }
 func (s *Service) Create(seed *big.Int, daily, category, difficulty string) (map[string]any, *Error) {
+	return s.CreateWithExclusions(seed, daily, category, difficulty, nil)
+}
+
+func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficulty string, extraExcludeIDs map[string]bool) (map[string]any, *Error) {
 	if !slices.Contains([]string{"usor", "normal", "greu"}, difficulty) {
 		difficulty = "normal"
 	}
@@ -324,12 +329,16 @@ func (s *Service) Create(seed *big.Int, daily, category, difficulty string) (map
 		item = s.pack.PickDaily("conexiuni", daily, opts)
 	} else {
 		rng = pyrandom.New(seed)
+		opts.ExcludeIDs = extraExcludeIDs
 		item = s.pack.PickSeeded("conexiuni", rng, opts)
 	}
 	var game *gameSession
 	var err *Error
 	if item != nil {
 		game, err = curated(item, daily, category)
+		if err == nil {
+			game.curatedID = item.ID
+		}
 	} else if category != "" {
 		return nil, fail(503, "Nu există încă jocuri pentru această categorie.")
 	} else {
@@ -348,6 +357,20 @@ func (s *Service) Create(seed *big.Int, daily, category, difficulty string) (map
 	}
 	body["game_id"] = id
 	return body, nil
+}
+
+func (s *Service) Progress(id string) (curatedID string, finished, won bool, score int, found bool) {
+	score = -1
+	found, _ = s.store.Transaction(id, func(v *gameSession) error {
+		curatedID = v.curatedID
+		finished = v.won || v.lost
+		won = v.won
+		if finished {
+			score = max(0, 1000-250*v.mistakes-100*v.cluesUsed)
+		}
+		return nil
+	})
+	return
 }
 func (s *Service) concept(id string) map[string]string {
 	label, ok := s.data.Labels[id]

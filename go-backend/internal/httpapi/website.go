@@ -267,7 +267,7 @@ func (s *Server) website(w http.ResponseWriter, r *http.Request) bool {
 		if r.Method != "POST" {
 			write(w, r, 405, map[string]any{"detail": "Method Not Allowed"})
 		} else {
-			write(w, r, 503, map[string]any{"detail": "Trimiterea de jocuri nu este activata pe acest server."})
+			s.submit(w, r)
 		}
 		return true
 	case "/legal/privacy", "/legal/terms":

@@ -2,7 +2,7 @@
 //
 // Separate from api/client.ts on purpose: the account endpoints need same-origin session
 // cookies + the CSRF token echoed as X-CSRFToken (Django/DRF SessionAuthentication). The
-// anonymous game client stays cookie/CSRF-free. GET /api/me seeds the csrftoken cookie.
+// authenticated game writes use the same CSRF proof. GET /api/me seeds the cookie.
 
 export interface AuthUser {
   id: number;
@@ -57,10 +57,14 @@ function getCookie(name: string): string | null {
   const prefix = `${name}=`;
   for (const part of document.cookie ? document.cookie.split(";") : []) {
     const c = part.trim();
-    if (c.startsWith(prefix)) return decodeURIComponent(c.slice(prefix.length));
+    if (c.startsWith(prefix)) {
+      try { return decodeURIComponent(c.slice(prefix.length)); } catch { return null; }
+    }
   }
   return null;
 }
+
+export const readCSRFToken = (): string | null => getCookie("csrftoken");
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const headers: Record<string, string> = { "Content-Type": "application/json" };

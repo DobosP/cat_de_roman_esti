@@ -17,6 +17,7 @@ import (
 
 type Error = gameapi.Error
 type gameSession struct {
+	curatedID                                         string
 	seeds                                             []string
 	target, difficulty, daily, category               string
 	owned                                             map[string]*Pair
@@ -57,6 +58,10 @@ func New(data *content.Content) *Service {
 	return &Service{data: data, graph: graph.New(data), pack: pack.New(data), store: session.New[*gameSession](), cache: newCache()}
 }
 func (s *Service) Create(seed *big.Int, daily, category, difficulty string) (map[string]any, *Error) {
+	return s.CreateWithExclusions(seed, daily, category, difficulty, nil)
+}
+
+func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficulty string, extraExcludeIDs map[string]bool) (map[string]any, *Error) {
 	if difficulty != "usor" && difficulty != "greu" && difficulty != "normal" {
 		difficulty = "normal"
 	}
@@ -70,6 +75,7 @@ func (s *Service) Create(seed *big.Int, daily, category, difficulty string) (map
 		rng = pyrandom.NewUint64(catalog.DailySeed(daily, "alchimie"))
 		item = s.pack.PickDaily("alchimie", daily, opts)
 	} else {
+		opts.ExcludeIDs = extraExcludeIDs
 		item = s.pack.PickSeeded("alchimie", rng, opts)
 	}
 	var g *gameSession
@@ -86,6 +92,7 @@ func (s *Service) Create(seed *big.Int, daily, category, difficulty string) (map
 			return nil, &Error{Status: 503, Detail: "Jocul ales nu are o proiecție de rețete validă."}
 		}
 		g = newGame(seeds, target, p, difficulty, daily, item.Category)
+		g.curatedID = item.ID
 	} else {
 		g, err = s.mine(rng, difficulty, daily, category)
 		if err != nil {
@@ -97,6 +104,20 @@ func (s *Service) Create(seed *big.Int, daily, category, difficulty string) (map
 		return nil, &Error{Status: 503, Detail: "Prea multe jocuri active. Încearcă din nou."}
 	}
 	return s.state(id, g), nil
+}
+
+func (s *Service) Progress(id string) (curatedID string, finished, won bool, score int, found bool) {
+	score = -1
+	found, _ = s.store.Transaction(id, func(v *gameSession) error {
+		curatedID = v.curatedID
+		finished = v.won()
+		won = finished
+		if won {
+			score = v.score()
+		}
+		return nil
+	})
+	return
 }
 func (s *Service) concept(id string) map[string]any {
 	return map[string]any{"id": id, "label": s.graph.Label(id)}
