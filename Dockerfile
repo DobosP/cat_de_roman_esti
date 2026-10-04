@@ -26,6 +26,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --gid 10001 app \
     && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
+RUN mkdir -p /data/submissions && chown 10001:10001 /data/submissions && chmod 700 /data/submissions
 WORKDIR /app
 COPY --from=backend /out/cat-server /usr/local/bin/cat-server
 COPY shared-go/authcore/LICENSE /usr/share/doc/cat-authcore/LICENSE

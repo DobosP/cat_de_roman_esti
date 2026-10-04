@@ -178,7 +178,7 @@ docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
 docker compose -f docker-compose.prod.yml logs -f app   # watch migrations + boot
 ```
 
-The `app` entrypoint runs `migrate` automatically. Verify:
+The optional native account `app` command runs `cat-server -migrate` before serving. Verify:
 
 ```bash
 curl -fsS https://<CAT_DOMAIN>/api/health        # {"ok": true, ...}
@@ -231,6 +231,7 @@ docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
 
 The Go anonymous image runs no migrations. The optional native account profile applies explicit
 Go migrations against PostgreSQL; activation still requires the go-live checklist.
+Legacy Python staging is isolated in `docker-compose.python-reference.yml` for offline reference/rollback.
 Roll back by checking out the recorded commit and either restoring
 the preserved image tag or rebuilding that commit. Never use `down -v` or a Docker prune:
 the Caddy TLS volumes and other apps on the shared host are outside this rollout's scope.

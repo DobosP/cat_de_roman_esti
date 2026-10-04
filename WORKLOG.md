@@ -1405,3 +1405,10 @@ analysis falls back to module metadata and its wildcard warnings are reported se
 Docker/Go-module/CI paths now include native account/shared-core dependencies and license
 notice. Python remains offline content/reference tooling; Rust remains anonymous research.
 This record precedes final browser/CI/public rollout proof; no new production activation.
+
+Optional accounts `docker-compose.prod.yml` now invokes native Go and explicit migrations;
+legacy staging is preserved separately as docker-compose.python-reference.yml. No account
+profile was deployed. The image initializes a private UID10001 proposal-volume directory;
+anonymous mode remains read-only and proposals/account flags off. Local622/622 browser
+qualification completed without skips/retries/flaky cases; CI native/frontend/3.12/3.14
+jobs pass, selected browser CI remains in progress.
