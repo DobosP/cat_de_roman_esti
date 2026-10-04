@@ -89,6 +89,9 @@ func (c *Client) get(ctx context.Context, path string, query url.Values, out any
 	if int64(len(raw)) > c.limits.PageBytes {
 		return errors.New("RO-EDU page byte cap exceeded")
 	}
+	if err = validateWire(raw); err != nil {
+		return err
+	}
 	d := json.NewDecoder(bytes.NewReader(raw))
 	d.UseNumber()
 	if err = d.Decode(out); err != nil {

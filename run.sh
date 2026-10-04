@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Native Go arcade launcher; Python remains an offline content/test tool.
+# Native Go arcade launcher and source freshness build gate.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -8,7 +8,7 @@ STATIC_INDEX="$SCRIPT_DIR/cat_de_roman_esti/web/static/index.html"
 FRONTEND_DIR="$SCRIPT_DIR/frontend"
 native_port="${PORT:-8000}"
 native_host="${HOST:-127.0.0.1}"
-native_build_dir="$HOME/work/_temp/adhoc-cat-native-$(date +%Y%m%d)"
+native_build_dir="${CDR_TOOLCHAIN_SCRATCH:-$HOME/work/_temp/adhoc-cat-native-$(date +%Y%m%d)}"
 native_repository_key="$(printf '%s' "$SCRIPT_DIR" | cksum)"
 native_repository_key="${native_repository_key%% *}"
 native_binary="$native_build_dir/cat-server-$native_repository_key"
@@ -43,7 +43,9 @@ build_backend() {
   mkdir -p "$native_build_dir/go-cache" "$native_build_dir/go-tmp"
   log "building Go backend (incremental cache in workspace scratch)"
   (cd "$SCRIPT_DIR/go-backend"
-    CGO_ENABLED=0 GOCACHE="$native_build_dir/go-cache" GOTMPDIR="$native_build_dir/go-tmp" \
+    GOMAXPROCS=2 GOFLAGS=-p=2 GOCACHE="$native_build_dir/go-cache" GOTMPDIR="$native_build_dir/go-tmp" \
+      go run ./cmd/cat-content export --root .. --check
+    CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 GOCACHE="$native_build_dir/go-cache" GOTMPDIR="$native_build_dir/go-tmp" \
       go build -trimpath -ldflags="-s -w" -o "$native_binary.$$" ./cmd/cat-server)
   mv "$native_binary.$$" "$native_binary"
 }

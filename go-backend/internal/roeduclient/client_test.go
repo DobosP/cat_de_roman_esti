@@ -137,3 +137,21 @@ func TestUnknownProductsAndReservedFilters(t *testing.T) {
 		t.Fatal("cursor override")
 	}
 }
+
+func TestWireCannotEraseRefusalOrReplaceUnicode(t *testing.T) {
+	for _, raw := range [][]byte{
+		[]byte(`{"available":false,"available":true,"records":[]}`),
+		[]byte(`{"available":true,"records":[{"id":"n","label_ro":"\ud800"}]}`),
+		[]byte(`{"available":false,"avail\u0061ble":true,"records":[]}`),
+		[]byte(`{"available":true,"records":[{"id":"n","redistributable":false,"redistributable":true}]}`),
+		append([]byte(`{"available":true,"records":[{"id":"n","label_ro":"`), append([]byte{0xff}, []byte(`"}]}`)...)...),
+		[]byte(strings.Repeat("[", 66) + "0" + strings.Repeat("]", 66)),
+	} {
+		if validateWire(raw) == nil {
+			t.Fatal("ambiguous or invalid wire input accepted")
+		}
+	}
+	if err := validateWire([]byte(`{"available":true,"records":[],"provenance":{"source_url":"https://example.invalid"}}`)); err != nil {
+		t.Fatal(err)
+	}
+}

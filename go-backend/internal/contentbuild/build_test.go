@@ -395,3 +395,45 @@ func TestMalformedSourceEncodingAndNumbers(t *testing.T) {
 		t.Fatal("null archive list accepted")
 	}
 }
+
+func TestProvenanceURLPortContract(t *testing.T) {
+	for _, tc := range []struct {
+		url   string
+		valid bool
+	}{{"https://example.test/reference", true}, {"http://example.test:1/path", true}, {"http://example.test:0001/path", true}, {"http://example.test:65535/path", true}, {"http://[::1]:65535/path", true}, {"http://example.test:/path", true}, {"http://example.test:0/path", false}, {"http://example.test:0000/path", false}, {"http://example.test:65536/path", false}, {"http://[::1]:65536/path", false}, {"http://example.test:99999999999999999999999999999/path", false}, {"http://example.test:wrong/path", false}, {"http://example.test/reference\u202f", false}, {"https://user:password@example.test/path", false}, {"file:///reference", false}} {
+		if got := ValidReference(tc.url); got != tc.valid {
+			t.Fatalf("provenance URL %q = %v want %v", tc.url, got, tc.valid)
+		}
+	}
+}
+
+func TestPrivateSourceUnicodeScalarAndDuplicateRefusal(t *testing.T) {
+	for _, raw := range []string{`{"x":"\ud800"}`, `{"x":"\udc00"}`, `{"x":"\ud800\u0041"}`, `{"x":1,"\u0078":2}`} {
+		if _, err := DecodeObject([]byte(raw)); err == nil {
+			t.Fatalf("private source silently repaired or shadowed %s", raw)
+		}
+	}
+	for raw, want := range map[string]string{`{"x":"\ud83d\ude00"}`: "😀", `{"x":"\\ud800"}`: `\ud800`} {
+		got, err := DecodeObject([]byte(raw))
+		if err != nil || got["x"] != want {
+			t.Fatalf("valid source %s fails: %v", raw, err)
+		}
+	}
+}
+func TestFixtureNonnumericSalienceRefusal(t *testing.T) {
+	base := source(t, "kg_sample.json")
+	for _, value := range []any{"0.8", true, []any{json.Number("0.8")}, json.Number("1e999")} {
+		raw := clone(t, base)
+		node := object(array(raw["kg_nodes"])[0])
+		node["salience"] = value
+		node["difficulty_tier"] = "hard"
+		errors := validateFixture(raw)
+		found := false
+		for _, err := range errors {
+			found = found || strings.HasPrefix(err, "field_shapes:") && strings.Contains(err, "salience")
+		}
+		if !found {
+			t.Fatalf("invalid salience %v accepted: %v", value, errors)
+		}
+	}
+}

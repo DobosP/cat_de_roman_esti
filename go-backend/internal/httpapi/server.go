@@ -89,17 +89,33 @@ func (s *Server) serveHTTP(w http.ResponseWriter, r *http.Request) {
 		write(w, r, 413, map[string]any{"detail": "Request body too large"})
 		return
 	}
+	// Keep the established size/preflight precedence while refusing configured
+	// hosts before an upload can occupy the anonymous handler.
+	origin := r.Header.Get("Origin")
+	localCORS := localOrigin.MatchString(origin) && (s.Auth == nil || origin == s.authOrigin)
+	preflight := localCORS && r.Method == "OPTIONS" && r.Header.Get("Access-Control-Request-Method") != ""
+	if !preflight && !validHost(r.Host, s.allowedHosts) {
+		w.Header().Add("Vary", "origin")
+		if localCORS {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+			w.Header().Set("Access-Control-Allow-Credentials", "true")
+		}
+		websiteBytes(w, r, 400, "text/html; charset=utf-8", []byte(badHostHTML))
+		return
+	}
 	if r.Body != nil {
 		raw, err := io.ReadAll(io.LimitReader(r.Body, MaxRequestBytes+1))
-		_ = r.Body.Close()
 		if err != nil {
 			write(w, r, 400, map[string]any{"detail": "Request body unreadable"})
+			_ = r.Body.Close()
 			return
 		}
 		if len(raw) > MaxRequestBytes {
 			write(w, r, 413, map[string]any{"detail": "Request body too large"})
+			_ = r.Body.Close()
 			return
 		}
+		_ = r.Body.Close()
 		r.Body = io.NopCloser(bytes.NewReader(raw))
 	}
 	{

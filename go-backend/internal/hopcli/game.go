@@ -13,6 +13,7 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/roeduclient"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/strictjson"
 )
 
 type Puzzle struct {
@@ -137,6 +138,9 @@ func ReadFixture(path string) (*Bundle, error) {
 	}
 	if len(data) > 32<<20 {
 		return nil, errors.New("fixture byte cap exceeded")
+	}
+	if err = strictjson.Validate(data); err != nil {
+		return nil, err
 	}
 	var raw roeduclient.Bundle
 	d := json.NewDecoder(strings.NewReader(string(data)))

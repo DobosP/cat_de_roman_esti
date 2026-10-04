@@ -38,14 +38,36 @@ No real ingestion, provider/model activation, paid infrastructure or content pro
 - Node 24.21.0: 242/242 frontend assertions, lint/typecheck/build pass; 119.78 KiB initial
   JS/CSS gzip. Product frontend/assets are unchanged. Private browser helpers use Go.
 - Native document term/verb corpus and repository check pass; document budgets hold.
+- Native Docker build passes source freshness. Isolated image
+  `4f520238340b4875a47f729681aef450dbf856813be357376c50b71f6e84aa5f` passes
+  native smoke151/six games/exploration/28 assets, UID10001/read-only/healthy/zero restarts.
+  Python/Rust executables are absent. The build context includes only the bound rubric
+  exception; local environment files remain excluded. No image was deployed.
 
 ## Integration still required
 
 Full source-root fresh-checkout qualification includes exact native source/operator/builder
 checks, all native race/vet, explicit disposable PostgreSQL lanes, compiled frozen HTTP
-parity, Node gates and all 622 browser cases. Operator review/source-version/rollback checks
-and the independent review findings must pass before retiring legacy required paths.
+parity, Node gates and all 622 browser cases. Operator review/source-version/rollback and independent review checks now pass; the full
+fresh-checkout integrated gate remains required before retiring legacy required paths.
 The Python reference and Rust research files, tests and rollback profiles remain intact.
 
 Aggregate receipts live in the authorized task scratch tree during work. Durable final
 qualification commands/counts and any unresolved gaps will be recorded here and in STATUS.
+
+## Operator and transport qualification
+
+Native operators match all 716 ranking rows/metadata and 336 derived boards; 709 approved
+dossiers pass the native census. Synthetic review/import/queue/projection/stale-source,
+under-lock runtime inventory and verified rollback cases pass. Builders reproduce all four
+original bytes/SHA pins, audit 85 quick boards/33 goal modes/351 recipes/nine books/1009
+prefixes, and pass a genuine synthetic changed-version installation while sealed export
+refuses the old serving pin. Original data/ledgers remain unchanged.
+
+Thirteen actual TCP refusal cases pass within 2 seconds after confirmed no-upload/drain failures;
+frozen 32 body, synthetic account lifecycle, CORS/host/size contracts pass the same focused
+race run (53.222 seconds). Compiled independent parity still 1207/1207. Shared auth is unchanged.
+Private Unicode/schema/URI IPC negative tests pass without modifying raw game negatives.
+The first full browser run passes 622/622 with no retries in 25.9 minutes, Python/Rust absent from PATH.
+The remaining complete fresh checkout run implements the original qualification scope;
+no whole browser run is repeated solely for the TCP fix.

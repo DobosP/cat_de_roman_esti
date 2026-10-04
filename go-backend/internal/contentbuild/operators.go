@@ -66,3 +66,7 @@ func Caption(g *graph.Service, a, b string) string {
 	}
 	return fallback
 }
+
+// ValidReference checks an offline provenance citation under the shared URL
+// contract, including Python-compatible explicit port range validation.
+func ValidReference(value string) bool { return validReference(value) }

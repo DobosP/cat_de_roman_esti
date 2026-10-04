@@ -40,19 +40,22 @@ func TestAll1009IndependentHistoricalSavedPrefixes(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if corpus.Schema != "legacy-saved-prefixes-v1" || corpus.Source != c.Sources["alchimie_discovery_world_v92.json"] || corpus.Count != 1009 || len(corpus.Books) != 9 {
+	if corpus.Schema != "legacy-saved-prefixes-v1" || corpus.Source != "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44" || corpus.Count != 1009 || len(corpus.Books) != 9 {
 		t.Fatal("independent corpus/source identity mismatch")
 	}
 	s := New(c)
 	if s.loadError != nil {
 		t.Fatal(s.loadError)
 	}
-	if len(s.world.Versions) != 9 {
+	if len(s.world.Versions) < len(corpus.Books) {
 		t.Fatal("historical book count changed")
 	}
 	checked := 0
 	for _, book := range corpus.Books {
 		t.Run(book.Hash, func(t *testing.T) {
+			if archived, ok := s.world.versions[book.Hash]; !ok || archived.WorldID != book.WorldID {
+				t.Fatal("historical book missing")
+			}
 			owned := map[string]bool{}
 			for _, id := range book.Starters {
 				owned[id] = true

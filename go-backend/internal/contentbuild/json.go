@@ -8,6 +8,7 @@ import (
 	_ "embed"
 	"encoding/json"
 	"fmt"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/strictjson"
 	"io"
 	"math"
 	"os"
@@ -50,6 +51,9 @@ func frozenRules() (map[string]any, error) {
 	return rules, rulesError
 }
 func decodeObject(b []byte) (map[string]any, error) {
+	if err := strictjson.Validate(b); err != nil {
+		return nil, err
+	}
 	if !utf8.Valid(b) {
 		return nil, fmt.Errorf("source is not valid UTF-8")
 	}
@@ -394,4 +398,21 @@ func unescapeSeparators(encoded []byte) []byte {
 		i++
 	}
 	return out
+}
+
+// DecodeObject validates private source/operator JSON before decoding, including
+// Unicode scalar validity and duplicate/depth checks. HTTP bodies use their own
+// domain parser and frozen compatibility corpus.
+func DecodeObject(raw []byte) (map[string]any, error) { return decodeObject(raw) }
+func numericShape(v any) bool {
+	switch n := v.(type) {
+	case json.Number:
+		f, err := n.Float64()
+		return err == nil && !math.IsNaN(f) && !math.IsInf(f, 0)
+	case float64:
+		return !math.IsNaN(n) && !math.IsInf(n, 0)
+	case int, int64:
+		return true
+	}
+	return false
 }

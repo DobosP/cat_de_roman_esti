@@ -97,17 +97,9 @@ func replayRequests(handler http.Handler) error {
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetEscapeHTML(false)
 	for scanner.Scan() {
-		var input struct {
-			Method  string            `json:"method"`
-			Path    string            `json:"path"`
-			Body    string            `json:"body"`
-			Headers map[string]string `json:"headers"`
-		}
-		if err := json.Unmarshal(scanner.Bytes(), &input); err != nil {
+		input, err := decodeReplayInput(scanner.Bytes())
+		if err != nil {
 			return err
-		}
-		if input.Method == "" {
-			input.Method = "GET"
 		}
 		request := httptest.NewRequest(input.Method, input.Path, strings.NewReader(input.Body))
 		for k, v := range input.Headers {

@@ -79,6 +79,9 @@ func validateFixture(raw map[string]any) []string {
 				if _, ok := cats[str(m["category"])]; !ok {
 					fail("field_shapes", "unknown category")
 				}
+				if !numericShape(m["salience"]) {
+					fail("field_shapes", id+" salience must be numeric")
+				}
 				sal := number(m["salience"])
 				tier := "hard"
 				if sal >= .66 {

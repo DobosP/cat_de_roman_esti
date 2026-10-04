@@ -50,6 +50,7 @@ func (s *Server) exclusions(r *http.Request, game string) map[string]bool {
 	return ids
 }
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w = observeRefusals(w, r)
 	if s.Accounts == nil {
 		s.serveHTTP(w, r)
 		return

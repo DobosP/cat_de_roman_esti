@@ -6,6 +6,7 @@ import (
 	"math"
 	"net/url"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -445,7 +446,8 @@ func validReference(v any) bool {
 				return false
 			}
 		}
-		if p == "0" {
+		port, err := strconv.Atoi(p)
+		if err != nil || port < 1 || port > 65535 {
 			return false
 		}
 	}

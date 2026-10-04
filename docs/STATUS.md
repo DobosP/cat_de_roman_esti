@@ -54,7 +54,6 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-
 ## Current artifact pins
 
 - alchimie_discovery_world_v92.json: `0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44`
@@ -67,7 +66,6 @@ Unrevealed answers, recipe maps and routes stay private.
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
 - kg_sample.json: `1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64`
 - cat_mobile_app_pack_contract.json: `82304733284ca62245e0d2ac0abb7b81c991ed1857ca904c990116c5bce280b4`
-
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -81,7 +79,7 @@ Unrevealed answers, recipe maps and routes stay private.
   six games/mining, exploration/restores, metadata/OpenAPI, legal pages and SPA are native Go.
   Canonical launcher/Docker/anonymous profile have no Python serving process or fallback.
 - Serving qualification: **1207 HTTP responses/runtime** match Django; all games and nine histories
-  match frozen references. Prior Go race/vet and retained Rust **55 tests** pass (linked proof).
+  match frozen references; prior Go race/vet and retained Rust **55 tests** pass (linked proof).
 - Fixed a shared frontend score-receipt race found by the Go two-tab browser gate: transaction time
   is sampled after Web Lock acquisition. **241 frontend cases**, lint/typecheck/build pass (119.78 KiB).
 - **622/622 browser cases per runtime** pass; same-CPU HTTP [receipts](reviews/native-backends/README.md).
@@ -105,8 +103,10 @@ Unrevealed answers, recipe maps and routes stay private.
 - Native source/tooling stage [ADR-0165](adr/0165-native-source-build-and-qualification.md):
   exact eight-source export, 180 terminal paths, 32 neutral body cases and 1009 saved prefixes pass.
   Native compiled parity 1207/1207, synthetic smoke151/28asset proofs, REST/mobile/docs race/vet pass.
-  Explicit synthetic-PG account/HTTP and shared auth gates pass; full operator/browser gate in progress.
-- Accounts/submissions remain off under go-live gates; recurring content loop remains outside rollout.
+  Source operators/builders race/vet and exact716/336/4rail checks pass; browser622/622 native passes.
+- [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
+  [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity pass; auth unchanged.
+  Fresh full native checkout gate pending; production accounts/proposals remain off.
 - Next: same-Wi-Fi phone/desktop testing, iPhone (Safari/WebKit untested), Android and enlarged text.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0165), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0167), reviews/WORKLOG: history.
