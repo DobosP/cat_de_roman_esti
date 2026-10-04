@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-04 — complete Go serving merged/published/deployed; anonymous V1.0.1.
+Last verified: 2026-10-05 — native terminal/REST/mobile tooling stage; production remains anonymous V1.0.1.
 
 ## Current state
 
@@ -103,10 +103,11 @@ Unrevealed answers, recipe maps and routes stay private.
 - UID10001/read-only, healthy/zero restarts; fixedPCRE2 and zero fixableHIGH/CRITICAL image gate.
   Caddy/certificates/volumes preserved; previousGo+Python rollback profiles retained.
   [Complete rollout proof](reviews/go-completion/README.md). No provider/minor activation.
-- Native Go docs/run/DB/account gates are aligned (2026-10-04); Python is CLI/content/oracle only.
+- Native terminal/REST/mobile stage [ADR-0164](adr/0164-native-terminal-and-rest-tools.md):
+  Go 1.27.1 race/vet pass; 180 frozen terminal puzzles solve at par; mobile contract matches.
+  REST synthetic refusal/caps/snapshot/legal tests pass; broader tooling gates remain in progress.
 - Accounts/submissions remain off under go-live gates; recurring content loop remains outside rollout.
-- Next: a same-Wi-Fi phone/desktop session with the tester guide, including an iPhone
-  (Safari/WebKit is untested), an Android phone and enlarged text. Accounts stay off.
+- Next: same-Wi-Fi phone/desktop testing, iPhone (Safari/WebKit untested), Android and enlarged text.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -117,4 +118,4 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0163), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0164), reviews/WORKLOG: history.
