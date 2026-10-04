@@ -105,7 +105,7 @@ Unrevealed answers, recipe maps and routes stay private.
   Native compiled parity 1207/1207, synthetic smoke151/28asset proofs, REST/mobile/docs race/vet pass.
   Source operators/builders race/vet and exact716/336/4rail checks pass; browser622/622 native passes.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
-  [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity pass; auth unchanged.
+  [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   Fresh full native checkout gate pending; production accounts/proposals remain off.
 - Next: same-Wi-Fi phone/desktop testing, iPhone (Safari/WebKit untested), Android and enlarged text.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing

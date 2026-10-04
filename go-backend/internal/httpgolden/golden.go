@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/strictjson"
 	"io"
 	"reflect"
 	"sort"
@@ -63,6 +64,9 @@ func ReadCorpus(r io.Reader, compressed bool) (*Corpus, error) {
 	}
 	if len(raw) > MaxCorpusBytes {
 		return nil, fmt.Errorf("corpus byte budget exceeded")
+	}
+	if err = strictjson.Validate(raw); err != nil {
+		return nil, err
 	}
 	var c Corpus
 	d := json.NewDecoder(bytes.NewReader(raw))

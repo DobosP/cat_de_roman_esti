@@ -71,3 +71,7 @@ Private Unicode/schema/URI IPC negative tests pass without modifying raw game ne
 The first full browser run passes 622/622 with no retries in 25.9 minutes, Python/Rust absent from PATH.
 The remaining complete fresh checkout run implements the original qualification scope;
 no whole browser run is repeated solely for the TCP fix.
+
+Qualification corpus, JSON HTTP responses and binary replay responses also use the
+shared strict scalar/duplicate decoder. Focused httpgolden race passes (29.272s),
+including unchanged frozen1207 decode/replay and malformed/private input refusals.

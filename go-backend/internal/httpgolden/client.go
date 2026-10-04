@@ -8,6 +8,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/strictjson"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -157,6 +158,11 @@ func (t *httpTransport) Do(ctx context.Context, r Request) (Response, error) {
 	if len(raw) > MaxResponse {
 		return Response{}, fmt.Errorf("response budget exceeded")
 	}
+	if strings.Contains(res.Header.Get("Content-Type"), "application/json") {
+		if err = strictjson.Validate(raw); err != nil {
+			return Response{}, err
+		}
+	}
 	return Response{res.StatusCode, decode(raw), res.Header, raw, time.Since(start)}, nil
 }
 func (t *httpTransport) Close() error { t.transport.CloseIdleConnections(); return nil }
@@ -304,6 +310,13 @@ func (t *replayTransport) Do(ctx context.Context, r Request) (Response, error) {
 				return
 			}
 			break
+		}
+		if e = strictjson.Validate(line); e != nil {
+			result <- struct {
+				r Response
+				e error
+			}{e: e}
+			return
 		}
 		var v struct {
 			Status int `json:"status"`
