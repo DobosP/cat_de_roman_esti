@@ -1,0 +1,209 @@
+{
+  "id": "v1-3-lemn",
+  "revision": 2,
+  "state": "selected_for_refinement",
+  "origin_track": "discovery",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "checked_on": "2026-10-06",
+  "label_ro": "Lemn",
+  "sense": "Materialul provenit din părțile lemnoase ale arborilor, folosit între altele la construcții și mobilier.",
+  "category": "viata_de_roman",
+  "novelty": {
+    "kind": "new_shared_concept",
+    "prior_research_id": "v99-everyday-lemn",
+    "old_record_revision": 1,
+    "proposed_node_id": "n_v1_3_material_lemn"
+  },
+  "identity_checks": {
+    "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+    "normalization": "NFKD; remove combining marks; casefold; collapse whitespace",
+    "current_normalized_owner": null,
+    "world_label_owners": [],
+    "contexto_label_projection": null,
+    "evidence_path": "docs/reviews/v1-3-everyday-concepts/research-identity.json",
+    "evidence_sha256": "5f67c2b7a60b4551a4f8328fd0e733ef344e705b1461d65822f37a71b74aca2d",
+    "scope": "Exact KG/world/structured-rejection identity screen; independent prospective gameplay checks still required."
+  },
+  "player_benefit": "Add recognizable everyday objects and specific object-part/material/usage paths; select only clear, useful gameplay contributions.",
+  "games": [
+    "lant",
+    "contexto",
+    "intrusul",
+    "perechi"
+  ],
+  "sources": [
+    {
+      "id": "school-wood",
+      "url": "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf",
+      "publisher": "Ministerul Educației",
+      "kind": "primary_official_teaching_document",
+      "access": "full_pdf_text_opened",
+      "published_period": "2021–2022",
+      "locations": [
+        {
+          "pdf_page_index": 19,
+          "physical_page": 20,
+          "supports": "Affirmative teaching prose identifies timber/wood raw material as obtained from tree trunks and branches."
+        },
+        {
+          "pdf_page_index": 20,
+          "physical_page": 21,
+          "supports": "Teaching prose uses wood chairs and other household/school furniture as familiar examples."
+        },
+        {
+          "pdf_page_index": 8,
+          "physical_page": 9,
+          "supports": "A completion exercise describes hinge support/guidance for furniture doors, building doors and windows; manufacturer sources independently corroborate the physical applications."
+        }
+      ],
+      "license": "No redistribution license established; public access alone does not license copying the document. Only original editorial claim notes and source URL retained.",
+      "accessed_on": "2026-10-06"
+    },
+    {
+      "id": "ikea-chair",
+      "url": "https://www.ikea.com/ro/ro/p/pinntorp-scaun-maro-deschis-vopsit-00529478/",
+      "publisher": "IKEA of Sweden",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Named chair is solid pine; its assembly/maintenance references screws. Supports the qualified proposition that some chairs use wood, not all chairs or all furniture.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored.",
+      "accessed_on": "2026-10-06"
+    },
+    {
+      "id": "ikea-screw-wood",
+      "url": "https://www.ikea.com/ro/ro/manuals/fixa-260-piece-screw-and-plug-set__AA-2097280-1_pub.pdf",
+      "publisher": "IKEA",
+      "kind": "primary_manufacturer_manual",
+      "access": "full_pdf_text_opened",
+      "locations": [
+        {
+          "pdf_page_index": 39,
+          "physical_page": 40,
+          "supports": "Romanian instructions discuss fixing objects into solid wood using screws."
+        },
+        {
+          "pdf_page_index": 40,
+          "physical_page": 41,
+          "supports": "Romanian installation section includes direct screw insertion in solid wood."
+        }
+      ],
+      "supports": "Wood pieces/objects can be fastened using suitable screws. Generalized material-fastener role, not a copied installation rule or universal screw/material claim.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored.",
+      "accessed_on": "2026-10-06"
+    },
+    {
+      "id": "bosch-saw",
+      "url": "https://www.bosch-diy.com/ro/ro/p/pks-55-a-0603501020",
+      "publisher": "Robert Bosch Power Tools",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Saw product explicitly cuts wood/wooden material. Supports wood→saw use; do not infer all blades cut every material.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored.",
+      "accessed_on": "2026-10-06"
+    }
+  ],
+  "recognition": {
+    "evidence": "Official school teaching connects wood with tree trunks/branches and familiar household products; current manufacturer pages independently use the wood/material/wood-chair vocabulary.",
+    "human_playtest": "unrun"
+  },
+  "play_sketches": [
+    "A native exact guess shares one identity across its reviewed inflections; all candidate links leave the new node toward an existing object.",
+    "Balama→Ușă and Fermoar→Ghiozdan should provide clear warm guesses for existing curated targets; no hidden-target promotion.",
+    "Lemn offers the specific tree/material/chair/fastener/saw roles; no meal-table identity merge or broad furniture fan-out."
+  ],
+  "risks": [
+    "Keep domestic workshop/material scope explicit; category must follow the concept, not be changed solely to satisfy a numerical floor.",
+    "No broad furniture fan-out or reciprocal relations. Existing n_v4gas_masa means a meal, so a wooden-table source cannot justify an edge to it.",
+    "Prefer singular material aliases initially; do not automatically adopt lemne/firewood or compound plant names.",
+    "Material links can create noisy common-neighbor crafting associations; exact preinstallation old-stock impact remains required.",
+    "Zero incoming protects the new hidden-target boundary but does not provide a new intermediate for old Lanț routes."
+  ],
+  "dependencies": [
+    "Exact frozen module/proposal independent factual and quality judgments",
+    "Complete prospective old-stock/native/reference/history and generated terminal-puzzle impact",
+    "Supported graph transaction and fresh native source3/installed-authority chain bound to source2",
+    "Native integrated gates and local landing before next version"
+  ],
+  "decision": "Select the exact bounded root-authored graph proposal for independent refinement; no installation approval.",
+  "next_action": "Complete exact factual/quality/impact reviews; install only accepted unchanged bytes through the supported transaction and refresh native downstream authority.",
+  "history": [
+    {
+      "revision": 1,
+      "state": "idea",
+      "checked_on": "2026-10-06",
+      "evidence_path": "docs/reviews/v1-3-everyday-concepts/pool-r1.json",
+      "evidence_sha256": "8cea038b9e0424dcfb616b824c71600e437533d3687b457b377e30c126c55f95",
+      "notes": "Exact original V1.3 kickoff records retained; prior V99 revision1 remains a lead, never installation approval."
+    },
+    {
+      "revision": 2,
+      "checked_on": "2026-10-06",
+      "author": "root-integrator",
+      "notes": "Fresh independent research and exact current identity/deck screen; narrowed graph scope without synonym or round quota.",
+      "transition": "research evidence → selected_for_refinement, frozen pre-handoff bytes"
+    }
+  ],
+  "research_evidence": {
+    "path": "docs/reviews/v1-3-everyday-concepts/hardware-material-research.json",
+    "sha256": "d80cd599d702f5342192b96313f23c72e3135adb6fce9daaf06a7ededee2f930"
+  },
+  "proposed_grammatical_forms": [
+    "lemnul",
+    "lemnului"
+  ],
+  "claims": [
+    {
+      "id": "link-5",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "obtained_from",
+      "object_id": "n_v4sti_copac",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "material provenit din părțile lemnoase ale unui copac",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf"
+      ]
+    },
+    {
+      "id": "link-6",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "used_to_make",
+      "object_id": "n_v24_home_seating_scaun",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "poate fi folosit la fabricarea unor scaune",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.ikea.com/ro/ro/p/pinntorp-scaun-maro-deschis-vopsit-00529478/",
+        "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf"
+      ]
+    },
+    {
+      "id": "link-7",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "joined_with",
+      "object_id": "n_v32_workshop_fastener_surub",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "piesele de lemn se pot îmbina cu șuruburi pentru lemn",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.ikea.com/ro/ro/manuals/fixa-260-piece-screw-and-plug-set__AA-2097280-1_pub.pdf"
+      ]
+    },
+    {
+      "id": "link-8",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "cut_with",
+      "object_id": "n_v32_workshop_cut_fierastrau",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "se poate tăia cu fierăstrăul",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.bosch-diy.com/ro/ro/p/pks-55-a-0603501020"
+      ]
+    }
+  ]
+}

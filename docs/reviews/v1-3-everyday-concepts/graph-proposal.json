@@ -1,0 +1,605 @@
+{
+  "schema": "v1-3-graph-editorial-proposal-v1",
+  "revision": 1,
+  "author": "root-integrator",
+  "checked_on": "2026-10-06",
+  "valid_until": "Bound proposal/module/selected snapshots/baseline/runtime changes; repeat affected exact reviews.",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "source_module": "scripts/everyday_graph_v1_3_data.py",
+  "source_module_sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+  "selected_pool_records": [
+    {
+      "id": "v1-3-balama",
+      "revision": 2,
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-balama-r2.json",
+      "sha256": "01f97aae567673bb7fe92866a6627fd30d5b023d3e1cf58433c80538cb780e51"
+    },
+    {
+      "id": "v1-3-lemn",
+      "revision": 2,
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-lemn-r2.json",
+      "sha256": "0028b4e197094b48dc2e7d40eda28f83673cc163dba57ad06caf48c5c866cd43"
+    },
+    {
+      "id": "v1-3-fermoar",
+      "revision": 2,
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-fermoar-r2.json",
+      "sha256": "eeae197dcc914206f65fc3d7ac87fb414eac302cf5d4e1a2ec09988b53480b1f"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n_v1_3_home_balama",
+      "node_type": "concept",
+      "label_ro": "Balama",
+      "category": "viata_de_roman",
+      "description": "Piesă articulată care permite rotirea unei uși sau a unui canat; aici, balamaua fizică de feronerie.",
+      "salience": 0.85,
+      "aliases": [
+        "balamaua",
+        "balamale",
+        "balamalele",
+        "balamalei",
+        "balamalelor"
+      ]
+    },
+    {
+      "id": "n_v1_3_material_lemn",
+      "node_type": "concept",
+      "label_ro": "Lemn",
+      "category": "viata_de_roman",
+      "description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+      "salience": 0.9,
+      "aliases": [
+        "lemnul",
+        "lemnului"
+      ]
+    },
+    {
+      "id": "n_v1_3_clothing_fermoar",
+      "node_type": "concept",
+      "label_ro": "Fermoar",
+      "category": "viata_de_roman",
+      "description": "Dispozitiv de închidere cu două șiruri de elemente care se îmbină prin deplasarea unui cursor, folosit la îmbrăcăminte și genți.",
+      "salience": 0.85,
+      "aliases": [
+        "fermoarul",
+        "fermoare",
+        "fermoarele",
+        "fermoarului",
+        "fermoarelor"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "src": "n_v1_3_home_balama",
+      "dst": "n_v4via_usa",
+      "relation": "allows_pivoting",
+      "label_ro": "permite rotirea unei uși batante",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_home_balama",
+      "dst": "n_v24_home_surfaces_fereastra",
+      "relation": "allows_pivoting",
+      "label_ro": "poate permite rotirea canatului mobil al unei ferestre",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_home_balama",
+      "dst": "n_v24_home_storage_dulap",
+      "relation": "used_in",
+      "label_ro": "se poate monta la ușile batante ale unui dulap",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_home_balama",
+      "dst": "n_v32_workshop_fastener_surub",
+      "relation": "fastened_with",
+      "label_ro": "unele balamale se fixează cu șuruburi",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_material_lemn",
+      "dst": "n_v4sti_copac",
+      "relation": "obtained_from",
+      "label_ro": "material provenit din părțile lemnoase ale unui copac",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_material_lemn",
+      "dst": "n_v24_home_seating_scaun",
+      "relation": "used_to_make",
+      "label_ro": "poate fi folosit la fabricarea unor scaune",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_material_lemn",
+      "dst": "n_v32_workshop_fastener_surub",
+      "relation": "joined_with",
+      "label_ro": "piesele de lemn se pot îmbina cu șuruburi pentru lemn",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_material_lemn",
+      "dst": "n_v32_workshop_cut_fierastrau",
+      "relation": "cut_with",
+      "label_ro": "se poate tăia cu fierăstrăul",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_clothing_fermoar",
+      "dst": "n_v30_clothing_everyday_pantaloni",
+      "relation": "used_to_close",
+      "label_ro": "poate fi folosit la închiderea pantalonilor",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_clothing_fermoar",
+      "dst": "n_v30_clothing_everyday_fusta",
+      "relation": "used_to_close",
+      "label_ro": "poate fi folosit la închiderea unei fuste",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_clothing_fermoar",
+      "dst": "n_v30_clothing_outer_geaca",
+      "relation": "used_to_close",
+      "label_ro": "poate fi folosit la închiderea unei geci",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "src": "n_v1_3_clothing_fermoar",
+      "dst": "n_v23via_ghiozdan",
+      "relation": "used_to_close",
+      "label_ro": "poate fi folosit la închiderea compartimentelor unui ghiozdan",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    }
+  ],
+  "claims": [
+    {
+      "id": "link-1",
+      "subject_id": "n_v1_3_home_balama",
+      "predicate": "allows_pivoting",
+      "object_id": "n_v4via_usa",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "permite rotirea unei uși batante",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://ftt.roto-frank.com/ro-ro/produse/produse-pentru-usi/balamale-pentru-usi/"
+      ]
+    },
+    {
+      "id": "link-2",
+      "subject_id": "n_v1_3_home_balama",
+      "predicate": "allows_pivoting",
+      "object_id": "n_v24_home_surfaces_fereastra",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "poate permite rotirea canatului mobil al unei ferestre",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://ftt.roto-frank.com/ro-ro/produse/detalii/roto-nx/"
+      ]
+    },
+    {
+      "id": "link-3",
+      "subject_id": "n_v1_3_home_balama",
+      "predicate": "used_in",
+      "object_id": "n_v24_home_storage_dulap",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "se poate monta la ușile batante ale unui dulap",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.blum.com/ro/ro/products/cabinet-applications/inward-opening-door/overview/",
+        "https://www.blum.com/ro/ro/products/hingesystems/clip-top-blumotion/overview/"
+      ]
+    },
+    {
+      "id": "link-4",
+      "subject_id": "n_v1_3_home_balama",
+      "predicate": "fastened_with",
+      "object_id": "n_v32_workshop_fastener_surub",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "unele balamale se fixează cu șuruburi",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://catalog.hettich.com/General/TuI_2025/ro_RO/catalogs/TuI_2025_ro_RO/pdf/save/bk_114.pdf"
+      ]
+    },
+    {
+      "id": "link-5",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "obtained_from",
+      "object_id": "n_v4sti_copac",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "material provenit din părțile lemnoase ale unui copac",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf"
+      ]
+    },
+    {
+      "id": "link-6",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "used_to_make",
+      "object_id": "n_v24_home_seating_scaun",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "poate fi folosit la fabricarea unor scaune",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.ikea.com/ro/ro/p/pinntorp-scaun-maro-deschis-vopsit-00529478/",
+        "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf"
+      ]
+    },
+    {
+      "id": "link-7",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "joined_with",
+      "object_id": "n_v32_workshop_fastener_surub",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "piesele de lemn se pot îmbina cu șuruburi pentru lemn",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.ikea.com/ro/ro/manuals/fixa-260-piece-screw-and-plug-set__AA-2097280-1_pub.pdf"
+      ]
+    },
+    {
+      "id": "link-8",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "cut_with",
+      "object_id": "n_v32_workshop_cut_fierastrau",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "se poate tăia cu fierăstrăul",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.bosch-diy.com/ro/ro/p/pks-55-a-0603501020"
+      ]
+    },
+    {
+      "id": "link-9",
+      "subject_id": "n_v1_3_clothing_fermoar",
+      "predicate": "used_to_close",
+      "object_id": "n_v30_clothing_everyday_pantaloni",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "poate fi folosit la închiderea pantalonilor",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://edu.gov.md/sites/default/files/s.04.o.025_tehnologia_confectiilor_din_tricot_ii.pdf"
+      ]
+    },
+    {
+      "id": "link-10",
+      "subject_id": "n_v1_3_clothing_fermoar",
+      "predicate": "used_to_close",
+      "object_id": "n_v30_clothing_everyday_fusta",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "poate fi folosit la închiderea unei fuste",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://edu.gov.md/sites/default/files/s.04.o.025_tehnologia_confectiilor_din_tricot_ii.pdf"
+      ]
+    },
+    {
+      "id": "link-11",
+      "subject_id": "n_v1_3_clothing_fermoar",
+      "predicate": "used_to_close",
+      "object_id": "n_v30_clothing_outer_geaca",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "poate fi folosit la închiderea unei geci",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.decathlon.ro/p/geaca-navigatie-sailing-500-barbati/_/R-p-327999"
+      ]
+    },
+    {
+      "id": "link-12",
+      "subject_id": "n_v1_3_clothing_fermoar",
+      "predicate": "used_to_close",
+      "object_id": "n_v23via_ghiozdan",
+      "direction": "subject_to_object; one-way only",
+      "label_ro": "poate fi folosit la închiderea compartimentelor unui ghiozdan",
+      "evidence_state": "supported",
+      "evidence_scope": "research; separate exact factual/quality gate required",
+      "source_urls": [
+        "https://www.herlitz.ro/cumpara/ghiozdan-neechipat-nature-quest-motiv-heavenly-dreams-1896"
+      ]
+    }
+  ],
+  "baseline_endpoint_nodes": [
+    {
+      "id": "n_v23via_ghiozdan",
+      "node_type": "concept",
+      "label_ro": "Ghiozdan",
+      "category": "viata_de_roman",
+      "description": "Geantă purtată pe spate în care elevii își duc la școală manualele, caietele și rechizitele.",
+      "salience": 0.84,
+      "difficulty_tier": "easy",
+      "degree": 13,
+      "aliases": [
+        "ghiozdanul",
+        "rucsac școlar"
+      ]
+    },
+    {
+      "id": "n_v24_home_seating_scaun",
+      "node_type": "concept",
+      "label_ro": "Scaun",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «mobilier pentru șezut»: Scaun.",
+      "salience": 0.88,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "scaunul",
+        "scaune",
+        "scaunele",
+        "scaunului",
+        "scaunelor"
+      ]
+    },
+    {
+      "id": "n_v24_home_storage_dulap",
+      "node_type": "concept",
+      "label_ro": "Dulap",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «mobilier pentru depozitare»: Dulap.",
+      "salience": 0.82,
+      "difficulty_tier": "easy",
+      "degree": 7,
+      "aliases": [
+        "dulapul",
+        "dulapuri",
+        "dulapurile",
+        "dulapului",
+        "dulapurilor"
+      ]
+    },
+    {
+      "id": "n_v24_home_surfaces_fereastra",
+      "node_type": "concept",
+      "label_ro": "Fereastră",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră.",
+      "salience": 0.84,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "ferestre",
+        "ferestrele",
+        "ferestrei",
+        "ferestrelor"
+      ]
+    },
+    {
+      "id": "n_v30_clothing_everyday_fusta",
+      "node_type": "concept",
+      "label_ro": "Fustă",
+      "category": "viata_de_roman",
+      "description": "Haină purtată de la talie în jos, fără părți separate pentru picioare.",
+      "salience": 0.91,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "fuste",
+        "fustele",
+        "fustei"
+      ]
+    },
+    {
+      "id": "n_v30_clothing_everyday_pantaloni",
+      "node_type": "concept",
+      "label_ro": "Pantaloni",
+      "category": "viata_de_roman",
+      "description": "Haină purtată de la talie în jos, cu câte o parte pentru fiecare picior.",
+      "salience": 0.94,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "pantalon",
+        "pantalonul",
+        "pantalonii",
+        "pantalonilor"
+      ]
+    },
+    {
+      "id": "n_v30_clothing_outer_geaca",
+      "node_type": "concept",
+      "label_ro": "Geacă",
+      "category": "viata_de_roman",
+      "description": "Haină scurtă purtată peste alte haine pentru protecție și căldură.",
+      "salience": 0.92,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "geci",
+        "gecile",
+        "gecii"
+      ]
+    },
+    {
+      "id": "n_v32_workshop_cut_fierastrau",
+      "node_type": "concept",
+      "label_ro": "Fierăstrău",
+      "category": "viata_de_roman",
+      "description": "Unealtă cu lamă dințată, folosită pentru a tăia lemn sau alte materiale.",
+      "salience": 0.92,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "fierăstrăul",
+        "fierăstraie",
+        "fierăstraiele",
+        "fierăstrăului",
+        "ferăstrău",
+        "ferăstrăul",
+        "ferăstraie",
+        "ferăstraiele",
+        "ferăstrăului",
+        "fierăstrăului de atelier",
+        "fierăstraielor de atelier"
+      ]
+    },
+    {
+      "id": "n_v32_workshop_fastener_surub",
+      "node_type": "concept",
+      "label_ro": "Șurub",
+      "category": "viata_de_roman",
+      "description": "Piesă metalică filetată care prinde obiecte prin rotire.",
+      "salience": 0.92,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "șurubul",
+        "șuruburi",
+        "șuruburile",
+        "șurubului",
+        "șurubului de atelier",
+        "șuruburilor de atelier"
+      ]
+    },
+    {
+      "id": "n_v4sti_copac",
+      "node_type": "concept",
+      "label_ro": "copac",
+      "category": "stiinta",
+      "description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+      "salience": 0.6446,
+      "difficulty_tier": "medium",
+      "degree": 9,
+      "aliases": [
+        "copacul",
+        "copaci",
+        "copacii",
+        "arbore",
+        "copacului",
+        "copacilor"
+      ]
+    },
+    {
+      "id": "n_v4via_usa",
+      "node_type": "concept",
+      "label_ro": "ușă",
+      "category": "viata_de_roman",
+      "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință.",
+      "salience": 0.6855,
+      "difficulty_tier": "easy",
+      "degree": 42,
+      "aliases": [
+        "uși",
+        "ușile"
+      ]
+    }
+  ],
+  "counts": {
+    "new_shared_concepts": 3,
+    "new_world_concepts": 0,
+    "stored_grammatical_aliases": 12,
+    "new_canonical_label_keys": 3,
+    "genuine_synonym_families": 0,
+    "stored_links": 12,
+    "directed_non_distractor_arcs": 12,
+    "curated_rounds": 0,
+    "new_target_approvals": 0
+  },
+  "direction_boundary": {
+    "all_arcs_new_to_existing": true,
+    "new_incoming_arcs": 0,
+    "old_to_new_arcs": 0,
+    "old_owner_reassignment": false,
+    "reverse_arcs_inferred": false,
+    "scope": "Typed vocabulary/new-start paths only; no new intermediate for an old directed route. Exact impact/terminal regeneration and native replay remain obligations."
+  },
+  "category_and_weights": "All three concepts are scoped to ordinary domestic objects/material/workshop use. Salience/strength values are editorial rankings, not measurements or thresholds changed to satisfy adoption.",
+  "deferred_records": [
+    "v1-3-clanta",
+    "v1-3-toc-usa",
+    "v1-3-perdea",
+    "v1-3-ata",
+    "v1-3-nasture"
+  ],
+  "inputs": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v1-3-everyday-concepts/research-identity.json": "5f67c2b7a60b4551a4f8328fd0e733ef344e705b1461d65822f37a71b74aca2d",
+    "docs/reviews/v1-3-everyday-concepts/deck-screen.json": "50d9055e986b656c715f6c2207fa650215527b237ca179f4cab997bebf0c71ff",
+    "docs/reviews/v1-3-everyday-concepts/hardware-material-research.json": "d80cd599d702f5342192b96313f23c72e3135adb6fce9daaf06a7ededee2f930",
+    "docs/reviews/v1-3-everyday-concepts/textile-research.json": "344e47e5e84fdbc11d8e970702c52322a07e7b9540f9446052a59d11e9ecff88",
+    "docs/reviews/v1-3-everyday-concepts/toolchain-prerequisite.json": "c8fcd21a1f37c9504588d40f7c8fa93b0c7afffd085e0418b9c5a7c24790d7a3"
+  },
+  "source_policy": {
+    "adopted_material": "Original editorial facts, individual forms and source URLs only; no definitions, dictionary corpora, source bodies, images, prices or instructions copied into gameplay.",
+    "dictionary_limits": "DOOM3 electronic text is CC BY-NC-SA4.0; DEX automated access/extraction/storage restrictions are recorded in research. These references grant no corpus redistribution approval. Primary manufacturer/public teaching access likewise is not a blanket copying license.",
+    "installation_approval": false
+  },
+  "supported_preflight": {
+    "command": "PYTHONPATH=. <documented-reference-interpreter> scripts/apply_common_words_v24.py --data-module everyday_graph_v1_3_data --dry-run",
+    "result": "GREEN; no served fixture changed",
+    "nodes": 3,
+    "edges": 12,
+    "intuitive_probes": 12,
+    "eligible_benchmark": 322,
+    "uniquely_resolved_benchmark": 322,
+    "expected_degrees": {
+      "n_v1_3_clothing_fermoar": 4,
+      "n_v1_3_home_balama": 4,
+      "n_v1_3_material_lemn": 4,
+      "n_v23via_ghiozdan": 14,
+      "n_v24_home_seating_scaun": 6,
+      "n_v24_home_storage_dulap": 8,
+      "n_v24_home_surfaces_fereastra": 5,
+      "n_v30_clothing_everyday_fusta": 6,
+      "n_v30_clothing_everyday_pantaloni": 6,
+      "n_v30_clothing_outer_geaca": 6,
+      "n_v32_workshop_cut_fierastrau": 5,
+      "n_v32_workshop_fastener_surub": 7,
+      "n_v4sti_copac": 10,
+      "n_v4via_usa": 43
+    },
+    "native_prerequisite": "Exact Go1.27.1 restored; source/export/current all4authority baseline GREEN."
+  },
+  "remaining_gate_work": [
+    "Exact independently authored graph factual/quality acceptance, bound to these bytes",
+    "Read-only prospective all-game/terminal/history effects, repair or hold any regression",
+    "Supported graph apply; current source3 parent/source2 chain; fresh quick/world/extensions raw/final reviews and audits",
+    "Native source freshness/export/rank/derive/mobile/all rails; independent current HTTP/reference/history evidence; appropriate race/vet/docs/whitespace",
+    "Independent assembled review then local green landing/verified merged cleanup; start next version only then"
+  ],
+  "installation_status": "Not installed; research/preflight is not approval."
+}

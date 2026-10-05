@@ -1,0 +1,263 @@
+{
+  "archive_authority": {
+    "prior_qualification": "docs/reviews/go-native-toolchain/README.md; retained final-gates.py and collect-receipt.py independently require this exact archive SHA and Go1.27.1 linux/amd64.",
+    "sha256": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+  },
+  "binaries": {
+    "cat-content": {
+      "path": "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content",
+      "sha256": "90acb3c0847ef6a903ba3c9da12b48016acf8ed91eb767b37122841fabf869ab"
+    },
+    "cat-content-rail": {
+      "path": "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content-rail",
+      "sha256": "b36eddbd30bbb9aa95cc837390b1c17e09cd32cb74ba42f83048910c6a190b80"
+    },
+    "cat-doc-check": {
+      "path": "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-doc-check",
+      "sha256": "251cf28613cc55306dce724ac49d080b86bbaf790623fa17836f2ea648fa32e3"
+    }
+  },
+  "checked_on": "2026-10-06",
+  "commands": [
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/tools/go/bin/go",
+        "version"
+      ],
+      "elapsed_seconds": 0.002,
+      "exit_code": 0,
+      "output": "go version go1.27.1 linux/amd64"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/tools/go/bin/go",
+        "tool",
+        "compile",
+        "-V"
+      ],
+      "elapsed_seconds": 0.005,
+      "exit_code": 0,
+      "output": "compile version go1.27.1"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/tools/go/bin/go",
+        "tool",
+        "link",
+        "-V"
+      ],
+      "elapsed_seconds": 0.004,
+      "exit_code": 0,
+      "output": "link version go1.27.1"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/go-backend",
+        "mod",
+        "verify"
+      ],
+      "elapsed_seconds": 0.252,
+      "exit_code": 0,
+      "output": "all modules verified"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/go-backend",
+        "build",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-doc-check",
+        "./cmd/cat-doc-check"
+      ],
+      "elapsed_seconds": 3.374,
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/go-backend",
+        "build",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content",
+        "./cmd/cat-content"
+      ],
+      "elapsed_seconds": 0.853,
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/go-backend",
+        "build",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content-rail",
+        "./cmd/cat-content-rail"
+      ],
+      "elapsed_seconds": 7.372,
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-doc-check",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3"
+      ],
+      "elapsed_seconds": 0.084,
+      "exit_code": 0,
+      "result": {
+        "budgets": [],
+        "dead_links": [],
+        "files": 46,
+        "orphans": [],
+        "retired_verbs": [],
+        "stale_terms": []
+      }
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content",
+        "validate",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3"
+      ],
+      "elapsed_seconds": 0.969,
+      "exit_code": 0,
+      "output": "Native sources GREEN"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content",
+        "export",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3",
+        "--check"
+      ],
+      "elapsed_seconds": 1.122,
+      "exit_code": 0,
+      "output": "Native private content current"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content-rail",
+        "all",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3",
+        "--check"
+      ],
+      "elapsed_seconds": 7.681,
+      "exit_code": 0,
+      "result": {
+        "ok": true,
+        "rails": [
+          {
+            "artifact_sha256": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+            "exact_bytes": true,
+            "native_source_sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+            "ok": true,
+            "rail": "quick",
+            "rebuilt_sha256": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+            "semantic_exact": true
+          },
+          {
+            "artifact_sha256": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+            "exact_bytes": true,
+            "native_source_sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+            "ok": true,
+            "rail": "world",
+            "rebuilt_sha256": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+            "semantic_exact": true
+          },
+          {
+            "artifact_sha256": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+            "exact_bytes": true,
+            "native_source_sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+            "ok": true,
+            "rail": "extensions",
+            "rebuilt_sha256": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+            "semantic_exact": true
+          },
+          {
+            "artifact_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+            "exact_bytes": true,
+            "native_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6",
+            "ok": true,
+            "rail": "reserve",
+            "rebuilt_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+            "semantic_exact": true
+          }
+        ]
+      }
+    }
+  ],
+  "execution_environment": {
+    "GOCACHE": "/home/dobo/work/_temp/codex__content-v1-3/gocache",
+    "GOFLAGS": "-p=2 -mod=readonly",
+    "GOMAXPROCS": "2",
+    "GOMODCACHE": "/home/dobo/go/pkg/mod",
+    "GOPATH": "/home/dobo/work/_temp/codex__content-v1-3/gopath",
+    "GOPROXY": "off",
+    "GOROOT": "/home/dobo/work/_temp/codex__content-v1-3/tools/go",
+    "GOTMPDIR": "/home/dobo/work/_temp/codex__content-v1-3/tmp",
+    "GOTOOLCHAIN": "local",
+    "GOWORK": "off",
+    "TMPDIR": "/home/dobo/work/_temp/codex__content-v1-3/tmp"
+  },
+  "git_head": "9f75fdbee28b7632608ccaf91e0fb11eef8a065d",
+  "git_tree": "7e48f27803646dbd7789006de788d526ecf61fbc",
+  "limitations": [
+    "These prerequisite builds and baseline gates do not replace the full native race/vet, independent content reviews, compatibility, browser or release gates required for a new content wave."
+  ],
+  "purpose": "Restore the exact previously qualified compiler and prove unchanged V1.2 native source authorities before V1.3 topology authoring.",
+  "repository_source": {
+    "encoding": "SHA-256 of UTF-8 canonical JSON sorted path/sha256/bytes entries from git ls-files over the listed scopes; identical before and after commands.",
+    "files": 219,
+    "scope": [
+      "go-backend",
+      "shared-go/authcore",
+      "cat_de_roman_esti/fixtures",
+      "tests/fixtures",
+      "docs/CRITIQUE_RUBRIC.md"
+    ],
+    "sha256": "710f20ddb1879f717da16ed21ab573267d219800daa44bb1a6ebf5e66faa49c6"
+  },
+  "restoration": {
+    "archive_restored": "/home/dobo/work/_temp/codex__content-v1-3/tools/go1.27.1.linux-amd64.tar.gz",
+    "archive_sha256": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445",
+    "archive_source": "/home/dobo/work/_temp/fix__rest-contract-transport-20261006/tools/go1.27.1.linux-amd64.tar.gz",
+    "identities": {
+      "go/VERSION": "25eb74b09036e1ad894fb63b86cb0f0ee53342df8d2e2e860da4ff5079607758",
+      "go/bin/go": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624",
+      "go/bin/gofmt": "86dd91f69254432a37ca365f964720677040fd6f049a412c23e25f8b3812f342",
+      "go/pkg/tool/linux_amd64/compile": "3780fc07130d6d45096373acf062cc316940d253e2a1d892ece03a3bdd0d21d4",
+      "go/pkg/tool/linux_amd64/link": "a29ac5e8f64111b0b5c5d31e452f18abf7ee79f44b421081b5509c8939d92ba9"
+    },
+    "sdk_root": "/home/dobo/work/_temp/codex__content-v1-3/tools/go",
+    "version": "go version go1.27.1 linux/amd64"
+  },
+  "result": {
+    "all_four_native_authority_reconstructions": "exact byte/semantic matches",
+    "approval_changes": 0,
+    "compiler_and_linker": "Go1.27.1; executable hashes match the verified archive",
+    "docs": "GREEN",
+    "graph_edits": 0,
+    "native_builds": "three current tools built successfully",
+    "native_source_validation": "GREEN",
+    "offline_dependencies": "all modules verified",
+    "publication": false,
+    "runtime_edits": 0,
+    "sealed_export_check": "GREEN",
+    "source_inputs_unchanged": true
+  },
+  "safe_unpack": "Verified SHA before and after copy; members restricted to regular files/directories beneath go/, no absolute/traversal/link/device members; bounded member count and total size.",
+  "schema_version": 1,
+  "serving_export_sha256": "d98280f0178e13f0d6ec8fd92813c4057f6408a0e3215ec61a0dbb70f9dd3313",
+  "valid_until": "SDK, archive, dependency modules or bound repository source inputs change — then treat as history."
+}

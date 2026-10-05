@@ -1,31 +1,47 @@
 # V1.3 — everyday concepts and specific object links
 
-Valid until: source, research or bound runtime changes — then repeat affected checks.
+Valid until: bound proposal, research, baseline or runtime changes — repeat affected checks.
 
-Started2026-10-06 after fully reviewed local V1.2 landing `17f7da1` and documentation
-completion `18832d4`. Baseline: `18832d41bedfe5f63ee98fcffa709d29d9f86361`.
-Phase: research. The [pool](../../content-pool/v1-3-everyday-concepts/pool.json) holds eight
-finite leads from prior V99 work, with fresh primary hinge/furniture research begun.
-No V1.3 graph concepts, forms, links, recipes or rounds are installed.
+Started2026-10-06 after local V1.2 content17f7da1 and documentation18832d4.
+Baseline: `18832d41bedfe5f63ee98fcffa709d29d9f86361`. Phase: exact proposal review.
+The [pool](../../content-pool/v1-3-everyday-concepts/pool.json) retains eight finite leads:
+three selected for refinement and five held. Original revision1 bytes remain in
+[pool-r1.json](pool-r1.json). No V1.3 graph/source data is installed.
 
-The player outcome sought is better ordinary-object vocabulary, honest specific paths
-and several clear rounds where the evidence supports them. Balama/Clanță/Toc de ușă,
-Perdea/Lemn and Ață/Nasture/Fermoar need exact sense and normalized ownership checks,
-claim-specific primary sources, Romanian familiarity and useful alternative gameplay.
-Prior researched status never substitutes for current independent factual/quality review.
-Keep all historical holds/rejections, minimum graph/target floors, normal selection,
-resource bounds, deterministic behavior, private answers and save mechanics.
+[Graph proposal R1](graph-proposal.json) binds root-authored
+`scripts/everyday_graph_v1_3_data.py` and three exact revision2 selection snapshots.
+It proposes Balama, narrowly scoped Lemn and Fermoar: three shared concepts,
+12 grammatical aliases and12 one-way outward links. Zero genuine synonym families,
+world-local concepts, curated rounds or new hidden-target approvals are proposed.
+Balama→Ușă and Fermoar→Ghiozdan are concrete useful-guess hypotheses; exact native
+playthroughs and normal selection/pool evidence remain required after adoption.
+
+[Hardware/material research](hardware-material-research.json) and
+[textile research](textile-research.json) preserve primary claim URLs, access limits,
+source reuse restrictions and counterexamples. [Identity](research-identity.json) and
+[deck screen](deck-screen.json) distinguish exact KG/world ownership from existing
+Clanță/Perdea Contexto projections. Holds also retain Toc de ușă's qualified input and
+mounting evidence, Ață's needle/sense/topology concerns and Nasture's weak fourth link.
+No broad furniture/clothing fan-out or alias inflation is accepted as puzzle evidence.
+Lemn keeps only singular-material forms; bare toc/fir and rare synonyms stay unselected.
+
+The [toolchain prerequisite](toolchain-prerequisite.json) is resolved: exact Go1.27.1
+archive/tool identities restored into this task's own scratch, offline dependencies
+verified and current docs/source/export/all four authority checks GREEN. V1.2 sealed
+export/source inputs remain exact. Scratch: `/home/dobo/work/_temp/codex__content-v1-3`.
+Use its `tools/go/bin/go` and recorded isolated cache/environment for subsequent gates.
+The supported graph preflight passes3nodes/12edges/12link probes and322/322 eligible
+beginner probes; Ruff passes. These checks grant no installation approval.
+
+Independent factual and refute-first quality/impact review of the exact frozen bytes
+is underway. Preserve all graph/target floors, old records, source archives, historic
+saves, session/resource bounds, private answers and deterministic behavior. Confirm
+all affected Cald feedback, Lanț profiles, partitions, recipes and regenerated terminal
+puzzles; refresh downstream current source3/authority and independent HTTP/reference
+bindings only after graph acceptance. All required integrated gates precede local landing.
 
 Follow the [content skill](../../../.agents/skills/romanian-game-content/SKILL.md) and
-[ADR-0170](../../adr/0170-v1-2-reviewed-content-growth.md). Native source version3 must
-name the exact current reviewed version2 parent; a research candidate grants no authority.
-Run supported graph writes and catalog installations serially, refresh all affected
-reviews/source corpora/bindings and complete integrated gates before local landing.
-
-The existing heartbeat `romanian-content-versions-v1-2-onward` continues this same chat
-every30minutes, reusing this worktree until this bounded version finishes. It then starts
-the next version and remains quiet on unchanged state. Human stop/pause takes precedence.
-The prior SDK path disappeared during external scratch upkeep after V1.2 qualification;
-rediscover the qualified Go toolchain before any graph/source installation. The retained native
-document checker validates this research-only kickoff. This version's scratch is
-`/home/dobo/work/_temp/codex__content-v1-3`. No push/deploy authorized.
+[ADR-0170](../../adr/0170-v1-2-reviewed-content-growth.md). Source3 must name the exact
+reviewed source2 parent. The existing same-chat heartbeat reuses this worktree until
+V1.3 is fully reviewed, verified and locally landed, then starts the next V1.x.
+Human stop/pause takes precedence. No push/deploy authorized.

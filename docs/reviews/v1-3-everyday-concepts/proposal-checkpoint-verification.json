@@ -1,0 +1,101 @@
+{
+  "schema": "v1-3-proposal-checkpoint-verification-v1",
+  "checked_on": "2026-10-06",
+  "valid_until": "Any bound proposal, selected snapshot or listed artifact changes; repeat affected checks.",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "module_sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+  "proposal_sha256": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3",
+  "pool_sha256": "e7a1211fe4aa9b75e5bd8b4a3ea26afba37919eaaaf11483a1bb15caea6088e5",
+  "selection_snapshot_exact_matches": true,
+  "proposal_module_projection_exact": true,
+  "native_prerequisite_receipt": {
+    "path": "docs/reviews/v1-3-everyday-concepts/toolchain-prerequisite.json",
+    "sha256": "c8fcd21a1f37c9504588d40f7c8fa93b0c7afffd085e0418b9c5a7c24790d7a3"
+  },
+  "authoring_checks": [
+    "Ruff format/check GREEN after fixing initial line-length before freeze",
+    "Supported common-word transaction --dry-run GREEN;3nodes12edges12intuitionprobes322/322eligiblebenchmark",
+    "Native docs GREEN;46files and empty error/budget arrays",
+    "Whitespace GREEN"
+  ],
+  "runtime_artifacts_unchanged": [
+    {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+      "git_blob_identity": "3e1e87cf10f9eca426b68adf75094f3ac355045f",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "tests/fixtures/kg_sample.json",
+      "sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+      "git_blob_identity": "3e1e87cf10f9eca426b68adf75094f3ac355045f",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "git_blob_identity": "5ebb221e45789cfbd9921f6efe68ff25bade29fc",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "tests/fixtures/games_pack.json",
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "git_blob_identity": "5ebb221e45789cfbd9921f6efe68ff25bade29fc",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "tests/fixtures/cat_mobile_app_pack_contract.json",
+      "sha256": "8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438",
+      "git_blob_identity": "2f7e3be99fce870075970a94f88ef58746d3283b",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+      "sha256": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+      "git_blob_identity": "e57c29ad1352d1454ddef8c02c4ca0a961fc6afa",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      "sha256": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+      "git_blob_identity": "f890c44c8c4b1254982d8247803d432e88b7538a",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "sha256": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+      "git_blob_identity": "ee0434ea146bc09b55854b3abcbca8e347c627c7",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "sha256": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+      "git_blob_identity": "5f861f3a3776f3d3238c5bab01648c69fd5c934e",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+      "sha256": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+      "git_blob_identity": "b1b9077d3c998f7b05a6e7611746e68a61a60406",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "go-backend/internal/content/bundled.json",
+      "sha256": "d98280f0178e13f0d6ec8fd92813c4057f6408a0e3215ec61a0dbb70f9dd3313",
+      "git_blob_identity": "b8aaaf90c664c675176653c768e047e569852bee",
+      "baseline_byte_exact": true
+    },
+    {
+      "path": "go-backend/internal/contentrails/sources/installed-authorities.json",
+      "sha256": "1cab0b04ee0aabf8b6654037097dc9ec1740690992bc1d21a1a3d871593220aa",
+      "git_blob_identity": "9bcb2bfdb81ba9647742f52175eb5a7ff85ff3f5",
+      "baseline_byte_exact": true
+    }
+  ],
+  "independent_graph_review_status": "In progress, not presumed accepted.",
+  "not_claimed": [
+    "No V1.3 graph installation",
+    "No new hidden targets or curated rounds",
+    "No V1.3 native integrated qualification/local landing/human playtest"
+  ]
+}

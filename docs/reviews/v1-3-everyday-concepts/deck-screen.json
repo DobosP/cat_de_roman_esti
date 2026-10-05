@@ -1,0 +1,118 @@
+{
+  "schema": "v1-3-author-deck-screen-v1",
+  "checked_on": "2026-10-06",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "valid_until": "Any bound inventory or proposed module changes; then repeat affected screen.",
+  "author": "root-integrator",
+  "inputs": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+    "scripts/everyday_graph_v1_3_data.py": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7"
+  },
+  "screen": [
+    {
+      "inventory": "pack",
+      "game": "conexiuni",
+      "total": 245,
+      "anchor_involved_ids": [
+        "cx_viata_de_roman_363",
+        "cx_viata_de_roman_365",
+        "cx_viata_de_roman_366",
+        "cx_viata_de_roman_367",
+        "cx_viata_de_roman_368",
+        "cx_viata_de_roman_369",
+        "cx_viata_de_roman_370",
+        "cx_viata_de_roman_373"
+      ],
+      "new_id_exposures": 0
+    },
+    {
+      "inventory": "pack",
+      "game": "contexto",
+      "total": 265,
+      "anchor_involved_ids": [
+        "ct_viata_de_roman_364",
+        "ct_viata_de_roman_377"
+      ],
+      "new_id_exposures": 0
+    },
+    {
+      "inventory": "pack",
+      "game": "lant",
+      "total": 123,
+      "anchor_involved_ids": [
+        "lt_viata_de_roman_211"
+      ],
+      "new_id_exposures": 0
+    },
+    {
+      "inventory": "pack",
+      "game": "alchimie",
+      "total": 83,
+      "anchor_involved_ids": [
+        "al_viata_de_roman_093"
+      ],
+      "new_id_exposures": 0
+    },
+    {
+      "inventory": "quick_authored",
+      "game": "intrusul",
+      "total": 45,
+      "anchor_involved_ids": [
+        "iq92_workshop",
+        "iq92_storage",
+        "iq92_clothing",
+        "iq92_v94_sleep"
+      ],
+      "new_id_exposures": 0
+    },
+    {
+      "inventory": "quick_authored",
+      "game": "perechi",
+      "total": 40,
+      "anchor_involved_ids": [
+        "pq92_associations_10",
+        "pq92_associations_13",
+        "pq92_associations_17",
+        "pq92_associations_19",
+        "pq92_session02_everyday_02",
+        "pq92_v93_everyday_02",
+        "pq92_v95_everyday_01",
+        "pq92_v95_everyday_02",
+        "pq92_v95_everyday_03"
+      ],
+      "new_id_exposures": 0
+    }
+  ],
+  "synonym_screen": {
+    "Balama": "Physical object retained. Rare țâțână/șarnieră synonyms unselected without separate scope/familiarity review.",
+    "Lemn": "Material retained. Copac/arbore is the living plant; cherestea is a processed product. No identity merge or wood-piece plural imported.",
+    "Fermoar": "Closure retained. Fermetură is not automatically adopted as a broad unqualified synonym.",
+    "Nasture": "Bumb retained only as a historical/regional research lead; no synonym adoption.",
+    "Perdea": "Draperie may be opaque/thicker; no synonym adoption or projection retirement.",
+    "Ață": "Only sewing-thread sense explored; bare fir/fire can describe other things, no synonym adoption.",
+    "Clanță": "Modern door handle explored; bare mâner covers more objects, no synonym adoption.",
+    "Toc de ușă": "Construction frame explored; bare toc has other senses, no synonym adoption."
+  },
+  "proposed_counts": {
+    "new_shared_concepts": 3,
+    "new_world_concepts": 0,
+    "new_stored_grammatical_aliases": 12,
+    "new_label_keys": 3,
+    "genuine_synonym_families": 0,
+    "new_stored_links": 12,
+    "directed_non_distractor_arcs": 12,
+    "curated_rounds": 0,
+    "new_target_approvals": 0
+  },
+  "installed_counts": {
+    "concepts": 0,
+    "forms": 0,
+    "links": 0,
+    "rounds": 0
+  },
+  "scope_limit": "This is an exact inventory/identity screen and bounded authoring scope, not review acceptance, target approval or playable-round proof. New IDs absent from existing decks do not by themselves establish board fairness. Independent full prospective graph impact and downstream current source/catalog/HTTP/history gates remain mandatory."
+}

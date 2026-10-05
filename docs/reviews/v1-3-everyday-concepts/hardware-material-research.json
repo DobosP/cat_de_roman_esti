@@ -1,0 +1,425 @@
+{
+  "kind": "v1-3-hardware-material-discovery-research-v1",
+  "reviewer": "/root/graph_quality",
+  "role": "independent_refute_first_discovery_critic",
+  "checked_on": "2026-10-06",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "baseline_kg_sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+  "scope": "Balama, Clanță, Toc de ușă and Lemn discovery. No graph/pool mutation, installation approval or Fermoar review. Final exact proposal gates remain separate.",
+  "sources": [
+    {
+      "id": "school-wood",
+      "url": "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf",
+      "publisher": "Ministerul Educației",
+      "kind": "primary_official_teaching_document",
+      "access": "full_pdf_text_opened",
+      "published_period": "2021–2022",
+      "locations": [
+        {
+          "pdf_page_index": 19,
+          "physical_page": 20,
+          "supports": "Affirmative teaching prose identifies timber/wood raw material as obtained from tree trunks and branches."
+        },
+        {
+          "pdf_page_index": 20,
+          "physical_page": 21,
+          "supports": "Teaching prose uses wood chairs and other household/school furniture as familiar examples."
+        },
+        {
+          "pdf_page_index": 8,
+          "physical_page": 9,
+          "supports": "A completion exercise describes hinge support/guidance for furniture doors, building doors and windows; manufacturer sources independently corroborate the physical applications."
+        }
+      ],
+      "license": "No redistribution license established; public access alone does not license copying the document. Only original editorial claim notes and source URL retained."
+    },
+    {
+      "id": "roto-doors",
+      "url": "https://ftt.roto-frank.com/ro-ro/produse/produse-pentru-usi/balamale-pentru-usi/",
+      "publisher": "Roto Frank",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Hinges for entrance doors, including wood/PVC/aluminium door applications. This supports a typical door-use association, not every possible door.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "roto-windows",
+      "url": "https://ftt.roto-frank.com/ro-ro/produse/detalii/roto-nx/",
+      "publisher": "Roto Frank",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Window hardware program explicitly names applied and hidden hinges for wood/PVC window types; the proposed caption must specify moving/hinged window leaves.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "blum-cupboards",
+      "url": "https://www.blum.com/ro/ro/products/cabinet-applications/inward-opening-door/overview/",
+      "publisher": "Blum",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Hinged furniture doors for cupboards/dressing/storage, with hinge-system variants. Do not generalize to sliding-door cupboards.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "blum-hinges",
+      "url": "https://www.blum.com/ro/ro/products/hingesystems/clip-top-blumotion/overview/",
+      "publisher": "Blum",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Current furniture hinge application and ordinary articulated cabinet-door movement.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "hettich-screws",
+      "url": "https://catalog.hettich.com/General/TuI_2025/ro_RO/catalogs/TuI_2025_ro_RO/pdf/save/bk_114.pdf",
+      "publisher": "Hettich",
+      "kind": "primary_manufacturer_catalog",
+      "access": "full_single_page_pdf_opened",
+      "locations": [
+        {
+          "pdf_page_index": 0,
+          "physical_page": 1,
+          "supports": "Glass-door hinge product lists included fastening screws and steel/zinc composition."
+        }
+      ],
+      "supports": "Some hinge assemblies use fastening screws; no claim that every hinge installation is screwed rather than glued/pressed.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "ikea-chair",
+      "url": "https://www.ikea.com/ro/ro/p/pinntorp-scaun-maro-deschis-vopsit-00529478/",
+      "publisher": "IKEA of Sweden",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Named chair is solid pine; its assembly/maintenance references screws. Supports the qualified proposition that some chairs use wood, not all chairs or all furniture.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "ikea-screw-wood",
+      "url": "https://www.ikea.com/ro/ro/manuals/fixa-260-piece-screw-and-plug-set__AA-2097280-1_pub.pdf",
+      "publisher": "IKEA",
+      "kind": "primary_manufacturer_manual",
+      "access": "full_pdf_text_opened",
+      "locations": [
+        {
+          "pdf_page_index": 39,
+          "physical_page": 40,
+          "supports": "Romanian instructions discuss fixing objects into solid wood using screws."
+        },
+        {
+          "pdf_page_index": 40,
+          "physical_page": 41,
+          "supports": "Romanian installation section includes direct screw insertion in solid wood."
+        }
+      ],
+      "supports": "Wood pieces/objects can be fastened using suitable screws. Generalized material-fastener role, not a copied installation rule or universal screw/material claim.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "bosch-saw",
+      "url": "https://www.bosch-diy.com/ro/ro/p/pks-55-a-0603501020",
+      "publisher": "Robert Bosch Power Tools",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Saw product explicitly cuts wood/wooden material. Supports wood→saw use; do not infer all blades cut every material.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "lexical-balama",
+      "url": "https://dexonline.ro/definitie/balama",
+      "kind": "credited_dictionary_reference",
+      "access": "page_text_opened",
+      "supports": "Physical articulated fitting sense, plural/definite/genitive forms and distinct figurative body-joint senses.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "lexical-lemn",
+      "url": "https://dexonline.ro/definitie/lemn",
+      "kind": "credited_dictionary_reference",
+      "access": "page_text_opened",
+      "supports": "Material sense is distinct from archaic tree naming, cut pieces/firewood and compound plant names. Morphological fact alone does not approve all senses.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "lexical-clanta",
+      "url": "https://dexonline.ro/definitie/clanta",
+      "kind": "credited_dictionary_reference",
+      "access": "page_text_opened_unaccented_url",
+      "supports": "Modern door-handle sense plus older latch/tongue and pejorative mouth senses; not every handle is an exact equivalent.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "lexical-toc",
+      "url": "https://dexonline.ro/definitie/toc",
+      "kind": "credited_dictionary_reference",
+      "access": "page_text_opened",
+      "supports": "Construction frame sense and competing case/writing-tool/heel meanings; retain the qualified door-frame label.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "porta-frame",
+      "url": "https://portadoors.com/ro/c/tocuri-si-supralumini-ro/",
+      "publisher": "PORTA Doors",
+      "kind": "primary_manufacturer",
+      "access": "page_text_opened",
+      "supports": "Current door-frame lineup includes steel frames, establishing a concrete manufacturer usage and counterexample to wood-only frame claims.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "porta-installation",
+      "url": "https://portadoors.com/ro/wp-content/uploads/sites/6/2026/04/RO_Katalog_INWESTYCYJNY_PORTA_2026_www.pdf",
+      "publisher": "PORTA Doors",
+      "kind": "primary_manufacturer_catalog",
+      "access": "indexed_search_text_only_full_open_refused_for_43MB_size",
+      "supports": "Indexed original catalog describes door-frame mounting with screws into walls; discovery lead only until directly accessible exact source inspection.",
+      "license": "No redistribution permission inferred. Source cited for independently authored facts; no page body, product image, dictionary corpus or definition stored."
+    },
+    {
+      "id": "doom-balama",
+      "url": "https://doom.lingv.ro/cautare/q/balama?",
+      "publisher": "Institutul de Lingvistică",
+      "kind": "primary_normative_dictionary",
+      "access": "parent_reports_browser_verified_this_task_direct_reviewer_web_open_unavailable",
+      "license": "Parent verified dictionary text CC BY-NC-SA4.0. No definitions/corpus copied here; only original grammatical facts, forms and URL retained."
+    },
+    {
+      "id": "doom-lemn",
+      "url": "https://doom.lingv.ro/cautare/q/lemn?",
+      "publisher": "Institutul de Lingvistică",
+      "kind": "primary_normative_dictionary",
+      "access": "parent_reports_browser_verified_this_task_direct_reviewer_web_open_unavailable",
+      "license": "Parent verified dictionary text CC BY-NC-SA4.0. No definitions/corpus copied here; only original grammatical facts, forms and URL retained."
+    }
+  ],
+  "records": [
+    {
+      "id": "v1-3-balama",
+      "recommendation": "prioritize_for_exact_proposal_review",
+      "sense": "Ordinary articulated physical fitting used in hinged panels/doors; no body-joint metaphor.",
+      "suggested_label": "Balama",
+      "suggested_aliases": [
+        "balamaua",
+        "balamale",
+        "balamalele",
+        "balamalei",
+        "balamalelor"
+      ],
+      "recognition": "Older credited dictionary/literary use plus current original Romanian-language hardware producers; official vocational teaching corroborates the object vocabulary. This is familiarity evidence, not a population survey.",
+      "specific_links": [
+        {
+          "direction": "Balama→existing",
+          "endpoint_id": "n_v4via_usa",
+          "relation_role": "used_in",
+          "editorial_caption": "Permite rotirea unei uși batante.",
+          "source_ids": [
+            "roto-doors",
+            "lexical-balama"
+          ]
+        },
+        {
+          "direction": "Balama→existing",
+          "endpoint_id": "n_v24_home_surfaces_fereastra",
+          "relation_role": "used_in",
+          "editorial_caption": "La canate mobile ale unor ferestre.",
+          "source_ids": [
+            "roto-windows"
+          ]
+        },
+        {
+          "direction": "Balama→existing",
+          "endpoint_id": "n_v24_home_storage_dulap",
+          "relation_role": "used_in",
+          "editorial_caption": "La uși batante ale unor dulapuri.",
+          "source_ids": [
+            "blum-cupboards",
+            "blum-hinges"
+          ]
+        },
+        {
+          "direction": "Balama→existing",
+          "endpoint_id": "n_v32_workshop_fastener_surub",
+          "relation_role": "fastened_with",
+          "editorial_caption": "Unele balamale se fixează cu șuruburi.",
+          "source_ids": [
+            "hettich-screws"
+          ]
+        }
+      ],
+      "neighbor_feasibility": {
+        "existing_unique_incident": 4,
+        "same_household_category": 4,
+        "incoming_if_all_one_way_outward": 0,
+        "new_hidden_contexto_target": false
+      },
+      "cautions": [
+        "Do not add țâțână/șarnieră or figurative body aliases without independent sense review.",
+        "Door/window/cupboard uses are qualified applications, not universal requirements for every object.",
+        "Outward-only edges provide typed guesses and potential new-start routes; they do not make Balama reachable from an existing Lanț route."
+      ]
+    },
+    {
+      "id": "v1-3-lemn",
+      "recommendation": "prioritize_narrow_neighborhood_for_exact_proposal_review",
+      "sense": "Wood as an ordinary physical material used for household objects/construction; not an exact tree identity, all composites, or a separately framed firewood concept.",
+      "suggested_label": "Lemn",
+      "suggested_aliases": [
+        "lemnul",
+        "lemnului"
+      ],
+      "recognition": "Official school teaching connects wood with tree trunks/branches and familiar household products; current manufacturer pages independently use the wood/material/wood-chair vocabulary.",
+      "specific_links": [
+        {
+          "direction": "Lemn→existing",
+          "endpoint_id": "n_v4sti_copac",
+          "relation_role": "sourced_from",
+          "editorial_caption": "Material provenit din trunchiul și ramurile arborilor.",
+          "source_ids": [
+            "school-wood"
+          ]
+        },
+        {
+          "direction": "Lemn→existing",
+          "endpoint_id": "n_v24_home_seating_scaun",
+          "relation_role": "can_be_material_for",
+          "editorial_caption": "Unele scaune pot fi construite din lemn.",
+          "source_ids": [
+            "ikea-chair",
+            "school-wood"
+          ]
+        },
+        {
+          "direction": "Lemn→existing",
+          "endpoint_id": "n_v32_workshop_fastener_surub",
+          "relation_role": "can_be_fastened_with",
+          "editorial_caption": "Piese de lemn pot fi fixate cu șuruburi potrivite.",
+          "source_ids": [
+            "ikea-screw-wood",
+            "ikea-chair"
+          ]
+        },
+        {
+          "direction": "Lemn→existing",
+          "endpoint_id": "n_v32_workshop_cut_fierastrau",
+          "relation_role": "cut_with",
+          "editorial_caption": "Lemnul se poate tăia cu fierăstrăul.",
+          "source_ids": [
+            "bosch-saw"
+          ]
+        }
+      ],
+      "neighbor_feasibility": {
+        "existing_unique_incident": 4,
+        "same_household_category_if_domestic_material_scope": 3,
+        "incoming_if_all_one_way_outward": 0,
+        "new_hidden_contexto_target": false
+      },
+      "cautions": [
+        "Keep domestic workshop/material scope explicit; category must follow the concept, not be changed solely to satisfy a numerical floor.",
+        "No broad furniture fan-out or reciprocal relations. Existing n_v4gas_masa means a meal, so a wooden-table source cannot justify an edge to it.",
+        "Prefer singular material aliases initially; do not automatically adopt lemne/firewood or compound plant names.",
+        "Material links can create noisy common-neighbor crafting associations; exact preinstallation old-stock impact remains required.",
+        "Zero incoming protects the new hidden-target boundary but does not provide a new intermediate for old Lanț routes."
+      ]
+    },
+    {
+      "id": "v1-3-clanta",
+      "recommendation": "hold_this_wave",
+      "sense": "Modern physical door handle that operates the latch mechanism.",
+      "reason": "Already owns a nonwinning Contexto synthetic input; native adoption requires an explicit scoped migration/retirement and old feedback recheck. Door/metal are sound associations, but adding key/hand/general opening links just to reach a floor would be weak or misleading.",
+      "existing_projection": {
+        "id": "ctxp_5f57a567b6621896187e",
+        "surface": "clanță",
+        "anchor_id": "n_v4soc_casa",
+        "domain": "mobilier și casă",
+        "accent_folded_clanta_same_owner": true
+      },
+      "counterexamples": [
+        "Older latch/tongue meaning is distinct from every modern handle.",
+        "Figurative pejorative mouth sense stays outside gameplay.",
+        "A key operates the lock; do not claim it necessarily operates the handle."
+      ],
+      "source_ids": [
+        "lexical-clanta"
+      ],
+      "next_action": "Keep recognition research; investigate migration and a small exact mechanical neighborhood in a separately bounded wave."
+    },
+    {
+      "id": "v1-3-toc-usa",
+      "recommendation": "retain_promising_research_deprioritize_for_current_shortlist",
+      "sense": "The fixed door frame, distinct from the movable door leaf.",
+      "reason": "Qualified label is necessary and less spontaneously nameable than Balama/Lemn. Four plausible existing endpoints are Door/Wall/Screw/Metal, but mounting assertions need accessible exact original manufacturer evidence; the large current original catalog was available only through indexed snippets to this reviewer.",
+      "possible_future_endpoints": [
+        "n_v4via_usa",
+        "n_v24_home_structure_perete",
+        "n_v32_workshop_fastener_surub",
+        "n_v4sti_metal"
+      ],
+      "cautions": [
+        "Never use bare toc/tocul/tocuri as automatic door-frame aliases.",
+        "Do not link qualified Toc de ușă as though it were a window frame.",
+        "Some frames use wood, steel or composites; no universal solid-wood claim.",
+        "No new hidden-target or round approval is inferred."
+      ],
+      "source_ids": [
+        "lexical-toc",
+        "porta-frame",
+        "porta-installation"
+      ],
+      "next_action": "Find a small directly accessible manufacturer installation specification; independently review exact forms/claims before a later proposal."
+    }
+  ],
+  "identity_checks": {
+    "native_kg_exact_owner_matches": 0,
+    "world_exact_label_owner_matches": 0,
+    "structured_exact_string_tombstone_matches": 0,
+    "candidate_families_checked": [
+      "Balama",
+      "Clanță",
+      "Toc de ușă",
+      "Lemn"
+    ],
+    "checked_forms": {
+      "Balama": [
+        "balama",
+        "balamaua",
+        "balamale",
+        "balamalele",
+        "balamalei",
+        "balamalelor"
+      ],
+      "Clanță": [
+        "clanță",
+        "clanța",
+        "clanțe",
+        "clanțele",
+        "clanței",
+        "clanțelor"
+      ],
+      "Toc de ușă": [
+        "toc de ușă",
+        "tocul de ușă",
+        "tocul ușii",
+        "tocuri de ușă",
+        "tocuri de uși",
+        "tocurile ușilor"
+      ],
+      "Lemn": [
+        "lemn",
+        "lemnul",
+        "lemnului",
+        "lemne",
+        "lemnelor"
+      ]
+    },
+    "synthetic_owner_caution": "Clanță is already available in Contexto through its reviewed nonwinning projection. Absence from native KG does not mean globally unavailable.",
+    "prior_research": "The corresponding V99 records are researched leads, not installation approvals; their historical dispositions were not changed. V50 explicit-rejection and current Conexiuni/Lanț tombstone searches found no exact candidate-name rejection."
+  },
+  "prospective_boundary": "Recommend only one-way links from new Balama/Lemn to existing nodes. This yields four concrete incident neighbors per node but zero incoming, preventing accidental new Contexto fallback targets and old-node path shortcuts. Full old-target rank/feedback, old Alchimie, Lanț selection/start, source binding and normal gameplay audits remain required.",
+  "access_limits": [
+    "The direct official DOOM URLs were unavailable through this reviewer’s web tool; parent browser verification is explicitly separate from independently opened dictionary/manufacturer/school evidence.",
+    "Accented Clanță dictionary URL failed; the credited unaccented entry opened.",
+    "The 43 MB original PORTA 2026 catalog exceeded web-tool content size; its indexed original snippets are discovery leads, not full source inspection.",
+    "PINNTORP assembly PDF returned a cache miss; the directly opened product material/assembly statements and full FIXA manual supply the checked chair/fastener claims."
+  ],
+  "familiarity_limits": "School/manufacturer/dictionary signals establish recognizable language and objects; no human spontaneous-name test or enjoyment playtest has run. No new hidden target, round, alias promotion or source authority is approved by this research."
+}

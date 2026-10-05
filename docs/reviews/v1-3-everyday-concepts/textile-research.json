@@ -1,0 +1,426 @@
+{
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "checked_on": "2026-10-06",
+  "dictionary_leads": {
+    "ata": "https://dexonline.ro/definitie/a%C8%9B%C4%83",
+    "bumb": "https://dexonline.ro/definitie/bumb",
+    "fermetura": "https://dexonline.ro/definitie/fermetur%C4%83",
+    "fermoar": "https://dexonline.ro/definitie/fermoar",
+    "nasture": "https://dexonline.ro/definitie/nasture",
+    "perdea": "https://dexonline.ro/definitie/perdea",
+    "policy": "Lead URLs only in this scout; no definitions, paradigms or database extraction copied. Parent noted current footer retrieval/storage restrictions except official public sets. Official DOOM is orthographic, not semantic, and carries its own NC-SA license."
+  },
+  "final_gate_approval_granted": false,
+  "human_playtest": "unrun",
+  "identity_checks": {
+    "current_rejection_ledgers": "Exact normalized whole-string headword checks found no identity tombstones. Substring ață hits belong to other words; not counted as candidate rejection.",
+    "headword_native_owners": {
+      "Ață": [],
+      "Fermoar": [],
+      "Nasture": [],
+      "Perdea": []
+    },
+    "old_pool": "Four V99 revision1 records retained; their researched state is not installation approval.",
+    "projection_warning": "Native absence is not unavailable guessing for Perdea/draperie: both existing nonwinning Casa-domain projections.",
+    "raw_bulk_extracts_saved": false
+  },
+  "kind": "v1-3-textile-research-v1",
+  "normalization": "NFKD, remove combining marks, casefold, collapse whitespace; every current KG label and alias compared.",
+  "records": [
+    {
+      "alias_screening": {
+        "draperie": "Hold exact alias. Sheer/heavy opacity/use distinctions and broader hanging-textile senses are unresolved; preserve sense distinctions.",
+        "inflections": "perdeaua/perdele/perdelele/perdelei/perdelelor are grammatical proposals, not new synonyms or approved forms."
+      },
+      "existing_proxy": {
+        "anchor_id": "n_v4soc_casa",
+        "domain": "mobilier și casă",
+        "mapping_kind": "domain_fallback",
+        "rank_penalty": 1,
+        "surface": "perdea"
+      },
+      "hold_reasons": [
+        "Explicit proxy retirement and before/after feedback proof required.",
+        "Only three bounded specific relations retained; no room/casa or second light/soare fan-out added merely to reach graph floor.",
+        "No incoming-neighbor or hidden-target approval claim."
+      ],
+      "id": "v1-3-perdea",
+      "label_ro": "Perdea",
+      "native_exact_label_alias_owners": [],
+      "novelty": "New shared-KG concept if adopted, but already a nonwinning Contexto guess; not new unavailable vocabulary.",
+      "other_proxy": {
+        "anchor_id": "n_v4soc_casa",
+        "mapping_kind": "domain_fallback",
+        "surface": "draperie"
+      },
+      "prior_pool_id": "v99-everyday-perdea",
+      "prior_revision": 1,
+      "recognition": "Familiar household term; prior V99 pre2010 lexical and current national-media lead remain research evidence. Brand examples are contemporary public usage, not independent audience proof.",
+      "recommended_research_state": "held",
+      "relations": [
+        {
+          "caption": "poate acoperi o fereastră",
+          "direction": "new_Perdea -> n_v24_home_surfaces_fereastra",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Fereastră",
+          "source_refs": [
+            "ikea_window"
+          ],
+          "state": "source_supported_research_only"
+        },
+        {
+          "caption": "poate filtra lumina",
+          "direction": "new_Perdea -> n_v4sti_lumina",
+          "existing_category": "stiinta",
+          "existing_label": "lumină",
+          "source_refs": [
+            "ikea_window"
+          ],
+          "state": "source_supported_research_only"
+        },
+        {
+          "caption": "poate înlocui o ușă în cadrul ei",
+          "direction": "new_Perdea -> n_v4via_usa",
+          "existing_category": "viata_de_roman",
+          "existing_label": "ușă",
+          "source_refs": [
+            "ikea_door"
+          ],
+          "state": "qualified_hypothesis; source uses thin drapery term"
+        }
+      ],
+      "sense": "Textile furnishing hung at a window or doorway; forest/smoke/shower senses excluded.",
+      "source_refs": [
+        "ikea_window",
+        "ikea_door",
+        "ikea_drapery"
+      ]
+    },
+    {
+      "alias_screening": {
+        "fir de cusut": "Potential same-sense synonym only if the node is explicitly sewing thread; no blanket fir alias.",
+        "inflections": "ațe/ațele/aței/ațelor are grammar proposals; ața accent-folds to the canonical ață key and should not be counted as a distinct stored input form."
+      },
+      "existing_distinct_proxy": {
+        "anchor_id": "n_v31_hygiene_oral_periuta_dinti",
+        "domain": "igienă",
+        "mapping_kind": "explicit",
+        "surface": "ață dentară"
+      },
+      "hold_reasons": [
+        "Four independently useful existing-node relations not established; do not repeat generic garment/material class links to fill a quota.",
+        "Needle dependency and bare-label sense remain unresolved.",
+        "No incoming/target/recipe approval."
+      ],
+      "id": "v1-3-ata",
+      "label_ro": "Ață",
+      "native_exact_label_alias_owners": [],
+      "novelty": "New shared concept; bare sewing term absent from native resolver and projection.",
+      "prior_pool_id": "v99-everyday-ata",
+      "prior_revision": 1,
+      "recognition": "Romanian national gradeVII2025 school source explicitly uses ață de cusut; current maker use supports mechanics. No broad audience/human quiz test.",
+      "recommended_research_state": "held",
+      "relations": [
+        {
+          "caption": "poate fi folosită la coaserea unei cămăși",
+          "direction": "new_Ata_de_cusut -> n_v29_clothing_everyday_camasa",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Cămașă",
+          "source_refs": [
+            "coats_shirts"
+          ],
+          "state": "source_supported_research_only"
+        }
+      ],
+      "sense": "Sewing thread; dental floss, string/rope and figurative senses excluded. Qualified Ață de cusut is the safer proposed identity.",
+      "source_refs": [
+        "school2025",
+        "coats_shirts",
+        "coats_stitches"
+      ],
+      "uninstalled_dependency": {
+        "bare_ac_owner": "n_v20via_aer_conditionat",
+        "label": "Ac de cusut",
+        "notes": "Never alias bare ac to sewing needle; it already normalizes to existing AC air conditioning. No new needle dependency installed.",
+        "source_refs": [
+          "coats_stitches"
+        ]
+      }
+    },
+    {
+      "alias_screening": {
+        "bumb": "Historical/regional synonym lead, not approved. No fresh independent exact-sense/familiarity proof; do not add merely to increase forms.",
+        "inflections": "nasturele/nasturi/nasturii/nasturelui/nasturilor are grammar proposals, not synonym growth."
+      },
+      "hold_reasons": [
+        "Root holds this concept rather than use generic Haină as fourth class-level neighbor.",
+        "Nasture/Fermoar compete across garments; graph links do not prove a unique pairing board.",
+        "Decorative buttons do not necessarily close a garment; captions remain possible-use statements."
+      ],
+      "id": "v1-3-nasture",
+      "label_ro": "Nasture",
+      "later_qualified_lead": {
+        "caption": "folosit la închiderea unor tricouri polo de golf",
+        "direction": "new_Nasture -> n_v4spo_tricou",
+        "source_refs": [
+          "polo"
+        ],
+        "state": "Retained hypothesis only after root froze held shortlist; target is sports equipment, not generic clothing T-shirt. Exact source and gameplay critique still required."
+      },
+      "native_exact_label_alias_owners": [],
+      "novelty": "New shared concept; native/projection headword absent.",
+      "prior_pool_id": "v99-everyday-nasture",
+      "prior_revision": 1,
+      "recognition": "Current Romanian gradeVII2025 school list includes buttons; everyday shirt usage and own-brand sports-product lead corroborate living use. No human playtest.",
+      "recommended_research_state": "held",
+      "relations": [
+        {
+          "caption": "poate fi folosit la închiderea unei cămăși",
+          "direction": "new_Nasture -> n_v29_clothing_everyday_camasa",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Cămașă",
+          "source_refs": [
+            "coats_shirts"
+          ],
+          "state": "source_supported_research_only"
+        },
+        {
+          "caption": "poate fi folosit la închiderea unor pantaloni",
+          "direction": "new_Nasture -> n_v30_clothing_everyday_pantaloni",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Pantaloni",
+          "source_refs": [
+            "moldova_closures"
+          ],
+          "state": "indexed_primary_claim; full verification pending"
+        },
+        {
+          "caption": "poate fi folosit la închiderea unor fuste",
+          "direction": "new_Nasture -> n_v30_clothing_everyday_fusta",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Fustă",
+          "source_refs": [
+            "moldova_closures"
+          ],
+          "state": "indexed_primary_claim; full verification pending"
+        }
+      ],
+      "sense": "Small garment fastening or ornament; do not conflate electrical button, snap fastener and every closure mechanism.",
+      "source_refs": [
+        "school2025",
+        "coats_shirts",
+        "moldova_closures",
+        "polo"
+      ]
+    },
+    {
+      "alias_screening": {
+        "fermetură": "Hold automatic synonym. No current primary source establishes exact equivalent zipper sense rather than a wider fastening/clasp term.",
+        "inflections": [
+          "fermoarul",
+          "fermoare",
+          "fermoarele",
+          "fermoarului",
+          "fermoarelor"
+        ],
+        "morphology_support": "Root verified official DOOM3 one neuter lemma/plural fermoare. Other forms are independently reviewable editorial grammatical applications; not a copied paradigm dataset."
+      },
+      "id": "v1-3-fermoar",
+      "label_ro": "Fermoar",
+      "limits": [
+        "Four one-way possible-use links, no existing->new incoming arcs proposed.",
+        "No hidden-target, curated-round, recipe or enjoyment approval.",
+        "Root/verifier must independently settle PDF/search access and exact selected-source bindings before adoption.",
+        "No all-garments or all-schoolbags universal claim."
+      ],
+      "native_exact_label_alias_owners": [],
+      "not_current_use_support": [
+        "ykk_old_index"
+      ],
+      "novelty": "New shared concept; current native resolver/projection absent.",
+      "prior_pool_id": "v99-everyday-fermoar",
+      "prior_revision": 1,
+      "recognition": "National gradeVII2025 school text explicitly includes fermoare; current Romanian jacket and actual primary-school bag descriptions show everyday use. Manufacturer English structure evidence is not Romanian recognition by itself.",
+      "recommended_research_state": "researched_for_root_shortlist; not_approved",
+      "relations": [
+        {
+          "caption": "poate fi folosit la închiderea unor pantaloni",
+          "direction": "new_Fermoar -> n_v30_clothing_everyday_pantaloni",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Pantaloni",
+          "source_refs": [
+            "moldova_closures"
+          ],
+          "state": "indexed_primary_claim; independent final verification still required"
+        },
+        {
+          "caption": "poate fi folosit la închiderea unor fuste",
+          "direction": "new_Fermoar -> n_v30_clothing_everyday_fusta",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Fustă",
+          "source_refs": [
+            "moldova_closures"
+          ],
+          "state": "indexed_primary_claim; independent final verification still required"
+        },
+        {
+          "caption": "poate fi folosit la închiderea frontală a unor geci",
+          "direction": "new_Fermoar -> n_v30_clothing_outer_geaca",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Geacă",
+          "source_refs": [
+            "tribord_jacket"
+          ],
+          "state": "current_primary_product_text_supported"
+        },
+        {
+          "caption": "poate fi folosit la închiderea compartimentelor unor ghiozdane",
+          "direction": "new_Fermoar -> n_v23via_ghiozdan",
+          "existing_category": "viata_de_roman",
+          "existing_label": "Ghiozdan",
+          "source_refs": [
+            "schoolbag"
+          ],
+          "state": "fresh_browser_ui_support_reported_by_root; retailer attribution"
+        }
+      ],
+      "sense": "Sliding zipper closure with interlocking chain elements; other clasp mechanisms excluded.",
+      "source_refs": [
+        "school2025",
+        "moldova_closures",
+        "tribord_jacket",
+        "schoolbag",
+        "ykk_current",
+        "doom"
+      ]
+    }
+  ],
+  "researcher": "/root/synonym_scout",
+  "scope": "Fresh bounded research for four everyday leads; no graph/code/data edits and no independent approval files. Root owns proposal/integration.",
+  "source_access_failures": [
+    {
+      "status": "Full fetch rejected for16.4MB content; no full-document claim used.",
+      "url": "https://portal.eduhr.ro/wp-content/uploads/2021/11/A791.pdf"
+    },
+    {
+      "status": "Web open inaccessible; not counted as verified full evidence.",
+      "url": "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/7%20ED%20TEHNO.pdf"
+    },
+    {
+      "status": "Full fetch rejected for16.3MB content; indexed excerpt is a lead only, not used as complete textbook evidence.",
+      "url": "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2014_RM_TEXTILE%20SI%20PIELARIE.pdf"
+    },
+    {
+      "status": "Scout UI browser unavailable; root rendered current page independently. Old indexed application list is historical; fresh page lacks those four specific names.",
+      "url": "https://ykkdigitalshowroom.com/en/item/32/"
+    }
+  ],
+  "source_reuse_policy": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+  "sources": {
+    "coats_shirts": {
+      "access": "indexed_page_text_verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_thread_manufacturer_technical_application",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "Shirt construction uses sewing threads, including button-sewing operations. English technical source supports mechanics, not Romanian familiarity alone.",
+      "url": "https://www.coats.com/en-us/industries/apparel/applications/menswear/shirts/"
+    },
+    "coats_stitches": {
+      "access": "indexed_page_text_verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_thread_manufacturer_technical_explanation",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "Sewing needle carries thread through fabric to form stitches. The ac de cusut dependency is distinct from current AC air-conditioning owner.",
+      "url": "https://www.coats.com/tr/info-hub/Basic-stitch-types/"
+    },
+    "doom": {
+      "access": "fermoar entry browser_ui_verified_by_root; homepage page_text_verified_by_scout",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_normative_linguistics_reference",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "One neuter lemma, plural fermoare; five proposed article/case forms are editorial applications of that paradigm, not copied entry data. Homepage identifies CC BY-NC-SA4.0 electronic edition; no dataset-reuse permission inferred.",
+      "url": "https://doom.lingv.ro/cautare/q/fermoar?"
+    },
+    "ikea_door": {
+      "access": "page_text_verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_brand_use_demonstration",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "An IKEA employee uses thin drapes instead of door panels, with a curtain rail over the door frame. Supports a possible alternative at a doorway, not curtain as a physical door-panel part.",
+      "url": "https://www.ikea.com/ro/ro/ideas/welcome-to-my-place/descopera-printre-multe-altele-covorul-lucrat-manual-de-bo-karl-pub0cbe10b0/"
+    },
+    "ikea_drapery": {
+      "access": "indexed_page_text_verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_own_product_description",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "Opaque/heavier drapery differs from sheer-curtain examples. Manufacturer terminology is not a complete Romanian synonym proof.",
+      "url": "https://www.ikea.com/ro/ro/p/sanela-draperii-2buc-albastru-inchis-rjns-40591406/"
+    },
+    "ikea_window": {
+      "access": "indexed_page_text_verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_own_product_description",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "A household window curtain diffuses sunlight and allows light through; its material is cotton. Product-specific care/material details do not describe every curtain.",
+      "url": "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-alb-rjns-20491040/"
+    },
+    "moldova_closures": {
+      "access": "indexed_primary_text_verified; full PDF open cache miss",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_government_vocational_curriculum",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "The practical-work list explicitly covers zipper closures and button closures on trousers and skirts. Romanian-language vocational evidence; not Romanian national recognition by itself.",
+      "url": "https://edu.gov.md/sites/default/files/s.04.o.025_tehnologia_confectiilor_din_tricot_ii.pdf"
+    },
+    "polo": {
+      "access": "indexed_product_text_verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_own_brand_product_description",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "INESIS golf polo includes two sewn buttons. Possible qualified future sports-shirt link, not a claim about all sports T-shirts.",
+      "url": "https://www.decathlon.ro/p/tricou-polo-golf-mw500-rosu-barbati/_/R-p-324952"
+    },
+    "school2025": {
+      "access": "page_text_verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_Romanian_education_document",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "locator": "24 April2025, gradeVII, printed page2 lines98–99",
+      "supports": "The national technology olympiad includes sewing thread, buttons and zippers as textile auxiliary materials. This is selective school exposure, not universal audience measurement.",
+      "url": "https://isj.sv.edu.ro/ONETEH/images/docs/VII_PS_ETAP_subiect.pdf"
+    },
+    "schoolbag": {
+      "access": "browser_ui_verified_by_root; scout direct open cache miss and search text verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_retail_product_description",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "Current TigerFamily NatureQuest TGNQ-038A is a primary-school ghiozdan for classes0–III with main and front zipper closures. It is not Herlitz own-brand manufacturer evidence; retailer/operator attribution retained.",
+      "url": "https://www.herlitz.ro/cumpara/ghiozdan-neechipat-nature-quest-motiv-heavenly-dreams-1896"
+    },
+    "tribord_jacket": {
+      "access": "page_text_verified",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_own_brand_product_description",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "TRIBORD Sailing500 jacket has a central zipper. Supports a possible front jacket closure, not all jackets.",
+      "url": "https://www.decathlon.ro/p/geaca-navigatie-sailing-500-barbati/_/R-p-327999"
+    },
+    "ykk_current": {
+      "access": "root_verified_current_web_fetch; two pages, April2026",
+      "accessed_on": "2026-10-06",
+      "kind": "primary_zipper_manufacturer_catalog",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "Current material/zipper component structure. Does not name all four selected garment/bag categories; not used for those specific usage claims.",
+      "url": "https://ykkdigitalshowroom.com/assets/NATULON_Plus_en.pdf"
+    },
+    "ykk_old_index": {
+      "access": "indexed older text has jackets/skirts/pants/backpack; current URL redirects to JS-only item32",
+      "accessed_on": "2026-10-06",
+      "kind": "historical_manufacturer_index_lead",
+      "license_or_reuse_limit": "Read as factual/recognition reference only. No site text, definitions, tables, document bodies, prices or images copied. This research grants no redistribution license; deployment/source reuse assessment remains separate.",
+      "supports": "Historical lead only. Root rendered current item32 and found broad Sports/Outdoor Wear/Fashion, not the old four-specific list. Do not present old indexed list as freshly verified current four-use support.",
+      "url": "https://www.ykkfastening.com/products/search/detail.html?pdid1=NATULON+Plus%28R%29"
+    }
+  }
+}

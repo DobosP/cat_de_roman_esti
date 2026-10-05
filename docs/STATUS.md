@@ -106,8 +106,8 @@ Unrevealed answers, recipe maps and routes stay private.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
-- V1.3: [eight everyday research leads](content-pool/v1-3-everyday-concepts/pool.json), [kickoff](reviews/v1-3-everyday-concepts/README.md); zero installed.
-  Next: exact sense/source/graph proposals; phone/iPhone/Android/enlarged-text human testing remains.
+- V1.3: [pool3selected/5held](content-pool/v1-3-everyday-concepts/pool.json), [proposal](reviews/v1-3-everyday-concepts/README.md); zero installed.
+  ExactGo1.27.1 restored/baseline4rails GREEN; graph3concepts/12forms/12links awaiting independent gates.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
