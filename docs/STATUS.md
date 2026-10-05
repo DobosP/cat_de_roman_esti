@@ -17,8 +17,7 @@ Last verified: 2026-10-06 — V1.2 reviewed/landed locally17f7da1; production an
   loads at startup and reserve drift returns the game's JSON 503; `/` revalidates on
   every load; `/api/health` reports `version`. Quick-game tiles are display-capitalised
   (reviewed lowercase allowlist); server copy has diacritics and correct plurals.
-- Ghiozdan→Capra cu trei iezi has independently reviewed captions/approval; both natural routes win.
-  All 120 reviewed caption entries remain exact.
+- Ghiozdan→Capra cu trei iezi has reviewed approval/captions; both routes win; all120captions exact.
 - A finite reviewed reserve excludes 20 pack rounds and three quick boards from new
   bundled selection. Archived records remain unchanged. Custom development overrides
   retain their previous unranked compatibility scope under ADR-0158.
@@ -107,7 +106,8 @@ Unrevealed answers, recipe maps and routes stay private.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
-- Next: V1.3 content discovery/refinement; phone/iPhone/Android/enlarged-text human testing remains.
+- V1.3: [eight everyday research leads](content-pool/v1-3-everyday-concepts/pool.json), [kickoff](reviews/v1-3-everyday-concepts/README.md); zero installed.
+  Next: exact sense/source/graph proposals; phone/iPhone/Android/enlarged-text human testing remains.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
