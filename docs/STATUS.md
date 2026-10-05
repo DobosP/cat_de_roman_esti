@@ -2,11 +2,8 @@
 
 Last verified: 2026-10-05 — native toolchain qualified locally; production remains anonymous V1.0.1.
 
-- **GitHub Actions (Last verified: 2026-10-04):** owner-requested on-demand policy,
-  [ADR-0164](adr/0164-manual-github-actions.md). Workflows use `workflow_dispatch`; automatic
-  push/PR/label/schedule runs are removed. Existing jobs, inputs, and safety gates
-  remain. Workflow YAML, manual inputs, job dependencies, and permission preservation
-  were checked; this configuration edit does not refresh application test results.
+- **GitHub Actions:** owner manual policy [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05.
+  Required Go/Node gates run on dispatch; reference inputs defaultfalse. No hosted run occurred.
 
 ## Current state
 
@@ -106,13 +103,11 @@ Unrevealed answers, recipe maps and routes stay private.
   Caddy/certificates/volumes preserved; previousGo+Python rollback profiles retained.
   [Complete rollout proof](reviews/go-completion/README.md). No provider/minor activation.
 - Native source/tooling stage [ADR-0165](adr/0165-native-source-build-and-qualification.md):
-  exact eight-source export, 180 terminal paths, 32 neutral body cases and 1009 saved prefixes pass.
-  Native compiled parity 1207/1207, synthetic smoke151/28asset proofs, REST/mobile/docs race/vet pass.
-  Native operators/builders/tagged input and neutral release coupling (optional legacy) pass.
+  eight-source export,180 terminal paths,32 body/1009prefix/1207HTTP/smoke151/28asset proofs pass;
+  REST/mobile/docs/operator/builder race/vet, tagged input and neutral release coupling pass.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
-  [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): clean native Go/PG/Node242/browser622 GREEN.
-  Accepted origin4fcf manual policy is integrated; native Go/Node gates default, references opt-in.
+  [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): Go/PG/Node242/browser622 and independent reviews GREEN.
 - Next: same-Wi-Fi phone/desktop testing, iPhone (Safari/WebKit untested), Android and enlarged text.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
