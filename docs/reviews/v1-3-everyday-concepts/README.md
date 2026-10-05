@@ -25,5 +25,7 @@ reviews/source corpora/bindings and complete integrated gates before local landi
 The existing heartbeat `romanian-content-versions-v1-2-onward` continues this same chat
 every30minutes, reusing this worktree until this bounded version finishes. It then starts
 the next version and remains quiet on unchanged state. Human stop/pause takes precedence.
-The existing qualified SDK is `/home/dobo/work/_temp/feat__go-native-toolchain/tools/go/bin/go`;
-this version's scratch is `/home/dobo/work/_temp/codex__content-v1-3`. No push/deploy authorized.
+The prior SDK path disappeared during external scratch upkeep after V1.2 qualification;
+rediscover the qualified Go toolchain before any graph/source installation. The retained native
+document checker validates this research-only kickoff. This version's scratch is
+`/home/dobo/work/_temp/codex__content-v1-3`. No push/deploy authorized.
