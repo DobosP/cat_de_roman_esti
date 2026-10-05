@@ -44,8 +44,7 @@ Last verified: 2026-10-05 — native toolchain qualified locally; production rem
 | Intrusul | 228 | 228 | 0 | 226 selectable / 188 preferred |
 | Perechi | 193 | 193 | 0 | 192 selectable / 153 preferred |
 
-Pack **716 = 709 approved + 7 pending**, 527 eligible. Quick **421 stored / 418 selectable**;
-341 preferred, starter pools 62/61. The 85 authored and 336 frozen quick payloads stay exact.
+Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
 KG: `fixture-v1-reviewed-content`, 2416 nodes/9458 links/8641 forms/180 puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
