@@ -3,8 +3,10 @@ package contentrails
 import (
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie_explore"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild"
 	"net/url"
+	"path/filepath"
 	"sort"
 	"strings"
 )
@@ -334,6 +336,9 @@ func buildWorld(root string, s *Source, candidate map[string]any, candidateSHA s
 	return out, nil
 }
 func auditWorld(root string, raw map[string]any) (map[string]any, error) {
+	if errors := contentbuild.ValidateFixture(filepath.Join(root, "cat_de_roman_esti/fixtures/kg_sample.json")); len(errors) != 0 {
+		return nil, fmt.Errorf("prospective world source fixture invalid: %s", strings.Join(errors[:min(len(errors), 8)], "; "))
+	}
 	g, err := sourceGraph(root)
 	if err != nil {
 		return nil, err
@@ -342,10 +347,20 @@ func auditWorld(root string, raw map[string]any) (map[string]any, error) {
 	if err != nil {
 		return nil, err
 	}
-	data, err := contentbuild.Load(root)
+	// The source root can intentionally contain an old installed world while
+	// its graph and a separately reviewed prospective world are being staged.
+	// Use a fresh sealed serving snapshot only inside this audit, then overlay
+	// the independently parsed source graph and the validated prospective world.
+	// Export/startup continue to require coherent reviewed installed sources.
+	data, err := content.Load()
 	if err != nil {
 		return nil, err
 	}
+	data.Nodes = g.Content.Nodes
+	data.Edges = g.Content.Edges
+	data.Labels = g.Content.Labels
+	data.CategoryLabels = g.Content.CategoryLabels
+	data.NormalizedIndex = g.Content.NormalizedIndex
 	data.DiscoveryWorld = normalized
 	recipes := rows(raw["recipes"])
 	goalIDs := []*string{nil}

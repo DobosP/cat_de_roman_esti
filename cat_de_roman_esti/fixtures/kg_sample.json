@@ -1,11 +1,11 @@
 {
   "meta": {
-    "build_version": "fixture-v1-reviewed-content",
+    "build_version": "fixture-v1-2-reviewed-content",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "V1: three reviewed description corrections, three historical Cristina Neagu relationship labels, and removal of one unsupported casting link. All 180 existing puzzles are preserved and validated without regeneration.",
+    "note": "V1.2: four reviewed synonym families (22 forms), one pedestrian-path synonym link.",
     "counts": {
       "nodes": 2416,
-      "edges": 9458,
+      "edges": 9459,
       "puzzles": 180,
       "by_category": {
         "arta_cultura": 128,
@@ -1652,7 +1652,12 @@
       "aliases": [
         "vioara clasică",
         "instrumentul vioară",
-        "viori"
+        "viori",
+        "scripcă",
+        "scripci",
+        "scripcile",
+        "scripcii",
+        "scripcilor"
       ]
     },
     {
@@ -17002,7 +17007,12 @@
         "roșii",
         "roșiile",
         "roșiei",
-        "roșiilor"
+        "roșiilor",
+        "tomată",
+        "tomate",
+        "tomatele",
+        "tomatei",
+        "tomatelor"
       ]
     },
     {
@@ -17450,7 +17460,7 @@
       "description": "Drum îngust pentru mers pe jos prin natură sau sate.",
       "salience": 0.3736,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "cărarea",
         "cărări",
@@ -17467,7 +17477,7 @@
       "description": "Traseu îngust de mers pe jos, frecvent în zone montane.",
       "salience": 0.3844,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "poteci",
         "potecile"
@@ -19692,7 +19702,13 @@
         "magazine",
         "magazinele",
         "magazinului",
-        "magazinelor"
+        "magazinelor",
+        "prăvălie",
+        "prăvălia",
+        "prăvălii",
+        "prăvăliile",
+        "prăvăliei",
+        "prăvăliilor"
       ]
     },
     {
@@ -20809,7 +20825,13 @@
       "aliases": [
         "liftul",
         "lifturi",
-        "lifturile"
+        "lifturile",
+        "ascensor",
+        "ascensorul",
+        "ascensoare",
+        "ascensoarele",
+        "ascensorului",
+        "ascensoarelor"
       ]
     },
     {
@@ -132172,6 +132194,16 @@
       "strength": 0.7,
       "is_distractor": 0,
       "bidirectional": 0
+    },
+    {
+      "id": "de8800",
+      "src_id": "n_v4geo_carare",
+      "dst_id": "n_v4geo_poteca",
+      "relation": "synonym_of",
+      "label_ro": "sinonime pentru un drum îngust de mers pe jos",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 1
     }
   ],
   "kg_puzzles": [

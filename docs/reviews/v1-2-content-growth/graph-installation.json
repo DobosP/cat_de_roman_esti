@@ -1,0 +1,65 @@
+{
+  "schema": "v1-2-graph-installation-receipt-v1",
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "date": "2026-10-05",
+  "proposal_sha256": "2aabb5e017fda46910f354a6bbce0c39dfdda8a5de215dce18bbeabc67683111",
+  "factual_review_sha256": "96ced04cb238ed93d8f2ee1140d41c530125723a957d3b7ecabdb3c74a43cf94",
+  "quality_review_sha256": "508f457f2dd6b6b95e503044dc4499cd664c99590585d4dd5f838cf467a1acc7",
+  "applied_via": "scripts/apply_common_words_v24.py --data-module synonym_graph_v1_2_data",
+  "commands": {
+    "dry_run_exit": 0,
+    "graph_apply_exit": 0,
+    "rank_write_exit": 0,
+    "derive_write_exit": 0
+  },
+  "kg_sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+  "counts": {
+    "nodes": [
+      2416,
+      2416
+    ],
+    "edges": [
+      9458,
+      9459
+    ],
+    "forms": [
+      8641,
+      8663
+    ],
+    "puzzles": [
+      180,
+      180
+    ]
+  },
+  "new_edge_records": [
+    {
+      "id": "de8800",
+      "src_id": "n_v4geo_carare",
+      "dst_id": "n_v4geo_poteca",
+      "relation": "synonym_of",
+      "label_ro": "sinonime pentru un drum îngust de mers pe jos",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 1
+    }
+  ],
+  "alias_extended_nodes": [
+    "n_v4gas_rosie",
+    "n_v4soc_magazin",
+    "n_v4via_lift",
+    "n_vioara"
+  ],
+  "only_degree_changed_nodes": [
+    "n_v4geo_carare",
+    "n_v4geo_poteca"
+  ],
+  "all_other_nodes_exact": true,
+  "all_old_edges_exact": true,
+  "all_terminal_puzzles_exact": true,
+  "preserved_payloads": {
+    "games_pack.json": true,
+    "board_rankings_v37.json": true,
+    "derived_catalog_v38.json": true
+  },
+  "runtime_qualification": "pending final catalog/export/authority checks; source application is not landing"
+}

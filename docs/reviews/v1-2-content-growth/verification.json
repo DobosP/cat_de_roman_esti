@@ -1,0 +1,217 @@
+{
+  "schema": "v1-2-integrated-verification-v1",
+  "checked_on": "2026-10-06",
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "native_backend_race": {
+    "command": "go -C go-backend test -race ./...",
+    "exit_code": 0,
+    "passed_packages": 27,
+    "first_run_failure": "Branch-dependent delta test assumed no task content delta; replaced with hermetic synthetic Git baseline and positive one-form proof; no production behavior changed."
+  },
+  "native_vet": {
+    "commands": [
+      "go -C go-backend vet ./...",
+      "go -C shared-go/authcore vet ./..."
+    ],
+    "exit_code": 0
+  },
+  "shared_auth_race": {
+    "command": "go -C shared-go/authcore test -race ./...",
+    "exit_code": 0
+  },
+  "source_validation_export": {
+    "commands": [
+      "go -C go-backend run ./cmd/cat-content validate --root ..",
+      "go -C go-backend run ./cmd/cat-content export --root .. --check"
+    ],
+    "exit_code": 0
+  },
+  "independent_python_export": {
+    "command": "PYTHONPATH=. <documented-reference-interpreter> scripts/export_go_content.py --check",
+    "exit_code": 0,
+    "bytes": 7231736
+  },
+  "rank_derive": {
+    "commands": [
+      "cat-content-ops rank --root . --check",
+      "cat-content-ops derive --root . --check"
+    ],
+    "exit_code": 0
+  },
+  "native_rails": {
+    "ok": true,
+    "rails": [
+      {
+        "rail": "quick",
+        "ok": true,
+        "rebuilt_sha256": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+        "artifact_sha256": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7"
+      },
+      {
+        "rail": "world",
+        "ok": true,
+        "rebuilt_sha256": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+        "artifact_sha256": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7"
+      },
+      {
+        "rail": "extensions",
+        "ok": true,
+        "rebuilt_sha256": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+        "artifact_sha256": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7"
+      },
+      {
+        "rail": "reserve",
+        "ok": true,
+        "rebuilt_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "artifact_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6"
+      }
+    ]
+  },
+  "mobile": {
+    "command": "go -C go-backend run ./cmd/cat-mobile-pack --root .. --check",
+    "exit_code": 0
+  },
+  "current_http": {
+    "requests": 1207,
+    "independent_expected": "Django TestClient; immutable historical request logic; original corpus retained",
+    "comparison": "1207matched, original/current1207same requests/statuses, only3manifest leaf fields changed",
+    "current_corpus_sha256": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+    "compiled_independent_replay": "1207/1207, source-map exact selector"
+  },
+  "focused_new_gameplay_race": {
+    "contexto_seconds": 2.234,
+    "lant_seconds": 2.088,
+    "result": "Synonyms/inflections one attempt, exact identity/wins, held forms unchanged; both real moves and terminal recovery pass."
+  },
+  "current_contexto_vectors": {
+    "result": "60 sequences independently reproduced, one sequence15scalar expected rank/message deltas; native focused race passed10.890s."
+  },
+  "history_reference": {
+    "command": "PYTHONPATH=. <documented-reference-interpreter> -m pytest tests/test_v1_content_history.py tests/test_v1_2_content_history.py tests/test_v50_synonyms_basic_words.py tests/test_v33_basic_words.py -q",
+    "passed": 68,
+    "seconds": 13.47,
+    "historical_bytes": "Original receipts/hashes retained; explicit new inverse restores exact baseline dictionary order."
+  },
+  "lint": {
+    "command": "PYTHONPATH=. <documented-reference-interpreter> -m ruff check --no-cache",
+    "exit_code": 0
+  },
+  "docs": {
+    "command": "go -C go-backend run ./cmd/cat-doc-check --root ..",
+    "exit_code": 0,
+    "budgets": []
+  },
+  "whitespace": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "smoke": {
+    "ok": true,
+    "mode": "smoke",
+    "requests": 151,
+    "elapsed_seconds": 0.177932123,
+    "content_hash": "sha256:c8f9c6fc4f9d2ff7e1221f10ef17f2cbcc7194206d773fae8cebc583e6c74c51",
+    "games_completed": 6,
+    "exploration_restore": true,
+    "assets_verified": 28,
+    "legal_sha256": {
+      "/legal/privacy": "49b73ca793154bf4ac7980ac5632f72f0243066d10ac6a6ef0a88bce79ef05f9",
+      "/legal/terms": "c87a6a4309ba357d55b95c4b41532350fa6dac5cc9c315e8a1741c89906d2249"
+    },
+    "accounts_enabled": false
+  },
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "go-backend/internal/content/bundled.json": "d98280f0178e13f0d6ec8fd92813c4057f6408a0e3215ec61a0dbb70f9dd3313",
+    "go-backend/internal/content/digest.go": "af020cacd3227f7e7ac4558b885dcae61fbf26d3a925089f594e86c63d7aea02",
+    "go-backend/internal/contentrails/sources/authored-v1.json": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6",
+    "go-backend/internal/contentrails/sources/authored-v2.json": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "1cab0b04ee0aabf8b6654037097dc9ec1740690992bc1d21a1a3d871593220aa",
+    "go-backend/internal/contentrails/installed_authorities_pin.go": "7d3662cbed3520d034b14d473ddf22d6d3b0e75a5081f69179b9d87703f02445",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438"
+  },
+  "logs": {
+    "native-race.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/native-race.log.gz",
+      "original_sha256": "48f22219c387eea692adbd6e669e5ffa2719b5f52f03c351ded65b688fa83da5",
+      "gzip_sha256": "444c5db88a70e7a25b787f2f69793a97889086b9a50ca280a3383f6628bee301"
+    },
+    "native-race-final.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/native-race-final.log.gz",
+      "original_sha256": "818e61b64b3c7445ed613ffd747d42c842641e9b4354c9b3fad2e8a8eece3001",
+      "gzip_sha256": "5ffcb0d14b05571d1fb8275fd1c5a3e08480b85949850ab9d8ef1ae2d221ae32"
+    },
+    "shared-auth-race.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/shared-auth-race.log.gz",
+      "original_sha256": "50a58de77cfadc772893b442d0ede9d658bf0cadd196e97ec9a1405e36432ec2",
+      "gzip_sha256": "bea0e58b3d86f4ab556297e253f48e1c09616f67eb9e532170146829338413f8"
+    },
+    "history-reference-tests.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/history-reference-tests.log.gz",
+      "original_sha256": "aee601e4422cc6e9cf8963d082881a757721c21dbb1a05cfa9b40607d3066530",
+      "gzip_sha256": "e74f908717091569435bee7ea3c07fb593b9396ec51556e34c60535d072536d3"
+    },
+    "current-reference-tests.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/current-reference-tests.log.gz",
+      "original_sha256": "e742f848512cad87f1c57f7d880ef1ffe12936d95fd93a7bdcdd735dfe07a437",
+      "gzip_sha256": "b263ad71127cbec921d6dd39eb2792c5c208d2492fa69aab414aaa52345ed5b1"
+    },
+    "source-game-contracts.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/source-game-contracts.log.gz",
+      "original_sha256": "03602adc9d4e1aea5527cc3b9a174ff3fa220cdf0adf5bcd82e58e8701c9780a",
+      "gzip_sha256": "cb249e11f41f562c5236499a0f7161efe5b9de2f996d0e8fe8255c42949d51a2"
+    },
+    "graph-preflight.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/graph-preflight.log.gz",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "graph-preflight-r2.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/graph-preflight-r2.log.gz",
+      "original_sha256": "e494e925df74db2f2b50f574949b3b161634ff46c749f2cb31fbce908f3a2a84",
+      "gzip_sha256": "76eb9526632431d3f76a7d871171a0eaeeca17f8cce579559005eac9a5e4f33f"
+    },
+    "graph-apply.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/graph-apply.log.gz",
+      "original_sha256": "1ce5e80e03387a66903d1daf7dd869d24f102369c795ed1322d1258a696fcf46",
+      "gzip_sha256": "71d282923a084eb8e6cc4ae682c11072fd70a3f191f4c94cfba51387d6002ce2"
+    },
+    "current-http-capture.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/current-http-capture.log.gz",
+      "original_sha256": "eb5b6b57a157d00faa8c63f67b96400d306c2d852d414b040ac8a7d1de2c30d0",
+      "gzip_sha256": "117f79be19b68248edae62da81b9c4c40893cfafb8b9bbd2ee1d56b89cbca9bd"
+    },
+    "smoke.log": {
+      "path": "docs/reviews/v1-2-content-growth/logs/smoke.log.gz",
+      "original_sha256": "be7307abcc012877fbfadc2fdda919fb90441c08b232aa66c8309f15abaae505",
+      "gzip_sha256": "be389d1981b451e1a554af7f75ebde306c152c500c3cc634e9c29347c6fc6858"
+    }
+  },
+  "unchanged_frontend_assets": true,
+  "scope_limits": [
+    "No frontend source change, so frontend build not rerun.",
+    "No accounts/auth behavior change or activation; explicit disposable-PG release lane not rerun.",
+    "No new full622 browser matrix or physical-device/human enjoyment claim; source/API and actual smoke cases documented.",
+    "No push or deployment."
+  ],
+  "phase": "Integrated gates GREEN; independent final assembled review/local landing pending"
+}

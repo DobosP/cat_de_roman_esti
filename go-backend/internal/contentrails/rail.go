@@ -146,7 +146,16 @@ func baseline(root string, s *Source, rail string) (map[string]any, error) {
 }
 func Check(root string, s *Source, rail string) (CheckResult, error) {
 	result := CheckResult{Rail: rail, SourceSHA256: s.SHA256}
-	rebuilt, err := baseline(root, s, rail)
+	a, err := loadInstalledAuthorities(root)
+	if err != nil {
+		return result, err
+	}
+	rebuilt, adopted, err := a.rebuild(root, s, rail)
+	if adopted {
+		result.SourceSHA256 = text(object(object(a.raw["rails"])[rail])["source_sha256"])
+	} else if err == nil {
+		rebuilt, err = baseline(root, s, rail)
+	}
 	if err != nil {
 		return result, err
 	}
@@ -188,6 +197,9 @@ func Check(root string, s *Source, rail string) (CheckResult, error) {
 		}
 	}
 	result.OK = true
+	if _, err = loadInstalledAuthorities(root); err != nil {
+		return result, err
+	}
 	return result, nil
 }
 func CheckAll(root string, s *Source) ([]CheckResult, error) {
@@ -417,10 +429,16 @@ func ProtectedOutput(root, target string, inputs ...string) error {
 	if err != nil || target == "" {
 		return fmt.Errorf("explicit output required")
 	}
-	for _, name := range append(append([]string{}, inputs...), filepath.Join(root, "go-backend/internal/contentrails/sources/authored-v1.json")) {
+	protected := append(append([]string{}, inputs...), filepath.Join(root, "go-backend/internal/contentrails/sources/authored-v1.json"), filepath.Join(root, installedManifestPath), filepath.Join(root, installedPinPath))
+	runtimeInputs, err := runtimePaths(root)
+	if err != nil {
+		return err
+	}
+	protected = append(protected, runtimeInputs...)
+	for _, name := range protected {
 		absolute, _ := filepath.Abs(name)
 		if path == absolute {
-			return fmt.Errorf("output would overwrite a protected author/review input")
+			return fmt.Errorf("output would overwrite a protected authority/runtime/author/review input")
 		}
 	}
 	for _, relative := range []string{"cat_de_roman_esti/fixtures", "tests/fixtures", "go-backend/internal/contentrails/sources"} {
@@ -470,6 +488,14 @@ func firstDifference(a, b any, path string) string {
 	return path
 }
 func Rebuild(root string, s *Source, rail string) (map[string]any, error) {
+	a, err := loadInstalledAuthorities(root)
+	if err != nil {
+		return nil, err
+	}
+	value, adopted, err := a.rebuild(root, s, rail)
+	if adopted || err != nil {
+		return value, err
+	}
 	return baseline(root, s, rail)
 }
 
@@ -488,6 +514,15 @@ func runtimePaths(root string) ([]string, error) {
 			}
 			name := d.Name()
 			if strings.HasSuffix(name, "_test.go") {
+				return nil
+			}
+			relative, err := filepath.Rel(root, path)
+			if err != nil {
+				return err
+			}
+			if relative = filepath.ToSlash(relative); relative == installedManifestPath || relative == installedPinPath {
+				// Only these new authority metadata files are separately pinned;
+				// every previously audited source remains in the runtime manifest.
 				return nil
 			}
 			if strings.HasSuffix(name, ".go") || name == "go.mod" || name == "go.sum" || name == "rules_unicode15.json" || name == "provenance.json" || name == "rules_provenance.json" || name == "bundled.json" || strings.Contains(filepath.ToSlash(path), "/contentrails/sources/") && strings.HasSuffix(name, ".json") {
@@ -515,6 +550,28 @@ func inputReadPaths(root string, s *Source, inputs ...string) ([]string, error) 
 		out = append(out, filepath.Join(root, "cat_de_roman_esti/fixtures", name))
 	}
 	out = append(out, filepath.Join(root, "docs/CRITIQUE_RUBRIC.md"))
+	out = append(out, filepath.Join(root, installedManifestPath), filepath.Join(root, installedPinPath))
+	a, err := loadInstalledAuthorities(root)
+	if err != nil {
+		return nil, err
+	}
+	for _, v := range rows(a.raw["source_chain"]) {
+		out = append(out, filepath.Join(root, text(object(v)["path"])))
+	}
+	registeredSources, err := a.sources(root)
+	if err != nil {
+		return nil, err
+	}
+	for _, source := range registeredSources {
+		for _, v := range object(source.Raw["archives"]) {
+			out = append(out, filepath.Join(root, text(object(v)["path"])))
+		}
+	}
+	for _, v := range object(a.raw["rails"]) {
+		for _, key := range installedDocumentKeys {
+			out = append(out, filepath.Join(root, text(object(object(v)[key])["path"])))
+		}
+	}
 	for _, v := range object(s.Raw["archives"]) {
 		out = append(out, filepath.Join(root, text(object(v)["path"])))
 	}
@@ -688,6 +745,18 @@ func validateInstalled(root, rail string, value map[string]any, expectedSHA stri
 }
 
 func validateLoadedSource(root string, s *Source, path string) error {
+	if s.Version > 2 {
+		a, err := loadInstalledAuthorities(root)
+		if err != nil {
+			return err
+		}
+		if _, err = a.sources(root); err != nil {
+			return err
+		}
+		if !a.registeredParent(s.Version, text(s.Raw["parent_source_sha256"])) {
+			return fmt.Errorf("loaded source does not descend from reviewed installed authority")
+		}
+	}
 	if path == "" {
 		path = filepath.Join(root, "go-backend/internal/contentrails/sources/authored-v1.json")
 	}

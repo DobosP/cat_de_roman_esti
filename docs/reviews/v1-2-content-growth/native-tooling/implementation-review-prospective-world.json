@@ -1,0 +1,97 @@
+{
+  "checked_on": "2026-10-05",
+  "checks": [
+    "Current KG receives existing full fixture validation before SourceGraph and proposed-world validation.",
+    "ValidateDiscoveryWorld still checks independent review descriptors, candidate binding, schema/bounds, all KG concept snapshots and authored provenance against the current source graph before bootstrap.",
+    "content.Load produces a fresh digest-verified embedded Content; only Nodes, Edges, Labels, CategoryLabels, NormalizedIndex and validated normalized DiscoveryWorld are overlaid in the private audit instance, matching the existing quick-audit pattern.",
+    "All recipe/goal/restore/historical-prefix replay loops remain unchanged; serving loader, contentbuild.Load, installer and authority gates are unmodified.",
+    "The public Audit wrapper still snapshots and rechecks runtime/source inventories and binds exact catalog/candidate bytes; ConfirmFinal and the installed-authority readset/stability checks remain unchanged.",
+    "Focused test proves a current proposed world can be audited while installed-world snapshots are stale; stale proposed snapshots are refused, installed-world bytes stay exact and full source-export loading still refuses the incoherent staged root."
+  ],
+  "implementation_findings": [],
+  "kind": "v1-2-native-prospective-world-implementation-review-v1",
+  "limitations": [
+    "The durable pre-install audit is replay/source-binding evidence for separate final factual and quality judgments; this implementation review does not grant content approval.",
+    "After installation and export/pin updates, regenerate the populated authority ledger audit/final bindings and perform the required assembled integration recheck."
+  ],
+  "original_review": {
+    "path": "docs/reviews/v1-2-content-growth/native-tooling/implementation-review.json",
+    "sha256": "737e0441ce4091a1f07e10e387746681ec240704277274e90ff676f80e37a88e",
+    "unchanged": true
+  },
+  "resolved_finding": {
+    "problem": "Replacing the full root export loader with the sealed baseline initially removed global KG fixture validation; SourceGraph is a parser and does not certify graph metadata, counts, aliases, endpoints or puzzle contracts.",
+    "resolution": "auditWorld now calls the existing full contentbuild.ValidateFixture against current KG before parsing/validating/replaying the proposal. The malformed-count negative proves a parser-valid and snapshot-valid world cannot bypass that separate gate."
+  },
+  "reviewed_sha256": {
+    "go-backend/cmd/cat-content-rail/main.go": "66aa1433d6eda62c084fc656f8a03990708677639e54aa3ec4dc1c188f6636a8",
+    "go-backend/internal/alchimie_explore/service.go": "34932e427369da4086f4ce7f87ba8b75477f1d0fb0374f53e5be72977e6eec6f",
+    "go-backend/internal/content/content.go": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+    "go-backend/internal/contentbuild/build.go": "99249fc6ce2519cf628061e1ad6f63f72fff7a0c34c8c65c609813e05eb9e598",
+    "go-backend/internal/contentbuild/validate.go": "8752f9905dd4582b8718e27b1eea89e6ac0381a60fca9bd1c7a8a25f88017bbd",
+    "go-backend/internal/contentbuild/world.go": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+    "go-backend/internal/contentrails/installed.go": "d4f465ecb24754730f2e5e6e45a441ff5bbbc146ac9cc53c50824446992dbefd",
+    "go-backend/internal/contentrails/rail.go": "5076e3b45923d9ee7a5563d9c1fd2b84c6fae1db16fb2beb1efc9c6f3c3a0f55",
+    "go-backend/internal/contentrails/source.go": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+    "go-backend/internal/contentrails/world.go": "caadad6c38f40563c97fbdae6b2698e29daa7db978296535a68298bbbcfaec8d",
+    "go-backend/internal/contentrails/world_audit_test.go": "d174a04ac94f8dcd7b16f6c772e3d70522cc2d09b50625214fa302b5d070bd80"
+  },
+  "reviewer": "Codex independent implementation reviewer /root/synonym_scout",
+  "scope": "Supplemental code review of offline prospective-world audit bootstrap only; no lexical, relation, recipe or concept quality approval.",
+  "verdict": "accept",
+  "verification": {
+    "actual_preinstall_audit": {
+      "candidate_sha256": "8c6f7f0405c0a14a9432673b768df292ba8eefdb96f4f6d5d7e5594b517b70e9",
+      "catalog_sha256": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+      "command": "independent-cat-content-rail world --root <task worktree> --source <task worktree>/go-backend/internal/contentrails/sources/authored-v2.json --audit-catalog <task worktree>/docs/reviews/v1-2-content-growth/native/world/proposal.json --audit-out <task worktree>/docs/reviews/v1-2-content-growth/native/world/preinstall-audit.json",
+      "current_runtime_hashes_bound": true,
+      "exit_code": 0,
+      "goal_replays": 33,
+      "historical_books": 9,
+      "historical_prefixes": 1009,
+      "kg_sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+      "metrics": {
+        "concepts": 251,
+        "historical_books": 9,
+        "optional_goals": 32,
+        "recipes": 351
+      },
+      "operator_binary_sha256": "03f377448571a8da22ead3d5e2723db1da3aa2519100841e0a4ec5225794c295",
+      "operator_build_command": "go -C go-backend build -o <task scratch>/independent-cat-content-rail ./cmd/cat-content-rail",
+      "path": "docs/reviews/v1-2-content-growth/native/world/preinstall-audit.json",
+      "sha256": "a13d0d9f0682f8662982e79225d44022b65c9259364c636b46ae61dfeab6de74",
+      "verdict": "accept"
+    },
+    "actual_root_files_unchanged_before_after_audit": {
+      "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+      "cat_de_roman_esti/fixtures/kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+      "docs/reviews/v1-2-content-growth/native/world/proposal.json": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+      "go-backend/internal/content/bundled.json": "f2f8a629f3366a8da6984f608d01dd2ef2354f6de857f0db8b1268047fb6de88",
+      "go-backend/internal/content/digest.go": "ee640f4e2a47d40891647e04eefdb7edd2708d439e99e0ccc600620f80f47021"
+    },
+    "focused_race_command": "go -C go-backend test -race ./internal/contentrails -run 'TestProspectiveWorld' -count=1 -json",
+    "focused_race_log_sha256": "0eff593c38e920a0f83861932ce201ac13a3e048f426ca677bdf9bdc7b9dfb5c",
+    "focused_race_results": [
+      {
+        "elapsed_seconds": 5.34,
+        "name": "TestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay",
+        "passed": true
+      },
+      {
+        "elapsed_seconds": 58.45,
+        "name": "TestProspectiveWorldAuditWithChangedGraphKeepsInstalledWorldFailClosed",
+        "passed": true
+      },
+      {
+        "elapsed_seconds": 64.846,
+        "name": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+        "passed": true
+      }
+    ],
+    "focused_vet_command": "go -C go-backend vet ./internal/contentrails",
+    "focused_vet_exit_code": 0,
+    "old_default_baseline_tests_rerun": false,
+    "running_fixture_readers": 0,
+    "toolchain": "go version go1.27.1 linux/amd64"
+  }
+}

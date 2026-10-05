@@ -80,6 +80,13 @@ func run() error {
 	if err != nil {
 		return err
 	}
+	var corpus *httpgolden.Corpus
+	if mode == "parity" {
+		corpus, err = httpgolden.ForSources(data.Sources)
+		if err != nil {
+			return err
+		}
+	}
 	var transport httpgolden.Transport
 	if *origin != "" {
 		transport, err = httpgolden.HTTP(*origin)
@@ -110,10 +117,7 @@ func run() error {
 	var value any
 	switch mode {
 	case "parity", "replay":
-		var corpus *httpgolden.Corpus
-		if mode == "parity" {
-			corpus, err = httpgolden.Frozen()
-		} else {
+		if mode == "replay" {
 			var file *os.File
 			file, err = os.Open(*input)
 			if err == nil {

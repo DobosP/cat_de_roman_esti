@@ -100,50 +100,50 @@ class CurrentContentSnapshot:
 
 
 CURRENT_CONTENT = CurrentContentSnapshot(
-    build_version='fixture-v1-reviewed-content',
+    build_version='fixture-v1-2-reviewed-content',
     artifact_sha256=_frozen({
         'cat_de_roman_esti/fixtures/kg_sample.json': (
-            '1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64'
+            'c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85'
         ),
         'cat_de_roman_esti/fixtures/games_pack.json': (
             'e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8'
         ),
         'cat_de_roman_esti/fixtures/board_rankings_v37.json': (
-            'bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc'
+            '96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806'
         ),
         'cat_de_roman_esti/fixtures/derived_catalog_v38.json': (
-            'bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4'
+            '1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71'
         ),
         'cat_de_roman_esti/fixtures/quick_games_v92.json': (
-            '85c89ec82d27a19ba619604ed3c47b09e3bb18e1718343db6d56c03b0999761c'
+            'cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c'
         ),
         'tests/fixtures/cat_mobile_app_pack_contract.json': (
-            '82304733284ca62245e0d2ac0abb7b81c991ed1857ca904c990116c5bce280b4'
+            '8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438'
         ),
     }),
     payload_sha256=_frozen({
-        'ranking_rows': '1af93757554c0af4293fd2690e933887d3d0286752d09a023985afc9eabe3dc2',
-        'frozen_derived_boards': '1aa4138171644870f65ca1925f05c066f94e0dac087fd3682b5c374f225b86db',
+        'ranking_rows': '5848733fa5d59d3ddf7b84c968c1647fcbcc78664b018039b920f2d348d2ac41',
+        'frozen_derived_boards': '993e4e04834d2ab446ec28dd593177e071b11b881e49f941f677e0eaf66d01d4',
         'kg_nodes_without_aliases': (
-            '8487ecf37493f428a2087e138d82826c624cc3e97491f599e7977c26994f9642'
+            'a8c082b2c8bfc5ab8085831ffaf002d879363fe514918da9b7bb1d88017cff36'
         ),
-        'kg_edges': '26d482e246837abf284c514f43f76f4da5c7fd92cc5f17d78cf89af5210b75b0',
+        'kg_edges': 'a2c5cb088b941f929785b23c0778fe6b3910f68c8af05431d0f643505c8dd6ac',
         'kg_puzzles': '3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc',
         'contexto_profile': '9a9f3a940e3ffeaf938308a58a2786822327f3e0fdcd26188fc921041b13a3a3',
         'alchimie_closure_profile': (
             'e3b695dcd41ce465cfb46274217441bc0dfd10f19dde0bf9d64d94d603c5289e'
         ),
-        'mobile_content': 'b673caa14e7b6635fb8d7f283c2e0a4f8dbb9667450746ce9cdf0081dc8fd310',
+        'mobile_content': 'c8f9c6fc4f9d2ff7e1221f10ef17f2cbcc7194206d773fae8cebc583e6c74c51',
     }),
     kg_counts=_frozen({
         'nodes': 2416,
-        'edges': 9458,
-        'aliases': 8641,
+        'edges': 9459,
+        'aliases': 8663,
         'puzzles': 180,
     }),
     mobile_counts=_frozen({
         'nodes': 2416,
-        'edges': 9458,
+        'edges': 9459,
         'puzzles': 180,
     }),
     pack_counts=_frozen({

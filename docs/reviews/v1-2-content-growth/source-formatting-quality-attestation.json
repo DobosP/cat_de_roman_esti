@@ -1,0 +1,36 @@
+{
+  "schema": "v1-2-source-formatting-quality-attestation-v1",
+  "role": "quality",
+  "reviewer": "/root/graph_quality",
+  "checked_on": "2026-10-05",
+  "original_applied_source": {
+    "path": "docs/reviews/v1-2-content-growth/synonym_graph_v1_2_data-r2-applied.py.txt",
+    "sha256": "a982934526bc132e089d6012cd1d8254952bc99791d9f8c14e889d773c21a247"
+  },
+  "formatted_source": {
+    "path": "scripts/synonym_graph_v1_2_data.py",
+    "sha256": "03c34a9d54c8e602d99777be5981bab8d50db5fc99b320ae342cd05f733efd1c"
+  },
+  "proposal_sha256": "2aabb5e017fda46910f354a6bbce0c39dfdda8a5de215dce18bbeabc67683111",
+  "ast_comparison": {
+    "method": "ast.parse then ast.dump with include_attributes=False; independently computed from both saved source files.",
+    "equal": true,
+    "sha256": "e237ba5a51185b34d5ded86f2950bb378a74f79238b48a975209e32d6a71d30b"
+  },
+  "semantic_checks": {
+    "synonym_families": 4,
+    "accepted_forms": 22,
+    "relations": 1,
+    "new_nodes": 0,
+    "new_rounds": 0,
+    "exact_proposal_match": true
+  },
+  "prior_quality_review": {
+    "path": "docs/reviews/v1-2-content-growth/graph-quality-review.json",
+    "sha256": "508f457f2dd6b6b95e503044dc4499cd664c99590585d4dd5f838cf467a1acc7",
+    "judgment": "accept_graph_proposal_for_integration",
+    "unchanged": true
+  },
+  "verdict": "accept_formatting_only",
+  "rationale": "Independent byte-pin, AST and literal-value checks confirm the entire module has the same semantics as the exact R2 source that was applied. The only changes wrap the two overlong ascensor/prăvălie tuple lines and add harmless trailing commas. All 22 aliases, the single bidirectional pedestrian-path synonym edge, empty node/round identities and the proposal match remain exact. The prior independent content quality judgments stand unchanged and their archived source/reviews are preserved. This authoring-module formatting is outside the native runtime hash inventory; the three fresh installed audit acceptances remain bound to their checked runtime/source bytes."
+}

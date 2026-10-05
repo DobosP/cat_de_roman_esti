@@ -32,6 +32,81 @@ _V1_AFTER = {
 }
 
 
+_V1_2_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-2-content-growth/artifact-delta.json"
+)
+_V1_2_RECEIPT_SHA256 = "1a5dc1eb4c8b60742a0981baea93a628c819bda790e235e0288e5a297f37adee"
+# Independently checked against git 6deab61 and the supported V1.2 writes.
+# These pins stay separate from both the receipt and mutable current-content pins.
+_V1_2_BASELINE = {
+    "kg_sample.json": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "board_rankings_v37.json": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc",
+    "derived_catalog_v38.json": "bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4",
+    "cat_mobile_app_pack_contract.json": (
+        "82304733284ca62245e0d2ac0abb7b81c991ed1857ca904c990116c5bce280b4"
+    ),
+}
+_V1_2_AFTER = {
+    "kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "board_rankings_v37.json": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+    "derived_catalog_v38.json": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+    "cat_mobile_app_pack_contract.json": (
+        "8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438"
+    ),
+}
+_V1_2_REVIEW_BINDINGS = {
+    "graph_proposal_sha256": "2aabb5e017fda46910f354a6bbce0c39dfdda8a5de215dce18bbeabc67683111",
+    "graph_factual_sha256": "96ced04cb238ed93d8f2ee1140d41c530125723a957d3b7ecabdb3c74a43cf94",
+    "graph_quality_sha256": "508f457f2dd6b6b95e503044dc4499cd664c99590585d4dd5f838cf467a1acc7",
+}
+_V1_2_TABLES = {
+    "kg_sample.json": {"kg_nodes", "kg_edges", "kg_puzzles"},
+    "games_pack.json": {"conexiuni", "contexto", "lant", "alchimie"},
+    "board_rankings_v37.json": {"boards"},
+    "derived_catalog_v38.json": {"boards"},
+    "cat_mobile_app_pack_contract.json": {"kg_nodes", "kg_edges", "kg_puzzles"},
+}
+_V1_2_ALIASES = {
+    "n_v4via_lift": (
+        "ascensor", "ascensorul", "ascensoare", "ascensoarele", "ascensorului", "ascensoarelor",
+    ),
+    "n_v4gas_rosie": ("tomată", "tomate", "tomatele", "tomatei", "tomatelor"),
+    "n_vioara": ("scripcă", "scripci", "scripcile", "scripcii", "scripcilor"),
+    "n_v4soc_magazin": (
+        "prăvălie", "prăvălia", "prăvălii", "prăvăliile", "prăvăliei", "prăvăliilor",
+    ),
+}
+_V1_2_PATH_IDS = {"n_v4geo_carare", "n_v4geo_poteca"}
+_V1_2_NEW_EDGE = {
+    "id": "de8800", "src_id": "n_v4geo_carare", "dst_id": "n_v4geo_poteca",
+    "relation": "synonym_of", "label_ro": "sinonime pentru un drum îngust de mers pe jos",
+    "strength": 0.95, "is_distractor": 0, "bidirectional": 1,
+}
+# Native rendering sorted dictionary keys without changing any ranked/derived row.
+# Restore only the finite baseline orders independently inventoried from git 6deab61.
+_V1_2_KEY_ORDERS = {
+    "board_rankings_v37.json": {
+        "": (("meta", "boards"),),
+        "/boards/*": ((
+            "id", "game", "status", "romanian_familiarity", "play_quality",
+            "pilot_score", "rank", "pilot_eligible", "selection_weight",
+        ),),
+    },
+    "derived_catalog_v38.json": {
+        "": (("meta", "boards"),),
+        "/boards/*": ((
+            "id", "game", "source_id", "category", "difficulty", "romanian_familiarity",
+            "play_quality", "standard_score", "starter_score", "starter_eligible",
+            "standard_rank", "starter_rank", "payload",
+        ),),
+        "/boards/*/payload": (("members", "intruder", "group_label"), ("pairs",)),
+        "/boards/*/payload/pairs/*": (("members", "group_label"),),
+    },
+}
+
+
 _RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v80-clatite-target/artifact-delta.json"
 )
@@ -388,8 +463,11 @@ def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) ->
     return restored
 
 
-def _reverse_bound_delta(current: dict, filename: str, receipt_path: Path) -> dict:
-    """Check complete canonical artifact bytes on both sides of an exact delta."""
+def _reverse_bound_delta(
+    current: dict, filename: str, receipt_path: Path, *,
+    baseline_key_orders: dict[str, tuple[tuple[str, ...], ...]] | None = None,
+) -> dict:
+    """Check full bytes; optionally restore independently fixed dictionary orders."""
     receipt = json.loads(receipt_path.read_bytes())["files"][filename]
     indent = 2 if filename == "kg_sample.json" else 1
 
@@ -399,6 +477,28 @@ def _reverse_bound_delta(current: dict, filename: str, receipt_path: Path) -> di
 
     assert digest(current) == receipt["after_sha256"]
     restored = _reverse_reviewed_delta(current, filename, receipt_path)
+    if baseline_key_orders is not None:
+        for orders in baseline_key_orders.values():
+            assert orders and all(len(order) == len(set(order)) for order in orders)
+            assert len({frozenset(order) for order in orders}) == len(orders)
+        visited: set[str] = set()
+
+        def reorder(value, path: str):
+            if isinstance(value, dict):
+                keys = tuple(value)
+                if path in baseline_key_orders:
+                    matching = [order for order in baseline_key_orders[path]
+                                if set(order) == set(value)]
+                    assert len(matching) == 1
+                    keys = matching[0]
+                    visited.add(path)
+                return {key: reorder(value[key], path + "/" + key) for key in keys}
+            if isinstance(value, list):
+                return [reorder(row, path + "/*") for row in value]
+            return value
+
+        restored = reorder(restored, "")
+        assert visited == set(baseline_key_orders)
     assert digest(restored) == receipt["baseline_sha256"]
     return restored
 
@@ -616,8 +716,108 @@ def before_v96_artifact(current: dict, filename: str) -> dict:
     return _reverse_bound_delta(current, filename, _V96_RECEIPT)
 
 
+
+def before_v1_2_artifact(current: dict, filename: str) -> dict:
+    """Peel only the exact reviewed V1.2 graph and serialization transition."""
+    blob = _V1_2_RECEIPT.read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == _V1_2_RECEIPT_SHA256
+    receipt = json.loads(blob)
+    assert set(receipt) == {
+        "schema_version", "baseline_commit", "scope", "review_bindings", "generator", "files",
+    }
+    assert receipt["schema_version"] == 1
+    assert receipt["scope"] == (
+        "V1.2 exact graph/metadata inverse; no historic receipt or hash modified"
+    )
+    assert receipt["generator"] == (
+        "Root exact before/after row delta from git baseline/current supported writes"
+    )
+    assert receipt["baseline_commit"] == "6deab61c20067c66f0b6120b2b09f44a580526d6"
+    assert receipt["review_bindings"] == _V1_2_REVIEW_BINDINGS
+    files = receipt["files"]
+    assert set(files) == set(_V1_2_BASELINE) == set(_V1_2_AFTER)
+    assert filename in files
+
+    def changed_fields(before: dict, after: dict) -> set[str]:
+        assert set(before) == set(after)
+        return {key for key in before if before[key] != after[key]}
+
+    for name, artifact in files.items():
+        assert set(artifact) == {
+            "baseline_sha256", "after_sha256", "head_before", "head_after", "tables",
+        }
+        assert artifact["baseline_sha256"] == _V1_2_BASELINE[name]
+        assert artifact["after_sha256"] == _V1_2_AFTER[name]
+        assert set(artifact["tables"]) == _V1_2_TABLES[name]
+        before, after = artifact["head_before"], artifact["head_after"]
+        assert set(before) == set(after) == (
+            {"contract", "manifest"} if name.startswith("cat_mobile") else {"meta"}
+        )
+        if name == "games_pack.json":
+            assert before == after
+        elif name.startswith("cat_mobile"):
+            assert before["contract"] == after["contract"]
+            first, last = before["manifest"], after["manifest"]
+            assert changed_fields(first, last) == {"build_version", "content_hash", "counts"}
+            assert first["content_hash"] == (
+                "sha256:b673caa14e7b6635fb8d7f283c2e0a4f8dbb9667450746ce9cdf0081dc8fd310"
+            )
+            assert last["content_hash"] == (
+                "sha256:16634bb35bfc4c629815792181dc26e917a02d75fe9fb5aa1e27f8c576f55e35"
+            )
+        else:
+            first, last = before["meta"], after["meta"]
+            expected = {
+                "kg_sample.json": {"build_version", "note", "counts"},
+                "board_rankings_v37.json": {"kg_sha256"},
+                "derived_catalog_v38.json": {"kg_sha256", "v37_rankings_sha256"},
+            }[name]
+            assert changed_fields(first, last) == expected
+            if name != "kg_sample.json":
+                assert first["kg_sha256"] == _V1_2_BASELINE["kg_sample.json"]
+                assert last["kg_sha256"] == _V1_2_AFTER["kg_sample.json"]
+            if name == "derived_catalog_v38.json":
+                assert first["v37_rankings_sha256"] == _V1_2_BASELINE["board_rankings_v37.json"]
+                assert last["v37_rankings_sha256"] == _V1_2_AFTER["board_rankings_v37.json"]
+        if name in {"kg_sample.json", "cat_mobile_app_pack_contract.json"}:
+            assert first["build_version"] == "fixture-v1-reviewed-content"
+            assert last["build_version"] == "fixture-v1-2-reviewed-content"
+            assert first["counts"]["edges"] == 9458
+            assert last["counts"] == {**first["counts"], "edges": 9459}
+        for table, changes in artifact["tables"].items():
+            assert set(changes) == {"added", "removed", "changed", "baseline_order"}
+            assert not changes["removed"] and changes["baseline_order"] is None
+            if name == "kg_sample.json" and table == "kg_nodes":
+                assert not changes["added"]
+                assert set(changes["changed"]) == set(_V1_2_ALIASES) | _V1_2_PATH_IDS
+                for node_id, change in changes["changed"].items():
+                    assert set(change) == {"before", "after"}
+                    first, last = change["before"], change["after"]
+                    assert first["id"] == last["id"] == node_id
+                    if node_id in _V1_2_ALIASES:
+                        assert changed_fields(first, last) == {"aliases"}
+                        assert last["aliases"] == [*first["aliases"], *_V1_2_ALIASES[node_id]]
+                    else:
+                        assert changed_fields(first, last) == {"degree"}
+                        assert first["degree"] == 3 and last["degree"] == 4
+            elif name in {"kg_sample.json", "cat_mobile_app_pack_contract.json"} and (
+                table == "kg_edges"
+            ):
+                expected = _V1_2_NEW_EDGE if name == "kg_sample.json" else {
+                    key: _V1_2_NEW_EDGE[key] for key in ("id", "src_id", "dst_id")
+                }
+                assert changes["added"] == [expected] and not changes["changed"]
+            else:
+                assert not changes["added"] and not changes["changed"]
+    return _reverse_bound_delta(
+        current, filename, _V1_2_RECEIPT,
+        baseline_key_orders=_V1_2_KEY_ORDERS.get(filename),
+    )
+
+
 def before_v1_artifact(current: dict, filename: str) -> dict:
-    """Reconstruct exact cc0a6a4 bytes using only the reviewed, pinned V1 delta."""
+    """Peel V1.2, then reconstruct cc0a6a4 through the original pinned V1 delta."""
+    current = before_v1_2_artifact(current, filename)
     blob = _V1_RECEIPT.read_bytes()
     assert hashlib.sha256(blob).hexdigest() == _V1_RECEIPT_SHA256
     receipt = json.loads(blob)

@@ -1,0 +1,130 @@
+{
+  "capture_receipt_path": "docs/reviews/v1-2-content-growth/reference/contexto-vector-capture.json",
+  "capture_receipt_sha256": "c50f73213a6eb8b57f102508353aeab19056f3f54470a3e303bc6ad552d13fb8",
+  "checked_on": "2026-10-05",
+  "checks": {
+    "action_count": 1139,
+    "all_action_requests_inputs_confirmation_shapes_and_statuses_exact": true,
+    "all_other_scalar_leaves_exact": true,
+    "all_response_keysets_types_and_array_lengths_exact": true,
+    "changed_action_indices": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "changed_scalar_leaves": 15,
+    "changed_sequence": 24,
+    "create_fields_all_exact": true,
+    "hidden_answer_and_unrevealed_target_fields_unchanged": true,
+    "old_vectors_preserved_losslessly": true,
+    "sequences": 60,
+    "unchanged_sequences": 59
+  },
+  "current_kg_sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+  "current_vector_path": "go-backend/internal/contexto/testdata/python_games.json",
+  "current_vector_sha256": "d8d02cc30806b1d475efdab0d8130f92bb9ee688b3fe12aecec50362e0f72284",
+  "exact_deltas": [
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/6/body/guess/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/6/body/guesses/1/rank"
+    },
+    {
+      "new": "Mai rece cu 544 locuri.",
+      "old": "Mai rece cu 543 locuri.",
+      "path": "/actions/6/body/feedback/message"
+    },
+    {
+      "new": -544,
+      "old": -543,
+      "path": "/actions/6/body/feedback/rank_delta"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/7/body/guesses/2/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/8/body/guesses/2/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/9/body/guess/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/9/body/guesses/2/rank"
+    },
+    {
+      "new": "Deja încercat — rămâne #1291.",
+      "old": "Deja încercat — rămâne #1290.",
+      "path": "/actions/9/body/feedback/message"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/10/body/guesses/2/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/11/body/guesses/2/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/12/body/guesses/2/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/13/body/guesses/2/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/14/body/guesses/3/rank"
+    },
+    {
+      "new": 1291,
+      "old": 1290,
+      "path": "/actions/15/body/guesses/3/rank"
+    }
+  ],
+  "generator_exact_git_baseline": true,
+  "generator_path": "go-backend/internal/contexto/testdata/generate_games.py",
+  "generator_sha256": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513",
+  "historical_archive_path": "docs/reviews/v1-2-content-growth/reference/historical-contexto-game-vectors.json.gz",
+  "historical_archive_sha256": "d1fd40e44407e56ed2d4e6919e46cac29fa50a853c4dbc285c075c99f09a861b",
+  "historical_bytes_exact_git_baseline": true,
+  "historical_decompressed_sha256": "02167b4c236aa98b7efe738469617810a758983162730d0ad93826120f62f003",
+  "independent_recapture": {
+    "exact_current_vector_bytes": true,
+    "executed": true,
+    "generated_raw_sha256": "d8d02cc30806b1d475efdab0d8130f92bb9ee688b3fe12aecec50362e0f72284",
+    "method": "Run the unchanged generator with runpy.run_path under a non-main name, then call generate(contexto) in memory using the shared Python3.12 offline reference interpreter, current task KG, Django TestClient, account/submission flags off and bytecode writing disabled. The generator main file-writing block was not invoked.",
+    "sequences": 60
+  },
+  "kind": "contexto-vector-independent-review-v1",
+  "rationale": "Independently inspected every old/new sequence and action. Only the normal difficulty, seed 1, empty-category/non-daily sequence at index 24 changes. Its ten affected response bodies carry one guess rank moving from 1290 to 1291 plus mechanically consistent rank-history and feedback derivatives. No request, creation state, status, body schema/type, hidden answer, target identity or unrelated response leaf changes. The historical gzip decompresses byte-for-byte to the original Git baseline, and the generator itself is byte-identical to that baseline. An independent full in-memory Django capture reproduced the complete current vector file exactly, so expectations were not derived from native outputs or manually patched rank fields. This accepts the bounded test-vector refresh reflecting the reviewed graph ripple. It does not lower an assertion, waive native tests, rewrite historical evidence, approve source/runtime changes or replace the final assembled-code/source review. The parent-reported focused native race run is separate; this reviewer independently recaptured Django but did not rerun that native command.",
+  "reviewer": "/root/toolchain",
+  "role": "factual",
+  "valid_until": "Current KG, reference generator, vectors or reviewed graph impact changes; then capture and review again.",
+  "verdict": "accept"
+}

@@ -1,0 +1,31 @@
+"""V1.2 graph proposal. Apply only after exact independent reviews.
+
+The supported graph transaction owns fixture writes; selection does not grant approval.
+"""
+from basic_words_v33_data import BEGINNER_BENCHMARK as BEGINNER_BENCHMARK
+from contexto_common_words_v72_data import DEFERRED_AMBIGUOUS_TERMS as DEFERRED_AMBIGUOUS_TERMS
+
+BUILD_VERSION = "fixture-v1-2-reviewed-content"
+NOTE = "V1.2: four reviewed synonym families (22 forms), one pedestrian-path synonym link."
+GAME_ITEM_IDS = ()
+NEW_NODE_IDS = ()
+INTUITIVE_PAIRS = (("n_v4geo_carare", "n_v4geo_poteca"),)
+ALIASES = {
+    "n_v4via_lift": (
+        "ascensor", "ascensorul", "ascensoare", "ascensoarele", "ascensorului", "ascensoarelor",
+    ),
+    "n_v4gas_rosie": ("tomată", "tomate", "tomatele", "tomatei", "tomatelor"),
+    "n_vioara": ("scripcă", "scripci", "scripcile", "scripcii", "scripcilor"),
+    "n_v4soc_magazin": (
+        "prăvălie", "prăvălia", "prăvălii", "prăvăliile", "prăvăliei", "prăvăliilor",
+    ),
+}
+EDGES = ({
+    "src": "n_v4geo_carare", "dst": "n_v4geo_poteca", "relation": "synonym_of",
+    "label_ro": "sinonime pentru un drum îngust de mers pe jos", "strength": 0.95,
+    "is_distractor": 0, "bidirectional": 1,
+},)
+
+
+def build_nodes_and_edges():
+    return {"nodes": (), "edges": EDGES, "aliases": ALIASES}

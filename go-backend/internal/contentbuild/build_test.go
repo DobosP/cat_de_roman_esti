@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden"
 	"math"
 	"os"
 	"path/filepath"
@@ -40,7 +41,7 @@ func clone(t *testing.T, m map[string]any) map[string]any {
 	}
 	return r
 }
-func TestRebuildFrozenBundleAndPin(t *testing.T) {
+func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 	root := repoRoot(t)
 	b, e := Build(root)
 	if e != nil {
@@ -53,8 +54,8 @@ func TestRebuildFrozenBundleAndPin(t *testing.T) {
 	if !bytes.Equal(b, old) {
 		t.Fatalf("native source rebuild differs: %s vs %s", SHA256(b), SHA256(old))
 	}
-	if SHA256(b) != "f2f8a629f3366a8da6984f608d01dd2ef2354f6de857f0db8b1268047fb6de88" {
-		t.Fatal("independently frozen release digest drift")
+	if SHA256(b) != "d98280f0178e13f0d6ec8fd92813c4057f6408a0e3215ec61a0dbb70f9dd3313" {
+		t.Fatal("independently reviewed current release digest drift")
 	}
 	pin, e := os.ReadFile(filepath.Join(root, "go-backend/internal/content/digest.go"))
 	if e != nil {
@@ -67,8 +68,8 @@ func TestRebuildFrozenBundleAndPin(t *testing.T) {
 	if e != nil {
 		t.Fatal(e)
 	}
-	if len(array(m["nodes"])) != 2416 || len(array(m["edges"])) != 9458 || len(array(m["pack_items"])) != 709 || len(array(m["boards"])) != 418 {
-		t.Fatal("frozen source inventories differ")
+	if len(array(m["nodes"])) != 2416 || len(array(m["edges"])) != 9459 || len(array(m["pack_items"])) != 709 || len(array(m["boards"])) != 418 {
+		t.Fatal("current reviewed source inventories differ")
 	}
 	world := object(m["discovery_world"])
 	if len(array(world["concepts"])) != 251 || len(array(world["recipes"])) != 351 || len(array(world["compatible_versions"])) != 9 {
@@ -85,6 +86,38 @@ func TestRebuildFrozenBundleAndPin(t *testing.T) {
 		if object(m["sources"])[name] != TextSHA256(raw) {
 			t.Fatalf("source digest differs: %s", name)
 		}
+	}
+}
+
+func TestInitialNativeMigrationReleaseHasPreservedArchiveEvidence(t *testing.T) {
+	// Initial migration evidence belongs to its immutable dated review and
+	// independent HTTP vectors; current content is rebuilt separately above.
+	const initialExport = "f2f8a629f3366a8da6984f608d01dd2ef2354f6de857f0db8b1268047fb6de88"
+	review, err := os.ReadFile(filepath.Join(repoRoot(t), "docs/reviews/go-native-toolchain/README.md"))
+	if err != nil || !bytes.Contains(review, []byte(initialExport)) || !bytes.Contains(review, []byte("ae70c16935d402719b95405685bccbbbea13a3bd")) {
+		t.Fatal("initial migration release/archive claim was lost", err)
+	}
+	corpus, err := httpgolden.Frozen()
+	if err != nil || len(corpus.Cases) != 1207 || len(corpus.Sources) != 8 || corpus.Sources["kg_sample.json"] != "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64" {
+		t.Fatal("initial independent content/source corpus drifted", err)
+	}
+	found := false
+	for _, row := range corpus.Cases {
+		if row.Request.Path != "/api/manifest" || row.Status != 200 {
+			continue
+		}
+		body, ok := row.Body.(map[string]any)
+		if !ok {
+			t.Fatal("initial manifest evidence lost")
+		}
+		counts := object(body["counts"])
+		if number(counts["nodes"]) != 2416 || number(counts["edges"]) != 9458 || number(counts["puzzles"]) != 180 {
+			t.Fatal("historical manifest expectations changed")
+		}
+		found = true
+	}
+	if !found {
+		t.Fatal("initial manifest vector not preserved")
 	}
 }
 func TestPinnedUnicodeAndCanonicalEncoding(t *testing.T) {

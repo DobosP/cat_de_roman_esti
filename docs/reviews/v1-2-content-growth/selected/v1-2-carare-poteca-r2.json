@@ -1,0 +1,81 @@
+{
+  "id": "v1-2-carare-poteca",
+  "revision": 2,
+  "state": "selected_for_refinement",
+  "origin_track": "discovery",
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "checked_on": "2026-10-05",
+  "label_ro": "Cărare ↔ Potecă",
+  "sense": "Drum îngust pentru mers pe jos; sensurile existente, fără cărarea din păr.",
+  "category": "geografie",
+  "novelty": {
+    "kind": "new_relation",
+    "existing_ids": [
+      "n_v4geo_carare",
+      "n_v4geo_poteca"
+    ]
+  },
+  "identity_checks": {
+    "distinct_existing_nodes": true,
+    "direct_pair_in_baseline": false,
+    "node_merge": false
+  },
+  "player_benefit": "One legible direct hop between familiar pedestrian-path words, preserving their historical identities.",
+  "games": [
+    "lant",
+    "contexto"
+  ],
+  "claims": [
+    {
+      "subject": "Cărare",
+      "predicate": "synonym_of_in_path_sense",
+      "object": "Potecă",
+      "direction": "bidirectional",
+      "evidence_state": "supported",
+      "sources": [
+        "https://dexonline.ro/definitie/potec%C4%83",
+        "https://dexonline.ro/definitie/c%C4%83rare"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://dexonline.ro/definitie/potec%C4%83",
+      "accessed_on": "2026-10-05",
+      "notes": "Existing graph senses are the pedestrian path sense; no claim about the hair-part sense."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/c%C4%83rare",
+      "accessed_on": "2026-10-05",
+      "notes": "Existing graph senses are the pedestrian path sense; no claim about the hair-part sense."
+    }
+  ],
+  "recognition": {
+    "difficulty": "ordinary geography vocabulary",
+    "human_playtest": "unrun"
+  },
+  "play_sketches": [
+    "Cărare → Potecă and reverse; other historical legal routes stay valid."
+  ],
+  "risks": [
+    "Topology can alter ranks/routes and requires measured impact."
+  ],
+  "dependencies": [
+    "Native versioned authority adoption",
+    "Fresh downstream source bindings"
+  ],
+  "decision": "Selected for exact independent review; not installed.",
+  "next_action": "Review exact proposal; test all affected graph/game behavior.",
+  "history": [
+    {
+      "date": "2026-10-05",
+      "actor": "root-integrator",
+      "action": "selected existing-node relation"
+    },
+    {
+      "date": "2026-10-05",
+      "actor": "root-integrator",
+      "action": "Revised exact proposal after supported dry-run/quality findings; fresh reviews required."
+    }
+  ]
+}

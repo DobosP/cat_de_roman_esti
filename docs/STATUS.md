@@ -1,15 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-05 — native toolchain qualified locally; production remains anonymous V1.0.1.
+Last verified: 2026-10-06 — V1.2 local gates GREEN; final review/landing pending; production anonymous V1.0.1.
 
-- **GitHub Actions:** owner manual policy [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05.
-  Required Go/Node gates run on dispatch; reference inputs defaultfalse. No hosted run occurred.
+- **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
 ## Current state
 
-- The owner requested internal V100 as a testing release named **V1** for mixed ages on
-  phones and desktop. Package **1.0.1** (lobby badge **V1.0.1**) hardens the V1 1.0.0
-  release `2ba8a8b` after an independent review; decision [ADR-0159](adr/0159-v1-0-1-testing-hardening.md).
+- Package **1.0.1** (lobby **V1.0.1**) hardens owner-requested mixed-age V1 on phones/desktop;
+  independent review/decision [ADR-0159](adr/0159-v1-0-1-testing-hardening.md).
 - 1.0.1: a 0-point loss is never a record; circuit daily intent is single-use (one resume
   notice; Intrusul/Perechi results offer the pending daily); Conexiuni/Intrusul/Perechi
   boards step 4/2/1 columns only; Lanț stacks its route on phones and Alchimie keeps long
@@ -19,20 +17,23 @@ Last verified: 2026-10-05 — native toolchain qualified locally; production rem
   loads at startup and reserve drift returns the game's JSON 503; `/` revalidates on
   every load; `/api/health` reports `version`. Quick-game tiles are display-capitalised
   (reviewed lowercase allowlist); server copy has diacritics and correct plurals.
-- Three reviewed captions explain the held Ghiozdan→Capra cu trei iezi board. Fresh
-  independent analyst/verifier gates promote that single board; both natural routes win.
-  All 117 earlier captions remain exact; 120 caption entries now have reviewed text.
+- Ghiozdan→Capra cu trei iezi has independently reviewed captions/approval; both natural routes win.
+  All 120 reviewed caption entries remain exact.
 - A finite reviewed reserve excludes 20 pack rounds and three quick boards from new
   bundled selection. Archived records remain unchanged. Custom development overrides
   retain their previous unranked compatibility scope under ADR-0158.
-- Reconsideration retains all 256 historical rejections and seven other pending boards.
-  The V99 pool remains 12 research proposals (eight researched/four held), none installed;
-  the three V98 recipe continuation ideas remain research. Quality gates were not lowered.
-- The repository [content skill](../.agents/skills/romanian-game-content/SKILL.md) retains
-  conservative refinement and experimental discovery as separate tracks.
+- All 256 historical rejections/seven pending boards, V99 twelve research proposals
+  (eight researched/four held) and V98 three recipe ideas retain their prior state.
+- [Content skill](../.agents/skills/romanian-game-content/SKILL.md): refinement/discovery with independent gates.
 - Decision/evidence: [ADR-0158](adr/0158-v1-testing-release.md),
-  [release review](reviews/v1-testing-release/README.md), [ADR-0159](adr/0159-v1-0-1-testing-hardening.md),
-  [Romanian tester guide](TESTARE_V1.md) (now with a same-Wi-Fi phone setup and known limits).
+  [release review](reviews/v1-testing-release/README.md), [Romanian tester guide](TESTARE_V1.md).
+- **V1.2 active:** four reviewed synonym families (ascensor, tomată, scripcă, prăvălie),
+  22 distinct forms and Cărare↔Potecă; zero new concepts/curated rounds. Old records,
+  recipe cores/histories/pools persist. [Review](reviews/v1-2-content-growth/README.md),
+  [ADR-0170](adr/0170-v1-2-reviewed-content-growth.md), [pool](content-pool/v1-2-synonyms-and-links/pool.json).
+- Native current authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
+  independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
+  Full native/shared race/vet,smoke151/assets28/docs GREEN; assembled review/landing pending. V1.x loop every30min.
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | New-round pool |
@@ -46,7 +47,7 @@ Last verified: 2026-10-05 — native toolchain qualified locally; production rem
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-KG: `fixture-v1-reviewed-content`, 2416 nodes/9458 links/8641 forms/180 puzzles.
+KG: `fixture-v1-2-reviewed-content`, 2416 nodes/9459 links/8663 forms/180 puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration remains **251 concepts/351 recipes/147 discoveries**, 96 supplies, 12 tiers,
@@ -57,16 +58,16 @@ sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 bo
 Unrevealed answers, recipe maps and routes stay private.
 ## Current artifact pins
 
-- alchimie_discovery_world_v92.json: `0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44`
-- alchimie_recipe_extensions_v92.json: `c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661`
-- quick_games_v92.json: `85c89ec82d27a19ba619604ed3c47b09e3bb18e1718343db6d56c03b0999761c`
+- alchimie_discovery_world_v92.json: `4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3`
+- alchimie_recipe_extensions_v92.json: `9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3`
+- quick_games_v92.json: `cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc`
-- derived_catalog_v38.json: `bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4`
+- board_rankings_v37.json: `96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806`
+- derived_catalog_v38.json: `1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64`
-- cat_mobile_app_pack_contract.json: `82304733284ca62245e0d2ac0abb7b81c991ed1857ca904c990116c5bce280b4`
+- kg_sample.json: `c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85`
+- cat_mobile_app_pack_contract.json: `8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -101,13 +102,12 @@ Unrevealed answers, recipe maps and routes stay private.
 - UID10001/read-only, healthy/zero restarts; fixedPCRE2 and zero fixableHIGH/CRITICAL image gate.
   Caddy/certificates/volumes preserved; previousGo+Python rollback profiles retained.
   [Complete rollout proof](reviews/go-completion/README.md). No provider/minor activation.
-- Native source/tooling stage [ADR-0165](adr/0165-native-source-build-and-qualification.md):
-  eight-source export,180 terminal paths,32 body/1009prefix/1207HTTP/smoke151/28asset proofs pass;
-  REST/mobile/docs/operator/builder race/vet, tagged input and neutral release coupling pass; unique capture source archived.
+- Native source/tooling [ADR-0165](adr/0165-native-source-build-and-qualification.md): eight-source export,
+  terminal180/body32/prefix1009/HTTP1207/smoke151/assets28 and operator/race/vet proofs pass; capture archived.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
-  [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): Go/PG/Node242/browser622 and independent reviews GREEN.
-- Next: same-Wi-Fi phone/desktop testing, iPhone (Safari/WebKit untested), Android and enlarged text.
+  [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
+- Next: finish V1.2 local landing, then V1.3; phone/iPhone/Android/enlarged-text human testing remains.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0168), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0170), reviews/WORKLOG: history.

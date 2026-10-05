@@ -32,6 +32,7 @@ func run() error {
 	finalFactual := f.String("final-factual-review", "", "final factual acceptance")
 	finalQuality := f.String("final-quality-review", "", "final quality acceptance")
 	pin := f.String("expected-sha256", "", "explicit reviewed output artifact pin for installation")
+	installedOut := f.String("installed-authority-out", "", "build draft installed-authority entry from current independently reviewed installed artifact; never write manifest or pin")
 	if err := f.Parse(os.Args[2:]); err != nil {
 		return err
 	}
@@ -41,6 +42,26 @@ func run() error {
 	s, err := contentrails.LoadSource(*source)
 	if err != nil {
 		return err
+	}
+	if *installedOut != "" {
+		if *write || *check || *candidateOut != "" || *auditCatalog != "" || rail == "all" || rail == "reserve" || *source == "" || *candidate == "" || *factual == "" || *quality == "" || *proposal == "" || *finalAudit == "" || *finalFactual == "" || *finalQuality == "" || *pin == "" {
+			return fmt.Errorf("installed-authority output requires supported rail, exact source/candidate/reviews/proposal/current audit/final reviews/artifact SHA and a separate output action")
+		}
+		if err = contentrails.ProtectedOutput(*root, *installedOut, *source, *candidate, *factual, *quality, *proposal, *finalAudit, *finalFactual, *finalQuality); err != nil {
+			return err
+		}
+		entry, err := contentrails.BuildInstalledAuthorityEntry(*root, s, rail, *candidate, *factual, *quality, *proposal, *finalAudit, *finalFactual, *finalQuality, *pin)
+		if err != nil {
+			return err
+		}
+		blob, err := contentrails.Render(entry)
+		if err != nil {
+			return err
+		}
+		if err = contentrails.WriteOutputs([]string{*installedOut}, blob); err != nil {
+			return err
+		}
+		return json.NewEncoder(os.Stdout).Encode(map[string]any{"ok": true, "mode": "installed-authority-draft", "rail": rail, "native_source_sha256": s.SHA256, "native_source_version": s.Version, "artifact_sha256": *pin})
 	}
 	if rail == "all" {
 		if !*check || *write || *candidateOut != "" || *candidate != "" || *auditCatalog != "" {

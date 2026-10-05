@@ -20,7 +20,11 @@ import (
 //go:embed testdata/python-http-parity.json.gz
 var frozen []byte
 
+//go:embed testdata/python-http-parity-v1-2.json.gz
+var frozenV12 []byte
+
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
+const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"
 const MaxCorpusBytes = 32 * 1024 * 1024
 const MaxCases = 4096
 
@@ -93,6 +97,37 @@ func Frozen() (*Corpus, error) {
 		return nil, fmt.Errorf("expected 1207 independent HTTP cases")
 	}
 	return c, err
+}
+
+func reviewedV12() (*Corpus, error) {
+	if fmt.Sprintf("%x", sha256.Sum256(frozenV12)) != V12SHA256 {
+		return nil, fmt.Errorf("independent V1.2 HTTP corpus digest drift")
+	}
+	c, err := ReadCorpus(bytes.NewReader(frozenV12), true)
+	if err == nil && len(c.Cases) != 1207 {
+		return nil, fmt.Errorf("expected 1207 independent V1.2 HTTP cases")
+	}
+	return c, err
+}
+
+// ForSources selects an independently captured reviewed corpus only when its
+// entire source identity equals the requested export. Historical Frozen remains
+// immutable; unknown, partial or mixed source sets never gain expected responses.
+func ForSources(sources map[string]string) (*Corpus, error) {
+	original, err := Frozen()
+	if err != nil {
+		return nil, err
+	}
+	current, err := reviewedV12()
+	if err != nil {
+		return nil, err
+	}
+	for _, c := range []*Corpus{original, current} {
+		if reflect.DeepEqual(c.Sources, sources) {
+			return c, nil
+		}
+	}
+	return nil, fmt.Errorf("no independently reviewed HTTP corpus matches exact source digests")
 }
 func replace(text string, aliases map[string]string) string {
 	keys := []string{}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-05",
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "native_source_validation": {
+    "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+    "exit_code": 0,
+    "result": "Native sources GREEN"
+  },
+  "baseline_rails": {
+    "ok": true,
+    "rails": [
+      {
+        "rail": "quick",
+        "ok": true,
+        "rebuilt_sha256": "85c89ec82d27a19ba619604ed3c47b09e3bb18e1718343db6d56c03b0999761c",
+        "artifact_sha256": "85c89ec82d27a19ba619604ed3c47b09e3bb18e1718343db6d56c03b0999761c",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6"
+      },
+      {
+        "rail": "world",
+        "ok": true,
+        "rebuilt_sha256": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+        "artifact_sha256": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6"
+      },
+      {
+        "rail": "extensions",
+        "ok": true,
+        "rebuilt_sha256": "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661",
+        "artifact_sha256": "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6"
+      },
+      {
+        "rail": "reserve",
+        "ok": true,
+        "rebuilt_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "artifact_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6"
+      }
+    ]
+  },
+  "graph_preflight_r2": {
+    "command": "PYTHONPATH=. <reference-interpreter> scripts/apply_common_words_v24.py --data-module synonym_graph_v1_2_data --dry-run",
+    "exit_code": 0,
+    "result": "apply_common_words_v24[synonym_graph_v1_2_data]: preflight GREEN — 0 nodes, 1 edges, 324 beginner probes, 1 intuitive-link probes\napply_common_words_v24[synonym_graph_v1_2_data]: dry-run complete; no repository files changed\n"
+  },
+  "shipping_artifacts_equal_baseline": true,
+  "new_graph_installation": false
+}

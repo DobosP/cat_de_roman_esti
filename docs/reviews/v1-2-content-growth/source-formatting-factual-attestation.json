@@ -1,0 +1,25 @@
+{
+  "applied_module_path": "docs/reviews/v1-2-content-growth/synonym_graph_v1_2_data-r2-applied.py.txt",
+  "applied_module_sha256": "a982934526bc132e089d6012cd1d8254952bc99791d9f8c14e889d773c21a247",
+  "ast_exact": true,
+  "ast_sha256": "e237ba5a51185b34d5ded86f2950bb378a74f79238b48a975209e32d6a71d30b",
+  "checked_on": "2026-10-05",
+  "formatted_module_path": "scripts/synonym_graph_v1_2_data.py",
+  "formatted_module_sha256": "03c34a9d54c8e602d99777be5981bab8d50db5fc99b320ae342cd05f733efd1c",
+  "kind": "v1-2-source-formatting-factual-attestation-v1",
+  "prior_factual_review_path": "docs/reviews/v1-2-content-growth/graph-factual-review.json",
+  "prior_factual_review_sha256": "96ced04cb238ed93d8f2ee1140d41c530125723a957d3b7ecabdb3c74a43cf94",
+  "projection": {
+    "alias_families": 4,
+    "edges": 1,
+    "exact_forms": 22,
+    "new_nodes": 0,
+    "new_round_ids": 0
+  },
+  "proposal_sha256": "2aabb5e017fda46910f354a6bbce0c39dfdda8a5de215dce18bbeabc67683111",
+  "rationale": "Independently parsed and compared both complete Python modules with ast.dump(include_attributes=False); ASTs are exactly identical. Independently compared every alias tuple and all seven edge semantic fields with the exact frozen R2 proposal. All 22 forms, the one pedestrian-path synonym edge and empty new-node/new-game ID tuples are unchanged. The exact applied module bytes remain preserved at the archive path; current bytes differ solely in source formatting. The prior factual judgment remains bound to the original preserved applied bytes and is unchanged. This new attestation establishes the formatting equivalence; it neither rehashes that judgment nor grants new semantic, installation, source-data reuse, push or deployment approval.",
+  "reviewer": "/root/toolchain",
+  "role": "factual",
+  "valid_until": "Either module AST, frozen proposal or original factual judgment changes; then obtain a new independent judgment.",
+  "verdict": "accept"
+}

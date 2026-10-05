@@ -1,0 +1,376 @@
+{
+  "schema": "v1-2-independent-graph-quality-review-v1",
+  "reviewer": "/root/graph_quality",
+  "role": "independent refute-first graph lexical/gameplay quality reviewer",
+  "author_of_proposal": "root-integrator",
+  "decision": "accept_graph_proposal_for_integration",
+  "checked_on": "2026-10-05",
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "proposal_path": "docs/reviews/v1-2-content-growth/graph-proposal.json",
+  "graph_proposal_sha256": "2aabb5e017fda46910f354a6bbce0c39dfdda8a5de215dce18bbeabc67683111",
+  "candidate_path": "scripts/synonym_graph_v1_2_data.py",
+  "candidate_sha256": "a982934526bc132e089d6012cd1d8254952bc99791d9f8c14e889d773c21a247",
+  "raw_candidate_sha256": "a982934526bc132e089d6012cd1d8254952bc99791d9f8c14e889d773c21a247",
+  "proposal_revision": 2,
+  "candidate_matches_proposal": true,
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "counts": {
+    "new_shared_nodes": 0,
+    "stored_relations": 1,
+    "directed_non_distractor_arcs": 2,
+    "verified_synonym_alias_families": 4,
+    "new_stored_forms": 22,
+    "new_normalized_unique_keys": 22,
+    "new_curated_rounds": 0,
+    "new_target_approvals": 0
+  },
+  "lexical_judgments": [
+    {
+      "id": "lex-1",
+      "node_id": "n_v4via_lift",
+      "headword": "ascensor",
+      "exact_forms": [
+        "ascensor",
+        "ascensorul",
+        "ascensoare",
+        "ascensoarele",
+        "ascensorului",
+        "ascensoarelor"
+      ],
+      "decision": "accept",
+      "quality_reason": "The Romanian building-transport sense of ascensor names the existing lift object. Freight/platform variants broaden application of the same device, not a competing unqualified concept owner. These six correct inflections admit familiar optional typed guesses while keeping the current building description and node identity.",
+      "counterexample_result": "Foreign proper-name ascensors can denote funiculars; those are different-language proper names, not evidence that the reviewed Romanian noun means a funicular. No such compound is added.",
+      "recognition_sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ascensor",
+          "supports": "DEX09 synonym sense and orthographic paradigm; same entry preserves DLRLC/earlier recognition."
+        },
+        {
+          "url": "https://www.digi24.ro/regional/digi24-constanta/constanta-24-de-ani-fara-lift-sute-de-oameni-urca-opt-etaje-pe-scari-165803",
+          "supports": "Original 2014 Romanian report uses lift and ascensor for the same block transport object."
+        },
+        {
+          "url": "https://m.digi24.ro/digieconomic/financiar/primul-oras-care-pune-in-aplicare-programul-pentru-lifturi-in-blocurile-vechi-cine-are-prioritate-117009",
+          "supports": "Current 2026 Romanian report uses ascensor for lift installation in old apartment blocks; recognition signal, not policy advice."
+        }
+      ]
+    },
+    {
+      "id": "lex-2",
+      "node_id": "n_v4gas_rosie",
+      "headword": "tomată",
+      "exact_forms": [
+        "tomată",
+        "tomate",
+        "tomatele",
+        "tomatei",
+        "tomatelor"
+      ],
+      "decision": "accept",
+      "quality_reason": "Tomată is an established synonym for the existing edible tomato concept. Plant use is a predictable food-plant metonymy also present in roșie, and does not justify a second food identity. The proposal expressly uses the edible-fruit sense; these five stored forms produce five unique resolver keys.",
+      "counterexample_result": "Tomată can describe the plant or appear in the governmental program name. No plant-only description, program identity or new target is added. Articulated tomata is already accepted by accent folding of tomată; it needs no duplicate stored alias.",
+      "recognition_sources": [
+        {
+          "url": "https://dexonline.ro/definitie/tomat%C4%83",
+          "supports": "DEX09 synonym and morphological paradigm; older dictionaries establish continued lexical presence."
+        },
+        {
+          "url": "https://media.hotnews.ro/assets/document/2008/09/18/4414197-0.pdf",
+          "supports": "Original Ministry of Public Health food document identifies tomatoes in an edible tomato/bulion conversion."
+        },
+        {
+          "url": "https://hd.prefectura.mai.gov.ro/wp-content/uploads/sites/53/2018/09/RaportDAJ.pdf",
+          "supports": "Romanian official agriculture report uses tomate for the familiar crop; supplementary recognition signal only."
+        }
+      ]
+    },
+    {
+      "id": "lex-3",
+      "node_id": "n_vioara",
+      "headword": "scripcă",
+      "exact_forms": [
+        "scripcă",
+        "scripci",
+        "scripcile",
+        "scripcii",
+        "scripcilor"
+      ],
+      "decision": "accept",
+      "quality_reason": "Scripcă is a regional/popular name for the existing violin instrument, rather than a distinct violin type. Accepting an optional player word is useful even though the word would be a poor obligatory easy-target label. The five inflections retain one instrument identity and do not change its salience or difficulty.",
+      "counterexample_result": "DEX records violin sound/music and the occupation as metonymic secondary senses. None supplies an independently conflicting concrete instrument owner in this KG. The reviewed instrument sense remains clear; no sound/occupation concept is merged. Scripca needs no duplicate stored alias because it folds to scripcă.",
+      "recognition_sources": [
+        {
+          "url": "https://dexonline.ro/definitie/scripc%C4%83",
+          "supports": "DEX09 instrument synonym, secondary metonymy, DOOM/regional status and the exact paradigm; literary examples establish historical presence."
+        },
+        {
+          "url": "https://www.radioromaniacultural.ro/exclusiv-online/cursuri-limbi-straine/anglo-logos-xii-6-octombrie-2017-id8646.html",
+          "supports": "Original 2017 Romanian public-radio language program explicitly pairs scripcă and vioară."
+        },
+        {
+          "url": "https://www.romania-muzical.ro/articol/sarbatoarea-muzicii-vechi-ii-invita-din-nou-pe-iubitorii-de-cultura-la-miercurea-ciuc/3933771/2631/1",
+          "supports": "Original 2026 public-radio festival press release uses scripcă in a family/children musical workshop. This confirms current use, not measured nationwide familiarity."
+        }
+      ]
+    },
+    {
+      "id": "lex-5",
+      "node_id": "n_v4soc_magazin",
+      "headword": "prăvălie",
+      "exact_forms": [
+        "prăvălie",
+        "prăvălia",
+        "prăvălii",
+        "prăvăliile",
+        "prăvăliei",
+        "prăvăliilor"
+      ],
+      "decision": "accept",
+      "quality_reason": "The dominant concrete prăvălie sense is the retail local described by the existing magazin node. Smaller-shop connotations do not create a separate object in this proposal. All six forms are grammatical and let a player submit the traditional name while retaining the existing commercial owner.",
+      "counterexample_result": "Rare trade/individual-profession and figurative uses exist. They are not imported; no alcohol-specific compound, workshop identity or figurative person is equated with magazin. Size nuance is acknowledged rather than erased from editorial notes.",
+      "recognition_sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pr%C4%83v%C4%83lie",
+          "supports": "DEX98 and DLRLC dominant shop synonym, exact inflection, and MDA secondary meanings."
+        },
+        {
+          "url": "https://hotnews.ro/la-vulturul-de-mare-cu-pestele-n-ghiare-cum-s-a-transformat-o-pravalie-ngramadita-n-cel-mai-faimos-magazin-din-bucurestiul-interbelic-55934",
+          "supports": "Original 2023 Romanian feature uses prăvălie and magazin for the same retail establishment; supports continuing recognition."
+        }
+      ]
+    }
+  ],
+  "edge_judgments": [
+    {
+      "id": "link-carare-poteca",
+      "edge_key": [
+        "n_v4geo_carare",
+        "n_v4geo_poteca",
+        "synonym_of"
+      ],
+      "decision": "accept",
+      "quality_reason": "The two existing pedestrian-path senses are lexical synonyms. The narrower frequent-mountain description of potecă is compatible with cărare through nature/villages. Hair-parting, figurative journey and carriage-action senses of cărare are outside this relation. Bidirectionality is honest for the synonym relation. Keep distinct existing IDs; this edge grants neither exact-win equivalence nor approval to either target.",
+      "strength_judgment": "0.95 is an editorial directness estimate for a near-identical pedestrian-path meaning, not a measured source quantity. The observed numerical rank changes remain disclosed.",
+      "recognition_sources": [
+        {
+          "url": "https://dexonline.ro/definitie/c%C4%83rare",
+          "supports": "DEX/MDA path sense and secondary hair-parting/figurative distinctions."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/potec%C4%83",
+          "supports": "DEX/DLRLC and synonym dictionaries identify the narrow pedestrian path as cărare."
+        },
+        {
+          "url": "https://litere.ucv.ro/litere/sites/default/files/litere/Cercetare/Activitate%20stiintifica/texte_si_discipline_in_dialog_2019.pdf",
+          "supports": "Independent original university lexical study supplies the pedestrian cărare/potecă relation in its indexed text."
+        }
+      ],
+      "incoming_floor": {
+        "before": [
+          3,
+          3
+        ],
+        "after": [
+          4,
+          4
+        ],
+        "new_contexto_target_eligible": false
+      },
+      "old_board_membership": "Only cx_geografie_254 and cx_viata_de_roman_367 contain both endpoints; they share the same group in each. Their fairness metrics are unchanged.",
+      "caption_limit": "Current Lanț caption fallback for this new relation is the truthful neutral legătură directă in either orientation. No new reviewed caption or informative-hint claim is made."
+    }
+  ],
+  "historical_checks": {
+    "v50_proposed_surface_matches": 0,
+    "existing_label_id_alias_collisions": 0,
+    "projection_surface_overlaps": 0,
+    "reviewed_fuzzy_deny_or_unresolved_spelling_conflicts": 0,
+    "old_known_surface_owner_changes": 0,
+    "tombstone_overlap": "cx_geografie_180 contains both path endpoints in the same rejected group. No board is authored or resurrected, and the 122 Conexiuni and 105 Lanț tombstone inventories stay untouched. No rejection is overridden by this graph review."
+  },
+  "held_r1_research": [
+    {
+      "headword": "nădragi",
+      "original_family_id": "lex-4",
+      "decision": "hold",
+      "reason": "DEX09 gives trousers and izmene as separate senses, while MDA and DRAM preserve the underwear sense. The shared exact resolver cannot qualify a player intended sense. Retain research and do not install the three plural forms as blanket trousers equivalents. This is a lexical identity hold, not an adult-content judgment.",
+      "source": "https://dexonline.ro/definitie/n%C4%83drag"
+    }
+  ],
+  "normalization_note": "R1 redundant tomata/scripca rows were removed. Accent folding of the retained headwords still accepts those valid typed spellings;22 stored rows supply22 new keys, not22 new concepts.",
+  "impact_evidence": {
+    "path": "docs/reviews/v1-2-content-growth/graph-quality-impact.json",
+    "sha256": "0f5eea3122507774d58cefcf611ddf52747a52afce7c31bd8d802bfad9eb409b",
+    "summary": {
+      "accepted_families": 4,
+      "accepted_forms": 22,
+      "normalized_unique_keys": 22,
+      "nodes_added": 0,
+      "edges_added": 1,
+      "new_rounds": 0,
+      "old_known_surface_owner_changes": 0,
+      "conexiuni_compared": 245,
+      "conexiuni_changed": 0,
+      "lant_compared": 123,
+      "lant_changed": 0,
+      "contexto_compared": 265,
+      "bfs_maps_changed": 0,
+      "raw_rank_targets_changed": 65,
+      "raw_rank_pairs_changed": 4572,
+      "raw_rank_delta_histogram": {
+        "-170": 1,
+        "-164": 1,
+        "-158": 1,
+        "-153": 1,
+        "-141": 1,
+        "-139": 1,
+        "-137": 1,
+        "-131": 1,
+        "-125": 2,
+        "-122": 2,
+        "-119": 1,
+        "-102": 1,
+        "-101": 1,
+        "-99": 1,
+        "-94": 1,
+        "-92": 1,
+        "-88": 1,
+        "-80": 1,
+        "-77": 1,
+        "-76": 2,
+        "-71": 1,
+        "-70": 1,
+        "-68": 2,
+        "-65": 1,
+        "-64": 1,
+        "-56": 1,
+        "-55": 1,
+        "-52": 2,
+        "-51": 1,
+        "-50": 1,
+        "-49": 1,
+        "-47": 3,
+        "-44": 1,
+        "-41": 1,
+        "-39": 2,
+        "-35": 1,
+        "-34": 1,
+        "-33": 1,
+        "-30": 3,
+        "-29": 1,
+        "-28": 1,
+        "-25": 1,
+        "-24": 3,
+        "-23": 2,
+        "-21": 1,
+        "-20": 1,
+        "-17": 1,
+        "-16": 1,
+        "-14": 1,
+        "-13": 1,
+        "-11": 1,
+        "-3": 1,
+        "1": 4507
+      },
+      "effective_native_feedback_targets_changed": 65,
+      "effective_native_feedback_pairs_changed": 4705,
+      "effective_rank_delta_histogram": {
+        "-170": 1,
+        "-164": 1,
+        "-158": 1,
+        "-153": 1,
+        "-141": 1,
+        "-139": 1,
+        "-137": 1,
+        "-131": 1,
+        "-125": 2,
+        "-122": 2,
+        "-119": 1,
+        "-102": 1,
+        "-101": 1,
+        "-99": 1,
+        "-94": 1,
+        "-92": 1,
+        "-88": 1,
+        "-80": 1,
+        "-77": 1,
+        "-76": 2,
+        "-71": 1,
+        "-70": 1,
+        "-68": 2,
+        "-65": 1,
+        "-64": 1,
+        "-56": 1,
+        "-55": 1,
+        "-52": 2,
+        "-51": 1,
+        "-50": 1,
+        "-49": 1,
+        "-47": 3,
+        "-44": 1,
+        "-41": 1,
+        "-39": 2,
+        "-35": 1,
+        "-34": 1,
+        "-33": 1,
+        "-30": 3,
+        "-29": 1,
+        "-28": 1,
+        "-25": 1,
+        "-24": 3,
+        "-23": 2,
+        "-21": 1,
+        "-20": 1,
+        "-17": 1,
+        "-16": 1,
+        "-14": 1,
+        "-13": 1,
+        "-11": 1,
+        "-3": 1,
+        "1": 4640
+      },
+      "alchimie_core_compared": 83,
+      "alchimie_core_changed": 0
+    },
+    "quality_assessment": "All old hop bands/reachability remain unchanged. Exactly 65 endpoint native ranks improve;4640 other effective native ranks move back exactly 1 slot, within their existing bands. These are acceptable bounded consequences of the truthful synonym route, not evidence of improved enjoyment. All 245 Conexiuni, 123 Lanț and 83 core Alchimie profiles remain exact.",
+    "full_lossless_evidence": {
+      "path": "docs/reviews/v1-2-content-growth/graph-quality-impact-full.json.gz",
+      "compression": "gzip",
+      "gzip_mtime": 0,
+      "compressed_bytes": 142176,
+      "compressed_sha256": "37e05d289aca6bd00698178a91558ad9a959413de7a6eee2ecf5e342c31a2d00",
+      "original_bytes": 776890,
+      "original_sha256": "8c0e804572a8ea8f991a78c3d79b930794c6070d58b4d8f974a63c00716668fd",
+      "roundtrip_verified": true,
+      "contents": "Exact original graph-quality-impact.json bytes; complete 265 target maps/deltas plus 245 Conexiuni, 123 Lanț, 83 Alchimie and lexical receipts."
+    },
+    "packaging_history": [
+      {
+        "packaging_only": true,
+        "previous_review_sha256": "e9e09d3cb83b4ee71d8d05b9fe2ccb1dc505ddca3a26aa6a9abb3112efcf4036",
+        "original_impact_path": "docs/reviews/v1-2-content-growth/graph-quality-impact.json",
+        "original_impact_sha256": "8c0e804572a8ea8f991a78c3d79b930794c6070d58b4d8f974a63c00716668fd",
+        "summary_sha256": "0f5eea3122507774d58cefcf611ddf52747a52afce7c31bd8d802bfad9eb409b",
+        "full_archive_sha256": "37e05d289aca6bd00698178a91558ad9a959413de7a6eee2ecf5e342c31a2d00",
+        "all_judgments_unchanged": true
+      }
+    ]
+  },
+  "required_before_landing": [
+    "Run supported native graph transaction and compare installed nodes/aliases/edge/degrees against this exact proposal; no manual fixture edits.",
+    "Run complete fresh source/operator/builder gates and final native audit; this editorial review is not installation approval.",
+    "Refresh all 85 authored quick-board and 49 recipe-extension exact candidates with independent factual/quality coverage bound to current KG. World NodeSnapshot retains aliases and Roșie occurs there, so refresh its bindings and independent review if native validation detects the changed snapshot.",
+    "Preserve frozen 336 derived-board payload, all archived reviews, all existing curated records, pending dispositions, reserves and historical saved exploration prefixes.",
+    "Check final effective native and synthetic-projection feedback, actual typed wins/deduplication, no wrong-owner wins, unchanged reviewed spelling denials, Lanț directed captions, all old Alchimie books/extensions, and no new target eligibility claim."
+  ],
+  "source_access_notes": [
+    "All cited dictionary entries opened. The current 2026 Radio România Muzical workshop page and2017 Radio România Cultural page opened directly.",
+    "The older 2015 Radio România Muzical page returned a Unicode decoding error and its2025 article returned a cache miss; the2026opened press release replaced current-recognition evidence.",
+    "The biblioteca-digitala folk guide and Radio Timișoara page returned internal errors; they are not required evidence or relied on for acceptance.",
+    "No dictionary corpus or full page content is copied. Sources are citations to editorial factual/paradigm notes; access does not grant a reuse license."
+  ],
+  "remaining_limits": [
+    "No human playtest enjoyment or nationwide word-frequency measurement is available. Optional input acceptance does not certify a fair new easy target.",
+    "This review measures the isolated frozen graph change; downstream fresh artifact acceptance and final native installed audit remain separate."
+  ]
+}

@@ -132,11 +132,36 @@ func LoadSource(path string) (*Source, error) {
 			return nil, err
 		}
 	}
+	s, err := decodeSource(raw, "", -1)
+	if err != nil {
+		return nil, err
+	}
+	if path == "" && s.SHA256 != AuthoredSHA256 {
+		return nil, fmt.Errorf("pinned native authoring source drift")
+	}
+	if s.SHA256 == AuthoredSHA256 && s.Version == 1 {
+		return s, nil
+	}
+	parent := text(s.Raw["parent_source_sha256"])
+	validParent := s.Version == 2 && parent == AuthoredSHA256
+	if s.Version > 2 {
+		a, err := parseInstalledAuthorities(installedAuthorityBytes, InstalledAuthoritiesSHA256)
+		if err != nil {
+			return nil, err
+		}
+		validParent = a.registeredParent(s.Version, parent)
+	}
+	if !validParent {
+		return nil, fmt.Errorf("authored transition requires sequential version and exact reviewed parent source")
+	}
+	return s, nil
+}
+
+func decodeSource(raw []byte, expectedParent string, expectedVersion int) (*Source, error) {
 	if len(raw) > MaxBytes {
 		return nil, fmt.Errorf("authored source byte cap exceeded")
 	}
-	sha := contentbuild.SHA256(raw)
-	if err = strictjson.Validate(raw); err != nil {
+	if err := strictjson.Validate(raw); err != nil {
 		return nil, err
 	}
 	value, err := contentops.Decode(raw)
@@ -147,16 +172,10 @@ func LoadSource(path string) (*Source, error) {
 		return nil, err
 	}
 	version := integer(value["version"])
-	if value["schema"] != "native-content-authored-v1" || version < 1 || version > 1000 {
-		return nil, fmt.Errorf("authored schema/version refused")
+	if value["schema"] != "native-content-authored-v1" || version < 1 || version > 1000 || expectedVersion >= 0 && (version != expectedVersion || version > 1 && value["parent_source_sha256"] != expectedParent) {
+		return nil, fmt.Errorf("authored schema/version/parent refused")
 	}
-	if sha != AuthoredSHA256 && (version <= 1 || value["parent_source_sha256"] != AuthoredSHA256) {
-		return nil, fmt.Errorf("authored transition requires newer version and exact reviewed parent source")
-	}
-	if path == "" && sha != AuthoredSHA256 {
-		return nil, fmt.Errorf("pinned native authoring source drift")
-	}
-	return &Source{value, sha, version}, nil
+	return &Source{value, contentbuild.SHA256(raw), version}, nil
 }
 func archive(root string, s *Source, name string) (map[string]any, error) {
 	a := object(object(s.Raw["archives"])[name])

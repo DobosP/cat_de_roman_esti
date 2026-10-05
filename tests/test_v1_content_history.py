@@ -99,8 +99,9 @@ def test_v1_inverse_rejects_forged_baseline_even_with_new_receipt_pin(
 
 
 def test_v1_delta_is_only_the_independently_reviewed_graph_and_status_change() -> None:
-    kg = current("kg_sample.json")
-    old = before_v1_artifact(kg, "kg_sample.json")
+    latest_kg = current("kg_sample.json")
+    kg = history.before_v1_2_artifact(latest_kg, "kg_sample.json")
+    old = before_v1_artifact(latest_kg, "kg_sample.json")
     before_nodes = {r["id"]: r for r in old["kg_nodes"]}
     after_nodes = {r["id"]: r for r in kg["kg_nodes"]}
     changed = {key: {field for field in before_nodes[key]
@@ -119,8 +120,9 @@ def test_v1_delta_is_only_the_independently_reviewed_graph_and_status_change() -
         "de1218", "de2664", "de2665",
     }
     assert old["kg_puzzles"] == kg["kg_puzzles"]
-    pack = current("games_pack.json")
-    previous = before_v1_artifact(pack, "games_pack.json")
+    latest_pack = current("games_pack.json")
+    pack = history.before_v1_2_artifact(latest_pack, "games_pack.json")
+    previous = before_v1_artifact(latest_pack, "games_pack.json")
     changed_ids = []
     for game in GAMES:
         assert [r["id"] for r in pack[game]] == [r["id"] for r in previous[game]]

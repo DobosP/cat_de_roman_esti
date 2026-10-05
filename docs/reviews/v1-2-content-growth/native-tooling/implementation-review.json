@@ -1,0 +1,244 @@
+{
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "checked_on": "2026-10-05",
+  "checks": [
+    "Default empty compiled authority falls through to unchanged pinned V1 baseline; all four historical artifact checks reproduce exact bytes.",
+    "Adopted V2 rails reconstruct exact authored candidate, require complete factual and independently identified quality judgments, then require exact saved proposal, current native runtime/source audit and final acceptance by the corresponding independent initial reviewers.",
+    "Artifact/source pins alone cannot grant authority: missing documents, rejected raw facts, shared reviewer identity, held final reviews and rehashed stale audit bindings refuse.",
+    "Source-chain schema enforces sequential versions, exact predecessor digests, unique paths/digests and bounded length; sources and archived descriptors are reread and hashed. A future unadopted candidate does not gain approval from a source digest alone.",
+    "Only the two exact metadata paths are excluded from the runtime manifest. The Go pin must equal its fixed metadata-only template; extra functions, declarations, imports or even comment drift refuse. All earlier runtime inputs and installed.go remain audited.",
+    "Protected authority reads require bounded regular files, non-symlinked parents, matching opened-FD identity and rechecked path identities; path escapes, symlinked parents, directories and oversized documents refuse.",
+    "Adoption and draft generation recheck all seven descriptors, runtime/source inventories and metadata before success. Installation readsets include both excluded metadata files, registered source chains, archives and authority documents; guarded installation retains existing compare-and-swap and rollback checks.",
+    "Draft outputs explicitly protect both metadata paths and every runtimePaths input, as well as supplied source/review inputs and fixture/source directories."
+  ],
+  "findings": [],
+  "immutable_v1": {
+    "archive_count": 13,
+    "archives": [
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "extensions_candidate",
+        "path": "docs/reviews/v1-testing-release/content/recipes/candidates.json",
+        "sha256": "adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "extensions_factual",
+        "path": "docs/reviews/v1-testing-release/content/recipes/factual-review.json",
+        "sha256": "bbf106d08e7ea887d0a19c0a876dfa0c3a49547e0b02c8ce8c43656d7d7926b9"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "extensions_quality",
+        "path": "docs/reviews/v1-testing-release/content/recipes/quality-review.json",
+        "sha256": "f08e80ddecf9c247b311e9b7d2063506aba3dd99c1f9de39b56b11b30f711f09"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "quick_candidate",
+        "path": "docs/reviews/v1-testing-release/content/quick/candidate.json",
+        "sha256": "efa071d9c8c17899cb123fb0a3cdb8c67741ec38982b45df1599d915be5d73f0"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "quick_factual",
+        "path": "docs/reviews/v1-testing-release/content/quick/factual-review.json",
+        "sha256": "7383ca84896278f146b3b4a1c1f82166545878ab417e7d6f328c5baf8e862773"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "quick_quality",
+        "path": "docs/reviews/v1-testing-release/content/quick/quality-review.json",
+        "sha256": "244239884a69575c62245e982dcb04ff7fa01c99697d4b9008600ed06f49b8b4"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "reserve_alchimie",
+        "path": "docs/reviews/v1-testing-release/content/alchimie-reserve-proposal.json",
+        "sha256": "bcf35794a43f437f78d420b34a0e4ae44e1accd76c7eddde46a4bdf9e33728e6"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "reserve_proposal",
+        "path": "docs/reviews/v1-testing-release/content/selection-reserve-proposal.json",
+        "sha256": "e02b1a624fb7df8edfbcf507a8c9d7bcfb39510cba771d9b3d660430b2360de4"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "reserve_quality",
+        "path": "docs/reviews/v1-testing-release/content/selection-reserve-quality-review.json",
+        "sha256": "54980fe74ac512b431eed9c8f3e3390c53e40a16a3efc1ad7fd207a528178758"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "world_candidate",
+        "path": "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/candidate.json",
+        "sha256": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "world_factual",
+        "path": "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/factual-review.json",
+        "sha256": "501e4ea97ce564e9fb1e764978d7c8a628c7f5774cc2531b7ee117555f5e6e1f"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "world_previous",
+        "path": "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json",
+        "sha256": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496"
+      },
+      {
+        "baseline_bytes_exact": true,
+        "descriptor_sha_exact": true,
+        "name": "world_quality",
+        "path": "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/quality-review.json",
+        "sha256": "37ed31a2bda9e9a32494736a81f2c51d901e44195852a28b9da26976ba7d38c1"
+      }
+    ],
+    "source_baseline_bytes_exact": true,
+    "source_path": "go-backend/internal/contentrails/sources/authored-v1.json",
+    "source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6"
+  },
+  "independence": {
+    "file_writes": "This implementation-review.json receipt only.",
+    "implementation_authored_by_reviewer": false,
+    "prior_role": "Read-only lexical research scout; own researched candidates are excluded from this approval."
+  },
+  "kind": "v1-2-native-installed-authority-implementation-review-v1",
+  "limitations": [
+    "This accepts implementation only; every user-content initial/raw/final review and factual source gate still applies.",
+    "The populated authority ledger and resulting exported graph/artifacts require a separate assembled integration recheck after root installs source/pin updates.",
+    "Focused synthetic and race checks establish deterministic refusal behavior, not human play quality or a proof against an adversary with arbitrary concurrent filesystem control."
+  ],
+  "resolved_findings": [
+    {
+      "finding": "Draft builder lacked final seven-document and runtime/source snapshot rechecks.",
+      "resolution": "Added descriptor rereads and before/after runtime/source inventories; gate remains failure-closed."
+    },
+    {
+      "finding": "Protected reads checked Lstat before open without verifying the opened FD and parent identities.",
+      "resolution": "Added regular FD identity check and parent/file inode and symlink-state rechecks before bounded read."
+    },
+    {
+      "finding": "Draft output could overwrite the separately pinned Go metadata file or other runtime input.",
+      "resolution": "ProtectedOutput now explicitly protects both metadata paths and the complete runtime inventory; independent direct output refusal test passes."
+    }
+  ],
+  "reviewed_sha256": {
+    "go-backend/cmd/cat-content-rail/main.go": "66aa1433d6eda62c084fc656f8a03990708677639e54aa3ec4dc1c188f6636a8",
+    "go-backend/cmd/cat-content-rail/main_test.go": "3a6cf163c54b13e180c588433c055bc100a4c4eea30936637de3302f5b1ccded",
+    "go-backend/internal/contentrails/installed.go": "d4f465ecb24754730f2e5e6e45a441ff5bbbc146ac9cc53c50824446992dbefd",
+    "go-backend/internal/contentrails/installed_authorities_pin.go": "6f0ae7b1f9bb787fc8c090648e1b4d0826eb82eae196df2f1476f22cda8f4d51",
+    "go-backend/internal/contentrails/installed_test.go": "2a3252822f1fc61e1b5228c199387731e5a3c5ea4ee6434a03fbaf1880459c3b",
+    "go-backend/internal/contentrails/rail.go": "5076e3b45923d9ee7a5563d9c1fd2b84c6fae1db16fb2beb1efc9c6f3c3a0f55",
+    "go-backend/internal/contentrails/source.go": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "8fb407c7518bb053ec6f80975eecabfb6ed75df67ec79ae0a8f563b7596e3111"
+  },
+  "reviewer": "Codex independent implementation reviewer /root/synonym_scout",
+  "scope": "Native installed-authority implementation and CLI output protection only; no KG lexical/relation/content approval.",
+  "verdict": "accept",
+  "verification": {
+    "authority_negative_race": {
+      "log_sha256": "06facb7aceb2507b2eabca5bd003879494d3b50123790a2635fb1fa4e5a21694",
+      "packages": [
+        {
+          "elapsed_seconds": 4.605,
+          "package": "github.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-content-rail",
+          "passed": true
+        },
+        {
+          "elapsed_seconds": 167.339,
+          "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+          "passed": true
+        }
+      ],
+      "passed_test_and_subtest_count": 26,
+      "scope": "Final stability/opened-FD implementation; compiled before the later output-path-only correction, covered separately below."
+    },
+    "baseline_check": {
+      "authority_state": "empty",
+      "exact_four_artifacts": true,
+      "passed": true,
+      "sha256_by_rail": {
+        "extensions": "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661",
+        "quick": "85c89ec82d27a19ba619604ed3c47b09e3bb18e1718343db6d56c03b0999761c",
+        "reserve": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "world": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44"
+      }
+    },
+    "commands": [
+      "go -C go-backend test -race ./internal/contentrails ./cmd/cat-content-rail -run 'TestInstalledAuthority|TestReviewedInstalledVersionTwo|TestFutureInstalledParent|TestInstalledAuthorityOutput' -count=1 -json",
+      "go -C go-backend test -race ./internal/contentrails ./cmd/cat-content-rail -run 'TestInstalledAuthorityProtected|TestInstalledAuthorityDraft|TestInstalledAuthorityOutput|TestOutputCannot' -count=1 -json",
+      "go -C go-backend vet ./internal/contentrails ./cmd/cat-content-rail",
+      "go -C go-backend run ./cmd/cat-content-rail all --root .. --check"
+    ],
+    "environment": {
+      "GOCACHE": "task scratch content-rail-go/cache",
+      "GOFLAGS": "-p=2",
+      "GOMAXPROCS": "2",
+      "GOTMPDIR": "same task scratch",
+      "TMPDIR": "task scratch content-rail-go/tmp"
+    },
+    "final_output_and_reader_race": {
+      "log_sha256": "f6234c09f9d21c3efd462a5dbdfbbe361fceaa9db4835e20233df972fa83fa8d",
+      "packages": [
+        {
+          "elapsed_seconds": 1.04,
+          "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+          "passed": true
+        },
+        {
+          "elapsed_seconds": 4.062,
+          "package": "github.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-content-rail",
+          "passed": true
+        }
+      ],
+      "passed_test_and_subtest_count": 4,
+      "scope": "Latest frozen runtime code including ProtectedOutput correction; direct reader/output and CLI mixed/incomplete mode refusals."
+    },
+    "final_reader_race": {
+      "log_sha256": "8c9143df2a099090d13681503f2c70b5dbe9b9267e8d19f773c7008ba973da09",
+      "packages": [
+        {
+          "elapsed_seconds": 1.047,
+          "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+          "passed": true
+        }
+      ],
+      "passed_test_and_subtest_count": 1,
+      "scope": "Additional independent direct reader refusal test."
+    },
+    "focused_vet_exit_code": 0,
+    "running_test_processes": 0,
+    "supporting_full_package_race": {
+      "log_sha256": "104d53439dc862ea5fe21f28e87134ecd209292d5d67ef6d73407158ae72e2c3",
+      "packages": [
+        {
+          "elapsed_seconds": 5.426,
+          "package": "github.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-content-rail",
+          "passed": true
+        },
+        {
+          "elapsed_seconds": 376.642,
+          "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+          "passed": true
+        }
+      ],
+      "passed_test_and_subtest_count": 38,
+      "scope": "Historical regression support; compiled before final stability/output refinements and not claimed to certify all final-code behavior."
+    },
+    "toolchain": "go version go1.27.1 linux/amd64"
+  }
+}

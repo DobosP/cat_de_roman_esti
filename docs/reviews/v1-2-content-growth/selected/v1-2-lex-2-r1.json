@@ -1,0 +1,75 @@
+{
+  "id": "v1-2-lex-2",
+  "revision": 1,
+  "state": "selected_for_refinement",
+  "origin_track": "discovery",
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "checked_on": "2026-10-05",
+  "label_ro": "tomată",
+  "sense": "Fructul comestibil folosit în salate și sosuri; sensul alimentar.",
+  "category": "gastronomie",
+  "novelty": {
+    "kind": "accepted_form",
+    "existing_ids": [
+      "n_v4gas_rosie"
+    ],
+    "verified_synonym_pending_independent_review": true
+  },
+  "identity_checks": {
+    "normalized_owners": [],
+    "forms": [
+      "tomată",
+      "tomata",
+      "tomate",
+      "tomatele",
+      "tomatei",
+      "tomatelor"
+    ],
+    "prior_exact_decision": "no match in targeted V50/pool searches"
+  },
+  "player_benefit": "Accept a familiar alternative word for the same existing typed concept; do not split identity or inflate node count.",
+  "games": [
+    "contexto",
+    "lant"
+  ],
+  "claims": [
+    {
+      "subject": "tomată",
+      "predicate": "same_referent_in_declared_sense",
+      "object": "Roșie",
+      "evidence_state": "supported",
+      "sources": [
+        "https://dexonline.ro/definitie/tomat%C4%83"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://dexonline.ro/definitie/tomat%C4%83",
+      "accessed_on": "2026-10-05",
+      "notes": "Research lead; original editorial note, no copied definition."
+    }
+  ],
+  "recognition": {
+    "intended_difficulty": "ordinary accepted input; not a new hidden target",
+    "human_playtest": "unrun"
+  },
+  "play_sketches": [
+    "Resolve headword and inflections to the existing ID; repeated synonyms must remain one attempt."
+  ],
+  "risks": [
+    "Inflections and sense boundaries still require two independent reviews."
+  ],
+  "dependencies": [
+    "Native adopted-version reconstruction and all downstream artifact checks."
+  ],
+  "decision": "Selected as a bounded root-authored proposal; selection is not approval.",
+  "next_action": "Independent factual and quality review of exact graph-proposal bytes, then supported graph transaction and downstream audits.",
+  "history": [
+    {
+      "date": "2026-10-05",
+      "actor": "root-integrator",
+      "action": "researched and selected exact proposed family"
+    }
+  ]
+}

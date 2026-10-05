@@ -1,0 +1,237 @@
+{
+  "schema": "v1-2-graph-editorial-proposal-v1",
+  "revision": 1,
+  "author": "root-integrator",
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "checked_on": "2026-10-05",
+  "lexical_families": [
+    {
+      "id": "lex-1",
+      "node_id": "n_v4via_lift",
+      "headword": "ascensor",
+      "forms": [
+        "ascensor",
+        "ascensorul",
+        "ascensoare",
+        "ascensoarele",
+        "ascensorului",
+        "ascensoarelor"
+      ],
+      "sense": "Instalație pentru transport vertical între etaje.",
+      "sources": [
+        "https://dexonline.ro/definitie/ascensor"
+      ],
+      "node_snapshot": {
+        "id": "n_v4via_lift",
+        "node_type": "concept",
+        "label_ro": "lift",
+        "category": "viata_de_roman",
+        "description": "Instalație care urcă și coboară persoane între etajele blocului.",
+        "salience": 0.4503,
+        "difficulty_tier": "medium",
+        "degree": 4,
+        "aliases": [
+          "liftul",
+          "lifturi",
+          "lifturile"
+        ]
+      }
+    },
+    {
+      "id": "lex-2",
+      "node_id": "n_v4gas_rosie",
+      "headword": "tomată",
+      "forms": [
+        "tomată",
+        "tomata",
+        "tomate",
+        "tomatele",
+        "tomatei",
+        "tomatelor"
+      ],
+      "sense": "Fructul comestibil folosit în salate și sosuri; sensul alimentar.",
+      "sources": [
+        "https://dexonline.ro/definitie/tomat%C4%83"
+      ],
+      "node_snapshot": {
+        "id": "n_v4gas_rosie",
+        "node_type": "concept",
+        "label_ro": "Roșie",
+        "category": "gastronomie",
+        "description": "Legumă-fruct comestibilă folosită în salate, sosuri și tocane.",
+        "salience": 0.6714,
+        "difficulty_tier": "easy",
+        "degree": 5,
+        "aliases": [
+          "roșia",
+          "roșii",
+          "roșiile",
+          "roșiei",
+          "roșiilor"
+        ]
+      }
+    },
+    {
+      "id": "lex-3",
+      "node_id": "n_vioara",
+      "headword": "scripcă",
+      "forms": [
+        "scripcă",
+        "scripca",
+        "scripci",
+        "scripcile",
+        "scripcii",
+        "scripcilor"
+      ],
+      "sense": "Vioară, în denumirea populară/regională a instrumentului.",
+      "sources": [
+        "https://dexonline.ro/definitie/scripc%C4%83"
+      ],
+      "node_snapshot": {
+        "id": "n_vioara",
+        "node_type": "concept",
+        "label_ro": "Vioară",
+        "category": "personalitati",
+        "description": "Instrument muzical cu coarde.",
+        "salience": 0.1905,
+        "difficulty_tier": "hard",
+        "degree": 8,
+        "aliases": [
+          "vioara clasică",
+          "instrumentul vioară",
+          "viori"
+        ]
+      }
+    },
+    {
+      "id": "lex-4",
+      "node_id": "n_v30_clothing_everyday_pantaloni",
+      "headword": "nădragi",
+      "forms": [
+        "nădragi",
+        "nădragii",
+        "nădragilor"
+      ],
+      "sense": "Pantaloni, denumire populară; numai familia pluralului.",
+      "sources": [
+        "https://www.bjarges.ro/download/enciclopedia/enciclopedia_iv_Glosar.pdf"
+      ],
+      "node_snapshot": {
+        "id": "n_v30_clothing_everyday_pantaloni",
+        "node_type": "concept",
+        "label_ro": "Pantaloni",
+        "category": "viata_de_roman",
+        "description": "Haină purtată de la talie în jos, cu câte o parte pentru fiecare picior.",
+        "salience": 0.94,
+        "difficulty_tier": "easy",
+        "degree": 5,
+        "aliases": [
+          "pantalon",
+          "pantalonul",
+          "pantalonii",
+          "pantalonilor"
+        ]
+      }
+    },
+    {
+      "id": "lex-5",
+      "node_id": "n_v4soc_magazin",
+      "headword": "prăvălie",
+      "forms": [
+        "prăvălie",
+        "prăvălia",
+        "prăvălii",
+        "prăvăliile",
+        "prăvăliei",
+        "prăvăliilor"
+      ],
+      "sense": "Local de vânzare cu amănuntul; sensul comercial concret.",
+      "sources": [
+        "https://dexonline.ro/definitie/pr%C4%83v%C4%83lie"
+      ],
+      "node_snapshot": {
+        "id": "n_v4soc_magazin",
+        "node_type": "concept",
+        "label_ro": "magazin",
+        "category": "societate",
+        "description": "Loc comercial unde se vând produse către cumpărători.",
+        "salience": 0.6464,
+        "difficulty_tier": "medium",
+        "degree": 16,
+        "aliases": [
+          "magazinul",
+          "magazine",
+          "magazinele",
+          "magazinului",
+          "magazinelor"
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "link-carare-poteca",
+      "src": "n_v4geo_carare",
+      "dst": "n_v4geo_poteca",
+      "relation": "synonym_of",
+      "label_ro": "sinonime pentru un drum îngust de mers pe jos",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 1,
+      "sources": [
+        "https://dexonline.ro/definitie/potec%C4%83",
+        "https://dexonline.ro/definitie/c%C4%83rare"
+      ],
+      "sense": "Drum îngust pentru mers pe jos; sensurile existente, fără cărarea din păr.",
+      "endpoint_snapshots": [
+        {
+          "id": "n_v4geo_carare",
+          "node_type": "concept",
+          "label_ro": "cărare",
+          "category": "geografie",
+          "description": "Drum îngust pentru mers pe jos prin natură sau sate.",
+          "salience": 0.3736,
+          "difficulty_tier": "medium",
+          "degree": 3,
+          "aliases": [
+            "cărarea",
+            "cărări",
+            "cărările",
+            "cărării pietonale",
+            "cărărilor pietonale"
+          ]
+        },
+        {
+          "id": "n_v4geo_poteca",
+          "node_type": "concept",
+          "label_ro": "potecă",
+          "category": "geografie",
+          "description": "Traseu îngust de mers pe jos, frecvent în zone montane.",
+          "salience": 0.3844,
+          "difficulty_tier": "medium",
+          "degree": 3,
+          "aliases": [
+            "poteci",
+            "potecile"
+          ]
+        }
+      ]
+    }
+  ],
+  "nodes": [],
+  "preservation": {
+    "existing_ids": true,
+    "existing_approved_rounds": true,
+    "historical_reviews": true,
+    "no_node_merge": true,
+    "no_new_rounds_without_separate_review": true
+  },
+  "source_policy": "Original editorial facts and notes only; source URLs are citations, not licenses. No copied dictionary definitions, page corpora or inherited approval. Independent review must check access/provenance and forms.",
+  "planned_counts": {
+    "new_shared_nodes": 0,
+    "new_relations": 1,
+    "verified_synonym_alias_families": 5,
+    "accepted_forms_if_all_reviewed": 27,
+    "new_curated_rounds": 0
+  }
+}

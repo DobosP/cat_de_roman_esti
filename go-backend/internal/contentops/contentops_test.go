@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -717,8 +718,65 @@ func TestUnanimousPromotionAndProspectiveRejectDebt(t *testing.T) {
 		}
 	})
 }
+func deltaRepository(t *testing.T) string {
+	t.Helper()
+	root := t.TempDir()
+	for _, path := range inventoryFiles {
+		blob, e := os.ReadFile(filepath.Join(repoRoot(t), path))
+		if e != nil {
+			t.Fatal(e)
+		}
+		put(t, filepath.Join(root, path), blob)
+	}
+	config := filepath.Join(root, "empty-git-config")
+	put(t, config, []byte{})
+	hooks := filepath.Join(root, "empty-hooks")
+	if e := os.MkdirAll(hooks, 0700); e != nil {
+		t.Fatal(e)
+	}
+	// Initialize without inherited Git redirection, templates, credentials,
+	// hooks or signing configuration; no real checkout/index is addressed.
+	cmd := exec.Command("git", "-C", root, "init", "--template="+hooks)
+	for _, value := range os.Environ() {
+		if !strings.HasPrefix(value, "GIT_") {
+			cmd.Env = append(cmd.Env, value)
+		}
+	}
+	cmd.Env = append(cmd.Env, "GIT_CONFIG_NOSYSTEM=1", "GIT_CONFIG_GLOBAL="+config)
+	if output, e := cmd.CombinedOutput(); e != nil {
+		t.Fatalf("initialize private delta repository: %v (%s)", e, output)
+	}
+	for name, value := range map[string]string{
+		"GIT_DIR": filepath.Join(root, ".git"), "GIT_WORK_TREE": root,
+		"GIT_COMMON_DIR": filepath.Join(root, ".git"), "GIT_INDEX_FILE": filepath.Join(root, ".git/index"),
+		"GIT_OBJECT_DIRECTORY": filepath.Join(root, ".git/objects"), "GIT_ALTERNATE_OBJECT_DIRECTORIES": "",
+		"GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": config, "GIT_CONFIG_COUNT": "0", "GIT_CONFIG_PARAMETERS": "",
+		"GIT_AUTHOR_NAME": "Content Delta Fixture", "GIT_COMMITTER_NAME": "Content Delta Fixture",
+		"GIT_AUTHOR_EMAIL": "content-delta-fixture@example.invalid", "GIT_COMMITTER_EMAIL": "content-delta-fixture@example.invalid",
+		"GIT_AUTHOR_DATE": "2000-01-01T00:00:00Z", "GIT_COMMITTER_DATE": "2000-01-01T00:00:00Z",
+	} {
+		t.Setenv(name, value)
+	}
+	run := func(args ...string) {
+		t.Helper()
+		options := []string{"-c", "core.hooksPath=" + hooks, "-c", "commit.gpgsign=false", "-c", "user.name=Content Delta Fixture", "-c", "user.email=content-delta-fixture@example.invalid"}
+		if _, e := boundedGit(root, append(options, args...)...); e != nil {
+			t.Fatal(e)
+		}
+	}
+	paths := []string{}
+	for _, path := range inventoryFiles {
+		paths = append(paths, path)
+	}
+	sort.Strings(paths)
+	run(append([]string{"add", "--"}, paths...)...)
+	run("commit", "--no-gpg-sign", "-m", "Synthetic delta baseline")
+	return root
+}
+
 func TestDeltaStableIdentitySchema(t *testing.T) {
-	report, e := Delta(repoRoot(t), "HEAD")
+	root := deltaRepository(t)
+	report, e := Delta(root, "HEAD")
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -728,7 +786,7 @@ func TestDeltaStableIdentitySchema(t *testing.T) {
 	for _, key := range []string{"concepts", "forms", "connections", "puzzles"} {
 		r := obj(report[key])
 		if integer(r["added_count"]) != 0 || integer(r["removed_count"]) != 0 || integer(r["changed_count"]) != 0 {
-			t.Fatalf("tooling-only branch changed real content %s", key)
+			t.Fatalf("unchanged private baseline reported content changes for %s", key)
 		}
 	}
 	if !strings.Contains(DeltaText(report), "Alias data") {
@@ -736,9 +794,43 @@ func TestDeltaStableIdentitySchema(t *testing.T) {
 			t.Fatal("text report omitted alias semantics")
 		}
 	}
-	if _, e = Delta(repoRoot(t), "--all"); e == nil {
+	if _, e = Delta(root, "--all"); e == nil {
 		t.Fatal("Git option injection accepted")
 	}
+	t.Run("one lexical form is distinct from concept growth", func(t *testing.T) {
+		path := filepath.Join(root, inventoryFiles["kg"])
+		kg, _, e := read(path)
+		if e != nil {
+			t.Fatal(e)
+		}
+		node := obj(array(kg["kg_nodes"])[0])
+		id := str(node["id"])
+		const form = "delta fixture lexical form"
+		node["aliases"] = append(array(node["aliases"]), form)
+		put(t, path, kg)
+		changed, e := Delta(root, "HEAD")
+		if e != nil {
+			t.Fatal(e)
+		}
+		forms := obj(changed["forms"])
+		ids, ok := forms["added_ids"].([][]string)
+		if integer(forms["added_count"]) != 1 || integer(forms["removed_count"]) != 0 || integer(forms["changed_count"]) != 0 || !ok || len(ids) != 1 {
+			t.Fatal("single form addition misreported", forms)
+		}
+		pair := ids[0]
+		if len(pair) != 2 || pair[0] != id || pair[1] != form {
+			t.Fatal("lexical form identity was not retained", ids)
+		}
+		for _, key := range []string{"concepts", "connections", "puzzles"} {
+			r := obj(changed[key])
+			if integer(r["added_count"]) != 0 || integer(r["removed_count"]) != 0 || integer(r["changed_count"]) != 0 {
+				t.Fatal("lexical form invented other semantic content growth", key)
+			}
+		}
+		if obj(changed["synonyms"])["count"] != nil {
+			t.Fatal("alias fixture manufactured a verified synonym claim")
+		}
+	})
 }
 func TestLedgerTamperingFailsClosed(t *testing.T) {
 	s := syntheticSource(t)

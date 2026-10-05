@@ -9,6 +9,7 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -21,9 +22,9 @@ func testData(t *testing.T) *content.Content {
 	}
 	return c
 }
-func TestFrozenIndependentHTTPParity(t *testing.T) {
+func TestCurrentIndependentHTTPParity(t *testing.T) {
 	data := testData(t)
-	c, err := Frozen()
+	c, err := ForSources(data.Sources)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -36,9 +37,63 @@ func TestFrozenIndependentHTTPParity(t *testing.T) {
 		t.Fatal("incomplete independent parity")
 	}
 }
+
+func TestHistoricalFrozenCorpusAndExactReviewedSelection(t *testing.T) {
+	original, err := Frozen()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if FrozenSHA256 != "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb" || len(original.Cases) != 1207 || len(original.Sources) != 8 || original.Reference != "Django application, scripts/check_go_parity.py at ae70c16935d402719b95405685bccbbbea13a3bd" {
+		t.Fatal("historical independent corpus identity/count/source assurance changed")
+	}
+	selected, err := ForSources(original.Sources)
+	if err != nil || !reflect.DeepEqual(selected, original) {
+		t.Fatal("historical source set selected different expected responses", err)
+	}
+	current, err := reviewedV12()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(current.Cases) != 1207 || len(current.Sources) != 8 || !strings.Contains(current.Reference, "Independent Django application; V1.2") || reflect.DeepEqual(current.Sources, original.Sources) {
+		t.Fatal("current independent corpus lacks its own source/capture identity")
+	}
+	selected, err = ForSources(current.Sources)
+	if err != nil || !reflect.DeepEqual(selected, current) || !reflect.DeepEqual(current.Sources, testData(t).Sources) {
+		t.Fatal("current source set selected different expected responses", err)
+	}
+}
+
+func TestUnknownMixedAndPartialSourcesRefuseWithoutRequests(t *testing.T) {
+	data := testData(t)
+	client, _ := NewClient(Local(httpapi.New(data)), MaxCases)
+	for _, mutate := range []func(map[string]string){
+		func(s map[string]string) { s["kg_sample.json"] = strings.Repeat("0", 64) },
+		func(s map[string]string) { delete(s, "kg_sample.json") },
+		func(s map[string]string) { s["extra-unreviewed-source.json"] = strings.Repeat("0", 64) },
+		func(s map[string]string) {
+			s["kg_sample.json"] = "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64"
+		},
+	} {
+		sources := map[string]string{}
+		for k, v := range data.Sources {
+			sources[k] = v
+		}
+		mutate(sources)
+		if _, err := ForSources(sources); err == nil || client.Count() != 0 {
+			t.Fatal("unreviewed/mixed source set acquired expectations or made requests")
+		}
+	}
+	original, err := Frozen()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err = Replay(context.Background(), client, original, data); err == nil || client.Count() != 0 {
+		t.Fatal("historical corpus replay against changed content did not refuse before requests")
+	}
+}
 func TestReferenceSourceBindingAndMismatchFailClosed(t *testing.T) {
 	data := testData(t)
-	c, err := Frozen()
+	c, err := ForSources(data.Sources)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -47,7 +102,7 @@ func TestReferenceSourceBindingAndMismatchFailClosed(t *testing.T) {
 	if _, err = Replay(context.Background(), client, c, data); err == nil || client.Count() != 0 {
 		t.Fatal("source drift must refuse before requests")
 	}
-	c, err = Frozen()
+	c, err = ForSources(data.Sources)
 	if err != nil {
 		t.Fatal(err)
 	}

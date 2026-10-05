@@ -1,0 +1,316 @@
+{
+  "schema": "v1-2-graph-editorial-factual-review-v1",
+  "reviewer": "/root/toolchain",
+  "role": "factual",
+  "checked_on": "2026-10-05",
+  "proposal_revision": 2,
+  "proposal_sha256": "2aabb5e017fda46910f354a6bbce0c39dfdda8a5de215dce18bbeabc67683111",
+  "source_module": "scripts/synonym_graph_v1_2_data.py",
+  "source_module_sha256": "a982934526bc132e089d6012cd1d8254952bc99791d9f8c14e889d773c21a247",
+  "independence": "Reviewer did not author or revise proposal, module, research pool or fixtures. This independent review covers exact frozen R2 bytes only; no R1 review was saved or adopted.",
+  "input_ids": [
+    "lex-1",
+    "lex-2",
+    "lex-3",
+    "lex-5",
+    "link-carare-poteca"
+  ],
+  "source_policy": {
+    "adopted_material": "Original editorial lexical facts, individual word forms and reviewer paraphrases only. No copied definitions, quotations, dictionary database, document text, image or corpus is installed.",
+    "citations_are_not_licenses": true,
+    "restrictions": "Dexonline’s freshly accessed footer restricts extraction, storage and use without prior written agreement except officially provided public datasets. This review does not grant redistribution permission for that site’s data; meanings are independently corroborated and forms are editorial grammatical judgments. Availability of publisher/heritage/scholarly evidence is not blanket reuse permission.",
+    "scope": "No bulk scraping, dictionary-definition copying, document-body archive, media copying or inherited approval. Research URLs remain outside the runtime source module."
+  },
+  "checks": {
+    "module_alias_projection_exact": true,
+    "module_edge_projection_exact": true,
+    "module_has_no_new_node_or_game_ids": true,
+    "runtime_source_has_no_research_urls": true,
+    "all_four_node_snapshots_equal_baseline_fixture": true,
+    "unicode_version": "15.0.0",
+    "foreign_owner_exact_normalized_collisions": [],
+    "literal_forms": 22,
+    "distinct_normalized_keys": 22,
+    "existing_endpoint_pair_edge": false,
+    "historical_search": "No prior exact rejected proposals for these four synonym families found in earlier content pools and JSON review records. Cărare/Potecă co-occur in historical Conexiuni dossiers cx_geografie_180 and cx_viata_de_roman_367; quality impacts are a separate obligation."
+  },
+  "items": [
+    {
+      "id": "lex-1",
+      "node_id": "n_v4via_lift",
+      "headword": "ascensor",
+      "verdict": "accept",
+      "forms": [
+        {
+          "form": "ascensor",
+          "verdict": "accept",
+          "morphology": "singular noun"
+        },
+        {
+          "form": "ascensorul",
+          "verdict": "accept",
+          "morphology": "definite singular nominative/accusative"
+        },
+        {
+          "form": "ascensoare",
+          "verdict": "accept",
+          "morphology": "indefinite plural"
+        },
+        {
+          "form": "ascensoarele",
+          "verdict": "accept",
+          "morphology": "definite plural nominative/accusative"
+        },
+        {
+          "form": "ascensorului",
+          "verdict": "accept",
+          "morphology": "definite singular genitive/dative"
+        },
+        {
+          "form": "ascensoarelor",
+          "verdict": "accept",
+          "morphology": "definite plural genitive/dative"
+        }
+      ],
+      "rationale": "The installed lift node has the vertical passenger-transport sense of ascensor. Corint’s own grammar excerpt explicitly identifies this pair as synonyms. The six forms follow the neuter ascensor/ascensoare paradigm; each spelling is correct.",
+      "sense_limits": "Building passenger lift only; no additional machinery type or new concept is implied.",
+      "sources": [
+        {
+          "url": "https://edituracorint.ro/pub/media/catalog/product/attachment/g/r/gramatica_limbii_romane_pentru_elevi_si_profesori_fragment.pdf",
+          "access": "successful primary publisher PDF; printed p.10/P3, lines51–54",
+          "supports": "Lift/ascensor lexical equivalence."
+        },
+        {
+          "url": "https://iscir.ro/wp-content/uploads/2011/03/HGascensoare2016.pdf",
+          "access": "successful26-page official PDF; current indexed excerpt",
+          "supports": "Passenger-ascensor terminology and ascensorul/ascensoarele/ascensoarelor usage."
+        }
+      ],
+      "crosscheck": "Fresh ascensor dictionary entry accessed, but no dictionary text or paradigm is reproduced; article/case forms are independent editorial grammatical judgments."
+    },
+    {
+      "id": "lex-2",
+      "node_id": "n_v4gas_rosie",
+      "headword": "tomată",
+      "verdict": "accept",
+      "forms": [
+        {
+          "form": "tomată",
+          "verdict": "accept",
+          "morphology": "singular noun"
+        },
+        {
+          "form": "tomate",
+          "verdict": "accept",
+          "morphology": "indefinite plural or indefinite singular genitive/dative"
+        },
+        {
+          "form": "tomatele",
+          "verdict": "accept",
+          "morphology": "definite plural nominative/accusative"
+        },
+        {
+          "form": "tomatei",
+          "verdict": "accept",
+          "morphology": "definite singular genitive/dative"
+        },
+        {
+          "form": "tomatelor",
+          "verdict": "accept",
+          "morphology": "definite plural genitive/dative"
+        }
+      ],
+      "rationale": "Tomată names the tomato represented by the existing edible-food Roșie node. UEFISCDI’s original project description alternates tomate/roșii for the same crop and its English text names tomatoes. The five proposed spellings are correct feminine forms.",
+      "sense_limits": "Edible tomato only; no colour adjective, cattle-breed phrase, unripe-only term or unrestricted pătlăgea alias is added.",
+      "sources": [
+        {
+          "url": "https://uefiscdi.gov.ro/lista-proiecte-finantate-ro-md-2023",
+          "access": "successful primary HTML; projectPN-IV-P8-8.3-ROMD-2023-0298, lines3369–3376",
+          "supports": "Independent use of tomate and roșii for the same crop."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/tomat%C4%83",
+          "access": "successful HTML; lines134–148",
+          "supports": "Supplementary spelling cross-check; DEX-derived, not an independent semantic signal."
+        }
+      ],
+      "crosscheck": "Fresh tomată dictionary entry accessed. The omitted tomata spelling is already recognized by normalization once tomată is installed and is not a new data point."
+    },
+    {
+      "id": "lex-3",
+      "node_id": "n_vioara",
+      "headword": "scripcă",
+      "verdict": "accept",
+      "forms": [
+        {
+          "form": "scripcă",
+          "verdict": "accept",
+          "morphology": "singular noun"
+        },
+        {
+          "form": "scripci",
+          "verdict": "accept",
+          "morphology": "indefinite plural or indefinite singular genitive/dative"
+        },
+        {
+          "form": "scripcile",
+          "verdict": "accept",
+          "morphology": "definite plural nominative/accusative"
+        },
+        {
+          "form": "scripcii",
+          "verdict": "accept",
+          "morphology": "definite singular genitive/dative"
+        },
+        {
+          "form": "scripcilor",
+          "verdict": "accept",
+          "morphology": "definite plural genitive/dative"
+        }
+      ],
+      "rationale": "Scripcă is an established regional name for the violin. CIMEC’s independent traditional-taraf inventory explicitly identifies it as a vioară. Scripci is the regular accepted plural and scripcii the definite singular oblique form; all five spellings are correct.",
+      "sense_limits": "Musical instrument only; exclude sound/music/profession extensions, proper names and compounds naming a contrabass or toy. An optional accepted input synonym does not justify a new obscure target.",
+      "sources": [
+        {
+          "url": "https://temp-18-250.cimec.ro/images/imaterial/Extras_Inventar_Taraful-Traditional.pdf",
+          "access": "successful primary heritage PDF; printed p.4/P3 line173",
+          "supports": "Independent identification of scripcă as a name of vioară."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/scripc%C4%83",
+          "access": "successful HTML; restrictive footer present",
+          "supports": "Read-only counterexample check for instrument-versus-secondary senses and proper-name distinction. No dictionary prose or paradigm is installed."
+        }
+      ],
+      "crosscheck": "The five forms are editorial grammatical judgments. Omitted scripca is already recognized by normalization once scripcă is installed."
+    },
+    {
+      "id": "lex-5",
+      "node_id": "n_v4soc_magazin",
+      "headword": "prăvălie",
+      "verdict": "accept",
+      "forms": [
+        {
+          "form": "prăvălie",
+          "verdict": "accept",
+          "morphology": "singular noun"
+        },
+        {
+          "form": "prăvălia",
+          "verdict": "accept",
+          "morphology": "definite singular nominative/accusative"
+        },
+        {
+          "form": "prăvălii",
+          "verdict": "accept",
+          "morphology": "indefinite plural or indefinite singular genitive/dative"
+        },
+        {
+          "form": "prăvăliile",
+          "verdict": "accept",
+          "morphology": "definite plural nominative/accusative"
+        },
+        {
+          "form": "prăvăliei",
+          "verdict": "accept",
+          "morphology": "definite singular genitive/dative"
+        },
+        {
+          "form": "prăvăliilor",
+          "verdict": "accept",
+          "morphology": "definite plural genitive/dative"
+        }
+      ],
+      "rationale": "The school publisher’s dramatic-text lesson uses prăvălie for premises with merchants selling goods. Its indexed grade-VIII glossary explicitly pairs this with magazin. The existing node is the concrete commercial shop; all six feminine forms are correct.",
+      "sense_limits": "Retail premises only; no warehouse, magazine/publication or regional false-friend sense is merged. No alcohol-dependent play value or historical shop theme is introduced.",
+      "sources": [
+        {
+          "url": "https://ro.izzi.digital/DOS/61951/63485.html",
+          "access": "successful primary interactive school lesson; lines27–29",
+          "supports": "Concrete retail-goods context for prăvălie."
+        },
+        {
+          "url": "https://catalog.manualedigitaleart.ro/art-r8/v1/art-r8.pdf",
+          "access": "fresh indexed publisher glossary excerpt, direct fetch404",
+          "supports": "Historical school-glossary signal; direct availability limitation retained."
+        },
+        {
+          "url": "https://catalog.manualedigitaleart.ro/art-romana-8-2025/v1/art-romana-8-2025.pdf",
+          "access": "fresh indexed publisher excerpt; direct fetch refused by38.7MB tool size cap",
+          "supports": "Current school-text recognition and retail context; no PDF downloaded."
+        }
+      ],
+      "crosscheck": "Fresh prăvălie dictionary entry and Wiktionary search paradigm checked. These are not treated as independent corpus licenses; morphology is an editorial grammatical judgment."
+    },
+    {
+      "id": "link-carare-poteca",
+      "verdict": "accept",
+      "exact_edge": {
+        "src": "n_v4geo_carare",
+        "dst": "n_v4geo_poteca",
+        "relation": "synonym_of",
+        "label_ro": "sinonime pentru un drum îngust de mers pe jos",
+        "strength": 0.95,
+        "is_distractor": 0,
+        "bidirectional": 1
+      },
+      "rationale": "Both existing endpoint definitions denote narrow routes for walking. The independently fetched lexical study identifies potecă with cărare in precisely that physical footpath sense. The direction-neutral caption accurately limits the synonym claim and preserves both node IDs.",
+      "sense_limits": "Exclude hair-parting, cart-road, street and generic arbitrary road identity. Bidirectionality is legitimate for this scoped lexical relation. Strength0.95 is an editorial gameplay weight, not measured scientific confidence.",
+      "sources": [
+        {
+          "url": "https://limbaromana.md/index.php?go=articole&n=462",
+          "access": "successful primary article by Nicolae Felecan and Ramona Băbaș; line88",
+          "supports": "Pedestrian-path potecă/cărare meaning; the separate colnic discussion supplies a counterexample against collapsing wider cart-road senses."
+        },
+        {
+          "url": "https://lingv.ro/wp-content/uploads/2019/04/LR_2_2008.pdf",
+          "access": "successful independent academic journal PDF; printed p.209/P94 lines3778–3779",
+          "supports": "Supplementary linguistic corroboration of the shared pedestrian-path semantic field."
+        }
+      ],
+      "separate_gate": "Factual acceptance does not certify numeric gameplay effects. Fresh six-game quality/topology checks must cover approved-round selection, Contexto feedback, Lanț routes, Alchimie projections and historical saves before installation."
+    }
+  ],
+  "held_research_notes": [
+    {
+      "headword": "nădragi",
+      "verdict": "hold",
+      "reason": "Excluded from R2. Pants evidence alone does not settle underwear/izmene polysemy; a generic exact alias may choose the wrong intended garment sense. Its proposed county-library glossary URL also redirects to Account Suspended. No nădragi forms are accepted by this review.",
+      "sources": [
+        "https://clasate.cimec.ro/Detaliu.asp?k=1F23777912F04672B772797EE5CC4CFA",
+        "https://ro.wiktionary.org/wiki/n%C4%83drag",
+        "https://www.bjarges.ro/download/enciclopedia/enciclopedia_iv_Glosar.pdf"
+      ],
+      "scope": "Historical research only, outside exact R2 input_ids."
+    },
+    {
+      "headword": "mâță",
+      "verdict": "hold",
+      "reason": "Outside R2. Familiar cat synonym evidence does not remove the mâțe/mate mathematics accent-folding collision; no cat-family aliases accepted here.",
+      "sources": [
+        "https://limbaromana.md/index.php?go=articole&n=3657"
+      ]
+    }
+  ],
+  "omitted_redundant_forms": {
+    "tomata": "Already recognized through tomată accent folding after installation; adds zero distinct normalized keys.",
+    "scripca": "Already recognized through scripcă accent folding after installation; adds zero distinct normalized keys."
+  },
+  "conclusion": {
+    "accepted_ids": [
+      "lex-1",
+      "lex-2",
+      "lex-3",
+      "lex-5",
+      "link-carare-poteca"
+    ],
+    "held_exact_input_ids": [],
+    "rejected_exact_input_ids": [],
+    "accepted_forms": 22,
+    "distinct_normalized_keys": 22,
+    "accepted_relations": 1,
+    "new_shared_nodes": 0,
+    "new_curated_rounds": 0,
+    "scope": "Exact R2 factual gate only. It does not replace quality review, native binding/export/runtime gates, round promotion or push/deploy authorization."
+  }
+}

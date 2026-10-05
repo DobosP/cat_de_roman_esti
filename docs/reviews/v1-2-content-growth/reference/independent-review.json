@@ -1,0 +1,178 @@
+{
+  "baseline_commit": "6deab61c20067c66f0b6120b2b09f44a580526d6",
+  "capture": {
+    "answer_driving_source": "The Django oracle private session/graph drives successful actions; native responses provide only the random-ID bridge.",
+    "capture_result": "1207 responses matched",
+    "capture_run_log_sha256": "eb5b6b57a157d00faa8c63f67b96400d306c2d852d414b040ac8a7d1de2c30d0",
+    "expected_response_source": "Django TestClient response.status_code and response.json(); the native response is compared, never frozen as an expected response.",
+    "normalization": "Random session identifiers only; status, rank, score, paths and content metadata are compared exactly.",
+    "only_changes": [
+      "worktree ROOT",
+      "task output destination",
+      "accurate independent-reference label"
+    ],
+    "original_baseline_bytes_exact": true,
+    "original_path": "docs/reviews/go-native-toolchain/archived-reference/capture_reference.py.txt",
+    "original_sha256": "a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+    "prepared_sha256": "8e546ea4d5136570efae4730bc23f86d0ef7cc213d848472f636b720b65deec5",
+    "provenance_path": "docs/reviews/v1-2-content-growth/reference/capture-verification.json",
+    "provenance_sha256": "bc47150f94626e9096c66086e779907f59e812306b407fb9e4857e70d2399303",
+    "request_expectation_logic_bytes_unchanged": true
+  },
+  "checked_on": "2026-10-05",
+  "corpora": {
+    "current": {
+      "cases": 1207,
+      "compressed_bytes": 33601,
+      "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz",
+      "reference": "Independent Django application; V1.2 reviewed sources at baseline6deab61c20067c66f0b6120b2b09f44a580526d6; preserved capture author a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+      "sha256": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+      "source_count": 8,
+      "source_sha256": {
+        "alchimie_discovery_world_v92.json": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+        "alchimie_recipe_extensions_v92.json": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+        "board_rankings_v37.json": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+        "derived_catalog_v38.json": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+        "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+        "kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+        "quick_games_v92.json": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+        "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+      },
+      "uncompressed_sha256": "449465ca4b539c9e6bf69eb08176ac8fc29b129cccf9b6f4947dff239ee91e20"
+    },
+    "current_sources_equal_export_provenance_and_all_fixture_bytes": true,
+    "historical": {
+      "baseline_bytes_exact": true,
+      "cases": 1207,
+      "path": "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz",
+      "reference": "Django application, scripts/check_go_parity.py at ae70c16935d402719b95405685bccbbbea13a3bd",
+      "sha256": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+      "source_count": 8
+    },
+    "native_export_sha256": "d98280f0178e13f0d6ec8fd92813c4057f6408a0e3215ec61a0dbb70f9dd3313"
+  },
+  "findings": [],
+  "full_comparison": {
+    "all_requests_exact": true,
+    "all_statuses_exact": true,
+    "changed_case_zero_based": 923,
+    "changed_request": "GET /api/manifest",
+    "changed_response_bodies": 1,
+    "coverage": "Same fixed seed, category, starter, daily, Unicode, malformed-query/body, session-rotation, all-six-game successful/error journeys and exploration cases as the preserved author.",
+    "only_leaf_differences": [
+      {
+        "after": "fixture-v1-2-reviewed-content",
+        "before": "fixture-v1-reviewed-content",
+        "path": "build_version"
+      },
+      {
+        "after": "sha256:c8f9c6fc4f9d2ff7e1221f10ef17f2cbcc7194206d773fae8cebc583e6c74c51",
+        "before": "sha256:45cffff4729eb237009e59bb44dce390f883b692269b75207ed6cd9ab8faa4f8",
+        "path": "content_hash"
+      },
+      {
+        "after": 9459,
+        "before": 9458,
+        "path": "counts.edges"
+      }
+    ],
+    "request_count": 1207,
+    "request_sequence_sha256": "265e830797eb8b034f58613326c05326530f4a5406319e2be09ec4514580f7ed",
+    "sampled_game_rank_or_score_differences": 0,
+    "sampled_privacy_or_game_payload_differences": 0,
+    "status_counts": {
+      "200": 492,
+      "400": 141,
+      "404": 13,
+      "405": 13,
+      "413": 1,
+      "422": 547
+    },
+    "status_sequence_sha256": "f191f878f6033ae08bf2cbc82ca389a4097bac856808a13db2ee837a08d89ac7",
+    "unchanged_response_bodies": 1206
+  },
+  "kind": "v1-2-independent-current-http-reference-review-v1",
+  "limitations": [
+    "The corpus preserves the original1207 anonymous cases; it does not claim every possible new synonym guess or all graph feedback profiles are covered. Those content/runtime gates remain separate.",
+    "Fresh native audits/final judgments and populated installed-authority integration must bind the final runtime code including this selector; independent HTTP parity does not grant content promotion or deployment approval."
+  ],
+  "reviewer": "Codex independent capture/selector reviewer /root/synonym_scout",
+  "scope": "Independent reference capture provenance, complete historical/current vector comparison and exact-source selector implementation; no lexical or game-content approval.",
+  "selector_review": {
+    "Replay_source_refusal_and_exact_compare_bytes_unchanged": true,
+    "current_corpus_pin_and_exact1207_count_checked": true,
+    "default_parity_selects_before_transport_construction": true,
+    "historical_Frozen_api_and_pin_preserved": true,
+    "historical_archive_evidence_assertions_preserved": "Initial f2f8 export, old source map and2416nodes/9458edges/180puzzles remain in a separate immutable-evidence test.",
+    "reviewed_sha256": {
+      "go-backend/cmd/cat-qualify/main.go": "38aa41a38f51a6700d238085dd80845c5fff166b5b21a521cec5ca79ac8e6def",
+      "go-backend/internal/contentbuild/build_test.go": "f066038e6c9bfb83e41dd01e309b2f569ffdf511ab2cf7a1fc73733dacad3d02",
+      "go-backend/internal/httpgolden/golden.go": "2447ba4c07e46cf3378d084735f1a822d6579e3d30f860d4a5c17c5d3d97d068",
+      "go-backend/internal/httpgolden/golden_test.go": "7015c4f761711d7005ddbb7eb9305f7c13ee3a119a6e065eca92b5e6b7b9776d",
+      "go-backend/internal/httpgolden/testdata/README.md": "347980ef69561fadc4f819a941e3ed4df26bb07f8d8f130bc4490c74c0da6c66"
+    },
+    "selection": "reflect.DeepEqual of complete old/current source maps; no nearest-match or fallback for unknown, missing, extra or mixed sources.",
+    "session_alias_replacement_and_normalization_bytes_unchanged": true
+  },
+  "verdict": "accept",
+  "verification": {
+    "focused_race_command": "go -C go-backend test -race ./internal/httpgolden -run 'TestCurrentIndependentHTTPParity|TestHistoricalFrozenCorpusAndExactReviewedSelection|TestUnknownMixedAndPartialSourcesRefuseWithoutRequests|TestReferenceSourceBindingAndMismatchFailClosed|TestSessionAliases' -count=1 -json",
+    "focused_race_log_sha256": "7b0ca5caa2ba11c424f27fe0ec5427befa4aa00e4ab892ff3426dca730c3d540",
+    "focused_race_results": [
+      {
+        "elapsed_seconds": 6.65,
+        "name": "TestCurrentIndependentHTTPParity",
+        "passed": true
+      },
+      {
+        "elapsed_seconds": 2.34,
+        "name": "TestHistoricalFrozenCorpusAndExactReviewedSelection",
+        "passed": true
+      },
+      {
+        "elapsed_seconds": 3,
+        "name": "TestUnknownMixedAndPartialSourcesRefuseWithoutRequests",
+        "passed": true
+      },
+      {
+        "elapsed_seconds": 2.66,
+        "name": "TestReferenceSourceBindingAndMismatchFailClosed",
+        "passed": true
+      },
+      {
+        "elapsed_seconds": 0,
+        "name": "TestSessionAliasesKeepPrefixAndEscapedIdentityDistinct",
+        "passed": true
+      },
+      {
+        "elapsed_seconds": 15.69,
+        "name": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+        "passed": true
+      }
+    ],
+    "focused_vet_command": "go -C go-backend vet ./internal/httpgolden ./cmd/cat-qualify",
+    "focused_vet_exit_code": 0,
+    "independent_python_export_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. CAT_ACCOUNTS_ENABLED=0 <shared reference interpreter> scripts/export_go_content.py --check",
+      "exit_code": 0,
+      "result": "Go private content current: 7231736 bytes"
+    },
+    "independently_compiled_selector_replay": {
+      "qualifier_binary_sha256": "2446a3a4a952e5df29cc0b1739120839f1fe43f2a050762b5282bbe5319ecd02",
+      "report": {
+        "accounts_enabled": false,
+        "content_hash": "sha256:c8f9c6fc4f9d2ff7e1221f10ef17f2cbcc7194206d773fae8cebc583e6c74c51",
+        "elapsed_seconds": 0.959087717,
+        "mode": "independent_parity",
+        "ok": true,
+        "reference": "Independent Django application; V1.2 reviewed sources at baseline6deab61c20067c66f0b6120b2b09f44a580526d6; preserved capture author a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+        "requests": 1207
+      },
+      "report_sha256": "4df4dd08b866828f4f0592225d6976e029a5b1c32a7cab64598067f50fadbabe",
+      "server_binary_sha256": "efe509d37f74aac97e378ca9ef90185f57de0485f4dd19cb20607c4f8a356373"
+    },
+    "qualified_toolchain": "go1.27.1 linux/amd64",
+    "running_review_test_processes": 0,
+    "unknown_partial_extra_mixed_and_stale_source_zero_request_refusals_tested": true
+  }
+}
