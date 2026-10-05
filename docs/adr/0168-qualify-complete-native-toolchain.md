@@ -44,3 +44,15 @@ and publication. Resource reports remain local; coordinator uses authorized stat
 
 [Proof](../reviews/go-native-toolchain/README.md), [tooling](../NATIVE_TOOLCHAIN.md),
 [testing](../agent-testing.md) and [STATUS](../STATUS.md) record exact boundaries/receipts.
+
+## Release metadata closure — 2026-10-05
+
+The native release guard requires neutral `go-backend/release.json` schema 1 and
+compares it, frontend package/lock/root-package/TypeScript version and lobby badge
+with the embedded native build version. Original Python package/project declarations
+remain checked independently when retained; their absence cannot block a native root.
+The original SemVer and mismatch contracts remain. Focused race/vet and independent
+review pass, including a compiled test run from a four-file native/frontend-only root
+and explicit native/frontend version drift refusals. This closure changes no serving
+source, fixture, auth module, product frontend or generated asset. No heavy release
+gate was repeated; the earlier complete source/image receipts remain applicable.

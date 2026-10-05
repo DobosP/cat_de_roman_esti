@@ -97,3 +97,16 @@ rejected making the Python reference job manual; the active job remains automati
 explicit human approval. All reference tests and rollback profiles remain intact. No
 rejected CI action was applied through a workaround. Source work is complete and locally
 qualified; this policy decision is the remaining approval gap.
+
+## Native release metadata closure
+
+The release guard now binds neutral `go-backend/release.json` schema 1 to the native
+AppVersion and all original frontend package/lock/root-package/TypeScript/badge fields.
+Each retained Python declaration remains checked independently when present. Go
+1.27.1 focused race passes (2.599s), vet and independent review pass, with all 11
+negative cases and matching optional-declaration positives. A compiled race test
+passes from a four-file native/frontend-only root (1.64s), with no Python references;
+bad frontend and neutral native versions fail explicitly (1.24s/1.36s). Python/Rust
+are absent from PATH during that proof. Scratch receipts: task `release-closure/`.
+Only the test, neutral release metadata and documentation change in this correction;
+serving sources/data/auth/frontend/assets are unchanged. The full gate was not repeated.

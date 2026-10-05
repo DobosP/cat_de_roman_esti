@@ -102,7 +102,7 @@ Unrevealed answers, recipe maps and routes stay private.
 - Native source/tooling stage [ADR-0165](adr/0165-native-source-build-and-qualification.md):
   exact eight-source export, 180 terminal paths, 32 neutral body cases and 1009 saved prefixes pass.
   Native compiled parity 1207/1207, synthetic smoke151/28asset proofs, REST/mobile/docs race/vet pass.
-  Native operators/builders exact716/336/4rail race/vet and tagged input/release coupling pass.
+  Native operators/builders/tagged input and neutral release coupling (optional legacy) pass.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): clean native Go/PG/Node242/browser622 GREEN.

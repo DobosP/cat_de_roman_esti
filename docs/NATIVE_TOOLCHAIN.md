@@ -100,5 +100,7 @@ supplied disposable database. Provider mocks remain local; production flags are 
 Tagged app-pack input: native terminal `--offline --fixture <tagged.json>` auto-detects
 public tagged envelopes. Bounded `internal/apppack` contracts preserve tags/facets and
 filter app/layer/schema/kind/legal scope on detached records. Native release coupling
-checks the frontend package/lock/badge and retained package declarations against the
-canonical native build version. These input/version guards are distinct from mobile output.
+checks neutral `go-backend/release.json` and frontend package/lock/badge against the
+canonical native build version; retained Python declarations are checked when present.
+See the release closure in [ADR-0168](adr/0168-qualify-complete-native-toolchain.md).
+These input/version guards are distinct from mobile output.
