@@ -4,7 +4,8 @@ This is the contract a **generated mobile client** (Track A: Expo / React Native
 depends on. It is additive over the existing `/api/wordgames/*` routes — no route paths,
 or methods changed. Conexiuni's earned-group semantics are defined by
 [ADR-0014](adr/0014-conexiuni-earned-group-reveal.md). Guarded by
-`tests/test_mobile_contract.py` and the manifest tests in `tests/test_app_pack_contract.py`.
+native HTTP website/OpenAPI goldens, `internal/mobilepack` output contracts and
+`internal/apppack` input contracts; original Python tests remain independent references.
 
 ## 1. Stable OpenAPI operationIds
 
@@ -302,8 +303,10 @@ clients submit ids, never labels, so matching is unaffected.
 
 ## 6. Public app-pack fixture for roedu-mobile
 
-`scripts/export_mobile_app_pack.py` exports a deterministic, public-only app-pack snapshot
-from the bundled KG (ADR-0008). The checked-in cat fixture is:
+`go -C go-backend run ./cmd/cat-mobile-pack --root .. --check` checks the deterministic
+public-only app-pack snapshot; without `--check`, explicit `--out` regenerates it.
+The original `scripts/export_mobile_app_pack.py` remains an independent reference for
+snapshots from the bundled KG (ADR-0008). The checked-in cat fixture is:
 
 ```text
 tests/fixtures/cat_mobile_app_pack_contract.json

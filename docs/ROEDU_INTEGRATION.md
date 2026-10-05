@@ -17,8 +17,9 @@ We use only the **read** transport: `GET /v1/health`, `GET /v1/products`,
 
 ## Tagged app-pack contract
 
-The repo also has fixture-backed support for the shared RO-EDU app-pack envelope while
-the real `ro_data_server` endpoint is being integrated. The expected public packs are:
+The native `apppack` decoder and terminal `--fixture` autodetection support the shared
+RO-EDU app-pack envelope through bounded synthetic/offline input. Real endpoint integration
+remains outside this migration. The expected public packs are:
 
 - `pack_id`: `roedu:cat_de_roman_esti:kg_nodes:v1`,
   `roedu:cat_de_roman_esti:kg_edges:v1`, `roedu:cat_de_roman_esti:kg_puzzles:v1`
@@ -42,21 +43,11 @@ non-empty `legal_basis`, and `gdpr_relevant=false`. Missing or unknown metadata,
 game bundle. Public records also drop internal-only provenance keys such as `source_url`,
 `sha256`, internal paths, and `llms.txt` references.
 
-## API key
+## API configuration
 
-```
-ROEDU_API_KEY = cat-de-roman-dev
-```
-
-On the platform this resolves to:
-
-```
-Scope(app="cat-de-roman-esti", products={"kg_nodes","kg_edges","kg_puzzles"}, internal=False)
-```
-
-Scope isolation: `social-app-dev` and `ro-teacher-dev` keys do **not** get KG access;
-`admin-dev` wildcard covers everything. This key is dev-only — production keys are
-issued separately.
+The native online client reads `ROEDU_API_KEY`; `ROEDU_API_URL` or explicit `--api-url`
+selects the approved producer. Values are not written into source, reports or errors.
+The three-product public scope is configured by the producer; unknown permissions refuse.
 
 ## Field mapping (served record → our model)
 
@@ -97,60 +88,46 @@ issued separately.
 | `tags`,`facets`,`source`,`redistributable` | same | retained for app-pack puzzle selection |
 
 `solution_path` / `hint_neighbors` are tolerated as either a JSON-array **string**
-(as stored in SQLite/served) or an already-parsed list — see `engine._as_id_list`.
-`is_distractor` / `bidirectional` are tolerated as int, "1"/"0", or bool — see
-`graph._as_bool`.
+(as stored in SQLite/served) or an already-parsed list — see native `roeduclient.IDList` (retained `engine._as_id_list` reference).
+`is_distractor` / `bidirectional` are tolerated as int, "1"/"0", or bool — see native
+`hopcli` record parsing (retained `graph._as_bool` reference).
 
 ## Fail-closed gate
 
-The server is fail-closed and enforces the license gate (`GatePolicy.permits`). The
-vendored client trusts the server but is itself fail-closed: `RoeduClient.iter` returns
-immediately on any page with `available=false`, so a gate refusal or an unbuilt store
-yields **zero** records. `data.load_from_client` therefore degrades to a smaller (never
-fabricated) bundle, and `HopGame.load` refuses puzzles whose nodes aren't present.
-Client pulls are bounded by default (`10_000` nodes, `50_000` edges, `5_000` puzzles);
-callers may override those caps for tests or controlled deployments.
+Native REST loads refuse unavailable/torn pages, repeated cursors/IDs, changed snapshots,
+redirects, malformed/ambiguous Unicode JSON and byte/page/record cap overruns. Legal
+redistribution and non-personal metadata is required, and provenance/page identities
+survive private fixture export. Limits: 200 records/page, 500 pages/product, 4 MiB/page,
+10,000 nodes, 50,000 edges and 5,000 puzzles; request/operation deadlines are explicit.
+No partial corpus is committed on refusal. Native tagged app-pack input caps 16 MiB/512
+packs and the same product counts; mismatched/private/unknown legal rows are withheld.
+The independent original client/loader/tests remain available as optional references.
 
 ## Offline fixture
 
 For development and tests without a live server, `cat_de_roman_esti/fixtures/kg_sample.json`
 is a hand-authored KG snapshot conforming to the contract field shapes. `--offline`
 plays against it; the CLI also auto-falls-back to it if the server probe (`/v1/health`)
-fails. The test suite drives a **fake in-process client** (`tests/conftest.py::FakeRoeduClient`)
-that re-implements the page/cursor/availability contract over the same sample — so the
-loader, pagination, and fail-closed path are all exercised with no network.
+fails. Native REST tests use local synthetic HTTP peers; native app-pack/terminal tests preserve
+exact fixture tags/facets, public filtering and playable paths. Retained Python fake-client
+tests independently describe the same original integration.
 
 `tests/fixtures/kg_app_pack_sample.json` is a synthetic redistributable app-pack
 fixture. It contains no internal source URLs, checksums, internal paths, `llms.txt`
 entries, or TDM-only item bodies.
 
-## Running against a live server
+## Explicit transport/fixture qualification
 
-```
-cp .env.example .env            # ROEDU_API_URL + ROEDU_API_KEY=cat-de-roman-dev
-# start the platform (in the ro_data_server repo):
-#   ROEDU_DATA_DIR=/path/to/data python -m ro_data_server --port 8077
-cat-de-roman --category istorie --difficulty hard
-```
-
-## Live e2e smoke
-
-The release smoke uses the real transport and loader path; it does not fall back to the
-offline fixture. Run it only when a live `ro_data_server` is available:
+Use a synthetic or separately authorized RO-EDU endpoint; no live import was used here.
 
 ```bash
-ROEDU_API_URL=<ro_data_server_url> ROEDU_API_KEY=<api_key> \
-  python scripts/e2e_smoke.py --require-live easy
+./cat-de-roman --api-url http://127.0.0.1:8077 --category istorie --difficulty hard
+./cat-de-roman --offline --fixture tests/fixtures/kg_app_pack_sample.json --list
+go -C go-backend run ./cmd/cat-roedu smoke --url http://127.0.0.1:8077 --difficulty easy
+go -C go-backend run ./cmd/cat-roedu export --url http://127.0.0.1:8077 --out <scratch>/kg.json
 ```
 
-On PowerShell:
-
-```powershell
-$env:ROEDU_API_URL = "<ro_data_server_url>"
-$env:ROEDU_API_KEY = "<api_key>"
-python scripts/e2e_smoke.py --require-live easy
-```
-
-Without `--require-live`, an unavailable or unhealthy live server exits with skip code
-`77` and prints the rerun command. With `--require-live`, the same condition exits
-`1` so a release gate can fail clearly instead of silently passing.
+The terminal retains health-only offline fallback. Smoke/export never turn missing
+required infrastructure, license refusal or a partial corpus into success/skip. The
+original `scripts/e2e_smoke.py` and `gen_real_fixture.py` remain optional historical
+references; active bounded operators and receipts are in [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md).

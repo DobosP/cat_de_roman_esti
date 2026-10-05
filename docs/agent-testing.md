@@ -4,9 +4,10 @@ Last verified: 2026-10-04
 
 ## Native serving gates
 
-Go 1.27.1 serves the arcade, accounts and proposals; `run.sh`/root Dockerfile are canonical.
+Go 1.27.1 serves the arcade, accounts/proposals and native content/tooling; Node 24 builds the SPA.
 [ADR-0162](adr/0162-select-go-production-backend.md) and [ADR-0163](adr/0163-complete-native-go-accounts.md)
-record the runtime boundaries. Python commands below are offline content/reference gates.
+record serving boundaries; [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md)
+records native operator/review rails. Python commands below are optional independent references.
 
 | Scope | Command | Expected |
 |---|---|---|
@@ -14,11 +15,11 @@ record the runtime boundaries. Python commands below are offline content/referen
 | Shared native identity | `go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...` | crypto/session/provider fixtures pass |
 | Native account release | `go -C go-backend test -race ./internal/accounts -accounts.database <disposable-dsn>` | real PostgreSQL migration/consent/erasure contracts pass |
 | Native combined HTTP release | `go -C go-backend test -race ./internal/httpapi -arcade.database <disposable-dsn>` | real signup/consent/game ownership/credit/erase races pass |
-| Native content freshness | `PYTHONPATH=. <interp> scripts/export_go_content.py --check` | sealed export matches reviewed source |
-| Differential HTTP | `PYTHONPATH=. <interp> scripts/check_go_parity.py --binary <native-binary>` | current response parity in [STATUS](STATUS.md) |
+| Native source freshness | `go -C go-backend run ./cmd/cat-content validate --root .. && go -C go-backend run ./cmd/cat-content export --root .. --check` | complete source gates and exact sealed export |
+| Independent frozen HTTP | `go -C go-backend run ./cmd/cat-qualify parity --binary <native-binary>` | all 1207 independent expected responses/source bindings |
 | Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | tracked `web/static` bundle; no frontend language migration |
-| Browser | `cd frontend && npm run test:e2e` after build/browser setup | Go server; six real game journeys desktop/mobile; offline Python answer helpers |
-| Docs | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
+| Browser | `cd frontend && npm run test:e2e` after build/browser setup | Go server/private planner; six real journeys on desktop/mobile |
+| Native docs | `go -C go-backend run ./cmd/cat-doc-check --root ..` | empty error/budget arrays |
 | Whitespace | `git diff --check` | no output |
 
 Native PG gates require an explicit disposable fixture, never a live or production DSN.
@@ -48,15 +49,15 @@ Other supported Python versions test the retained implementation without regener
 `pyproject.toml` adds `-q`; use `-o addopts=""` when recording assertion totals.
 Node 24 is the qualified frontend build environment; verify `node -v`/`npm -v` before use.
 Playwright setup uses `npx playwright install chromium`; `CDR_E2E_PORT` and
-`CDR_E2E_OUTPUT_DIR` scope the local server and scratch receipts. Only test helpers invoke Python.
+`CDR_E2E_OUTPUT_DIR` scope the local server and scratch receipts. Private answer helpers run Go; `CDR_BROWSER_PLAN_BINARY` selects the scratch planner.
 Windows targeted reference tests use `PYTHONUTF8=1`; the full Unix `resource`-using suite needs WSL.
-For Windows Edge browser fixtures, make a reference `python3.exe` available on `PATH`.
+For browser fixtures, build `cat-browser-plan` and set its absolute scratch path.
 
 ## Before commit
 
 1. Run docs/whitespace gates; documentation-only changes need no game or asset rebuild.
 2. Native behavior changes run focused Go race/vet and applicable PG/HTTP release lanes.
-3. Content changes run validators, export freshness and independent review/reference gates.
+3. Content changes run native source/operator/rail freshness and independent review contracts.
 4. Frontend JS/TS/CSS changes run frontend/build/browser gates and commit regenerated
    `web/static` plus `.vite/manifest.json` (ADR-0020); backend/docs-only edits do not regenerate it.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
@@ -69,3 +70,7 @@ classifying an isolated timing failure as a regression; do not weaken its assert
 Reference `tests/accounts/` collection requires `CAT_ACCOUNTS_ENABLED=1`.
 Current content expectations: [ADR-0116](adr/0116-share-current-content-test-expectations.md),
 `tests/current_content.py` and `tests/content_scenarios.py`; historical pins remain separate.
+
+Complete native-only qualification: `scripts/qualify_go_toolchain.sh`, documented in
+[NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md), requires explicit disposable PG and task scratch,
+Go 1.27.1/Node 24, Python/Rust absent from PATH; no missing required gate becomes a skip.

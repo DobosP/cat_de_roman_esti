@@ -4,11 +4,11 @@
 - Purpose: Romanian word-game arcade — six server-authoritative text games (Alchimie, Intrusul,
   Perechi, Conexiuni, Cald sau Rece, Lanțul Cuvintelor) served by `go-backend/` + React/TypeScript
   SPA (`frontend/`) over the bundled Romanian KG build; `cat_de_roman_esti/web/` is an offline oracle
-  `cat_de_roman_esti/fixtures/kg_sample.json` (data.py:27); the terminal CLI `cat-de-roman` (pyproject.toml:44)
-  is the original semantic-hop game. Word-game/session behavior stays bounded, deterministic, test-covered.
+  `cat_de_roman_esti/fixtures/kg_sample.json` (data.py:27); `./cat-de-roman` builds the native
+  original terminal hop game. Word-game/session behavior stays bounded, deterministic, test-covered.
 - Main server: Go (`go-backend/`, qualified 1.27.1), native pgx/shared auth; Node 24 builds the SPA.
-  Python 3.12/Unicode 15 validates and exports content and runs the differential reference;
-  The Python terminal CLI remains a separate play mode; Django web/accounts are offline oracles. ADR-0162/0163.
+  Go builds content/operators/terminal/tools with pinned Unicode 15; Python/Rust remain optional
+  independent references. Django web/accounts are offline oracles. ADR-0162/0163/0165/0166.
 - Status source: `docs/STATUS.md`.
 
 ## Fleet context
@@ -43,17 +43,17 @@
 ## Commands
 - Native serving gates: `go -C go-backend test -race ./... && go -C go-backend vet ./...`; shared auth:
   `go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...`; explicit PG lanes: agent-testing.
-- Offline content/reference interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12, Django + pytest-django installed;
+- Optional independent reference interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12, Django + pytest-django installed;
   gitignored, lives only in the shared checkout). From a task worktree prefix `PYTHONPATH=.`. Do NOT use the
   `romania_scraper` venv: it has no Django — `pytest --co` = 7 collection errors, 402/898 tests (verified 2026-09-05).
 - Targeted test: `PYTHONPATH=. ~/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_wordgames_session_store.py -q` → 16 passed
 - Full suite: same interpreter, `-m pytest -q` (current result in `docs/STATUS.md`; load-sensitive); accounts suite:
-  `CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 <interpreter> -m pytest -q tests/accounts` (ci.yml:61)
-- Content gates: `<interpreter> scripts/validate_fixture.py` → `GREEN: fixture is valid (0 errors)` ·
-  `<interpreter> scripts/validate_games_pack.py` → `games pack GREEN` (ci.yml:51-55)
-- Lint: `<interpreter> -m ruff check` · Whitespace: `git diff --check`
+  `CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 <interpreter> -m pytest -q tests/accounts` (optional independent reference)
+- Content gates: `go -C go-backend run ./cmd/cat-content validate --root ..` and
+  `go -C go-backend run ./cmd/cat-content export --root .. --check`; operator rails: agent-testing.
+- Native lint: `go -C go-backend vet ./...`; optional oracle Ruff · Whitespace: `git diff --check`
 - Frontend, only when `frontend/` changes: `cd frontend && npm ci && npm test && npm run lint && npm run build`
-  (ci.yml:84-95); commit the regenerated `cat_de_roman_esti/web/static` + `.vite/manifest.json` with it (ADR-0020).
+  (native frontend gate); commit the regenerated `cat_de_roman_esti/web/static` + `.vite/manifest.json` with it (ADR-0020).
 - Run the Go app: `./run.sh`; runtime/release: `docs/NATIVE_BACKENDS.md`; deploy: `docs/DEPLOY.md`.
 
 ## Safety

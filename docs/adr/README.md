@@ -78,8 +78,9 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0163 | [Complete native Go accounts and serving](0163-complete-native-go-accounts.md) | accepted; offline tools amended by 0164; activation gated |
 | 0164 | [Native terminal, REST and mobile tools](0164-native-terminal-and-rest-tools.md) | accepted; qualification extended by 0165 |
 | 0165 | [Native source build and independent qualification](0165-native-source-build-and-qualification.md) | accepted; operators extended by 0166 |
-| 0166 | [Native content operators and builder rails](0166-native-content-operators-and-builder-rails.md) | accepted implementation; fresh qualification pending |
+| 0166 | [Native content operators and builder rails](0166-native-content-operators-and-builder-rails.md) | accepted; qualified by 0168 |
 | 0167 | [Bound early TCP refusals](0167-close-unread-bodies-on-early-refusal.md) | accepted; shared auth unchanged |
+| 0168 | [Complete native toolchain qualification](0168-qualify-complete-native-toolchain.md) | qualified; CI reference routing approval pending |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

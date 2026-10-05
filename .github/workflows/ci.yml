@@ -53,35 +53,57 @@ jobs:
         with:
           go-version: "1.27.1"
           cache: false
+      - name: Prepare native-only executable path
+        id: native-path
+        run: |
+          path=$(./scripts/prepare_native_path.sh "$HOME/work/_temp/cat-native-ci/path")
+          echo "path=$path" >> "$GITHUB_OUTPUT"
       - name: Validate and rebuild reviewed source content
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         run: |
           go -C go-backend run ./cmd/cat-content validate --root ..
           go -C go-backend run ./cmd/cat-content export --root .. --check
+          go -C go-backend run ./cmd/cat-content-ops rank --root .. --check
+          go -C go-backend run ./cmd/cat-content-ops derive --root .. --check
+          go -C go-backend run ./cmd/cat-content-rail all --root .. --check
           go -C go-backend run ./cmd/cat-mobile-pack --root .. --check
           go -C go-backend run ./cmd/cat-doc-check --root ..
       - name: Format, vet and race-test native backend
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         working-directory: go-backend
         run: |
           test -z "$(gofmt -l .)"
           go vet ./...
           go test -race ./...
       - name: Build standalone native binary
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         working-directory: go-backend
         run: |
           CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o ../build/cat-server ./cmd/cat-server
           CGO_ENABLED=0 go build -trimpath -o ../build/cat-browser-plan ./cmd/cat-browser-plan
           CGO_ENABLED=0 go build -trimpath -o ../build/cat-qualify ./cmd/cat-qualify
       - name: Qualify native account database and shared authentication
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         run: |
           go -C shared-go/authcore test -race ./...
           go -C shared-go/authcore vet ./...
           go -C go-backend test -race ./internal/accounts -accounts.database 'postgres://fixture:disposable-ci-fixture@127.0.0.1:5432/cat_native_test?sslmode=disable'
           go -C go-backend test -race ./internal/httpapi -arcade.database 'postgres://fixture:disposable-ci-fixture@127.0.0.1:5432/cat_native_test?sslmode=disable'
       - name: Replay independent frozen HTTP contracts
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         run: build/cat-qualify parity --binary build/cat-server
       - name: Build canonical Go release container
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         run: docker build -f Dockerfile -t cat-native-go:ci .
       - name: Verify canonical Go container
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         run: |
           test "$(docker image inspect --format '{{.Config.User}}' cat-native-go:ci)" = "10001:10001"
           container=$(docker run -d --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1::8000 -e CAT_LEGAL_OPERATOR=Synthetic-CI -e CAT_LEGAL_CONTACT_EMAIL=operator@example.invalid cat-native-go:ci)
@@ -172,7 +194,14 @@ jobs:
           path: build
       - name: Restore native executable permission
         run: chmod +x build/cat-server build/cat-browser-plan build/cat-qualify
+      - name: Prepare native-only browser executable path
+        id: native-path
+        run: |
+          path=$(./scripts/prepare_native_path.sh "$HOME/work/_temp/cat-native-browser-ci/path")
+          echo "path=$path" >> "$GITHUB_OUTPUT"
       - name: Install and build current SPA
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         working-directory: frontend
         run: |
           npm ci
@@ -181,6 +210,8 @@ jobs:
         working-directory: frontend
         run: npx playwright install --with-deps chromium
       - name: Standalone native game journeys (desktop + mobile)
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         working-directory: frontend
         run: npm run test:e2e
       - uses: actions/upload-artifact@v4
@@ -193,7 +224,7 @@ jobs:
   native-rust-browser:
     name: Rust research browser (manual)
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_rust }}
-    needs: [native-rust]
+    needs: [native-rust, native-go]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -202,11 +233,12 @@ jobs:
           node-version: "24"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
-      - uses: actions/setup-python@v5
+      - uses: actions/download-artifact@v4
         with:
-          python-version: "3.12"
-      - name: Install offline fixture oracle
-        run: python -m pip install -c constraints.txt -e ".[web]"
+          name: cat-native-go
+          path: build
+      - name: Restore private planner executable permission
+        run: chmod +x build/cat-browser-plan
       - uses: actions/download-artifact@v4
         with:
           name: cat-native-rust
@@ -284,16 +316,29 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
+      - name: Prepare native-only frontend executable path
+        id: native-path
+        run: |
+          path=$(../scripts/prepare_native_path.sh "$HOME/work/_temp/cat-frontend-ci/path")
+          echo "path=$path" >> "$GITHUB_OUTPUT"
       - name: Install (npm ci)
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         run: npm ci
 
       - name: Frontend contracts
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         run: npm test
 
       - name: Lint (eslint)
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         run: npm run lint
 
       - name: Build (tsc --noEmit && vite build)
+        env:
+          PATH: ${{ steps.native-path.outputs.path }}
         # vite.config.ts emits into ../cat_de_roman_esti/web/static; assert the SPA
         # shell landed (mirrors the Dockerfile's build-time check).
         run: |

@@ -27,12 +27,16 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 - **Go 1.27.1** serves the six games, exploration, site/API routes, optional PostgreSQL
   accounts and private pending proposals ([ADR-0162](docs/adr/0162-select-go-production-backend.md),
   [ADR-0163](docs/adr/0163-complete-native-go-accounts.md)). Accounts/proposals remain off publicly.
-- **Python** retains the stdlib terminal CLI, content tooling and Django reference tests;
-  native content export uses Python 3.12 / Unicode 15.0.0. Reference web dependencies
-  are pinned by `constraints.txt`. Rust remains a retained research implementation.
+- Native content export/validators/review builders, REST operators, the original terminal
+  command and private qualification tools run in Go with pinned Unicode 15 tables
+  ([native tooling](docs/NATIVE_TOOLCHAIN.md), [ADR-0166](docs/adr/0166-native-content-operators-and-builder-rails.md)).
+- **Python/Rust** sources, tests and rollback profiles remain independent references.
+  Legacy Python web dependencies are pinned by `constraints.txt`.
 - Frontend: React 19.2 + Vite 8.1 + TypeScript, Node 24 — see [`frontend/README.md`](frontend/README.md).
-- Vendored stdlib HTTP client (`roedu_client.py`, urllib) for the RO-EDU data platform.
-- Dev tooling: `pytest` + `ruff` (line-length 100, select E,F,I,UP,B).
+- Native bounded RO-EDU REST client and provenance-preserving fixture/smoke operators;
+  the original vendored Python client remains an independent reference.
+- Native race/vet/source/HTTP/browser gates; retained `pytest`/`ruff` reference commands
+  are listed separately in the testing guide.
 - Data source: the `kg_nodes` / `kg_edges` / `kg_puzzles` products served by
   `ro_data_server` (producer: `romania_scraper`). Plays fully offline against a bundled
   fixture too.
@@ -40,18 +44,12 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 ## Quick start (CLI)
 
 ```bash
-# install (editable, with dev tools)
-python -m pip install -e ".[dev]"
+# Go 1.27.1 builds the original terminal game into workspace scratch.
+./cat-de-roman --offline
+./cat-de-roman --offline --list
 
-# play offline against the bundled fixture — no server needed
-cat-de-roman --offline
-
-# list what's available
-cat-de-roman --offline --list
-
-# play online against a live RO-EDU server
-cp .env.example .env          # ROEDU_API_URL + ROEDU_API_KEY=cat-de-roman-dev
-cat-de-roman --category istorie --difficulty hard
+# Explicit online play uses ROEDU_API_KEY when configured.
+./cat-de-roman --api-url http://127.0.0.1:8077 --category istorie --difficulty hard
 ```
 
 If the server probe (`/v1/health`) fails, the CLI automatically falls back to the
@@ -78,7 +76,8 @@ Install the qualified Go 1.27.1 compiler, then:
 The launcher builds Go with an incremental cache under `~/work/_temp/` and builds
 React only when its compiled bundle is missing. Node 24 is needed for that frontend
 build. `PORT=9000 ./run.sh` changes the listener; a busy port fails explicitly.
-Python remains a content-production and reference-test dependency.
+Native source/build/operator and qualification commands are in
+[`docs/NATIVE_TOOLCHAIN.md`](docs/NATIVE_TOOLCHAIN.md); Python remains an optional oracle.
 
 ### Frontend development
 
@@ -119,18 +118,24 @@ The CI gate set (`.github/workflows/ci.yml`), runnable locally:
 ```bash
 go -C go-backend test -race ./... && go -C go-backend vet ./...
 go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...
-python scripts/validate_fixture.py                       # offline KG content gate
-python scripts/validate_games_pack.py                    # curated pack content gate
-ruff check                                               # lint
-pytest -q                                                # offline differential/content oracle
-CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 pytest -q tests/accounts
+go -C go-backend run ./cmd/cat-content validate --root ..
+go -C go-backend run ./cmd/cat-content export --root .. --check
+go -C go-backend run ./cmd/cat-content-ops rank --root .. --check
+go -C go-backend run ./cmd/cat-content-ops derive --root .. --check
+go -C go-backend run ./cmd/cat-content-rail all --root .. --check
+go -C go-backend run ./cmd/cat-mobile-pack --root .. --check
+go -C go-backend run ./cmd/cat-doc-check --root ..
 ( cd frontend && npm test && npm run lint && npm run build )
 ```
 
 Game/content tests use bundled fixtures and local fake providers, with no live upstream.
 Native account and combined HTTP release gates also require an explicit disposable
 PostgreSQL fixture; ordinary Go runs skip those contracts when no DSN is supplied.
-Commands and expected outputs: [`docs/agent-testing.md`](docs/agent-testing.md).
+The complete native-only gate is `scripts/qualify_go_toolchain.sh`, with explicit task
+scratch/PG and Python/Rust absent from PATH. Retained Python validators/Ruff/pytest are
+optional independent references, with complete commands in
+[`docs/agent-testing.md`](docs/agent-testing.md). The active Python reference CI job remains
+automatic until the exact manual-routing proposal receives human approval (ADR-0168).
 
 ## Contributing
 

@@ -4,8 +4,9 @@ Last verified: 2026-10-05
 
 The tooling boundaries and retention requirements are recorded in
 [ADR-0164](adr/0164-native-terminal-and-rest-tools.md) and
-[ADR-0165](adr/0165-native-source-build-and-qualification.md). Complete integration
-qualification is in progress; completed gates are in [STATUS](STATUS.md).
+[ADR-0165](adr/0165-native-source-build-and-qualification.md). Complete clean-source
+qualification passes under [ADR-0168](adr/0168-qualify-complete-native-toolchain.md);
+CI reference routing is awaiting human approval. Current gates are in [STATUS](STATUS.md).
 These local tools never add a public solution endpoint.
 
 From the repository root with Go 1.27.1:
@@ -95,3 +96,9 @@ synthetic HTTP smoke/benchmark, Node gates and all browser cases. Its exit statu
 turn missing required infrastructure into a skip. Default hermetic Go runs retain their
 optional-PG markers; the explicit release lanes execute those same tests against the
 supplied disposable database. Provider mocks remain local; production flags are unchanged.
+
+Tagged app-pack input: native terminal `--offline --fixture <tagged.json>` auto-detects
+public tagged envelopes. Bounded `internal/apppack` contracts preserve tags/facets and
+filter app/layer/schema/kind/legal scope on detached records. Native release coupling
+checks the frontend package/lock/badge and retained package declarations against the
+canonical native build version. These input/version guards are distinct from mobile output.

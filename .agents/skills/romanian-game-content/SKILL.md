@@ -93,7 +93,7 @@ Keep discovery records separate from importer input and runtime status fields.
 Adopting a new shared concept into a round requires both the graph transaction and that
 game's downstream review rail against the resulting graph; passing one does not pass the other.
 
-Use each script's current help/schema rather than synthesizing a new review format. Research
+Use the native operators' current help/schema rather than synthesizing a new review format. Research
 sources and pool digests do not replace the rails' candidate, dossier, rubric and audit bindings.
 A raw quality `keep` remains pending; it is not promotion. Only complete, current approvals
 can cross the installation boundary. Do not hand-edit fixtures or generated static assets.
@@ -118,7 +118,8 @@ Keep session bounds, deterministic behavior, private answers and historical save
 
 Report baseline-to-result counts separately for new shared concepts, world-local concepts,
 accepted forms, per-game fresh exposures, rounds, approvals and eligible/preferred selection.
-Use `scripts/report_content_delta.py --baseline <commit> --text` for the inventory it covers;
+Use `go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline <commit> --text`
+for the inventory it covers;
 add world and per-game exposure counts separately. Aliases do not prove synonym growth.
 Include selected/held/rejected pool records, evidence, player-visible outcomes and next actions.
 Update STATUS and any required ADR in the same commit; follow repo landing rules. Push and

@@ -44,12 +44,12 @@ No real ingestion, provider/model activation, paid infrastructure or content pro
   Python/Rust executables are absent. The build context includes only the bound rubric
   exception; local environment files remain excluded. No image was deployed.
 
-## Integration still required
+## Original integration acceptance scope
 
 Full source-root fresh-checkout qualification includes exact native source/operator/builder
 checks, all native race/vet, explicit disposable PostgreSQL lanes, compiled frozen HTTP
 parity, Node gates and all 622 browser cases. Operator review/source-version/rollback and independent review checks now pass; the full
-fresh-checkout integrated gate remains required before retiring legacy required paths.
+fresh-checkout integrated gate is now complete; CI routing still needs explicit approval.
 The Python reference and Rust research files, tests and rollback profiles remain intact.
 
 Aggregate receipts live in the authorized task scratch tree during work. Durable final
@@ -75,3 +75,25 @@ no whole browser run is repeated solely for the TCP fix.
 Qualification corpus, JSON HTTP responses and binary replay responses also use the
 shared strict scalar/duplicate decoder. Focused httpgolden race passes (29.272s),
 including unchanged frozen1207 decode/replay and malformed/private input refusals.
+
+## Final clean-source receipt
+
+The complete native-only fresh qualification exits0/GREEN: all native race/vet, explicit
+disposable account/combined-HTTP PostgreSQL lanes,1207 compiled independent parity,
+151-request smoke/six games/exploration/28 assets, bounded160-request benchmark,
+Node242 assertions/lint/typecheck/build and622 browser cases/no retries(34.8m).
+No SDK/model/browser download or live/private data copy was required. The original
+snapshot contained code11f88ec (code identical to amended a3966e1; STATUS annotation only);
+a clean tracked supplement added the two unique version/input contracts before final
+receipt. Native supplementary race passes apppack1.069s/hopcli6.147s/content12.975s, vet
+passes; original fixtures/corpora/sharedauth/assets remain byte-identical.
+
+Final cached image `adbca81025d0fef6164cd49cf5b97b7aeca3833fddc59c0080cd5389597e744b`
+passes native151/six-game/exploration/28-asset smoke, UID10001/read-only/healthy/zero
+restarts and no Python/Rust executables. Isolated test containers are removed; no deploy.
+
+Required native CI commands now use an executable allowlist. Automatic approval review
+rejected making the Python reference job manual; the active job remains automatic pending
+explicit human approval. All reference tests and rollback profiles remain intact. No
+rejected CI action was applied through a workaround. Source work is complete and locally
+qualified; this policy decision is the remaining approval gap.

@@ -1,7 +1,7 @@
 # ADR-0166 — Native content operators and builder rails
 
 Date: 2026-10-05
-Status: accepted implementation; full fresh-checkout qualification pending
+Status: accepted; full qualification completed by ADR-0168; CI reference routing pending
 Amends: ADR-0165's remaining content-operator boundary and ADR-0102's operator commands.
 
 ## Decision
@@ -55,3 +55,11 @@ success. Production remains anonymous and accounts/proposals off.
 [builder contract](../../go-backend/internal/contentrails/README.md),
 [wave checklist](../PACK_ONLY_CONTENT_WAVES.md), [tooling](../NATIVE_TOOLCHAIN.md) and
 [proof record](../reviews/go-native-toolchain/README.md) contain interfaces and receipts.
+
+## Writer scope clarification — 2026-10-05
+
+The shared repository lock/readset/runtime-membership paragraph governs content mutation
+and installation writers. Scratch candidate/proposal/audit output and public mobile/REST
+projection writers use their own bounded synced sibling replacement paths; they do not
+claim the complete repository installation readset. They cannot grant approval or activate
+serving. All library/source/API language boundaries remain as recorded above.

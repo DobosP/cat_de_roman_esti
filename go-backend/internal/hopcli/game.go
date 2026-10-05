@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/apppack"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/roeduclient"
@@ -20,6 +21,10 @@ type Puzzle struct {
 	ID, StartID, TargetID, Category, Difficulty string
 	OptimalHops, Par                            int
 	SolutionPath, HintNeighbors                 []string
+	Tags                                        []string
+	Facets                                      map[string]any
+	Source                                      string
+	Redistributable                             bool
 }
 type Bundle struct {
 	Graph   *graph.Service
@@ -95,7 +100,7 @@ func Parse(raw roeduclient.Bundle) (*Bundle, error) {
 		if kind == "" {
 			kind = "concept"
 		}
-		c.Nodes = append(c.Nodes, content.Node{ID: id, LabelRO: label, NodeType: kind, Category: text(r["category"]), Description: text(r["description"]), Salience: number(r["salience"])})
+		c.Nodes = append(c.Nodes, content.Node{ID: id, LabelRO: label, NodeType: kind, Category: text(r["category"]), Description: text(r["description"]), Salience: number(r["salience"]), DifficultyTier: text(r["difficulty_tier"]), Degree: int(number(r["degree"])), Aliases: roeduclient.IDList(r["aliases"]), Tags: roeduclient.IDList(r["tags"]), Facets: facetCopy(r["facets"]), Source: text(r["source"]), Redistributable: truth(r["redistributable"])})
 	}
 	for _, r := range raw.Edges {
 		src, dst := text(r["src_id"]), text(r["dst_id"])
@@ -106,12 +111,12 @@ func Parse(raw roeduclient.Bundle) (*Bundle, error) {
 		if v, ok := r["bidirectional"]; ok {
 			bidirectional = truth(v)
 		}
-		c.Edges = append(c.Edges, content.Edge{ID: text(r["id"]), Src: src, Dst: dst, LabelRO: text(r["label_ro"]), Strength: number(r["strength"]), IsDistractor: truth(r["is_distractor"]), Bidirectional: bidirectional})
+		c.Edges = append(c.Edges, content.Edge{ID: text(r["id"]), Src: src, Dst: dst, Relation: text(r["relation"]), Tags: roeduclient.IDList(r["tags"]), Facets: facetCopy(r["facets"]), Source: text(r["source"]), Redistributable: truth(r["redistributable"]), LabelRO: text(r["label_ro"]), Strength: number(r["strength"]), IsDistractor: truth(r["is_distractor"]), Bidirectional: bidirectional})
 	}
 	b := &Bundle{Graph: graph.New(c), Puzzles: []Puzzle{}, Raw: raw}
 	pids := map[string]bool{}
 	for _, r := range raw.Puzzles {
-		p := Puzzle{ID: text(r["id"]), StartID: text(r["start_id"]), TargetID: text(r["target_id"]), Category: text(r["category"]), Difficulty: strings.ToLower(strings.TrimSpace(text(r["difficulty"]))), OptimalHops: int(number(r["optimal_hops"])), Par: int(number(r["par"])), SolutionPath: roeduclient.IDList(r["solution_path"]), HintNeighbors: roeduclient.IDList(r["hint_neighbors"])}
+		p := Puzzle{ID: text(r["id"]), StartID: text(r["start_id"]), TargetID: text(r["target_id"]), Category: text(r["category"]), Difficulty: strings.ToLower(strings.TrimSpace(text(r["difficulty"]))), OptimalHops: int(number(r["optimal_hops"])), Par: int(number(r["par"])), SolutionPath: roeduclient.IDList(r["solution_path"]), HintNeighbors: roeduclient.IDList(r["hint_neighbors"]), Tags: roeduclient.IDList(r["tags"]), Facets: facetCopy(r["facets"]), Source: text(r["source"]), Redistributable: truth(r["redistributable"])}
 		if _, ok := r["par"]; !ok {
 			p.Par = p.OptimalHops
 		}
@@ -141,6 +146,20 @@ func ReadFixture(path string) (*Bundle, error) {
 	}
 	if err = strictjson.Validate(data); err != nil {
 		return nil, err
+	}
+	var envelope map[string]json.RawMessage
+	if err = json.Unmarshal(data, &envelope); err != nil {
+		return nil, err
+	}
+	_, hasPacks := envelope["packs"]
+	_, hasApp := envelope["app"]
+	_, hasPackID := envelope["pack_id"]
+	if hasPacks || hasApp || hasPackID {
+		raw, err := apppack.DecodeBundle(data)
+		if err != nil {
+			return nil, err
+		}
+		return Parse(raw)
 	}
 	var raw roeduclient.Bundle
 	d := json.NewDecoder(strings.NewReader(string(data)))
@@ -248,4 +267,14 @@ func Smoke(b *Bundle, difficulty string) (map[string]any, error) {
 		return g.Summary(), nil
 	}
 	return nil, errors.New("no matching puzzle")
+}
+
+func facetCopy(v any) map[string]any {
+	out := map[string]any{}
+	if source, ok := v.(map[string]any); ok {
+		for key, value := range source {
+			out[key] = value
+		}
+	}
+	return out
 }

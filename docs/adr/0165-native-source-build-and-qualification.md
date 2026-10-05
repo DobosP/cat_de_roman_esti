@@ -1,7 +1,7 @@
 # ADR-0165 — Native source build and independent qualification
 
 Date: 2026-10-05
-Status: accepted; complete content-operator integration qualification remains in progress
+Status: accepted; full qualification completed by ADR-0168; CI reference routing pending
 Amends: ADR-0162's Python content-build and mandatory HTTP/browser helper boundary.
 
 ## Decision
