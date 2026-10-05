@@ -3,6 +3,16 @@
 Valid until: the recorded verification run ends — then treat as history.
 
 
+## 2026-10-05 — preserve optional capture source keeper
+
+- Archived the sole unique reference-capture source as inert.txt with exact SHA/path/size
+  manifest before verified-merged cleanup. No executable/test/lint discovery or ordinary
+  native dependency added; no raw logs/corpora/media/credentials/binaries/transcripts copied.
+- All80 source/corpus candidates in fresh/source match tracked main. Shared caches/PG and
+  independent reviewer evidence remain protected; generated owned artifacts can be removed
+  only after exact ownership and archive ancestry checks.
+
+
 ## 2026-10-05 — coordinator native toolchain and manual CI integration
 
 - Independent source/operator/HTTP/client/planner/mobile reviews at54ea2b5 passed; exact

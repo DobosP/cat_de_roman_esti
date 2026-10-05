@@ -103,7 +103,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [Complete rollout proof](reviews/go-completion/README.md). No provider/minor activation.
 - Native source/tooling stage [ADR-0165](adr/0165-native-source-build-and-qualification.md):
   eight-source export,180 terminal paths,32 body/1009prefix/1207HTTP/smoke151/28asset proofs pass;
-  REST/mobile/docs/operator/builder race/vet, tagged input and neutral release coupling pass.
+  REST/mobile/docs/operator/builder race/vet, tagged input and neutral release coupling pass; unique capture source archived.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): Go/PG/Node242/browser622 and independent reviews GREEN.

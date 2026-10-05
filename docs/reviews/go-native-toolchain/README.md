@@ -99,3 +99,8 @@ release gates remain mandatory for ordinary dispatch; retained Python requires e
 run_reference=true and Rust requires run_rust=true, both default false. No workflow was
 activated or dispatched. The unpublished native-terminal ADR0164 claim became0169 to keep
 published manual-policy0164 unique. Shipping code/data/auth/image bytes remain unchanged.
+
+## Source keeper preservation
+
+The sole unique optional capture author is preserved as exact-byte inert evidence in
+[archived-reference](archived-reference/README.md). Ordinary native paths remain unchanged.
