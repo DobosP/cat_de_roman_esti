@@ -5,7 +5,7 @@ Valid until: bound graph, source, runtime, review or research bytes change — t
 Baseline `6deab61c20067c66f0b6120b2b09f44a580526d6`; task `codex/content-v1-2`.
 The owner requested internet research, creative content discovery and consecutive versions until stopped.
 The local continuation heartbeat is `romanian-content-versions-v1-2-onward`, every 30 minutes.
-**Phase: reviewed graph/catalogs/export and installed-authority reconstruction GREEN; integrated gates GREEN; final review/local landing pending.**
+**Phase: independently reviewed, integrated gates GREEN, locally landed on main `17f7da1`.**
 
 Four exact synonym families add 22 distinct accepted-form proposals: ascensor→Lift,
 tomată→Roșie, scripcă→Vioară and prăvălie→Magazin. One bidirectional relation links
@@ -50,5 +50,6 @@ Current source/export/operator/mobile checks, all four strict native reconstruct
 independent Python export/current HTTP1207 and focused gameplay/history checks pass.
 Complete native/shared race/vet, docs/whitespace and local smoke151/six games/assets28 pass.
 [Final verification](verification.json) preserves initial failures and their narrow fixes.
-Final assembled review and local landing remain pending.
+[Assembled review](assembled-review.json) accepts exact current code/data/authority and preserved history.
+Local main landing: `17f7da185c97ebeab4e15745d57d299844725b4f`; the five selected pool records are integrated.
 Human enjoyment and physical-device playtesting are unrun. Public production is unchanged.

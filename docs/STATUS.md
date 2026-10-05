@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-06 — V1.2 local gates GREEN; final review/landing pending; production anonymous V1.0.1.
+Last verified: 2026-10-06 — V1.2 reviewed/landed locally17f7da1; production anonymous V1.0.1.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -27,13 +27,13 @@ Last verified: 2026-10-06 — V1.2 local gates GREEN; final review/landing pendi
 - [Content skill](../.agents/skills/romanian-game-content/SKILL.md): refinement/discovery with independent gates.
 - Decision/evidence: [ADR-0158](adr/0158-v1-testing-release.md),
   [release review](reviews/v1-testing-release/README.md), [Romanian tester guide](TESTARE_V1.md).
-- **V1.2 active:** four reviewed synonym families (ascensor, tomată, scripcă, prăvălie),
+- **V1.2 landed locally17f7da1:** four reviewed synonym families (ascensor, tomată, scripcă, prăvălie),
   22 distinct forms and Cărare↔Potecă; zero new concepts/curated rounds. Old records,
   recipe cores/histories/pools persist. [Review](reviews/v1-2-content-growth/README.md),
   [ADR-0170](adr/0170-v1-2-reviewed-content-growth.md), [pool](content-pool/v1-2-synonyms-and-links/pool.json).
 - Native current authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
   independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
-  Full native/shared race/vet,smoke151/assets28/docs GREEN; assembled review/landing pending. V1.x loop every30min.
+  Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; V1.x loop every30min.
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | New-round pool |
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
-- Next: finish V1.2 local landing, then V1.3; phone/iPhone/Android/enlarged-text human testing remains.
+- Next: V1.3 content discovery/refinement; phone/iPhone/Android/enlarged-text human testing remains.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni

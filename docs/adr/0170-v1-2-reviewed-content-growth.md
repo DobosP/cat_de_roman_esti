@@ -1,6 +1,6 @@
 # ADR-0170: V1.2 reviewed lexical growth and native installed-authority reconstruction
 
-- Status: accepted; integrated gates GREEN, final assembled review/local landing pending
+- Status: accepted; integrated gates and assembled review GREEN; local landing17f7da1
 - Date: 2026-10-06
 
 ## Context
@@ -56,4 +56,4 @@ Evidence is in [the V1.2 review](../reviews/v1-2-content-growth/README.md) and t
 candidate pool. The graph changes improve typed input coverage and one honest direct hop;
 Cald rank ripple is measured and disclosed. Automated checks do not establish human enjoyment.
 The continuation loop reuses incomplete work, preserves research holds and cannot advance a
-version merely because a candidate is authored or a pin changes. Final local landing and assembled acceptance remain pending.
+version merely because a candidate is authored or a pin changes. The independent assembled review accepted the version; local main landing is17f7da1.
