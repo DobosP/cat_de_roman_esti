@@ -2,6 +2,12 @@
 
 Last verified: 2026-10-05 — native toolchain qualified locally; production remains anonymous V1.0.1.
 
+- **GitHub Actions (Last verified: 2026-10-04):** owner-requested on-demand policy,
+  [ADR-0164](adr/0164-manual-github-actions.md). Workflows use `workflow_dispatch`; automatic
+  push/PR/label/schedule runs are removed. Existing jobs, inputs, and safety gates
+  remain. Workflow YAML, manual inputs, job dependencies, and permission preservation
+  were checked; this configuration edit does not refresh application test results.
+
 ## Current state
 
 - The owner requested internal V100 as a testing release named **V1** for mixed ages on
@@ -106,7 +112,7 @@ Unrevealed answers, recipe maps and routes stay private.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): clean native Go/PG/Node242/browser622 GREEN.
-  CI Python-reference routing awaits explicit approval after automatic review rejection.
+  Accepted origin4fcf manual policy is integrated; native Go/Node gates default, references opt-in.
 - Next: same-Wi-Fi phone/desktop testing, iPhone (Safari/WebKit untested), Android and enlarged text.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea

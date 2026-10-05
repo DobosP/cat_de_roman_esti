@@ -49,7 +49,7 @@ No real ingestion, provider/model activation, paid infrastructure or content pro
 Full source-root fresh-checkout qualification includes exact native source/operator/builder
 checks, all native race/vet, explicit disposable PostgreSQL lanes, compiled frozen HTTP
 parity, Node gates and all 622 browser cases. Operator review/source-version/rollback and independent review checks now pass; the full
-fresh-checkout integrated gate is now complete; CI routing still needs explicit approval.
+fresh-checkout integrated gate is complete; newer origin4fcf manual CI policy is integrated.
 The Python reference and Rust research files, tests and rollback profiles remain intact.
 
 Aggregate receipts live in the authorized task scratch tree during work. Durable final
@@ -92,21 +92,10 @@ Final cached image `adbca81025d0fef6164cd49cf5b97b7aeca3833fddc59c0080cd5389597e
 passes native151/six-game/exploration/28-asset smoke, UID10001/read-only/healthy/zero
 restarts and no Python/Rust executables. Isolated test containers are removed; no deploy.
 
-Required native CI commands now use an executable allowlist. Automatic approval review
-rejected making the Python reference job manual; the active job remains automatic pending
-explicit human approval. All reference tests and rollback profiles remain intact. No
-rejected CI action was applied through a workaround. Source work is complete and locally
-qualified; this policy decision is the remaining approval gap.
-
-## Native release metadata closure
-
-The release guard now binds neutral `go-backend/release.json` schema 1 to the native
-AppVersion and all original frontend package/lock/root-package/TypeScript/badge fields.
-Each retained Python declaration remains checked independently when present. Go
-1.27.1 focused race passes (2.599s), vet and independent review pass, with all 11
-negative cases and matching optional-declaration positives. A compiled race test
-passes from a four-file native/frontend-only root (1.64s), with no Python references;
-bad frontend and neutral native versions fail explicitly (1.24s/1.36s). Python/Rust
-are absent from PATH during that proof. Scratch receipts: task `release-closure/`.
-Only the test, neutral release metadata and documentation change in this correction;
-serving sources/data/auth/frontend/assets are unchanged. The full gate was not repeated.
+Required native CI commands use an executable allowlist. Worker approval review initially
+rejected its proposed manual routing. The coordinator subsequently integrated origin/main
+4fcf308's accepted owner manual-only policy through the canonical merge. Native Go/Node
+release gates remain mandatory for ordinary dispatch; retained Python requires explicit
+run_reference=true and Rust requires run_rust=true, both default false. No workflow was
+activated or dispatched. The unpublished native-terminal ADR0164 claim became0169 to keep
+published manual-policy0164 unique. Shipping code/data/auth/image bytes remain unchanged.

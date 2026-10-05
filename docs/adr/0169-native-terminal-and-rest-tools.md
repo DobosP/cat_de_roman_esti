@@ -1,4 +1,4 @@
-# ADR-0164 — Native terminal, REST and mobile tools
+# ADR-0169 — Native terminal, REST and mobile tools
 
 Date: 2026-10-05
 Status: accepted; broader native content-toolchain qualification remains in progress

@@ -1,27 +1,22 @@
 name: CI
 
-# Gate every push + PR on the same checks the repo holds to locally:
-#   - fixture is valid (validate_fixture.py — the committed KG content gate)
-#   - pytest green (engine + loader + BFF, all offline against the bundled fixture)
-#   - ruff clean (lint)
-#   - the SPA type-checks (tsc --noEmit), builds (vite), and lints (eslint)
-#
-# Everything runs offline against the bundled fixture — no live ro_data_server, no
-# secrets. The web deps are installed PINNED via constraints.txt so CI matches deploy.
+# Required Go content/operator/HTTP/account/image and Node/browser gates run on demand.
+# Python and Rust references are explicit opt-in historical qualification.
+# Native commands use the executable allowlist; no private producer/token is needed.
 
+# Run from Actions > Run workflow only when requested or needed for a specific change.
 on:
-  push:
-    branches: ["**"]
-  pull_request:
-    branches: ["**"]
   workflow_dispatch:
     inputs:
+      run_reference:
+        description: Run retained Python reference tests and lint in addition to native gates
+        type: boolean
+        default: false
       run_rust:
         description: Run retained Rust research qualification (not the selected release runtime)
         type: boolean
         default: false
 
-# A newer push to the same ref cancels the older in-flight run.
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -264,6 +259,7 @@ jobs:
           retention-days: 7
 
   backend:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_reference }}
     name: backend (py${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:

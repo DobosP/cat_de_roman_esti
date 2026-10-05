@@ -1,7 +1,7 @@
 # ADR-0163 — Complete native Go accounts and serving
 
 Date: 2026-10-04
-Status: accepted implementation direction; offline terminal/client boundary amended by ADR-0164; production accounts remain gated
+Status: accepted implementation direction; offline terminal/client boundary amended by ADR-0169; production accounts remain gated
 Amends: ADR-0162's anonymous runtime boundary; Go selection remains unchanged.
 
 ## Decision

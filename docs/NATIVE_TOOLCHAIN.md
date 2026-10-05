@@ -3,10 +3,10 @@
 Last verified: 2026-10-05
 
 The tooling boundaries and retention requirements are recorded in
-[ADR-0164](adr/0164-native-terminal-and-rest-tools.md) and
+[ADR-0169](adr/0169-native-terminal-and-rest-tools.md) and
 [ADR-0165](adr/0165-native-source-build-and-qualification.md). Complete clean-source
 qualification passes under [ADR-0168](adr/0168-qualify-complete-native-toolchain.md);
-CI reference routing is awaiting human approval. Current gates are in [STATUS](STATUS.md).
+CI follows accepted manual policy (ADR-0164); native gates default, references opt-in. Current gates are in [STATUS](STATUS.md).
 These local tools never add a public solution endpoint.
 
 From the repository root with Go 1.27.1:

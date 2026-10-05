@@ -2,6 +2,18 @@
 
 Valid until: the recorded verification run ends — then treat as history.
 
+
+## 2026-10-05 — coordinator native toolchain and manual CI integration
+
+- Independent source/operator/HTTP/client/planner/mobile reviews at54ea2b5 passed; exact
+  server bytes match imageadbca810/f7772a7a. Native release coupling fix78c08b7 is reviewed
+  separately without requiring optional Python metadata. Content/shared-auth/assets unchanged.
+- Integrated published origin4fcf308 owner manual-only Actions policy in the task branch,
+  preserving required Go/Node/account/HTTP/image/browser release checks. Python and Rust
+  reference inputs are explicit/defaultfalse; no hosted workflow was enabled or dispatched.
+- The unpublished native-terminal0164 decision is169; published manual-policy0164 remains.
+  CI/doc policy checks and source closure are qualified without repeating passed whole suites.
+
 ## V72 verification (2026-08-27)
 
 Moved from STATUS to keep current truth concise; current gates and production state remain there.
