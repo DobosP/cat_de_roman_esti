@@ -29,7 +29,7 @@ deploy without explicit authorization. Human stop/pause overrides the loop.
 
 ## Six-lead source checkpoint
 
-The [durable pool](../../content-pool/v1-6-everyday-inputs/pool.json) now records three
+The initial [pool R1](research-pool-r1.json.gz) recorded three
 researched hypotheses (drapel, culinary untdelemn, employee-pay leafă) and three held
 hypotheses (already-owned cucuruz, broader gazetă, and absent Geamantan/Valiză owners).
 Leafă continues i05-lex-01 as revision2; its original held revision remains unchanged.
@@ -43,7 +43,7 @@ The broader Gazetă sense conflicts with the installed Revista/Ziar distinction.
 specific national-flag neighbor retains its separate owner. All source claims, counter-senses,
 access failures and rights qualifications are in [primary A](lexical-primary-a.json) and
 [primary B](lexical-primary-b.json); the [independent critique](research-quality-r1.json)
-binds those exact reports and the pool.
+binds those exact reports and the archived R1 pool.
 
 The next useful check is ordinary typed play, prioritizing drapel/Steag and untdelemn/Ulei.
 Static eligible Cald cases exist near Steag and at Chec via Ulei→Chec; actual normal selection,
@@ -79,3 +79,23 @@ source window, lower thresholds or delete another task's scratch.
 admitted check after memory recovered above the unchanged floor. The earlier source
 concurrency failure and preflight refusal remain immutable history. This check permits
 persistence of the research checkpoint only; it grants no content installation approval.
+
+
+## Ordinary-input baseline and refinement readiness
+
+The [actual baseline](native-input-baseline-summary-r1.json) records54 public HTTP-handler
+requests in four ordinary sessions. Default easy/no-category selection found Alba Iulia at
+seed36 and Chec at seed3 after37 picker draws. Drapel and untdelemn returned unknown with
+zero attempts and no suggestions. Canonical Steag/Ulei gave rank5/rank2, distance1 and
+closeness99. Exact recovery, private answers, repeats, earned category clues and700-point
+terminal scores passed. This is in-process HTTP evidence, not browser/TCP or prospective
+alias execution. The original pool, source-failure and refusal records remain historical.
+
+[Independent readiness review](baseline-readiness-review-r1.json) supports only drapel and
+untdelemn moving to revision2 ready_for_refinement in the [current pool](../../content-pool/v1-6-everyday-inputs/pool.json).
+Leafă remains researched; three other leads stay held. The intended next scope is two
+singular headwords, with no concepts, edges, targets or rounds. It has not been selected.
+All stored-form and installed inventory deltas remain zero; no Source6 or content release.
+The exact R2 method is preserved with its [initial request changes](baseline-method-review-r1.json)
+and [final method acceptance](baseline-method-review-r2.json). The native lane respected
+its20-minute/2GiB/1GiB bounds and kept all bound installed bytes exact.

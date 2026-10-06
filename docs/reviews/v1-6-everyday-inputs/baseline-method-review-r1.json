@@ -1,0 +1,12 @@
+{
+  "schema": "v1-6-baseline-method-review-r1",
+  "reviewer": "/root/v16_probe_plan",
+  "reviewed_at_utc": "2026-10-06T22:29:01.558258+00:00",
+  "method_sha256": "03dade0694c506eb3d5d94efb5fb85d69f092496c3cc2c696734451213353298",
+  "verdict": "REQUEST CHANGES",
+  "issues": [
+    "Preterminal GET discarded status/state: error400/404 could pass privacy. Require200 and exact attempts/guesses/clues_used/won recovery.",
+    "Observed unknown/confirmation response must charge zero attempts with empty guesses; initial/repeat equal counts alone is insufficient."
+  ],
+  "other_findings": "Unchanged sealed content and ordinary HTTP create; fixed512picker draws,4sessions80requests, one confirmation per novel arm; correct payloads, bounded extras, score and selection checks. No native execution or installation acceptance."
+}

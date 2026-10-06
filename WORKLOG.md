@@ -1635,3 +1635,10 @@ other leads remain held. Original leafă R1/access limits remain recorded. No se
 concepts, links, targets, rounds, source or runtime mutation; no game-gate pass inferred.
 [Research checkpoint](docs/reviews/v1-6-everyday-inputs/README.md) binds exact source/quality
 receipts and the next ordinary typed-play checks. Brief4-over-3 worker overlap is a failed source constraint; later memory headroom refused native docs before launch. A later separately admitted documentation check supports research checkpoint persistence only; the earlier failures remain history. This is not a release. Main stays clean; no push/deployment.
+
+
+V1.6 ordinary input follow-up: actual54-request native HTTP-handler baseline at ordinary
+seeds36/3 demonstrates missing drapel/untdelemn with canonicalSteag/Ulei rank5/2. Four
+sessions preserve private Get, repeats, earned clues and700score recovery; all bound runtime
+bytes remain exact. Independent review supports only those two R2records becoming ready
+for refinement; leafă remains researched and3holds persist. No selected candidate or release.
