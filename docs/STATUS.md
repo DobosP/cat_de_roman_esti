@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-06 — V1.4 installed Source4/all required gates GREEN in isolated task; independent assembled review/local landing pending; production anonymous V1.0.1.
+Last verified: 2026-10-06 — V1.4 independently accepted672d656/all required gates GREEN in isolated task; local landing pending; production anonymous V1.0.1.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) graph0nodes/2forms/2links accepted/applied; Source4/current4authority/native+shared race/vet/export+Python/HTTP1207/history394/smoke151+28/docs GREEN; independent assembled review/local landing pending.
+  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) graph0nodes/2forms/2links accepted/applied; Source4/current4authority/native+shared race/vet/export+Python/HTTP1207/history394/smoke151+28/docs GREEN; assembled ACCEPT672d656; local landing pending.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni

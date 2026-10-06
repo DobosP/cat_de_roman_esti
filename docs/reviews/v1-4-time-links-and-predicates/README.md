@@ -3,8 +3,8 @@
 Valid until: baseline, source evidence or intended scope changes — repeat affected checks.
 
 Started2026-10-06 after V1.3 content95f94e3/reviewed landing082ba99/documentation46641d6.
-Baseline:46641d6f9963f92941d12f5955e5eb40a2d8fb56. Phase: native integration; accepted shared graph applied.
-The independently accepted V1.4 shared graph is applied in this task; three native catalogs have signed staging and a coherent eight-source export; current reference/installed authority/full gates remain in transition. The [pool](../../content-pool/v1-4-time-links-and-predicates/pool.json) records6leads:3selected for independent refinement/3held (duplicate, orologiu and clipă/moment); four additional ceasornic inflections remain unselected.
+Baseline:46641d6f9963f92941d12f5955e5eb40a2d8fb56. Phase: all required integration gates GREEN; assembled ACCEPT672d656; local landing pending.
+The independently accepted shared graph, allthree signed catalogs, current references and Source4 installed authority are verified in this isolated task. Required gates are GREEN; exact independent assembled review ACCEPTS672d656; local landing is pending. The [pool](../../content-pool/v1-4-time-links-and-predicates/pool.json) records6leads:3selected for independent refinement/3held (duplicate, orologiu and clipă/moment); four additional ceasornic inflections remain unselected.
 
 [Time-link screen](research-time-links.json) preserves exact endpoint directions, existing deck uses and official-access/mirror qualifications. No new conversion fact is claimed from a reverse arc.
 
@@ -53,9 +53,9 @@ No reviewer acceptance or installation is inferred from this root proposal or pr
 
 [Raw factual review](graph-factual-review.json) ACCEPTS exact proposal6cae1819/moduleb7c5af54,
 covering2forms/2arcs and qualified instrument/duration/source-access/license scope. It grants
-no quality/installation/current-authority approval. [Exact quality](graph-quality-review.json) ACCEPTS the same bytes; [impact](graph-quality-impact.json) and [installation](graph-installation.json) preserve180terminal/716pack/rankrows/336derivedpayloads. Source4 and all three candidates received fresh complete independent raw reviews; each native catalog then crossed its exact current staging audit/two same-role final reviews. Native source/export and independent Python byte-check are GREEN (7238892bytes). Installed frozen-runtime audits/current authority/reference/fullgates and local landing remain required. The module and selected snapshots stay byte-frozen.
+no quality/installation/current-authority approval. [Exact quality](graph-quality-review.json) ACCEPTS the same bytes; [impact](graph-quality-impact.json) and [installation](graph-installation.json) preserve180terminal/716pack/rankrows/336derivedpayloads. Source4 and all three candidates received fresh complete independent raw reviews; each native catalog then crossed its exact current staging audit/two same-role final reviews. Native source/export and independent Python byte-check are GREEN (7238892bytes). At this staging checkpoint, installed audits/authority/reference/fullgates were pending; the final installed section below records their later completion. Local landing still requires final assembled acceptance. The module and selected snapshots stay byte-frozen.
 
-[Current source/export checkpoint](native/source-export-checkpoint.json) binds allthree signed
+[Earlier source/export checkpoint](native/source-export-checkpoint.json) binds allthree signed
 catalogs, Source4 exact Source3parent, eight actual fixture identities and bundle d1d3f721… .
 The earlier [Quick/World milestone](native/staging-installation-progress.json) is history
 valid only before the Extensions/export phase. All16 prior unique archives remain; three
@@ -67,9 +67,8 @@ round and three controlled duration paths/private Get/wins. Exact V1.3 bundled b
 [archived](reference/historical-v1-3-bundled.json.gz), with old digest/inventory/source-corpus
 assertions retained in a bounded native test. [History phase](reference/history-graph-phase.json)
 and [independent quality](reference/history-graph-phase-quality-review.json) preserve whole
-byte inverses/assertions/old captures; catalog inverses/current captures are still finishing.
-New actual independent HTTP capture matches1207responses but is not yet reviewed/current
-selector authority. No current-authority or green local-landing claim is made at this phase.
+byte inverses/assertions/old captures; catalog inverses/current captures were still finishing at that intermediate checkpoint; their completed final reviews appear below.
+The first actual independent HTTP capture matched1207responses before its later capture/selector review. This paragraph records that historical phase, not the completed installation status below.
 
 Final installed phase: [runtime freeze](native/runtime-freeze.json), allthree fresh saved
 installed audits and same-role factual/quality finals underpin [authority assembly](native/authority-assembly.json).
@@ -91,3 +90,5 @@ usage/legal-placeholder refusals are retained in [runtime notes](runtime-verific
 Final independent assembled exact-revision acceptance and local landing remain mandatory.
 Pool records stay3selected/3held until final acceptance/landing; four additional exactforms
 and inherited fallback predicate weaknesses stay held. No new target/curated recipe approval.
+
+[Final assembled review](assembled-review.json) independently ACCEPTS exact672d656ac8d72ccd2da071598ed049596a340a41. Metadata/source/runtime/reference bytes are frozen; only accurate review/landing documentation remains.
