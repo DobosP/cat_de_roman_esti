@@ -100,50 +100,52 @@ class CurrentContentSnapshot:
 
 
 CURRENT_CONTENT = CurrentContentSnapshot(
-    build_version='fixture-v1-2-reviewed-content',
+    build_version='fixture-v1-3-everyday-concepts',
     artifact_sha256=_frozen({
         'cat_de_roman_esti/fixtures/kg_sample.json': (
-            'c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85'
+            'd035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63'
         ),
         'cat_de_roman_esti/fixtures/games_pack.json': (
             'e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8'
         ),
         'cat_de_roman_esti/fixtures/board_rankings_v37.json': (
-            '96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806'
+            'e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b'
         ),
         'cat_de_roman_esti/fixtures/derived_catalog_v38.json': (
-            '1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71'
+            'b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9'
         ),
         'cat_de_roman_esti/fixtures/quick_games_v92.json': (
-            'cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c'
+            '99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f'
         ),
         'tests/fixtures/cat_mobile_app_pack_contract.json': (
-            '8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438'
+            'f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94'
         ),
     }),
     payload_sha256=_frozen({
-        'ranking_rows': '5848733fa5d59d3ddf7b84c968c1647fcbcc78664b018039b920f2d348d2ac41',
+        'ranking_rows': '4c86e3531b6199b87d2672db01d44123cd6d11fe56e0a33e78eaec8f3f3201e0',
         'frozen_derived_boards': '993e4e04834d2ab446ec28dd593177e071b11b881e49f941f677e0eaf66d01d4',
         'kg_nodes_without_aliases': (
-            'a8c082b2c8bfc5ab8085831ffaf002d879363fe514918da9b7bb1d88017cff36'
+            'a81a780ffba72bb77400d52f83d3de80115364c3708d465513e2efe103b59c4e'
         ),
-        'kg_edges': 'a2c5cb088b941f929785b23c0778fe6b3910f68c8af05431d0f643505c8dd6ac',
+        'kg_edges': '38e78e4dea242d7b319d31b55158d90fb827570c66023ba5f24eaba09aa492a7',
         'kg_puzzles': '3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc',
-        'contexto_profile': '9a9f3a940e3ffeaf938308a58a2786822327f3e0fdcd26188fc921041b13a3a3',
+        'contexto_profile': 'b34856651cdc5205cba1a57407a13dc0e95a0bd844ef82b3eca81ec703e37313',
         'alchimie_closure_profile': (
             'e3b695dcd41ce465cfb46274217441bc0dfd10f19dde0bf9d64d94d603c5289e'
         ),
-        'mobile_content': 'c8f9c6fc4f9d2ff7e1221f10ef17f2cbcc7194206d773fae8cebc583e6c74c51',
+        # Public projection and full fixture/API hashes bind distinct contracts.
+        'mobile_content': 'a00fb1308f215ea8e554df5fb3f60e7d12a2031c075280099454fb7299d48db9',
+        'fixture_content': 'c48dc37f32c8a08495e24a4b0b6ac773c7027dc102f4be236881c8425e7b1b42',
     }),
     kg_counts=_frozen({
-        'nodes': 2416,
-        'edges': 9459,
-        'aliases': 8663,
+        'nodes': 2419,
+        'edges': 9471,
+        'aliases': 8675,
         'puzzles': 180,
     }),
     mobile_counts=_frozen({
-        'nodes': 2416,
-        'edges': 9459,
+        'nodes': 2419,
+        'edges': 9471,
         'puzzles': 180,
     }),
     pack_counts=_frozen({
@@ -205,9 +207,9 @@ CURRENT_CONTENT = CurrentContentSnapshot(
         "preferred_by_game": _frozen({"intrusul": 188, "perechi": 153}),
     }),
     feedback_observations=_frozen({
-        'food_responsive': 2306,
+        'food_responsive': 2309,
         'food_direct_projections': 17,
-        'family_member_rank': 2127,
+        'family_member_rank': 2130,
     }),
     clatite_opener_ranks=_frozen(
         {"făină": 2, "ou": 7, "gem": 10, "dulceață": 9,

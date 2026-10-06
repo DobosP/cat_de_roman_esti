@@ -1,0 +1,81 @@
+{
+  "kind": "v1-3-focused-gameplay-test-quality-review-v2",
+  "role": "quality",
+  "reviewer": "/root/graph_quality",
+  "previous_review": {
+    "path": "docs/reviews/v1-3-everyday-concepts/gameplay-test-review.json",
+    "sha256": "3ce73ba41b7940f0f690e4ab589988f7a09225f255f92306a09d329f75208ae8",
+    "preserved": true
+  },
+  "verdict": "accept_implementation_for_focused_gate",
+  "test_files": [
+    {
+      "path": "go-backend/internal/contexto/content_v1_3_test.go",
+      "sha256": "1aaf98dd1dd835b92330c063b099f89d99f35fd4b1b7120c18af748e37feff21"
+    },
+    {
+      "path": "go-backend/internal/lant/content_v1_3_test.go",
+      "sha256": "2d2f0ce69f710744bf4121952a06efa1174aef00e376823d6f4d01e4632d8145"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "go-backend/internal/contexto/service.go",
+      "sha256": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4"
+    },
+    {
+      "path": "go-backend/internal/lant/service.go",
+      "sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90"
+    },
+    {
+      "path": "go-backend/internal/pack/pack.go",
+      "sha256": "a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7"
+    },
+    {
+      "path": "go-backend/internal/contentrails/rail.go",
+      "sha256": "5076e3b45923d9ee7a5563d9c1fd2b84c6fae1db16fb2beb1efc9c6f3c3a0f55"
+    }
+  ],
+  "unchanged_prior_scope": "The original three controlled Contexto inflection-family checks and three controlled Lanț direction/score/resume checks retain their assertions and prior implementation judgment; no source service behavior changed.",
+  "new_natural_selection": {
+    "test": "TestV13NaturallySelectedExistingTargetsAcceptSpecificNewGuesses",
+    "seed_search_limit": 4096,
+    "targets": [
+      "n_v4via_usa",
+      "n_v23via_ghiozdan"
+    ],
+    "guess_alias_pairs": [
+      [
+        "balama",
+        "balamalele"
+      ],
+      [
+        "fermoar",
+        "fermoarele"
+      ]
+    ],
+    "ordinary_pack_selection": {
+      "game": "contexto",
+      "category": "viata_de_roman",
+      "difficulty": "usor",
+      "filtered_shelf_weights": true,
+      "exclusion_override": false
+    },
+    "ordinary_service_create": true,
+    "new_private_session": true,
+    "label_alias_one_attempt": true,
+    "nonwinning_direct_warm_feedback": true,
+    "initial_guess_and_get_target_field_absent": true,
+    "existing_target_identity_win_on_second_attempt": true,
+    "rationale": "The finite search uses the unchanged ordinary eligible pack selector and the same options used by Service.Create. It chooses a seed without altering eligibility, target inventory, RNG or exclusions; the actual session is created via Service.Create, and the exact old target identity win then confirms the intended natural target. Both novel vocabulary families remain nonwinning warm guesses and aliases share one charged attempt."
+  },
+  "limits": [
+    "This proves natural selection for two existing curated targets when executed; it does not approve new target eligibility, all-category selection coverage or new curated Lanț starts.",
+    "Privacy assertions cover the withheld target field; exhaustive nested HTTP/privacy checks remain separate.",
+    "The natural test is service-level, not an HTTP integration test.",
+    "This receipt is static implementation review. Execution/pass status remains deferred to the coherent export and root focused/full-race gates."
+  ],
+  "execution_status": "not_run_by_this_review",
+  "test_files_excluded_from_native_runtime_manifest": true,
+  "rationale": "Accept the added bounded natural-selection regression test. It improves the original controlled-session coverage through genuine Service.Create without target injection or exclusion overrides. No mechanical source edits, session bound changes or candidate/runtime hash exclusions were added. Preserve all earlier semantic and privacy limits; run with the coherent current export before assembled acceptance."
+}

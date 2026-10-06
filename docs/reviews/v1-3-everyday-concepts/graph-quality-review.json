@@ -1,0 +1,472 @@
+{
+  "schema": "v1-3-independent-graph-quality-review-v1",
+  "reviewer": "/root/graph_quality",
+  "role": "independent_refute_first_graph_quality_reviewer",
+  "author_of_proposal": "root-integrator",
+  "decision": "accept_graph_proposal_for_integration",
+  "checked_on": "2026-10-06",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "graph_proposal_sha256": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3",
+  "candidate_path": "scripts/everyday_graph_v1_3_data.py",
+  "candidate_sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+  "raw_candidate_sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+  "selected_pool_records": [
+    {
+      "id": "v1-3-balama",
+      "revision": 2,
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-balama-r2.json",
+      "sha256": "01f97aae567673bb7fe92866a6627fd30d5b023d3e1cf58433c80538cb780e51"
+    },
+    {
+      "id": "v1-3-lemn",
+      "revision": 2,
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-lemn-r2.json",
+      "sha256": "0028b4e197094b48dc2e7d40eda28f83673cc163dba57ad06caf48c5c866cd43"
+    },
+    {
+      "id": "v1-3-fermoar",
+      "revision": 2,
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-fermoar-r2.json",
+      "sha256": "eeae197dcc914206f65fc3d7ac87fb414eac302cf5d4e1a2ec09988b53480b1f"
+    }
+  ],
+  "proposal_input_bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v1-3-everyday-concepts/research-identity.json": "5f67c2b7a60b4551a4f8328fd0e733ef344e705b1461d65822f37a71b74aca2d",
+    "docs/reviews/v1-3-everyday-concepts/deck-screen.json": "50d9055e986b656c715f6c2207fa650215527b237ca179f4cab997bebf0c71ff",
+    "docs/reviews/v1-3-everyday-concepts/hardware-material-research.json": "d80cd599d702f5342192b96313f23c72e3135adb6fce9daaf06a7ededee2f930",
+    "docs/reviews/v1-3-everyday-concepts/textile-research.json": "344e47e5e84fdbc11d8e970702c52322a07e7b9540f9446052a59d11e9ecff88",
+    "docs/reviews/v1-3-everyday-concepts/toolchain-prerequisite.json": "c8fcd21a1f37c9504588d40f7c8fa93b0c7afffd085e0418b9c5a7c24790d7a3"
+  },
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "counts": {
+    "new_shared_nodes": 3,
+    "new_world_nodes": 0,
+    "stored_grammatical_aliases": 12,
+    "new_canonical_label_keys": 3,
+    "new_normalized_input_keys": 15,
+    "genuine_synonym_families": 0,
+    "stored_one_way_links": 12,
+    "new_curated_rounds": 0,
+    "new_hidden_target_approvals": 0
+  },
+  "node_judgments": [
+    {
+      "id": "n_v1_3_home_balama",
+      "decision": "accept",
+      "exact_record": {
+        "id": "n_v1_3_home_balama",
+        "node_type": "concept",
+        "label_ro": "Balama",
+        "category": "viata_de_roman",
+        "description": "Piesă articulată care permite rotirea unei uși sau a unui canat; aici, balamaua fizică de feronerie.",
+        "salience": 0.85,
+        "aliases": [
+          "balamaua",
+          "balamale",
+          "balamalele",
+          "balamalei",
+          "balamalelor"
+        ]
+      },
+      "quality_reason": "Accept the ordinary physical hinge fitting. Five inflections retain that object rather than body-joint metaphor or rare regional synonym. Four qualified concrete uses connect familiar existing objects; all same household category. Outward-only direction supplies useful typed guesses while leaving old-route intermediates and hidden-target eligibility intact.",
+      "recognition_sources": [
+        "https://ftt.roto-frank.com/ro-ro/produse/produse-pentru-usi/balamale-pentru-usi/",
+        "https://www.blum.com/ro/ro/products/hingesystems/clip-top-blumotion/overview/"
+      ],
+      "incoming": 0,
+      "direct_incident_neighbors": 4,
+      "hidden_target_approval": false
+    },
+    {
+      "id": "n_v1_3_material_lemn",
+      "decision": "accept",
+      "exact_record": {
+        "id": "n_v1_3_material_lemn",
+        "node_type": "concept",
+        "label_ro": "Lemn",
+        "category": "viata_de_roman",
+        "description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+        "salience": 0.9,
+        "aliases": [
+          "lemnul",
+          "lemnului"
+        ]
+      },
+      "quality_reason": "Accept the physical wood/material sense with only two singular aliases. Domestic material/workshop category fits the stated household use. Tree provenance and specific chair/fastener/saw roles avoid arbitrary furniture fan-out; neither tree identity, all composites nor firewood naming is merged. Broad-material risks were challenged and all old crafting cores/path profiles remain exact.",
+      "recognition_sources": [
+        "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf",
+        "https://www.ikea.com/ro/ro/p/pinntorp-scaun-maro-deschis-vopsit-00529478/"
+      ],
+      "incoming": 0,
+      "direct_incident_neighbors": 4,
+      "hidden_target_approval": false
+    },
+    {
+      "id": "n_v1_3_clothing_fermoar",
+      "decision": "accept",
+      "exact_record": {
+        "id": "n_v1_3_clothing_fermoar",
+        "node_type": "concept",
+        "label_ro": "Fermoar",
+        "category": "viata_de_roman",
+        "description": "Dispozitiv de închidere cu două șiruri de elemente care se îmbină prin deplasarea unui cursor, folosit la îmbrăcăminte și genți.",
+        "salience": 0.85,
+        "aliases": [
+          "fermoarul",
+          "fermoare",
+          "fermoarele",
+          "fermoarului",
+          "fermoarelor"
+        ]
+      },
+      "quality_reason": "Accept the everyday sliding zipper closure and five regular neuter inflections. The description names a physical mechanism; no broader clasp/fermetură alias is inferred. Four possible-use clothing/schoolbag links are familiar and honest because buttons, elastic, snaps and other closures remain valid alternatives. No new pairing board, hidden target or recipe is approved.",
+      "recognition_sources": [
+        "https://isj.sv.edu.ro/ONETEH/images/docs/VII_PS_ETAP_subiect.pdf",
+        "https://www.decathlon.ro/p/geaca-navigatie-sailing-500-barbati/_/R-p-327999",
+        "https://ykkdigitalshowroom.com/assets/NATULON_Plus_en.pdf"
+      ],
+      "incoming": 0,
+      "direct_incident_neighbors": 4,
+      "hidden_target_approval": false
+    }
+  ],
+  "edge_judgments": [
+    {
+      "ref": "link-1",
+      "edge_key": [
+        "n_v1_3_home_balama",
+        "n_v4via_usa",
+        "allows_pivoting"
+      ],
+      "decision": "accept",
+      "quality_reason": "A hinge allowing a hinged door to pivot is a defining, recognizable mechanical association; this does not claim every door is hinged.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://ftt.roto-frank.com/ro-ro/produse/produse-pentru-usi/balamale-pentru-usi/"
+      ]
+    },
+    {
+      "ref": "link-2",
+      "edge_key": [
+        "n_v1_3_home_balama",
+        "n_v24_home_surfaces_fereastra",
+        "allows_pivoting"
+      ],
+      "decision": "accept",
+      "quality_reason": "A movable leaf of a suitable window can pivot on a hinge. The qualified window scope is supported by original window-hardware documentation.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://ftt.roto-frank.com/ro-ro/produse/detalii/roto-nx/"
+      ]
+    },
+    {
+      "ref": "link-3",
+      "edge_key": [
+        "n_v1_3_home_balama",
+        "n_v24_home_storage_dulap",
+        "used_in"
+      ],
+      "decision": "accept",
+      "quality_reason": "Hinged cupboard doors are a documented furniture application; sliding cupboards are a counterexample to universal phrasing and the caption avoids that claim.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://www.blum.com/ro/ro/products/cabinet-applications/inward-opening-door/overview/",
+        "https://www.blum.com/ro/ro/products/hingesystems/clip-top-blumotion/overview/"
+      ]
+    },
+    {
+      "ref": "link-4",
+      "edge_key": [
+        "n_v1_3_home_balama",
+        "n_v32_workshop_fastener_surub",
+        "fastened_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Some hinge assemblies use fastening screws, explicitly listed in the original single-page hardware catalog; glue/press-fit alternatives remain outside the claim.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://catalog.hettich.com/General/TuI_2025/ro_RO/catalogs/TuI_2025_ro_RO/pdf/save/bk_114.pdf"
+      ]
+    },
+    {
+      "ref": "link-5",
+      "edge_key": [
+        "n_v1_3_material_lemn",
+        "n_v4sti_copac",
+        "obtained_from"
+      ],
+      "decision": "accept",
+      "quality_reason": "The official teaching source expressly derives wood raw material from tree trunks/branches in affirmative prose. Material-to-tree direction is provenance, not an exact tree synonym.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf"
+      ]
+    },
+    {
+      "ref": "link-6",
+      "edge_key": [
+        "n_v1_3_material_lemn",
+        "n_v24_home_seating_scaun",
+        "used_to_make"
+      ],
+      "decision": "accept",
+      "quality_reason": "An original manufacturer wood chair and school household examples establish the qualified some-chair material role. Metal/plastic chairs remain counterexamples to a universal material claim.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://www.ikea.com/ro/ro/p/pinntorp-scaun-maro-deschis-vopsit-00529478/",
+        "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf"
+      ]
+    },
+    {
+      "ref": "link-7",
+      "edge_key": [
+        "n_v1_3_material_lemn",
+        "n_v32_workshop_fastener_surub",
+        "joined_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Suitable screws can fasten wood pieces. This is a qualified material-fastener association, not permission to use every screw in every kind of wood or a copied installation rule.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://www.ikea.com/ro/ro/manuals/fixa-260-piece-screw-and-plug-set__AA-2097280-1_pub.pdf"
+      ]
+    },
+    {
+      "ref": "link-8",
+      "edge_key": [
+        "n_v1_3_material_lemn",
+        "n_v32_workshop_cut_fierastrau",
+        "cut_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Wood cutting with a suitable saw is a specific, documented tool role; the description does not claim universal blade compatibility.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://www.bosch-diy.com/ro/ro/p/pks-55-a-0603501020"
+      ]
+    },
+    {
+      "ref": "link-9",
+      "edge_key": [
+        "n_v1_3_clothing_fermoar",
+        "n_v30_clothing_everyday_pantaloni",
+        "used_to_close"
+      ],
+      "decision": "accept",
+      "quality_reason": "The original government curriculum explicitly discusses zipper closure systems for trousers. The possible-use caption allows button/elastic alternatives; pockets alone would not establish waist closure.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://edu.gov.md/sites/default/files/s.04.o.025_tehnologia_confectiilor_din_tricot_ii.pdf"
+      ]
+    },
+    {
+      "ref": "link-10",
+      "edge_key": [
+        "n_v1_3_clothing_fermoar",
+        "n_v30_clothing_everyday_fusta",
+        "used_to_close"
+      ],
+      "decision": "accept",
+      "quality_reason": "The original government curriculum explicitly discusses zipper closure systems for skirts. Wrap/elastic/button skirts are acknowledged counterexamples; no universal claim is made.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://edu.gov.md/sites/default/files/s.04.o.025_tehnologia_confectiilor_din_tricot_ii.pdf"
+      ]
+    },
+    {
+      "ref": "link-11",
+      "edge_key": [
+        "n_v1_3_clothing_fermoar",
+        "n_v30_clothing_outer_geaca",
+        "used_to_close"
+      ],
+      "decision": "accept",
+      "quality_reason": "The original own-brand jacket description lists a central zipper, supporting a possible jacket closure. Other jacket fastenings remain valid alternatives.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://www.decathlon.ro/p/geaca-navigatie-sailing-500-barbati/_/R-p-327999"
+      ]
+    },
+    {
+      "ref": "link-12",
+      "edge_key": [
+        "n_v1_3_clothing_fermoar",
+        "n_v23via_ghiozdan",
+        "used_to_close"
+      ],
+      "decision": "accept",
+      "quality_reason": "The original schoolbag listing explicitly describes zipped compartments and a front zipper. Retailer attribution is retained; the listing is not claimed as Herlitz own-brand manufacture and not every bag must use zippers.",
+      "direction": {
+        "one_way_new_to_existing": true,
+        "reverse_claim_or_arc_approved": false
+      },
+      "source_urls": [
+        "https://www.herlitz.ro/cumpara/ghiozdan-neechipat-nature-quest-motiv-heavenly-dreams-1896"
+      ]
+    }
+  ],
+  "strength_and_salience_judgment": "Salience 0.85–0.90 and strengths 0.80–0.90 are explicit editorial familiarity/directness rankings, not measured source quantities. They do not establish hidden-target approval, playtest enjoyment or a lowered quality floor.",
+  "identity_checks": {
+    "old_native_owners_changed": 0,
+    "new_surface_existing_native_collisions": 0,
+    "new_surface_projection_conflicts": 0,
+    "new_world_label_collisions": 0,
+    "historical_exact_identity_tombstones_found": 0,
+    "scope": "Exact current label/alias/world/projection and structured rejection checks; no new board is submitted so no tombstone is resurrected or cleared. All previous holds and rejected identities remain."
+  },
+  "direction_boundary": {
+    "new_incoming_arcs": 0,
+    "new_target_reverse_reach": [
+      1,
+      1,
+      1
+    ],
+    "new_target_responsive_counts": [
+      0,
+      0,
+      0
+    ],
+    "new_target_good": [
+      false,
+      false,
+      false
+    ],
+    "old_all_node_mined_target_threshold_checks": 2416,
+    "old_target_eligibility_changes": 0,
+    "old_outgoing_adjacency_and_cost_exact": true,
+    "no_old_path_shortcuts": true,
+    "limitation": "These nodes supply typed guesses and possible new-start routes; old starts cannot reach a new node as an intermediate. No new curated Lanț round or every-fallback-seed preservation is claimed."
+  },
+  "impact_evidence": {
+    "path": "docs/reviews/v1-3-everyday-concepts/graph-quality-impact.json",
+    "sha256": "918572f30674e8d5a943ffada72d832991a8ec5b9ed353154dcfbe9cf352a2a7",
+    "full_lossless_evidence": {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-quality-impact-full.json.gz",
+      "gzip_mtime": 0,
+      "compressed_sha256": "95eaf9a054115ec2c80a0d8185851825d2bd05e9f80559af8b9563e4a48d0db5",
+      "compressed_bytes": 445493,
+      "uncompressed_sha256": "9a8cecc944852850029343781f78a5055c535acaffe6d29754c0703154197285",
+      "uncompressed_bytes": 2408090,
+      "roundtrip_verified": true
+    },
+    "summary": {
+      "alchimie_core_changed": 0,
+      "alchimie_core_compared": 83,
+      "cold_warm_clue_changed_targets": 0,
+      "cold_warm_clue_new_labels": 0,
+      "conexiuni_changed": 0,
+      "conexiuni_compared": 245,
+      "contexto_compared": 265,
+      "lant_changed": 0,
+      "lant_compared": 123,
+      "native_closeness_changed_pairs": 24227,
+      "native_rank_changed_pairs": 297861,
+      "native_rank_delta_bounds": [
+        0,
+        3
+      ],
+      "native_temperature_changed_pairs": 650,
+      "new_aliases": 12,
+      "new_edges": 12,
+      "new_hidden_target_eligible": 0,
+      "new_nodes": 3,
+      "new_normalized_keys_including_labels": 15,
+      "old_adjacency_and_cost_exact": true,
+      "old_known_owner_changes": 0,
+      "old_native_guess_target_pairs": 640240,
+      "old_projection_guess_target_pairs": 122960,
+      "projection_closeness_changed_pairs": 4835,
+      "projection_rank_changed_pairs": 55832,
+      "projection_rank_delta_bounds": [
+        0,
+        3
+      ],
+      "projection_temperature_changed_pairs": 110,
+      "terminal_puzzles_rebuilt": 180,
+      "terminal_puzzle_record_changes": 0,
+      "old_mined_target_threshold_checks": 2416,
+      "old_mined_target_eligibility_changes": 0,
+      "quick_ratings_compared": 85,
+      "quick_rating_changes": 0,
+      "old_node_degree_metadata_changes": 11,
+      "world_concept_snapshot_changes": 0
+    },
+    "quality_assessment": "All 245 Conexiuni fairness profiles,123 Lanț profiles and83 Alchimie core recipes/routes/par remain exact. All 85 quick score inputs/ratings are exact;11 old degree metadata snapshots need fresh bound downstream artifacts. Old Cald hop/weighted distances, anchors and wins are exact, but additional guess concepts cause rank shifts 0–3, 650 native/110 projected one-tier temperature shifts and closeness shifts±1. These bounded percentile effects are fully disclosed and acceptable for three true, nameable new guesses; no temperature-preservation claim is made. All 12 direct new-guess role probes return nonwinning Fierbinte/rank 3–5/closeness 99.",
+    "cold_clue_probe_limit": "Same three farthest old native guesses were used per target; all 265 candidate warmer-clue choices are unchanged. This is not enumeration of every possible player history."
+  },
+  "terminal_and_save_identity": {
+    "supported_isolated_rebuild": "GREEN: three normalized nodes/twelve one-way links regenerate 180 terminal records exactly; prospective fixture SHA d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "actual_record_changes": 0,
+    "initial_attempt_preserved": "Full first-failure log retained in lossless evidence. Validator correctly refused repository/scratch mirror mismatch and rolled back; rerun pointed all mirror constants to isolated copies and retained complete checks. No validation rule was suppressed.",
+    "world_concept_snapshot_changed_ids": [],
+    "world_recipe_history_scope": "No world concepts/recipes/goals/supplies/history records change, and none of the 11 changed old endpoint snapshots occurs in the 251-concept world. Fresh native world/source/history audit remains required after graph installation."
+  },
+  "deferred_research_preserved": {
+    "ids": [
+      "v1-3-clanta",
+      "v1-3-toc-usa",
+      "v1-3-perdea",
+      "v1-3-ata",
+      "v1-3-nasture"
+    ],
+    "reasons": "Clanță/Perdea retain synthetic-owner migration holds; Toc de ușă remains qualified-frame research with source/recognition limits; Ață/Nasture retain bounded neighborhood/sense/dependency cautions. No hold is converted into approval here."
+  },
+  "fresh_source_checks": {
+    "hardware_and_material": "This reviewer independently opened original Roto/Blum/Hettich/IKEA/Bosch pages/manuals and the official Romanian education wood source. Tree provenance is affirmative teaching prose, not one of the surrounding true/false exercise statements.",
+    "fermoar": "Independently opened Romanian grade VII 2025 official school list, the own-brand jacket description and current YKK two-page component catalog; independently checked indexed original government trouser/skirt closure text and schoolbag listing. Source access limitations are retained, not presented as full fetches.",
+    "copyright_scope": "Only original editorial claims, individual forms and citations are adopted. No dictionary corpus/definitions, page bodies, images, product pricing, copied instructions or blanket redistribution license is approved."
+  },
+  "source_access_notes": [
+    "Official DOOM entries were browser-verified by the root; separate final factual coverage remains required; this reviewer’s direct web entry fetch was unavailable. Five regular hinge/zipper inflections and two singular wood forms are independently coherent; no rare synonym adoption is inferred.",
+    "Moldovan curriculum full open returned a cache miss; its indexed original text explicitly names separate zipper closure systems on trousers and skirts. Independent final factual coverage remains mandatory.",
+    "Schoolbag direct web open failed in this reviewer; original listing search text names zipped main/front compartments and correct TigerFamily brand/retailer attribution. Root browser supplies separate full access; final independent factual coverage remains required.",
+    "The YKK component PDF opened; screenshot request later missed cache. Text parts were verified, and no unobserved specific four-use application list is claimed from that catalog."
+  ],
+  "required_before_landing": [
+    "Supported graph transaction must exactly match this module/proposal, all three nodes, 12 aliases/links, expected old degree metadata and proven 180 terminal records; preserve baseline mirrors and every pack/status/rejection record.",
+    "Refresh current native source version 3 chained to exact version 2, current source corpora/export/mobile/rank/derive and all affected raw/dossier/final independent review bindings. Do not hand-rehash old approval.",
+    "Run fresh quick/world/extensions source-bound native construction, full natural gameplay/privacy/resume/score and historical save audits; verify all 85 quick rows,351 world recipes/251 concepts, 49 extension candidates and old recipe cores remain appropriately bound.",
+    "Confirm installed native new guesses/aliases, no wrong-owner wins or accidental new hidden targets, old reviewed spelling exclusions, prospective new-start selection and truthful directed captions.",
+    "Complete required native/source/operator/shared race/vet/docs/whitespace and independent assembled review before local landing. No push/deployment is granted by this review."
+  ],
+  "remaining_limits": [
+    "Human spontaneous-name tests and enjoyment/device playtests are unrun.",
+    "This is graph editorial acceptance for integration only; no game-instance promotion, installation authority or runtime activation is granted."
+  ]
+}

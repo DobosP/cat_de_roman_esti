@@ -1,0 +1,40 @@
+{
+  "schema": "v1-3-native-authority-adoption-v1",
+  "previous_manifest_sha256": "1cab0b04ee0aabf8b6654037097dc9ec1740690992bc1d21a1a3d871593220aa",
+  "current_manifest_sha256": "8d9245f861bba03718213900984d2f2829d4d584d43bac701e5c3167ded623bf",
+  "preserved_source2_chain_descriptor": {
+    "parent_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6",
+    "path": "go-backend/internal/contentrails/sources/authored-v2.json",
+    "sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+    "version": 2
+  },
+  "appended_source3_descriptor": {
+    "path": "go-backend/internal/contentrails/sources/authored-v3.json",
+    "sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+    "version": 3,
+    "parent_source_sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7"
+  },
+  "adopted_entries": {
+    "quick": {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/installed-authority-entry.json",
+      "sha256": "7912b38ebad280a35d4510b30c31ad89242b43b53b74b8ef8d1288dfd42caebd"
+    },
+    "world": {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/installed-authority-entry.json",
+      "sha256": "6a1a022bd7b98eb9142d70315f70da36da4bce545319c7dc8958d1e2d0966cc1"
+    },
+    "extensions": {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/installed-authority-entry.json",
+      "sha256": "a80b7d85eb5335e56898d21e279bd992ea372341c3a1f56eb22afb4cf05317e6"
+    }
+  },
+  "pin_shape": "Existing exact native metadata-only template, sole SHA literal changed; no new exclusion",
+  "frozen_runtime_unchanged": true,
+  "check_status": "GREEN: rebuilt native operator reproduces allfour currentrails exactly; final fullgates stillpending",
+  "current_operator_sha256": "7b03c146595d2b693e5b470b7db124912e490824bfed7b9b85e6a627a60e0d2b",
+  "current_check": {
+    "path": "docs/reviews/v1-3-everyday-concepts/native/current-authority-check.json",
+    "sha256": "928ce624add7618067dbc30e2053c11eb6a3b0d7295c64b56368d8ab1c43650d"
+  },
+  "freeze_compiled_tools_note": "Freeze tools are historical at audit time; operator rebuilt solely after separatelychecked2metadata adoption. All106 runtime/source inputs remainexact."
+}

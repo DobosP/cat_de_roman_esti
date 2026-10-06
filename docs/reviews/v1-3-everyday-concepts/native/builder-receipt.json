@@ -1,0 +1,208 @@
+{
+  "binding_scope_notes": [
+    "Raw quick binds current KG/editorial source and derived board payload; complete current source bindings are added by proposal/audit gates.",
+    "The source3 extensions definitions and historical provenance bindings remain exact; native Candidate refreshes kg/pack/rubric and native source identity. Other historical bindings are not assertions of current full-source equality.",
+    "Raw extension candidate contains 68 archived core records and 49 candidate additions, exactly as V1.2. The expected installed extension catalog has 27 books containing those 49 additions."
+  ],
+  "builder": "/root/synonym_scout",
+  "candidate_outputs": {
+    "extensions": {
+      "bindings": {
+        "catalog_builder": {
+          "path": "scripts/build_alchimie_recipe_extensions.py",
+          "sha256": "874286c4f26d1b05964b611f91ebb3bc4b524abfca7837c710fec78cecd9ec69"
+        },
+        "core_runtime": {
+          "path": "cat_de_roman_esti/wordgames/alchimie.py",
+          "sha256": "e7684a500a6c8bcea5edac249b49921ce10a8d405b5c43a87eb777f6779b69c9"
+        },
+        "extensions_runtime": {
+          "path": "cat_de_roman_esti/wordgames/recipe_extensions.py",
+          "sha256": "138a48aa48390161270ecb76d4c3c6a43971c3600b66d84c782998fafb1afd79"
+        },
+        "graph_runtime": {
+          "path": "cat_de_roman_esti/graph.py",
+          "sha256": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0"
+        },
+        "kg": {
+          "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+          "sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63"
+        },
+        "pack": {
+          "path": "cat_de_roman_esti/fixtures/games_pack.json",
+          "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+        },
+        "packs_runtime": {
+          "path": "cat_de_roman_esti/wordgames/packs.py",
+          "sha256": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db"
+        },
+        "rankings": {
+          "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+          "sha256": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc"
+        },
+        "release_reserve": {
+          "path": "cat_de_roman_esti/fixtures/release_reserve_v1.json",
+          "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+        },
+        "rubric": {
+          "path": "docs/CRITIQUE_RUBRIC.md",
+          "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+        },
+        "service_runtime": {
+          "path": "cat_de_roman_esti/wordgames/service.py",
+          "sha256": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+        }
+      },
+      "bytes": 2020145,
+      "changed_top_level_keys_from_v1_2": [
+        "bindings",
+        "native_source_sha256",
+        "native_source_version"
+      ],
+      "inventory": {
+        "archived_core_board_records": 68,
+        "candidate_additions": 49
+      },
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/candidate.json",
+      "sha256": "ce6c98d0afb9391b5e792f8911e48363bee33c77f6c6872498a46526918f606d",
+      "v1_2_authored_semantics_exact": true
+    },
+    "quick": {
+      "bindings": {
+        "core_payload_sha256": "b78f069479f99741bf5187db638eebbc476eccf2d914c4a48b072b895446dc29",
+        "editorial_source_sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+        "kg_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+        "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+      },
+      "bytes": 119216,
+      "changed_top_level_keys_from_v1_2": [
+        "bindings",
+        "native_source_version"
+      ],
+      "inventory": {
+        "boards": 85
+      },
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/candidate.json",
+      "sha256": "98ab2e535b7db3e4098285c59a03994e6d86093458d710d43e6b864ad3e7adfc",
+      "v1_2_authored_semantics_exact": true
+    },
+    "world": {
+      "bindings": {
+        "editorial_source_sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+        "kg_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+        "previous_world_sha256": "8c6f7f0405c0a14a9432673b768df292ba8eefdb96f4f6d5d7e5594b517b70e9",
+        "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+      },
+      "bytes": 808897,
+      "changed_top_level_keys_from_v1_2": [
+        "bindings",
+        "native_source_version"
+      ],
+      "inventory": {
+        "compatible_versions": 9,
+        "concepts": 251,
+        "goals": 32,
+        "recipes": 351,
+        "unlocks": 12
+      },
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/candidate.json",
+      "sha256": "d3c1419c83a6e29f34790cef62717a4fbf36ec5577526677ac43db99fc0f089d",
+      "v1_2_authored_semantics_exact": true
+    }
+  },
+  "catalog_installations": 0,
+  "checked_on": "2026-10-06",
+  "command_log_sha256": "71b5fa2fa53bee0cdbeb5b76224c9d76cfb7fc5285642aeeded204f5cbcf3a50",
+  "factual_quality_reviewers_expected": [
+    "/root/content_rail",
+    "/root/graph_quality"
+  ],
+  "helper_sha256": "36031a9e6ae5671e85dd3123ca53803f7e909dfbe93e1437a53ad3725dd81834",
+  "immutable_v1_v2_archive_file_sha256_matches_original_descriptors": {
+    "docs/reviews/v1-testing-release/content/alchimie-reserve-proposal.json": "bcf35794a43f437f78d420b34a0e4ae44e1accd76c7eddde46a4bdf9e33728e6",
+    "docs/reviews/v1-testing-release/content/quick/candidate.json": "efa071d9c8c17899cb123fb0a3cdb8c67741ec38982b45df1599d915be5d73f0",
+    "docs/reviews/v1-testing-release/content/quick/factual-review.json": "7383ca84896278f146b3b4a1c1f82166545878ab417e7d6f328c5baf8e862773",
+    "docs/reviews/v1-testing-release/content/quick/quality-review.json": "244239884a69575c62245e982dcb04ff7fa01c99697d4b9008600ed06f49b8b4",
+    "docs/reviews/v1-testing-release/content/recipes/candidates.json": "adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366",
+    "docs/reviews/v1-testing-release/content/recipes/factual-review.json": "bbf106d08e7ea887d0a19c0a876dfa0c3a49547e0b02c8ce8c43656d7d7926b9",
+    "docs/reviews/v1-testing-release/content/recipes/quality-review.json": "f08e80ddecf9c247b311e9b7d2063506aba3dd99c1f9de39b56b11b30f711f09",
+    "docs/reviews/v1-testing-release/content/selection-reserve-proposal.json": "e02b1a624fb7df8edfbcf507a8c9d7bcfb39510cba771d9b3d660430b2360de4",
+    "docs/reviews/v1-testing-release/content/selection-reserve-quality-review.json": "54980fe74ac512b431eed9c8f3e3390c53e40a16a3efc1ad7fd207a528178758",
+    "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+    "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/candidate.json": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4",
+    "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/factual-review.json": "501e4ea97ce564e9fb1e764978d7c8a628c7f5774cc2531b7ee117555f5e6e1f",
+    "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/quality-review.json": "37ed31a2bda9e9a32494736a81f2c51d901e44195852a28b9da26976ba7d38c1"
+  },
+  "inputs_before_and_after_exact": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "docs/reviews/v1-testing-release/content/alchimie-reserve-proposal.json": "bcf35794a43f437f78d420b34a0e4ae44e1accd76c7eddde46a4bdf9e33728e6",
+    "docs/reviews/v1-testing-release/content/quick/candidate.json": "efa071d9c8c17899cb123fb0a3cdb8c67741ec38982b45df1599d915be5d73f0",
+    "docs/reviews/v1-testing-release/content/quick/factual-review.json": "7383ca84896278f146b3b4a1c1f82166545878ab417e7d6f328c5baf8e862773",
+    "docs/reviews/v1-testing-release/content/quick/quality-review.json": "244239884a69575c62245e982dcb04ff7fa01c99697d4b9008600ed06f49b8b4",
+    "docs/reviews/v1-testing-release/content/recipes/candidates.json": "adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366",
+    "docs/reviews/v1-testing-release/content/recipes/factual-review.json": "bbf106d08e7ea887d0a19c0a876dfa0c3a49547e0b02c8ce8c43656d7d7926b9",
+    "docs/reviews/v1-testing-release/content/recipes/quality-review.json": "f08e80ddecf9c247b311e9b7d2063506aba3dd99c1f9de39b56b11b30f711f09",
+    "docs/reviews/v1-testing-release/content/selection-reserve-proposal.json": "e02b1a624fb7df8edfbcf507a8c9d7bcfb39510cba771d9b3d660430b2360de4",
+    "docs/reviews/v1-testing-release/content/selection-reserve-quality-review.json": "54980fe74ac512b431eed9c8f3e3390c53e40a16a3efc1ad7fd207a528178758",
+    "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/candidate.json": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4",
+    "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/factual-review.json": "501e4ea97ce564e9fb1e764978d7c8a628c7f5774cc2531b7ee117555f5e6e1f",
+    "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/quality-review.json": "37ed31a2bda9e9a32494736a81f2c51d901e44195852a28b9da26976ba7d38c1",
+    "go-backend/internal/content/bundled.json": "d98280f0178e13f0d6ec8fd92813c4057f6408a0e3215ec61a0dbb70f9dd3313",
+    "go-backend/internal/content/digest.go": "af020cacd3227f7e7ac4558b885dcae61fbf26d3a925089f594e86c63d7aea02",
+    "go-backend/internal/contentrails/installed_authorities_pin.go": "7d3662cbed3520d034b14d473ddf22d6d3b0e75a5081f69179b9d87703f02445",
+    "go-backend/internal/contentrails/sources/authored-v1.json": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6",
+    "go-backend/internal/contentrails/sources/authored-v2.json": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "1cab0b04ee0aabf8b6654037097dc9ec1740690992bc1d21a1a3d871593220aa"
+  },
+  "kind": "v1-3-native-source3-candidate-builder-v1",
+  "native_generation": {
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-3/native_refresh_phase.py",
+      "candidates",
+      "--expected-kg-sha256",
+      "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63"
+    ],
+    "elapsed_seconds": 0.85,
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "{\"argv\": [\"/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content\", \"validate-fixture\", \"--root\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3\"]}\nGREEN: fixture is valid (0 errors)\n{\"argv\": [\"/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content-rail\", \"quick\", \"--root\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3\", \"--source\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/go-backend/internal/contentrails/sources/authored-v3.json\", \"--candidate-out\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/docs/reviews/v1-3-everyday-concepts/native/quick/candidate.json\"]}\n{\"mode\":\"candidate\",\"ok\":true,\"source_sha256\":\"56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc\",\"source_version\":3}\n{\"argv\": [\"/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content-rail\", \"world\", \"--root\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3\", \"--source\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/go-backend/internal/contentrails/sources/authored-v3.json\", \"--candidate-out\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/docs/reviews/v1-3-everyday-concepts/native/world/candidate.json\"]}\n{\"mode\":\"candidate\",\"ok\":true,\"source_sha256\":\"56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc\",\"source_version\":3}\n{\"argv\": [\"/home/dobo/work/_temp/codex__content-v1-3/bin/cat-content-rail\", \"extensions\", \"--root\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3\", \"--source\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/go-backend/internal/contentrails/sources/authored-v3.json\", \"--candidate-out\", \"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3/docs/reviews/v1-3-everyday-concepts/native/extensions/candidate.json\"]}\n{\"mode\":\"candidate\",\"ok\":true,\"source_sha256\":\"56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc\",\"source_version\":3}\n"
+  },
+  "new_curated_rounds_or_hidden_target_approvals": 0,
+  "new_world_concepts_or_recipes": 0,
+  "next_gate": "Independent raw factual/quality review of all three exact current candidates before proposal construction; preserve fullLoad/export transition refusals.",
+  "pin_manifest_corpus_edits": 0,
+  "review_acceptances_authored": 0,
+  "scope": "Source3 and native raw candidates only; not independent approval, pin adoption or catalog installation.",
+  "source": {
+    "authored_definitions_unchanged": [
+      "quick",
+      "world",
+      "extensions",
+      "legacy_sources"
+    ],
+    "base_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+    "bytes": 2411050,
+    "changed_metadata": [
+      "version",
+      "parent_source_sha256",
+      "base_commit",
+      "archives.world_previous",
+      "archives.world_candidate",
+      "archives.world_factual",
+      "archives.world_quality"
+    ],
+    "parent_source_sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+    "path": "go-backend/internal/contentrails/sources/authored-v3.json",
+    "sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+    "version": 3,
+    "world_predecessor_generation_guard": "Native world candidate generation passed previousMatchesCurrent against the V1.2 installed world/history."
+  },
+  "tool_sha256": "b36eddbd30bbb9aa95cc837390b1c17e09cd32cb74ba42f83048910c6a190b80"
+}

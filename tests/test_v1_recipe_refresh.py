@@ -4,6 +4,7 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import sys
 from copy import deepcopy
 from pathlib import Path
 from types import SimpleNamespace
@@ -18,6 +19,7 @@ from cat_de_roman_esti.wordgames import packs as P
 from cat_de_roman_esti.wordgames import recipe_extensions as R
 from cat_de_roman_esti.wordgames.service import SessionStore, WordGameService
 from scripts import build_alchimie_recipe_extensions as B
+from tests.content_history import before_v1_2_artifact, before_v1_2_extension_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "docs/reviews/v1-testing-release/content"
@@ -25,6 +27,37 @@ REVIEW = CONTENT / "recipes"
 CATALOG = REVIEW / "catalog.json"
 AFFECTED = {"al_arta_cultura_016": 1, "al_film_tv_020": 3, "al_sport_083": 3}
 WITHDRAWN = "al_istorie_034"
+
+
+@pytest.fixture(scope="module", autouse=True)
+def exact_v1_source_context(tmp_path_factory):
+    """Run unchanged V1 assertions against exact V1 sources, preserving current gates."""
+    real_root = ROOT
+    historical = tmp_path_factory.mktemp("exact-v1-recipe-sources")
+    for filename in ("kg_sample.json", "games_pack.json"):
+        value = read(real_root / "cat_de_roman_esti/fixtures" / filename)
+        value = before_v1_2_artifact(value, filename)
+        path = historical / "cat_de_roman_esti/fixtures" / filename
+        path.parent.mkdir(parents=True, exist_ok=True)
+        indent = 2 if filename == "kg_sample.json" else 1
+        path.write_bytes((json.dumps(value, ensure_ascii=False, indent=indent) + "\n").encode())
+    catalog = before_v1_2_extension_catalog(read(
+        real_root / "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json"
+    ))
+    path = historical / "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json"
+    write(path, catalog)
+    assert path.read_bytes() == CATALOG.read_bytes()
+    rubric = historical / "docs/CRITIQUE_RUBRIC.md"
+    rubric.parent.mkdir(parents=True, exist_ok=True)
+    rubric.write_bytes((real_root / "docs/CRITIQUE_RUBRIC.md").read_bytes())
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(sys.modules[__name__], "ROOT", historical)
+    monkeypatch.setattr(B, "ROOT", historical)
+    try:
+        yield
+    finally:
+        monkeypatch.undo()
+        R._load_catalog.cache_clear()
 
 
 def sha(blob: bytes) -> str:

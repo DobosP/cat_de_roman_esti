@@ -1,0 +1,156 @@
+{
+  "kind": "v1-3-reference-and-selector-independent-quality-review-v1",
+  "role": "quality",
+  "reviewer": "/root/graph_quality",
+  "verdict": "accept",
+  "scope": "Exact independent Django expected-response capture, current vector adoption with lossless historical preservation, narrow source corpus selector and current native rebuild-test update.",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "evidence": {
+    "path": "docs/reviews/v1-3-everyday-concepts/reference/independent-quality-evidence.json",
+    "sha256": "58a7d9c397703529c9d6af8ee62d207f13694b55b871d7ed59f2d35fd65853a9",
+    "producer_verification_sha256": "37e9aaa2f3d1615fd5f4aaf1be445ad14f5152fbe132cb356054a8bf216b0b69",
+    "full_delta_gzip_sha256": "2d18c75c11f6f395c355fdae2477e5f606dd40d3045c3012d64187fd40a7cfc9"
+  },
+  "approved_http_capture": {
+    "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz",
+    "sha256": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+    "decompressed_sha256": "f6c267f5493ee64312c8389160c41019037585472ee7814ff9a5e15e0144d1cc",
+    "requests": 1207,
+    "independent_django_only_responses_reproduced": 1207,
+    "expected_answer_origin": "Django TestClient statuses/bodies and Python private session state; native results were comparison output only. This reviewer separately replayed saved requests against Django without using native expected responses.",
+    "normalization": "Only existing opaque session ID substitutions; no new HTTP normalizer. Vector generator retains only existing game_id/resolved_token normalization."
+  },
+  "current_sources": {
+    "alchimie_discovery_world_v92.json": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+    "alchimie_recipe_extensions_v92.json": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+    "board_rankings_v37.json": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+    "derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+    "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "current_export_sha256": "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f",
+  "original_capture_producers": {
+    "http_three_metadata_literal_changes_only": true,
+    "original_http_author_sha256": "a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+    "original_vector_author_sha256": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513",
+    "prepared_http_author_sha256": "fc6c394779dd5bd359fd2ba30d57e682f0df5c4d868f91987c59f314eca65513",
+    "prepared_vector_author_sha256": "83c9912c444c013ad49517ad495d69c99e75bbf03d7b4efa03a74a5d2279453f",
+    "protected_originals": {
+      "docs/reviews/v1-2-content-growth/reference/historical-contexto-game-vectors.json.gz": "d1fd40e44407e56ed2d4e6919e46cac29fa50a853c4dbc285c075c99f09a861b",
+      "go-backend/internal/contexto/testdata/python_games.json": "d8d02cc30806b1d475efdab0d8130f92bb9ee688b3fe12aecec50362e0f72284",
+      "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+      "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+      "go-backend/internal/lant/testdata/python_games.json": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048"
+    },
+    "vector_output_literal_only": true
+  },
+  "preserved_historical_v1_2_contexto": {
+    "path": "docs/reviews/v1-3-everyday-concepts/reference/historical-v1-2-contexto-game-vectors.json.gz",
+    "compressed_sha256": "1feaa935a35d6540ad5251e8633b9de24367bac36aad6de8a4863986258c4a17",
+    "decompressed_sha256": "d8d02cc30806b1d475efdab0d8130f92bb9ee688b3fe12aecec50362e0f72284",
+    "exact_git_baseline_bytes": true,
+    "note": "The earlier independent evidence predates adoption and checked old bytes at the original testdata path. Those same bytes are now preserved losslessly here, while the current testdata path contains the reproduced V1.3 capture. No old vector claim is discarded."
+  },
+  "http_delta": {
+    "requests_statuses_keysets_types_array_lengths_exact": true,
+    "unchanged_bodies": 1184,
+    "changed_bodies": 23,
+    "changed_scalar_leaves": 26,
+    "changed_scope": "Health concepts, manifest release/hash and node/edge totals, household category +3 nodes, twenty existing Contexto response reachable_count +3. Complete per-case changes bound in independent evidence."
+  },
+  "vectors": {
+    "contexto": {
+      "changed_leaf_counts": {
+        "closeness": 76,
+        "message": 150,
+        "rank": 810,
+        "rank_delta": 54,
+        "reachable_count": 921
+      },
+      "changed_sequences": 60,
+      "current_sha256": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078",
+      "numeric_delta_bounds": {
+        "closeness": {
+          "maximum": 1,
+          "minimum": 1
+        },
+        "rank": {
+          "maximum": 2,
+          "minimum": 1
+        },
+        "rank_delta": {
+          "maximum": 2,
+          "minimum": -2
+        },
+        "reachable_count": {
+          "maximum": 3,
+          "minimum": 3
+        }
+      },
+      "original_generator_reproduced_exact": true,
+      "prior_sha256": "d8d02cc30806b1d475efdab0d8130f92bb9ee688b3fe12aecec50362e0f72284",
+      "same_inputs_statuses_and_actions": true,
+      "sequences": 60
+    },
+    "lant": {
+      "changed_leaf_counts": {},
+      "changed_sequences": 0,
+      "current_sha256": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+      "numeric_delta_bounds": {},
+      "original_generator_reproduced_exact": true,
+      "prior_sha256": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+      "same_inputs_statuses_and_actions": true,
+      "sequences": 60
+    }
+  },
+  "approved_code_files": [
+    {
+      "path": "go-backend/internal/httpgolden/golden.go",
+      "sha256": "883020aa7566a234c1a4eb2932e66d55b5a1ba01fee0a66fd479b8887f0f1802"
+    },
+    {
+      "path": "go-backend/internal/httpgolden/golden_test.go",
+      "sha256": "cf9ce67f4bad210b5cdf2a42d8dadd4619abac697da394719ad65c65582fb48d"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/build_test.go",
+      "sha256": "a14de5489b1e23f3d5a58082253fb6aac46f5ead26310023501fe20e68d8a8b8"
+    }
+  ],
+  "code_preservation": {
+    "golden_go_added_function": "reviewedV13",
+    "golden_go_changed_function": "ForSources",
+    "existing_functions_exact": [
+      "ReadCorpus",
+      "Frozen",
+      "reviewedV12",
+      "replace",
+      "normalized",
+      "Replay"
+    ],
+    "selector_semantics": "Append only the separately pinned V1.3 corpus to the original/V1.2 list. Selection still requires reflect.DeepEqual of the complete source map. Unknown, partial, mixed and extra source maps refuse; no fallback or normalization of content-source identity.",
+    "golden_test_changed_function": "TestHistoricalFrozenCorpusAndExactReviewedSelection",
+    "old_frozen_and_v12_selection_preserved": true,
+    "all_refusal_and_replay_tests_unchanged": true,
+    "contentbuild_test_changed_function": "TestRebuildCurrentReviewedBundleAndPin",
+    "contentbuild_only_current_digest_and_node_edge_inventory_changed": true,
+    "initial_native_migration_release_archive_test_exact": true,
+    "native_inventory": {
+      "nodes": 2419,
+      "edges": 9471,
+      "pack_items": 709,
+      "boards": 418
+    }
+  },
+  "focused_native_execution": {
+    "command": "GOTOOLCHAIN=local /home/dobo/work/_temp/codex__content-v1-3/tools/go/bin/go -C go-backend test ./internal/httpgolden ./internal/contentbuild ./internal/contexto ./internal/lant",
+    "exit_code": 0,
+    "packages_passed": 4,
+    "log_sha256": "8829ff9bc0f6ed72798c99e188d6f26eefb8d598e19e78e53421d49471a74eca",
+    "coverage": "Includes current 1207-request native HTTP replay, exact full-map historical/current selection and refusal tests, byte-exact native bundle rebuild/pin/source checks, both Contexto 60-vector and Lanț60-vector comparisons, and V1.3 focused/natural service tests."
+  },
+  "limits": "This accepts the captured reference and narrow implementation. It is not final installed-content authority or a full-race release result. Fresh installed current-source audits/finals and assembled native gates remain required.",
+  "rationale": "Independent expected-answer provenance is intact and every current captured HTTP response and both original-generator vectors reproduced exactly in Python/Django. Old HTTP corpora and original archive remain immutable; V1.2 current vectors survive losslessly. All requests/actions/statuses and response shapes are preserved; only reviewed graph-inventory/reachability and small expected numeric rank/closeness feedback effects change. Actual adopted bytes match the reviewed capture. Source selector retains strict complete-map refusal and all earlier expected corpora; no check or session bound is weakened. Focused native execution passed the current independent parity and regression gates."
+}

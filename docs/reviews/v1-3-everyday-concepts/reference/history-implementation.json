@@ -1,0 +1,102 @@
+{
+  "kind": "v1-3-history-reference-implementation-v1",
+  "checked_on": "2026-10-06",
+  "implementer": "/root/synonym_scout",
+  "scope": "Strict test-history inverses and capture preparation only; no review acceptance, catalog/source/pin adoption or reference capture executed.",
+  "code_sha256": {
+    "tests/content_history.py": "8690b2be022a361263b31ef8cabea5f080015cee0f92728619d24ac03a6ed703",
+    "tests/test_v1_2_content_history.py": "299425fc227ab17ae3b73f5b16baeae7539e21f4e65a0a3b938d80a5160f589d",
+    "tests/test_v1_3_content_history.py": "ebc6b881f4e78bf287ea29d0a562d5c11e093f049d2bed3ffdca6eb51c55ab7f"
+  },
+  "old_history_assertion_AST_preserved": true,
+  "existing_function_changes": "Only before_v1_2_artifact prepends the new strict peel; existing V1.2 test current input is reconstructed before its unchanged assertions.",
+  "old_V1_V1_2_receipts_and_all_pins_exact": true,
+  "restored_complete_bytes": {
+    "kg_sample.json": {
+      "before_sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+      "after_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+      "complete_restored_bytes_equal_git_18832": true
+    },
+    "board_rankings_v37.json": {
+      "before_sha256": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+      "after_sha256": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+      "complete_restored_bytes_equal_git_18832": true
+    },
+    "derived_catalog_v38.json": {
+      "before_sha256": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+      "after_sha256": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+      "complete_restored_bytes_equal_git_18832": true
+    },
+    "cat_mobile_app_pack_contract.json": {
+      "before_sha256": "8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438",
+      "after_sha256": "f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94",
+      "complete_restored_bytes_equal_git_18832": true
+    }
+  },
+  "graph_receipt_sha256": "92ba14415cad62aaf1fb0b8578852e8efeaea090d085ae64448862bb32763e3e",
+  "mobile_public_constructor": {
+    "native_constructor_path": "go-backend/internal/mobilepack/mobile.go",
+    "native_constructor_sha256": "af34eda5788c48e335b39316b0f105ce724de70063654ccc655112c60ecbf84e",
+    "root_reported_current_native_check_exit_code": 0,
+    "independent_in_memory_projection_equal_all_current_public_rows": true,
+    "content_hash": "sha256:a00fb1308f215ea8e554df5fb3f60e7d12a2031c075280099454fb7299d48db9",
+    "public_added_nodes": 3,
+    "public_added_edges": 12,
+    "old_public_rows_and_all180puzzles_exact": true,
+    "private_helper_fields_added": false
+  },
+  "test_runs": [
+    {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_v1_3_content_history.py",
+        "tests/test_v1_2_content_history.py",
+        "tests/test_v1_content_history.py",
+        "-k",
+        "not current_snapshot",
+        "-o",
+        "cache_dir=/home/dobo/work/_temp/codex__content-v1-3/pytest-cache-history"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 6.366,
+      "log": "history-v1-3-focused.log",
+      "result": "75 passing, 5 pending-mobile failures; one current snapshot test deselected during transition",
+      "log_sha256": "b57dd01060bc0a334f1356008ff1a8218202a86d102745e29b001ac74a4958d7"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_v1_3_content_history.py",
+        "tests/test_v1_2_content_history.py",
+        "tests/test_v1_content_history.py",
+        "-k",
+        "cat_mobile_app_pack_contract",
+        "-o",
+        "cache_dir=/home/dobo/work/_temp/codex__content-v1-3/pytest-cache-history"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.284,
+      "log": "history-v1-3-mobile-final.log",
+      "result": "all12selected mobile cases pass, including five prior failures and five new cases",
+      "log_sha256": "eb27a136c18598aedc0e4f11e6893b614a04335a9faf3ec03433325d777e2663"
+    }
+  ],
+  "lint_and_whitespace": "Ruff and scoped git diff --check pass; final change after tests only helper docstring/error-message cleanup.",
+  "rank_delta": "Exactly five rows: ct364 play_quality89→91; ct377 play_quality88→91/pilot77→78/rank125→122 with one finite move; ct_muzica168/ct_societate290/ct_stiinta189 ranks +1. Rest exact.",
+  "derived_delta": "All336rows exact; only two source hash metadata fields change.",
+  "capture_preparation_path": "/home/dobo/work/_temp/codex__content-v1-3/reference-preparation/capture-preparation.json",
+  "capture_preparation_sha256": "565bd84e901bc6af649b6045fb28cea5e5f352e543fc22bad60dc5edf25074b0",
+  "remaining_before_full_history_and_capture_gate": [
+    "Actual final installed quick/world/extensions catalog hashes and finite metadata/snapshot deltas must be independently bound; helper refuses changed catalog bytes until then.",
+    "Root current-content snapshot/Python pin updates and all current native catalogs/export must be ready before fresh HTTP/Contexto capture.",
+    "Run final integrated full history/current suite after those bindings; the current-content snapshot assertion was not weakened."
+  ],
+  "no_expected_fixtures_generated": true,
+  "source_graph_catalog_pin_edits": 0
+}

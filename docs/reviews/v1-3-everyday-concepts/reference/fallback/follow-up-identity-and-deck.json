@@ -1,0 +1,365 @@
+{
+  "kind": "held-fallback-identity-and-deck-screen-v1",
+  "checked_on": "2026-10-06",
+  "valid_until": "Bound graph/decks/reference/quality-hold changes; then repeat affected identity screen.",
+  "researcher": "/root/synonym_scout",
+  "scope": "Bounded read-only follow-up supporting the existing hold; no new wave/pool, approval, taxonomy/source edit or category-move remedy.",
+  "input_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+    "scripts/basic_words_v29_data.py": "2636ee0ea92aba120709f38f373036f4de950dca685924eea14882c4840a7d4e",
+    "scripts/basic_words_v28_data.py": "f23b9f5fe2b763f05726213021c2d083b5433bf03a9f68eec6997816d4dcb500",
+    "scripts/common_words_v24_data.py": "54d75cffb8e5e5b2b4903de9d872bb37495b58b4a7bde5dd076b56fa51a365fb",
+    "docs/reviews/v1-3-everyday-concepts/reference/fallback/capture-proposal.json": "f4038f5d7818b55fdc7acb54ec2593b1cac02198d7b4a181ed7d8584fb93a272",
+    "docs/reviews/v1-3-everyday-concepts/reference/fallback/independent-quality-review.json": "059e19f7a54fc12be691cc760dc10b4153c8a6755e6268906a945a67b18e61f2",
+    "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-conexiuni.json.gz": "6a7024c3e711f2441d58f927d32d094cb30be29dfb669561112ac3a97272ecb1"
+  },
+  "held_case": {
+    "name": "global-daily-seven",
+    "difficulty": "normal",
+    "daily": "2026-10-03",
+    "category": "",
+    "seed": "0",
+    "pack_limit": 7,
+    "tiles": 16,
+    "group_key": "societate",
+    "group_label": "Societate",
+    "members": [
+      {
+        "id": "n_socx_universitatea_babes_bolyai",
+        "label": "Universitatea Babeș-Bolyai",
+        "node_type": "org",
+        "category": "societate",
+        "stored_sense_screen": "university/institution; UBB is an accepted alias"
+      },
+      {
+        "id": "n_v11soc_buletin",
+        "label": "Buletin",
+        "node_type": "concept",
+        "category": "societate",
+        "stored_sense_screen": "identity document; not an institution or time unit"
+      },
+      {
+        "id": "n_v20soc_referendum",
+        "label": "Referendum",
+        "node_type": "concept",
+        "category": "societate",
+        "stored_sense_screen": "civic voting/consultation process; not an institution or time unit"
+      },
+      {
+        "id": "n_v29_time_units_secunda",
+        "label": "Secundă",
+        "node_type": "concept",
+        "category": "societate",
+        "stored_sense_screen": "duration unit; stored description explicitly relates60seconds to one minute"
+      }
+    ],
+    "constraint_meaning": "7is the test-limited curated shelf (GamesPack(items[:pack_limit])), not seven tiles; the captured board has16tiles/fourgroups. This is a forced fallback reference case, not a curated board approval."
+  },
+  "secunda_identity": {
+    "id": "n_v29_time_units_secunda",
+    "label": "Secundă",
+    "category": "societate",
+    "node_type": "concept",
+    "stored_description": "Unitate scurtă de timp; șaizeci de secunde formează un minut.",
+    "aliases": [
+      "secunde",
+      "secundele",
+      "secundei"
+    ],
+    "parsed_tags": [],
+    "parsed_facets": {},
+    "raw_tags_or_sense_fields_present": [],
+    "exact_record_unchanged_from_v1_2": true,
+    "normalized_owners": {
+      "Secundă": "n_v29_time_units_secunda",
+      "secunda": "n_v29_time_units_secunda",
+      "secunde": "n_v29_time_units_secunda",
+      "secundele": "n_v29_time_units_secunda",
+      "secundei": "n_v29_time_units_secunda"
+    },
+    "incident_edges": [
+      {
+        "id": "de8215",
+        "src_id": "n_v29_time_units_minut",
+        "dst_id": "n_v29_time_units_secunda",
+        "relation": "has_part_time",
+        "label_ro": "are șaizeci de secunde",
+        "strength": 0.99,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      {
+        "id": "de8218",
+        "src_id": "n_v29_time_units_secunda",
+        "dst_id": "n_v24_time_day_ora",
+        "relation": "part_of_time",
+        "label_ro": "este o unitate mai mică decât ora",
+        "strength": 0.95,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      {
+        "id": "de8219",
+        "src_id": "n_v29_time_units_secunda",
+        "dst_id": "n_v24_time_day_ceas",
+        "relation": "measured_by",
+        "label_ro": "este măsurată de ceas",
+        "strength": 0.97,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      {
+        "id": "de8220",
+        "src_id": "n_v4spo_alergare",
+        "dst_id": "n_v29_time_units_secunda",
+        "relation": "timed_in",
+        "label_ro": "poate fi cronometrată în secunde",
+        "strength": 0.96,
+        "is_distractor": 0,
+        "bidirectional": 0
+      }
+    ]
+  },
+  "related_time_nodes": [
+    {
+      "id": "n_v29_time_units_minut",
+      "label": "Minut",
+      "category": "societate",
+      "stored_description": "Unitate de timp egală cu șaizeci de secunde."
+    },
+    {
+      "id": "n_v24_time_day_ora",
+      "label": "Oră",
+      "category": "societate",
+      "stored_description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Oră."
+    },
+    {
+      "id": "n_v24_time_day_zi",
+      "label": "Zi",
+      "category": "societate",
+      "stored_description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Zi."
+    },
+    {
+      "id": "n_v28_time_calendar_saptamana",
+      "label": "Săptămână",
+      "category": "societate",
+      "stored_description": "Perioadă de șapte zile consecutive."
+    },
+    {
+      "id": "n_v28_time_calendar_luna_calendaristica",
+      "label": "Lună calendaristică",
+      "category": "societate",
+      "stored_description": "Una dintre cele douăsprezece perioade ale anului calendaristic."
+    },
+    {
+      "id": "n_v4ist_an",
+      "label": "An",
+      "category": "istorie",
+      "stored_description": "Unitate de timp folosită pentru datarea evenimentelor istorice."
+    },
+    {
+      "id": "n_v4ist_secol",
+      "label": "Secol",
+      "category": "istorie",
+      "stored_description": "Perioadă de o sută de ani folosită în datarea istorică."
+    },
+    {
+      "id": "n_v24_time_day_ceas",
+      "label": "Ceas",
+      "category": "societate",
+      "stored_description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Ceas."
+    },
+    {
+      "id": "n_v29_time_calendar",
+      "label": "Calendar",
+      "category": "societate",
+      "stored_description": "Sistem sau obiect care arată zilele, lunile și datele unui an."
+    },
+    {
+      "id": "n_v29_time_daily_noapte",
+      "label": "Noapte",
+      "category": "societate",
+      "stored_description": "Partea întunecată a zilei, dintre seară și dimineață."
+    },
+    {
+      "id": "n_v29_time_weekly_weekend",
+      "label": "Weekend",
+      "category": "societate",
+      "stored_description": "Zilele de la sfârșitul săptămânii, de obicei sâmbăta și duminica."
+    }
+  ],
+  "sense_boundaries": [
+    "Minut/Secundă/Oră are distinct duration units, not synonyms.",
+    "Ceas measures time and Calendar organizes dates; neither is simply another duration unit.",
+    "Noapte/Weekend are time periods/day parts; a common time theme alone does not prove one interchangeable predicate.",
+    "Lună calendaristică has its own qualified identity; bare lună currently resolves n_v24_nature_sky_luna (celestial body).",
+    "Secundă has only the time-unit native label/alias owner in this inspected graph. Broader ordinal/musical polysemy was not redefined or newly approved."
+  ],
+  "existing_deck_uses": {
+    "secunda_curated_main_pack_uses": [],
+    "main_pack_scope": "Exact ID scan of all Conexiuni/Contexto/Lanț/Alchimie records in games_pack.json found no Secundă occurrence; derived336 also has no Secundă occurrence.",
+    "authored_quick_uses": [
+      {
+        "authored_id": "iq92_duration",
+        "source_id": "aq92_intrusul_duration",
+        "game": "intrusul",
+        "board_category": "viata_de_roman",
+        "difficulty": "usor",
+        "literal_payload": {
+          "group_label": "Unități pentru măsurarea duratei",
+          "intruder": "n_v24_school_supplies_rigla",
+          "members": [
+            "n_v29_time_units_secunda",
+            "n_v29_time_units_minut",
+            "n_v24_time_day_ora"
+          ]
+        },
+        "installed_board_id": "vi_f35963646af0a7b74917"
+      },
+      {
+        "authored_id": "pq92_associations_12",
+        "source_id": "aq92_perechi_associations_12",
+        "game": "perechi",
+        "board_category": "viata_de_roman",
+        "difficulty": "normal",
+        "literal_payload": {
+          "pairs": [
+            {
+              "group_label": "Părinții",
+              "members": [
+                "n_v24_people_parents_mama",
+                "n_v24_people_parents_tata"
+              ]
+            },
+            {
+              "group_label": "Piese care se conectează pentru alimentare electrică",
+              "members": [
+                "n_v33_electric_outlet_priza",
+                "n_v33_electric_plug_stecher"
+              ]
+            },
+            {
+              "group_label": "Compozitor și lucrare muzicală",
+              "members": [
+                "n_ciprian_porumbescu",
+                "n_v20art_balada_porumbescu"
+              ]
+            },
+            {
+              "group_label": "Un minut are șaizeci de secunde",
+              "members": [
+                "n_v29_time_units_minut",
+                "n_v29_time_units_secunda"
+              ]
+            }
+          ]
+        },
+        "installed_board_id": "vp_17127227370b9fe05ac8"
+      }
+    ],
+    "related_calendar_conexiuni": {
+      "id": "cx_viata_de_roman_371",
+      "status": "approved",
+      "category": "viata_de_roman",
+      "group_key": "g3",
+      "group_label": "Unități calendaristice",
+      "members": [
+        {
+          "id": "n_v4ist_secol",
+          "label": "Secol",
+          "node_category": "istorie"
+        },
+        {
+          "id": "n_v4ist_an",
+          "label": "An",
+          "node_category": "istorie"
+        },
+        {
+          "id": "n_v28_time_calendar_saptamana",
+          "label": "Săptămână",
+          "node_category": "societate"
+        },
+        {
+          "id": "n_v28_time_calendar_luna_calendaristica",
+          "label": "Lună calendaristică",
+          "node_category": "societate"
+        }
+      ],
+      "meaning": "An existing explicit calendar-unit predicate spans Istorie and Societate node categories, demonstrating that board predicates and broad KG categories are different scopes."
+    }
+  },
+  "prior_quality": [
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/factual-review.json",
+      "sha256": "c15b2f3edcd7cb886d288ba459f501a64cd6badba6371c074e5080e3a16b21fe",
+      "role": "factual",
+      "items": [
+        {
+          "id": "iq92_duration",
+          "verdict": "accept",
+          "inherited": true
+        },
+        {
+          "id": "pq92_associations_12",
+          "verdict": "accept",
+          "inherited": true
+        }
+      ],
+      "scope": "These existing independent judgments apply to the explicit authored duration/pair predicates, not the forced Societate group."
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/quality-review.json",
+      "sha256": "41173d60d92fdb0508fbb05a6bdf5abd5994aabfda570787b57222e028283fab",
+      "role": "quality",
+      "items": [
+        {
+          "id": "iq92_duration",
+          "verdict": "accept",
+          "inherited": true
+        },
+        {
+          "id": "pq92_associations_12",
+          "verdict": "accept",
+          "inherited": true
+        }
+      ],
+      "scope": "These existing independent judgments apply to the explicit authored duration/pair predicates, not the forced Societate group."
+    }
+  ],
+  "prior_rejection_screen": {
+    "ledgers": [
+      {
+        "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+        "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+        "exact_related_id_mentions": []
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+        "sha256": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+        "exact_related_id_mentions": []
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json",
+        "sha256": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612",
+        "exact_related_id_mentions": []
+      }
+    ],
+    "limits": "No exact related time ID hit in these three current structured ledgers. This is not an exhaustive semantic search of every historical review, nor permission to remove or bypass a rejection."
+  },
+  "existing_hold": {
+    "review_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/independent-quality-review.json",
+    "id": "fallback-global-daily-seven-societate-secunda",
+    "verdict": "hold",
+    "reason": "Broad Societate membership and zero foreign on-board links do not establish a defensible specific predicate for UBB/Buletin/Referendum/Secundă.",
+    "no_new_v1_3_vocabulary_or_relation_participates": true
+  },
+  "uncertainty_and_next_bounds": [
+    "The temporal category assignment is inherited and systematic across nearby units/periods, not a newly added V1.3 Secundă mutation. Category reassignment requires a separately sourced identity/taxonomy decision and complete impact checks.",
+    "Moving Secundă alone would change candidate populations without establishing a clear predicate for the remaining institution/document/process combination or validating the replacement tile.",
+    "A future bounded review should inspect the miner’s actual predicate/group provenance and test human-defensible commonality, counterexamples and alternative partitions across all16tiles; zero graph cross-links are not semantic uniqueness evidence.",
+    "Any tag/category/miner/curated change requires new independent factual/quality judgments and all existing gates after V1.3 has actually landed. No proposal, installation or approval is authored here."
+  ]
+}

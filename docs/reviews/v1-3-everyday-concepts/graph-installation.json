@@ -1,0 +1,407 @@
+{
+  "schema": "v1-3-supported-graph-installation-v1",
+  "checked_on": "2026-10-06",
+  "valid_until": "Any installed graph/module/proposal/review dependency changes; repeat affected checks.",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "source_module_sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+  "proposal_sha256": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3",
+  "raw_factual_review_sha256": "333d1f5adc09fd13acecc2d52e799e18898b02b650a7b91d95471d0a69615248",
+  "raw_quality_review_sha256": "052714f6a8d2433779998211bfc57f8152f8af8dc38b0cdc65367def9f372b0a",
+  "before_kg_sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+  "after_kg_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+  "matches_independent_prospective_fixture": true,
+  "package_test_mirrors_exact": true,
+  "counts": {
+    "nodes_before": 2416,
+    "nodes_after": 2419,
+    "stored_aliases_before": 8663,
+    "stored_aliases_after": 8675,
+    "links_before": 9459,
+    "links_after": 9471,
+    "terminal_puzzles_before": 180,
+    "terminal_puzzles_after": 180,
+    "new_shared_concepts": 3,
+    "new_grammatical_forms": 12,
+    "new_links": 12,
+    "genuine_synonym_families": 0,
+    "new_curated_rounds": 0,
+    "new_hidden_target_approvals": 0
+  },
+  "preservation": {
+    "old_edge_records_exact": true,
+    "old_node_fields_exact_except_11_degrees": true,
+    "all_180_terminal_records_exact": true,
+    "pack_bytes_exact_no_status_or_payload_edits": true,
+    "old_alias_lists_exact": true
+  },
+  "old_node_metadata_changes": [
+    {
+      "id": "n_v4sti_copac",
+      "changes": {
+        "degree": {
+          "before": 9,
+          "after": 10
+        }
+      }
+    },
+    {
+      "id": "n_v4via_usa",
+      "changes": {
+        "degree": {
+          "before": 42,
+          "after": 43
+        }
+      }
+    },
+    {
+      "id": "n_v23via_ghiozdan",
+      "changes": {
+        "degree": {
+          "before": 13,
+          "after": 14
+        }
+      }
+    },
+    {
+      "id": "n_v24_home_surfaces_fereastra",
+      "changes": {
+        "degree": {
+          "before": 4,
+          "after": 5
+        }
+      }
+    },
+    {
+      "id": "n_v24_home_storage_dulap",
+      "changes": {
+        "degree": {
+          "before": 7,
+          "after": 8
+        }
+      }
+    },
+    {
+      "id": "n_v24_home_seating_scaun",
+      "changes": {
+        "degree": {
+          "before": 5,
+          "after": 6
+        }
+      }
+    },
+    {
+      "id": "n_v30_clothing_everyday_pantaloni",
+      "changes": {
+        "degree": {
+          "before": 5,
+          "after": 6
+        }
+      }
+    },
+    {
+      "id": "n_v30_clothing_everyday_fusta",
+      "changes": {
+        "degree": {
+          "before": 5,
+          "after": 6
+        }
+      }
+    },
+    {
+      "id": "n_v30_clothing_outer_geaca",
+      "changes": {
+        "degree": {
+          "before": 5,
+          "after": 6
+        }
+      }
+    },
+    {
+      "id": "n_v32_workshop_fastener_surub",
+      "changes": {
+        "degree": {
+          "before": 5,
+          "after": 7
+        }
+      }
+    },
+    {
+      "id": "n_v32_workshop_cut_fierastrau",
+      "changes": {
+        "degree": {
+          "before": 4,
+          "after": 5
+        }
+      }
+    }
+  ],
+  "new_edge_records": [
+    {
+      "id": "de8801",
+      "src_id": "n_v1_3_home_balama",
+      "dst_id": "n_v4via_usa",
+      "relation": "allows_pivoting",
+      "label_ro": "permite rotirea unei uși batante",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8802",
+      "src_id": "n_v1_3_home_balama",
+      "dst_id": "n_v24_home_surfaces_fereastra",
+      "relation": "allows_pivoting",
+      "label_ro": "poate permite rotirea canatului mobil al unei ferestre",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8803",
+      "src_id": "n_v1_3_home_balama",
+      "dst_id": "n_v24_home_storage_dulap",
+      "relation": "used_in",
+      "label_ro": "se poate monta la ușile batante ale unui dulap",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8804",
+      "src_id": "n_v1_3_home_balama",
+      "dst_id": "n_v32_workshop_fastener_surub",
+      "relation": "fastened_with",
+      "label_ro": "unele balamale se fixează cu șuruburi",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8805",
+      "src_id": "n_v1_3_material_lemn",
+      "dst_id": "n_v4sti_copac",
+      "relation": "obtained_from",
+      "label_ro": "material provenit din părțile lemnoase ale unui copac",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8806",
+      "src_id": "n_v1_3_material_lemn",
+      "dst_id": "n_v24_home_seating_scaun",
+      "relation": "used_to_make",
+      "label_ro": "poate fi folosit la fabricarea unor scaune",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8807",
+      "src_id": "n_v1_3_material_lemn",
+      "dst_id": "n_v32_workshop_fastener_surub",
+      "relation": "joined_with",
+      "label_ro": "piesele de lemn se pot îmbina cu șuruburi pentru lemn",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8808",
+      "src_id": "n_v1_3_material_lemn",
+      "dst_id": "n_v32_workshop_cut_fierastrau",
+      "relation": "cut_with",
+      "label_ro": "se poate tăia cu fierăstrăul",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8809",
+      "src_id": "n_v1_3_clothing_fermoar",
+      "dst_id": "n_v30_clothing_everyday_pantaloni",
+      "relation": "used_to_close",
+      "label_ro": "poate fi folosit la închiderea pantalonilor",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8810",
+      "src_id": "n_v1_3_clothing_fermoar",
+      "dst_id": "n_v30_clothing_everyday_fusta",
+      "relation": "used_to_close",
+      "label_ro": "poate fi folosit la închiderea unei fuste",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8811",
+      "src_id": "n_v1_3_clothing_fermoar",
+      "dst_id": "n_v30_clothing_outer_geaca",
+      "relation": "used_to_close",
+      "label_ro": "poate fi folosit la închiderea unei geci",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8812",
+      "src_id": "n_v1_3_clothing_fermoar",
+      "dst_id": "n_v23via_ghiozdan",
+      "relation": "used_to_close",
+      "label_ro": "poate fi folosit la închiderea compartimentelor unui ghiozdan",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    }
+  ],
+  "before_meta": {
+    "build_version": "fixture-v1-2-reviewed-content",
+    "generated_at": "2026-06-21T00:00:00Z",
+    "note": "V1.2: four reviewed synonym families (22 forms), one pedestrian-path synonym link.",
+    "counts": {
+      "nodes": 2416,
+      "edges": 9459,
+      "puzzles": 180,
+      "by_category": {
+        "arta_cultura": 128,
+        "film_tv": 157,
+        "gastronomie": 260,
+        "geografie": 164,
+        "istorie": 148,
+        "limba": 149,
+        "literatura": 143,
+        "meme_net": 158,
+        "muzica": 146,
+        "personalitati": 129,
+        "societate": 197,
+        "sport": 160,
+        "stiinta": 191,
+        "viata_de_roman": 286
+      },
+      "puzzles_by_cat_diff": {
+        "arta_cultura/easy": 6,
+        "arta_cultura/hard": 6,
+        "film_tv/easy": 6,
+        "film_tv/hard": 6,
+        "gastronomie/easy": 6,
+        "gastronomie/hard": 6,
+        "geografie/easy": 6,
+        "geografie/hard": 6,
+        "istorie/easy": 6,
+        "istorie/hard": 6,
+        "limba/easy": 6,
+        "limba/hard": 6,
+        "literatura/easy": 6,
+        "literatura/hard": 6,
+        "meme_net/easy": 6,
+        "meme_net/hard": 6,
+        "mixed/easy": 6,
+        "mixed/hard": 6,
+        "muzica/easy": 6,
+        "muzica/hard": 6,
+        "personalitati/easy": 6,
+        "personalitati/hard": 6,
+        "societate/easy": 6,
+        "societate/hard": 6,
+        "sport/easy": 6,
+        "sport/hard": 6,
+        "stiinta/easy": 6,
+        "stiinta/hard": 6,
+        "viata_de_roman/easy": 6,
+        "viata_de_roman/hard": 6
+      }
+    }
+  },
+  "after_meta": {
+    "build_version": "fixture-v1-3-everyday-concepts",
+    "generated_at": "2026-06-21T00:00:00Z",
+    "note": "V1.3: three reviewed everyday concepts, twelve grammatical forms and twelve one-way links.",
+    "counts": {
+      "nodes": 2419,
+      "edges": 9471,
+      "puzzles": 180,
+      "by_category": {
+        "arta_cultura": 128,
+        "film_tv": 157,
+        "gastronomie": 260,
+        "geografie": 164,
+        "istorie": 148,
+        "limba": 149,
+        "literatura": 143,
+        "meme_net": 158,
+        "muzica": 146,
+        "personalitati": 129,
+        "societate": 197,
+        "sport": 160,
+        "stiinta": 191,
+        "viata_de_roman": 289
+      },
+      "puzzles_by_cat_diff": {
+        "arta_cultura/easy": 6,
+        "arta_cultura/hard": 6,
+        "film_tv/easy": 6,
+        "film_tv/hard": 6,
+        "gastronomie/easy": 6,
+        "gastronomie/hard": 6,
+        "geografie/easy": 6,
+        "geografie/hard": 6,
+        "istorie/easy": 6,
+        "istorie/hard": 6,
+        "limba/easy": 6,
+        "limba/hard": 6,
+        "literatura/easy": 6,
+        "literatura/hard": 6,
+        "meme_net/easy": 6,
+        "meme_net/hard": 6,
+        "mixed/easy": 6,
+        "mixed/hard": 6,
+        "muzica/easy": 6,
+        "muzica/hard": 6,
+        "personalitati/easy": 6,
+        "personalitati/hard": 6,
+        "societate/easy": 6,
+        "societate/hard": 6,
+        "sport/easy": 6,
+        "sport/hard": 6,
+        "stiinta/easy": 6,
+        "stiinta/hard": 6,
+        "viata_de_roman/easy": 6,
+        "viata_de_roman/hard": 6
+      }
+    }
+  },
+  "native_rank_sha256": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+  "native_derived_sha256": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+  "supported_commands": [
+    "PYTHONPATH=. <documented-reference-interpreter> scripts/apply_common_words_v24.py --data-module everyday_graph_v1_3_data",
+    "cat-content validate-fixture --root .",
+    "cat-content-ops rank --root . --write",
+    "cat-content-ops derive --root . --write"
+  ],
+  "logs": {
+    "graph-apply": {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/graph-apply.log.gz",
+      "sha256": "b89b6256f7a8f791d82e7eb65b819f4ac178a56fb76cc1977c031c5961901196",
+      "uncompressed_sha256": "7d114f03825d72e72d0323d18f995d415a2c56738622c6058b4bc43741222715"
+    },
+    "native-fixture-validate": {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-fixture-validate.log.gz",
+      "sha256": "caabfbac921eac21cd0734dfba0d832969edfabac40fbc21472307a9ef8c098e",
+      "uncompressed_sha256": "2fd6dad3dcba91390dd4f0345e7e04074b285a46bb30a98a8bebb2fdb6bc948d"
+    },
+    "rank": {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/rank.log.gz",
+      "sha256": "37db558cbe4de26e87ba8ff6ba4172cc93daa8b3111e94f9c122654f69a5c466",
+      "uncompressed_sha256": "908b8cf4a524dcaf6c7a8c00dcb34a63d86e190b90dd6da7a039298fb4da30b5"
+    },
+    "derive": {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/derive.log.gz",
+      "sha256": "4b84bde4ffa1080604b9dfff20d3529b50da79e13b96cdc00c187581832572f7",
+      "uncompressed_sha256": "b5d0b92facff8b5ac728fa1015c024dd30c0431dfa3a27072abf6f3516c2f45e"
+    }
+  },
+  "integration_status": "Graph installed in isolated task worktree only; native downstream refresh/full qualification and local landing are pending."
+}

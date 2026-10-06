@@ -1,0 +1,9 @@
+{
+  "kind": "alchimie-recipe-extension-final-review-v1",
+  "role": "quality",
+  "reviewer": "/root/graph_quality",
+  "catalog_sha256": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+  "live_audit_sha256": "a62692dcb2f7c88e7edc6825913fc61730f776674affd415de7e763476e6b8db",
+  "verdict": "accept",
+  "rationale": "Accept this exact saved proposal for guarded staging only. Independently reproduced all 27 books through the Python/Django core builder and deterministic minimum-plan oracle: every core, recipe, route and par remains exact to baseline 18832d41, all 49 additions retain exact identities/pairs/results/edge IDs, no diagnostics or competing outputs occur, and all current node/edge snapshots match the applied graph. The only installed-extension snapshot difference is Ușă degree 42→43 in al_viata_de_roman_096; its labels, senses, edges, core and addition semantics are unchanged. Both complete 49-row raw reviews bind the exact current candidate and different factual/quality identities, with quality reviewer /root/graph_quality. Native audit replay covers all 27 books/49 additions; every current 106-path runtime hash and all eight fixture sources plus rubric were independently reproduced and rechecked after oracle work, including Source3 and the reviewed exact consumer pin updates. Full independent per-book evidence is native/extensions/staging-quality-evidence.json SHA a8e1e501cf96439988c3c42b53215eb01ed0564e6590f99e583c715a91b816b2. This does not approve assembled installed authority or claim natural HTTP extension gameplay; fresh post-export current-source audits and final installed reviews remain required."
+}

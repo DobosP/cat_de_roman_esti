@@ -1,0 +1,682 @@
+{
+  "schema": "v1-3-graph-factual-review-v1",
+  "role": "factual",
+  "reviewer": "/root/content_rail",
+  "checked_on": "2026-10-06",
+  "reviewed_at_commit": "7cc06bc52e501a2c5288a4dcea56f0b5f55407ca",
+  "valid_until": "Any bound proposal/module/input/snapshot/sense/direction changes; affected exact factual review must be repeated.",
+  "author_independence": {
+    "proposal_author": "root-integrator",
+    "graph_or_pool_authored_by_reviewer": false,
+    "toolchain_prerequisite_metadata_authored_by_reviewer": true,
+    "source_checks": "Primary pages/official documents and three official DOOM UI entries independently checked; other agents' leads were not treated as approval."
+  },
+  "verdict": "accept",
+  "scope": "Exact three shared concepts, twelve grammatical forms and twelve one-way outward non-distractor relations only; no installation/target/round/quality approval.",
+  "proposal_sha256": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3",
+  "source_module_sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "baseline_kg_sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+  "bindings": {
+    "proposal": {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-proposal.json",
+      "sha256": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3"
+    },
+    "module": {
+      "path": "scripts/everyday_graph_v1_3_data.py",
+      "sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7"
+    },
+    "selected_pool_records": [
+      {
+        "id": "v1-3-balama",
+        "revision": 2,
+        "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-balama-r2.json",
+        "sha256": "01f97aae567673bb7fe92866a6627fd30d5b023d3e1cf58433c80538cb780e51"
+      },
+      {
+        "id": "v1-3-lemn",
+        "revision": 2,
+        "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-lemn-r2.json",
+        "sha256": "0028b4e197094b48dc2e7d40eda28f83673cc163dba57ad06caf48c5c866cd43"
+      },
+      {
+        "id": "v1-3-fermoar",
+        "revision": 2,
+        "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-fermoar-r2.json",
+        "sha256": "eeae197dcc914206f65fc3d7ac87fb414eac302cf5d4e1a2ec09988b53480b1f"
+      }
+    ],
+    "inputs": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+      "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "docs/reviews/v1-3-everyday-concepts/research-identity.json": "5f67c2b7a60b4551a4f8328fd0e733ef344e705b1461d65822f37a71b74aca2d",
+      "docs/reviews/v1-3-everyday-concepts/deck-screen.json": "50d9055e986b656c715f6c2207fa650215527b237ca179f4cab997bebf0c71ff",
+      "docs/reviews/v1-3-everyday-concepts/hardware-material-research.json": "d80cd599d702f5342192b96313f23c72e3135adb6fce9daaf06a7ededee2f930",
+      "docs/reviews/v1-3-everyday-concepts/textile-research.json": "344e47e5e84fdbc11d8e970702c52322a07e7b9540f9446052a59d11e9ecff88",
+      "docs/reviews/v1-3-everyday-concepts/toolchain-prerequisite.json": "c8fcd21a1f37c9504588d40f7c8fa93b0c7afffd085e0418b9c5a7c24790d7a3"
+    }
+  },
+  "reviewed_refs": [
+    "nodes[0]",
+    "nodes[1]",
+    "nodes[2]",
+    "nodes[0].aliases[0]",
+    "nodes[0].aliases[1]",
+    "nodes[0].aliases[2]",
+    "nodes[0].aliases[3]",
+    "nodes[0].aliases[4]",
+    "nodes[1].aliases[0]",
+    "nodes[1].aliases[1]",
+    "nodes[2].aliases[0]",
+    "nodes[2].aliases[1]",
+    "nodes[2].aliases[2]",
+    "nodes[2].aliases[3]",
+    "nodes[2].aliases[4]",
+    "edges[0]",
+    "edges[1]",
+    "edges[2]",
+    "edges[3]",
+    "edges[4]",
+    "edges[5]",
+    "edges[6]",
+    "edges[7]",
+    "edges[8]",
+    "edges[9]",
+    "edges[10]",
+    "edges[11]"
+  ],
+  "node_definitions": [
+    {
+      "ref": "nodes[0]",
+      "id": "n_v1_3_home_balama",
+      "verdict": "accept",
+      "sense": "Physical hardware hinge, not figurative bodily joints.",
+      "sources": [
+        "doom_balama",
+        "edu_wood",
+        "roto_door",
+        "roto_window",
+        "blum_cabinet"
+      ],
+      "rationale": "Physical support/guidance and moving-door/window applications are independently evidenced. Description is consistent with those mechanics."
+    },
+    {
+      "ref": "nodes[1]",
+      "id": "n_v1_3_material_lemn",
+      "verdict": "accept",
+      "sense": "Wood material for construction/household objects; ordinary tree-derived material, not firewood-piece counts or a named plant.",
+      "sources": [
+        "doom_lemn",
+        "edu_wood",
+        "ikea_chair",
+        "ikea_screws"
+      ],
+      "rationale": "Ministry teaching directly links furniture wood to trees and examines its material structure. The chosen material sense is conservative; no plural piece aliases are adopted."
+    },
+    {
+      "ref": "nodes[2]",
+      "id": "n_v1_3_clothing_fermoar",
+      "verdict": "accept",
+      "sense": "Physical slider-operated closure, not an abstract/software zipper.",
+      "sources": [
+        "doom_fermoar",
+        "ykk_structure",
+        "coats_garments",
+        "decathlon_jacket"
+      ],
+      "rationale": "Maker explains opposing meshing element rows and slider motion; actual clothing/bag applications support the defined physical mechanism."
+    }
+  ],
+  "forms": [
+    {
+      "ref": "nodes[0].aliases[0]",
+      "node_id": "n_v1_3_home_balama",
+      "form": "balamaua",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_balama"
+      ],
+      "rationale": "Official DOOM entry explicitly gives definite singular."
+    },
+    {
+      "ref": "nodes[0].aliases[1]",
+      "node_id": "n_v1_3_home_balama",
+      "form": "balamale",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_balama"
+      ],
+      "rationale": "Official DOOM entry explicitly gives plural."
+    },
+    {
+      "ref": "nodes[0].aliases[2]",
+      "node_id": "n_v1_3_home_balama",
+      "form": "balamalele",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_balama"
+      ],
+      "rationale": "Regular definite nominative/accusative plural from the verified plural stem."
+    },
+    {
+      "ref": "nodes[0].aliases[3]",
+      "node_id": "n_v1_3_home_balama",
+      "form": "balamalei",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_balama"
+      ],
+      "rationale": "Official DOOM entry explicitly gives definite genitive-dative singular."
+    },
+    {
+      "ref": "nodes[0].aliases[4]",
+      "node_id": "n_v1_3_home_balama",
+      "form": "balamalelor",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_balama"
+      ],
+      "rationale": "Regular definite genitive-dative plural from the verified plural stem."
+    },
+    {
+      "ref": "nodes[1].aliases[0]",
+      "node_id": "n_v1_3_material_lemn",
+      "form": "lemnul",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_lemn"
+      ],
+      "rationale": "Regular definite singular of the verified neuter material noun."
+    },
+    {
+      "ref": "nodes[1].aliases[1]",
+      "node_id": "n_v1_3_material_lemn",
+      "form": "lemnului",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_lemn"
+      ],
+      "rationale": "Regular definite genitive-dative singular of the same material noun."
+    },
+    {
+      "ref": "nodes[2].aliases[0]",
+      "node_id": "n_v1_3_clothing_fermoar",
+      "form": "fermoarul",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_fermoar"
+      ],
+      "rationale": "Regular definite singular of the verified neuter noun."
+    },
+    {
+      "ref": "nodes[2].aliases[1]",
+      "node_id": "n_v1_3_clothing_fermoar",
+      "form": "fermoare",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_fermoar"
+      ],
+      "rationale": "Official DOOM entry explicitly gives plural."
+    },
+    {
+      "ref": "nodes[2].aliases[2]",
+      "node_id": "n_v1_3_clothing_fermoar",
+      "form": "fermoarele",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_fermoar"
+      ],
+      "rationale": "Regular definite nominative/accusative plural from the verified plural stem."
+    },
+    {
+      "ref": "nodes[2].aliases[3]",
+      "node_id": "n_v1_3_clothing_fermoar",
+      "form": "fermoarului",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_fermoar"
+      ],
+      "rationale": "Regular definite genitive-dative singular of the verified neuter noun."
+    },
+    {
+      "ref": "nodes[2].aliases[4]",
+      "node_id": "n_v1_3_clothing_fermoar",
+      "form": "fermoarelor",
+      "verdict": "accept",
+      "kind": "grammatical_form",
+      "sources": [
+        "doom_fermoar"
+      ],
+      "rationale": "Regular definite genitive-dative plural from the verified plural stem."
+    }
+  ],
+  "claims": [
+    {
+      "ref": "edges[0]",
+      "claim_id": "link-1",
+      "subject_id": "n_v1_3_home_balama",
+      "predicate": "allows_pivoting",
+      "object_id": "n_v4via_usa",
+      "direction": "subject_to_object only",
+      "caption": "permite rotirea unei uși batante",
+      "verdict": "accept",
+      "sources": [
+        "roto_door",
+        "edu_wood"
+      ],
+      "rationale": "Physical door-leaf opening and hinge role support rotation of a swinging room/entrance door; sliding/hingeless doors are outside the asserted case."
+    },
+    {
+      "ref": "edges[1]",
+      "claim_id": "link-2",
+      "subject_id": "n_v1_3_home_balama",
+      "predicate": "allows_pivoting",
+      "object_id": "n_v24_home_surfaces_fereastra",
+      "direction": "subject_to_object only",
+      "caption": "poate permite rotirea canatului mobil al unei ferestre",
+      "verdict": "accept",
+      "sources": [
+        "roto_window",
+        "edu_wood"
+      ],
+      "rationale": "Maker tilt-and-turn system has moving window-leaf hinges; possible mobile-sash rotation is precise and does not describe fixed panes."
+    },
+    {
+      "ref": "edges[2]",
+      "claim_id": "link-3",
+      "subject_id": "n_v1_3_home_balama",
+      "predicate": "used_in",
+      "object_id": "n_v24_home_storage_dulap",
+      "direction": "subject_to_object only",
+      "caption": "se poate monta la ușile batante ale unui dulap",
+      "verdict": "accept",
+      "sources": [
+        "blum_cabinet",
+        "edu_wood"
+      ],
+      "rationale": "Maker installs moving furniture doors on named hinge types; qualified swinging cabinet-door application is honest."
+    },
+    {
+      "ref": "edges[3]",
+      "claim_id": "link-4",
+      "subject_id": "n_v1_3_home_balama",
+      "predicate": "fastened_with",
+      "object_id": "n_v32_workshop_fastener_surub",
+      "direction": "subject_to_object only",
+      "caption": "unele balamale se fixează cu șuruburi",
+      "verdict": "accept",
+      "sources": [
+        "ikea_screws",
+        "roto_door",
+        "hettich"
+      ],
+      "rationale": "IKEA directly lists hinge fixing as a wood-screw application and Roto depicts screw mounting. Some glass interfaces use adhesive; the some-hinges qualification correctly preserves that counterexample."
+    },
+    {
+      "ref": "edges[4]",
+      "claim_id": "link-5",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "obtained_from",
+      "object_id": "n_v4sti_copac",
+      "direction": "subject_to_object only",
+      "caption": "material provenit din părțile lemnoase ale unui copac",
+      "verdict": "accept",
+      "sources": [
+        "edu_wood"
+      ],
+      "rationale": "Official teaching explicitly states furniture wood comes from forest trees; the material origin direction is wood-to-tree, with no inferred reverse arc."
+    },
+    {
+      "ref": "edges[5]",
+      "claim_id": "link-6",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "used_to_make",
+      "object_id": "n_v24_home_seating_scaun",
+      "direction": "subject_to_object only",
+      "caption": "poate fi folosit la fabricarea unor scaune",
+      "verdict": "accept",
+      "sources": [
+        "ikea_chair"
+      ],
+      "rationale": "Maker chair material is solid pine, a specific example sufficient for some-chairs wording. Metal/plastic/chair-frame alternatives are not denied."
+    },
+    {
+      "ref": "edges[6]",
+      "claim_id": "link-7",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "joined_with",
+      "object_id": "n_v32_workshop_fastener_surub",
+      "direction": "subject_to_object only",
+      "caption": "piesele de lemn se pot îmbina cu șuruburi pentru lemn",
+      "verdict": "accept",
+      "sources": [
+        "ikea_screws",
+        "bosch_screws"
+      ],
+      "rationale": "IKEA directly lists joining wood materials; Bosch distinguishes the suitable wood screws. Caption does not imply all screw types work for all materials."
+    },
+    {
+      "ref": "edges[7]",
+      "claim_id": "link-8",
+      "subject_id": "n_v1_3_material_lemn",
+      "predicate": "cut_with",
+      "object_id": "n_v32_workshop_cut_fierastrau",
+      "direction": "subject_to_object only",
+      "caption": "se poate tăia cu fierăstrăul",
+      "verdict": "accept",
+      "sources": [
+        "bosch_saw"
+      ],
+      "rationale": "Original Bosch manual directly discusses saw cuts in wood. Some saws/blades are material-specific; possibility wording avoids universality."
+    },
+    {
+      "ref": "edges[8]",
+      "claim_id": "link-9",
+      "subject_id": "n_v1_3_clothing_fermoar",
+      "predicate": "used_to_close",
+      "object_id": "n_v30_clothing_everyday_pantaloni",
+      "direction": "subject_to_object only",
+      "caption": "poate fi folosit la închiderea pantalonilor",
+      "verdict": "accept",
+      "sources": [
+        "coats_garments",
+        "edu_garments"
+      ],
+      "rationale": "Original maker brochure and official teaching each identify zipper closures in trousers; button/elastic trousers remain possible."
+    },
+    {
+      "ref": "edges[9]",
+      "claim_id": "link-10",
+      "subject_id": "n_v1_3_clothing_fermoar",
+      "predicate": "used_to_close",
+      "object_id": "n_v30_clothing_everyday_fusta",
+      "direction": "subject_to_object only",
+      "caption": "poate fi folosit la închiderea unei fuste",
+      "verdict": "accept",
+      "sources": [
+        "coats_garments",
+        "edu_garments"
+      ],
+      "rationale": "Original maker brochure and official teaching each identify zipper closures in skirts; other skirt closures remain possible."
+    },
+    {
+      "ref": "edges[10]",
+      "claim_id": "link-11",
+      "subject_id": "n_v1_3_clothing_fermoar",
+      "predicate": "used_to_close",
+      "object_id": "n_v30_clothing_outer_geaca",
+      "direction": "subject_to_object only",
+      "caption": "poate fi folosit la închiderea unei geci",
+      "verdict": "accept",
+      "sources": [
+        "decathlon_jacket"
+      ],
+      "rationale": "Own-brand Romanian jacket has a central zipper; no claim every coat/jacket has a zipper."
+    },
+    {
+      "ref": "edges[11]",
+      "claim_id": "link-12",
+      "subject_id": "n_v1_3_clothing_fermoar",
+      "predicate": "used_to_close",
+      "object_id": "n_v23via_ghiozdan",
+      "direction": "subject_to_object only",
+      "caption": "poate fi folosit la închiderea compartimentelor unui ghiozdan",
+      "verdict": "accept",
+      "sources": [
+        "eastpak_school",
+        "eastpak_pockets",
+        "herlitz_school"
+      ],
+      "rationale": "Manufacturer schoolbag collection and model specify zip-fastening pockets; current Romanian SKU additionally confirms primary-school ghiozdan compartments. Qualified schoolbag closure is supported with maker evidence, not just a generic outdoor bag."
+    }
+  ],
+  "sources": [
+    {
+      "id": "doom_balama",
+      "url": "https://doom.lingv.ro/cautare/q/balama",
+      "source_type": "official normative dictionary",
+      "checked_on": "2026-10-06",
+      "access": "Browser UI, exact one-entry search",
+      "notes": "Feminine lemma; official entry gives its definite singular, genitive-dative singular and plural. Additional definite plural/oblique plural forms use ordinary inflection.",
+      "license_observation": "Official electronic DOOM footer shows CC BY-NC-SA4.0; used as limited morphology evidence only, not as dataset or definition-copy permission."
+    },
+    {
+      "id": "doom_lemn",
+      "url": "https://doom.lingv.ro/cautare/q/lemn",
+      "source_type": "official normative dictionary",
+      "checked_on": "2026-10-06",
+      "access": "Browser UI, exact search with compound entries distinguished",
+      "notes": "Neuter lemma independently present. Proposed two articles retain the material singular; the proposal deliberately omits piece/firewood plural readings.",
+      "license_observation": "Official electronic DOOM footer shows CC BY-NC-SA4.0; used as limited morphology evidence only, not as dataset or definition-copy permission."
+    },
+    {
+      "id": "doom_fermoar",
+      "url": "https://doom.lingv.ro/cautare/q/fermoar",
+      "source_type": "official normative dictionary",
+      "checked_on": "2026-10-06",
+      "access": "Browser DOM exact one-entry search",
+      "notes": "Canonical neuter lemma and plural verified. Definite and oblique forms derive regularly; no misspelling or borrowed zip alias adopted.",
+      "license_observation": "Official electronic DOOM footer shows CC BY-NC-SA4.0; used as limited morphology evidence only, not as dataset or definition-copy permission."
+    },
+    {
+      "id": "edu_wood",
+      "url": "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf",
+      "source_type": "Romanian Ministry of Education teaching document",
+      "checked_on": "2026-10-06",
+      "access": "Full official PDF parsed",
+      "notes": "Printed pages9/10 treat hinges as furniture/construction-door/window support and guidance accessories; printed page37 expressly connects furniture wood with forest trees. Later sections examine tree-trunk wood structure.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "roto_door",
+      "url": "https://ftt.roto-frank.com/ro-ro/produse/detalii/roto-solid-b-218-p/",
+      "source_type": "manufacturer",
+      "checked_on": "2026-10-06",
+      "access": "Fresh full page, reached from official Romanian door-hinge catalogue",
+      "notes": "Entrance-door hinge product; describes door-leaf movement, opening cycles/angle limiter and screw mounting in rebate/leaf. Supports physical pivoting and some screw attachment.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "roto_window",
+      "url": "https://ftt.roto-frank.com/ro-ro/produse/detalii/roto-nx/",
+      "source_type": "manufacturer",
+      "checked_on": "2026-10-06",
+      "access": "Fresh full official Romanian page",
+      "notes": "Tilt-and-turn window hardware includes exposed/concealed hinge systems and moving window leaves. Qualified mobile-sash rotation is supported, not an assertion about fixed glazing.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "blum_cabinet",
+      "url": "https://www.blum.com/ro/ro/products/cabinet-applications/inward-opening-door/overview/",
+      "source_type": "manufacturer",
+      "checked_on": "2026-10-06",
+      "access": "Fresh full official Romanian page",
+      "notes": "CLIP top/COMPACT hinges mount moving furniture doors and enable inward opening in storage furniture. Qualified cabinet-door use is supported.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "hettich",
+      "url": "https://catalog.hettich.com/General/TuI_2025/ro_RO/catalogs/TuI_2025_ro_RO/pdf/save/bk_114.pdf",
+      "source_type": "manufacturer catalogue",
+      "checked_on": "2026-10-06",
+      "access": "Full one-page official PDF",
+      "notes": "Sensys glass-hinge variants include fastening screws alongside an adhesive adapter. This is not evidence that all hinges attach to every substrate with screws.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "ikea_screws",
+      "url": "https://www.ikea.com/ro/ro/p/trixig-set-suruburi-lemn-200-piese-50561183/",
+      "source_type": "manufacturer product specification",
+      "checked_on": "2026-10-06",
+      "access": "Fresh full official Romanian page",
+      "notes": "Product-use section expressly identifies wood-material joining and hinge fixing. Independently replaces weaker mounting-only evidence for the exact two screw relations.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "ikea_chair",
+      "url": "https://www.ikea.com/ro/ro/p/pinntorp-scaun-maro-deschis-vopsit-00590480/",
+      "source_type": "manufacturer product specification",
+      "checked_on": "2026-10-06",
+      "access": "Full official Romanian page",
+      "notes": "Chair material specification identifies solid pine; existential use of wood to manufacture some chairs is directly supported.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "bosch_saw",
+      "url": "https://www.bosch-diy.com/storage/de-de/pks-55-100025246-original-pdf-455789-de-de.pdf",
+      "source_type": "manufacturer operating manual",
+      "checked_on": "2026-10-06",
+      "access": "Full official multilingual PDF",
+      "notes": "Romanian printed page69 includes a wood-cutting section and longitudinal/transverse wood cuts. Product web page lacked an extracted wood text, so the original manual supplies the evidence.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "bosch_screws",
+      "url": "https://www.bosch-pt.com/help/en/akkuschrauber/technik-info/duebel.htm",
+      "source_type": "manufacturer technical explanation",
+      "checked_on": "2026-10-06",
+      "access": "Fresh full official page",
+      "notes": "Explains joining workpieces with screws and choosing wood/chipboard-specific screws. Corroborates the qualified wood-joining relation.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "coats_garments",
+      "url": "https://cdn.coats.com/wp-content/uploads/Invisible-Zips-Brochure.pdf",
+      "source_type": "manufacturer technical brochure",
+      "checked_on": "2026-10-06",
+      "access": "Full four-page official PDF",
+      "notes": "Applications and guidance include skirts and trousers/waistband openings. This confirms possible zipper closure, without excluding button or elastic alternatives.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "edu_garments",
+      "url": "https://edu.gov.md/sites/default/files/2._practica_de_instruire_i_0.pdf",
+      "source_type": "Moldovan Ministry of Education curriculum",
+      "checked_on": "2026-10-06",
+      "access": "Full eleven-page official Romanian-language PDF",
+      "notes": "PDF pages6/7 explicitly place zipper-closure processing in skirt and trouser assembly. Independent replacement for an inaccessible supplied curriculum URL.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "decathlon_jacket",
+      "url": "https://www.decathlon.ro/p/geaca-navigatie-sailing-500-barbati/_/R-p-327999",
+      "source_type": "own-brand manufacturer/retailer",
+      "checked_on": "2026-10-06",
+      "access": "Full official Romanian product page",
+      "notes": "TRIBORD jacket specification identifies its central plastic zipper. Supports some jacket closure, not every jacket design.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "ykk_structure",
+      "url": "https://www.ykk.com/english/ykk/tech/01.html",
+      "source_type": "manufacturer technical explanation",
+      "checked_on": "2026-10-06",
+      "access": "Fresh full official page",
+      "notes": "Explains meshing left/right elements, slider and tape; slider movement opens/closes the joined rows. Direct support for the original editorial physical definition.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "eastpak_school",
+      "url": "https://us.eastpak.com/collections/back-to-school-backpacks",
+      "source_type": "manufacturer school-product catalogue",
+      "checked_on": "2026-10-06",
+      "access": "Fresh full official page",
+      "notes": "Official school-backpack collection includes Padded Double and discusses reinforced zippers in bags used for books/notebooks. Establishes the schoolbag sense.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "eastpak_pockets",
+      "url": "https://us.eastpak.com/products/padded-double-black",
+      "source_type": "manufacturer product specification",
+      "checked_on": "2026-10-06",
+      "access": "Fresh full official page",
+      "notes": "Lists zip-fastening front pockets and a zippered rear security pocket on a model independently identified in the manufacturer school collection.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    },
+    {
+      "id": "herlitz_school",
+      "url": "https://www.herlitz.ro/cumpara/ghiozdan-neechipat-nature-quest-motiv-heavenly-dreams-1896",
+      "source_type": "primary retailer technical specification, not manufacturer",
+      "checked_on": "2026-10-06",
+      "access": "Fresh Chrome rendered UI; web extractor failed",
+      "notes": "Actual Tiger Family SKU TGNQ-038A: schoolbag for primary pupils; main closure/front pocket use zippers. Details explicitly identify Ghiozdan and Fermoar. Additional Romanian firsthand confirmation; manufacturer corroboration is supplied separately by Eastpak.",
+      "license_observation": "Public original document/page; no blanket source-body/image/definition republication permission asserted. Only independently written factual notes and URLs retained."
+    }
+  ],
+  "identity_checks": {
+    "source_module_matches_proposal_payload": true,
+    "all_input_and_selected_snapshot_digests_exact": true,
+    "all_eleven_baseline_endpoint_node_records_exact": true,
+    "new_node_id_collisions": 0,
+    "normalized_existing_label_id_or_alias_collisions": 0,
+    "new_batch_normalized_surface_collisions": 0,
+    "contexto_projection_surface_matches": 0,
+    "existing_alchimie_world_concept_matches": 0,
+    "existing_owners_reassigned": false,
+    "former_owners_removed": false,
+    "old_nodes_or_edges_removed": false,
+    "incoming_to_new_nodes": 0,
+    "old_to_new_or_inferred_reverse_arcs": 0,
+    "new_arcs_each_target_existing_node": true
+  },
+  "counts": {
+    "accepted_node_definitions": 3,
+    "accepted_grammatical_forms": 12,
+    "accepted_stored_links": 12,
+    "directed_non_distractor_arcs": 12,
+    "genuine_synonym_additions": 0,
+    "new_curated_round_approvals": 0,
+    "new_hidden_target_approvals": 0
+  },
+  "qualifications": [
+    "Material/possibility captions do not universalize hinge design, chair material, screw compatibility or garment/bag closure.",
+    "Salience and edge strengths are editorial values, not measured physical/familiarity statistics; quality reviewer remains responsible for recognition and gameplay judgments.",
+    "These new nodes have no incoming arcs and this factual review does not make them eligible hidden targets or destinations.",
+    "Evidence supports facts and input forms; actual directed gameplay, all-target effects, terminal regeneration, historical payloads and current native authorities still require the normal installation/integration gates."
+  ],
+  "source_access_exceptions": [
+    {
+      "url": "https://d2.blum.com/services/BEC003/mod0001-fl-144_fl_dok_bau_%24sro_%24aof_%24v1.pdf",
+      "status": "web cache miss; not relied on",
+      "replacement": "blum_cabinet and ikea_screws originals"
+    },
+    {
+      "url": "https://www.mec.gov.md/sites/default/files/f.02.o.014_bazele_tehnologiei_confectilor_ii.pdf",
+      "status": "web extractor unavailable; not relied on",
+      "replacement": "edu_garments full PDF and coats_garments original brochure"
+    },
+    {
+      "url": "https://www.herlitz.ro/cumpara/ghiozdan-neechipat-nature-quest-motiv-heavenly-dreams-1896",
+      "status": "web extractor error; current rendered Chrome description/details independently verified",
+      "additional_manufacturer_evidence": [
+        "eastpak_school",
+        "eastpak_pockets"
+      ]
+    },
+    {
+      "url": "https://www.jansport.com/products/big-student-backpack-js0a47jk",
+      "status": "fetch exceeded web tool size limit; indexed snippet not used as sole evidence",
+      "replacement": "eastpak_school/eastpak_pockets"
+    }
+  ],
+  "access_and_reuse": {
+    "dictionary_queries": "Only individual public DOOM morphology searches; no DEX API/dataset/definition extraction or dictionary corpus saved.",
+    "retained_content": "Short independently written factual summaries, individual editorial forms and claim-specific URLs only. No source bodies, images, prices, assembly procedures or source definitions copied into the game.",
+    "license_approval": false
+  },
+  "blocking_issues": [],
+  "changes_requested": [],
+  "installation_approval": false
+}

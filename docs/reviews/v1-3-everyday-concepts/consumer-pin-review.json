@@ -1,0 +1,68 @@
+{
+  "kind": "v1-3-exact-consumer-pin-quality-review-v1",
+  "reviewer": "/root/graph_quality",
+  "role": "independent_quality",
+  "verdict": "accept_exact_literal_updates",
+  "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "proposed_changes": [
+    {
+      "path": "go-backend/internal/contentbuild/build.go",
+      "current_file_sha256": "7eb425747042773ac1fd441f217a646bbc1563d870a376cbeaf8be5d48459945",
+      "expected_after_literal_only_sha256": "632e639009592318d05e03bafe26456b8a9124fe5eee6333fd375c21be1cfc53",
+      "literal_replacements": [
+        {
+          "old": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+          "new": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9"
+        },
+        {
+          "old": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+          "new": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f"
+        }
+      ]
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/derived_catalog.py",
+      "current_file_sha256": "a9c8e28f73612d443962482d9194f00c9951ae177a2d7edf6b3f2d4f40aafd07",
+      "expected_after_literal_only_sha256": "4cdc541a824019d95aeb9482e2b81eb2178bed9afd3486d0bb023f8dfcfd242b",
+      "literal_replacements": [
+        {
+          "old": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+          "new": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9"
+        }
+      ]
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/quick_catalog.py",
+      "current_file_sha256": "6ea46a1b5a528c572af5005dbbffea4ac72296d3d76a2f8cf42a335a5c78ac4f",
+      "expected_after_literal_only_sha256": "5893b66d890b54f32417bc2a96b5eab18ccf249314eec999d5af1c60ada7625e",
+      "literal_replacements": [
+        {
+          "old": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+          "new": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f"
+        }
+      ]
+    }
+  ],
+  "artifact_bindings": {
+    "derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+    "quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+    "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "board_rankings_v37.json": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b"
+  },
+  "independent_checks": {
+    "applied_graph_matches_reviewed_prototype": true,
+    "graph_quality_review_sha256": "052714f6a8d2433779998211bfc57f8152f8af8dc38b0cdc65367def9f372b0a",
+    "graph_impact_sha256": "918572f30674e8d5a943ffada72d832991a8ec5b9ed353154dcfbe9cf352a2a7",
+    "frozen_derived_boards_exact": 336,
+    "quick_authored_and_rated_records_exact": 85,
+    "quick_saved_catalog_equals_signed_proposal": true,
+    "initial_quick_quality_review_sha256": "41173d60d92fdb0508fbb05a6bdf5abd5994aabfda570787b57222e028283fab",
+    "same_role_quick_final_quality_sha256": "68c41658ae7ab3fa85bb4316b09ac9eca40addf85c520a3deb1ba40adf181cc3",
+    "independent_quick_final_factual_sha256": "87ea0acf3237b6d7795ef8b9d43639df9644f846950211fb9e53474460326a06",
+    "quick_preinstall_audit_sha256": "8f17f600c31290c9ff6b3ed452cdf1db4a3c4ff5a70775ec8058c3db75b7f28a",
+    "ranking_scope": "Five known derived Cald quality/score/rank changes; total/approved/eligible counts and all pack records are unchanged. No claim of every ranking row byte identity.",
+    "reserve_exact_and_unmodified": true
+  },
+  "rationale": "Approve only the four declared digest literal substitutions across these three consumer files. The new digests match the actual current derived wrapper and independently signed staged quick catalog. They retain all source/schema/structural/semantic checks and align fail-closed byte pins to the reviewed data; no acceptance threshold, loading policy, corpus selector or reserve pin changes. Current derived 336 board payloads and quick 85 authored/rated records are exact. Raw/final quick reviews and complete 85 natural replay audit bind the current saved catalog. Every previously reviewed old graph/puzzle/pack/status/rejection bound and disclosed numeric ranking effect remains applicable. This is permission for exact pin alignment, not final installed authority; mutation must be followed by native/reference source validation, export/rebuild and fresh post-freeze audits."
+}

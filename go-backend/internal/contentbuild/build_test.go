@@ -54,7 +54,7 @@ func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 	if !bytes.Equal(b, old) {
 		t.Fatalf("native source rebuild differs: %s vs %s", SHA256(b), SHA256(old))
 	}
-	if SHA256(b) != "d98280f0178e13f0d6ec8fd92813c4057f6408a0e3215ec61a0dbb70f9dd3313" {
+	if SHA256(b) != "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f" {
 		t.Fatal("independently reviewed current release digest drift")
 	}
 	pin, e := os.ReadFile(filepath.Join(root, "go-backend/internal/content/digest.go"))
@@ -68,7 +68,7 @@ func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 	if e != nil {
 		t.Fatal(e)
 	}
-	if len(array(m["nodes"])) != 2416 || len(array(m["edges"])) != 9459 || len(array(m["pack_items"])) != 709 || len(array(m["boards"])) != 418 {
+	if len(array(m["nodes"])) != 2419 || len(array(m["edges"])) != 9471 || len(array(m["pack_items"])) != 709 || len(array(m["boards"])) != 418 {
 		t.Fatal("current reviewed source inventories differ")
 	}
 	world := object(m["discovery_world"])

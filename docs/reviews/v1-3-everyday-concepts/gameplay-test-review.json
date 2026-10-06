@@ -1,0 +1,72 @@
+{
+  "kind": "v1-3-focused-gameplay-test-quality-review-v1",
+  "role": "quality",
+  "reviewer": "/root/graph_quality",
+  "verdict": "accept_implementation_for_focused_gate",
+  "test_files": [
+    {
+      "path": "go-backend/internal/contexto/content_v1_3_test.go",
+      "sha256": "a5dcfda9739ba475a87ee2100fadb67332c593b2587c5e691415ae93af2e860a"
+    },
+    {
+      "path": "go-backend/internal/lant/content_v1_3_test.go",
+      "sha256": "2d2f0ce69f710744bf4121952a06efa1174aef00e376823d6f4d01e4632d8145"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "go-backend/internal/contexto/service.go",
+      "sha256": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4"
+    },
+    {
+      "path": "go-backend/internal/lant/service.go",
+      "sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90"
+    },
+    {
+      "path": "go-backend/internal/contentrails/rail.go",
+      "sha256": "5076e3b45923d9ee7a5563d9c1fd2b84c6fae1db16fb2beb1efc9c6f3c3a0f55"
+    }
+  ],
+  "checks": {
+    "contexto_forms": 15,
+    "contexto_concepts": 3,
+    "contexto_real_guess_and_get_services": true,
+    "contexto_inflection_family_attempt_deduplication": true,
+    "contexto_direct_nonwinning_warm_guesses": true,
+    "contexto_target_field_absent_before_win": true,
+    "contexto_zero_incoming_reverse_reach": true,
+    "contexto_existing_exact_target_wins_on_second_identity": true,
+    "lant_real_move_and_get_services": true,
+    "lant_controlled_outward_pairs": 3,
+    "lant_non_distractor_one_way_edges": true,
+    "lant_score1000_and_terminal_resume": true,
+    "lant_absent_reverse_link_and_refusal_without_charged_move": true,
+    "lant_generic_caption_not_new_curated_caption": true,
+    "test_files_excluded_from_native_runtime_manifest": true
+  },
+  "limits": [
+    "Sessions are controlled privately; these tests do not assert natural curated selection of new starts or new hidden targets.",
+    "Contexto privacy assertion covers the withheld target field. It does not independently scan all nested payload strings; broader natural HTTP/privacy tests remain mandatory.",
+    "One-hop Lanț sessions exercise direction and service behavior; no new curated route or general player enjoyment claim follows.",
+    "Execution is deferred to the coherent native export; this receipt judges implementation and scope and does not report tests passing."
+  ],
+  "rationale": "The tests cover substantive V1.3 regressions through real game service methods without changing runtime mechanics, bounds, target eligibility or curated inventories. Assertions agree with existing source behavior and the independently approved outward-only graph. They preserve explicit controlled-session scope and leave full native race/serving checks to the assembled gate.",
+  "applied_consumer_pin_attestation": {
+    "preapproval_review_sha256": "1b8a3707c11f4cc4ca7d5e83d5f68b7b94e6b49f2be89ec24df190e87c98bdef",
+    "exact_literal_only_expected_after_hashes_verified": true,
+    "files": [
+      {
+        "path": "go-backend/internal/contentbuild/build.go",
+        "sha256": "632e639009592318d05e03bafe26456b8a9124fe5eee6333fd375c21be1cfc53"
+      },
+      {
+        "path": "cat_de_roman_esti/wordgames/derived_catalog.py",
+        "sha256": "4cdc541a824019d95aeb9482e2b81eb2178bed9afd3486d0bb023f8dfcfd242b"
+      },
+      {
+        "path": "cat_de_roman_esti/wordgames/quick_catalog.py",
+        "sha256": "5893b66d890b54f32417bc2a96b5eab18ccf249314eec999d5af1c60ada7625e"
+      }
+    ]
+  }
+}

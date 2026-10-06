@@ -1,0 +1,59 @@
+{
+  "kind": "v1-3-quick-world-history-implementation-v1",
+  "checked_on": "2026-10-06",
+  "implementer": "/root/synonym_scout",
+  "scope": "Strict history inverses for actual signed quick/world catalogs only; no review acceptance, catalog installation or runtime/source/pin edits.",
+  "catalog_delta_path": "docs/reviews/v1-3-everyday-concepts/reference/catalog-history-quick-world.json",
+  "catalog_delta_sha256": "29aa6786173370f6ce31348acc41ab07f500db2d2c80f7bf95d9a431e9dabba0",
+  "code_sha256": {
+    "tests/content_history.py": "5f305b0954e36578fe78eacc8101f699a2a97601979f9b82807416f541aeaa77",
+    "tests/test_v1_3_content_history.py": "9e83c4d4b84b63576f32b411391ba0a003bc8cb0472d835ef4a6e6ee5962e1b0"
+  },
+  "complete_byte_restoration": {
+    "quick_games_v92.json": {
+      "after_sha256": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+      "before_sha256": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+      "restored_complete_bytes_equal_git18832": true
+    },
+    "alchimie_discovery_world_v92.json": {
+      "after_sha256": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+      "before_sha256": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+      "restored_complete_bytes_equal_git18832": true
+    }
+  },
+  "quick_scope": "85authored/85rating rows/322nodes unchanged except ten degree snapshots; only binding/candidate/reviewer descriptors restored.",
+  "world_scope": "251concepts/351recipes/32goals/12unlocks/nine histories and mechanics exact; only four metadata keys restored.",
+  "strict_encoding": "Native Render two spaces and final newline, no key sorting, no broad normalization.",
+  "staging_initial_and_same_role_final_review_bindings_checked": true,
+  "old_V1_V1_2_history_expectations_preserved": true,
+  "tests": {
+    "focused_final_command": {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_v1_3_content_history.py",
+        "-k",
+        "catalog",
+        "-o",
+        "cache_dir=/home/dobo/work/_temp/codex__content-v1-3/pytest-cache-history"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.591,
+      "log": "history-v1-3-catalogs-quick-world-final.log"
+    },
+    "selected_cases": 26,
+    "exit_code": 0,
+    "final_log_sha256": "64576d99c4cef913eb9b9bd4e5a096807fe2289f77eb08a67c7de2e43fc6349d",
+    "initial_failure_log_sha256": "e4a54fe869d0f3826414eb409996e18fdee499920eaa97211ee886659aaffe27",
+    "initial_failure_reason": "My helper initially applied one-space source encoding to native catalogs. Full actual artifact hashes were correct. Corrected to explicit native Render encoding and retained all fixed hashes."
+  },
+  "ruff": "pass",
+  "scoped_whitespace": "pass",
+  "extensions_inverse": "Current V1.2 baseline remains exact; new bytes refused until final actual signed artifact/delta are provided.",
+  "current_content_snapshot": "Awaiting final artifact/export and Python pins; no expectation edited yet.",
+  "reference_captures_executed": 0,
+  "expected_fixtures_generated": 0,
+  "source_graph_runtime_catalog_pin_edits": 0
+}

@@ -107,6 +107,86 @@ _V1_2_KEY_ORDERS = {
 }
 
 
+# Independently fixed from git 18832d4 and supported V1.3 graph writes.
+# Existing V1/V1.2 receipt and artifact pins remain unchanged.
+_V1_3_GRAPH_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-3-everyday-concepts/graph-installation.json"
+)
+_V1_3_GRAPH_RECEIPT_SHA256 = "92ba14415cad62aaf1fb0b8578852e8efeaea090d085ae64448862bb32763e3e"
+_V1_3_BASELINE = dict(_V1_2_AFTER)
+_V1_3_AFTER = {
+    "kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "board_rankings_v37.json": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+    "derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+    "games_pack.json": _V1_2_AFTER["games_pack.json"],
+    "cat_mobile_app_pack_contract.json": (
+        "f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94"
+    ),
+}
+_V1_3_REVIEW_BINDINGS = {
+    "source_module_sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+    "proposal_sha256": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3",
+    "raw_factual_review_sha256": "333d1f5adc09fd13acecc2d52e799e18898b02b650a7b91d95471d0a69615248",
+    "raw_quality_review_sha256": "052714f6a8d2433779998211bfc57f8152f8af8dc38b0cdc65367def9f372b0a",
+}
+_V1_3_NODE_IDS = (
+    "n_v1_3_home_balama", "n_v1_3_material_lemn", "n_v1_3_clothing_fermoar",
+)
+_V1_3_DEGREES = {
+    "n_v4sti_copac": (9, 10), "n_v4via_usa": (42, 43),
+    "n_v23via_ghiozdan": (13, 14), "n_v24_home_surfaces_fereastra": (4, 5),
+    "n_v24_home_storage_dulap": (7, 8), "n_v24_home_seating_scaun": (5, 6),
+    "n_v30_clothing_everyday_pantaloni": (5, 6),
+    "n_v30_clothing_everyday_fusta": (5, 6), "n_v30_clothing_outer_geaca": (5, 6),
+    "n_v32_workshop_fastener_surub": (5, 7), "n_v32_workshop_cut_fierastrau": (4, 5),
+}
+_V1_3_RANK_FIELDS = {
+    "ct_viata_de_roman_364": {"play_quality": (89, 91)},
+    "ct_muzica_168": {"rank": (122, 123)},
+    "ct_societate_290": {"rank": (123, 124)},
+    "ct_stiinta_189": {"rank": (124, 125)},
+    "ct_viata_de_roman_377": {
+        "pilot_score": (77, 78), "play_quality": (88, 91), "rank": (125, 122),
+    },
+}
+_V1_3_CATALOG_BASELINE = {
+    "quick_games_v92.json": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+    "alchimie_discovery_world_v92.json": (
+        "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3"
+    ),
+    "alchimie_recipe_extensions_v92.json": (
+        "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3"
+    ),
+}
+
+
+_V1_3_CATALOG_AFTER = {
+    "alchimie_recipe_extensions_v92.json": (
+        "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5"
+    ),
+    "quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+    "alchimie_discovery_world_v92.json": (
+        "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6"
+    ),
+}
+_V1_3_CATALOG_DELTA = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-3-everyday-concepts/reference/catalog-history-quick-world.json"
+)
+_V1_3_CATALOG_DELTA_SHA256 = "29aa6786173370f6ce31348acc41ab07f500db2d2c80f7bf95d9a431e9dabba0"
+
+
+_V1_3_EXTENSION_DELTA = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-3-everyday-concepts/reference/catalog-history-extensions.json"
+)
+_V1_3_EXTENSION_DELTA_SHA256 = "bbf13df29b4437eef2293aedc329527c5a0708ecae9ebff94e7ef6a908ad92fd"
+
+
+_V1_2_EXTENSION_HISTORY = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-3-everyday-concepts/reference/catalog-history-v1-2-extensions.json"
+)
+_V1_2_EXTENSION_HISTORY_SHA256 = "6d24f62277eae019bdb813a52050ab232bb7d64ccb8a038bed2855af07c468ca"
+
+
 _RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v80-clatite-target/artifact-delta.json"
 )
@@ -717,8 +797,341 @@ def before_v96_artifact(current: dict, filename: str) -> dict:
 
 
 
+def _v1_3_artifact_digest(value: dict, filename: str) -> str:
+    """Exact source encoding, without sorting or general normalization."""
+    blob = (json.dumps(value, ensure_ascii=False,
+                       indent=2 if filename == "kg_sample.json" else 1) + "\n").encode()
+    return hashlib.sha256(blob).hexdigest()
+
+
+def _v1_3_graph_receipt() -> dict:
+    blob = _V1_3_GRAPH_RECEIPT.read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == _V1_3_GRAPH_RECEIPT_SHA256
+    receipt = json.loads(blob)
+    assert receipt["schema"] == "v1-3-supported-graph-installation-v1"
+    assert receipt["baseline_commit"] == "18832d41bedfe5f63ee98fcffa709d29d9f86361"
+    assert {key: receipt[key] for key in _V1_3_REVIEW_BINDINGS} == _V1_3_REVIEW_BINDINGS
+    assert receipt["before_kg_sha256"] == _V1_3_BASELINE["kg_sample.json"]
+    assert receipt["after_kg_sha256"] == _V1_3_AFTER["kg_sample.json"]
+    assert receipt["native_rank_sha256"] == _V1_3_AFTER["board_rankings_v37.json"]
+    assert receipt["native_derived_sha256"] == _V1_3_AFTER["derived_catalog_v38.json"]
+    assert receipt["matches_independent_prospective_fixture"] is True
+    assert receipt["package_test_mirrors_exact"] is True
+    assert receipt["counts"] == {
+        "nodes_before": 2416, "nodes_after": 2419,
+        "stored_aliases_before": 8663, "stored_aliases_after": 8675,
+        "links_before": 9459, "links_after": 9471,
+        "terminal_puzzles_before": 180, "terminal_puzzles_after": 180,
+        "new_shared_concepts": 3, "new_grammatical_forms": 12, "new_links": 12,
+        "genuine_synonym_families": 0, "new_curated_rounds": 0,
+        "new_hidden_target_approvals": 0,
+    }
+    assert receipt["preservation"] == {
+        "old_edge_records_exact": True, "old_node_fields_exact_except_11_degrees": True,
+        "all_180_terminal_records_exact": True,
+        "pack_bytes_exact_no_status_or_payload_edits": True, "old_alias_lists_exact": True,
+    }
+    changes = receipt["old_node_metadata_changes"]
+    assert len(changes) == len(_V1_3_DEGREES)
+    assert {row["id"]: row["changes"] for row in changes} == {
+        node_id: {"degree": {"before": before, "after": after}}
+        for node_id, (before, after) in _V1_3_DEGREES.items()
+    }
+    assert all(set(row) == {"id", "changes"} for row in changes)
+    edges = receipt["new_edge_records"]
+    assert [row["id"] for row in edges] == [f"de{n}" for n in range(8801, 8813)]
+    assert all(row["src_id"] in _V1_3_NODE_IDS and row["dst_id"] not in _V1_3_NODE_IDS
+               and row["bidirectional"] == 0 and row["is_distractor"] == 0 for row in edges)
+    first, last = receipt["before_meta"], receipt["after_meta"]
+    assert set(first) == set(last)
+    assert {key for key in first if first[key] != last[key]} == {
+        "build_version", "note", "counts",
+    }
+    assert first["build_version"] == "fixture-v1-2-reviewed-content"
+    assert last["build_version"] == "fixture-v1-3-everyday-concepts"
+    expected_counts = deepcopy(first["counts"])
+    expected_counts.update(nodes=2419, edges=9471)
+    expected_counts["by_category"]["viata_de_roman"] += 3
+    assert last["counts"] == expected_counts
+    return receipt
+
+
+def before_v1_3_artifact(current: dict, filename: str) -> dict:
+    """Peel exact installed V1.3 graph/rank/derived/mobile bytes back to 18832d4."""
+    assert filename in _V1_3_BASELINE
+    receipt = _v1_3_graph_receipt()
+    current_hash = _v1_3_artifact_digest(current, filename)
+    if current_hash == _V1_3_BASELINE[filename]:
+        return deepcopy(current)
+    assert filename in _V1_3_AFTER
+    assert current_hash == _V1_3_AFTER[filename]
+    restored = deepcopy(current)
+    if filename == "kg_sample.json":
+        assert current["meta"] == receipt["after_meta"]
+        assert len(current["kg_puzzles"]) == 180
+        assert tuple(row["id"] for row in current["kg_nodes"][-3:]) == _V1_3_NODE_IDS
+        assert current["kg_edges"][-12:] == receipt["new_edge_records"]
+        restored["kg_nodes"] = restored["kg_nodes"][:-3]
+        restored["kg_edges"] = restored["kg_edges"][:-12]
+        nodes = {row["id"]: row for row in restored["kg_nodes"]}
+        assert len(nodes) == len(restored["kg_nodes"]) == 2416
+        for node_id, (before, after) in _V1_3_DEGREES.items():
+            assert nodes[node_id]["degree"] == after
+            nodes[node_id]["degree"] = before
+        restored["meta"] = deepcopy(receipt["before_meta"])
+        assert restored["kg_puzzles"] == current["kg_puzzles"]
+    elif filename == "board_rankings_v37.json":
+        rows = restored["boards"]
+        assert len(rows) == 716 and len({row["id"] for row in rows}) == 716
+        by_id = {row["id"]: row for row in rows}
+        for item_id, fields in _V1_3_RANK_FIELDS.items():
+            for field, (before, after) in fields.items():
+                assert by_id[item_id][field] == after
+                by_id[item_id][field] = before
+        position = next(i for i, row in enumerate(rows) if row["id"] == "ct_viata_de_roman_377")
+        assert [row["id"] for row in rows[position:position + 4]] == [
+            "ct_viata_de_roman_377", "ct_muzica_168", "ct_societate_290", "ct_stiinta_189",
+        ]
+        moved = rows.pop(position)
+        rows.insert(position + 3, moved)
+        assert restored["meta"]["kg_sha256"] == _V1_3_AFTER["kg_sample.json"]
+        restored["meta"]["kg_sha256"] = _V1_3_BASELINE["kg_sample.json"]
+    elif filename == "derived_catalog_v38.json":
+        assert len(restored["boards"]) == 336
+        assert restored["meta"]["kg_sha256"] == _V1_3_AFTER["kg_sample.json"]
+        assert restored["meta"]["v37_rankings_sha256"] == _V1_3_AFTER["board_rankings_v37.json"]
+        restored["meta"]["kg_sha256"] = _V1_3_BASELINE["kg_sample.json"]
+        restored["meta"]["v37_rankings_sha256"] = _V1_3_BASELINE["board_rankings_v37.json"]
+        assert restored["boards"] == current["boards"]
+    elif filename == "cat_mobile_app_pack_contract.json":
+        assert restored["contract"] == "cat_de_roman_esti.mobile_app_pack.v1"
+        labels = {
+            "n_v1_3_home_balama": "Balama", "n_v1_3_material_lemn": "Lemn",
+            "n_v1_3_clothing_fermoar": "Fermoar",
+        }
+        for node_id, label in labels.items():
+            expected = {"id": node_id, "label_ro": label}
+            assert restored["kg_nodes"].count(expected) == 1
+            restored["kg_nodes"].remove(expected)
+        for edge in receipt["new_edge_records"]:
+            expected = {key: edge[key] for key in ("id", "src_id", "dst_id")}
+            assert restored["kg_edges"].count(expected) == 1
+            restored["kg_edges"].remove(expected)
+        assert len(restored["kg_nodes"]) == 2416
+        assert len(restored["kg_edges"]) == 9459
+        assert len(restored["kg_puzzles"]) == 180
+        assert restored["kg_puzzles"] == current["kg_puzzles"]
+        manifest = restored["manifest"]
+        assert manifest["build_version"] == "fixture-v1-3-everyday-concepts"
+        assert manifest["content_hash"] == (
+            "sha256:a00fb1308f215ea8e554df5fb3f60e7d12a2031c075280099454fb7299d48db9"
+        )
+        assert manifest["counts"] == {"nodes": 2419, "edges": 9471, "puzzles": 180}
+        manifest["build_version"] = "fixture-v1-2-reviewed-content"
+        manifest["content_hash"] = (
+            "sha256:16634bb35bfc4c629815792181dc26e917a02d75fe9fb5aa1e27f8c576f55e35"
+        )
+        manifest["counts"] = {"nodes": 2416, "edges": 9459, "puzzles": 180}
+    else:
+        raise AssertionError("Unreviewed V1.3 artifact delta")
+    assert _v1_3_artifact_digest(restored, filename) == _V1_3_BASELINE[filename]
+    return restored
+
+
+def _v1_3_catalog_digest(value: dict) -> str:
+    """Native Render uses exactly two spaces and a final newline for all three rails."""
+    blob = (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode()
+    return hashlib.sha256(blob).hexdigest()
+
+
+def _before_v1_3_extensions(current: dict) -> dict:
+    blob = _V1_3_EXTENSION_DELTA.read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == _V1_3_EXTENSION_DELTA_SHA256
+    delta = json.loads(blob)
+    name = "alchimie_recipe_extensions_v92.json"
+    assert delta["schema"] == "v1-3-extension-catalog-history-delta-v1"
+    assert delta["baseline_commit"] == "18832d41bedfe5f63ee98fcffa709d29d9f86361"
+    assert delta["baseline_sha256"] == _V1_3_CATALOG_BASELINE[name]
+    assert delta["after_sha256"] == _V1_3_CATALOG_AFTER[name]
+    assert set(delta["metadata_before"]) == set(delta["metadata_after"]) == {
+        "bindings", "candidate_sha256", "semantic_reviews",
+    }
+    assert delta["board"] == {
+        "id": "al_viata_de_roman_096", "node_id": "n_v4via_usa",
+        "degree_before": 42, "degree_after": 43,
+        "entry_before": "7e47eb8a0e11f498c2c1958c284e81a6b4c445ac1fe769dafd13108cc2d222b7",
+        "entry_after": "fd4a511da803a07b8ad405b5d983e36e1408b9d3c88d7f4762b0b4fa6aa7403f",
+    }
+    documents = delta["staging_documents_sha256"]
+    assert set(documents) == {
+        "docs/reviews/v1-3-everyday-concepts/native/extensions/" + path
+        for path in (
+            "candidate.json", "factual-review.json", "quality-review.json", "proposal.json",
+            "preinstall-audit.json", "final-factual-review.json", "final-quality-review.json",
+        )
+    }
+    root = Path(__file__).resolve().parents[1]
+    assert all(hashlib.sha256((root / path).read_bytes()).hexdigest() == expected
+               for path, expected in documents.items())
+    restored = deepcopy(current)
+    assert all(current[key] == value for key, value in delta["metadata_after"].items())
+    for key, value in delta["metadata_before"].items():
+        restored[key] = deepcopy(value)
+    assert len(restored["boards"]) == 27
+    assert sum(len(board["additions"]) for board in restored["boards"]) == 49
+    boards = [board for board in restored["boards"] if board["id"] == "al_viata_de_roman_096"]
+    assert len(boards) == 1
+    board = boards[0]
+    assert board["entry_sha256"] == delta["board"]["entry_after"]
+    assert board["nodes"]["n_v4via_usa"]["degree"] == 43
+    board["entry_sha256"] = delta["board"]["entry_before"]
+    board["nodes"]["n_v4via_usa"]["degree"] = 42
+    assert _v1_3_catalog_digest(restored) == _V1_3_CATALOG_BASELINE[name]
+    return restored
+
+
+def before_v1_3_catalog(current: dict, filename: str) -> dict:
+    """Restore only exact signed catalog deltas; keep every legacy byte check."""
+    assert filename in _V1_3_CATALOG_BASELINE
+    current_hash = _v1_3_catalog_digest(current)
+    if current_hash == _V1_3_CATALOG_BASELINE[filename]:
+        return deepcopy(current)
+    assert filename in _V1_3_CATALOG_AFTER, "Final reviewed V1.3 catalog inverse is not yet bound"
+    assert current_hash == _V1_3_CATALOG_AFTER[filename]
+    if filename == "alchimie_recipe_extensions_v92.json":
+        return _before_v1_3_extensions(current)
+    blob = _V1_3_CATALOG_DELTA.read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == _V1_3_CATALOG_DELTA_SHA256
+    receipt = json.loads(blob)
+    assert receipt["schema"] == "v1-3-quick-world-catalog-history-delta-v1"
+    assert receipt["baseline_commit"] == "18832d41bedfe5f63ee98fcffa709d29d9f86361"
+    assert receipt["graph_installation_sha256"] == _V1_3_GRAPH_RECEIPT_SHA256
+    assert receipt["source3_sha256"] == (
+        "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc"
+    )
+    assert receipt["scope"] == (
+        "Only exact signed quick/world metadata and ten quick degree snapshots; "
+        "preserve all old semantics and histories."
+    )
+    assert set(receipt["files"]) == set(_V1_3_CATALOG_AFTER) - {
+        "alchimie_recipe_extensions_v92.json",
+    }
+    for name, delta in receipt["files"].items():
+        assert set(delta) == {
+            "baseline_sha256", "after_sha256", "metadata_before", "metadata_after", "node_degrees",
+        }
+        assert delta["baseline_sha256"] == _V1_3_CATALOG_BASELINE[name]
+        assert delta["after_sha256"] == _V1_3_CATALOG_AFTER[name]
+        fields = {"bindings", "candidate_sha256", "reviews"}
+        if name == "alchimie_discovery_world_v92.json":
+            fields.add("native_source_version")
+            assert not delta["node_degrees"]
+            assert delta["metadata_before"]["native_source_version"] == 2
+            assert delta["metadata_after"]["native_source_version"] == 3
+        else:
+            assert delta["node_degrees"] == {
+                node_id: {"before": before, "after": after}
+                for node_id, (before, after) in _V1_3_DEGREES.items()
+                if node_id != "n_v4via_usa"
+            }
+        assert set(delta["metadata_before"]) == set(delta["metadata_after"]) == fields
+        assert delta["metadata_before"]["bindings"]["kg_sha256"] == (
+            _V1_3_BASELINE["kg_sample.json"]
+        )
+        assert delta["metadata_after"]["bindings"]["kg_sha256"] == (
+            _V1_3_AFTER["kg_sample.json"]
+        )
+    documents = receipt["staging_documents_sha256"]
+    assert set(documents) == {
+        f"docs/reviews/v1-3-everyday-concepts/native/{rail}/{name}"
+        for rail in ("quick", "world")
+        for name in (
+            "candidate.json", "factual-review.json", "quality-review.json", "proposal.json",
+            "preinstall-audit.json", "final-factual-review.json", "final-quality-review.json",
+        )
+    }
+    root = Path(__file__).resolve().parents[1]
+    assert all(hashlib.sha256((root / path).read_bytes()).hexdigest() == expected
+               for path, expected in documents.items())
+    delta = receipt["files"][filename]
+    restored = deepcopy(current)
+    assert all(current[key] == value for key, value in delta["metadata_after"].items())
+    for key, value in delta["metadata_before"].items():
+        restored[key] = deepcopy(value)
+    if filename == "quick_games_v92.json":
+        assert len(restored["boards"]) == len(restored["authored"]) == 85
+        assert len(restored["nodes"]) == 322
+        for node_id, degree in delta["node_degrees"].items():
+            assert restored["nodes"][node_id]["degree"] == degree["after"]
+            restored["nodes"][node_id]["degree"] = degree["before"]
+    else:
+        assert len(restored["concepts"]) == 251 and len(restored["recipes"]) == 351
+        assert len(restored["goals"]) == 32 and len(restored["compatible_versions"]) == 9
+    assert _v1_3_catalog_digest(restored) == _V1_3_CATALOG_BASELINE[filename]
+    return restored
+
+
+def before_v1_2_extension_catalog(current: dict) -> dict:
+    """Restore the complete original V1 extension book, with every old pin intact."""
+    name = "alchimie_recipe_extensions_v92.json"
+    current = before_v1_3_catalog(current, name)
+    assert _v1_3_catalog_digest(current) == (
+        "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3"
+    )
+    blob = _V1_2_EXTENSION_HISTORY.read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == _V1_2_EXTENSION_HISTORY_SHA256
+    delta = json.loads(blob)
+    assert delta["schema"] == "v1-2-extension-history-supplement-v1"
+    assert delta["before_commit"] == "6deab61c20067c66f0b6120b2b09f44a580526d6"
+    assert delta["after_commit"] == "18832d41bedfe5f63ee98fcffa709d29d9f86361"
+    assert delta["scope"] == (
+        "Exact three V1.2 alias/degree snapshot and entry changes plus source/review metadata; "
+        "old V1 catalog bytes and assertions retained."
+    )
+    assert delta["baseline_sha256"] == (
+        "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661"
+    )
+    assert delta["after_sha256"] == _V1_3_CATALOG_BASELINE[name]
+    assert set(delta["metadata_before"]) == set(delta["metadata_after"]) == {
+        "bindings", "candidate_sha256", "semantic_reviews",
+    }
+    assert set(delta["boards"]) == {
+        "al_gastronomie_029", "al_geografie_031", "al_personalitati_006",
+    }
+    assert all(current[key] == value for key, value in delta["metadata_after"].items())
+    restored = deepcopy(current)
+    for key, value in delta["metadata_before"].items():
+        restored[key] = deepcopy(value)
+    by_id = {board["id"]: board for board in restored["boards"]}
+    expected_nodes = {
+        "al_gastronomie_029": "n_v4gas_rosie", "al_geografie_031": "n_v4geo_carare",
+        "al_personalitati_006": "n_vioara",
+    }
+    for board_id, change in delta["boards"].items():
+        board = by_id[board_id]
+        assert set(change) == {"entry_before", "entry_after", "nodes"}
+        assert set(change["nodes"]) == {expected_nodes[board_id]}
+        assert board["entry_sha256"] == change["entry_after"]
+        for node_id, snapshot in change["nodes"].items():
+            assert board["nodes"][node_id] == snapshot["after"]
+            first, last = snapshot["before"], snapshot["after"]
+            assert set(first) == set(last)
+            fields = {key for key in first if first[key] != last[key]}
+            if node_id in _V1_2_ALIASES:
+                assert fields == {"aliases"}
+                assert last["aliases"] == [*first["aliases"], *_V1_2_ALIASES[node_id]]
+            else:
+                assert node_id == "n_v4geo_carare" and fields == {"degree"}
+                assert first["degree"] == 3 and last["degree"] == 4
+            board["nodes"][node_id] = deepcopy(first)
+        board["entry_sha256"] = change["entry_before"]
+    assert _v1_3_catalog_digest(restored) == delta["baseline_sha256"]
+    return restored
+
+
 def before_v1_2_artifact(current: dict, filename: str) -> dict:
     """Peel only the exact reviewed V1.2 graph and serialization transition."""
+    current = before_v1_3_artifact(current, filename)
     blob = _V1_2_RECEIPT.read_bytes()
     assert hashlib.sha256(blob).hexdigest() == _V1_2_RECEIPT_SHA256
     receipt = json.loads(blob)

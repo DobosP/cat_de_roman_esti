@@ -1,0 +1,59 @@
+{
+  "conexiuni_original_producer": "not found in current repository, original f7d741c tree/history or surviving scratch filename inventory; integrator informed before reconstruction",
+  "kind": "v1-3-fallback-reference-preparation-v1",
+  "native_freeze_sha256": "3828d6856a9854c6935915565ef572cadc93bfdeed20f1175825e61d21eec323",
+  "old_vectors": [
+    {
+      "archive_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-conexiuni-python-goldens.json.gz",
+      "archive_sha256": "7d0de47730c99c29d7749ec8349b2b14d2acdc224b0d01433e100f1d29e75b50",
+      "bytes": 523901,
+      "path": "go-backend/internal/conexiuni/testdata/python-goldens.json",
+      "sha256": "99c64400ab9f026af25b051c9650956aef43605cf3846b972df5946a0fa1bf87"
+    },
+    {
+      "archive_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-alchimie-python_parity.json.gz",
+      "archive_sha256": "808660cf583ce9b7df9f4d6d5722cfbaf84663b321fc80d1da09e0f9cf7fdf20",
+      "bytes": 318870,
+      "path": "go-backend/internal/alchimie/testdata/python_parity.json",
+      "sha256": "3329e3c9349180db0a21841b879a3546253fbde024e38b6e58a131c34890aa38"
+    },
+    {
+      "archive_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-frontend-seeded-starts.json.gz",
+      "archive_sha256": "ef3b4f7ab4bd840839be9c8e320d46c83a47b5f806249bee8ef34adaa78c1e67",
+      "bytes": 6615,
+      "path": "frontend/e2e/seeded-starts.json",
+      "sha256": "04c5e1908921fb863cb92cf76194071ab567b2fe4a1bb9f0b4f545a104c6e883"
+    },
+    {
+      "archive_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-graph-python_graph.json.gz",
+      "archive_sha256": "2030ad8eac1f838162f4da83bfcd3cb70a88e9c8daf4a8283aa6131e352a3a81",
+      "bytes": 1868418,
+      "path": "go-backend/internal/graph/testdata/python_graph.json",
+      "sha256": "684e221c73fd0619a1dfc9f398f6deb7228fa3fe4c6077ee7e34eddc2453484e"
+    }
+  ],
+  "retained_producers": [
+    {
+      "archive_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-generate.py.txt",
+      "archive_sha256": "18dfac8404e29c38cf715d81e32fb37b3326294537fd00527480680784e8ef0a",
+      "baseline_exact": true,
+      "path": "go-backend/internal/alchimie/testdata/generate.py",
+      "sha256": "18dfac8404e29c38cf715d81e32fb37b3326294537fd00527480680784e8ef0a"
+    },
+    {
+      "archive_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-solutions.py.txt",
+      "archive_sha256": "2f19d6957a04cbac7a9161a170e3c75cac8fdc21276bf27e9c121136ad60114e",
+      "baseline_exact": true,
+      "path": "frontend/e2e/solutions.py",
+      "sha256": "2f19d6957a04cbac7a9161a170e3c75cac8fdc21276bf27e9c121136ad60114e"
+    },
+    {
+      "archive_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-graph-generate.py.txt",
+      "archive_sha256": "fe1b677dbc789b390c887be709de9d41e64cc3271c871e86fc47875349700c5b",
+      "baseline_exact": true,
+      "path": "go-backend/internal/graph/testdata/generate.py",
+      "sha256": "fe1b677dbc789b390c887be709de9d41e64cc3271c871e86fc47875349700c5b"
+    }
+  ],
+  "review_state": "capture preparation only; no expected-vector adoption or quality acceptance"
+}

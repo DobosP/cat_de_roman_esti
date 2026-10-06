@@ -58,8 +58,19 @@ func TestHistoricalFrozenCorpusAndExactReviewedSelection(t *testing.T) {
 		t.Fatal("current independent corpus lacks its own source/capture identity")
 	}
 	selected, err = ForSources(current.Sources)
-	if err != nil || !reflect.DeepEqual(selected, current) || !reflect.DeepEqual(current.Sources, testData(t).Sources) {
-		t.Fatal("current source set selected different expected responses", err)
+	if err != nil || !reflect.DeepEqual(selected, current) {
+		t.Fatal("V1.2 source set selected different expected responses", err)
+	}
+	latest, err := reviewedV13()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if V13SHA256 != "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670" || len(latest.Cases) != 1207 || len(latest.Sources) != 8 || !strings.Contains(latest.Reference, "Independent Django application; V1.3") || reflect.DeepEqual(latest.Sources, current.Sources) || reflect.DeepEqual(latest.Sources, original.Sources) {
+		t.Fatal("V1.3 independent corpus lacks its own exact source/capture identity")
+	}
+	selected, err = ForSources(latest.Sources)
+	if err != nil || !reflect.DeepEqual(selected, latest) || !reflect.DeepEqual(latest.Sources, testData(t).Sources) {
+		t.Fatal("current V1.3 source set selected different expected responses", err)
 	}
 }
 

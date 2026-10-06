@@ -1,0 +1,455 @@
+{
+  "capture_compressed_sha256": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+  "capture_decompressed_sha256": "f6c267f5493ee64312c8389160c41019037585472ee7814ff9a5e15e0144d1cc",
+  "current_sources": {
+    "alchimie_discovery_world_v92.json": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+    "alchimie_recipe_extensions_v92.json": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+    "board_rankings_v37.json": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+    "derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+    "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "export_sha256": "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f",
+  "http_delta": {
+    "changed_response_rows": 23,
+    "complete_changed_rows": [
+      {
+        "case_index": 922,
+        "changes": [
+          {
+            "after": 2419,
+            "before": 2416,
+            "path": "$.concepts"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/health"
+        }
+      },
+      {
+        "case_index": 923,
+        "changes": [
+          {
+            "after": "fixture-v1-3-everyday-concepts",
+            "before": "fixture-v1-2-reviewed-content",
+            "path": "$.build_version"
+          },
+          {
+            "after": "sha256:c48dc37f32c8a08495e24a4b0b6ac773c7027dc102f4be236881c8425e7b1b42",
+            "before": "sha256:c8f9c6fc4f9d2ff7e1221f10ef17f2cbcc7194206d773fae8cebc583e6c74c51",
+            "path": "$.content_hash"
+          },
+          {
+            "after": 9471,
+            "before": 9459,
+            "path": "$.counts.edges"
+          },
+          {
+            "after": 2419,
+            "before": 2416,
+            "path": "$.counts.nodes"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/manifest"
+        }
+      },
+      {
+        "case_index": 924,
+        "changes": [
+          {
+            "after": 289,
+            "before": 286,
+            "path": "$.categories[4].node_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/categories"
+        }
+      },
+      {
+        "case_index": 1037,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games?seed=17&difficulty="
+        }
+      },
+      {
+        "case_index": 1038,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games?seed=17&difficulty=invalid"
+        }
+      },
+      {
+        "case_index": 1039,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games?seed=17&daily="
+        }
+      },
+      {
+        "case_index": 1040,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games?seed=17&starter=2"
+        }
+      },
+      {
+        "case_index": 1041,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games?seed=17&starter=bad"
+        }
+      },
+      {
+        "case_index": 1046,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games?seed=7&difficulty=usor"
+        }
+      },
+      {
+        "case_index": 1047,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/wordgames/contexto/games/session-228"
+        }
+      },
+      {
+        "case_index": 1049,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "{\"text\":\"cuvantxyz\"}",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games/session-228/guess"
+        }
+      },
+      {
+        "case_index": 1056,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "{\"text\": \"n_vlad_tepes\"}",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games/session-228/guess"
+        }
+      },
+      {
+        "case_index": 1057,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/wordgames/contexto/games/session-228"
+        }
+      },
+      {
+        "case_index": 1059,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games?seed=17&difficulty=normal"
+        }
+      },
+      {
+        "case_index": 1060,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/wordgames/contexto/games/session-229"
+        }
+      },
+      {
+        "case_index": 1062,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "{\"text\":\"cuvantxyz\"}",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games/session-229/guess"
+        }
+      },
+      {
+        "case_index": 1069,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "{\"text\": \"n_henri_coanda\"}",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games/session-229/guess"
+        }
+      },
+      {
+        "case_index": 1070,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/wordgames/contexto/games/session-229"
+        }
+      },
+      {
+        "case_index": 1072,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games?seed=31&difficulty=greu"
+        }
+      },
+      {
+        "case_index": 1073,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/wordgames/contexto/games/session-230"
+        }
+      },
+      {
+        "case_index": 1075,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "{\"text\":\"cuvantxyz\"}",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games/session-230/guess"
+        }
+      },
+      {
+        "case_index": 1082,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "{\"text\": \"n_noul_val_romanesc\"}",
+          "method": "POST",
+          "path": "/api/wordgames/contexto/games/session-230/guess"
+        }
+      },
+      {
+        "case_index": 1083,
+        "changes": [
+          {
+            "after": 2356,
+            "before": 2353,
+            "path": "$.reachable_count"
+          }
+        ],
+        "request": {
+          "body": "",
+          "method": "GET",
+          "path": "/api/wordgames/contexto/games/session-230"
+        }
+      }
+    ],
+    "same1207_requests_and_statuses": true,
+    "unchanged_response_rows": 1184
+  },
+  "independent_django_only_replay": {
+    "expected_answers_from_native": false,
+    "matched_statuses_and_bodies": 1207,
+    "normalization": "Existing opaque session-ID substitution only, in paths/body strings; no extra normalization.",
+    "requests": 1207
+  },
+  "kind": "v1-3-independent-reference-quality-evidence-v1",
+  "limits": "Reference expected-response provenance and captured scope only; new-node acceptance, final installed authority, full race/native release gates and natural gameplay tests remain separately required.",
+  "method": "Independent read-only Django replay of all captured HTTP requests and in-memory unmodified original generator reproduction for both 60-sequence vectors; exact reverse literal producer and all eight source comparisons.",
+  "producer_preservation": {
+    "http_three_metadata_literal_changes_only": true,
+    "original_http_author_sha256": "a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+    "original_vector_author_sha256": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513",
+    "prepared_http_author_sha256": "fc6c394779dd5bd359fd2ba30d57e682f0df5c4d868f91987c59f314eca65513",
+    "prepared_vector_author_sha256": "83c9912c444c013ad49517ad495d69c99e75bbf03d7b4efa03a74a5d2279453f",
+    "protected_originals": {
+      "docs/reviews/v1-2-content-growth/reference/historical-contexto-game-vectors.json.gz": "d1fd40e44407e56ed2d4e6919e46cac29fa50a853c4dbc285c075c99f09a861b",
+      "go-backend/internal/contexto/testdata/python_games.json": "d8d02cc30806b1d475efdab0d8130f92bb9ee688b3fe12aecec50362e0f72284",
+      "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+      "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+      "go-backend/internal/lant/testdata/python_games.json": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048"
+    },
+    "vector_output_literal_only": true
+  },
+  "quality_check_script_sha256": "aed09abebc221bd580a576d3d50dfa85a9a711fb8f49546fb655ff011e876f59",
+  "reviewer": "/root/graph_quality",
+  "role": "quality",
+  "vectors": {
+    "contexto": {
+      "changed_leaf_counts": {
+        "closeness": 76,
+        "message": 150,
+        "rank": 810,
+        "rank_delta": 54,
+        "reachable_count": 921
+      },
+      "changed_sequences": 60,
+      "current_sha256": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078",
+      "numeric_delta_bounds": {
+        "closeness": {
+          "maximum": 1,
+          "minimum": 1
+        },
+        "rank": {
+          "maximum": 2,
+          "minimum": 1
+        },
+        "rank_delta": {
+          "maximum": 2,
+          "minimum": -2
+        },
+        "reachable_count": {
+          "maximum": 3,
+          "minimum": 3
+        }
+      },
+      "original_generator_reproduced_exact": true,
+      "prior_sha256": "d8d02cc30806b1d475efdab0d8130f92bb9ee688b3fe12aecec50362e0f72284",
+      "same_inputs_statuses_and_actions": true,
+      "sequences": 60
+    },
+    "lant": {
+      "changed_leaf_counts": {},
+      "changed_sequences": 0,
+      "current_sha256": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+      "numeric_delta_bounds": {},
+      "original_generator_reproduced_exact": true,
+      "prior_sha256": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+      "same_inputs_statuses_and_actions": true,
+      "sequences": 60
+    }
+  },
+  "verdict": "accept"
+}

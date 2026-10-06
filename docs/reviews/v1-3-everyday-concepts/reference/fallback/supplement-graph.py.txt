@@ -1,0 +1,52 @@
+"""Independent current graph coverage supplement; original target-row AST intact.
+
+Retains all six rows produced by the original current inventory index selection.
+Evaluates the same original target-row expression for the two historical IDs
+that those six index positions displaced. No native output supplies expectations.
+"""
+from pathlib import Path
+import ast,copy,hashlib,json,os,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3')
+OUT=Path('/home/dobo/work/_temp/codex__content-v1-3/fallback-reference')
+source=ROOT/'go-backend/internal/graph/testdata/generate.py'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+freeze=json.loads((ROOT/'docs/reviews/v1-3-everyday-concepts/final-runtime-freeze.json').read_text())
+files={source,OUT/'graph-python_graph.json',ROOT/'go-backend/internal/graph/testdata/python_graph.json'}
+files.update(ROOT/d['path'] for d in freeze['runtime_sources'])
+files.update(p for p in (ROOT/'cat_de_roman_esti').rglob('*.py') if '__pycache__' not in p.parts)
+files.update(ROOT/('docs/CRITIQUE_RUBRIC.md' if k=='rubric' else 'cat_de_roman_esti/fixtures/'+k) for k in freeze['source_bindings'])
+files.update(ROOT/p for p in freeze['expected_reference_files'])
+before={str(p):sha(p) for p in files}
+for d in freeze['runtime_sources']:assert sha(ROOT/d['path'])==d['sha256']
+sys.path.insert(0,str(ROOT))
+os.environ['DJANGO_SETTINGS_MODULE']='cat_de_roman_esti.web.settings';os.environ['CAT_ACCOUNTS_ENABLED']='0';os.environ['CAT_DEBUG']='1';os.environ['CAT_KG_FIXTURE']=str(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')
+import django
+django.setup()
+from cat_de_roman_esti.wordgames.service import get_service
+svc=get_service()
+original=source.read_text();tree=ast.parse(original,filename=str(source))
+doc=next(n.value for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='document' for t in n.targets))
+expr=next(v for k,v in zip(doc.keys,doc.values) if isinstance(k,ast.Constant) and k.value=='targets')
+assert isinstance(expr,ast.ListComp) and isinstance(expr.elt,ast.Dict)
+row_code=compile(ast.fix_missing_locations(ast.Expression(expr.elt)),str(source),'eval')
+old=json.loads((ROOT/'go-backend/internal/graph/testdata/python_graph.json').read_text())
+base=json.loads((OUT/'graph-python_graph.json').read_text());assert len(base['targets'])==6
+assert sha(OUT/'graph-python_graph.json')=='e17a836ed29ed6131b7c1fcb981fb4f5747e8c9e2747046406ec33107a0febc5'
+missing=[r['id'] for r in old['targets'] if r['id'] not in {r['id'] for r in base['targets']}]
+assert missing==['n_v2via_gospodarie_rurala','n_v4muz_refren']
+rows=[eval(row_code,{'svc':svc,'t':t}) for t in missing]
+assert all(list(row)==list(base['targets'][0]) for row in rows)
+for row in base['targets']:assert eval(row_code,{'svc':svc,'t':row['id']})==row
+result=copy.deepcopy(base);result['targets']+=rows
+assert len(result['targets'])==8 and len({r['id'] for r in result['targets']})==8
+assert {r['id'] for r in old['targets']}<={r['id'] for r in result['targets']}
+assert result['targets'][:6]==base['targets'] and {k:v for k,v in result.items() if k!='targets'}=={k:v for k,v in base.items() if k!='targets'}
+assert all(sha(Path(p))==h for p,h in before.items()),'Supplement input changed'
+raw=(json.dumps(result,ensure_ascii=False,separators=(',',':'))+'\n').encode()
+(OUT/'graph-python_graph-r2.json').write_bytes(raw)
+supplement={'kind':'v1-3-independent-current-graph-coverage-supplement-v1','expected_source':'Independent current Django/Python WordGameService, evaluated unchanged original target-row AST','source_bindings':{k:v for k,v in freeze['source_bindings'].items() if k!='rubric'},'kg_sha256':freeze['source_bindings']['kg_sample.json'],'native_freeze_sha256':sha(ROOT/'docs/reviews/v1-3-everyday-concepts/final-runtime-freeze.json'),'original_generator_sha256':sha(source),'original_target_row_expression':ast.get_source_segment(original,expr.elt),'original_target_row_ast_sha256':hashlib.sha256(ast.dump(expr.elt,include_attributes=False).encode()).hexdigest(),'base_six_capture_sha256':sha(OUT/'graph-python_graph.json'),'supplemental_target_ids':missing,'rows':rows,'row_schema':list(rows[0]),'original_six_and_all_non_target_fields_exact':True,'all_old_target_ids_retained':True,'native_and_python_source_readset_unchanged':True,'supplemented_capture_sha256':hashlib.sha256(raw).hexdigest(),'supplemented_capture_bytes':len(raw),'source_readset':before}
+(OUT/'graph-supplement.json').write_text(json.dumps(supplement,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+print('Current graph rows',len(result['targets']),'original six exact; supplemental IDs',missing)
+print('R2',hashlib.sha256(raw).hexdigest(),len(raw))
+print('Supplement',sha(OUT/'graph-supplement.json'))
+print('Schema',list(rows[0]))

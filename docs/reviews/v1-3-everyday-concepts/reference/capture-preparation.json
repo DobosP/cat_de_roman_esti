@@ -1,0 +1,85 @@
+{
+  "kind": "v1-3-reference-capture-preparation-v1",
+  "checked_on": "2026-10-06",
+  "scope": "Preparation only, no Django/native expected-response or game-vector generation executed.",
+  "root_signal_required_before_capture": true,
+  "required_prerequisites": [
+    "All three catalogs installed through independent gates",
+    "Current Python catalog pins ready",
+    "All eight fixture identities equal current sealed export sources",
+    "Rebuilt current native server binary",
+    "Runtime/source/export freeze"
+  ],
+  "http_capture": {
+    "original_path": "docs/reviews/go-native-toolchain/archived-reference/capture_reference.py.txt",
+    "original_sha256": "a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+    "prepared_path": "/home/dobo/work/_temp/codex__content-v1-3/reference-preparation/capture_reference_v1_3.py",
+    "prepared_sha256": "fc6c394779dd5bd359fd2ba30d57e682f0df5c4d868f91987c59f314eca65513",
+    "literal_changes_only": [
+      "worktree ROOT",
+      "task output path",
+      "accurate V1.3 reference label"
+    ],
+    "reverse_replacements_recover_original_bytes": true,
+    "request_expected_response_logic_unchanged": true,
+    "normalization": "existing random session-ID normalization only",
+    "expected_source": "Django TestClient statuses/bodies; native output compared only",
+    "expected_case_coverage": 1207
+  },
+  "game_vectors": {
+    "generator_path": "go-backend/internal/contexto/testdata/generate_games.py",
+    "generator_sha256": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513",
+    "prepared_path": "/home/dobo/work/_temp/codex__content-v1-3/reference-preparation/generate_game_vectors_v1_3.py",
+    "prepared_sha256": "83c9912c444c013ad49517ad495d69c99e75bbf03d7b4efa03a74a5d2279453f",
+    "literal_changes_only": [
+      "task-scoped output directory/file name"
+    ],
+    "reverse_replacement_recovers_original_bytes": true,
+    "normalization": "existing game_id/resolved_token randomness only",
+    "expected_source": "Django TestClient and independent Python private session state",
+    "expected_sequences_per_game": 60,
+    "games": [
+      "contexto",
+      "lant"
+    ]
+  },
+  "protected_original_bytes_sha256": {
+    "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+    "go-backend/internal/contexto/testdata/python_games.json": "d8d02cc30806b1d475efdab0d8130f92bb9ee688b3fe12aecec50362e0f72284",
+    "go-backend/internal/lant/testdata/python_games.json": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+    "docs/reviews/v1-2-content-growth/reference/historical-contexto-game-vectors.json.gz": "d1fd40e44407e56ed2d4e6919e46cac29fa50a853c4dbc285c075c99f09a861b"
+  },
+  "historical_contexto_decompressed_sha256": "02167b4c236aa98b7efe738469617810a758983162730d0ad93826120f62f003",
+  "historical_contexto_sequences": 60,
+  "expected_fixtures_written": 0,
+  "source_pin_graph_catalog_edits": 0,
+  "deferred_commands": [
+    {
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3",
+      "environment": {
+        "PYTHONPATH": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "CAT_ACCOUNTS_ENABLED": "0"
+      },
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/codex__content-v1-3/reference-preparation/capture_reference_v1_3.py",
+        "--binary",
+        "/home/dobo/work/_temp/codex__content-v1-3/bin/cat-server"
+      ]
+    },
+    {
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3",
+      "environment": {
+        "PYTHONPATH": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-3",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "CAT_ACCOUNTS_ENABLED": "0"
+      },
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/codex__content-v1-3/reference-preparation/generate_game_vectors_v1_3.py"
+      ]
+    }
+  ]
+}

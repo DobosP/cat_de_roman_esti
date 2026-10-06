@@ -1,0 +1,42 @@
+{
+  "schema": "v1-3-reviewed-fallback-reference-adoption-v1",
+  "runtime_freeze_sha256": "3828d6856a9854c6935915565ef572cadc93bfdeed20f1175825e61d21eec323",
+  "proposal_sha256": "f4038f5d7818b55fdc7acb54ec2593b1cac02198d7b4a181ed7d8584fb93a272",
+  "quality_review_sha256": "059e19f7a54fc12be691cc760dc10b4153c8a6755e6268906a945a67b18e61f2",
+  "generated_expected_files": [
+    {
+      "captured_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-conexiuni.json.gz",
+      "captured_sha256": "e0aaef96a28c2a7d2487bb91e5dabbe93b63449c0dfa24920aa299edcb56f86e",
+      "compressed_sha256": "6a7024c3e711f2441d58f927d32d094cb30be29dfb669561112ac3a97272ecb1",
+      "current_expected_path": "go-backend/internal/conexiuni/testdata/python-goldens.json",
+      "old_sha256": "99c64400ab9f026af25b051c9650956aef43605cf3846b972df5946a0fa1bf87",
+      "rail": "conexiuni"
+    },
+    {
+      "captured_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-alchimie.json.gz",
+      "captured_sha256": "1066d21ff9884c5597cb3a08d1e2ab15ea56e1bc10aaa412f7cf42866fac7366",
+      "compressed_sha256": "8fdf33525095e5dde5ed11098cf716727bbe9da85fddcbc63ed817976be8e26a",
+      "current_expected_path": "go-backend/internal/alchimie/testdata/python_parity.json",
+      "old_sha256": "3329e3c9349180db0a21841b879a3546253fbde024e38b6e58a131c34890aa38",
+      "rail": "alchimie"
+    },
+    {
+      "captured_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-browser.json.gz",
+      "captured_sha256": "5644ab3b7ee583db6904858712e3872928d62aac2c667322153720e8f4dd31b3",
+      "compressed_sha256": "65b6dbcfe2cb82244282298180e95ea2f05d5d53e36c5d8fc763a4f33c20dd9d",
+      "current_expected_path": "frontend/e2e/seeded-starts.json",
+      "old_sha256": "04c5e1908921fb863cb92cf76194071ab567b2fe4a1bb9f0b4f545a104c6e883",
+      "rail": "browser"
+    },
+    {
+      "captured_path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-graph-r2.json.gz",
+      "captured_sha256": "fbdb4a5eca38b3127a7321fbebf5da93219691e7e27f74f5113c7a36b12b47b1",
+      "compressed_sha256": "3ef514edce5f40ec9def0b253bc7232b9a7939074cd4178ed78d00bfd99ce453",
+      "current_expected_path": "go-backend/internal/graph/testdata/python_graph.json",
+      "old_sha256": "684e221c73fd0619a1dfc9f398f6deb7228fa3fe4c6077ee7e34eddc2453484e",
+      "rail": "graph"
+    }
+  ],
+  "all106_runtime_and_prior3_expected_references_unchanged": true,
+  "limits": "Generated expected-reference bytes only; no curated/content/predicate approval. Quality holds retained. Native and frontend gates follow."
+}

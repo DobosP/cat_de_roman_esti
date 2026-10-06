@@ -1,0 +1,156 @@
+{
+  "kind": "v1-3-final-history-current-reference-implementation-v1",
+  "checked_on": "2026-10-06",
+  "implementer": "/root/synonym_scout",
+  "scope": "Strict historical reconstruction, manually fixed final-current test expectations and independently generated reference expectations; no semantic content approval or runtime/source/catalog/pin edit.",
+  "files_sha256": {
+    "tests/content_history.py": "8405e743834f641ea60c9cf4cb556c4589bc704334515c1b70d8c44a54e3b318",
+    "tests/current_content.py": "2b93c6336b18f1d2f9c7506b0af5a65cb0f858054a5f18c56240d2679418835d",
+    "tests/test_v1_2_content_history.py": "299425fc227ab17ae3b73f5b16baeae7539e21f4e65a0a3b938d80a5160f589d",
+    "tests/test_v1_3_content_history.py": "3afe294b861753d44e55887c37afb4a32abdfeee486e913846232f08b9439ad2",
+    "tests/test_v1_recipe_refresh.py": "50e48d41d1e6f3f965beafe0b2fa29148ced8e32ebee5c188be2aac487868bd2",
+    "go-backend/internal/contexto/testdata/python_games.json": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078",
+    "go-backend/internal/lant/testdata/python_games.json": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
+  },
+  "all_eight_inverse_complete_bytes": {
+    "kg_sample.json": {
+      "after_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+      "before_sha256": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+      "complete_bytes_equal_git18832": true
+    },
+    "board_rankings_v37.json": {
+      "after_sha256": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+      "before_sha256": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+      "complete_bytes_equal_git18832": true
+    },
+    "derived_catalog_v38.json": {
+      "after_sha256": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+      "before_sha256": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+      "complete_bytes_equal_git18832": true
+    },
+    "games_pack.json": {
+      "after_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "before_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "complete_bytes_equal_git18832": true
+    },
+    "cat_mobile_app_pack_contract.json": {
+      "after_sha256": "f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94",
+      "before_sha256": "8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438",
+      "complete_bytes_equal_git18832": true
+    },
+    "quick_games_v92.json": {
+      "after_sha256": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+      "before_sha256": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+      "complete_bytes_equal_git18832": true
+    },
+    "alchimie_discovery_world_v92.json": {
+      "after_sha256": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+      "before_sha256": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+      "complete_bytes_equal_git18832": true
+    },
+    "alchimie_recipe_extensions_v92.json": {
+      "after_sha256": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+      "before_sha256": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+      "complete_bytes_equal_git18832": true
+    }
+  },
+  "original_v1_extension_catalog": {
+    "sha256": "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661",
+    "complete_bytes_equal_git6deab61": true,
+    "supplement_sha256": "6d24f62277eae019bdb813a52050ab232bb7d64ccb8a038bed2855af07c468ca",
+    "repinned_scope_epoch_forgeries_refused": true
+  },
+  "all_original_v1_recipe_functions_assertions_and_literals_AST_exact": true,
+  "historical_test_context": "Module-scoped exact V1 reconstruction in pytest temp files; patches only test ROOT and builder ROOT, undoes both and clears extension loader cache. All original assertions execute; all68retained book bytes and seven restored crafts verified.",
+  "old_v1_v1_2_receipts_and_pins_untouched": true,
+  "current_expectations": {
+    "observations_path": "docs/reviews/v1-3-everyday-concepts/reference/current-content-observations.json",
+    "observations_sha256": "786d1a7db32d697f65ce3e6bba37be700bd0ebc24579d9adc07d554861c4664d",
+    "scope": "Final six artifact hashes/current KG counters/known feedback measurements and current payload hashes; stable336derived/180puzzles/pack/status/eligibility/projection/closure/clătite expectations retained.",
+    "mobile_public_hash": "a00fb1308f215ea8e554df5fb3f60e7d12a2031c075280099454fb7299d48db9",
+    "fixture_api_hash": "c48dc37f32c8a08495e24a4b0b6ac773c7027dc102f4be236881c8425e7b1b42",
+    "distinction": "Prior mutable mobile_content slot held the API/full-fixture hash. Current public projection and full fixture/API hash are now explicit separate keys; all old hashes remain in unchanged historical evidence.",
+    "gem_probe": "Typed Django natural seed73 returns existing ctxp_fab0f46e7bcd5932442e projection/rank10; raw native resolver is not the typed guess route."
+  },
+  "comprehensive_gate": {
+    "argv": [
+      "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_v1_3_content_history.py",
+      "tests/test_v1_2_content_history.py",
+      "tests/test_v1_content_history.py",
+      "tests/test_v93_content_history.py",
+      "tests/test_v94_content_history.py",
+      "tests/test_v95_content_history.py",
+      "tests/test_v96_content_history.py",
+      "tests/test_v97_content_history.py",
+      "tests/test_quick_catalog_v92.py",
+      "tests/test_v54_people_morphology.py",
+      "tests/test_v72_romanian_dishes_and_pastries_morphology.py",
+      "tests/test_v47_contexto_pending_gate.py",
+      "tests/test_v80_clatite_target.py",
+      "tests/test_v33_basic_words.py",
+      "tests/test_v1_recipe_refresh.py",
+      "-o",
+      "cache_dir=/home/dobo/work/_temp/codex__content-v1-3/pytest-cache-history"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 73.612,
+    "log": "history-current-reference-comprehensive-final.log",
+    "deselection": null,
+    "modules": 15,
+    "cases": 305,
+    "result": "all305pass, no deselection",
+    "final_log": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-current-reference-comprehensive-final.log.gz",
+      "compressed_sha256": "c3b769504cc55ea7a603f22b23ca53a0193c932e855fadfbc1741c458d6aca69",
+      "uncompressed_sha256": "8029fa0de00c2b63c6aca451b9f93e98fa0e8067761b8c1c8787eb3214eaa03e"
+    },
+    "initial_result": "301pass/4historical-context failures, full log retained",
+    "initial_log": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-current-reference-comprehensive.log.gz",
+      "compressed_sha256": "887a4be3f6925c292e02b17d0464bb7e09f09332f8ed5cc1169c95c492613aab",
+      "uncompressed_sha256": "130177a0113e7bc9de5705918ff51dbe3bac5fc888611a3dbdb3b1a994aea7be"
+    }
+  },
+  "legacy_recipe_gate": {
+    "argv": [
+      "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_v1_recipe_refresh.py",
+      "-o",
+      "cache_dir=/home/dobo/work/_temp/codex__content-v1-3/pytest-cache-history"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 6.516,
+    "log": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-v1-recipes-final.log.gz",
+      "compressed_sha256": "da8c9313ad3c9259274d33620d2b59387ff9bf2d7d1eec680ea74223908ea2eb",
+      "uncompressed_sha256": "cfc14fd2dc11c362cccf5421245ca5ab0e9d286b54a604a80bd2dd5522f6feb9"
+    },
+    "deselection": null,
+    "cases": 13,
+    "result": "all13pass"
+  },
+  "final_guard_delta": "After comprehensive startup, three extra epoch/scope assertions were added to the existing fixed-hash history supplement; direct positive/repinned negative checks above confirm them. No behavior/fixture/hash was loosened.",
+  "ruff_and_whitespace": "Ruff passed; scoped diff check performed before seal.",
+  "capture_verification_sha256": "37e9aaa2f3d1615fd5f4aaf1be445ad14f5152fbe132cb356054a8bf216b0b69",
+  "durable_capture_artifacts_sha256": "0e0c1cdbc96d402af9771706cea0a6e32a02502352eac79061ba3b319d308b6d",
+  "current_export_sha256": "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f",
+  "current_sources": {
+    "alchimie_discovery_world_v92.json": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+    "alchimie_recipe_extensions_v92.json": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+    "board_rankings_v37.json": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+    "derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+    "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "independent_review": "Separate assembled quality/factual decisions remain root-owned; this is an implementation/test/provenance receipt."
+}

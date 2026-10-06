@@ -1,0 +1,61 @@
+{
+  "kind": "v1-3-durable-reference-artifact-map-v1",
+  "checked_on": "2026-10-06",
+  "scope": "Inert evidence snapshots and exact provenance only; not executable tooling or approval.",
+  "owner": "/root/synonym_scout",
+  "retained": {
+    "capture-preparation.json": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/capture-preparation.json",
+      "sha256": "565bd84e901bc6af649b6045fb28cea5e5f352e543fc22bad60dc5edf25074b0",
+      "bytes": 4226,
+      "executable": false
+    },
+    "capture_reference_v1_3.py": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/prepared-capture-reference.py.txt",
+      "sha256": "fc6c394779dd5bd359fd2ba30d57e682f0df5c4d868f91987c59f314eca65513",
+      "bytes": 18674,
+      "executable": false
+    },
+    "generate_game_vectors_v1_3.py": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/prepared-game-vectors.py.txt",
+      "sha256": "83c9912c444c013ad49517ad495d69c99e75bbf03d7b4efa03a74a5d2279453f",
+      "bytes": 6250,
+      "executable": false
+    },
+    "http-capture-command.json": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/http-capture-command.json",
+      "sha256": "069ed2cc698c985b74a3878f690500484268a2a1b28ad1f26053024f831e9f9c",
+      "bytes": 1476,
+      "executable": false
+    },
+    "game-vector-capture-command.json": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/game-vector-capture-command.json",
+      "sha256": "445bb18c07cb200cebd971e86b16c9628bce6d53b8e48ae9a56cb3a2bf3d38f7",
+      "bytes": 1601,
+      "executable": false
+    },
+    "http-capture.log": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/http-capture.log.gz",
+      "compressed_sha256": "117f79be19b68248edae62da81b9c4c40893cfafb8b9bbd2ee1d56b89cbca9bd",
+      "uncompressed_sha256": "eb5b6b57a157d00faa8c63f67b96400d306c2d852d414b040ac8a7d1de2c30d0",
+      "uncompressed_bytes": 76,
+      "gzip_mtime": 0
+    },
+    "game-vector-capture.log": {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/game-vector-capture.log.gz",
+      "compressed_sha256": "06f17b44baac3dbb65041510860bf4e7c240c44353e9c1124eba38ef63c8e70f",
+      "uncompressed_sha256": "9423b13f9de21bce785a08605d3faf1647177fe308bb826c81175ac037390a34",
+      "uncompressed_bytes": 37217,
+      "gzip_mtime": 0
+    }
+  },
+  "original_http_author": {
+    "path": "docs/reviews/go-native-toolchain/archived-reference/capture_reference.py.txt",
+    "sha256": "a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc"
+  },
+  "original_game_author": {
+    "path": "go-backend/internal/contexto/testdata/generate_games.py",
+    "sha256": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513"
+  },
+  "reconstruction": "Prepared-source exact bytes are retained as nonexecutable .py.txt files. Original authors and precise changed literals can be independently diffed against these bytes; undoing the three HTTP metadata substitutions or the one game output substitution recovers original byte hashes exactly. Scratch is not required to assess captured expected responses or provenance."
+}

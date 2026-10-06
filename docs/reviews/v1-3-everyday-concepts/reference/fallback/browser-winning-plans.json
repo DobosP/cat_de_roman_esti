@@ -1,0 +1,606 @@
+{
+  "alchimie": {
+    "hint_setup": [
+      {
+        "a": "n_gheorghe_marinescu",
+        "b": "n_stilou_rezervor"
+      },
+      {
+        "a": "n_gheorghe_marinescu",
+        "b": "n_v3sti_microscop"
+      },
+      {
+        "a": "n_gheorghe_marinescu",
+        "b": "n_v4sti_foc"
+      },
+      {
+        "a": "n_stilou_rezervor",
+        "b": "n_v3sti_experiment"
+      },
+      {
+        "a": "n_stilou_rezervor",
+        "b": "n_v3sti_microscop"
+      },
+      {
+        "a": "n_stilou_rezervor",
+        "b": "n_v4sti_foc"
+      },
+      {
+        "a": "n_stilou_rezervor",
+        "b": "n_v4sti_ureche"
+      },
+      {
+        "a": "n_v3sti_experiment",
+        "b": "n_v4sti_foc"
+      },
+      {
+        "a": "n_v3sti_microscop",
+        "b": "n_v4sti_foc"
+      },
+      {
+        "a": "n_v3sti_microscop",
+        "b": "n_v4sti_ureche"
+      },
+      {
+        "a": "n_v4sti_foc",
+        "b": "n_v4sti_ureche"
+      }
+    ],
+    "initial": {
+      "attempted_count": 0,
+      "board_category": "stiinta",
+      "difficulty": "usor",
+      "discovered_count": 0,
+      "hint_available": false,
+      "hint_stage": "output",
+      "hints_used": 0,
+      "inventory": [
+        {
+          "depleted": true,
+          "id": "n_stilou_rezervor",
+          "label": "Stiloul cu rezervor",
+          "links": [],
+          "parents": null,
+          "ready": false,
+          "recent": true,
+          "useful": false
+        },
+        {
+          "depleted": false,
+          "id": "n_v4sti_ureche",
+          "label": "ureche",
+          "links": [],
+          "parents": null,
+          "ready": true,
+          "recent": true,
+          "useful": true
+        },
+        {
+          "depleted": false,
+          "id": "n_gheorghe_marinescu",
+          "label": "Gheorghe Marinescu",
+          "links": [],
+          "parents": null,
+          "ready": true,
+          "recent": true,
+          "useful": true
+        },
+        {
+          "depleted": false,
+          "id": "n_v3sti_experiment",
+          "label": "Experiment",
+          "links": [],
+          "parents": null,
+          "ready": true,
+          "recent": true,
+          "useful": true
+        },
+        {
+          "depleted": false,
+          "id": "n_v3sti_microscop",
+          "label": "Microscop",
+          "links": [],
+          "parents": null,
+          "ready": true,
+          "recent": true,
+          "useful": true
+        },
+        {
+          "depleted": true,
+          "id": "n_v4sti_foc",
+          "label": "foc",
+          "links": [],
+          "parents": null,
+          "ready": false,
+          "recent": true,
+          "useful": false
+        }
+      ],
+      "inventory_summary": {
+        "active": 4,
+        "depleted": 2,
+        "total": 6
+      },
+      "moves": 0,
+      "recipe_summary": {
+        "max_results": 2,
+        "pairs": 7,
+        "routes": 4
+      },
+      "seed_count": 6,
+      "target": {
+        "description": "Agent infecțios microscopic care se reproduce în celule vii.",
+        "id": null,
+        "label": "virus",
+        "revealed": false
+      },
+      "target_depth": 2,
+      "won": false
+    },
+    "practice": {
+      "action": "combine",
+      "labels": [
+        "Gheorghe Marinescu",
+        "Experiment"
+      ],
+      "payload": {
+        "a": "n_gheorghe_marinescu",
+        "b": "n_v3sti_experiment"
+      }
+    },
+    "steps": [
+      {
+        "action": "combine",
+        "labels": [
+          "Gheorghe Marinescu",
+          "Experiment"
+        ],
+        "payload": {
+          "a": "n_gheorghe_marinescu",
+          "b": "n_v3sti_experiment"
+        }
+      },
+      {
+        "action": "combine",
+        "labels": [
+          "Biologie",
+          "Experiment"
+        ],
+        "payload": {
+          "a": "n_v2sti_biologie",
+          "b": "n_v3sti_experiment"
+        }
+      }
+    ]
+  },
+  "conexiuni": {
+    "initial": {
+      "clue_available": false,
+      "clues": [],
+      "clues_used": 0,
+      "difficulty": "usor",
+      "lives": 4,
+      "lost": false,
+      "mistakes": 0,
+      "remaining_groups": 4,
+      "solved": [],
+      "solved_count": 0,
+      "tiles": [
+        {
+          "id": "n_v42vdr_babele",
+          "label": "Zilele Babelor"
+        },
+        {
+          "id": "n_v42vdr_8_martie",
+          "label": "8 Martie"
+        },
+        {
+          "id": "n_v42vdr_iepurasul",
+          "label": "Iepurașul de Paște"
+        },
+        {
+          "id": "n_v42vdr_ciocnitul_oualor",
+          "label": "Ciocnitul ouălor"
+        },
+        {
+          "id": "n_v42vdr_ursul_obicei",
+          "label": "Jocul ursului"
+        },
+        {
+          "id": "n_v42vdr_sorcova",
+          "label": "Sorcova"
+        },
+        {
+          "id": "n_v42vdr_nasii",
+          "label": "Nașii"
+        },
+        {
+          "id": "n_v42vdr_slujba_inviere",
+          "label": "Slujba de Înviere"
+        },
+        {
+          "id": "n_v42vdr_vopsitul_oualor",
+          "label": "Vopsitul ouălor"
+        },
+        {
+          "id": "n_v42vdr_darul",
+          "label": "Darul de nuntă"
+        },
+        {
+          "id": "n_martisor",
+          "label": "Mărțișor"
+        },
+        {
+          "id": "n_v42vdr_ghiocel",
+          "label": "Ghiocelul"
+        },
+        {
+          "id": "n_v42vdr_furatul_miresei",
+          "label": "Furatul miresei"
+        },
+        {
+          "id": "n_vdr_plugusorul",
+          "label": "Plugușorul"
+        },
+        {
+          "id": "n_v42vdr_capra",
+          "label": "Jocul caprei"
+        },
+        {
+          "id": "n_v42vdr_dansul_gainii",
+          "label": "Dansul găinii"
+        }
+      ],
+      "won": false
+    },
+    "practice": {
+      "action": "guess",
+      "labels": [
+        "Plugușorul",
+        "Jocul caprei",
+        "Sorcova",
+        "Mărțișor"
+      ],
+      "payload": {
+        "ids": [
+          "n_vdr_plugusorul",
+          "n_v42vdr_capra",
+          "n_v42vdr_sorcova",
+          "n_martisor"
+        ]
+      }
+    },
+    "steps": [
+      {
+        "action": "guess",
+        "labels": [
+          "Plugușorul",
+          "Jocul caprei",
+          "Sorcova",
+          "Jocul ursului"
+        ],
+        "payload": {
+          "ids": [
+            "n_vdr_plugusorul",
+            "n_v42vdr_capra",
+            "n_v42vdr_sorcova",
+            "n_v42vdr_ursul_obicei"
+          ]
+        }
+      },
+      {
+        "action": "guess",
+        "labels": [
+          "Mărțișor",
+          "Ghiocelul",
+          "8 Martie",
+          "Zilele Babelor"
+        ],
+        "payload": {
+          "ids": [
+            "n_martisor",
+            "n_v42vdr_ghiocel",
+            "n_v42vdr_8_martie",
+            "n_v42vdr_babele"
+          ]
+        }
+      },
+      {
+        "action": "guess",
+        "labels": [
+          "Dansul găinii",
+          "Nașii",
+          "Darul de nuntă",
+          "Furatul miresei"
+        ],
+        "payload": {
+          "ids": [
+            "n_v42vdr_dansul_gainii",
+            "n_v42vdr_nasii",
+            "n_v42vdr_darul",
+            "n_v42vdr_furatul_miresei"
+          ]
+        }
+      },
+      {
+        "action": "guess",
+        "labels": [
+          "Ciocnitul ouălor",
+          "Vopsitul ouălor",
+          "Slujba de Înviere",
+          "Iepurașul de Paște"
+        ],
+        "payload": {
+          "ids": [
+            "n_v42vdr_ciocnitul_oualor",
+            "n_v42vdr_vopsitul_oualor",
+            "n_v42vdr_slujba_inviere",
+            "n_v42vdr_iepurasul"
+          ]
+        }
+      }
+    ]
+  },
+  "contexto": {
+    "initial": {
+      "attempts": 0,
+      "clue_available": false,
+      "clues_used": 0,
+      "difficulty": "usor",
+      "gave_up": false,
+      "guesses": [],
+      "reachable_count": 2356,
+      "won": false
+    },
+    "practice": {
+      "action": "guess",
+      "payload": {
+        "text": "Podea"
+      }
+    },
+    "steps": [
+      {
+        "action": "guess",
+        "payload": {
+          "text": "Făraș"
+        }
+      }
+    ]
+  },
+  "intrusul": {
+    "initial": {
+      "attempts": 0,
+      "difficulty": "usor",
+      "hint_available": false,
+      "hints_used": 0,
+      "lost": false,
+      "mistakes": 0,
+      "remaining_mistakes": 3,
+      "tiles": [
+        {
+          "id": "n_v28_feeling_social_rusine",
+          "label": "Rușine"
+        },
+        {
+          "id": "n_v24_feeling_needs_oboseala",
+          "label": "Oboseală"
+        },
+        {
+          "id": "n_v24_feeling_needs_sete",
+          "label": "Sete"
+        },
+        {
+          "id": "n_v24_feeling_needs_foame",
+          "label": "Foame"
+        }
+      ],
+      "won": false,
+      "wrong_ids": []
+    },
+    "practice": {
+      "action": "guess",
+      "labels": [
+        "Foame"
+      ],
+      "payload": {
+        "id": "n_v24_feeling_needs_foame"
+      }
+    },
+    "steps": [
+      {
+        "action": "guess",
+        "labels": [
+          "Rușine"
+        ],
+        "payload": {
+          "id": "n_v28_feeling_social_rusine"
+        }
+      }
+    ]
+  },
+  "lant": {
+    "initial": {
+      "backtrack_recommended": false,
+      "choices": [
+        {
+          "label": "Tenis",
+          "relation": "exemplu și categorie"
+        },
+        {
+          "label": "Turneu de Grand Slam",
+          "relation": "exemplu și categorie"
+        },
+        {
+          "label": "Wimbledon 2019",
+          "relation": "parte și întreg"
+        }
+      ],
+      "current": {
+        "id": "n_spt_wimbledon",
+        "label": "Wimbledon"
+      },
+      "difficulty": "usor",
+      "moves": 0,
+      "optimal": 2,
+      "path": [
+        {
+          "id": "n_spt_wimbledon",
+          "label": "Wimbledon"
+        }
+      ],
+      "start": {
+        "id": "n_spt_wimbledon",
+        "label": "Wimbledon"
+      },
+      "target": {
+        "description": "Ilie Năstase a fost primul lider al clasamentului computerizat ATP, în 1973.",
+        "id": "n_spt_nastase_numarul_1",
+        "label": "Primul număr 1 ATP"
+      },
+      "won": false
+    },
+    "practice": {
+      "action": "move",
+      "payload": {
+        "text": "Madrid Open"
+      }
+    },
+    "steps": [
+      {
+        "action": "move",
+        "payload": {
+          "text": "Madrid Open"
+        }
+      },
+      {
+        "action": "move",
+        "payload": {
+          "text": "Primul număr 1 ATP"
+        }
+      }
+    ]
+  },
+  "perechi": {
+    "initial": {
+      "actions": 0,
+      "hint_available": false,
+      "hints_used": 0,
+      "lost": false,
+      "mistakes": 0,
+      "remaining_mistakes": 6,
+      "remaining_pairs": 4,
+      "solved_count": 0,
+      "solved_pairs": [],
+      "tiles": [
+        {
+          "id": "n_v2spo_inot_sportiv",
+          "label": "Înot sportiv",
+          "solved": false
+        },
+        {
+          "id": "n_spt_columbia_romania_1994",
+          "label": "Columbia - România 1994",
+          "solved": false
+        },
+        {
+          "id": "n_spt_record_100m_liber_2022",
+          "label": "Recordul la 100 m liber din 2022",
+          "solved": false
+        },
+        {
+          "id": "n_spt_generatia_de_aur",
+          "label": "Generația de Aur",
+          "solved": false
+        },
+        {
+          "id": "n_v2spo_turneu_grand_slam",
+          "label": "Turneu de Grand Slam",
+          "solved": false
+        },
+        {
+          "id": "n_spt_wimbledon",
+          "label": "Wimbledon",
+          "solved": false
+        },
+        {
+          "id": "n_spt_helmut_duckadam",
+          "label": "Helmut Duckadam",
+          "solved": false
+        },
+        {
+          "id": "n_spt_patru_penaltyuri",
+          "label": "Patru penalty-uri apărate",
+          "solved": false
+        }
+      ],
+      "won": false
+    },
+    "practice": {
+      "action": "match",
+      "labels": [
+        "Helmut Duckadam",
+        "Wimbledon"
+      ],
+      "payload": {
+        "ids": [
+          "n_spt_helmut_duckadam",
+          "n_spt_wimbledon"
+        ]
+      }
+    },
+    "steps": [
+      {
+        "action": "match",
+        "labels": [
+          "Helmut Duckadam",
+          "Patru penalty-uri apărate"
+        ],
+        "payload": {
+          "ids": [
+            "n_spt_helmut_duckadam",
+            "n_spt_patru_penaltyuri"
+          ]
+        }
+      },
+      {
+        "action": "match",
+        "labels": [
+          "Wimbledon",
+          "Turneu de Grand Slam"
+        ],
+        "payload": {
+          "ids": [
+            "n_spt_wimbledon",
+            "n_v2spo_turneu_grand_slam"
+          ]
+        }
+      },
+      {
+        "action": "match",
+        "labels": [
+          "Columbia - România 1994",
+          "Generația de Aur"
+        ],
+        "payload": {
+          "ids": [
+            "n_spt_columbia_romania_1994",
+            "n_spt_generatia_de_aur"
+          ]
+        }
+      },
+      {
+        "action": "match",
+        "labels": [
+          "Recordul la 100 m liber din 2022",
+          "Înot sportiv"
+        ],
+        "payload": {
+          "ids": [
+            "n_spt_record_100m_liber_2022",
+            "n_v2spo_inot_sportiv"
+          ]
+        }
+      }
+    ]
+  }
+}

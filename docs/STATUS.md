@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-06 — V1.2 reviewed/landed locally17f7da1; production anonymous V1.0.1.
+Last verified: 2026-10-06 — V1.3 required gates GREEN; assembled/local landing pending; production anonymous V1.0.1.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -30,7 +30,7 @@ Last verified: 2026-10-06 — V1.2 reviewed/landed locally17f7da1; production an
   22 distinct forms and Cărare↔Potecă; zero new concepts/curated rounds. Old records,
   recipe cores/histories/pools persist. [Review](reviews/v1-2-content-growth/README.md),
   [ADR-0170](adr/0170-v1-2-reviewed-content-growth.md), [pool](content-pool/v1-2-synonyms-and-links/pool.json).
-- Native current authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
+- V1.2 baseline authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
   independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
   Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; V1.x loop every30min.
 ## Inventory and invariants
@@ -46,7 +46,7 @@ Last verified: 2026-10-06 — V1.2 reviewed/landed locally17f7da1; production an
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-KG: `fixture-v1-2-reviewed-content`, 2416 nodes/9459 links/8663 forms/180 puzzles.
+Task KG: `fixture-v1-3-everyday-concepts`, 2419 nodes/9471 links/8675 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration remains **251 concepts/351 recipes/147 discoveries**, 96 supplies, 12 tiers,
@@ -57,16 +57,16 @@ sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 bo
 Unrevealed answers, recipe maps and routes stay private.
 ## Current artifact pins
 
-- alchimie_discovery_world_v92.json: `4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3`
-- alchimie_recipe_extensions_v92.json: `9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3`
-- quick_games_v92.json: `cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c`
+- alchimie_discovery_world_v92.json: `28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6`
+- alchimie_recipe_extensions_v92.json: `b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5`
+- quick_games_v92.json: `99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806`
-- derived_catalog_v38.json: `1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71`
+- board_rankings_v37.json: `e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b`
+- derived_catalog_v38.json: `b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85`
-- cat_mobile_app_pack_contract.json: `8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438`
+- kg_sample.json: `d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63`
+- cat_mobile_app_pack_contract.json: `f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -106,15 +106,15 @@ Unrevealed answers, recipe maps and routes stay private.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
-- V1.3: [pool3selected/5held](content-pool/v1-3-everyday-concepts/pool.json), [proposal](reviews/v1-3-everyday-concepts/README.md); zero installed.
-  ExactGo1.27.1 restored/baseline4rails GREEN; graph3concepts/12forms/12links awaiting independent gates.
+- V1.3: [pool3selected/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
+  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled/landing pending.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
-  Limbă/Geografie Greu shelves, label spellings (Herta Müller, Mica Unire 1859).
+  Limbă/Geografie Greu shelves, label spellings (Herta Müller, Mica Unire 1859); forced fallback Societate/Secundă and mixed Personalități predicates.
 - Known limits: Alchimie Greu starts on shelves without a curated board can take seconds
   (a time cap would break deterministic dailies); older stored score details keep ISO dates
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0170), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0171), reviews/WORKLOG: history.
