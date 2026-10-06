@@ -3,8 +3,8 @@
 Valid until: baseline, source evidence or intended scope changes — repeat affected checks.
 
 Started2026-10-06 after V1.3 content95f94e3/reviewed landing082ba99/documentation46641d6.
-Baseline:46641d6f9963f92941d12f5955e5eb40a2d8fb56. Phase: all required integration gates GREEN; assembled ACCEPT672d656; local landing pending.
-The independently accepted shared graph, allthree signed catalogs, current references and Source4 installed authority are verified in this isolated task. Required gates are GREEN; exact independent assembled review ACCEPTS672d656; local landing is pending. The [pool](../../content-pool/v1-4-time-links-and-predicates/pool.json) records6leads:3selected for independent refinement/3held (duplicate, orologiu and clipă/moment); four additional ceasornic inflections remain unselected.
+Baseline:46641d6f9963f92941d12f5955e5eb40a2d8fb56. Phase: all required integration gates GREEN; assembled ACCEPT672d656; locally landedfd09b3b.
+The independently accepted shared graph, allthree signed catalogs, current references and Source4 installed authority are verified in this isolated task. Required gates are GREEN; exact independent assembled review ACCEPTS672d656; local landing is completefd09b3b. The [pool](../../content-pool/v1-4-time-links-and-predicates/pool.json) records6leads:3selected for independent refinement/3held (duplicate, orologiu and clipă/moment); four additional ceasornic inflections remain unselected.
 
 [Time-link screen](research-time-links.json) preserves exact endpoint directions, existing deck uses and official-access/mirror qualifications. No new conversion fact is claimed from a reverse arc.
 
@@ -88,7 +88,13 @@ path/asset change; Node/browser production/account-PG gates are not claimed as n
 Smoke uses documented synthetic operator/contact on isolated anonymous localhost; initial
 usage/legal-placeholder refusals are retained in [runtime notes](runtime-verification-notes.json).
 Final independent assembled exact-revision acceptance and local landing remain mandatory.
-Pool records stay3selected/3held until final acceptance/landing; four additional exactforms
+Pool records are3integrated/3held after final acceptance/landing; four additional exactforms
 and inherited fallback predicate weaknesses stay held. No new target/curated recipe approval.
 
 [Final assembled review](assembled-review.json) independently ACCEPTS exact672d656ac8d72ccd2da071598ed049596a340a41. Metadata/source/runtime/reference bytes are frozen; only accurate review/landing documentation remains.
+
+Local landing completedfd09b3ba9fd87963c5cde7519fbeab971a0db240 after exact672d656
+assembled acceptance63b1531d… . [Landing record](landing.json) preserves actual scope/gates/
+SDK preservation and cleanup prerequisites; pre-integration pool bytes and selected
+snapshots remain frozen. Shared main is clean; no push/deployment. Next boundedV1.5
+discovery begins after this fully green local landing and verified-merged cleanup.

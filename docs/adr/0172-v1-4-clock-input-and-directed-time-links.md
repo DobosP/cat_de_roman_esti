@@ -1,6 +1,6 @@
 # ADR-0172: V1.4 qualified clock inputs and directed duration-unit links
 
-- Status: accepted and fully verified integration; independently assembled ACCEPT672d656; local landing pending
+- Status: accepted and fully verified integration; independently assembled ACCEPT672d656 and locally landedfd09b3b
 - Date: 2026-10-06
 
 ## Context
@@ -49,4 +49,4 @@ next sequential wave starts only after green local landing. No push/deploy is au
 selected snapshots, primary semantic/morphology/measurement evidence, access/license limits,
 independent raw judgments, lossless prospective effects and actual graph installation.
 Inputs and directed navigability improve; existing rounds/pools stay unchanged. Automated
-and AI review is not human enjoyment evidence. Allthree native catalogs have exact independent staging finals and a coherent source/export with independent Python byte equality. Fresh current reference/history reviews, allthree installed same-role finals, strict four-rail authority and required native/shared/source/HTTP/smoke/lint/docs gates are GREEN; independent assembled exact revision672d656 is ACCEPTED; local landing remains pending.
+and AI review is not human enjoyment evidence. Allthree native catalogs have exact independent staging finals and a coherent source/export with independent Python byte equality. Fresh current reference/history reviews, allthree installed same-role finals, strict four-rail authority and required native/shared/source/HTTP/smoke/lint/docs gates are GREEN; independent assembled exact revision672d656 is ACCEPTED; local landing completedfd09b3b, with all required gates and unchanged production.
