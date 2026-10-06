@@ -1,0 +1,132 @@
+{
+  "association_pool_states": {
+    "held": 3,
+    "idea": 2,
+    "rejected": 2,
+    "researched": 3
+  },
+  "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "binding_mismatches": [],
+  "budgets": {
+    "AGENTS.md": {
+      "count": 80,
+      "maximum": 80,
+      "nonblank": false
+    },
+    "CLAUDE.md": {
+      "count": 8,
+      "maximum": 12,
+      "nonblank": true
+    },
+    "docs/STATUS.md": {
+      "count": 120,
+      "maximum": 120,
+      "nonblank": false
+    },
+    "docs/agent-map.md": {
+      "count": 49,
+      "maximum": 60,
+      "nonblank": false
+    },
+    "docs/agent-testing.md": {
+      "count": 76,
+      "maximum": 80,
+      "nonblank": false
+    }
+  },
+  "changed_paths": [
+    "WORKLOG.md",
+    "docs/STATUS.md",
+    "docs/adr/0137-finish-v91-and-stop-iteration-loop.md",
+    "docs/adr/0173-resume-bounded-content-version-loop.md",
+    "docs/adr/README.md",
+    "docs/content-pool/v1-5-association-i01/pool-r1.json",
+    "docs/content-pool/v1-5-association-i01/pool.json",
+    "docs/reviews/v1-5-small-objects/README.md",
+    "docs/reviews/v1-5-small-objects/iterations/i01/README.md",
+    "docs/reviews/v1-5-small-objects/iterations/i01/breloc-source-screen-r1.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/case-requirements-r1.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/case-requirements-r2.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/factual-reconciliation-r2.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/factual-review-r1.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/packet-r1.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/packet-r2.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/palnie-source-screen-r1.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/plan-r1.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/quality-reconciliation-r2.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/quality-review-r1.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/replan-source-screen-r1.json",
+    "docs/reviews/v1-5-small-objects/iterations/i01/verification-r2.json"
+  ],
+  "checked_on": "2026-10-06",
+  "complete_research_records": 10,
+  "current_packet_sha256": "75a8dc32cc345644520add93bab979cf993de4686cf28009fbcc2d6944a2f7a5",
+  "initial_work_budget_gib": 1,
+  "live_document_check": {
+    "dead_links": [],
+    "files": 46,
+    "implementation": "Existing Python reference functions; native doccheck NOT RUN.",
+    "manual_changed_markdown_dead_links": [],
+    "orphans": [],
+    "retired_verbs": [],
+    "stale_terms": []
+  },
+  "minimum_commit_free_gib": 16,
+  "next_action": "Save a clean source-review handoff and worker-owned progress packet; finite2existing-node relation replan remains V1.5, native campaigns require actual owner/coordinator admission.",
+  "not_run": [
+    "Go/native CLI/build/install",
+    "WSL/Docker/PG/full-suite",
+    "frontend/browser/model/GPU/image",
+    "graph/preflight/apply/gameplay/terminal simulations",
+    "Source5/candidate/module generation",
+    "fixture/export/source/authority/runtime writes",
+    "push/merge/deployment/deletion"
+  ],
+  "old_research_lane": {
+    "clean": true,
+    "preserved": true,
+    "sha": "a75ce96227271408e529e46cc27b1a62dd000f38"
+  },
+  "original_pool": "Exact old2researched/6held/0selected/0installed bytes preserved.",
+  "peak_process_profile": "NOT RUN; workload restricted to bounded source/read/edit/Git/documentation tools.",
+  "qualification": "NOT_QUALIFIED; native held; no selection/installation/source5/module/merge request.",
+  "quality_effects": "Breloc1/1 and Palnie4/1; shampoo held; generated miner exposure and reverse-old-path/cycle risks explicit.",
+  "r1_bindings_checked": 52,
+  "r1_original_pool_path_resolution": {
+    "archived_exact_bytes": "docs/content-pool/v1-5-association-i01/pool-r1.json",
+    "original_path": "docs/content-pool/v1-5-association-i01/pool.json",
+    "qualification": "R1 packet/reviews are immutable historical snapshots; their old mutable ledger path resolves to these archived bytes.",
+    "sha256": "a8cbd2b88c57e08bb7ccf5fec3988c216a6587c31914bd6fc80ba21f57525c29"
+  },
+  "r2_bindings_checked": 58,
+  "resource_sample": {
+    "commitFreeGiB": 18.08,
+    "diskFreeGiB": 21.72,
+    "physicalFreeGiB": 21.65,
+    "sampledAt": "2026-10-06T12:26:57.414990+03:00"
+  },
+  "review_artifacts": {
+    "docs/reviews/v1-5-small-objects/iterations/i01/factual-reconciliation-r2.json": "4ab8e22c16a245f30efc8cc5fb130c7154de8da66387c0306a9a62051492dd71",
+    "docs/reviews/v1-5-small-objects/iterations/i01/factual-review-r1.json": "7e4f12cecbc825e3715c0cdc8026673979ad71e01d33cfb26995ba9ab00b58ff",
+    "docs/reviews/v1-5-small-objects/iterations/i01/quality-reconciliation-r2.json": "7990ac65c7872421761782338e0379cbc3a01d55b71cdd1ff2e761e3ff567301",
+    "docs/reviews/v1-5-small-objects/iterations/i01/quality-review-r1.json": "f77850727c852880c0574a0e9c679c39f7bdf846a17e69ead1dc2d77fae38f5e"
+  },
+  "schema": "v1-5-i01-light-source-handoff-verification-v1",
+  "scope": "Read-only stdlib byte/document checks and Git isolation; no application simulation/test or native qualification.",
+  "shared_main": {
+    "clean": true,
+    "sha": "a75ce96227271408e529e46cc27b1a62dd000f38"
+  },
+  "whitespace": {
+    "command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --cached --check",
+    "crlf_receipt_paths": [
+      "docs/reviews/v1-5-small-objects/iterations/i01/factual-reconciliation-r2.json",
+      "docs/reviews/v1-5-small-objects/iterations/i01/factual-review-r1.json",
+      "docs/reviews/v1-5-small-objects/iterations/i01/quality-reconciliation-r2.json",
+      "docs/reviews/v1-5-small-objects/iterations/i01/quality-review-r1.json"
+    ],
+    "plain_staged_check": "Flags only terminal CRLF on four exact independent receipt bytes; preserved intentionally.",
+    "receipt_bytes_normalized": false,
+    "status": "PASS"
+  }
+}

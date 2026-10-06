@@ -1,0 +1,938 @@
+{
+  "records": [
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "inference",
+          "object": "n_v24_transport_personal_masina",
+          "predicate": "accessory for carrying a vehicle's keys",
+          "source_ids": [
+            "vw"
+          ],
+          "subject": "v1-5-object-3 r3"
+        }
+      ],
+      "decision": "Brand merchandise listing does not establish this functional predicate. Would add a context shortcut through keys.",
+      "dependencies": [
+        "Original r3 exact sense and current KG endpoint sense"
+      ],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "history": [
+        {
+          "author": "/root; source worker /root/breloc_sources",
+          "date": "2026-10-06",
+          "evidence": "breloc-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea -> held"
+        }
+      ],
+      "id": "v15-i01-breloc-assoc-1",
+      "identity_checks": {
+        "endpoint": {
+          "aliases": [
+            "mașini",
+            "mașinile",
+            "automobil",
+            "autoturism",
+            "automobilul",
+            "automobile",
+            "automobilele",
+            "automobilului",
+            "automobilelor",
+            "autoturismul",
+            "autoturisme",
+            "autoturismele",
+            "autoturismului",
+            "autoturismelor",
+            "autoturismului personal",
+            "autoturismelor personale"
+          ],
+          "category": "societate",
+          "degree": 5,
+          "description": "Concept cotidian din grupul «transport personal»: Mașină.",
+          "difficulty_tier": "easy",
+          "id": "n_v24_transport_personal_masina",
+          "label_ro": "Mașină",
+          "node_type": "concept",
+          "salience": 0.94
+        },
+        "endpoint_sense_mapping": "qualified by screen"
+      },
+      "label_ro": "Breloc → Mașină",
+      "next_action": "Do not adopt this relation under current evidence; reopen only with material specific source evidence.",
+      "novelty": {
+        "existing_ids": [
+          "n_v24_transport_personal_masina"
+        ],
+        "kind": "new_relation",
+        "original_record": "v1-5-object-3 r3"
+      },
+      "origin_track": "discovery",
+      "play_sketches": {
+        "hypothesis": "Possible car-key vocabulary route, currently unearned.",
+        "verified_runtime": false
+      },
+      "player_benefit": "Possible car-key vocabulary route, currently unearned.",
+      "recognition": "The original r3 recognition screen is unchanged; it does not validate this association.",
+      "revision": 1,
+      "risks": [
+        "The same merchandise collection lists towels and clothing; its branding alone cannot justify vehicle edges."
+      ],
+      "sense": "Exact physical key-accessory association hypothesis",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "Copyright Porsche Romania 2026; no open reuse licence verified",
+          "note": "Breloc appears in branded merchandise alongside clothing and towels; no functional vehicle relationship stated.",
+          "url": "https://www.volkswagen.ro/service-piese-si-accesorii/accesorii/Colectia-Volkswagen"
+        }
+      ],
+      "state": "held"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "inference",
+          "object": "n_v4via_usa",
+          "predicate": "helps carry the key used to open a door",
+          "source_ids": [
+            "lego",
+            "action"
+          ],
+          "subject": "v1-5-object-3 r3"
+        }
+      ],
+      "decision": "Door function belongs to Cheie. This bypasses the supported key attachment and supplies no distinct direct association.",
+      "dependencies": [
+        "Original r3 exact sense and current KG endpoint sense"
+      ],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "history": [
+        {
+          "author": "/root; source worker /root/breloc_sources",
+          "date": "2026-10-06",
+          "evidence": "breloc-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea -> rejected"
+        }
+      ],
+      "id": "v15-i01-breloc-assoc-2",
+      "identity_checks": {
+        "endpoint": {
+          "aliases": [
+            "uși",
+            "ușile"
+          ],
+          "category": "viata_de_roman",
+          "degree": 43,
+          "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință.",
+          "difficulty_tier": "easy",
+          "id": "n_v4via_usa",
+          "label_ro": "ușă",
+          "node_type": "concept",
+          "salience": 0.6855
+        },
+        "endpoint_sense_mapping": "qualified by screen"
+      },
+      "label_ro": "Breloc → ușă",
+      "next_action": "Do not adopt this relation under current evidence; reopen only with material specific source evidence.",
+      "novelty": {
+        "existing_ids": [
+          "n_v4via_usa"
+        ],
+        "kind": "new_relation",
+        "original_record": "v1-5-object-3 r3"
+      },
+      "origin_track": "discovery",
+      "play_sketches": {
+        "hypothesis": "No distinct benefit beyond the existing key anchor.",
+        "verified_runtime": false
+      },
+      "player_benefit": "No distinct benefit beyond the existing key anchor.",
+      "recognition": "The original r3 recognition screen is unchanged; it does not validate this association.",
+      "revision": 1,
+      "risks": [
+        "A key accessory does not itself operate the door; decorative accessories can be used without door keys."
+      ],
+      "sense": "Exact physical key-accessory association hypothesis",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "Copyright 2026 LEGO Group, all rights reserved; factual paraphrase only",
+          "note": "Key attachment supported; no door, car or childhood neck-key relationship established.",
+          "url": "https://www.lego.com/ro-ro/product/lego-gold-minifigure-key-chain-850807"
+        },
+        {
+          "access_date": "2026-10-06",
+          "license": "No open reuse licence verified; factual paraphrase only",
+          "note": "Physical key accessory supported; strap-assisted handling remains part of that existing relationship.",
+          "url": "https://www.action.com/ro-ro/p/3220202/breloc/"
+        }
+      ],
+      "state": "rejected"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "unresolved",
+          "object": "n_vdr_cheia_de_la_gat",
+          "predicate": "used with the childhood key carried around the neck",
+          "source_ids": [],
+          "subject": "v1-5-object-3 r3"
+        }
+      ],
+      "decision": "No original evidence found tying the frozen accessory specifically to this cultural practice. Shared key wording is insufficient.",
+      "dependencies": [
+        "Original r3 exact sense and current KG endpoint sense"
+      ],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "history": [
+        {
+          "author": "/root; source worker /root/breloc_sources",
+          "date": "2026-10-06",
+          "evidence": "breloc-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea -> held"
+        }
+      ],
+      "id": "v15-i01-breloc-assoc-3",
+      "identity_checks": {
+        "endpoint": {
+          "aliases": [
+            "cheia la gât",
+            "cheia de gât",
+            "cheie purtată la gât",
+            "cheia școlarului"
+          ],
+          "category": "viata_de_roman",
+          "degree": 7,
+          "description": "Cheia purtată de copii la gât când mergeau singuri acasă de la școală.",
+          "difficulty_tier": "easy",
+          "id": "n_vdr_cheia_de_la_gat",
+          "label_ro": "Cheia de la gât",
+          "node_type": "concept",
+          "salience": 0.7501
+        },
+        "endpoint_sense_mapping": "qualified by screen"
+      },
+      "label_ro": "Breloc → Cheia de la gât",
+      "next_action": "Do not adopt this relation under current evidence; reopen only with material specific source evidence.",
+      "novelty": {
+        "existing_ids": [
+          "n_vdr_cheia_de_la_gat"
+        ],
+        "kind": "new_relation",
+        "original_record": "v1-5-object-3 r3"
+      },
+      "origin_track": "discovery",
+      "play_sketches": {
+        "hypothesis": "Potential cross-generational route, currently unearned.",
+        "verified_runtime": false
+      },
+      "player_benefit": "Potential cross-generational route, currently unearned.",
+      "recognition": "The original r3 recognition screen is unchanged; it does not validate this association.",
+      "revision": 1,
+      "risks": [
+        "The endpoint describes a key worn around the neck; a breloc is not necessary to that practice."
+      ],
+      "sense": "Exact physical key-accessory association hypothesis",
+      "sources": [],
+      "state": "held"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "supported",
+          "object": "n_v4spo_fluier",
+          "predicate": "some models incorporate a whistle",
+          "source_ids": [
+            "trespass"
+          ],
+          "subject": "v1-5-object-3 r3"
+        }
+      ],
+      "decision": "Specific multifunction example exists, but the endpoint explicitly means a referee's signalling instrument. Outdoor emergency evidence does not establish that sense.",
+      "dependencies": [
+        "Original r3 exact sense and current KG endpoint sense"
+      ],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "history": [
+        {
+          "author": "/root; source worker /root/breloc_sources",
+          "date": "2026-10-06",
+          "evidence": "breloc-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea -> rejected"
+        }
+      ],
+      "id": "v15-i01-breloc-assoc-4",
+      "identity_checks": {
+        "endpoint": {
+          "aliases": [
+            "fluierul",
+            "fluiere",
+            "fluierele",
+            "fluierului de arbitru",
+            "fluierelor de arbitru"
+          ],
+          "category": "sport",
+          "degree": 3,
+          "description": "Instrument folosit de arbitru pentru a semnala faze de joc.",
+          "difficulty_tier": "medium",
+          "id": "n_v4spo_fluier",
+          "label_ro": "fluier",
+          "node_type": "concept",
+          "salience": 0.376
+        },
+        "endpoint_sense_mapping": "unresolved"
+      },
+      "label_ro": "Breloc → fluier",
+      "next_action": "Do not adopt this relation under current evidence; reopen only with material specific source evidence.",
+      "novelty": {
+        "existing_ids": [
+          "n_v4spo_fluier"
+        ],
+        "kind": "new_relation",
+        "original_record": "v1-5-object-3 r3"
+      },
+      "origin_track": "discovery",
+      "play_sketches": {
+        "hypothesis": "No honest route to the existing sport endpoint established.",
+        "verified_runtime": false
+      },
+      "player_benefit": "No honest route to the existing sport endpoint established.",
+      "recognition": "The original r3 recognition screen is unchanged; it does not validate this association.",
+      "revision": 1,
+      "risks": [
+        "Emergency whistle function differs from referee signalling; ordinary key accessories need not contain either."
+      ],
+      "sense": "Exact physical key-accessory association hypothesis",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "Copyright 2026 Jacobs & Turner Ltd; no open reuse licence verified",
+          "note": "Manufacturer documents outdoor emergency whistles with keyring attachments; referee use is not established.",
+          "url": "https://www.trespass.com/keyring-set-blow-x-whistle"
+        }
+      ],
+      "state": "rejected"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "supported",
+          "object": "n_v4sti_lichid",
+          "predicate": "se folosește la turnarea lichidelor în recipiente",
+          "source_ids": [
+            "S1",
+            "S6"
+          ],
+          "subject": "v1-5-object-2 r3"
+        }
+      ],
+      "decision": "Qualified source research only; do not mark ready, select or install.",
+      "dependencies": [
+        "Exact original r3 sense",
+        "Current endpoint snapshot",
+        "Independent complete factual and quality/source-effects reviews",
+        "Qualified native admission and all applicable gates"
+      ],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "history": [
+        {
+          "author": "/root; source worker /root/palnie_sources",
+          "date": "2026-10-06",
+          "evidence": "palnie-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea -> researched"
+        }
+      ],
+      "id": "v15-i01-palnie-assoc-1",
+      "identity_checks": {
+        "endpoint": {
+          "aliases": [
+            "lichidul",
+            "lichide",
+            "lichidele",
+            "lichidului",
+            "lichidelor",
+            "lichidului newtonian",
+            "lichidelor newtoniene"
+          ],
+          "category": "stiinta",
+          "degree": 5,
+          "description": "Stare a materiei cu volum propriu și formă variabilă.",
+          "difficulty_tier": "medium",
+          "id": "n_v4sti_lichid",
+          "label_ro": "lichid",
+          "node_type": "concept",
+          "salience": 0.6314
+        },
+        "sense_qualification": "Explicit liquid/filling subtype and optional wording retained"
+      },
+      "label_ro": "Pâlnie → lichid",
+      "next_action": "Independent reviewers must settle exact source support and whether the pair provides distinct player value; reject weak-edge padding.",
+      "novelty": {
+        "existing_ids": [
+          "n_v4sti_lichid"
+        ],
+        "kind": "new_relation",
+        "original_record": "v1-5-object-2 r3"
+      },
+      "origin_track": "discovery",
+      "play_sketches": {
+        "hypothesis": "Central function anchor; modest optional hop.",
+        "verified_runtime": false
+      },
+      "player_benefit": "Central function anchor; modest optional hop.",
+      "recognition": "Original r3 word recognition remains bounded; spontaneous transfer associations/recall/enjoyment are unmeasured.",
+      "revision": 1,
+      "risks": [
+        "The KG endpoint denotes the liquid state generally, rather than a particular household liquid.",
+        "The sources also describe dry-material uses; those remain outside the frozen liquid-only claim.",
+        "No numeric strength, ordinary gameplay benefit or quality-floor acceptance established."
+      ],
+      "sense": "Exact household liquid-transfer association hypothesis",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "© Inter IKEA Systems B.V. 1999–2026; no open reuse license verified. Factual paraphrase only.",
+          "note": "Household funnel for filling bottles with homemade juice, lemonade and other beverages.",
+          "url": "https://www.ikea.com/ro/ro/p/uppfylld-palnie-galben-neon-80521930/"
+        },
+        {
+          "access_date": "2026-10-06",
+          "license": "© 2026 Velleman Group nv, all rights reserved; no open reuse license verified. Factual paraphrase only.",
+          "note": "Ordinary nested funnels described for accurate refilling of liquids; explicitly names washing-up liquid and home/kitchen applications.",
+          "url": "https://www.velleman.eu/products/view/set-of-4-funnels-hfus1/?id=372284&lang=en"
+        }
+      ],
+      "state": "researched"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "supported",
+          "object": "n_v24_food_pantry_ulei",
+          "predicate": "ajută la turnarea uleiului alimentar într-un recipient mai mic",
+          "source_ids": [
+            "S2"
+          ],
+          "subject": "v1-5-object-2 r3"
+        }
+      ],
+      "decision": "Qualified source research only; do not mark ready, select or install.",
+      "dependencies": [
+        "Exact original r3 sense",
+        "Current endpoint snapshot",
+        "Independent complete factual and quality/source-effects reviews",
+        "Qualified native admission and all applicable gates"
+      ],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "history": [
+        {
+          "author": "/root; source worker /root/palnie_sources",
+          "date": "2026-10-06",
+          "evidence": "palnie-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea -> researched"
+        }
+      ],
+      "id": "v15-i01-palnie-assoc-2",
+      "identity_checks": {
+        "endpoint": {
+          "aliases": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor"
+          ],
+          "category": "gastronomie",
+          "degree": 6,
+          "description": "Concept cotidian din grupul «ingrediente de bază»: Ulei.",
+          "difficulty_tier": "easy",
+          "id": "n_v24_food_pantry_ulei",
+          "label_ro": "Ulei",
+          "node_type": "concept",
+          "salience": 0.88
+        },
+        "sense_qualification": "Explicit liquid/filling subtype and optional wording retained"
+      },
+      "label_ro": "Pâlnie → Ulei",
+      "next_action": "Independent reviewers must settle exact source support and whether the pair provides distinct player value; reject weak-edge padding.",
+      "novelty": {
+        "existing_ids": [
+          "n_v24_food_pantry_ulei"
+        ],
+        "kind": "new_relation",
+        "original_record": "v1-5-object-2 r3"
+      },
+      "origin_track": "discovery",
+      "play_sketches": {
+        "hypothesis": "Concrete household liquid instance distinct from Apă.",
+        "verified_runtime": false
+      },
+      "player_benefit": "Concrete household liquid instance distinct from Apă.",
+      "recognition": "Original r3 word recognition remains bounded; spontaneous transfer associations/recall/enjoyment are unmeasured.",
+      "revision": 1,
+      "risks": [
+        "Support concerns cooking oil, not motor oil.",
+        "The source's particular funnel does not fit ordinary soda or bottled-water necks; compatibility is not universal.",
+        "No numeric strength, ordinary gameplay benefit or quality-floor acceptance established."
+      ],
+      "sense": "Exact household liquid-transfer association hypothesis",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "No open reuse license verified. Factual paraphrase only.",
+          "note": "Explicitly describes transferring bulk liquids such as cooking oil into smaller containers; specifies bottle-fit limitations.",
+          "url": "https://www.turnrightsolutions.com/products/wide-neck-funnels"
+        }
+      ],
+      "state": "researched"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "supported",
+          "object": "n_v31_hygiene_hair_sampon",
+          "predicate": "poate ajuta la umplerea recipientelor cu șampon lichid",
+          "source_ids": [
+            "S3"
+          ],
+          "subject": "v1-5-object-2 r3"
+        }
+      ],
+      "decision": "Qualified source research only; do not mark ready, select or install.",
+      "dependencies": [
+        "Exact original r3 sense",
+        "Current endpoint snapshot",
+        "Independent complete factual and quality/source-effects reviews",
+        "Qualified native admission and all applicable gates"
+      ],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "history": [
+        {
+          "author": "/root; source worker /root/palnie_sources",
+          "date": "2026-10-06",
+          "evidence": "palnie-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea -> researched"
+        }
+      ],
+      "id": "v15-i01-palnie-assoc-3",
+      "identity_checks": {
+        "endpoint": {
+          "aliases": [
+            "șamponul",
+            "șampoane",
+            "șampoanele",
+            "șamponului",
+            "șamponului de păr",
+            "șampoanelor de păr"
+          ],
+          "category": "viata_de_roman",
+          "degree": 5,
+          "description": "Produs lichid folosit cu apă pentru a spăla părul.",
+          "difficulty_tier": "easy",
+          "id": "n_v31_hygiene_hair_sampon",
+          "label_ro": "Șampon",
+          "node_type": "concept",
+          "salience": 0.92
+        },
+        "sense_qualification": "Explicit liquid/filling subtype and optional wording retained"
+      },
+      "label_ro": "Pâlnie → Șampon",
+      "next_action": "Independent reviewers must settle exact source support and whether the pair provides distinct player value; reject weak-edge padding.",
+      "novelty": {
+        "existing_ids": [
+          "n_v31_hygiene_hair_sampon"
+        ],
+        "kind": "new_relation",
+        "original_record": "v1-5-object-2 r3"
+      },
+      "origin_track": "discovery",
+      "play_sketches": {
+        "hypothesis": "Concrete filling use with an existing same-category endpoint; modest gameplay salience.",
+        "verified_runtime": false
+      },
+      "player_benefit": "Concrete filling use with an existing same-category endpoint; modest gameplay salience.",
+      "recognition": "Original r3 word recognition remains bounded; spontaneous transfer associations/recall/enjoyment are unmeasured.",
+      "revision": 1,
+      "risks": [
+        "Evidence is a specific shampoo/body-wash tutorial, not proof that this is a customary use for every shampoo.",
+        "The link supports filling, not shampoo manufacture, effectiveness or universal funnel compatibility.",
+        "No numeric strength, ordinary gameplay benefit or quality-floor acceptance established."
+      ],
+      "sense": "Exact household liquid-transfer association hypothesis",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "No open reuse license verified. Factual paraphrase only; recipe not reproduced.",
+          "note": "Explicit instruction to use a funnel to fill containers with the prepared shampoo/body wash.",
+          "url": "https://www.chemistrystore.com/organic-coconut-and-olive-oil-shampoo-bodywash-tutorial.pdf"
+        }
+      ],
+      "state": "researched"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "supported",
+          "object": "n_v31_cleaning_supply_detergent",
+          "predicate": "poate ajuta la reumplerea unui recipient cu detergent lichid de vase",
+          "source_ids": [
+            "S6"
+          ],
+          "subject": "v1-5-object-2 r3"
+        }
+      ],
+      "decision": "Qualified source research only; do not mark ready, select or install.",
+      "dependencies": [
+        "Exact original r3 sense",
+        "Current endpoint snapshot",
+        "Independent complete factual and quality/source-effects reviews",
+        "Qualified native admission and all applicable gates"
+      ],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "history": [
+        {
+          "author": "/root; source worker /root/palnie_sources",
+          "date": "2026-10-06",
+          "evidence": "palnie-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea -> researched"
+        }
+      ],
+      "id": "v15-i01-palnie-assoc-4",
+      "identity_checks": {
+        "endpoint": {
+          "aliases": [
+            "detergentul",
+            "detergenți",
+            "detergenții",
+            "detergentului",
+            "detergentului de curățenie",
+            "detergenților de curățenie"
+          ],
+          "category": "viata_de_roman",
+          "degree": 5,
+          "description": "Produs de curățare folosit pentru vase, haine sau suprafețe.",
+          "difficulty_tier": "easy",
+          "id": "n_v31_cleaning_supply_detergent",
+          "label_ro": "Detergent",
+          "node_type": "concept",
+          "salience": 0.93
+        },
+        "sense_qualification": "Explicit liquid/filling subtype and optional wording retained"
+      },
+      "label_ro": "Pâlnie → Detergent",
+      "next_action": "Independent reviewers must settle exact source support and whether the pair provides distinct player value; reject weak-edge padding.",
+      "novelty": {
+        "existing_ids": [
+          "n_v31_cleaning_supply_detergent"
+        ],
+        "kind": "new_relation",
+        "original_record": "v1-5-object-2 r3"
+      },
+      "origin_track": "discovery",
+      "play_sketches": {
+        "hypothesis": "Explicit ordinary-funnel refill use with an existing same-category endpoint; modest gameplay salience.",
+        "verified_runtime": false
+      },
+      "player_benefit": "Explicit ordinary-funnel refill use with an existing same-category endpoint; modest gameplay salience.",
+      "recognition": "Original r3 word recognition remains bounded; spontaneous transfer associations/recall/enjoyment are unmeasured.",
+      "revision": 1,
+      "risks": [
+        "The broader KG endpoint includes detergents beyond the liquid dishwashing subtype; retain the liquid qualifier.",
+        "S4 concerns specialized disposable refill packaging and cannot establish this ordinary-utensil claim.",
+        "S5 could not be read; its search excerpt was not treated as verified evidence.",
+        "No numeric strength, ordinary gameplay benefit or quality-floor acceptance established."
+      ],
+      "sense": "Exact household liquid-transfer association hypothesis",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "© 2026 Velleman Group nv, all rights reserved; no open reuse license verified. Factual paraphrase only.",
+          "note": "Ordinary nested funnels described for accurate refilling of liquids; explicitly names washing-up liquid and home/kitchen applications.",
+          "url": "https://www.velleman.eu/products/view/set-of-4-funnels-hfus1/?id=372284&lang=en"
+        }
+      ],
+      "state": "researched"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "source_scout_only",
+          "object": "n_v29_kitchen_table_cutit",
+          "predicate": "se poate felia cu",
+          "source_ids": [
+            "knife-ikea"
+          ],
+          "subject": "n_v4gas_paine"
+        }
+      ],
+      "decision": "Finite contingency idea only; not selected as an automatic substitute shipment.",
+      "dependencies": [
+        "Exact existing KG and all downstream gates",
+        "Fresh exact independent review before an actual replan selection"
+      ],
+      "games": [
+        "Lanțul Cuvintelor",
+        "Cald sau Rece"
+      ],
+      "history": [
+        {
+          "author": "/root",
+          "date": "2026-10-06",
+          "evidence": "replan-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea"
+        }
+      ],
+      "id": "v15-i01-existing-bread-knife",
+      "identity_checks": {
+        "destination": {
+          "aliases": [
+            "cuțitul",
+            "cuțite",
+            "cuțitele",
+            "cuțitului"
+          ],
+          "category": "gastronomie",
+          "degree": 4,
+          "description": "Unealtă cu lamă și mâner, folosită pentru a tăia alimente sau alte lucruri.",
+          "difficulty_tier": "easy",
+          "id": "n_v29_kitchen_table_cutit",
+          "label_ro": "Cuțit",
+          "node_type": "concept",
+          "salience": 0.92
+        },
+        "existing_reverse_edge": "de8204",
+        "missing_proposed_direct_arc": true,
+        "source": {
+          "aliases": [
+            "pâinea",
+            "pâini",
+            "pâinile",
+            "pită",
+            "pite",
+            "pitele",
+            "pitei",
+            "pitelor",
+            "pâinii",
+            "pâinilor"
+          ],
+          "category": "gastronomie",
+          "degree": 21,
+          "description": "Aliment de bază făcut din aluat copt, consumat la masă.",
+          "difficulty_tier": "easy",
+          "id": "n_v4gas_paine",
+          "label_ro": "Pâine",
+          "node_type": "concept",
+          "salience": 0.9273
+        }
+      },
+      "label_ro": "Pâine → Cuțit",
+      "next_action": "Use as bounded V1.5 replan only if current new-object scope fails; freeze a new exact proposal and meaningful normal-play outcome.",
+      "novelty": {
+        "existing_ids": [
+          "n_v4gas_paine",
+          "n_v29_kitchen_table_cutit"
+        ],
+        "kind": "new_relation"
+      },
+      "origin_track": "refinement",
+      "play_sketches": {
+        "hypothesis": "The familiar existing forward knife-to-bread edge is playable only in that direction.",
+        "verified_runtime": false
+      },
+      "player_benefit": "A truthful optional bread-to-tool hop, if normal selection and all affected profiles justify it.",
+      "recognition": "Existing canonical endpoints; new association enjoyment and selection not established.",
+      "revision": 1,
+      "risks": [
+        "No new recognition/forms/rounds; meaningful benefit not established.",
+        "Reverse arcs change directed distances, cycles, mining, warmth and history snapshots."
+      ],
+      "sense": "Existing canonical functional relation counterpart",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "No open reuse license verified; factual paraphrase only.",
+          "note": "Some knives are designed for cutting bread; supports a qualified bread-can-be-sliced-with-knife relation, not every knife/bread combination.",
+          "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/"
+        }
+      ],
+      "state": "idea"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "source_scout_only",
+          "object": "n_v4gas_apa",
+          "predicate": "controlează curgerea",
+          "source_ids": [
+            "tap-ikea"
+          ],
+          "subject": "n_v33_bathroom_fixture_robinet"
+        }
+      ],
+      "decision": "Finite contingency idea only; not selected as an automatic substitute shipment.",
+      "dependencies": [
+        "Exact existing KG and all downstream gates",
+        "Fresh exact independent review before an actual replan selection"
+      ],
+      "games": [
+        "Lanțul Cuvintelor",
+        "Cald sau Rece"
+      ],
+      "history": [
+        {
+          "author": "/root",
+          "date": "2026-10-06",
+          "evidence": "replan-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea"
+        }
+      ],
+      "id": "v15-i01-existing-tap-water",
+      "identity_checks": {
+        "destination": {
+          "aliases": [
+            "ape",
+            "apele",
+            "apei",
+            "apelor"
+          ],
+          "category": "gastronomie",
+          "degree": 30,
+          "description": "Lichid de băut și ingredient de bază în gătit.",
+          "difficulty_tier": "easy",
+          "id": "n_v4gas_apa",
+          "label_ro": "Apă",
+          "node_type": "concept",
+          "salience": 0.968
+        },
+        "existing_reverse_edge": "de8418",
+        "missing_proposed_direct_arc": true,
+        "source": {
+          "aliases": [
+            "robinetul",
+            "robinete",
+            "robinetele",
+            "robinetului",
+            "robinetului de baie",
+            "robinetelor de baie"
+          ],
+          "category": "viata_de_roman",
+          "degree": 5,
+          "description": "Dispozitiv care deschide, oprește și reglează curgerea apei.",
+          "difficulty_tier": "easy",
+          "id": "n_v33_bathroom_fixture_robinet",
+          "label_ro": "Robinet",
+          "node_type": "concept",
+          "salience": 0.94
+        }
+      },
+      "label_ro": "Robinet → Apă",
+      "next_action": "Use as bounded V1.5 replan only if current new-object scope fails; freeze a new exact proposal and meaningful normal-play outcome.",
+      "novelty": {
+        "existing_ids": [
+          "n_v33_bathroom_fixture_robinet",
+          "n_v4gas_apa"
+        ],
+        "kind": "new_relation"
+      },
+      "origin_track": "refinement",
+      "play_sketches": {
+        "hypothesis": "The current water-to-tap flow edge has no direct tap-to-water functional counterpart.",
+        "verified_runtime": false
+      },
+      "player_benefit": "A truthful optional tool-to-liquid hop, subject to current graph feedback/fallback/history effects.",
+      "recognition": "Existing canonical endpoints; new association enjoyment and selection not established.",
+      "revision": 1,
+      "risks": [
+        "No temperature, potability, prescription or new target claim.",
+        "Reverse arcs change directed distances, cycles, mining, warmth and history snapshots."
+      ],
+      "sense": "Existing canonical functional relation counterpart",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "© Inter IKEA Systems B.V.2014; factual paraphrase only.",
+          "note": "Lever manipulation controls domestic water release.",
+          "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf"
+        }
+      ],
+      "state": "idea"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Research ledger only; original V1.5 pool and snapshots remain exact. No selection, import or runtime approval.",
+  "theme": "V1.5 i01: specific small-object associations and finite functional-direction contingency"
+}

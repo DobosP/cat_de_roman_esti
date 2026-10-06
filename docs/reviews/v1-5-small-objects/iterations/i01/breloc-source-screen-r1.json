@@ -1,0 +1,113 @@
+{
+  "additional_admissible_neighbors_found": 0,
+  "additional_associations_investigated": 4,
+  "associations": [
+    {
+      "admissible": false,
+      "counterexample": "The same merchandise collection lists towels and clothing; its branding alone cannot justify vehicle edges.",
+      "direction": "Breloc -> Mașină",
+      "endpoint_category": "societate",
+      "endpoint_id": "n_v24_transport_personal_masina",
+      "endpoint_label": "Mașină",
+      "evidence_state": "inference",
+      "player_benefit": "Possible car-key vocabulary route, currently unearned.",
+      "predicate_hypothesis": "accessory for carrying a vehicle's keys",
+      "reason": "Brand merchandise listing does not establish this functional predicate. Would add a context shortcut through keys.",
+      "source_ids": [
+        "vw"
+      ]
+    },
+    {
+      "admissible": false,
+      "counterexample": "A key accessory does not itself operate the door; decorative accessories can be used without door keys.",
+      "direction": "Breloc -> Ușă",
+      "endpoint_category": "viata_de_roman",
+      "endpoint_id": "n_v4via_usa",
+      "endpoint_label": "ușă",
+      "evidence_state": "inference",
+      "player_benefit": "No distinct benefit beyond the existing key anchor.",
+      "predicate_hypothesis": "helps carry the key used to open a door",
+      "reason": "Door function belongs to Cheie. This bypasses the supported key attachment and supplies no distinct direct association.",
+      "source_ids": [
+        "lego",
+        "action"
+      ]
+    },
+    {
+      "admissible": false,
+      "counterexample": "The endpoint describes a key worn around the neck; a breloc is not necessary to that practice.",
+      "direction": "Breloc -> Cheia de la gât",
+      "endpoint_category": "viata_de_roman",
+      "endpoint_id": "n_vdr_cheia_de_la_gat",
+      "endpoint_label": "Cheia de la gât",
+      "evidence_state": "unresolved",
+      "player_benefit": "Potential cross-generational route, currently unearned.",
+      "predicate_hypothesis": "used with the childhood key carried around the neck",
+      "reason": "No original evidence found tying the frozen accessory specifically to this cultural practice. Shared key wording is insufficient.",
+      "source_ids": []
+    },
+    {
+      "admissible": false,
+      "counterexample": "Emergency whistle function differs from referee signalling; ordinary key accessories need not contain either.",
+      "direction": "Breloc -> Fluier",
+      "endpoint_category": "sport",
+      "endpoint_id": "n_v4spo_fluier",
+      "endpoint_label": "fluier",
+      "endpoint_mapping_state": "unresolved",
+      "evidence_state": "supported",
+      "player_benefit": "No honest route to the existing sport endpoint established.",
+      "predicate_hypothesis": "some models incorporate a whistle",
+      "reason": "Specific multifunction example exists, but the endpoint explicitly means a referee's signalling instrument. Outdoor emergency evidence does not establish that sense.",
+      "source_ids": [
+        "trespass"
+      ]
+    }
+  ],
+  "baseline": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "builds_tests_simulations_installations": 0,
+  "checked_on": "2026-10-06",
+  "conclusion": "No adequate additional specific endpoints established within this finite screen. Retain the association hold; do not broaden endpoints or pad links.",
+  "filesystem_writes": 0,
+  "gate_result": "4/2 floor remains unmet",
+  "primary_pages_opened": 4,
+  "retained_supported_counts": {
+    "same_category_neighbors": 1,
+    "unique_incident_neighbors": 1
+  },
+  "schema": "v1-5-breloc-association-i01-source-screen",
+  "sense": "Exact frozen physical key accessory",
+  "sources": [
+    {
+      "access": "Direct text read; Specifications, lines 497-504",
+      "id": "lego",
+      "license": "Copyright 2026 LEGO Group, all rights reserved; factual paraphrase only",
+      "publisher": "LEGO Group",
+      "summary": "Key attachment supported; no door, car or childhood neck-key relationship established.",
+      "url": "https://www.lego.com/ro-ro/product/lego-gold-minifigure-key-chain-850807"
+    },
+    {
+      "access": "Direct text read; Description, lines 44-49",
+      "id": "action",
+      "license": "No open reuse licence verified; factual paraphrase only",
+      "publisher": "Action Retail Romania",
+      "summary": "Physical key accessory supported; strap-assisted handling remains part of that existing relationship.",
+      "url": "https://www.action.com/ro-ro/p/3220202/breloc/"
+    },
+    {
+      "access": "Direct text read; collection lines 21-75",
+      "id": "vw",
+      "license": "Copyright Porsche Romania 2026; no open reuse licence verified",
+      "publisher": "Volkswagen Romania / Porsche Romania",
+      "summary": "Breloc appears in branded merchandise alongside clothing and towels; no functional vehicle relationship stated.",
+      "url": "https://www.volkswagen.ro/service-piese-si-accesorii/accesorii/Colectia-Volkswagen"
+    },
+    {
+      "access": "Direct text read; Description/Features, lines 479-490",
+      "id": "trespass",
+      "license": "Copyright 2026 Jacobs & Turner Ltd; no open reuse licence verified",
+      "publisher": "Trespass / Jacobs & Turner Ltd",
+      "summary": "Manufacturer documents outdoor emergency whistles with keyring attachments; referee use is not established.",
+      "url": "https://www.trespass.com/keyring-set-blow-x-whistle"
+    }
+  ]
+}

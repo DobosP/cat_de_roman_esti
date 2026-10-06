@@ -1,0 +1,425 @@
+{
+  "schema": "v1-5-i01-independent-factual-reconciliation-v1",
+  "checked_on": "2026-10-06",
+  "reviewer": "/root/blueprint_factual",
+  "independent_of_packet_and_source_authorship": true,
+  "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "scope": "Bounded exact metadata reconciliation of i01 r2 against immutable r1 factual review and archived r1 ledger. Light file reads and hash comparisons only; no new source review or native approval.",
+  "packet": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i01/packet-r2.json",
+    "sha256": "75a8dc32cc345644520add93bab979cf993de4686cf28009fbcc2d6944a2f7a5"
+  },
+  "ledger": {
+    "path": "docs/content-pool/v1-5-association-i01/pool.json",
+    "sha256": "9d1b6e34bb770f15f9a2cae3525a1def0fcc967042284e11d86451110a823fd5"
+  },
+  "immutable_r1_ledger": {
+    "path": "docs/content-pool/v1-5-association-i01/pool-r1.json",
+    "sha256": "a8cbd2b88c57e08bb7ccf5fec3988c216a6587c31914bd6fc80ba21f57525c29"
+  },
+  "immutable_r1_packet": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i01/packet-r1.json",
+    "sha256": "15047c51162ed603ba9197a8e2a0802c5d7e624322f6ba215a690147677c4c1e"
+  },
+  "immutable_r1_factual_receipt": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i01/factual-review-r1.json",
+    "sha256": "7e4f12cecbc825e3715c0cdc8026673979ad71e01d33cfb26995ba9ab00b58ff"
+  },
+  "immutable_r1_quality_receipt": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i01/quality-review-r1.json",
+    "sha256": "f77850727c852880c0574a0e9c679c39f7bdf846a17e69ead1dc2d77fae38f5e"
+  },
+  "case_requirements": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i01/case-requirements-r2.json",
+    "sha256": "bae23f119a9dcb6a5ffc89fac40962076f9c71ac3515e6b844d4b25692882d62"
+  },
+  "verdict": "METADATA_RECONCILIATION_ACCEPTED_ADOPTION_HELD",
+  "verdict_detail": "All ten dispositions and unchanged source/identity bindings reconcile. The whistle endpoint clarification and shampoo lifecycle hold accurately record r1 review feedback. Acceptance applies only to this exact r2 research metadata; no proposal, source module, graph, pool selection, installation or native approval transfers.",
+  "complete_row_coverage": [
+    {
+      "id": "v15-i01-breloc-assoc-1",
+      "label": "Breloc → Mașină",
+      "endpoint": "n_v24_transport_personal_masina",
+      "state_r1": "held",
+      "state_r2": "held",
+      "revision_r1": 1,
+      "revision_r2": 1,
+      "claim_source_ids": [
+        "vw"
+      ],
+      "claims_unchanged": true,
+      "changed_fields": [],
+      "factual_disposition": "Inference retained. Vehicle-branded merchandise does not establish the original ordinary keyring sense as a direct functional association with the canonical car endpoint.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-breloc-assoc-2",
+      "label": "Breloc → ușă",
+      "endpoint": "n_v4via_usa",
+      "state_r1": "rejected",
+      "state_r2": "rejected",
+      "revision_r1": 1,
+      "revision_r2": 1,
+      "claim_source_ids": [
+        "lego",
+        "action"
+      ],
+      "claims_unchanged": true,
+      "changed_fields": [],
+      "factual_disposition": "Rejected inference retained. Carrying a key used to open a door is key-mediated and does not establish a direct keyring-to-door function.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-breloc-assoc-3",
+      "label": "Breloc → Cheia de la gât",
+      "endpoint": "n_vdr_cheia_de_la_gat",
+      "state_r1": "held",
+      "state_r2": "held",
+      "revision_r1": 1,
+      "revision_r2": 1,
+      "claim_source_ids": [],
+      "claims_unchanged": true,
+      "changed_fields": [],
+      "factual_disposition": "Unresolved and held. No original source establishes the proposed cultural neck-key association.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-breloc-assoc-4",
+      "label": "Breloc → fluier",
+      "endpoint": "n_v4spo_fluier",
+      "state_r1": "rejected",
+      "state_r2": "rejected",
+      "revision_r1": 1,
+      "revision_r2": 2,
+      "claim_source_ids": [
+        "trespass"
+      ],
+      "claims_unchanged": false,
+      "changed_fields": [
+        "claims",
+        "history",
+        "revision"
+      ],
+      "factual_disposition": "Correct clarification of r1 review: the outdoor emergency-whistle/keyring product example remains supported; mapping that product to the canonical referee-signalling whistle sense remains unsupported. Claim subject, predicate, object, direction and source IDs are unchanged.",
+      "claim_annotation_delta": {
+        "evidence_state": {
+          "from": "supported",
+          "to": "unresolved"
+        },
+        "product_example_state": {
+          "added": "supported"
+        },
+        "canonical_endpoint_mapping": {
+          "added": "unsupported referee sense"
+        }
+      },
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-palnie-assoc-1",
+      "label": "Pâlnie → lichid",
+      "endpoint": "n_v4sti_lichid",
+      "state_r1": "researched",
+      "state_r2": "researched",
+      "revision_r1": 1,
+      "revision_r2": 1,
+      "claim_source_ids": [
+        "S1",
+        "S6"
+      ],
+      "claims_unchanged": true,
+      "changed_fields": [],
+      "factual_disposition": "Qualified liquid-pouring use retained. The scientific liquid-state endpoint is related by the exact use predicate, not by an assertion that the funnel itself is liquid or supports every dry material.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-palnie-assoc-2",
+      "label": "Pâlnie → Ulei",
+      "endpoint": "n_v24_food_pantry_ulei",
+      "state_r1": "researched",
+      "state_r2": "researched",
+      "revision_r1": 1,
+      "revision_r2": 1,
+      "claim_source_ids": [
+        "S2"
+      ],
+      "claims_unchanged": true,
+      "changed_fields": [],
+      "factual_disposition": "Qualified cooking-oil transfer into a smaller recipient retained. No motor-oil sense, universal bottle fit, numeric attribute, or broader function is inferred.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-palnie-assoc-3",
+      "label": "Pâlnie → Șampon",
+      "endpoint": "n_v31_hygiene_hair_sampon",
+      "state_r1": "researched",
+      "state_r2": "held",
+      "revision_r1": 1,
+      "revision_r2": 2,
+      "claim_source_ids": [
+        "S3"
+      ],
+      "claims_unchanged": true,
+      "changed_fields": [
+        "decision",
+        "history",
+        "next_action",
+        "revision",
+        "risks",
+        "state"
+      ],
+      "factual_disposition": "Specific tutorial evidence for filling bottles with liquid shampoo remains supported and unchanged. Broad household familiarity or distinct player value is not established. The quality lifecycle hold is recorded, and this endpoint cannot supply the missing admissible same-category neighbor.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-palnie-assoc-4",
+      "label": "Pâlnie → Detergent",
+      "endpoint": "n_v31_cleaning_supply_detergent",
+      "state_r1": "researched",
+      "state_r2": "researched",
+      "revision_r1": 1,
+      "revision_r2": 1,
+      "claim_source_ids": [
+        "S6"
+      ],
+      "claims_unchanged": true,
+      "changed_fields": [],
+      "factual_disposition": "Ordinary Velleman funnel use for refilling liquid dishwashing detergent remains qualified support. The failed Delphis page remains unverified and excluded from positive evidence; specialized Greiner packaging is not substituted for the ordinary-use evidence.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-existing-bread-knife",
+      "label": "Pâine → Cuțit",
+      "endpoint": "n_v29_kitchen_table_cutit",
+      "state_r1": "idea",
+      "state_r2": "idea",
+      "revision_r1": 1,
+      "revision_r2": 1,
+      "claim_source_ids": [
+        "knife-ikea"
+      ],
+      "claims_unchanged": true,
+      "changed_fields": [],
+      "factual_disposition": "Source-scout-only contingency retained with predicate 'se poate felia cu'. Existing nondistractor directed edge de8204 is Cuțit → Pâine, bidirectional 0; the opposite direction remains an unselected idea, not an approved insertion.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    },
+    {
+      "id": "v15-i01-existing-tap-water",
+      "label": "Robinet → Apă",
+      "endpoint": "n_v4gas_apa",
+      "state_r1": "idea",
+      "state_r2": "idea",
+      "revision_r1": 1,
+      "revision_r2": 1,
+      "claim_source_ids": [
+        "tap-ikea"
+      ],
+      "claims_unchanged": true,
+      "changed_fields": [],
+      "factual_disposition": "Source-scout-only contingency retained with predicate 'controlează curgerea'. Existing nondistractor directed edge de8418 is Apă → Robinet, bidirectional 0; the opposite direction remains an unselected idea. No temperature, potability or handedness claim is added.",
+      "source_records_unchanged": true,
+      "identity_checks_unchanged": true,
+      "direction": "outgoing_only",
+      "r1_factual_review_qualification_retained": true,
+      "adoption_approved": false
+    }
+  ],
+  "actionable_factual_corrections": [],
+  "coverage": {
+    "required_row_count": 10,
+    "reviewed_row_count": 10,
+    "missing_row_ids": [],
+    "unexpected_row_ids": [],
+    "packet_input_binding_count": 58,
+    "packet_input_bindings_verified": 58,
+    "packet_input_binding_mismatches": [],
+    "nested_existing_selector_input_count": 5,
+    "nested_existing_selector_hashes_verified": 5,
+    "nested_existing_selector_hash_mismatches": [],
+    "rows_completely_unchanged": 8,
+    "rows_with_exact_unchanged_claim_arrays": 9,
+    "rows_with_exact_unchanged_source_records": 10,
+    "rows_with_exact_unchanged_identity_checks": 10,
+    "new_or_removed_source_claims": 0,
+    "new_or_removed_row_ids": 0,
+    "source_subject_predicate_object_direction_and_source_ids_preserved_for_all_ten": true,
+    "coverage_gaps": [],
+    "qualification": "Existing test selector files were hash-checked as metadata, not executed. Historical r1 factual source observations are retained under unchanged bindings, not re-opened or represented as newly verified."
+  },
+  "historical_resolution": {
+    "original_r1_ledger_path": "docs/content-pool/v1-5-association-i01/pool.json",
+    "resolved_exact_archive_path": "docs/content-pool/v1-5-association-i01/pool-r1.json",
+    "resolved_sha256": "a8cbd2b88c57e08bb7ccf5fec3988c216a6587c31914bd6fc80ba21f57525c29",
+    "accepted": true,
+    "qualification": "The r1 packet and receipts remain immutable historical snapshots. Their former mutable ledger path resolves to archived exact bytes; current r2 bytes do not replace the r1 evidence or expand its approval."
+  },
+  "preservation_checks": {
+    "original_small_objects_pool": {
+      "path": "docs/content-pool/v1-5-small-objects/pool.json",
+      "sha256": "72eb5ca30d91ab1e2e47119e520153b564c39953e264623d17f08879eb4e0cad"
+    },
+    "source4_sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "authority_sha256": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "bundle_sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "shared_kg_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "all_58_bound_inputs_match_exact_bytes": true,
+    "original_small_objects_pool_counts": {
+      "researched": 2,
+      "held": 6,
+      "selected": 0,
+      "installed": 0
+    },
+    "current_i01_pool_counts": {
+      "held": 3,
+      "researched": 3,
+      "rejected": 2,
+      "idea": 2,
+      "selected": 0,
+      "installed": 0
+    },
+    "reviewer_input_or_pool_writes": 0,
+    "qualification": "Hash equality establishes preservation of the bound files. This review does not claim an executed baseline or working-tree cleanliness gate."
+  },
+  "guard_review": {
+    "kind": "Static source and metadata interpretation only; preflight NOT RUN",
+    "mandatory_new_node_floor": {
+      "distinct_nondistractor_incident_neighbors_at_least": 4,
+      "same_category_neighbors_at_least": 2
+    },
+    "incident_count_direction_qualification": "Direction is ignored only for this incident floor; actual graph traversal and gameplay remain directed. Reverse duplicates or morphology do not add distinct neighbors.",
+    "breloc": {
+      "incident": 1,
+      "same_category": 1,
+      "additional_admissible_neighbors": 0,
+      "actual_proposal": "blocked"
+    },
+    "palnie": {
+      "retained_water_endpoint": "n_v4gas_apa",
+      "retained_water_evidence_state": "inference",
+      "quality_supported_research_counterfactual": {
+        "incident": 4,
+        "same_category": 1,
+        "shampoo_counted": false
+      },
+      "all_four_additional_rows_counterfactual": {
+        "incident": 5,
+        "same_category": 2,
+        "condition": "All four would have to be independently accepted; this is hypothetical and does not override the shampoo quality hold."
+      },
+      "actual_proposal": "blocked",
+      "incoming_edges": 0,
+      "numeric_attributes": null,
+      "hidden_target_approved": false,
+      "no_authored_round_or_recipe_approval": true,
+      "potential_new_generated_round_or_seed_exposure": true
+    },
+    "source_support_certifies_graph_floor": false,
+    "source_support_certifies_gameplay_quality": false,
+    "old_node_ideas_selected": false,
+    "floor_relaxation_approved": false
+  },
+  "effect_review": {
+    "miner_eligibility": {
+      "lant_service": {
+        "path": "go-backend/internal/lant/service.go",
+        "sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90"
+      },
+      "lant_observation": "Static source admits degree >= 2 candidates within its pool/category rules; a degree >= 1 fallback exists when the category candidate pool is empty.",
+      "alchimie_projection": {
+        "path": "go-backend/internal/alchimie/projection.go",
+        "sha256": "c45a46c4836b58b572f4fec15dbc72a355ec3b8a35a0bee6a37672104a8dab86"
+      },
+      "alchimie_observation": "Static source filters candidates to at least two NeighborIDs plus scope, after salience selection; the all-node fallback retains the neighbor and scope filter.",
+      "conclusion": "Proposed extra outgoing neighbors could make Pâlnie eligible for generated seed/round exposure under applicable selection restrictions. Actual selection, resulting rounds and gameplay effects remain uncomputed.",
+      "executed": false
+    },
+    "existing_node_reverse_path_risk": "Adding Pâine → Cuțit or Robinet → Apă beside existing opposite directed arcs could create directed cycles and shorten old-node distances. A new-leaf path argument cannot discharge those existing-node risks.",
+    "queued_replan_ideas": 2,
+    "auto_substitute_selection": false,
+    "requirements_refinement_accepted_as_plan_only": true
+  },
+  "approval_flags": {
+    "source_claim_annotation_reconciliation": true,
+    "native_execution": false,
+    "raw_graph_adoption": false,
+    "runnable_proposal": false,
+    "source_module": false,
+    "source5": false,
+    "pool_selection": false,
+    "installation": false,
+    "quality_adoption": false,
+    "approval_transfer": false
+  },
+  "unresolved_adoption_gaps": [
+    "Breloc still lacks three distinct admissible incident neighbors and a second same-category neighbor.",
+    "Pâlnie excluding quality-held shampoo still lacks a second admissible same-category neighbor; the all-four 5/2 count remains hypothetical.",
+    "Specific shampoo tutorial support does not establish household familiarity or distinct normal-play value; its quality lifecycle hold remains active.",
+    "The two existing-node associations remain queued source-scout ideas requiring independent selection, endpoint/direction quality review and reverse-path effects.",
+    "No exact runnable graph payload, source module, native manifest/slot or installation artifact has been reviewed.",
+    "Miner candidate/seed exposure, old-node directed reachability and distances, gameplay impact and historical saved-prefix closure require a later exact-artifact native review under coordinator-held gates."
+  ],
+  "source_access": {
+    "new_primary_opens": 0,
+    "new_searches": 0,
+    "browser_ui_actions": 0,
+    "r1_source_observations_reused_only_under_unchanged_bindings": true
+  },
+  "execution": {
+    "status": "NOT RUN",
+    "tests": 0,
+    "native_commands": 0,
+    "builds": 0,
+    "simulations": 0,
+    "model_campaigns": 0,
+    "source_campaigns": 0,
+    "child_workers": 0,
+    "report_write_only": true
+  },
+  "not_run": [
+    "Source opens, source hunt, browser UI and new source verification",
+    "Preflight, graph traversal, miner simulation or generated selection",
+    "Go, build, install, frontend, WSL, pytest or other tests",
+    "Raw/native graph or module/Source5 creation",
+    "Pool selection, installation, publication or merge",
+    "Native gameplay, historical saved-prefix, distance or closure campaign"
+  ],
+  "native_status": "HELD",
+  "quiet_window": "KEEP",
+  "next_action": "Return this exact reconciliation receipt to the coordinator. Keep native gates held and continue only under later explicit authorization tied to exact reviewed artifacts."
+}

@@ -1,0 +1,275 @@
+{
+  "schema": "v1-5-i01-independent-factual-source-review-v1",
+  "checked_on": "2026-10-06",
+  "reviewer": "/root/blueprint_factual",
+  "independent_of_packet_and_source_authorship": true,
+  "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "packet": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i01/packet-r1.json",
+    "sha256": "15047c51162ed603ba9197a8e2a0802c5d7e624322f6ba215a690147677c4c1e"
+  },
+  "ledger": {
+    "path": "docs/content-pool/v1-5-association-i01/pool.json",
+    "sha256": "a8cbd2b88c57e08bb7ccf5fec3988c216a6587c31914bd6fc80ba21f57525c29"
+  },
+  "scope": "Complete independent factual/source review of all ten frozen research rows. Source truth and endpoint qualifications only; no quality, selection, executable proposal, native raw review or installation approval.",
+  "verdict": "accept_qualified_source_research_only",
+  "complete_row_coverage": "10/10 exact packet record IDs; no duplicate or unknown rows",
+  "actionable_factual_corrections": [],
+  "coverage": [
+    {
+      "id": "v15-i01-breloc-assoc-1",
+      "label": "Breloc -> Masina",
+      "verdict": "retain_held",
+      "source_ids": [
+        "vw"
+      ],
+      "basis": "Saved original Volkswagen merchandise screen; not freshly reopened in this six-source review.",
+      "reason": "Brand merchandise does not establish a specific functional vehicle relationship. The inferred car-key shortcut remains unsupported for adoption.",
+      "endpoint_mapping": "Current personal-car endpoint snapshot matches; a correct endpoint does not validate the inferred association."
+    },
+    {
+      "id": "v15-i01-breloc-assoc-2",
+      "label": "Breloc -> Usa",
+      "verdict": "retain_rejected",
+      "source_ids": [
+        "lego",
+        "action"
+      ],
+      "basis": "Saved original key-attachment sources and accepted r3 receipts; no fresh reopen here.",
+      "reason": "Key attachment does not directly establish door operation or an independently useful door relation. The hypothetical key-mediated statement remains inference, not a supported direct association."
+    },
+    {
+      "id": "v15-i01-breloc-assoc-3",
+      "label": "Breloc -> Cheia de la gat",
+      "verdict": "retain_held",
+      "source_ids": [],
+      "basis": "Finite screen reports no supporting original evidence.",
+      "reason": "The childhood neck-key practice is not established for the frozen accessory. This is a bounded evidence gap, not proof that no such example could ever exist."
+    },
+    {
+      "id": "v15-i01-breloc-assoc-4",
+      "label": "Breloc -> fluier",
+      "verdict": "retain_rejected_endpoint_mismatch",
+      "source_ids": [
+        "trespass"
+      ],
+      "basis": "Fresh original manufacturer text, Description/Features lines479-490.",
+      "reason": "Emergency whistles with keyring attachments are documented. That product fact does not establish the current KG endpoint's referee signalling sense; the row's supported annotation can describe the product example only, not a supported canonical sport edge.",
+      "endpoint_mapping": "n_v4spo_fluier explicitly describes an instrument used by a referee. Retain unresolved mapping and rejection."
+    },
+    {
+      "id": "v15-i01-palnie-assoc-1",
+      "label": "Palnie -> lichid",
+      "verdict": "supported_function_with_endpoint_qualification",
+      "source_ids": [
+        "S1",
+        "S6"
+      ],
+      "basis": "Fresh ordinary Velleman funnel text; IKEA S1 remains saved original r3 evidence.",
+      "reason": "Liquid refilling supports the pouring function. The endpoint represents the liquid state generally, so the predicate must remain about pouring liquid materials rather than asserting identity, liquid-only exclusivity or a particular household substance.",
+      "qualification": "Dry-material uses are source context and remain outside the frozen household liquid-transfer hypothesis."
+    },
+    {
+      "id": "v15-i01-palnie-assoc-2",
+      "label": "Palnie -> Ulei",
+      "verdict": "supported_qualified_cooking_oil_use",
+      "source_ids": [
+        "S2"
+      ],
+      "basis": "Fresh original TurnRight Solutions product text, lines48-56.",
+      "reason": "The page expressly describes transferring cooking oil to smaller containers and limits bottle fit. The pantry/gastronomie endpoint is appropriate for cooking oil; motor oil and universal container compatibility are not established."
+    },
+    {
+      "id": "v15-i01-palnie-assoc-3",
+      "label": "Palnie -> Sampon",
+      "verdict": "supported_specific_tutorial_use_only",
+      "source_ids": [
+        "S3"
+      ],
+      "basis": "Fresh original seven-page Chemistry Store tutorial PDF, page7/step6.",
+      "reason": "The tutorial expressly uses a funnel to fill containers with prepared shampoo/body wash. This supports the optional liquid-shampoo filling caption. It does not establish customary Romanian household use, use with every shampoo, enjoyment or an intuitively salient gameplay association.",
+      "qualification": "Tutorial recipe, manufacture, efficacy and formulation instructions are not adopted."
+    },
+    {
+      "id": "v15-i01-palnie-assoc-4",
+      "label": "Palnie -> Detergent",
+      "verdict": "supported_qualified_ordinary_liquid_dish_detergent_refill",
+      "source_ids": [
+        "S6"
+      ],
+      "basis": "Fresh original Velleman Toolland HFUS1 product description, lines952-960.",
+      "reason": "An ordinary nested funnel set explicitly names washing-up liquid and home/kitchen uses. This supports the optional liquid dishwashing-detergent refill caption, not every detergent form or use.",
+      "qualification": "Greiner S4 is specialized packaging context, not support for an ordinary utensil. Delphis S5 remains failed access with null evidence and is not counted as verified support."
+    },
+    {
+      "id": "v15-i01-existing-bread-knife",
+      "label": "Paine -> Cutit",
+      "verdict": "qualified_source_scout_supported_retains_idea",
+      "source_ids": [
+        "knife-ikea"
+      ],
+      "basis": "Fresh original Romanian IKEA bread-knife product text, line60.",
+      "reason": "The product documents bread cutting. The optional bread-can-be-sliced-with-knife statement fits the broad knife endpoint without claiming every knife is suitable. Current de8204 is outgoing knife-to-bread only; the proposed direct opposite arc is absent.",
+      "qualification": "No round, selection, benefit, weight, enum or gameplay approval."
+    },
+    {
+      "id": "v15-i01-existing-tap-water",
+      "label": "Robinet -> Apa",
+      "verdict": "qualified_source_scout_supported_retains_idea",
+      "source_ids": [
+        "tap-ikea"
+      ],
+      "basis": "Fresh IKEA-hosted instruction PDF AA-2163215-1, Romanian section page0/lines238-247.",
+      "reason": "Handle movement controls domestic water release, supporting the narrow flow-control caption. Current de8418 is outgoing water-to-tap only; the proposed direct opposite arc is absent.",
+      "qualification": "The document's language sections differ on left/right operation; no handedness, temperature or potability claim is adopted. Hornbach technical/irrigation context remains a nonprimary scope counterexample."
+    }
+  ],
+  "source_access": {
+    "maximum_primary_opens": 6,
+    "primary_opens": 6,
+    "primary_pages_readable": 6,
+    "search_queries": 0,
+    "browser_ui": 0,
+    "fresh_sources": [
+      {
+        "id": "S2",
+        "url": "https://www.turnrightsolutions.com/products/wide-neck-funnels",
+        "locator": "Product function and compatibility, lines48-56",
+        "access": "Original-site web text",
+        "license": "No open reuse licence verified; factual paraphrase only."
+      },
+      {
+        "id": "S3",
+        "url": "https://www.chemistrystore.com/organic-coconut-and-olive-oil-shampoo-bodywash-tutorial.pdf",
+        "locator": "PDF page7, step6; extracted lines45-47",
+        "access": "Original seven-page PDF text",
+        "license": "No open reuse licence verified; no recipe reproduced."
+      },
+      {
+        "id": "S6",
+        "url": "https://www.velleman.eu/products/view/set-of-4-funnels-hfus1/?id=372284&lang=en",
+        "locator": "Product description, lines952-960",
+        "access": "Original product web text; same-page find used for locator",
+        "license": "Saved copyright qualification retained; no open reuse licence independently verified."
+      },
+      {
+        "id": "trespass",
+        "url": "https://www.trespass.com/keyring-set-blow-x-whistle",
+        "locator": "Description/Features, lines479-490",
+        "access": "Original manufacturer web text; same-page find used for locator",
+        "license": "Copyright2026 Jacobs & Turner Ltd. visible; no open reuse licence verified."
+      },
+      {
+        "id": "knife-ikea",
+        "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/",
+        "locator": "Product description, line60",
+        "access": "Original Romanian product web text; same-page find used for locator",
+        "license": "Copyright1999-2026 Inter IKEA Systems B.V. visible; no open reuse licence verified."
+      },
+      {
+        "id": "tap-ikea",
+        "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf",
+        "locator": "Romanian section, PDF page0, lines238-247",
+        "access": "Original IKEA-hosted two-page PDF text; same-page find used for locator",
+        "license": "Copyright2014 Inter IKEA Systems B.V. and document ID visible; no open reuse licence verified."
+      }
+    ],
+    "saved_only_sources": [
+      "vw",
+      "lego",
+      "action",
+      "S1",
+      "S4",
+      "S5",
+      "tap-hornbach-scope",
+      "earlier r3 recognition and morphology receipts"
+    ],
+    "limitations": [
+      "Primary access here is web-reader text, which may be cached; no live rendered UI or binary PDF hash check.",
+      "Volkswagen/LEGO/Action/IKEA funnel/Greiner/Hornbach saved source observations were not freshly reopened.",
+      "Delphis S5 was not reopened or verified. Its failed access remains an explicit gap.",
+      "No fresh recognition, recall, enjoyment or source-licence campaign was performed."
+    ]
+  },
+  "preservation_checks": {
+    "input_binding_hashes_checked": 52,
+    "input_binding_mismatches": [],
+    "endpoint_snapshots_checked": 12,
+    "endpoint_snapshot_mismatches": [],
+    "unique_source1_through_source4_archives_checked": 19,
+    "archive_hash_mismatches": [],
+    "nested_existing_selector_hashes_checked": 5,
+    "nested_selector_hash_mismatches": [],
+    "old_pool_and_r3_snapshots_unchanged": true,
+    "original_pool_states": {
+      "researched": 2,
+      "held": 6,
+      "selected": 0,
+      "installed": 0
+    },
+    "source4_sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "authority_sha256": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "bundle_sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "existing_reverse_edges": {
+      "de8204": "n_v29_kitchen_table_cutit -> n_v4gas_paine; bidirectional0; nondistractor",
+      "de8418": "n_v4gas_apa -> n_v33_bathroom_fixture_robinet; bidirectional0; nondistractor"
+    },
+    "proposed_opposite_direct_arcs_absent": true
+  },
+  "guard_review": {
+    "code": "scripts/apply_common_words_v24.py:_preflight",
+    "code_sha256": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "required_unique_nondistractor_incident": 4,
+    "required_same_category": 2,
+    "breloc_retained_incident": 1,
+    "breloc_retained_same_category": 1,
+    "breloc_additional_admissible_neighbors": 0,
+    "palnie_counterfactual_if_all_four_additions_accepted": {
+      "incident": 5,
+      "same_category": 2,
+      "incoming": 0
+    },
+    "conclusion": "The Palnie5/2 arithmetic is conditional on accepting all four new relations, including both same-category shampoo and detergent endpoints. Source facts do not certify their quality or authorize a graph payload. Breloc remains below4/2. No preflight was run.",
+    "inherited_water_claim": "Apa remains the accepted supported_inference liquid instance, not a new directly sourced pouring instruction.",
+    "target_approval": false
+  },
+  "unresolved_adoption_gaps": [
+    "Shampoo tutorial evidence does not establish customary household use or a familiar specific association.",
+    "Liquid-state and liquid-subtype endpoint qualifications must survive exact future captions and schema attributes.",
+    "Independent quality judgment may reject source-true links as weak floor padding; this factual review does not settle that question.",
+    "Canonical IDs, relation enums, numeric weights/salience, exact selection and executable proposal/module remain unapproved.",
+    "Exact seeds/case IDs/history vectors and acceptance criteria require a complete later execution manifest.",
+    "Native admission, ordinary selection/play, all six-game/terminal/history/source/export/authority effects remain untested.",
+    "Existing-node contingencies remain ideas; current forward links and factual reverse hypotheses do not establish benefit or authorize adoption."
+  ],
+  "approval_flags": {
+    "native_raw_review": false,
+    "selection": false,
+    "actual_proposal": false,
+    "installation": false,
+    "promotion": false,
+    "deployment": false,
+    "push": false,
+    "merge": false
+  },
+  "execution": {
+    "tests_run": 0,
+    "simulations_run": 0,
+    "builds_run": 0,
+    "native_commands_run": 0,
+    "workers_spawned": 0,
+    "authorized_report_write_only": true
+  },
+  "not_run": [
+    "Go/native help/source/operator/rail/export",
+    "Build/install/graph preflight/apply",
+    "Gameplay/terminal/current-and-historical HTTP checks",
+    "Race/vet/full tests/pytest",
+    "WSL/Docker/PostgreSQL",
+    "Frontend/browser",
+    "Model/GPU/image/release campaigns",
+    "Pool/module/candidate/proposal/Source5/runtime/authority writes"
+  ],
+  "next_action": "Settle the independent quality verdict on the exact same packet; preserve negative rows and source qualifications. Hold or replan weak associations before any separately admitted exact proposal."
+}

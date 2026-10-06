@@ -85,6 +85,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0170 | [V1.2 reviewed content growth](0170-v1-2-reviewed-content-growth.md) | accepted; locally landed17f7da1 |
 | 0171 | [V1.3 everyday graph growth](0171-v1-3-everyday-graph-growth.md) | accepted; gates/assembled review GREEN; locally landed082ba99 |
 | 0172 | [V1.4 clock inputs and directed time links](0172-v1-4-clock-input-and-directed-time-links.md) | graph accepted; native integration pending |
+| 0173 | [Resume a bounded local content version loop](0173-resume-bounded-content-version-loop.md) | accepted; source-only V1.5 iteration, native gates held |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

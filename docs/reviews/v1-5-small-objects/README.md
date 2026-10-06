@@ -70,3 +70,8 @@ The [Linux toolchain receipt](toolchain-baseline.json) remains historical qualif
 Next requires coordinator re-admission: retain adoption holds or authorize new honest association
 research and a newly frozen, independently reviewed exact scope before a qualified slot.
 No rail bypass, next wave, heartbeat resume, push, merge or deployment is authorized.
+
+Current renewed-loop preparation: [i01 bounded association screen](iterations/i01/README.md)
+records ten hypotheses and independent source/quality feedback under [ADR-0173](../../adr/0173-resume-bounded-content-version-loop.md).
+Original research/blueprint evidence above remains exact; current native execution is held.
+Owner renewal replaces the earlier loop-stop authorization; later versions still await a verified landing.

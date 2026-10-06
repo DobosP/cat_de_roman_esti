@@ -1,6 +1,6 @@
 # ADR-0137: Finish V91 and stop automatic iteration
 
-- Status: accepted
+- Status: superseded-by ADR-0173 for the renewed V1.5-and-later loop; historical V91 stop retained
 - Date: 2026-09-08
 
 ## Decision

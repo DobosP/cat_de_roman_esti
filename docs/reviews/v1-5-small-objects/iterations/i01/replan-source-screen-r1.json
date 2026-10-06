@@ -1,0 +1,70 @@
+{
+  "author": "/root",
+  "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "checked_on": "2026-10-06",
+  "ideas": [
+    {
+      "caption_hypothesis": "se poate felia cu",
+      "dst": "n_v29_kitchen_table_cutit",
+      "existing_reverse_edge": "de8204",
+      "id": "v15-i01-existing-bread-knife",
+      "limits": "No new recognition/forms/rounds; meaningful benefit not established.",
+      "player_benefit_hypothesis": "A truthful optional bread-to-tool hop, if normal selection and all affected profiles justify it.",
+      "source_ids": [
+        "knife-ikea"
+      ],
+      "src": "n_v4gas_paine",
+      "static_missing_direction": true,
+      "static_player_problem": "The familiar existing forward knife-to-bread edge is playable only in that direction."
+    },
+    {
+      "caption_hypothesis": "controlează curgerea",
+      "dst": "n_v4gas_apa",
+      "existing_reverse_edge": "de8418",
+      "id": "v15-i01-existing-tap-water",
+      "limits": "No temperature, potability, prescription or new target claim.",
+      "player_benefit_hypothesis": "A truthful optional tool-to-liquid hop, subject to current graph feedback/fallback/history effects.",
+      "source_ids": [
+        "tap-ikea"
+      ],
+      "src": "n_v33_bathroom_fixture_robinet",
+      "static_missing_direction": true,
+      "static_player_problem": "The current water-to-tap flow edge has no direct tap-to-water functional counterpart."
+    }
+  ],
+  "installation_approval": false,
+  "maximum_primary_pages": 4,
+  "native_raw_review": false,
+  "primary_pages_opened": 3,
+  "schema": "v1-5-existing-functional-direction-replan-scout-v1",
+  "scope": "Two contingent existing-node relations, source preparation only, not selected as a substitute shipment.",
+  "selection_approval": false,
+  "sources": [
+    {
+      "access": "Direct readable product text; line60 describes bread cutting; no recipe copied.",
+      "id": "knife-ikea",
+      "license": "No open reuse license verified; factual paraphrase only.",
+      "publisher": "IKEA of Sweden AB",
+      "supports": "Some knives are designed for cutting bread; supports a qualified bread-can-be-sliced-with-knife relation, not every knife/bread combination.",
+      "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/"
+    },
+    {
+      "access": "Direct PDF text, page0 Romanian section lines238–247, documentAA-2163215-1.",
+      "id": "tap-ikea",
+      "license": "© Inter IKEA Systems B.V.2014; factual paraphrase only.",
+      "limits": "Romanian/other-language left-right wording differs; no handedness, temperature or safety claim is proposed.",
+      "publisher": "Inter IKEA Systems B.V.",
+      "supports": "Lever manipulation controls domestic water release.",
+      "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf"
+    },
+    {
+      "access": "Direct PDF text, page1 opening/closing section.",
+      "id": "tap-hornbach-scope",
+      "license": "No open reuse license verified; factual paraphrase only.",
+      "limits": "Double-service plastic tap and potentially nonpotable technical/irrigation water; not used as primary support for the canonical household-drinking-water edge.",
+      "publisher": "Supplier instruction file hosted by Hornbach; original issuer not established",
+      "supports": "Opening/closing a water tap is described.",
+      "url": "https://media.hornbach.ro/hb/ownersmanual/as.137830455.pdf"
+    }
+  ]
+}

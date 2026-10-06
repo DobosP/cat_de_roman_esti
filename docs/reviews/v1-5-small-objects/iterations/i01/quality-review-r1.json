@@ -1,0 +1,406 @@
+{
+  "schema": "v1-5-i01-independent-quality-source-effects-review-v1",
+  "reviewer": "/root/quality_review",
+  "authorship": {
+    "packet_author": false,
+    "pool_author": false,
+    "source_screen_author": false
+  },
+  "checked_on": "2026-10-06",
+  "worktree": "C:/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__v1-5-association-i01",
+  "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "verdict": "RESEARCH_REVIEW_COMPLETE_ADOPTION_HELD",
+  "scope": "Exact frozen i01 packet; all ten records covered. Research dispositions only, no native/raw/selection/install or merge approval.",
+  "bindings": {
+    "packet": {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i01/packet-r1.json",
+      "sha256": "15047c51162ed603ba9197a8e2a0802c5d7e624322f6ba215a690147677c4c1e"
+    },
+    "pool": {
+      "path": "docs/content-pool/v1-5-association-i01/pool.json",
+      "sha256": "a8cbd2b88c57e08bb7ccf5fec3988c216a6587c31914bd6fc80ba21f57525c29"
+    },
+    "plan": "e64867aebe687e4ab2cf9d0896c91b560bce2e7d6cb8536010ae3d6f367e7e10",
+    "breloc_screen": "4c78b5fd8887d194c6e23ee4c12c8214551c45acf5c7711dcdfcaadbd9e3260d",
+    "palnie_screen": "852aa562950782c5eb806423c37154b9e49fb8edd316f310d0ddfad09fa920d9",
+    "replan_screen": "c7f4fa794610e8686c07edc642dc5d04a941b19253453c100f3d7a749ecb0ec2",
+    "case_requirements": "ad20b557d054cb85e20641fa28f9ecb2506481de0deaeee21aa9faa33dde2889",
+    "breloc_r3": "43feab29f93a19c2853da98ea0ec6e742f0ef25c539d423c3807f768b25a5b31",
+    "palnie_r3": "78eba8ead137edf5c10747c0959e713106c8457ef33e6829d5c2b22b3d00bf11",
+    "rubric": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "original_pool": "72eb5ca30d91ab1e2e47119e520153b564c39953e264623d17f08879eb4e0cad",
+    "kg": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "source4": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "bundled": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "authority": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047"
+  },
+  "verification": {
+    "packet_digest_match": true,
+    "declared_input_bindings_checked": 52,
+    "all_52_match": true,
+    "nested_case_source_bindings_checked": 5,
+    "all_5_match": true,
+    "record_count": 10,
+    "unique_record_ids": 10,
+    "endpoint_snapshot_checks": 12,
+    "all_snapshot_fields_match_current_kg": true,
+    "existing_edges_verified": [
+      {
+        "id": "de8204",
+        "src": "n_v29_kitchen_table_cutit",
+        "dst": "n_v4gas_paine",
+        "relation": "cuts_food",
+        "strength": 0.98,
+        "bidirectional": 0
+      },
+      {
+        "id": "de8418",
+        "src": "n_v4gas_apa",
+        "dst": "n_v33_bathroom_fixture_robinet",
+        "relation": "flows_through",
+        "strength": 0.99,
+        "bidirectional": 0
+      }
+    ],
+    "proposed_existing_direct_arcs_absent": true,
+    "actual_small_objects_module_exists": false,
+    "actual_source5_exists": false,
+    "method": "Read-only file hashes, JSON field/snapshot comparisons, retained source-code inspection and four original primary-page reads; no graph traversal or prospective simulation."
+  },
+  "primary_checks": {
+    "original_pages_opened": 4,
+    "additional_searches": 0,
+    "browser_ui_used": false,
+    "sources": [
+      {
+        "id": "S6",
+        "url": "https://www.velleman.eu/products/view/set-of-4-funnels-hfus1/?id=372284&lang=en",
+        "citation": "[Velleman HFUS1](https://www.velleman.eu/products/view/set-of-4-funnels-hfus1/?id=372284&lang=en)",
+        "result": "Direct product text names washing-up-liquid refilling with ordinary nested funnels and home applications. Supports the qualified detergent caption; dry-material examples do not broaden the frozen liquid sense.",
+        "location": "Product description and features, extracted lines956-960/986-987."
+      },
+      {
+        "id": "S3",
+        "url": "https://www.chemistrystore.com/organic-coconut-and-olive-oil-shampoo-bodywash-tutorial.pdf",
+        "citation": "[The Chemistry Store tutorial](https://www.chemistrystore.com/organic-coconut-and-olive-oil-shampoo-bodywash-tutorial.pdf)",
+        "result": "Final tutorial step uses a funnel for filling the prepared shampoo/body-wash containers. This proves the narrow example, not customary domestic shampoo refilling or spontaneous association.",
+        "location": "Final page, step6, extracted lines45-47. No recipe or effectiveness claim adopted."
+      },
+      {
+        "id": "S2",
+        "url": "https://www.turnrightsolutions.com/products/wide-neck-funnels",
+        "citation": "[TurnRight wide-neck funnels](https://www.turnrightsolutions.com/products/wide-neck-funnels)",
+        "result": "Product text expressly gives cooking-oil transfer into smaller containers and specifies bottle-fit limits. Supports a possible cooking-oil transfer function, not universal compatibility.",
+        "location": "Extracted lines48-56."
+      },
+      {
+        "id": "tap-ikea",
+        "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf",
+        "citation": "[IKEA tap instructions AA-2163215-1](https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf)",
+        "result": "Romanian instructions describe handle manipulation releasing domestic water. Retain only flow-control meaning; differing handedness and temperature wording supplies no proposed claim, and potability is not established.",
+        "location": "Page0 Romanian section, extracted lines238-247."
+      }
+    ],
+    "other_sources": "Breloc negative and bread-source receipts reviewed as bound supplied evidence; no additional page opens. Earlier r3 source qualifications retained. Failed Delphis access is not support; specialized Greiner packaging is a counterexample, not ordinary-funnel evidence."
+  },
+  "record_reviews": [
+    {
+      "id": "v15-i01-breloc-assoc-1",
+      "label": "Breloc to Mașină",
+      "disposition": "hold",
+      "research_state_action": "Retain held; no relation adoption.",
+      "A1": "Both words are familiar; that does not validate the pair.",
+      "A2": "Car-key use is plausible, but this branded merchandise listing supplies no specific functional evidence.",
+      "A3": "Vehicle function is mediated through keys; branding cannot replace the proposed predicate.",
+      "A7": "The merchandise collection can also brand unrelated objects. No distinctive direct association established.",
+      "refutation": "A brand logo or vehicle-themed souvenir is not evidence of a functional accessory-to-vehicle relation.",
+      "ordinary_player_benefit": "Unearned context shortcut beyond the accepted Cheie attachment.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-breloc-assoc-2",
+      "label": "Breloc to ușă",
+      "disposition": "reject",
+      "research_state_action": "Preserve rejected record and evidence.",
+      "A1": "Endpoints recognizable.",
+      "A2": "Door-key familiarity cannot make the accessory itself a door-operating tool.",
+      "A3": "The supported operation belongs to Cheie, not Breloc.",
+      "A7": "This collapses a mediated key relationship into a shortcut without a distinct direct function.",
+      "refutation": "A decorative key accessory need not be attached to any door key.",
+      "ordinary_player_benefit": "No justified benefit beyond the existing key anchor.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-breloc-assoc-3",
+      "label": "Breloc to Cheia de la gât",
+      "disposition": "hold",
+      "research_state_action": "Retain held; no source hunt repeated unchanged.",
+      "A1": "Cultural endpoint may be recognizable; original r3 recognition does not prove this relationship.",
+      "A2": "Potential cross-generational relevance remains hypothetical.",
+      "A3": "No source establishes use of this frozen accessory in the specific practice.",
+      "A7": "Shared key wording does not make the accessory distinctive to that cultural memory.",
+      "refutation": "The key can be worn on a cord without a breloc.",
+      "ordinary_player_benefit": "Unproved.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-breloc-assoc-4",
+      "label": "Breloc to fluier",
+      "disposition": "reject",
+      "research_state_action": "Preserve rejected mapping; retain the multifunction-product fact separately.",
+      "A1": "The words are familiar, but the canonical endpoint means a referee's instrument.",
+      "A2": "An outdoor emergency model does not establish the sport association.",
+      "A3": "The witnessed whistle sense does not map to the frozen referee-signalling description.",
+      "A7": "A particular multifunction accessory cannot generalize the frozen Breloc to that sport endpoint.",
+      "refutation": "Emergency signalling and referee signalling are distinct uses.",
+      "ordinary_player_benefit": "No honest route to the current endpoint.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-palnie-assoc-1",
+      "label": "Pâlnie to lichid",
+      "disposition": "keep",
+      "research_state_action": "Retain qualified researched hypothesis; no ready/selected transition.",
+      "A1": "Familiar tool and basic liquid concept.",
+      "A2": "Central household transfer function is legible.",
+      "A3": "Caption describes use for pouring liquids; it does not classify Pâlnie as a liquid.",
+      "A7": "A characteristic funnel function, rather than arbitrary co-occurrence. The broad state-of-matter endpoint remains an abstraction and cannot gain target approval.",
+      "refutation": "Dry-material uses exist but do not refute or expand this exact liquid caption.",
+      "ordinary_player_benefit": "Plausible explanatory anchor or optional hop; actual ordinary usefulness NOT RUN.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-palnie-assoc-2",
+      "label": "Pâlnie to Ulei",
+      "disposition": "keep",
+      "research_state_action": "Retain qualified researched cooking-oil hypothesis.",
+      "A1": "Familiar household tool and cooking ingredient.",
+      "A2": "Transfer between household containers is a concrete understandable use.",
+      "A3": "Retain cooking-oil and possible-transfer wording; do not include motor oil or universal bottle fit.",
+      "A7": "A concrete functional liquid instance, stronger than a theme or brand association; it still shares the same transfer mechanism as water.",
+      "refutation": "One product's neck limits prevent universal compatibility claims, not the qualified possible use.",
+      "ordinary_player_benefit": "Plausible distinct ingredient anchor; measured game benefit NOT RUN.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-palnie-assoc-3",
+      "label": "Pâlnie to Șampon",
+      "disposition": "hold",
+      "research_state_action": "Preserve the true narrow filling example; hold adoption and do not count it as quality-cleared connectivity.",
+      "A1": "Words and liquid-shampoo endpoint are recognizable.",
+      "A2": "A supplier DIY formulation/bottling tutorial does not establish an ordinary spontaneous household association.",
+      "A3": "The optional qualified caption is source-true; manufacture, effectiveness and universal compatibility remain excluded.",
+      "A7": "The witnessed use follows the general pourable-liquid affordance. Evidence does not yet show why this particular hygiene endpoint should receive a distinctive player association.",
+      "refutation": "The same funnel step could fill many prepared liquid products; a single formulation tutorial cannot supply familiarity or normal-play salience.",
+      "ordinary_player_benefit": "Insufficiently established; a forced warm-target case would not resolve the concern.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-palnie-assoc-4",
+      "label": "Pâlnie to Detergent",
+      "disposition": "keep",
+      "research_state_action": "Retain qualified researched liquid-dishwashing refill hypothesis, with modest salience and no adoption.",
+      "A1": "Recognizable household concepts.",
+      "A2": "Ordinary funnel refill marketing for a home application is stronger support than specialized concentrate packaging or a bespoke recipe.",
+      "A3": "Keep the liquid dishwashing subtype and optional refill wording. The canonical detergent class also includes other forms and uses.",
+      "A7": "Concrete tool-for-refill function supports a plausible association; its broad transfer affordance does not justify arbitrary strength or warmth.",
+      "refutation": "Powder and other detergents are outside this caption; neither unread Delphis text nor specialized Greiner packaging can enlarge support.",
+      "ordinary_player_benefit": "Plausible refill anchor, not proved customary use or measured fun. Ordinary gameplay NOT RUN.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-existing-bread-knife",
+      "label": "Pâine to Cuțit",
+      "disposition": "keep",
+      "research_state_action": "Retain contingency idea only; no automatic substitute selection.",
+      "A1": "Both endpoints familiar.",
+      "A2": "Slicing bread with a suitable knife is an ordinary understandable function.",
+      "A3": "Existential wording se poate felia cu fits the generic knife endpoint without promising every knife works equally well.",
+      "A7": "Specific food-to-tool relation; the missing direction is verified, but existing reverse familiarity does not prove new play value.",
+      "refutation": "Bread knives are particular tools; preserve the optional qualification.",
+      "ordinary_player_benefit": "Plausible optional reverse hop; selection, path effects and actual player benefit NOT RUN.",
+      "quality_adoption": false
+    },
+    {
+      "id": "v15-i01-existing-tap-water",
+      "label": "Robinet to Apă",
+      "disposition": "keep",
+      "research_state_action": "Retain contingency idea only.",
+      "A1": "Familiar household endpoints.",
+      "A2": "Water-flow control is the tap's central function.",
+      "A3": "Flow-control caption is supported. No temperature, handedness or potability promise; the gastronomic water endpoint requires the retained household-water qualification.",
+      "A7": "Specific device function, not generic association; missing direct counterpart verified.",
+      "refutation": "Technical or irrigation-tap material cannot prove drinking-water suitability. The IKEA domestic instruction supports only flow control here.",
+      "ordinary_player_benefit": "Plausible optional hop; actual feedback and mining benefit NOT RUN.",
+      "quality_adoption": false
+    }
+  ],
+  "dispositions_summary": {
+    "keep_research_or_idea": 5,
+    "hold": 3,
+    "reject": 2,
+    "total": 10,
+    "pool_bytes_changed": false,
+    "ready_or_selected": 0
+  },
+  "connectivity": {
+    "execution_status": "NOT RUN",
+    "guard": "scripts/apply_common_words_v24.py:_preflight: four unique nondistractor incident neighbors and two same-category neighbors.",
+    "breloc": {
+      "additional_quality_supported_neighbors": 0,
+      "retained_incident": 1,
+      "retained_same_category": 1,
+      "actual_proposal": "BLOCKED"
+    },
+    "palnie": {
+      "packet_all_four_links_arithmetic": {
+        "incident": 5,
+        "same_category": 2,
+        "status": "CONDITIONAL_ONLY_NOT_RAIL_OR_QUALITY_CLEARANCE"
+      },
+      "quality_supported_research_subset_without_held_shampoo": {
+        "endpoints": [
+          "n_v4gas_apa",
+          "n_v4sti_lichid",
+          "n_v24_food_pantry_ulei",
+          "n_v31_cleaning_supply_detergent"
+        ],
+        "maximum_incident": 4,
+        "maximum_same_category": 1,
+        "status": "STILL_FAILS_SAME_CATEGORY_FLOOR; not an actual selected payload"
+      },
+      "actual_proposal": "BLOCKED"
+    },
+    "incoming_target_constraint": "All proposed new-concept arcs are outgoing only: incoming0, reverse-reachable target size1 and responsive0. C3 incoming5 and runtime120/40 remain separate; no new hidden target approval.",
+    "prohibition": "Do not clear the floor by keeping a weak shampoo link for its category, adding forms/reverse duplicates, changing categories, weakening guards or using another importer."
+  },
+  "source_effects": {
+    "status": "STATIC_RISKS_ONLY; ALL EXECUTION NOT RUN",
+    "new_concept_variant": [
+      "Strictly outgoing new nodes cannot shorten old-to-old directed paths, conditional on explicit bidirectional0 and no old-to-new arcs.",
+      "Reverse-reachable profiles can gain new guesses: Cald ranks, closeness, temperatures, clues and projected feedback may change despite unchanged old distances.",
+      "Current exact owners can remain stable while fuzzy suggestions, confirmations and all-ID fallback shuffle change.",
+      "New viata_de_roman members change Conexiuni category-size denominators, member order, RNG and fallback boards.",
+      "Pâlnie with four or five outgoing neighbors crosses the ordinary Lanț and Alchimie degree>=2 candidate filter. The old single-leaf exclusion inference no longer applies: generated start/seed exposure and latent common-neighbor recipes must be measured.",
+      "Unique endpoints do not establish five independent association mechanisms: liquid, water, oil and refill products share a transfer affordance.",
+      "Endpoint incident-degree updates affect exact catalog node/edge snapshots and historical artifact receipts."
+    ],
+    "existing_node_contingency_variant": [
+      "Pâine to Cuțit and Robinet to Apă add reverse functional counterparts between old nodes. The new-leaf no-shortcut observation is inapplicable.",
+      "They may change old directed distances, weighted costs, cycles, reachability, target bands, hints, mining, common-neighbor recipe closure and selection.",
+      "Their absence as direct arcs and the one-way old edges are verified static gaps, not measured user problems or shipment approval."
+    ],
+    "no_runtime_workaround": "Any unreviewed ordinary/fallback exposure is a stop/hold finding. Do not hide it with salience suppression, taxonomy changes or runtime exclusions.",
+    "source5_boundary": "A catalog Source5 cannot carry shared KG additions or cure a graph-quality hold. Actual accepted graph payload/write/hash and fresh KG-bound catalog reviews remain prerequisites; Source4 and all eight baseline sources remain current."
+  },
+  "finite_gate_requirements": [
+    {
+      "id": "identity",
+      "status": "NOT RUN",
+      "population": "8677 existing forms and464projections; exact active variant's proposed forms only",
+      "proof": "Owners, fuzzy/suggestions/confirmation, deduplication and negative cases."
+    },
+    {
+      "id": "contexto",
+      "status": "NOT RUN",
+      "population": "265targets x2419old native nodes=641035pairs;265x464projections=122960pairs; exact added inputs and all-node target flags",
+      "proof": "Directed/weighted/reverse/rank/closeness/temperature/anchor/clue deltas; ordinary private Create/Get, invalid/confirmed/deduplicated guesses, give-up/win, daily and account exclusions."
+    },
+    {
+      "id": "conexiuni",
+      "status": "NOT RUN",
+      "population": "245curatedprofiles plus exact finite fallback difficulty/category/daily selectors",
+      "proof": "Partitions, fairness, cross counts, category denominators, member order and selected-board changes."
+    },
+    {
+      "id": "lant",
+      "status": "NOT RUN",
+      "population": "123curatedprofiles plus exact ordinary curated/mined/fallback selectors",
+      "proof": "Routes, captions, options, hints, par, real first-hop alternatives and new-node exposure."
+    },
+    {
+      "id": "alchimie",
+      "status": "NOT RUN",
+      "population": "83authoredprojections; exact mined scenarios;68books/521recipes;27extensionbooks/49additions",
+      "proof": "Core/route/par preservation, seed exposure, latent pair closure and complete actual node/edge snapshots; no new recipe approval."
+    },
+    {
+      "id": "quick",
+      "status": "NOT RUN",
+      "population": "85authored +336frozen-derived;228Intrusul/193Perechi",
+      "proof": "Payload/rating/rank/order and resolver preservation; no new rows."
+    },
+    {
+      "id": "terminal",
+      "status": "NOT RUN",
+      "population": "180puzzles and exact bound mechanics selectors",
+      "proof": "Regeneration, IDs, options/hints/hops/undo/path/par/refusal/win/score."
+    },
+    {
+      "id": "discovery-history",
+      "status": "NOT RUN",
+      "population": "251concepts/351recipes/147discoveries;9historicalworlds/1009savedprefixes",
+      "proof": "Earned crafts, compatible versions, recipe hashes, privacy/bounds and strict finite before/after inverses preserving old assertions and corpora."
+    },
+    {
+      "id": "native-source-assembly",
+      "status": "NOT RUN",
+      "population": "Exact accepted variant only",
+      "proof": "Supported graph rail, rank/derive/mobile, all three KG-bound raw/proposal/audit/final rails, reserve/four-rail authority, eight-source export/rebuild, required race/vet and assembled review."
+    },
+    {
+      "id": "http",
+      "status": "NOT RUN",
+      "population": "Fresh1207-casecurrentcorpus, full-eight-source selector, old corpora and scheduled151smoke/28assets",
+      "proof": "Independent current reference capture and strict source-set acceptance; no native-generated expectation repair."
+    }
+  ],
+  "concrete_gaps": [
+    "Shampoo's narrow factual support remains insufficient for quality adoption and cannot presently supply Pâlnie's second same-category neighbor.",
+    "Meaningful ordinary player benefit is unmeasured for every proposed relation; recognizable endpoints and source truth alone are insufficient.",
+    "No exact active variant, canonical new IDs, enums, strengths, salience, module, Source5 or resulting artifact hashes exist.",
+    "The case requirements acknowledge an unresolved exact all-game selector/history manifest and acceptance criteria. Bound existing test files are precedents, not executed coverage for i01.",
+    "Seed23/usor/viata_de_roman is a proposed observation, not a guaranteed Ușă target or warm Pâlnie outcome after a changed source set; forced targets cannot replace ordinary play.",
+    "The future manifest must distinguish the multiple-outgoing Pâlnie variant from existing-node reverse arcs and derive forms, source sets and effect universes from that exact variant.",
+    "All native admission and gameplay/installation gates remain held under QUIET_WINDOW KEEP."
+  ],
+  "corrections_required_in_any_continuation": [
+    "Record shampoo as source-true narrow evidence with an independent quality adoption hold; preserve its current history rather than rewriting the evidence.",
+    "Do not report conditional5/2 as cleared. Without held shampoo, current research-supported arithmetic is at most4incident/1samecategory.",
+    "Do not claim no new generated rounds/recipes solely because GAME_ITEM_IDS would be empty; multi-link Pâlnie becomes miner-eligible.",
+    "Do not transfer the outgoing-new-leaf path observation to the existing-node reverse-direction contingency."
+  ],
+  "next_finite_step": {
+    "action": "Close i01 with all ten dispositions and retained Breloc/Pâlnie adoption holds. If the coordinator authorizes a replan, freeze one exact bounded research variant and its complete selector/history requirements before requesting any native admission.",
+    "limits": "No repeated unchanged source hunt, automatic substitute shipment, padding link, actual module/proposal/Source5 generation or native execution follows from this review.",
+    "source_campaign_closed": true
+  },
+  "approvals": {
+    "research_receipt": true,
+    "quality_adoption": false,
+    "selection": false,
+    "native_raw": false,
+    "actual_proposal": false,
+    "installation": false,
+    "Source5": false,
+    "new_hidden_target": false,
+    "new_round": false,
+    "new_recipe": false,
+    "deployment": false,
+    "push": false,
+    "merge": false
+  },
+  "not_run": [
+    "Go/native CLI/build/install",
+    "Tests/race/vet/pytest",
+    "Graph preflight/apply/traversal/gameplay simulations",
+    "Frontend/browserUI",
+    "WSL/Docker/PostgreSQL",
+    "Model/GPU/image work",
+    "Source5/module/candidate/proposal generation",
+    "Runtime/export/authority writes",
+    "Historical replay/reference capture"
+  ],
+  "writes_authorized": "Only this independent quality-review-r1.json receipt. Bound packet, pool and inputs are immutable.",
+  "valid_until": "Any packet, record, source/code/runtime binding, exact intended variant or admission condition changes; refresh affected independent review."
+}

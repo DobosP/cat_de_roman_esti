@@ -1,0 +1,164 @@
+{
+  "access_date": "2026-10-06",
+  "additional_associations": [
+    {
+      "benefit": "Central function anchor; modest optional hop.",
+      "category": "stiinta",
+      "counterexamples": [
+        "The KG endpoint denotes the liquid state generally, rather than a particular household liquid.",
+        "The sources also describe dry-material uses; those remain outside the frozen liquid-only claim."
+      ],
+      "direction": "Pâlnie -> lichid",
+      "endpoint_id": "n_v4sti_lichid",
+      "label": "lichid",
+      "predicate": "se folosește la turnarea lichidelor în recipiente",
+      "sources": [
+        "S1",
+        "S6"
+      ],
+      "status": "supported"
+    },
+    {
+      "benefit": "Concrete household liquid instance distinct from Apă.",
+      "category": "gastronomie",
+      "counterexamples": [
+        "Support concerns cooking oil, not motor oil.",
+        "The source's particular funnel does not fit ordinary soda or bottled-water necks; compatibility is not universal."
+      ],
+      "direction": "Pâlnie -> Ulei",
+      "endpoint_id": "n_v24_food_pantry_ulei",
+      "label": "Ulei",
+      "predicate": "ajută la turnarea uleiului alimentar într-un recipient mai mic",
+      "sources": [
+        "S2"
+      ],
+      "status": "supported"
+    },
+    {
+      "benefit": "Concrete filling use with an existing same-category endpoint; modest gameplay salience.",
+      "category": "viata_de_roman",
+      "counterexamples": [
+        "Evidence is a specific shampoo/body-wash tutorial, not proof that this is a customary use for every shampoo.",
+        "The link supports filling, not shampoo manufacture, effectiveness or universal funnel compatibility."
+      ],
+      "direction": "Pâlnie -> Șampon",
+      "endpoint_id": "n_v31_hygiene_hair_sampon",
+      "label": "Șampon",
+      "predicate": "poate ajuta la umplerea recipientelor cu șampon lichid",
+      "sources": [
+        "S3"
+      ],
+      "status": "supported"
+    },
+    {
+      "benefit": "Explicit ordinary-funnel refill use with an existing same-category endpoint; modest gameplay salience.",
+      "category": "viata_de_roman",
+      "counterexamples": [
+        "The broader KG endpoint includes detergents beyond the liquid dishwashing subtype; retain the liquid qualifier.",
+        "S4 concerns specialized disposable refill packaging and cannot establish this ordinary-utensil claim.",
+        "S5 could not be read; its search excerpt was not treated as verified evidence."
+      ],
+      "direction": "Pâlnie -> Detergent",
+      "endpoint_id": "n_v31_cleaning_supply_detergent",
+      "label": "Detergent",
+      "predicate": "poate ajuta la reumplerea unui recipient cu detergent lichid de vase",
+      "sources": [
+        "S6"
+      ],
+      "status": "supported"
+    }
+  ],
+  "baseline": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "candidate": "v1-5-object-2",
+  "endpoint_limits": {
+    "absent_exact_labels_or_aliases": [
+      "Sticlă",
+      "Borcan",
+      "Limonadă",
+      "Suc",
+      "Plastic",
+      "Inox",
+      "Gât de sticlă",
+      "Recipient"
+    ],
+    "excluded_existing_endpoint": {
+      "category": "stiinta",
+      "id": "n_v29_body_upper_gat",
+      "label": "Gât",
+      "reason": "Canonical description is the human body part; bottle-neck wording cannot establish a link.",
+      "status": "contradicted"
+    },
+    "themed_container_warning": "Borcanele de zacuscă is not a generic Borcan endpoint."
+  },
+  "existing_water_claim": {
+    "category": "gastronomie",
+    "endpoint_id": "n_v4gas_apa",
+    "note": "Accepted liquid-instance inference remains unchanged; not promoted to direct source instruction.",
+    "status": "inference"
+  },
+  "iteration": "v1-5-association-i01",
+  "primary_pages_attempted": 6,
+  "primary_pages_readable": 5,
+  "rail_assessment": {
+    "additional_same_category_endpoints": 2,
+    "additional_unique_existing_endpoints": 4,
+    "certified": false,
+    "potential_unique_neighbors_including_existing_Apa": 5,
+    "remaining_review": "Evidence supports qualified factual captions. Distinct gameplay value, strength, edge enum, direction implementation and the independent 4/2 rail remain unapproved."
+  },
+  "scope": "Exact household liquid-transfer Pâlnie sense",
+  "sources": [
+    {
+      "access": "Readable web text",
+      "evidence": "Household funnel for filling bottles with homemade juice, lemonade and other beverages.",
+      "id": "S1",
+      "license": "© Inter IKEA Systems B.V. 1999–2026; no open reuse license verified. Factual paraphrase only.",
+      "primary": "Original IKEA UPPFYLLD product page",
+      "url": "https://www.ikea.com/ro/ro/p/uppfylld-palnie-galben-neon-80521930/"
+    },
+    {
+      "access": "Readable web text",
+      "evidence": "Explicitly describes transferring bulk liquids such as cooking oil into smaller containers; specifies bottle-fit limitations.",
+      "id": "S2",
+      "license": "No open reuse license verified. Factual paraphrase only.",
+      "primary": "Original TurnRight Solutions product page",
+      "url": "https://www.turnrightsolutions.com/products/wide-neck-funnels"
+    },
+    {
+      "access": "Readable PDF text, page 7, step 6",
+      "evidence": "Explicit instruction to use a funnel to fill containers with the prepared shampoo/body wash.",
+      "id": "S3",
+      "license": "No open reuse license verified. Factual paraphrase only; recipe not reproduced.",
+      "primary": "Original The Chemistry Store tutorial PDF",
+      "url": "https://www.chemistrystore.com/organic-coconut-and-olive-oil-shampoo-bodywash-tutorial.pdf"
+    },
+    {
+      "access": "Readable web text",
+      "evidence": "Sealed concentrate packaging empties into a bottle; emptied packaging subsequently acts as a funnel for added water.",
+      "id": "S4",
+      "license": "No open reuse license verified. Factual paraphrase only.",
+      "primary": "Original Greiner Packaging product explanation",
+      "url": "https://www.greiner-gpi.com/en/Products/Product-innovations/Refill-Funnel",
+      "use": "Scope counterexample; specialized packaging, not ordinary household utensil support."
+    },
+    {
+      "access": "Open failed: cache miss",
+      "evidence": null,
+      "id": "S5",
+      "license": "Unresolved because page content was unavailable.",
+      "primary": "Original Delphis Eco product page",
+      "url": "https://delphiseco.com/collections/household/products/washing-up-liquid-conc-5ltr-retail",
+      "use": "Not counted as verified support."
+    },
+    {
+      "access": "Readable cached web text; page generated 2026-06-23",
+      "evidence": "Ordinary nested funnels described for accurate refilling of liquids; explicitly names washing-up liquid and home/kitchen applications.",
+      "id": "S6",
+      "license": "© 2026 Velleman Group nv, all rights reserved; no open reuse license verified. Factual paraphrase only.",
+      "primary": "Original Velleman own-brand Toolland HFUS1 product page",
+      "url": "https://www.velleman.eu/products/view/set-of-4-funnels-hfus1/?id=372284&lang=en"
+    }
+  ],
+  "stop_reason": "Finite association brief answered; six-page attempt limit reached.",
+  "writes": 0
+}

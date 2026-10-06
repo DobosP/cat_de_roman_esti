@@ -1477,3 +1477,29 @@ Verification: canonical command/flag/profile descriptions checked against native
 `./run.sh help` and Compose files. `check_docs.py .` reports files38/dead_links0/stale_terms0/
 retired_verbs0/orphans0; `git diff --check` is clean. Budgets: AGENTS80/STATUS120/agent-map49/
 agent-testing71 lines. No native behavior or game/asset generation changed.
+
+## 2026-10-06 — V1.5 association iteration i01
+
+Valid until: i01 baseline, packet or intended scope changes — then treat as history.
+
+Owner renewed the bounded local version loop; [ADR-0173](docs/adr/0173-resume-bounded-content-version-loop.md)
+records the decision and amends only ADR-0137's superseded status. New task branch
+`codex/v1-5-association-i01` starts from local main `a75ce96227271408e529e46cc27b1a62dd000f38`.
+Earlier research branch/worktree and immutable r3 evidence remain.
+
+[Source/review packet](docs/reviews/v1-5-small-objects/iterations/i01/README.md) records ten finite
+association hypotheses. Independent factual review retains qualified source facts.
+Independent quality holds the shampoo association despite its real DIY bottling example:
+Pâlnie's admissible research neighborhood is at most4/1; Breloc stays1/1.
+No new-object proposal clears the unchanged4/2 guard. Old original pool remains2researched/6held,
+0selected/installed. New ledger is3researched/3held/2rejected/2ideas,0selected/installed.
+
+The exact initial ledger/packet/reviews are archived; r2 applies independent feedback and
+explicitly records ordinary miner exposure above degree2 and old-node reverse path/cycle risks.
+Two existing-node functional direction ideas are a finite V1.5 replan, not accepted growth.
+Exact payload attributes, execution vectors, normal player benefit, all native/history gates
+and actual qualified main landing remain outstanding.
+
+Light byte/document/budget/whitespace checks pass; native Go/WSL/Docker/PG/full-suite/browser/
+model/build/install and gameplay simulations remain NOT RUN under QUIET_WINDOW KEEP.
+No Source5, generated artifact, fixture, code, authority, push, merge, deployment or deletion.
