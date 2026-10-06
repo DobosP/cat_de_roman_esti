@@ -12,6 +12,12 @@ import (
 )
 
 func worldCandidate(root string, s *Source, historical bool) (map[string]any, error) {
+	return worldCandidateForPhase(root, s, historical, false)
+}
+
+// Installed reconstruction checks the completed candidate against the installed
+// world. Staging instead requires its immutable predecessor to remain current.
+func worldCandidateForPhase(root string, s *Source, historical, installed bool) (map[string]any, error) {
 	g, err := sourceGraph(root)
 	if err != nil {
 		return nil, err
@@ -148,7 +154,7 @@ func worldCandidate(root string, s *Source, historical bool) (map[string]any, er
 	if err != nil {
 		return nil, err
 	}
-	if !historical {
+	if !historical && !installed {
 		if err = previousMatchesCurrent(root, previous); err != nil {
 			return nil, err
 		}
@@ -171,6 +177,11 @@ func worldCandidate(root string, s *Source, historical bool) (map[string]any, er
 	out["compatible_versions"] = versions
 	if !historical {
 		out["native_source_version"] = s.Version
+	}
+	if installed {
+		if err = previousMatchesCurrent(root, out); err != nil {
+			return nil, fmt.Errorf("installed world differs from reconstructed candidate/history: %w", err)
+		}
 	}
 	return out, nil
 }

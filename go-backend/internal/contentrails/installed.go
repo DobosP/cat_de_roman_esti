@@ -259,7 +259,7 @@ func (a *installedAuthorities) rebuild(root string, selected *Source, rail strin
 		}
 		paths[key] = path
 	}
-	catalog, err := BuildProposal(root, s, rail, paths["candidate"], paths["factual_review"], paths["quality_review"])
+	catalog, err := buildInstalledProposal(root, s, rail, paths["candidate"], paths["factual_review"], paths["quality_review"])
 	if err != nil {
 		return nil, true, err
 	}
@@ -332,7 +332,7 @@ func BuildInstalledAuthorityEntry(root string, s *Source, rail, candidate, factu
 		}
 		entry[installedDocumentKeys[i]] = map[string]any{"path": relative, "sha256": digestBytes(blob)}
 	}
-	catalog, err := BuildProposal(root, s, rail, candidate, factual, quality)
+	catalog, err := buildInstalledProposal(root, s, rail, candidate, factual, quality)
 	if err != nil {
 		return nil, err
 	}

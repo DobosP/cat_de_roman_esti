@@ -14,6 +14,7 @@ from cat_de_roman_esti.wordgames import alchimie_explore as E
 from cat_de_roman_esti.wordgames.discovery_world import MAX_CATALOG_BYTES, get_world, validate_world
 from cat_de_roman_esti.wordgames.service import SessionStore, get_service
 from scripts import build_alchimie_discovery_world as B
+from tests.content_history import historical_v97_world
 from tests.test_v96_world_quality import HISTORY as OLD_HISTORY
 from tests.test_v96_world_quality import checkpoint
 
@@ -26,6 +27,12 @@ NEW_WORDS = {'alw_food_supa_rosii': 'Supă de roșii',
 NEW_RECIPES = ('supa-rosii-supa', 'supa-rosii-orez',
                'mancare-spanac-usturoi', 'mancare-spanac-lapte')
 HISTORY = [*OLD_HISTORY, (249, 145, PREVIOUS_SHA)]
+
+
+@pytest.fixture(autouse=True)
+def historical_context(monkeypatch, tmp_path):
+    with historical_v97_world(monkeypatch, tmp_path / "v97-source-root"):
+        yield
 
 
 @pytest.fixture

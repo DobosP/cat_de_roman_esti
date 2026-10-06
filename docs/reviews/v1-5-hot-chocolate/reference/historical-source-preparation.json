@@ -1,0 +1,68 @@
+{
+  "schema": "v1-5-historical-source-preparation-v1",
+  "checked_on": "2026-10-06",
+  "valid_until": "The bound V1.5 proposal, candidate, historical archive, legacy source or owned test source changes; then review and qualify again.",
+  "worker": "/root/toolchain",
+  "scope": "Bounded source preparation only; no native command, tests, captures, catalogue installation or fixture/golden rewrite run by this worker.",
+  "admission": "docs/reviews/v1-5-hot-chocolate/reference-source-admission.json",
+  "source_checkpoint": "a4f42f176b06276a3d46f3da40373cecfb70f7ac",
+  "owned_sources": {
+    "tests/content_history.py": "a588665664979ac90d6cf4adc3446af396d38747189a62a2d20125e63ac839bf",
+    "tests/test_v1_4_content_history.py": "a7ede49356f509c8c217be6bf0da71c4c3b129fdbcac5387f5bb8943175ff406",
+    "tests/test_v97_world_quality.py": "f35fbbd2222896ab5b9cf39dda15763c4351132aa4a99edfc1d3c1c353b734bc",
+    "tests/test_v1_5_world_history.py": "ac3272dd65145d791eeb6f7549b11f87f1321074ad36720f080d5236be8d9646",
+    "go-backend/internal/alchimie_explore/service_test.go": "0a67b8a03392619d711102bbae2985b1fa7b9986fc2577e4f15ea898b6c17488"
+  },
+  "incremental_source_scope": "Five small source files, below 10 MiB; existing archive retained without modification.",
+  "inverse": {
+    "name": "before_v1_5_world_catalog",
+    "bound_proposal": "docs/reviews/v1-5-hot-chocolate/native/world/proposal.json",
+    "bound_proposal_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+    "bound_candidate_sha256": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+    "restored_source4_world_sha256": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+    "scope": "Only the exact one world-local hot-chocolate concept, exact one milk/chocolate recipe, appended tenth history and reviewed world metadata. Every existing record, order, goal, starter/unlock and prior history must reconstruct complete V1.4. No other fixture inverse widened.",
+    "entry": "Invoked before before_v1_4_catalog; existing V1.3 and older inverse chain continues unchanged. V1.4 historical test current() selects this exact world-only historical view without repinning its literal hashes."
+  },
+  "historical_python_context": {
+    "consumer": "tests/test_v97_world_quality.py world fixture",
+    "method": "Scoped actual discovery_world.CATALOG_PATH to immutable exact Source4 proposal with cache clearing on entry/exit. The existing isolated SessionStore and all original 251/351/9 assertions remain. Context restores the real current loader path afterward.",
+    "legacy_source_sha256": "66ade386c05e25f8b58990d127834c5803206e4565600256d55b09658bd23e2b",
+    "legacy_producer_unchanged": true
+  },
+  "historical_native_context": {
+    "consumer": "alchimie_explore service_test.go load",
+    "archive": "go-backend/internal/alchimie_explore/testdata/bundled-v1-4.json.gz",
+    "compressed_sha256": "76245d7d5fd3266981c92e3ad7a7e323395b8edd919a4208a56b01bf3bc5f5d3",
+    "raw_sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "raw_limit_bytes": 8388608,
+    "current_coverage": "The root-owned external content_v1_5_test.go remains untouched and tests actual current/prospective discovery and saved progress.",
+    "writes_held_at_root_request": true
+  },
+  "static_source_checks": {
+    "Python_AST_syntax": "parsed only, no test execution/import",
+    "original_assertions": {
+      "tests/content_history.py": {
+        "original_assertions": 420,
+        "all_original_assertions_retained": true
+      },
+      "tests/test_v1_4_content_history.py": {
+        "original_assertions": 33,
+        "all_original_assertions_retained": true
+      },
+      "tests/test_v97_world_quality.py": {
+        "original_assertions": 46,
+        "all_original_assertions_retained": true
+      }
+    },
+    "old_test_functions_and_parametrizations": "No test function or parametrization removed, skipped, deselected or renamed; the requested original 17-module/394-case qualification remains to be executed under a separate admission.",
+    "new_regression_source": "tests/test_v1_5_world_history.py adds complete-byte restoration/nonmutation/idempotence, old archive assurance, six mutation/order/duplicate refusals, forged-pin refusal and loader path/cache restoration; no skip path."
+  },
+  "later_corpus_roadmap": {
+    "not_owned_or_executed": true,
+    "strict_http_selection": "Current httpgolden/golden.go has four independently captured source families. Add a fifth V1.5 corpus only after fresh full Django capture, verified provenance/semantic delta and exact eight-source equality. Preserve all four old gzip corpora and ForSources fail-closed unknown/partial/mixed-source behavior.",
+    "current_reference_capture": "Adapt only root/output/reference names in the preserved V1.4 producer and run under a new explicit resource admission. Keep all 1207 requests and all original case coverage. Actual changed-world responses must come from current Django get_world after installation, never native outputs or hand-edited hashes.",
+    "other_reference_families": "KG and the other seven sources are unchanged: preserve current Contexto/Lanț, graph/selector and curated Alchimie golden coverage; measure equality rather than assume it. Freeze old exploration goldens on exact Source4 helper and independently capture any new current-world family with explicit provenance.",
+    "required_after_source_preparation": "Separate admission for staging, Go formatting/compilation, meaningful current/historical regression execution, full original historical module collection/count, current reference captures, strict selector tests and all integrated gates before landing."
+  },
+  "status": "source prepared and actual inverse pin bound; execution/qualification pending separate admissions"
+}

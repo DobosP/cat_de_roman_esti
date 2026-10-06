@@ -1,0 +1,50 @@
+{
+  "lane": "current-http-capture-r2",
+  "manifest_sha256": "5ba3a46650265e6bc285eef5f9604f002cc7f9788373cd1d486804e41ffc0172",
+  "checked_at_utc": "2026-10-06T19:30:27.568183+00:00",
+  "deadline_pass": true,
+  "steps": [
+    {
+      "name": "independent-Django-current-HTTP-capture",
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/source/capture_reference_v1_5.py",
+        "--binary",
+        "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/bin/cat-server",
+        "--runtime",
+        "go"
+      ],
+      "started_at_utc": "2026-10-06T19:30:18.792458+00:00",
+      "finished_at_utc": "2026-10-06T19:30:27.567808+00:00",
+      "elapsed_seconds": 8.77536,
+      "exit_code": 0,
+      "guard": null,
+      "peak_group_RSS_bytes": 200925184,
+      "log_sha256": "eb5b6b57a157d00faa8c63f67b96400d306c2d852d414b040ac8a7d1de2c30d0",
+      "log_text": "go arcade HTTP parity: 1207 responses matched (only session IDs normalized)\n"
+    }
+  ],
+  "all_steps_completed": true,
+  "incremental_bytes": 33751,
+  "unchanged": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": true,
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": true,
+    "cat_de_roman_esti/fixtures/board_demotions_v43.json": true,
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": true,
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": true,
+    "cat_de_roman_esti/fixtures/contexto_demotions_v44.json": true,
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": true,
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": true,
+    "cat_de_roman_esti/fixtures/games_pack.json": true,
+    "cat_de_roman_esti/fixtures/kg_real.json": true,
+    "cat_de_roman_esti/fixtures/kg_sample.json": true,
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": true,
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": true,
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": true,
+    "go-backend/internal/content/bundled.json": true,
+    "go-backend/internal/content/digest.go": true,
+    "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/source/capture_reference_v1_5.py": true,
+    "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/bin/cat-server": true
+  },
+  "installation_approval": false
+}

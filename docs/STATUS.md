@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-06 — owner resumed Linux V1.5; Windows source already landed; Source4 unchanged, qualification pending.
+Last verified: 2026-10-07 — V1.5 task worktree installed and required gates qualified; exact assembled review and local landing pending.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -49,15 +49,15 @@ Pool counts describe curated records; existing on-demand fallback generators rem
 Task KG: `fixture-v1-4-time-links`, 2419 nodes/9473 links/8677 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
-Exploration remains **251 concepts/351 recipes/147 discoveries**, 96 supplies, 12 tiers,
-32 goals, nine historical books and 1009 verified saved prefixes.
+Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
+32 goals, ten historical books and 1156 verified saved prefixes.
 Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB requests.
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
 ## Current artifact pins
 
-- alchimie_discovery_world_v92.json: `0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef`
+- alchimie_discovery_world_v92.json: `196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086`
 - alchimie_recipe_extensions_v92.json: `1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7`
 - quick_games_v92.json: `a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
@@ -79,7 +79,7 @@ Unrevealed answers, recipe maps and routes stay private.
 - [ADR-0162](adr/0162-select-go-production-backend.md): owner-selected Go-only production runtime;
   six games/mining, exploration/restores, metadata/OpenAPI, legal pages and SPA are native Go.
   Canonical launcher/Docker/anonymous profile have no Python serving process or fallback.
-- Serving qualification: **1207 HTTP responses/runtime** match Django; all games and nine histories
+- Serving qualification: **1207 HTTP responses/runtime** match Django; all games and ten histories
   match frozen references; prior Go race/vet and retained Rust **55 tests** pass (linked proof).
 - Fixed a shared frontend score-receipt race found by the Go two-tab browser gate: transaction time
   is sampled after Web Lock acquisition. **241 frontend cases**, lint/typecheck/build pass (119.78 KiB).
@@ -107,14 +107,14 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-  V1.3/V1.4 verified content remains Source4/authority43/Source8. Windowsi01–i08 source/CRLF transport is on mainbb99e81;0installedV1.5 increments. Owner resumed per [ADR-0177](adr/0177-resume-linux-v1-5-qualification.md)/[handoff](reviews/v1-5-small-objects/linux-resume/README.md); existing worktree reused, Source4native prerequisites GREEN; i02 exactdraft/fresh source+quality conditional only; earlierdiskrefusal preserved; recoveredsupported dryrunGREEN0/2/324/2, isolatedcandidate/180exact;2Lant/all265Caldprofileschange;native384Create/65endpoints/0boundedwitness, playNOTRUN; savedqualitative/codegaps and late sourcecaps held; poolR3=2held/0selected; noV1.5data/Source5, loopACTIVE.
+  V1.5/Source5 World is installed in the task worktree; Quick/Extensions retain Source4. [Hot chocolate](reviews/v1-5-hot-chocolate/README.md) adds one world-local concept/recipe; both i02 links stay held and the Contexto projection stays exact. Fresh 108-source audits/finals, strict all-four authority, 33 goal modes/148 discoveries/1156 prefixes, 60-request journey, 1207 HTTP parity, smoke151/assets28, 425 reference checks, export/rank/derive/mobile and shared race/vet pass. All 27 backend test packages have passing race coverage; the 24 content-rail cases use exhaustive 5/19 groups; vet passes. Exact assembled review and local landing remain.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
   Limbă/Geografie Greu shelves, label spellings (Herta Müller, Mica Unire 1859); forced fallback Societate/Secundă and mixed Personalități predicates.
 - Known limits: Alchimie Greu starts on shelves without a curated board can take seconds
   (a time cap would break deterministic dailies); older stored score details keep ISO dates
-  but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
+  but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0177), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0178), reviews/WORKLOG: history.

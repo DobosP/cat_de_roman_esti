@@ -1,0 +1,741 @@
+{
+  "active_native_review_directory": "docs/reviews/v1-5-hot-chocolate/native; roothasbegun freshworldrawgeneration there. Earlier $ROOT/docs/reviews/v1-5-small-objects/native argv placeholders are relocatedto this active directory when executing; all source/role gates unchanged.",
+  "active_preparation": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i06/source-proposal-r1.json",
+    "sha256": "c0e970966da5a547849aa51b9fc0992b1b075d4cc5e6f5432398525a0dd9f4ce"
+  },
+  "active_source5_proposal_location": "docs/reviews/v1-5-hot-chocolate/source5-proposal.json; root has now authored this as an UNAPPROVED Source5input. Minimalcurrent roadmap still requires rawcandidate/exactreviews and separatelyadmitted later signedstage; use finalcanonical authored-v5 path after reviewed rootdecision.",
+  "approval_flags": {
+    "Source5": false,
+    "authority": false,
+    "deployment": false,
+    "export": false,
+    "installation": false,
+    "landing": false,
+    "plan_only": true,
+    "prospective": false,
+    "push": false,
+    "quality": false,
+    "selection": false,
+    "world_factual": false
+  },
+  "checked_on": "2026-10-06",
+  "installed_authority_entry_commands": [
+    [
+      "$BIN/cat-content-rail",
+      "world",
+      "--root",
+      "$ROOT",
+      "--source",
+      "$ROOT/go-backend/internal/contentrails/sources/authored-v5.json",
+      "--candidate",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/world/candidate.json",
+      "--factual-review",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/world/factual-review.json",
+      "--quality-review",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/world/quality-review.json",
+      "--proposal",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/world/proposal.json",
+      "--live-audit",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/world/installed-audit.json",
+      "--final-factual-review",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/world/installed-final-factual-review.json",
+      "--final-quality-review",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/world/installed-final-quality-review.json",
+      "--expected-sha256",
+      "$REVIEWED_WORLD_SHA",
+      "--installed-authority-out",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/world/installed-authority-entry.json"
+    ],
+    [
+      "$BIN/cat-content-rail",
+      "quick",
+      "--root",
+      "$ROOT",
+      "--source",
+      "$ROOT/go-backend/internal/contentrails/sources/authored-v4.json",
+      "--candidate",
+      "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/quick/candidate.json",
+      "--factual-review",
+      "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/quick/factual-review.json",
+      "--quality-review",
+      "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/quick/quality-review.json",
+      "--proposal",
+      "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/quick/proposal.json",
+      "--live-audit",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/quick/installed-audit.json",
+      "--final-factual-review",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/quick/installed-final-factual-review.json",
+      "--final-quality-review",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/quick/installed-final-quality-review.json",
+      "--expected-sha256",
+      "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "--installed-authority-out",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/quick/installed-authority-entry.json"
+    ],
+    [
+      "$BIN/cat-content-rail",
+      "extensions",
+      "--root",
+      "$ROOT",
+      "--source",
+      "$ROOT/go-backend/internal/contentrails/sources/authored-v4.json",
+      "--candidate",
+      "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/extensions/candidate.json",
+      "--factual-review",
+      "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/extensions/factual-review.json",
+      "--quality-review",
+      "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/extensions/quality-review.json",
+      "--proposal",
+      "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/extensions/proposal.json",
+      "--live-audit",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/extensions/installed-audit.json",
+      "--final-factual-review",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/extensions/installed-final-factual-review.json",
+      "--final-quality-review",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/extensions/installed-final-quality-review.json",
+      "--expected-sha256",
+      "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+      "--installed-authority-out",
+      "$ROOT/docs/reviews/v1-5-small-objects/native/extensions/installed-authority-entry.json"
+    ]
+  ],
+  "legacy_python_authority_and_history": {
+    "actual_sources": [
+      "scripts/build_alchimie_discovery_world.py imports historical SOURCE and B.candidate reconstructs V97 values; tests/test_v97_world_quality.py asserts251/351/9 against it and get_world().",
+      "discovery_world.py get_world reads CATALOG_PATH/_load_world and validatescurrentgraph; currentDjango runtime/captures thus see generatedSource5 catalogue.",
+      "tests/content_history.py before_v1_4_catalog then before_v1_3_catalog are exacthash/byteinverse hooks; tests/current_content.py snapshot remainsunchanged for KG-onlyproperties in world-onlywave."
+    ],
+    "decision": "Keep scripts/alchimie_discovery_recipe_source.py exacthistorical66ade…; no added Ciocolatăcaldă in its RECIPES/WORLD_CONCEPTS. Native authored Source5 is currentauthority. Python current serving get_world loads generatedcatalogue; it never needslegacyRECIPES updated for currentnativeworld.",
+    "historical_service_view": "For oldV97/currentliteral tests that call get_world()/Django, use separatelyreviewed historicaltestcontext with V14catalogue exactbytes via temporaryloaderpath or explicitvalidatedhistoricalworld. Patch actual imported loaderaliases/cache/store asneeded; do not modifyservedfixtures orlegacyproducer. Restorepaths/caches/stores afterward, and preserve oldassertion texts/casecollection.",
+    "minimal_shim": "Add exact scoped before_v1_5_world_catalog inverse using new signedcataloguehash/receipt, removingonly acceptedoneconcept/recipe/10thbook/binding changes and proving exactV14world0d1018…. Invoke it before existing before_v1_4_catalog for theworldartifact only. Allotherfiles pass unchanged existinginversechecks.",
+    "preservation_tests": "Add currentSource5/oldSource4 byteassurance and explicitinverse mutation/order/duplicate refusals. Old B.candidate assertions must keep251/351/9; newcurrentV15 tests assert252/352/10 from independentlyaccepted current evidence."
+  },
+  "minimal_implementation_files": [
+    "go-backend/internal/contentrails/sources/authored-v5.json (authored input)",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json (native signed catalogue)",
+    "go-backend/internal/content/bundled.json + digest.go (native generated export)",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-5.json.gz + golden.go/focused selector tests (reviewed fifth exactSource8 selector)",
+    "Current exploration/reference expectations ONLY if independently generated differences; retain exact V14 archives/literals and newV15 history inverse tests/helper entries",
+    "go-backend/internal/contentrails/sources/installed-authorities.json + installed_authorities_pin.go (strict metadataonly)",
+    "Meaningful native alchimie_explore/contentrails world newrecipe/save/empty/privacy tests; docs/STATUS + ADR/index + actual receipts"
+  ],
+  "not_run": "No nativebuild/help execution/tests/operators/source5/candidate/audit/catalogue/capture/authority/landing action performed by this planner. All commands are argv templates and every outputSHA is actualfuture independent accepted data.",
+  "paths": {
+    "BIN": "Qualified current native binary directory from own prerequisite receipt; rebuild after relevant source/export/metadata changes",
+    "GO": "Own qualified Go1.27.1",
+    "PREPARED": "$SCRATCH/current-reference; no foreign V14 scratch dependency",
+    "PY": "/home/dobo/work/cat_de_roman_esti/.venv/bin/python (Python3.12 optional independent oracle)",
+    "REF": "$ROOT/docs/reviews/v1-5-small-objects/reference",
+    "ROOT": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5",
+    "SCRATCH": "/home/dobo/work/_temp/codex__content-v1-5"
+  },
+  "planner": "/root/content_rail",
+  "preserve_exact_without_rewrites": [
+    "KG package/testmirror0cd…",
+    "games_pack e24…",
+    "board_rankings58fa…",
+    "derived_catalog250… + Python/Go consumerpins",
+    "quick cataloga21… + quick rawSource4/reviews/proposal/Pythonconsumerpin",
+    "extensions catalogue1dd… + Source4 raw/reviews/proposal",
+    "reservefd522… and allfinite23 judgments",
+    "currentmobilecontract2f756…",
+    "alloldsource1–4 and19archives/previousauthorityhistory/corpora"
+  ],
+  "reusable_verified_precedents": [
+    {
+      "file": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/capture_reference_v1_4.py.txt",
+        "sha256": "d77eb4eaf52f7ccb4cdd6f51fdc32e8d15a08cf3de8007b760f775717e7c7cfc"
+      },
+      "reuse": "HTTP1207 differential producer; preserve requests/validation/expected authorship, adapt only ROOT/output/reference names; CLI --binary,--runtime go,--report."
+    },
+    {
+      "file": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/capture_fallbacks_v1_4.py.txt",
+        "sha256": "96c7bc9d3fa587e41c6a39e2491867e26cb5be58cf75034386eed1f7661eea37"
+      },
+      "reuse": "Canonical fallback wrapper alchimie/browser/graph modes; takes mode,ROOT,OUT; output-path-only adapters prove originalproducer bytes reversible."
+    },
+    {
+      "file": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/generate_game_vectors_v1_4.py.txt",
+        "sha256": "7350df893c6f1baac58414b0922d94395f60e14a8bb95dcbd8ed0e9eeae3da68"
+      },
+      "reuse": "Contexto60/Lant60 currentvectors; unchanged KG means expected equality still must be measured."
+    },
+    {
+      "file": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/generate_alchimie_v1_4.py.txt",
+        "sha256": "285b45dd2377e6b114e8a14c684bfe1f0702398244aec6764972f7ead7190efa"
+      },
+      "reuse": "Curated/mined/exploration/restores; new World affects exploration/history expectations. Retain all original cases."
+    },
+    {
+      "file": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/generate_graph_v1_4.py.txt",
+        "sha256": "e2b65a0ac0bebeab3a9b3bdba1949471de11b3d03b1890c7aa0d88fc2e69cd4d"
+      },
+      "reuse": "19texts/65ratios/current targetrows; keep all8 actual oldtargetIDs including supplemental2; noKGgrowth should be byte-exact."
+    },
+    {
+      "file": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/generate_selectors_v1_4.py.txt",
+        "sha256": "2dbd5cfeda5a37e6b4fcf4c614b97f25e38f2763ae61a2f091e09e58c85da037"
+      },
+      "reuse": "Selection reference; no forced excludelist/shelf change."
+    },
+    {
+      "file": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quality-methods-source-archive.json.gz",
+        "sha256": "afe6c7a1d43b632bd687142d87522337f12d23df1c8257f88542c0daec41b419"
+      },
+      "reuse": "Reusable mechanical verification methods only, not approval/rationale generation. Priorjudgments cannot be rebound."
+    },
+    {
+      "file": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/history-current-reference-final.json",
+        "sha256": "10062da202a8a48b400bdf5e3cd3be79586e1d93c092efebb183cfd9684789d5"
+      },
+      "reuse": "Whole byte inverse/old assertions precedent; add world-onlyV15 inverse then allprevious versions, no deselection."
+    }
+  ],
+  "review_receipt_minimum": [
+    "Exact i06 world author/spec/candidate; raw world factual+quality complete coverage",
+    "Prospective native addedrecipe andoldempty-save/newService/currenthistory proof plus independentquality acceptance",
+    "Native Source5 builder receipt,world proposal/currentstagingaudit andsame-role stagingfinals",
+    "Current source/export andindependentPython exact check,referencecapture provenance+semanticdelta quality,oldV14 archives/fullhistoryinverseimplementation independent review",
+    "Final runtime freeze; current3installedaudits/same-role finals; exact3CLI entrydrafts; mixedsource authority two-metadata assembly review",
+    "Native source/export/rank/derive/mobile/all4/HTTP1207/fullnative+shared racevet/fullhistory/smoke151assets28/docswhitespace andexactrevision assembled review before rootlocalgreenlanding"
+  ],
+  "schema": "v1-5-linux-world-only-landing-rail-plan-v1",
+  "scope": "Practical command roadmap ONLY for prepared i06 Ciocolatăcaldă world-local addition after fresh reviews/prospective acceptance. No installedV15 data/currentapproval by this plan. i02 two directions remainHELD; earlier sharedKG sequence is historical and not selected.",
+  "source5_authoring": {
+    "existing_unique_archive_union_sources1_through4": 19,
+    "expected_after_new_v14_predecessor_union": 22,
+    "metadata_change": [
+      "version",
+      "parent_source_sha256",
+      "base_commit",
+      "archives.world_previous",
+      "archives.world_candidate",
+      "archives.world_factual",
+      "archives.world_quality"
+    ],
+    "parent_source_sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "path": "go-backend/internal/contentrails/sources/authored-v5.json",
+    "predecessor_descriptors": {
+      "world_candidate": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/candidate.json",
+        "sha256": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc"
+      },
+      "world_factual": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/factual-review.json",
+        "sha256": "48a6cfcd0ad80a82f248b3cc532b724dba88da8059fdab763c5a5a61f4ac63a1"
+      },
+      "world_previous": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/candidate.json",
+        "sha256": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc"
+      },
+      "world_quality": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/quality-review.json",
+        "sha256": "32f65cc95cd9d169bba1019d85ab545eaa70be6e17decca0d1fce0d80f3a2240"
+      }
+    },
+    "source_cli_truth": "Actual cat-content-rail flags are --source/--candidate-out/--candidate/--factual-review/--quality-review/--proposal. No source-authoring or --input mode exists; do not invent one.",
+    "unchanged_sections": [
+      "quick",
+      "extensions",
+      "legacy_sources",
+      "world.world",
+      "world.descriptions",
+      "world.starters",
+      "world.unlocks",
+      "world.goals",
+      "all old world definitions/recipes/source evidence"
+    ],
+    "version": 5,
+    "world_delta": {
+      "recipe_sources": {
+        "ciocolata-calda-lapte-ciocolata": [
+          "https://www.kaufland.ro/retete/cauta-o-reteta/reteta.ciocolata-calda.r_id=RO_1308.html"
+        ]
+      },
+      "recipes": [
+        [
+          "ciocolata-calda-lapte-ciocolata",
+          "Lapte",
+          "Ciocolată",
+          "Ciocolată caldă",
+          "Ciocolata se amestecă cu lapte încălzit pentru o variantă de ciocolată caldă; perechea surprinde baza preparatului, iar zahărul și aromele pot completa rețeta."
+        ]
+      ],
+      "world_concepts": {
+        "Ciocolată caldă": {
+          "description": "Băutură caldă pe bază de ciocolată; varianta propusă folosește lapte încălzit și poate include zahăr sau arome.",
+          "id": "alw_food_ciocolata_calda",
+          "sources": [
+            "https://www.kaufland.ro/retete/cauta-o-reteta/reteta.ciocolata-calda.r_id=RO_1308.html"
+          ]
+        }
+      }
+    }
+  },
+  "source_checkpoint": "a4f42f176b06276a3d46f3da40373cecfb70f7ac",
+  "source_checks": [
+    {
+      "path": "go-backend/cmd/cat-content-rail/main.go",
+      "sha256": "66aa1433d6eda62c084fc656f8a03990708677639e54aa3ec4dc1c188f6636a8"
+    },
+    {
+      "path": "go-backend/cmd/cat-content/main.go",
+      "sha256": "58a3a29310b771e27ac4f05bfb6ed0ad9cba6fca646ad9916d93071e64fdd722"
+    },
+    {
+      "path": "go-backend/internal/contentops/command.go",
+      "sha256": "6a17c5c08d694eb1dd5c092d42240be64929d877563b3ec2a5019d301ea49e4c"
+    },
+    {
+      "path": "go-backend/cmd/cat-mobile-pack/main.go",
+      "sha256": "1a75f503e6bead9d9a18adfb6e936b297004f6978de5459b76aad6984bccbfb3"
+    },
+    {
+      "path": "go-backend/cmd/cat-qualify/main.go",
+      "sha256": "38aa41a38f51a6700d238085dd80845c5fff166b5b21a521cec5ca79ac8e6def"
+    },
+    {
+      "path": "go-backend/internal/contentrails/source.go",
+      "sha256": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de"
+    },
+    {
+      "path": "go-backend/internal/contentrails/shape.go",
+      "sha256": "ee73f903a862de0601685e7bce1204e80d8235eb46befd1dabdd20ce806497de"
+    },
+    {
+      "path": "go-backend/internal/contentrails/world.go",
+      "sha256": "caadad6c38f40563c97fbdae6b2698e29daa7db978296535a68298bbbcfaec8d"
+    },
+    {
+      "path": "go-backend/internal/contentrails/reserve.go",
+      "sha256": "ac2bb53234e366b784562c5f382eed9f5aba4d1669934169354ffe93ac078c00"
+    },
+    {
+      "path": "go-backend/internal/contentrails/installed.go",
+      "sha256": "d4f465ecb24754730f2e5e6e45a441ff5bbbc146ac9cc53c50824446992dbefd"
+    },
+    {
+      "path": "go-backend/internal/contentrails/rail.go",
+      "sha256": "5076e3b45923d9ee7a5563d9c1fd2b84c6fae1db16fb2beb1efc9c6f3c3a0f55"
+    },
+    {
+      "path": "go-backend/internal/alchimie_explore/service.go",
+      "sha256": "34932e427369da4086f4ce7f87ba8b75477f1d0fb0374f53e5be72977e6eec6f"
+    },
+    {
+      "path": "go-backend/internal/httpapi/body.go",
+      "sha256": "22dc70b3656ed389cdf3ae2d289fa3c5207f5e322b643cfba72f4405e00c7815"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/build.go",
+      "sha256": "ccb575e94fa2615eb0712b6852b7e8936048457a84b67b2762d9d83da769c44b"
+    }
+  ],
+  "steps": [
+    {
+      "action": "Admit corrected ordinary/exploration prospective proof and final world scope",
+      "commands": [],
+      "files": "Fresh exact i06 authored world proposal/source specification, independent factual/quality reviews and prospective native empty-pair/save/privacy/determinism results; selected pool revision/snapshot only after root decision.",
+      "guard": "i02 graph directions stay HELD. No functional_graph apply, no KG/rank/derive changes. i06 old source-only receipts are leads, not new data approval.",
+      "step": 1
+    },
+    {
+      "action": "Seal unchanged baseline and old history before any authoring",
+      "commands": [
+        [
+          "$BIN/cat-content",
+          "validate",
+          "--root",
+          "$ROOT"
+        ],
+        [
+          "$BIN/cat-content",
+          "export",
+          "--root",
+          "$ROOT",
+          "--check"
+        ],
+        [
+          "$BIN/cat-content-rail",
+          "all",
+          "--root",
+          "$ROOT",
+          "--check"
+        ]
+      ],
+      "files": "Archive exact V1.4 world0d1018…/bundle d1d3…/Source8/corpora/current literals and source4authority43ae…; independent preservation receipt.",
+      "guard": "Run baseline all4 BEFORE Source5file introduces an extra runtime input. Check current SDK/operator provenance; rebuild per resource admission.",
+      "step": 2
+    },
+    {
+      "action": "Author native Source5 structured input",
+      "commands": [],
+      "files": "go-backend/internal/contentrails/sources/authored-v5.json; builder receipt binding source/i06scope/predecessor/current inputs.",
+      "guard": "No source-authoring command exists. File authoring is structured source data, never a served-fixture edit. CloneSource4, set version5,parent444…,base_commit to actual accepted wave baseline; use exact V1.4 predecessor descriptors below. Append only i06 world_concepts,one5-string recipe tuple,recipe_sources. Other authored sections exactly retained.",
+      "step": 3
+    },
+    {
+      "action": "Generate ONLY fresh Source5 world raw candidate",
+      "commands": [
+        [
+          "$BIN/cat-content-rail",
+          "world",
+          "--root",
+          "$ROOT",
+          "--source",
+          "$ROOT/go-backend/internal/contentrails/sources/authored-v5.json",
+          "--candidate-out",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/candidate.json"
+        ]
+      ],
+      "files": "native/world/candidate.json plus independent factual-review.json and quality-review.json",
+      "guard": "Current native Source5 LoadSource validates sequential exact Source4 parent already registered in old ledger. PreviousMatchesCurrent must pass current signed V1.4world. Review all252concepts/352recipes/32goals/12unlocks/10histories if actual builder yields expected counts. Old251 exact concepts may inherit only after complete equality; new warm beverage requires fresh judgment. No IDs/slots inferred from count arithmetic.",
+      "step": 4
+    },
+    {
+      "action": "Build exact reviewed world proposal",
+      "commands": [
+        [
+          "$BIN/cat-content-rail",
+          "world",
+          "--root",
+          "$ROOT",
+          "--source",
+          "$ROOT/go-backend/internal/contentrails/sources/authored-v5.json",
+          "--candidate",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/candidate.json",
+          "--factual-review",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/factual-review.json",
+          "--quality-review",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/quality-review.json",
+          "--proposal",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/proposal.json"
+        ]
+      ],
+      "files": "native/world/proposal.json",
+      "guard": "Existing world generator produces normalized serving catalogue with recipe/snapshot/source descriptors. Complete native review schema; factual/quality authors distinct and exact candidate SHA.",
+      "step": 5
+    },
+    {
+      "action": "Fresh staging world audit and same-role final reviews",
+      "commands": [
+        [
+          "$BIN/cat-content-rail",
+          "world",
+          "--root",
+          "$ROOT",
+          "--source",
+          "$ROOT/go-backend/internal/contentrails/sources/authored-v5.json",
+          "--audit-catalog",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/proposal.json",
+          "--audit-out",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/preinstall-audit.json"
+        ]
+      ],
+      "files": "native/world/preinstall-audit.json,final-factual-review.json,final-quality-review.json",
+      "guard": "Audit all33goal modes/current recipes and10histories, current RuntimeHashes/all8sources+rubric. Native world final kind alchimie-discovery-world-final-v1; seven keys including audit_sha256/catalog_sha256; same reviewers as raw. Guard included bytes through signed write.",
+      "step": 6
+    },
+    {
+      "action": "Guarded world catalogue install only",
+      "commands": [
+        [
+          "$BIN/cat-content-rail",
+          "world",
+          "--root",
+          "$ROOT",
+          "--source",
+          "$ROOT/go-backend/internal/contentrails/sources/authored-v5.json",
+          "--candidate",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/candidate.json",
+          "--factual-review",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/factual-review.json",
+          "--quality-review",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/quality-review.json",
+          "--proposal",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/proposal.json",
+          "--live-audit",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/preinstall-audit.json",
+          "--final-factual-review",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/final-factual-review.json",
+          "--final-quality-review",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/final-quality-review.json",
+          "--expected-sha256",
+          "$REVIEWED_WORLD_SHA",
+          "--write"
+        ]
+      ],
+      "files": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json via existing readset/CAS/transaction only; staging receipt/inverse archive.",
+      "guard": "No hand-editing catalogue. Actual saved proposal SHA is sole expected pin. Quick/Ext/Reserve/GamesPack/KG/rank/derived/mobile remain exact current bytes. World validate has no separate literal source pin to adjust.",
+      "step": 7
+    },
+    {
+      "action": "Coherent native export and independent Python check",
+      "commands": [
+        [
+          "$BIN/cat-content",
+          "validate",
+          "--root",
+          "$ROOT"
+        ],
+        [
+          "$BIN/cat-content",
+          "export",
+          "--root",
+          "$ROOT"
+        ],
+        [
+          "$BIN/cat-content",
+          "export",
+          "--root",
+          "$ROOT",
+          "--check"
+        ],
+        [
+          "$PY",
+          "scripts/export_go_content.py",
+          "--check"
+        ]
+      ],
+      "files": "go-backend/internal/content/bundled.json and digest.go generated transaction; export receipt with new Source8 (only World changes).",
+      "guard": "Use Python3.12/Unicode15 optional independent oracle with PYTHONPATH=$ROOT,accounts off. Legacy exporter wording is history; native export remains canonical. No Quick/derived consumer pin change for world-only scope.",
+      "step": 8
+    },
+    {
+      "action": "Independent current HTTP/fallback references and old history proofs",
+      "commands": [
+        [
+          "$PY",
+          "$PREPARED/capture_reference_v1_5.py",
+          "--binary",
+          "$BIN/cat-server",
+          "--runtime",
+          "go",
+          "--report",
+          "$REF/http-differential.json"
+        ],
+        [
+          "$BIN/cat-qualify",
+          "replay",
+          "--binary",
+          "$BIN/cat-server",
+          "--input",
+          "$REF/python-http-parity-v1-5.json.gz",
+          "--report",
+          "$REF/native-replay.json"
+        ]
+      ],
+      "files": "New independently Django-authored1207corpus; current vector candidates, full deltas, source-capture provenance, independent quality/current-reference review; all four old corpora retained. Current expected changes only after reviewed truth.",
+      "guard": "Rebuild sealed server after export first. Reuse original producer/request logic with ROOT/output/reference substitutions only. Do not source expected responses from Go. Default parity must refuse new source map until exact reviewed fifth selector added.",
+      "step": 9
+    },
+    {
+      "action": "Freeze all included runtime/source/export/reference inputs",
+      "commands": [],
+      "files": "native/runtime-freeze.json; source-map/export/corpus/selector/history implementation and consumer-scope independent review receipts.",
+      "guard": "Source5 is new included runtime JSON; membership is actual RuntimeHashes (likely108 with only new sourcefile), not an assumed count. All code including HTTPselector/pinlogic must finish before postinstalled audits. _test/testdata/reference files still separately hash-bound. Only exact two authority metadata paths are excluded from runtime self-hash.",
+      "step": 10
+    },
+    {
+      "action": "Fresh current installed audits for all3rails",
+      "commands": [
+        [
+          "$BIN/cat-content-rail",
+          "world",
+          "--root",
+          "$ROOT",
+          "--source",
+          "$ROOT/go-backend/internal/contentrails/sources/authored-v5.json",
+          "--audit-catalog",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/proposal.json",
+          "--audit-out",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/world/installed-audit.json"
+        ],
+        [
+          "$BIN/cat-content-rail",
+          "quick",
+          "--root",
+          "$ROOT",
+          "--source",
+          "$ROOT/go-backend/internal/contentrails/sources/authored-v4.json",
+          "--audit-catalog",
+          "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/quick/proposal.json",
+          "--audit-out",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/quick/installed-audit.json"
+        ],
+        [
+          "$BIN/cat-content-rail",
+          "extensions",
+          "--root",
+          "$ROOT",
+          "--source",
+          "$ROOT/go-backend/internal/contentrails/sources/authored-v4.json",
+          "--audit-catalog",
+          "$ROOT/docs/reviews/v1-4-time-links-and-predicates/native/extensions/proposal.json",
+          "--audit-out",
+          "$ROOT/docs/reviews/v1-5-small-objects/native/extensions/installed-audit.json"
+        ]
+      ],
+      "files": "Fresh installed-final-factual-review.json and installed-final-quality-review.json for eachrail, same identities as that rail raw reviews.",
+      "guard": "Old Quick/Ext catalogue/candidate/raw reviews stay Source4 exact but their old audits are stale because World source and RuntimeHashes changed. Fresh finals must inspect current exact unchanged semantics/dependencies/new fullbindings; never edit old finals or rehash approvals. Quick85/460 natural; Ext27/49+83core preservation; World33/all current recipes/10histories.",
+      "step": 11
+    },
+    {
+      "action": "Build strict installed-authority entry drafts",
+      "commands": [],
+      "files": "native/{world,quick,extensions}/installed-authority-entry.json via --installed-authority-out recipes below.",
+      "guard": "World source5; Quick/Extensions source4. Current exact installed audits/finals and saved proposal SHA mandatory. CLI never writes manifest/pin or grants approval by a pin.",
+      "step": 12
+    },
+    {
+      "action": "Adopt exact reviewed mixed-source authority metadata and rebuild",
+      "commands": [
+        [
+          "$BIN/cat-content-rail",
+          "all",
+          "--root",
+          "$ROOT",
+          "--check"
+        ],
+        [
+          "$BIN/cat-content-rail",
+          "reserve",
+          "--root",
+          "$ROOT",
+          "--check"
+        ],
+        [
+          "$BIN/cat-content-ops",
+          "rank",
+          "--root",
+          "$ROOT",
+          "--check"
+        ],
+        [
+          "$BIN/cat-content-ops",
+          "derive",
+          "--root",
+          "$ROOT",
+          "--check"
+        ],
+        [
+          "$BIN/cat-mobile-pack",
+          "--root",
+          "$ROOT",
+          "--check"
+        ]
+      ],
+      "files": "sources/installed-authorities.json append exactSource5 chain descriptor; replace three entries from exact native drafts; installed_authorities_pin.go from unchanged exact PinBytesForInstalledAuthorities template (SHA sole variable). Independent two-metadata assembly review.",
+      "guard": "Preserve Source2/3/4 chain and all old sources/archive bytes. Rebuild all relevant qualified operators after embedded metadata adoption. Default all --check WITHOUT --source5 reconstructs mixed current rails. Forced --source5 against unchanged Source4 Quick/Ext must refuse. Reserve remains original fd522… with 20pack/3quick archived judgments.",
+      "step": 13
+    },
+    {
+      "action": "Full required gates and independent exact-revision assembled acceptance",
+      "commands": [
+        [
+          "$GO",
+          "-C",
+          "$ROOT/go-backend",
+          "test",
+          "-race",
+          "./..."
+        ],
+        [
+          "$GO",
+          "-C",
+          "$ROOT/go-backend",
+          "vet",
+          "./..."
+        ],
+        [
+          "$GO",
+          "-C",
+          "$ROOT/shared-go/authcore",
+          "test",
+          "-race",
+          "./..."
+        ],
+        [
+          "$GO",
+          "-C",
+          "$ROOT/shared-go/authcore",
+          "vet",
+          "./..."
+        ],
+        [
+          "$BIN/cat-qualify",
+          "parity",
+          "--binary",
+          "$BIN/cat-server",
+          "--report",
+          "$REF/parity-final.json"
+        ],
+        [
+          "$BIN/cat-qualify",
+          "smoke",
+          "--url",
+          "$ISOLATED_ANONYMOUS_URL",
+          "--static-root",
+          "$ROOT/cat_de_roman_esti/web/static",
+          "--report",
+          "$REF/smoke-final.json"
+        ],
+        [
+          "$BIN/cat-doc-check",
+          "--root",
+          "$ROOT"
+        ],
+        [
+          "git",
+          "diff",
+          "--check"
+        ]
+      ],
+      "files": "Full gate receipts, new meaningful gameplay/history tests, source/ref assertions, STATUS/date/ADR017x/ADRindex in same change, independent assembled exactcommit acceptance, then root-owned green local landing.",
+      "guard": "Every heavy lane separately resource-admitted and measured. Full historical collection without deselection; update current expectations only after independently captured proof, preserve all old literal/archive assurance. Node24 frontend gates only if actual frontend/e2e source fixture changes; static assets unchanged otherwise proved exact. No push/deploy inferred; shared main must finish clean.",
+      "step": 14
+    }
+  ],
+  "world_history_and_empty_pair_proof": {
+    "api": {
+      "combine": "POST /api/alchimie/explore/{id}/combine {a,b} under existing exact pair-body validation",
+      "create": "POST /api/alchimie/explore {progress,goal_id optional}",
+      "get": "GET /api/alchimie/explore/{id}",
+      "hint_goal": "Existing /hint and /goal endpoints; use recorded actual schema, no new endpoint"
+    },
+    "expected_not_approved_counts": {
+      "authored_concepts": 78,
+      "concepts": 252,
+      "goal_modes": 33,
+      "goals": 32,
+      "historical_books": 10,
+      "productive_discoveries": 148,
+      "recipes": 352,
+      "saved_prefixes": "1009 plus actual currentV14 productive prefixes; expected147 additional→1156, confirm native actual receipts"
+    },
+    "native_cases": [
+      "Through ordinary default oldexploration API earn existingChocolate via existing supply16/recipe path, not newseed injection. With Lapte+Ciocolată owned, observe old empty result and empty_pairs entry; Get retains empty observation; save only actualstate.progress.",
+      "Construct NEW candidate service via validated prospective World proposal using existing private native audit overlay (no hot-source file swap), restore exactoldprogress through10thhash; oldownedIDs/parents retained, newconcept still undiscovered initially, currenthash migrates, empty memory fresh because it is session-local.",
+      "Candidate combines same milk/chocolatepair→newCiocolatăcaldă; reverse pair ordering identical; duplicatecraft yields already_known/noextra discovery; realrevisions/Get/hints/privatefutureIDs/empty_pair bounds inspected.",
+      "Old Service.New fixedworld keeps oldbehavior; candidateGet oldsessionID404, explicitnewCreate(progress) migrates. No nativehotreload/live-book replacement claim. Sessionlocal revision/hint/empty fields mayreset; report semanticpreservation rather than full oldstatebyte equality.",
+      "Old-current completed251concept save now restores all251 but completefalse until newresult earned; all33goalmodes remain reachable and full replay restoration complete. Unknown hash/wrong world409; illegal/uneared/impossiblecraft400; extra progress.empty_pairs422; bound256crafts/128empty/2MiB inputs retained."
+    ],
+    "new_history": "compatibleVersions appends exactSource4 mechanics when recipe set changes; 10 histories expected under16 cap. Preserve all351 oldrecipe pair→results/allstarters/goals/unlocks; nochanged old pair output.",
+    "new_node_id": "alw_food_ciocolata_calda",
+    "new_recipe_id": "ciocolata-calda-lapte-ciocolata",
+    "pair_ids": [
+      "n_v4gas_lapte",
+      "n_v85_food_ciocolata"
+    ],
+    "semantic_limits": "Warm milk/chocolate foundation, not complete2ingredient recipe, universaldairy or Romanianorigin; distinguish Ganache/currentcoldMilkshake/Contextoprojection. Fresh factual+quality must resolve exactsemantic novelty before proposing."
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "v1-5-exhaustive-current-metadata-contentrails-test-groups-v1",
+  "checked_at_utc": "2026-10-06T20:57:00.779899+00:00",
+  "enumeration_argv": [
+    "/home/dobo/work/_temp/codex__content-v1-5/tools/go/bin/go",
+    "-C",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/go-backend",
+    "test",
+    "./internal/contentrails",
+    "-list",
+    "."
+  ],
+  "enumeration_output": "TestInstalledAuthorityEmptyKeepsHistoricalBaselineAndPinIsSeparate\nTestInstalledAuthorityPinExclusionPermitsOnlyDigestMetadata\nTestInstalledAuthorityProtectedDocumentReaderRefusals\nTestInstalledAuthorityDraftOutputCannotOverwriteAuthorityOrRuntime\nTestReviewedInstalledVersionTwoReconstructsWithoutRelabelingV1\nTestInstalledAuthoritySchemaPinAndSequentialChainRefusals\nTestInstalledAuthorityCannotBeGrantedByPinsWithoutCurrentReviews\nTestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse\nTestFutureInstalledParentChainRequiresExactSequentialReviewedPredecessor\nTestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes\nTestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix\nTestStrictPrivateSourceAndReviewJSON\nTestSourceShapeAndVersionParentRefuseBeforeConstruction\nTestCompleteIndependentJudgmentsSourcesAndCandidateBinding\nTestHistoricalWorldTransitionsKeepCurrentBooksAndRefuseChangedRecipes\nTestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal\nTestSharedGuardedTransactionsRollbackAndRefuseStaleReadsets\nTestOutputCannotFollowSymlinkOrOverwriteFixtures\nTestSecondWorldTransitionRefusesStalePreviousArchive\nTestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval\nTestLoadedCustomSourceCASRefusesChangedFlagFile\nTestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay\nTestProspectiveWorldAuditWithChangedGraphKeepsInstalledWorldFailClosed\nTestInstalledWorldReconstructionAfterRecipeTransition\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails\t0.012s\n",
+  "all_tests": [
+    "TestInstalledAuthorityEmptyKeepsHistoricalBaselineAndPinIsSeparate",
+    "TestInstalledAuthorityPinExclusionPermitsOnlyDigestMetadata",
+    "TestInstalledAuthorityProtectedDocumentReaderRefusals",
+    "TestInstalledAuthorityDraftOutputCannotOverwriteAuthorityOrRuntime",
+    "TestReviewedInstalledVersionTwoReconstructsWithoutRelabelingV1",
+    "TestInstalledAuthoritySchemaPinAndSequentialChainRefusals",
+    "TestInstalledAuthorityCannotBeGrantedByPinsWithoutCurrentReviews",
+    "TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse",
+    "TestFutureInstalledParentChainRequiresExactSequentialReviewedPredecessor",
+    "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes",
+    "TestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix",
+    "TestStrictPrivateSourceAndReviewJSON",
+    "TestSourceShapeAndVersionParentRefuseBeforeConstruction",
+    "TestCompleteIndependentJudgmentsSourcesAndCandidateBinding",
+    "TestHistoricalWorldTransitionsKeepCurrentBooksAndRefuseChangedRecipes",
+    "TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal",
+    "TestSharedGuardedTransactionsRollbackAndRefuseStaleReadsets",
+    "TestOutputCannotFollowSymlinkOrOverwriteFixtures",
+    "TestSecondWorldTransitionRefusesStalePreviousArchive",
+    "TestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval",
+    "TestLoadedCustomSourceCASRefusesChangedFlagFile",
+    "TestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay",
+    "TestProspectiveWorldAuditWithChangedGraphKeepsInstalledWorldFailClosed",
+    "TestInstalledWorldReconstructionAfterRecipeTransition"
+  ],
+  "groups": {
+    "a_current_and_historical_world": [
+      "TestInstalledWorldReconstructionAfterRecipeTransition",
+      "TestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix",
+      "TestHistoricalWorldTransitionsKeepCurrentBooksAndRefuseChangedRecipes",
+      "TestSecondWorldTransitionRefusesStalePreviousArchive",
+      "TestProspectiveWorldAuditWithChangedGraphKeepsInstalledWorldFailClosed"
+    ],
+    "b_all_other_operator_cases": [
+      "TestInstalledAuthorityEmptyKeepsHistoricalBaselineAndPinIsSeparate",
+      "TestInstalledAuthorityPinExclusionPermitsOnlyDigestMetadata",
+      "TestInstalledAuthorityProtectedDocumentReaderRefusals",
+      "TestInstalledAuthorityDraftOutputCannotOverwriteAuthorityOrRuntime",
+      "TestReviewedInstalledVersionTwoReconstructsWithoutRelabelingV1",
+      "TestInstalledAuthoritySchemaPinAndSequentialChainRefusals",
+      "TestInstalledAuthorityCannotBeGrantedByPinsWithoutCurrentReviews",
+      "TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse",
+      "TestFutureInstalledParentChainRequiresExactSequentialReviewedPredecessor",
+      "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes",
+      "TestStrictPrivateSourceAndReviewJSON",
+      "TestSourceShapeAndVersionParentRefuseBeforeConstruction",
+      "TestCompleteIndependentJudgmentsSourcesAndCandidateBinding",
+      "TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal",
+      "TestSharedGuardedTransactionsRollbackAndRefuseStaleReadsets",
+      "TestOutputCannotFollowSymlinkOrOverwriteFixtures",
+      "TestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval",
+      "TestLoadedCustomSourceCASRefusesChangedFlagFile",
+      "TestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay"
+    ]
+  },
+  "groups_disjoint": true,
+  "complete_union": true,
+  "all_subtests_included": true,
+  "no_case_deselection": true,
+  "actual_source_manifest_sha256": "a4ace0908e17611d6aebbbbe1121a26df2c462caaa7baaa9d8981d936df89c0e",
+  "actual_pin_sha256": "e29b381be0f6fc3774b80e06558fdadc10189cb95a07b3f74aa9eda0e0d80411",
+  "reason": "Unfiltered full package hit18m harness timeout while final world test ran, no assertion failure; preserve result and rerun every24current-metadata case exactlyonce across these disjoint bounded campaigns. Application assertions and20m/RSS/disk caps unchanged.",
+  "prior_timeout_receipt": {
+    "path": "docs/reviews/v1-5-hot-chocolate/contentrails-full-race-r1-result.json",
+    "sha256": "d379f0b9118799b0cdf860d05cc94f497d974108a3d50279bb1965c3cc4decc3"
+  }
+}

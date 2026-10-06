@@ -1,0 +1,23 @@
+import json,os,pathlib,socket,subprocess,time,urllib.request
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5');S=pathlib.Path('/home/dobo/work/_temp/codex__content-v1-5');D=R/'docs/reviews/v1-5-hot-chocolate'
+env=dict(os.environ);env.update({'CAT_ACCOUNTS_ENABLED':'0','CAT_SUBMISSIONS_ENABLED':'0','CAT_LEGAL_OPERATOR':'Synthetic-Fixture','CAT_LEGAL_CONTACT_EMAIL':'operator@example.invalid'})
+with socket.socket() as s:s.bind(('127.0.0.1',0));port=s.getsockname()[1]
+url=f'http://127.0.0.1:{port}'
+with (S/'hot-chocolate/final-smoke-server.log').open('w') as log:
+ p=subprocess.Popen([str(S/'cat-server'),'-listen',f'127.0.0.1:{port}'],cwd=R,env=env,stdout=log,stderr=subprocess.STDOUT)
+ try:
+  ready=False
+  for _ in range(100):
+   if p.poll() is not None:raise RuntimeError('owned smoke server exited')
+   try:
+    with urllib.request.urlopen(url+'/api/health',timeout=1) as r:ready=r.status==200
+   except OSError:pass
+   if ready:break
+   time.sleep(.1)
+  assert ready
+  a=[str(S/'cat-qualify'),'smoke','--url',url,'--static-root',str(R/'cat_de_roman_esti/web/static'),'--report',str(D/'native-smoke.json')]
+  print(json.dumps({'owned_loopback_url':url,'argv':a}),flush=True);subprocess.run(a,env=env,cwd=R,check=True)
+ finally:
+  p.terminate()
+  try:p.wait(timeout=10)
+  except subprocess.TimeoutExpired:p.kill();p.wait()

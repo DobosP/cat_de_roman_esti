@@ -1,0 +1,59 @@
+{
+  "lane": "prospective-journey",
+  "manifest_sha256": "119828f09a6038865856f4e17a06c032685c6f6a97fed82d95797991ab836ad1",
+  "checked_at_utc": "2026-10-06T19:03:47.580412+00:00",
+  "deadline_pass": true,
+  "steps": [
+    {
+      "name": "native-earned-discovery-save-journey",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/go-backend",
+        "test",
+        "-overlay",
+        "/home/dobo/work/_temp/codex__content-v1-5/hot-chocolate/journey-overlay.json",
+        "-count=1",
+        "-vet=off",
+        "-run",
+        "^TestV15HotChocolateEarnedDiscoveryAndNewServiceRestore$",
+        "-timeout",
+        "5m",
+        "-v",
+        "./internal/alchimie_explore"
+      ],
+      "started_at_utc": "2026-10-06T19:03:40.484482+00:00",
+      "finished_at_utc": "2026-10-06T19:03:47.579926+00:00",
+      "elapsed_seconds": 7.095454,
+      "exit_code": 0,
+      "guard": null,
+      "peak_group_RSS_bytes": 261042176,
+      "log_sha256": "ab55cdd517cacba8ab14af509edf5e5ff0c0fb63da021cba361547d47b717c5c",
+      "log_text": "=== RUN   TestV15HotChocolateEarnedDiscoveryAndNewServiceRestore\n    content_v1_5_test.go:316: old17 preserved; new18th discovery; restore/repeat/private states checked through 60 HTTP requests\n--- PASS: TestV15HotChocolateEarnedDiscoveryAndNewServiceRestore (2.28s)\nPASS\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie_explore\t2.318s\n"
+    }
+  ],
+  "all_steps_completed": true,
+  "incremental_bytes": 6931405,
+  "unchanged": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": true,
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": true,
+    "cat_de_roman_esti/fixtures/board_demotions_v43.json": true,
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": true,
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": true,
+    "cat_de_roman_esti/fixtures/contexto_demotions_v44.json": true,
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": true,
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": true,
+    "cat_de_roman_esti/fixtures/games_pack.json": true,
+    "cat_de_roman_esti/fixtures/kg_real.json": true,
+    "cat_de_roman_esti/fixtures/kg_sample.json": true,
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": true,
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": true,
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": true,
+    "go-backend/internal/content/bundled.json": true,
+    "go-backend/internal/contentrails/sources/installed-authorities.json": true,
+    "go-backend/internal/alchimie_explore/content_v1_5_test.go": true,
+    "docs/reviews/v1-5-hot-chocolate/native/world/proposal.json": true,
+    "go-backend/internal/alchimie_explore/service_test.go": true
+  },
+  "installation_approval": false
+}

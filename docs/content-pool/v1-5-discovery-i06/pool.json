@@ -9,19 +9,21 @@
     "material_refinement": 1,
     "fresh_leads": 4,
     "deep_investigations": 2,
-    "researched": 1,
+    "researched": 0,
     "held": 4,
     "ready": 0,
-    "selected": 0,
-    "installed": 0
+    "selected": 1,
+    "installed": 0,
+    "staged_qualified": 1,
+    "integrated": 0
   },
   "records": [
     {
       "id": "i04-world-01",
-      "revision": 3,
-      "state": "researched",
+      "revision": 4,
+      "state": "selected_for_refinement",
       "origin_track": "refinement",
-      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "baseline_commit": "a4f42f176b06276a3d46f3da40373cecfb70f7ac",
       "checked_on": "2026-10-06",
       "label_ro": "Ciocolată caldă",
       "sense": "Ciocolată caldă",
@@ -35,8 +37,8 @@
         "hypothesis": true
       },
       "identity_checks": {
-        "result": "Proposed ID alw_food_ciocolata_calda, label and milk/chocolate pair absent current/all9books; no KG owner or literal source/Contexto match. Milk starter; chocolate result ciocolata-casa from Cacao/Lapte praf unlocked16.",
-        "coverage": "Exact current JSON/text and selected owner/trio/pair scans; semantic/history/gameplay clearance incomplete."
+        "result": "New WORLD-LOCAL ID alw_food_ciocolata_calda and Milk+Chocolate recipe. Existing Contexto projection ctxp_cb75bc0c21d2e2940911 already represents this label through Ceai n_v24_food_snack_ceai, explicit băuturi/penalty1; it remains exact. Earlier i06 no-Contexto-match claim is corrected here. No new shared KG owner, accepted form or global guess exposure.",
+        "coverage": "Exact current native candidate, old251concepts351recipes/supplies/goals, unchanged174KG snapshots, all9oldhistories and appended Source4book; native33goal/1156prefix audit and60request ordinary HTTP journey."
       },
       "player_benefit": "A familiar warm beverage foundation from already earned ingredients.",
       "games": [
@@ -64,25 +66,64 @@
       ],
       "recognition": "Current owner exposure and scoped published evidence only; no fresh population familiarity or enjoyment measurement.",
       "play_sketches": {
-        "status": "NOT RUN; source hypothesis only"
+        "status": "Actual prospective native HTTP: earn16 old discoveries/unlock cofetarie; existingChocolate17; Milk+Chocolate now18thdiscovery. New service restores old17progress and retains all earnedparents; old transientempty memory clears, oldservice remainsold."
       },
       "risks": [
-        "No native/play/history/source/export/authority/assembled acceptance",
-        "No new node/form/weight/category/round approval inferred"
+        "Exact assembled review and local landing remain",
+        "No human enjoyment measurement; no shared KG, form, synonym or curated-round addition"
       ],
       "dependencies": [
-        "Independent exact source reviews",
-        "Actual owner release and coordinator-admitted qualification"
+        "Exact assembled review and local landing"
       ],
-      "decision": "Exact inert source proposal prepared, not selected or installed. Warm beverage distinct from current cream-based Ganache and cold Milkshake; Cacao cu lapte remains held, no parallel beverage added.",
-      "next_action": "Independent source proposal assessment and complete admitted native/source/authority/history/journey qualification.",
+      "decision": "Exact R4 world-only refinement passed supported installation, fresh same-role installed audits/finals and strict mixed-source authority. required gates qualified; exact assembled review and local landing pending.",
+      "next_action": "Complete exact assembled review and local landing, then mark integrated with the actual landing commit.",
       "history": [
         {
           "date": "2026-10-06",
           "author": "/root",
           "action": "Source-only record; zero ready/selected/installed."
+        },
+        {
+          "date": "2026-10-06",
+          "author": "/root",
+          "revision": 4,
+          "action": "Select exact world-only refinement; correct preexistingContexto owner; preserve all oldholds and i02two-link rejection for this landing."
         }
-      ]
+      ],
+      "handoff": {
+        "rail": "native-world",
+        "candidate_path": "docs/reviews/v1-5-hot-chocolate/native/world/candidate.json",
+        "candidate_sha256": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+        "source5_sha256": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+        "parent_source4_sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+        "proposal_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+        "source_fact_review_sha256": "f8e3f12d8ae85f20f060fc50b8e70d920b747ea3c07926345f517c7bd0e96945",
+        "source_quality_review_sha256": "f19205e9ef18803e3e7c81f1245cf858b16ef5df553e704532d470d271883e69",
+        "prospective_evidence_path": "docs/reviews/v1-5-hot-chocolate/prospective-evidence.json",
+        "installation_approved": true,
+        "installed_in_task_worktree": true,
+        "local_landing_pending": true
+      },
+      "integration": {
+        "state": "qualified_in_task_worktree_awaiting_assembled_review_and_local_landing",
+        "canonical_world_concept_id": "alw_food_ciocolata_calda",
+        "canonical_recipe_id": "ciocolata-calda-lapte-ciocolata",
+        "world_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+        "native_world_source_version": 5,
+        "quick_extensions_source_version": 4,
+        "receipt": "docs/reviews/v1-5-hot-chocolate/verification.json",
+        "new_world_local_concepts": 1,
+        "new_shared_concepts": 0,
+        "new_recipes": 1,
+        "new_curated_rounds": 0,
+        "new_forms": 0,
+        "new_synonym_families": 0,
+        "shared_projection_preserved": "ctxp_cb75bc0c21d2e2940911 -> n_v24_food_snack_ceai",
+        "goal_modes": 33,
+        "discoveries": 148,
+        "historical_prefixes": 1156,
+        "local_landing_pending": true
+      }
     },
     {
       "id": "i06-functional-01",
@@ -307,5 +348,9 @@
         }
       ]
     }
-  ]
+  ],
+  "previous_snapshot": {
+    "path": "docs/content-pool/v1-5-discovery-i06/pool-r3.json",
+    "sha256": "e38326750689731b6132704d06a9884cc494e19ffeeb21bc535b81c34fa14cb1"
+  }
 }

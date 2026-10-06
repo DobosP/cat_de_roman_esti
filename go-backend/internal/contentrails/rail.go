@@ -64,11 +64,24 @@ func buildReviewed(root string, s *Source, rail string, candidate map[string]any
 	return nil, fmt.Errorf("unknown review rail")
 }
 func BuildProposal(root string, s *Source, rail, candidatePath, factualPath, qualityPath string) (map[string]any, error) {
+	return buildProposal(root, s, rail, candidatePath, factualPath, qualityPath, false)
+}
+
+func buildInstalledProposal(root string, s *Source, rail, candidatePath, factualPath, qualityPath string) (map[string]any, error) {
+	return buildProposal(root, s, rail, candidatePath, factualPath, qualityPath, true)
+}
+
+func buildProposal(root string, s *Source, rail, candidatePath, factualPath, qualityPath string, installed bool) (map[string]any, error) {
 	candidate, err := Read(candidatePath)
 	if err != nil {
 		return nil, err
 	}
-	expected, err := Candidate(root, s, rail, false)
+	var expected map[string]any
+	if installed && rail == "world" {
+		expected, err = worldCandidateForPhase(root, s, false, true)
+	} else {
+		expected, err = Candidate(root, s, rail, false)
+	}
 	if err != nil {
 		return nil, err
 	}

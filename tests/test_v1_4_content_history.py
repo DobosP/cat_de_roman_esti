@@ -36,7 +36,8 @@ def current(filename: str) -> dict:
     directory = (
         "tests/fixtures" if filename.startswith("cat_mobile") else ("cat_de_roman_esti/fixtures")
     )
-    return json.loads((ROOT / directory / filename).read_bytes())
+    latest = json.loads((ROOT / directory / filename).read_bytes())
+    return history.before_v1_5_world_catalog(latest, filename)
 
 
 def digest(value: dict, filename: str) -> str:

@@ -1,0 +1,301 @@
+{
+  "schema": "v1-5-hotchocolate-native-journey-source-plan-r1",
+  "designer": "/root/assembled_review",
+  "saved_at_utc": "2026-10-06T18:36:02.783846+00:00",
+  "scope": "Source-only exact meaningful journey plan for proposed world-local Ciocolată caldă. No game/native/reference execution or runtime/source/pool/fixture change. Not a source/recipe/quality/installation approval.",
+  "source_admission": {
+    "sha256": "00a9a07d7c7d8a1f2b68fa5210d49a7735222aa3658d833f935b97bd496299c9",
+    "hard_deadline_utc": "2026-10-06T18:40:08.986918+00:00",
+    "analysis_before180second_reserve": true,
+    "earlier_failed_windows_remain_historical_NOTPASS": true
+  },
+  "bindings": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+    "go-backend/internal/alchimie/testdata/python_parity.json": "ead042be8645eb74ea775c7e9d085fbc7bc4ac4fbf3cc5e90cdb591c36fa398f",
+    "go-backend/internal/alchimie_explore/service.go": "34932e427369da4086f4ce7f87ba8b75477f1d0fb0374f53e5be72977e6eec6f",
+    "go-backend/internal/alchimie_explore/service_test.go": "d8205a0fa8ba66b7f8543f2d4aca32e6419746bd0da63015bc344001040ea404",
+    "go-backend/internal/alchimie_explore/saved_prefix_test.go": "f14221d91640b7e0636b5e978dfbfd3a7408da0e48c0f613fb48092bd7c46610",
+    "docs/reviews/v1-5-small-objects/iterations/i06/source-proposal-r1.json": "c0e970966da5a547849aa51b9fc0992b1b075d4cc5e6f5432398525a0dd9f4ce"
+  },
+  "candidate_scope": {
+    "proposed_world_id": "alw_food_ciocolata_calda",
+    "proposed_recipe_id": "ciocolata-calda-lapte-ciocolata",
+    "pair": [
+      "n_v4gas_lapte",
+      "n_v85_food_ciocolata"
+    ],
+    "new_shared_KG_nodes_or_edges_or_forms": 0,
+    "new_world_concepts_proposed": 1,
+    "new_recipes_proposed": 1,
+    "unchanged_starters_unlocks_goals": true,
+    "heating_qualification": "Keep lapte încălzit explicit; this pair represents the basis of one hot variant, not a complete two-ingredient cooking procedure, all hot chocolates, milkshake or ganache equivalence."
+  },
+  "ingredient_ownership": {
+    "Milk": "Lapte is a legitimate existing starter among8, not artificially earned or granted by a helper. Preserve actual starter list.",
+    "Chocolate": "After16 distinct productive discoveries, existing cofetarie unlock supplies Cacao and Lapte praf. Combine them through unchanged ciocolata-casa to earn Chocolate as discovery17.",
+    "forbidden": "No direct store ownership mutation, altered starters/unlocks, helper grants, fabricated progress or fully-owned FIFO fixture as the player journey."
+  },
+  "exact_source_derived_prefix16_NOT_EXECUTED": [
+    {
+      "source_frozen_action_index": 3,
+      "recipe_id": "aluat-apa",
+      "pair_ids": [
+        "n_v24_food_pantry_faina",
+        "n_v4gas_apa"
+      ],
+      "labels": [
+        "Făină",
+        "Apă"
+      ],
+      "expected_existing_result_id": "n_v84_food_aluat"
+    },
+    {
+      "source_frozen_action_index": 4,
+      "recipe_id": "paine-cuptor",
+      "pair_ids": [
+        "n_v84_food_aluat",
+        "n_v84_food_cuptor"
+      ],
+      "labels": [
+        "Aluat",
+        "Cuptor de bucătărie"
+      ],
+      "expected_existing_result_id": "n_v4gas_paine"
+    },
+    {
+      "source_frozen_action_index": 5,
+      "recipe_id": "branza-cheag",
+      "pair_ids": [
+        "n_v4gas_lapte",
+        "n_v84_food_cheag"
+      ],
+      "labels": [
+        "Lapte",
+        "Cheag alimentar"
+      ],
+      "expected_existing_result_id": "n_v2gas_branza"
+    },
+    {
+      "source_frozen_action_index": 6,
+      "recipe_id": "alivenci-branza",
+      "pair_ids": [
+        "n_v2gas_branza",
+        "n_v84_food_malai"
+      ],
+      "labels": [
+        "Brânză",
+        "Mălai"
+      ],
+      "expected_existing_result_id": "n_v11gas_alivenci"
+    },
+    {
+      "source_frozen_action_index": 7,
+      "recipe_id": "branza-burduf-sare",
+      "pair_ids": [
+        "n_v2gas_branza",
+        "n_v4gas_sare"
+      ],
+      "labels": [
+        "Brânză",
+        "Sare"
+      ],
+      "expected_existing_result_id": "n_v42gas_branza_burduf"
+    },
+    {
+      "source_frozen_action_index": 8,
+      "recipe_id": "budinca-paine-lapte",
+      "pair_ids": [
+        "n_v4gas_lapte",
+        "n_v4gas_paine"
+      ],
+      "labels": [
+        "Lapte",
+        "Pâine"
+      ],
+      "expected_existing_result_id": "alw_food_budinca_paine"
+    },
+    {
+      "source_frozen_action_index": 9,
+      "recipe_id": "caramel-apa",
+      "pair_ids": [
+        "n_v24_food_pantry_zahar",
+        "n_v4gas_apa"
+      ],
+      "labels": [
+        "Zahăr",
+        "Apă"
+      ],
+      "expected_existing_result_id": "alw_food_caramel"
+    },
+    {
+      "source_frozen_action_index": 10,
+      "recipe_id": "chiftele-legume-ou",
+      "pair_ids": [
+        "n_v4gas_legume",
+        "n_v4gas_ou"
+      ],
+      "labels": [
+        "Legume",
+        "Ou"
+      ],
+      "expected_existing_result_id": "alw_food_chiftele_legume"
+    },
+    {
+      "source_frozen_action_index": 11,
+      "recipe_id": "ardei-carne",
+      "pair_ids": [
+        "n_v24_food_salad_veg_ardei",
+        "n_v4gas_carne"
+      ],
+      "labels": [
+        "Ardei",
+        "Carne"
+      ],
+      "expected_existing_result_id": "n_gas_ardei_umpluti"
+    },
+    {
+      "source_frozen_action_index": 12,
+      "recipe_id": "ardei-copti-cuptor",
+      "pair_ids": [
+        "n_v24_food_salad_veg_ardei",
+        "n_v84_food_cuptor"
+      ],
+      "labels": [
+        "Ardei",
+        "Cuptor de bucătărie"
+      ],
+      "expected_existing_result_id": "alw_food_ardei_copti"
+    },
+    {
+      "source_frozen_action_index": 13,
+      "recipe_id": "bruschete-paine-rosie",
+      "pair_ids": [
+        "n_v4gas_paine",
+        "n_v4gas_rosie"
+      ],
+      "labels": [
+        "Pâine",
+        "Roșie"
+      ],
+      "expected_existing_result_id": "alw_food_bruschete"
+    },
+    {
+      "source_frozen_action_index": 14,
+      "recipe_id": "budinca-orez-lapte",
+      "pair_ids": [
+        "n_v3gas_orez",
+        "n_v4gas_lapte"
+      ],
+      "labels": [
+        "Orez",
+        "Lapte"
+      ],
+      "expected_existing_result_id": "alw_food_budinca_orez"
+    },
+    {
+      "source_frozen_action_index": 15,
+      "recipe_id": "chiftele-ou",
+      "pair_ids": [
+        "n_v4gas_carne",
+        "n_v4gas_ou"
+      ],
+      "labels": [
+        "Carne",
+        "Ou"
+      ],
+      "expected_existing_result_id": "n_v20gas_chiftele"
+    },
+    {
+      "source_frozen_action_index": 16,
+      "recipe_id": "ciorba-fasole-bors",
+      "pair_ids": [
+        "n_gas_bors",
+        "n_v4gas_fasole"
+      ],
+      "labels": [
+        "Borș",
+        "Fasole"
+      ],
+      "expected_existing_result_id": "n_v42gas_ciorba_fasole"
+    },
+    {
+      "source_frozen_action_index": 17,
+      "recipe_id": "compot-fruct",
+      "pair_ids": [
+        "n_v4gas_apa",
+        "n_v4gas_fruct"
+      ],
+      "labels": [
+        "Apă",
+        "Fruct"
+      ],
+      "expected_existing_result_id": "n_v20gas_compot"
+    },
+    {
+      "source_frozen_action_index": 18,
+      "recipe_id": "crema-zahar-ars-caramel-lapte",
+      "pair_ids": [
+        "alw_food_caramel",
+        "n_v4gas_lapte"
+      ],
+      "labels": [
+        "Caramel",
+        "Lapte"
+      ],
+      "expected_existing_result_id": "alw_food_crema_zahar_ars"
+    }
+  ],
+  "existing_seventeenth_recipe": {
+    "id": "ciocolata-casa",
+    "pair": [
+      "n_v85_food_cacao",
+      "n_v86_food_lapte_praf"
+    ],
+    "result": "n_v85_food_ciocolata",
+    "scope": "Source-defined action, not newly observed native result."
+  },
+  "minimal_native_case_manifest_before_execution": [
+    {
+      "id": "HC_BASE_OWNERSHIP_AND_MISS",
+      "steps": "Fresh actual Source4 service/Create default exploration. Check starting8 includes Milk but not Chocolate/Cacao/MilkPowder. Before owning Chocolate, Milk+Chocolate refuses unowned ingredient400 with unchanged state. Perform exact16 existing pairs, observing each new output/count/unlock; cofetarie at16 supplies Cacao+MilkPowder. Existing ciocolata-casa produces Chocolate17. Milk+Chocolate is currently200 empty/nonproductive: inventory and progress17 preserved, one canonical empty-pair observation; repeated miss does not duplicate it. Save lossless Get and exact actual progress hash/pairs."
+    },
+    {
+      "id": "HC_CANDIDATE_NEW_DISCOVERY",
+      "steps": "Fresh native service using separately reviewed candidate world, no graph/pack override. Create default, replay same16+oldChocolate recipe with legitimate ownership. Initial/Create/Get must not inventory-reveal new concept or complete unearned recipe tables. Milk+Chocolate yields only hot-chocolate concept as productive18th discovery; ingredients remain owned. Get preserves output/parents/progress. Reversed pair and repeat return existing item/newfalse without spending discovery capacity or duplicate grants."
+    },
+    {
+      "id": "HC_OLD_PROGRESS_NEW_SERVICE_EMPTY_MEMORY",
+      "steps": "Construct a NEW candidate service instance. Restore exact legitimately earned17-discovery Source4 progress captured after the baseline empty attempt. Old hash must be retained by supported compatible history; new response reports current candidate hash and preserves all old earned IDs/order/unlocks. No automatic hot-chocolate grant. Native restore replays discoveries only; empty_pairs is session observation state, absent from progress. Thus fresh restore has cleared old empty observations and Milk+Chocolate can now be retried productively. Do not serialize or inject old empty-pair memory into validated discoveries."
+    },
+    {
+      "id": "HC_CURRENT_PROGRESS_NEW_SERVICE",
+      "steps": "Capture actual candidate18-discovery progress, instantiate another fresh native service and restore. New concept, exact productive pair order and parentage remain. Repeat/reversed pair does not add discoveries. This proves actual new-service persistence rather than same-session Get alone."
+    },
+    {
+      "id": "HC_REFUSALS_AND_CONTINUATION",
+      "steps": "Unknown world/hash, malformed or unowned recipe progress remain400/409 under existing contract and allocate no state. Preserve old state/payloads on refusals. Continue legitimate old recipes after hot chocolate without new supply grants; note the extra productive discovery may advance later existing threshold unlock timing, requiring full closure/history/goal audit."
+    }
+  ],
+  "empty_pair_and_client_contract": "Native progress contains world_id, recipe_hash, discoveries only; saved empty_pairs is not a supported migration field. Current frontend renders empty observations from actual returned state, while explorationSave persists progress/compatible hashes. Prove cleared fresh-service memory through real API state; separately inspect/test existing client save/merge behavior before claiming browser UX.",
+  "privacy_and_semantics": "Use actual native Create/Combine/Get/restore handlers under exact separate admission. Only owned inventory/earned recipes and legitimate staged hints may expose results. No full recipe map, unearned target IDs or session internals. Exploration has no scored-round win or1000point claim.",
+  "existing_test_precedents_not_execution": [
+    "TestAllDiscoveryCraftsSupplyTiersHintsAndCompletionParity",
+    "TestCurrentAndAllArchivedMechanicsRestoreParity",
+    "TestRestoreCannotInventAndRepeatsDoNotSpendCapacity",
+    "TestGoalChangesGuidanceAndObservedEmptyMemoryIsBounded",
+    "TestAll1009IndependentHistoricalSavedPrefixes"
+  ],
+  "full_landing_requirements": "Root exact world proposal and actual Source5 parent4, independent fresh raw factual/quality and native world validation, current/old mechanics compatibility archive, all33goal modes/closure/repeats/privacy/new-service cases, all nine prior1009prefix assertions plus preserved Source4current mechanics, strict inverse histories/reference captures/current source export/operator/catalog/authority rails and full required backend/shared race/vet/HTTP/docs/assembled gates. Existing historical bytes/assertions remain; never repin/deselect failures. No new game/session bounds or hidden target approvals.",
+  "not_approved": [
+    "Actual native journey or performance",
+    "Exact candidate Source5/materialization",
+    "Recipe/factual/quality adoption",
+    "World/current authority/export/reference/history qualification",
+    "Local landing or deployment"
+  ],
+  "resource": {
+    "own_source_RSS_bytes": 21692416,
+    "no_native_or_profile_process_started": true,
+    "only_two_small_plan_docs_written": true
+  }
+}

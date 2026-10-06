@@ -1,0 +1,258 @@
+{
+  "all_nonworld_cases_exact": true,
+  "all_requests_exact": true,
+  "all_statuses_exact": true,
+  "baseline_sha256": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+  "body_delta_entries": 16,
+  "cases": 1207,
+  "changed_body_cases": 4,
+  "complete_changed_case_deltas": [
+    {
+      "body_deltas": [
+        {
+          "after": [
+            "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+            "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+            "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+            "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+            "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+            "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+            "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+            "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+            "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4",
+            "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796"
+          ],
+          "before": [
+            "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+            "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+            "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+            "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+            "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+            "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+            "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+            "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+            "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4"
+          ],
+          "kind": "array_length",
+          "path": "/compatible_recipe_hashes"
+        },
+        {
+          "after": "9101c93667fb8f8ea7a992647712205fe35b3ad9cb1edef707936c0814ee901d",
+          "before": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "kind": "scalar",
+          "path": "/progress/recipe_hash"
+        },
+        {
+          "after": 252,
+          "before": 251,
+          "kind": "scalar",
+          "path": "/world/total_concepts"
+        },
+        {
+          "after": 352,
+          "before": 351,
+          "kind": "scalar",
+          "path": "/world/total_recipes"
+        }
+      ],
+      "case_index": 1202,
+      "request": {
+        "body": "{}",
+        "method": "POST",
+        "path": "/api/alchimie/explore"
+      },
+      "status": 200
+    },
+    {
+      "body_deltas": [
+        {
+          "after": [
+            "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+            "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+            "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+            "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+            "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+            "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+            "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+            "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+            "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4",
+            "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796"
+          ],
+          "before": [
+            "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+            "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+            "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+            "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+            "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+            "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+            "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+            "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+            "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4"
+          ],
+          "kind": "array_length",
+          "path": "/compatible_recipe_hashes"
+        },
+        {
+          "after": "9101c93667fb8f8ea7a992647712205fe35b3ad9cb1edef707936c0814ee901d",
+          "before": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "kind": "scalar",
+          "path": "/progress/recipe_hash"
+        },
+        {
+          "after": 252,
+          "before": 251,
+          "kind": "scalar",
+          "path": "/world/total_concepts"
+        },
+        {
+          "after": 352,
+          "before": 351,
+          "kind": "scalar",
+          "path": "/world/total_recipes"
+        }
+      ],
+      "case_index": 1203,
+      "request": {
+        "body": "",
+        "method": "POST",
+        "path": "/api/alchimie/explore/session-247/hint"
+      },
+      "status": 200
+    },
+    {
+      "body_deltas": [
+        {
+          "after": [
+            "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+            "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+            "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+            "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+            "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+            "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+            "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+            "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+            "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4",
+            "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796"
+          ],
+          "before": [
+            "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+            "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+            "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+            "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+            "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+            "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+            "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+            "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+            "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4"
+          ],
+          "kind": "array_length",
+          "path": "/compatible_recipe_hashes"
+        },
+        {
+          "after": "9101c93667fb8f8ea7a992647712205fe35b3ad9cb1edef707936c0814ee901d",
+          "before": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "kind": "scalar",
+          "path": "/progress/recipe_hash"
+        },
+        {
+          "after": 252,
+          "before": 251,
+          "kind": "scalar",
+          "path": "/world/total_concepts"
+        },
+        {
+          "after": 352,
+          "before": 351,
+          "kind": "scalar",
+          "path": "/world/total_recipes"
+        }
+      ],
+      "case_index": 1204,
+      "request": {
+        "body": "{\"goal_id\":null}",
+        "method": "POST",
+        "path": "/api/alchimie/explore/session-247/goal"
+      },
+      "status": 200
+    },
+    {
+      "body_deltas": [
+        {
+          "after": [
+            "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+            "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+            "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+            "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+            "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+            "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+            "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+            "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+            "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4",
+            "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796"
+          ],
+          "before": [
+            "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+            "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+            "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+            "6e7ec07ab602bf1b6f16c7868c7841d84f5cb6dde2f0f6d17b78dc9c08d3fb7d",
+            "969d3d92444b8a54d540ec1f5763ca0dcde6857a5c6fd39da3c491e10912da30",
+            "a1507dfd3d576b4237fa122dbd18a22f49751122d0a6df9ca6b79f3378ce72ca",
+            "f0ee5fae4c6b8fecf03b1a2922d2bb39a2737cae3f24292d597a916c688a8e74",
+            "3b85f2bfcd8b3b3c982a7bebe7c030b456904395e49a4bca8fe8a9e5b980b694",
+            "a048e5c10370ee5ddb5a91544b7f9220cb04608b3e3a2bce13dbfab5acb742b4"
+          ],
+          "kind": "array_length",
+          "path": "/compatible_recipe_hashes"
+        },
+        {
+          "after": "9101c93667fb8f8ea7a992647712205fe35b3ad9cb1edef707936c0814ee901d",
+          "before": "75bc9df98fa2ab707e236a3699b208c43147cb2fb38fcd351918e92f3975d796",
+          "kind": "scalar",
+          "path": "/progress/recipe_hash"
+        },
+        {
+          "after": 252,
+          "before": 251,
+          "kind": "scalar",
+          "path": "/world/total_concepts"
+        },
+        {
+          "after": 352,
+          "before": 351,
+          "kind": "scalar",
+          "path": "/world/total_recipes"
+        }
+      ],
+      "case_index": 1206,
+      "request": {
+        "body": "",
+        "method": "GET",
+        "path": "/api/alchimie/explore/session-247"
+      },
+      "status": 200
+    }
+  ],
+  "current_capture_sha256": "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519",
+  "exact_unchanged_body_cases": 1203,
+  "kinds": {
+    "array_length": 4,
+    "scalar": 12
+  },
+  "method": "Direct recursive comparison of decompressed JSON with exact1207 aligned case order. Requests and statuses assert complete equality. Dict key sets, scalar types and array lengths are compared without any new normalization; list length changes retain both complete arrays.",
+  "no_dict_key_or_scalar_type_change": true,
+  "reference_metadata_after": "Independent Django application; V1.5 reviewed world-only sources at baseline a4f42f176b06276a3d46f3da40373cecfb70f7ac; native world proposal 196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086; preserved capture author a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+  "reference_metadata_before": "Independent Django application; prospective V1.4 reviewed sources at baseline46641d6f9963f92941d12f5955e5eb40a2d8fb56; preserved capture author a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+  "reviewer": "/root/graph_quality",
+  "saved_at_utc": "2026-10-06T19:40:29.012380+00:00",
+  "schema": "v1-5-independent-http-quality-exact-delta-v1",
+  "schema_version_equal": true,
+  "sole_array_length_change": "Existing9 compatibility hashes retain identical ordered prefix and append exact Source4 current75bc book.",
+  "source8_delta": [
+    {
+      "after": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+      "before": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+      "kind": "scalar",
+      "path": "/alchimie_discovery_world_v92.json"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "v1-5-hot-chocolate-prospective-journey-lane-v1",
+  "lane": "prospective-journey",
+  "checked_at_utc": "2026-10-06T19:03:40.199832+00:00",
+  "deadline_utc": "2026-10-06T19:23:40.199832+00:00",
+  "runner_sha256": "3a80e41d7456a32f68cc81cccd400266f46d49455d76ba26bf9c716438fc165c",
+  "inputs": {
+    "go-backend/internal/alchimie_explore/content_v1_5_test.go": "0915420c4b22452ccd1f30a73f7fc28616d134401f5bd408af30c0a7055fa65a",
+    "docs/reviews/v1-5-hot-chocolate/native/world/proposal.json": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+    "docs/reviews/v1-5-hot-chocolate/native/world/candidate.json": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+    "docs/reviews/v1-5-hot-chocolate/native/world/factual-review.json": "f8e3f12d8ae85f20f060fc50b8e70d920b747ea3c07926345f517c7bd0e96945",
+    "docs/reviews/v1-5-hot-chocolate/native/world/quality-review.json": "f19205e9ef18803e3e7c81f1245cf858b16ef5df553e704532d470d271883e69",
+    "go-backend/internal/alchimie_explore/service_test.go": "0a67b8a03392619d711102bbae2985b1fa7b9986fc2577e4f15ea898b6c17488"
+  },
+  "unchanged": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+    "cat_de_roman_esti/fixtures/board_demotions_v43.json": "c35261a5208d9b68d39a94f8602a5586db67eaecbe130c0c219f6a43fd1ef0a7",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+    "cat_de_roman_esti/fixtures/contexto_demotions_v44.json": "29c76be1d65fc38bf2e3a754d48ba3b96a8e6b6c95fde28c7c2fbd882ee9996c",
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/kg_real.json": "baf3d6c98f809479c5f690373cd297dece73286ec083b2e643191d4bb705c104",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "go-backend/internal/content/bundled.json": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "go-backend/internal/alchimie_explore/content_v1_5_test.go": "0915420c4b22452ccd1f30a73f7fc28616d134401f5bd408af30c0a7055fa65a",
+    "docs/reviews/v1-5-hot-chocolate/native/world/proposal.json": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+    "go-backend/internal/alchimie_explore/service_test.go": "0a67b8a03392619d711102bbae2985b1fa7b9986fc2577e4f15ea898b6c17488"
+  },
+  "commands": [
+    {
+      "name": "native-earned-discovery-save-journey",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/go-backend",
+        "test",
+        "-overlay",
+        "/home/dobo/work/_temp/codex__content-v1-5/hot-chocolate/journey-overlay.json",
+        "-count=1",
+        "-vet=off",
+        "-run",
+        "^TestV15HotChocolateEarnedDiscoveryAndNewServiceRestore$",
+        "-timeout",
+        "5m",
+        "-v",
+        "./internal/alchimie_explore"
+      ]
+    }
+  ],
+  "scratch_bindings": {
+    "/home/dobo/work/_temp/codex__content-v1-5/hot-chocolate/journey-prospective_test.go": "a3e82f0889f3eb1cddddb3f0d2ae74c577d306c0dc16f1f593ebfd8f98c40064",
+    "/home/dobo/work/_temp/codex__content-v1-5/hot-chocolate/journey-overlay.json": "fcfc1341dbecde2b21ded3a6c31297170e79dc75801b560427c935b5192f08ae"
+  },
+  "only_overlay_replacements": [
+    "v15ProspectiveWorld emptyconstant\u2192exactreviewedproposal",
+    "v15ProspectiveTranscript emptyconstant\u2192ownscratchlosslessHTTPcapture"
+  ],
+  "reviewed_code_sha256": "0915420c4b22452ccd1f30a73f7fc28616d134401f5bd408af30c0a7055fa65a",
+  "limits": {
+    "RSS_bytes": 2147483648,
+    "incremental_bytes": 1073741824,
+    "start_disk_gib": 17,
+    "remaining_disk_mem_gib": 16,
+    "GOMAXPROCS": 2,
+    "build_jobs": 2,
+    "metadata_reserve_seconds": 45
+  },
+  "measured": {
+    "disk_free_gib": 112.68288803100586,
+    "memory_available_gib": 22.354419708251953
+  },
+  "earlier_guard_refusal": "journey-resource-refusal.json retained; no prior test ran",
+  "full_race_vet_gate_claim": false,
+  "installation_approval": false
+}

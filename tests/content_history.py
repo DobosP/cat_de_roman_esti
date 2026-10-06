@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections import Counter
+from contextlib import contextmanager
 from copy import deepcopy
 from pathlib import Path
 
@@ -963,9 +964,154 @@ def before_v1_4_artifact(current: dict, filename: str) -> dict:
     return restored
 
 
+# World-only V1.5 inverse bound to the actual independently reviewed native proposal.
+# This test adapter does not install it; all earlier catalogue pins stay unchanged.
+_V1_5_WORLD_AFTER_SHA256 = (
+    "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086"
+)
+_V1_5_WORLD_NAME = "alchimie_discovery_world_v92.json"
+_V1_5_WORLD_BEFORE = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-4-time-links-and-predicates/native/world/proposal.json"
+)
+_V1_5_WORLD_BEFORE_SHA256 = (
+    "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef"
+)
+_V1_5_WORLD_PROPOSAL = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-5-hot-chocolate/native/world/proposal.json"
+)
+_V1_5_WORLD_CANDIDATE = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v1-5-hot-chocolate/native/world/candidate.json"
+)
+_V1_5_WORLD_CANDIDATE_SHA256 = (
+    "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04"
+)
+_V1_5_LEGACY_WORLD_SOURCE_SHA256 = (
+    "66ade386c05e25f8b58990d127834c5803206e4565600256d55b09658bd23e2b"
+)
+
+
+def before_v1_5_world_catalog(current: dict, filename: str) -> dict:
+    """Reverse only the exact reviewed hot-chocolate world into complete V1.4."""
+    if filename != _V1_5_WORLD_NAME:
+        return deepcopy(current)
+    current_hash = _v1_3_catalog_digest(current)
+    earlier = {
+        _V1_5_WORLD_BEFORE_SHA256,
+        _V1_4_CATALOG_BASELINE[filename],
+        _V1_3_CATALOG_BASELINE[filename],
+    }
+    if current_hash in earlier:
+        return deepcopy(current)
+    assert _V1_5_WORLD_AFTER_SHA256 is not None, "V1.5 final world pin not admitted"
+    assert current_hash == _V1_5_WORLD_AFTER_SHA256
+    proposal_blob = _V1_5_WORLD_PROPOSAL.read_bytes()
+    assert hashlib.sha256(proposal_blob).hexdigest() == _V1_5_WORLD_AFTER_SHA256
+    assert current == json.loads(proposal_blob)
+    before_blob = _V1_5_WORLD_BEFORE.read_bytes()
+    assert hashlib.sha256(before_blob).hexdigest() == _V1_5_WORLD_BEFORE_SHA256
+    before = json.loads(before_blob)
+    candidate_blob = _V1_5_WORLD_CANDIDATE.read_bytes()
+    assert hashlib.sha256(candidate_blob).hexdigest() == _V1_5_WORLD_CANDIDATE_SHA256
+    candidate = json.loads(candidate_blob)
+    assert current["candidate_sha256"] == _V1_5_WORLD_CANDIDATE_SHA256
+    assert current["native_source_version"] == candidate["native_source_version"] == 5
+    assert current["concepts"] == candidate["concepts"]
+    assert current["compatible_versions"] == candidate["compatible_versions"]
+    assert len(current["concepts"]) == 252 and len(current["recipes"]) == 352
+    assert len(current["compatible_versions"]) == 10
+    assert len(before["concepts"]) == 251 and len(before["recipes"]) == 351
+    assert len(before["compatible_versions"]) == 9
+    concept_id = "alw_food_ciocolata_calda"
+    recipe_id = "ciocolata-calda-lapte-ciocolata"
+    assert sum(row["id"] == concept_id for row in current["concepts"]) == 1
+    assert sum(row["id"] == recipe_id for row in current["recipes"]) == 1
+    new_recipe = next(row for row in current["recipes"] if row["id"] == recipe_id)
+    authored_recipe = next(row for row in candidate["recipes"] if row["id"] == recipe_id)
+    assert new_recipe == authored_recipe
+    assert new_recipe["pair"] == ["n_v4gas_lapte", "n_v85_food_ciocolata"]
+    assert new_recipe["result"] == concept_id
+    assert current["compatible_versions"][:-1] == before["compatible_versions"]
+    for field in ("world", "goals", "unlocks", "schema_version"):
+        assert current[field] == before[field]
+    restored = deepcopy(current)
+    restored["concepts"] = [row for row in restored["concepts"] if row["id"] != concept_id]
+    restored["recipes"] = [row for row in restored["recipes"] if row["id"] != recipe_id]
+    restored["compatible_versions"] = restored["compatible_versions"][:-1]
+    for field in ("bindings", "candidate_sha256", "reviews", "native_source_version"):
+        restored[field] = deepcopy(before[field])
+    assert restored == before
+    assert _v1_3_catalog_digest(restored) == _V1_5_WORLD_BEFORE_SHA256
+    return restored
+
+
+@contextmanager
+def historical_v1_4_world(monkeypatch):
+    """Keep old literal tests on a genuine pinned loader context, then restore it."""
+    from cat_de_roman_esti.wordgames import discovery_world as world_loader
+
+    root = Path(__file__).resolve().parents[1]
+    source = root / "scripts/alchimie_discovery_recipe_source.py"
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == (
+        _V1_5_LEGACY_WORLD_SOURCE_SHA256
+    )
+    assert hashlib.sha256(_V1_5_WORLD_BEFORE.read_bytes()).hexdigest() == (
+        _V1_5_WORLD_BEFORE_SHA256
+    )
+    world_loader._load_world.cache_clear()
+    with monkeypatch.context() as scoped:
+        scoped.setattr(world_loader, "CATALOG_PATH", _V1_5_WORLD_BEFORE)
+        try:
+            yield world_loader.get_world()
+        finally:
+            world_loader._load_world.cache_clear()
+
+
+@contextmanager
+def historical_v97_world(monkeypatch, temporary_root: Path):
+    """Use exact V97 catalogue and strictly reversed KG for the old world tests."""
+    from cat_de_roman_esti.wordgames import discovery_world as world_loader
+    from cat_de_roman_esti.wordgames import service as service_loader
+    from scripts import build_alchimie_discovery_world as historical_builder
+
+    root = Path(__file__).resolve().parents[1]
+    legacy = root / "scripts/alchimie_discovery_recipe_source.py"
+    assert hashlib.sha256(legacy.read_bytes()).hexdigest() == (
+        _V1_5_LEGACY_WORLD_SOURCE_SHA256
+    )
+    current = json.loads((root / "cat_de_roman_esti/fixtures/kg_sample.json").read_bytes())
+    historical = before_v1_artifact(current, "kg_sample.json")
+    encoded = (json.dumps(historical, ensure_ascii=False, indent=2) + "\n").encode()
+    assert hashlib.sha256(encoded).hexdigest() == _V1_BASELINE["kg_sample.json"]
+    fixture = temporary_root / "cat_de_roman_esti/fixtures/kg_sample.json"
+    fixture.parent.mkdir(parents=True)
+    fixture.write_bytes(encoded)
+    rubric = temporary_root / "docs/CRITIQUE_RUBRIC.md"
+    rubric.parent.mkdir(parents=True)
+    rubric.write_bytes((root / "docs/CRITIQUE_RUBRIC.md").read_bytes())
+    catalog = root / (
+        "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/"
+        "proposed-catalog.json"
+    )
+    assert hashlib.sha256(catalog.read_bytes()).hexdigest() == (
+        "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44"
+    )
+    service_loader.get_service.cache_clear()
+    world_loader._load_world.cache_clear()
+    with monkeypatch.context() as scoped:
+        scoped.setenv("CAT_KG_FIXTURE", str(fixture))
+        scoped.setattr(historical_builder, "ROOT", temporary_root)
+        scoped.setattr(world_loader, "CATALOG_PATH", catalog)
+        try:
+            yield world_loader.get_world()
+        finally:
+            service_loader.get_service.cache_clear()
+            world_loader._load_world.cache_clear()
+
+
 def before_v1_4_catalog(current: dict, filename: str) -> dict:
     """Restore only exact signed V1.4 metadata and four quick snapshot changes."""
     assert filename in _V1_4_CATALOG_BASELINE
+    current = before_v1_5_world_catalog(current, filename)
     current_hash = _v1_3_catalog_digest(current)
     if current_hash in {_V1_4_CATALOG_BASELINE[filename], _V1_3_CATALOG_BASELINE[filename]}:
         return deepcopy(current)

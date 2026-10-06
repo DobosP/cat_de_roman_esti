@@ -1,0 +1,16 @@
+import datetime,hashlib,json,pathlib,shutil,sys
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5');S=pathlib.Path('/home/dobo/work/_temp/codex__content-v1-5');D=R/'docs/reviews/v1-5-hot-chocolate'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+name=sys.argv[1]; commands=json.loads(pathlib.Path(sys.argv[2]).read_bytes()); now=datetime.datetime.now(datetime.timezone.utc)
+mem={a:int(b.split()[0])*1024 for a,b in (l.split(':',1) for l in open('/proc/meminfo'))}['MemAvailable']; disk=shutil.disk_usage(R).free
+assert disk>=17*2**30 and mem>=16*2**30
+freeze=json.loads((D/(sys.argv[4] if len(sys.argv)>4 else 'runtime-freeze-r2.json')).read_bytes()); bindings={v['path']:v['sha256'] for v in freeze['runtime_sources']}
+assert all(sha(R/p)==v for p,v in bindings.items())
+for folder in ['cat_de_roman_esti/fixtures','go-backend/internal/contentrails/sources','go-backend/internal/httpgolden/testdata','go-backend/internal/alchimie_explore/testdata']:
+ for p in (R/folder).glob('*'):
+  if p.is_file():bindings[str(p.relative_to(R))]=sha(p)
+for pattern in ['go-backend/**/*_test.go','tests/content_history.py','tests/test_v1_5_world_history.py','tests/test_v1_4_content_history.py','tests/test_v97_world_quality.py']:
+ for p in R.glob(pattern):bindings[str(p.relative_to(R))]=sha(p)
+bindings['go-backend/internal/contentrails/installed_authorities_pin.go']=sha(R/'go-backend/internal/contentrails/installed_authorities_pin.go')
+m={'schema':'v1-5-integration-gate-admission-v1','lane':name,'checked_at_utc':now.isoformat(),'deadline_utc':(now+datetime.timedelta(minutes=20)).isoformat(),'runner_sha256':sha(S/'hot-chocolate/run_lane_v3.py'),'inputs':bindings,'unchanged':dict(bindings),'commands':commands,'environment':{'PYTHONPATH':str(R),'PYTHONDONTWRITEBYTECODE':'1','CAT_ALLOWED_HOSTS':'*','CAT_DEBUG':'1'},'limits':{'RSS_bytes':2*2**30,'incremental_bytes':2**30,'remaining_disk_mem_gib':16,'GOMAXPROCS':2,'build_jobs':2,'metadata_reserve_seconds':45},'measured':{'disk_gib':disk/2**30,'memory_gib':mem/2**30},'heavy_campaigns':1,'scope':sys.argv[3]}
+p=D/(name+'-admission.json');assert not p.exists();p.write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n');print(p)

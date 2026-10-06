@@ -1,0 +1,153 @@
+{
+  "schema": "v1-5-current-reference-source-preparation-v1",
+  "prepared_by": "/root/toolchain",
+  "valid_until": "Producer, current source8, Python/native code, compiled binary or reviewed proposal changes; recheck readset before any capture.",
+  "admission": "docs/reviews/v1-5-hot-chocolate/current-reference-preparation-admission.json",
+  "scope": "Source and scratch planning only; this worker ran no native commands, captures or tests and wrote no fixture/golden data.",
+  "capture": {
+    "argv": [
+      "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+      "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/source/capture_reference_v1_5.py",
+      "--binary",
+      "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/bin/cat-server",
+      "--runtime",
+      "go"
+    ],
+    "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5",
+    "producer_sha256": "1ecbc19936388363c6eb1e3b8bb764b0b0d527dd9ba46fbc47b8e8c4113d605a",
+    "adaptation_proof_path": "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/source/capture-adaptation.json",
+    "adaptation_proof_sha256": "5536fbf3ff3ab4886d6bf7dccc8ad9680619cc8c264d31dfb2f40f97bb26963c",
+    "preserved_original_sha256": "d77eb4eaf52f7ccb4cdd6f51fdc32e8d15a08cf3de8007b760f775717e7c7cfc",
+    "reversible_edits": "Only ROOT, output filename and reference label; every request, case, oracle/native comparison, normalization and capture statement remains exact.",
+    "output": "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/outputs/python-http-parity-v1-5.json.gz",
+    "cases_required": 1207,
+    "benchmark_flag": "Must be absent; benchmark adds 2000 requests. Original --report is only written inside benchmark.",
+    "expected_author": "Actual current independent Django TestClient responses. Native replay is comparison only, never expected-answer author.",
+    "not_executed": true
+  },
+  "readset": {
+    "producer": {
+      "path": "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/source/capture_reference_v1_5.py",
+      "sha256": "1ecbc19936388363c6eb1e3b8bb764b0b0d527dd9ba46fbc47b8e8c4113d605a"
+    },
+    "python_runtime_source_files": {
+      "cat_de_roman_esti/__init__.py": "b3588972f272a69fbc22bb4c7421cbb3f2cd949f15b4ee8ce288fb88c61f83f4",
+      "cat_de_roman_esti/_roedu_client_core.py": "9b79c18a181b624ebab4f5a6abb6bf3483b08b3378e98d6b84a1b8fc51ad72fc",
+      "cat_de_roman_esti/accounts/__init__.py": "974cd3c19124849fc8a7e046c0dab899bf295ad5a8f928a6e3bf4f65a4011576",
+      "cat_de_roman_esti/accounts/apps.py": "ed9c015f247f3e124ee51bdf6eec67ae92012db1c16553b81858da4db156c3da",
+      "cat_de_roman_esti/accounts/migrations/0001_initial.py": "144d0365351cb2a9d32253a0b34844793ec3c870057fed6d5ae2293487997087",
+      "cat_de_roman_esti/accounts/migrations/0002_profile_show_on_ranking.py": "793f73138837af5e1b629d0512420bc45053bed9f88da59dcbe8c44367ba0080",
+      "cat_de_roman_esti/accounts/migrations/0003_playedpuzzle.py": "d8e12f637b9717d4f7f795b56ff4e813c09a094f947e25c42ee77abce5c94f17",
+      "cat_de_roman_esti/accounts/migrations/0004_verified_ranking_privacy.py": "fce80364a35c886c29ce059ade61e0476199d3b8ebe7a11bb951344856e9a459",
+      "cat_de_roman_esti/accounts/migrations/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cat_de_roman_esti/accounts/models.py": "4b264909fbf4510b1e906f700c5a763356add7f3f3568c48a1d983c3786891eb",
+      "cat_de_roman_esti/accounts/progress.py": "174766559c4afc855bae86f725d3fa444b59e65de9e3eb6cce6ad07a39c7eefd",
+      "cat_de_roman_esti/accounts/urls.py": "b2da3f65e48ed49b7bf311b3c69a2ef5e8374cf063c162809eaddd6a4ea583c5",
+      "cat_de_roman_esti/accounts/views.py": "649bd698141eb45b95717a81820b641ababbdf48b79891b245f5a12a3edaa1c2",
+      "cat_de_roman_esti/cli.py": "1f862f56dced71d59574895a92954868c2dd94583e92f9c48bebef4b5a6845f4",
+      "cat_de_roman_esti/data.py": "dfd183e5a653d64d75ac8f509a2c4b70d33bc76b9cf9c005b2280ce470bb74dc",
+      "cat_de_roman_esti/engine.py": "5c81f86ade0e31838bedcdbc2bf0e4e037cf8d410e0daecca6caa7fa894cb507",
+      "cat_de_roman_esti/graph.py": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0",
+      "cat_de_roman_esti/roedu_client.py": "b8aafe122cb4dee7399bfbd0fcc159e97b39168b30575ccb6b4180cdbf0182eb",
+      "cat_de_roman_esti/web/__init__.py": "9e0612204ee300a1d4b0e7deedadaaddfc34e4aba9fa7accd524746a7f530674",
+      "cat_de_roman_esti/web/__main__.py": "df11e20f9e5e536d62a96bf65288b4f4bd4e79fad78c65f5aa52959a0390c9ac",
+      "cat_de_roman_esti/web/asgi.py": "a11eb9edce8ecdd7d3602acdfe284da41b4e51dfc27a0fbc25b7951d803cb9ee",
+      "cat_de_roman_esti/web/asgi_limits.py": "26e2c412c71560b71138617513424d627fe1bde78d32f60281dd0728633a9685",
+      "cat_de_roman_esti/web/http.py": "cae7428c92a442cb2ab5f3f695cd3c55759e06a0886ddb43b7edd449ab6304c5",
+      "cat_de_roman_esti/web/legal.py": "d6eb6c769b319e37fa0d1261659ca3f813f2a749d45bbbcbe14c26a86e918c4a",
+      "cat_de_roman_esti/web/meta.py": "6d0ce392b56953149d5fd309a11bdc6871b1a106ecf39a6c61033f368893452c",
+      "cat_de_roman_esti/web/settings.py": "dfab2b84e60bd6245ecdb5571580d753b786bd849e02fb564e34104433684e36",
+      "cat_de_roman_esti/web/spa.py": "4f321c4f71e91fabb0a97543576f10985670d51ed2982bbead83f8f0be190204",
+      "cat_de_roman_esti/web/urls.py": "ead8b6ca81be580a1006f81e14d106723e826d248117cea14ecc162a9768d61f",
+      "cat_de_roman_esti/web/wsgi.py": "9c36307f06e02e167dc98d6db419f648a17faffb9dd74531d8e1b8220f640118",
+      "cat_de_roman_esti/wordgames/__init__.py": "9c0d15b79b798a4d6da3181c3909b956b8d11286c8cea448565f6adb82f0adb5",
+      "cat_de_roman_esti/wordgames/_progress.py": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48",
+      "cat_de_roman_esti/wordgames/_session_endpoint.py": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+      "cat_de_roman_esti/wordgames/alchimie.py": "154e010a6ba87fe4abc4ce1f869c1a7b5d9bc7f18817cc75f83b69cb1a7dca70",
+      "cat_de_roman_esti/wordgames/alchimie_explore.py": "34f6eb3162150df3109bc69cbdbd111dd041f4cfcce658d4e8c7bfa4999a0258",
+      "cat_de_roman_esti/wordgames/categories.py": "718acb594b21d655845809d72321b73da2cdc9986205741c01aa83cf8fc825dd",
+      "cat_de_roman_esti/wordgames/conexiuni.py": "8bbf38955cbfd2e2b685f682e6c7b708ad98e82e3896ea5b16a75a39f4a1a83e",
+      "cat_de_roman_esti/wordgames/contexto.py": "6cac84f51aa2e675e28f77713d0f55b984603793f5646fa6d77403aebe71c7a6",
+      "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+      "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+      "cat_de_roman_esti/wordgames/derived_catalog.py": "5b0797723812b4b0ff35550c5d524e6306a32ad4cc895436c49e71cc1ed97b63",
+      "cat_de_roman_esti/wordgames/discovery_world.py": "cbbc98d1fe076d002e06d71e8b8881a4b950e4510879e309fa12f106070983da",
+      "cat_de_roman_esti/wordgames/intrusul.py": "f96454c60460d4567cee9f7b1c28890cada7ce7e611a57eb21c831e8c7913d5b",
+      "cat_de_roman_esti/wordgames/label_corrections.py": "552b4cd698115370e8f16a1ac1ed45f12c29888dc36593b3c8243fd0032b33a0",
+      "cat_de_roman_esti/wordgames/lant.py": "a3e02df4e000d7d23dfb74273b737814e03aa3cbd9d05e27544483485e5b5ee7",
+      "cat_de_roman_esti/wordgames/lant_relations.py": "e7b2f429a01d513b3138b04533ed16ccdd0cfdf5bf4caa88ce83c51765d9097c",
+      "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+      "cat_de_roman_esti/wordgames/perechi.py": "fff466079ad178bdaaea4a39eae9508a6559984c104973ea23e112759848c163",
+      "cat_de_roman_esti/wordgames/quick_catalog.py": "68b8ad75d1b9fbe0563585811e0b8bb9f7272e3847909cab883384958ad71ded",
+      "cat_de_roman_esti/wordgames/recipe_extensions.py": "138a48aa48390161270ecb76d4c3c6a43971c3600b66d84c782998fafb1afd79",
+      "cat_de_roman_esti/wordgames/release_reserve.py": "2b8ea60ec60a4c4590a1a1931954a08d7adb6f2769092876e6b8d7dca66a9f03",
+      "cat_de_roman_esti/wordgames/service.py": "ac39b40c5cd04c3070da015b2abe2a20276ab725c523948fff65e21a31033bec",
+      "cat_de_roman_esti/wordgames/submissions.py": "f7f14115813f9154b121b5edb35bd6455c4fb27631a24cc08d401009a81725cd"
+    },
+    "current_source8": {
+      "alchimie_discovery_world_v92.json": {
+        "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+        "sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086"
+      },
+      "alchimie_recipe_extensions_v92.json": {
+        "path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+        "sha256": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7"
+      },
+      "board_rankings_v37.json": {
+        "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+        "sha256": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef"
+      },
+      "derived_catalog_v38.json": {
+        "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+        "sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01"
+      },
+      "games_pack.json": {
+        "path": "cat_de_roman_esti/fixtures/games_pack.json",
+        "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+      },
+      "kg_sample.json": {
+        "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+        "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+      },
+      "quick_games_v92.json": {
+        "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+        "sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+      },
+      "release_reserve_v1.json": {
+        "path": "cat_de_roman_esti/fixtures/release_reserve_v1.json",
+        "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+      }
+    },
+    "current_bundle": {
+      "path": "go-backend/internal/content/bundled.json",
+      "sha256": "c1fff429992c69926aafb07f5b015f890a82c7c01cc5230107bdaf481bca5993"
+    },
+    "digest_authority": {
+      "path": "go-backend/internal/content/digest.go",
+      "sha256": "35f33cfeb67f234ceeee6e2a6ec08dabc036a383e46bbd48bf6d8b4287061ea2"
+    },
+    "actual_world_proposal": {
+      "path": "docs/reviews/v1-5-hot-chocolate/native/world/proposal.json",
+      "sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086"
+    },
+    "binary": "Planned separately admitted build target; actual binary SHA and qualified Go/runtime readset must be recorded by the executing parent.",
+    "environment": "Names and fixed synthetic settings only: PYTHONPATH=current task root, PYTHONDONTWRITEBYTECODE=1, CAT_DEBUG=1, CAT_ACCOUNTS_ENABLED=0, CAT_SUBMISSIONS_ENABLED=0. No credentials or provider values inspected."
+  },
+  "build_test_adapter": {
+    "path": "go-backend/internal/contentbuild/build_test.go",
+    "sha256": "e92aa7640939ba92c6bc1b3de575dc7ee413ead0919bc7364c51968e7f4310b2",
+    "old_test": "Original TestRebuildCurrentReviewedBundleAndPin name and d1/2419/9473/709/418/251/351/9/eight-source assertions retained in genuine bounded Source4 archive context. Native Canonical roundtrip must reconstruct exact archived bytes and old digest declaration; the old world source bytes come from immutable actual Source4 proposal.",
+    "archive": "Exact compressed76245d7d… and rawd1d3f721… whole bundle, with 2MiB compressed/8MiB raw refusal bounds.",
+    "new_current_test": "TestRebuildSource5WorldOnlyReviewedBundleAndPin invokes actual Build(current root), requires byte equality with installed export, exact current c1fff429… digest/pin, world252/352/10 and world source196e0b72…. It verifies all eight actual source files and proves every other bundle field and the other seven source identities remain Source4 exact.",
+    "qualification": "No compilation/test execution performed; native gofmt/focused and full tests require separate admission."
+  },
+  "fifth_selector_roadmap": {
+    "runtime_file": "go-backend/internal/httpgolden/golden.go",
+    "runtime_file_unchanged_by_this_worker": true,
+    "prerequisites": "Successful capture, exact raw corpus SHA, all1207-case request/source8 preservation and independent expected-response/provenance delta review.",
+    "minimal_adoption": "Add the fifth separately pinned embedded corpus and reviewedV15 reader; include it in the existing complete reflect.DeepEqual Source8 selection. Preserve all four old corpora and reader hashes, 1207 count checks and strict unknown/partial/mixed-set refusal.",
+    "selector_tests": "Retain old source-family cases and add exact V15 current selection plus unknown/mixed/missing/extra source refusal without any inference-by-KG-only shortcut.",
+    "pending": "No fifth corpus/hash fabricated, no runtime selector modified and no capture/golden data written."
+  },
+  "status": "capture source and build-test contexts prepared; execution and fifth-corpus adoption await separate admissions/evidence"
+}

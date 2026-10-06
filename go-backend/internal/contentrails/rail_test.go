@@ -57,7 +57,7 @@ func TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes(t *testing.
 	}
 }
 func TestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix(t *testing.T) {
-	root := rootPath(t)
+	root, _ := historicalWorldRoot(t)
 	quick, err := fixture(root, "quick_games_v92.json")
 	if err != nil {
 		t.Fatal(err)
@@ -201,7 +201,7 @@ func TestCompleteIndependentJudgmentsSourcesAndCandidateBinding(t *testing.T) {
 	}
 }
 func TestHistoricalWorldTransitionsKeepCurrentBooksAndRefuseChangedRecipes(t *testing.T) {
-	root := rootPath(t)
+	root, _ := historicalWorldRoot(t)
 	s := sourceForTest(t)
 	next, err := Candidate(root, s, "world", false)
 	if err != nil {
@@ -391,7 +391,7 @@ func TestOutputCannotFollowSymlinkOrOverwriteFixtures(t *testing.T) {
 }
 
 func TestSecondWorldTransitionRefusesStalePreviousArchive(t *testing.T) {
-	root, s := cloneRoot(t)
+	root, s := historicalWorldRoot(t)
 	previous, err := archive(root, s, "world_candidate")
 	if err != nil {
 		t.Fatal(err)

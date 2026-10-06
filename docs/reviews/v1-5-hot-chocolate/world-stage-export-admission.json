@@ -1,0 +1,93 @@
+{
+  "schema": "v1-5-world-supported-stage-export-admission-v1",
+  "lane": "world-stage-export",
+  "checked_at_utc": "2026-10-06T19:22:46.309683+00:00",
+  "deadline_utc": "2026-10-06T19:42:46.309683+00:00",
+  "runner_sha256": "2e07a568a74806565e67593f267feb01fdbcb49bcf229f15f1dc49bf20192336",
+  "inputs": {
+    "go-backend/internal/contentrails/sources/authored-v5.json": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+    "docs/reviews/v1-5-hot-chocolate/native/world/candidate.json": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+    "docs/reviews/v1-5-hot-chocolate/native/world/factual-review.json": "f8e3f12d8ae85f20f060fc50b8e70d920b747ea3c07926345f517c7bd0e96945",
+    "docs/reviews/v1-5-hot-chocolate/native/world/quality-review.json": "f19205e9ef18803e3e7c81f1245cf858b16ef5df553e704532d470d271883e69",
+    "docs/reviews/v1-5-hot-chocolate/native/world/proposal.json": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+    "docs/reviews/v1-5-hot-chocolate/native/world/prospective-audit-r2.json": "28aaf3f4ed2591312a84bae0b66355583a95cd13dc878dda55410119809109b8",
+    "docs/reviews/v1-5-hot-chocolate/native/world/final-factual-review.json": "6a3ef2304367e72cce2dc1bbc9e582aff4b62eccf72a2bbb47f50e3af912f7c4",
+    "docs/reviews/v1-5-hot-chocolate/native/world/final-quality-review.json": "e974dcaa6d50b7dc6da44d38bb00f6d02a942fa48744f814a383cf0c41f1ec98"
+  },
+  "unchanged": {
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+    "cat_de_roman_esti/fixtures/board_demotions_v43.json": "c35261a5208d9b68d39a94f8602a5586db67eaecbe130c0c219f6a43fd1ef0a7",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+    "cat_de_roman_esti/fixtures/contexto_demotions_v44.json": "29c76be1d65fc38bf2e3a754d48ba3b96a8e6b6c95fde28c7c2fbd882ee9996c",
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/kg_real.json": "baf3d6c98f809479c5f690373cd297dece73286ec083b2e643191d4bb705c104",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "go-backend/internal/contentrails/sources/authored-v5.json": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585"
+  },
+  "expected_after": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086"
+  },
+  "commands": [
+    {
+      "name": "supported-world-installation",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-content-rail",
+        "world",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/go-backend/internal/contentrails/sources/authored-v5.json",
+        "--candidate",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/candidate.json",
+        "--factual-review",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/factual-review.json",
+        "--quality-review",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/quality-review.json",
+        "--proposal",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/proposal.json",
+        "--live-audit",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/prospective-audit-r2.json",
+        "--final-factual-review",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/final-factual-review.json",
+        "--final-quality-review",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/final-quality-review.json",
+        "--expected-sha256",
+        "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+        "--write"
+      ]
+    },
+    {
+      "name": "native-private-export",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-content",
+        "export",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5"
+      ]
+    }
+  ],
+  "allowed_mutations": [
+    "one generated world catalogue through native supported transaction",
+    "native bundled.json and digest.go through nativeexport"
+  ],
+  "required_followup": "Refresh independentcurrentreference/currentconsumerchecks and all3installedaudits/same-role finals; strictmixedSource5World/Source4otherauthority/allrequiredgates/assembled/localmerge remainmandatory.",
+  "limits": {
+    "RSS_bytes": 2147483648,
+    "incremental_bytes": 1073741824,
+    "start_disk_gib": 17,
+    "remaining_disk_mem_gib": 16,
+    "GOMAXPROCS": 2,
+    "build_jobs": 2,
+    "metadata_reserve_seconds": 45
+  },
+  "measured": {
+    "disk_free_gib": 104.14385604858398,
+    "memory_available_gib": 27.84539794921875
+  }
+}

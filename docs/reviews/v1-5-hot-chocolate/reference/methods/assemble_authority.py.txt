@@ -1,0 +1,28 @@
+import datetime,hashlib,json,pathlib,subprocess
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5');D=R/'docs/reviews/v1-5-hot-chocolate';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();P=R/'go-backend/internal/contentrails/sources/installed-authorities.json';Q=R/'go-backend/internal/contentrails/installed_authorities_pin.go'
+old=(D/'native/previous-installed-authorities.json').read_bytes();pin=(D/'native/previous-installed-authorities-pin.go.txt').read_bytes();assert P.read_bytes()==old and Q.read_bytes()==pin
+prior=json.loads(old);new=json.loads(old);src='go-backend/internal/contentrails/sources/authored-v5.json';s=json.loads((R/src).read_bytes());assert s['version']==5 and s['parent_source_sha256']==prior['source_chain'][-1]['sha256']
+frozen=json.loads((D/'runtime-freeze-r2.json').read_bytes());assert len(frozen['runtime_sources'])==108;assert all(sha(R/x['path'])==x['sha256'] for x in frozen['runtime_sources'])
+oldpaths=subprocess.check_output(['git','ls-tree','-r','--name-only','a4f42f176b06276a3d46f3da40373cecfb70f7ac','--','go-backend/internal/contentrails/sources'],cwd=R,text=True).splitlines();archives={}
+for p in oldpaths:
+ if p==str(P.relative_to(R)):continue
+ previous=subprocess.check_output(['git','show','a4f42f176b06276a3d46f3da40373cecfb70f7ac:'+p],cwd=R);assert (R/p).read_bytes()==previous;archives[p]=sha(R/p)
+archive_bindings={};old_archive_bindings={}
+for source_path in sorted((R/'go-backend/internal/contentrails/sources').glob('authored-v*.json')):
+ source_doc=json.loads(source_path.read_bytes())
+ for v in source_doc['archives'].values():
+  assert sha(R/v['path'])==v['sha256'];archive_bindings[v['path']]=v['sha256']
+  if source_doc['version']<5:old_archive_bindings[v['path']]=v['sha256']
+ for p,h in source_doc['legacy_sources'].items():assert sha(R/p)==h
+assert len(old_archive_bindings)==19
+for rail in ('world','quick','extensions'):
+ entry=json.loads((D/'native'/rail/'installed-authority-entry.json').read_bytes())
+ for field in ('candidate','factual_review','quality_review','proposal','audit','final_factual_review','final_quality_review'):
+  assert sha(R/entry[field]['path'])==entry[field]['sha256']
+ assert entry['source_sha256']==(sha(R/src) if rail=='world' else prior['source_chain'][-1]['sha256'])
+ new['rails'][rail]=entry
+new['source_chain'].append({'parent_source_sha256':s['parent_source_sha256'],'path':src,'sha256':sha(R/src),'version':5})
+assert new['source_chain'][:-1]==prior['source_chain']
+b=(json.dumps(new,ensure_ascii=False,sort_keys=True,indent=2)+'\n').encode();h=hashlib.sha256(b).hexdigest();oldh=hashlib.sha256(old).hexdigest();assert pin.count(oldh.encode())==1;newpin=pin.replace(oldh.encode(),h.encode());P.write_bytes(b);Q.write_bytes(newpin)
+r={'schema':'v1-5-installed-authority-assembly-v1','checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'old_manifest_sha256':oldh,'new_manifest_sha256':h,'new_pin_sha256':sha(Q),'metadata_pin_only_digest_substitution':True,'rail_entries_exact_native_drafts':True,'prior_source_chain_exact':True,'old_source_archives_unchanged':archives,'source1_to4_all19_archives_verified':old_archive_bindings,'source5_archive_bindings_verified':archive_bindings,'legacy_source_bindings_verified':s['legacy_sources'],'source5_sha256':sha(R/src),'source5_parent':s['parent_source_sha256'],'world_source_version':5,'quick_extensions_source_version':4,'included_runtime108_unchanged':True,'next':'Rebuild metadata-embedding tools and strict default all-four check; required integrated gates; independent exact-commit assembled review and root-owned local landing.'}
+(D/'native/authority-assembly.json').write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n');print(json.dumps({k:v for k,v in r.items() if k not in ('old_source_archives_unchanged','next')}))

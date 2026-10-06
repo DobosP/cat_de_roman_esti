@@ -29,10 +29,14 @@ var frozenV13 []byte
 //go:embed testdata/python-http-parity-v1-4.json.gz
 var frozenV14 []byte
 
+//go:embed testdata/python-http-parity-v1-5.json.gz
+var frozenV15 []byte
+
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"
 const V13SHA256 = "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
 const V14SHA256 = "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a"
+const V15SHA256 = "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519"
 const MaxCorpusBytes = 32 * 1024 * 1024
 const MaxCases = 4096
 
@@ -140,6 +144,17 @@ func reviewedV14() (*Corpus, error) {
 	return c, err
 }
 
+func reviewedV15() (*Corpus, error) {
+	if fmt.Sprintf("%x", sha256.Sum256(frozenV15)) != V15SHA256 {
+		return nil, fmt.Errorf("independent V1.5 HTTP corpus digest drift")
+	}
+	c, err := ReadCorpus(bytes.NewReader(frozenV15), true)
+	if err == nil && (len(c.Cases) != 1207 || len(c.Sources) != 8) {
+		return nil, fmt.Errorf("expected 1207 independent V1.5 HTTP cases and exact eight sources")
+	}
+	return c, err
+}
+
 // ForSources selects an independently captured reviewed corpus only when its
 // entire source identity equals the requested export. Historical Frozen remains
 // immutable; unknown, partial or mixed source sets never gain expected responses.
@@ -160,7 +175,11 @@ func ForSources(sources map[string]string) (*Corpus, error) {
 	if err != nil {
 		return nil, err
 	}
-	for _, c := range []*Corpus{original, current, latest, v14} {
+	v15, err := reviewedV15()
+	if err != nil {
+		return nil, err
+	}
+	for _, c := range []*Corpus{original, current, latest, v14, v15} {
 		if reflect.DeepEqual(c.Sources, sources) {
 			return c, nil
 		}

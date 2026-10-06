@@ -1,0 +1,11 @@
+import pathlib,json,hashlib,subprocess,sys
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5');D=R/'docs/reviews/v1-5-hot-chocolate';S=pathlib.Path('/home/dobo/work/_temp/codex__content-v1-5');sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ad=json.loads((D/'installed-final-review-r2-admission.json').read_bytes());commands=[]
+for rail,scope in ad['scope'].items():
+ d=D/'native'/rail
+ for role in ['factual','quality']:
+  p=d/('installed-final-'+role+'-review-r2.json');r=json.loads(p.read_bytes());assert r['role']==role and r['verdict']=='accept';assert r['reviewer']=='/root/'+('content_rail' if role=='factual' else 'graph_quality');assert r['catalog_sha256']==scope['artifact_sha256'];assert r['live_audit_sha256' if rail=='extensions' else 'audit_sha256']==scope['audit_sha256']
+ argv=[str(S/'cat-content-rail'),rail,'--root',str(R),'--source',str(R/scope['source_path'])]
+ for flag,key in [('candidate','candidate'),('factual-review','factual_review'),('quality-review','quality_review'),('proposal','proposal')]:argv+=['--'+flag,str(R/scope[key]['path'])]
+ argv+=['--live-audit',str(R/scope['audit_path']),'--final-factual-review',str(d/'installed-final-factual-review-r2.json'),'--final-quality-review',str(d/'installed-final-quality-review-r2.json'),'--expected-sha256',scope['artifact_sha256'],'--installed-authority-out',str(d/'installed-authority-entry.json')];commands.append({'name':'native-'+rail+'-authority-entry','argv':argv})
+(D/'authority-entry-r2-commands.json').write_text(json.dumps(commands,indent=2)+'\n')
+print('Prepared',len(commands),'exact native authority commands; no execution or metadata mutation')

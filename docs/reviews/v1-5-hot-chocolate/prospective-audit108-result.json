@@ -1,0 +1,52 @@
+{
+  "lane": "prospective-audit108",
+  "manifest_sha256": "18708dbfb649652b7e6d82a9665660a28235327c6605649333cb2eb157405a86",
+  "checked_at_utc": "2026-10-06T19:14:04.969274+00:00",
+  "deadline_pass": true,
+  "steps": [
+    {
+      "name": "fresh108-source-prospective-world-audit",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-content-rail",
+        "world",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/go-backend/internal/contentrails/sources/authored-v5.json",
+        "--audit-catalog",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/proposal.json",
+        "--audit-out",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/prospective-audit-r2.json"
+      ],
+      "started_at_utc": "2026-10-06T19:13:39.771704+00:00",
+      "finished_at_utc": "2026-10-06T19:14:04.968919+00:00",
+      "elapsed_seconds": 25.197228,
+      "exit_code": 0,
+      "guard": null,
+      "peak_group_RSS_bytes": 84578304,
+      "log_sha256": "8784bf5efe894aba895f784580015b8399e239297c4cbd65010ad9c45d2453b6",
+      "log_text": "{\"mode\":\"audit\",\"ok\":true,\"rail\":\"world\"}\n"
+    }
+  ],
+  "all_steps_completed": true,
+  "incremental_bytes": 24891,
+  "unchanged": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": true,
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": true,
+    "cat_de_roman_esti/fixtures/board_demotions_v43.json": true,
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": true,
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": true,
+    "cat_de_roman_esti/fixtures/contexto_demotions_v44.json": true,
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": true,
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": true,
+    "cat_de_roman_esti/fixtures/games_pack.json": true,
+    "cat_de_roman_esti/fixtures/kg_real.json": true,
+    "cat_de_roman_esti/fixtures/kg_sample.json": true,
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": true,
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": true,
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": true,
+    "go-backend/internal/content/bundled.json": true,
+    "go-backend/internal/contentrails/sources/installed-authorities.json": true
+  },
+  "installation_approval": false
+}

@@ -266,7 +266,7 @@ func TestV14IndependentCorpusRetainsExactSourceScope(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if V14SHA256 != "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a" || len(c.Cases) != 1207 || len(c.Sources) != 8 || !strings.Contains(c.Reference, "prospective V1.4 reviewed sources at baseline46641d6f9963f92941d12f5955e5eb40a2d8fb56") || !reflect.DeepEqual(c.Sources, testData(t).Sources) {
+	if V14SHA256 != "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a" || len(c.Cases) != 1207 || len(c.Sources) != 8 || !strings.Contains(c.Reference, "prospective V1.4 reviewed sources at baseline46641d6f9963f92941d12f5955e5eb40a2d8fb56") || !reflect.DeepEqual(c.Sources, historicalV14Data(t).Sources) {
 		t.Fatal("V1.4 independent corpus source/capture identity drift")
 	}
 	selected, err := ForSources(c.Sources)
@@ -278,5 +278,108 @@ func TestV14IndependentCorpusRetainsExactSourceScope(t *testing.T) {
 		if err != nil || reflect.DeepEqual(old.Sources, c.Sources) {
 			t.Fatal("V1.4 replaced historical source scope", err)
 		}
+	}
+}
+
+// The V1.4 source assertion above belongs to its exact frozen predecessor.
+// Current HTTP replay uses testData and ForSources, selecting V1.5 independently.
+func historicalV14Data(t *testing.T) *content.Content {
+	t.Helper()
+	f, err := os.Open(filepath.Join("..", "alchimie_explore", "testdata", "bundled-v1-4.json.gz"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	compressed, err := io.ReadAll(io.LimitReader(f, (2<<20)+1))
+	closeErr := f.Close()
+	if err != nil || closeErr != nil || len(compressed) > 2<<20 || fmt.Sprintf("%x", sha256.Sum256(compressed)) != "76245d7d5fd3266981c92e3ad7a7e323395b8edd919a4208a56b01bf3bc5f5d3" {
+		t.Fatal("historical V1.4 compressed archive refused", err)
+	}
+	z, err := gzip.NewReader(bytes.NewReader(compressed))
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, err := io.ReadAll(io.LimitReader(z, (8<<20)+1))
+	closeErr = z.Close()
+	if err != nil || closeErr != nil || len(b) > 8<<20 || fmt.Sprintf("%x", sha256.Sum256(b)) != "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2" {
+		t.Fatal("historical V1.4 exact bytes refused", err)
+	}
+	c, err := content.Decode(b)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return c
+}
+
+func TestV15IndependentCorpusRetainsExactWorldOnlySourceScope(t *testing.T) {
+	c, err := reviewedV15()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if V15SHA256 != "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519" || len(c.Cases) != 1207 || len(c.Sources) != 8 || !strings.Contains(c.Reference, "Independent Django application; V1.5 reviewed world-only sources") || !reflect.DeepEqual(c.Sources, testData(t).Sources) {
+		t.Fatal("V1.5 independent corpus source/capture identity drift")
+	}
+	if c.Sources["alchimie_discovery_world_v92.json"] != "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086" {
+		t.Fatal("V1.5 selected an unreviewed world source")
+	}
+	selected, err := ForSources(c.Sources)
+	if err != nil || !reflect.DeepEqual(selected, c) {
+		t.Fatal("V1.5 source set selected different independent responses", err)
+	}
+	v14, err := reviewedV14()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for name, expected := range v14.Sources {
+		if name != "alchimie_discovery_world_v92.json" && c.Sources[name] != expected {
+			t.Fatalf("world-only HTTP reference changed another source %s", name)
+		}
+	}
+	if reflect.DeepEqual(c.Sources, v14.Sources) {
+		t.Fatal("V1.5 reused the prior world source identity")
+	}
+	for _, read := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13, reviewedV14} {
+		old, err := read()
+		if err != nil || reflect.DeepEqual(old.Sources, c.Sources) {
+			t.Fatal("V1.5 replaced a historical source scope", err)
+		}
+		selected, err := ForSources(old.Sources)
+		if err != nil || !reflect.DeepEqual(selected, old) {
+			t.Fatal("historical selector was lost during V1.5 adoption", err)
+		}
+	}
+}
+
+func TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests(t *testing.T) {
+	data := testData(t)
+	client, err := NewClient(Local(httpapi.New(data)), MaxCases)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer client.Close()
+	for name, mutate := range map[string]func(map[string]string){
+		"unknown-world": func(s map[string]string) { s["alchimie_discovery_world_v92.json"] = strings.Repeat("0", 64) },
+		"missing-world": func(s map[string]string) { delete(s, "alchimie_discovery_world_v92.json") },
+		"extra-source":  func(s map[string]string) { s["unreviewed-world.json"] = strings.Repeat("0", 64) },
+		"same-kg-with-mixed-source": func(s map[string]string) {
+			s["quick_games_v92.json"] = "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c"
+		},
+	} {
+		t.Run(name, func(t *testing.T) {
+			sources := map[string]string{}
+			for key, value := range data.Sources {
+				sources[key] = value
+			}
+			mutate(sources)
+			if _, err := ForSources(sources); err == nil || client.Count() != 0 {
+				t.Fatal("unreviewed world source acquired expectations or made requests")
+			}
+		})
+	}
+	v14, err := reviewedV14()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err = Replay(context.Background(), client, v14, data); err == nil || client.Count() != 0 {
+		t.Fatal("same-KG Source4 replay against Source5 did not refuse before requests")
 	}
 }

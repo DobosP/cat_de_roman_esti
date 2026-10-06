@@ -41,7 +41,7 @@ func TestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay(t *testing.T) {
 }
 
 func TestProspectiveWorldAuditWithChangedGraphKeepsInstalledWorldFailClosed(t *testing.T) {
-	root, _ := cloneRoot(t)
+	root, _ := historicalWorldRoot(t)
 	world, err := fixture(root, "alchimie_discovery_world_v92.json")
 	if err != nil {
 		t.Fatal(err)

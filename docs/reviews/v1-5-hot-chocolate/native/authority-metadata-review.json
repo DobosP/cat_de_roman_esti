@@ -1,0 +1,69 @@
+{
+  "schema": "v1-5-independent-authority-metadata-review-v1",
+  "reviewer": "/root/assembled_review",
+  "role": "independent source metadata reviewer",
+  "scope": "Exact two-file authority metadata integrity; no native execution, no final assembled or landing acceptance. Root authored metadata; factual/quality authors are independent other roles.",
+  "verdict": "accept_metadata_integrity_only",
+  "admitted_files": {
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "a4ace0908e17611d6aebbbbe1121a26df2c462caaa7baaa9d8981d936df89c0e",
+    "go-backend/internal/contentrails/installed_authorities_pin.go": "e29b381be0f6fc3774b80e06558fdadc10189cb95a07b3f74aa9eda0e0d80411"
+  },
+  "bindings": {
+    "previous_authority_sha256": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "assembly_sha256": "aa496c86b4e6f7ccbfc5a4296730045108ab2238798982f9816753015872ba74",
+    "entry_result_sha256": "a226a51fb9ac2e96b00f5f427fe8dd1ff856053afa62bc42ae2f9f11ffeb2cf7",
+    "runtime_freeze_r2_sha256": "13bc6cef7c0c91880c13d65fd6be99530c6829b8fb8a5dcf0fb71c980cc1ccc8",
+    "native_entry_sha256": {
+      "world": "731fdbcb64602379bbe9266bcb9c012d80ff3f9bbfeff0eb13c55885c5d91fe1",
+      "quick": "49edda161a5cf441d842baff7a36ce95cab03a3ec6264e53d0bf80397db4b5b3",
+      "extensions": "e8d20dc9626dd0f34392b0182ef32ca3673e982fbc26a2d8f3c5863bdd272f90"
+    },
+    "source5_sha256": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+    "source5_parent_sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1"
+  },
+  "checked_results": {
+    "all_checks_pass": true,
+    "assertions": 118,
+    "prior_archives": 19,
+    "all_chain_archives": 22,
+    "included_runtime": 108,
+    "source_bindings": 9,
+    "fresh_same_role_reviewers": {
+      "world": {
+        "factual": "/root/content_rail",
+        "quality": "/root/graph_quality"
+      },
+      "quick": {
+        "factual": "/root/content_rail",
+        "quality": "/root/graph_quality"
+      },
+      "extensions": {
+        "factual": "/root/content_rail",
+        "quality": "/root/graph_quality"
+      }
+    },
+    "native_entry_stages": 3,
+    "World_Source": 5,
+    "Quick_Extensions_Source": 4,
+    "pin_only_digest_substitution": true,
+    "source_chain_append_only": true,
+    "runtime_actual_hashes_and_inclusion_exact": true,
+    "all3_R2_replay_payloads_equal_prior": true
+  },
+  "issues": [],
+  "approval_boundary": "Metadata verified against actual files and saved native outputs, not a native-command rerun. Strict default all-four/source/refusal/full gates are separate root lanes; exact-commit independent assembled review remains required. No installation or release approval inferred. Historical R1 judgments remain history. Any included file or descriptor drift invalidates this metadata review.",
+  "timing": {
+    "admitted_start_utc": "2026-10-06T20:34:30.409283+00:00",
+    "first_inspection_observed_utc": "2026-10-06T20:37:17.105123+00:00",
+    "analysis_finished_utc": "2026-10-06T20:39:27.062732+00:00",
+    "deadline_utc": "2026-10-06T20:49:30.409283+00:00",
+    "metadata_reserve_start_utc": "2026-10-06T20:46:30.409283+00:00",
+    "analysis_before_reserve": true,
+    "hard_deadline_pass": true,
+    "process_peak_RSS_bytes": 41746432,
+    "native_execution_count": 0,
+    "receipt_bytes": 3738,
+    "resource_bound_pass": true
+  },
+  "method": "Read-only Python JSON/streamed SHA checks: exact 21 native entry document descriptors; same-role new R2 final bindings; append chain v2–5 with exact parents and actual v1–5 bytes; 19/22 unique archival maps and legacy sources; one digest pin replacement; native runtime inclusion rule plus all 108 current hashes/current nine source bindings; current coherent bundle and fifth corpus."
+}

@@ -2,10 +2,12 @@ package alchimie_explore
 
 import (
 	"bytes"
+	"compress/gzip"
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"io"
 	"os"
 	"testing"
 )
@@ -24,7 +26,28 @@ func golden(t *testing.T) map[string]any {
 }
 func load(t *testing.T) *Service {
 	t.Helper()
-	data, e := content.Load()
+	// These tests retain the complete frozen Source4 corpus and its literals.
+	// The separate content_v1_5_test.go exercises the actual current world.
+	compressed, e := os.ReadFile("testdata/bundled-v1-4.json.gz")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if fmt.Sprintf("%x", sha256.Sum256(compressed)) != "76245d7d5fd3266981c92e3ad7a7e323395b8edd919a4208a56b01bf3bc5f5d3" {
+		t.Fatal("frozen Source4 exploration archive drift")
+	}
+	z, e := gzip.NewReader(bytes.NewReader(compressed))
+	if e != nil {
+		t.Fatal(e)
+	}
+	raw, e := io.ReadAll(io.LimitReader(z, (8<<20)+1))
+	closeErr := z.Close()
+	if e != nil || closeErr != nil || len(raw) > 8<<20 {
+		t.Fatal("invalid or oversized frozen Source4 exploration bundle")
+	}
+	if fmt.Sprintf("%x", sha256.Sum256(raw)) != "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2" {
+		t.Fatal("frozen Source4 exploration bundle drift")
+	}
+	data, e := content.Decode(raw)
 	if e != nil {
 		t.Fatal(e)
 	}

@@ -1,0 +1,6 @@
+import json,pathlib,subprocess
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5');S=pathlib.Path('/home/dobo/work/_temp/codex__content-v1-5');D=R/'docs/reviews/v1-5-hot-chocolate';results=[]
+for rail in ('quick','extensions'):
+ a=[str(S/'cat-content-rail'),rail,'--root',str(R),'--source',str(R/'go-backend/internal/contentrails/sources/authored-v5.json'),'--check'];p=subprocess.run(a,cwd=R,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+ results.append({'rail':rail,'argv':a,'exit_code':p.returncode,'output':p.stdout});assert p.returncode!=0 and 'does not authorize selected authored source' in p.stdout
+(D/'mixed-source-refusals.json').write_text(json.dumps({'schema':'v1-5-mixed-source-authority-refusals-v1','results':results,'all_refused_as_required':True},indent=2)+'\n');print('WorldSource5 cannot be substituted for unchanged Source4 Quick or Extensions')

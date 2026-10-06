@@ -1,0 +1,79 @@
+{
+  "lane": "proposal-audit",
+  "manifest_sha256": "00c7bf793c5fb3ce646fe657ec328393923c5e1b9c97bf17ca70bb765e33f4f0",
+  "checked_at_utc": "2026-10-06T18:56:16.198675+00:00",
+  "deadline_pass": true,
+  "steps": [
+    {
+      "name": "build-reviewed-proposal",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-content-rail",
+        "world",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/source5-proposal.json",
+        "--candidate",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/candidate.json",
+        "--factual-review",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/factual-review.json",
+        "--quality-review",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/quality-review.json",
+        "--proposal",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/proposal.json"
+      ],
+      "started_at_utc": "2026-10-06T18:55:50.258816+00:00",
+      "finished_at_utc": "2026-10-06T18:55:52.517771+00:00",
+      "elapsed_seconds": 2.258964,
+      "exit_code": 0,
+      "guard": null,
+      "peak_group_RSS_bytes": 61530112,
+      "log_sha256": "06550cbe94b953a0df4473ce4d4cd1aebe2373fd5e7f2044f6dcd3cfd759d702",
+      "log_text": "{\"mode\":\"proposal\",\"ok\":true,\"rail\":\"world\"}\n"
+    },
+    {
+      "name": "prospective-world-audit",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-content-rail",
+        "world",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/source5-proposal.json",
+        "--audit-catalog",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/proposal.json",
+        "--audit-out",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5/docs/reviews/v1-5-hot-chocolate/native/world/prospective-audit.json"
+      ],
+      "started_at_utc": "2026-10-06T18:55:52.518176+00:00",
+      "finished_at_utc": "2026-10-06T18:56:16.198177+00:00",
+      "elapsed_seconds": 23.680015,
+      "exit_code": 0,
+      "guard": null,
+      "peak_group_RSS_bytes": 86499328,
+      "log_sha256": "8784bf5efe894aba895f784580015b8399e239297c4cbd65010ad9c45d2453b6",
+      "log_text": "{\"mode\":\"audit\",\"ok\":true,\"rail\":\"world\"}\n"
+    }
+  ],
+  "all_steps_completed": true,
+  "incremental_bytes": 912476,
+  "unchanged": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": true,
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": true,
+    "cat_de_roman_esti/fixtures/board_demotions_v43.json": true,
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": true,
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": true,
+    "cat_de_roman_esti/fixtures/contexto_demotions_v44.json": true,
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": true,
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": true,
+    "cat_de_roman_esti/fixtures/games_pack.json": true,
+    "cat_de_roman_esti/fixtures/kg_real.json": true,
+    "cat_de_roman_esti/fixtures/kg_sample.json": true,
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": true,
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": true,
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": true,
+    "go-backend/internal/content/bundled.json": true,
+    "go-backend/internal/contentrails/sources/installed-authorities.json": true
+  },
+  "installation_approval": false
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "v1-5-installed-three-rail-final-review-r2-admission-v1",
+  "checked_at_utc": "2026-10-06T20:24:32.116448+00:00",
+  "deadline_utc": "2026-10-06T20:44:32.116448+00:00",
+  "metadata_reserve_seconds": 180,
+  "scope": {
+    "world": {
+      "audit_path": "docs/reviews/v1-5-hot-chocolate/native/world/installed-audit-r2.json",
+      "audit_sha256": "0a295df3ace1be4a9cd989fa68f259156a6920ecd27d9a59d075d7bcfdf31983",
+      "native_source_version": 5,
+      "source_path": "go-backend/internal/contentrails/sources/authored-v5.json",
+      "candidate": {
+        "path": "docs/reviews/v1-5-hot-chocolate/native/world/candidate.json",
+        "sha256": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04"
+      },
+      "factual_review": {
+        "path": "docs/reviews/v1-5-hot-chocolate/native/world/factual-review.json",
+        "sha256": "f8e3f12d8ae85f20f060fc50b8e70d920b747ea3c07926345f517c7bd0e96945"
+      },
+      "quality_review": {
+        "path": "docs/reviews/v1-5-hot-chocolate/native/world/quality-review.json",
+        "sha256": "f19205e9ef18803e3e7c81f1245cf858b16ef5df553e704532d470d271883e69"
+      },
+      "proposal": {
+        "path": "docs/reviews/v1-5-hot-chocolate/native/world/proposal.json",
+        "sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086"
+      },
+      "artifact_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086"
+    },
+    "quick": {
+      "audit_path": "docs/reviews/v1-5-hot-chocolate/native/quick/installed-audit-r2.json",
+      "audit_sha256": "1cf975e887416d57fb2a1d2747b8bec6478a340ad412f0d38f62f8a1bab784fa",
+      "native_source_version": 4,
+      "source_path": "go-backend/internal/contentrails/sources/authored-v4.json",
+      "candidate": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quick/candidate.json",
+        "sha256": "302f42db4596e8568bd4423c090bc795bef270c641c99ce6ce996d35e691f6da"
+      },
+      "factual_review": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quick/factual-review.json",
+        "sha256": "9e72009a865d5da6636496899e203a3262a25c3c36fed161a5cb2f20fe78bc3f"
+      },
+      "quality_review": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quick/quality-review.json",
+        "sha256": "f52c1bbc4022c830c41c0b3cbecb5be20b50d144f2788503374e9a4edf55f35c"
+      },
+      "proposal": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quick/proposal.json",
+        "sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+      },
+      "artifact_sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+    },
+    "extensions": {
+      "audit_path": "docs/reviews/v1-5-hot-chocolate/native/extensions/installed-audit-r2.json",
+      "audit_sha256": "2a0363404594b112cb322005f6b993620bfda40138fae94bca6d2be1bc2f3bf6",
+      "native_source_version": 4,
+      "source_path": "go-backend/internal/contentrails/sources/authored-v4.json",
+      "candidate": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/extensions/candidate.json",
+        "sha256": "83b4a02f2c51db7539672306002eced3b8b497ebb6879c651a8ebc9a59352550"
+      },
+      "factual_review": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/extensions/factual-review.json",
+        "sha256": "1f443f8e42fb7e8f8e91390cc3f63d0a5ad697c8b7069f10561d99d86cbf53ca"
+      },
+      "quality_review": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/extensions/quality-review.json",
+        "sha256": "d5a0421ab18b48ada4246e282034bee98d1c21cd879d3bb68cf9883c9039bdcc"
+      },
+      "proposal": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/extensions/proposal.json",
+        "sha256": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7"
+      },
+      "artifact_sha256": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7"
+    }
+  },
+  "runtime_freeze_sha256": "13bc6cef7c0c91880c13d65fd6be99530c6829b8fb8a5dcf0fb71c980cc1ccc8",
+  "reviewer_identity_policy": "Same /root/content_rail factual and /root/graph_quality quality identities as rawreviews; exact newlysavedinstalledaudit/catalog binds, no stalepreinstallfinal reuse.",
+  "resource": {
+    "disk_gib": 101.233154296875,
+    "mem_available_gib": 22.259368896484375,
+    "max_worker_RSS_bytes": 536870912,
+    "max_incremental_bytes": 10485760,
+    "heavy_lanes": 0
+  },
+  "required_output": "native/<rail>/installed-final-factual-review-r2.json and installed-final-quality-review-r2.json",
+  "reason": "Narrow installed-world reconstruction operatorfix c938 reviewed and focusednativeRACEpassed660seconds. Runtimechanged; allnewR2audits bindupdated108paths. World/source8/bundle/recipes unchanged. PreserveallR1finals exactly."
+}
