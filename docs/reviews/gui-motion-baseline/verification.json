@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "scope": "archive integrity only",
+  "archive_sha256": "5864537fb20d0d5945e770d15d121469db8c8529d2b2f4b8a45add7c60564ab0",
+  "regular_member_count": 74,
+  "deterministic_rebuild_equal": true,
+  "included_bytes_equal_original": true,
+  "frozen_git_hashes_verified": 110,
+  "generated_variant_reconstruction_hashes_verified": 6,
+  "native_chat_session_id_scan": "no native UUIDv7/chat identifiers found in included text",
+  "excluded_classes_verified": true,
+  "documentation_gate": {
+    "status": "PASS",
+    "qualified_go": "go1.27.1 linux/amd64",
+    "command": "GOENV=off GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local GOCACHE=<task-scratch>/go-cache GOMODCACHE=<task-scratch>/go-mod <existing-qualified-go> -C go-backend run ./cmd/cat-doc-check --root ..",
+    "result": {
+      "files": 46,
+      "dead_links": [],
+      "stale_terms": [],
+      "retired_verbs": [],
+      "orphans": [],
+      "budgets": []
+    },
+    "network_or_dependency_install": false
+  },
+  "whitespace_gate": {
+    "status": "PASS",
+    "commands": [
+      "git diff --check",
+      "git diff --cached --check"
+    ],
+    "scope": "owned keeper/docs changes"
+  },
+  "browser_rerun": false,
+  "dependency_install": false,
+  "future_case_or_mutant_pass_claim": false,
+  "status_doc_lines": 120,
+  "source_scope": {
+    "changed_paths": [
+      "WORKLOG.md",
+      "docs/STATUS.md",
+      "docs/reviews/gui-motion-baseline/"
+    ],
+    "runtime_frontend_api_content_adr_changes": false
+  }
+}

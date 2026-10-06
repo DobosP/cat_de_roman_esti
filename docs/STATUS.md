@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-06 — Windows loop stopped; Linux source-only transport; default CRLF failure preserved; V1.5 unqualified.
+Last verified: 2026-10-06 — source-only V1.5 remains unqualified; Windows/CRLF history preserved; GUI motion preparation keeper archived.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0176), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest0176), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.

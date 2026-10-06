@@ -1603,3 +1603,10 @@ Paul directly stopped discovery/loops and new per-iteration workspaces, requeste
 Valid until: exact source-transport pin/base/remote or qualification state changes — then treat as history.
 
 The coordinator requested completion of Paul's explicit source-main handoff with a separately identified single-command CR-at-EOL check retaining all standard actual trailing-blank/EOF/space-before-tab rules. Original default aggregate FAILURE and frozen i04 bytes remain. Exact f1d8e78 CRLF-aware check passed, new handoff ordinary check passed,101changedpaths are docs/WORKLOG only; runtime unchanged. ADR0176 partially supersedes only the historical CRLF transport blocker; no repo/global whitespace change or content/runtime qualification is inferred. This transport clarification is frozen separately and its exact final pin requires independent closure before main update. Actual source-main/remote result belongs to the immutable worker transport report. Windows discovery/loops remain stopped, V1.5 NOT_QUALIFIED.
+
+
+## 2026-10-06 — GUI motion preparation keeper
+
+Valid until: settled S1 base/core/runtime-witness binding changes — then treat as history.
+
+Preparation only: [review keeper](docs/reviews/gui-motion-baseline/README.md) preserves74 exact regular members in a deterministic185114-byte archive (`5864537fb20d0d5945e770d15d121469db8c8529d2b2f4b8a45add7c60564ab0`). Original29-case React preview/three oracle controls remain provisional on Playwright1.62.1;69 synthetic Node checks passed;48 future browser cases and six source mutants remain UNEXECUTED, with no device/release/full-gate claim. The110 pinned source files and six generated variants are Git/hash references; caches/binaries/fonts/traces/transcripts are excluded. Runtime-witness placement CORE_REQUEST blocks future named-gate import, not this archival record. No consumer/runtime/content/ADR changes or browser/dependency rerun; parent reviews/lands, then a fresh S1 chat starts from core-v1.0.
