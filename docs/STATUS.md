@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-06 — V1.5 i02 source/native-plan reviews; WAITING_NATIVE_WINDOW; production anonymous V1.0.1.
+Last verified: 2026-10-06 — V1.5 i03 source discovery active; independent source reviews accepted with adoption held; native held; V1.4 retained.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) graph0nodes/2forms/2links accepted/applied; Source4/current4authority/native+shared race/vet/export+Python/HTTP1207/history394/smoke151+28/docs GREEN; assembled ACCEPT672d656; locally landedfd09b3b; [pool3integrated/3held](content-pool/v1-4-time-links-and-predicates/pool.json); [V1.5](reviews/v1-5-small-objects/README.md) r3 remains2researched/6held,0selected/installed; [i01](reviews/v1-5-small-objects/iterations/i01/README.md) Breloc1/1/Pâlnie4/1 held; [i02](reviews/v1-5-small-objects/iterations/i02/README.md) two existing-direction hypotheses source-reviewed,2held/0selected/installed;136 exact bindings/89 named-test definitions/docs/budgets/default whitespace PASS, all actual native/play/installation gates NOT RUN; WAITING_NATIVE_WINDOW; loop ACTIVE per [ADR-0173](adr/0173-resume-bounded-content-version-loop.md).
+  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) graph0nodes/2forms/2links accepted/applied; Source4/current4authority/native+shared race/vet/export+Python/HTTP1207/history394/smoke151+28/docs GREEN; assembled ACCEPT672d656; locally landedfd09b3b; [pool3integrated/3held](content-pool/v1-4-time-links-and-predicates/pool.json); [V1.5](reviews/v1-5-small-objects/README.md) r3 remains2researched/6held,0selected/installed; [i01](reviews/v1-5-small-objects/iterations/i01/README.md) Breloc1/1/Pâlnie4/1 held; [i02](reviews/v1-5-small-objects/iterations/i02/README.md) two existing-direction hypotheses source-reviewed,2held/0selected/installed;136 exact bindings/89 named-test definitions/docs/budgets/default whitespace PASS, all actual native/play/installation gates NOT RUN; WAITING_NATIVE_WINDOW; loop ACTIVE per [ADR-0173](adr/0173-resume-bounded-content-version-loop.md); [i03](reviews/v1-5-small-objects/iterations/i03/README.md)21raw/8deep/9held/11ideas/1rejected/0selected/installed,35 source bindings; b02casting screen held; independent factual/quality source-only acceptance; discovery continues per [ADR-0174](adr/0174-continue-discovery-during-qualification-holds.md).
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0173), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0174), reviews/WORKLOG: history.

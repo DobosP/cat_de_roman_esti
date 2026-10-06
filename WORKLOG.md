@@ -1531,3 +1531,19 @@ path changes from a75ce962. No module, actual proposal or Source5 generation. Al
 graph/gameplay simulations, PG/WSL/Docker/browser/model/installation gates remain HELD / NOT RUN.
 WAITING_NATIVE_WINDOW is recorded once; no unchanged source retry. Coordinator owns actual qualified
 main landing. No merge request, version increment, push, deployment, deletion or hold mutation.
+
+## V1.5 i03 continuous source discovery — 2026-10-06
+
+Valid until: bound source/pool/baseline or admission changes — then treat as history.
+
+Owner correction resumes diverse source discovery while native qualification stays held.
+Studied actual V1.2/V1.3/V1.4/V99 evidence. Isolated i03 starts from preserved ac90ab08.
+Batch b01 records21 leads/8deep/9held/11ideas/1duplicate rejected; zero selected/installed.
+Batch b02 records one casting-correction investigation, held because partial cast lists
+are insufficient negative proof and original full-generics access failed. No graph edit.
+Exact pool/current identity screen and35-bind packet receive independent factual/quality
+source-only acceptance. Facts reopens all8deep leads; limits remain explicit. Lanternă
+projection ownership is highlighted; no first-exposure claim. Research packet/pool immutable.
+Fresh commit18.46GiB supports the0.5GiB source ceiling; no peak profile or native gate run.
+ADR-0174 separates active discovery from WAITING_NATIVE_WINDOW. Next frontier is existing-KG
+strict groups, pairs and outsiders; prior holds/receipts and shared main remain preserved.

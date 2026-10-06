@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "iteration": "i03",
+  "checked_on": "2026-10-06",
+  "source_checks": {
+    "packet_bindings": 35,
+    "mismatches": 0,
+    "docs_live": 46,
+    "dead": 0,
+    "stale": 0,
+    "retired": 0,
+    "orphans": 0,
+    "budgets": {
+      "AGENTS": 80,
+      "CLAUDE_nonblank": 8,
+      "STATUS": 120,
+      "agent_map": 49,
+      "agent_testing": 76
+    },
+    "initial_default_whitespace": "PASS",
+    "new_review_hashes": "both match exact reviewer returned hashes",
+    "research_reviews": "both source-only accepted, no frozen scope correction"
+  },
+  "scope": "Only lightweight stdlib/file/Git documentation checks; no application imports/tests/simulations/native qualification.",
+  "fresh_source_start": {
+    "commitFreeGiB": 18.465213775634766,
+    "physicalFreeGiB": 18.89014434814453,
+    "diskFreeGiB": 19.66213607788086,
+    "minimumCommitReserveGiB": 16,
+    "sourceCeilingGiB": 0.5,
+    "peakProfiling": "NOT RUN"
+  },
+  "preserved_errors": [
+    "First static KG probe nodes-key KeyError discarded; corrected kg_nodes fields only.",
+    "Normal sandbox Git worktree access refused; authorized isolated source-only Git checks retried escalated.",
+    "Large serialized pool command refused locally by length guard before execution; bounded staging chunks used and only own staging file removed."
+  ],
+  "runtime_and_native": "HELD / NOT RUN",
+  "qualification": "NOT_QUALIFIED",
+  "discovery": "ACTIVE; two finite batches completed and fresh i04 frontier recorded before source-turn checkpoint"
+}

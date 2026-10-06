@@ -3,7 +3,7 @@
 Valid until: a later owner decision supersedes the standing loop request — then treat as history.
 
 Date: 2026-10-06
-Status: accepted
+Status: accepted; discovery continuation clarified by ADR-0174
 
 ## Decision
 

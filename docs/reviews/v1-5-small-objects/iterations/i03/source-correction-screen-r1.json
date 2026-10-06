@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "iteration": "i03",
+  "batch": "b02",
+  "id": "i03-repair-01",
+  "baseline": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "player_problem": "An existing reciprocal casting edge can teach a false actor/film association; STATUS already records this casting debt.",
+  "edge_exact": {
+    "id": "de451",
+    "src_id": "n_ftv_toma_caragiu",
+    "dst_id": "n_reconstituirea_film",
+    "relation": "related_to",
+    "label_ro": "a jucat în",
+    "strength": 0.86,
+    "is_distractor": 0,
+    "bidirectional": 1
+  },
+  "changed_runtime": false,
+  "state": "held",
+  "claims": [
+    {
+      "claim": "Current KG says Toma Caragiu acted in Reconstituirea.",
+      "evidence_state": "current exact source assertion observed",
+      "source": "kg_sample.json/de451"
+    },
+    {
+      "claim": "Curator/film-institute/festival pages name other credited actors; none of opened lists includes Toma.",
+      "evidence_state": "supported limited lists; absence alone is not complete proof of nonparticipation",
+      "sources": [
+        "https://aarc.ro/filme/film/reconstituirea-1970",
+        "https://www2.tiff.ro/film/reconstituirea-0",
+        "https://www.bfi.org.uk/film/0f8b6c66-647a-508b-ae17-8f4ea26747e5/reconstituirea"
+      ]
+    }
+  ],
+  "source_notes": {
+    "aarc": "UCIN-edited original catalogue: principal George Mihăiță/Vladimir Găitan/George Constantin; full-generics link cache miss, no complete cast verified.",
+    "tiff": "Festival original 2010 listing names seven actors. Its rendered12h duration is ignored as anomalous; no runtime/year edit proposed.",
+    "bfi": "Institute catalogue names three featured actors, not a completeness assertion."
+  },
+  "accessed_on": "2026-10-06",
+  "searches": [
+    "site.anf-cinemateca.ro Reconstituirea George Constantin Emil Botta 1968",
+    "site.tiff.ro Reconstituirea George Constantin George Mihăiță"
+  ],
+  "failed_access": {
+    "url": "https://aarc.ro/filme/distributie/4161",
+    "reason": "cache miss on full-generics link; partial list not upgraded to negative proof"
+  },
+  "novelty": "existing source correction; no additive concept/input/round growth claimed",
+  "play_hypothesis": "Remove false casting association only through separately qualified source correction; targeted existing graph/play/history impact would need exact review. No materialization, simulation or ordinary journey observed.",
+  "blockers": [
+    "complete original credits or archival nonparticipation evidence",
+    "supported immutable history/source correction rail and exact scope",
+    "all actual native/current/history/source/export/authority gates held",
+    "independent factual/quality and assembled acceptance"
+  ],
+  "next_action": "Seek accessible original complete credits or archival catalogue entry in later evidence batch; no repeat of unchanged failing URL alone."
+}
