@@ -65,3 +65,38 @@ late. No overall20minute PASS is claimed. No active process or another case star
 Alloriginals/installedbytes remain; no actual transaction, Source5, poolselection,
 rawquality or installation acceptance. Exactmethods/manifests/losslessinert archives
 are retained with the checkpoints. Next work needs a fresh exact case/resource admission.
+
+The [saved-only qualitative inspection](prospective-effects-qualitative-r1.json)
+finds3180new raw reachable Cald entries (12bathroom IDs×265targets),133same-hop
+weighted decreases across13targets and zero finite-to-finite hop shortenings. Actual
+public ranks/temperature remain unmeasured. The pending Apă→Nor near-corridor gain
+can be a legal reciprocal nonprogress detour, not proven D3 simple-path choice.
+Twenty-one latent pairs remain unapproved; ingredient-return/abstract-occasion/weather
+bridges need semantic qualification. This source review finished late, explicitly NOTPASS.
+
+[Independent native case design](native-ordinary-case-design-r1.json) informed a separate
+[exact method](native-ordinary-method-r1.json)/[resource admission](native-ordinary-admission-r1.json).
+The [actual native search](native-ordinary-search-stage-r1.json) checked384 candidate-only
+HTTP Creates across omitted/gastronomie/viata_de_roman, seeds0–127/usor, original
+selectors and no exclusions. It found65distinct endpoints and zero nonrepeating
+arc-bearing witness within optimal2–3/optimal+2 under its bounded nonexhaustive BFS.
+Actual10.46seconds/242237440bytes process-groupRSS/11431626incrementalbytes; no
+guard failure, all bound installed bytes exact. [Negative stop](native-ordinary-negative-stop-r1.json)
+records final metadata within the new native window, stops all further search/play on
+that admission and preserves the separate earlier timing failures. No forced pair/play.
+
+[Partial code critique](native-ordinary-design-review-r1.json) retains missing lossless
+initial states/actual-shortest assertion and blocks phase2 on this freeze: baseline
+divergence preservation, exact arc/caption/refusal/full-state and Get privacy checks
+remain incomplete. It is a late/unknown-start source review, not an execution or release
+approval. Lossless inert methods/search archives preserve exact inputs/results; native
+Get/hints/moves/score are NOTRUN. [PoolR3](../../../content-pool/v1-5-directions-i02/pool.json)
+stays2held/0selected; exactR2 snapshot preserves previous unapproved draft bindings.
+Do not repeat this search or source hunt. A different useful scope and stronger exact
+method need independent critique and fresh separate admission. No Source5/install/gate
+promotion or V1.6 release; all installed V1.4 inventory/pools remain unchanged.
+
+[Compact persistence review](native-negative-checkpoint-review-r1.json) independently
+checks saved hashes/counts/heldR3/exactR2/docs only. Its receipt met the hard source
+deadline but missed the60second metadata-reserve boundary, explicitly partial NOTPASS.
+It grants no quality, execution, installation or complete-window acceptance.

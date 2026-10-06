@@ -1,0 +1,34 @@
+{
+ "schema": "v1-5-native-negative-persistence-review-v1",
+ "reviewer": "/root/assembled_review",
+ "verdict": "PARTIAL_PERSISTENCE_NOTPASS",
+ "admission_sha256": "e740580a2c7ce8c97092cdd45533a48d0287cf01cbea0d3ced252482f0839e75",
+ "timing": {
+  "start_utc": "2026-10-06T18:11:53.919076+00:00",
+  "hard_deadline_utc": "2026-10-06T18:15:53.919076+00:00",
+  "analysis_finished_utc": "2026-10-06T18:15:14.725152+00:00",
+  "elapsed_seconds": 200.806,
+  "before60second_metadata_reserve": false,
+  "deadline_met_at_save": true,
+  "RSS_bytes": 16252928
+ },
+ "checks": {
+  "stage_exit": 0,
+  "guard_stop": null,
+  "current_bound_bytes_all_true": true,
+  "full_gzip_sha256": "82b32264a59b07a9607e7af7c838a8c20c368cb1fecdcb168045223a8cb38079",
+  "queries": 384,
+  "unique_endpoint_pairs": 65,
+  "cases": 0,
+  "method_087631_unchanged": true,
+  "pool_R3_b489d_2held_0selected": true,
+  "exact_R2_f2c13321_snapshot": true,
+  "STATUS120_and_README_proof_gaps_NOinstall": true,
+  "f9_caEC_receipt_hashes_exact_and_prior_NOTPASS_preserved": true,
+  "no_more_search_or_play_current_admission": true
+ },
+ "limits": "Finite saved candidate-query/path domain only. No exhaustive impossibility, native play, quality or installation proof. Earlier failed windows are not reset by this separate persistence window.",
+ "scope": "Minimal saved hash/count/archive/pool-history/doc checks only. No source/code/effects reanalysis or Go/profile/docs execution. Initial parser expectation corrected: current-byte field is a map of true comparisons, not a scalar. No artifact or gate changed.",
+ "quality_or_installation_acceptance": false,
+ "next": "Persist the negative checkpoint and held pool. Do not repeat or expand search/play on this admission; any new useful scope/method requires separate critique and admission."
+}

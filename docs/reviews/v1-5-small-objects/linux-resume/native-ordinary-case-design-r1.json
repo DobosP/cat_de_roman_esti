@@ -1,0 +1,271 @@
+{
+  "approval_flags": {
+    "actual_play": false,
+    "build": false,
+    "case_design_only": true,
+    "export": false,
+    "factual_quality_acceptance": false,
+    "harness_code": false,
+    "installation": false,
+    "merge": false,
+    "native_execution": false,
+    "push": false,
+    "source5": false
+  },
+  "baseline_commit": "8d09e3447ec470b119fd401117c5a8a50980ba0c",
+  "checked_on": "2026-10-06",
+  "designer": "/root/content_rail",
+  "existing_bounds_and_precedents": {
+    "http": "httpgolden requestlimit max10000,requesttimeout15s,maxresponse4MiB/maxrequest65537; use lowerfixedlane request cap and totalcontext deadline.",
+    "lant": "64hop cap;512route-profile FIFO; usorselection thresholds unchanged; hints clamp3 requests and usor nonimprovementclamp2.",
+    "session": "7200sslidingTTL,1000sessions/game;≤384searchsessions per side (no capacityextension); no concurrentsearch.",
+    "source_and_receipts": "≤16MiB source fixture pernativeparser; candidate3,675,442bytes; receipts≤5MiB,source inspection≤512MiB. Actualfuturecompiler/run RSS/cache/time mustbemeasured anew,notinferred from this design.",
+    "tests_as_source": [
+      "lant/service_test.go TestPinnedValidationAndConcurrentHintStages,TestPythonHTTPSequences",
+      "lant/content_v1_4_test.go controlledMove/Get duration tests are not ordinaryselection proof",
+      "lant/progress_test.go authoritative terminalscore/curated progress",
+      "cmd/cat-server/main_test.go runtimeenvoverride refusal"
+    ]
+  },
+  "inputs": {
+    "actual_edge_ids": [
+      "de8815",
+      "de8816"
+    ],
+    "baseline": {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+    },
+    "candidate_actual_path": "/home/dobo/work/_temp/codex__content-v1-5/prospective/generator-produced-kg.json",
+    "candidate_archive": {
+      "path": "docs/reviews/v1-5-small-objects/linux-resume/prospective-candidate-archive.json",
+      "sha256": "161489cfd496967ca38864a1d9a3776d63c69e96f8d98168ba3bbc3fe482c9d2"
+    },
+    "candidate_bytes": 3675442,
+    "candidate_sha256": "90c369f4d1ac11198cda60fb28229f5b6087ccbec716c3940d8759c3fbb2ed0c",
+    "current_bundle": {
+      "path": "go-backend/internal/content/bundled.json",
+      "sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2"
+    },
+    "supported_materialization_receipt": {
+      "path": "docs/reviews/v1-5-small-objects/linux-resume/prospective-materialization-checkpoint.json",
+      "sha256": "d2d22378f1e70f85886e428034102237d5d2c3b71a49fa746f685635dc562bdb"
+    }
+  },
+  "phase1_search": {
+    "account_exclusions": "none; anonymousclient noCookie/Authorization, no direct CreateWithExclusions parameter override",
+    "categories": [
+      {
+        "meaning": "ordinary global category, no category parameter",
+        "query": "omitted"
+      },
+      {
+        "meaning": "ordinary food shelf, relevant to Pâine/Cuțit",
+        "query": "category=gastronomie"
+      },
+      {
+        "meaning": "ordinary household shelf, relevant to Robinet/Apă",
+        "query": "category=viata_de_roman"
+      }
+    ],
+    "client_cap_each": 512,
+    "daily": "absent",
+    "deterministic_path_search": [
+      "For each selectedcandidatepair, enumerate SIMPLE nonrepeating source-graph paths containing de8815 or de8816, maximum hops bodyoptimal+2 (≤5).",
+      "Use native ordered NeighborIDs/DistancesTo; prune if remaining native distance exceeds remaininghop budget. Sort deterministically by hopcount then fullIDsequence; verify actual winning edge ID via graph.Link, not raw duplicate record presence.",
+      "Bound private enumeration to10000states perselectedcase and1000000states aggregate. If cap/time is hit, report INCOMPLETE rather than zero-witness or acceptance.",
+      "Prefer a witness with the same baseline naturalstart/target and a baseline-legal prefix before the newarc; this enables honest pairedbaseline Move refusal later. If endpoints differ, keep the natural difference and do not force baseline store state."
+    ],
+    "difficulty": "usor",
+    "initial_validation": [
+      "HTTP200 and ordinaryknowncategory/difficulty; game_id/start/current/target/path/optimal; path contains only start,moves0,wonfalse.",
+      "Lant targetID/label/description and optimal are public BY DESIGN; do not demand hidden target. Unrevealed fullsolution/route map,score/share and unearned_hint must not appear. Choices have labels+shortrelations,not an internal fullroute.",
+      "Record bodyoptimal and actual native shortest distance. Require reportedoptimal2–3 AND actual shortest matches it; any mismatch is evidence requiring investigation, not rewritten expectedpar."
+    ],
+    "max_baseline_creates": 384,
+    "max_candidate_creates": 384,
+    "max_total_HTTP_requests": 768,
+    "native_path": "POST /api/wordgames/lant/games?seed=<0..127>&difficulty=usor plus optional category",
+    "natural_selection_proof": "Keep exact response start/target/category/difficulty/optimal/choices and rawstatus; no predetermined start/target in request. Classify outcome as curated if existing baseline PackItems match selected endpoint pair; otherwise ordinary mined. Do not pretend custom unranked metadata changes ranking.",
+    "order": "Contexts in listed order, then seeds ascending0..127; candidate andbaseline same publicquery. Stop as soon as first witness for eachactualnewedge is saved, or all384 tuples exhausted.",
+    "search_actions": "Create only. No Get/move/hint/undo before witness freeze. Native private graph inspection is permitted solely to derive an arc-bearing path after natural public selection.",
+    "selector_sources": [
+      "lant/service.go:382 curatedWithExclusions retains preference/eligible/rng/wide policy; CreateWithExclusions:530 selects curated first, otherwise mine",
+      "mine:421 uses usorlo2/hi3,categorypool,degree≥2; salience≥.6 subset if≥8; atmost140attempts/24targets perstart,goodCount6 break",
+      "routeProfiles:144 uses optimal and optimal+2 corridor,512cache entries; rule no forced candidates"
+    ],
+    "status": "DESIGNED_NOT_RUN",
+    "witness_fields": [
+      "Exact selectedcategory/seed/startID/targetID/initialoptimum and all normalized initialstate",
+      "Exact edgeID/src/dst; fullprivate plannedIDpath and labelmoves, hopcount/newedgeposition, allowedpubliccaptions",
+      "Native before/aftergraph/source file SHA, harness/overlay/binaryhashes, selector source hashes, numericweight editorialstatus",
+      "BaselineCreate output and whethersameendpointpair permits direct pairedcounterfactual; record limitations ifdifferent",
+      "Strictmetadata-only witnessreceipt frozen before any play"
+    ],
+    "zero_witness_rule": "Exhausted exact finite384tuple domain with noarc-bearingordinarycase is a HOLD on this lane, notproof that natural play is impossible globally. Do not expand range/category,forcepair orclaimV15 benefit without a new explicit rootadmission."
+  },
+  "phase2_native_play": {
+    "caption_checks": [
+      "New used_with/controls have no frozenfallbackentry and no matchingreviewededge digest; existing Caption mustyield neutral legătură directă. Rawdraft captions se poatefelia cu/controleazăcurgerea are NOT publiccaption approvals.",
+      "Choices/hintrelation use s.short (≤34runes,possibleellipsis); earnedpath/move use full caption; Get must retain same earnedrelation.",
+      "Initial request target ispublic; no false secret-target test. No full solution/recipes/internal mining/provenance exposed."
+    ],
+    "endpoints": {
+      "get": "GET /api/wordgames/lant/games/{game_id}",
+      "hint": "POST /api/wordgames/lant/games/{game_id}/hint",
+      "move": "POST /api/wordgames/lant/games/{game_id}/move {\"text\":\"<actuallabel>\"}",
+      "undo": "POST /api/wordgames/lant/games/{game_id}/undo"
+    },
+    "method": "Only after frozen firstwitness androotadmission/exactharnessfreeze; recreate its same publicseed/category on freshcandidate service, then send actual HTTPmoves using displaylabels. Pairedbaselineuses same ordinaryCreate, never forcedstore.",
+    "minimal_cases_per_witness": [
+      "Clean route:Create→initialGetequal→one blank/knownnonneighbor invalidMove→Getunchanged→plannedlabelmoves→Get after each→terminalGet→repeat validterminalMove→terminalUndo→terminalHint→terminalGetunchanged.",
+      "Independent same-seed repeat:normalize ONLY randomgame_id and compare deterministicsame initial choices/path/progress/finalscore. Do notnormalize genuine source/category/route deltas.",
+      "Separate hints/undo clone:Create same query, take1–3 hints with earned_hint carried byGet, validmoveclearsEarned, Undo beforewin decrements one earnedhop/resetsNonImproving, thenfinish; hints do notcostmoves orsubtractscore.",
+      "If pairedbaseline naturalstart/target matches andprefixoldlegal: replay sameprefix, then newdestinationlabel. Baseline must return200okfalse with no statechange because sourcegraph lacks directarc, whilecandidateaccepts exactnewedge. If baseline endpoints differ, do not claim this counterfactualHTTPrefusal; use exactgraph absence plus candidateactualpublicmove and report natural-selection divergence."
+    ],
+    "move_checks": [
+      "HTTP200oktrue,currentID exactexpectednode,earnedpath grows byone,moves increments,relation matches derived publicCaption andGetpathrelation; won only atpublictarget.",
+      "Each oldprefix/suffixtransition retains actual allowededge andcaptions; newarc is de8815 or de8816 and notdistractor/bidirectional reverse leak.",
+      "Progress kind matches actual distance change: closer/lateral/farther/dead_end/won; usorbacktrack_recommended only after two nonimprovingsteps, and reset bycloser/won/undo.",
+      "Get beforewin has no score/share orunearnedfuture route/hint; earned_hint only after an actual hintrequest anddeepcloned. Moves clear earned hint."
+    ],
+    "request_budget": "≤160 additional HTTPrequests across two firstwitnesses, includingrepeat/hint/terminal cases. Exactactual harnesssequence/requestmanifest must be frozen beforeadmission.",
+    "score_and_terminal": [
+      "Compute expected max100, RoundToEven(1000*initialoptimal/max(moves,1,initialoptimal)) from actualroute;1000onlyif moves≤optimal,500–750/667etc for allowed2-extra-hop detours. Do not force everywitness to1000.",
+      "Won Get includes score/share,terminalchoicesempty. Subsequent validMove returns same wonstate; terminalUndo unchanged; terminalHint returns nilhint/already-reached message without changing terminalpath/moves/score.",
+      "A separate malformedbody test retains422 validationbefore terminalhandling; missinggame lookup404 precedes callbackvalidation. Existing tests areprecedents, notexecuteevidence."
+    ],
+    "status": "DESIGNED_NOT_RUN_SEPARATE_ADMISSION"
+  },
+  "schema": "v1-5-linux-native-ordinary-lant-case-design-v1",
+  "scope": "Read-only bounded independent CASE DESIGN. No harness authored, Go build/test, nativeHTTP, fixture/export write or actual gameplay. Separate root admission and exact harness review required.",
+  "sealed_runtime": {
+    "finding": "CAT_KG_FIXTURE,CAT_GAMES_PACK,CAT_BOARD_RANKINGS are rejected by Go sealed serving runtime. Do not use env override or claim a supported native server custom-data deployment.",
+    "full_build_limit": "contentbuild.Load/Build against changedKG still binds current rank/derived/quick/world/source authorities; a stale-source refusal must remain intact. This lane does not call them to bypass a gate.",
+    "source": "go-backend/cmd/cat-server/main.go:68–74,validateRuntimeEnvironment"
+  },
+  "smallest_executable_lane_proposal": {
+    "environment": "GOTOOLCHAIN=local,GOWORK=off,taskownedGOCACHE/GOPATH; no serverenv overrides,no networkdependencydownloads orPG/accounts needed. Root mustadmitbuildcache/disk/RAM/time before execution.",
+    "estimated_vs_measured": "No elapsed/RSS/nativeoutput claim here; smallestsourcefeasible lane identified, performance notexecuted orcertified.",
+    "future_go_command": [
+      "<qualifiedGo1.27.1>",
+      "-C",
+      "<worktree>/go-backend",
+      "test",
+      "-overlay=<task-ownscratch>/ordinary-overlay.json",
+      "-run=^TestProspectiveOrdinaryLantV15Search$",
+      "-count=1",
+      "-timeout=10m",
+      "./internal/contentbuild"
+    ],
+    "not_admitted_here": true,
+    "phase": "Compile/review scratchoverlay then ONLYphase1 Create search. Saveexactwitness/absence/incomplete results andstopbeforeplay unless same separateexecutionadmission explicitly includes frozenphase2.",
+    "release_boundary": "Doesnotqualify candidate fullsourceBuild/export/HTTPcorpus/Source5/authority/fourrails/rank/mobile/terminal/fullhistory/inverse/quality/race/vet/assembled acceptance."
+  },
+  "smallest_supported_private_overlay": {
+    "factory": [
+      "Hash actual baseline/candidate files before reading and after all cases; read source fixture ≤16MiB with existing bounded ReadObject contract.",
+      "Call exported ValidateFixture(path) for BOTH actual files and refuse any errors. SourceGraph parses but does not replace the full fixture validator.",
+      "Call exported SourceGraph(path), obtaining native g.Content via standard parsedGraph; verify actual de8815/de8816, old9473 records and all node fields except the four actual degree changes against supported materialization receipt.",
+      "For EACH side call content.Load freshly. Before graph.New/httpapi.New or any Content.Shared operation replace ONLY Nodes,Edges,Labels,NormalizedIndex with exact parsed native graph fields. Preserve PackRanked=true,PackItems,all stored rankings/rules/Unicode/category/metadata/world/projection data. Assert unchanged normalization/category maps equal actual native source graph maps.",
+      "Compute private LantCaptions for every allowed actual directed pair through exported contentbuild.Caption(actualGraph,a,b), the same exact edge snapshot/frozen-rule fallback as exporter. Do not copy rawedge.label_ro into a public caption or author review entries.",
+      "Create normal native handler httpapi.New(freshContent); transport httpgolden.Local(handler) and bounded NewClient, anonymously. All six factories use fresh shared graph memo; this lane invokes only Lant routes."
+    ],
+    "future_virtual_file": "go-backend/internal/contentbuild/prospective_ordinary_v15_test.go",
+    "harness_location": "V1.5-owned scratch only; go -overlay maps this nonexistent virtual test filename to an independently reviewed scratch *_test.go. No real runtime/test source rewrite.",
+    "invalid_alternatives": [
+      "No CAT_KG_FIXTURE env on cat-server.",
+      "No manual bundled.json/generatedfixture or current expected corpus writes.",
+      "No forcing store-created endpoint pairs, reduced/empty PackItems, PackRanked=false, exclusion IDs or rewired caches to obtain a witness.",
+      "Do not replace original validators, old expectations or sealed pin checks."
+    ],
+    "metadata_truth": "Label every output UNRANKED PROSPECTIVE IN-MEMORY GRAPH COMPARISON / NOT EXPORT OR SOURCE-AUTHORITY QUALIFICATION. This is a receipt provenance label, not a fabricated public ranking field or PackRanked=false modification. Keep actual baseline PackRanked and all normal selector semantics unchanged; old Sources/Manifest remain baseline context and must not be called current candidate sources. Do not call metadata/export/authority endpoints as candidate proof.",
+    "supported_sources": [
+      "contentbuild/graph.go:88 SourceGraph; Service.Content exported; contentbuild/validate.go:17 ValidateFixture; contentbuild/operators.go:47 Caption",
+      "content/content.go:116 Load; graph/service.go:31 New memoizes on Content.Shared; httpapi/server.go:53 New; httpgolden/client.go:196 Local"
+    ],
+    "test_package": "contentbuild"
+  },
+  "source_bindings": [
+    {
+      "path": "go-backend/cmd/cat-server/main.go",
+      "sha256": "ff609dcfff976d678b00d97c3fbd11398110cd63f6c79697452883204e0e70c4"
+    },
+    {
+      "path": "go-backend/internal/content/content.go",
+      "sha256": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83"
+    },
+    {
+      "path": "go-backend/internal/graph/service.go",
+      "sha256": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/graph.go",
+      "sha256": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/validate.go",
+      "sha256": "8752f9905dd4582b8718e27b1eea89e6ac0381a60fca9bd1c7a8a25f88017bbd"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/operators.go",
+      "sha256": "3572d808b8890762e3433c504feea71cf7306e52cdc29727be8706afea7c5a2a"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/build.go",
+      "sha256": "ccb575e94fa2615eb0712b6852b7e8936048457a84b67b2762d9d83da769c44b"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/rules_unicode15.json",
+      "sha256": "cd579dc1d8e583e595f454b0d6ac50ec7afaaf72d9fb3725efbc6e5936fe9558"
+    },
+    {
+      "path": "go-backend/internal/lant/service.go",
+      "sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90"
+    },
+    {
+      "path": "go-backend/internal/lant/service_test.go",
+      "sha256": "a87d4389380789fd04dcbc8da3e1cc2f0487037f09f7bb96d90e9093745b9d79"
+    },
+    {
+      "path": "go-backend/internal/lant/content_v1_4_test.go",
+      "sha256": "ad788b8b4e360cc523243aad53065ecabd4261910919dacca341b3977710adc1"
+    },
+    {
+      "path": "go-backend/internal/lant/progress_test.go",
+      "sha256": "783d4591e4fe69dcdca5e6cd81da6ebd9d71db1d8596d488a9b82cfceb6cc296"
+    },
+    {
+      "path": "go-backend/internal/httpapi/arcade.go",
+      "sha256": "cb54d41ea9ee66e70bb0c53ac79e4df6ff96b7698fc78b326fa4732722e1be0d"
+    },
+    {
+      "path": "go-backend/internal/httpapi/server.go",
+      "sha256": "8786ad6d0d5781c19dcb34fe0c258310b033a3500217855f078deef9c15325e9"
+    },
+    {
+      "path": "go-backend/internal/httpgolden/client.go",
+      "sha256": "2228ce4d1011ea43cea2184de89db43f1ac92015a72b7738eb2628c76dd30f03"
+    },
+    {
+      "path": "go-backend/internal/session/store.go",
+      "sha256": "83d212817e1a5da3bb0305b3a22e8f2472c8e7c4dba3c9e307bbbbbf1b502277"
+    },
+    {
+      "path": "go-backend/internal/session/config.go",
+      "sha256": "9567f50a7b837ccefeba92d71004ab2151f3cb683c7941d57d65cfd6ed1ec19b"
+    },
+    {
+      "path": "go-backend/internal/contentrails/quick.go",
+      "sha256": "75e16613164e35e3c6260b208a98dd152174aeebe329c9ed75a0a72cfe89dd9f"
+    },
+    {
+      "path": "go-backend/internal/pack/pack.go",
+      "sha256": "a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7"
+    },
+    {
+      "path": "go-backend/internal/content/bundled.json",
+      "sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2"
+    }
+  ]
+}

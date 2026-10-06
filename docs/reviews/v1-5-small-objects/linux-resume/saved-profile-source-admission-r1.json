@@ -1,0 +1,42 @@
+{
+  "schema": "v1-5-saved-profile-and-native-case-design-source-admission-v1",
+  "checked_at_utc": "2026-10-06T17:56:20.362722+00:00",
+  "coordinator": "/root",
+  "checkpoint": "8d09e3447ec470b119fd401117c5a8a50980ba0c",
+  "scope": "Two independent read-only source/saved-profile workers, each512MiB RSS/5MiB newreceipt/10minutes including metadata; no profile recomputation/native/build/HTTP lane admission. Root source inspection/docs only.",
+  "earlier_root_observation": {
+    "disk_free_gib": 56.68717575073242,
+    "mem_available_gib": 25.126407623291016,
+    "load": [
+      31.4990234375,
+      31.69091796875,
+      30.87158203125
+    ]
+  },
+  "current_disk_free_gib": 56.684139251708984,
+  "current_mem_available_gib": 28.852317810058594,
+  "load": [
+    35.22021484375,
+    33.015625,
+    31.455078125
+  ],
+  "cpu_count": 32,
+  "bound_saved_inputs": {
+    "prospective-profiles-full.json.gz": "74079d26c4a6723be69cebe0608afddd4cc7f430e1b0efeeb35d77032f0e3fd6",
+    "prospective-generated-candidate.json.gz": "9c3a5b7b7c69e58aaf4115763a30ced97e45cf5d814815870c149eedfa1ab5a9",
+    "prospective-method-manifest.json": "026b37b65a943ae4256fb5e433ed36f25bf487fefdf204c315f57ecf3a1421be"
+  },
+  "limits": {
+    "worker_wall_seconds": 600,
+    "worker_RSS_bytes": 536870912,
+    "worker_incremental_receipt_bytes": 5242880,
+    "heavy_lanes": 0,
+    "remaining_disk_floor_bytes": 17179869184
+  },
+  "stop_conditions": [
+    "Saved inputs missing or altered",
+    "New heavy/native/executable scope requires separate exactcase/method/resource admission",
+    "Budget failure means honestpartial/notpass, neverreset"
+  ],
+  "installation_or_quality_approval": false
+}
