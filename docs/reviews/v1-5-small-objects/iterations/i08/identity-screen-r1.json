@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "version": "V1.5",
+  "iteration": "i08",
+  "baseline": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "owners": {
+    "Dascăl": [],
+    "Bancomat": [],
+    "Card bancar": [],
+    "Bibliotecă": [
+      {
+        "id": "n_v4lit_biblioteca",
+        "label_ro": "bibliotecă",
+        "description": "Loc unde se păstrează și se citesc cărți.",
+        "matching": [
+          "bibliotecă"
+        ]
+      }
+    ],
+    "Carte": [
+      {
+        "id": "n_v3lit_carte",
+        "label_ro": "Carte",
+        "description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+        "matching": [
+          "Carte"
+        ]
+      }
+    ],
+    "Cititor": [
+      {
+        "id": "n_v3lit_cititor",
+        "label_ro": "Cititor",
+        "description": "Persoană care citește cărți, poezii sau alte texte.",
+        "matching": [
+          "Cititor"
+        ]
+      }
+    ],
+    "Muzeu": [
+      {
+        "id": "n_v2art_muzeu",
+        "label_ro": "Muzeu",
+        "description": "Instituție care păstrează și expune colecții de artă, istorie sau știință.",
+        "matching": [
+          "Muzeu"
+        ]
+      }
+    ],
+    "Tablou": [
+      {
+        "id": "n_v3art_tablou",
+        "label_ro": "Tablou",
+        "description": "Lucrare pictată sau desenată pe pânză, hârtie ori alt suport.",
+        "matching": [
+          "Tablou"
+        ]
+      }
+    ],
+    "Teatru": [
+      {
+        "id": "n_v2art_teatru",
+        "label_ro": "Teatru",
+        "description": "Artă scenică bazată pe joc actoricesc, regie și spectacol public.",
+        "matching": [
+          "Teatru"
+        ]
+      }
+    ],
+    "Spectacol": [
+      {
+        "id": "n_v4art_spectacol",
+        "label_ro": "Spectacol",
+        "description": "Reprezentație artistică văzută de public pe scenă sau într-o sală.",
+        "matching": [
+          "Spectacol"
+        ]
+      }
+    ],
+    "Stadion": [
+      {
+        "id": "n_v4spo_stadion",
+        "label_ro": "stadion",
+        "description": "Arenă mare pentru meciuri, competiții și spectatori.",
+        "matching": [
+          "stadion"
+        ]
+      }
+    ],
+    "Meci": [
+      {
+        "id": "n_v3spo_meci",
+        "label_ro": "Meci",
+        "description": "Întâlnire sportivă între jucători sau echipe, cu scor și reguli.",
+        "matching": [
+          "Meci"
+        ]
+      }
+    ]
+  },
+  "preserved_existing_arcs": [
+    {
+      "id": "de3108",
+      "src_id": "n_v3lit_cititor",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "citește cartea",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de3519",
+      "src_id": "n_v4art_spectacol",
+      "dst_id": "n_v2art_teatru",
+      "relation": "related_to",
+      "label_ro": "are loc la",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4073",
+      "src_id": "n_v4lit_biblioteca",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "adăpostește cărți",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4537",
+      "src_id": "n_v4spo_stadion",
+      "dst_id": "n_v3spo_meci",
+      "relation": "related_to",
+      "label_ro": "găzduiește meciuri",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5755",
+      "src_id": "n_v4lit_biblioteca",
+      "dst_id": "n_v3lit_cititor",
+      "relation": "related_to",
+      "label_ro": "loc pentru cititori",
+      "strength": 0.55,
+      "is_distractor": 0,
+      "bidirectional": 1
+    }
+  ],
+  "read_only_audit": {
+    "reviewer": "/root/i05_inventory_audit",
+    "coverage": "9runtime inputs/19prior pool files/all9worldhistorical books; exact/folded owners, scoped semanticnear/priorwords+endpointIDs, full quick/derived pair-member scans; noappimports/tests/web/native/simulation",
+    "prior_pool_manifest_sha256": "61d0944bccce3f0f43d112a48f461f32b7f17b2fb3c90a9fac0612d05a828507",
+    "facts": {
+      "candidate_words": "Dascăl/Bancomat/Card bancar absent folded owners and scanned source/projection/round/tombstone literals; no prior candidate-word/reading-endpoint pool hits",
+      "pair_duplicate": "Bibliotecă–Carte already quick vp_d4de16f5c5ae3db873a0, exact same two IDs; other3pairs absent exact quick/derived scans",
+      "pair_type": "n_v2art_teatru means dramatic art, not building; cannot promise4uniforminstitution pairs",
+      "competing_matches": "Muzeu collections not only paintings; Spectacol not only theatre; full competition notassessed",
+      "tombstones": "Owner occurrences cx_literatura_197/cx_muzica_271/cx_sport_223/cx_stiinta_166 remain; no boardrevival",
+      "reading_exclusions": "Bibliotecă→Carte and Cititor→Bibliotecă already bidirectional de4073/de5755. de3108 reader/book also preserved. No fresh direction credit."
+    },
+    "limitations": "Literal/scope checks are not full semantic rejection/projection or gameplay/history clearance; no4/2 or approval."
+  },
+  "scanned_inputs": [
+    {
+      "path": "docs/content-pool/v1-2-synonyms-and-links/pool.json",
+      "sha256": "81972b787b2726277cf5b8fe54aa3f8f62f61b7d0359f3bf1f66ebd6c6a7c123"
+    },
+    {
+      "path": "docs/content-pool/v1-3-everyday-concepts/pool.json",
+      "sha256": "cb0b6fad80fecbea4381e54eb412528bfaeaa631dd439b89c43fa7279773df5b"
+    },
+    {
+      "path": "docs/content-pool/v1-4-time-links-and-predicates/pool-before-integration.json",
+      "sha256": "50881322f54965a63537ab6e13c84e6b90c4756a58868ef32db894ab8d3a6ece"
+    },
+    {
+      "path": "docs/content-pool/v1-4-time-links-and-predicates/pool.json",
+      "sha256": "572a02d14255018fdfd66cd484dd03d072b691e66d288dd65480480d3833c3e7"
+    },
+    {
+      "path": "docs/content-pool/v1-5-association-i01/pool-r1.json",
+      "sha256": "a8cbd2b88c57e08bb7ccf5fec3988c216a6587c31914bd6fc80ba21f57525c29"
+    },
+    {
+      "path": "docs/content-pool/v1-5-association-i01/pool.json",
+      "sha256": "9d1b6e34bb770f15f9a2cae3525a1def0fcc967042284e11d86451110a823fd5"
+    },
+    {
+      "path": "docs/content-pool/v1-5-directions-i02/pool-r1.json",
+      "sha256": "e5e6dc53ece841a017c9f62dea9c0b01d95e3be3783895b6febdf854680feb8e"
+    },
+    {
+      "path": "docs/content-pool/v1-5-directions-i02/pool.json",
+      "sha256": "f2c13321fd1fc9e9600f1511a84dcae0e2c3ad3b4d5794dbb701eefdca9822ae"
+    },
+    {
+      "path": "docs/content-pool/v1-5-discovery-i03/pool.json",
+      "sha256": "46b8315d43baa8e1754664fbfbb855b970a22ea54d1b2635d8389ae4a4039945"
+    },
+    {
+      "path": "docs/content-pool/v1-5-discovery-i04/pool-r2.json",
+      "sha256": "ba9898dc021a0645ee481669acbe468baeb4fea40deae199f7815f3de02fcc67"
+    },
+    {
+      "path": "docs/content-pool/v1-5-discovery-i04/pool.json",
+      "sha256": "b97069e63da0fecb056d88261b09d442f1db906e8941de31d5c4367ddaef1ee6"
+    },
+    {
+      "path": "docs/content-pool/v1-5-discovery-i05/pool.json",
+      "sha256": "e1a98c95e20064959dcf4f121bfc63bfd69053c505b7c1e68bed8f67a59f8cd0"
+    },
+    {
+      "path": "docs/content-pool/v1-5-discovery-i06/pool.json",
+      "sha256": "e38326750689731b6132704d06a9884cc494e19ffeeb21bc535b81c34fa14cb1"
+    },
+    {
+      "path": "docs/content-pool/v1-5-discovery-i07/pool-r2.json",
+      "sha256": "dd1c595c830cd469e8bad671d165a2467765502b292626fd96a2926421452e56"
+    },
+    {
+      "path": "docs/content-pool/v1-5-discovery-i07/pool.json",
+      "sha256": "39de49d1cc6da399d2cecd683c2c4d453d3e91f9820be05625442e89647ec7be"
+    },
+    {
+      "path": "docs/content-pool/v1-5-small-objects/pool-r1.json",
+      "sha256": "e5e6f1039b8e66a9e2d708c82c69f56abacbaa4c6f5485491de6b3b0df366905"
+    },
+    {
+      "path": "docs/content-pool/v1-5-small-objects/pool-r2.json",
+      "sha256": "be4aefe40feb05fbb4f96a79f3261e9135beab6e5ac23690f1d455bb7f9e87e6"
+    },
+    {
+      "path": "docs/content-pool/v1-5-small-objects/pool.json",
+      "sha256": "72eb5ca30d91ab1e2e47119e520153b564c39953e264623d17f08879eb4e0cad"
+    },
+    {
+      "path": "docs/content-pool/v99-everyday-spaces/pool.json",
+      "sha256": "af9dae42a7d7d880d73709438d1cc7ed3b4e8a00e64f6d93b1cf4a61797061c3"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "sha256": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      "sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+      "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+      "sha256": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/release_reserve_v1.json",
+      "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    },
+    {
+      "path": "go-backend/internal/contentrails/sources/authored-v4.json",
+      "sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/contexto_projection.py",
+      "sha256": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a"
+    }
+  ]
+}
