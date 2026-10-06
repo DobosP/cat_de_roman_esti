@@ -1,0 +1,212 @@
+{
+  "id": "v16-lex-untdelemn",
+  "revision": 2,
+  "state": "ready_for_refinement",
+  "origin_track": "discovery",
+  "baseline_commit": "0b9c22bcca0da5cf00a31203e6b1c9173d525b56",
+  "checked_on": "2026-10-07",
+  "label_ro": "untdelemn → Ulei",
+  "sense": "Edible vegetable oil only; installed culinary Ulei sense. Do not generalize to motor/mineral oil or separate regional ulei homonym.",
+  "category": "everyday typed-input coverage",
+  "novelty": {
+    "kind": "accepted_form",
+    "existing_ids": [
+      "n_v24_food_pantry_ulei"
+    ],
+    "hypothesis": true,
+    "new_concept_claim": false,
+    "new_synonym_family_installed": false
+  },
+  "identity_checks": {
+    "receipt": "docs/reviews/v1-6-everyday-inputs/identity-deck-screen-r1.json",
+    "sha256": "122ba50ba17de0e15e0f955e9c80083225d4803d29c0643039a3315b38af10a8",
+    "native_exact_resolution": {
+      "untdelemn": null,
+      "Ulei": "n_v24_food_pantry_ulei"
+    },
+    "projection_matches": [],
+    "nearby_compound_owners": [],
+    "prior_records": [],
+    "limitation": "Current native baseline rejects this exact headword without suggestions or charge. Prospective input, complete fuzzy/ownership/history and all-game effects remain unrun."
+  },
+  "player_benefit": "Actual ordinary easy/no-category ct_gastronomie_347 at seed3 rejects untdelemn with0attempts/no suggestions; canonical owner gives rank2, distance1/closeness99. A qualified accepted headword could recover that useful guess. Prospective success has not been tested.",
+  "games": [
+    "Cald sau Rece typed guesses",
+    "Lanțul Cuvintelor typed hops (only after ordinary case proof)"
+  ],
+  "claims": [
+    {
+      "subject": "untdelemn",
+      "predicate": "synonym_in_qualified_sense_of",
+      "object": "Ulei",
+      "direction": "Potential input resolution only; no graph arc",
+      "evidence_state": "supported_qualified_sense_not_installation",
+      "source_refs": [
+        "doom",
+        "doom-untdelemn",
+        "doom-ulei",
+        "radio-untdelemn",
+        "expur"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "doom",
+      "url": "https://doom.lingv.ro/",
+      "publisher": "Institutul de Lingvistică al Academiei Române «Iorgu Iordan – Alexandru Rosetti»",
+      "original": "Institution's own electronic DOOM3, based on its 2021 edition printed by Univers Enciclopedic.",
+      "access": "Web body plus original browser UI read.",
+      "license": "Homepage expressly identifies electronic DOOM3 as CC BY-NC-SA 4.0; https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ro . This research does not grant permission to republish the dictionary or make a commercial dictionary derivative.",
+      "claim": "Normative spelling/morphology source. The homepage says it does not supply full lexical definitions; parenthetical distinctions can still bound morphology.",
+      "accessed_date": "2026-10-07",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-b.json",
+      "report_sha256": "0416abb045740f5cd31a4446f101942cabb211ccb01e7eab2e70a099eaa1a140",
+      "rights_note": "Homepage expressly identifies electronic DOOM3 as CC BY-NC-SA 4.0; https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ro . This research does not grant permission to republish the dictionary or make a commercial dictionary derivative."
+    },
+    {
+      "id": "doom-untdelemn",
+      "url": "https://doom.lingv.ro/cautare/q/untdelemn?",
+      "publisher_ref": "doom",
+      "access": "Original site search UI read; one result.",
+      "license_ref": "doom",
+      "claim": "Neuter noun, explicitly bounded to edible vegetable oil. The written form is untdelemn; the plural untdelemnuri is marked for varieties.",
+      "accessed_date": "2026-10-07",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-b.json",
+      "report_sha256": "0416abb045740f5cd31a4446f101942cabb211ccb01e7eab2e70a099eaa1a140",
+      "rights_note": "doom"
+    },
+    {
+      "id": "doom-ulei",
+      "url": "https://doom.lingv.ro/cautare/q/ulei?",
+      "publisher_ref": "doom",
+      "access": "Original site search UI read; two entries.",
+      "license_ref": "doom",
+      "claim": "Entry 1 has the fatty-liquid sense and variety plural uleiuri. A separate regional entry refers to a tree trunk/container/beehive and has plural uleie. These distinct senses must not be conflated.",
+      "accessed_date": "2026-10-07",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-b.json",
+      "report_sha256": "0416abb045740f5cd31a4446f101942cabb211ccb01e7eab2e70a099eaa1a140",
+      "rights_note": "doom"
+    },
+    {
+      "id": "radio-untdelemn",
+      "url": "https://www.radiotimisoara.ro/rubrici/limba-romana/lemnul-din-cuvantul-untdelemn-clar-e-maslin-182585.html",
+      "publisher": "Radio România Timișoara",
+      "original": "Broadcaster's own Să vorbim corect column by Marcel Tolcea, posted by Dana Florea 2018-09-14; broadcast dated 2018-08-01.",
+      "access": "Opened body including the final semantic explanation.",
+      "license": "No open reuse license observed. Own paraphrase only; the page's image credit does not license the article.",
+      "claim": "The column distinguishes olive-oil origins from established wider edible-vegetable-oil usage. Its etymological discussion cites Sorin Stati; it is not the original Stati book, and is not used to establish that book's detailed etymology.",
+      "accessed_date": "2026-10-07",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-b.json",
+      "report_sha256": "0416abb045740f5cd31a4446f101942cabb211ccb01e7eab2e70a099eaa1a140",
+      "rights_note": "No open reuse license observed. Own paraphrase only; the page's image credit does not license the article."
+    },
+    {
+      "id": "expur",
+      "url": "https://expur.ro/ulei-pentru-consum-uman/",
+      "publisher": "Expur",
+      "original": "Manufacturer's own human-consumption vegetable-oil and brand page.",
+      "access": "Opened current body and footer.",
+      "license": "Footer ©2026 Expur, all rights reserved. No advertising copy, logos or images copied.",
+      "claim": "The brand Untdelemn de la Bunica is presented within edible oils and for everyday cooking. Supports current grocery-language exposure; a brand name alone does not establish a dictionary synonym or recognition frequency.",
+      "accessed_date": "2026-10-07",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-b.json",
+      "report_sha256": "0416abb045740f5cd31a4446f101942cabb211ccb01e7eab2e70a099eaa1a140",
+      "rights_note": "Footer ©2026 Expur, all rights reserved. No advertising copy, logos or images copied."
+    }
+  ],
+  "recognition": {
+    "signals": [
+      "Radio România Timișoara's own language broadcast/article, 2018.",
+      "Manufacturer's current food-oil brand and culinary use page."
+    ],
+    "limits": "Two different contexts attest use; the radio item is outside the rubric's last-five-years media window. Brand exposure cannot prove all-age recognition. No human playtest evidence."
+  },
+  "observed_forms_not_proposed": [
+    "untdelemn",
+    "untdelemnuri (varieties only; held from any blanket form proposal)"
+  ],
+  "play_sketches": {
+    "status": "BASELINE RUN; prospective alias play NOT RUN",
+    "next_case": "Repeat exact ordinary protocol against an independently reviewed supported-generator-produced prospective two-headword candidate; no installed mutation before required gates.",
+    "pack_record_counts": {
+      "conexiuni": 0,
+      "contexto": 0,
+      "lant": 0,
+      "alchimie": 0
+    },
+    "quick_authored_uses": [
+      {
+        "id": "vp_99f196b9c164451ab805",
+        "status": null,
+        "game": "perechi",
+        "difficulty": "usor",
+        "category": "viata_de_roman"
+      }
+    ],
+    "world_recipe_ids": [
+      "mujdei-ulei",
+      "gogosi",
+      "cartofi-ulei",
+      "maioneza-galbenus",
+      "maioneza-ou",
+      "pesto-busuioc",
+      "salata-vinete-ulei"
+    ],
+    "warning": "Exposure in tap boards or world recipes is not proof of accepted typed input.",
+    "baseline_evidence": {
+      "summary": "docs/reviews/v1-6-everyday-inputs/native-input-baseline-summary-r1.json",
+      "sha256": "5273a55f5f604cec28bf4469593c2654f1229fc03f0987090235c0cd56dbd4fd",
+      "case": "ct_gastronomie_347",
+      "seed": 3,
+      "canonical_rank": 2,
+      "canonical_distance": 1,
+      "canonical_closeness": 99,
+      "novel_initial_result": "unknown,0attempts,empty guesses,no suggestions"
+    }
+  },
+  "risks": [
+    "Edible vegetable oil only; installed culinary Ulei sense. Do not generalize to motor/mineral oil or separate regional ulei homonym.",
+    "No selected record, raw factual/quality install review, prospective profile or native installation approval exists.",
+    "Source rights/access qualifications stay attached; only original summaries and lexical facts retained."
+  ],
+  "dependencies": [
+    "Exact current source/owner/forms/projection/rejection checks",
+    "Ordinary selected baseline/prospective typed play and actual API privacy/score/hint/history effects",
+    "Supported graph/native source and current authority rail if selected; no graph/target threshold relaxation"
+  ],
+  "decision": "Primary qualified sense, exact ownership/novelty and useful actual baseline input gap support refinement readiness. Independent review supports this transition; no selection or adoption approval.",
+  "next_action": "Freeze exact selected revisions when preparing a bounded two-headword graph proposal; obtain independent exact factual and quality/prospective judgments, supported isolated materialization and complete consumer/history/privacy/authority gates.",
+  "history": [
+    {
+      "date": "2026-10-07",
+      "author": "/root",
+      "action": "Bounded six-lead source/identity/deck screen, zero selected or installed."
+    },
+    {
+      "date": "2026-10-07",
+      "author": "/root",
+      "from_revision": 1,
+      "from_state": "researched",
+      "action": "R2 ready_for_refinement after actual baseline and independent readiness review; no selected handoff or installation.",
+      "prior_pool_archive": "docs/reviews/v1-6-everyday-inputs/research-pool-r1.json.gz",
+      "prior_pool_raw_sha256": "fce2af89c2093bfb7d83b025df7ab872f42aac0108e5a269eac767b88a257e09",
+      "review": "docs/reviews/v1-6-everyday-inputs/baseline-readiness-review-r1.json",
+      "review_sha256": "f47971f1c5879e03c5540046f85868f4b9dd16e31fd421a10c01dd904280d10d"
+    }
+  ],
+  "intended_refinement_scope": {
+    "surface": "untdelemn",
+    "stored_forms": 1,
+    "new_concepts": 0,
+    "new_edges": 0,
+    "new_targets": 0,
+    "new_rounds": 0,
+    "note": "Only actually measured singular headword. Other sourced inflections remain unselected."
+  }
+}

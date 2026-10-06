@@ -1,0 +1,192 @@
+{
+  "id": "v16-lex-drapel",
+  "revision": 2,
+  "state": "ready_for_refinement",
+  "origin_track": "discovery",
+  "baseline_commit": "0b9c22bcca0da5cf00a31203e6b1c9173d525b56",
+  "checked_on": "2026-10-07",
+  "label_ro": "drapel → Steag",
+  "sense": "Physical flag/emblem of a state, group or institution; preserve distinct national-flag owner and specialist/figurative exclusions.",
+  "category": "everyday typed-input coverage",
+  "novelty": {
+    "kind": "accepted_form",
+    "existing_ids": [
+      "n_v4ist_steag"
+    ],
+    "hypothesis": true,
+    "new_concept_claim": false,
+    "new_synonym_family_installed": false
+  },
+  "identity_checks": {
+    "receipt": "docs/reviews/v1-6-everyday-inputs/identity-deck-screen-r1.json",
+    "sha256": "122ba50ba17de0e15e0f955e9c80083225d4803d29c0643039a3315b38af10a8",
+    "native_exact_resolution": {
+      "drapel": null,
+      "Steag": "n_v4ist_steag"
+    },
+    "projection_matches": [],
+    "nearby_compound_owners": [
+      {
+        "id": "n_v21soc_drapelul_romaniei",
+        "label_ro": "Drapelul României",
+        "aliases": [
+          "tricolorul",
+          "steagul României",
+          "drapelul tricolor",
+          "drapelul național",
+          "albastru galben roșu"
+        ]
+      }
+    ],
+    "prior_records": [],
+    "limitation": "Current native baseline rejects this exact headword without suggestions or charge. Prospective input, complete fuzzy/ownership/history and all-game effects remain unrun."
+  },
+  "player_benefit": "Actual ordinary easy/no-category ct_istorie_368 at seed36 rejects drapel with0attempts/no suggestions; canonical owner gives rank5, distance1/closeness99. A qualified accepted headword could recover that useful guess. Prospective success has not been tested.",
+  "games": [
+    "Cald sau Rece typed guesses",
+    "Lanțul Cuvintelor typed hops (only after ordinary case proof)"
+  ],
+  "claims": [
+    {
+      "subject": "drapel",
+      "predicate": "synonym_in_qualified_sense_of",
+      "object": "Steag",
+      "direction": "Potential input resolution only; no graph arc",
+      "evidence_state": "supported_qualified_sense_not_installation",
+      "source_refs": [
+        "doom-about",
+        "doom-drapel",
+        "dlr-provenance",
+        "dlr-drapel",
+        "mapn-drapel"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "doom-about",
+      "url": "https://doom.lingv.ro/",
+      "kind": "original normative publisher",
+      "action": "Opened with web tool and browser; read About and electronic license.",
+      "supports": "DOOM is a form dictionary, norm source and license provenance.",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json",
+      "report_sha256": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+      "rights_note": "Report sources_policy: provenance-specific rights, no source text or assets copied; no blanket reuse license."
+    },
+    {
+      "id": "doom-drapel",
+      "url": "https://doom.lingv.ro/cautare/q/drapel?",
+      "kind": "original normative publisher",
+      "action": "Browser search submitted and result read; web extractor query URL failed.",
+      "supports": "Neuter drapel, plural drapele; no restriction label in displayed entry.",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json",
+      "report_sha256": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+      "rights_note": "Report sources_policy: provenance-specific rights, no source text or assets copied; no blanket reuse license."
+    },
+    {
+      "id": "dlr-provenance",
+      "url": "https://dlr1.solirom.ro/",
+      "kind": "Academy institute archive",
+      "action": "Read home provenance; searched drapel, leafă, geamantan and valiză through visible UI.",
+      "supports": "Publisher-institute provenance of original facsimiles; search labels distinguish DA and DLR.",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json",
+      "report_sha256": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+      "rights_note": "Report sources_policy: provenance-specific rights, no source text or assets copied; no blanket reuse license."
+    },
+    {
+      "id": "dlr-drapel",
+      "url": "https://cflr-scans.solirom.ro/A100059/scans/04/f0259.webp",
+      "kind": "original DLR facsimile",
+      "locator": "Printed p.1423, DRAPÉL I.1; continuation and II in right column.",
+      "action": "Read image source from displayed entry, opened image and inspected browser screenshot.",
+      "supports": "Main flag/emblem sense explicitly includes steag(1); additional fabric/pavilion and aviation/foundry uses occur separately.",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json",
+      "report_sha256": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+      "rights_note": "Report sources_policy: provenance-specific rights, no source text or assets copied; no blanket reuse license."
+    },
+    {
+      "id": "mapn-drapel",
+      "url": "https://www.mapn.ro/cpresa/19291_ziua-drapelului-na%C8%9Bional",
+      "kind": "original Romanian institutional usage",
+      "published_on": "2026-06-25",
+      "locator": "Press release 183, body and final historical paragraph.",
+      "action": "Opened original page successfully; read dated body and reuse footer.",
+      "supports": "National flag called drapel and steag in the same official text. Footer allows use with attribution subject to copyright law; no broader license inferred.",
+      "accessed_on": "2026-10-07",
+      "report": "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json",
+      "report_sha256": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+      "rights_note": "Report sources_policy: provenance-specific rights, no source text or assets copied; no blanket reuse license."
+    }
+  ],
+  "recognition": "Original publisher/institution and historical dictionary usage as recorded in the bound source report; no human familiarity or enjoyment survey.",
+  "observed_forms_not_proposed": [
+    "drapel",
+    "drapele"
+  ],
+  "play_sketches": {
+    "status": "BASELINE RUN; prospective alias play NOT RUN",
+    "next_case": "Repeat exact ordinary protocol against an independently reviewed supported-generator-produced prospective two-headword candidate; no installed mutation before required gates.",
+    "pack_record_counts": {
+      "conexiuni": 0,
+      "contexto": 0,
+      "lant": 0,
+      "alchimie": 0
+    },
+    "quick_authored_uses": [],
+    "world_recipe_ids": [],
+    "warning": "Exposure in tap boards or world recipes is not proof of accepted typed input.",
+    "baseline_evidence": {
+      "summary": "docs/reviews/v1-6-everyday-inputs/native-input-baseline-summary-r1.json",
+      "sha256": "5273a55f5f604cec28bf4469593c2654f1229fc03f0987090235c0cd56dbd4fd",
+      "case": "ct_istorie_368",
+      "seed": 36,
+      "canonical_rank": 5,
+      "canonical_distance": 1,
+      "canonical_closeness": 99,
+      "novel_initial_result": "unknown,0attempts,empty guesses,no suggestions"
+    }
+  },
+  "risks": [
+    "Physical flag/emblem of a state, group or institution; preserve distinct national-flag owner and specialist/figurative exclusions.",
+    "No selected record, raw factual/quality install review, prospective profile or native installation approval exists.",
+    "Source rights/access qualifications stay attached; only original summaries and lexical facts retained."
+  ],
+  "dependencies": [
+    "Exact current source/owner/forms/projection/rejection checks",
+    "Ordinary selected baseline/prospective typed play and actual API privacy/score/hint/history effects",
+    "Supported graph/native source and current authority rail if selected; no graph/target threshold relaxation"
+  ],
+  "decision": "Primary qualified sense, exact ownership/novelty and useful actual baseline input gap support refinement readiness. Independent review supports this transition; no selection or adoption approval.",
+  "next_action": "Freeze exact selected revisions when preparing a bounded two-headword graph proposal; obtain independent exact factual and quality/prospective judgments, supported isolated materialization and complete consumer/history/privacy/authority gates.",
+  "history": [
+    {
+      "date": "2026-10-07",
+      "author": "/root",
+      "action": "Bounded six-lead source/identity/deck screen, zero selected or installed."
+    },
+    {
+      "date": "2026-10-07",
+      "author": "/root",
+      "from_revision": 1,
+      "from_state": "researched",
+      "action": "R2 ready_for_refinement after actual baseline and independent readiness review; no selected handoff or installation.",
+      "prior_pool_archive": "docs/reviews/v1-6-everyday-inputs/research-pool-r1.json.gz",
+      "prior_pool_raw_sha256": "fce2af89c2093bfb7d83b025df7ab872f42aac0108e5a269eac767b88a257e09",
+      "review": "docs/reviews/v1-6-everyday-inputs/baseline-readiness-review-r1.json",
+      "review_sha256": "f47971f1c5879e03c5540046f85868f4b9dd16e31fd421a10c01dd904280d10d"
+    }
+  ],
+  "intended_refinement_scope": {
+    "surface": "drapel",
+    "stored_forms": 1,
+    "new_concepts": 0,
+    "new_edges": 0,
+    "new_targets": 0,
+    "new_rounds": 0,
+    "note": "Only actually measured singular headword. Other sourced inflections remain unselected."
+  }
+}

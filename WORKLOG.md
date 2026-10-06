@@ -1642,3 +1642,12 @@ seeds36/3 demonstrates missing drapel/untdelemn with canonicalSteag/Ulei rank5/2
 sessions preserve private Get, repeats, earned clues and700score recovery; all bound runtime
 bytes remain exact. Independent review supports only those two R2records becoming ready
 for refinement; leafă remains researched and3holds persist. No selected candidate or release.
+
+
+V1.6 exact proposal/materialization: selected two immutable R2records, with current R3
+handoff metadata; raw factual review accepts only the qualified singulars. Independent
+quality remains pending and specifies finite all-game/fuzzy/prospective cases. Repaired
+method passed supported isolated preflight/apply: candidate63f0dcd7 contains2419/9473/8679/180,
+exactly2added forms; all other node fields/edges/terminal/pack payloads and installed bytes
+preserved. Generated artifacts are archived; no Source6/installation/landing or pool growth
+is claimed. Final quality and native prospective/full downstream gates remain required.

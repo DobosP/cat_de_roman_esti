@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "theme": "v1-6-everyday-inputs",
-  "baseline_commit": "0b9c22bcca0da5cf00a31203e6b1c9173d525b56",
-  "scope": "Six lexical hypotheses:2ready_for_refinement after actual baseline,1researched continued leafă,3held. No selected snapshot, candidate module, source6, runtime edit or installation approval. Historical R1 pool/source critique preserved.",
+  "baseline_commit": "7806eecdf10f32763218a58a4e1e58b77c9e1a89",
+  "scope": "Two exact R2records selected for two-singular-input refinement, current recordsR3 handoff metadata; one researched leafă and three held unchanged. No candidate accepted, generated graph installed or Source6. R1/R2pool bytes preserved.",
   "counts": {
     "records": 6,
     "researched": 1,
     "held": 3,
-    "selected": 0,
+    "selected": 2,
     "integrated": 0,
     "new_shared_concepts": 0,
     "new_world_concepts": 0,
@@ -17,15 +17,15 @@
     "curated_rounds_added": 0,
     "eligible_pool_delta": 0,
     "preferred_pool_delta": 0,
-    "ready_for_refinement": 2
+    "ready_for_refinement": 0
   },
   "records": [
     {
       "id": "v16-lex-drapel",
-      "revision": 2,
-      "state": "ready_for_refinement",
+      "revision": 3,
+      "state": "selected_for_refinement",
       "origin_track": "discovery",
-      "baseline_commit": "0b9c22bcca0da5cf00a31203e6b1c9173d525b56",
+      "baseline_commit": "7806eecdf10f32763218a58a4e1e58b77c9e1a89",
       "checked_on": "2026-10-07",
       "label_ro": "drapel → Steag",
       "sense": "Physical flag/emblem of a state, group or institution; preserve distinct national-flag owner and specialist/figurative exclusions.",
@@ -200,6 +200,13 @@
           "prior_pool_raw_sha256": "fce2af89c2093bfb7d83b025df7ab872f42aac0108e5a269eac767b88a257e09",
           "review": "docs/reviews/v1-6-everyday-inputs/baseline-readiness-review-r1.json",
           "review_sha256": "f47971f1c5879e03c5540046f85868f4b9dd16e31fd421a10c01dd904280d10d"
+        },
+        {
+          "date": "2026-10-07",
+          "author": "/root",
+          "action": "Selected exact frozen R2record for two-singular-input refinement; R3 is handoff metadata only. No acceptance or installation inferred.",
+          "pre_selection_pool_raw_sha256": "2e7fc187c76341669d402b3f8436922256002d781e8230ccf020154717ba02cf",
+          "pre_selection_archive": "docs/reviews/v1-6-everyday-inputs/research-pool-r2-before-selection.json.gz"
         }
       ],
       "intended_refinement_scope": {
@@ -210,6 +217,30 @@
         "new_targets": 0,
         "new_rounds": 0,
         "note": "Only actually measured singular headword. Other sourced inflections remain unselected."
+      },
+      "handoff": {
+        "selected_revision": 2,
+        "snapshot_path": "docs/reviews/v1-6-everyday-inputs/selection-snapshots/v16-lex-drapel-r2.json",
+        "snapshot_sha256": "a989814bbe3eda0b844331f5749d34a90b4fe26584caed730e2e97a82ecbc114",
+        "baseline_commit": "7806eecdf10f32763218a58a4e1e58b77c9e1a89",
+        "proposal_path": "docs/reviews/v1-6-everyday-inputs/graph-proposal-r1.json",
+        "proposal_sha256": "4db45b490f1a431055390a4147222a10d4403596272e2135d6d88303f13a6ab6",
+        "module_path": "scripts/everyday_inputs_v1_6_data.py",
+        "module_sha256": "9a932fe50589cd67a0073be2a02a0e8a7dd61c2d5f973b39adb83770abbea8f3",
+        "intended_rail": "scripts/apply_common_words_v24.py --data-module everyday_inputs_v1_6_data; nonmutating --dry-run and isolated supported materialization require separate measured admission. No direct fixture edits. Installation only after exact accepted factual/quality/prospective evidence.",
+        "acceptance_requirements": [
+          "Independent exact factual review of both headwords, qualified senses, normalized owners, primary evidence/access/license limits.",
+          "Independent quality review, complete prospective all-game/terminal/identity/fuzzy/ordinaryplay/privacy/score/hint/history evidence on exact supported-generator-produced candidate.",
+          "Supported accepted graph transaction, Source6 exact reviewed Source5parent22b7853e, full affected catalogs/reviews/authority/export/reference/history/native checks; no stale judgments.",
+          "Independent exact assembled acceptance and green local landing before a new version."
+        ],
+        "unresolved_issues": [
+          "Raw factual and raw quality acceptance",
+          "Nonmutating supported preflight",
+          "Actual isolated supported materialization and all-game/terminal/fuzzy/prospective HTTP evidence",
+          "Source6 and installed audits/current authority/full verification/local landing"
+        ],
+        "installation_approval": false
       }
     },
     {
@@ -881,10 +912,10 @@
     },
     {
       "id": "v16-lex-untdelemn",
-      "revision": 2,
-      "state": "ready_for_refinement",
+      "revision": 3,
+      "state": "selected_for_refinement",
       "origin_track": "discovery",
-      "baseline_commit": "0b9c22bcca0da5cf00a31203e6b1c9173d525b56",
+      "baseline_commit": "7806eecdf10f32763218a58a4e1e58b77c9e1a89",
       "checked_on": "2026-10-07",
       "label_ro": "untdelemn → Ulei",
       "sense": "Edible vegetable oil only; installed culinary Ulei sense. Do not generalize to motor/mineral oil or separate regional ulei homonym.",
@@ -1079,6 +1110,13 @@
           "prior_pool_raw_sha256": "fce2af89c2093bfb7d83b025df7ab872f42aac0108e5a269eac767b88a257e09",
           "review": "docs/reviews/v1-6-everyday-inputs/baseline-readiness-review-r1.json",
           "review_sha256": "f47971f1c5879e03c5540046f85868f4b9dd16e31fd421a10c01dd904280d10d"
+        },
+        {
+          "date": "2026-10-07",
+          "author": "/root",
+          "action": "Selected exact frozen R2record for two-singular-input refinement; R3 is handoff metadata only. No acceptance or installation inferred.",
+          "pre_selection_pool_raw_sha256": "2e7fc187c76341669d402b3f8436922256002d781e8230ccf020154717ba02cf",
+          "pre_selection_archive": "docs/reviews/v1-6-everyday-inputs/research-pool-r2-before-selection.json.gz"
         }
       ],
       "intended_refinement_scope": {
@@ -1089,6 +1127,30 @@
         "new_targets": 0,
         "new_rounds": 0,
         "note": "Only actually measured singular headword. Other sourced inflections remain unselected."
+      },
+      "handoff": {
+        "selected_revision": 2,
+        "snapshot_path": "docs/reviews/v1-6-everyday-inputs/selection-snapshots/v16-lex-untdelemn-r2.json",
+        "snapshot_sha256": "26d0e981822c268f70527eb4caff9fe031078f69968a1be6f11b54b4d594b921",
+        "baseline_commit": "7806eecdf10f32763218a58a4e1e58b77c9e1a89",
+        "proposal_path": "docs/reviews/v1-6-everyday-inputs/graph-proposal-r1.json",
+        "proposal_sha256": "4db45b490f1a431055390a4147222a10d4403596272e2135d6d88303f13a6ab6",
+        "module_path": "scripts/everyday_inputs_v1_6_data.py",
+        "module_sha256": "9a932fe50589cd67a0073be2a02a0e8a7dd61c2d5f973b39adb83770abbea8f3",
+        "intended_rail": "scripts/apply_common_words_v24.py --data-module everyday_inputs_v1_6_data; nonmutating --dry-run and isolated supported materialization require separate measured admission. No direct fixture edits. Installation only after exact accepted factual/quality/prospective evidence.",
+        "acceptance_requirements": [
+          "Independent exact factual review of both headwords, qualified senses, normalized owners, primary evidence/access/license limits.",
+          "Independent quality review, complete prospective all-game/terminal/identity/fuzzy/ordinaryplay/privacy/score/hint/history evidence on exact supported-generator-produced candidate.",
+          "Supported accepted graph transaction, Source6 exact reviewed Source5parent22b7853e, full affected catalogs/reviews/authority/export/reference/history/native checks; no stale judgments.",
+          "Independent exact assembled acceptance and green local landing before a new version."
+        ],
+        "unresolved_issues": [
+          "Raw factual and raw quality acceptance",
+          "Nonmutating supported preflight",
+          "Actual isolated supported materialization and all-game/terminal/fuzzy/prospective HTTP evidence",
+          "Source6 and installed audits/current authority/full verification/local landing"
+        ],
+        "installation_approval": false
       }
     }
   ]

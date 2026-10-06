@@ -1,0 +1,155 @@
+{
+ "schema": "v1-6-independent-materialized-identity-review-r1",
+ "reviewer": "/root/v16_raw_quality",
+ "checked_at_utc": "2026-10-06T23:08:57.007948+00:00",
+ "baseline_commit": "7806eecdf10f32763218a58a4e1e58b77c9e1a89",
+ "decision": "accept_actual_isolated_candidate_identity_only",
+ "mismatches": [],
+ "raw_quality_acceptance": false,
+ "final_quality_acceptance": false,
+ "prospective_gameplay_acceptance": false,
+ "installation_approval": false,
+ "candidate_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+ "candidate_bytes": 3674955,
+ "baseline_fixture_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+ "bindings": {
+  "docs/reviews/v1-6-everyday-inputs/prospective-candidate-archive-r1.json": "d2e06ee905b27535bd7aa6a60fc12ec31954e707f242fec58b5b73055763c3fc",
+  "docs/reviews/v1-6-everyday-inputs/isolated-materialization-r1-admission.json": "41feb20674013fe20c18823f2c259a7efcba6a99757bedc9a6a7ce0e0558d246",
+  "docs/reviews/v1-6-everyday-inputs/isolated-materialization-r1-result.json": "4c519d5ae171532b083660088b6c57599b3242051e3ed9b3ff79e86023af2471",
+  "docs/reviews/v1-6-everyday-inputs/isolated-materialization-r1.json": "8a94422e070419a2f0221eefd660593707923128d83227d30a828d303172ff48",
+  "docs/reviews/v1-6-everyday-inputs/materialization-persistence-admission-r1.json": "aa6f270d4d9a7095ee415c5fc021588eaa039b1c78dd0bb135748fb8178c2e0a",
+  "docs/reviews/v1-6-everyday-inputs/methods/materialize_graph_r1.py.txt": "e9167dbb7051722e4089f3ccfcc7f2145c731588727b7cc1a84697cd00a30da6",
+  "docs/reviews/v1-6-everyday-inputs/graph-materialization-method-review-r2.json": "9dbf72a30e2704ac4e456e6976f1c9072a908548b826f138692ecfbb1659707f",
+  "docs/reviews/v1-6-everyday-inputs/graph-factual-review-r1.json": "7bc364f970b45f8011ba081bfadadb8521f6e2e951cae9dd211e8f15124fe713",
+  "docs/reviews/v1-6-everyday-inputs/graph-quality-prospective-r1.json": "c7afbdd634e1990b9f7dde6c4b9ad95eb4094457ba1919379a69b8fb43bca519",
+  "docs/reviews/v1-6-everyday-inputs/graph-proposal-r1.json": "4db45b490f1a431055390a4147222a10d4403596272e2135d6d88303f13a6ab6",
+  "scripts/everyday_inputs_v1_6_data.py": "9a932fe50589cd67a0073be2a02a0e8a7dd61c2d5f973b39adb83770abbea8f3",
+  "go-backend/internal/contentrails/sources/authored-v5.json": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+  "go-backend/internal/contentrails/sources/installed-authorities.json": "a4ace0908e17611d6aebbbbe1121a26df2c462caaa7baaa9d8981d936df89c0e",
+  "go-backend/internal/content/bundled.json": "c1fff429992c69926aafb07f5b015f890a82c7c01cc5230107bdaf481bca5993"
+ },
+ "archives": {
+  "prospective-kg-r1.json.gz": {
+   "sha256": "700601f2096c83f9381a6161ecf5869e4e704bf831936e3270498a6f8288fb65",
+   "raw_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+   "raw_bytes": 3674955,
+   "compressed_bytes": 432974,
+   "lossless_digest_and_size_verified": true
+  },
+  "prospective-mobile-r1.json.gz": {
+   "sha256": "22ca56cf0db0d06bd0c3bc2f3535ae6f3c785be67c83d3fc8ad6265324915be8",
+   "raw_sha256": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae",
+   "raw_bytes": 1115310,
+   "compressed_bytes": 144314,
+   "lossless_digest_and_size_verified": true
+  },
+  "isolated-transaction-r1.log.gz": {
+   "sha256": "310f0129e563a2829a2e7bf1680fd332671ed50a37588e3d41754042c76c1b52",
+   "raw_sha256": "241ad8574cbdba577ac31adbde37e0cb1c0667b2c84ded2ab51a9fbd9c495233",
+   "raw_bytes": 1429,
+   "compressed_bytes": 593,
+   "lossless_digest_and_size_verified": true
+  }
+ },
+ "independent_comparison": {
+  "method": "Read-only SHA256/gzip roundtrip, complete parsed-record comparisons and actual current file hashes. No generator, validator, native command, game/profile replay, test or build executed by this reviewer.",
+  "all_2419_node_ids_and_order_exact": true,
+  "changed_nodes_only": {
+   "n_v4ist_steag": {
+    "appended_alias": "drapel",
+    "all_other_fields_exact": true,
+    "all_previous_aliases_and_order_exact": true
+   },
+   "n_v24_food_pantry_ulei": {
+    "appended_alias": "untdelemn",
+    "all_other_fields_exact": true,
+    "all_previous_aliases_and_order_exact": true
+   }
+  },
+  "stored_aliases_before": 8677,
+  "stored_aliases_after": 8679,
+  "all_9473_edge_records_and_order_exact": true,
+  "all_180_regenerated_terminal_records_and_order_exact": true,
+  "specific_Romanian_flag_owner_exact": true,
+  "only_top_level_changes": [
+   "meta",
+   "kg_nodes"
+  ],
+  "metadata_delta": {
+   "build_version": {
+    "before": "fixture-v1-4-time-links",
+    "after": "fixture-v1-6-everyday-inputs"
+   },
+   "note": {
+    "before": "V1.4: one qualified clock synonym family (two forms) and two directed duration-unit links.",
+    "after": "V1.6: two qualified singular synonym inputs for existing flag and edible-oil concepts."
+   }
+  },
+  "candidate_archive_equals_both_scratch_KG_mirrors": true,
+  "both_candidate_pack_mirrors_equal_current_installed_pack": true,
+  "all_five_installed_transaction_inputs_equal_scratch_baseline": true,
+  "all_admission_input_hashes_current": 145,
+  "all_protected_installed_hashes_current": 138,
+  "new_nodes": 0,
+  "new_edges": 0,
+  "new_targets_or_rounds": 0
+ },
+ "mobile_identity": {
+  "archive_equals_scratch": true,
+  "only_manifest_delta": {
+   "build_version": {
+    "before": "fixture-v1-4-time-links",
+    "after": "fixture-v1-6-everyday-inputs"
+   }
+  },
+  "contract_and_all_node_edge_puzzle_records_exact": true,
+  "content_hash_unchanged": "sha256:9b8e304038ae5750d15eb804145dae4428f8fb8289d15873660669865234a0b3",
+  "limit": "This verifies generated contract identity/delta and archival losslessness, not a new native mobile/runtime qualification."
+ },
+ "supported_execution_receipts": {
+  "method_digest_matches_prior_accepted_R2": true,
+  "outer_admission_hash_and_result_bindings_exact": true,
+  "steps": [
+   {
+    "name": "exact-supported-nonmutating-preflight",
+    "exit_code": 0,
+    "elapsed_seconds": 0.542001,
+    "peak_group_RSS_bytes": 8912896,
+    "guard": null
+   },
+   {
+    "name": "supported-isolated-two-form-materialization",
+    "exit_code": 0,
+    "elapsed_seconds": 71.20154,
+    "peak_group_RSS_bytes": 124674048,
+    "guard": null
+   }
+  ],
+  "incremental_bytes": 25931661,
+  "deadline_pass": true,
+  "inner_status": "SUPPORTED_ISOLATED_APPLY_GREEN",
+  "inner_validation_errors": [],
+  "log": "Archived transaction log records0nodes/2aliases/0edges,180regenerated puzzles,324beginner probes, final GREEN and staged_items=[]. Its raw hash matches the result. Existing unchanged validators and rollback-protected method remain bound; no evidence of suppression or materialization mismatch found.",
+  "resource_limit": "Resource values are archived runner measurements, not new execution or an independently sampled campaign."
+ },
+ "pending": [
+  "Final exact raw quality acceptance remains pending.",
+  "All-game/target/projection/fuzzy profile comparisons remain pending; unchanged graph topology alone does not establish unchanged profiles or suggestions.",
+  "Ordinary prospective native HTTP alias success, deduplication, attempts, score, hints, privacy and recovery remain pending.",
+  "Current world/quick/history/native Source6/authority/export/reference and assembled acceptance remain pending.",
+  "Installation and landing remain unapproved by this identity-only report."
+ ],
+ "execution": {
+  "sole_written_file": "docs/reviews/v1-6-everyday-inputs/materialized-identity-review-r1.json",
+  "max_report_bytes": 8192,
+  "tests": 0,
+  "native_commands": 0,
+  "profile_replays": 0,
+  "baseline_reruns": 0,
+  "fixture_runtime_pool_edits": 0,
+  "commits": 0,
+  "new_agents_spawned": 0,
+  "report_process_max_RSS_bytes": 60985344
+ },
+ "valid_until": "Any bound candidate/archive/method/review/source/runtime change; repeat affected comparison. This isolated candidate is not installed content."
+}

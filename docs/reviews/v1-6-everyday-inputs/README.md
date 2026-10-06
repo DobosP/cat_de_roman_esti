@@ -7,6 +7,10 @@ Started after V1.5's exact independent acceptance and local landing. Baseline is
 Source5 World with Source4 Quick/Extensions, and strict installed authority a4ace090.
 No push or deployment accompanied that landing.
 
+Current phase: two exact R2records selected; raw facts accepted and supported isolated
+materialization passed. Final quality, prospective play and installation gates remain pending.
+Installed Source5 content is unchanged.
+
 The next wave will inspect existing decks, missing familiar input forms and specific
 associations, then research at most six finite leads through original sources. It will
 reuse existing pools and rejection reasons before proposing new work. The i02 graph
@@ -45,13 +49,13 @@ access failures and rights qualifications are in [primary A](lexical-primary-a.j
 [primary B](lexical-primary-b.json); the [independent critique](research-quality-r1.json)
 binds those exact reports and the archived R1 pool.
 
-The next useful check is ordinary typed play, prioritizing drapel/Steag and untdelemn/Ulei.
+At the initial source checkpoint, the next check was ordinary typed play for drapel/Steag and untdelemn/Ulei.
 Static eligible Cald cases exist near Steag and at Chec via Ulei→Chec; actual normal selection,
-baseline fuzzy/confirmation behavior, benefit, scores, hints and privacy remain UNRUN.
+baseline fuzzy/confirmation behavior, benefit, scores, hints and privacy were then UNRUN.
 Recipe and tap-board exposure do not prove alias support in label-only search. Leafă is a
 lower-priority typed-case search; research is not raw quality or installation acceptance.
 
-No selected snapshot, candidate module, Source6 or V1.6 runtime change exists. Added shared
+At that source-only stage no selected snapshot, candidate module, Source6 or runtime change existed. Added shared
 concepts, world concepts, genuine synonym families, accepted forms, links, curated rounds,
 eligible and preferred pools are all zero. Source5 and every installed binding remain exact.
 Source-lane bounds/stop and documentation-only verification accompany this checkpoint;
@@ -93,9 +97,42 @@ alias execution. The original pool, source-failure and refusal records remain hi
 
 [Independent readiness review](baseline-readiness-review-r1.json) supports only drapel and
 untdelemn moving to revision2 ready_for_refinement in the [current pool](../../content-pool/v1-6-everyday-inputs/pool.json).
-Leafă remains researched; three other leads stay held. The intended next scope is two
-singular headwords, with no concepts, edges, targets or rounds. It has not been selected.
+Leafă remains researched; three other leads stay held. The intended scope at readiness was two
+singular headwords, with no concepts, edges, targets or rounds. Selection had not yet occurred.
 All stored-form and installed inventory deltas remain zero; no Source6 or content release.
 The exact R2 method is preserved with its [initial request changes](baseline-method-review-r1.json)
 and [final method acceptance](baseline-method-review-r2.json). The native lane respected
 its20-minute/2GiB/1GiB bounds and kept all bound installed bytes exact.
+
+
+## Exact proposal and isolated generator checkpoint
+
+[Proposal R1](graph-proposal-r1.json) freezes exactly the two R2ready records and the
+`scripts/everyday_inputs_v1_6_data.py` module. Current pool R3records add selection handoff
+metadata; the [pre-selection R2pool](research-pool-r2-before-selection.json.gz) stays byte exact.
+Only singular drapel→Steag and untdelemn→culinary Ulei are proposed: two synonym families,
+two stored forms, zero shared/world concepts, edges, targets or curated rounds. No other
+inflection was selected. Leafă remains researched and the three holds remain unchanged.
+
+[Raw factual review](graph-factual-review-r1.json) accepts the exact two singulars and
+qualified senses after primary-source checks. [Quality/prospective scrutiny](graph-quality-prospective-r1.json)
+allows isolated investigation while withholding final raw quality and installation. Its
+finite plan covers all game profiles, 29 fuzzy queries, old owner/projection preservation,
+all180terminal records, existing histories and prospective ordinary alias play at seeds36/3.
+
+The initial materialization method needed input-pin and failure-receipt repairs, retained
+in the earlier method and quality report. [Repaired method review](graph-materialization-method-review-r2.json)
+accepts exact e9167dbb… for separate execution. [Actual generator result](isolated-materialization-r1.json)
+and [lossless candidate archive](prospective-candidate-archive-r1.json) bind supported dry-run
+and isolated five-mirror apply. The candidate SHA63f0dcd7… has2419nodes/9473edges/8679forms/
+180puzzles: exactly the two appended forms, all other node fields, edges, old terminal
+payloads and pack mirrors preserved. Original validators and mobile refresh passed.
+All installed bindings remained unchanged; candidate and mobile bytes exist only as
+research artifacts/scratch outputs. Preflight0.542s/apply71.202s, sampled groupRSS124674048B
+and25931661B increment remained within the separately admitted bounds.
+
+Prospective native alias play, complete all-game/fuzzy/world/history comparisons, final
+raw quality, Source6/catalog/current-authority/export/reference gates and independent
+assembled acceptance remain pending. This checkpoint is not an installed V1.6 release;
+all installed inventory deltas remain zero. Do not repeat the completed baseline or
+materialization. Reuse the exact candidate and the finite quality case plan for next work.
