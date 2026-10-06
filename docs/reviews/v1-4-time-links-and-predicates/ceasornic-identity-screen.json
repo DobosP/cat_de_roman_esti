@@ -1,0 +1,83 @@
+{
+  "schema": "v1-4-bounded-ceasornic-identity-screen-v1",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "kg_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+  "instrument_owner": {
+    "id": "n_v24_time_day_ceas",
+    "node_type": "concept",
+    "label_ro": "Ceas",
+    "category": "societate",
+    "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Ceas.",
+    "salience": 0.94,
+    "difficulty_tier": "easy",
+    "degree": 6,
+    "aliases": [
+      "ceasul",
+      "ceasuri",
+      "ceasurile"
+    ]
+  },
+  "prospective_forms": [
+    {
+      "form": "ceasornic",
+      "normalized": "ceasornic",
+      "kg_owners": [],
+      "world_exact_owners": [],
+      "exact_projection_rows": []
+    },
+    {
+      "form": "ceasornicul",
+      "normalized": "ceasornicul",
+      "kg_owners": [],
+      "world_exact_owners": [],
+      "exact_projection_rows": []
+    },
+    {
+      "form": "ceasornice",
+      "normalized": "ceasornice",
+      "kg_owners": [],
+      "world_exact_owners": [],
+      "exact_projection_rows": []
+    },
+    {
+      "form": "ceasornicele",
+      "normalized": "ceasornicele",
+      "kg_owners": [],
+      "world_exact_owners": [],
+      "exact_projection_rows": []
+    },
+    {
+      "form": "ceasornicului",
+      "normalized": "ceasornicului",
+      "kg_owners": [],
+      "world_exact_owners": [],
+      "exact_projection_rows": []
+    },
+    {
+      "form": "ceasornicelor",
+      "normalized": "ceasornicelor",
+      "kg_owners": [],
+      "world_exact_owners": [],
+      "exact_projection_rows": []
+    }
+  ],
+  "rejection_ledgers": [
+    {
+      "path": "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+      "sha256": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+      "literal_exact_form_hits": []
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+      "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+      "literal_exact_form_hits": []
+    }
+  ],
+  "normalization": "existing supported importer validator normalize_text, documented Python3.12/Unicode15 reference",
+  "limits": [
+    "Identity absence never approves synonym meaning or morphology.",
+    "Ledger search is bounded literal surface screening, not exhaustive concept equivalence.",
+    "Plant and duration senses must remain excluded from intended owner."
+  ],
+  "installation_approval": false
+}

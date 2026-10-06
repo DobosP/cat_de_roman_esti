@@ -1,0 +1,204 @@
+{
+  "id": "v1-4-time-link-3",
+  "revision": 3,
+  "state": "selected_for_refinement",
+  "origin_track": "discovery",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "checked_on": "2026-10-06",
+  "label_ro": "Zi → Oră",
+  "sense": "Fixed-duration unit conversion; distinct units and separately qualified civil/calendar senses.",
+  "category": "societate",
+  "novelty": {
+    "kind": "new_relation",
+    "existing_ids": [
+      "n_v24_time_day_zi",
+      "n_v24_time_day_ora"
+    ],
+    "existing_edge_id": null,
+    "new_endpoint_link": true,
+    "hypothesis_only": true,
+    "possible_contribution": "One missing directed reachability arc; no new conversion fact/concept/form."
+  },
+  "identity_checks": {
+    "desired_direction": {
+      "dst_id": "n_v24_time_day_ora",
+      "src_id": "n_v24_time_day_zi"
+    },
+    "exact_direct_edges": [],
+    "effective_arcs": [],
+    "inverse_existing_edges": [
+      {
+        "bidirectional": 0,
+        "dst_id": "n_v24_time_day_zi",
+        "id": "de7959",
+        "is_distractor": 0,
+        "label_ro": "măsurarea timpului zilnic",
+        "relation": "time_unit",
+        "src_id": "n_v24_time_day_ora",
+        "strength": 0.9
+      }
+    ],
+    "endpoint_snapshots": [
+      {
+        "aliases": [
+          "ziua",
+          "zile",
+          "zilele"
+        ],
+        "category": "societate",
+        "degree": 9,
+        "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Zi.",
+        "difficulty_tier": "easy",
+        "id": "n_v24_time_day_zi",
+        "label_ro": "Zi",
+        "node_type": "concept",
+        "salience": 0.94
+      },
+      {
+        "aliases": [
+          "ore",
+          "orele"
+        ],
+        "category": "societate",
+        "degree": 8,
+        "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Oră.",
+        "difficulty_tier": "easy",
+        "id": "n_v24_time_day_ora",
+        "label_ro": "Oră",
+        "node_type": "concept",
+        "salience": 0.94
+      }
+    ]
+  },
+  "player_benefit": "Explain a specific measurable connection if meaningful repair beyond existing data can be established; duplicates never count as growth.",
+  "games": [
+    "conexiuni",
+    "contexto",
+    "lant",
+    "intrusul",
+    "perechi"
+  ],
+  "claims": [
+    {
+      "subject_id": "n_v24_time_day_zi",
+      "object_id": "n_v24_time_day_ora",
+      "claim_ro": "Ca unitate de durată, o zi are douăzeci și patru de ore.",
+      "evidence_state": "supported_duration_conversion",
+      "supporting_source_ids": [
+        "bipm-si-4-01",
+        "ro-primary-textbook-time"
+      ],
+      "installation_approval": false
+    }
+  ],
+  "sources": [
+    {
+      "access": "Direct PDF opened and parsed successfully,102pages. Cover identifies V4.01/June2026. Table8 read on printedp140/PDFpage30; Table2/second definition on printedp126/PDFpage16.",
+      "checked_on": "2026-10-06",
+      "doi": "https://doi.org/10.59161/AUEZ1291",
+      "id": "bipm-si-4-01",
+      "license": "CC BY4.0 explicitly stated on PDFpage2 and BIPM brochure landing page. Attribute BIPM, link source/license and indicate changes for any reused text. This research paraphrases facts and copies no figures or source corpus.",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "primary": true,
+      "publisher": "Bureau International des Poids et Mesures",
+      "scope": "Defined duration units. Minute/second of angle appear separately in Table8 and are outside these endpoints.",
+      "supports": [
+        "1 min = 60 s",
+        "1 h = 60 min = 3600 s",
+        "1 d = 24 h = 86400 s",
+        "The second is the SI base unit of time; minute/hour/day are non-SI units."
+      ],
+      "title": "BIPM SI Brochure, ninth edition, version4.01, June2026",
+      "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf/2d2b50bf-f2b4-9661-f402-5f9d66e4b507?version=7.0&t=1780410776583&download=true"
+    },
+    {
+      "access": "Primary publisher HTML page opened and read successfully; page102 contains printedpage100. The fullPDF exceeded browser size limit, so only the successfully read HTML lesson is claimed.",
+      "checked_on": "2026-10-06",
+      "does_not_support": [
+        "This lesson does not verify the minute-to-second coefficient.",
+        "Its simplified365-day year statement is not reused as an invariant."
+      ],
+      "id": "ro-primary-textbook-time",
+      "license": "No open reuse licence verified; publisher material is not treated as a licensed corpus. Store the URL and original paraphrase of fixed facts only; no page/image/text bulk copied.",
+      "primary": true,
+      "publisher": "Original textbook publisher Corint",
+      "supports": [
+        "Romanian lesson explicitly teaches hour-to-minute60 and day-to-hour24 conversions.",
+        "Children encounter these units with clock-reading/quarter-hour/half-hour exercises."
+      ],
+      "title": "Corint, Matematică și explorarea mediului, clasaII, time lesson printedp100",
+      "url": "https://www.manuale.edituracorint.ro/2023/matematica_II/files/basic-html/page102.html"
+    },
+    {
+      "access": "Full20page PDF opened. Firstpage identifies the ministry, order5003/02.12.2014 and București2014. Read competencies4.1/4.2 printedpp10–11 and unit/time-transformations table printedp16.",
+      "access_limits": "Official ISE original URL failed browser access and independent public fetch failed DNS; official ISJConstanța mirror was indexed but direct fetch404. Those inaccessible paths are not treated as freshly verified source text.",
+      "checked_on": "2026-10-06",
+      "does_not_support": [
+        "The PDF does not print the three numeric conversion coefficients and does not explicitly list secunda in the searched text. BIPM is the numeric authority.",
+        "No assertion about the latest in-force curriculum or a current legal requirement is made from this mirrored historical document."
+      ],
+      "id": "ro-curriculum-2014",
+      "license": "No open licence verified. Reference the document and summarize curriculum scope; copy no textbook/programme prose, images or corpus.",
+      "official_host": false,
+      "primary_document": true,
+      "publisher": "Ministerul Educației Naționale; original primary document hosted by third-party Edupedu mirror",
+      "supports": [
+        "Primary-school treatment of duration measurement, clocks, calendars and transformations from larger to smaller time units.",
+        "Curricular recognition context for the four existing duration-unit words."
+      ],
+      "title": "Ministerul Educației Naționale: Matematică, claseleIII–IV, Anexa2 to OM5003/02.12.2014",
+      "url": "https://cdn.edupedu.ro/wp-content/uploads/2018/09/Matematica_clasele-a-III-a-a-IV-a.pdf"
+    }
+  ],
+  "recognition": {
+    "state": "source-supported research only",
+    "access_qualification": "Numeric conversion directly verified in current primary BIPM; curriculum document supplies pedagogic recognition context, not a numeric coefficient or current-law claim.",
+    "no_claim_of_fun": true
+  },
+  "play_sketches": {
+    "alchimie": "A fixed conversion cannot be represented honestly as two ordinary distinct ingredients without multiplicity semantics. No numeric conversion recipe is proposed.",
+    "conexiuni": "A specific duration predicate is semantically tighter than the broad Societate category, but this does not repair or approve held fallback boards. Distinct partition, difficulty and generic-filler checks still apply.",
+    "contexto": "An added incoming arc is not target qualification; the incoming-neighbour floor and nameable-target/feedback gates remain.",
+    "intrusul": "Existing accepted duration trio Secundă/Minut/Oră is already covered. Adding Zi to a unit family does not authorize a near-duplicate board.",
+    "lant": "If independently accepted, missing reverse unit arcs could permit a familiar Zi→Oră→Minut→Secundă direction with truthful conversion captions. Still requires source/rank/route/save/reachability impact checks and alternatives; no journey approval.",
+    "perechi": "Minute–second pair already served; replacing its label or reskinning the same four pairings supplies no fresh round. Mixed adjacent units create competing valid pairings, so a new matching board is not presumed valid."
+  },
+  "risks": [
+    "Time duration only; no plane-angle minute/second or ordinal/musical second.",
+    "Hour means duration unit, not a school lesson or clock reading.",
+    "Day means the defined duration unit; exclude daylight span and any unqualified claim about elapsed local civil/calendar dates.",
+    "Do not equate calendar month or calendar year to a fixed number of days/hours.",
+    "No aliases/synonyms proposed; existing normalized owners remain unchanged.",
+    "The ministry-authored2014 curriculum was read through a named third-party mirror after official original access failures; its metadata is not proof of current statutory force.",
+    "Romanian textbook hour/day coefficients were read on the original publisher HTML, not inferred from a failedPDF fetch.",
+    "Research hypotheses and factual fixed factors are not permission to mutate approved stock, category ownership, fixture JSON, runtime or review pins."
+  ],
+  "dependencies": [
+    "Independent factual/quality, exact handoff and all affected native gates before adoption."
+  ],
+  "decision": "Select this exact missing reverse duration arc for independent refinement; conversion fact already known, only directed reachability growth proposed.",
+  "next_action": "Complete exact raw factual/quality, all-game/terminal/mined/profile/usefulness evidence and mandatory native integration before any installation.",
+  "history": [
+    {
+      "revision": 1,
+      "checked_on": "2026-10-06",
+      "notes": "Initial bounded research after greenV1.3 landing; no selection/adoption."
+    },
+    {
+      "revision": 2,
+      "checked_on": "2026-10-06",
+      "notes": "New exact directional inventory evidence distinguishes missing reverse arc from existing conversion fact; rootR1 pool retained. No selection/approval."
+    },
+    {
+      "revision": 3,
+      "checked_on": "2026-10-06",
+      "state": "selected_for_refinement",
+      "author": "root-integrator",
+      "notes": "Root accepts responsibility for bounded exact proposal; selection is never installation approval."
+    }
+  ],
+  "research_evidence": {
+    "path": "docs/reviews/v1-4-time-links-and-predicates/research-time-links.json",
+    "sha256": "f799e6a4faf5fb3430ce0e7eee5d881c19dfdbab28fc64c094d6ac09c5360821"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "v1-4-current-input-observation-v1",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "kg_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+  "query": {
+    "seed": 23,
+    "difficulty": "usor",
+    "category": "viata_de_roman"
+  },
+  "private_target_not_revealed": true,
+  "guesses": [
+    {
+      "text": "ceasornic",
+      "status": 200,
+      "body": {
+        "ok": false,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "suggestions": [],
+        "guesses": [],
+        "attempts": 0,
+        "won": false,
+        "reachable_count": 2356,
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "text": "ceasornice",
+      "status": 200,
+      "body": {
+        "ok": false,
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "suggestions": [],
+        "guesses": [],
+        "attempts": 0,
+        "won": false,
+        "reachable_count": 2356,
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "text": "ceas",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "guess": {
+          "id": "n_v24_time_day_ceas",
+          "label": "Ceas",
+          "distance": 6,
+          "rank": 2158,
+          "temperature": "Inghetat",
+          "closeness": 8,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "n_v24_time_day_ceas",
+            "label": "Ceas",
+            "distance": 6,
+            "rank": 2158,
+            "temperature": "Inghetat",
+            "closeness": 8,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2356,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2158."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    }
+  ],
+  "limits": "Current baseline observation only; no hypothetical new alias data loaded or accepted."
+}

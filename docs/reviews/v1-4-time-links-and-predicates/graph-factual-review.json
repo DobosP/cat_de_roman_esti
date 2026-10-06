@@ -1,0 +1,470 @@
+{
+  "access_and_reuse": {
+    "dictionary_access": "Only an individual official DOOM lemma/plural query; no DEX scrape/API/corpus/definition dataset saved or imported.",
+    "facts_and_text": "Own Romanian factual captions and individual form facts only; no paper/textbook/museum/botanical corpus, definition bodies, figures or tables copied into game data.",
+    "license_approval": false,
+    "licenses": "BIPM brochure CC BY4.0 directly verified. DOOM visible CC BY-NC-SA4.0 recorded without a blanket commercial corpus grant. Other sources retain exact access/copyright qualifications; absence of an open grant is not misrepresented."
+  },
+  "author_independence": {
+    "graph_module_authored_by_reviewer": false,
+    "pool_or_selected_records_authored_by_reviewer": false,
+    "proposal_author": "root-integrator",
+    "research_reports_authored_by_reviewer": [
+      "research-time-links.json",
+      "lexical-primary-followup.json"
+    ],
+    "review_method": "Reviewed every actual selected form/sense/arrow/caption/current endpoint against independently accessed primary evidence and current bytes. Research support did not grant this acceptance before the exact authored proposal existed."
+  },
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "baseline_kg_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+  "bindings": {
+    "additional_current_readset": {
+      "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+      "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "cat_de_roman_esti/fixtures/kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+      "cat_de_roman_esti/fixtures/quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+      "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "docs/reviews/v1-4-time-links-and-predicates/ceasornic-current-input.json": "dba0c016866493707f21b4febb70d6d149b5946346b95b9a6c0b7d5113e4acb9",
+      "docs/reviews/v1-4-time-links-and-predicates/ceasornic-identity-screen.json": "bced4963a5b87f99980d8eff13761c9a05b128b49e4b31361460c7788bf0ea3d",
+      "docs/reviews/v1-4-time-links-and-predicates/graph-proposal.json": "6cae1819c10164f5181501eb86de75b32592af035f4198e642a43f63f798085d",
+      "docs/reviews/v1-4-time-links-and-predicates/lexical-primary-followup.json": "477b167be7890ab2be069e79cc2ab1ab6460e06a922b98fed030c5ccb718cc9b",
+      "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json": "b2d75580cbea8dbc16784d0a1c570889095eecd61bb13f88d002b91733f0c1ca",
+      "docs/reviews/v1-4-time-links-and-predicates/research-time-links.json": "f799e6a4faf5fb3430ce0e7eee5d881c19dfdbab28fc64c094d6ac09c5360821",
+      "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-lexical-ceasornic-r2.json": "c4c049a6412f6ccfd3111c8434d83e0be91fb925ddd4a4a9900467ca7a1ac37c",
+      "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-time-link-2-r3.json": "cd5c649e9b63a94a4293903442d65fc40b12a455cb9e3ea0c778b5988e8c87d9",
+      "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-time-link-3-r3.json": "2d9588836af4d95d374ac67c7a1c13d6b69c1e1d86f24e254c9da6e2816ad678",
+      "go-backend/internal/content/bundled.json": "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f",
+      "scripts/basic_words_v33_data.py": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033",
+      "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+      "scripts/time_graph_v1_4_data.py": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a"
+    },
+    "inputs": {
+      "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "cat_de_roman_esti/fixtures/kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+      "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "docs/reviews/v1-4-time-links-and-predicates/ceasornic-current-input.json": "dba0c016866493707f21b4febb70d6d149b5946346b95b9a6c0b7d5113e4acb9",
+      "docs/reviews/v1-4-time-links-and-predicates/ceasornic-identity-screen.json": "bced4963a5b87f99980d8eff13761c9a05b128b49e4b31361460c7788bf0ea3d",
+      "docs/reviews/v1-4-time-links-and-predicates/lexical-primary-followup.json": "477b167be7890ab2be069e79cc2ab1ab6460e06a922b98fed030c5ccb718cc9b",
+      "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json": "b2d75580cbea8dbc16784d0a1c570889095eecd61bb13f88d002b91733f0c1ca",
+      "docs/reviews/v1-4-time-links-and-predicates/research-time-links.json": "f799e6a4faf5fb3430ce0e7eee5d881c19dfdbab28fc64c094d6ac09c5360821"
+    },
+    "module": {
+      "path": "scripts/time_graph_v1_4_data.py",
+      "sha256": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a"
+    },
+    "proposal": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/graph-proposal.json",
+      "sha256": "6cae1819c10164f5181501eb86de75b32592af035f4198e642a43f63f798085d"
+    },
+    "selected_pool_records": [
+      {
+        "id": "v1-4-time-link-2",
+        "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-time-link-2-r3.json",
+        "revision": 3,
+        "sha256": "cd5c649e9b63a94a4293903442d65fc40b12a455cb9e3ea0c778b5988e8c87d9"
+      },
+      {
+        "id": "v1-4-time-link-3",
+        "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-time-link-3-r3.json",
+        "revision": 3,
+        "sha256": "2d9588836af4d95d374ac67c7a1c13d6b69c1e1d86f24e254c9da6e2816ad678"
+      },
+      {
+        "id": "v1-4-lexical-ceasornic",
+        "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-lexical-ceasornic-r2.json",
+        "revision": 2,
+        "sha256": "c4c049a6412f6ccfd3111c8434d83e0be91fb925ddd4a4a9900467ca7a1ac37c"
+      }
+    ]
+  },
+  "blocking_issues": [],
+  "changes_requested": [],
+  "checked_on": "2026-10-06",
+  "claims": [
+    {
+      "label_ro": "ca unitate de durată, are șaizeci de minute",
+      "object_id": "n_v29_time_units_minut",
+      "rationale": "BIPM V4.01 Table8 explicitly defines the duration hour as60minutes; primary Romanian textbook lesson independently teaches this coefficient. The caption qualifies duration, excluding a clock reading or school lesson. Existing inverse de8214 already gives the same conversion; the proposed forward arc is missing and contributes directed reachability only, not a new conversion fact.",
+      "ref": "edges[0]",
+      "relation": "has_part_time",
+      "sources": [
+        "bipm-si-4-01",
+        "ro-primary-textbook-time"
+      ],
+      "subject_id": "n_v24_time_day_ora",
+      "verdict": "accept"
+    },
+    {
+      "label_ro": "ca unitate de durată, are douăzeci și patru de ore",
+      "object_id": "n_v24_time_day_ora",
+      "rationale": "BIPM V4.01 Table8 defines the duration unit day as24hours; primary Romanian lesson teaches this coefficient. The explicit duration-unit caption does not universalize elapsed local civil dates, daylight spans, UTC/calendar phenomena, months or years. Desired Zi→Oră is missing; inverse de7959 is only the existing generic unit association. Stored direction and caption are factually consistent without claiming a newly discovered conversion.",
+      "ref": "edges[1]",
+      "relation": "has_part_time",
+      "sources": [
+        "bipm-si-4-01",
+        "ro-primary-textbook-time"
+      ],
+      "subject_id": "n_v24_time_day_zi",
+      "verdict": "accept"
+    }
+  ],
+  "counts": {
+    "accepted_new_input_forms": 2,
+    "accepted_new_node_definitions": 0,
+    "accepted_one_way_non_distractor_links": 2,
+    "accepted_qualified_synonym_families": 1,
+    "new_conversion_facts": 0,
+    "new_curated_round_approvals": 0,
+    "new_hidden_target_approvals": 0
+  },
+  "forms": [
+    {
+      "form": "ceasornic",
+      "kind": "qualified_synonym_lemma",
+      "node_id": "n_v24_time_day_ceas",
+      "rationale": "Exact normative lemma observed in the official rendered DOOM entry. Both directly read institutional academic texts explicitly pair Ceas/Ceasornic by shared object denotation. Current deck and incident-edge meanings identify this owner as the physical time-indicating instrument; no hour-duration or botanical owner is reassigned.",
+      "ref": "lexical_families[0].forms[0]",
+      "sources": [
+        "doom-ceasornic-direct",
+        "baiceanu-upit-2015",
+        "mocanu-upsc-2020",
+        "cimec-clock-museum"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "form": "ceasornice",
+      "kind": "grammatical_plural_of_qualified_synonym",
+      "node_id": "n_v24_time_day_ceas",
+      "rationale": "Official rendered DOOM explicitly gives this neuter plural. Same qualified instrument sense and owner; this is one inflectional input form, not a second independent synonym family. No article/genitive/dative form is added.",
+      "ref": "lexical_families[0].forms[1]",
+      "sources": [
+        "doom-ceasornic-direct"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "identity_checks": {
+    "all_bound_input_and_three_selected_snapshot_hashes_exact": true,
+    "all_four_existing_endpoint_node_snapshots_exact": true,
+    "existing_clock_decks": [
+      {
+        "id": "vi_9eda06bf86921d9f8444",
+        "payload": {
+          "group_label": "Obiecte sanitare racordate la apă",
+          "intruder": "n_v24_time_day_ceas",
+          "members": [
+            "n_v33_bathroom_fixture_chiuveta",
+            "n_v33_bathroom_fixture_cada_baie",
+            "n_v33_bathroom_fixture_robinet"
+          ]
+        },
+        "source_id": "aq92_intrusul_bathroom"
+      },
+      {
+        "id": "vp_a5135345d5ea3093e474",
+        "payload": {
+          "pairs": [
+            {
+              "group_label": "Personaj și actorul care îl interpretează",
+              "members": [
+                "n_v17fil_garcea",
+                "n_ftv_mugur_mihaescu"
+              ]
+            },
+            {
+              "group_label": "Instrument și unitatea pe care o indică",
+              "members": [
+                "n_v24_time_day_ceas",
+                "n_v24_time_day_ora"
+              ]
+            },
+            {
+              "group_label": "Vasul plantei și unealta cu care o uzi",
+              "members": [
+                "n_v32_garden_container_ghiveci_flori",
+                "n_v32_garden_water_stropitoare"
+              ]
+            },
+            {
+              "group_label": "Animale sălbatice din familia cervidelor",
+              "members": [
+                "n_v33_forest_animal_caprioara",
+                "n_v33_forest_animal_cerb"
+              ]
+            }
+          ]
+        },
+        "source_id": "aq92_perechi_associations_02"
+      },
+      {
+        "id": "vp_ac0bb5b0f36200c0de75",
+        "payload": {
+          "pairs": [
+            {
+              "group_label": "Loc de educație și activitatea sa centrală",
+              "members": [
+                "n_v3soc_scoala",
+                "n_v24_action_routine_a_invata"
+              ]
+            },
+            {
+              "group_label": "Legumă și animal asociat cu ea",
+              "members": [
+                "n_v24_food_salad_veg_morcov",
+                "n_v30_animal_field_iepure"
+              ]
+            },
+            {
+              "group_label": "Instrument și unitate de timp măsurată",
+              "members": [
+                "n_v24_time_day_ceas",
+                "n_v29_time_units_minut"
+              ]
+            },
+            {
+              "group_label": "Floare și recipient pentru planta ei",
+              "members": [
+                "n_v4sti_floare",
+                "n_v32_garden_container_ghiveci_flori"
+              ]
+            }
+          ]
+        },
+        "source_id": "aq92_session02_perechi_everyday_03"
+      }
+    ],
+    "existing_effective_directed_link_duplicates": 0,
+    "existing_semantic_inverse_links": [
+      {
+        "dst_id": "n_v24_time_day_ora",
+        "id": "de8214",
+        "label_ro": "șaizeci de minute alcătuiesc o oră",
+        "src_id": "n_v29_time_units_minut",
+        "strength": 0.99
+      },
+      {
+        "dst_id": "n_v24_time_day_zi",
+        "id": "de7959",
+        "label_ro": "măsurarea timpului zilnic",
+        "src_id": "n_v24_time_day_ora",
+        "strength": 0.9
+      }
+    ],
+    "module_matches_exact_proposal": true,
+    "old_owners_reassigned": false,
+    "old_records_or_prior_judgments_removed": false,
+    "qualified_full_identity_receipt_sha256": "bced4963a5b87f99980d8eff13761c9a05b128b49e4b31361460c7788bf0ea3d",
+    "selected_new_form_current_contexto_projection_matches": 0,
+    "selected_new_form_current_world_label_collisions": 0,
+    "selected_new_form_exact_kg_label_alias_or_native_index_collisions": 0,
+    "source_runtime_catalogue_diff_command": [
+      "git",
+      "diff",
+      "--quiet",
+      "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "--",
+      "go-backend",
+      "shared-go/authcore",
+      "cat_de_roman_esti/fixtures"
+    ],
+    "source_runtime_catalogues_unchanged_at_review": "git diff --quiet against baseline for go-backend/shared-go-authcore/fixture paths returned0; current source KG/export hashes exact.",
+    "unselected_direct_duplicate": "Minut→Secundă de8215 remains unchanged and is not proposed."
+  },
+  "installation_approval": false,
+  "lexical_families": [
+    {
+      "headword": "ceasornic",
+      "node_id": "n_v24_time_day_ceas",
+      "rationale": "Direct academic semantic pairing goes beyond morphology alone; the existing three clock deck roles and current source node/edge identity fit the instrument interpretation. Both selected bare forms are free in exact current normalization. Genuine lexical-family count is one; plural is morphology. Plant, hour/occasion, component-mechanism and unproven universal subtype meanings remain excluded. Optional-input coverage preserves familiar displayed Ceas; this does not prove population recognition or enjoyment.",
+      "ref": "lexical_families[0]",
+      "sense": "Physical clock/watch time-indicating instrument matching displayed Ceas.",
+      "sources": [
+        "baiceanu-upit-2015",
+        "mocanu-upsc-2020",
+        "doom-ceasornic-direct",
+        "cimec-clock-museum"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "node_definitions": [],
+  "proposal_sha256": "6cae1819c10164f5181501eb86de75b32592af035f4198e642a43f63f798085d",
+  "qualifications": [
+    "Only ceasornic/ceasornice are accepted as exact selected forms. Four article/case forms, orologiu and clipă/moment remain unselected or held; this review does not broaden them.",
+    "The botanical Passiflora use is real counterexample evidence; no plant meaning or unseen botanical owner is erased. Ceas hour/occasion meaning remains distinct from the existing instrument owner.",
+    "Defined duration conversion factors never imply a fixed calendar-month/year length or an unconditional civil/daylight interval. Minute/hour/day remain non-SI units; second is the SI time base unit.",
+    "Two new stored directions over existing unordered endpoint pairs are reachability growth, not two newly discovered facts or synonyms.",
+    "Raw factual captions do not grant separately reviewed public Lanț caption stock. Keep the existing safe public labels unless that separate rail approves exact presentation.",
+    "The dry-run preflight is baseline execution evidence, not factual source proof or installed/current authority approval. All graph transaction, complete prospective quality, affected-game/source4/current authority/export/reference/history/race/vet/docs and assembled release gates remain required."
+  ],
+  "reviewed_at_commit": "2b1428622f9f43fe4c1f5b75bb1a8dacfbc59e1c",
+  "reviewed_refs": [
+    "lexical_families[0]",
+    "lexical_families[0].forms[0]",
+    "lexical_families[0].forms[1]",
+    "edges[0]",
+    "edges[1]"
+  ],
+  "reviewer": "/root/content_rail",
+  "role": "factual",
+  "schema": "v1-4-graph-factual-review-v1",
+  "scope": "Exact one existing-clock synonym family, two directly normative input forms and two one-way qualified duration-unit relations. Zero nodes, curated rounds, hidden targets, installed authority, source/export/pin changes or quality approval.",
+  "source_access_exceptions": [
+    {
+      "observation": "Direct web access failed in this follow-up. Original researcher reported zero rendered results/partial edition; that prior observation is inherited, not represented as a fresh dictionary definition.",
+      "url": "https://dlr.lingv.ro/cautare/ceasornic"
+    },
+    {
+      "observation": "Indexed etymological lead but direct open failed; not claimed as directly read semantic authority.",
+      "url": "https://dspace.bcu-iasi.ro/bitstream/handle/123456789/8031/Hristea%2C%20Theodor%2C%20Corectari%20si%20precizari%20etimologice%2C%20Limba%20romana%2C%20An.%2046%2C%20Nr.%201-3%2C%201997%2C%20p.%20109-118.pdf?sequence=1"
+    },
+    {
+      "observation": "Browser refused44,271,656-byte PDF by size. No full rule/table access claimed.",
+      "url": "https://download.intuitext.ro/manuale/Intuitext_Manual_LLR_cls_6.pdf"
+    },
+    {
+      "observation": "Direct access failed; no parsed genitive/dative table claim.",
+      "url": "https://mecc.gov.md/sites/default/files/lumina_l_lir_rom_cl_10_aloling_text.pdf"
+    },
+    {
+      "observation": "Direct access failed; not used as an official-Romanian case-rule proof.",
+      "url": "https://acikders.ankara.edu.tr/pluginfile.php/151646/mod_resource/content/1/Articolul%20hotarat%20si%20nehotarat.pdf"
+    },
+    {
+      "observation": "Indexed primary-use ceasornicelor lead but direct open failed; no actual article/case-form reading claimed.",
+      "url": "https://biblioteca-digitala.ro/reviste/academia-barladeana/Nedelea-Dumitru_Pelerinaj-printre-orologii_vol2_2007.pdf"
+    },
+    {
+      "qualification": "Pedagogic scope only, not current statutory force or numeric-conversion authority.",
+      "status": "Official original not accessible; historical primary ministry document read through explicitly disclosed Edupedu mirror.",
+      "url": "http://programe.ise.ro/Portals/1/Curriculum/2014-12/21-Matematica_clasele%20a%20III-a%20-%20a%20IV-a.pdf"
+    }
+  ],
+  "source_module_sha256": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a",
+  "sources": [
+    {
+      "access": "Direct PDF opened and parsed successfully,102pages. Cover identifies V4.01/June2026. Table8 read on printedp140/PDFpage30; Table2/second definition on printedp126/PDFpage16.",
+      "doi": "https://doi.org/10.59161/AUEZ1291",
+      "id": "bipm-si-4-01",
+      "license": "CC BY4.0 explicitly stated on PDFpage2 and BIPM brochure landing page. Attribute BIPM, link source/license and indicate changes for any reused text. This research paraphrases facts and copies no figures or source corpus.",
+      "primary": true,
+      "publisher": "Bureau International des Poids et Mesures",
+      "qualification": "Defined duration units. Minute/second of angle appear separately in Table8 and are outside these endpoints.",
+      "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf/2d2b50bf-f2b4-9661-f402-5f9d66e4b507?version=7.0&t=1780410776583&download=true"
+    },
+    {
+      "access": "Full primary HTML opened successfully.",
+      "doi": null,
+      "id": "bipm-non-si-update",
+      "license": "No separate reuse grant checked for the news page; retain URL and paraphrased status fact only. No news prose copied.",
+      "primary": true,
+      "publisher": "BIPM",
+      "qualification": "Avoid outdated accepted-for-use-with-SI terminology and do not call minute/hour/day SI base or SI derived units.",
+      "url": "https://www.bipm.org/en/-/2026-06-04-updated-si-brochure-clarifies-the-status-of-non-si-units"
+    },
+    {
+      "access": "Primary publisher HTML page opened and read successfully; page102 contains printedpage100. The fullPDF exceeded browser size limit, so only the successfully read HTML lesson is claimed.",
+      "doi": null,
+      "id": "ro-primary-textbook-time",
+      "license": "No open reuse licence verified; publisher material is not treated as a licensed corpus. Store the URL and original paraphrase of fixed facts only; no page/image/text bulk copied.",
+      "primary": true,
+      "publisher": "Original textbook publisher Corint",
+      "qualification": [
+        "This lesson does not verify the minute-to-second coefficient.",
+        "Its simplified365-day year statement is not reused as an invariant."
+      ],
+      "url": "https://www.manuale.edituracorint.ro/2023/matematica_II/files/basic-html/page102.html"
+    },
+    {
+      "access": "Full20page PDF opened. Firstpage identifies the ministry, order5003/02.12.2014 and București2014. Read competencies4.1/4.2 printedpp10–11 and unit/time-transformations table printedp16.",
+      "doi": null,
+      "id": "ro-curriculum-2014",
+      "license": "No open licence verified. Reference the document and summarize curriculum scope; copy no textbook/programme prose, images or corpus.",
+      "primary": true,
+      "publisher": "Ministerul Educației Naționale; original primary document hosted by third-party Edupedu mirror",
+      "qualification": "Official ISE original URL failed browser access and independent public fetch failed DNS; official ISJConstanța mirror was indexed but direct fetch404. Those inaccessible paths are not treated as freshly verified source text.",
+      "url": "https://cdn.edupedu.ro/wp-content/uploads/2018/09/Matematica_clasele-a-III-a-a-IV-a.pdf"
+    },
+    {
+      "access": "Full293page institutional PDF opened; author/title/contents/publisher and the specific passage read independently on2026-10-06.",
+      "author_or_publisher": "Lucian Dumitru Băiceanu",
+      "doi": null,
+      "doi_note": "No doi.org identifier found in the opened PDF; no DOI is invented or asserted absent globally. Cite this exact publisher URL/issue/page.",
+      "id": "baiceanu-upit-2015",
+      "license": "No open reuse grant verified. Paraphrase the claim and retain the short four-token pair only; do not copy article/corpus text.",
+      "locator": "Article starts printedp16/PDFpage16; explicit pair and semantic discussion printedp17/PDFpage17.",
+      "primary_kind": "Original authored academic paper, on original University of Pitești publisher host; discusses Sorin Stati scholarship.",
+      "qualification": "The parenthetical English watch=clock is a loose gloss, not proof of universal equivalence of clock subtypes. The paper summarizes older Stati works rather than conducting a modern recognition survey.",
+      "url": "https://www.upit.ro/_document/21192/eli_no._16-2015.pdf"
+    },
+    {
+      "access": "Full institutional PDF opened and its metadata plus the exact ceas–ceasornic pair and surrounding word/sense discussion read independently on2026-10-06.",
+      "author_or_publisher": "Liuba Mocanu",
+      "doi": null,
+      "doi_note": "No doi.org identifier found in the opened PDF. ISBN and repository URL retained.",
+      "id": "mocanu-upsc-2020",
+      "license": "The filename license.txt is not a licence grant; the response is a copyrighted course PDF. No open reuse grant verified; facts/paraphrase only.",
+      "locator": "Title/author/approval metadata PDFpages1–2; lexical-semantic discussion printedp41/PDFpage41.",
+      "primary_kind": "Original authored university course support, served as a68page PDF by the university repository despite its misleading license.txt URL suffix.",
+      "qualification": "Its total/absolute terminology does not erase Ceas hour/occasion senses or the plant homonym of ceasornic. It is Moldovan university teaching material, not Romanian national curriculum or measured population recognition.",
+      "url": "https://dir.upsc.md/handle/123456789/2072/license.txt"
+    },
+    {
+      "access": "Fresh agent-owned Chrome tab showed exactly one result on2026-10-06: ceasornic, neuter noun, plural ceasornice. Read directly; no dictionary scrape or downloaded corpus.",
+      "author_or_publisher": "Institutul de Lingvistică Iorgu Iordan–Al.Rosetti",
+      "doi": null,
+      "doi_note": "No DOI asserted for this individual web entry.",
+      "id": "doom-ceasornic-direct",
+      "license": "Visible official footer links CC BY-NC-SA4.0 alongside generic template copyright. This is not a blanket commercial corpus redistribution grant; retain only individual observed form facts.",
+      "locator": null,
+      "primary_kind": "Official Academia Română linguistic institute DOOM3 normative entry.",
+      "qualification": "Entry directly establishes these two form facts only. No semantic definition or unshown article/genitive forms are claimed as displayed.",
+      "url": "https://doom.lingv.ro/cautare/q/ceasornic?"
+    },
+    {
+      "access": "Full primary HTML opened on2026-10-06; the page itself states last modified29July1998.",
+      "author_or_publisher": "Muzeul Ceasului, Ploiești, Nicolae Simache collection",
+      "doi": null,
+      "doi_note": null,
+      "id": "cimec-clock-museum",
+      "license": "No open reuse grant verified. Facts/paraphrase only; no museum images or body prose copied.",
+      "locator": null,
+      "primary_kind": "Original cultural-heritage museum collection presentation on cIMeC.",
+      "qualification": "It distinguishes early solar/water/sand timekeepers from mechanical/modern ceasornice. A mechanism in a musical box is a component, not proof the whole box is a clock. Do not assert broad synonymy with every timer, smartwatch app or clepsydra subtype from this page.",
+      "url": "https://www.cimec.ro/muzee/ceasuri/ceas.htm"
+    },
+    {
+      "access": "Full42page primary PDF opened; clock-direction word occurrence independently located on2026-10-06.",
+      "author_or_publisher": null,
+      "doi": null,
+      "doi_note": null,
+      "id": "litera-ordinary-school-context",
+      "license": "No open reuse grant verified; citation/paraphrase only.",
+      "locator": "PDFpage7 (zero-based parsedpage6), day/night modelling activity; independently read the actual clockwise phrase. Original lexical report stated PDFpage6 and remains immutable history.",
+      "primary_kind": "Original publisher gradeII mathematics/environment teaching plan.",
+      "qualification": "Indirect vocabulary exposure only, not a semantic definition, current national-curriculum legal claim or representative recognition measurement.",
+      "url": "https://edu.litera.ro/manuale/2023_MEM2/2023_549_MEM2_proiectare_new.pdf"
+    },
+    {
+      "access": "Full155page PDF opened. Its own methodology says Latin names are followed by Hungarian and Romanian names; at PDFpage67 it lists Passiflora coerulea with Romanian name ceasornic.",
+      "author_or_publisher": "Adattár: fajismeret (elnevezés, felhasználás)",
+      "doi": null,
+      "doi_note": null,
+      "id": "botanical-adattar-counterexample",
+      "license": "No reuse grant verified. Read one claim only; no botanical/dictionary name corpus copied.",
+      "locator": null,
+      "primary_kind": "Original botanical/ethnobotanical appendix text reproduced by scholarly digital archive Adatbank; complete cover authorship not established from this appendix alone.",
+      "qualification": "Authorship/date/full-book metadata remain incomplete in the standalone appendix; no DOI or contemporary species nomenclature claim inferred. This is counterexample evidence, not a proposed new plant/node/alias.",
+      "url": "https://adatbank.ro/html/alcim_pdf8879.pdf"
+    }
+  ],
+  "strength_editorial_review": {
+    "comparison": "Matches existing exact unit-conversion de8214/de8215 strength0.99.",
+    "qualification": "This is editorial edge weighting, not factual likelihood, audience familiarity, measured confidence, an independent quality verdict or permission to lower thresholds. All prospective feedback/miner/route impact remains separately reviewed.",
+    "value": 0.99,
+    "verdict": "factually_consistent_editorial_value"
+  },
+  "valid_until": "Any bound proposal/module/selected snapshot/source/research/owner/sense/form/direction/caption change; repeat affected exact factual review.",
+  "verdict": "accept"
+}

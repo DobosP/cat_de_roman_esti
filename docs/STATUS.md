@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) research6leads/4holds started, no data installed.
+  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) proposal0nodes/2forms/2links factual ACCEPT, quality/impact pending; no data installed.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni

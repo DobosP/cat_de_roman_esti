@@ -3,8 +3,8 @@
 Valid until: baseline, source evidence or intended scope changes — repeat affected checks.
 
 Started2026-10-06 after V1.3 content95f94e3/reviewed landing082ba99/documentation46641d6.
-Baseline:46641d6f9963f92941d12f5955e5eb40a2d8fb56. Phase: bounded research only.
-No V1.4 graph/source/runtime/corpus or approval is installed. The [pool](../../content-pool/v1-4-time-links-and-predicates/pool.json) records6leads:2unselected reverse-direction hypotheses/4held (one duplicate and three lexical meaning/recognition/access gaps).
+Baseline:46641d6f9963f92941d12f5955e5eb40a2d8fb56. Phase: exact proposal/raw independent review; no installation.
+No V1.4 graph/source/runtime/corpus or approval is installed. The [pool](../../content-pool/v1-4-time-links-and-predicates/pool.json) records6leads:3selected for independent refinement/3held (duplicate, orologiu and clipă/moment); four additional ceasornic inflections remain unselected.
 
 [Time-link screen](research-time-links.json) preserves exact endpoint directions, existing deck uses and official-access/mirror qualifications. No new conversion fact is claimed from a reverse arc.
 
@@ -35,3 +35,25 @@ All critique, independent factual/quality, native source/operator/authority/HTTP
 privacy/bounds/determinism gates remain. Preserve all old source/reference archives and
 selected snapshots. Loop continues after a fully green local landing; human stop/pause wins.
 No push/deploy authorized.
+
+[Primary lexical follow-up](lexical-primary-followup.json) resolves the qualified instrument
+semantic gap through two original authored linguistic texts, fresh DOOM lemma/plural and
+physical-device context; plant/hour senses remain excluded. [Identity](ceasornic-identity-screen.json)
+and [current input](ceasornic-current-input.json) show no exact owner and currently unavailable
+ceasornic/ceasornice while Ceas is recognized. No proposed rare displayed target is added.
+
+[ProposalR1](graph-proposal.json) binds root-authored `scripts/time_graph_v1_4_data.py` and three
+exact pre-handoff selected snapshots. Proposed scope:0concepts,1qualified synonym family,
+2accepted input forms and2directed duration-unit links,0new conversionfacts/curatedrounds/
+hidden-target approvals. Supported nonmutating preflight passes0nodes/2edges/324beginner
+probes/2linkprobes; Ruff GREEN. [Interim quality](reverse-link-quality-screen-interim.json)
+reports all245/123/83 authored profiles and all265currentCald hop/weighted maps unchanged;
+stored incident degrees and directed/incoming counts remain separate. Full feedback,
+terminal/mined/ordinaryplay effects and exact factual/quality reviews are still required.
+[Integration readiness](integration-readiness.md) preserves exactsource4parent3/nativegates.
+No reviewer acceptance or installation is inferred from this root proposal or preflight.
+
+[Raw factual review](graph-factual-review.json) ACCEPTS exact proposal6cae1819/moduleb7c5af54,
+covering2forms/2arcs and qualified instrument/duration/source-access/license scope. It grants
+no quality/installation/current-authority approval. Final refute-first quality and its full
+prospective receipt remain in progress; the module and selected snapshots stay byte-frozen.

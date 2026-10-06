@@ -1,0 +1,527 @@
+{
+  "kind": "v1-4-native-integration-readiness-v1",
+  "checked_on": "2026-10-06",
+  "valid_until": "Baseline/source/code/export/tool identity or intended changes differ; inspect/rebuild affected readiness.",
+  "role": "/root/synonym_scout tooling readiness only",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "prospective_source4": {
+    "version": 4,
+    "parent_source_sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+    "source4_present": false,
+    "current_authority_sha256": "8d9245f861bba03718213900984d2f2829d4d584d43bac701e5c3167ded623bf",
+    "current_world_raw_predecessor_sha256": "d3c1419c83a6e29f34790cef62717a4fbf36ec5577526677ac43db99fc0f089d"
+  },
+  "sdk_critical_hashes_and_version": "All6critical archive/tool/version identities rechecked equalqualified baseline; actualGo/compiler/linker1.27.1.",
+  "environment_path": "/home/dobo/work/_temp/codex__content-v1-4/qualified-env.sh",
+  "build_receipt": {
+    "kind": "v1-4-readiness-build-v1",
+    "qualified_environment": {
+      "GOMAXPROCS": "2",
+      "GOFLAGS": "-p=2 -mod=readonly",
+      "GOPROXY": "off",
+      "GOTOOLCHAIN": "local",
+      "GOWORK": "off",
+      "GOROOT": "/home/dobo/work/_temp/codex__content-v1-4/tools/go",
+      "GOCACHE": "/home/dobo/work/_temp/codex__content-v1-4/gocache",
+      "GOMODCACHE": "/home/dobo/go/pkg/mod",
+      "GOPATH": "/home/dobo/work/_temp/codex__content-v1-4/gopath",
+      "GOTMPDIR": "/home/dobo/work/_temp/codex__content-v1-4/tmp",
+      "TMPDIR": "/home/dobo/work/_temp/codex__content-v1-4/tmp"
+    },
+    "sdk_executable_sha256": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624",
+    "environment_file_sha256": "8f30d8bce84f95f5a9fd73061be84f871e2d34833943d01954843257de854b41",
+    "sources_before_after_exact": {
+      "go-backend/internal/contentrails/sources/authored-v1.json": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6",
+      "go-backend/internal/contentrails/sources/authored-v2.json": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+      "go-backend/internal/contentrails/sources/authored-v3.json": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+      "go-backend/internal/contentrails/sources/installed-authorities.json": "8d9245f861bba03718213900984d2f2829d4d584d43bac701e5c3167ded623bf",
+      "go-backend/internal/contentrails/installed_authorities_pin.go": "c122627839b2177e6f957b77d080dbab85677d65c0950226ef9dc9376cb9213b",
+      "go-backend/internal/content/bundled.json": "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f",
+      "go-backend/internal/content/digest.go": "38f75208a4c13c5f65b2a4ddf97204697643915a31798649cc511a568eb3dc86",
+      "go-backend/go.mod": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50",
+      "go-backend/go.sum": "af163d80d114418f5acec96c1e08659aa9a8acdf6b1822344309d07a4628a621",
+      "cat_de_roman_esti/fixtures/kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63"
+    },
+    "builds": [
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+          "-C",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4/go-backend",
+          "build",
+          "-o",
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content",
+          "./cmd/cat-content"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 3.975,
+        "stdout": "",
+        "stderr": "",
+        "binary_sha256": "dac547048e518f810e3ce24e0a5e8e41807c8f88c0c916cf6e52bb7746e748fa"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+          "-C",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4/go-backend",
+          "build",
+          "-o",
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-rail",
+          "./cmd/cat-content-rail"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 7.682,
+        "stdout": "",
+        "stderr": "",
+        "binary_sha256": "cbb4ad4a0d010ca4ed479ee5c9f35fa73858b57eb86ed9c77c1a0c52d31a7510"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+          "-C",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4/go-backend",
+          "build",
+          "-o",
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-ops",
+          "./cmd/cat-content-ops"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.165,
+        "stdout": "",
+        "stderr": "",
+        "binary_sha256": "6d3e9220b5e1bc3537617c37f34e50d9c17935891a5109e01de759643badacc1"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+          "-C",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4/go-backend",
+          "build",
+          "-o",
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-mobile-pack",
+          "./cmd/cat-mobile-pack"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.374,
+        "stdout": "",
+        "stderr": "",
+        "binary_sha256": "2ea01483a527df2b531f79f1ff46f009bc66710c47984008dfbf2c4938ea9201"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+          "-C",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4/go-backend",
+          "build",
+          "-o",
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-server",
+          "./cmd/cat-server"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.569,
+        "stdout": "",
+        "stderr": "",
+        "binary_sha256": "18e4c7fb85f99d7f617f6bba00657f7d776eb0ff1962b1da9c146b645482f58e"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+          "-C",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4/go-backend",
+          "build",
+          "-o",
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-qualify",
+          "./cmd/cat-qualify"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.435,
+        "stdout": "",
+        "stderr": "",
+        "binary_sha256": "fd308894c56d98270e734fb5aeddb975476db4aae054f754187d3a18b313aa1f"
+      }
+    ],
+    "baseline_content": "Embedded V1.3/b9189... only; rebuild after any reviewed source/pin/export/code transition.",
+    "graph_source_pin_runtime_edits": 0
+  },
+  "actual_cli_help": {
+    "kind": "v1-4-native-cli-help-v1",
+    "commands": [
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content",
+          "validate",
+          "--help"
+        ],
+        "exit_code": 1,
+        "help": "Usage of cat-content validate:\n  -check\n    \tcheck deterministic export freshness without writing\n  -kg string\n    \tfixture path for a standalone validator\n  -pack string\n    \tpack path for a standalone validator\n  -root string\n    \trepository source root (default \"..\")\nflag: help requested\n"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-rail",
+          "quick",
+          "--help"
+        ],
+        "exit_code": 1,
+        "help": "Usage of quick:\n  -audit-catalog string\n    \texact catalog to audit privately\n  -audit-out string\n    \texplicit native audit output\n  -candidate string\n    \texact native candidate input\n  -candidate-out string\n    \tgenerate source-bound candidate without approvals\n  -check\n    \trebuild unchanged baseline and check exact approved bytes\n  -expected-sha256 string\n    \texplicit reviewed output artifact pin for installation\n  -factual-review string\n    \tcomplete factual review\n  -final-factual-review string\n    \tfinal factual acceptance\n  -final-quality-review string\n    \tfinal quality acceptance\n  -installed-authority-out string\n    \tbuild draft installed-authority entry from current independently reviewed installed artifact; never write manifest or pin\n  -live-audit string\n    \tbound saved native audit\n  -proposal string\n    \texplicit saved proposal output\n  -quality-review string\n    \tcomplete independent quality review\n  -root string\n    \trepository root (default \"..\")\n  -source string\n    \tnative authored JSON; changed source needs version>1 and exact parent_source_sha256\n  -write\n    \tinstall only after bound native audit and final independent judgments\ncat-content-rail: flag: help requested\n"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-ops",
+          "rank",
+          "--help"
+        ],
+        "exit_code": 1,
+        "help": "Usage of cat-content-ops rank:\n  -analyst string\n    \tauthored analyst JSON\n  -baseline string\n    \tGit baseline commit/ref (default \"HEAD\")\n  -check\n    \tread-only check (default)\n  -dir string\n    \tcandidate/review/queue directory\n  -dossier string\n    \tdossier directory\n  -dossiers string\n    \treview dossier directory\n  -game string\n    \tcritique game filter\n  -ids string\n    \tcomma-separated exact IDs\n  -json\n    \tJSON output (default)\n  -out string\n    \toutput directory or JSON file\n  -pack-only\n    \trefuse graph mutation\n  -projection-audit string\n    \texact live projection audit\n  -reviews string\n    \tsubmission review artifact directory\n  -root string\n    \tlocal repository/source root (default \".\")\n  -status string\n    \tcritique status filter (default \"pending\")\n  -strict\n    \tfail on deterministic critique FAIL\n  -text\n    \tconcise content inventory delta totals\n  -verifier string\n    \tauthored verifier JSON\n  -write\n    \texplicitly write reviewed local files\ncat-content-ops: flag: help requested\n"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-ops",
+          "derive",
+          "--help"
+        ],
+        "exit_code": 1,
+        "help": "Usage of cat-content-ops derive:\n  -analyst string\n    \tauthored analyst JSON\n  -baseline string\n    \tGit baseline commit/ref (default \"HEAD\")\n  -check\n    \tread-only check (default)\n  -dir string\n    \tcandidate/review/queue directory\n  -dossier string\n    \tdossier directory\n  -dossiers string\n    \treview dossier directory\n  -game string\n    \tcritique game filter\n  -ids string\n    \tcomma-separated exact IDs\n  -json\n    \tJSON output (default)\n  -out string\n    \toutput directory or JSON file\n  -pack-only\n    \trefuse graph mutation\n  -projection-audit string\n    \texact live projection audit\n  -reviews string\n    \tsubmission review artifact directory\n  -root string\n    \tlocal repository/source root (default \".\")\n  -status string\n    \tcritique status filter (default \"pending\")\n  -strict\n    \tfail on deterministic critique FAIL\n  -text\n    \tconcise content inventory delta totals\n  -verifier string\n    \tauthored verifier JSON\n  -write\n    \texplicitly write reviewed local files\ncat-content-ops: flag: help requested\n"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-ops",
+          "delta",
+          "--help"
+        ],
+        "exit_code": 1,
+        "help": "Usage of cat-content-ops delta:\n  -analyst string\n    \tauthored analyst JSON\n  -baseline string\n    \tGit baseline commit/ref (default \"HEAD\")\n  -check\n    \tread-only check (default)\n  -dir string\n    \tcandidate/review/queue directory\n  -dossier string\n    \tdossier directory\n  -dossiers string\n    \treview dossier directory\n  -game string\n    \tcritique game filter\n  -ids string\n    \tcomma-separated exact IDs\n  -json\n    \tJSON output (default)\n  -out string\n    \toutput directory or JSON file\n  -pack-only\n    \trefuse graph mutation\n  -projection-audit string\n    \texact live projection audit\n  -reviews string\n    \tsubmission review artifact directory\n  -root string\n    \tlocal repository/source root (default \".\")\n  -status string\n    \tcritique status filter (default \"pending\")\n  -strict\n    \tfail on deterministic critique FAIL\n  -text\n    \tconcise content inventory delta totals\n  -verifier string\n    \tauthored verifier JSON\n  -write\n    \texplicitly write reviewed local files\ncat-content-ops: flag: help requested\n"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-mobile-pack",
+          "--help"
+        ],
+        "exit_code": 0,
+        "help": "Usage of /home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-mobile-pack:\n  -check\n    \tcompare public contract without writing\n  -fixture string\n    \tinput KG fixture\n  -out string\n    \toutput public app-pack\n  -root string\n    \trepository root (default \"..\")\n"
+      },
+      {
+        "argv": [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-qualify",
+          "parity",
+          "--help"
+        ],
+        "exit_code": 1,
+        "help": "{\"error\":\"flag: help requested\",\"ok\":false}\nUsage of parity:\n  -binary string\n    \tnative server replay executable (parity/replay only)\n  -concurrency int\n    \tbenchmark concurrency, 1..64 (default 1)\n  -flows int\n    \tbenchmark measured flows, 1..900 (default 200)\n  -input string\n    \tsource-bound JSON or .gz corpus for replay\n  -output string\n    \tcapture corpus output file\n  -reference string\n    \texplicit captured reference description\n  -report string\n    \taggregate qualification receipt file\n  -static-root string\n    \trelease static tree for smoke byte verification (default \"cat_de_roman_esti/web/static\")\n  -timeout duration\n    \twhole qualification timeout, at most 10m (default 2m0s)\n  -url string\n    \texplicit anonymous HTTP(S) origin\n  -warmup-flows int\n    \tbenchmark warmup flows, 0..100 (default 24)\n  -workload string\n    \tbenchmark creates or journeys (default \"journeys\")\n"
+      }
+    ]
+  },
+  "read_only_helper": {
+    "path": "/home/dobo/work/_temp/codex__content-v1-4/readiness/inspect_native_readiness.py",
+    "sha256": "5375f69d2e6d251e5e109ab70447316ae2f4a6ec1601416b1ad361884ef1c7a3",
+    "side_effects": "None: pathlib reads/hash assertions/JSONstdout only; no subprocess or writes; stops when baseline differs or source4 appears.",
+    "inert_source_for_reconstruction": "#!/usr/bin/env python3\n\"\"\"Read-only V1.4 baseline inspection and future command inventory.\n\nNo subprocess, output writes, candidate/proposal/review creation or installation.\nA command listing is not authorization to execute a later mutation.\n\"\"\"\nfrom pathlib import Path\nimport hashlib\nimport json\n\nROOT = Path(\"/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4\")\nTOOLS = Path(\"/home/dobo/work/_temp/codex__content-v1-4/readiness/bin\")\nEXPECTED = {\n    \"go-backend/internal/contentrails/sources/authored-v3.json\": \"56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc\",\n    \"go-backend/internal/contentrails/sources/installed-authorities.json\": \"8d9245f861bba03718213900984d2f2829d4d584d43bac701e5c3167ded623bf\",\n    \"cat_de_roman_esti/fixtures/kg_sample.json\": \"d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63\",\n    \"go-backend/internal/content/bundled.json\": \"b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f\",\n}\n\ndef main():\n    actual = {}\n    for path, expected in EXPECTED.items():\n        full = ROOT / path\n        if not full.is_file() or full.is_symlink():\n            raise SystemExit(\"STOP: baseline input missing/nonregular\")\n        actual[path] = hashlib.sha256(full.read_bytes()).hexdigest()\n        if actual[path] != expected:\n            raise SystemExit(\"STOP: baseline changed; refresh readiness after independent review\")\n    source4 = ROOT / \"go-backend/internal/contentrails/sources/authored-v4.json\"\n    if source4.exists():\n        raise SystemExit(\"STOP: source4 now exists; this is a preparation-only baseline helper\")\n    commands = [[str(TOOLS / \"cat-content\"), \"validate\", \"--root\", str(ROOT)],\n                [str(TOOLS / \"cat-content\"), \"export\", \"--root\", str(ROOT), \"--check\"],\n                [str(TOOLS / \"cat-content-rail\"), \"all\", \"--root\", str(ROOT), \"--check\"],\n                [str(TOOLS / \"cat-content-ops\"), \"rank\", \"--root\", str(ROOT), \"--check\"],\n                [str(TOOLS / \"cat-content-ops\"), \"derive\", \"--root\", str(ROOT), \"--check\"],\n                [str(TOOLS / \"cat-mobile-pack\"), \"--root\", str(ROOT), \"--check\"]]\n    print(json.dumps({\"baseline_hashes\": actual, \"source4_present\": False,\n                     \"required_source4_parent_sha256\": EXPECTED[\"go-backend/internal/contentrails/sources/authored-v3.json\"],\n                     \"readonly_commands_not_executed\": commands, \"native_actions_executed\": 0,\n                     \"gate\": \"Graph proposal/independent acceptance/applied actual hash/source4/raw/final reviews are not available or authorized by research.\"}, indent=2))\n\nif __name__ == \"__main__\":\n    main()\n"
+  },
+  "snapshot_ownership": {
+    "n_v29_time_units_secunda": {
+      "quick_snapshot": true,
+      "quick_authored_ids": [
+        "iq92_duration",
+        "pq92_associations_12"
+      ],
+      "world_concept": false,
+      "extension_books": []
+    },
+    "n_v29_time_units_minut": {
+      "quick_snapshot": true,
+      "quick_authored_ids": [
+        "iq92_duration",
+        "pq92_associations_12",
+        "pq92_session02_everyday_03"
+      ],
+      "world_concept": false,
+      "extension_books": []
+    },
+    "n_v24_time_day_ora": {
+      "quick_snapshot": true,
+      "quick_authored_ids": [
+        "iq92_duration",
+        "pq92_associations_02"
+      ],
+      "world_concept": false,
+      "extension_books": []
+    },
+    "n_v24_time_day_zi": {
+      "quick_snapshot": true,
+      "quick_authored_ids": [
+        "pq92_s03_associations_03"
+      ],
+      "world_concept": false,
+      "extension_books": []
+    },
+    "n_v24_time_day_ceas": {
+      "quick_snapshot": true,
+      "quick_authored_ids": [
+        "iq92_bathroom",
+        "pq92_associations_02",
+        "pq92_session02_everyday_03"
+      ],
+      "world_concept": false,
+      "extension_books": []
+    }
+  },
+  "baseline_stock": {
+    "quick_authored": 85,
+    "frozen_derived": 336,
+    "pack": 716,
+    "approved_pack": 709,
+    "pending_pack": 7,
+    "alchimie_authored_cores": 83,
+    "world_concepts": 251,
+    "world_recipes": 351,
+    "world_goals": 32,
+    "world_goal_audit_modes": 33,
+    "world_histories": 9,
+    "world_saved_prefixes": 1009,
+    "extensions_archived_core_records": 68,
+    "extensions_candidates": 49,
+    "extensions_installed_books": 27,
+    "extensions_additions": 49,
+    "reserve_source": "immutableV1"
+  },
+  "input_code_and_durable_evidence_sha256": {
+    "go-backend/internal/contentrails/source.go": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+    "go-backend/internal/contentrails/rail.go": "5076e3b45923d9ee7a5563d9c1fd2b84c6fae1db16fb2beb1efc9c6f3c3a0f55",
+    "go-backend/internal/contentrails/extensions.go": "c3c5166b6b6975128da9884c70921c7552ce83140575f5b5e90106dffa6c07af",
+    "go-backend/internal/contentrails/world.go": "caadad6c38f40563c97fbdae6b2698e29daa7db978296535a68298bbbcfaec8d",
+    "go-backend/internal/contentrails/installed.go": "d4f465ecb24754730f2e5e6e45a441ff5bbbc146ac9cc53c50824446992dbefd",
+    "go-backend/cmd/cat-content-rail/main.go": "66aa1433d6eda62c084fc656f8a03990708677639e54aa3ec4dc1c188f6636a8",
+    "go-backend/internal/httpgolden/golden.go": "883020aa7566a234c1a4eb2932e66d55b5a1ba01fee0a66fd479b8887f0f1802",
+    "go-backend/cmd/cat-qualify/main.go": "38aa41a38f51a6700d238085dd80845c5fff166b5b21a521cec5ca79ac8e6def",
+    "tests/content_history.py": "8405e743834f641ea60c9cf4cb556c4589bc704334515c1b70d8c44a54e3b318",
+    "tests/current_content.py": "2b93c6336b18f1d2f9c7506b0af5a65cb0f858054a5f18c56240d2679418835d",
+    "docs/reviews/v1-3-everyday-concepts/native-refresh-plan.md": "ca664fe4b9c6fb7dbcbabc7e56c28d5a7c722f5136201f0a76da217389a9724f",
+    "docs/reviews/v1-3-everyday-concepts/reference/capture-artifacts.json": "0e0c1cdbc96d402af9771706cea0a6e32a02502352eac79061ba3b319d308b6d",
+    "docs/reviews/v1-3-everyday-concepts/reference/history-current-reference-final.json": "2209a962dc82802ec4972cbe603909918ec5dd538722fa27124814cc370fae5c",
+    "docs/reviews/v1-4-time-links-and-predicates/toolchain-baseline.json": "e1292d0e3ab3e17bbc32d1416c46b811d392bc2aed3354d66597c6af6646014a"
+  },
+  "preserved_reference_producer_sha256": {
+    "docs/reviews/go-native-toolchain/archived-reference/capture_reference.py.txt": "a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc",
+    "go-backend/internal/contexto/testdata/generate_games.py": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513",
+    "go-backend/internal/graph/testdata/generate.py": "fe1b677dbc789b390c887be709de9d41e64cc3271c871e86fc47875349700c5b",
+    "go-backend/internal/alchimie/testdata/generate.py": "18dfac8404e29c38cf715d81e32fb37b3326294537fd00527480680784e8ef0a",
+    "go-backend/internal/catalog/testdata/generate_vectors.py": "7f7b86ea1b57daf34a588a0ffa2b0a3ce7b43faaf4f944502cfda0e7c7c74c82",
+    "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-generate.py.txt": "18dfac8404e29c38cf715d81e32fb37b3326294537fd00527480680784e8ef0a",
+    "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-graph-generate.py.txt": "fe1b677dbc789b390c887be709de9d41e64cc3271c871e86fc47875349700c5b",
+    "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-solutions.py.txt": "2f19d6957a04cbac7a9161a170e3c75cac8fdc21276bf27e9c121136ad60114e"
+  },
+  "current_and_historical_reference_sha256": {
+    "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+    "go-backend/internal/contexto/testdata/python_games.json": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078",
+    "go-backend/internal/lant/testdata/python_games.json": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+    "go-backend/internal/graph/testdata/python_graph.json": "fbdb4a5eca38b3127a7321fbebf5da93219691e7e27f74f5113c7a36b12b47b1",
+    "go-backend/internal/conexiuni/testdata/python-goldens.json": "e0aaef96a28c2a7d2487bb91e5dabbe93b63449c0dfa24920aa299edcb56f86e",
+    "go-backend/internal/alchimie/testdata/python_parity.json": "1066d21ff9884c5597cb3a08d1e2ab15ea56e1bc10aaa412f7cf42866fac7366",
+    "frontend/e2e/seeded-starts.json": "5644ab3b7ee583db6904858712e3872928d62aac2c667322153720e8f4dd31b3"
+  },
+  "integration_checklist": [
+    "Research is not selection or acceptance. Root resolves exact duration/device senses, recognition, normative forms, directions, strength estimates, duplicate/predicate/tombstone constraints and source access/license limits. Preserve both inherited fallback holds.",
+    "Bind exact selected revisions and graph importer proposal/module. Obtain complete independent factual and quality reviews before the supported guarded graph transaction. No placeholders or hand fixture edits. Capture all baseline sources/mirrors before mutation.",
+    "For Oră→Minut and Zi→Oră reverse hypotheses, verify exact absent direction and existing inverse record. Count a new directed arc separately from an already-known conversion fact; do not flip bidirectional or assume civil/daylight/calendar days are fixed24-hour durations. Minute→Second is an existing duplicate hold.",
+    "Recompute full affected graph/game impact: old normalized owners, all265 Cald targets/ranks/closeness/temperature/clues, mined eligibility and incoming floor, all123 Lanț profiles/captions/alternatives, all245 partitions,83 Alchimie cores/routes/par,85quick ratings and180terminal puzzles. Existing-node reverse arcs can shorten old paths; do not assume V1.3 outward-only preservation.",
+    "If ceasornic is independently accepted, bind it only to existing physical-device Ceas ID; preserve Oră/time-unit identities. Lemma synonym coverage and inflections are separate counts. Recheck every proposed normalized surface/owner and all current Ceas snapshot consumers; no new node or target approval follows from an alias.",
+    "Only after actual supported KG bytes are known, root authors source4 version4 parent exact source3 SHA56ef...; retain source1/2/3/archive bytes and authored definitions unless separately reviewed. Set world predecessor descriptors to exact current V1.3 raw candidate d3c141... and its corresponding raw reviews; predecessor/current-history guard must pass.",
+    "Native rank/derive, then fresh source4 raw quick/world/extensions candidates and complete independent raw reviews. Raw extensions retain68 archived core records/49candidate additions; expected current installed book27/49. Refresh all3KG-bound rails even though these5endpoint IDs are absent from current251world/27extension snapshots.",
+    "Build/audit/sign-stage quick/world sequentially, obtaining same-role initial finals immediately before each native guarded --write. Changes to sibling sources stale earlier audits. Extension proposal needs coherent full contentbuild.Load(root) and separately reviewed derived/quick source pins; stop on stale snapshots/pins, do not loosen validators.",
+    "Validate/export all8current sources, rebuild public mobile from source, update separately reviewed Python consumers and independently verify export. Rebuild embedded-content tools/server after source/pin/export changes. Preserve old corpus/vector bytes before fresh Django/reference capture with unchanged producer logic/random-ID normalization; inspect allcoverage/status/body deltas.",
+    "ForSources currently accepts only exact original/V1.2/V1.3 complete source maps. Unknown V1.4 correctly refuses before transport. Add a new reviewed capture/source-map entry only through independent capture review; retain Frozen(), exact full-map equality and Replay refusal. Refresh graph/Conexiuni/Alchimie/selector/browser references as affected, not only1207HTTP and60Contexto sequences.",
+    "Freeze actual final runtime/code/source/export, run fresh installed quick/world/extensions audits and same-role finals. Generate native CLI authority-entry drafts, separately adopt sequential source4 and strict metadata-only manifest/pin; exclude only those2files from runtime hash self-reference. Rebuild and check current4rails with reserveV1unchanged. Any covered source/code change invalidates audits/finals.",
+    "Extend history with independently pinned actual before/afterV1.4 finite inverses before existingV1.3/V1.2/V1 helpers; do not rehash old expectations, clear rejects, broad-normalize or deselect failures. Update only separately reviewed current snapshot values. Run required source/operators/export/mobile/current+historic references/native/shared race/vet/docs/whitespace/natural gameplay/privacy/save/bounds gates and independent assembled review before root-only green local landing. No push/deploy authorized."
+  ],
+  "command_inventory_not_executed": {
+    "readonly_now": [
+      [
+        "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content",
+        "validate",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4"
+      ],
+      [
+        "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content",
+        "export",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+        "--check"
+      ],
+      [
+        "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-rail",
+        "all",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+        "--check"
+      ]
+    ],
+    "later_root_only_after_graph_acceptance": {
+      "rank": [
+        "cat-content-ops",
+        "rank",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+        "--write"
+      ],
+      "derive": [
+        "cat-content-ops",
+        "derive",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+        "--write"
+      ],
+      "candidate": [
+        "cat-content-rail",
+        "RAIL",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4/go-backend/internal/contentrails/sources/authored-v4.json",
+        "--candidate-out",
+        "NEW_CURRENT_REVIEW_NATIVE_RAIL/candidate.json"
+      ],
+      "proposal": [
+        "cat-content-rail",
+        "RAIL",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+        "--source",
+        "ACTUAL_SOURCE4_PATH",
+        "--candidate",
+        "EXACT_CANDIDATE",
+        "--factual-review",
+        "EXACT_RAW_FACTUAL",
+        "--quality-review",
+        "EXACT_RAW_QUALITY",
+        "--proposal",
+        "NEW_PROPOSAL_OUTPUT"
+      ],
+      "audit": [
+        "cat-content-rail",
+        "RAIL",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+        "--source",
+        "ACTUAL_SOURCE4_PATH",
+        "--audit-catalog",
+        "EXACT_PROPOSAL",
+        "--audit-out",
+        "NEW_AUDIT_OUTPUT"
+      ],
+      "staging": [
+        "cat-content-rail",
+        "RAIL",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+        "--source",
+        "ACTUAL_SOURCE4_PATH",
+        "--candidate",
+        "EXACT_CANDIDATE",
+        "--factual-review",
+        "EXACT_RAW_FACTUAL",
+        "--quality-review",
+        "EXACT_RAW_QUALITY",
+        "--proposal",
+        "EXACT_PROPOSAL",
+        "--write",
+        "--live-audit",
+        "EXACT_CURRENT_PREAUDIT",
+        "--final-factual-review",
+        "SAME_ROLE_FINAL_FACTUAL",
+        "--final-quality-review",
+        "SAME_ROLE_FINAL_QUALITY",
+        "--expected-sha256",
+        "ACTUAL_REVIEWED_PROPOSAL_SHA"
+      ],
+      "authority_draft": "Same exact full inputs/current installed audit+finals+artifact SHA, separate --installed-authority-out NEW_DRAFT; never --write and never manifest/pin output."
+    }
+  },
+  "metavariable_note": "UPPERCASE operands are documentation-only role/path metavariables, not generated artifacts/hashes. Fill only after actual inputs and independent gates exist.",
+  "current_prerequisites_not_met": [
+    "Selected accepted graph/synonym proposal",
+    "Independent raw factual/quality graph acceptance",
+    "Actual post-transaction KG hash",
+    "Source4/current raw candidates/reviews/proposals/audits/finals"
+  ],
+  "premature_matrix_or_mutation_commands_run": 0,
+  "pool_proposal_candidate_fixture_runtime_pin_review_acceptance_edits": 0,
+  "new_installed_data": 0,
+  "preparation_verification": {
+    "read_only_inspector_exit_code": 0,
+    "inspector_result": {
+      "baseline_hashes": {
+        "go-backend/internal/contentrails/sources/authored-v3.json": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+        "go-backend/internal/contentrails/sources/installed-authorities.json": "8d9245f861bba03718213900984d2f2829d4d584d43bac701e5c3167ded623bf",
+        "cat_de_roman_esti/fixtures/kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+        "go-backend/internal/content/bundled.json": "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f"
+      },
+      "source4_present": false,
+      "required_source4_parent_sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+      "readonly_commands_not_executed": [
+        [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content",
+          "validate",
+          "--root",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4"
+        ],
+        [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content",
+          "export",
+          "--root",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+          "--check"
+        ],
+        [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-rail",
+          "all",
+          "--root",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+          "--check"
+        ],
+        [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-ops",
+          "rank",
+          "--root",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+          "--check"
+        ],
+        [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-ops",
+          "derive",
+          "--root",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+          "--check"
+        ],
+        [
+          "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-mobile-pack",
+          "--root",
+          "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4",
+          "--check"
+        ]
+      ],
+      "native_actions_executed": 0,
+      "gate": "Graph proposal/independent acceptance/applied actual hash/source4/raw/final reviews are not available or authorized by research."
+    },
+    "all_registered_v1_v2_v3_archive_file_digests_match_descriptors": {
+      "docs/reviews/v1-testing-release/content/recipes/candidates.json": "adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366",
+      "docs/reviews/v1-testing-release/content/recipes/factual-review.json": "bbf106d08e7ea887d0a19c0a876dfa0c3a49547e0b02c8ce8c43656d7d7926b9",
+      "docs/reviews/v1-testing-release/content/recipes/quality-review.json": "f08e80ddecf9c247b311e9b7d2063506aba3dd99c1f9de39b56b11b30f711f09",
+      "docs/reviews/v1-testing-release/content/quick/candidate.json": "efa071d9c8c17899cb123fb0a3cdb8c67741ec38982b45df1599d915be5d73f0",
+      "docs/reviews/v1-testing-release/content/quick/factual-review.json": "7383ca84896278f146b3b4a1c1f82166545878ab417e7d6f328c5baf8e862773",
+      "docs/reviews/v1-testing-release/content/quick/quality-review.json": "244239884a69575c62245e982dcb04ff7fa01c99697d4b9008600ed06f49b8b4",
+      "docs/reviews/v1-testing-release/content/alchimie-reserve-proposal.json": "bcf35794a43f437f78d420b34a0e4ae44e1accd76c7eddde46a4bdf9e33728e6",
+      "docs/reviews/v1-testing-release/content/selection-reserve-proposal.json": "e02b1a624fb7df8edfbcf507a8c9d7bcfb39510cba771d9b3d660430b2360de4",
+      "docs/reviews/v1-testing-release/content/selection-reserve-quality-review.json": "54980fe74ac512b431eed9c8f3e3390c53e40a16a3efc1ad7fd207a528178758",
+      "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/candidate.json": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4",
+      "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/factual-review.json": "501e4ea97ce564e9fb1e764978d7c8a628c7f5774cc2531b7ee117555f5e6e1f",
+      "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+      "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/quality-review.json": "37ed31a2bda9e9a32494736a81f2c51d901e44195852a28b9da26976ba7d38c1",
+      "docs/reviews/v1-2-content-growth/native/world/candidate.json": "8c6f7f0405c0a14a9432673b768df292ba8eefdb96f4f6d5d7e5594b517b70e9",
+      "docs/reviews/v1-2-content-growth/native/world/factual-review.json": "5df5b762183db0b973f8b974841c60825e4ae031fc8babec1f84b4e01684b9c7",
+      "docs/reviews/v1-2-content-growth/native/world/quality-review.json": "dacbb4066dd326523d4c866f6e49dfbd74384aea5c994a3e82a0de738e04c043"
+    },
+    "candidate_review_install_or_matrix_actions": 0
+  }
+}
