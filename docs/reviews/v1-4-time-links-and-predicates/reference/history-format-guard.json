@@ -1,0 +1,19 @@
+{
+  "394passed_test_execution_semantics_unchanged": true,
+  "files": {
+    "tests/content_history.py": "b4405def962ef86d8b99dc4efae8f5459e0662822a3ab8aa89e657dfbf023ae8",
+    "tests/current_content.py": "6fe13e78616826b4e5ccc8f66b6d4f43dd7d82c048b944a4a2e07a7f1238d509",
+    "tests/test_v1_3_content_history.py": "644a70e5e81c09259a55d4a72ad1510aa73b6c5e10e1e2936a36c30e5299a06f",
+    "tests/test_v1_4_content_history.py": "680aef936fe2ec008b9cdf57b6441ddcdd55d3838989dd1314bd352291a2b35d"
+  },
+  "final_log": "docs/reviews/v1-4-time-links-and-predicates/reference/ruff-final.log.gz",
+  "final_ruff_exit_code": 0,
+  "initial_cache_failure": "First lint attempt could not create worktree cache under sandbox. Uncached checks completed; no rule disabled.",
+  "initial_log": "docs/reviews/v1-4-time-links-and-predicates/reference/ruff-initial-line-wrap.log.gz",
+  "initial_ruff_exit_code": 1,
+  "intermediate_log": "docs/reviews/v1-4-time-links-and-predicates/reference/ruff-intermediate-four-long-literals.log.gz",
+  "intermediate_ruff_exit_code": 1,
+  "kind": "v1-4-final-history-format-only-guard-v1",
+  "old_and_new_AST_exact": true,
+  "reason": "Initial uncached Ruff check found23new E501 line-wrap errors. Formatter limited to new V1.4 helper block and new test module; four remaining long literal entries received explicit parentheses. Every formatting stage asserted complete AST equality. Existing source/test scopes remain unchanged."
+}

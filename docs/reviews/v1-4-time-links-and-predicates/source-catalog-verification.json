@@ -1,0 +1,60 @@
+[
+  {
+    "name": "native-validate",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content",
+      "validate",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "output": "Native sources GREEN\n"
+  },
+  {
+    "name": "native-export-check",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content",
+      "export",
+      "--root",
+      ".",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": "Native private content current\n"
+  },
+  {
+    "name": "native-rank",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-ops",
+      "rank",
+      "--root",
+      ".",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": "{\n \"artifact\": \"board_rankings_v37.json\",\n \"counts\": {\n  \"approved\": 709,\n  \"by_game\": {\n   \"alchimie\": 83,\n   \"conexiuni\": 245,\n   \"contexto\": 265,\n   \"lant\": 123\n  },\n  \"eligible_by_game\": {\n   \"alchimie\": 68,\n   \"conexiuni\": 83,\n   \"contexto\": 255,\n   \"lant\": 121\n  },\n  \"pilot_eligible\": 527,\n  \"total\": 716\n },\n \"format_drift\": false,\n \"semantic_match\": true,\n \"write\": false\n}\n"
+  },
+  {
+    "name": "native-derive",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-content-ops",
+      "derive",
+      "--root",
+      ".",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": "{\n \"artifact\": \"derived_catalog_v38.json\",\n \"counts\": {\n  \"by_game\": {\n   \"intrusul\": 183,\n   \"perechi\": 153\n  },\n  \"sources_by_game\": {\n   \"intrusul\": 66,\n   \"perechi\": 51\n  },\n  \"starter_by_game\": {\n   \"intrusul\": 24,\n   \"perechi\": 26\n  },\n  \"total\": 336\n },\n \"format_drift\": false,\n \"semantic_match\": true,\n \"write\": false\n}\n"
+  },
+  {
+    "name": "native-mobile",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/readiness/bin/cat-mobile-pack",
+      "--root",
+      ".",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": "public mobile app-pack current\n"
+  }
+]

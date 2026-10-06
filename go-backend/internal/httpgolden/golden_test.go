@@ -2,13 +2,18 @@ package httpgolden
 
 import (
 	"bytes"
+	"compress/gzip"
 	"context"
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
+	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"reflect"
 	"strings"
 	"testing"
@@ -69,7 +74,7 @@ func TestHistoricalFrozenCorpusAndExactReviewedSelection(t *testing.T) {
 		t.Fatal("V1.3 independent corpus lacks its own exact source/capture identity")
 	}
 	selected, err = ForSources(latest.Sources)
-	if err != nil || !reflect.DeepEqual(selected, latest) || !reflect.DeepEqual(latest.Sources, testData(t).Sources) {
+	if err != nil || !reflect.DeepEqual(selected, latest) || !reflect.DeepEqual(latest.Sources, historicalV13Data(t).Sources) {
 		t.Fatal("current V1.3 source set selected different expected responses", err)
 	}
 }
@@ -231,5 +236,47 @@ func TestLocalTransportByteAndDeadlineBounds(t *testing.T) {
 	cancel()
 	if _, err := bounded.Do(ctx, Request{Method: "GET", Path: "/"}); err == nil {
 		t.Fatal("cancelled offline request accepted")
+	}
+}
+
+func historicalV13Data(t *testing.T) *content.Content {
+	t.Helper()
+	raw, err := os.ReadFile(filepath.Join("../../..", "docs/reviews/v1-4-time-links-and-predicates/reference/historical-v1-3-bundled.json.gz"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	z, err := gzip.NewReader(bytes.NewReader(raw))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer z.Close()
+	b, err := io.ReadAll(io.LimitReader(z, (16<<20)+1))
+	if err != nil || len(b) > 16<<20 || fmt.Sprintf("%x", sha256.Sum256(b)) != "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f" {
+		t.Fatal("historical V1.3 exact bytes refused", err)
+	}
+	c, err := content.Decode(b)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return c
+}
+
+func TestV14IndependentCorpusRetainsExactSourceScope(t *testing.T) {
+	c, err := reviewedV14()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if V14SHA256 != "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a" || len(c.Cases) != 1207 || len(c.Sources) != 8 || !strings.Contains(c.Reference, "prospective V1.4 reviewed sources at baseline46641d6f9963f92941d12f5955e5eb40a2d8fb56") || !reflect.DeepEqual(c.Sources, testData(t).Sources) {
+		t.Fatal("V1.4 independent corpus source/capture identity drift")
+	}
+	selected, err := ForSources(c.Sources)
+	if err != nil || !reflect.DeepEqual(selected, c) {
+		t.Fatal("V1.4 selected different independent responses", err)
+	}
+	for _, read := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13} {
+		old, err := read()
+		if err != nil || reflect.DeepEqual(old.Sources, c.Sources) {
+			t.Fatal("V1.4 replaced historical source scope", err)
+		}
 	}
 }

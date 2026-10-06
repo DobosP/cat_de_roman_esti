@@ -1,0 +1,96 @@
+{
+  "artifacts": {
+    "derived_sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+    "kg_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "pack_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "quick_sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+    "rank_sha256": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+    "reserve_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "baseline_revision": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "files": [
+    {
+      "after_sha256": "ccb575e94fa2615eb0712b6852b7e8936048457a84b67b2762d9d83da769c44b",
+      "before_sha256": "632e639009592318d05e03bafe26456b8a9124fe5eee6333fd375c21be1cfc53",
+      "literal_substitutions": [
+        {
+          "after": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+          "before": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+          "count": 1
+        },
+        {
+          "after": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+          "before": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+          "count": 1
+        }
+      ],
+      "path": "go-backend/internal/contentbuild/build.go",
+      "reverse_substitution_recovers_exact_baseline_bytes": true
+    },
+    {
+      "after_sha256": "5b0797723812b4b0ff35550c5d524e6306a32ad4cc895436c49e71cc1ed97b63",
+      "before_sha256": "4cdc541a824019d95aeb9482e2b81eb2178bed9afd3486d0bb023f8dfcfd242b",
+      "literal_substitutions": [
+        {
+          "after": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+          "before": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+          "count": 1
+        }
+      ],
+      "path": "cat_de_roman_esti/wordgames/derived_catalog.py",
+      "reverse_substitution_recovers_exact_baseline_bytes": true
+    },
+    {
+      "after_sha256": "68b8ad75d1b9fbe0563585811e0b8bb9f7272e3847909cab883384958ad71ded",
+      "before_sha256": "5893b66d890b54f32417bc2a96b5eab18ccf249314eec999d5af1c60ada7625e",
+      "literal_substitutions": [
+        {
+          "after": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+          "before": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+          "count": 1
+        }
+      ],
+      "path": "cat_de_roman_esti/wordgames/quick_catalog.py",
+      "reverse_substitution_recovers_exact_baseline_bytes": true
+    }
+  ],
+  "graph_prospective_impact_sha256": "a8d5bade1c59d8754b423a234797163aafcc736215926bcd2fe3ecd0840fc81f",
+  "graph_quality_sha256": "3c2f8d9b1b66411741a254d26d028cd6b6dfb4972537163ab37a24784ff6e3e3",
+  "kind": "v1-4-consumer-pin-independent-quality-review-v1",
+  "method_script_sha256": "7c13948fe262914384583453cd2d2e35c491c8c1bdadc1b3d3355979343ab8a1",
+  "preserved_semantics": {
+    "all_current_quick_ratings_independently_recalculated": true,
+    "all_nonpin_code_bytes_and_constraints_exact_baseline": true,
+    "all_ranking_derived_quick_rows_and_order_exact_baseline": true,
+    "derived_payload_rows": 336,
+    "derived_rows_Render_sha256": "b78f069479f99741bf5187db638eebbc476eccf2d914c4a48b072b895446dc29",
+    "quick_authored_and_rated_rows": 85,
+    "quick_current_node_snapshots": 322,
+    "quick_rated_rows_Render_sha256": "27a6d5dce9e24b0766ff4d47cfe9cfb1cf666b07e4db56bd53c4f2d19a154262",
+    "ranking_rows": 716,
+    "ranking_rows_Render_sha256": "1eec683a1b9d1d71299b60cb923edde4775ba39cecd6dd162cc25f28564c5c94",
+    "reserve_and_pack_bytes_exact_baseline": true,
+    "reserve_pin_exact_unchanged": true
+  },
+  "quick_staging_audit_sha256": "70f917a6927f7f8c5a9fae75906b6c2beb0bef2f890dd089225f9bae8da849ff",
+  "quick_staging_evidence_sha256": "cfbd334f8b1a8368866f7772462a7490f87d80eb8be9f03c96623cc7457f224e",
+  "rationale": "The exact actual substitutions reverse losslessly to all three46641 baseline files and bind current generated derive250594… and native signed Quicka21b3c… bytes. All716 ranking records,336derived payload records and85Quick authored/rated identities/payloads/order remain exact baseline; all85 ratings were freshly independently recalculated on current KG and all322 snapshots match. Only supported graph metadata heads change in rank/derive. The reserve and raw game pack bytes/pin remain exact. Both independent raw/staging Quick reviewer roles remain bound to saved proposal/audit. No source implementation, constraint or validation rule changed beyond the four digest literals. Accept this narrow consumer pin update for coherent native export. build.go changes the audited runtime manifest, so earlier staging audits remain historical; fresh installed audits/finals against final runtime/source freeze are mandatory before installed authority/assembled release.",
+  "reviewer": "/root/graph_quality",
+  "role": "quality",
+  "scope": "Actual four literal substitutions in three consumer files only; authority is the already independently reviewed supported derive and signed Quick artifacts. No rule/logic/threshold/session/exclusion/dependency changes or installed/assembled acceptance.",
+  "signed_quick_prerequisite_reviews": [
+    {
+      "raw_review_sha256": "f52c1bbc4022c830c41c0b3cbecb5be20b50d144f2788503374e9a4edf55f35c",
+      "reviewer": "/root/graph_quality",
+      "role": "quality",
+      "staging_final_sha256": "c3aa51e23d61ef4b1433f1b20cd2bf1b593d1efc8ec91d1cfd6ab2ee358c36a5"
+    },
+    {
+      "raw_review_sha256": "9e72009a865d5da6636496899e203a3262a25c3c36fed161a5cb2f20fe78bc3f",
+      "reviewer": "/root/content_rail",
+      "role": "factual",
+      "staging_final_sha256": "baa5c63bd0561d6624fd0292f6f77c6f84ea12c5992a4a2f03de53dc2a9c1380"
+    }
+  ],
+  "verdict": "accept"
+}

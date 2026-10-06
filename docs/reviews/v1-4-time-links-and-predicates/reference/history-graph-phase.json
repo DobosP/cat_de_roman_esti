@@ -1,0 +1,127 @@
+{
+  "author": "/root/synonym_scout",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "captures_executed": 0,
+  "checked_on": "2026-10-06",
+  "complete_actual_artifact_restorations": {
+    "board_rankings_v37.json": {
+      "complete_46641d6_bytes_equal": true,
+      "current_sha256": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+      "old_v1_3_baseline_pin_preserved": true,
+      "older_v1_3_reconstruction_hash": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+      "restored_46641d6_sha256": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b"
+    },
+    "cat_mobile_app_pack_contract.json": {
+      "complete_46641d6_bytes_equal": true,
+      "current_sha256": "2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8",
+      "old_v1_3_baseline_pin_preserved": true,
+      "older_v1_3_reconstruction_hash": "8735d304a7d9734a53c03307c034093c910c1a931e73c40df346ed25700f1438",
+      "restored_46641d6_sha256": "f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94"
+    },
+    "derived_catalog_v38.json": {
+      "complete_46641d6_bytes_equal": true,
+      "current_sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "old_v1_3_baseline_pin_preserved": true,
+      "older_v1_3_reconstruction_hash": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+      "restored_46641d6_sha256": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9"
+    },
+    "games_pack.json": {
+      "complete_46641d6_bytes_equal": true,
+      "current_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "old_v1_3_baseline_pin_preserved": true,
+      "older_v1_3_reconstruction_hash": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "restored_46641d6_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+    },
+    "kg_sample.json": {
+      "complete_46641d6_bytes_equal": true,
+      "current_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "old_v1_3_baseline_pin_preserved": true,
+      "older_v1_3_reconstruction_hash": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+      "restored_46641d6_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63"
+    }
+  },
+  "current_content_snapshot_writes": 0,
+  "current_expected_corpus_writes": 0,
+  "exact_diff": {
+    "gzip_sha256": "ec3762d86b73c8054a568ed42df31d86b779d107af95431b9ca7f64497574bc6",
+    "path": "docs/reviews/v1-4-time-links-and-predicates/reference/history-graph-phase.diff.gz",
+    "uncompressed_sha256": "c8eec75489f913d2166ddcb0cdd695cd04f15ae8589b3c96b2a16a98c669c644"
+  },
+  "graph_installation_sha256": "13f792c55e1cb5662b9fa4a8d4e86f54a987443ccc6a089abb177be9734cc5eb",
+  "independent_review_acceptances_authored": 0,
+  "kind": "v1-4-exact-history-graph-phase-implementation-v1",
+  "new_test_file": {
+    "path": "tests/test_v1_4_content_history.py",
+    "sha256": "f3d9e3c15f661703d7fe2a6cd66a032bbdfc78ca226fdb4f6acb399d9cce3708"
+  },
+  "next_action": "Bind exact three signed catalogs after root staging coherence; then root signal for complete export/rebuilt server before independent expected captures and final current-content updates.",
+  "pending_catalog_scope": "Only known historical catalog hashes are accepted. Unknown/incomplete/future V1.4 catalog bytes refuse until actual signed reviewed artifact and staging bindings are sealed.",
+  "pending_processes": 0,
+  "reference_preservation_sha256": "16beac7ad4d7c1d360350d0c74d7e56399836e40e2316c133f80a244aad23b19",
+  "role": "implementation author; no independent approval",
+  "scope": "Exact V1.4 graph/header/mobile inverse and narrow historical adapters only. Current expected snapshot remains V1.3 until coherent export.",
+  "serving_fixture_runtime_source_pin_authority_writes": 0,
+  "source_AST_and_literal_preservation": {
+    "tests/content_history.py": {
+      "after_sha256": "ad8782ee61c961e87babeae9ba4185a653ce726da26d27fa56c5961bf496b081",
+      "all_old_test_assertion_functions_and_literals_AST_exact": true,
+      "all_old_top_level_assignments_AST_exact": 75,
+      "allowed_adapter_changes": [
+        "before_v1_3_artifact adds one strict peel call",
+        "before_v1_3_catalog adds one strict peel call"
+      ],
+      "before_sha256": "8405e743834f641ea60c9cf4cb556c4589bc704334515c1b70d8c44a54e3b318",
+      "old_definition_count": 85,
+      "preserved_inert_before_source": {
+        "gzip_sha256": "6b6e15df93bb8d94af6defef5623cf6f7046635000b73736a84b4c74859b4495",
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/baseline-v1-3-content_history.py.txt.gz",
+        "uncompressed_sha256": "8405e743834f641ea60c9cf4cb556c4589bc704334515c1b70d8c44a54e3b318"
+      }
+    },
+    "tests/current_content.py": {
+      "after_sha256": "2b93c6336b18f1d2f9c7506b0af5a65cb0f858054a5f18c56240d2679418835d",
+      "all_old_test_assertion_functions_and_literals_AST_exact": true,
+      "all_old_top_level_assignments_AST_exact": 3,
+      "allowed_adapter_changes": [],
+      "before_sha256": "2b93c6336b18f1d2f9c7506b0af5a65cb0f858054a5f18c56240d2679418835d",
+      "old_definition_count": 2,
+      "preserved_inert_before_source": {
+        "gzip_sha256": "d78096376cb815274db60c1839d339217fd9848327b46e8dfcb5840565881860",
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/baseline-v1-3-current_content.py.txt.gz",
+        "uncompressed_sha256": "2b93c6336b18f1d2f9c7506b0af5a65cb0f858054a5f18c56240d2679418835d"
+      }
+    },
+    "tests/test_v1_3_content_history.py": {
+      "after_sha256": "644a70e5e81c09259a55d4a72ad1510aa73b6c5e10e1e2936a36c30e5299a06f",
+      "all_old_test_assertion_functions_and_literals_AST_exact": true,
+      "all_old_top_level_assignments_AST_exact": 5,
+      "allowed_adapter_changes": [
+        "current() dispatches only exact V1.4 artifact/catalog peel"
+      ],
+      "before_sha256": "3afe294b861753d44e55887c37afb4a32abdfeee486e913846232f08b9439ad2",
+      "old_definition_count": 13,
+      "preserved_inert_before_source": {
+        "gzip_sha256": "5b4e32e86fd839f11047939298e7e280fdfb293637b5f79a1c0a485b2977b4c3",
+        "path": "docs/reviews/v1-4-time-links-and-predicates/reference/baseline-v1-3-test_v1_3_content_history.py.txt.gz",
+        "uncompressed_sha256": "3afe294b861753d44e55887c37afb4a32abdfeee486e913846232f08b9439ad2"
+      }
+    }
+  },
+  "test": {
+    "argv": [
+      "PYTHONPATH=.",
+      "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_v1_4_content_history.py"
+    ],
+    "cases_passed": 49,
+    "exit_code": 0,
+    "log_gzip_sha256": "ca0f65fe0ee55e0cea88221449d0d15e6ddafe9c15639707bdb652f6c3d36f4f",
+    "log_path": "docs/reviews/v1-4-time-links-and-predicates/reference/history-graph-tests.log.gz",
+    "log_uncompressed_sha256": "34885ca5b1ff763fc403eb9bf08eedee994f23728fbc41b590539facb3650164"
+  },
+  "valid_until": "Signed catalog/runtime/reference inputs or these test helpers change; then refresh affected phase evidence.",
+  "whitespace_exit_code": 0
+}

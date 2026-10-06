@@ -1,0 +1,29 @@
+[
+  {
+    "name": "backend-race",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+      "-C",
+      "go-backend",
+      "test",
+      "-race",
+      "./..."
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 480.185,
+    "output": "?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-browser-plan\t[no test files]\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-content\t[no test files]\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-content-ops\t[no test files]\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-content-rail\t3.774s\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-doc-check\t[no test files]\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-hop\t[no test files]\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-mobile-pack\t[no test files]\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-qualify\t[no test files]\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-roedu\t[no test files]\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-server\t1.025s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts\t1.028s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie\t14.183s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie_explore\t8.096s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/apppack\t1.028s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/browserplan\t5.715s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/catalog\t2.158s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/conexiuni\t11.567s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/content\t5.566s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild\t47.743s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/contentops\t56.737s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails\t402.579s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/contexto\t14.921s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/doccheck\t1.012s\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi\t[no test files]\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/graph\t2.627s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/hopcli\t3.030s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi\t17.023s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden\t24.296s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/intrusul\t1.881s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/lant\t14.541s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/mobilepack\t2.653s\n?   \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/pack\t[no test files]\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/perechi\t2.770s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom\t1.012s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/roeduclient\t1.027s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/session\t1.015s\nok  \tgithub.com/DobosP/cat_de_roman_esti/go-backend/internal/strictjson\t1.009s\n"
+  },
+  {
+    "name": "backend-vet",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+      "-C",
+      "go-backend",
+      "vet",
+      "./..."
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.042,
+    "output": ""
+  }
+]

@@ -1,0 +1,81 @@
+"""Task-owned wrapper: execute unchanged retained Django producers into scratch."""
+from pathlib import Path
+import hashlib,json,os,runpy,sys
+REPO=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4')
+ROOT=Path(sys.argv[2]) if len(sys.argv)>2 else REPO
+OUT=Path(sys.argv[3]) if len(sys.argv)>3 else Path('/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/outputs')
+OUT.mkdir(parents=True,exist_ok=True)
+mode=sys.argv[1]
+os.environ['DJANGO_SETTINGS_MODULE']='cat_de_roman_esti.web.settings'
+os.environ['CAT_ACCOUNTS_ENABLED']='0'
+os.environ['CAT_DEBUG']='1'
+os.environ['CAT_KG_FIXTURE']=str(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')
+sys.path.insert(0,str(ROOT))
+import django
+django.setup()
+from django.test import Client
+requests=[];sessions={}
+def norm(value):
+ if isinstance(value,dict):
+  return {k:('<session>' if k=='game_id' else norm(v)) for k,v in value.items()}
+ if isinstance(value,list):return [norm(v) for v in value]
+ if isinstance(value,str):
+  for session,label in sessions.items():value=value.replace(session,label)
+ return value
+original_generic=Client.generic
+def traced(self,method,path,data='',content_type='application/octet-stream',secure=False,**kwargs):
+ response=original_generic(self,method,path,data,content_type,secure,**kwargs)
+ try:body=response.json()
+ except ValueError:body={'non_json_sha256':hashlib.sha256(response.content).hexdigest()}
+ if isinstance(body,dict) and isinstance(body.get('game_id'),str):sessions.setdefault(body['game_id'],f'<session:{len(sessions)+1}>')
+ if isinstance(data,bytes):data=data.decode()
+ try:requestbody=json.loads(data) if data else None
+ except (ValueError,TypeError):requestbody=str(data)
+ requests.append({'method':method,'path':norm(path),'request_body':norm(requestbody),'content_type':content_type,'status':response.status_code,'body':norm(body)})
+ return response
+Client.generic=traced
+if mode=='alchimie':
+ source=REPO/'go-backend/internal/alchimie/testdata/generate.py'
+ original=source.read_bytes();needle='out = Path(__file__).with_name("python_parity.json")'
+ replacement='out = Path('+repr(str(OUT/'alchimie-python_parity.json'))+')'
+ assert original.decode().count(needle)==1
+ prepared=original.decode().replace(needle,replacement)
+ assert prepared.replace(replacement,needle).encode()==original
+ (OUT/'prepared-alchimie.py.txt').write_text(prepared)
+ exec(compile(prepared,str(source),'exec'),{'__name__':'__main__','__file__':str(ROOT/'go-backend/internal/alchimie/testdata/generate.py')})
+elif mode=='browser':
+ source=REPO/'frontend/e2e/solutions.py'
+ namespace=runpy.run_path(str(source),run_name='fallback_reference_producer')
+ games=('alchimie','intrusul','perechi','conexiuni','contexto','lant')
+ plans={}
+ for game in games:
+  plan=namespace['solution'](game);gid=list(sessions)[-1];plans[game]=plan
+  client=Client()
+  for action in plan['steps']:
+   replay=client.post(f"/api/wordgames/{game}/games/{gid}/"+action['action'],action['payload'],content_type='application/json')
+   assert replay.status_code==200,(game,action['action'],replay.status_code)
+  terminal=client.get(f"/api/wordgames/{game}/games/{gid}")
+  assert terminal.status_code==200 and terminal.json()['won'],(game,'not won',terminal.json())
+  practice=namespace['solution'](game);pgid=list(sessions)[-1]
+  preview=client.post(f"/api/wordgames/{game}/games/{pgid}/"+practice['practice']['action'],practice['practice']['payload'],content_type='application/json')
+  assert preview.status_code==200,(game,'practice status',preview.status_code)
+  import importlib
+  module=importlib.import_module(f'cat_de_roman_esti.wordgames.{game}')
+  module.store.delete(gid);module.store.delete(pgid)
+ starts={game:plans[game]['initial'] for game in games}
+ (OUT/'browser-seeded-starts.json').write_text(json.dumps(starts,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+ (OUT/'browser-winning-plans.json').write_text(json.dumps(plans,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+ print('browser captures',len(plans),'winning actions',sum(len(p['steps']) for p in plans.values()),flush=True)
+elif mode=='graph':
+ source=REPO/'go-backend/internal/graph/testdata/generate.py'
+ original=source.read_bytes();needle='Path(__file__).with_name("python_graph.json").write_text('
+ replacement='Path('+repr(str(OUT/'graph-python_graph.json'))+').write_text('
+ assert original.decode().count(needle)==1
+ prepared=original.decode().replace(needle,replacement)
+ assert prepared.replace(replacement,needle).encode()==original
+ (OUT/'prepared-graph.py.txt').write_text(prepared)
+ exec(compile(prepared,str(source),'exec'),{'__name__':'__main__','__file__':str(source)})
+ print('graph captured 19 texts, 65 ratios, six targets and two complete salience orders',flush=True)
+else:raise ValueError(mode)
+(OUT/(mode+'-http-responses.json')).write_text(json.dumps({'schema':1,'cases':requests},ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+print('full Django HTTP records',mode,len(requests),'statuses',sorted({p['status'] for p in requests}),flush=True)

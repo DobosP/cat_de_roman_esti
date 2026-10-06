@@ -1,0 +1,92 @@
+{
+  "contexto_checks": {
+    "actual_second_identity_win": {
+      "attempts": 2,
+      "score": 940
+    },
+    "all_inputs_one_attempt_nonwinning": true,
+    "category": "viata_de_roman",
+    "difficulty": "usor",
+    "four_unselected_forms_absent_exact_resolution": true,
+    "inputs": [
+      "ceasornic",
+      "CEASORNICE",
+      "Ceas"
+    ],
+    "ordinary_service_create": true,
+    "preserved_cold_feedback": {
+      "closeness": 8,
+      "rank": 2158
+    },
+    "same_canonical_owner": "n_v24_time_day_ceas",
+    "seed": 23,
+    "selected_existing_target_verified_by_actual_Usa_win": true,
+    "target_field_withheld_create_guess_resume": true
+  },
+  "current_service_files": [
+    {
+      "path": "go-backend/internal/contexto/service.go",
+      "sha256": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4"
+    },
+    {
+      "path": "go-backend/internal/lant/service.go",
+      "sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90"
+    },
+    {
+      "path": "go-backend/internal/graph/service.go",
+      "sha256": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e"
+    }
+  ],
+  "graph_quality_review_sha256": "3c2f8d9b1b66411741a254d26d028cd6b6dfb4972537163ab37a24784ff6e3e3",
+  "kind": "v1-4-focused-gameplay-test-independent-quality-review-v1",
+  "lant_checks": {
+    "all_optimal_scores": 1000,
+    "controlled_service_sessions": true,
+    "directed_shortest_distance_matches_each_path": true,
+    "no_unreviewed_numeric_caption": true,
+    "paths": [
+      {
+        "moves": 1,
+        "start": "Oră",
+        "target": "Minut"
+      },
+      {
+        "moves": 1,
+        "start": "Zi",
+        "target": "Oră"
+      },
+      {
+        "moves": 3,
+        "start": "Zi",
+        "target": "Secundă"
+      }
+    ],
+    "public_short_caption": "legătură directă",
+    "real_move_and_get_apis": true,
+    "terminal_moves_and_win_resume_exact": true,
+    "won_only_at_last_move": true
+  },
+  "limits": [
+    "Static implementation review only; execution is deferred until a coherent sealed Source4 export exists.",
+    "Contexto assertions cover the target field, identity, score and selected-game input behavior; exhaustive nested-payload privacy remains in broader current HTTP gates.",
+    "Absent exact aliases do not promise absence of generic fuzzy corrections. Existing typo machinery can correct article forms without granting them exact alias/source approval.",
+    "The two1hop Lanț sessions are controlled legality/score tests and are outside ordinary usor2–3hop selection. They claim no new curated round, endpoint/target eligibility or ordinary selection.",
+    "Lanț endpoints are intentionally public; this test does not independently inspect every private route/corridor field. Broader service/HTTP privacy tests remain mandatory."
+  ],
+  "proposal_sha256": "6cae1819c10164f5181501eb86de75b32592af035f4198e642a43f63f798085d",
+  "rationale": "The assertions match independently reproduced prototype behavior and existing unchanged native service scoring/resolution semantics. The new clock family maps to one familiar owner and preserves the cold result rather than inventing warmth; natural creation and eventual Ușă win confirm the existing target. Controlled duration paths exercise real directed Move/Get behavior, exact shortest hops and optimal scoring while holding numeric public captions outside scope. No runtime mechanics or bounds are edited by these tests.",
+  "reviewer": "/root/graph_quality",
+  "role": "quality",
+  "test_files": [
+    {
+      "path": "go-backend/internal/contexto/content_v1_4_test.go",
+      "sha256": "34f61e83e627a46d71a6927f6acd62d54d954c0be3a1bca2cd5dc96add8d8969"
+    },
+    {
+      "path": "go-backend/internal/lant/content_v1_4_test.go",
+      "sha256": "ad788b8b4e360cc523243aad53065ecabd4261910919dacca341b3977710adc1"
+    }
+  ],
+  "test_files_excluded_from_native_runtime_hashes": true,
+  "verdict": "accept_implementation_for_focused_gate"
+}

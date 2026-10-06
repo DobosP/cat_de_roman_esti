@@ -100,52 +100,52 @@ class CurrentContentSnapshot:
 
 
 CURRENT_CONTENT = CurrentContentSnapshot(
-    build_version='fixture-v1-3-everyday-concepts',
+    build_version='fixture-v1-4-time-links',
     artifact_sha256=_frozen({
         'cat_de_roman_esti/fixtures/kg_sample.json': (
-            'd035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63'
+            '0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6'
         ),
         'cat_de_roman_esti/fixtures/games_pack.json': (
             'e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8'
         ),
         'cat_de_roman_esti/fixtures/board_rankings_v37.json': (
-            'e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b'
+            '58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef'
         ),
         'cat_de_roman_esti/fixtures/derived_catalog_v38.json': (
-            'b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9'
+            '25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01'
         ),
         'cat_de_roman_esti/fixtures/quick_games_v92.json': (
-            '99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f'
+            'a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609'
         ),
         'tests/fixtures/cat_mobile_app_pack_contract.json': (
-            'f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94'
+            '2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8'
         ),
     }),
     payload_sha256=_frozen({
         'ranking_rows': '4c86e3531b6199b87d2672db01d44123cd6d11fe56e0a33e78eaec8f3f3201e0',
         'frozen_derived_boards': '993e4e04834d2ab446ec28dd593177e071b11b881e49f941f677e0eaf66d01d4',
         'kg_nodes_without_aliases': (
-            'a81a780ffba72bb77400d52f83d3de80115364c3708d465513e2efe103b59c4e'
+            '50845eaeb21fc29d968914cbf23d71465c8d6894f867281dcc5481031f97a87c'
         ),
-        'kg_edges': '38e78e4dea242d7b319d31b55158d90fb827570c66023ba5f24eaba09aa492a7',
+        'kg_edges': 'da70ba04ab4f8863775e97eb179bca549d60fe16e9b8d9eee7ff29f6b96492c7',
         'kg_puzzles': '3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc',
         'contexto_profile': 'b34856651cdc5205cba1a57407a13dc0e95a0bd844ef82b3eca81ec703e37313',
         'alchimie_closure_profile': (
             'e3b695dcd41ce465cfb46274217441bc0dfd10f19dde0bf9d64d94d603c5289e'
         ),
         # Public projection and full fixture/API hashes bind distinct contracts.
-        'mobile_content': 'a00fb1308f215ea8e554df5fb3f60e7d12a2031c075280099454fb7299d48db9',
-        'fixture_content': 'c48dc37f32c8a08495e24a4b0b6ac773c7027dc102f4be236881c8425e7b1b42',
+        'mobile_content': '9b8e304038ae5750d15eb804145dae4428f8fb8289d15873660669865234a0b3',
+        'fixture_content': 'cbd1592e1103e0b0fb7d6945ae4440b50280fa29ae88c91e40a7dab864bd695d',
     }),
     kg_counts=_frozen({
         'nodes': 2419,
-        'edges': 9471,
-        'aliases': 8675,
+        'edges': 9473,
+        'aliases': 8677,
         'puzzles': 180,
     }),
     mobile_counts=_frozen({
         'nodes': 2419,
-        'edges': 9471,
+        'edges': 9473,
         'puzzles': 180,
     }),
     pack_counts=_frozen({

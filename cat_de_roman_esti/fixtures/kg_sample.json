@@ -1,11 +1,11 @@
 {
   "meta": {
-    "build_version": "fixture-v1-3-everyday-concepts",
+    "build_version": "fixture-v1-4-time-links",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "V1.3: three reviewed everyday concepts, twelve grammatical forms and twelve one-way links.",
+    "note": "V1.4: one qualified clock synonym family (two forms) and two directed duration-unit links.",
     "counts": {
       "nodes": 2419,
-      "edges": 9471,
+      "edges": 9473,
       "puzzles": 180,
       "by_category": {
         "arta_cultura": 128,
@@ -33770,7 +33770,9 @@
       "aliases": [
         "ceasul",
         "ceasuri",
-        "ceasurile"
+        "ceasurile",
+        "ceasornic",
+        "ceasornice"
       ]
     },
     {
@@ -33781,7 +33783,7 @@
       "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Oră.",
       "salience": 0.94,
       "difficulty_tier": "easy",
-      "degree": 8,
+      "degree": 10,
       "aliases": [
         "ore",
         "orele"
@@ -33795,7 +33797,7 @@
       "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Zi.",
       "salience": 0.94,
       "difficulty_tier": "easy",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "ziua",
         "zile",
@@ -34638,7 +34640,7 @@
       "description": "Unitate de timp egală cu șaizeci de secunde.",
       "salience": 0.94,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "minutul",
         "minute",
@@ -132370,6 +132372,26 @@
       "relation": "used_to_close",
       "label_ro": "poate fi folosit la închiderea compartimentelor unui ghiozdan",
       "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8813",
+      "src_id": "n_v24_time_day_ora",
+      "dst_id": "n_v29_time_units_minut",
+      "relation": "has_part_time",
+      "label_ro": "ca unitate de durată, are șaizeci de minute",
+      "strength": 0.99,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8814",
+      "src_id": "n_v24_time_day_zi",
+      "dst_id": "n_v24_time_day_ora",
+      "relation": "has_part_time",
+      "label_ro": "ca unitate de durată, are douăzeci și patru de ore",
+      "strength": 0.99,
       "is_distractor": 0,
       "bidirectional": 0
     }

@@ -1,0 +1,244 @@
+{
+  "schema": "v1-4-independent-assembled-preflight-v1",
+  "reviewer": "/root/assembled_review",
+  "role": "assembled_preflight",
+  "checked_on": "2026-10-06",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "task_head_observed": "db186ecc04ebb69fbebac4311e72d97f7895fd65",
+  "valid_until": "Any bound input or runtime/reference/authority change; this is a transitional preflight, never final acceptance.",
+  "verdict": "continue_guarded_integration_final_acceptance_withheld",
+  "authorship_independence": "Reviewer authored no proposal, pool, module, source, generated fixture, runtime, test, reference helper, pin or authority file. Only this read-only preflight receipt is authored by this reviewer.",
+  "scope": "Actual current worktree vs exact locally landed V1.3, graph delta, source ancestry/archive immutability, complete authored downstream payload equality, independent raw/staging reviewer bindings, signed stage equality, consumer substitutions, coherent eight-source export, unchanged serving constraints and known incomplete boundaries. Fulfilled native gates were not redundantly rerun.",
+  "counts": {
+    "concepts_before": 2419,
+    "concepts_after": 2419,
+    "links_before": 9471,
+    "links_after": 9473,
+    "stored_aliases_before": 8675,
+    "stored_aliases_after": 8677,
+    "terminal_puzzles": 180,
+    "new_shared_concepts": 0,
+    "new_world_concepts": 0,
+    "new_qualified_synonym_families": 1,
+    "new_exact_forms": 2,
+    "new_directed_links": 2,
+    "new_conversion_facts": 0,
+    "new_curated_rounds": 0,
+    "new_hidden_target_approvals": 0
+  },
+  "preservation": {
+    "all9471_old_edge_records_and_order_exact": true,
+    "all180_terminal_puzzles_exact": true,
+    "all2419_node_ids_and_order_exact": true,
+    "node_field_changes": {
+      "n_v24_time_day_ceas": {
+        "aliases": {
+          "before": [
+            "ceasul",
+            "ceasuri",
+            "ceasurile"
+          ],
+          "after": [
+            "ceasul",
+            "ceasuri",
+            "ceasurile",
+            "ceasornic",
+            "ceasornice"
+          ]
+        }
+      },
+      "n_v24_time_day_ora": {
+        "degree": {
+          "before": 8,
+          "after": 10
+        }
+      },
+      "n_v24_time_day_zi": {
+        "degree": {
+          "before": 9,
+          "after": 10
+        }
+      },
+      "n_v29_time_units_minut": {
+        "degree": {
+          "before": 4,
+          "after": 5
+        }
+      }
+    },
+    "full_pack_and_reserve_bytes_exact": true,
+    "ranking_rows_exact": 716,
+    "frozen_derived_rows_exact": 336,
+    "quick_authored_rows_and_ratings_exact": 85,
+    "quick_current_node_snapshots": 322,
+    "world_concepts_exact": 251,
+    "world_recipes_exact": 351,
+    "world_goals_exact": 32,
+    "world_unlocks_exact": 12,
+    "world_compatible_histories_exact": 9,
+    "extension_live_book_records_exact": 27,
+    "production_code_only_four_reviewed_pin_literals_plus_generated_digest": [
+      "cat_de_roman_esti/wordgames/derived_catalog.py",
+      "cat_de_roman_esti/wordgames/quick_catalog.py",
+      "go-backend/internal/content/digest.go",
+      "go-backend/internal/contentbuild/build.go"
+    ],
+    "rubric_bytes_exact": true,
+    "privacy_session_transport_restore_and_mining_implementations_unchanged": true,
+    "shared_main_clean_at_baseline": true
+  },
+  "source4": {
+    "sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "parent_source3_sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+    "all_authored_definitions_and_legacy_source_descriptors_exact_source3": true,
+    "legacy_archives_retained_and_independently_hash_verified": 16,
+    "v1_3_world_candidate_and_raw_review_archives_added": 3,
+    "all_unique_chain_archives_independently_hash_verified": 19
+  },
+  "staging_rails": {
+    "quick": {
+      "candidate_sha256": "302f42db4596e8568bd4423c090bc795bef270c641c99ce6ce996d35e691f6da",
+      "proposal_equals_installed_artifact_sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "staging_audit_sha256": "70f917a6927f7f8c5a9fae75906b6c2beb0bef2f890dd089225f9bae8da849ff",
+      "independent_roles": {
+        "factual": {
+          "reviewer": "/root/content_rail",
+          "raw_sha256": "9e72009a865d5da6636496899e203a3262a25c3c36fed161a5cb2f20fe78bc3f",
+          "staging_final_sha256": "baa5c63bd0561d6624fd0292f6f77c6f84ea12c5992a4a2f03de53dc2a9c1380"
+        },
+        "quality": {
+          "reviewer": "/root/graph_quality",
+          "raw_sha256": "f52c1bbc4022c830c41c0b3cbecb5be20b50d144f2788503374e9a4edf55f35c",
+          "staging_final_sha256": "c3aa51e23d61ef4b1433f1b20cd2bf1b593d1efc8ec91d1cfd6ab2ee358c36a5"
+        }
+      },
+      "runtime_inventory": 107,
+      "expected_staging_runtime_changes_requiring_new_installed_audit": [
+        "go-backend/internal/content/bundled.json",
+        "go-backend/internal/content/digest.go",
+        "go-backend/internal/contentbuild/build.go"
+      ]
+    },
+    "world": {
+      "candidate_sha256": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc",
+      "proposal_equals_installed_artifact_sha256": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+      "staging_audit_sha256": "3b7722b1796950a733bd277fb5b0e0c442414bcd98459bd5a054a5558dffda3f",
+      "independent_roles": {
+        "factual": {
+          "reviewer": "/root/content_rail",
+          "raw_sha256": "48a6cfcd0ad80a82f248b3cc532b724dba88da8059fdab763c5a5a61f4ac63a1",
+          "staging_final_sha256": "210f2b0f2d536cbbeae860f649da32d90e559ff2d4d9571a836105183a3da03d"
+        },
+        "quality": {
+          "reviewer": "/root/graph_quality",
+          "raw_sha256": "32f65cc95cd9d169bba1019d85ab545eaa70be6e17decca0d1fce0d80f3a2240",
+          "staging_final_sha256": "40dba2d7dccbe1fc987c5ab586ef4fee7a0d9eb4aff3ea1e05dc01e1c66328fb"
+        }
+      },
+      "runtime_inventory": 107,
+      "expected_staging_runtime_changes_requiring_new_installed_audit": [
+        "go-backend/internal/content/bundled.json",
+        "go-backend/internal/content/digest.go",
+        "go-backend/internal/contentbuild/build.go"
+      ]
+    },
+    "extensions": {
+      "candidate_sha256": "83b4a02f2c51db7539672306002eced3b8b497ebb6879c651a8ebc9a59352550",
+      "proposal_equals_installed_artifact_sha256": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+      "staging_audit_sha256": "cd4401471b181190199f7968e144182af7b4a4ae705ea8f8631d5bf1fa0aec17",
+      "independent_roles": {
+        "factual": {
+          "reviewer": "/root/content_rail",
+          "raw_sha256": "1f443f8e42fb7e8f8e91390cc3f63d0a5ad697c8b7069f10561d99d86cbf53ca",
+          "staging_final_sha256": "5baf7a43c4a653537b836da426f14b16e1f53486fd4cd0df2d1b4a7732a2898e"
+        },
+        "quality": {
+          "reviewer": "/root/graph_quality",
+          "raw_sha256": "d5a0421ab18b48ada4246e282034bee98d1c21cd879d3bb68cf9883c9039bdcc",
+          "staging_final_sha256": "a12a26a085cad8f06f3a79a1e767516c839c6dd20b05a992de7f1f4f8dc9286e"
+        }
+      },
+      "runtime_inventory": 107,
+      "expected_staging_runtime_changes_requiring_new_installed_audit": [
+        "go-backend/internal/content/bundled.json",
+        "go-backend/internal/content/digest.go"
+      ]
+    }
+  },
+  "export": {
+    "bundle_sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "bytes": 7238892,
+    "all8_source_hashes_match_actual_files": true,
+    "sources": {
+      "alchimie_discovery_world_v92.json": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+      "alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+      "board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+      "derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    },
+    "fresh_postexport_installed_audit_acceptance": false
+  },
+  "pool": {
+    "leads": 6,
+    "selected_exact_revisions": [
+      {
+        "id": "v1-4-time-link-2",
+        "revision": 3,
+        "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-time-link-2-r3.json",
+        "sha256": "cd5c649e9b63a94a4293903442d65fc40b12a455cb9e3ea0c778b5988e8c87d9"
+      },
+      {
+        "id": "v1-4-time-link-3",
+        "revision": 3,
+        "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-time-link-3-r3.json",
+        "sha256": "2d9588836af4d95d374ac67c7a1c13d6b69c1e1d86f24e254c9da6e2816ad678"
+      },
+      {
+        "id": "v1-4-lexical-ceasornic",
+        "revision": 2,
+        "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-lexical-ceasornic-r2.json",
+        "sha256": "c4c049a6412f6ccfd3111c8434d83e0be91fb925ddd4a4a9900467ca7a1ac37c"
+      }
+    ],
+    "states": {
+      "held": 3,
+      "selected_for_refinement": 3
+    },
+    "four_extra_ceasornic_article_case_forms_unselected": true,
+    "inherited_forced_Societate_Secunda_and_mixed_Personalitati_holds_open": true,
+    "aliases_not_counted_as_concepts_or_new_rounds": true,
+    "public_numeric_lant_caption_approval": false,
+    "human_enjoyment_evidence": false
+  },
+  "material_implementation_defects_identified": [],
+  "required_before_final_assembled_review": [
+    {
+      "id": "current_installed_authority",
+      "blocking_for_landing": true,
+      "reason": "Current authority still pins Source3. Freeze final runtime/export/references, run fresh installed audits for all3 affected rails, obtain same-role new finals, build native authority entries and append exact Source4 ancestry without rewriting previous chain; allfour current checks must pass."
+    },
+    {
+      "id": "current_independent_references_and_history",
+      "blocking_for_landing": true,
+      "reason": "Current native reference corpora still bind V1.3 and before_v1_4_catalog intentionally refuses signed new catalogs. Complete strict supported V1.4 inverse/capture updates preserving all prior assertions/archives and independently review actual resulting captures/selector bindings."
+    },
+    {
+      "id": "integrated_gates_and_frozen_revision",
+      "blocking_for_landing": true,
+      "reason": "Full appropriate native/shared race/vet, focused added gameplay tests, source/export/Python exact, rank/derive/mobile/authority, HTTP/privacy/history/smoke/docs/whitespace and any triggered frontend gates need complete durable receipts against the final frozen revision before a fresh assembled judgment."
+    },
+    {
+      "id": "current_documentation_checkpoint",
+      "blocking_for_landing": true,
+      "reason": "STATUS still lists old Quick/world/extensions pins and describes native source/export as pending; README, TASK_BRIEF, ADR phase and native/staging-installation-progress receipt retain older transition states. Update current truth and phase after checks; retain pre-install receipts as explicit history instead of rebinding old judgments."
+    },
+    {
+      "id": "report_and_next_wave",
+      "blocking_for_landing": true,
+      "reason": "Final report must distinguish one qualified synonym family/two forms/two directed links from zero concepts/conversion facts/curated rounds/target approvals; mark selected pool entries integrated only at real green completion, keep holds and no human-enjoyment claims. Next sequential version follows actual independent acceptance/local landing and preserved toolchain cleanup."
+    }
+  ]
+}

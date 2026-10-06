@@ -1,0 +1,222 @@
+"""Generate private differential vectors from the pinned Python reference implementation."""
+
+import hashlib
+import json
+import os
+import random
+import sys
+from pathlib import Path
+
+
+def main():
+    ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4')
+    sys.path.insert(0, str(ROOT))
+    os.environ["DJANGO_SETTINGS_MODULE"] = "cat_de_roman_esti.web.settings"
+    os.environ["CAT_ACCOUNTS_ENABLED"] = "0"
+    os.environ["CAT_KG_FIXTURE"] = str(ROOT / "cat_de_roman_esti/fixtures/kg_sample.json")
+    import django
+
+    django.setup()
+    from django.test import Client
+
+    from cat_de_roman_esti.wordgames import alchimie as A
+    from cat_de_roman_esti.wordgames import alchimie_explore as E
+    from cat_de_roman_esti.wordgames.discovery_world import get_world
+    from cat_de_roman_esti.wordgames.packs import get_pack
+
+    def project(p):
+        return {
+            "recipes": [
+                {"pair": list(k), "results": list(v)} for k, v in sorted(p.recipes.items())
+            ],
+            "routes": [
+                [{"pair": list(k), "results": list(v)} for k, v in route] for route in p.routes
+            ],
+            "par": p.par,
+            "candidate_quality": [list(x) for x in p.candidate_quality],
+        }
+
+    def normalize(x):
+        if isinstance(x, dict):
+            return {k: "<session>" if k == "game_id" else normalize(v) for k, v in x.items()}
+        if isinstance(x, list):
+            return [normalize(v) for v in x]
+        return x
+
+    def digest(x):
+        return hashlib.sha256(
+            json.dumps(
+                normalize(x), ensure_ascii=False, sort_keys=True, separators=(",", ":")
+            ).encode()
+        ).hexdigest()
+
+    result = {
+        "schema": 1,
+        "fixture_sha256": hashlib.sha256(
+            (ROOT / "cat_de_roman_esti/fixtures/kg_sample.json").read_bytes()
+        ).hexdigest(),
+        "curated": [],
+        "mined": [],
+        "challenge_journeys": [],
+        "explore": [],
+        "restores": [],
+    }
+    for item in get_pack().pool("alchimie"):
+        seeds = list(item.payload["seeds"])
+        target = item.payload["target"]
+        p = A._build_playable_recipe_projection(seeds, target, item.category)
+        result["curated"].append(
+            {
+                "id": item.id,
+                "seeds": seeds,
+                "target": target,
+                "category": item.category,
+                "projection": project(p) if p else None,
+            }
+        )
+    print("curated", len(result["curated"]), flush=True)
+    for seed in range(6):
+        difficulty = ("usor", "normal", "greu")[seed % 3]
+        g = A._build_session(random.Random(seed), difficulty=difficulty)
+        result["mined"].append(
+            {
+                "seed": seed,
+                "difficulty": difficulty,
+                "category": g.category,
+                "seeds": g.seeds,
+                "target": g.target,
+                "recipes": [
+                    {"pair": list(k), "results": list(v)} for k, v in sorted(g.recipes.items())
+                ],
+                "routes": [
+                    [{"pair": list(k), "results": list(v)} for k, v in route] for route in g.routes
+                ],
+                "par": g.target_depth,
+                "state": A._state_payload("<session>", g),
+            }
+        )
+        print("mined", seed, g.category, flush=True)
+    client = Client()
+    for seed in (0, 11, 37):
+        created = client.post(f"/api/wordgames/alchimie/games?seed={seed}").json()
+        gid = created["game_id"]
+        game = A.store.get(gid)
+        steps = [{"action": "create", "seed": seed, "hash": digest(created)}]
+        dry = [
+            p
+            for p in __import__("itertools").combinations(sorted(game.owned), 2)
+            if not game.recipes.get(p)
+        ]
+        for p in dry[:2]:
+            v = client.post(
+                f"/api/wordgames/alchimie/games/{gid}/combine",
+                {"a": p[0], "b": p[1]},
+                content_type="application/json",
+            ).json()
+            steps.append({"action": "combine", "a": p[0], "b": p[1], "hash": digest(v)})
+            v = client.post(
+                f"/api/wordgames/alchimie/games/{gid}/combine",
+                {"a": p[1], "b": p[0]},
+                content_type="application/json",
+            ).json()
+            steps.append({"action": "combine", "a": p[1], "b": p[0], "hash": digest(v)})
+        if len(dry) >= 2:
+            v = client.post(f"/api/wordgames/alchimie/games/{gid}/hint").json()
+            steps.append({"action": "hint", "hash": digest(v)})
+        for p in A._minimum_projected_plan(set(game.owned), game.target, game.recipes):
+            v = client.post(
+                f"/api/wordgames/alchimie/games/{gid}/combine",
+                {"a": p[0], "b": p[1]},
+                content_type="application/json",
+            ).json()
+            steps.append({"action": "combine", "a": p[0], "b": p[1], "hash": digest(v)})
+        v = client.post(
+            f"/api/wordgames/alchimie/games/{gid}/combine",
+            {"a": "invalid", "b": "invalid"},
+            content_type="application/json",
+        ).json()
+        steps.append({"action": "combine", "a": "invalid", "b": "invalid", "hash": digest(v)})
+        v = client.post(f"/api/wordgames/alchimie/games/{gid}/reset").json()
+        steps.append({"action": "reset", "hash": digest(v)})
+        result["challenge_journeys"].append(steps)
+        A.store.delete(gid)
+    w = get_world()
+    goal = next(iter(w.goals))
+    v = client.post(
+        "/api/alchimie/explore", {"goal_id": goal}, content_type="application/json"
+    ).json()
+    gid = v["game_id"]
+    steps = [{"action": "create", "goal": goal, "hash": digest(v)}]
+    step = 0
+    while not v["complete"]:
+        if step % 17 == 0:
+            for _ in range(2):
+                v = client.post(f"/api/alchimie/explore/{gid}/hint").json()
+                steps.append({"action": "hint", "hash": digest(v)})
+        s = E.store.get(gid)
+        p = E._useful_pair(s)
+        assert p
+        v = client.post(
+            f"/api/alchimie/explore/{gid}/combine",
+            {"a": p[1], "b": p[0]},
+            content_type="application/json",
+        ).json()
+        steps.append({"action": "combine", "a": p[1], "b": p[0], "hash": digest(v)})
+        step += 1
+        if step % 30 == 0:
+            restored = client.post(
+                "/api/alchimie/explore",
+                {"progress": v["progress"], "goal_id": goal},
+                content_type="application/json",
+            ).json()
+            result["restores"].append(
+                {"progress": v["progress"], "goal": goal, "hash": digest(restored)}
+            )
+            E.store.delete(restored["game_id"])
+    v = client.post(f"/api/alchimie/explore/{gid}/hint").json()
+    steps.append({"action": "hint", "hash": digest(v)})
+    result["explore"] = steps
+    E.store.delete(gid)
+    for version in w.compatible_versions.values():
+        mechanics = version.mechanics.model_dump()
+        owned = set(mechanics["starters"])
+        crafted = set()
+        saved = []
+        while True:
+            before = len(crafted)
+            for r in mechanics["recipes"]:
+                p = r["pair"]
+                out = r["result"]
+                if set(p) <= owned and out not in owned:
+                    owned.add(out)
+                    crafted.add(out)
+                    saved.append(p)
+                    for u in mechanics["unlocks"]:
+                        if len(crafted) >= u["after"]:
+                            owned.update(u["concepts"])
+            if before == len(crafted):
+                break
+        progress = {"world_id": w.id, "recipe_hash": version.recipe_hash, "discoveries": saved}
+        v = client.post(
+            "/api/alchimie/explore", {"progress": progress}, content_type="application/json"
+        ).json()
+        assert "inventory" in v
+        result["restores"].append({"progress": progress, "hash": digest(v)})
+        E.store.delete(v["game_id"])
+    out = Path('/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/outputs/python_parity.json')
+    out.write_text(
+        json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+    )
+    print(
+        "written",
+        out.stat().st_size,
+        "explore crafts",
+        step,
+        "restores",
+        len(result["restores"]),
+        flush=True,
+    )
+
+
+if __name__ == "__main__":
+    main()

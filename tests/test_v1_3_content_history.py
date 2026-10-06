@@ -33,7 +33,10 @@ def current(filename: str) -> dict:
     directory = "tests/fixtures" if filename.startswith("cat_mobile") else (
         "cat_de_roman_esti/fixtures"
     )
-    return json.loads((ROOT / directory / filename).read_bytes())
+    latest = json.loads((ROOT / directory / filename).read_bytes())
+    if filename in history._V1_4_CATALOG_BASELINE:
+        return history.before_v1_4_catalog(latest, filename)
+    return history.before_v1_4_artifact(latest, filename)
 
 
 def digest(value: dict, filename: str) -> str:

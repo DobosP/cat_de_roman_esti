@@ -1,0 +1,27 @@
+[
+  {
+    "name": "shared-race",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+      "-C",
+      "shared-go/authcore",
+      "test",
+      "-race",
+      "./..."
+    ],
+    "exit_code": 0,
+    "output": "ok  \tgithub.com/DobosP/cat_de_roman_esti/shared-go/authcore\t8.671s\n"
+  },
+  {
+    "name": "shared-vet",
+    "argv": [
+      "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+      "-C",
+      "shared-go/authcore",
+      "vet",
+      "./..."
+    ],
+    "exit_code": 0,
+    "output": ""
+  }
+]

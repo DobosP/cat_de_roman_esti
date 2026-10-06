@@ -1,0 +1,84 @@
+{
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "checked_on": "2026-10-06",
+  "consumer_pin_review": {
+    "path": "docs/reviews/v1-4-time-links-and-predicates/consumer-pin-review.json",
+    "sha256": "2d747d59c19fea961c1b6d38728e0930b1b469df8db5ac52c4ac817b6d845558"
+  },
+  "extension_preaudit": {
+    "path": "docs/reviews/v1-4-time-links-and-predicates/native/extensions/preinstall-audit.json",
+    "sha256": "cd4401471b181190199f7968e144182af7b4a4ae705ea8f8631d5bf1fa0aec17"
+  },
+  "extension_proposal": {
+    "path": "docs/reviews/v1-4-time-links-and-predicates/native/extensions/proposal.json",
+    "sha256": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7"
+  },
+  "guard_correction": "Native Quick write exit0 succeeded. Root post-write verification mistakenly expected a nonexistent tests/fixtures Quick mirror; canonical-only guard corrected and exact installed bytes confirmed without a repeated write.",
+  "native_source": {
+    "path": "go-backend/internal/contentrails/sources/authored-v4.json",
+    "sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1"
+  },
+  "required_next": "Signed Extensions write; native source/export plus independent Python byte check; strict history/current capture review; frozen runtime fresh installed audits and same-role finals; strict current four-rail authority; full applicable integrated gates and assembled independent review before local landing.",
+  "schema": "v1-4-native-staging-progress-v1",
+  "stages": {
+    "quick": {
+      "canonical_artifact": {
+        "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+        "sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+      },
+      "native_write": {
+        "exit_code": 0,
+        "log": {
+          "path": "docs/reviews/v1-4-time-links-and-predicates/logs/quick-write.log.gz",
+          "sha256": "5ca080d5ecbbe1e5b705e9ec4d5a9b07d4a1bc425e25a8faa779ef2fc101515f"
+        }
+      },
+      "proposal": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quick/proposal.json",
+        "sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+      },
+      "staging_audit": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quick/preinstall-audit.json",
+        "sha256": "70f917a6927f7f8c5a9fae75906b6c2beb0bef2f890dd089225f9bae8da849ff"
+      },
+      "staging_final_factual": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quick/final-factual-review.json",
+        "sha256": "baa5c63bd0561d6624fd0292f6f77c6f84ea12c5992a4a2f03de53dc2a9c1380"
+      },
+      "staging_final_quality": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/quick/final-quality-review.json",
+        "sha256": "c3aa51e23d61ef4b1433f1b20cd2bf1b593d1efc8ec91d1cfd6ab2ee358c36a5"
+      }
+    },
+    "world": {
+      "canonical_artifact": {
+        "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+        "sha256": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef"
+      },
+      "native_write": {
+        "exit_code": 0,
+        "log": {
+          "path": "docs/reviews/v1-4-time-links-and-predicates/logs/world-write.log.gz",
+          "sha256": "90c6fbf0983988fc9ac86c7c1d97a78acce47808f04c2047886104559ff09740"
+        }
+      },
+      "proposal": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/proposal.json",
+        "sha256": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef"
+      },
+      "staging_audit": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/preinstall-audit.json",
+        "sha256": "3b7722b1796950a733bd277fb5b0e0c442414bcd98459bd5a054a5558dffda3f"
+      },
+      "staging_final_factual": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/final-factual-review.json",
+        "sha256": "210f2b0f2d536cbbeae860f649da32d90e559ff2d4d9571a836105183a3da03d"
+      },
+      "staging_final_quality": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/final-quality-review.json",
+        "sha256": "40dba2d7dccbe1fc987c5ab586ef4fee7a0d9eb4aff3ea1e05dc01e1c66328fb"
+      }
+    }
+  },
+  "status": "Quick and World signed staging installed; Extensions reviews pending; no current V1.4 export/installed authority/full gates/landing yet"
+}

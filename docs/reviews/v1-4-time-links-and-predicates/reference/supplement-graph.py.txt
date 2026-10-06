@@ -1,0 +1,21 @@
+"""Independent V1.4 graph supplement: same original Python target-row AST; old8targets retained."""
+from pathlib import Path
+import ast,copy,hashlib,json,os,sys
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4')
+OUT=Path('/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/outputs')
+sys.path.insert(0,str(ROOT))
+from cat_de_roman_esti.wordgames.service import get_service
+svc=get_service();source=ROOT/'go-backend/internal/graph/testdata/generate.py'
+original=source.read_text();tree=ast.parse(original)
+document=next(n.value for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='document' for t in n.targets))
+expr=next(v for k,v in zip(document.keys,document.values) if isinstance(k,ast.Constant) and k.value=='targets')
+row_code=compile(ast.fix_missing_locations(ast.Expression(expr.elt)),str(source),'eval')
+old=json.loads((ROOT/'go-backend/internal/graph/testdata/python_graph.json').read_bytes());base=json.loads((OUT/'graph-python_graph.json').read_bytes());assert len(base['targets'])==6
+missing=[r['id'] for r in old['targets'] if r['id'] not in {r['id'] for r in base['targets']}];assert missing==['n_v2via_gospodarie_rurala','n_v4muz_refren']
+rows=[eval(row_code,{'svc':svc,'t':t}) for t in missing]
+for row in base['targets']:assert eval(row_code,{'svc':svc,'t':row['id']})==row
+result=copy.deepcopy(base);result['targets']+=rows;assert len(result['targets'])==8
+assert {r['id'] for r in old['targets']}=={r['id'] for r in result['targets']}
+assert result['targets'][:6]==base['targets'] and all(result[k]==base[k] for k in base if k!='targets')
+raw=(json.dumps(result,ensure_ascii=False,separators=(',',':'))+'\n').encode();(OUT/'graph-python_graph-supplemented.json').write_bytes(raw)
+print('Eight original+historical graph target rows',hashlib.sha256(raw).hexdigest())

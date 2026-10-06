@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-06 — V1.3 reviewed/landed locally082ba99; required gates GREEN; production anonymous V1.0.1.
+Last verified: 2026-10-06 — V1.4 installed Source4/all required gates GREEN in isolated task; independent assembled review/local landing pending; production anonymous V1.0.1.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -46,7 +46,7 @@ Last verified: 2026-10-06 — V1.3 reviewed/landed locally082ba99; required gate
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Task KG: `fixture-v1-3-everyday-concepts`, 2419 nodes/9471 links/8675 forms/180 exact puzzles.
+Task KG: `fixture-v1-4-time-links`, 2419 nodes/9473 links/8677 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration remains **251 concepts/351 recipes/147 discoveries**, 96 supplies, 12 tiers,
@@ -57,16 +57,16 @@ sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 bo
 Unrevealed answers, recipe maps and routes stay private.
 ## Current artifact pins
 
-- alchimie_discovery_world_v92.json: `28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6`
-- alchimie_recipe_extensions_v92.json: `b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5`
-- quick_games_v92.json: `99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f`
+- alchimie_discovery_world_v92.json: `0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef`
+- alchimie_recipe_extensions_v92.json: `1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7`
+- quick_games_v92.json: `a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b`
-- derived_catalog_v38.json: `b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9`
+- board_rankings_v37.json: `58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef`
+- derived_catalog_v38.json: `25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63`
-- cat_mobile_app_pack_contract.json: `f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94`
+- kg_sample.json: `0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6`
+- cat_mobile_app_pack_contract.json: `2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) proposal0nodes/2forms/2links factual ACCEPT, quality/impact pending; no data installed.
+  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) graph0nodes/2forms/2links accepted/applied; Source4/current4authority/native+shared race/vet/export+Python/HTTP1207/history394/smoke151+28/docs GREEN; independent assembled review/local landing pending.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0171), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0172), reviews/WORKLOG: history.

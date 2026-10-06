@@ -84,6 +84,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0169 | [Native terminal, REST and mobile tools](0169-native-terminal-and-rest-tools.md) | accepted; unpublished 0164 claim renumbered after manual policy landed |
 | 0170 | [V1.2 reviewed content growth](0170-v1-2-reviewed-content-growth.md) | accepted; locally landed17f7da1 |
 | 0171 | [V1.3 everyday graph growth](0171-v1-3-everyday-graph-growth.md) | accepted; gates/assembled review GREEN; locally landed082ba99 |
+| 0172 | [V1.4 clock inputs and directed time links](0172-v1-4-clock-input-and-directed-time-links.md) | graph accepted; native integration pending |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

@@ -2,9 +2,11 @@ package contentbuild
 
 import (
 	"bytes"
+	"compress/gzip"
 	"encoding/json"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden"
+	"io"
 	"math"
 	"os"
 	"path/filepath"
@@ -54,7 +56,7 @@ func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 	if !bytes.Equal(b, old) {
 		t.Fatalf("native source rebuild differs: %s vs %s", SHA256(b), SHA256(old))
 	}
-	if SHA256(b) != "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f" {
+	if SHA256(b) != "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2" {
 		t.Fatal("independently reviewed current release digest drift")
 	}
 	pin, e := os.ReadFile(filepath.Join(root, "go-backend/internal/content/digest.go"))
@@ -68,7 +70,7 @@ func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 	if e != nil {
 		t.Fatal(e)
 	}
-	if len(array(m["nodes"])) != 2419 || len(array(m["edges"])) != 9471 || len(array(m["pack_items"])) != 709 || len(array(m["boards"])) != 418 {
+	if len(array(m["nodes"])) != 2419 || len(array(m["edges"])) != 9473 || len(array(m["pack_items"])) != 709 || len(array(m["boards"])) != 418 {
 		t.Fatal("current reviewed source inventories differ")
 	}
 	world := object(m["discovery_world"])
@@ -468,5 +470,40 @@ func TestFixtureNonnumericSalienceRefusal(t *testing.T) {
 		if !found {
 			t.Fatalf("invalid salience %v accepted: %v", value, errors)
 		}
+	}
+}
+
+func TestArchivedV13BundleBytesAndInventoriesStayExact(t *testing.T) {
+	raw, err := os.ReadFile(filepath.Join(repoRoot(t), "docs/reviews/v1-4-time-links-and-predicates/reference/historical-v1-3-bundled.json.gz"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	z, err := gzip.NewReader(bytes.NewReader(raw))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer z.Close()
+	b, err := io.ReadAll(io.LimitReader(z, (16<<20)+1))
+	if err != nil || len(b) > 16<<20 || SHA256(b) != "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f" {
+		t.Fatal("exact historical V1.3 bundle drift", err)
+	}
+	m, err := decodeObject(b)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(array(m["nodes"])) != 2419 || len(array(m["edges"])) != 9471 || len(array(m["pack_items"])) != 709 || len(array(m["boards"])) != 418 {
+		t.Fatal("historical V1.3 source inventories drift")
+	}
+	world := object(m["discovery_world"])
+	if len(array(world["concepts"])) != 251 || len(array(world["recipes"])) != 351 || len(array(world["compatible_versions"])) != 9 {
+		t.Fatal("historical V1.3 world inventory/history drift")
+	}
+	sources := map[string]string{}
+	for name, v := range object(m["sources"]) {
+		sources[name] = str(v)
+	}
+	corpus, err := httpgolden.ForSources(sources)
+	if err != nil || len(corpus.Cases) != 1207 || len(sources) != 8 || !strings.Contains(corpus.Reference, "Independent Django application; V1.3") {
+		t.Fatal("historical V1.3 full source corpus drift", err)
 	}
 }

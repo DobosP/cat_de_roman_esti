@@ -1,0 +1,277 @@
+{
+  "author_of_proposal": "root-integrator",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "candidate_path": "scripts/time_graph_v1_4_data.py",
+  "candidate_sha256": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a",
+  "checked_on": "2026-10-06",
+  "counts": {
+    "accepted_surface_forms": 2,
+    "distinct_synonym_lemmas": 1,
+    "edges_after": 9473,
+    "edges_before": 9471,
+    "new_conversion_facts": 0,
+    "new_curated_rounds": 0,
+    "new_directed_traversals": 2,
+    "new_synonym_families": 1,
+    "new_target_approvals": 0,
+    "nodes_after": 2419,
+    "nodes_before": 2419,
+    "plural_inflections": 1,
+    "stored_forms_after": 8677,
+    "stored_forms_before": 8675
+  },
+  "decision": "accept_graph_proposal_for_integration",
+  "edge_judgments": [
+    {
+      "dst": "n_v29_time_units_minut",
+      "rationale": "The exact fixed-duration relationship is primary-source supported and recognizable. A missing directed traversal becomes a direct legal association; distinct units are not synonyms and there is no numeric ingredient/multiplicity recipe. Duration-only caption excludes civil/daylight/lesson senses. This is a new directed entry over known units, not a newly discovered conversion or curated round.",
+      "relation": "has_part_time",
+      "sources": [
+        "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232",
+        "https://www.manuale.edituracorint.ro/2023/matematica_II/files/basic-html/page102.html"
+      ],
+      "src": "n_v24_time_day_ora",
+      "strength": 0.99,
+      "verdict": "accept"
+    },
+    {
+      "dst": "n_v24_time_day_ora",
+      "rationale": "The exact fixed-duration relationship is primary-source supported and recognizable. A missing directed traversal becomes a direct legal association; distinct units are not synonyms and there is no numeric ingredient/multiplicity recipe. Duration-only caption excludes civil/daylight/lesson senses. This is a new directed entry over known units, not a newly discovered conversion or curated round.",
+      "relation": "has_part_time",
+      "sources": [
+        "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232",
+        "https://www.manuale.edituracorint.ro/2023/matematica_II/files/basic-html/page102.html"
+      ],
+      "src": "n_v24_time_day_zi",
+      "strength": 0.99,
+      "verdict": "accept"
+    }
+  ],
+  "graph_proposal_sha256": "6cae1819c10164f5181501eb86de75b32592af035f4198e642a43f63f798085d",
+  "identity_and_target_floors": [
+    {
+      "directed_outgoing_unique_after": 4,
+      "directed_outgoing_unique_before": 4,
+      "five_unique_incoming_after": false,
+      "five_unique_incoming_before": false,
+      "id": "n_v24_time_day_ceas",
+      "incoming_unique_after": 2,
+      "incoming_unique_before": 2,
+      "native_mined_threshold_after": true,
+      "native_mined_threshold_before": true,
+      "responsive_after": 870,
+      "responsive_before": 868,
+      "reverse_reachable_after": 2356,
+      "reverse_reachable_before": 2356,
+      "stored_incident_degree_after": 6,
+      "stored_incident_degree_before": 6
+    },
+    {
+      "directed_outgoing_unique_after": 4,
+      "directed_outgoing_unique_before": 3,
+      "five_unique_incoming_after": true,
+      "five_unique_incoming_before": true,
+      "id": "n_v24_time_day_ora",
+      "incoming_unique_after": 6,
+      "incoming_unique_before": 5,
+      "native_mined_threshold_after": true,
+      "native_mined_threshold_before": true,
+      "responsive_after": 1030,
+      "responsive_before": 1030,
+      "reverse_reachable_after": 2356,
+      "reverse_reachable_before": 2356,
+      "stored_incident_degree_after": 10,
+      "stored_incident_degree_before": 8
+    },
+    {
+      "directed_outgoing_unique_after": 4,
+      "directed_outgoing_unique_before": 3,
+      "five_unique_incoming_after": true,
+      "five_unique_incoming_before": true,
+      "id": "n_v24_time_day_zi",
+      "incoming_unique_after": 6,
+      "incoming_unique_before": 6,
+      "native_mined_threshold_after": true,
+      "native_mined_threshold_before": true,
+      "responsive_after": 1001,
+      "responsive_before": 1001,
+      "reverse_reachable_after": 2356,
+      "reverse_reachable_before": 2356,
+      "stored_incident_degree_after": 10,
+      "stored_incident_degree_before": 9
+    },
+    {
+      "directed_outgoing_unique_after": 3,
+      "directed_outgoing_unique_before": 3,
+      "five_unique_incoming_after": false,
+      "five_unique_incoming_before": false,
+      "id": "n_v29_time_units_minut",
+      "incoming_unique_after": 2,
+      "incoming_unique_before": 1,
+      "native_mined_threshold_after": true,
+      "native_mined_threshold_before": true,
+      "responsive_after": 321,
+      "responsive_before": 255,
+      "reverse_reachable_after": 2356,
+      "reverse_reachable_before": 2356,
+      "stored_incident_degree_after": 5,
+      "stored_incident_degree_before": 4
+    },
+    {
+      "directed_outgoing_unique_after": 2,
+      "directed_outgoing_unique_before": 2,
+      "five_unique_incoming_after": false,
+      "five_unique_incoming_before": false,
+      "id": "n_v29_time_units_secunda",
+      "incoming_unique_after": 2,
+      "incoming_unique_before": 2,
+      "native_mined_threshold_after": true,
+      "native_mined_threshold_before": true,
+      "responsive_after": 509,
+      "responsive_before": 501,
+      "reverse_reachable_after": 2356,
+      "reverse_reachable_before": 2356,
+      "stored_incident_degree_after": 4,
+      "stored_incident_degree_before": 4
+    }
+  ],
+  "impact_evidence": {
+    "full_path": "docs/reviews/v1-4-time-links-and-predicates/graph-quality-impact-full.json.gz",
+    "full_sha256": "e395e14ef1be5e9e06b7a60dff0345d5f3b75ca64354d5a84036c1308992f92b",
+    "full_uncompressed_sha256": "d4009d37885b6d787b647ad053cfc2659eafd831ee18a7629ca7e82b5298e995",
+    "summary_path": "docs/reviews/v1-4-time-links-and-predicates/graph-quality-impact.json",
+    "summary_sha256": "a8d5bade1c59d8754b423a234797163aafcc736215926bcd2fe3ecd0840fc81f"
+  },
+  "lexical_family_judgments": [
+    {
+      "forms": [
+        "ceasornic",
+        "ceasornice"
+      ],
+      "fuzzy_boundary": "Article forms can now receive existing generic typo corrections despite remaining absent exact alias keys. This is not acceptance of four extra forms.",
+      "headword": "ceasornic",
+      "held_forms": [
+        "ceasornicul",
+        "ceasornicele",
+        "ceasornicului",
+        "ceasornicelor"
+      ],
+      "meaning": "Qualified physical time-indicating instrument consistent with all existing Ceas instrument/pair/outsider roles; not Oră duration, botanical Passiflora, every subtype or clockwork mechanism.",
+      "node_id": "n_v24_time_day_ceas",
+      "ownership": "All selected normalized keys lack current KG/world/projection owners and literal reviewed ledger conflicts; no old known surface is retargeted.",
+      "rationale": "Two directly checked authored academic primary texts pair these words within synonymy; the retained official DOOM observation directly supplies lemma/plural. Source use and current decks support an optional input for the familiar displayed Ceas. Concrete ordinary current-stock prototype changes200unknown/0attempts to recognized same-owner/1attempt, deduplicates the plural and canonical Ceas and preserves target privacy/resume/actual win. Recognition/population enjoyment is not measured, and the word is not introduced as a rare displayed target. Plant counterexample and subtype/hour qualifications remain explicit.",
+      "sources": [
+        "https://www.upit.ro/_document/21192/eli_no._16-2015.pdf",
+        "https://dir.upsc.md/handle/123456789/2072/license.txt",
+        "https://doom.lingv.ro/cautare/q/ceasornic?",
+        "https://www.cimec.ro/muzee/ceasuri/ceas.htm",
+        "https://adatbank.ro/html/alcim_pdf8879.pdf"
+      ],
+      "verdict": "accept"
+    }
+  ],
+  "node_judgments": [],
+  "preservation_and_actual_benefit": {
+    "alchimie_authored_projection_core_route_par_quality_records": 83,
+    "alchimie_changed": 0,
+    "alchimie_requested_societate_mined_cases": 6,
+    "alchimie_retained_unscoped_mined_cases": 6,
+    "alchimie_sampled_mined_core_changes": 0,
+    "conexiuni_changed": 0,
+    "conexiuni_fairness_profiles": 245,
+    "conexiuni_original_mined_difficulties_and_forced_daily_cases": 4,
+    "conexiuni_sampled_changes": 0,
+    "contexto_curated_targets": 265,
+    "curated_hop_weighted_map_changed_pairs": 0,
+    "exact_combined_terminal_changed": 0,
+    "known_old_resolver_changes": 0,
+    "lant_changed": 0,
+    "lant_route_profiles": 123,
+    "native_guess_target_pairs": 641035,
+    "native_mined_flag_changes": 0,
+    "native_threshold_targets": 2419,
+    "ordinary_lant_initial_changes": 0,
+    "ordinary_lant_queries": 15,
+    "ordinary_lant_queries_curated": 8,
+    "ordinary_lant_queries_mined": 7,
+    "projection_anchor_changes": 0,
+    "projection_guess_target_pairs": 122960,
+    "quick_changed": 0,
+    "quick_ratings": 85,
+    "reverse_reachable_sets_changed": 0,
+    "terminal_records": 180,
+    "world_affected_concept_snapshots": []
+  },
+  "proposal_input_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v1-4-time-links-and-predicates/ceasornic-current-input.json": "dba0c016866493707f21b4febb70d6d149b5946346b95b9a6c0b7d5113e4acb9",
+    "docs/reviews/v1-4-time-links-and-predicates/ceasornic-identity-screen.json": "bced4963a5b87f99980d8eff13761c9a05b128b49e4b31361460c7788bf0ea3d",
+    "docs/reviews/v1-4-time-links-and-predicates/lexical-primary-followup.json": "477b167be7890ab2be069e79cc2ab1ab6460e06a922b98fed030c5ccb718cc9b",
+    "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json": "b2d75580cbea8dbc16784d0a1c570889095eecd61bb13f88d002b91733f0c1ca",
+    "docs/reviews/v1-4-time-links-and-predicates/research-time-links.json": "f799e6a4faf5fb3430ce0e7eee5d881c19dfdbab28fc64c094d6ac09c5360821"
+  },
+  "public_caption_boundary": {
+    "existing_easy_puzzles_visiting_hour": [
+      "pz_societate_easy_3",
+      "pz_societate_easy_4",
+      "pz_societate_easy_5",
+      "pz_societate_easy_6"
+    ],
+    "lanț_public_short": "legătură directă",
+    "specific_numeric_public_hint_approval": false,
+    "terminal_easy_raw_edge_captions_visible": true
+  },
+  "rationale": "Accept only the exact combined proposal for guarded integration. The optional known clock synonym repairs a concrete missing input while retaining one semantic owner; two specific reverse duration arcs remove unnatural directed detours. Complete authored profile/target/ownership screens and bounded ordinary/mined play preserve existing effects, and the supported exact module rebuild preserves all180 terminal records. Numeric public Lanț guidance, new target/recipe/round approval, category repair and human enjoyment are not inferred. The hour-only subset would alter two legacy terminal bodies and is not covered by this acceptance.",
+  "raw_candidate_sha256": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a",
+  "remaining_limits": [
+    "Django/Python isolated prospective observations, not installed native gameplay; native source4 refresh/raw/staging/installed/export/authority/parity/complete release gates remain mandatory.",
+    "Bounded actual queries and twelve mined Alchimie cases do not prove every unseen seed/history. No authored recipe/curated round promotion from latent pairs.",
+    "No gain claimed in current265target feedback or existing123/83profile stock. Primary direct traversal/time caption utility and two currently-unavailable clock inputs are the concrete improvements.",
+    "No hidden target approval: Minute has only2unique incoming parents despite stored incident degree5, Clock still2; native mined flags were already true and unchanged.",
+    "Four extra article/case forms remain outside exact aliases; generic existing typo correction for two is not additional morphology/source approval.",
+    "Inherited forced Societate/Secundă and mixed Personalități holds remain; no taxonomy/miner fix or human enjoyment claim."
+  ],
+  "required_before_landing": [
+    "Independent unchanged exact raw factual acceptance; supported rollback-protected module transaction only.",
+    "Native rank/derive and source4 exact source3 ancestry; fresh quick/world/extensions raw/staging/installed audits and same-role judgments for all changed dependencies even when semantics inherit exactly.",
+    "Fresh current export/expected-reference/source identities, historic exact inverses/saves, current authority, HTTP/gameplay/target privacy/bounds/race/vet/docs/assembled release gates."
+  ],
+  "reviewer": "/root/graph_quality",
+  "role": "quality",
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "schema": "v1-4-graph-quality-review-v1",
+  "selected_pool_records": [
+    {
+      "id": "v1-4-time-link-2",
+      "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-time-link-2-r3.json",
+      "revision": 3,
+      "sha256": "cd5c649e9b63a94a4293903442d65fc40b12a455cb9e3ea0c778b5988e8c87d9"
+    },
+    {
+      "id": "v1-4-time-link-3",
+      "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-time-link-3-r3.json",
+      "revision": 3,
+      "sha256": "2d9588836af4d95d374ac67c7a1c13d6b69c1e1d86f24e254c9da6e2816ad678"
+    },
+    {
+      "id": "v1-4-lexical-ceasornic",
+      "path": "docs/reviews/v1-4-time-links-and-predicates/selection-snapshots/v1-4-lexical-ceasornic-r2.json",
+      "revision": 2,
+      "sha256": "c4c049a6412f6ccfd3111c8434d83e0be91fb925ddd4a4a9900467ca7a1ac37c"
+    }
+  ],
+  "source_access_notes": "Reviewer directly read BIPM V4.01 and Corint lesson, both authored academic synonymy texts, museum usage and botanical appendix. DOOM individual lemma/plural observations are factual-researcher browser evidence, not a new definition scrape by this reviewer. No source definitions/corpora/images are copied. Dictionary licence is not a blanket data reuse grant; BIPM CC BY4 and other source reuse limits remain in bound research.",
+  "strength_and_salience_judgment": "0.99 is an editorial estimate matching the existing exact minute→second conversion; no salience change or probability/recognition measurement is implied.",
+  "terminal_and_save_identity": {
+    "both_exact_terminal_changes": 0,
+    "day_only_terminal_changes": 0,
+    "hour_only_changed_ids": [
+      "pz_societate_hard_5",
+      "pz_societate_hard_6"
+    ],
+    "hour_only_terminal_body_changes": 2,
+    "interpretation": "Hour-only introduces a new4hop hard Zi→Minut candidate and shifts two reused terminal IDs. With both arcs that pair is2hop and falls outside the hard bucket; exact module preserves all180. Acceptance cannot be transferred to a narrowed one-arc transaction."
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "schema": "v1-4-exact-supported-graph-installation-v1",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "proposal_sha256": "6cae1819c10164f5181501eb86de75b32592af035f4198e642a43f63f798085d",
+  "module_sha256": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a",
+  "raw_factual_review_sha256": "47d0f89b9ddbe6630f63764239365b78e14db40d12eaf04dc18c281e280e37ce",
+  "raw_quality_review_sha256": "3c2f8d9b1b66411741a254d26d028cd6b6dfb4972537163ab37a24784ff6e3e3",
+  "kg_before_sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+  "kg_after_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+  "prototype_bytes_exact": true,
+  "new_concepts": 0,
+  "new_qualified_synonym_families": 1,
+  "new_exact_forms": 2,
+  "new_directed_links": 2,
+  "new_conversion_facts": 0,
+  "new_curated_rounds_or_target_approvals": 0,
+  "node_field_changes": [
+    {
+      "id": "n_v24_time_day_ceas",
+      "changes": {
+        "aliases": {
+          "before": [
+            "ceasul",
+            "ceasuri",
+            "ceasurile"
+          ],
+          "after": [
+            "ceasul",
+            "ceasuri",
+            "ceasurile",
+            "ceasornic",
+            "ceasornice"
+          ]
+        }
+      }
+    },
+    {
+      "id": "n_v24_time_day_ora",
+      "changes": {
+        "degree": {
+          "before": 8,
+          "after": 10
+        }
+      }
+    },
+    {
+      "id": "n_v24_time_day_zi",
+      "changes": {
+        "degree": {
+          "before": 9,
+          "after": 10
+        }
+      }
+    },
+    {
+      "id": "n_v29_time_units_minut",
+      "changes": {
+        "degree": {
+          "before": 4,
+          "after": 5
+        }
+      }
+    }
+  ],
+  "new_edges": [
+    {
+      "id": "de8813",
+      "src_id": "n_v24_time_day_ora",
+      "dst_id": "n_v29_time_units_minut",
+      "relation": "has_part_time",
+      "label_ro": "ca unitate de durată, are șaizeci de minute",
+      "strength": 0.99,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8814",
+      "src_id": "n_v24_time_day_zi",
+      "dst_id": "n_v24_time_day_ora",
+      "relation": "has_part_time",
+      "label_ro": "ca unitate de durată, are douăzeci și patru de ore",
+      "strength": 0.99,
+      "is_distractor": 0,
+      "bidirectional": 0
+    }
+  ],
+  "all9471_old_edges_exact": true,
+  "all180_terminal_puzzles_exact": true,
+  "all716_pack_records_exact": true,
+  "all716_rank_rows_exact": true,
+  "all336_derived_payloads_exact": true,
+  "current_rank_sha256": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+  "current_derived_sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+  "current_mobile_sha256": "2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8",
+  "installed_native_authority": "V1.3 history; currentsource4/candidate/review/catalog/export/reference/authority/fullgates stillrequired",
+  "logs": {
+    "graph-apply.log": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/graph-apply.log.gz",
+      "uncompressed_sha256": "696dc1b5d6f8225a928182868d16c513376b721b64e74aa5bfae7ab3663eba4f",
+      "gzip_sha256": "da82d12608bafe263e5618c49b6afbb04c18df771dd017060e8dedddbd4d9487"
+    },
+    "fixture-validation.log": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/fixture-validation.log.gz",
+      "uncompressed_sha256": "2fd6dad3dcba91390dd4f0345e7e04074b285a46bb30a98a8bebb2fdb6bc948d",
+      "gzip_sha256": "caabfbac921eac21cd0734dfba0d832969edfabac40fbc21472307a9ef8c098e"
+    },
+    "rank-write.log": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/rank-write.log.gz",
+      "uncompressed_sha256": "908b8cf4a524dcaf6c7a8c00dcb34a63d86e190b90dd6da7a039298fb4da30b5",
+      "gzip_sha256": "37db558cbe4de26e87ba8ff6ba4172cc93daa8b3111e94f9c122654f69a5c466"
+    },
+    "derive-write.log": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/derive-write.log.gz",
+      "uncompressed_sha256": "b5d0b92facff8b5ac728fa1015c024dd30c0431dfa3a27072abf6f3516c2f45e",
+      "gzip_sha256": "4b84bde4ffa1080604b9dfff20d3529b50da79e13b96cdc00c187581832572f7"
+    }
+  }
+}

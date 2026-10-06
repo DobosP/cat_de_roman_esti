@@ -1,0 +1,45 @@
+{
+  "baseline_revision": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "checks": {
+    "actual_quick_world_unbound_proposals_refused": true,
+    "all85_old_helper_function_AST_exact_after_only_two_new_prepend_calls": true,
+    "all_current_inputs_unmutated": true,
+    "all_five_artifacts_restore_exact_git_bytes_through_four_versions": true,
+    "all_old_assignments_imports_literals_exact": true,
+    "eleven_archives_lossless_git_baseline_and_current_exact": true,
+    "no_general_key_order_canonicalization_added": true,
+    "no_test_deselection": true,
+    "old_v1_3_test_bodies_assertions_literals_preserved": true,
+    "old_v1_v1_2_recipe_tests_and_current_content_file_baseline_byte_exact": true,
+    "only_existing_current_adapter_changes_scope_to_prior_wave": true,
+    "whole_current_and_whole_restored_SHA_required": true
+  },
+  "evidence_sha256": "2ac9387863554eda4be8bf8fa5f1ee4b07f9e7cef09fce552e14f1808dacb536",
+  "focused_cases": 49,
+  "implementation_receipt_sha256": "60e185023a75357c8eb6cfd7d45cd96f0ae685912cb91667cb110c30878a212d",
+  "kind": "v1-4-graph-phase-history-independent-quality-review-v1",
+  "rationale": "Independent source/AST and raw Git byte reconstruction checks support the precise finite inverse: two new qualified arcs, two Clock surfaces, three stored degree adjustments, exact KG/rank/derive headers and two public mobile edge records plus manifest. All20 artifact/layer comparisons recover exact Git bytes; no current input is mutated. Prior85 helper functions and old constants/imports remain exact after excluding only the two intended V1.4 prepend statements. Every V1.3 test function/assertion/literal remains exact except current() now selects the historical wave. All49 focused positive/idempotence/drift/duplicate/order/forged-and-repinned-receipt tests pass. Complete old-byte hashes make acceptance fail closed; unknown staging catalogs are expressly refused. Eleven original reference corpora recover exact46641 baseline bytes. Mutable current_content expectations and older assertions are untouched. No actionable issue in this bounded phase; further native catalog restoration and reference refresh require separate exact receipts and reviews.",
+  "reference_preservation_receipt_sha256": "16beac7ad4d7c1d360350d0c74d7e56399836e40e2316c133f80a244aad23b19",
+  "reviewer": "/root/graph_quality",
+  "role": "quality",
+  "scope": "Exact graph/header/public-mobile history-phase implementation only. No catalog inverse for signed V1.4 has yet been authorized; no current expected recapture, consumer pin, installed authority or assembled release acceptance.",
+  "source_files": [
+    {
+      "path": "tests/content_history.py",
+      "sha256": "ad8782ee61c961e87babeae9ba4185a653ce726da26d27fa56c5961bf496b081"
+    },
+    {
+      "path": "tests/test_v1_3_content_history.py",
+      "sha256": "644a70e5e81c09259a55d4a72ad1510aa73b6c5e10e1e2936a36c30e5299a06f"
+    },
+    {
+      "path": "tests/test_v1_4_content_history.py",
+      "sha256": "f3d9e3c15f661703d7fe2a6cd66a032bbdfc78ca226fdb4f6acb399d9cce3708"
+    }
+  ],
+  "test_command": "PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v1_4_content_history.py -q",
+  "test_exit_code": 0,
+  "test_log_path": "docs/reviews/v1-4-time-links-and-predicates/reference/history-graph-phase-quality-tests.log.gz",
+  "test_log_sha256": "ca0f65fe0ee55e0cea88221449d0d15e6ddafe9c15639707bdb652f6c3d36f4f",
+  "verdict": "accept"
+}

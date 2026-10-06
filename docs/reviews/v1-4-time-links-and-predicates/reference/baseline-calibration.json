@@ -1,0 +1,135 @@
+{
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "baseline_manifest": "docs/reviews/v1-4-time-links-and-predicates/reference/baseline-calibration-source-manifest.json.gz",
+  "baseline_manifest_raw_sha256": "2a4d8b2338deb5545fa21b58a488451857be2c17e31d22f25e66e766d34b4054",
+  "browser_complete_winning_plans_equal_v1_3": true,
+  "calibration": [
+    {
+      "baseline_output": "alchimie-python_parity.json",
+      "complete_bytes_equal_v1_3": true,
+      "expected_path": "go-backend/internal/alchimie/testdata/python_parity.json",
+      "sha256": "1066d21ff9884c5597cb3a08d1e2ab15ea56e1bc10aaa412f7cf42866fac7366"
+    },
+    {
+      "baseline_output": "browser-seeded-starts.json",
+      "complete_bytes_equal_v1_3": true,
+      "expected_path": "frontend/e2e/seeded-starts.json",
+      "sha256": "5644ab3b7ee583db6904858712e3872928d62aac2c667322153720e8f4dd31b3"
+    },
+    {
+      "all_original_six_and_nontarget_fields_equal_v1_3": true,
+      "baseline_output": "graph-python_graph.json",
+      "six_target_sha256": "e17a836ed29ed6131b7c1fcb981fb4f5747e8c9e2747046406ec33107a0febc5",
+      "two_supplemental_target_ids_retained": [
+        "n_v2via_gospodarie_rurala",
+        "n_v4muz_refren"
+      ]
+    },
+    {
+      "baseline_output": "historical-conexiuni-python-goldens.json",
+      "cases": 12,
+      "complete_bytes_equal_v1_3": true,
+      "sha256": "e0aaef96a28c2a7d2487bb91e5dabbe93b63449c0dfa24920aa299edcb56f86e"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/reconstruct_conexiuni_v1_4.py",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle",
+        "historical"
+      ],
+      "elapsed_seconds": 0.598,
+      "environment": {
+        "CAT_ACCOUNTS_ENABLED": "0",
+        "CAT_DEBUG": "1",
+        "CAT_KG_FIXTURE": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle/cat_de_roman_esti/fixtures/kg_sample.json",
+        "DJANGO_SETTINGS_MODULE": "cat_de_roman_esti.web.settings",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "exit_code": 0,
+      "label": "conexiuni",
+      "log_path": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-calibration-conexiuni.log",
+      "log_sha256": "e9037228be135ba7ab9340fc9e1afed542a61b9be930bd97fce0fa030ae61729"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/capture_fallbacks_v1_4.py",
+        "alchimie",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-calibration"
+      ],
+      "elapsed_seconds": 7.281,
+      "environment": {
+        "CAT_ACCOUNTS_ENABLED": "0",
+        "CAT_DEBUG": "1",
+        "CAT_KG_FIXTURE": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle/cat_de_roman_esti/fixtures/kg_sample.json",
+        "DJANGO_SETTINGS_MODULE": "cat_de_roman_esti.web.settings",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "exit_code": 0,
+      "label": "alchimie",
+      "log_path": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-calibration-alchimie.log",
+      "log_sha256": "5991dc32d861b9f5a350cc939084aaa1b8658555593fb98fabeb7754123d5552"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/capture_fallbacks_v1_4.py",
+        "browser",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-calibration"
+      ],
+      "elapsed_seconds": 0.638,
+      "environment": {
+        "CAT_ACCOUNTS_ENABLED": "0",
+        "CAT_DEBUG": "1",
+        "CAT_KG_FIXTURE": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle/cat_de_roman_esti/fixtures/kg_sample.json",
+        "DJANGO_SETTINGS_MODULE": "cat_de_roman_esti.web.settings",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "exit_code": 0,
+      "label": "browser",
+      "log_path": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-calibration-browser.log",
+      "log_sha256": "3ce0654b00abe1ea00961234760f58c4bb9223244f0de821d1f7b29760c7db57"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/capture_fallbacks_v1_4.py",
+        "graph",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle",
+        "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-calibration"
+      ],
+      "elapsed_seconds": 0.443,
+      "environment": {
+        "CAT_ACCOUNTS_ENABLED": "0",
+        "CAT_DEBUG": "1",
+        "CAT_KG_FIXTURE": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle/cat_de_roman_esti/fixtures/kg_sample.json",
+        "DJANGO_SETTINGS_MODULE": "cat_de_roman_esti.web.settings",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-v1-3-oracle",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "exit_code": 0,
+      "label": "graph",
+      "log_path": "/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/baseline-calibration-graph.log",
+      "log_sha256": "61e43887d8f9fd2fd8029063936cc982461af8d091970c7f0fc283ed8134de1b"
+    }
+  ],
+  "kind": "v1-4-independent-v1-3-baseline-calibration-v1",
+  "native_outputs_supply_no_expected_answers": true,
+  "source_selection": "Exact git46641d6 Python source/fixture files in a hermetic task-owned scratch copy, no real environment/provider/config values."
+}

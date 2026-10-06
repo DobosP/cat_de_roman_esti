@@ -1,0 +1,16 @@
+{
+  "schema": "v1-4-runtime-verification-notes-v1",
+  "parity": "Exact native report preserved from completed parity tool stdout;1207responses passed before independent smoke usage error",
+  "smoke_initial_failures": [
+    "Wrong --binary invocation correctly refused; smoke requires explicit --url",
+    "First explicit localhost server correctly refused legal placeholder; documented synthetic operator/contact fixture added"
+  ],
+  "smoke_configuration": {
+    "scope": "isolated localhost anonymous fixture only",
+    "operator": "Native qualification fixture",
+    "contact": "qualification@example.invalid",
+    "accounts_enabled": false
+  },
+  "local_server_terminated": true,
+  "checks_relaxed": false
+}

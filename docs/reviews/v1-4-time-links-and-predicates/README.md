@@ -3,8 +3,8 @@
 Valid until: baseline, source evidence or intended scope changes — repeat affected checks.
 
 Started2026-10-06 after V1.3 content95f94e3/reviewed landing082ba99/documentation46641d6.
-Baseline:46641d6f9963f92941d12f5955e5eb40a2d8fb56. Phase: exact proposal/raw independent review; no installation.
-No V1.4 graph/source/runtime/corpus or approval is installed. The [pool](../../content-pool/v1-4-time-links-and-predicates/pool.json) records6leads:3selected for independent refinement/3held (duplicate, orologiu and clipă/moment); four additional ceasornic inflections remain unselected.
+Baseline:46641d6f9963f92941d12f5955e5eb40a2d8fb56. Phase: native integration; accepted shared graph applied.
+The independently accepted V1.4 shared graph is applied in this task; three native catalogs have signed staging and a coherent eight-source export; current reference/installed authority/full gates remain in transition. The [pool](../../content-pool/v1-4-time-links-and-predicates/pool.json) records6leads:3selected for independent refinement/3held (duplicate, orologiu and clipă/moment); four additional ceasornic inflections remain unselected.
 
 [Time-link screen](research-time-links.json) preserves exact endpoint directions, existing deck uses and official-access/mirror qualifications. No new conversion fact is claimed from a reverse arc.
 
@@ -23,8 +23,7 @@ Initial primary research: [BIPM SI](https://www.bipm.org/en/measurement-units),
 Second is the SI base unit for time; minute/hour/day are distinct off-system units, not
 synonyms or SI base units. Fixed-duration conversions are separate from civil/calendar
 boundary cases. Brochure licence is CC BY4.0; retain source/license/access metadata and
-original factual summaries without copying source corpora. Romanian recognition/orthography
-and all exact graph/deck/prospective effects still need evidence.
+original factual summaries without copying source corpora. Romanian recognition/orthography and exact graph/deck/prospective effects were unresolved at this initial screen; later exact reviews below resolve the selected scope.
 
 Qualified Go1.27.1 SDK/archive was copied and critical hashes matched into this task's own
 scratch before verified-merged V1.3 cleanup. Fresh [baseline qualification](toolchain-baseline.json) is GREEN: offline modules, native
@@ -39,7 +38,7 @@ No push/deploy authorized.
 [Primary lexical follow-up](lexical-primary-followup.json) resolves the qualified instrument
 semantic gap through two original authored linguistic texts, fresh DOOM lemma/plural and
 physical-device context; plant/hour senses remain excluded. [Identity](ceasornic-identity-screen.json)
-and [current input](ceasornic-current-input.json) show no exact owner and currently unavailable
+and [baseline input](ceasornic-current-input.json) show no conflicting exact owner and previously unavailable
 ceasornic/ceasornice while Ceas is recognized. No proposed rare displayed target is added.
 
 [ProposalR1](graph-proposal.json) binds root-authored `scripts/time_graph_v1_4_data.py` and three
@@ -48,12 +47,47 @@ exact pre-handoff selected snapshots. Proposed scope:0concepts,1qualified synony
 hidden-target approvals. Supported nonmutating preflight passes0nodes/2edges/324beginner
 probes/2linkprobes; Ruff GREEN. [Interim quality](reverse-link-quality-screen-interim.json)
 reports all245/123/83 authored profiles and all265currentCald hop/weighted maps unchanged;
-stored incident degrees and directed/incoming counts remain separate. Full feedback,
-terminal/mined/ordinaryplay effects and exact factual/quality reviews are still required.
+stored incident degrees and directed/incoming counts remain separate. The initial preflight granted no approval; completed full feedback/terminal/mined/ordinaryplay checks and exact independent judgments are bound below.
 [Integration readiness](integration-readiness.md) preserves exactsource4parent3/nativegates.
 No reviewer acceptance or installation is inferred from this root proposal or preflight.
 
 [Raw factual review](graph-factual-review.json) ACCEPTS exact proposal6cae1819/moduleb7c5af54,
 covering2forms/2arcs and qualified instrument/duration/source-access/license scope. It grants
-no quality/installation/current-authority approval. Final refute-first quality and its full
-prospective receipt remain in progress; the module and selected snapshots stay byte-frozen.
+no quality/installation/current-authority approval. [Exact quality](graph-quality-review.json) ACCEPTS the same bytes; [impact](graph-quality-impact.json) and [installation](graph-installation.json) preserve180terminal/716pack/rankrows/336derivedpayloads. Source4 and all three candidates received fresh complete independent raw reviews; each native catalog then crossed its exact current staging audit/two same-role final reviews. Native source/export and independent Python byte-check are GREEN (7238892bytes). Installed frozen-runtime audits/current authority/reference/fullgates and local landing remain required. The module and selected snapshots stay byte-frozen.
+
+[Current source/export checkpoint](native/source-export-checkpoint.json) binds allthree signed
+catalogs, Source4 exact Source3parent, eight actual fixture identities and bundle d1d3f721… .
+The earlier [Quick/World milestone](native/staging-installation-progress.json) is history
+valid only before the Extensions/export phase. All16 prior unique archives remain; three
+V1.3 predecessor documents make19 unique archives across Source1–4, independently checked
+in [assembled preflight](assembled-preflight.json), which withholds final acceptance.
+
+Focused actual native race checks pass qualified clock input in an ordinary existing Ușă
+round and three controlled duration paths/private Get/wins. Exact V1.3 bundled bytes are
+[archived](reference/historical-v1-3-bundled.json.gz), with old digest/inventory/source-corpus
+assertions retained in a bounded native test. [History phase](reference/history-graph-phase.json)
+and [independent quality](reference/history-graph-phase-quality-review.json) preserve whole
+byte inverses/assertions/old captures; catalog inverses/current captures are still finishing.
+New actual independent HTTP capture matches1207responses but is not yet reviewed/current
+selector authority. No current-authority or green local-landing claim is made at this phase.
+
+Final installed phase: [runtime freeze](native/runtime-freeze.json), allthree fresh saved
+installed audits and same-role factual/quality finals underpin [authority assembly](native/authority-assembly.json).
+Strict default allfour reconstruction is GREEN, Source4parent3/archive chain retained,
+manifest43ae0363…/metadata-only pin0ddb209e… . Included107runtime/ninebindings remain exact.
+[History final](reference/history-current-reference-final.json) and [independent quality](reference/history-current-reference-quality-review.json)
+verify394checks/17modules/no deselection, eight whole byte inverses and preserved assertions.
+[HTTP quality](reference/http-quality-review.json), [fourth selector](reference/http-selector-quality-review.json)
+and [remaining captures](reference/capture-family-quality-review.json) bind actual independent
+Django outputs;1206bodies exact, one manifest has three legitimate changes, Refren→Minut
+forward-hop8→7 and Alchimie fixtureSHA are the only other current-reference differences.
+
+[Verification](verification.json):27native backend race packages and vet, shared race/vet,
+source/export+independentPython, rank/derive/mobile/currentauthority,1207HTTP,151smoke/28assets,
+new actual gameplay/history/source-scope checks, lint/whitespace/docs GREEN. No frontend
+path/asset change; Node/browser production/account-PG gates are not claimed as new runs.
+Smoke uses documented synthetic operator/contact on isolated anonymous localhost; initial
+usage/legal-placeholder refusals are retained in [runtime notes](runtime-verification-notes.json).
+Final independent assembled exact-revision acceptance and local landing remain mandatory.
+Pool records stay3selected/3held until final acceptance/landing; four additional exactforms
+and inherited fallback predicate weaknesses stay held. No new target/curated recipe approval.

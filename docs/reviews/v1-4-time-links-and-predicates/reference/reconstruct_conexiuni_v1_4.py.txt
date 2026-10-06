@@ -1,0 +1,83 @@
+"""NEW independent Django producer; explicit frozen-request action selectors.
+
+Original Conexiuni producer unavailable. This reconstruction preserves the exact
+12 input envelopes, action order and status/terminal/duplicate/clue coverage.
+Existing 400 terminal guess requests remain literal; 409 duplicates and valid
+on-board guesses use member-index selectors from the actual Django session.
+No native output is read or used to author any expected response.
+"""
+import copy,hashlib,json,os,platform,sys
+from pathlib import Path
+from urllib.parse import urlencode
+REPO=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-4')
+SCRATCH=Path('/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/outputs')
+ROOT=Path(sys.argv[1]);label=sys.argv[2]
+sys.path.insert(0,str(ROOT))
+os.environ['DJANGO_SETTINGS_MODULE']='cat_de_roman_esti.web.settings'
+os.environ['CAT_ACCOUNTS_ENABLED']='0';os.environ['CAT_DEBUG']='1'
+os.environ['CAT_KG_FIXTURE']=str(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import conexiuni as C
+from cat_de_roman_esti.wordgames.packs import GamesPack,get_pack
+from cat_de_roman_esti.wordgames.service import get_service
+oldraw=(REPO/'go-backend/internal/conexiuni/testdata/python-goldens.json').read_bytes()
+old=json.loads(oldraw);result={'cases':[],'python':platform.python_version()}
+base=get_pack();client=Client();mapping=[]
+def normalize(value):
+ if isinstance(value,dict):return {k:('<session>' if k=='game_id' else normalize(v)) for k,v in value.items()}
+ if isinstance(value,list):return [normalize(v) for v in value]
+ return value
+def response(resp):return {'status':resp.status_code,'body':normalize(resp.json())}
+for case in old['cases']:
+ original_get_pack=C.get_pack
+ if case['pack_limit'] is not None:
+  items=[i for i in base.pool('conexiuni',difficulty=case['difficulty'],category=case['category'] or None) if i._pilot_eligible]
+  items.sort(key=lambda i:i.id)
+  limited=GamesPack(items[:case['pack_limit']],ranked=base.ranked)
+  C.get_pack=lambda:limited
+ else:C.get_pack=lambda:base
+ query={k:case[k] for k in ('seed','difficulty','category','daily') if case[k]!=''}
+ resp=client.post('/api/wordgames/conexiuni/games?'+urlencode(query))
+ row={k:copy.deepcopy(v) for k,v in case.items() if k not in ('create','steps')};row['create']=response(resp);row['steps']=[]
+ assert resp.status_code==case['create']['status'],(case['name'],'create status')
+ detail={'name':case['name'],'input_envelope':{k:row[k] for k in ('seed','difficulty','category','daily','pack_limit')},'steps':[]}
+ if resp.status_code==200:
+  gid=resp.json()['game_id'];session=C.store.get(gid)
+  terminal=next(s['body']['solution'] for s in reversed(case['steps']) if 'solution' in s['body'])
+  oldgroups={g['key']:[t['id'] for t in g['tiles']] for g in terminal}
+  oldkeys=sorted(oldgroups);newkeys=sorted(session.groups)
+  assert len(oldkeys)==len(newkeys)==4
+  slots={nid:(gi,mi) for gi,key in enumerate(oldkeys) for mi,nid in enumerate(oldgroups[key])}
+  detail['old_groups']=[{'key':key,'members':oldgroups[key]} for key in oldkeys]
+  detail['current_groups']=[{'key':key,'label':C._group_label(session,key),'members':list(session.groups[key])} for key in newkeys]
+  detail['current_pack_id']=session.pack_id
+  detail['current_quality']=C._board_quality(session)
+  for index,step in enumerate(case['steps']):
+   oldids=step.get('ids',[]);selectors=[]
+   if step['action']=='guess' and step['status']!=400:
+    selectors=[slots[nid] for nid in oldids]
+    assert [oldgroups[oldkeys[gi]][mi] for gi,mi in selectors]==oldids
+    ids=[session.groups[newkeys[gi]][mi] for gi,mi in selectors]
+   else:ids=list(oldids)
+   if step['action']=='get':resp=client.get('/api/wordgames/conexiuni/games/'+gid)
+   elif step['action']=='clue':resp=client.post('/api/wordgames/conexiuni/games/'+gid+'/clue')
+   elif step['action']=='guess':resp=client.post('/api/wordgames/conexiuni/games/'+gid+'/guess',{'ids':ids},content_type='application/json')
+   else:raise ValueError(step['action'])
+   captured={'action':step['action'],'ids':ids,**response(resp)};row['steps'].append(captured)
+   assert captured['status']==step['status'],(case['name'],index,'status changed',captured['status'],step['status'],captured['body'])
+   if step['status']!=200:assert captured['body']==step['body'],(case['name'],index,'error body changed')
+   for flag in ('won','lost','mistakes','lives','correct','one_away','clues_used','solved_count'):
+    if flag in step['body']:assert captured['body'][flag]==step['body'][flag],(case['name'],index,flag)
+   detail['steps'].append({'index':index,'action':step['action'],'old_ids':oldids,'current_ids':ids,'selectors_group_member':selectors,'literal_error_request':step['action']=='guess' and step['status']==400,'old_status':step['status'],'current_status':captured['status'],'old_response_sha256':hashlib.sha256(json.dumps(step['body'],sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest(),'current_response_sha256':hashlib.sha256(json.dumps(captured['body'],sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()})
+  assert any(s['body'].get('won') or s['body'].get('lost') for s in row['steps']),case['name']
+  C.store.delete(gid)
+ C.get_pack=original_get_pack
+ result['cases'].append(row);mapping.append(detail)
+ print(label,case['name'],'steps',len(row['steps']),'create',row['create']['status'],flush=True)
+raw=(json.dumps(result,ensure_ascii=False,sort_keys=True,indent=2)+'\n').encode()
+(SCRATCH/(label+'-conexiuni-python-goldens.json')).write_bytes(raw)
+(SCRATCH/(label+'-conexiuni-action-mapping.json')).write_text(json.dumps({'kind':'new-django-only-conexiuni-reconstruction-v1','root':str(ROOT),'case_count':12,'action_mappings':mapping},ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+if label=='historical':assert raw==oldraw,'Hermetic old source did not reproduce original vector bytes'
+print(label,'captured',len(result['cases']),'cases',sum(len(c['steps']) for c in result['cases']),'steps','SHA',hashlib.sha256(raw).hexdigest(),'old_exact',raw==oldraw,flush=True)

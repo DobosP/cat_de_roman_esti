@@ -1,0 +1,167 @@
+"""Freeze actual Python HTTP sequences for native Contexto and Lanț services."""
+
+import json
+import os
+from pathlib import Path
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+import django
+
+django.setup()
+from django.test import Client  # noqa: E402
+
+from cat_de_roman_esti.wordgames import contexto, lant  # noqa: E402
+from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
+
+client = Client()
+svc = get_service()
+
+
+def normalized(value):
+    if isinstance(value, dict):
+        return {
+            k: "<session>"
+            if k == "game_id"
+            else "<confirmation>"
+            if k == "resolved_token"
+            else normalized(v)
+            for k, v in value.items()
+        }
+    if isinstance(value, list):
+        return [normalized(v) for v in value]
+    return value
+
+
+def generate(game):
+    sequences = []
+    for difficulty in ["usor", "normal", "greu"]:
+        for seed in [0, 1, 7, 17, -31]:
+            for category, daily in [
+                ("", None),
+                ("gastronomie", None),
+                ("literatura", "2026-10-01"),
+                ("", ""),
+            ]:
+                base = f"/api/wordgames/{game}/games"
+                query = f"seed={seed}&difficulty={difficulty}"
+                if category:
+                    query += f"&category={category}"
+                if daily is not None:
+                    query += f"&daily={daily}"
+                response = client.post(base + "?" + query)
+                sequence = {
+                    "seed": str(seed),
+                    "difficulty": difficulty,
+                    "category": category,
+                    "daily": daily,
+                    "create_status": response.status_code,
+                    "create": normalized(response.json()),
+                    "actions": [],
+                }
+                sequences.append(sequence)
+                if response.status_code != 200:
+                    continue
+                sid = response.json()["game_id"]
+
+                def action(kind, text=None, confirm=None, *, base=base, sid=sid, sequence=sequence):
+                    body = {}
+                    if text is not None:
+                        body["text"] = text
+                    if confirm is not None:
+                        body["confirm"] = confirm
+                    path = base + "/" + sid + ("/" + kind if kind != "get" else "")
+                    r = (
+                        client.get(path)
+                        if kind == "get"
+                        else client.post(
+                            path, data=json.dumps(body), content_type="application/json"
+                        )
+                    )
+                    sequence["actions"].append(
+                        {
+                            "kind": kind,
+                            "text": text,
+                            "confirm": "<confirmation>" if confirm else None,
+                            "status": r.status_code,
+                            "body": normalized(r.json()),
+                        }
+                    )
+                    return r.json()
+
+                if game == "contexto":
+                    action("get")
+                    for text in [
+                        "",
+                        "qqqqno_such_word",
+                        "paște",
+                        "gem",
+                        "gem",
+                        "n_mihai_eminescu",
+                        "sare",
+                        "Mihai Eminscu",
+                    ]:
+                        result = action("guess", text)
+                        if result.get("needs_confirmation"):
+                            action("guess", text, result["resolved_token"])
+                    action("clue")
+                    action("get")
+                    action("clue")
+                    action("get")
+                    if seed % 2:
+                        state = contexto.store.get(sid)
+                        action("guess", state.target)
+                    else:
+                        action("giveup")
+                    action("get")
+                    action("guess", "gem")
+                    action("clue")
+                    action("giveup")
+                else:
+                    action("get")
+                    action("move", "")
+                    action("move", "qqqqno_such_word")
+                    action("move", "paște")
+                    action("hint")
+                    action("get")
+                    action("hint")
+                    action("hint")
+                    action("get")
+                    state = lant.store.get(sid)
+                    action("move", state.current)
+                    dist = svc.distances_to(state.target)
+                    step = next(
+                        n
+                        for n in svc.neighbor_ids(state.current)
+                        if dist.get(n) == dist[state.current] - 1
+                    )
+                    action("move", step)
+                    action("get")
+                    action("undo")
+                    action("get")
+                    action("hint")
+                    for _ in range(12):
+                        state = lant.store.get(sid)
+                        if state.won:
+                            break
+                        dist = svc.distances_to(state.target)
+                        step = next(
+                            n
+                            for n in svc.neighbor_ids(state.current)
+                            if dist.get(n) == dist[state.current] - 1
+                        )
+                        action("move", step)
+                    action("get")
+                    action("undo")
+                    action("hint")
+                    action("move", "gem")
+    return sequences
+
+
+if __name__ == "__main__":
+    for game in ["contexto", "lant"]:
+        out = Path('/home/dobo/work/_temp/codex__content-v1-4/history-reference-ready/outputs') / ("python-" + game + "-games-v1-4.json")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(
+            json.dumps(generate(game), ensure_ascii=False, separators=(",", ":")) + "\n",
+            encoding="utf-8",
+        )
