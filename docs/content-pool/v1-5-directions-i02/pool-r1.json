@@ -1,0 +1,276 @@
+{
+  "records": [
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "supported",
+          "object": "n_v29_kitchen_table_cutit",
+          "predicate": "se poate felia cu",
+          "qualification": "Qualified bread-can-be-sliced-with-a-suitable-knife relation; not every knife/bread combination.",
+          "source_ids": [
+            "knife-ikea"
+          ],
+          "subject": "n_v4gas_paine"
+        }
+      ],
+      "decision": "Distinct finite source/attribute replan researched; original idea remains unchanged. Not selected for refinement or installation.",
+      "dependencies": [
+        "Exact existing KG and all downstream gates",
+        "Fresh exact independent review before an actual replan selection"
+      ],
+      "documentary_variant_record": {
+        "bidirectional": 0,
+        "dst": "n_v29_kitchen_table_cutit",
+        "id": "e_v15i02_bread_knife",
+        "is_distractor": 0,
+        "label_ro": "se poate felia cu",
+        "relation": "used_with",
+        "src": "n_v4gas_paine",
+        "strength": 0.98
+      },
+      "games": [
+        "Lanțul Cuvintelor",
+        "Cald sau Rece"
+      ],
+      "history": [
+        {
+          "author": "/root",
+          "date": "2026-10-06",
+          "evidence": "replan-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea"
+        },
+        {
+          "author": "/root",
+          "date": "2026-10-06",
+          "evidence": "docs/reviews/v1-5-small-objects/iterations/i02/source-bindings-r1.json",
+          "revision": 1,
+          "transition": "New distinct i02 researched record; no i01 lifecycle mutation."
+        }
+      ],
+      "id": "v15-i02-bread-knife",
+      "identity_checks": {
+        "destination": {
+          "aliases": [
+            "cuțitul",
+            "cuțite",
+            "cuțitele",
+            "cuțitului"
+          ],
+          "category": "gastronomie",
+          "degree": 4,
+          "description": "Unealtă cu lamă și mâner, folosită pentru a tăia alimente sau alte lucruri.",
+          "difficulty_tier": "easy",
+          "id": "n_v29_kitchen_table_cutit",
+          "label_ro": "Cuțit",
+          "node_type": "concept",
+          "salience": 0.92
+        },
+        "existing_reverse_edge": "de8204",
+        "missing_proposed_direct_arc": true,
+        "source": {
+          "aliases": [
+            "pâinea",
+            "pâini",
+            "pâinile",
+            "pită",
+            "pite",
+            "pitele",
+            "pitei",
+            "pitelor",
+            "pâinii",
+            "pâinilor"
+          ],
+          "category": "gastronomie",
+          "degree": 21,
+          "description": "Aliment de bază făcut din aluat copt, consumat la masă.",
+          "difficulty_tier": "easy",
+          "id": "n_v4gas_paine",
+          "label_ro": "Pâine",
+          "node_type": "concept",
+          "salience": 0.9273
+        }
+      },
+      "label_ro": "Pâine → Cuțit",
+      "next_action": "Independent exact factual and quality/source-effect review; actual normal-play/source/history gates await native admission. Hold if meaningful benefit cannot be demonstrated.",
+      "novelty": {
+        "existing_ids": [
+          "n_v4gas_paine",
+          "n_v29_kitchen_table_cutit"
+        ],
+        "kind": "new_relation"
+      },
+      "origin_track": "refinement",
+      "play_sketches": {
+        "hypothesis": "The familiar existing forward knife-to-bread edge is playable only in that direction.",
+        "verified_runtime": false
+      },
+      "player_benefit": "A truthful optional bread-to-tool hop, if normal selection and all affected profiles justify it.",
+      "recognition": "Existing canonical endpoints; new association enjoyment and selection not established.",
+      "research_predecessor": {
+        "commit": "e495f3332bf2bb291c59320a7526b0438afd03cf",
+        "path": "docs/content-pool/v1-5-association-i01/pool.json",
+        "record_id": "v15-i01-existing-bread-knife",
+        "sha256": "9d1b6e34bb770f15f9a2cae3525a1def0fcc967042284e11d86451110a823fd5",
+        "state_preserved": "idea"
+      },
+      "revision": 1,
+      "risks": [
+        "No new recognition/forms/rounds; meaningful benefit not established.",
+        "Reverse arcs change directed distances, cycles, mining, warmth and history snapshots.",
+        "Proposed same-as-reverse strengths and generic existing relation enums remain editorial hypotheses, not facts or approvals.",
+        "No new distinct incident neighbor pairs or word recognition growth."
+      ],
+      "sense": "Existing canonical functional relation counterpart",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "No open reuse license verified; factual paraphrase only.",
+          "note": "Some knives are designed for cutting bread; supports a qualified bread-can-be-sliced-with-knife relation, not every knife/bread combination.",
+          "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/"
+        }
+      ],
+      "state": "researched"
+    },
+    {
+      "baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+      "category": "small-object functional associations",
+      "checked_on": "2026-10-06",
+      "claims": [
+        {
+          "direction": "outgoing_only",
+          "evidence_state": "supported",
+          "object": "n_v4gas_apa",
+          "predicate": "controlează curgerea",
+          "qualification": "Domestic tap controls water flow; no temperature, handedness, potability or health claim.",
+          "source_ids": [
+            "tap-ikea"
+          ],
+          "subject": "n_v33_bathroom_fixture_robinet"
+        }
+      ],
+      "decision": "Distinct finite source/attribute replan researched; original idea remains unchanged. Not selected for refinement or installation.",
+      "dependencies": [
+        "Exact existing KG and all downstream gates",
+        "Fresh exact independent review before an actual replan selection"
+      ],
+      "documentary_variant_record": {
+        "bidirectional": 0,
+        "dst": "n_v4gas_apa",
+        "id": "e_v15i02_tap_water",
+        "is_distractor": 0,
+        "label_ro": "controlează curgerea",
+        "relation": "controls",
+        "src": "n_v33_bathroom_fixture_robinet",
+        "strength": 0.99
+      },
+      "games": [
+        "Lanțul Cuvintelor",
+        "Cald sau Rece"
+      ],
+      "history": [
+        {
+          "author": "/root",
+          "date": "2026-10-06",
+          "evidence": "replan-source-screen-r1.json",
+          "revision": 1,
+          "transition": "idea"
+        },
+        {
+          "author": "/root",
+          "date": "2026-10-06",
+          "evidence": "docs/reviews/v1-5-small-objects/iterations/i02/source-bindings-r1.json",
+          "revision": 1,
+          "transition": "New distinct i02 researched record; no i01 lifecycle mutation."
+        }
+      ],
+      "id": "v15-i02-tap-water",
+      "identity_checks": {
+        "destination": {
+          "aliases": [
+            "ape",
+            "apele",
+            "apei",
+            "apelor"
+          ],
+          "category": "gastronomie",
+          "degree": 30,
+          "description": "Lichid de băut și ingredient de bază în gătit.",
+          "difficulty_tier": "easy",
+          "id": "n_v4gas_apa",
+          "label_ro": "Apă",
+          "node_type": "concept",
+          "salience": 0.968
+        },
+        "existing_reverse_edge": "de8418",
+        "missing_proposed_direct_arc": true,
+        "source": {
+          "aliases": [
+            "robinetul",
+            "robinete",
+            "robinetele",
+            "robinetului",
+            "robinetului de baie",
+            "robinetelor de baie"
+          ],
+          "category": "viata_de_roman",
+          "degree": 5,
+          "description": "Dispozitiv care deschide, oprește și reglează curgerea apei.",
+          "difficulty_tier": "easy",
+          "id": "n_v33_bathroom_fixture_robinet",
+          "label_ro": "Robinet",
+          "node_type": "concept",
+          "salience": 0.94
+        }
+      },
+      "label_ro": "Robinet → Apă",
+      "next_action": "Independent exact factual and quality/source-effect review; actual normal-play/source/history gates await native admission. Hold if meaningful benefit cannot be demonstrated.",
+      "novelty": {
+        "existing_ids": [
+          "n_v33_bathroom_fixture_robinet",
+          "n_v4gas_apa"
+        ],
+        "kind": "new_relation"
+      },
+      "origin_track": "refinement",
+      "play_sketches": {
+        "hypothesis": "The current water-to-tap flow edge has no direct tap-to-water functional counterpart.",
+        "verified_runtime": false
+      },
+      "player_benefit": "A truthful optional tool-to-liquid hop, subject to current graph feedback/fallback/history effects.",
+      "recognition": "Existing canonical endpoints; new association enjoyment and selection not established.",
+      "research_predecessor": {
+        "commit": "e495f3332bf2bb291c59320a7526b0438afd03cf",
+        "path": "docs/content-pool/v1-5-association-i01/pool.json",
+        "record_id": "v15-i01-existing-tap-water",
+        "sha256": "9d1b6e34bb770f15f9a2cae3525a1def0fcc967042284e11d86451110a823fd5",
+        "state_preserved": "idea"
+      },
+      "revision": 1,
+      "risks": [
+        "No temperature, potability, prescription or new target claim.",
+        "Reverse arcs change directed distances, cycles, mining, warmth and history snapshots.",
+        "Proposed same-as-reverse strengths and generic existing relation enums remain editorial hypotheses, not facts or approvals.",
+        "No new distinct incident neighbor pairs or word recognition growth."
+      ],
+      "sense": "Existing canonical functional relation counterpart",
+      "sources": [
+        {
+          "access_date": "2026-10-06",
+          "license": "© Inter IKEA Systems B.V.2014; factual paraphrase only.",
+          "note": "Lever manipulation controls domestic water release.",
+          "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf"
+        }
+      ],
+      "state": "researched"
+    }
+  ],
+  "revision": 1,
+  "schema_version": 1,
+  "scope": "Research-only exact documentary hypotheses; never importer input.",
+  "theme": "v1-5-existing-functional-directions-i02"
+}

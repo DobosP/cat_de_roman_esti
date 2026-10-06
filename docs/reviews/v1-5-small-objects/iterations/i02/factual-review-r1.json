@@ -1,0 +1,557 @@
+{
+  "schema": "v1-5-i02-independent-factual-review-v1",
+  "checked_on": "2026-10-06",
+  "reviewer": "/root/blueprint_factual",
+  "independent_of_packet_source_and_case_authorship": true,
+  "authors_not_reviewers": [
+    "/root",
+    "/root/i02_caseplan"
+  ],
+  "research_parent_commit": "e495f3332bf2bb291c59320a7526b0438afd03cf",
+  "runtime_baseline_commit": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "scope": "Exactly two documentary existing-node direction hypotheses. Independent primary-source, canonical identity and static schema byte review only; no source module, actual proposal, graph materialization, traversal, simulation, native command or test execution.",
+  "packet": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/packet-r1.json",
+    "sha256": "feb415263a275dd916871ac95732536405bd48363a51f3baa33bcdab09fbc892"
+  },
+  "plan": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/plan-r1.json",
+    "sha256": "95c820e8a4c5aa1171b2ec35e4192b975fbfd73379c5663fe0926a8150bdf753"
+  },
+  "variant": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/variant-r1.json",
+    "sha256": "5859ad9977246c033d6151a58510838afc6491292f8284690aa091fb73cea3a7"
+  },
+  "source_bindings": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/source-bindings-r1.json",
+    "sha256": "2f106271d0d37e3fbda592aeec02b1251b2918120679e008e9b11a7dea3180b2"
+  },
+  "ledger": {
+    "path": "docs/content-pool/v1-5-directions-i02/pool.json",
+    "sha256": "e5e6dc53ece841a017c9f62dea9c0b01d95e3be3783895b6febdf854680feb8e"
+  },
+  "native_plan": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/native-plan-r1.json",
+    "sha256": "3d70f82d0e617cd0b74fc4c8260d8512eaeef0120319f05deb4fe898310ea89b"
+  },
+  "admission_prerequisites": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/admission-prerequisites-r1.json",
+    "sha256": "cb24d88e755070f79667de182ff2ddd2b247b497aa76717a8a42fe15ab36305f"
+  },
+  "verdict": "RESEARCH_FACTUAL_REVIEW_COMPLETE_ADOPTION_HELD",
+  "verdict_detail": "Both exact qualified source predicates apply to the canonical endpoint senses, with honest limitations. Current reverse records and existing endpoint bytes are preserved, and the proposed direct records and IDs are absent from the bound fixture. Numeric weights, final materialization and player benefit remain hypotheses. This is exact-bound source-preparation acceptance only; all adoption and execution gates remain held.",
+  "complete_row_coverage": [
+    {
+      "record_id": "v15-i02-bread-knife",
+      "pool_state": "researched",
+      "verdict": "QUALIFIED_SOURCE_PREDICATE_SUPPORTED_RESEARCH_ONLY",
+      "canonical_source": {
+        "id": "n_v4gas_paine",
+        "label_ro": "PÃ¢ine",
+        "category": "gastronomie",
+        "sense": "Baked bread as an everyday food."
+      },
+      "canonical_destination": {
+        "id": "n_v29_kitchen_table_cutit",
+        "label_ro": "CuÈ›it",
+        "category": "gastronomie",
+        "sense": "A blade-and-handle cutting tool; the caption is limited to a suitable knife."
+      },
+      "predicate": "se poate felia cu",
+      "direction": "outgoing_only",
+      "relation_value": "used_with",
+      "documentary_edge_id": "e_v15i02_bread_knife",
+      "documentary_flags": {
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "documentary_strength": 0.98,
+      "strength_status": "Exact copy of preserved de8204 strength; editorial hypothesis, not a source fact or measured gameplay weight.",
+      "source_ids": [
+        "knife-ikea"
+      ],
+      "source_support": "The named IKEA VÃ–RDA bread-knife product describes a serrated edge intended for cutting bread. This supports the qualified possibility that bread can be sliced with a suitable knife.",
+      "source_limits": [
+        "Does not establish that every knife slices every bread.",
+        "Does not prove numeric strength, equal weighted cost or ordinary player benefit.",
+        "No dimensions, warranty, price, material or other product attributes enter the proposed arc."
+      ],
+      "identity_checks": {
+        "source_snapshot_exact": true,
+        "destination_snapshot_exact": true,
+        "source_and_destination_exist_once": true,
+        "proposed_id_collisions_in_bound_kg": 0,
+        "existing_proposed_direct_serialized_records": 0
+      },
+      "preserved_reverse": {
+        "id": "de8204",
+        "src_id": "n_v29_kitchen_table_cutit",
+        "dst_id": "n_v4gas_paine",
+        "relation": "cuts_food",
+        "label_ro": "taie pÃ¢inea",
+        "strength": 0.98,
+        "is_distractor": 0,
+        "bidirectional": 0,
+        "complete_eight_fields_match": true
+      },
+      "scope_status": "A separate documentary counterpart caption; the original reverse caption is not made bidirectional.",
+      "approval_flags": {
+        "selection": false,
+        "raw": false,
+        "native": false,
+        "installation": false,
+        "actual_play": false
+      }
+    },
+    {
+      "record_id": "v15-i02-tap-water",
+      "pool_state": "researched",
+      "verdict": "QUALIFIED_SOURCE_PREDICATE_SUPPORTED_RESEARCH_ONLY",
+      "canonical_source": {
+        "id": "n_v33_bathroom_fixture_robinet",
+        "label_ro": "Robinet",
+        "category": "viata_de_roman",
+        "sense": "Domestic tap which opens, stops and regulates water flow."
+      },
+      "canonical_destination": {
+        "id": "n_v4gas_apa",
+        "label_ro": "ApÄƒ",
+        "category": "gastronomie",
+        "sense": "Everyday water, whose canonical description mentions drinking and cooking; the new predicate concerns flow control only."
+      },
+      "predicate": "controleazÄƒ curgerea",
+      "direction": "outgoing_only",
+      "relation_value": "controls",
+      "documentary_edge_id": "e_v15i02_tap_water",
+      "documentary_flags": {
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "documentary_strength": 0.99,
+      "strength_status": "Exact copy of preserved de8418 strength; editorial hypothesis, not a source fact or measured gameplay weight.",
+      "source_ids": [
+        "tap-ikea"
+      ],
+      "source_support": "The named IKEA DALSKÃ„R instructions describe releasing domestic water by manipulating the tap lever. This supports the limited flow-control predicate for the existing tap and water concepts.",
+      "source_limits": [
+        "Does not establish water potability, safety or health effects.",
+        "No temperature or hot/cold operating rule is imported.",
+        "Romanian left/right wording differs from other-language instructions; no handedness claim is imported.",
+        "The retained Hornbach technical/irrigation tap document is scope counterevidence only, not positive support for drinking-water quality."
+      ],
+      "identity_checks": {
+        "source_snapshot_exact": true,
+        "destination_snapshot_exact": true,
+        "source_and_destination_exist_once": true,
+        "proposed_id_collisions_in_bound_kg": 0,
+        "existing_proposed_direct_serialized_records": 0
+      },
+      "preserved_reverse": {
+        "id": "de8418",
+        "src_id": "n_v4gas_apa",
+        "dst_id": "n_v33_bathroom_fixture_robinet",
+        "relation": "flows_through",
+        "label_ro": "curge prin robinet",
+        "strength": 0.99,
+        "is_distractor": 0,
+        "bidirectional": 0,
+        "complete_eight_fields_match": true
+      },
+      "scope_status": "A separate documentary flow-control counterpart; the original flow-through caption is not made bidirectional.",
+      "approval_flags": {
+        "selection": false,
+        "raw": false,
+        "native": false,
+        "installation": false,
+        "actual_play": false
+      }
+    }
+  ],
+  "actionable_factual_corrections": [],
+  "minor_interpretation_notes": [
+    "The ledger risk text says 'relation enums'; the frozen packet explicitly and correctly qualifies used_with and controls as existing nonempty string values, not a closed enum. This review uses the packet's precise schema interpretation.",
+    "Current node snapshots include stored degree, but the frozen packet correctly allows generated incident-degree fields to change later. No future byte-preservation or zero-exposure promise for generated fields is accepted."
+  ],
+  "coverage": {
+    "required_record_ids": [
+      "v15-i02-bread-knife",
+      "v15-i02-tap-water"
+    ],
+    "reviewed_record_ids": [
+      "v15-i02-bread-knife",
+      "v15-i02-tap-water"
+    ],
+    "required_rows": 2,
+    "reviewed_rows": 2,
+    "missing_rows": [],
+    "unexpected_rows": [],
+    "full_packet_input_count": 131,
+    "input_hashes_verified": 131,
+    "input_hash_mismatches": [],
+    "verification_mode": "Each bound file hashed sequentially with streaming SHA256; no source generation or execution.",
+    "semantic_schema_input_count": 5,
+    "semantic_schema_hashes_verified": 5,
+    "semantic_schema_mismatches": [],
+    "canonical_nodes": 4,
+    "canonical_node_snapshot_fields_per_node": 9,
+    "canonical_snapshot_mismatches": [],
+    "preserved_reverse_edges": 2,
+    "preserved_reverse_fields_per_edge": 8,
+    "preserved_reverse_snapshot_mismatches": [],
+    "proposed_direct_record_matches": 0,
+    "proposed_id_collision_matches": 0,
+    "primary_source_opens": 2,
+    "primary_source_open_limit": 3,
+    "coverage_gaps": [],
+    "qualification": "All 131 input bindings are copied below from the exact frozen packet after hash verification. Root's 89 named Go test definitions are text metadata only; this factual reviewer has not executed or collected tests, and does not independently certify that definition audit."
+  },
+  "source_access": {
+    "new_searches": 0,
+    "new_primary_opens": 2,
+    "browser_ui_actions": 0,
+    "local_source_downloads": 0,
+    "opened_sources": [
+      {
+        "id": "knife-ikea",
+        "publisher": "IKEA of Sweden AB",
+        "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/",
+        "accessed_on": "2026-10-06",
+        "status": "readable_primary_product_text",
+        "location": "Product details, line 60 in the readable page",
+        "license": "No open reuse license verified; factual paraphrase only.",
+        "factual_observation": "Bread-knife design is described as suitable for cutting bread; the proposed caption remains conditional on a suitable knife."
+      },
+      {
+        "id": "tap-ikea",
+        "publisher": "Inter IKEA Systems B.V.",
+        "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf",
+        "accessed_on": "2026-10-06",
+        "status": "readable_primary_pdf_text",
+        "location": "Page 0 Romanian section; AA-2163215-1",
+        "license": "Copyright Inter IKEA Systems B.V. 2014; factual paraphrase only.",
+        "factual_observation": "Lever movement releases domestic water. Left/right translations differ; the reviewed caption asserts flow control only."
+      }
+    ],
+    "retained_counterexample": {
+      "id": "tap-hornbach-scope",
+      "url": "https://media.hornbach.ro/hb/ownersmanual/as.137830455.pdf",
+      "reopened": false,
+      "role": "Inherited scope counterevidence only. No fresh verification or potable-water support is claimed."
+    },
+    "source_true_does_not_establish_useful_gameplay": true,
+    "numeric_strength_is_source_fact": false
+  },
+  "schema_and_value_review": {
+    "inputs": {
+      "go-backend/internal/contentbuild/graph.go": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+      "go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+      "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+      "scripts/basic_words_v33_data.py": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033",
+      "scripts/time_graph_v1_4_data.py": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a"
+    },
+    "normalizer_inspected_as_source_only": true,
+    "normalizer_observation": "The supported normalizer statically accepts nonempty src/dst/relation strings, a supplied nonempty explicit id, strengths within [0,1], and explicit binary flags. It was neither invoked nor imported.",
+    "relation_is_closed_enum": false,
+    "existing_serialized_relation_counts": {
+      "used_with": 16,
+      "controls": 1
+    },
+    "explicit_ids_unique_within_documentary_variant": true,
+    "explicit_ids_absent_from_current_bound_kg": true,
+    "id_preservation_in_actual_transaction": "UNRESOLVED / NOT RUN",
+    "direct_pair_claim": "Missing stored direct records were checked by exact src_id/dst_id field comparison only; no reachability or shortest-path claim is made.",
+    "weight_policy": "0.98 and 0.99 exactly copy old opposite strengths; appropriateness, equal weighted feedback and player value remain unmeasured."
+  },
+  "preservation_checks": {
+    "kg_snapshot": {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+    },
+    "i01_current_ledger": {
+      "path": "docs/content-pool/v1-5-association-i01/pool.json",
+      "sha256": "9d1b6e34bb770f15f9a2cae3525a1def0fcc967042284e11d86451110a823fd5"
+    },
+    "i01_archived_r1_ledger": {
+      "path": "docs/content-pool/v1-5-association-i01/pool-r1.json",
+      "sha256": "a8cbd2b88c57e08bb7ccf5fec3988c216a6587c31914bd6fc80ba21f57525c29"
+    },
+    "immutable_i01_factual_receipt": {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i01/factual-review-r1.json",
+      "sha256": "7e4f12cecbc825e3715c0cdc8026673979ad71e01d33cfb26995ba9ab00b58ff"
+    },
+    "immutable_i01_factual_reconciliation": {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i01/factual-reconciliation-r2.json",
+      "sha256": "4ab8e22c16a245f30efc8cc5fb130c7154de8da66387c0306a9a62051492dd71"
+    },
+    "original_small_object_ledger": {
+      "path": "docs/content-pool/v1-5-small-objects/pool.json",
+      "sha256": "72eb5ca30d91ab1e2e47119e520153b564c39953e264623d17f08879eb4e0cad"
+    },
+    "old_i01_contingency_states": {
+      "v15-i01-existing-bread-knife": "idea",
+      "v15-i01-existing-tap-water": "idea"
+    },
+    "i02_pool_states": {
+      "researched": 2,
+      "selected": 0,
+      "installed": 0
+    },
+    "original_small_object_pool_states": {
+      "researched": 2,
+      "held": 6,
+      "selected": 0,
+      "installed": 0
+    },
+    "authored_endpoint_fields": "All current four exact canonical snapshots match. Documentary scope preserves labels, descriptions, aliases/forms, categories and salience; generated stored incident-degree fields remain uncomputed for a future graph.",
+    "old_reverse_records": "Complete existing de8204 and de8418 row values match the source-binding snapshots inside the unchanged exact fixture; no flag or caption has been changed.",
+    "reviewer_input_pool_or_receipt_mutations": 0,
+    "reviewer_new_files": "Only this independent factual report."
+  },
+  "scope_and_guard_review": {
+    "new_nodes": 0,
+    "new_forms": 0,
+    "new_distinct_incident_pairs": 0,
+    "new_authored_rounds": 0,
+    "new_targets": 0,
+    "new_recipes": 0,
+    "removed_edges": 0,
+    "hypothetical_separate_directed_arc_records": 2,
+    "new_node_floor_unchanged": {
+      "distinct_nondistractor_incident_neighbors_at_least": 4,
+      "same_category_neighbors_at_least": 2
+    },
+    "old_floor_results_retained": {
+      "breloc": {
+        "incident": 1,
+        "same_category": 1,
+        "status": "held"
+      },
+      "palnie_excluding_quality_held_shampoo": {
+        "incident": 4,
+        "same_category": 1,
+        "status": "held"
+      }
+    },
+    "qualification": "Both endpoints in each proposed pair already exist and an opposite direct arc already connects each pair. These directions add no distinct incident pair and cannot pad or waive either original small-object floor.",
+    "hidden_factual_padding_found": false,
+    "hidden_target_or_incoming_floor_waiver": false,
+    "potential_directed_cycle_and_reverse_path_effects": true,
+    "generated_exposure": "UNRESOLVED; new outgoing directions can change directed/cross counts, eligibility, rank, mining, fallback and player feedback. No zero-exposure promise is accepted."
+  },
+  "unresolved_adoption_gaps": [
+    "No actual supported module, runnable proposal, Source5, resulting graph/runtime/source/export/authority hashes or actual ID-preservation receipt exists.",
+    "Appropriate weights and meaningful nonempty naturally selected ordinary player improvement remain unmeasured; fixed endpoint-pair use alone cannot establish normal selection benefit.",
+    "Actual all-node directed/weighted distances, reciprocal cycles, ranks/temperature, incoming eligibility, clue/anchor, option/caption/par and all-game current/fallback/category/RNG effects are NOT RUN.",
+    "Latent crafting/source closure and generated seed/round exposure remain unresolved.",
+    "Precise current eight-source/current HTTP corpus registration, complete old consumer/parameter-ID full-history selectors, strict inverse receipts and immutable old/current historical assertions remain unresolved.",
+    "Future native scratch, fixture identity, binary, qualified toolchain/reference window and measured resource budgets are not admitted; QUIET_WINDOW KEEP remains in force.",
+    "Current qualification, independent assembled acceptance, coordinator-only main merge receipt and all later-version prerequisites remain absent."
+  ],
+  "planned_gate_statuses": {
+    "graph_preflight": "NOT RUN",
+    "graph_materialization": "NOT RUN",
+    "identity_and_ownership_execution": "NOT RUN",
+    "all_game_impact": "NOT RUN",
+    "meaningful_ordinary_player_journey": "NOT RUN",
+    "terminal_puzzle_regeneration": "NOT RUN",
+    "historical_saved_prefixes": "NOT RUN",
+    "complete_full_history_and_inverse_sources": "NOT RUN",
+    "independent_current_http_and_old_corpora_parity": "NOT RUN",
+    "race_vet_and_full_native_qualification": "NOT RUN",
+    "resource_peak_measurement": "NOT RUN",
+    "assembled_acceptance": "NOT RUN",
+    "installation": "NOT RUN",
+    "main_merge": "NOT RUN"
+  },
+  "named_test_metadata": {
+    "root_declared_existing_named_go_definitions": 89,
+    "root_claim_kind": "Text definition/path metadata only.",
+    "independent_factual_reviewer_test_execution": 0,
+    "test_collection_or_registration_proof": false,
+    "green_gate_inferred_from_named_definitions": false
+  },
+  "approval_flags": {
+    "research_factual_predicates_only": true,
+    "actual_proposal": false,
+    "module": false,
+    "source5": false,
+    "raw_graph": false,
+    "native": false,
+    "selection": false,
+    "installation": false,
+    "actual_play": false,
+    "new_target": false,
+    "new_round": false,
+    "new_recipe": false,
+    "assembled_acceptance": false,
+    "main_merge": false,
+    "push": false,
+    "deployment": false,
+    "approval_transfer": false
+  },
+  "resource_boundary": {
+    "local_source_work_ceiling_gib": 0.5,
+    "largest_parsed_source_file_bytes": 3674915,
+    "bound_input_hashing": "Sequential streaming; no whole bound corpus loaded for hashing.",
+    "local_downloads": 0,
+    "peak_process_profile": "NOT RUN; ceiling is a constraint, not a measured peak."
+  },
+  "execution": {
+    "native_status": "HELD / NOT RUN",
+    "quiet_window": "KEEP",
+    "test_commands": 0,
+    "go_or_native_cli_commands": 0,
+    "builds": 0,
+    "installations": 0,
+    "graph_traversals": 0,
+    "preflights": 0,
+    "graph_or_gameplay_simulations": 0,
+    "browser_ui_actions": 0,
+    "models": 0,
+    "child_workers": 0,
+    "source_opens": 2,
+    "report_write": "Python stdlib pathlib.write_text with UTF-8 encoding and newline='\\n'; sole authorized report."
+  },
+  "not_run": [
+    "Graph/preflight/gameplay/miner/weighted-distance simulation or runtime selection",
+    "Go/native CLI/help/build/install, frontend, WSL, Docker, PG or any test/full-suite",
+    "Browser UI, image/model campaigns or further source hunting",
+    "Module, Source5, fixture, exporter, authority or runtime generation",
+    "Raw graph adoption, pool selection, installation, assembled acceptance, merge, push or deployment",
+    "Meaningful actual ordinary play and all current/historical executable qualification gates"
+  ],
+  "next_action": "Return this exact-bound research factual receipt to the coordinator. Preserve held native/adoption gates. Later materialization and gameplay qualification require separately authorized, coordinator-admitted work and fresh independent exact-artifact acceptance.",
+  "verified_input_bindings": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/NATIVE_TOOLCHAIN.md": "fd39105146e7c7a04449f230a763bb54da75b09094d0a021f548c4605cba70b3",
+    "docs/agent-testing.md": "8bf486174b59ecb3e987c53201329f061a6369fa61941006cea0f3830be74b34",
+    "docs/content-pool/v1-5-association-i01/pool-r1.json": "a8cbd2b88c57e08bb7ccf5fec3988c216a6587c31914bd6fc80ba21f57525c29",
+    "docs/content-pool/v1-5-association-i01/pool.json": "9d1b6e34bb770f15f9a2cae3525a1def0fcc967042284e11d86451110a823fd5",
+    "docs/content-pool/v1-5-directions-i02/pool.json": "e5e6dc53ece841a017c9f62dea9c0b01d95e3be3783895b6febdf854680feb8e",
+    "docs/content-pool/v1-5-small-objects/pool-r1.json": "e5e6f1039b8e66a9e2d708c82c69f56abacbaa4c6f5485491de6b3b0df366905",
+    "docs/content-pool/v1-5-small-objects/pool-r2.json": "be4aefe40feb05fbb4f96a79f3261e9135beab6e5ac23690f1d455bb7f9e87e6",
+    "docs/content-pool/v1-5-small-objects/pool.json": "72eb5ca30d91ab1e2e47119e520153b564c39953e264623d17f08879eb4e0cad",
+    "docs/reviews/v1-3-everyday-concepts/graph-proposal.json": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3",
+    "docs/reviews/v1-4-time-links-and-predicates/graph-proposal.json": "6cae1819c10164f5181501eb86de75b32592af035f4198e642a43f63f798085d",
+    "docs/reviews/v1-4-time-links-and-predicates/graph-quality-impact.json": "a8d5bade1c59d8754b423a234797163aafcc736215926bcd2fe3ecd0840fc81f",
+    "docs/reviews/v1-4-time-links-and-predicates/history-reference-readiness.json": "7c214475d31b12f2b6020298511ab942a107b6949563959cb09c8b730e7ac0d2",
+    "docs/reviews/v1-4-time-links-and-predicates/native/world/candidate.json": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc",
+    "docs/reviews/v1-4-time-links-and-predicates/native/world/factual-review.json": "48a6cfcd0ad80a82f248b3cc532b724dba88da8059fdab763c5a5a61f4ac63a1",
+    "docs/reviews/v1-4-time-links-and-predicates/native/world/quality-review.json": "32f65cc95cd9d169bba1019d85ab545eaa70be6e17decca0d1fce0d80f3a2240",
+    "docs/reviews/v1-5-small-objects/frozen/breloc-r3.json": "43feab29f93a19c2853da98ea0ec6e742f0ef25c539d423c3807f768b25a5b31",
+    "docs/reviews/v1-5-small-objects/frozen/palnie-r3.json": "78eba8ead137edf5c10747c0959e713106c8457ef33e6829d5c2b22b3d00bf11",
+    "docs/reviews/v1-5-small-objects/identity-deck-screen.json": "a87587dfac0d26fb075c0f5428c1ac02028db29165696bd6595d76c3537eb94c",
+    "docs/reviews/v1-5-small-objects/iterations/i01/breloc-source-screen-r1.json": "4c78b5fd8887d194c6e23ee4c12c8214551c45acf5c7711dcdfcaadbd9e3260d",
+    "docs/reviews/v1-5-small-objects/iterations/i01/case-requirements-r1.json": "ad20b557d054cb85e20641fa28f9ecb2506481de0deaeee21aa9faa33dde2889",
+    "docs/reviews/v1-5-small-objects/iterations/i01/case-requirements-r2.json": "bae23f119a9dcb6a5ffc89fac40962076f9c71ac3515e6b844d4b25692882d62",
+    "docs/reviews/v1-5-small-objects/iterations/i01/factual-reconciliation-r2.json": "4ab8e22c16a245f30efc8cc5fb130c7154de8da66387c0306a9a62051492dd71",
+    "docs/reviews/v1-5-small-objects/iterations/i01/factual-review-r1.json": "7e4f12cecbc825e3715c0cdc8026673979ad71e01d33cfb26995ba9ab00b58ff",
+    "docs/reviews/v1-5-small-objects/iterations/i01/packet-r2.json": "75a8dc32cc345644520add93bab979cf993de4686cf28009fbcc2d6944a2f7a5",
+    "docs/reviews/v1-5-small-objects/iterations/i01/palnie-source-screen-r1.json": "852aa562950782c5eb806423c37154b9e49fb8edd316f310d0ddfad09fa920d9",
+    "docs/reviews/v1-5-small-objects/iterations/i01/plan-r1.json": "e64867aebe687e4ab2cf9d0896c91b560bce2e7d6cb8536010ae3d6f367e7e10",
+    "docs/reviews/v1-5-small-objects/iterations/i01/quality-reconciliation-r2.json": "7990ac65c7872421761782338e0379cbc3a01d55b71cdd1ff2e761e3ff567301",
+    "docs/reviews/v1-5-small-objects/iterations/i01/quality-review-r1.json": "f77850727c852880c0574a0e9c679c39f7bdf846a17e69ead1dc2d77fae38f5e",
+    "docs/reviews/v1-5-small-objects/iterations/i01/replan-source-screen-r1.json": "c7f4fa794610e8686c07edc642dc5d04a941b19253453c100f3d7a749ecb0ec2",
+    "docs/reviews/v1-5-small-objects/iterations/i01/verification-r2.json": "075aa01c03fd6713dde60ed74b407c1e5114eaa25cc274e958de2b0976733ab7",
+    "docs/reviews/v1-5-small-objects/iterations/i02/admission-prerequisites-r1.json": "cb24d88e755070f79667de182ff2ddd2b247b497aa76717a8a42fe15ab36305f",
+    "docs/reviews/v1-5-small-objects/iterations/i02/native-plan-r1.json": "3d70f82d0e617cd0b74fc4c8260d8512eaeef0120319f05deb4fe898310ea89b",
+    "docs/reviews/v1-5-small-objects/iterations/i02/plan-r1.json": "95c820e8a4c5aa1171b2ec35e4192b975fbfd73379c5663fe0926a8150bdf753",
+    "docs/reviews/v1-5-small-objects/iterations/i02/source-bindings-r1.json": "2f106271d0d37e3fbda592aeec02b1251b2918120679e008e9b11a7dea3180b2",
+    "docs/reviews/v1-5-small-objects/iterations/i02/variant-r1.json": "5859ad9977246c033d6151a58510838afc6491292f8284690aa091fb73cea3a7",
+    "docs/reviews/v1-5-small-objects/research-accessories-stoppers.json": "a42b1fe781d378e56da494b07719b154ec3c83d030d7d48dbec900ee446f124d",
+    "docs/reviews/v1-5-small-objects/research-doom-forms.json": "afda4c26be524529aa4efa9d1d425a0d0c637e0d1691de377508af9c975ff1b8",
+    "docs/reviews/v1-5-small-objects/research-object-tools.json": "035e7e6cef18a73e661b11da7e12df76d4f647356f544cc571ae14b660c592fa",
+    "docs/reviews/v1-5-small-objects/windows-factual-review.json": "18018ee761dd8d3c485e2070a1d06cc3d615f60b3c807421ea91d3de04cad717",
+    "docs/reviews/v1-5-small-objects/windows-identity-screen.json": "7c46f350ad4a37ba9aafa29b788f2fa94ea08732d32de153f41c580f30354de1",
+    "docs/reviews/v1-5-small-objects/windows-proposal-blueprint-r1.json": "7941bbb757953f7d56d04116684c355c069108bd6a129c84809fbde9155f919e",
+    "docs/reviews/v1-5-small-objects/windows-quality-review.json": "4e7ec6d75369872f3a93b09c639060c8ae8241477d8bba08671da470b2c54222",
+    "docs/reviews/v1-5-small-objects/windows-research-packet.json": "7aab26dc7280ebd654f568f0974ecaefba25e63531d0072970da7e2f0a6060b2",
+    "docs/reviews/v1-5-small-objects/windows-sources.json": "2437a0f9fdfa94f181b510c6c09a58884dec4348126ca3bbba4189de5bf5459e",
+    "docs/reviews/v1-5-small-objects/windows-verification.json": "c341efd86edc88a2ed55b6c50dac5abd624c5bc6a9b16efee4a7433b4f1127d9",
+    "go-backend/cmd/cat-content-rail/main.go": "66aa1433d6eda62c084fc656f8a03990708677639e54aa3ec4dc1c188f6636a8",
+    "go-backend/cmd/cat-content-rail/main_test.go": "3a6cf163c54b13e180c588433c055bc100a4c4eea30936637de3302f5b1ccded",
+    "go-backend/cmd/cat-content/main.go": "58a3a29310b771e27ac4f05bfb6ed0ad9cba6fca646ad9916d93071e64fdd722",
+    "go-backend/cmd/cat-mobile-pack/main.go": "1a75f503e6bead9d9a18adfb6e936b297004f6978de5459b76aad6984bccbfb3",
+    "go-backend/cmd/cat-qualify/main.go": "38aa41a38f51a6700d238085dd80845c5fff166b5b21a521cec5ca79ac8e6def",
+    "go-backend/go.mod": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50",
+    "go-backend/internal/alchimie/progress_test.go": "0cf957c07c83ab5ce05d48f1934743395ee75e007f80095352b448a235984977",
+    "go-backend/internal/alchimie/projection.go": "c45a46c4836b58b572f4fec15dbc72a355ec3b8a35a0bee6a37672104a8dab86",
+    "go-backend/internal/alchimie/review_test.go": "0bb928fce70c66f7d4e5f722a7649f3a396d1c71dfc31486d687dc161ac98e68",
+    "go-backend/internal/alchimie/service_test.go": "963b404e662d52a75e04e2540fbb75622bc4893b5fcd7471a604a5d15fdebc9d",
+    "go-backend/internal/alchimie/testdata/python_parity.json": "ead042be8645eb74ea775c7e9d085fbc7bc4ac4fbf3cc5e90cdb591c36fa398f",
+    "go-backend/internal/alchimie_explore/saved_prefix_test.go": "f14221d91640b7e0636b5e978dfbfd3a7408da0e48c0f613fb48092bd7c46610",
+    "go-backend/internal/alchimie_explore/service_test.go": "d8205a0fa8ba66b7f8543f2d4aca32e6419746bd0da63015bc344001040ea404",
+    "go-backend/internal/alchimie_explore/testdata/legacy-saved-prefixes-v92.json": "51eadd294f043991fb9a518a0ea62b7bd1249f2f1d3878db91cd0d3253ab1718",
+    "go-backend/internal/catalog/catalog_test.go": "7991e3f565c229ce5cacf079dcac6cc2250ef75cff2aea4ca6d191ffba11ed5e",
+    "go-backend/internal/catalog/testdata/python_selector.json": "c6add73c1cd1cbfd2e7ad63c7ac219520501046dadf367a1c118f7a766fd46e0",
+    "go-backend/internal/conexiuni/progress_test.go": "40cd1fa1cada5fc30a6e0ab45f843cb8534460a75343fea8fed7663268fa215f",
+    "go-backend/internal/conexiuni/service_test.go": "e84a30951f85bb4ff3fca091e6e51742549f5902f9978d6e63711b1485d22efb",
+    "go-backend/internal/conexiuni/testdata/python-goldens.json": "e0aaef96a28c2a7d2487bb91e5dabbe93b63449c0dfa24920aa299edcb56f86e",
+    "go-backend/internal/content/bundled.json": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "go-backend/internal/contentbuild/build.go": "ccb575e94fa2615eb0712b6852b7e8936048457a84b67b2762d9d83da769c44b",
+    "go-backend/internal/contentbuild/build_test.go": "15b1eab30544b7adb291f6b8e1c02ac4bbc0fd772bc8e11fad46662027443aec",
+    "go-backend/internal/contentbuild/graph.go": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+    "go-backend/internal/contentbuild/transactions_test.go": "4742c99e6b93bab9c3ca161adc06b69683c10e2e0a525d5b611d7ad961cc9b5d",
+    "go-backend/internal/contentops/command.go": "6a17c5c08d694eb1dd5c092d42240be64929d877563b3ec2a5019d301ea49e4c",
+    "go-backend/internal/contentops/contentops_test.go": "fa0286bb98555c3fcc9150ddf868d8701f0a9f781b9c73a338dd011bbd72bf69",
+    "go-backend/internal/contentrails/installed.go": "d4f465ecb24754730f2e5e6e45a441ff5bbbc146ac9cc53c50824446992dbefd",
+    "go-backend/internal/contentrails/installed_test.go": "2a3252822f1fc61e1b5228c199387731e5a3c5ea4ee6434a03fbaf1880459c3b",
+    "go-backend/internal/contentrails/rail_test.go": "1c16e4b49c1978efa3a969294fc0e1b5819e00ee7bfc1ea3e1f32c5b342d8f2a",
+    "go-backend/internal/contentrails/review.go": "065af97857dba7e1c4f72b61a69b1948fa3b1b04fb4bbd276554d58094d9dfc8",
+    "go-backend/internal/contentrails/shape.go": "ee73f903a862de0601685e7bce1204e80d8235eb46befd1dabdd20ce806497de",
+    "go-backend/internal/contentrails/source.go": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+    "go-backend/internal/contentrails/sources/authored-v4.json": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "go-backend/internal/contentrails/world_audit_test.go": "d174a04ac94f8dcd7b16f6c772e3d70522cc2d09b50625214fa302b5d070bd80",
+    "go-backend/internal/contexto/content_v1_2_test.go": "310320e0e857ecef064681ca8ae827f36918cea3b39ea0ca01b0258f074597b2",
+    "go-backend/internal/contexto/content_v1_3_test.go": "1aaf98dd1dd835b92330c063b099f89d99f35fd4b1b7120c18af748e37feff21",
+    "go-backend/internal/contexto/content_v1_4_test.go": "34f61e83e627a46d71a6927f6acd62d54d954c0be3a1bca2cd5dc96add8d8969",
+    "go-backend/internal/contexto/progress_test.go": "ffad14dcb22fe8568858993c1f61276a9fdb272688fda17526eb0682b7ee8e6b",
+    "go-backend/internal/contexto/service_test.go": "2382b7fffaf893f3585c6c3e2408c738b01bae7835efec50507316fc0e79399a",
+    "go-backend/internal/contexto/testdata/python_games.json": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078",
+    "go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+    "go-backend/internal/graph/service_test.go": "31adfc74c4ec017e57635992130980707c5841937814beb7ae288946c3612827",
+    "go-backend/internal/graph/testdata/python_graph.json": "823fe4153abe826c03aaff8479773bc0c22b3659ad22b800c3d56d2ec629a83a",
+    "go-backend/internal/hopcli/apppack_test.go": "b722e2824789f77238e961aa950703946269d2fa14e642ebc2780d3666612d4d",
+    "go-backend/internal/hopcli/game_test.go": "1946dd46bae20819ff33a3d88bc30f03c4500243b3ff31e9142046e4f54beaa9",
+    "go-backend/internal/hopcli/loading_test.go": "e03e3a9cd623f08f2525ae4fbef31046a84b491a2e94808bac39257d6f69fd04",
+    "go-backend/internal/httpgolden/golden.go": "215499b02d12cc5da8a8ddf3349dce74b4a730da1e9a756b2742f0ee66d0d22f",
+    "go-backend/internal/httpgolden/golden_test.go": "1da7113f29cffff3966a6a6e1493d53b83b67a44da12a15ef96909f1b958b03c",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-4.json.gz": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+    "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+    "go-backend/internal/intrusul/service_test.go": "cc932331dbbddb86467d9be839f8f2d1fb6c47869754de82c013f34d1c02a742",
+    "go-backend/internal/lant/content_v1_2_test.go": "a85a7bc5caba7b12a558f31da8e949d2f9394ca94970e6dba9bae839c048655b",
+    "go-backend/internal/lant/content_v1_3_test.go": "2d2f0ce69f710744bf4121952a06efa1174aef00e376823d6f4d01e4632d8145",
+    "go-backend/internal/lant/content_v1_4_test.go": "ad788b8b4e360cc523243aad53065ecabd4261910919dacca341b3977710adc1",
+    "go-backend/internal/lant/progress_test.go": "783d4591e4fe69dcdca5e6cd81da6ebd9d71db1d8596d488a9b82cfceb6cc296",
+    "go-backend/internal/lant/service.go": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90",
+    "go-backend/internal/lant/service_test.go": "a87d4389380789fd04dcbc8da3e1cc2f0487037f09f7bb96d90e9093745b9d79",
+    "go-backend/internal/lant/testdata/python_games.json": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+    "go-backend/internal/mobilepack/mobile_test.go": "c08f9e497f64596b5d057499f681a33b87645e5f9830e9ddc4ef7bab5f6fb54d",
+    "go-backend/internal/perechi/service_test.go": "2c69b6e5006ee5245cca4024b38ff93ba5740ddea6251714997673e52da0a65b",
+    "go-backend/internal/perechi/testdata/python-goldens.json": "081f02948ddc9a9fa8bd215f7b214771588dd35612cf7c4a8b66016c79771ab1",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "scripts/basic_words_v33_data.py": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033",
+    "scripts/everyday_graph_v1_3_data.py": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+    "scripts/qualify_go_toolchain.sh": "c7e65ad67627e5060a154f3aef6091e46057562456a6d704d7d1e7a85d90ab11",
+    "scripts/time_graph_v1_4_data.py": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a",
+    "tests/content_history.py": "b4405def962ef86d8b99dc4efae8f5459e0662822a3ab8aa89e657dfbf023ae8",
+    "tests/content_scenarios.py": "27e15dc3e595fb84a9fa89147993bb02b0741cde5bc2ea50e3f5487c94757f85",
+    "tests/current_content.py": "6fe13e78616826b4e5ccc8f66b6d4f43dd7d82c048b944a4a2e07a7f1238d509",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8",
+    "tests/test_v1_2_content_history.py": "299425fc227ab17ae3b73f5b16baeae7539e21f4e65a0a3b938d80a5160f589d",
+    "tests/test_v1_3_content_history.py": "644a70e5e81c09259a55d4a72ad1510aa73b6c5e10e1e2936a36c30e5299a06f",
+    "tests/test_v1_4_content_history.py": "680aef936fe2ec008b9cdf57b6441ddcdd55d3838989dd1314bd352291a2b35d",
+    "tests/test_v1_content_history.py": "5a76788a5a3791177f17355326e534db97c6fda9be5f47e737aa8e17c9e1acdc"
+  }
+}

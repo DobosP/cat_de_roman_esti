@@ -1503,3 +1503,31 @@ and actual qualified main landing remain outstanding.
 Light byte/document/budget/whitespace checks pass; native Go/WSL/Docker/PG/full-suite/browser/
 model/build/install and gameplay simulations remain NOT RUN under QUIET_WINDOW KEEP.
 No Source5, generated artifact, fixture, code, authority, push, merge, deployment or deletion.
+
+## 2026-10-06 — V1.5 i02 source-only functional-direction replan
+
+Valid until: i02 exact variant, baseline, case/source bindings or admission changes — then treat as history.
+
+Runtime base a75ce962; research parent e495f333; isolated codex/v1-5-directions-i02 preserves i01.
+The [i02 record](docs/reviews/v1-5-small-objects/iterations/i02/README.md) freezes exactly Pâine→Cuțit
+used_with / se poate felia cu /0.98 and Robinet→Apă controls / controlează curgerea /0.99,
+with explicit outgoing-only nondistractor flags and separate ID hypotheses. Old de8204/de8418
+remain exact. The existing relation values differ from old reverse pair keys; preflight is NOT RUN.
+Authored endpoint fields stay fixed; generated degree fields are unresolved. Zero new distinct
+incident pairs, concepts, forms or authored rounds/targets/recipes; generated exposure is unresolved.
+
+Independent factual source review accepts qualified bread/suitable-knife and domestic water-flow
+predicates. Independent quality retains plausible functional research while holding numerical and
+actual ordinary-play adoption. The two records become held, preserving original researched bytes,
+source truth and all i01 holds. Current feedback packet has136 bindings;89 existing Go test names
+were verified as source definitions only, not executed or collected. Independent metadata
+reconciliations bind the exact current ledger. The native plan freezes existing corpora/selectors,
+verified future command templates and unmeasured RAM/disk/wall estimates, explicitly leaving
+new source hashes, natural journeys, inverse/full-history and independent1207 HTTP prerequisites unresolved.
+
+Light docs/budgets/default whitespace and byte/isolation checks pass; old i01 terminal-CRLF receipts
+remain exact with their separately recorded CRLF-aware result. No runtime/code/asset/source/authority
+path changes from a75ce962. No module, actual proposal or Source5 generation. All native tests/builds,
+graph/gameplay simulations, PG/WSL/Docker/browser/model/installation gates remain HELD / NOT RUN.
+WAITING_NATIVE_WINDOW is recorded once; no unchanged source retry. Coordinator owns actual qualified
+main landing. No merge request, version increment, push, deployment, deletion or hold mutation.

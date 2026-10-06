@@ -1,0 +1,191 @@
+{
+  "schema": "v1-5-i02-independent-factual-reconciliation-v1",
+  "checked_on": "2026-10-06",
+  "reviewer": "/root/blueprint_factual",
+  "independent_of_packet_source_and_case_authorship": true,
+  "scope": "Minimal metadata-only r2 reconciliation against the immutable i02 r1 factual receipt and archived initial ledger. No new source or execution review.",
+  "packet": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/packet-r2.json",
+    "sha256": "1d3b29567a8635290d536528c10ee3e30c6cf501be2bc43db12d534b147f7b41"
+  },
+  "current_ledger": {
+    "path": "docs/content-pool/v1-5-directions-i02/pool.json",
+    "sha256": "f2c13321fd1fc9e9600f1511a84dcae0e2c3ad3b4d5794dbb701eefdca9822ae"
+  },
+  "archived_initial_ledger": {
+    "path": "docs/content-pool/v1-5-directions-i02/pool-r1.json",
+    "sha256": "e5e6dc53ece841a017c9f62dea9c0b01d95e3be3783895b6febdf854680feb8e"
+  },
+  "immutable_r1_packet": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/packet-r1.json",
+    "sha256": "feb415263a275dd916871ac95732536405bd48363a51f3baa33bcdab09fbc892"
+  },
+  "immutable_r1_factual_receipt": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/factual-review-r1.json",
+    "sha256": "d1c452353654557fe308b00c577a4bf29058bed8a328b7661a885bd5a8f385d5"
+  },
+  "immutable_r1_quality_receipt": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/quality-review-r1.json",
+    "sha256": "b04c4c737e01c34fb3487f03809cafd2dacc025a5ec5d1fb229a319a1d25911d"
+  },
+  "feedback_closure": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/feedback-closure-r2.json",
+    "sha256": "88a9fbd60efd3282963e7df579f693c04a527c6e49d4152247fb3a7a284eeea8"
+  },
+  "verdict": "METADATA_RECONCILIATION_ACCEPTED_ADOPTION_HELD",
+  "verdict_detail": "Both researched-to-held transitions accurately retain qualified source truth while withholding numerical, ordinary-play and native adoption. The exact r1 factual verdict remains research-only; no approval transfers.",
+  "complete_row_coverage": [
+    {
+      "id": "v15-i02-bread-knife",
+      "state_r1": "researched",
+      "state_r2": "held",
+      "revision_r1": 1,
+      "revision_r2": 2,
+      "changed_fields": [
+        "decision",
+        "history",
+        "next_action",
+        "review_feedback",
+        "revision",
+        "state"
+      ],
+      "claim_arrays_exact": true,
+      "source_records_exact": true,
+      "identity_snapshots_exact": true,
+      "edge_hypothesis_exact": true,
+      "retained_predicate": "se poate felia cu",
+      "retained_edge": {
+        "id": "e_v15i02_bread_knife",
+        "src": "n_v4gas_paine",
+        "dst": "n_v29_kitchen_table_cutit",
+        "relation": "used_with",
+        "strength": 0.98,
+        "bidirectional": 0,
+        "is_distractor": 0
+      },
+      "preserved_reverse": "de8204",
+      "reasoning": "Suitable-knife bread slicing remains the same qualified source-supported possibility, not every knife/bread combination. The copied 0.98 weight remains editorial; actual natural selection, useful ordinary play and all affected current/history/source qualification remain unapproved and NOT RUN.",
+      "metadata_disposition": "Hold reconciles with the immutable factual and quality receipts; no factual rejection or new source claim is implied."
+    },
+    {
+      "id": "v15-i02-tap-water",
+      "state_r1": "researched",
+      "state_r2": "held",
+      "revision_r1": 1,
+      "revision_r2": 2,
+      "changed_fields": [
+        "decision",
+        "history",
+        "next_action",
+        "review_feedback",
+        "revision",
+        "state"
+      ],
+      "claim_arrays_exact": true,
+      "source_records_exact": true,
+      "identity_snapshots_exact": true,
+      "edge_hypothesis_exact": true,
+      "retained_predicate": "controleazÄƒ curgerea",
+      "retained_edge": {
+        "id": "e_v15i02_tap_water",
+        "src": "n_v33_bathroom_fixture_robinet",
+        "dst": "n_v4gas_apa",
+        "relation": "controls",
+        "strength": 0.99,
+        "bidirectional": 0,
+        "is_distractor": 0
+      },
+      "preserved_reverse": "de8418",
+      "reasoning": "Domestic tap flow control remains qualified support only. Potability, temperature, handedness and health are not inferred; Hornbach remains scope counterevidence. The copied 0.99 weight, meaningful ordinary-play benefit and all affected execution gates remain unapproved and NOT RUN.",
+      "metadata_disposition": "Hold reconciles with the immutable factual and quality receipts; no factual rejection or new source claim is implied."
+    }
+  ],
+  "coverage": {
+    "required_rows": 2,
+    "reviewed_rows": 2,
+    "missing_rows": [],
+    "unexpected_rows": [],
+    "packet_input_binding_count": 136,
+    "sequential_streaming_hashes_verified": 136,
+    "input_hash_mismatches": [],
+    "r1_input_binding_count": 131,
+    "r1_bindings_with_unchanged_digest": 130,
+    "only_changed_r1_binding": "docs/content-pool/v1-5-directions-i02/pool.json",
+    "added_r2_binding_count": 5,
+    "added_bindings": "Initial ledger archive, r1 packet, r1 factual receipt, r1 quality receipt, feedback closure.",
+    "exact_claim_arrays": 2,
+    "exact_source_records": 2,
+    "exact_identity_snapshots": 2,
+    "exact_edge_hypotheses": 2,
+    "immutable_plan_variant_source_case_and_review_bindings_preserved": true,
+    "source_claims_added_or_removed": 0,
+    "coverage_gaps": [],
+    "row_field_sets_verified": true,
+    "removed_row_fields": 0
+  },
+  "historical_r1_resolution": {
+    "original_mutable_path": "docs/content-pool/v1-5-directions-i02/pool.json",
+    "exact_archive_path": "docs/content-pool/v1-5-directions-i02/pool-r1.json",
+    "sha256": "e5e6dc53ece841a017c9f62dea9c0b01d95e3be3783895b6febdf854680feb8e",
+    "accepted": true,
+    "qualification": "Immutable r1 packet and reviews resolve their old pool binding to the archived initial bytes. Current lifecycle bytes do not rewrite historical evidence."
+  },
+  "actionable_factual_corrections": [],
+  "preservation_and_limits": {
+    "current_i02_states": {
+      "held": 2,
+      "selected": 0,
+      "installed": 0
+    },
+    "old_i01_and_r3_bound_inputs_unchanged": true,
+    "original_small_object_floors": {
+      "breloc": "1 incident / 1 same-category, held",
+      "palnie": "4 incident / 1 same-category excluding held shampoo, held"
+    },
+    "no_new_nodes_forms_distinct_incident_pairs_authored_rounds_targets_or_recipes": true,
+    "existing_new_node_floor_unchanged": "At least 4 distinct nondistractor incident neighbors and 2 same-category neighbors; no waiver.",
+    "generated_incident_degree_and_exposure": "May change after a future materialization; uncomputed. No zero-exposure or fixed generated-degree promise.",
+    "named_test_definitions": "Existing text metadata only; no test execution, collection, registration or green gate inferred."
+  },
+  "unresolved_adoption_gaps": [
+    "Exact materialized module/proposal/Source5 and resulting graph/runtime/source/export/authority bytes do not exist.",
+    "Weight suitability and meaningful naturally selected ordinary-play improvement remain unmeasured.",
+    "Directed/weighted distances, cycles, ranks/temperature, mining/fallback and latent crafting effects remain unresolved.",
+    "Current independent HTTP/source registration, full-history selectors and strict inverse receipts remain incomplete.",
+    "Owner release, admitted native resources, complete qualification and independent assembled acceptance remain absent."
+  ],
+  "approval_flags": {
+    "metadata_reconciliation_only": true,
+    "approval_transfer": false,
+    "raw_graph": false,
+    "native": false,
+    "actual_proposal": false,
+    "module": false,
+    "source5": false,
+    "selection": false,
+    "installation": false,
+    "actual_play": false,
+    "assembled_acceptance": false,
+    "main_merge": false,
+    "push": false,
+    "deployment": false
+  },
+  "execution": {
+    "status": "NOT RUN",
+    "native_status": "HELD / NOT RUN",
+    "wait_phase": "WAITING_NATIVE_WINDOW",
+    "quiet_window": "KEEP",
+    "new_source_opens": 0,
+    "new_searches": 0,
+    "native_commands": 0,
+    "tests": 0,
+    "simulations": 0,
+    "extra_research": 0,
+    "child_workers": 0,
+    "authorized_write": "Only factual-reconciliation-r2.json, Python stdlib UTF-8 LF.",
+    "source_work_ceiling_gib": 0.5,
+    "peak_process_measurement": "NOT RUN"
+  },
+  "not_run": "All materialization, preflight, actual play, native/build/install, current and historical executable gates remain NOT RUN. No source hunt or source reopening occurred.",
+  "next_action": "Return this exact metadata receipt; preserve the holds. No unchanged source hunt or actual campaign is authorized by this reconciliation."
+}

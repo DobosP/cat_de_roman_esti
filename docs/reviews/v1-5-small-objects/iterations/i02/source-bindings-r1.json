@@ -1,0 +1,174 @@
+{
+  "author": "/root",
+  "checked_on": "2026-10-06",
+  "claims": [
+    {
+      "direction": "outgoing_only",
+      "id": "v15-i02-bread-knife",
+      "numeric_strength_is_source_fact": false,
+      "object": "n_v29_kitchen_table_cutit",
+      "predicate": "se poate felia cu",
+      "qualification": "Qualified bread-can-be-sliced-with-a-suitable-knife relation; not every knife/bread combination.",
+      "source_evidence_state": "Prior qualified source observations; fresh exact factual review pending.",
+      "source_ids": [
+        "knife-ikea"
+      ],
+      "subject": "n_v4gas_paine"
+    },
+    {
+      "direction": "outgoing_only",
+      "id": "v15-i02-tap-water",
+      "numeric_strength_is_source_fact": false,
+      "object": "n_v4gas_apa",
+      "predicate": "controlează curgerea",
+      "qualification": "Domestic tap controls water flow; no temperature, handedness, potability or health claim.",
+      "source_evidence_state": "Prior qualified source observations; fresh exact factual review pending.",
+      "source_ids": [
+        "tap-ikea"
+      ],
+      "subject": "n_v33_bathroom_fixture_robinet"
+    }
+  ],
+  "executed": false,
+  "kg_snapshot": {
+    "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+    "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+  },
+  "node_snapshots": {
+    "n_v29_kitchen_table_cutit": {
+      "aliases": [
+        "cuțitul",
+        "cuțite",
+        "cuțitele",
+        "cuțitului"
+      ],
+      "category": "gastronomie",
+      "degree": 4,
+      "description": "Unealtă cu lamă și mâner, folosită pentru a tăia alimente sau alte lucruri.",
+      "difficulty_tier": "easy",
+      "id": "n_v29_kitchen_table_cutit",
+      "label_ro": "Cuțit",
+      "node_type": "concept",
+      "salience": 0.92
+    },
+    "n_v33_bathroom_fixture_robinet": {
+      "aliases": [
+        "robinetul",
+        "robinete",
+        "robinetele",
+        "robinetului",
+        "robinetului de baie",
+        "robinetelor de baie"
+      ],
+      "category": "viata_de_roman",
+      "degree": 5,
+      "description": "Dispozitiv care deschide, oprește și reglează curgerea apei.",
+      "difficulty_tier": "easy",
+      "id": "n_v33_bathroom_fixture_robinet",
+      "label_ro": "Robinet",
+      "node_type": "concept",
+      "salience": 0.94
+    },
+    "n_v4gas_apa": {
+      "aliases": [
+        "ape",
+        "apele",
+        "apei",
+        "apelor"
+      ],
+      "category": "gastronomie",
+      "degree": 30,
+      "description": "Lichid de băut și ingredient de bază în gătit.",
+      "difficulty_tier": "easy",
+      "id": "n_v4gas_apa",
+      "label_ro": "Apă",
+      "node_type": "concept",
+      "salience": 0.968
+    },
+    "n_v4gas_paine": {
+      "aliases": [
+        "pâinea",
+        "pâini",
+        "pâinile",
+        "pită",
+        "pite",
+        "pitele",
+        "pitei",
+        "pitelor",
+        "pâinii",
+        "pâinilor"
+      ],
+      "category": "gastronomie",
+      "degree": 21,
+      "description": "Aliment de bază făcut din aluat copt, consumat la masă.",
+      "difficulty_tier": "easy",
+      "id": "n_v4gas_paine",
+      "label_ro": "Pâine",
+      "node_type": "concept",
+      "salience": 0.9273
+    }
+  },
+  "preserved_reverse_edge_snapshots": {
+    "de8204": {
+      "bidirectional": 0,
+      "dst_id": "n_v4gas_paine",
+      "id": "de8204",
+      "is_distractor": 0,
+      "label_ro": "taie pâinea",
+      "relation": "cuts_food",
+      "src_id": "n_v29_kitchen_table_cutit",
+      "strength": 0.98
+    },
+    "de8418": {
+      "bidirectional": 0,
+      "dst_id": "n_v33_bathroom_fixture_robinet",
+      "id": "de8418",
+      "is_distractor": 0,
+      "label_ro": "curge prin robinet",
+      "relation": "flows_through",
+      "src_id": "n_v4gas_apa",
+      "strength": 0.99
+    }
+  },
+  "prior_scout": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i01/replan-source-screen-r1.json",
+    "sha256": "c7f4fa794610e8686c07edc642dc5d04a941b19253453c100f3d7a749ecb0ec2"
+  },
+  "qualification": "Original primary sources support qualified predicates only; royalty/license observations remain factual paraphrase only. Hornbach file is retained scope counterevidence, not ordinary potable-water support.",
+  "schema": "v1-5-i02-claim-source-binding-v1",
+  "semantic_schema_inputs": {
+    "go-backend/internal/contentbuild/graph.go": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+    "go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "scripts/basic_words_v33_data.py": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033",
+    "scripts/time_graph_v1_4_data.py": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a"
+  },
+  "sources": [
+    {
+      "access": "Direct readable product text; line60 describes bread cutting; no recipe copied.",
+      "id": "knife-ikea",
+      "license": "No open reuse license verified; factual paraphrase only.",
+      "publisher": "IKEA of Sweden AB",
+      "supports": "Some knives are designed for cutting bread; supports a qualified bread-can-be-sliced-with-knife relation, not every knife/bread combination.",
+      "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/"
+    },
+    {
+      "access": "Direct PDF text, page0 Romanian section lines238–247, documentAA-2163215-1.",
+      "id": "tap-ikea",
+      "license": "© Inter IKEA Systems B.V.2014; factual paraphrase only.",
+      "limits": "Romanian/other-language left-right wording differs; no handedness, temperature or safety claim is proposed.",
+      "publisher": "Inter IKEA Systems B.V.",
+      "supports": "Lever manipulation controls domestic water release.",
+      "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf"
+    },
+    {
+      "access": "Direct PDF text, page1 opening/closing section.",
+      "id": "tap-hornbach-scope",
+      "license": "No open reuse license verified; factual paraphrase only.",
+      "limits": "Double-service plastic tap and potentially nonpotable technical/irrigation water; not used as primary support for the canonical household-drinking-water edge.",
+      "publisher": "Supplier instruction file hosted by Hornbach; original issuer not established",
+      "supports": "Opening/closing a water tap is described.",
+      "url": "https://media.hornbach.ro/hb/ownersmanual/as.137830455.pdf"
+    }
+  ]
+}

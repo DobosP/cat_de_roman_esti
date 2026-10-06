@@ -75,3 +75,7 @@ Current renewed-loop preparation: [i01 bounded association screen](iterations/i0
 records ten hypotheses and independent source/quality feedback under [ADR-0173](../../adr/0173-resume-bounded-content-version-loop.md).
 Original research/blueprint evidence above remains exact; current native execution is held.
 Owner renewal replaces the earlier loop-stop authorization; later versions still await a verified landing.
+
+Current bounded replan: [i02 exact existing functional directions](iterations/i02/README.md) preserves i01,
+freezes two source/attribute hypotheses and a finite native validation/admission plan; actual adoption
+remains held in WAITING_NATIVE_WINDOW. No V1.5 qualified landing or next-version receipt exists.
