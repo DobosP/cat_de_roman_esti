@@ -1,0 +1,84 @@
+{
+  "schema": "v1-5-current-linux-prerequisites-v1",
+  "baseline_commit": "bb99e81333b497ac90fc78e231d88d51367538db",
+  "six_critical_sdk_hashes_match": true,
+  "checks": [
+    {
+      "name": "version",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/tools/go/bin/go",
+        "version"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.007043506999934834,
+      "output": "go version go1.27.1 linux/amd64\n"
+    },
+    {
+      "name": "modules",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/tools/go/bin/go",
+        "-C",
+        "go-backend",
+        "mod",
+        "verify"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5507957569999462,
+      "output": "all modules verified\n"
+    },
+    {
+      "name": "sources",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-content",
+        "validate",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.143923590999975,
+      "output": "Native sources GREEN\n"
+    },
+    {
+      "name": "export",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-content",
+        "export",
+        "--root",
+        ".",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.4318825869999046,
+      "output": "Native private content current\n"
+    },
+    {
+      "name": "authority",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-content-rail",
+        "all",
+        "--root",
+        ".",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 17.5325242130001,
+      "output": "{\"ok\":true,\"rails\":[{\"rail\":\"quick\",\"ok\":true,\"rebuilt_sha256\":\"a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609\",\"artifact_sha256\":\"a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609\",\"exact_bytes\":true,\"semantic_exact\":true,\"native_source_sha256\":\"444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1\"},{\"rail\":\"world\",\"ok\":true,\"rebuilt_sha256\":\"0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef\",\"artifact_sha256\":\"0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef\",\"exact_bytes\":true,\"semantic_exact\":true,\"native_source_sha256\":\"444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1\"},{\"rail\":\"extensions\",\"ok\":true,\"rebuilt_sha256\":\"1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7\",\"artifact_sha256\":\"1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7\",\"exact_bytes\":true,\"semantic_exact\":true,\"native_source_sha256\":\"444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1\"},{\"rail\":\"reserve\",\"ok\":true,\"rebuilt_sha256\":\"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7\",\"artifact_sha256\":\"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7\",\"exact_bytes\":true,\"semantic_exact\":true,\"native_source_sha256\":\"bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6\"}]}\n"
+    },
+    {
+      "name": "docs",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-5/cat-doc-check",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.23788510700001098,
+      "output": "{\"files\":46,\"dead_links\":[],\"stale_terms\":[],\"retired_verbs\":[],\"orphans\":[],\"budgets\":[]}\n"
+    }
+  ],
+  "elapsed_seconds": 23.08263792299988,
+  "incremental_cache_bytes": 0,
+  "subprocess_peak_rss_kib": 137340,
+  "source4_unchanged": true,
+  "installation_approval": false
+}

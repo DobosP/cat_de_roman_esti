@@ -109,3 +109,5 @@ for Contexto advisory display filtering and unknown-word feedback.
 
 ADR-0159 partially amends [ADR-0158](0158-v1-testing-release.md) for the lobby version label
 and the word-grid reflow; its release, reserve and content decisions remain.
+
+- [0177](0177-resume-linux-v1-5-qualification.md) — resume owner-requested Linux V1.5 with bounded native admission.

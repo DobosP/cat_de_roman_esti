@@ -1,0 +1,171 @@
+{
+  "schema": "v1-5-linux-functional-draft-proposal-v1",
+  "revision": 1,
+  "author": "/root",
+  "baseline_commit": "bb99e81333b497ac90fc78e231d88d51367538db",
+  "source_module": "scripts/functional_graph_v1_5_data.py",
+  "source_module_sha256": "595117fa0e7d9401354bb14a8520db095c8b11f6af34b6eb12aa224149f721c9",
+  "nodes": [],
+  "aliases": {},
+  "edges": [
+    {
+      "bidirectional": 0,
+      "dst": "n_v29_kitchen_table_cutit",
+      "id": "e_v15i02_bread_knife",
+      "is_distractor": 0,
+      "label_ro": "se poate felia cu",
+      "relation": "used_with",
+      "src": "n_v4gas_paine",
+      "strength": 0.98
+    },
+    {
+      "bidirectional": 0,
+      "dst": "n_v4gas_apa",
+      "id": "e_v15i02_tap_water",
+      "is_distractor": 0,
+      "label_ro": "controlează curgerea",
+      "relation": "controls",
+      "src": "n_v33_bathroom_fixture_robinet",
+      "strength": 0.99
+    }
+  ],
+  "endpoint_snapshots": {
+    "n_v4gas_apa": {
+      "id": "n_v4gas_apa",
+      "node_type": "concept",
+      "label_ro": "Apă",
+      "category": "gastronomie",
+      "description": "Lichid de băut și ingredient de bază în gătit.",
+      "salience": 0.968,
+      "difficulty_tier": "easy",
+      "degree": 30,
+      "aliases": [
+        "ape",
+        "apele",
+        "apei",
+        "apelor"
+      ]
+    },
+    "n_v4gas_paine": {
+      "id": "n_v4gas_paine",
+      "node_type": "concept",
+      "label_ro": "Pâine",
+      "category": "gastronomie",
+      "description": "Aliment de bază făcut din aluat copt, consumat la masă.",
+      "salience": 0.9273,
+      "difficulty_tier": "easy",
+      "degree": 21,
+      "aliases": [
+        "pâinea",
+        "pâini",
+        "pâinile",
+        "pită",
+        "pite",
+        "pitele",
+        "pitei",
+        "pitelor",
+        "pâinii",
+        "pâinilor"
+      ]
+    },
+    "n_v29_kitchen_table_cutit": {
+      "id": "n_v29_kitchen_table_cutit",
+      "node_type": "concept",
+      "label_ro": "Cuțit",
+      "category": "gastronomie",
+      "description": "Unealtă cu lamă și mâner, folosită pentru a tăia alimente sau alte lucruri.",
+      "salience": 0.92,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "cuțitul",
+        "cuțite",
+        "cuțitele",
+        "cuțitului"
+      ]
+    },
+    "n_v33_bathroom_fixture_robinet": {
+      "id": "n_v33_bathroom_fixture_robinet",
+      "node_type": "concept",
+      "label_ro": "Robinet",
+      "category": "viata_de_roman",
+      "description": "Dispozitiv care deschide, oprește și reglează curgerea apei.",
+      "salience": 0.94,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "robinetul",
+        "robinete",
+        "robinetele",
+        "robinetului",
+        "robinetului de baie",
+        "robinetelor de baie"
+      ]
+    }
+  },
+  "preserved_reverse_records": [
+    {
+      "id": "de8204",
+      "src_id": "n_v29_kitchen_table_cutit",
+      "dst_id": "n_v4gas_paine",
+      "relation": "cuts_food",
+      "label_ro": "taie pâinea",
+      "strength": 0.98,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8418",
+      "src_id": "n_v4gas_apa",
+      "dst_id": "n_v33_bathroom_fixture_robinet",
+      "relation": "flows_through",
+      "label_ro": "curge prin robinet",
+      "strength": 0.99,
+      "is_distractor": 0,
+      "bidirectional": 0
+    }
+  ],
+  "pool_scope": "i02 revision2 records remain held, no selection/adoption claimed; exact draft must receive new factual/quality/prospective judgments",
+  "bound_pool": {
+    "path": "docs/content-pool/v1-5-directions-i02/pool.json",
+    "sha256": "f2c13321fd1fc9e9600f1511a84dcae0e2c3ad3b4d5794dbb701eefdca9822ae"
+  },
+  "prior_variant": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/variant-r1.json",
+    "sha256": "5859ad9977246c033d6151a58510838afc6491292f8284690aa091fb73cea3a7"
+  },
+  "fresh_source_factual": {
+    "path": "docs/reviews/v1-5-small-objects/linux-resume/i02-factual-recheck.json",
+    "sha256": "9c4308049ec1a6fdf32ba991e764e0c652434b577381803471099d04bc05e085"
+  },
+  "native_prerequisites": {
+    "path": "docs/reviews/v1-5-small-objects/linux-resume/prerequisites.json",
+    "sha256": "7e5531d06b5e344a877442322c431efc20221849a26ed633922342b4cca8ce41"
+  },
+  "reconciliation": {
+    "path": "docs/reviews/v1-5-small-objects/linux-resume/reconciliation.json",
+    "sha256": "866c92ed1dc53fadb11fb4d5fcf9a5ebff1ba337fcd370a946b9b569299fd97b"
+  },
+  "counting": {
+    "new_shared_concepts": 0,
+    "new_world_concepts": 0,
+    "synonyms": 0,
+    "forms": 0,
+    "directed_links_proposed": 2,
+    "new_distinct_incident_pairs": 0,
+    "new_curated_rounds_or_target_approvals": 0
+  },
+  "required_before_mutation": [
+    "New exact independent raw factual/quality including source sense/strength/captions",
+    "Materialized prospective actual cases/all-game/terminal/privacy/history/rank/mining/cycle impacts and ordinary play benefit",
+    "Fresh bounded next-lane resource/case admission",
+    "Exact selected record revisions/snapshots/accepted supported proposal"
+  ],
+  "approval": {
+    "raw_factual": false,
+    "raw_quality": false,
+    "prospective": false,
+    "installation": false,
+    "source5": false
+  }
+}

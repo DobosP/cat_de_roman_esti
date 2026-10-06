@@ -1,0 +1,405 @@
+{
+  "schema": "v1-5-linux-source-reconciliation-independent-audit-v1",
+  "checked_at_utc": "2026-10-06T16:45:31.995849+00:00",
+  "auditor": "/root/assembled_review",
+  "scope": "Read-only byte/Git/metadata/tool availability reconciliation. No native executable, build, simulation, test, materialization, graph/source/fixture/runtime/approval operation performed by this auditor. Only this new LF receipt is written.",
+  "source_baseline_commit": "bb99e81333b497ac90fc78e231d88d51367538db",
+  "accepted_runtime_baseline_commit": "8e2d4ece4147b3455a1fb1e6a40c5045f75398a5",
+  "old_linux_source_checkpoint": "6026ad99d2babe8670490a71fc43a04fe9ea5f53",
+  "verdict": "source_runtime_preservation_verified_V1_5_adoption_still_unqualified",
+  "refs_observed": {
+    "HEAD": "bb99e81333b497ac90fc78e231d88d51367538db",
+    "main": "bb99e81333b497ac90fc78e231d88d51367538db",
+    "origin/main": "bb99e81333b497ac90fc78e231d88d51367538db",
+    "origin/codex/content-v1-5": "6026ad99d2babe8670490a71fc43a04fe9ea5f53",
+    "origin/codex/v1-5-discovery-i09": "bb99e81333b497ac90fc78e231d88d51367538db"
+  },
+  "live_remote_read": {
+    "method": "git ls-remote origin refs/heads/main refs/heads/codex/v1-5-discovery-i09 refs/heads/codex/content-v1-5",
+    "exit_code": 0,
+    "refs/heads/main": "bb99e81333b497ac90fc78e231d88d51367538db",
+    "refs/heads/codex/v1-5-discovery-i09": "bb99e81333b497ac90fc78e231d88d51367538db",
+    "refs/heads/codex/content-v1-5": "6026ad99d2babe8670490a71fc43a04fe9ea5f53",
+    "note": "Live remote main and i09 contain the Windows transport chain; old content-v1-5 published ref stays at6026. Remote source publication is not content release qualification."
+  },
+  "ancestry_verified": {
+    "8e2d4ec": "8e2d4ece4147b3455a1fb1e6a40c5045f75398a5",
+    "6026ad9": "6026ad99d2babe8670490a71fc43a04fe9ea5f53",
+    "a75ce962": "a75ce96227271408e529e46cc27b1a62dd000f38",
+    "e495f333": "e495f3332bf2bb291c59320a7526b0438afd03cf",
+    "ac90ab08": "ac90ab08dbb6eed617e7747c198582c83dd04fda",
+    "ce13e53e": "ce13e53ec1f159ed4955d4ed1f9ac125ef3ca0b9",
+    "df21f834": "df21f8349cf89fb7d3a81fdf3e0e59b88a74af38",
+    "85aea4ee": "85aea4ee39369017143c33d6861d31cf1e128df3",
+    "3e0ddc8f": "3e0ddc8ffb28bb7eab3f010ff5d05776a297c261",
+    "521ba75b": "521ba75b490a832fb75028918b2bc83d1b1454d1",
+    "1759bd61": "1759bd61ecd41d90deeed0fc8ada45c1e8e41665",
+    "f1d8e78": "f1d8e78190ece5451ffadcb8e72bcfdbb90fa352",
+    "5827a49": "5827a49cab7c2ec1ede759768c7a8582ef60ee1e"
+  },
+  "committed_scope": {
+    "paths_changed_from8e2d4ec": 126,
+    "all_changes_docs_or_WORKLOG": true,
+    "runtime_tests_generated_frontend_static_scripts_unchanged": true,
+    "no_V1_5_installed_data": true
+  },
+  "runtime_and_authority": {
+    "source4_runtime_paths107_actual_bytes_equal_8e2_6026_bb99": true,
+    "runtime_freeze_receipt_sha256": "8f4d781f15143fe211ad85c7776712690c8ab9c9400696edafa6213b61ad12f5",
+    "all8_fixture_source_hashes": {
+      "alchimie_discovery_world_v92.json": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+      "alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+      "board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+      "derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    },
+    "bundle_sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "authority_metadata": {
+      "go-backend/internal/contentrails/sources/installed-authorities.json": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+      "go-backend/internal/contentrails/installed_authorities_pin.go": "0ddb209e09681e1cd8410b113d690ec06e3ed650440454744153b60605f21c93"
+    },
+    "all_authority_descriptors_and_current107_runtime9bindings_exact": true,
+    "current_corpus_files_preserved": 24,
+    "current_corpus_file_hashes": {
+      "go-backend/internal/alchimie/testdata/generate.py": "18dfac8404e29c38cf715d81e32fb37b3326294537fd00527480680784e8ef0a",
+      "go-backend/internal/alchimie/testdata/python_parity.json": "ead042be8645eb74ea775c7e9d085fbc7bc4ac4fbf3cc5e90cdb591c36fa398f",
+      "go-backend/internal/alchimie_explore/testdata/README.md": "ad54fcc9f84de10a6c4f79ecb8bdebe1e61762a966a31c9fb68dcc0388b347b7",
+      "go-backend/internal/alchimie_explore/testdata/legacy-saved-prefixes-v92.json": "51eadd294f043991fb9a518a0ea62b7bd1249f2f1d3878db91cd0d3253ab1718",
+      "go-backend/internal/catalog/testdata/blake2b8.json": "2d77db85ca5e94ec41d1249f64fef8873da71410fa2df43c9bb412ec832d0bc4",
+      "go-backend/internal/catalog/testdata/generate_vectors.py": "7f7b86ea1b57daf34a588a0ffa2b0a3ce7b43faaf4f944502cfda0e7c7c74c82",
+      "go-backend/internal/catalog/testdata/python_selector.json": "c6add73c1cd1cbfd2e7ad63c7ac219520501046dadf367a1c118f7a766fd46e0",
+      "go-backend/internal/catalog/testdata/synthetic_boards.json": "7317e34d86c236f0a34432b3170974ab035da22696fe881325338e0f1cc322b7",
+      "go-backend/internal/conexiuni/testdata/python-goldens.json": "e0aaef96a28c2a7d2487bb91e5dabbe93b63449c0dfa24920aa299edcb56f86e",
+      "go-backend/internal/contexto/testdata/generate_games.py": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513",
+      "go-backend/internal/contexto/testdata/python_games.json": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078",
+      "go-backend/internal/graph/testdata/generate.py": "fe1b677dbc789b390c887be709de9d41e64cc3271c871e86fc47875349700c5b",
+      "go-backend/internal/graph/testdata/python_graph.json": "823fe4153abe826c03aaff8479773bc0c22b3659ad22b800c3d56d2ec629a83a",
+      "go-backend/internal/httpapi/testdata/submissions_python.json": "3e6abd138789e23600941915eab6948197f8a53820442c13c5ac1e90aefc0000",
+      "go-backend/internal/httpapi/testdata/website_python.json": "64b3042843ce8edd1628b6dc39c3bf26cc41a3343d2b258c24024c5340590362",
+      "go-backend/internal/httpgolden/testdata/README.md": "347980ef69561fadc4f819a941e3ed4df26bb07f8d8f130bc4490c74c0da6c66",
+      "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+      "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+      "go-backend/internal/httpgolden/testdata/python-http-parity-v1-4.json.gz": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+      "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+      "go-backend/internal/lant/testdata/python_games.json": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+      "go-backend/internal/perechi/testdata/generate_python_goldens.py": "8bb9e5a108108f78895dbdf833a712daeec81132c98e1911ce37c45b012e47d0",
+      "go-backend/internal/perechi/testdata/python-goldens.json": "081f02948ddc9a9fa8bd215f7b214771588dd35612cf7c4a8b66016c79771ab1",
+      "go-backend/internal/pyrandom/testdata/python_random.json": "8b84d5e0f3645df119253b80211b198ff7d28cd4d27bc2ae38e39147b926cd96"
+    },
+    "native_current_all4_reconstruction_executed_by_auditor": false
+  },
+  "source_archives": {
+    "Source1_to4_hashes": {
+      "go-backend/internal/contentrails/sources/authored-v1.json": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6",
+      "go-backend/internal/contentrails/sources/authored-v2.json": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+      "go-backend/internal/contentrails/sources/authored-v3.json": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+      "go-backend/internal/contentrails/sources/authored-v4.json": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1"
+    },
+    "unique_archives_verified": 19,
+    "all19_archive_bytes_and_descriptor_hashes_equal8e2d4ec": true,
+    "archive_hashes": {
+      "docs/reviews/v1-testing-release/content/recipes/candidates.json": "adfd63e353f85fd2f33bd047d11becf7c71ef05248619197627d043f8492d366",
+      "docs/reviews/v1-testing-release/content/recipes/factual-review.json": "bbf106d08e7ea887d0a19c0a876dfa0c3a49547e0b02c8ce8c43656d7d7926b9",
+      "docs/reviews/v1-testing-release/content/recipes/quality-review.json": "f08e80ddecf9c247b311e9b7d2063506aba3dd99c1f9de39b56b11b30f711f09",
+      "docs/reviews/v1-testing-release/content/quick/candidate.json": "efa071d9c8c17899cb123fb0a3cdb8c67741ec38982b45df1599d915be5d73f0",
+      "docs/reviews/v1-testing-release/content/quick/factual-review.json": "7383ca84896278f146b3b4a1c1f82166545878ab417e7d6f328c5baf8e862773",
+      "docs/reviews/v1-testing-release/content/quick/quality-review.json": "244239884a69575c62245e982dcb04ff7fa01c99697d4b9008600ed06f49b8b4",
+      "docs/reviews/v1-testing-release/content/alchimie-reserve-proposal.json": "bcf35794a43f437f78d420b34a0e4ae44e1accd76c7eddde46a4bdf9e33728e6",
+      "docs/reviews/v1-testing-release/content/selection-reserve-proposal.json": "e02b1a624fb7df8edfbcf507a8c9d7bcfb39510cba771d9b3d660430b2360de4",
+      "docs/reviews/v1-testing-release/content/selection-reserve-quality-review.json": "54980fe74ac512b431eed9c8f3e3390c53e40a16a3efc1ad7fd207a528178758",
+      "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/candidate.json": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4",
+      "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/factual-review.json": "501e4ea97ce564e9fb1e764978d7c8a628c7f5774cc2531b7ee117555f5e6e1f",
+      "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+      "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/quality-review.json": "37ed31a2bda9e9a32494736a81f2c51d901e44195852a28b9da26976ba7d38c1",
+      "docs/reviews/v1-2-content-growth/native/world/candidate.json": "8c6f7f0405c0a14a9432673b768df292ba8eefdb96f4f6d5d7e5594b517b70e9",
+      "docs/reviews/v1-2-content-growth/native/world/factual-review.json": "5df5b762183db0b973f8b974841c60825e4ae031fc8babec1f84b4e01684b9c7",
+      "docs/reviews/v1-2-content-growth/native/world/quality-review.json": "dacbb4066dd326523d4c866f6e49dfbd74384aea5c994a3e82a0de738e04c043",
+      "docs/reviews/v1-3-everyday-concepts/native/world/candidate.json": "d3c1419c83a6e29f34790cef62717a4fbf36ec5577526677ac43db99fc0f089d",
+      "docs/reviews/v1-3-everyday-concepts/native/world/factual-review.json": "5f0c58f674d247d35c459cf696abdf2f2354be9c5d2c8cb3ab5599ece8b1a266",
+      "docs/reviews/v1-3-everyday-concepts/native/world/quality-review.json": "df517fbae1e00ec1f8a2bbcffbba5653a4ba21a3e327706f611c75da58f14c49"
+    }
+  },
+  "research_and_line_endings": {
+    "prior6026_research_files_preserved": 8,
+    "old6026_pool_bytes_equal_current_pool_r2": true,
+    "all_existing_committed_pool_and_V1_5_source_receipts_equal_bb99_Git_bytes": 123,
+    "old_rejection_stock_bytes_preserved_by_empty_non_doc_diff": true,
+    "CRLF_files": [
+      {
+        "path": "docs/content-pool/v1-5-discovery-i04/pool-r2.json",
+        "sha256": "ba9898dc021a0645ee481669acbe468baeb4fea40deae199f7815f3de02fcc67",
+        "CRLF": 880,
+        "bare_LF": 0,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/content-pool/v1-5-discovery-i04/pool.json",
+        "sha256": "b97069e63da0fecb056d88261b09d442f1db906e8941de31d5c4367ddaef1ee6",
+        "CRLF": 383,
+        "bare_LF": 0,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i01/factual-reconciliation-r2.json",
+        "sha256": "4ab8e22c16a245f30efc8cc5fb130c7154de8da66387c0306a9a62051492dd71",
+        "CRLF": 1,
+        "bare_LF": 424,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i01/factual-review-r1.json",
+        "sha256": "7e4f12cecbc825e3715c0cdc8026673979ad71e01d33cfb26995ba9ab00b58ff",
+        "CRLF": 1,
+        "bare_LF": 274,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i01/quality-reconciliation-r2.json",
+        "sha256": "7990ac65c7872421761782338e0379cbc3a01d55b71cdd1ff2e761e3ff567301",
+        "CRLF": 1,
+        "bare_LF": 311,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i01/quality-review-r1.json",
+        "sha256": "f77850727c852880c0574a0e9c679c39f7bdf846a17e69ead1dc2d77fae38f5e",
+        "CRLF": 1,
+        "bare_LF": 405,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i04/identity-screen-r1.json",
+        "sha256": "c8d2f963087e7d1b2ead241ba5ad22d39cf24156efd1437d4b539498c250daf9",
+        "CRLF": 24,
+        "bare_LF": 0,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i04/packet-r1.json",
+        "sha256": "390e48279d655b43f529c660da29fb2edebe364a2f7dc09c5ea8af45f6a117d0",
+        "CRLF": 64,
+        "bare_LF": 0,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i04/packet-r2.json",
+        "sha256": "19c5bfdd526700643a3a2bd62d9136f33b7fd8c098fbfcddf8efaa09ed1fc7f2",
+        "CRLF": 75,
+        "bare_LF": 0,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i04/plan-r1.json",
+        "sha256": "6155a8fe2757b725a7a4aa238997b33f033b109bf41f5fca32ead87772575575",
+        "CRLF": 36,
+        "bare_LF": 0,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i04/quality-review-r1.json",
+        "sha256": "d95905ba0c2952e4525c6a4e59e334c1cf255bbdad361dbbb611829621eda7c3",
+        "CRLF": 201,
+        "bare_LF": 0,
+        "raw_git_bytes_exact": true
+      },
+      {
+        "path": "docs/reviews/v1-5-small-objects/iterations/i04/quality-review-r2.json",
+        "sha256": "bdb8bd7f30442747fa09d49c48bc7f84536aec21ca6a68efe5dacd02a5c68554",
+        "CRLF": 176,
+        "bare_LF": 0,
+        "raw_git_bytes_exact": true
+      }
+    ],
+    "default_aggregate_failure_preserved": {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "a75ce962..bb99e81"
+      ],
+      "exit_code": 2,
+      "stdout_lines": 3686,
+      "stdout_sha256": "08097c68d2492912b5c5fcda1f61c18d0b55f17b740ff321f23eadee8dfcca51",
+      "stderr_bytes": 0
+    },
+    "finite_CR_at_EOL_source_transport_check": {
+      "argv": [
+        "git",
+        "-c",
+        "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+        "diff",
+        "--check",
+        "a75ce962..bb99e81"
+      ],
+      "exit_code": 0,
+      "stdout_lines": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    "interpretation": "Default aggregate whitespace remains failed. The separately named CR-aware pass preserves immutable source bytes and qualifies transport only. No Git setting or byte normalization occurred. New Linux-owned doc diffs are LF and must pass ordinary default checks.",
+    "new_LF_doc_changes_observed": [
+      "WORKLOG.md",
+      "docs/STATUS.md",
+      "docs/adr/0175-stop-windows-loop-for-linux-handoff.md",
+      "docs/adr/README.md"
+    ]
+  },
+  "toolchain_availability": {
+    "historical_baseline_receipt_sha256": "5ecacf54f417bf996c4951072f7910033f64b3c342c9e7e89ffd0186e85119fd",
+    "critical_archive_and_sdk_hashes_verified": [
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/tools/go1.27.1.linux-amd64.tar.gz",
+        "sha256": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445",
+        "available_and_exact": true
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/tools/go/bin/go",
+        "sha256": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624",
+        "available_and_exact": true
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/tools/go/bin/gofmt",
+        "sha256": "86dd91f69254432a37ca365f964720677040fd6f049a412c23e25f8b3812f342",
+        "available_and_exact": true
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/tools/go/pkg/tool/linux_amd64/compile",
+        "sha256": "3780fc07130d6d45096373acf062cc316940d253e2a1d892ece03a3bdd0d21d4",
+        "available_and_exact": true
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/tools/go/pkg/tool/linux_amd64/link",
+        "sha256": "a29ac5e8f64111b0b5c5d31e452f18abf7ee79f44b421081b5509c8939d92ba9",
+        "available_and_exact": true
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/tools/go/VERSION",
+        "sha256": "25eb74b09036e1ad894fb63b86cb0f0ee53342df8d2e2e860da4ff5079607758",
+        "available_and_exact": true
+      }
+    ],
+    "own_env_available": true,
+    "VERSION_text": [
+      "go1.27.1",
+      "time 2026-08-28T16:20:06Z"
+    ],
+    "qualified_SDK_execution_by_auditor": false,
+    "historical_native_module_source_export_authority_docs_GREEN": "Historical receipt at8e2; immutable Source4 bytes are preserved. It is not new V1.5 qualification."
+  },
+  "new_root_admission_and_prerequisites": {
+    "admission": {
+      "path": "docs/reviews/v1-5-small-objects/linux-resume/admission.json",
+      "sha256": "bf3c4d3b69e2d36e3e88b6924c9aedcefe75d80f90655c6a6277cd3b60bc2156"
+    },
+    "fresh_prerequisites": {
+      "path": "docs/reviews/v1-5-small-objects/linux-resume/prerequisites.json",
+      "sha256": "7e5531d06b5e344a877442322c431efc20221849a26ed633922342b4cca8ce41"
+    },
+    "root_reported_all_six_checks_GREEN": true,
+    "independent_role_execution_claim": false,
+    "admitted_scope": {
+      "scope": "Task-owned qualified toolchain/hash/module and unchanged Source4 source/export/default-four-authority/docs prerequisite checks only",
+      "max_go_parallelism": 2,
+      "max_runtime_threads": 2,
+      "incremental_task_disk_ceiling_gib": 0.5,
+      "wall_minutes_ceiling": 20,
+      "recheck_disk_floor_gib": 16,
+      "no_parallel_heavy_lane": true
+    },
+    "resource_snapshot": {
+      "mem_available_gib": 76.94159698486328,
+      "disk_free_gib": 21.227073669433594,
+      "load_average": [
+        4.48193359375,
+        2.93505859375,
+        1.68017578125
+      ]
+    },
+    "newest_human_steering": "Root admission records the human request to resume the Linux V loop. It supersedes historical stopped Windows continuation restrictions through newADR0177. This auditor does not grant any further lane or installation authority.",
+    "later_lanes_need_separate_exact_manifest_measured_resource_admission": true
+  },
+  "i02_exact_source_state": {
+    "packet_r2_sha256": "1d3b29567a8635290d536528c10ee3e30c6cf501be2bc43db12d534b147f7b41",
+    "current_bound_paths_verified": 136,
+    "current_binding_mismatches": [],
+    "historical_r1_current_path_mismatch": "The original pool.json path now contains r2 held dispositions; its exact r1 digest resolves solely through immutable pool-r1.json. No stale approval transfer.",
+    "r1_archive_resolution": {
+      "original_path": "docs/content-pool/v1-5-directions-i02/pool.json",
+      "resolved_archive_path": "docs/content-pool/v1-5-directions-i02/pool-r1.json",
+      "sha256": "e5e6dc53ece841a017c9f62dea9c0b01d95e3be3783895b6febdf854680feb8e"
+    },
+    "two_hypotheses": [
+      {
+        "case_id": "V15I02-BREAD-KNIFE",
+        "id": "e_v15i02_bread_knife",
+        "src": "n_v4gas_paine",
+        "dst": "n_v29_kitchen_table_cutit",
+        "relation": "used_with",
+        "caption": "se poate felia cu",
+        "strength": 0.98,
+        "is_distractor": 0,
+        "bidirectional": 0,
+        "preserve_exact": {
+          "id": "de8204",
+          "src": "n_v29_kitchen_table_cutit",
+          "dst": "n_v4gas_paine",
+          "relation": "cuts_food",
+          "caption": "taie pâinea",
+          "strength": 0.98,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      },
+      {
+        "case_id": "V15I02-TAP-WATER",
+        "id": "e_v15i02_tap_water",
+        "src": "n_v33_bathroom_fixture_robinet",
+        "dst": "n_v4gas_apa",
+        "relation": "controls",
+        "caption": "controlează curgerea",
+        "strength": 0.99,
+        "is_distractor": 0,
+        "bidirectional": 0,
+        "preserve_exact": {
+          "id": "de8418",
+          "src": "n_v4gas_apa",
+          "dst": "n_v33_bathroom_fixture_robinet",
+          "relation": "flows_through",
+          "caption": "curge prin robinet",
+          "strength": 0.99,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      }
+    ],
+    "current_states": {
+      "held": 2,
+      "installed": 0,
+      "selected": 0
+    },
+    "all_approval_flags_false": true,
+    "current_opposite_arcs_exact_and_proposed_directions_absent": true,
+    "named89test_definitions": "Verified as source text in the old packet only; not registration/collection/execution evidence.",
+    "source_reviews": "Exact current reconciliation descriptors remain valid source/metadata receipts, never raw graph/numerical/gameplay/installation approval."
+  },
+  "remaining_i02_qualification_gaps": [
+    "No exact supported module/raw graph proposal, actual preflight/materialization or source5/current result hashes exist.",
+    "Strength0.98/0.99 and reciprocal cycles are documentary editorial hypotheses. Actual stored-degree/outdegree, all-pairs/weighted profile, target eligibility/rank/temperature, ordered adjacency/captions, fallback/RNG/mining/latent-crafting and all-game/terminal effects remain unmeasured.",
+    "Natural arc-bearing ordinary selection seeds/actions/expected outcomes and player benefit remain unresolved; controlled pair probing must not be described as normal selection.",
+    "Exact resulting full-history consumer/parameter-ID/inverse manifest and current independently captured1207 source dictionary/selector registration do not exist. All old corpora/assertions/saves/private state must survive without repinning or deselection.",
+    "Fresh raw factual/quality candidate judgments, refreshed native candidate/catalog/staging/installed same-role audits/finals/authority/export/reference and complete applicable race/vet/history/HTTP/assembled gates are still required before any content local landing.",
+    "Current prerequisite admission is bounded to unchanged Source4 checks (2threads/jobs,0.5GiB incremental disk,20minutes,16GiB disk floor). Old Windows future estimates are unmeasured; each later Linux lane needs actual host/peak/disk/wall/stop/overlap admission. A source-only or recovered resource window does not authorize a whole campaign.",
+    "Disposable PG/WSL/Docker/browser/provider/account/deployment lanes are not admitted by this audit or source handoff. Parent must decide actual applicability from final change and trusted owner instructions; do not claim these ran."
+  ],
+  "unchanged_quality_and_resource_guards": [
+    "New-node4distinct-incident/2category requirements remain; i02 has zero new concepts/forms/distinct incident pairs/authored rounds or recipes, so no guard waiver is inferred.",
+    "Cald5uniqueincoming, editorial criteria, normal-play proof, source ancestry, bounded sessions/requests/crafting/histories and private-answer/save compatibility remain.",
+    "Breloc and Pâlnie i01 connectivity/case requirements and i06 new-service/restore/empty-pair holds are not silently reopened by prioritizing existing-node i02."
+  ],
+  "new_LF_receipt_only": true,
+  "publication_or_merge_approval": false,
+  "installation_approval": false
+}

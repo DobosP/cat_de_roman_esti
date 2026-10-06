@@ -1,0 +1,309 @@
+{
+  "approval_flags": {
+    "actual_play": false,
+    "actual_proposal": false,
+    "assembled_acceptance": false,
+    "deployment": false,
+    "installation": false,
+    "merge": false,
+    "module": false,
+    "native": false,
+    "numeric_weight": false,
+    "push": false,
+    "quality": false,
+    "raw_graph": false,
+    "selection": false,
+    "source5": false,
+    "source_only_research": true
+  },
+  "baseline_artifacts": [
+    {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+    },
+    {
+      "path": "go-backend/internal/content/bundled.json",
+      "sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2"
+    },
+    {
+      "path": "go-backend/internal/contentrails/sources/authored-v4.json",
+      "sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1"
+    },
+    {
+      "path": "go-backend/internal/contentrails/sources/installed-authorities.json",
+      "sha256": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047"
+    }
+  ],
+  "baseline_runtime": "V1.4 unchanged current KG/Source4/authority; Windowsi01–i08 landed source-only. Owner directly resumedLinuxloop; old stop/nativeNOTRUN receipts remain history, resource holds and gates are not waived.",
+  "checked_at_utc": "2026-10-06 16:36:50 UTC",
+  "checked_on": "2026-10-06",
+  "complete_coverage": [
+    {
+      "documentary_edge_hypothesis": {
+        "bidirectional": 0,
+        "dst": "n_v29_kitchen_table_cutit",
+        "id": "e_v15i02_bread_knife",
+        "is_distractor": 0,
+        "label_ro": "se poate felia cu",
+        "relation": "used_with",
+        "src": "n_v4gas_paine",
+        "strength": 0.98
+      },
+      "endpoint_senses": [
+        {
+          "all_existing_label_alias_surfaces_resolve_exact_owner": true,
+          "canonical_snapshot_sha256": "62a47fc3614b0e0fa53f747f4324f2bdf2e186489ce03be6641bc3ecb8819aa7",
+          "category": "gastronomie",
+          "description": "Aliment de bază făcut din aluat copt, consumat la masă.",
+          "id": "n_v4gas_paine",
+          "label_ro": "Pâine",
+          "node_type": "concept"
+        },
+        {
+          "all_existing_label_alias_surfaces_resolve_exact_owner": true,
+          "canonical_snapshot_sha256": "5e7ca1cd7785172d275cf7c0a57d26036101f621a72518e2ed222f6a3c68f170",
+          "category": "gastronomie",
+          "description": "Unealtă cu lamă și mâner, folosită pentru a tăia alimente sau alte lucruri.",
+          "id": "n_v29_kitchen_table_cutit",
+          "label_ro": "Cuțit",
+          "node_type": "concept"
+        }
+      ],
+      "existing_exact_endpoint_pair_records": 1,
+      "future_obligation": "This source-only screen is not raw approval. Independently bind a later exact authored module/proposal, unchanged old records, inverse/current/full-history/native/ordinary-play effects and private earned caption behavior before any installation.",
+      "new_distinct_incident_pair_count": 0,
+      "potential_two_arc_cycle": true,
+      "preserved_opposite_record": {
+        "bidirectional": 0,
+        "dst_id": "n_v4gas_paine",
+        "id": "de8204",
+        "is_distractor": 0,
+        "label_ro": "taie pâinea",
+        "relation": "cuts_food",
+        "src_id": "n_v29_kitchen_table_cutit",
+        "strength": 0.98
+      },
+      "preserved_opposite_record_sha256": "434df5a823ff79c36b67342c1f352e92b2f53571057379850e7492cc71403886",
+      "record_id": "v15-i02-bread-knife",
+      "relation_value_already_present": 16,
+      "same_relation_unordered_pair_key_absent": true,
+      "semantic_rationale": "The ordinary bread food can be sliced using a suitable kitchen bread knife. The modal caption preserves possibility and does not universalize every knife or every loaf. Both endpoints are existing concept-type records in gastronomie; no metaphorical bread, weapon or renamed object is introduced.",
+      "source_fact_recheck": "SUPPORTED_QUALIFIED_PREDICATE_ONLY",
+      "static_counts": [
+        {
+          "actual_incident_record_count": 21,
+          "actual_stored_incident_degree": 21,
+          "actual_unique_non_distractor_incoming": 20,
+          "actual_unique_non_distractor_outgoing": 13,
+          "conditional_incoming_delta": 0,
+          "conditional_new_incident_record_count": 22,
+          "conditional_outgoing_delta": 1,
+          "id": "n_v4gas_paine"
+        },
+        {
+          "actual_incident_record_count": 4,
+          "actual_stored_incident_degree": 4,
+          "actual_unique_non_distractor_incoming": 1,
+          "actual_unique_non_distractor_outgoing": 3,
+          "conditional_incoming_delta": 1,
+          "conditional_new_incident_record_count": 5,
+          "conditional_outgoing_delta": 0,
+          "id": "n_v29_kitchen_table_cutit"
+        }
+      ],
+      "strength_status": "0.98/0.99 copies an existing opposite-edge editorial value; no source or weight-quality acceptance.",
+      "supplied_edge_id_absent": true
+    },
+    {
+      "documentary_edge_hypothesis": {
+        "bidirectional": 0,
+        "dst": "n_v4gas_apa",
+        "id": "e_v15i02_tap_water",
+        "is_distractor": 0,
+        "label_ro": "controlează curgerea",
+        "relation": "controls",
+        "src": "n_v33_bathroom_fixture_robinet",
+        "strength": 0.99
+      },
+      "endpoint_senses": [
+        {
+          "all_existing_label_alias_surfaces_resolve_exact_owner": true,
+          "canonical_snapshot_sha256": "feb7b0e023dee63b6fef661f159037fb5a955ee4902a73d38bcd8ce1d5122b6b",
+          "category": "viata_de_roman",
+          "description": "Dispozitiv care deschide, oprește și reglează curgerea apei.",
+          "id": "n_v33_bathroom_fixture_robinet",
+          "label_ro": "Robinet",
+          "node_type": "concept"
+        },
+        {
+          "all_existing_label_alias_surfaces_resolve_exact_owner": true,
+          "canonical_snapshot_sha256": "9764c06f8f72b74271fa199d7592fbac88b46f1ca17e0fb6b91524b71951c39d",
+          "category": "gastronomie",
+          "description": "Lichid de băut și ingredient de bază în gătit.",
+          "id": "n_v4gas_apa",
+          "label_ro": "Apă",
+          "node_type": "concept"
+        }
+      ],
+      "existing_exact_endpoint_pair_records": 1,
+      "future_obligation": "This source-only screen is not raw approval. Independently bind a later exact authored module/proposal, unchanged old records, inverse/current/full-history/native/ordinary-play effects and private earned caption behavior before any installation.",
+      "new_distinct_incident_pair_count": 0,
+      "potential_two_arc_cycle": true,
+      "preserved_opposite_record": {
+        "bidirectional": 0,
+        "dst_id": "n_v33_bathroom_fixture_robinet",
+        "id": "de8418",
+        "is_distractor": 0,
+        "label_ro": "curge prin robinet",
+        "relation": "flows_through",
+        "src_id": "n_v4gas_apa",
+        "strength": 0.99
+      },
+      "preserved_opposite_record_sha256": "da5b401cee60e76843fe8e93ff1982704f762a3202bf9a937cce68d2235e84b8",
+      "record_id": "v15-i02-tap-water",
+      "relation_value_already_present": 1,
+      "same_relation_unordered_pair_key_absent": true,
+      "semantic_rationale": "The ordinary domestic tap controls release/flow of water, matching its explicit device definition. Cross-category viata_de_roman→gastronomie is functional, not a claim that a tap is food or that all discharged water is potable. No treatment, temperature, left/right operation, health or filtering assertion is made.",
+      "source_fact_recheck": "SUPPORTED_QUALIFIED_PREDICATE_ONLY",
+      "static_counts": [
+        {
+          "actual_incident_record_count": 5,
+          "actual_stored_incident_degree": 5,
+          "actual_unique_non_distractor_incoming": 3,
+          "actual_unique_non_distractor_outgoing": 2,
+          "conditional_incoming_delta": 0,
+          "conditional_new_incident_record_count": 6,
+          "conditional_outgoing_delta": 1,
+          "id": "n_v33_bathroom_fixture_robinet"
+        },
+        {
+          "actual_incident_record_count": 30,
+          "actual_stored_incident_degree": 30,
+          "actual_unique_non_distractor_incoming": 20,
+          "actual_unique_non_distractor_outgoing": 24,
+          "conditional_incoming_delta": 1,
+          "conditional_new_incident_record_count": 31,
+          "conditional_outgoing_delta": 0,
+          "id": "n_v4gas_apa"
+        }
+      ],
+      "strength_status": "0.98/0.99 copies an existing opposite-edge editorial value; no source or weight-quality acceptance.",
+      "supplied_edge_id_absent": true
+    }
+  ],
+  "conclusion": "QUALIFIED_SOURCE_PREDICATES_SUPPORTED; NOFACTUALBLOCKER_TO_AUTHORING_A_BOUNDED_LATER_PROPOSAL. All numerical quality, actualproposal/rawgraph/native/ordinaryplay/selection/installation/source5/fullrelease judgments remain unapproved. Oldsourcepreparation reviews are not rebound into newapproval.",
+  "current_pool": {
+    "path": "docs/content-pool/v1-5-directions-i02/pool.json",
+    "sha256": "f2c13321fd1fc9e9600f1511a84dcae0e2c3ad3b4d5794dbb701eefdca9822ae"
+  },
+  "exact_variant": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/variant-r1.json",
+    "sha256": "5859ad9977246c033d6151a58510838afc6491292f8284690aa091fb73cea3a7"
+  },
+  "fresh_source_observations": [
+    {
+      "accessed_on": "2026-10-06",
+      "actual_access": "Fresh direct readable full product page via web open succeeded.",
+      "claim_ids": [
+        "v15-i02-bread-knife"
+      ],
+      "copyright_and_licence": "Observed footer©InterIKEASystemsBV1999–2026. No open reuse licence verified; no source prose/images/recipe/corpus reused.",
+      "id": "knife-ikea",
+      "location": "Productdescriptionline60;bread-slicing illustrationdescriptionline89.",
+      "original_summary": "This serrated bread knife is expressly intended for cutting bread. It supports a bread-slicing possibility with an appropriate knife, not a universal knife/loaf suitability claim.",
+      "publisher": "IKEA of Sweden AB/Inter IKEA Systems B.V.,original Romanian VÖRDA102.892.32 product documentation",
+      "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/"
+    },
+    {
+      "accessed_on": "2026-10-06",
+      "actual_access": "Fresh direct PDF open/read succeeded; sameURL downloaded to own scratch and local text inspected.",
+      "claim_ids": [
+        "v15-i02-tap-water"
+      ],
+      "copyright_and_licence": "ActualPDFfooter©InterIKEASystemsBV2014;AA-2163215-1. No open reuse licence verified; only this factual paraphrase retained.",
+      "download_identity": {
+        "bytes": 875449,
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/linux-resume/i02-factual/tap-ikea-aa2163215.pdf",
+        "sha256": "23b676b23bbaf5f077a5e1535490a7d3a59746cc82b5d6d1144d80b86a0787be"
+      },
+      "id": "tap-ikea",
+      "location": "PDFpage1,Romanian section;webtextlines238–247.",
+      "original_summary": "Operating the domestic mixer lever releases water; this grounds flow control. Romanian wording specifies right while English and several other languages specify left for a temperature setting. No handedness or temperature claim is adopted.",
+      "publisher": "Document namesDALSKÄR and copyrightholderInterIKEASystemsBV; CloudFront host ownership is not separately certified. Brand-issued document identified from its contents, not inferred from CDN URL alone.",
+      "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf"
+    },
+    {
+      "accessed_on": "2026-10-06",
+      "actual_access": "Fresh directPDFopen succeeded; exactURL downloaded andlocaltextread.",
+      "claim_ids": [],
+      "copyright_and_licence": "No explicit copyright/openreuse licence verified on the inspected file. No issuer or openpermission invented.",
+      "download_identity": {
+        "bytes": 129605,
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/linux-resume/i02-factual/hornbach-scope.pdf",
+        "sha256": "5702dbaecd1af4e2f89d72198b9380cbb3cc4b514c9f44ca6682cdad39ce98e4"
+      },
+      "id": "tap-hornbach-scope",
+      "location": "PDFpage2,water-service switching andopening/closing sections.",
+      "original_summary": "This double-service plastic tap document covers potable-versus-technical/irrigation supplies and opening/closing. It demonstrates why a generictap claim cannot imply drinking-water quality; not primary support for the canonical household-water edge.",
+      "publisher": "Hornbach-hosted supplier instruction file; original issuer remains unidentified in the inspected document.",
+      "role": "Retained scope counterevidence only.",
+      "url": "https://media.hornbach.ro/hb/ownersmanual/as.137830455.pdf"
+    },
+    {
+      "accessed_on": "2026-10-06",
+      "actual_access": "Fresh direct full official product page open succeeded.",
+      "claim_ids": [
+        "v15-i02-tap-water"
+      ],
+      "copyright_and_licence": "Commercialcopyright;noopenreuse licenceverified. Originalfactualsummaryonly.",
+      "id": "tap-ikea-official-context",
+      "location": "Productdescription/details andassembly-document links.",
+      "original_summary": "Current official DALSKÄR family page is a domesticbasin mixer and describes water operation. It supports household context and independently shows left-side temperature wording; no numericflow/pressure/temperature/performance/legal claim is adopted.",
+      "publisher": "IKEA of Sweden AB/Inter IKEA Systems B.V.,current original Romanian DALSKÄR family product documentation",
+      "role": "Supplemental original-household context; does not claim exact same model revision or PDF bytes.",
+      "url": "https://www.ikea.com/ro/ro/p/dalskaer-baterie-lavoar-negru-70603498/"
+    }
+  ],
+  "head": "bb99e81333b497ac90fc78e231d88d51367538db",
+  "immutable_current_packet": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/packet-r2.json",
+    "sha256": "1d3b29567a8635290d536528c10ee3e30c6cf501be2bc43db12d534b147f7b41"
+  },
+  "native_preparation_plan": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/native-plan-r1.json",
+    "sha256": "3d70f82d0e617cd0b74fc4c8260d8512eaeef0120319f05deb4fe898310ea89b"
+  },
+  "reviewer": "/root/content_rail",
+  "schema": "v1-5-linux-i02-fresh-factual-source-recheck-v1",
+  "scope": "Only the exact two documentary i02 existing-node directional counterparts; fresh source/identity/schema screen, not raw review or numerical/runtime adoption.",
+  "source_bindings": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i02/source-bindings-r1.json",
+    "sha256": "2f106271d0d37e3fbda592aeec02b1251b2918120679e008e9b11a7dea3180b2"
+  },
+  "source_effect_limits": [
+    "The edge normalizer defaults bidirectional1; exact documentary records explicitly set0. Do not flip old bidirectional flags or reuse old captions backward.",
+    "unorderedendpoint+relation deduplication means a caption-only reverse change under cuts_food/flows_through would collide. The proposed existing used_with/controls values avoid these exact two keys; supported actualpreflight must stillpass.",
+    "Two possible new arc records,zero new concept/form/authoredround/target/recipe/distinctincidentpair. Do not report new independent relationship facts or measuredgameplaybenefit.",
+    "Preserve all9473oldedge records,all180puzzles,all old node attributes/labels/aliases/categories/salience. Only generatedincident-degree fields maychange after a supportedbuild; thisscreen changes none.",
+    "New reciprocalcycles/directedpaths/weightedfeedback/fallbackmining/clues/latentcrafting maychange despitezero authoredrounds. Fullimpact/current/history/inverse/ordinaryplay/privacy/source5/native/export/authority gates remainrequired.",
+    "Raw truthful captions are not approval for earnedpublic Lanț captions or unearned solution exposure. Existing neutral/strict-reviewed publiccaption mechanism must bechecked separately."
+  ],
+  "verification": {
+    "actual_gameplay": false,
+    "directed_proposed_arc_already_present": 0,
+    "exact_source_bound_node_snapshots_verified": 4,
+    "exact_source_bound_opposite_edge_snapshots_verified": 2,
+    "existing_relation_values": {
+      "controls": 1,
+      "used_with": 16
+    },
+    "graph_preflight_executed": false,
+    "immutable_packet_input_bindings": 136,
+    "method": "Read current rawKG plus bundled pinnedUnicode15 ownerindex; compare exact prior snapshots, streamedrawbytes and unorderedendpoint+relation keys as implemented at retained writer._edge_key. Count actualincident/outgoing/incoming neighbors statically. Conditional+1/cycle consequences are graphstructure predictions only; no materialized graph/paths/ranks/miner/weight simulation.",
+    "mismatches": [],
+    "native_execution": false,
+    "readset_count": 142,
+    "same_relation_unordered_pair_collisions": 0,
+    "streamed_hashes_verified": 136
+  }
+}

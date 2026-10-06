@@ -1,0 +1,368 @@
+{
+  "approval_flags": {
+    "assembled_acceptance": false,
+    "catalogues": false,
+    "deployment": false,
+    "fullgates": false,
+    "graph_installation": false,
+    "merge": false,
+    "module_execution": false,
+    "native": false,
+    "numeric_weight_quality": false,
+    "pool_selection": false,
+    "prospective_effects": false,
+    "push": false,
+    "quality": false,
+    "raw_factual_for_prospective_only": true,
+    "source5": false
+  },
+  "author_independence": {
+    "basis": "Fresh raw review compares actual newmodule/draft/currentdependencies, rather than editing oldsource-review hashes; prior research retains its source-only boundary.",
+    "module_author": "/root",
+    "proposal_author": "/root",
+    "reviewer_authored_prior_source_research": true,
+    "reviewer_authored_proposal_or_module": false
+  },
+  "baseline_commit": "bb99e81333b497ac90fc78e231d88d51367538db",
+  "baseline_kg_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+  "bindings": {
+    "current_authority": {
+      "path": "go-backend/internal/contentrails/sources/installed-authorities.json",
+      "sha256": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047"
+    },
+    "current_bundle": {
+      "path": "go-backend/internal/content/bundled.json",
+      "sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2"
+    },
+    "current_source4": {
+      "path": "go-backend/internal/contentrails/sources/authored-v4.json",
+      "sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1"
+    },
+    "module": {
+      "path": "scripts/functional_graph_v1_5_data.py",
+      "sha256": "595117fa0e7d9401354bb14a8520db095c8b11f6af34b6eb12aa224149f721c9"
+    },
+    "module_dependencies": [
+      {
+        "path": "scripts/basic_words_v33_data.py",
+        "sha256": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033"
+      },
+      {
+        "path": "scripts/contexto_common_words_v72_data.py",
+        "sha256": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee"
+      }
+    ],
+    "native_graph": {
+      "path": "go-backend/internal/graph/service.go",
+      "sha256": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e"
+    },
+    "native_graph_schema": {
+      "path": "go-backend/internal/contentbuild/graph.go",
+      "sha256": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24"
+    },
+    "native_validation": {
+      "path": "go-backend/internal/contentbuild/validate.go",
+      "sha256": "8752f9905dd4582b8718e27b1eea89e6ac0381a60fca9bd1c7a8a25f88017bbd"
+    },
+    "normalizer": {
+      "path": "scripts/apply_common_words_v24.py",
+      "sha256": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91"
+    },
+    "packet": {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i02/packet-r2.json",
+      "sha256": "1d3b29567a8635290d536528c10ee3e30c6cf501be2bc43db12d534b147f7b41"
+    },
+    "pool": {
+      "path": "docs/content-pool/v1-5-directions-i02/pool.json",
+      "sha256": "f2c13321fd1fc9e9600f1511a84dcae0e2c3ad3b4d5794dbb701eefdca9822ae"
+    },
+    "prerequisites": {
+      "path": "docs/reviews/v1-5-small-objects/linux-resume/prerequisites.json",
+      "sha256": "7e5531d06b5e344a877442322c431efc20221849a26ed633922342b4cca8ce41"
+    },
+    "proposal": {
+      "path": "docs/reviews/v1-5-small-objects/linux-resume/graph-draft-proposal-r1.json",
+      "sha256": "7e5d935e413fac8d14e83fde694011167fc3aca03a4fae3876b79503c12c30c5"
+    },
+    "reconciliation": {
+      "path": "docs/reviews/v1-5-small-objects/linux-resume/reconciliation.json",
+      "sha256": "866c92ed1dc53fadb11fb4d5fcf9a5ebff1ba337fcd370a946b9b569299fd97b"
+    },
+    "rubric": {
+      "path": "docs/CRITIQUE_RUBRIC.md",
+      "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+    },
+    "source_recheck": {
+      "path": "docs/reviews/v1-5-small-objects/linux-resume/i02-factual-recheck.json",
+      "sha256": "9c4308049ec1a6fdf32ba991e764e0c652434b577381803471099d04bc05e085"
+    },
+    "variant": {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i02/variant-r1.json",
+      "sha256": "5859ad9977246c033d6151a58510838afc6491292f8284690aa091fb73cea3a7"
+    }
+  },
+  "blocking_issues": [],
+  "changes_requested": [],
+  "checked_at_utc": "2026-10-06 16:57:18 UTC",
+  "checked_on": "2026-10-06",
+  "claims": [
+    {
+      "acceptance_scope": "Exact qualified factual raw draft suitable to enter separately admitted prospective checks; no installation.",
+      "bidirectional": 0,
+      "dst": "n_v29_kitchen_table_cutit",
+      "edge_id": "e_v15i02_bread_knife",
+      "empirical_strength_claim": false,
+      "endpoint_categories": [
+        "gastronomie",
+        "gastronomie"
+      ],
+      "endpoint_types": [
+        "concept",
+        "concept"
+      ],
+      "is_distractor": 0,
+      "label_ro": "se poate felia cu",
+      "new_distinct_incident_pairs": 0,
+      "numeric_quality_approval": false,
+      "qualification": "Qualified bread-can-be-sliced-with-a-suitable-knife relation; not every knife/bread combination.",
+      "rationale": "The ordinary bread food can be sliced using a suitable kitchen bread knife. The modal caption preserves possibility and does not universalize every knife or every loaf. Both endpoints are existing concept-type records in gastronomie; no metaphorical bread, weapon or renamed object is introduced.",
+      "record_id": "v15-i02-bread-knife",
+      "relation": "used_with",
+      "reverse_preserved": {
+        "bidirectional": 0,
+        "dst_id": "n_v4gas_paine",
+        "id": "de8204",
+        "is_distractor": 0,
+        "label_ro": "taie pâinea",
+        "relation": "cuts_food",
+        "src_id": "n_v29_kitchen_table_cutit",
+        "strength": 0.98
+      },
+      "same_endpoint_pair_relation_collision": false,
+      "source_ids": [
+        "knife-ikea"
+      ],
+      "src": "n_v4gas_paine",
+      "strength": 0.98,
+      "verdict": "accept"
+    },
+    {
+      "acceptance_scope": "Exact qualified factual raw draft suitable to enter separately admitted prospective checks; no installation.",
+      "bidirectional": 0,
+      "dst": "n_v4gas_apa",
+      "edge_id": "e_v15i02_tap_water",
+      "empirical_strength_claim": false,
+      "endpoint_categories": [
+        "viata_de_roman",
+        "gastronomie"
+      ],
+      "endpoint_types": [
+        "concept",
+        "concept"
+      ],
+      "is_distractor": 0,
+      "label_ro": "controlează curgerea",
+      "new_distinct_incident_pairs": 0,
+      "numeric_quality_approval": false,
+      "qualification": "Domestic tap controls water flow; no temperature, handedness, potability or health claim.",
+      "rationale": "The ordinary domestic tap controls release/flow of water, matching its explicit device definition. Cross-category viata_de_roman→gastronomie is functional, not a claim that a tap is food or that all discharged water is potable. No treatment, temperature, left/right operation, health or filtering assertion is made.",
+      "record_id": "v15-i02-tap-water",
+      "relation": "controls",
+      "reverse_preserved": {
+        "bidirectional": 0,
+        "dst_id": "n_v33_bathroom_fixture_robinet",
+        "id": "de8418",
+        "is_distractor": 0,
+        "label_ro": "curge prin robinet",
+        "relation": "flows_through",
+        "src_id": "n_v4gas_apa",
+        "strength": 0.99
+      },
+      "same_endpoint_pair_relation_collision": false,
+      "source_ids": [
+        "tap-ikea"
+      ],
+      "src": "n_v33_bathroom_fixture_robinet",
+      "strength": 0.99,
+      "verdict": "accept"
+    }
+  ],
+  "counts": {
+    "directed_edge_records_proposed": 2,
+    "new_authored_rounds_recipes_targets": 0,
+    "new_distinct_incident_pairs": 0,
+    "new_forms": 0,
+    "new_shared_concepts": 0,
+    "new_synonym_families": 0,
+    "new_world_concepts": 0
+  },
+  "forms": [],
+  "identity_checks": {
+    "actualpreflight_or_module_import_executed": false,
+    "all_existing_label_alias_owners_exact": true,
+    "complete_bound_endpoint_snapshots": 4,
+    "complete_bound_old_opposite_records": 2,
+    "current_edges": 9473,
+    "current_nodes": 2419,
+    "imports_preserve_current_benchmark_and_deferred_terms": [
+      {
+        "module": "basic_words_v33_data",
+        "names": [
+          "BEGINNER_BENCHMARK"
+        ]
+      },
+      {
+        "module": "contexto_common_words_v72_data",
+        "names": [
+          "DEFERRED_AMBIGUOUS_TERMS"
+        ]
+      }
+    ],
+    "module_ast_literal_payload_equals_json_draft": true,
+    "module_builder_staticreturn_only": true,
+    "module_empty_nodes_aliases_game_ids_verified": true,
+    "new_supplied_ID_collisions": 0,
+    "newselfloops": 0,
+    "rejection_ledgers": [
+      {
+        "endpoint_touching_records": [],
+        "method": "Every complete actual item-map value inspected for exact endpointIDs; preserved ledger bytes, not just dictionary keys.",
+        "path": "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+        "records": 105,
+        "scope": "No rejected board is promoted by this graph-only factual judgment; no new authored groups/routes supplied.",
+        "sha256": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d"
+      },
+      {
+        "endpoint_touching_records": [
+          {
+            "canonical_record_sha256": "3f4a32808e86e4a3b9b4f7802d4fff635e2ca70f14d0c461687c9130d231f307",
+            "endpoint_ids": [
+              "n_v4gas_apa"
+            ],
+            "id": "cx_stiinta_230"
+          }
+        ],
+        "method": "Every complete actual item-map value inspected for exact endpointIDs; preserved ledger bytes, not just dictionary keys.",
+        "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+        "records": 122,
+        "scope": "No rejected board is promoted by this graph-only factual judgment; no new authored groups/routes supplied.",
+        "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869"
+      }
+    ],
+    "same_relation_unordered_endpoint_key_collisions": 0,
+    "unchanged_puzzles": 180
+  },
+  "installation_approval": false,
+  "node_definitions": [],
+  "preservation_boundary": {
+    "Source4_parent_for_laterSource5": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "all9473_oldedges": "Require exact recordpreservation includingde8204/de8418; no removals orbidirectionalflips.",
+    "all_old_nodes_attributes_except_generateddegree": "Require unchanged afteractualsupportedmaterialization; notexecutedbythisreview.",
+    "current_pool_states": "Both exacti02r2 records remainHELD; rawfactual acceptance does notselectthem orrewritepoolhistory.",
+    "native_current_authority": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "new_node_floor4_2_and_target_incoming5": "Unchanged; zero newnodes or targetapprovals.",
+    "prospective_artifacts": "Not inspected/generated here; acceptedrawfacts do not grantactual sourcewrite or persistent graph/catalogue activation."
+  },
+  "proposal_sha256": "7e5d935e413fac8d14e83fde694011167fc3aca03a4fae3876b79503c12c30c5",
+  "qualifications": [
+    "Pâine is bakedfood; Cuțit a suitable foodcuttingknife in thisclaim, not every blade/loaf, no weapon/use/safety instruction.",
+    "Robinet is domesticflow-control device; Apă is existing waterconcept. Edge neither certifies potability nor implies a filter/treatment/temperature/handedness guarantee.",
+    "Original DALSKÄR Romanian right/left conflict is retained but outside proposedcaption; primarymanufacturer provenance is identified from documentcopyright/content, CDNownership separatelyunverified. Hornbach issuer/licence gap is retained and itstechnical-water content not used for canonicalhouseholdpotability.",
+    "Noopencontent licence is inferred. Only short originalfactual summaries retained; no source prose/images/recipes/corpora imported.",
+    "Exactnondistractor0/bidirectional0 accepted asexplicit schemaflags for evaluation; oldopposite records remain separately directed and must stayexact.",
+    "Robinet feedbackproxy already maps nonwinningfeedback toApă in the exactbaseline bundle. No novelty/warmnessimprovement is inferred from adding a grapharc. Its expandedreachability/cycle/SCC consequences require actualindependentimpact checks."
+  ],
+  "reviewed_at_commit": "bb99e81333b497ac90fc78e231d88d51367538db",
+  "reviewer": "/root/content_rail",
+  "role": "factual",
+  "rubric_walk": {
+    "A1_A2": "Allfour retained ordinary labels/senses are already reviewed stock; accessible householdmanufacturer contexts support presentqualifieduses. No rare target, populationrecall score or enjoyment evidence is invented.",
+    "A3_A4": "Both exactmodal/functional predicates have currentclaim-specificprimarysupport andcorrectdirectedsubject/object. No automaticreversecaption reuse.",
+    "A5": "No newalcoholdependent/adult framing orpromotedstock. Existing rejectedcx_stiinta230 mentioningApă remains rejected; no critic/reusehold is waived.",
+    "A6": "No newpuzzle freshness approval. Two newdirections,zero newconcepts/forms/distinctincidentpairs; repeated endpoints are stated rather than counted as independentfacts.",
+    "A7": "Specific food/tool-use and domesticdevice/flow-control predicates,notregion/mereco-occurrence themes; no blanket taxonomy orallknife guarantee.",
+    "game_specific": "No board/hidden target/recipe is authored here. Cald incomingfloors, allround predicates/mining/closure, Lanț alternatives/captions and save/privacy/nativefullgates remain for independentprospective reviews."
+  },
+  "schema": "v1-5-linux-graph-draft-factual-review-v1",
+  "scope": "New independent exact RAW factual draft review of the two supplied directedcounterparts. Accept qualified predicate/sense/schema/provenance facts for prospectiveonly. No quality/weight/fullimpact/ordinaryplay/selectedpool/source5/installation/release approval.",
+  "source_module_sha256": "595117fa0e7d9401354bb14a8520db095c8b11f6af34b6eb12aa224149f721c9",
+  "sources": [
+    {
+      "accessed_on": "2026-10-06",
+      "copyright_and_licence": "Observed footer©InterIKEASystemsBV1999–2026. No open reuse licence verified; no source prose/images/recipe/corpus reused.",
+      "fresh_access": "For raw draft review, original knife page and bothoriginal PDFs directly reopened successfully with full readable text. Supplemental official householdcontext was directly read during same Linux source check.",
+      "id": "knife-ikea",
+      "location": "Productdescriptionline60;bread-slicing illustrationdescriptionline89.",
+      "original_summary": "This serrated bread knife is expressly intended for cutting bread. It supports a bread-slicing possibility with an appropriate knife, not a universal knife/loaf suitability claim.",
+      "publisher": "IKEA of Sweden AB/Inter IKEA Systems B.V.,original Romanian VÖRDA102.892.32 product documentation",
+      "role": "Claim-specific primary fact support",
+      "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/"
+    },
+    {
+      "accessed_on": "2026-10-06",
+      "copyright_and_licence": "ActualPDFfooter©InterIKEASystemsBV2014;AA-2163215-1. No open reuse licence verified; only this factual paraphrase retained.",
+      "download_identity": {
+        "bytes": 875449,
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/linux-resume/i02-factual/tap-ikea-aa2163215.pdf",
+        "sha256": "23b676b23bbaf5f077a5e1535490a7d3a59746cc82b5d6d1144d80b86a0787be"
+      },
+      "fresh_access": "For raw draft review, original knife page and bothoriginal PDFs directly reopened successfully with full readable text. Supplemental official householdcontext was directly read during same Linux source check.",
+      "id": "tap-ikea",
+      "location": "PDFpage1,Romanian section;webtextlines238–247.",
+      "original_summary": "Operating the domestic mixer lever releases water; this grounds flow control. Romanian wording specifies right while English and several other languages specify left for a temperature setting. No handedness or temperature claim is adopted.",
+      "publisher": "Document namesDALSKÄR and copyrightholderInterIKEASystemsBV; CloudFront host ownership is not separately certified. Brand-issued document identified from its contents, not inferred from CDN URL alone.",
+      "role": "Claim-specific primary fact support",
+      "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf"
+    },
+    {
+      "accessed_on": "2026-10-06",
+      "copyright_and_licence": "No explicit copyright/openreuse licence verified on the inspected file. No issuer or openpermission invented.",
+      "download_identity": {
+        "bytes": 129605,
+        "path": "/home/dobo/work/_temp/codex__content-v1-5/linux-resume/i02-factual/hornbach-scope.pdf",
+        "sha256": "5702dbaecd1af4e2f89d72198b9380cbb3cc4b514c9f44ca6682cdad39ce98e4"
+      },
+      "fresh_access": "For raw draft review, original knife page and bothoriginal PDFs directly reopened successfully with full readable text. Supplemental official householdcontext was directly read during same Linux source check.",
+      "id": "tap-hornbach-scope",
+      "location": "PDFpage2,water-service switching andopening/closing sections.",
+      "original_summary": "This double-service plastic tap document covers potable-versus-technical/irrigation supplies and opening/closing. It demonstrates why a generictap claim cannot imply drinking-water quality; not primary support for the canonical household-water edge.",
+      "publisher": "Hornbach-hosted supplier instruction file; original issuer remains unidentified in the inspected document.",
+      "role": "Retained scope counterevidence only.",
+      "url": "https://media.hornbach.ro/hb/ownersmanual/as.137830455.pdf"
+    },
+    {
+      "accessed_on": "2026-10-06",
+      "copyright_and_licence": "Commercialcopyright;noopenreuse licenceverified. Originalfactualsummaryonly.",
+      "fresh_access": "For raw draft review, original knife page and bothoriginal PDFs directly reopened successfully with full readable text. Supplemental official householdcontext was directly read during same Linux source check.",
+      "id": "tap-ikea-official-context",
+      "location": "Productdescription/details andassembly-document links.",
+      "original_summary": "Current official DALSKÄR family page is a domesticbasin mixer and describes water operation. It supports household context and independently shows left-side temperature wording; no numericflow/pressure/temperature/performance/legal claim is adopted.",
+      "publisher": "IKEA of Sweden AB/Inter IKEA Systems B.V.,current original Romanian DALSKÄR family product documentation",
+      "role": "Supplemental original-household context; does not claim exact same model revision or PDF bytes.",
+      "url": "https://www.ikea.com/ro/ro/p/dalskaer-baterie-lavoar-negru-70603498/"
+    }
+  ],
+  "strength_editorial_review": {
+    "bread": {
+      "copied_exactly_from": "de8204",
+      "value": 0.98
+    },
+    "prospective_permission": "Values are explicit valid-range existingeditorial hypotheses, not probabilities, experimentally measured association strength, equalcost or established weightedfeedback quality. Prospective impact/independentquality mayrequire reject/revise; this raw factual verdict does not approve numerical suitability.",
+    "schema_range_only_verified": true,
+    "source_derived_measurement": false,
+    "tap": {
+      "copied_exactly_from": "de8418",
+      "value": 0.99
+    }
+  },
+  "valid_until": "Any exact proposal/module/currentKG/endpoints/oldedge/recordrevision/source/caption/relation/flag/strength/binding changes; repeat affected factual judgment.",
+  "verdict": "accept",
+  "verification": {
+    "all_match": true,
+    "exact_source_recheck_current": true,
+    "frozen_i02packet_hashes": 136,
+    "method": "Static AST/literal payload and source/JSON/schema/currentowner/dedup/rejection reads with bounded stdlib streamed hashes. No executable module import, supportedgraphpreflight, mutation, gamesimulation, native/fulltest or sourcegeneration.",
+    "rawdraft_module_pre_post_byte_guard": true,
+    "readset_count": 146
+  }
+}

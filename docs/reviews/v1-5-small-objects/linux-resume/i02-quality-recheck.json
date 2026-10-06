@@ -1,0 +1,301 @@
+{
+  "CRLF_transport_boundary": "ADR0176 allowed a finite source-only CR-at-EOL transport while preserving failed default aggregate check. It grants no V1.5 native/install acceptance; old frozen Windows receipts remain untouched. New document is LF.",
+  "approval_flags": {
+    "installation": false,
+    "native_qualification_complete": false,
+    "new_recipe": false,
+    "new_round": false,
+    "new_synonym": false,
+    "new_target": false,
+    "numerical_adoption": false,
+    "proposal": false,
+    "raw_graph": false,
+    "research_triage_only": true,
+    "selection": false,
+    "threshold_change": false
+  },
+  "checked_on": "2026-10-06",
+  "current_authority_sha256": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+  "gates_not_run_by_this_role": [
+    "supported preflight or apply",
+    "candidate module/proposal/raw approval",
+    "all-game/full-profile prospective simulations",
+    "ordinary native/Create/Move/Guess/Get/play/hint audit",
+    "terminal regeneration",
+    "native source5/catalog/export/authority/history/reference/full gates",
+    "human enjoyment testing"
+  ],
+  "inert_method_source": "import pathlib,json,hashlib,sys,collections\nfrom collections import deque\nR=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5');D=R/'docs/reviews/v1-5-small-objects';sys.path.insert(0,str(R));from cat_de_roman_esti.graph import Graph\nfrom cat_de_roman_esti.wordgames.service import WordGameService\nfrom cat_de_roman_esti.wordgames.contexto_feedback import feedback_proxy_id\nsha=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest();read=lambda p:json.loads(pathlib.Path(p).read_bytes());kgp=R/'cat_de_roman_esti/fixtures/kg_sample.json';kg=read(kgp);assert sha(kgp)=='0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6';svc=WordGameService(Graph.from_records(kg['kg_nodes'],kg['kg_edges']));vpath=D/'iterations/i02/variant-r1.json';v=read(vpath);pack=read(R/'cat_de_roman_esti/fixtures/games_pack.json');bundle=read(R/'go-backend/internal/content/bundled.json');world=read(R/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json');nodes={x['id']:x for x in kg['kg_nodes']};edgeids={e['id']:e for e in kg['kg_edges']}\ndef shortest(a,b):\n q=deque([[a]]);seen={a}\n while q:\n  path=q.popleft()\n  if path[-1]==b:return path\n  for n in svc.neighbor_ids(path[-1]):\n   if n not in seen:seen.add(n);q.append(path+[n])\n return None\nrows=[]\nfor hypothesis in v['proposed_direction_records']:\n e=hypothesis['edge'];src,dst=e['src'],e['dst'];reverse=edgeids[hypothesis['reverse']];assert svc.link(src,dst) is None and reverse['src_id']==dst and reverse['dst_id']==src and not reverse['bidirectional'] and not reverse['is_distractor']\n path=shortest(src,dst)\n idset={src,dst};conex=[]\n for b in pack['conexiuni']:\n  members=[i for g in b['groups'].values() for i in g] if isinstance(b['groups'],dict) else [i for g in b['groups'] for i in g['members']]\n  if idset<=set(members):conex.append(b['id'])\n roles={'curated_Contexto_targets':[r['id'] for r in pack['contexto'] if r['target'] in idset],'curated_Lant_endpoint_records':[r['id'] for r in pack['lant'] if r['start'] in idset or r['target'] in idset],'Conexiuni_both_endpoints_on_board':conex,'world_concepts':[r['id'] for r in world['concepts'] if r['id'] in idset]}\n rows.append({'record_id':hypothesis['record_id'],'proposed_documentary_edge':e,'source_snapshot':nodes[src],'destination_snapshot':nodes[dst],'opposite_raw_edge_exact':reverse,'effective_new_direction_currently_missing':True,'existing_baseline_path_ids':path,'existing_baseline_path_labels':None if path is None else [svc.label(i) for i in path],'baseline_hops':None if path is None else len(path)-1,'hypothetical_direct_hops':1,'installed_hops_measured':False,'new_distinct_undirected_pair':False,'new_direct_two_edge_cycle':True,'already_transitively_in_same_SCC':path is not None,'reachability_set_consequence':('This edge lies inside an existing SCC because both directions already have directed paths; by itself it cannot add reachability, though shortest/weighted distances/order can change.' if path is not None else 'No baseline src→dst path exists. This edge can expand old reachability and merge previously separate SCCs; all affected old profiles, mined/recipe/terminal effects must be measured after exact proposal freeze. No reachability preservation claim.'),'current_src_outgoing_unique':svc.degree(src),'hypothetical_src_outgoing_unique':svc.degree(src)+1,'current_dst_incoming_unique':len(svc.predecessor_ids(dst)),'hypothetical_dst_incoming_unique':len(svc.predecessor_ids(dst))+1,'current_stored_incident_degrees':{i:nodes[i]['degree'] for i in [src,dst]},'hypothetical_stored_incident_degrees':{i:nodes[i]['degree']+1 for i in [src,dst]},'degree_note':'Hypothetical arithmetic only, not supported generator output; stored incident count differs from unique outgoing/native Degree and unique incoming target floor.','current_nonwinning_Contexto_feedback_proxy_src':feedback_proxy_id(src),'current_nonwinning_Contexto_feedback_proxy_dst':feedback_proxy_id(dst),'current_public_Lant_caption_new_direction':bundle['lant_captions'].get(src+'\\x00'+dst),'current_public_Lant_caption_opposite':bundle['lant_captions'].get(dst+'\\x00'+src),'proposed_caption_serving_expectation':'used_with/controls have no currently reviewed relation fallback, so a new generated Lanț caption would be neutral legătură directă unless separately reviewed; raw graph text is not automatically earned public guidance.','current_dependency_presence':roles,'quality_disposition':'WORTH_BOUNDED_EXACT_PROSPECTIVE_QUALIFICATION_ONLY','current_adoption':'HOLD until exact authored module/proposal, fresh independent raw reviews and admitted measured downstream qualification.'})\nassert len(rows)==2\nresult={'schema':'v1-5-linux-i02-independent-quality-static-recheck-v1','checked_on':'2026-10-06','reviewer':'/root/graph_quality','main_source_baseline':'bb99e81333b497ac90fc78e231d88d51367538db','retained_runtime_graph_baseline':'0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6','inputs':{str(p.relative_to(R)):sha(p) for p in [vpath,D/'iterations/i02/native-plan-r1.json',D/'iterations/i02/source-bindings-r1.json',D/'iterations/i02/quality-review-r1.json',D/'iterations/i02/quality-reconciliation-r2.json',R/'docs/CRITIQUE_RUBRIC.md',R/'cat_de_roman_esti/wordgames/contexto_feedback.py',R/'go-backend/internal/lant/service.go',R/'go-backend/internal/contentbuild/build.go']},'source4_sha256':sha(R/'go-backend/internal/contentrails/sources/authored-v4.json'),'current_authority_sha256':sha(R/'go-backend/internal/contentrails/sources/installed-authorities.json'),'scope':'Fresh source/static two-direction quality triage, not root authored input, raw graph acceptance or measured native gameplay/prospective result. No module/proposal/pool/data/threshold/generator/corpus/runtime edits; no additional research lead or child agent.','rows':rows,'qualified_source_recheck':[{'url':'https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/','access':'Fresh primary HTML read succeeded','summary':'A bread knife is documented cutting bread; supports possible bread slicing with a suitable knife, not every knife/bread combination. No product corpus, ratings, price or image imported.'},{'url':'https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf','access':'Fresh original two-page multilingual PDF opened','summary':'A domestic mixer lever releases water. Only generic flow control is retained; no universal handedness, temperature, potability or health assertion.'}],'worthiness':{'bread_knife':'Clear missing familiar food-to-tool direction and a direct step that matches an intuitive action. Existing graph already exposes both concepts and opposite association; growth is direction availability, not concept/pair/synonym/round novelty. Conditional worthiness is enough to test, not observed fun or ordinary selection.','tap_water':'Clear missing device-to-controlled-substance direction. The current nonwinning Contexto Robinet already borrows Apă feedback, so no warmer ordinary Robinet guess is promised. Benefit must instead be demonstrated in actual directed movement/options/earned hints/other affected guesses under current scoring.','overall':'Both deserve bounded exact prospective qualification. Retain adoption HOLD. A failure to find meaningful ordinary attributable play, or unsafe old puzzle/core/fairness/feedback changes, refutes shipping even though physical source claims are true.'},'necessary_bounded_cases_before_adoption':[{'case':'Two explicit direct endpoints','scope':'Baseline direct move absence versus actual candidate legal Pâine→Cuțit/Robinet→Apă, terminal Get/score/private internals, aliases/dedup/reverse arc preservation. Label as controlled fixed cases; one-hop pairs do not prove ordinary easy2–3 selection.'},{'case':'Ordinary current selector case','scope':'Freeze a finite search budget and original seed/category/difficulty/daily inputs. Find at least one naturally selected route using an accepted direction with plausible alternatives/real choice. Possible candidates to investigate are a bread-to-kitchen route via Cuțit or a household-to-water route via Robinet; no seed/outcome is claimed. No forced exclusions, mined thresholds, authored promotion or unbounded reroll search to obtain a pass.'},{'case':'Current scoring/proxy control','scope':'Compare all265 approved/pending target hop+weighted profiles and actual feedback; specifically preserve Robinet→Apă legacy proxy semantics, exact target wins, nonwinning word identity/attempts/privacy and earned clue cases. Cuțit incoming1→2 remains below the5floor; Apă20→21 already clears it. No new target approval.'},{'case':'Old content and mined/terminal effects','scope':'Compare245Conexiuni fairness/labels,123Lanț paths/options/captions/par,83Alchimie cores plus seeded/category/daily mining and latent common-neighbor candidates,85authored/336frozen quick records and251/351world snapshots/mechanics/history. Regenerate180terminal puzzles in isolated supported scratch before any preserve claim. Keep old source/corpus/history assertions and tombstones exact.'}],'specific_risks':['Positive-weight reciprocal cycles do not by themselves break visited-set BFS/Dijkstra/finite closure, but may shorten many old distances and change frontier/RNG/route ordering.','The examined native Lanț>=2 candidate boundary is already met by Pâine13out and Robinet2out; those endpoints do not newly cross it. Robinet2→3 can cross other inspected legacy-oracle starts>=3 logic, so exact native/legacy selector behavior remains to measure.','New incoming destination parents create possible latent Cuțit or Apă common-neighbor outputs. These are unapproved associations, not ingredient arithmetic, new authored recipes or implicitly truthful crafts.','Both Apă and Pâine occur in the current world, so fresh node snapshot/Render reviews and coherent Source5/downstream bindings are required even if authored world definitions and mechanics remain identical.','Raw controls/used_with labels are not automatically public Lanț hints; any desired earned-caption change has its own exact review.','Copied0.98/0.99 weights are editorial hypotheses. Source verification does not establish equal graded costs, rank/temperature improvements or safety of every resulting shortcut.'],'gates_not_run_by_this_role':['supported preflight or apply','candidate module/proposal/raw approval','all-game/full-profile prospective simulations','ordinary native/Create/Move/Guess/Get/play/hint audit','terminal regeneration','native source5/catalog/export/authority/history/reference/full gates','human enjoyment testing'],'approval_flags':{'research_triage_only':True,'raw_graph':False,'numerical_adoption':False,'proposal':False,'selection':False,'native_qualification_complete':False,'installation':False,'new_target':False,'new_round':False,'new_recipe':False,'new_synonym':False,'threshold_change':False},'CRLF_transport_boundary':'ADR0176 allowed a finite source-only CR-at-EOL transport while preserving failed default aggregate check. It grants no V1.5 native/install acceptance; old frozen Windows receipts remain untouched. New document is LF.','inert_method_source':pathlib.Path(__file__).read_text(),'method_source_sha256':sha(__file__)}\nassert sha(kgp)==result['retained_runtime_graph_baseline'];p=D/'linux-resume/i02-quality-recheck.json';assert not p.exists();p.write_text(json.dumps(result,ensure_ascii=False,sort_keys=True,indent=2)+'\\n');print(json.dumps({'sha256':sha(p),'rows':[{k:r[k] for k in ['record_id','baseline_hops','current_src_outgoing_unique','current_dst_incoming_unique','current_dependency_presence']} for r in rows]},ensure_ascii=False))\n",
+  "inputs": {
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v1-5-small-objects/iterations/i02/native-plan-r1.json": "3d70f82d0e617cd0b74fc4c8260d8512eaeef0120319f05deb4fe898310ea89b",
+    "docs/reviews/v1-5-small-objects/iterations/i02/quality-reconciliation-r2.json": "636dda73bb81941e714cf213293c2fc73a80c2574f3f692390c7b94b8bceead1",
+    "docs/reviews/v1-5-small-objects/iterations/i02/quality-review-r1.json": "b04c4c737e01c34fb3487f03809cafd2dacc025a5ec5d1fb229a319a1d25911d",
+    "docs/reviews/v1-5-small-objects/iterations/i02/source-bindings-r1.json": "2f106271d0d37e3fbda592aeec02b1251b2918120679e008e9b11a7dea3180b2",
+    "docs/reviews/v1-5-small-objects/iterations/i02/variant-r1.json": "5859ad9977246c033d6151a58510838afc6491292f8284690aa091fb73cea3a7",
+    "go-backend/internal/contentbuild/build.go": "ccb575e94fa2615eb0712b6852b7e8936048457a84b67b2762d9d83da769c44b",
+    "go-backend/internal/lant/service.go": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90"
+  },
+  "main_source_baseline": "bb99e81333b497ac90fc78e231d88d51367538db",
+  "method_source_sha256": "94809980871c0f8e3fd1a16742eb3649d3f93bc2c94bf2a4a16deb93459a1f13",
+  "necessary_bounded_cases_before_adoption": [
+    {
+      "case": "Two explicit direct endpoints",
+      "scope": "Baseline direct move absence versus actual candidate legal Pâine→Cuțit/Robinet→Apă, terminal Get/score/private internals, aliases/dedup/reverse arc preservation. Label as controlled fixed cases; one-hop pairs do not prove ordinary easy2–3 selection."
+    },
+    {
+      "case": "Ordinary current selector case",
+      "scope": "Freeze a finite search budget and original seed/category/difficulty/daily inputs. Find at least one naturally selected route using an accepted direction with plausible alternatives/real choice. Possible candidates to investigate are a bread-to-kitchen route via Cuțit or a household-to-water route via Robinet; no seed/outcome is claimed. No forced exclusions, mined thresholds, authored promotion or unbounded reroll search to obtain a pass."
+    },
+    {
+      "case": "Current scoring/proxy control",
+      "scope": "Compare all265 approved/pending target hop+weighted profiles and actual feedback; specifically preserve Robinet→Apă legacy proxy semantics, exact target wins, nonwinning word identity/attempts/privacy and earned clue cases. Cuțit incoming1→2 remains below the5floor; Apă20→21 already clears it. No new target approval."
+    },
+    {
+      "case": "Old content and mined/terminal effects",
+      "scope": "Compare245Conexiuni fairness/labels,123Lanț paths/options/captions/par,83Alchimie cores plus seeded/category/daily mining and latent common-neighbor candidates,85authored/336frozen quick records and251/351world snapshots/mechanics/history. Regenerate180terminal puzzles in isolated supported scratch before any preserve claim. Keep old source/corpus/history assertions and tombstones exact."
+    }
+  ],
+  "qualified_source_recheck": [
+    {
+      "access": "Fresh primary HTML read succeeded",
+      "summary": "A bread knife is documented cutting bread; supports possible bread slicing with a suitable knife, not every knife/bread combination. No product corpus, ratings, price or image imported.",
+      "url": "https://www.ikea.com/ro/ro/p/voerda-cutit-paine-negru-10289232/"
+    },
+    {
+      "access": "Fresh original two-page multilingual PDF opened",
+      "summary": "A domestic mixer lever releases water. Only generic flow control is retained; no universal handedness, temperature, potability or health assertion.",
+      "url": "https://d37kg2ecsrm74.cloudfront.net/web/ikea4/pdfs/advice_and_instructions/215/AA-2163215-1_pub.pdf"
+    }
+  ],
+  "retained_runtime_graph_baseline": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+  "reviewer": "/root/graph_quality",
+  "rows": [
+    {
+      "already_transitively_in_same_SCC": true,
+      "baseline_hops": 3,
+      "current_adoption": "HOLD until exact authored module/proposal, fresh independent raw reviews and admitted measured downstream qualification.",
+      "current_dependency_presence": {
+        "Conexiuni_both_endpoints_on_board": [],
+        "curated_Contexto_targets": [
+          "ct_gastronomie_336"
+        ],
+        "curated_Lant_endpoint_records": [],
+        "world_concepts": [
+          "n_v29_kitchen_table_cutit",
+          "n_v4gas_paine"
+        ]
+      },
+      "current_dst_incoming_unique": 1,
+      "current_nonwinning_Contexto_feedback_proxy_dst": "n_v29_kitchen_table_cutit",
+      "current_nonwinning_Contexto_feedback_proxy_src": "n_v4gas_paine",
+      "current_public_Lant_caption_new_direction": null,
+      "current_public_Lant_caption_opposite": "legătură directă",
+      "current_src_outgoing_unique": 13,
+      "current_stored_incident_degrees": {
+        "n_v29_kitchen_table_cutit": 4,
+        "n_v4gas_paine": 21
+      },
+      "degree_note": "Hypothetical arithmetic only, not supported generator output; stored incident count differs from unique outgoing/native Degree and unique incoming target floor.",
+      "destination_snapshot": {
+        "aliases": [
+          "cuțitul",
+          "cuțite",
+          "cuțitele",
+          "cuțitului"
+        ],
+        "category": "gastronomie",
+        "degree": 4,
+        "description": "Unealtă cu lamă și mâner, folosită pentru a tăia alimente sau alte lucruri.",
+        "difficulty_tier": "easy",
+        "id": "n_v29_kitchen_table_cutit",
+        "label_ro": "Cuțit",
+        "node_type": "concept",
+        "salience": 0.92
+      },
+      "effective_new_direction_currently_missing": true,
+      "existing_baseline_path_ids": [
+        "n_v4gas_paine",
+        "n_v2via_masa_in_familie",
+        "n_v4gas_masa",
+        "n_v29_kitchen_table_cutit"
+      ],
+      "existing_baseline_path_labels": [
+        "Pâine",
+        "Masa în familie",
+        "Masă",
+        "Cuțit"
+      ],
+      "hypothetical_direct_hops": 1,
+      "hypothetical_dst_incoming_unique": 2,
+      "hypothetical_src_outgoing_unique": 14,
+      "hypothetical_stored_incident_degrees": {
+        "n_v29_kitchen_table_cutit": 5,
+        "n_v4gas_paine": 22
+      },
+      "installed_hops_measured": false,
+      "new_direct_two_edge_cycle": true,
+      "new_distinct_undirected_pair": false,
+      "opposite_raw_edge_exact": {
+        "bidirectional": 0,
+        "dst_id": "n_v4gas_paine",
+        "id": "de8204",
+        "is_distractor": 0,
+        "label_ro": "taie pâinea",
+        "relation": "cuts_food",
+        "src_id": "n_v29_kitchen_table_cutit",
+        "strength": 0.98
+      },
+      "proposed_caption_serving_expectation": "used_with/controls have no currently reviewed relation fallback, so a new generated Lanț caption would be neutral legătură directă unless separately reviewed; raw graph text is not automatically earned public guidance.",
+      "proposed_documentary_edge": {
+        "bidirectional": 0,
+        "dst": "n_v29_kitchen_table_cutit",
+        "id": "e_v15i02_bread_knife",
+        "is_distractor": 0,
+        "label_ro": "se poate felia cu",
+        "relation": "used_with",
+        "src": "n_v4gas_paine",
+        "strength": 0.98
+      },
+      "quality_disposition": "WORTH_BOUNDED_EXACT_PROSPECTIVE_QUALIFICATION_ONLY",
+      "reachability_set_consequence": "This edge lies inside an existing SCC because both directions already have directed paths; by itself it cannot add reachability, though shortest/weighted distances/order can change.",
+      "record_id": "v15-i02-bread-knife",
+      "source_snapshot": {
+        "aliases": [
+          "pâinea",
+          "pâini",
+          "pâinile",
+          "pită",
+          "pite",
+          "pitele",
+          "pitei",
+          "pitelor",
+          "pâinii",
+          "pâinilor"
+        ],
+        "category": "gastronomie",
+        "degree": 21,
+        "description": "Aliment de bază făcut din aluat copt, consumat la masă.",
+        "difficulty_tier": "easy",
+        "id": "n_v4gas_paine",
+        "label_ro": "Pâine",
+        "node_type": "concept",
+        "salience": 0.9273
+      }
+    },
+    {
+      "already_transitively_in_same_SCC": false,
+      "baseline_hops": null,
+      "current_adoption": "HOLD until exact authored module/proposal, fresh independent raw reviews and admitted measured downstream qualification.",
+      "current_dependency_presence": {
+        "Conexiuni_both_endpoints_on_board": [],
+        "curated_Contexto_targets": [],
+        "curated_Lant_endpoint_records": [
+          "lt_stiinta_216"
+        ],
+        "world_concepts": [
+          "n_v4gas_apa"
+        ]
+      },
+      "current_dst_incoming_unique": 20,
+      "current_nonwinning_Contexto_feedback_proxy_dst": "n_v4gas_apa",
+      "current_nonwinning_Contexto_feedback_proxy_src": "n_v4gas_apa",
+      "current_public_Lant_caption_new_direction": null,
+      "current_public_Lant_caption_opposite": "legătură directă",
+      "current_src_outgoing_unique": 2,
+      "current_stored_incident_degrees": {
+        "n_v33_bathroom_fixture_robinet": 5,
+        "n_v4gas_apa": 30
+      },
+      "degree_note": "Hypothetical arithmetic only, not supported generator output; stored incident count differs from unique outgoing/native Degree and unique incoming target floor.",
+      "destination_snapshot": {
+        "aliases": [
+          "ape",
+          "apele",
+          "apei",
+          "apelor"
+        ],
+        "category": "gastronomie",
+        "degree": 30,
+        "description": "Lichid de băut și ingredient de bază în gătit.",
+        "difficulty_tier": "easy",
+        "id": "n_v4gas_apa",
+        "label_ro": "Apă",
+        "node_type": "concept",
+        "salience": 0.968
+      },
+      "effective_new_direction_currently_missing": true,
+      "existing_baseline_path_ids": null,
+      "existing_baseline_path_labels": null,
+      "hypothetical_direct_hops": 1,
+      "hypothetical_dst_incoming_unique": 21,
+      "hypothetical_src_outgoing_unique": 3,
+      "hypothetical_stored_incident_degrees": {
+        "n_v33_bathroom_fixture_robinet": 6,
+        "n_v4gas_apa": 31
+      },
+      "installed_hops_measured": false,
+      "new_direct_two_edge_cycle": true,
+      "new_distinct_undirected_pair": false,
+      "opposite_raw_edge_exact": {
+        "bidirectional": 0,
+        "dst_id": "n_v33_bathroom_fixture_robinet",
+        "id": "de8418",
+        "is_distractor": 0,
+        "label_ro": "curge prin robinet",
+        "relation": "flows_through",
+        "src_id": "n_v4gas_apa",
+        "strength": 0.99
+      },
+      "proposed_caption_serving_expectation": "used_with/controls have no currently reviewed relation fallback, so a new generated Lanț caption would be neutral legătură directă unless separately reviewed; raw graph text is not automatically earned public guidance.",
+      "proposed_documentary_edge": {
+        "bidirectional": 0,
+        "dst": "n_v4gas_apa",
+        "id": "e_v15i02_tap_water",
+        "is_distractor": 0,
+        "label_ro": "controlează curgerea",
+        "relation": "controls",
+        "src": "n_v33_bathroom_fixture_robinet",
+        "strength": 0.99
+      },
+      "quality_disposition": "WORTH_BOUNDED_EXACT_PROSPECTIVE_QUALIFICATION_ONLY",
+      "reachability_set_consequence": "No baseline src→dst path exists. This edge can expand old reachability and merge previously separate SCCs; all affected old profiles, mined/recipe/terminal effects must be measured after exact proposal freeze. No reachability preservation claim.",
+      "record_id": "v15-i02-tap-water",
+      "source_snapshot": {
+        "aliases": [
+          "robinetul",
+          "robinete",
+          "robinetele",
+          "robinetului",
+          "robinetului de baie",
+          "robinetelor de baie"
+        ],
+        "category": "viata_de_roman",
+        "degree": 5,
+        "description": "Dispozitiv care deschide, oprește și reglează curgerea apei.",
+        "difficulty_tier": "easy",
+        "id": "n_v33_bathroom_fixture_robinet",
+        "label_ro": "Robinet",
+        "node_type": "concept",
+        "salience": 0.94
+      }
+    }
+  ],
+  "schema": "v1-5-linux-i02-independent-quality-static-recheck-v1",
+  "scope": "Fresh source/static two-direction quality triage, not root authored input, raw graph acceptance or measured native gameplay/prospective result. No module/proposal/pool/data/threshold/generator/corpus/runtime edits; no additional research lead or child agent.",
+  "source4_sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+  "specific_risks": [
+    "Positive-weight reciprocal cycles do not by themselves break visited-set BFS/Dijkstra/finite closure, but may shorten many old distances and change frontier/RNG/route ordering.",
+    "The examined native Lanț>=2 candidate boundary is already met by Pâine13out and Robinet2out; those endpoints do not newly cross it. Robinet2→3 can cross other inspected legacy-oracle starts>=3 logic, so exact native/legacy selector behavior remains to measure.",
+    "New incoming destination parents create possible latent Cuțit or Apă common-neighbor outputs. These are unapproved associations, not ingredient arithmetic, new authored recipes or implicitly truthful crafts.",
+    "Both Apă and Pâine occur in the current world, so fresh node snapshot/Render reviews and coherent Source5/downstream bindings are required even if authored world definitions and mechanics remain identical.",
+    "Raw controls/used_with labels are not automatically public Lanț hints; any desired earned-caption change has its own exact review.",
+    "Copied0.98/0.99 weights are editorial hypotheses. Source verification does not establish equal graded costs, rank/temperature improvements or safety of every resulting shortcut."
+  ],
+  "worthiness": {
+    "bread_knife": "Clear missing familiar food-to-tool direction and a direct step that matches an intuitive action. Existing graph already exposes both concepts and opposite association; growth is direction availability, not concept/pair/synonym/round novelty. Conditional worthiness is enough to test, not observed fun or ordinary selection.",
+    "overall": "Both deserve bounded exact prospective qualification. Retain adoption HOLD. A failure to find meaningful ordinary attributable play, or unsafe old puzzle/core/fairness/feedback changes, refutes shipping even though physical source claims are true.",
+    "tap_water": "Clear missing device-to-controlled-substance direction. The current nonwinning Contexto Robinet already borrows Apă feedback, so no warmer ordinary Robinet guess is promised. Benefit must instead be demonstrated in actual directed movement/options/earned hints/other affected guesses under current scoring."
+  }
+}

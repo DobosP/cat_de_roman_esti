@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-06 — Windows loop stopped; Linux source-only transport; default CRLF failure preserved; V1.5 unqualified.
+Last verified: 2026-10-06 — owner resumed Linux V1.5; Windows source already landed; Source4 unchanged, qualification pending.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -32,7 +32,7 @@ Last verified: 2026-10-06 — Windows loop stopped; Linux source-only transport;
   [ADR-0170](adr/0170-v1-2-reviewed-content-growth.md), [pool](content-pool/v1-2-synonyms-and-links/pool.json).
 - V1.2 baseline authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
   independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
-  Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; old content heartbeat PAUSED.
+  Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; content heartbeat renewed per ADR-0177.
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | New-round pool |
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-  Source3/allfour authority/source/export/native+shared race/vet/HTTP1207/history305/frontend242 GREEN; assembled ACCEPT95f94e3; locally landed082ba99; [V1.4](reviews/v1-4-time-links-and-predicates/README.md) graph0nodes/2forms/2links accepted/applied; Source4/current4authority/native+shared race/vet/export+Python/HTTP1207/history394/smoke151+28/docs GREEN; assembled ACCEPT672d656; locally landedfd09b3b; [pool3integrated/3held](content-pool/v1-4-time-links-and-predicates/pool.json); [V1.5](reviews/v1-5-small-objects/README.md) r3 remains2researched/6held,0selected/installed; [i01](reviews/v1-5-small-objects/iterations/i01/README.md) Breloc1/1/Pâlnie4/1 held; [i02](reviews/v1-5-small-objects/iterations/i02/README.md) two existing-direction hypotheses source-reviewed,2held/0selected/installed;136 exact bindings/89 named-test definitions/docs/budgets/default whitespace PASS, all actual native/play/installation gates NOT RUN; WAITING_NATIVE_WINDOW; loop ACTIVE per [ADR-0173](adr/0173-resume-bounded-content-version-loop.md); [i03](reviews/v1-5-small-objects/iterations/i03/README.md)21raw/8deep/9held/11ideas/1rejected/0selected/installed,35 source bindings; b02casting screen held; independent factual/quality source-only acceptance; discovery continues per [ADR-0174](adr/0174-continue-discovery-during-qualification-holds.md). [i04](reviews/v1-5-small-objects/iterations/i04/README.md):12records/11new/1follow-up/5deep/0selected/installed; Ciocolată caldă researched, other10held/1rejected; r1 preserved; bound r2 factual/quality source acceptance; native/gameplay/history NOT RUN; discovery ACTIVE. [i05](reviews/v1-5-small-objects/iterations/i05/README.md):6records/1known-input exclusion/5deep/3researched/2held/1rejected/0ready/selected/installed; recipe and label research only, exact frozen reviews; discovery ACTIVE. [i06](reviews/v1-5-small-objects/iterations/i06/README.md):1material beverage refinement/4fresh hypotheses/2deep/1researched/4held/0ready/selected/installed;19 frozen bindings; independent factual/quality source acceptance only; native restore/new-service gap NOT RUN; prior turn cap failed and preserved. [i07](reviews/v1-5-small-objects/iterations/i07/README.md):R2 six fresh held/three directions/three deep investigations/four sourced records/zero ready/selected/installed;R1 incorrect novelty preserved,35bindings; independent factual/quality source acceptance; resource wait resumed only above16GiB. [i08](reviews/v1-5-small-objects/iterations/i08/README.md):4fresh/3directions/3investigations/3held/1rejected/0ready/selected/installed;2existing reading directions excluded;33frozenbindings; independent factual/quality source acceptance, nativeNOTRUN. Windows loop STOPPED per [ADR-0175](adr/0175-stop-windows-loop-for-linux-handoff.md); [Linux handoff](reviews/v1-5-small-objects/linux-handoff-2026-10-06.md); source branch preserved, default aggregate whitespace FAILED; finite CRLF-aware transport per [ADR-0176](adr/0176-preserve-crlf-source-transport.md); actual source landing receipt remains separate from release acceptance. Earlier ACTIVE statements are history.
+  V1.3/V1.4 verified content remains Source4/authority43/Source8. Windowsi01–i08 source/CRLF transport is on mainbb99e81;0installedV1.5 increments. Owner resumed per [ADR-0177](adr/0177-resume-linux-v1-5-qualification.md)/[handoff](reviews/v1-5-small-objects/linux-resume/README.md); existing worktree reused, Source4native prerequisites GREEN; i02 exactdraft/fresh source+quality conditional only; preflight NOT RUN(recorded disk9.98<17GiB; earlier6.21probe); noV1.5data, loopACTIVE.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0176), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0177), reviews/WORKLOG: history.
