@@ -1,7 +1,7 @@
 # ADR-0175: Stop the Windows content loop for Linux handoff
 
 Date: 2026-10-06
-Status: accepted
+Status: partially superseded by ADR-0176 for the finite CRLF source-transport check; Windows stop remains
 
 ## Decision
 

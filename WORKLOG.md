@@ -1596,3 +1596,10 @@ Four fresh leads across teacher inputs, financial equipment and institutional pa
 Valid until: Linux continuation changes exact source/remote state — then treat as history.
 
 Paul directly stopped discovery/loops and new per-iteration workspaces, requested local source landing and authorized pushing unfinished work for Linux. Existing i09 checkout predates stop; its failed15.6798GiB pre-freeze probe wrote no candidate artifacts. Reuse it for this handoff only. i08 source1759bd6 is independently reviewed and complete, but aggregate default whitespace over a75ce962..1759bd6 fails on preserved historical i04 CRLF. Preserve exact old bytes and maina75ce962; push prepared source chain/handoff on existing branch without force or deletion. No V1.5 native/gameplay/history/assembled acceptance or release. ADR0175 records stop/scope; Linux handoff captures already observed generic native Spectacol/Teatru captions and held/unverified new leads. All actual qualification gates remain held. Exact final local/remote SHAs and push outcome belong to the separate worker stop report.
+
+
+## 2026-10-06 — Finite source transport preserves CRLF receipts
+
+Valid until: exact source-transport pin/base/remote or qualification state changes — then treat as history.
+
+The coordinator requested completion of Paul's explicit source-main handoff with a separately identified single-command CR-at-EOL check retaining all standard actual trailing-blank/EOF/space-before-tab rules. Original default aggregate FAILURE and frozen i04 bytes remain. Exact f1d8e78 CRLF-aware check passed, new handoff ordinary check passed,101changedpaths are docs/WORKLOG only; runtime unchanged. ADR0176 partially supersedes only the historical CRLF transport blocker; no repo/global whitespace change or content/runtime qualification is inferred. This transport clarification is frozen separately and its exact final pin requires independent closure before main update. Actual source-main/remote result belongs to the immutable worker transport report. Windows discovery/loops remain stopped, V1.5 NOT_QUALIFIED.

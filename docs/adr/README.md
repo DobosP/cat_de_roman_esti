@@ -87,7 +87,8 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0172 | [V1.4 clock inputs and directed time links](0172-v1-4-clock-input-and-directed-time-links.md) | graph accepted; native integration pending |
 | 0173 | [Resume a bounded local content version loop](0173-resume-bounded-content-version-loop.md) | partially superseded by0175 for Windows stop; native gates held |
 | 0174 | [Continue discovery during qualification holds](0174-continue-discovery-during-qualification-holds.md) | partially superseded by0175 for Windows stop; native qualification held |
-| 0175 | [Stop the Windows loop for Linux handoff](0175-stop-windows-loop-for-linux-handoff.md) | accepted; source branch push, aggregate landing blocked, no runtime qualification |
+| 0175 | [Stop the Windows loop for Linux handoff](0175-stop-windows-loop-for-linux-handoff.md) | accepted stop; CRLF transport blocker partially superseded by0176; no runtime qualification |
+| 0176 | [Preserve CRLF source transport](0176-preserve-crlf-source-transport.md) | finite source-only check; default failure preserved; native qualification held |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

@@ -13,9 +13,9 @@ empty runtime diff against actual main a75ce962 and nine prior clean checkouts p
 Three held leads and one rejected pair sketch remain zero ready/selected/installed.
 All prior frozen packets and source commits are preserved; source reviews do not qualify V1.5.
 
-The requested aggregate landing check `git diff --check a75ce962..1759bd6` FAILED with exit2
+At the first source-transport attempt, the requested aggregate landing check `git diff --check a75ce962..1759bd6` FAILED with exit2
 on preserved i04 CRLF files. The immutable worker whitespace receipt records3686 output lines.
-No default check is weakened and old frozen bytes are not normalized. Local main remains
+No default check is weakened and old frozen bytes are not normalized. At that first attempt local main remained
 `a75ce96227271408e529e46cc27b1a62dd000f38`; the prepared chain plus this handoff is retained on
 existing `codex/v1-5-discovery-i09` for the authorized non-force push. Exact resulting remote
 SHA and actual push result are recorded in the separate stop/Linux-handoff worker report.
@@ -79,3 +79,15 @@ push, branch/worktree deletion or cleanup is performed.
 - `codex/v1-5-discovery-i08` — `1759bd61ecd41d90deeed0fc8ada45c1e8e41665`
 - `codex/v1-5-discovery-i09` — `1759bd61ecd41d90deeed0fc8ada45c1e8e41665`
 - `codex/v1-5-windows-research` — `a75ce96227271408e529e46cc27b1a62dd000f38`
+
+## Finite CRLF transport closure
+
+[ADR-0176](../../adr/0176-preserve-crlf-source-transport.md) records the one-command CR-at-EOL
+recognition alternative. The original default aggregate failure remains authoritative as a failed
+check; this alternative is separately identified and does not normalize frozen bytes or change
+repo/global configuration. The full exact source pin must have no actual trailing blanks/EOF/
+space-before-tab defects, while every new handoff commit must pass the default check. Independent
+source isolation and exact clean-base/origin audit precede local-main fast-forward and ordinary
+push. The separate immutable worker source-transport report records actual resulting local/remote
+SHAs and both check outcomes. This fulfills source preparation only; all V1.5 qualification and
+release gates remain held and unrun, and Windows loops/discovery remain stopped.
