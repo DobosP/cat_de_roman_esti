@@ -27,10 +27,41 @@ aftereffect is claimed.
 
 [Exact draft](graph-draft-proposal-r1.json) binds [module](../../../../scripts/functional_graph_v1_5_data.py),
 current endpoints/reverses andsource136 evidence; bothi02pool records remainheld.
-No preflight/generatedfixture/Source5/data/installapproval. [Resource refusal](preflight-admission-refusal.json)
+At the prior0773329checkpoint no preflight/generatedfixture/Source5/data/installapproval existed. [Resource refusal](preflight-admission-refusal.json)
 retains theguardexit1: an earlier post-refusal resource sample was6.21GiB; the later saved refusal-status sample is9.98GiB, both below17GiBpreflight admission,
 and execution stopped before anysubprocess. No threshold was lowered, filesdeleted
-orotherownerstopped. Heavy lanes wait measuredspace recovery; loop remainsACTIVE
+orotherownerstopped. That historical refusal held heavy lanes until measured recovery; loop remainsACTIVE
 with strictresource checks and no repeated unchanged refusal/falsequalification.
 
 [Exact raw factual review](graph-draft-factual-review.json) accepts only separately admitted prospective scrutiny of this draft. No current raw quality/prospective/selection/installation approval exists.
+
+Disk recovered above the existing floor. [Fresh admission](dryrun-recovery-admission.json)
+and [actual result](dryrun-recovery-result.json) record supportednonmutating preflight
+GREEN0nodes/2edges/324beginner/2linkprobes,0.488seconds/85760KiB and allinstalled
+boundbytesunchanged. This preserves the earlier failure and grants no effect/installation
+acceptance. [Prospective admission](prospective-admission-r1.json) permits just one
+isolated supported-materialization/profile lane,2GiBRAM/1GiBincrement/20min/floor16;
+allguards retained, exactcases/methods required, partialcheckpoint if incomplete.
+Actual after-effects, rawquality/poolselection/Source5/install/fullgates remain pending.
+
+The first [isolated materialization checkpoint](prospective-materialization-checkpoint.json)
+is GREEN through the full supported apply/approved-pack/mirror/mobile/original validators.
+Candidate90c369f4… has actual de8815/de8816 and four incident-degree updates; all9473old
+edges/2419IDs/8677forms and180terminal records are exact. Installed worktreeSource4 stayed
+byte-identical. Actual116.23seconds/1316736KiB peak/26MB scratch remain inside resourcecaps.
+
+[Profile checkpoint](prospective-profiles-checkpoint.json) measures actual broad effects:
+245Conex/83Alch/85Quick checks exact, two of123Lant profiles changed (approvedlt_stiinta_201
+and pendinglt_stiinta_216), all265Cald target hop/weighted maps changed with3313changed
+guess-target entries,29→27SCC/+28632ordered reachability pairs,21latent shared-neighbor
+pairs (16both≥.70). No recipe approval; nativeincoming5/min2pools add no IDs, legacymin3
+addsRobinet. These findings require current exact quality/ordinary-play/history scrutiny,
+not a rehash/promotion of earlier source approval. Ordinarynative selection/privateAPI
+play/Get/hints/score and completehistory/currentcorpus qualification remain NOTRUN.
+
+[Partial stop receipt](prospective-partial-stop.json) preserves timing honestly: substantive
+profile work stopped17:34:29UTC before17:35:05deadline; finalmetadata receipt17:35:52 was
+late. No overall20minute PASS is claimed. No active process or another case started.
+Alloriginals/installedbytes remain; no actual transaction, Source5, poolselection,
+rawquality or installation acceptance. Exactmethods/manifests/losslessinert archives
+are retained with the checkpoints. Next work needs a fresh exact case/resource admission.

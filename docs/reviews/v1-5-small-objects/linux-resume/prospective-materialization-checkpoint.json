@@ -1,0 +1,90 @@
+{
+  "actual_candidate_mirrors_equal": true,
+  "actual_new_edge_records": [
+    {
+      "bidirectional": 0,
+      "dst_id": "n_v29_kitchen_table_cutit",
+      "id": "de8815",
+      "is_distractor": 0,
+      "label_ro": "se poate felia cu",
+      "relation": "used_with",
+      "src_id": "n_v4gas_paine",
+      "strength": 0.98
+    },
+    {
+      "bidirectional": 0,
+      "dst_id": "n_v4gas_apa",
+      "id": "de8816",
+      "is_distractor": 0,
+      "label_ro": "controlează curgerea",
+      "relation": "controls",
+      "src_id": "n_v33_bathroom_fixture_robinet",
+      "strength": 0.99
+    }
+  ],
+  "all_node_ids_preserved": true,
+  "all_old_forms_exact": true,
+  "all_worktree_bound_bytes_unchanged": true,
+  "baseline_fixture_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+  "candidate_counts": {
+    "aliases": 8677,
+    "edges": 9475,
+    "nodes": 2419,
+    "terminal_puzzles": 180
+  },
+  "draft_sha256": "7e5d935e413fac8d14e83fde694011167fc3aca03a4fae3876b79503c12c30c5",
+  "elapsed_seconds": 116.23092485500001,
+  "failure": null,
+  "generator_candidate_path": "/home/dobo/work/_temp/codex__content-v1-5/prospective/generator-produced-kg.json",
+  "generator_candidate_sha256": "90c369f4d1ac11198cda60fb28229f5b6087ccbec716c3940d8759c3fbb2ed0c",
+  "guard_stop": [],
+  "kind": "v1-5-exact-isolated-supported-materialization-checkpoint-v1",
+  "log_sha256": "a79f88ecdacf5eab91bcb73a4cadc20f5fa82c070eb28e476c479a0e22a7c3e7",
+  "method_manifest_sha256": "026b37b65a943ae4256fb5e433ed36f25bf487fefdf204c315f57ecf3a1421be",
+  "module_sha256": "595117fa0e7d9401354bb14a8520db095c8b11f6af34b6eb12aa224149f721c9",
+  "no_raw_quality_or_installation_acceptance": true,
+  "node_field_changes": {
+    "n_v29_kitchen_table_cutit": {
+      "degree": {
+        "after": 5,
+        "before": 4
+      }
+    },
+    "n_v33_bathroom_fixture_robinet": {
+      "degree": {
+        "after": 6,
+        "before": 5
+      }
+    },
+    "n_v4gas_apa": {
+      "degree": {
+        "after": 31,
+        "before": 30
+      }
+    },
+    "n_v4gas_paine": {
+      "degree": {
+        "after": 22,
+        "before": 21
+      }
+    }
+  },
+  "old180terminal_records_exact": true,
+  "old9473edges_prefix_exact": true,
+  "peak_rss_kib": 1316736,
+  "raw_factual_sha256": "0a9bd5c9530a0aebe340c47c06eb5a2df4f49967df2c108b1fc1f5838814b687",
+  "remaining": [
+    "All authored profile/Cald/eligibility/SCC/native ordinary-play coverage not yet run"
+  ],
+  "reviewer": "/root/graph_quality",
+  "scratch_rollback_restored_all5": false,
+  "status": "SUPPORTED_ISOLATED_APPLY_GREEN",
+  "terminal_differences": [],
+  "validation_observations": [
+    {
+      "canonical_mirrors_equal": true,
+      "errors": [],
+      "requested_path": "/home/dobo/work/_temp/codex__content-v1-5/prospective/candidate/package/kg_sample.json"
+    }
+  ]
+}
