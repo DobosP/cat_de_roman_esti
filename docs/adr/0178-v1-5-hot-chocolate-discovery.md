@@ -1,7 +1,7 @@
 # ADR-0178: V1.5 hot-chocolate discovery
 
 Date: 2026-10-06
-Status: accepted; required gates qualified; exact assembled review and local landing pending
+Status: accepted; independently reviewed, fully verified and landed locally e8c4bbc
 
 ## Context
 

@@ -54,8 +54,10 @@ subtest retained and unchanged race assertions and 20-minute resource caps. All 
 backend test packages have passing race coverage; shared auth race/vet, the final
 authority CLI and all backend vet pass.
 
-Exact-commit assembled review and local landing still precede pool integration.
+Exact-commit assembled acceptance and local landing are complete; the selected pool record is integrated.
 Frontend/static bytes are unchanged. No new browser, disposable PostgreSQL, provider
 activation, production deployment or human enjoyment claim is made.
 
-[Independent assembled review](assembled-review.json) ACCEPTS exact684b29bb9f2cafb0f8acd14178cf8f0e6fd71023 after289independent checks. All required gates are qualified; only local landing and integration bookkeeping remain. No push or deployment.
+[Independent assembled review](assembled-review.json) ACCEPTS exact684b29bb9f2cafb0f8acd14178cf8f0e6fd71023 after289independent checks. All required gates are qualified; local landing and pool integration are complete. No push or deployment.
+
+[Local landing](landing.json) completed e8c4bbcbf502b646fa95e9527bbcf8458bfebf71. Shared main is clean, GUI preparation records are preserved, and no push/deployment occurred. V1.6 starts after this accepted nonempty release.

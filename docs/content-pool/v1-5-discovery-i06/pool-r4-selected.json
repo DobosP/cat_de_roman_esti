@@ -20,8 +20,8 @@
   "records": [
     {
       "id": "i04-world-01",
-      "revision": 5,
-      "state": "integrated",
+      "revision": 4,
+      "state": "selected_for_refinement",
       "origin_track": "refinement",
       "baseline_commit": "a4f42f176b06276a3d46f3da40373cecfb70f7ac",
       "checked_on": "2026-10-06",
@@ -75,8 +75,8 @@
       "dependencies": [
         "Exact assembled review and local landing"
       ],
-      "decision": "Integrated after exact independent assembled acceptance of684b29b and verified local fast-forward landing e8c4bbc; all required gates qualified. No shared KG/form/synonym/link/round growth.",
-      "next_action": "Preserve installed Source5 identity, recipe and save ancestry; later waves independently qualify changed dependencies.",
+      "decision": "Exact R4 world-only refinement passed supported installation, fresh same-role installed audits/finals and strict mixed-source authority. required gates qualified; exact assembled review and local landing pending.",
+      "next_action": "Complete exact assembled review and local landing, then mark integrated with the actual landing commit.",
       "history": [
         {
           "date": "2026-10-06",
@@ -88,12 +88,6 @@
           "author": "/root",
           "revision": 4,
           "action": "Select exact world-only refinement; correct preexistingContexto owner; preserve all oldholds and i02two-link rejection for this landing."
-        },
-        {
-          "date": "2026-10-07",
-          "revision": 5,
-          "author": "/root",
-          "action": "Selected exactR4 integrated after actual green local landing; selectedR4 bytes archived unchanged."
         }
       ],
       "handoff": {
@@ -111,20 +105,24 @@
         "local_landing_pending": true
       },
       "integration": {
-        "reviewed_content_commit": "684b29bb9f2cafb0f8acd14178cf8f0e6fd71023",
-        "local_landing_commit": "e8c4bbcbf502b646fa95e9527bbcf8458bfebf71",
-        "assembled_review_sha256": "62817bd17021d66a67bede3d090359e2fe63c59ff4fc3f3c25a75371182311e2",
-        "world_concept_id": "alw_food_ciocolata_calda",
-        "recipe_id": "ciocolata-calda-lapte-ciocolata",
-        "source5_sha256": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+        "state": "qualified_in_task_worktree_awaiting_assembled_review_and_local_landing",
+        "canonical_world_concept_id": "alw_food_ciocolata_calda",
+        "canonical_recipe_id": "ciocolata-calda-lapte-ciocolata",
         "world_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
-        "world_counts": [
-          252,
-          352,
-          148
-        ],
-        "new_shared_concepts_forms_synonym_families_links_rounds": 0,
-        "verification": "docs/reviews/v1-5-hot-chocolate/verification.json"
+        "native_world_source_version": 5,
+        "quick_extensions_source_version": 4,
+        "receipt": "docs/reviews/v1-5-hot-chocolate/verification.json",
+        "new_world_local_concepts": 1,
+        "new_shared_concepts": 0,
+        "new_recipes": 1,
+        "new_curated_rounds": 0,
+        "new_forms": 0,
+        "new_synonym_families": 0,
+        "shared_projection_preserved": "ctxp_cb75bc0c21d2e2940911 -> n_v24_food_snack_ceai",
+        "goal_modes": 33,
+        "discoveries": 148,
+        "historical_prefixes": 1156,
+        "local_landing_pending": true
       }
     },
     {
@@ -352,7 +350,7 @@
     }
   ],
   "previous_snapshot": {
-    "path": "docs/content-pool/v1-5-discovery-i06/pool-r4-selected.json",
-    "sha256": "90e398f40255efc9017a8cf22df92fed903257a52b31fefce3502c7e6b001f54"
+    "path": "docs/content-pool/v1-5-discovery-i06/pool-r3.json",
+    "sha256": "e38326750689731b6132704d06a9884cc494e19ffeeb21bc535b81c34fa14cb1"
   }
 }

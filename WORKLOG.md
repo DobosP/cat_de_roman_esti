@@ -1616,3 +1616,9 @@ Valid until: owner Linux resumption on2026-10-06 — treat as history.
 Valid until: settled S1 base/core/runtime-witness binding changes — then treat as history.
 
 Preparation only: [review keeper](docs/reviews/gui-motion-baseline/README.md) preserves74 exact regular members in a deterministic185114-byte archive (`5864537fb20d0d5945e770d15d121469db8c8529d2b2f4b8a45add7c60564ab0`). Original29-case React preview/three oracle controls remain provisional on Playwright1.62.1;69 synthetic Node checks passed;48 future browser cases and six source mutants remain UNEXECUTED, with no device/release/full-gate claim. The110 pinned source files and six generated variants are Git/hash references; caches/binaries/fonts/traces/transcripts are excluded. Runtime-witness placement CORE_REQUEST blocks future named-gate import, not this archival record. No consumer/runtime/content/ADR changes or browser/dependency rerun; parent reviews/lands, then a fresh S1 chat starts from core-v1.0.
+
+## V1.5 local content landing — 2026-10-07
+
+Valid until: a later content/source change — then treat this as history.
+
+Exact684b29b independently accepted62817bd1 and locally landed e8c4bbc. Adds one world-local Ciocolată caldă concept and one earned Milk/Chocolate recipe; world252/352/148,10books/1156savedprefixes. Shared KG/forms/synonyms/links/curated pools unchanged. All425reference,1207HTTP,151/28smoke and complete native/shared race/vet/authority/source gates qualified; original18mtimeout retained with exhaustive passing24case5/19groups. GUI keeper84fc retained. No push/deployment.
