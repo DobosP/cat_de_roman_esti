@@ -1547,3 +1547,13 @@ projection ownership is highlighted; no first-exposure claim. Research packet/po
 Fresh commit18.46GiB supports the0.5GiB source ceiling; no peak profile or native gate run.
 ADR-0174 separates active discovery from WAITING_NATIVE_WINDOW. Next frontier is existing-KG
 strict groups, pairs and outsiders; prior holds/receipts and shared main remain preserved.
+
+## 2026-10-06 — V1.5 i04 continuous source discovery
+
+Valid until: exact research sources or qualification dependencies change — then treat as history.
+
+- Sole source author screened twelve records across three directions/batches; eleven new leads and one material sofa follow-up, five deeply researched. Ciocolată caldă is a promising world-local recipe foundation; no selected/installed content.
+- Seven existing-node boards fail endpoint ownership; Cacao cu lapte held as near-duplicate, egg/bread sandwich pair rejected because Frigănele already owns it, lexical variants held for sense/provenance compatibility.
+- Preserved frozen r1 and independent factual/quality receipts; bound r2 fixes pool convention and unsupported generic rejected-sandwich recognition. All actual source/native/gameplay/history and assembled gates remain held, NOT_QUALIFIED.
+- Resource probe chronology and 15.25-minute source checkpoint overrun disclosed. Interrupted static probes discarded; no native execution or further discovery during closure.
+- Next i05 frontier: fresh existing-world recipe foundations, narrower lexical senses and accessible caption-repair alternatives; no unchanged rejected/held hunt. Shared main and earlier immutable research remain preserved.

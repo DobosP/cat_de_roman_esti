@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "independent_source_quality_correction_recheck",
+  "reviewer": "/root/i04_quality_review",
+  "reviewedAt": "2026-10-06T15:14:11.730617+03:00",
+  "version": "V1.5",
+  "iteration": "i04",
+  "sourceOnly": true,
+  "poolBinding": {
+    "path": "docs/content-pool/v1-5-discovery-i04/pool-r2.json",
+    "sha256": "ba9898dc021a0645ee481669acbe468baeb4fea40deae199f7815f3de02fcc67"
+  },
+  "packetBinding": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i04/packet-r2.json",
+    "sha256": "19c5bfdd526700643a3a2bd62d9136f33b7fd8c098fbfcddf8efaa09ed1fc7f2"
+  },
+  "priorReviewBinding": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i04/quality-review-r1.json",
+    "sha256": "d95905ba0c2952e4525c6a4e59e334c1cf255bbdad361dbbb611829621eda7c3"
+  },
+  "verdict": "SOURCE_RESEARCH_ACCEPTED_ADOPTION_HELD",
+  "correctionResults": [
+    {
+      "id": "Q1",
+      "result": "RESOLVED",
+      "evidence": "schema_version: 1 and a meaningful theme present; convention fields and baseline/date/source access annotations added with explicit partial identity coverage."
+    },
+    {
+      "id": "Q2",
+      "result": "RESOLVED",
+      "evidence": "Sandvis cu ou now explicitly says familiarity and source witnesses were not researched because occupied-pair rejection ended investigation."
+    }
+  ],
+  "recordComparisons": [
+    {
+      "id": "i04-group-01",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-group-02",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-group-03",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-outsider-01",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-outsider-02",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-outsider-03",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-pairs-01",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-world-01",
+      "r2Revision": 2,
+      "state": "researched",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-world-02",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-world-03",
+      "r2Revision": 2,
+      "state": "rejected",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i03-lex-03",
+      "r2Revision": 3,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    },
+    {
+      "id": "i04-lex-02",
+      "r2Revision": 2,
+      "state": "held",
+      "preservedSubstantiveSemantics": true
+    }
+  ],
+  "bindingResults": [
+    {
+      "path": "docs/content-pool/v1-5-discovery-i04/pool.json",
+      "sha256": "b97069e63da0fecb056d88261b09d442f1db906e8941de31d5c4367ddaef1ee6",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "sha256": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+      "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      "sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "matches": true
+    },
+    {
+      "path": "docs/CRITIQUE_RUBRIC.md",
+      "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "matches": true
+    },
+    {
+      "path": "docs\\content-pool\\v1-5-discovery-i04\\pool-r2.json",
+      "sha256": "ba9898dc021a0645ee481669acbe468baeb4fea40deae199f7815f3de02fcc67",
+      "matches": true
+    },
+    {
+      "path": "docs\\reviews\\v1-5-small-objects\\iterations\\i04\\plan-r1.json",
+      "sha256": "6155a8fe2757b725a7a4aa238997b33f033b109bf41f5fca32ead87772575575",
+      "matches": true
+    },
+    {
+      "path": "docs\\reviews\\v1-5-small-objects\\iterations\\i04\\identity-screen-r1.json",
+      "sha256": "c8d2f963087e7d1b2ead241ba5ad22d39cf24156efd1437d4b539498c250daf9",
+      "matches": true
+    }
+  ],
+  "scopeConclusion": "All 12 frozen r2 records preserve the conservative substantive states and evidence boundaries of r1; changed counts remain 11 new leads, one material follow-up, five deeply researched, three batches, zero selected/installed. Ciocolata calda remains a promising researched foundation only. No new external fact or acceptance inferred.",
+  "remainingChecks": "All missing factual/provenance/identity, complete current/projection/tombstone/history, exact source/generator/proposal, native/source5/export/authority/gameplay/full-history/inverse/journey and independent assembled acceptance checks from r1 remain unresolved as applicable. No human familiarity or enjoyment evidence was added.",
+  "processCompliance": "Failed b03 pre-probe chronology and fifteen-minute freeze overshoot remain explicitly disclosed; this source correction review does not convert them to passing checks.",
+  "independence": {
+    "authoredFrozenContent": false,
+    "changedFrozenContent": false,
+    "newResearch": false,
+    "nativeOrGameplayExecuted": false,
+    "outputOwnership": "Only quality-review-r2.json"
+  },
+  "releaseQualification": "NOT_QUALIFIED; no merge or V1.6 authorization"
+}

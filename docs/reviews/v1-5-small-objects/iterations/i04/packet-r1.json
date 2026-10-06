@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "version": "V1.5",
+  "iteration": "i04",
+  "frozenAt": "2026-10-06T15:09:50.559639+03:00",
+  "sourceOnly": true,
+  "baseline": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "parent": "ce13e53ec1f159ed4955d4ed1f9ac125ef3ca0b9",
+  "bindings": [
+    {
+      "path": "docs/content-pool/v1-5-discovery-i04/pool.json",
+      "sha256": "b97069e63da0fecb056d88261b09d442f1db906e8941de31d5c4367ddaef1ee6"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "sha256": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+      "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      "sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01"
+    },
+    {
+      "path": "docs/CRITIQUE_RUBRIC.md",
+      "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+    }
+  ],
+  "budget": {
+    "rawCeiling": 12,
+    "deepCeiling": 6,
+    "batches": 3,
+    "sourceBudgetGiB": 0.5,
+    "freshCommitGiB": [
+      17.497707,
+      17.377117,
+      18.522087
+    ],
+    "probeFailures": [
+      "b03 intended measurement failed before ctypes due KeyError; three lexical pages opened before successful fresh sample at15:08. No native work occurred.",
+      "Corrective inventory probe failed after successful resource sample because kg_nodes key was wrongly called nodes; no passing identity result inferred."
+    ]
+  },
+  "requiredNext": [
+    "Static source correction and exact bounded identity/history check",
+    "Independent frozen-byte factual and quality review",
+    "All applicable source5/native/gameplay/export/authority/history gates NOT_RUN held"
+  ],
+  "nextDiscovery": "i05: materially different recipe-foundation and semantic input frontier after current checkpoint; do not repeat absent-owner boards or Breloc/Pâlnie unchanged."
+}

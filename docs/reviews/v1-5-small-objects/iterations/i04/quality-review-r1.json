@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "independent_source_quality",
+  "reviewer": "/root/i04_quality_review",
+  "reviewedAt": "2026-10-06T15:12:31.718229+03:00",
+  "version": "V1.5",
+  "iteration": "i04",
+  "sourceOnly": true,
+  "poolBinding": {
+    "path": "docs/content-pool/v1-5-discovery-i04/pool.json",
+    "sha256": "b97069e63da0fecb056d88261b09d442f1db906e8941de31d5c4367ddaef1ee6"
+  },
+  "packetBinding": {
+    "path": "docs/reviews/v1-5-small-objects/iterations/i04/packet-r1.json",
+    "sha256": "390e48279d655b43f529c660da29fb2edebe364a2f7dc09c5ea8af45f6a117d0"
+  },
+  "baseline": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "researchParent": "ce13e53ec1f159ed4955d4ed1f9ac125ef3ca0b9",
+  "verdict": "SOURCE_DOCUMENTATION_CORRECTIONS_REQUIRED",
+  "researchDisposition": "All twelve record states and zero selected/installed counts are conservative and defensible. Ciocolata calda is a meaningful source-only foundation worth bounded refinement, not accepted gameplay.",
+  "coverage": {
+    "recordsRequested": 12,
+    "recordsReviewed": 12,
+    "newLeads": 11,
+    "materialFollowups": 1,
+    "deeplyResearchedRecorded": 5,
+    "batchesRecorded": 3,
+    "selectionApproved": 0,
+    "installationApproved": 0
+  },
+  "criteriaRead": [
+    "romanian-game-content/SKILL.md",
+    "references/candidate-pool.md",
+    "docs/CRITIQUE_RUBRIC.md"
+  ],
+  "actualChecks": [
+    "Exact pool and packet hashes",
+    "All eight packet artifact bindings",
+    "All twelve frozen records",
+    "Read-only current world exact milk/chocolate absence and egg/bread collision; existing Ganache uses chocolate and sweet cream"
+  ],
+  "bindingResults": [
+    {
+      "path": "docs/content-pool/v1-5-discovery-i04/pool.json",
+      "expected": "b97069e63da0fecb056d88261b09d442f1db906e8941de31d5c4367ddaef1ee6",
+      "actual": "b97069e63da0fecb056d88261b09d442f1db906e8941de31d5c4367ddaef1ee6",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "expected": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "actual": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "expected": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+      "actual": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "expected": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "actual": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "expected": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "actual": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+      "expected": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+      "actual": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+      "matches": true
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      "expected": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "actual": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "matches": true
+    },
+    {
+      "path": "docs/CRITIQUE_RUBRIC.md",
+      "expected": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "actual": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "matches": true
+    }
+  ],
+  "records": [
+    {
+      "id": "i04-group-01",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: recognizable Vioara does not establish familiarity of the entire quartet; Viola/Violoncel/Contrabas need distinct owners and recognition checks. No complete Conexiuni board, partition, gradient or collision qualification exists."
+    },
+    {
+      "id": "i04-group-02",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: Kiwi has fruit/bird competition, Cazuar may be a specialist term; missing owners prevent selection. A flightlessness hypothesis alone is not a fair complete board."
+    },
+    {
+      "id": "i04-group-03",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: Grigorescu-Paris alone cannot establish one precise common training predicate. Petrascu ownership, all biographies and recognition remain unverified; reused painters require full inventory review."
+    },
+    {
+      "id": "i04-outsider-01",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: the explicit additive display RGB qualifier is essential; ordinary painting primaries invite a different answer. The scoped source claim does not establish broad recognizability or an accepted outsider."
+    },
+    {
+      "id": "i04-outsider-02",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: planet-versus-satellite is only a hypothesis and missing owners block the bounded existing-KG route. Luna must retain sky-body sense; recognition and accidental type shortcuts need a concrete board review."
+    },
+    {
+      "id": "i04-outsider-03",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: Liliac has bat/flower polysemy; exact animal sense and one defensible outsider remain unqualified. Missing owners prevent selection."
+    },
+    {
+      "id": "i04-pairs-01",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: intuitive country/capital pairs are a plausible foundation but five absent owners, exact senses and competing valid matches block this existing-KG proposal."
+    },
+    {
+      "id": "i04-world-01",
+      "revision": 1,
+      "frozenState": "researched",
+      "qualityFinding": "Researched is appropriate, not ready or accepted. A warm milk/chocolate beverage is a concrete potential player benefit using existing ingredients; qualifier must explain a variant rather than a universal complete cooking recipe. Ganache and cold beverage alternatives, current and historical identity, empty-pair observations and reachable journey are unresolved. Commercial witnesses alone do not complete rubric F or human familiarity/enjoyment evidence."
+    },
+    {
+      "id": "i04-world-02",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: the current cocoa-milk idea is near-identical to hot chocolate, with hot/cold product variants. A second concept would require a distinct player purpose and definition; no padding warranted."
+    },
+    {
+      "id": "i04-world-03",
+      "revision": 1,
+      "frozenState": "rejected",
+      "qualityFinding": "Rejected exact deterministic-pair proposal is correct; I independently confirmed egg+bread already owns friganele-ou. Generic recognition boilerplate is unsupported here because there are no recorded lexical/product witnesses or recognition investigation."
+    },
+    {
+      "id": "i03-lex-03",
+      "revision": 2,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: material dictionary sense evidence supports overlap but a narrow divan subtype is not an unconditional Canapea alias; sofa and sofa-with-Romanian-s-comma verb must remain distinct. Actual owner incidents, normalization and original provenance need checking."
+    },
+    {
+      "id": "i04-lex-02",
+      "revision": 1,
+      "frozenState": "held",
+      "qualityFinding": "Held correctly: towel overlap is promising for input recovery, but decorative cloth and head-covering senses can mislead. Exact ownership, original stergar entry, incident sense and normalization remain incomplete."
+    }
+  ],
+  "concreteCorrections": [
+    {
+      "id": "Q1",
+      "scope": "pool envelope",
+      "finding": "Pool contract specifies schema_version: 1 and theme; frozen pool instead has schemaVersion and omits theme. This is an editorial durable-pool contract correction, not a runtime validator failure.",
+      "requiredResolution": "Preserve r1 and bind a companion correction/addendum or a separately frozen revision explicitly declaring schema_version: 1 and theme v1-5-discovery-i04."
+    },
+    {
+      "id": "Q2",
+      "scope": "i04-world-03 recognition",
+      "finding": "Generic Romanian published lexical/product witnesses statement is unsupported for this rejected record: sources is empty and no recognition investigation is recorded. Pair-collision rejection remains valid.",
+      "requiredResolution": "Preserve r1 and record an exact bound correction that familiarity was not researched because the current pair collision ended this proposal; do not imply external recognition witnesses."
+    }
+  ],
+  "unperformedOrMissing": [
+    "No independent external page reopening in this quality review; factual reviewer owns source verification",
+    "Full original lexical provenance, label/alias/homonym ownership, prior pool and tombstone/projection/history clearance as applicable",
+    "Concrete final generator/importer proposal and resulting corpus/source bindings",
+    "Actual native/source5/source/export/authority qualification",
+    "Gameplay, full-history, inverse, empty-pair and journey cases",
+    "Independent assembled acceptance and human playtest/familiarity evidence"
+  ],
+  "processLimitations": [
+    "Packet explicitly records failed intended b03 resource probe and lexical pages opened before the successful fresh sample; this chronology is not a passing per-batch resource check",
+    "Parent reports freeze at 15.25 minutes; this exceeds the fifteen-minute source budget and is not green",
+    "No further discovery authorized within this turn; next batch requires a fresh admitted source cycle"
+  ],
+  "independence": {
+    "authoredFrozenContent": false,
+    "modifiedFrozenContent": false,
+    "nativeOrGameplayExecution": false,
+    "otherAuthorWorkersSpawned": false,
+    "outputOwnership": "Only this independent quality receipt"
+  },
+  "acceptance": "NOT_QUALIFIED; research review never qualifies release or main landing"
+}

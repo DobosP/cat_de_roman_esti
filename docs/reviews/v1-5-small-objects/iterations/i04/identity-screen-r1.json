@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "baseline": "a75ce96227271408e529e46cc27b1a62dd000f38",
+  "auditor": "/root/i04_inventory_audit independent read-only; root proposals only",
+  "coverage": {
+    "conex_current": 245,
+    "conex_tombstones": 122,
+    "groups": 488,
+    "quick_authored": 85,
+    "quick_derived": 336,
+    "durable_pools": 8
+  },
+  "findings": [
+    "Every b01 set has missing endpoints. Compound titles do not supply standalone owner.",
+    "No all-three-painter group among current/tombstone exact scanned groups; two-ID overlaps exist cx_arta_cultura_004/094/241 and cx_personalitati_062/212 plus tombstone147.",
+    "No examined quick board had >=2 painter IDs or >=2 România/București/Paris IDs."
+  ],
+  "limitations": [
+    "Selected exact static inventory only; not complete semantic near-duplicate or all history/projection qualification.",
+    "Root probes failed on optional aliases, incorrect nodes/label keys and unlock assumptions; interrupted results discarded. No failed probe counted passing.",
+    "Historical hot-beverage pair check still incomplete; chocolate unlock/journey not verified."
+  ],
+  "execution": "No app imports, tests, generators or runtime simulation"
+}
