@@ -1568,3 +1568,10 @@ Valid until: exact source claims, inputs or qualification dependencies change �
 - Exact native/source/export/authority/gameplay/history and assembled gates remain held. Research parent df21f83/runtime a75 unchanged; previous immutable evidence preserved.
 - Next i06 rotates to distinctive existing-owner functional relations and bounded quick-exposure predicates; source backlog refinement remains separate.
 - Independent factual and quality source reviews accept six records plus one exclusion; all13bindings match, no concrete corrections; adoption remains held. Coordinator requested one finite Ciocolată caldă source proposal alongside continuing fresh discovery next, without native/materialization authority.
+
+
+## 2026-10-06 — V1.5 i06 frozen source preparation
+
+Valid until: exact i06 source claims or qualification dependencies change — then treat as history.
+
+Prepared one inert Ciocolată caldă world-local definition/pair/source scaffold and four fresh functional/quick hypotheses, independently accepted as source preparation only. One researched/four held/zero ready, selected or installed;19 exact bindings. Heating/extra ingredients/competing results, earned chocolate availability and the native fixed-world-at-New restore gap remain explicit. Initial i06 checkpoint exceeded15min (15.4069min); original checkpoint and failed cap preserved. Three valid fresh batch probes17.355/17.467/17.826GiB; source budget<=0.5GiB, peak not measured. Failed source-key/wildcard/path probes were discarded rather than counted green. No runtime, generated fixtures, historical assertions or actual native/play/export/authority checks changed or ran. Later closure keeps frozen bytes and LF receipts; discovery continues after current source checkpoint.

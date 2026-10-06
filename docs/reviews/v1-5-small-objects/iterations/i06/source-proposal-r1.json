@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "inert_source_preparation_not_importer_input",
+  "version": "V1.5",
+  "iteration": "i06",
+  "record": "i04-world-01",
+  "record_revision": 3,
+  "sourceOnly": true,
+  "selected": false,
+  "installed": false,
+  "scope": "ONE world-local definition and recipe; no KG/node/form/category/weight/starter/unlock/goal change",
+  "proposed": {
+    "id": "alw_food_ciocolata_calda",
+    "label": "Ciocolată caldă",
+    "description": "Băutură caldă pe bază de ciocolată; varianta propusă folosește lapte încălzit și poate include zahăr sau arome.",
+    "recipe_id": "ciocolata-calda-lapte-ciocolata",
+    "pair": [
+      "n_v4gas_lapte",
+      "n_v85_food_ciocolata"
+    ],
+    "explanation": "Ciocolata se amestecă cu lapte încălzit pentru o variantă de ciocolată caldă; perechea surprinde baza preparatului, iar zahărul și aromele pot completa rețeta.",
+    "sources": [
+      "https://www.kaufland.ro/retete/cauta-o-reteta/reteta.ciocolata-calda.r_id=RO_1308.html"
+    ]
+  },
+  "native_source_shape_sketch": {
+    "world_concepts": {
+      "Ciocolată caldă": {
+        "id": "alw_food_ciocolata_calda",
+        "description": "Băutură caldă pe bază de ciocolată; varianta propusă folosește lapte încălzit și poate include zahăr sau arome.",
+        "sources": [
+          "https://www.kaufland.ro/retete/cauta-o-reteta/reteta.ciocolata-calda.r_id=RO_1308.html"
+        ]
+      }
+    },
+    "recipes": [
+      [
+        "ciocolata-calda-lapte-ciocolata",
+        "Lapte",
+        "Ciocolată",
+        "Ciocolată caldă",
+        "Ciocolata se amestecă cu lapte încălzit pentru o variantă de ciocolată caldă; perechea surprinde baza preparatului, iar zahărul și aromele pot completa rețeta."
+      ]
+    ],
+    "recipe_sources": {
+      "ciocolata-calda-lapte-ciocolata": [
+        "https://www.kaufland.ro/retete/cauta-o-reteta/reteta.ciocolata-calda.r_id=RO_1308.html"
+      ]
+    }
+  },
+  "rails": "Source4 parent pinned; actual Source5 and native operator candidate/proposal/audit/review/authority materialization NOT RUN. Sketch is docs evidence, not an applied source module.",
+  "source_boundaries": [
+    "Do not claim complete2ingredient recipe, Romanianorigin, allhotchocolate dairy, or actual unique culinary result.",
+    "Keep warming explicit to distinguish cold Milkshake; Ganache current cream/filling/glaze definition remains.",
+    "Do not add Cacao cu lapte as a second parallel concept.",
+    "Authored description belongs in world_concepts, not KG descriptions override map."
+  ],
+  "static_capacity": {
+    "current_concepts": 251,
+    "current_recipes": 351,
+    "caps": [
+      256,
+      512
+    ],
+    "conditional_after": [
+      252,
+      352
+    ],
+    "status": "Arithmetic only; no reservation or approval."
+  }
+}
