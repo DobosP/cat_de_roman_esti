@@ -1622,3 +1622,16 @@ Preparation only: [review keeper](docs/reviews/gui-motion-baseline/README.md) pr
 Valid until: a later content/source change — then treat this as history.
 
 Exact684b29b independently accepted62817bd1 and locally landed e8c4bbc. Adds one world-local Ciocolată caldă concept and one earned Milk/Chocolate recipe; world252/352/148,10books/1156savedprefixes. Shared KG/forms/synonyms/links/curated pools unchanged. All425reference,1207HTTP,151/28smoke and complete native/shared race/vet/authority/source gates qualified; original18mtimeout retained with exhaustive passing24case5/19groups. GUI keeper84fc retained. No push/deployment.
+
+
+## V1.6 bounded lexical research — 2026-10-07
+
+Valid until: source, identity, consumer or selected scope changes — then repeat affected checks.
+
+Six hypotheses screened against actual normalized owners, sealed index, current decks,
+projections, world and tombstones. Primary Academy dictionary/DOOM and original publisher
+sources support scoped drapel, untdelemn and continued i05-lex-01 leafă R2 research; three
+other leads remain held. Original leafă R1/access limits remain recorded. No selected forms,
+concepts, links, targets, rounds, source or runtime mutation; no game-gate pass inferred.
+[Research checkpoint](docs/reviews/v1-6-everyday-inputs/README.md) binds exact source/quality
+receipts and the next ordinary typed-play checks. Brief4-over-3 worker overlap is a failed source constraint; later memory headroom refused native docs before launch. A later separately admitted documentation check supports research checkpoint persistence only; the earlier failures remain history. This is not a release. Main stays clean; no push/deployment.

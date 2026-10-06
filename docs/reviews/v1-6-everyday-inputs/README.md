@@ -25,3 +25,57 @@ and archive in this task's own scratch. [Baseline qualification](toolchain-basel
 records the unchanged Source5 checks. Later native/research/install lanes need their
 own measured finite admission. Keep main clean and keep unmerged work; never push or
 deploy without explicit authorization. Human stop/pause overrides the loop.
+
+
+## Six-lead source checkpoint
+
+The [durable pool](../../content-pool/v1-6-everyday-inputs/pool.json) now records three
+researched hypotheses (drapel, culinary untdelemn, employee-pay leafă) and three held
+hypotheses (already-owned cucuruz, broader gazetă, and absent Geamantan/Valiză owners).
+Leafă continues i05-lex-01 as revision2; its original held revision remains unchanged.
+Original dictionary scans and successful2008/2024 publisher access materially improve
+that earlier evidence. No complete inflection family is inferred from observed forms.
+
+[Identity/deck screen](identity-deck-screen-r1.json) binds the actual Unicode15 normalizer,
+sealed index, every current owner/form, projections, world labels, deck uses and tombstones.
+Cucuruz already has a separate ID and de1913 connects it with Porumb; neither is new growth.
+The broader Gazetă sense conflicts with the installed Revista/Ziar distinction. Steag's
+specific national-flag neighbor retains its separate owner. All source claims, counter-senses,
+access failures and rights qualifications are in [primary A](lexical-primary-a.json) and
+[primary B](lexical-primary-b.json); the [independent critique](research-quality-r1.json)
+binds those exact reports and the pool.
+
+The next useful check is ordinary typed play, prioritizing drapel/Steag and untdelemn/Ulei.
+Static eligible Cald cases exist near Steag and at Chec via Ulei→Chec; actual normal selection,
+baseline fuzzy/confirmation behavior, benefit, scores, hints and privacy remain UNRUN.
+Recipe and tap-board exposure do not prove alias support in label-only search. Leafă is a
+lower-priority typed-case search; research is not raw quality or installation acceptance.
+
+No selected snapshot, candidate module, Source6 or V1.6 runtime change exists. Added shared
+concepts, world concepts, genuine synonym families, accepted forms, links, curated rounds,
+eligible and preferred pools are all zero. Source5 and every installed binding remain exact.
+Source-lane bounds/stop and documentation-only verification accompany this checkpoint;
+any executable prospective/native lane needs a fresh finite case and measured admission.
+
+
+The source admission's three-worker maximum was briefly exceeded when the quality
+reviewer overlapped both source researchers and the root agent. The original admission
+is preserved; the [stop receipt](source-stop-r1.json) records this concurrency failure.
+No full resource-compliance pass is claimed, and no installation was attempted. Future
+admissions must count the root explicitly and wait for a worker to finish before adding
+another. Valid source observations are retained without promoting this run to approval.
+
+
+[Documentation preflight refusal](checkpoint-docs-refusal-r1.json) preserves the later
+resource hold: the sample immediately before the guard showed12.793GiB available memory
+against the16GiB floor. The checker was NOT RUN; no commit or V1.6 landing was made.
+Exact assertion operands were not emitted, so the nearby observation is not presented
+as the exact failed-guard sample. Keep these uncommitted files and retry only after
+meaningful measured resource recovery with a new finite admission; never reset the old
+source window, lower thresholds or delete another task's scratch.
+
+
+[Recovery documentation check](checkpoint-docs-recovery-r1.json) records a separately
+admitted check after memory recovered above the unchanged floor. The earlier source
+concurrency failure and preflight refusal remain immutable history. This check permits
+persistence of the research checkpoint only; it grants no content installation approval.

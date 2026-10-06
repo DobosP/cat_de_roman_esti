@@ -1,0 +1,248 @@
+{
+  "schema": "v1-6-lexical-primary-research-v1",
+  "baseline_commit": "f65a97a0ff4a2e3282178f91596fdf6ee83b1694",
+  "scope": "Source-only research for cucuruz→Porumb, gazetă→Ziar, untdelemn→Ulei. No candidate selection, approval, pool, fixture, runtime, or form installation.",
+  "accessed_date": "2026-10-07",
+  "access_timezone": "Europe/Bucharest (UTC+03:00)",
+  "admission": "lexical-source-admission-r1.json; analysis before 2026-10-06T22:08:22Z",
+  "evidence_policy": "Own short paraphrases and exact lexical facts only. Original publishers are identified per source; search-only leads and unsuccessful retrievals do not become verified evidence. Dictionary presence and commercial exposure are not human recognition tests.",
+  "sources": [
+    {
+      "id": "doom",
+      "url": "https://doom.lingv.ro/",
+      "publisher": "Institutul de Lingvistică al Academiei Române «Iorgu Iordan – Alexandru Rosetti»",
+      "original": "Institution's own electronic DOOM3, based on its 2021 edition printed by Univers Enciclopedic.",
+      "access": "Web body plus original browser UI read.",
+      "license": "Homepage expressly identifies electronic DOOM3 as CC BY-NC-SA 4.0; https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ro . This research does not grant permission to republish the dictionary or make a commercial dictionary derivative.",
+      "claim": "Normative spelling/morphology source. The homepage says it does not supply full lexical definitions; parenthetical distinctions can still bound morphology.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "doom-cucuruz",
+      "url": "https://doom.lingv.ro/cautare/q/cucuruz?",
+      "publisher_ref": "doom",
+      "access": "Original site search UI returned two entries; browser title and URL verified. Web fetch of this detail URL failed, so the evidence is the browser read.",
+      "license_ref": "doom",
+      "claim": "Entry 1 is regional, masculine, with maize/cone sense hints and plural cucuruzi. Entry 2 is neuter with maize-field sense and chiefly plural cucuruze.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "delr-cucuruz",
+      "url": "https://delr.lingv.ro/?searchTerm=cucuruz&selectedId=CUCUR%C3%9AZ",
+      "publisher": "Institutul de Lingvistică al Academiei Române «Iorgu Iordan – Alexandru Rosetti»",
+      "original": "Institution's own DELR entry; homepage https://delr.lingv.ro/ identifies Institute authorship and Editura Academiei Române printed volumes.",
+      "access": "Opened full entry body, not just snippet.",
+      "license": "No reuse license observed on entry or homepage. Do not infer the DOOM license applies to DELR.",
+      "claim": "Maize is explicitly a Transylvanian/Banat sense. Other recorded uses include cone, cob, maize field/harvest, underdeveloped maize, Petasites plants, walnut kernel and haystack.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "doom-gazeta",
+      "url": "https://doom.lingv.ro/cautare/q/gazet%C4%83?",
+      "publisher_ref": "doom",
+      "access": "Original site search UI read; one result.",
+      "license_ref": "doom",
+      "claim": "Feminine noun; displayed genitive-dative definite gazetei and plural gazete. No restrictive register marker displayed.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "cji-media",
+      "url": "https://educatia.mediacritica.md/wp-content/uploads/2021/04/MANUAL-EducatiaMedia-web.pdf",
+      "publisher": "Centrul pentru Jurnalism Independent (CJI), Chișinău",
+      "original": "Educație pentru media (clasele a III-a–a IV-a), Loretta Handrabura, Natalia Grîu, Silvia Șpac, 2017; institution credited in PDF pp1–2 and its own mediacritica.md domain. Republic of Moldova educational source, not evidence of Romanian Ministry approval.",
+      "access": "Original PDF parsed body and targeted finds read. Printed p18 / PDF index17 and printed p38 / index37. Screenshot attempts failed with cache miss; no local PDF downloaded.",
+      "license": "PDF front matter credits CJI 2017. No explicit open reuse license verified. Retain only own paraphrases and bibliographic facts.",
+      "claim": "The p18 glossary permits either a newspaper or a magazine under gazetă. The p38 classroom lesson places gazetă beside ziar/jurnal for a publication carrying current information. Supports a newspaper sense, not universal equivalence with all periodicals.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "gsp-history",
+      "url": "https://www.gsp.ro/despre-gazeta-sporturilor-gsp/istoric",
+      "publisher": "Gazeta Sporturilor / GSP.ro (Ringier Sportal)",
+      "original": "Publication's own account of its newspaper and online history.",
+      "access": "Opened article body, especially history and final print/online paragraph.",
+      "license": "No open reuse license observed; terms link exists. No article text or images copied.",
+      "claim": "The publisher calls Gazeta Sporturilor a newspaper and states that its printed edition ended in November 2023 while online publishing continues. This is a concrete current and historical Romanian exposure signal, not a general semantic definition.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "doom-untdelemn",
+      "url": "https://doom.lingv.ro/cautare/q/untdelemn?",
+      "publisher_ref": "doom",
+      "access": "Original site search UI read; one result.",
+      "license_ref": "doom",
+      "claim": "Neuter noun, explicitly bounded to edible vegetable oil. The written form is untdelemn; the plural untdelemnuri is marked for varieties.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "doom-ulei",
+      "url": "https://doom.lingv.ro/cautare/q/ulei?",
+      "publisher_ref": "doom",
+      "access": "Original site search UI read; two entries.",
+      "license_ref": "doom",
+      "claim": "Entry 1 has the fatty-liquid sense and variety plural uleiuri. A separate regional entry refers to a tree trunk/container/beehive and has plural uleie. These distinct senses must not be conflated.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "radio-untdelemn",
+      "url": "https://www.radiotimisoara.ro/rubrici/limba-romana/lemnul-din-cuvantul-untdelemn-clar-e-maslin-182585.html",
+      "publisher": "Radio România Timișoara",
+      "original": "Broadcaster's own Să vorbim corect column by Marcel Tolcea, posted by Dana Florea 2018-09-14; broadcast dated 2018-08-01.",
+      "access": "Opened body including the final semantic explanation.",
+      "license": "No open reuse license observed. Own paraphrase only; the page's image credit does not license the article.",
+      "claim": "The column distinguishes olive-oil origins from established wider edible-vegetable-oil usage. Its etymological discussion cites Sorin Stati; it is not the original Stati book, and is not used to establish that book's detailed etymology.",
+      "accessed_date": "2026-10-07"
+    },
+    {
+      "id": "expur",
+      "url": "https://expur.ro/ulei-pentru-consum-uman/",
+      "publisher": "Expur",
+      "original": "Manufacturer's own human-consumption vegetable-oil and brand page.",
+      "access": "Opened current body and footer.",
+      "license": "Footer ©2026 Expur, all rights reserved. No advertising copy, logos or images copied.",
+      "claim": "The brand Untdelemn de la Bunica is presented within edible oils and for everyday cooking. Supports current grocery-language exposure; a brand name alone does not establish a dictionary synonym or recognition frequency.",
+      "accessed_date": "2026-10-07"
+    }
+  ],
+  "hypotheses": [
+    {
+      "hypothesis": "cucuruz→Porumb",
+      "finding": "Sense-supported but already-owned; stop research and hold any ownership migration.",
+      "semantic_sources": [
+        "delr-cucuruz",
+        "doom-cucuruz"
+      ],
+      "morphology": {
+        "directly_observed": [
+          "cucuruz",
+          "cucuruzi"
+        ],
+        "excluded_from_maize_form_claim": [
+          "cucuruze"
+        ],
+        "note": "The neuter plural is attached to maize-field sense. No exhaustive declension or historical/regional variants are proposed."
+      },
+      "scope_limit": "Only the maize sense could be considered equivalent to a maize concept. The source explicitly records other senses; no all-senses synonym assertion.",
+      "root_identity_handoff": {
+        "source": "Root's same-session exact KG inspection (not independently re-run here)",
+        "existing_owner": "n_lbax_regionalism_cucuruz",
+        "reported_aliases": [
+          "cucuruzul",
+          "cucuruz ardelenesc",
+          "cucuruz bănățean"
+        ],
+        "reported_degree": 5,
+        "other_owner": "n_v2lim_porumb",
+        "finding": "Porumb description already names cucuruz; do not count a novel input or redirect an owned label."
+      },
+      "recognition": "Regional status verified. Broad cross-regional recognition and player benefit remain unproven; further recognition research stopped on root instruction after ownership collision.",
+      "holds": [
+        "Preserve existing node/alias ownership.",
+        "No migration, merge, selection, new-form count or approval from this source note."
+      ]
+    },
+    {
+      "hypothesis": "gazetă→Ziar",
+      "finding": "Newspaper sense supported by original educational source and publisher usage; global equivalence held because gazetă is broader.",
+      "semantic_sources": [
+        "cji-media",
+        "gsp-history"
+      ],
+      "morphology": {
+        "source": "doom-gazeta",
+        "directly_observed": [
+          "gazetă",
+          "gazetei",
+          "gazete"
+        ],
+        "note": "Only explicitly displayed forms are recorded. Forms such as gazeta/gazetele/gazetelor have not been individually sourced here."
+      },
+      "scope_limit": "The source permits a magazine as well as a newspaper; avoid collapsing all uses of gazetă into Ziar. Publication titles are recognition examples, not blanket synonym rules.",
+      "recognition": {
+        "signals": [
+          "Romanian-language primary-school media lesson (Moldova, 2017).",
+          "Romanian newspaper's own long-running title and continuing web edition."
+        ],
+        "limits": "Signals establish real educational/media exposure, not measured broad Romanian recognition. No human playtest evidence. A Romanian Ministry-hosted glossary was not verified."
+      },
+      "holds": [
+        "Root must bind exact Ziar sense and ownership/aliases/deck/rejection state.",
+        "Broad-periodical counter-sense requires an explicit acceptance decision before any alias rail.",
+        "Primary Academy explanatory entry for gazetă was not obtained; DOOM verifies morphology only.",
+        "No selection or approval."
+      ]
+    },
+    {
+      "hypothesis": "untdelemn→Ulei",
+      "finding": "Edible-vegetable-oil sense has direct original DOOM support; admit to further sense/identity review only.",
+      "semantic_sources": [
+        "doom-untdelemn",
+        "radio-untdelemn"
+      ],
+      "morphology": {
+        "source": "doom-untdelemn",
+        "directly_observed": [
+          "untdelemn",
+          "untdelemnuri"
+        ],
+        "restriction": "The plural names varieties. No invented articulated/genitive-dative forms, undelemn variant, or hyphenated unt-de-lemn spelling proposed."
+      },
+      "scope_limit": "Olive oil is a historically salient narrower use; current source also permits other edible vegetable oils. No support for replacing motor/mineral oil or every possible Ulei sense. The separate regional ulei entry is explicitly excluded.",
+      "recognition": {
+        "signals": [
+          "Radio România Timișoara's own language broadcast/article, 2018.",
+          "Manufacturer's current food-oil brand and culinary use page."
+        ],
+        "limits": "Two different contexts attest use; the radio item is outside the rubric's last-five-years media window. Brand exposure cannot prove all-age recognition. No human playtest evidence."
+      },
+      "holds": [
+        "Root must verify that installed Ulei owner is the edible-vegetable-oil sense and check existing forms, decks and rejections.",
+        "No blanket approval of all oil senses or all plurals.",
+        "No selection or approval."
+      ]
+    }
+  ],
+  "source_actions": [
+    {
+      "action": "Consulted official DOOM through its own search UI for all three lead words and Ulei; used its explicit homepage license.",
+      "outcome": "Completed. No dictionary bulk export."
+    },
+    {
+      "action": "Opened official DELR cucuruz and its own project homepage.",
+      "outcome": "Completed; homepage says online coverage A–E. Failed direct Gazette/Untdelemn queries are not evidence against their existence."
+    },
+    {
+      "action": "Searched original educational and publisher sources for gazetă; opened CJI PDF and GSP history.",
+      "outcome": "Completed text-source inspection; CJI screenshot cache failures remain disclosed."
+    },
+    {
+      "action": "Attempted ART publisher's original 2023 grade-2 PDF, https://catalog.manualedigitaleart.ro/art-romana-2-2023/v1/art-romana-2-2023.pdf .",
+      "outcome": "Web tool refused 34,220,816-byte content as too large. Exceeds source budget; not downloaded and search excerpt not promoted into verified evidence."
+    },
+    {
+      "action": "Checked original SSMR Gazeta Matematica page, https://portal.ssmr.ro/publicatii/gma/informatii .",
+      "outcome": "Search suggests a magazine example but direct open returned 502. Not needed for the CJI-backed breadth claim; search-only result not admitted as verified evidence."
+    },
+    {
+      "action": "Opened Radio România Timișoara and Expur original pages for untdelemn.",
+      "outcome": "Completed. No product/media assets copied."
+    },
+    {
+      "action": "A shell HEAD request to CJI failed DNS within the sandbox.",
+      "outcome": "No download, no bypass and no source bytes persisted."
+    },
+    {
+      "action": "Additional contextual searches returned mirrors, discussions and other leads.",
+      "outcome": "Excluded from semantic/form claims. No digitizer, dictionary mirror, snippet, Reddit discussion or derivative quotation treated as the original Academy publisher or as a reuse license."
+    }
+  ],
+  "resource": {
+    "local_source_downloads": 0,
+    "local_source_bytes": 0,
+    "durable_output_limit_bytes": 15360,
+    "native_commands": 0,
+    "heavy_lanes": 0,
+    "installed_data_mutation": false,
+    "measurements": "No local bulk source processing. Tool-managed browser/web memory not independently measured; no claim of a measured browser RSS."
+  }
+}
