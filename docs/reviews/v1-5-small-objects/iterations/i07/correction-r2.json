@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "valid_until": "Exact i07 source dependencies change — then treat as history",
+  "iteration": "i07",
+  "r1_pool": {
+    "path": "docs/content-pool/v1-5-discovery-i07/pool.json",
+    "sha256": "39de49d1cc6da399d2cecd683c2c4d453d3e91f9820be05625442e89647ec7be"
+  },
+  "r1_packet": {
+    "path": "packet-r1.json",
+    "sha256": "4a6bda074de2e94d0a2fe40759900c81b0613509e7cf7cbb53d2315817261ef9"
+  },
+  "r1_status": "SUPERSEDED_SOURCE_SCREEN_NOT_ACCEPTED",
+  "corrections": [
+    "Two unchanged Umbrelă/Sită leads were incorrectly labelled fresh in R1; remove from active pool and retain in exclusion ledger.",
+    "Exact scalar-only matches do not detect prior play-sketch phrases; independent word-boundary/substrings resolved them.",
+    "World Pepene is explicitly scoped to watermelon; shared generic KG still needs sense clearance."
+  ],
+  "r2_pool_sha": "dd1c595c830cd469e8bad671d165a2467765502b292626fd96a2926421452e56",
+  "native": "HELD NOT_RUN"
+}
