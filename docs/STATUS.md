@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and five spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0174), reviews/WORKLOG: history.
+- README/AGENTS: orientation; agent-map/testing: routes/gates; ADRs (newest 0176), reviews/WORKLOG: history.
