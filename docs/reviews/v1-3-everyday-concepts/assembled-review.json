@@ -1,0 +1,1176 @@
+{
+  "accepted_change_scope": {
+    "all180_terminal_records_exact": true,
+    "curated_rounds": 0,
+    "directed_links": 12,
+    "genuine_synonyms": 0,
+    "grammatical_aliases": 12,
+    "new_canonical_word_keys": 3,
+    "new_target_approvals": 0,
+    "old_degree_only_updates": 11,
+    "ranking_changed_rows": 5,
+    "serving_pack_metadata_change": "ct_viata_de_roman_377 pilot_score77→78",
+    "shared_concepts": 3,
+    "world_local_concepts": 0
+  },
+  "actionable_issues_remaining_within_v1_3_scope": [],
+  "baseline_revision": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
+  "changed_file_inventory": [
+    {
+      "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "sha256": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+      "sha256": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+      "sha256": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      "sha256": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63"
+    },
+    {
+      "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "sha256": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/derived_catalog.py",
+      "sha256": "4cdc541a824019d95aeb9482e2b81eb2178bed9afd3486d0bb023f8dfcfd242b"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/quick_catalog.py",
+      "sha256": "5893b66d890b54f32417bc2a96b5eab18ccf249314eec999d5af1c60ada7625e"
+    },
+    {
+      "path": "docs/STATUS.md",
+      "sha256": "3ea735d56bd60b8a9eaf59b5a09f11d65060cccb94a2f9f7d170de7ee80e4688"
+    },
+    {
+      "path": "docs/adr/0171-v1-3-everyday-graph-growth.md",
+      "sha256": "a97656403af029c2e673442482e0a489d6862e83ba455c0e99e8ecdd70f5727f"
+    },
+    {
+      "path": "docs/adr/README.md",
+      "sha256": "cc0f4d400285ef39b6ffd579bf2f9790a2c624306fc4780dee6ab9d4a5d9ed9a"
+    },
+    {
+      "path": "docs/content-pool/v1-3-everyday-concepts/pool.json",
+      "sha256": "e7a1211fe4aa9b75e5bd8b4a3ea26afba37919eaaaf11483a1bb15caea6088e5"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/README.md",
+      "sha256": "35f38bc8b3fe395f8ce5b6bce4fb33d608fc70f4560aaf54df295d2aa1a24ee0"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/authority-adoption.json",
+      "sha256": "f09aa25c3a174ba3aea5aebc460544f69e090e2aa2403609b350801132b47f7d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/baseline.json",
+      "sha256": "762af90eae559f798561e6408ed129a7f540514435931b0ec70c39dc529c622d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/consumer-pin-review.json",
+      "sha256": "1b8a3707c11f4cc4ca7d5e83d5f68b7b94e6b49f2be89ec24df190e87c98bdef"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/deck-screen.json",
+      "sha256": "50d9055e986b656c715f6c2207fa650215527b237ca179f4cab997bebf0c71ff"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/export-independent-factual-review.json",
+      "sha256": "0acedf487eb9e4615131b9040fccefe55ba5b830c0a8c5fade67e0d3e41a8c87"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/final-runtime-freeze.json",
+      "sha256": "3828d6856a9854c6935915565ef572cadc93bfdeed20f1175825e61d21eec323"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/gameplay-test-review-r2.json",
+      "sha256": "3931ded85383143a5dc14bcf81ba1f0ee8b7cf77979d1abc5a09428e9c987238"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/gameplay-test-review.json",
+      "sha256": "3ce73ba41b7940f0f690e4ab589988f7a09225f255f92306a09d329f75208ae8"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-factual-review.json",
+      "sha256": "333d1f5adc09fd13acecc2d52e799e18898b02b650a7b91d95471d0a69615248"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-installation.json",
+      "sha256": "92ba14415cad62aaf1fb0b8578852e8efeaea090d085ae64448862bb32763e3e"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-proposal.json",
+      "sha256": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-quality-impact-full.json.gz",
+      "sha256": "95eaf9a054115ec2c80a0d8185851825d2bd05e9f80559af8b9563e4a48d0db5"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-quality-impact.json",
+      "sha256": "918572f30674e8d5a943ffada72d832991a8ec5b9ed353154dcfbe9cf352a2a7"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-quality-review.json",
+      "sha256": "052714f6a8d2433779998211bfc57f8152f8af8dc38b0cdc65367def9f372b0a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/hardware-material-research.json",
+      "sha256": "d80cd599d702f5342192b96313f23c72e3135adb6fce9daaf06a7ededee2f930"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/installed-quality-evidence.json",
+      "sha256": "bca92faaa66cd8c60d5ebc5e69be60d3d3ff63a08abce293c9053e5864e390f3"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/content-delta.txt.gz",
+      "sha256": "96aca785b625efc6a6696650038adf56067c1cb458854a411c25fbf17ef15268"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/current-authority-final.json.gz",
+      "sha256": "f2f8bb6d13d06f9ce3ec067a0510bb6e7a1d38b214ea2958582f48fe6da517e7"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/current-source-http-gameplay-race.log.gz",
+      "sha256": "6158d3b9802abca91629cda41ad04257ecda7f652abd5383a37375490c4670cb"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/derive-check-final.log.gz",
+      "sha256": "9ed01274fe78e94589e5dae8672bb161d8dcc45967b9d49ee3e2dadb18e954d2"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/derive-check.log.gz",
+      "sha256": "9ed01274fe78e94589e5dae8672bb161d8dcc45967b9d49ee3e2dadb18e954d2"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/derive.log.gz",
+      "sha256": "4b84bde4ffa1080604b9dfff20d3529b50da79e13b96cdc00c187581832572f7"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/docs-final.json.gz",
+      "sha256": "3ddbc3e750312bfc441e7da992605b60064803a1a44a7f853974e3a2223fd32b"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/extensions-install.log.gz",
+      "sha256": "b26669bd8b7364cc23ebe716de6c0a59c0d00d57a04fe31869a91ca04955c85a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/extensions-installed-audit.log.gz",
+      "sha256": "07c4cdfd8e47a668dcbd65bfb0ab26f8cb9deeaca4158b032b5d5f39625376ce"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/extensions-preaudit.log.gz",
+      "sha256": "81d8443299d56ef419f01ec358af12b399aae9884f670370e3755fe478759e4c"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/extensions-proposal.log.gz",
+      "sha256": "833639513a10cca5b9ec4df4326c7ce7f5ea367b3d01df9c6c55033d09df00f4"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/fallback-four-package-race.log.gz",
+      "sha256": "b1527da0763533c371a401068f6ee9ade39a3357ecc218abc6a21195b2492a30"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-audit.json.gz",
+      "sha256": "41ae04694799a4ce2f29188b9d5d7a200dbb426932d7b21aaef5a1c6f33b7cb1"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-ci.log.gz",
+      "sha256": "6deeeeacb3ce692694229f97fde0793f6791be20de6ef24b85328658bcd9c319"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-qualified-build.log.gz",
+      "sha256": "bd9cc8a04ca362a17d33a045ad2fa176069d1d1fe26675988b0b99f98a673044"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-qualified-ci.log.gz",
+      "sha256": "af5185d06be701e978636ddd3c09e881e4ca639083a40c6b13bb3fe66b1034b8"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-qualified-lint.log.gz",
+      "sha256": "f601efe9ab4acc553164eaf05c356892bac8526c4e5d00486024e72127debb33"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-qualified-test.log.gz",
+      "sha256": "d214953ff0626c6e88b20752a103d2ed672536f5382c16e3f3f0dcd75f2169a5"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-static-byte-check.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-test.log.gz",
+      "sha256": "4212ee2ac49bf7b8cabbc41b6f0b78d9d2372f447ebe9398cd7890c931878424"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/graph-apply.log.gz",
+      "sha256": "b89b6256f7a8f791d82e7eb65b819f4ac178a56fb76cc1977c031c5961901196"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/mobile-check-final.log.gz",
+      "sha256": "953f152122d325278d30402a9aa98e37d610262ee8701ab3fb65fbe5a9fdcf5a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-export-check-final.log.gz",
+      "sha256": "77e30add72a91b123efe46af49001812755b316fef1c8a372b1f3bf61ef46eed"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-fixture-validate.log.gz",
+      "sha256": "caabfbac921eac21cd0734dfba0d832969edfabac40fbc21472307a9ef8c098e"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-http-parity.json.gz",
+      "sha256": "51f6f5fa5a275ae3bb2245f8905b6ad4f38b621ccc275ce2a215a5473d7e1d09"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-http-parity.log.gz",
+      "sha256": "51f6f5fa5a275ae3bb2245f8905b6ad4f38b621ccc275ce2a215a5473d7e1d09"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-race-current.log.gz",
+      "sha256": "ef6a9ea2d2a904c75c971340baf08e4c5f224ec4f21e43d85c9b7f78ecbcc749"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-race-first.log.gz",
+      "sha256": "d91d9a9843ebd1e28a01c34c68ec76cfb68c353266b54698e0992ac992366629"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-smoke.json.gz",
+      "sha256": "b24998f8ec6089a0b7ddf6da6449b140cb4193c31d51f0afddcb45d307c7dec6"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-smoke.log.gz",
+      "sha256": "b24998f8ec6089a0b7ddf6da6449b140cb4193c31d51f0afddcb45d307c7dec6"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-source-validate-final.log.gz",
+      "sha256": "c44ff1606465369c64c07614344b591441dea9df2f9bcede5cabe9e060755276"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-vet-current.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-vet.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/new-gameplay-race.log.gz",
+      "sha256": "8476ca99d389f8a578adbc26440369b3915542dc2b363ab057ad37b85bfdf057"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/python-export-check-final.log.gz",
+      "sha256": "13751a8124d5282fc77e532ef57b51a9dfcb5fe443c7ea7c9319036d5343c9e5"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/quick-install.log.gz",
+      "sha256": "938dae74ecef49ee33b8577d7a6aa4ea1bb56650d8e4e41dc089fe6a34457fa1"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/quick-installed-audit.log.gz",
+      "sha256": "c96cc31eb57c3d41da8da289422ed99fa46e98bae29801c4d2412ece89ef75ad"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/quick-preaudit.log.gz",
+      "sha256": "30d61ef5ce16d43a83e9cef4a6daed3057f05c53daea3b31244d96e8a18c79a8"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/quick-proposal.log.gz",
+      "sha256": "58d66bd44ffbf9d4d4ebce77d191a215787f5fc8961d9360811aea4a6f8e65b6"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/rank-check-final.log.gz",
+      "sha256": "f0e6b45996f5e0f59fa321aa8efbf8cd4e2c2faf4748c44f7c2f31f4998f65d8"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/rank-check.log.gz",
+      "sha256": "f0e6b45996f5e0f59fa321aa8efbf8cd4e2c2faf4748c44f7c2f31f4998f65d8"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/rank.log.gz",
+      "sha256": "37db558cbe4de26e87ba8ff6ba4172cc93daa8b3111e94f9c122654f69a5c466"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/ruff-final.log.gz",
+      "sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/shared-auth-race.log.gz",
+      "sha256": "a1c2b6f285dc8da5726cfc36ee1c31a42e0f77b0c0ca72868db7a63ea9b0c7b1"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/shared-auth-vet.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/world-install.log.gz",
+      "sha256": "8481609be67f664bf9091868e2cd5d08f95d3ab242057c83e665c9fe10527750"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/world-installed-audit.log.gz",
+      "sha256": "cd025a15943885349dce24de47e6b31226f76f141b114ca1ba75043f25ac8a7f"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/world-preaudit.log.gz",
+      "sha256": "5bec70b4def9472662f580ac2874783801f72b55cf8b6471a114c5d56094a107"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/world-proposal.log.gz",
+      "sha256": "3ccc8c62c65f24f8fc3c0513ae828af4d060eaa6f34d96073443c5b14f45e315"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native-refresh-plan.md",
+      "sha256": "ca664fe4b9c6fb7dbcbabc7e56c28d5a7c722f5136201f0a76da217389a9724f"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/builder-receipt.json",
+      "sha256": "994e02d25cb1d8ec16a893ac34212251fe67cbfa52000c25e7d4201481681efe"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/current-authority-check.json",
+      "sha256": "928ce624add7618067dbc30e2053c11eb6a3b0d7295c64b56368d8ab1c43650d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/candidate.json",
+      "sha256": "ce6c98d0afb9391b5e792f8911e48363bee33c77f6c6872498a46526918f606d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/factual-review.json",
+      "sha256": "6f08151bda755b2bfff8de203fae7a00e84d4f3af56548ba2aaed706c5d59fcc"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/final-factual-review.json",
+      "sha256": "2dc5888cf5b837de0eaa5766ac564736266a3f75cf2f741936773a831382203c"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/final-quality-review.json",
+      "sha256": "16cf81183df0d9b92735e1adfca8208d24a39a561ce6782ff23dc2207c36747a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/installed-audit.json",
+      "sha256": "c9834b4a256c7240c9a1f5a538cd4fd759d67127f36875daab4aad45379b816c"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/installed-authority-entry.json",
+      "sha256": "a80b7d85eb5335e56898d21e279bd992ea372341c3a1f56eb22afb4cf05317e6"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/installed-final-factual-review.json",
+      "sha256": "135aba77c8f9c2622e94237cc03ecd29fffd9a2027f19cddd9e4e201c4ff94d4"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/installed-final-quality-review.json",
+      "sha256": "c0fbd3802725c8629617a4d46ad115c336a86088a58cad5ad82318e937247906"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/installed-quality-evidence.json",
+      "sha256": "8a13ba82381b38f1d96c75bd95654fdee25ce9661943ee26e92ec6aeb12a832e"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/preinstall-audit.json",
+      "sha256": "a62692dcb2f7c88e7edc6825913fc61730f776674affd415de7e763476e6b8db"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/proposal.json",
+      "sha256": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/quality-review.json",
+      "sha256": "39c97a44c62e4531879cfd5f538a82a9ea429a8022bfe47cb33e8e70cec939bd"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/extensions/staging-quality-evidence.json",
+      "sha256": "a8e1e501cf96439988c3c42b53215eb01ed0564e6590f99e583c715a91b816b2"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/candidate.json",
+      "sha256": "98ab2e535b7db3e4098285c59a03994e6d86093458d710d43e6b864ad3e7adfc"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/factual-review.json",
+      "sha256": "c15b2f3edcd7cb886d288ba459f501a64cd6badba6371c074e5080e3a16b21fe"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/final-factual-review.json",
+      "sha256": "87ea0acf3237b6d7795ef8b9d43639df9644f846950211fb9e53474460326a06"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/final-quality-review.json",
+      "sha256": "68c41658ae7ab3fa85bb4316b09ac9eca40addf85c520a3deb1ba40adf181cc3"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/installed-audit.json",
+      "sha256": "d300a8cfc8c928c9ebd8fe39e06039ed3efd138cbcef6e846695c8d2148395a4"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/installed-authority-entry.json",
+      "sha256": "7912b38ebad280a35d4510b30c31ad89242b43b53b74b8ef8d1288dfd42caebd"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/installed-final-factual-review.json",
+      "sha256": "f6509096aee4be5624dfcaa2926ff20d2d843396b54a531ac25e8830c80f65e2"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/installed-final-quality-review.json",
+      "sha256": "15f6e1b87557dde598eab0d1cd0c0bb618ed0126b33de435c8a075571619de05"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/preinstall-audit.json",
+      "sha256": "8f17f600c31290c9ff6b3ed452cdf1db4a3c4ff5a70775ec8058c3db75b7f28a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/proposal.json",
+      "sha256": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/quick/quality-review.json",
+      "sha256": "41173d60d92fdb0508fbb05a6bdf5abd5994aabfda570787b57222e028283fab"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/candidate.json",
+      "sha256": "d3c1419c83a6e29f34790cef62717a4fbf36ec5577526677ac43db99fc0f089d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/factual-review.json",
+      "sha256": "5f0c58f674d247d35c459cf696abdf2f2354be9c5d2c8cb3ab5599ece8b1a266"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/final-factual-review.json",
+      "sha256": "90d78d43d6926f68b32f1c76f0c186d3deec1b949506e071a145e057f1fb1f72"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/final-quality-review.json",
+      "sha256": "64bc801bbfc6c74df01e17f27ef2d86f5f9b7569a4bb5e79800876f2eedfc501"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/installed-audit.json",
+      "sha256": "980a3fe8dd2f2c3423f2bd364a0e3524a5fd941e9092606f3ffe0e24df948483"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/installed-authority-entry.json",
+      "sha256": "6a1a022bd7b98eb9142d70315f70da36da4bce545319c7dc8958d1e2d0966cc1"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/installed-final-factual-review.json",
+      "sha256": "86c2a98f0b19f2c916dbabe63dff187bebca2c71c5317baea2ef6c47009d003c"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/installed-final-quality-review.json",
+      "sha256": "76cb71f2e1686bb9a6fe373c46060e249372ad9cc3d08b35a69e5ecd29c002af"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/preinstall-audit.json",
+      "sha256": "193bf26c380b5a4243415c47be13cc51ddf76a7bf8bfffebb5fb73f67f050d4d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/proposal.json",
+      "sha256": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/native/world/quality-review.json",
+      "sha256": "df517fbae1e00ec1f8a2bbcffbba5653a4ba21a3e327706f611c75da58f14c49"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/pool-r1.json",
+      "sha256": "8cea038b9e0424dcfb616b824c71600e437533d3687b457b377e30c126c55f95"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/proposal-checkpoint-verification.json",
+      "sha256": "6f52486dc9f7d59848d4931f6ec9568036df21070e495a2f217881097cb7e048"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference-freeze-addendum.json",
+      "sha256": "c2b286e1e15a6e75113e6117074b98b70bb568c82138febd8d683948a089897a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/capture-artifacts.json",
+      "sha256": "0e0c1cdbc96d402af9771706cea0a6e32a02502352eac79061ba3b319d308b6d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/capture-preparation.json",
+      "sha256": "565bd84e901bc6af649b6045fb28cea5e5f352e543fc22bad60dc5edf25074b0"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/capture-verification.json",
+      "sha256": "37e9aaa2f3d1615fd5f4aaf1be445ad14f5152fbe132cb356054a8bf216b0b69"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/catalog-history-extensions.json",
+      "sha256": "bbf13df29b4437eef2293aedc329527c5a0708ecae9ebff94e7ef6a908ad92fd"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/catalog-history-quick-world.json",
+      "sha256": "29aa6786173370f6ce31348acc41ab07f500db2d2c80f7bf95d9a431e9dabba0"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/catalog-history-v1-2-extensions.json",
+      "sha256": "6d24f62277eae019bdb813a52050ab232bb7d64ccb8a038bed2855af07c468ca"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/current-content-observations.json",
+      "sha256": "786d1a7db32d697f65ce3e6bba37be700bd0ebc24579d9adc07d554861c4664d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/current-reference-delta-full.json.gz",
+      "sha256": "2d18c75c11f6f395c355fdae2477e5f606dd40d3045c3012d64187fd40a7cfc9"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/adoption.json",
+      "sha256": "c4065eb1e95aa696ffa30a3076fc97f5893fdada343fa805c8adc24fc87528b0"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/alchimie-capture.log.gz",
+      "sha256": "6e88e2c274db04b1a3210499861c5d7c32e5055098361a84b234853637ef2df9"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/alchimie-http-responses.json.gz",
+      "sha256": "9e710ddc396c525c6a01d8078deddc71b48167daafb8d52bdc262cfe8230054d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/browser-capture.log.gz",
+      "sha256": "98b51d30838ab57600dd9fb64b1d0baf74592969477d31d3e0030f09b80bd426"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/browser-http-responses.json.gz",
+      "sha256": "483dade8c988d491fd3e5a4eccde365a632f4689a8b5db8e0aef24580d03d859"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/browser-winning-plans.json",
+      "sha256": "ec065e5b56612b28eb4f5739dc7fa19ff86fdc9dac27e9b95059e2aaf86a31fc"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/capture-command.json.gz",
+      "sha256": "c30ce723ab98ae85707af0d956c67ae6cc836c2127bb34c798036c66158ed579"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/capture-proposal-r1.json",
+      "sha256": "ce13641a47e07d4636aba21bef48ccaf0deebbd6f0994b34458b85971ae98fa8"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/capture-proposal.json",
+      "sha256": "f4038f5d7818b55fdc7acb54ec2593b1cac02198d7b4a181ed7d8584fb93a272"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/capture.py.txt",
+      "sha256": "b8bde0a156663be1d03c0c5f5a42cc1f174e86b994f0bb7d362a2ef21d697334"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-alchimie.json.gz",
+      "sha256": "8fdf33525095e5dde5ed11098cf716727bbe9da85fddcbc63ed817976be8e26a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-browser.json.gz",
+      "sha256": "65b6dbcfe2cb82244282298180e95ea2f05d5d53e36c5d8fc763a4f33c20dd9d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-conexiuni.json.gz",
+      "sha256": "6a7024c3e711f2441d58f927d32d094cb30be29dfb669561112ac3a97272ecb1"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-graph-r2.json.gz",
+      "sha256": "3ef514edce5f40ec9def0b253bc7232b9a7939074cd4178ed78d00bfd99ce453"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/captured-graph.json.gz",
+      "sha256": "cea69fe9d8de7701199ec8d0afb9381202d06a8ee4c467bcf05fafd78c1ad58a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/complete-delta-alchimie.json.gz",
+      "sha256": "23964719d4c5cd51baa7019cfa5e2ecdb2cf4c606c546ff0b9c337f0a18d77d2"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/complete-delta-browser.json.gz",
+      "sha256": "afe1e1de736b1d55d2a86493fcd8ad62cb943046b8b666de6a67d041f99c44f5"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/complete-delta-conexiuni.json.gz",
+      "sha256": "7da4231c42f1d36dbf4e9fe6b7734c870b347a58b34d81f573c8ae1c94d964d2"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/complete-delta-graph-r2.json.gz",
+      "sha256": "50817c0e9d745d0141bd678862a5d77aa06bd70189be2838a0c3236e53e9b7fd"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/complete-delta-graph.json.gz",
+      "sha256": "86b11c492b6a9e0cef5415a21c7eec2a242e9e02fe0d387227b67adc2022c230"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/complete-http-delta-alchimie.json.gz",
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/complete-http-delta-browser.json.gz",
+      "sha256": "8e57f3e6626eeea5a97edf02fac3be888916b4a2aec8e75ebe754b7695d64691"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/current-conexiuni-action-mapping.json.gz",
+      "sha256": "2e27297fa9d44671eaf759c504e9836c3e7bb183c37ba12b18f522ac8bf8679d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/current-conexiuni-capture.log.gz",
+      "sha256": "2a69dde6ae5ea6e833ca1fe2602e726ee34d6f9e7078c24e76fac429f69184be"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/follow-up-identity-and-deck.json",
+      "sha256": "d4ee5cf30ccedea5a09b98779e94cb07e6c55664b44ca7dd0c1b8e63dd50b81d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/graph-capture.log.gz",
+      "sha256": "d60fe5dba7ece524cdf4eb837f9bfac46ca853ee8ef1db7810e19b750dd98ea7"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/graph-supplement.json.gz",
+      "sha256": "0d22665c263439fee5d8d2b2d9fab5c57d3b8001c8e0476075270ffcb1c3fdf4"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/graph-supplement.log",
+      "sha256": "73ae709b23329691533cbfd60e3f3465b59aa99f9d61e104034445738b1ffee6"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-alchimie-capture.log.gz",
+      "sha256": "a9fc9e95ce1a2bb0dc13fc4114b62c7a5e5b2c054173216d97e3ba47e153a697"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-alchimie-python_parity.json.gz",
+      "sha256": "808660cf583ce9b7df9f4d6d5722cfbaf84663b321fc80d1da09e0f9cf7fdf20"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-browser-capture.log.gz",
+      "sha256": "98b51d30838ab57600dd9fb64b1d0baf74592969477d31d3e0030f09b80bd426"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-browser-http-responses.json.gz",
+      "sha256": "edb8c2fcf90cca96c6fdf22e436259d71de1faf3d307d34908c059585884e524"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-browser-winning-plans.json",
+      "sha256": "3e0c666c294a606f3ee0cd6269f493c97a9f89965b1f50fc9fae45ac4df6165f"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-conexiuni-action-mapping.json.gz",
+      "sha256": "b99a252608f7a4b7e8776bd75e971bf228bbcef039159520389c223b7e7fd27a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-conexiuni-capture.log.gz",
+      "sha256": "8e261a09c00e7db89629163db1f3be8f98c64cf621126c5b675a30ec834b6f6d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-conexiuni-python-goldens.json.gz",
+      "sha256": "7d0de47730c99c29d7749ec8349b2b14d2acdc224b0d01433e100f1d29e75b50"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-frontend-seeded-starts.json.gz",
+      "sha256": "ef3b4f7ab4bd840839be9c8e320d46c83a47b5f806249bee8ef34adaa78c1e67"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-graph-capture.log.gz",
+      "sha256": "d60fe5dba7ece524cdf4eb837f9bfac46ca853ee8ef1db7810e19b750dd98ea7"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/historical-graph-python_graph.json.gz",
+      "sha256": "2030ad8eac1f838162f4da83bfcd3cb70a88e9c8daf4a8283aa6131e352a3a81"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/independent-quality-review.json",
+      "sha256": "059e19f7a54fc12be691cc760dc10b4153c8a6755e6268906a945a67b18e61f2"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/old-f7-source-source-manifest.json",
+      "sha256": "ec6e4e114ccc65ae9bc57b3b1c7598bdd70de81a345215c00e003c9c13034234"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-generate.py.txt",
+      "sha256": "18dfac8404e29c38cf715d81e32fb37b3326294537fd00527480680784e8ef0a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-graph-generate.py.txt",
+      "sha256": "fe1b677dbc789b390c887be709de9d41e64cc3271c871e86fc47875349700c5b"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/original-solutions.py.txt",
+      "sha256": "2f19d6957a04cbac7a9161a170e3c75cac8fdc21276bf27e9c121136ad60114e"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/preparation.json",
+      "sha256": "5ed6e04e8a0654026ffaaeb64a06b5f272be8b7c63f932996ba48fcc4144ee31"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/prepared-alchimie.py.txt",
+      "sha256": "1ffcf3532e1ec29412a8c614c8af6a94b7db57c3285e50fe578695529191b6fd"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/prepared-graph.py.txt",
+      "sha256": "673f10feb9cb0d54f6f86e878071b0a69b65f286cbad7f902ce234587f0950ac"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/reconstruct-conexiuni.py.txt",
+      "sha256": "d0dfdddf75503c53a7795661fd6aff601806d01a078fd8bde7a89aeba36dbcc6"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/supplement-graph.py.txt",
+      "sha256": "118ad057eab1050b453ef0030a2e4a7e6bf547d5c06a6e5d0b57d9f895a1c160"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/game-vector-capture-command.json",
+      "sha256": "445bb18c07cb200cebd971e86b16c9628bce6d53b8e48ae9a56cb3a2bf3d38f7"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/game-vector-capture.log.gz",
+      "sha256": "06f17b44baac3dbb65041510860bf4e7c240c44353e9c1124eba38ef63c8e70f"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/historical-v1-2-contexto-game-vectors.json.gz",
+      "sha256": "1feaa935a35d6540ad5251e8633b9de24367bac36aad6de8a4863986258c4a17"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-catalog-implementation-quick-world.json",
+      "sha256": "63f93e6753b19931903fbd4243f11a785206774a5c6defe444a2f89fa4d317af"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-current-reference-comprehensive-final.log.gz",
+      "sha256": "c3b769504cc55ea7a603f22b23ca53a0193c932e855fadfbc1741c458d6aca69"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-current-reference-comprehensive.log.gz",
+      "sha256": "887a4be3f6925c292e02b17d0464bb7e09f09332f8ed5cc1169c95c492613aab"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-current-reference-final.json",
+      "sha256": "2209a962dc82802ec4972cbe603909918ec5dd538722fa27124814cc370fae5c"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-implementation.json",
+      "sha256": "788c37a021b246ef574421b150ffe3ba0c3e79661f7e1dbe8cf62955dd290f39"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/history-v1-recipes-final.log.gz",
+      "sha256": "da8c9313ad3c9259274d33620d2b59387ff9bf2d7d1eec680ea74223908ea2eb"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/http-capture-command.json",
+      "sha256": "069ed2cc698c985b74a3878f690500484268a2a1b28ad1f26053024f831e9f9c"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/http-capture.log.gz",
+      "sha256": "117f79be19b68248edae62da81b9c4c40893cfafb8b9bbd2ee1d56b89cbca9bd"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/independent-quality-evidence.json",
+      "sha256": "58a7d9c397703529c9d6af8ee62d207f13694b55b871d7ed59f2d35fd65853a9"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/independent-quality-review.json",
+      "sha256": "43c77fdfdb8cee6af297b607f5c049996ab8c5b5cc6b1396c97e48a8159828b0"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/prepared-capture-reference.py.txt",
+      "sha256": "fc6c394779dd5bd359fd2ba30d57e682f0df5c4d868f91987c59f314eca65513"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/prepared-game-vectors.py.txt",
+      "sha256": "83c9912c444c013ad49517ad495d69c99e75bbf03d7b4efa03a74a5d2279453f"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/research-identity.json",
+      "sha256": "5f67c2b7a60b4551a4f8328fd0e733ef344e705b1461d65822f37a71b74aca2d"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-balama-r2.json",
+      "sha256": "01f97aae567673bb7fe92866a6627fd30d5b023d3e1cf58433c80538cb780e51"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-fermoar-r2.json",
+      "sha256": "eeae197dcc914206f65fc3d7ac87fb414eac302cf5d4e1a2ec09988b53480b1f"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/selection-snapshots/v1-3-lemn-r2.json",
+      "sha256": "0028b4e197094b48dc2e7d40eda28f83673cc163dba57ad06caf48c5c866cd43"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/staging-verification.json",
+      "sha256": "9dfdcc14bb408477d4f8d035572d360d1945d8e420d94c0b6b22f0805674988a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/textile-research.json",
+      "sha256": "344e47e5e84fdbc11d8e970702c52322a07e7b9540f9446052a59d11e9ecff88"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/toolchain-prerequisite.json",
+      "sha256": "c8fcd21a1f37c9504588d40f7c8fa93b0c7afffd085e0418b9c5a7c24790d7a3"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/verification.json",
+      "sha256": "4108ca6299cdf58cb8a7c3f484386c2f6bee8870566a33b730c4265881b1fb6a"
+    },
+    {
+      "path": "frontend/e2e/seeded-starts.json",
+      "sha256": "5644ab3b7ee583db6904858712e3872928d62aac2c667322153720e8f4dd31b3"
+    },
+    {
+      "path": "go-backend/internal/alchimie/testdata/python_parity.json",
+      "sha256": "1066d21ff9884c5597cb3a08d1e2ab15ea56e1bc10aaa412f7cf42866fac7366"
+    },
+    {
+      "path": "go-backend/internal/conexiuni/testdata/python-goldens.json",
+      "sha256": "e0aaef96a28c2a7d2487bb91e5dabbe93b63449c0dfa24920aa299edcb56f86e"
+    },
+    {
+      "path": "go-backend/internal/content/bundled.json",
+      "sha256": "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f"
+    },
+    {
+      "path": "go-backend/internal/content/digest.go",
+      "sha256": "38f75208a4c13c5f65b2a4ddf97204697643915a31798649cc511a568eb3dc86"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/build.go",
+      "sha256": "632e639009592318d05e03bafe26456b8a9124fe5eee6333fd375c21be1cfc53"
+    },
+    {
+      "path": "go-backend/internal/contentbuild/build_test.go",
+      "sha256": "a14de5489b1e23f3d5a58082253fb6aac46f5ead26310023501fe20e68d8a8b8"
+    },
+    {
+      "path": "go-backend/internal/contentrails/installed_authorities_pin.go",
+      "sha256": "c122627839b2177e6f957b77d080dbab85677d65c0950226ef9dc9376cb9213b"
+    },
+    {
+      "path": "go-backend/internal/contentrails/sources/authored-v3.json",
+      "sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc"
+    },
+    {
+      "path": "go-backend/internal/contentrails/sources/installed-authorities.json",
+      "sha256": "8d9245f861bba03718213900984d2f2829d4d584d43bac701e5c3167ded623bf"
+    },
+    {
+      "path": "go-backend/internal/contexto/content_v1_3_test.go",
+      "sha256": "1aaf98dd1dd835b92330c063b099f89d99f35fd4b1b7120c18af748e37feff21"
+    },
+    {
+      "path": "go-backend/internal/contexto/testdata/python_games.json",
+      "sha256": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078"
+    },
+    {
+      "path": "go-backend/internal/graph/testdata/python_graph.json",
+      "sha256": "fbdb4a5eca38b3127a7321fbebf5da93219691e7e27f74f5113c7a36b12b47b1"
+    },
+    {
+      "path": "go-backend/internal/httpgolden/golden.go",
+      "sha256": "883020aa7566a234c1a4eb2932e66d55b5a1ba01fee0a66fd479b8887f0f1802"
+    },
+    {
+      "path": "go-backend/internal/httpgolden/golden_test.go",
+      "sha256": "cf9ce67f4bad210b5cdf2a42d8dadd4619abac697da394719ad65c65582fb48d"
+    },
+    {
+      "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz",
+      "sha256": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
+    },
+    {
+      "path": "go-backend/internal/lant/content_v1_3_test.go",
+      "sha256": "2d2f0ce69f710744bf4121952a06efa1174aef00e376823d6f4d01e4632d8145"
+    },
+    {
+      "path": "scripts/everyday_graph_v1_3_data.py",
+      "sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7"
+    },
+    {
+      "path": "tests/content_history.py",
+      "sha256": "8405e743834f641ea60c9cf4cb556c4589bc704334515c1b70d8c44a54e3b318"
+    },
+    {
+      "path": "tests/current_content.py",
+      "sha256": "2b93c6336b18f1d2f9c7506b0af5a65cb0f858054a5f18c56240d2679418835d"
+    },
+    {
+      "path": "tests/fixtures/board_rankings_v37.json",
+      "sha256": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b"
+    },
+    {
+      "path": "tests/fixtures/cat_mobile_app_pack_contract.json",
+      "sha256": "f5ebc91f3cefb2fdc9755ea015d1eae9e58a2edf722621f273e73ef937d82e94"
+    },
+    {
+      "path": "tests/fixtures/derived_catalog_v38.json",
+      "sha256": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9"
+    },
+    {
+      "path": "tests/fixtures/kg_sample.json",
+      "sha256": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63"
+    },
+    {
+      "path": "tests/test_v1_2_content_history.py",
+      "sha256": "299425fc227ab17ae3b73f5b16baeae7539e21f4e65a0a3b938d80a5160f589d"
+    },
+    {
+      "path": "tests/test_v1_3_content_history.py",
+      "sha256": "3afe294b861753d44e55887c37afb4a32abdfeee486e913846232f08b9439ad2"
+    },
+    {
+      "path": "tests/test_v1_recipe_refresh.py",
+      "sha256": "50e48d41d1e6f3f965beafe0b2fa29148ced8e32ebee5c188be2aac487868bd2"
+    }
+  ],
+  "checked_final_log_descriptors": {
+    "current-authority-final.json": {
+      "gzip_sha256": "f2f8bb6d13d06f9ce3ec067a0510bb6e7a1d38b214ea2958582f48fe6da517e7",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/current-authority-final.json.gz",
+      "uncompressed_sha256": "928ce624add7618067dbc30e2053c11eb6a3b0d7295c64b56368d8ab1c43650d"
+    },
+    "derive-check-final.log": {
+      "gzip_sha256": "9ed01274fe78e94589e5dae8672bb161d8dcc45967b9d49ee3e2dadb18e954d2",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/derive-check-final.log.gz",
+      "uncompressed_sha256": "de1da26ca332304ac71364e11abc8e86955ad2043943225200253b8e4face9a9"
+    },
+    "frontend-qualified-build.log": {
+      "gzip_sha256": "bd9cc8a04ca362a17d33a045ad2fa176069d1d1fe26675988b0b99f98a673044",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-qualified-build.log.gz",
+      "uncompressed_sha256": "6535a1e50773b847cb15d8e12ee25195a3f228524ae0fb461fd2ea0cfecafa6a"
+    },
+    "frontend-qualified-ci.log": {
+      "gzip_sha256": "af5185d06be701e978636ddd3c09e881e4ca639083a40c6b13bb3fe66b1034b8",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-qualified-ci.log.gz",
+      "uncompressed_sha256": "baebb07634c485511136c52931c9c4558be7f0bd14d1f370691666a8057606dc"
+    },
+    "frontend-qualified-lint.log": {
+      "gzip_sha256": "f601efe9ab4acc553164eaf05c356892bac8526c4e5d00486024e72127debb33",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-qualified-lint.log.gz",
+      "uncompressed_sha256": "306ce50c58dddbc19ada8da9f7c2ab068661a2447fd82c94574e9eb259d65a3a"
+    },
+    "frontend-qualified-test.log": {
+      "gzip_sha256": "d214953ff0626c6e88b20752a103d2ed672536f5382c16e3f3f0dcd75f2169a5",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-qualified-test.log.gz",
+      "uncompressed_sha256": "b7ac2694649a59815e9ba45577c620d2a216743f69cb519fe1421745d3087a43"
+    },
+    "frontend-static-byte-check.log": {
+      "gzip_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/frontend-static-byte-check.log.gz",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mobile-check-final.log": {
+      "gzip_sha256": "953f152122d325278d30402a9aa98e37d610262ee8701ab3fb65fbe5a9fdcf5a",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/mobile-check-final.log.gz",
+      "uncompressed_sha256": "950ff344a404f9321e6be224962ce22be074b965cb0f5e72f8da04bc0757f5b9"
+    },
+    "native-export-check-final.log": {
+      "gzip_sha256": "77e30add72a91b123efe46af49001812755b316fef1c8a372b1f3bf61ef46eed",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-export-check-final.log.gz",
+      "uncompressed_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb"
+    },
+    "native-http-parity.json": {
+      "gzip_sha256": "51f6f5fa5a275ae3bb2245f8905b6ad4f38b621ccc275ce2a215a5473d7e1d09",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-http-parity.json.gz",
+      "uncompressed_sha256": "ce34921893106b2190f0946e78e798cb32ccaa773f29ff7083b5457e15897256"
+    },
+    "native-race-current.log": {
+      "gzip_sha256": "ef6a9ea2d2a904c75c971340baf08e4c5f224ec4f21e43d85c9b7f78ecbcc749",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-race-current.log.gz",
+      "uncompressed_sha256": "713f1822a0d08fe4d360b4a958b60c7dcd54b296cd70eb9e8b9d2a62a4d1e6f8"
+    },
+    "native-smoke.json": {
+      "gzip_sha256": "b24998f8ec6089a0b7ddf6da6449b140cb4193c31d51f0afddcb45d307c7dec6",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-smoke.json.gz",
+      "uncompressed_sha256": "25358d7cc1c384ea28c7eb16df5aab87af169de3539f8541003aadf381a40e26"
+    },
+    "native-smoke.log": {
+      "gzip_sha256": "b24998f8ec6089a0b7ddf6da6449b140cb4193c31d51f0afddcb45d307c7dec6",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-smoke.log.gz",
+      "uncompressed_sha256": "25358d7cc1c384ea28c7eb16df5aab87af169de3539f8541003aadf381a40e26"
+    },
+    "native-source-validate-final.log": {
+      "gzip_sha256": "c44ff1606465369c64c07614344b591441dea9df2f9bcede5cabe9e060755276",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-source-validate-final.log.gz",
+      "uncompressed_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976"
+    },
+    "native-vet-current.log": {
+      "gzip_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/native-vet-current.log.gz",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "python-export-check-final.log": {
+      "gzip_sha256": "13751a8124d5282fc77e532ef57b51a9dfcb5fe443c7ea7c9319036d5343c9e5",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/python-export-check-final.log.gz",
+      "uncompressed_sha256": "f6a0db5bbc49440ddaa580c475a60a839b16cd7d6f85cb73505ee3d7135687b1"
+    },
+    "rank-check-final.log": {
+      "gzip_sha256": "f0e6b45996f5e0f59fa321aa8efbf8cd4e2c2faf4748c44f7c2f31f4998f65d8",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/rank-check-final.log.gz",
+      "uncompressed_sha256": "fd5cb4eec1e2e39c90a5cfefd2374739f56cff4b704366407685e4f62824798d"
+    },
+    "ruff-final.log": {
+      "gzip_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "path": "docs/reviews/v1-3-everyday-concepts/logs/ruff-final.log.gz",
+      "uncompressed_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  },
+  "decision": "accept_exact_local_content_revision_for_landing",
+  "dependency_advisory": {
+    "advisory": "https://github.com/advisories/GHSA-68fv-2mgg-jv7q",
+    "dependency_changes": 0,
+    "dev": true,
+    "judgment": "Faithfully recorded preexisting development dependency finding. Required ci/test/lint/build gates pass; this review does not claim a security audit pass or remediation.",
+    "npm_audit_exit_code": 1,
+    "package": "source-map-js",
+    "package_lock_exact_baseline": true,
+    "package_lock_sha256": "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c",
+    "severity": "high",
+    "status": "preexisting_locked_development_finding_unresolved",
+    "version": "1.2.1"
+  },
+  "gates": {
+    "additional_reviewer_final_history_cases": 73,
+    "additional_reviewer_native_focused_packages": 4,
+    "current_native_authority_rails": 4,
+    "frontend_actual_node": "24.21.0",
+    "frontend_cases": 242,
+    "frontend_ci_lint_build": "pass",
+    "frontend_static_assets_and_manifest": "byte_exact_baseline",
+    "history_cases": 305,
+    "history_deselection": 0,
+    "native_assets": 28,
+    "native_http_requests": 1207,
+    "native_race_packages": 27,
+    "native_smoke_requests": 151,
+    "native_source_export_and_independent_python_export": "exact7238102bytes",
+    "native_vet": "pass",
+    "ruff_docs_whitespace": "pass",
+    "shared_auth_race_vet": "pass"
+  },
+  "held_identity_deck_followup": {
+    "judgment": "The exact Secundă ID/time-unit sense, two already-reviewed quick uses and no main-pack use are correctly distinguished from the forced Societate predicate. Moving one category alone is not a reviewed remedy; future taxonomy/miner changes need sourced decisions and all fresh gates.",
+    "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/follow-up-identity-and-deck.json",
+    "sha256": "d4ee5cf30ccedea5a09b98779e94cb07e6c55664b44ca7dd0c1b8e63dd50b81d"
+  },
+  "held_quality_followups": [
+    {
+      "follow_up": "Prioritize sourced taxonomy/fallback repair in V1.4 with fresh raw judgments and all impact/installation gates. Do not promote this board as high-quality curated content.",
+      "id": "fallback-global-daily-seven-societate-secunda",
+      "members": [
+        "Universitatea Babeș-Bolyai",
+        "Buletin",
+        "Referendum",
+        "Secundă"
+      ],
+      "reason": "Secundă is a time unit. Broad Societate membership and zero foreign on-board links do not establish a defensible specific predicate. Existing taxonomy weakness newly exposed by deterministic forced-shelf selection; no new V1.3 vocabulary or relation participates.",
+      "scope": {
+        "date": "2026-10-03",
+        "difficulty": "normal",
+        "group": "societate",
+        "pack_limit": 7
+      },
+      "verdict": "hold"
+    },
+    {
+      "follow_up": "Retain as legacy fallback taxonomy debt; no promotion or new relation claim.",
+      "id": "fallback-mined-greu-personalitati-mixed-types",
+      "reason": "The unchanged legacy Personalități umbrella groups Montréal1976/event, Bizanț după Bizanț/work, school-of-history concept and Celibidache/person. Preserved reference correctness is not a fresh semantic endorsement.",
+      "scope": {
+        "difficulty": "greu",
+        "group": "personalitati",
+        "pack_limit": 0,
+        "seed": 13
+      },
+      "verdict": "hold"
+    }
+  ],
+  "included_runtime_diff_paths": [
+    "go-backend/internal/content/bundled.json",
+    "go-backend/internal/content/digest.go",
+    "go-backend/internal/contentbuild/build.go",
+    "go-backend/internal/contentrails/sources/authored-v3.json",
+    "go-backend/internal/httpgolden/golden.go"
+  ],
+  "kind": "v1-3-exact-revision-assembled-quality-review-v1",
+  "preservation": {
+    "all180_terminal_puzzles_exact": true,
+    "all336derived_and85quick_authored_rated_payloads_exact": true,
+    "all8_history_inverse_fullbytes_restore_git18832": true,
+    "authority_manifest_matches_all3_native_entry_drafts": true,
+    "curated_stock_status_rejection_and_eligibility_retained": true,
+    "fallback_old_expected_vectors_preserved_losslessly": true,
+    "only_existing_metadata_pin_literal_changed": true,
+    "original_v1_catalog_c520_restored_exact": true,
+    "original_v1_recipe_test_bodies_assertions_literals_exact": true,
+    "previous_review_source_tombstone_reserve_static_files_compared_exact": 342,
+    "source2_parent_chain_row_exact": true,
+    "source3_author_definitions_and_legacy_sources_exact": true,
+    "world251concepts351recipes9histories_preserved": true
+  },
+  "prior_independent_judgment_bindings": [
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/graph-quality-review.json",
+      "sha256": "052714f6a8d2433779998211bfc57f8152f8af8dc38b0cdc65367def9f372b0a"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/installed-quality-evidence.json",
+      "sha256": "bca92faaa66cd8c60d5ebc5e69be60d3d3ff63a08abce293c9053e5864e390f3"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/consumer-pin-review.json",
+      "sha256": "1b8a3707c11f4cc4ca7d5e83d5f68b7b94e6b49f2be89ec24df190e87c98bdef"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/gameplay-test-review-r2.json",
+      "sha256": "3931ded85383143a5dc14bcf81ba1f0ee8b7cf77979d1abc5a09428e9c987238"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/independent-quality-review.json",
+      "sha256": "43c77fdfdb8cee6af297b607f5c049996ab8c5b5cc6b1396c97e48a8159828b0"
+    },
+    {
+      "path": "docs/reviews/v1-3-everyday-concepts/reference/fallback/independent-quality-review.json",
+      "sha256": "059e19f7a54fc12be691cc760dc10b4153c8a6755e6268906a945a67b18e61f2"
+    }
+  ],
+  "rationale": "Accept exact95f94 for local landing. The conservative three-concept/twelve-form/twelve-outward-link graph, complete all-game impact, source3 raw/staging/installed gates, strict ancestry/metadata, independently reproduced current expectations, unchanged historical assertions, full native/shared/frontend gates and clean checkpoint agree. No source/miner/session threshold was weakened; no new hidden target or curated promotion is inferred. Old records, histories and source/reference archives remain exact. Actual fallback selection/par changes and inherited semantic weaknesses are explicit rather than disguised as unchanged content. Current public-mobile versus full-fixture hashes bind distinct correct contracts; the locked dev advisory remains honestly recorded. These retained, scoped holds are not newly introduced false graph claims and do not block the accepted local graph wave.",
+  "reference_freeze_addendum_sha256": "c2b286e1e15a6e75113e6117074b98b70bb568c82138febd8d683948a089897a",
+  "reviewed_diff_bytes": 39731268,
+  "reviewed_diff_sha256": "33438876139d18be4587b56ab229941db0dfaa3685c011fa36cb6e5f173242a3",
+  "reviewed_revision": "95f94e3d1a5fb22f3e3db381803c0d9df46e1ff9",
+  "reviewer": "/root/graph_quality",
+  "role": "quality",
+  "runtime_freeze_sha256": "3828d6856a9854c6935915565ef572cadc93bfdeed20f1175825e61d21eec323",
+  "runtime_manifest_rows": 106,
+  "scope_limits": [
+    "No hosted Actions dispatch, push or deployment",
+    "No account/provider activation or PostgreSQL release-lane qualification",
+    "No new frontend app code; no full browser622 rerun; native/browser-reference and smoke evidence recorded",
+    "Automated/AI gates do not establish human enjoyment",
+    "Curated stock/pools unchanged; on-demand fallback selections change and legacy semantic holds are not promoted",
+    "Approval binds exact95f94 content/source/test/reference tree and its preserved holds; any later included runtime/source/expected-reference change requires affected re-review.",
+    "Local landing only. No push, deployment, account activation, new curated round/hidden target or human enjoyment approval.",
+    "Reference refreshes establish accurately captured existing fallback behavior, not high-quality curated predicate approval. Secundă/Societate and mixed Personalități remain held for a future separately reviewed wave."
+  ],
+  "seven_current_expected_reference_hashes": {
+    "frontend/e2e/seeded-starts.json": "5644ab3b7ee583db6904858712e3872928d62aac2c667322153720e8f4dd31b3",
+    "go-backend/internal/alchimie/testdata/python_parity.json": "1066d21ff9884c5597cb3a08d1e2ab15ea56e1bc10aaa412f7cf42866fac7366",
+    "go-backend/internal/conexiuni/testdata/python-goldens.json": "e0aaef96a28c2a7d2487bb91e5dabbe93b63449c0dfa24920aa299edcb56f86e",
+    "go-backend/internal/contexto/testdata/python_games.json": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078",
+    "go-backend/internal/graph/testdata/python_graph.json": "fbdb4a5eca38b3127a7321fbebf5da93219691e7e27f74f5113c7a36b12b47b1",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+    "go-backend/internal/lant/testdata/python_games.json": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048"
+  },
+  "source_bindings": {
+    "alchimie_discovery_world_v92.json": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+    "alchimie_recipe_extensions_v92.json": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+    "board_rankings_v37.json": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+    "derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+    "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "rubric": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+  },
+  "verdict": "accept",
+  "verification_sha256": "4108ca6299cdf58cb8a7c3f484386c2f6bee8870566a33b730c4265881b1fb6a"
+}

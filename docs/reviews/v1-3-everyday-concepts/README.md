@@ -6,7 +6,7 @@ Started2026-10-06 after local V1.2 content17f7da1 and documentation18832d4.
 Baseline: `18832d41bedfe5f63ee98fcffa709d29d9f86361`. Phase: native integration.
 The [pool](../../content-pool/v1-3-everyday-concepts/pool.json) retains eight finite leads:
 three selected for refinement and five held. Original revision1 bytes remain in
-[pool-r1.json](pool-r1.json). The accepted graph is installed in this isolated worktree; native catalogs/export/authority and required gates are GREEN; assembled review/local landing remain pending.
+[pool-r1.json](pool-r1.json). The accepted graph is installed in this isolated worktree; native catalogs/export/authority and required gates are GREEN; assembled review ACCEPT95f94e3; local landing remains pending.
 
 [Graph proposal R1](graph-proposal.json) binds root-authored
 `scripts/everyday_graph_v1_3_data.py` and three exact revision2 selection snapshots.
@@ -62,7 +62,7 @@ adds two displaced old IDs to the original six rows. On-demand Alchimie selectio
 are disclosed; no curated cores change. Forced Societate/Secundă and mixed Personalități
 fallbacks remain [quality holds](reference/fallback/independent-quality-review.json), not new
 curated approval. The unchanged locked development source-map-js advisory is recorded.
-Independent assembled review and local landing remain pending. [Builder receipt](native/builder-receipt.json), [refresh plan](native-refresh-plan.md). Preserve all graph/target floors, old records, source archives, historic
+Independent [assembled review](assembled-review.json) ACCEPTS exact95f94e3 with no remaining in-scope issue. Local landing follows the guarded documentation acknowledgment. [Builder receipt](native/builder-receipt.json), [refresh plan](native-refresh-plan.md). Preserve all graph/target floors, old records, source archives, historic
 saves, session/resource bounds, private answers and deterministic behavior. Confirm
 all affected Cald feedback, Lanț profiles, partitions, recipes and regenerated terminal
 puzzles; refresh downstream current source3/authority and independent HTTP/reference

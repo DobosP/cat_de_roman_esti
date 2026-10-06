@@ -2,7 +2,7 @@
   "schema": "v1-3-integrated-verification-v1",
   "checked_on": "2026-10-06",
   "baseline_commit": "18832d41bedfe5f63ee98fcffa709d29d9f86361",
-  "status": "Required integrated gates GREEN; independent assembled acceptance/local landing still pending",
+  "status": "Required integrated gates GREEN; independent assembled ACCEPT95f94e3; local landing pending",
   "toolchains": {
     "go": {
       "version": "go1.27.1 linux/amd64",
@@ -342,5 +342,10 @@
       "uncompressed_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
       "gzip_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd"
     }
+  },
+  "assembled_review": {
+    "reviewed_revision": "95f94e3d1a5fb22f3e3db381803c0d9df46e1ff9",
+    "path": "docs/reviews/v1-3-everyday-concepts/assembled-review.json",
+    "sha256": "cb15f1aac972210e8e1fcb85dd62ba27643546567ecb1064e562920db8e415a2"
   }
 }

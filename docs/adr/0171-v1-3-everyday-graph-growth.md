@@ -1,6 +1,6 @@
 # ADR-0171: V1.3 everyday concepts with specific outward links
 
-- Status: accepted; installed authority and required integrated gates GREEN; assembled review/local landing pending
+- Status: accepted; installed authority and required integrated gates GREEN; assembled review ACCEPT95f94e3; local landing pending
 - Date: 2026-10-06
 
 ## Context
