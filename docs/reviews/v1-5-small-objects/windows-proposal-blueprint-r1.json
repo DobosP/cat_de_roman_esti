@@ -1,0 +1,425 @@
+{
+  "accepted_research_snapshots": [
+    {
+      "id": "v1-5-object-2",
+      "path": "docs/reviews/v1-5-small-objects/frozen/palnie-r3.json",
+      "revision": 3,
+      "sha256": "78eba8ead137edf5c10747c0959e713106c8457ef33e6829d5c2b22b3d00bf11",
+      "state": "researched"
+    },
+    {
+      "id": "v1-5-object-3",
+      "path": "docs/reviews/v1-5-small-objects/frozen/breloc-r3.json",
+      "revision": 3,
+      "sha256": "43feab29f93a19c2853da98ea0ec6e742f0ef25c539d423c3807f768b25a5b31",
+      "state": "researched"
+    }
+  ],
+  "accepted_scope": "Exact four r3 research claims and one outgoing functional relation per concept only; no new source claim, morphology padding or candidate/round selection.",
+  "author": "/root",
+  "baseline_commit": "b646d3dfe1d273eee6a811e7745a0b4d8adcc28f",
+  "checked_on": "2026-10-06",
+  "counterfactual_diff_not_apply_receipt": {
+    "assumption": "Exactly two novel node IDs and two outgoing nondistractor arcs, with no other change. This scope fails the supported guard.",
+    "distinct_label_plural_surface_hypotheses": 4,
+    "kg_links": {
+      "before": 9473,
+      "hypothetical": 9475
+    },
+    "kg_nodes": {
+      "before": 2419,
+      "hypothetical": 2421
+    },
+    "new_synonym_families": 0,
+    "old_record_edit_intent": "None except generated incident-degree updates of two existing endpoints; no old label, alias, category, description, pack or puzzle change.",
+    "plural_alias_hypotheses": 2,
+    "round_target_additions": 0,
+    "stored_degree_expectations": {
+      "n_v4gas_apa": {
+        "before": 30,
+        "hypothetical": 31
+      },
+      "n_v4via_cheie": {
+        "before": 5,
+        "hypothetical": 6
+      },
+      "new_breloc": 1,
+      "new_palnie": 1
+    },
+    "world_concept_recipe_additions": 0
+  },
+  "deployment_approval": false,
+  "document_kind": "Non-executable editorial blueprint; not native candidate/proposal, selection, raw approval or Source5.",
+  "effect_limits": [
+    "No graph simulation or executable preflight. Static predicted refusal is not a failed executed gate.",
+    "No old directed path shortcut from a strictly outgoing-only new leaf, conditional on explicit nonbidirectional flags; this does not establish feedback/mining/selection invariance.",
+    "Shared category membership changes Conexiuni denominators and RNG; new guesses may change Cald rank/normalization/suggestions, and generated degree/metadata snapshots change.",
+    "Automatic fallback exposure outside exact accepted scope is stop/hold, without runtime exclusions or category changes to conceal regressions.",
+    "Actual ordinary feedback warmth, recognition recall/enjoyment, weighted ranks and target bands remain unproved.",
+    "Additional relations, numbers or subset adoption are a new exact scope; no automatic transfer of blueprint or r3 research acceptance."
+  ],
+  "expected_node_changes": [
+    {
+      "category_if_later_reviewed": "viata_de_roman",
+      "description_exact_r3": "Mic accesoriu fizic care se poate prinde de chei.",
+      "label_ro": "Breloc",
+      "lemma": "breloc",
+      "node_type_category_ids_selection_approval": false,
+      "node_type_if_later_reviewed": "concept",
+      "plural_alias_hypothesis": "brelocuri",
+      "research_id": "v1-5-object-3",
+      "research_revision": 3,
+      "salience": null,
+      "salience_status": "Required numeric editorial attribute unresolved; no fabricated familiarity score or target eligibility workaround.",
+      "unreserved_id_example": "n_v1_5_accessory_breloc"
+    },
+    {
+      "category_if_later_reviewed": "viata_de_roman",
+      "description_exact_r3": "Ustensilă gospodărească cu deschidere largă și ieșire îngustă, folosită la turnarea lichidelor în recipiente cu deschidere mică.",
+      "label_ro": "Pâlnie",
+      "lemma": "pâlnie",
+      "node_type_category_ids_selection_approval": false,
+      "node_type_if_later_reviewed": "concept",
+      "plural_alias_hypothesis": "pâlnii",
+      "research_id": "v1-5-object-2",
+      "research_revision": 3,
+      "salience": null,
+      "salience_status": "Required numeric editorial attribute unresolved; no fabricated familiarity score or target eligibility workaround.",
+      "unreserved_id_example": "n_v1_5_household_palnie"
+    }
+  ],
+  "expected_relation_changes": [
+    {
+      "bidirectional_if_later_reviewed": 0,
+      "caption_exact_r3": "se poate prinde de chei",
+      "claim_id": "breloc-key-attachment",
+      "direction_requirement": "outgoing only",
+      "evidence_state": "supported",
+      "existing_endpoint_id": "n_v4via_cheie",
+      "existing_endpoint_snapshot": {
+        "aliases": [
+          "cheia",
+          "chei",
+          "cheile"
+        ],
+        "category": "viata_de_roman",
+        "degree": 5,
+        "description": "Obiect metalic folosit pentru încuierea și descuierea unei uși.",
+        "difficulty_tier": "medium",
+        "id": "n_v4via_cheie",
+        "label_ro": "cheie",
+        "node_type": "concept",
+        "salience": 0.602
+      },
+      "from_unreserved_id_example": "n_v1_5_accessory_breloc",
+      "is_distractor_if_later_reviewed": 0,
+      "predicate_enum_id_strength_approval": false,
+      "source_ids": [
+        "breloc-lego-recheck",
+        "breloc-action-recheck"
+      ],
+      "strength": null,
+      "strength_status": "Numeric editorial weight unresolved; mandatory exact review, not a probability/source-confidence score.",
+      "unreserved_relation_string_example": "attaches_to"
+    },
+    {
+      "bidirectional_if_later_reviewed": 0,
+      "caption_exact_r3": "ajută la turnarea apei într-un recipient cu deschidere îngustă",
+      "claim_id": "palnie-water-instance",
+      "direction_requirement": "outgoing only",
+      "evidence_state": "supported_inference",
+      "existing_endpoint_id": "n_v4gas_apa",
+      "existing_endpoint_snapshot": {
+        "aliases": [
+          "ape",
+          "apele",
+          "apei",
+          "apelor"
+        ],
+        "category": "gastronomie",
+        "degree": 30,
+        "description": "Lichid de băut și ingredient de bază în gătit.",
+        "difficulty_tier": "easy",
+        "id": "n_v4gas_apa",
+        "label_ro": "Apă",
+        "node_type": "concept",
+        "salience": 0.968
+      },
+      "from_unreserved_id_example": "n_v1_5_household_palnie",
+      "is_distractor_if_later_reviewed": 0,
+      "predicate_enum_id_strength_approval": false,
+      "source_ids": [
+        "palnie-ikea-recheck",
+        "palnie-intuitext-inherited"
+      ],
+      "strength": null,
+      "strength_status": "Numeric editorial weight unresolved; mandatory exact review, not a probability/source-confidence score.",
+      "unreserved_relation_string_example": "helps_pour"
+    }
+  ],
+  "finite_future_gates": [
+    {
+      "id": "identity",
+      "scope": "All8677 current stored forms, four proposed label/plural surfaces, current normalized owners/464 projections, fuzzy/confirmation/suggestion/canonical-dedupe negative cases."
+    },
+    {
+      "id": "contexto",
+      "scope": "All265 current targets x2419old native IDs and464projections, then proposed inputs; directed/weighted/reverse/rank/closeness/temperature/clue/anchor deltas and all-node target flags; existing finite private ordinary Create/Get/play/attempt/daily/account-exclusion cases."
+    },
+    {
+      "id": "conexiuni",
+      "scope": "All245curated fairness/partition profiles and existing finite forced fallback difficulty/category/daily cases; category denominators, member order and RNG effects require separate comparison."
+    },
+    {
+      "id": "lant",
+      "scope": "All123curated route/options/hint/caption/par profiles and existing ordinary/mined/fallback queries; exact direction, meaningful alternatives and natural selection."
+    },
+    {
+      "id": "alchimie",
+      "scope": "All83authored core/route/par/projection records and existing finite mined cases; latent pair closure remains unapproved;68selectable books521recipes/27extension books49additions and snapshots preserved."
+    },
+    {
+      "id": "quick",
+      "scope": "85authored and336frozen-derived payload/rating/rank/order profiles;228Intrusul193Perechi; zero new rows."
+    },
+    {
+      "id": "terminal",
+      "scope": "Exact all180puzzle regeneration and existing finite easy/hard/options/hints/hops/undo/path/par/refusal/win/score cases; retain all old IDs."
+    },
+    {
+      "id": "history",
+      "scope": "World251concepts351recipes147discoveries, ninehistorical worlds1009savedprefixes; compatible versions/earned crafts/private bounds unchanged; strict finite inverse before/after receipts preserving old code/assertions/corpora, no test deselection or expected-hash repair."
+    },
+    {
+      "id": "native-source-assembly",
+      "scope": "Supported graph preflight/apply; rank/derive/mobile; all3KG-bound fresh raw/proposal/staging+installed audits/same-role finals; reserve/all4authority, eight-source export/rebuild, current/historical references, required race/vet and independent assembled review."
+    },
+    {
+      "id": "http-source-selector",
+      "scope": "Fresh independent1207-case current HTTP corpus bound to complete resulting eight-source dictionary, strict selector and old four corpora preserved;151smoke28assets when scheduled in integrated lane."
+    }
+  ],
+  "hard_blockers": [
+    {
+      "code": "scripts/apply_common_words_v24.py:_preflight",
+      "conclusion": "Exact current scope would be refused. No preflight executed. No runnable proposal/module instantiation or supported installation path cleared.",
+      "direction_rule": "Counts unique incident neighbors in either direction only for this floor. Parallel/reverse arcs and extra forms cannot add distinct neighbors.",
+      "id": "new-node-connectivity-floor",
+      "line_anchor": 605,
+      "required_same_category_neighbors": 2,
+      "required_unique_non_distractor_incident_neighbors": 4,
+      "static_rows": [
+        {
+          "incident": 1,
+          "incoming": 0,
+          "outgoing": 1,
+          "research_id": "v1-5-object-3",
+          "same_category": 1
+        },
+        {
+          "incident": 1,
+          "incoming": 0,
+          "outgoing": 1,
+          "research_id": "v1-5-object-2",
+          "same_category": 0
+        }
+      ]
+    },
+    {
+      "id": "qualified-slot-and-owner-resource-boundary",
+      "state": "No qualified toolchain slot or execution authorized in this stage. Owner restricts to light reading/editing. No Go/build/install/frontend/browser/WSL/pytest/simulation campaign."
+    },
+    {
+      "fields": [
+        "exact canonical node IDs",
+        "relation strings",
+        "numeric node salience",
+        "numeric edge strength",
+        "build version/note"
+      ],
+      "id": "unresolved-required-editorial-attributes",
+      "state": "Must be frozen and independently reviewed in an authorized later actual proposal; r3 acceptance does not cover these unspecified values."
+    }
+  ],
+  "input_bindings": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/content-pool/v1-5-small-objects/pool-r1.json": "e5e6f1039b8e66a9e2d708c82c69f56abacbaa4c6f5485491de6b3b0df366905",
+    "docs/content-pool/v1-5-small-objects/pool-r2.json": "be4aefe40feb05fbb4f96a79f3261e9135beab6e5ac23690f1d455bb7f9e87e6",
+    "docs/content-pool/v1-5-small-objects/pool.json": "72eb5ca30d91ab1e2e47119e520153b564c39953e264623d17f08879eb4e0cad",
+    "docs/reviews/v1-3-everyday-concepts/graph-proposal.json": "cd8bf5927d7dcc33e5207c99a06bb10a043c2b0220636265d3d6aecba6b938b3",
+    "docs/reviews/v1-4-time-links-and-predicates/graph-proposal.json": "6cae1819c10164f5181501eb86de75b32592af035f4198e642a43f63f798085d",
+    "docs/reviews/v1-4-time-links-and-predicates/graph-quality-impact.json": "a8d5bade1c59d8754b423a234797163aafcc736215926bcd2fe3ecd0840fc81f",
+    "docs/reviews/v1-4-time-links-and-predicates/history-reference-readiness.json": "7c214475d31b12f2b6020298511ab942a107b6949563959cb09c8b730e7ac0d2",
+    "docs/reviews/v1-4-time-links-and-predicates/native/world/candidate.json": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc",
+    "docs/reviews/v1-4-time-links-and-predicates/native/world/factual-review.json": "48a6cfcd0ad80a82f248b3cc532b724dba88da8059fdab763c5a5a61f4ac63a1",
+    "docs/reviews/v1-4-time-links-and-predicates/native/world/quality-review.json": "32f65cc95cd9d169bba1019d85ab545eaa70be6e17decca0d1fce0d80f3a2240",
+    "docs/reviews/v1-5-small-objects/frozen/breloc-r3.json": "43feab29f93a19c2853da98ea0ec6e742f0ef25c539d423c3807f768b25a5b31",
+    "docs/reviews/v1-5-small-objects/frozen/palnie-r3.json": "78eba8ead137edf5c10747c0959e713106c8457ef33e6829d5c2b22b3d00bf11",
+    "docs/reviews/v1-5-small-objects/identity-deck-screen.json": "a87587dfac0d26fb075c0f5428c1ac02028db29165696bd6595d76c3537eb94c",
+    "docs/reviews/v1-5-small-objects/research-accessories-stoppers.json": "a42b1fe781d378e56da494b07719b154ec3c83d030d7d48dbec900ee446f124d",
+    "docs/reviews/v1-5-small-objects/research-doom-forms.json": "afda4c26be524529aa4efa9d1d425a0d0c637e0d1691de377508af9c975ff1b8",
+    "docs/reviews/v1-5-small-objects/research-object-tools.json": "035e7e6cef18a73e661b11da7e12df76d4f647356f544cc571ae14b660c592fa",
+    "docs/reviews/v1-5-small-objects/windows-factual-review.json": "18018ee761dd8d3c485e2070a1d06cc3d615f60b3c807421ea91d3de04cad717",
+    "docs/reviews/v1-5-small-objects/windows-identity-screen.json": "7c46f350ad4a37ba9aafa29b788f2fa94ea08732d32de153f41c580f30354de1",
+    "docs/reviews/v1-5-small-objects/windows-quality-review.json": "4e7ec6d75369872f3a93b09c639060c8ae8241477d8bba08671da470b2c54222",
+    "docs/reviews/v1-5-small-objects/windows-research-packet.json": "7aab26dc7280ebd654f568f0974ecaefba25e63531d0072970da7e2f0a6060b2",
+    "docs/reviews/v1-5-small-objects/windows-sources.json": "2437a0f9fdfa94f181b510c6c09a58884dec4348126ca3bbba4189de5bf5459e",
+    "docs/reviews/v1-5-small-objects/windows-verification.json": "c341efd86edc88a2ed55b6c50dac5abd624c5bc6a9b16efee4a7433b4f1127d9",
+    "go-backend/go.mod": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50",
+    "go-backend/internal/content/bundled.json": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "go-backend/internal/contentbuild/build.go": "ccb575e94fa2615eb0712b6852b7e8936048457a84b67b2762d9d83da769c44b",
+    "go-backend/internal/contentrails/installed.go": "d4f465ecb24754730f2e5e6e45a441ff5bbbc146ac9cc53c50824446992dbefd",
+    "go-backend/internal/contentrails/review.go": "065af97857dba7e1c4f72b61a69b1948fa3b1b04fb4bbd276554d58094d9dfc8",
+    "go-backend/internal/contentrails/shape.go": "ee73f903a862de0601685e7bce1204e80d8235eb46befd1dabdd20ce806497de",
+    "go-backend/internal/contentrails/source.go": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+    "go-backend/internal/contentrails/sources/authored-v4.json": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "go-backend/internal/httpgolden/golden.go": "215499b02d12cc5da8a8ddf3349dce74b4a730da1e9a756b2742f0ee66d0d22f",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-4.json.gz": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "scripts/everyday_graph_v1_3_data.py": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+    "scripts/time_graph_v1_4_data.py": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a"
+  },
+  "installation_approval": false,
+  "module_contract_if_later_unblocked": {
+    "actual_editorial_proposal_sha256": null,
+    "actual_file_created": false,
+    "actual_module_sha256": null,
+    "constants": [
+      "NODES",
+      "EDGES",
+      "ALIASES",
+      "BUILD_VERSION",
+      "NOTE",
+      "NEW_NODE_IDS",
+      "GAME_ITEM_IDS",
+      "INTUITIVE_PAIRS",
+      "BEGINNER_BENCHMARK",
+      "DEFERRED_AMBIGUOUS_TERMS"
+    ],
+    "entrypoint": "callable build_nodes_and_edges() returns nodes/edges and optional node->aliases map",
+    "game_item_ids_requirement": "Empty; no world/recipe/round or hidden-target adoption in this scope. Preserve old beginner/deferred input benchmarks.",
+    "hazard": "Loader defaults bidirectional=1 and strength=0.5 if omitted. Separately authorized exact payload must explicitly freeze outgoing-only flags and reviewed weights.",
+    "native_rail_limit": "Native content validates/exports; pack-only import refuses graph; native catalog rails cover quick/world/extensions/reserve. No invented native shared-KG importer.",
+    "planned_path_only": "scripts/small_objects_graph_v1_5_data.py",
+    "required_exact_review_edge_fields": [
+      "src",
+      "dst",
+      "relation",
+      "label_ro",
+      "strength",
+      "is_distractor",
+      "bidirectional"
+    ],
+    "required_node_fields": [
+      "id",
+      "node_type",
+      "label_ro",
+      "category",
+      "description",
+      "salience"
+    ],
+    "supported_rail": "Retained scripts/apply_common_words_v24.py with --data-module and --dry-run. No review/digest CLI flags. Editorial reviews are separate prerequisites."
+  },
+  "native_raw_review": false,
+  "next_action": "Coordinator chooses retained adoption holds or newly authorized honest association research; a separately scheduled qualified slot and fresh exact reviews follow. Go availability alone does not clear incident4/samecategory2.",
+  "not_run": [
+    "Go",
+    "native CLI help",
+    "build/install",
+    "graph preflight/apply",
+    "Source5/candidate/proposal generation",
+    "graph/gameplay simulations",
+    "native source/export/operator/rail gates",
+    "race/vet",
+    "frontend/browser",
+    "WSL",
+    "pytest",
+    "PostgreSQL/model/GPU/image/release campaigns"
+  ],
+  "preserved_state": {
+    "held": 6,
+    "held_ids": [
+      "v1-5-object-1",
+      "v1-5-object-4",
+      "v1-5-object-5",
+      "v1-5-object-6",
+      "v1-5-object-7",
+      "v1-5-object-8"
+    ],
+    "installed": 0,
+    "installed_concept_form_synonym_relation_round_target_delta": 0,
+    "old_heartbeat": "PAUSED",
+    "researched": 2,
+    "selected": 0
+  },
+  "readable_blueprint": {
+    "path": "docs/reviews/v1-5-small-objects/PROPOSAL_BLUEPRINT.md",
+    "sha256": "4220067fcd91482983d99746dc4c13481987f4d090add95c6af073330ed63b18"
+  },
+  "revision": 1,
+  "schema": "v1-5-documentation-only-proposal-blueprint-v1",
+  "selection_approval": false,
+  "source5_if_later_unblocked": {
+    "actual_file_created": false,
+    "actual_source5_sha256": null,
+    "authority_boundary": "Only reviewed installed-entry drafts followed by explicit metadata-only source-chain/manifest/pin adoption after final runtime freeze. No Source5, code pin, authority or runtime edit in this stage.",
+    "creation_prerequisites": [
+      "New exact independently accepted graph module/proposal with sufficient honest connectivity and qualified toolchain.",
+      "Actual supported graph write and resulting KG digest; no guessed future input digest.",
+      "Retain all nineteen unique Source1–4 archive references/bytes and earlier source chain."
+    ],
+    "current_authority_sha256": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "fresh_catalog_bindings": "Fresh quick/world/extensions candidates bind actual resulting KG, rubric and Source5; quick core payload, world previous candidate and full extensions/runtime inputs remain exact. Both raw reviewers cover complete candidates; staging audits/finals bind current runtime/export.",
+    "outer_fields_only": [
+      "schema",
+      "version",
+      "base_commit",
+      "parent_source_sha256",
+      "legacy_sources",
+      "archives",
+      "quick",
+      "world",
+      "extensions"
+    ],
+    "parent_source_sha256_required": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "planned_path_only": "go-backend/internal/contentrails/sources/authored-v5.json",
+    "schema": "native-content-authored-v1",
+    "shared_kg_nodes_edges_fields_permitted": false,
+    "version_required": 5,
+    "world_predecessor": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/native/world/candidate.json",
+      "requirement": "Current V1.4 raw world candidate and its exact raw/final reviews; never use served artifact as authored input or older V1.3 predecessor.",
+      "sha256": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc"
+    }
+  },
+  "source8_baseline": {
+    "alchimie_discovery_world_v92.json": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+    "alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+    "board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+    "derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+    "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "target_constraint": {
+    "c3_incoming_floor": 5,
+    "degree_distinction": "Stored degree counts incident edges; runtime Degree counts outgoing playable neighbors; C3 counts unique incoming parents. The preflight incident4/samecategory2 guard is separate.",
+    "new_target_approval": false,
+    "runtime_responsive_floor": 40,
+    "runtime_reverse_reachable_floor": 120,
+    "static_newnode_incoming": 0,
+    "static_responsive": 0,
+    "static_reverse_reachable_size": 1
+  },
+  "valid_until": "Any r3/source/code/runtime/toolchain/scope dependency changes; rehash and repeat affected blueprint review."
+}

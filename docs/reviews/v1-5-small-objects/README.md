@@ -5,7 +5,7 @@ Valid until: baseline, candidate, source access or intended scope changes — re
 Bounded Windows research resumed from published `6026ad99d2babe8670490a71fc43a04fe9ea5f53`,
 carrying V1.4 local content baseline `8e2d4ece4147b3455a1fb1e6a40c5045f75398a5`.
 V1.4 acceptance/landing receipts remain historical. The old content heartbeat remains PAUSED.
-This session covers research preparation only; no concurrent loop, V1.6 or integration.
+This session covers research and a documentation-only proposal blueprint; no concurrent loop, V1.6 or integration.
 
 The [pool](../../content-pool/v1-5-small-objects/pool.json) remains eight leads:
 two researched (Breloc/Pâlnie r3), six held (Dop/Sită/Făraș/Nasture/Clanță/Strecurătoare),
@@ -44,9 +44,29 @@ its Source3 parent is `56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7
 All 19 unique Source1–4 archives, authority `43ae0363…`, bundle `d1d3f721…`
 and Source8/corpus remain unchanged. Installed concept/form/synonym/link/round/target increments are zero.
 
-Go is absent from this Windows PATH. Native doccheck, source/export/operator/rail, gameplay/HTTP,
-race/vet, frontend/browser, PostgreSQL and release campaigns were NOT RUN here.
-The [Linux toolchain receipt](toolchain-baseline.json) is historical, not Windows qualification.
-Next: coordinator schedules a qualified Go1.27.1 slot before any bounded supported module/proposal,
-fresh independent raw reviews, prospective all-game/terminal checks and installation rails.
-If a rail needs further honest associations, hold the candidate. No shipment quota or weakened gate.
+The accepted research r3 is preserved in local commit `b646d3dfe1d273eee6a811e7745a0b4d8adcc28f`.
+The [frozen proposal blueprint](PROPOSAL_BLUEPRINT.md) and its
+[exact machine-readable scope](windows-proposal-blueprint-r1.json) document only a hypothetical
+two-node/two-outgoing-link diff, required Source5 bindings and finite future all-game/terminal gates.
+[Independent blueprint factual review](windows-blueprint-factual-review.json) and
+[independent blueprint quality/source-effects review](windows-blueprint-quality-review.json)
+accept documentation only; [light verification](windows-blueprint-verification.json) records
+byte/document checks and execution limits. Research pools and earlier evidence remain unchanged.
+
+The retained graph transaction requires each new node to have four distinct incident neighbors
+and two in its own category. Breloc has 1/1; Pâlnie has 1/0. Static inspection predicts refusal;
+no preflight was executed. Go availability alone cannot clear this guard. Required numeric
+attributes, exact IDs/relation strings and future module/Source5 hashes remain unresolved.
+No executable module, actual proposal, Source5, selection, round/recipe approval or runtime edit exists.
+Future execution also needs an exact case manifest binding seeds, categories, case IDs, history
+vectors and acceptance criteria; this blueprint does not establish gate completeness.
+
+Go was absent from this Windows PATH during the earlier research stage. Native doccheck,
+source/export/operator/rail, gameplay/terminal/HTTP, race/vet, frontend/browser, PostgreSQL and
+release campaigns remain NOT RUN here. The current coordinator resource hold permits only
+completion of this open source/review handoff and a clean local worktree; all native gates are held.
+The [Linux toolchain receipt](toolchain-baseline.json) remains historical qualification.
+
+Next requires coordinator re-admission: retain adoption holds or authorize new honest association
+research and a newly frozen, independently reviewed exact scope before a qualified slot.
+No rail bypass, next wave, heartbeat resume, push, merge or deployment is authorized.

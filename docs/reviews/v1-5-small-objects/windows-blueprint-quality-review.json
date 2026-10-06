@@ -1,0 +1,240 @@
+{
+  "actual_proposal_install_blocker": {
+    "assessment": "The blueprint correctly blocks actual proposal/module generation and installation. Extra forms, parallel or reverse arcs do not supply distinct neighbors. No padding, category change, alternate importer or lowered guard is accepted.",
+    "code": "scripts/apply_common_words_v24.py:_preflight",
+    "execution_status": "NOT RUN",
+    "line_anchor": 605,
+    "required_same_category_neighbors": 2,
+    "required_unique_nondistractor_incident_neighbors": 4,
+    "rows": [
+      {
+        "conclusion": "Would be refused.",
+        "hypothesis": "Breloc to Cheie",
+        "incident": 1,
+        "incoming": 0,
+        "outgoing": 1,
+        "research_id": "v1-5-object-3",
+        "same_category": 1
+      },
+      {
+        "conclusion": "Would be refused.",
+        "hypothesis": "Pâlnie to Apă",
+        "incident": 1,
+        "incoming": 0,
+        "outgoing": 1,
+        "research_id": "v1-5-object-2",
+        "same_category": 0
+      }
+    ],
+    "separate_target_constraint": {
+      "c3_incoming_floor": 5,
+      "hypothetical_newnode_responsive_count": 0,
+      "hypothetical_newnode_reverse_reachable_size": 1,
+      "new_target_approval": false,
+      "runtime_responsive_floor": 40,
+      "runtime_reverse_reachable_floor": 120
+    },
+    "status": "STATIC_BLOCKER_CONFIRMED"
+  },
+  "approvals": {
+    "actual_proposal": false,
+    "deployment": false,
+    "documentation_only": true,
+    "installation": false,
+    "native_raw_review": false,
+    "new_round": false,
+    "new_target": false,
+    "push_merge": false,
+    "recipe": false,
+    "selection": false,
+    "source5": false
+  },
+  "authored_blueprint": false,
+  "binding_verification": {
+    "actual_module_exists": false,
+    "actual_source5_exists": false,
+    "all_declared_input_bindings_match": true,
+    "declared_input_bindings_checked": 45,
+    "frozen_document_hashes_match": true,
+    "mismatches": [],
+    "source8_baseline_files_match_bound_inputs": true
+  },
+  "bindings": {
+    "baseline_commit": "b646d3dfe1d273eee6a811e7745a0b4d8adcc28f",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/content-pool/v1-5-small-objects/pool.json": "72eb5ca30d91ab1e2e47119e520153b564c39953e264623d17f08879eb4e0cad",
+    "docs/reviews/v1-5-small-objects/PROPOSAL_BLUEPRINT.md": "4220067fcd91482983d99746dc4c13481987f4d090add95c6af073330ed63b18",
+    "docs/reviews/v1-5-small-objects/frozen/breloc-r3.json": "43feab29f93a19c2853da98ea0ec6e742f0ef25c539d423c3807f768b25a5b31",
+    "docs/reviews/v1-5-small-objects/frozen/palnie-r3.json": "78eba8ead137edf5c10747c0959e713106c8457ef33e6829d5c2b22b3d00bf11",
+    "docs/reviews/v1-5-small-objects/windows-proposal-blueprint-r1.json": "7941bbb757953f7d56d04116684c355c069108bd6a129c84809fbde9155f919e",
+    "docs/reviews/v1-5-small-objects/windows-quality-review.json": "4e7ec6d75369872f3a93b09c639060c8ae8241477d8bba08671da470b2c54222",
+    "docs/reviews/v1-5-small-objects/windows-research-packet.json": "7aab26dc7280ebd654f568f0974ecaefba25e63531d0072970da7e2f0a6060b2",
+    "go-backend/internal/content/bundled.json": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+    "go-backend/internal/contentrails/sources/authored-v4.json": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91"
+  },
+  "blocking_documentation_findings": [],
+  "checked_on": "2026-10-06",
+  "conditions": [
+    "Acceptance binds only the two frozen document hashes and their current inputs.",
+    "Keep actual proposal/module generation and installation blocked under the exact one-link scope.",
+    "Preserve two researched records, six holds and zero selected or installed records.",
+    "Any added relation, numeric attribute, subset adoption, category change or dependency change requires a new exact scope and affected independent review.",
+    "Fallback exposure outside the accepted scope remains a stop/hold condition; do not conceal it with runtime exclusions or taxonomy changes.",
+    "No native raw, staging, installed, source-chain, export, target, round, recipe, deployment or landing approval follows."
+  ],
+  "deferred_execution_gaps": [
+    {
+      "disposition": "Required before any actual proposal; does not block acceptance of this documentation-only blueprint.",
+      "gap": "No canonical IDs, reviewed relation enums, salience, strengths, build version, module or actual proposal digest exist.",
+      "id": "no-exact-payload"
+    },
+    {
+      "disposition": "A future exact execution manifest must bind those cases and acceptance criteria. This review grants no gate completeness or gameplay approval.",
+      "gap": "Several rows refer to existing finite scenarios without enumerating their exact seeds, categories, test-case IDs and history vectors in this blueprint.",
+      "id": "no-execution-case-manifest"
+    },
+    {
+      "disposition": "NOT RUN. Synthetic forced endpoint feedback must not be represented as naturally selected current gameplay.",
+      "gap": "Ordinary warmth, fallback exposure, clue behavior, fuzzy changes, weighted ranks and target bands remain unmeasured.",
+      "id": "no-observed-gameplay-deltas"
+    },
+    {
+      "disposition": "NOT RUN. Existing receipts remain historical precedents, not results for these hypotheses.",
+      "gap": "No prospective artifact regeneration, saved-prefix replay, archive reconstruction or current reference capture was performed.",
+      "id": "no-runtime-history-reconstruction"
+    }
+  ],
+  "finite_gate_coverage": [
+    {
+      "assessment": "Adequate documentation scope; no form installation or resolver invariance claimed.",
+      "coverage": "All 8677 current stored forms, four proposed surfaces, 464 projections, exact owners, fuzzy suggestions, confirmation and canonical deduplication.",
+      "execution_status": "NOT RUN",
+      "id": "identity"
+    },
+    {
+      "assessment": "Correctly includes rank, closeness, temperature, reverse reachability and clue effects. Outgoing-only leaves can change denominators and fallback selection even when old directed distances remain unchanged.",
+      "coverage": "265 targets by 2419 old native IDs: 641035 old native pairs; 265 by 464 projections: 122960 projection pairs; proposed inputs, all-node target flags and private ordinary play cases.",
+      "execution_status": "NOT RUN",
+      "id": "contexto"
+    },
+    {
+      "assessment": "Correctly includes category-size denominators, member ordering and RNG effects; curated invariance alone is insufficient.",
+      "coverage": "245 curated fairness and partition profiles plus existing finite forced fallback difficulty, category and daily cases.",
+      "execution_status": "NOT RUN",
+      "id": "conexiuni"
+    },
+    {
+      "assessment": "Degree-one leaves do not justify new rounds or meaningful alternatives. Caption and natural-selection requirements remain explicit.",
+      "coverage": "123 curated route, option, caption, hint and par profiles; existing ordinary curated, mined and fallback cases.",
+      "execution_status": "NOT RUN",
+      "id": "lant"
+    },
+    {
+      "assessment": "Latent shared-endpoint combinations remain unapproved. Incident-degree and node/edge snapshot changes require fresh extension checks.",
+      "coverage": "83 authored projection records, existing finite mined cases, 68 selectable books with 521 recipes, 27 extension books with 49 additions and exact snapshots.",
+      "execution_status": "NOT RUN",
+      "id": "alchimie"
+    },
+    {
+      "assessment": "Correctly requires preservation and zero additional rows.",
+      "coverage": "85 authored and 336 frozen derived payloads, ratings, ranks and order; 228 Intrusul and 193 Perechi records.",
+      "execution_status": "NOT RUN",
+      "id": "intrusul-perechi"
+    },
+    {
+      "assessment": "Exact regeneration remains required; conditional path preservation does not replace it.",
+      "coverage": "All 180 puzzle records and existing finite easy/hard options, hints, hops, undo, path, par, refusal, win and score cases.",
+      "execution_status": "NOT RUN",
+      "id": "terminal"
+    },
+    {
+      "assessment": "Correctly preserves old assertions and corpora and rejects expected-hash repair or test deselection as substitutes for preservation.",
+      "coverage": "251 concepts, 351 recipes, 147 discoveries; nine historical worlds and 1009 saved prefixes; compatible versions, earned crafts, privacy and bounds; strict finite inverses.",
+      "execution_status": "NOT RUN",
+      "id": "discovery-history"
+    },
+    {
+      "assessment": "Clearly deferred to separately authorized qualified execution; no native approval is implied.",
+      "coverage": "Supported graph transaction; rank, derive and mobile artifacts; three KG-bound catalog rails; reserve and four-rail authority; eight-source export, rebuilt tools, current and historical references, race/vet and assembled review.",
+      "execution_status": "NOT RUN",
+      "id": "native-source-assembly"
+    },
+    {
+      "assessment": "Correctly distinguishes the current four accepted source sets from a future Source5 transition.",
+      "coverage": "Fresh independent 1207-case current HTTP corpus, exact full-eight-source selector, historical corpora and scheduled 151-smoke/28-asset integrated coverage.",
+      "execution_status": "NOT RUN",
+      "id": "http-source-selector"
+    }
+  ],
+  "follow_on_scope_authorized": false,
+  "graph_and_source5_separation": {
+    "approval_transfer": false,
+    "assessment": "Correctly stated.",
+    "graph_transaction": "Retained common-word transaction; editorial factual and quality reviews are separate prerequisites. This blueprint is not its executable proposal.",
+    "preservation": "Source1–4 bytes and nineteen archive references remain required. The current V1.4 raw world candidate is the stated predecessor.",
+    "schema_hazard": "The edge loader defaults bidirectional to 1 and strength to 0.5. The blueprint correctly requires explicit outgoing-only flags and separately reviewed weights.",
+    "source5": "A later authored catalog source requires sequential version 5, exact Source4 parent, actual accepted resulting KG digest and fresh KG-bound catalog reviews.",
+    "source_schema_has_shared_kg_nodes_edges_fields": false,
+    "source_schema_reference": "go-backend/internal/contentrails/shape.go:36"
+  },
+  "not_run": [
+    "Executable preflight or graph apply",
+    "Proposal, module or Source5 generation",
+    "Graph or gameplay simulations",
+    "Native builds, installs, exports or audits",
+    "Tests, race or vet",
+    "Frontend or browser",
+    "WSL or pytest",
+    "Model, GPU or image work",
+    "Source campaign"
+  ],
+  "review_scope": "Exact frozen blueprint; light reads and hashing only. No renewed source campaign or executable verification.",
+  "reviewer": "/root/quality_review",
+  "role": "independent quality and static source-effects reviewer",
+  "schema": "v1-5-documentation-only-blueprint-quality-review-v1",
+  "scope_assessment": {
+    "accepted": [
+      "Breloc remains the physical key accessory, with breloc/brelocuri only.",
+      "Pâlnie remains the household liquid-transfer tool, with pâlnie/pâlnii only.",
+      "Each hypothetical relation is outgoing only; explicit nonbidirectional and nondistractor flags are required.",
+      "Tentative IDs and relation strings are unreserved examples; salience and strength remain unresolved.",
+      "Counterfactual counts and incident-degree increments are clearly distinguished from supported apply receipts.",
+      "Two records remain researched and six remain held; selection and installation remain zero.",
+      "No new target, round, recipe, world concept, runtime exclusion or category workaround is approved."
+    ],
+    "retained_claims": [
+      {
+        "blueprint_disposition": "Retained without expansion.",
+        "claim_id": "breloc-physical-accessory",
+        "research_state": "supported"
+      },
+      {
+        "blueprint_disposition": "Specific physical attachment caption retained; enum and numeric strength unapproved.",
+        "claim_id": "breloc-key-attachment",
+        "research_state": "supported"
+      },
+      {
+        "blueprint_disposition": "Household transfer sense retained without material, filtering or purification claims.",
+        "claim_id": "palnie-household-liquid-transfer",
+        "research_state": "supported"
+      },
+      {
+        "blueprint_disposition": "Water remains an explicitly inferred liquid instance; no recipe or target approval.",
+        "claim_id": "palnie-water-instance",
+        "research_state": "supported_inference"
+      }
+    ],
+    "rubric_disposition": {
+      "A1_A2": "Earlier bounded recognition and relevance acceptance retained; recall and enjoyment remain unmeasured.",
+      "A3_A4": "Supported predicates and explicit inference remain qualified; unspecified native attributes are not approved.",
+      "A5": "Original descriptions and captions remain sketches; no copied recipe or source passage is introduced.",
+      "A6": "Novel concept/form hypotheses are distinguished from synonyms and installed growth.",
+      "A7": "The two specific associations remain researched; one association does not supply sufficient connectivity or round quality."
+    }
+  },
+  "verdict": "ACCEPT_DOCUMENTATION_ONLY_WITH_ACTUAL_PROPOSAL_INSTALL_BLOCKED",
+  "writes_performed": false
+}
