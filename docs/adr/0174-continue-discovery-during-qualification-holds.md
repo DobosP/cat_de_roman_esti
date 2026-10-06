@@ -3,7 +3,7 @@
 Valid until: the owner changes the continuous discovery request — then treat as history.
 
 Date: 2026-10-06
-Status: accepted
+Status: partially superseded by ADR-0175 for the stopped Windows loop and Linux source handoff
 
 ## Decision
 

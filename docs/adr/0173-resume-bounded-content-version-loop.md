@@ -3,7 +3,7 @@
 Valid until: a later owner decision supersedes the standing loop request — then treat as history.
 
 Date: 2026-10-06
-Status: accepted; discovery continuation clarified by ADR-0174
+Status: partially superseded by ADR-0175 for the stopped Windows loop and Linux source handoff; discovery continuation clarified by ADR-0174
 
 ## Decision
 
