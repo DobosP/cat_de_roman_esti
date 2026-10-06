@@ -1,38 +1,52 @@
 # V1.5 — small objects and truthful everyday links
 
-Valid until: baseline/evidence/intended scope changes — refresh affected checks.
+Valid until: baseline, candidate, source access or intended scope changes — refresh affected checks.
 
-Baseline8e2d4ece4147b3455a1fb1e6a40c5045f75398a5; V1.4 content672d656 independently
-accepted63b1531d and locally landedfd09b3b/documented8e2d4ec. Its verified-merged
-branch/worktree/scratch are cleaned after exact SDK preservation into this own scratch.
+Bounded Windows research resumed from published `6026ad99d2babe8670490a71fc43a04fe9ea5f53`,
+carrying V1.4 local content baseline `8e2d4ece4147b3455a1fb1e6a40c5045f75398a5`.
+V1.4 acceptance/landing receipts remain historical. The old content heartbeat remains PAUSED.
+This session covers research preparation only; no concurrent loop, V1.6 or integration.
 
-Phase: completed finite research wrap, parked for the owner Windows switch. [Pool](../../content-pool/v1-5-small-objects/pool.json) has eight leads: two researched(Breloc,Pâlnie) and six held(Dop,Sită,Făraș,Nasture,Clanță,Strecurătoare). Earlier kickoff four-idea/four-held records remain in pool-r1.json.
-No module/proposal/graph/source5/corpus/runtime data or approval is installed.
+The [pool](../../content-pool/v1-5-small-objects/pool.json) remains eight leads:
+two researched (Breloc/Pâlnie r3), six held (Dop/Sită/Făraș/Nasture/Clanță/Strecurătoare),
+zero selected or integrated. [Previous exact pool](../../content-pool/v1-5-small-objects/pool-r2.json)
+preserves the published r2 bytes; the original r1 and four inherited source/screen reports remain exact.
 
-An original [museum description](https://muzeul-satului.ro/despre-noi/patrimoniul-muzeului/expozitia-permanenta-in-aer-liber/oloinita-zlatna/)
-records sifting oilseed meal; it does not establish ordinary wheat-flour/bread recipes.
-The completed original DOOM3 UI checks retain12 exact observed forms; INP funnel inventory and original school chemistry PDF access gaps are resolved in the frozen tool report. Dated clothing screenshot/access limits, semantic/subtype questions and unapproved regional synonyms remain. Source facts and occurrence evidence grant no alias, target, game or installation approval.
+The [frozen packet](windows-research-packet.json) binds the exact two snapshots, four claim IDs,
+rubric, fresh [sources](windows-sources.json), current [identity screen](windows-identity-screen.json),
+Source4 parent and all eight current source hashes. Its research-only review vocabulary is separate
+from native importer raw judgments, dossiers, promotion and installed acceptance.
 
-Own qualified Go1.27.1 and allsix critical archive/tool hashes match preservedV1.4.
-[Fresh baseline](toolchain-baseline.json): offline modules/native source/export/default
-currentallfour authority/docs GREEN. No foreign scratch dependency. Source4 SHA444e4bc1…
-and authority43ae0363… remain current; any Source5 must name that exact Source4parent,
-retain every prior archive and refresh every affected native/current-reference gate.
+- [Breloc r3](frozen/breloc-r3.json): physical key accessory; only the optional
+  Breloc→Cheie attachment is in scope. Original manufacturer/retailer use, fresh original DOOM
+  morphology and independent Romanian media before 2010/current support investigated recognition.
+  Ghiozdan, materials, jewelry/watch, credentials and synonym claims remain outside the packet.
+- [Pâlnie r3](frozen/palnie-r3.json): household liquid-transfer tool; Pâlnie→Apă is expressly
+  a liquid-instance inference. Fresh household documentation, official educational occurrence
+  and current national-media use support investigation. The failed fresh Windows manual access
+  remains qualified inherited evidence. Filtering/purification, specialized separation, wood,
+  acoustic/metaphorical senses and tolcer aliases are excluded.
+- Only the witnessed lemma and plural are future form hypotheses for each concept.
+  Extra morphology supplies no graph floor, synonym count or gameplay growth.
+- Both sketches concern a future nonwinning typed guess or optional outward vocabulary hop.
+  A single anchor is thin connectivity: no hidden target, five-incoming floor, complete route,
+  unique partition, pair set, recipe, difficulty band or enjoyment approval follows.
 
-Completed identity/deck/owner/rejection and primary-source research is bound in the final checkpoint. After explicit owner resume, narrow/select only exact independently worthy claims and run the supported proposal/graph/native rails and critique rubric. The five spare
-world slots are a capacity limit, not a shipment quota. Inherited fallback and four held
-clock exactforms remain open. Sessions/privacy/historical saves/thresholds remain fixed.
-After fully green independent assembled review/local landing, start next sequentialwave.
-No push/deployment; human stop/pause overrides the continuing heartbeat.
+[Independent factual review](windows-factual-review.json) and
+[independent quality review](windows-quality-review.json) are bound to the frozen packet.
+[Windows verification](windows-verification.json) records exact synthetic checks, doc/budget/whitespace
+results and execution limits. The earlier [checkpoint](research-checkpoint.json),
+[wrap review](research-wrap-review.json) and [Windows handover](WINDOWS_HANDOVER.md) are historical
+pre-resume records; their parked phase and earlier pool bindings do not approve r3.
 
-Finite research checkpoint for the owner device switch: [primary forms](research-doom-forms.json),
-[tool sources](research-object-tools.json), [accessory/stopper sources](research-accessories-stoppers.json)
-and [independent identity/deck screen](identity-deck-screen.json) are frozen. [Checkpoint](research-checkpoint.json)
-records2researched/6held,0selected/installed. Breloc has the strongest two qualified
-attachment leads; Pâlnie's liquid-transfer role remains conditional and its wood link
-is quality-held. Dop/Sită retain sense/anchor/overlap holds. Făraș is an existing approved
-target and reused pair; its old rejection is history, not a current floor failure.
+Current Source4 is `444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1`;
+its Source3 parent is `56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc`.
+All 19 unique Source1–4 archives, authority `43ae0363…`, bundle `d1d3f721…`
+and Source8/corpus remain unchanged. Installed concept/form/synonym/link/round/target increments are zero.
 
-The owner asked to stop new work for a Windows switch. This chat's content heartbeat is
-PAUSED; no automatic resume, new wave or data installation. [Portable continuation](WINDOWS_HANDOVER.md)
-has branch/baseline, actual publication limits, retained evidence and next gates.
+Go is absent from this Windows PATH. Native doccheck, source/export/operator/rail, gameplay/HTTP,
+race/vet, frontend/browser, PostgreSQL and release campaigns were NOT RUN here.
+The [Linux toolchain receipt](toolchain-baseline.json) is historical, not Windows qualification.
+Next: coordinator schedules a qualified Go1.27.1 slot before any bounded supported module/proposal,
+fresh independent raw reviews, prospective all-game/terminal checks and installation rails.
+If a rail needs further honest associations, hold the candidate. No shipment quota or weakened gate.

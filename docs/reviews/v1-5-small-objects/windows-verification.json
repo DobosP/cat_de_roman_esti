@@ -1,0 +1,433 @@
+{
+  "baseline_commit": "6026ad99d2babe8670490a71fc43a04fe9ea5f53",
+  "budgets": {
+    "AGENTS.md": {
+      "limit": 80,
+      "lines": 80
+    },
+    "CLAUDE.md": {
+      "limit": 12,
+      "lines": 8
+    },
+    "docs/STATUS.md": {
+      "limit": 120,
+      "lines": 120
+    },
+    "docs/agent-map.md": {
+      "limit": 60,
+      "lines": 49
+    },
+    "docs/agent-testing.md": {
+      "limit": 80,
+      "lines": 76
+    }
+  },
+  "bundle_sha256": "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406dabcfd54c2",
+  "changed_files": [
+    "docs/STATUS.md",
+    "docs/content-pool/v1-5-small-objects/pool-r2.json",
+    "docs/content-pool/v1-5-small-objects/pool.json",
+    "docs/reviews/v1-5-small-objects/README.md",
+    "docs/reviews/v1-5-small-objects/frozen/breloc-r3.json",
+    "docs/reviews/v1-5-small-objects/frozen/palnie-r3.json",
+    "docs/reviews/v1-5-small-objects/windows-factual-review.json",
+    "docs/reviews/v1-5-small-objects/windows-identity-screen.json",
+    "docs/reviews/v1-5-small-objects/windows-quality-review.json",
+    "docs/reviews/v1-5-small-objects/windows-research-packet.json",
+    "docs/reviews/v1-5-small-objects/windows-sources.json",
+    "docs/reviews/v1-5-small-objects/windows-verification.json"
+  ],
+  "checked_on": "2026-10-06",
+  "checker_sha256": "6745ae4dbf7f4b57e671b7ad887571c9722a416f73a80f5c3902a5a6a8f0d10e",
+  "checks": [
+    {
+      "name": "frozen exact packet",
+      "status": "PASS"
+    },
+    {
+      "name": "baseline",
+      "status": "PASS"
+    },
+    {
+      "name": "binding current_pool",
+      "status": "PASS"
+    },
+    {
+      "name": "binding identity",
+      "status": "PASS"
+    },
+    {
+      "name": "binding pool_r2",
+      "status": "PASS"
+    },
+    {
+      "name": "binding rubric",
+      "status": "PASS"
+    },
+    {
+      "name": "binding sources",
+      "status": "PASS"
+    },
+    {
+      "name": "prior pool exact original bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "prior pool matches baseline",
+      "status": "PASS"
+    },
+    {
+      "name": "finite pool budget",
+      "status": "PASS"
+    },
+    {
+      "name": "states stay two researched six held",
+      "status": "PASS"
+    },
+    {
+      "name": "held record exact v1-5-object-1",
+      "status": "PASS"
+    },
+    {
+      "name": "held record exact v1-5-object-4",
+      "status": "PASS"
+    },
+    {
+      "name": "held record exact v1-5-object-5",
+      "status": "PASS"
+    },
+    {
+      "name": "held record exact v1-5-object-6",
+      "status": "PASS"
+    },
+    {
+      "name": "held record exact v1-5-object-7",
+      "status": "PASS"
+    },
+    {
+      "name": "held record exact v1-5-object-8",
+      "status": "PASS"
+    },
+    {
+      "name": "snapshot digest v1-5-object-2",
+      "status": "PASS"
+    },
+    {
+      "name": "snapshot exact pool revision v1-5-object-2",
+      "status": "PASS"
+    },
+    {
+      "name": "minimal lemma plural v1-5-object-2",
+      "status": "PASS"
+    },
+    {
+      "name": "one relation v1-5-object-2",
+      "status": "PASS"
+    },
+    {
+      "name": "no selected lifecycle v1-5-object-2",
+      "status": "PASS"
+    },
+    {
+      "name": "snapshot digest v1-5-object-3",
+      "status": "PASS"
+    },
+    {
+      "name": "snapshot exact pool revision v1-5-object-3",
+      "status": "PASS"
+    },
+    {
+      "name": "minimal lemma plural v1-5-object-3",
+      "status": "PASS"
+    },
+    {
+      "name": "one relation v1-5-object-3",
+      "status": "PASS"
+    },
+    {
+      "name": "no selected lifecycle v1-5-object-3",
+      "status": "PASS"
+    },
+    {
+      "name": "source IDs unique",
+      "status": "PASS"
+    },
+    {
+      "name": "claim sources palnie-household-liquid-transfer",
+      "status": "PASS"
+    },
+    {
+      "name": "claim sources palnie-water-instance",
+      "status": "PASS"
+    },
+    {
+      "name": "factual access and licence records v1-5-object-2",
+      "status": "PASS"
+    },
+    {
+      "name": "claim sources breloc-physical-accessory",
+      "status": "PASS"
+    },
+    {
+      "name": "claim sources breloc-key-attachment",
+      "status": "PASS"
+    },
+    {
+      "name": "factual access and licence records v1-5-object-3",
+      "status": "PASS"
+    },
+    {
+      "name": "water inference stays explicit",
+      "status": "PASS"
+    },
+    {
+      "name": "old report exact identity-deck-screen.json",
+      "status": "PASS"
+    },
+    {
+      "name": "old report exact research-accessories-stoppers.json",
+      "status": "PASS"
+    },
+    {
+      "name": "old report exact research-doom-forms.json",
+      "status": "PASS"
+    },
+    {
+      "name": "old report exact research-object-tools.json",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged source4",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged authority",
+      "status": "PASS"
+    },
+    {
+      "name": "unchanged bundle",
+      "status": "PASS"
+    },
+    {
+      "name": "source4 exact source3 parent",
+      "status": "PASS"
+    },
+    {
+      "name": "19 unique archives",
+      "status": "PASS"
+    },
+    {
+      "name": "all prior archives bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "all eight source pins equal",
+      "status": "PASS"
+    },
+    {
+      "name": "source8 bytes alchimie_discovery_world_v92.json",
+      "status": "PASS"
+    },
+    {
+      "name": "source8 bytes alchimie_recipe_extensions_v92.json",
+      "status": "PASS"
+    },
+    {
+      "name": "source8 bytes board_rankings_v37.json",
+      "status": "PASS"
+    },
+    {
+      "name": "source8 bytes derived_catalog_v38.json",
+      "status": "PASS"
+    },
+    {
+      "name": "source8 bytes games_pack.json",
+      "status": "PASS"
+    },
+    {
+      "name": "source8 bytes kg_sample.json",
+      "status": "PASS"
+    },
+    {
+      "name": "source8 bytes quick_games_v92.json",
+      "status": "PASS"
+    },
+    {
+      "name": "source8 bytes release_reserve_v1.json",
+      "status": "PASS"
+    },
+    {
+      "name": "current source8 corpus bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "1207 frozen cases not execution",
+      "status": "PASS"
+    },
+    {
+      "name": "seven witnessed forms checked not installed",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact owner pâlnie",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact owner pâlnia",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact owner pâlniei",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact owner pâlnii",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact owner pâlniile",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact owner breloc",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact owner brelocuri",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact deck/tombstone leaf games_pack.json",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact deck/tombstone leaf quick_games_v92.json",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact deck/tombstone leaf derived_catalog_v38.json",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact deck/tombstone leaf conexiuni_rejection_tombstones.json",
+      "status": "PASS"
+    },
+    {
+      "name": "no exact deck/tombstone leaf lant_rejection_tombstones.json",
+      "status": "PASS"
+    },
+    {
+      "name": "no terminal-puzzle lexical exposure",
+      "status": "PASS"
+    },
+    {
+      "name": "review exact packet factual",
+      "status": "PASS"
+    },
+    {
+      "name": "review unchanged bindings factual",
+      "status": "PASS"
+    },
+    {
+      "name": "review four claim coverage factual",
+      "status": "PASS"
+    },
+    {
+      "name": "research only verdict factual",
+      "status": "PASS"
+    },
+    {
+      "name": "review snapshot coverage factual",
+      "status": "PASS"
+    },
+    {
+      "name": "review exact packet quality",
+      "status": "PASS"
+    },
+    {
+      "name": "review unchanged bindings quality",
+      "status": "PASS"
+    },
+    {
+      "name": "review four claim coverage quality",
+      "status": "PASS"
+    },
+    {
+      "name": "research only verdict quality",
+      "status": "PASS"
+    },
+    {
+      "name": "review snapshot coverage quality",
+      "status": "PASS"
+    },
+    {
+      "name": "only bounded research/documentation changes",
+      "status": "PASS"
+    },
+    {
+      "name": "zero installed growth and zero selections",
+      "status": "PASS"
+    },
+    {
+      "name": "budget AGENTS.md",
+      "status": "PASS"
+    },
+    {
+      "name": "budget CLAUDE.md",
+      "status": "PASS"
+    },
+    {
+      "name": "budget docs/STATUS.md",
+      "status": "PASS"
+    },
+    {
+      "name": "budget docs/agent-map.md",
+      "status": "PASS"
+    },
+    {
+      "name": "budget docs/agent-testing.md",
+      "status": "PASS"
+    },
+    {
+      "name": "whitespace",
+      "status": "PASS"
+    }
+  ],
+  "documentation_reference_gate": {
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "C:/Users/Paul Work/personal_repos/agent-ops/scripts/check_docs.py",
+      "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__v1-5-windows-research"
+    ],
+    "dead_links": 0,
+    "exit_code": 0,
+    "files": 46,
+    "native_doccheck": "NOT RUN: Go absent; Python reference plus explicit budget check only.",
+    "orphans": 0,
+    "retired_verbs": 0,
+    "stale_terms": 0
+  },
+  "execution_limit": "Stdlib exact bytes/archive/snapshot/owner/exposure/budget checks only; no native export/HTTP execution/engine/gameplay/Source5/promotion qualification.",
+  "independent_review_sha256": {
+    "factual": "18018ee761dd8d3c485e2070a1d06cc3d615f60b3c807421ea91d3de04cad717",
+    "quality": "4e7ec6d75369872f3a93b09c639060c8ae8241477d8bba08671da470b2c54222"
+  },
+  "native_gates": {
+    "reason": "Go absent from Windows PATH; no qualified Windows Go1.27.1 slot or full campaigns scheduled. Inherited Linux gates remain historical.",
+    "status": "NOT RUN"
+  },
+  "packet_sha256": "7aab26dc7280ebd654f568f0974ecaefba25e63531d0072970da7e2f0a6060b2",
+  "passed": 88,
+  "python_version": "3.11.15",
+  "review_relative_links_exist": true,
+  "review_serialization_verification": {
+    "factual": "Reviewer independently reread exact saved JSON SHA18018ee761dd8d3c485e2070a1d06cc3d615f60b3c807421ea91d3de04cad717 and confirmed faithful result, no scope error.",
+    "quality": "Reviewer independently reread exact saved JSON SHA4e7ec6d75369872f3a93b09c639060c8ae8241477d8bba08671da470b2c54222 and confirmed faithful result, no scope error."
+  },
+  "schema": "v1-5-windows-research-synthetic-verification-v1",
+  "scope_note": "No architectural or runtime decision was made; research lifecycle remains researched/held under ADR-0156 and its existing rails.",
+  "scratch_checker": "C:/Users/Paul Work/personal_repos/_temp/codex__v1-5-windows-research/verify_research.py",
+  "source4_sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1"
+}

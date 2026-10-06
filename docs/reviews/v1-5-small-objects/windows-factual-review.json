@@ -1,0 +1,109 @@
+{
+  "actionable_factual_corrections": [],
+  "bindings": {
+    "authority_sha256": "43ae03635028f1d9a1dd7c5211d20b365aa740da10a88339fdf680addce55047",
+    "baseline_commit": "6026ad99d2babe8670490a71fc43a04fe9ea5f53",
+    "current_pool_sha256": "72eb5ca30d91ab1e2e47119e520153b564c39953e264623d17f08879eb4e0cad",
+    "identity_sha256": "7c46f350ad4a37ba9aafa29b788f2fa94ea08732d32de153f41c580f30354de1",
+    "pool_r2_sha256": "be4aefe40feb05fbb4f96a79f3261e9135beab6e5ac23690f1d455bb7f9e87e6",
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "source4_sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+    "sources_sha256": "2437a0f9fdfa94f181b510c6c09a58884dec4348126ca3bbba4189de5bf5459e"
+  },
+  "checked_on": "2026-10-06",
+  "claim_reviews": [
+    {
+      "id": "palnie-household-liquid-transfer",
+      "reason": "Original IKEA beverage-transfer function and narrowing outlet support the scoped household definition. Neither exclusive liquid use nor bare filtering is asserted.",
+      "source_ids": [
+        "palnie-ikea-recheck"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "id": "palnie-water-instance",
+      "reason": "Water is an ordinary liquid instance. IKEA does not expressly instruct water pouring; the snapshot preserves that inference and excludes filtration, purification and separation.",
+      "source_ids": [
+        "palnie-ikea-recheck"
+      ],
+      "verdict": "supported_inference"
+    },
+    {
+      "id": "breloc-physical-accessory",
+      "reason": "Original maker and independent retailer document physical key accessories. Jewelry/watch, credentials and figurative uses are excluded.",
+      "source_ids": [
+        "breloc-lego-recheck",
+        "breloc-action-recheck"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "id": "breloc-key-attachment",
+      "reason": "Optional key attachment is expressly documented and independently corroborated. The caption makes no universal-material or reverse-edge assertion.",
+      "source_ids": [
+        "breloc-lego-recheck",
+        "breloc-action-recheck"
+      ],
+      "verdict": "supported"
+    }
+  ],
+  "complete_claim_coverage": "4/4 exact packet claim IDs",
+  "independent_of_candidate_source_authorship": true,
+  "installation_approval": false,
+  "license_handling": "Commercial/media/manual open reuse permission is not claimed. Original factual paraphrases only; DOOM homepage licence statement does not settle later reuse.",
+  "native_raw_importer_review": false,
+  "packet": {
+    "path": "docs/reviews/v1-5-small-objects/windows-research-packet.json",
+    "sha256": "7aab26dc7280ebd654f568f0974ecaefba25e63531d0072970da7e2f0a6060b2"
+  },
+  "preservation_checks": {
+    "all_packet_dependencies_match": true,
+    "inherited_reports_match": true,
+    "six_held_records_deep_equal_pool_r2": true,
+    "snapshots_equal_current_pool_records": true,
+    "source4_bundle_authority_unchanged": true
+  },
+  "promotion_authority": false,
+  "recognition": "Fresh national-media and official educational occurrence facts match source records. They establish wording/context, not recall rate, enjoyment or target difficulty.",
+  "recorded_by": "/root from the reviewer's complete read-only result",
+  "reviewer": "/root/identity_audit",
+  "schema": "v1-5-independent-research-factual-review-v1",
+  "scope": "Independent factual review of frozen research only; not a native raw importer review, promotion, ready/selected transition or assembled installation acceptance.",
+  "snapshots": [
+    {
+      "id": "v1-5-object-2",
+      "revision": 3,
+      "sha256": "78eba8ead137edf5c10747c0959e713106c8457ef33e6829d5c2b22b3d00bf11"
+    },
+    {
+      "id": "v1-5-object-3",
+      "revision": 3,
+      "sha256": "43feab29f93a19c2853da98ea0ec6e742f0ef25c539d423c3807f768b25a5b31"
+    }
+  ],
+  "source_access": {
+    "accessed_on": "2026-10-06",
+    "fresh_original_reads": [
+      "breloc-lego-recheck",
+      "breloc-action-recheck",
+      "breloc-digi24-2022",
+      "palnie-ikea-recheck",
+      "palnie-education-2022-recheck",
+      "palnie-protv-2026",
+      "palnie-laura-sava-2007"
+    ],
+    "limits": [
+      "Exact DOOM entry reads failed; IAB unavailable and browser inventory empty for this reviewer. No fresh rendered-form verification; exact forms remain the source researchers' observations.",
+      "DOOM original homepage independently confirms electronic CC BY-NC-SA 4.0 statement; installation/reuse applicability remains a separate gate.",
+      "Intuitext original PDF failed here; preserved local-PDF/text/render inspection and PDF hash are inherited evidence, not independently verified PDF bytes/pages.",
+      "GSP original article read failed here; source researcher's rendered body/date inspection inherited. Indexed comments were not body evidence.",
+      "Laura Sava original page confirms displayed 2007 date and funnel-as-mold wording; no independent archived 2007 wording."
+    ],
+    "resolved_access": [
+      "ProTV initial URL failed; exact original indexed result yielded full article."
+    ]
+  },
+  "tests": "Read-only binding/JSON/owner/exposure/source checks; no native or gameplay execution.",
+  "verdict": "accept_researched_only",
+  "writes": 0
+}
