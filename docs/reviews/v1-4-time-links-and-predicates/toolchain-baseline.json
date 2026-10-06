@@ -1,0 +1,126 @@
+{
+  "schema": "v1-4-task-owned-native-baseline-qualification-v1",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "qualified_go_version": "go1.27.1 linux/amd64",
+  "own_sdk_path": "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+  "own_env": "/home/dobo/work/_temp/codex__content-v1-4/qualified-env.sh",
+  "toolchain_preservation": {
+    "schema": "v1-4-task-owned-qualified-sdk-preservation-v1",
+    "from_verified_merged_task": "codex/content-v1-3",
+    "qualified_parent_receipt": "docs/reviews/v1-3-everyday-concepts/toolchain-prerequisite.json",
+    "exact_copied_hashes": [
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-4/tools/go1.27.1.linux-amd64.tar.gz",
+        "sha256": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/go",
+        "sha256": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624"
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-4/tools/go/bin/gofmt",
+        "sha256": "86dd91f69254432a37ca365f964720677040fd6f049a412c23e25f8b3812f342"
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-4/tools/go/pkg/tool/linux_amd64/compile",
+        "sha256": "3780fc07130d6d45096373acf062cc316940d253e2a1d892ece03a3bdd0d21d4"
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-4/tools/go/pkg/tool/linux_amd64/link",
+        "sha256": "a29ac5e8f64111b0b5c5d31e452f18abf7ee79f44b421081b5509c8939d92ba9"
+      },
+      {
+        "path": "/home/dobo/work/_temp/codex__content-v1-4/tools/go/VERSION",
+        "sha256": "25eb74b09036e1ad894fb63b86cb0f0ee53342df8d2e2e860da4ff5079607758"
+      }
+    ],
+    "foreign_task_scratch_dependency": false,
+    "fresh_v1_4_baseline_gates_pending": true
+  },
+  "offline_module_verification": "all modules verified",
+  "native_source_validation": "GREEN",
+  "native_export_current": "GREEN",
+  "current_four_rail_authority": {
+    "ok": true,
+    "rails": [
+      {
+        "rail": "quick",
+        "ok": true,
+        "rebuilt_sha256": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+        "artifact_sha256": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc"
+      },
+      {
+        "rail": "world",
+        "ok": true,
+        "rebuilt_sha256": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+        "artifact_sha256": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc"
+      },
+      {
+        "rail": "extensions",
+        "ok": true,
+        "rebuilt_sha256": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+        "artifact_sha256": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc"
+      },
+      {
+        "rail": "reserve",
+        "ok": true,
+        "rebuilt_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "artifact_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6"
+      }
+    ]
+  },
+  "native_docs": {
+    "files": 46,
+    "dead_links": [],
+    "stale_terms": [],
+    "retired_verbs": [],
+    "orphans": [],
+    "budgets": []
+  },
+  "artifacts": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+    "go-backend/internal/content/bundled.json": "b9189ef3befe94978dc2ddfc180f463a34556982178ee378f679cc83bc2cea6f",
+    "go-backend/internal/contentrails/sources/authored-v3.json": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "8d9245f861bba03718213900984d2f2829d4d584d43bac701e5c3167ded623bf"
+  },
+  "new_v1_4_installed_data": 0,
+  "logs": {
+    "baseline-mod-verify.log": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/baseline-mod-verify.log.gz",
+      "uncompressed_sha256": "b4537ed75f533f993f371954de47e42a793b8e5b0587577de7e27fb3e50696bd",
+      "gzip_sha256": "de2b50035a2908a2968b74a16db077fa5f22455175d1b8b48a94f60d5e4c9623"
+    },
+    "baseline-source.log": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/baseline-source.log.gz",
+      "uncompressed_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+      "gzip_sha256": "c44ff1606465369c64c07614344b591441dea9df2f9bcede5cabe9e060755276"
+    },
+    "baseline-export.log": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/baseline-export.log.gz",
+      "uncompressed_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+      "gzip_sha256": "77e30add72a91b123efe46af49001812755b316fef1c8a372b1f3bf61ef46eed"
+    },
+    "baseline-authority.json": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/baseline-authority.json.gz",
+      "uncompressed_sha256": "928ce624add7618067dbc30e2053c11eb6a3b0d7295c64b56368d8ab1c43650d",
+      "gzip_sha256": "f2f8bb6d13d06f9ce3ec067a0510bb6e7a1d38b214ea2958582f48fe6da517e7"
+    },
+    "baseline-docs.json": {
+      "path": "docs/reviews/v1-4-time-links-and-predicates/logs/baseline-docs.json.gz",
+      "uncompressed_sha256": "52613d0a5ee6aa07db806b02e81b5741d8f5f0146881b1861baf513ae4d15f3e",
+      "gzip_sha256": "3ddbc3e750312bfc441e7da992605b60064803a1a44a7f853974e3a2223fd32b"
+    }
+  }
+}

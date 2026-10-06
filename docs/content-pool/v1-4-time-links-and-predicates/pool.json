@@ -1,0 +1,925 @@
+{
+  "schema_version": 1,
+  "theme": "v1-4-time-links-and-predicates",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "candidate_budget": 6,
+  "records": [
+    {
+      "id": "v1-4-time-link-1",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "Minut → Secundă",
+      "sense": "Fixed-duration unit conversion; distinct units and separately qualified civil/calendar senses.",
+      "category": "societate",
+      "novelty": {
+        "kind": "new_relation",
+        "existing_ids": [
+          "n_v29_time_units_minut",
+          "n_v29_time_units_secunda"
+        ],
+        "existing_edge_id": "de8215",
+        "new_endpoint_link": false,
+        "hypothesis_only": true,
+        "possible_contribution": "None for exact duplicate; separately reviewed caption precision only forde7959."
+      },
+      "identity_checks": {
+        "existing_edge": {
+          "id": "de8215",
+          "src_id": "n_v29_time_units_minut",
+          "dst_id": "n_v29_time_units_secunda",
+          "relation": "has_part_time",
+          "label_ro": "are șaizeci de secunde",
+          "strength": 0.99,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        "endpoint_definitions": {
+          "n_v29_time_units_minut": "Unitate de timp egală cu șaizeci de secunde.",
+          "n_v29_time_units_secunda": "Unitate scurtă de timp; șaizeci de secunde formează un minut."
+        }
+      },
+      "player_benefit": "Explain a specific measurable connection if meaningful repair beyond existing data can be established; duplicates never count as growth.",
+      "games": [
+        "conexiuni",
+        "contexto",
+        "lant",
+        "intrusul",
+        "perechi"
+      ],
+      "claims": [
+        {
+          "subject_id": "n_v29_time_units_minut",
+          "object_id": "n_v29_time_units_secunda",
+          "claim_ro": "Un minut are șaizeci de secunde.",
+          "evidence_state": "supported_duration_conversion",
+          "supporting_source_ids": [
+            "bipm-si-4-01"
+          ],
+          "installation_approval": false
+        }
+      ],
+      "sources": [
+        {
+          "access": "Direct PDF opened and parsed successfully,102pages. Cover identifies V4.01/June2026. Table8 read on printedp140/PDFpage30; Table2/second definition on printedp126/PDFpage16.",
+          "checked_on": "2026-10-06",
+          "doi": "https://doi.org/10.59161/AUEZ1291",
+          "id": "bipm-si-4-01",
+          "license": "CC BY4.0 explicitly stated on PDFpage2 and BIPM brochure landing page. Attribute BIPM, link source/license and indicate changes for any reused text. This research paraphrases facts and copies no figures or source corpus.",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "primary": true,
+          "publisher": "Bureau International des Poids et Mesures",
+          "scope": "Defined duration units. Minute/second of angle appear separately in Table8 and are outside these endpoints.",
+          "supports": [
+            "1 min = 60 s",
+            "1 h = 60 min = 3600 s",
+            "1 d = 24 h = 86400 s",
+            "The second is the SI base unit of time; minute/hour/day are non-SI units."
+          ],
+          "title": "BIPM SI Brochure, ninth edition, version4.01, June2026",
+          "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf/2d2b50bf-f2b4-9661-f402-5f9d66e4b507?version=7.0&t=1780410776583&download=true"
+        },
+        {
+          "access": "Full20page PDF opened. Firstpage identifies the ministry, order5003/02.12.2014 and București2014. Read competencies4.1/4.2 printedpp10–11 and unit/time-transformations table printedp16.",
+          "access_limits": "Official ISE original URL failed browser access and independent public fetch failed DNS; official ISJConstanța mirror was indexed but direct fetch404. Those inaccessible paths are not treated as freshly verified source text.",
+          "checked_on": "2026-10-06",
+          "does_not_support": [
+            "The PDF does not print the three numeric conversion coefficients and does not explicitly list secunda in the searched text. BIPM is the numeric authority.",
+            "No assertion about the latest in-force curriculum or a current legal requirement is made from this mirrored historical document."
+          ],
+          "id": "ro-curriculum-2014",
+          "license": "No open licence verified. Reference the document and summarize curriculum scope; copy no textbook/programme prose, images or corpus.",
+          "official_host": false,
+          "primary_document": true,
+          "publisher": "Ministerul Educației Naționale; original primary document hosted by third-party Edupedu mirror",
+          "supports": [
+            "Primary-school treatment of duration measurement, clocks, calendars and transformations from larger to smaller time units.",
+            "Curricular recognition context for the four existing duration-unit words."
+          ],
+          "title": "Ministerul Educației Naționale: Matematică, claseleIII–IV, Anexa2 to OM5003/02.12.2014",
+          "url": "https://cdn.edupedu.ro/wp-content/uploads/2018/09/Matematica_clasele-a-III-a-a-IV-a.pdf"
+        }
+      ],
+      "recognition": {
+        "state": "source-supported research only",
+        "access_qualification": "Numeric conversion directly verified in current primary BIPM; curriculum document supplies pedagogic recognition context, not a numeric coefficient or current-law claim.",
+        "no_claim_of_fun": true
+      },
+      "play_sketches": {
+        "alchimie": "A fixed conversion cannot be represented honestly as two ordinary distinct ingredients without multiplicity semantics. No numeric conversion recipe is proposed.",
+        "conexiuni": "A specific duration predicate is semantically tighter than the broad Societate category, but this does not repair or approve held fallback boards. Distinct partition, difficulty and generic-filler checks still apply.",
+        "contexto": "An added incoming arc is not target qualification; the incoming-neighbour floor and nameable-target/feedback gates remain.",
+        "intrusul": "Existing accepted duration trio Secundă/Minut/Oră is already covered. Adding Zi to a unit family does not authorize a near-duplicate board.",
+        "lant": "If independently accepted, missing reverse unit arcs could permit a familiar Zi→Oră→Minut→Secundă direction with truthful conversion captions. Still requires source/rank/route/save/reachability impact checks and alternatives; no journey approval.",
+        "perechi": "Minute–second pair already served; replacing its label or reskinning the same four pairings supplies no fresh round. Mixed adjacent units create competing valid pairings, so a new matching board is not presumed valid."
+      },
+      "risks": [
+        "Time duration only; no plane-angle minute/second or ordinal/musical second.",
+        "Hour means duration unit, not a school lesson or clock reading.",
+        "Day means the defined duration unit; exclude daylight span and any unqualified claim about elapsed local civil/calendar dates.",
+        "Do not equate calendar month or calendar year to a fixed number of days/hours.",
+        "No aliases/synonyms proposed; existing normalized owners remain unchanged.",
+        "The ministry-authored2014 curriculum was read through a named third-party mirror after official original access failures; its metadata is not proof of current statutory force.",
+        "Romanian textbook hour/day coefficients were read on the original publisher HTML, not inferred from a failedPDF fetch.",
+        "Research hypotheses and factual fixed factors are not permission to mutate approved stock, category ownership, fixture JSON, runtime or review pins."
+      ],
+      "dependencies": [
+        "Independent factual/quality, exact handoff and all affected native gates before adoption."
+      ],
+      "decision": "Exact conversion already installed; hold duplicate addition.",
+      "next_action": "Avoid readding this edge; seek a distinct player benefit.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Initial bounded research after greenV1.3 landing; no selection/adoption."
+        }
+      ],
+      "research_evidence": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/research-time-links.json",
+        "sha256": "f799e6a4faf5fb3430ce0e7eee5d881c19dfdbab28fc64c094d6ac09c5360821"
+      }
+    },
+    {
+      "id": "v1-4-time-link-2",
+      "revision": 2,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "Oră → Minut",
+      "sense": "Fixed-duration unit conversion; distinct units and separately qualified civil/calendar senses.",
+      "category": "societate",
+      "novelty": {
+        "kind": "new_relation",
+        "existing_ids": [
+          "n_v24_time_day_ora",
+          "n_v29_time_units_minut"
+        ],
+        "existing_edge_id": null,
+        "new_endpoint_link": true,
+        "hypothesis_only": true,
+        "possible_contribution": "One missing directed reachability arc; no new conversion fact/concept/form."
+      },
+      "identity_checks": {
+        "desired_direction": {
+          "dst_id": "n_v29_time_units_minut",
+          "src_id": "n_v24_time_day_ora"
+        },
+        "exact_direct_edges": [],
+        "effective_arcs": [],
+        "inverse_existing_edges": [
+          {
+            "bidirectional": 0,
+            "dst_id": "n_v24_time_day_ora",
+            "id": "de8214",
+            "is_distractor": 0,
+            "label_ro": "șaizeci de minute alcătuiesc o oră",
+            "relation": "part_of_time",
+            "src_id": "n_v29_time_units_minut",
+            "strength": 0.99
+          }
+        ],
+        "endpoint_snapshots": [
+          {
+            "aliases": [
+              "ore",
+              "orele"
+            ],
+            "category": "societate",
+            "degree": 8,
+            "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Oră.",
+            "difficulty_tier": "easy",
+            "id": "n_v24_time_day_ora",
+            "label_ro": "Oră",
+            "node_type": "concept",
+            "salience": 0.94
+          },
+          {
+            "aliases": [
+              "minutul",
+              "minute",
+              "minutele",
+              "minutului"
+            ],
+            "category": "societate",
+            "degree": 4,
+            "description": "Unitate de timp egală cu șaizeci de secunde.",
+            "difficulty_tier": "easy",
+            "id": "n_v29_time_units_minut",
+            "label_ro": "Minut",
+            "node_type": "concept",
+            "salience": 0.94
+          }
+        ]
+      },
+      "player_benefit": "Explain a specific measurable connection if meaningful repair beyond existing data can be established; duplicates never count as growth.",
+      "games": [
+        "conexiuni",
+        "contexto",
+        "lant",
+        "intrusul",
+        "perechi"
+      ],
+      "claims": [
+        {
+          "subject_id": "n_v24_time_day_ora",
+          "object_id": "n_v29_time_units_minut",
+          "claim_ro": "O oră are șaizeci de minute.",
+          "evidence_state": "supported_duration_conversion",
+          "supporting_source_ids": [
+            "bipm-si-4-01",
+            "ro-primary-textbook-time"
+          ],
+          "installation_approval": false
+        }
+      ],
+      "sources": [
+        {
+          "access": "Direct PDF opened and parsed successfully,102pages. Cover identifies V4.01/June2026. Table8 read on printedp140/PDFpage30; Table2/second definition on printedp126/PDFpage16.",
+          "checked_on": "2026-10-06",
+          "doi": "https://doi.org/10.59161/AUEZ1291",
+          "id": "bipm-si-4-01",
+          "license": "CC BY4.0 explicitly stated on PDFpage2 and BIPM brochure landing page. Attribute BIPM, link source/license and indicate changes for any reused text. This research paraphrases facts and copies no figures or source corpus.",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "primary": true,
+          "publisher": "Bureau International des Poids et Mesures",
+          "scope": "Defined duration units. Minute/second of angle appear separately in Table8 and are outside these endpoints.",
+          "supports": [
+            "1 min = 60 s",
+            "1 h = 60 min = 3600 s",
+            "1 d = 24 h = 86400 s",
+            "The second is the SI base unit of time; minute/hour/day are non-SI units."
+          ],
+          "title": "BIPM SI Brochure, ninth edition, version4.01, June2026",
+          "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf/2d2b50bf-f2b4-9661-f402-5f9d66e4b507?version=7.0&t=1780410776583&download=true"
+        },
+        {
+          "access": "Primary publisher HTML page opened and read successfully; page102 contains printedpage100. The fullPDF exceeded browser size limit, so only the successfully read HTML lesson is claimed.",
+          "checked_on": "2026-10-06",
+          "does_not_support": [
+            "This lesson does not verify the minute-to-second coefficient.",
+            "Its simplified365-day year statement is not reused as an invariant."
+          ],
+          "id": "ro-primary-textbook-time",
+          "license": "No open reuse licence verified; publisher material is not treated as a licensed corpus. Store the URL and original paraphrase of fixed facts only; no page/image/text bulk copied.",
+          "primary": true,
+          "publisher": "Original textbook publisher Corint",
+          "supports": [
+            "Romanian lesson explicitly teaches hour-to-minute60 and day-to-hour24 conversions.",
+            "Children encounter these units with clock-reading/quarter-hour/half-hour exercises."
+          ],
+          "title": "Corint, Matematică și explorarea mediului, clasaII, time lesson printedp100",
+          "url": "https://www.manuale.edituracorint.ro/2023/matematica_II/files/basic-html/page102.html"
+        },
+        {
+          "access": "Full20page PDF opened. Firstpage identifies the ministry, order5003/02.12.2014 and București2014. Read competencies4.1/4.2 printedpp10–11 and unit/time-transformations table printedp16.",
+          "access_limits": "Official ISE original URL failed browser access and independent public fetch failed DNS; official ISJConstanța mirror was indexed but direct fetch404. Those inaccessible paths are not treated as freshly verified source text.",
+          "checked_on": "2026-10-06",
+          "does_not_support": [
+            "The PDF does not print the three numeric conversion coefficients and does not explicitly list secunda in the searched text. BIPM is the numeric authority.",
+            "No assertion about the latest in-force curriculum or a current legal requirement is made from this mirrored historical document."
+          ],
+          "id": "ro-curriculum-2014",
+          "license": "No open licence verified. Reference the document and summarize curriculum scope; copy no textbook/programme prose, images or corpus.",
+          "official_host": false,
+          "primary_document": true,
+          "publisher": "Ministerul Educației Naționale; original primary document hosted by third-party Edupedu mirror",
+          "supports": [
+            "Primary-school treatment of duration measurement, clocks, calendars and transformations from larger to smaller time units.",
+            "Curricular recognition context for the four existing duration-unit words."
+          ],
+          "title": "Ministerul Educației Naționale: Matematică, claseleIII–IV, Anexa2 to OM5003/02.12.2014",
+          "url": "https://cdn.edupedu.ro/wp-content/uploads/2018/09/Matematica_clasele-a-III-a-a-IV-a.pdf"
+        }
+      ],
+      "recognition": {
+        "state": "source-supported research only",
+        "access_qualification": "Numeric conversion directly verified in current primary BIPM; curriculum document supplies pedagogic recognition context, not a numeric coefficient or current-law claim.",
+        "no_claim_of_fun": true
+      },
+      "play_sketches": {
+        "alchimie": "A fixed conversion cannot be represented honestly as two ordinary distinct ingredients without multiplicity semantics. No numeric conversion recipe is proposed.",
+        "conexiuni": "A specific duration predicate is semantically tighter than the broad Societate category, but this does not repair or approve held fallback boards. Distinct partition, difficulty and generic-filler checks still apply.",
+        "contexto": "An added incoming arc is not target qualification; the incoming-neighbour floor and nameable-target/feedback gates remain.",
+        "intrusul": "Existing accepted duration trio Secundă/Minut/Oră is already covered. Adding Zi to a unit family does not authorize a near-duplicate board.",
+        "lant": "If independently accepted, missing reverse unit arcs could permit a familiar Zi→Oră→Minut→Secundă direction with truthful conversion captions. Still requires source/rank/route/save/reachability impact checks and alternatives; no journey approval.",
+        "perechi": "Minute–second pair already served; replacing its label or reskinning the same four pairings supplies no fresh round. Mixed adjacent units create competing valid pairings, so a new matching board is not presumed valid."
+      },
+      "risks": [
+        "Time duration only; no plane-angle minute/second or ordinal/musical second.",
+        "Hour means duration unit, not a school lesson or clock reading.",
+        "Day means the defined duration unit; exclude daylight span and any unqualified claim about elapsed local civil/calendar dates.",
+        "Do not equate calendar month or calendar year to a fixed number of days/hours.",
+        "No aliases/synonyms proposed; existing normalized owners remain unchanged.",
+        "The ministry-authored2014 curriculum was read through a named third-party mirror after official original access failures; its metadata is not proof of current statutory force.",
+        "Romanian textbook hour/day coefficients were read on the original publisher HTML, not inferred from a failedPDF fetch.",
+        "Research hypotheses and factual fixed factors are not permission to mutate approved stock, category ownership, fixture JSON, runtime or review pins."
+      ],
+      "dependencies": [
+        "Independent factual/quality, exact handoff and all affected native gates before adoption."
+      ],
+      "decision": "Desired Oră→Minut arc is absent, but exact inverse Minut→Oră already gives the same60:1 conversion. Missing direction could add directed reachability, not a new fact or synonym; no selection or graph approval.",
+      "next_action": "Integrator may revise research pool direction only; keep unselected until exact topology proposal, independent factual/quality gates and full affected-game audits.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Initial bounded research after greenV1.3 landing; no selection/adoption."
+        },
+        {
+          "revision": 2,
+          "checked_on": "2026-10-06",
+          "notes": "New exact directional inventory evidence distinguishes missing reverse arc from existing conversion fact; rootR1 pool retained. No selection/approval."
+        }
+      ],
+      "research_evidence": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/research-time-links.json",
+        "sha256": "f799e6a4faf5fb3430ce0e7eee5d881c19dfdbab28fc64c094d6ac09c5360821"
+      }
+    },
+    {
+      "id": "v1-4-time-link-3",
+      "revision": 2,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "Zi → Oră",
+      "sense": "Fixed-duration unit conversion; distinct units and separately qualified civil/calendar senses.",
+      "category": "societate",
+      "novelty": {
+        "kind": "new_relation",
+        "existing_ids": [
+          "n_v24_time_day_zi",
+          "n_v24_time_day_ora"
+        ],
+        "existing_edge_id": null,
+        "new_endpoint_link": true,
+        "hypothesis_only": true,
+        "possible_contribution": "One missing directed reachability arc; no new conversion fact/concept/form."
+      },
+      "identity_checks": {
+        "desired_direction": {
+          "dst_id": "n_v24_time_day_ora",
+          "src_id": "n_v24_time_day_zi"
+        },
+        "exact_direct_edges": [],
+        "effective_arcs": [],
+        "inverse_existing_edges": [
+          {
+            "bidirectional": 0,
+            "dst_id": "n_v24_time_day_zi",
+            "id": "de7959",
+            "is_distractor": 0,
+            "label_ro": "măsurarea timpului zilnic",
+            "relation": "time_unit",
+            "src_id": "n_v24_time_day_ora",
+            "strength": 0.9
+          }
+        ],
+        "endpoint_snapshots": [
+          {
+            "aliases": [
+              "ziua",
+              "zile",
+              "zilele"
+            ],
+            "category": "societate",
+            "degree": 9,
+            "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Zi.",
+            "difficulty_tier": "easy",
+            "id": "n_v24_time_day_zi",
+            "label_ro": "Zi",
+            "node_type": "concept",
+            "salience": 0.94
+          },
+          {
+            "aliases": [
+              "ore",
+              "orele"
+            ],
+            "category": "societate",
+            "degree": 8,
+            "description": "Concept cotidian din grupul «măsurarea timpului zilnic»: Oră.",
+            "difficulty_tier": "easy",
+            "id": "n_v24_time_day_ora",
+            "label_ro": "Oră",
+            "node_type": "concept",
+            "salience": 0.94
+          }
+        ]
+      },
+      "player_benefit": "Explain a specific measurable connection if meaningful repair beyond existing data can be established; duplicates never count as growth.",
+      "games": [
+        "conexiuni",
+        "contexto",
+        "lant",
+        "intrusul",
+        "perechi"
+      ],
+      "claims": [
+        {
+          "subject_id": "n_v24_time_day_zi",
+          "object_id": "n_v24_time_day_ora",
+          "claim_ro": "Ca unitate de durată, o zi are douăzeci și patru de ore.",
+          "evidence_state": "supported_duration_conversion",
+          "supporting_source_ids": [
+            "bipm-si-4-01",
+            "ro-primary-textbook-time"
+          ],
+          "installation_approval": false
+        }
+      ],
+      "sources": [
+        {
+          "access": "Direct PDF opened and parsed successfully,102pages. Cover identifies V4.01/June2026. Table8 read on printedp140/PDFpage30; Table2/second definition on printedp126/PDFpage16.",
+          "checked_on": "2026-10-06",
+          "doi": "https://doi.org/10.59161/AUEZ1291",
+          "id": "bipm-si-4-01",
+          "license": "CC BY4.0 explicitly stated on PDFpage2 and BIPM brochure landing page. Attribute BIPM, link source/license and indicate changes for any reused text. This research paraphrases facts and copies no figures or source corpus.",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "primary": true,
+          "publisher": "Bureau International des Poids et Mesures",
+          "scope": "Defined duration units. Minute/second of angle appear separately in Table8 and are outside these endpoints.",
+          "supports": [
+            "1 min = 60 s",
+            "1 h = 60 min = 3600 s",
+            "1 d = 24 h = 86400 s",
+            "The second is the SI base unit of time; minute/hour/day are non-SI units."
+          ],
+          "title": "BIPM SI Brochure, ninth edition, version4.01, June2026",
+          "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf/2d2b50bf-f2b4-9661-f402-5f9d66e4b507?version=7.0&t=1780410776583&download=true"
+        },
+        {
+          "access": "Primary publisher HTML page opened and read successfully; page102 contains printedpage100. The fullPDF exceeded browser size limit, so only the successfully read HTML lesson is claimed.",
+          "checked_on": "2026-10-06",
+          "does_not_support": [
+            "This lesson does not verify the minute-to-second coefficient.",
+            "Its simplified365-day year statement is not reused as an invariant."
+          ],
+          "id": "ro-primary-textbook-time",
+          "license": "No open reuse licence verified; publisher material is not treated as a licensed corpus. Store the URL and original paraphrase of fixed facts only; no page/image/text bulk copied.",
+          "primary": true,
+          "publisher": "Original textbook publisher Corint",
+          "supports": [
+            "Romanian lesson explicitly teaches hour-to-minute60 and day-to-hour24 conversions.",
+            "Children encounter these units with clock-reading/quarter-hour/half-hour exercises."
+          ],
+          "title": "Corint, Matematică și explorarea mediului, clasaII, time lesson printedp100",
+          "url": "https://www.manuale.edituracorint.ro/2023/matematica_II/files/basic-html/page102.html"
+        },
+        {
+          "access": "Full20page PDF opened. Firstpage identifies the ministry, order5003/02.12.2014 and București2014. Read competencies4.1/4.2 printedpp10–11 and unit/time-transformations table printedp16.",
+          "access_limits": "Official ISE original URL failed browser access and independent public fetch failed DNS; official ISJConstanța mirror was indexed but direct fetch404. Those inaccessible paths are not treated as freshly verified source text.",
+          "checked_on": "2026-10-06",
+          "does_not_support": [
+            "The PDF does not print the three numeric conversion coefficients and does not explicitly list secunda in the searched text. BIPM is the numeric authority.",
+            "No assertion about the latest in-force curriculum or a current legal requirement is made from this mirrored historical document."
+          ],
+          "id": "ro-curriculum-2014",
+          "license": "No open licence verified. Reference the document and summarize curriculum scope; copy no textbook/programme prose, images or corpus.",
+          "official_host": false,
+          "primary_document": true,
+          "publisher": "Ministerul Educației Naționale; original primary document hosted by third-party Edupedu mirror",
+          "supports": [
+            "Primary-school treatment of duration measurement, clocks, calendars and transformations from larger to smaller time units.",
+            "Curricular recognition context for the four existing duration-unit words."
+          ],
+          "title": "Ministerul Educației Naționale: Matematică, claseleIII–IV, Anexa2 to OM5003/02.12.2014",
+          "url": "https://cdn.edupedu.ro/wp-content/uploads/2018/09/Matematica_clasele-a-III-a-a-IV-a.pdf"
+        }
+      ],
+      "recognition": {
+        "state": "source-supported research only",
+        "access_qualification": "Numeric conversion directly verified in current primary BIPM; curriculum document supplies pedagogic recognition context, not a numeric coefficient or current-law claim.",
+        "no_claim_of_fun": true
+      },
+      "play_sketches": {
+        "alchimie": "A fixed conversion cannot be represented honestly as two ordinary distinct ingredients without multiplicity semantics. No numeric conversion recipe is proposed.",
+        "conexiuni": "A specific duration predicate is semantically tighter than the broad Societate category, but this does not repair or approve held fallback boards. Distinct partition, difficulty and generic-filler checks still apply.",
+        "contexto": "An added incoming arc is not target qualification; the incoming-neighbour floor and nameable-target/feedback gates remain.",
+        "intrusul": "Existing accepted duration trio Secundă/Minut/Oră is already covered. Adding Zi to a unit family does not authorize a near-duplicate board.",
+        "lant": "If independently accepted, missing reverse unit arcs could permit a familiar Zi→Oră→Minut→Secundă direction with truthful conversion captions. Still requires source/rank/route/save/reachability impact checks and alternatives; no journey approval.",
+        "perechi": "Minute–second pair already served; replacing its label or reskinning the same four pairings supplies no fresh round. Mixed adjacent units create competing valid pairings, so a new matching board is not presumed valid."
+      },
+      "risks": [
+        "Time duration only; no plane-angle minute/second or ordinal/musical second.",
+        "Hour means duration unit, not a school lesson or clock reading.",
+        "Day means the defined duration unit; exclude daylight span and any unqualified claim about elapsed local civil/calendar dates.",
+        "Do not equate calendar month or calendar year to a fixed number of days/hours.",
+        "No aliases/synonyms proposed; existing normalized owners remain unchanged.",
+        "The ministry-authored2014 curriculum was read through a named third-party mirror after official original access failures; its metadata is not proof of current statutory force.",
+        "Romanian textbook hour/day coefficients were read on the original publisher HTML, not inferred from a failedPDF fetch.",
+        "Research hypotheses and factual fixed factors are not permission to mutate approved stock, category ownership, fixture JSON, runtime or review pins."
+      ],
+      "dependencies": [
+        "Independent factual/quality, exact handoff and all affected native gates before adoption."
+      ],
+      "decision": "Desired Zi→Oră arc is absent; inverse Oră→Zi already exists with a generic daily-time caption. A precise reverse direction is a reachability/caption hypothesis over known duration units, not a new concept, synonym or newly discovered conversion fact.",
+      "next_action": "Integrator may revise research pool direction only; keep unselected until exact topology proposal, independent factual/quality gates and full affected-game audits.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Initial bounded research after greenV1.3 landing; no selection/adoption."
+        },
+        {
+          "revision": 2,
+          "checked_on": "2026-10-06",
+          "notes": "New exact directional inventory evidence distinguishes missing reverse arc from existing conversion fact; rootR1 pool retained. No selection/approval."
+        }
+      ],
+      "research_evidence": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/research-time-links.json",
+        "sha256": "f799e6a4faf5fb3430ce0e7eee5d881c19dfdbab28fc64c094d6ac09c5360821"
+      }
+    },
+    {
+      "id": "v1-4-lexical-ceasornic",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "Ceas / ceasornic",
+      "sense": "Potential genuine synonym/input coverage in the physical clock-instrument sense",
+      "category": "societate",
+      "novelty": {
+        "kind": "accepted_form",
+        "existing_ids": [
+          "n_v24_time_day_ceas"
+        ],
+        "hypothesis_only": true,
+        "genuine_synonym_approval": false
+      },
+      "identity_checks": {
+        "owner": "n_v24_time_day_ceas",
+        "screen_path": "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json",
+        "observed_forms": {
+          "observed": [
+            "ceasornic",
+            "ceasornice"
+          ],
+          "not_independent_synonyms": "Plural is an inflection; further case/article forms require grammar review, not alias-volume credit."
+        }
+      },
+      "player_benefit": "If independently supported, recognize a plausible currently unavailable typed clock guess while preserving the existing Ceas owner.",
+      "games": [
+        "contexto",
+        "lant"
+      ],
+      "claims": [
+        {
+          "state": "unresolved_for_installation",
+          "supported_research": "Official DOOM confirms word and neuter plural; primary gradeII publisher material supports school exposure to the clock vocabulary. Current deck/edge roles clarify the existing instrument identity.",
+          "unresolved": "An exact primary semantic dictionary entry was not verified; independent sense and recognition judgment remains required before classifying this as an accepted synonym family.",
+          "source_ids": [
+            "doom_ceasornic",
+            "school_clock_vocabulary"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://doom.lingv.ro/cautare/q/ceasornic?",
+          "publisher": "Institutul de Lingvistică al Academiei Române, DOOM3",
+          "access": "Rendered Chrome UI verified by this researcher; direct web open inaccessible",
+          "observed_individual_form_facts": {
+            "lemma": "ceasornic",
+            "gender": "neuter",
+            "plural": "ceasornice"
+          },
+          "scope": "Orthography/morphology only; DOOM lookup does not itself establish synonym sense or population recognition."
+        },
+        {
+          "url": "https://edu.litera.ro/manuale/2023_MEM2/2023_549_MEM2_proiectare_new.pdf",
+          "publisher": "Editura Litera, gradeII mathematics/environment teaching plan",
+          "access": "Primary publisher PDF opened; ceasornic occurs at PDFpage6 in a day/night modelling activity",
+          "claim_paraphrase": "The teaching activity uses the familiar clockwise-direction expression while modelling Earth rotation.",
+          "limits": "Indirect primary-school exposure evidence, not a definition, direct official-ministry curriculum verification or measured spontaneous recognition. No ministry programme was successfully verified in this bounded run."
+        }
+      ],
+      "source_access_limitations": {
+        "dlr2": {
+          "homepage": "https://dlr.lingv.ro/",
+          "query": "https://dlr.lingv.ro/cautare/ceasornic",
+          "observed": "Official DLR2 rendered query shows zero results for ceasornic; direct web query inaccessible. The site describes ongoing partial edition work.",
+          "inference_limit": "Do not interpret incomplete online coverage as proof the word is invalid or absent from all academic dictionaries."
+        },
+        "dlr1": {
+          "url": "https://dlr1.solirom.ro/",
+          "observed": "Official linked first-edition portal loaded its institutional navigation, but main lookup content remained blank after visible Home navigation; no entry/sense verified.",
+          "inference_limit": "No definition or synonym assertion extracted."
+        },
+        "ministry_programme_candidate": {
+          "attempted_url": "https://edu.ro/sites/default/files/_fi%C8%99iere/Invatamant-Preuniversitar/2016/invatamant%20primar/Programa_%20Matematica_explorarea_mediului_CP_I_II_2013.pdf",
+          "observed": "Unverified candidate path was inaccessible; targeted official/ISE searches did not provide usable direct curriculum evidence.",
+          "inference_limit": "This is an access/path gap, not a verified official document or current-availability claim."
+        }
+      },
+      "license_and_reuse": {
+        "doom": "Visible official DOOM footer links CC BY-NC-SA4.0 and includes generic site-template copyright text. Record only individual observed word/form facts; no blanket commercial or dataset redistribution grant inferred.",
+        "dictionary_leads_only": [
+          "https://dexonline.ro/definitie/ceasornic",
+          "https://dexonline.ro/definitie/orologiu",
+          "https://dexonline.ro/definitie/clip%C4%83",
+          "https://dexonline.ro/definitie/moment"
+        ],
+        "dex_limit": "Retained project instruction: automated retrieval/storage/extraction restricted except official public sets. These URLs are leads only; no DEX definitions or dataset were retrieved/copied for this checkpoint.",
+        "papers_and_curriculum": "Only small original paraphrases, page locators and URLs are recorded; no page bodies, dictionary definitions, scans, images, whole PDFs or copied teaching texts are added to game data."
+      },
+      "recognition": {
+        "state": "held independent meaning/recognition/owner review",
+        "no_display_or_target_promotion": true
+      },
+      "play_sketches": [
+        "If independently supported, recognize a plausible currently unavailable typed clock guess while preserving the existing Ceas owner."
+      ],
+      "risks": [
+        "Ceas used as a duration/hour is a different sense owned by Oră, not this device node.",
+        "Clock/watch/device subtypes and digital versus mechanical use require exact semantic screening."
+      ],
+      "dependencies": [
+        "Exact primary semantic evidence and independent meaning/recognition/identity review, then all affected native gates."
+      ],
+      "decision": "Preserve research hold: An exact primary semantic dictionary entry was not verified; independent sense and recognition judgment remains required before classifying this as an accepted synonym family.",
+      "next_action": "Acquire exact primary semantic sense evidence and independent qualified-owner/recognition review; keep held until then.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Bounded lexical research retained, no synonym/inflection/concept approval or installation."
+        }
+      ],
+      "research_evidence": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json",
+        "sha256": "b2d75580cbea8dbc16784d0a1c570889095eecd61bb13f88d002b91733f0c1ca"
+      }
+    },
+    {
+      "id": "v1-4-lexical-orologiu",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "Ceas / orologiu",
+      "sense": "Sourced shared denotation with narrower clock/register cautions",
+      "category": "societate",
+      "novelty": {
+        "kind": "accepted_form",
+        "existing_ids": [
+          "n_v24_time_day_ceas"
+        ],
+        "hypothesis_only": true,
+        "genuine_synonym_approval": false
+      },
+      "identity_checks": {
+        "owner": "n_v24_time_day_ceas",
+        "screen_path": "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json",
+        "observed_forms": {
+          "observed": [
+            "orologiu",
+            "orologiul",
+            "orologii",
+            "orologiile"
+          ],
+          "not_independent_synonyms": "Article/plural forms are morphological inputs, not separate synonym families."
+        }
+      },
+      "player_benefit": "Possible optional typed input for a familiar displayed owner, if the subtype/sense review supports that treatment; no rare-word display or new target approval proposed.",
+      "games": [
+        "contexto",
+        "lant"
+      ],
+      "claims": [
+        {
+          "state": "unresolved_for_installation",
+          "supported_research": "Official DOOM provides lemma and plural/article morphology; primary linguistics study explicitly places it in time-instrument denotative synonymy.",
+          "unresolved": "Classroom context describes a large fixed clock and flags possible unfamiliarity. Broad unqualified interchangeability with every clock/watch and average Romanian recognition are unproven.",
+          "source_ids": [
+            "doom_orologiu",
+            "linear_synonymy_study",
+            "orologiu_teaching_context"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://doom.lingv.ro/cautare/q/orologiu?",
+          "publisher": "Institutul de Lingvistică al Academiei Române, DOOM3",
+          "access": "Rendered Chrome UI verified by this researcher; direct web open inaccessible",
+          "observed_individual_form_facts": {
+            "lemma": "orologiu",
+            "gender": "neuter",
+            "definite_singular": "orologiul",
+            "plural": "orologii",
+            "definite_plural": "orologiile"
+          }
+        },
+        {
+          "url": "https://lingv.ro/wp-content/uploads/2019/04/LR_2_2008.pdf",
+          "publisher": "Institutul de Lingvistică; Limba Română LVII,2 (2008), Monica Busuioc",
+          "access": "Primary institutional PDF text opened and relevant passage found; printed pages145–146/PDF30–31",
+          "claim_paraphrase": "The study gives clock, pendulum clock and orologiu as a denotative synonymy example sharing time-measuring-instrument meaning, while contrasting context-only or metaphorical substitutions.",
+          "limits": "A theoretical shared-denotation example does not erase subtype/register distinctions or establish present-day recognition."
+        },
+        {
+          "url": "https://conferinte.stiu.md/sites/default/files/evenimente/USARB.%20Interuniv.%202024%20Vol.3.pdf",
+          "publisher": "Authored Moldovan university educational conference proceedings hosted on scholarly STIU repository",
+          "access": "Primary authored PDF text opened; relevant classroom vocabulary discussion at PDFpage185",
+          "claim_paraphrase": "The teaching discussion explains orologiu as a large clock fixed to a building/interior structure and introduces it among potentially unfamiliar words.",
+          "limits": "A narrower clock context and a recognition caution; not Romanian national curriculum or representative audience measurement."
+        }
+      ],
+      "source_access_limitations": {
+        "dlr2": {
+          "homepage": "https://dlr.lingv.ro/",
+          "query": "https://dlr.lingv.ro/cautare/ceasornic",
+          "observed": "Official DLR2 rendered query shows zero results for ceasornic; direct web query inaccessible. The site describes ongoing partial edition work.",
+          "inference_limit": "Do not interpret incomplete online coverage as proof the word is invalid or absent from all academic dictionaries."
+        },
+        "dlr1": {
+          "url": "https://dlr1.solirom.ro/",
+          "observed": "Official linked first-edition portal loaded its institutional navigation, but main lookup content remained blank after visible Home navigation; no entry/sense verified.",
+          "inference_limit": "No definition or synonym assertion extracted."
+        },
+        "ministry_programme_candidate": {
+          "attempted_url": "https://edu.ro/sites/default/files/_fi%C8%99iere/Invatamant-Preuniversitar/2016/invatamant%20primar/Programa_%20Matematica_explorarea_mediului_CP_I_II_2013.pdf",
+          "observed": "Unverified candidate path was inaccessible; targeted official/ISE searches did not provide usable direct curriculum evidence.",
+          "inference_limit": "This is an access/path gap, not a verified official document or current-availability claim."
+        }
+      },
+      "license_and_reuse": {
+        "doom": "Visible official DOOM footer links CC BY-NC-SA4.0 and includes generic site-template copyright text. Record only individual observed word/form facts; no blanket commercial or dataset redistribution grant inferred.",
+        "dictionary_leads_only": [
+          "https://dexonline.ro/definitie/ceasornic",
+          "https://dexonline.ro/definitie/orologiu",
+          "https://dexonline.ro/definitie/clip%C4%83",
+          "https://dexonline.ro/definitie/moment"
+        ],
+        "dex_limit": "Retained project instruction: automated retrieval/storage/extraction restricted except official public sets. These URLs are leads only; no DEX definitions or dataset were retrieved/copied for this checkpoint.",
+        "papers_and_curriculum": "Only small original paraphrases, page locators and URLs are recorded; no page bodies, dictionary definitions, scans, images, whole PDFs or copied teaching texts are added to game data."
+      },
+      "recognition": {
+        "state": "held independent meaning/recognition/owner review",
+        "no_display_or_target_promotion": true
+      },
+      "play_sketches": [
+        "Possible optional typed input for a familiar displayed owner, if the subtype/sense review supports that treatment; no rare-word display or new target approval proposed."
+      ],
+      "risks": [
+        "Orologiu for an architectural clock may be narrower than generic Ceas or a wristwatch.",
+        "The time-instrument overlap does not license mapping it to Oră, Minut or Secundă."
+      ],
+      "dependencies": [
+        "Exact primary semantic evidence and independent meaning/recognition/identity review, then all affected native gates."
+      ],
+      "decision": "Preserve research hold: Classroom context describes a large fixed clock and flags possible unfamiliarity. Broad unqualified interchangeability with every clock/watch and average Romanian recognition are unproven.",
+      "next_action": "Keep the qualification and recognition hold; verify primary dictionary senses and intended optional-input scope before selecting anything.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Bounded lexical research retained, no synonym/inflection/concept approval or installation."
+        }
+      ],
+      "research_evidence": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json",
+        "sha256": "b2d75580cbea8dbc16784d0a1c570889095eecd61bb13f88d002b91733f0c1ca"
+      }
+    },
+    {
+      "id": "v1-4-lexical-clipa-moment",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "clipă / moment",
+      "sense": "Possible brief-time lexical family; distinct from fixed duration units",
+      "category": "societate",
+      "novelty": {
+        "kind": "new_shared_concept",
+        "existing_ids": [],
+        "hypothesis_only": true,
+        "genuine_synonym_approval": false
+      },
+      "identity_checks": {
+        "owner": null,
+        "screen_path": "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json",
+        "observed_forms": {
+          "observed": [
+            "clipă",
+            "clipei",
+            "clipe",
+            "moment",
+            "momente"
+          ],
+          "not_independent_synonyms": "These forms do not prove equivalence or calibrated durations."
+        }
+      },
+      "player_benefit": "Future qualified vocabulary exploration only; no benefit or installation claimed now.",
+      "games": [
+        "contexto",
+        "lant"
+      ],
+      "claims": [
+        {
+          "state": "unresolved_for_installation",
+          "supported_research": "Official DOOM verifies normative noun/forms; neither bare word has a current exact native/projection owner.",
+          "unresolved": "No exact primary semantic definition/synonym claim was verified in this bounded run; both concepts would require identity/meaning/topology review rather than an alias shortcut.",
+          "source_ids": [
+            "doom_clipa",
+            "doom_moment"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://doom.lingv.ro/cautare/q/clip%C4%83?",
+          "publisher": "Institutul de Lingvistică al Academiei Române, DOOM3",
+          "access": "Rendered Chrome UI verified by this researcher",
+          "observed_individual_form_facts": {
+            "lemma": "clipă",
+            "gender": "feminine",
+            "definite_genitive_dative": "clipei",
+            "plural": "clipe"
+          }
+        },
+        {
+          "url": "https://doom.lingv.ro/cautare/q/moment?",
+          "publisher": "Institutul de Lingvistică al Academiei Române, DOOM3",
+          "access": "Rendered Chrome UI verified by this researcher",
+          "observed_individual_form_facts": {
+            "lemma": "moment",
+            "gender": "neuter",
+            "plural": "momente"
+          },
+          "additional_observation": "Results include the noun and separate multiword/locution entries, not four interchangeable noun senses."
+        }
+      ],
+      "source_access_limitations": {
+        "dlr2": {
+          "homepage": "https://dlr.lingv.ro/",
+          "query": "https://dlr.lingv.ro/cautare/ceasornic",
+          "observed": "Official DLR2 rendered query shows zero results for ceasornic; direct web query inaccessible. The site describes ongoing partial edition work.",
+          "inference_limit": "Do not interpret incomplete online coverage as proof the word is invalid or absent from all academic dictionaries."
+        },
+        "dlr1": {
+          "url": "https://dlr1.solirom.ro/",
+          "observed": "Official linked first-edition portal loaded its institutional navigation, but main lookup content remained blank after visible Home navigation; no entry/sense verified.",
+          "inference_limit": "No definition or synonym assertion extracted."
+        },
+        "ministry_programme_candidate": {
+          "attempted_url": "https://edu.ro/sites/default/files/_fi%C8%99iere/Invatamant-Preuniversitar/2016/invatamant%20primar/Programa_%20Matematica_explorarea_mediului_CP_I_II_2013.pdf",
+          "observed": "Unverified candidate path was inaccessible; targeted official/ISE searches did not provide usable direct curriculum evidence.",
+          "inference_limit": "This is an access/path gap, not a verified official document or current-availability claim."
+        }
+      },
+      "license_and_reuse": {
+        "doom": "Visible official DOOM footer links CC BY-NC-SA4.0 and includes generic site-template copyright text. Record only individual observed word/form facts; no blanket commercial or dataset redistribution grant inferred.",
+        "dictionary_leads_only": [
+          "https://dexonline.ro/definitie/ceasornic",
+          "https://dexonline.ro/definitie/orologiu",
+          "https://dexonline.ro/definitie/clip%C4%83",
+          "https://dexonline.ro/definitie/moment"
+        ],
+        "dex_limit": "Retained project instruction: automated retrieval/storage/extraction restricted except official public sets. These URLs are leads only; no DEX definitions or dataset were retrieved/copied for this checkpoint.",
+        "papers_and_curriculum": "Only small original paraphrases, page locators and URLs are recorded; no page bodies, dictionary definitions, scans, images, whole PDFs or copied teaching texts are added to game data."
+      },
+      "recognition": {
+        "state": "held independent meaning/recognition/owner review",
+        "no_display_or_target_promotion": true
+      },
+      "play_sketches": [
+        "Future qualified vocabulary exploration only; no benefit or installation claimed now."
+      ],
+      "risks": [
+        "Waiting a moment/clipă is contextual speech, not an assertion of exactly one calibrated second.",
+        "Multiword uses of moment and the existing named Babasha event are separate contexts/identities."
+      ],
+      "dependencies": [
+        "Exact primary semantic evidence and independent meaning/recognition/identity review, then all affected native gates."
+      ],
+      "decision": "Preserve research hold: No exact primary semantic definition/synonym claim was verified in this bounded run; both concepts would require identity/meaning/topology review rather than an alias shortcut.",
+      "next_action": "Keep out of Secundă aliases and preserve the existing fallback hold; obtain primary semantic evidence and a distinct useful concept/neighbor hypothesis before further refinement.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Bounded lexical research retained, no synonym/inflection/concept approval or installation."
+        }
+      ],
+      "research_evidence": {
+        "path": "docs/reviews/v1-4-time-links-and-predicates/research-synonym-screen.json",
+        "sha256": "b2d75580cbea8dbc16784d0a1c570889095eecd61bb13f88d002b91733f0c1ca"
+      }
+    }
+  ],
+  "inherited_quality_holds_reference": "docs/reviews/v1-3-everyday-concepts/reference/fallback/independent-quality-review.json",
+  "source_reuse_policy": "Preserve source/access/license; independent summaries only. Research/duplicate evidence is never approval."
+}

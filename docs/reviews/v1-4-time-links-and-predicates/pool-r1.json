@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "theme": "v1-4-time-links-and-predicates",
+  "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+  "candidate_budget": 6,
+  "records": [
+    {
+      "id": "v1-4-time-link-1",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "Minut → Secundă",
+      "sense": "Fixed-duration unit conversion; distinct units and separately qualified civil/calendar senses.",
+      "category": "societate",
+      "novelty": {
+        "kind": "new_relation",
+        "existing_ids": [
+          "n_v29_time_units_minut",
+          "n_v29_time_units_secunda"
+        ],
+        "existing_edge_id": "de8215",
+        "new_endpoint_link": false,
+        "hypothesis_only": true,
+        "possible_contribution": "None for exact duplicate; separately reviewed caption precision only forde7959."
+      },
+      "identity_checks": {
+        "existing_edge": {
+          "id": "de8215",
+          "src_id": "n_v29_time_units_minut",
+          "dst_id": "n_v29_time_units_secunda",
+          "relation": "has_part_time",
+          "label_ro": "are șaizeci de secunde",
+          "strength": 0.99,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        "endpoint_definitions": {
+          "n_v29_time_units_minut": "Unitate de timp egală cu șaizeci de secunde.",
+          "n_v29_time_units_secunda": "Unitate scurtă de timp; șaizeci de secunde formează un minut."
+        }
+      },
+      "player_benefit": "Explain a specific measurable connection if meaningful repair beyond existing data can be established; duplicates never count as growth.",
+      "games": [
+        "conexiuni",
+        "contexto",
+        "lant",
+        "intrusul",
+        "perechi"
+      ],
+      "claims": [
+        {
+          "subject_id": "n_v29_time_units_minut",
+          "object_id": "n_v29_time_units_secunda",
+          "claim": "A minute-duration equals60seconds.",
+          "evidence_state": "supported_duration_conversion",
+          "supporting_sources": [
+            "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232"
+          ],
+          "installation_approval": false
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232",
+          "accessed_on": "2026-10-06",
+          "source_kind": "primary BIPM SI Brochure9th edition v4.01 June2026",
+          "locator": "English Table8 PDFpage141",
+          "note": "Second is SI time base unit; minute/hour/day are distinct non-SI units with fixed-duration conversions.",
+          "license": "CC BY4.0; original summary only, no copied corpus/text/images"
+        }
+      ],
+      "recognition": {
+        "state": "pending Romanian curriculum/source and current deck screen",
+        "no_claim_of_fun": true
+      },
+      "play_sketches": [
+        "Specific time-unit predicate contrasting units/instruments/calendar concepts; ambiguity/shortcuts/duplicates require review."
+      ],
+      "risks": [
+        "Category alone does not establish a specific predicate.",
+        "Civil/calendar boundaries differ from standard duration units.",
+        "Research pool never serves as native importer input."
+      ],
+      "dependencies": [
+        "Independent factual/quality, exact handoff and all affected native gates before adoption."
+      ],
+      "decision": "Exact conversion already installed; hold duplicate addition.",
+      "next_action": "Avoid readding this edge; seek a distinct player benefit.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Initial bounded research after greenV1.3 landing; no selection/adoption."
+        }
+      ]
+    },
+    {
+      "id": "v1-4-time-link-2",
+      "revision": 1,
+      "state": "held",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "Minut → Oră",
+      "sense": "Fixed-duration unit conversion; distinct units and separately qualified civil/calendar senses.",
+      "category": "societate",
+      "novelty": {
+        "kind": "new_relation",
+        "existing_ids": [
+          "n_v29_time_units_minut",
+          "n_v24_time_day_ora"
+        ],
+        "existing_edge_id": "de8214",
+        "new_endpoint_link": false,
+        "hypothesis_only": true,
+        "possible_contribution": "None for exact duplicate; separately reviewed caption precision only forde7959."
+      },
+      "identity_checks": {
+        "existing_edge": {
+          "id": "de8214",
+          "src_id": "n_v29_time_units_minut",
+          "dst_id": "n_v24_time_day_ora",
+          "relation": "part_of_time",
+          "label_ro": "șaizeci de minute alcătuiesc o oră",
+          "strength": 0.99,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        "endpoint_definitions": {
+          "n_v29_time_units_minut": "Unitate de timp egală cu șaizeci de secunde.",
+          "n_v24_time_day_ora": "Concept cotidian din grupul «măsurarea timpului zilnic»: Oră."
+        }
+      },
+      "player_benefit": "Explain a specific measurable connection if meaningful repair beyond existing data can be established; duplicates never count as growth.",
+      "games": [
+        "conexiuni",
+        "contexto",
+        "lant",
+        "intrusul",
+        "perechi"
+      ],
+      "claims": [
+        {
+          "subject_id": "n_v29_time_units_minut",
+          "object_id": "n_v24_time_day_ora",
+          "claim": "60minutes equal one hour-duration.",
+          "evidence_state": "supported_duration_conversion",
+          "supporting_sources": [
+            "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232"
+          ],
+          "installation_approval": false
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232",
+          "accessed_on": "2026-10-06",
+          "source_kind": "primary BIPM SI Brochure9th edition v4.01 June2026",
+          "locator": "English Table8 PDFpage141",
+          "note": "Second is SI time base unit; minute/hour/day are distinct non-SI units with fixed-duration conversions.",
+          "license": "CC BY4.0; original summary only, no copied corpus/text/images"
+        }
+      ],
+      "recognition": {
+        "state": "pending Romanian curriculum/source and current deck screen",
+        "no_claim_of_fun": true
+      },
+      "play_sketches": [
+        "Specific time-unit predicate contrasting units/instruments/calendar concepts; ambiguity/shortcuts/duplicates require review."
+      ],
+      "risks": [
+        "Category alone does not establish a specific predicate.",
+        "Civil/calendar boundaries differ from standard duration units.",
+        "Research pool never serves as native importer input."
+      ],
+      "dependencies": [
+        "Independent factual/quality, exact handoff and all affected native gates before adoption."
+      ],
+      "decision": "Exact conversion already installed; hold duplicate addition.",
+      "next_action": "Avoid readding this edge; seek a distinct player benefit.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Initial bounded research after greenV1.3 landing; no selection/adoption."
+        }
+      ]
+    },
+    {
+      "id": "v1-4-time-link-3",
+      "revision": 1,
+      "state": "researched",
+      "origin_track": "discovery",
+      "baseline_commit": "46641d6f9963f92941d12f5955e5eb40a2d8fb56",
+      "checked_on": "2026-10-06",
+      "label_ro": "Oră → Zi",
+      "sense": "Fixed-duration unit conversion; distinct units and separately qualified civil/calendar senses.",
+      "category": "societate",
+      "novelty": {
+        "kind": "new_relation",
+        "existing_ids": [
+          "n_v24_time_day_ora",
+          "n_v24_time_day_zi"
+        ],
+        "existing_edge_id": "de7959",
+        "new_endpoint_link": false,
+        "hypothesis_only": true,
+        "possible_contribution": "None for exact duplicate; separately reviewed caption precision only forde7959."
+      },
+      "identity_checks": {
+        "existing_edge": {
+          "id": "de7959",
+          "src_id": "n_v24_time_day_ora",
+          "dst_id": "n_v24_time_day_zi",
+          "relation": "time_unit",
+          "label_ro": "măsurarea timpului zilnic",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        "endpoint_definitions": {
+          "n_v24_time_day_ora": "Concept cotidian din grupul «măsurarea timpului zilnic»: Oră.",
+          "n_v24_time_day_zi": "Concept cotidian din grupul «măsurarea timpului zilnic»: Zi."
+        }
+      },
+      "player_benefit": "Explain a specific measurable connection if meaningful repair beyond existing data can be established; duplicates never count as growth.",
+      "games": [
+        "conexiuni",
+        "contexto",
+        "lant",
+        "intrusul",
+        "perechi"
+      ],
+      "claims": [
+        {
+          "subject_id": "n_v24_time_day_ora",
+          "object_id": "n_v24_time_day_zi",
+          "claim": "24hours equal one standard day-duration; civil/calendar boundaries need a separate qualification.",
+          "evidence_state": "supported_duration_conversion",
+          "supporting_sources": [
+            "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232"
+          ],
+          "installation_approval": false
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232",
+          "accessed_on": "2026-10-06",
+          "source_kind": "primary BIPM SI Brochure9th edition v4.01 June2026",
+          "locator": "English Table8 PDFpage141",
+          "note": "Second is SI time base unit; minute/hour/day are distinct non-SI units with fixed-duration conversions.",
+          "license": "CC BY4.0; original summary only, no copied corpus/text/images"
+        }
+      ],
+      "recognition": {
+        "state": "pending Romanian curriculum/source and current deck screen",
+        "no_claim_of_fun": true
+      },
+      "play_sketches": [
+        "Specific time-unit predicate contrasting units/instruments/calendar concepts; ambiguity/shortcuts/duplicates require review."
+      ],
+      "risks": [
+        "Category alone does not establish a specific predicate.",
+        "Civil/calendar boundaries differ from standard duration units.",
+        "Research pool never serves as native importer input."
+      ],
+      "dependencies": [
+        "Independent factual/quality, exact handoff and all affected native gates before adoption."
+      ],
+      "decision": "Research existing-caption precision; sense and prospective effects unresolved.",
+      "next_action": "Compare sense/caption/deck use; judge precision without overclaiming calendar facts.",
+      "history": [
+        {
+          "revision": 1,
+          "checked_on": "2026-10-06",
+          "notes": "Initial bounded research after greenV1.3 landing; no selection/adoption."
+        }
+      ]
+    }
+  ],
+  "inherited_quality_holds_reference": "docs/reviews/v1-3-everyday-concepts/reference/fallback/independent-quality-review.json",
+  "source_reuse_policy": "Preserve source/access/license; independent summaries only. Research/duplicate evidence is never approval."
+}
