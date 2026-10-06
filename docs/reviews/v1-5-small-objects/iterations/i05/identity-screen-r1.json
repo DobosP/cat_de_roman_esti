@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "auditor": "/root/i05_inventory_audit independent read-only",
+  "current_inputs": [
+    "KG",
+    "world",
+    "pack",
+    "quick",
+    "derived",
+    "Conex/Lanț tombstones"
+  ],
+  "coverage": "All9 historical world books exact pair scans;9durable pool.json files exact/folded matching; specific consumer owner IDs. i04 currentpool-r2 omitted from auditor pool glob; its semantic-equivalent r1 pool scanned, independent exact r2 reviews preserved. No full semantic/projection/history clearance.",
+  "findings": {
+    "i05-world-01": "Both ingredients exist. Proposed pair absent current and all9 historical recipe books; no exact/folded KG label/alias or world label owner. Ovăz unlock brutarie55; actual journey not run.",
+    "i05-world-02": "Pair absent current/all9books; no exact/folded label/alias/world label match. Iaurt unlock30, banana45.",
+    "i05-world-03": "Exactpair already budinca-orez-lapte→alw_food_budinca_orez current and7laterhistoricalbooks; first2books absent.",
+    "i05-lex-01": "No exact/folded leafă KG owner; salary owner has salariul/salarii/salariile/salariului/salariilor.",
+    "i05-repair-01": "Current label Herta Muller; aliases Herta Mueller/H. Müller/scriitoarea Herta Müller. Proposed display folds to same sole owner. Existing cx_literatura_198 plus2Conex tombstone exposures.",
+    "i05-repair-02": "Currentlabel Mică Unire1859 (actual label retains spaces); proposedMica Unire1859folds same soleowner. Current8Conex/2Lanț/4derived/2Conex tombstone exposures."
+  },
+  "exclusions": [
+    {
+      "label": "odaie",
+      "owner": "n_v24_home_rooms_camera",
+      "reason": "Already accepted exact alias and explicit i03 screened exclusion; not a fresh lead or reopened proposal.",
+      "prior": "docs/content-pool/v1-5-discovery-i03/pool.json screened_exclusions[0]",
+      "failed_fetch": "https://dexonline.ro/definitie/odaie failed; no lexical evidence claimed."
+    }
+  ],
+  "native": "NOT_ASSESSED; no tests/app imports/simulation"
+}

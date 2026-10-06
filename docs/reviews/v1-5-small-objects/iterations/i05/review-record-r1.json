@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "version": "V1.5",
+  "iteration": "i05",
+  "artifactRefs": [
+    {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i05/factual-review-r1.json",
+      "sha256": "33fa91c7e623902c68809987c42ac36a7ad14c48f99b536909f27d559aaad47f"
+    },
+    {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i05/identity-screen-r1.json",
+      "sha256": "159156c1ec5fb86720fc21a85c2b099605d2af4ded382ddf39f9cef2e11475d4"
+    },
+    {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i05/packet-r1.json",
+      "sha256": "ec199fc40a770308a8261ad3e2da953d28086ffad822557cec3b3145f2562d9f"
+    },
+    {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i05/plan-r1.json",
+      "sha256": "271aa36968ca1e5ee09f231e46167f073bc95a82530eb5a30d15358d30eaa4a4"
+    },
+    {
+      "path": "docs/reviews/v1-5-small-objects/iterations/i05/quality-review-r2.json",
+      "sha256": "cec5bf5500c50e02e0161ab1f7ac9947ba09ecfa0b1bfd8caf70d37491c8852e"
+    },
+    {
+      "path": "docs/content-pool/v1-5-discovery-i05/pool.json",
+      "sha256": "e1a98c95e20064959dcf4f121bfc63bfd69053c505b7c1e68bed8f67a59f8cd0"
+    }
+  ],
+  "factual": "r1 ACCEPT_RESEARCH_WITH_ADOPTION_HELD",
+  "quality": "r2 ACCEPT_RESEARCH_WITH_ADOPTION_HELD; judgments unchanged, LF serialization correction",
+  "originalQualityRaw": {
+    "path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\fleet-claude-codex-20261006\\cat-i05-quality-review-raw-r1.json",
+    "sha256": "e3773a1704e3487b95de09373da5399cf4e34d0d19d4ba3b21529a0e4109d6dc",
+    "preserved": "byte-exact; only this newly created owned review receipt relocated, no evidence deleted"
+  },
+  "defaultWhitespaceFirstAttempt": "FAILED due new quality-r1 CRLF; preserved as failure, never called PASS",
+  "packetBindings": 13,
+  "counts": {
+    "raw_records": 6,
+    "new_candidate_hypotheses": 4,
+    "first_recorded_backlog_repair_research": 2,
+    "known_accepted_input_exclusions": 1,
+    "deep_investigations": 5,
+    "researched": 3,
+    "held": 2,
+    "rejected": 1,
+    "ready": 0,
+    "selected": 0,
+    "installed": 0
+  },
+  "native": "HELD / NOT RUN",
+  "overall": "NOT_QUALIFIED"
+}

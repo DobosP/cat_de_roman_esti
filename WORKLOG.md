@@ -1557,3 +1557,14 @@ Valid until: exact research sources or qualification dependencies change — the
 - Preserved frozen r1 and independent factual/quality receipts; bound r2 fixes pool convention and unsupported generic rejected-sandwich recognition. All actual source/native/gameplay/history and assembled gates remain held, NOT_QUALIFIED.
 - Resource probe chronology and 15.25-minute source checkpoint overrun disclosed. Interrupted static probes discarded; no native execution or further discovery during closure.
 - Next i05 frontier: fresh existing-world recipe foundations, narrower lexical senses and accessible caption-repair alternatives; no unchanged rejected/held hunt. Shared main and earlier immutable research remain preserved.
+
+## 2026-10-06 — V1.5 i05 source discovery
+
+Valid until: exact source claims, inputs or qualification dependencies change — then treat as history.
+
+- Three bounded batches screen six source records plus one prior accepted-input exclusion; four fresh hypotheses and two first-recorded display-backlog investigations. Five deeply investigated; zero ready/selected/installed.
+- Milk/oats foundation researched; yogurt smoothie held after mismatching alcoholic original source; rice/milk occupied pair rejected. Leafă salary sense held for polysemy/provenance; odaie already accepted and excluded.
+- Herta Müller and Mica Unire1859 display corrections supported narrowly by publisher/StateMint originals; failed Nobel/MAI fetches excluded. No new game/word/recipe adoption asserted.
+- Exact native/source/export/authority/gameplay/history and assembled gates remain held. Research parent df21f83/runtime a75 unchanged; previous immutable evidence preserved.
+- Next i06 rotates to distinctive existing-owner functional relations and bounded quick-exposure predicates; source backlog refinement remains separate.
+- Independent factual and quality source reviews accept six records plus one exclusion; all13bindings match, no concrete corrections; adoption remains held. Coordinator requested one finite Ciocolată caldă source proposal alongside continuing fresh discovery next, without native/materialization authority.
