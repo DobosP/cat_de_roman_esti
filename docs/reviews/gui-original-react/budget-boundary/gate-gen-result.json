@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "target": "gen",
+  "status": "fail",
+  "sha": "39526b67f7f2f3346876d9ee1848bff5dc74957c",
+  "dirty": false,
+  "tree_sha256": "2970d1c98eb238c6e1b2ccb7daa5014f49e8d86d4ebbe07288c6effb38cbc171",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "028ab052097aa8ad497732bd9db32e30de9595a69155064d61a5b15d23e1bcbc",
+  "parallel": 4,
+  "started": "2026-10-07T06:25:59.303Z",
+  "finished": "2026-10-07T06:27:44.341Z",
+  "checks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 2
+    },
+    {
+      "name": "cat-gen-request",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "name": "cat-original-npm-ci",
+      "status": "pass",
+      "duration_ms": 4171
+    },
+    {
+      "name": "cat-original-frontend-build",
+      "status": "pass",
+      "duration_ms": 6332
+    },
+    {
+      "name": "cat-original-build-cat-server",
+      "status": "pass",
+      "duration_ms": 1560
+    },
+    {
+      "name": "cat-original-build-cat-browser-plan",
+      "status": "pass",
+      "duration_ms": 756
+    },
+    {
+      "name": "cat-original-ui-runtime",
+      "status": "pass",
+      "duration_ms": 67859
+    },
+    {
+      "name": "cat-original-receipt-contract",
+      "status": "pass",
+      "duration_ms": 177
+    },
+    {
+      "name": "cat-browser-inventory",
+      "status": "pass",
+      "duration_ms": 4163
+    },
+    {
+      "name": "cat-quality-npm-ci",
+      "status": "pass",
+      "duration_ms": 689
+    },
+    {
+      "name": "cat-original-baseline",
+      "status": "fail",
+      "reason": "node failed (1)",
+      "duration_ms": 18151
+    },
+    {
+      "name": "cat-original-budget-boundary",
+      "status": "pass",
+      "duration_ms": 231
+    },
+    {
+      "name": "repo-gen-exit",
+      "status": "fail",
+      "reason": "Actual hook process exited 201",
+      "duration_ms": 104584
+    }
+  ],
+  "csp": {
+    "stage": "report-only",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {},
+  "artifacts": [
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-bootstrap-config-0.stdout.log sha256:b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-bootstrap-config-1.stdout.log sha256:b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-bootstrap-config-1.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/bootstrap-execution.json sha256:a701078543960a3a94f66c3f8ada6e02a1b53132e1574c71176806ef3d7e541a",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-repo-gen-9.stdout.log sha256:6138abc493161ba120d4265fc3c1cfa1fba5a854a7fd3f25cc05d7d98f01cd1e",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-repo-gen-9.stderr.log sha256:a56542290b60592e1401c6e5ec7f564c4385ecf0a251e4091391dc8eee773fb7",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-npm-ci-1.stdout.log sha256:5e8f0b29dabd34192ff180d08a22c51f9addb03b2b73b8f7890e6ba20da84213",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-npm-ci-1.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-frontend-build-2.stdout.log sha256:d3b7870de022eff1ca68ae86bf2ae37a6301f2593d8123f357e72d5f50c93eaa",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-frontend-build-2.stderr.log sha256:0052d970095c621adb14b97678461ce2ffc097e27b5c1e1b883ba7bd52bb94d4",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-build-cat-server-3.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-build-cat-server-3.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/cat-server sha256:5579a826a51b74fbb896113d7861e844efac0419712a876bff39b3f1b5411ef2",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-build-cat-browser-plan-4.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-build-cat-browser-plan-4.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/cat-browser-plan sha256:9ca554bae3775d5964312e473a9ac4eae0e820afa0a5f2e6f5f029c5cea7e020",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-ui-runtime-6.stdout.log sha256:b9d3780bd90d700d64fa4bf2edbf29a865d902fa4537e6c9f9b7111a5ec37d7f",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-ui-runtime-6.stderr.log sha256:705fe64504709fbe4226bd197c053c8d1b925d243bc3670dae97b82fd9f24f12",
+    ".gate/gen/original/evidence/games.mjs sha256:070345c2e34b2a7a4ed41664929f28337ca3558aa04f0df78bb676d91378a914",
+    ".gate/gen/original/evidence/gui-original-execution.mjs sha256:99ad0d44d3c67b5133d3fb04ab0f76f0aa292ef648fc98b1c0b35697af8634f2",
+    ".gate/gen/original/evidence/native-plan.mjs sha256:7f6f861e460a6763da29280dc72024299b9140b7c7dace4b0ad34f0f3511d7c0",
+    ".gate/gen/original/evidence/native-report.json sha256:b9d3780bd90d700d64fa4bf2edbf29a865d902fa4537e6c9f9b7111a5ec37d7f",
+    ".gate/gen/original/evidence/original-lock.json sha256:f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c",
+    ".gate/gen/original/evidence/original-package.json sha256:efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9",
+    ".gate/gen/original/evidence/original-ui-0.3.0.tgz sha256:1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+    ".gate/gen/original/evidence/playwright.original.config.mjs sha256:6e05214dbbcb1bb5c2881a0a2a228ca1a3292039d1baea0858787856415ad14f",
+    ".gate/gen/original/evidence/receipt.json sha256:a1adb20d6a43d7f5fc1aebecb83f37d3f899ad8cb31ed955557a5da10842a9d5",
+    ".gate/gen/original/evidence/reporter.mjs sha256:20f561c1fcd1c0829460fdd4bdf58d51435d8ad5f4c162dfa21441fa5955a3c8",
+    ".gate/gen/original/evidence/runtime.spec.mjs sha256:2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a",
+    ".gate/gen/original/evidence/seeded-starts.json sha256:5644ab3b7ee583db6904858712e3872928d62aac2c667322153720e8f4dd31b3",
+    ".gate/gen/original/evidence/source-hashes.json sha256:83b349bda500a08102b5fdbd69b7c8c4c5de7630a4afc8746365dce3fc4b2cbc",
+    ".gate/gen/original/evidence/stderr.log sha256:705fe64504709fbe4226bd197c053c8d1b925d243bc3670dae97b82fd9f24f12",
+    ".gate/gen/original/evidence/stdout.log sha256:b9d3780bd90d700d64fa4bf2edbf29a865d902fa4537e6c9f9b7111a5ec37d7f",
+    ".gate/gen/original/playwright.json sha256:c18b4a542bc6866dbdd0e7e21a64fee4d977d2080b144f0042d8d501315e24c0",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-receipt-contract-8.stdout.log sha256:5f16b39a27b4e3f4c1e94d02b76c22d6e9baad74702ff23a4969549b91484ebe",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-receipt-contract-8.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-browser-inventory-9.stdout.log sha256:05fea578143f58da15883f036181a281b1e80e7c3a5c10b0ccaaa873b363cc84",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-browser-inventory-9.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-quality-npm-ci-10.stdout.log sha256:68f720d662df157484a3a7f60319d47dc6c81b170c3803b792d222d0257b40b6",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-quality-npm-ci-10.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-baseline-11.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-baseline-11.stderr.log sha256:b28fe435bd31c3c8c65ce31d0e9b71f705b08bef90fbcd0c0982fe3ffe218448",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-budget-boundary-12.stdout.log sha256:ca7e1deeb2cf6853149c9bc0ff94d9b98db7b76a9fdd0acdf02538b72f551185",
+    ".gate/gen/logs/72dd24bd-64e4-4766-8ab4-8db0a1290063-cat-original-budget-boundary-12.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/original/budget-boundary.json sha256:ca7e1deeb2cf6853149c9bc0ff94d9b98db7b76a9fdd0acdf02538b72f551185",
+    ".gate/gen/execution.json sha256:39085dcae9fb7c5b46639b8446a7973704eace969bd8165e3375759a06a3a3c4"
+  ]
+}

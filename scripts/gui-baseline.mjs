@@ -49,7 +49,8 @@ try {
   if (!ready) throw new Error("Actual baseline server did not start");
   const pages = [];
   for (const [index, route] of routes.entries()) {
-    const page = await browser.newPage({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce", locale: "ro-RO", timezoneId: "Europe/Bucharest" });
+    const context = await browser.newContext({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce", locale: "ro-RO", timezoneId: "Europe/Bucharest" });
+    const page = await context.newPage();
     await page.goto(origin + route);
     if (route === "/") await page.locator(".hero-title").waitFor();
     else if (route === "/clasament") {
@@ -66,7 +67,7 @@ try {
     const axe = await new AxeBuilder({ page, axeSource }).analyze();
     const fingerprint = axe.violations.map((violation) => ({ id: violation.id, impact: violation.impact, targets: violation.nodes.map((node) => node.target) }));
     pages.push({ route, screenshot: capture ? `baselines/cat/${name}` : `${output}/${name}`, captured_file: `${output}/${name}`, sha256: hash(image), axe: fingerprint });
-    await page.close();
+    await context.close();
   }
   // Vitals are measured by the actual library, loaded before page JS, under the
   // required CDP throttle. Missing tooling cannot become fabricated timing values.
@@ -77,7 +78,8 @@ try {
   for (const [route, selector] of [["/conexiuni", ".connections-grid button"], ["/alchimie?mode=challenges", ".alchemy-inventory-grid button"]]) {
     const runs = [];
     for (let run = 0; run < 5; run++) {
-      const page = await browser.newPage({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce" });
+      const context = await browser.newContext({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce" });
+      const page = await context.newPage();
       const cdp = await page.context().newCDPSession(page);
       await cdp.send("Emulation.setCPUThrottlingRate", { rate: 4 });
       await cdp.send("Network.enable");
@@ -117,7 +119,7 @@ try {
       // Genuine pagehide finalizes the library callbacks; no synthetic lifecycle event.
       await page.goto("about:blank");
       const final = (name) => metrics.filter((metric) => metric.name === name).at(-1)?.value;
-      runs.push({ ...observed, lcp: final("LCP"), inp: final("INP"), cls: final("CLS") ?? 0, action: { name: actionLabel, startTime: actionStarted, entries: actionEntries, latency_ms: Math.max(...actionEntries.map((entry) => entry.duration)) }, metrics }); await page.close();
+      runs.push({ ...observed, lcp: final("LCP"), inp: final("INP"), cls: final("CLS") ?? 0, action: { name: actionLabel, startTime: actionStarted, entries: actionEntries, latency_ms: Math.max(...actionEntries.map((entry) => entry.duration)) }, metrics }); await context.close();
     }
     const median = (key) => runs.map((item) => item[key]).sort((a, b) => a - b)[2];
     vitals.push({ route, runs, median: { lcp: median("lcp"), inp: median("inp"), cls: median("cls") } });
