@@ -1,0 +1,150 @@
+{
+  "schema": "v1-7-graph-editorial-proposal-r2",
+  "revision": 2,
+  "author": "/root",
+  "checked_on": "2026-10-08",
+  "valid_until": "Any bound module/snapshot/source/runtime dependency changes; repeat affected exact review.",
+  "baseline_commit": "1f746db16bf25fca6ab0ae80aff4ddc39c19f74b",
+  "source_module": "scripts/everyday_inputs_v1_7_data_r2.py",
+  "source_module_sha256": "1f9c1841bcce5aa4c66f6ae04deac1e4d6a3a08725892da9e830ee09b9d018c5",
+  "selected_pool_records": [
+    {
+      "id": "i05-lex-01",
+      "revision": 7,
+      "path": "docs/reviews/v1-7-recognizable-content/selection-snapshots/i05-lex-01-r7-reconsideration.json",
+      "sha256": "bd1ebaec0b5edb8f95dc21eb1f04bffb2acccf1c4731e060d40e7dde5c9fce6a"
+    }
+  ],
+  "nodes": [],
+  "edges": [],
+  "lexical_families": [
+    {
+      "node_id": "n_v4soc_salariu",
+      "headword": "leafă",
+      "forms": [
+        "leafă"
+      ],
+      "sense": "Periodic employee-pay sense matching Salary. Exclude regional găvan/tool, old mercenary and blanket income/service-payment equivalence. No additional inflections selected.",
+      "node_snapshot": {
+        "id": "n_v4soc_salariu",
+        "node_type": "concept",
+        "label_ro": "salariu",
+        "category": "societate",
+        "description": "Sumă de bani primită periodic pentru muncă.",
+        "salience": 0.6482,
+        "difficulty_tier": "medium",
+        "degree": 10,
+        "aliases": [
+          "salariul",
+          "salarii",
+          "salariile",
+          "salariului",
+          "salariilor"
+        ]
+      },
+      "unselected_observed_forms": [
+        "lefii",
+        "lefuri",
+        "lefi"
+      ],
+      "independent_raw_acceptance": false
+    }
+  ],
+  "counting": {
+    "new_shared_concepts": 0,
+    "new_world_concepts": 0,
+    "qualified_synonym_families_proposed": 1,
+    "singular_input_forms_proposed": 1,
+    "new_grammatical_inflections_proposed": 0,
+    "new_links": 0,
+    "new_curated_rounds": 0,
+    "new_target_approvals": 0,
+    "installed_additions": 0
+  },
+  "ordinary_baseline_cases": [
+    {
+      "headword": "leafă",
+      "canonical": "Salariu",
+      "owner": "n_v4soc_salariu",
+      "curated_id": "ct_societate_090",
+      "seed": 7,
+      "selector": {
+        "difficulty": "normal",
+        "category": "societate",
+        "daily": false,
+        "exclusions": false
+      },
+      "baseline_result": "unknown,0charge,suggestionLeana; canonicalrank15/distance2/closeness99; warmerbancărank3,4attempts1clue700win,privateGet/Progress/share/repeats PASS",
+      "baseline_requests": 32,
+      "sessions": 2
+    }
+  ],
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+    "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+    "go-backend/internal/content/digest.go": "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d",
+    "go-backend/internal/contentrails/sources/authored-v6.json": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "e365d23ae9cfd2581e146dccc142818d56cdb90fa292b376378996fba78e9b21",
+    "go-backend/internal/contentrails/installed_authorities_pin.go": "5e02f956299375a00549ca2d12a5d3c661366e713c314de2d219f4fea997ad29",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "scripts/basic_words_v33_data.py": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033",
+    "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+    "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+    "docs/reviews/v1-7-recognizable-content/primary-leafa-refresh-r1.json": "f8b9106b73cfe05763e0e6a1a9e5b71828ba4ce2cda2975557ebed88bd0bc71f",
+    "docs/reviews/v1-7-recognizable-content/primary-leafa-browser-access-r2.json": "1859d56a7f49ac7822ac3fc6d9c4cbb2d053f17f92377bd8354d2be8582a6822",
+    "docs/reviews/v1-7-recognizable-content/identity-deck-screen-r1.json": "629fdc1bf1c31b3ac54fe5c72f2f872ee86b90e1a3fbba641b9343b8f4b4663d",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-native-baseline-summary-r1.json": "e535d26c3b0b8602a3a96fa7e2457f1cc295643aa00928b4d1437412402532e6",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-baseline-transcript-r1.json.gz": "bad70fc7107c4b4d83856a53181a1fa24ef8a60f088ddb84fe6bb7aafaf091a0",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-baseline-readiness-review-r1.json": "046715b161c97b738cc6579ad06bf7f97329a22d1c09ac030032595d0541eaf1",
+    "docs/reviews/v1-7-recognizable-content/research-pool-r2-before-selection.json.gz": "714516a68b19778702e359e986318e125cb072be53b13ff1012c5081954de850",
+    "docs/reviews/v50-synonym-basic-word-funnel/vocabulary.json": "b38fb0c106bcb2c1ef0e047b8fe55d111fcda1645fce24beb6f89a247a0700de",
+    "docs/reviews/v50-synonym-basic-word-funnel/README.md": "b8f4856393e422d858ba7077386e8124223b5699b48c5e43b1166bce3a5c1a0c",
+    "scripts/contexto_common_words_v50_data.py": "88f2d58a7f4c77ab08da2eb5cb0864ebc9bf3206c40d7010d77361c50276bd17",
+    "tests/test_v50_synonyms_basic_words.py": "14f2e52e154e2e383ebf266b5369f9543381473688077e3960df42689a89fc3e",
+    "docs/reviews/v1-7-recognizable-content/historical-hold-audit-r1.json": "c1c5747f703f41da3dff21b8bc8a461f45101e1b23cb05aa69d8a2bbc7693718",
+    "docs/reviews/v1-7-recognizable-content/historical-hold-disposition-proposal-r2.json": "07a0b72bbf17d1bf39dd578f8bbe74c20a7c230791761d84c8bcd3619f4078fc",
+    "docs/reviews/v1-7-recognizable-content/hold-disposition-factual-review-r2.json": "e74cd75ef8ad3d005947e32a0b461a55d1d16f085c70a7265e0cdd0aebbdb823",
+    "docs/reviews/v1-7-recognizable-content/hold-disposition-quality-review-r2.json": "effa10dc4e60e32ed081887c0585206251bd48b71374352e7554239f05488d6d",
+    "docs/reviews/v1-7-recognizable-content/research-pool-r5-before-r2-selection.json.gz": "da94adef7c859c83f252ee0619813f9972ed31f0ae7054240bddd965b4782ae1"
+  },
+  "installation_rail": "scripts/apply_common_words_v24.py --data-module everyday_inputs_v1_7_data_r2; ONLY after fresh exactR2module/proposal rawfacts+quality/hold-treatment permission and new reviewed isolation/admission. Originalsharedguard/validators unchanged; failedR1neverretried.",
+  "acceptance_requirements": [
+    "Independent exact factual meaning/norm/identity/access/license judgment for single selected leafă form and Salary owner",
+    "Independent exact quality and all affected/fuzzy/owner/game/history/terminal/mining/prospective ordinary seed7 proof on supported generator candidate",
+    "Supported graph adoption only after acceptance, Source7 exact reviewedSource6parenta086dc2a and all25ancestors, affected source/catalogue/reviews/audits/finals/export/reference/history/currentauthority",
+    "Full mandatory checks and independent exact assembled acceptance before local green landing"
+  ],
+  "pending": [
+    "Fresh exactactualR2module/proposal rawfacts+quality includingexplicitonehold treatment",
+    "R2method/readset/admission and distinct supportedpreflight/isolation",
+    "Allactualcandidate fuzzy/owner/games/ordinary/history/terminal/mining finalquality",
+    "Finalholdretirement/Source7/currentauthority/fullverification/assembled/greenlocaladoption"
+  ],
+  "installation_approval": false,
+  "historical_hold_treatment": {
+    "scope": "current R2batch only, literalleafă/normalizedleafa/ownerSalary, no other batch/gate/legacydata changes",
+    "known_old": "both V50 reviewersaliasreject/finalrejected22; perwordreasonUNKNOWN",
+    "parent_deferred_count": 70,
+    "candidate_deferred_count": 69,
+    "only_removed_literal": "leafă",
+    "remaining_values_order_exact": true,
+    "global_bare_alias_mechanically_sense_filtered": false,
+    "conditional_source_permissions": {
+      "hold-disposition-factual-review-r2.json": "e74cd75ef8ad3d005947e32a0b461a55d1d16f085c70a7265e0cdd0aebbdb823",
+      "hold-disposition-quality-review-r2.json": "effa10dc4e60e32ed081887c0585206251bd48b71374352e7554239f05488d6d"
+    },
+    "fresh_actual_module_raw_reviews_required": true,
+    "final_retirement_approved": false,
+    "old_R1_failed_lane_and_module_bytes_preserved": true,
+    "legacy_V50_V72_shared_importer_test_assertions_unchanged": true,
+    "historical_context_required": "genuine SHA-pinned Source6 pre-retirement to preserve original all7blocked assertions; currenteveryother69 baseline statuses preserved, notallunresolved"
+  }
+}

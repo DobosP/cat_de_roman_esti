@@ -105,3 +105,27 @@ raw facts/conditional quality, all old rejection/source records and original fai
 Future retirement must be one-surface/one-owner batch-local, preserve originalV50/V72/sharedgate/other69dispositions and old historical assertions
 in genuine pre-retirement context, and obtain new exact independent facts/quality before a differently bound supported isolated lane.
 Do not retry R1, lower thresholds, edit the shared guard or infer that earlier rawfactual acceptance retired the historical block.
+
+## R2 explicitly scoped reconsideration
+
+The [new disposition proposal](historical-hold-disposition-proposal-r2.json) 07a0b72b acknowledges both V50rejects and unknown word-specific rationale.
+[Factual disposition review](hold-disposition-factual-review-r2.json) e74cd75e and [quality disposition review](hold-disposition-quality-review-r2.json) effa10dc
+conditionally permitted source construction only. A global bare alias cannot mechanically sense-filter; this remains an explicit editorial risk.
+The exact NEW module everyday_inputs_v1_7_data_r2.py 1f9c1841 and [graph proposalR2](graph-proposal-r2.json) b1aff0b3 bind frozen R7snapshotbd1ebaec;
+R8 handoff pool13a103ee has1selected/1researched/4held/0installed. Pre-reconsideration/selection pools and R1module/proposal/refusal remain exact.
+Only the current R2wave batch omits one literal leafă from inherited70, retaining the ordered other69 with asserted one-owner tuple/alias and no other additions.
+V50/V72sources/BLOCKEDrecords, unchanged sharedimporter, thresholds and original tests remain byte-identical.
+[Fresh actual-module factual](raw-factual-review-r2.json) e975ac12 and [fresh quality/prospective](raw-quality-prospective-review-r2.json) 38fdf521 permit
+SUPPORTED ISOLATED R2 scrutiny only, NOT finalretirement/rawquality/Source7/installation. A newly bound method/readset/admission must precede different preflight.
+Actual other69 baseline owner/projection/unresolved dispositions and genuineSource6 historical all7blocked assertions remain mandatory; never call all69unresolved.
+No candidate or R2native execution has occurred. Old failedR1clock stays failed; no identical retry or shared gate bypass.
+
+### Exact formatting-bound source
+
+Required module lint E501 stopped commit before native execution: only the NOTE literal exceeded100 columns.
+[Repair](r2-note-format-repair-r1.json) preserves old1f9c source in exactgzip; parenthesized literal wrapping leaves fullAST and NOTEvalue identical.
+The current module is adb25ece and [format-only proposalR3](graph-proposal-r3.json)0caad7bc binds the same semanticR2scope/snapshot;
+R9handoff metadata e4477bf8 records this byte change. [Fresh factual ACK](raw-factual-format-binding-r3.json)6f188d5c and
+[fresh quality ACK](raw-quality-format-binding-r3.json)b2822328 bind the new bytes while preserving conditional isolated scrutiny only.
+Finalholdretirement/adoption are still withheld. Future isolation method/readset/admission must name actual adb25/0caad/newACKs,
+not old1f9/b1 or failedR1. No candidate, newnativepreflight, Source7 or live data change occurred.

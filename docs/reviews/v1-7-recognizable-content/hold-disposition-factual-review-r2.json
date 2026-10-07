@@ -1,0 +1,630 @@
+{
+  "schema": "v1-7-historical-hold-disposition-factual-review-r2",
+  "role": "factual",
+  "reviewer": "/root/v17_raw_factual",
+  "checked_on": "2026-10-08",
+  "reviewed_at_utc": "2026-10-07T21:33:08.112813+00:00",
+  "baseline_commit": "1f746db16bf25fca6ab0ae80aff4ddc39c19f74b",
+  "proposal_path": "docs/reviews/v1-7-recognizable-content/historical-hold-disposition-proposal-r2.json",
+  "proposal_sha256": "07a0b72bbf17d1bf39dd578f8bbe74c20a7c230791761d84c8bcd3619f4078fc",
+  "proposal_revision": 2,
+  "held_record_snapshot": {
+    "id": "i05-lex-01",
+    "revision": 6,
+    "state": "held",
+    "path": "docs/reviews/v1-7-recognizable-content/selection-snapshots/i05-lex-01-r6-held.json",
+    "sha256": "cde868d0868842d801544586cf4d17eddc13435a39a1268f8b196efe822bcc5a"
+  },
+  "current_pool": {
+    "path": "docs/content-pool/v1-7-recognizable-content/pool.json",
+    "sha256": "f347cefb438f7784c24b42001f78a588dfdd654c08266f74e7e855798ba8b2cc",
+    "record_revision": 7,
+    "record_state": "held"
+  },
+  "verdict": "conditional_support_for_isolated_reconsideration_only",
+  "decision": "NEW_BOUND_R2_FACTUAL_SUPPORT_FOR_ONE_LITERAL_ONE_OWNER_ISOLATED_INVESTIGATION; HISTORICAL_REJECTION_NOT_REVERSED_AND_RETIREMENT_NOT_GRANTED",
+  "scope": "Fresh source-level reconsideration of the recorded V50 same-leafă/same-Salary rejection and proposed batch-local literal disposition. Only one bare singular leafă→n_v4soc_salariu may be investigated. This is neither a relabelled raw-R1 approval nor a generated-module/native/adoption decision.",
+  "independence": {
+    "R2_proposal_or_pool_authored_by_reviewer": false,
+    "R2_quality_review_read": false,
+    "prior_R1_role": "Same original independent factual role; its old exact receipt remains historical and does not approve this new scope.",
+    "method": "Independently inspect historical vocabulary classifications, legacy source/block vector, active shared gate and all7 original assertion contract; recheck current exact owner/index/source pins and assess global bare-form ambiguity explicitly. Stable original-source observations independently made by this reviewer at20:48–20:53UTC are reused as factual observations only, not as old editorial verdicts."
+  },
+  "readset_sha256": {
+    "docs/reviews/v50-synonym-basic-word-funnel/vocabulary.json": "b38fb0c106bcb2c1ef0e047b8fe55d111fcda1645fce24beb6f89a247a0700de",
+    "docs/reviews/v50-synonym-basic-word-funnel/README.md": "b8f4856393e422d858ba7077386e8124223b5699b48c5e43b1166bce3a5c1a0c",
+    "docs/adr/0074-bounded-typed-vocabulary-expansion.md": "5bbad9855ebaec74adc85b7a25883e2ffe195304ba7ca3615446ef4a719e2231",
+    "docs/adr/0075-bounded-alias-morphology-and-common-guesses.md": "08e04d3a29d3e341f2507ec293445ca7cce73ec65e9b8bcfcf2716e9e23f24ed",
+    "scripts/contexto_common_words_v50_data.py": "88f2d58a7f4c77ab08da2eb5cb0864ebc9bf3206c40d7010d77361c50276bd17",
+    "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "tests/test_v50_synonyms_basic_words.py": "14f2e52e154e2e383ebf266b5369f9543381473688077e3960df42689a89fc3e",
+    "scripts/everyday_inputs_v1_7_data.py": "37b0fd5b843d962d886ff660afb64a0c4c1bc844ecdbaae74eb56eecce7b3004",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+    "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "e365d23ae9cfd2581e146dccc142818d56cdb90fa292b376378996fba78e9b21",
+    "docs/reviews/v1-7-recognizable-content/historical-hold-audit-r1.json": "c1c5747f703f41da3dff21b8bc8a461f45101e1b23cb05aa69d8a2bbc7693718",
+    "docs/reviews/v1-7-recognizable-content/graph-proposal-r1.json": "a53df02974cd2a3b187ed26ed0cd0b3655f16cecc99f3d2f7774cf15d162d45b",
+    "docs/reviews/v1-7-recognizable-content/raw-factual-review-r1.json": "e2fad3f2fb2d9e0ef7b186c0303058f890d9ac27aef46b7db8aa404e4c2f2e60",
+    "docs/reviews/v1-7-recognizable-content/raw-quality-prospective-review-r1.json": "d605a55f2091988efb04749762d8f23de0e03932a8c856d5e706384c00c77de1",
+    "docs/reviews/v1-7-recognizable-content/primary-leafa-browser-access-r2.json": "1859d56a7f49ac7822ac3fc6d9c4cbb2d053f17f92377bd8354d2be8582a6822",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-native-baseline-summary-r1.json": "e535d26c3b0b8602a3a96fa7e2457f1cc295643aa00928b4d1437412402532e6",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-baseline-readiness-review-r1.json": "046715b161c97b738cc6579ad06bf7f97329a22d1c09ac030032595d0541eaf1",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-refusal-summary-r1.json": "4b4e89ca3a2ab7af03bd2d466ed66e3192761aa5874d5f8e524a23f9a7e70125",
+    "docs/reviews/v1-7-recognizable-content/research-pool-r4-before-reconsideration.json.gz": "781b27a98dc412d07a0236362b65ce6adea737bf28e1cb9161a8b31dcece859c",
+    "docs/reviews/v1-7-recognizable-content/historical-hold-disposition-proposal-r2.json": "07a0b72bbf17d1bf39dd578f8bbe74c20a7c230791761d84c8bcd3619f4078fc",
+    "docs/reviews/v1-7-recognizable-content/selection-snapshots/i05-lex-01-r6-held.json": "cde868d0868842d801544586cf4d17eddc13435a39a1268f8b196efe822bcc5a",
+    "docs/content-pool/v1-7-recognizable-content/pool.json": "f347cefb438f7784c24b42001f78a588dfdd654c08266f74e7e855798ba8b2cc",
+    "docs/reviews/v1-7-recognizable-content/hold-reconsideration-preparation-admission-r2.json": "c02df7a457a20503421b6ad3612ea18ec3a5e8a538635c0771bd189036ca927a",
+    "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+    "docs/reviews/v1-7-recognizable-content/primary-leafa-refresh-r1.json": "f8b9106b73cfe05763e0e6a1a9e5b71828ba4ce2cda2975557ebed88bd0bc71f",
+    "cat_de_roman_esti/wordgames/service.py": "ac39b40c5cd04c3070da015b2abe2a20276ab725c523948fff65e21a31033bec",
+    "docs/STATUS.md": "8b587dcdabd6d28ddf7b7a5b577e83f73bbea05721f633ff397fd378cce0b3e4",
+    "scripts/contexto_common_words_v51_data.py": "059e63d9238b12aeeb6a69c112848f6ba6d71597e71c32b7c0e8f7663daf8b04",
+    "scripts/contexto_common_words_v52_data.py": "a7a8213e219a215513c1e67fd87f3452fc6d37b17b9ad18a05ba1426b70e2d80",
+    "scripts/contexto_common_words_v53_data.py": "c10353e7aa5f1fbd5e9d7e7ea6ef4ddb4168ac4408c72b41a6b131da8630fdc6",
+    "scripts/contexto_common_words_v54_data.py": "4873501d99c8956fe33938beafe0f077205b26fb0de36f88c375935f137ecda4",
+    "scripts/contexto_common_words_v55_data.py": "58fbf3fa538f74bb3ee5dbbe3409804630271fad15205a2b45c5ae0486db83fb",
+    "scripts/contexto_common_words_v56_data.py": "72d0c288d400709717a97ce7c10a0f17c13ee0de968a7f38d50b92cd0525571f",
+    "scripts/contexto_common_words_v57_data.py": "f2d741739c04d40095edf61a66582ec3901d942117852bc83302b67e5d5bb9a2",
+    "scripts/contexto_common_words_v58_data.py": "779dd22058a5d196d940900b9d1bdffe92e614eb85d390f9122db81eae5a3b99",
+    "scripts/contexto_common_words_v59_data.py": "ece70efbe8871fa9dfafe02084212d088623f34eee003f57ee4ce6378f67d794",
+    "scripts/contexto_common_words_v60_data.py": "a76cdc4f4c1da877fef6cc8fcb13c40084dae6ca47b1aae3593c1d5acd6a5918",
+    "scripts/contexto_common_words_v61_data.py": "f6f17c8584e861dfd7bd5e137793e97e4adc174b6f7fd87d2fe835065b610007",
+    "scripts/contexto_common_words_v62_data.py": "4e78b343dd8931d8647921970919060ff816b2f4c3372d4c7a681ad2364a6a39",
+    "scripts/contexto_common_words_v63_data.py": "d539ca7effd835b887361572884e120ee42126c5a2039c37e62c4c34eb153330",
+    "scripts/contexto_common_words_v64_data.py": "a5f36259907bc9dedbb6860d6b2da2251beb72b154755132a3eed957feeaf7c8",
+    "scripts/contexto_common_words_v65_data.py": "aee9ac4841dba4684cbfd0e316830fd89ee0b41fe8f331b3dfaf8191416faa00",
+    "scripts/contexto_common_words_v66_data.py": "5132881287e47a49fc7be61d3d11b06d4d3bc16ec6912eb9b2041d5da0c9e0c1",
+    "scripts/contexto_common_words_v67_data.py": "1e1f47371a14d68b0fe0aecd4b620023284b02d569d8a7b8e0f410afa4c7f0ba",
+    "scripts/contexto_common_words_v68_data.py": "641d13b2ce738c053bf3f3d820ab918613c21f5504afb21ab3fd6821adbd40bf",
+    "scripts/contexto_common_words_v70_data.py": "a7007c5d331bab1b8bcf798a20a14766a66a29506dafe807e1702928fde06528",
+    "scripts/contexto_common_words_v71_data.py": "ab55dd00f619c0e0012949e4ec6f227d9e6bb33055bde968097e0699440931a9"
+  },
+  "checks": {
+    "all22_R2_proposal_bindings_exact": true,
+    "held_R6_snapshot_exact_and_equal_archived_record": true,
+    "current_R7_record_remains_HELD": true,
+    "all_bound_legacy_source_chain_pins_exact": true,
+    "base_deferred_count": 70,
+    "base_deferred_normalized_unique_count": 70,
+    "leafă_literal_occurrences_in_base": 1,
+    "proposed_other_terms_count": 69,
+    "base70_ordered_canonical_sha256": "ca4043ff48dc88bc9b8c0a4ceec634f9f11f2b5743406abe3edd5aff0124dc67",
+    "other69_ordered_canonical_sha256": "112f704026ebc170ae79279c91ef1057e1ab03d5a8724f13baf4e846f237be2f",
+    "future_R2_module_exists": false,
+    "current_owner": "n_v4soc_salariu",
+    "current_bare_leaf_key_owner": null,
+    "current_singular_input_installed": false,
+    "shared_importer_guard_changed": false,
+    "tests_changed": false,
+    "native_game_profile_or_transaction_run_by_reviewer": false
+  },
+  "historical_findings": {
+    "candidate": "V50 vocabulary candidates.aliases[leafă] exactly n_v4soc_salariu; same bare singular and same owner proposed now.",
+    "classification": "Both reviewer_a.alias_reject and reviewer_b.alias_reject contain leafă. Final.rejected contains it among22; final.deferred8 does not. The separately named reviews.unanimous_reject array does not contain it, so do not mislabel that array membership.",
+    "word_specific_reason": "UNKNOWN. Saved reviewer rows contain classification lists and bindings, without a leafă-specific rationale. General hard-homonym/collision policy cannot reconstruct why either reviewer rejected it.",
+    "old_reviewers_wrong_claim_supported": false,
+    "old_rejection_preserved": true,
+    "active_gate": "V50 BLOCKED_ALIAS_FORMS includes the exact leafă literal; V72 inherits70 deferred surfaces. Shared apply_common_words_v24 preflight compares normalized incoming authored word keys with batch deferred keys and correctly rejected R1. The old R1 failure is substantive formal-contract refusal, not a tooling defect to bypass.",
+    "R1_limit": "R1 factual sense facts remain valid within their old narrow bounds, but that review did not explicitly reconsider the newly found V50 rejection/active inherited vector. Its bound module imports the full70 hold vector while authors leafă, so old raw acceptance cannot justify retirement or retrying unchanged R1."
+  },
+  "new_source_support": {
+    "primary_exact_form": "Original DOOM search was independently read earlier this source session: remuneration entry2 presents singular leafă with no displayed regional/obsolete marker. Separate entry1 is marked regional and denotes găvan. Observed payment lefii/lefuri and tool lefi are not selected.",
+    "primary_exact_meaning": "Original DLR printed487/entryLEAFĂ1 sense2 was visually enlarged/read by this reviewer: periodic remuneration to an employee from a public/private institution is linked to salary. Its broader service/produce payment extension is real and excluded from the proposed Salary equivalence. Printed486/sense1 separately marks old military/mercenary payment obsolete.",
+    "current_owner_match": "Actual current Salary description is periodic money received for work; category societate, degree10 and existing employment/pay neighbors support that intended employee-pay referent. No owner/header/aliases were changed. Old incident tax/pay/industry labels are contextual records, not newly verified contemporary financial claims.",
+    "usage_support": "Original Romanian HotNews wording from2008 and2024 was directly read by this reviewer earlier; leafă and salariu refer to the same remuneration/pay-slip context. Academy2017 semantic article supplies historical work-pay/income distinctions, not modern dominance or financial advice.",
+    "baseline_gap": "Bound actual Source6 normal/Societate BNRseed7/32HTTP evidence046715b1 supplies a finite intended-pay use: leafă unknown/suggestionLeana/zero new charge versus Salary rank15/distance2/closeness99. Baseline is not prospective alias success, policy-defect proof, enjoyment evidence or hold-retirement approval."
+  },
+  "global_bare_alias_assessment": {
+    "proposed_mechanism": "The shared bare normalized key leafa would resolve to Salary globally. A module NOTE or qualified prose does not mechanically filter a user’s intended sense.",
+    "counter_senses_remain_real": [
+      "Regional găvan/tool homonym",
+      "Historical soldier/mercenary payment",
+      "Broader service compensation including produce or nonperiodic arrangements",
+      "Total income or all remuneration are not equivalent to periodic employee salary"
+    ],
+    "facts_supporting_finite_investigation": "The intended employee-pay reading is directly documented as a current unrestricted normative headword and occurs in modern original publisher wording; the distinct tool entry is expressly regional and the old military entry expressly obsolete. Together with the exact existing pay owner and ordinary intended-pay input gap, these provide a defensible ordinary-pay interpretation to investigate. This is an inference about a reasonable game input, not measured population dominance.",
+    "suitability_verdict": "Conditionally suitable for an isolated optional-input investigation of this ordinary pay reading. It is NOT factually justified as universal equivalence for every bare-token intent or every payment. No current competing shared/projection owner would be displaced, but absence of such an owner does not erase semantic ambiguity.",
+    "no_false_sense_filter_promise": true,
+    "condition_for_any_later_retirement": "Fresh quality and exact actual-module reviews must explicitly agree that ordinary employee-pay input value warrants this one scoped disposition despite the surviving secondary meanings. Prospective evidence must expose global alias effects/collisions/fuzzy behavior rather than imply runtime can distinguish pay from tool intent. If it cannot satisfy the retained exact-owner/editorial boundaries honestly, keep HELD or propose a separately sourced explicit phrase/nonwinning mechanism."
+  },
+  "proposed_batch_disposition_assessment": {
+    "source_only_permission": "If the independently bound R2quality review also permits this exact investigation, root may prepare/freeze one new R2 source module/proposal/handoff for review. This receipt alone grants no permission to execute a native lane or actually retire the hold.",
+    "permitted_literal_scope": [
+      "leafă"
+    ],
+    "permitted_intended_owner": "n_v4soc_salariu",
+    "preconditions": [
+      "Base source V72 hash remainsf1c6c3fb and exact vector length70 with70 normalized-unique keys and one literal leafă.",
+      "Derived current-batch vector must equal the original exact ordered vector omitting ONLY the literal leafă, length69; no normalized blanket filter, extra forms, owner changes or general exemption.",
+      "Explicit reconsidered tuple must be exactly(leafă,) and owner map exactlyleafă→n_v4soc_salariu; actual new module bytes require fresh exact review before any generator/native admission.",
+      "All V50 classification/source bytes, V72/legacy chain, shared importer guard, all original thresholds and other69 dispositions remain preserved. Old R1 proposal/module/factual/quality/refusal receipts remain immutable history.",
+      "No node, edge, target, curated round, additional morphological form or Source7 installation is implied."
+    ],
+    "final_retirement_approved": false,
+    "default_shared_gate_waiver_approved": false
+  },
+  "other69_current_baseline_static": {
+    "method": "Read inherited V72 constants with bytecode disabled and inspect exact current sealed base index plus contexto_data.projection_terms. These are two serialized namespaces, not public native resolution/confirmation/hint behavior.",
+    "rows": [
+      {
+        "surface": "mare",
+        "normalized_key": "mare",
+        "sealed_base_index_owner": "n_v3geo_mare",
+        "sealed_projection": null
+      },
+      {
+        "surface": "rău",
+        "normalized_key": "rau",
+        "sealed_base_index_owner": "n_v2geo_rau",
+        "sealed_projection": null
+      },
+      {
+        "surface": "rapid",
+        "normalized_key": "rapid",
+        "sealed_base_index_owner": "n_v11spo_rapid_bucuresti",
+        "sealed_projection": null
+      },
+      {
+        "surface": "masă",
+        "normalized_key": "masa",
+        "sealed_base_index_owner": "n_v4gas_masa",
+        "sealed_projection": null
+      },
+      {
+        "surface": "bancă",
+        "normalized_key": "banca",
+        "sealed_base_index_owner": "n_v4soc_banca",
+        "sealed_projection": null
+      },
+      {
+        "surface": "temă",
+        "normalized_key": "tema",
+        "sealed_base_index_owner": "n_v4lit_tema",
+        "sealed_projection": null
+      },
+      {
+        "surface": "par",
+        "normalized_key": "par",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "vinete",
+        "normalized_key": "vinete",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "persoană",
+        "normalized_key": "persoana",
+        "sealed_base_index_owner": "n_v4lim_persoana_gramaticala",
+        "sealed_projection": null
+      },
+      {
+        "surface": "barcă",
+        "normalized_key": "barca",
+        "sealed_base_index_owner": "n_spt_fc_barcelona",
+        "sealed_projection": null
+      },
+      {
+        "surface": "taxi",
+        "normalized_key": "taxi",
+        "sealed_base_index_owner": "n_v11muz_taxi",
+        "sealed_projection": null
+      },
+      {
+        "surface": "ogradă",
+        "normalized_key": "ograda",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "muică",
+        "normalized_key": "muica",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "baraboi",
+        "normalized_key": "baraboi",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "cucuruzi",
+        "normalized_key": "cucuruzi",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "cucuruzii",
+        "normalized_key": "cucuruzii",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "blid",
+        "normalized_key": "blid",
+        "sealed_base_index_owner": null,
+        "sealed_projection": {
+          "public_id": "ctxp_0d16f4679699413609bc",
+          "anchor_id": "n_v30_kitchen_table_castron",
+          "mapping_kind": "explicit",
+          "rank_penalty": 1
+        }
+      },
+      {
+        "surface": "amicii",
+        "normalized_key": "amicii",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "arborele",
+        "normalized_key": "arborele",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "arbori",
+        "normalized_key": "arbori",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "arborii",
+        "normalized_key": "arborii",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "arborelui",
+        "normalized_key": "arborelui",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "arborilor",
+        "normalized_key": "arborilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "cuptor",
+        "normalized_key": "cuptor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "fișă",
+        "normalized_key": "fisa",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "elan",
+        "normalized_key": "elan",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "priză multiplă",
+        "normalized_key": "priza multipla",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "păturile",
+        "normalized_key": "paturile",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "păturilor",
+        "normalized_key": "paturilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "mesei",
+        "normalized_key": "mesei",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "meselor",
+        "normalized_key": "meselor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "părintelui",
+        "normalized_key": "parintelui",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "părinților",
+        "normalized_key": "parintilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "golfului",
+        "normalized_key": "golfului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "golfurilor",
+        "normalized_key": "golfurilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "peștelui",
+        "normalized_key": "pestelui",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "peștilor",
+        "normalized_key": "pestilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "corpului",
+        "normalized_key": "corpului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "corpurilor",
+        "normalized_key": "corpurilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "tabloului",
+        "normalized_key": "tabloului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "tablourilor",
+        "normalized_key": "tablourilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "cărții",
+        "normalized_key": "cartii",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "cărților",
+        "normalized_key": "cartilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "creierului",
+        "normalized_key": "creierului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "creierelor",
+        "normalized_key": "creierelor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "fileului",
+        "normalized_key": "fileului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "fileurilor",
+        "normalized_key": "fileurilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "cheii",
+        "normalized_key": "cheii",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "cheilor",
+        "normalized_key": "cheilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "portului",
+        "normalized_key": "portului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "porturilor",
+        "normalized_key": "porturilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "rolului",
+        "normalized_key": "rolului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "rolurilor",
+        "normalized_key": "rolurilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "frontului",
+        "normalized_key": "frontului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "fronturilor",
+        "normalized_key": "fronturilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "notei",
+        "normalized_key": "notei",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "notelor",
+        "normalized_key": "notelor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "curentului",
+        "normalized_key": "curentului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "curenților",
+        "normalized_key": "curentilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "fluxului",
+        "normalized_key": "fluxului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "fluxurilor",
+        "normalized_key": "fluxurilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "punctului",
+        "normalized_key": "punctului",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "punctelor",
+        "normalized_key": "punctelor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "legii",
+        "normalized_key": "legii",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "legilor",
+        "normalized_key": "legilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "băncii",
+        "normalized_key": "bancii",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "băncilor",
+        "normalized_key": "bancilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "intrigii",
+        "normalized_key": "intrigii",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      },
+      {
+        "surface": "intrigilor",
+        "normalized_key": "intrigilor",
+        "sealed_base_index_owner": null,
+        "sealed_projection": null
+      }
+    ],
+    "counts": {
+      "sealed_base_index_owner_present": 9,
+      "sealed_projection_present": 1,
+      "neither_static_namespace_present": 59
+    },
+    "critical_limit": "Do not call all69 unresolved. Even9 static index owners may be subject to accent-sensitive/fuzzy deny or service rules;59 absent static keys may produce suggestions/confirmation. Actual current native/service dispositions must be separately measured and frozen before candidate comparison. The row ordering and existing owner/projection metadata here are preservation evidence, not new approvals."
+  },
+  "historical_assertion_conditions": {
+    "all7_literal_BLOCKED_forms": [
+      "ogradă",
+      "leafă",
+      "muică",
+      "baraboi",
+      "cucuruzi",
+      "cucuruzii",
+      "blid"
+    ],
+    "original_assertion_retained": "assert all(svc.resolve(surface) is None for surface in DATA.BLOCKED_ALIAS_FORMS)",
+    "meaning": "This exact historical contract must continue to run against a genuine SHA-verified pre-retirement Source6 graph/context. Do not drop leafă from old literal tuples, redefine old expected responses from a new candidate, or replace the old assertion with a permissive current-state check.",
+    "future_code_review": "Any historical/current-context split needs independent exact review of the genuine predecessor archive/inverse and cache/root restoration before running all original checks. New current tests prove leafă resolution plus every other69 measured unchanged disposition; blid remains nonwinning projection while historical shared resolve stays absent. No tests were changed in this source phase."
+  },
+  "source_access_license_false_claim_checks": {
+    "original_normative_receipt": "1859d56a7f49ac7822ac3fc6d9c4cbb2d053f17f92377bd8354d2be8582a6822",
+    "independent_prior_observation_receipt": "e2fad3f2fb2d9e0ef7b186c0303058f890d9ac27aef46b7db8aa404e4c2f2e60; underlying original observations only reused here, old verdict not rebound.",
+    "DOOM_url": "https://doom.lingv.ro/cautare/q/leaf%C4%83?",
+    "DLR_pay_url": "https://cflr-scans.solirom.ro/A100059/scans/08/f0491.webp",
+    "DLR_old_military_url": "https://cflr-scans.solirom.ro/A100059/scans/08/f0490.webp",
+    "rights": "DOOM electronic CC BY-NC-SA4.0 is source-specific; do not transfer it to DLR/journal/press or infer unrestricted commercial reproduction. No open DLR facsimile/journal/press reproduction license verified; no original definitions/scans/articles copied.",
+    "edition_numbering": "DOOM payment entry2 vs DLR entry1/sense2 is an editorial numbering difference, not semantic contradiction.",
+    "finance": "Historical/recent publisher usage supports words, not adopted salary amounts, legislation, employment facts or current public-office statuses. Existing financial KG edges are not reapproved as current facts.",
+    "past_rationale": "No assertion that old reviewers acted because of regional tool, lack of primary access, register or mercenary sense; saved per-word reason remains UNKNOWN.",
+    "population": "No empirical claim that every Romanian primarily uses the pay sense or enjoys this alias; optional input investigation is narrower than target recognition/promotion."
+  },
+  "permission_summary": {
+    "construct_exact_source_R2_module_only_after_matching_independent_quality_permission": true,
+    "retirement_approved": false,
+    "native_execution_approved": false,
+    "raw_module_or_generated_candidate_approved": false,
+    "installation_approved": false,
+    "Source7_approved": false,
+    "new_target_round_approved": false
+  },
+  "remaining_conditions": [
+    "Bind new actual R2module/proposal/selected revision and get fresh affected exact factual/quality review; current prose is not actual-module acceptance.",
+    "Measure/freeze actual all70 current owner/projection/fuzzy/service dispositions and compare exact supported candidate; preserve other69 ordered dispositions without invented blanket-unresolved expectations.",
+    "Fresh distinct reviewed preflight/isolated transaction admission, full affected games/fuzzyLeana/ordinaryseed7 alias-canonical shared slot/hints700/privacy/history/mining/terminal evidence and final scoped retirement/rawquality judgment.",
+    "Exact Source7 reviewedSource6parent/all25archives, affected catalogue/reviews/current-authority/export/corpus/history bindings, fresh installed original-role finals, full required checks and independent assembled acceptance before green landing."
+  ],
+  "resource_clock": {
+    "admission_path": "docs/reviews/v1-7-recognizable-content/hold-reconsideration-preparation-admission-r2.json",
+    "deadline_utc": "2026-10-07T21:47:14.371621+00:00",
+    "source_cutoff_utc": "2026-10-07T21:44:14.371621+00:00",
+    "review_requested_finish_before_utc": "2026-10-07T21:40:00+00:00",
+    "root_inclusive_max_agents": 3,
+    "worker_browser_peak_RSS": "Unmeasured; no whole-source memory PASS. Parent admission fresh disk223327256576B/memory67830591488B is a headroom observation, not measured worker RSS.",
+    "execution": "No native/game/build/transaction/source data change; read-only hashes/classifications/constants/index observations plus this one factual JSON report. Earlier R1 materialization failed and remains failed, with no retry/clock reset."
+  },
+  "valid_until": "Any bound R2 proposal, held snapshot, source interpretation, owner/index, current namespace, intended literal disposition or actual future module/handoff changes; repeat affected exact review."
+}
