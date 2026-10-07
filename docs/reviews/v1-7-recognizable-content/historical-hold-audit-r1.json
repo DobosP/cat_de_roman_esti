@@ -1,0 +1,111 @@
+{
+  "schema": "v1-7-leafa-exact-historical-hold-audit-r1",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-07T21:18:52.112802+00:00",
+  "scope": "Narrow read-only historical rejection/deferred-gate audit and requirements for possible bounded R2 reconsideration. No retirement, source/pool/module/proposal/fixture/native change or selection/adoption approval.",
+  "decision": "CURRENT_R1_REMAINS_BLOCKED; NEW_EXACT_R2_RECONSIDERATION_JUSTIFIED_ONLY",
+  "retirement_approved": false,
+  "selection_approved": false,
+  "adoption_approved": false,
+  "Source7_approved": false,
+  "bindings": {
+    "docs/reviews/v1-7-recognizable-content/historical-hold-audit-admission-r1.json": "03d31728cb2963bdf6fadd752e84bd1b1fb2eb82c6b46bf8f08eba6631766e9d",
+    "docs/reviews/v50-synonym-basic-word-funnel/vocabulary.json": "b38fb0c106bcb2c1ef0e047b8fe55d111fcda1645fce24beb6f89a247a0700de",
+    "docs/reviews/v50-synonym-basic-word-funnel/README.md": "b8f4856393e422d858ba7077386e8124223b5699b48c5e43b1166bce3a5c1a0c",
+    "docs/adr/0074-bounded-typed-vocabulary-expansion.md": "5bbad9855ebaec74adc85b7a25883e2ffe195304ba7ca3615446ef4a719e2231",
+    "docs/adr/0075-bounded-alias-morphology-and-common-guesses.md": "08e04d3a29d3e341f2507ec293445ca7cce73ec65e9b8bcfcf2716e9e23f24ed",
+    "tests/test_v50_synonyms_basic_words.py": "14f2e52e154e2e383ebf266b5369f9543381473688077e3960df42689a89fc3e",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "scripts/everyday_inputs_v1_7_data.py": "37b0fd5b843d962d886ff660afb64a0c4c1bc844ecdbaae74eb56eecce7b3004",
+    "docs/reviews/v1-7-recognizable-content/graph-proposal-r1.json": "a53df02974cd2a3b187ed26ed0cd0b3655f16cecc99f3d2f7774cf15d162d45b",
+    "docs/reviews/v1-7-recognizable-content/raw-factual-review-r1.json": "e2fad3f2fb2d9e0ef7b186c0303058f890d9ac27aef46b7db8aa404e4c2f2e60",
+    "docs/reviews/v1-7-recognizable-content/raw-quality-prospective-review-r1.json": "d605a55f2091988efb04749762d8f23de0e03932a8c856d5e706384c00c77de1",
+    "docs/reviews/v1-7-recognizable-content/primary-leafa-browser-access-r2.json": "1859d56a7f49ac7822ac3fc6d9c4cbb2d053f17f92377bd8354d2be8582a6822",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-baseline-readiness-review-r1.json": "046715b161c97b738cc6579ad06bf7f97329a22d1c09ac030032595d0541eaf1",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-native-baseline-summary-r1.json": "e535d26c3b0b8602a3a96fa7e2457f1cc295643aa00928b4d1437412402532e6",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-refusal-summary-r1.json": "4b4e89ca3a2ab7af03bd2d466ed66e3192761aa5874d5f8e524a23f9a7e70125",
+    "scripts/contexto_common_words_v50_data.py": "88f2d58a7f4c77ab08da2eb5cb0864ebc9bf3206c40d7010d77361c50276bd17",
+    "scripts/contexto_common_words_v51_data.py": "059e63d9238b12aeeb6a69c112848f6ba6d71597e71c32b7c0e8f7663daf8b04",
+    "scripts/contexto_common_words_v52_data.py": "a7a8213e219a215513c1e67fd87f3452fc6d37b17b9ad18a05ba1426b70e2d80",
+    "scripts/contexto_common_words_v53_data.py": "c10353e7aa5f1fbd5e9d7e7ea6ef4ddb4168ac4408c72b41a6b131da8630fdc6",
+    "scripts/contexto_common_words_v54_data.py": "4873501d99c8956fe33938beafe0f077205b26fb0de36f88c375935f137ecda4",
+    "scripts/contexto_common_words_v55_data.py": "58fbf3fa538f74bb3ee5dbbe3409804630271fad15205a2b45c5ae0486db83fb",
+    "scripts/contexto_common_words_v56_data.py": "72d0c288d400709717a97ce7c10a0f17c13ee0de968a7f38d50b92cd0525571f",
+    "scripts/contexto_common_words_v57_data.py": "f2d741739c04d40095edf61a66582ec3901d942117852bc83302b67e5d5bb9a2",
+    "scripts/contexto_common_words_v58_data.py": "779dd22058a5d196d940900b9d1bdffe92e614eb85d390f9122db81eae5a3b99",
+    "scripts/contexto_common_words_v59_data.py": "ece70efbe8871fa9dfafe02084212d088623f34eee003f57ee4ce6378f67d794",
+    "scripts/contexto_common_words_v60_data.py": "a76cdc4f4c1da877fef6cc8fcb13c40084dae6ca47b1aae3593c1d5acd6a5918",
+    "scripts/contexto_common_words_v61_data.py": "f6f17c8584e861dfd7bd5e137793e97e4adc174b6f7fd87d2fe835065b610007",
+    "scripts/contexto_common_words_v62_data.py": "4e78b343dd8931d8647921970919060ff816b2f4c3372d4c7a681ad2364a6a39",
+    "scripts/contexto_common_words_v63_data.py": "d539ca7effd835b887361572884e120ee42126c5a2039c37e62c4c34eb153330",
+    "scripts/contexto_common_words_v64_data.py": "a5f36259907bc9dedbb6860d6b2da2251beb72b154755132a3eed957feeaf7c8",
+    "scripts/contexto_common_words_v65_data.py": "aee9ac4841dba4684cbfd0e316830fd89ee0b41fe8f331b3dfaf8191416faa00",
+    "scripts/contexto_common_words_v66_data.py": "5132881287e47a49fc7be61d3d11b06d4d3bc16ec6912eb9b2041d5da0c9e0c1",
+    "scripts/contexto_common_words_v67_data.py": "1e1f47371a14d68b0fe0aecd4b620023284b02d569d8a7b8e0f410afa4c7f0ba",
+    "scripts/contexto_common_words_v68_data.py": "641d13b2ce738c053bf3f3d820ab918613c21f5504afb21ab3fd6821adbd40bf",
+    "scripts/contexto_common_words_v70_data.py": "a7007c5d331bab1b8bcf798a20a14766a66a29506dafe807e1702928fde06528",
+    "scripts/contexto_common_words_v71_data.py": "ab55dd00f619c0e0012949e4ec6f227d9e6bb33055bde968097e0699440931a9",
+    "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee"
+  },
+  "known_historical_record": {
+    "review_path": "docs/reviews/v50-synonym-basic-word-funnel/vocabulary.json",
+    "candidate_locator": "candidates/aliases/leafă",
+    "candidate_owner": "n_v4soc_salariu",
+    "reviewer_a_locator": "reviews/reviewer_a/alias_reject",
+    "reviewer_b_locator": "reviews/reviewer_b/alias_reject",
+    "both_reject_exact_surface": true,
+    "final_locator": "final/rejected/0",
+    "final_classification": "rejected among22, not one of8 final.deferred surfaces",
+    "separate_unanimous_reject_array_membership": false,
+    "final_alias_or_projection_acceptance": false,
+    "lexical_source_present": "https://dexonline.ro/definitie/leaf%C4%83",
+    "per_word_reason": "UNKNOWN: saved rows contain classifications/owner, not a leafă-specific explanatory rationale. Do not claim the two old reviewers rejected it specifically for the regional tool, register, mercenary sense or lack of primary access.",
+    "general_policy": "ADR0074/README limit shared aliases to independently unanimous normalized-unique exact same-referent forms; disagreements defer, collisions/hard homonyms reject. Those general classes cannot identify this word’s missing historical reason. ADR0074 is superseded; ADR0075 explicitly retains its separation/collision/owner/archive boundaries while itself later superseded.",
+    "historical_funnel_counts": {
+      "accepted_alias_surfaces": 8,
+      "accepted_projection_surfaces": 12,
+      "deferred_surfaces": 8,
+      "rejected_surfaces": 22,
+      "new_nodes": 0,
+      "new_edges": 0,
+      "new_game_records": 0
+    }
+  },
+  "current_formal_block": {
+    "origin": "scripts/contexto_common_words_v50_data.py BLOCKED_ALIAS_FORMS contains leafă; appended to BASE_DEFERRED_AMBIGUOUS_TERMS.",
+    "inheritance": "V51→52→53→54→55→56→57→58→59→60→61→62→63→64→65→66→67→68→70→71→72 preserves inherited terms. V72 exposes inherited DEFERRED_AMBIGUOUS_TERMS, source assertion70unique terms.",
+    "r1_module": "37b0fd5b imports this unchangedV72 deferred vector and separately authors ALIASES={n_v4soc_salariu:(leafă,)}. That is contradictory under the existing batch contract, regardless of R1 prose qualification.",
+    "shared_importer": "apply_common_words_v24 _preflight intersects normalized batch deferred terms with incoming authored word keys. It correctly refuses leafa before supported materialization.",
+    "actual_failure": "Exact original native refusal summary4b4e89ca/resulta51fa543: exit1 deferred ambiguous terms were authored into the resolver:[leafa]; transaction restored. Step2skipped, no candidate generated/materializer/live/source change.197protected+14scratch postchecks exact; failedcampaign remainsFAIL, not resourcePASS.",
+    "earlier_screen_limit": "R1 identity/pool screens did not identify this historical V50 vocabulary row or active inherited source hold. They cannot serve as complete rejection clearance. Keep their exact old hashes/conditional judgments as historical, never silently rebind them.",
+    "policy_result": "Current R1 cannot be installed or generated by supported rails; do not change/deactivate the shared gate or silently filter the term merely to obtain a passing run."
+  },
+  "materially_new_evidence_and_its_limits": [
+    {
+      "evidence": "Current original DOOM/DLR browser receipt1859d56a and independently reviewed raw facts e2fad3f2",
+      "supports": "Explicit periodic employee-pay sense matching unchanged Salary; regional găvan/tool separately identified; modern pay entry lacks restrictive register marker in the reported observation. Edition numbering differences do not conflict. Only singular proposed; current source/access/license/uncopied-text limits preserved.",
+      "does_not_prove": "That the saved V50 rejection reason was wrong, that regional/historical homonyms disappeared, that every usage is Salary, or that a global shared bare-word alias is automatically acceptable."
+    },
+    {
+      "evidence": "Ordinary unchanged sealedSource6 BNR normal/Societate seed7,8draws,2public-created sessions32HTTP; readiness046715b1",
+      "supports": "Actual leafăunknown/suggestionLeana/zerocharge versus canonicalSalary rank15/distance2/Cald99, coherent safe warmerbank3,4attempts/1clue/700score/privateGet/Progress/share. This is a concrete intended employee-pay input gap worth finite reconsideration.",
+      "does_not_prove": "A runtime defect against the old exclusion policy, prospective alias/fuzzy/global-homonym behavior, default/no-category/human enjoyment, shared Lanț benefit, historical hold retirement or a new target/round."
+    },
+    {
+      "evidence": "R1 exact factual and quality/prospective receipts e2fad3f2/d605a55f",
+      "supports": "Narrow word/owner facts and a planned bounded player-benefit investigation.",
+      "does_not_prove": "Explicit reconsideration/retirement of the newly identified old same-word/same-owner two-reviewer rejection. Their bound37/a53 scope remains blocked; they cannot be relabelled as R2 approvals."
+    }
+  ],
+  "minimal_honest_future_r2_proposal": [
+    "Root records a NEW exact revision/handoff acknowledging the V50same-word/same-owner rejection and active inherited hold, linking this audit and failed R1 lane. Preserve oldR4snapshot/R5handoff/R1proposal/module/reviews/refusal bytes; revise current pool feedback rather than silently rewriting its selected claims.",
+    "One explicit normalized surface leafa / stored singular leafă and one existing owner n_v4soc_salariu may be reconsidered. Freeze an exact R2 retirement proposal naming the historical row/source hashes, narrow employee-pay rationale, retained homonym limits and evidence. Retirement is an editorial decision requiring fresh independent exact factual AND quality scrutiny, not a side effect of successful generation.",
+    "If both exact R2 reviewers permit isolated investigation, the R2wave module may declare a batch-local retired-hold tuple for ONLY this surface/owner and an exact derived deferred vector omitting only that reviewed item. Require set/order-preservation checks against inheritedV72: allother69remain and no additional input/target/category/threshold changes. Preserve V50BLOCKED_ALIAS_FORMS, V50vocabulary/README/alllegacy source modules includingV72, and shared importer rejection logic byte-for-byte; no global deletion, blanket exemption or generic gate waiver.",
+    "A module note describing employee pay does not mechanically make a bare global alias sense-specific. R2 factual/quality reviewers must explicitly decide whether familiar dominant employee use justifies overriding the archived exclusion despite the regional tool/historical pay readings. If that cannot be defended, retain the hold or revise to a separately sourced explicit phrase or nonwinning mechanism with honest owner/proxy review; do not force the current bare word into Salary.",
+    "Preserve the original V50funnel and every archived reviewer classification. Preserve all original test assertions/literals, including all seven blocked forms unresolved, in a genuine independently SHA-verified pre-retirement Source6/archived context. Any current-context split must be explicit and reviewed: new tests require only this newly qualified leafă owner to resolve, every other inherited hold retain its exact independently measured baseline owner/projection/unresolved disposition, with no new shared alias admission, historical all-blocked context stay exact, and default importer refusal still reject unreviewed hold injection. Do not remove leafă from the historical expected tuple, weaken assertions or derive old expected responses from the new candidate.",
+    "After fresh exact R2facts/quality permit isolation and changed-input method/admission reviews, use original supported transactions to materialize a distinct owned attempt. R1 failed guards/output remain history; no identical failed retry or old-clock reset. Final retirement/adoption is withheld until actual complete exact all-game/mining/projection/fuzzy/owner/history/terminal plus ordinaryseed7alias/canonical/privateGet/hint700 evidence, Source7reviewedSource6parent/all25archives and current-authority/fullassembled gates pass."
+  ],
+  "concrete_next_step": "Prepare exactly one source-only R2 hold-reconsideration/handoff proposal for leafă→Salary with explicit old rejection and batch-local intended disposition, then obtain fresh independent exact factual and quality judgments before modifying the wave module or attempting a different supported lane. Preserve hold if the bare global alias cannot legitimately carry the qualified sense.",
+  "resource_and_clock": "Root+auditor2inclusive under fresh historical-hold-audit admission; no native replay/browser/new research breadth/additional agent. Completed before21:20:52sourcecutoff within original21:23:52absolute deadline. Whole-worker/browser RSS unmeasured; no such qualification claimed.",
+  "valid_until": "Any bound historical/source/currentproposal/evidence/scope changes; repeat affected audit. This record itself grants no retirement or installation."
+}

@@ -91,3 +91,17 @@ Frozen pre-selection [R2pool](research-pool-r2-before-selection.json.gz), R4snap
 The finite next evidence includes all716pack/265feedback/2419mining/464projections/421quick/World/180terminal/history,
 29newlexicalqueries plus19retained regressions, <=192declared service cases and ordinaryseed7 direct/sharedattempt/privacy/warmerclue700 proof.
 Only supported nonmutating preflight/isolated generator under fresh admissions may precede installation; no actual generated candidate exists yet.
+
+## R1 supported preflight refusal and historical hold
+
+The [supported refusal summary](isolated-materialization-refusal-summary-r1.json) preserves the failed R1 lane and lossless logs:
+actual dry-run rejects authored normalized leafa in the inherited deferred list. All197protected inputs+14scratch/tool pins remain exact;
+no resource-floor/RSS failure, no materialization, and candidate path remains absent. Source6 live data are unchanged.
+The [historical audit](historical-hold-audit-r1.json) verifies V50 BOTH reviewers alias_reject for leafă→sameSalary and final.rejected22;
+no saved per-word rationale exists. V50BLOCKED_ALIAS_FORMS propagates into unchanged V72 deferred70 and the shared importer correctly refuses it.
+Current original normative/ordinary32case evidence warrants NEW scoped R2 reconsideration only, not automatic removal or judgment rebinding.
+Only i05-lex-01 moves R5selected→R6held; [pre-hold pool](research-pool-r3-before-preflight-hold.json.gz), exact selectedR4/proposalR1/moduleR1,
+raw facts/conditional quality, all old rejection/source records and original failed clock remain preserved. Pool1researched/5held/0selected/0installed.
+Future retirement must be one-surface/one-owner batch-local, preserve originalV50/V72/sharedgate/other69dispositions and old historical assertions
+in genuine pre-retirement context, and obtain new exact independent facts/quality before a differently bound supported isolated lane.
+Do not retry R1, lower thresholds, edit the shared guard or infer that earlier rawfactual acceptance retired the historical block.
