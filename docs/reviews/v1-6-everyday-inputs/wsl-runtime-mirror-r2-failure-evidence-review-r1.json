@@ -1,0 +1,73 @@
+{
+  "Linux_interpreter_sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+  "evidence_sha256": {
+    "wsl-runtime-mirror-r2-failure-result.json": "4d9f4e3aa847f529a0555e07eb48a4d61f1c6905e7a0b6bec47c0a209a0dad9a",
+    "wsl-runtime-mirror-r2-parent-result.json": "a01476dfe279b7b0851050f54867d80d0cc8ec85d6a406dd233b46f964866936",
+    "wsl-runtime-mirror-r2-stderr.txt": "aadde31d519d4e8655d3e8ef15316f6e71695ae8e35a431d97116a1842336cec",
+    "wsl-runtime-mirror-r2-stdout.txt": "833ea0e3e6790fb73a7e1db9982f90b18d1fc49c163648f8ae91d65ffab7c5a0"
+  },
+  "failure": {
+    "canonical_runtime_preinventory_exact_reported": true,
+    "child_elapsed_seconds": 43.32491455900163,
+    "completed_accepted_loop_rows": 127,
+    "elapsed_before_publication": 43.31222606400115,
+    "host_elapsed_seconds": 43.70400000000154,
+    "native_commands_executed": 0,
+    "parent_exit_code": 1,
+    "reason": "TimeoutError: profile work/total deadline",
+    "status": "failed",
+    "total_limit_seconds": 50,
+    "work_limit_seconds": 40
+  },
+  "findings": [],
+  "helper_evidence": {
+    "claim": "Original result confirms existing terminal registry; parent before/after owned-live arrays empty and exited, no new native/helper invocation by reviewer.",
+    "cleanup_unconfirmed_terminals": [],
+    "orphan_sidecars": [],
+    "pending_or_unknown_entries": [],
+    "registry_terminal_count": 283,
+    "retained_worker_sidecars": 283
+  },
+  "installation_approval": false,
+  "method_sha256": "7f3ab617cdb347e11176513bd8e550e982588bbb6d43b68a8aa2b8e605fead78",
+  "next_constraints": [
+    "Original failure/result/pending/128 partial files retained, no promotion/reuse as complete mirror.",
+    "No retry under sameUUID or cap/deadline reset. A materially changed independently reviewed preparation needs fresh owned root and full parity/evidence within unchanged40/50 and64MiB/original1GiB bounds.",
+    "Pure synthetic R11 fixtures may qualify components independently; actual mirror/R11/native campaign remain blocked on complete qualified preparation.",
+    "Original failednativeR1 clock/baseline/peak/outcomes immutable, no native approval."
+  ],
+  "nonce": "d318b9b3638e4de18d31fac17897c196",
+  "original_native_failed_result_sha256": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+  "performance_inference_only": [
+    "Parent start12:23:57.781 and first accounting12:24:11.034 leave about13.25seconds spent in startup pins/runtime inventory/first helper; components were not individually timed.",
+    "Repeated fresh canonical ancestor/Path.resolve checks and per64KiB resource guards plausibly add metadata cost; retained evidence does not isolate those costs or establish throughput.",
+    "A materially new anchored-directory/no-follow metadata strategy or independently qualified host streaming reader could reduce overhead while preserving identity/hash/ancestry/resource/time bounds; identical cached repeat is unsupported."
+  ],
+  "resource_claim_limit": {
+    "MemAvailable_before": 35299385344,
+    "accounting_before_total": 1098568799,
+    "disk_before_C": 25004269568,
+    "disk_before_ext4": 992874037248,
+    "fresh_final_accounting": false,
+    "growth_before": 346137211,
+    "original_baseline": 752431588,
+    "statement": "Failure evidence and source guards are accepted; absent final accounting/RSS/full parity are not manufactured as PASS."
+  },
+  "retained_partial_audit": {
+    "actual_regular_singlelink_files": 128,
+    "all128_match_exact_plan_paths_sizes_hashes": true,
+    "bytes": 52945789,
+    "interpretation": "128th file retained before an operation guard failed;127 completed accepted rows and128 present files are coherent. No full final parity or runtime109 qualification.",
+    "missing_plan_files": 44,
+    "original_pending_sha256": "8f57a37e883ed3b3942e3b25c6add4b307792c7154ee1cc1d9b8bc120eb4a50e",
+    "original_result_matches_D_copy": true,
+    "runtime_tmp_empty": true
+  },
+  "reviewed_at_utc": "2026-10-07T12:31:38.512818+00:00",
+  "reviewer": "/root/continuation_audit, independent reviewer",
+  "schema": "v1-6-wsl-runtime-mirror-r2-failure-evidence-review-r1",
+  "scope": "Read/hash/parse exact original/copied failure/parent captures, retained ext4 mirror files and helper registry, targeted source timing analysis. No candidate/helper/application/native execution, mirror creation, signals, deletion, retry or clock renewal.",
+  "source_review_sha256": "770ae562551eca2c0ace39216c3313570ac59505beb0e4d77f1d4f56ccb3e6fe",
+  "valid_until": "Bound evidence changes; preserve originalfailed preparation and originalnativeR1 history.",
+  "verdict": "ACCEPT_PRESERVED_FAILED_PREPARATION_EVIDENCE"
+}

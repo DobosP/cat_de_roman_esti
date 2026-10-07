@@ -1,0 +1,268 @@
+{
+  "accounting_after_fresh_sample": {
+    "C_bytes": 1078926816,
+    "C_free_bytes": 27213348864,
+    "WSL_MemAvailable_bytes": 32990138368,
+    "ext4_free_bytes": 992816472064,
+    "ext4_owned_bytes": 18874368,
+    "growth_from_retained_original_baseline": 345369596,
+    "sampled_at_utc": "2026-10-07T11:42:28.020448+00:00",
+    "total_bytes": 1097801184
+  },
+  "accounting_before": {
+    "C_bytes": 1060037337,
+    "C_free_bytes": 27238883328,
+    "WSL_MemAvailable_bytes": 32936767488,
+    "ext4_free_bytes": 992868790272,
+    "ext4_owned_bytes": 0,
+    "growth_from_retained_original_baseline": 307605749,
+    "sampled_at_utc": "2026-10-07T11:41:59.024082+00:00",
+    "total_bytes": 1060037337
+  },
+  "accounting_sample_precedes_final_report": true,
+  "baseline_origin_sha256": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+  "cache_state": "ordinary cached filesystem operations; no eviction or cold-cache claim",
+  "checked_at_utc": "2026-10-07T11:41:59.107417+00:00",
+  "claim_limit": "Does not prove NTFS caused the failed lane or predict native build/CPU/race throughput. No R1 clock renewal, resume or native PASS.",
+  "cleanup_or_deletions": 0,
+  "cpu_seconds": 6.101243446,
+  "elapsed_seconds_before_publication": 37.120806185999754,
+  "exclusive_task_root_ownership_required": true,
+  "ext4_accounting_root": "/home/paul_work/work/_temp/codex__content-v1-6",
+  "filesystem_identities": {
+    "C": {
+      "device": "0:84",
+      "filesystem": "9p",
+      "mount": "/mnt/c"
+    },
+    "ext4": {
+      "device": "8:32",
+      "filesystem": "ext4",
+      "mount": "/"
+    }
+  },
+  "final_publication_growth_upper_bound": 38288135,
+  "helper_calls": 2,
+  "limits": {
+    "RSS_bytes": 2147483648,
+    "original_baseline_growth_bytes": 1073741824,
+    "profile_growth_bytes": 67108864,
+    "publication_reserve_inside_caps": 524288,
+    "report_bytes": 131072,
+    "total_seconds": 50,
+    "work_seconds": 40
+  },
+  "matched_hash_parity": true,
+  "no_original_data_writes": true,
+  "nonce": "ec561abf57bf47ada35787b989a424e7",
+  "original_baseline_bytes": 752431588,
+  "peak_process_RSS_bytes": 26894336,
+  "profile_roots": {
+    "NTFS": "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/io-profile-r1/ec561abf57bf47ada35787b989a424e7",
+    "ext4": "/home/paul_work/work/_temp/codex__content-v1-6/io-profile-r1/ec561abf57bf47ada35787b989a424e7"
+  },
+  "publication_started_elapsed_seconds": 37.15422360199955,
+  "qualification_scope": "synthetic_metadata_and_io_only",
+  "retained_files": true,
+  "roots_C": [
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gocache",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tmp",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gopath",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gomodcache",
+    "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tools"
+  ],
+  "schema": "v1-6-matched-scratch-io-profile-r1",
+  "source_bindings": {
+    "Linux_python_path": "/usr/bin/python3.14",
+    "Linux_python_sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+    "R4": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+    "R9": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+    "Windows_python": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+    "profile": "121490ad8322f74064d7abf953b38773fcc76622873b973142d7d4609fe7dda7"
+  },
+  "source_or_native_tests_executed": 0,
+  "status": "completed_synthetic_io_profile",
+  "synthetic_payload_bytes": 37748736,
+  "windows_metadata_cleanup": "confirmed_by_exact_R9_final_receipts",
+  "work_finished_elapsed_seconds": 29.084308006000356,
+  "workloads": {
+    "NTFS": [
+      {
+        "cpu_seconds": 0.43672698899999984,
+        "name": "write",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "bytes": 9437184,
+          "directories": 18,
+          "files": 65
+        },
+        "wall_seconds": 2.48320048000096
+      },
+      {
+        "cpu_seconds": 0.5296862159999998,
+        "name": "copy",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "bytes": 9437184,
+          "files": 65
+        },
+        "wall_seconds": 2.745195550000062
+      },
+      {
+        "cpu_seconds": 0.20133712999999975,
+        "name": "fresh-stat",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "bytes": 18874368,
+          "files": 130
+        },
+        "wall_seconds": 1.0842711580007744
+      },
+      {
+        "cpu_seconds": 0.889921798,
+        "name": "read-sha256",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "files": 130,
+          "manifest_sha256": "d4957ef5f299877c63f11407d190dfb57e43568bbecd991287290a53d07366a4"
+        },
+        "wall_seconds": 4.424124656999993
+      },
+      {
+        "cpu_seconds": 0.2558870099999999,
+        "name": "fresh-fsync",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "directory_fsync_calls": 19,
+          "fresh_file_fsync_calls": 130
+        },
+        "wall_seconds": 1.6978082149998954
+      }
+    ],
+    "ext4": [
+      {
+        "cpu_seconds": 0.22430299499999995,
+        "name": "write",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "bytes": 9437184,
+          "directories": 18,
+          "files": 65
+        },
+        "wall_seconds": 0.8393291930005944
+      },
+      {
+        "cpu_seconds": 0.3227543490000002,
+        "name": "copy",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "bytes": 9437184,
+          "files": 65
+        },
+        "wall_seconds": 1.2233318649996363
+      },
+      {
+        "cpu_seconds": 0.13972233299999992,
+        "name": "fresh-stat",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "bytes": 18874368,
+          "files": 130
+        },
+        "wall_seconds": 0.5775319040003524
+      },
+      {
+        "cpu_seconds": 0.7310704670000003,
+        "name": "read-sha256",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "files": 130,
+          "manifest_sha256": "d4957ef5f299877c63f11407d190dfb57e43568bbecd991287290a53d07366a4"
+        },
+        "wall_seconds": 3.1992065449994698
+      },
+      {
+        "cpu_seconds": 0.2968849889999996,
+        "name": "fresh-fsync",
+        "proc_self_io_after": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "proc_self_io_before": {
+          "reason": "proc-self-io-absent",
+          "supported": false
+        },
+        "result": {
+          "directory_fsync_calls": 19,
+          "fresh_file_fsync_calls": 130
+        },
+        "wall_seconds": 2.5501920149999933
+      }
+    ]
+  }
+}

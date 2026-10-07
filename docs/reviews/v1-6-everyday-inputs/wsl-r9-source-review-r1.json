@@ -1,0 +1,40 @@
+{
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:27:57Z",
+  "append_only": true,
+  "reviewer_execution_performed": false,
+  "reviewer_os_process_checks_performed": false,
+  "native_campaign_admitted": false,
+  "schema": "v1-6-independent-source-review",
+  "scope": "SOURCE_ONLY",
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "bindings": {
+    "methods/run_worktree_lane_wsl_r9.py.txt": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+    "methods/check_runner_signal_wsl_actual_r9.py.txt": "b1690655242067646e16a855b8df5330967de4aa0251d9d8be5ccdd506abdd76",
+    "methods/check_scan_parity_wsl_windows_r4.py.txt": "602bf85c3677a303fc21f1a5ac14ab8c0635f42ae4b153a00f2e6c4f594e2836",
+    "methods/windows_size_helper_wsl_r4.py.txt": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7"
+  },
+  "component_verdicts": {
+    "runner_r9": "ACCEPT_SOURCE_ONLY",
+    "actual_root_lifecycle_fixture_r9": "ACCEPT_SOURCE_ONLY",
+    "windows_scanner_parity_fixture_r4": "ACCEPT_SOURCE_ONLY"
+  },
+  "findings": [],
+  "resolves": "R8-F1 in preserved wsl-r8-source-review-r1.json",
+  "accepted_source_properties": [
+    "Only historical-registry inspection changes from exact rejected R8. R3 lookup uses fresh lstat, treats only FileNotFoundError as absence, requires an actual directory and propagates all other lookup/enumeration errors. Directory symlinks and non-directory entries refuse.",
+    "R2 historical registry itself must be an actual directory before its unchanged exact single-nonce/file/hash retirement checks; original failed/unconfirmed status is preserved.",
+    "Complete strict four-role hard quota validators and their pre-count invocation, source/interpreter/new R4 registry pins, current final receipt/identity/exit/job-close caps, fresh fallback and all fixed campaign state/publication/limits remain unchanged.",
+    "Actual-root lifecycle fixture changes only both R9 runner filename references. Scanner parity fixture changes only exact R9 source binding/schema. All prior roots, observations, signal/error assertions and24/30/60s bounds remain."
+  ],
+  "claim_limits": [
+    "Source acceptance is not caller-based fixture execution qualification.",
+    "Accepted controlled Windows helper execution is a separate evidence scope; it does not establish full actual-root scanner performance or lifecycle behavior."
+  ],
+  "execution_preconditions": [
+    "Source-review and run exact updated pure hard-proof and historical-registry negative fixtures, including denied lstat/iteration propagation, before actual-root qualification.",
+    "Bind exact R9 bytes at the expected scratch path and run scanner/full actual-root active and finalization fixtures with unchanged external bounds.",
+    "Static roots must remain quiet during exact scanner parity; dynamic probe observations retain their64KiB difference bound and do not claim exact parity.",
+    "Fresh original resource admission and fixed campaign clock/baseline remain mandatory before native commands; no resets or old synthetic pass inheritance."
+  ]
+}

@@ -1,0 +1,422 @@
+"""Actual R12 closed-failed-lane CLI refusals; source-only until independent acceptance.
+Usage: qualified Python -B FILE NEW_DIRECT_S_PROBE_DIRECTORY BINDING_JSON BINDING_SHA256
+The binding identifies an already closed R16 active lane. No admission, clock, baseline,
+manifest, state or original outcome is created or renewed by this fixture.
+Work24seconds; total30seconds. Whole mixed-root accounting remains fresh.
+"""
+import datetime
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import signal
+import stat
+import subprocess
+import sys
+import time
+
+if not sys.dont_write_bytecode or sys.flags.optimize != 0:
+    raise RuntimeError('ordinary nonoptimized qualified Python -B required')
+R=Path('/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S=Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+D=R/'docs/reviews/v1-6-everyday-inputs'
+X=Path('/home/paul_work/work/_temp/codex__content-v1-6')
+RUNNER=S/'probe/run_worktree_lane_wsl_r12.py'
+RUNNER_SHA='77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0'
+ACTIVE_SHA='4d5ef75cb3ad5f67e42d237c6bd5f7fb2af38a233b5e0273c481c1d45b950de5'
+PYTHON=Path('/usr/bin/python3.14')
+PYTHON_SHA='52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41'
+MODE=S/'probe/go-tool-telemetry-r1/mode'
+MODE_SHA='b470b84cf0cd3189e10615bffea7d5cbd9f61134ba1c2cfd513ddd45b776a5f6'
+COPY_RESULT=D/'wsl-runtime-mirror-r6-result.json'
+COPY_SHA='efa8509d719fc2507248873a76c6059907a78f6839a96409769119befe0f1238'
+MIRROR=X/'runtime-readset-mirror-r1/43a6894fd7a94b3587c744815884c9f3'
+BASELINE=752431588
+GIB=1<<30
+REPORT_RESERVE=128<<10
+MAX_READ=128<<10
+received_signal=None
+module=None
+
+def on_signal(number, frame):
+    # Flag-only: Popen return-to-ownership bookkeeping cannot be interrupted.
+    global received_signal
+    received_signal=number
+    if module is not None:
+        module.received_signal=number
+
+def exact_file(path, wanted, maximum=MAX_READ):
+    path=Path(path)
+    before=path.lstat()
+    if (not stat.S_ISREG(before.st_mode) or before.st_nlink!=1 or
+            path.resolve(strict=True)!=path or before.st_size>maximum):
+        raise ValueError('exact single-link unredirected bounded regular file required: '+str(path))
+    data=path.read_bytes()
+    after=path.lstat()
+    if (len(data)>maximum or
+            (before.st_dev,before.st_ino,before.st_mode,before.st_size,before.st_mtime_ns,before.st_nlink)!=
+            (after.st_dev,after.st_ino,after.st_mode,after.st_size,after.st_mtime_ns,after.st_nlink) or
+            hashlib.sha256(data).hexdigest()!=wanted):
+        raise ValueError('exact immutable bounded file differs: '+str(path))
+    return data
+
+def rss_bytes():
+    for line in Path('/proc/self/status').read_text().splitlines():
+        if line.startswith('VmRSS:'):
+            return int(line.split()[1])*1024
+    raise RuntimeError('own RSS unavailable')
+
+def timestamp(value):
+    result=datetime.datetime.fromisoformat(value)
+    if result.tzinfo is None:
+        raise ValueError('aware retained lane time required')
+    return result
+
+def closed_binding(path, wanted):
+    if not re.fullmatch('[0-9a-f]{64}', wanted):
+        raise ValueError('exact binding hash required')
+    if path!=D/'wsl-r12-failed-lane-refusal-binding-r2.json':
+        raise ValueError('exact dedicated owned R2 binding path required')
+    data=exact_file(path,wanted)
+    binding=json.loads(data)
+    keys={'schema','lane','manifest','state','cumulative_result','step0','active_check','active_parent',
+          'pins','expected_deadline_utc','original_start_size','active_fixture_sha256'}
+    if not isinstance(binding,dict) or set(binding)!=keys:
+        raise ValueError('exact closed failed-lane binding fields required')
+    if (binding['schema']!='v1-6-r12-exact-closed-failed-lane-refusal-binding-r1' or
+            binding['active_fixture_sha256']!=ACTIVE_SHA or binding['original_start_size']!=BASELINE or
+            not re.fullmatch('r16-active-[0-9a-f]{16}',binding['lane'])):
+        raise ValueError('binding must identify one exact closed R16 active lane')
+    lane=binding['lane']
+    snapshots={path:wanted}
+    targets={}
+    for key in ('manifest','state','cumulative_result','step0','active_check','active_parent'):
+        item=binding[key]
+        if (not isinstance(item,dict) or set(item)!={'path','sha256'} or
+                not isinstance(item['path'],str) or not re.fullmatch('[0-9a-f]{64}',item['sha256'])):
+            raise ValueError('invalid exact receipt binding')
+        targets[key]=Path(item['path'])
+    # Validate ALL target locations before opening any of the six receipts.
+    manifest_path=targets['manifest']
+    if (manifest_path.name!='admission.json' or manifest_path.parent.parent!=S/'probe' or
+            not re.fullmatch('wsl-r12-actual-active-r16-[0-9a-f]{32}',manifest_path.parent.name)):
+        raise ValueError('original direct task-owned R16 active admission required')
+    if (targets['state']!=S/'probe'/(lane+'-r4-r2-state.json') or
+            targets['cumulative_result']!=D/(lane+'-result.json') or
+            targets['step0']!=D/(lane+'-step-0-result.json') or
+            targets['active_check']!=manifest_path.parent/'check-result.json' or
+            targets['active_parent']!=D/'wsl-r12-actual-active-r16-parent.json'):
+        raise ValueError('retained failed-lane receipt paths differ')
+    if manifest_path.parent.resolve(strict=True)!=manifest_path.parent:
+        raise ValueError('original active directory was redirected')
+    objects={}
+    for key,target in targets.items():
+        snapshots[target]=binding[key]['sha256']
+        objects[key]=json.loads(exact_file(target,binding[key]['sha256']))
+    manifest,state,result,step,check,parent=(objects[k] for k in
+        ('manifest','state','cumulative_result','step0','active_check','active_parent'))
+    deadline=timestamp(binding['expected_deadline_utc'])
+    start=timestamp(manifest['checked_at_utc'])
+    if (manifest['deadline_utc']!=binding['expected_deadline_utc'] or
+            (deadline-start).total_seconds()!=1200 or manifest['lane']!=lane or
+            manifest['runner_sha256']!=RUNNER_SHA or manifest['historical_growth_baseline']!=BASELINE or
+            manifest['execution_mirror']!=str(MIRROR) or len(manifest['commands'])!=2 or
+            manifest['commands'][0]['name']!='owned-python-child-and-grandchild' or
+            manifest['commands'][1]['name']!='forbidden-after-failure' or
+            manifest['scratch_bindings']!={} or manifest['expected_after']!={}):
+        raise ValueError('original active manifest/clock/baseline differs')
+    pins=binding['pins']
+    if (not isinstance(pins,dict) or pins!=manifest['inputs'] or pins!=manifest['unchanged'] or
+            len(pins)!=5 or pins.get(str(RUNNER))!=RUNNER_SHA or pins.get(str(MODE))!=MODE_SHA or
+            pins.get(str(COPY_RESULT))!=COPY_SHA):
+        raise ValueError('complete original protected active pins required')
+    for name,digest in pins.items():
+        target=Path(name)
+        if target not in (RUNNER,MODE,COPY_RESULT) and target.parent!=manifest_path.parent:
+            raise ValueError('protected active pin escaped its exact owned directory')
+        exact_file(target,digest)
+        snapshots[target]=digest
+    if (state['status']!='failed' or state['pending'] is not None or state['next_index']!=1 or
+            len(state['steps'])!=1 or state['steps'][0]!={'receipt_path':binding['step0']['path'],
+                                                       'receipt_sha256':binding['step0']['sha256']} or
+            result['status']!='failed' or result['all_steps_completed'] is not False or
+            result['steps']!=[step] or step['index']!=0 or step['status']!='failed' or
+            step['argv']!=manifest['commands'][0]['argv'] or step['received_signal']!=signal.SIGTERM or
+            step['exit_code'] in (None,0) or step['cleanup']['error'] is not None or
+            step['cleanup']['remaining_live_members']!=[] or
+            not all(step['pre_checks'].values()) or not all(step['post_checks'].values()) or
+            step['pre_checks'].get('owned-telemetry-mode:off-shape-hash') is not True or
+            step['post_checks'].get('owned-telemetry-mode:off-shape-hash') is not True):
+        raise ValueError('exact durable failed owned-cleanup lane required')
+    for obj in (state,result,step):
+        if (obj['original_start_size']!=BASELINE or obj['deadline_utc']!=binding['expected_deadline_utc'] or
+                obj['manifest_sha256']!=binding['manifest']['sha256'] or
+                obj['campaign_started_at_utc']!=state['campaign_started_at_utc']):
+            raise ValueError('retained failure identity/time/baseline differs')
+    if (check.get('passed') is not True or check.get('failure') is not None or
+            check.get('fallback_cleanup_needed') is not False or
+            type(check.get('work_finished_elapsed_seconds')) not in (int,float) or
+            not 0<=check['work_finished_elapsed_seconds']<=24 or
+            not 0<=check.get('elapsed_seconds',31)<=30 or
+            check.get('runner_sha256')!=RUNNER_SHA or
+            check.get('copy_result_sha256')!=COPY_SHA or check.get('task_owned_mode_sha256')!=MODE_SHA or
+            check.get('native_Go_or_application_executions')!=0 or
+            check['observations'].get('separate_real_failed_lane_cli_refusal_gate_mandatory') is not True or
+            check['observations'].get('forbidden_successor_not_launched') is not True):
+        raise ValueError('successful bounded R16 active fixture receipt required')
+    if (parent.get('mode')!='active' or parent.get('exit_code')!=0 or
+            type(parent.get('elapsed_seconds')) not in (int,float) or
+            not 0<=parent['elapsed_seconds']<=30 or
+            parent.get('fixture_sha256')!=ACTIVE_SHA or parent.get('fixture_post_sha256')!=ACTIVE_SHA or
+            parent.get('windows_process_exited') is not True or
+            parent['interpreter_immediate_pre']['sha256']!=PYTHON_SHA or
+            parent['interpreter_post']['sha256']!=PYTHON_SHA or
+            parent['interpreter_immediate_pre']['optimize']!=0 or
+            parent['interpreter_post']['optimize']!=0 or
+            parent['interpreter_immediate_pre']['no_bytecode'] is not True or
+            parent['interpreter_post']['no_bytecode'] is not True):
+        raise ValueError('exact closed qualified R16 active parent receipt required')
+    return binding,manifest,deadline,snapshots
+
+
+def terminal_signal():
+    if received_signal is not None:
+        return received_signal
+    waiting=sorted({signal.SIGTERM,signal.SIGINT}.intersection(signal.sigpending()))
+    return int(waiting[0]) if waiting else None
+
+def report_blob(report):
+    blob=(json.dumps(report,sort_keys=True,indent=2)+'\n').encode()
+    if len(blob)>32<<10:
+        raise RuntimeError('refusal report32KiB encoding bound')
+    return blob
+
+def absent(path):
+    try:path.lstat()
+    except FileNotFoundError:return
+    raise RuntimeError('owned terminal transition path already occupied')
+
+def publish_terminal(directory,report,started):
+    # Caller blocks catchable signals before taking its first terminal snapshot.
+    # At most three32KiB images/links plus32KiB overhead use the unchanged128KiB
+    # reserve. Every transition is inside this just-created owned directory.
+    if directory.resolve(strict=True)!=directory or not stat.S_ISDIR(directory.lstat().st_mode):
+        raise RuntimeError('owned terminal directory redirected')
+    target=directory/'check-result.json'
+    pending=directory/'result.json.pending'
+    attempt=directory/'result.completion-attempt.json'
+    transition=directory/'result.signal-failure.pending'
+    for path in (target,pending,attempt,transition):absent(path)
+    initial=report_blob(report)
+    with pending.open('xb') as handle:
+        handle.write(initial);handle.flush();os.fsync(handle.fileno())
+    absent(target)
+    os.replace(pending,target)
+    fd=os.open(directory,os.O_RDONLY|os.O_DIRECTORY)
+    try:os.fsync(fd)
+    finally:os.close(fd)
+    elapsed=time.monotonic()-started
+    late=terminal_signal()  # Final empty snapshot follows the total-time check.
+    if late is not None or elapsed>30:
+        # The first durable image is an uncommitted completion attempt. Keep it
+        # unchanged and publish a coherent failed terminal receipt before return.
+        report['passed']=False
+        report['received_signal']=late
+        report['elapsed_seconds']=elapsed
+        if report['failure'] is None:
+            report['failure']={'type':'InterruptedError' if late is not None else 'TimeoutError',
+                               'message':'catchable signal before completed terminal boundary' if late is not None
+                                         else 'terminal publication exceeded30seconds'}
+        failure_image=report_blob(report)
+        for path in (attempt,transition):absent(path)
+        exact_file(target,hashlib.sha256(initial).hexdigest(),32<<10)
+        with transition.open('xb') as handle:
+            handle.write(failure_image);handle.flush();os.fsync(handle.fileno())
+        exact_file(target,hashlib.sha256(initial).hexdigest(),32<<10)
+        exact_file(transition,hashlib.sha256(failure_image).hexdigest(),32<<10)
+        # link is exclusive; an occupied attempt is never overwritten. Both
+        # names now identify our known image before replacing only its target.
+        os.link(target,attempt)
+        before=target.lstat();retained=attempt.lstat()
+        if (not stat.S_ISREG(before.st_mode) or before.st_nlink!=2 or retained.st_nlink!=2 or
+                (before.st_dev,before.st_ino)!=(retained.st_dev,retained.st_ino) or
+                hashlib.sha256(target.read_bytes()).digest()!=hashlib.sha256(initial).digest()):
+            raise RuntimeError('owned completion-attempt identity changed')
+        os.replace(transition,target)
+        exact_file(attempt,hashlib.sha256(initial).hexdigest(),32<<10)
+        exact_file(target,hashlib.sha256(failure_image).hexdigest(),32<<10)
+        fd=os.open(directory,os.O_RDONLY|os.O_DIRECTORY)
+        try:os.fsync(fd)
+        finally:os.close(fd)
+    # SUCCESS boundary: initial image is durable and the fresh empty signal/
+    # total-time snapshot above is complete. Signals after this boundary remain
+    # blocked until exit and cannot retroactively invalidate a completed check.
+    return report
+
+
+def main():
+    global module
+    started=time.monotonic()
+    if len(sys.argv)!=4:
+        raise ValueError('NEW_DIRECT_S_PROBE_DIRECTORY BINDING_JSON BINDING_SHA256 required')
+    directory=Path(sys.argv[1])
+    if (directory.parent!=S/'probe' or directory.parent.resolve(strict=True)!=directory.parent or
+            not re.fullmatch('r12-failed-lane-refusals-[0-9a-f]{32}',directory.name)):
+        raise ValueError('fresh direct owned refusal directory required')
+    try:
+        directory.lstat()
+    except FileNotFoundError:
+        pass
+    else:
+        raise ValueError('refusal directory already exists; never retry/reset')
+    directory.mkdir(mode=0o700)
+    child=identity=None
+    failure=None
+    fallback=False
+    observations=[]
+    accounts={}
+    work_finished=None
+    peak_rss=0
+    cleanup=None
+    def remaining():
+        nonlocal peak_rss
+        peak_rss=max(peak_rss,rss_bytes())
+        if peak_rss>2*GIB:
+            raise RuntimeError('fixture own RSS2GiB')
+        if received_signal is not None:
+            raise InterruptedError('catchable fixture signal')
+        value=started+24-time.monotonic()
+        if value<=0:
+            raise TimeoutError('refusal fixture work budget exhausted')
+        return value
+    def live_lane(deadline):
+        remaining()
+        if datetime.datetime.now(datetime.timezone.utc)>=deadline:
+            raise TimeoutError('original failed lane deadline expired; never renew it')
+    def stable(snapshots):
+        for path,digest in snapshots.items():
+            remaining()
+            exact_file(path,digest)
+    def account(name,manifest,first):
+        remaining()
+        roots=module.measurement_roots(manifest)
+        measured=module.measured_size(roots,interruptible=True)
+        remaining()
+        free=min(shutil.disk_usage(root).free for root in (R,X))
+        memory=module.memory_available()
+        growth=measured-BASELINE
+        if (growth<0 or growth+REPORT_RESERVE>GIB or
+                any(shutil.disk_usage(root).free<(17 if first else 16)*GIB for root in (R,X)) or
+                free-REPORT_RESERVE<16*GIB or memory<16*GIB):
+            raise RuntimeError('fresh cumulative growth/dual-volume/memory/publication floor')
+        accounts[name]={'fresh_measured_bytes':measured,'original_baseline_bytes':BASELINE,
+                        'incremental_bytes':growth,'reserved_report_bytes_inside_limits':REPORT_RESERVE,
+                        'minimum_volume_free_bytes':free,'memory_available_bytes':memory,
+                        'measurement_roots':[str(root) for root in roots]}
+    try:
+        remaining()
+        if Path(sys.executable).resolve(strict=True)!=PYTHON or sys.version_info[:2]!=(3,14):
+            raise RuntimeError('exact qualified Linux Python invocation required')
+        # Interpreter is larger than the bounded JSON/source readsets.
+        if hashlib.sha256(PYTHON.read_bytes()).hexdigest()!=PYTHON_SHA:
+            raise RuntimeError('exact Linux interpreter hash differs')
+        binding_path=Path(sys.argv[2])
+        binding,manifest,deadline,snapshots=closed_binding(binding_path,sys.argv[3])
+        remaining()
+        exact_file(RUNNER,RUNNER_SHA)
+        spec=importlib.util.spec_from_file_location('exact_r12_refusal_guard',RUNNER)
+        module=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.received_signal=received_signal
+        module.limits(manifest)
+        live_lane(deadline)
+        stable(snapshots)
+        account('pre',manifest,True)
+        expected={1:'ValueError: only the exact successful prefix may continue; pending/failed/complete cannot retry',
+                  0:'ValueError: campaign already exists; never reset/retry index zero'}
+        for index,error in expected.items():
+            live_lane(deadline)
+            stable(snapshots)
+            out_path=directory/('refusal-'+str(index)+'-stdout.json')
+            err_path=directory/('refusal-'+str(index)+'-stderr.txt')
+            with out_path.open('xb') as out,err_path.open('xb') as err:
+                live_lane(deadline)  # Positive work and original deadline immediately before Popen.
+                # Exact pinned R12 has a Python3.14 SyntaxWarning for return-in-finally.
+                # Suppress only that warning category in this controlled CLI; all other
+                # stderr remains forbidden. This changes diagnostics, not optimization.
+                child=subprocess.Popen([str(PYTHON),'-B','-W','ignore::SyntaxWarning',
+                                        str(RUNNER),binding['manifest']['path'],str(index)],
+                                       stdout=out,stderr=err,start_new_session=True)
+                identity=module.process_info(child.pid)
+                if identity is None or identity['pgid']!=child.pid or identity['sid']!=child.pid:
+                    raise RuntimeError('owned real CLI identity unavailable')
+                while not module.child_finished(child):
+                    remaining()
+                    members,rss=module.group_info(child.pid)
+                    peak_rss=max(peak_rss,rss)
+                    if rss>2*GIB or out_path.stat().st_size>16<<10 or err_path.stat().st_size>16<<10:
+                        raise RuntimeError('owned real CLI RSS/output bound')
+                    time.sleep(min(.05,remaining()))
+                if module.group_info(child.pid)[0]:
+                    raise RuntimeError('real refusal CLI descendants remain')
+                code=child.wait(timeout=remaining())
+                child=None
+            stdout=out_path.read_bytes();stderr=err_path.read_bytes()
+            if len(stdout)>16<<10 or stderr or code!=2:
+                raise AssertionError('real refusal CLI exact exit2/empty stderr/bounded stdout required')
+            obj=json.loads(stdout)
+            if obj!={'status':'refused','error':error}:
+                raise AssertionError('real refusal CLI must identify the specific failed-lane branch')
+            live_lane(deadline)
+            stable(snapshots)
+            observations.append({'index':index,'exit_code':code,'captured_json':obj,
+                                 'stdout_sha256':hashlib.sha256(stdout).hexdigest(),
+                                 'stderr_sha256':hashlib.sha256(stderr).hexdigest(),
+                                 'closed_lane_and_pins_unchanged':True})
+        account('post',manifest,False)
+        stable(snapshots)
+        live_lane(deadline)
+        work_finished=time.monotonic()-started
+        if work_finished>24:
+            raise TimeoutError('success validations exceeded24seconds')
+        remaining()
+    except BaseException as exc:
+        failure={'type':type(exc).__name__,'message':str(exc)[:2048]}
+    finally:
+        if child is not None:
+            fallback=True
+            try:
+                if module is None or identity is None:
+                    raise RuntimeError('owned CLI cleanup identity unavailable')
+                cleanup=module.stop_owned_group(child,identity)
+                if cleanup.get('error') is not None or cleanup.get('remaining_live_members')!=[]:
+                    raise RuntimeError('owned real CLI cleanup unconfirmed')
+            except BaseException as exc:
+                cleanup={'error':repr(exc)[:2048],'remaining_live_members':'unconfirmed'}
+        signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGTERM,signal.SIGINT})
+        ending_signal=terminal_signal()
+        elapsed=time.monotonic()-started
+        passed=(failure is None and not fallback and ending_signal is None and
+                work_finished is not None and work_finished<=24 and elapsed<=30)
+        report={'schema':'v1-6-r12-actual-closed-failed-lane-cli-refusals-r2',
+                'passed':passed,'scope':'two-fresh-OS-CLI-specific-refusals-on-an-immutable-closed-failed-lane',
+                'failure':failure,'fallback_cleanup_needed':fallback,'cleanup':cleanup,
+                'elapsed_seconds':elapsed,'budget_seconds':30,'work_budget_seconds':24,
+                'work_finished_elapsed_seconds':work_finished,'peak_sampled_RSS_bytes':peak_rss,
+                'received_signal':ending_signal,'accounts':accounts,'observations':observations,
+                'binding_sha256':sys.argv[3],'runner_sha256':RUNNER_SHA,'active_fixture_sha256':ACTIVE_SHA,
+                'native_Go_or_application_executions':0,'original_lane_bytes_time_baseline_renewed':False,
+                'previous_failed_attempts_reclassified':False,'real_queued_prefix_gate_remains_mandatory':True,
+                'SIGKILL_hostloss_guarantee':False,
+                'controlled_CLI_warning_policy':'ignore::SyntaxWarning on the exact pinned R12 CLI only; all other stderr forbidden'}
+        report=publish_terminal(directory,report,started)
+        if time.monotonic()-started>30:
+            return 1
+    return 0 if report['passed'] else 1
+
+if __name__=='__main__':
+    signal.signal(signal.SIGTERM,on_signal);signal.signal(signal.SIGINT,on_signal)
+    raise SystemExit(main())

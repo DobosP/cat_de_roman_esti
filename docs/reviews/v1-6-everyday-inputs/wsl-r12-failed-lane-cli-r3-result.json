@@ -1,0 +1,85 @@
+{
+  "SIGKILL_hostloss_guarantee": false,
+  "accounts": {
+    "post": {
+      "fresh_measured_bytes": 1211791866,
+      "incremental_bytes": 459360278,
+      "measurement_roots": [
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gocache",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tmp",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gopath",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gomodcache",
+        "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tools",
+        "/home/paul_work/work/_temp/codex__content-v1-6"
+      ],
+      "memory_available_bytes": 32902946816,
+      "minimum_volume_free_bytes": 25161822208,
+      "original_baseline_bytes": 752431588,
+      "reserved_report_bytes_inside_limits": 131072
+    },
+    "pre": {
+      "fresh_measured_bytes": 1211778907,
+      "incremental_bytes": 459347319,
+      "measurement_roots": [
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gocache",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tmp",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gopath",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gomodcache",
+        "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tools",
+        "/home/paul_work/work/_temp/codex__content-v1-6"
+      ],
+      "memory_available_bytes": 33128833024,
+      "minimum_volume_free_bytes": 25162571776,
+      "original_baseline_bytes": 752431588,
+      "reserved_report_bytes_inside_limits": 131072
+    }
+  },
+  "active_fixture_sha256": "db930e35ed4be2262d60bb6879f3f2475fe63861003c91f3cb850241d3f8831a",
+  "binding_sha256": "5a63832567af001bda1e78f55c124dbbd6ede58a209620d726c84f72789322c4",
+  "budget_seconds": 30,
+  "cleanup": null,
+  "controlled_CLI_warning_policy": "ignore::SyntaxWarning on the exact pinned R13 CLI only; all other stderr forbidden",
+  "elapsed_seconds": 14.197391764999338,
+  "failure": null,
+  "fallback_cleanup_needed": false,
+  "native_Go_or_application_executions": 0,
+  "observations": [
+    {
+      "captured_json": {
+        "error": "ValueError: only the exact successful prefix may continue; pending/failed/complete cannot retry",
+        "status": "refused"
+      },
+      "closed_lane_and_pins_unchanged": true,
+      "exit_code": 2,
+      "index": 1,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "1bb70ba25ff83b38565ac15c1ce004deaec47a9a27d0c7b50a373185095016f4"
+    },
+    {
+      "captured_json": {
+        "error": "ValueError: campaign already exists; never reset/retry index zero",
+        "status": "refused"
+      },
+      "closed_lane_and_pins_unchanged": true,
+      "exit_code": 2,
+      "index": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "4b386541c7855edf1d93e8f4a6c34bd188b55db32642fefe038a6cfb3a708060"
+    }
+  ],
+  "original_lane_bytes_time_baseline_renewed": false,
+  "passed": true,
+  "peak_sampled_RSS_bytes": 27099136,
+  "previous_failed_attempts_reclassified": false,
+  "real_queued_prefix_gate_remains_mandatory": true,
+  "received_signal": null,
+  "runner_sha256": "adda73a297bad19565b95d3d1ece92a842b9cccb8bf994e0089d0f2474b37858",
+  "schema": "v1-6-r13-actual-closed-failed-lane-cli-refusals-r3",
+  "scope": "two-fresh-OS-CLI-specific-refusals-on-an-immutable-closed-failed-lane",
+  "work_budget_seconds": 24,
+  "work_finished_elapsed_seconds": 14.197210435999295
+}

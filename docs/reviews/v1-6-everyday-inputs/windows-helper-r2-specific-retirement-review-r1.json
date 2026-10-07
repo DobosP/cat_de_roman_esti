@@ -1,0 +1,58 @@
+{
+  "schema": "v1-6-specific-prelaunch-retirement-independent-review-r1",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T09:56:23Z",
+  "verdict": "ACCEPT_SPECIFIC_SOURCE_AND_REPORTED_EXIT_PROOF_SCOPE",
+  "append_only": true,
+  "bindings": {
+    "windows-helper-r2-specific-prelaunch-retirement-r1.json": "9568ea89da271a71475f6f5fa2858aa40a466983dd49c7fb56324a2af49052a4",
+    "windows-helper-r2-prelaunch-pending-r1.json": "131afdd601012e58f3395b7be3f429e79453f20d9dfa6ea1b2a6a0676fe04e2b",
+    "windows-helper-r2-fixture-r1-failure.json": "140e961e8ed5833d5e3209121d6fc0c12e0d613f6785bff104246f18ebb6dbb1",
+    "methods/windows_size_helper_wsl_r2.py.txt": "c708c0c88a8f8cd4ef76857dd9f03bbac4cf77f74d45548e0247c4051dda39d8"
+  },
+  "exact_scope": {
+    "nonce": "27a9d5d9e8c54627aefa0c353dcc5dcb",
+    "parent": {
+      "pid": 4608,
+      "creation_time_100ns": 134358400214369680
+    },
+    "retirement": "This exact no-worker prelaunch failure may remain as inactive, preserved R2 history for a new independently reviewed helper revision and separate registry.",
+    "original_failure_remains_unconfirmed": true,
+    "original_r2_and_r6_registry_refusal_preserved": true,
+    "no_general_pending_exception": true,
+    "no_cleanup_success_or_native_pass_conversion": true
+  },
+  "findings": [],
+  "reviewer_independent_observations": [
+    "Read the exact retirement decision and matched its SHA-256.",
+    "Read and matched original pending receipt to the preserved copy; its original false cleanup flags, null launcher/worker identities and phase=created remain unchanged.",
+    "Read and matched original failed fixture to the preserved copy during the preceding preservation review; passed=false and all_original_process_identities_quiescent=false remain historical execution evidence.",
+    "Enumerated the R2 registry and observed only the exact pending receipt, with no worker-output sidecar.",
+    "Reviewed exact helper source: exclusive worker output creation at line 319 precedes its sole CreateProcessW call at line 343; source never removes that output."
+  ],
+  "reported_os_proof": {
+    "performed_by": "/root",
+    "reviewer_performed_os_checks": false,
+    "identity": {
+      "pid": 4608,
+      "creation_time_100ns": 134358400214369680
+    },
+    "result": "PID absent",
+    "supporting_report": "Root reports repeated exact parent identity-quiescence verification and an empty filtered helper-path Win32_Process inventory."
+  },
+  "reasoning": "An initial ledger with null process identities alone does not exclude a launch before a ledger update. For this exact source and artifact, retained output is created before any launcher can be created; its absence, unchanged original receipt and reported exited supervisor support the narrowly scoped no-worker prelaunch conclusion. This conclusion does not rewrite the helper's missing terminal cleanup proof.",
+  "reviewer_actions": {
+    "application_or_helper_execution": false,
+    "os_process_checks": false,
+    "signals": false,
+    "moves": false,
+    "deletions": false,
+    "original_artifact_edits": false
+  },
+  "remaining_requirements": [
+    "Keep all original pending/failure artifacts and their false cleanup flags intact.",
+    "R2 and the R6 registry that points to it remain refused; the decision grants no generic pending-receipt bypass.",
+    "Any new helper, registry, diagnostic or fixture requires exact-source independent review before invocation.",
+    "A new revision must earn its own controlled fixture, fresh accounting, lifecycle and unchanged resource admission evidence; no native campaign is admitted by this decision."
+  ]
+}

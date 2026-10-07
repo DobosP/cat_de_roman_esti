@@ -1,0 +1,190 @@
+{
+  "schema": "v1-6-native-wsl-campaign-spec-source-review-r3",
+  "checked_at_utc": "2026-10-07T10:51:36.2111632Z",
+  "reviewer": "/root/qualification_ledger",
+  "role": "independent_campaign_spec_and_qualification_ledger_review",
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "qualification": "SPEC_SOURCE_ONLY",
+  "valid_until": "Any bound command, repository or scratch digest, measurement root, limit or admission prerequisite changes. This does not admit a host, create a clock or accept native execution or landing.",
+  "spec": {
+    "path": "wsl-native-campaign-spec-r3.json",
+    "sha256": "f857d3dd36587c23b14fcd00f28915f711baf9427811f4be2d5c59ea7528fa86"
+  },
+  "scope": "Exact readsets, fixed commands, complete roots/caps, source test inventory and retained installed evidence. This reviewer authored the Windows helper and does not review its correctness; independently bound continuation_audit reviews and controlled results remain prerequisites. No Go, module download, native helper or fixture execution occurred here.",
+  "findings": [],
+  "preserved_drafts": {
+    "r1_spec_sha256": "e0991165317790e19a29c6c354f572ddd5e70eba46c312a6fe9ee935e893b85d",
+    "r2_spec_sha256": "68029608f1c9443f5075e469b747d1a0f9bf292e6c091379622af87003d5a095",
+    "r2_scope": "Unadmitted broad 6227-file draft retained; no acceptance or execution inferred."
+  },
+  "verified": {
+    "repository_inputs": 1259,
+    "all_repository_input_hashes_exact": true,
+    "inputs_equal_unchanged_exactly": true,
+    "prior1121_inputs_retained": true,
+    "old_inputs_missing": 0,
+    "new_owned_wave_bindings": 138,
+    "new_method_bindings": 34,
+    "all_additions_within_owned_wave": true,
+    "declared_old_doc_refresh_allowlist": [
+      "README.md",
+      "docs/reviews/v1-6-everyday-inputs/README.md",
+      "docs/STATUS.md"
+    ],
+    "actual_old_digest_refreshes": [
+      "docs/STATUS.md",
+      "docs/reviews/v1-6-everyday-inputs/README.md"
+    ],
+    "expected_after_empty": true,
+    "scratch_pins_exact": 6,
+    "all_scratch_copies_materialized": true,
+    "runner_sha256": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+    "windows_helper_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+    "windows_interpreter_sha256": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+    "critical_final_methods_reviews_results_and_complete_archive_bound": true,
+    "source_not_admission": true,
+    "no_lane_start_deadline_or_baseline_fields": true,
+    "command_count": 8,
+    "partition_sizes": [
+      5,
+      5,
+      5,
+      4
+    ],
+    "selected_names": 19,
+    "unique_selected_names": 19,
+    "all_selected_names_exist_in_actual_Go_source": true,
+    "partition_regexes_anchored_and_exact_to_frozen_plan": true,
+    "partition_flags_race_json_count1_timeout18m": true,
+    "selected19_exact_checkpoint_set": true,
+    "selected19_plus_retained_passed_world5_equals_actual24": true,
+    "world5_disjoint_from_selected19": true,
+    "final_authority_cli_race_present": true,
+    "all_backend_vet_present": true,
+    "native_documentation_check_added_before_admission": true,
+    "all_native_Go_commands_use_owned_pinned_binary": true,
+    "no_explicit_Go_build_command": true
+  },
+  "measured_roots": [
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gocache",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tmp",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gopath",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gomodcache",
+    "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tools"
+  ],
+  "roots_nonoverlapping_and_all_owned_cache_tool_outputs_counted": true,
+  "environment_assessed": {
+    "fixed": "Go2 threads/jobs; GOFLAGS=-p=2 -mod=readonly; GOPROXY=off; GOTOOLCHAIN=local; GOWORK=off; owned GOROOT/GOCACHE/GOMODCACHE/GOPATH/GOTMPDIR/TMPDIR; GOMEMLIMIT1536MiB",
+    "network_exception": "Only first fixed locked-module step may use official proxy.golang.org and sum.golang.org to download pinned public dependencies; mod verify stays offline and all four mod/sum hashes are asserted unchanged. No build/test during fetch. All seven subsequent commands inherit GOPROXY off.",
+    "locked_fetch_method_sha256": "a6411285001a79f508e5023191bca19f4d575bc530932e64d1f193658dfafa29",
+    "accounts_submissions_off": true
+  },
+  "limits_preserved": {
+    "GOMAXPROCS": 2,
+    "RSS_bytes": 2147483648,
+    "build_jobs": 2,
+    "inclusive_agents_max": 3,
+    "incremental_bytes": 1073741824,
+    "metadata_reserve_seconds": 180,
+    "remaining_disk_memory_floor_bytes": 17179869184,
+    "start_disk_floor_bytes": 18253611008
+  },
+  "immutable_campaign_seconds": 1200,
+  "retained_installed_evidence": {
+    "runtime_freeze_sha256": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7",
+    "runtime109_exact": true,
+    "source8_and_rubric_exact": true,
+    "total_bindings_exact": 118,
+    "quick_world_extensions_current_artifacts_audits_candidates_raw_reviews_proposals_exact": true,
+    "installed_finals": [
+      {
+        "path": "native/quick/installed-final-factual-review-r1.json",
+        "sha256": "4292e37726bf97147dcd165ae41c0a5aad7e46a9d3d6817d0b475a1829891f21",
+        "exact_catalogue_and_audit_acceptance": true
+      },
+      {
+        "path": "native/quick/installed-final-quality-review-r1.json",
+        "sha256": "bd882a20bc2bdacb4f0a10e3df8a44d35d9881959a147cfa6e66829228d2c416",
+        "exact_catalogue_and_audit_acceptance": true
+      },
+      {
+        "path": "native/world/installed-final-factual-review-r1.json",
+        "sha256": "69a02ec02a3d720101855d3c0e54b2a8d0e01d95a78c5e4ae107336ca11e4e8a",
+        "exact_catalogue_and_audit_acceptance": true
+      },
+      {
+        "path": "native/world/installed-final-quality-review-r1.json",
+        "sha256": "85b25e3c5e7938a082dfecbae6298f7d15d0793c4b45cdba38aef78ab72b8efa",
+        "exact_catalogue_and_audit_acceptance": true
+      },
+      {
+        "path": "native/extensions/installed-final-factual-review-r1.json",
+        "sha256": "079ee361d52acf73d0aacdb01106d4aeb317ec4284e2bac3f2ee3e85f883a36e",
+        "exact_catalogue_and_audit_acceptance": true
+      },
+      {
+        "path": "native/extensions/installed-final-quality-review-r1.json",
+        "sha256": "4e75ea42533be20551039e06a2f4ac05f3159d18119c854b28a66bcdc0bd80cf",
+        "exact_catalogue_and_audit_acceptance": true
+      }
+    ],
+    "extensions_audit_field": "live_audit_sha256",
+    "no_audit_final_refresh_required_for_docs_or_methods_only": true,
+    "current_Source6_authored_manifest_and_Go_pin_exact": true,
+    "protected_metadata_exclusions": "Only the existing two authority manifest/pin metadata exclusions; no new runtime exclusions."
+  },
+  "ledger": {
+    "retained_completed": [
+      "489 independent Python cases, Ruff and current HTTP golden race",
+      "Source6 installed audits and six original-role factual/quality finals",
+      "Current all-four authority, source/export/ranking/derived/mobile and independent export checks",
+      "36 remaining backend packages race/vet and shared auth race/vet",
+      "Complete five World contentrails cases and 1207 current HTTP/151 TCP/28 asset checks",
+      "Independent adapter source, 217 pure parser cases and bounded metadata parity/active/finalization observations; independent evidence acceptance remains a prerequisite"
+    ],
+    "pending": [
+      "Fresh host/toolchain/resource/owned-process admission",
+      "First fixed locked-module prerequisites and all19 complementary contentrails in exhaustive5/5/5/4 groups",
+      "Final authority CLI race, all-backend vet, native doc check on the frozen documentation snapshot",
+      "Complete final gate ledger, current docs/ADR and pool qualification, independent exact-commit assembled acceptance",
+      "Actual accepted green local landing, then mark selected pool records integrated"
+    ],
+    "pool": {
+      "records": 6,
+      "selected_for_refinement": 2,
+      "researched": 1,
+      "held": 3,
+      "integrated": 0,
+      "installed_or_landed_claims": false,
+      "selected_ids": [
+        "v16-lex-drapel",
+        "v16-lex-untdelemn"
+      ],
+      "held_and_researched_bytes_retained": true
+    },
+    "initial_historical_checkpoint_stop_preference": "Superseded by the latest direct original-chat loop request; qualification gates remain binding."
+  },
+  "conditions": [
+    "Require independent exact R9 actual-root/pure lifecycle evidence acceptance and fresh host/Go1.27.1/toolchain/resource admission before any command. Keep at most three agents inclusive and no prior owned writer or unconfirmed cleanup.",
+    "Use one new immutable admission whose exact eight commands,1259 inputs,six scratch pins,seven roots and all caps stay fixed. One original cumulative disk baseline and20-minute deadline covers locked fetch plus every native step; failed or pending campaigns cannot be reset or resumed as success.",
+    "The native documentation command checks the pinned prelanding documentation snapshot. Final docs/ADR/pool status changes and exact assembled acceptance remain separate required work; this review does not preapprove later bytes.",
+    "Any runtime/source/corpus/audit/final binding change invalidates the affected installed acceptance and requires fresh honest audits/finals. Do not reapply already-staged graph/World/Quick/Extensions transactions.",
+    "Preserve all original failures/refusals and excluded raw archive addenda. New unbound preservation artifacts confer no execution acceptance and remain inside measured worktree/scratch roots.",
+    "Local landing only after all required green gates and exact independent assembled acceptance. This source review grants no push/deploy/provider activation or unmerged-work deletion."
+  ],
+  "execution": {
+    "native_commands": 0,
+    "module_downloads": 0,
+    "helper_or_fixture_executions": 0,
+    "sole_write": "wsl-native-campaign-spec-review-r3.json"
+  },
+  "claims": {
+    "fresh_host_admitted": false,
+    "campaign_clock_created": false,
+    "native_campaign_passed": false,
+    "adapter_correctness_reviewed_by_this_author": false,
+    "release_or_landing_approval": false
+  }
+}

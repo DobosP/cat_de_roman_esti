@@ -1,0 +1,88 @@
+{
+  "schema": "v1-6-native-exact-admission-review-r1",
+  "checked_at_utc": "2026-10-07T10:55:16.5229618Z",
+  "reviewer": "/root/qualification_ledger",
+  "verdict": "ACCEPT_EXACT_ADMISSION",
+  "admission": {
+    "path": "wsl-native-admission-r1.json",
+    "sha256": "e104bffd2bb7d2c7030126258f357bd0681f63f644ef5920e16c89b2cf41a721",
+    "lane": "v1-6-wsl-native-r1",
+    "checked_at_utc": "2026-10-07T13:53:13.928421+03:00",
+    "deadline_utc": "2026-10-07T14:13:13.928421+03:00"
+  },
+  "accepted_spec": {
+    "path": "wsl-native-campaign-spec-r3.json",
+    "sha256": "f857d3dd36587c23b14fcd00f28915f711baf9427811f4be2d5c59ea7528fa86",
+    "review_sha256": "95884cbb5ac6dc2b78792ca3e353a2f33837c452f5d499de4979fbb03349cbac"
+  },
+  "independent_fixture_acceptance": {
+    "path": "wsl-r9-fixture-evidence-review-r1.json",
+    "sha256": "65e7fbc22a63d2d31f0fc0c19078c092e8be95ef004469e9f875a635882ced08",
+    "verdict": "ACCEPT_BOUND_FIXTURE_QUALIFICATION_FOR_FRESH_NATIVE_ADMISSION"
+  },
+  "exact_delta_only": [
+    "schema changes to admission schema",
+    "not_an_admission changes true to false",
+    "new lane",
+    "fixed checked_at_utc",
+    "fixed deadline_utc exactly1200 seconds later",
+    "three exact independent prerequisite pins",
+    "fresh host facts"
+  ],
+  "unchanged_spec_fields": [
+    "inputs",
+    "unchanged",
+    "scratch_bindings",
+    "commands",
+    "limits",
+    "environment",
+    "additional_measure_dirs",
+    "expected_after",
+    "runner_sha256",
+    "contract",
+    "preconditions",
+    "prior_spec_sha256",
+    "refreshed_documentation_only",
+    "scope_correction",
+    "supersedes_unadmitted_r2_sha256"
+  ],
+  "verified": {
+    "all1259_repository_input_hashes_rechecked_exact": true,
+    "all6_scratch_pins_rechecked_exact": true,
+    "all3_independent_prerequisite_hashes_exact": true,
+    "all8_commands_and7_roots_unchanged": true,
+    "fixed_limits_and_offline_environment_unchanged": true,
+    "exact20minute_deadline": true,
+    "no_lane_state_result_or_lock_exists": true,
+    "no_baseline_created_by_reviewer": true,
+    "main_clean_independently_checked": true,
+    "main_HEAD": "6a2332795dc5fa2db3eb61e196ab7ab820e76caa",
+    "task_HEAD": "4c69ad234b90d98aa66501fccc6324a3743bf391"
+  },
+  "host_snapshot": {
+    "WSL_MemAvailable_bytes": 35168403456,
+    "agents_inclusive": 3,
+    "checked_at_unix": 1791370393.0027573,
+    "disk_free_bytes": 28366503936,
+    "main_HEAD": "6a2332795dc5fa2db3eb61e196ab7ab820e76caa",
+    "main_clean": true,
+    "owned_Linux_runner_PIDs": [],
+    "owned_Windows_helper_PIDs": [],
+    "task_HEAD": "4c69ad234b90d98aa66501fccc6324a3743bf391"
+  },
+  "host_snapshot_scope": "Reviewed the admission-bound fresh snapshot: disk28366503936 exceeds17GiB; WSLMemAvailable35168403456 exceeds16GiB; agent count3; empty owned Linux/Windows process arrays; host timestamp0.926s before admission. The reviewer did not independently rerun OS process/resource probes; runner refreshes floors before each native launch.",
+  "conditions": [
+    "Do not renew or edit the exact accepted admission. All eight commands share this original deadline and the first runner-created baseline. A failed or pending lane cannot be reset or resumed as success.",
+    "Before launching step0, keep owned writer/process state quiescent and preserve the exact1259 input and six scratch hashes. Keep at most three agents inclusive.",
+    "Every preflight/monitor/publication refresh must pass existing resource, cleanup and reserve guards. Source acceptance and this admission are not native execution or landing acceptance.",
+    "Complete current gate ledger, final documentation/ADR/pool qualification and meaningful independent exact-commit assembled acceptance before actual green local landing. No push/deploy/provider or unmerged deletion approval is granted."
+  ],
+  "execution": {
+    "native_commands": 0,
+    "module_downloads": 0,
+    "helper_or_fixture_runs": 0,
+    "clock_renewals": 0,
+    "sole_write": "wsl-native-admission-review-r1.json"
+  },
+  "findings": []
+}

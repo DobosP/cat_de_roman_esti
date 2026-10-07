@@ -1,0 +1,101 @@
+{
+  "all_steps_completed": false,
+  "campaign_started_at_utc": "2026-10-07T14:44:14.936689+00:00",
+  "deadline_utc": "2026-10-07T15:04:14.503037+00:00",
+  "fresh_campaign_start_size": 1211264814,
+  "installation_approval": false,
+  "lane": "r16-active-09a946c0c06a76b8",
+  "manifest_sha256": "da747c7c7f7f9c3bfdce540a49d8415e21b9c5fbbe1495db76884e8b7afe2c37",
+  "original_start_size": 752431588,
+  "peak_sampled_incremental_bytes": 458860596,
+  "publication_accounting": {
+    "atomic_temporaries_and_final_outputs_included": true,
+    "disk_free_before_publication": 25483952128,
+    "encoded_total_limit_bytes": 16777216,
+    "included_increment_upper_bound": 525969460,
+    "memory_available_before_publication": 28597567488,
+    "original_start_size": 752431588,
+    "peak_including_publication_upper_bound": 525969460,
+    "reserved_disk_lower_bound": 25416843264,
+    "reserved_publication_bytes_inside_limits": 67108864,
+    "sampled_increment_before_publication": 458860596,
+    "size_before_publication": 1211292184
+  },
+  "schema": "v1-6-cumulative-worktree-runner-r4-r2",
+  "status": "failed",
+  "steps": [
+    {
+      "argv": [
+        "/usr/bin/python3.14",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/wsl-r12-actual-active-r16-0c9f72473f444889809dea3e57ae7f1a/child.py",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/wsl-r12-actual-active-r16-0c9f72473f444889809dea3e57ae7f1a/owned-processes.json"
+      ],
+      "campaign_started_at_utc": "2026-10-07T14:44:14.936689+00:00",
+      "cleanup": {
+        "actions": [
+          "SIGTERM_owned_group"
+        ],
+        "elapsed_seconds": 0.08578769700034172,
+        "error": null,
+        "remaining_live_members": []
+      },
+      "deadline_utc": "2026-10-07T15:04:14.503037+00:00",
+      "exit_code": 143,
+      "failure": {
+        "message": "catchable signal before disk accounting",
+        "type": "InterruptedError"
+      },
+      "finished_at_utc": "2026-10-07T14:44:31.827332+00:00",
+      "guard": "catchable-signal",
+      "index": 0,
+      "log_bytes": 0,
+      "log_path": "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/r16-active-09a946c0c06a76b8-0.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_text": "",
+      "manifest_sha256": "da747c7c7f7f9c3bfdce540a49d8415e21b9c5fbbe1495db76884e8b7afe2c37",
+      "name": "owned-python-child-and-grandchild",
+      "original_start_size": 752431588,
+      "peak_group_RSS_bytes": 9035776,
+      "post_checks": {
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/go-tool-telemetry-r1/mode": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/run_worktree_lane_wsl_r12.py": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/wsl-r12-actual-active-r16-0c9f72473f444889809dea3e57ae7f1a/child.py": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/wsl-r12-actual-active-r16-0c9f72473f444889809dea3e57ae7f1a/immutable-input.txt": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/wsl-runtime-mirror-r6-result.json": true,
+        "namespace:canonical-compiler-go": true,
+        "namespace:canonical-runtime109": true,
+        "namespace:mirror-runtime109": true,
+        "owned-telemetry-mode:off-shape-hash": true
+      },
+      "post_failure": "InterruptedError('catchable signal before disk accounting')",
+      "pre_checks": {
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/go-tool-telemetry-r1/mode": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/run_worktree_lane_wsl_r12.py": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/wsl-r12-actual-active-r16-0c9f72473f444889809dea3e57ae7f1a/child.py": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/wsl-r12-actual-active-r16-0c9f72473f444889809dea3e57ae7f1a/immutable-input.txt": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/wsl-runtime-mirror-r6-result.json": true,
+        "namespace:canonical-compiler-go": true,
+        "namespace:canonical-runtime109": true,
+        "namespace:mirror-runtime109": true,
+        "owned-telemetry-mode:off-shape-hash": true
+      },
+      "publication_accounting": {
+        "atomic_temporaries_and_final_outputs_included": true,
+        "disk_free_before_publication": 25483952128,
+        "encoded_total_limit_bytes": 16777216,
+        "included_increment_upper_bound": 525969460,
+        "memory_available_before_publication": 28597567488,
+        "original_start_size": 752431588,
+        "peak_including_publication_upper_bound": 525969460,
+        "reserved_disk_lower_bound": 25416843264,
+        "reserved_publication_bytes_inside_limits": 67108864,
+        "sampled_increment_before_publication": 458860596,
+        "size_before_publication": 1211292184
+      },
+      "received_signal": 15,
+      "signal_commit_policy": "Signals before the final empty pending-signal snapshot fail this step. That snapshot follows fsynced outcome publication, manifest recheck and final accounting. State acknowledgement then uses reserved bytes. Signals after this completed-outcome boundary stay deferred until the next serial boundary or exit; they do not retroactively invalidate a completed command. No child remains.",
+      "started_at_utc": "2026-10-07T14:44:19.024839+00:00",
+      "status": "failed"
+    }
+  ]
+}

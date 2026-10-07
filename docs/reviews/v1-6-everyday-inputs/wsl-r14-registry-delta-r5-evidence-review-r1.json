@@ -1,0 +1,107 @@
+{
+  "control_flow_proofs_from_exact_nonoptimized_source_and_all_cases_passed": [
+    "Two fresh sweeps asserted16 entry lstats,8 single16385-byte read requests, actual lstat worker peak2 and unfinished future peak2, all futures done.",
+    "A deterministic two-worker barrier error stopped refill, propagated PermissionError and joined the sibling before returning.",
+    "The same registry was accepted, then mutated and refused; fresh open denial propagated.",
+    "Entry interruption performed zero enumeration/lstat/open IO.",
+    "One own SIGTERM after final worker join was detected by the exact production post-join check.",
+    "With a pending signal and noninterruptible default, every8 entry types and4 final reads completed."
+  ],
+  "exact_evidence_sha256": {
+    "wsl-r14-registry-delta-r5-parent.json": "cd16e8d8b3b098900f32d8079e9c4c408e0b221ef0fb550d51078c266bb4b092",
+    "wsl-r14-registry-delta-r5-result.json": "5e66a3b69a61337c6801aed010a6813b5ea6eb6c3078ba598a96863cf82dff02",
+    "wsl-r14-registry-delta-r5-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-r14-registry-delta-r5-stdout.json": "2202aa51e7aec0080961c089c64e8b89e784b2dfa4c4d7b02459e796d89494d1"
+  },
+  "exact_source_sha256": {
+    "methods/check_r14_registry_delta_pure_wsl_r5.py.txt": "1b3e198c52f36e3ddab250f8bdd8a03987f7e1d8ba23688fc34d81fc8c6348b5",
+    "methods/invoke_pure_capture_r2.ps1.txt": "37e8a68ea8d3432f2697f964d190751fd7487a79cc22fc0cd17b3d5b7b33a3f9",
+    "methods/run_worktree_lane_wsl_r14.py.txt": "42543f0b8a6e9f37a55410ec1800b59c91b61f069c9913309cde9371f6501144"
+  },
+  "findings": [],
+  "live_read_only_audit": {
+    "audit_time_utc": "2026-10-07T15:59:35.900062+00:00",
+    "direct_root_and_regular_single_link_artifacts": true,
+    "exact_boundary_bytes": 16384,
+    "exact_oversize_bytes": 16385,
+    "inventory_sha256": "d0f3ebfbb170c7c3c62aa14d0bb4c498e8c1d6cc6e4d785b1d7c8c0dc6e6df2c",
+    "nonregular_adversary_retained_as_directory": true,
+    "owned_C_root": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\r14-registry-delta-r5\\fde9130f9b65405989d2d36c1487616d",
+    "readable_linux_matching_actor_inventory": [],
+    "retained_regular_bytes": 50013,
+    "retained_regular_files": 88,
+    "windows_capture_pid": 45652,
+    "windows_capture_pid_absent": true
+  },
+  "nonce": "fde9130f9b65405989d2d36c1487616d",
+  "observation": {
+    "25_control_names": [
+      "all-valid",
+      "fresh-receipt-mutation",
+      "reject-schema",
+      "reject-nonce",
+      "reject-receipt_path",
+      "reject-status",
+      "reject-launcher_not_created",
+      "reject-worker_not_created",
+      "reject-worker_exit_confirmed",
+      "reject-launcher_exit_confirmed",
+      "reject-job_empty",
+      "malformed-json",
+      "nonobject-json",
+      "oversize-bounded-read",
+      "exact-16KiB-accepted",
+      "pending-refused",
+      "orphan-refused",
+      "unknown-refused",
+      "nonregular-refused",
+      "two-workers-fresh-all-types-bounded-reads-twice",
+      "error-stops-refill-and-joins-other-worker",
+      "fresh-read-denial-propagates",
+      "entry-interruption-performs-no-IO",
+      "real-self-SIGTERM-after-final-join-refuses",
+      "noninterruptible-publication-completes-all"
+    ],
+    "all25_passed": true,
+    "budget_seconds": 10,
+    "bytecode_disabled": true,
+    "child_elapsed_seconds": 1.5009225210014847,
+    "compile_diagnostics_retained": [
+      "'return' in a 'finally' block"
+    ],
+    "error": null,
+    "host_elapsed_seconds": 1.6975657,
+    "host_exit_code": 0,
+    "immediate_pre_post_python_and_sources_exact": true,
+    "native_application_helper_executions": 0,
+    "old_whole217_57_20_24_suites_rerun": false,
+    "one_actual_intended_self_SIGTERM": true,
+    "optimized_execution_refused_and_actual_optimize_zero": true,
+    "python_sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+    "raw_result_and_parent_stdout_stderr_copies_exact": true,
+    "stderr_empty": true,
+    "stdout_json_equals_report": true,
+    "unplanned_signal": null
+  },
+  "preserved_prior_evidence_sha256": {
+    "v1-6-wsl-native-r1-result.json": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "wsl-r12-actual-active-r16-result.json": "12015a66c8838591a4a39c5adbb5e2ae8630a0d38312fdda0e7e96c2b46c4226",
+    "wsl-r13-actual-active-r17-evidence-review-r1.json": "62d574e487113cfeab46de2b786ce1bc39ce0f50eb33dfd5ed0b8b30d30597fe"
+  },
+  "prior_source_review": {
+    "path": "wsl-r14-registry-source-review-r2.json",
+    "sha256": "8acf7b649a02fc4e1d85216392d639db42cfd517a724eda2dfbc614d03b262d9"
+  },
+  "review_execution": "Read-only files/hash/source and OS absence audit only. Reviewer executed no candidate pool, fixture, signal, helper, Go or native command.",
+  "reviewed_at_utc": "2026-10-07T16:02:34.725262+00:00",
+  "reviewer": "independent continuation_audit",
+  "schema": "v1-6-r14-registry-delta-r5-evidence-review-r1",
+  "scope": [
+    "Controlled tiny ledger registry acceptance/error/concurrency and one post-join own-signal observation only; no foreign-process cleanup or host full-size count is accepted.",
+    "Peak2 values are established by executed source assertions, not separate numeric fields in the emitted report. No measured peak RSS is emitted; own RSS policy was guarded.",
+    "No in-flight-worker signal event was executed; the delivered signal is precisely after final shutdown/join.",
+    "The1.5s synthetic execution proves no full305-record throughput or finalization/queued24s feasibility.",
+    "R14 actual lifecycle, new exact closed-lane CLI refusals, Go/native/docs/assembled/landing remain pending; nativeR1 failure/caps/baseline remain immutable."
+  ],
+  "verdict": "ACCEPT_PURE_CONTROLLED_OBSERVATION_ONLY"
+}

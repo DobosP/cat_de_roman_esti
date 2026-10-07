@@ -1,0 +1,292 @@
+"""Pure exact-R4 descriptor fault controls; no helper/Go/native command.
+
+CLI: python3 -B fixture.py UUID32 EXACT_FIXTURE_SHA EXACT_R4_PATH
+Uses tiny fresh owned C/ext4 trees. Resource policy is mocked to the fixture's
+10s/2GiB bounds, never qualified-host disk/memory/accounting or OS exit evidence.
+All created fixture files and failed copy prefixes remain; no cleanup deletion.
+"""
+import errno
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import resource
+import signal
+import stat
+import sys
+import time
+import types
+from unittest import mock
+
+STARTED = time.monotonic()
+R4_SHA = '51e615d5d679a2040eeb98306ff3fe302289abee4bc1faec4000e95006309900'
+C_PARENT = Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/descriptor-copy-pure-fixtures-r1')
+X_PARENT = Path('/home/paul_work/work/_temp/codex__content-v1-6/descriptor-copy-pure-fixtures-r1')
+CASES = []
+CLOSED_FDS = 0
+report_path = None
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def guard():
+    if time.monotonic() - STARTED >= 10:
+        raise TimeoutError('descriptor pure fixture10seconds')
+    if resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024 > 2 << 30:
+        raise RuntimeError('descriptor pure fixture RSS2GiB')
+
+
+def chain(path):
+    for node in reversed([Path(path), *Path(path).parents]):
+        if not stat.S_ISDIR(node.lstat().st_mode) or node.resolve(strict=True) != node:
+            raise ValueError('fixture ancestor redirected/non-directory')
+
+
+def write(path, blob):
+    guard()
+    if len(blob) > 128 << 10:
+        raise ValueError('fixture image128KiB')
+    with Path(path).open('xb') as out:
+        out.write(blob)
+        out.flush()
+        os.fsync(out.fileno())
+    guard()
+
+
+def case(name, function, wanted=None):
+    guard()
+    if wanted is None:
+        if function() is not True:
+            raise RuntimeError(name + ': expected True')
+    else:
+        try:
+            function()
+        except wanted:
+            pass
+        else:
+            raise RuntimeError(name + ': expected ' + wanted.__name__)
+    guard()
+    CASES.append(name)
+
+
+def assert_closed(fds, real_fstat):
+    global CLOSED_FDS
+    for fd in fds:
+        try:
+            real_fstat(fd)
+        except OSError as exc:
+            if exc.errno != errno.EBADF:
+                raise
+            CLOSED_FDS += 1
+        else:
+            raise RuntimeError('recorded owned descriptor remained open')
+
+
+def main():
+    global report_path
+    if len(sys.argv) != 4 or not re.fullmatch(r'[0-9a-f]{32}', sys.argv[1]) or not re.fullmatch(r'[0-9a-f]{64}', sys.argv[2]):
+        raise ValueError('fresh UUID32 fixture hash and exact R4 source required')
+    nonce, own_sha, method_path = sys.argv[1:]
+    if not sys.dont_write_bytecode or sys.flags.optimize != 0 or digest(__file__) != own_sha or digest(method_path) != R4_SHA:
+        raise RuntimeError('ordinary Python -B and exact source pins required')
+    for parent in (C_PARENT, X_PARENT):
+        chain(parent.parent)
+        try:
+            parent.lstat()
+        except FileNotFoundError:
+            parent.mkdir(mode=0o700)
+        chain(parent)
+    croot, xroot = C_PARENT / nonce, X_PARENT / nonce
+    for root in (croot, xroot):
+        root.mkdir(mode=0o700)
+        chain(root)
+    report_path = croot / 'result.json'
+    loader = importlib.machinery.SourceFileLoader('pure_exact_descriptor_r4', method_path)
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    m = importlib.util.module_from_spec(spec)
+    loader.exec_module(m)  # main, profile import and handlers remain inactive.
+    m.p = types.SimpleNamespace(guard=lambda **kwargs: guard(), operation=lambda function, *args: function(*args))
+    def deny(*args, **kwargs):
+        raise RuntimeError('pure fixture native/profile import denied')
+    m.load_profile = deny
+    real_fstat, real_open, real_close = os.fstat, os.open, os.close
+    real_read, real_write, real_stat = os.read, os.write, os.stat
+    serial = 0
+    def with_trees(function, relative='a/file.bin'):
+        nonlocal serial
+        serial += 1
+        source_root = croot / ('source-' + str(serial))
+        destination_root = xroot / ('destination-' + str(serial))
+        source_root.mkdir(mode=0o700)
+        destination_root.mkdir(mode=0o700)
+        (source_root / Path(relative).parent).mkdir(mode=0o700, parents=True, exist_ok=True)
+        original = source_root / relative
+        payload = b'synthetic-owned-payload'
+        write(original, payload)
+        if relative.endswith('.go'):
+            (source_root / 'shared-go/authcore').mkdir(mode=0o700, parents=True)
+        source_tree = destination_tree = None
+        try:
+            source_tree = m.HeldTree(source_root)
+            destination_tree = m.HeldTree(destination_root)
+            source_tree.parent(relative)
+            destination_tree.parent(relative, make=True)
+            m.source_tree, m.mirror_tree = source_tree, destination_tree
+            row = {'path': relative, 'bytes': len(payload), 'sha256': hashlib.sha256(payload).hexdigest()}
+            source_tree.verify_edges()
+            destination_tree.verify_edges()
+            return function(source_root, destination_root, source_tree, destination_tree, row, payload)
+        finally:
+            for tree in (source_tree, destination_tree):
+                if tree is not None:
+                    fds = [record[0] for record in tree.records.values()]
+                    tree.close()
+                    assert_closed(fds, real_fstat)
+            m.source_tree = m.mirror_tree = None
+    def normal(sr, dr, st, dt, row, payload):
+        answer = m.copy_one(row)
+        return (answer['fresh_destination_verified'] and (dr / row['path']).read_bytes() == payload
+                and m.fresh_hash(st, row['path'])[0] == row['sha256']
+                and st.verify_edges()['fresh_all_named_edges_verified']
+                and dt.verify_edges()['fresh_all_named_edges_verified'])
+    case('normal-exact-copy-and-fresh-source-destination-hashes', lambda: with_trees(normal))
+    def parent_replaced(sr, dr, st, dt, row, payload):
+        (sr / 'a').rename(sr / 'retained-original-a')
+        (sr / 'a').mkdir(mode=0o700)
+        return st.verify_edges()
+    case('named-parent-replacement-refused', lambda: with_trees(parent_replaced), RuntimeError)
+    def root_replaced(sr, dr, st, dt, row, payload):
+        retained = sr.with_name(sr.name + '-retained-original')
+        sr.rename(retained)
+        sr.mkdir(mode=0o700)
+        return st.verify_edges()
+    case('named-canonical-root-replacement-refused', lambda: with_trees(root_replaced), RuntimeError)
+    def parent_link(sr, dr, st, dt, row, payload):
+        (sr / 'a').rename(sr / 'retained-original-a')
+        (sr / 'a').symlink_to(sr / 'retained-original-a', target_is_directory=True)
+        return st.verify_edges()
+    case('named-parent-symlink-refused', lambda: with_trees(parent_link), RuntimeError)
+    def leaf_link(sr, dr, st, dt, row, payload):
+        original = sr / row['path']
+        original.rename(original.with_suffix('.retained-original'))
+        original.symlink_to(original.with_suffix('.retained-original'))
+        return m.fresh_hash(st, row['path'])
+    case('selected-leaf-symlink-refused', lambda: with_trees(leaf_link), RuntimeError)
+    def hardlink(sr, dr, st, dt, row, payload):
+        os.link(sr / row['path'], sr / 'owned-hardlink')
+        return m.fresh_hash(st, row['path'])
+    case('selected-leaf-hardlink-refused', lambda: with_trees(hardlink), RuntimeError)
+    def leaf_fifo(sr, dr, st, dt, row, payload):
+        original = sr / row['path']
+        original.rename(original.with_suffix('.retained-original'))
+        os.mkfifo(original, mode=0o600)
+        return m.fresh_hash(st, row['path'])
+    case('selected-nonregular-FIFO-refused-before-open', lambda: with_trees(leaf_fifo), RuntimeError)
+    def edge_denied(sr, dr, st, dt, row, payload):
+        target_fd = st.parent('a/file.bin')[0]
+        def denied(path, *args, **kwargs):
+            if path == 'file.bin' and kwargs.get('dir_fd') == target_fd:
+                raise PermissionError('controlled fresh leaf denial')
+            return real_stat(path, *args, **kwargs)
+        with mock.patch.object(m.os, 'stat', side_effect=denied):
+            return m.fresh_hash(st, row['path'])
+    case('fresh-leaf-PermissionError-propagates', lambda: with_trees(edge_denied), PermissionError)
+    def read_denied(sr, dr, st, dt, row, payload):
+        with m.read_leaf(st, row['path']) as (fd, initial):
+            def denied(actual_fd, *args):
+                if actual_fd == fd:
+                    raise PermissionError('controlled file read denial')
+                return real_read(actual_fd, *args)
+            with mock.patch.object(m.os, 'read', side_effect=denied):
+                return m.hash_fd(fd, initial.st_size)
+    case('file-read-PermissionError-propagates', lambda: with_trees(read_denied), PermissionError)
+    def write_zero(sr, dr, st, dt, row, payload):
+        with mock.patch.object(m.os, 'write', return_value=0):
+            return m.copy_one(row)
+    case('zero-progress-write-refused-partial-retained', lambda: with_trees(write_zero), RuntimeError)
+    def source_changes(sr, dr, st, dt, row, payload):
+        wanted_identity = real_stat(sr / row['path'])
+        reads = 0
+        def mutate(fd, size):
+            nonlocal reads
+            result = real_read(fd, size)
+            value = real_fstat(fd)
+            if (value.st_dev, value.st_ino) == (wanted_identity.st_dev, wanted_identity.st_ino):
+                reads += 1
+                if reads == 3:
+                    with (sr / row['path']).open('wb') as out:
+                        out.write(b'x' * len(payload))
+                        out.flush()
+                        os.fsync(out.fileno())
+            return result
+        with mock.patch.object(m.os, 'read', side_effect=mutate):
+            return m.copy_one(row)
+    case('canonical-source-mutation-during-stream-refused', lambda: with_trees(source_changes), RuntimeError)
+    def runtime_exact(sr, dr, st, dt, row, payload):
+        wanted = {row['path']: row['sha256']}
+        return m.runtime_inventory(st, wanted) == wanted
+    case('fresh-runtime-enumeration-positive', lambda: with_trees(runtime_exact, 'go-backend/ns/n.go'))
+    def runtime_extra(sr, dr, st, dt, row, payload):
+        write(sr / 'go-backend/ns/new.go', b'new-owned-runtime')
+        return m.runtime_inventory(st, {row['path']: row['sha256']})
+    case('fresh-extra-runtime-member-refused', lambda: with_trees(runtime_extra, 'go-backend/ns/n.go'), RuntimeError)
+    def runtime_missing(sr, dr, st, dt, row, payload):
+        original = sr / row['path']
+        original.rename(original.with_suffix('.retained-original'))
+        return m.runtime_inventory(st, {row['path']: row['sha256']})
+    case('fresh-missing-runtime-member-refused', lambda: with_trees(runtime_missing, 'go-backend/ns/n.go'), RuntimeError)
+    def runtime_denied(sr, dr, st, dt, row, payload):
+        with mock.patch.object(m.os, 'scandir', side_effect=PermissionError('controlled enumeration denial')):
+            return m.runtime_inventory(st, {row['path']: row['sha256']})
+    case('fresh-runtime-enumeration-PermissionError-propagates', lambda: with_trees(runtime_denied, 'go-backend/ns/n.go'), PermissionError)
+    opened = []
+    def anchor_fails():
+        def capture(path, flags, *args, **kwargs):
+            fd = real_open(path, flags, *args, **kwargs)
+            opened.append(fd)
+            return fd
+        with mock.patch.object(m.os, 'open', side_effect=capture), mock.patch.object(m.os, 'fstat', side_effect=PermissionError('controlled first anchor fstat denial')):
+            return m.HeldTree(croot)
+    case('anchor-fstat-failure-propagates', anchor_fails, PermissionError)
+    case('anchor-fstat-failure-owned-FD-confirmed-closed', lambda: (assert_closed(opened, real_fstat) is None))
+    if digest(method_path) != R4_SHA or digest(__file__) != own_sha:
+        raise RuntimeError('fixture/method source changed')
+    guard()
+    return {'schema': 'v1-6-descriptor-copy-pure-fixture-r1', 'passed': True,
+            'fixture_sha256': own_sha, 'copy_method_sha256': R4_SHA, 'cases': CASES,
+            'case_count': len(CASES), 'recorded_owned_directory_FDs_confirmed_closed': CLOSED_FDS,
+            'C_owned_root': str(croot), 'ext4_owned_root': str(xroot),
+            'children_or_native_commands': 0, 'no_deletions': True,
+            'fixture_bounds': {'wall_seconds': 10, 'RSS_bytes': 2 << 30, 'report_bytes': 128 << 10},
+            'elapsed_seconds': time.monotonic() - STARTED,
+            'claim_limit': 'Pure descriptor/control tests only. Mocked resource guards are not original-baseline accounting, host admission, helper ownership, process-exit proof or native qualification.',
+            'actual_code_tested': ['HeldTree named edges and close', 'read_leaf identities', 'hash_fd', 'copy_one', 'fresh_hash', 'runtime_inventory'],
+            'adapter_operation_counts': m.COUNTS}
+
+
+if __name__ == '__main__':
+    def interrupted(number, frame):
+        raise InterruptedError('descriptor pure fixture signal ' + str(number))
+    signal.signal(signal.SIGTERM, interrupted)
+    signal.signal(signal.SIGINT, interrupted)
+    signal.signal(signal.SIGALRM, interrupted)
+    signal.setitimer(signal.ITIMER_REAL, 10)
+    result = {'schema': 'v1-6-descriptor-copy-pure-fixture-r1', 'passed': False}
+    code = 1
+    try:
+        result = main()
+        code = 0
+    except BaseException as exc:
+        result.update(error=type(exc).__name__ + ': ' + str(exc), cases=CASES, elapsed_seconds=time.monotonic() - STARTED)
+    try:
+        if report_path is not None:
+            write(report_path, (json.dumps(result, sort_keys=True, indent=2) + '\n').encode())
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+    print(json.dumps(result, sort_keys=True))
+    raise SystemExit(code)

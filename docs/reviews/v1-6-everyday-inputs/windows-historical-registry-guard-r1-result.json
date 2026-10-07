@@ -1,0 +1,162 @@
+{
+  "schema": "v1-6-pure-windows-historical-registry-guard-fixture-r1",
+  "passed": true,
+  "runner_sha256": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+  "fixture_sha256": "402fdf87cb8f71fbe31edf3c708a465abf56fcfdf993bcf5078dc90b7c6746ae",
+  "cases": [
+    {
+      "name": "absent-never-invoked-r3-accepted",
+      "expected_accept": true,
+      "outcome": {
+        "accepted": true
+      },
+      "synthetic_digest_bindings_checked": 6,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "empty-never-invoked-r3-accepted",
+      "expected_accept": true,
+      "outcome": {
+        "accepted": true
+      },
+      "synthetic_digest_bindings_checked": 6,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "denied-r3-lstat-propagates",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "PermissionError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "denied-r3-iterdir-propagates",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "PermissionError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r3-regular-file-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r3-symlink-directory-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r3-new-owned-entry-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r2-regular-file-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r2-symlink-directory-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r2-original-directory-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r2-original-symlink-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r2-missing-original-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r2-extra-entry-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r2-renamed-original-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 0,
+      "all_owned_synthetic_entries_preserved": true
+    },
+    {
+      "name": "r2-mutated-original-bytes-refused",
+      "expected_accept": false,
+      "outcome": {
+        "accepted": false,
+        "exception": "RuntimeError"
+      },
+      "synthetic_digest_bindings_checked": 1,
+      "all_owned_synthetic_entries_preserved": true
+    }
+  ],
+  "native_or_Go_executions": 0,
+  "real_historical_registry_reads_or_writes": 0,
+  "digest_stub_is_not_historical_evidence_verification": true,
+  "elapsed_seconds": 7.453029722999418,
+  "native_calls_attempted": 0,
+  "cases_completed": 15
+}

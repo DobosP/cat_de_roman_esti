@@ -1,0 +1,281 @@
+{
+  "checks": {
+    "all_24_case_names_match_static_source": true,
+    "all_24_cases_passed": true,
+    "archived_result_equals_original": true,
+    "archived_stdout_and_stderr_equal_original": true,
+    "budget_seconds": 10,
+    "captured_known_compile_diagnostic": [
+      "'return' in a 'finally' block"
+    ],
+    "child_elapsed_seconds": 1.5576380090024031,
+    "error": null,
+    "host_elapsed_seconds": 2.0394134,
+    "host_exit_code": 0,
+    "immediate_pre_post_interpreter_pin_exact": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+    "interpreter_nonoptimized_bytecode_disabled": true,
+    "native_application_helper_executions": 0,
+    "no_accepted_count_returned": true,
+    "real_self_signal_deliveries": 8,
+    "source_materializations_current_exact": true,
+    "stderr_empty": true,
+    "stdout_json_equals_terminal_result": true
+  },
+  "evidence_sha256": {
+    "wsl-r13-accounting-signal-delta-r2-parent.json": "ed0ea4693ee6d7edf16762bc233b1d7f1c7163a2e26f4fac9c82a24c0c6f8fab",
+    "wsl-r13-accounting-signal-delta-r2-result.json": "aa0db1e5170b37105c507a9752137c36adb4e8c131b389e0e516b5d5d0aa1a3d",
+    "wsl-r13-accounting-signal-delta-r2-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-r13-accounting-signal-delta-r2-stdout.json": "261946aaaafad79364a09fd66c93dbe3adaafd4526c7cfe80a11b5789c7fbcb4"
+  },
+  "exact_sources": {
+    "capture": {
+      "path": "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-6\\docs\\reviews\\v1-6-everyday-inputs\\methods\\invoke_pure_capture_r2.ps1.txt",
+      "sha256": "37e8a68ea8d3432f2697f964d190751fd7487a79cc22fc0cd17b3d5b7b33a3f9"
+    },
+    "fixture": {
+      "path": "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-6\\docs\\reviews\\v1-6-everyday-inputs\\methods\\check_r13_accounting_signal_delta_pure_wsl_r2.py.txt",
+      "sha256": "a3308ea3914b8fad43da57a85391a20d77a862128cc013cd5e69819195e91810"
+    },
+    "runner": {
+      "path": "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-6\\docs\\reviews\\v1-6-everyday-inputs\\methods\\run_worktree_lane_wsl_r13.py.txt",
+      "sha256": "adda73a297bad19565b95d3d1ece92a842b9cccb8bf994e0089d0f2474b37858"
+    }
+  },
+  "findings": [],
+  "live_read_only_audit": {
+    "C_device": 84,
+    "C_direct_directory": true,
+    "C_root": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\r13-accounting-signal-delta-r2\\99d82e19668841fb8729d3908c08518b",
+    "X_device": 2080,
+    "X_direct_directory_empty": true,
+    "X_root": "/home/paul_work/work/_temp/codex__content-v1-6/probe/r13-accounting-signal-delta-r2/99d82e19668841fb8729d3908c08518b",
+    "actual_owned_X_device": 2080,
+    "capture_windows_pid": 46848,
+    "capture_windows_pid_absent": true,
+    "current_linux_python_sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+    "devices_differ": true,
+    "readable_linux_proc_matches_for_fixture_runner_or_nonce": [],
+    "regular_files": [
+      {
+        "bytes": 64,
+        "path": "D/methods/windows_size_helper_wsl_r2.py.txt",
+        "sha256": "da3903bdd13a48c68ca8b12758e387f6418acd04f857e087a1b6ba3c832c673c"
+      },
+      {
+        "bytes": 64,
+        "path": "D/windows-helper-r2-prelaunch-pending-r1.json",
+        "sha256": "08b017f37e91e46576805c723d8ce9be415fc0edecd619dc23d4f6f6afa3d3fb"
+      },
+      {
+        "bytes": 64,
+        "path": "D/windows-helper-r2-specific-prelaunch-retirement-r1.json",
+        "sha256": "05c807907b2d227ebcb06b3da2caab6f5427f12c3eb3e6d54e9450aa80dfa78b"
+      },
+      {
+        "bytes": 64,
+        "path": "D/windows-helper-r2-specific-retirement-review-r1.json",
+        "sha256": "4f19552215857f501c574ad606fbb9cf94133a47b506a13aebd26552d8476963"
+      },
+      {
+        "bytes": 64,
+        "path": "S/probe/helper.py",
+        "sha256": "c50521975bd9faeeee911a47e3f0de303c552c58f617f4437997fcdeab1b899d"
+      },
+      {
+        "bytes": 64,
+        "path": "S/probe/windows-size-helper-fixtures/r2-reviewed-1/check-result.json",
+        "sha256": "e9d4163da9c62fda44e7b03a1dd4356edfc740d99dd51d0e236741e74ff15f69"
+      },
+      {
+        "bytes": 64,
+        "path": "S/probe/windows-size-helper-r2/27a9d5d9e8c54627aefa0c353dcc5dcb.json",
+        "sha256": "08b017f37e91e46576805c723d8ce9be415fc0edecd619dc23d4f6f6afa3d3fb"
+      },
+      {
+        "bytes": 416,
+        "path": "S/probe/windows-size-helper-r4/00000000000000000000000000000001.json",
+        "sha256": "eb19b3df89d3226ba7e395797d8ce7e146fcbefcc481847e0e0f3abee9e1b253"
+      },
+      {
+        "bytes": 6,
+        "path": "S/probe/windows-size-helper-r4/00000000000000000000000000000001.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 416,
+        "path": "S/probe/windows-size-helper-r4/00000000000000000000000000000002.json",
+        "sha256": "4581eaad4160bcfdf546aa4dd9dab2fffcc03a9bf125d6eec346b0a970dff17d"
+      },
+      {
+        "bytes": 6,
+        "path": "S/probe/windows-size-helper-r4/00000000000000000000000000000002.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 64,
+        "path": "S/tools/python.exe",
+        "sha256": "bb777e8264a7d7db690ff5f61bd07d2f2581bd34dfad31e3646ee2d1a7aa14ab"
+      },
+      {
+        "bytes": 401,
+        "path": "fresh-mutation/00000000000000000000000000000001.json",
+        "sha256": "58ada3522387102742ffa21726dc89b6c99086e39cbd18b80085d94494eb79f4"
+      },
+      {
+        "bytes": 6,
+        "path": "fresh-mutation/00000000000000000000000000000001.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 400,
+        "path": "fresh-mutation/00000000000000000000000000000002.json",
+        "sha256": "a171d4f5ca2aa13ffd5cb861e9db70c22f829462e69344353d0dae0e81651990"
+      },
+      {
+        "bytes": 6,
+        "path": "fresh-mutation/00000000000000000000000000000002.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 398,
+        "path": "invalid-type/00000000000000000000000000000001.json",
+        "sha256": "7f14917a8ed21794b0a5622167d14a6ce17ed04d1cb1e27c4e2a7c44f1588db7"
+      },
+      {
+        "bytes": 6,
+        "path": "invalid-type/00000000000000000000000000000001.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 398,
+        "path": "invalid-type/00000000000000000000000000000002.json",
+        "sha256": "0b89a38b7b85bf86874e80389c63cbc99edbc2184f32e52fd66b1e8c30ad9390"
+      },
+      {
+        "bytes": 6,
+        "path": "invalid-type/00000000000000000000000000000002.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 1,
+        "path": "malformed/00000000000000000000000000000001.json",
+        "sha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96"
+      },
+      {
+        "bytes": 6,
+        "path": "malformed/00000000000000000000000000000001.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 395,
+        "path": "malformed/00000000000000000000000000000002.json",
+        "sha256": "7cdf78120e5328ac07d600a24c822e657bb605eb6ced5b5a3cc73f64703ca129"
+      },
+      {
+        "bytes": 6,
+        "path": "malformed/00000000000000000000000000000002.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 392,
+        "path": "orphan/00000000000000000000000000000001.json",
+        "sha256": "015fec6609600058fae444739b1ee6fa633a586893033deb8890467a8ea6fe04"
+      },
+      {
+        "bytes": 6,
+        "path": "orphan/00000000000000000000000000000001.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 392,
+        "path": "orphan/00000000000000000000000000000002.json",
+        "sha256": "ef30024bc2a8c8f5137f31f79a47b0afd1b15534538fba8024d37b7d6f243ca6"
+      },
+      {
+        "bytes": 6,
+        "path": "orphan/00000000000000000000000000000002.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 2,
+        "path": "orphan/00000000000000000000000000000003.worker-output.json",
+        "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      {
+        "bytes": 393,
+        "path": "pending/00000000000000000000000000000001.json",
+        "sha256": "9e09356013e23014dde523c665c6eaf9dcca8079fa361338c94d21cf9ed29677"
+      },
+      {
+        "bytes": 2,
+        "path": "pending/00000000000000000000000000000001.json.pending",
+        "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      {
+        "bytes": 6,
+        "path": "pending/00000000000000000000000000000001.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 393,
+        "path": "pending/00000000000000000000000000000002.json",
+        "sha256": "248902838c1062facdbf6e55832a2786c4892bc6ff72c2c1d9ab4e572935351e"
+      },
+      {
+        "bytes": 6,
+        "path": "pending/00000000000000000000000000000002.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 3067,
+        "path": "result.json",
+        "sha256": "aa0db1e5170b37105c507a9752137c36adb4e8c131b389e0e516b5d5d0aa1a3d"
+      },
+      {
+        "bytes": 400,
+        "path": "valid-registry/00000000000000000000000000000001.json",
+        "sha256": "a780d1d5032ebc2524860951b37cc1d3c725ffda4c7b1c41c53621ad854925b0"
+      },
+      {
+        "bytes": 6,
+        "path": "valid-registry/00000000000000000000000000000001.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      },
+      {
+        "bytes": 400,
+        "path": "valid-registry/00000000000000000000000000000002.json",
+        "sha256": "7cfbe8d5b94b64629fb03bdda65bfce610bd3255dfbf9cdf6a84954fb46dec59"
+      },
+      {
+        "bytes": 6,
+        "path": "valid-registry/00000000000000000000000000000002.worker-output.json",
+        "sha256": "3b00ba5361676a0a8152642a6edaf54a222bd409b5774b5b461ac8d1cee09cb4"
+      }
+    ],
+    "result_regular_single_link": true
+  },
+  "nonce": "99d82e19668841fb8729d3908c08518b",
+  "preserved_prior_evidence_sha256": {
+    "v1-6-wsl-native-r1-result.json": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "wsl-r12-actual-active-r15-result.json": "bebf432a9dfceabc31e3646902c9099746e81f490d911c9452668b50603c5938",
+    "wsl-r12-actual-active-r16-result.json": "12015a66c8838591a4a39c5adbb5e2ae8630a0d38312fdda0e7e96c2b46c4226",
+    "wsl-r13-accounting-signal-delta-source-review-r1.json": "a59f4d71f7dacadbbc0d3affa4dc3354f02eab8e080cde58b1f8abcf90406ff1"
+  },
+  "prior_exact_source_acceptance": {
+    "path": "wsl-r13-accounting-signal-delta-source-review-r2.json",
+    "sha256": "d9c9ac7a5aa5a6d15f0af03c10b26ebe648fdbfa796ab7ab62086479a961deb1"
+  },
+  "review_execution": "Candidate code was not executed by reviewer. Read-only file/AST/hash/current-process inventory audits only.",
+  "reviewed_at_utc": "2026-10-07T15:19:33.049580+00:00",
+  "reviewer": "independent continuation_audit",
+  "schema": "v1-6-r13-accounting-signal-delta-pure-r2-evidence-review-r1",
+  "scope": [
+    "Eight delivered signals target the fixture own process and call the exact R13 flag handler; they prove no foreign-process cleanup.",
+    "Tiny freshly read synthetic history markers stand for digest results; no production history receipt/hash or actual Windows helper count is accepted.",
+    "Noninterruptible validator controls preserve fresh complete validation, mutations/errors refuse; the valid measured path stops at the denied helper boundary.",
+    "The exact current child and host timings satisfy the existing10s bound; RSS policy was guarded but no measured peak is reported.",
+    "No prior217/57/20 fixture was rerun; original nativeR1 and R15/R16 lifecycle failures remain unchanged.",
+    "This observation grants no R17 actual lifecycle, CLI refusal, finalization, queued prefix, performance, Go/native/doc/landing qualification; no campaign clock or baseline is created or renewed."
+  ],
+  "verdict": "ACCEPT_PURE_CONTROLLED_OBSERVATION_ONLY"
+}

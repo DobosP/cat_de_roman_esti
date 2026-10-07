@@ -1,0 +1,45 @@
+param([string]$Fixture,[string]$FixturePin,[string]$Method,[string]$MethodPin,[string]$Label,[string]$ResultParent,[int]$Cases)
+$ErrorActionPreference='Stop'
+$reviewDir='C:\Users\Paul Work\personal_repos\_worktrees\cat_de_roman_esti\codex__content-v1-6\docs\reviews\v1-6-everyday-inputs'
+$probeDir='C:\Users\Paul Work\personal_repos\_temp\codex__content-v1-6\probe'
+if ($Fixture -notmatch '^[a-z0-9_]+$' -or $Method -notmatch '^[a-z0-9_]+$' -or $Label -notmatch '^[a-z0-9-]+$' -or $FixturePin -notmatch '^[a-f0-9]{64}$' -or $MethodPin -notmatch '^[a-f0-9]{64}$') {throw 'invalid exact capture arguments'}
+foreach ($suffix in @('-parent.json','-result.json','-stdout.json','-stderr.txt')) {
+ if (Test-Path -LiteralPath (Join-Path $reviewDir ($Label+$suffix))) {throw 'retained labeled attempt exists; no identical execution'}
+}
+foreach ($pair in @(@($Fixture,$FixturePin),@($Method,$MethodPin))) {
+ $from=Join-Path $reviewDir ('methods\'+$pair[0]+'.py.txt'); $to=Join-Path $probeDir ($pair[0]+'.py')
+ if ((Get-FileHash -LiteralPath $from -Algorithm SHA256).Hash.ToLower() -ne $pair[1]) {throw 'source pin mismatch'}
+ if (Test-Path -LiteralPath $to) {if ((Get-FileHash -LiteralPath $to -Algorithm SHA256).Hash.ToLower() -ne $pair[1]) {throw 'materialization occupied'}} else {[IO.File]::Copy($from,$to,$false)}
+ if ((Get-FileHash -LiteralPath $to -Algorithm SHA256).Hash.ToLower() -ne $pair[1]) {throw 'materialization mismatch'}
+}
+$nonce=[guid]::NewGuid().ToString('N')
+$stdoutPath=Join-Path $probeDir ($Label+'-'+$nonce+'-stdout.json'); $stderrPath=Join-Path $probeDir ($Label+'-'+$nonce+'-stderr.txt')
+$pythonCode='import hashlib,json,sys; print(json.dumps({"path":sys.executable,"version":sys.version,"sha256":hashlib.sha256(open(sys.executable,"rb").read()).hexdigest(),"optimize":sys.flags.optimize,"no_bytecode":sys.dont_write_bytecode}))'
+$pre=& wsl.exe -d Ubuntu --exec /usr/bin/python3.14 -B -c $pythonCode
+if ($LASTEXITCODE -ne 0) {throw 'pre interpreter check failed'}
+$preJson=$pre|ConvertFrom-Json
+if ($preJson.sha256 -ne '52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41') {throw 'interpreter pin mismatch'}
+$linuxProbe='/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/'
+$argText='-d Ubuntu --exec /usr/bin/python3.14 -B "'+$linuxProbe+$Fixture+'.py" '+$nonce+' '+$FixturePin+' "'+$linuxProbe+$Method+'.py"'
+$clock=[Diagnostics.Stopwatch]::StartNew()
+$child=Start-Process -FilePath wsl.exe -ArgumentList $argText -WindowStyle Hidden -PassThru -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+$done=$child.WaitForExit(15000)
+if (-not $done) {Stop-Process -Id $child.Id;throw 'parent timeout; inspect Linux ownership before further execution'}
+$child.Refresh();$exitCode=$child.ExitCode;$clock.Stop()
+$post=& wsl.exe -d Ubuntu --exec /usr/bin/python3.14 -B -c $pythonCode
+if ($LASTEXITCODE -ne 0) {throw 'post interpreter check failed'}
+$postJson=$post|ConvertFrom-Json
+$parent=[ordered]@{schema=$Label+'-parent';nonce=$nonce;exit_code=$exitCode;elapsed_seconds=$clock.Elapsed.TotalSeconds;windows_process_id=$child.Id;windows_process_exited=$done;interpreter_immediate_pre=$preJson;interpreter_post=$postJson;fixture_sha256=$FixturePin;method_sha256=$MethodPin;fixture_post_sha256=(Get-FileHash -LiteralPath (Join-Path $probeDir ($Fixture+'.py')) -Algorithm SHA256).Hash.ToLower();method_post_sha256=(Get-FileHash -LiteralPath (Join-Path $probeDir ($Method+'.py')) -Algorithm SHA256).Hash.ToLower();stdout_sha256=(Get-FileHash -LiteralPath $stdoutPath -Algorithm SHA256).Hash.ToLower();stderr_sha256=(Get-FileHash -LiteralPath $stderrPath -Algorithm SHA256).Hash.ToLower();raw_stdout=$stdoutPath;raw_stderr=$stderrPath;scope='Bounded Python-only controls on synthetic tiny ledgers; real self-signals and mocked accounting/owned-helper callbacks; no native qualification'}
+$parentPath=Join-Path $reviewDir ($Label+'-parent.json')
+if (Test-Path -LiteralPath $parentPath) {throw 'parent receipt occupied'}
+[IO.File]::WriteAllText($parentPath,($parent|ConvertTo-Json -Depth 8)+"`n",[Text.UTF8Encoding]::new($false))
+[IO.File]::Copy($stdoutPath,(Join-Path $reviewDir ($Label+'-stdout.json')),$false)
+[IO.File]::Copy($stderrPath,(Join-Path $reviewDir ($Label+'-stderr.txt')),$false)
+$copyCode='import pathlib,sys; src=pathlib.Path(sys.argv[1]); dst=pathlib.Path(sys.argv[2]); data=src.read_bytes(); assert len(data)<131072; f=dst.open("xb"); f.write(data); f.close()'
+$linuxResult=$ResultParent+'/'+$nonce+'/result.json'
+$linuxReceipt='/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/'+$Label+'-result.json'
+& wsl.exe -d Ubuntu --exec /usr/bin/python3.14 -B -c $copyCode $linuxResult $linuxReceipt
+if ($LASTEXITCODE -ne 0) {throw 'exact result capture failed'}
+$observed=Get-Content -LiteralPath (Join-Path $reviewDir ($Label+'-result.json')) -Raw|ConvertFrom-Json
+[pscustomobject]@{label=$Label;nonce=$nonce;exit_code=$exitCode;host_seconds=$clock.Elapsed.TotalSeconds;passed=$observed.passed;case_count=$observed.case_count;child_seconds=$observed.elapsed_seconds;error=$observed.error;interpreter_match=($preJson.sha256 -eq $postJson.sha256);parent_sha=(Get-FileHash -LiteralPath $parentPath -Algorithm SHA256).Hash.ToLower()}|ConvertTo-Json
+if ($exitCode -ne 0 -or -not $observed.passed -or $observed.case_count -ne $Cases -or $preJson.sha256 -ne $postJson.sha256) {throw 'bounded pure fixture not accepted'}

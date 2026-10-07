@@ -1,0 +1,118 @@
+{
+  "budget_seconds": 10,
+  "case_count": 24,
+  "cases": [
+    {
+      "name": "measured-entry-signal-no-IO-or-helper",
+      "passed": true
+    },
+    {
+      "name": "history-entry-signal-no-IO",
+      "passed": true
+    },
+    {
+      "name": "registry-entry-signal-no-IO",
+      "passed": true
+    },
+    {
+      "name": "history-missing-R3-lstat-self-SIGTERM",
+      "passed": true
+    },
+    {
+      "name": "history-R2-lstat-self-SIGINT",
+      "passed": true
+    },
+    {
+      "name": "history-enumeration-self-SIGINT",
+      "passed": true
+    },
+    {
+      "name": "history-fresh-digest-self-SIGTERM",
+      "passed": true
+    },
+    {
+      "name": "registry-enumeration-self-SIGTERM-before-lstat",
+      "passed": true
+    },
+    {
+      "name": "registry-lstat-self-SIGTERM",
+      "passed": true
+    },
+    {
+      "name": "registry-fresh-final-read-self-SIGINT",
+      "passed": true
+    },
+    {
+      "name": "measured-history-digest-interrupt-no-count-or-helper",
+      "passed": true
+    },
+    {
+      "name": "default-noninterruptible-history-completes-six-fresh-digests",
+      "passed": true
+    },
+    {
+      "name": "default-noninterruptible-registry-all-types-and-two-fresh-finals",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-measured-validations-reach-denied-helper-not-count",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-fresh-receipt-mutation-refused",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-fresh-history-mutation-refused",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-malformed-final-refused",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-pending-final-refused",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-orphan-output-refused",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-registry-lstat-denial-propagates",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-registry-fresh-read-denial-propagates",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-history-digest-denial-propagates",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-history-enumeration-denial-propagates",
+      "passed": true
+    },
+    {
+      "name": "noninterruptible-nonregular-registry-entry-refused",
+      "passed": true
+    }
+  ],
+  "compile_diagnostics": [
+    "'return' in a 'finally' block"
+  ],
+  "elapsed_seconds": 1.5576380090024031,
+  "error": null,
+  "expected_cases": 24,
+  "fixture_sha256": "a3308ea3914b8fad43da57a85391a20d77a862128cc013cd5e69819195e91810",
+  "method_sha256": "adda73a297bad19565b95d3d1ece92a842b9cccb8bf994e0089d0f2474b37858",
+  "native_application_helper_executions": 0,
+  "no_returned_accepted_count": true,
+  "passed": true,
+  "production_history_receipts_or_hashes_claimed": false,
+  "real_self_signal_deliveries": 8,
+  "schema": "v1-6-r13-accounting-signal-delta-pure-r2",
+  "scope": "controlled callback and real self-signal checks on tiny owned synthetic ledgers",
+  "unchanged_217_57_20_controls_rerun": false
+}

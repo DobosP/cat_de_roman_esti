@@ -1,0 +1,42 @@
+{
+  "R13_actual_failed_attempt_preserved": true,
+  "R14_preserved_unexecuted": true,
+  "accepted_changes": [
+    "Active now launches owned child and grandchild as serial step0; forbidden successor is step1. It requires pending index0/empty prefix before signalling real supervisor, durable one failed row, exact target argv/name/index, original baseline/deadline/start, real group cleanup/no live child or grandchild and successor marker absent.",
+    "Both failed continuation(index1) and reset(index0) invocations must refuse without mutating failed state. It no longer claims successful-prefix preservation; separate actual queued-prefix gate remains mandatory.",
+    "Active supervisor-exit wait uses fresh remaining24-second work time instead of incidental inner7-second wait. Exit encompasses unchanged production post-checks and durable resource-accounted publication. This adjusts fixture scheduling only; production group cleanup policy, real resource/readset guards,24 work/30 total and six-second cleanup/report reserve stay unchanged.",
+    "Positive prelaunch and every work-wait cutoff plus final work_finished_elapsed_seconds<=24 and fresh remaining guard remain in all3 modes. Finalization/queued mechanisms are unchanged from reviewed R13.",
+    "All exact R12/mode/closed-copy/qualified direct UUID43a6894fd7a94b3587c744815884c9f3/namespace109+161 bindings and original752431588 cumulative growth accounting remain unchanged."
+  ],
+  "all_prior_failures_preserved": true,
+  "candidate_bytes": 27417,
+  "candidate_lines": 468,
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "exact_python_fixture_execution_prerequisite_accepted": true,
+  "execution_preconditions": [
+    "Parent checks fresh distinct result/capture labels and fresh owned probe directory before launch; materialized fixture exactc299..., runner77f94..., Python52e0... ordinary nonoptimized-B pre/post pins required.",
+    "Run active, finalization and queued sequentially with actual task roots quiet. Capture correct active/finalization check-result.json and passed boolean; queued result.json/status; all require parent exit and complete capture within30 seconds plus explicit work duration<=24.",
+    "Keep exact raw parent/stdout/stderr, production state/step/cumulative/log/lock and helper evidence. Any timeout/fallback cleanup/failed assertion stays failed.",
+    "All3 actual modes must pass independently before claiming lifecycle qualification. This source receipt promises no pass and grants no native admission."
+  ],
+  "findings": [],
+  "native_pass": false,
+  "original_failed_clock_renewed": false,
+  "reviewed_at_utc": "2026-10-07T14:11:25.110227+00:00",
+  "reviewer": "/root/continuation_audit, independent source reviewer",
+  "schema": "v1-6-r12-actual-fixture-source-review-r3",
+  "scope": "Exact R15 changes against reviewed R13 and preserved unexecuted R14; source-only active coverage split and fixture scheduler wait review. Full unchanged R12/mode/mirror/readset/ownership mechanisms retain prior source review.",
+  "source_binding": {
+    "methods/check_runner_signal_wsl_actual_r13.py.txt": "234178e492b53001ff78bd5dd8eeb7fe4723b71f4d396ac94d5c9b263ea05f8e",
+    "methods/check_runner_signal_wsl_actual_r14.py.txt": "69edfa2173e29e5e1a068728a24b4d1212570d90229611f77aca8685828bd23f",
+    "methods/check_runner_signal_wsl_actual_r15.py.txt": "c299824538413b506809ecb09994d8fbf516fdb862ccd12f97eadd6ebee04355",
+    "methods/run_worktree_lane_wsl_r12.py.txt": "77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0",
+    "wsl-native-namespace-spec-r1.json": "2e4a9543c414de1ed1e406febc5b7eb09ccac095e8f6e3b1237feb2421906825",
+    "wsl-r12-actual-active-r13-failure-evidence-review-r1.json": "45194b5b5e28d5e88a3d9db55c5bde1ea58edc1db6e3341253bd6f255186f2b8",
+    "wsl-r12-actual-fixture-source-review-r2.json": "56fb4a6910ddb36d9fc8e0c255972592656d06d85774a3a0b7d93d0fa5d68959",
+    "wsl-runtime-mirror-r6-evidence-review-r1.json": "ec3344367a7a5e70ab1da17be871cff80b76031786883aeb9565c30f663b7e27",
+    "wsl-runtime-mirror-r6-result.json": "efa8509d719fc2507248873a76c6059907a78f6839a96409769119befe0f1238"
+  },
+  "valid_until": "Any source or dependency/mirror change requires a new exact review; this receipt is source-only historical evidence.",
+  "verdict": "ACCEPT_SOURCE_ONLY"
+}

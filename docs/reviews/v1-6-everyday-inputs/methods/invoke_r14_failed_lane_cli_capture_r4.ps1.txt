@@ -1,0 +1,45 @@
+param([ValidatePattern('^[a-f0-9]{64}$')][string]$FixturePin,[ValidatePattern('^[a-f0-9]{64}$')][string]$BindingPin)
+$Mode='failed-lane-refusals';$Revision='r4'
+$ErrorActionPreference='Stop'
+$D='C:\Users\Paul Work\personal_repos\_worktrees\cat_de_roman_esti\codex__content-v1-6\docs\reviews\v1-6-everyday-inputs'
+$S='C:\Users\Paul Work\personal_repos\_temp\codex__content-v1-6'
+$label='wsl-r12-failed-lane-cli-r4'
+foreach($suffix in @('-parent.json','-result.json','-stdout.json','-stderr.txt')) {if(Test-Path -LiteralPath (Join-Path $D ($label+$suffix))){throw 'retained attempt exists; identical revision/mode is not admitted to repeat'}}
+$name='check_r14_failed_lane_cli_wsl_r4.py'
+$binding=Join-Path $D 'wsl-r12-failed-lane-refusal-binding-r4.json'
+if((Get-FileHash -LiteralPath $binding -Algorithm SHA256).Hash.ToLower() -ne $BindingPin){throw 'exact closed-lane binding changed'}
+$from=Join-Path $D ('methods\'+$name+'.txt');$fixture=Join-Path $S ('probe\'+$name)
+if((Get-FileHash -LiteralPath $from -Algorithm SHA256).Hash.ToLower() -ne $FixturePin){throw 'fixture source changed'}
+if(Test-Path -LiteralPath $fixture){if((Get-FileHash -LiteralPath $fixture -Algorithm SHA256).Hash.ToLower() -ne $FixturePin){throw 'fixture materialization occupied'}}else{[IO.File]::Copy($from,$fixture,$false)}
+if((Get-FileHash -LiteralPath $fixture -Algorithm SHA256).Hash.ToLower() -ne $FixturePin){throw 'fixture materialization mismatch'}
+$nonce=[guid]::NewGuid().ToString('N')
+$stdoutPath=Join-Path $S ('probe\'+$label+'-'+$nonce+'-stdout.json');$stderrPath=Join-Path $S ('probe\'+$label+'-'+$nonce+'-stderr.txt')
+$linuxProbe='/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/';$linuxDirectory=$linuxProbe+'r12-failed-lane-refusals-'+$nonce
+$linuxBinding='/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/wsl-r12-failed-lane-refusal-binding-r4.json'
+$pythonCode='import hashlib,json,sys; print(json.dumps({"path":sys.executable,"version":sys.version,"sha256":hashlib.sha256(open(sys.executable,"rb").read()).hexdigest(),"optimize":sys.flags.optimize,"no_bytecode":sys.dont_write_bytecode}))'
+$pre=& wsl.exe -d Ubuntu --exec /usr/bin/python3.14 -B -c $pythonCode
+if($LASTEXITCODE -ne 0){throw 'pre interpreter failed'}
+$preJson=$pre|ConvertFrom-Json
+if($preJson.sha256 -ne '52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41'){throw 'interpreter changed'}
+$argText='-d Ubuntu --exec /usr/bin/python3.14 -B "'+$linuxProbe+$name+'" "'+$linuxDirectory+'" "'+$linuxBinding+'" '+$BindingPin
+$clock=[Diagnostics.Stopwatch]::StartNew()
+$child=Start-Process -FilePath wsl.exe -ArgumentList $argText -WindowStyle Hidden -PassThru -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+$done=$child.WaitForExit(35000)
+if(-not$done){Stop-Process -Id $child.Id;throw 'parent35s timeout; inspect Linux ownership before any new writer'}
+$child.Refresh();$exitCode=$child.ExitCode;$clock.Stop()
+$post=& wsl.exe -d Ubuntu --exec /usr/bin/python3.14 -B -c $pythonCode
+if($LASTEXITCODE -ne 0){throw 'post interpreter failed'}
+$postJson=$post|ConvertFrom-Json
+$parent=[ordered]@{schema=$label+'-parent';nonce=$nonce;mode=$Mode;revision=$Revision;exit_code=$exitCode;elapsed_seconds=$clock.Elapsed.TotalSeconds;windows_process_id=$child.Id;windows_process_exited=$done;interpreter_immediate_pre=$preJson;interpreter_post=$postJson;fixture_sha256=$FixturePin;fixture_post_sha256=(Get-FileHash -LiteralPath $fixture -Algorithm SHA256).Hash.ToLower();stdout_sha256=(Get-FileHash -LiteralPath $stdoutPath -Algorithm SHA256).Hash.ToLower();stderr_sha256=(Get-FileHash -LiteralPath $stderrPath -Algorithm SHA256).Hash.ToLower();raw_stdout=$stdoutPath;raw_stderr=$stderrPath;scope='Two real R14 CLI refusals on one immutable closed failed R18 lane; no game native qualification';binding_sha256=$BindingPin;binding_post_sha256=(Get-FileHash -LiteralPath $binding -Algorithm SHA256).Hash.ToLower();previous_failed_attempts_reclassified=$false}
+$parentPath=Join-Path $D ($label+'-parent.json')
+[IO.File]::WriteAllText($parentPath,($parent|ConvertTo-Json -Depth 8)+"`n",[Text.UTF8Encoding]::new($false))
+[IO.File]::Copy($stdoutPath,(Join-Path $D ($label+'-stdout.json')),$false)
+[IO.File]::Copy($stderrPath,(Join-Path $D ($label+'-stderr.txt')),$false)
+$resultName='check-result.json'
+$resultPath=Join-Path $S ('probe\r12-failed-lane-refusals-'+$nonce+'\'+$resultName)
+if(-not(Test-Path -LiteralPath $resultPath)){Get-Content -LiteralPath $stderrPath -Raw;throw 'fixture result absent; preserve raw evidence and inspect ownership'}
+[IO.File]::Copy($resultPath,(Join-Path $D ($label+'-result.json')),$false)
+$observed=Get-Content -LiteralPath $resultPath -Raw|ConvertFrom-Json
+$passed=$observed.passed -eq $true
+[pscustomobject]@{mode=$Mode;revision=$Revision;nonce=$nonce;exit_code=$exitCode;host_seconds=$clock.Elapsed.TotalSeconds;passed=$passed;result=$observed;parent_sha=(Get-FileHash -LiteralPath $parentPath -Algorithm SHA256).Hash.ToLower()}|ConvertTo-Json -Depth 7
+if($exitCode -ne 0 -or -not$passed -or $clock.Elapsed.TotalSeconds -gt 30 -or $observed.elapsed_seconds -gt 30 -or $null -eq $observed.work_finished_elapsed_seconds -or $observed.work_finished_elapsed_seconds -gt 24 -or $preJson.sha256 -ne $postJson.sha256 -or $parent.binding_post_sha256 -ne $BindingPin -or $parent.fixture_post_sha256 -ne $FixturePin){throw 'actual fixture not accepted'}

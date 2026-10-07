@@ -1,0 +1,28 @@
+{
+  "after": "{\"interpreter_sha\": \"52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41\", \"owned_live\": []}\n",
+  "after_exit": 0,
+  "argv": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu",
+    "--",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=6s",
+    "50s",
+    "/usr/bin/python3.14",
+    "-B",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/prepare_runtime_readset_mirror_wsl_r2.py",
+    "d318b9b3638e4de18d31fac17897c196",
+    "7f3ab617cdb347e11176513bd8e550e982588bbb6d43b68a8aa2b8e605fead78"
+  ],
+  "before": "{\"interpreter_sha\": \"52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41\", \"owned_live\": []}\n",
+  "exit_code": 1,
+  "host_elapsed_seconds": 43.70400000000154,
+  "schema": "v1-6-runtime-mirror-r2-parent-capture",
+  "source_sha256_after": "7f3ab617cdb347e11176513bd8e550e982588bbb6d43b68a8aa2b8e605fead78",
+  "started_at_utc": "2026-10-07T12:23:57.781222+00:00",
+  "stderr": "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/run_worktree_lane_wsl_r9.py:722: SyntaxWarning: 'return' in a 'finally' block\n  return publish_outcome(manifest, manifest_path, manifest_bytes, index, state, row, prefix,\n",
+  "stderr_sha256": "aadde31d519d4e8655d3e8ef15316f6e71695ae8e35a431d97116a1842336cec",
+  "stdout_sha256": "833ea0e3e6790fb73a7e1db9982f90b18d1fc49c163648f8ae91d65ffab7c5a0"
+}

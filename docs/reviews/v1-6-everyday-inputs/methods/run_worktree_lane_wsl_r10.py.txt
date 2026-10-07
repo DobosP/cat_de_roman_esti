@@ -1,0 +1,821 @@
+"""One frozen qualification step per invocation; never renew a campaign budget.
+
+Usage: qualified_python run_worktree_lane_wsl_r10.py ADMISSION_JSON all|STEP_INDEX
+Catchable SIGTERM/SIGINT trigger owned child-session cleanup and failed receipts.
+SIGKILL, host loss, uninterruptible kernel waits and unavailable storage are not
+claimed safe. A pending state left by such loss refuses automatic continuation.
+"""
+import datetime
+import fcntl
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import stat
+import signal
+import subprocess
+import sys
+import tempfile
+import time
+import uuid
+
+R = Path('/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S = Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+D = R / 'docs/reviews/v1-6-everyday-inputs'
+X = Path('/home/paul_work/work/_temp/codex__content-v1-6')
+HISTORICAL_GROWTH_BASELINE = 752431588
+GIB = 2 ** 30
+received_signal = None
+
+
+def on_signal(number, frame):
+    # Do not raise between Popen and ownership bookkeeping. The monitor notices
+    # the flag immediately after the owned child has been durably identified.
+    global received_signal
+    if received_signal is None:
+        received_signal = number
+
+
+def now():
+    return datetime.datetime.now(datetime.timezone.utc)
+
+
+def digest(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def emit(value):
+    # Never depend on an exec-session stdout pipe for cleanup or durable results.
+    try:
+        os.write(1, (json.dumps(value, sort_keys=True) + '\n').encode())
+    except OSError:
+        pass
+
+
+def write_json(path, value, exclusive=False):
+    path = Path(path)
+    blob = (json.dumps(value, sort_keys=True, indent=2) + '\n').encode()
+    name = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=path.parent, prefix='.r4-', delete=False) as out:
+            name = Path(out.name)
+            out.write(blob)
+            out.flush()
+            os.fsync(out.fileno())
+        if exclusive:
+            os.link(name, path)
+            name.unlink()
+        else:
+            os.replace(name, path)
+        name = None
+        fd = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+    finally:
+        if name is not None:
+            name.unlink(missing_ok=True)
+
+
+def memory_available():
+    with open('/proc/meminfo') as source:
+        for line in source:
+            if line.startswith('MemAvailable:'):
+                return int(line.split()[1]) * 1024
+    raise RuntimeError('MemAvailable missing')
+
+
+def process_info(pid):
+    try:
+        raw = Path('/proc') / str(pid) / 'stat'
+        fields = raw.read_text().rsplit(')', 1)[1].split()
+        return {'pid': pid, 'state': fields[0], 'pgid': int(fields[2]),
+                'sid': int(fields[3]), 'start_ticks': int(fields[19])}
+    except (OSError, ValueError, IndexError):
+        return None
+
+
+def group_info(pgid):
+    members, rss = [], 0
+    for entry in Path('/proc').iterdir():
+        if not entry.name.isdigit():
+            continue
+        info = process_info(int(entry.name))
+        if info is None or info['pgid'] != pgid or info['sid'] != pgid:
+            continue
+        if info['state'] not in ('Z', 'X'):
+            members.append(info)
+        try:
+            for line in (entry / 'status').read_text().splitlines():
+                if line.startswith('VmRSS:'):
+                    rss += int(line.split()[1]) * 1024
+                    break
+        except (OSError, ValueError):
+            pass
+    return members, rss
+
+
+def child_finished(child):
+    # Keep the leader waitable until its session is empty. WNOWAIT prevents PID
+    # reuse between observing exit and terminating any remaining owned children.
+    return os.waitid(os.P_PID, child.pid, os.WEXITED | os.WNOHANG | os.WNOWAIT) is not None
+
+
+def stop_owned_group(child, identity):
+    started = time.monotonic()
+    actions = []
+    actual = process_info(child.pid)
+    if actual is None or actual['start_ticks'] != identity['start_ticks'] or actual['pgid'] != child.pid or actual['sid'] != child.pid:
+        return {'actions': actions, 'error': 'owned leader identity no longer provable',
+                'remaining_live_members': group_info(child.pid)[0]}
+    members, _ = group_info(child.pid)
+    if members:
+        os.killpg(child.pid, signal.SIGTERM)
+        actions.append('SIGTERM_owned_group')
+    while time.monotonic() - started < 4:
+        if not group_info(child.pid)[0]:
+            break
+        time.sleep(.05)
+    if group_info(child.pid)[0]:
+        os.killpg(child.pid, signal.SIGKILL)
+        actions.append('SIGKILL_owned_group')
+    while time.monotonic() - started < 5:
+        if not group_info(child.pid)[0]:
+            break
+        time.sleep(.05)
+    remaining = group_info(child.pid)[0]
+    if not remaining and child_finished(child):
+        child.wait(timeout=.1)
+    return {'actions': actions, 'remaining_live_members': remaining,
+            'elapsed_seconds': time.monotonic() - started,
+            'error': None if not remaining else 'owned group remained after cleanup budget'}
+
+
+def measurement_roots(manifest):
+    roots = [S / 'probe', S / 'gocache', S / 'tmp', S / 'gopath', S / 'gomodcache', R]
+    for extra in manifest.get('additional_measure_dirs', []):
+        path = Path(extra).resolve()
+        if not (path.is_relative_to(S) or path == X):
+            raise ValueError('additional measurement directory escaped owned task scratch')
+        roots.append(path)
+    roots = [path.resolve() for path in roots]
+    if X.resolve() != X or X not in roots:
+        raise ValueError('entire nonsymlink Linux task scratch must be measured')
+    for i, path in enumerate(roots):
+        for other in roots[:i]:
+            if path == other or path.is_relative_to(other) or other.is_relative_to(path):
+                raise ValueError('overlapping measurement roots')
+    return roots
+
+
+def linux_measured_size(roots, interruptible=False):
+    total = 0
+    pending = list(roots)
+    while pending:
+        directory = pending.pop()
+        try:
+            with os.scandir(directory) as entries:
+                for entry in entries:
+                    if interruptible and received_signal is not None:
+                        raise InterruptedError('catchable signal during disk accounting')
+                    try:
+                        if entry.is_dir(follow_symlinks=False):
+                            pending.append(entry.path)
+                        elif entry.is_file():
+                            total += entry.stat().st_size
+                    except FileNotFoundError:
+                        pass
+        except FileNotFoundError:
+            pass
+    return total
+
+
+WINDOWS_PYTHON = Path('/mnt/c/Users/Paul Work/AppData/Local/hermes/hermes-agent/venv/Scripts/python.exe')
+WINDOWS_HELPER = S / 'probe/windows_size_helper_wsl_r4.py'
+WINDOWS_PYTHON_SHA = '885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8'
+WINDOWS_HELPER_SHA = '67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7'
+
+def windows_path(path):
+    value = str(path)
+    if not value.startswith('/mnt/c/') or '..' in Path(value).parts:
+        raise ValueError('Windows helper only admits exact mounted C roots')
+    return 'C:/' + value[len('/mnt/c/'):]
+
+def validate_prior_windows_receipts(receipts):
+    finals, sidecars = {}, []
+    for entry in receipts.iterdir():
+        if not stat.S_ISREG(entry.lstat().st_mode):
+            raise RuntimeError('nonregular Windows metadata registry entry')
+        match = re.fullmatch(r'([0-9a-f]{32})(\.json|\.worker-output\.json|\.json\.pending)', entry.name)
+        if match is None:
+            raise RuntimeError('unknown Windows metadata registry entry')
+        nonce, kind = match.groups()
+        if kind == '.json':
+            finals[nonce] = entry
+        else:
+            sidecars.append((nonce, kind))
+    for nonce, kind in sidecars:
+        if nonce not in finals or kind == '.json.pending':
+            raise RuntimeError('orphan or pending Windows metadata sidecar; no new helper admitted')
+    for nonce, previous in finals.items():
+        snapshot = previous.read_bytes()
+        if len(snapshot) > 16 << 10:
+            raise ValueError('prior Windows metadata receipt16KiB')
+        old = json.loads(snapshot)
+        if not isinstance(old, dict) or old.get('schema') != 'v1-6-windows-fresh-size-helper-r2' or old.get('nonce') != nonce:
+            raise RuntimeError('invalid prior Windows metadata receipt identity')
+        if str(old.get('receipt_path','')).replace(chr(92),'/') != windows_path(previous):
+            raise RuntimeError('prior Windows metadata receipt path differs')
+        if old.get('launcher_not_created') or old.get('worker_not_created'):
+            raise RuntimeError('prelaunch failure requires independent disposition; no new helper admitted')
+        if old.get('status') not in ('completed', 'failed') or any(old.get(key) is not True for key in
+                ('worker_exit_confirmed', 'launcher_exit_confirmed', 'job_empty')):
+            raise RuntimeError('unconfirmed prior Windows metadata cleanup; no new helper admitted')
+
+def validate_specific_retired_r2_registry():
+    never_invoked = S / 'probe/windows-size-helper-r3'
+    try:
+        prior_mode = never_invoked.lstat().st_mode
+    except FileNotFoundError:
+        prior_mode = None
+    if prior_mode is not None:
+        if not stat.S_ISDIR(prior_mode) or any(never_invoked.iterdir()):
+            raise RuntimeError('unreviewed or invalid R3 helper registry; no new helper admitted')
+    registry = S / 'probe/windows-size-helper-r2'
+    if not stat.S_ISDIR(registry.lstat().st_mode):
+        raise RuntimeError('historical R2 registry redirected or is not a directory')
+    original = registry / '27a9d5d9e8c54627aefa0c353dcc5dcb.json'
+    entries = list(registry.iterdir())
+    if entries != [original] or not stat.S_ISREG(original.lstat().st_mode):
+        raise RuntimeError('historical R2 registry changed or acquired new owned work')
+    pins = {
+        original: '131afdd601012e58f3395b7be3f429e79453f20d9dfa6ea1b2a6a0676fe04e2b',
+        S / 'probe/windows-size-helper-fixtures/r2-reviewed-1/check-result.json': '140e961e8ed5833d5e3209121d6fc0c12e0d613f6785bff104246f18ebb6dbb1',
+        D / 'windows-helper-r2-prelaunch-pending-r1.json': '131afdd601012e58f3395b7be3f429e79453f20d9dfa6ea1b2a6a0676fe04e2b',
+        D / 'windows-helper-r2-specific-prelaunch-retirement-r1.json': '9568ea89da271a71475f6f5fa2858aa40a466983dd49c7fb56324a2af49052a4',
+        D / 'windows-helper-r2-specific-retirement-review-r1.json': 'f08ba7eb9f9c09db173f4ce77488038a927f862ca669ede20742c56fddef3425',
+        D / 'methods/windows_size_helper_wsl_r2.py.txt': 'c708c0c88a8f8cd4ef76857dd9f03bbac4cf77f74d45548e0247c4051dda39d8',
+    }
+    if any(digest(path) != wanted for path, wanted in pins.items()):
+        raise RuntimeError('specific retired R2 failure/source/exit-review binding changed')
+
+def validate_hard_working_set_quota(value):
+    if not isinstance(value, dict) or any(type(value.get(key)) is not int or value[key] != wanted
+            for key, wanted in (('minimum_bytes', 1 << 20), ('maximum_bytes', 64 << 20))):
+        raise ValueError('Windows hard working-set exact numerical bounds')
+    flags = value.get('enforcement_flags')
+    if type(flags) is not int or flags < 0 or not flags & 4 or flags & 8:
+        raise ValueError('Windows hard maximum is not enforced')
+
+
+def validate_hard_working_set_proofs(value):
+    proofs = value.get('hard_working_set_proofs')
+    if not isinstance(proofs, dict) or set(proofs) != {'parent', 'launcher', 'worker', 'worker_self'}:
+        raise ValueError('Windows complete hard working-set proof roles')
+    for role, scope in (('parent', 'parent-own-current-process'), ('launcher', 'exact-owned-windows-job'),
+                        ('worker', 'exact-owned-windows-job'), ('worker_self', 'worker-own-current-process')):
+        proof = proofs[role]
+        validate_hard_working_set_quota(proof)
+        identity = value.get('worker' if role == 'worker_self' else role)
+        if not isinstance(identity, dict) or any(type(identity.get(key)) is not int or identity[key] <= 0
+                or type(proof.get(key)) is not int or proof[key] != identity[key]
+                for key in ('pid', 'creation_time_100ns')):
+            raise ValueError('Windows hard working-set proof identity differs')
+        if proof.get('ownership_scope') != scope or any(proof.get(key) is not True for key in
+                ('hard_max_verified', 'identity_verified_before_quota', 'before_traversal', 'quota_call_succeeded')):
+            raise ValueError('Windows hard working-set admission/ownership proof')
+        if role != 'parent' and proof.get('job_membership_verified_before_quota') is not True:
+            raise ValueError('Windows hard working-set job membership unconfirmed')
+        if role in ('launcher', 'worker') and proof.get('exact_owned_job_membership_verified_before_quota') is not True:
+            raise ValueError('Windows hard working-set exact job ownership unconfirmed')
+    if proofs['launcher'].get('enforced_while_suspended') is not True:
+        raise ValueError('Windows launcher working set was not limited before resume')
+    for key in ('launcher_working_set_before_traversal', 'parent_working_set_at_completion',
+                'worker_working_set_at_completion'):
+        validate_hard_working_set_quota(value.get(key))
+    setup = value.get('job_setup')
+    if not isinstance(setup, dict) or setup.get('configured') is not True or type(setup.get('limit_flags')) is not int or setup['limit_flags'] != 8968:
+        raise ValueError('Windows committed-memory/job ownership configuration differs')
+    for key, wanted in (('job_memory_limit_bytes', 64 << 20), ('process_memory_limit_bytes', 64 << 20), ('job_active_process_limit', 2)):
+        if type(value.get(key)) is not int or value[key] != wanted:
+            raise ValueError('Windows job memory/active-process bound differs')
+    if value.get('job_closed_confirmed') is not True:
+        raise ValueError('Windows owned job close unconfirmed')
+
+def measured_size(roots, interruptible=False):
+    validate_specific_retired_r2_registry()
+    if digest(WINDOWS_HELPER) != WINDOWS_HELPER_SHA or digest(WINDOWS_PYTHON) != WINDOWS_PYTHON_SHA:
+        raise RuntimeError('Windows size helper/interpreter binding changed')
+    receipts = S / 'probe/windows-size-helper-r4'
+    receipts.mkdir(exist_ok=True)
+    validate_prior_windows_receipts(receipts)
+    windows_roots = [path for path in roots if str(path).startswith('/mnt/c/')]
+    linux_roots = [path for path in roots if path not in windows_roots]
+    if linux_roots != [X]:
+        raise ValueError('Linux accounting must include exactly the whole owned task scratch')
+    requested = [windows_path(path) for path in windows_roots]
+    if len(requested) != len(set(requested)):
+        raise ValueError('duplicate helper roots')
+    receipt_path = receipts / (uuid.uuid4().hex + '.json')
+    if interruptible and received_signal is not None:
+        raise InterruptedError('catchable signal before disk accounting')
+    # Windows supervisor owns a killed-on-close job; its receipt proves actual
+    # worker/launcher exit. Timeout here never grants cleanup or a passing count.
+    completed = subprocess.run([str(WINDOWS_PYTHON), '-B', windows_path(WINDOWS_HELPER),
+                                windows_path(receipt_path), *requested],
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5, check=True)
+    if len(completed.stdout) > 16 << 10:
+        raise ValueError('Windows helper publication16KiB')
+    value = json.loads(completed.stdout)
+    snapshot = receipt_path.read_bytes()
+    if len(snapshot) > 16 << 10:
+        raise ValueError('Windows helper receipt16KiB')
+    receipt = json.loads(snapshot)
+    if any(receipt.get(key) != wanted for key, wanted in value.items()):
+        raise ValueError('helper stdout differs from one final receipt snapshot')
+    if value.get('schema') != 'v1-6-windows-fresh-size-helper-r2' or value.get('roots') != requested:
+        raise ValueError('Windows helper response roots/schema')
+    if str(value.get('receipt_path','')).replace(chr(92),'/') != windows_path(receipt_path) or value.get('status') != 'completed':
+        raise ValueError('Windows helper completion/receipt identity')
+    if any(value.get(key) is not True for key in ('worker_exit_confirmed', 'launcher_exit_confirmed', 'job_empty')):
+        raise ValueError('Windows helper process cleanup unconfirmed')
+    for name in ('parent','launcher','worker'):
+        identity = value.get(name)
+        if not isinstance(identity,dict) or any(type(identity.get(key)) is not int or identity[key] <= 0 for key in
+                                               ('pid','creation_time_100ns')):
+            raise ValueError('Windows helper exact process identity missing')
+    if type(value.get('regular_bytes')) is not int or value['regular_bytes'] < 0:
+        raise ValueError('Windows helper invalid byte count')
+    if not isinstance(value.get('elapsed_seconds'), (int,float)) or not 0 <= value['elapsed_seconds'] < 4:
+        raise ValueError('Windows helper time bound')
+    for name in ('peak_job_memory_bytes','peak_working_set_bytes'):
+        if type(value.get(name)) is not int or not 0 < value[name] <= 64 << 20:
+            raise ValueError('Windows helper working-set/job-memory bound')
+    if value.get('helper_sha256') != WINDOWS_HELPER_SHA or value.get('interpreter_sha256') != WINDOWS_PYTHON_SHA:
+        raise ValueError('Windows helper reported source/interpreter binding differs')
+    if value.get('python_version') != '3.11.15' or not isinstance(value.get('deferred'),list):
+        raise ValueError('Windows helper host/deferred shape')
+    validate_hard_working_set_proofs(value)
+    deferred = value['deferred']
+    if any(not isinstance(item,str) for item in deferred) or len(deferred) != len(set(deferred)):
+        raise ValueError('duplicate/invalid deferred path')
+    total = value['regular_bytes'] + linux_measured_size(linux_roots, interruptible)
+    for item in deferred:
+        item = item.replace('\\','/')
+        if not item.startswith('C:/') or '..' in Path(item).parts:
+            raise ValueError('deferred path escaped C root')
+        path = Path('/mnt/c/' + item[3:])
+        if not any(path == root or path.is_relative_to(root) for root in roots):
+            raise ValueError('deferred path escaped accounting roots')
+        if interruptible and received_signal is not None:
+            raise InterruptedError('catchable signal during disk accounting')
+        try:
+            mode = path.lstat().st_mode
+            if stat.S_ISDIR(mode):total += linux_measured_size([path],interruptible)
+            else:
+                metadata = path.stat()
+                if stat.S_ISREG(metadata.st_mode):total += metadata.st_size
+        except FileNotFoundError:pass
+    if digest(WINDOWS_HELPER) != WINDOWS_HELPER_SHA or digest(WINDOWS_PYTHON) != WINDOWS_PYTHON_SHA:
+        raise RuntimeError('Windows size helper/interpreter changed during accounting')
+    if interruptible and received_signal is not None:
+        raise InterruptedError('catchable signal after disk accounting')
+    return total
+
+
+def readset(manifest, phase):
+    expected = {}
+    groups = ('inputs', 'scratch_bindings') if phase == 'pre' else ('unchanged', 'scratch_bindings', 'expected_after')
+    for group in groups:
+        for name, value in manifest.get(group, {}).items():
+            path = Path(name)
+            path = path if path.is_absolute() else R / path
+            key = str(path)
+            if key in expected and expected[key] != value:
+                raise ValueError('conflicting readset binding: ' + key)
+            expected[key] = value
+    checks, failures = {}, {}
+    for name, wanted in expected.items():
+        try:
+            actual = digest(name)
+        except OSError as exc:
+            actual = 'unreadable:' + type(exc).__name__
+        checks[name] = actual == wanted
+        if actual != wanted:
+            failures[name] = {'expected': wanted, 'actual': actual}
+    return checks, failures
+
+
+def environment(manifest):
+    fixed = {'GOMAXPROCS': '2', 'GOFLAGS': '-p=2 -mod=readonly', 'GOPROXY': 'off',
+             'GOTOOLCHAIN': 'local', 'GOWORK': 'off', 'GOROOT': str(S / 'tools/go'),
+             'GOCACHE': str(S / 'gocache'), 'GOMODCACHE': str(S / 'gomodcache'),
+             'GOPATH': str(S / 'gopath'), 'GOTMPDIR': str(S / 'tmp'),
+             'TMPDIR': str(X / 'runtime-test-tmp-r1' / qualified_mirror(manifest).name),
+             'GOMEMLIMIT': '1536MiB'}
+    extra = manifest.get('environment', {})
+    if any(key in extra and extra[key] != value for key, value in fixed.items()):
+        raise ValueError('qualified tool environment override refused')
+    env = dict(os.environ)
+    env.update({'CAT_ACCOUNTS_ENABLED': '0', 'CAT_ALLOWED_HOSTS': 'testserver,example.com'})
+    env.update(extra)
+    env.update(fixed)
+    env['PATH'] = str(S / 'tools/go/bin') + os.pathsep + env.get('PATH', '')
+    return env
+
+
+def limits(manifest):
+    wanted = {'RSS_bytes': 2 * GIB, 'incremental_bytes': GIB,
+              'start_disk_floor_bytes': 17 * GIB, 'remaining_disk_memory_floor_bytes': 16 * GIB,
+              'GOMAXPROCS': 2, 'build_jobs': 2, 'metadata_reserve_seconds': 180}
+    for key, value in wanted.items():
+        if type(manifest.get('limits', {}).get(key)) is not int or manifest['limits'][key] != value:
+            raise ValueError('fixed R4 campaign limit differs: ' + key)
+    start = datetime.datetime.fromisoformat(manifest['checked_at_utc'])
+    deadline = datetime.datetime.fromisoformat(manifest['deadline_utc'])
+    if start.tzinfo is None or deadline.tzinfo is None or not 0 < (deadline - start).total_seconds() <= 1200:
+        raise ValueError('campaign must have one fixed deadline within twenty minutes')
+    return deadline
+
+
+def budget(roots, state, deadline, before_launch=False, first=False):
+    size = measured_size(roots, interruptible=True)
+    increment = size - state['original_start_size']
+    state['peak_sampled_incremental_bytes'] = max(state['peak_sampled_incremental_bytes'], increment)
+    if any(shutil.disk_usage(path).free < (17 if first else 16) * GIB for path in (R, X)) or memory_available() < 16 * GIB:
+        return 'remaining-disk-or-memory-floor', increment
+    if increment > GIB:
+        return 'cumulative-incremental1GiB', increment
+    if now() >= deadline - datetime.timedelta(seconds=195 if before_launch else 180):
+        return 'metadata-time-reserve', increment
+    return None, increment
+
+
+def load_prefix(state, manifest, index, manifest_sha, roots):
+    if state.get('manifest_sha256') != manifest_sha or state.get('deadline_utc') != manifest['deadline_utc'] or state.get('measurement_roots') != [str(p) for p in roots]:
+        raise ValueError('campaign identity/deadline/roots changed')
+    if state.get('status') != 'ready' or state.get('pending') is not None or state.get('next_index') != index or len(state.get('steps', [])) != index:
+        raise ValueError('only the exact successful prefix may continue; pending/failed/complete cannot retry')
+    if type(state.get('original_start_size')) is not int or state['original_start_size'] < 0:
+        raise ValueError('original campaign baseline missing')
+    entries = []
+    for i, item in enumerate(state['steps']):
+        path = D / (manifest['lane'] + '-step-' + str(i) + '-result.json')
+        receipt_bytes = path.read_bytes()
+        if item['receipt_path'] != str(path) or hashlib.sha256(receipt_bytes).hexdigest() != item['receipt_sha256']:
+            raise ValueError('successful prefix receipt changed')
+        row = json.loads(receipt_bytes)
+        if row['index'] != i or row['manifest_sha256'] != manifest_sha or row['name'] != manifest['commands'][i]['name'] or row['argv'] != manifest['commands'][i]['argv'] or row['exit_code'] != 0 or row['guard'] is not None or row['status'] != 'passed':
+            raise ValueError('prefix is not exact and successful')
+        if row.get('original_start_size') != state['original_start_size'] or row.get('deadline_utc') != state['deadline_utc'] or row.get('campaign_started_at_utc') != state['campaign_started_at_utc']:
+            raise ValueError('original prefix baseline/deadline/start changed')
+        entries.append(row)
+    return entries
+
+
+# This is reserved INSIDE the unchanged1GiB increment and16GiB floor.
+# Total encoded step/state/cumulative output is capped16MiB.64MiB covers two
+# copies of all three images (including atomic temporaries), failure rewrites
+# of this uncommitted step, and filesystem block/directory overhead.
+PUBLICATION_ALLOWANCE = 64 << 20
+MAX_PUBLICATION_ENCODING = 16 << 20
+CATCHABLE_SIGNALS = {signal.SIGTERM, signal.SIGINT}
+
+
+def encoded(value):
+    return (json.dumps(value, sort_keys=True, indent=2) + '\n').encode()
+
+
+def verify_manifest_snapshot(path, snapshot):
+    if Path(path).read_bytes() != snapshot:
+        raise RuntimeError('manifest bytes changed during invocation')
+
+
+def publication_guard(increment, disk_free, memory_free, encoded_bytes, cutoff_reached,
+                      allowance=PUBLICATION_ALLOWANCE):
+    if encoded_bytes > MAX_PUBLICATION_ENCODING:
+        return 'publication-encoding-bound'
+    if increment + allowance > GIB:
+        return 'publication-cumulative-incremental1GiB'
+    if disk_free - allowance < 16 * GIB or memory_free < 16 * GIB:
+        return 'publication-disk-or-memory-floor'
+    if cutoff_reached:
+        return 'metadata-time-reserve'
+    return None
+
+
+def pending_signal():
+    if received_signal is not None:
+        return received_signal
+    waiting = sorted(CATCHABLE_SIGNALS.intersection(signal.sigpending()))
+    return int(waiting[0]) if waiting else None
+
+
+def outcome_images(manifest, index, state, row, prefix, step_path):
+    passed = row['exit_code'] == 0 and row['guard'] is None and row['failure'] is None
+    row['status'] = 'passed' if passed else 'failed'
+    final_state = json.loads(json.dumps(state))
+    final_state['steps'].append({'receipt_path': str(step_path),
+                                'receipt_sha256': hashlib.sha256(encoded(row)).hexdigest()})
+    final_state['pending'] = None
+    final_state['next_index'] = index + 1
+    final_state['status'] = ('completed' if index + 1 == len(manifest['commands']) else 'ready') if passed else 'failed'
+    final_state['last_updated_at_utc'] = row['finished_at_utc']
+    result = {'schema': 'v1-6-cumulative-worktree-runner-r4-r2', 'lane': manifest['lane'],
+              'manifest_sha256': state['manifest_sha256'], 'deadline_utc': state['deadline_utc'],
+              'campaign_started_at_utc': state['campaign_started_at_utc'],
+              'original_start_size': state['original_start_size'],
+              'fresh_campaign_start_size': state.get('fresh_campaign_start_size'),
+              'status': final_state['status'],
+              'all_steps_completed': final_state['status'] == 'completed', 'steps': prefix + [row],
+              'peak_sampled_incremental_bytes': state['peak_sampled_incremental_bytes'],
+              'publication_accounting': row['publication_accounting'],
+              'installation_approval': False}
+    return final_state, result
+
+
+def publish_outcome(manifest, manifest_path, snapshot, index, state, row, prefix,
+                    state_path, result_path, roots, deadline):
+    step_path = D / (manifest['lane'] + '-step-' + str(index) + '-result.json')
+    # All potentially slow log reads already finished. Keep both signals pending
+    # during metadata I/O; explicitly inspect them BEFORE successful commitment.
+    signal.pthread_sigmask(signal.SIG_BLOCK, CATCHABLE_SIGNALS)
+    row['signal_commit_policy'] = (
+        'Signals before the final empty pending-signal snapshot fail this step. '
+        'That snapshot follows fsynced outcome publication, manifest recheck and '
+        'final accounting. State acknowledgement then uses reserved bytes. '
+        'Signals after this completed-outcome boundary stay deferred until the next serial boundary or exit; '
+        'they do not retroactively invalidate a completed command. No child remains.')
+    signum = pending_signal()
+    if signum is not None:
+        row['received_signal'] = signum
+        row['guard'] = row['guard'] or 'catchable-signal-finalization'
+    try:
+        verify_manifest_snapshot(manifest_path, snapshot)
+    except (OSError, RuntimeError) as exc:
+        row['guard'] = row['guard'] or 'manifest-drift-finalization'
+        row['manifest_failure'] = str(exc)
+    size = measured_size(roots)
+    free, mem = min(shutil.disk_usage(path).free for path in (R, X)), memory_available()
+    increment = size - state['original_start_size']
+    state['peak_sampled_incremental_bytes'] = max(state['peak_sampled_incremental_bytes'], increment)
+    row['publication_accounting'] = {
+        'size_before_publication': size, 'original_start_size': state['original_start_size'],
+        'sampled_increment_before_publication': increment,
+        'reserved_publication_bytes_inside_limits': PUBLICATION_ALLOWANCE,
+        'encoded_total_limit_bytes': MAX_PUBLICATION_ENCODING,
+        'included_increment_upper_bound': increment + PUBLICATION_ALLOWANCE,
+        'peak_including_publication_upper_bound': max(state['peak_sampled_incremental_bytes'], increment + PUBLICATION_ALLOWANCE),
+        'disk_free_before_publication': free,
+        'reserved_disk_lower_bound': free - PUBLICATION_ALLOWANCE,
+        'memory_available_before_publication': mem,
+        'atomic_temporaries_and_final_outputs_included': True}
+    final_state, result = outcome_images(manifest, index, state, row, prefix, step_path)
+    total = sum(len(encoded(v)) for v in (row, final_state, result))
+    reason = publication_guard(increment, free, mem, total,
+                               now() >= deadline - datetime.timedelta(seconds=180))
+    row['guard'] = row['guard'] or reason
+    final_state, result = outcome_images(manifest, index, state, row, prefix, step_path)
+    if sum(len(encoded(v)) for v in (row, final_state, result)) > MAX_PUBLICATION_ENCODING:
+        raise RuntimeError('refuse oversized final metadata; state remains pending')
+    # These are uncommitted current-step images under the campaign flock.
+    # Previous immutable prefix files are never rewritten. State stays pending.
+    write_json(step_path, row, exclusive=True)
+    published_step_hash = digest(step_path)
+    write_json(result_path, result)
+    try:
+        verify_manifest_snapshot(manifest_path, snapshot)
+        final_size = measured_size(roots)
+        final_free, final_mem = min(shutil.disk_usage(path).free for path in (R, X)), memory_available()
+        # Only the bounded final state acknowledgement remains to be written.
+        remaining_charge = 2 * len(encoded(final_state)) + (128 << 10)
+        final_reason = publication_guard(final_size - state['original_start_size'],
+                                         final_free, final_mem, len(encoded(final_state)),
+                                         now() >= deadline - datetime.timedelta(seconds=180),
+                                         allowance=remaining_charge)
+        if final_size - state['original_start_size'] > row['publication_accounting']['included_increment_upper_bound']:
+            final_reason = final_reason or 'publication-reservation-exceeded'
+        if final_reason:
+            row['guard'] = row['guard'] or final_reason
+    except (OSError, RuntimeError) as exc:
+        row['guard'] = row['guard'] or 'final-publication-check-failure'
+        row['publication_failure'] = str(exc)
+    # SUCCESS COMMIT BOUNDARY: this final empty signal snapshot occurs only
+    # after outcome files are durable and all above checks are complete.
+    signum = pending_signal()
+    if signum is not None:
+        row['received_signal'] = signum
+        row['guard'] = row['guard'] or 'catchable-signal-finalization'
+    final_state, result = outcome_images(manifest, index, state, row, prefix, step_path)
+    passed = final_state['status'] in ('ready', 'completed')
+    if not passed:
+        # Failure publication is not acceptance. Replace only this still-owned,
+        # uncommitted step, preserving prior successful prefix receipts.
+        if digest(step_path) != published_step_hash:
+            raise RuntimeError('uncommitted step changed; state remains pending')
+        if sum(len(encoded(v)) for v in (row, final_state, result)) > MAX_PUBLICATION_ENCODING:
+            raise RuntimeError('refuse oversized failure metadata; state remains pending')
+        write_json(step_path, row)
+        write_json(result_path, result)
+    write_json(state_path, final_state)
+    emit({'lane': manifest['lane'], 'index': index, 'status': final_state['status'],
+          'exit_code': row['exit_code'], 'guard': row['guard'], 'result_path': str(result_path),
+          'post_commit_pending_signals': sorted(int(x) for x in CATCHABLE_SIGNALS.intersection(signal.sigpending())) if passed else []})
+    # This one-step process exits with signals still masked after commitment;
+    # before-boundary signals have already produced coherent failed images.
+    return 0 if passed else 1
+
+
+def qualified_mirror(manifest):
+    mirror = Path(manifest.get('execution_mirror', ''))
+    if (mirror.parent != X / 'runtime-readset-mirror-r1' or
+            not re.fullmatch(r'[0-9a-f]{32}', mirror.name) or
+            mirror.resolve() != mirror):
+        raise ValueError('execution mirror must be one direct nonsymlink UUID32 child')
+    return mirror
+
+
+def qualified_step_cwd(manifest, step):
+    # Only the pinned ext4 execution mirror or genuine canonical repository.
+    mirror = qualified_mirror(manifest)
+    cwd = Path(step.get('cwd', str(R))).resolve()
+    allowed = (R, mirror / 'go-backend/internal/contentrails',
+               mirror / 'go-backend/cmd/cat-content-rail')
+    if cwd not in allowed or not cwd.is_dir():
+        raise ValueError('step cwd differs from closed reviewed roots')
+    return cwd
+
+
+def run_step(manifest, manifest_path, manifest_bytes, index, state, state_path, result_path, roots, deadline, prefix):
+    step = manifest['commands'][index]
+    child = identity = None
+    row = {'index': index, 'name': step['name'], 'argv': step['argv'],
+           'manifest_sha256': state['manifest_sha256'], 'started_at_utc': now().isoformat(),
+           'original_start_size': state['original_start_size'],
+           'deadline_utc': state['deadline_utc'],
+           'campaign_started_at_utc': state['campaign_started_at_utc'],
+           'exit_code': None, 'guard': None, 'failure': None, 'cleanup': None,
+           'peak_group_RSS_bytes': 0, 'status': 'failed'}
+    log = S / 'probe' / (manifest['lane'] + '-' + str(index) + '.log')
+    state['status'] = 'pending'
+    state['pending'] = {'index': index, 'name': step['name'], 'argv': step['argv'],
+                        'phase': 'preflight', 'pid': None, 'log_path': str(log)}
+    write_json(state_path, state)
+    try:
+        row['pre_checks'], failures = readset(manifest, 'pre')
+        if failures:
+            row['pre_failures'] = failures
+            raise RuntimeError('pre-step readset changed')
+        reason, _ = budget(roots, state, deadline, before_launch=True, first=index == 0)
+        if reason:
+            row['guard'] = reason
+            raise RuntimeError(reason)
+        if received_signal is not None:
+            raise InterruptedError('catchable signal before launch')
+        env = environment(manifest)
+        with log.open('xb') as output:
+            state['pending']['phase'] = 'spawning'
+            write_json(state_path, state)
+            verify_manifest_snapshot(manifest_path, manifest_bytes)
+            step_cwd = qualified_step_cwd(manifest, step)
+            env['PWD'] = str(step_cwd)
+            child = subprocess.Popen(step['argv'], cwd=step_cwd, env=env, stdout=output,
+                                     stderr=subprocess.STDOUT, start_new_session=True)
+            identity = process_info(child.pid)
+            if identity is None or identity['pgid'] != child.pid or identity['sid'] != child.pid:
+                raise RuntimeError('new child session identity unavailable')
+            state['pending'].update(identity)
+            state['pending']['phase'] = 'monitoring'
+            write_json(state_path, state)
+            while not child_finished(child):
+                if received_signal is not None:
+                    raise InterruptedError('catchable signal while child active')
+                _, rss = group_info(child.pid)
+                row['peak_group_RSS_bytes'] = max(row['peak_group_RSS_bytes'], rss)
+                reason, _ = budget(roots, state, deadline)
+                if rss > 2 * GIB:
+                    reason = 'process-group-RSS2GiB'
+                if reason:
+                    row['guard'] = reason
+                    raise RuntimeError(reason)
+                time.sleep(.5)
+            if received_signal is not None:
+                raise InterruptedError('catchable signal at child completion')
+            if group_info(child.pid)[0]:
+                raise RuntimeError('owned descendants remain after leader exit')
+            row['exit_code'] = child.wait()
+            child = None
+            if row['exit_code'] != 0:
+                raise RuntimeError('native command failed')
+    except BaseException as exc:
+        row['failure'] = {'type': type(exc).__name__, 'message': str(exc)}
+        if row['guard'] is None:
+            row['guard'] = 'catchable-signal' if received_signal is not None else 'step-failure'
+    finally:
+        if child is not None:
+            try:
+                if identity is None:
+                    identity = process_info(child.pid)
+                if identity is None:
+                    raise RuntimeError('cannot prove owned leader identity for cleanup')
+                row['cleanup'] = stop_owned_group(child, identity)
+                row['exit_code'] = child.returncode
+                if row['cleanup']['error'] is not None:
+                    row['guard'] = 'owned-group-cleanup-unconfirmed'
+            except BaseException as exc:
+                row['cleanup'] = {'error': repr(exc)}
+                row['guard'] = 'owned-group-cleanup-unconfirmed'
+        try:
+            row['post_checks'], failures = readset(manifest, 'post')
+            if failures:
+                row['post_failures'] = failures
+                row['guard'] = row['guard'] or 'post-step-readset-changed'
+            reason, increment = budget(roots, state, deadline)
+            row['incremental_bytes_from_original_baseline'] = increment
+            row['guard'] = row['guard'] or reason
+        except BaseException as exc:
+            row['post_failure'] = repr(exc)
+            row['guard'] = row['guard'] or 'post-step-check-failure'
+        row['received_signal'] = received_signal
+        row['finished_at_utc'] = now().isoformat()
+        # Expose finalization while state remains pending. The fixture injects a
+        # catchable signal at log hashing, without changing the real hash value.
+        state['pending']['phase'] = 'finalizing'
+        write_json(state_path, state)
+        if log.exists():
+            row['log_path'], row['log_sha256'], row['log_bytes'] = str(log), digest(log), log.stat().st_size
+            row['log_text'] = log.read_text(errors='replace') if log.stat().st_size <= 1024 * 1024 else None
+        return publish_outcome(manifest, manifest_path, manifest_bytes, index, state, row, prefix,
+                               state_path, result_path, roots, deadline)
+
+
+def main():
+    if len(sys.argv) != 3:
+        raise ValueError('usage: run_worktree_lane_wsl_r10.py ADMISSION all|STEP_INDEX')
+    manifest_path = Path(sys.argv[1]).resolve()
+    manifest_bytes = manifest_path.read_bytes()
+    manifest_sha = hashlib.sha256(manifest_bytes).hexdigest()
+    manifest = json.loads(manifest_bytes)
+    if digest(Path(__file__)) != manifest['runner_sha256']:
+        raise ValueError('runner source hash differs')
+    serial = sys.argv[2] == 'all'
+    index = 0 if serial else int(sys.argv[2])
+    lane = manifest['lane']
+    if not re.fullmatch(r'[a-z][a-z0-9-]{0,95}', lane) or not 0 <= index < len(manifest['commands']):
+        raise ValueError('invalid lane/index')
+    deadline = limits(manifest)
+    roots = measurement_roots(manifest)
+    if manifest.get('historical_growth_baseline') != HISTORICAL_GROWTH_BASELINE:
+        raise ValueError('retained cumulative growth baseline changed')
+    state_path = S / 'probe' / (lane + '-r4-r2-state.json')
+    result_path = D / (lane + '-result.json')
+    lock_path = S / 'probe' / (lane + '-r4-r2.lock')
+    fd = os.open(lock_path, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(fd, 'a+') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if index == 0:
+            if state_path.exists() or result_path.exists():
+                raise ValueError('campaign already exists; never reset/retry index zero')
+            state = {'schema': 'v1-6-worktree-runner-r4-state', 'manifest_sha256': manifest_sha,
+                     'deadline_utc': manifest['deadline_utc'], 'campaign_started_at_utc': now().isoformat(),
+                     'original_start_size': HISTORICAL_GROWTH_BASELINE,
+                     'fresh_campaign_start_size': measured_size(roots),
+                     'measurement_roots': [str(p) for p in roots],
+                     'peak_sampled_incremental_bytes': 0, 'status': 'ready', 'next_index': 0,
+                     'pending': None, 'steps': []}
+            write_json(state_path, state, exclusive=True)
+        else:
+            state = json.loads(state_path.read_bytes())
+        if state['original_start_size'] != HISTORICAL_GROWTH_BASELINE:
+            raise ValueError('state cumulative baseline changed')
+        indices = range(len(manifest['commands'])) if serial else [index]
+        for index in indices:
+            verify_manifest_snapshot(manifest_path, manifest_bytes)
+            prefix = load_prefix(state, manifest, index, manifest_sha, roots)
+            outcome = run_step(manifest, manifest_path, manifest_bytes, index, state, state_path, result_path, roots, deadline, prefix)
+            if outcome != 0:
+                return outcome
+            if serial and index + 1 < len(manifest['commands']):
+                # Each commit was durable before unmasking; a queued signal
+                # retains that prefix and makes the next step fail before launch.
+                signal.pthread_sigmask(signal.SIG_UNBLOCK, CATCHABLE_SIGNALS)
+                state = json.loads(state_path.read_bytes())
+        return 0
+
+
+if __name__ == '__main__':
+    signal.signal(signal.SIGTERM, on_signal)
+    signal.signal(signal.SIGINT, on_signal)
+    try:
+        code = main()
+    except BaseException as exc:
+        emit({'status': 'refused', 'error': type(exc).__name__ + ': ' + str(exc)})
+        code = 2
+    raise SystemExit(code)

@@ -1,0 +1,39 @@
+{
+  "application_or_go_executions": 0,
+  "bindings": {
+    "run_worktree_lane_wsl_r3.py.txt": "09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d",
+    "run_worktree_lane_wsl_r9.py.txt": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213"
+  },
+  "budget_seconds": 60,
+  "checks": {
+    "actual_probe_self_metadata_difference_bounded64KiB": true,
+    "all_prior_helper_cleanup_confirmed": true,
+    "all_six_static_real_roots_exact": true,
+    "catchable_signal_refused": true,
+    "deferred_io_failure_closed": true,
+    "fresh_change_recounted": true,
+    "missing_root_zero": true,
+    "regular_hidden_nested_hardlink_filelink_dirlink_dangling": true
+  },
+  "elapsed_seconds": 43.43087407300118,
+  "passed": true,
+  "probe_bytes": {
+    "hybrid": 1234190,
+    "linux_after": 1242064,
+    "linux_before": 1230424
+  },
+  "schema": "v1-6-wsl-windows-fresh-parity-r4",
+  "static_real_roots": [
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gocache",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tmp",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gopath",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gomodcache",
+    "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tools"
+  ],
+  "static_real_roots_bytes": 748343738,
+  "timings": {
+    "linux_static_scan_seconds": 32.35490551100156,
+    "windows_static_scan_seconds": 1.1424601809994783
+  }
+}

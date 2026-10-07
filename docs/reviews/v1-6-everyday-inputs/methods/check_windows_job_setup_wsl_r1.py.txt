@@ -1,0 +1,158 @@
+"""Bounded native-Windows Job setup diagnostic; never creates a child process.
+
+CLI: diagnostic.py FRESH_OWNED_RESULT_JSON HELPER_PATH EXACT_HELPER_SHA256
+Records ABI sizes, exact API return/errors and closing the sole empty owned job.
+This is diagnostic evidence, never a helper/native-campaign qualification.
+"""
+import ctypes
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import sys
+import threading
+import time
+
+STARTED = time.monotonic()
+sys.dont_write_bytecode = True
+S = Path('C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+PYTHON = Path('C:/Users/Paul Work/AppData/Local/hermes/hermes-agent/venv/Scripts/python.exe')
+PYTHON_SHA = '885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8'
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def main(result_path, helper_path, helper_sha):
+    if sys.platform != 'win32' or sys.version.split()[0] != '3.11.15' or Path(sys.executable).resolve() != PYTHON.resolve() or digest(PYTHON) != PYTHON_SHA:
+        raise RuntimeError('exact native Windows interpreter required')
+    folder = (S / 'probe/windows-job-setup-r1').resolve()
+    folder.mkdir(parents=True, exist_ok=True)
+    result_path = Path(result_path).resolve()
+    if result_path.parent != folder or not re.fullmatch(r'[0-9a-f]{32}\.json', result_path.name):
+        raise ValueError('fresh owned result location required')
+    helper_path = Path(helper_path).resolve()
+    if digest(helper_path) != helper_sha:
+        raise RuntimeError('exact helper source binding required')
+    report = {'schema': 'v1-6-windows-job-setup-diagnostic-r1', 'status': 'pending',
+              'parent_pid': os.getpid(), 'helper_sha256': helper_sha,
+              'interpreter_sha256': PYTHON_SHA, 'diagnostic_sha256': digest(__file__),
+              'child_process_creations': 0, 'native_or_application_tests': 0,
+              'job_closed_confirmed': False, 'job_empty_confirmed': False,
+              'helper_execution_or_qualification': False, 'configuration_probes': []}
+    def publish(first=False):
+        blob = json.dumps(report, indent=2).encode('utf-8') + b'\n'
+        if len(blob) > 16 << 10:
+            raise ValueError('diagnostic receipt16KiB')
+        if first:
+            with result_path.open('xb') as stream:
+                stream.write(blob)
+                stream.flush()
+                os.fsync(stream.fileno())
+        else:
+            pending = result_path.with_name(result_path.name + '.pending')
+            with pending.open('xb') as stream:
+                stream.write(blob)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(pending, result_path)
+    publish(first=True)
+    holder = {'job': None, 'kernel': None}
+    finished = threading.Event()
+    def hard_guard():
+        if finished.wait(max(0, 3.7 - (time.monotonic() - STARTED))):
+            return
+        if holder['job'] and holder['kernel']:
+            holder['kernel'].CloseHandle(holder['job'])
+        os._exit(124)  # No child ever created; pending exact diagnostic evidence remains.
+    threading.Thread(target=hard_guard, daemon=True).start()
+    job, helper = None, None
+    try:
+        loader = importlib.machinery.SourceFileLoader('setup_diagnostic_inert_helper', str(helper_path))
+        spec = importlib.util.spec_from_loader(loader.name, loader)
+        helper = importlib.util.module_from_spec(spec)
+        loader.exec_module(helper)  # Definitions only: neither worker nor supervisor invoked.
+        holder['kernel'] = helper.K
+        report['parent_creation_time_100ns'] = helper.creation(helper.K.GetCurrentProcess())
+        report['abi'] = {'pointer_bytes': ctypes.sizeof(ctypes.c_void_p)}
+        for name in ('BASIC_LIMIT', 'EXTENDED_LIMIT', 'ACCOUNTING', 'SECURITY',
+                     'STARTUP', 'STARTUP_EX', 'PROCESS', 'MEMORY_COUNTERS'):
+            structure = getattr(helper, name)
+            report['abi'][name] = {'size': ctypes.sizeof(structure),
+                                  'offsets': {field[0]: getattr(structure, field[0]).offset for field in structure._fields_}}
+        counters = helper.MEMORY_COUNTERS()
+        counters.cb = ctypes.sizeof(counters)
+        helper.checked(helper.K.K32GetProcessMemoryInfo(helper.K.GetCurrentProcess(), ctypes.byref(counters), counters.cb))
+        report['parent_peak_working_set_bytes'] = int(counters.PeakWorkingSetSize)
+        report['parent_peak_committed_bytes'] = int(counters.PeakPagefileUsage)
+        if max(counters.PeakWorkingSetSize, counters.PeakPagefileUsage) > 64 << 20:
+            raise MemoryError('diagnostic parent64MiB')
+        publish()
+        ctypes.set_last_error(0)
+        job = helper.K.CreateJobObjectW(None, None)
+        report['create_job'] = {'returned_handle': bool(job), 'winerror': ctypes.get_last_error()}
+        if not job:
+            raise ctypes.WinError(report['create_job']['winerror'])
+        holder['job'] = job
+        for label, flags, workingset in (
+            ('exact_R2_limits', helper.JOB_FLAGS, True),
+            ('diagnostic_same64MiB_memory_without_workingset', helper.JOB_FLAGS & ~0x1, False),
+        ):
+            if time.monotonic() - STARTED >= 2:
+                raise TimeoutError('setup diagnostic2s work')
+            limits = helper.EXTENDED_LIMIT()
+            limits.BasicLimitInformation.LimitFlags = flags
+            limits.BasicLimitInformation.ActiveProcessLimit = 2
+            if workingset:
+                limits.BasicLimitInformation.MinimumWorkingSetSize = 1 << 20
+                limits.BasicLimitInformation.MaximumWorkingSetSize = 64 << 20
+            limits.ProcessMemoryLimit = limits.JobMemoryLimit = 64 << 20
+            ctypes.set_last_error(0)
+            accepted = helper.K.SetInformationJobObject(job, 9, ctypes.byref(limits), ctypes.sizeof(limits))
+            error = ctypes.get_last_error()
+            item = {'name': label, 'limit_flags': flags, 'process_memory_limit_bytes': 64 << 20,
+                    'job_memory_limit_bytes': 64 << 20, 'returned_success': bool(accepted), 'winerror': error}
+            report['configuration_probes'].append(item)
+            report['job_empty_confirmed'] = helper.job_empty(job)
+            if not report['job_empty_confirmed']:
+                raise RuntimeError('no-child diagnostic job unexpectedly nonempty')
+            publish()
+        report['status'] = 'diagnostic_completed'
+    except BaseException as exc:
+        report.update(status='failed', failure=type(exc).__name__, detail=str(exc)[:2048],
+                      failure_winerror=getattr(exc, 'winerror', None))
+    finally:
+        if job:
+            try:
+                report['job_empty_confirmed'] = helper.job_empty(job)
+            except BaseException as exc:
+                report.update(status='cleanup_unconfirmed', cleanup_query_error=str(exc)[:2048])
+            finally:
+                try:
+                    helper.checked(helper.K.CloseHandle(job))
+                    report['job_closed_confirmed'] = True
+                    holder['job'] = None
+                except BaseException as exc:
+                    report.update(status='cleanup_unconfirmed', cleanup_close_error=str(exc)[:2048])
+        else:
+            report['job_not_created'] = True
+            report['job_empty_confirmed'] = report['job_closed_confirmed'] = True
+    if digest(helper_path) != helper_sha or digest(PYTHON) != PYTHON_SHA:
+        report.update(status='failed', failure='source/interpreter binding drift')
+    report['elapsed_seconds'] = time.monotonic() - STARTED
+    if report['elapsed_seconds'] >= 4 or not report['job_closed_confirmed'] or not report['job_empty_confirmed']:
+        report['status'] = 'failed'
+    publish()
+    print(json.dumps(report))
+    finished.set()
+    return 0 if report['status'] == 'diagnostic_completed' else 1
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        raise SystemExit('diagnostic.py FRESH_OWNED_RESULT_JSON HELPER_PATH EXACT_HELPER_SHA256')
+    raise SystemExit(main(*sys.argv[1:]))

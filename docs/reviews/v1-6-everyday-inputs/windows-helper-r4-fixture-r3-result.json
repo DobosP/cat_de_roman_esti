@@ -1,0 +1,571 @@
+{
+  "schema": "v1-6-controlled-windows-size-helper-fixture-r3",
+  "passed": true,
+  "helper_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+  "interpreter_sha256": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+  "fixture_sha256": "906f14d55933a73bbae1d8704b399c07ad499bab33b4cbc0f3804c5ff0751271",
+  "calls": [
+    {
+      "label": "regular-hidden-hardlinks-and-deferred-junctions",
+      "receipt_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\6976df3115f140ecbb9a9b2a03d738ae.json",
+      "status": "cleanup-confirmed",
+      "native_call_launcher": {
+        "pid": 28080,
+        "creation_time_100ns": 134358423397843944
+      },
+      "exit_code": 0,
+      "parent_call_elapsed_seconds": 0.6880000000001019,
+      "raw_streams": {
+        "stdout": {
+          "path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\regular-hidden-hardlinks-and-deferred-junctions.stdout.bin",
+          "original_bytes": 4249,
+          "saved_bytes": 4249,
+          "sha256": "e142c5c55273fc30977bddd7dd099a0a66c31d2fb1708275db964042486116a3",
+          "truncated": false
+        },
+        "stderr": {
+          "path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\regular-hidden-hardlinks-and-deferred-junctions.stderr.bin",
+          "original_bytes": 0,
+          "saved_bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "truncated": false
+        }
+      },
+      "native_call_launcher_quiescence": {
+        "pid": 28080,
+        "original_identity_quiescent": true,
+        "reason": "matching process handle signalled exit"
+      },
+      "identities": {
+        "schema": "v1-6-windows-fresh-size-helper-r2",
+        "nonce": "6976df3115f140ecbb9a9b2a03d738ae",
+        "phase": "completed",
+        "roots": [
+          "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/windows-size-helper-fixtures/r4-reviewed-1/tree"
+        ],
+        "source_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+        "interpreter_sha256": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+        "parent": {
+          "pid": 28732,
+          "creation_time_100ns": 134358423398362775
+        },
+        "launcher": {
+          "pid": 40928,
+          "creation_time_100ns": 134358423400876193
+        },
+        "worker": {
+          "pid": 35864,
+          "creation_time_100ns": 134358423401539745
+        },
+        "worker_exit_confirmed": true,
+        "launcher_exit_confirmed": true,
+        "job_empty": true,
+        "job_terminated": false,
+        "work_limit_seconds": 2.0,
+        "parent_limit_seconds": 4.0,
+        "job_memory_limit_bytes": 67108864,
+        "process_memory_limit_bytes": 67108864,
+        "job_active_process_limit": 2,
+        "worker_output_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\6976df3115f140ecbb9a9b2a03d738ae.worker-output.json",
+        "working_set_minimum_bytes": 1048576,
+        "working_set_maximum_bytes": 67108864,
+        "hard_working_set_proofs": {
+          "parent": {
+            "pid": 28732,
+            "creation_time_100ns": 134358423398362775,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "parent-own-current-process",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": false,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "launcher": {
+            "pid": 40928,
+            "creation_time_100ns": 134358423400876193,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "exact-owned-windows-job",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": true,
+            "enforced_while_suspended": true,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "worker_self": {
+            "pid": 35864,
+            "creation_time_100ns": 134358423401539745,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "worker-own-current-process",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": false,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "worker": {
+            "pid": 35864,
+            "creation_time_100ns": 134358423401539745,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "exact-owned-windows-job",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": true,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          }
+        },
+        "job_setup": {
+          "configured": true,
+          "pointer_bytes": 8,
+          "basic_limit_bytes": 64,
+          "extended_limit_bytes": 144,
+          "limit_flags": 8968
+        },
+        "launcher_working_set_before_traversal": {
+          "minimum_bytes": 1048576,
+          "maximum_bytes": 67108864,
+          "enforcement_flags": 6
+        },
+        "worker_exit_elapsed_seconds": 0.3599999999987631,
+        "worker_exit_code": 0,
+        "peak_job_memory_bytes": 14389248,
+        "peak_worker_committed_memory_bytes": 12070912,
+        "job_closed_confirmed": true,
+        "parent_working_set_at_completion": {
+          "minimum_bytes": 1048576,
+          "maximum_bytes": 67108864,
+          "enforcement_flags": 6
+        },
+        "failure": null,
+        "elapsed_seconds": 0.375,
+        "receipt_schema": "v1-6-windows-size-helper-owned-call-r2",
+        "status": "completed",
+        "receipt_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\6976df3115f140ecbb9a9b2a03d738ae.json",
+        "helper_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+        "python_version": "3.11.15",
+        "regular_bytes": 17,
+        "deferred": [
+          "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\tree\\junction-live",
+          "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\tree\\junction-missing"
+        ],
+        "peak_working_set_bytes": 21446656,
+        "worker_elapsed_seconds": 0.030999999999039574,
+        "worker_working_set_at_completion": {
+          "minimum_bytes": 1048576,
+          "maximum_bytes": 67108864,
+          "enforcement_flags": 6
+        }
+      },
+      "identity_quiescence": {
+        "parent": {
+          "pid": 28732,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        },
+        "launcher": {
+          "pid": 40928,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        },
+        "worker": {
+          "pid": 35864,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        }
+      }
+    },
+    {
+      "label": "fresh-hardlink-change-and-new-file",
+      "receipt_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\9c9328f4720c44b09dfdab7e51bccb96.json",
+      "status": "cleanup-confirmed",
+      "native_call_launcher": {
+        "pid": 38348,
+        "creation_time_100ns": 134358423405054997
+      },
+      "exit_code": 0,
+      "parent_call_elapsed_seconds": 0.6720000000004802,
+      "raw_streams": {
+        "stdout": {
+          "path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\fresh-hardlink-change-and-new-file.stdout.bin",
+          "original_bytes": 4255,
+          "saved_bytes": 4255,
+          "sha256": "4eb9a580f080cf6fafc718f32dcb8a7f2a69345a529fcc6ace54fb2474056f45",
+          "truncated": false
+        },
+        "stderr": {
+          "path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\fresh-hardlink-change-and-new-file.stderr.bin",
+          "original_bytes": 0,
+          "saved_bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "truncated": false
+        }
+      },
+      "native_call_launcher_quiescence": {
+        "pid": 38348,
+        "original_identity_quiescent": true,
+        "reason": "matching process handle signalled exit"
+      },
+      "identities": {
+        "schema": "v1-6-windows-fresh-size-helper-r2",
+        "nonce": "9c9328f4720c44b09dfdab7e51bccb96",
+        "phase": "completed",
+        "roots": [
+          "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/windows-size-helper-fixtures/r4-reviewed-1/tree"
+        ],
+        "source_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+        "interpreter_sha256": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+        "parent": {
+          "pid": 36920,
+          "creation_time_100ns": 134358423405640365
+        },
+        "launcher": {
+          "pid": 42596,
+          "creation_time_100ns": 134358423408123339
+        },
+        "worker": {
+          "pid": 632,
+          "creation_time_100ns": 134358423408654254
+        },
+        "worker_exit_confirmed": true,
+        "launcher_exit_confirmed": true,
+        "job_empty": true,
+        "job_terminated": false,
+        "work_limit_seconds": 2.0,
+        "parent_limit_seconds": 4.0,
+        "job_memory_limit_bytes": 67108864,
+        "process_memory_limit_bytes": 67108864,
+        "job_active_process_limit": 2,
+        "worker_output_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\9c9328f4720c44b09dfdab7e51bccb96.worker-output.json",
+        "working_set_minimum_bytes": 1048576,
+        "working_set_maximum_bytes": 67108864,
+        "hard_working_set_proofs": {
+          "parent": {
+            "pid": 36920,
+            "creation_time_100ns": 134358423405640365,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "parent-own-current-process",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": false,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "launcher": {
+            "pid": 42596,
+            "creation_time_100ns": 134358423408123339,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "exact-owned-windows-job",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": true,
+            "enforced_while_suspended": true,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "worker_self": {
+            "pid": 632,
+            "creation_time_100ns": 134358423408654254,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "worker-own-current-process",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": false,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "worker": {
+            "pid": 632,
+            "creation_time_100ns": 134358423408654254,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "exact-owned-windows-job",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": true,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          }
+        },
+        "job_setup": {
+          "configured": true,
+          "pointer_bytes": 8,
+          "basic_limit_bytes": 64,
+          "extended_limit_bytes": 144,
+          "limit_flags": 8968
+        },
+        "launcher_working_set_before_traversal": {
+          "minimum_bytes": 1048576,
+          "maximum_bytes": 67108864,
+          "enforcement_flags": 6
+        },
+        "worker_exit_elapsed_seconds": 0.3279999999995198,
+        "worker_exit_code": 0,
+        "peak_job_memory_bytes": 14721024,
+        "peak_worker_committed_memory_bytes": 12406784,
+        "job_closed_confirmed": true,
+        "parent_working_set_at_completion": {
+          "minimum_bytes": 1048576,
+          "maximum_bytes": 67108864,
+          "enforcement_flags": 6
+        },
+        "failure": null,
+        "elapsed_seconds": 0.3440000000009604,
+        "receipt_schema": "v1-6-windows-size-helper-owned-call-r2",
+        "status": "completed",
+        "receipt_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\9c9328f4720c44b09dfdab7e51bccb96.json",
+        "helper_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+        "python_version": "3.11.15",
+        "regular_bytes": 32,
+        "deferred": [
+          "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\tree\\junction-live",
+          "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\tree\\junction-missing"
+        ],
+        "peak_working_set_bytes": 21778432,
+        "worker_elapsed_seconds": 0.01599999999962165,
+        "worker_working_set_at_completion": {
+          "minimum_bytes": 1048576,
+          "maximum_bytes": 67108864,
+          "enforcement_flags": 6
+        }
+      },
+      "identity_quiescence": {
+        "parent": {
+          "pid": 36920,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        },
+        "launcher": {
+          "pid": 42596,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        },
+        "worker": {
+          "pid": 632,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        }
+      }
+    },
+    {
+      "label": "injected-hung-worker-job-termination-and-exit-proof",
+      "receipt_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\68eb51ce87614830bd9ce8dc8ad80266.json",
+      "status": "cleanup-confirmed",
+      "native_call_launcher": {
+        "pid": 39096,
+        "creation_time_100ns": 134358423411882644
+      },
+      "exit_code": 1,
+      "parent_call_elapsed_seconds": 2.2030000000013388,
+      "raw_streams": {
+        "stdout": {
+          "path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\injected-hung-worker-job-termination-and-exit-proof.stdout.bin",
+          "original_bytes": 3871,
+          "saved_bytes": 3871,
+          "sha256": "9a3f82230bb0d70f0814f8f43963f298eb9b294662c7331a777df441fa8da4bd",
+          "truncated": false
+        },
+        "stderr": {
+          "path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-fixtures\\r4-reviewed-1\\injected-hung-worker-job-termination-and-exit-proof.stderr.bin",
+          "original_bytes": 0,
+          "saved_bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "truncated": false
+        }
+      },
+      "native_call_launcher_quiescence": {
+        "pid": 39096,
+        "original_identity_quiescent": true,
+        "reason": "matching process handle signalled exit"
+      },
+      "identities": {
+        "schema": "v1-6-windows-fresh-size-helper-r2",
+        "nonce": "68eb51ce87614830bd9ce8dc8ad80266",
+        "phase": "failed",
+        "roots": [
+          "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/windows-size-helper-fixtures/r4-reviewed-1/tree"
+        ],
+        "source_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+        "interpreter_sha256": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+        "parent": {
+          "pid": 41048,
+          "creation_time_100ns": 134358423412404497
+        },
+        "launcher": {
+          "pid": 39144,
+          "creation_time_100ns": 134358423414746182
+        },
+        "worker": {
+          "pid": 40776,
+          "creation_time_100ns": 134358423415308687
+        },
+        "worker_exit_confirmed": true,
+        "launcher_exit_confirmed": true,
+        "job_empty": true,
+        "job_terminated": true,
+        "work_limit_seconds": 2.0,
+        "parent_limit_seconds": 4.0,
+        "job_memory_limit_bytes": 67108864,
+        "process_memory_limit_bytes": 67108864,
+        "job_active_process_limit": 2,
+        "worker_output_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\68eb51ce87614830bd9ce8dc8ad80266.worker-output.json",
+        "working_set_minimum_bytes": 1048576,
+        "working_set_maximum_bytes": 67108864,
+        "hard_working_set_proofs": {
+          "parent": {
+            "pid": 41048,
+            "creation_time_100ns": 134358423412404497,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "parent-own-current-process",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": false,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "launcher": {
+            "pid": 39144,
+            "creation_time_100ns": 134358423414746182,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "exact-owned-windows-job",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": true,
+            "enforced_while_suspended": true,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "worker_self": {
+            "pid": 40776,
+            "creation_time_100ns": 134358423415308687,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "worker-own-current-process",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": false,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          },
+          "worker": {
+            "pid": 40776,
+            "creation_time_100ns": 134358423415308687,
+            "minimum_bytes": 1048576,
+            "maximum_bytes": 67108864,
+            "enforcement_flags": 6,
+            "hard_max_verified": true,
+            "identity_verified_before_quota": true,
+            "ownership_scope": "exact-owned-windows-job",
+            "job_membership_verified_before_quota": true,
+            "exact_owned_job_membership_verified_before_quota": true,
+            "enforced_while_suspended": false,
+            "before_traversal": true,
+            "quota_call_succeeded": true
+          }
+        },
+        "job_setup": {
+          "configured": true,
+          "pointer_bytes": 8,
+          "basic_limit_bytes": 64,
+          "extended_limit_bytes": 144,
+          "limit_flags": 8968
+        },
+        "launcher_working_set_before_traversal": {
+          "minimum_bytes": 1048576,
+          "maximum_bytes": 67108864,
+          "enforcement_flags": 6
+        },
+        "failure_stage": "actual-worker-hard-working-set-verified-before-traversal",
+        "failure_winerror": null,
+        "worker_exit_elapsed_seconds": 1.9069999999992433,
+        "peak_job_memory_bytes": 14663680,
+        "peak_worker_committed_memory_bytes": 12353536,
+        "job_closed_confirmed": true,
+        "parent_working_set_at_completion": {
+          "minimum_bytes": 1048576,
+          "maximum_bytes": 67108864,
+          "enforcement_flags": 6
+        },
+        "failure": "TimeoutError: Windows owned-worker watchdog",
+        "elapsed_seconds": 1.9219999999986612,
+        "receipt_schema": "v1-6-windows-size-helper-owned-call-r2",
+        "status": "failed",
+        "receipt_path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\windows-size-helper-r4\\68eb51ce87614830bd9ce8dc8ad80266.json",
+        "helper_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+        "python_version": "3.11.15"
+      },
+      "identity_quiescence": {
+        "parent": {
+          "pid": 41048,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        },
+        "launcher": {
+          "pid": 39144,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        },
+        "worker": {
+          "pid": 40776,
+          "original_identity_quiescent": true,
+          "reason": "PID absent"
+        }
+      }
+    }
+  ],
+  "application_or_Go_executions": 0,
+  "foreign_processes_signalled": 0,
+  "all_original_process_identities_quiescent": true,
+  "tests": {
+    "normal_regular_bytes": 17,
+    "fresh_regular_bytes": 32,
+    "hidden_file_included": true,
+    "hardlinks_counted_each_path": true,
+    "two_reparse_entries_deferred": true,
+    "hung_worker_job_killed": true,
+    "actual_parent_launcher_worker_creation_identities_checked": true,
+    "hard64MiB_working_set_on_parent_suspended_launcher_and_worker": true,
+    "worker_self_enforcement_verified_before_traversal": true
+  },
+  "elapsed_seconds": 3.67200000000048
+}

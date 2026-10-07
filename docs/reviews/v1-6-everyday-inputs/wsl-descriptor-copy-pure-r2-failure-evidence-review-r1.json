@@ -1,0 +1,45 @@
+{
+  "artifact_bindings": {
+    "wsl-descriptor-copy-pure-r2-parent.json": "f4febabadeac368a6af4c07996aa87db0f88179d45be7b068d805317c26f7d74",
+    "wsl-descriptor-copy-pure-r2-result.json": "8acce1cf481f8893d556de44f58597c51ef0385323986eff494370a80ef54300",
+    "wsl-descriptor-copy-pure-r2-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-descriptor-copy-pure-r2-stdout.json": "732e0df9f6a25861543ee471934006d149e7da2889bc3e2e6f0ee33f53ca634d"
+  },
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "independent_checks": [
+    "Copied JSON result and original S UUID result are exact8acce1...; raw stdout original/copy exact732e0... and semantically matches result. Parent JSON hashes match raw capture.",
+    "Live materialized fixture104899... and copy342a070... hashes freshly match.",
+    "Retained C source1/source2-renamed-parent/source3 each contains original23-byte synthetic payload SHA e271657623991e4af9c99c87296d919db7d3a565bf483e0987bfb3625d563166.",
+    "Read-only WSL metadata/hash audit found ext4 destination1/a/file.bin regular single-link exact23-byte payload, destination2/3 empty parent directories. No fixture/helper/copy/native command was invoked for review."
+  ],
+  "installation_approval": false,
+  "limits": [
+    "The observed C rename refusal is scoped to this owned held-root fixture operation; its general filesystem cause is not diagnosed.",
+    "Only positive copy and named-parent replacement passed before failure. Remaining acquisition/signal/FD/publication/runtime cases did not run.",
+    "This fixture failure does not demonstrate a defect in unchanged R6 copy, does not qualify full fixture, mirror preparation, resources/helper cleanup or native execution.",
+    "New materially changed R3 adversary/host-behavior fixture may be reviewed separately; preserve this failure and UUID unchanged."
+  ],
+  "native_pass": false,
+  "nonce": "98ed5eea93ad48b595ada047f832757b",
+  "observed": {
+    "Linux_interpreter_immediate_pre_and_post": "parent capture records exact52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41,3.14.4,opt0,no_bytecode",
+    "child_elapsed_seconds": 0.3590563710022252,
+    "complete_fixture_status": "FAILED",
+    "completed_cases": 2,
+    "error": "PermissionError errno13 renaming the tiny owned C source-3 root while directory descriptors were held",
+    "expected_cases": 31,
+    "parent_elapsed_seconds": 1.0122989,
+    "parent_exit_code": 1,
+    "stderr_bytes": 0
+  },
+  "original_failed_native_R1_clock_renewed": false,
+  "original_failures_preserved": true,
+  "reviewed_at_utc": "2026-10-07T13:12:53.736011+00:00",
+  "reviewer": "/root/continuation_audit, independent reviewer",
+  "schema": "v1-6-descriptor-copy-pure-r2-failure-evidence-review-r1",
+  "source_bindings": {
+    "methods/check_descriptor_copy_pure_wsl_r2.py.txt": "1048994445f6d691bcfc7842dbf0e61deb81961ed885f05b5d09a8c335784f2d",
+    "methods/prepare_runtime_readset_mirror_wsl_r6.py.txt": "342a070872792b0203ec4f074a4cabca4579f4c8bcd8bb2b66246f8b79c01110"
+  },
+  "verdict": "ACCEPT_PRESERVED_FAILED_FIXTURE_EVIDENCE"
+}

@@ -1,0 +1,526 @@
+"""Fresh Windows metadata worker under an owned, bounded Windows Job Object.
+
+CLI: helper.py FRESH_OWNED_RECEIPT [--fixture-hang] ROOT...
+Every completed result proves actual worker/launcher exit and an empty owned job.
+A pending receipt deliberately makes no cleanup or qualification claim.
+"""
+import ctypes
+from ctypes import wintypes
+import hashlib
+import json
+import math
+import msvcrt
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+import threading
+import time
+
+STARTED = time.monotonic()
+sys.dont_write_bytecode = True
+R = Path('C:/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S = Path('C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+PYTHON = Path('C:/Users/Paul Work/AppData/Local/hermes/hermes-agent/venv/Scripts/python.exe')
+PYTHON_SHA = '885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8'
+MEMORY = 64 << 20
+OUTPUT = 1 << 20
+WORK_LIMIT = 2.0
+WORK_CUTOFF = 1.9  # Reserve100ms for the actual worker exit before the2s work cap.
+PARENT_LIMIT = 4.0
+HARD_PARENT_CUTOFF = 3.7
+WAIT_OBJECT_0 = 0
+WAIT_TIMEOUT = 258
+JOB_FLAGS = 0x2000 | 0x100 | 0x200 | 0x1 | 0x8
+
+class IO_COUNTERS(ctypes.Structure):
+    _fields_ = [(n, ctypes.c_ulonglong) for n in
+                ('ReadOperationCount', 'WriteOperationCount', 'OtherOperationCount',
+                 'ReadTransferCount', 'WriteTransferCount', 'OtherTransferCount')]
+
+class BASIC_LIMIT(ctypes.Structure):
+    _fields_ = [('PerProcessUserTimeLimit', ctypes.c_longlong),
+                ('PerJobUserTimeLimit', ctypes.c_longlong), ('LimitFlags', wintypes.DWORD),
+                ('MinimumWorkingSetSize', ctypes.c_size_t), ('MaximumWorkingSetSize', ctypes.c_size_t),
+                ('ActiveProcessLimit', wintypes.DWORD), ('Affinity', ctypes.c_size_t),
+                ('PriorityClass', wintypes.DWORD), ('SchedulingClass', wintypes.DWORD)]
+
+class EXTENDED_LIMIT(ctypes.Structure):
+    _fields_ = [('BasicLimitInformation', BASIC_LIMIT), ('IoInfo', IO_COUNTERS),
+                ('ProcessMemoryLimit', ctypes.c_size_t), ('JobMemoryLimit', ctypes.c_size_t),
+                ('PeakProcessMemoryUsed', ctypes.c_size_t), ('PeakJobMemoryUsed', ctypes.c_size_t)]
+
+class ACCOUNTING(ctypes.Structure):
+    _fields_ = [(n, ctypes.c_longlong) for n in ('TotalUserTime', 'TotalKernelTime',
+        'ThisPeriodTotalUserTime', 'ThisPeriodTotalKernelTime')] + [(n, wintypes.DWORD) for n in
+        ('TotalPageFaultCount', 'TotalProcesses', 'ActiveProcesses', 'TotalTerminatedProcesses')]
+
+class MEMORY_COUNTERS(ctypes.Structure):
+    _fields_ = [('cb', wintypes.DWORD), ('PageFaultCount', wintypes.DWORD)] + [
+        (n, ctypes.c_size_t) for n in ('PeakWorkingSetSize', 'WorkingSetSize',
+        'QuotaPeakPagedPoolUsage', 'QuotaPagedPoolUsage', 'QuotaPeakNonPagedPoolUsage',
+        'QuotaNonPagedPoolUsage', 'PagefileUsage', 'PeakPagefileUsage')]
+
+class SECURITY(ctypes.Structure):
+    _fields_ = [('nLength', wintypes.DWORD), ('lpSecurityDescriptor', ctypes.c_void_p),
+                ('bInheritHandle', wintypes.BOOL)]
+
+class STARTUP(ctypes.Structure):
+    _fields_ = [('cb', wintypes.DWORD), ('lpReserved', wintypes.LPWSTR),
+                ('lpDesktop', wintypes.LPWSTR), ('lpTitle', wintypes.LPWSTR),
+                ('dwX', wintypes.DWORD), ('dwY', wintypes.DWORD), ('dwXSize', wintypes.DWORD),
+                ('dwYSize', wintypes.DWORD), ('dwXCountChars', wintypes.DWORD),
+                ('dwYCountChars', wintypes.DWORD), ('dwFillAttribute', wintypes.DWORD),
+                ('dwFlags', wintypes.DWORD), ('wShowWindow', wintypes.WORD),
+                ('cbReserved2', wintypes.WORD), ('lpReserved2', ctypes.POINTER(ctypes.c_byte)),
+                ('hStdInput', wintypes.HANDLE), ('hStdOutput', wintypes.HANDLE),
+                ('hStdError', wintypes.HANDLE)]
+
+class STARTUP_EX(ctypes.Structure):
+    _fields_ = [('StartupInfo', STARTUP), ('lpAttributeList', ctypes.c_void_p)]
+
+class PROCESS(ctypes.Structure):
+    _fields_ = [('hProcess', wintypes.HANDLE), ('hThread', wintypes.HANDLE),
+                ('dwProcessId', wintypes.DWORD), ('dwThreadId', wintypes.DWORD)]
+
+K = ctypes.WinDLL('kernel32', use_last_error=True)
+PROTOTYPES = {
+    'CreateJobObjectW': ((ctypes.c_void_p, wintypes.LPCWSTR), wintypes.HANDLE),
+    'SetInformationJobObject': ((wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD), wintypes.BOOL),
+    'QueryInformationJobObject': ((wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD, ctypes.c_void_p), wintypes.BOOL),
+    'AssignProcessToJobObject': ((wintypes.HANDLE, wintypes.HANDLE), wintypes.BOOL),
+    'TerminateJobObject': ((wintypes.HANDLE, wintypes.UINT), wintypes.BOOL),
+    'TerminateProcess': ((wintypes.HANDLE, wintypes.UINT), wintypes.BOOL),
+    'WaitForSingleObject': ((wintypes.HANDLE, wintypes.DWORD), wintypes.DWORD),
+    'GetProcessTimes': ((wintypes.HANDLE, ctypes.POINTER(wintypes.FILETIME), ctypes.POINTER(wintypes.FILETIME), ctypes.POINTER(wintypes.FILETIME), ctypes.POINTER(wintypes.FILETIME)), wintypes.BOOL),
+    'GetExitCodeProcess': ((wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)), wintypes.BOOL),
+    'GetCurrentProcess': ((), wintypes.HANDLE),
+    'CloseHandle': ((wintypes.HANDLE,), wintypes.BOOL),
+    'IsProcessInJob': ((wintypes.HANDLE, wintypes.HANDLE, ctypes.POINTER(wintypes.BOOL)), wintypes.BOOL),
+    'K32GetProcessMemoryInfo': ((wintypes.HANDLE, ctypes.POINTER(MEMORY_COUNTERS), wintypes.DWORD), wintypes.BOOL),
+    'OpenProcess': ((wintypes.DWORD, wintypes.BOOL, wintypes.DWORD), wintypes.HANDLE),
+    'CreatePipe': ((ctypes.POINTER(wintypes.HANDLE), ctypes.POINTER(wintypes.HANDLE), ctypes.POINTER(SECURITY), wintypes.DWORD), wintypes.BOOL),
+    'SetHandleInformation': ((wintypes.HANDLE, wintypes.DWORD, wintypes.DWORD), wintypes.BOOL),
+    'CreateProcessW': ((wintypes.LPCWSTR, wintypes.LPWSTR, ctypes.c_void_p, ctypes.c_void_p, wintypes.BOOL, wintypes.DWORD, ctypes.c_void_p, wintypes.LPCWSTR, ctypes.POINTER(STARTUP), ctypes.POINTER(PROCESS)), wintypes.BOOL),
+    'InitializeProcThreadAttributeList': ((ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, ctypes.POINTER(ctypes.c_size_t)), wintypes.BOOL),
+    'UpdateProcThreadAttribute': ((ctypes.c_void_p, wintypes.DWORD, ctypes.c_size_t, ctypes.c_void_p, ctypes.c_size_t, ctypes.c_void_p, ctypes.c_void_p), wintypes.BOOL),
+    'DeleteProcThreadAttributeList': ((ctypes.c_void_p,), None),
+    'ResumeThread': ((wintypes.HANDLE,), wintypes.DWORD),
+    'WriteFile': ((wintypes.HANDLE, ctypes.c_void_p, wintypes.DWORD, ctypes.POINTER(wintypes.DWORD), ctypes.c_void_p), wintypes.BOOL),
+}
+for name, (arguments, result) in PROTOTYPES.items():
+    function = getattr(K, name)
+    function.argtypes, function.restype = arguments, result
+
+def checked(value):
+    if not value:
+        raise ctypes.WinError(ctypes.get_last_error())
+    return value
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+def creation(handle):
+    c, e, k, u = (wintypes.FILETIME() for _ in range(4))
+    checked(K.GetProcessTimes(handle, ctypes.byref(c), ctypes.byref(e), ctypes.byref(k), ctypes.byref(u)))
+    return (int(c.dwHighDateTime) << 32) | int(c.dwLowDateTime)
+
+def memory_peak(handle):
+    counters = MEMORY_COUNTERS()
+    counters.cb = ctypes.sizeof(counters)
+    checked(K.K32GetProcessMemoryInfo(handle, ctypes.byref(counters), counters.cb))
+    peak = int(counters.PeakWorkingSetSize)
+    if peak > MEMORY or int(counters.PeakPagefileUsage) > MEMORY:
+        raise MemoryError('Windows helper process64MiB')
+    return peak
+
+def canonical(path):
+    value = Path(path)
+    if not value.is_absolute() or '..' in value.parts:
+        raise ValueError('absolute owned root required')
+    resolved = value.resolve()
+    if os.path.normcase(os.path.abspath(value)) != os.path.normcase(str(resolved)):
+        raise ValueError('accounting root itself must not redirect')
+    return resolved
+
+def inside(path, base):
+    return os.path.commonpath((os.path.normcase(str(path)), os.path.normcase(str(base)))) == os.path.normcase(str(base))
+
+def roots_checked(values):
+    if not 1 <= len(values) <= 32 or sum(map(len, values)) > 24000:
+        raise ValueError('root argument bound')
+    roots = [canonical(value) for value in values]
+    bases = [R.resolve(), S.resolve()]
+    if any(not any(inside(root, base) for base in bases) for root in roots):
+        raise ValueError('root outside actual task/scratch directories')
+    for i, root in enumerate(roots):
+        if any(inside(root, prior) or inside(prior, root) for prior in roots[:i]):
+            raise ValueError('overlapping accounting roots')
+    return roots
+
+def encoded(value, maximum=OUTPUT):
+    blob = json.dumps(value, ensure_ascii=True, separators=(',', ':')).encode('utf-8') + b'\n'
+    if len(blob) > maximum:
+        raise ValueError('Windows helper output bound')
+    return blob
+
+def receipt_write(path, value, first=False):
+    blob = encoded(value, 16 << 10)
+    if first:
+        with path.open('xb') as stream:
+            stream.write(blob)
+            stream.flush()
+            os.fsync(stream.fileno())
+    else:
+        temporary = path.with_name(path.name + '.pending')
+        with temporary.open('xb') as stream:
+            stream.write(blob)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+
+def job_empty(job):
+    info = ACCOUNTING()
+    checked(K.QueryInformationJobObject(job, 1, ctypes.byref(info), ctypes.sizeof(info), None))
+    return info.ActiveProcesses == 0
+
+def worker(arguments):
+    source_sha, nonce, hang_text, *values = arguments
+    roots = roots_checked(values)
+    if digest(__file__) != source_sha or digest(PYTHON) != PYTHON_SHA:
+        raise RuntimeError('worker source/interpreter binding changed')
+    in_job = wintypes.BOOL()
+    checked(K.IsProcessInJob(K.GetCurrentProcess(), None, ctypes.byref(in_job)))
+    if not in_job.value:
+        raise RuntimeError('worker not in a Windows job')
+    ready = {'schema': 'v1-6-windows-size-worker-ready-r2', 'nonce': nonce,
+             'source_sha256': source_sha, 'pid': os.getpid(),
+             'creation_time_100ns': creation(K.GetCurrentProcess())}
+    ready_blob = encoded(ready, 4096)
+    os.write(1, ready_blob)
+    line = sys.stdin.buffer.readline(4097)
+    if len(line) > 4096:
+        raise ValueError('worker handshake bound')
+    permission = json.loads(line)
+    if permission.get('nonce') != nonce or permission.get('source_sha256') != source_sha or permission.get('worker_pid') != os.getpid():
+        raise ValueError('worker start handshake mismatch')
+    if permission.get('worker_creation_time_100ns') != ready['creation_time_100ns']:
+        raise ValueError('worker creation identity mismatch')
+    deadline = permission['work_deadline_monotonic']
+    if not isinstance(deadline, (int, float)) or not STARTED < deadline <= STARTED + WORK_LIMIT:
+        raise ValueError('worker time admission mismatch')
+    if hang_text == '1':
+        time.sleep(60)  # Controlled watchdog fixture; suspended launch guaranteed job ownership.
+    pending, total, deferred, peak = list(roots), 0, [], 0
+    def budget():
+        nonlocal peak
+        if time.monotonic() >= deadline:
+            raise TimeoutError('Windows metadata work deadline')
+        peak = max(peak, memory_peak(K.GetCurrentProcess()))
+    budget()
+    while pending:
+        directory = pending.pop()
+        try:
+            with os.scandir(directory) as entries:
+                for entry in entries:
+                    budget()
+                    try:
+                        metadata = entry.stat(follow_symlinks=False)
+                        if metadata.st_file_attributes & 0x400:
+                            deferred.append(entry.path)
+                        elif entry.is_dir(follow_symlinks=False):
+                            pending.append(entry.path)
+                        elif entry.is_file():
+                            total += metadata.st_size
+                        else:
+                            deferred.append(entry.path)
+                    except FileNotFoundError:
+                        pass
+                    except OSError:
+                        deferred.append(entry.path)
+        except FileNotFoundError:
+            pass
+    budget()
+    value = {'regular_bytes': total, 'deferred': deferred, 'peak_working_set_bytes': peak,
+             'worker_elapsed_seconds': time.monotonic() - STARTED}
+    blob = encoded(value, OUTPUT - len(ready_blob))
+    budget()
+    if digest(__file__) != source_sha or digest(PYTHON) != PYTHON_SHA:
+        raise RuntimeError('worker bindings changed during traversal')
+    os.write(1, blob)
+
+def supervisor(arguments):
+    holder = {'job': None, 'launcher': None, 'worker': None}
+    finished = threading.Event()
+    def hard_guard():
+        if finished.wait(max(0.0, HARD_PARENT_CUTOFF - (time.monotonic() - STARTED))):
+            return
+        if holder['job']:
+            K.TerminateJobObject(holder['job'], 124)
+        if holder['worker']:
+            K.WaitForSingleObject(holder['worker'], 100)
+        elif holder['launcher']:
+            K.WaitForSingleObject(holder['launcher'], 100)
+        os._exit(124)  # Non-inherited job handle closes; pending exact identities remain.
+    threading.Thread(target=hard_guard, daemon=True).start()
+    if len(arguments) < 2:
+        raise ValueError('fresh owned receipt and accounting roots required')
+    receipt = Path(arguments[0])
+    hang = arguments[1:2] == ['--fixture-hang']
+    values = arguments[2:] if hang else arguments[1:]
+    roots = roots_checked(values)
+    folder = S / 'probe/windows-size-helper-r3'
+    folder.mkdir(parents=True, exist_ok=True)
+    folder = canonical(folder)
+    receipt = canonical(receipt)
+    if receipt.parent != folder or not re.fullmatch(r'[0-9a-f]{32}\.json', receipt.name):
+        raise ValueError('fresh per-call owned receipt location required')
+    nonce = receipt.stem
+    source_sha = digest(__file__)
+    if Path(sys.executable).resolve() != PYTHON.resolve() or sys.version.split()[0] != '3.11.15' or digest(PYTHON) != PYTHON_SHA:
+        raise RuntimeError('exact Windows interpreter required')
+    if hang:
+        fixture_base = S / 'probe/windows-size-helper-fixtures'
+        if len(roots) != 1 or not inside(roots[0], fixture_base.resolve()):
+            raise ValueError('hung-worker fixture root refused')
+        authority = json.loads((roots[0].parent / 'allow-hung-worker.json').read_bytes())
+        if authority != {'schema': 'v1-6-controlled-hung-worker', 'helper_sha256': source_sha}:
+            raise ValueError('hung-worker fixture authorization refused')
+    output_path = folder / (nonce + '.worker-output.json')
+    ledger = {'schema': 'v1-6-windows-size-helper-owned-call-r2', 'nonce': nonce,
+              'phase': 'created', 'roots': values, 'source_sha256': source_sha,
+              'interpreter_sha256': PYTHON_SHA,
+              'parent': {'pid': os.getpid(), 'creation_time_100ns': creation(K.GetCurrentProcess())},
+              'launcher': None, 'worker': None, 'worker_exit_confirmed': False,
+              'launcher_exit_confirmed': False, 'job_empty': False, 'job_terminated': False,
+              'work_limit_seconds': WORK_LIMIT, 'parent_limit_seconds': PARENT_LIMIT,
+              'job_memory_limit_bytes': MEMORY, 'process_memory_limit_bytes': MEMORY,
+              'job_active_process_limit': 2, 'worker_output_path': str(output_path)}
+    receipt_write(receipt, ledger, first=True)
+    job = None
+    process, assigned, worker_exit, launcher_exit = PROCESS(), False, False, False
+    input_read, input_write = wintypes.HANDLE(), wintypes.HANDLE()
+    response, failure, attributes = None, None, None
+    attributes_initialized = False
+    ledger['job_setup'] = {'configured': False, 'pointer_bytes': ctypes.sizeof(ctypes.c_void_p),
+                           'basic_limit_bytes': ctypes.sizeof(BASIC_LIMIT),
+                           'extended_limit_bytes': ctypes.sizeof(EXTENDED_LIMIT),
+                           'limit_flags': JOB_FLAGS}
+    try:
+        job = checked(K.CreateJobObjectW(None, None))
+        holder['job'] = job
+        ledger['phase'] = 'job-created-before-configuration'
+        receipt_write(receipt, ledger)
+        limits = EXTENDED_LIMIT()
+        limits.BasicLimitInformation.LimitFlags = JOB_FLAGS
+        limits.BasicLimitInformation.MinimumWorkingSetSize = 1 << 20
+        limits.BasicLimitInformation.MaximumWorkingSetSize = MEMORY
+        limits.BasicLimitInformation.ActiveProcessLimit = 2  # Redirector plus metadata worker.
+        limits.ProcessMemoryLimit = limits.JobMemoryLimit = MEMORY
+        checked(K.SetInformationJobObject(job, 9, ctypes.byref(limits), ctypes.sizeof(limits)))
+        ledger['job_setup']['configured'] = True
+        memory_peak(K.GetCurrentProcess())
+        security = SECURITY(ctypes.sizeof(SECURITY), None, True)
+        checked(K.CreatePipe(ctypes.byref(input_read), ctypes.byref(input_write), ctypes.byref(security), 4096))
+        checked(K.SetHandleInformation(input_write, 1, 0))
+        with output_path.open('xb') as output:
+            output_handle = msvcrt.get_osfhandle(output.fileno())
+            os.set_handle_inheritable(output_handle, True)
+            startup = STARTUP_EX()
+            startup.StartupInfo.cb = ctypes.sizeof(STARTUP_EX)
+            startup.StartupInfo.dwFlags, startup.StartupInfo.wShowWindow = 0x101, 0
+            startup.StartupInfo.hStdInput = input_read
+            startup.StartupInfo.hStdOutput = startup.StartupInfo.hStdError = output_handle
+            required = ctypes.c_size_t()
+            K.InitializeProcThreadAttributeList(None, 1, 0, ctypes.byref(required))
+            if required.value == 0 or required.value > 64 << 10:
+                raise RuntimeError('Windows job-list attribute size unavailable')
+            attributes = ctypes.create_string_buffer(required.value)
+            checked(K.InitializeProcThreadAttributeList(attributes, 1, 0, ctypes.byref(required)))
+            attributes_initialized = True
+            jobs = (wintypes.HANDLE * 1)(job)
+            # PROC_THREAD_ATTRIBUTE_JOB_LIST assigns atomically during creation.
+            # A hard parent exit cannot leave an unassigned suspended launcher.
+            checked(K.UpdateProcThreadAttribute(attributes, 0, 0x0002000D,
+                                                ctypes.byref(jobs), ctypes.sizeof(jobs), None, None))
+            startup.lpAttributeList = ctypes.cast(attributes, ctypes.c_void_p)
+            argv = [str(PYTHON), '-B', str(Path(__file__).resolve()), '--worker',
+                    source_sha, nonce, '1' if hang else '0', *map(str, roots)]
+            command = ctypes.create_unicode_buffer(subprocess.list2cmdline(argv))
+            checked(K.CreateProcessW(str(PYTHON), command, None, None, True,
+                                     0x08000000 | 0x4 | 0x00080000, None, str(S),
+                                     ctypes.cast(ctypes.byref(startup), ctypes.POINTER(STARTUP)), ctypes.byref(process)))
+            assigned = True
+            holder['launcher'] = process.hProcess
+            ledger['launcher'] = {'pid': int(process.dwProcessId), 'creation_time_100ns': creation(process.hProcess)}
+            in_job = wintypes.BOOL()
+            checked(K.IsProcessInJob(process.hProcess, job, ctypes.byref(in_job)))
+            if not in_job.value:
+                raise RuntimeError('suspended launcher outside exact owned job')
+            ledger['phase'] = 'owned-job-assigned-suspended'
+            receipt_write(receipt, ledger)
+            if K.ResumeThread(process.hThread) == 0xFFFFFFFF:
+                raise ctypes.WinError(ctypes.get_last_error())
+            checked(K.CloseHandle(process.hThread))
+            process.hThread = None
+            checked(K.CloseHandle(input_read))
+            input_read = wintypes.HANDLE()
+            while True:
+                if time.monotonic() >= STARTED + WORK_CUTOFF:
+                    raise TimeoutError('worker ready watchdog')
+                with output_path.open('rb') as stream:
+                    ready_blob = stream.readline(4097)
+                if ready_blob.endswith(b'\n'):
+                    if len(ready_blob) > 4096:
+                        raise ValueError('worker ready output bound')
+                    ready = json.loads(ready_blob)
+                    break
+                if K.WaitForSingleObject(process.hProcess, 0) == WAIT_OBJECT_0:
+                    raise RuntimeError('launcher exited before worker ready')
+                time.sleep(0.005)
+            if ready.get('schema') != 'v1-6-windows-size-worker-ready-r2' or ready.get('nonce') != nonce or ready.get('source_sha256') != source_sha:
+                raise ValueError('actual worker ready binding')
+            if type(ready.get('pid')) is not int or ready['pid'] <= 0 or type(ready.get('creation_time_100ns')) is not int:
+                raise ValueError('actual worker identity shape')
+            worker_handle = checked(K.OpenProcess(0x100000 | 0x1000, False, ready['pid']))
+            holder['worker'] = worker_handle
+            if creation(worker_handle) != ready['creation_time_100ns']:
+                raise ValueError('actual worker creation identity changed')
+            in_job = wintypes.BOOL()
+            checked(K.IsProcessInJob(worker_handle, job, ctypes.byref(in_job)))
+            if not in_job.value:
+                raise RuntimeError('actual worker outside exact owned job')
+            ledger['worker'] = {'pid': ready['pid'], 'creation_time_100ns': ready['creation_time_100ns']}
+            ledger['phase'] = 'actual-worker-owned-not-started'
+            receipt_write(receipt, ledger)
+            handshake = {'nonce': nonce, 'source_sha256': source_sha, 'worker_pid': ready['pid'],
+                         'worker_creation_time_100ns': ready['creation_time_100ns'],
+                         'work_deadline_monotonic': STARTED + WORK_CUTOFF}
+            blob = encoded(handshake, 4096)
+            written = wintypes.DWORD()
+            checked(K.WriteFile(input_write, blob, len(blob), ctypes.byref(written), None))
+            if written.value != len(blob):
+                raise RuntimeError('partial worker handshake')
+            checked(K.CloseHandle(input_write))
+            input_write = wintypes.HANDLE()
+            remaining_ms = max(0, math.floor((STARTED + WORK_CUTOFF - time.monotonic()) * 1000))
+            wait = K.WaitForSingleObject(worker_handle, remaining_ms)
+            if wait == WAIT_TIMEOUT:
+                raise TimeoutError('Windows owned-worker watchdog')
+            if wait != WAIT_OBJECT_0:
+                raise ctypes.WinError(ctypes.get_last_error())
+            worker_exit = True
+            ledger['worker_exit_elapsed_seconds'] = time.monotonic() - STARTED
+            code = wintypes.DWORD()
+            checked(K.GetExitCodeProcess(worker_handle, ctypes.byref(code)))
+            ledger['worker_exit_code'] = int(code.value)
+            if code.value != 0:
+                raise RuntimeError('Windows metadata worker failed')
+            if ledger['worker_exit_elapsed_seconds'] > WORK_LIMIT:
+                raise TimeoutError('worker exit exceeds2s')
+            if output_path.stat().st_size > OUTPUT:
+                raise ValueError('worker output1MiB')
+            lines = output_path.read_bytes().splitlines()
+            if len(lines) != 2 or lines[0] + b'\n' != ready_blob:
+                raise ValueError('worker result framing')
+            response = json.loads(lines[1])
+            if type(response.get('regular_bytes')) is not int or response['regular_bytes'] < 0 or not isinstance(response.get('deferred'), list):
+                raise ValueError('worker result shape')
+            for value in response['deferred']:
+                if not isinstance(value, str) or not any(inside(Path(value), root) for root in roots):
+                    raise ValueError('deferred path escaped roots')
+            if not 0 < response.get('peak_working_set_bytes', 0) <= MEMORY:
+                raise ValueError('worker working-set bound')
+    except BaseException as exc:
+        failure = type(exc).__name__ + ': ' + str(exc)[:2048]
+        ledger['failure_stage'] = ledger['phase']
+        ledger['failure_winerror'] = getattr(exc, 'winerror', None)
+    finally:
+        if process.hProcess:
+            remaining_ms = max(0, math.floor((STARTED + WORK_LIMIT - time.monotonic()) * 1000))
+            launcher_exit = K.WaitForSingleObject(process.hProcess, remaining_ms if worker_exit else 0) == WAIT_OBJECT_0
+            if not worker_exit or not launcher_exit or not job_empty(job):
+                if assigned:
+                    checked(K.TerminateJobObject(job, 124))
+                    ledger['job_terminated'] = True
+                else:
+                    checked(K.TerminateProcess(process.hProcess, 124))
+                    ledger['unassigned_owned_launcher_terminated'] = True
+                if holder['worker']:
+                    worker_exit = K.WaitForSingleObject(holder['worker'], 1000) == WAIT_OBJECT_0
+                    ledger['worker_exit_elapsed_seconds'] = time.monotonic() - STARTED
+                launcher_exit = K.WaitForSingleObject(process.hProcess, 1000) == WAIT_OBJECT_0
+                if response is not None:
+                    failure = failure or 'job required termination after normal worker result'
+            ledger['worker_exit_confirmed'] = worker_exit
+            ledger['launcher_exit_confirmed'] = launcher_exit
+        else:
+            # No successful CreateProcessW call: no launcher/worker identities are fabricated.
+            ledger['launcher_not_created'] = ledger['worker_not_created'] = True
+            ledger['cleanup_proof'] = 'no successful native process creation'
+            worker_exit = launcher_exit = True
+            ledger['worker_exit_confirmed'] = ledger['launcher_exit_confirmed'] = True
+        ledger['job_empty'] = job_empty(job) if process.hProcess and job else True
+        peak = EXTENDED_LIMIT()
+        if job and process.hProcess:
+            checked(K.QueryInformationJobObject(job, 9, ctypes.byref(peak), ctypes.sizeof(peak), None))
+        elif not job:
+            ledger['job_not_created'] = True
+        else:
+            ledger['peak_memory_proof'] = 'no successful native process creation'
+        ledger['peak_job_memory_bytes'] = int(peak.PeakJobMemoryUsed)
+        ledger['peak_worker_committed_memory_bytes'] = int(peak.PeakProcessMemoryUsed)
+        if attributes_initialized:
+            K.DeleteProcThreadAttributeList(attributes)
+        for handle in (input_read, input_write, process.hThread, holder['worker'], process.hProcess):
+            if handle:
+                checked(K.CloseHandle(handle))
+        if job:
+            checked(K.CloseHandle(job))
+        ledger['job_closed_confirmed'] = True
+        holder.update(job=None, worker=None, launcher=None)
+    memory_peak(K.GetCurrentProcess())
+    if digest(__file__) != source_sha or digest(PYTHON) != PYTHON_SHA:
+        failure = 'source/interpreter binding changed during call'
+    if not worker_exit or not launcher_exit or not ledger['job_empty'] or ledger['peak_job_memory_bytes'] > MEMORY:
+        failure = failure or 'Windows process exit/job/memory guard'
+    if time.monotonic() - STARTED >= HARD_PARENT_CUTOFF:
+        failure = failure or 'parent publication reserve exhausted'
+    ledger.update(phase='failed' if failure else 'completed', failure=failure,
+                  elapsed_seconds=time.monotonic() - STARTED)
+    value = dict(ledger, schema='v1-6-windows-fresh-size-helper-r2',
+                 receipt_schema='v1-6-windows-size-helper-owned-call-r2',
+                 status=ledger['phase'], receipt_path=str(receipt), helper_sha256=source_sha,
+                 python_version=sys.version.split()[0])
+    if response is not None and failure is None:
+        value.update(response)
+    try:
+        blob = encoded(value, 16 << 10)
+    except ValueError:
+        failure = 'final helper receipt16KiB'
+        value = dict(ledger, schema='v1-6-windows-fresh-size-helper-r2',
+                     receipt_schema='v1-6-windows-size-helper-owned-call-r2',
+                     status='failed', phase='failed', failure=failure,
+                     receipt_path=str(receipt), helper_sha256=source_sha,
+                     python_version=sys.version.split()[0])
+        blob = encoded(value, 16 << 10)
+    if value['elapsed_seconds'] >= PARENT_LIMIT:
+        raise TimeoutError('parent4s')
+    receipt_write(receipt, value)
+    # Exact same JSON values are committed to the final receipt and reported on stdout.
+    os.write(1, blob)
+    finished.set()
+    return 1 if failure else 0
+
+if __name__ == '__main__':
+    if sys.platform != 'win32':
+        raise SystemExit('Windows helper requires native Windows')
+    if sys.argv[1:2] == ['--worker']:
+        try:
+            worker(sys.argv[2:])
+        except BaseException as exc:
+            os.write(1, encoded({'failure': type(exc).__name__, 'detail': str(exc)[:2048]}))
+            raise SystemExit(1)
+    else:
+        raise SystemExit(supervisor(sys.argv[1:]))

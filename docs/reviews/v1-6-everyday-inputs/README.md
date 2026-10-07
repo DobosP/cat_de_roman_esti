@@ -4,8 +4,36 @@
 
 Valid until: exact bindings, host admission or owner steering change — recheck before execution.
 
-Canonical task branch `codex/content-v1-6` now continues from documentation checkpoint
-d8b7600 in `C:/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6`;
+The human stopped the Windows loop and requested this partial feature state be saved and
+pushed to origin for Linux continuation. [ADR-0180](../../adr/0180-stop-windows-loop-publish-linux-checkpoint.md)
+supersedes automatic continuation. The automation is paused and all agents/owned native
+processes are stopped. This is a WIP checkpoint, not green qualification or a main landing.
+
+Current R14 registry source and focused25 controls are independently accepted
+([source](wsl-r14-registry-source-review-r2.json), [controlled evidence](wsl-r14-registry-delta-r5-evidence-review-r1.json)).
+R18 actual active passed16.526s work/16.890s host with0.088s child/grandchild cleanup,
+exact bindings and no successor. Its [raw result](wsl-r12-actual-active-r18-result.json)
+and [exact failed-lane binding](wsl-r12-failed-lane-refusal-binding-r4.json) are saved;
+independent active/binding review was interrupted by the stop, so remains pending.
+The [stopped local metadata archive](wsl-stopped-local-metadata-archive-r1.json) preserves
+original helper registries, fixture artifacts, lane states and scratch methods with
+member hashes. SDKs, build caches and generated execution mirrors remain local and
+must be refreshed/rebuilt as needed on Linux; Windows absolute paths are historical.
+
+On Linux, fetch `origin/codex/content-v1-6` and preserve any newer local work before
+updating the feature worktree with the prescribed task-worktree helper. Read STATUS,
+this current section, the content skill and original checkpoint as historical evidence.
+Use the native Linux runner/host admission rather than running WSL/Windows-specific
+methods blindly. Refresh actual Go1.27.1, host, paths, resources and exact inputs;
+never reuse or reset failed Windows campaign clocks/baselines or claim partial passes.
+Finish required independent runner/lifecycle review on the admitted host, then freshly
+run all19 complementary contentrails cases in5/5/5/4 groups under one immutable20-minute
+campaign, canonical CLI race/vet/native-doc, final ledger/pool/docs and exact assembled
+acceptance. Both aliases and Source6 transactions are already present; do not reapply.
+V1.7 starts only after an independently accepted green local V1.6 landing.
+
+Canonical task branch `codex/content-v1-6` now continues from unqualified repair checkpoint
+4c69ad2, retaining the earlier d8b7600 evidence, in `C:/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6`;
 the prescribed agent-ops helper created it. The old managed checkout/branch retains its
 unmerged evidence and is idle. Shared Source5 main6a233279 is clean.
 The current continuation decision is [ADR-0179](../../adr/0179-resume-v1-6-in-original-chat.md).
@@ -32,20 +60,42 @@ source/parser scopes. Windows helperR2 and its fixture passed source review, but
 [first actual fixture failed](windows-helper-r2-fixture-r1-failure.json) before a final
 response. The original phase-created receipt remains unconfirmed and retained;
 [its exact parent is absent](windows-helper-r2-prelaunch-failure-preservation-r1.json).
-No recorded launcher/worker or worker-output exists. A revised fixture must preserve
-setup diagnostics, and a guarded helper revision requires independent review before
-another invocation. Actual-root parity and active/finalization proofs remain pending.
-The [seven-step command specification](wsl-native-campaign-spec-r1.json) passed
-[source-only partition/pin review](wsl-native-campaign-spec-review-r1.json) before
-these documentation changes; fresh final-adapter bindings/admission remain required.
-Every accounting root,2GiB native RSS/1GiB growth/17GiB startdisk/16GiB remaining
-floors stays unchanged. No module fetch, native test/build or campaign has executed.
+No recorded launcher/worker or worker-output exists. The exact source/output ordering
+and repeated parent exit proof support only the
+[independently reviewed specific retirement](windows-helper-r2-specific-retirement-review-r1.json);
+the original false flags and R2/R6 refusal remain unchanged.
+[HelperR3/fixtureR2 source review](windows-helper-r3-source-review-r1.json) accepts
+bounded setup failure finalization and raw stream preservation. The no-child
+[job diagnostic](windows-job-setup-r2-result.json) completes in0.031s, with the job
+empty and closed; exact working-set Job flags are refused with Windows error1314,
+while the same64MiB committed-memory flags without working-set are accepted.
+That alternate diagnostic does not qualify the helper. Original wrong-directory
+argument refusal is also retained. The [own-process API diagnostic](windows-working-set-r1-result.json)
+sets/readbacks exact1MiB/64MiB hard maximum in0.016s without privilege/system changes.
+The [bounded evidence review](windows-host-diagnostics-evidence-review-r1.json) accepts
+only diagnostic/API/parser observations. R3 has not launched a worker.
+[R7 source review](wsl-r7-source-review-r1.json) and
+[29-case pure registry regression](windows-receipt-registry-r2-result.json) pass.
+[HelperR4 source](windows-helper-r4-source-review-r1.json) uses hard per-process limits
+on parent, suspended launcher and actual worker, retaining Job64MiB commit/active2.
+Its [controlled Windows fixture](windows-helper-r4-fixture-r3-result.json) passes in3.672s:
+17→32 fresh bytes, four identity-bound hard-limit roles and all processes gone; the
+hung-worker call remains failed and is stopped by1.907s. The
+[independent evidence review](windows-helper-r4-fixture-evidence-review-r1.json) accepts
+only that bounded scope; [original control receipts/raw streams](windows-helper-r4-fixture-r3-evidence.tar.gz)
+are retained unchanged. R8's Python3.14exists-error suppression is rejected;
+[R9 source repair](wsl-r9-source-review-r1.json) propagates I/O failures and binds the
+specific historical retirement. The source-reviewed pure regressions pass: [registry29](windows-receipt-registry-r4-result.json), [hard-limit proofs173](windows-hard-working-set-proofs-r2-result.json), and [synthetic history guard15](windows-historical-registry-guard-r1-result.json).
+[Full actual-root parity](wsl-windows-parity-r4-result.json) passes in43.431s: all six static roots match748343738bytes; Windows1.142s versus Linux32.355s. Dynamic probe metadata stays within64KiB. Actual [active](wsl-r9-actual-active-result.json) and [finalization](wsl-r9-actual-finalization-result.json) fixtures pass in14.396s/9.230s, with owned exit, durable failed outcome, immutable baseline/deadline and failed-resume refusal. These are metadata/Python-only checks. [Complete original artifacts](wsl-r9-qualification-fixtures-evidence-r2.tar.gz) preserve Linux symlinks; the incomplete Windows archiveR1 is retained after its symlink read failure. Independent evidence acceptance and fresh native admission remain required.
+The [original specification](wsl-native-campaign-spec-r1.json) and broad unadmittedR2 draft remain history. Final [bounded R3 specification](wsl-native-campaign-spec-r3.json) and [source-only review](wsl-native-campaign-spec-review-r3.json) bind1259 repository inputs/six scratch pins, nineteen anchored cases5/5/5/4, CLIrace/vet/docs and seven accounting roots. [Independent fixture evidence acceptance](wsl-r9-fixture-evidence-review-r1.json) and [raw lifecycle/helper addendum](wsl-r9-lifecycle-helper-evidence-r1.tar.gz) preserve all61 original records. The [exact admission](wsl-native-admission-r1.json) and [independent admission review](wsl-native-admission-review-r1.json) fix10:53:13→11:13:13UTC and baseline752431588bytes.
 
-Runtime109/source8/rubric and existing Source6 installed finals/reference/native/HTTP
-proofs remain exact. Both synonym transactions are already staged. All nineteen cases,
-CLI/vet/docs/pool qualification, exact-commit assembled acceptance and local landing
-remain pending. No native campaign clock/baseline has been created. Original receipts,
-private answers and unrelated GUI work remain preserved; no push/deploy is authorized.
+[NativeR1 cumulative outcome](v1-6-wsl-native-r1-result.json) is FAILED, not a version qualification. Step0 locked publicmodules/verification and step1all five race cases PASS. Step2 stops at metadata-time-reserve11:10:28 while rebuilding all four baseline artifacts, after two additional raw test passes; the interrupted group and fourteen remaining complementary cases are unqualified. Original deadline/baseline stay unchanged. PeakgroupRSS490426368/growth580340038 remain below2GiB/1GiB. SIGTERM owned-group cleanup finishes0.026s with no remaining members; all1265 pre/post input/tool bindings pass. [Exact native evidence](wsl-native-campaign-r1-evidence.tar.gz) includes577 original receipts/logs/helper records/admission reviews and the immutable documentation snapshot. NativeCLI/vet/docs never launched. Independent diagnosis of cold compilation and warm rebuild cost precedes any materially changed host qualification; no identical retry or renewed failed clock.
+
+The [independent failed-campaign evidence review](wsl-native-r1-failure-evidence-review-r1.json) accepts preservation and failure classification only. A separately source-reviewed [matched scratch IO profile](wsl-scratch-io-profile-r1-result.json) completes in37.415s host/29.084s work with identical260files/36MiB payload,26.9MB peakRSS and cumulative growth345369596bytes from the original752431588baseline. [Independent profile evidence acceptance](wsl-scratch-io-profile-evidence-review-r1.json) verifies actual payloads, parent/raw captures and282 terminal helper records with matching sidecars/no pending. Ext4 write/copy/stat/hash are faster in this bounded sample; fsync is slower. These observations establish no native-throughput guarantee or permission to renew the failed campaign. Owned Linux scratch `/home/paul_work/work/_temp/codex__content-v1-6` now contains retained profile data and must be counted with all Windows roots. The [genuine canonical Git inventory prerequisite](wsl-canonical-git-inventory-prerequisite-r1.json) matches6173tracked paths across Windows/Linux under explicit Git directories; native docs has not run. A minimal path/binary adaptation is under source-only review. All nineteen complementary cases require a complete accepted campaign, preserving5/5/5/4 groups and original resource limits.
+
+Split execution has scoped [retained binary provenance/design acceptance](wsl-retained-contentrails-binary-provenance-review-r1.json); the original failed test outcome remains failed. The R10 serial adapter is source-only history; [R11 source review](wsl-r11-source-review-r1.json) requires fresh canonical+mirror runtime109 and canonical161Go-source membership at every pre/post step, alongside every known-file hash. Mirror copyR1 is held for omitted fresh canonical membership; corrected [copyR2 source review](wsl-runtime-mirror-preparation-source-review-r2.json) accepts fresh canonical109 before copy and canonical+mirror109 final parity. Its [actual bounded preparation](wsl-runtime-mirror-r2-failure-result.json) FAILS at the40second work guard after127/172files; parent43.704s/child43.325s, no owned processes remain and no native command ran. The [exact parent capture](wsl-runtime-mirror-r2-parent-result.json), raw streams and partial Linux mirror are retained at nonce`d318b9b3638e4de18d31fac17897c196`; never resume/reset/retry that failed copy. The [R11 pure fixture evidence](wsl-r11-pure-fixture-r2-evidence-review-r1.json) accepts57 controlled cases in2.793s child/3.375s host, with mocked metadata only; actual active/finalization/queued-stop qualification remains pending. The [R12 source review](wsl-r12-source-review-r1.json) adds exact task-owned off-mode and removes inherited Go child-telemetry flags, following the [SDK source review](wsl-go-tool-owned-telemetry-source-review-r1.json). Its20 isolated mode/environment controls pass the scoped independent evidence review. Descriptor [copyR6 source review](wsl-runtime-mirror-descriptor-source-review-r2.json) accepts held directory/leaf identity guards, flag-only signals and bounded failed publication. The [first descriptor fixture failure](wsl-descriptor-copy-pure-r2-failure-evidence-review-r1.json) remains a full FAIL after2/31 cases: this host refuses renaming a C directory with open handles. The revised R3 fixture reaches7/32 then fails on unsupported C FIFO creation. The [host-faithful descriptor fixture](wsl-descriptor-copy-pure-r4-evidence-review-r1.json) passes32 controls in2.899s child/3.484s host; [R12 telemetry delta](wsl-r12-telemetry-pure-delta-r1-evidence-review-r1.json) passes20 isolated controls. The [complete R6 mirror preparation](wsl-runtime-mirror-r6-evidence-review-r1.json) is independently accepted for metadata only: fresh nonce`43a6894fd7a94b3587c744815884c9f3`, all172readers/57,335,773bytes and canonical+mirror109 hashes exact; work22.832s/host31.685s,29,999,104bytes peakRSS and457,191,007bytes cumulative growth from the original752,431,588baseline. Both volume/memory floors pass;285terminal helper records/285sidecars have no pending/orphans and all six new helper process identities are absent. Original failed mirror128files and all failure bytes are unchanged. The source-accepted R13 actual active check fails before target launch at its24second work guard; its raw receipts remain retained. R15 removes that prefix and observes real SIGTERM owned-group cleanup0.08697s, exact readsets/state and no successor. The whole R15 fixture still FAILS24.008s when the final reset0 CLI refusal has only0.237s left. [Independent failure preservation](wsl-r12-actual-active-r15-failure-evidence-review-r1.json) verifies process absence and exact historical bytes; it grants no lifecycle qualification. First continuation1 success is only a control-flow inference. The source-accepted R16 active-only check also FAILS25.678s at guard-exit timeout. [Independent R16 failure preservation](wsl-r12-actual-active-r16-failure-evidence-review-r1.json) confirms original bytes, owned process absence and299terminal/299sidecar helper records clean. Source-accepted refusalR2 remains unexecuted because its R16 binding requires a successful active check. The [R13 early-interrupt source review](wsl-r13-source-review-r1.json) accepts only earlier refusal of accounting already interrupted by SIGTERM: every returned measurement, both final publication counts and fresh post-readsets retain all checks and limits. [Focused R13 delta evidence](wsl-r13-accounting-signal-delta-r2-evidence-review-r1.json) accepts24 controls and eight real self-signal deliveries in1.558s child/2.039s host. [R17 actual active evidence and exact binding](wsl-r13-actual-active-r17-evidence-review-r1.json) pass23.368s work/23.885s host: real SIGTERM cleanup0.093s, all pre/post pins and namespaces exact, no successor launched. [Real CLI refusal evidence](wsl-r13-actual-failed-lane-cli-r3-evidence-review-r1.json) passes14.197s work/14.753s host: continuation1 and reset0 are refused with their exact errors; original six lane artifacts, five pins, clock and baseline stay unchanged. Registry305terminal/305sidecar records have no pending or unconfirmed cleanup and all scoped processes are absent. Finalization and queued gates remain unexecuted. Their six/eight fresh accounting sweeps motivate a source-only R14 two-worker bounded registry adapter; no checks, resource caps or fixture budgets are relaxed. No native application has run through R12/R13. Source-only native specR4 binds the failed mirror and receives no admission. No clock or resource cap has been renewed.
+
+Runtime109/source8/rubric and existing Source6 installed finals/reference/native/HTTP proofs remain exact. Both synonym transactions are already staged. Pool stays2selected/1researched/3held/0integrated. Full gate ledger/currentdocs/pool/exact-commit assembled acceptance and green local landing remain pending. All original failures/private answers and unrelated GUI work stay preserved; no push/deploy is authorized.
 
 ## Historical Windows session 1 checkpoint
 

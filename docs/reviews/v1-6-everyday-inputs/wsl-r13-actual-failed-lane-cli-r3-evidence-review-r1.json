@@ -1,0 +1,206 @@
+{
+  "binding_sha256": "5a63832567af001bda1e78f55c124dbbd6ede58a209620d726c84f72789322c4",
+  "checks": {
+    "RSS_limit_bytes": 2147483648,
+    "child_elapsed_seconds": 14.197391764999338,
+    "fallback_cleanup_needed": false,
+    "host_elapsed_seconds": 14.7534101,
+    "interpreter_sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+    "native_application_Go_executions": 0,
+    "old_deadline_alive_at_after_execution_audit": true,
+    "original_baseline_bytes": 752431588,
+    "original_deadline_utc": "2026-10-07T15:40:14.025831+00:00",
+    "original_result_raw_parent_captures_exact": true,
+    "peak_sampled_RSS_bytes": 27099136,
+    "per_image_limit_bytes": 32768,
+    "received_signal": null,
+    "six_bound_file_hashes_and_five_protected_pins_unchanged": true,
+    "source_and_interpreter_immediate_pre_post_exact": true,
+    "terminal_image_bytes": 3969,
+    "total_limit_seconds": 30,
+    "two_expected_real_CLI_observations": [
+      {
+        "captured_json": {
+          "error": "ValueError: only the exact successful prefix may continue; pending/failed/complete cannot retry",
+          "status": "refused"
+        },
+        "exit_code": 2,
+        "index": 1,
+        "raw_file_shape_verified_regular_single_link": true,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "1bb70ba25ff83b38565ac15c1ce004deaec47a9a27d0c7b50a373185095016f4"
+      },
+      {
+        "captured_json": {
+          "error": "ValueError: campaign already exists; never reset/retry index zero",
+          "status": "refused"
+        },
+        "exit_code": 2,
+        "index": 0,
+        "raw_file_shape_verified_regular_single_link": true,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "4b386541c7855edf1d93e8f4a6c34bd188b55db32642fefe038a6cfb3a708060"
+      }
+    ],
+    "work_finished_elapsed_seconds": 14.197210435999295,
+    "work_limit_seconds": 24
+  },
+  "diagnostics": {
+    "both_real_CLI_stderr_empty": true,
+    "no_diagnostic_erasure": true,
+    "outer_harness_known_captured_warnings": "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/check_r13_failed_lane_cli_wsl_r3.py:417: SyntaxWarning: 'return' in a 'finally' block\n  return 1\n/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/run_worktree_lane_wsl_r13.py:854: SyntaxWarning: 'return' in a 'finally' block\n  return publish_outcome(manifest, manifest_path, manifest_bytes, index, state, row, prefix,\n",
+    "outer_harness_stderr_sha256": "da0aa0d5f017924f5cf3984460be111fe5ef12aebd2c1eff296d7bc1cd729c6d",
+    "real_CLI_warning_policy": "ignore::SyntaxWarning on the exact pinned R13 CLI only; all other stderr forbidden"
+  },
+  "exact_evidence_sha256": {
+    "wsl-r12-failed-lane-cli-r3-parent.json": "8b75d8c957a6c4e20e0066246aad0b1a61e91715b200fcf059325c2cba21d279",
+    "wsl-r12-failed-lane-cli-r3-result.json": "80daeb2a307ad4079d41560f56d5280cc6433aa2b202e95bb2068244f5475485",
+    "wsl-r12-failed-lane-cli-r3-stderr.txt": "da0aa0d5f017924f5cf3984460be111fe5ef12aebd2c1eff296d7bc1cd729c6d",
+    "wsl-r12-failed-lane-cli-r3-stdout.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "exact_source_sha256": {
+    "methods/check_r13_failed_lane_cli_wsl_r3.py.txt": "462174cc6a7eb1911b1cdba3c1e6b30ac54cd984e4d618d9407b85934362c2b9",
+    "methods/invoke_r13_failed_lane_cli_capture_r3.ps1.txt": "875777931f2a643590325595d7f81495dcf6f6332af3cc431ef95b0adc4098c9",
+    "methods/run_worktree_lane_wsl_r13.py.txt": "adda73a297bad19565b95d3d1ece92a842b9cccb8bf994e0089d0f2474b37858"
+  },
+  "findings": [],
+  "fresh_read_only_actor_audit": {
+    "audit_time_utc": "2026-10-07T15:33:59.394003+00:00",
+    "capture_and_six_new_helper_PIDs_absent": true,
+    "filtered_windows_helper_inventory": [],
+    "readable_linux_matching_refusal_or_R13_or_old_lane_processes": [],
+    "retained_root_direct_regular_single_link_artifacts": true,
+    "windows_capture_pid": 41992
+  },
+  "helper_registry": {
+    "retained_worker_outputs": 305,
+    "terminal_records": 305,
+    "two_new_terminal_records": [
+      {
+        "cleanup_confirmed": true,
+        "elapsed_seconds": 1.2340000000003783,
+        "file": "68691e0ee2cd4785854f9bf9581f56b4.json",
+        "hard64MiB_identity_proofs_verified": true,
+        "identities": {
+          "launcher": {
+            "creation_time_100ns": 134358605317109630,
+            "pid": 44872
+          },
+          "parent": {
+            "creation_time_100ns": 134358605313749714,
+            "pid": 35480
+          },
+          "worker": {
+            "creation_time_100ns": 134358605317803886,
+            "pid": 52768
+          }
+        },
+        "sha256": "3081d9380824091c2f53e39a30135ab77f58e166eb0aed20ef5cc0c39e3b7139",
+        "worker_exit_elapsed_seconds": 1.2179999999971187,
+        "worker_output_sha256": "f09601822670bdf0570ccb1433a0ba9c5ce03b15f27353136a65dd65b1c1b94a"
+      },
+      {
+        "cleanup_confirmed": true,
+        "elapsed_seconds": 1.2040000000015425,
+        "file": "a8c7050373e84cb2ae62d17c03fa6d0d.json",
+        "hard64MiB_identity_proofs_verified": true,
+        "identities": {
+          "launcher": {
+            "creation_time_100ns": 134358605391754094,
+            "pid": 43000
+          },
+          "parent": {
+            "creation_time_100ns": 134358605388536019,
+            "pid": 42228
+          },
+          "worker": {
+            "creation_time_100ns": 134358605392344347,
+            "pid": 4816
+          }
+        },
+        "sha256": "584b231d75200e1078730232b7b049138e4e34b0bd1f03f8727a2d8832b916d7",
+        "worker_exit_elapsed_seconds": 1.1880000000019209,
+        "worker_output_sha256": "a520ea8cefac8681aba20d7ae5c106e97e0d2c2f668ef8e9a19ef22bca96c1b4"
+      }
+    ],
+    "unknown_pending_unconfirmed_entries": []
+  },
+  "nonce": "84dd3b7e49f44a459022662d8bba87e5",
+  "preserved_failures": {
+    "v1-6-wsl-native-r1-result.json": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "wsl-r12-actual-active-r15-result.json": "bebf432a9dfceabc31e3646902c9099746e81f490d911c9452668b50603c5938",
+    "wsl-r12-actual-active-r16-result.json": "12015a66c8838591a4a39c5adbb5e2ae8630a0d38312fdda0e7e96c2b46c4226"
+  },
+  "prior_exact_binding_and_active_evidence_review": {
+    "path": "wsl-r13-actual-active-r17-evidence-review-r1.json",
+    "sha256": "62d574e487113cfeab46de2b786ce1bc39ce0f50eb33dfd5ed0b8b30d30597fe"
+  },
+  "resources": {
+    "post": {
+      "fresh_measured_bytes": 1211791866,
+      "incremental_bytes": 459360278,
+      "measurement_roots": [
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gocache",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tmp",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gopath",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gomodcache",
+        "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tools",
+        "/home/paul_work/work/_temp/codex__content-v1-6"
+      ],
+      "memory_available_bytes": 32902946816,
+      "minimum_volume_free_bytes": 25161822208,
+      "original_baseline_bytes": 752431588,
+      "reserved_report_bytes_inside_limits": 131072
+    },
+    "pre": {
+      "fresh_measured_bytes": 1211778907,
+      "incremental_bytes": 459347319,
+      "measurement_roots": [
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gocache",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tmp",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gopath",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/gomodcache",
+        "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/tools",
+        "/home/paul_work/work/_temp/codex__content-v1-6"
+      ],
+      "memory_available_bytes": 33128833024,
+      "minimum_volume_free_bytes": 25162571776,
+      "original_baseline_bytes": 752431588,
+      "reserved_report_bytes_inside_limits": 131072
+    }
+  },
+  "review_execution": "No candidate code, Go, helper, signals or native commands executed by reviewer. Read-only evidence/hash/source-line and OS-inventory audits only.",
+  "reviewed_at_utc": "2026-10-07T15:36:27.597643+00:00",
+  "reviewer": "independent continuation_audit",
+  "schema": "v1-6-r13-actual-failed-lane-cli-r3-evidence-review-r1",
+  "scope": [
+    "Both exact index1 continuation and index0 reset errors were returned by real pinned R13 CLI OS processes before the original15:40:14.025831 lane deadline; state, files, clock and baseline were not renewed.",
+    "The accepted warning filter applies only to SyntaxWarning on the exact real CLI. Outer harness diagnostics remain retained and acknowledged.",
+    "The successful publication signal-failure transition is source-qualified but was not exercised here because received_signal is null.",
+    "This grants the separate actual CLI refusal gate only. Finalization, successful queued-prefix, Go/native/doc/assembled/landing remain pending; original nativeR1 failure remains permanent."
+  ],
+  "timing_inference_only": {
+    "current_registry_entries": 610,
+    "current_terminal_receipts": 305,
+    "next_design_candidate": "A separately qualified fresh descriptor/scandir registry sweep preserving all entry types, receipt identity/byte parses, IO refusals and cleanup checks could reduce metadata overhead; no cross-call cache, exclusions, baseline reset or cap change.",
+    "normal_accounting_source_lines": [
+      218,
+      221,
+      223,
+      239,
+      241,
+      245,
+      335,
+      337,
+      342
+    ],
+    "observation": "Every full normal count still performs the complete fresh history/registry sweep before host enumeration. R13 only avoids known-doomed interruptible work after a signal. Own helper runtimes1.234/1.204s do not isolate registry or namespace cost within the14.197s whole refusal fixture. No guarantee of queued fixture fitting24s follows.",
+    "per_full_normal_count_minimum_fresh_lstat_operations": 610,
+    "per_full_normal_count_minimum_receipt_read_parse_operations": 305
+  },
+  "verdict": "ACCEPT_BOUNDED_REAL_CLI_REFUSAL_OBSERVATIONS_ONLY"
+}

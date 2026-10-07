@@ -1,0 +1,45 @@
+{
+  "evidence": [
+    "cmd/internal/telemetry/counter/counter.go22-24 calls OpenDir with TEST_TELEMETRY_DIR before counters record. OpenDir109-113 replaces Default with NewDir before internal Open.",
+    "NewDir only encapsulates the owned local/upload/debug/mode paths; Mode128-146 reads the owned mode and trims whitespace.",
+    "internal/counter/file.go384-388 returns ErrDisabled before rotate/mmap/counter file creation when mode is off.",
+    "cmd/internal/telemetry MaybeParent32-35 binds Config.TelemetryDir; Start.parent145-155 replaces Default and returns before token acquisition, local file/child creation when off.",
+    "MaybeChild also passes Config.TelemetryDir, but cmd/go main100 runs it before counter.Open; inherited GO_TELEMETRY_CHILD=1 directly enters child logic."
+  ],
+  "execution_authorized": false,
+  "limits": [
+    "Source flow supports the override; actual future invocation still needs accepted exact manifest/environment and fresh admission.",
+    "Missing/unreadable mode defaults to local, so existence plus byte protection is necessary.",
+    "Does not qualify native nineteen tests, mirror preparation, helper cleanup, installation or landing."
+  ],
+  "native_pass": false,
+  "original_failed_native_preserved": true,
+  "proposed_mode": {
+    "bytes": 4,
+    "literal_utf8": "off\n",
+    "path": "S/probe/go-tool-telemetry-r1/mode",
+    "sha256": "b470b84cf0cd3189e10615bffea7d5cbd9f61134ba1c2cfd513ddd45b776a5f6"
+  },
+  "required_admission_conditions": [
+    "Create only the new owned scratch mode file; keep directory ancestry nonsymlink and file regular single-link. No user/provider/global mode mutation.",
+    "Bind TEST_TELEMETRY_DIR to the exact absolute owned directory in every relevant native command environment, including converter/tool descendants; pre/post hash and namespace evidence must protect the mode file.",
+    "Remove inherited GO_TELEMETRY_CHILD and GO_TELEMETRY_CHILD_UPLOAD or bind verified non-child values so MaybeChild cannot preempt the real command.",
+    "Include this file and any owned output in unchanged cumulative C+wholeX accounting and original caps.",
+    "Preserve R1 failed clock/outcome and prior accounting evidence; this design grants no retrospective absence-of-output claim."
+  ],
+  "reviewed_at_utc": "2026-10-07T13:00:05.129773+00:00",
+  "reviewer": "/root/continuation_audit, independent source reviewer",
+  "schema": "v1-6-owned-go-telemetry-source-review-r1",
+  "scope": "Static installed pinned Go SDK telemetry source flow only. No Go/tool/helper/native execution, no telemetry mode file creation, no global configuration read or write.",
+  "sdk_sources": {
+    "go/main.go": "750f5cbf07bb4304e33d34d7c2655ad977db7ea5855c47051bf122988f63068a",
+    "internal/telemetry/counter/counter.go": "592d9ac24df7b6a04debca264ea5bcd85dffb128462c606d49fbd29a0f1eb8c2",
+    "internal/telemetry/telemetry.go": "952d7e1749504884f1b818189eb1e20c895a978e44010893ff153b8b955877e7",
+    "vendor/golang.org/x/telemetry/counter/counter.go": "6fb8526d6fa4aaa67428fe6ee6574ca7a4dabe51ae840a476b9bd00c4414a3a1",
+    "vendor/golang.org/x/telemetry/internal/counter/file.go": "2e0788524fda0d4989168459a4460000c8b34a269e89eacc120ae558303f9522",
+    "vendor/golang.org/x/telemetry/internal/telemetry/dir.go": "f6b6937ccd88b77bf8d1d65a71bcf390971b69850d7b27cd8d812c46f98392e1",
+    "vendor/golang.org/x/telemetry/start.go": "ba88b75343c42caeb6c6605ebdaa63343f88c14327693bec266543a3d0e28904"
+  },
+  "valid_until": "Any bound SDK source, mode/environment binding or admission contract changes.",
+  "verdict": "ACCEPT_SOURCE_ONLY_OWNED_OFF_DIRECTORY_DESIGN"
+}

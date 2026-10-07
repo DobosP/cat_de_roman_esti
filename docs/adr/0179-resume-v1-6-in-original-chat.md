@@ -1,7 +1,7 @@
 # ADR-0179 — Continue V1.6 and the version loop in the original chat
 
 Date: 2026-10-07
-Status: Accepted — owner-authorized continuation; qualification pending
+Status: Superseded for automatic continuation by ADR-0180; qualification gates retained
 
 ## Context
 

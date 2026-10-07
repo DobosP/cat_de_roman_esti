@@ -1,0 +1,79 @@
+{
+  "artifact_and_source_bindings": {
+    "methods/prepare_runtime_readset_mirror_wsl_r6.py.txt": "342a070872792b0203ec4f074a4cabca4579f4c8bcd8bb2b66246f8b79c01110",
+    "runtime-freeze-r1.json": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7",
+    "wsl-mixed-volume-adaptation-plan-r1.json": "3a24afc4fbdce982c454749b1f5752b291bc7c81e35e408210f354cf19058091",
+    "wsl-native-namespace-spec-r1.json": "2e4a9543c414de1ed1e406febc5b7eb09ccac095e8f6e3b1237feb2421906825",
+    "wsl-runtime-mirror-r6-parent.json": "13a7c4ef58db9d7d93521401d303fac06e830097276e94cf58cd03b60b404645",
+    "wsl-runtime-mirror-r6-result.json": "efa8509d719fc2507248873a76c6059907a78f6839a96409769119befe0f1238",
+    "wsl-runtime-mirror-r6-stderr.txt": "aadde31d519d4e8655d3e8ef15316f6e71695ae8e35a431d97116a1842336cec",
+    "wsl-runtime-mirror-r6-stdout.json": "7a42832d4ca9092860e270ae5ebb2b336ee03d4e679b44470c5cbd975c2ed35d"
+  },
+  "candidate_commands_executed_by_reviewer": false,
+  "failure_preservation": [
+    "Original native R1 fa093d1b... remains failed and same immutable deadline. CopyR2 4d9f4e3a... and descriptorR2/R3 failures8acce1cf.../813f0984... byte-exact.",
+    "Old failed mirror UUIDd318b9b3638e4de18d31fac17897c196 still128files/52,945,789bytes; never resumed or deleted.",
+    "Original R2 no-worker pending nonce27a9... remains exact131afdd6... retired inactive history under earlier specific decision, not generic cleanup success."
+  ],
+  "independent_live_checks": [
+    "Every172 canonical and mirror leaf freshly lstat/type/single-link/size/resolve/identity/hash checked against exact plan; full mirror file inventory exact and no nonregular entries. No byte mismatch.",
+    "Fresh canonical/mirror runtime names each109 and canonical .go including tests161 match namespace spec; frozen109 hashes match the already freshly hashed172 rows.",
+    "Named canonical/mirror roots dev/inode exactlymatch report:84/34058472182111077 and2080/123665; retained before/after edge-map hashes equal, counts below256 and all descriptor-close success proof present.",
+    "Fresh completeX accounting129160767 bytes exactlyequals sampled after129160767. New TMPDIR empty.",
+    "Both new Windows receipt deferred lists24 paths freshly resolved on Linux:1392bytes each. Regular-plus-deferred totals exactly1080446830 before and1080461828 after. Sum with respective wholeX samples reproduces report totals.",
+    "285 R4 terminal plus285 regular single-link sidecars, no pending/orphan/unknown/nonregular registry entries or unconfirmed cleanup. Latest two helper calls bound to source67d87a..., interpreter885aba..., exact seven original roots,64MiB job/process commit and four identity-bound hard-WS role proofs, closed/empty job and confirmed worker/launcher exit.",
+    "All six Windows helper parent/launcher/worker PIDs44552/49072/45244/47960/55040/47768 absent at fresh read-only process check.",
+    "Original/copy raw report/stdout hashes and result proof bytes72390 match; parent immediate pre/post Linux Python52e0...,3.14.4,opt0,-B and materialized method/profile/R9/helper hashes match. Stderr only preserved SyntaxWarning."
+  ],
+  "installation_approval": false,
+  "mirror": "/home/paul_work/work/_temp/codex__content-v1-6/runtime-readset-mirror-r1/43a6894fd7a94b3587c744815884c9f3",
+  "native_pass": false,
+  "new_helper_receipts": {
+    "6c96334571f44dd5bee01fcc977b2744.json": {
+      "elapsed_seconds": 0.9689999999973224,
+      "sha256": "142090a93b5736cac9d6b53d3f08379ddea8950d07c1c8feb3f285b06d5b4e58",
+      "worker_elapsed_seconds": 0.6409999999996217
+    },
+    "feb351301c1440b7b20ac6a0d5da4271.json": {
+      "elapsed_seconds": 0.8280000000013388,
+      "sha256": "e6b93481fe9fb2b75bf0b060f01031e314ed56704bd6970339b78fecd3ad90ad",
+      "worker_elapsed_seconds": 0.5160000000032596
+    }
+  },
+  "next_requirement": "This exact mirror may serve the reviewed Python-only R12 actual lifecycle/finalization/queued prerequisites. Native execution still requires those actual evidence receipts, exact updated spec/admission/current documentation, fresh original caps/resources/readsets and all19 tests plusCLI/vet/genuine canonical Git docs gates.",
+  "nonce": "43a6894fd7a94b3587c744815884c9f3",
+  "observed": {
+    "after_original_baseline_growth_bytes": 457191007,
+    "after_original_growth_plus_reserve_bytes": 457715295,
+    "after_total_bytes": 1209622595,
+    "before_total_bytes": 1152271824,
+    "canonical_compile_go_namespace": 161,
+    "canonical_runtime_files": 109,
+    "child_total_elapsed_seconds": 31.221401146998687,
+    "mirror_held_directories": 85,
+    "mirror_runtime_files": 109,
+    "original_growth_baseline_bytes": 752431588,
+    "parent_elapsed_seconds": 31.6851532,
+    "parent_exit_code": 0,
+    "peak_RSS_bytes": 29999104,
+    "preparation_growth_upper_bound_bytes": 57875059,
+    "publication_reserve_bytes": 524288,
+    "reader_bytes": 57335773,
+    "reader_files": 172,
+    "source_held_directories": 86,
+    "work_elapsed_seconds": 22.831849733996933
+  },
+  "original_native_clock_renewed": false,
+  "resource_checks": [
+    "40s work/50s total enforced with observed margins; report72390<128KiB; stream1MiB; held-directory cap256/tree.",
+    "Fresh before/after C disk25.645/25.645GB and ext4~992.8/992.7GB exceed17GiB initial/16GiB remaining; MemAvailable38.079/37.096GB exceeds16GiB.",
+    "57,875,059-byte preparation upper growth including unchanged512KiB reserve is below64MiB;457,715,295-byte original-baseline growth plus reserve below1GiB; RSS29,999,104below2GiB.",
+    "No baseline reset, archive substitution or cache-only resource claim. Subsequent admissions must refresh resources including new evidence outputs."
+  ],
+  "reviewed_at_utc": "2026-10-07T13:41:51.874769+00:00",
+  "reviewer": "/root/continuation_audit, independent evidence reviewer",
+  "reviewer_operations": "Read-only standard-library hashes/namespaces/metadata and Windows process inventory; no copy/helper/fixture/Go/application invocation.",
+  "schema": "v1-6-runtime-mirror-r6-evidence-review-r1",
+  "valid_until": "Any bound mirror/source/readset namespace changes or new unmet admission condition; retain this preparation as immutable history.",
+  "verdict": "ACCEPT_COMPLETE_METADATA_PREPARATION_EVIDENCE_ONLY"
+}

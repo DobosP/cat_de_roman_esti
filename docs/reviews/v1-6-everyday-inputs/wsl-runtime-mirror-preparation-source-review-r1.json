@@ -1,0 +1,30 @@
+{
+  "clock_renewed": false,
+  "execution_authorized": false,
+  "findings": [
+    {
+      "id": "F1",
+      "issue": "runtime109 enumerated only from mirror. Final canonical pass hashes172 known entries, missing fresh canonical runtimePaths-selected membership equality. Extra canonical .go/provenance/sourceJSON can be omitted while claimed parity stays true.",
+      "lines": "170-192",
+      "priority": 1,
+      "required_fix": "New append-only source: fresh canonical runtimePaths-equivalent enumeration before copy and at final parity; exact freeze109 membership/hash equality; reject missing/new/nonregular/link/redirect entries and propagate IO/enumeration errors."
+    }
+  ],
+  "installation_approval": false,
+  "native_execution_by_reviewer": false,
+  "original_native_R1_remains_failed": true,
+  "otherwise_checked": [
+    "Fresh directUUID roots, exact172/57,335,773 byte pin manifest, source ancestry/singlelink/open identity/stream hash/prepost metadata and destination parity.",
+    "Inert bytecode-disabled exact profile/R9; only two real seven-root metadata helper calls plus fresh wholeX accounting.",
+    "Original752431588/1GiB plus64MiB new-growth/512KiB publication reserve/40work50total/RSS2GiB/bothvolume/WSL caps retained.",
+    "Root-init stdout failure evidence and retained partial files, no unknown cleanup or native claims."
+  ],
+  "plan_sha256": "3a24afc4fbdce982c454749b1f5752b291bc7c81e35e408210f354cf19058091",
+  "reviewed_at_utc": "2026-10-07T12:21:15.389276+00:00",
+  "reviewer": "/root/continuation_audit, independent reviewer",
+  "schema": "v1-6-wsl-runtime-mirror-preparation-source-review-r1",
+  "scope": "Full324-line copy and exact profile/production runtime reader source; no execution.",
+  "source_sha256": "e7780a577add97c8149b115a8805fd05c56b9d3b62979e79b9d909bb3906c695",
+  "valid_until": "Bound source or evidence changes; retain as append-only history.",
+  "verdict": "REQUEST_CHANGES"
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "v1-6-independent-bounded-evidence-review-r1",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:16:31Z",
+  "verdict": "ACCEPT_DIAGNOSTIC_API_AND_PURE_CLASSIFIER_OBSERVATIONS_ONLY",
+  "append_only": true,
+  "reviewer_execution_performed": false,
+  "reviewer_os_process_checks_performed": false,
+  "native_or_application_qualification": false,
+  "native_campaign_admitted": false,
+  "proposed_helper_r4_source_reviewed": false,
+  "bindings": {
+    "windows-job-setup-r2-result.json": "bbfe56d1ef8e369f3da7571f13403c2f087527923ec2e009aeb26ee9e561919d",
+    "windows-working-set-r1-result.json": "cdeeca0e2946b32b35b24585bdd6aad39c63f0ac76e9191e56b00d69fe2a0ee1",
+    "windows-receipt-registry-r2-result.json": "2013a73c0f086133187191f683eedcefae58d9c714ec6bf01626bddb5d9b722d",
+    "methods/check_windows_job_setup_wsl_r2.py.txt": "1e8978f0a9a7f9b13b3d87749d2590532f93b35eb3aeaafddc2fbb80292115b5",
+    "methods/check_windows_working_set_wsl_r1.py.txt": "b62e344845779a26833060b5d7bf30daf9d7c971c4aac9fb3e364f1584121e28",
+    "methods/check_windows_receipt_registry_wsl_r2.py.txt": "700a25803c2732358f734bfa59b789dc5efc09dc111795a6ea075ef480afef52",
+    "methods/run_worktree_lane_wsl_r7.py.txt": "20bd802f4263111999cc5471897827b3916d9ba48fc933678cd7851703c29ae2",
+    "methods/windows_size_helper_wsl_r3.py.txt": "6404cd2f50998a2a06f3459afd4605a349a6c9c90690eba9d666b6b4caceeb23"
+  },
+  "findings": [],
+  "component_observations": {
+    "job_setup_r2": {
+      "verdict": "ACCEPT_COMPLETED_NO_CHILD_DIAGNOSTIC",
+      "exact_job_working_set_configuration": "REJECTED_BY_HOST_API",
+      "exact_limit_flags": 8969,
+      "exact_winerror": 1314,
+      "same_memory_limits_without_job_working_set_flag": "ACCEPTED_API_OBSERVATION_ONLY",
+      "alternate_limit_flags": 8968,
+      "process_and_job_memory_limit_bytes": 67108864,
+      "work_and_total_elapsed_seconds": 0.031000000000858563,
+      "job_empty_and_closed_confirmed": true,
+      "child_process_creations": 0,
+      "parent_identity": {
+        "pid": 40992,
+        "creation_time_100ns": 134358412215913330
+      }
+    },
+    "own_process_working_set_r1": {
+      "verdict": "ACCEPT_OWN_PROCESS_HARD_MAX_API_OBSERVATION",
+      "minimum_bytes": 1048576,
+      "maximum_bytes": 67108864,
+      "readback_flags_twice": 6,
+      "hard_max_enable_flag_present": true,
+      "hard_max_disable_flag_absent": true,
+      "minimum_is_not_hard_enforced": true,
+      "initial_peak_working_set_bytes": 19750912,
+      "final_peak_working_set_bytes": 20238336,
+      "peak_committed_bytes": 10858496,
+      "work_and_total_elapsed_seconds": 0.01599999999962165,
+      "token_adjustments": 0,
+      "system_or_account_changes": 0,
+      "token_closed_confirmed": true,
+      "child_process_creations": 0,
+      "parent_identity": {
+        "pid": 21284,
+        "creation_time_100ns": 134358417037264640
+      },
+      "token_observation": "Only SeIncreaseWorkingSetPrivilege is present among the three relevant queried privileges; its recorded attributes are zero. No privilege was enabled or granted."
+    },
+    "pure_registry_r2": {
+      "verdict": "ACCEPT_BOUND_GENERIC_REGISTRY_FIXTURE_PASS",
+      "passed": true,
+      "cases_completed": 29,
+      "all_observed_outcomes_match_expected": true,
+      "all_case_input_entries_preserved": true,
+      "native_calls_attempted": 0,
+      "elapsed_seconds": 2.802705280000737,
+      "scope": "Generic terminal/sidecar classification, including new explicit not-created flags; synthetic cleanup flags are not native process exit proof and the historical retirement guard was not exercised."
+    }
+  },
+  "claim_limits": [
+    "Read and hash-bound the archived execution receipts and inspected their internally consistent outcomes against accepted source contracts; reviewer did not rerun them or independently inspect the live OS.",
+    "Job diagnostic completion means API errors were recorded and the empty Job was closed. It does not accept the rejected exact Job working-set configuration or authorize dropping the64MiB ceiling.",
+    "Own-process hard working-set success proves an API observation for that one diagnostic process. It proves no suspended launcher/actual-worker support or inherited working-set settings.",
+    "No production helper fixture, full-root parity, active/finalization lifecycle or native campaign has been qualified by these observations."
+  ],
+  "proposed_helper_r4_review_contract": [
+    "Use a new immutable helper revision and separately reviewed exact caller/fixtures; no production source acceptance is recorded here.",
+    "Keep aggregate Job committed-memory ceiling64MiB, process committed-memory64MiB, active-process limit2, kill-on-close and suspended atomic Job assignment unchanged.",
+    "Verify the supervisor's own hard64MiB working-set state before spawning; verify the exact suspended launcher before resume; verify actual worker PID/creation/member identity and hard maximum before granting traversal.",
+    "Record/read back exact maximum64MiB with hard-max enable and no hard-max disable; fail closed on every API, identity or binding error without token changes or system privilege grants.",
+    "Preserve two-second worker work, four-second supervisor total, hard guard, exact ownership/exit/job-empty proof, source/interpreter pins, bounded metadata publication and original native admission clocks/baselines.",
+    "Earn new controlled helper, real-root parity and lifecycle execution evidence under unchanged caps before native commands."
+  ]
+}

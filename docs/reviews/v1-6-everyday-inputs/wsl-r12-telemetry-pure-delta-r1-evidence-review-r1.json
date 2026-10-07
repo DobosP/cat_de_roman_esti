@@ -1,0 +1,44 @@
+{
+  "all_prior_failures_retained": true,
+  "artifact_bindings": {
+    "wsl-r12-telemetry-pure-delta-r1-parent.json": "05e2e499679914c375441ad46f2ebc842cd2430293148ff4d7a408e49943d124",
+    "wsl-r12-telemetry-pure-delta-r1-result.json": "0ed970af7c6c21ee25af0d9fe42eea2b992ddd790c4e6fc33c76a4bf211a21a1",
+    "wsl-r12-telemetry-pure-delta-r1-stderr.txt": "02908d9d4caaa21f92a2d6ef9f1e3f8b1b43ff2ceff6f35b355cc1db78af41a1",
+    "wsl-r12-telemetry-pure-delta-r1-stdout.json": "1d06d500ad5de853e2814b4dce3258e5d7e63f15dacef2dcf08805d321c7e764"
+  },
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "fixture": "r12-telemetry-pure-delta-r1",
+  "independent_checks": [
+    "All20 unique accepted-source case names present; original/copied raw stdout semantically equals exact result; parent exit/bounds/source and Linux Python pre/post evidence consistent.",
+    "Live ext4 original result exactly0ed970af...; normal mode regular single-link4 bytes exact b470b84cf0cd3189e10615bffea7d5cbd9f61134ba1c2cfd513ddd45b776a5f6. Wrong-mode3 bytes and hardlink pair(nlink2) plus symlink retained, coherent with adversaries.",
+    "242-byte stderr is only the preserved Python3.14 SyntaxWarning about unchanged runner return-in-finally source, not an execution failure. No environment secret values are printed."
+  ],
+  "installation_approval": false,
+  "interpreter_evidence": "Parent records immediate pre/post Linux Python52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41,3.14.4,opt0,no_bytecode; no prior pure-run prehash gap is claimed for these executions.",
+  "limits": [
+    "Only isolated mode/environment/readset predicates tested; namespace checks stubbed and R11 cases deliberately not repeated.",
+    "Fixture modified only fresh owned synthetic ext4 mode files; no runtime Go invocation or actual/global telemetry setting observation is claimed.",
+    "No R12 actual process/lifecycle/queued-stop, host resources/helper cleanup or native coverage acceptance."
+  ],
+  "native_pass": false,
+  "nonce": "ced16e5171ef456c8b8bec6b9503aa96",
+  "observed": {
+    "child_elapsed_seconds": 0.10775558699970134,
+    "exit_code": 0,
+    "parent_elapsed_seconds": 0.6635765,
+    "passed_cases": 20,
+    "report_bytes": 2123,
+    "same_path_fixture_mode_mutations": 4,
+    "unchanged_R11_cases_reexecuted": 0
+  },
+  "original_failed_native_R1_clock_renewed": false,
+  "read_only_audit_performed": true,
+  "reviewed_at_utc": "2026-10-07T13:24:58.239146+00:00",
+  "reviewer": "/root/continuation_audit, independent evidence reviewer",
+  "schema": "v1-6-pure-controlled-fixture-evidence-review-r1",
+  "source_bindings": {
+    "methods/check_r12_telemetry_delta_pure_wsl_r1.py.txt": "5b515c012dc32fc8b88e19786c3e54b26f039c30ced1b2773c6f64fa0f4fbb74",
+    "methods/run_worktree_lane_wsl_r12.py.txt": "77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0"
+  },
+  "verdict": "ACCEPT_PURE_CONTROLLED_FIXTURE_OBSERVATION_ONLY"
+}

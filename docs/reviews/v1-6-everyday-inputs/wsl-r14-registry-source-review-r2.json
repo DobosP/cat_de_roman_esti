@@ -1,0 +1,64 @@
+{
+  "R4_instrumentation_limitation": "The retired callback counter could briefly count an already done future as unfinished before its completion callback ran, causing a false peak. FinalR5 filters future.done directly; no R4 execution evidence is claimed.",
+  "component_verdicts": {
+    "focused_fixture_r5": "ACCEPT_SOURCE_ONLY",
+    "generic_capture_r2": "ACCEPT_SOURCE_ONLY_REUSED_EXACT_BYTES",
+    "runner_r14": "ACCEPT_SOURCE_ONLY_REUSED_EXACT_BYTES"
+  },
+  "exact_source_sha256": {
+    "methods/check_r14_registry_delta_pure_wsl_r5.py.txt": "1b3e198c52f36e3ddab250f8bdd8a03987f7e1d8ba23688fc34d81fc8c6348b5",
+    "methods/invoke_pure_capture_r2.ps1.txt": "37e8a68ea8d3432f2697f964d190751fd7487a79cc22fc0cd17b3d5b7b33a3f9",
+    "methods/run_worktree_lane_wsl_r14.py.txt": "42543f0b8a6e9f37a55410ec1800b59c91b61f069c9913309cde9371f6501144"
+  },
+  "findings": [],
+  "fixture_qualified_source_scope": {
+    "bound_runner_sha256": "42543f0b8a6e9f37a55410ec1800b59c91b61f069c9913309cde9371f6501144",
+    "declared_cases": 25,
+    "entry_pending_signal_requires_zero_IO": true,
+    "exact16KiB_accept_and16KiB_plus1_refusal": true,
+    "fresh_C_owned_tiny_ledgers": true,
+    "fresh_read_permission_failure_propagates": true,
+    "no_application_native_helper_or_pool_execution_by_reviewer": true,
+    "one_intended_self_signal_not_foreign_process_cleanup": true,
+    "optimized_or_bytecode_writing_interpreter_refused": true,
+    "original_receipt_predicate_branches_covered_by_focused_cases": true,
+    "own_RSS_limit_bytes": 2147483648,
+    "pending_signal_noninterruptible_sweep_completes_fresh_validation": true,
+    "real_self_SIGTERM_after_join_requires_interruption": true,
+    "report_limit_bytes": 131072,
+    "two_fresh_sweeps_check_all_entry_types_and_single16385_byte_read_requests": true,
+    "work_and_watchdog_seconds": 10,
+    "worker_error_stops_refill_and_joins_sibling": true
+  },
+  "preserved_unexecuted_variants": {
+    "methods/check_r14_registry_delta_pure_wsl_r1.py.txt": "4f2991f86ac46923561f2b70e96b11b124d736275a51e1e944e83c3ebf26ada2",
+    "methods/check_r14_registry_delta_pure_wsl_r2.py.txt": "d323dcb88b7971f7733e178bd00dde046f6049f1e5d5a1f04fdd2e530f0c1af2",
+    "methods/check_r14_registry_delta_pure_wsl_r4.py.txt": "ba4a26a8e8ab1f1e96a931fc92e60554223da280d55e04f501a7d2cc3e7ff4f7"
+  },
+  "prior_runner_and_rejected_fixture_receipt": {
+    "path": "wsl-r14-registry-source-review-r1.json",
+    "sha256": "1c38c67cd2d76c51178ffe976a9ed27240f29f465c26482a584b1621bffcbd03"
+  },
+  "remaining_execution_preconditions": [
+    "One exact materialized R5 control run with immediate pre/post interpreter/source pins, real25 PASS evidence, all started pool workers joined and10s budget observed.",
+    "Execution receipt must retain one actual self-delivery and no unplanned signal; no old217/57/20/24 whole suite rerun is claimed.",
+    "Retargeted R18 actual and CLI sources require separate exact source acceptance before use.",
+    "No conclusion that six finalization or eight queued full accounts fit24s follows from source acceptance; actual gates remain required.",
+    "Existing nativeR1/lifecycle failures and baseline752431588/caps are preserved; no failed clock may renew."
+  ],
+  "repair_verification": {
+    "R2_unexpected_signal_finding_repaired": true,
+    "actual_worker_lstat_peak_two_and_unfinished_peak_two_assertions": true,
+    "expected_deliveries_exactly_one": true,
+    "noninterruptible_pending_flag_requires_all8_lstats_and4_reads": true,
+    "planned_marker_surrounds_single_self_SIGTERM": true,
+    "same_registry_accepted_before_fresh_mutation_then_refused": true,
+    "self_signal_case_named_post_final_join_precisely": true,
+    "unexpected_signal_retained_and_refused_by_handler_guard_and_pass": true,
+    "unfinished_future_metric_uses_actual_done_state_not_callback_timing": true
+  },
+  "review_execution": "Only exact source reads/hash/diff/AST review. Reviewer executed no candidate code, threads, signal, helper, Go or native command.",
+  "reviewed_at_utc": "2026-10-07T15:56:12.848774+00:00",
+  "reviewer": "independent continuation_audit",
+  "schema": "v1-6-r14-registry-source-review-r2"
+}

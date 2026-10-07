@@ -1,0 +1,46 @@
+{
+  "R1_preserved_unexecuted": true,
+  "all_prior_failures_preserved": true,
+  "bindings": {
+    "methods/check_r13_accounting_signal_delta_pure_wsl_r1.py.txt": "e6593f26905ca412e010ed5a6d223d2274f8cb5721cbf4eb53a6ee159fda2dcf",
+    "methods/invoke_pure_capture_r2.ps1.txt": "37e8a68ea8d3432f2697f964d190751fd7487a79cc22fc0cd17b3d5b7b33a3f9",
+    "methods/run_worktree_lane_wsl_r13.py.txt": "adda73a297bad19565b95d3d1ece92a842b9cccb8bf994e0089d0f2474b37858",
+    "wsl-r13-source-review-r1.json": "f236ab2a4299c9c6077b6a6da6c05e8b6d20e1ad58fe030aae25867f62e7c5fb"
+  },
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "capture_source_acceptance": {
+    "changes": "Accurate real-self-signal/synthetic-ledger/callback scope plus all four Dlabels checked before materialization/launch. Other pin/raw capture logic unchanged.",
+    "exact_source_and_materialized_sha256": "37e8a68ea8d3432f2697f964d190751fd7487a79cc22fc0cd17b3d5b7b33a3f9",
+    "execution_dependency": "Fixture rejected until corrected exact source independently accepted; capture acceptance alone grants no execution.",
+    "limits": "15-second parent watchdog is recovery only, not a claim of10-second fixture success. Evidence acceptance must verify all actual child/parent durations against required bounds and exact24 results; timeout does not prove Linux closure."
+  },
+  "components": {
+    "focused_fixture": "REQUEST_CHANGES",
+    "parent_capture_R2": "ACCEPT_CAPTURE_SOURCE_ONLY"
+  },
+  "execution_authorized": false,
+  "finding": {
+    "fixture_lines": "87-89,208-212",
+    "id": "F1",
+    "issue": "module.X is synthetic directory/X under mountedC, so production measured_size routes both requested roots to Windows. linux_roots=[] then violates the exact[wholeX] requirement before controlled HelperBoundary. Noninterruptible case14 cannot reach expected denied helper, and final helpercount1 assertion cannot pass.",
+    "priority": 1,
+    "required_fix": "Preserve R1 unexecuted. Append fixtureR2 using a fresh same-UUID owned actualext4 synthetic X path with resolved/root ownership checks; retain all assertions/caps and no returned host count/helper execution.",
+    "runner_lines": "342-345"
+  },
+  "fixture_bytes": 17974,
+  "fixture_lines": 287,
+  "native_pass": false,
+  "original_failed_clock_renewed": false,
+  "otherwise_accepted_fixture_scope": [
+    "24 actual named controls counted statically: early pending signal zeroIO/helper; real selfTERM/INT delivery to exact flag handler at history/registry enumeration/lstat/read/digest boundaries; no foreign-process cleanup.",
+    "Synthetic tiny digest-result marker files and two final/four typed registry entries explicitly model history/OS/helper resources; no production receipts/hashes fabricated or accepted host count returned.",
+    "Fresh mutation/malformed/pending/orphan/nonregular/IO refusal controls, noninterruptible full-history/default-registry traversal and exact source pre/post binds retained.",
+    "10-second watchdog/work guard,2GiB ownRSS,128KiB report; ordinary nonoptimized-B and subprocess/Popen denied."
+  ],
+  "reviewed_at_utc": "2026-10-07T15:08:06.707575+00:00",
+  "reviewer": "/root/continuation_audit, independent source reviewer",
+  "schema": "v1-6-wsl-r13-accounting-signal-delta-source-review-r1",
+  "scope": "Full287-line focused fixture; full generic capture and exact prior-to-R2 diff. No candidate execution.",
+  "valid_until": "Rejected unexecuted fixture stays history; independently review append-only topology repair before any execution.",
+  "verdict": "REQUEST_CHANGES"
+}

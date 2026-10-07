@@ -115,3 +115,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0178](0178-v1-5-hot-chocolate-discovery.md) — one reviewed world-local hot-chocolate discovery with preserved progress and native gates.
 
 - [0179](0179-resume-v1-6-in-original-chat.md) — continue the existing V1.6 task and sequential version loop in the original chat with unchanged gates.
+
+- [0180](0180-stop-windows-loop-publish-linux-checkpoint.md) — stop the Windows version loop and publish the explicitly requested partial V1.6 feature checkpoint for Linux.

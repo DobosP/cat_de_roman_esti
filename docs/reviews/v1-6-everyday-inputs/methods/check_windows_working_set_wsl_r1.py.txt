@@ -1,0 +1,229 @@
+"""Bounded own-process Windows hard working-set diagnostic; no children.
+
+CLI: diagnostic.py FRESH_OWNED_RESULT_JSON
+Reads only three relevant current-token privilege names/attributes (TOKEN_QUERY).
+Attempts and reads back a 64MiB HARDWS maximum only on this short-lived process.
+No token adjustment, OS privilege grant, account/admin change or helper execution.
+Primary API contracts: Microsoft SetProcessWorkingSetSizeEx / GetProcessWorkingSetSizeEx,
+OpenProcessToken / GetTokenInformation / TOKEN_PRIVILEGES / LookupPrivilegeValueW.
+"""
+import ctypes
+from ctypes import wintypes
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import sys
+import threading
+import time
+
+STARTED = time.monotonic()
+sys.dont_write_bytecode = True
+S = Path('C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+PYTHON = Path('C:/Users/Paul Work/AppData/Local/hermes/hermes-agent/venv/Scripts/python.exe')
+PYTHON_SHA = '885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8'
+MEMORY = 64 << 20
+MIN_WS = 1 << 20
+HARD_MAX = 4
+PRIVILEGES = ('SeIncreaseWorkingSetPrivilege', 'SeIncreaseQuotaPrivilege', 'SeIncreaseBasePriorityPrivilege')
+
+
+class LUID(ctypes.Structure):
+    _fields_ = [('LowPart', wintypes.DWORD), ('HighPart', wintypes.LONG)]
+
+
+class LUID_ATTRIBUTES(ctypes.Structure):
+    _fields_ = [('Luid', LUID), ('Attributes', wintypes.DWORD)]
+
+
+class TOKEN_PRIVILEGES_ONE(ctypes.Structure):
+    _fields_ = [('PrivilegeCount', wintypes.DWORD), ('Privileges', LUID_ATTRIBUTES * 1)]
+
+
+class MEMORY_COUNTERS(ctypes.Structure):
+    _fields_ = [('cb', wintypes.DWORD), ('PageFaultCount', wintypes.DWORD)] + [
+        (n, ctypes.c_size_t) for n in ('PeakWorkingSetSize', 'WorkingSetSize',
+        'QuotaPeakPagedPoolUsage', 'QuotaPagedPoolUsage', 'QuotaPeakNonPagedPoolUsage',
+        'QuotaNonPagedPoolUsage', 'PagefileUsage', 'PeakPagefileUsage')]
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def main(result_path):
+    if sys.platform != 'win32' or sys.version.split()[0] != '3.11.15' or Path(sys.executable).resolve() != PYTHON.resolve() or digest(PYTHON) != PYTHON_SHA:
+        raise RuntimeError('exact native Windows interpreter required')
+    folder = (S / 'probe/windows-working-set-r1').resolve()
+    result_path = Path(result_path).resolve()
+    if result_path.parent != folder or not re.fullmatch(r'[0-9a-f]{32}\.json', result_path.name):
+        raise ValueError('fresh owned result location required')
+    folder.mkdir(parents=True, exist_ok=True)
+    source_sha = digest(__file__)
+    K = ctypes.WinDLL('kernel32', use_last_error=True)
+    A = ctypes.WinDLL('advapi32', use_last_error=True)
+    K.GetCurrentProcess.argtypes, K.GetCurrentProcess.restype = [], wintypes.HANDLE
+    K.GetProcessTimes.argtypes = [wintypes.HANDLE] + [ctypes.POINTER(wintypes.FILETIME)] * 4
+    K.GetProcessTimes.restype = wintypes.BOOL
+    K.GetProcessWorkingSetSizeEx.argtypes = [wintypes.HANDLE, ctypes.POINTER(ctypes.c_size_t), ctypes.POINTER(ctypes.c_size_t), ctypes.POINTER(wintypes.DWORD)]
+    K.GetProcessWorkingSetSizeEx.restype = wintypes.BOOL
+    K.SetProcessWorkingSetSizeEx.argtypes = [wintypes.HANDLE, ctypes.c_size_t, ctypes.c_size_t, wintypes.DWORD]
+    K.SetProcessWorkingSetSizeEx.restype = wintypes.BOOL
+    K.K32GetProcessMemoryInfo.argtypes = [wintypes.HANDLE, ctypes.POINTER(MEMORY_COUNTERS), wintypes.DWORD]
+    K.K32GetProcessMemoryInfo.restype = wintypes.BOOL
+    K.CloseHandle.argtypes, K.CloseHandle.restype = [wintypes.HANDLE], wintypes.BOOL
+    A.OpenProcessToken.argtypes = [wintypes.HANDLE, wintypes.DWORD, ctypes.POINTER(wintypes.HANDLE)]
+    A.OpenProcessToken.restype = wintypes.BOOL
+    A.GetTokenInformation.argtypes = [wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD, ctypes.POINTER(wintypes.DWORD)]
+    A.GetTokenInformation.restype = wintypes.BOOL
+    A.LookupPrivilegeValueW.argtypes = [wintypes.LPCWSTR, wintypes.LPCWSTR, ctypes.POINTER(LUID)]
+    A.LookupPrivilegeValueW.restype = wintypes.BOOL
+    def checked(value):
+        if not value:
+            raise ctypes.WinError(ctypes.get_last_error())
+        return value
+    def within_work():
+        if time.monotonic() - STARTED >= 2:
+            raise TimeoutError('own-process diagnostic2s work')
+    process = K.GetCurrentProcess()  # Own-process pseudohandle; never close/signal another process.
+    created, exited, kernel, user = (wintypes.FILETIME() for _ in range(4))
+    checked(K.GetProcessTimes(process, ctypes.byref(created), ctypes.byref(exited), ctypes.byref(kernel), ctypes.byref(user)))
+    report = {'schema': 'v1-6-windows-own-hard-working-set-diagnostic-r1', 'status': 'pending',
+              'parent_pid': os.getpid(), 'parent_creation_time_100ns': (int(created.dwHighDateTime) << 32) | int(created.dwLowDateTime),
+              'diagnostic_sha256': source_sha, 'interpreter_sha256': PYTHON_SHA,
+              'child_process_creations': 0, 'native_or_application_tests': 0,
+              'token_adjustments': 0, 'system_or_account_changes': 0,
+              'own_process_state_lifetime': 'until this diagnostic process exits',
+              'helper_execution_or_qualification': False, 'token_handle_closed_confirmed': False,
+              'requested_minimum_working_set_bytes': MIN_WS, 'requested_maximum_working_set_bytes': MEMORY,
+              'requested_enforcement_flags': HARD_MAX, 'hard_max_verified': False,
+              'abi': {'pointer_bytes': ctypes.sizeof(ctypes.c_void_p), 'luid_bytes': ctypes.sizeof(LUID),
+                      'privilege_entry_bytes': ctypes.sizeof(LUID_ATTRIBUTES),
+                      'privileges_offset': TOKEN_PRIVILEGES_ONE.Privileges.offset}}
+    def publish(first=False):
+        blob = json.dumps(report, indent=2).encode('utf-8') + b'\n'
+        if len(blob) > 16 << 10:
+            raise ValueError('own-process diagnostic receipt16KiB')
+        if first:
+            with result_path.open('xb') as stream:
+                stream.write(blob)
+                stream.flush()
+                os.fsync(stream.fileno())
+        else:
+            pending = result_path.with_name(result_path.name + '.pending')
+            with pending.open('xb') as stream:
+                stream.write(blob)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(pending, result_path)
+    publish(first=True)
+    finished = threading.Event()
+    def hard_guard():
+        if not finished.wait(max(0, 3.7 - (time.monotonic() - STARTED))):
+            os._exit(124)  # No children. Own token handle/state ends; pending receipt retained.
+    threading.Thread(target=hard_guard, daemon=True).start()
+    token = wintypes.HANDLE()
+    def memory_snapshot():
+        within_work()
+        counters = MEMORY_COUNTERS()
+        counters.cb = ctypes.sizeof(counters)
+        checked(K.K32GetProcessMemoryInfo(process, ctypes.byref(counters), counters.cb))
+        value = {'working_set_bytes': int(counters.WorkingSetSize), 'peak_working_set_bytes': int(counters.PeakWorkingSetSize),
+                 'committed_bytes': int(counters.PagefileUsage), 'peak_committed_bytes': int(counters.PeakPagefileUsage)}
+        if max(value.values()) > MEMORY:
+            raise MemoryError('own-process diagnostic64MiB memory')
+        return value
+    def working_set_snapshot():
+        within_work()
+        minimum, maximum, flags = ctypes.c_size_t(), ctypes.c_size_t(), wintypes.DWORD()
+        ctypes.set_last_error(0)
+        accepted = K.GetProcessWorkingSetSizeEx(process, ctypes.byref(minimum), ctypes.byref(maximum), ctypes.byref(flags))
+        error = ctypes.get_last_error()
+        value = {'returned_success': bool(accepted), 'winerror': error, 'minimum_bytes': int(minimum.value),
+                 'maximum_bytes': int(maximum.value), 'enforcement_flags': int(flags.value)}
+        if not accepted:
+            raise ctypes.WinError(error)
+        return value
+    try:
+        report['memory_before'] = memory_snapshot()
+        report['working_set_before'] = working_set_snapshot()
+        within_work()
+        checked(A.OpenProcessToken(process, 0x8, ctypes.byref(token)))  # TOKEN_QUERY only.
+        size = wintypes.DWORD()
+        ctypes.set_last_error(0)
+        accepted = A.GetTokenInformation(token, 3, None, 0, ctypes.byref(size))  # TokenPrivileges=3.
+        error = ctypes.get_last_error()
+        if accepted or error != 122 or not (TOKEN_PRIVILEGES_ONE.Privileges.offset <= size.value <= 64 << 10):
+            raise RuntimeError('bounded token-privileges buffer query failed: ' + str(error))
+        within_work()
+        buffer = ctypes.create_string_buffer(size.value)
+        checked(A.GetTokenInformation(token, 3, buffer, size.value, ctypes.byref(size)))
+        count = wintypes.DWORD.from_buffer(buffer).value
+        offset, entry_size = TOKEN_PRIVILEGES_ONE.Privileges.offset, ctypes.sizeof(LUID_ATTRIBUTES)
+        if count > 256 or offset + count * entry_size > size.value or size.value > len(buffer):
+            raise ValueError('bounded token-privileges encoding required')
+        selected = {}
+        for name in PRIVILEGES:
+            within_work()
+            luid = LUID()
+            checked(A.LookupPrivilegeValueW(None, name, ctypes.byref(luid)))
+            selected[name] = {'present': False, 'enabled': False, 'enabled_by_default': False}
+            for index in range(count):
+                item = LUID_ATTRIBUTES.from_buffer(buffer, offset + index * entry_size)
+                if item.Luid.LowPart == luid.LowPart and item.Luid.HighPart == luid.HighPart:
+                    selected[name] = {'present': True, 'attributes': int(item.Attributes),
+                                      'enabled': bool(item.Attributes & 2), 'enabled_by_default': bool(item.Attributes & 1)}
+                    break
+        report['relevant_current_token_privileges'] = selected
+        publish()
+        within_work()
+        ctypes.set_last_error(0)
+        accepted = K.SetProcessWorkingSetSizeEx(process, MIN_WS, MEMORY, HARD_MAX)
+        error = ctypes.get_last_error()
+        report['set_hard_max'] = {'returned_success': bool(accepted), 'winerror': error}
+        publish()
+        if not accepted:
+            raise ctypes.WinError(error)
+        current = working_set_snapshot()
+        report['working_set_after'] = current
+        if current['minimum_bytes'] != MIN_WS or current['maximum_bytes'] != MEMORY or not (current['enforcement_flags'] & HARD_MAX) or current['enforcement_flags'] & 8:
+            raise RuntimeError('exact64MiB process hard maximum not verified')
+        report['hard_max_verified'] = True
+        report['memory_after'] = memory_snapshot()
+        current = working_set_snapshot()
+        report['working_set_at_work_completion'] = current
+        if current != report['working_set_after']:
+            raise RuntimeError('own process hard maximum drifted')
+        report['work_finished_elapsed_seconds'] = time.monotonic() - STARTED
+        if report['work_finished_elapsed_seconds'] >= 2:
+            raise TimeoutError('own-process diagnostic2s total work')
+        report['status'] = 'diagnostic_completed'
+    except BaseException as exc:
+        report.update(status='failed', failure=type(exc).__name__, detail=str(exc)[:2048], failure_winerror=getattr(exc, 'winerror', None))
+        report.setdefault('work_finished_elapsed_seconds', time.monotonic() - STARTED)
+    finally:
+        if token:
+            try:
+                checked(K.CloseHandle(token))
+                report['token_handle_closed_confirmed'] = True
+            except BaseException as exc:
+                report.update(status='failed', cleanup_error=str(exc)[:2048])
+        else:
+            report['token_handle_not_created'] = True
+            report['token_handle_closed_confirmed'] = True
+    if digest(__file__) != source_sha or digest(PYTHON) != PYTHON_SHA:
+        report.update(status='failed', failure='source/interpreter binding drift')
+    report['elapsed_seconds'] = time.monotonic() - STARTED
+    if report['elapsed_seconds'] >= 4 or not report['token_handle_closed_confirmed']:
+        report['status'] = 'failed'
+    publish()
+    print(json.dumps(report))
+    finished.set()
+    return 0 if report['status'] == 'diagnostic_completed' else 1
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        raise SystemExit('diagnostic.py FRESH_OWNED_RESULT_JSON')
+    raise SystemExit(main(sys.argv[1]))

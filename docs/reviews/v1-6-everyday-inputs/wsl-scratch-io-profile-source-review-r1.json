@@ -1,0 +1,78 @@
+{
+  "schema": "v1-6-wsl-scratch-io-profile-source-review-r1",
+  "valid_until": "Bound method bytes, R9/R4/runtime pins, ownership/root paths, resource limits or execution contract changes — preserve this review as history and review the new exact source.",
+  "reviewed_at_utc": "2026-10-07 11:39:29 UTC",
+  "reviewer": "/root/continuation_audit; independent of profile author",
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "method": {
+    "path": "methods/check_scratch_io_wsl_ext4_r1.py.txt",
+    "sha256": "121490ad8322f74064d7abf953b38773fcc76622873b973142d7d4609fe7dda7",
+    "bytes": 23095,
+    "lines": 529
+  },
+  "scope": "Independent full source review only. No profile, fixture, helper, Go/application command, native campaign or OS/resource probe executed by reviewer. Only this dedicated append-only review receipt is written.",
+  "findings": [],
+  "exact_dependencies": {
+    "R9_source_path": "S/probe/run_worktree_lane_wsl_r9.py",
+    "R9_sha256": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+    "R4_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+    "failed_native_result_path": "D/v1-6-wsl-native-r1-result.json",
+    "failed_native_result_sha256": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "retained_original_baseline_bytes": 752431588,
+    "known_failed_native_state": "R1 remains failed and cannot resume or renew. Its passing prefix and failed receipts are retained unchanged; the profile does not invoke runner main or load_prefix."
+  },
+  "accepted_source_properties": [
+    {
+      "lines": "1-8,23-57,393-426,487-492",
+      "observation": "Synthetic IO-only scope, independent40-second work/50-second total timer, exact own-source argument, preserved failed native result and original752431588-byte baseline. No mirror, original cache eviction, deletion, fake Git, app test or native PASS is claimed."
+    },
+    {
+      "lines": "85-107,131-143,393-421,434-441",
+      "observation": "Canonical C and ext4 home ancestry requires literal absolute actual directories with exact resolved paths; fresh targets use lstat-based absence and exclusive creation. ext4 home must be a distinct ext4 device. X_TASK must be absent or empty; existing or redirected targets and IO errors refuse. New writes stay in exact owned C/ext4 profile subtrees or the accepted metadata registry."
+    },
+    {
+      "lines": "156-201,244-265,464-479",
+      "observation": "Initial17GiB and continuing16GiB disk floors are checked for C and ext4, with WSL MemAvailable16GiB and own-processRSS2GiB. Before every guarded operation the retained before-sample plus full64MiB profile allowance must fit the original1GiB growth ceiling. Fresh final C+ext4 accounting and512KiB publication reserve are checked inside both ceilings and disk floors. Baseline is not replaced with a profile-local cumulative baseline."
+    },
+    {
+      "lines": "204-241,244-265",
+      "observation": "Ordinary nonoptimized Python -B is required before exact R9 inert import. Runner roots/source/helper pins are rechecked. A narrow subprocess proxy permits only the accepted R4 invocation, original seven C roots, owned UUID receipt registry and unchanged timeout/pipe/check policy, at most twice. Existing registry refusal and confirmed final receipts remain production R9 semantics; ext4 uses the unchanged reviewed Linux fresh scanner over all X_TASK bytes."
+    },
+    {
+      "lines": "274-390,454-459",
+      "observation": "Each matched workload creates64x16KiB small files plus one8MiB file,9MiB source and9MiB clone,18MiB per filesystem and36MiB total. Both130-file relative-path/size/SHA manifests must match exactly. Fresh shape checks require regular single-link files. Both perform130 file fsyncs and19 directory fsyncs. CPU/wall and /proc/self/io observations are recorded without cold-cache or native throughput claims."
+    },
+    {
+      "lines": "63-72,482-529",
+      "observation": "SIGTERM/SIGINT and local SIGALRM mark interruption and notify imported accounting logic. Signals do not interrupt the accepted helper wait/ownership protocol midway. Failures remain failed; uncertain/incomplete helper return cannot acquire a confirmed cleanup claim. Failure finalization uses only remaining original50-second profile budget, preserves artifacts, and emits failed_publication stdout if no safely owned receipt root exists."
+    },
+    {
+      "lines": "181-201,508-529",
+      "observation": "Pending/result reports are exclusive no-follow creations, UTF-8 JSON bounded128KiB, flushed/fsynced with directory fsync. Publication is guarded before and after; total elapsed must remain below50s for accepted stdout/zero exit. A written receipt by itself does not override failed/late publication or a nonzero process exit."
+    }
+  ],
+  "execution_conditions": [
+    "Materialize this exact source as a fresh regular file under owned S/probe, bind SHA121490ad8322f74064d7abf953b38773fcc76622873b973142d7d4609fe7dda7, and invoke ordinary nonoptimized Python with -B and a fresh UUID32. Record the actual Linux interpreter path/hash/version before launch.",
+    "Keep canonical R, owned C scratch and ext4 task roots under exclusive writer ownership while the diagnostic runs. No other source, registry, cache, fixture, scratch or report writer may change these measured roots concurrently.",
+    "Freshly verify the original failed result, prefix/archive preservation, exact production R9/R4/Windows interpreter pins and terminal helper registry before invocation. No previous pending/unconfirmed helper or reused profile root may be bypassed.",
+    "Capture stdout, stderr, exit code and host wall time under an external50-second total acceptance bound. Accept only matching completed_synthetic_io_profile stdout, zero exit, bound result bytes and elapsed within cap. Retain failed_publication/timeout diagnostics and every owned artifact; no fallback original-root write or deletion.",
+    "Refresh initial17GiB C/ext4 free-space,16GiB WSL memory and all original-baseline1GiB headroom conditions. The Windows backing C volume remains required even though ext4 is distinct.",
+    "A successful profile supplies only matched synthetic path/IO observations. A helper failure, IO error, resource refusal, interruption or late publication remains failure and grants no native qualification."
+  ],
+  "interpretation_limits": [
+    "Timed operations include the repeated resource-guard overhead; /proc/self/io covers the profile process, not aggregate native compiler or Windows helper IO.",
+    "The fixed sequence is NTFS then ext4 using freshly written ordinary cached synthetic files. It is one paired observation, not a randomized/cold-cache benchmark or proof of the earlier campaign's cause.",
+    "No native Go, CPU/race throughput or all19-test completion guarantee follows from profile success. Any later scratch/mirror adaptation requires exact source/root/runtime review, fresh mixed-volume accounting and applicable host qualification.",
+    "The permanently failed native R1 clock and original prefix are unchanged. This independent bounded diagnostic clock does not renew, retry or resume R1, and does not grant a new native campaign, landing, push or deployment.",
+    "Catchable signals are covered to the described scope; SIGKILL, host loss and uninterruptible filesystem waits have no safety/cleanup guarantee."
+  ],
+  "execution": {
+    "profile_runs": 0,
+    "metadata_helper_runs": 0,
+    "Go_or_application_runs": 0,
+    "native_campaigns": 0,
+    "clock_renewals": 0,
+    "source_edits": 0,
+    "sole_write": "wsl-scratch-io-profile-source-review-r1.json"
+  }
+}

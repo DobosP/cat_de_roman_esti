@@ -1,0 +1,287 @@
+"""Focused R13 early-accounting signal controls; no application/Go/helper execution.
+Usage: qualified Python -B FILE UUID32 FIXTURE_SHA256 COPIED_R13_METHOD.py
+Only new interruption paths and narrow unchanged-validation controls run here.
+History digest values and OS/helper resources are synthetic; real self-SIGTERM/
+SIGINT delivery exercises the exact flag handler, not foreign-process cleanup.
+"""
+import contextlib
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import signal
+import stat
+import sys
+import time
+import warnings
+
+if not sys.dont_write_bytecode or sys.flags.optimize!=0:
+    raise RuntimeError('ordinary nonoptimized qualified Python -B required')
+S=Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+METHOD_SHA='adda73a297bad19565b95d3d1ece92a842b9cccb8bf994e0089d0f2474b37858'
+ROOT=S/'probe/r13-accounting-signal-delta-r1'
+EXPECTED_CASES=24
+class HelperBoundary(Exception):pass
+
+@contextlib.contextmanager
+def patched(obj,name,value):
+    old=getattr(obj,name);setattr(obj,name,value)
+    try:yield
+    finally:setattr(obj,name,old)
+
+def main():
+    started=time.monotonic();cases=[];error=None;module=None;injected=None;deliveries=0
+    if len(sys.argv)!=4 or not re.fullmatch('[0-9a-f]{32}',sys.argv[1]) or not re.fullmatch('[0-9a-f]{64}',sys.argv[2]):
+        raise ValueError('fresh UUID32, exact fixture SHA and method path required')
+    own=Path(__file__)
+    if hashlib.sha256(own.read_bytes()).hexdigest()!=sys.argv[2]:
+        raise ValueError('fixture bytes differ')
+    method=Path(sys.argv[3])
+    if method!=S/'probe/run_worktree_lane_wsl_r13.py':
+        raise ValueError('exact copied R13 method path required')
+    def guard():
+        if time.monotonic()-started>=10:raise TimeoutError('pure10second cap')
+        for line in Path('/proc/self/status').read_text().splitlines():
+            if line.startswith('VmRSS:'):
+                if int(line.split()[1])*1024>2*(1<<30):raise RuntimeError('pure RSS2GiB cap')
+                break
+        else:raise RuntimeError('own RSS unavailable')
+    def planned_handler(number,frame):
+        nonlocal deliveries
+        if injected!=number:raise InterruptedError('unplanned fixture signal')
+        module.on_signal(number,frame);deliveries+=1
+    def alarm(number,frame):raise TimeoutError('pure10second watchdog')
+    prior_handlers={value:signal.getsignal(value) for value in (signal.SIGTERM,signal.SIGINT,signal.SIGALRM)}
+    signal.signal(signal.SIGALRM,alarm);signal.setitimer(signal.ITIMER_REAL,10)
+    if ROOT.resolve()!=ROOT:raise ValueError('pure parent redirect')
+    ROOT.mkdir(exist_ok=True)
+    directory=ROOT/sys.argv[1]
+    directory.mkdir(mode=0o700)
+    def deliver(number):
+        nonlocal injected
+        injected=number
+        try:
+            os.kill(os.getpid(),number)
+            assert module.received_signal==number
+        finally:injected=None
+    def must_raise(kind,call):
+        try:call()
+        except kind:return
+        raise AssertionError('expected '+kind.__name__)
+    def case(name,call):
+        guard();module.received_signal=None
+        call();guard();cases.append({'name':name,'passed':True})
+    try:
+        meta=method.lstat()
+        if (not stat.S_ISREG(meta.st_mode) or meta.st_nlink!=1 or method.resolve()!=method or
+                hashlib.sha256(method.read_bytes()).hexdigest()!=METHOD_SHA):
+            raise ValueError('exact unredirected R13 source required')
+        spec=importlib.util.spec_from_file_location('focused_r13_delta',method)
+        module=importlib.util.module_from_spec(spec)
+        with warnings.catch_warnings(record=True) as diagnostics:
+            warnings.simplefilter('always',SyntaxWarning)
+            spec.loader.exec_module(module)
+        diagnostic_messages=[str(value.message) for value in diagnostics]
+        module.S=directory/'S';module.D=directory/'D';module.R=directory/'R';module.X=directory/'X'
+        for path in (module.S/'probe',module.S/'tools',module.D/'methods',module.R,module.X):
+            path.mkdir(parents=True)
+        module.WINDOWS_HELPER=module.S/'probe/helper.py'
+        module.WINDOWS_PYTHON=module.S/'tools/python.exe'
+        history={
+            module.S/'probe/windows-size-helper-r2/27a9d5d9e8c54627aefa0c353dcc5dcb.json':'131afdd601012e58f3395b7be3f429e79453f20d9dfa6ea1b2a6a0676fe04e2b',
+            module.S/'probe/windows-size-helper-fixtures/r2-reviewed-1/check-result.json':'140e961e8ed5833d5e3209121d6fc0c12e0d613f6785bff104246f18ebb6dbb1',
+            module.D/'windows-helper-r2-prelaunch-pending-r1.json':'131afdd601012e58f3395b7be3f429e79453f20d9dfa6ea1b2a6a0676fe04e2b',
+            module.D/'windows-helper-r2-specific-prelaunch-retirement-r1.json':'9568ea89da271a71475f6f5fa2858aa40a466983dd49c7fb56324a2af49052a4',
+            module.D/'windows-helper-r2-specific-retirement-review-r1.json':'f08ba7eb9f9c09db173f4ce77488038a927f862ca669ede20742c56fddef3425',
+            module.D/'methods/windows_size_helper_wsl_r2.py.txt':'c708c0c88a8f8cd4ef76857dd9f03bbac4cf77f74d45548e0247c4051dda39d8'}
+        tools={module.WINDOWS_HELPER:module.WINDOWS_HELPER_SHA,module.WINDOWS_PYTHON:module.WINDOWS_PYTHON_SHA}
+        for path,value in {**history,**tools}.items():
+            path.parent.mkdir(parents=True,exist_ok=True);path.write_text(value)
+        counts={'digest':0,'lstat':0,'read':0,'helper':0}
+        def marker_digest(path):
+            guard();counts['digest']+=1
+            # Fresh tiny fixture file contents stand for the digest result; no
+            # real history hash or production receipt is fabricated by this test.
+            return Path(path).read_text()
+        module.digest=marker_digest
+        def denied_helper(*args,**kwargs):
+            counts['helper']+=1;raise HelperBoundary('controlled denied OS helper boundary')
+        def denied_popen(*args,**kwargs):raise AssertionError('no fixture children permitted')
+        real_run=module.subprocess.run;real_popen=module.subprocess.Popen
+        module.subprocess.run=denied_helper;module.subprocess.Popen=denied_popen
+        signal.signal(signal.SIGTERM,planned_handler);signal.signal(signal.SIGINT,planned_handler)
+        def registry(name):
+            folder=directory/name;folder.mkdir()
+            for number in (1,2):
+                nonce=('%032x'%number)
+                target=folder/(nonce+'.json')
+                obj={'schema':'v1-6-windows-fresh-size-helper-r2','nonce':nonce,
+                     'receipt_path':module.windows_path(target),'status':'completed',
+                     'worker_exit_confirmed':True,'launcher_exit_confirmed':True,'job_empty':True}
+                target.write_text(json.dumps(obj))
+                (folder/(nonce+'.worker-output.json')).write_text('{}\n{}\n')
+            return folder
+        receipts=registry('valid-registry')
+        live_receipts=module.S/'probe/windows-size-helper-r4';live_receipts.mkdir()
+        for path in receipts.iterdir():
+            value=path.read_text()
+            if len(path.stem)==32:
+                obj=json.loads(value);obj['receipt_path']=module.windows_path(live_receipts/path.name);value=json.dumps(obj)
+            (live_receipts/path.name).write_text(value)
+        original_lstat=Path.lstat;original_iter=Path.iterdir;original_read=Path.read_bytes
+        def no_io_entry(call):
+            def forbidden(*args,**kwargs):raise AssertionError('early interruption touched IO/digest/helper')
+            module.received_signal=signal.SIGTERM
+            with patched(Path,'lstat',forbidden),patched(Path,'iterdir',forbidden),patched(Path,'read_bytes',forbidden),patched(module,'digest',forbidden),patched(module.subprocess,'run',forbidden):
+                must_raise(InterruptedError,call)
+        case('measured-entry-signal-no-IO-or-helper',lambda:no_io_entry(lambda:module.measured_size([],True)))
+        case('history-entry-signal-no-IO',lambda:no_io_entry(lambda:module.validate_specific_retired_r2_registry(True)))
+        case('registry-entry-signal-no-IO',lambda:no_io_entry(lambda:module.validate_prior_windows_receipts(receipts,True)))
+        never=module.S/'probe/windows-size-helper-r3'
+        historical=module.S/'probe/windows-size-helper-r2'
+        def after_lstat(target,call,number=signal.SIGTERM):
+            reached=[]
+            def observed(path,*args,**kwargs):
+                if path!=target:return original_lstat(path,*args,**kwargs)
+                reached.append(str(path))
+                try:return original_lstat(path,*args,**kwargs)
+                finally:deliver(number)
+            with patched(Path,'lstat',observed):must_raise(InterruptedError,call)
+            assert reached==[str(target)]
+        case('history-missing-R3-lstat-self-SIGTERM',lambda:after_lstat(never,lambda:module.validate_specific_retired_r2_registry(True)))
+        case('history-R2-lstat-self-SIGINT',lambda:after_lstat(historical,lambda:module.validate_specific_retired_r2_registry(True),signal.SIGINT))
+        def after_enum(target,call,before_yield=False):
+            reached=[]
+            def observed(path):
+                if path!=target:return original_iter(path)
+                def generate():
+                    for entry in original_iter(path):
+                        if before_yield and not reached:
+                            reached.append('enumeration');deliver(signal.SIGTERM)
+                        yield entry
+                    if not before_yield:
+                        reached.append('enumeration');deliver(signal.SIGINT)
+                return generate()
+            with patched(Path,'iterdir',observed):must_raise(InterruptedError,call)
+            assert reached==['enumeration']
+        case('history-enumeration-self-SIGINT',lambda:after_enum(historical,lambda:module.validate_specific_retired_r2_registry(True)))
+        def during_digest(call):
+            visited=[]
+            def observed(path):
+                visited.append(path);value=marker_digest(path);deliver(signal.SIGTERM);return value
+            with patched(module,'digest',observed):must_raise(InterruptedError,call)
+            assert len(visited)==1
+        case('history-fresh-digest-self-SIGTERM',lambda:during_digest(lambda:module.validate_specific_retired_r2_registry(True)))
+        case('registry-enumeration-self-SIGTERM-before-lstat',lambda:after_enum(receipts,lambda:module.validate_prior_windows_receipts(receipts,True),True))
+        first=next(iter(receipts.iterdir()))
+        case('registry-lstat-self-SIGTERM',lambda:after_lstat(first,lambda:module.validate_prior_windows_receipts(receipts,True)))
+        def during_read():
+            visited=[]
+            def observed(path):
+                value=original_read(path)
+                if path.parent==receipts and len(path.stem)==32:
+                    visited.append(path);deliver(signal.SIGINT)
+                return value
+            with patched(Path,'read_bytes',observed):must_raise(InterruptedError,lambda:module.validate_prior_windows_receipts(receipts,True))
+            assert len(visited)==1
+        case('registry-fresh-final-read-self-SIGINT',during_read)
+        case('measured-history-digest-interrupt-no-count-or-helper',lambda:during_digest(lambda:module.measured_size([module.S/'probe',module.X],True)))
+        def default_history():
+            module.received_signal=signal.SIGTERM;before=counts['digest']
+            module.validate_specific_retired_r2_registry()
+            assert counts['digest']-before==6
+        case('default-noninterruptible-history-completes-six-fresh-digests',default_history)
+        def default_registry():
+            module.received_signal=signal.SIGINT;seen=[];types=[]
+            def observed(path):
+                if path.parent==receipts and len(path.stem)==32:seen.append(path)
+                return original_read(path)
+            def typed(path,*args,**kwargs):
+                if path.parent==receipts:types.append(path)
+                return original_lstat(path,*args,**kwargs)
+            with patched(Path,'read_bytes',observed),patched(Path,'lstat',typed):
+                module.validate_prior_windows_receipts(receipts)
+            assert len(seen)==2 and len(types)==4
+        case('default-noninterruptible-registry-all-types-and-two-fresh-finals',default_registry)
+        def default_measured():
+            module.received_signal=signal.SIGTERM;before=counts['digest'];helper=counts['helper']
+            must_raise(HelperBoundary,lambda:module.measured_size([module.S/'probe',module.X]))
+            assert counts['digest']-before==8 and counts['helper']==helper+1
+        case('noninterruptible-measured-validations-reach-denied-helper-not-count',default_measured)
+        def fresh_mutation():
+            folder=registry('fresh-mutation');module.validate_prior_windows_receipts(folder)
+            target=folder/('%032x.json'%1);obj=json.loads(target.read_text());obj['worker_exit_confirmed']=False;target.write_text(json.dumps(obj))
+            must_raise(RuntimeError,lambda:module.validate_prior_windows_receipts(folder))
+        case('noninterruptible-fresh-receipt-mutation-refused',fresh_mutation)
+        def history_mutation():
+            target=next(iter(history));module.validate_specific_retired_r2_registry()
+            target.write_text('different controlled digest')
+            try:must_raise(RuntimeError,lambda:module.validate_specific_retired_r2_registry())
+            finally:target.write_text(history[target])
+        case('noninterruptible-fresh-history-mutation-refused',history_mutation)
+        def malformed():
+            folder=registry('malformed');(folder/('%032x.json'%1)).write_text('{')
+            must_raise(json.JSONDecodeError,lambda:module.validate_prior_windows_receipts(folder))
+        case('noninterruptible-malformed-final-refused',malformed)
+        def pending():
+            folder=registry('pending');(folder/('%032x.json.pending'%1)).write_text('{}')
+            must_raise(RuntimeError,lambda:module.validate_prior_windows_receipts(folder))
+        case('noninterruptible-pending-final-refused',pending)
+        def orphan():
+            folder=registry('orphan');(folder/('%032x.worker-output.json'%3)).write_text('{}')
+            must_raise(RuntimeError,lambda:module.validate_prior_windows_receipts(folder))
+        case('noninterruptible-orphan-output-refused',orphan)
+        def io_lstat():
+            def denied(path,*args,**kwargs):
+                if path.parent==receipts:raise PermissionError('controlled lstat denial')
+                return original_lstat(path,*args,**kwargs)
+            with patched(Path,'lstat',denied):must_raise(PermissionError,lambda:module.validate_prior_windows_receipts(receipts))
+        case('noninterruptible-registry-lstat-denial-propagates',io_lstat)
+        def io_read():
+            def denied(path):
+                if path.parent==receipts and len(path.stem)==32:raise PermissionError('controlled read denial')
+                return original_read(path)
+            with patched(Path,'read_bytes',denied):must_raise(PermissionError,lambda:module.validate_prior_windows_receipts(receipts))
+        case('noninterruptible-registry-fresh-read-denial-propagates',io_read)
+        def io_digest():
+            def denied(path):raise PermissionError('controlled digest denial')
+            with patched(module,'digest',denied):must_raise(PermissionError,lambda:module.validate_specific_retired_r2_registry())
+        case('noninterruptible-history-digest-denial-propagates',io_digest)
+        def io_enum():
+            def denied(path):
+                if path==historical:raise PermissionError('controlled enumeration denial')
+                return original_iter(path)
+            with patched(Path,'iterdir',denied):must_raise(PermissionError,lambda:module.validate_specific_retired_r2_registry())
+        case('noninterruptible-history-enumeration-denial-propagates',io_enum)
+        def invalid_type():
+            folder=registry('invalid-type');(folder/'unexpected-directory').mkdir()
+            must_raise(RuntimeError,lambda:module.validate_prior_windows_receipts(folder))
+        case('noninterruptible-nonregular-registry-entry-refused',invalid_type)
+        assert len(cases)==EXPECTED_CASES and counts['helper']==1
+        assert hashlib.sha256(method.read_bytes()).hexdigest()==METHOD_SHA
+        guard()
+    except BaseException as exc:
+        error={'type':type(exc).__name__,'message':str(exc)[:2048]}
+    finally:
+        if module is not None and 'real_run' in locals():
+            module.subprocess.run=real_run;module.subprocess.Popen=real_popen
+        for number,handler in prior_handlers.items():signal.signal(number,handler)
+        elapsed=time.monotonic()-started
+        report={'schema':'v1-6-r13-accounting-signal-delta-pure-r1','passed':error is None and len(cases)==EXPECTED_CASES and elapsed<10,
+                'case_count':len(cases),'expected_cases':EXPECTED_CASES,'cases':cases,'error':error,
+                'elapsed_seconds':elapsed,'budget_seconds':10,'method_sha256':METHOD_SHA,
+                'fixture_sha256':sys.argv[2],'real_self_signal_deliveries':deliveries,
+                'compile_diagnostics':diagnostic_messages if 'diagnostic_messages' in locals() else [],
+                'scope':'controlled callback and real self-signal checks on tiny owned synthetic ledgers',
+                'production_history_receipts_or_hashes_claimed':False,'native_application_helper_executions':0,
+                'no_returned_accepted_count':True,'unchanged_217_57_20_controls_rerun':False}
+        blob=(json.dumps(report,sort_keys=True,indent=2)+'\n').encode()
+        if len(blob)>=128<<10:raise RuntimeError('pure report128KiB cap')
+        with (directory/'result.json').open('xb') as handle:handle.write(blob)
+        signal.setitimer(signal.ITIMER_REAL,0)
+    print(json.dumps(report,sort_keys=True))
+    return 0 if report['passed'] else 1
+
+if __name__=='__main__':raise SystemExit(main())

@@ -1,0 +1,47 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:03:52Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "bindings": {
+    "methods/run_worktree_lane_wsl_r7.py.txt": "20bd802f4263111999cc5471897827b3916d9ba48fc933678cd7851703c29ae2",
+    "methods/check_runner_signal_wsl_actual_r7.py.txt": "5b15962a630f5f8f00deb0d2b838dfecf20bc108bd18660ea449c157c03c5457",
+    "methods/check_scan_parity_wsl_windows_r2.py.txt": "c90dbf6860b1cfd764bc78916e3059d593bb658fdd9cb55f406a7709c972017e",
+    "methods/check_windows_receipt_registry_wsl_r2.py.txt": "700a25803c2732358f734bfa59b789dc5efc09dc111795a6ea075ef480afef52",
+    "methods/windows_size_helper_wsl_r3.py.txt": "6404cd2f50998a2a06f3459afd4605a349a6c9c90690eba9d666b6b4caceeb23"
+  },
+  "component_verdicts": {
+    "runner_r7": "ACCEPT_SOURCE_ONLY",
+    "actual_root_lifecycle_fixture_r7": "ACCEPT_SOURCE_ONLY",
+    "windows_scanner_parity_fixture_r2": "ACCEPT_SOURCE_ONLY",
+    "pure_registry_fixture_r2": "ACCEPT_SOURCE_ONLY"
+  },
+  "findings": [],
+  "accepted_source_properties": [
+    "Caller differences from exact R6 are helper R3 filename/hash and new R3 registry, explicit refusal of not-created-process flags, and a narrowly hash-bound historical R2 guard before every measurement.",
+    "Historical R2 guard requires precisely the one original regular pending receipt and pins its exact bytes, original failed fixture, preserved pending copy, exact helper R2 source, retirement decision and independent retirement review. Any additional output/pending/new registry entry or changed bound file refuses; no general unresolved-cleanup exception is introduced.",
+    "Generic R3 prior-receipt validator refuses launcher_not_created or worker_not_created proof even with terminal failure and true synthetic exit flags. New prelaunch failures require independent disposition.",
+    "Original exact current receipt protocol, source/interpreter pins, atomic helper ownership, fresh Linux fallback semantics, measurement roots, native caps, original baseline/deadline, publication headroom and signal-aware prefix/state logic remain unchanged.",
+    "Actual lifecycle fixture differs only in active and finalization R7 runner filename references; full actual roots including SDK tools and unchanged 24s work / 30s total acceptance are retained.",
+    "Scanner parity fixture changes only candidate R7 source binding/schema and R3 registry validation. Fresh synthetic 20-to-35 counts, controlled signal/PermissionError refusal, six static whole-root exact comparisons, separately labelled dynamic probe delta <=64KiB and total sixty-second acceptance are retained.",
+    "Pure registry R2 fixture pins exact R7 bytes, preserves the prior 27 cases and adds two explicit not-created-process refusal cases for 29 total. It invokes no helper/native/Go commands, prevents subprocess calls, checks input snapshots unchanged and preserves ten-second/32KiB input/128KiB report bounds."
+  ],
+  "claim_limits": [
+    "The pure registry fixture tests generic classification, not the full historical R2 hash guard and not actual process exits.",
+    "Static scanner parity requires quiescent real roots; dynamic probe observation does not claim exact parity or independently attribute every changed byte.",
+    "Source acceptance does not resolve the reported host SetInformationJobObject failure or qualify any fixture execution."
+  ],
+  "execution_preconditions": [
+    "The exact separately accepted no-child setup diagnostic runs first; no alternate production flags are authorized by its observations.",
+    "The exact pure 29-case registry fixture may execute independently of native helper success with ordinary nonoptimized Python, fresh owned roots and an external ten-second bound.",
+    "Require exact helper R3/Windows fixture R2 execution plus real ownership cleanup before scanner or lifecycle qualification. Any new prelaunch failure remains blocked by the generic validator.",
+    "Copy/bind exact R7 runner bytes at the scratch path; re-run actual-root active and finalization scenarios under unchanged bounds. No R3 synthetic pass is inherited.",
+    "Use ordinary nonoptimized Python and an external sixty-second scanner bound, keep static roots quiet, and retain failed/incomplete evidence.",
+    "Fresh original disk/memory/resource admission and the unchanged fixed native campaign clock/baseline are still required; this review creates no native manifest or admission."
+  ]
+}

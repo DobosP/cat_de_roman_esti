@@ -1,0 +1,143 @@
+{
+  "schema": "v1-6-windows-job-setup-diagnostic-r2",
+  "status": "diagnostic_completed",
+  "parent_pid": 40992,
+  "helper_sha256": "6404cd2f50998a2a06f3459afd4605a349a6c9c90690eba9d666b6b4caceeb23",
+  "interpreter_sha256": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+  "diagnostic_sha256": "1e8978f0a9a7f9b13b3d87749d2590532f93b35eb3aeaafddc2fbb80292115b5",
+  "child_process_creations": 0,
+  "native_or_application_tests": 0,
+  "job_closed_confirmed": true,
+  "job_empty_confirmed": true,
+  "helper_execution_or_qualification": false,
+  "configuration_probes": [
+    {
+      "name": "exact_R2_limits",
+      "limit_flags": 8969,
+      "process_memory_limit_bytes": 67108864,
+      "job_memory_limit_bytes": 67108864,
+      "returned_success": false,
+      "winerror": 1314
+    },
+    {
+      "name": "diagnostic_same64MiB_memory_without_workingset",
+      "limit_flags": 8968,
+      "process_memory_limit_bytes": 67108864,
+      "job_memory_limit_bytes": 67108864,
+      "returned_success": true,
+      "winerror": 0
+    }
+  ],
+  "parent_creation_time_100ns": 134358412215913321,
+  "abi": {
+    "pointer_bytes": 8,
+    "BASIC_LIMIT": {
+      "size": 64,
+      "offsets": {
+        "PerProcessUserTimeLimit": 0,
+        "PerJobUserTimeLimit": 8,
+        "LimitFlags": 16,
+        "MinimumWorkingSetSize": 24,
+        "MaximumWorkingSetSize": 32,
+        "ActiveProcessLimit": 40,
+        "Affinity": 48,
+        "PriorityClass": 56,
+        "SchedulingClass": 60
+      }
+    },
+    "EXTENDED_LIMIT": {
+      "size": 144,
+      "offsets": {
+        "BasicLimitInformation": 0,
+        "IoInfo": 64,
+        "ProcessMemoryLimit": 112,
+        "JobMemoryLimit": 120,
+        "PeakProcessMemoryUsed": 128,
+        "PeakJobMemoryUsed": 136
+      }
+    },
+    "ACCOUNTING": {
+      "size": 48,
+      "offsets": {
+        "TotalUserTime": 0,
+        "TotalKernelTime": 8,
+        "ThisPeriodTotalUserTime": 16,
+        "ThisPeriodTotalKernelTime": 24,
+        "TotalPageFaultCount": 32,
+        "TotalProcesses": 36,
+        "ActiveProcesses": 40,
+        "TotalTerminatedProcesses": 44
+      }
+    },
+    "SECURITY": {
+      "size": 24,
+      "offsets": {
+        "nLength": 0,
+        "lpSecurityDescriptor": 8,
+        "bInheritHandle": 16
+      }
+    },
+    "STARTUP": {
+      "size": 104,
+      "offsets": {
+        "cb": 0,
+        "lpReserved": 8,
+        "lpDesktop": 16,
+        "lpTitle": 24,
+        "dwX": 32,
+        "dwY": 36,
+        "dwXSize": 40,
+        "dwYSize": 44,
+        "dwXCountChars": 48,
+        "dwYCountChars": 52,
+        "dwFillAttribute": 56,
+        "dwFlags": 60,
+        "wShowWindow": 64,
+        "cbReserved2": 66,
+        "lpReserved2": 72,
+        "hStdInput": 80,
+        "hStdOutput": 88,
+        "hStdError": 96
+      }
+    },
+    "STARTUP_EX": {
+      "size": 112,
+      "offsets": {
+        "StartupInfo": 0,
+        "lpAttributeList": 104
+      }
+    },
+    "PROCESS": {
+      "size": 24,
+      "offsets": {
+        "hProcess": 0,
+        "hThread": 8,
+        "dwProcessId": 16,
+        "dwThreadId": 20
+      }
+    },
+    "MEMORY_COUNTERS": {
+      "size": 72,
+      "offsets": {
+        "cb": 0,
+        "PageFaultCount": 4,
+        "PeakWorkingSetSize": 8,
+        "WorkingSetSize": 16,
+        "QuotaPeakPagedPoolUsage": 24,
+        "QuotaPagedPoolUsage": 32,
+        "QuotaPeakNonPagedPoolUsage": 40,
+        "QuotaNonPagedPoolUsage": 48,
+        "PagefileUsage": 56,
+        "PeakPagefileUsage": 64
+      }
+    }
+  },
+  "parent_peak_working_set_bytes": 21970944,
+  "parent_peak_committed_bytes": 12591104,
+  "create_job": {
+    "returned_handle": true,
+    "winerror": 0
+  },
+  "work_finished_elapsed_seconds": 0.031000000000858563,
+  "elapsed_seconds": 0.031000000000858563
+}
