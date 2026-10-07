@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "target": "deps",
+  "status": "pass",
+  "sha": "61b7b1899b52e85daa736bc7b1ad0758b367df5e",
+  "dirty": false,
+  "tree_sha256": "322a3e3e10352ca35b642ac9e731a19a0d1cecc7c916a2de2e512417efaf8ced",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "028ab052097aa8ad497732bd9db32e30de9595a69155064d61a5b15d23e1bcbc",
+  "parallel": 4,
+  "started": "2026-10-07T06:16:31.978Z",
+  "finished": "2026-10-07T06:16:33.475Z",
+  "checks": [
+    {
+      "name": "npm-lock",
+      "status": "pass",
+      "duration_ms": 1127
+    },
+    {
+      "name": "go-mod-tidy",
+      "status": "pass",
+      "duration_ms": 119
+    }
+  ],
+  "csp": {
+    "stage": "report-only",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {},
+  "artifacts": [
+    ".gate/deps/logs/070a8de5-7544-42eb-b154-a5aa7fbdb767-npm-lock-1.stdout.log sha256:6956ec60210c74c475208fbda0abccd487bf203c95a593b158a4f1154317f5d7",
+    ".gate/deps/logs/070a8de5-7544-42eb-b154-a5aa7fbdb767-npm-lock-1.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/deps/logs/070a8de5-7544-42eb-b154-a5aa7fbdb767-go-mod-tidy-3.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/deps/logs/070a8de5-7544-42eb-b154-a5aa7fbdb767-go-mod-tidy-3.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/deps/logs/070a8de5-7544-42eb-b154-a5aa7fbdb767-go-mod-tidy-4.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/deps/logs/070a8de5-7544-42eb-b154-a5aa7fbdb767-go-mod-tidy-4.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/deps/logs/070a8de5-7544-42eb-b154-a5aa7fbdb767-bootstrap-deps-0.stdout.log sha256:be7b2f431af2aaa17a54738bc1c895cd6212fba470ed2b8648ae892475bda7c5",
+    ".gate/deps/logs/070a8de5-7544-42eb-b154-a5aa7fbdb767-bootstrap-deps-0.stderr.log sha256:326849be622a12083e97ce0b7b1125eb16b12ecc24bf7084d6bfe52595133bee",
+    ".gate/deps/bootstrap-execution.json sha256:86c470c5942a57a63ac1fe1111f250e414ed79e46204fe561d4756ce658691ac"
+  ]
+}
