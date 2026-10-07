@@ -53,7 +53,8 @@ try {
     await page.locator(".screen").first().waitFor();
     await page.waitForFunction(() => document.querySelector(".screen") && getComputedStyle(document.querySelector(".screen")).opacity === "1");
     await page.evaluate(() => document.fonts.ready);
-    await page.waitForFunction(() => [...document.querySelectorAll(".game-intro, .home-game-card")].every((element) => getComputedStyle(element).opacity === "1"));
+    await page.waitForFunction(() => [...document.querySelectorAll(".game-intro, .game-card")].every((element) => getComputedStyle(element).opacity === "1"));
+    await page.evaluate(async () => { await Promise.all(document.getAnimations().filter((animation) => Number.isFinite(animation.effect?.getComputedTiming().endTime)).map((animation) => animation.finished.catch(() => {}))); });
     const name = `route-${index}.png`, image = await page.screenshot({ path: `${output}/${name}`, fullPage: true });
     const axe = await new AxeBuilder({ page, axeSource }).analyze();
     const fingerprint = axe.violations.map((violation) => ({ id: violation.id, impact: violation.impact, targets: violation.nodes.map((node) => node.target) }));
