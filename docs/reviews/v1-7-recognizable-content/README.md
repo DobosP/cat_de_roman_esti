@@ -163,3 +163,24 @@ Only the selection-binding sentinel changed in the completed pack stage, with th
 [Independent partial-evidence review](partial-prospective-evidence-review-r1.json)8d4d85f8 accepts retained identity/completed pack observations only; Conex outer failure and all remaining gaps stay explicit. Further campaigns require meaningful resource recovery plus separately fresh exact admission.
 Native index/compilation/profiles/ordinary32HTTP are unexecuted; preserve exact accepted R2 methods and freeze derived-index/binary output hashes before probes without changing any immutable campaign deadline/baseline.
 All remaining reference/native fuzzy/input/69/historical all7/terminal/Lanț handlers/world/history/final quality/hold disposition/Source7/current-authority/assembled gates remain pending.
+
+## Actual native producer evidence and precondition repair
+
+The [metadata-only staging ACK](native-output-staging-review-r1.json)eaf4956d accepted57bcef43 with manual receipt/log/output checks and one immutable outer campaign.
+The [actual native admission](native-prospective-native-admission-r1.json)308d8cf8 preserved23:18:27→23:38:27UTC. SDK0/index1/exclusive two-race compilation+source-removal2 passed.
+Actual index64f8c909 preserves13514old normalized owners and adds only leafa→Salary (13515total). Compile receipt46abb674 binds profile31940b27 and HTTP8eccee68; all3temporary files were removed before probes.
+Root verified producing receipts/logs and froze exclusive outputkeeper64d0057c/external digest2e01f374; all source/output/prefix hashes were checked before and after probe3.
+Probe3 FAILED before any feedback/fuzzy/mining count: expected node alias leafa from its normalized map, but generated/helper alias is correctly RAWleafă.
+[Failure summary](native-prospective-precondition-failure-summary-r1.json)7ce8f327 retains incomplete11-row JSONL complete=false/test_failed=true/counts{}, original failedstate next_index4/pendingnull, and HTTP4NEVERLAUNCHED.
+Root initially assumed failednext_index3 in a postcheck; that read-only assertion was corrected to actual4, with no file mutation and all output/source checks exact.
+[Lossless failed manifest](native-prospective-failed-archive-manifest-r1.json)1e2c154b binds33rawmembers including exact compiled binaries/index/producers/keeper/candidate pair; archive5d8bf2b3 preserves all bytes.
+[Independent failed evidence review](native-prospective-failure-evidence-review-r1.json)c3e75874 accepts only valid producers/resources and retained failure identity. It does not qualify gameplay, fuzzy feedback, HTTP or adoption.
+
+The NEW minimal [R3 source proposal](native-prospective-method-proposal-r3.json)a33c8a9f/readset2bd9e017 binds profilesR2 21ccc86b: separate raw Salary→leafă for exact node append, unchanged normalized leafa→Salary plus explicit Normalize(raw) assertion and both-form emission.
+Profile-only lifecycleR3 96383211 retains exclusive creation/inode+hash cleanup/failure receipts, with2freshtemps/onefresh profile binary; no index regeneration or HTTP recompile.
+[Independent R3 source review](native-prospective-method-review-r3.json)c16dc063 permits fresh scrutiny and reviewed reuse of actual64f index/unexecuted8eccHTTP only; it requires NEW concrete four-step/two-temp/one-compiler staging ACK and fresh resource admission before execution.
+Original308dfailedcampaign/oldmethods/binaries/keepers remain immutable; no assertion removed or relaxed.
+[Original source2249 stop](native-precondition-repair-source-stop-r1.json) records metadata-deadlineFAIL/incomplete staging: root queued send_message to idle completed author, which does not trigger a turn, and waited instead of dispatching followup_task.
+Valid substantive archive/R3source/reviews were frozen before23:44:35, but final metadata missed23:47:35. New stagingR2 never existed/was never reviewed; no rerun occurred. Do not retroactively pass or reset that window.
+Next iteration must explicitly dispatch a finite metadata staging task, freeze reviewed NEW prefix+inherited old producer lineage, then separately admit a different repaired-profile campaign.
+Reference813unrun/Conex245unqualified/all7/69 and native fullprofiles/ordinary32HTTP/Lanț/terminal/World/history/finalquality/retirement/Source7/all release gates remain pending.
