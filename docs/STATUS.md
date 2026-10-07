@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — GUI S1: original16fixtures/78assertions, exact30-file freeze and9-route/five-run baseline captured through clean pinned gen. [Proof](reviews/gui-original-react/README.md). M0/M1 formally unqualified:114086gz>40960; E3 delivery work allowed, no device/UI activation.
+Last verified: 2026-10-07 — GUI S1 STOPPED for Windows continuation: original16/78, exact30-file freeze and9-route/five-run baseline captured through clean pinned gen. [Proof](reviews/gui-original-react/README.md). M0/M1 unqualified:114086gz>40960; no device/UI activation; four local style drafts unverified.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
