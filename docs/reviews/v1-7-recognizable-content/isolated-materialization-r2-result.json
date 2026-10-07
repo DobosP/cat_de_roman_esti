@@ -1,0 +1,100 @@
+{
+  "schema": "v1-7-isolated-materialization-r2",
+  "failure": null,
+  "elapsed_seconds": 78.5332215519993,
+  "max_RSS_KiB": 121704,
+  "installed_transaction_files_unchanged": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": true,
+    "tests/fixtures/kg_sample.json": true,
+    "cat_de_roman_esti/fixtures/games_pack.json": true,
+    "tests/fixtures/games_pack.json": true,
+    "tests/fixtures/cat_mobile_app_pack_contract.json": true
+  },
+  "validation_observations": [
+    {
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/probe/materialization-r2/candidate/package/kg_sample.json",
+      "errors": [],
+      "mirrors_equal": true
+    }
+  ],
+  "mirrors_equal": true,
+  "log_sha256": "09d440c5e684e6f8fe2b2bfb2f2e7cf69b8e19188393619cb1f2c7a7d9b8bb31",
+  "factual_review_sha256": "e975ac126696cabb547a5fb71e19878665ee43fc2baedf7ce351de9b25f8370a",
+  "proposal_sha256": "0caad7bcbe695dda5b92a0f0360038fa2d952e23235d33ba67c61170aff9b354",
+  "module_sha256": "adb25ece1451536cd9732a3bebd1a1e0d9a3794e2234aab70c96d49994ddfb7d",
+  "raw_quality_acceptance": false,
+  "installation_approval": false,
+  "actual_module_hold_vectors": {
+    "base70_count": 70,
+    "base_normalized_unique_count": 70,
+    "base70_canonical_sha256": "ca4043ff48dc88bc9b8c0a4ceec634f9f11f2b5743406abe3edd5aff0124dc67",
+    "remaining69_count": 69,
+    "remaining69_canonical_sha256": "112f704026ebc170ae79279c91ef1057e1ab03d5a8724f13baf4e846f237be2f",
+    "remaining_values_order_exact": true,
+    "only_current_batch_reconsideration": true
+  },
+  "candidate_sha256": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+  "candidate_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/materialization-r2/candidate/package/kg_sample.json",
+  "counts": {
+    "nodes": 2419,
+    "edges": 9473,
+    "stored_aliases": 8680,
+    "puzzles": 180
+  },
+  "exact_node_deltas": {
+    "n_v4soc_salariu": {
+      "before": {
+        "id": "n_v4soc_salariu",
+        "node_type": "concept",
+        "label_ro": "salariu",
+        "category": "societate",
+        "description": "Sumă de bani primită periodic pentru muncă.",
+        "salience": 0.6482,
+        "difficulty_tier": "medium",
+        "degree": 10,
+        "aliases": [
+          "salariul",
+          "salarii",
+          "salariile",
+          "salariului",
+          "salariilor"
+        ]
+      },
+      "after": {
+        "id": "n_v4soc_salariu",
+        "node_type": "concept",
+        "label_ro": "salariu",
+        "category": "societate",
+        "description": "Sumă de bani primită periodic pentru muncă.",
+        "salience": 0.6482,
+        "difficulty_tier": "medium",
+        "degree": 10,
+        "aliases": [
+          "salariul",
+          "salarii",
+          "salariile",
+          "salariului",
+          "salariilor",
+          "leafă"
+        ]
+      }
+    }
+  },
+  "exact_metadata_deltas": {
+    "build_version": {
+      "before": "fixture-v1-6-everyday-inputs",
+      "after": "fixture-v1-7-employee-pay-input"
+    },
+    "note": {
+      "before": "V1.6: two qualified singular synonym inputs for existing flag and edible-oil concepts.",
+      "after": "V1.7 R2: one singular employee-pay input; only this batch reconsiders the archived leafă hold."
+    }
+  },
+  "mobile_sha256": "95c27815c52af67a1900f8402d272bc1a5d78440f4640abc7fa45704a4033c75",
+  "mobile_only_manifest_build_version_changed": true,
+  "all_old_edges_and_terminal_payloads_exact": true,
+  "all_old_nodes_except_one_appended_form_exact": true,
+  "pack_mirrors_unchanged": true,
+  "postcondition_failure": null,
+  "status": "SUPPORTED_ISOLATED_APPLY_GREEN"
+}

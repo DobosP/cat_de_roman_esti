@@ -1,0 +1,41 @@
+{
+  "schema": "v1-7-materialization-admission-self-binding-ack-r2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-07T22:03:06.383307+00:00",
+  "checked_on": "2026-10-08",
+  "decision": "ACK_EXISTING_EXTERNAL_ADMISSION_SNAPSHOT_HASH_AS_SELF_PROTECTION",
+  "scope": "Narrow source acknowledgement clarifying implementation of ee409review admission immutability condition. The admission cannot contain its own SHA as an inputs/unchanged value without circular hashing. Existing unchanged qualified runner plus externally retained expected digest satisfies that condition; no runner/method/gate/resource or quality scope change.",
+  "bindings": {
+    "docs/reviews/v1-7-recognizable-content/materialization-method-review-r2.json": "ee409f4a7fff2e3783665c673a6062eb1bd0c7d0c1956e4f24d346962d0ace8b",
+    "docs/reviews/v1-7-recognizable-content/candidate-method-preparation-admission-r2.json": "38406df1b0e6a839fcd7b094300bcdd65331ee0234f6904d362c5a45d7023318",
+    "docs/reviews/v1-7-recognizable-content/materialization-method-proposal-r2.json": "7b9f8cc39eddb30b57c07f484dd71a9995264a38879a68060960b8a570e3c163",
+    "docs/reviews/v1-7-recognizable-content/materialization-protected-inputs-r2.json": "e8954d6361560523c42c0e3ad2784e50f93618e1a2f61e2edcc615cb3cbe2b5a",
+    "docs/reviews/v1-7-recognizable-content/methods/materialize_graph_r2.py.txt": "f824437ce5f54740ca14e74ac55be5bc63b6656a07d58a5b976533801842e85c"
+  },
+  "runner": {
+    "path": "/home/dobo/work/_temp/codex__content-v1-7/probe/run_owned_full_scratch_lane.py",
+    "sha256": "397686a51c5f03f207cc450fceda8b88623383a83ab2ecb90a884e6167fa91ee"
+  },
+  "verified_existing_mechanism": [
+    "Runner main reads exact admission bytes and derives manifest_sha256. New index0 rejects any existing campaign state/result and durably creates one original-start/deadline/root identity carrying that hash.",
+    "load_prefix requires current manifest hash/deadline/roots equal persistent campaign identity, ready exact-next-index state and every immutable prior receipt hash/name/argv/index/success/original-baseline/deadline/start. Mutated admission or prefix/pending/failed attempts refuse continuation.",
+    "run_step calls verify_manifest_snapshot against the initial exact byte snapshot immediately before subprocess.Popen. Any detected mutation prevents spawn.",
+    "Each row and cumulative result carries the pinned manifest_sha256. publish_outcome checks exact admission bytes before output publication and after durable step/result publication before successful state commitment; detected drift marks failure. Campaign state lifecycle is mutable but admission-hash identity and previous receipt prefix remain invariant.",
+    "Existing fixed limits, fresh floor checks/fullS-R cumulative accounting/180metadata reserve/owned cleanup/refusal rules are unchanged. No native command was executed by this reviewer."
+  ],
+  "required_execution_conditions": [
+    "After creating the exact admission once, externally retain its expected full SHA as a keeper outside that self-referential document. Verify actual file digest equals that keeper immediately before EACH of the three runner invocations, including index0. Do not recompute a mutated admission as a new trusted baseline or overwrite/restart old campaign state.",
+    "Inspect recorded manifest_sha256 in campaign state/every step/cumulative receipt against the SAME external keeper when judging execution, and verify current admission bytes still match after invocations. On mismatch/refusal, retain failure/pending evidence and stop dependent stages; never count it as passing. This uses existing hashes/read inspection, not a new execution framework.",
+    "Every OTHER method/proposal/readset/review/ACK/helper/source/snapshot/scratch identity remains a normal immutable inputs AND post-step unchanged pin as required by ee409. This ACK itself is also immutable pre/post evidence. Admission self-binding is the sole justified alternative to embedding its own hash in its own maps.",
+    "All original fresh resource floors/caps, exact three commands, distinct ownmaterialization-r2 path, original validators/rollback, no failedR1clock reset, actual candidate identity/prospective/full-native-history and finalquality/retirement/Source7/assembled conditions remain in force."
+  ],
+  "not_approved": {
+    "admission_content_or_actual_execution_result": "Future concrete admission still must meet all exact method/source/resource conditions; no native run/result reviewed here.",
+    "final_raw_quality": false,
+    "hold_retirement": false,
+    "installation": false,
+    "Source7": false
+  },
+  "source_window": "Original candidate-method-preparation-admission-r2 SHA38406df1;21:52:15.969849→22:09:15.969849cutoff/22:12:15.969849deadline. Root+author+reviewer3inclusive; static runner read/hash only; no extra agent/browser/import/native/method/framework writes. Whole-workerRSSunmeasured; no clock renewal.",
+  "valid_until": "Runner/method/admission-binding mechanism or relevant exact dependencies change; repeat affected source review. Actual immutable admission/receipt hashes must be verified in execution."
+}
