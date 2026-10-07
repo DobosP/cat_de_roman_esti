@@ -44,6 +44,16 @@ Archive SHA256:742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65.
 Its native result/actions are preserved in legacy-freeze/; source-file hashes and
 the archive/sidecar are in the root legacy/ directory. No rebuild supplied fallback bytes.
 
-Baseline screenshots/axe/vitals, CSP conversion, Motion/tooling normalization,
-source retirement, parent staged UI sync/trust and canonical unit/full
+Original baseline capture passed through clean pinned gen atae9be5b5a0f891dd5d36d6bb18945e9dcd8102a5.
+It records9 loaded route screenshots, actual existing Axe fingerprints, verified
+import closures/CSS16093gz, and5 raw callback/action runs for each scripted interaction.
+Conexiuni medians: LCP2836ms/INP184ms/CLS0. Alchimie: LCP4228ms/INP200ms/CLS0.00057706.
+Actual interaction entries are retained separately; page INP also includes start.
+These are original throttled desktop measurements and runner-built-server proof.
+They establish neither physical device nor canonical full/image/performance acceptance.
+Original Home114086gz still fails the literal40960-byte budget. Native E3 keeps
+M0/M1 formally unqualified; budgets and failed reports remain preserved.
+
+CSP conversion, Motion/tooling normalization, source retirement,
+parent staged UI sync/trust and canonical unit/full
 qualification remain outstanding. No device or live/soak evidence is attested.

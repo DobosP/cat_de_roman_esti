@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — GUI S1 M0: clean gen atb50ae14 passed9checks/original16fixtures/78assertions; exact30-file legacy freeze atf50715d passed. [Proof](reviews/gui-original-react/README.md). Canonical unit/UI migration pending; V1.5 history unchanged.
+Last verified: 2026-10-07 — GUI S1: original16fixtures/78assertions, exact30-file freeze and9-route/five-run baseline captured through clean pinned gen. [Proof](reviews/gui-original-react/README.md). M0/M1 formally unqualified:114086gz>40960; E3 delivery work allowed, no device/UI activation.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 

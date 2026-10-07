@@ -1,0 +1,600 @@
+{
+  "schema": 1,
+  "check": "cat-original-ui-runtime-execution",
+  "status": "pass",
+  "app": "cat_de_roman_esti",
+  "sha": "ae9be5b5a0f891dd5d36d6bb18945e9dcd8102a5",
+  "tree_sha256": "03dc2fd85a7abb2b095dbf5eca481ff21e92019f621504ae263344354384d66d",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "runtime_sdk": {
+    "name": "@roedu/ui",
+    "version": "0.3.0",
+    "archive_sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+    "manifest_sha256": "1e693baa0e9187ffcdd6c35f841370e70ec71551751d10fc01902b6be2f57357",
+    "entry": "dist/index.js",
+    "entry_sha256": "45bc37efd15df1d9671d17e5d5f96518128a19da9af4bdfc3d437906ab8d049d"
+  },
+  "runtime_dependencies": {
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "framer-motion": "12.42.2"
+  },
+  "dependency_graph": {
+    "manifest": {
+      "path": "docs/reviews/gui-original-react/original-package.json",
+      "sha256": "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9"
+    },
+    "lock": {
+      "path": "docs/reviews/gui-original-react/original-lock.json",
+      "sha256": "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "original-intrusul-intro-single-flight",
+      "suite": "behavior",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "intro.inert-and-busy",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.all-actions-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.no-second-create-or-saved-pointer",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.authoritative-board-and-pointer",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-leaving-actions",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.mounted-controls-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.no-requests-or-score-writes",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-leaving-earned-hint",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-leaving-recovery-retry",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-held-winning-mutation",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-held-winning-read",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-held-winning-unmounted",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-private-upload-once-after-resume",
+      "suite": "behavior",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "upload.stale-reply-sends-nothing",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.exactly-one-earned-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.repeat-resume-never-sends-second-row",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-intro-single-flight",
+      "suite": "behavior",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "intro.inert-and-busy",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.all-actions-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.no-second-create-or-saved-pointer",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.authoritative-board-and-pointer",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-leaving-actions",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.mounted-controls-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.no-requests-or-score-writes",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-leaving-earned-hint",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-leaving-recovery-retry",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-held-winning-mutation",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-held-winning-read",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-held-winning-unmounted",
+      "suite": "presence",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-private-upload-once-after-resume",
+      "suite": "behavior",
+      "source": {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "upload.stale-reply-sends-nothing",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.exactly-one-earned-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.repeat-resume-never-sends-second-row",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    }
+  ]
+}

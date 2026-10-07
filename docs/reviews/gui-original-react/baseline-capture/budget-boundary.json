@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "check": "cat-original-budget-boundary",
+  "scope": "actual-original-home-entry-counterexample",
+  "sha": "ae9be5b5a0f891dd5d36d6bb18945e9dcd8102a5",
+  "tree_sha256": "03dc2fd85a7abb2b095dbf5eca481ff21e92019f621504ae263344354384d66d",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "manifest_sha256": "9ed68d3ff5f73bec7ced96e100ff5718043bcc7efc85cf3b3916df5c82867827",
+  "budgets_sha256": "40f4fc9961a0276663791437417033b0589577ac65811f3863a0fde7a42f9fb4",
+  "report": {
+    "schema": 1,
+    "status": "fail",
+    "global_css": {
+      "scope": "global-css",
+      "name": "global",
+      "actual_gz": 8770,
+      "limit_gz": null,
+      "status": "recorded",
+      "files": [
+        "assets/index-D9HNWgEs.css"
+      ]
+    },
+    "routes": [
+      {
+        "name": "home",
+        "class": "cat-initial",
+        "js": {
+          "scope": "route-js",
+          "name": "home",
+          "actual_gz": 114086,
+          "limit_gz": 40960,
+          "status": "fail",
+          "files": [
+            "assets/index-qYTSE3Vo.js"
+          ],
+          "target_gz": 30720,
+          "target_status": "unmet"
+        },
+        "css": {
+          "scope": "route-css",
+          "name": "home",
+          "actual_gz": 8770,
+          "limit_gz": null,
+          "status": "recorded",
+          "files": [
+            "assets/index-D9HNWgEs.css"
+          ]
+        }
+      }
+    ],
+    "vendors": [],
+    "unused_limits": [
+      {
+        "name": "js.island-route",
+        "limit_gz": 35840,
+        "reason": "no route declares this class"
+      },
+      {
+        "name": "js.server-page",
+        "limit_gz": 10240,
+        "reason": "no route declares this class"
+      },
+      {
+        "name": "js.vendor-gated.maplibre",
+        "limit_gz": 317440,
+        "reason": "no vendor binding declares this asset"
+      }
+    ],
+    "non_page_routes": [],
+    "vitals_limits": {
+      "lcp_ms": 2500,
+      "inp_ms": 200,
+      "throttle": {
+        "cpu": 4,
+        "rtt_ms": 150,
+        "down_kbps": 1600
+      }
+    },
+    "unmeasured_metrics": [
+      "lcp_ms",
+      "inp_ms"
+    ]
+  }
+}
