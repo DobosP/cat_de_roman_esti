@@ -54,7 +54,8 @@ try {
     await page.goto(origin + route);
     if (route === "/") await page.locator(".hero-title").waitFor();
     else if (route === "/clasament") {
-      await page.locator(".ranking-game-select").waitFor();
+      await page.locator(".ranking-game-select").waitFor({ state: "attached" });
+      await page.getByRole("heading", { name: "🏆 Clasament" }).waitFor();
       await page.waitForFunction(() => !document.querySelector('.ranking-state[aria-busy="true"]'));
     } else if (route.includes("mode=explore")) await page.locator(".alchemy-explore-screen").waitFor();
     else await page.locator(".game-intro").waitFor();
@@ -67,6 +68,7 @@ try {
     const axe = await new AxeBuilder({ page, axeSource }).analyze();
     const fingerprint = axe.violations.map((violation) => ({ id: violation.id, impact: violation.impact, targets: violation.nodes.map((node) => node.target) }));
     pages.push({ route, screenshot: capture ? `baselines/cat/${name}` : `${output}/${name}`, captured_file: `${output}/${name}`, sha256: hash(image), axe: fingerprint });
+    process.stderr.write(`Captured original route ${route}: ${fingerprint.length} axe fingerprints\n`);
     await context.close();
   }
   // Vitals are measured by the actual library, loaded before page JS, under the
@@ -120,6 +122,7 @@ try {
       await page.goto("about:blank");
       const final = (name) => metrics.filter((metric) => metric.name === name).at(-1)?.value;
       runs.push({ ...observed, lcp: final("LCP"), inp: final("INP"), cls: final("CLS") ?? 0, action: { name: actionLabel, startTime: actionStarted, entries: actionEntries, latency_ms: Math.max(...actionEntries.map((entry) => entry.duration)) }, metrics }); await context.close();
+      process.stderr.write(`Measured ${actionLabel} run ${run + 1}/5 with actual callbacks and action entries\n`);
     }
     const median = (key) => runs.map((item) => item[key]).sort((a, b) => a - b)[2];
     vitals.push({ route, runs, median: { lcp: median("lcp"), inp: median("inp"), cls: median("cls") } });
