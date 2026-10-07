@@ -35,8 +35,9 @@ const quality = "tools/gui-baseline-quality";
 const axeSource = fs.readFileSync(`${quality}/node_modules/axe-core/axe.min.js`, "utf8");
 const axeVersion = JSON.parse(fs.readFileSync(`${quality}/node_modules/axe-core/package.json`)).version;
 if (axeVersion !== "4.14.0") throw new Error(`Required axeSource4.14.0 is unavailable (actual ${axeVersion}); retain the original dependency graph until its proof`);
-const server = !process.env.GATE_APP_URL ? spawn(process.env.CDR_NATIVE_BINARY, ["-listen", "127.0.0.1:8138"], { cwd: root, stdio: ["ignore", "pipe", "pipe"], env: { ...process.env, CAT_ACCOUNTS_ENABLED: "0", CAT_SUBMISSIONS_ENABLED: "0" } }) : null;
-const origin = process.env.GATE_APP_URL || "http://127.0.0.1:8138";
+const local = mode === "original-capture" || !process.env.GATE_APP_URL;
+const server = local ? spawn(process.env.CDR_NATIVE_BINARY, ["-listen", "127.0.0.1:8138"], { cwd: root, stdio: ["ignore", "pipe", "pipe"], env: { ...process.env, CAT_ACCOUNTS_ENABLED: "0", CAT_SUBMISSIONS_ENABLED: "0" } }) : null;
+const origin = local ? "http://127.0.0.1:8138" : process.env.GATE_APP_URL;
 if (server) { server.stdout.on("data", (data) => process.stderr.write(data)); server.stderr.on("data", (data) => process.stderr.write(data)); }
 const browser = await chromium.launch();
 try {
@@ -50,10 +51,16 @@ try {
   for (const [index, route] of routes.entries()) {
     const page = await browser.newPage({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce", locale: "ro-RO", timezoneId: "Europe/Bucharest" });
     await page.goto(origin + route);
+    if (route === "/") await page.locator(".hero-title").waitFor();
+    else if (route === "/clasament") {
+      await page.locator(".ranking-game-select").waitFor();
+      await page.waitForFunction(() => !document.querySelector('.ranking-state[aria-busy="true"]'));
+    } else if (route.includes("mode=explore")) await page.locator(".alchemy-explore-screen").waitFor();
+    else await page.locator(".game-intro").waitFor();
     await page.locator(".screen").first().waitFor();
     await page.waitForFunction(() => document.querySelector(".screen") && getComputedStyle(document.querySelector(".screen")).opacity === "1");
     await page.evaluate(() => document.fonts.ready);
-    await page.waitForFunction(() => [...document.querySelectorAll(".game-intro, .game-card")].every((element) => getComputedStyle(element).opacity === "1"));
+    await page.waitForFunction(() => [...document.querySelectorAll(".game-intro, .game-card, .hero-title span, header > p")].every((element) => getComputedStyle(element).opacity === "1"));
     await page.evaluate(async () => { await Promise.all(document.getAnimations().filter((animation) => Number.isFinite(animation.effect?.getComputedTiming().endTime)).map((animation) => animation.finished.catch(() => {}))); });
     const name = `route-${index}.png`, image = await page.screenshot({ path: `${output}/${name}`, fullPage: true });
     const axe = await new AxeBuilder({ page, axeSource }).analyze();
@@ -77,21 +84,40 @@ try {
       await cdp.send("Network.emulateNetworkConditions", { offline: false, latency: 150, downloadThroughput: 1600 * 1000 / 8, uploadThroughput: 750 * 1000 / 8 });
       const metrics = [];
       await page.exposeBinding("__catVital", (_source, metric) => { metrics.push(metric); });
-      await page.addInitScript({ content: `${vitalsSource}\nwindow.__catVitals={};const record=m=>{window.__catVitals[m.name.toLowerCase()]=m.value;window.__catVital({name:m.name,id:m.id,value:m.value,rating:m.rating,entries:m.entries.length})};webVitals.onLCP(record,{reportAllChanges:true});webVitals.onINP(record,{reportAllChanges:true,durationThreshold:0});webVitals.onCLS(record,{reportAllChanges:true});` });
+      await page.addInitScript({ content: `${vitalsSource}\nwindow.__catVitals={};window.__catEvents=[];const entry=e=>({name:e.name,startTime:e.startTime,duration:e.duration,interactionId:e.interactionId||0,target:e.target?.closest?.('button')?.className||e.target?.tagName||'',text:e.target?.closest?.('button')?.textContent?.trim()||''});new PerformanceObserver(list=>window.__catEvents.push(...list.getEntries().map(entry))).observe({type:'event',buffered:true,durationThreshold:16});const record=m=>{window.__catVitals[m.name.toLowerCase()]=m.value;window.__catVital({name:m.name,id:m.id,value:m.value,rating:m.rating,entries:m.entries.map(entry)})};webVitals.onLCP(record,{reportAllChanges:true});webVitals.onINP(record,{reportAllChanges:true,durationThreshold:0});webVitals.onCLS(record,{reportAllChanges:true});` });
       const game = route.startsWith("/alchimie") ? "alchimie" : "conexiuni";
       await page.route(`**/api/wordgames/${game}/games?*`, async (request) => { const url = new URL(request.request().url()); url.searchParams.set("seed", "38"); await request.continue({ url: url.toString() }); });
       await page.goto(origin + route);
       await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
       await page.locator(selector).first().waitFor();
+      let actionStarted, actionLabel;
       if (route.startsWith("/alchimie")) {
         const step = nativePlan(["alchimie"]).steps[0];
-        for (const label of step.labels) await page.locator(".alchemy-inventory-grid").getByRole("button", { name: new RegExp(`^${label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:,|$)`) }).click();
-      } else await page.locator(selector).first().click();
-      await page.waitForTimeout(1000);
-      await page.evaluate(() => document.dispatchEvent(new Event("visibilitychange")));
-      const observed = await page.evaluate(() => window.__catVitals);
+        const button = (label) => page.locator(".alchemy-inventory-grid").getByRole("button", { name: new RegExp(`^${label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:,|$)`) });
+        await button(step.labels[0]).click();
+        actionStarted = await page.evaluate(() => performance.now()); actionLabel = "Alchimie combine";
+        const response = page.waitForResponse((response) => response.request().method() === "POST" && new URL(response.url()).pathname.endsWith("/combine"));
+        await button(step.labels[1]).click();
+        const reply = await response;
+        if (reply.status() !== 200) throw new Error("Actual scripted combine did not succeed");
+        const fresh = await reply.json();
+        if (!fresh.discovered?.length) throw new Error("Scripted original combine must create an earned concept");
+        await page.waitForFunction((label) => [...document.querySelectorAll(".alchemy-word")].some((element) => element.textContent.includes(label)), fresh.discovered[0].label);
+        await page.waitForFunction(() => !document.querySelector(".alchemy-working"));
+      } else {
+        actionStarted = await page.evaluate(() => performance.now()); actionLabel = "Conexiuni select";
+        await page.locator(selector).first().click();
+        await page.locator('.connection-tile[aria-pressed="true"]').waitFor();
+      }
+      await page.waitForFunction(() => Number.isFinite(window.__catVitals.lcp) && Number.isFinite(window.__catVitals.inp));
+      await page.waitForFunction((start) => window.__catEvents.some((entry) => entry.interactionId > 0 && entry.startTime >= start && /connection-tile|alchemy-word/.test(entry.target)), actionStarted);
+      const observed = await page.evaluate(() => ({ ...window.__catVitals, events: window.__catEvents }));
       if (!Number.isFinite(observed.lcp) || !Number.isFinite(observed.inp)) throw new Error("Actual LCP/INP did not arrive from web-vitals");
-      runs.push({ ...observed, metrics }); await page.close();
+      const actionEntries = observed.events.filter((entry) => entry.interactionId > 0 && entry.startTime >= actionStarted && /connection-tile|alchemy-word/.test(entry.target));
+      // Genuine pagehide finalizes the library callbacks; no synthetic lifecycle event.
+      await page.goto("about:blank");
+      const final = (name) => metrics.filter((metric) => metric.name === name).at(-1)?.value;
+      runs.push({ ...observed, lcp: final("LCP"), inp: final("INP"), cls: final("CLS") ?? 0, action: { name: actionLabel, startTime: actionStarted, entries: actionEntries, latency_ms: Math.max(...actionEntries.map((entry) => entry.duration)) }, metrics }); await page.close();
     }
     const median = (key) => runs.map((item) => item[key]).sort((a, b) => a - b)[2];
     vitals.push({ route, runs, median: { lcp: median("lcp"), inp: median("inp"), cls: median("cls") } });
