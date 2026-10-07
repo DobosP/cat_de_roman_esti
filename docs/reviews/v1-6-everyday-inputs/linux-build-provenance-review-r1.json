@@ -1,0 +1,65 @@
+{
+  "schema": "v1-6-linux-build-provenance-independent-review-r1",
+  "checked_at_utc": "2026-10-07T17:46:04.620494+00:00",
+  "reviewer": "/root/v16_linux_finish/linux_runner_review",
+  "scope": "Narrow actual build-prerequisite/provenance and compiled test-name verification only. No rerun, test execution, app/data mutation, broad release review or installation approval.",
+  "valid_until": "Relevant source/input/tool/method/binary/receipt bytes change or the fresh native campaign departs from the accepted plan.",
+  "files": {
+    "linux-build-summary-r1.json": {
+      "bytes": 2428,
+      "sha256": "205eca9e25794790184d251e2ea7f4a56d5c1871ca08d9a1e12aa516a54e1def"
+    },
+    "linux-build-prerequisite-r1-admission.json": {
+      "bytes": 341871,
+      "sha256": "c75a88facc11eebace47b15b6b8d2f5f7b3eccfc414cf18b25c05d663bf718d7"
+    },
+    "linux-build-prerequisite-r1-result.json": {
+      "bytes": 1798680,
+      "sha256": "1d40d9c7de16e139e1ade38e6b5c97e725acc940dd6d95c6e57efea10434f35f"
+    },
+    "linux-native-plan-r1.json": {
+      "bytes": 178272,
+      "sha256": "875bdbf12ce5639f7ba8ee66ec7203d6c03695d569276b61a9d0066d8085531d"
+    },
+    "linux-lifecycle-and-native-plan-review-r1.json": {
+      "bytes": 9347,
+      "sha256": "698caca99a24573e48398e12f419095bb11654f45800560c8fb84a8c06bedc84"
+    }
+  },
+  "verdict": "ACCEPT_BUILD_PROVENANCE_ONLY",
+  "checks": {
+    "commands": "All five actual argv/name/index values equal the independently reviewed build plan: own qualified version, offline module verification, race compile, build information and package-cwd enumeration.",
+    "admission": "Fresh recorded disk 228972638208 bytes and MemAvailable 41741611008 bytes exceed original floors. One checked_at 2026-10-07T17:42:49.009530+00:00 and deadline 2026-10-07T18:02:49.009530+00:00 give exactly 1200 seconds; limits/measurement directories/scratch bindings equal the reviewed plan. Plan and independent review were added as protected task inputs.",
+    "complete_prefix": "Cumulative/state status completed, all_steps_completed true, pending null and next_index 5. Each of five immutable receipt digests matches state and each parsed receipt exactly equals its cumulative row. Every row retains the same manifest SHA, original baseline 2339923667 bytes, deadline and campaign start. All five status passed/exit zero/guard null/failure null.",
+    "readsets": "Every step has 1273 pre and post checks, all true: 1266 protected task inputs plus seven scratch/tool bindings. Current independent hash reads of all 1266+7 remain exact.",
+    "logs": "All five raw log hashes/current log bytes match their receipts. Actual version is go version go1.27.1 linux/amd64; module output is all modules verified.",
+    "race_provenance": "Actual go version -m names the contentrails.test path and Go1.27.1, -race=true, GOOS=linux, GOARCH=amd64 and pinned module/replacement provenance. Compilation used the exact reviewed -race -c command.",
+    "compiled_names": "Actual -test.list output contains exactly 24 names, equals the summary and matches the complete 24 current source functions. The four approved anchored groups select the exact 19 complementary names, with no omitted or duplicate group member.",
+    "resource_scope": {
+      "peak_sampled_process_group_RSS_bytes": 221208576,
+      "peak_sampled_incremental_bytes": 32183919,
+      "largest_recorded_publication_inclusive_upper_bound_bytes": 99292783,
+      "limits_unchanged": true,
+      "final_metadata_included_by_reservation": true
+    },
+    "no_test_result_claim": "Compilation and test listing produced no test-function execution. This result does not pass any of the 19 remaining cases or grant release/landing approval."
+  },
+  "binary": {
+    "path": "/home/dobo/work/_temp/codex__content-v1-6/probe/linux-contentrails-race-r1.test",
+    "bytes": 29152009,
+    "sha256": "84c22158a6a16fa6557e4d26a1ce41901a49b05268b9340cdca9ce590e458c56",
+    "current_exact": true,
+    "race_instrumented": true
+  },
+  "next_authority": "Create a separately measured fresh native admission using the exact accepted four anchored binary commands plus CLI race/vet, identical limits/maps/measurement roots, one fixed maximum-1200-second campaign deadline and baseline, and the exact verified binary SHA as protected scratch input. This does not reset or continue an old failed clock. Stop and preserve any failure; do not launch its successor.",
+  "historical_failure_reclassification": false,
+  "installation_or_landing_approval": false,
+  "reviewer_execution": {
+    "native": 0,
+    "Go": 0,
+    "test": 0,
+    "application": 0,
+    "source_evidence_hash_reads": true,
+    "review_receipts_written": 1
+  }
+}

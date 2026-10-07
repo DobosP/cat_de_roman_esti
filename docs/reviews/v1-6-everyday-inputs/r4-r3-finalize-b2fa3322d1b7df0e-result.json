@@ -1,0 +1,76 @@
+{
+  "all_steps_completed": false,
+  "campaign_started_at_utc": "2026-10-07T17:34:55.032903+00:00",
+  "deadline_utc": "2026-10-07T17:54:54.977322+00:00",
+  "installation_approval": false,
+  "lane": "r4-r3-finalize-b2fa3322d1b7df0e",
+  "manifest_sha256": "66e73e3f2265684bc85493d7ca5fc3b6bd59eac6156fbcb83b55db3dd7d5e501",
+  "original_start_size": 1807235551,
+  "peak_sampled_incremental_bytes": 1187,
+  "publication_accounting": {
+    "atomic_temporaries_and_final_outputs_included": true,
+    "disk_free_before_publication": 229103546368,
+    "encoded_total_limit_bytes": 16777216,
+    "included_increment_upper_bound": 67110051,
+    "memory_available_before_publication": 53636005888,
+    "original_start_size": 1807235551,
+    "peak_including_publication_upper_bound": 67110051,
+    "reserved_disk_lower_bound": 229036437504,
+    "reserved_publication_bytes_inside_limits": 67108864,
+    "sampled_increment_before_publication": 1187,
+    "size_before_publication": 1807236738
+  },
+  "schema": "v1-6-cumulative-worktree-runner-r4-r3",
+  "status": "failed",
+  "steps": [
+    {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-c",
+        "pass"
+      ],
+      "campaign_started_at_utc": "2026-10-07T17:34:55.032903+00:00",
+      "cleanup": null,
+      "deadline_utc": "2026-10-07T17:54:54.977322+00:00",
+      "exit_code": 0,
+      "failure": null,
+      "finished_at_utc": "2026-10-07T17:34:56.772444+00:00",
+      "guard": "catchable-signal-finalization",
+      "incremental_bytes_from_original_baseline": 1135,
+      "index": 0,
+      "log_bytes": 0,
+      "log_path": "/home/dobo/work/_temp/codex__content-v1-6/probe/r4-r3-finalize-b2fa3322d1b7df0e-0.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_text": "",
+      "manifest_sha256": "66e73e3f2265684bc85493d7ca5fc3b6bd59eac6156fbcb83b55db3dd7d5e501",
+      "name": "tiny-child-before-late-signal",
+      "original_start_size": 1807235551,
+      "peak_group_RSS_bytes": 0,
+      "post_checks": {
+        "/home/dobo/work/_temp/codex__content-v1-6/probe/linux-r4-r3-finalization-r1/inject_late_signal.py": true,
+        "/home/dobo/work/_temp/codex__content-v1-6/probe/run_worktree_lane_r4_r3.py": true
+      },
+      "pre_checks": {
+        "/home/dobo/work/_temp/codex__content-v1-6/probe/linux-r4-r3-finalization-r1/inject_late_signal.py": true,
+        "/home/dobo/work/_temp/codex__content-v1-6/probe/run_worktree_lane_r4_r3.py": true
+      },
+      "publication_accounting": {
+        "atomic_temporaries_and_final_outputs_included": true,
+        "disk_free_before_publication": 229103546368,
+        "encoded_total_limit_bytes": 16777216,
+        "included_increment_upper_bound": 67110051,
+        "memory_available_before_publication": 53636005888,
+        "original_start_size": 1807235551,
+        "peak_including_publication_upper_bound": 67110051,
+        "reserved_disk_lower_bound": 229036437504,
+        "reserved_publication_bytes_inside_limits": 67108864,
+        "sampled_increment_before_publication": 1187,
+        "size_before_publication": 1807236738
+      },
+      "received_signal": 2,
+      "signal_commit_policy": "Signals before the final empty pending-signal snapshot fail this step. That snapshot follows fsynced outcome publication, manifest recheck and final accounting. State acknowledgement then uses reserved bytes. Signals after this completed-outcome boundary stay deferred until exit; they do not retroactively invalidate a completed command. No child remains.",
+      "started_at_utc": "2026-10-07T17:34:55.247437+00:00",
+      "status": "failed"
+    }
+  ]
+}

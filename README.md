@@ -2,7 +2,7 @@
 
 V1.6 continues as an unmerged checkpoint on `codex/content-v1-6`; see the
 [current qualification](docs/reviews/v1-6-everyday-inputs/README.md) and
-[continuation decision](docs/adr/0179-resume-v1-6-in-original-chat.md). It is not release-qualified.
+[continuation decision](docs/adr/0181-resume-linux-v1-6-finish.md). Native content/documentation gates passed; exact assembled review precedes landing.
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in

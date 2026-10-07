@@ -1,7 +1,7 @@
 # ADR-0180 — Stop the Windows loop and publish the Linux checkpoint
 
 Date: 2026-10-07
-Status: Accepted — human-requested stop and WIP feature publication
+Status: Superseded by ADR-0181 — historical human-requested stop and WIP feature publication
 
 ## Context
 

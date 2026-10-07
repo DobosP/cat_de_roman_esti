@@ -1,6 +1,40 @@
 # V1.6 — everyday input coverage
 
-## Current qualification in the original chat
+## Current Linux qualification
+
+Valid until: exact bindings, host admission or human steering change — recheck before execution.
+
+The human resumed this original-chat loop after inspecting Windows a1f0079;
+[ADR-0181](../../adr/0181-resume-linux-v1-6-finish.md) supersedes the stop and
+[ADR-0182](../../adr/0182-v1-6-reviewed-singular-inputs.md) records the exact content.
+All19 complementary rail cases passed one independently planned Linux race campaign,
+5/5/5/4, plus final CLI race/backend vet. Its immutable17:47:27→18:07:27UTC clock
+and original baseline remain exact; final native metadata completed17:58:40UTC.
+Peak sampled RSS702,844,928bytes; cumulative increment59,920,318bytes; all1278
+protected checks per step passed. [Summary](linux-complementary19-summary-r1.json),
+[complete raw archive](linux-native-complete-evidence-r1.tar.gz),
+[member manifest](linux-native-complete-evidence-manifest-r1.json) and
+[independent acceptance](linux-complete-native-evidence-review-r1.json) bind the result.
+No prior failed Linux/Windows campaign was reset or reclassified.
+
+Minimal Linux R4-R3 fixes one prior-receipt hash/parse race with one byte snapshot.
+Independent source, actual active/finalization controls, finite plan and exact Go1.27.1
+race-binary provenance passed. No Windows subsystem was ported. All24 rail functions
+are covered by earlier exact5 World cases and these19. The other36 backend packages/
+shared race+vet,489 references/Ruff/full HTTPgolden race, installed Source6 audits/
+original-role finals/currentall4authority, source/export/rank/derive/mobile/independent
+export and actual1207parity/151TCP/28assets remain exact at109runtime/source8/rubric.
+
+Exactly2 singular synonym families/forms: drapel→Steag and untdelemn→culinary Ulei.
+Zero concepts, edges, targets, rounds or eligible/preferred growth. Actual sealed
+56-request ordinary play proves direct aliases/shared attempts/private recovery;
+controlled Lanț/terminal evidence stays separate. Pool2selected/1researched/3held/
+0integrated remains until actual root landing. [Complete ledger](verification.json)
+records all gates. Native docs46/default working+staged whitespace passed. Independent exact-commit
+assembled review precedes root's green landing. No mainmerge/push/deploy or PG/provider activation
+has occurred in this worker; the root owns the authorized publication and next wave.
+
+## Historical Windows stop and Linux transport checkpoint
 
 Valid until: exact bindings, host admission or owner steering change — recheck before execution.
 

@@ -1,0 +1,110 @@
+{
+  "schema": "v1-6-linux-lifecycle-and-compiled-native-plan-independent-review-r1",
+  "checked_at_utc": "2026-10-07T17:42:15.629274+00:00",
+  "reviewer": "/root/v16_linux_finish/linux_runner_review",
+  "valid_until": "Bound fixture/evidence/method/plan bytes change, relevant protected input changes, or execution departs from the approved finite Linux scope.",
+  "scope": "Independent verification of two completed controlled Linux lifecycle fixtures and source approval of the exact separately admitted compiled race prerequisite plus complementary 19-case native plan. No native/Go/application/test execution by this reviewer.",
+  "files": {
+    "linux-lifecycle-summary-r1.json": {
+      "bytes": 4868,
+      "sha256": "8a54b6127b518f29b77a9ef76d83acaaf691b07604fc197474de1beac343acd3"
+    },
+    "linux-lifecycle-evidence-r1.tar.gz": {
+      "bytes": 4827,
+      "sha256": "31df544667976c5feeda9c6ddc3447552bdf302e27121d4a8ad6b56ac279b5ac"
+    },
+    "linux-native-plan-r1.json": {
+      "bytes": 178272,
+      "sha256": "875bdbf12ce5639f7ba8ee66ec7203d6c03695d569276b61a9d0066d8085531d"
+    },
+    "linux-runner-source-review-r1.json": {
+      "bytes": 6702,
+      "sha256": "1bd59816684e062a640733db76f26c8c7d8e0945c488775bbd0782e50917d649"
+    },
+    "methods/run_worktree_lane_r4_r3.py.txt": {
+      "bytes": 27801,
+      "sha256": "a7deb39ed747c68bc029da3ea7d02485096d6ff6ef531aa2b948ffc3e28a0b73"
+    },
+    "methods/check_runner_signal_r4_r3.py.txt": {
+      "bytes": 15492,
+      "sha256": "21606efc94fd281022f92d7790b8c3e0a050beb7ddbe0a2a749d08aa4b59385c"
+    },
+    "wsl-native-campaign-spec-r3.json": {
+      "bytes": 343131,
+      "sha256": "f857d3dd36587c23b14fcd00f28915f711baf9427811f4be2d5c59ea7528fa86"
+    },
+    "linux-resume-source-admission-r1.json": {
+      "bytes": 631,
+      "sha256": "8b9ae8cf126dbf385f5a03827f81ffff81548f1fa053b2d45a326b0bf170a79b"
+    }
+  },
+  "fixture_verdict": "ACCEPT_ACTUAL_CONTROLLED_LINUX_LIFECYCLE_EVIDENCE",
+  "fixture_checks": {
+    "archive": "All 21 regular members verified against the summary exact sizes and SHA-256 values; all archived byte sequences equal their current task/scratch originals. Archive SHA-256 31df544667976c5feeda9c6ddc3447552bdf302e27121d4a8ad6b56ac279b5ac.",
+    "active": {
+      "passed": true,
+      "elapsed_seconds": 3.7035678209999787,
+      "budget_seconds": 30,
+      "successful_prefix_preserved": true,
+      "failed_owned_step_signal": 15,
+      "cleanup_seconds": 0.2428581380002015,
+      "cleanup_remaining_live_members": [],
+      "fallback_cleanup_needed": false,
+      "reset_and_successor_refusal": "Exact reviewed harness executes both refusal calls, checks failed state hash preservation and successor file absence; report observations and current forbidden-file absence agree. Raw refusal stdout is not separately archived.",
+      "closed_stdout": "The actual reviewed harness closes the guard stdout pipe before SIGTERM; durable state/outcomes remain readable and exact.",
+      "current_process_check": "Neither recorded child nor grandchild identity is live in /proc at review; PID/start-tick ownership avoids attributing reused PIDs to this fixture."
+    },
+    "finalization": {
+      "passed": true,
+      "elapsed_seconds": 2.2423323110001547,
+      "budget_seconds": 30,
+      "child_exit_code": 0,
+      "received_SIGINT": 2,
+      "guard": "catchable-signal-finalization",
+      "outcome": "Durable failed state, matching cumulative/step receipt, and no approval despite successful child exit.",
+      "scope": "Controlled SIGINT at real log hashing with original digest preserved; exact publication predicate boundary checks, not every possible signal timing."
+    },
+    "chains": "Both states retain exact original admission SHA, baseline, deadline and campaign start. State receipt hashes match every immutable step byte sequence; cumulative rows equal those receipts. Active prefix passes and interrupted step fails; finalization child exit zero still fails. All pre/post readset values are true. Both cumulative outcomes remain failed/all_steps_completed false/installation_approval false as intended controls.",
+    "publication": "Actual receipts reserve 64 MiB inside unchanged growth and disk limits and record atomic temporary/final output inclusion. No publication-limit, floor or deadline relaxation.",
+    "meaning": "PASS is confined to successful handling of deliberately failed Python-only lifecycle campaigns. It is not native throughput, content correctness, application installation, SIGKILL/host-loss safety or Windows/WSL qualification."
+  },
+  "plan_verdict": "ACCEPT_EXACT_LINUX_PLAN_CONDITIONALLY_ON_FRESH_ADMISSIONS_AND_POSTBUILD_VERIFICATION",
+  "plan_checks": {
+    "input_maps": "All 1264 task inputs and all seven scratch bindings verified against current file hashes. All original 1259 names are retained; the five added names are exact Linux runner/harness/source-review/lifecycle-summary/archive evidence. The only four original-map digest changes are STATUS, ADR0179, ADR index and wave README documentation.",
+    "compiler_coverage": "All 161 current Go source files under go-backend/shared-go are included in the task input map. No Go source, test assertion or production artifact changes are introduced by this plan.",
+    "coverage": "Source contains 24 top-level contentrails test functions. The planned four disjoint anchored groups contain exactly 19 distinct functions. The complementary five are the previously recorded World transition/history cases; plan does not claim to rerun them. Actual compiled enumeration must match all 24 before the 19-case campaign begins.",
+    "build_prerequisite": "Exact own Go1.27.1 version, offline locked-module verification, go test -race -c ./internal/contentrails, go version -m of the produced binary, and package-cwd test.list. Compiling a race binary and enumerating it does not execute the 24 test functions; it is still separately bounded native/build work.",
+    "binary_commands": "Each command uses /usr/bin/env -C the real contentrails package directory, the same exact postbuild-pinned binary, -test.v, -test.timeout=18m and the exact fully anchored group regex. This preserves rootPath relative resolution and executes functions afresh without Go cached test result reuse. Group sizes 5/5/5/4 cover all 19 complementary cases.",
+    "final_commands": "The same native campaign then executes final cat-content-rail CLI race tests with -count=1 and complete backend vet. All four groups plus CLI/vet share one new fixed deadline and original measured baseline; subprocess timeout flags do not grant extra campaign time.",
+    "limits": {
+      "GOMAXPROCS": 2,
+      "RSS_bytes": 2147483648,
+      "build_jobs": 2,
+      "incremental_bytes": 1073741824,
+      "metadata_reserve_seconds": 180,
+      "remaining_disk_memory_floor_bytes": 17179869184,
+      "start_disk_floor_bytes": 18253611008
+    },
+    "measurement_roots": "Mandatory task/probe/cache/tmp/gopath roots plus all seven listed disjoint owned scratch directories cover every current own scratch subdirectory. The tools directory is counted. No unrelated older wave readsets are silently substituted and no task scratch growth is excluded.",
+    "material_difference": "This prospective Linux plan reuses the exact qualified host lifecycle method and compiles race instrumentation once in a separate prerequisite before finite compiled-binary groups. It is a new materially scoped campaign, not a continuation, reset or relabel of failed historical Linux/Windows admissions."
+  },
+  "execution_conditions": [
+    "Before the build prerequisite, obtain and record fresh actual free disk at least 17 GiB and MemAvailable at least 16 GiB; create exactly one new immutable admission preserving the reviewed command/input/scratch/limit maps and exact runner source SHA.",
+    "The build admission has its own single maximum-1200-second clock, original measured growth baseline and 180-second metadata reserve. No tests launch if the prerequisite or any guard fails.",
+    "Before creating the native admission, verify successful complete prerequisite receipts, actual Go1.27.1, race build information, all 24 enumerated current function names and the actual produced binary SHA-256. Add that exact binary to protected scratch bindings; inspect original-source identity before execution.",
+    "Measure fresh headroom again for the native campaign. Preserve exact 19-case/CLI/vet argv, all mandatory input names/current pins, accounting roots and limits; use one maximum-1200-second deadline and one cumulative baseline for the entire campaign.",
+    "Only exact successful prefixes may continue. Any guard or case failure stops that campaign, preserves all raw evidence and prevents successor launch; do not renew its clock, reuse a failed admission or reclassify historical outcomes.",
+    "No fixture or plan approval substitutes for complete native results, source/current authority checks, docs/whitespace, pool finalization or independent exact assembled release acceptance."
+  ],
+  "findings": [],
+  "historical_failures_reclassified": false,
+  "installation_or_landing_approval": false,
+  "reviewer_execution": {
+    "native": 0,
+    "Go": 0,
+    "application": 0,
+    "fixture": 0,
+    "source_integrity_and_evidence_reads": true,
+    "review_receipts_written": 1
+  }
+}

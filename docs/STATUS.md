@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — Source5 main6a233279 unchanged; V1.6 partial/unmerged; human stopped the loop and requested an origin feature checkpoint for Linux continuation.
+Last verified: 2026-10-07 — Source5 main6a233279 unchanged; V1.6 partial/unmerged; human resumed the Linux qualification and iteration loop under ADR-0181.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -46,7 +46,7 @@ Last verified: 2026-10-07 — Source5 main6a233279 unchanged; V1.6 partial/unmer
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Qualified Source5 KG: `fixture-v1-4-time-links`, 2419 nodes/9473 links/8677 forms/180 exact puzzles.
+Staged Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
@@ -55,18 +55,18 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Current qualified artifact pins
+## Current staged V1.6 pins (main remains qualified Source5)
 
-- alchimie_discovery_world_v92.json: `196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086`
-- alchimie_recipe_extensions_v92.json: `1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7`
-- quick_games_v92.json: `a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609`
+- alchimie_discovery_world_v92.json: `8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad`
+- alchimie_recipe_extensions_v92.json: `d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc`
+- quick_games_v92.json: `0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef`
-- derived_catalog_v38.json: `25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01`
+- board_rankings_v37.json: `036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31`
+- derived_catalog_v38.json: `fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6`
-- cat_mobile_app_pack_contract.json: `2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8`
+- kg_sample.json: `63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf`
+- cat_mobile_app_pack_contract.json: `282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-- V1.5/Source5 remains qualified main6a233279; shared checkout clean. V1.6 is partial/unmerged on canonical `codex/content-v1-6`; [ADR-0179](adr/0179-resume-v1-6-in-original-chat.md) records the loop here. Exactly2 staged singular forms (drapel→Steag, untdelemn→culinaryUlei), zero new nodes/edges/targets/rounds. Frozen runtime109/source8/rubric and existing Source6/489reference/native/HTTP proofs remain exact. Original Linux/Windows runner failures are retained. Go1.27.1 SDK, WSL primitives, independent R9/helperR4 source+controlled Windows evidence,217 pure cases, full-root parity and both actual lifecycle fixtures pass their scopes. Source-onlyR3 and exact immutable nativeR1 admission were independently accepted. NativeR1 step0 lockedmodules and step1five race cases pass; step2 stopped at metadata-time-reserve11:10:28UTC, original deadline11:13:13/baseline752431588 unchanged. PeakRSS490426368/growth580340038 stay below2GiB/1GiB; SIGTERM cleanup0.026s leaves no owned processes. All1265 pre/post bindings pass. [Exact raw evidence](reviews/v1-6-everyday-inputs/wsl-native-campaign-r1-evidence.tar.gz) retains receipts/logs/helper history/old docs; interrupted assertions are unqualified. Fourteen complementary cases, finalCLI/vet/docs/pool/assembled acceptance and green landing remain pending. Pool stays2selected/1researched/3held/0integrated. Independent failed-campaign and bounded synthetic IO evidence reviews pass their scopes: matched260files/36MiB in37.415s; ext4 write/copy/stat/hash faster, fsync slower. Linux scratch is counted. Exact split-binary provenance/R11 source pass scope reviews; per-step canonical+mirror109 and compiler161 namespaces are required. Source-accepted mirrorR2 preparation stopped at40s after127/172files; partials/rawfailure retained, no native launched. R11 pure57 cases pass scoped review; R12 owned-telemetry source and descriptor copyR6 source are accepted. Descriptor fixtures retain full failures2/31 on C held-root rename and7/32 on unsupported C FIFO; host-faithful descriptor32 and telemetry20 controls pass scoped evidence reviews. Complete mirrorR6 is independently accepted for metadata:172readers/57,335,773bytes,109runtime exact,22.832s work/31.685s host,29,999,104RSS/growth457,191,007 under unchanged caps;285terminal helpers clean. ActualR13 failed before target launch at24s; R15 real owned cleanup/readsets/no-successor passed their raw scope but the whole fixture FAILED24.008s at reset-refusal timeout, preserved independently. R16 active-only also FAILED25.678s at guard-exit timeout; independent failure preservation confirms owned process absence and299terminal/299sidecar helpers clean. Source-accepted R13 adds early signal checks only to already-interrupted accounting; accepted measurements/publication counts/post-readsets retain every guard. Focused delta24 controls pass scoped review. R17 actual active passes23.368s work/23.885s host with0.093s owned cleanup; exact failed-lane CLI continuation/reset refusals pass14.197s work/14.753s host, independently accepted with original clock/baseline/pins unchanged. Finalization/queued and native throughput remain unqualified. R14 bounded two-worker fresh registry source and focused25 controls are independently accepted; R18 actual active passes16.526s work/16.890s host but independent active/binding review was interrupted by the human stop. R18 finalization/queued/CLI-refusal and new native campaign are unexecuted. Every receipt/readset/resource guard and fixed budget remains required. All19 require a complete accepted campaign; no identical retry or renewed failed clock. [Current evidence](reviews/v1-6-everyday-inputs/README.md). [ADR-0180](adr/0180-stop-windows-loop-publish-linux-checkpoint.md) records the stopped loop and human-authorized WIP origin publication; no green landing/version advance is claimed. Continue qualification on Linux.
+- V1.5/Source5 remains qualified main6a233279; V1.6 unmerged on `codex/content-v1-6` under [ADR-0181](adr/0181-resume-linux-v1-6-finish.md)/[0182](adr/0182-v1-6-reviewed-singular-inputs.md). Exactly2 singular synonym families/forms, zero concepts/edges/targets/rounds. All24rails complete5+19 race partitions and finalCLI/backendvet PASS; exact489reference/109runtime/Source6all4authority/36backend+shared/1207HTTP/smoke151+28 retained. Linux19campaign ended17:58:40UTC before18:07:27deadline, sampledRSS702844928/increment59920318bytes. [Ledger](reviews/v1-6-everyday-inputs/verification.json) binds all gates/retained failures. Nativedocs46/defaultworking+stagedwhitespace PASS; independent exactassembled review precedes root landing. Pool2selected/1researched/3held/0integrated; every earlier hold/rejection remains.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0179), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.
+- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0182), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.

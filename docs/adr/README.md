@@ -117,3 +117,7 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0179](0179-resume-v1-6-in-original-chat.md) — continue the existing V1.6 task and sequential version loop in the original chat with unchanged gates.
 
 - [0180](0180-stop-windows-loop-publish-linux-checkpoint.md) — stop the Windows version loop and publish the explicitly requested partial V1.6 feature checkpoint for Linux.
+
+- [0181](0181-resume-linux-v1-6-finish.md) — resume the existing Linux V1.6 qualification and human-requested iteration loop.
+
+- [0182](0182-v1-6-reviewed-singular-inputs.md) — two qualified singular synonym inputs with native Source6/current authority and preserved history.
