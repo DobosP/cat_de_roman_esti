@@ -1,5 +1,68 @@
 # V1.6 — everyday input coverage
 
+## Owner-paused Windows continuation
+
+Valid until: the owner resumes this exact branch and refreshes host admission — then treat this checkpoint as history.
+
+V1.6 is a **partial checkpoint, not green and not landed**. Continue on
+`codex/content-v1-6`; qualified main is Source5 `6a2332795dc5fa2db3eb61e196ab7ab820e76caa`.
+The owner requested an immediate restart and Windows continuation. Finish only V1.6;
+after green independent review, root lands and pushes `origin/main`, then stops.
+The heartbeat is paused and no V1.7 is authorized.
+
+The tracked [continuation checkpoint](continuation-checkpoint-r1.json) contains the
+exact gate ledger, all nineteen remaining test names, resource limits, artifact pins
+and Windows instructions. TASK_BRIEF/TASK_RESULT are local ignored convenience files;
+this README and the JSON receipt are the transport handoff.
+
+Passed:489 Python references/Ruff/full HTTPgolden race; fresh109-runtime/source8
+installed audits and original-role finals; exact default all-four authority plus
+source/export/rank/derive/mobile/independent export;36 other backend packages and
+shared race/vet; full five-test World group; compiled1207 parity and owned TCP151
+requests/28 assets. The earlier mixed historical-context failure is preserved and
+its independently reviewed test-only repair passed the complete World group.
+
+**Pending:** all nineteen complementary contentrail tests have no accepted pass.
+The old runner exited143 while its owned native group remained; that group was
+verified and stopped, with all protected bytes exact. Cause is unknown. R4 source
+review requested three fixes; revised R4-R2 is prepared but its review was interrupted
+by the owner. Both Python-only fixture modes and the new cumulative campaign are
+unexecuted. Final docs/ADR/pool qualification, exact-commit assembled review and green
+landing remain outstanding. Do not treat this transport commit as release approval.
+
+R4-R2 and its harness are available as exact tracked [runner source](methods/run_worktree_lane_r4_r2.py.txt)
+and [harness source](methods/check_runner_signal_r4_r2.py.txt). They are Linux-specific
+and unapproved for execution. Windows continuation must inspect the actual host and
+qualified Go1.27.1, preserve byte pins, and review any necessary path/supervision
+adaptation. Keep the same resource caps and one fixed20-minute deadline/disk baseline
+across exhaustive5/5/5/4 partitions; never reset a failed window. All source/candidate/
+review/corpus/history inputs are durable in the repository. Do not reapply completed
+content transactions or change held records. Linux scratch/SDK remain preserved;
+Linux executables cannot be assumed runnable on Windows.
+
+Remaining19 test functions (all require a fresh qualified pass):
+
+- `TestInstalledAuthorityEmptyKeepsHistoricalBaselineAndPinIsSeparate`
+- `TestInstalledAuthorityPinExclusionPermitsOnlyDigestMetadata`
+- `TestInstalledAuthorityProtectedDocumentReaderRefusals`
+- `TestInstalledAuthorityDraftOutputCannotOverwriteAuthorityOrRuntime`
+- `TestReviewedInstalledVersionTwoReconstructsWithoutRelabelingV1`
+- `TestInstalledAuthoritySchemaPinAndSequentialChainRefusals`
+- `TestInstalledAuthorityCannotBeGrantedByPinsWithoutCurrentReviews`
+- `TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse`
+- `TestFutureInstalledParentChainRequiresExactSequentialReviewedPredecessor`
+- `TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes`
+- `TestStrictPrivateSourceAndReviewJSON`
+- `TestSourceShapeAndVersionParentRefuseBeforeConstruction`
+- `TestCompleteIndependentJudgmentsSourcesAndCandidateBinding`
+- `TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal`
+- `TestSharedGuardedTransactionsRollbackAndRefuseStaleReadsets`
+- `TestOutputCannotFollowSymlinkOrOverwriteFixtures`
+- `TestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval`
+- `TestLoadedCustomSourceCASRefusesChangedFlagFile`
+- `TestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay`
+
+
 Valid until: owner steering, baseline or selected candidate changes — repeat affected checks.
 
 Started after V1.5's exact independent acceptance and local landing. Baseline is
@@ -13,7 +76,8 @@ Independent raw graph quality accepts the exact two-form candidate for staging. 
 candidates and Quick/World proposals are generated in isolation. Native raw reviews and
 Quick/World prospective audits and same-role World finals pass; supported installation,
 current-artifact history and full release gates remain pending.
-Installed Source5 content is unchanged.
+The qualified serving bundle remains Source5. Task graph/Source6/rank/derive staging is
+now present; its first lane has the resource-accounting limitation documented below.
 
 The next wave will inspect existing decks, missing familiar input forms and specific
 associations, then research at most six finite leads through original sources. It will
@@ -296,3 +360,80 @@ length check is retained as history. No native audit was rerun or weakened.
 These finals allow only the exact supported World transaction while its bindings remain
 identical. They are not installed audits/finals, current authority, release or assembled
 acceptance. Actual worktree graph/Source6/catalogue staging has not started.
+
+
+## Actual worktree staging and resource-accounting limitation
+
+After the unexecuted R1 wrapper received changes, the [R2 method review](source6-worktree-staging-method-review-r2.json)
+accepted atomic no-clobber authored-source publication, SIGTERM-safe ownership bookkeeping
+and independent graph/mode/authored rollback attempts. The old wrapper remains preserved.
+The [actual staging result](source6-worktree-staging-r1-result.json) completes the original
+graph transaction, native ranking and native derived builders. All ten exact postconditions
+match the isolated candidates: two KG mirrors63f0dcd7, generated mobile, two unchanged pack
+mirrors, ranking036c8a00 and derivedfdc94e5d mirrors, and authored Source6a086dc2a.
+Eight paths changed bytes/presence; all other protected bytes remain exact. World, Quick,
+Extensions, reserve, serving bundle and installed-authority metadata remain unchanged.
+
+A [resource-qualification limitation](source6-worktree-staging-resource-limit-r1.json)
+is explicit: the inherited runner measured scratch/docs/caches but omitted the actual
+worktree output directories from incremental-disk accounting. This lane is not a full
+resource PASS. The stop attempt occurred after all three commands finished and signalled
+no process. Successful content/byte/mode observations are retained without erasing the gap.
+The corrected guard counts the whole task worktree once; it requires independent review
+and a fresh bounded nonmutating qualification over these existing staged outputs before
+further installation. Do not reapply the already-installed graph module or reset R1 clocks.
+No V1.6 serving release or local landing has occurred; main remains the qualified Source5.
+
+
+[Fresh actual-root qualification](source6-current-requalification-summary-r1.json) passes
+nonmutating native ranking/derived checks and World audit under the corrected whole-worktree
+guard:28.653s,149237760sampledRSS,25773incremental bytes,1717protected hashes exact.
+The actual-root audit is byte-identical to the earlier isolated one. This qualifies the
+present staged state without retrospectively passing R1's incomplete accounting.
+
+Same-role World R2 finals explicitly accept the actual worktree. Its [guarded installation](source6-world-staging-summary-r1.json)
+passes and refreshes Quick's actual audit after the source binding change. Quick85/460HTTP
+then receives same-role factual/quality finals. Its first installation preflight refuses
+at16057647104available-memory bytes, before admission or subprocess. Fresh measured
+recovery above the unchanged floor admits R2; [Quick installation](source6-quick-staging-summary-r1.json)
+passes. World8f013a8f and Quick0c79b9c5 are now staged in this worktree; the serving bundle
+and current-authority metadata remain Source5. No V1.6 release or landing is claimed.
+
+The [reviewed-pin transition](source6-reviewed-pin-transition-r1.json) proposes only derived
+fdc94e5d and Quick0c79b9c5 digest updates in Go and independent Python loaders. All loader
+conditions remain strict. Those runtime changes invalidate earlier live audits for future
+installed authority, so final installed audits/finals still wait for the complete runtime,
+export, reference and history freeze. Genuine immutable Source5/Source4 test contexts are
+being prepared; old digest literals and assertions must not be repinned to Source6.
+
+
+## Complete native source set and exported bundle
+
+[Pin review](source6-reviewed-pin-review-r1.json) accepts exactly four substitutions
+across three loaders. Genuine immutable Source4/Source5 contexts retain all original
+assertions; their rebuilds and pin restoration pass focused native race checks. Fresh
+current tools construct Extensionsd94647e7 and its actual audit6d6010f2. This audit proves
+27affected projections/49 additions, plans/par and node/edge provenance; it is not an
+HTTP or Combine-session replay. Same-role factual/quality finals accept only the exact
+transaction. Native guarded installation then succeeds.
+
+[Native export summary](source6-export-summary-r1.json) records complete source validation,
+supported export, rebuilt tools and exact export check. Bundlee0cfe93d has7272424bytes;
+digestc0bededc and all eight source hashes are explicit. [Whole-bundle comparison](reference/bundle-delta-r1.json)
+finds31changed JSON paths: only the two node aliases/two normalized owners, Ulei snapshot,
+manifest and source/review metadata. Boards, feedback data, edges, route captions, pack
+records and normalization rules remain exact. This is native qualification only; current
+independent export/HTTP, installed authority and full release gates remain pending.
+
+The first next source-preparation admission refused16765857792available-memory bytes
+before workers or native subprocesses; its refusal is preserved. A fresh measured recovery
+admitted R2. Source-only authors prepared strict complete-byte V1.6 history inverses,
+old KG/World loader contexts and separate current Source6 tests, retaining500old assertions
+and every old digest literal.64new Python cases are a static count, not a test result.
+Independent review and execution remain required.
+
+The capture adapter changes only root/output/provenance labels in the preserved1207-case
+Django producer. A separate56-request method loads the actual sealed Source6 bundle without
+research overlays, and a40-request permanent regression protects ordinary synonym inputs.
+These remain unexecuted until method review and fresh resource admission. No expected
+responses, old corpora or production HTTP selector have been edited.

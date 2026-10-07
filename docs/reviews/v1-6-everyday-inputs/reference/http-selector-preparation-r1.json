@@ -1,0 +1,170 @@
+{
+ "accepted_capture_review": {
+  "path": "docs/reviews/v1-6-everyday-inputs/source6-capture-and-current-input-review-r1.json",
+  "scope": "Independent exact captured data acceptance permits this separately reviewed integration; it is not selector code or release approval.",
+  "sha256": "da15a5c5a0e34ca4ec8cc79d7aca2334ddbaee6d37fd5021361c59d5cde60df6"
+ },
+ "admission": {
+  "path": "docs/reviews/v1-6-everyday-inputs/source6-current-snapshot-selector-preparation-admission-r1.json",
+  "sha256": "192af7a7b79696f8fbd37798aeb400ff3fdbd54edfbd21fe37f45c7967151f1c"
+ },
+ "checked_at_utc": "2026-10-07T03:58:23.781244+00:00",
+ "execution": {
+  "Go_commands": 0,
+  "commits": 0,
+  "deadline_minus180s_preserved": true,
+  "expected_response_edits": 0,
+  "gofmt": 0,
+  "native_tests_builds_or_captures": 0,
+  "process_max_RSS_bytes": 22925312,
+  "source_files_written": [
+   "go-backend/internal/httpgolden/golden.go",
+   "go-backend/internal/httpgolden/golden_test.go",
+   "go-backend/internal/httpgolden/source6_test.go",
+   "go-backend/internal/httpgolden/testdata/python-http-parity-v1-6.json.gz",
+   "docs/reviews/v1-6-everyday-inputs/reference/http-selector-preparation-r1.json"
+  ],
+  "subagents": 0
+ },
+ "existing_test_full_diff": "--- before/golden_test.go\n+++ after/golden_test.go\n@@ -315,7 +315,7 @@\n \tif err != nil {\n \t\tt.Fatal(err)\n \t}\n-\tif V15SHA256 != \"22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519\" || len(c.Cases) != 1207 || len(c.Sources) != 8 || !strings.Contains(c.Reference, \"Independent Django application; V1.5 reviewed world-only sources\") || !reflect.DeepEqual(c.Sources, testData(t).Sources) {\n+\tif V15SHA256 != \"22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519\" || len(c.Cases) != 1207 || len(c.Sources) != 8 || !strings.Contains(c.Reference, \"Independent Django application; V1.5 reviewed world-only sources\") || !reflect.DeepEqual(c.Sources, historicalV15Data(t).Sources) {\n \t\tt.Fatal(\"V1.5 independent corpus source/capture identity drift\")\n \t}\n \tif c.Sources[\"alchimie_discovery_world_v92.json\"] != \"196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086\" {\n@@ -350,7 +350,7 @@\n }\n \n func TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests(t *testing.T) {\n-\tdata := testData(t)\n+\tdata := historicalV15Data(t)\n \tclient, err := NewClient(Local(httpapi.New(data)), MaxCases)\n \tif err != nil {\n \t\tt.Fatal(err)\n",
+ "five_historical_corpora_unchanged": {
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-4.json.gz": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-5.json.gz": "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519",
+  "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
+ },
+ "generated_corpus_copy": {
+  "cases": 1207,
+  "compressed_bytes": 33785,
+  "compressed_sha256": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+  "copy_method": "Read accepted gzip bytes and write those exact bytes; no decompression/re-encoding in the copy. Decompression was read-only inspection.",
+  "destination": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-6.json.gz",
+  "expected_response_edits": 0,
+  "provenance": "Actual independent Django1207 capture and native child comparison already accepted by da15a5c5.1207 request/status/order identities persist;1206 bodies exact and sole manifest case923 delta accepted. No expected body was authored here.",
+  "raw_bytes": 696176,
+  "raw_sha256": "6306370b083e3d2b90471319b827c1da47719095041fa43355e18b3caf1aae75",
+  "scratch_capture": "/home/dobo/work/_temp/codex__content-v1-6/current-reference-v1-6/outputs/python-http-parity-v1-6.json.gz",
+  "scratch_durable_runtime_copy_byte_exact": true,
+  "source": "docs/reviews/v1-6-everyday-inputs/reference/current-http-corpus-r1.json.gz",
+  "source8": {
+   "alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+   "alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+   "board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+   "derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+   "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+   "quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+   "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  }
+ },
+ "historical_Source5_context": {
+  "all_old_test_functions_literals_requests_mutations_assertions_preserved": true,
+  "all_other_old_test_bytes_exact": true,
+  "archive": {
+   "bytes": 1927955,
+   "compressed_read_limit": 4194304,
+   "exact_uncompressed_bytes": 14376960,
+   "path": "docs/reviews/v1-6-everyday-inputs/reference/historical-source5-context.tar.gz",
+   "per_member_limit_bytes": 8388608,
+   "regular_unique_members_required": 12,
+   "sha256": "ffffa21ccf11f79d817c529123f2583824c62fefaabd17a5887e7ce809507e48",
+   "uncompressed_read_limit": 33554432
+  },
+  "bundle": {
+   "bytes": 7272295,
+   "decoder": "Existing content.Decode; eight source identities required.",
+   "member": "go-backend/internal/content/bundled.json",
+   "sha256": "c1fff429992c69926aafb07f5b015f890a82c7c01cc5230107bdaf481bca5993"
+  },
+  "helper": "Test-only historicalV15Data in source6_test.go reads genuine immutable12-member tar, never expected source identities from the HTTP corpus.",
+  "independent_source_context_check": "Read-only extraction of exactC1 bytes confirms decoded sources equal the V1.5 corpus source tuple; no tautological construction from corpus expectations.",
+  "manifest": {
+   "path": "docs/reviews/v1-6-everyday-inputs/reference/historical-source5-context-manifest.json",
+   "sha256": "47d93bbae6a5a6f5eec031a09568c20e2f81887598cff9fff9120c9eeff2a48c"
+  },
+  "production_loader_or_fixture_changes": false,
+  "scope_authorization": "Root explicitly authorized narrow acquisition changes at both existing V1.5 test sites after their current-loader assumption was identified.",
+  "sites": [
+   "TestV15IndependentCorpusRetainsExactWorldOnlySourceScope comparison now reads historicalV15Data(t).Sources.",
+   "TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests initializes data through historicalV15Data(t), preserving meaningful same-KG Source4 versusSource5 refusal."
+  ]
+ },
+ "implementation": {
+  "LoadVersion_inspection": "No LoadVersion function exists in current httpgolden; existing version-specific readers and ForSources are retained.",
+  "ReadCorpus_and_Replay_byte_budget_schema_trailing_fields_source_checks_exact": true,
+  "additive_changes": [
+   "Embed exact testdata/python-http-parity-v1-6.json.gz as frozenV16.",
+   "Pin V16SHA256 to accepted compressed15c7d1bc.",
+   "Add reviewedV16 with existing SHA check/ReadCorpus and exact1207case/eight-source guard.",
+   "Load that sixth corpus and append it to existing ForSources full-map reflect.DeepEqual candidates."
+  ],
+  "all5_old_reader_bodies_and_pin_literals_exact": true,
+  "current_replay": "Existing TestCurrentIndependentHTTPParity remains unchanged and will select currentSource6 through full source8 after rebuild.",
+  "no_unknown_fallback_KG_only_or_partial_matching": true,
+  "reverse_removes_only_additions_and_restores_old_runtime_bytes": true
+ },
+ "new_test_source": {
+  "lines": 226,
+  "meaningful_coverage": [
+   "Exact Source6 compressed pin, schema,1207 cases, eight literal accepted source identities and reviewed capture provenance; full selected corpus equality.",
+   "All five historical source tuples retain their exact corpus responses. Source4 andSource5 deliberately share KG while differing in World, proving complete-tuple selection.",
+   "Eight independently changed source digests and eight independently missing sources refuse with nil expected corpus. Extra,nil,empty andKG-only tuples also refuse, without rewriting supplied maps.",
+   "All30 genuine single-source historical mixtures refuse; unchanged-value substitutions are skipped because they remain the legitimate Source6 tuple."
+  ],
+  "native_test_execution": false,
+  "path": "go-backend/internal/httpgolden/source6_test.go",
+  "sha256": "130e0b3de2f224de8d516fef6b919cdde74ecf9c07cabb3b27f09f410a3d5d5f",
+  "source_only_fixture_comparison": "Independent read-only JSON comparison verifies all8changed,8missing and30mixed maps differ from every one of the six accepted source tuples. This is not execution of the Go selector/tests.",
+  "tests": [
+   "TestV16IndependentCorpusRetainsExactSourceScope",
+   "TestV16SelectorPreservesAllFiveHistoricalCorpora",
+   "TestV16SelectorRefusesEveryChangedOrMissingSource",
+   "TestV16SelectorRefusesMixedHistoricalSources"
+  ]
+ },
+ "owned_files": {
+  "go-backend/internal/httpgolden/golden.go": {
+   "after_sha256": "65540cb714ff875975777089217b4750dd9e22b39493659261ff86fa5afcee13",
+   "before_sha256": "b892cff05b5a68d03b90f8874cec77914f1b71f27192df5a519f43a0a64c3c45",
+   "bytes": 8872
+  },
+  "go-backend/internal/httpgolden/golden_test.go": {
+   "after_sha256": "f7db694d84f652d3a4aa7776b17aef2ac22d5558bccb6a334561a76326bdf952",
+   "before_sha256": "d572da2c57067ef23a34f99028cf9e5bd5f07edbf57b3064ccb5e7f91f1c09ac",
+   "bytes": 14964
+  },
+  "go-backend/internal/httpgolden/source6_test.go": {
+   "after_sha256": "130e0b3de2f224de8d516fef6b919cdde74ecf9c07cabb3b27f09f410a3d5d5f",
+   "before_sha256": null,
+   "bytes": 7601
+  },
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-6.json.gz": {
+   "after_sha256": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+   "before_sha256": null,
+   "bytes": 33785
+  }
+ },
+ "prepared_by": "/root/v16_source6_plan",
+ "remaining_gates": [
+  "Independent exact source/context implementation review before native probes.",
+  "Separately admitted gofmt/compilation plus focused selector/refusal/historical tests and existing full1207 current native HTTP replay; no passing result claimed here.",
+  "Root-owned current snapshot/history fixes and full489 rerun remain outside this work.",
+  "golden.go is a production runtime source; regenerate/freeze relevant tool builds and obtain fresh installed audits/same-role finals after final runtime/reference freeze before current authority.",
+  "Full remaining native/shared/source/export/reference/authority/release/assembled gates and local landing remain unaccepted."
+ ],
+ "runtime_full_diff": "--- before/golden.go\n+++ after/golden.go\n@@ -32,11 +32,15 @@\n //go:embed testdata/python-http-parity-v1-5.json.gz\n var frozenV15 []byte\n \n+//go:embed testdata/python-http-parity-v1-6.json.gz\n+var frozenV16 []byte\n+\n const FrozenSHA256 = \"9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb\"\n const V12SHA256 = \"6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd\"\n const V13SHA256 = \"67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670\"\n const V14SHA256 = \"9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a\"\n const V15SHA256 = \"22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519\"\n+const V16SHA256 = \"15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe\"\n const MaxCorpusBytes = 32 * 1024 * 1024\n const MaxCases = 4096\n \n@@ -155,6 +159,17 @@\n \treturn c, err\n }\n \n+func reviewedV16() (*Corpus, error) {\n+\tif fmt.Sprintf(\"%x\", sha256.Sum256(frozenV16)) != V16SHA256 {\n+\t\treturn nil, fmt.Errorf(\"independent V1.6 HTTP corpus digest drift\")\n+\t}\n+\tc, err := ReadCorpus(bytes.NewReader(frozenV16), true)\n+\tif err == nil && (len(c.Cases) != 1207 || len(c.Sources) != 8) {\n+\t\treturn nil, fmt.Errorf(\"expected 1207 independent V1.6 HTTP cases and exact eight sources\")\n+\t}\n+\treturn c, err\n+}\n+\n // ForSources selects an independently captured reviewed corpus only when its\n // entire source identity equals the requested export. Historical Frozen remains\n // immutable; unknown, partial or mixed source sets never gain expected responses.\n@@ -179,7 +194,11 @@\n \tif err != nil {\n \t\treturn nil, err\n \t}\n-\tfor _, c := range []*Corpus{original, current, latest, v14, v15} {\n+\tv16, err := reviewedV16()\n+\tif err != nil {\n+\t\treturn nil, err\n+\t}\n+\tfor _, c := range []*Corpus{original, current, latest, v14, v15, v16} {\n \t\tif reflect.DeepEqual(c.Sources, sources) {\n \t\t\treturn c, nil\n \t\t}\n",
+ "schema": "v1-6-strict-http-selector-source-preparation-r1",
+ "static_checks": {
+  "all_five_old_compressed_hashes_exact": true,
+  "all_original_old_test_names_retained": true,
+  "copied_corpus_exact": true,
+  "new_expected_source_map_equals_accepted_corpus": true,
+  "new_source_trailing_whitespace_absent": true,
+  "old_runtime_full_reverse_byte_equality": true,
+  "old_tests_full_reverse_of_only_two_acquisition_sites": true,
+  "tracked_diff_whitespace": "git diff --check for two edited tracked Go files returned exit0/no output."
+ },
+ "status": "Source prepared; independent code review, gofmt/compilation and native tests/replay remain UNEXECUTED.",
+ "valid_until": "Any edited source, accepted gzip, immutable Source5 context or bound approval changes; renew affected review. Source-only preparation does not qualify execution."
+}

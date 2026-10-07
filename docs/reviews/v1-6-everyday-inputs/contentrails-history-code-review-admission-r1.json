@@ -1,0 +1,24 @@
+{
+  "schema": "v1-6-contentrails-history-code-review-source-admission-r1",
+  "started_at_utc": "2026-10-07T05:28:30.906514+00:00",
+  "deadline_utc": "2026-10-07T05:48:30.906514+00:00",
+  "metadata_reserve_seconds": 180,
+  "inclusive_agents_max": 3,
+  "agents": [
+    "/root",
+    "/root/v16_finish_qualification",
+    "/root/v16_raw_quality"
+  ],
+  "disk_free_bytes": 232261226496,
+  "memory_available_bytes": 24991809536,
+  "native_execution": false,
+  "scope": "Independent review only of three test-context source files and original assertions/callers, complete bounded historical archive provenance and current-runtime preservation. Reviewer writes one code-review receipt. No source edits or native execution.",
+  "inputs": {
+    "go-backend/internal/contentrails/historical_context_v16_test.go": "ad7d7e0bea251eb0bedff30e9502d6c819f778c5961c1a894a0b20c210820866",
+    "go-backend/internal/contentrails/rail_test.go": "9a19eb672c8f49228bb39d0b8e3989862896b8b368582c86bff136640004cf59",
+    "go-backend/internal/contentrails/world_installed_test.go": "e18e015d75f235e6cb632b5e9351a470d1495b4bd454e8edd2a513a162e463b1"
+  },
+  "preparation_sha256": "f5d4d34dae7f9248a2beeab7c8c3e0398f194dca761a663ad5626e973c589ea4",
+  "runtime_freeze_sha256": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7",
+  "failed_execution_sha256": "c7e5bc653e7f4dd51e7b11a823d42236d1a40a744e267367e4325d1b2fa0736f"
+}

@@ -1,0 +1,188 @@
+{
+ "admission": {
+  "path": "docs/reviews/v1-6-everyday-inputs/contentrails-history-preparation-admission-r1.json",
+  "sha256": "c39fb464650f282d96a5c190b8983ce2e23e20678c02ec03b356d2ac02210d43"
+ },
+ "before_archives": {
+  "go-backend/internal/contentrails/rail_test.go": {
+   "archive_path": "docs/reviews/v1-6-everyday-inputs/methods/rail_test.before-historical-context-r1.go.gz",
+   "archive_sha256": "a90fe9df7e27faa7e57544d88d37fad5418ff917fd0d092edeefe2399ed78072",
+   "before_sha256": "db3d6a1899c3fe87424c2cf7ab929c819458e4b822e052fb01a4705e62518b11"
+  },
+  "go-backend/internal/contentrails/world_installed_test.go": {
+   "archive_path": "docs/reviews/v1-6-everyday-inputs/methods/world_installed_test.before-historical-context-r1.go.gz",
+   "archive_sha256": "06528edd8a0fc5403747dacbfc5c14f142156cccdb4051a09d688c96b39f3d45",
+   "before_sha256": "4037f1931e0af37ed90cc1fae1b72893900227103b3ac7768c536d3c4dcb221e"
+  }
+ },
+ "checked_at_utc": "2026-10-07T05:22:21.589406+00:00",
+ "execution": {
+  "commits": 0,
+  "deadline_minus180s_preserved": true,
+  "gofmt_tests_builds_engine_imports": 0,
+  "native_Go_commands": 0,
+  "process_max_RSS_bytes": 93122560,
+  "subagents": 0,
+  "written_paths": [
+   "go-backend/internal/contentrails/rail_test.go",
+   "go-backend/internal/contentrails/world_installed_test.go",
+   "go-backend/internal/contentrails/historical_context_v16_test.go",
+   "docs/reviews/v1-6-everyday-inputs/reference/contentrails-historical-context-preparation-r1.json"
+  ]
+ },
+ "failure_preserved": {
+  "diagnosis": "The historical Source4 World was paired with current Source6 KG Ulei aliases; Source5 reconstruction expected a frozen old candidate against current Source6 bindings. These are context errors; no assertion or production guard is weakened.",
+  "path": [
+   "docs/reviews/v1-6-everyday-inputs/source6-contentrails-group-a-and-http-r1-result.json"
+  ],
+  "reclassified_as_pass": false,
+  "sha256": "c7e5bc653e7f4dd51e7b11a823d42236d1a40a744e267367e4325d1b2fa0736f"
+ },
+ "five_affected_test_contexts": [
+  {
+   "change": "Quick85 and Extensions27/49 fixture reads/audits use coherent current rootPath. Only World fixture/audit uses historicalWorldRoot with old matching KG and exactSource4 World; original33/9/1009 assertions stay.",
+   "test": "TestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix"
+  },
+  {
+   "body": "Unchanged. historicalWorldRoot now includes actual oldKG plusSource4World and all defaultSource1 World archives; original9books, changed-recipe and removed-supply refusals retain their actual contexts.",
+   "test": "TestHistoricalWorldTransitionsKeepCurrentBooksAndRefuseChangedRecipes"
+  },
+  {
+   "body": "Unchanged. DefaultSource1 current/previous archive closure is present at pinned bytes. Same current9history predecessor initially matches; replacing it with older history must still refuse.",
+   "test": "TestSecondWorldTransitionRefusesStalePreviousArchive"
+  },
+  {
+   "body": "world_audit_test.go unchanged. It still builds starting World snapshots from that actual historical graph, proves ValidateDiscoveryWorld accepts them, adds its synthetic tomato alias, proves stale snapshot refusal, proves prospective audit33/9/1009/351, and preserves installed bytes.",
+   "boundary": "Its contentbuild.Load checks remain negative incoherent-source refusals under CURRENT strict pins. This helper does not claim a passing historical contentbuild.Load or isolate that refusal exclusively to the alias; genuine old Build coverage remains in separately qualified contentbuild tests.",
+   "test": "TestProspectiveWorldAuditWithChangedGraphKeepsInstalledWorldFailClosed"
+  },
+  {
+   "change": "Positive reconstruction and each of four independent mutation roots start from pinnedSource5. Candidate/rawreviews/196e proposal exist independently of currentSource6 authority membership. Original public predecessor refusal, exact installed reconstruction, native33/10/1156/352 and mutation-specific installed-world refusals remain unchanged.",
+   "test": "TestInstalledWorldReconstructionAfterRecipeTransition"
+  }
+ ],
+ "frozen_current_preservation": {
+  "all109_runtime_rows_current": true,
+  "all8_sources_plus_rubric_current": true,
+  "authority_manifest_sha256": "e365d23ae9cfd2581e146dccc142818d56cdb90fa292b376378996fba78e9b21",
+  "authority_pin_sha256": "5e02f956299375a00549ca2d12a5d3c661366e713c314de2d219f4fea997ad29",
+  "production_and_current_authority_files_written": 0,
+  "runtime_freeze_sha256": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7"
+ },
+ "full_existing_diffs": {
+  "go-backend/internal/contentrails/rail_test.go": "--- before/go-backend/internal/contentrails/rail_test.go\n+++ after/go-backend/internal/contentrails/rail_test.go\n@@ -57,7 +57,7 @@\n \t}\n }\n func TestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix(t *testing.T) {\n-\troot, _ := historicalWorldRoot(t)\n+\troot := rootPath(t)\n \tquick, err := fixture(root, \"quick_games_v92.json\")\n \tif err != nil {\n \t\tt.Fatal(err)\n@@ -69,11 +69,12 @@\n \tif len(rows(q[\"replays\"])) != 85 || q[\"core_boards_preserved\"] != true {\n \t\tt.Fatal(\"quick audit coverage\")\n \t}\n-\tworld, err := fixture(root, \"alchimie_discovery_world_v92.json\")\n-\tif err != nil {\n-\t\tt.Fatal(err)\n-\t}\n-\tw, err := auditWorld(root, world)\n+\tworldRoot, _ := historicalWorldRoot(t)\n+\tworld, err := fixture(worldRoot, \"alchimie_discovery_world_v92.json\")\n+\tif err != nil {\n+\t\tt.Fatal(err)\n+\t}\n+\tw, err := auditWorld(worldRoot, world)\n \tif err != nil {\n \t\tt.Fatal(err)\n \t}\n",
+  "go-backend/internal/contentrails/world_installed_test.go": "--- before/go-backend/internal/contentrails/world_installed_test.go\n+++ after/go-backend/internal/contentrails/world_installed_test.go\n@@ -9,10 +9,12 @@\n )\n \n // Old contract tests retain their original literal assertions against the exact\n-// archived Source4 world. Only this private test root receives historical bytes.\n+// archived Source4 world and its matching KG. Only this private test root receives\n+// historical bytes; current serving pins and loaders are never changed.\n func historicalWorldRoot(t *testing.T) (string, *Source) {\n \tt.Helper()\n-\troot, s := cloneRoot(t)\n+\troot := historicalSource5RailsRoot(t)\n+\ts := sourceForTest(t)\n \traw, err := os.ReadFile(filepath.Join(rootPath(t), \"docs/reviews/v1-4-time-links-and-predicates/native/world/proposal.json\"))\n \tif err != nil || digestBytes(raw) != \"0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef\" {\n \t\tt.Fatal(\"authentic Source4 world archive changed\", err)\n@@ -28,7 +30,7 @@\n }\n \n func TestInstalledWorldReconstructionAfterRecipeTransition(t *testing.T) {\n-\troot := rootPath(t)\n+\troot := historicalSource5RailsRoot(t)\n \ts, err := LoadSource(filepath.Join(root, \"go-backend/internal/contentrails/sources/authored-v5.json\"))\n \tif err != nil {\n \t\tt.Fatal(err)\n@@ -72,7 +74,7 @@\n \t\t}},\n \t} {\n \t\tt.Run(mutation.name, func(t *testing.T) {\n-\t\t\ttemp, _ := cloneRoot(t)\n+\t\t\ttemp := historicalSource5RailsRoot(t)\n \t\t\tcurrent, err := fixture(temp, \"alchimie_discovery_world_v92.json\")\n \t\t\tif err != nil {\n \t\t\t\tt.Fatal(err)\n"
+ },
+ "helper_design": {
+  "C1_proof": {
+   "bundle_sha256": "c1fff429992c69926aafb07f5b015f890a82c7c01cc5230107bdaf481bca5993",
+   "digest_go_sha256": "35f33cfeb67f234ceeee6e2a6ec08dabc036a383e46bbd48bf6d8b4287061ea2",
+   "eight_source_hashes_verified_against_decoded_bundle": true
+  },
+  "Source4_derivation": "historicalWorldRoot retains its original SHA-checked0d10180a Source4World replacement over this oldKG base. No C1-to-Source4 bundle regeneration is implied.",
+  "Source5_parent": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+  "Source5_temp_root_bytes": 29759917,
+  "Source5_temp_root_files": 27,
+  "World_document_closure": {
+   "docs/reviews/v1-4-time-links-and-predicates/native/world/candidate.json": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc",
+   "docs/reviews/v1-4-time-links-and-predicates/native/world/factual-review.json": "48a6cfcd0ad80a82f248b3cc532b724dba88da8059fdab763c5a5a61f4ac63a1",
+   "docs/reviews/v1-4-time-links-and-predicates/native/world/quality-review.json": "32f65cc95cd9d169bba1019d85ab545eaa70be6e17decca0d1fce0d80f3a2240",
+   "docs/reviews/v1-5-hot-chocolate/native/world/candidate.json": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+   "docs/reviews/v1-5-hot-chocolate/native/world/factual-review.json": "f8e3f12d8ae85f20f060fc50b8e70d920b747ea3c07926345f517c7bd0e96945",
+   "docs/reviews/v1-5-hot-chocolate/native/world/quality-review.json": "f19205e9ef18803e3e7c81f1245cf858b16ef5df553e704532d470d271883e69",
+   "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496",
+   "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/candidate.json": "e6d4dc8b071e7f4977c81abdcd007120b8bffd5ac9d4803f62f35b8d3a2339d4",
+   "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/factual-review.json": "501e4ea97ce564e9fb1e764978d7c8a628c7f5774cc2531b7ee117555f5e6e1f",
+   "docs/reviews/v97-discovery-continuity-and-new-words/integration/alchimie/quality-review.json": "37ed31a2bda9e9a32494736a81f2c51d901e44195852a28b9da26976ba7d38c1"
+  },
+  "archive": {
+   "bytes": 1927955,
+   "compressed_limit_bytes": 4194304,
+   "exact_uncompressed_tar_bytes": 14376960,
+   "member_size_limit_bytes": 16777216,
+   "path": "docs/reviews/v1-6-everyday-inputs/reference/historical-source5-context.tar.gz",
+   "regular_members": 12,
+   "sha256": "ffffa21ccf11f79d817c529123f2583824c62fefaabd17a5887e7ce809507e48",
+   "uncompressed_limit_bytes": 33554432
+  },
+  "authored_source_pins": {
+   "go-backend/internal/contentrails/sources/authored-v1.json": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6",
+   "go-backend/internal/contentrails/sources/authored-v5.json": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585"
+  },
+  "document_paths": "PinnedSource1/Source5 descriptors restricted to docs/reviews relative paths without parent traversal; conflicting identities refused. The Source5 source itself is exact22b7853e and decoded with exactversion5/parent4.",
+  "document_read_limit_bytes": 4194304,
+  "manifest": {
+   "baseline_commit": "6a2332795dc5fa2db3eb61e196ab7ab820e76caa",
+   "path": "docs/reviews/v1-6-everyday-inputs/reference/historical-source5-context-manifest.json",
+   "read_limit_bytes": 32768,
+   "sha256": "47d93bbae6a5a6f5eec031a09568c20e2f81887598cff9fff9120c9eeff2a48c"
+  },
+  "member_safety": "Only exact twelve allowlisted paths derived from the eight source names plus bundle/digest/rubric/Source4World are accepted; every member must be regular, unique, positive-sized, exact-length and exact-SHA. Complete membership is required before test-root writes.",
+  "name": "historicalSource5RailsRoot",
+  "no_pin_override_linkname_global_runtime_or_loader_seam": true,
+  "old_proposal_supply": "The exact archivedSource5World fixture bytes196e are written unchanged to the oldV1.5 proposal path in the temporary root; independently verified equal to the actual old proposal. This avoids dependence on whether installedSource6authority names that old proposal.",
+  "scope": "World-only test context, not a historical serving export authority. No clone of mutable current data/authority membership is used to supply expected Source5 inputs.",
+  "writes": "Only a fresh t.TempDir at test execution; exact approved blobs written0600 under created0700 parents. KG/pack/reserve test mirrors copy the same archive blobs."
+ },
+ "historicalWorldRoot_call_site_count": 4,
+ "historicalWorldRoot_definition_additional_occurrence": 1,
+ "owned_files": {
+  "go-backend/internal/contentrails/historical_context_v16_test.go": {
+   "after_sha256": "ad7d7e0bea251eb0bedff30e9502d6c819f778c5961c1a894a0b20c210820866",
+   "before_sha256": null,
+   "bytes": 6892
+  },
+  "go-backend/internal/contentrails/rail_test.go": {
+   "after_sha256": "9a19eb672c8f49228bb39d0b8e3989862896b8b368582c86bff136640004cf59",
+   "before_sha256": "db3d6a1899c3fe87424c2cf7ab929c819458e4b822e052fb01a4705e62518b11",
+   "bytes": 16653
+  },
+  "go-backend/internal/contentrails/world_installed_test.go": {
+   "after_sha256": "e18e015d75f235e6cb632b5e9351a470d1495b4bd454e8edd2a513a162e463b1",
+   "before_sha256": "4037f1931e0af37ed90cc1fae1b72893900227103b3ac7768c536d3c4dcb221e",
+   "bytes": 3753
+  }
+ },
+ "prepared_by": "/root/v16_source6_plan",
+ "preservation_proof": {
+  "Source4_expectations": [
+   33,
+   9,
+   1009
+  ],
+  "Source5_expectations": {
+   "goal_modes": 33,
+   "histories": 10,
+   "prefixes": 1156,
+   "proposal_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+   "recipes": 352
+  },
+  "all4_installed_mutations_retained": [
+   "world-id",
+   "recipe-result",
+   "history-removal",
+   "history-mutation"
+  ],
+  "all_old_test_names_assertion_expressions_literals_requests_and_mutations_retained": true,
+  "exact_reverse_of_context_changes_restores_each_complete_before_file": true,
+  "no_tests_skipped_deleted_or_deselected": true,
+  "public_candidate_and_BuildProposal_predecessor_refusals_unchanged": true,
+  "world_audit_test_go_unchanged_sha256": "88232dfd6ff6f4baa0bb7d846a7ab18a4b7f39dd1ed58fe6565890640bda975b"
+ },
+ "remaining": [
+  "Independent exact source review, including sparse historical-root dependencies and original mutation/public-guard preservation.",
+  "Separately admitted gofmt and full existing contentrails5+19 execution; no focused subset is claimed as full qualification.",
+  "Resume remaining HTTP parity/smoke only after the preserved failed lane has a genuinely green fresh qualification; retain original failure evidence."
+ ],
+ "schema": "v1-6-contentrails-genuine-historical-context-source-preparation-r1",
+ "static_checks": {
+  "Go_syntax_compilation_gofmt_tests": "NOT RUN; independent review required first.",
+  "all10_World_document_hashes_current": true,
+  "archive_and_manifest_all12_member_hashes_verified_without_importing_app_or_engine": true,
+  "defaultSource1_andSource5_World_closure_complete": true,
+  "new_helper_trailing_whitespace_absent": true,
+  "tracked_diff_whitespace": "git diff --check returned0/no output for both edited tracked tests."
+ },
+ "status": "SOURCE_PREPARED_REQUIRES_INDEPENDENT_REVIEW_AND_SEPARATE_EXECUTION",
+ "valid_until": "Any helper, context-bound file or preserved test changes; renew source review and qualify under a new execution admission."
+}

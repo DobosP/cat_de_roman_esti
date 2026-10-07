@@ -1,0 +1,19 @@
+{
+  "schema": "v1-6-history-import-format-repair-r1",
+  "started_at_utc": "2026-10-07T03:26:52.489863+00:00",
+  "finished_at_utc": "2026-10-07T03:26:52.628673+00:00",
+  "source_budget_seconds": 300,
+  "inclusive_agents": 1,
+  "memory_available_bytes": 19591847936,
+  "disk_free_bytes": 235787431936,
+  "failure": "source6-current-input-gates-r1 stopped at Ruff I001 before game tests/export checks; only extra blank line between adjacent same-package local imports.",
+  "failure_result_sha256": "524789b731a8880dd1f08caf0e6438b73ea837d35b0ce0f66cf65d18ab8fe120",
+  "before_archive_path": "docs/reviews/v1-6-everyday-inputs/methods/content_history.before-import-fix.py.gz",
+  "before_archive_sha256": "0db3b86db8bc2ddd425dcff210762050b0f1b50f09bdb3ea22d03513b0d4d482",
+  "before_source_sha256": "80fd1dc7920f3fda5dccf87f67122039e62ac919baa5492fe4aaf24181b02ca0",
+  "after_source_sha256": "6bc5071ef329fff4ffd3237ce095e0efbf1bd5a9d1d1cd051174869135c621ac",
+  "entire_python_AST_exact": true,
+  "only_change": "One blank line removed between adjacent imports. No statement/assertion/literal/pin/fixture change.",
+  "review_relation": "Original history review remains bound to exact archived before bytes; current source is proven AST-identical rather than silently rebinding old review.",
+  "remaining_native_steps_in_r1": "Not run"
+}

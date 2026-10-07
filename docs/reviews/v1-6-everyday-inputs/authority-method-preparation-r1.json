@@ -1,0 +1,19 @@
+{
+  "schema": "v1-6-authority-and-smoke-method-preparation-r1",
+  "checked_at_utc": "2026-10-07T04:28:14.574322+00:00",
+  "methods": {
+    "docs/reviews/v1-6-everyday-inputs/methods/prepare_authority-v1-6-r1.py.txt": "6ecd174cf32df55d1c21454176b4dba89bd42ce594ab387fae8be0cc1ddff7be",
+    "docs/reviews/v1-6-everyday-inputs/methods/assemble_authority-v1-6-r1.py.txt": "d6e7e3772c211cbaf931f5622bd84b3babaa94d8f3b32a7b6dee4ecfc5b99659",
+    "docs/reviews/v1-6-everyday-inputs/methods/check_mixed_refusals-v1-6-r1.py.txt": "23f3ad8f8b9e3452553d5baa3a15c0e2f4059809523712d1335c73fbc4c50f8b",
+    "docs/reviews/v1-6-everyday-inputs/methods/smoke_current-v1-6-r1.py.txt": "143a509b0697bda0797b6dcf46a9127f2a3bcb9a3577a5e06b5671b1ba2396c3"
+  },
+  "scope": "Prepared exact native draft commands; all3 Source6 entries plus exactparent Source5 chain append and metadata-only digest substitution; current forced-Source5 negatives; path-only adapted anonymous loopback smoke. No script executed, native commands, metadata adoption or new passing claim.",
+  "smoke_source": "docs/reviews/v1-5-hot-chocolate/reference/methods/smoke_current.py.txt",
+  "smoke_changes": "Only worktree/scratch/review/output and binary locations; request engine, environment fields, loopback isolation/readiness and finally-owned-server cleanup exact.",
+  "native_schema_inspected": [
+    "go-backend/cmd/cat-content-rail/main.go",
+    "go-backend/internal/contentrails/installed.go",
+    "go-backend/internal/contentrails/rail.go"
+  ],
+  "independent_review_required": true
+}

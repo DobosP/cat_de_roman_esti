@@ -1,0 +1,15 @@
+{
+  "schema": "v1-6-capture-result-review-parallel-reference-gates-admission-r1",
+  "started_at_utc": "2026-10-07T03:35:59.367050+00:00",
+  "deadline_utc": "2026-10-07T03:55:59.367050+00:00",
+  "metadata_reserve_seconds": 180,
+  "inclusive_agents_max": 2,
+  "worker_roles": [
+    "root native/history runner",
+    "one independent source-only result reviewer"
+  ],
+  "disk_free_bytes": 235743543296,
+  "memory_available_bytes": 21760143360,
+  "scope": "One independent read-only capture/qualified-input result review may run alongside one separately admitted native process-group history campaign. Reviewer writes only its new receipt, never inputs/runtime. Whole-worktree/scratch native accounting includes review output; native1processgroup2GiB and alloriginalfloors/caps.",
+  "reviewer_native_execution": false
+}

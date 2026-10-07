@@ -1,0 +1,424 @@
+{
+  "schema": "v1-6-source-only-complete-json-comparison-r2",
+  "valid_until": "A bound before/after source or receipt changes; then repeat comparison. This is source preparation, not test execution.",
+  "baseline_commit": "6a2332795dc5fa2db3eb61e196ab7ab820e76caa",
+  "receipt_sha256": "ae25a9e99cb64bf766b1d88513d68990bc7266b755fbfe9480f2c10dd7dd2acb",
+  "method": "All old bytes are git show baseline:path; all after bytes are actual installed files. Re-encoding each parsed object reproduces full raw bytes exactly. Enumerate every differing primitive/list field and object-key order; do not execute an inverse or application code.",
+  "files": {
+    "kg_sample.json": {
+      "before_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "after_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+      "changed_top_level_fields": [
+        "kg_nodes",
+        "meta"
+      ],
+      "complete_changes": [
+        {
+          "path": [
+            "meta",
+            "build_version"
+          ],
+          "before": "fixture-v1-4-time-links",
+          "after": "fixture-v1-6-everyday-inputs"
+        },
+        {
+          "path": [
+            "meta",
+            "note"
+          ],
+          "before": "V1.4: one qualified clock synonym family (two forms) and two directed duration-unit links.",
+          "after": "V1.6: two qualified singular synonym inputs for existing flag and edible-oil concepts."
+        },
+        {
+          "path": [
+            "kg_nodes",
+            1093,
+            "aliases"
+          ],
+          "before": [
+            "steagul",
+            "steaguri",
+            "steagurile"
+          ],
+          "after": [
+            "steagul",
+            "steaguri",
+            "steagurile",
+            "drapel"
+          ]
+        },
+        {
+          "path": [
+            "kg_nodes",
+            2036,
+            "aliases"
+          ],
+          "before": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor"
+          ],
+          "after": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor",
+            "untdelemn"
+          ]
+        }
+      ]
+    },
+    "games_pack.json": {
+      "before_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "after_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "changed_top_level_fields": [],
+      "complete_changes": []
+    },
+    "board_rankings_v37.json": {
+      "before_sha256": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+      "after_sha256": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+      "changed_top_level_fields": [
+        "meta"
+      ],
+      "complete_changes": [
+        {
+          "path": [
+            "meta",
+            "kg_sha256"
+          ],
+          "before": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+          "after": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+        }
+      ]
+    },
+    "derived_catalog_v38.json": {
+      "before_sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "after_sha256": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+      "changed_top_level_fields": [
+        "meta"
+      ],
+      "complete_changes": [
+        {
+          "path": [
+            "meta",
+            "kg_sha256"
+          ],
+          "before": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+          "after": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+        },
+        {
+          "path": [
+            "meta",
+            "v37_rankings_sha256"
+          ],
+          "before": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+          "after": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31"
+        }
+      ]
+    },
+    "cat_mobile_app_pack_contract.json": {
+      "before_sha256": "2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8",
+      "after_sha256": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae",
+      "changed_top_level_fields": [
+        "manifest"
+      ],
+      "complete_changes": [
+        {
+          "path": [
+            "manifest",
+            "build_version"
+          ],
+          "before": "fixture-v1-4-time-links",
+          "after": "fixture-v1-6-everyday-inputs"
+        }
+      ]
+    },
+    "quick_games_v92.json": {
+      "before_sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "after_sha256": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+      "changed_top_level_fields": [
+        "bindings",
+        "candidate_sha256",
+        "nodes",
+        "reviews"
+      ],
+      "complete_changes": [
+        {
+          "path": [
+            "bindings",
+            "core_catalog_sha256"
+          ],
+          "before": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+          "after": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+        },
+        {
+          "path": [
+            "bindings",
+            "kg_sha256"
+          ],
+          "before": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+          "after": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+        },
+        {
+          "path": [
+            "candidate_sha256"
+          ],
+          "before": "302f42db4596e8568bd4423c090bc795bef270c641c99ce6ce996d35e691f6da",
+          "after": "1950ad42444168c5fb3c1350dc53edde74198e3d9fc16db831fda2ebf17a3c6a"
+        },
+        {
+          "path": [
+            "nodes",
+            "n_v24_food_pantry_ulei",
+            "aliases"
+          ],
+          "before": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor"
+          ],
+          "after": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor",
+            "untdelemn"
+          ]
+        },
+        {
+          "path": [
+            "reviews",
+            0,
+            "reviewer"
+          ],
+          "before": "/root/content_rail",
+          "after": "/root/v16_native_raw_factual"
+        },
+        {
+          "path": [
+            "reviews",
+            0,
+            "sha256"
+          ],
+          "before": "9e72009a865d5da6636496899e203a3262a25c3c36fed161a5cb2f20fe78bc3f",
+          "after": "339d07c57f2318b83af5aae078a284a374f41ce95e2bba24bdc86eb67991a0d3"
+        },
+        {
+          "path": [
+            "reviews",
+            1,
+            "reviewer"
+          ],
+          "before": "/root/graph_quality",
+          "after": "/root/v16_raw_quality"
+        },
+        {
+          "path": [
+            "reviews",
+            1,
+            "sha256"
+          ],
+          "before": "f52c1bbc4022c830c41c0b3cbecb5be20b50d144f2788503374e9a4edf55f35c",
+          "after": "8ee6c4c400f94bcaa3176bdfa4c5a234fc423c53142be2a9073652716e84df8b"
+        }
+      ]
+    },
+    "alchimie_discovery_world_v92.json": {
+      "before_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+      "after_sha256": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+      "changed_top_level_fields": [
+        "bindings",
+        "candidate_sha256",
+        "concepts",
+        "native_source_version",
+        "reviews"
+      ],
+      "complete_changes": [
+        {
+          "path": [
+            "bindings",
+            "editorial_source_sha256"
+          ],
+          "before": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+          "after": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+        },
+        {
+          "path": [
+            "bindings",
+            "kg_sha256"
+          ],
+          "before": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+          "after": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+        },
+        {
+          "path": [
+            "bindings",
+            "previous_world_sha256"
+          ],
+          "before": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc",
+          "after": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04"
+        },
+        {
+          "path": [
+            "candidate_sha256"
+          ],
+          "before": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+          "after": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+        },
+        {
+          "path": [
+            "concepts",
+            146,
+            "snapshot",
+            "aliases"
+          ],
+          "before": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor"
+          ],
+          "after": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor",
+            "untdelemn"
+          ]
+        },
+        {
+          "path": [
+            "native_source_version"
+          ],
+          "before": 5,
+          "after": 6
+        },
+        {
+          "path": [
+            "reviews",
+            0,
+            "candidate_sha256"
+          ],
+          "before": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+          "after": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+        },
+        {
+          "path": [
+            "reviews",
+            0,
+            "reviewer"
+          ],
+          "before": "/root/content_rail",
+          "after": "/root/v16_native_raw_factual"
+        },
+        {
+          "path": [
+            "reviews",
+            0,
+            "sha256"
+          ],
+          "before": "f8e3f12d8ae85f20f060fc50b8e70d920b747ea3c07926345f517c7bd0e96945",
+          "after": "fedcff86e30edf5f9033f7c0808eb6f54ef8d8845a6ab82f08c0945a268aa0ce"
+        },
+        {
+          "path": [
+            "reviews",
+            1,
+            "candidate_sha256"
+          ],
+          "before": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+          "after": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+        },
+        {
+          "path": [
+            "reviews",
+            1,
+            "reviewer"
+          ],
+          "before": "/root/graph_quality",
+          "after": "/root/v16_raw_quality"
+        },
+        {
+          "path": [
+            "reviews",
+            1,
+            "sha256"
+          ],
+          "before": "f19205e9ef18803e3e7c81f1245cf858b16ef5df553e704532d470d271883e69",
+          "after": "2096d85b045a71466c4e9535414939788ea6f0469dbce42babe1389c5f4c5120"
+        }
+      ]
+    },
+    "alchimie_recipe_extensions_v92.json": {
+      "before_sha256": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+      "after_sha256": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+      "changed_top_level_fields": [
+        "bindings",
+        "candidate_sha256",
+        "semantic_reviews"
+      ],
+      "complete_changes": [
+        {
+          "path": [
+            "bindings",
+            "kg",
+            "sha256"
+          ],
+          "before": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+          "after": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+        },
+        {
+          "path": [
+            "candidate_sha256"
+          ],
+          "before": "83b4a02f2c51db7539672306002eced3b8b497ebb6879c651a8ebc9a59352550",
+          "after": "09cb6222c91015c499173f58f95d6040c7495846fca998d594778342b14ce458"
+        },
+        {
+          "path": [
+            "semantic_reviews",
+            0,
+            "reviewer"
+          ],
+          "before": "/root/content_rail",
+          "after": "/root/v16_native_raw_factual"
+        },
+        {
+          "path": [
+            "semantic_reviews",
+            0,
+            "sha256"
+          ],
+          "before": "1f443f8e42fb7e8f8e91390cc3f63d0a5ad697c8b7069f10561d99d86cbf53ca",
+          "after": "c91f60f37d8a16f07bc1adc42f326d2d60c53514c548b7a17ed698798226ef75"
+        },
+        {
+          "path": [
+            "semantic_reviews",
+            1,
+            "reviewer"
+          ],
+          "before": "/root/graph_quality",
+          "after": "/root/v16_raw_quality"
+        },
+        {
+          "path": [
+            "semantic_reviews",
+            1,
+            "sha256"
+          ],
+          "before": "d5a0421ab18b48ada4246e282034bee98d1c21cd879d3bb68cf9883c9039bdcc",
+          "after": "8be16d03ced69a4b79c29d1a9bf46096ce0bdf1d2e201ffb76670e809286cc01"
+        }
+      ]
+    }
+  }
+}

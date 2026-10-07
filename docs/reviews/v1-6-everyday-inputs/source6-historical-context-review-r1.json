@@ -1,0 +1,34 @@
+{
+  "schema": "v1-6-root-historical-context-code-review-r1",
+  "checked_at_utc": "2026-10-07T02:31:10.595703+00:00",
+  "reviewer": "/root",
+  "author": "/root/v16_historical_contexts",
+  "verdict": "accept_for_formatting_and_focused_race_verification",
+  "before_format_sources": {
+    "go-backend/internal/contentbuild/build_test.go": {
+      "source_sha256": "4ba997ad378a26da9d0da0294c84e6af4b644ea699dec7a285db2cfc2772d0f2",
+      "archive_path": "docs/reviews/v1-6-everyday-inputs/methods/build_test.go.before-gofmt.json.gz",
+      "archive_sha256": "576b2e47aea748d40b6c5e9253b15ef5e61fafdf6c59701541c9f4fff2431294"
+    },
+    "go-backend/internal/contentbuild/history_context_test.go": {
+      "source_sha256": "2562e036f5e3042ced9c523ef153dcc24c250d2ece8f8274464152c481ae6a82",
+      "archive_path": "docs/reviews/v1-6-everyday-inputs/methods/history_context_test.go.before-gofmt.json.gz",
+      "archive_sha256": "878a0ff3778e718b8b4d13f8c87c3821221cec602d6d4e89d0e391c44234f762"
+    }
+  },
+  "old_test_exact_reconstruction": true,
+  "old_test_baseline_commit": "4f04f0d6e3e39f0c2d65556c6e92aaabead0a29d",
+  "reviewed_properties": [
+    "Real Build still executes over all eight immutable Source5 files, and Source4 differs only in its archived World; no returning archive in place of Build.",
+    "Archive and manifest hashes, bounded sizes, exact allowed12-member coverage and every member digest checked before writing private temp context.",
+    "Only three test-scoped historical pins; Setenv forbids parallel test/ancestor, no background Build/Load goroutines, Cleanup restores current map. A distinct subtest proves restoration.",
+    "All original test code restored byte-for-byte by reversing only documented context setup/comments; original expected literals/failure assertions remain.",
+    "No production loader/guard edits beyond independently reviewed digest substitutions; Source6 current test/export pin will be added after actual qualified export."
+  ],
+  "pending": [
+    "gofmt",
+    "focused native race checks for Source4/Source5 rebuilds and pin restoration",
+    "new current Source6 rebuild assertion after actual export",
+    "strict Python V1.6 inverses and historical loader contexts from plan"
+  ]
+}

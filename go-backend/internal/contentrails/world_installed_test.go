@@ -9,10 +9,12 @@ import (
 )
 
 // Old contract tests retain their original literal assertions against the exact
-// archived Source4 world. Only this private test root receives historical bytes.
+// archived Source4 world and its matching KG. Only this private test root receives
+// historical bytes; current serving pins and loaders are never changed.
 func historicalWorldRoot(t *testing.T) (string, *Source) {
 	t.Helper()
-	root, s := cloneRoot(t)
+	root := historicalSource5RailsRoot(t)
+	s := sourceForTest(t)
 	raw, err := os.ReadFile(filepath.Join(rootPath(t), "docs/reviews/v1-4-time-links-and-predicates/native/world/proposal.json"))
 	if err != nil || digestBytes(raw) != "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef" {
 		t.Fatal("authentic Source4 world archive changed", err)
@@ -28,7 +30,7 @@ func historicalWorldRoot(t *testing.T) (string, *Source) {
 }
 
 func TestInstalledWorldReconstructionAfterRecipeTransition(t *testing.T) {
-	root := rootPath(t)
+	root := historicalSource5RailsRoot(t)
 	s, err := LoadSource(filepath.Join(root, "go-backend/internal/contentrails/sources/authored-v5.json"))
 	if err != nil {
 		t.Fatal(err)
@@ -72,7 +74,7 @@ func TestInstalledWorldReconstructionAfterRecipeTransition(t *testing.T) {
 		}},
 	} {
 		t.Run(mutation.name, func(t *testing.T) {
-			temp, _ := cloneRoot(t)
+			temp := historicalSource5RailsRoot(t)
 			current, err := fixture(temp, "alchimie_discovery_world_v92.json")
 			if err != nil {
 				t.Fatal(err)

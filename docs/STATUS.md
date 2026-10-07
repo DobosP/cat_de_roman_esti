@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — V1.5 fully qualified, independently accepted and landed locally; main clean, no push or deployment.
+Last verified: 2026-10-07 — qualified Source5 main6a233279 published; V1.6 partial checkpoint paused for Windows, not green or landed.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -46,7 +46,7 @@ Last verified: 2026-10-07 — V1.5 fully qualified, independently accepted and l
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Task KG: `fixture-v1-4-time-links`, 2419 nodes/9473 links/8677 forms/180 exact puzzles.
+Qualified Source5 KG: `fixture-v1-4-time-links`, 2419 nodes/9473 links/8677 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
@@ -55,7 +55,7 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Current artifact pins
+## Current qualified artifact pins
 
 - alchimie_discovery_world_v92.json: `196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086`
 - alchimie_recipe_extensions_v92.json: `1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7`
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-  V1.5/Source5 World landed locally e8c4bbc; Quick/Extensions retain Source4. [Hot chocolate](reviews/v1-5-hot-chocolate/README.md) adds one world-local concept/recipe; both i02 links stay held and the Contexto projection stays exact. Fresh 108-source audits/finals, strict all-four authority, 33 goal modes/148 discoveries/1156 prefixes, 60-request journey, 1207 HTTP parity, smoke151/assets28, 425 reference checks, export/rank/derive/mobile and shared race/vet pass. All 27 backend test packages have passing race coverage; the 24 content-rail cases use exhaustive 5/19 groups; vet passes. Exact assembled review62817bd1 accepted684b29b; local landing e8c4bbc complete. V1.6 [source screen](reviews/v1-6-everyday-inputs/README.md) records2selected/1researched/3held. Actual54-request baseline proves drapel/untdelemn missing typed guesses while canonicalSteag/Ulei rank5/2; leafă still needs a case, cucuruz already owned, gazetă broader, Geamantan/Valiză absent. Exact two-singular proposal/raw facts and supported isolated candidate63f0dcd7 are recorded:2forms,0other node/edge/puzzle/pack deltas. Native56-request prospective play,265target/2419mining profiles and1776reference cases pass with12lexical/36service deltas and6explained reference changes. Specificflag/nativeLanț/terminal controls pass; independent4149550d accepts exact rawgraphquality for staging. Isolated Source6a086dc2a candidates and native716ranking/336derived rebuilds pass; only Ulei World snapshot adds untdelemn, all mechanics/boards exact. Fresh native raw reviews cover85Quick/352recipes+252concepts/49Extensions. Quick85/460HTTP and World33modes/148discoveries/1156prefix native prospective audits pass; same-role World prospective finals accept only exact staging. Supported installation/history/currentauthority/fullrelease remain pending. Installed data unchanged. Earlier worker/resource failures remain history.
+- V1.5/Source5 remains qualified main6a233279 (published). V1.6 is a **partial, unmerged checkpoint** on `codex/content-v1-6`, paused by owner for Windows restart; [continuation](reviews/v1-6-everyday-inputs/continuation-checkpoint-r1.json) and [review](reviews/v1-6-everyday-inputs/README.md) give current task state. Exactly2 singular forms are staged (drapel→Steag, untdelemn→culinaryUlei), zero nodes/edges/targets/rounds. Source6/current authority all4,489 reference checks,36 other backend packages/shared race+vet,World5 cases,compiled1207 parity andTCP151/assets28 pass. All19 complementary contentrail cases remain unqualified after external wrapper interruption; R4-R2 review is pending and both fixture modes/newcampaign are unexecuted. Original failures/holds remain preserved. Complete V1.6 later; root then lands/pushes origin/main and stops. Heartbeat paused; **no V1.7**.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni

@@ -20,7 +20,7 @@ SOURCE4_BUNDLE_SHA256 = "d1d3f721525e06f247727d6998bd91a9e38bf26610bde9eba55406d
 
 
 def current() -> dict:
-    raw = (ROOT / "cat_de_roman_esti/fixtures" / WORLD).read_bytes()
+    raw = history.historical_source5_bytes(WORLD)
     assert history._V1_5_WORLD_AFTER_SHA256 is not None, "Final V1.5 pin is required"
     assert hashlib.sha256(raw).hexdigest() == history._V1_5_WORLD_AFTER_SHA256
     return json.loads(raw)
@@ -79,11 +79,11 @@ def test_v15_inverse_refuses_rebinding_to_a_forged_proposal(monkeypatch):
         history.before_v1_5_world_catalog(latest, WORLD)
 
 
-def test_historical_loader_context_restores_current_path_and_cache(monkeypatch):
+def test_historical_loader_context_restores_current_path_and_cache(monkeypatch, tmp_path):
     from cat_de_roman_esti.wordgames import discovery_world as loader
 
     original = loader.CATALOG_PATH
-    with history.historical_v1_4_world(monkeypatch) as world:
+    with history.historical_v1_4_world(monkeypatch, tmp_path / "source4") as world:
         assert loader.CATALOG_PATH == history._V1_5_WORLD_BEFORE
         assert len(world.concepts) == 251 and len(world.recipes) == 351
         assert len(world.catalog.compatible_versions) == 9

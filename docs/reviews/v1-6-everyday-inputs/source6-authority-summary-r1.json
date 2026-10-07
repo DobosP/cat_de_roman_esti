@@ -1,0 +1,59 @@
+{
+  "schema": "v1-6-current-authority-and-source-summary-r1",
+  "checked_at_utc": "2026-10-07T04:52:24.258313+00:00",
+  "result": "PASS",
+  "execution_sha256": "22dcdd779fcdc3c037e4bd305ecfa98d7544d1f0be6c7a3a4c4e497e759ba5f6",
+  "all18steps_pass": true,
+  "runtime109_source8_unchanged": true,
+  "all_four": {
+    "ok": true,
+    "rails": [
+      {
+        "rail": "quick",
+        "ok": true,
+        "rebuilt_sha256": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+        "artifact_sha256": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+      },
+      {
+        "rail": "world",
+        "ok": true,
+        "rebuilt_sha256": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+        "artifact_sha256": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+      },
+      {
+        "rail": "extensions",
+        "ok": true,
+        "rebuilt_sha256": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+        "artifact_sha256": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+      },
+      {
+        "rail": "reserve",
+        "ok": true,
+        "rebuilt_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "artifact_sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "exact_bytes": true,
+        "semantic_exact": true,
+        "native_source_sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6"
+      }
+    ]
+  },
+  "forced_source5_refusals_sha256": "46d8c516ebbeaf24138ce21e4e235993994ae3693814b8eedee9065e558084a4",
+  "assembly_sha256": "fda2b1b9e7bad3224855a02b228c0ede508d5f3ffbdd1ad8d3868dfe905c1adf",
+  "metadata_sha256": "e365d23ae9cfd2581e146dccc142818d56cdb90fa292b376378996fba78e9b21",
+  "metadata_pin_sha256": "5e02f956299375a00549ca2d12a5d3c661366e713c314de2d219f4fea997ad29",
+  "native_source_validate_export_rank_derive_mobile_and_independent_export": "PASS",
+  "inventory_delta_text": "Content delta: 6a2332795dc5fa2db3eb61e196ab7ab820e76caa -> working tree\nconcepts: 2419 -> 2419; +0 -0 changed 0; unchanged 2419\nconnections: 9473 -> 9473; +0 -0 changed 0; unchanged 9473\nforms: 8677 -> 8679; +2 -0 changed 0; unchanged 8677\npuzzles: 180 -> 180; +0 -0 changed 0; unchanged 180\nconexiuni records: 245 -> 245; +0 -0 changed 0; unchanged 245\nconexiuni approved: 245 -> 245; +0 -0 changed 0; unchanged 245\nconexiuni declared_ranked_eligible: 83 -> 83; +0 -0 changed 0; unchanged 83\ncontexto records: 265 -> 265; +0 -0 changed 0; unchanged 265\ncontexto approved: 263 -> 263; +0 -0 changed 0; unchanged 263\ncontexto declared_ranked_eligible: 255 -> 255; +0 -0 changed 0; unchanged 255\nlant records: 123 -> 123; +0 -0 changed 0; unchanged 123\nlant approved: 121 -> 121; +0 -0 changed 0; unchanged 121\nlant declared_ranked_eligible: 121 -> 121; +0 -0 changed 0; unchanged 121\nalchimie records: 83 -> 83; +0 -0 changed 0; unchanged 83\nalchimie approved: 80 -> 80; +0 -0 changed 0; unchanged 80\nalchimie declared_ranked_eligible: 68 -> 68; +0 -0 changed 0; unchanged 68\nintrusul catalog boards: 228 -> 228; +0 -0 changed 0; unchanged 228\nperechi catalog boards: 193 -> 193; +0 -0 changed 0; unchanged 193\nForms are exact [node_id, form] pairs, not necessarily new concepts or synonyms.\nConcept changes exclude aliases; other record fields are compared exactly.\nApproved additions include new records and promotions of existing records.\nRanked eligibility is declared by the sidecar; run content/runtime gates separately.\nMissing historical derived catalogs count as zero; missing rankings are unknown.\nQuick-game boards include the frozen V38 catalog and reviewed authored supplements.\n",
+  "peak_group_RSS_bytes": 148176896,
+  "incremental_bytes": 105493591,
+  "metadata_replacement": "Non-atomic; both intended exact postimages verified successfully before any rebuild. No recovery was required.",
+  "remaining": "Exhaustive native/shared race and vet, actual current1207 parity/smoke151/assets28, docs/whitespace, independent exact-commit assembled acceptance and root landing."
+}

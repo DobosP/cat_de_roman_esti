@@ -1,0 +1,26 @@
+{
+  "schema": "v1-6-signal-safe-runner-source-preparation-r1",
+  "started_at_utc": "2026-10-07T06:09:18.315693+00:00",
+  "deadline_utc": "2026-10-07T06:29:18.315693+00:00",
+  "metadata_reserve_seconds": 180,
+  "inclusive_agents_max": 3,
+  "agents": [
+    "/root",
+    "/root/v16_finish_qualification",
+    "/root/v16_source6_plan"
+  ],
+  "disk_free_bytes": 231166054400,
+  "memory_available_bytes": 22635372544,
+  "native_execution": false,
+  "scope": "Prepare R4 supervisor from immutableR3 with catchable SIGTERM/SIGINT cleanup, failure/result receipt despite closed stdout, and explicit single-step campaign continuation preserving one fixed deadline/original wholeR+S disk baseline. Prepare bounded owned signal-cleanup smoke source. No execution and no runtime/tests/fixtures/authority edits.",
+  "runner_r3_sha256": "0404337d2847bb9857a1890d107ac76feea66c82549d0620138d826fee70fe34",
+  "interruption_receipt_sha256": "98e1a9ed314e31db58f1b9936294c2aa36fd2120710a1719e69c36a3d608f877",
+  "partition_plan_sha256": "ced57aa091651b3a3dc372799d14d0fc0daa46a31a36560590aa971caf70e52d",
+  "outputs": [
+    "probe/run_worktree_lane_r4.py",
+    "probe/check_runner_signal_r4.py",
+    "docs/reviews/v1-6-everyday-inputs/methods/run_worktree_lane_r4.py.txt",
+    "docs/reviews/v1-6-everyday-inputs/methods/check_runner_signal_r4.py.txt",
+    "docs/reviews/v1-6-everyday-inputs/reference/runner-r4-preparation-r1.json"
+  ]
+}

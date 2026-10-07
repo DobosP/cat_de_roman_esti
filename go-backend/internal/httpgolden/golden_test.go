@@ -315,7 +315,7 @@ func TestV15IndependentCorpusRetainsExactWorldOnlySourceScope(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if V15SHA256 != "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519" || len(c.Cases) != 1207 || len(c.Sources) != 8 || !strings.Contains(c.Reference, "Independent Django application; V1.5 reviewed world-only sources") || !reflect.DeepEqual(c.Sources, testData(t).Sources) {
+	if V15SHA256 != "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519" || len(c.Cases) != 1207 || len(c.Sources) != 8 || !strings.Contains(c.Reference, "Independent Django application; V1.5 reviewed world-only sources") || !reflect.DeepEqual(c.Sources, historicalV15Data(t).Sources) {
 		t.Fatal("V1.5 independent corpus source/capture identity drift")
 	}
 	if c.Sources["alchimie_discovery_world_v92.json"] != "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086" {
@@ -350,7 +350,7 @@ func TestV15IndependentCorpusRetainsExactWorldOnlySourceScope(t *testing.T) {
 }
 
 func TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests(t *testing.T) {
-	data := testData(t)
+	data := historicalV15Data(t)
 	client, err := NewClient(Local(httpapi.New(data)), MaxCases)
 	if err != nil {
 		t.Fatal(err)

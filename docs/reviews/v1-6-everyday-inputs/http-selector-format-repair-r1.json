@@ -1,0 +1,12 @@
+{
+  "schema": "v1-6-http-test-format-only-repair-r1",
+  "before_sha256": "130e0b3de2f224de8d516fef6b919cdde74ecf9c07cabb3b27f09f410a3d5d5f",
+  "expected_after_sha256": "821c02dfd642a2656eae7a919a0a80bf885a2830b0d7dee4d469c58b45550436",
+  "archive_sha256": "191ce4ab79d00e7a9e9f39cd856b3ea2c9422c2266288cea921dde97bba17122",
+  "exact_change": "One alignment space on each of six source-map entries, as emitted by qualified gofmt -d. No token/literal/assertion changes.",
+  "failed_run": "source6-history-selector-gates-r2-result.json",
+  "failed_stage": "gofmt-d-only; no Ruff/collection/tests executed",
+  "review_authorizes_formatting": "source6-selector-code-review-r1.json",
+  "whitespace_stripped_bytes_equal": true,
+  "preparation_failure_preserved": "First expected-format calculator asserted before writing any file because unscoped kg_sample key needle also matched the later KG-only negative map. Repaired needle includes the exact two-tab line prefix; exactly six declaration lines now match. No code edit or native execution occurred in that failed preparation."
+}

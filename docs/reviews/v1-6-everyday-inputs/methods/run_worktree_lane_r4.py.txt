@@ -1,0 +1,434 @@
+"""One frozen qualification step per invocation; never renew a campaign budget.
+
+Usage: qualified_python run_worktree_lane_r4.py ADMISSION_JSON STEP_INDEX
+Catchable SIGTERM/SIGINT trigger owned child-session cleanup and failed receipts.
+SIGKILL, host loss, uninterruptible kernel waits and unavailable storage are not
+claimed safe. A pending state left by such loss refuses automatic continuation.
+"""
+import datetime
+import fcntl
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import signal
+import subprocess
+import sys
+import tempfile
+import time
+
+R = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S = Path('/home/dobo/work/_temp/codex__content-v1-6')
+D = R / 'docs/reviews/v1-6-everyday-inputs'
+GIB = 2 ** 30
+received_signal = None
+
+
+def on_signal(number, frame):
+    # Do not raise between Popen and ownership bookkeeping. The monitor notices
+    # the flag immediately after the owned child has been durably identified.
+    global received_signal
+    if received_signal is None:
+        received_signal = number
+
+
+def now():
+    return datetime.datetime.now(datetime.timezone.utc)
+
+
+def digest(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def emit(value):
+    # Never depend on an exec-session stdout pipe for cleanup or durable results.
+    try:
+        os.write(1, (json.dumps(value, sort_keys=True) + '\n').encode())
+    except OSError:
+        pass
+
+
+def write_json(path, value, exclusive=False):
+    path = Path(path)
+    blob = (json.dumps(value, sort_keys=True, indent=2) + '\n').encode()
+    name = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=path.parent, prefix='.r4-', delete=False) as out:
+            name = Path(out.name)
+            out.write(blob)
+            out.flush()
+            os.fsync(out.fileno())
+        if exclusive:
+            os.link(name, path)
+            name.unlink()
+        else:
+            os.replace(name, path)
+        name = None
+        fd = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+    finally:
+        if name is not None:
+            name.unlink(missing_ok=True)
+
+
+def memory_available():
+    with open('/proc/meminfo') as source:
+        for line in source:
+            if line.startswith('MemAvailable:'):
+                return int(line.split()[1]) * 1024
+    raise RuntimeError('MemAvailable missing')
+
+
+def process_info(pid):
+    try:
+        raw = Path('/proc') / str(pid) / 'stat'
+        fields = raw.read_text().rsplit(')', 1)[1].split()
+        return {'pid': pid, 'state': fields[0], 'pgid': int(fields[2]),
+                'sid': int(fields[3]), 'start_ticks': int(fields[19])}
+    except (OSError, ValueError, IndexError):
+        return None
+
+
+def group_info(pgid):
+    members, rss = [], 0
+    for entry in Path('/proc').iterdir():
+        if not entry.name.isdigit():
+            continue
+        info = process_info(int(entry.name))
+        if info is None or info['pgid'] != pgid or info['sid'] != pgid:
+            continue
+        if info['state'] not in ('Z', 'X'):
+            members.append(info)
+        try:
+            for line in (entry / 'status').read_text().splitlines():
+                if line.startswith('VmRSS:'):
+                    rss += int(line.split()[1]) * 1024
+                    break
+        except (OSError, ValueError):
+            pass
+    return members, rss
+
+
+def child_finished(child):
+    # Keep the leader waitable until its session is empty. WNOWAIT prevents PID
+    # reuse between observing exit and terminating any remaining owned children.
+    return os.waitid(os.P_PID, child.pid, os.WEXITED | os.WNOHANG | os.WNOWAIT) is not None
+
+
+def stop_owned_group(child, identity):
+    started = time.monotonic()
+    actions = []
+    actual = process_info(child.pid)
+    if actual is None or actual['start_ticks'] != identity['start_ticks'] or actual['pgid'] != child.pid or actual['sid'] != child.pid:
+        return {'actions': actions, 'error': 'owned leader identity no longer provable',
+                'remaining_live_members': group_info(child.pid)[0]}
+    members, _ = group_info(child.pid)
+    if members:
+        os.killpg(child.pid, signal.SIGTERM)
+        actions.append('SIGTERM_owned_group')
+    while time.monotonic() - started < 4:
+        if not group_info(child.pid)[0]:
+            break
+        time.sleep(.05)
+    if group_info(child.pid)[0]:
+        os.killpg(child.pid, signal.SIGKILL)
+        actions.append('SIGKILL_owned_group')
+    while time.monotonic() - started < 5:
+        if not group_info(child.pid)[0]:
+            break
+        time.sleep(.05)
+    remaining = group_info(child.pid)[0]
+    if not remaining and child_finished(child):
+        child.wait(timeout=.1)
+    return {'actions': actions, 'remaining_live_members': remaining,
+            'elapsed_seconds': time.monotonic() - started,
+            'error': None if not remaining else 'owned group remained after cleanup budget'}
+
+
+def measurement_roots(manifest):
+    roots = [S / 'probe', S / 'gocache', S / 'tmp', S / 'gopath', R]
+    for extra in manifest.get('additional_measure_dirs', []):
+        path = Path(extra).resolve()
+        if not path.is_relative_to(S):
+            raise ValueError('additional measurement directory escaped task scratch')
+        roots.append(path)
+    roots = [path.resolve() for path in roots]
+    for i, path in enumerate(roots):
+        for other in roots[:i]:
+            if path == other or path.is_relative_to(other) or other.is_relative_to(path):
+                raise ValueError('overlapping measurement roots')
+    return roots
+
+
+def measured_size(roots, interruptible=False):
+    total = 0
+    for directory in roots:
+        for path in directory.rglob('*'):
+            if interruptible and received_signal is not None:
+                raise InterruptedError('catchable signal during disk accounting')
+            try:
+                if path.is_file():
+                    total += path.stat().st_size
+            except FileNotFoundError:
+                pass
+    return total
+
+
+def readset(manifest, phase):
+    expected = {}
+    groups = ('inputs', 'scratch_bindings') if phase == 'pre' else ('unchanged', 'scratch_bindings', 'expected_after')
+    for group in groups:
+        for name, value in manifest.get(group, {}).items():
+            path = Path(name)
+            path = path if path.is_absolute() else R / path
+            key = str(path)
+            if key in expected and expected[key] != value:
+                raise ValueError('conflicting readset binding: ' + key)
+            expected[key] = value
+    checks, failures = {}, {}
+    for name, wanted in expected.items():
+        try:
+            actual = digest(name)
+        except OSError as exc:
+            actual = 'unreadable:' + type(exc).__name__
+        checks[name] = actual == wanted
+        if actual != wanted:
+            failures[name] = {'expected': wanted, 'actual': actual}
+    return checks, failures
+
+
+def environment(manifest):
+    fixed = {'GOMAXPROCS': '2', 'GOFLAGS': '-p=2 -mod=readonly', 'GOPROXY': 'off',
+             'GOTOOLCHAIN': 'local', 'GOWORK': 'off', 'GOROOT': str(S / 'tools/go'),
+             'GOCACHE': str(S / 'gocache'), 'GOMODCACHE': '/home/dobo/go/pkg/mod',
+             'GOPATH': str(S / 'gopath'), 'GOTMPDIR': str(S / 'tmp'),
+             'TMPDIR': str(S / 'tmp'), 'GOMEMLIMIT': '1536MiB'}
+    extra = manifest.get('environment', {})
+    if any(key in extra and extra[key] != value for key, value in fixed.items()):
+        raise ValueError('qualified tool environment override refused')
+    env = dict(os.environ)
+    env.update({'CAT_ACCOUNTS_ENABLED': '0', 'CAT_ALLOWED_HOSTS': 'testserver,example.com'})
+    env.update(extra)
+    env.update(fixed)
+    env['PATH'] = str(S / 'tools/go/bin') + os.pathsep + env.get('PATH', '')
+    return env
+
+
+def limits(manifest):
+    wanted = {'RSS_bytes': 2 * GIB, 'incremental_bytes': GIB,
+              'start_disk_floor_bytes': 17 * GIB, 'remaining_disk_memory_floor_bytes': 16 * GIB,
+              'GOMAXPROCS': 2, 'build_jobs': 2, 'metadata_reserve_seconds': 180}
+    for key, value in wanted.items():
+        if type(manifest.get('limits', {}).get(key)) is not int or manifest['limits'][key] != value:
+            raise ValueError('fixed R4 campaign limit differs: ' + key)
+    start = datetime.datetime.fromisoformat(manifest['checked_at_utc'])
+    deadline = datetime.datetime.fromisoformat(manifest['deadline_utc'])
+    if start.tzinfo is None or deadline.tzinfo is None or not 0 < (deadline - start).total_seconds() <= 1200:
+        raise ValueError('campaign must have one fixed deadline within twenty minutes')
+    return deadline
+
+
+def budget(roots, state, deadline, before_launch=False, first=False):
+    size = measured_size(roots, interruptible=True)
+    increment = size - state['original_start_size']
+    state['peak_sampled_incremental_bytes'] = max(state['peak_sampled_incremental_bytes'], increment)
+    if shutil.disk_usage(R).free < (17 if first else 16) * GIB or memory_available() < 16 * GIB:
+        return 'remaining-disk-or-memory-floor', increment
+    if increment > GIB:
+        return 'cumulative-incremental1GiB', increment
+    if now() >= deadline - datetime.timedelta(seconds=195 if before_launch else 180):
+        return 'metadata-time-reserve', increment
+    return None, increment
+
+
+def load_prefix(state, manifest, index, manifest_sha, roots):
+    if state.get('manifest_sha256') != manifest_sha or state.get('deadline_utc') != manifest['deadline_utc'] or state.get('measurement_roots') != [str(p) for p in roots]:
+        raise ValueError('campaign identity/deadline/roots changed')
+    if state.get('status') != 'ready' or state.get('pending') is not None or state.get('next_index') != index or len(state.get('steps', [])) != index:
+        raise ValueError('only the exact successful prefix may continue; pending/failed/complete cannot retry')
+    if type(state.get('original_start_size')) is not int or state['original_start_size'] < 0:
+        raise ValueError('original campaign baseline missing')
+    entries = []
+    for i, item in enumerate(state['steps']):
+        path = D / (manifest['lane'] + '-step-' + str(i) + '-result.json')
+        if item['receipt_path'] != str(path) or digest(path) != item['receipt_sha256']:
+            raise ValueError('successful prefix receipt changed')
+        row = json.loads(path.read_bytes())
+        if row['index'] != i or row['manifest_sha256'] != manifest_sha or row['name'] != manifest['commands'][i]['name'] or row['argv'] != manifest['commands'][i]['argv'] or row['exit_code'] != 0 or row['guard'] is not None or row['status'] != 'passed':
+            raise ValueError('prefix is not exact and successful')
+        if row.get('original_start_size') != state['original_start_size'] or row.get('deadline_utc') != state['deadline_utc'] or row.get('campaign_started_at_utc') != state['campaign_started_at_utc']:
+            raise ValueError('original prefix baseline/deadline/start changed')
+        entries.append(row)
+    return entries
+
+
+def run_step(manifest, index, state, state_path, result_path, roots, deadline, prefix):
+    step = manifest['commands'][index]
+    child = identity = None
+    row = {'index': index, 'name': step['name'], 'argv': step['argv'],
+           'manifest_sha256': state['manifest_sha256'], 'started_at_utc': now().isoformat(),
+           'original_start_size': state['original_start_size'],
+           'deadline_utc': state['deadline_utc'],
+           'campaign_started_at_utc': state['campaign_started_at_utc'],
+           'exit_code': None, 'guard': None, 'failure': None, 'cleanup': None,
+           'peak_group_RSS_bytes': 0, 'status': 'failed'}
+    log = S / 'probe' / (manifest['lane'] + '-' + str(index) + '.log')
+    state['status'] = 'pending'
+    state['pending'] = {'index': index, 'name': step['name'], 'argv': step['argv'],
+                        'phase': 'preflight', 'pid': None, 'log_path': str(log)}
+    write_json(state_path, state)
+    try:
+        row['pre_checks'], failures = readset(manifest, 'pre')
+        if failures:
+            row['pre_failures'] = failures
+            raise RuntimeError('pre-step readset changed')
+        reason, _ = budget(roots, state, deadline, before_launch=True, first=index == 0)
+        if reason:
+            row['guard'] = reason
+            raise RuntimeError(reason)
+        if received_signal is not None:
+            raise InterruptedError('catchable signal before launch')
+        env = environment(manifest)
+        with log.open('xb') as output:
+            state['pending']['phase'] = 'spawning'
+            write_json(state_path, state)
+            child = subprocess.Popen(step['argv'], cwd=R, env=env, stdout=output,
+                                     stderr=subprocess.STDOUT, start_new_session=True)
+            identity = process_info(child.pid)
+            if identity is None or identity['pgid'] != child.pid or identity['sid'] != child.pid:
+                raise RuntimeError('new child session identity unavailable')
+            state['pending'].update(identity)
+            state['pending']['phase'] = 'monitoring'
+            write_json(state_path, state)
+            while not child_finished(child):
+                if received_signal is not None:
+                    raise InterruptedError('catchable signal while child active')
+                _, rss = group_info(child.pid)
+                row['peak_group_RSS_bytes'] = max(row['peak_group_RSS_bytes'], rss)
+                reason, _ = budget(roots, state, deadline)
+                if rss > 2 * GIB:
+                    reason = 'process-group-RSS2GiB'
+                if reason:
+                    row['guard'] = reason
+                    raise RuntimeError(reason)
+                time.sleep(.5)
+            if received_signal is not None:
+                raise InterruptedError('catchable signal at child completion')
+            if group_info(child.pid)[0]:
+                raise RuntimeError('owned descendants remain after leader exit')
+            row['exit_code'] = child.wait()
+            child = None
+            if row['exit_code'] != 0:
+                raise RuntimeError('native command failed')
+    except BaseException as exc:
+        row['failure'] = {'type': type(exc).__name__, 'message': str(exc)}
+        if row['guard'] is None:
+            row['guard'] = 'catchable-signal' if received_signal is not None else 'step-failure'
+    finally:
+        if child is not None:
+            try:
+                if identity is None:
+                    identity = process_info(child.pid)
+                if identity is None:
+                    raise RuntimeError('cannot prove owned leader identity for cleanup')
+                row['cleanup'] = stop_owned_group(child, identity)
+                row['exit_code'] = child.returncode
+                if row['cleanup']['error'] is not None:
+                    row['guard'] = 'owned-group-cleanup-unconfirmed'
+            except BaseException as exc:
+                row['cleanup'] = {'error': repr(exc)}
+                row['guard'] = 'owned-group-cleanup-unconfirmed'
+        try:
+            row['post_checks'], failures = readset(manifest, 'post')
+            if failures:
+                row['post_failures'] = failures
+                row['guard'] = row['guard'] or 'post-step-readset-changed'
+            reason, increment = budget(roots, state, deadline)
+            row['incremental_bytes_from_original_baseline'] = increment
+            row['guard'] = row['guard'] or reason
+        except BaseException as exc:
+            row['post_failure'] = repr(exc)
+            row['guard'] = row['guard'] or 'post-step-check-failure'
+        row['received_signal'] = received_signal
+        if received_signal is not None:
+            row['guard'] = row['guard'] or 'catchable-signal'
+        row['finished_at_utc'] = now().isoformat()
+        if log.exists():
+            row['log_path'], row['log_sha256'], row['log_bytes'] = str(log), digest(log), log.stat().st_size
+            row['log_text'] = log.read_text(errors='replace') if log.stat().st_size <= 1024 * 1024 else None
+        passed = row['exit_code'] == 0 and row['guard'] is None and row['failure'] is None
+        row['status'] = 'passed' if passed else 'failed'
+        step_path = D / (manifest['lane'] + '-step-' + str(index) + '-result.json')
+        write_json(step_path, row, exclusive=True)
+        state['steps'].append({'receipt_path': str(step_path), 'receipt_sha256': digest(step_path)})
+        state['pending'] = None
+        state['next_index'] = index + 1
+        state['status'] = ('completed' if index + 1 == len(manifest['commands']) else 'ready') if passed else 'failed'
+        state['last_updated_at_utc'] = now().isoformat()
+        write_json(state_path, state)
+        result = {'schema': 'v1-6-cumulative-worktree-runner-r4', 'lane': manifest['lane'],
+                  'manifest_sha256': state['manifest_sha256'], 'deadline_utc': state['deadline_utc'],
+                  'campaign_started_at_utc': state['campaign_started_at_utc'],
+                  'original_start_size': state['original_start_size'], 'status': state['status'],
+                  'all_steps_completed': state['status'] == 'completed', 'steps': prefix + [row],
+                  'peak_sampled_incremental_bytes': state['peak_sampled_incremental_bytes'],
+                  'deadline_pass': now() < deadline, 'installation_approval': False}
+        write_json(result_path, result)
+        emit({'lane': manifest['lane'], 'index': index, 'status': state['status'],
+              'exit_code': row['exit_code'], 'guard': row['guard'], 'result_path': str(result_path)})
+    return 0 if passed else 1
+
+
+def main():
+    if len(sys.argv) != 3:
+        raise ValueError('usage: run_worktree_lane_r4.py ADMISSION STEP_INDEX')
+    manifest_path = Path(sys.argv[1]).resolve()
+    manifest_sha = digest(manifest_path)
+    manifest = json.loads(manifest_path.read_bytes())
+    if digest(Path(__file__)) != manifest['runner_sha256']:
+        raise ValueError('runner source hash differs')
+    index = int(sys.argv[2])
+    lane = manifest['lane']
+    if not re.fullmatch(r'[a-z][a-z0-9-]{0,95}', lane) or not 0 <= index < len(manifest['commands']):
+        raise ValueError('invalid lane/index')
+    deadline = limits(manifest)
+    roots = measurement_roots(manifest)
+    state_path = S / 'probe' / (lane + '-r4-state.json')
+    result_path = D / (lane + '-result.json')
+    lock_path = S / 'probe' / (lane + '-r4.lock')
+    fd = os.open(lock_path, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(fd, 'a+') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if index == 0:
+            if state_path.exists() or result_path.exists():
+                raise ValueError('campaign already exists; never reset/retry index zero')
+            state = {'schema': 'v1-6-worktree-runner-r4-state', 'manifest_sha256': manifest_sha,
+                     'deadline_utc': manifest['deadline_utc'], 'campaign_started_at_utc': now().isoformat(),
+                     'original_start_size': measured_size(roots), 'measurement_roots': [str(p) for p in roots],
+                     'peak_sampled_incremental_bytes': 0, 'status': 'ready', 'next_index': 0,
+                     'pending': None, 'steps': []}
+            write_json(state_path, state, exclusive=True)
+        else:
+            state = json.loads(state_path.read_bytes())
+        prefix = load_prefix(state, manifest, index, manifest_sha, roots)
+        return run_step(manifest, index, state, state_path, result_path, roots, deadline, prefix)
+
+
+if __name__ == '__main__':
+    signal.signal(signal.SIGTERM, on_signal)
+    signal.signal(signal.SIGINT, on_signal)
+    try:
+        code = main()
+    except BaseException as exc:
+        emit({'status': 'refused', 'error': type(exc).__name__ + ': ' + str(exc)})
+        code = 2
+    raise SystemExit(code)

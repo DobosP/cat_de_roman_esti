@@ -1695,3 +1695,25 @@ and1156saved prefixes across10books. Both actual proposals and audits remain iso
 915protected files stay exact. Same-role World prospective finals accept exact proposal8f013a8f/audit2a6db5a7 only;
 Quick needs a fresh audit/final after World staging. No serving export/authority/release
 or V1.6 landing is inferred from these intermediate gates.
+
+
+## 2026-10-07 — V1.6 complete native source staging
+
+Graph two forms/Source6/rank/derive, World8f013a8f, Quick0c79b9c5 and Extensionsd94647e7
+were staged through supported transactions and exact independent review gates. Initial
+worktree increment accounting gap remains explicit; correctedwholeR guard and fresh
+nonmutating qualification passed. Memory preflight refusals remain preserved. Native
+source validation/export/check now pass for e0cfe93d7272424bytes; no currentauthority or
+release claim. Immutable Source4/Source5 rebuild race checks pass with old assertions.
+Strict history, current sealed-input and independent1207capture methods are source-ready
+and awaiting independent review/execution. Main remains unchanged and clean; no push.
+
+## V1.6 owner pause for Windows continuation — 2026-10-07
+
+Valid until: owner resumes the exact continuation branch — then treat as history.
+
+Qualification paused before completion for immediate restart. Source6 staging and several gates pass, but all19 complementary contentrail cases remain unqualified after the stopped external-wrapper interruption. R4-R2 review and both fixture modes are pending; no assembled release acceptance or V1.6 landing. Durable continuation: `docs/reviews/v1-6-everyday-inputs/continuation-checkpoint-r1.json`. Finish V1.6 later, root publishes green main, then stop; noV1.7.
+
+Previous task STATUS paragraph, preserved as superseded history:
+
+V1.5/Source5 World landed locally e8c4bbc; Quick/Extensions retain Source4. [Hot chocolate](reviews/v1-5-hot-chocolate/README.md) adds one world-local concept/recipe; both i02 links stay held and the Contexto projection stays exact. Fresh 108-source audits/finals, strict all-four authority, 33 goal modes/148 discoveries/1156 prefixes, 60-request journey, 1207 HTTP parity, smoke151/assets28, 425 reference checks, export/rank/derive/mobile and shared race/vet pass. All 27 backend test packages have passing race coverage; the 24 content-rail cases use exhaustive 5/19 groups; vet passes. Exact assembled review62817bd1 accepted684b29b; local landing e8c4bbc complete. V1.6 [source screen](reviews/v1-6-everyday-inputs/README.md) records2selected/1researched/3held. Actual54-request baseline proves drapel/untdelemn missing typed guesses while canonicalSteag/Ulei rank5/2; leafă still needs a case, cucuruz already owned, gazetă broader, Geamantan/Valiză absent. Exact two-singular proposal/raw facts and supported isolated candidate63f0dcd7 are recorded:2forms,0other node/edge/puzzle/pack deltas. Native56-request prospective play,265target/2419mining profiles and1776reference cases pass with12lexical/36service deltas and6explained reference changes. Specificflag/nativeLanț/terminal controls pass; independent4149550d accepts exact rawgraphquality for staging. Isolated Source6a086dc2a candidates and native716ranking/336derived rebuilds pass; only Ulei World snapshot adds untdelemn, all mechanics/boards exact. Fresh native raw reviews cover85Quick/352recipes+252concepts/49Extensions. Quick85/460HTTP and World33modes/148discoveries/1156prefix native prospective audits pass; same-role World prospective finals accept only exact staging. Task graph/Source6/rank/derive match the exact candidate (8679forms). Corrected whole-worktree guard and fresh native actual-root requalification pass; original accounting gap remains history. World8f013a8f and Quick0c79b9c5 were staged through guarded native transactions and same-role finals; a Quick memory refusal remains preserved. Extensionsd94647e7 is staged through native finals; complete source validation and native exporte0cfe93d/7272424bytes pass. Source4/Source5 historical rebuild race checks pass with old assertions intact. Strict history/current-input/capture methods await independent review and execution; currentauthority/fullrelease remain pending. Earlier worker/resource failures remain history.

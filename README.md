@@ -1,5 +1,8 @@
 # cat_de_roman_esti
 
+V1.6 is paused as an unmerged Windows continuation checkpoint on `codex/content-v1-6`;
+see the [tracked handoff](docs/reviews/v1-6-everyday-inputs/continuation-checkpoint-r1.json). It is not release-qualified.
+
 A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in
 `docs/STATUS.md`; no graph visualization). Alchimie exploration also has its

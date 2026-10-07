@@ -1,0 +1,204 @@
+"""Strict complete-byte V1.6 inverse and independently current Source6 coverage."""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from copy import deepcopy
+from pathlib import Path
+
+import pytest
+
+from tests import content_history as history
+
+ROOT = Path(__file__).resolve().parents[1]
+NAMES = tuple(history._V1_6_BASELINE)
+
+
+def current(filename):
+    directory = ("tests/fixtures" if filename.startswith("cat_mobile")
+                 else "cat_de_roman_esti/fixtures")
+    raw = (ROOT / directory / filename).read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == history._V1_6_AFTER[filename]
+    value = json.loads(raw)
+    assert history._v1_6_bytes(value, filename) == raw
+    return value
+
+
+def inverse(value, filename):
+    operation = (history.before_v1_6_catalog if filename in history._V1_6_CATALOGS
+                 else history.before_v1_6_artifact)
+    return operation(value, filename)
+
+
+@pytest.mark.parametrize("filename", NAMES)
+def test_v16_restores_every_baseline_byte_without_mutation_and_is_idempotent(filename):
+    latest = current(filename)
+    untouched = deepcopy(latest)
+    previous = inverse(latest, filename)
+    assert history._v1_6_bytes(previous, filename) == history.historical_source5_bytes(filename)
+    assert hashlib.sha256(history._v1_6_bytes(previous, filename)).hexdigest() == (
+        history._V1_6_BASELINE[filename]
+    )
+    assert latest == untouched and previous is not latest
+    twice = inverse(previous, filename)
+    assert twice == previous and twice is not previous
+
+
+@pytest.mark.parametrize("filename", NAMES)
+@pytest.mark.parametrize("mutation", ["header", "record", "order", "duplicate"])
+def test_v16_rejects_any_unreviewed_bytes_and_keeps_input(filename, mutation):
+    latest = current(filename)
+    key = ("kg_nodes" if filename in {"kg_sample.json", "cat_mobile_app_pack_contract.json"}
+           else "concepts" if filename.startswith("alchimie_discovery")
+           else "conexiuni" if filename == "games_pack.json" else "boards")
+    if mutation == "header":
+        latest["unreviewed"] = True
+    elif mutation == "record":
+        latest[key][0]["unreviewed"] = True
+    elif mutation == "order":
+        latest[key][0], latest[key][1] = latest[key][1], latest[key][0]
+    else:
+        latest[key].append(deepcopy(latest[key][0]))
+    untouched = deepcopy(latest)
+    with pytest.raises(AssertionError):
+        inverse(latest, filename)
+    assert latest == untouched
+
+
+def test_v16_actual_source_has_exact_two_forms_and_no_other_graph_change():
+    latest = current("kg_sample.json")
+    previous = inverse(latest, "kg_sample.json")
+    changes = {}
+    for before, after in zip(previous["kg_nodes"], latest["kg_nodes"], strict=True):
+        assert before["id"] == after["id"]
+        if before != after:
+            assert {k for k in before if before[k] != after[k]} == {"aliases"}
+            changes[after["id"]] = (before["aliases"], after["aliases"])
+    assert changes == {
+        key: (aliases, [*aliases, added])
+        for key, (aliases, added) in history._V1_6_ALIASES.items()
+    }
+    assert sum(len(n.get("aliases", [])) for n in latest["kg_nodes"]) == 8679
+    assert latest["kg_edges"] == previous["kg_edges"]
+    assert latest["kg_puzzles"] == previous["kg_puzzles"]
+    assert current("games_pack.json") == inverse(current("games_pack.json"), "games_pack.json")
+
+
+@pytest.mark.parametrize("mutation", ["reorder", "duplicate", "extra-form", "other-owner"])
+def test_v16_rejects_unreviewed_aliases(mutation):
+    latest = current("kg_sample.json")
+    nodes = {n["id"]: n for n in latest["kg_nodes"]}
+    aliases = nodes["n_v24_food_pantry_ulei"]["aliases"]
+    if mutation == "reorder":
+        aliases.reverse()
+    elif mutation == "duplicate":
+        aliases.append("untdelemn")
+    elif mutation == "extra-form":
+        aliases.append("untdelemnului")
+    else:
+        aliases.remove("untdelemn")
+        nodes["n_v4ist_steag"]["aliases"].append("untdelemn")
+    with pytest.raises(AssertionError):
+        inverse(latest, "kg_sample.json")
+
+
+@pytest.mark.parametrize("filename", sorted(history._V1_6_CATALOGS))
+def test_v16_rejects_repinned_catalogue_forgery(monkeypatch, filename):
+    latest = current(filename)
+    latest["candidate_sha256"] = "0" * 64
+    monkeypatch.setitem(history._V1_6_AFTER, filename,
+                        hashlib.sha256(history._v1_6_bytes(latest, filename)).hexdigest())
+    with pytest.raises(AssertionError):
+        inverse(latest, filename)
+
+
+@pytest.mark.parametrize("repin", [False, True])
+@pytest.mark.parametrize("mutation", ["parent", "source", "before", "after", "review", "metadata"])
+def test_v16_rejects_forged_or_repinned_receipt(tmp_path, monkeypatch, repin, mutation):
+    latest = current("alchimie_discovery_world_v92.json")
+    receipt = json.loads(history._V1_6_RECEIPT.read_bytes())
+    if mutation in {"parent", "source"}:
+        key = "parent_source5_sha256" if mutation == "parent" else "source6_sha256"
+        receipt[key] = "0" * 64
+    elif mutation in {"before", "after"}:
+        receipt["files"]["kg_sample.json"][mutation + "_sha256"] = "0" * 64
+    elif mutation == "review":
+        receipt["documents_sha256"][next(iter(receipt["documents_sha256"]))] = "0" * 64
+    else:
+        row = receipt["files"]["alchimie_discovery_world_v92.json"]
+        row["metadata"]["before"]["native_source_version"] = 4
+    raw = (json.dumps(receipt, ensure_ascii=False, indent=2) + "\n").encode()
+    path = tmp_path / "forged-receipt.json"
+    path.write_bytes(raw)
+    monkeypatch.setattr(history, "_V1_6_RECEIPT", path)
+    if repin:
+        monkeypatch.setattr(history, "_V1_6_RECEIPT_SHA256", hashlib.sha256(raw).hexdigest())
+    with pytest.raises(AssertionError):
+        inverse(latest, "alchimie_discovery_world_v92.json")
+
+
+def test_v16_refuses_mixed_binding_and_changed_previous_history():
+    for part in ("binding", "history"):
+        latest = current("alchimie_discovery_world_v92.json")
+        if part == "binding":
+            latest["bindings"]["kg_sha256"] = history._V1_6_BASELINE["kg_sample.json"]
+        else:
+            latest["compatible_versions"][0]["source_sha256"] = "0" * 64
+        with pytest.raises(AssertionError):
+            inverse(latest, "alchimie_discovery_world_v92.json")
+
+
+def test_v16_old_chain_keeps_source5_world_only_and_all_earlier_literals():
+    latest = current("alchimie_discovery_world_v92.json")
+    source5 = inverse(latest, "alchimie_discovery_world_v92.json")
+    assert history._v1_3_catalog_digest(source5) == history._V1_5_WORLD_AFTER_SHA256
+    source4 = history.before_v1_5_world_catalog(latest, "alchimie_discovery_world_v92.json")
+    assert history._v1_3_catalog_digest(source4) == history._V1_5_WORLD_BEFORE_SHA256
+    source3 = history.before_v1_4_catalog(latest, "alchimie_discovery_world_v92.json")
+    assert history._v1_3_catalog_digest(source3) == (
+        history._V1_4_CATALOG_BASELINE["alchimie_discovery_world_v92.json"]
+    )
+
+
+def test_v16_historical_world_restores_real_current_loaders(monkeypatch, tmp_path):
+    from cat_de_roman_esti.wordgames import discovery_world as world_loader
+    from cat_de_roman_esti.wordgames import service as service_loader
+
+    original_path = world_loader.CATALOG_PATH
+    original_fixture = os.environ.get("CAT_KG_FIXTURE")
+    service_loader.get_service.cache_clear()
+    world_loader._load_world.cache_clear()
+    try:
+        assert service_loader.get_service().resolve("drapel") == "n_v4ist_steag"
+        assert service_loader.get_service().resolve("untdelemn") == "n_v24_food_pantry_ulei"
+        assert len(world_loader.get_world().concepts) == 252
+        with history.historical_v1_4_world(monkeypatch, tmp_path / "old") as world:
+            assert len(world.concepts) == 251
+            assert service_loader.get_service().resolve("drapel") is None
+            assert service_loader.get_service().resolve("untdelemn") is None
+        assert world_loader.CATALOG_PATH == original_path
+        assert os.environ.get("CAT_KG_FIXTURE") == original_fixture
+        assert world_loader._load_world.cache_info().currsize == 0
+        assert service_loader.get_service.cache_info().currsize == 0
+        assert service_loader.get_service().resolve("untdelemn") == "n_v24_food_pantry_ulei"
+        assert len(world_loader.get_world().concepts) == 252
+    finally:
+        service_loader.get_service.cache_clear()
+        world_loader._load_world.cache_clear()
+
+
+def test_v16_historical_context_restores_after_body_failure(monkeypatch, tmp_path):
+    from cat_de_roman_esti.wordgames import discovery_world as world_loader
+    from cat_de_roman_esti.wordgames import service as service_loader
+
+    original_path = world_loader.CATALOG_PATH
+    original_fixture = os.environ.get("CAT_KG_FIXTURE")
+    with pytest.raises(RuntimeError, match="bounded failure"):
+        with history.historical_v1_4_world(monkeypatch, tmp_path / "failing"):
+            assert service_loader.get_service().resolve("untdelemn") is None
+            raise RuntimeError("bounded failure")
+    assert world_loader.CATALOG_PATH == original_path
+    assert os.environ.get("CAT_KG_FIXTURE") == original_fixture
+    assert world_loader._load_world.cache_info().currsize == 0
+    assert service_loader.get_service.cache_info().currsize == 0

@@ -1,0 +1,63 @@
+{
+  "schema": "v1-6-complete-world-rail-and-current-http-summary-r2",
+  "result": "PASS",
+  "execution_sha256": "1c599f024d4f5ff4164bdf8639a1bd70320c5bb38c860aac153e4e76b76594b6",
+  "complete_group_a_tests": [
+    "TestInstalledWorldReconstructionAfterRecipeTransition",
+    "TestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix",
+    "TestHistoricalWorldTransitionsKeepCurrentBooksAndRefuseChangedRecipes",
+    "TestSecondWorldTransitionRefusesStalePreviousArchive",
+    "TestProspectiveWorldAuditWithChangedGraphKeepsInstalledWorldFailClosed"
+  ],
+  "group_a_seconds": 383.613873,
+  "current24_test_functions_preserved": true,
+  "independent_test_context_review_sha256": "b2922c0adbf11b92e2d65890ed1ff09d8a7b26dd006407c3ee0808cc86c9768f",
+  "formatted_test_postimages": [
+    {
+      "path": "go-backend/internal/contentrails/historical_context_v16_test.go",
+      "reviewed_before_sha256": "ad7d7e0bea251eb0bedff30e9502d6c819f778c5961c1a894a0b20c210820866",
+      "canonical_after_sha256": "eb6226ec627412f4906905e4786676e6e36f2438876015e91eb375f9f6f2a61c"
+    },
+    {
+      "path": "go-backend/internal/contentrails/rail_test.go",
+      "reviewed_before_sha256": "9a19eb672c8f49228bb39d0b8e3989862896b8b368582c86bff136640004cf59",
+      "canonical_after_sha256": "9a19eb672c8f49228bb39d0b8e3989862896b8b368582c86bff136640004cf59"
+    },
+    {
+      "path": "go-backend/internal/contentrails/world_installed_test.go",
+      "reviewed_before_sha256": "e18e015d75f235e6cb632b5e9351a470d1495b4bd454e8edd2a513a162e463b1",
+      "canonical_after_sha256": "e18e015d75f235e6cb632b5e9351a470d1495b4bd454e8edd2a513a162e463b1"
+    }
+  ],
+  "canonical_reviewed_bytes_verified_before_and_after_tests": true,
+  "runtime109_source8_authority_protected_exact": true,
+  "parity_report_sha256": "1a8b967828acacda70acbdb9bee66f649b782bd2ad285b4c00991d49d3c097bc",
+  "smoke_report_sha256": "16e6b55913ea90203c4e8fed687dba22481feb026512a3cd091c0531e1bc1a64",
+  "parity": {
+    "ok": true,
+    "mode": "independent_parity",
+    "requests": 1207,
+    "reference": "Independent Django application; V1.6 two reviewed singular inputs drapel and untdelemn in actual Source6 a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611; actual sealed export e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877; preserved V1.5 producer 1ecbc19936388363c6eb1e3b8bb764b0b0d527dd9ba46fbc47b8e8c4113d605a; capture does not itself confer current authority or release approval",
+    "elapsed_seconds": 1.612848553,
+    "content_hash": "sha256:7410c200f06f24a23581a78c8804a685013c1aaffa878a6a46388bb8369f44de",
+    "accounts_enabled": false
+  },
+  "smoke": {
+    "ok": true,
+    "mode": "smoke",
+    "requests": 151,
+    "elapsed_seconds": 0.295940813,
+    "content_hash": "sha256:7410c200f06f24a23581a78c8804a685013c1aaffa878a6a46388bb8369f44de",
+    "games_completed": 6,
+    "exploration_restore": true,
+    "assets_verified": 28,
+    "legal_sha256": {
+      "/legal/privacy": "49b73ca793154bf4ac7980ac5632f72f0243066d10ac6a6ef0a88bce79ef05f9",
+      "/legal/terms": "c87a6a4309ba357d55b95c4b41532350fa6dac5cc9c315e8a1741c89906d2249"
+    },
+    "accounts_enabled": false
+  },
+  "peak_group_RSS_bytes": 468131840,
+  "incremental_bytes": 12457786,
+  "original_group_a_r1": "FAIL preserved; two historical-context failures; parity/smoke not executed in that failed lane."
+}

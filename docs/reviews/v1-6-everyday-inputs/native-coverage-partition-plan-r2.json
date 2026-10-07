@@ -1,0 +1,63 @@
+{
+  "schema": "v1-6-contentrails-b-exhaustive-partitions-r2",
+  "original_group_b": [
+    "TestInstalledAuthorityEmptyKeepsHistoricalBaselineAndPinIsSeparate",
+    "TestInstalledAuthorityPinExclusionPermitsOnlyDigestMetadata",
+    "TestInstalledAuthorityProtectedDocumentReaderRefusals",
+    "TestInstalledAuthorityDraftOutputCannotOverwriteAuthorityOrRuntime",
+    "TestReviewedInstalledVersionTwoReconstructsWithoutRelabelingV1",
+    "TestInstalledAuthoritySchemaPinAndSequentialChainRefusals",
+    "TestInstalledAuthorityCannotBeGrantedByPinsWithoutCurrentReviews",
+    "TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse",
+    "TestFutureInstalledParentChainRequiresExactSequentialReviewedPredecessor",
+    "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes",
+    "TestStrictPrivateSourceAndReviewJSON",
+    "TestSourceShapeAndVersionParentRefuseBeforeConstruction",
+    "TestCompleteIndependentJudgmentsSourcesAndCandidateBinding",
+    "TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal",
+    "TestSharedGuardedTransactionsRollbackAndRefuseStaleReadsets",
+    "TestOutputCannotFollowSymlinkOrOverwriteFixtures",
+    "TestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval",
+    "TestLoadedCustomSourceCASRefusesChangedFlagFile",
+    "TestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay"
+  ],
+  "groups": {
+    "0": [
+      "TestInstalledAuthorityEmptyKeepsHistoricalBaselineAndPinIsSeparate",
+      "TestReviewedInstalledVersionTwoReconstructsWithoutRelabelingV1",
+      "TestFutureInstalledParentChainRequiresExactSequentialReviewedPredecessor",
+      "TestCompleteIndependentJudgmentsSourcesAndCandidateBinding",
+      "TestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval"
+    ],
+    "1": [
+      "TestInstalledAuthorityPinExclusionPermitsOnlyDigestMetadata",
+      "TestInstalledAuthoritySchemaPinAndSequentialChainRefusals",
+      "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes",
+      "TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal",
+      "TestLoadedCustomSourceCASRefusesChangedFlagFile"
+    ],
+    "2": [
+      "TestInstalledAuthorityProtectedDocumentReaderRefusals",
+      "TestInstalledAuthorityCannotBeGrantedByPinsWithoutCurrentReviews",
+      "TestStrictPrivateSourceAndReviewJSON",
+      "TestSharedGuardedTransactionsRollbackAndRefuseStaleReadsets",
+      "TestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay"
+    ],
+    "3": [
+      "TestInstalledAuthorityDraftOutputCannotOverwriteAuthorityOrRuntime",
+      "TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse",
+      "TestSourceShapeAndVersionParentRefuseBeforeConstruction",
+      "TestOutputCannotFollowSymlinkOrOverwriteFixtures"
+    ]
+  },
+  "sizes": [
+    5,
+    5,
+    5,
+    4
+  ],
+  "disjoint_exhaustive": true,
+  "reason": "Prior externalSIGTERM ended resource monitor while exact owned native child remained; orphan stopped. Cause unknown. Shorter separate invocations avoid relying on unproven long-session lifetime, without omitting tests.",
+  "campaign_contract": "All19 cases plus CLI/vet share one NEW fixed20min admission, one original disk baseline/1GiB increment and nonresetting deadline; separate single-step runner invocations resume exact successful prefix only. Original failed window remains failed and immutable.",
+  "no_tests_executed": true
+}

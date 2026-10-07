@@ -1,0 +1,48 @@
+{
+  "schema": "v1-6-mixed-source-authority-refusals-r1",
+  "results": [
+    {
+      "rail": "quick",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-6/probe/authority-tools-r1/cat-content-rail",
+        "quick",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6/go-backend/internal/contentrails/sources/authored-v5.json",
+        "--check"
+      ],
+      "exit_code": 1,
+      "output": "cat-content-rail: installed authority does not authorize selected authored source\n"
+    },
+    {
+      "rail": "world",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-6/probe/authority-tools-r1/cat-content-rail",
+        "world",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6/go-backend/internal/contentrails/sources/authored-v5.json",
+        "--check"
+      ],
+      "exit_code": 1,
+      "output": "cat-content-rail: installed authority does not authorize selected authored source\n"
+    },
+    {
+      "rail": "extensions",
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-6/probe/authority-tools-r1/cat-content-rail",
+        "extensions",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6/go-backend/internal/contentrails/sources/authored-v5.json",
+        "--check"
+      ],
+      "exit_code": 1,
+      "output": "cat-content-rail: installed authority does not authorize selected authored source\n"
+    }
+  ],
+  "all_refused_as_required": true
+}

@@ -1,0 +1,131 @@
+{
+ "R1_findings_resolved": [
+  {
+   "evidence": "pthread_sigmask blocks SIGTERM before os.link and keeps it blocked through source_created=True and scratch unlink. A pending SIGTERM is delivered after restoring the mask, with ownership already known to the outer exception cleanup.",
+   "id": "publication-interruption",
+   "status": "resolved for outer SIGTERM"
+  },
+  {
+   "evidence": "os.link(source_temp,source_target) atomically refuses an existing destination on the asserted same filesystem. No os.replace of the authored target remains. Rollback deletion requires the exact recorded device/inode and Source6 hash.",
+   "id": "publication-no-clobber",
+   "status": "resolved"
+  },
+  {
+   "evidence": "The primary failure remains recorded. Repeated SIGTERM is ignored during cleanup; supported A._restore, each mode restoration and owned Source6 removal have independent error collection, so one failure does not skip the others. Failure or cleanup_errors exits1 after the receipt.",
+   "id": "cleanup-completeness",
+   "status": "resolved"
+  },
+  {
+   "evidence": "Original five transaction-file permission modes are captured; success and failure paths reapply them and the result records each mode equality. No uid/gid/mtime or uncatchable-crash restoration claim is made.",
+   "id": "file-metadata",
+   "status": "resolved for mode preservation"
+  },
+  {
+   "evidence": "Pre-existing actual result is refused before any mutation. R1 method/rejection remain exact and unexecuted. R2 method can produce first actual staging receipt named r1 because neither method has executed and no actual staging receipt exists.",
+   "id": "prior-result-preservation",
+   "status": "resolved"
+  }
+ ],
+ "bindings": {
+  "methods/stage_graph_source6_r1.py.txt": "836b9145c12171441a91f844cb7d296b047d922a00daa8890a6978738852dd0f",
+  "source6-worktree-staging-case-r1.json": "a5bf31ff7748af7174bc0fb399365f54dbc52f25e09829e13b4ed1d5cc60bd90",
+  "source6-worktree-staging-method-review-r1.json": "c78194a2a1c2cac14a94037702a1f3660a615505fb4e686c8098c6d728d37519",
+  "source6-worktree-staging-preparation-admission-r1.json": "19c117a5f5bc3e2c72c570e403dfae7da956253781876eeb7e22adecafb573d0"
+ },
+ "checked_at_utc": "2026-10-07T01:44:07.453300+00:00",
+ "decision": {
+  "World_transaction_in_next_phase": false,
+  "actual_staging_or_rollback_execution_proven": false,
+  "fresh_native_execution_admission_required": true,
+  "frozen_case_accepted": true,
+  "installation_current_authority_release_acceptance": false,
+  "scope": "Exact R2 wrapper for a separately admitted actual graph+authored Source6 staging, followed by supported native rank/derive only.",
+  "unresolved_method_findings": [],
+  "verdict": "ACCEPT_METHOD"
+ },
+ "execution": {
+  "builds_tests_engines": 0,
+  "deadline_minus120s_preserved": true,
+  "native_commands": 0,
+  "process_max_RSS_bytes": 19591168,
+  "runtime_fixture_or_authored_source_writes": 0,
+  "sole_output": "docs/reviews/v1-6-everyday-inputs/source6-worktree-staging-method-review-r2.json"
+ },
+ "execution_manifest_conditions": [
+  "Bind exact scratch method SHAa37c6108, original scripts/data module, graph proposal/source/selected records, raw factual/quality judgments, Source6 draft and all protected Source5 runtime/catalog/authority files before execution; retain those declared inputs at current hashes.",
+  "Use expected_after_graph exactly as recorded here. Whole-phase expected_after includes all10 recorded paths. The wrapper stages graph and authored Source6 only; rank and derive use supported native commands separately.",
+  "Bind the original tool/source provenance and preserve bounded execution limits. Wrapper has a2GiB address-space limit; outer monitored runner owns elapsed/RSS/disk limits and sends SIGTERM with the existing5second grace. This static review is not an executed resource/rollback qualification.",
+  "Keep original source6-stage-r1 isolated evidence unchanged. Do not run World --write, update Go/Python pins, export, change authority, or repin Source6 base_commit during the narrowed phase.",
+  "On success require the receipt to show no failure/cleanup errors, all five expected hashes and modes, authored Source6 present at exact hash, and no scratch publication file. On failure retain primary/cleanup facts and verify actual rollback before any separate retry."
+ ],
+ "frozen_case_review": {
+  "both_pack_mirrors_unchanged": true,
+  "exact_eight_changed_paths_recomputed_against_current_worktree": true,
+  "expected_after_exact_ten": true,
+  "expected_after_graph_exact_five": true,
+  "four_old_catalog_pins_current": true,
+  "fresh_actual_execution_manifest": "Still required with concrete qualified binary/interpreter paths, measured resource budget, exact760 preparation inputs plus current evidence/method/case, unchanged protection excluding only eight allowed changed paths, and all10 postconditions.",
+  "isolated_root_immutable": true,
+  "three_command_templates_only": "Original graph wrapper R2, supported native rank, supported native derive; no World write or pin/export/authority action.",
+  "verdict": "ACCEPT"
+ },
+ "method": {
+  "AST_syntax_pass": true,
+  "bytes": 6161,
+  "durable_path": "docs/reviews/v1-6-everyday-inputs/methods/stage_graph_source6_r2.py.txt",
+  "full_R1_R2_source_diff_inspected": true,
+  "scratch_bytes_exact": true,
+  "scratch_path": "/home/dobo/work/_temp/codex__content-v1-6/probe/stage_graph_source6_r2.py",
+  "sha256": "a37c61085015fe16b41c1c56400041f189123de109aceb3c9884e4a2c4cb16f3"
+ },
+ "preexecution_observations": {
+  "R2_scratch_temporary_absent": true,
+  "actual_staging_receipt_absent": true,
+  "authored_target_absent": true,
+  "worktree_data_Remains_Source5": true
+ },
+ "prior_review_all_bound_code_and_evidence_rehashed_unchanged": true,
+ "reviewer": "/root/v16_source6_plan",
+ "schema": "v1-6-independent-worktree-staging-method-review-r2",
+ "subsequent_World_and_Extensions_order": {
+  "Extensions": "After accepted Quick staging, review exact Go reviewedPins substitutions: derived25059439 to fdc94e5d and Quicka21b3c6e to0c79b9c5; rebuild tools. Then contentbuild.Load can validate coherent source8 and Extensions proposal can use the exact reviewed candidate/raw reviews. No guard bypass or authored Source6 change is needed.",
+  "Python_reference": "Later independent reference loaders require matching derived/Quick pin updates in wordgames/derived_catalog.py and quick_catalog.py. They are not native Extensions dependencies.",
+  "Quick": "Installing World changes source bindings, so the existing Quick audit cannot serve as the later live audit. Obtain fresh Quick audit and same-role finals on the post-World readset, then its supported transaction.",
+  "World": "After actual worktree source8+rubric and full109 relative runtime entries equal the saved World audit, obtain same-reviewer explicit actual-root applicability confirmation. Relocation alone is not a ConfirmFinal mismatch; any actual bound-byte/runtime membership change requires renewed native audit/finals. World transaction has its own later admission.",
+  "remaining": "Full installed authority, final audits after runtime/export/reference freeze, integrated/release checks and landing remain separate and unaccepted."
+ },
+ "supported_transaction_preserved": {
+  "actual_default_five_paths": true,
+  "expected_after_entire_graph_Source6_rank_derive_phase": {
+   "cat_de_roman_esti/fixtures/board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+   "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+   "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+   "go-backend/internal/contentrails/sources/authored-v6.json": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+   "tests/fixtures/board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+   "tests/fixtures/cat_mobile_app_pack_contract.json": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae",
+   "tests/fixtures/derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+   "tests/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "tests/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+  },
+  "expected_after_graph": {
+   "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+   "tests/fixtures/cat_mobile_app_pack_contract.json": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae",
+   "tests/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "tests/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+  },
+  "fixed_module": "everyday_inputs_v1_6_data",
+  "generated_fixture_copy": false,
+  "generator_validator_or_game_guard_monkeypatches": false,
+  "original_A_apply_unchanged": true,
+  "path_counts": {
+   "changed_bytes_or_presence_including_Source6": 8,
+   "graph_transaction": 5,
+   "unchanged_pack_mirrors": 2,
+   "whole_phase": 10
+  },
+  "snapshot_restore_calls": "Original A._snapshot/A._restore; wrapper adds exact output verification, authored publication and mode handling only."
+ },
+ "valid_until": "Any method, bound source/evidence, expected-byte mapping or scope change. This review does not authorize an expanded executable lane."
+}

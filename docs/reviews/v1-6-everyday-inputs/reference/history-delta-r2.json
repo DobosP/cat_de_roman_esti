@@ -1,0 +1,284 @@
+{
+  "schema": "v1-6-exact-history-delta-v1",
+  "baseline_commit": "6a2332795dc5fa2db3eb61e196ab7ab820e76caa",
+  "source6_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+  "parent_source5_sha256": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+  "files": {
+    "kg_sample.json": {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "before_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "after_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+      "before_archive": "history-source5-kg_sample.json.gz",
+      "before_archive_sha256": "9a14d939b3b1e26a1f8289a22082f353515af6b537dfd9cf73ecdbd2f5ea895b",
+      "before_bytes": 3674915,
+      "after_bytes": 3674955,
+      "metadata": {}
+    },
+    "games_pack.json": {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "before_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "after_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "before_archive": "history-source5-games_pack.json.gz",
+      "before_archive_sha256": "d9992c5d59b32eaee1172f547376341e847b983ab453c351176816abc1ad767d",
+      "before_bytes": 410839,
+      "after_bytes": 410839,
+      "metadata": {}
+    },
+    "board_rankings_v37.json": {
+      "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+      "before_sha256": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+      "after_sha256": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+      "before_archive": "history-source5-board_rankings_v37.json.gz",
+      "before_archive_sha256": "458dabfc9a9aaa64570e6a1d2deb9c6e92ec650d2589942c6a7166b8c5dde7b3",
+      "before_bytes": 164784,
+      "after_bytes": 164784,
+      "metadata": {}
+    },
+    "derived_catalog_v38.json": {
+      "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      "before_sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "after_sha256": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+      "before_archive": "history-source5-derived_catalog_v38.json.gz",
+      "before_archive_sha256": "36e7b60defeb48ad22fd78ed206264a527d756da945e16470cbdb6cf99c23602",
+      "before_bytes": 249190,
+      "after_bytes": 249190,
+      "metadata": {}
+    },
+    "cat_mobile_app_pack_contract.json": {
+      "path": "tests/fixtures/cat_mobile_app_pack_contract.json",
+      "before_sha256": "2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8",
+      "after_sha256": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae",
+      "before_archive": "history-source5-cat_mobile_app_pack_contract.json.gz",
+      "before_archive_sha256": "7f9f530c1c9e2f8111fde0177bf3f41bdca6e73288ca998dd389cad813ac39b3",
+      "before_bytes": 1115305,
+      "after_bytes": 1115310,
+      "metadata": {}
+    },
+    "quick_games_v92.json": {
+      "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "before_sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "after_sha256": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+      "before_archive": "history-source5-quick_games_v92.json.gz",
+      "before_archive_sha256": "7248dcc3ffab2895b811e95710d917f8ff240269ba7ceab6d403ba3410d953ba",
+      "before_bytes": 381504,
+      "after_bytes": 381537,
+      "metadata": {
+        "before": {
+          "bindings": {
+            "core_catalog_sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+            "core_payload_sha256": "b78f069479f99741bf5187db638eebbc476eccf2d914c4a48b072b895446dc29",
+            "kg_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+            "pack_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+            "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+          },
+          "candidate_sha256": "302f42db4596e8568bd4423c090bc795bef270c641c99ce6ce996d35e691f6da",
+          "reviews": [
+            {
+              "reviewer": "/root/content_rail",
+              "role": "factual",
+              "sha256": "9e72009a865d5da6636496899e203a3262a25c3c36fed161a5cb2f20fe78bc3f"
+            },
+            {
+              "reviewer": "/root/graph_quality",
+              "role": "quality",
+              "sha256": "f52c1bbc4022c830c41c0b3cbecb5be20b50d144f2788503374e9a4edf55f35c"
+            }
+          ]
+        },
+        "after": {
+          "bindings": {
+            "core_catalog_sha256": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+            "core_payload_sha256": "b78f069479f99741bf5187db638eebbc476eccf2d914c4a48b072b895446dc29",
+            "kg_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+            "pack_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+            "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+          },
+          "candidate_sha256": "1950ad42444168c5fb3c1350dc53edde74198e3d9fc16db831fda2ebf17a3c6a",
+          "reviews": [
+            {
+              "reviewer": "/root/v16_native_raw_factual",
+              "role": "factual",
+              "sha256": "339d07c57f2318b83af5aae078a284a374f41ce95e2bba24bdc86eb67991a0d3"
+            },
+            {
+              "reviewer": "/root/v16_raw_quality",
+              "role": "quality",
+              "sha256": "8ee6c4c400f94bcaa3176bdfa4c5a234fc423c53142be2a9073652716e84df8b"
+            }
+          ]
+        }
+      }
+    },
+    "alchimie_discovery_world_v92.json": {
+      "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "before_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+      "after_sha256": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+      "before_archive": "history-source5-alchimie_discovery_world_v92.json.gz",
+      "before_archive_sha256": "c74170d8b3581740027d5133ab0066c55f201b49520c345dfafd5008ae18bdc9",
+      "before_bytes": 887711,
+      "after_bytes": 887746,
+      "metadata": {
+        "before": {
+          "bindings": {
+            "editorial_source_sha256": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+            "kg_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+            "previous_world_sha256": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc",
+            "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+          },
+          "candidate_sha256": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+          "native_source_version": 5,
+          "reviews": [
+            {
+              "candidate_sha256": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+              "reviewer": "/root/content_rail",
+              "role": "factual",
+              "sha256": "f8e3f12d8ae85f20f060fc50b8e70d920b747ea3c07926345f517c7bd0e96945"
+            },
+            {
+              "candidate_sha256": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+              "reviewer": "/root/graph_quality",
+              "role": "quality",
+              "sha256": "f19205e9ef18803e3e7c81f1245cf858b16ef5df553e704532d470d271883e69"
+            }
+          ]
+        },
+        "after": {
+          "bindings": {
+            "editorial_source_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+            "kg_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+            "previous_world_sha256": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+            "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+          },
+          "candidate_sha256": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04",
+          "native_source_version": 6,
+          "reviews": [
+            {
+              "candidate_sha256": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04",
+              "reviewer": "/root/v16_native_raw_factual",
+              "role": "factual",
+              "sha256": "fedcff86e30edf5f9033f7c0808eb6f54ef8d8845a6ab82f08c0945a268aa0ce"
+            },
+            {
+              "candidate_sha256": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04",
+              "reviewer": "/root/v16_raw_quality",
+              "role": "quality",
+              "sha256": "2096d85b045a71466c4e9535414939788ea6f0469dbce42babe1389c5f4c5120"
+            }
+          ]
+        }
+      }
+    },
+    "alchimie_recipe_extensions_v92.json": {
+      "path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+      "before_sha256": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+      "after_sha256": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+      "before_archive": "history-source5-alchimie_recipe_extensions_v92.json.gz",
+      "before_archive_sha256": "b82d2ef88d01d8d2e59994446c7aafc815a4d984088eff398aa4d92ed6b0305d",
+      "before_bytes": 480000,
+      "after_bytes": 480012,
+      "metadata": {
+        "before": {
+          "bindings": {
+            "kg": {
+              "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+              "sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+            },
+            "pack": {
+              "path": "cat_de_roman_esti/fixtures/games_pack.json",
+              "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+            },
+            "rubric": {
+              "path": "docs/CRITIQUE_RUBRIC.md",
+              "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+            }
+          },
+          "candidate_sha256": "83b4a02f2c51db7539672306002eced3b8b497ebb6879c651a8ebc9a59352550",
+          "semantic_reviews": [
+            {
+              "reviewer": "/root/content_rail",
+              "role": "factual",
+              "sha256": "1f443f8e42fb7e8f8e91390cc3f63d0a5ad697c8b7069f10561d99d86cbf53ca"
+            },
+            {
+              "reviewer": "/root/graph_quality",
+              "role": "quality",
+              "sha256": "d5a0421ab18b48ada4246e282034bee98d1c21cd879d3bb68cf9883c9039bdcc"
+            }
+          ]
+        },
+        "after": {
+          "bindings": {
+            "kg": {
+              "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+              "sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+            },
+            "pack": {
+              "path": "cat_de_roman_esti/fixtures/games_pack.json",
+              "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+            },
+            "rubric": {
+              "path": "docs/CRITIQUE_RUBRIC.md",
+              "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+            }
+          },
+          "candidate_sha256": "09cb6222c91015c499173f58f95d6040c7495846fca998d594778342b14ce458",
+          "semantic_reviews": [
+            {
+              "reviewer": "/root/v16_native_raw_factual",
+              "role": "factual",
+              "sha256": "c91f60f37d8a16f07bc1adc42f326d2d60c53514c548b7a17ed698798226ef75"
+            },
+            {
+              "reviewer": "/root/v16_raw_quality",
+              "role": "quality",
+              "sha256": "8be16d03ced69a4b79c29d1a9bf46096ce0bdf1d2e201ffb76670e809286cc01"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "documents_sha256": {
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/actual-worktree-audit-r1.json": "6d6010f25e300129dada414fe881d35c12592f536deae3ecca55c12b5c075428",
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/candidate.json": "09cb6222c91015c499173f58f95d6040c7495846fca998d594778342b14ce458",
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/factual-review.json": "c91f60f37d8a16f07bc1adc42f326d2d60c53514c548b7a17ed698798226ef75",
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/final-factual-evidence-r1.json": "3163ab65ab9b2e42e8ff5d07b4c894572b0e740fd6e1a7b0af8235daab96b3ee",
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/final-factual-review-r1.json": "0bcb01a91cb8db1beb5d17a54028c39c2a0a7d975e42d690414368c0b9f6b3d5",
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/final-quality-evidence-r1.json": "a95f997a968115fd256354cc52493edecc4fc73a1ef8373e0903afd43dacb353",
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/final-quality-review-r1.json": "b7bef9a901e33abb765569bea09110b0f2151e918cabdf1058481279a67d8dd4",
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/proposal.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/quality-review.json": "8be16d03ced69a4b79c29d1a9bf46096ce0bdf1d2e201ffb76670e809286cc01",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/actual-worktree-audit-r1.json": "2f8ddd81961c6c146dec89589ab88b4b8bcfe6c3c6a7c16a39f36ef7c7d867eb",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/candidate.json": "1950ad42444168c5fb3c1350dc53edde74198e3d9fc16db831fda2ebf17a3c6a",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/factual-review.json": "339d07c57f2318b83af5aae078a284a374f41ce95e2bba24bdc86eb67991a0d3",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/final-factual-evidence-r1.json": "a44685032c9bc2d644586bc6d3eb272dcdbd06c2be50051b859ed8a38692ce5a",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/final-factual-review-r1.json": "7644654e3c31d6c0c0d8505a149a22017d60f1518db27bb56a61e836a767467e",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/final-quality-evidence-r1.json": "05e5eaf754845f9d54242bada50c8679ffdadbbf89c986757b5d7f08dc79758f",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/final-quality-review-r1.json": "a30b4600ea9fd5fcef53e4551cf09c1e11af1fb07fc85a64fdf3e96d69373548",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/proposal.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/prospective-audit-r1.json": "d56f405f066993ca1217988076dd3a38b17386e639e07470abf7a495b4858660",
+    "docs/reviews/v1-6-everyday-inputs/native/quick/quality-review.json": "8ee6c4c400f94bcaa3176bdfa4c5a234fc423c53142be2a9073652716e84df8b",
+    "docs/reviews/v1-6-everyday-inputs/native/raw-factual-evidence-r1.json": "181defc0ec9035b30cfdabc1349a0e89629dd9d098aefaa48b9927098b7dab8b",
+    "docs/reviews/v1-6-everyday-inputs/native/raw-quality-evidence-r1.json": "ef44112cd14e558f00c716ee3f0683551d34c4b2fa07d30a0e520fd9124bd469",
+    "docs/reviews/v1-6-everyday-inputs/native/world/actual-worktree-audit-r1.json": "2a6db5a75c385030b4e8ef73962f898f6a2ac933226e84d3d90b1a957b3fdac8",
+    "docs/reviews/v1-6-everyday-inputs/native/world/candidate.json": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04",
+    "docs/reviews/v1-6-everyday-inputs/native/world/factual-review.json": "fedcff86e30edf5f9033f7c0808eb6f54ef8d8845a6ab82f08c0945a268aa0ce",
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-factual-evidence-r1.json": "69ff5f749acaf62a33bf15f91b62d38948d59508e26742054798964de4e9c985",
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-factual-evidence-r2.json": "d85039d054e5ebbea3c14ecfd644ebd589e2f0fb87e9841301ed253882cff4d5",
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-factual-review-r1.json": "c9b4375a19de9bf457e72637e2c837d39c422b550229a9e622386345618f0e9d",
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-factual-review-r2.json": "1777295e83470bd03e51ba49c3e9112336add635a7bfed13f50bf6b6da5f04a7",
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-quality-evidence-r1.json": "e5f0556eb87f6cb36edc0bc3d9d4f13939cddb86b9d38c29130b1d7fd54701b8",
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-quality-evidence-r2.json": "2f19ff2b6886c77158be4cf5b74a8fa67a444c7fdd2d8d9a2d0f8a9ff2b6d027",
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-quality-review-r1.json": "3ba012b87f2e294be17e3e7dc8071ad991bd7dbc3b30a8f8d7322393f1186e5e",
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-quality-review-r2.json": "9d0f8fb0f5188dc8d4fdb390c85885349faa25a8fe5dd6470721762682da3912",
+    "docs/reviews/v1-6-everyday-inputs/native/world/proposal.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+    "docs/reviews/v1-6-everyday-inputs/native/world/prospective-audit-r1.json": "2a6db5a75c385030b4e8ef73962f898f6a2ac933226e84d3d90b1a957b3fdac8",
+    "docs/reviews/v1-6-everyday-inputs/native/world/quality-review.json": "2096d85b045a71466c4e9535414939788ea6f0469dbce42babe1389c5f4c5120",
+    "go-backend/internal/contentrails/sources/authored-v6.json": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+    "go-backend/internal/contentrails/sources/authored-v5.json": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+    "docs/reviews/v1-6-everyday-inputs/source6-export-summary-r1.json": "be9ea737529d91b683b27ff7d52e548e2c6c9165bc762efb9528b29e7f56e278",
+    "docs/reviews/v1-6-everyday-inputs/graph-proposal-r1.json": "4db45b490f1a431055390a4147222a10d4403596272e2135d6d88303f13a6ab6",
+    "docs/reviews/v1-6-everyday-inputs/graph-factual-review-r1.json": "7bc364f970b45f8011ba081bfadadb8521f6e2e951cae9dd211e8f15124fe713",
+    "docs/reviews/v1-6-everyday-inputs/remaining-native-controls-quality-r1.json": "4149550d7b4c413a1faba095bf337d14035e42ed0d81c5c2d0467a78c1b2e53c"
+  }
+}

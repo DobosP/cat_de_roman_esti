@@ -1,0 +1,236 @@
+{
+ "author": "/root/v16_source6_plan",
+ "baseline_source_sha256": {
+  "go-backend/internal/httpgolden/golden.go": "b892cff05b5a68d03b90f8874cec77914f1b71f27192df5a519f43a0a64c3c45",
+  "go-backend/internal/httpgolden/golden_test.go": "d572da2c57067ef23a34f99028cf9e5bd5f07edbf57b3064ccb5e7f91f1c09ac"
+ },
+ "checked_at_utc": "2026-10-07T04:06:36.847211+00:00",
+ "data_identity": {
+  "accepted_capture_review_sha256": "da15a5c5a0e34ca4ec8cc79d7aca2334ddbaee6d37fd5021361c59d5cde60df6",
+  "all5historical_corpora": {
+   "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": {
+    "compressed_sha256": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+    "raw_sha256": "449465ca4b539c9e6bf69eb08176ac8fc29b129cccf9b6f4947dff239ee91e20",
+    "sources": {
+     "alchimie_discovery_world_v92.json": "4a6056f3138d0231752056fb588554ee8b4aaa9364511103329ea30120bec1c3",
+     "alchimie_recipe_extensions_v92.json": "9b7da100fb59f416667c0f23c04947f61d3d0e07d5712d57176293538302f1e3",
+     "board_rankings_v37.json": "96409c88927a60e9d6d379237af88a57aef6b40279520bf54f64214017b45806",
+     "derived_catalog_v38.json": "1340147300b3d9d174e09d899ac8eaf91756ca0470d0550121af66751ea92d71",
+     "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+     "kg_sample.json": "c9f23c4a9dab1281ad91baaf0e2c836a5b7ab9a6d5f2776799908d76e10f4b85",
+     "quick_games_v92.json": "cc242a902fd4c040f0e52da94ec95683a9bbcdab41f4b9fb72de5a9c5ff5659c",
+     "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    }
+   },
+   "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": {
+    "compressed_sha256": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+    "raw_sha256": "f6c267f5493ee64312c8389160c41019037585472ee7814ff9a5e15e0144d1cc",
+    "sources": {
+     "alchimie_discovery_world_v92.json": "28d73ca0c51883f24f370becd6c1fde1eb1c7d034c4be60cd64e8e7c94fbf8d6",
+     "alchimie_recipe_extensions_v92.json": "b1caa2a46f0d9a2e72b25404fd991f62a20b65cf8604c292170d0efa941757a5",
+     "board_rankings_v37.json": "e24954508573a06c885be3163b3e25c011a14809a7b358cb0aad004dad9a8f2b",
+     "derived_catalog_v38.json": "b4ae19266627b738ebe29928acc5952da9be98415fb8632870243e8634a32ad9",
+     "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+     "kg_sample.json": "d035f616b4aef5077d77d9cbbdefbd74c1ce2b360a1874a0533a0bd43bb04f63",
+     "quick_games_v92.json": "99db98d64b5b7c103ee70eab2b2b79b04d4ff62072942a159caa65518375ed9f",
+     "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    }
+   },
+   "go-backend/internal/httpgolden/testdata/python-http-parity-v1-4.json.gz": {
+    "compressed_sha256": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+    "raw_sha256": "a0546b23550dc8a7d120d1602d79efbe32a4dca1e541427ea913d5001724c492",
+    "sources": {
+     "alchimie_discovery_world_v92.json": "0d10180a3ad7cd88ba642cd1326fcbf78a2e398af8643a75f9e1b1d789909cef",
+     "alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+     "board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+     "derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+     "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+     "kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+     "quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+     "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    }
+   },
+   "go-backend/internal/httpgolden/testdata/python-http-parity-v1-5.json.gz": {
+    "compressed_sha256": "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519",
+    "raw_sha256": "ca49e8cb13a7b2ca3d64c827bf9a988aed2fafa38a23febd9d8eb3ba9a4b9419",
+    "sources": {
+     "alchimie_discovery_world_v92.json": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+     "alchimie_recipe_extensions_v92.json": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+     "board_rankings_v37.json": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+     "derived_catalog_v38.json": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+     "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+     "kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+     "quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+     "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    }
+   },
+   "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": {
+    "compressed_sha256": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+    "raw_sha256": "2cd2184a6f039204f9f1934e7730afa27ddd8270b94e337cc6165666160e69c3",
+    "sources": {
+     "alchimie_discovery_world_v92.json": "0b3fea2c30b4c729cbe8398bc467e5a4f7e6a443ff886023a07d9bf0e40e9f44",
+     "alchimie_recipe_extensions_v92.json": "c52035abbbf08f6a1d4c1b50d8048bc5efcf3c7a4f2c9daca0096cb3444c9661",
+     "board_rankings_v37.json": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc",
+     "derived_catalog_v38.json": "bea0732aefeb0af59e99c926f893bc9f6bb54bae3bb371eace238872470ac2a4",
+     "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+     "kg_sample.json": "1c74e5fe387b20ed196f76588d1ef96658743776817532c09a17ab9dd0a39b64",
+     "quick_games_v92.json": "85c89ec82d27a19ba619604ed3c47b09e3bb18e1718343db6d56c03b0999761c",
+     "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    }
+   }
+  },
+  "cases": 1207,
+  "compressed_bytes": 33785,
+  "exact_source8_literals": {
+   "alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+   "alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+   "board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+   "derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+   "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+   "quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+   "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "expected_response_edits": 0,
+  "new_compressed_sha256": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+  "new_gzip_runtime_durable_scratch_byte_exact": true,
+  "new_raw_sha256": "6306370b083e3d2b90471319b827c1da47719095041fa43355e18b3caf1aae75",
+  "raw_bytes": 696176,
+  "source8_equals_current_sealed_bundle": true
+ },
+ "decision": {
+  "Go_compiled_or_tests_passed": false,
+  "blocking_findings": [],
+  "changes_required": [],
+  "current_runtime_installed_authority_release_or_assembled_acceptance": false,
+  "source_only": true,
+  "verdict": "accept_exact_frozen_selector_and_historical_context_sources_for_formatting_and_separately_admitted_native_qualification"
+ },
+ "execution": {
+  "application_imports": 0,
+  "code_fixture_runtime_or_corpus_edits": 0,
+  "commits": 0,
+  "native_Go_build_test_replay_or_capture_commands": 0,
+  "read_only_git_baseline_reads": true,
+  "sole_written_file": "docs/reviews/v1-6-everyday-inputs/source6-selector-code-review-r1.json",
+  "source_hash_JSON_archive_data_comparisons_only": true,
+  "source_process_max_RSS_bytes": 128917504,
+  "subagents": 0
+ },
+ "historical_context_identity": {
+  "C1_bundle_bytes": 7272295,
+  "C1_bundle_sha256": "c1fff429992c69926aafb07f5b015f890a82c7c01cc5230107bdaf481bca5993",
+  "all12actual_member_names_sizes_hashes_verified": true,
+  "archive_compressed_bytes": 1927955,
+  "archive_sha256": "ffffa21ccf11f79d817c529123f2583824c62fefaabd17a5887e7ce809507e48",
+  "decoded_source5_JSON_tuple_independently_matches_V15_corpus": true,
+  "independent_manifest_sha256": "47d93bbae6a5a6f5eec031a09568c20e2f81887598cff9fff9120c9eeff2a48c",
+  "members": 12,
+  "review_limit": "Go content.Decode call was inspected,not run. Full compressed archive pin binds member identities even though the helper only selects the C1 member; it performs no filesystem extraction.",
+  "tar_bytes": 14376960
+ },
+ "implementation_review": [
+  {
+   "evidence": "Exact15c7d1bc gzip embedded asfrozenV16 with fixedV16SHA256. reviewedV16 preserves existing SHA-check then bounded strict ReadCorpus and additionally requires exactly1207cases/eight sources. No expected body is generated or rewritten.",
+   "id": "additive-reader-and-pin",
+   "verdict": "accept"
+  },
+  {
+   "evidence": "ForSources reads the five original corpora in their original order,then the new sixth,and returns a corpus only through full reflect.DeepEqual of map keys/counts/values. Unknown,partial,extra,nil,empty or mixed maps return nil/error. No KG-only shortcut,subset compare or fallback is introduced;caller map is read only.",
+   "id": "complete-source-selection",
+   "verdict": "accept"
+  },
+  {
+   "evidence": "Removing only the added embed,const,reviewedV16 function,one reader invocation and final list element reproduces the exact oldb892cff0 runtime bytes. Thus all five old reader bodies/pins,ReadCorpus strict JSON/trailing/unknown-field/source/size rules,32MiB/4096 limits and Replay exact source-before-request/status/body comparisons remain unchanged.",
+   "id": "old-reader-parser-replay-preservation",
+   "verdict": "accept"
+  },
+  {
+   "evidence": "Only two approvedV15data-acquisition substitutions reproduce the exact newgolden_test.go from oldd572da2c. Every old test name,64hex occurrence,literal,request/mutation,if assertion and failure branch remains. Current full1207test is byte-identical and continues to use real content.Load plus ForSources.",
+   "id": "old-test-preservation",
+   "verdict": "accept"
+  },
+  {
+   "evidence": "historicalV15Data authenticates the complete fixedffffa21c archive before reading exactC1bundle and passes it through existing content.Decode. No source tuple is built from corpus expectations. The archive is bounded4MiB compressed/32MiB expanded,exact14376960tar bytes,12unique regular members with each<=8MiB,and exact7272295byte/c1fff429 bundle. It extracts only in memory and never changes serving data or production loader behavior.",
+   "id": "genuine-Source5-context",
+   "verdict": "accept"
+  },
+  {
+   "evidence": "The twoV15tests now compare/use genuine Source5 content rather than newlycurrentSource6. Source4/Source5 deliberately share KG0cd but differ in the World digest,so their old full-source refusal remains meaningful and still checks zero client requests. V15scope and older branch assertions are not converted to currentSource6 expectations.",
+   "id": "historical-test-meaning",
+   "verdict": "accept"
+  },
+  {
+   "evidence": "Four new top-level tests cover exactSource6capture identity/full selected corpus equality,allfivehistorical selections,same-KG/different-world distinction,every8changed+8missing source,extra/nil/empty/KG-only refusal with input nonmutation,and all30genuine single-source old/current mixtures. Equal-value historical substitutions are correctly not treated as invalid. This is source/data coverage analysis,not Go test execution.",
+   "id": "new-regression-source",
+   "verdict": "accept_static"
+  }
+ ],
+ "negative_map_static_comparison": {
+  "Source4_Source5_sameKG_distinctWorld_control": true,
+  "accepted_distinct_tuples": 6,
+  "all50negative_maps_differ_from_every_accepted_tuple": true,
+  "changed_sources": 8,
+  "genuine_historical_mixtures": 30,
+  "missing_sources": 8,
+  "no_selector_function_executed": true,
+  "other_incomplete_maps": 4,
+  "six_tuple_complete_hash": "eca5f6c896cf2958adacf5df9303eafb7ff66cfc2ee3a99686182419da4b1ebc"
+ },
+ "readset_sha256": {
+  "docs/reviews/v1-6-everyday-inputs/reference/current-http-corpus-r1.json.gz": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+  "docs/reviews/v1-6-everyday-inputs/reference/historical-source5-context-manifest.json": "47d93bbae6a5a6f5eec031a09568c20e2f81887598cff9fff9120c9eeff2a48c",
+  "docs/reviews/v1-6-everyday-inputs/reference/historical-source5-context.tar.gz": "ffffa21ccf11f79d817c529123f2583824c62fefaabd17a5887e7ce809507e48",
+  "docs/reviews/v1-6-everyday-inputs/reference/http-selector-preparation-r1.json": "937e99b1fcc8248e6c8dcc630d534622856692fa8a68e89ec81b6d3ba0a771b2",
+  "docs/reviews/v1-6-everyday-inputs/source6-capture-and-current-input-review-r1.json": "da15a5c5a0e34ca4ec8cc79d7aca2334ddbaee6d37fd5021361c59d5cde60df6",
+  "docs/reviews/v1-6-everyday-inputs/source6-selector-review-admission-r1.json": "f736ac3b87316e7d74612eecc48eba69f84b978bb2c3fa519c556a1ac34d008e",
+  "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+  "go-backend/internal/content/content.go": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+  "go-backend/internal/content/digest.go": "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d",
+  "go-backend/internal/httpgolden/golden.go": "65540cb714ff875975777089217b4750dd9e22b39493659261ff86fa5afcee13",
+  "go-backend/internal/httpgolden/golden_test.go": "f7db694d84f652d3a4aa7776b17aef2ac22d5558bccb6a334561a76326bdf952",
+  "go-backend/internal/httpgolden/source6_test.go": "130e0b3de2f224de8d516fef6b919cdde74ecf9c07cabb3b27f09f410a3d5d5f",
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-4.json.gz": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-5.json.gz": "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519",
+  "go-backend/internal/httpgolden/testdata/python-http-parity-v1-6.json.gz": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+  "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
+ },
+ "required_execution_and_followup": [
+  "Record gofmt changes and rehash reviewed source outputs,then compile and run allnewV16selection/refusal/historical tests plus existingV15Source5zero-request refusals and allother unchangedhttpgolden tests under separate admission.",
+  "Run existing TestCurrentIndependentHTTPParity against actualSource6 for all1207cases; no static/data comparison is a substitute for its native execution.",
+  "Preserve all five oldcorpora and execute historical selection/budget/malformed/source mismatch coverage. No skipped/deselected or narrowed old cases.",
+  "golden.go is a production runtime source; rebuild relevant tools and freeze allruntime/reference changes before fresh installed audits/same-role finals,currentSource6all-fourauthority/fullnative/shared/history/reference/release/assembled gates.",
+  "Full489reference rerun/current snapshot repair is a separate review/execution scope. No release,landing,push or deployment approval follows here."
+ ],
+ "reviewer": "/root/v16_raw_quality",
+ "schema": "v1-6-independent-strict-selector-code-review-r1",
+ "test_scope": {
+  "all_source_tests_UNEXECUTED": true,
+  "current1207replay_test_unchanged": true,
+  "new_top_level_tests": [
+   "TestV16IndependentCorpusRetainsExactSourceScope",
+   "TestV16SelectorPreservesAllFiveHistoricalCorpora",
+   "TestV16SelectorRefusesEveryChangedOrMissingSource",
+   "TestV16SelectorRefusesMixedHistoricalSources"
+  ],
+  "old64hex_occurrences_exact": true,
+  "old_test_names_retained": [
+   "TestCurrentIndependentHTTPParity",
+   "TestHistoricalFrozenCorpusAndExactReviewedSelection",
+   "TestUnknownMixedAndPartialSourcesRefuseWithoutRequests",
+   "TestReferenceSourceBindingAndMismatchFailClosed",
+   "TestSessionAliasesKeepPrefixAndEscapedIdentityDistinct",
+   "TestBoundedAnonymousHTTPClient",
+   "TestCorpusLimitsTrailingFieldsAndMalformedRecords",
+   "TestCaptureCanReplayButDoesNotClaimIndependentReference",
+   "TestBenchmarkBounds",
+   "TestLocalTransportByteAndDeadlineBounds",
+   "TestV14IndependentCorpusRetainsExactSourceScope",
+   "TestV15IndependentCorpusRetainsExactWorldOnlySourceScope",
+   "TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests"
+  ]
+ },
+ "valid_until": "Any reviewed source,captured gzip,historical archive,source tuple or scope change;renew affected source review. Formatting-only updates need recorded new hashes before native qualification."
+}

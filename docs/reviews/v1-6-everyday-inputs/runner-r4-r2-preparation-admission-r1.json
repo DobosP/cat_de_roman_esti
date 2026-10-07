@@ -1,0 +1,28 @@
+{
+  "schema": "v1-6-runner-r4-r2-source-repair-admission-r1",
+  "started_at_utc": "2026-10-07T06:43:33.666191+00:00",
+  "deadline_utc": "2026-10-07T07:03:33.666191+00:00",
+  "metadata_reserve_seconds": 180,
+  "inclusive_agents_max": 3,
+  "agents": [
+    "/root",
+    "/root/v16_finish_qualification",
+    "/root/v16_source6_plan"
+  ],
+  "disk_free_bytes": 230610649088,
+  "memory_available_bytes": 22590984192,
+  "native_execution": false,
+  "review_sha256": "b002ee2aca040bff0be66d36761d95693daed4017e0719c5e958384ae10f4f52",
+  "original_methods": {
+    "/home/dobo/work/_temp/codex__content-v1-6/probe/run_worktree_lane_r4.py": "3e914113179052a5b106204387506e22b61f081f711c90d015932e2e6badde59",
+    "/home/dobo/work/_temp/codex__content-v1-6/probe/check_runner_signal_r4.py": "25e2fa82e901db6ff588ef5e811bb06c3dfe5244db8b294a14fdd12526355b64"
+  },
+  "scope": "Narrow fixes for R4-F1 final-publication resource accounting, R4-F2 one-buffer manifest hash/parse, R4-F3 signal-safe success commit through finalization. Preserve original R3/R4/harness/refusal bytes; write new versioned R4r2/harness methods and exact inert copies only. Extend bounded Python-only fixture methods as needed for these corrections; no execution or app/runtime/test/source8/authority edits.",
+  "outputs": [
+    "probe/run_worktree_lane_r4_r2.py",
+    "probe/check_runner_signal_r4_r2.py",
+    "docs/reviews/v1-6-everyday-inputs/methods/run_worktree_lane_r4_r2.py.txt",
+    "docs/reviews/v1-6-everyday-inputs/methods/check_runner_signal_r4_r2.py.txt",
+    "docs/reviews/v1-6-everyday-inputs/reference/runner-r4-r2-preparation-r1.json"
+  ]
+}

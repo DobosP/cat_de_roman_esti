@@ -1,0 +1,7 @@
+import datetime,hashlib,json,pathlib,subprocess
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6');S=pathlib.Path('/home/dobo/work/_temp/codex__content-v1-6');D=R/'docs/reviews/v1-6-everyday-inputs';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+results=[]
+for rail in ('quick','world','extensions'):
+ a=[str(S/'probe/authority-tools-r1/cat-content-rail'),rail,'--root',str(R),'--source',str(R/'go-backend/internal/contentrails/sources/authored-v5.json'),'--check'];p=subprocess.run(a,cwd=R,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+ results.append({'rail':rail,'argv':a,'exit_code':p.returncode,'output':p.stdout});assert p.returncode!=0 and 'does not authorize selected authored source' in p.stdout
+out=D/'mixed-source-refusals-r1.json';assert not out.exists();out.write_text(json.dumps({'schema':'v1-6-mixed-source-authority-refusals-r1','results':results,'all_refused_as_required':True},indent=2)+'\n');print('All three current Source6 rails refuse forced historical Source5 authority')
