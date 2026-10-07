@@ -1,0 +1,36 @@
+"""Derive prospective normalized owners from actual supported KG bytes, not a fixture edit."""
+import hashlib
+import json
+import os
+import pathlib
+import sys
+import unicodedata
+
+R = pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+S = pathlib.Path('/home/dobo/work/_temp/codex__content-v1-7/probe')
+sys.path[:0] = [str(R), str(R / 'scripts')]
+from cat_de_roman_esti.data import load_fixture
+from cat_de_roman_esti.wordgames.service import WordGameService
+
+sha = lambda p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+base = R / 'cat_de_roman_esti/fixtures/kg_sample.json'
+candidate = S / 'materialization-r2/candidate/package/kg_sample.json'
+assert unicodedata.unidata_version == '15.0.0'
+assert sha(base) == '63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf'
+assert sha(candidate) == '3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749'
+before = WordGameService(graph=load_fixture(base).graph)._index
+after = WordGameService(graph=load_fixture(candidate).graph)._index
+expected = {'leafa': 'n_v4soc_salariu'}
+assert len(before) == 13514 and len(after) == 13515
+assert all(after.get(k) == owner for k, owner in before.items())
+assert {k: v for k, v in after.items() if k not in before} == expected
+payload = {'schema': 'v1-7-actual-candidate-research-index-r1', 'baseline_kg_sha256': sha(base),
+ 'candidate_kg_sha256': sha(candidate), 'unicode_version': unicodedata.unidata_version,
+ 'normalizer_source_sha256': sha(R / 'cat_de_roman_esti/wordgames/service.py'),
+ 'derivation_method_sha256': sha(__file__), 'baseline_index': before, 'candidate_index': after,
+ 'index_additions': expected, 'old_owners_exact': True,
+ 'qualification': 'Research derivative only. Not a sealed export or current authority; all source manifests remain installed baseline.'}
+out = pathlib.Path(os.environ['V17_CANDIDATE_INDEX'])
+assert out.is_relative_to(S) and not out.exists()
+out.write_text(json.dumps(payload, ensure_ascii=False, sort_keys=True, indent=2) + '\n')
+print(json.dumps({'index_sha256': sha(out), 'baseline_owners': len(before), 'candidate_owners': len(after), 'added': expected}))

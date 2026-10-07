@@ -1,0 +1,503 @@
+#!/usr/bin/env python3
+"""INERT prospective reference method. Copy only after separate exact admission.
+
+Run each finite partition with the shared, nonrenewable admission deadline. Required
+JSON admission fields: method_sha256, started_at_utc, deadline_utc, output_directory,
+source_sha256 (all reviewed readset inputs), scratch_sha256 (14 qualified tools/runner),
+approved_cases (stage -> exact ID list).
+The output directory must be an empty/new subdirectory of this task's own scratch.
+Invoke with --admission FILE --stage NAME --start I --stop J (half-open indexes).
+No stage is an all-game or installed-source qualification. The receipt declares
+missing IDs; aggregation requires the complete CASE_MANIFEST and exact bindings.
+No fixture, source catalog, expected response, native binary or repository mutation.
+"""
+from __future__ import annotations
+
+import argparse
+import collections
+import datetime as dt
+import hashlib
+import itertools
+import json
+import os
+from pathlib import Path
+import resource
+import signal
+import sys
+import time
+import traceback
+import unicodedata
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+SCRATCH = Path('/home/dobo/work/_temp/codex__content-v1-7')
+BASE = ROOT / 'cat_de_roman_esti/fixtures/kg_sample.json'
+CANDIDATE = SCRATCH / 'probe/materialization-r2/candidate/package/kg_sample.json'
+BASE_SHA = '63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf'
+CANDIDATE_SHA = '3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749'
+FIX = ROOT / 'cat_de_roman_esti/fixtures'
+SOURCE_FILES = [
+    'cat_de_roman_esti/data.py', 'cat_de_roman_esti/graph.py', 'cat_de_roman_esti/engine.py',
+    'cat_de_roman_esti/web/settings.py', 'cat_de_roman_esti/web/http.py',
+    'cat_de_roman_esti/wordgames/_progress.py', 'cat_de_roman_esti/wordgames/_session_endpoint.py',
+    *['cat_de_roman_esti/wordgames/' + p + '.py' for p in (
+        'service', 'packs', 'categories', 'alchimie', 'lant', 'lant_relations',
+        'derived_catalog', 'quick_catalog', 'recipe_extensions', 'discovery_world',
+        'release_reserve', 'label_corrections')],
+    'scripts/critique_pack.py', 'docs/CRITIQUE_RUBRIC.md',
+    *['cat_de_roman_esti/fixtures/' + p for p in (
+        'games_pack.json', 'board_rankings_v37.json', 'derived_catalog_v38.json',
+        'quick_games_v92.json', 'alchimie_recipe_extensions_v92.json',
+        'alchimie_discovery_world_v92.json', 'release_reserve_v1.json',
+        'lant_rejection_tombstones.json', 'conexiuni_rejection_tombstones.json')],
+    'go-backend/internal/contentrails/sources/authored-v4.json',
+    'go-backend/internal/contentrails/sources/authored-v5.json',
+    'go-backend/internal/contentrails/sources/authored-v6.json',
+    'go-backend/internal/contentrails/sources/installed-authorities.json',
+]
+SOURCE_FILES += [
+    'cat_de_roman_esti/wordgames/contexto_projection.py', 'tests/current_content.py',
+    'tests/content_history.py', 'tests/test_v50_synonyms_basic_words.py',
+]
+LIMIT_AS = 2 * 1024**3
+LIMIT_DISK = 1024**3
+LIMIT_WALL = 1200
+PENDING = [
+    'Full Cald feedback/2419 eligibility/48 fixed lexical query/native HTTP/other69 hold methods are separate.',
+    'Fresh Source7/current authority/ranking/derived/export/1207 HTTP gates are separate.',
+    'World candidate source-bound execution and 33 modes/148 discoveries/1156 saved prefixes UNRUN.',
+    'Lanț handler undo/hints/score/privacy and ordinary selected play are separate.',
+    'Terminal raw preservation is not native terminal/reference execution.',
+    'Structural equality is not factual/quality approval, human playtest, installation or landing.',
+]
+
+
+def canonical(v):
+    return json.dumps(v, ensure_ascii=False, sort_keys=True, separators=(',', ':'),
+                      allow_nan=False).encode()
+
+
+def digest(v):
+    return hashlib.sha256(canonical(v)).hexdigest()
+
+
+def file_sha(p):
+    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+def read(p):
+    return json.loads(Path(p).read_bytes())
+
+
+def now():
+    return dt.datetime.now(dt.timezone.utc)
+
+
+def abort(*_):
+    raise TimeoutError('shared admitted reference lane deadline reached')
+
+
+def capture(fn, expected_error=None):
+    # Only a source-specific exact refusal is an expected dependency observation.
+    # Other errors escape to the structured failed-partition receipt.
+    try:
+        value = fn()
+    except ValueError as exc:
+        if expected_error is None or str(exc) != expected_error:
+            raise
+        return {'accepted': False, 'expected_dependency_refusal': True,
+                'error_type': type(exc).__name__, 'message': str(exc)}
+    assert expected_error is None, 'expected source dependency refusal did not occur'
+    return {'accepted': True, 'value': value}
+
+
+def plain(v):
+    from collections.abc import Mapping
+    if isinstance(v, Mapping):
+        return {k: plain(x) for k, x in v.items()}
+    if isinstance(v, (tuple, list)):
+        return [plain(x) for x in v]
+    return v
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--admission', type=Path, required=True)
+    p.add_argument('--stage', required=True, choices=[
+        'pack', 'conexiuni', 'lant', 'alchimie', 'quick', 'world', 'terminal', 'lant-inputs'])
+    p.add_argument('--start', type=int, default=0)
+    p.add_argument('--stop', type=int)
+    args = p.parse_args()
+    resource.setrlimit(resource.RLIMIT_AS, (LIMIT_AS, LIMIT_AS))
+    admission = read(args.admission)
+    assert admission['method_sha256'] == file_sha(__file__)
+    began = dt.datetime.fromisoformat(admission['started_at_utc'])
+    deadline = dt.datetime.fromisoformat(admission['deadline_utc'])
+    assert began.tzinfo and deadline.tzinfo and began <= now() < deadline
+    assert 0 < (deadline - began).total_seconds() <= LIMIT_WALL
+    out = Path(admission['output_directory']).resolve()
+    assert out.is_relative_to(SCRATCH.resolve()) and out != SCRATCH.resolve()
+    out.mkdir(parents=True, exist_ok=True)
+    assert not out.is_symlink()
+    signal.signal(signal.SIGALRM, abort)
+    signal.signal(signal.SIGTERM, abort)
+    signal.setitimer(signal.ITIMER_REAL, (deadline - now()).total_seconds())
+    sys.dont_write_bytecode = True
+    sys.path[:0] = [str(ROOT), str(ROOT / 'scripts')]
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'cat_de_roman_esti.web.settings'
+    os.environ['CAT_ACCOUNTS_ENABLED'] = '0'
+    # Environment graph overrides are forbidden: all candidate services are explicit.
+    assert not any(os.environ.get(k) for k in (
+        'CAT_KG_FIXTURE', 'CAT_GAMES_PACK', 'CAT_BOARD_RANKINGS'))
+    receipt = {
+        'schema': 'v17-reference-prospective-partition-r1', 'stage': args.stage,
+        'method_sha256': file_sha(__file__), 'admission_sha256': file_sha(args.admission),
+        'baseline_sha256': BASE_SHA, 'candidate_sha256': CANDIDATE_SHA,
+        'started_at_utc': now().isoformat(), 'completed': [], 'pending_gates': PENDING,
+        'complete': False, 'all_game_qualification': False,
+        'resource_limits': {'address_space_bytes': LIMIT_AS, 'incremental_output_bytes': LIMIT_DISK,
+                            'shared_lane_wall_seconds': LIMIT_WALL},
+    }
+    started = time.monotonic()
+    stamp = f'{args.stage}-{args.start}-{args.stop if args.stop is not None else "end"}'
+    receipt_path = out / (stamp + '-receipt.json')
+    assert not receipt_path.exists(), 'do not overwrite an earlier partition receipt'
+
+    def disk_size():
+        return sum(q.stat().st_size for q in out.rglob('*') if q.is_file())
+
+    def save(path, value, *, allow_replace=False):
+        data = canonical(value) + b'\n'
+        assert len(data) + disk_size() < LIMIT_DISK, 'shared output directory disk cap'
+        if allow_replace:
+            # Atomic replacement preserves the last checkpoint if serialization or
+            # writing fails; only this process's checkpoint/current case is replaced.
+            temporary = path.with_name(path.name + '.partial')
+            temporary.write_bytes(data)
+            temporary.replace(path)
+        else:
+            with path.open('xb') as f:
+                f.write(data)
+
+    def checkpoint():
+        receipt['elapsed_seconds'] = time.monotonic() - started
+        receipt['peak_rss_bytes'] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
+        receipt['output_directory_bytes'] = disk_size()
+        save(receipt_path, receipt, allow_replace=True)
+
+    try:
+        assert sys.version_info[:2] == (3,12) and unicodedata.unidata_version == '15.0.0'
+        receipt['reference_runtime'] = {'python':sys.version.split()[0],
+            'unicode':unicodedata.unidata_version,'executable':sys.executable}
+        assert file_sha(BASE) == BASE_SHA and file_sha(CANDIDATE) == CANDIDATE_SHA
+        pins = admission['source_sha256']
+        assert set(SOURCE_FILES) <= set(pins), 'missing explicit source/catalog authority pins'
+        for rel, expected in pins.items():
+            assert file_sha(ROOT / rel) == expected, rel
+        assert len(admission['scratch_sha256']) >= 14
+        for path, expected in admission['scratch_sha256'].items():
+            assert Path(path).resolve().is_relative_to(SCRATCH.resolve())
+            assert file_sha(path) == expected, path
+        receipt['source_sha256'] = pins
+        receipt['scratch_sha256'] = admission['scratch_sha256']
+        checkpoint()
+        import django
+        django.setup()
+        from unittest.mock import patch
+        from cat_de_roman_esti.data import load_fixture
+        from cat_de_roman_esti.wordgames.service import WordGameService
+        from cat_de_roman_esti.wordgames import (
+            alchimie as A, packs as P, lant as L, lant_relations as LR,
+            quick_catalog as Q, derived_catalog as D, recipe_extensions as E,
+            discovery_world as W, release_reserve as RR)
+        from scripts import critique_pack as C
+
+        services = [WordGameService(graph=load_fixture(path).graph) for path in (BASE, CANDIDATE)]
+        kg = [read(BASE), read(CANDIDATE)]
+        pack = read(FIX / 'games_pack.json')
+        candidate_pack = CANDIDATE.parent / 'games_pack.json'
+        assert candidate_pack.read_bytes() == (FIX / 'games_pack.json').read_bytes()
+        receipt['candidate_pack_sha256'] = file_sha(candidate_pack)
+        ranking = read(FIX / 'board_rankings_v37.json')
+        ranks = {r['id']: r for r in ranking['boards']}
+        reserve = read(FIX / 'release_reserve_v1.json')
+        frozen = read(FIX / 'derived_catalog_v38.json')
+        quick = read(FIX / 'quick_games_v92.json')
+        world_raw = read(FIX / 'alchimie_discovery_world_v92.json')
+        extensions = read(FIX / 'alchimie_recipe_extensions_v92.json')
+        raw_records = [(g, r) for g in P.GAME_KINDS for r in pack[g]]
+        assert [len(pack[g]) for g in P.GAME_KINDS] == [245, 265, 123, 83]
+        assert len(raw_records) == len(ranks) == 716
+        assert sum(bool(r['pilot_eligible']) for r in ranking['boards']) == 527
+        assert collections.Counter(r['status'] for _, r in raw_records) == {'approved': 709, 'pending': 7}
+        assert len(frozen['boards']) == 336 and len(quick['authored']) == len(quick['boards']) == 85
+        assert [len(world_raw[k]) for k in ('concepts', 'recipes', 'unlocks', 'goals', 'compatible_versions')] == [252,352,12,32,10]
+        assert len(kg[0]['kg_puzzles']) == len(kg[1]['kg_puzzles']) == 180
+        assert [r['id'] for r in kg[0]['kg_puzzles']] == [r['id'] for r in kg[1]['kg_puzzles']]
+        receipt['terminal_raw_before_sha256'] = digest(kg[0]['kg_puzzles'])
+        receipt['terminal_raw_after_sha256'] = digest(kg[1]['kg_puzzles'])
+        assert kg[0]['kg_edges'] == kg[1]['kg_edges']
+        before_nodes = {n['id']: n for n in kg[0]['kg_nodes']}
+        after_nodes = {n['id']: n for n in kg[1]['kg_nodes']}
+        assert set(before_nodes) == set(after_nodes) and len(before_nodes) == 2419
+        allowed = {'n_v4soc_salariu': 'leafă'}
+        for nid, old in before_nodes.items():
+            expected = dict(old)
+            if nid in allowed:
+                expected['aliases'] = [*old.get('aliases', []), allowed[nid]]
+            assert expected == after_nodes[nid], ('unexpected KG delta', nid)
+        strength_maps = [Q.graph_strengths(svc) for svc in services]
+        base_catalog = D.load_derived_catalog()
+        ranked_pack = P.load_pack()
+        all_quick = [*frozen['boards'], *quick['boards']]
+        cases = {
+            'pack': [r['id'] for _, r in raw_records] + ['@selection-bindings'],
+            'conexiuni': [r['id'] for r in pack['conexiuni']],
+            'lant': [r['id'] for r in pack['lant']] + ['@all-directed-captions'],
+            'alchimie': [r['id'] for r in pack['alchimie']] + ['@selectable-books'],
+            'quick': [r['id'] for r in all_quick] + ['@authored-ratings', '@selection-bindings'],
+            'world': ['@complete-world-dependencies'],
+            'terminal': [r['id'] for r in kg[0]['kg_puzzles']],
+            'lant-inputs': sorted(allowed),
+        }
+        receipt['case_manifest'] = cases
+        receipt['case_manifest_sha256'] = digest(cases)
+        ids = cases[args.stage]
+        assert admission['approved_cases'][args.stage] == ids, 'exact complete case admission differs'
+        stop = len(ids) if args.stop is None else args.stop
+        assert 0 <= args.start < stop <= len(ids)
+        chosen = ids[args.start:stop]
+        receipt['selected_ids'] = chosen
+        receipt['missing_stage_ids'] = [x for x in ids if x not in chosen]
+        checkpoint()
+        by_id = {r['id']: (g, r) for g, r in raw_records}
+        quick_by_id = {r['id']: r for r in all_quick}
+        assert len(quick_by_id) == 421
+        terminal_by_id = [{r['id']: r for r in x['kg_puzzles']} for x in kg]
+
+        def projection(svc, r, playable):
+            with patch.object(A, 'get_service', return_value=svc):
+                value = (A._build_playable_recipe_projection if playable else
+                         A._build_recipe_projection)(r['seeds'], r['target'], r.get('category'))
+            if value is None:
+                return None
+            return {'core': E.core_record(r['seeds'], r['target'], r.get('category'),
+                                         value.recipes, value.routes, value.par),
+                    'candidate_quality': value.candidate_quality}
+
+        def quick_board(row):
+            return D.DerivedBoard(
+                game=row['game'], category=row['category'], difficulty=row['difficulty'],
+                payload=row['payload'], _catalog_id=row['id'], _source_id=row['source_id'],
+                **{'_' + k: row[k] for k in ('romanian_familiarity','play_quality','standard_score',
+                    'starter_score','starter_eligible','standard_rank','starter_rank')})
+
+        def profile(svc, side, case):
+            if args.stage == 'pack':
+                if case == '@selection-bindings':
+                    # Do not repin a candidate ranking or simulate its acceptance.
+                    gate = capture(lambda: P._load_rankings(pack, FIX / 'games_pack.json',
+                        (BASE, CANDIDATE)[side], FIX / 'board_rankings_v37.json'),
+                        'board rankings: kg_sha256 does not match kg_sample.json' if side else None)
+                    if gate['accepted']:
+                        gate['value'] = {'indexed_count': len(gate['value']), 'rows_sha256': digest(gate['value'])}
+                    return {'current_selection': {g: {'count': ranked_pack.selectable_count(g),
+                        'eligible_ids': [i.id for i in ranked_pack.pool(g) if i._pilot_eligible],
+                        'weights': {i.id: i._selection_weight for i in ranked_pack.pool(g)}} for g in P.GAME_KINDS},
+                        'selection_provenance': 'installed ranking, structural preservation only',
+                        'actual_graph_bound_ranking_gate': gate, 'reserve': reserve,
+                        'tombstones': {name:read(FIX / name) for name in
+                            ('lant_rejection_tombstones.json','conexiuni_rejection_tombstones.json')}}
+                game, r = by_id[case]
+                return {'game': game, 'record': r, 'ranking': ranks[case],
+                        'reserved': case in reserve['ids'],
+                        'envelope_errors': P.validate_envelope(r, game),
+                        'payload_errors': P.validate_payload(r, game, svc)}
+            if args.stage == 'conexiuni':
+                r = by_id[case][1]
+                visible = [n for group in r['groups'].values() for n in group]
+                unfair, contested, raw = C.fairness_counts(r['groups'],
+                    {n: set(svc.neighbor_ids(n)) for n in visible},
+                    {n: svc.node(n).node_type for n in visible})
+                return {'record': r, 'strict_unfair_ids': unfair, 'contested_ids': contested,
+                        'engine_unfair_raw': raw,
+                        'on_board_directed_edges': [[a,b, E.record_snapshot(svc.link(a,b))]
+                            for a in visible for b in visible if svc.link(a,b)]}
+            if args.stage == 'lant':
+                if case == '@all-directed-captions':
+                    return [{'src': a, 'dst': b, 'edge': E.record_snapshot(svc.link(a,b)),
+                             'caption': LR.caption(svc,a,b)} for a in sorted(svc.all_ids())
+                            for b in sorted(svc.neighbor_ids(a))]
+                r = by_id[case][1]
+                par = svc.distance(r['start'], r['target'])
+                return {'record': r, 'actual_par': par,
+                        'strict_and_near_profiles': None if par is None else
+                            L._compute_route_profiles(svc,r['start'],r['target'],par,slack=L._CORRIDOR_SLACK),
+                        'declared_par_profiles': L._compute_route_profiles(svc,r['start'],r['target'],r['optimal'],slack=L._CORRIDOR_SLACK),
+                        'representative_paths_limit_3': C.representative_shortest_paths(svc,r['start'],r['target'],r['optimal'])}
+            if args.stage == 'alchimie':
+                if case == '@selectable-books':
+                    rows = []
+                    selected = [r for r in pack['alchimie'] if ranks[r['id']]['pilot_eligible']]
+                    assert len(selected) == 68
+                    # Exact aggregation of the 83 prior complete case records. This
+                    # last case must follow all 83, avoiding a duplicate heavy pass.
+                    source_receipts = []
+                    for r in selected:
+                        index = cases['alchimie'].index(r['id'])
+                        previous_path = out / f'alchimie-{index:04d}.json'
+                        previous = read(previous_path)
+                        assert previous['status'] == 'complete' and previous['case'] == r['id']
+                        assert previous['method_sha256'] == receipt['method_sha256']
+                        assert previous['baseline_sha256'] == BASE_SHA and previous['candidate_sha256'] == CANDIDATE_SHA
+                        key = 'before' if side == 0 else 'after'
+                        assert digest(previous[key]) == previous[key + '_sha256']
+                        value = previous[key]['playable_projection']
+                        assert value is not None
+                        rows.append({'id':r['id'],'projection':value})
+                        source_receipts.append({'id':r['id'],'sha256':file_sha(previous_path)})
+                    recipe_count = sum(len(x['projection']['core']['recipes']) for x in rows)
+                    if side == 0:
+                        assert recipe_count == 521, ('baseline selectable recipe count', recipe_count)
+                    return {'book_count':len(rows), 'recipe_count':recipe_count,
+                            'preserves_expected_521_recipes':recipe_count == 521, 'books':rows, 'source_case_files':source_receipts}
+                r = by_id[case][1]
+                answer = {'record':r, 'core_projection':projection(svc,r,False),
+                          'playable_projection':projection(svc,r,True)}
+                A._build_recipe_projection_cached.cache_clear()
+                return answer
+            if args.stage == 'quick':
+                if case == '@authored-ratings':
+                    return Q.rated_boards(quick['authored'],base_catalog,svc)
+                if case == '@selection-bindings':
+                    # Native Source6 ancestry remains bound; candidate authority is not fabricated.
+                    with patch.object(Q,'DEFAULT_FIXTURE',(BASE,CANDIDATE)[side]):
+                        actual_bindings = Q.bindings(live=True)
+                        gate = capture(lambda: Q.validate_catalog(quick,base_catalog,svc),
+                            'quick catalog: source drift' if side else None)
+                    assert (actual_bindings != quick['bindings']) == bool(side)
+                    if gate['accepted']:
+                        gate['value'] = {'boards':len(gate['value'])}
+                    catalog = D.DerivedCatalog([quick_board(r) for r in all_quick])
+                    return {'candidate_catalog_gate':gate,
+                        'declared_bindings':quick['bindings'],'actual_bindings':actual_bindings,
+                        'inventory_provenance':'unchanged existing catalog rows; ratings recomputed separately',
+                        'selection':{g:{'all':len([b for b in catalog._boards if b.game==g]),
+                            'selectable_ids':[b._catalog_id for b in catalog.pool(g)],
+                            'preferred_ids':[b._catalog_id for b in catalog._preferred_shelf(catalog.pool(g))],
+                            'starter_ids':[b._catalog_id for b in catalog.pool(g,starter=True)]} for g in ('intrusul','perechi')},
+                        'frozen_rows_sha256':digest(frozen['boards']), 'authored_records_sha256':digest(quick['authored']),
+                        'node_snapshot_mismatches':{n:{'expected':snapshot,'actual':E.record_snapshot(svc.node(n))}
+                            for n,snapshot in quick['nodes'].items() if E.record_snapshot(svc.node(n)) != snapshot}}
+                row = quick_by_id[case]
+                visible = Q.visible_ids(row)
+                return {'stored_record':row,'reserved':RR.quick_is_reserved(quick_board(row)),
+                    'concept_meanings':{n:{k:v for k,v in E.record_snapshot(svc.node(n)).items() if k != 'aliases'} for n in visible},
+                    'node_aliases':{n:list(svc.node(n).aliases) for n in visible},
+                    'all_visible_pair_directions':[[a,b, None if svc.link(a,b) is None else E.record_snapshot(svc.link(a,b))]
+                        for a in visible for b in visible if a != b],
+                    'symmetric_strengths':[[a,b,strength_maps[side].get(frozenset((a,b)),0)]
+                        for a,b in itertools.combinations(visible,2)]}
+            if args.stage == 'world':
+                # validate_world(check_graph=False) validates actual 10 historical mechanics;
+                # it does not replay saved prefixes or award/restore runtime progress.
+                world = W.validate_world(world_raw,check_graph=False)
+                with patch.object(W,'get_service',return_value=svc):
+                    gate = capture(lambda: W._check_graph(world),
+                        'Alchimie discovery world: concept source changed'
+                        if side and 'n_v4soc_salariu' in world.concepts else None)
+                snapshots = {}
+                for n,c in world.concepts.items():
+                    actual = None if svc.node(n) is None else E.record_snapshot(svc.node(n))
+                    if c.origin == 'kg' and actual != c.snapshot:
+                        snapshots[n] = {'expected':c.snapshot,'actual':actual}
+                changed = set(snapshots)
+                assert changed == ({'n_v4soc_salariu'}
+                    if side and 'n_v4soc_salariu' in world.concepts else set())
+                def usages(value, needle, path=''):
+                    if isinstance(value, dict):
+                        return [p for k,v in value.items() for p in usages(v,needle,path + '/' + str(k))]
+                    if isinstance(value,list):
+                        return [p for i,v in enumerate(value) for p in usages(v,needle,path + '/' + str(i))]
+                    return [path] if value == needle else []
+                dependency_paths = {n:usages(world_raw,n) for n in sorted(changed)}
+                ext = {b['id'] if 'id' in b else str(i):
+                       {n:{'expected':snapshot,'actual':E.record_snapshot(svc.node(n))}
+                        for n,snapshot in b['nodes'].items() if E.record_snapshot(svc.node(n)) != snapshot}
+                       for i,b in enumerate(extensions['boards'])}
+                return {'raw_catalog':world_raw,'world_source_version':world_raw.get('native_source_version'),
+                    'actual_source_bound_graph_gate':gate,'node_snapshot_mismatches':snapshots,
+                    'all_changed_owner_dependency_paths':dependency_paths,
+                    'affected_recipes':[r for r in world_raw['recipes'] if changed.intersection([*r['pair'],r['result']])],
+                    'mechanics':world.mechanics,'mechanics_sha256':world.recipe_hash,
+                    'compatible_history_hashes':sorted(world.compatible_versions),
+                    'extension_snapshot_mismatches':{k:v for k,v in ext.items() if v},
+                    'candidate_runtime_world_replays':'UNRUN before fresh supported source catalog qualification'}
+            if args.stage == 'terminal':
+                return terminal_by_id[side][case]
+            if args.stage == 'lant-inputs':
+                owner = case
+                alias = allowed[owner]
+                incident = set(services[0].neighbor_ids(owner)) | set(services[0].predecessor_ids(owner))
+                incident |= set(services[1].neighbor_ids(owner)) | set(services[1].predecessor_ids(owner))
+                nonneighbor = next(n for n in sorted(svc.all_ids()) if n != owner and n not in incident)
+                rows = []
+                for current in sorted(incident | {owner,nonneighbor}):
+                    for spelling in (svc.label(owner),alias):
+                        with patch.object(L,'get_service',return_value=svc):
+                            resolved = L._resolve_neighbor(spelling,current,owner)
+                        rows.append({'current':current,'text':spelling,'resolved':resolved,
+                            'same_node':resolved == current,
+                            'legal_link':resolved is not None and resolved != current and svc.link(current,resolved) is not None,
+                            'caption':LR.caption(svc,current,resolved) if resolved else '',
+                            'owner_to_current_allowed':svc.link(owner,current) is not None})
+                return {'provenance':'constructed finite incident resolution, not ordinary selected play',
+                        'owner':owner,'nonneighbor_control':nonneighbor,'rows':rows}
+            raise AssertionError(args.stage)
+
+        for index, case in enumerate(chosen,args.start):
+            record = {'case':case,'index':index,'stage':args.stage,'status':'started',
+                      'method_sha256':receipt['method_sha256'], 'admission_sha256':receipt['admission_sha256'],
+                      'baseline_sha256':BASE_SHA,'candidate_sha256':CANDIDATE_SHA}
+            case_path = out / f'{args.stage}-{index:04d}.json'
+            assert not case_path.exists(), 'case overlap/overwrite forbidden'
+            receipt['current_case'] = case
+            checkpoint()
+            for side,svc in enumerate(services):
+                value = plain(profile(svc,side,case))
+                record['before' if side == 0 else 'after'] = value
+                # Save lossless completed baseline if candidate fails mid-case.
+                if side == 0:
+                    save(case_path,record)
+            record.update(status='complete',before_sha256=digest(record['before']),after_sha256=digest(record['after']))
+            record['changed'] = record['before'] != record['after']
+            save(case_path,record,allow_replace=True)
+            receipt['completed'].append({'id':case,'path':case_path.name,'sha256':file_sha(case_path),
+                'before_sha256':record['before_sha256'],'after_sha256':record['after_sha256'],'changed':record['changed']})
+            checkpoint()
+        receipt['complete'] = True
+        receipt['covered_count'] = len(receipt['completed'])
+        receipt['changed_count'] = sum(x['changed'] for x in receipt['completed'])
+        receipt['complete_stage'] = not receipt['missing_stage_ids']
+        receipt['combined_before_sha256'] = digest([(x['id'],x['before_sha256']) for x in receipt['completed']])
+        receipt['combined_after_sha256'] = digest([(x['id'],x['after_sha256']) for x in receipt['completed']])
+    except BaseException as exc:
+        receipt['failure'] = {'type':type(exc).__name__,'message':str(exc),
+                              'traceback':traceback.format_exc(limit=8)}
+    finally:
+        signal.setitimer(signal.ITIMER_REAL,0)
+        receipt['finished_at_utc'] = now().isoformat()
+        receipt['installed_kg_exact'] = file_sha(BASE) == BASE_SHA
+        receipt['candidate_kg_exact'] = file_sha(CANDIDATE) == CANDIDATE_SHA
+        receipt['scratch_files_exact'] = all(file_sha(path) == expected
+            for path, expected in admission['scratch_sha256'].items())
+        receipt['source_files_exact'] = all(file_sha(ROOT / rel) == expected
+                                            for rel, expected in admission['source_sha256'].items())
+        checkpoint()
+        print(json.dumps({'receipt':str(receipt_path),'complete':receipt['complete'],
+                          'covered':len(receipt['completed']),'sha256':file_sha(receipt_path)}))
+    return 0 if (receipt['complete'] and receipt['source_files_exact']
+                 and receipt['scratch_files_exact']) else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

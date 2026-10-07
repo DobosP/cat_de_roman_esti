@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+"""Inert V1.7 old-hold reference method. Copy/run only after exact fresh admission.
+
+Executes two ORIGINAL V50 test functions, including its original seven-blocked
+assertion, only in genuine physical SHA-pinned Source6 before retirement. Does not
+rewrite tests, expected responses or fixtures. It deliberately refuses after live
+Source6 changes; later installed historical-context adaptation is a separate gate.
+The other69 stage records actual Python reference exact/projection/fuzzy/advisory
+outcomes before/after; native behavior is independently measured by native methods.
+No all69-unknown assertion and no claim reference fuzzy equals Go service behavior.
+"""
+from __future__ import annotations
+import argparse
+import datetime as dt
+import hashlib
+import json
+import os
+from pathlib import Path
+import resource
+import runpy
+import signal
+import sys
+import time
+import traceback
+import unicodedata
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+SCRATCH = Path('/home/dobo/work/_temp/codex__content-v1-7')
+BASE = ROOT / 'cat_de_roman_esti/fixtures/kg_sample.json'
+CANDIDATE = SCRATCH / 'probe/materialization-r2/candidate/package/kg_sample.json'
+BASE_SHA = '63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf'
+CANDIDATE_SHA = '3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749'
+TEST = ROOT / 'tests/test_v50_synonyms_basic_words.py'
+TEST_SHA = '14f2e52e154e2e383ebf266b5369f9543381473688077e3960df42689a89fc3e'
+BLOCKED = ('ogradă','leafă','muică','baraboi','cucuruzi','cucuruzii','blid')
+LIMIT_AS = 2 * 1024**3
+LIMIT_DISK = 1024**3
+
+def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def canonical(v): return json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+def digest(v): return hashlib.sha256(canonical(v)).hexdigest()
+def read(p): return json.loads(Path(p).read_bytes())
+def now(): return dt.datetime.now(dt.timezone.utc)
+def abort(*_): raise TimeoutError('immutable admitted history/reference deadline')
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--admission',type=Path,required=True)
+    p.add_argument('--stage',choices=('all7','other69-reference'),required=True)
+    args=p.parse_args()
+    resource.setrlimit(resource.RLIMIT_AS,(LIMIT_AS,LIMIT_AS))
+    ad=read(args.admission); assert ad['method_sha256']==sha(__file__)
+    began=dt.datetime.fromisoformat(ad['started_at_utc']); deadline=dt.datetime.fromisoformat(ad['deadline_utc'])
+    assert began.tzinfo and deadline.tzinfo and began<=now()<deadline
+    assert 0<(deadline-began).total_seconds()<=1200
+    out=Path(ad['output_directory']).resolve()
+    assert out.is_relative_to(SCRATCH.resolve()) and out!=SCRATCH.resolve()
+    out.mkdir(parents=True,exist_ok=True); assert not out.is_symlink()
+    receipt_path=out/(args.stage+'-receipt.json'); assert not receipt_path.exists()
+    assert not any(os.environ.get(k) for k in ('CAT_KG_FIXTURE','CAT_GAMES_PACK','CAT_BOARD_RANKINGS'))
+    sys.dont_write_bytecode=True; sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+    os.environ['DJANGO_SETTINGS_MODULE']='cat_de_roman_esti.web.settings'
+    os.environ['CAT_ACCOUNTS_ENABLED']='0'
+    signal.signal(signal.SIGALRM,abort); signal.signal(signal.SIGTERM,abort)
+    signal.setitimer(signal.ITIMER_REAL,(deadline-now()).total_seconds())
+    record={'schema':'v17-hold-reference-r1','stage':args.stage,'complete':False,
+            'method_sha256':sha(__file__),'admission_sha256':sha(args.admission),
+            'baseline_sha256':BASE_SHA,'candidate_sha256':CANDIDATE_SHA,
+            'started_at_utc':now().isoformat(),'installation_approval':False,
+            'native_service_behavior':'separate native-method evidence; not inferred here'}
+    start=time.monotonic()
+    try:
+        assert sys.version_info[:2]==(3,12) and unicodedata.unidata_version=='15.0.0'
+        assert sha(BASE)==BASE_SHA and sha(CANDIDATE)==CANDIDATE_SHA and sha(TEST)==TEST_SHA
+        for rel,expected in ad['source_sha256'].items(): assert sha(ROOT/rel)==expected,rel
+        assert len(ad['scratch_sha256']) >= 14
+        for path,expected in ad['scratch_sha256'].items():
+            assert Path(path).resolve().is_relative_to(SCRATCH.resolve())
+            assert sha(path)==expected,path
+        assert ad['remaining69_sha256']=='112f704026ebc170ae79279c91ef1057e1ab03d5a8724f13baf4e846f237be2f'
+        other=ad['remaining69']; assert len(other)==69 and digest(other)==ad['remaining69_sha256']
+        assert 'leafă' not in other
+        import django
+        django.setup()
+        from cat_de_roman_esti.data import load_fixture
+        from cat_de_roman_esti.wordgames.service import WordGameService, normalize
+        from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection, suggest_projection
+        if args.stage=='all7':
+            # Run unedited existing functions, not reimplementations of their assertions.
+            module=runpy.run_path(str(TEST),run_name='v17_genuine_source6_v50_context')
+            assert module['DATA'].BLOCKED_ALIAS_FORMS==BLOCKED
+            assert module['_PACKAGE_KG']==BASE
+            assert sha(module['_TEST_KG'])==BASE_SHA
+            assert module['CURRENT_CONTENT'].kg_sha256==BASE_SHA
+            funcs=('test_v50_review_funnel_is_exact_complete_and_unanimous',
+                   'test_v50_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors')
+            for name in funcs: module[name]()
+            svc=WordGameService(load_fixture(BASE).graph)
+            observed=[{'surface':surface,'resolved':svc.resolve(surface)} for surface in BLOCKED]
+            assert all(row['resolved'] is None for row in observed)
+            record.update(original_test_sha256=TEST_SHA,executed_original_functions=list(funcs),
+                          all_original_seven_blocked_assertion_executed=True,blocked=observed,
+                          historical_context='actual physical SHA-pinned Source6; no inverse or candidate-derived expectations',
+                          whole_V50_suite_executed=False)
+        else:
+            svcs=[WordGameService(load_fixture(path).graph) for path in (BASE,CANDIDATE)]
+            assert [len(s.graph.nodes) for s in svcs]==[2419,2419]
+            rows=[]
+            for surface in other:
+                versions=[]
+                for svc in svcs:
+                    term=resolve_projection(surface)
+                    versions.append({'normalized_key':normalize(surface),'exact_owner':svc.resolve(surface),
+                        'projection':None if term is None else {'id':term.public_id,'surface':term.surface,
+                            'anchor_id':term.anchor_id,'domain':term.domain,'penalty':term.rank_penalty,'kind':term.mapping_kind},
+                        'fuzzy_owner':svc.resolve_fuzzy(surface),'advisory_labels':svc.suggest(surface),
+                        'projection_advisory_ids':[t.public_id for t in suggest_projection(surface)]})
+                assert versions[0]['exact_owner']==versions[1]['exact_owner'],surface
+                assert versions[0]['projection']==versions[1]['projection'],surface
+                rows.append({'surface':surface,'before':versions[0],'after':versions[1],
+                             'lexical_changed':versions[0]!=versions[1]})
+            assert svcs[0].resolve('leafă') is None and svcs[1].resolve('leafă')=='n_v4soc_salariu'
+            record.update(rows=rows,row_count=69,remaining69_sha256=digest(other),
+                          changed_lexical_rows=[r['surface'] for r in rows if r['lexical_changed']],
+                          exact_owner_and_proxy_dispositions_unchanged=True,
+                          new_leaf_owner='n_v4soc_salariu',new_stored_forms=1)
+        record['complete']=True
+    except BaseException as exc:
+        record['failure']={'type':type(exc).__name__,'message':str(exc),'traceback':traceback.format_exc(limit=8)}
+    finally:
+        signal.setitimer(signal.ITIMER_REAL,0)
+        record.update(finished_at_utc=now().isoformat(),elapsed_seconds=time.monotonic()-start,
+                      peak_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,
+                      baseline_exact=sha(BASE)==BASE_SHA,candidate_exact=sha(CANDIDATE)==CANDIDATE_SHA,
+                      source_files_exact=all(sha(ROOT/rel)==expected for rel,expected in ad['source_sha256'].items()),
+                      scratch_files_exact=all(sha(path)==expected for path,expected in ad['scratch_sha256'].items()))
+        data=canonical(record)+b'\n'; assert len(data)<LIMIT_DISK
+        with receipt_path.open('xb') as f: f.write(data)
+        print(json.dumps({'receipt':str(receipt_path),'complete':record['complete'],'sha256':sha(receipt_path)}))
+    return 0 if (record['complete'] and record['source_files_exact']
+                 and record['scratch_files_exact']) else 1
+
+if __name__=='__main__': raise SystemExit(main())

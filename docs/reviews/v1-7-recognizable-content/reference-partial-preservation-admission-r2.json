@@ -1,0 +1,35 @@
+{
+  "schema": "v1-7-reference-partial-preservation-source-admission-v1",
+  "checked_at_utc": "2026-10-07T22:53:38.465886+00:00",
+  "source_cutoff_utc": "2026-10-07T23:00:38.465886+00:00",
+  "deadline_utc": "2026-10-07T23:03:38.465886+00:00",
+  "fresh_headroom": {
+    "disk_free_bytes": 221392429056,
+    "memory_available_bytes": 20117196800
+  },
+  "prior_exact_memory_hold_sample": {
+    "at_utc": "2026-10-07T22:49:27+00:00",
+    "memory_available_bytes": 16476676096,
+    "floor_bytes": 17179869184
+  },
+  "recovery_sample_read_only": {
+    "at_utc": "2026-10-07T22:52:41.086483+00:00",
+    "memory_available_bytes": 23743803392
+  },
+  "max_agents_including_root": 2,
+  "scope": "Only lossless archival/member manifests and independent hash recheck of preserved failed-reference partial962casepairs and frozen source method packets. No reference replay/continuation/nativeGo/sourcechecker/fixtures/Source7/hold retirement. Original reference6a2b campaign remainsFAILED with its originaldeadline/baseline. New source-only preservation follows meaningful measured memory recovery; it is not a retry/reset or retroactive resourcePASS. Root owns later docs/nativechecker/checkpoint; worker archives only.",
+  "source_worker_RSS": "unmeasured; no whole source memory qualification",
+  "measurement_roots": [
+    "/home/dobo/work/_temp/codex__content-v1-7",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7"
+  ],
+  "source_incremental_limit_bytes": 1073741824,
+  "inputs": {
+    "reference-prospective-native-admission-r1.json": "6a2b4af04894627b5c0fd1f4bc6e0fe45a7e716ecaa310dcda0dccb5d1ccf68e",
+    "reference-prospective-partial-summary-r1.json": "2ed7a19224c8a5bbbef5490165f3d2503ad079428ced95e220c129f56bb21465",
+    "reference-prospective-partial-stop-r1.json": "c92d9a5390592a3f63ce25b30e76ba0740df3d421a7ff96880aeeb1a49018b07",
+    "reference-prospective-preservation-refusal-r1.json": "0dcd649f4ce162f6b8e2f4b7c8b4c10d9777a17eabe9898c60e3467d42e6756c"
+  },
+  "status": "SOURCE_ONLY_PRESERVATION_ADMITTED",
+  "original_full_S_R_size": 1154071367
+}
