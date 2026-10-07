@@ -28,7 +28,7 @@ Own Go1.27.1 SDK/archive/current metadata-aware tools are preserved in this task
 The initial exact-copy receipt does not fully qualify incremental resource accounting: its inherited guard omitted SDK/tool growth.
 That limitation stays explicit in [preservation](toolchain-preservation.json); the full-scratch namespace adapter adds coverage,
 with no cap/lifecycle changes. Independent adapter review accepted the exact coverage change; the fresh own version/modules/source/export/currentallfour/docs baseline passed.
-[Baseline](toolchain-baseline.json) uses full own-scratch accounting; this does not retroactively qualify the R1 copy. Verified-merged old-task cleanup follows.
+[Baseline](toolchain-baseline.json) uses full own-scratch accounting; this does not retroactively qualify the R1 copy. [Verified-merged cleanup](previous-version-cleanup.json) is complete; the qualified SDK now belongs solely to this task scratch.
 [Adapter proposal](namespace-adapter-proposal.json) and [copy inputs](toolchain-copy-inputs.json) bind exact bytes.
 
 Before each source/native lane measure fresh17GiBstartdisk/16GiBremainingdisk+MemAvailable floors;
