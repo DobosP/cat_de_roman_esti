@@ -8,8 +8,11 @@ Source5 World with Source4 Quick/Extensions, and strict installed authority a4ac
 No push or deployment accompanied that landing.
 
 Current phase: two exact R2records selected; raw facts accepted and supported isolated
-materialization and broad prospective native/reference checks passed. Final quality,
-Source6/current-artifact history and full installation gates remain pending.
+materialization, broad prospective native/reference checks and remaining controls passed.
+Independent raw graph quality accepts the exact two-form candidate for staging. Source6
+candidates and Quick/World proposals are generated in isolation. Native raw reviews and
+Quick/World prospective audits and same-role World finals pass; supported installation,
+current-artifact history and full release gates remain pending.
 Installed Source5 content is unchanged.
 
 The next wave will inspect existing decks, missing familiar input forms and specific
@@ -223,3 +226,73 @@ final LF. Earlier method/execution/quality hashes remain bound to those original
 not silently repinned. The [independent reconciliation review](method-eof-review-r1.json)
 checks this relation. The follow-up uses fail-fast default working/staged whitespace and
 native documentation checks. No engine assertion, fixture or runtime byte changes.
+
+
+## Isolated Source6 native candidates
+
+[Source preparation](source6-preparation-manifest-r1.json) freezes a task-owned isolated
+source tree from760 exact copied files and the supported generated KG/mobile bytes.
+Source6 drafta086dc2a names reviewed basecf0da492 and exact Source5parent22b7853e;
+authored definitions and four legacy source-code pins are unchanged. Its archive closure
+contains all22previous entries plus three current V1.5World candidate/raw-review records.
+No serving source, catalogue, bundle or authority has been installed.
+
+The first tool build stopped before any builder because this copied tree has no usable
+Git metadata. [Failure](source6-vcs-build-refusal-r1.json) and [independent repair review](source6-vcs-build-review-r1.json)
+preserve the result; the fresh R2 lane disables only VCS stamping for the two isolated tools.
+All source/base/parent/archive and runtime gates stay intact. The [R2 result](source6-candidates-r2-result.json)
+passes seven steps in28.243s, with264482816sampled peak process-group RSS and71743614
+incremental bytes;895 protected files remain exact.
+
+[Complete generated comparison](source6-generated-candidates-r1.json) preserves all outputs.
+The716 ranking rows and336 derived board payloads are exact; only their KG/ranking metadata
+changes. Native Quick85 and Extensions49 authored items are exact, with current source/KG
+headers. World252concepts/352recipes retains all recipes, goals, unlocks and ten historical
+books; only Ulei's snapshot gains singular untdelemn, alongside current source/KG/predecessor
+headers. These generated candidates are inputs to fresh native reviews, not approved
+proposals or installation. Actual World33modes/148discoveries/1156saved prefixes and all
+current source/export/history/authority/full-release gates remain required.
+
+
+## Native raw reviews and prospective Quick/World audits
+
+Independent complete [factual evidence](native/raw-factual-evidence-r1.json) and
+[quality evidence](native/raw-quality-evidence-r1.json) cover85Quick boards,352World recipes,
+252concepts and49Extensions. Ulei, its seven World recipe dependencies and the existing
+Ulei–sunflower-seeds Perechi board receive fresh judgments. The board qualifies the
+association as some varieties; it does not assert that every oil is sunflower oil.
+Unchanged records inherit only after full record/dependency comparison; original recipe
+citations are preserved. Counts and thresholds do not change.
+
+[Actual native proposal/audit summary](source6-quick-world-prospective-summary-r1.json)
+records four supported steps with all915protected hashes exact. Quick85 ordinary seeded
+replays pass460HTTP requests. World33goal modes each reach148discoveries; all10 historical
+books/1156saved prefixes restore earned progress. Closure, hidden goal-ID and restoration
+checks run dynamically; recipe privacy also uses current serializer source evidence, not
+a fresh World HTTP transcript.
+Audits bind109runtime files, all eight sources and rubric in the isolated source root.
+These are proper native prospective catalogue audits, not a qualified serving export,
+current installed authority, human playtest or completed V1.6 release.
+
+[Complete proposal differences](source6-proposal-differences-r1.json) retain the actual
+metadata, source/review and Ulei snapshot changes. Native World final factual/quality
+judgments must bind this exact proposal/audit/readset. World staging changes a source
+binding, so Quick needs a fresh audit and same-role finals afterward; the first Quick
+audit is retained as prospective evidence. Extensions proposal still waits for coherent
+reviewed catalogue/pin staging. Freeze all runtime/export/history/reference changes before
+fresh installed audits/finals and current-authority reconstruction. Main and installed
+Source5 remain unchanged; all earlier failures and held content remain preserved.
+
+
+The same raw reviewers accepted the exact World prospective transaction in
+[final factual review](native/world/final-factual-review-r1.json) and
+[final quality review](native/world/final-quality-review-r1.json), bound to proposal8f013a8f
+and audit2a6db5a7. Their evidence verifies complete proposal reconstruction and all current
+source/runtime hashes; it distinguishes dynamic native observations from serializer source
+inspection. The factual metadata script initially asserted that Quick replays was an
+integer instead of an array; that failed attempt wrote neither final, and the corrected
+length check is retained as history. No native audit was rerun or weakened.
+
+These finals allow only the exact supported World transaction while its bindings remain
+identical. They are not installed audits/finals, current authority, release or assembled
+acceptance. Actual worktree graph/Source6/catalogue staging has not started.

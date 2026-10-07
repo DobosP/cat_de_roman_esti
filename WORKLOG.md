@@ -1676,3 +1676,22 @@ archived Lanț source view, but a non-fail-fast shell continued to commit66d43a5
 Exact tested/reviewed aa8dc4f1 bytes retained in lossless archive/Git; currentview removes
 only one LF. Review hashes remain historical exact bindings. Follow-up must pass default
 working/staged diff checks with set-e; no data/assertion/runtime change or old failure erased.
+
+
+## 2026-10-07 — V1.6 isolated Source6 candidates
+
+Prepared exact task-owned Source6a086dc2a with Source5parent22b7853e and all25 reachable
+archives (22 old plus three V1.5 World records). Initial non-Git VCS-stamping tool-build
+failure is preserved; independently reviewed R2 disables stamping only. All seven native
+steps pass, producing unchanged716 ranking rows/336 derived payloads and three candidates.
+Only Ulei World snapshot adds untdelemn; authored content/mechanics/history remain exact.
+Installed Source5/main are untouched. Fresh native reviews, audits/finals, history/current
+authority, full release checks and assembled acceptance remain required.
+
+Complete native raw factual/quality reviews cover85Quick/352World recipes+252concepts/
+49Extensions, including fresh Ulei concept/seven recipes/one Perechi board. Native Quick
+proposal/audit passes85ordinary replays/460HTTP; World passes33goal modes,148discoveries
+and1156saved prefixes across10books. Both actual proposals and audits remain isolated;
+915protected files stay exact. Same-role World prospective finals accept exact proposal8f013a8f/audit2a6db5a7 only;
+Quick needs a fresh audit/final after World staging. No serving export/authority/release
+or V1.6 landing is inferred from these intermediate gates.

@@ -1,0 +1,149 @@
+{
+  "schema": "v1-6-source6-native-proposal-differences-r1",
+  "checked_at_utc": "2026-10-07T01:26:00.094814+00:00",
+  "rails": {
+    "quick": {
+      "installed_path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "installed_sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "proposal_path": "docs/reviews/v1-6-everyday-inputs/native/quick/proposal.json",
+      "proposal_sha256": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+      "changes": [
+        {
+          "path": "/bindings/core_catalog_sha256",
+          "before": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+          "after": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+        },
+        {
+          "path": "/bindings/kg_sha256",
+          "before": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+          "after": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+        },
+        {
+          "path": "/candidate_sha256",
+          "before": "302f42db4596e8568bd4423c090bc795bef270c641c99ce6ce996d35e691f6da",
+          "after": "1950ad42444168c5fb3c1350dc53edde74198e3d9fc16db831fda2ebf17a3c6a"
+        },
+        {
+          "path": "/nodes/n_v24_food_pantry_ulei/aliases",
+          "before": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor"
+          ],
+          "after": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor",
+            "untdelemn"
+          ]
+        },
+        {
+          "path": "/reviews/0/reviewer",
+          "before": "/root/content_rail",
+          "after": "/root/v16_native_raw_factual"
+        },
+        {
+          "path": "/reviews/0/sha256",
+          "before": "9e72009a865d5da6636496899e203a3262a25c3c36fed161a5cb2f20fe78bc3f",
+          "after": "339d07c57f2318b83af5aae078a284a374f41ce95e2bba24bdc86eb67991a0d3"
+        },
+        {
+          "path": "/reviews/1/reviewer",
+          "before": "/root/graph_quality",
+          "after": "/root/v16_raw_quality"
+        },
+        {
+          "path": "/reviews/1/sha256",
+          "before": "f52c1bbc4022c830c41c0b3cbecb5be20b50d144f2788503374e9a4edf55f35c",
+          "after": "8ee6c4c400f94bcaa3176bdfa4c5a234fc423c53142be2a9073652716e84df8b"
+        }
+      ]
+    },
+    "world": {
+      "installed_path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "installed_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+      "proposal_path": "docs/reviews/v1-6-everyday-inputs/native/world/proposal.json",
+      "proposal_sha256": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+      "changes": [
+        {
+          "path": "/bindings/editorial_source_sha256",
+          "before": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+          "after": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+        },
+        {
+          "path": "/bindings/kg_sha256",
+          "before": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+          "after": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+        },
+        {
+          "path": "/bindings/previous_world_sha256",
+          "before": "4ad8ff7ec767ca21ea57888e323355a2f08fc039e436518eb314ab2ed76c04dc",
+          "after": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04"
+        },
+        {
+          "path": "/candidate_sha256",
+          "before": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+          "after": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+        },
+        {
+          "path": "/concepts/146/snapshot/aliases",
+          "before": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor"
+          ],
+          "after": [
+            "uleiul",
+            "uleiuri",
+            "uleiurile",
+            "uleiului",
+            "uleiurilor",
+            "untdelemn"
+          ]
+        },
+        {
+          "path": "/native_source_version",
+          "before": 5,
+          "after": 6
+        },
+        {
+          "path": "/reviews/0/candidate_sha256",
+          "before": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+          "after": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+        },
+        {
+          "path": "/reviews/0/reviewer",
+          "before": "/root/content_rail",
+          "after": "/root/v16_native_raw_factual"
+        },
+        {
+          "path": "/reviews/0/sha256",
+          "before": "f8e3f12d8ae85f20f060fc50b8e70d920b747ea3c07926345f517c7bd0e96945",
+          "after": "fedcff86e30edf5f9033f7c0808eb6f54ef8d8845a6ab82f08c0945a268aa0ce"
+        },
+        {
+          "path": "/reviews/1/candidate_sha256",
+          "before": "2a30f2acbaa217a8c6c5dbcaab16acab7513491fbd094066bb49325b0d3e3e04",
+          "after": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+        },
+        {
+          "path": "/reviews/1/reviewer",
+          "before": "/root/graph_quality",
+          "after": "/root/v16_raw_quality"
+        },
+        {
+          "path": "/reviews/1/sha256",
+          "before": "f19205e9ef18803e3e7c81f1245cf858b16ef5df553e704532d470d271883e69",
+          "after": "2096d85b045a71466c4e9535414939788ea6f0469dbce42babe1389c5f4c5120"
+        }
+      ]
+    }
+  },
+  "scope": "Complete JSON differences of actual generated native prospective proposals versus installed Source5/Source4 fixtures. Not installation approval."
+}

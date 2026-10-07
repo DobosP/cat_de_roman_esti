@@ -1,0 +1,10 @@
+{
+  "schema": "v1-6-isolated-vcs-build-repair-r1",
+  "recorded_at_utc": "2026-10-07T01:02:29.138432+00:00",
+  "failed_result": "source6-candidates-r1-result.json",
+  "failure": "Go build of the isolated copied tree stopped with error obtaining VCS status exit128 before rank/derive/candidate commands.",
+  "repair": "Pass -buildvcs=false ONLY for tool binaries built from the non-Git isolated tree. Source6 base_commit and parent, all760copied-file hashes, runtime inventories and native/content/review gates stay unchanged. This accurately omits a nonexistent VCS stamp, not content qualification.",
+  "native_builders_ran": false,
+  "worktree_or_staging_sources_changed": false,
+  "fresh_review_required": true
+}
