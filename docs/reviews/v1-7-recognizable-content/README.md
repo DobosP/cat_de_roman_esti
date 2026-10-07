@@ -64,3 +64,17 @@ The next finite investigation should establish an ordinary useful leafă case or
 No Source7, candidate module, selected snapshot, raw installation judgment or game-data change is present.
 
 [Independent research-quality receipt](research-quality-review-r1.json) accepts only the research checkpoint:2researched/4held, zero readiness/selection/adoption. Prioritize a finite ordinary native leafă/salariu case. Frozen R1 identity old-pool substring matching has a nonblocking Plic←explicit false positive; that hit is not a real Plic hold. Actual prior i03Plic hold remains separately sourced; use exact token/phrase boundaries in a future versioned screen, never silently rebind R1.
+
+## Ordinary leafă baseline and R4 readiness
+
+The R2 baseline method was accepted before execution; R1 remains unexecuted REQUEST_CHANGES because a selected Societate category cannot be earned as a category clue.
+[Actual summary](ordinary-leafa-native-baseline-summary-r1.json) and [lossless transcript](ordinary-leafa-baseline-transcript-r1.json.gz)
+show8ordinarypicker draws to BNR ct_societate_090/normal/Societate atseed7,2publichandler sessions/32requests.
+Leafă is unknown and suggests Leana without charge; canonical Salariu rank15/distance2/Cald99, safe warmer bancă rank3,
+exact4attempts/1clue/700score/share/privateGet/Progress and repeats pass. Three native steps stayed within fixed bounds,
+peak389517312RSS/increment435848417bytes;111runtime/currentauthority files unchanged and owned temporary Go source removed.
+[Independent exact readiness review](ordinary-leafa-baseline-readiness-review-r1.json) verifies every response and lossless archive;
+[root current dictionary access](primary-leafa-browser-access-r2.json) separately re-observes original DOOM/DLR qualified senses.
+Only i05-lex-01 is now R4 ready_for_refinement for singular employee-pay leafă; other records remain unchanged:
+1ready/1researched/4held/0selected/0installed. [Pre-readiness R1pool](research-pool-r1-before-readiness.json.gz) remains exact.
+No Source7, graph module/proposal, raw adoption judgments, prospective aliases or new game-data installation exists.

@@ -1,0 +1,200 @@
+package httpapi
+
+// Research baseline only: exact current sealed Source6 content.Load and ordinary
+// filtered selection/public HTTP. No content overlay, source mutation, private
+// session injection, new alias, promotion, browser/TCP or human-play claim.
+import (
+ "bytes"
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "math/big"
+ "net/http/httptest"
+ "os"
+ "path/filepath"
+ "reflect"
+ "strings"
+ "testing"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/pack"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom"
+)
+
+func TestV17OrdinaryLeafaBaseline(t *testing.T) {
+ t.Setenv("CAT_ALLOWED_HOSTS", "testserver,example.com")
+ taskRoot:=os.Getenv("V17_LEAFA_ROOT")
+ if taskRoot!="/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7" {t.Fatal("exact task root required")}
+ expectedSources := map[string]string{
+  "alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+  "alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+  "board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+  "derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+  "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+  "kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+  "quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+  "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+ }
+ bindings := map[string]string{
+  "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+  "go-backend/internal/content/digest.go": "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d",
+ }
+ for name,digest := range expectedSources { bindings["cat_de_roman_esti/fixtures/"+name] = digest }
+ verifyBindings := func() bool {
+  t.Helper()
+  valid := true
+  for name,expected := range bindings {
+   raw,e := os.ReadFile(filepath.Join(taskRoot,name))
+   if e != nil { t.Errorf("read binding %s: %v",name,e);valid=false;continue }
+   if fmt.Sprintf("%x",sha256.Sum256(raw)) != expected { t.Errorf("binding drift: %s",name);valid=false }
+  }
+  return valid
+ }
+ if !verifyBindings() { t.Fatal("source/export bindings invalid before qualification") }
+ c, err := content.Load()
+ if err != nil { t.Fatal(err) }
+ if !reflect.DeepEqual(c.Sources,expectedSources) { t.Fatal("embedded exact eight-source identity mismatch") }
+ rawBundle,err := os.ReadFile(filepath.Join(taskRoot,"go-backend/internal/content/bundled.json"))
+ if err != nil || len(rawBundle) != 7272424 { t.Fatalf("sealed bundle read/size: %v %d",err,len(rawBundle)) }
+ diskContent,err := content.Decode(rawBundle)
+ if err != nil || !reflect.DeepEqual(c,diskContent) { t.Fatalf("embedded content differs from actual sealed bundle: %v",err) }
+
+ const curated="ct_societate_090"
+ const target="n_bnr"
+ const owner="n_v4soc_salariu"
+ if c.Labels[owner]!="Salariu" || c.Labels[target]!="Banca Națională a României" {t.Fatal("fixed owner/target identity drift")}
+ report:=map[string]any{"schema":"v1-7-ordinary-leafa-baseline-r2", "scope":"Research-only unchanged sealed Source6 in-process public HTTP; no content overlay or session injection; no adoption/TCP/browser/human evidence", "source8":expectedSources,"bundle_sha256":"e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877","selector":map[string]any{"difficulty":"normal","category":"societate","daily":false,"exclusions":false},"curated_id":curated,"target_id":target,"seed_bound_inclusive":[]int{0,127},"max_picker_draws":128,"max_sessions":2,"max_requests":80,"installed_content_mutation":false,"research_overlay_used":false,"complete":false,"installation_approval":false}
+ transcript:=[]map[string]any{}
+ observations:=[]map[string]any{}
+ pickerDraws:=[]map[string]any{}
+ t.Cleanup(func(){
+  report["post_bindings_unchanged"]=verifyBindings()
+  report["test_failed"]=t.Failed(); report["transcript"]=transcript; report["observations"]=observations; report["picker_draws"]=pickerDraws;report["request_count"]=len(transcript)
+  blob,e:=json.MarshalIndent(report,"","  ");if e!=nil {t.Error(e);return};if len(blob)+1>1024*1024 {t.Error("report exceeds1MiB");return}
+  path:=os.Getenv("V17_LEAFA_REPORT");if path!="/home/dobo/work/_temp/codex__content-v1-7/probe/ordinary-leafa-baseline-r2.json" {t.Error("exact own report path required");return}
+  f,e:=os.OpenFile(path,os.O_WRONLY|os.O_CREATE|os.O_EXCL,0600);if e!=nil {t.Error(e);return};defer f.Close()
+  if _,e=f.Write(append(blob,'\n'));e!=nil {t.Error(e);return};if e=f.Sync();e!=nil {t.Error(e)}
+ })
+ picker:=pack.New(c);seed:=int64(-1)
+ for n:=int64(0);n<128;n++ {
+  chosen:=picker.PickSeeded("contexto",pyrandom.New(big.NewInt(n)),pack.PickOptions{Category:"societate",Difficulty:"normal",FilteredShelfWeights:true})
+  draw:=map[string]any{"seed":n,"chosen_id":nil};if chosen!=nil {draw["chosen_id"]=chosen.ID};pickerDraws=append(pickerDraws,draw)
+  if chosen!=nil && chosen.ID==curated {if chosen.Payload["target"]!=target || chosen.Status!="approved" || !chosen.PilotEligible {t.Fatal("fixed ordinary curated case identity/eligibility drift")};seed=n;break}
+ }
+ report["seed"]=seed;report["case_found"]=seed>=0
+ if seed<0 {report["outcome"]="HELD: no fixed ordinary selected case within128draws; no forced target or expanded search";report["complete"]=true;return}
+ number:=func(v any)int{f,ok:=v.(float64);if !ok {t.Fatalf("not JSON number: %T %v",v,v)};return int(f)}
+ var canonicalFeedback map[string]any
+ for _,arm:=range []string{"alias_first","canonical_first"} {
+  s:=New(c)
+  obs:=map[string]any{"arm":arm,"seed":seed,"novel":"leafă","canonical":"Salariu"};observations=append(observations,obs)
+  request:=func(label,method,path string,body any,privacy bool)(int,map[string]any){
+   t.Helper();if len(transcript)>=80 {t.Fatal("request cap reached")}
+   var data []byte;if body!=nil {var e error;data,e=json.Marshal(body);if e!=nil {t.Fatal(e)}}
+   req:=httptest.NewRequest(method,"http://testserver"+path,bytes.NewReader(data));req.Header.Set("Content-Type","application/json")
+   rec:=httptest.NewRecorder();s.ServeHTTP(rec,req);reply:=map[string]any{}
+   if e:=json.Unmarshal(rec.Body.Bytes(),&reply);e!=nil {t.Fatalf("non-JSON response %d: %s",rec.Code,rec.Body.String())}
+   transcript=append(transcript,map[string]any{"arm":arm,"label":label,"method":method,"path":path,"request":body,"status":rec.Code,"response":reply})
+   if privacy && reply["won"]!=true {for _,key:=range []string{"target","score","share","curated_id","curatedId"}{if _,ok:=reply[key];ok {t.Fatalf("private field exposed %s: %s",label,key)}};for _,secret:=range []string{target,c.Labels[target],curated}{if strings.Contains(rec.Body.String(),secret){t.Fatalf("target/curated identity exposed %s",label)}}}
+   return rec.Code,reply
+  }
+  sameState:=func(label string,got,expected map[string]any){t.Helper();for _,key:=range []string{"attempts","guesses","clues_used","won"}{old,present:=expected[key];current,found:=got[key];if !present || !found || !reflect.DeepEqual(old,current){t.Fatalf("%s %s drift: %v vs %v",label,key,old,current)}}}
+  getState:=func(label,base string,expected map[string]any){t.Helper();status,got:=request(label,"GET",base,nil,true);if status!=200 {t.Fatalf("GET%s status%d",label,status)};sameState(label,got,expected)}
+  status,initial:=request("create","POST",fmt.Sprintf("/api/wordgames/contexto/games?seed=%d&difficulty=normal&category=societate",seed),nil,true)
+  if status!=200 || initial["won"]!=false || number(initial["attempts"])!=0 || number(initial["clues_used"])!=0 {t.Fatalf("create failed: %d %v",status,initial)}
+  id,ok:=initial["game_id"].(string);if !ok {t.Fatal("missing session")};base:="/api/wordgames/contexto/games/"+id
+  cid,finished,won,score,found:=s.contexto.Progress(id);if !found || cid!=curated || finished || won || score!=-1 {t.Fatal("public-created ordinary selection differs")}
+  getState("initial_get",base,initial)
+  status,_=request("unearned_clue","POST",base+"/clue",nil,true);if status!=400 {t.Fatalf("unearned clue status%d",status)}
+  getState("unearned_clue_get",base,initial)
+  current:=initial
+  canonical:=func(){
+   status,reply:=request("canonical","POST",base+"/guess",map[string]any{"text":"Salariu"},true)
+   if status!=200 || reply["ok"]!=true || reply["won"]!=false || reply["needs_confirmation"]==true {t.Fatalf("canonical failed: %d %v",status,reply)}
+   guess,ok:=reply["guess"].(map[string]any);if !ok || guess["id"]!=owner {t.Fatal("canonical owner mismatch")}
+   feedback:=map[string]any{};for _,key:=range []string{"id","label","distance","rank","temperature","closeness"}{feedback[key]=guess[key]}
+   if number(guess["rank"])<1 || number(guess["distance"])<0 || number(guess["closeness"])<0 || number(guess["closeness"])>100 {t.Fatal("invalid canonical feedback")}
+   if canonicalFeedback==nil {canonicalFeedback=feedback}else if !reflect.DeepEqual(canonicalFeedback,feedback){t.Fatal("same-seed canonical feedback changed betweenfresharms")}
+   obs["canonical_feedback"]=feedback
+   status,repeated:=request("canonical_repeat","POST",base+"/guess",map[string]any{"text":"Salariu"},true)
+   if status!=200 || repeated["ok"]!=true || repeated["won"]!=false {t.Fatal("canonical repeat failed")};sameState("canonical_repeat",repeated,reply)
+   current=repeated;getState("after_canonical_get",base,current)
+  }
+  novel:=func(){
+   before:=current
+   status,first:=request("leafă","POST",base+"/guess",map[string]any{"text":"leafă"},true)
+   if status!=200 {t.Fatalf("novel status%d",status)}
+   // An unexpected target resolution is recorded honestly and ends this arm;
+   // do not try to continue a won session or force a canonical response.
+   if first["won"]==true {obs["novel_kind"]="unexpected_target_win";obs["novel_first_response"]=first;current=first;return}
+   for _,key:=range []string{"target","score","share","curated_id","curatedId"}{if _,ok:=first[key];ok {t.Fatalf("novel nonterminal private field%s",key)}}
+   for _,secret:=range []string{target,c.Labels[target],curated}{raw,_:=json.Marshal(first);if strings.Contains(string(raw),secret){t.Fatal("novel nonterminal target leaked")}}
+   status,repeated:=request("leafă_repeat","POST",base+"/guess",map[string]any{"text":"leafă"},true);if status!=200 {t.Fatal("novel repeat status")};sameState("novel_repeat",repeated,first)
+   obs["novel_first_response"]=first;obs["novel_repeat_response"]=repeated
+   switch {
+   case first["needs_confirmation"]==true:
+    sameState("unconfirmed_leafă",first,before);obs["novel_kind"]="fuzzy_confirmation"
+    token,ok:=first["resolved_token"].(string);if !ok || token=="" {t.Fatal("missing confirmation token")}
+    status,confirmed:=request("leafă_confirm_once","POST",base+"/guess",map[string]any{"text":"leafă","confirm":token},true)
+    if status!=200 || confirmed["ok"]!=true {t.Fatal("one confirmation failed")};obs["novel_confirmation_response"]=confirmed;current=confirmed
+    if confirmed["won"]!=true {for _,key:=range []string{"target","score","share","curated_id","curatedId"}{if _,ok:=confirmed[key];ok {t.Fatal("confirmed nonterminal private field")}}}
+   case first["ok"]==true:
+    obs["novel_kind"]="direct_existing_resolution";if number(first["attempts"])>number(before["attempts"])+1 {t.Fatal("direct input charged more thanone")};current=repeated
+   default:
+    obs["novel_kind"]="unknown_or_suggestion_only";sameState("unknown_leafă",first,before);current=repeated
+   }
+   if current["won"]!=true {getState("after_leafă_get",base,current)}
+  }
+  if arm=="alias_first" {novel();if current["won"]!=true {canonical()}}else {canonical();novel()}
+  if current["won"]==true {
+   obs["early_terminal"]=current
+   status,recovered:=request("early_terminal_get","GET",base,nil,false);if status!=200 {t.Fatal("earlyterminal GETstatus")};sameState("earlyterminal GET",recovered,current)
+   for _,key:=range []string{"target","score","share"}{if !reflect.DeepEqual(recovered[key],current[key]){t.Fatal("earlyterminal recovery drift")}}
+   body,ok:=current["target"].(map[string]any);if !ok || body["id"]!=target || body["label"]!=c.Labels[target]{t.Fatal("earlyterminal target mismatch")}
+   cid,done,win,score,exists:=s.contexto.Progress(id);if !exists || cid!=curated || !done || !win || score!=number(current["score"]){t.Fatal("earlyterminal Progressdrift")}
+   obs["hypothesis_hold"]="existing typed input wins or resolves early; no alias-growth benefit inferred"
+   continue
+  }
+  for _,extra:=range []string{"Bani","Impozit"} {
+   if number(current["attempts"])>=3 {break}
+   status,reply:=request("earned_extra","POST",base+"/guess",map[string]any{"text":extra},true)
+   if status!=200 || reply["ok"]!=true || reply["won"]!=false {t.Fatalf("extra failed%s:%v",extra,reply)};current=reply
+  }
+  if number(current["attempts"])!=3 {t.Fatalf("three nonwinning attempts not reached withinfixedextras:%v",current)}
+  guesses,ok:=current["guesses"].([]any);if !ok || len(guesses)!=3 {t.Fatal("three unique guess slots required")};seenIDs:=map[string]bool{};seenAttempts:=map[int]bool{}
+  for _,value:=range guesses {guess,ok:=value.(map[string]any);if !ok {t.Fatal("invalid guessrecord")};gid,ok:=guess["id"].(string);attempt:=number(guess["attempt_number"]);if !ok || gid=="" || gid==target || seenIDs[gid] || attempt<1 || attempt>3 || seenAttempts[attempt]{t.Fatal("unique nonwinning sequence drift")};seenIDs[gid]=true;seenAttempts[attempt]=true}
+  if !seenIDs[owner] {t.Fatal("canonical owner lost")}
+  cluesUsed:=0
+  if current["clue_available"]==true {
+   if current["next_clue_kind"]!="warmer" {t.Fatal("explicit Societate category must offer warmer, notcategory")}
+   status,clue:=request("earned_warmer_clue","POST",base+"/clue",nil,true)
+   if status!=200 || clue["clue_kind"]!="warmer" || number(clue["clues_used"])!=1 || number(clue["attempts"])!=3 || clue["won"]!=false || !reflect.DeepEqual(clue["guesses"],current["guesses"]) {t.Fatalf("earnedwarmer failed%v",clue)}
+   word,ok:=clue["word"].(map[string]any);if !ok {t.Fatal("warmer clue word missing")}
+   label,ok:=word["label"].(string);if !ok || label=="" || label==c.Labels[target] {t.Fatal("warmer clue exposedtarget/emptylabel")}
+   best:=int(^uint(0)>>1);for _,value:=range guesses {g:=value.(map[string]any);if number(g["rank"])<best {best=number(g["rank"])}}
+   if number(word["rank"])<=1 || number(word["rank"])>=best {t.Fatal("warmer clue rank mustbe safe and better than publicbest")}
+   obs["earned_clue"]=clue;getState("after_clue_get",base,clue);cluesUsed=1
+  }else {
+   if _,ok:=current["next_clue_kind"];ok {t.Fatal("unavailable clue must omit nextkind")}
+   status,refusal:=request("unavailable_warmer_clue","POST",base+"/clue",nil,true)
+   if status!=400 {t.Fatal("unavailable warmer clue refusalstatus")}
+   obs["clue_refusal"]=refusal;getState("after_clue_refusal_get",base,current)
+  }
+  expectedScore:=max(50,1000-60*3-120*cluesUsed)
+  status,terminal:=request("solve","POST",base+"/guess",map[string]any{"text":c.Labels[target]},false)
+  if status!=200 || terminal["won"]!=true || number(terminal["attempts"])!=4 || number(terminal["clues_used"])!=cluesUsed || number(terminal["score"])!=expectedScore {t.Fatalf("terminal exactfourattempt/actualclue/score drift:%v",terminal)}
+  targetBody,ok:=terminal["target"].(map[string]any);if !ok || targetBody["id"]!=target || targetBody["label"]!=c.Labels[target] {t.Fatal("terminal target mismatch")}
+  // Reconstruct the share from public guess records in attempt order; do not
+  // assume warmth or copy an expected response from another content version.
+  trail:=make([]string,4);all,ok:=terminal["guesses"].([]any);if !ok || len(all)!=4 {t.Fatal("terminal fourguess records")}
+  for _,value:=range all {g:=value.(map[string]any);emoji:="🟥";if number(g["distance"])==0 {emoji="🎯"}else if number(g["closeness"])>=75 {emoji="🟩"}else if number(g["closeness"])>=50 {emoji="🟨"}else if number(g["closeness"])>=25 {emoji="🟧"};attempt:=number(g["attempt_number"]);if attempt<1 || attempt>4 || trail[attempt-1]!="" {t.Fatal("terminal shareattempt order")};trail[attempt-1]=emoji}
+  wantedShare:="cat_de_roman_esti · Cald sau Rece · "+c.CategoryLabels["societate"]+"\n"+strings.Join(trail,"")+"\n4 încercări"
+  if cluesUsed>0 {wantedShare+="\nindiciu x1"}
+  if terminal["share"]!=wantedShare {t.Fatal("share differsfrompublicrecords")}
+  status,recovered:=request("terminal_get","GET",base,nil,false);if status!=200 {t.Fatal("terminal GETstatus")};sameState("terminal_get",recovered,terminal)
+  for _,key:=range []string{"target","score","share"}{if !reflect.DeepEqual(recovered[key],terminal[key]){t.Fatalf("terminal GET%s drift",key)}}
+  cid,done,win,finalScore,exists:=s.contexto.Progress(id);if !exists || cid!=curated || !done || !win || finalScore!=expectedScore {t.Fatal("terminal Progressdrift")}
+  obs["final_attempts"]=4;obs["final_clues_used"]=cluesUsed;obs["final_score"]=expectedScore
+ }
+ report["complete"]=true;report["session_count"]=len(observations)
+ t.Logf("ordinary baseline complete: seed%d draws%d sessions%d requests%d",seed,len(pickerDraws),len(observations),len(transcript))
+}
