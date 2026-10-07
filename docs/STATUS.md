@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — GUI S1 M0: original16-fixture/78-assertion native+receipt checks passed at097dd45; gen failed full-inventory naming, fix pending. No canonical unit/UI migration qualification; V1.5 history unchanged.
+Last verified: 2026-10-07 — GUI S1 M0: clean pinned gen atb50ae14 passed9checks, original16fixtures/78assertions and receipt contract; [proof](reviews/gui-original-react/README.md). Canonical unit/UI migration pending; V1.5 history unchanged.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 

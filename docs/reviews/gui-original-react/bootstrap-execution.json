@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "target": "gen",
+  "invocation": "a8a975da-3a2f-4073-9983-e5ab486b6d21",
+  "sha": "b50ae145d743a2ef7ff145589a6f422c23069c3f",
+  "tree_sha256": "c447fd1841b801cab3a072157d687ac9b1671b4246bcea8af23aac53f59699af",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "started": "2026-10-07T06:01:47.694Z",
+  "config": {
+    "role": "consumer",
+    "app": "cat_de_roman_esti",
+    "npm_dir": "tools/gui-bootstrap-webkit",
+    "vendor_dir": "frontend/vendor",
+    "go_dirs": [
+      "go-backend"
+    ]
+  },
+  "config_sha256": "b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+  "wrapper_target": "gen",
+  "wrapper_config": ".gate/gen/wrapper-kit-config.json",
+  "wrapper_config_sha256": "62ab368b1ea2d6e4f4ec83aece581fddb8b08f4c19c5fbcdfa415d5d85aaf353",
+  "wrapper_invocation": "8e88c890-6096-4eb8-a834-bb82026299fd",
+  "wrapper_descriptor": ".gate/wrapper-current.json",
+  "wrapper_descriptor_sha256": "c560f4ba966a71e1d97c2e6edc473f6ada7248b7b0040ecf112fb39cf9c66577",
+  "actions": [
+    {
+      "phase": "config",
+      "kind": "command",
+      "command": "task",
+      "argument_count": 2,
+      "args_sha256": "0ea985cd9f5cae0b9544a01fbd8472bc9d6983d613c528839f81dcafe6fa1238",
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_ms": 129,
+      "stdout_sha256": "b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/a8a975da-3a2f-4073-9983-e5ab486b6d21-bootstrap-config-0.stdout.log",
+      "stderr_log": ".gate/gen/logs/a8a975da-3a2f-4073-9983-e5ab486b6d21-bootstrap-config-0.stderr.log"
+    },
+    {
+      "phase": "config",
+      "kind": "command",
+      "command": "task",
+      "argument_count": 2,
+      "args_sha256": "0ea985cd9f5cae0b9544a01fbd8472bc9d6983d613c528839f81dcafe6fa1238",
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_ms": 135,
+      "stdout_sha256": "b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/a8a975da-3a2f-4073-9983-e5ab486b6d21-bootstrap-config-1.stdout.log",
+      "stderr_log": ".gate/gen/logs/a8a975da-3a2f-4073-9983-e5ab486b6d21-bootstrap-config-1.stderr.log"
+    }
+  ],
+  "artifacts": [
+    ".gate/gen/logs/a8a975da-3a2f-4073-9983-e5ab486b6d21-bootstrap-config-0.stdout.log sha256:b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+    ".gate/gen/logs/a8a975da-3a2f-4073-9983-e5ab486b6d21-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/gen/logs/a8a975da-3a2f-4073-9983-e5ab486b6d21-bootstrap-config-1.stdout.log sha256:b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+    ".gate/gen/logs/a8a975da-3a2f-4073-9983-e5ab486b6d21-bootstrap-config-1.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  ],
+  "finished": "2026-10-07T06:01:47.981Z"
+}
