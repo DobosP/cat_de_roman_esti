@@ -1,0 +1,13 @@
+from pathlib import Path
+import json,hashlib,shutil
+O=Path('/home/dobo/work/_temp/codex__content-v1-6');S=Path('/home/dobo/work/_temp/codex__content-v1-7');R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7');D=R/'docs/reviews/v1-7-recognizable-content'
+c=json.loads((D/'toolchain-copy-inputs.json').read_text());assert not(S/'tools').exists();(S/'tools').mkdir()
+for rel,want in c['critical_hashes'].items(): assert hashlib.sha256((O/rel).read_bytes()).hexdigest()==want
+shutil.copytree(O/'tools/go',S/'tools/go',symlinks=True)
+shutil.copy2(O/'tools/go1.27.1.linux-amd64.tar.gz',S/'tools/go1.27.1.linux-amd64.tar.gz')
+for name,want in c['tools'].items():
+ shutil.copy2(O/'probe/authority-tools-r1'/name,S/name);assert hashlib.sha256((S/name).read_bytes()).hexdigest()==want
+for rel,want in c['critical_hashes'].items(): assert hashlib.sha256((S/rel).read_bytes()).hexdigest()==want
+(S/'qualified-env.sh').write_text((O/'qualified-env.sh').read_text().replace(str(O),str(S)))
+result={'schema':'v1-7-owned-qualified-toolchain-preservation-v1','from_completed_task':str(O),'to_own_scratch':str(S),'critical_hashes':c['critical_hashes'],'all_six_copied_exact':True,'binaries':c['tools'],'baseline_commit':'dccd401b390d9d09244b8469f5f0ebcffa190518','native_baseline_pending':True,'namespace_adapter':'only three existing qualified runner R/S/D constants changed; algorithms and limits unchanged'}
+(D/'toolchain-preservation.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\n');print('qualified SDK/archive and seven current metadata-aware tools copied exact')

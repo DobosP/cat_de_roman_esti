@@ -1,0 +1,101 @@
+{
+  "checked_at_utc": "2026-10-07T19:10:21.143489+00:00",
+  "exact_changes": {
+    "additional_dirs": "Fresh full-scratch admissions must omit additional_measure_dirs or use []; old child directories are already covered by S and the unchanged overlap guard correctly refuses their redundant addition.",
+    "coverage": "The entire own S7 tree now includes tools/SDK, seven root-level tool binaries, probe/state/log/temp/cache files. R7 remains included. Resolved S7 and R7 are disjoint, so no overlapping default roots or double counting.",
+    "measurement_roots": "Only the default roots expression changes from four narrow S subdirectories plus R to [S,R]. Exact projected source equals candidate bytes; AST parses. No other behavioral change.",
+    "namespace_constants": "Only R/S/D advance to existing owned V1.7 task/workspace/review paths.",
+    "preserved": "All existing lifecycle/ownership/signal/publication/readset/hash-parse/cumulative-start/deadline/refusal logic, environment and resource caps are byte-identical to the qualified base outside the four substitutions."
+  },
+  "files": {
+    "candidate_sha256": "397686a51c5f03f207cc450fceda8b88623383a83ab2ecb90a884e6167fa91ee",
+    "proposal_sha256": "afbc818e38d18459181d618191f2968a6311c8e24579bc21ca23b7e293678e7f",
+    "qualified_V1_6_base_sha256": "a7deb39ed747c68bc029da3ea7d02485096d6ff6ef531aa2b948ffc3e28a0b73"
+  },
+  "findings": [],
+  "next_condition": "Root may admit one fresh bounded native baseline with this exact source hash, full-owned-scratch accounting and original limits, then assess its actual results before verified-merged V1.6 cleanup. No native baseline or copied-operation resource PASS is granted here.",
+  "old_copy_failure": "toolchain-preservation.json retains R1_NOT_FULLY_RESOURCE_QUALIFIED. Current exact copied hashes prove identity/availability only; this source verdict does not retroactively qualify the omitted SDK/root-tool increments in R1.",
+  "qualified_copy_hash_reads": {
+    "all_seven_exact": true,
+    "all_six_exact": true,
+    "critical": {
+      "tools/go/VERSION": {
+        "actual": "25eb74b09036e1ad894fb63b86cb0f0ee53342df8d2e2e860da4ff5079607758",
+        "expected": "25eb74b09036e1ad894fb63b86cb0f0ee53342df8d2e2e860da4ff5079607758"
+      },
+      "tools/go/bin/go": {
+        "actual": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624",
+        "expected": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624"
+      },
+      "tools/go/bin/gofmt": {
+        "actual": "86dd91f69254432a37ca365f964720677040fd6f049a412c23e25f8b3812f342",
+        "expected": "86dd91f69254432a37ca365f964720677040fd6f049a412c23e25f8b3812f342"
+      },
+      "tools/go/pkg/tool/linux_amd64/compile": {
+        "actual": "3780fc07130d6d45096373acf062cc316940d253e2a1d892ece03a3bdd0d21d4",
+        "expected": "3780fc07130d6d45096373acf062cc316940d253e2a1d892ece03a3bdd0d21d4"
+      },
+      "tools/go/pkg/tool/linux_amd64/link": {
+        "actual": "a29ac5e8f64111b0b5c5d31e452f18abf7ee79f44b421081b5509c8939d92ba9",
+        "expected": "a29ac5e8f64111b0b5c5d31e452f18abf7ee79f44b421081b5509c8939d92ba9"
+      },
+      "tools/go1.27.1.linux-amd64.tar.gz": {
+        "actual": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445",
+        "expected": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+      }
+    },
+    "critical_count": 6,
+    "tool_count": 7,
+    "tools": {
+      "cat-content": {
+        "actual": "5e381ff0489ca735268403e072638751116dd2caa4dc44193c231fa145352b6e",
+        "expected": "5e381ff0489ca735268403e072638751116dd2caa4dc44193c231fa145352b6e"
+      },
+      "cat-content-ops": {
+        "actual": "4be33997b10097a89d8412b10b303049fceaedc7d3489f21b1ff7f2ccc884784",
+        "expected": "4be33997b10097a89d8412b10b303049fceaedc7d3489f21b1ff7f2ccc884784"
+      },
+      "cat-content-rail": {
+        "actual": "bbe6d0fe9e64695cd5cc05bde1fd6b0e995d60eb41c7c693a5f559f0ae6cdf96",
+        "expected": "bbe6d0fe9e64695cd5cc05bde1fd6b0e995d60eb41c7c693a5f559f0ae6cdf96"
+      },
+      "cat-doc-check": {
+        "actual": "3caf29e4181f4aa4eb16ed287e624d78e9baac6c4b4b2b48b981933c8d9509a3",
+        "expected": "3caf29e4181f4aa4eb16ed287e624d78e9baac6c4b4b2b48b981933c8d9509a3"
+      },
+      "cat-mobile-pack": {
+        "actual": "8818047da66182bcec7c825a452bb88d29098a7793a2db869b8d4edd7cdb35b6",
+        "expected": "8818047da66182bcec7c825a452bb88d29098a7793a2db869b8d4edd7cdb35b6"
+      },
+      "cat-qualify": {
+        "actual": "9648c6ef22c9557e1a31858c9c60f3757eef8893eced9864930e493ea4e39837",
+        "expected": "9648c6ef22c9557e1a31858c9c60f3757eef8893eced9864930e493ea4e39837"
+      },
+      "cat-server": {
+        "actual": "9c40564c6c8b53045b94f08574af3f6824b250824a46d1bad4dc5a6ee5840da4",
+        "expected": "9c40564c6c8b53045b94f08574af3f6824b250824a46d1bad4dc5a6ee5840da4"
+      }
+    }
+  },
+  "resource_observation": {
+    "MemAvailable_bytes": 22737612800,
+    "floors_met": true,
+    "free_disk_bytes": 230916235264,
+    "required_remaining_disk_memory_bytes": 17179869184,
+    "required_start_disk_bytes": 18253611008,
+    "source_worker_peak_RSS_unmeasured": true
+  },
+  "reviewer": "/root/v16_linux_finish",
+  "reviewer_execution": {
+    "Go": 0,
+    "agents_spawned": 0,
+    "application": 0,
+    "method": 0,
+    "native": 0,
+    "review_receipts_written": 1
+  },
+  "schema": "v1-7-independent-owned-namespace-full-scratch-review-v1",
+  "scope": "Narrow read-only source/hash inspection, less than five minutes. No guard import/invocation, native/version/application execution, fixture creation, source edit or additional agent. Only this receipt written.",
+  "source_runtime_game_data_change": "No application/runtime/fixture/reviewed content change. This tool-only adapter broadens resource accounting.",
+  "verdict": "ACCEPT_SOURCE_NAMESPACE_AND_FULL_SCRATCH_COVERAGE_ONLY"
+}
