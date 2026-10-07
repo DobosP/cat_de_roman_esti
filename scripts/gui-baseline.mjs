@@ -5,9 +5,10 @@ import { gzipSync, brotliCompressSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
 import AxeBuilder from "../frontend/node_modules/@axe-core/playwright/dist/index.mjs";
+import { nativePlan } from "../frontend/e2e/native-plan.mjs";
 
-const root = process.cwd(), capture = process.argv[2] === "capture";
-const output = capture ? "baselines/cat" : ".gate/full/baseline-comparison";
+const root = process.cwd(), mode = process.argv[2], capture = mode === "capture" || mode === "original-capture";
+const output = mode === "original-capture" ? ".gate/gen/original/baseline" : capture ? "baselines/cat" : ".gate/full/baseline-comparison";
 fs.mkdirSync(output, { recursive: true });
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const routes = ["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie?mode=challenges", "/alchimie?mode=explore", "/cald-rece", "/lant", "/clasament"];
@@ -30,8 +31,9 @@ const closures = Object.fromEntries(Object.keys(manifest).map((entry) => {
   const measured = [...files].sort().map((file) => { const data = fs.readFileSync(`${source}/${file}`); return { file, gz: gzipSync(data).length, br: brotliCompressSync(data).length }; });
   return [entry, { files: measured, gz: measured.reduce((sum, item) => sum + item.gz, 0), br: measured.reduce((sum, item) => sum + item.br, 0) }];
 }));
-const axeSource = fs.readFileSync("frontend/node_modules/axe-core/axe.min.js", "utf8");
-const axeVersion = JSON.parse(fs.readFileSync("frontend/node_modules/axe-core/package.json")).version;
+const quality = "tools/gui-baseline-quality";
+const axeSource = fs.readFileSync(`${quality}/node_modules/axe-core/axe.min.js`, "utf8");
+const axeVersion = JSON.parse(fs.readFileSync(`${quality}/node_modules/axe-core/package.json`)).version;
 if (axeVersion !== "4.14.0") throw new Error(`Required axeSource4.14.0 is unavailable (actual ${axeVersion}); retain the original dependency graph until its proof`);
 const server = !process.env.GATE_APP_URL ? spawn(process.env.CDR_NATIVE_BINARY, ["-listen", "127.0.0.1:8138"], { cwd: root, stdio: ["ignore", "pipe", "pipe"], env: { ...process.env, CAT_ACCOUNTS_ENABLED: "0", CAT_SUBMISSIONS_ENABLED: "0" } }) : null;
 const origin = process.env.GATE_APP_URL || "http://127.0.0.1:8138";
@@ -50,15 +52,19 @@ try {
     await page.goto(origin + route);
     await page.locator(".screen").first().waitFor();
     await page.waitForFunction(() => document.querySelector(".screen") && getComputedStyle(document.querySelector(".screen")).opacity === "1");
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForFunction(() => [...document.querySelectorAll(".game-intro, .home-game-card")].every((element) => getComputedStyle(element).opacity === "1"));
     const name = `route-${index}.png`, image = await page.screenshot({ path: `${output}/${name}`, fullPage: true });
     const axe = await new AxeBuilder({ page, axeSource }).analyze();
     const fingerprint = axe.violations.map((violation) => ({ id: violation.id, impact: violation.impact, targets: violation.nodes.map((node) => node.target) }));
-    pages.push({ route, screenshot: `${output}/${name}`, sha256: hash(image), axe: fingerprint });
+    pages.push({ route, screenshot: capture ? `baselines/cat/${name}` : `${output}/${name}`, captured_file: `${output}/${name}`, sha256: hash(image), axe: fingerprint });
     await page.close();
   }
   // Vitals are measured by the actual library, loaded before page JS, under the
   // required CDP throttle. Missing tooling cannot become fabricated timing values.
-  const vitalsSource = fs.readFileSync("frontend/node_modules/web-vitals/dist/web-vitals.iife.js", "utf8");
+  const vitalsSource = fs.readFileSync(`${quality}/node_modules/web-vitals/dist/web-vitals.iife.js`, "utf8");
+  const vitalsVersion = JSON.parse(fs.readFileSync(`${quality}/node_modules/web-vitals/package.json`)).version;
+  if (vitalsVersion !== "6.2.3") throw new Error("Actual locked web-vitals6.2.3 source required");
   const vitals = [];
   for (const [route, selector] of [["/conexiuni", ".connections-grid button"], ["/alchimie?mode=challenges", ".alchemy-inventory-grid button"]]) {
     const runs = [];
@@ -68,23 +74,29 @@ try {
       await cdp.send("Emulation.setCPUThrottlingRate", { rate: 4 });
       await cdp.send("Network.enable");
       await cdp.send("Network.emulateNetworkConditions", { offline: false, latency: 150, downloadThroughput: 1600 * 1000 / 8, uploadThroughput: 750 * 1000 / 8 });
-      await page.addInitScript({ content: `${vitalsSource}\nwindow.__catVitals={};webVitals.onLCP(m=>window.__catVitals.lcp=m.value,{reportAllChanges:true});webVitals.onINP(m=>window.__catVitals.inp=m.value,{reportAllChanges:true});webVitals.onCLS(m=>window.__catVitals.cls=m.value,{reportAllChanges:true});` });
+      const metrics = [];
+      await page.exposeBinding("__catVital", (_source, metric) => { metrics.push(metric); });
+      await page.addInitScript({ content: `${vitalsSource}\nwindow.__catVitals={};const record=m=>{window.__catVitals[m.name.toLowerCase()]=m.value;window.__catVital({name:m.name,id:m.id,value:m.value,rating:m.rating,entries:m.entries.length})};webVitals.onLCP(record,{reportAllChanges:true});webVitals.onINP(record,{reportAllChanges:true,durationThreshold:0});webVitals.onCLS(record,{reportAllChanges:true});` });
+      const game = route.startsWith("/alchimie") ? "alchimie" : "conexiuni";
+      await page.route(`**/api/wordgames/${game}/games?*`, async (request) => { const url = new URL(request.request().url()); url.searchParams.set("seed", "38"); await request.continue({ url: url.toString() }); });
       await page.goto(origin + route);
       await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
-      const button = page.locator(selector).first(); await button.waitFor(); await button.click();
+      await page.locator(selector).first().waitFor();
       if (route.startsWith("/alchimie")) {
-        await page.locator(selector).nth(1).click();
-      }
+        const step = nativePlan(["alchimie"]).steps[0];
+        for (const label of step.labels) await page.locator(".alchemy-inventory-grid").getByRole("button", { name: new RegExp(`^${label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:,|$)`) }).click();
+      } else await page.locator(selector).first().click();
       await page.waitForTimeout(1000);
       await page.evaluate(() => document.dispatchEvent(new Event("visibilitychange")));
       const observed = await page.evaluate(() => window.__catVitals);
       if (!Number.isFinite(observed.lcp) || !Number.isFinite(observed.inp)) throw new Error("Actual LCP/INP did not arrive from web-vitals");
-      runs.push(observed); await page.close();
+      runs.push({ ...observed, metrics }); await page.close();
     }
     const median = (key) => runs.map((item) => item[key]).sort((a, b) => a - b)[2];
     vitals.push({ route, runs, median: { lcp: median("lcp"), inp: median("inp"), cls: median("cls") } });
   }
-  const report = { schema: 1, mode: capture ? "capture" : "verify", sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, toolchain_digest: process.env.TOOLCHAIN_DIGEST, sizes, closures, css, cssTotal, pages, axeVersion, vitals, method: { runs: 5, reducedMotion: "reduce", cpu: 4, rtt_ms: 150, down_kbps: 1600 } };
+  const inputs = Object.fromEntries(["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz", `${quality}/package.json`, `${quality}/package-lock.json`].map((file) => [file, hash(fs.readFileSync(file))]));
+  const report = { schema: 1, mode: capture ? "capture" : "verify", proof_scope: mode === "original-capture" ? "pinned-gen-original-runner-built-server" : "actual-app-image", sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, toolchain_digest: process.env.TOOLCHAIN_DIGEST, inputs, sizes, closures, css, cssTotal, pages, axeVersion, axe_source_sha256: hash(axeSource), vitalsVersion, vitals_source_sha256: hash(vitalsSource), vitals, method: { runs: 5, reducedMotion: "reduce", cpu: 4, rtt_ms: 150, down_kbps: 1600 } };
   fs.writeFileSync(`${output}/capture.json`, JSON.stringify(report, null, 2) + "\n");
   if (!capture) {
     const baseline = JSON.parse(fs.readFileSync("baselines/cat/capture.json"));

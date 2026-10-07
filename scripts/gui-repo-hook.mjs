@@ -54,7 +54,15 @@ function nativeUnit() {
 switch (target) {
   case "setup": setup("cat-setup"); break;
   case "deps":
-    command("npm-lock", "npm", ["install", "--package-lock-only", "--ignore-scripts"], frontend);
+    hook.check("npm-lock", () => {
+      const primary = JSON.parse(fs.readFileSync(".gate/wrapper-current.json")).target;
+      const request = JSON.parse(fs.readFileSync("scripts/gui-deps-request.json"));
+      hook.assert("Explicit auxiliary-only dependency request", () => request.schema === 1 && request.scope === "baseline-quality-only" && Object.keys(request).length === 2);
+      const onlyQuality = primary === "deps";
+      const before = ["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz"].map((file) => hash(fs.readFileSync(file)));
+      for (const module of [...(onlyQuality ? [] : ["frontend"]), "tools/gui-baseline-quality"]) hook.run("npm", ["install", "--package-lock-only", "--ignore-scripts"], path.join(root, module));
+      if (onlyQuality) hook.assert("Original frontend graph and SDK bytes stayed exact", () => ["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz"].every((file, index) => hash(fs.readFileSync(file)) === before[index]));
+    });
     hook.check("go-mod-tidy", () => {
       for (const module of ["go-backend", "shared-go/authcore"]) hook.run("go", ["mod", "tidy"], path.join(root, module));
     });
@@ -62,7 +70,7 @@ switch (target) {
   case "gen": {
     const request = JSON.parse(fs.readFileSync(path.join(root, "scripts/gui-gen-request.json")));
     hook.check("cat-gen-request", () => hook.assert("Explicit committed original qualification request", () =>
-      request.schema === 1 && request.operation === "qualify-original-react" && request.fixtures === "frontend/e2e/original/runtime.spec.mjs" && Object.keys(request).length === 3));
+      request.schema === 1 && ["qualify-original-react", "capture-original-baseline"].includes(request.operation) && request.fixtures === "frontend/e2e/original/runtime.spec.mjs" && Object.keys(request).length === 3));
     // Plain gen is the E1 original route; it deliberately runs actual prerequisites
     // itself, as canonical setup has no nested gen-context routing in core-v1.1.
     setup("cat-original");
@@ -95,6 +103,17 @@ switch (target) {
     if (hook.checks.every((item) => item.status === "pass")) command("cat-browser-inventory", "node", ["scripts/gui-full-browser.mjs", "inventory"], root, {
       CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan"),
     });
+    if (request.operation === "capture-original-baseline" && hook.checks.every((item) => item.status === "pass")) {
+      command("cat-quality-npm-ci", "npm", ["ci", "--no-audit", "--no-fund"], path.join(root, "tools/gui-baseline-quality"));
+      command("cat-original-baseline", "node", ["scripts/gui-baseline.mjs", "original-capture"], root, {
+        CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan"),
+      });
+      if (fs.existsSync(path.join(scratch, "original/baseline/capture.json"))) {
+        for (const name of fs.readdirSync(path.join(scratch, "original/baseline"))) hook.artifact(`${directory}/original/baseline/${name}`);
+      }
+      command("cat-original-budget-boundary", "node", ["scripts/gui-original-budget.mjs"]);
+      if (fs.existsSync(path.join(scratch, "original/budget-boundary.json"))) hook.artifact(`${directory}/original/budget-boundary.json`);
+    }
     break;
   }
   case "unit": nativeUnit(); break;
