@@ -1,0 +1,51 @@
+from pathlib import Path
+import json,hashlib,datetime,unicodedata,collections
+from cat_de_roman_esti.wordgames.service import normalize
+from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7');D=R/'docs/reviews/v1-7-recognizable-content'
+assert unicodedata.unidata_version=='15.0.0'
+files=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/fixtures/quick_games_v92.json','cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json','cat_de_roman_esti/fixtures/lant_rejection_tombstones.json','go-backend/internal/content/bundled.json','cat_de_roman_esti/wordgames/contexto_projection.py','cat_de_roman_esti/wordgames/service.py']
+bind={f:hashlib.sha256((R/f).read_bytes()).hexdigest() for f in files}
+k=json.loads((R/files[0]).read_text());pack=json.loads((R/files[1]).read_text());quick=json.loads((R/files[2]).read_text());world=json.loads((R/files[3]).read_text());tombs=json.loads((R/files[4]).read_text());bundle=json.loads((R/files[5]).read_text());nodes={x['id']:x for x in k['kg_nodes']}
+labels=['leafă','Salariu','Compot','Compot de mere','Sandviș','Sandviș cu brânză','Scrisoare','Plic','Busolă','Nord','Tocător','Tocător de bucătărie']
+def strings(x):
+ if isinstance(x,str):yield x
+ elif isinstance(x,list):
+  for v in x:yield from strings(v)
+ elif isinstance(x,dict):
+  for v in x.values():yield from strings(v)
+def records(x):
+ if isinstance(x,list):
+  for v in x:yield from records(v)
+ elif isinstance(x,dict):
+  if 'id' in x:yield x
+  for v in x.values():yield from records(v)
+out=[]
+for label in labels:
+ key=normalize(label);owners=[{'id':n['id'],'label':n['label_ro'],'category':n['category']} for n in k['kg_nodes'] if key in {normalize(n['label_ro']),*(normalize(a) for a in n.get('aliases',[]))}];w=[{'id':c['id'],'label':c['label']} for c in world['concepts'] if normalize(c['label'])==key];proj=resolve_projection(label)
+ uses=[]
+ for source,data in [('pack',pack),('quick',quick)]:
+  for r in records(data):
+   # References by exact label, or canonical owner ID for ID-authored payloads.
+   ss=set(strings(r))
+   if any(normalize(s)==key for s in ss) or any(n['id'] in ss for n in owners):uses.append({'source':source,'id':r['id'],'status':r.get('status'),'category':r.get('category')})
+ old=[]
+ for p in sorted((R/'docs/content-pool').glob('*/pool.json')):
+  for r in json.loads(p.read_text()).get('records',[]):
+   if any(key in normalize(str(r.get(f,''))) for f in ['label_ro','sense']):old.append({'pool':str(p.relative_to(R)),'pool_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'id':r['id'],'revision':r.get('revision'),'state':r.get('state'),'decision':r.get('decision'),'next_action':r.get('next_action')})
+ out.append({'label':label,'normalized':key,'sealed_base_index_owner':bundle['normalized_index'].get(key),'shared_exact_owners':owners,'world_exact_owners':w,'reference_authored_projection':None if proj is None else {'public_id':proj.public_id,'surface':proj.surface,'anchor_id':proj.anchor_id,'domain':proj.domain,'penalty':proj.rank_penalty,'mapping_kind':proj.mapping_kind},'projection_provenance':'Current project-authored pure Python table/resolve_projection, not serialized alchimie_projections or actual native HTTP proof. New native identity/gameplay verification remains required.','deck_uses':uses,'old_pool_records':old,'tombstone_exact_surface_present':any(normalize(s)==key for s in strings(tombs))})
+adj=collections.defaultdict(set)
+for e in k['kg_edges']:
+ if not e['is_distractor']:
+  adj[e['src_id']].add(e['dst_id'])
+  if e['bidirectional']:adj[e['dst_id']].add(e['src_id'])
+d={'n_v4soc_salariu':0};q=collections.deque(d)
+while q:
+ x=q.popleft()
+ if d[x]>=3:continue
+ for y in adj[x]:
+  if y not in d:d[y]=d[x]+1;q.append(y)
+cases=[{'round':x['id'],'target_id':x['target'],'target_label':nodes[x['target']]['label_ro'],'distance':d[x['target']],'difficulty':x['difficulty'],'category':x['category'],'status':x['status']} for x in pack['contexto'] if x['target'] in d and x['status']=='approved']
+results={'schema':'v1-7-source-identity-deck-screen-v1','baseline_commit':'a34a6ade957436d89b6c9b1424babf763ad1f9d1','checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'unicode_version':unicodedata.unidata_version,'input_bindings':bind,'labels':out,'salary_static_cases_only':sorted(cases,key=lambda x:(x['distance'],x['round']))[:14],'salary_static_case_count':len(cases),'sealed_projection_map_empty':bundle['alchimie_projections']=={},'acceptance_limit':'No exact base-index entry does not prove rejected input; runtime projections, suggestions/fuzzy/confirmation/native ordinary selection must be tested. No data mutation/selection/approval.'}
+p=D/'identity-deck-screen-r1.json';p.write_text(json.dumps(results,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+print({'report':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'labels':len(out),'salary_static_cases':len(cases),'Tocător_de_bucătărie_uses':next(x for x in out if x['label']=='Tocător de bucătărie')['deck_uses']})

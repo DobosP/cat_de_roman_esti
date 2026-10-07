@@ -1,0 +1,394 @@
+{
+  "schema": "v1-7-primary-object-link-source-screen-r1",
+  "valid_until": "Source access, bound installed inputs or human scope changes; recheck before selection/install.",
+  "baseline_commit": "a34a6ade957436d89b6c9b1424babf763ad1f9d1",
+  "author": "/root/v17_object_link_sources",
+  "prepared_at_utc": "2026-10-07T19:42:19.604683+00:00",
+  "admission_sha256": "afd005eb29bd91e2f024e7157de2d83bfaf5b4ebc386234a198981d96e210e15",
+  "scope": "Only3 source hypotheses: chopping-board Tocător, physical Scrisoare→Plic, magnetic Busolă→Nord. Research only; no approval/selection/module/data/native execution.",
+  "resource_limits_observation": "Source worker/browser RSS not measured; no source memory qualification claimed. No delegated workers created.",
+  "input_bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+    "docs/content-pool/v1-5-discovery-i03/pool.json": "46b8315d43baa8e1754664fbfbb855b970a22ea54d1b2635d8389ae4a4039945",
+    "docs/reviews/v1-7-recognizable-content/source-screen-admission-r1.json": "afd005eb29bd91e2f024e7157de2d83bfaf5b4ebc386234a198981d96e210e15"
+  },
+  "identity_method": {
+    "normalization": "Local bounded Python NFKD/casefold with combining marks removed, plus direct sealed normalized_index keys; root independently performs production Unicode15 identity screen. Preliminary screen is not complete identity clearance.",
+    "shared_exact_label_alias_matches": {
+      "Tocător": [],
+      "Tocător de bucătărie": [],
+      "Scrisoare": [],
+      "Plic": [],
+      "Busolă": [],
+      "Nord": []
+    },
+    "sealed_native_normalized_index": {
+      "tocator": null,
+      "tocator de bucatarie": null,
+      "scrisoare": null,
+      "plic": null,
+      "busola": null,
+      "nord": null
+    },
+    "sealed_projection_matches": [
+      {
+        "public_id": "ctxp_7687de8a10648bdf4e3c",
+        "surface": "tocător de bucătărie",
+        "key": "tocator de bucatarie",
+        "anchor_id": "n_v29_kitchen_table_cutit",
+        "domain": "ustensile de bucătărie",
+        "mapping_kind": "explicit",
+        "rank_penalty": 0
+      }
+    ],
+    "world_exact_label_matches": {
+      "Tocător": [],
+      "Tocător de bucătărie": [],
+      "Scrisoare": [],
+      "Plic": [],
+      "Busolă": [],
+      "Nord": []
+    },
+    "decks": "Whole parsed games_pack and quick catalogue contain no exact standalone normalized string among these six surfaces. Proper literary letters, publication descriptions and metaphorical plic substring uses exist; no generic label owner inferred. This is not a prospective play or whole-deck semantic novelty approval.",
+    "both_edge_directions": "No generic shared endpoint owners exist for either proposed letter pair or compass pair; hence no existing shared rows in either direction connecting those generic identities. Cannot represent them as existing-node arcs or new directed reachability without first qualifying owners.",
+    "tombstones": "Both parsed current Conexiuni/Lanț tombstones contain no exact standalone string of the six surfaces. Scrisoare/title and plic-containing substrings are historical context, not blanket semantic clearance.",
+    "projection_provenance": {
+      "serialized_path": "go-backend/internal/content/bundled.json:/contexto_data/projection_terms/73",
+      "direct_observation": "Exact descriptor(public_id/anchor/domain/key/mapping_kind/penalty) read from serialized Contexto projection_terms. This is neither a normalized_index shared KG owner nor an alchimie_projections owner.",
+      "independent_static_definition": "cat_de_roman_esti/wordgames/contexto_projection.py:224 surface, line978 explicit Cuțit anchoring tuple.",
+      "alchimie_projections": "Serialized array is empty in current bundle. No alchimie projection ownership claimed.",
+      "runtime_limit": "No native or reference API/projection-builder execution by this worker; actual served proxy acceptance and its complete identity/feedback still require exact native checks."
+    }
+  },
+  "sources": [
+    {
+      "id": "ikea-knife-manual",
+      "url": "https://www.ikea.com/ro/ro/manuals/ikea-cutit-decojit__AA-1436920-4_pub.pdf",
+      "publisher": "IKEA of Sweden",
+      "kind": "primary manufacturer Romanian instruction manual",
+      "accessed_on": "2026-10-07",
+      "access": "OPEN PDF text:60pages; Romanian printed41/zero-based40, lines993–1003. Screenshot attempt failed cache miss; no visual screenshot proof.",
+      "supports": "The Romanian knife-use instructions recommend a wooden or plastic cutting board; this supports the knife/board functional relationship and existence of wooden models.",
+      "scope_limits": "Manufacturer guidance for its knives, not a universal safety rule or a claim that every board is wooden; no content dating inferred from search age.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    },
+    {
+      "id": "ikea-board-vegetables",
+      "url": "https://www.ikea.com/ro/ro/cat/cutite-tocatoare-15934/",
+      "publisher": "IKEA of Sweden",
+      "kind": "primary manufacturer Romanian category/use description",
+      "accessed_on": "2026-10-07",
+      "access": "OPEN HTML text; lines13–17 and product family listing.",
+      "supports": "Romanian manufacturer copy describes cutting vegetables on cutting boards.",
+      "scope_limits": "Specific preparation use, not proof of any new world recipe or of all food-processing meanings of tocător.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    },
+    {
+      "id": "ikea-board-wood",
+      "url": "https://www.ikea.com/ro/ro/p/artistisk-tocator-stejar-80511083/",
+      "publisher": "IKEA of Sweden",
+      "kind": "primary manufacturer specific product material",
+      "accessed_on": "2026-10-07",
+      "access": "OPEN HTML text; material lines68–70 and95–97.",
+      "supports": "ARTISTISK is a cutting board made from solid oak wood.",
+      "scope_limits": "An actual wooden example only. Bamboo products were not used to equate bamboo with tree wood. The oil treatment material is unspecified and is not linked to edible Ulei.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    },
+    {
+      "id": "ikea-board-plastic-cheese",
+      "url": "https://www.ikea.com/ro/ro/p/legitim-tocator-set-2-bucati-alb-70556703/",
+      "publisher": "IKEA of Sweden",
+      "kind": "primary manufacturer specific product function/counterexample",
+      "accessed_on": "2026-10-07",
+      "access": "OPEN HTML text; lines81–87 and103–105.",
+      "supports": "LEGITIM is a polyethylene board, gentle to knives, with optional serving use for cheese or cold cuts.",
+      "scope_limits": "This refutes universal wooden composition. Optional serving is not compulsory preparation, unique pairing, cheese manufacturing, or a recipe. Image alt text alone was not used as proof of a chopping fact.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    },
+    {
+      "id": "beko-competing-tocator",
+      "url": "https://www.beko.com/ro-ro/produse/mini-tocatoare-si-mixere/tocator-500-w-500-ml-chp-62522-w",
+      "publisher": "Beko Romania",
+      "kind": "primary manufacturer counter-sense",
+      "accessed_on": "2026-10-07",
+      "access": "OPEN HTML text; lines491–497 and545–553.",
+      "supports": "Tocător names a powered household food chopper with a bowl and cutting blades.",
+      "scope_limits": "Bare tocător and even household kitchen context do not uniquely identify a chopping board. Person/adjectival senses were not independently verified in an original Academy semantic entry; they remain unapproved counter-sense leads.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    },
+    {
+      "id": "posta-domestic",
+      "url": "https://www.posta-romana.ro/a219/servicii-expeditori/scrisori-carti-postale/in-romania/corespondenta-intern.html",
+      "publisher": "C.N. Poșta Română S.A.",
+      "kind": "primary original postal operator object/service description",
+      "accessed_on": "2026-10-07",
+      "access": "OPEN HTML text; physical communications lines452–453; envelope/card formats lines518–526; addressing/sealing paragraphs also exposed.",
+      "supports": "The operator distinguishes physically transported correspondence from electronic delivery, includes letters and postcards, and recognizes envelope packaging.",
+      "scope_limits": "Stable object mechanics only. No tariff, legal requirement, weight/size/date-of-service assertion adopted. A postcard can travel without an envelope; electronic letters are outside the proposed sense.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    },
+    {
+      "id": "posta-myletter",
+      "url": "https://www.posta-romana.ro/a1127/servicii-expeditori/servicii-speciale/servicii-postale-speciale/myletter.html",
+      "publisher": "C.N. Poșta Română S.A.",
+      "kind": "primary original postal operator envelope use",
+      "accessed_on": "2026-10-07",
+      "access": "OPEN actual link53 from domestic correspondence page; lines443–447 and480–484. Earlier guessed a1317 URL failed and was not evidence.",
+      "supports": "MyLetter explicitly offers personalized paper envelopes for correspondence/invitations.",
+      "scope_limits": "A concrete correspondence/envelope use, not proof that all letters require envelopes or that generic physical-letter owners already exist in the KG.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    },
+    {
+      "id": "geonaute-magnetic-north",
+      "url": "https://www.decathlon.ro/p/busola-cursa-de-orientare-sau-drumetie-portocaliu-explorer-500/_/R-p-303520",
+      "publisher": "Decathlon / Geonaute",
+      "kind": "primary own-brand manufacturer Romanian use and magnetic correction",
+      "accessed_on": "2026-10-07",
+      "access": "OPEN HTML text; navigation lines83–88 and magnetic-declination lines103–106.",
+      "supports": "The instructions align the magnetic needle with north; magnetic declination is the angle between magnetic north and map geographic north.",
+      "scope_limits": "Qualified magnetic navigation-compass sense. Do not claim exact geographic north, literal pointing to the geographic pole, universal correctness near interference, or equate the compass with drawing Compas or GPS. Numeric/local declination not adopted.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    },
+    {
+      "id": "corint-school-lead",
+      "url": "https://manuale.edituracorint.ro/2023/fizica_VI/files/basic-html/page90.html",
+      "publisher": "Editura Corint",
+      "kind": "original publisher school recognition/counterclaim lead",
+      "accessed_on": "2026-10-07",
+      "access": "SEARCH INDEX exposed original-publisher full text including magnetic/geographic distinction, but direct HTML open failed internal error. Original PDF https://www.manuale.edituracorint.ro/2023/fizica_VI.pdf failed tool10MiB limit. NOT independently direct-access verified.",
+      "supports": "Indexed gradeVI physics material discusses compass, magnetic field and geographic/magnetic distinction.",
+      "scope_limits": "Recognition lead only; not installation support. Associated geography interactive page opened only a browser active-content notice. No indexed paragraphs copied or asserted as a directly opened manual.",
+      "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+    }
+  ],
+  "records": [
+    {
+      "lead_id": "v17-object-01",
+      "label_ro": "Tocător",
+      "sense": "Physical flat household chopping board; powered chopper/industrial cutter/person senses excluded. Display/alias qualification unresolved.",
+      "state": "researched_unselected",
+      "novelty": "Potential shared-KG adoption of an already represented physical-board Contexto term, not globally new lexicon or a synonym. No new shared owner exists; actual served typed-input acceptance remains untested in this worker.",
+      "existing_projection": {
+        "public_id": "ctxp_7687de8a10648bdf4e3c",
+        "surface": "tocător de bucătărie",
+        "key": "tocator de bucatarie",
+        "anchor_id": "n_v29_kitchen_table_cutit",
+        "domain": "ustensile de bucătărie",
+        "mapping_kind": "explicit",
+        "rank_penalty": 0
+      },
+      "source_facts": [
+        {
+          "claim": "Chopping board and knife are functional counterparts in food preparation.",
+          "sources": [
+            "ikea-knife-manual",
+            "ikea-board-vegetables"
+          ]
+        },
+        {
+          "claim": "Some chopping boards are made of solid tree wood; other models are plastic.",
+          "sources": [
+            "ikea-board-wood",
+            "ikea-board-plastic-cheese"
+          ]
+        },
+        {
+          "claim": "Vegetables can be cut on a board.",
+          "sources": [
+            "ikea-board-vegetables"
+          ]
+        },
+        {
+          "claim": "Some boards can optionally serve cheese.",
+          "sources": [
+            "ikea-board-plastic-cheese"
+          ]
+        }
+      ],
+      "finite_incident_hypotheses": [
+        {
+          "existing_id": "n_v29_kitchen_table_cutit",
+          "category": "gastronomie",
+          "direction_hypothesis": "Cuțit→new chopping board",
+          "caption_hypothesis": "se poate folosi pe",
+          "meaning": "Knife use on a board; proposed reverse caption would need separate exact review.",
+          "sources": [
+            "ikea-knife-manual"
+          ]
+        },
+        {
+          "existing_id": "n_v1_3_material_lemn",
+          "category": "viata_de_roman",
+          "direction_hypothesis": "new chopping board→Lemn",
+          "caption_hypothesis": "unele modele sunt din",
+          "meaning": "Existential material link only, not universal wooden composition.",
+          "sources": [
+            "ikea-board-wood",
+            "ikea-board-plastic-cheese"
+          ]
+        },
+        {
+          "existing_id": "n_v4gas_legume",
+          "category": "gastronomie",
+          "direction_hypothesis": "Legume→new chopping board",
+          "caption_hypothesis": "se pot tăia pe",
+          "meaning": "Preparation surface, not generic kitchen co-occurrence.",
+          "sources": [
+            "ikea-board-vegetables"
+          ]
+        },
+        {
+          "existing_id": "n_v2gas_branza",
+          "category": "gastronomie",
+          "direction_hypothesis": "Brânză→new chopping board",
+          "caption_hypothesis": "se poate servi pe",
+          "meaning": "Optional cheese serving supported by a concrete board; possible broad/generic serving association needs adversarial quality scrutiny.",
+          "sources": [
+            "ikea-board-plastic-cheese"
+          ]
+        }
+      ],
+      "floor_qualification": "These four distinct existing endpoints are finite supported facts, with3gastronomie neighbors if the eventual board is honestly categorised gastronomie. This is NOT a reviewed4incident/2same-category proof: proposed sense/label/directions/strengths are not frozen, optional serving may be editorially weak, no graph transaction exists. Do not add generic Casa/Bucătărie or multiple vegetables to pad a floor.",
+      "recognition": "Romanian manufacturer board labels/use and contrasting powered-chopper wording observed. Population recognition, pre2010 cross-generation evidence and original Academy semantic entry remain unqualified.",
+      "play_hypotheses": [
+        "Controlled Lanț input/step such as vegetables→board→wood may be legible if actual ordinary selection and alternative routes support it; NOT RUN.",
+        "A pair knife–board has plausible competition with knife–bread, knife–vegetables and cheese–board. No unique Perechi arrangement approved.",
+        "Verify actual native acceptance/identity of the serialized Contexto term, then compare complete current proxy feedback across every target before any explicit retirement/migration. Bare Tocător unknown/fuzzy behavior and label-only UI search not tested."
+      ],
+      "risks": [
+        "Current ctxp_7687 proxy already anchors Cuțit with penalty0; scoped migration/retirement and preservation of old feedback required.",
+        "Bare tocător is used by an original manufacturer for a powered kitchen chopper. No ambiguous alias or synonym approval.",
+        "Only3prospective incoming neighbors in shown hypotheses, so no new Cald target approval; outgoing wooden-material link cannot supply incoming5.",
+        "Topology can change routes/ranks/SCC and latent crafting; unchanged or warmer feedback is not promised.",
+        "Do not use unspecified board-treatment oil as edible Ulei.",
+        "Bread image/serving evidence is not separately approved slicing-on-board evidence."
+      ],
+      "next_action": "Independent source/sense/editorial screening, refresh root exact identities, then decide whether actual proxy migration and four nonpadding useful relations justify a bounded candidate. Remain unselected until exact handoff."
+    },
+    {
+      "lead_id": "v17-link-01",
+      "label_ro": "Scrisoare→Plic",
+      "sense": "Physical paper correspondence and postal envelope; exclude email, named literary works, soup/seed sachets and wedding-money metonymy.",
+      "state": "held",
+      "novelty": "Not a candidate existing-node edge: generic Scrisoare and Plic owners are absent.",
+      "prior_record": {
+        "path": "docs/content-pool/v1-5-discovery-i03/pool.json",
+        "id": "i03-office-04",
+        "revision": 1,
+        "state": "held",
+        "retained_reason": "One strong existing postal owner; generic Scrisoare/Timbru/Hârtie absent; no4/2; no current legal/numerical claim."
+      },
+      "source_facts": [
+        {
+          "claim": "Physical letters are a correspondence category separate from electronic delivery; postal envelope packaging is recognized.",
+          "sources": [
+            "posta-domestic"
+          ]
+        },
+        {
+          "claim": "Personalized paper envelopes are offered for correspondence.",
+          "sources": [
+            "posta-myletter"
+          ]
+        }
+      ],
+      "predicate_hypothesis": "Physical letter→postal envelope: se poate trimite într-un. Do not say every letter must use an envelope; postcards and electronic letters provide clear scope boundaries.",
+      "recognition": "Original Romanian postal operator uses ordinary letter/envelope terminology. Broad player familiarity and independent2signal/cross-generation evidence not measured.",
+      "play_hypotheses": [
+        "A future correspondence pair/route could be tested in its own bounded cluster after real owners are qualified. NOT RUN; no literary title-token or Poșta universal pairing approved."
+      ],
+      "next_action": "Preserve hold; no unchanged same-owner arc hunt. A separate correspondence-cluster scope with independently sourced real4/2incident neighbors for each new owner would be needed. No owner invented."
+    },
+    {
+      "lead_id": "v17-link-02",
+      "label_ro": "Busolă→Nord",
+      "sense": "Magnetic navigation compass and qualified magnetic-north direction; distinguish geographic north, drawing Compas, GPS and pole identities.",
+      "state": "held",
+      "novelty": "Not a candidate existing-node edge: generic Busolă and Nord owners are absent.",
+      "prior_record": {
+        "path": "docs/content-pool/v1-5-discovery-i03/pool.json",
+        "id": "i03-outdoor-01",
+        "revision": 1,
+        "state": "held",
+        "retained_reason": "One supported incident owner(Hartă); no4/2 or target approval; historical/projection screen incomplete."
+      },
+      "source_facts": [
+        {
+          "claim": "The own-brand manufacturer describes magnetic needle/north alignment and distinguishes magnetic north from map geographic north by declination.",
+          "sources": [
+            "geonaute-magnetic-north"
+          ]
+        }
+      ],
+      "predicate_hypothesis": "Qualified compass→qualified magnetic north: acul indică direcția nordului magnetic. Bare Nord might denote cardinal/geographic direction; absent owner cannot be given a magnetic sense silently.",
+      "recognition": "Original Romanian product/use copy directly opened. Indexed original Corint gradeVI material is a school-recognition lead; direct manual access failed, so it is not promoted to verified secondary support.",
+      "play_hypotheses": [
+        "A map/orientation route could be tested only after actual owner/neighbor qualification. GPS–Hartă and compass–map compete in pairs. NOT RUN; no ordinary play promise."
+      ],
+      "risks": [
+        "Magnetic declination/interference make exact geographic-north claim false.",
+        "Generic Nord absent; no new magnetic-direction node invented merely to accommodate caption.",
+        "Existing drawing Compas is not synonymous with Busolă.",
+        "School-index text and inaccessible PDF cannot clear source access/recognition gates."
+      ],
+      "next_action": "Preserve hold. Do not repeat unchanged absent-owner arc search or create artificial compass geographic fan-out. More cluster scope requires materially new real endpoint evidence."
+    }
+  ],
+  "results": {
+    "researched_unselected": 1,
+    "held": 2,
+    "new_shared_concepts_installed": 0,
+    "new_world_concepts_installed": 0,
+    "synonym_families_approved": 0,
+    "forms_approved": 0,
+    "links_installed": 0,
+    "curated_rounds_approved": 0,
+    "runtime_probes": "NOT RUN",
+    "factual_or_quality_adoption": "NOT GRANTED"
+  },
+  "access_failures": [
+    {
+      "url": "https://manuale.edituracorint.ro/2023/fizica_VI/files/basic-html/page89.html",
+      "status": "Direct open internal error; not evidence."
+    },
+    {
+      "url": "https://manuale.edituracorint.ro/2023/fizica_VI/files/basic-html/page90.html",
+      "status": "Original-publisher text visible in search index; direct open internal error; indexed only."
+    },
+    {
+      "url": "https://www.manuale.edituracorint.ro/2023/fizica_VI.pdf",
+      "status": "Direct fetch refused10MiB tool size limit; no downloaded PDF or page proof."
+    },
+    {
+      "url": "https://manuale2022.edituracorint.ro/Manual_Geografie_5/index.html",
+      "status": "Opened only active-content-blocked notice; search terms are leads, not direct verified lesson."
+    },
+    {
+      "url": "https://www.posta-romana.ro/a1317/servicii-expeditori/servicii-speciale/myletter.html",
+      "status": "Guessed URL failed; replaced by actual operator link53 URL."
+    },
+    {
+      "url": "https://www.ikea.com/ro/ro/manuals/ikea-cutit-decojit__AA-1436920-4_pub.pdf",
+      "status": "PDF text opened; subsequent screenshot zero-based40 failed cache miss; no visual proof claimed."
+    }
+  ],
+  "verification_limits": [
+    "No native docs, supported generator, gameplay, fuzzy query, topology profile, target selection, recipe/save-history or independent factual/quality approval was executed by this worker.",
+    "This file is authored source research and must not be treated as installation or ordinary-game benefit evidence.",
+    "All original holds remain; no fixture/bundle/source/catalogue mutation."
+  ],
+  "report_revision_history": [
+    {
+      "at_utc": "2026-10-07T19:43:02.171995+00:00",
+      "previous_sha256": "690a37d1e75ff8731598cbed96856847abd0bd852372d2c717851bd1edfec179",
+      "event": "Root-requested precise Contexto descriptor provenance: source is sealed contexto_data/projection_terms, not normalized_index or empty alchimie_projections; runtime verification explicitly pending."
+    }
+  ]
+}

@@ -38,3 +38,29 @@ Keep all prior failures; never reset failed clocks, retry unchanged refused guar
 Only supported accepted transactions/builders may alter graph/catalogues. Freeze runtime before fresh installed audits/finals,
 refresh all affected corpus/history/export/authority bindings and finish exact assembled acceptance before landing.
 Later versions land locally; further pushing/deployment requires explicit authorization. The existing heartbeat is active until human stop.
+
+## First six-lead source iteration
+
+[Source admission](source-screen-admission-r1.json) and [stop](source-screen-stop-r1.json) preserve the original clock:
+all substantive report writes ended19:46:13UTC before19:47:02cutoff; stop metadata19:48:57 was before19:50:02deadline.
+The first stop writer incorrectly compared its own metadata time to the source cutoff and failed before writing;
+the correction records actual report mtimes and the original absolute deadline, without renewing either.
+Source worker/browser peak RSS was not measured; no whole-source memory qualification is claimed.
+
+The [durable pool](../../content-pool/v1-7-recognizable-content/pool.json) has2researched/4held,0selected/0installed.
+[Identity/deck screen](identity-deck-screen-r1.json), [recipe sources](primary-recipe-sources-r1.json),
+[object/link sources](primary-object-link-sources-r1.json) and [leafă refresh](primary-leafa-refresh-r1.json) bind exact evidence.
+Compot and Sandviș already own the proposed recipes; missing generic letter/compass owners and old holds prevent arcs.
+Leafă retains periodic employee-pay evidence and current dictionary web-tool access gaps;51 nearby static approved
+Cald targets are only planning evidence. No native selected case, actual unknown/fuzzy/confirmation or benefit proof exists.
+Tocător de bucătărie is already a guess-only descriptor ctxp_7687de8a10648bdf4e3c, explicitly anchored Cuțit with penalty0.
+Its actual sealed location is contexto_data/projection_terms[73], separately corroborated by the authored reference table;
+base normalized_index and top-level alchimie_projections are different namespaces. Native input/prospective effects are unrun.
+Four scoped facts (knife, some wooden models, vegetables, optional cheese serving) do not grant4/2 or adoption approval.
+Physical-board/electric-chopper ambiguity, cheese-serving genericity and explicit proxy retirement/migration remain open.
+Current owner absence never proves a rejected guess. Preserve all original citations/access/licenses/counterexamples.
+
+The next finite investigation should establish an ordinary useful leafă case or resolve the Tocător proxy/design blockers.
+No Source7, candidate module, selected snapshot, raw installation judgment or game-data change is present.
+
+[Independent research-quality receipt](research-quality-review-r1.json) accepts only the research checkpoint:2researched/4held, zero readiness/selection/adoption. Prioritize a finite ordinary native leafă/salariu case. Frozen R1 identity old-pool substring matching has a nonblocking Plic←explicit false positive; that hit is not a real Plic hold. Actual prior i03Plic hold remains separately sourced; use exact token/phrase boundaries in a future versioned screen, never silently rebind R1.
