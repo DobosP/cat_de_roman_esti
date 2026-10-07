@@ -213,3 +213,13 @@ approval-free candidate generation, World/Quick before Extensions, fresh audits/
 finals after each binding change, and fresh final installed authority after runtime freeze.
 Use that plan and current operator schemas; do not bypass predecessors or reinterpret
 research adapters as sealed exports. All installed Source5 data remains unchanged.
+
+
+The first controls checkpoint commit66d43a5 incorrectly continued after a staged whitespace
+failure (one extra trailing blank line in the new Lanț method view). Main was not merged.
+[Reconciliation](method-eof-reconciliation-r1.json) preserves the exact reviewed/executed
+aa8dc4f1… bytes in a lossless archive and Git66d43a5; the readable view removes only one
+final LF. Earlier method/execution/quality hashes remain bound to those original bytes,
+not silently repinned. The [independent reconciliation review](method-eof-review-r1.json)
+checks this relation. The follow-up uses fail-fast default working/staged whitespace and
+native documentation checks. No engine assertion, fixture or runtime byte changes.

@@ -1669,3 +1669,10 @@ plus36numbered/8invalid controls. Original numbered-only terminal semantics pres
 Independent4149550d accepts exact rawgraphquality for supported staging, not Source6 or
 installation. Fresh Ulei concept/source catalog/audit/history/currentauthority/fullrelease
 checks remain; inspected actual operator sequence saved. Installed Source5 remains exact.
+
+
+Controls persistence correction: staged whitespace rejected a trailing blank line in the
+archived Lanț source view, but a non-fail-fast shell continued to commit66d43a5. No mainmerge.
+Exact tested/reviewed aa8dc4f1 bytes retained in lossless archive/Git; currentview removes
+only one LF. Review hashes remain historical exact bindings. Follow-up must pass default
+working/staged diff checks with set-e; no data/assertion/runtime change or old failure erased.

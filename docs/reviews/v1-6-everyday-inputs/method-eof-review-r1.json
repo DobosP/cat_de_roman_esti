@@ -1,0 +1,59 @@
+{
+  "schema": "v1-6-method-eof-review-r1",
+  "reviewer": "independent source-only provenance reviewer",
+  "reviewed_at_utc": "2026-10-07T00:49:19Z",
+  "verdict": "accept_lossless_tested_method_preservation_and_whitespace_only_view",
+  "blockers": [],
+  "scope": "Static comparison of the archived tested bytes, exact Git object and current readable Lanț method. No native, toolchain, test, browser or game execution.",
+  "bindings": {
+    "reconciliation_receipt": {
+      "path": "docs/reviews/v1-6-everyday-inputs/method-eof-reconciliation-r1.json",
+      "sha256": "2da47c065afee544cfa99a0d893d28ecea4c3847e43cd00511528d612bd9d754"
+    },
+    "source_admission": {
+      "path": "docs/reviews/v1-6-everyday-inputs/method-eof-repair-admission-r1.json",
+      "sha256": "edb7975b03ee9134755948b7e3415a2b05e1d4d54c2a13e811611500295882c0"
+    },
+    "tested_method": {
+      "sha256": "aa8dc4f1694233e1ee27adf7aa248b11d1d1700cf00b169b3b06b7851373733a",
+      "bytes": 9825,
+      "git_reference": "66d43a512c7cced5c61a91dc45e67ad808e124c4:docs/reviews/v1-6-everyday-inputs/methods/native_lant_controls_test.go.txt",
+      "lossless_archive": "docs/reviews/v1-6-everyday-inputs/methods/native_lant_controls_tested_r1.go.txt.gz",
+      "archive_sha256": "dc717f4f9d381bf4b0fd597c5719a500469e1c6477ece95c91760a83b3756985"
+    },
+    "current_readable_view": {
+      "path": "docs/reviews/v1-6-everyday-inputs/methods/native_lant_controls_test.go.txt",
+      "sha256": "f46cc23db1248fe0a6b6622e7aaa5f1e2ff5838b325d423749740d90c98c628e",
+      "bytes": 9824
+    },
+    "prior_method_review_sha256": "e50be9eb9e58994ca19c423b163d0b238760519979002782edd52d9591cf90b9",
+    "flag_repair_review_sha256": "87fd03fd080d51529a153cf79399fe6c5325956d9165167be5c2317d19640257",
+    "execution_summary_sha256": "4c7f94dbea10d169ba0831d9b6bff70de494fb71699902ff5a897e3de2ee2494",
+    "actual_control_quality_review_sha256": "4149550d7b4c413a1faba095bf337d14035e42ed0d81c5c2d0467a78c1b2e53c"
+  },
+  "independent_verification": {
+    "decompressed_archive_equals_exact_git_object": true,
+    "decompressed_archive_sha256_equals_tested_method_sha256": true,
+    "exact_git_object_sha256_equals_tested_method_sha256": true,
+    "current_view_plus_one_final_LF_equals_tested_bytes": true,
+    "current_view_retains_one_terminal_LF": true,
+    "tested_method_has_two_terminal_LFs": true,
+    "other_byte_changes": 0,
+    "go_token_or_assertion_changes": 0
+  },
+  "judgment": [
+    "The one removed byte is a blank line after the method's final closing brace. All Go source tokens, comments, assertions and test behavior are unchanged. No engine rerun is required for this readable-view whitespace correction.",
+    "The original aa8dc4f method remains exactly recoverable from both the lossless archive and named Git object. The prior method reviews and actual-control quality review still bind aa8dc4f, and the execution summary still binds those original reviews. No historical hash is silently repinned to f46cc23.",
+    "Existing exact evidence remains valid for the prior execution of the original bytes, with its existing research and qualification limits. This reconciliation is not a new execution or new quality judgment. Readers resolving the old path/hash pair should use the named archive or Git object for the historical bytes.",
+    "The recorded staged whitespace-gate failure and commit despite that failure remain process-failure history. Provenance preservation does not retroactively make that gate pass or authorize landing. Subsequent commit blocks must fail immediately on any nonzero check, as recorded by the orchestrator."
+  ],
+  "limits": "No runtime, fixture, candidate, source-authority or content behavior change is reviewed or authorized here. Existing installation and qualification boundaries remain. This review neither reruns nor independently rejudges the native game observations.",
+  "review_execution": {
+    "native_or_test_execution": 0,
+    "runtime_fixture_pool_or_method_edits": 0,
+    "commits": 0,
+    "sole_written_file": "docs/reviews/v1-6-everyday-inputs/method-eof-review-r1.json",
+    "max_bytes": 6144
+  },
+  "valid_until": "Any bound archive, historical evidence, Git object identity or current readable-view bytes change."
+}
