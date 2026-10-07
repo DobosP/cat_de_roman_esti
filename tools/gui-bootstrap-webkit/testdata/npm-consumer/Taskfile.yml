@@ -1,0 +1,6 @@
+version: '3'
+tasks:
+  deps:
+    desc: Create the isolated consuming lock through npm only, offline.
+    cmds:
+      - npm install --package-lock-only --ignore-scripts --workspaces=false --offline --allow-remote=none --no-audit --no-fund

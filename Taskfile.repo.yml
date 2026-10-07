@@ -1,0 +1,39 @@
+version: "3"
+silent: true
+tasks:
+  kit-config:
+    cmds:
+      - node --input-type=module -e 'process.stdout.write("{\"role\":\"consumer\",\"app\":\"cat_de_roman_esti\",\"npm_dir\":\"tools/gui-bootstrap-webkit\",\"vendor_dir\":\"frontend/vendor\",\"go_dirs\":[\"go-backend\"]}")'
+  setup:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:setup hook before execution; no successful bootstrap stub')"
+  deps:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:deps hook before execution; no successful bootstrap stub')"
+  gen:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:gen hook before execution; no successful bootstrap stub')"
+  unit:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:unit hook before execution; no successful bootstrap stub')"
+  full:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:full hook before execution; no successful bootstrap stub')"
+  build:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:build hook before execution; no successful bootstrap stub')"
+  baseline:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:baseline hook before execution; no successful bootstrap stub')"
+  assets-sync:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:assets-sync hook before execution; no successful bootstrap stub')"
+  legacy-freeze:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:legacy-freeze hook before execution; no successful bootstrap stub')"
+  e2e:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:e2e hook before execution; no successful bootstrap stub')"
+  perf:
+    cmds:
+      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:perf hook before execution; no successful bootstrap stub')"

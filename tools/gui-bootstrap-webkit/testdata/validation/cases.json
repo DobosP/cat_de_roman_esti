@@ -1,0 +1,10 @@
+{
+  "scoped": "import React from 'react'; export { createPortal } from 'react-dom/client'; const lazy = import /* comment */ ('react-router-dom'); const c = require('preact/compat');\n",
+  "unscoped": "import { useState } from 'react';\n",
+  "clean": "export const greeting = 'import React from react';\n",
+  "v11": "import React, {forwardRef} from 'react'; const C = forwardRef(() => <div style='color:red' onclick='bad()'>x</div>);\n",
+  "compat": "{\"compilerOptions\": {\"paths\": {\"react\": [\"preact/compat\"]}}}",
+  "unsafeCompat": "{\"compilerOptions\": {\"baseUrl\": \".\", \"paths\": {\"react\": [\"preact/compat\"]}}}",
+  "escaped": "import React from '\\u0072eact';\n",
+  "inlineDisable": "// eslint-disable-next-line no-restricted-imports\nimport React from 'react';\n"
+}

@@ -1,0 +1,27 @@
+{
+  "plugins": [
+    "typescript"
+  ],
+  "rules": {
+    "no-debugger": "error",
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          "react",
+          "react-dom*",
+          "react-router*",
+          "preact/compat*",
+          "framer-motion",
+          "@types/react*"
+        ]
+      }
+    ],
+    "typescript/no-floating-promises": [
+      "error",
+      {
+        "ignoreVoid": true
+      }
+    ]
+  }
+}

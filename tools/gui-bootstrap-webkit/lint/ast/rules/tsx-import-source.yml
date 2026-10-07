@@ -1,0 +1,27 @@
+{
+  "id": "roedu-tsx-import-source",
+  "language": "Tsx",
+  "severity": "error",
+  "message": "import-source",
+  "rule": {
+    "all": [
+      {
+        "kind": "string"
+      },
+      {
+        "inside": {
+          "any": [
+            {
+              "kind": "import_statement"
+            },
+            {
+              "kind": "export_statement"
+            }
+          ],
+          "stopBy": "neighbor",
+          "field": "source"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+version: '3'
+silent: true
+# Repo-owned hooks are not replaced by kit:sync. Fill them before first adoption.
+# repo:kit-config may omit ui_adoption (active). Native E1 permits only Cat to
+# append the complete staged-react/S1-M2/legacy seal from CORE-PATCH-1; never emit
+# null or an explicit active object. Original-runtime receipt qualification and
+# requireActiveUi at S1-M2 are mandatory; a pending label is not acceptance.
+vars:
+  KIT_NPM_DIR: frontend/node_modules/@roedu/web-kit
+  KIT_VENDOR_DIR: frontend/vendor
+  KIT_GO_DIRS: []
+tasks:
+  kit-config:
+    desc: Required consumer kit-config hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the kit config')"
+  setup:
+    desc: Required consumer setup hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:setup hook with actual checks')"
+  unit:
+    desc: Required consumer unit hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:unit hook with actual checks')"
+  full:
+    desc: Required consumer full hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:full hook with actual checks')"
+  gen:
+    desc: Required consumer gen hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:gen hook with actual checks')"
+  deps:
+    desc: Required consumer deps hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:deps hook with actual checks')"
+  assets-sync:
+    desc: Required consumer assets-sync hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:assets-sync hook with actual checks')"
+  build:
+    desc: Required consumer build hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:build hook with actual checks')"
+  baseline:
+    desc: Required consumer baseline hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:baseline hook with actual checks')"
+  legacy-freeze:
+    desc: Required consumer legacy-freeze hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:legacy-freeze hook with actual checks')"
+  e2e:
+    desc: Required consumer e2e hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:e2e hook with actual checks')"
+  perf:
+    desc: Required consumer perf hook
+    cmds:
+      - node --input-type=module -e "throw Error('fill in the repo:perf hook with actual checks')"

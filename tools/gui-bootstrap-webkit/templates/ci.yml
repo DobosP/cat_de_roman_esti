@@ -1,0 +1,143 @@
+# Reviewed CI execution variant; native clean wrapper/full remains release authority.
+# Primary release: https://github.com/actions/checkout/releases/tag/v7.0.1 (2026-07-20)
+# Primary release: https://github.com/actions/upload-artifact/releases/tag/v7.0.1
+name: RO-EDU core source qualification
+'on':
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: roedu-core-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  unit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Checkout exact event source
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          clean: false
+      - name: Build capped fresh image and qualify explicit CI execution copy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I - <<'ROEDU_CI'
+          import copy, hashlib, json, os, pathlib, re, shutil, stat, subprocess, sys, time
+          source=pathlib.Path(os.environ['GITHUB_WORKSPACE']).resolve()
+          run=os.environ['GITHUB_RUN_ID']; attempt=os.environ['GITHUB_RUN_ATTEMPT']
+          if not run.isdigit() or not attempt.isdigit(): raise SystemExit('Invalid CI run identity')
+          scratch=pathlib.Path(os.environ['RUNNER_TEMP'])/f'roedu-core-ci-{run}-{attempt}'
+          scratch.mkdir(); execution=scratch/'execution'; evidence=scratch/'evidence'; evidence.mkdir()
+          builder=f'roedu-gates-ci-{run}-{attempt}'; image=f'roedu-toolchain:ci-{run}-{attempt}'
+          def command(args, **kwargs):
+              return subprocess.run(args, check=True, text=True, **kwargs)
+          def output(args): return command(args,stdout=subprocess.PIPE).stdout.strip()
+          def digest(data): return hashlib.sha256(data).hexdigest()
+          ignored={'.git','node_modules','.gate','.vitest','dist','test-results'}
+          metadata={'TASK_BRIEF.md','TASK_RESULT.md','SWARM_RESULT.md'}
+          def skip(name): return name in ignored or name in metadata or name=='.env' or name.startswith('.env.')
+          def protected(relative):
+              return relative in {'budgets.json','scripts/gate.sh','compose.gate.yml','Taskfile.yml','.gate.env','Dockerfile.toolchain','versions.lock.json','Taskfile.repo.yml','engine.json','.gitattributes','AGENTS.md','docs/PROGRAM.md','.agent/PLANS.md'} or relative.startswith(('.codex/','kit/','legacy/','web-kit/templates/','web-kit/schemas/')) or '/baselines/' in '/'+relative or re.search(r'(^|/)testdata/golden[^/]*/',relative) or '/golden/testdata/' in '/'+relative or relative.endswith('/internal/contract/assets.json') or relative.endswith('/engine.json') or relative in {'lint/scope.json','kit.lock.json'}
+          def snapshot(directory, only_protected=False):
+              files=[]
+              for base,dirs,names in os.walk(directory,followlinks=False):
+                  dirs[:]=sorted(name for name in dirs if not skip(name))
+                  for name in dirs+names:
+                      if skip(name): continue
+                      path=pathlib.Path(base)/name; relative=path.relative_to(directory).as_posix()
+                      if path.is_symlink(): raise RuntimeError('CI source symlink refused')
+                      if path.is_file() and (not only_protected or protected(relative)): files.append((relative,path))
+              value=hashlib.sha256()
+              for relative,path in sorted(files):
+                  mode=b'x' if path.stat().st_mode&0o111 else b'-'
+                  value.update(os.fsencode(relative)+b'\0'+mode+b'\0'+hashlib.sha256(path.read_bytes()).digest())
+              return value.hexdigest()
+          sha=output(['git','-C',str(source),'rev-parse','HEAD'])
+          if not re.fullmatch('[a-f0-9]{40}',sha): raise RuntimeError('Actual checked out SHA required')
+          if output(['git','-C',str(source),'status','--porcelain']): raise RuntimeError('CI checkout must start clean')
+          source_tree=snapshot(source); original_lock_bytes=(source/'versions.lock.json').read_bytes(); original_env_bytes=(source/'.gate.env').read_bytes()
+          lock=json.loads(original_lock_bytes); dockerfile=(source/'Dockerfile.toolchain').read_bytes()
+          args={}
+          for entry in lock['tools']:
+              if entry.get('build_arg'):
+                  key=entry['build_arg']; value=entry.get('build_arg_value',entry.get('version'))
+                  if key in args or not isinstance(value,str) or not value or '\n' in value: raise RuntimeError('Invalid/duplicate locked build argument')
+                  args[key]=value
+              if entry.get('build_arg_sha256'):
+                  key=entry['build_arg_sha256']; value=entry.get('sha256_linux_x64',entry.get('sha256_linux_amd64'))
+                  if key in args or not re.fullmatch('[a-f0-9]{64}',value or ''): raise RuntimeError('Checksum build argument required')
+                  args[key]=value
+          declared_args=[name.removesuffix(' (tag@digest)') if name=='PLAYWRIGHT_IMAGE (tag@digest)' else name for name in lock['toolchain_image']['build_args']]
+          if len(set(declared_args))!=len(declared_args) or set(args)!=set(declared_args): raise RuntimeError('Locked toolchain build argument inventory differs')
+          pw=next(entry for entry in lock['tools'] if entry['tool']=='playwright-image')
+          if args['PLAYWRIGHT_IMAGE']!=f"{pw['version']}@{pw['digest']}": raise RuntimeError('Frozen Playwright index binding required')
+          for key,value in args.items():
+              match=re.search(rb'^ARG '+key.encode()+rb'=(.*)$',dockerfile,re.M)
+              if not match or (match[1].decode()!=value and not(key=='PG_MAJOR' and match[1]==b'__PROD_PG_MAJOR__')): raise RuntimeError('Recipe/default differs from locked build argument')
+          provenance={'schema':1,'kind':'ci-execution-variant','source_sha':sha,'source_tree_sha256':source_tree,'source_versions_lock_sha256':digest(original_lock_bytes),'source_gate_env_sha256':digest(original_env_bytes),'dockerfile_sha256':digest(dockerfile),'parent_toolchain_image':lock['toolchain_image'],'playwright_index':args['PLAYWRIGHT_IMAGE'],'build_args':args,'limits':{'builder_cpu':8,'builder_memory_bytes':10*1024**3,'unit_cpu':4,'unit_memory_bytes':6*1024**3},'release_authority':'native clean wrapper full and parent release; CI variant is separate automated source qualification'}
+          status=1; owned_builder=False
+          try:
+              command(['docker','buildx','create','--name',builder,'--driver','docker-container','--driver-opt','memory=10g','--driver-opt','memory-swap=10g','--driver-opt','cpu-period=100000','--driver-opt','cpu-quota=800000','--bootstrap']); owned_builder=True
+              caps=json.loads(output(['docker','inspect',f'buildx_buildkit_{builder}0']))[0]['HostConfig']
+              if caps['Memory']!=10*1024**3 or caps['CpuPeriod']!=100000 or caps['CpuQuota']!=800000: raise RuntimeError('BuildKit cap inspection failed')
+              if subprocess.run(['docker','image','inspect',image],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0: raise RuntimeError('CI image tag already exists; never rebuild a tag')
+              build=['docker','buildx','build','--builder',builder,'--platform','linux/amd64','--load','--no-cache','-f',str(source/'Dockerfile.toolchain'),'-t',image]
+              for key in declared_args: build.extend(['--build-arg',f'{key}={args[key]}'])
+              build.append(str(source)); command(build)
+              actual_id=output(['docker','image','inspect','--format','{{.Id}}',image])
+              if not re.fullmatch('sha256:[a-f0-9]{64}',actual_id): raise RuntimeError('Fresh immutable CI image ID required')
+              shutil.copytree(source,execution,ignore=lambda directory,names:[name for name in names if skip(name)],symlinks=True)
+              if snapshot(execution)!=source_tree: raise RuntimeError('Initial execution copy differs from original source')
+              env_text=original_env_bytes.decode()
+              for key,value in [('TOOLCHAIN_IMAGE',image),('TOOLCHAIN_DIGEST',actual_id)]:
+                  if len(re.findall(r'^'+key+r'=',env_text,re.M))!=1: raise RuntimeError('Unique toolchain env lines required')
+                  env_text=re.sub(r'^'+key+r'=[^\r\n]*',key+'='+value,env_text,flags=re.M)
+              (execution/'.gate.env').write_text(env_text)
+              execution_lock=copy.deepcopy(lock); execution_lock['toolchain_image']['version']=image; execution_lock['toolchain_image']['image_id']=actual_id
+              # Only two identity fields differ as data; no tool/version/floor/exception is changed.
+              restored=copy.deepcopy(execution_lock); restored['toolchain_image']['version']=lock['toolchain_image']['version']; restored['toolchain_image']['image_id']=lock['toolchain_image']['image_id']
+              if restored!=lock: raise RuntimeError('Unexpected execution lock changes')
+              execution_lock_bytes=(json.dumps(execution_lock,ensure_ascii=False,indent=2)+'\n').encode(); (execution/'versions.lock.json').write_bytes(execution_lock_bytes)
+              execution_tree=snapshot(execution); protected_before=snapshot(execution,True)
+              provenance.update(actual_image_tag=image,actual_image_id=actual_id,execution_tree_sha256=execution_tree,execution_versions_lock_sha256=digest(execution_lock_bytes),execution_gate_env_sha256=digest((execution/'.gate.env').read_bytes()),gate_dirty=True)
+              docker=['docker','run','--rm','--cpus','4','--memory','6g','--memory-swap','6g','--user',f'{os.getuid()}:{os.getgid()}','--workdir','/work','--mount',f'type=bind,source={execution},target=/work','--env-file',str(execution/'.gate.env')]
+              for key,value in [('GATE_SHA',sha),('GATE_TREE_SHA256',execution_tree),('GATE_DIRTY','true'),('GOMAXPROCS','4'),('GOFLAGS','-p=4'),('GOWORK','off'),('GATE_VERSIONS_RESOLVE','0')]: docker.extend(['--env',f'{key}={value}'])
+              docker.extend([actual_id,'task','gate:unit'])
+              result=subprocess.run(docker); status=result.returncode
+              report_path=execution/'.gate/unit/result.json'
+              if not report_path.is_file(): raise RuntimeError('Actual CI unit result missing')
+              report=json.loads(report_path.read_bytes())
+              for key,value in [('sha',sha),('tree_sha256',execution_tree),('dirty',True),('toolchain_digest',actual_id),('versions_lock_sha256',digest((execution/'versions.lock.json').read_bytes())),('parallel',4)]:
+                  if report.get(key)!=value: raise RuntimeError('CI unit result identity mismatch')
+              if not report.get('checks') or len({row['name'] for row in report['checks']})!=len(report['checks']): raise RuntimeError('Actual distinct CI checks required')
+              if status!=0 or report['status']!='pass' or any(row['status']=='fail' for row in report['checks']): raise RuntimeError('Actual unit gate failed')
+              if snapshot(execution,True)!=protected_before: raise RuntimeError('CI unit mutated protected execution files')
+              provenance.update(unit_result_sha256=digest(report_path.read_bytes()),unit_status=report['status'],execution_tree_sha256_after=snapshot(execution))
+              shutil.copytree(execution/'.gate/unit',evidence/'unit'); status=0
+          except Exception as error:
+              provenance['failure']=str(error); status=1
+          finally:
+              provenance['source_tree_sha256_after']=snapshot(source)
+              provenance['source_unchanged']=provenance['source_tree_sha256_after']==source_tree and (source/'versions.lock.json').read_bytes()==original_lock_bytes and (source/'.gate.env').read_bytes()==original_env_bytes
+              if not provenance['source_unchanged']: status=1
+              if (execution/'.gate/unit').is_dir() and not (evidence/'unit').exists(): shutil.copytree(execution/'.gate/unit',evidence/'unit')
+              (evidence/'ci-provenance.json').write_text(json.dumps(provenance,ensure_ascii=False,indent=2)+'\n')
+              if owned_builder: subprocess.run(['docker','buildx','rm',builder],check=False)
+              summary=os.environ.get('GITHUB_STEP_SUMMARY')
+              if summary:
+                  with open(summary,'a') as stream: stream.write('CI execution variant: '+provenance.get('unit_status','failed')+'\n\nSource tree: '+source_tree+'\n\nExecution tree: '+provenance.get('execution_tree_sha256','unavailable')+'\n\nImage: '+provenance.get('actual_image_id','unavailable')+'\n')
+          sys.exit(status)
+          ROEDU_CI
+      - name: Preserve actual CI unit and image provenance
+        if: always()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: roedu-core-ci-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/roedu-core-ci-${{ github.run_id }}-${{ github.run_attempt }}/evidence/
+          if-no-files-found: error
+          retention-days: 14

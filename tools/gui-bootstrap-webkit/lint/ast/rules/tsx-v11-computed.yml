@@ -1,0 +1,16 @@
+{
+  "id": "roedu-tsx-v11-computed",
+  "language": "Tsx",
+  "severity": "error",
+  "message": "v11-computed",
+  "rule": {
+    "all": [
+      {
+        "kind": "subscript_expression"
+      },
+      {
+        "regex": "\\[\\s*[\"'](forwardRef|defaultProps)[\"']\\s*\\]$"
+      }
+    ]
+  }
+}

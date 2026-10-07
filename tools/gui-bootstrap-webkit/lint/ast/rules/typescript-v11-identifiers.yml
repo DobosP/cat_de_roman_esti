@@ -1,0 +1,23 @@
+{
+  "id": "roedu-typescript-v11-identifiers",
+  "language": "TypeScript",
+  "severity": "error",
+  "message": "v11-identifiers",
+  "rule": {
+    "all": [
+      {
+        "any": [
+          {
+            "kind": "identifier"
+          },
+          {
+            "kind": "property_identifier"
+          }
+        ]
+      },
+      {
+        "regex": "^(forwardRef|defaultProps)$"
+      }
+    ]
+  }
+}

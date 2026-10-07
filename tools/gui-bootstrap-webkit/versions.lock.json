@@ -1,0 +1,789 @@
+{
+  "schema": 2,
+  "_comment": "Linux review seed, verified against primary registries 2026-10-06. No production major, toolchain image ID or owner ACK is filled.",
+  "resolved": "2026-10-06",
+  "policy": {
+    "latest_stable": {
+      "npm": "the `latest` dist-tag (`npm view <pkg> dist-tags.latest`); if `latest` carries a prerelease suffix, the highest non-prerelease semver in `versions`.",
+      "runtime:node": "the highest non-prerelease version in https://nodejs.org/dist/index.json, Current or LTS alike (`lts:false` is allowed; Decision 6 = newest stable). A new major line (e.g. 27.x) is adopted at the next core resolution after its first non-prerelease release, never as an RC or nightly. Node is core-scope, so only a core resolution moves it.",
+      "runtime:go": "newest `go1.X.Y` with `stable:true` at https://go.dev/dl/?mode=json.",
+      "gomod": "https://proxy.golang.org/<module>/@latest (never a pseudo-version or prerelease).",
+      "image": "newest non-prerelease tag of the chosen flavour (trixie / trixie-slim / noble / static-debian13:nonroot), pinned by the multi-arch index digest. Index digest sources: Docker Hub `https://hub.docker.com/v2/repositories/library/<repo>/tags/<tag>` field `digest`; gcr.io and mcr.microsoft.com `curl -fsSI -H 'Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json' https://<registry>/v2/<repo>/manifests/<tag>` header `Docker-Content-Digest`.",
+      "apt": "the version Debian 13 (trixie + trixie-security) installs at build time, checked as a FLOOR (`dpkg --compare-versions <installed> ge <version>`), never as an exact `pkg=ver` pin: superseded Debian versions leave the mirrors and an exact pin breaks the build. The digest-pinned base image is the reproducibility anchor; the installed version is printed in the build log and the SBOM. A Debian security update needs no lock change; raising the floor is a `GATE-CHANGE: versions <tool> floor` commit at any time, not only at M0."
+    },
+    "forbidden_tags": [
+      "next",
+      "rc",
+      "beta",
+      "alpha",
+      "canary",
+      "experimental",
+      "dev",
+      "nightly",
+      "insiders",
+      "preview"
+    ],
+    "forbidden_semver": "any version with a prerelease suffix (e.g. 11.0.0-rc.1, 2.0.0-next.3, 0.0.0-dev); 0.x tools that label themselves beta are excluded (see oxfmt).",
+    "scopes": {
+      "core": "baked into roedu-toolchain:core-vN or a Dockerfile base image, shared by the kit, or a test-runner that screenshot baselines depend on. Re-resolved ONLY by a core session at its M0 (S0a, S0b) or by Paul when he cuts a new `core-v1.N`; an entry with `rebuild: toolchain` moves only together with a Dockerfile.toolchain change and a toolchain image rebuild by Paul (new `image_id`). App sessions never change a core entry: they receive it via `KIT_BUMP` + `task kit:sync`.",
+      "app": "used by the named `apps` only. Re-resolved by that app's session at its M0 and merged on every `KIT_BUMP`. An app session also adds its own other direct npm / Go dependencies here at its M0 as `scope: app` entries.",
+      "environment": "native Linux host packages (docker engine, buildx, host apt). Pinned by Paul (PROGRAM §0.4-2), recorded for reference only; `versions:check` skips them and no session resolves them."
+    },
+    "statuses": {
+      "pinned": "default when absent. Exact match required: package.json (save-exact) and every package-lock.json `packages[\"node_modules/<tool>\"].version`, go.mod `require`, Dockerfile `ARG`/`FROM`, .nvmrc, .gate.env, and the runner's `--version` output for `rebuild: toolchain` entries. Absence is fine unless the entry's `apps` / scope requires the tool.",
+      "optional": "allowed only when needed (reason in `notes`, or in `exception` when it is also held back); if present, exact match as `pinned`.",
+      "transitive-only": "may appear in package-lock.json only as a dependency of the entries named in `dependants`; never in any package.json, never imported (Oxlint `no-restricted-imports` + ast-grep).",
+      "banned": "must be absent from every package.json, package-lock.json and go.mod of the repo (and never imported), from `enforced_from` on. `version` is null; `observed_latest` records what was seen."
+    },
+    "re_resolution_allowed": [
+      "core scope: S0a M0, S0b M0, or Paul cutting `core-v1.N` (with a toolchain rebuild for `rebuild: toolchain` entries)",
+      "app scope: the app session's M0, and the merge done by a `KIT_BUMP: core-v1.N` line in CORE_REQUESTS.md"
+    ],
+    "procedure": {
+      "before_real_resolver": "Read-only stable primary-registry lookups at authorized M0; manifests/seed lock changes only in chore(versions) with source/date/exception record. Bootstrap gen/deps/check explicitly refuse; implement real resolver before milestone acceptance. Never hand-edit package-lock.json/go.sum.",
+      "real_resolver": "Only gen --resolve-versions at M0 or explicit KIT_BUMP resolution request. Runner versions:resolve then deps; exact contract syncback, no environment prefix.",
+      "owner_approval": "Exception approval fields remain null; literal ACK1–6 and production PG/image pins are required before dispatch."
+    },
+    "no_downgrade": "A version lower than the committed lock is forbidden. A lower version, a held-back major, or a peer-conflict workaround is legal only as an `exception` carrying `approved_by` (Paul, with date). Adding a NEW exception, or any lower version, is a hard stop (PROGRAM §5.5: prerelease-only or peer conflict): write the question in the ExecPlan and stop until Paul acknowledges it. A session may only carry an existing exception unchanged, or DROP it when its reason no longer holds (Decision Log line).",
+    "exceptions_rule": "Every `exception` is re-checked at each resolution and dropped as soon as the blocking reason is gone. `approved_by` is mandatory on every exception; an exception without it fails `versions:check` once implemented and fails the reviewer's diff before that.",
+    "enforcement": "`task versions:check` (in gate:unit) is a STUB in the bootstrap Taskfile (it only tests that this file exists) until S0a replaces it; the target is a minimal check in S0a M0 (node script comparing direct deps in package.json/package-lock.json, go.mod, .nvmrc, Dockerfile ARG/FROM lines and the runner's `node --version`/`npm --version`/`go version`/`templ version` with this file), landed as `GATE-CHANGE: versions:check`, and the full check by S0a M5 at the latest. UNTIL it is real, no gate checks this file's CONTENT; the only mechanical touches are the stub's existence test, the `versions_lock_sha256` every gate result.json records, and linux-prereqs.sh (a host prerequisite check, not a gate) comparing `toolchain_image.image_id` with the local image ID and .gate.env `TOOLCHAIN_DIGEST`. So Paul's review diffs versions.lock.json and every package-lock.json/go.mod/.nvmrc/Dockerfile* against this seed at EVERY S0a milestone boundary (`git diff <bootstrap sha> -- versions.lock.json` + downgrade/exception scan). Inside the runner there is no git, so the gate's no-downgrade floor is: in an app repo, the core tag's lock delivered by `kit:sync`; in roedu-ui, the reviewer's diff against the previous core tag.",
+    "kit_sync_merge": "On `KIT_BUMP: core-v1.N`, `task kit:sync` merges the core tag's lock into the app's lock: (1) every `scope: core` and `scope: environment` entry, and `toolchain_image`, is replaced by core's verbatim; an app lock whose core entry is HIGHER than core's is a hard stop (a session moved a core entry), never silently lowered; (2) `scope: app` entries present in both: the higher version wins, ties keep the app entry (its `apps`, `exception`, `approved_by`); (3) app-only entries are kept; core-only `scope: app` entries are dropped unless the app's `apps` is listed; (4) `resolved` = the later date. The merge lands in the `chore(kit): bump to core-v1.N` commit with a Decision Log line per changed entry; `versions:check` then runs in gate:unit.",
+    "kinds": [
+      "npm",
+      "runtime",
+      "gomod",
+      "image",
+      "apt"
+    ],
+    "entry_fields": "tool, kind, scope (core|app|environment), apps (app scope), status (pinned|optional|transitive-only|banned; default pinned), version, released, source, date (resolved), digest (images: multi-arch index digest), build_arg (Dockerfile.toolchain ARG it feeds), rebuild (toolchain = moving it needs an image rebuild), dependants (transitive-only), enforced_from (banned), observed_latest, exception (reason), approved_by (mandatory with exception), notes"
+  },
+  "tools": [
+    {
+      "tool": "preact",
+      "kind": "npm",
+      "scope": "core",
+      "version": "11.0.0",
+      "released": "2026-09-30",
+      "source": "https://registry.npmjs.org/preact/11.0.0",
+      "date": "2026-10-06",
+      "notes": "ESM-only; no compat; v11 lint (PROGRAM §2.3)"
+    },
+    {
+      "tool": "preact-iso",
+      "kind": "npm",
+      "scope": "app",
+      "apps": [
+        "cat_de_roman_esti"
+      ],
+      "version": "2.12.2",
+      "released": "2026-08-11",
+      "source": "https://registry.npmjs.org/preact-iso/2.12.2",
+      "date": "2026-10-06",
+      "notes": "cat only"
+    },
+    {
+      "tool": "@preact/signals",
+      "kind": "npm",
+      "scope": "core",
+      "version": "2.11.3",
+      "released": "2026-09-30",
+      "source": "https://registry.npmjs.org/@preact/signals/2.11.3",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "preact-render-to-string",
+      "kind": "npm",
+      "scope": "core",
+      "version": "6.8.0",
+      "released": "2026-10-01",
+      "source": "https://registry.npmjs.org/preact-render-to-string/6.8.0",
+      "date": "2026-10-06",
+      "notes": "required peer of preact-iso (>=6.4.0); pinned and checked like a direct dependency"
+    },
+    {
+      "tool": "@preact/preset-vite",
+      "kind": "npm",
+      "scope": "core",
+      "version": "2.10.6",
+      "released": "2026-07-18",
+      "source": "https://registry.npmjs.org/@preact/preset-vite/2.10.6",
+      "date": "2026-10-06",
+      "notes": "peer @babel/core 7.x"
+    },
+    {
+      "tool": "@babel/core",
+      "kind": "npm",
+      "scope": "core",
+      "version": "7.29.7",
+      "released": "2026-05-25",
+      "source": "https://registry.npmjs.org/@babel/core/7.29.7",
+      "date": "2026-10-06",
+      "exception": "latest is 8.0.6 but @preact/preset-vite 2.10.6 peers @babel/core 7.x; newest 7.x taken until the preset widens its range",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "vite",
+      "kind": "npm",
+      "scope": "core",
+      "version": "8.3.3",
+      "released": "2026-10-06",
+      "source": "https://registry.npmjs.org/vite/8.3.3",
+      "date": "2026-10-06",
+      "notes": "budget attribution via output.codeSplitting"
+    },
+    {
+      "tool": "rolldown",
+      "kind": "npm",
+      "scope": "core",
+      "status": "transitive-only",
+      "dependants": [
+        "vite"
+      ],
+      "version": "1.2.12",
+      "source": "https://registry.npmjs.org/rolldown/1.2.12",
+      "date": "2026-10-06",
+      "notes": "resolved through vite's ~1.2.11 range; checked in package-lock.json only",
+      "released": "2026-09-30"
+    },
+    {
+      "tool": "esbuild",
+      "kind": "npm",
+      "scope": "core",
+      "status": "optional",
+      "version": "0.28.2",
+      "source": "https://registry.npmjs.org/esbuild/0.28.2",
+      "date": "2026-10-06",
+      "notes": "reference/measurement only (size comparisons); in Vite 8 peer range ^0.27 || ^0.28; not a build dependency",
+      "released": "2026-08-08"
+    },
+    {
+      "tool": "typescript",
+      "kind": "npm",
+      "scope": "core",
+      "version": "7.0.2",
+      "released": "2026-07-08",
+      "source": "https://registry.npmjs.org/typescript/7.0.2",
+      "date": "2026-10-06",
+      "notes": "native tsc; no stable JS API until 7.1"
+    },
+    {
+      "tool": "@typescript/typescript6",
+      "kind": "npm",
+      "scope": "core",
+      "status": "optional",
+      "version": "6.0.2",
+      "source": "https://registry.npmjs.org/@typescript/typescript6/6.0.2",
+      "date": "2026-10-06",
+      "exception": "only if a tool needs the TS JS API (e.g. dts fallback if tsc 7 emit fails the S0a snapshot test); none planned",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required",
+      "released": "2026-07-06"
+    },
+    {
+      "tool": "vitest",
+      "kind": "npm",
+      "scope": "core",
+      "version": "5.0.3",
+      "released": "2026-09-30",
+      "source": "https://registry.npmjs.org/vitest/5.0.3",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "@vitest/browser",
+      "kind": "npm",
+      "scope": "core",
+      "version": "5.0.3",
+      "released": "2026-09-30",
+      "source": "https://registry.npmjs.org/@vitest/browser/5.0.3",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "@vitest/browser-playwright",
+      "kind": "npm",
+      "scope": "core",
+      "version": "5.0.3",
+      "released": "2026-09-30",
+      "source": "https://registry.npmjs.org/@vitest/browser-playwright/5.0.3",
+      "date": "2026-10-06",
+      "notes": "the only browser provider used"
+    },
+    {
+      "tool": "@playwright/test",
+      "kind": "npm",
+      "scope": "core",
+      "version": "1.63.0",
+      "released": "2026-09-04",
+      "source": "https://registry.npmjs.org/@playwright/test/1.63.0",
+      "date": "2026-10-06",
+      "exception": "fixed until a `GATE-CHANGE: baseline recapture` by Paul/core: must equal the playwright-image tag and the `playwright` entry; all three move together with a toolchain rebuild and new screenshot baselines (1.63.0 is also npm `latest` on 2026-10-06)",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "playwright",
+      "kind": "npm",
+      "scope": "core",
+      "version": "1.63.0",
+      "released": "2026-09-04",
+      "source": "https://registry.npmjs.org/playwright/1.63.0",
+      "date": "2026-10-06",
+      "exception": "fixed together with @playwright/test and playwright-image (see @playwright/test)",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "notes": "Appendix A row `@playwright/test, playwright`",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "oxlint",
+      "kind": "npm",
+      "scope": "core",
+      "version": "1.87.0",
+      "released": "2026-10-05",
+      "source": "https://registry.npmjs.org/oxlint/1.87.0",
+      "date": "2026-10-06",
+      "build_arg": "OXLINT_VERSION",
+      "rebuild": "toolchain"
+    },
+    {
+      "tool": "oxlint-tsgolint",
+      "kind": "npm",
+      "scope": "core",
+      "version": "7.0.2003",
+      "source": "https://registry.npmjs.org/oxlint-tsgolint/7.0.2003",
+      "date": "2026-10-06",
+      "released": "2026-09-24"
+    },
+    {
+      "tool": "oxfmt",
+      "kind": "npm",
+      "scope": "core",
+      "status": "banned",
+      "enforced_from": "bootstrap",
+      "version": null,
+      "observed_latest": "0.72.0",
+      "source": "https://registry.npmjs.org/oxfmt/0.72.0",
+      "date": "2026-10-06",
+      "exception": "excluded: 0.72.0 is beta on 0.x; prettier (latest) used as a devDependency via `npm run`, never global, never on the toolchain PATH",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "prettier",
+      "kind": "npm",
+      "scope": "core",
+      "version": "3.9.9",
+      "released": "2026-09-23",
+      "source": "https://registry.npmjs.org/prettier/3.9.9",
+      "date": "2026-10-06",
+      "notes": "replaces oxfmt for TS/CSS formatting; devDependency run via `npm run` in the runner, never global, never on the toolchain image PATH (templ fmt gotcha, PROGRAM §3.3). `next` is 4.0.0-alpha.13 (forbidden)."
+    },
+    {
+      "tool": "@ast-grep/cli",
+      "kind": "npm",
+      "scope": "core",
+      "version": "0.45.3",
+      "released": "2026-08-31",
+      "source": "https://registry.npmjs.org/@ast-grep/cli/0.45.3",
+      "date": "2026-10-06",
+      "build_arg": "ASTGREP_VERSION",
+      "rebuild": "toolchain"
+    },
+    {
+      "tool": "motion",
+      "kind": "npm",
+      "scope": "core",
+      "version": "14.0.0",
+      "released": "2026-10-02",
+      "source": "https://registry.npmjs.org/motion/14.0.0",
+      "date": "2026-10-06",
+      "notes": "hard dep framer-motion 14.0.0 (see framer-motion); motion/mini + spring = 5,078 B gz"
+    },
+    {
+      "tool": "framer-motion",
+      "kind": "npm",
+      "scope": "core",
+      "status": "transitive-only",
+      "dependants": [
+        "motion"
+      ],
+      "version": "14.0.0",
+      "source": "https://registry.npmjs.org/framer-motion/14.0.0",
+      "date": "2026-10-06",
+      "notes": "lockfile presence allowed only as motion's hard dependency; import-banned (PROGRAM §2.3); re-check on every KIT_BUMP that it pulls no React types (Risk 13)",
+      "released": "2026-10-02"
+    },
+    {
+      "tool": "react",
+      "kind": "npm",
+      "scope": "core",
+      "status": "banned",
+      "enforced_from": "roedu-ui: end of S0a M0; app repos: the milestone that removes the app's last React/compat source (named in the session prompt and Decision Log); before that versions:check reports it as `legacy-pending`, never as pass",
+      "version": null,
+      "source": "PROGRAM.md §0.2 decision 1, §2.3",
+      "date": "2026-10-06",
+      "notes": "frozen legacy tarballs under legacy/ and embedfs/legacy/ are exempt (PROGRAM §8.2)"
+    },
+    {
+      "tool": "react-dom",
+      "kind": "npm",
+      "scope": "core",
+      "status": "banned",
+      "enforced_from": "as react",
+      "version": null,
+      "source": "PROGRAM.md §0.2 decision 1, §2.3",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "@types/react",
+      "kind": "npm",
+      "scope": "core",
+      "status": "banned",
+      "enforced_from": "as react",
+      "version": null,
+      "source": "PROGRAM.md §2.3; 01-session0a-core.md Preact 11 checklist",
+      "date": "2026-10-06",
+      "notes": "includes @types/react-dom; watch framer-motion's optional React peers"
+    },
+    {
+      "tool": "react-router",
+      "kind": "npm",
+      "scope": "core",
+      "status": "banned",
+      "enforced_from": "as react",
+      "version": null,
+      "source": "PROGRAM.md §0.2 decision 1",
+      "date": "2026-10-06",
+      "notes": "covers react-router-dom and every react-router* package; `preact/compat` is a subpath of preact, banned by import lint, not by the lockfile"
+    },
+    {
+      "tool": "@zag-js/combobox",
+      "kind": "npm",
+      "scope": "core",
+      "version": "1.45.0",
+      "released": "2026-10-05",
+      "source": "https://registry.npmjs.org/@zag-js/combobox/1.45.0",
+      "date": "2026-10-06",
+      "exception": "stays on 1.x: 2.0.0 exists only as `next`",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "@zag-js/vanilla",
+      "kind": "npm",
+      "scope": "core",
+      "version": "1.45.0",
+      "released": "2026-10-05",
+      "source": "https://registry.npmjs.org/@zag-js/vanilla/1.45.0",
+      "date": "2026-10-06",
+      "exception": "stays on 1.x: 2.x is `next` only",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "maplibre-gl",
+      "kind": "npm",
+      "scope": "app",
+      "apps": [
+        "social_media_activities_app"
+      ],
+      "version": "6.12.0",
+      "released": "2026-10-03",
+      "source": "https://registry.npmjs.org/maplibre-gl/6.12.0",
+      "date": "2026-10-06",
+      "notes": "fixes GHSA-jrc7-96c5-q579 / CVE-2026-85061 (<=6.4.0); 304.7 KB gz JS"
+    },
+    {
+      "tool": "leaflet",
+      "kind": "npm",
+      "scope": "app",
+      "apps": [
+        "social_media_activities_app"
+      ],
+      "version": "1.9.4",
+      "released": "2023-05-18",
+      "source": "https://registry.npmjs.org/leaflet/1.9.4",
+      "date": "2026-10-06",
+      "exception": "2.x is alpha only; social must-not-touch",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "3d-force-graph",
+      "kind": "npm",
+      "scope": "app",
+      "apps": [
+        "social_media_activities_app"
+      ],
+      "version": "1.80.1",
+      "released": "2026-09-29",
+      "source": "https://registry.npmjs.org/3d-force-graph/1.80.1",
+      "date": "2026-10-06",
+      "notes": "peer three >=0.179 <1"
+    },
+    {
+      "tool": "three",
+      "kind": "npm",
+      "scope": "app",
+      "apps": [
+        "social_media_activities_app"
+      ],
+      "version": "0.186.1",
+      "source": "https://registry.npmjs.org/three/0.186.1",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "web-vitals",
+      "kind": "npm",
+      "scope": "core",
+      "version": "6.2.3",
+      "released": "2026-10-05",
+      "source": "https://registry.npmjs.org/web-vitals/6.2.3",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "axe-core",
+      "kind": "npm",
+      "scope": "core",
+      "version": "4.14.0",
+      "released": "2026-10-05",
+      "source": "https://registry.npmjs.org/axe-core/4.14.0",
+      "date": "2026-10-06",
+      "exception": "injected via AxeBuilder({ axeSource }) because @axe-core/playwright 4.13.0 depends on axe-core ~4.13 (a second, nested 4.13.x copy in package-lock.json is expected)",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "@axe-core/playwright",
+      "kind": "npm",
+      "scope": "core",
+      "version": "4.13.0",
+      "released": "2026-08-11",
+      "source": "https://registry.npmjs.org/@axe-core/playwright/4.13.0",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "@lhci/cli",
+      "kind": "npm",
+      "scope": "core",
+      "status": "optional",
+      "version": "0.15.1",
+      "released": "2025-06-25",
+      "source": "https://registry.npmjs.org/@lhci/cli/0.15.1",
+      "date": "2026-10-06",
+      "exception": "stale: bundles Lighthouse 12.6.1 (latest 13.5.0); advisory only, never a gate",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "pa11y-ci",
+      "kind": "npm",
+      "scope": "app",
+      "apps": [
+        "ro_teacher"
+      ],
+      "version": "5.0.0",
+      "released": "2026-10-05",
+      "source": "https://registry.npmjs.org/pa11y-ci/5.0.0",
+      "date": "2026-10-06",
+      "notes": "ro go-browser-tests.sh only; pulls puppeteer 25 + own Chrome; not in gate:unit"
+    },
+    {
+      "tool": "vitest-browser-preact",
+      "kind": "npm",
+      "scope": "core",
+      "status": "banned",
+      "enforced_from": "bootstrap",
+      "version": null,
+      "observed_latest": "1.1.0",
+      "source": "https://registry.npmjs.org/vitest-browser-preact/1.1.0",
+      "date": "2026-10-06",
+      "exception": "not used: peer preact ^10.0.0 rejects Preact 11; use plain render() + @vitest/browser-playwright locators",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "@testing-library/preact",
+      "kind": "npm",
+      "scope": "core",
+      "status": "banned",
+      "enforced_from": "bootstrap",
+      "version": null,
+      "observed_latest": "3.2.4",
+      "source": "https://registry.npmjs.org/@testing-library/preact/3.2.4",
+      "date": "2026-10-06",
+      "exception": "not used: last release 2024, @testing-library/dom ^8, no Preact 11 statement",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "node",
+      "kind": "runtime",
+      "scope": "core",
+      "version": "26.10.0",
+      "released": "2026-09-21",
+      "source": "https://nodejs.org/dist/index.json",
+      "date": "2026-10-06",
+      "build_arg": "NODE_VERSION",
+      "rebuild": "toolchain",
+      "sha256_linux_x64": "ca70e9e349de048b9522abb3adc05b3bd6f43c5ffd3ec57916c7da292f59f022",
+      "sha256_source": "https://nodejs.org/dist/v26.10.0/SHASUMS256.txt (node-v26.10.0-linux-x64.tar.xz)",
+      "notes": "Current line (index.json lts:false), LTS on 2026-10-28; bundles npm 11.19.1. The Playwright base ships Node 24 (image history: ARG NODE_VERSION=24), so Dockerfile.toolchain installs this tarball, checksum-verified (NODE_SHA256), ahead of the base's Node on PATH. versions:check asserts `node --version` = v<version> inside the runner and .nvmrc = <version>; engines.node >=<version>.",
+      "build_arg_sha256": "NODE_SHA256"
+    },
+    {
+      "tool": "npm",
+      "kind": "npm",
+      "scope": "core",
+      "version": "12.2.0",
+      "released": "2026-09-30",
+      "source": "https://registry.npmjs.org/npm/12.2.0",
+      "date": "2026-10-06",
+      "build_arg": "NPM_VERSION",
+      "rebuild": "toolchain",
+      "notes": "`npm i -g npm@12.2.0` in build stages and the toolchain image; versions:check asserts `npm --version` inside the runner; .npmrc = save-exact + engine-strict only"
+    },
+    {
+      "tool": "go",
+      "kind": "runtime",
+      "scope": "core",
+      "version": "1.27.1",
+      "released": "2026-09-01",
+      "source": "https://go.dev/dl/?mode=json",
+      "date": "2026-10-06",
+      "build_arg": "GO_VERSION",
+      "rebuild": "toolchain",
+      "sha256_linux_amd64": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445",
+      "sha256_source": "https://go.dev/dl/?mode=json (go1.27.1.linux-amd64.tar.gz)",
+      "notes": "versions:check asserts `go version` inside the runner",
+      "build_arg_sha256": "GO_SHA256"
+    },
+    {
+      "tool": "github.com/a-h/templ",
+      "kind": "gomod",
+      "scope": "core",
+      "version": "v0.3.1070",
+      "released": "2026-10-04",
+      "source": "https://proxy.golang.org/github.com/a-h/templ/@v/v0.3.1070.info",
+      "date": "2026-10-06",
+      "build_arg": "TEMPL_VERSION",
+      "rebuild": "toolchain",
+      "notes": "`go get -tool .../cmd/templ@v0.3.1070`; fmt with -prettier-required=false; bump = GATE-CHANGE + golden rerun; go.mod tool version must equal the image's `templ version`"
+    },
+    {
+      "tool": "github.com/flosch/pongo2/v6",
+      "kind": "gomod",
+      "scope": "core",
+      "version": "v6.1.0",
+      "released": "2026-05-02",
+      "source": "https://proxy.golang.org/github.com/flosch/pongo2/v6/@v/v6.1.0.info",
+      "date": "2026-10-06",
+      "exception": "v7 is alpha only; pongo2 is removed per app at the end of the templ port",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "github.com/vearutop/statigz",
+      "kind": "gomod",
+      "scope": "core",
+      "version": "v1.5.0",
+      "released": "2025-04-09",
+      "source": "https://proxy.golang.org/github.com/vearutop/statigz/@v/v1.5.0.info",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "github.com/go-task/task/v3",
+      "kind": "gomod",
+      "scope": "core",
+      "version": "v3.54.0",
+      "released": "2026-10-01",
+      "source": "https://proxy.golang.org/github.com/go-task/task/v3/@v/v3.54.0.info",
+      "date": "2026-10-06",
+      "build_arg": "TASK_VERSION",
+      "rebuild": "toolchain",
+      "notes": "fixes GHSA-679p-658w-m3wr; user cancel exits 205"
+    },
+    {
+      "tool": "golang",
+      "kind": "image",
+      "scope": "core",
+      "version": "golang:1.27.1-trixie",
+      "source": "https://hub.docker.com/v2/repositories/library/golang/tags/1.27.1-trixie",
+      "date": "2026-10-06",
+      "digest": "sha256:8f58fd67ea075142d947a60e0caa4317746a55118d312f027793d382c7741734",
+      "notes": "app Dockerfile build stage; FROM <version>@<digest>"
+    },
+    {
+      "tool": "node-image",
+      "kind": "image",
+      "scope": "core",
+      "version": "node:26.10.0-trixie-slim",
+      "source": "https://hub.docker.com/v2/repositories/library/node/tags/26.10.0-trixie-slim",
+      "date": "2026-10-06",
+      "digest": "sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33",
+      "notes": "app Dockerfile frontend stage; ships npm 11.x; upgrade to npm 12.2.0 in stage; tag tracks the node entry"
+    },
+    {
+      "tool": "debian-slim",
+      "kind": "image",
+      "scope": "core",
+      "version": "debian:13.7-slim",
+      "released": "2026-09-12",
+      "source": "https://hub.docker.com/v2/repositories/library/debian/tags/13.7-slim",
+      "date": "2026-10-06",
+      "digest": "sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+      "notes": "social runtime base (ffmpeg/prlimit required at startup); reproducibility anchor for the social apt floor entries"
+    },
+    {
+      "tool": "distroless-static",
+      "kind": "image",
+      "scope": "core",
+      "version": "gcr.io/distroless/static-debian13:nonroot",
+      "source": "https://gcr.io/v2/distroless/static-debian13/tags/list",
+      "date": "2026-10-06",
+      "digest": "sha256:e2e927ec666bae08560abb3c55d0659eceabb657f56b6782ab500a9fc7f555e3",
+      "notes": "ro_teacher + cat runtime base; rolling tag, last push 2026-09-13 -> digest is the pin"
+    },
+    {
+      "tool": "playwright-image",
+      "kind": "image",
+      "scope": "core",
+      "version": "mcr.microsoft.com/playwright:v1.63.0-noble",
+      "source": "https://mcr.microsoft.com/v2/playwright/manifests/v1.63.0-noble",
+      "date": "2026-10-06",
+      "digest": "sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27",
+      "digest_note": "multi-arch index digest observed 2026-10-06 (Docker-Content-Digest; linux/amd64 manifest sha256:bc6ab0d6d44ff4826e4cb8c1e6d801e185bfc42bb0753f8e2a30efc70db054c7). Paul re-verifies with `docker buildx imagetools inspect mcr.microsoft.com/playwright:v1.63.0-noble` BEFORE the first toolchain build and sets `digest_verified_by`.",
+      "digest_verified_by": "Parent primary MCR verification 2026-10-06: index digest matches frozen pin",
+      "build_arg": "PLAYWRIGHT_IMAGE",
+      "build_arg_value": "mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27",
+      "rebuild": "toolchain",
+      "exception": "fixed choice (not -resolute/-jammy, and not moved by re-resolution): screenshot baselines depend on it; moves only with @playwright/test + playwright in a `GATE-CHANGE: baseline recapture` and a toolchain rebuild",
+      "approved_by": "Paul via direct parent-chat authorization 2026-10-06",
+      "notes": "Dockerfile.toolchain must build FROM tag@digest, never the bare tag; ships Node 24 (see node entry)",
+      "approval_status": "ACK accepted; actual versions and gate checks still required"
+    },
+    {
+      "tool": "postgres",
+      "kind": "image",
+      "scope": "core",
+      "version": "16",
+      "image": "postgres:16-trixie",
+      "source": "https://hub.docker.com/v2/repositories/library/postgres/tags/16-trixie",
+      "date": "2026-10-06",
+      "digest": "sha256:65b16a8b326e0cfbdf33fa7e783f2a0cb352a61448616ccccfd616ef42aa0f65",
+      "build_arg": "PG_MAJOR",
+      "rebuild": "toolchain",
+      "rule": "`version` = the PRODUCTION server's Postgres major only (bare integer, e.g. 16); `image` = the full ref compose uses. Paul replaces the token `16` everywhere BEFORE the first toolchain build: PROGRAM.md §3.2 (the `____` cell), this entry (`version`, `image`, `source`, `digest` placeholder) and the `social-db` entry, bootstrap/.gate.env `PG_MAJOR=`, and bootstrap/compose.gate.yml (`GATE_DB_IMAGE` default `postgres:<major>-trixie` and the `TEACHER_GO_PG_BINDIR` default). bootstrap/Dockerfile.toolchain's `ARG PG_MAJOR` default may stay a token: the wrapper's `toolchain` target passes `--build-arg PG_MAJOR` from .gate.env (a by-hand build must pass it too). The digest is resolved at S0a M0 (Codex, `chore(versions)`). The toolchain image installs `postgresql-<major>` server binaries from PGDG at build time (not exact-pinned; `pg_config --version` is printed by versions:check). Latest stable is 18.6, adopted only if prod is 18; 19beta4 is forbidden. Upgrading prod is outside this program. No session may start M0 while any `16` remains (`grep -rn 16` must be empty)."
+    },
+    {
+      "tool": "social-db",
+      "kind": "image",
+      "scope": "app",
+      "apps": [
+        "social_media_activities_app"
+      ],
+      "version": "built locally from social's Dockerfile.db",
+      "image": "FROM postgres:16-trixie@<postgres digest> + PGDG postgresql-16-postgis-3 + postgresql-16-pgvector",
+      "source": "social_media_activities_app Dockerfile.db (today PG16 + PostGIS + pgvector, evidence/recon/build-test-deploy.raw.md)",
+      "date": null,
+      "rule": "Same major as the postgres entry; base pinned by the postgres digest; the PostGIS/pgvector packages follow the apt FLOOR rule (versions recorded at S3A M0). compose.gate.yml uses it through `GATE_DB_IMAGE` in social's .gate.env/compose override. Resolved by the S3A M0 session (app scope)."
+    },
+    {
+      "tool": "ffmpeg",
+      "kind": "apt",
+      "scope": "app",
+      "apps": [
+        "social_media_activities_app"
+      ],
+      "version": "7:7.1.5-0+deb13u1",
+      "version_rule": "floor",
+      "source": "https://sources.debian.org/api/src/ffmpeg/",
+      "date": "2026-10-06",
+      "notes": "Debian 13 trixie stable (forky/sid 9.0.2 is not stable). Install unpinned (`apt-get install --no-install-recommends ffmpeg`) from trixie + trixie-security on the digest-pinned debian-slim base, then assert `dpkg --compare-versions \"$(dpkg-query -W -f='${Version}' ffmpeg)\" ge 7:7.1.5-0+deb13u1` and that the upstream line is 7:7.1.x (stays in trixie). A +deb13uN security update passes without a lock change; raising the floor is a `GATE-CHANGE: versions ffmpeg floor` commit, not an M0-only re-resolution."
+    },
+    {
+      "tool": "docker-buildx (native Linux host)",
+      "kind": "apt",
+      "scope": "environment",
+      "version": "0.34.1",
+      "source": "docker buildx version on authorized Linux host",
+      "date": "2026-10-06",
+      "notes": "Installed host retained under ACK 2. No host package upgrade is part of this task."
+    },
+    {
+      "tool": "@types/node",
+      "kind": "npm",
+      "scope": "core",
+      "version": "26.6.4",
+      "released": "2026-10-01",
+      "source": "https://registry.npmjs.org/@types/node/26.6.4",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "golang.org/x/net",
+      "kind": "gomod",
+      "scope": "core",
+      "version": "v0.59.0",
+      "released": "2026-09-08",
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.59.0.info",
+      "date": "2026-10-06"
+    },
+    {
+      "tool": "github.com/jackc/pgx/v5",
+      "kind": "gomod",
+      "scope": "core",
+      "version": "v5.11.0",
+      "released": "2026-09-07",
+      "source": "https://proxy.golang.org/github.com/jackc/pgx/v5/@v/v5.11.0.info",
+      "date": "2026-10-06"
+    }
+  ],
+  "toolchain_image": {
+    "tool": "roedu-toolchain",
+    "kind": "image",
+    "scope": "core",
+    "version": "roedu-toolchain:core-v1.0-linux-20261006",
+    "source": "bootstrap/Dockerfile.toolchain (later web-kit/templates/Dockerfile.toolchain)",
+    "build_args": [
+      "PLAYWRIGHT_IMAGE (tag@digest)",
+      "NODE_VERSION",
+      "NODE_SHA256",
+      "GO_VERSION",
+      "GO_SHA256",
+      "TEMPL_VERSION",
+      "TASK_VERSION",
+      "NPM_VERSION",
+      "OXLINT_VERSION",
+      "ASTGREP_VERSION",
+      "PG_MAJOR"
+    ],
+    "build_args_rule": "`build_args` lists exactly the ARG names Dockerfile.toolchain declares, in file order, and every `build_arg` named by an entry above must appear in it. The wrapper's `toolchain` target passes only `--build-arg PG_MAJOR` (from .gate.env); every other ARG is taken from its Dockerfile default, so each default must equal its entry here (`version`, `sha256_linux_x64`, or `build_arg_value` for PLAYWRIGHT_IMAGE). Node and Go tarballs are checksum-verified against `sha256_linux_x64` / `sha256_linux_amd64` (build args NODE_SHA256 / GO_SHA256).",
+    "image_id": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "image_id_note": "`image_id` is this entry's ONLY digest key (linux-prereqs.sh reads it; never add a `digest` field here). Its value is the LOCAL image ID printed by `docker image inspect -f '{{.Id}}' roedu-toolchain:core-v1.0`, and it must equal .gate.env `TOOLCHAIN_DIGEST` (the .gate.env key the wrapper compares with the local image ID); NOT a RepoDigest, buildx manifest or registry digest: recording any of those makes every gate refuse to run.",
+    "rule": "Owner builds a new immutable toolchain tag using the capped native Linux builder, fills production PG and image ID only after review, then trust and real gate checks. Synthetic prep build is recorded separately and grants no approval.",
+    "dockerfile_sha256": "eb9ef4aec821103a6df389a0171202bc817bdbfe7556a68ed329b476394ead7d",
+    "build_provenance": "Approved PG16 image built by parent through reviewed wrapper and capped roedu-gates-linux builder; immutable local archive saved. Same reviewed Dockerfile bytes as bootstrap."
+  },
+  "not_resolved_2026_10_06": [
+    "image digests other than playwright-image (Codex at S0a M0; reviewer re-resolves)",
+    "postgres major/digest and social-db (after Paul fills PROD_PG_MAJOR)",
+    "@types/* other than the banned React types",
+    "three/kapsule beyond peer ranges",
+    "Go module minor dependencies",
+    "app sessions' own direct dependencies (each app's M0)",
+    "PGDG postgresql/postgis/pgvector package versions (floors recorded at S0a/S3A M0)",
+    "Trivy and govulncheck latest (S3A M0; social qualify-native.sh pins v0.75.0 / v1.8.0 today)"
+  ],
+  "owner_approval": {
+    "acknowledgments": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "postgres_major": 16,
+    "source": "Paul explicitly acknowledged ACK 1–6 and PostgreSQL 16 in the GUI migration parent chat on 2026-10-06, then authorized end-to-end implementation, no further permission questions, parent review/landing and cleanup of completed managed work.",
+    "authority": "direct human launch authorization, not physical/release evidence"
+  }
+}

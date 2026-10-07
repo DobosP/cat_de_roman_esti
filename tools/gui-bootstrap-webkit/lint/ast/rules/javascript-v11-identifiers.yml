@@ -1,0 +1,23 @@
+{
+  "id": "roedu-javascript-v11-identifiers",
+  "language": "JavaScript",
+  "severity": "error",
+  "message": "v11-identifiers",
+  "rule": {
+    "all": [
+      {
+        "any": [
+          {
+            "kind": "identifier"
+          },
+          {
+            "kind": "property_identifier"
+          }
+        ]
+      },
+      {
+        "regex": "^(forwardRef|defaultProps)$"
+      }
+    ]
+  }
+}

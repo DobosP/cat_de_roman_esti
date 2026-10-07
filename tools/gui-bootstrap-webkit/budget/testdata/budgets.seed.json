@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "measured_at": null,
+  "source": "PROGRAM.md §4.6 seed. JS limits are estimates until the device checkpoint (§4.7). css.global.limit_gz per repo: social 16954, ro_teacher 16807, cat_de_roman_esti and roedu-ui null until their M0 baseline capture. null = record the actual size, do not fail. Paul-owned; read-only to Codex; changes only in GATE-CHANGE: commits.",
+  "js": {
+    "server-page": { "limit_gz": 10240 },
+    "island-route": { "limit_gz": 35840 },
+    "cat-initial": { "limit_gz": 40960, "target_gz": 30720 },
+    "vendor-gated": { "maplibre": { "limit_gz": 317440 } }
+  },
+  "css": {
+    "global": { "limit_gz": null }
+  },
+  "routes": {},
+  "vitals": {
+    "lcp_ms": 2500,
+    "inp_ms": 200,
+    "throttle": { "cpu": 4, "rtt_ms": 150, "down_kbps": 1600 }
+  }
+}

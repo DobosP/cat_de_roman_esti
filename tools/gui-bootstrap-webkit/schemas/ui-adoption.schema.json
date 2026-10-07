@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "mode",
+    "status",
+    "until",
+    "source",
+    "config_sha256",
+    "legacy",
+    "selected_ui"
+  ],
+  "properties": {
+    "mode": {
+      "const": "staged-react"
+    },
+    "status": {
+      "const": "pending"
+    },
+    "until": {
+      "const": "S1-M2"
+    },
+    "source": {
+      "const": "repo:kit-config"
+    },
+    "config_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "legacy": {
+      "type": "object",
+      "required": [
+        "version",
+        "archive_sha256",
+        "source_sha",
+        "receipt",
+        "receipt_sha256"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.3.0"
+        },
+        "archive_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$"
+        },
+        "receipt": {
+          "type": "string",
+          "pattern": "^(?!.*(?:^|/)(?:kit|node_modules|third_party|vendor|dist|embedfs|test-results|TASK_BRIEF\\.md|TASK_RESULT\\.md|SWARM_RESULT\\.md)(?:/|$))(?!.*\\.tsbuildinfo(?:\\.(?:gz|br))?$)[A-Za-z0-9_@-][A-Za-z0-9_@.-]*(?:/[A-Za-z0-9_@-][A-Za-z0-9_@.-]*)*$"
+        },
+        "receipt_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "selected_ui": {
+      "type": "object",
+      "required": [
+        "version",
+        "archive_sha256"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "archive_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

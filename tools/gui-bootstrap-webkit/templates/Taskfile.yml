@@ -1,0 +1,576 @@
+version: '3'
+silent: true
+includes:
+  repo:
+    taskfile: ./Taskfile.repo.yml
+    optional: false
+vars:
+  _RUNNER_JS: |
+    import * as fs from 'node:fs';
+    import path from 'node:path';
+    import {spawnSync} from 'node:child_process';
+    import {createHash,randomUUID} from 'node:crypto';
+    import {pathToFileURL} from 'node:url';
+    const target=process.argv[2],root=fs.realpathSync(process.cwd()),hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+    /** Closed Native E1 configuration. Absence is active; only Cat may stage the sealed original SDK. */
+    function validateUiAdoption(config) {
+      if (!Object.hasOwn(config, 'ui_adoption')) return undefined;
+      const phase = config.ui_adoption;
+      const fields = (value, keys) => !!value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
+      if (config.role !== 'consumer' || config.app !== 'cat_de_roman_esti' || !fields(phase, ['mode', 'until', 'legacy']) || phase.mode !== 'staged-react' || phase.until !== 'S1-M2') throw Error('Unsupported or malformed ui_adoption phase');
+      const legacy = phase.legacy;
+      if (!fields(legacy, ['version', 'archive_sha256', 'source_sha', 'receipt', 'receipt_sha256']) || legacy.version !== '0.3.0' || typeof legacy.archive_sha256 !== 'string' || typeof legacy.source_sha !== 'string' || typeof legacy.receipt_sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(legacy.archive_sha256) || !/^[a-f0-9]{40}([a-f0-9]{24})?$/.test(legacy.source_sha) || !/^[a-f0-9]{64}$/.test(legacy.receipt_sha256)) throw Error('Malformed sealed original UI identity');
+      const receipt = legacy.receipt;
+      const excluded = new Set(['kit', 'node_modules', 'third_party', 'vendor', 'dist', 'embedfs', 'test-results', 'TASK_BRIEF.md', 'TASK_RESULT.md', 'SWARM_RESULT.md']);
+      if (typeof receipt !== 'string' || !receipt || receipt.startsWith('/') || /\.tsbuildinfo(?:\.(?:gz|br))?$/.test(receipt) || receipt.split('/').some(part => !/^[A-Za-z0-9_@.-]+$/.test(part) || part === '.' || part === '..' || part.startsWith('.') || excluded.has(part))) throw Error('Original UI receipt must be a literal source-owned path outside caches, inputs and dependencies');
+      if ([config.vendor_dir ?? 'frontend/vendor', config.npm_dir ?? 'frontend/node_modules/@roedu/web-kit'].some(directory => typeof directory === 'string' && (receipt === directory || receipt.startsWith(directory + '/')))) throw Error('Original UI receipt overlaps a configured dependency directory');
+      return { mode: 'staged-react', until: 'S1-M2', legacy: { version: '0.3.0', archive_sha256: legacy.archive_sha256, source_sha: legacy.source_sha, receipt, receipt_sha256: legacy.receipt_sha256 } };
+    }
+    /** Read only the wrapper-owned current invocation; matching historical receipts are never selectors. */
+    function frozenBootstrapConfig(ctx) {
+      const known = new Set(['unit','full','gen','deps','kit:sync','build','image','baseline','golden:capture','golden:verify','contract:refresh','legacy:freeze','e2e','perf','qualify','shell']);
+      const input = relative => {
+        let current = ctx.root;
+        for (const part of relative.split('/')) { current = path.join(current,part); const stat = fs.lstatSync(current); if (stat.isSymbolicLink() || (!stat.isFile() && !stat.isDirectory())) throw Error('Nonregular current configuration ancestor'); }
+        if (!fs.lstatSync(current).isFile()) throw Error('Current configuration must be a regular file'); return current;
+      };
+      const descriptorPath='.gate/wrapper-current.json', descriptorBytes=fs.readFileSync(input(descriptorPath)), current=JSON.parse(descriptorBytes);
+      const fields=['schema','invocation','target','sha','tree_sha256','toolchain_digest','config_sha256','config_path','config_file_sha256'];
+      if (!current || typeof current!=='object' || Array.isArray(current) || Object.keys(current).length!==fields.length || !fields.every(key=>Object.hasOwn(current,key)) || current.schema!==1 || typeof current.invocation!=='string' || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(current.invocation??'') || typeof current.target!=='string' || !known.has(current.target) || current.sha!==ctx.sha || current.tree_sha256!==ctx.tree_sha256 || current.toolchain_digest!==ctx.toolchain_digest || !/^[a-f0-9]{64}$/.test(current.config_sha256??'') || !/^[a-f0-9]{64}$/.test(current.config_file_sha256??'')) throw Error('Closed current wrapper invocation identity required');
+      const relative=`.gate/${current.target.replaceAll(':','-')}/wrapper-kit-config.json`;
+      if (current.config_path!==relative) throw Error('Current configuration reference differs from exact primary target');
+      if (ctx.target && ctx.target!==current.target) {
+        const parents={setup:['unit','full','build','baseline','e2e','perf','kit:sync'],deps:['gen','kit:sync'], 'assets:sync':['build','kit:sync']};
+        if (!parents[ctx.target]?.includes(current.target)) throw Error('Requested primary target differs from current wrapper invocation');
+      }
+      const bytes=fs.readFileSync(input(relative)), captured=JSON.parse(bytes), config=captured.config;
+      if (hash(bytes)!==current.config_file_sha256 || captured.schema!==1 || captured.target!==current.target || captured.sha!==current.sha || captured.tree_sha256!==current.tree_sha256 || captured.toolchain_digest!==current.toolchain_digest || captured.config_sha256!==current.config_sha256 || !config || typeof config!=='object' || Array.isArray(config) || Object.keys(config).some(key=>!['role','app','npm_dir','vendor_dir','go_dirs','ui_adoption'].includes(key)) || !['role','app','npm_dir','vendor_dir','go_dirs'].every(key=>Object.hasOwn(config,key)) || !['core','consumer'].includes(config.role) || typeof config.app!=='string' || !/^[A-Za-z][A-Za-z0-9_-]*$/.test(config.app)) throw Error('Current frozen configuration bytes/identity differ');
+      const literal=(value,dot=false)=>{if(dot&&value==='.')return value;if(typeof value!=='string'||!value||value.startsWith('/')||value.split('/').some(part=>!/^[A-Za-z0-9_@.-]+$/.test(part)||part==='.'||part==='..'))throw Error('Nonliteral current configured path');return value;};
+      literal(config.npm_dir);literal(config.vendor_dir);
+      if(!Array.isArray(config.go_dirs)||!config.go_dirs.length||new Set(config.go_dirs).size!==config.go_dirs.length)throw Error('Explicit current Go paths required');config.go_dirs.forEach(directory=>literal(directory,true));
+      const phase=validateUiAdoption(config),canonical={role:config.role,app:config.app,npm_dir:config.npm_dir,vendor_dir:config.vendor_dir,go_dirs:[...config.go_dirs],...(phase?{ui_adoption:phase}:{})};
+      if(current.config_sha256!==hash(JSON.stringify(canonical))||JSON.stringify(config)!==JSON.stringify(canonical))throw Error('Current complete phase projection checksum mismatch');
+      return {config:canonical,config_sha256:captured.config_sha256,wrapper_target:captured.target,wrapper_config:relative,wrapper_config_sha256:hash(bytes),wrapper_invocation:current.invocation,wrapper_descriptor:descriptorPath,wrapper_descriptor_sha256:hash(descriptorBytes)};
+    }
+    function context(target, invocation = randomUUID()) {
+      const root = fs.realpathSync(process.cwd()), values = {};
+      for (const line of fs.readFileSync(path.join(root, '.gate.env'), 'utf8').split('\n')) { const match = /^([A-Z_]+)=([^\r\n]*)$/.exec(line); if (match) values[match[1]] = match[2]; }
+      const ctx = { root, target, invocation, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, dirty: process.env.GATE_DIRTY === 'true', toolchain_digest: process.env.TOOLCHAIN_DIGEST ?? values.TOOLCHAIN_DIGEST, stage: process.env.CSP_STAGE ?? values.CSP_STAGE, parallel: Number(process.env.GOMAXPROCS), cap: Number(process.env.GATE_PARALLEL_MAX ?? values.GATE_PARALLEL_MAX), started: new Date().toISOString() };
+      if (!/^[a-f0-9]{40}$/.test(ctx.sha ?? '') || !/^[a-f0-9]{64}$/.test(ctx.tree_sha256 ?? '') || !/^sha256:[a-f0-9]{64}$/.test(ctx.toolchain_digest ?? '') || !Number.isInteger(ctx.parallel) || ctx.parallel < 1 || ctx.parallel > ctx.cap || !['report-only', 'enforced'].includes(ctx.stage)) throw Error('Native wrapper identity/resources required for bootstrap');
+      return { ...ctx, ...frozenBootstrapConfig(ctx) };
+    }
+    function evidenceState(ctx){return {schema:1,target:ctx.target,invocation:ctx.invocation,sha:ctx.sha,tree_sha256:ctx.tree_sha256,toolchain_digest:ctx.toolchain_digest,started:ctx.started,config:ctx.config,config_sha256:ctx.config_sha256,wrapper_target:ctx.wrapper_target,wrapper_config:ctx.wrapper_config,wrapper_config_sha256:ctx.wrapper_config_sha256,wrapper_invocation:ctx.wrapper_invocation,wrapper_descriptor:ctx.wrapper_descriptor,wrapper_descriptor_sha256:ctx.wrapper_descriptor_sha256,actions:[],artifacts:[]};}
+    function outputPath(ctx,relative){if(typeof relative!=='string'||!relative.startsWith(`.gate/${ctx.target.replaceAll(':','-')}/`)||/[\\:\x00-\x1f\x7f]/.test(relative)||relative.split('/').some(p=>!p||p==='.'||p==='..'))throw Error('Unsafe bootstrap evidence path');let current=ctx.root;for(const part of relative.split('/')){current=path.join(current,part);try{if(fs.lstatSync(current).isSymbolicLink())throw Error('Symlink bootstrap evidence path');}catch(error){if(error.code!=='ENOENT')throw error;}}return current;}
+    function retain(ctx,evidence,phase,command,args,child,duration){if(!/^[A-Za-z][A-Za-z0-9._-]*$/.test(phase))throw Error('Unsafe bootstrap phase');const ordinal=evidence.actions.length,prefix=`.gate/${ctx.target.replaceAll(':','-')}/logs/${ctx.invocation}-bootstrap-${phase}-${ordinal}`,logs={};for(const stream of ['stdout','stderr']){const relative=`${prefix}.${stream}.log`,bytes=Buffer.from(child[stream]??''),file=outputPath(ctx,relative);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes,{flag:'wx'});evidence.artifacts.push(`${relative} sha256:${hash(bytes)}`);logs[`${stream}_log`]=relative;}evidence.actions.push({phase,kind:'command',command,argument_count:args.length,args_sha256:hash(JSON.stringify(args)),cwd:'.',exit_code:child.status??-1,duration_ms:duration,stdout_sha256:hash(child.stdout??''),stderr_sha256:hash(child.stderr??''),...(child.error?{error:child.error.message}:{}),...logs});}
+    function invoke(ctx,evidence,phase,command,args,maxBuffer=64*1024*1024){const started=Date.now(),child=spawnSync(command,args,{cwd:ctx.root,env:process.env,encoding:'utf8',maxBuffer});retain(ctx,evidence,phase,command,args,child,Date.now()-started);if(child.stderr)process.stderr.write(child.stderr);return child;}
+    function seal(ctx,evidence){evidence.finished=new Date().toISOString();const relative=`.gate/${ctx.target.replaceAll(':','-')}/bootstrap-execution.json`,bytes=Buffer.from(JSON.stringify(evidence,null,2)+'\n'),file=outputPath(ctx,relative);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes);return {schema:1,target:ctx.target,invocation:ctx.invocation,sha:ctx.sha,tree_sha256:ctx.tree_sha256,toolchain_digest:ctx.toolchain_digest,started:ctx.started,path:relative,sha256:hash(bytes)};}
+    function evidenceArtifacts(ctx,evidence){const receipt=seal(ctx,evidence);return [...evidence.artifacts,`${receipt.path} sha256:${receipt.sha256}`];}
+    function adopt(ctx,artifacts,report){for(const artifact of report.artifacts??[]){const match=/^(.+) sha256:([a-f0-9]{64})$/.exec(artifact);if(!match)throw Error('Malformed bootstrap hook artifact');const file=outputPath(ctx,match[1]);if(!fs.lstatSync(file).isFile()||hash(fs.readFileSync(file))!==match[2])throw Error('Bootstrap hook artifact mismatch');if(!artifacts.includes(artifact))artifacts.push(artifact);}}
+    function safe(value){if(typeof value!=='string'||!value||value.startsWith('/')||/[\\:\x00-\x1f\x7f]/.test(value)||value.split('/').some(x=>!x||x==='.'||x==='..'))throw Error('Unsafe configured kit path');return value;}
+    function regular(relative,missing=false){let p=root;for(const name of safe(relative).split('/')){p=path.join(p,name);try{if(fs.lstatSync(p).isSymbolicLink())throw Error('Symlink in configured kit path');}catch(e){if(e.code!=='ENOENT'||!missing)throw e;}}return p;}
+    let ctx,evidence;
+    function child(command,args,phase='child',maxBuffer){const p=invoke(ctx,evidence,phase,command,args,maxBuffer);if(p.error||p.status!==0)throw Error(`${command} failed (${p.status??'unavailable'})`);return p;}
+    function config(){const p=child('task',['--silent','repo:kit-config'],'config',1024*1024);const c=JSON.parse(p.stdout);if(!['core','consumer'].includes(c.role)||typeof c.app!=='string'||Object.keys(c).some(k=>!['role','app','npm_dir','vendor_dir','go_dirs','ui_adoption'].includes(k)))throw Error('Invalid kit config');const phase=validateUiAdoption(c);c.npm_dir=safe(c.npm_dir??(c.role==='core'?'web-kit':'frontend/node_modules/@roedu/web-kit'));const vendor=safe(c.vendor_dir??'frontend/vendor'),go=c.go_dirs??ctx.config.go_dirs;for(const d of go)if(d!=='.')safe(d);const canonical={role:c.role,app:c.app,npm_dir:c.npm_dir,vendor_dir:vendor,go_dirs:go,...(phase?{ui_adoption:phase}:{})};if(hash(JSON.stringify(canonical))!==ctx.config_sha256)throw Error('Actual repo configuration differs from the complete frozen phase');return canonical;}
+    function publishFailure(error){if(!ctx)throw error;const artifacts=evidenceArtifacts(ctx,evidence),result={schema:1,target:ctx.target,status:'fail',sha:ctx.sha,dirty:ctx.dirty,tree_sha256:ctx.tree_sha256,toolchain_digest:ctx.toolchain_digest,versions_lock_sha256:hash(fs.readFileSync(path.join(ctx.root,'versions.lock.json'))),parallel:ctx.parallel,started:ctx.started,finished:new Date().toISOString(),checks:[{name:'bootstrap',status:'fail',reason:error.message,duration_ms:Math.max(0,Date.now()-Date.parse(ctx.started))}],csp:{stage:ctx.stage,violations:0,legacy_violations:0},budgets:{},artifacts};const relative=`.gate/${ctx.target.replaceAll(':','-')}/result.json`;fs.writeFileSync(outputPath(ctx,relative),JSON.stringify(result,null,2)+'\n');process.exitCode=1;}
+    try{
+      if(!/^[A-Za-z][A-Za-z0-9:._-]*$/.test(target??''))throw Error('Unsafe bootstrap target');ctx=context(target);evidence=evidenceState(ctx);
+      let cfg=config(),witness;
+      const runnerPath=regular(`${cfg.npm_dir}/scripts/run-task.mjs`,true),mustInstall=['unit','full','build','baseline','e2e','perf'].includes(target)||!fs.existsSync(runnerPath);
+      if(target==='gen'&&process.env.GATE_VERSIONS_RESOLVE==='1'&&!fs.existsSync(runnerPath))child('task',['--silent','deps'],'deps');
+      if(target==='versions:resolve'&&process.env.GATE_VERSIONS_RESOLVE!=='1')throw Error('Only gen --resolve-versions may resolve versions');
+      if(mustInstall||target==='setup'){
+        const started=Date.now(),p=child('task',['--silent','repo:setup',`INVOCATION=${ctx.invocation}`],'setup');
+        witness={command:'task',target:'repo:setup',exit_code:p.status,duration_ms:Date.now()-started,report:JSON.parse(p.stdout)};
+      }
+      cfg=config();const manifest=JSON.parse(fs.readFileSync(regular(`${cfg.npm_dir}/package.json`)));
+      if(manifest.name!=='@roedu/web-kit')throw Error('Located package is not @roedu/web-kit');
+      if(target==='kit:check'){
+        const p=child(process.execPath,[regular(`${cfg.npm_dir}/scripts/kit-sync.mjs`),cfg.role==='core'?'--self-test':'--check'],'kit-check');
+        const report=JSON.parse(p.stdout);if(report.status!=='pass'||!Array.isArray(report.checks)||!report.checks.length)throw Error('Actual kit check failed');seal(ctx,evidence);process.stdout.write(JSON.stringify(report)+'\n');
+      }else if(target==='setup'){
+        const {createContext,validateSetupWitness}=await import(pathToFileURL(regular(`${cfg.npm_dir}/scripts/run-task.mjs`)).href);
+        validateSetupWitness(witness,createContext('setup',ctx.invocation));const receipt=seal(ctx,evidence);process.stdout.write(JSON.stringify({...witness.report,bootstrap_evidence:receipt})+'\n');
+      }else if(target==='versions:resolve'){
+        const p=child('bash',[regular(`${cfg.npm_dir}/scripts/resolve-versions.sh`)],'versions-resolve');seal(ctx,evidence);if(p.stdout)process.stdout.write(p.stdout);
+      }else{
+        const runner=await import(pathToFileURL(regular(`${cfg.npm_dir}/scripts/run-task.mjs`)).href);const bootstrapEvidence=seal(ctx,evidence);await runner.main(target,{...(witness?{setupWitness:witness}:{}),bootstrapEvidence});
+      }
+    }catch(error){process.stderr.write(error.message+'\n');try{publishFailure(error);}catch(failure){process.stderr.write(failure.message+'\n');process.exitCode=1;}}
+  _DEPS_JS: |
+    import * as fs from 'node:fs';
+    import path from 'node:path';
+    import {createHash,randomUUID} from 'node:crypto';
+    import {spawnSync} from 'node:child_process';
+    const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+    /** Closed Native E1 configuration. Absence is active; only Cat may stage the sealed original SDK. */
+    function validateUiAdoption(config) {
+      if (!Object.hasOwn(config, 'ui_adoption')) return undefined;
+      const phase = config.ui_adoption;
+      const fields = (value, keys) => !!value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
+      if (config.role !== 'consumer' || config.app !== 'cat_de_roman_esti' || !fields(phase, ['mode', 'until', 'legacy']) || phase.mode !== 'staged-react' || phase.until !== 'S1-M2') throw Error('Unsupported or malformed ui_adoption phase');
+      const legacy = phase.legacy;
+      if (!fields(legacy, ['version', 'archive_sha256', 'source_sha', 'receipt', 'receipt_sha256']) || legacy.version !== '0.3.0' || typeof legacy.archive_sha256 !== 'string' || typeof legacy.source_sha !== 'string' || typeof legacy.receipt_sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(legacy.archive_sha256) || !/^[a-f0-9]{40}([a-f0-9]{24})?$/.test(legacy.source_sha) || !/^[a-f0-9]{64}$/.test(legacy.receipt_sha256)) throw Error('Malformed sealed original UI identity');
+      const receipt = legacy.receipt;
+      const excluded = new Set(['kit', 'node_modules', 'third_party', 'vendor', 'dist', 'embedfs', 'test-results', 'TASK_BRIEF.md', 'TASK_RESULT.md', 'SWARM_RESULT.md']);
+      if (typeof receipt !== 'string' || !receipt || receipt.startsWith('/') || /\.tsbuildinfo(?:\.(?:gz|br))?$/.test(receipt) || receipt.split('/').some(part => !/^[A-Za-z0-9_@.-]+$/.test(part) || part === '.' || part === '..' || part.startsWith('.') || excluded.has(part))) throw Error('Original UI receipt must be a literal source-owned path outside caches, inputs and dependencies');
+      if ([config.vendor_dir ?? 'frontend/vendor', config.npm_dir ?? 'frontend/node_modules/@roedu/web-kit'].some(directory => typeof directory === 'string' && (receipt === directory || receipt.startsWith(directory + '/')))) throw Error('Original UI receipt overlaps a configured dependency directory');
+      return { mode: 'staged-react', until: 'S1-M2', legacy: { version: '0.3.0', archive_sha256: legacy.archive_sha256, source_sha: legacy.source_sha, receipt, receipt_sha256: legacy.receipt_sha256 } };
+    }
+    /** Read only the wrapper-owned current invocation; matching historical receipts are never selectors. */
+    function frozenBootstrapConfig(ctx) {
+      const known = new Set(['unit','full','gen','deps','kit:sync','build','image','baseline','golden:capture','golden:verify','contract:refresh','legacy:freeze','e2e','perf','qualify','shell']);
+      const input = relative => {
+        let current = ctx.root;
+        for (const part of relative.split('/')) { current = path.join(current,part); const stat = fs.lstatSync(current); if (stat.isSymbolicLink() || (!stat.isFile() && !stat.isDirectory())) throw Error('Nonregular current configuration ancestor'); }
+        if (!fs.lstatSync(current).isFile()) throw Error('Current configuration must be a regular file'); return current;
+      };
+      const descriptorPath='.gate/wrapper-current.json', descriptorBytes=fs.readFileSync(input(descriptorPath)), current=JSON.parse(descriptorBytes);
+      const fields=['schema','invocation','target','sha','tree_sha256','toolchain_digest','config_sha256','config_path','config_file_sha256'];
+      if (!current || typeof current!=='object' || Array.isArray(current) || Object.keys(current).length!==fields.length || !fields.every(key=>Object.hasOwn(current,key)) || current.schema!==1 || typeof current.invocation!=='string' || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(current.invocation??'') || typeof current.target!=='string' || !known.has(current.target) || current.sha!==ctx.sha || current.tree_sha256!==ctx.tree_sha256 || current.toolchain_digest!==ctx.toolchain_digest || !/^[a-f0-9]{64}$/.test(current.config_sha256??'') || !/^[a-f0-9]{64}$/.test(current.config_file_sha256??'')) throw Error('Closed current wrapper invocation identity required');
+      const relative=`.gate/${current.target.replaceAll(':','-')}/wrapper-kit-config.json`;
+      if (current.config_path!==relative) throw Error('Current configuration reference differs from exact primary target');
+      if (ctx.target && ctx.target!==current.target) {
+        const parents={setup:['unit','full','build','baseline','e2e','perf','kit:sync'],deps:['gen','kit:sync'], 'assets:sync':['build','kit:sync']};
+        if (!parents[ctx.target]?.includes(current.target)) throw Error('Requested primary target differs from current wrapper invocation');
+      }
+      const bytes=fs.readFileSync(input(relative)), captured=JSON.parse(bytes), config=captured.config;
+      if (hash(bytes)!==current.config_file_sha256 || captured.schema!==1 || captured.target!==current.target || captured.sha!==current.sha || captured.tree_sha256!==current.tree_sha256 || captured.toolchain_digest!==current.toolchain_digest || captured.config_sha256!==current.config_sha256 || !config || typeof config!=='object' || Array.isArray(config) || Object.keys(config).some(key=>!['role','app','npm_dir','vendor_dir','go_dirs','ui_adoption'].includes(key)) || !['role','app','npm_dir','vendor_dir','go_dirs'].every(key=>Object.hasOwn(config,key)) || !['core','consumer'].includes(config.role) || typeof config.app!=='string' || !/^[A-Za-z][A-Za-z0-9_-]*$/.test(config.app)) throw Error('Current frozen configuration bytes/identity differ');
+      const literal=(value,dot=false)=>{if(dot&&value==='.')return value;if(typeof value!=='string'||!value||value.startsWith('/')||value.split('/').some(part=>!/^[A-Za-z0-9_@.-]+$/.test(part)||part==='.'||part==='..'))throw Error('Nonliteral current configured path');return value;};
+      literal(config.npm_dir);literal(config.vendor_dir);
+      if(!Array.isArray(config.go_dirs)||!config.go_dirs.length||new Set(config.go_dirs).size!==config.go_dirs.length)throw Error('Explicit current Go paths required');config.go_dirs.forEach(directory=>literal(directory,true));
+      const phase=validateUiAdoption(config),canonical={role:config.role,app:config.app,npm_dir:config.npm_dir,vendor_dir:config.vendor_dir,go_dirs:[...config.go_dirs],...(phase?{ui_adoption:phase}:{})};
+      if(current.config_sha256!==hash(JSON.stringify(canonical))||JSON.stringify(config)!==JSON.stringify(canonical))throw Error('Current complete phase projection checksum mismatch');
+      return {config:canonical,config_sha256:captured.config_sha256,wrapper_target:captured.target,wrapper_config:relative,wrapper_config_sha256:hash(bytes),wrapper_invocation:current.invocation,wrapper_descriptor:descriptorPath,wrapper_descriptor_sha256:hash(descriptorBytes)};
+    }
+    function context(target, invocation = randomUUID()) {
+      const root = fs.realpathSync(process.cwd()), values = {};
+      for (const line of fs.readFileSync(path.join(root, '.gate.env'), 'utf8').split('\n')) { const match = /^([A-Z_]+)=([^\r\n]*)$/.exec(line); if (match) values[match[1]] = match[2]; }
+      const ctx = { root, target, invocation, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, dirty: process.env.GATE_DIRTY === 'true', toolchain_digest: process.env.TOOLCHAIN_DIGEST ?? values.TOOLCHAIN_DIGEST, stage: process.env.CSP_STAGE ?? values.CSP_STAGE, parallel: Number(process.env.GOMAXPROCS), cap: Number(process.env.GATE_PARALLEL_MAX ?? values.GATE_PARALLEL_MAX), started: new Date().toISOString() };
+      if (!/^[a-f0-9]{40}$/.test(ctx.sha ?? '') || !/^[a-f0-9]{64}$/.test(ctx.tree_sha256 ?? '') || !/^sha256:[a-f0-9]{64}$/.test(ctx.toolchain_digest ?? '') || !Number.isInteger(ctx.parallel) || ctx.parallel < 1 || ctx.parallel > ctx.cap || !['report-only', 'enforced'].includes(ctx.stage)) throw Error('Native wrapper identity/resources required for bootstrap');
+      return { ...ctx, ...frozenBootstrapConfig(ctx) };
+    }
+    function evidenceState(ctx){return {schema:1,target:ctx.target,invocation:ctx.invocation,sha:ctx.sha,tree_sha256:ctx.tree_sha256,toolchain_digest:ctx.toolchain_digest,started:ctx.started,config:ctx.config,config_sha256:ctx.config_sha256,wrapper_target:ctx.wrapper_target,wrapper_config:ctx.wrapper_config,wrapper_config_sha256:ctx.wrapper_config_sha256,wrapper_invocation:ctx.wrapper_invocation,wrapper_descriptor:ctx.wrapper_descriptor,wrapper_descriptor_sha256:ctx.wrapper_descriptor_sha256,actions:[],artifacts:[]};}
+    function outputPath(ctx,relative){if(typeof relative!=='string'||!relative.startsWith(`.gate/${ctx.target.replaceAll(':','-')}/`)||/[\\:\x00-\x1f\x7f]/.test(relative)||relative.split('/').some(p=>!p||p==='.'||p==='..'))throw Error('Unsafe bootstrap evidence path');let current=ctx.root;for(const part of relative.split('/')){current=path.join(current,part);try{if(fs.lstatSync(current).isSymbolicLink())throw Error('Symlink bootstrap evidence path');}catch(error){if(error.code!=='ENOENT')throw error;}}return current;}
+    function retain(ctx,evidence,phase,command,args,child,duration){if(!/^[A-Za-z][A-Za-z0-9._-]*$/.test(phase))throw Error('Unsafe bootstrap phase');const ordinal=evidence.actions.length,prefix=`.gate/${ctx.target.replaceAll(':','-')}/logs/${ctx.invocation}-bootstrap-${phase}-${ordinal}`,logs={};for(const stream of ['stdout','stderr']){const relative=`${prefix}.${stream}.log`,bytes=Buffer.from(child[stream]??''),file=outputPath(ctx,relative);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes,{flag:'wx'});evidence.artifacts.push(`${relative} sha256:${hash(bytes)}`);logs[`${stream}_log`]=relative;}evidence.actions.push({phase,kind:'command',command,argument_count:args.length,args_sha256:hash(JSON.stringify(args)),cwd:'.',exit_code:child.status??-1,duration_ms:duration,stdout_sha256:hash(child.stdout??''),stderr_sha256:hash(child.stderr??''),...(child.error?{error:child.error.message}:{}),...logs});}
+    function invoke(ctx,evidence,phase,command,args,maxBuffer=64*1024*1024){const started=Date.now(),child=spawnSync(command,args,{cwd:ctx.root,env:process.env,encoding:'utf8',maxBuffer});retain(ctx,evidence,phase,command,args,child,Date.now()-started);if(child.stderr)process.stderr.write(child.stderr);return child;}
+    function seal(ctx,evidence){evidence.finished=new Date().toISOString();const relative=`.gate/${ctx.target.replaceAll(':','-')}/bootstrap-execution.json`,bytes=Buffer.from(JSON.stringify(evidence,null,2)+'\n'),file=outputPath(ctx,relative);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes);return {schema:1,target:ctx.target,invocation:ctx.invocation,sha:ctx.sha,tree_sha256:ctx.tree_sha256,toolchain_digest:ctx.toolchain_digest,started:ctx.started,path:relative,sha256:hash(bytes)};}
+    function evidenceArtifacts(ctx,evidence){const receipt=seal(ctx,evidence);return [...evidence.artifacts,`${receipt.path} sha256:${receipt.sha256}`];}
+    function adopt(ctx,artifacts,report){for(const artifact of report.artifacts??[]){const match=/^(.+) sha256:([a-f0-9]{64})$/.exec(artifact);if(!match)throw Error('Malformed bootstrap hook artifact');const file=outputPath(ctx,match[1]);if(!fs.lstatSync(file).isFile()||hash(fs.readFileSync(file))!==match[2])throw Error('Bootstrap hook artifact mismatch');if(!artifacts.includes(artifact))artifacts.push(artifact);}}
+    function checksValid(checks) {
+      if (!Array.isArray(checks) || !checks.length || new Set(checks.map(item => item.name)).size !== checks.length) throw Error('Actual nonempty distinct checks required');
+      for (const check of checks) if (typeof check.name !== 'string' || !['pass', 'fail'].includes(check.status) || !Number.isInteger(check.duration_ms) || check.duration_ms < 0) throw Error('Malformed bootstrap check');
+    }
+    function publish(ctx, checks, artifacts, exitCode) {
+      checksValid(checks);
+      const result = { schema: 1, target: ctx.target, status: exitCode === 0 && checks.every(item => item.status === 'pass') ? 'pass' : 'fail', sha: ctx.sha, dirty: ctx.dirty, tree_sha256: ctx.tree_sha256, toolchain_digest: ctx.toolchain_digest, versions_lock_sha256: hash(fs.readFileSync(path.join(ctx.root, 'versions.lock.json'))), parallel: ctx.parallel, started: ctx.started, finished: new Date().toISOString(), checks, csp: { stage: ctx.stage, violations: 0, legacy_violations: 0 }, budgets: {}, artifacts };
+      const directory = path.join(ctx.root, '.gate', ctx.target.replaceAll(':', '-')); fs.mkdirSync(directory, { recursive: true }); fs.writeFileSync(path.join(directory, 'result.json'), JSON.stringify(result, null, 2) + '\n');
+      process.exitCode = result.status === 'pass' ? 0 : 1; return result;
+    }
+    /** Dependency generation before node_modules exists; repo hook must be self-contained and emit actual command evidence. */
+    function bootstrapDeps() {
+      const ctx = context('deps'), checks = [], artifacts = [], evidence = evidenceState(ctx), start = Date.now();
+      const child = invoke(ctx,evidence,'deps','task',['--silent','repo:deps',`INVOCATION=${ctx.invocation}`]);
+      try {
+        const report = JSON.parse(child.stdout); checksValid(report.checks);
+        if (report.schema !== 1 || report.target !== 'deps' || report.invocation !== ctx.invocation || report.sha !== ctx.sha || report.tree_sha256 !== ctx.tree_sha256 || !Array.isArray(report.actions)) throw Error('Dependency hook is empty/unbound');
+        for (const required of ['npm-lock', 'go-mod-tidy']) {
+          const check = report.checks.find(item => item.name === required), actions = report.actions.filter(action => action.check === required && action.kind === 'command');
+          const command = required === 'npm-lock' ? 'npm' : 'go', args = required === 'npm-lock' ? ['install', '--package-lock-only', '--ignore-scripts'] : ['mod', 'tidy'];
+          if (!check || (check.status === 'pass' && (!actions.length || actions.some(action => path.basename(action.command) !== command || action.args_sha256 !== hash(JSON.stringify(args)) || action.exit_code !== 0)))) throw Error(`Actual dependency command missing/false pass: ${required}`);
+        }
+        adopt(ctx,artifacts,report); checks.push(...report.checks);
+        if (child.error || child.status !== 0) throw Error('Actual repo:deps process failed');
+      } catch (error) { checks.push({ name: 'repo-deps', status: 'fail', reason: error.message, duration_ms: Date.now() - start }); }
+      return publish(ctx, checks, [...artifacts,...evidenceArtifacts(ctx,evidence)], child.status ?? 1);
+    }
+
+    try { bootstrapDeps(); } catch(error) { process.stderr.write(error.message+'\n');process.exitCode=1; }
+  _KIT_SYNC_JS: |
+    import * as fs from 'node:fs';
+    import path from 'node:path';
+    import { gunzipSync } from 'node:zlib';
+    import { createHash, randomUUID } from 'node:crypto';
+    import { spawnSync } from 'node:child_process';
+    import { fileURLToPath } from 'node:url';
+    const MAX_ARCHIVE = 128 * 1024 * 1024;
+    const fail = message => { throw Error(message); };
+    const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+    function safePath(value, allowDot = false) {
+      if (allowDot && value === '.') return '.';
+      if (typeof value !== 'string' || !value || value.startsWith('/') || /[\\:\x00-\x1f\x7f]/.test(value)) fail(`Unsafe path: ${String(value)}`);
+      const normalized = value.endsWith('/') ? value.slice(0, -1) : value;
+      if (normalized.split('/').some(part => !part || part === '.' || part === '..')) fail(`Unsafe path: ${value}`);
+      return normalized;
+    }
+    function octal(block, offset, length, label) {
+      const text = block.subarray(offset, offset + length).toString('ascii').replace(/\0.*$/s, '').trim();
+      if (!/^[0-7]+$/.test(text)) fail(`Invalid tar ${label}`);
+      const value = Number.parseInt(text, 8);
+      if (!Number.isSafeInteger(value) || value > MAX_ARCHIVE) fail(`Tar ${label} exceeds limit`);
+      return value;
+    }
+    function field(block, start, length) {
+      const bytes = block.subarray(start, start + length), zero = bytes.indexOf(0);
+      if (zero >= 0 && !bytes.subarray(zero).every(byte => byte === 0)) fail('Malformed tar string padding');
+      return new TextDecoder('utf-8', { fatal: true }).decode(zero < 0 ? bytes : bytes.subarray(0, zero));
+    }
+    function pax(data) {
+      const result = {};
+      let position = 0;
+      while (position < data.length) {
+        const space = data.indexOf(32, position);
+        if (space < 0) fail('Malformed PAX length');
+        const length = data.subarray(position, space).toString('ascii');
+        if (!/^\d+$/.test(length)) fail('Malformed PAX length');
+        const count = Number(length);
+        if (!Number.isSafeInteger(count) || count < 5 || position + count > data.length || data[position + count - 1] !== 10) fail('Malformed PAX record');
+        const record = new TextDecoder('utf-8', { fatal: true }).decode(data.subarray(space + 1, position + count - 1));
+        const equal = record.indexOf('=');
+        if (equal < 1) fail('Malformed PAX value');
+        const key = record.slice(0, equal), value = record.slice(equal + 1);
+        if (!['path', 'size', 'mtime', 'atime', 'ctime', 'comment', 'uid', 'gid', 'uname', 'gname'].includes(key) || key in result || value.includes('\0')) fail(`Unsupported PAX field: ${key}`);
+        if (key === 'path') safePath(value);
+        result[key] = value; position += count;
+      }
+      return result;
+    }
+    /** Strict regular-file/directory USTAR parser. PAX metadata and git's global comment are supported. */
+    function parseTar(buffer) {
+      if (!Buffer.isBuffer(buffer) || buffer.length > MAX_ARCHIVE || buffer.length % 512) fail('Malformed tar size');
+      const entries = new Map();
+      let position = 0, extended = {}, longName;
+      while (position < buffer.length) {
+        const block = buffer.subarray(position, position + 512);
+        if (block.every(byte => byte === 0)) {
+          if (position + 1024 > buffer.length || !buffer.subarray(position).every(byte => byte === 0)) fail('Malformed tar end marker');
+          if (Object.keys(extended).length || longName) fail('Dangling tar extension');
+          return entries;
+        }
+        const checksum = octal(block, 148, 8, 'checksum');
+        let actual = 0; for (let index = 0; index < 512; index++) actual += index >= 148 && index < 156 ? 32 : block[index];
+        if (checksum !== actual) fail('Tar checksum mismatch');
+        if (!['ustar', 'ustar '].includes(field(block, 257, 6))) fail('Unsupported tar format');
+        const size = octal(block, 124, 12, 'size'), mode = octal(block, 100, 8, 'mode');
+        if (mode & ~0o777) fail('Unsafe tar permissions');
+        const type = String.fromCharCode(block[156] || 48), end = position + 512 + Math.ceil(size / 512) * 512;
+        if (end > buffer.length) fail('Truncated tar entry');
+        const data = buffer.subarray(position + 512, position + 512 + size);
+        if (!buffer.subarray(position + 512 + size, end).every(byte => byte === 0)) fail('Nonzero tar padding');
+        position = end;
+        if (type === 'x' || type === 'g') {
+          const metadata = pax(data);
+          if (type === 'g') { if ('path' in metadata || 'size' in metadata) fail('Unsafe global PAX path/size'); }
+          else { if (Object.keys(extended).length) fail('Repeated PAX extension'); extended = metadata; }
+          continue;
+        }
+        if (type === 'L') {
+          if (longName) fail('Repeated long-name extension');
+          longName = safePath(new TextDecoder('utf-8', { fatal: true }).decode(data).replace(/\0$/, ''));
+          continue;
+        }
+        if (type !== '0' && type !== '5') fail(`Unsafe tar entry type: ${type}`);
+        if (field(block, 157, 100)) fail('Tar link target forbidden');
+        if (type === '5' && size !== 0) fail('Directory has tar payload');
+        if (extended.size !== undefined && (!/^\d+$/.test(extended.size) || Number(extended.size) !== size)) fail('PAX size mismatch');
+        const prefix = field(block, 345, 155), name = field(block, 0, 100);
+        const entry = safePath(extended.path ?? longName ?? (prefix ? `${prefix}/${name}` : name));
+        if (entry.split('/').some(part => /^__pycache__$|\.py[co](?:\.(?:gz|br))?$/i.test(part))) fail(`Excluded Python bytecode/cache in bootstrap archive: ${entry}`);
+        extended = {}; longName = undefined;
+        if (entries.has(entry)) fail(`Duplicate tar path: ${entry}`);
+        for (let parent = path.posix.dirname(entry); parent !== '.'; parent = path.posix.dirname(parent)) if (entries.get(parent)?.type === 'file') fail(`Tar ancestor is a file: ${parent}`);
+        if (type === '0' && [...entries.keys()].some(key => key.startsWith(`${entry}/`))) fail(`Tar file shadows directory: ${entry}`);
+        entries.set(entry, { type: type === '5' ? 'directory' : 'file', mode, data: Buffer.from(data) });
+        if (entries.size > 20000) fail('Too many tar entries');
+      }
+      fail('Tar end marker missing');
+    }
+    function readTarGz(buffer) {
+      if (!Buffer.isBuffer(buffer) || buffer.length > MAX_ARCHIVE) fail('Archive exceeds limit');
+      return parseTar(gunzipSync(buffer, { maxOutputLength: MAX_ARCHIVE }));
+    }
+    function regular(root, relative) {
+      let file = root;
+      for (const part of safePath(relative).split('/')) {
+        file = path.join(file, part);
+        const stat = fs.lstatSync(file); if (stat.isSymbolicLink()) throw Error('Bootstrap input symlink forbidden');
+      }
+      if (!fs.lstatSync(file).isFile()) throw Error('Bootstrap input must be a regular file'); return file;
+    }
+    function verifyInputs(root) {
+      const tag = fs.readFileSync(regular(root, 'kit/CORE_TAG'), 'utf8');
+      if (!/^core-v1\.\d+\n?$/.test(tag)) throw Error('Committed CORE_TAG required');
+      const names = fs.readdirSync(path.join(root, 'kit')).sort();
+      const ui = names.find(name => /^roedu-ui-\d+\.\d+\.\d+\.tgz$/.test(name)), npm = names.find(name => /^roedu-web-kit-\d+\.\d+\.\d+\.tgz$/.test(name));
+      const go = `web-kit-go-${tag.trim()}.tgz`, expected = ['CORE_TAG', 'SHA256SUMS', ui, npm, go];
+      if (!ui || !npm || names.length !== 5 || names.some(name => !expected.includes(name))) throw Error('Exactly the committed tag and three archives/checksums required');
+      const sums = new Map();
+      for (const line of fs.readFileSync(regular(root, 'kit/SHA256SUMS'), 'utf8').split('\n').filter(Boolean)) {
+        const match = /^([a-f0-9]{64}) [ *]([^/\\\s]+)$/.exec(line);
+        if (!match || ![ui, npm, go].includes(match[2]) || sums.has(match[2])) throw Error('Invalid canonical archive checksum set'); sums.set(match[2], match[1]);
+      }
+      if (sums.size !== 3) throw Error('All three archive hashes required');
+      for (const name of [ui, npm, go]) if (hash(fs.readFileSync(regular(root, `kit/${name}`))) !== sums.get(name)) throw Error(`Archive checksum mismatch: ${name}`);
+      readTarGz(fs.readFileSync(regular(root, `kit/${go}`)));
+      const entries = readTarGz(fs.readFileSync(regular(root, `kit/${npm}`)));
+      const script = entries.get('package/scripts/kit-sync.mjs');
+      if (script?.type !== 'file' || script.data.length === 0) throw Error('Verified standalone kit-sync entry missing');
+      const manifest = JSON.parse(entries.get('package/package.json')?.data.toString('utf8') ?? 'null');
+      if (manifest?.name !== '@roedu/web-kit' || npm !== `roedu-web-kit-${manifest.version}.tgz`) throw Error('Verified web-kit package identity mismatch');
+      const uiEntries = readTarGz(fs.readFileSync(regular(root, `kit/${ui}`))), uiEntry = uiEntries.get('package/package.json');
+      if (uiEntry?.type !== 'file') throw Error('Verified selected UI manifest missing');
+      const uiManifest = JSON.parse(uiEntry.data.toString('utf8'));
+      if (uiManifest.name !== '@roedu/ui' || typeof uiManifest.version !== 'string' || !/^\d+\.\d+\.\d+$/.test(uiManifest.version) || ui !== `roedu-ui-${uiManifest.version}.tgz`) throw Error('Verified selected UI package identity mismatch');
+      return { tag: tag.trim(), script: script.data, archive: npm, archive_sha256: sums.get(npm), selected_ui: { version: uiManifest.version, archive_sha256: sums.get(ui) } };
+    }
+    /** Closed Native E1 configuration. Absence is active; only Cat may stage the sealed original SDK. */
+    function validateUiAdoption(config) {
+      if (!Object.hasOwn(config, 'ui_adoption')) return undefined;
+      const phase = config.ui_adoption;
+      const fields = (value, keys) => !!value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
+      if (config.role !== 'consumer' || config.app !== 'cat_de_roman_esti' || !fields(phase, ['mode', 'until', 'legacy']) || phase.mode !== 'staged-react' || phase.until !== 'S1-M2') throw Error('Unsupported or malformed ui_adoption phase');
+      const legacy = phase.legacy;
+      if (!fields(legacy, ['version', 'archive_sha256', 'source_sha', 'receipt', 'receipt_sha256']) || legacy.version !== '0.3.0' || typeof legacy.archive_sha256 !== 'string' || typeof legacy.source_sha !== 'string' || typeof legacy.receipt_sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(legacy.archive_sha256) || !/^[a-f0-9]{40}([a-f0-9]{24})?$/.test(legacy.source_sha) || !/^[a-f0-9]{64}$/.test(legacy.receipt_sha256)) throw Error('Malformed sealed original UI identity');
+      const receipt = legacy.receipt;
+      const excluded = new Set(['kit', 'node_modules', 'third_party', 'vendor', 'dist', 'embedfs', 'test-results', 'TASK_BRIEF.md', 'TASK_RESULT.md', 'SWARM_RESULT.md']);
+      if (typeof receipt !== 'string' || !receipt || receipt.startsWith('/') || /\.tsbuildinfo(?:\.(?:gz|br))?$/.test(receipt) || receipt.split('/').some(part => !/^[A-Za-z0-9_@.-]+$/.test(part) || part === '.' || part === '..' || part.startsWith('.') || excluded.has(part))) throw Error('Original UI receipt must be a literal source-owned path outside caches, inputs and dependencies');
+      if ([config.vendor_dir ?? 'frontend/vendor', config.npm_dir ?? 'frontend/node_modules/@roedu/web-kit'].some(directory => typeof directory === 'string' && (receipt === directory || receipt.startsWith(directory + '/')))) throw Error('Original UI receipt overlaps a configured dependency directory');
+      return { mode: 'staged-react', until: 'S1-M2', legacy: { version: '0.3.0', archive_sha256: legacy.archive_sha256, source_sha: legacy.source_sha, receipt, receipt_sha256: legacy.receipt_sha256 } };
+    }
+    /** Read only the wrapper-owned current invocation; matching historical receipts are never selectors. */
+    function frozenBootstrapConfig(ctx) {
+      const known = new Set(['unit','full','gen','deps','kit:sync','build','image','baseline','golden:capture','golden:verify','contract:refresh','legacy:freeze','e2e','perf','qualify','shell']);
+      const input = relative => {
+        let current = ctx.root;
+        for (const part of relative.split('/')) { current = path.join(current,part); const stat = fs.lstatSync(current); if (stat.isSymbolicLink() || (!stat.isFile() && !stat.isDirectory())) throw Error('Nonregular current configuration ancestor'); }
+        if (!fs.lstatSync(current).isFile()) throw Error('Current configuration must be a regular file'); return current;
+      };
+      const descriptorPath='.gate/wrapper-current.json', descriptorBytes=fs.readFileSync(input(descriptorPath)), current=JSON.parse(descriptorBytes);
+      const fields=['schema','invocation','target','sha','tree_sha256','toolchain_digest','config_sha256','config_path','config_file_sha256'];
+      if (!current || typeof current!=='object' || Array.isArray(current) || Object.keys(current).length!==fields.length || !fields.every(key=>Object.hasOwn(current,key)) || current.schema!==1 || typeof current.invocation!=='string' || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(current.invocation??'') || typeof current.target!=='string' || !known.has(current.target) || current.sha!==ctx.sha || current.tree_sha256!==ctx.tree_sha256 || current.toolchain_digest!==ctx.toolchain_digest || !/^[a-f0-9]{64}$/.test(current.config_sha256??'') || !/^[a-f0-9]{64}$/.test(current.config_file_sha256??'')) throw Error('Closed current wrapper invocation identity required');
+      const relative=`.gate/${current.target.replaceAll(':','-')}/wrapper-kit-config.json`;
+      if (current.config_path!==relative) throw Error('Current configuration reference differs from exact primary target');
+      if (ctx.target && ctx.target!==current.target) {
+        const parents={setup:['unit','full','build','baseline','e2e','perf','kit:sync'],deps:['gen','kit:sync'], 'assets:sync':['build','kit:sync']};
+        if (!parents[ctx.target]?.includes(current.target)) throw Error('Requested primary target differs from current wrapper invocation');
+      }
+      const bytes=fs.readFileSync(input(relative)), captured=JSON.parse(bytes), config=captured.config;
+      if (hash(bytes)!==current.config_file_sha256 || captured.schema!==1 || captured.target!==current.target || captured.sha!==current.sha || captured.tree_sha256!==current.tree_sha256 || captured.toolchain_digest!==current.toolchain_digest || captured.config_sha256!==current.config_sha256 || !config || typeof config!=='object' || Array.isArray(config) || Object.keys(config).some(key=>!['role','app','npm_dir','vendor_dir','go_dirs','ui_adoption'].includes(key)) || !['role','app','npm_dir','vendor_dir','go_dirs'].every(key=>Object.hasOwn(config,key)) || !['core','consumer'].includes(config.role) || typeof config.app!=='string' || !/^[A-Za-z][A-Za-z0-9_-]*$/.test(config.app)) throw Error('Current frozen configuration bytes/identity differ');
+      const literal=(value,dot=false)=>{if(dot&&value==='.')return value;if(typeof value!=='string'||!value||value.startsWith('/')||value.split('/').some(part=>!/^[A-Za-z0-9_@.-]+$/.test(part)||part==='.'||part==='..'))throw Error('Nonliteral current configured path');return value;};
+      literal(config.npm_dir);literal(config.vendor_dir);
+      if(!Array.isArray(config.go_dirs)||!config.go_dirs.length||new Set(config.go_dirs).size!==config.go_dirs.length)throw Error('Explicit current Go paths required');config.go_dirs.forEach(directory=>literal(directory,true));
+      const phase=validateUiAdoption(config),canonical={role:config.role,app:config.app,npm_dir:config.npm_dir,vendor_dir:config.vendor_dir,go_dirs:[...config.go_dirs],...(phase?{ui_adoption:phase}:{})};
+      if(current.config_sha256!==hash(JSON.stringify(canonical))||JSON.stringify(config)!==JSON.stringify(canonical))throw Error('Current complete phase projection checksum mismatch');
+      return {config:canonical,config_sha256:captured.config_sha256,wrapper_target:captured.target,wrapper_config:relative,wrapper_config_sha256:hash(bytes),wrapper_invocation:current.invocation,wrapper_descriptor:descriptorPath,wrapper_descriptor_sha256:hash(descriptorBytes)};
+    }
+    function context(target, invocation = randomUUID()) {
+      const root = fs.realpathSync(process.cwd()), values = {};
+      for (const line of fs.readFileSync(path.join(root, '.gate.env'), 'utf8').split('\n')) { const match = /^([A-Z_]+)=([^\r\n]*)$/.exec(line); if (match) values[match[1]] = match[2]; }
+      const ctx = { root, target, invocation, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, dirty: process.env.GATE_DIRTY === 'true', toolchain_digest: process.env.TOOLCHAIN_DIGEST ?? values.TOOLCHAIN_DIGEST, stage: process.env.CSP_STAGE ?? values.CSP_STAGE, parallel: Number(process.env.GOMAXPROCS), cap: Number(process.env.GATE_PARALLEL_MAX ?? values.GATE_PARALLEL_MAX), started: new Date().toISOString() };
+      if (!/^[a-f0-9]{40}$/.test(ctx.sha ?? '') || !/^[a-f0-9]{64}$/.test(ctx.tree_sha256 ?? '') || !/^sha256:[a-f0-9]{64}$/.test(ctx.toolchain_digest ?? '') || !Number.isInteger(ctx.parallel) || ctx.parallel < 1 || ctx.parallel > ctx.cap || !['report-only', 'enforced'].includes(ctx.stage)) throw Error('Native wrapper identity/resources required for bootstrap');
+      return { ...ctx, ...frozenBootstrapConfig(ctx) };
+    }
+    function evidenceState(ctx){return {schema:1,target:ctx.target,invocation:ctx.invocation,sha:ctx.sha,tree_sha256:ctx.tree_sha256,toolchain_digest:ctx.toolchain_digest,started:ctx.started,config:ctx.config,config_sha256:ctx.config_sha256,wrapper_target:ctx.wrapper_target,wrapper_config:ctx.wrapper_config,wrapper_config_sha256:ctx.wrapper_config_sha256,wrapper_invocation:ctx.wrapper_invocation,wrapper_descriptor:ctx.wrapper_descriptor,wrapper_descriptor_sha256:ctx.wrapper_descriptor_sha256,actions:[],artifacts:[]};}
+    function outputPath(ctx,relative){if(typeof relative!=='string'||!relative.startsWith(`.gate/${ctx.target.replaceAll(':','-')}/`)||/[\\:\x00-\x1f\x7f]/.test(relative)||relative.split('/').some(p=>!p||p==='.'||p==='..'))throw Error('Unsafe bootstrap evidence path');let current=ctx.root;for(const part of relative.split('/')){current=path.join(current,part);try{if(fs.lstatSync(current).isSymbolicLink())throw Error('Symlink bootstrap evidence path');}catch(error){if(error.code!=='ENOENT')throw error;}}return current;}
+    function retain(ctx,evidence,phase,command,args,child,duration){if(!/^[A-Za-z][A-Za-z0-9._-]*$/.test(phase))throw Error('Unsafe bootstrap phase');const ordinal=evidence.actions.length,prefix=`.gate/${ctx.target.replaceAll(':','-')}/logs/${ctx.invocation}-bootstrap-${phase}-${ordinal}`,logs={};for(const stream of ['stdout','stderr']){const relative=`${prefix}.${stream}.log`,bytes=Buffer.from(child[stream]??''),file=outputPath(ctx,relative);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes,{flag:'wx'});evidence.artifacts.push(`${relative} sha256:${hash(bytes)}`);logs[`${stream}_log`]=relative;}evidence.actions.push({phase,kind:'command',command,argument_count:args.length,args_sha256:hash(JSON.stringify(args)),cwd:'.',exit_code:child.status??-1,duration_ms:duration,stdout_sha256:hash(child.stdout??''),stderr_sha256:hash(child.stderr??''),...(child.error?{error:child.error.message}:{}),...logs});}
+    function invoke(ctx,evidence,phase,command,args,maxBuffer=64*1024*1024){const started=Date.now(),child=spawnSync(command,args,{cwd:ctx.root,env:process.env,encoding:'utf8',maxBuffer});retain(ctx,evidence,phase,command,args,child,Date.now()-started);if(child.stderr)process.stderr.write(child.stderr);return child;}
+    function seal(ctx,evidence){evidence.finished=new Date().toISOString();const relative=`.gate/${ctx.target.replaceAll(':','-')}/bootstrap-execution.json`,bytes=Buffer.from(JSON.stringify(evidence,null,2)+'\n'),file=outputPath(ctx,relative);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes);return {schema:1,target:ctx.target,invocation:ctx.invocation,sha:ctx.sha,tree_sha256:ctx.tree_sha256,toolchain_digest:ctx.toolchain_digest,started:ctx.started,path:relative,sha256:hash(bytes)};}
+    function evidenceArtifacts(ctx,evidence){const receipt=seal(ctx,evidence);return [...evidence.artifacts,`${receipt.path} sha256:${receipt.sha256}`];}
+    function adopt(ctx,artifacts,report){for(const artifact of report.artifacts??[]){const match=/^(.+) sha256:([a-f0-9]{64})$/.exec(artifact);if(!match)throw Error('Malformed bootstrap hook artifact');const file=outputPath(ctx,match[1]);if(!fs.lstatSync(file).isFile()||hash(fs.readFileSync(file))!==match[2])throw Error('Bootstrap hook artifact mismatch');if(!artifacts.includes(artifact))artifacts.push(artifact);}}
+    function checksValid(checks) {
+      if (!Array.isArray(checks) || !checks.length || new Set(checks.map(item => item.name)).size !== checks.length) throw Error('Actual nonempty distinct checks required');
+      for (const check of checks) if (typeof check.name !== 'string' || !['pass', 'fail'].includes(check.status) || !Number.isInteger(check.duration_ms) || check.duration_ms < 0) throw Error('Malformed bootstrap check');
+    }
+    /** Carry actual standalone inspection truth through the pre-install bootstrap. */
+    function validateBootstrapUiAdoption(ctx, report, input) {
+      const phase = validateUiAdoption(ctx.config), present = Object.hasOwn(report, 'ui_adoption');
+      if (!phase) {
+        if (present || report.checks.some(check => check.name === 'ui-adoption' || check.name === 'ui-staged-original')) throw Error('Active bootstrap must not carry staged UI evidence');
+        return undefined;
+      }
+      const value = report.ui_adoption;
+      const fields = (object, keys) => !!object && typeof object === 'object' && !Array.isArray(object) && Object.keys(object).length === keys.length && keys.every(key => Object.hasOwn(object,key));
+      if (!present || !fields(value,['mode','status','until','source','config_sha256','legacy','selected_ui']) || value.mode !== 'staged-react' || value.status !== 'pending' || value.until !== 'S1-M2' || value.source !== 'repo:kit-config' || value.config_sha256 !== ctx.config_sha256) throw Error('Standalone pending UI evidence must bind the complete frozen configuration');
+      const canonical = validateUiAdoption({ ...ctx.config, ui_adoption: { mode: value.mode, until: value.until, legacy: value.legacy } });
+      if (JSON.stringify(canonical) !== JSON.stringify(phase)) throw Error('Standalone pending legacy seal differs from frozen phase');
+      if (!fields(value.selected_ui,['version','archive_sha256']) || value.selected_ui.version !== input.selected_ui.version || value.selected_ui.archive_sha256 !== input.selected_ui.archive_sha256) throw Error('Standalone selected UI evidence differs from verified committed kit input');
+      const actual = report.checks.filter(check => check.name === 'ui-adoption');
+      if (actual.length !== 1 || actual[0].status !== 'pass' || actual[0].reason !== 'ui-staged-pending' || report.checks.some(check => check.name === 'ui-staged-original')) throw Error('Actual standalone ui-adoption inspection check and pending reason required');
+      return { mode: 'staged-react', status: 'pending', until: 'S1-M2', source: 'repo:kit-config', config_sha256: ctx.config_sha256, legacy: canonical.legacy, selected_ui: { ...input.selected_ui } };
+    }
+    function publish(ctx, checks, artifacts, exitCode, uiAdoption) {
+      checksValid(checks);
+      const result = { schema: 1, target: ctx.target, status: exitCode === 0 && checks.every(item => item.status === 'pass') ? 'pass' : 'fail', sha: ctx.sha, dirty: ctx.dirty, tree_sha256: ctx.tree_sha256, toolchain_digest: ctx.toolchain_digest, versions_lock_sha256: hash(fs.readFileSync(path.join(ctx.root, 'versions.lock.json'))), parallel: ctx.parallel, started: ctx.started, finished: new Date().toISOString(), checks, csp: { stage: ctx.stage, violations: 0, legacy_violations: 0 }, budgets: {}, artifacts, ...(uiAdoption?{ui_adoption:uiAdoption}:{}) };
+      const directory = path.join(ctx.root, '.gate', ctx.target.replaceAll(':', '-')); fs.mkdirSync(directory, { recursive: true }); fs.writeFileSync(path.join(directory, 'result.json'), JSON.stringify(result, null, 2) + '\n');
+      process.exitCode = result.status === 'pass' ? 0 : 1; return result;
+    }
+    /** First sync imports no package helper: only this one checksum-verified standalone script is extracted. */
+    function bootstrapKitSync() {
+      const ctx = context('kit:sync'), checks = [], artifacts = [], evidence = evidenceState(ctx);
+      let child, uiAdoption;
+      try {
+        const start = Date.now(), input = verifyInputs(ctx.root);
+        checks.push({ name: 'bootstrap-kit-input', status: 'pass', duration_ms: Date.now() - start });
+        const directory = path.join(ctx.root, '.gate/kit-sync/_bootstrap'); fs.mkdirSync(directory, { recursive: true });
+        const script = path.join(directory, 'kit-sync.mjs'); fs.writeFileSync(script, input.script, { mode: 0o600 });
+        artifacts.push(`verified-bootstrap ${input.archive} sha256:${input.archive_sha256}`);
+        child = invoke(ctx,evidence,'kit-sync',process.execPath,[script]);
+        const report = JSON.parse(child.stdout); checksValid(report.checks); checks.push(...report.checks);
+        if (child.error || child.status !== 0 || report.status !== 'pass' || report.mode !== 'sync' || report.tag !== input.tag) throw Error('Actual standalone kit sync failed');
+        uiAdoption = validateBootstrapUiAdoption(ctx, report, input);
+      } catch (error) { checks.push({ name: 'bootstrap-kit-sync', status: 'fail', reason: error.message, duration_ms: 0 }); }
+      return publish(ctx, checks, [...artifacts,...evidenceArtifacts(ctx,evidence)], child?.status ?? 1, uiAdoption);
+    }
+    /** Dependency generation before node_modules exists; repo hook must be self-contained and emit actual command evidence. */
+    function bootstrapDeps() {
+      const ctx = context('deps'), checks = [], artifacts = [], evidence = evidenceState(ctx), start = Date.now();
+      const child = invoke(ctx,evidence,'deps','task',['--silent','repo:deps',`INVOCATION=${ctx.invocation}`]);
+      try {
+        const report = JSON.parse(child.stdout); checksValid(report.checks);
+        if (report.schema !== 1 || report.target !== 'deps' || report.invocation !== ctx.invocation || report.sha !== ctx.sha || report.tree_sha256 !== ctx.tree_sha256 || !Array.isArray(report.actions)) throw Error('Dependency hook is empty/unbound');
+        for (const required of ['npm-lock', 'go-mod-tidy']) {
+          const check = report.checks.find(item => item.name === required), actions = report.actions.filter(action => action.check === required && action.kind === 'command');
+          const command = required === 'npm-lock' ? 'npm' : 'go', args = required === 'npm-lock' ? ['install', '--package-lock-only', '--ignore-scripts'] : ['mod', 'tidy'];
+          if (!check || (check.status === 'pass' && (!actions.length || actions.some(action => path.basename(action.command) !== command || action.args_sha256 !== hash(JSON.stringify(args)) || action.exit_code !== 0)))) throw Error(`Actual dependency command missing/false pass: ${required}`);
+        }
+        adopt(ctx,artifacts,report); checks.push(...report.checks);
+        if (child.error || child.status !== 0) throw Error('Actual repo:deps process failed');
+      } catch (error) { checks.push({ name: 'repo-deps', status: 'fail', reason: error.message, duration_ms: Date.now() - start }); }
+      return publish(ctx, checks, [...artifacts,...evidenceArtifacts(ctx,evidence)], child.status ?? 1);
+    }
+
+    try { bootstrapKitSync(); } catch(error) { process.stderr.write(error.message+'\n');process.exitCode=1; }
+tasks:
+  _runner:
+    desc: Trusted inline package locator and actual setup launcher
+    internal: true
+    cmds:
+      - |
+        node --input-type=module - '{{.TARGET}}' <<'ROEDU_RUNNER'
+        {{._RUNNER_JS}}
+        ROEDU_RUNNER
+  setup:
+    desc: Install through the explicit repo setup hook
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: setup
+  gate:unit:
+    desc: Run generic checks and bound repo unit hook
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: unit
+  gate:full:
+    desc: Run complete generic checks and bound repo full hook
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: full
+  gen:
+    desc: Generate repo sources; resolution only via approved wrapper flag
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: gen
+  assets:sync:
+    desc: Copy actual built assets into module embedfs
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: assets:sync
+  build:
+    desc: Build actual product and delivery artifacts
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: build
+  image:record:
+    desc: Record host-built immutable app image ID
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: image
+  versions:check:
+    desc: Check exact versions and scoped legacy findings
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: versions:check
+  versions:resolve:
+    desc: Internal resolver guarded by gen --resolve-versions
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: versions:resolve
+  kit:check:
+    desc: Check actual committed kit identity; core runs fixture self-test
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: kit:check
+  baseline:
+    desc: Capture actual live app screenshot baseline
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: baseline
+  legacy:freeze:
+    desc: Invoke repo-owned legacy freeze hook
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: legacy:freeze
+  e2e:
+    desc: Invoke actual repo-owned browser subset
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: e2e
+  perf:
+    desc: Invoke actual repo-owned performance subset
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: perf
+  golden:capture:
+    desc: S0b or app-owned golden capture; refuses until implemented
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: golden:capture
+  golden:verify:
+    desc: S0b or app-owned golden verification; refuses until implemented
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: golden:verify
+  contract:refresh:
+    desc: S0b or app-owned contract refresh; refuses until implemented
+    cmds:
+      - task: _runner
+        vars:
+          TARGET: contract:refresh
+  deps:
+    desc: Generate real dependency locks before any package helper is installed
+    cmds:
+      - |
+        node --input-type=module <<'ROEDU_DEPS'
+        {{._DEPS_JS}}
+        ROEDU_DEPS
+  kit:sync:
+    desc: Parent-only committed kit bootstrap; extracts only verified standalone sync script
+    cmds:
+      - |
+        node --input-type=module <<'ROEDU_KIT_SYNC'
+        {{._KIT_SYNC_JS}}
+        ROEDU_KIT_SYNC
+  env:up:
+    desc: Host wrapper owns test environment lifecycle
+    cmds:
+      - |
+        node --input-type=module -e "throw Error('Runner has no Docker socket; trusted host wrapper full manages the test environment')"
+  env:down:
+    desc: Host wrapper owns test environment lifecycle
+    cmds:
+      - |
+        node --input-type=module -e "throw Error('Runner has no Docker socket; trusted host wrapper full manages the test environment')"

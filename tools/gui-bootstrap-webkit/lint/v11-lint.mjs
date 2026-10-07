@@ -1,0 +1,3 @@
+import {checkVersions} from '../scripts/versions-check.mjs';
+import {taskConfig} from './lint-scope.mjs';
+try{const report=await checkVersions({root:process.cwd(),config:taskConfig(process.cwd()),lintOnly:true});process.stdout.write(JSON.stringify(report)+'\n');if(report.status!=='pass'){for(const error of report.errors)process.stderr.write(`${error.rule}: ${error.tool_or_import} ${error.paths.join(', ')}\n`);process.exitCode=1;}}catch(error){process.stderr.write(error.message+'\n');process.stdout.write(JSON.stringify({schema:1,status:'fail',reason:'validation-failed',errors:[error.message],legacy_pending:[]})+'\n');process.exitCode=1;}

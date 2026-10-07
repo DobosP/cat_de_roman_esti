@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema",
+    "measured_at",
+    "js",
+    "css",
+    "routes",
+    "vitals"
+  ],
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "measured_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$"
+    },
+    "source": {
+      "type": "string"
+    },
+    "js": {
+      "type": "object",
+      "required": [
+        "server-page",
+        "island-route",
+        "cat-initial",
+        "vendor-gated"
+      ],
+      "properties": {
+        "server-page": {
+          "$ref": "#/$defs/limit"
+        },
+        "island-route": {
+          "$ref": "#/$defs/limit"
+        },
+        "cat-initial": {
+          "type": "object",
+          "required": [
+            "limit_gz",
+            "target_gz"
+          ],
+          "properties": {
+            "limit_gz": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "target_gz": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "vendor-gated": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/limit"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "css": {
+      "type": "object",
+      "required": [
+        "global"
+      ],
+      "properties": {
+        "global": {
+          "type": "object",
+          "required": [
+            "limit_gz"
+          ],
+          "properties": {
+            "limit_gz": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "routes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "class",
+          "islands",
+          "widgets"
+        ],
+        "properties": {
+          "class": {
+            "enum": [
+              "server-page",
+              "island-route",
+              "cat-initial"
+            ]
+          },
+          "islands": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "widgets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "vitals": {
+      "type": "object",
+      "required": [
+        "lcp_ms",
+        "inp_ms",
+        "throttle"
+      ],
+      "properties": {
+        "lcp_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "inp_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "throttle": {
+          "type": "object",
+          "required": [
+            "cpu",
+            "rtt_ms",
+            "down_kbps"
+          ],
+          "properties": {
+            "cpu": {
+              "type": "number",
+              "minimum": 1
+            },
+            "rtt_ms": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "down_kbps": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "limit": {
+      "type": "object",
+      "required": [
+        "limit_gz"
+      ],
+      "properties": {
+        "limit_gz": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

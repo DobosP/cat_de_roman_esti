@@ -1,0 +1,19 @@
+{
+  "id": "roedu-javascript-import-call",
+  "language": "JavaScript",
+  "severity": "error",
+  "message": "import-call",
+  "rule": {
+    "all": [
+      {
+        "kind": "call_expression"
+      },
+      {
+        "has": {
+          "field": "function",
+          "regex": "^(require|import)$"
+        }
+      }
+    ]
+  }
+}

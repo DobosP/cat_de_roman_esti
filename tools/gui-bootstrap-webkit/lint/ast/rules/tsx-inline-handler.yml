@@ -1,0 +1,16 @@
+{
+  "id": "roedu-tsx-inline-handler",
+  "language": "Tsx",
+  "severity": "error",
+  "message": "inline-handler",
+  "rule": {
+    "all": [
+      {
+        "kind": "jsx_attribute"
+      },
+      {
+        "regex": "^on[A-Za-z]+\\s*=\\s*[\"']"
+      }
+    ]
+  }
+}

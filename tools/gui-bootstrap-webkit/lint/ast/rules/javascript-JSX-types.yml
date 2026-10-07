@@ -1,0 +1,20 @@
+{
+  "id": "roedu-javascript-JSX-types",
+  "language": "JavaScript",
+  "severity": "error",
+  "message": "JSX-types",
+  "rule": {
+    "all": [
+      {
+        "any": [
+          {
+            "kind": "member_expression"
+          }
+        ]
+      },
+      {
+        "regex": "^JSX\\s*\\.\\s*HTMLAttributes$"
+      }
+    ]
+  }
+}

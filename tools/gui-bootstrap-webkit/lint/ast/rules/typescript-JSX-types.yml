@@ -1,0 +1,23 @@
+{
+  "id": "roedu-typescript-JSX-types",
+  "language": "TypeScript",
+  "severity": "error",
+  "message": "JSX-types",
+  "rule": {
+    "all": [
+      {
+        "any": [
+          {
+            "kind": "member_expression"
+          },
+          {
+            "kind": "nested_type_identifier"
+          }
+        ]
+      },
+      {
+        "regex": "^JSX\\s*\\.\\s*HTMLAttributes$"
+      }
+    ]
+  }
+}

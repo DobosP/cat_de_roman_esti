@@ -1,0 +1,19 @@
+{
+  "id": "roedu-html-script-region",
+  "language": "Html",
+  "severity": "error",
+  "message": "script-region",
+  "rule": {
+    "all": [
+      {
+        "kind": "raw_text"
+      },
+      {
+        "inside": {
+          "kind": "script_element",
+          "stopBy": "end"
+        }
+      }
+    ]
+  }
+}

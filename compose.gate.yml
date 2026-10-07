@@ -1,0 +1,105 @@
+# Gate environment for one worktree (PROGRAM.md §4.1, §4.2, §4.9). Read-only to Codex (GATE-CHANGE: only).
+# Invoked only by scripts/gate.sh:  docker compose -f compose.gate.yml --profile <unit|full> run --rm --user UID:GID runner task gate:<target>
+# The wrapper exports COMPOSE_PROJECT_NAME=gate-<slug>, GATE_SHA, GATE_DIRTY, GATE_TREE_SHA256, GOMAXPROCS, GOFLAGS, TOOLCHAIN_IMAGE, PG_MAJOR.
+# M5: repo hooks locate the delivered kit; the runner receives no Docker socket.
+# No published host ports: two sessions can run side by side.
+
+x-limits: &limits
+  cpus: "4"
+  mem_limit: 6g
+
+services:
+  runner:
+    image: ${TOOLCHAIN_IMAGE:-roedu-toolchain:core-v1.0}
+    profiles: ["unit", "full"]
+    <<: *limits
+    working_dir: /work
+    volumes:
+      - .:/work
+      - roedu-gocache:/cache/go-build
+      - roedu-gomodcache:/cache/go-mod
+      - roedu-npmcache:/cache/npm
+      - roedu-pwcache:/cache/pw
+    environment:
+      HOME: /home/runner
+      GOCACHE: /cache/go-build
+      GOMODCACHE: /cache/go-mod
+      npm_config_cache: /cache/npm
+      GOMAXPROCS: ${GOMAXPROCS:-4}
+      GOFLAGS: ${GOFLAGS:--p=4}
+      GOWORK: "off"
+      GATE_SHA: ${GATE_SHA:?pass --sha to the wrapper}
+      GATE_DIRTY: ${GATE_DIRTY:-false}
+      GATE_TREE_SHA256: ${GATE_TREE_SHA256:?computed by the wrapper}
+      # Existing committed key: bind execution before kit:sync updates desired env.
+      TOOLCHAIN_DIGEST: ${TOOLCHAIN_DIGEST:?pinned by the wrapper}
+      GATE_VERSIONS_RESOLVE: ${GATE_VERSIONS_RESOLVE:-0}
+      CSP_STAGE: ${CSP_STAGE:-report-only}
+      # ro go-pg-tests.sh: writable, contains /_temp/, short enough for the 89-char Unix-socket limit; pre-created 1777 in the image.
+      TEACHER_GO_PG_SCRATCH_ROOT: /scratch/_temp/teacher-go-pg
+      TEACHER_GO_PG_BINDIR: /usr/lib/postgresql/${PG_MAJOR:-16}/bin
+      # full profile only; task gate:full refuses to run with these unset (no silent skips, §4.3).
+      GATE_DB_DSN: ${GATE_DB_DSN:-}
+      GATE_APP_URL: ${GATE_APP_URL:-}
+      GATE_APP_IMAGE: ${GATE_APP_IMAGE:-}
+      GATE_APP_IMAGE_ID: ${GATE_APP_IMAGE_ID:-}
+    depends_on:
+      db:
+        condition: service_healthy
+        required: false
+      app:
+        condition: service_healthy
+        required: false
+
+  db:
+    # ro/cat: postgres:<PROD_PG_MAJOR>-trixie by digest; social: the kit's PostGIS + pgvector image of the same major.
+    image: ${GATE_DB_IMAGE:-postgres:16-trixie}
+    profiles: ["full"]
+    cpus: "2"
+    mem_limit: 2g
+    environment:
+      POSTGRES_USER: gate
+      POSTGRES_PASSWORD: gate
+      POSTGRES_DB: gate
+    tmpfs: ["/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gate -d gate"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  app:
+    # The production image built from this worktree (task build → image); the same image goes to staging and prod.
+    image: ${GATE_APP_IMAGE:-roedu-app:${COMPOSE_PROJECT_NAME:-gate}}
+    profiles: ["full"]
+    cpus: "2"
+    mem_limit: 2g
+    networks:
+      default:
+        aliases: [roedu-gate.test]
+    environment:
+      DATABASE_URL: postgres://gate:gate@db:5432/gate?sslmode=disable
+      PORT: "8080"
+      # Stage A (report-only) until the app's named milestone flips it to enforced (§4.4); either way zero violations required.
+      CSP_STAGE: ${CSP_STAGE:-report-only}
+      DJANGO_CSP_ENFORCE: ${DJANGO_CSP_ENFORCE:-false}
+      CAT_CSP_ENFORCE: ${CAT_CSP_ENFORCE:-false}
+      RO_TEACHER_CSP_ENFORCE: ${RO_TEACHER_CSP_ENFORCE:-false}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "/app", "healthcheck"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  roedu-gocache:
+    external: true
+  roedu-gomodcache:
+    external: true
+  roedu-npmcache:
+    external: true
+  roedu-pwcache:
+    external: true

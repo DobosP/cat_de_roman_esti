@@ -1,0 +1,19 @@
+{
+  "id": "roedu-tsx-import-call",
+  "language": "Tsx",
+  "severity": "error",
+  "message": "import-call",
+  "rule": {
+    "all": [
+      {
+        "kind": "call_expression"
+      },
+      {
+        "has": {
+          "field": "function",
+          "regex": "^(require|import)$"
+        }
+      }
+    ]
+  }
+}

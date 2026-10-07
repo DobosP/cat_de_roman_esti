@@ -1,0 +1,19 @@
+{
+  "id": "roedu-go-templ-SafeURL",
+  "language": "Go",
+  "severity": "error",
+  "message": "templ-SafeURL",
+  "rule": {
+    "all": [
+      {
+        "kind": "call_expression"
+      },
+      {
+        "has": {
+          "field": "function",
+          "regex": "^templ\\s*\\.\\s*SafeURL$"
+        }
+      }
+    ]
+  }
+}

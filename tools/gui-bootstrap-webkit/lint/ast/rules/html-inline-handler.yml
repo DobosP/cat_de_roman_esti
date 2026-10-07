@@ -1,0 +1,16 @@
+{
+  "id": "roedu-html-inline-handler",
+  "language": "Html",
+  "severity": "error",
+  "message": "inline-handler",
+  "rule": {
+    "all": [
+      {
+        "kind": "attribute"
+      },
+      {
+        "regex": "(?i)^on[a-z]+\\s*="
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "roedu-tsx-Component-base",
+  "language": "Tsx",
+  "severity": "error",
+  "message": "Component-base",
+  "rule": {
+    "all": [
+      {
+        "any": [
+          {
+            "kind": "member_expression"
+          },
+          {
+            "kind": "subscript_expression"
+          }
+        ]
+      },
+      {
+        "regex": "^(Component|this)\\s*(\\.\\s*base|\\[\\s*[\"']base[\"']\\s*\\])$"
+      }
+    ]
+  }
+}

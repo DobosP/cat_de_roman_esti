@@ -1,0 +1,25 @@
+{
+  "id": "roedu-javascript-useRef-initial",
+  "language": "JavaScript",
+  "severity": "error",
+  "message": "useRef-initial",
+  "rule": {
+    "all": [
+      {
+        "kind": "call_expression"
+      },
+      {
+        "has": {
+          "field": "function",
+          "regex": "(^|\\.)useRef$"
+        }
+      },
+      {
+        "has": {
+          "field": "arguments",
+          "regex": "^\\(\\s*\\)$"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "roedu-tsx-v11-identifiers",
+  "language": "Tsx",
+  "severity": "error",
+  "message": "v11-identifiers",
+  "rule": {
+    "all": [
+      {
+        "any": [
+          {
+            "kind": "identifier"
+          },
+          {
+            "kind": "property_identifier"
+          }
+        ]
+      },
+      {
+        "regex": "^(forwardRef|defaultProps)$"
+      }
+    ]
+  }
+}

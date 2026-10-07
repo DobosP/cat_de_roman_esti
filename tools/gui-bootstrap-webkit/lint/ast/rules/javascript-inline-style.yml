@@ -1,0 +1,35 @@
+{
+  "id": "roedu-javascript-inline-style",
+  "language": "JavaScript",
+  "severity": "error",
+  "message": "inline-style",
+  "rule": {
+    "all": [
+      {
+        "kind": "jsx_attribute"
+      },
+      {
+        "regex": "^style\\s*="
+      },
+      {
+        "inside": {
+          "all": [
+            {
+              "any": [
+                {
+                  "kind": "jsx_opening_element"
+                },
+                {
+                  "kind": "jsx_self_closing_element"
+                }
+              ]
+            },
+            {
+              "regex": "^<\\s*[a-z]"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

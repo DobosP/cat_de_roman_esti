@@ -1,0 +1,16 @@
+{
+  "id": "roedu-javascript-inline-handler",
+  "language": "JavaScript",
+  "severity": "error",
+  "message": "inline-handler",
+  "rule": {
+    "all": [
+      {
+        "kind": "jsx_attribute"
+      },
+      {
+        "regex": "^on[A-Za-z]+\\s*=\\s*[\"']"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "roedu-html-inline-style",
+  "language": "Html",
+  "severity": "error",
+  "message": "inline-style",
+  "rule": {
+    "all": [
+      {
+        "kind": "attribute"
+      },
+      {
+        "regex": "(?i)^style\\s*="
+      }
+    ]
+  }
+}

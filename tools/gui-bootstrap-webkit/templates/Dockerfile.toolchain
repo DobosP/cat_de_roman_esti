@@ -1,0 +1,81 @@
+# roedu-toolchain:core-v1.N — the pinned runner every gate executes in (PROGRAM.md §4.1, §10.1).
+# Built by Paul on the Linux host: bash scripts/gate.sh toolchain --tag roedu-toolchain:<new> --sha <HEAD>
+#   (= docker buildx build --load --build-arg PG_MAJOR=<.gate.env> -f Dockerfile.toolchain -t roedu-toolchain:<tag> .)
+# Record the printed image ID in .gate.env + versions.lock.json as `GATE-CHANGE: toolchain <tag>`.
+# Every version below is a build-arg whose default equals its versions.lock.json entry (`version`, `sha256_*`, or
+# `build_arg_value` for PLAYWRIGHT_IMAGE); `task versions:resolve` re-pins them. The Playwright base is the fixed choice
+# (screenshot baselines depend on it) and is pinned by digest.
+ARG PLAYWRIGHT_IMAGE=mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+FROM ${PLAYWRIGHT_IMAGE}
+
+ARG NODE_VERSION=26.10.0
+ARG NODE_SHA256=ca70e9e349de048b9522abb3adc05b3bd6f43c5ffd3ec57916c7da292f59f022
+ARG GO_VERSION=1.27.1
+ARG GO_SHA256=63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445
+ARG TEMPL_VERSION=v0.3.1070
+ARG TASK_VERSION=v3.54.0
+ARG NPM_VERSION=12.2.0
+ARG OXLINT_VERSION=1.87.0
+ARG ASTGREP_VERSION=0.45.3
+ARG PG_MAJOR=__PROD_PG_MAJOR__
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Build tools (gcc/libc6-dev: `go test -race` needs cgo; python3: the in-runner docs gate; xz-utils: the Node tarball)
+# + PostgreSQL server binaries of PROD_PG_MAJOR (ro go-pg-tests.sh runs initdb in-runner; social db is a compose service).
+RUN test "$(uname -m)" = x86_64 && test "${PG_MAJOR}" != "__PROD_PG_MAJOR__" || { echo "PG_MAJOR build-arg is required (the wrapper passes it from .gate.env)" >&2; exit 1; } \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates curl gnupg rsync xz-utils gcc libc6-dev python3 libnss-wrapper postgresql-common \
+ && /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y \
+ && apt-get install -y --no-install-recommends "postgresql-${PG_MAJOR}" \
+ && rm -rf /var/lib/apt/lists/*
+
+# Node at the lock version, checksum-verified, installed to /opt/node and placed AHEAD of the base image's Node 24 on PATH.
+RUN mkdir -p /scratch && curl -fsSLo /scratch/node.tar.xz "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz" \
+ && echo "${NODE_SHA256}  /scratch/node.tar.xz" | sha256sum -c - \
+ && mkdir -p /opt/node && tar -xJf /scratch/node.tar.xz -C /opt/node --strip-components=1 && rm /scratch/node.tar.xz
+
+# Go at the lock version, checksum-verified.
+RUN curl -fsSLo /scratch/go.tgz "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
+ && echo "${GO_SHA256}  /scratch/go.tgz" | sha256sum -c - \
+ && tar -C /usr/local -xzf /scratch/go.tgz && rm /scratch/go.tgz
+
+# CGO stays off by default (CGO_ENABLED=0 -trimpath release builds); `go test -race` lines set CGO_ENABLED=1 explicitly.
+# No GOFLAGS here: the wrapper/compose own GOFLAGS (-p=N) at run time.
+ENV PATH=/opt/node/bin:/usr/local/go/bin:/usr/lib/postgresql/${PG_MAJOR}/bin:${PATH} \
+    GOTOOLCHAIN=local CGO_ENABLED=0 GOMAXPROCS=4 GOFLAGS=-p=4
+
+# templ + task CLIs (module go.mod files additionally pin templ via `go get -tool`).
+RUN GOBIN=/usr/local/bin go install "github.com/a-h/templ/cmd/templ@${TEMPL_VERSION}" \
+ && GOBIN=/usr/local/bin go install "github.com/go-task/task/v3/cmd/task@${TASK_VERSION}" \
+ && rm -rf /root/go /root/.cache/go-build
+
+# npm 12 (Node 26 bundles 11.x), Oxlint, ast-grep — installed into /opt/node (global prefix), first on PATH.
+# prettier is deliberately NOT on PATH (§3.3 templ fmt gotcha).
+RUN npm i -g "npm@${NPM_VERSION}" \
+ && npm i -g "oxlint@${OXLINT_VERSION}" "@ast-grep/cli@${ASTGREP_VERSION}" \
+ && npm cache clean --force \
+ && node --version && npm --version && go version && templ version && task --version
+
+# Runner is started with --user $(id -u):$(id -g) and has no passwd entry: give it a HOME and a short, writable
+# scratch root containing /_temp/ for go-pg-tests.sh (socket path < 89 chars, initdb refuses root).
+# The /cache/* dirs are 1777 so empty named volumes mounted there inherit a writable mode on first use.
+RUN mkdir -p /home/runner /scratch/_temp/teacher-go-pg /cache/go-build /cache/go-mod /cache/npm /cache/pw \
+ && chmod 1777 /home/runner /scratch /scratch/_temp /scratch/_temp/teacher-go-pg /cache/go-build /cache/go-mod /cache/npm /cache/pw
+ENV HOME=/home/runner \
+    GOCACHE=/cache/go-build GOMODCACHE=/cache/go-mod \
+    npm_config_cache=/cache/npm PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
+    TEACHER_GO_PG_SCRATCH_ROOT=/scratch/_temp/teacher-go-pg
+
+WORKDIR /work
+
+# Map the caller's UID/GID for initdb without requiring a fixed host UID in the image.
+RUN printf '%s\n' '#!/bin/sh' 'set -eu' \
+ 'if ! getent passwd "$(id -u)" >/dev/null; then' \
+ '  pw="/home/runner/passwd-$(id -u)"; gr="/home/runner/group-$(id -g)"' \
+ '  printf "runner:x:%s:%s::/home/runner:/bin/sh\n" "$(id -u)" "$(id -g)" > "$pw"' \
+ '  printf "runner:x:%s:runner\n" "$(id -g)" > "$gr"' \
+ '  export NSS_WRAPPER_PASSWD="$pw" NSS_WRAPPER_GROUP="$gr"' \
+ '  export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libnss_wrapper.so' \
+ 'fi' 'exec "$@"' > /usr/local/bin/roedu-runner \
+ && chmod 755 /usr/local/bin/roedu-runner
+ENTRYPOINT ["/usr/local/bin/roedu-runner"]
