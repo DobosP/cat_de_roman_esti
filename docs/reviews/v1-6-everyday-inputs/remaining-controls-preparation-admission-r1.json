@@ -1,0 +1,26 @@
+{
+  "schema": "v1-6-remaining-control-method-preparation-r1",
+  "baseline_commit": "711486c4cb0792d76add087a4fe46ee9208fc445",
+  "started_at_utc": "2026-10-07T00:18:59.521584+00:00",
+  "deadline_utc": "2026-10-07T00:38:59.521584+00:00",
+  "metadata_reserve_seconds": 180,
+  "scope": "Prepare exact specific-flag negative and native Lant/terminal control methods, independently inspect before execution, and read current Source6 native operator workflow. No native/profile/build/data mutation in source lane.",
+  "inclusive_active_agents_max": 3,
+  "roles": [
+    "root flag/integration",
+    "native Lant/terminal author",
+    "read-only source6 planner, then independent method reviewer after slot free"
+  ],
+  "worker_source_RSS_cap_bytes": 536870912,
+  "worker_incremental_bytes_cap": 10485760,
+  "measured_disk_bytes": 224526864384,
+  "measured_memory_bytes": 29335748608,
+  "critical_hash_checks": {
+    "tools/go1.27.1.linux-amd64.tar.gz": true,
+    "tools/go/bin/go": true,
+    "tools/go/bin/gofmt": true,
+    "tools/go/pkg/tool/linux_amd64/compile": true,
+    "tools/go/pkg/tool/linux_amd64/link": true,
+    "tools/go/VERSION": true
+  }
+}

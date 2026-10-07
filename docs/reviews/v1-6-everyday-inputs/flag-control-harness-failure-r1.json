@@ -1,0 +1,13 @@
+{
+  "schema": "v1-6-flag-harness-failure-r1",
+  "recorded_at_utc": "2026-10-07T00:32:16.565656+00:00",
+  "failed_lane": "remaining-native-controls-r1-result.json",
+  "failed_method_sha256": "f82ed3841dc85ab899163b08f69797975986693724f3b0a176a7da2debbe57b0",
+  "failure": "TestV16SpecificFlagNegativeControlResearch line84 printed <nil> after baseline canonical generic/specific steps.",
+  "cause": "e from Store.Create had error interface type; assigning Get returned nil *gameapi.Error to that existing interface made e!=nil true. This is a harness typed-nil error, not evidence of a game regression.",
+  "repair": "Use distinct createErr and getErr variables; report planned versus actually created sessions on partial failure. Assertions/gate thresholds unchanged.",
+  "failed_report_sha256": "9cebc9ec129c728ef51f6a9c0391193106f966dd3067fb83407a216b0646e400",
+  "new_method_sha256": "4ee72857f190116c6d6e5ae52a314629d0f41178472e0ab235366838e4db7984",
+  "remaining_commands": "Lan\u021b and terminal did not run because outerrunner stopped at first failingstep.",
+  "installed_mutation": false
+}

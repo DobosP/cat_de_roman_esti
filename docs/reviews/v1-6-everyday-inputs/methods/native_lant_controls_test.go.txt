@@ -1,0 +1,99 @@
+package lant
+
+// Research-only overlay. This executes constructed sessions, never ordinary
+// selection or approval. The content adapter retains baseline source identity.
+import (
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "os"
+ "reflect"
+ "testing"
+
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+)
+
+func TestV16ProspectiveLantControlsResearch(t *testing.T) {
+ path:=os.Getenv("V16_LANT_CONTROLS_REPORT"); if path=="" { t.Fatal("missing report path") }
+ f,err:=os.OpenFile(path,os.O_WRONLY|os.O_CREATE|os.O_EXCL,0600); if err!=nil {t.Fatal(err)}
+ defer f.Close()
+ enc:=json.NewEncoder(f)
+ emit:=func(v any){ if e:=enc.Encode(v);e!=nil {t.Fatal(e)};if e:=f.Sync();e!=nil {t.Fatal(e)} }
+ emit(map[string]any{"record":"start","method":"TestV16ProspectiveLantControlsResearch","candidate_kg_sha256":"63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf","scope":"constructed service sessions; baseline authority retained; no Source6, ordinary Lanț benefit, round or approval claim","limits":"18 legal-order cases; 4 invalid cases; sequential; externally bounded 2 GiB process / 1 GiB increment / 20 minutes"})
+ complete:=false
+ defer func(){emit(map[string]any{"record":"end","complete":complete,"failed":t.Failed()})}()
+ before,e:=content.Load();if e!=nil {t.Fatal(e)}
+ after,e:=content.V16ResearchCandidate();if e!=nil {t.Fatal(e)}
+ bs,cs:=New(before),New(after)
+ clean:=func(m map[string]any)map[string]any { out:=map[string]any{};for k,v:=range m {if k!="game_id" {out[k]=v}};return out }
+ same:=func(tt *testing.T,a,b any,what string){tt.Helper();if !reflect.DeepEqual(a,b){tt.Fatalf("%s differs: baseline=%v candidate=%v",what,a,b)}}
+ state:=func(tt *testing.T,s *Service,id string)map[string]any {tt.Helper();v,e:=s.Get(id);if e!=nil {tt.Fatal(e)};return clean(v)}
+ private:=func(tt *testing.T,s *Service,id string)[]byte {tt.Helper();var out []byte;found,e:=s.store.Transaction(id,func(v *game)error{var err error;out,err=json.Marshal(v);return err});if !found||e!=nil {tt.Fatal("private snapshot",found,e)};return out}
+ // Start/target and the played path are public in Lanț. The strict top-level
+ // contract excludes unrevealed routes, curated IDs and internal hint counters.
+ public:=func(tt *testing.T,m map[string]any,won bool){
+  tt.Helper();allowed:=map[string]bool{"start":true,"target":true,"current":true,"path":true,"moves":true,"optimal":true,"won":true,"difficulty":true,"choices":true,"backtrack_recommended":true,"earned_hint":true,"board_category":true,"daily":true,"score":true,"share":true}
+  for k:=range m {if !allowed[k] {tt.Fatalf("private/unexpected state field %s",k)}}
+  if !won {if _,ok:=m["score"];ok {tt.Fatal("preterminal score")};if _,ok:=m["share"];ok {tt.Fatal("preterminal share")}}
+  walk:=func(any){};walk=func(v any){switch x:=v.(type){case map[string]any:for k,y:=range x {switch k {case "solution_path","route","routes","shortest_path","curated_id","CuratedID","HintRequests","Chain":tt.Fatalf("private route/state field %s",k)};walk(y)};case []map[string]any:for _,y:=range x {walk(y)};case []any:for _,y:=range x {walk(y)}}};walk(m)
+ }
+ create:=func(tt *testing.T,s *Service,start,target string)string{tt.Helper();d,ok:=s.g.DistancesTo(target)[start];if !ok||d<1||d>2 {tt.Fatal("no bounded actual directed route",start,target)};id,e:=s.store.Create(&game{Start:start,Target:target,Optimal:d,Difficulty:"usor",Chain:[]string{start}});if e!=nil {tt.Fatal(e)};return id}
+ progress:=func(tt *testing.T,s *Service,id string,won bool,wantScore int){tt.Helper();cur,finished,w,score,found:=s.Progress(id);if !found||cur!=""||finished!=won||w!=won||score!=wantScore {tt.Fatalf("constructed progress drift: %q %v %v %d %v",cur,finished,w,score,found)}}
+ type incident struct{start,owner,alias,target,edge string}
+ cases:=[]incident{
+  {"n_marea_unire_1918","n_v4ist_steag","drapel","n_alba_iulia","de3926"},
+  {"n_regatul_romaniei","n_v4ist_steag","drapel","n_alba_iulia","de3927"},
+  {"n_revolutia_1989","n_v4ist_steag","drapel","n_alba_iulia","de3928"},
+  {"n_alba_iulia","n_v4ist_steag","drapel","n_regatul_romaniei","de3929"},
+  {"n_v21soc_drapelul_romaniei","n_v4ist_steag","drapel","n_alba_iulia","de7396"},
+  {"n_v4gas_mancare","n_v24_food_pantry_ulei","untdelemn","n_v87_food_chec","de7596"},
+  {"n_v24_food_pantry_zahar","n_v24_food_pantry_ulei","untdelemn","n_v87_food_chec","de7598"},
+  {"n_v24_food_pantry_faina","n_v24_food_pantry_ulei","untdelemn","n_v87_food_chec","de7599"},
+  {"n_v85_food_seminte_floarea_soarelui","n_v24_food_pantry_ulei","untdelemn","n_v87_food_chec","de8654"},
+ }
+ for _,row:=range cases {for _,aliasFirst:=range []bool{false,true} {
+  name:=fmt.Sprintf("%s/alias-first=%v",row.edge,aliasFirst)
+  t.Run(name,func(tt *testing.T){
+   events:=[]map[string]any{}
+   defer func(){emit(map[string]any{"record":"legal_case","case":name,"start":row.start,"owner":row.owner,"target":row.target,"edge":row.edge,"passed":!tt.Failed(),"events":events})}()
+   edge:=cs.g.Link(row.start,row.owner);if edge==nil||edge.ID!=row.edge||edge.IsDistractor||cs.g.Link(row.owner,row.target)==nil {tt.Fatal("fixed actual incident/path drift")}
+   if cs.g.Resolve(row.alias)!=row.owner||bs.g.Resolve(row.alias)!="" {tt.Fatal("candidate/baseline exact alias ownership drift")}
+   bID,cID:=create(tt,bs,row.start,row.target),create(tt,cs,row.start,row.target)
+   get:=func(tag string)map[string]any{a,b:=state(tt,bs,bID),state(tt,cs,cID);same(tt,a,b,tag);public(tt,b,b["won"]==true);events=append(events,map[string]any{"op":tag,"state":b});return b}
+   get("initial_get");progress(tt,cs,cID,false,-1)
+   for i:=0;i<3;i++ {a,ae:=bs.Hint(bID);b,be:=cs.Hint(cID);if ae!=nil||be!=nil {tt.Fatal(ae,be)};same(tt,a,b,"earned hint");events=append(events,map[string]any{"op":"hint","response":b});get("earned_hint_get")}
+   canonical:=cs.g.Label(row.owner);first,second:=canonical,row.alias;if aliasFirst {first,second=second,first}
+   move:=func(input string){a,ae:=bs.Move(bID,canonical);b,be:=cs.Move(cID,input);if ae!=nil||be!=nil||b["ok"]!=true||b["won"]!=false||b["moves"]!=1 {tt.Fatalf("move: %v %v %v",b,ae,be)};same(tt,a,b,"canonical/alias move");if _,ok:=b["score"];ok {tt.Fatal("move leaked preterminal score")};if _,ok:=b["share"];ok {tt.Fatal("move leaked preterminal share")};if b["relation"]!=cs.caption(row.start,row.owner) {tt.Fatal("caption differs")};if row.edge=="de7396"&&b["relation"]!="exemplu și categorie" {tt.Fatal("specific-to-generic caption drift")};events=append(events,map[string]any{"op":"move","input":input,"response":b});got:=get("post_move_get");if _,ok:=got["earned_hint"];ok {tt.Fatal("earned hint not cleared")}}
+   move(first)
+   saved:=private(tt,cs,cID)
+   a,ae:=bs.Move(bID,canonical);b,be:=cs.Move(cID,second);if ae!=nil||be!=nil||b["ok"]!=false||b["last_error"]!="Ești deja aici." {tt.Fatalf("repeat: %v %v %v",b,ae,be)};same(tt,a,b,"repeat response");same(tt,saved,private(tt,cs,cID),"repeat private state");events=append(events,map[string]any{"op":"repeat","input":second,"response":b});get("repeat_get")
+   a,ae=bs.Undo(bID);b,be=cs.Undo(cID);if ae!=nil||be!=nil||b["moves"]!=0 {tt.Fatal("undo",b,ae,be)};same(tt,clean(a),clean(b),"undo");get("undo_get")
+   move(second)
+   a,ae=bs.Move(bID,bs.g.Label(row.target));b,be=cs.Move(cID,cs.g.Label(row.target));if ae!=nil||be!=nil||b["ok"]!=true||b["won"]!=true||b["moves"]!=2 {tt.Fatal("finish",b,ae,be)};same(tt,a,b,"finish");events=append(events,map[string]any{"op":"finish","response":b})
+   final:=get("terminal_get");wantScore:=1000;if final["optimal"]==1 {wantScore=500};if final["score"]!=wantScore {tt.Fatal("two-hop score differs from actual optimal",final)};progress(tt,cs,cID,true,wantScore)
+   if final["path"].([]map[string]any)[1]["id"]!=row.owner {tt.Fatal("wrong resolved owner in route")}
+   // Terminal Lanț undo is deliberately a no-op; terminal hints/moves do not
+   // reopen a won session. This differs from the original terminal game's undo.
+   saved=private(tt,cs,cID)
+   _,ae=bs.Undo(bID);_,be=cs.Undo(cID);if ae!=nil||be!=nil {tt.Fatal(ae,be)};same(tt,final,get("terminal_undo_get"),"terminal undo state")
+   _,ae=bs.Hint(bID);_,be=cs.Hint(cID);if ae!=nil||be!=nil {tt.Fatal(ae,be)}
+   _,ae=bs.Move(bID,canonical);_,be=cs.Move(cID,row.alias);if ae!=nil||be!=nil {tt.Fatal(ae,be)};same(tt,saved,private(tt,cs,cID),"terminal private state");get("terminal_repeat_get")
+   events=append(events,map[string]any{"op":"private_final_digest","sha256":fmt.Sprintf("%x",sha256.Sum256(private(tt,cs,cID)))})
+  })
+ }}
+ invalid:=[]struct{current,target,owner,alias string}{
+  {"n_v24_food_pantry_ulei","n_v87_food_chec","n_v4ist_steag","drapel"},
+  {"n_v4ist_steag","n_alba_iulia","n_v24_food_pantry_ulei","untdelemn"},
+  {"n_v4soc_casa","n_v3soc_populatie","n_v24_food_pantry_ulei","untdelemn"},
+  {"n_v87_food_chec","n_v4gas_lapte","n_v24_food_pantry_ulei","untdelemn"},
+ }
+ for _,row:=range invalid {t.Run("invalid/"+row.current,func(tt *testing.T){
+  events:=[]map[string]any{};defer func(){emit(map[string]any{"record":"invalid_case","current":row.current,"owner":row.owner,"passed":!tt.Failed(),"events":events})}()
+  if cs.g.Link(row.current,row.owner)!=nil {tt.Fatal("prohibited edge became legal")}
+  bID,cID:=create(tt,bs,row.current,row.target),create(tt,cs,row.current,row.target)
+  saved:=private(tt,cs,cID)
+  for _,input:=range []string{cs.g.Label(row.owner),row.alias} {a,ae:=bs.Move(bID,bs.g.Label(row.owner));b,be:=cs.Move(cID,input);if ae!=nil||be!=nil||b["ok"]!=false {tt.Fatalf("invalid accepted %v %v %v",b,ae,be)};same(tt,a,b,"nonneighbor response");same(tt,saved,private(tt,cs,cID),"invalid private state");got:=state(tt,cs,cID);same(tt,state(tt,bs,bID),got,"invalid get");public(tt,got,false);progress(tt,cs,cID,false,-1);events=append(events,map[string]any{"input":input,"response":b,"get":got})}
+ })}
+ complete=true
+}
+

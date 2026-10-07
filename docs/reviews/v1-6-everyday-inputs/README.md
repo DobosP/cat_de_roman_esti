@@ -9,7 +9,7 @@ No push or deployment accompanied that landing.
 
 Current phase: two exact R2records selected; raw facts accepted and supported isolated
 materialization and broad prospective native/reference checks passed. Final quality,
-named remaining controls and installation gates remain pending.
+Source6/current-artifact history and full installation gates remain pending.
 Installed Source5 content is unchanged.
 
 The next wave will inspect existing decks, missing familiar input forms and specific
@@ -178,3 +178,38 @@ qualified World33modes/148discoveries/1156saved prefixes; Source6/rankings/catal
 currentauthority/export/references/full native gates and exact assembled acceptance.
 All installed Source5 bytes remain unchanged. Reuse the saved complete profiles and
 actual deltas; do not rerun completed research, baseline, materialization or profile lanes.
+
+
+## Remaining controls and raw graph quality
+
+[Actual control summary](remaining-native-controls-summary-r2.json) records the specific
+flag, native Lanț and terminal checks. The first flag harness failed on a Go typed-nil
+error-interface assignment; the failure/partial baseline and initial method are retained.
+[Independent repair review](flag-control-method-review-r2.json) verifies distinct error
+variables and honest partial-session counts, with every assertion retained. R1 stays FAIL;
+R2 passed all three controls in11.285s,151220224sampledRSS and6.76MBincrement with installed
+bindings unchanged. Lanț and terminal had not run in the failed R1 attempt.
+
+The four controlled flag sessions prove generic Steag/drapel and confirmed drapele cannot
+win or reveal the specific Romanian-flag target. Original tricolorul wins that owner at
+two attempts/no clues/940points. Eighteen legal Lanț order cases and four invalid cases
+preserve moves, repeats, reversed-Ulei/nonneighbor refusal, undo/hints/captions, scores,
+private state and Progress. Terminal checks replay all180actual puzzles in both modes
+(360paired records),36controlled numbered-play cases and8invalid directions. The original
+terminal has numbered choices only; aliases remain metadata there. No typed-terminal,
+ordinary Lanț, new-target or new-puzzle benefit is claimed. Its undo reopening differs
+from Lanț's terminal no-op and both existing contracts are preserved.
+
+[Independent exact raw graph quality](remaining-native-controls-quality-r1.json) accepts
+proposal4db45b49/module9a932fe5/candidate63f0dcd7 for supported refinement staging. It checked
+the complete control archives,149admitted inputs/138protected files and prior broad evidence.
+This is not World/catalog/source6/currentauthority/full-release or installation acceptance.
+Fresh World concept review and33modes/148discoveries/1156history audit remain mandatory for
+the changed Ulei snapshot; stale ranking/Quick/World guards stay closed until proper rebuild.
+
+[Inspected Source6 workflow](source6-integration-plan-r1.json) records actual code/CLI ordering,
+including no create-source command, exact Source5parent/archives, isolated rank/derive and
+approval-free candidate generation, World/Quick before Extensions, fresh audits/same-role
+finals after each binding change, and fresh final installed authority after runtime freeze.
+Use that plan and current operator schemas; do not bypass predecessors or reinterpret
+research adapters as sealed exports. All installed Source5 data remains unchanged.

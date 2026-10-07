@@ -1661,3 +1661,11 @@ only2storedforms, no other inventory growth. Three source/snapshot guards correc
 stale candidate bindings. Proper Source6/currentauthority/history, specific-flag/nativeLanț/
 terminal controls, fullgates and finalquality/assembled acceptance remain pending. Installed
 Source5 unchanged; all actual observations and partial-method history are archived.
+
+
+V1.6 remaining controls: repaired typed-nil harness failure remains failed history; fresh
+R2passes specificflag nonwinning,18+4nativeLanț state cases and all180terminal puzzles×2modes
+plus36numbered/8invalid controls. Original numbered-only terminal semantics preserved.
+Independent4149550d accepts exact rawgraphquality for supported staging, not Source6 or
+installation. Fresh Ulei concept/source catalog/audit/history/currentauthority/fullrelease
+checks remain; inspected actual operator sequence saved. Installed Source5 remains exact.
