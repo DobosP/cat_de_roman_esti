@@ -1651,3 +1651,13 @@ method passed supported isolated preflight/apply: candidate63f0dcd7 contains2419
 exactly2added forms; all other node fields/edges/terminal/pack payloads and installed bytes
 preserved. Generated artifacts are archived; no Source6/installation/landing or pool growth
 is claimed. Final quality and native prospective/full downstream gates remain required.
+
+
+V1.6 prospective evidence: reviewed methods executed against exact generated aliases/index
+with transparent research-only provenance. Native56-request two-order gameplay and full
+Cald/identity/mining/finite-fuzzy profiles pass; exhaustive reference1776cases complete.
+Independent6194505d review accepts12lexical/36service and6reference changes as explained;
+only2storedforms, no other inventory growth. Three source/snapshot guards correctly refuse
+stale candidate bindings. Proper Source6/currentauthority/history, specific-flag/nativeLanț/
+terminal controls, fullgates and finalquality/assembled acceptance remain pending. Installed
+Source5 unchanged; all actual observations and partial-method history are archived.

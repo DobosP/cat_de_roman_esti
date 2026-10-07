@@ -8,7 +8,8 @@ Source5 World with Source4 Quick/Extensions, and strict installed authority a4ac
 No push or deployment accompanied that landing.
 
 Current phase: two exact R2records selected; raw facts accepted and supported isolated
-materialization passed. Final quality, prospective play and installation gates remain pending.
+materialization and broad prospective native/reference checks passed. Final quality,
+named remaining controls and installation gates remain pending.
 Installed Source5 content is unchanged.
 
 The next wave will inspect existing decks, missing familiar input forms and specific
@@ -136,3 +137,44 @@ raw quality, Source6/catalog/current-authority/export/reference gates and indepe
 assembled acceptance remain pending. This checkpoint is not an installed V1.6 release;
 all installed inventory deltas remain zero. Do not repeat the completed baseline or
 materialization. Reuse the exact candidate and the finite quality case plan for next work.
+
+
+## Prospective native and reference observations
+
+[Complete prospective summary](prospective-results-summary-r1.json) binds the separately
+admitted native and reference runs, lossless observations and all1784reference file hashes.
+The [independent method review](prospective-method-review-r1.json) covers the exact methods;
+the HTTP draft's terminal-count/recovery gaps were fixed before execution. A research-only
+in-memory adapter loads verified baseline content, checks actual generated graph bytes and
+original-Python normalized owners, and transfers only the two alias lists/index entries.
+It intentionally retains baseline manifests: no sealed Source6/export/authority is claimed.
+
+Native complete evidence covers265targets,641035native-ID and122960projection feedback
+pairs,2419mined eligibility profiles,13512old normalized owners,464projection identities,
+265canonical wins/clue profiles and45weight shelves/180seeded choices. Those profiles are
+unchanged. Fixed29 plus existing19query cases produce12lexical and36service deltas; the
+[actual quality review](prospective-quality-observations-r1.json) accepts their scoped effects:
+six direct case/space queries, three fuzzy corrections and three suggestion-only changes.
+Only two headwords are stored forms; no plural/typo/uppercase count inflation or new target.
+
+The56-request candidate HTTP probe uses four ordinary sessions at the known seeds36/3,
+in both alias-first/canonical-first orders. Direct resolution, one shared guess/attempt,
+rank5/rank2 with distance1/closeness99, private Get recovery, earned clue and exact
+four-attempt/one-clue/700-point terminal recovery pass. These are in-process handlers;
+TCP/browser/human enjoyment and fully qualified Source6 runtime evidence remain separate.
+
+All1776reference cases completed under one shared20-minute lane:717pack/245Conexiuni/
+124Lanț/84Alchimie/423quick/oneworld/180terminal/twoincident-neighborhood cases, including
+coverage sentinels. Fairness, routes/captions,83core/playable projections and68selectable
+books/521recipes remain unchanged. Six recorded changes are the two new Lanț input
+mappings, one Ulei Perechi alias snapshot, and three exact source/snapshot dependency
+refusals (rankings, Quick and World). Seven existing Ulei recipes require refreshed source
+review; their mechanics are unchanged. Refusal observations are not passing source gates.
+
+Independent review6194505d… accepts the completed research evidence, with final raw quality
+and installation withheld. Remaining concrete work includes the specific-Romanian-flag
+negative control; native Lanț move/undo/hint/score/privacy; native terminal and properly
+qualified World33modes/148discoveries/1156saved prefixes; Source6/rankings/catalog snapshots/
+currentauthority/export/references/full native gates and exact assembled acceptance.
+All installed Source5 bytes remain unchanged. Reuse the saved complete profiles and
+actual deltas; do not rerun completed research, baseline, materialization or profile lanes.

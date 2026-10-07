@@ -1,0 +1,511 @@
+{
+  "schema": "v1-6-prospective-results-summary-r1",
+  "recorded_at_utc": "2026-10-06T23:54:52.724238+00:00",
+  "candidate_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+  "independent_method_review_sha256": "62903e7873ba078405aa23581a74a7932e32fd11b66d8116c10b6747af287367",
+  "native_lane_result_sha256": "993f1312a7de65d1d65d1ea5a630e0b36d72465a83f95ec08c3ccee602da26fa",
+  "reference_lane_result_sha256": "20e965f9b3e1c6691bfd463b07753b57f442bb1a5a6c3c1eb29d04e27aeae891",
+  "archives": {
+    "prospective-native-profiles-r1.jsonl.gz": {
+      "sha256": "ccdca44be2f7ca0f21224ea85a3c5dcf25f8702121540cb30f0e9144a0669eb8",
+      "raw_sha256": "a4d84eb0d5dafe974badeed8627c0b6b068e9ca90fdad30a3f4c8332fe3c91c1",
+      "raw_bytes": 1553193
+    },
+    "prospective-native-http-r1.json.gz": {
+      "sha256": "f278e1125f31adb003b38861051b6eb4af09e3d56cfedcb2a6b1460a06650f14",
+      "raw_sha256": "ff3196efdfae3c0fa92b265e0cf437197f570bf0c6759ade89c809f1a906f0dc",
+      "raw_bytes": 79070
+    },
+    "prospective-derived-index-r1.json.gz": {
+      "sha256": "3a8be31b335ef7c3fba3afaf0f15e8a4f6e21dc7fbefca7d9aa24fa35d3753ed",
+      "raw_sha256": "d291f5ad6114aa20db89a3b4e17b30e83dd6d60065b395952ec2d0c07eb09122",
+      "raw_bytes": 1229118
+    },
+    "prospective-reference-cases-r1.tar.gz": {
+      "sha256": "084ea7f4b18cf00fca1a95e86327085409724317579b83b2bc75148ac7ea8046",
+      "members": 1784,
+      "raw_file_bytes": 28132167
+    }
+  },
+  "reference_file_manifest_sha256": "5d48f56c1c90ebed4fee494d0a10de7b521b3a5b356d77e9ad9ac618d3a70f5c",
+  "native_terminal": {
+    "at": "2026-10-06T23:39:02.203073346Z",
+    "bytes_before_terminal": 1552429,
+    "complete": true,
+    "counts": {
+      "actual_canonical_winners": 265,
+      "anchor_policy_pairs": 641035,
+      "clue_profiles": 265,
+      "direct_alias_case_contexts": 24,
+      "full_profiles": 265,
+      "fuzzy_queries": 48,
+      "fuzzy_query_deltas": 12,
+      "mined_targets": 2419,
+      "mining_salience_order": 2,
+      "native_feedback_pairs": 641035,
+      "old_normalized_identity": 13512,
+      "ordinary_seeded_choices": 180,
+      "ordinary_weight_shelves": 45,
+      "pack_targets": 265,
+      "projection_feedback_pairs": 122960,
+      "projection_identity": 464,
+      "service_input_deltas": 36,
+      "service_input_pairs": 192
+    },
+    "differences": {},
+    "kind": "terminal",
+    "last_stage": "complete",
+    "qualification": "research_only; no sealed export, current authority, target approval, human or HTTP evidence",
+    "test_failed": false
+  },
+  "candidate_HTTP": {
+    "requests": 56,
+    "sessions": 4,
+    "seeds": {
+      "ct_gastronomie_347": 3,
+      "ct_istorie_368": 36
+    },
+    "observations": [
+      {
+        "alternate_response": {
+          "attempts": 1,
+          "clue_available": false,
+          "clues_used": 0,
+          "feedback": {
+            "kind": "repeat",
+            "message": "Deja încercat — rămâne #5."
+          },
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v4ist_steag",
+            "label": "Steag",
+            "rank": 5,
+            "temperature": "Fierbinte"
+          },
+          "guesses": [
+            {
+              "attempt_number": 1,
+              "closeness": 99,
+              "distance": 1,
+              "id": "n_v4ist_steag",
+              "label": "Steag",
+              "rank": 5,
+              "temperature": "Fierbinte"
+            }
+          ],
+          "ok": true,
+          "reachable_count": 2356,
+          "won": false
+        },
+        "alternate_spelling": "Steag",
+        "arm": "alias_first",
+        "canonical": "Steag",
+        "canonical_feedback": {
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v4ist_steag",
+          "label": "Steag",
+          "rank": 5,
+          "temperature": "Fierbinte"
+        },
+        "curated_id": "ct_istorie_368",
+        "final_attempts": 4,
+        "final_score": 700,
+        "first_response": {
+          "attempts": 1,
+          "clue_available": false,
+          "clues_used": 0,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #5."
+          },
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v4ist_steag",
+            "label": "Steag",
+            "rank": 5,
+            "temperature": "Fierbinte"
+          },
+          "guesses": [
+            {
+              "attempt_number": 1,
+              "closeness": 99,
+              "distance": 1,
+              "id": "n_v4ist_steag",
+              "label": "Steag",
+              "rank": 5,
+              "temperature": "Fierbinte"
+            }
+          ],
+          "ok": true,
+          "reachable_count": 2356,
+          "won": false
+        },
+        "first_spelling": "drapel",
+        "novel": "drapel",
+        "seed": 36,
+        "target_id": "n_alba_iulia"
+      },
+      {
+        "alternate_response": {
+          "attempts": 1,
+          "clue_available": false,
+          "clues_used": 0,
+          "feedback": {
+            "kind": "repeat",
+            "message": "Deja încercat — rămâne #5."
+          },
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v4ist_steag",
+            "label": "Steag",
+            "rank": 5,
+            "temperature": "Fierbinte"
+          },
+          "guesses": [
+            {
+              "attempt_number": 1,
+              "closeness": 99,
+              "distance": 1,
+              "id": "n_v4ist_steag",
+              "label": "Steag",
+              "rank": 5,
+              "temperature": "Fierbinte"
+            }
+          ],
+          "ok": true,
+          "reachable_count": 2356,
+          "won": false
+        },
+        "alternate_spelling": "drapel",
+        "arm": "canonical_first",
+        "canonical": "Steag",
+        "canonical_feedback": {
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v4ist_steag",
+          "label": "Steag",
+          "rank": 5,
+          "temperature": "Fierbinte"
+        },
+        "curated_id": "ct_istorie_368",
+        "final_attempts": 4,
+        "final_score": 700,
+        "first_response": {
+          "attempts": 1,
+          "clue_available": false,
+          "clues_used": 0,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #5."
+          },
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v4ist_steag",
+            "label": "Steag",
+            "rank": 5,
+            "temperature": "Fierbinte"
+          },
+          "guesses": [
+            {
+              "attempt_number": 1,
+              "closeness": 99,
+              "distance": 1,
+              "id": "n_v4ist_steag",
+              "label": "Steag",
+              "rank": 5,
+              "temperature": "Fierbinte"
+            }
+          ],
+          "ok": true,
+          "reachable_count": 2356,
+          "won": false
+        },
+        "first_spelling": "Steag",
+        "novel": "drapel",
+        "seed": 36,
+        "target_id": "n_alba_iulia"
+      },
+      {
+        "alternate_response": {
+          "attempts": 1,
+          "clue_available": false,
+          "clues_used": 0,
+          "feedback": {
+            "kind": "repeat",
+            "message": "Deja încercat — rămâne #2."
+          },
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v24_food_pantry_ulei",
+            "label": "Ulei",
+            "rank": 2,
+            "temperature": "Fierbinte"
+          },
+          "guesses": [
+            {
+              "attempt_number": 1,
+              "closeness": 99,
+              "distance": 1,
+              "id": "n_v24_food_pantry_ulei",
+              "label": "Ulei",
+              "rank": 2,
+              "temperature": "Fierbinte"
+            }
+          ],
+          "ok": true,
+          "reachable_count": 2356,
+          "won": false
+        },
+        "alternate_spelling": "Ulei",
+        "arm": "alias_first",
+        "canonical": "Ulei",
+        "canonical_feedback": {
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v24_food_pantry_ulei",
+          "label": "Ulei",
+          "rank": 2,
+          "temperature": "Fierbinte"
+        },
+        "curated_id": "ct_gastronomie_347",
+        "final_attempts": 4,
+        "final_score": 700,
+        "first_response": {
+          "attempts": 1,
+          "clue_available": false,
+          "clues_used": 0,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #2."
+          },
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v24_food_pantry_ulei",
+            "label": "Ulei",
+            "rank": 2,
+            "temperature": "Fierbinte"
+          },
+          "guesses": [
+            {
+              "attempt_number": 1,
+              "closeness": 99,
+              "distance": 1,
+              "id": "n_v24_food_pantry_ulei",
+              "label": "Ulei",
+              "rank": 2,
+              "temperature": "Fierbinte"
+            }
+          ],
+          "ok": true,
+          "reachable_count": 2356,
+          "won": false
+        },
+        "first_spelling": "untdelemn",
+        "novel": "untdelemn",
+        "seed": 3,
+        "target_id": "n_v87_food_chec"
+      },
+      {
+        "alternate_response": {
+          "attempts": 1,
+          "clue_available": false,
+          "clues_used": 0,
+          "feedback": {
+            "kind": "repeat",
+            "message": "Deja încercat — rămâne #2."
+          },
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v24_food_pantry_ulei",
+            "label": "Ulei",
+            "rank": 2,
+            "temperature": "Fierbinte"
+          },
+          "guesses": [
+            {
+              "attempt_number": 1,
+              "closeness": 99,
+              "distance": 1,
+              "id": "n_v24_food_pantry_ulei",
+              "label": "Ulei",
+              "rank": 2,
+              "temperature": "Fierbinte"
+            }
+          ],
+          "ok": true,
+          "reachable_count": 2356,
+          "won": false
+        },
+        "alternate_spelling": "untdelemn",
+        "arm": "canonical_first",
+        "canonical": "Ulei",
+        "canonical_feedback": {
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v24_food_pantry_ulei",
+          "label": "Ulei",
+          "rank": 2,
+          "temperature": "Fierbinte"
+        },
+        "curated_id": "ct_gastronomie_347",
+        "final_attempts": 4,
+        "final_score": 700,
+        "first_response": {
+          "attempts": 1,
+          "clue_available": false,
+          "clues_used": 0,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #2."
+          },
+          "guess": {
+            "attempt_number": 1,
+            "closeness": 99,
+            "distance": 1,
+            "id": "n_v24_food_pantry_ulei",
+            "label": "Ulei",
+            "rank": 2,
+            "temperature": "Fierbinte"
+          },
+          "guesses": [
+            {
+              "attempt_number": 1,
+              "closeness": 99,
+              "distance": 1,
+              "id": "n_v24_food_pantry_ulei",
+              "label": "Ulei",
+              "rank": 2,
+              "temperature": "Fierbinte"
+            }
+          ],
+          "ok": true,
+          "reachable_count": 2356,
+          "won": false
+        },
+        "first_spelling": "Ulei",
+        "novel": "untdelemn",
+        "seed": 3,
+        "target_id": "n_v87_food_chec"
+      }
+    ],
+    "provenance": "Actual generated alias/index projection in transparent research memory adapter. NOT sealed Source6/export/authority or TCP/browser qualification."
+  },
+  "reference_stages": {
+    "alchimie": {
+      "sha256": "f242c2e98718efae095becf26daeb61ea268a95862d4a79dea87f0567239c49f",
+      "covered": 84,
+      "changed_count": 0,
+      "elapsed_seconds": 45.67982001800192
+    },
+    "conexiuni": {
+      "sha256": "7cd08f8cfdc116fe865a99964c130eb5bfb442efd16f065bff2f524210d7ff98",
+      "covered": 245,
+      "changed_count": 0,
+      "elapsed_seconds": 22.593648619000305
+    },
+    "lant": {
+      "sha256": "7c944cf9c08ff7e037dc3397f5ee9a510eb461a682892dd319bb9ab19dad1254",
+      "covered": 124,
+      "changed_count": 0,
+      "elapsed_seconds": 25.787379958997917
+    },
+    "lant-inputs": {
+      "sha256": "04b1bf52c587be5352375cfe93af569a97f3ead131dc37817be595f2dbfbda1a",
+      "covered": 2,
+      "changed_count": 2,
+      "elapsed_seconds": 2.815222696001001
+    },
+    "pack": {
+      "sha256": "5f2a925827bcb42b9fb1bf39b595caad6dcc23d8fa14bd33d811bb8a0ac928a0",
+      "covered": 717,
+      "changed_count": 1,
+      "elapsed_seconds": 46.314098188999196
+    },
+    "quick": {
+      "sha256": "f9054da56f5f8ba1ad8bc68277ccec31097d9d8b5a270af46bd977605e7e6ebb",
+      "covered": 423,
+      "changed_count": 2,
+      "elapsed_seconds": 63.46625687100095
+    },
+    "terminal": {
+      "sha256": "9c1c3006fc2717305a38428f12971d26b304596cf640e51f64b21019693e503b",
+      "covered": 180,
+      "changed_count": 0,
+      "elapsed_seconds": 26.70779938600026
+    },
+    "world": {
+      "sha256": "d17ac8ca66174d8457d6b22de9a9d1f8ad3ace1da6f0ef80b23adb69923264d9",
+      "covered": 1,
+      "changed_count": 1,
+      "elapsed_seconds": 2.4643155980011215
+    }
+  },
+  "reference_cases_total": 1776,
+  "reference_changed_cases": [
+    {
+      "file": "lant-inputs-0000.json",
+      "stage": "lant-inputs",
+      "id": "n_v24_food_pantry_ulei",
+      "before_sha256": "19f12714ff6e30d2125ec6c1453439a18387d5c0edce77ab7704ff9bde6d6b8e",
+      "after_sha256": "9c9b7cee11447043aebcb9cd1a61ff74a827ac9405a23796e09c6b4be2a9a604"
+    },
+    {
+      "file": "lant-inputs-0001.json",
+      "stage": "lant-inputs",
+      "id": "n_v4ist_steag",
+      "before_sha256": "65da8163bddbbdd70a5ef71e3456451917cc654bb8a70ce816305fe21a8e1823",
+      "after_sha256": "b44f42bf3fe304196e97a095f8b548f255673e06d6b093ca55bf7f9801d0cbe6"
+    },
+    {
+      "file": "pack-0716.json",
+      "stage": "pack",
+      "id": "@selection-bindings",
+      "before_sha256": "33bc60e0f20bdd7d3e635c91290b68b94c6cfb54c0f4672403cc747dbfa368d3",
+      "after_sha256": "4d505444c9e41ac95b55539b5013a08c2b9eb24504f4651bb2ea99f4cf40c1a1"
+    },
+    {
+      "file": "quick-0405.json",
+      "stage": "quick",
+      "id": "vp_99f196b9c164451ab805",
+      "before_sha256": "ab07751d5f4cdf5615eafcdaa87b6dc5e31c7d7516e85745581441bfdac16907",
+      "after_sha256": "f31df96f7f5bcae367a8a5a3aafb80cf1dc8253e2ce04fb98a66d33eaf5d06f4"
+    },
+    {
+      "file": "quick-0422.json",
+      "stage": "quick",
+      "id": "@selection-bindings",
+      "before_sha256": "ac2179c8ae8dc4ee751f2eccb364947650d7ab6d43e11455343598f3f82938e1",
+      "after_sha256": "6c40ffbf4115194ed4078a249c868e2578712c164b2f2db6e8188da29861c68e"
+    },
+    {
+      "file": "world-0000.json",
+      "stage": "world",
+      "id": "@complete-world-dependencies",
+      "before_sha256": "a99af35875818f9beb68235a7c98c1e6786f12d202d59808b182cbe7025deb17",
+      "after_sha256": "8d4ae5f72b959419bf2faae5d07e3f3a347f42bc388298070d7d7491a7906b83"
+    }
+  ],
+  "pending": [
+    "Independent actual fuzzy/compatibility interpretation",
+    "Controlled native Lanț move/undo/hint/score/privacy and specific-owner nonwinning controls",
+    "Native terminal and World33modes/148discoveries/1156history checks on properly qualified source artifacts",
+    "Source6, snapshots/ranking/quick/world/catalog/authority/export/reference refresh and full gates",
+    "Final rawquality and independent assembled acceptance/local landing"
+  ],
+  "installation_approval": false
+}

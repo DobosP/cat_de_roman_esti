@@ -1,0 +1,129 @@
+package httpapi
+
+// Research-only prospective overlay. It consumes exact generator-produced aliases
+// and derived owners through the reviewed in-memory adapter. Ordinary HTTP requests
+// create/mutate test sessions; no private session injection or sealed-export claim.
+import (
+ "bytes"
+ "encoding/json"
+ "fmt"
+ "net/http/httptest"
+ "os"
+ "reflect"
+ "strings"
+ "testing"
+
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+)
+
+func TestV16ProspectiveOrdinaryInputResearch(t *testing.T) {
+ t.Setenv("CAT_ALLOWED_HOSTS", "testserver,example.com")
+ c, err := content.V16ResearchCandidate()
+ if err != nil { t.Fatal(err) }
+ type row struct { Curated, Target, Novel, Canonical, Owner string; Rank int; Extras []string }
+ cases := []row{
+  {"ct_istorie_368", "n_alba_iulia", "drapel", "Steag", "n_v4ist_steag", 5, []string{"Marea Unire 1918", "Revoluția din 1989"}},
+  {"ct_gastronomie_347", "n_v87_food_chec", "untdelemn", "Ulei", "n_v24_food_pantry_ulei", 2, []string{"Zahăr", "Făină"}},
+ }
+ report := map[string]any{"schema":"v1-6-prospective-ordinary-http-r1", "scope":"Actual generated aliases/derived owners in a research-only memory adapter; in-process public HTTP handlers, not sealed Source6/export/authority or TCP/browser", "candidate_kg_sha256":"63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf", "default_selector":map[string]any{"difficulty":"usor","category":"","daily":false,"exclusions":false}, "picker_search_rerun":false, "max_sessions":4, "max_requests":80, "planned_requests":56, "installed_content_mutation":false, "sealed_export_qualification":false}
+ transcript := []map[string]any{}
+ observations := []map[string]any{}
+ seeds := map[string]int64{"ct_istorie_368":36,"ct_gastronomie_347":3}
+ t.Cleanup(func() {
+  report["test_failed"] = t.Failed(); report["transcript"] = transcript; report["observations"] = observations; report["seeds"] = seeds
+  b,e := json.MarshalIndent(report,"","  "); if e != nil { t.Error(e); return }
+  path := os.Getenv("V16_CANDIDATE_HTTP_REPORT"); if path == "" { t.Error("missing report path"); return }
+  if e=os.WriteFile(path,append(b,'\n'),0600);e!=nil { t.Error(e) }
+ })
+ number := func(v any) int { f,ok:=v.(float64);if !ok {t.Fatalf("not a JSON number: %T %v",v,v)};return int(f) }
+ for _,r := range cases {
+  s:=New(c)
+  var canonicalFeedback map[string]any
+  for _,arm:=range []string{"alias_first","canonical_first"} {
+   obs:=map[string]any{"curated_id":r.Curated,"target_id":r.Target,"seed":seeds[r.Curated],"arm":arm,"novel":r.Novel,"canonical":r.Canonical}
+   observations=append(observations,obs)
+   request:=func(label,method,path string,body any,privacy bool) (int,map[string]any) {
+    t.Helper()
+    if len(transcript)>=80 {t.Fatal("request cap reached")}
+    var data []byte
+    if body!=nil {data,_=json.Marshal(body)}
+    req:=httptest.NewRequest(method,"http://testserver"+path,bytes.NewReader(data));req.Header.Set("Content-Type","application/json")
+    rec:=httptest.NewRecorder();s.ServeHTTP(rec,req)
+    response:=map[string]any{}
+    if err:=json.Unmarshal(rec.Body.Bytes(),&response);err!=nil {t.Fatalf("non-JSON response %d: %s",rec.Code,rec.Body.String())}
+    transcript=append(transcript,map[string]any{"case":r.Curated,"arm":arm,"label":label,"method":method,"path":path,"request":body,"status":rec.Code,"response":response})
+    if privacy {
+     for _,key:=range []string{"target","score","share","curated_id","curatedId"} {if _,ok:=response[key];ok {t.Fatalf("private field %s exposed at %s",key,label)}}
+     raw:=rec.Body.String()
+     for _,secret:=range []string{r.Target,c.Labels[r.Target],r.Curated} {if strings.Contains(raw,secret) {t.Fatalf("target/curated identity exposed at %s",label)}}
+    }
+    return rec.Code,response
+   }
+   getState:=func(label,base string,expected map[string]any) {
+    status,got:=request(label,"GET",base,nil,true)
+    if status!=200 {t.Fatalf("GET %s status %d",label,status)}
+    for _,key:=range []string{"attempts","guesses","clues_used","won"} {
+     old,present:=expected[key];current,found:=got[key]
+     if !present || !found || !reflect.DeepEqual(old,current) {t.Fatalf("GET %s field %s drift: %v vs %v",label,key,old,current)}
+    }
+   }
+   status,initial:=request("create","POST",fmt.Sprintf("/api/wordgames/contexto/games?seed=%d&difficulty=usor",seeds[r.Curated]),nil,true)
+   if status!=200 || initial["won"]!=false || number(initial["attempts"])!=0 {t.Fatalf("create: %d %v",status,initial)}
+   id,ok:=initial["game_id"].(string);if !ok {t.Fatal("missing session")};base:="/api/wordgames/contexto/games/"+id
+   curated,finished,won,score,found:=s.contexto.Progress(id)
+   if !found || curated!=r.Curated || finished || won || score!=-1 {t.Fatalf("ordinary selection mismatch: %s %v %v %d",curated,finished,won,score)}
+   getState("initial_get",base,initial)
+   status,_=request("unearned_clue","POST",base+"/clue",nil,true);if status!=400 {t.Fatalf("unearned clue status %d",status)}
+   firstText,alternate:=r.Novel,r.Canonical
+   if arm=="canonical_first" {firstText,alternate=r.Canonical,r.Novel}
+   assertGuess:=func(label string,status int,body map[string]any) map[string]any {
+    if status!=200 || body["ok"]!=true || body["won"]!=false || body["needs_confirmation"]==true || number(body["attempts"])!=1 {t.Fatalf("%s did not share one direct canonical attempt: %d %v",label,status,body)}
+    guess,ok:=body["guess"].(map[string]any)
+    if !ok || guess["id"]!=r.Owner || number(guess["distance"])!=1 || number(guess["rank"])!=r.Rank || number(guess["closeness"])!=99 {t.Fatalf("%s canonical warmth/owner drift: %v",label,guess)}
+    return guess
+   }
+   status,first:=request("first_form","POST",base+"/guess",map[string]any{"text":firstText},true)
+   guess:=assertGuess("first_form",status,first)
+   status,repeat:=request("first_repeat","POST",base+"/guess",map[string]any{"text":firstText},true)
+   assertGuess("first_repeat",status,repeat)
+   status,alternateReply:=request("alternate_form","POST",base+"/guess",map[string]any{"text":alternate},true)
+   assertGuess("alternate_form",status,alternateReply)
+   status,repeated:=request("alternate_repeat","POST",base+"/guess",map[string]any{"text":alternate},true)
+   assertGuess("alternate_repeat",status,repeated)
+   for _,reply:=range []map[string]any{first,repeat,alternateReply,repeated} {
+    guesses,ok:=reply["guesses"].([]any);if !ok || len(guesses)!=1 {t.Fatal("spellings created separate guess slots")}
+   }
+   obs["first_spelling"]=firstText;obs["alternate_spelling"]=alternate
+   obs["first_response"]=first;obs["alternate_response"]=alternateReply
+   feedback:=map[string]any{}
+   for _,key:=range []string{"id","label","distance","rank","temperature","closeness"} {feedback[key]=guess[key]}
+   obs["canonical_feedback"]=feedback
+   if canonicalFeedback==nil {canonicalFeedback=feedback} else if !reflect.DeepEqual(canonicalFeedback,feedback) {t.Fatal("canonical feedback changed across input orders")}
+   getState("after_forms_get",base,repeated)
+   last:=repeated
+   for _,extra:=range r.Extras {
+    if number(last["attempts"])>=3 {break}
+    status,last=request("earned_extra","POST",base+"/guess",map[string]any{"text":extra},true)
+    if status!=200 || last["ok"]!=true || last["won"]!=false {t.Fatalf("bounded extra failed: %s %v",extra,last)}
+   }
+   if number(last["attempts"])!=3 {t.Fatal("expected exactly three successful nonwinning guesses after two extras")}
+   status,clue:=request("earned_clue","POST",base+"/clue",nil,true)
+   if status!=200 || clue["clue_kind"]!="category" || number(clue["clues_used"])!=1 {t.Fatalf("earned clue %d %v",status,clue)}
+   getState("after_clue_get",base,clue)
+   status,terminal:=request("solve","POST",base+"/guess",map[string]any{"text":c.Labels[r.Target]},false)
+   if status!=200 || terminal["won"]!=true {t.Fatalf("solve failed %d %v",status,terminal)}
+   if number(terminal["attempts"])!=4 || number(terminal["clues_used"])!=1 || number(terminal["score"])!=700 {t.Fatalf("exact terminal counts/score drift: %v",terminal)}
+   expectedScore:=max(50,1000-60*(number(terminal["attempts"])-1)-120*number(terminal["clues_used"]))
+   if number(terminal["score"])!=expectedScore || terminal["share"]==nil {t.Fatal("terminal scoring/share mismatch")}
+   status,recovered:=request("terminal_get","GET",base,nil,false)
+   if status!=200 || !reflect.DeepEqual(recovered["target"],terminal["target"]) || recovered["score"]!=terminal["score"] || recovered["share"]!=terminal["share"] {t.Fatal("terminal recovery mismatch")}
+   for _,key:=range []string{"attempts","guesses","clues_used","won"} {if !reflect.DeepEqual(recovered[key],terminal[key]) {t.Fatalf("terminal GET %s drift",key)}}
+   cid,done,won,finalScore,exists:=s.contexto.Progress(id)
+   if !exists || cid!=r.Curated || !done || !won || finalScore!=expectedScore {t.Fatal("terminal progress mismatch")}
+   obs["final_attempts"]=terminal["attempts"];obs["final_score"]=expectedScore
+  }
+ }
+ if len(transcript)!=56 {t.Fatalf("finite protocol request count: %d",len(transcript))}
+ report["request_count"]=len(transcript)
+ t.Logf("prospective complete: fixed seeds=%v sessions=4 requests=%d",seeds,len(transcript))
+}
