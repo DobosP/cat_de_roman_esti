@@ -78,3 +78,16 @@ peak389517312RSS/increment435848417bytes;111runtime/currentauthority files uncha
 Only i05-lex-01 is now R4 ready_for_refinement for singular employee-pay leafă; other records remain unchanged:
 1ready/1researched/4held/0selected/0installed. [Pre-readiness R1pool](research-pool-r1-before-readiness.json.gz) remains exact.
 No Source7, graph module/proposal, raw adoption judgments, prospective aliases or new game-data installation exists.
+
+## Exact one-form refinement proposal
+
+Only i05-lex-01 R4 employee-pay leafă is selected; R5 is handoff metadata, binding exact [R4 snapshot](selection-snapshots/i05-lex-01-r4.json)
+SHAf1410a41 and [proposal](graph-proposal-r1.json) SHAa53df029 to module37b0fd5b.
+One singular form/one genuine synonym family proposed, zero nodes/edges/world concepts/targets/rounds/inflection expansion installed.
+[Independent raw factual](raw-factual-review-r1.json) e2fad3f2 accepts only the qualified form/owner and original sources.
+[Independent quality/prospective](raw-quality-prospective-review-r1.json) d605a55f permits supported isolated scrutiny ONLY;
+final raw quality/all-game/prospective/Source7/installation gates remain pending. Leana must remain exact-owned and changedfuzzy outcomes need fresh scrutiny.
+Frozen pre-selection [R2pool](research-pool-r2-before-selection.json.gz), R4snapshot and prior source/readiness evidence remain exact.
+The finite next evidence includes all716pack/265feedback/2419mining/464projections/421quick/World/180terminal/history,
+29newlexicalqueries plus19retained regressions, <=192declared service cases and ordinaryseed7 direct/sharedattempt/privacy/warmerclue700 proof.
+Only supported nonmutating preflight/isolated generator under fresh admissions may precede installation; no actual generated candidate exists yet.
