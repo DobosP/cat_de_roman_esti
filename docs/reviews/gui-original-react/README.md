@@ -38,6 +38,12 @@ gate-gen-result.json and gate-execution.json preserve the wrapper outcome and
 actual command actions. The full-suite inventory was discovered as654 distinct
 project/file/full-title cases; that discovery is not654 executed cases.
 
+The clean legacy:freeze target atf50715dcab3b69ba267c67c69cd95ce1b7f32ba7
+packed the exact30 committed files and verified each archive member byte-for-byte.
+Archive SHA256:742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65.
+Its native result/actions are preserved in legacy-freeze/; source-file hashes and
+the archive/sidecar are in the root legacy/ directory. No rebuild supplied fallback bytes.
+
 Baseline screenshots/axe/vitals, CSP conversion, Motion/tooling normalization,
-legacy freeze/retirement, parent staged UI sync/trust and canonical unit/full
+source retirement, parent staged UI sync/trust and canonical unit/full
 qualification remain outstanding. No device or live/soak evidence is attested.
