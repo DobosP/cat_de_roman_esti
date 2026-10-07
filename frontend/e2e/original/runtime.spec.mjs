@@ -73,7 +73,12 @@ async function leavingSnapshot(page, game, clickExit = false) {
     });
     if (root) observer.observe(root, { childList: true, subtree: true });
     if (leave) document.querySelector('button[aria-label="Ieși la lista de jocuri"]').click();
-    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    // Presence's ownership update precedes Framer's first opacity write. Observe
+    // a real in-progress exit frame, rather than guessing which rAF starts it.
+    for (let frame = 0; frame < 24; frame++) {
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      if (!root?.isConnected || Number(getComputedStyle(root).opacity) < 1) break;
+    }
     const board = document.querySelector(selector);
     const screen = board?.closest(".screen");
     const gameKey = selector.slice(1).split("-")[0];
@@ -210,16 +215,17 @@ for (const game of games.filter((game) => game.derived)) {
         const held = await hold(page, `${gameURL(game, initial.game_id)}${phase === "read" ? "" : `/${step.action}`}`);
         const performed = act(page, game, step);
         await held.requested;
-        if (phase === "unmounted") { await exit(page).click(); await expect(page.locator(game.board)).toHaveCount(0); }
-        else {
-          const snapshot = await leavingSnapshot(page, game, true);
-          await check("exit.reply-released-while-mounted-and-locked", () => {
-            expect(snapshot.mounted).toBe(true);
-            expect(snapshot.disabled).toBe(true);
-            expect(Number(snapshot.opacity)).toBeLessThan(1);
-          });
-        }
-        held.release();
+        try {
+          if (phase === "unmounted") { await exit(page).click(); await expect(page.locator(game.board)).toHaveCount(0); }
+          else {
+            const snapshot = await leavingSnapshot(page, game, true);
+            await check("exit.reply-released-while-mounted-and-locked", () => {
+              expect(snapshot.mounted).toBe(true);
+              expect(snapshot.disabled).toBe(true);
+              expect(Number(snapshot.opacity)).toBeLessThan(1);
+            });
+          }
+        } finally { held.release(); }
         await performed;
         if (phase !== "unmounted") await check("stale.no-transient-terminal-adoption-during-exit", async () => {
           expect(await page.evaluate(() => window.__originalExit.terminalAppearances)).toBe(0);
