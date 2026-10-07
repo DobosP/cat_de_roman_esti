@@ -1,6 +1,47 @@
 # V1.6 — everyday input coverage
 
-## Owner-paused Windows continuation
+## Current Windows continuation — session 1 checkpoint
+
+Valid until: host/resources, exact bindings or owner steering change — recheck before execution.
+
+This session started at the freshly fetched checkpoint902a341 on
+`codex/content-v1-6-windows-session-1`,
+in `C:/Users/Paul Work/.codex/worktrees/7cf2/cat_de_roman_esti`. Qualified shared
+main remains clean at6a233279. V1.6 remains partial, unmerged and unqualified.
+The owner's latest correction moves all implementation and the version loop back
+to the original chat, with no further chats. This session stops at the documentation
+checkpoint; it created no successor or schedule.
+The app-managed placement is retained while this review is live. Next-session setup
+must reconcile the agent-ops helper and workspace `_worktrees` convention without
+moving a live checkout, resetting the newer branch or discarding unmerged evidence.
+
+[Measured Windows inspection](windows-session-1-host-preservation-r1.json) records
+15.39GiB free on C:, below17GiB start and16GiB remaining-disk floors. Windows
+available physical memory exceeds16GiB, but is not a Linux MemAvailable measurement.
+Go1.27.1 is absent from PATH and inspected locations. The exact runner/harness use
+Linux-only fcntl, /proc, waitid, process groups and signal masking. Neither Python-only
+fixture mode nor any native campaign was started; no new campaign deadline/baseline
+exists. No dependencies were installed and no WSL/Docker campaign was begun.
+
+Both frozen R4-R2 method hashes, their ASTs and both embedded fixture scripts check
+exact. All122 current preservation checks pass, covering109runtime/source8/rubric,
+authority metadata/pin, authored Source6, sealed bundle, current HTTP corpus and
+history summary. This is byte/source inspection, not rerun application qualification.
+Independent R4-R2 source review remains pending: the requested reviewer stayed in
+`pending_init` and was interrupted for the owner-requested stop, without a verdict
+or independent receipt. No reviewer source approval is claimed. All command-tool
+calls completed; no runner, fixture, native group or scratch process was launched.
+
+Next in the original chat: finish exact R4-R2 independent source review. Before both bounded fixture modes,
+restore freshly measured disk admission and use independently reviewed host-compatible
+supervision with qualified Go available for the later native campaign. All nineteen
+cases listed below remain unqualified; then exhaustive5/5/5/4 plusCLI/vet must share
+one new fixed20-minute campaign, unchanged limits and original cumulative baseline.
+Final docs/ADR/pool qualification, exact-commit assembled acceptance and green landing
+remain outstanding. Preserve all original failures and already-staged transactions.
+Publication/deployment/provider activation are outside this session's request.
+
+## Historical owner-paused Windows continuation
 
 Valid until: the owner resumes this exact branch and refreshes host admission — then treat this checkpoint as history.
 
