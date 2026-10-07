@@ -1,0 +1,58 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T09:44:35Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "REQUEST_CHANGES_SOURCE_ONLY",
+  "bindings": {
+    "methods/run_worktree_lane_wsl_r5.py.txt": "aea93404c3faec563b3df0b3bd96835ad6fc7a653c680e8697c51f1d5634090d",
+    "methods/windows_size_helper_wsl_r2.py.txt": "c708c0c88a8f8cd4ef76857dd9f03bbac4cf77f74d45548e0247c4051dda39d8"
+  },
+  "findings": [
+    {
+      "id": "R5-F1",
+      "priority": "P1",
+      "file": "methods/run_worktree_lane_wsl_r5.py.txt",
+      "start_line": 212,
+      "end_line": 216,
+      "title": "Worker output sidecars are parsed as terminal receipts",
+      "detail": "The glob '*.json' includes UUID32.worker-output.json created by the exact helper at lines 290 and 319. Successful worker output contains two JSON lines (ready and response; helper lines 416-419), so json.loads(previous.read_bytes()) raises Extra data during the next measurement. Every real runner invocation needs multiple measurements; the first successful count therefore prevents the next count and cannot qualify a lifecycle or native campaign.",
+      "requested_change": "Enumerate and classify exact UUID32.json terminal receipts, UUID32.worker-output.json retained output and UUID32.json.pending sidecars. Refuse orphan or unknown entries and every pending sidecar even beside a terminal receipt; parse only bounded regular terminal receipt snapshots and require confirmed terminal cleanup. Preserve this variant and bind a new caller revision."
+    }
+  ],
+  "accepted_source_properties": [
+    "Exact helper/interpreter pins and duplicate accounting-root refusal.",
+    "One bounded final receipt read and stdout binding, exact roots and receipt identity, positive PID/creation identities, worker/launcher exit and Job-empty checks, 4s and 64MiB response limits.",
+    "Deferred paths use fresh Linux lstat plus one following stat; actual directories recurse through accepted R3 scanner, directory symlinks remain excluded, file symlinks count regular target sizes, only disappearing paths skip.",
+    "Original F1 final publication accounting, F2 manifest and prefix snapshot bindings, F3 signal-aware publication and cumulative pending/lock state are preserved; no changed native cap, baseline, campaign clock or metadata reserve."
+  ],
+  "preserved_unqualified_variants": {
+    "bindings": {
+      "methods/run_worktree_lane_wsl_r4.py.txt": "2fa452c682381bbf58147b06ac87f17856da38427c71c173db878c63e8af46a9",
+      "methods/windows_size_helper_wsl_r1.py.txt": "8d2c97479b43536f83bd1df56627dbc109dbd55bafd74558d7c1cecfcfa2744d"
+    },
+    "verdict": "REQUEST_CHANGES_SOURCE_ONLY",
+    "finding": {
+      "id": "R4-OWNERSHIP",
+      "priority": "P1",
+      "caller_lines": [
+        212,
+        213
+      ],
+      "helper_lines": [
+        13,
+        19
+      ],
+      "detail": "R4's Linux subprocess timeout cannot establish that the native Windows metadata process has exited if interop blocks or only its Linux launcher is killed. Helper R1 checks its deadline only when execution reaches budget() and has no atomic Job assignment, independently bounded owned supervisor, actual PID/creation receipt or confirmed native process/job cleanup. Blocking metadata IO can bypass progress checks. Preserve both variants as unqualified; do not infer termination or pass from timeout."
+    }
+  },
+  "execution_preconditions": [
+    "Do not execute R5 for qualification; review a new append-only caller repair and its registry regression fixture.",
+    "Re-run the exact repaired actual-root lifecycle fixture; old R3 synthetic passes do not qualify this adapter.",
+    "Keep failed R2 lifecycle and incomplete old/new whole-tree scanner receipts failed; no clock or cap resets."
+  ]
+}

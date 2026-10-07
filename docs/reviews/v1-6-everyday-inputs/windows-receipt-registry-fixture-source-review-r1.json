@@ -1,0 +1,28 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T09:48:40Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "bindings": {
+    "methods/check_windows_receipt_registry_wsl_r1.py.txt": "af00a02e6c5ceb76e398fa7ee7dcecb176798be417fda2688074678ce7382137",
+    "methods/run_worktree_lane_wsl_r6.py.txt": "855f4fe07fd64347ff4024db12526659ddcde5a42f655e752d2153d8909e7297"
+  },
+  "findings": [],
+  "accepted_source_properties": [
+    "Imports exact hash-bound runner bytes with bytecode disabled and invokes only the isolated registry validator; subprocess run/Popen are explicitly denied.",
+    "Creates a fresh owned tiny fixture tree and tests 27 cases, including repeat acceptance of a terminal receipt plus legitimate two-record worker output that reproduces the old glob parser defect.",
+    "Rejects orphan output/pending, pending beside terminal receipt, each false or wrong-type cleanup flag, malformed/nonobject/wrong-schema/nonce/path/status/oversized receipt, unknown/uppercase names, directories and symlink entries.",
+    "Every case snapshots entry modes, sizes, regular-file digests and symlink targets before and after validation, so accepted classification cannot be achieved by deleting or rewriting retained evidence.",
+    "The report explicitly distinguishes synthetic flags from real process-exit proof, checks no native call attempted, rechecks runner source bytes, bounds each input at 32KiB and the final report at 128KiB, and refuses elapsed time beyond ten seconds."
+  ],
+  "execution_preconditions": [
+    "Execute with exact reviewed fixture and R6 hashes, ordinary nonoptimized Python, a fresh owned directory and an external bounded watchdog.",
+    "Any timeout or missing durable receipt is failed/incomplete rather than passed. The internal elapsed checks alone do not preempt blocking filesystem IO.",
+    "This pure source/fixture scope proves receipt classification only; Windows process ownership still requires the separately accepted Windows helper fixture."
+  ]
+}

@@ -25,9 +25,21 @@ full-root lifecycle and incomplete old/new whole-tree fixture remain failed/inco
 Fresh complete worktree+scratch+SDK accounting is747460447bytes and38.533s/scan;
 disk30107168768/MemAvailable21549404160bytes exceed unchanged floors. Required
 R3 scans alone would overrun the fixed20-minute campaign, so native admission is held.
-A fresh Windows metadata adapter with owned job supervision is being prepared for
-independent review and bounded parity/lifecycle evidence. Every accounting root,
-2GiB native RSS/1GiB growth/17GiB startdisk/16GiB remaining floors stays unchanged.
+The [R5 source review](wsl-r5-source-review-r1.json) rejects its repeated-call receipt
+glob; the [R6 correction](wsl-r6-source-review-r1.json) and pure
+[27-case registry regression](windows-receipt-registry-r1-result.json) pass their
+source/parser scopes. Windows helperR2 and its fixture passed source review, but the
+[first actual fixture failed](windows-helper-r2-fixture-r1-failure.json) before a final
+response. The original phase-created receipt remains unconfirmed and retained;
+[its exact parent is absent](windows-helper-r2-prelaunch-failure-preservation-r1.json).
+No recorded launcher/worker or worker-output exists. A revised fixture must preserve
+setup diagnostics, and a guarded helper revision requires independent review before
+another invocation. Actual-root parity and active/finalization proofs remain pending.
+The [seven-step command specification](wsl-native-campaign-spec-r1.json) passed
+[source-only partition/pin review](wsl-native-campaign-spec-review-r1.json) before
+these documentation changes; fresh final-adapter bindings/admission remain required.
+Every accounting root,2GiB native RSS/1GiB growth/17GiB startdisk/16GiB remaining
+floors stays unchanged. No module fetch, native test/build or campaign has executed.
 
 Runtime109/source8/rubric and existing Source6 installed finals/reference/native/HTTP
 proofs remain exact. Both synonym transactions are already staged. All nineteen cases,

@@ -1,0 +1,27 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T09:44:35Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "bindings": {
+    "methods/check_runner_signal_wsl_actual_r5.py.txt": "7c7cf48dceb623919fdd6a479a10974e5d380bccd6fc07dbef8d08c1e5731c03",
+    "methods/run_worktree_lane_wsl_r5.py.txt": "aea93404c3faec563b3df0b3bd96835ad6fc7a653c680e8697c51f1d5634090d"
+  },
+  "findings": [],
+  "accepted_source_properties": [
+    "Only runner scratch filename, bytecode suppression before bound imports, and owned SDK tools accounting root differ from the previously reviewed actual-root WSL lifecycle harness.",
+    "Active and finalization wrappers retain exact runner byte bindings, production signal handlers, manifest/prefix/refusal/ownership/publication assertions and unchanged 24s work / 30s total acceptance.",
+    "The accounting roots are actual mounted worktree plus owned scratch subdirectories including tools; this is an actual-root fixture and does not reuse synthetic-root proof."
+  ],
+  "qualification_status": "Execution is blocked by the separately rejected R5 caller; source acceptance of the fixture does not accept its runner or predict a pass.",
+  "execution_preconditions": [
+    "Point a new append-only fixture revision at an independently accepted repaired caller with exact source binding.",
+    "Run both active and finalization lifecycle scenarios under the existing total bound; preserve every failed or incomplete run.",
+    "Validate fresh whole-actual-root byte accounting and unchanged resource admission before any native campaign."
+  ]
+}

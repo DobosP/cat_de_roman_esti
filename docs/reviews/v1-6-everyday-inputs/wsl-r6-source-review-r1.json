@@ -1,0 +1,36 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T09:48:40Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "bindings": {
+    "methods/run_worktree_lane_wsl_r6.py.txt": "855f4fe07fd64347ff4024db12526659ddcde5a42f655e752d2153d8909e7297",
+    "methods/check_runner_signal_wsl_actual_r6.py.txt": "5db8d774edfcac551a080c7ce5938bcaf44d97db8753687606fb4494ae2809fd",
+    "methods/windows_size_helper_wsl_r2.py.txt": "c708c0c88a8f8cd4ef76857dd9f03bbac4cf77f74d45548e0247c4051dda39d8"
+  },
+  "component_verdicts": {
+    "wsl_runner_r6": "ACCEPT_SOURCE_ONLY",
+    "actual_root_lifecycle_fixture_r6": "ACCEPT_SOURCE_ONLY"
+  },
+  "findings": [],
+  "supersedes_source_rejection_only": "wsl-r5-source-review-r1.json",
+  "accepted_source_properties": [
+    "The only runner change from exact R5 is validate_prior_windows_receipts plus its pre-spawn call. It repairs R5-F1 without rewriting preserved methods.",
+    "Registry enumeration requires regular files and exact lowercase UUID32 names. Only .json terminal snapshots are parsed; .worker-output.json is retained history beside a terminal receipt. Every .json.pending, orphan sidecar, unknown name or nonregular entry refuses before a new helper launches.",
+    "Each prior terminal receipt is read into one bounded 16KiB snapshot and requires exact schema, nonce, mounted receipt path, terminal completed/failed status, and true worker-exit, launcher-exit and Job-empty flags. Two-line output is never parsed as a receipt.",
+    "Helper/interpreter pins, exact roots, fresh deferred Linux stat semantics, bounded current receipt validation, process identity fields and original resource/prefix/publication/signal logic are unchanged from the independently reviewed R5 source.",
+    "Actual-root lifecycle R6 fixture differs from accepted R5 fixture only in its active and finalization runner filename references. Bytecode suppression, source binding, production signal handlers, SDK tools measurement and unchanged 24s work / 30s total acceptance remain."
+  ],
+  "execution_preconditions": [
+    "Run the independently accepted pure registry regression fixture against these exact R6 bytes; synthetic cleanup flags are parser fixtures and not native exit proof.",
+    "Require exact Windows helper R2 fixture execution and actual-root fresh parity evidence, then active and finalization R6 lifecycle execution under the unchanged total bound.",
+    "Copy exact accepted runner bytes to the named scratch path and bind their hash in fixture manifests; do not reuse R3 synthetic execution results as R6 proof.",
+    "Fresh disk/memory and original admission requirements still apply; no native campaign is admitted by source acceptance and no campaign clock or baseline may be reset.",
+    "Preserve all rejected variants and failed/incomplete fixture receipts unchanged."
+  ]
+}
