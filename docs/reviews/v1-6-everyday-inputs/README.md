@@ -34,6 +34,22 @@ records all gates. Native docs46/default working+staged whitespace passed. Indep
 assembled review precedes root's green landing. No mainmerge/push/deploy or PG/provider activation
 has occurred in this worker; the root owns the authorized publication and next wave.
 
+## Historical aggregate whitespace failure and reviewed resolution
+
+Root's full branch default whitespace check found5,557 trailing findings on38 new
+Windows documentation/method files, all outside runtime/source8/tests. The earlier
+working/staged checks covered the new Linux delta and do not waive this aggregate
+failure. Exact assembled review has not started. The metadata-only proposal preserves
+all551,843 original bytes losslessly in [the raw archive](windows38-original-rawbytes-r1.tar.gz)
+and maps original review hashes to archived members. Independent source review accepted exact CRLF→LF views. All38 current files nowmatch
+the proposedLF hashes; defaultwholebranchworking AND stagedchecks against6a PASS.
+Old Windows execution judgments do not transfer;16 past native documentaryinput hashes
+resolve through rawarchive members, not currentpaths. After-migration review and final
+manageddocs/aggregatechecks precede the new exactassembled revision.
+All actual native19/currentSource6 proofs remain valid at unchanged runtime bindings.
+[Migration proposal](windows38-LF-readability-proposal-r1.json) and
+[failed output](windows-new-crlf-aggregate-failure-r1.stdout.gz) preserve the complete scope.
+
 ## Historical Windows stop and Linux transport checkpoint
 
 Valid until: exact bindings, host admission or owner steering change — recheck before execution.

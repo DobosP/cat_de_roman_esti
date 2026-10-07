@@ -1,0 +1,72 @@
+{
+  "schema": "v1-6-Windows38-LF-independent-source-review-r1",
+  "checked_at_utc": "2026-10-07T18:19:47.555853+00:00",
+  "reviewer": "/root/v16_linux_finish/linux_runner_review",
+  "valid_until": "Exact 38-path scope, original archive, LF projections or formatting-only transformation changes; obtain a new exact review then.",
+  "scope": "Before-write independent source review of exact 38 new Windows documentary/method files. Verify actual default wholebranch failure, raw-byte preservation, semantic equivalence and current native-proof separation. No application/native/tool execution or candidate edits.",
+  "files": {
+    "windows-LF-source-admission-r1.json": {
+      "bytes": 740,
+      "sha256": "7b0e455dcbecec13eeb91c98a459bb54b065118afdce90ef78bd75151933371a"
+    },
+    "windows38-LF-readability-proposal-r1.json": {
+      "bytes": 16560,
+      "sha256": "11a7336f4a6848779ecfc74c519d4407f8489f9cbfd0d213fc68f5743682ff41"
+    },
+    "windows38-original-rawbytes-r1.tar.gz": {
+      "bytes": 171126,
+      "sha256": "2bc7fca4dd9dc9c0e69c39b320d724e5db71cb7de5f6af3f1e0c683f5c2eb55a"
+    },
+    "windows-new-crlf-aggregate-failure-r1.json": {
+      "bytes": 5270,
+      "sha256": "9b55a8d166aa6a63ad798249add76e23d3d76f4792ccc7937a8d5f13d3e2976f"
+    },
+    "windows-new-crlf-aggregate-failure-r1.stdout.gz": {
+      "bytes": 198595,
+      "sha256": "401f24ff65b8df3b1a9e3da0e9509bef955289ccd282c20cae118f8aa51c57a8"
+    },
+    "linux-complete-native-evidence-review-r1.json": {
+      "bytes": 10254,
+      "sha256": "17f60e8a237dc4d1cd0e7f8ba1a00f79e3fc993e015e93a3fffeb2cfa24b9fbf"
+    },
+    "linux-native-complete-evidence-manifest-r1.json": {
+      "bytes": 5748,
+      "sha256": "cce2c130d11d38de25605273f98707de19460099bd70bcbb69ec3d6066fb9a1a"
+    },
+    "runtime-freeze-r1.json": {
+      "bytes": 18683,
+      "sha256": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7"
+    }
+  },
+  "verdict": "ACCEPT_EXACT_METADATA_READABILITY_MIGRATION_ONLY",
+  "checks": {
+    "real_gate_failure": "Lossless failed stdout gzip decompresses to exact 1090581-byte SHA 9528b0329f967b33e61e7447c91b15a0fdbe8e482e20ee2d0c2395caee515028. Its 5557 trailing-whitespace headers name exactly 38 paths; all 38 were added after qualified main6a233279. The preliminary arbitrary CRLF byte scan of 55 text/binary paths is not adopted as scope.",
+    "exact_originals": "All 38 regular raw archive members are exactly named by the proposal and equal current pre-write bytes and exact Git revision9cc667b4f9d5afadf710a009630eb55400d2878a. Every raw size, SHA and CRLF count verifies. Archive SHA 2bc7fca4dd9dc9c0e69c39b320d724e5db71cb7de5f6af3f1e0c683f5c2eb55a; total551843 raw bytes.",
+    "exact_projection": "For each member the sole transformation is byte replacement CRLF with LF. There are no bare CR bytes. Exactly 5557 replacements reduce total size to546286 bytes and match every proposed LF digest/size. No other whitespace, token, JSON field, byte escape or semantic edit is permitted.",
+    "semantic_equivalence": "Decoded JSON values are identical; Python method ASTs are identical under universal-newline parsing; every decoded text line is identical. This establishes formatting-only readability equivalence, not approval to execute a newly hashed method.",
+    "historical_mapping": "The proposal supplies old original path, exact raw member name, original SHA/size and LF view SHA/size under one exact archived-original container. Historical raw reviews/receipts and their embedded digests must remain unchanged and resolve to those raw members. Current LF path is a readable view; an old raw digest does not automatically approve its new byte sequence.",
+    "native_proof_scope": "All109 frozen runtime hashes, eight physical source files plus rubric and all25 unique Source1-to6 ancestry archives verify current exact hashes and are disjoint from these38 paths. Current Go/compiler/test source and Source6 authority data are outside the transformation scope. The actual Linux runner/race binary and new Linux success receipts are not rewritten.",
+    "documentary_readset_distinction": "Sixteen of the38 paths occur in the completed Linux native admission as historical documentary/method inputs. After migration their old raw digests must be described as archived evidence, not falsely asserted to match current LF paths. Passed pre/post readsets remain the exact original executed outcome. New admissions must protect current LF digests when reading the views, never rerun an old failed clock or rewrite a historical admission.",
+    "earlier_CRLF_scope": "These38 files were newly added after the qualified baseline. This is no waiver for either them or the12 pre-existing frozen CRLF files; those old files remain outside this exact repair."
+  },
+  "execution_conditions": [
+    "Before each of the38 writes, assert current raw SHA and the exact archive member SHA, then apply only the reviewed CRLF-to-LF replacement and verify exact projected SHA/size.",
+    "Keep the raw archive, proposal mapping and failed wholebranch stdout immutable. Publish a migration receipt identifying archive/raw members and the LF view digests; do not rewrite any historical judgment or native-success receipt.",
+    "Confirm current109 runtime/source8/rubric/compiler/native archive/authority bindings are unchanged after migration. Preserve the original Linux native archive and complete-case evidence.",
+    "Run the default full branch working-tree git diff --check against qualified base6a233279 after the candidate writes and default full staged branch diff --check against that base before commit. Prior checks limited to the Linux delta do not satisfy this newly discovered aggregate failure.",
+    "Preserve any further default-gate failure as an actual failure; obtain a separately scoped remedy if it falls outside these38 newline-only paths. No -ignore-space, whitespace configuration relaxation, binary alteration or test waiver."
+  ],
+  "native_or_application_reexecution_required_by_this_change": false,
+  "new_method_execution_or_historical_judgment_approval": false,
+  "assembled_or_landing_approval": false,
+  "historical_failures_reclassified": false,
+  "reviewer_execution": {
+    "native": 0,
+    "Go": 0,
+    "application": 0,
+    "tests": 0,
+    "migration_writes": 0,
+    "read_only_Git_source_and_integrity_inspection": true,
+    "review_receipts_written": 1
+  }
+}
