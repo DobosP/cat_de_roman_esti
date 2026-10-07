@@ -10,12 +10,13 @@ fs.mkdirSync(output, { recursive: true });
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 function collect(report) {
   const cases = [];
-  function visit(suite) {
+  function visit(suite, parents = []) {
+    const titles = [...parents, ...(suite.title ? [suite.title] : [])];
     for (const spec of suite.specs || []) for (const item of spec.tests || []) {
       const file = path.isAbsolute(spec.file) ? path.relative(root, spec.file) : path.relative(root, path.resolve(report.config.rootDir, spec.file));
-      cases.push({ id: spec.id, project: item.projectName, file, title: spec.title, expectedStatus: item.expectedStatus, status: item.status, results: item.results, ok: spec.ok });
+      cases.push({ id: spec.id, project: item.projectName, file, title: [...titles, spec.title].join(" > "), expectedStatus: item.expectedStatus, status: item.status, results: item.results, ok: spec.ok });
     }
-    for (const child of suite.suites || []) visit(child);
+    for (const child of suite.suites || []) visit(child, titles);
   }
   for (const suite of report.suites || []) visit(suite);
   return cases;
