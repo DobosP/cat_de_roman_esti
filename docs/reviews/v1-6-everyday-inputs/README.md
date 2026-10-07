@@ -1,6 +1,14 @@
 # V1.6 — everyday input coverage
 
-## Current Linux qualification
+## Current qualified V1.6 landing
+
+V1.6 is independently accepted and landed on main at `848589d2a35966da7d579031c3c74de4a769ec01`.
+The exact reviewed content is `1b38e80a53e2566b17994a8e1e6bcf196f513f9e`; [assembled acceptance](assembled-review.json)
+SHA9a0ce834 and [landing record](landing.json) bind it. The pool now has2integrated/1researched/3held.
+User-authorized origin/main publication follows the landing documentation commit; no deployment.
+
+The qualification details below describe the completed pre-landing gates; their then-pending pool
+state is historical. Frozen selected R2 snapshots and pre-integration R3 pool bytes remain exact.
 
 Valid until: exact bindings, host admission or human steering change — recheck before execution.
 

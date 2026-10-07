@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — Source5 main6a233279 unchanged; V1.6 partial/unmerged; human resumed the Linux qualification and iteration loop under ADR-0181.
+Last verified: 2026-10-07 — V1.6 fully qualified, independently accepted and landed on main848589d; authorized publication follows landing docs. Content loop active.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -46,7 +46,7 @@ Last verified: 2026-10-07 — Source5 main6a233279 unchanged; V1.6 partial/unmer
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Staged Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679 forms/180 exact puzzles.
+Qualified Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
@@ -55,7 +55,7 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Current staged V1.6 pins (main remains qualified Source5)
+## Current qualified V1.6 pins
 
 - alchimie_discovery_world_v92.json: `8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad`
 - alchimie_recipe_extensions_v92.json: `d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc`
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-- V1.5/Source5 remains qualified main6a233279; V1.6 unmerged on `codex/content-v1-6` under [ADR-0181](adr/0181-resume-linux-v1-6-finish.md)/[0182](adr/0182-v1-6-reviewed-singular-inputs.md). Exactly2 singular synonym families/forms, zero concepts/edges/targets/rounds. All24rails complete5+19 race partitions and finalCLI/backendvet PASS; exact489reference/109runtime/Source6all4authority/36backend+shared/1207HTTP/smoke151+28 retained. Linux19campaign ended17:58:40UTC before18:07:27deadline, sampledRSS702844928/increment59920318bytes. [Ledger](reviews/v1-6-everyday-inputs/verification.json) binds all gates/retained failures. Nativedocs46/Linuxworking+stagedwhitespace PASS; wholebranchworking+stagedwhitespace PASS after reviewed38-fileLF migration,551843rawbytes preserved.16 pastdocumentary nativepins resolve archivedraw; runtimeunchanged. Finalmetadata evidence/docs and assembled review precede root landing. Pool2selected/1researched/3held/0integrated; every earlier hold/rejection remains.
+- V1.6/Source6 landed848589d after exact1b38 assembledACCEPT9a0ce834 and all required gates. [Landing](reviews/v1-6-everyday-inputs/landing.json), [ledger](reviews/v1-6-everyday-inputs/verification.json), [ADR-0182](adr/0182-v1-6-reviewed-singular-inputs.md). Two genuine synonym families/two singular forms (drapel→Steag, untdelemn→culinaryUlei); zero concepts/edges/targets/rounds or eligible/preferred growth. Complete24rail race cases/37backendpackages+shared/489reference/Source6currentall4/1207HTTP/smoke151+28/actualsealed56input proof, native docs46 and full-version default whitespace pass. Pool2integrated/1researched/3held; frozen R2/R3/history/failures preserved. Exact38WindowsLFviews retain551843rawbytes in a verified archive; no judgment rebinding. Active loop under ADR-0181; V1.7 starts only after qualified toolchain preservation and verified-merged cleanup.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni

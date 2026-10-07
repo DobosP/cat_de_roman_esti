@@ -1,0 +1,31 @@
+{
+  "schema": "v1-6-reviewed-main-landing-v1",
+  "checked_at_utc": "2026-10-07T18:58:56.941633+00:00",
+  "reviewed_content_commit": "1b38e80a53e2566b17994a8e1e6bcf196f513f9e",
+  "acceptance_metadata_commit": "848589d2a35966da7d579031c3c74de4a769ec01",
+  "local_landing_commit": "848589d2a35966da7d579031c3c74de4a769ec01",
+  "preserved_previous_main": "6a2332795dc5fa2db3eb61e196ab7ab820e76caa",
+  "assembled_review_sha256": "9a0ce834ece3ea7d60f378549bd390e82eaf237a4a137c9339212a7ceef391c0",
+  "mode": "green fast-forward; source8/109runtime/currentauthority/whole-version default whitespace verified",
+  "delta": {
+    "shared_concepts": 0,
+    "world_concepts": 0,
+    "genuine_synonym_families": 2,
+    "accepted_forms": 2,
+    "directed_links": 0,
+    "curated_rounds": 0,
+    "target_approvals": 0,
+    "eligible_preferred_delta": 0
+  },
+  "pool_states": {
+    "integrated": 2,
+    "researched": 1,
+    "held": 3
+  },
+  "publication": "user-authorized origin/main push follows this landing documentation commit",
+  "deployed": false,
+  "root_premerge_check_failure": {
+    "failure": "extra root script assumed runtime_sources was a dict; actual shape is list. Shell lacked set-e and continued into the already-green fast-forward.",
+    "correction": "correct list-based verification passed all109runtime and source8 hashes plus exact assembled acceptance/default whole-version whitespace before publication; subsequent shell scripts use set-e."
+  }
+}
