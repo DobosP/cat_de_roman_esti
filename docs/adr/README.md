@@ -113,3 +113,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0177](0177-resume-linux-v1-5-qualification.md) — resume owner-requested Linux V1.5 with bounded native admission.
 
 - [0178](0178-v1-5-hot-chocolate-discovery.md) — one reviewed world-local hot-chocolate discovery with preserved progress and native gates.
+
+- [0179](0179-resume-v1-6-in-original-chat.md) — continue the existing V1.6 task and sequential version loop in the original chat with unchanged gates.

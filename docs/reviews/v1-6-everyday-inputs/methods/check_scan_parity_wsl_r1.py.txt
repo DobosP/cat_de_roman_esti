@@ -1,0 +1,60 @@
+"""Bounded filesystem byte-count parity and mounted-tree scan timing, with no application execution."""
+import hashlib,importlib.machinery,importlib.util,json,os,signal,sys,time
+from pathlib import Path
+sys.dont_write_bytecode=True
+R=Path("/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6")
+S=Path("/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6")
+D=R/"docs/reviews/v1-6-everyday-inputs"
+def load(name,path):
+    loader=importlib.machinery.SourceFileLoader(name,str(path))
+    module=importlib.util.module_from_spec(importlib.util.spec_from_loader(name,loader))
+    loader.exec_module(module)
+    return module
+def main():
+    started=time.monotonic()
+    directory=Path(sys.argv[1]).resolve()
+    if directory==S/"probe" or not directory.is_relative_to((S/"probe").resolve()):
+        raise ValueError("outside owned probe")
+    directory.mkdir(mode=0o700)
+    tree=directory/"tree";tree.mkdir()
+    (tree/"nested").mkdir()
+    (tree/"plain").write_bytes(b"abc")
+    (tree/".hidden").write_bytes(b"xy")
+    (tree/"nested/deep").write_bytes(b"123456789")
+    os.link(tree/"plain",tree/"hardlink")
+    os.symlink(tree/"plain",tree/"filelink")
+    os.symlink(tree/"nested",tree/"dirlink",target_is_directory=True)
+    os.symlink(tree/"missing",tree/"dangling")
+    parent=D/"methods/run_worktree_lane_wsl_r2.py.txt"
+    candidate=D/"methods/run_worktree_lane_wsl_r3.py.txt"
+    bindings={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in (parent,candidate)}
+    old=load("old_scan",parent);new=load("new_scan",candidate)
+    assert old.measured_size([tree])==new.measured_size([tree])==20
+    (tree/"plain").write_bytes(b"abcdefgh")
+    assert old.measured_size([tree])==new.measured_size([tree])==35
+    assert old.measured_size([directory/"absent"])==new.measured_size([directory/"absent"])==0
+    new.received_signal=signal.SIGTERM
+    caught=False
+    try:new.measured_size([tree],interruptible=True)
+    except InterruptedError:caught=True
+    finally:new.received_signal=None
+    assert caught
+    real_scandir=os.scandir
+    def denied(path):raise PermissionError("controlled scanner permission refusal")
+    os.scandir=denied
+    refused=False
+    try:new.measured_size([tree])
+    except PermissionError:refused=True
+    finally:os.scandir=real_scandir
+    assert refused
+    times={}
+    t=time.monotonic();old_bytes=old.measured_size([R]);times["old_seconds"]=time.monotonic()-t
+    t=time.monotonic();new_bytes=new.measured_size([R]);times["new_seconds"]=time.monotonic()-t
+    assert old_bytes==new_bytes
+    assert all(hashlib.sha256(Path(path).read_bytes()).hexdigest()==wanted for path,wanted in bindings.items())
+    elapsed=time.monotonic()-started
+    report={"schema":"v1-6-wsl-scan-parity-fixture-r1","passed":elapsed<=30,"elapsed_seconds":elapsed,"budget_seconds":30,"bindings":bindings,"regular_hidden_nested_hardlink_filelink_dirlink_dangling_parity":True,"fresh_mutation_recounted":True,"catchable_signal_refused":caught,"permission_failure_closed":refused,"actual_task_tree_bytes":new_bytes,"actual_old_new_tree_count_equal":True,"timings":times,"application_or_native_executions":0}
+    (directory/"check-result.json").write_text(json.dumps(report,sort_keys=True,indent=2)+"\n")
+    print(json.dumps(report))
+    return 0 if report["passed"] else 1
+if __name__=="__main__":raise SystemExit(main())

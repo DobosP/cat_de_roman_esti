@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — qualified Source5 main6a233279 unchanged; V1.6 continuation resumed, Windows execution not admitted; not green or landed.
+Last verified: 2026-10-07 — qualified Source5 main6a233279 unchanged; V1.6 active on canonical task branch; native campaign pending; not green or landed.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
@@ -107,7 +107,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-- V1.5/Source5 remains qualified main6a233279 (published, shared checkout clean). V1.6 is a **partial, unmerged checkpoint** on `codex/content-v1-6-windows-session-1`, based on902a341; owner moved implementation/version loop back to the original chat. [Current review/handoff](reviews/v1-6-everyday-inputs/README.md); historical paused checkpoint/failed receipts remain exact. Exactly2 singular forms are staged (drapel→Steag, untdelemn→culinaryUlei), zero nodes/edges/targets/rounds. Prior Source6/all4authority,489 references,36 backend packages/shared race+vet,World5,compiled1207 parity/TCP151/assets28 evidence remains bound;122 current byte checks and both method/embedded-script AST checks pass. [Windows inspection](reviews/v1-6-everyday-inputs/windows-session-1-host-preservation-r1.json):15.39GiB free fails17GiB start/16GiB floor; Go1.27.1 unavailable in inspected paths; Linux supervision unsupported. R4-R2 independent source review remains pending; reviewer interrupted before initialization, no verdict. Both Python-only fixtures/all19 complementary contentrail cases/CLI+vet/assembled acceptance remain unqualified; no campaign clock/baseline created. No merge/publication/deploy; heartbeat remains paused. Original chat continues V1.6 until green.
+- V1.5/Source5 remains qualified main6a233279; shared checkout clean. V1.6 is partial/unmerged on canonical `codex/content-v1-6`; [ADR-0179](adr/0179-resume-v1-6-in-original-chat.md) records the original-chat version loop. Exactly2 staged singular forms (drapel→Steag, untdelemn→culinaryUlei), zero nodes/edges/targets/rounds. Frozen runtime109/source8/rubric and existing Source6/489reference/native/HTTP proofs remain exact. Reviewed WSLR3 scanner and controlled active/finalization fixtures pass; original R4-R2 receipt-race and full-root timing failures remain history. Go1.27.1 checksum/version and real WSL filesystem/supervision prerequisites are verified; fresh disk30.1GB/MemAvailable21.5GB exceed unchanged floors. Complete-root scan38.5s makes native admission infeasible with R3; reviewed Windows metadata/job adaptation is pending. All19 complementary contentrails, finalCLI/vet/docs/pool/assembled acceptance and green landing remain unqualified. [Current evidence](reviews/v1-6-everyday-inputs/README.md). No campaign deadline/baseline admitted; no push/deploy. Loop stays here; next version follows accepted green landing.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
 ## Doc map
 
-- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0178), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.
+- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0179), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.

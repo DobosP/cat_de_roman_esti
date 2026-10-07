@@ -1,6 +1,41 @@
 # V1.6 — everyday input coverage
 
-## Current Windows continuation — session 1 checkpoint
+## Current qualification in the original chat
+
+Valid until: exact bindings, host admission or owner steering change — recheck before execution.
+
+Canonical task branch `codex/content-v1-6` now continues from documentation checkpoint
+d8b7600 in `C:/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6`;
+the prescribed agent-ops helper created it. The old managed checkout/branch retains its
+unmerged evidence and is idle. Shared Source5 main6a233279 is clean.
+The current continuation decision is [ADR-0179](../../adr/0179-resume-v1-6-in-original-chat.md).
+
+Independent source review found a prior-receipt hash/read race in the original R4-R2;
+new WSL variants use one receipt snapshot and count the owned module cache.
+The [prefix regression](wsl-prefix-snapshot-fixture-r1-result.json) passes.
+The [scanner fixture](wsl-scanner-fixture-r2-result.json) passes synthetic old/new
+parity and one fresh actual R3 task-tree scan. Controlled [active](wsl-active-synthetic-r2-result.json)
+and [finalization](wsl-finalization-synthetic-r2-result.json) fixtures pass with real
+resource predicates and exact production R3 signal/publication logic on synthetic roots.
+They establish no native campaign or full-root runtime acceptance. The failed R2
+full-root lifecycle and incomplete old/new whole-tree fixture remain failed/incomplete.
+
+[WSL filesystem prerequisites](wsl-filesystem-preflight-r1.json) and exact
+[Go1.27.1 SDK checksum/version](wsl-toolchain-prerequisite-r1.json) are verified.
+Fresh complete worktree+scratch+SDK accounting is747460447bytes and38.533s/scan;
+disk30107168768/MemAvailable21549404160bytes exceed unchanged floors. Required
+R3 scans alone would overrun the fixed20-minute campaign, so native admission is held.
+A fresh Windows metadata adapter with owned job supervision is being prepared for
+independent review and bounded parity/lifecycle evidence. Every accounting root,
+2GiB native RSS/1GiB growth/17GiB startdisk/16GiB remaining floors stays unchanged.
+
+Runtime109/source8/rubric and existing Source6 installed finals/reference/native/HTTP
+proofs remain exact. Both synonym transactions are already staged. All nineteen cases,
+CLI/vet/docs/pool qualification, exact-commit assembled acceptance and local landing
+remain pending. No native campaign clock/baseline has been created. Original receipts,
+private answers and unrelated GUI work remain preserved; no push/deploy is authorized.
+
+## Historical Windows session 1 checkpoint
 
 Valid until: host/resources, exact bindings or owner steering change — recheck before execution.
 

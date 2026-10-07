@@ -1,0 +1,9 @@
+{
+  "change": "Fresh full traversal uses os.scandir/DirEntry metadata within each call, avoiding separate repeated Path stat calls. No cross-call cache, excluded directory, relaxed limit, deadline or baseline change. Permission/I/O errors fail closed; disappearing entries remain skipped as before.",
+  "parent_sha256": "7d429f4c200525ba34f2c731ca19cf3771ef076eb70b09fc2f1ee7020284ae90",
+  "preserved_failure": "active-wsl-r1/check-result.json: initial prefix timeout23.93s; fixture29.04s/30s, fallbackcleanup, passed=false.",
+  "runner_sha256": "09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d",
+  "schema": "v1-6-wsl-source-preparation-r3",
+  "source_only": true,
+  "status": "PREPARED_UNREVIEWED_UNEXECUTED"
+}

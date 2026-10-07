@@ -1,0 +1,48 @@
+{
+  "schema": "v1-6-wsl-independent-source-review-r3",
+  "checked_at_utc": "2026-10-07T08:27:23Z",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "ACCEPT",
+  "scope": "SOURCE_ONLY_SCANNER_CHANGE",
+  "source_accepted": true,
+  "valid_until": "Bound runner bytes, scanner semantics, filesystem assumptions or campaign contract changes; preserve this review and obtain a new exact review.",
+  "bindings": {
+    "methods/run_worktree_lane_wsl_r3.py.txt": "09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d",
+    "parent_runner_sha256": "7d429f4c200525ba34f2c731ca19cf3771ef076eb70b09fc2f1ee7020284ae90"
+  },
+  "inspected_difference": "The only R2-to-R3 change is measured_size: fresh os.scandir/DirEntry traversal replaces Path.rglob iteration.",
+  "accepted_source_properties": [
+    "Each invocation initializes a fresh pending root list and fresh scandir entries; there is no cross-call caching, byte sampling or path exclusion.",
+    "All default roots remain, including the owned gomodcache; nonoverlapping-root and scratch-escape refusals remain unchanged.",
+    "Actual directory entries recurse with follow_symlinks=False. Static symlink directories are not traversed; symlinks to regular files retain target-size counting as in the prior scanner.",
+    "Every enumerated entry observes received_signal when interruptible. Per-entry and directory-disappearance FileNotFoundError are skipped; other I/O failures propagate and cannot produce an accepted size result.",
+    "The existing 1GiB cumulative-growth cap, original campaign baseline, deadlines/floors, publication accounting and prefix/manifest snapshot consistency remain unchanged."
+  ],
+  "findings": [],
+  "preserved_failure": {
+    "status": "FAILED_FIXTURE_NOT_RECLASSIFIED",
+    "parent_reported_observation": "R2 active fixture first successful-prefix invocation timed out23.93s; harness29.04s, fallback cleanup needed and passed=false. No native/application/Go execution.",
+    "review_claim": "This materially new source scanner grants no retrospective pass, clock reset, cap relaxation or success inference for that original fixture."
+  },
+  "parent_reported_prior_evidence": {
+    "prefix_regression": "Passed0.385s against R2; not executed by this reviewer.",
+    "filesystem_preflight": "Native WSL hardlink/replace/directoryfsync and cross-processflock reportedly passed0.09s; not executed by this reviewer.",
+    "resources": "Parent-reported recovered C free disk29.8GB and MemAvailable23.65GB are not a fresh admission issued by this reviewer."
+  },
+  "remaining_execution_preconditions": [
+    "Prepare and independently review the exact scanner parity/performance fixture before execution.",
+    "Retain original R2 fixture files/results and bind materially new R3 bytes in fresh declared admission; do not relabel or renew its failed window.",
+    "Use the accepted R3 source at the lifecycle harness's required scratch runner filename and verify its exact hash before fixture invocation.",
+    "Inspect actual parity/performance and lifecycle fixture outcomes under original bounds; this source review establishes no performance result or fixture pass.",
+    "Native campaign still requires qualified Go1.27.1, exact current readsets and fresh resource admission with fixed cumulative deadline/baseline; no cap or content gate is waived."
+  ],
+  "execution": {
+    "application": 0,
+    "native": 0,
+    "fixture": 0,
+    "method_imports": 0,
+    "host_preflight": 0,
+    "review_receipts_written": 1
+  },
+  "limitations": "Acceptance is limited to the bound scanner source change and inherited unchanged guards. No actual filesystem traversal timing, fixture outcome, host safety result or release qualification is claimed."
+}

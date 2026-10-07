@@ -1,0 +1,59 @@
+{
+  "schema": "v1-6-runner-r4-r2-independent-source-review-r2",
+  "checked_at_utc": "2026-10-07T08:12:53Z",
+  "reviewer": "/root/continuation_audit",
+  "valid_until": "Reviewed source bytes or scope change; preserve this review and obtain a new exact review.",
+  "scope": "Full 570-line runner and 274-line harness source review only; no fixture, native, application or admission execution.",
+  "files": {
+    "methods/run_worktree_lane_r4_r2.py.txt": {
+      "bytes": 27734,
+      "sha256": "455c2669b6d9c85912796e3b08606af87acb1fdba0491f01efee03c322881504"
+    },
+    "methods/check_runner_signal_r4_r2.py.txt": {
+      "bytes": 15492,
+      "sha256": "7cd74d8fff6be373412cfbcb8747e4810d4c99b5bf436afc1e1887d74e777090"
+    }
+  },
+  "original_findings": {
+    "R4-F1": {
+      "source_status": "ADDRESSED",
+      "lines": "274-416",
+      "reason": "Publication reserves bounded metadata inside unchanged limits; durable outcome writes precede final size/floor/deadline checks and accepted state acknowledgement."
+    },
+    "R4-F2": {
+      "source_status": "ADDRESSED",
+      "lines": "529-532,455,350,383",
+      "reason": "Manifest hash and parse share one byte buffer; on-disk snapshot is rechecked before launch and publication."
+    },
+    "R4-F3": {
+      "source_status": "ADDRESSED",
+      "lines": "333-422",
+      "reason": "Log reads precede signal-masked finalization. Handled/pending signals fail the uncommitted step; campaign flock and pending state remain until coherent final acknowledgement. Explicit postcommit policy retains the defined boundary."
+    }
+  },
+  "findings": [
+    {
+      "id": "R4-R2-F1",
+      "priority": 2,
+      "title": "Hash and parse each prior receipt from one immutable buffer",
+      "file": "methods/run_worktree_lane_r4_r2.py.txt",
+      "start_line": 263,
+      "end_line": 265,
+      "evidence": "load_prefix compares digest(path) with the stored receipt hash, then separately reads path bytes for json.loads.",
+      "failure_trace": "A receipt changed between those reads can be copied into the cumulative ledger under its earlier stored hash. Field checks constrain commands/status/baseline, but do not bind all parsed evidence bytes.",
+      "required_change": "Read receipt_bytes once; compare hashlib.sha256(receipt_bytes).hexdigest() with the stored hash and parse json.loads(receipt_bytes)."
+    }
+  ],
+  "verdict": "REQUEST_CHANGES_SOURCE_ONLY",
+  "source_accepted": false,
+  "fixture_execution_approved": false,
+  "native_campaign_execution_approved": false,
+  "execution": {
+    "application": 0,
+    "native": 0,
+    "fixture": 0,
+    "method": 0,
+    "review_receipts_written": 1
+  },
+  "preserved_limits_and_failures": "No source guard, resource cap, failed admission, prior failed campaign or historical receipt is waived. Source review does not establish host locking/fsync support."
+}

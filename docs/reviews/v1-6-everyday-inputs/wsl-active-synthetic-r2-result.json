@@ -1,0 +1,23 @@
+{
+  "SIGKILL_hostloss_guarantee": false,
+  "budget_seconds": 30,
+  "elapsed_seconds": 4.1426356339998165,
+  "failure": null,
+  "fallback_cleanup_needed": false,
+  "native_Go_or_application_executions": 0,
+  "no_foreign_process_signalled": true,
+  "observations": {
+    "SIGTERM_only_guard_pid": true,
+    "baseline_deadline_start_preserved": true,
+    "closed_stdout_durable_failed_receipt": true,
+    "failed_resume_reset_refused": true,
+    "input_hashes_exact": true,
+    "owned_child_and_grandchild_not_live": true,
+    "runner_result_sha256": "ad0094ef0573137fc0ad8a291d14b7fa4f8cdf3d7c399d64b9bbc54c22ae3639",
+    "successful_prefix_preserved": true
+  },
+  "passed": true,
+  "runner_sha256": "09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d",
+  "schema": "v1-6-r4-python-only-signal-check",
+  "scope": "synthetic-root Python-only lifecycle"
+}

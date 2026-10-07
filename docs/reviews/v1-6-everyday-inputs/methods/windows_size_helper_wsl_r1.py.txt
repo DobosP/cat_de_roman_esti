@@ -1,0 +1,43 @@
+"""One fresh Windows metadata count; reparse/nonstandard entries are resolved by Linux."""
+import ctypes,json,os,sys,time
+from ctypes import wintypes
+sys.dont_write_bytecode=True
+started=time.monotonic();limit=3.0;memory_limit=64<<20
+class Counters(ctypes.Structure):
+    _fields_=[('cb',wintypes.DWORD),('PageFaultCount',wintypes.DWORD)]+[(n,ctypes.c_size_t) for n in ('PeakWorkingSetSize','WorkingSetSize','QuotaPeakPagedPoolUsage','QuotaPagedPoolUsage','QuotaPeakNonPagedPoolUsage','QuotaNonPagedPoolUsage','PagefileUsage','PeakPagefileUsage')]
+kernel=ctypes.WinDLL('kernel32',use_last_error=True);psapi=ctypes.WinDLL('psapi',use_last_error=True)
+kernel.GetCurrentProcess.restype=wintypes.HANDLE
+psapi.GetProcessMemoryInfo.argtypes=(wintypes.HANDLE,ctypes.POINTER(Counters),wintypes.DWORD)
+psapi.GetProcessMemoryInfo.restype=wintypes.BOOL
+peak=0
+def budget():
+    global peak
+    if time.monotonic()-started>limit:raise TimeoutError('Windows metadata helper3s')
+    c=Counters();c.cb=ctypes.sizeof(c)
+    if not psapi.GetProcessMemoryInfo(kernel.GetCurrentProcess(),ctypes.byref(c),c.cb):raise ctypes.WinError(ctypes.get_last_error())
+    peak=max(peak,int(c.WorkingSetSize))
+    if peak>memory_limit:raise MemoryError('Windows metadata helper64MiB')
+roots=sys.argv[1:]
+if not roots or any(not p.startswith('C:/Users/Paul Work/personal_repos/') or '..' in p.replace('\\','/').split('/') for p in roots):raise ValueError('unexpected owned roots')
+pending=list(roots);total=0;deferred=[];budget()
+while pending:
+    directory=pending.pop()
+    try:
+        with os.scandir(directory) as entries:
+            for entry in entries:
+                budget()
+                try:
+                    metadata=entry.stat(follow_symlinks=False)
+                    if metadata.st_file_attributes & 0x400:
+                        deferred.append(entry.path)
+                    elif entry.is_dir(follow_symlinks=False):pending.append(entry.path)
+                    elif entry.is_file():total+=metadata.st_size
+                    else:deferred.append(entry.path)
+                except FileNotFoundError:pass
+                except OSError:deferred.append(entry.path)
+    except FileNotFoundError:pass
+budget()
+result={'schema':'v1-6-windows-fresh-size-helper-r1','roots':roots,'regular_bytes':total,'deferred':deferred,'elapsed_seconds':time.monotonic()-started,'peak_working_set_bytes':peak,'python_version':sys.version.split()[0]}
+blob=json.dumps(result).encode()
+if len(blob)>1<<20:raise ValueError('helper output1MiB')
+budget();os.write(1,blob+b'\n')

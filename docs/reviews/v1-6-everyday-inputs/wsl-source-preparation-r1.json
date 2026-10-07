@@ -1,0 +1,25 @@
+{
+  "application_or_native_executions": 0,
+  "changes": [
+    "Two root constants per method adapt to canonical Windows task/scratch exposed through WSL.",
+    "Runner load_prefix hashes and parses one receipt buffer.",
+    "GOMODCACHE is owned scratch instead of another Linux user's path."
+  ],
+  "existing_original_methods_unchanged": true,
+  "files": {
+    "check_runner_signal_wsl_r1.py.txt": {
+      "bytes": 15536,
+      "parent_sha256": "7cd74d8fff6be373412cfbcb8747e4810d4c99b5bf436afc1e1887d74e777090",
+      "scratch_exact": true,
+      "sha256": "e19ec4196972ddc7a3181fb7a2bdbba5633a57e1d3c0d481c86fa468d052f109"
+    },
+    "run_worktree_lane_wsl_r1.py.txt": {
+      "bytes": 27843,
+      "parent_sha256": "455c2669b6d9c85912796e3b08606af87acb1fdba0491f01efee03c322881504",
+      "scratch_exact": true,
+      "sha256": "5b3fe01be67a1d0716c75427e8f2b947726052039175273271f8fa2a1f025bad"
+    }
+  },
+  "schema": "v1-6-owned-wsl-source-preparation-r1",
+  "status": "PREPARED_UNREVIEWED_UNEXECUTED"
+}

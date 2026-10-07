@@ -1,0 +1,53 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-c",
+    "pass"
+  ],
+  "campaign_started_at_utc": "2026-10-07T08:44:07.545000+00:00",
+  "cleanup": null,
+  "deadline_utc": "2026-10-07T09:04:06.963349+00:00",
+  "exit_code": 0,
+  "failure": null,
+  "finished_at_utc": "2026-10-07T08:44:08.252647+00:00",
+  "guard": null,
+  "incremental_bytes_from_original_baseline": 1613,
+  "index": 0,
+  "log_bytes": 0,
+  "log_path": "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/active-synthetic-wsl-r2/synthetic-scratch/probe/r4-r2-signal-1deea2af5645e848-0.log",
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log_text": "",
+  "manifest_sha256": "19300064c5fe70753c71c13eeb6ed5083beb1ba96d83f4439d880c1eb3c726c1",
+  "name": "successful-fixture-prefix",
+  "original_start_size": 1265,
+  "peak_group_RSS_bytes": 9883648,
+  "post_checks": {
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/active-synthetic-wsl-r2/child.py": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/active-synthetic-wsl-r2/immutable-input.txt": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/active-synthetic-wsl-r2/synthetic-scratch/probe/run_worktree_lane_r4_r2.py": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/methods/run_worktree_lane_wsl_r3.py.txt": true
+  },
+  "pre_checks": {
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/active-synthetic-wsl-r2/child.py": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/active-synthetic-wsl-r2/immutable-input.txt": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/active-synthetic-wsl-r2/synthetic-scratch/probe/run_worktree_lane_r4_r2.py": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/methods/run_worktree_lane_wsl_r3.py.txt": true
+  },
+  "publication_accounting": {
+    "atomic_temporaries_and_final_outputs_included": true,
+    "disk_free_before_publication": 30136827904,
+    "encoded_total_limit_bytes": 16777216,
+    "included_increment_upper_bound": 67110477,
+    "memory_available_before_publication": 24112001024,
+    "original_start_size": 1265,
+    "peak_including_publication_upper_bound": 67110477,
+    "reserved_disk_lower_bound": 30069719040,
+    "reserved_publication_bytes_inside_limits": 67108864,
+    "sampled_increment_before_publication": 1613,
+    "size_before_publication": 2878
+  },
+  "received_signal": null,
+  "signal_commit_policy": "Signals before the final empty pending-signal snapshot fail this step. That snapshot follows fsynced outcome publication, manifest recheck and final accounting. State acknowledgement then uses reserved bytes. Signals after this completed-outcome boundary stay deferred until exit; they do not retroactively invalidate a completed command. No child remains.",
+  "started_at_utc": "2026-10-07T08:44:07.590389+00:00",
+  "status": "passed"
+}

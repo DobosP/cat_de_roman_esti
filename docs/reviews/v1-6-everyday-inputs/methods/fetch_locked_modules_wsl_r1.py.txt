@@ -1,0 +1,15 @@
+"""Fetch only locked public Go modules into measured owned cache; no application build/test.
+Executed only as an admitted runner step, inheriting its owned process group and resource caps.
+"""
+from pathlib import Path
+import hashlib,json,os,subprocess
+R=Path('/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S=Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+files=[R/p for p in ('go-backend/go.mod','go-backend/go.sum','shared-go/authcore/go.mod','shared-go/authcore/go.sum')]
+before={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+fetch=dict(os.environ,GOPROXY='https://proxy.golang.org',GOSUMDB='sum.golang.org')
+for module in (R/'go-backend',R/'shared-go/authcore'):
+    subprocess.run([str(S/'tools/go/bin/go'),'-C',str(module),'mod','download'],env=fetch,check=True)
+    subprocess.run([str(S/'tools/go/bin/go'),'-C',str(module),'mod','verify'],check=True)
+assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in before.items())
+print(json.dumps({'locked_module_fetch_and_verify_passed':True,'module_mod_sum_unchanged':True,'application_builds_or_tests':0,'module_cache':str(S/'gomodcache')}))

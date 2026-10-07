@@ -1,0 +1,43 @@
+{
+  "schema": "v1-6-wsl-locked-modules-source-review-r1",
+  "checked_at_utc": "2026-10-07T08:44:42.3337538Z",
+  "valid_until": "Any method, named module readset, fixed runner environment, cache measurement root, campaign deadline/baseline or execution-scope change; source-only verdict does not approve an unreviewed manifest.",
+  "reviewer": "/root/qualification_ledger",
+  "role": "independent_source_review",
+  "verdict": "ACCEPT",
+  "qualification": "SOURCE_ONLY",
+  "method": {
+    "path": "methods/fetch_locked_modules_wsl_r1.py.txt",
+    "sha256": "a6411285001a79f508e5023191bca19f4d575bc530932e64d1f193658dfafa29"
+  },
+  "scope": "Exact locked public module-fetch method as step0 of the same fixed20-minute remaining-native campaign. Read-only source inspection; no Go, fetch, build, test or application process was executed by this reviewer.",
+  "findings": [],
+  "observations": [
+    "Both subprocesses use the exact qualified owned Go path and only the two named backend/shared-auth module directories.",
+    "No process group/session is created: download and verify subprocesses inherit the admitted supervisor-owned process group and its process-tree accounting.",
+    "Only download subprocesses override GOPROXY to https://proxy.golang.org and GOSUMDB to sum.golang.org; verify inherits the fixed supervisor environment.",
+    "subprocess.run(check=True) refuses any failed download/verification; PASS requires exact postimage hashes for all four go.mod/go.sum files.",
+    "No application build or test command appears in this method."
+  ],
+  "conditions": [
+    "Bind the exact method bytes and all four module go.mod/go.sum files in the supervisor admission, and retain module manifests as unchanged protected inputs.",
+    "Use this only as step0 of the same immutable20-minute campaign with the original cumulative disk baseline, not a separate or renewed qualification window.",
+    "Owned GOMODCACHE must remain among measured nonoverlapping mutable roots; all subsequent19 contentrails cases, final authorityCLI race and backendvet remain GOPROXYoff.",
+    "Preserve qualified Go1.27.1, Go2threads/jobs,2GiB owned-process-groupRSS,1GiB cumulative measured growth,17GiB startdisk and16GiB remainingdisk/MemAvailable floors,180second metadata reserve and maximum3 inclusive agents.",
+    "Obtain both active/finalization fixture passes and fresh host/toolchain/resource admission before any native campaign execution; exact final immutable manifest review remains required."
+  ],
+  "execution": {
+    "source_reads_only": true,
+    "module_downloads": 0,
+    "native_builds": 0,
+    "native_tests": 0,
+    "application_executions": 0,
+    "sole_write": "wsl-locked-modules-source-review-r1.json"
+  },
+  "claims": {
+    "locked_modules_downloaded": false,
+    "native_campaign_passed": false,
+    "application_qualification": false,
+    "release_or_landing_approval": false
+  }
+}

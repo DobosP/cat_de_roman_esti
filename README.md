@@ -1,7 +1,8 @@
 # cat_de_roman_esti
 
-V1.6 continues as an unmerged checkpoint on `codex/content-v1-6-windows-session-1`;
-see the [current continuation](docs/reviews/v1-6-everyday-inputs/README.md). Windows execution is not admitted; it is not release-qualified.
+V1.6 continues as an unmerged checkpoint on `codex/content-v1-6`; see the
+[current qualification](docs/reviews/v1-6-everyday-inputs/README.md) and
+[continuation decision](docs/adr/0179-resume-v1-6-in-original-chat.md). It is not release-qualified.
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in
