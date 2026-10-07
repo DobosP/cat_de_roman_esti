@@ -13,6 +13,8 @@ Preserve the six server-authoritative Romanian games while moving the SPA from R
 
 - [x] 2026-10-07 05:38 UTC — verified clean perf/gui-cat worktree; original package graph and source unchanged; owner bootstrap and exact core-v1.1 kit input present. Starting HEAD 0203351956ee19180bed9f25cbde7dfcfbe7af08.
 - [x] 2026-10-07 05:38 UTC — read S1 opening correction, CORE-PATCH-1, PROGRAM E1 and twelve-section plan contract. Original qualification precedes dependency/source changes and first sync.
+- [x] 2026-10-07 05:40 UTC — committed living plan as 054e32113e639ab9ac41e00e84d1360945297383.
+- [x] 2026-10-07 05:50 UTC — first actual pinned original gen inner-loop pass, dirty=true at054e321;12/12 original browser fixtures executed. Seven generating checks passed; tree d43546a1d471d4d5f04fa2a57564f962ac3b3fb14e5a84d87b2f29f6d022c234. No canonical unit or milestone claim.
 - [ ] M0 original — implement self-contained setup/deps/gen/baseline/unit/full/build/assets and original behavioral/Presence fixtures; execute original graph with pinned Chromium; preserve command bytes, assertions, hashes, SDK and lock snapshots.
 - [ ] M0 prerequisites — baseline, original 30-file freeze/retirement, class/CSSOM explicit-unit conversion, latest tooling/Motion14 normalization, unchanged assertion replay and meaningful backend SDK integration.
 - [ ] M0 owner boundary — commit clean evidence, become idle for parent protected staged-react configuration, first kit sync and trust; verify received provenance; canonical clean unit pass.
@@ -25,6 +27,8 @@ Preserve the six server-authoritative Romanian games while moving the SPA from R
 ## 3. Surprises & Discoveries
 
 The installed public web-kit under tools/gui-bootstrap-webkit is a temporary pre-sync helper locator, not an adopted UI. Its bytes are parent-owned and immutable to this worker. Taskfile.repo.yml starter hooks intentionally throw; no initial hook invocation can be treated as qualification. Original React19.2.7/ReactDOM19.2.7/UI0.3.0/Framer12.42.2 remain unchanged. The prior motion review contains preparation evidence only (29 preview, 69 focused preparation, 48 unexecuted future cases).
+
+Actual initial gen succeeded with original npm-ci/build and both native binaries. Independent read-only review identified fixture gaps before sealing: transient terminal adoption during exit, explicit animation progress and earned hint/recovery controls. The final fixture set adds these observations before its clean qualification. Setup cannot nest under gen in the current kit; real self-contained prerequisite checks work (REQ-1). Generating sync-back warns about excluded nonempty source directories without changing product files (REQ-2). Baseline requires axe4.14/web-vitals not present in the original graph, plus the pre-M1 /app healthcheck image; these are concrete prerequisites, not passing baselines.
 
 PROGRAM E1 supersedes historical first-sync-before-chat and late style conversion. Core-v1.1 at 9acd440 is the selected release; historical core-v1.0 text is not the active pin. First green unit needs exact original bundle freeze/retirement, explicit CSP style conversion, canonical Motion14 ownership and current toolchains.
 

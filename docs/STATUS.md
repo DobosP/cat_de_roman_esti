@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — GUI S1 original M0 starts on perf/gui-cat; no UI migration qualification. V1.5 history is unchanged.
+Last verified: 2026-10-07 — GUI S1 M0: original12-fixture pinned gen inner-loop passed; expanded16-fixture clean proof pending. No canonical unit/UI migration qualification; V1.5 history unchanged.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 

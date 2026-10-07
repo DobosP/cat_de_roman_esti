@@ -6,34 +6,34 @@ tasks:
       - node --input-type=module -e 'process.stdout.write("{\"role\":\"consumer\",\"app\":\"cat_de_roman_esti\",\"npm_dir\":\"tools/gui-bootstrap-webkit\",\"vendor_dir\":\"frontend/vendor\",\"go_dirs\":[\"go-backend\"]}")'
   setup:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:setup hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs setup '{{.INVOCATION}}'
   deps:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:deps hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs deps '{{.INVOCATION}}'
   gen:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:gen hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs gen '{{.INVOCATION}}'
   unit:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:unit hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs unit '{{.INVOCATION}}'
   full:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:full hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs full '{{.INVOCATION}}'
   build:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:build hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs build '{{.INVOCATION}}'
   baseline:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:baseline hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs baseline '{{.INVOCATION}}'
   assets-sync:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:assets-sync hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs assets-sync '{{.INVOCATION}}'
   legacy-freeze:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:legacy-freeze hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs legacy-freeze '{{.INVOCATION}}'
   e2e:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:e2e hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs e2e '{{.INVOCATION}}'
   perf:
     cmds:
-      - node --input-type=module -e "throw Error('S1 M0 must implement actual repo:perf hook before execution; no successful bootstrap stub')"
+      - node scripts/gui-repo-hook.mjs perf '{{.INVOCATION}}'

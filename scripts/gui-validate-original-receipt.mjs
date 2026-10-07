@@ -1,0 +1,21 @@
+import * as fs from "node:fs";
+import path from "node:path";
+import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
+
+const configResult = spawnSync("task", ["--silent", "repo:kit-config"], { encoding: "utf8" });
+if (configResult.status !== 0) throw new Error("Actual kit configuration required");
+const config = JSON.parse(configResult.stdout);
+const { readTarGz, verifyUiAdoptionReceipt } = await import(pathToFileURL(path.resolve(config.npm_dir, "scripts/kit-sync.mjs")).href);
+const hash = (data) => createHash("sha256").update(data).digest("hex");
+const evidence = ".gate/gen/original/evidence", validationRoot = ".gate/gen/original/validation-root";
+const destination = path.join(validationRoot, "docs/reviews/gui-original-react");
+fs.mkdirSync(destination, { recursive: true });
+for (const name of fs.readdirSync(evidence)) fs.copyFileSync(path.join(evidence, name), path.join(destination, name));
+const archive = fs.readFileSync("frontend/vendor/roedu-ui-0.3.0.tgz"), entries = readTarGz(archive);
+const sdk = { data: archive, entries, manifest: JSON.parse(entries.get("package/package.json").data), filename: "roedu-ui-0.3.0.tgz", sha256: hash(archive), integrity: `sha512-${createHash("sha512").update(archive).digest("base64")}` };
+const receipt = fs.readFileSync(path.join(evidence, "receipt.json"));
+const phase = { mode: "staged-react", until: "S1-M2", legacy: { version: "0.3.0", archive_sha256: hash(archive), source_sha: process.env.GATE_SHA, receipt: "docs/reviews/gui-original-react/receipt.json", receipt_sha256: hash(receipt) } };
+const proof = verifyUiAdoptionReceipt(path.resolve(validationRoot), phase, sdk, { manifest: "frontend/package.json", lock: "frontend/package-lock.json", pointer: (filename) => `file:vendor/${filename}` });
+process.stdout.write(JSON.stringify(proof, null, 2) + "\n");
