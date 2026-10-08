@@ -212,3 +212,39 @@ test("Perechi preserves deliberately moved help focus while a real keyboard matc
   await expect(help).toBeFocused();
   await expect(page.locator(`${perechi.board} button:focus`)).toHaveCount(0);
 });
+
+test("real Perechi terminal loss moves keyboard-owned tile focus to the authoritative result owner", async ({ page, request }) => {
+  await deterministicStarts(page, perechi); let state = await start(page, perechi);
+  const initial = state, steps = solution(perechi).steps;
+  // Same native cross-pair loss path as derived-action-recovery:23–29.
+  // Distinct tiles from different real solution pairs make six genuine mistakes.
+  const wrongIds = [
+    ...steps[0].payload.ids.flatMap((a) => steps[1].payload.ids.map((b) => [a, b])),
+    [steps[0].payload.ids[0], steps[2].payload.ids[0]],
+    [steps[0].payload.ids[1], steps[2].payload.ids[0]],
+  ];
+  expect(initial.remaining_mistakes).toBe(wrongIds.length);
+  expect(new Set(wrongIds.map((ids) => [...ids].sort().join("+"))).size).toBe(wrongIds.length);
+  for (const [index, ids] of wrongIds.entries()) {
+    const step = { action: "match", payload: { ids } };
+    const focused = tile(page, perechi, state.tiles.find(({ id }) => id === ids[1]).label);
+    await expect(focused).toBeEnabled();
+    const response = await keyboardPair(page, state, step, ids[1]);
+    expect(response.status()).toBe(200); state = await response.json();
+    expect(state.game_id).toBe(initial.game_id);
+    expect(state.correct).toBe(false); expect(state.repeated).toBe(false);
+    expect(state.mistakes).toBe(index + 1);
+    expect(state.remaining_mistakes).toBe(initial.remaining_mistakes - index - 1);
+    expect(state.won).toBe(false); expect(state.lost).toBe(index === wrongIds.length - 1);
+    if (!state.lost) await expect(page.locator(`${perechi.board} button`)).toHaveCount(initial.tiles.length);
+  }
+  const authoritative = await request.get(gameURL(perechi, initial.game_id));
+  expect(authoritative.status()).toBe(200); const saved = await authoritative.json();
+  expect(saved.lost).toBe(true); expect(saved.won).toBe(false);
+  expect(saved.mistakes).toBe(state.mistakes); expect(saved.remaining_mistakes).toBe(0);
+  await expect(page.locator(perechi.board)).toHaveCount(0);
+  const heading = page.getByRole("heading", { name: "Acestea erau perechile", exact: true });
+  await expect(heading).toBeVisible();
+  const owner = page.locator('div[tabindex="-1"]').filter({ has: heading });
+  await expect(owner).toHaveCount(1); await expect(owner).toBeFocused();
+});

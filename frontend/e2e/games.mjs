@@ -130,6 +130,10 @@ export async function act(page, game, step, { keyboard = false } = {}) {
 }
 
 export async function solve(page, game, steps, options = {}) {
+  // Old journeys retain the exact Encore default. Only a fixture with explicit
+  // daily intent/state may select one exact alternative completion action.
+  const completionAction = options.completionAction ?? "encore";
+  expect(["encore", "daily-offer", "daily-free"]).toContain(completionAction);
   let result;
   for (const step of steps) {
     const response = await act(page, game, step, options);
@@ -166,6 +170,11 @@ export async function solve(page, game, steps, options = {}) {
   }
   expect(result.won).toBe(true);
   await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-  await expect(page.getByRole("button", { name: /^Încă (?:unul|un lanț) →$/ })).toBeEnabled();
+  if (completionAction === "encore") {
+    await expect(page.getByRole("button", { name: /^Încă (?:unul|un lanț) →$/ })).toBeEnabled();
+  } else {
+    const name = completionAction === "daily-offer" ? "Joacă provocarea zilei →" : "Joacă liber →";
+    await expect(page.getByRole("button", { name, exact: true })).toBeEnabled();
+  }
   return result;
 }
