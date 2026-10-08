@@ -31,8 +31,8 @@ function frontendBuild(prefix) {
 function passed(name) {
   return hook.checks.find((item) => item.name === name)?.status === "pass";
 }
-function managedFrontendBuild(prefix) {
-  command(`${prefix}-fresh-build-output`, "node", ["scripts/gui-assets.mjs", "prepare"]);
+function managedFrontendBuild(prefix, prepared = false) {
+  if (!prepared) command(`${prefix}-fresh-build-output`, "node", ["scripts/gui-assets.mjs", "prepare"]);
   if (!passed(`${prefix}-fresh-build-output`)) return false;
   frontendBuild(prefix);
   // npm's post-Vite budget may fail after emitting a fresh complete graph.
@@ -156,10 +156,13 @@ switch (target) {
           normalizedContract("cat-normalized-api-consumer-contract", "tests/gui-api-consumer-contract.test.mjs", 2);
           normalizedContract("cat-normalized-selection-key-contract", "tests/conexiuni-selection-key.test.mjs", 3);
         }
+        // Empty compile scaffolds are required before independent source tests;
+        // they contain no usable UI manifest or compiled build identity.
+        command("cat-normalized-fresh-build-output", "node", ["scripts/gui-assets.mjs", "prepare"]);
         // These independent native checks run even when formatting/lint failed.
         runNativeSourcePreflight(hook);
         if (setupPassed && typesPassed) {
-          managedFrontendBuild("cat-normalized");
+          managedFrontendBuild("cat-normalized", true);
           if (passed("cat-normalized-fresh-build-output") && fs.existsSync(path.join(frontend, "dist/.vite/manifest.json"))) {
             command("cat-normalized-startup-measurement", "node", ["scripts/gui-startup-inventory.mjs"]);
           }

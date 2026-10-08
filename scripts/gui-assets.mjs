@@ -57,7 +57,7 @@ function currentContext(required = false) {
   const descriptorBytes = fs.readFileSync(confined(".gate/wrapper-current.json"));
   const descriptor = JSON.parse(descriptorBytes);
   if (process.platform !== "linux" || root !== "/work" || fs.realpathSync(root) !== root || descriptor.schema !== 1
-    || !["unit", "gen", "build"].includes(descriptor.target)
+    || !["unit", "full", "gen", "build"].includes(descriptor.target)
     || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(descriptor.invocation ?? "")
     || descriptor.sha !== process.env.GATE_SHA || descriptor.tree_sha256 !== process.env.GATE_TREE_SHA256
     || descriptor.toolchain_digest !== process.env.TOOLCHAIN_DIGEST

@@ -59,6 +59,27 @@ func TestInventoryValidWithoutGitAndHistoryReportOnly(t *testing.T) {
 	}
 }
 
+func TestInventoryRejectsEmptyOrHistoryOnly(t *testing.T) {
+	for _, kind := range []string{"empty-declaration", "zero-physical", "history-only"} {
+		t.Run(kind, func(t *testing.T) {
+			root := t.TempDir()
+			inventory := filepath.Join(root, "tracked-markdown.json")
+			paths := []string{}
+			switch kind {
+			case "zero-physical":
+				paths = []string{"README.md"}
+			case "history-only":
+				paths = []string{"docs/reviews/old.md"}
+				writeInventorySource(t, root, paths[0], "# Historical review\n")
+			}
+			writeInventory(t, inventory, paths)
+			if _, err := CheckInventory(root, inventory); err == nil {
+				t.Fatal("empty or history-only inventory admitted")
+			}
+		})
+	}
+}
+
 func TestInventoryRejectsStaleSourceSet(t *testing.T) {
 	for _, change := range []string{"addition", "deletion"} {
 		t.Run(change, func(t *testing.T) {

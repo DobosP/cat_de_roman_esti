@@ -52,6 +52,9 @@ func CheckInventory(root, inventoryPath string) (Report, error) {
 	if err != nil {
 		return r, err
 	}
+	if len(physical) == 0 {
+		return r, fmt.Errorf("Markdown inventory requires physical source documents")
+	}
 	if len(paths) != len(physical) {
 		return r, fmt.Errorf("Markdown inventory differs from physical source set: declared %d, actual %d", len(paths), len(physical))
 	}
@@ -60,7 +63,14 @@ func CheckInventory(root, inventoryPath string) (Report, error) {
 			return r, fmt.Errorf("Markdown inventory differs from physical source set at %q (actual %q)", name, physical[i])
 		}
 	}
-	return checkFiles(root, paths)
+	r, err = checkFiles(root, paths)
+	if err != nil {
+		return r, err
+	}
+	if r.Files == 0 {
+		return r, fmt.Errorf("Markdown inventory requires current, non-history documents")
+	}
+	return r, nil
 }
 
 func unaliasedDirectory(directory string) error {
@@ -143,7 +153,7 @@ func decodeInventory(raw []byte) ([]string, error) {
 	if decoder.Decode(new(json.RawMessage)) != io.EOF {
 		return nil, fmt.Errorf("trailing Markdown inventory content")
 	}
-	if len(seen) != 2 || schema != 1 || paths == nil || len(paths) > maxInventoryPaths {
+	if len(seen) != 2 || schema != 1 || len(paths) == 0 || len(paths) > maxInventoryPaths {
 		return nil, fmt.Errorf("Markdown inventory schema or path count refused")
 	}
 	for i, name := range paths {
