@@ -1,0 +1,60 @@
+package contentrails
+
+// Research-only: the EXISTING prospective audit overlays parsed candidate graph
+// into fresh sealed baseline inside its private audit. No Source7/export approval.
+import (
+ "bytes"
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "net/http/httptest"
+ "os"
+ "path/filepath"
+ "reflect"
+ "strings"
+ "testing"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
+)
+func TestV17ProspectiveNativeWorldResearch(t *testing.T) {
+ const task="/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7"
+ const candidate="/home/dobo/work/_temp/codex__content-v1-7/probe/materialization-r2/candidate/package/kg_sample.json"
+ const privateRoot="/home/dobo/work/_temp/codex__content-v1-7/probe/world-native-v17-r1-root"
+ const reportPath="/home/dobo/work/_temp/codex__content-v1-7/probe/world-native-v17-r1.jsonl"
+ const owner="n_v4soc_salariu"
+ f,e:=os.OpenFile(reportPath,os.O_CREATE|os.O_EXCL|os.O_WRONLY,0600);if e!=nil {t.Fatal(e)};defer f.Close()
+ nbytes:=0;complete:=false;requests:=0
+ emit:=func(v any){b,e:=json.Marshal(v);if e!=nil {t.Fatal(e)};if nbytes+len(b)+1>2<<20 {t.Fatal("world proof2MiBcap")};n,e:=f.Write(append(b,'\n'));nbytes+=n;if e!=nil {t.Fatal(e)};if e=f.Sync();e!=nil {t.Fatal(e)}}
+ defer func(){emit(map[string]any{"record":"end","complete":complete&&!t.Failed(),"failed":t.Failed(),"HTTP_requests":requests})}()
+ read:=func(path,want string)[]byte {t.Helper();b,e:=os.ReadFile(path);if e!=nil || fmt.Sprintf("%x",sha256.Sum256(b))!=want {t.Fatalf("sourcehash drift:%s:%v",path,e)};return b}
+ before,e:=content.Load();if e!=nil {t.Fatal(e)};after,e:=content.V17ResearchCandidate();if e!=nil {t.Fatal(e)}
+ if before.Sources["kg_sample.json"]!="63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf" || !reflect.DeepEqual(before.Sources,after.Sources) || !reflect.DeepEqual(before.Manifest,after.Manifest) || !reflect.DeepEqual(before.Metadata,after.Metadata) || !reflect.DeepEqual(before.DiscoveryWorld,after.DiscoveryWorld) {t.Fatal("verifiedsealedSource6/researchmetadata/world drift")}
+ if graph.New(after).Resolve("leafă")!=owner || graph.New(after).Resolve("leafa")!=owner || graph.New(before).Resolve("leafă")!="" {t.Fatal("exact rawalias/normalizedowner identity drift")}
+ if resolved,e:=filepath.EvalSymlinks(filepath.Dir(privateRoot));e!=nil||resolved!=filepath.Dir(privateRoot){t.Fatal("ownscratch ancestor drift",e)}
+ if e=os.Mkdir(privateRoot,0700);e!=nil {t.Fatal("privateworld root must be new; nooverwrite",e)}
+ copyBytes:=func(relative string,b []byte){t.Helper();p:=filepath.Join(privateRoot,relative);if e=os.MkdirAll(filepath.Dir(p),0700);e!=nil {t.Fatal(e)};x,e:=os.OpenFile(p,os.O_CREATE|os.O_EXCL|os.O_WRONLY,0600);if e!=nil {t.Fatal(e)};if _,e=x.Write(b);e!=nil {t.Fatal(e)};if e=x.Sync();e!=nil {t.Fatal(e)};if e=x.Close();e!=nil {t.Fatal(e)}}
+ candidateBytes:=read(candidate,"3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749")
+ for _,name:=range contentbuild.SourceNames {b:=read(filepath.Join(task,"cat_de_roman_esti/fixtures",name),before.Sources[name]);if name=="kg_sample.json" {b=candidateBytes};copyBytes("cat_de_roman_esti/fixtures/"+name,b);if name=="kg_sample.json"||name=="games_pack.json" {copyBytes("tests/fixtures/"+name,b)}}
+ copyBytes("docs/CRITIQUE_RUBRIC.md",read(filepath.Join(task,"docs/CRITIQUE_RUBRIC.md"),"3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"))
+ world,e:=fixture(privateRoot,"alchimie_discovery_world_v92.json");if e!=nil {t.Fatal(e)}
+ for _,v:=range rows(world["concepts"]) {if text(object(v)["id"])==owner {t.Fatal("Salary unexpectedlyworldmember")}}
+ for _,v:=range rows(world["recipes"]) {r:=object(v);if text(r["result"])==owner {t.Fatal("Salaryworldrecipe")};for _,id:=range ids(r["pair"]) {if id==owner {t.Fatal("Salaryworldingredient")}}}
+ audit,e:=auditWorld(privateRoot,world);if e!=nil {t.Fatal("originalactualprospectiveWorldaudit",e)}
+ if audit["verdict"]!="accept" || len(rows(audit["goal_replays"]))!=33 || len(rows(audit["compatible_save_replays"]))!=10 || integer(audit["historical_prefixes"])!=1156 || integer(object(audit["metrics"])["concepts"])!=252 || integer(object(audit["metrics"])["recipes"])!=352 {t.Fatal("nativeWorldcoverage drift",audit)}
+ for _,v:=range rows(audit["goal_replays"]) {if integer(object(v)["replayed_discoveries"])!=148 {t.Fatal("native148discoveryclosure drift")}}
+ emit(map[string]any{"record":"original_native_prospective_audit","graph_candidate_sha256":"3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749","World_sha256":"8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad","audit":audit,"qualification":"Nativeprospective33goals/148closure/tenbooks1156 actual; auditrecipes_privateflag is static, separately checked HTTPbelow. NotSource7/currentauthority."})
+ if _,e=contentbuild.Load(privateRoot);e==nil||!strings.Contains(e.Error(),"kg_sha256") {t.Fatal("completecandidate root did nothonestlyrefusestaleinstalledKGbinding",e)} else {emit(map[string]any{"record":"strict_installed_source_refusal","error":e.Error(),"scope":"Complete8source+mirrors+rubric copied; failuremustbe realKGbinding, not missingfile"})}
+ clean:=func(m map[string]any)map[string]any {x:=map[string]any{};for k,v:=range m {if k!="game_id" {x[k]=v}};return x}
+ privacy:=func(m map[string]any){t.Helper();if _,present:=m["recipes"];present {t.Fatal("privateworldrecipemap exposed")};for _,v:=range m["goals"].([]any) {g:=v.(map[string]any);if g["completed"]==false && g["target_id"]!=nil {t.Fatal("undiscoveredtarget exposed")}}}
+ var baselineState map[string]any
+ for _,c:=range []*content.Content{before,after} {
+  server:=httpapi.New(c)
+  request:=func(label,method,path string,body any,want int)map[string]any {t.Helper();if requests>=20 {t.Fatal("worldHTTP20cap")};var b []byte;if body!=nil {b,_=json.Marshal(body)};req:=httptest.NewRequest(method,"http://testserver"+path,bytes.NewReader(b));req.Header.Set("Content-Type","application/json");rec:=httptest.NewRecorder();server.ServeHTTP(rec,req);m:=map[string]any{};if e=json.Unmarshal(rec.Body.Bytes(),&m);e!=nil {t.Fatal(e)};requests++;emit(map[string]any{"record":"membership_HTTP","request_number":requests,"label":label,"method":method,"path":path,"request":body,"status":rec.Code,"response":m});if rec.Code!=want {t.Fatalf("worldHTTP%s got%d want%d",label,rec.Code,want)};return m}
+  initial:=request("create","POST","/api/alchimie/explore",map[string]any{},200);privacy(initial);if baselineState==nil {baselineState=clean(initial)} else if !reflect.DeepEqual(baselineState,clean(initial)) {t.Fatal("Worldstate changed underoutsidealias")}
+  path:="/api/alchimie/explore/"+initial["game_id"].(string);got:=request("initial_get","GET",path,nil,200);if !reflect.DeepEqual(clean(got),clean(initial)) {t.Fatal("initialGetdrift")};privacy(got)
+  for _,input:=range []string{"leafă","leafa","salariu",owner} {request("outsideworld_combine","POST",path+"/combine",map[string]any{"a":input,"b":"n_v4gas_lapte"},400);got=request("refusal_get","GET",path,nil,200);privacy(got);if !reflect.DeepEqual(clean(got),clean(initial)) {t.Fatal("outsideworld input changed inventory/progress/hints/emptypair state")}}
+ }
+ if requests!=20 {t.Fatal("incompletefixedWorldHTTP20")};complete=true
+}

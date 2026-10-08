@@ -1,0 +1,32 @@
+{
+  "schema": "v1-7-world-root-advisory-temporary-path-correction-v1",
+  "recorded_at_utc": "2026-10-08T02:43:23.040647+00:00",
+  "admission_sha256": "744076678b95946d5d9087ef4b78742a72867673d53b73ba72bd6350115b1571",
+  "immutable_admission_unchanged": true,
+  "initial_root_advisory_field": [
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/internal/content/v17_world_research_helper_r1.go",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/internal/contentrails/v17_world_controls_probe_r1_test.go"
+  ],
+  "actual_frozen_lifecycle_SOURCES": [
+    {
+      "source": "docs/reviews/v1-7-recognizable-content/methods/native_research_content_adapter_v17_r1.go.txt",
+      "sha256": "ed1563a09d66522ec96fb6c571daf71d195b5b8ac0072ec9bea913a876c94671",
+      "temporary": "go-backend/internal/content/v17_world_research_helper_r1.go"
+    },
+    {
+      "source": "docs/reviews/v1-7-recognizable-content/methods/native_world_v17_r1.go.txt",
+      "sha256": "ee92090ec696fc3630f2cd140f1e8d411131e6da52d45751f20bb21dd8928f0f",
+      "temporary": "go-backend/internal/contentrails/v17_world_research_probe_r1_test.go"
+    }
+  ],
+  "actual_temp_paths": [
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/internal/content/v17_world_research_helper_r1.go",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/internal/contentrails/v17_world_research_probe_r1_test.go"
+  ],
+  "issue": "Root advisory list named controls_probe instead of reviewed research_probe. Discovered statically afterSDK0 BEFOREcompile/probe, no source/destination publication. Originalqualified runner does not use this advisory field; exactreviewedlifecycle has always enforced correctSOURCES/exclusiveinode+hashcleanup.",
+  "added_stronger_root_check": "Root now verifies actual reviewed ASTSOURCES paths AND harmless oldadvisorypaths absent; actualcompilecleanup/producerkeeper mustbind exactactual2paths. No frozen source/method/gate edits.",
+  "execution_stopped_for_readonly_inspection": true,
+  "native_compile_or_probe_started": false,
+  "clock_reset": false,
+  "original_deadline_utc": "2026-10-08T03:00:13.715582+00:00"
+}

@@ -1,0 +1,87 @@
+"""Prospective candidate341 input contract; this is not installed Source7 proof."""
+from __future__ import annotations
+import json
+from pathlib import Path
+import pytest
+from tests import content_history as history
+from cat_de_roman_esti.data import load_fixture
+from cat_de_roman_esti.wordgames.service import WordGameService, normalize
+from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection, suggest_projection
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+
+
+def test_v17_only_singular_leafa_is_new_and_all_other69_dispositions_stay_exact():
+    path = ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
+    current = json.loads(path.read_bytes())
+    previous = json.loads(history.historical_source6_v17_bytes())
+    service = WordGameService(load_fixture(path).graph)
+    assert service.resolve("leafă") == "n_v4soc_salariu"
+    before = {row["id"]: row.get("aliases", []) for row in previous["kg_nodes"]}
+    after = {row["id"]: row.get("aliases", []) for row in current["kg_nodes"]}
+    assert set(before) == set(after)
+    assert {key: aliases for key, aliases in after.items() if aliases != before[key]} == {
+        "n_v4soc_salariu": [*before["n_v4soc_salariu"], "leafă"],
+    }
+    rows = history.historical_source6_v17_hold_rows()
+    assert len(rows) == 69
+    for row in rows:
+        surface = row["surface"]
+        term = resolve_projection(surface)
+        actual = {
+            "normalized_key": normalize(surface), "exact_owner": service.resolve(surface),
+            "projection": None if term is None else {
+                "id": term.public_id, "surface": term.surface, "anchor_id": term.anchor_id,
+                "domain": term.domain, "penalty": term.rank_penalty, "kind": term.mapping_kind,
+            },
+            "fuzzy_owner": service.resolve_fuzzy(surface),
+            "advisory_labels": service.suggest(surface),
+            "projection_advisory_ids": [x.public_id for x in suggest_projection(surface)],
+        }
+        assert actual == row["expected_before"], surface
+
+
+def test_source6_v50_context_restores_globals_env_cache_after_error(monkeypatch, tmp_path):
+    import os
+    from cat_de_roman_esti.wordgames import service as service_loader
+    namespace = {"_PACKAGE_KG": ROOT / "cat_de_roman_esti/fixtures/kg_sample.json",
+                 "_TEST_KG": ROOT / "tests/fixtures/kg_sample.json", "CURRENT_CONTENT": object()}
+    original = dict(namespace)
+    previous_env = os.environ.get("CAT_KG_FIXTURE")
+    with pytest.raises(RuntimeError, match="owned test control"):
+        with history.historical_source6_v17_v50_context(monkeypatch, tmp_path, namespace):
+            assert namespace["CURRENT_CONTENT"].kg_sha256 == (
+                "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+            )
+            assert service_loader.get_service().resolve("leafă") is None
+            assert namespace["_PACKAGE_KG"].read_bytes() == namespace["_TEST_KG"].read_bytes()
+            raise RuntimeError("owned test control")
+    assert namespace == original
+    assert os.environ.get("CAT_KG_FIXTURE") == previous_env
+    assert service_loader.get_service.cache_info().currsize == 0
+
+
+@pytest.mark.parametrize("mutation", ["archive", "member-pin", "snapshot-source"])
+def test_source6_history_refuses_unbound_bytes(monkeypatch, tmp_path, mutation):
+    if mutation == "archive":
+        path = tmp_path / "corrupt.tar.gz"
+        raw = bytearray(history._V1_7_SOURCE6_ARCHIVE.read_bytes())
+        raw[-1] ^= 1
+        path.write_bytes(raw)
+        monkeypatch.setattr(history, "_V1_7_SOURCE6_ARCHIVE", path)
+        with pytest.raises(AssertionError):
+            history.historical_source6_v17_bytes()
+    elif mutation == "member-pin":
+        changed = dict(history._V1_7_SOURCE6_MEMBER_PINS)
+        name = "snapshots/physical-source6-kg.json"
+        changed[name] = ("0" * 64, changed[name][1])
+        monkeypatch.setattr(history, "_V1_7_SOURCE6_MEMBER_PINS", changed)
+        with pytest.raises(AssertionError):
+            history.historical_source6_v17_bytes()
+    else:
+        path = tmp_path / "corrupt-current-content.py"
+        path.write_bytes(history._V1_7_SOURCE6_SNAPSHOT_SOURCE.read_bytes() + b"\n")
+        monkeypatch.setattr(history, "_V1_7_SOURCE6_SNAPSHOT_SOURCE", path)
+        with pytest.raises(AssertionError):
+            with history.historical_source6_v17_v50_context(monkeypatch, tmp_path / "ctx", {}):
+                pass

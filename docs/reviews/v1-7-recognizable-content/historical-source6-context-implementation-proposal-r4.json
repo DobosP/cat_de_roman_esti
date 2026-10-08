@@ -1,0 +1,58 @@
+{
+  "Source7_created": false,
+  "author": "/root/v17_reference_methods",
+  "decision": "SOURCE_ONLY_REQUIRES_FRESH_EXACT_REVIEW_AND_NEW_RESOURCE_ADMISSION",
+  "exact_diff_provenance": {
+    "AST_parse_only": true,
+    "patch_count": 3,
+    "patches": [
+      {
+        "new": "WORK = SCRATCH / 'probe/historical-context-prospective-r4'",
+        "old": "WORK = SCRATCH / 'probe/historical-context-prospective-r2'"
+      },
+      {
+        "new": "            collected=[]\n            artifact_report=report\n            patched=False",
+        "old": "            collected=[]\n            patched=False"
+      },
+      {
+        "new": "            def pytest_runtest_logreport(self,report):\n                self.artifact_report['reports'].append({'nodeid':report.nodeid,'when':report.when,\n                    'outcome':report.outcome,'duration_seconds':report.duration,\n                    'longrepr':None if report.passed else str(report.longrepr)})",
+        "old": "            def pytest_runtest_logreport(self,rep):\n                report['reports'].append({'nodeid':rep.nodeid,'when':rep.when,\n                    'outcome':rep.outcome,'duration_seconds':rep.duration,\n                    'longrepr':None if rep.passed else str(rep.longrepr)})"
+      }
+    ],
+    "reverse_allpatches_reproduces_exact_f969_R3": true
+  },
+  "execution_now": false,
+  "future_execution_conditions": [
+    "Freshreview and separately measured17GiBdiskstart16remainingdisk+memory/2GiBRSS1GiBfullS-R20min180reserve/397686 admission; sourceheadroomdoesnotauthorize execution.",
+    "Exactly7allphasepasses; dynamicROOTrestoredtrue/count1/originalfinalactualR, namespace-restoredtrue andallsource/SDK/candidate/planned/stagedphysicalpins exact.",
+    "Failure stopsdependentwork andretainsnewrawpacket; old656R3 andWorld744states/deadlines remainFAILEDimmutable."
+  ],
+  "installation_or_retirement_approval": false,
+  "live_changes": false,
+  "minimal_changes": [
+    "Usehookspec-required reportparameter.",
+    "Captureouterartifact dict in pluginclass artifact_report so eventreport doesnotshadow recordingtarget.",
+    "NEWexclusivehistorical-context-prospective-r4 directory; failedR3r2directory neveroverwritten/reused."
+  ],
+  "new_method_sha256": "6cf7e9d0d57594a3223972e7f0ed179a12f9cc48f79b771dbaf5d96d20636746",
+  "old_R3_acceptance_sha256": "85df5cd8b7a281e9d2ab2d06540e4fcf7b98f2657ca84d6ff78af5e8213adb0a",
+  "old_R3_method_sha256": "f969a35db115129ee82b955aa7758d2dd6e27816947115bae506bb99ab288416",
+  "old_actual_failed_admission_sha256": "656a4e4b6402bd8ec67bbcdb3e73eaacff59c61bf4fdd944de8e54a6ad3200d0",
+  "old_failure": "ActualPluginValidationError BEFOREcollection: reporthookparameterrep is nothookspecargument. ZEROcalls/collectedIDs, namespace-restoredtrue, ROOTneverpatchedfalse; allphysicalpins exact. RemainsFAILED, nottestsuccess or resourcefailure.",
+  "prepared_at_utc": "2026-10-08T03:04:30.026386+00:00",
+  "primary_installed_spec": {
+    "actual_version": "9.1.1",
+    "exact_signature": "pytest_runtest_logreport(report: TestReport)",
+    "hookspec_line": 777,
+    "hookspec_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/hookspec.py",
+    "hookspec_sha256": "12098571044671c24ed0011e2bb7d94976380265e5734c30f856479482e6f88d",
+    "observation": "Read installedprimarysource; no packageimport/testexecution or assumedinternetAPI.",
+    "version_source_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/_version.py",
+    "version_source_sha256": "a92165fd7b0e147d0e1b873f42ebe87f108f1f3d56b1b53fe4ad352a27adec4a"
+  },
+  "readset_sha256": "914780c8a4ede4d18ec5f4948dad941f16ea24d73a9746262fc22d6c37c5d3db",
+  "schema": "v17-prospective-history-official-pytest-hook-repair-proposal-r4",
+  "source_admission_sha256": "ab4ecfad19bac560cf3ddd10e0095bd9e45e17225d61e2d05501b619c39f7831",
+  "source_worker_RSS": "unmeasured; no source memory qualification",
+  "unchanged": "Original7selectors/testassertions/helperSource6/3bbemetadata/raw63f/0275archive/69BEFORE3fc/candidate341 andR3 ROOT+namespacewitnessqualification preserved; no semanticswaiver/framework/livepublication/Source7metadata."
+}
