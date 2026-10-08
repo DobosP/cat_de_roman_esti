@@ -5,7 +5,6 @@ import test from "node:test";
 const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const api = read("../src/api/contexto.ts");
 const screen = read("../src/screens/CaldRece.tsx");
-const css = read("../src/styles/arcade.css");
 const contextoCss = read("../src/styles/contexto.css");
 
 void test("accepted guesses type stable ordinals and bounded server comparison kinds", () => {
@@ -70,7 +69,7 @@ void test("the guess form exposes the paid clue while optional controls stay in 
   assert.match(options[0], /onClick=\{requestRevealConfirmation\}/);
   assert.match(options[0], /onClick=\{showOptions\}/);
   assert.match(options[0], /aria-label="Ordinea încercărilor"/);
-  assert.match(css, /\.contexto-action-row \.roedu-btn,[\s\S]*?min-height: 44px/);
+  assert.match(contextoCss, /\.contexto-action-row \.roedu-btn,[\s\S]*?min-height: 44px/);
 });
 
 void test("rules sit below the clue/options row and exhausted clues explain themselves", () => {

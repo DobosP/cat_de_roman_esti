@@ -249,37 +249,6 @@ input:focus-visible {
   -webkit-backdrop-filter: blur(8px);
 }
 
-.contexto-input-bar {
-  min-width: 0;
-}
-
-.contexto-action-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-}
-
-.contexto-action-row .roedu-btn,
-.contexto-reveal-confirm .roedu-btn {
-  min-width: 0;
-  min-height: 44px;
-  padding-inline: 8px;
-  font-size: 0.82rem;
-}
-
-.contexto-reveal-confirm {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  gap: 6px;
-  align-items: center;
-  min-height: 44px;
-  padding: 6px 8px;
-  border: 1px solid color-mix(in srgb, var(--warn) 55%, transparent);
-  border-radius: var(--roedu-radius-sm);
-  background: color-mix(in srgb, var(--warn) 10%, #15112d);
-  color: var(--text);
-  font-size: 0.82rem;
-}
 
 /* ------------------------------------------------------------------ wordmark */
 .wordmark-gradient {
@@ -1280,20 +1249,6 @@ input:focus-visible {
   margin: 0 0 12px;
 }
 
-.alchemy-earned-links {
-  flex-basis: 100%;
-  min-width: 0;
-  margin-top: 4px;
-  font-size: 0.84rem;
-  overflow-wrap: anywhere;
-  text-align: left;
-}
-
-.alchemy-earned-links ul {
-  margin: 5px 0 0;
-  padding-left: 20px;
-  color: var(--text-dim);
-}
 
 .hud {
   justify-content: flex-end;
@@ -1306,65 +1261,7 @@ input:focus-visible {
 
 
 
-.hint-fill-button {
-  min-height: 44px;
-  align-self: flex-start;
-  padding: 8px 10px !important;
-  border: 1px solid color-mix(in srgb, var(--warn) 55%, transparent);
-  border-radius: var(--roedu-radius-sm);
-  background: color-mix(in srgb, var(--warn) 10%, transparent);
-  color: var(--warn);
-}
 
-.alchemy-slot {
-  min-width: 0 !important;
-  max-width: min(300px, 38vw);
-}
-
-.alchemy-slot-label {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.alchemy-inventory-tabs {
-  display: flex;
-  gap: 7px;
-  overflow-x: auto;
-  padding: 2px;
-  scrollbar-width: none;
-}
-
-.alchemy-inventory-tabs::-webkit-scrollbar {
-  display: none;
-}
-
-.alchemy-inventory-tab {
-  flex: 0 0 auto;
-  min-height: 44px;
-  cursor: pointer;
-}
-
-.alchemy-inventory-search {
-  width: min(100%, 280px);
-  min-height: 44px;
-  align-self: flex-end;
-}
-
-.alchemy-inventory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
-  gap: 8px;
-}
-
-.alchemy-inventory-grid > .chip {
-  width: 100%;
-  min-height: 44px;
-  justify-content: center;
-  overflow-wrap: anywhere;
-  hyphens: auto;
-}
 
 /* ------------------------------------------------------------------ HUD stat badges */
 .stat-badge {
@@ -1546,36 +1443,6 @@ input:focus-visible {
     backdrop-filter: blur(12px);
   }
 
-  .alchemy-bench > .row:last-child {
-    margin-left: auto;
-  }
-
-  .alchemy-bench > .row:first-child {
-    width: 100%;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    flex-wrap: nowrap;
-  }
-
-  .alchemy-bench .alchemy-slot {
-    width: 100%;
-    max-width: 100%;
-    justify-content: center;
-  }
-
-  .alchemy-inventory-tabs {
-    margin-inline: -14px;
-    padding-inline: 14px;
-  }
-
-  .alchemy-inventory-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .alchemy-inventory-search {
-    width: 100%;
-    align-self: stretch;
-  }
 
   .word-hop-input {
     position: sticky;

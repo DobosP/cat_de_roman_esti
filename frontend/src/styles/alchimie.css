@@ -1,3 +1,101 @@
+.alchemy-earned-links {
+  flex-basis: 100%;
+  min-width: 0;
+  margin-top: 4px;
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.alchemy-earned-links ul {
+  margin: 5px 0 0;
+  padding-left: 20px;
+  color: var(--text-dim);
+}
+
+.alchemy-slot {
+  min-width: 0 !important;
+  max-width: min(300px, 38vw);
+}
+
+.alchemy-slot-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alchemy-inventory-tabs {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 2px;
+  scrollbar-width: none;
+}
+
+.alchemy-inventory-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.alchemy-inventory-tab {
+  flex: 0 0 auto;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.alchemy-inventory-search {
+  width: min(100%, 280px);
+  min-height: 44px;
+  align-self: flex-end;
+}
+
+.alchemy-inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 8px;
+}
+
+.alchemy-inventory-grid > .chip {
+  width: 100%;
+  min-height: 44px;
+  justify-content: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+@media (max-width: 640px) {
+  .alchemy-bench > .row:last-child {
+    margin-left: auto;
+  }
+
+  .alchemy-bench > .row:first-child {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    flex-wrap: nowrap;
+  }
+
+  .alchemy-bench .alchemy-slot {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .alchemy-inventory-tabs {
+    margin-inline: -14px;
+    padding-inline: 14px;
+  }
+
+  .alchemy-inventory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .alchemy-inventory-search {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
 /* Direct crafting: one active word and its library; secondary tools stay disclosed. */
 .alchemy-screen {
   --alchemy-ink: #eeeaf8;

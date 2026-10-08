@@ -1,3 +1,35 @@
+.contexto-input-bar {
+  min-width: 0;
+}
+
+.contexto-action-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.contexto-action-row .roedu-btn,
+.contexto-reveal-confirm .roedu-btn {
+  min-width: 0;
+  min-height: 44px;
+  padding-inline: 8px;
+  font-size: 0.82rem;
+}
+
+.contexto-reveal-confirm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 6px;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--warn) 55%, transparent);
+  border-radius: var(--roedu-radius-sm);
+  background: color-mix(in srgb, var(--warn) 10%, #15112d);
+  color: var(--text);
+  font-size: 0.82rem;
+}
+
 .contexto-warm-clue-button {
   min-width: 0;
   min-height: 44px;

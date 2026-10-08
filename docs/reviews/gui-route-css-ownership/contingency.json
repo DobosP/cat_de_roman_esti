@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "scope": "reviewed finite route ownership source contingency; budget and browser qualification pending",
+  "source_sha": "4f3b5069af24b52e2ab4352159a36403d598faae",
+  "captured_gate_result": "6f6d41425c1f21c8c9bc78f515e55f541b6867e3b232f083f86f7717bc26a2f9",
+  "last_actual_startup_bytes": 123951,
+  "unchanged_limit_bytes": 122880,
+  "global_before_sha256": "df34a6beb9b5fc5c9e1891c701b6b3d4b6420642278dc7267bcbe249ce0618a5",
+  "global_after_sha256": "fd74d5cbbc3f5154f33203fc55bf544559d875a8e5f5f44f9aab0ae44add9ac9",
+  "global_before_bytes": 39452,
+  "global_after_bytes": 36812,
+  "moved_raw_bytes": 2640,
+  "routes": [
+    {
+      "destination": "frontend/src/styles/alchimie.css",
+      "before_sha256": "a15b357f67e3cc8d8cb34f978222beff61fa6d57a9b880d2c2002eb35ab29eba",
+      "after_sha256": "2d5b3fc984415be657c7889aec1a2d596623142ab15099829aa746e02323f6cf",
+      "moved_raw_bytes": 1653,
+      "sections": [
+        {
+          "source_first_line": 1283,
+          "source_last_line": 1296,
+          "bytes": 247,
+          "sha256": "60395fd37a468a90e75e5f176246851454a1bcef64f05b6b53d70da16280c6a5",
+          "media": null,
+          "wrapper_only": false
+        },
+        {
+          "source_first_line": 1319,
+          "source_last_line": 1367,
+          "bytes": 823,
+          "sha256": "5f63892a8872a36b78f10705627cdc9c09e7745f162701befcb817acb2f84186",
+          "media": null,
+          "wrapper_only": false
+        },
+        {
+          "source_first_line": 1549,
+          "source_last_line": 1578,
+          "bytes": 583,
+          "sha256": "766ff5ff6e9bd24b8737b34b008cf0dd209630d6f7d9dd2508aa6e043de75783",
+          "media": "@media (max-width: 640px)",
+          "wrapper_only": true
+        }
+      ],
+      "existing_route_bytes": "exact later suffix retained"
+    },
+    {
+      "destination": "frontend/src/styles/contexto.css",
+      "before_sha256": "3bed7758a55fe5fab6937bedabf1c9098fc8ced9dff0bd27774593897434f51e",
+      "after_sha256": "874b76cefebf0c981889c44474f9b5e6dcb31e973ca3d3b995619acd0d1dcae1",
+      "moved_raw_bytes": 690,
+      "sections": [
+        {
+          "source_first_line": 252,
+          "source_last_line": 282,
+          "bytes": 690,
+          "sha256": "a0e27c1cbfdf68f5ee4e2514b3ce97473d0a357512212f21719a34d52ceea0b0",
+          "media": null,
+          "wrapper_only": false
+        }
+      ],
+      "existing_route_bytes": "exact later suffix retained"
+    },
+    {
+      "destination": "frontend/src/styles/lant.css",
+      "before_sha256": "1559a490f705859620c479a7943d842ee230e6fcc7ecb4478fb5e0340ffccee6",
+      "after_sha256": "0466f3f37c779eb54f83036846eb490f9c5d761cbf67c784a558f00e699f867c",
+      "moved_raw_bytes": 297,
+      "sections": [
+        {
+          "source_first_line": 1309,
+          "source_last_line": 1317,
+          "bytes": 297,
+          "sha256": "c7b6eff7fd4c63a4dc06405423876521000ce6b054786c558c40853d3f90341a",
+          "media": null,
+          "wrapper_only": false
+        }
+      ],
+      "existing_route_bytes": "exact later suffix retained"
+    }
+  ],
+  "source_check": {
+    "file": "frontend/tests/contexto-comparative-controls.test.mjs",
+    "before_sha256": "7032e47a7bb038cde62dff111eb6ad23de7ce2fdf130802b8725411522e7d6df",
+    "after_sha256": "6250ca79e9d4730ac15800d3b44741aba5a7f1b152badde3673da73c1de02100",
+    "change": "only actual stylesheet input for the same 44px action-row regex; unused global read removed; all callbacks/cases/thresholds unchanged"
+  },
+  "preserved": [
+    "all selector/declaration bytes and original media predicate",
+    "existing later route stylesheet suffixes/scoped overrides",
+    "Alchimie challenge and Explore both load base alchimie.css through lazy screen",
+    "all sticky/short-keyboard/coarse/HUD/category rules",
+    "Home/shell/AccountBar/fonts and counted import roots",
+    "original snapshots/sealed16+78/six old source assertions"
+  ],
+  "qualification": "UNRUN; no inferred gzip savings or budget pass"
+}
