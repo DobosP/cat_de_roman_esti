@@ -29,19 +29,25 @@ No reference server is selected as the default or given a consent/privacy waiver
 The shared Docker context now includes only the actual root asset-sync helper,
 keeps frontend build/config/confinement helpers available through `COPY frontend/`,
 and excludes host generated dist/identity/legacy trees. The source-owned sealed
-`legacy/` archive remains a required input. The unchanged GUI recipe benefits from
-the same context correction; its runtime/port/health contract is not modified here.
+`legacy/` archive remains a required input. This fixes the default/root and
+standalone context. `Dockerfile.gui` uses its existing separate
+`Dockerfile.gui.dockerignore`, which already explicitly admitted the helper;
+neither that override nor the GUI recipe changes here. The original report's
+GUI-context attribution was incorrect; predecessor commit `eaa5472` is preserved.
 
 Parent integration requirements:
 
-- Resolve and register actual image digests for `node:26.10.0-bookworm-slim`,
-  `golang:1.27.1-bookworm`, `debian:bookworm-slim`, `python:3.12-slim` and
-  `rust:1.98.1-bookworm`; these five tag identities deliberately remain unresolved.
-  Do not infer a digest, upgrade an interpreter, waive recipe discovery or claim
-  a complete image gate from these source changes.
-- Wire actual SHA/tree build arguments into the existing root/standalone build
-  callers. Current run.sh/compose/CI commands do not yet supply them; image builds
-  must fail closed until that owner integration is complete.
+- At `eaa5472`, the five historical-flavour image pins were pending. The parent
+  subsequently resolved/registered them in `3ea…`; this successor starts from
+  `1449d4a`. That source integration does not qualify image builds or deployments.
+- `run.sh docker` now validates explicit40/64-hex owner-supplied identities and
+  passes quoted build arguments. Default/prod/anon compose requires both build
+  arguments with no defaults; the owner supplies already validated same-source
+  evidence. Existing standalone Go instructions pass the same explicit arguments.
+  No tree hash producer, global `.gate.env` key or runtime identity setting is added.
+- The manual CI image build still needs parent-owned explicit input/argument
+  integration; application workflow files are unchanged here. Local `run`/`dev`
+  paths retain their separate known managed-output/identity alignment obligations.
 - Run actual source, context/COPY, clean native and optional reference image
   qualification. Preserve existing ports, migrations, volume ownership, health,
   managed/current/legacy byte identities, strict budgets and all safety gates.

@@ -59,9 +59,16 @@ Build the root Dockerfile for local, anonymous-production and optional native-ac
 profiles. It builds frontend JavaScript with Node and the server with Go, serves on
 container port 8000, and contains no Python interpreter. Anonymous publication and
 account activation are described in [DEPLOY](DEPLOY.md).
+Root/standalone Go builds require explicit owner-qualified `GATE_SHA` (40 lowercase
+hex) and `GATE_TREE_SHA256` (64 lowercase hex), from the actual same-source pinned
+wrapper evidence. Supply these only as build arguments; do not invent a Git-tree
+hash or set runtime identity overrides. Container/source changes still need actual
+qualification; these commands do not authorize deployment.
 
 ```bash
-docker build -t cat-de-roman-esti:local .
+[[ ${GATE_SHA:-} =~ ^[0-9a-f]{40}$ ]] && [[ ${GATE_TREE_SHA256:-} =~ ^[0-9a-f]{64}$ ]] || exit 2
+docker build --build-arg "GATE_SHA=$GATE_SHA" --build-arg "GATE_TREE_SHA256=$GATE_TREE_SHA256" \
+  -t cat-de-roman-esti:local .
 docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
   -p 127.0.0.1:8000:8000 -e CAT_ACCOUNTS_ENABLED=0 cat-de-roman-esti:local
 ```
@@ -70,13 +77,15 @@ docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
 
 The following Go/Rust comparison images are separate from canonical Compose.
 Build with the **repository root** as Docker context. The runtime stages contain
-the executable, its operating-system dependencies and the tracked compiled SPA.
+the executable, its operating-system dependencies and a fresh managed SPA.
 They run as UID/GID **10001**, listen on container port **8080**, support a read-only
 filesystem and have an HTTP health check. Python and the language compilers remain
 outside the runtime images.
 
 ```bash
-docker build -f go-backend/Dockerfile -t cat-native-go:local .
+[[ ${GATE_SHA:-} =~ ^[0-9a-f]{40}$ ]] && [[ ${GATE_TREE_SHA256:-} =~ ^[0-9a-f]{64}$ ]] || exit 2
+docker build -f go-backend/Dockerfile --build-arg "GATE_SHA=$GATE_SHA" \
+  --build-arg "GATE_TREE_SHA256=$GATE_TREE_SHA256" -t cat-native-go:local .
 docker build -f rust-backend/Dockerfile -t cat-native-rust:local .
 
 docker run --rm --name cat-native-go --read-only --cap-drop ALL \

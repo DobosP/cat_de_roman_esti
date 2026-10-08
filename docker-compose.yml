@@ -4,6 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        GATE_SHA: ${GATE_SHA:?explicit owner-qualified 40-hex source SHA required}
+        GATE_TREE_SHA256: ${GATE_TREE_SHA256:?explicit owner-qualified 64-hex source tree required}
     image: cat-de-roman-esti:latest
     container_name: cat-de-roman-esti
     ports:
