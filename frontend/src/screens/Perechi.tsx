@@ -53,11 +53,18 @@ interface StartOpts {
 type PendingFocus = (
   | { kind: "tile"; id: string }
   | { kind: "result" }
-  | { kind: "hint"; id: string; origin: HTMLButtonElement }
+  | { kind: "hint"; id: string }
 ) & {
   gameId: string;
   savedId: string | null;
+  origin: HTMLButtonElement;
 };
+
+function focusStillOwned(origin: HTMLButtonElement): boolean {
+  // Disabling/removing the owned button can leave focus on body. A deliberate
+  // move to another control supersedes the asynchronous restoration claim.
+  return document.activeElement === document.body || document.activeElement === origin;
+}
 
 export default function Perechi({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
@@ -76,7 +83,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   const hintButtonRef = useRef<HTMLButtonElement>(null);
   const resultFocusRef = useRef<HTMLDivElement>(null);
   const pendingFocus = useRef<PendingFocus | null>(null);
-  const focusedTileBeforeMutation = useRef<string | null>(null);
+  const focusedTileBeforeMutation = useRef<{ id: string; origin: HTMLButtonElement } | null>(null);
   useLayoutEffect(() => {
     if (!isPresent) {
       actionOwner.invalidate();
@@ -118,9 +125,15 @@ export default function Perechi({ onExit, onToast }: Props) {
   }, [actionOwner, onExit]);
   const queueFocusAfterUpdate = useCallback(
     (fresh: PerechiState, candidateIds: readonly string[]) => {
-      const focusedId = focusedTileBeforeMutation.current;
-      if (!focusedId || !candidateIds.includes(focusedId)) return;
-      const ownership = { gameId: fresh.game_id, savedId: active.peek() };
+      const focused = focusedTileBeforeMutation.current;
+      if (!focused || !candidateIds.includes(focused.id)) return;
+      if (!focusStillOwned(focused.origin)) {
+        pendingFocus.current = null;
+        focusedTileBeforeMutation.current = null;
+        return;
+      }
+      const focusedId = focused.id;
+      const ownership = { gameId: fresh.game_id, savedId: active.peek(), origin: focused.origin };
       if (fresh.won || fresh.lost) {
         pendingFocus.current = { kind: "result", ...ownership };
         return;
@@ -145,9 +158,11 @@ export default function Perechi({ onExit, onToast }: Props) {
     if (pending.kind === "hint") {
       pendingFocus.current = null;
       if (actionsLocked || finished) return;
-      // The disabled/removed hint button loses focus; do not override a player
-      // who moved to options or another control while the response was pending.
-      if (document.activeElement !== document.body && document.activeElement !== pending.origin) return;
+    }
+    if (!focusStillOwned(pending.origin)) {
+      pendingFocus.current = null;
+      focusedTileBeforeMutation.current = null;
+      return;
     }
     const target =
       pending.kind === "result"
@@ -366,8 +381,11 @@ export default function Perechi({ onExit, onToast }: Props) {
       if (!state || finished || actionsLocked) return;
       const ticket = beginAction(state, "match");
       if (!ticket) return;
-      focusedTileBeforeMutation.current =
-        ids.find((id) => tileRefs.current.get(id) === document.activeElement) ?? null;
+      const focusedId = ids.find((id) => tileRefs.current.get(id) === document.activeElement);
+      const focusOrigin = focusedId ? tileRefs.current.get(focusedId) : undefined;
+      focusedTileBeforeMutation.current = focusedId && focusOrigin
+        ? { id: focusedId, origin: focusOrigin }
+        : null;
       setChecking(ids);
       setBusy(true);
       try {

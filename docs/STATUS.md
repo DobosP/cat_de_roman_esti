@@ -6,8 +6,8 @@ Last verified: 2026-10-07 — GUI S1 STOPPED for Windows continuation: original1
 
 ## Current state
 
-- Package **1.0.1** (lobby **V1.0.1**) hardens owner-requested mixed-age V1 on phones/desktop;
-  independent review/decision [ADR-0159](adr/0159-v1-0-1-testing-hardening.md).
+- GUI Perechi focus fix (2026-10-08), source-only: native validation NOT RUN here; existing next/wrap/win/external-focus and authored loss-focus cases remain required.
+- Package **1.0.1** (lobby **V1.0.1**) hardens owner-requested mixed-age V1 on phones/desktop; independent review/decision [ADR-0159](adr/0159-v1-0-1-testing-hardening.md).
 - 1.0.1: a 0-point loss is never a record; circuit daily intent is single-use (one resume
   notice; Intrusul/Perechi results offer the pending daily); Conexiuni/Intrusul/Perechi
   boards step 4/2/1 columns only; Lanț stacks its route on phones and Alchimie keeps long
