@@ -7,7 +7,7 @@ const screen = readFileSync(
   "utf8",
 );
 const css = readFileSync(
-  new URL("../src/styles/arcade.css", import.meta.url),
+  new URL("../src/styles/contexto.css", import.meta.url),
   "utf8",
 );
 

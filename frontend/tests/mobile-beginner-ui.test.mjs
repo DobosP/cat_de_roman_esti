@@ -8,6 +8,7 @@ const intro = read("../src/components/GameIntro.tsx");
 const css = read("../src/styles/arcade.css");
 const alchimieCss = read("../src/styles/alchimie.css");
 const conexiuniCss = read("../src/styles/conexiuni.css");
+const lantCss = read("../src/styles/lant.css");
 const alchimie = read("../src/screens/Alchimie.tsx");
 const caldRece = read("../src/screens/CaldRece.tsx");
 const lant = read("../src/screens/Lant.tsx");
@@ -65,17 +66,17 @@ void test("Romanian labels wrap on a responsive Connections board and long paths
   assert.match(conexiuniCss, /@media \(max-width: 640px\)[\s\S]*?\.connection-tile \{[^}]*?min-height: 68px/);
   assert.match(lant, /className="row wrap breadcrumb-trail"/);
   assert.match(css, /\.breadcrumb-trail \{[\s\S]*?overflow-x: auto/);
-  assert.match(css, /\.lant-choice-grid \{[\s\S]*?repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(lantCss, /\.lant-choice-grid \{[\s\S]*?repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(
-    css,
+    lantCss,
     /@media \(max-width: 480px\)[\s\S]*?\.lant-choice-grid \{[\s\S]*?repeat\(2, minmax\(0, 1fr\)\)/,
   );
   assert.match(
-    css,
+    lantCss,
     /@media \(max-width: 480px\)[\s\S]*?\.lant-choice-grid > \.lant-choice:last-child:nth-child\(odd\)[\s\S]*?grid-column: 1 \/ -1/,
   );
-  assert.match(css, /\.lant-choice \{[\s\S]*?min-height: 58px/);
-  assert.match(css, /\.lant-choice span \{[\s\S]*?font-size: 0\.75rem/);
+  assert.match(lantCss, /\.lant-choice \{[\s\S]*?min-height: 58px/);
+  assert.match(lantCss, /\.lant-choice span \{[\s\S]*?font-size: 0\.75rem/);
 });
 
 void test("global shortcuts ignore focused controls instead of double-submitting", () => {

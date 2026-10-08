@@ -1,3 +1,80 @@
+.contexto-warm-clue-button {
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid rgba(244, 162, 89, 0.58);
+  border-radius: var(--roedu-radius-sm);
+  background: rgba(244, 162, 89, 0.1);
+  color: var(--text);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.contexto-comparison {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  min-height: 44px;
+  padding: 7px 11px;
+  border: 1px solid color-mix(in srgb, var(--game-contexto) 60%, transparent);
+  border-radius: var(--roedu-radius-sm);
+  background: color-mix(in srgb, var(--game-contexto) 11%, transparent);
+}
+
+.contexto-comparison--new-best,
+.contexto-comparison--warmer,
+.contexto-comparison--found {
+  border-color: color-mix(in srgb, var(--good) 65%, transparent);
+  background: color-mix(in srgb, var(--good) 10%, transparent);
+}
+
+.contexto-comparison--colder {
+  border-color: rgba(123, 184, 242, 0.65);
+  background: rgba(123, 184, 242, 0.1);
+}
+
+.contexto-comparison-copy {
+  min-width: 0;
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+  overflow-wrap: anywhere;
+  font-size: 0.84rem;
+}
+
+.contexto-comparison-copy span {
+  color: var(--text-dim);
+}
+
+.contexto-comparison-rank {
+  color: var(--game-contexto);
+  font-variant-numeric: tabular-nums;
+}
+
+.contexto-guess-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  width: min(240px, 100%);
+  margin-inline: auto;
+}
+
+.contexto-guess-tabs button {
+  min-height: 44px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--roedu-radius-sm);
+  background: transparent;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.contexto-guess-tabs button.is-active {
+  border-color: color-mix(in srgb, var(--game-contexto) 72%, transparent);
+  background: color-mix(in srgb, var(--game-contexto) 13%, transparent);
+  color: var(--text);
+}
+
 .contexto-screen .game-container {
   max-width: 740px;
 }

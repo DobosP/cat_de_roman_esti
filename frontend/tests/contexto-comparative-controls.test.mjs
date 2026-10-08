@@ -6,6 +6,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const api = read("../src/api/contexto.ts");
 const screen = read("../src/screens/CaldRece.tsx");
 const css = read("../src/styles/arcade.css");
+const contextoCss = read("../src/styles/contexto.css");
 
 void test("accepted guesses type stable ordinals and bounded server comparison kinds", () => {
   const guess = api.match(/export interface Guess[\s\S]*?\n}/);
@@ -32,7 +33,7 @@ void test("Bune and Recente use server rank order and stable attempt ordinals", 
   assert.match(screen, />\s*Bune\s*</);
   assert.match(screen, />\s*Recente\s*</);
   assert.match(screen, /displayedGuesses\.map\(\(g\)/);
-  assert.match(css, /\.contexto-guess-tabs button \{[\s\S]*?min-height: 44px/);
+  assert.match(contextoCss, /\.contexto-guess-tabs button \{[\s\S]*?min-height: 44px/);
 });
 
 void test("the latest accepted guess renders exactly one server-authored comparison", () => {
@@ -41,7 +42,7 @@ void test("the latest accepted guess renders exactly one server-authored compari
   assert.match(screen, /className=\{`contexto-comparison contexto-comparison--\$\{feedback\.kind\}`\}/);
   assert.match(screen, /\{feedback\.message\}/);
   assert.match(screen, /role="status"/);
-  assert.match(css, /\.contexto-comparison \{[\s\S]*?min-height: 44px/);
+  assert.match(contextoCss, /\.contexto-comparison \{[\s\S]*?min-height: 44px/);
 });
 
 void test("terminal results and clue cards each have one announcement owner", () => {

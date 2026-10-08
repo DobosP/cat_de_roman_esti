@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "scope": "source ownership split only; actual build/startup/pixel/browser qualification pending",
+  "source_sha": "5dba15b429090b9bfec55261cd0a37eb265c7d42",
+  "global_before_sha256": "d496ae960f3b455bb7a8b8f5b8fe716a390e1d3e28a6eb5ddc6ab3e5727a30b7",
+  "global_after_sha256": "df34a6beb9b5fc5c9e1891c701b6b3d4b6420642278dc7267bcbe249ce0618a5",
+  "global_before_bytes": 45352,
+  "global_after_bytes": 39452,
+  "moved_raw_bytes": 5900,
+  "routes": [
+    {
+      "source": "frontend/src/styles/arcade.css",
+      "destination": "frontend/src/styles/lant.css",
+      "consumer": "frontend/src/screens/Lant.tsx",
+      "placement": "prepend; exact pre-existing route sheet remains suffix unchanged",
+      "before_sha256": "d8951b5f696412262421be1083d85afc5f0f9e72c1acc6c5affe2a0506eafd7c",
+      "after_sha256": "1559a490f705859620c479a7943d842ee230e6fcc7ecb4478fb5e0340ffccee6",
+      "moved_raw_bytes": 2477,
+      "sections": [
+        {
+          "source_first_line": 1357,
+          "source_last_line": 1456,
+          "raw_bytes": 2047,
+          "raw_sha256": "2e78f0af6174e8989896b8646f3b8c81c58e1da16e427768149758d81a91ce08",
+          "media": null,
+          "new_wrapper_only": false
+        },
+        {
+          "source_first_line": 1869,
+          "source_last_line": 1881,
+          "raw_bytes": 275,
+          "raw_sha256": "6a29769841e565f27b190d7a23865940f1314515152737df99800a3957243d8d",
+          "media": "@media (max-width: 480px)",
+          "new_wrapper_only": true
+        },
+        {
+          "source_first_line": 2051,
+          "source_last_line": 2055,
+          "raw_bytes": 155,
+          "raw_sha256": "5c1e650171ece87357ae3b48a901c80483ab617944b4fa71cfcf3266572b7eb0",
+          "media": null,
+          "new_wrapper_only": false
+        }
+      ]
+    },
+    {
+      "source": "frontend/src/styles/arcade.css",
+      "destination": "frontend/src/styles/conexiuni.css",
+      "consumer": "frontend/src/screens/Conexiuni.tsx",
+      "placement": "prepend; exact pre-existing route sheet remains suffix unchanged",
+      "before_sha256": "886aeb8a57e0a8051754dd073946efe44660dab84c8581cfcc8fdf85f7f6b690",
+      "after_sha256": "0719f2619b2652c138f54f209fa7514d4410bfe62dab1d850bf431e38b5e8e3f",
+      "moved_raw_bytes": 1543,
+      "sections": [
+        {
+          "source_first_line": 1206,
+          "source_last_line": 1246,
+          "raw_bytes": 701,
+          "raw_sha256": "67d55accfaa8b9392b184009f854d8ff430dd512ad17af45a18290e684dfcbfd",
+          "media": null,
+          "new_wrapper_only": false
+        },
+        {
+          "source_first_line": 1347,
+          "source_last_line": 1355,
+          "raw_bytes": 156,
+          "raw_sha256": "9cb37143ed303480724a4ddc27f09fe2db1b1778bbc73127f349d356c95d6461",
+          "media": null,
+          "new_wrapper_only": false
+        },
+        {
+          "source_first_line": 1766,
+          "source_last_line": 1777,
+          "raw_bytes": 253,
+          "raw_sha256": "0bc1ab608ddfe0a5bdd8d57d803a27c3d7db8bf11e228664f420f1ef6478d74b",
+          "media": "@media (max-width: 640px)",
+          "new_wrapper_only": true
+        },
+        {
+          "source_first_line": 1883,
+          "source_last_line": 1890,
+          "raw_bytes": 174,
+          "raw_sha256": "3ec7362a4c3dff04c099640d1e1edfe8374b9bf9e6555eb43c4ebd634ea555d0",
+          "media": "@media (max-width: 480px)",
+          "new_wrapper_only": true
+        },
+        {
+          "source_first_line": 2059,
+          "source_last_line": 2062,
+          "raw_bytes": 259,
+          "raw_sha256": "2e8f58470c46c001b4221db3eafe557f2a0b41bf9d1de21ccf2ef0d9bad3f4b4",
+          "media": null,
+          "new_wrapper_only": false
+        }
+      ]
+    },
+    {
+      "source": "frontend/src/styles/arcade.css",
+      "destination": "frontend/src/styles/contexto.css",
+      "consumer": "frontend/src/screens/CaldRece.tsx",
+      "placement": "prepend; exact pre-existing route sheet remains suffix unchanged",
+      "before_sha256": "847428422c04b3267e7e2a1a1f29985ce82307b57f15f067480ccd731f7a2f7b",
+      "after_sha256": "3bed7758a55fe5fab6937bedabf1c9098fc8ced9dff0bd27774593897434f51e",
+      "moved_raw_bytes": 1880,
+      "sections": [
+        {
+          "source_first_line": 1458,
+          "source_last_line": 1533,
+          "raw_bytes": 1880,
+          "raw_sha256": "8df6f137643b6106b32e29b403f200ebd6aee619d294206081a990a9cc3afcfc",
+          "media": null,
+          "new_wrapper_only": false
+        }
+      ]
+    }
+  ],
+  "unchanged": [
+    "AccountBar and its mandatory startup closure",
+    "fonts",
+    "Home and shell rules",
+    "CSS selector/property bytes and media predicates",
+    "all existing route-specific CSS bytes as later suffix",
+    "mixed global sticky-header and short-keyboard safeguards",
+    "all native/CSP/focus logic and assertions"
+  ],
+  "cascade_facts": [
+    "Unique Lan\u021b class names occur only in Lant; existing .lant-screen selectors remain later and more specific.",
+    "Conexiuni-specific classes occur only in Conexiuni; existing .connections-screen selectors remain later and more specific.",
+    "Contexto warm-clue/comparison/guess-tab classes occur only in CaldRece; sticky-controls and all their media overrides stay global.",
+    "Extracted nested media fragments retain exact body bytes and condition strings; unrelated sibling rules remain in their original global media blocks.",
+    "The Conexiuni sticky coach media fragment remains global, retaining the existing route-sheet no-sticky source assertion and its more-specific static layout."
+  ],
+  "qualification": "UNRUN; no inferred gzip saving or budget pass",
+  "existing_source_check_inputs": [
+    {
+      "file": "frontend/tests/mobile-beginner-ui.test.mjs",
+      "before_sha256": "95d668671a91af77c2d43894244617051527ef70cd6089d065d04aec4d1845b9",
+      "after_sha256": "22e0d6cfb94155f27f380c91febd182f621686084173a89c6ae1e638e3e72c30",
+      "change": "only stylesheet read source or assertion input variable follows its new route owner; regexes, thresholds, callbacks and cases unchanged"
+    },
+    {
+      "file": "frontend/tests/contexto-comparative-controls.test.mjs",
+      "before_sha256": "b2092a858cab2f9c7a8639f7005eeb2ab94428a532a0e1b4a2c9c3d654d86a9c",
+      "after_sha256": "7032e47a7bb038cde62dff111eb6ad23de7ce2fdf130802b8725411522e7d6df",
+      "change": "only stylesheet read source or assertion input variable follows its new route owner; regexes, thresholds, callbacks and cases unchanged"
+    },
+    {
+      "file": "frontend/tests/contexto-progressive-clue.test.mjs",
+      "before_sha256": "85ea590a1a75c5e051460ac8d0a2d66e7a5f16930a76823209e625c99794d48d",
+      "after_sha256": "5f6a46a5b60d594fb0c1cc0e338e84c9e5f069760893b8cbe1191a6902a5549c",
+      "change": "only stylesheet read source or assertion input variable follows its new route owner; regexes, thresholds, callbacks and cases unchanged"
+    }
+  ]
+}

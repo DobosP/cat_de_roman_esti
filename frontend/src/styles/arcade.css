@@ -1203,47 +1203,6 @@ input:focus-visible {
   display: flex;
 }
 
-.connections-coach-action,
-.connections-lives {
-  display: flex;
-  align-items: center;
-}
-
-.connections-coach-action {
-  gap: 8px;
-}
-
-.connections-coach-stack {
-  display: grid;
-  gap: 8px;
-}
-
-.connections-lives {
-  gap: 3px;
-  flex: none;
-}
-
-.connections-life-dot {
-  width: 8px;
-  height: 8px;
-  border: 1px solid var(--cue-accent);
-  border-radius: 999px;
-  background: var(--cue-accent);
-  box-shadow: 0 0 8px -2px var(--cue-accent);
-}
-
-.connections-life-dot--spent {
-  background: transparent;
-  opacity: 0.35;
-  box-shadow: none;
-}
-
-.connections-feedback {
-  gap: 4px;
-  padding: 9px 12px;
-  border-color: color-mix(in srgb, var(--roedu-color-primary) 55%, transparent);
-  font-size: 0.84rem;
-}
 
 .rank-legend {
   font-size: 0.76rem;
@@ -1344,193 +1303,8 @@ input:focus-visible {
   min-width: 0;
 }
 
-.connections-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
 
-.connection-tile {
-  min-width: 0;
-  overflow-wrap: anywhere;
-  hyphens: auto;
-}
 
-.breadcrumb-trail {
-  min-width: 0;
-}
-
-.lant-choice-panel {
-  gap: 10px;
-  padding: 12px;
-  border: 1px solid color-mix(in srgb, var(--game-lant) 42%, transparent);
-  border-radius: var(--roedu-radius-md);
-  background: color-mix(in srgb, var(--game-lant) 7%, var(--roedu-color-surface));
-}
-
-.lant-choice-panel .faint {
-  font-size: 0.72rem;
-}
-
-.lant-choice-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.lant-choice {
-  min-width: 0;
-  min-height: 58px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 3px;
-  padding: 9px 10px;
-  border: 1px solid color-mix(in srgb, var(--game-lant) 38%, var(--surface-border));
-  border-radius: var(--roedu-radius-sm);
-  background: rgba(255, 255, 255, 0.035);
-  text-align: left;
-  transition: border-color 0.16s ease, background 0.16s ease, transform 0.12s ease;
-}
-
-.lant-choice:hover {
-  border-color: var(--game-lant);
-  background: color-mix(in srgb, var(--game-lant) 12%, transparent);
-  transform: translateY(-1px);
-}
-
-.lant-choice:disabled {
-  opacity: 0.5;
-}
-
-.lant-choice strong,
-.lant-choice span {
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
-
-.lant-choice strong {
-  color: var(--text);
-  font-size: 0.86rem;
-}
-
-.lant-choice span {
-  color: var(--text-faint);
-  font-size: 0.75rem;
-  line-height: 1.2;
-}
-
-.lant-progress {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 44px;
-  padding: 10px 12px;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--roedu-radius-md);
-  background: rgba(255, 255, 255, 0.035);
-}
-
-.lant-progress > span {
-  width: 1.4rem;
-  text-align: center;
-  font-size: 1.15rem;
-}
-
-.lant-progress--closer,
-.lant-progress--won {
-  border-color: var(--good);
-}
-
-.lant-progress--lateral {
-  border-color: var(--warn);
-}
-
-.lant-progress--farther,
-.lant-progress--dead_end {
-  border-color: var(--bad);
-}
-
-.lant-undo--recommended {
-  border-color: var(--warn) !important;
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--warn) 28%, transparent);
-}
-
-.contexto-warm-clue-button {
-  min-width: 0;
-  min-height: 44px;
-  padding: 6px 10px;
-  border: 1px solid rgba(244, 162, 89, 0.58);
-  border-radius: var(--roedu-radius-sm);
-  background: rgba(244, 162, 89, 0.1);
-  color: var(--text);
-  font-weight: 700;
-  overflow-wrap: anywhere;
-}
-
-.contexto-comparison {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 9px;
-  align-items: center;
-  min-height: 44px;
-  padding: 7px 11px;
-  border: 1px solid color-mix(in srgb, var(--game-contexto) 60%, transparent);
-  border-radius: var(--roedu-radius-sm);
-  background: color-mix(in srgb, var(--game-contexto) 11%, transparent);
-}
-
-.contexto-comparison--new-best,
-.contexto-comparison--warmer,
-.contexto-comparison--found {
-  border-color: color-mix(in srgb, var(--good) 65%, transparent);
-  background: color-mix(in srgb, var(--good) 10%, transparent);
-}
-
-.contexto-comparison--colder {
-  border-color: rgba(123, 184, 242, 0.65);
-  background: rgba(123, 184, 242, 0.1);
-}
-
-.contexto-comparison-copy {
-  min-width: 0;
-  display: flex;
-  gap: 5px;
-  align-items: baseline;
-  overflow-wrap: anywhere;
-  font-size: 0.84rem;
-}
-
-.contexto-comparison-copy span {
-  color: var(--text-dim);
-}
-
-.contexto-comparison-rank {
-  color: var(--game-contexto);
-  font-variant-numeric: tabular-nums;
-}
-
-.contexto-guess-tabs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px;
-  width: min(240px, 100%);
-  margin-inline: auto;
-}
-
-.contexto-guess-tabs button {
-  min-height: 44px;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--roedu-radius-sm);
-  background: transparent;
-  color: var(--text-dim);
-  font-weight: 700;
-}
-
-.contexto-guess-tabs button.is-active {
-  border-color: color-mix(in srgb, var(--game-contexto) 72%, transparent);
-  background: color-mix(in srgb, var(--game-contexto) 13%, transparent);
-  color: var(--text);
-}
 
 .hint-fill-button {
   min-height: 44px;
@@ -1763,18 +1537,6 @@ input:focus-visible {
     top: var(--game-shell-sticky-offset);
   }
 
-  .connections-coach {
-    background: linear-gradient(
-      100deg,
-      color-mix(in srgb, var(--cue-accent) 18%, #15112d),
-      #15112d
-    );
-    backdrop-filter: blur(12px);
-  }
-
-  .connections-coach .next-move-progress {
-    display: none;
-  }
 
   .alchemy-bench {
     position: sticky;
@@ -1866,28 +1628,7 @@ input:focus-visible {
 }
 
 @media (max-width: 480px) {
-  .lant-choice-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 
-  .lant-choice-grid > .lant-choice:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-    align-items: center;
-    text-align: center;
-  }
-
-  .lant-choice-panel {
-    margin-inline: -4px;
-  }
-
-  .connections-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .connection-tile {
-    min-height: 58px !important;
-    font-size: 0.86rem !important;
-  }
 
   .play-guide-step {
     min-height: 70px;
@@ -2048,18 +1789,9 @@ input:focus-visible {
 
 /* ===== V42 section: caldrece (builder-1 styles go here) ===== */
 /* ===== V42 section: lant (builder-2 styles go here) ===== */
-/* Intro disclosure: a real tap target that never demands the rules wall up front. */
-.lant-intro-disclosure {
-  font-size: 0.82rem;
-  text-align: left;
-}
 
 /* ===== V42 section: alchimie (builder-3 styles go here) ===== */
 
-/* ===== V42 section: conexiuni (builder-4 styles go here) ===== */
-/* Clue unlock/remaining hint on the Indiciu button: a small, muted suffix, not a
-   separate control (ADR-0007 clue economy). */
-.conexiuni-clue-status { font-size: 0.78em; opacity: 0.75; }
 
 /* ===== V42 section: derived-games (builder-5 styles go here) ===== */
 

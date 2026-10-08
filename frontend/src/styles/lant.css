@@ -1,3 +1,126 @@
+.breadcrumb-trail {
+  min-width: 0;
+}
+
+.lant-choice-panel {
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid color-mix(in srgb, var(--game-lant) 42%, transparent);
+  border-radius: var(--roedu-radius-md);
+  background: color-mix(in srgb, var(--game-lant) 7%, var(--roedu-color-surface));
+}
+
+.lant-choice-panel .faint {
+  font-size: 0.72rem;
+}
+
+.lant-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.lant-choice {
+  min-width: 0;
+  min-height: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+  padding: 9px 10px;
+  border: 1px solid color-mix(in srgb, var(--game-lant) 38%, var(--surface-border));
+  border-radius: var(--roedu-radius-sm);
+  background: rgba(255, 255, 255, 0.035);
+  text-align: left;
+  transition: border-color 0.16s ease, background 0.16s ease, transform 0.12s ease;
+}
+
+.lant-choice:hover {
+  border-color: var(--game-lant);
+  background: color-mix(in srgb, var(--game-lant) 12%, transparent);
+  transform: translateY(-1px);
+}
+
+.lant-choice:disabled {
+  opacity: 0.5;
+}
+
+.lant-choice strong,
+.lant-choice span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.lant-choice strong {
+  color: var(--text);
+  font-size: 0.86rem;
+}
+
+.lant-choice span {
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.lant-progress {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--roedu-radius-md);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.lant-progress > span {
+  width: 1.4rem;
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+.lant-progress--closer,
+.lant-progress--won {
+  border-color: var(--good);
+}
+
+.lant-progress--lateral {
+  border-color: var(--warn);
+}
+
+.lant-progress--farther,
+.lant-progress--dead_end {
+  border-color: var(--bad);
+}
+
+.lant-undo--recommended {
+  border-color: var(--warn) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--warn) 28%, transparent);
+}
+
+@media (max-width: 480px) {
+  .lant-choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lant-choice-grid > .lant-choice:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+  }
+
+  .lant-choice-panel {
+    margin-inline: -4px;
+  }
+}
+
+/* Intro disclosure: a real tap target that never demands the rules wall up front. */
+.lant-intro-disclosure {
+  font-size: 0.82rem;
+  text-align: left;
+}
+
 .lant-screen .game-container {
   gap: 12px;
 }

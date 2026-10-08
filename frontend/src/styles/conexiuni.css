@@ -1,3 +1,86 @@
+.connections-coach-action,
+.connections-lives {
+  display: flex;
+  align-items: center;
+}
+
+.connections-coach-action {
+  gap: 8px;
+}
+
+.connections-coach-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.connections-lives {
+  gap: 3px;
+  flex: none;
+}
+
+.connections-life-dot {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--cue-accent);
+  border-radius: 999px;
+  background: var(--cue-accent);
+  box-shadow: 0 0 8px -2px var(--cue-accent);
+}
+
+.connections-life-dot--spent {
+  background: transparent;
+  opacity: 0.35;
+  box-shadow: none;
+}
+
+.connections-feedback {
+  gap: 4px;
+  padding: 9px 12px;
+  border-color: color-mix(in srgb, var(--roedu-color-primary) 55%, transparent);
+  font-size: 0.84rem;
+}
+
+.connections-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.connection-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+@media (max-width: 640px) {
+  .connections-coach {
+    background: linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--cue-accent) 18%, #15112d),
+      #15112d
+    );
+    backdrop-filter: blur(12px);
+  }
+
+  .connections-coach .next-move-progress {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .connections-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .connection-tile {
+    min-height: 58px !important;
+    font-size: 0.86rem !important;
+  }
+}
+
+/* ===== V42 section: conexiuni (builder-4 styles go here) ===== */
+/* Clue unlock/remaining hint on the Indiciu button: a small, muted suffix, not a
+   separate control (ADR-0007 clue economy). */
+.conexiuni-clue-status { font-size: 0.78em; opacity: 0.75; }
+
 .connections-screen .game-shell-header,
 .connections-screen .connections-coach-stack,
 .connections-screen .connections-actions { position: static; }
