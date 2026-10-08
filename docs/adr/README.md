@@ -126,4 +126,6 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 
 - [0184](0184-native-spa-toolchain-and-managed-output.md) — native SPA tooling/managed-output prerequisites; runtime validation pending. ADR0183/Source7 preserved.
 
-- [0185](0185-accepted-eager-startup-bundle-accounting.md) — owner-accepted AccountBar startup JS/CSS accounting; unchanged limits, source amendment unapplied and Linux qualification pending.
+- [0185](0185-accepted-eager-startup-bundle-accounting.md) — owner-accepted AccountBar startup JS/CSS accounting; unchanged limits, source applied; Linux qualification pending.
+
+- [0186](0186-original-lint-equivalence-for-aria-and-focus.md) — original-source-grounded ARIA/focus advisory equivalence; all genuine guards and runtime assertions retained.
