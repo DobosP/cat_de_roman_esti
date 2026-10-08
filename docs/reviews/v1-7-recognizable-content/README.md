@@ -184,3 +184,19 @@ Original308dfailedcampaign/oldmethods/binaries/keepers remain immutable; no asse
 Valid substantive archive/R3source/reviews were frozen before23:44:35, but final metadata missed23:47:35. New stagingR2 never existed/was never reviewed; no rerun occurred. Do not retroactively pass or reset that window.
 Next iteration must explicitly dispatch a finite metadata staging task, freeze reviewed NEW prefix+inherited old producer lineage, then separately admit a different repaired-profile campaign.
 Reference813unrun/Conex245unqualified/all7/69 and native fullprofiles/ordinary32HTTP/Lanț/terminal/World/history/finalquality/retirement/Source7/all release gates remain pending.
+
+## Complete repaired native prospective evidence
+
+Explicit followup dispatch completed metadata [stagingR2](native-output-staging-proposal-r2.json)ae88b79b and [independent ACK](native-output-staging-review-r2.json)71cb6832 within57d4source00:01:26→00:11:26/cut00:08:26; [source-stop](native-output-staging-source-stop-r2.json)ac08c17f preserves that clock.
+[Fresh native admission](native-prospective-native-admission-r2.json)0536b783 uses ONE immutable00:08:50→00:28:50UTC campaign/reserve00:25:50, all257normal+25scratch pins. SDK0/profile-onlyR3compile1/fullprofiles2/previouslyunexecutedHTTP3 all PASS.
+Actual corrected profile binaryc17ee75e/compileb3a366c2 and2removedtemps were frozen with inherited64findex/8eccHTTP/oldpassedproducerlineage in newkeeper15f4f471/externaldigestfbbb0565.
+Root personally verified every admitted/source/output/keeper/current+inherited receipt/log hash before and after both probes; old308d remains FAILED.
+[Complete native summary](native-prospective-results-summary-r2.json)c232662a records265fulltarget profiles/641035IDtarget+122960projection feedback pairs/2419mining/13514oldnormalizedowners/464projection identities/265canonicalwins+clues/45shelves180choices unchanged, differences{}.
+All48 fixed lexical rows retain15changes:6direct leafă case/space/Unicode forms,4fuzzy corrections(leafăi/leafa?/leafaa/leafa!),2suggestion-only(leaf/lefa),3Leana advisory changes with exactowner unchanged. These are observations, not more stored forms or morphology approvals.
+All192 declared service cases retain40changes for independent critique. Separate all69 native dispositions stay exactly unchanged:9sharedexact/1nonwinningprojection/2fuzzycandidate/57unknownexact+fuzzy; no all-unknown claim.
+Actual2ordinaryPUBLIC-handler sessions/32requests atnormal/Societate seed7 select BNRct_societate_090 without seedsearch/privateinjection.
+Both alias-first/canonical-first arms directly accept leafă as the same Salaryattempt1/rank15/distance2/Cald99, repeats share the slot; earned warmerbank3,privateGet/status/state,4attempts1clue700/share/Progress pass.
+This is explicitly RESEARCH-ONLY in-memory generatedalias/index transfer into verified sealedSource6 baseline. Source/manifest identities remain baseline; no Source7sealedexport/currentauthority/TCP/browser/human-play qualification follows.
+[Complete archive manifest](native-prospective-complete-archive-manifest-r2.json)15512859 binds43losslessmembers/native481rows/32response transcript/producer lineage/keepers/index/newbin/admissions/logs; archived63b453b retains allbytes.
+Metadata closed00:22:03 before original00:25:50reserve; peaknativeRSS365350912B/archive sampledgroup35549184B/finalfullS-Rgrowth53027706B, all282pins exact, no activechild.
+[Independent actual quality review](complete-native-quality-review-r2.json)f5e3b860 accepts completed declared native research evidence only, after all43tar+2gzip members/481rows/32responses/282pins/old+new lineages and resource clocks; final rawquality/retirement/allgame/Source7 remain withheld. Old failures/rejections/unrun reference813+Conex245qualification/all7/reference69/nativeLanț/terminal/World/fullinstalledhistoricalcontext/finalrawquality/retirement/Source7/assembled release gates remain explicit.
