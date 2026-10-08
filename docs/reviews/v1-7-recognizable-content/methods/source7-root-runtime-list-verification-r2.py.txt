@@ -1,0 +1,19 @@
+# Inert exact root verification for the native RuntimeHashes list schema.
+# No native invocation, source/fixture mutation or failed campaign continuation.
+from pathlib import Path
+import hashlib
+
+def verify_runtime_rows(audit, isolated_root):
+    root = Path(isolated_root).resolve(strict=True)
+    rows = audit['runtime_sources']
+    assert isinstance(rows, list) and len(rows) == 110
+    assert len({row['path'] for row in rows}) == len(rows)
+    for row in rows:
+        assert isinstance(row, dict) and set(row) == {'path', 'sha256'}
+        relative = Path(row['path'])
+        assert not relative.is_absolute() and '..' not in relative.parts
+        target = root / relative
+        assert target.resolve(strict=True).is_relative_to(root)
+        assert target.is_file() and not target.is_symlink()
+        assert hashlib.sha256(target.read_bytes()).hexdigest() == row['sha256']
+    assert isinstance(audit['source_bindings'], dict) and audit['source_bindings']

@@ -1,0 +1,72 @@
+import json
+index=1
+keepers=json.loads("[{\"index\":0,\"keeper_path\":\"/home/dobo/work/_temp/codex__content-v1-7/probe/source7-quick-world-r1-keeper-0.json\",\"keeper_sha256\":\"8b510c322d10d05bebcc8c7e1e3407f4821e0fcde222e1684fbc1a5e3af0e6b1\",\"external_path\":\"/home/dobo/work/_temp/codex__content-v1-7/probe/source7-quick-world-r1-keeper-0-external.json\",\"external_sha256\":\"e392eb7d7e7717fe88f086999bff33e60b4e85b9e9c8552b63e66f63277d91f5\",\"output_sha256\":\"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c\",\"outputs\":1,\"payload_keys\":[\"authored\",\"bindings\",\"boards\",\"candidate_sha256\",\"excluded\",\"kind\",\"nodes\",\"reviews\"]}]")
+
+from pathlib import Path
+import json,hashlib,datetime,shutil
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7');S=Path('/home/dobo/work/_temp/codex__content-v1-7');D=R/'docs/reviews/v1-7-recognizable-content';I=S/'source7-stage-r1'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+admission=D/'source7-quick-world-native-admission-r1.json'
+assert sha(admission)=='9a88f1fa7f0c2add3185964fa680647eb5f06db155ae10980f40218f7a24f9a9'
+assert sha(D/'source7-quick-world-native-admission-external-r1.json')=='3d79c9140fe982fa5d2ea6ceefb351a95a149261a37bab95d7346e269e4e0757'
+a=json.loads(admission.read_bytes())
+assert all(sha(R/n)==h for n,h in a['inputs'].items())
+assert all(sha(n)==h for n,h in a['scratch_bindings'].items())
+old=json.loads((D/'source7-preparation-results-summary-r1.json').read_bytes())
+for item in old['root_external_keeper_chain']:
+ assert sha(item['keeper_path'])==item['keeper_sha256'] and sha(item['external_path'])==item['external_sha256']
+ k=json.loads(Path(item['keeper_path']).read_bytes())
+ for kind in ('producer_receipt','producer_log'):assert sha(k[kind]['path'])==k[kind]['sha256']
+for item in keepers:
+ assert sha(item['keeper_path'])==item['keeper_sha256'] and sha(item['external_path'])==item['external_sha256']
+ k=json.loads(Path(item['keeper_path']).read_bytes())
+ assert k['admission_sha256']==sha(admission) and k['deadline_utc']==a['deadline_utc']
+ for kind in ('producer_receipt','producer_log'):assert sha(k[kind]['path'])==k[kind]['sha256']
+ for n,h in k['outputs'].items():assert not Path(n).is_symlink() and sha(n)==h,n
+
+state=json.loads((S/'probe/source7-quick-world-prospective-r1-r4-r3-state.json').read_bytes())
+receipt=D/('source7-quick-world-prospective-r1-step-'+str(index)+'-result.json');rec=json.loads(receipt.read_bytes())
+assert rec['status']=='passed' and rec['guard'] is None and rec['exit_code']==0
+assert rec['manifest_sha256']==sha(admission) and rec['argv']==a['commands'][index]['argv'] and rec['deadline_utc']==a['deadline_utc']
+assert rec['original_start_size']==state['original_start_size']
+log=Path(rec['log_path']);assert sha(log)==rec['log_sha256']
+assert all(sha(R/n)==h for n,h in a['unchanged'].items()) and all(sha(n)==h for n,h in a['scratch_bindings'].items())
+cmd=a['commands'][index]['argv'];flag='--proposal' if index%2==0 else '--audit-out';out=Path(cmd[cmd.index(flag)+1]);rail=cmd[1]
+assert out.is_file() and not out.is_symlink()
+payload=json.loads(out.read_bytes());reply=json.loads(log.read_bytes());assert reply['ok'] is True
+candidate=D/'native'/rail/'candidate.json';raw=json.loads(candidate.read_bytes())
+assert payload['candidate_sha256']==sha(candidate)
+if index%2==0:
+ assert reply['mode']=='proposal'
+ field='boards' if rail=='quick' else 'recipes'
+ assert len(payload[field])==len(raw[field])== (85 if rail=='quick' else 352)
+ for role in ['factual','quality']:
+  matches=[r for r in payload['reviews'] if r['role']==role];assert len(matches)==1 and matches[0]['sha256']==sha(D/'native'/rail/(role+'-review.json'))
+ if rail=='world':assert payload['native_source_version']==7 and len(payload['concepts'])==252
+else:
+ assert reply['mode']=='audit' and payload['native_audit_version']==1
+ assert payload.get('passed') is True if rail=='quick' else payload.get('verdict')=='accept'
+ proposal=Path(cmd[cmd.index('--audit-catalog')+1]);assert payload['catalog_sha256']==sha(proposal)
+ assert isinstance(payload['runtime_sources'],dict) and payload['runtime_sources'] and isinstance(payload['source_bindings'],dict) and payload['source_bindings']
+ expectedkind='quick-content-live-audit-v1' if rail=='quick' else 'alchimie-discovery-world-audit-v1'
+ assert payload['kind']==expectedkind
+ assert all(sha(I/n)==h for n,h in payload['runtime_sources'].items())
+ if rail=='quick':
+  prop=json.loads(proposal.read_bytes());assert len(payload['replays'])==85 and {r['id'] for r in payload['replays']}=={b['id'] for b in prop['boards']} and payload['core_boards_preserved'] is True
+  assert all(r['hidden_answers_preserved'] is True and r['terminal_get_preserved'] is True and 0<=r['public_seed']<5000 for r in payload['replays'])
+ else:
+  assert len(payload['goal_replays'])==33 and len({r['goal_id'] for r in payload['goal_replays']})==33 and all(r['complete'] is True and r['all_recipes_consistent'] is True and r['replayed_discoveries']==148 for r in payload['goal_replays'])
+  assert payload['metrics']=={'concepts':252,'recipes':352,'optional_goals':32,'historical_books':10} and len(payload['compatible_save_replays'])==10 and payload['historical_prefixes']==1156
+  assert all(r['all_earned_concepts_preserved'] is True for r in payload['compatible_save_replays'])
+previous={} if not keepers else json.loads(Path(keepers[-1]['keeper_path']).read_bytes())['outputs']
+assert all(sha(n)==h and not Path(n).is_symlink() for n,h in previous.items())
+outputs=dict(previous);outputs[str(out)]=sha(out)
+assert state['status']==('completed' if index==3 else 'ready') and state['next_index']==index+1 and state['pending'] is None
+k={'schema':'v1-7-quick-world-root-output-keeper-v1','index':index,'created_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'admission_sha256':sha(admission),'deadline_utc':a['deadline_utc'],'original_start_size':rec['original_start_size'],'producer_receipt':{'path':str(receipt),'sha256':sha(receipt)},'producer_log':{'path':str(log),'sha256':sha(log)},'previous_keepers':keepers,'outputs':outputs,'root_manual_readsets_old_and_new_logs_verified':True,'source7_installation_approved':False}
+blob=(json.dumps(k,indent=2)+'\n').encode();assert len(blob)<=64*2**10
+f=S/'probe'/('source7-quick-world-r1-keeper-'+str(index)+'.json')
+with f.open('xb') as w:w.write(blob)
+g=S/'probe'/('source7-quick-world-r1-keeper-'+str(index)+'-external.json')
+ext=(json.dumps({'keeper_path':str(f),'keeper_sha256':sha(f),'admission_sha256':sha(admission)},indent=2)+'\n').encode();assert len(ext)<=4*2**10
+with g.open('xb') as w:w.write(ext)
+print(json.dumps({'index':index,'keeper_path':str(f),'keeper_sha256':sha(f),'external_path':str(g),'external_sha256':sha(g),'output_sha256':sha(out),'outputs':len(outputs),'payload_keys':list(payload)}))

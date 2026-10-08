@@ -1,0 +1,51 @@
+{
+  "schema": "v1-7-exact-isolated-World-guarded-transition-method-v2",
+  "prepared_at_utc": "2026-10-08T06:36:53.196121+00:00",
+  "status": "EXACT_ACTUAL_FINALS_BOUND_SOURCE_METHOD_WAIT_INDEPENDENT_REVIEW",
+  "source_admission_sha256": "1fcbe5ad8d1c3f57d46bb47f4f46c6425a652659716ee2c1eeac399961610e11",
+  "argv": [
+    "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1/cat-content-rail",
+    "world",
+    "--root",
+    "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1",
+    "--source",
+    "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/go-backend/internal/contentrails/sources/authored-v7.json",
+    "--candidate",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/native/world/candidate.json",
+    "--factual-review",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/native/world/factual-review.json",
+    "--quality-review",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/native/world/quality-review.json",
+    "--proposal",
+    "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/native/world/source7-proposal-r1.json",
+    "--live-audit",
+    "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/native/world/source7-prospective-audit-r1.json",
+    "--final-factual-review",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/native/world/final-factual-prospective-r1.json",
+    "--final-quality-review",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/native/world/final-quality-prospective-r1.json",
+    "--expected-sha256",
+    "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+    "--write"
+  ],
+  "authorized_single_target": {
+    "path": "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+    "before_sha256": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+    "after_expected_sha256": "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049"
+  },
+  "final_hashes_known": true,
+  "installation_approved": false,
+  "next_freeze_requirements": [
+    "Actual same-role factual/quality final bytehashes and evidence before complete readset/R2 method freeze. No placeholder native admission.",
+    "Fresh exact native admission with before-target in inputs, exclude ONLYtarget from immutable scratch/post-unchanged, expected_after ONLYtarget1f; all other inputs/readsets/runtime110 unchanged. Original supported InstallProposal/GuardedTransaction captures inputpaths/readset, revalidates source and finals, rollback and actual installedcatalogue validation unchanged.",
+    "Root personally checks all old/current source, tools, receipts/logs/keepers/finals/audit/current9sourcebinding hashes BEFORE write. After zeroexit guardnull verify exactworldSHA1f, every other original stagedfile remains exact; runtime110 unchanged; onlyWorldsourcebinding moves8f\u21921f, preserve old audit as pretransition history.",
+    "No mirror/Quick/Extension/pin/source/runtime/history/export/liveR changes in this command. OldQuickaudit becomes stale after World transition; later freshQuickaudit/same-role finals precede guarded Quick transition and reviewed exactpin updates/newtools before strictExtensions proposal."
+  ],
+  "final_review_sha256": {
+    "native/world/final-factual-prospective-r1.json": "6d66b4dbdbc07b85df02f520fa751db306b2c6acd4bfa499981dfadab5af6670",
+    "native/world/final-quality-prospective-r1.json": "4530cbd326ec089b64c87a375274dd5053b1d59be09eb40276fd750399f75727"
+  },
+  "readset_path": "docs/reviews/v1-7-recognizable-content/source7-isolated-world-transition-readset-r2.json",
+  "readset_sha256": "7cb9262c96dae49111ad68ecda52282f18a3ff1e40665ebaecd07e2b3554b41e",
+  "preview_sha256": "4d940f045e0675b9acdf5e610ab6a6f397418a69ec37114ff018a5d2a3acd979"
+}

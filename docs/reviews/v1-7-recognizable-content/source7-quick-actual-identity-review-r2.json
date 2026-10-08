@@ -1,0 +1,46 @@
+{
+  "schema": "independent-source7-quick-actual-output-review-v2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T06:14:38.268702+00:00",
+  "decision": "ACCEPT_ACTUAL_TWO_NATIVE_QUICK_STEPS_ONLY_PRESERVE_ROOT_PIPELINE_FAILURE",
+  "source_admission_sha256": "d9e315a2e5a915f4d6fba68655fdf26703ab4267823835cf8fde5c01e4c2ede9",
+  "bindings": {
+    "source7-world-remaining-scope-proposal-r2.json": "9f817d2b7bf0dd375c613fb0d2b07f8e7bd86ee250bf8aa3abbafdcb7fc4e807",
+    "source7-world-remaining-readset-r2.json": "c3eaba65e82145a4060314d71f05f0ca73e212688b9ad992c33d4fce025f7394",
+    "methods/source7-root-runtime-list-verification-r2.py.txt": "77a2e5503cc93c20ed9a1119300e454d7e64869adc9bd6cf339777f6ab774dfc",
+    "methods/source7-root-quick-audit-postcheck-failed-r1.py.txt": "fc11bebe171432e8bc4f47155ae25e237efe8fdcfc47b44322a5baa19b7c2603",
+    "source7-quick-world-root-postcheck-failure-stop-r1.json": "fc1db13429afd60e54b0679467e7f243f031f8f8d1a67b06437d6be5249fa37d",
+    "source7-quick-world-native-admission-r1.json": "9a88f1fa7f0c2add3185964fa680647eb5f06db155ae10980f40218f7a24f9a9",
+    "source7-quick-world-prospective-r1-step-0-result.json": "e175e352e22e2f70287040ec903b72f4a76e32cbac6021202788958a50c7d9c4",
+    "source7-quick-world-prospective-r1-step-1-result.json": "9c57413c271b02474eb586dbfc65cf4ac078552f331611801c0576c6ffb08b18",
+    "source7-quick-world-prospective-r1-result.json": "f373554c437b9de680f211724408165bf28579a74510f4b62d65c1c0305cd233"
+  },
+  "Quick_proposal_sha256": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+  "Quick_audit_sha256": "a15b2f5801e2cbffa036e6c3160a93369506844297db8fe64cc53b8f66791f0c",
+  "actual_observations": {
+    "native_passed": true,
+    "boards_and_replays": 85,
+    "public_requests_asserted_by_producer": 460,
+    "all_replay_scores": 1000,
+    "safe_unique_runtime_rows": 110,
+    "current_source_binding_keys": 9,
+    "old_initial_current_pin_count": 1028
+  },
+  "findings": [
+    "Both native step receipts/logs match exact old9a88 commands/prefix/admission/baseline/deadline, exit0/guard null and complete recorded pre/post checks. All1028 initial original inputs remain current. Their resources passed independently of the later root checker failure.",
+    "Actual proposal candidate and both review descriptors match exact c93/e069/26d7 raw payloads. Actual audit kind/version/passed/core-preservation/candidate/catalogue bindings are correct. All85 replay IDs cover the proposal exactly, public seeds are in0..4999 and all hidden-answer/terminal-Get flags and1000 scores pass.",
+    "The460 request count and privacy/resume/solve assertions are established by retained producer code and complete replay evidence; the audit is not a persisted transcript of all460 response bodies. No claim of independently inspecting unarchived bodies is made.",
+    "All110 runtime rows are unique two-field path/SHA records, safe relative regular files resolving within exact isolated root, with actual SHA matches. All9 source bindings (eight fixtures plus rubric) match actual isolated bytes.",
+    "Original root postchecker failed at the dict assumption for runtime_sources. That is a checker schema assumption, not bad candidate/audit/fuzzy/runtime data. The original RuntimeHashes API emits a list.",
+    "Root STOP fc1 remains authoritative overall failure; old native runner READY2/pending null and cumulative2passed prefix remain immutable identity evidence and are never resumed. World commands/outputs remain unrun/absent."
+  ],
+  "qualification": "Actual supported Quick prospective native audit of isolated proposal with privately overlaid fresh sealed Source6 baseline, not qualified sealed Source7 export/current authority or installed audit.",
+  "limits": {
+    "root_old_campaign_success": false,
+    "native_Quick_two_step_evidence_accepted": true,
+    "same_role_final_or_installation_approved": false,
+    "World_or_assembled_approved": false,
+    "whole_source_worker_RSS": "unmeasured",
+    "review_operations": "Static hashes/data/source/AST only; no native replay/import/Go/copy/proposal/audit execution."
+  }
+}
