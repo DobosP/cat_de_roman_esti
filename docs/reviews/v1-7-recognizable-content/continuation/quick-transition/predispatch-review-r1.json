@@ -1,0 +1,73 @@
+{
+  "kind": "independent-native-predispatch-source-review",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "ACCEPT_EXACT_PREDISPATCH_ONLY",
+  "substantive_completed_utc": "2026-10-08T11:43:40.2486476+00:00",
+  "source_admission_sha256": "cba6df86d560ff440af4ec75c4277455d1f5154b5e8ef4c658337eb2389d0baf",
+  "source_cutoff_utc": "2026-10-08T11:44:29.786136+00:00",
+  "source_metadata_deadline_utc": "2026-10-08T11:47:29.786136+00:00",
+  "source_RSS": "unmeasured",
+  "spec_sha256": "3ddff07750891037bbff9608f7f6daeb03cfa3f09733bb96901b393e7fbc0408",
+  "admission_sha256": "60c0cb01d6d665df977272a2dc7b43c11b4d0015d404e6d69fed288bc4c9039d",
+  "template_sha256": "500affe9b96d1ccc0192b2c0dd5665cd169c473ec688428c403937d58616aa3d",
+  "method_review_sha256": "2c11246d93f400840f12cdc38c48b5ce40acf40a3bca24068023d676aad3a897",
+  "binder_review_sha256": "1dd4a140793b20bc3624549c352014717941eb39af89dd24324eca07c5528f03",
+  "held_launcher": {
+    "pid": 44920,
+    "parent_pid": 27748,
+    "creation_utc": "2026-10-08T11:41:10.0019120+00:00",
+    "executable": "pwsh.exe",
+    "command_scope": "-NoProfile -Command invokes exact owned quick-transition-launcher-r1.ps1",
+    "source_sha256": "8f4d089628360d136725d68201bf3992c980d5f21efda4745455211971e8f54b",
+    "personally_checked_utc": "2026-10-08T11:42:43.2628107+00:00"
+  },
+  "native_clock": {
+    "started_epoch": 1791459670.9052503,
+    "deadline_epoch": 1791460870.9052503,
+    "started_utc": "2026-10-08T11:41:10.905250+00:00",
+    "deadline_utc": "2026-10-08T12:01:10.905250+00:00",
+    "baseline": 880502217,
+    "duration_seconds": 1200,
+    "launch_reserve_seconds": 195,
+    "metadata_reserve_seconds": 180,
+    "renewed": false
+  },
+  "checks": {
+    "checked_utc": "2026-10-08T11:42:15.6812853+00:00",
+    "all_original_474_pins_retained": true,
+    "all_current_481_windows_pins_fresh_exact": true,
+    "duplicate_normalized_paths_absent": true,
+    "corresponding_481_linux_pins_exact": true,
+    "metadata_only_additions": 7,
+    "every_other_template_field_exact": true,
+    "one_supported_write_argv_unchanged": true,
+    "complete_regular_nonreparse_stage_namespace_and_hashes": 416,
+    "runtime_bindings": 110,
+    "source_bindings_before": 9,
+    "source_bindings_after": 9,
+    "only_source_binding_transition": "Quick old0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345 to reviewed26b7dc0e7a4db0cd665c2593d86e55b2d5edff98f478374e0a8f3917e320512a",
+    "old_target_and_pinned_predecessor_backup_exact": true,
+    "candidate_catalog_audit_and_actual_same_role_reviews_bound": true,
+    "operator_lock_absent": true,
+    "output_directory_absent": true,
+    "independent_dispatch_marker_absent": true,
+    "binder_launcher_linux_windows_sources_fresh_exact": true
+  },
+  "resources": {
+    "checked_utc": "2026-10-08T11:43:40.2486476+00:00",
+    "whole_R_S_bytes": 880786839,
+    "growth_from_native_baseline": 284622,
+    "disk_free_bytes": 25207848960,
+    "available_physical_bytes": 27324608512,
+    "source_RSS": "unmeasured",
+    "native_group_RSS_sampling": "begins at dispatch; no native RSS observation claimed by this review"
+  },
+  "findings": [],
+  "disposition": [
+    "Parent may create only the marker containing this exact frozen spec SHA and dispatch the already-held one supported single-target Quick --write through accepted LinuxR1 and WindowsR3 guards, within the original native clock.",
+    "Launcher source reads exclusive admission once, freezes its spec SHA, checks marker and current spec against it, and forwards that same external digest. Parent remains sole native owner; reviewer has not dispatched, executed or mutated stage.",
+    "All native limits remain unchanged: parent-inclusive sampled2GiB RSS, GOMAXPROCS2, wholeR+S1GiB growth,17GiB initial/16GiB remaining disk,16GiB memory,1200s immutable clock and reserve180/launch195.",
+    "Any native failure, uncertain process cleanup, target/lock state or final publication failure remains failed history, even if the native operator wrote the target; no rollback after forced termination is assumed.",
+    "Acceptance is prospective predispatch only. Original proposal/audit outer campaign remains FAILED; no proposal/audit replay, installed/release V1.7 qualification, landing or V1.8 readiness is inferred."
+  ]
+}

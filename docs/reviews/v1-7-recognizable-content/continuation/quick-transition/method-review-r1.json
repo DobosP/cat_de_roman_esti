@@ -1,0 +1,62 @@
+{
+  "kind": "quick-isolated-transition-method-source-review-v1",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "REQUEST_CHANGES",
+  "scope": "Source-only unexecuted one-target scratch Quick transition; no native replay, target mutation or V1.7 qualification.",
+  "admission": {
+    "path": "S/quick-transition-source-admission-r1.json",
+    "start_utc": "2026-10-08T11:07:29.932537+00:00",
+    "cutoff_utc": "2026-10-08T11:24:29.932537+00:00",
+    "deadline_utc": "2026-10-08T11:27:29.932537+00:00",
+    "source_RSS": "unmeasured"
+  },
+  "exact_sources": {
+    "linux_sha256": "0204568bb08dde29a439c2aab0e74a320e2c33c2968da6e660ecb858ae1bb7ad",
+    "windows_sha256": "06107189ec4ca745660401433c3c57a2e8848538724547ea635a3debbabc89a6",
+    "template_sha256": "17db5b84b3a5be428d6837fba124d3e78df8882aff4c6f1600a9a7aa18ff1739"
+  },
+  "component_verdicts": {
+    "linux": "ACCEPT_SOURCE_ONLY_UNEXECUTED",
+    "windows": "REQUEST_CHANGES",
+    "template": "REQUEST_CHANGES"
+  },
+  "checks": {
+    "protected470_fresh_exact": true,
+    "cross_platform_maps_exact": true,
+    "stage416_coverage": 416,
+    "only_target_excluded": true,
+    "predecessor_backup_exact": true,
+    "new_transition_output_exists": false,
+    "checked_utc": "2026-10-08T11:17:20.2768684Z"
+  },
+  "supported_path": "CLI main.go:138 selects InstallProposal on --write without audit replay. rail.go:616 captures full immutable readset before BuildProposal/ConfirmFinal, creates only the Quick target change, and invokes GuardedTransaction. rail.go:726 checks signed target SHA and ValidateQuickCatalog without strict contentbuild.Load. files.go:341 verifies readset under lock and performs deferred restoration only on ordinary returned errors.",
+  "accepted_contracts": "Exact genuine saved candidate/raw reviews/same-role finals, backup and before/after Quick hashes;470 immutable non-target maps cover415 other stage files with exact416 namespace. Existing Linux flag-only signal/known-Popen starttick/waitid WNOWAIT/once-cleanup preserved. Parent-inclusive2GiB RSS,Go2,wholeR+S1GiB,17/16GiB disk,16GiB memory,immutable1200s/reserve180/launch195 and bounded reserved publication retained.",
+  "findings": [
+    {
+      "id": "F1",
+      "source": "quick-transition-windows-r1.py",
+      "lines": [
+        94,
+        99,
+        132,
+        134,
+        142
+      ],
+      "severity": "blocking",
+      "issue": "No flag-only catchable-signal handling. KeyboardInterrupt during Popen creation/assignment can leave carrier=None and cleanup='no child launched' although the Linux writer was launched. Cancel is not proof of absence.",
+      "repair": "Flag-only SIGINT/SIGTERM with ordinary prelaunch/loop/pre-success checks; mark and publish cleanup unconfirmed before Popen. Constructor/ownership uncertainty must stay explicit."
+    },
+    {
+      "id": "F2",
+      "source": "quick-transition-method-template-r1.json",
+      "field": "failure_policy",
+      "severity": "blocking_for_truthful_scope",
+      "issue": "Unqualified deferred Go rollback claim does not apply to supervisor SIGTERM/SIGKILL; abrupt termination does not guarantee Go defer/lock removal.",
+      "repair": "Qualify ordinary returned-error rollback versus forced/outer failure. Preserve exact target/lock state, claim no automatic rollback after forced termination, and require independent before/after/lock review plus confirmed absence before another writer."
+    }
+  ],
+  "original_failed_campaign_preserved": true,
+  "target_mutated": false,
+  "native_executed": false,
+  "next": "Preserve R1. Exact append-only Windows/template R2 repair review stays under this original source clock. Fresh exact native spec/admission and independent predispatch acceptance remain necessary."
+}

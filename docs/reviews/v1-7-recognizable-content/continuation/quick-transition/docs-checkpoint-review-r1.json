@@ -1,0 +1,14 @@
+{
+  "kind": "docs-checkpoint-independent-review-r1",
+  "publisher": "/root",
+  "reviewer": "/root/continuation_audit",
+  "source": "Actual reviewer message; root persisted after source freeze",
+  "frozen_utc": "2026-10-08T12:06:05.592+00:00",
+  "decision": "REQUEST_CHANGES",
+  "hashes": {
+    "checkpoint-r3.json": "2fccca537e2018b4c533e4a11f4d290f156ba70635602bd5efdf8412c4ff3496",
+    "STATUS.md": "e1afd6f81041c1b54f31061e77c22efcf529bb577a266d7742a82e45d463c308",
+    "README.md": "c861d7b77540256dde3e85bd6f99e0bb174e8b5d6c9319392344436a2fa834f3"
+  },
+  "finding": "Legacy STATUS pending clause still says Quick/Extensions transitions despite accepted isolated Quick. Replace it with Extensions transition/reviewed derived+Quick pin/tool updates to prevent replay. Checkpoint, README and STATUS lead otherwise accurate. No native re-review."
+}

@@ -1,0 +1,54 @@
+{
+  "kind": "quick-isolated-transition-admission-binder-source-review-v1",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "REQUEST_CHANGES",
+  "scope": "Independent source-only review of the unexecuted metadata-only admission binder. No binder/native execution, target mutation, new final verdict or scheduling.",
+  "admission": {
+    "path": "S/quick-transition-admission-source-admission-r1.json",
+    "start_utc": "2026-10-08T11:27:29.786136+00:00",
+    "cutoff_utc": "2026-10-08T11:44:29.786136+00:00",
+    "metadata_deadline_utc": "2026-10-08T11:47:29.786136+00:00",
+    "source_group_RSS": "unmeasured"
+  },
+  "exact_bindings": {
+    "binder_path": "S/probe/quick-transition-admit-r1.py",
+    "binder_sha256": "0a3a3e7f838b9304b0c1c6f79009cc2214bf7304fdf43b7007ece193162f2920",
+    "accepted_template_sha256": "500affe9b96d1ccc0192b2c0dd5665cd169c473ec688428c403937d58616aa3d",
+    "accepted_method_review_sha256": "2c11246d93f400840f12cdc38c48b5ce40acf40a3bca24068023d676aad3a897"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "blocking",
+      "lines": [
+        5,
+        6,
+        13,
+        15
+      ],
+      "issue": "The binder hashes one template read but parses a second; the verified method file is then freshly rehashed through extras/glob. There is no single byte snapshot binding the accepted template hash to parsed fields, nor guaranteed reuse of the externally verified method digest. An existing pin must not silently be replaced by a newer digest.",
+      "required_change": "Read/hash/parse the template from one retained byte snapshot; capture the method once against the external expected SHA and use that verified digest when constructing metadata pins. For any metadata path already pinned, preserve its original exact digest and refuse drift instead of rebinding it."
+    },
+    {
+      "id": "F2",
+      "severity": "blocking",
+      "lines": [
+        32,
+        33
+      ],
+      "issue": "exists()+write_bytes opens with overwrite semantics; the admission-receipt collision is checked only after writing the spec. This does not guarantee fresh immutable publication and can create a spec before discovering an occupied receipt path.",
+      "required_change": "Preflight both publication paths before writing either, then create each exclusively with xb/CreateNew. Never replace an existing or failed partial spec/receipt. Retain any new partial on failure with no child launch or dispatch marker."
+    }
+  ],
+  "accepted_source_observations": [
+    "No child-spawn/native invocation functions exist in the34-line binder.",
+    "Accepted template hash fixes the single supported --write argv, target0c79→26b7, stage416 namespace,474 immutable base pins, actual raw/final roles and native caps.",
+    "Fresh owned R+S traversal fails closed on reparse/nonregular/enumeration/stat errors.17GiB disk and16GiB available physical memory admission floors are read before creating the native epoch.",
+    "Native timing uses time.time()/epoch and timezone-aware UTC metadata; deadline is started+1200. It does not rewrite any earlier failed native clock.",
+    "Later exact final spec/PID/current namespace/readset/external SHA review remains mandatory before dispatch; this binder alone cannot authorize a writer."
+  ],
+  "prior_metadata_timing": "Previous method judgment froze11:22:33UTC; resources11:24:30 and publication11:24:31 were metadata-only. Preserve the incorrect provisional naive DateTime comparison as history. Use DateTimeOffset/UTC-aware comparisons in this new review.",
+  "original_failed_native_campaign_preserved": true,
+  "binder_executed": false,
+  "next": "Preserve unexecuted R1 and review a narrow append-only repair under this same current source admission; no native admission/spec creation before binder acceptance."
+}

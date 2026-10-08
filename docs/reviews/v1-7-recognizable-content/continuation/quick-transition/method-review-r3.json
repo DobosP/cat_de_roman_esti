@@ -1,0 +1,74 @@
+{
+  "kind": "quick-isolated-transition-method-source-review-v1",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "ACCEPT_SOURCE_ONLY_UNEXECUTED",
+  "scope": "Only this exact supported single-target scratch Quick0c79→26b7 transaction method. No native command/spec dispatch, replay, target mutation, installed Source7/World/V1.7/release acceptance.",
+  "valid_until": "Reviewed guards/template/protected inputs, current exact raw/final reviewer outputs or human steering changes.",
+  "admission": {
+    "path": "S/quick-transition-source-admission-r1.json",
+    "start_utc": "2026-10-08T14:07:29.932537+03:00",
+    "substantive_cutoff_utc": "2026-10-08T14:24:29.932537+03:00",
+    "metadata_deadline_utc": "2026-10-08T14:27:29.932537+03:00",
+    "whole_R_S_baseline_bytes": 879219003,
+    "source_group_RSS": "unmeasured"
+  },
+  "substantive_source_checks_completed_utc": "2026-10-08T11:22:33.5149791Z",
+  "sources": {
+    "linux": {
+      "path": "S/probe/quick-transition-linux-r1.py",
+      "sha256": "0204568bb08dde29a439c2aab0e74a320e2c33c2968da6e660ecb858ae1bb7ad"
+    },
+    "windows": {
+      "path": "S/probe/quick-transition-windows-r3.py",
+      "sha256": "e78df5971d0b05eb7a15250a25a1a97ba23e6beb10301fb6085f1afbe29c63f6"
+    },
+    "template": {
+      "path": "S/probe/quick-transition-method-template-r3.json",
+      "sha256": "500affe9b96d1ccc0192b2c0dd5665cd169c473ec688428c403937d58616aa3d"
+    }
+  },
+  "personally_verified": {
+    "protected474_fresh_exact": true,
+    "cross_platform_maps_exact": true,
+    "stage416_coverage": 416,
+    "only_target_excluded": true,
+    "predecessor_backup_exact": true,
+    "new_transition_output_exists": false,
+    "checked_utc": "2026-10-08T11:22:33.5149791Z"
+  },
+  "repair_lineage": {
+    "r1_rejection_sha256": "4501aa1b6a126170f3264be19f7f8ccd5313c4055a7fd98cacf575a35bac9aa4",
+    "r2_windows_sha256": "a14bdd24042d706869a9d26a50063bb5645025755cfe6f9dfa95db98056b1824",
+    "r2_template_sha256": "ece6428fb982e963cc72c1b11c363d6aea21586c7598ec8d47d3355202a99a4d",
+    "r1_r2_preserved_unexecuted": true,
+    "r2_remaining_gap": "A signal during resources fresh count could reach PASS without a post-count signal check. R3 adds that exact check and an explicit immediate pre-PASS check.",
+    "r3_delta": "Only two stopping assertions relative to WindowsR2.472→474 maps add preserved templateR2 and current driverR3; old pins unchanged."
+  },
+  "accepted_contracts": [
+    "Exactly one native CLI quick --write argv uses saved accepted candidate/proposal/audit, both genuine raw reviews and their same-role finals, plus expected new catalogue SHA. It does not select --audit-catalog or replay proposal/audit.",
+    "CLI main.go:138 calls InstallProposal. rail.go:616 validates Source7, captures full inputReadPaths before BuildProposal/ConfirmFinal, signs current exact audit/runtime/source/reviewer bindings and writes only ArtifactPath(root,quick).",
+    "GuardedTransaction files.go:341 takes exclusive .cat-content-ops.lock, rechecks complete captured byte/presence/mode readset, atomically writes, checks unchanged inputs and target gate. Ordinary Go errors execute deferred restoration/byte verification. Forced TERM/KILL does not guarantee defers; current target/lock/namespace must be preserved and independently reviewed before any subsequent writer.",
+    "All474 immutable non-target pins and cross-platform maps are fresh/exact; all415 other stage files covered, complete416-stage namespace, exact old Quick backup, only explicit target hash changes old0c79→new26b7. Namespace/lock absence and exact new target SHA are checked after completion.",
+    "Linux flag-only TERM/INT, known Popen/new group/initial starttick/waitidWNOWAIT and one-shot cleanup unchanged. WindowsR3 installs flag-only SIGINT/SIGTERM before spec reads, durably records unconfirmed launch before Popen, checks stopping through ordinary guards/loop/after-count/immediate pre-PASS and retains unconfirmed cleanup after any ownership uncertainty.",
+    "Single external spec SHA read/parse plus repeated exact pins; immutable1200 seconds/wall+monotonic deadline,195-second launch/180-second reserve; Go2, sampled parent-inclusive2GiB RSS, wholeR+S1GiB growth,17/16GiB disk and16GiB memory; bounded64KiB images/135168-byte publication reservation retained.",
+    "validateInstalled quick rail.go:726 checks signed exact SHA/ValidateQuickCatalog against staged graph and derived catalogue; it does not require the later reviewedPin/source tool updates or invoke strict contentbuild.Load. It certifies only this isolated target."
+  ],
+  "final_predispatch_requirements": [
+    "Fresh native admission with actual source/tool hashes, complete current stage/pin/backup/lock inventory, no owned native writer and fresh fullR+S/disk/memory metrics; immutable new native started_epoch/deadline_epoch exactly1200 apart, full_R_S_baseline and actual host_launcher_pid.",
+    "Final spec may add only those admission/timing/resource/PID values and exact accepted-review/template bindings; all474 pins,416 namespace, single argv/targets/current actual raw+final identities,110 runtime and before/after9-source maps stay fixed. Any additional semantic/source/argv change requires another source review.",
+    "Independently validate exact final spec before dispatch; pass its externally supplied SHA to both readers. This source receipt does not admit or launch a native process.",
+    "After success, this predecessor-bound prospective audit is historical relative to the changed Quick source binding. Later installed/adoption gates must use their required fresh current evidence."
+  ],
+  "original_outer_campaign": "FAILED and immutable; no clock reset or retrospective PASS",
+  "target_mutated": false,
+  "native_executed": false,
+  "findings": [],
+  "source_resources": {
+    "checked_utc": "2026-10-08T11:24:30.9606756Z",
+    "whole_R_S_bytes": 880478990,
+    "growth_from_source_admission_bytes": 1259987,
+    "disk_free_bytes": 25211060224,
+    "available_memory_bytes": 28087508992,
+    "source_group_RSS": "unmeasured"
+  }
+}

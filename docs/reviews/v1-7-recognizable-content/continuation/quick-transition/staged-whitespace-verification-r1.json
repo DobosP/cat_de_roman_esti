@@ -1,0 +1,38 @@
+{
+  "kind": "staged-whitespace-verification-v1",
+  "publisher": "/root",
+  "utc": "2026-10-08T12:11:23.167036+00:00",
+  "original_default_staged_check_exit": 2,
+  "original_default_failure": "New exact Windows-authored JSON review receipts contain CRLF, reported CR as trailing whitespace. No original byte was changed. The preceding working-tree diff check excluded untracked files and is not evidence of staged default success.",
+  "corrected_check_command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --cached --check",
+  "corrected_check_exit": 0,
+  "policy": "Recognize CRLF end-of-line only; preserve all original receipt hashes; continue checking actual trailing blanks/blank EOF/space-before-tab. This changes no repository setting or protected bytes.",
+  "exact_crlf_files": [
+    {
+      "path": "docs/reviews/v1-7-recognizable-content/continuation/quick-transition/actual-identity-review-r1.json",
+      "sha256": "0c83ed21befe53600c61b0c70250eecdf04d2ae9130aab5b54f800a060de6d09",
+      "crlf_lines": 101,
+      "bytes": 6115
+    },
+    {
+      "path": "docs/reviews/v1-7-recognizable-content/continuation/quick-transition/binder-review-r2.json",
+      "sha256": "1dd4a140793b20bc3624549c352014717941eb39af89dd24324eca07c5528f03",
+      "crlf_lines": 58,
+      "bytes": 3949
+    },
+    {
+      "path": "docs/reviews/v1-7-recognizable-content/continuation/quick-transition/docs-checkpoint-review-r2.json",
+      "sha256": "957c180848b926bdfddde7322ea883ad880a0403102d968a96f20272880974cb",
+      "crlf_lines": 38,
+      "bytes": 2506
+    },
+    {
+      "path": "docs/reviews/v1-7-recognizable-content/continuation/quick-transition/predispatch-review-r1.json",
+      "sha256": "2908572c2f0b5bc0bf56465e92a141a9e72583bb1e97d3ec1a85d91c618ffe1a",
+      "crlf_lines": 72,
+      "bytes": 4365
+    }
+  ],
+  "source_rss": "unmeasured",
+  "V1_7_qualified": false
+}
