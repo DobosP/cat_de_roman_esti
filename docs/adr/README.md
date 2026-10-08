@@ -121,3 +121,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0181](0181-resume-linux-v1-6-finish.md) — resume the existing Linux V1.6 qualification and human-requested iteration loop.
 
 - [0182](0182-v1-6-reviewed-singular-inputs.md) — two qualified singular synonym inputs with native Source6/current authority and preserved history.
+
+- [0183](0183-v1-7-single-salary-input-admission.md) — admit the exact singular salary input and one-word batch disposition to supported qualification.
