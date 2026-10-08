@@ -1,4 +1,6 @@
 # V1.7 — recognizable content and specific play
+Current tool-build preparation pickup: `continuation/checkpoint-r5.json`. The preserved Go1.27.1 SDK and11 locked modules are source-identity verified;277MB of warm caches were copied into owned scratch. No Go build ran. Formal method acceptance is held for complete immutable SDK namespace closure and finalized template/binder/launcher bindings. Existing caches, source drafts and all concrete review findings are preserved; the next run repairs that specific source condition before the first native build.
+
 Current source-only pin checkpoint: `continuation/checkpoint-r4.json`. Both actual reviewers accepted the exact derived/Quick pin proposal; the guarded one-file staged Go update completed at12:25:40UTC (209f99→ff37e9), preserving all415 other stage files. Live R/main Go/Python/fixtures remain Source6. Both Python after-files are prospective until a consistent supported Source7 install. Native tool builds and affected final audits are still required; a215 is predecessor-bound history. Frozen Source6 test expectations stay intact; reviewed historical routing and current Source7 coverage remain pending. No native lane, V1.7 installation or landing ran in this source-only phase.
 
 

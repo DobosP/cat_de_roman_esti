@@ -1,0 +1,76 @@
+{
+  "kind": "toolbuild-source-archive-manifest-v1",
+  "publisher": "/root",
+  "archive_sha256": "5177e3a664b9f5afe0812bfa986c1cab5f8b95a5cd2e00d2f8e988d8b6a402f6",
+  "archive": "toolbuild-source-raw-r1.tar.gz",
+  "regular_members": 13,
+  "raw_bytes": 13254307,
+  "members": [
+    {
+      "member": "toolbuild-method-source-admission-r1.json",
+      "bytes": 1209,
+      "sha256": "df985c0d823f399f37e95ec552b41a86037958384385bb7e24c9236328680042"
+    },
+    {
+      "member": "probe/toolbuild-admit-r1.py",
+      "bytes": 5064,
+      "sha256": "2acf84d8fd62f5c5f413a8e10345e1ea558cd14fae8faf29b0f8906f395db545"
+    },
+    {
+      "member": "probe/toolbuild-linux-r1.py",
+      "bytes": 7669,
+      "sha256": "5e09283e90569de66af4cd9da836690eddac63ec72ef6d6e49220b6fba4ef492"
+    },
+    {
+      "member": "probe/toolbuild-linux-r2.py",
+      "bytes": 7786,
+      "sha256": "a46d2cb1810e3f9e54bf9c17ea6817da06afd54a492f656f2afd64491b61e3ac"
+    },
+    {
+      "member": "probe/toolbuild-linux-r3.py",
+      "bytes": 8149,
+      "sha256": "2fbeac372000630639f79e910745308c314671ef5a9c93e1c08f1a8607ad1532"
+    },
+    {
+      "member": "probe/toolbuild-linux-r4.py",
+      "bytes": 8349,
+      "sha256": "5f708e2683086fbe6e4b77152ad16c38e37da66a9c3fd682879b8673d3cbb0ad"
+    },
+    {
+      "member": "probe/toolbuild-windows-r1.py",
+      "bytes": 11582,
+      "sha256": "d0a024bc25accac52d5c7c6b8429c7c0783e43fa9a57efcc7d1bbf5ae6d4ee55"
+    },
+    {
+      "member": "probe/toolbuild-windows-r2.py",
+      "bytes": 11939,
+      "sha256": "cf5acd28f448737fbc00e0cdb2a158c1e4e6803d24023f4c763ff0f9d3a572df"
+    },
+    {
+      "member": "probe/toolbuild-method-template-r1.json",
+      "bytes": 7221193,
+      "sha256": "34f7392e22567d5875a88162ae9a2f61ad86a3ba223cc068045293ec932cb9b8"
+    },
+    {
+      "member": "toolbuild-r1/owned-cache-copy-receipt-r1.json",
+      "bytes": 2900618,
+      "sha256": "24bbe840fff206d00fceafe128e75502085bd3ef59abff3e687bc939d8e95b9c"
+    },
+    {
+      "member": "toolbuild-r1/SDK-cache-readset-r1.json",
+      "bytes": 3051868,
+      "sha256": "1151005f0db69bf5f21003cdee7baa26c78b2badac03e6496c74bf4167455a27"
+    },
+    {
+      "member": "toolbuild-r1/SDK-cache-source-factual-review-r1.json",
+      "bytes": 18866,
+      "sha256": "a2c3c2163ae984aad35db88b10433f1ca2c8e93f9a8c6ad6012085b3d61f30f3"
+    },
+    {
+      "member": "toolbuild-r1/telemetry/mode",
+      "bytes": 15,
+      "sha256": "eca4dc793d90c25f03f26aebb775a88aea12744b5a74190392aa6371e3cb77f8"
+    }
+  ],
+  "scope": "Exact source-only method drafts/SDKcache provenance/owned-copy receipt/template. Cache payload276940688B remains ownedS and exactreadset-bound, not duplicated here. No Go/native build executed."
+}

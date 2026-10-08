@@ -1,0 +1,28 @@
+{
+  "kind": "toolbuild-preliminary-quality-review-message-record-v1",
+  "publisher": "/root",
+  "reviewer": "/root/continuation_audit",
+  "source": "Genuine peer messages persisted by root",
+  "source_freeze_utc": "2026-10-08T12:50:06+00:00",
+  "decision": "FORMAL_ACCEPTANCE_WITHHELD_NO_NATIVE_DISPATCH",
+  "findings": [
+    {
+      "draft": "LinuxR2 a46d2cb",
+      "condition": "Inherited Go telemetry child/helper/private-proxy inputs could escape owned/offline roots",
+      "repair": "LinuxR3 2fbeac closes inherited CHILD/cache helper/proxy inputs and binds owned off-mode; independently SDK-source confirmed"
+    },
+    {
+      "draft": "LinuxR3 2fbeac",
+      "condition": "Cancellation not checked immediately before Popen after long protected hashing",
+      "repair": "LinuxR4 5f708e2683086fbe6e4b77152ad16c38e37da66a9c3fd682879b8673d3cbb0ad entry/prelaunch/immediatePopen checks independently confirmed"
+    },
+    {
+      "condition": "Known SDK files hashed but full immutable external SDK membership not guarded; new Go source file could change compilation",
+      "repair": "NOT_APPLIED. Next exact substantive action add failclosed complete SDK namespace pre/post closure using full15639manifest. Also guard owned module source membership where appropriate; mutable compiledGOCACHE remains accounted."
+    }
+  ],
+  "remaining": "Finalize repaired guards/template/binder/heldlauncher/material-provenance packet in fresh source admission; independent formal acceptance, then separately refreshed exact native admission/PID/readset/resources/dispatch marker before any Go build. Do not dispatch draftR4/templateR1 unchanged.",
+  "SDK_mode_off": "Actual SDK counter/start code recognizes off 2026-10-08 and returns before counters/daemon; GOCACHEPROG removed, proxy/private bypass closed.",
+  "native_executed": false,
+  "source_rss": "unmeasured"
+}
