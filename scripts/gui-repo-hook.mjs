@@ -1,8 +1,9 @@
 import * as fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { pathToFileURL } from "node:url";
+import { resolveHookRuntime } from "./gui-hook-runtime.mjs";
 import { createHash } from "node:crypto";
+import { validGenRequest, runOriginalStyleOperation } from "./gui-style-operation.mjs";
 
 const target = process.argv[2], invocation = process.argv[3];
 const root = process.cwd();
@@ -10,7 +11,7 @@ const configured = spawnSync("task", ["--silent", "repo:kit-config"], { encoding
 if (configured.status !== 0) throw new Error("Actual repo:kit-config failed");
 const config = JSON.parse(configured.stdout);
 const kitRoot = path.join(root, config.npm_dir);
-const { createHook } = await import(pathToFileURL(path.join(kitRoot, "scripts/run-task.mjs")).href);
+const { createHook } = await import(resolveHookRuntime(root, target, config).url);
 const hook = createHook(target, invocation);
 const frontend = path.join(root, "frontend");
 const directory = `.gate/${target.replaceAll(":", "-")}`;
@@ -69,11 +70,16 @@ switch (target) {
     break;
   case "gen": {
     const request = JSON.parse(fs.readFileSync(path.join(root, "scripts/gui-gen-request.json")));
-    hook.check("cat-gen-request", () => hook.assert("Explicit committed original qualification request", () =>
-      request.schema === 1 && ["qualify-original-react", "capture-original-baseline"].includes(request.operation) && request.fixtures === "frontend/e2e/original/runtime.spec.mjs" && Object.keys(request).length === 3));
+    hook.check("cat-gen-request", () => hook.assert("Explicit committed original qualification or style-plan request", () => validGenRequest(request)));
+    if (hook.checks.some((item) => item.status !== "pass")) break;
+    if (request.operation === "plan-original-styles") {
+      runOriginalStyleOperation(hook, config, request);
+      break;
+    }
     // Plain gen is the E1 original route; it deliberately runs actual prerequisites
     // itself, as canonical setup has no nested gen-context routing in core-v1.1.
     setup("cat-original");
+    command("cat-original-api-consumer-contract", "node", ["--test", "tests/gui-api-consumer-contract.test.mjs"], frontend);
     frontendBuild("cat-original");
     binaries("cat-original");
     hook.check("cat-original-ui-runtime", () => {
@@ -103,6 +109,20 @@ switch (target) {
     if (hook.checks.every((item) => item.status === "pass")) command("cat-browser-inventory", "node", ["scripts/gui-full-browser.mjs", "inventory"], root, {
       CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan"),
     });
+    if (request.operation === "qualify-original-react" && hook.checks.every((item) => item.status === "pass")) {
+      command("cat-original-complete-browser", "node", ["scripts/gui-full-browser.mjs", "original"], root, {
+        CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan"),
+      });
+      const artifacts = `${directory}/original/complete-browser`;
+      function retain(relative) {
+        for (const entry of fs.readdirSync(path.join(root, relative), { withFileTypes: true })) {
+          const file = `${relative}/${entry.name}`;
+          if (entry.isDirectory()) retain(file);
+          else { if (!entry.isFile()) throw new Error("Nonregular original browser artifact refused"); hook.artifact(file); }
+        }
+      }
+      if (fs.existsSync(path.join(root, artifacts))) retain(artifacts);
+    }
     if (request.operation === "capture-original-baseline" && hook.checks.every((item) => item.status === "pass")) {
       command("cat-quality-npm-ci", "npm", ["ci", "--no-audit", "--no-fund"], path.join(root, "tools/gui-baseline-quality"));
       command("cat-original-baseline", "node", ["scripts/gui-baseline.mjs", "original-capture"], root, {

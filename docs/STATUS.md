@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-07 — GUI S1 STOPPED for Windows continuation: original16/78, exact30-file freeze and9-route/five-run baseline captured through clean pinned gen. [Proof](reviews/gui-original-react/README.md). M0/M1 unqualified:114086gz>40960; no device/UI activation; four local style drafts unverified.
+Last verified: 2026-10-08 — GUI original React GEN16/78/build PASS; complete894=883PASS/11FAIL,0skip/retry (original654PASS). Reviewed Perechi focus/test repairs integrated, NOTRUN. Guarded202-site CSP proposal preserved UNAPPLIED; two-owner Motion regression PASS. [Proof](reviews/gui-original-prerequisites/README.md). Original114111gz>40960; M0/M1/device/UI adoption unqualified.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 

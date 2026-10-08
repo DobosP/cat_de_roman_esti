@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "mode": "test-source-only-not-executed",
+  "passing": [
+    { "name": "finite signed literals include dimensional zero", "body": "export function Fixture() { return <div style={{ gap: 0, marginTop: -2, width: +12, opacity: 0.5, columnCount: 2 }} />; }", "expected": ["gap: \"0px\"", "marginTop: \"-2px\"", "width: \"12px\"", "opacity: 0.5", "columnCount: 2"] },
+    { "name": "dynamic signed length retains runtime helper validation", "body": "export function Fixture({ length }: { length: number }) { return <div style={{ marginTop: -length }} />; }", "expected": ["cssLength((-length))"] },
+    { "name": "mixed admitted values remain an explicit length expression", "body": "export function Fixture({ width }: { width: string | number | undefined }) { return <div style={{ width: width }} />; }", "expected": ["cssLength((width))"] },
+    { "name": "alias CSSProperties cast is removed after contextual checks", "body": "import type { CSSProperties as Style } from 'react'; export function Fixture() { return <div style={{ width: 12 } as Style} />; }", "expected": ["width: \"12px\""], "absent": ["as Style", "CSSProperties"] },
+    { "name": "string undefined and custom declarations preserve their values", "body": "export function Fixture() { return <div style={{ color: 'red', width: undefined, '--cue-count': 2 }} />; }", "expected": ["color: 'red'", "width: undefined", "'--cue-count': 2"] },
+    { "name": "retained CSSProperties alias remains imported", "body": "import type { CSSProperties as Style } from 'react'; export const retained: Style = { width: '1px' }; export function Fixture() { return <div style={{ width: 12 } as Style} />; }", "expected": ["CSSProperties as Style", "retained: Style"], "absent": ["as Style}"] }
+  ],
+  "refusing": [
+    { "name": "primitive JSX style", "body": "export function Fixture() { return <div style={1} />; }" },
+    { "name": "string JSX style initializer", "body": "export function Fixture() { return <div style='width:1px' />; }" },
+    { "name": "missing JSX expression", "body": "export function Fixture() { return <div style />; }" },
+    { "name": "empty JSX expression", "body": "export function Fixture() { return <div style={} />; }" },
+    { "name": "uncertain any value", "body": "export function Fixture({ value }: { value: any }) { return <div style={{ width: value }} />; }" },
+    { "name": "uncertain unknown value", "body": "export function Fixture({ value }: { value: unknown }) { return <div style={{ width: value }} />; }" },
+    { "name": "never value", "body": "export function Fixture({ value }: { value: never }) { return <div style={{ width: value }} />; }" },
+    { "name": "generic unresolved value", "body": "export function Fixture<T>({ value }: { value: T }) { return <div style={{ width: value }} />; }" },
+    { "name": "boolean value", "body": "export function Fixture() { return <div style={{ width: true }} />; }" },
+    { "name": "object value", "body": "export function Fixture() { return <div style={{ width: {} }} />; }" },
+    { "name": "nonliteral CSS bag", "body": "export function Fixture({ style }: { style: { width: number } }) { return <div style={style} />; }" },
+    { "name": "unknown cast", "body": "export function Fixture() { return <div style={{ width: 1 } as any} />; }" },
+    { "name": "object spread", "body": "export function Fixture() { const rest = { width: 1 }; return <div style={{ ...rest }} />; }" },
+    { "name": "computed property", "body": "export function Fixture() { return <div style={{ ['width']: 1 }} />; }" },
+    { "name": "getter property", "body": "export function Fixture() { return <div style={{ get width() { return 1; } }} />; }" },
+    { "name": "duplicate property", "body": "export function Fixture() { return <div style={{ width: 1, width: 2 }} />; }" },
+    { "name": "unsupported CSS property", "body": "export function Fixture() { return <div style={{ inventedProperty: 1 }} />; }" },
+    { "name": "opaque JSX spread", "body": "export function Fixture() { const props = { id: 'cue' }; return <div {...props} style={{ width: 1 }} />; }" },
+    { "name": "duplicate class attribute", "body": "export function Fixture() { return <div className='a' className='b' style={{ width: 1 }} />; }" },
+    { "name": "pre-existing css attribute", "body": "export function Fixture() { return <div css={{}} style={{ width: 1 }} />; }" },
+    { "name": "unsupported styled native tag", "body": "export function Fixture() { return <aside style={{ width: 1 }} />; }" },
+    { "name": "shadowed motion binding", "body": "export function Fixture() { const m = { button: (props: FixtureProps) => <button {...props} /> }; return <m.button style={{ width: 1 }} />; }" },
+    { "name": "generated import binding collision", "body": "export const Csp = 1; export function Fixture() { return <div style={{ width: 1 }} />; }" },
+    { "name": "source directive requires explicit placement", "body": "'use client'; export function Fixture() { return <div style={{ width: 1 }} />; }" },
+    { "name": "unknown identifier gives program diagnostics", "body": "export function Fixture() { return <div style={{ width: missing }} />; }" },
+    { "name": "syntax diagnostic", "body": "export function Fixture() { return <div style={{ width: }} />; }" },
+    { "name": "candidate unused Motion import is not suppressed", "body": "import { m } from 'framer-motion'; export function Fixture() { return <m.div style={{ width: 1 }} />; }", "candidate_diagnostics": true },
+    { "name": "partial file staging cannot publish valid site beside invalid site", "body": "export function Fixture({ value }: { value: any }) { return <><div style={{ width: 1 }} /><div style={{ width: value }} /></>; }" },
+    { "name": "nonfinite literal", "body": "export function Fixture() { return <div style={{ width: 1e999 }} />; }" },
+    { "name": "nonfinite unitless literal", "body": "export function Fixture() { return <div style={{ opacity: 1e999 }} />; }" },
+    { "name": "unreviewed Motion opacity owner", "body": "import { m } from 'framer-motion'; export function Fixture() { return <><m.div /><m.button style={{ opacity: 0.5 }} /></>; }" }
+  ],
+  "owner_mutations": [
+    { "name": "Alchimie changed predicate", "file": "frontend/src/screens/Alchimie.tsx", "find": "item.depleted ? 0.5 : 1", "replace": "!item.depleted ? 0.5 : 1" },
+    { "name": "Alchimie changed opacity", "file": "frontend/src/screens/Alchimie.tsx", "find": "item.depleted ? 0.5 : 1", "replace": "item.depleted ? 0.4 : 1" },
+    { "name": "Conexiuni changed predicate", "file": "frontend/src/screens/Conexiuni.tsx", "find": "actionsLocked && !isSel ? 0.55 : 1", "replace": "actionsLocked && isSel ? 0.55 : 1" },
+    { "name": "Conexiuni changed opacity", "file": "frontend/src/screens/Conexiuni.tsx", "find": "actionsLocked && !isSel ? 0.55 : 1", "replace": "actionsLocked && !isSel ? 0.5 : 1" }
+  ]
+}

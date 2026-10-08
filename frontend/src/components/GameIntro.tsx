@@ -6,7 +6,7 @@
 // global key listener (which used to collide across screens).
 
 import type { ReactNode } from "react";
-import { m } from "framer-motion";
+import { CspMotion } from "./CspStyle";
 import { Badge, Button } from "@roedu/ui";
 import { useDailyIntent } from "../hooks/useDailyIntent";
 import type { ScoreEntry } from "../scores";
@@ -73,14 +73,14 @@ export function GameIntro({
     action?.();
   };
   return (
-    <m.div
+    <CspMotion.div
       className="card game-intro"
       inert={starting}
       aria-busy={starting}
       initial={{ opacity: 0, y: 18, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      style={{
+      css={{
         boxShadow: glow ? `0 0 80px -30px ${glow}, var(--shadow-card)` : undefined,
       }}
     >
@@ -143,6 +143,6 @@ export function GameIntro({
           Recordul tău: <strong style={{ color: accent }}>{best.score}</strong> · {displayDetail(best.detail)}
         </p>
       )}
-    </m.div>
+    </CspMotion.div>
   );
 }

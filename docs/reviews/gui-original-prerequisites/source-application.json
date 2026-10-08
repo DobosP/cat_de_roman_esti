@@ -1,0 +1,257 @@
+{
+  "recorded_utc": "2026-10-07T20:07:37.342995+00:00",
+  "worktree": "/home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-prerequisites-linux",
+  "branch": "fix/gui-cat-prerequisites-linux",
+  "head": "e092478aa3737f7956c9730caa809a7932bfdbb9",
+  "seal_sha256": "c590082298d71f2788e4dee5cbd78c746b0251d67466d93b57b6dc8b750cab6a",
+  "parent_review_sha256": "a6702e2e32bf1d5469b04507d0592bf44e6bd6f4560dd3b64e3f80d5fe7fa201",
+  "source_applied": true,
+  "paths": [
+    {
+      "path": "frontend/e2e/perechi-loss-progress.spec.mjs",
+      "operation": "add",
+      "sha256": "ba88b7c7c836a9ec389ae40ecd4703842c32685fe12b1536fc93f884633bcab8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/src/components/CspElements.tsx",
+      "operation": "add",
+      "sha256": "b82ae97d019fcd7c0b77680ed40dec45559aa7faf847b6d1df47f0ebfb4d8810",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/src/components/CspStyle.ts",
+      "operation": "add",
+      "sha256": "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/src/components/CspStyle.tsx",
+      "operation": "delete",
+      "sha256": null,
+      "git_mode": null
+    },
+    {
+      "path": "frontend/src/components/cssUnits.ts",
+      "operation": "modify",
+      "sha256": "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/tests/css-units.test.mjs",
+      "operation": "add",
+      "sha256": "bdbeb4403573b1a02ae525561a2a66b2040677d9372cb6a0f20016ff27f07a41",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/tests/fixtures/gui-hook-runtime-bootstrap.json",
+      "operation": "add",
+      "sha256": "2da3cd5cfde99d5f9eed8a180677396681fc2e4a2541835d9812c7c64ba83ccf",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/tests/fixtures/gui-style-plan.json",
+      "operation": "add",
+      "sha256": "24bdcb858dcc74878e99aca0de338bf335cf3b1b3c14e8b68820fca1be9ca8b9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/tests/gui-hook-runtime.test.mjs",
+      "operation": "add",
+      "sha256": "09f275a5b2ae4119fab8d610ba6d7aff771e0ed409a735fe646c2a97057d3377",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/tests/gui-style-operation.test.mjs",
+      "operation": "add",
+      "sha256": "7a006e15b1ac835bbf79ded503c72669c1711551bc56af0ff0ca0d1d99dd31f6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/tests/gui-style-plan.test.mjs",
+      "operation": "add",
+      "sha256": "8aa91b12e219253d0f983620496a24356abcecaaef3d584b079cc5f1e82b7cb9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/gui-hook-runtime.mjs",
+      "operation": "add",
+      "sha256": "bda8ad8e6e0c9e0f46a735736ef5e4c4c70c4784eb62f5b275377d975f76b4bd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/gui-repo-hook.mjs",
+      "operation": "modify",
+      "sha256": "249d3652035161316abdcbe4e556fa20e0e92f7f73b9d55308dda81b20139d8a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/gui-style-operation.mjs",
+      "operation": "add",
+      "sha256": "e0df5b725105acff5810911dbd1b81d4402db8d5a6a6158763f231505da4f73d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/gui-style-plan.mjs",
+      "operation": "modify",
+      "sha256": "490463d4a36cf0fffdba71e68b5b95ea18ed965d027eea1d49d44d9808019106",
+      "git_mode": "100644"
+    }
+  ],
+  "old_worktree_local_five_unchanged": true,
+  "runtime": "Prior gen only; corrected source/complete new case execution NOT RUN",
+  "qualified_identities": "UNSET",
+  "commit": null,
+  "valid_until": "Superseding implementation or actual qualification; then treat as history",
+  "accepted_source_packet": "cat-linux-source-integration-final-capture-20261007",
+  "closed_packet_regular_files": 146,
+  "checksum_rows": 145,
+  "raw_git_operations": 15,
+  "afterimages": 14,
+  "raw_git_preimages": 4,
+  "actual_git_absences": 11,
+  "selection": "Windows retention13 + accepted S1/S2 + accepted CSP split + exact downstream bindings",
+  "source_validation": [
+    "Raw Git preimages/absences and all14 afterimage hashes checked before/after direct application",
+    "All product afterimages logical100644",
+    "Both whole frozen predecessors/seals unchanged",
+    "Old worktree HEAD/status/all five drafts unchanged",
+    "Shared main remained clean"
+  ],
+  "whitespace": "PASS: git diff --check plus git diff --no-index --check for every untracked addition; no whitespace output.",
+  "actual_validation": "PENDING serial lane release, current bootstrap admission and parent physical preservation; original exact-manifest planning/checks precede graph-changing first kit sync. Later qualified-core adoption follows protected clean-idle owner sequence.",
+  "tests": "AUTHORED NOT RUN",
+  "compiler": "Prior original source actualPASS; corrected source NOT RUN",
+  "lint": "NOT RUN",
+  "build": "Prior original source actualPASS; corrected source NOT RUN",
+  "canonical_unit": "NOT RUN",
+  "canonical_full": "NOT RUN",
+  "framework_adoption": false,
+  "M0_M1_qualified": false,
+  "physical_device": "UNSET",
+  "same_SHA_green_unit_before_KIT_BUMP": "REQUIRED; NOT YET EARNED",
+  "supplemental_source_work": {
+    "lant_literal_bag": {
+      "schema": 1,
+      "recorded_utc": "2026-10-07T20:14:35.117784+00:00",
+      "path": "frontend/src/screens/Lant.tsx",
+      "before_sha256": "11e5df54a95a49713c0f62f9245bab7e95686f3ef90036ada3463055881b0091",
+      "after_sha256": "aca827a02a40fedfc82425cb7979773964d799de574d9acd4ff719b09f04b4aa",
+      "change": "Same pure current-step predicate moved from whole style bag to each of its three properties; current and previous style values preserved",
+      "reason": "Accepted original planner requires a literal bag, so the existing whole-object ternary is a definite manual refusal",
+      "source_review": {
+        "reviewer": "/root/style_inventory",
+        "verdict": "No material source issue; same pure predicate and values, only literal bag differs",
+        "execution": false
+      },
+      "runtime": "NOT RUN",
+      "tests": "NOT RUN",
+      "unrelated_event_key_label_motion_changes": false,
+      "original_owner_files_changed": false,
+      "independent_of_accepted15_operations": true,
+      "parent_source_review": "PENDING"
+    },
+    "motion_leaf_conversions": {
+      "schema": 1,
+      "changes": [
+        {
+          "path": "frontend/src/components/GameIntro.tsx",
+          "before_snapshot": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/style-leaf-before/GameIntro.tsx",
+          "before_sha256": "3bc48c47ee72099986d3e0cbf4300be34c5162f638223717c84b2c80fab67a3a",
+          "after_sha256": "75176b7a58a3621a1441b8e3739679ad427f5583d231e324666953b46db15e00"
+        },
+        {
+          "path": "frontend/src/components/Confetti.tsx",
+          "before_snapshot": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/style-leaf-before/Confetti.tsx",
+          "before_sha256": "c7801e7f977de459977fc30831a0e65fe2db79e6673229d165b0b76a105bcf5d",
+          "after_sha256": "3adcebbaff6e0e6a93e03c8e3db357e3d87788414e9e34d42fa450e178a9f4c0"
+        }
+      ],
+      "scope": "Two sole Motion leaf tags and style props to existing CspMotion/css; import cleanup only",
+      "runtime": "NOT RUN",
+      "independent_review": {
+        "reviewer": "/root/hook_contracts",
+        "verdict": "No source blocker; exact tag/prop/import changes only, all other motion/control/style values unchanged",
+        "execution": false
+      },
+      "parent_review": "PENDING"
+    },
+    "browser_replacement_contracts": {
+      "path": "frontend/e2e/gui-replacement-contracts.spec.mjs",
+      "sha256": "b71b22e480adcc52aca43f3461127f16c2eb33fe5f93c25e9f1b011bf83d17d5",
+      "authored_cases": 9,
+      "lines": 261,
+      "fixture_data": "Explicit synthetic API/local-history presentation fixtures; no real child/account data",
+      "source_review": {
+        "reviewer": "/root/hook_contracts",
+        "verdict": "No material source defect;9meaningful DOM cases, strengthened5/6 daily-navigation cause and zeroPOST/history assertions match current contracts",
+        "reviewed_sha256": "b71b22e480adcc52aca43f3461127f16c2eb33fe5f93c25e9f1b011bf83d17d5",
+        "execution": false
+      },
+      "parent_source_review": "PENDING",
+      "runtime": "NOT RUN",
+      "discovery_inventory_execution": "PENDING",
+      "original16_78_source_tests_inventory": "UNCHANGED",
+      "causal_review_correction": "5/6 branch proves exact enabled Lan\u021b daily action, navigation, enabled daily start, zero premature POST/create and unchanged history;6/6 branch unchanged"
+    }
+  },
+  "worker_state": "Corrected source readying for parent review; NO next wrapper/application until cleared",
+  "current_head": "a01073e7b144265539da28da6b2f15582c838178",
+  "actual_original_prerequisite_run": {
+    "date": "2026-10-08",
+    "scope": "dirty originalReact inner-loop only",
+    "tree_sha256": "30497970261bda600ee06f4b1842eb555766af21b92482403b5cbf175d7c0858",
+    "result_sha256": "fe8bb02f8aa0869177b7d1b66da4363fd070df98f65b5a0a98102ee8dbd533de",
+    "checks_passed": 12,
+    "compiler_build": "PASS prior source",
+    "original_fixtures": 16,
+    "executed_assertions": 78,
+    "baseline_routes": 9,
+    "actual_discovery": 684,
+    "home_js_gz": 114111,
+    "home_limit_gz": 40960,
+    "real_budget_status": "fail",
+    "canonical_qualification": false
+  },
+  "captured_style_proposal": {
+    "tree_sha256": "4b0b5a68609aba24775106bc4aa4bc4280eabb4f3f2b223c31940c26830be9e1",
+    "result_sha256": "2dec149f44a334212c9e0f0f6897974c6f2c474d8939f34d1d50bf5a187ac0ec",
+    "report_sha256": "5dcd6c8211b6d12495aaddc71fe3c004619089477a3540556a71ae3712e6e745",
+    "sites": 202,
+    "files": 18,
+    "diagnostics": 0,
+    "candidate_diagnostics": 0,
+    "candidate_applied": false,
+    "parent_verdict": "Repair Motion layout shadow ownership before application; source alone not runtime parity"
+  },
+  "motion_correction": {
+    "adapter_sha256": "82b932aee629f072bc8ce3d202f4081e3c4ba436daf0afece6cee7fcd8bbc255",
+    "planner_sha256": "177c994476aeaceedb8d453d47d914a96894fbed2c4e96c0342625dd6a5f635d",
+    "operation_sha256": "cdf80f10d4df252c7241159ec52c62eaa91f3c7dbe17ededdefcb55ec40f6a13",
+    "scope": "Complete CSS validation first; only layout-owned boxShadow forwarded as closed Motion model, excluded from SDK writer; preserve undefined, no animate target",
+    "source_review": "Independent bounded source pass for3actualconstant-layout owners; generic ownership changes remain outside proven scope",
+    "runtime": "NOT RUN corrected source",
+    "regression": "Authored genuine original/broken/corrected domMax projection+DOM scaling/fallback/restoration/strictCSP/guard negatives; exact source pins; existing style-GEN actual check",
+    "whitespace_fix": "Whole-line opacity member deletion and adjacent-comment regressions authored; frozen candidate not trimmed",
+    "parent_source_review": "PENDING"
+  },
+  "firstbatch_test_integration": {
+    "source_commit": "aa45a90bc52ae910fde1e6d24473926c631c9d05",
+    "resulting_head": "a01073e7b144265539da28da6b2f15582c838178",
+    "new_files": 3,
+    "logical_cases": 23,
+    "source_acceptance": "Parent accepted",
+    "actual_execution": "NOT RUN",
+    "inventory_update": "NOT APPLIED",
+    "old_assertions_retired": false
+  },
+  "original_complete_browser_route": {
+    "driver_sha256": "48880fe094819fde34c9502f99b0a25afd2c3c2ffb4212d90aceb7d1e8d513fb",
+    "hook_sha256": "9b03ba83059724fbf50e047ec7cae1ef5b2ff66b3d0106663f238b79db5cd315",
+    "scope": "Existing qualify-original-react GEN; actual built native server/config/complete strict matrix,0retry/skip/currentcontext/graph/commands/rawstreams; canonical full image/assets/CSP/vitals tail preserved",
+    "canonical_full": false,
+    "actual_execution": "NOT RUN",
+    "parent_source_review": "PENDING",
+    "prerequisite": "Fresh actual discovery and reviewed matching inventory before strict equality"
+  }
+}

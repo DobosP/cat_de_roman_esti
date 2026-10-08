@@ -162,7 +162,7 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
         <span className="row" style={{ gap: 8, alignItems: "center" }}>
           <span
             className="badge"
-            style={{ borderColor: color, color, fontWeight: 700 }}
+            style={{ borderColor: color, color: color, fontWeight: 700 }}
           >
             {TEMP_LABEL[g.temperature]}
           </span>
@@ -170,7 +170,7 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
             className="badge"
             style={{
               borderColor: color,
-              color,
+              color: color,
               fontWeight: 800,
               fontVariantNumeric: "tabular-nums",
             }}

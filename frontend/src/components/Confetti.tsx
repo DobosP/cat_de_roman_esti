@@ -3,7 +3,8 @@
 // motion by rendering nothing. Parent must be position:relative + overflow:hidden
 // (the .confetti-layer is absolutely positioned and clipped to it).
 
-import { m, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
+import { CspMotion } from "./CspStyle";
 
 const PALETTE = ["#ffd166", "#ff5470", "#4ea8ff", "#54e39d", "#c689ff"];
 
@@ -26,10 +27,10 @@ export function Confetti({ accent, count = 26 }: { accent?: string; count?: numb
         const delay = seeded(i, 5) * 0.6;
         const scale = 0.7 + seeded(i, 6) * 0.7;
         return (
-          <m.span
+          <CspMotion.span
             key={i}
             className="confetti-piece"
-            style={{ left: `${left}%`, background: colors[i % colors.length] }}
+            css={{ left: `${left}%`, background: colors[i % colors.length] }}
             initial={{ y: -20, opacity: 0, rotate: 0, scale }}
             animate={{ y: 480, opacity: [0, 1, 1, 0], rotate: spin }}
             transition={{ duration: fall, delay, ease: "linear" }}

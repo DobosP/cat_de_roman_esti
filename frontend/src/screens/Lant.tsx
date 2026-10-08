@@ -99,15 +99,11 @@ function Breadcrumb({ path }: { path: PathStep[] }) {
             )}
             <span
               className="chip"
-              style={
-                i === path.length - 1
-                  ? {
-                      borderColor: DEF.accent,
-                      color: DEF.accent,
-                      fontWeight: 700,
-                    }
-                  : undefined
-              }
+              style={{
+                borderColor: i === path.length - 1 ? DEF.accent : undefined,
+                color: i === path.length - 1 ? DEF.accent : undefined,
+                fontWeight: i === path.length - 1 ? 700 : undefined,
+              }}
             >
               {step.label}
             </span>
