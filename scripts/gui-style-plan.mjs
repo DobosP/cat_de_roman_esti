@@ -459,7 +459,7 @@ export function main(profile = "original") {
       assert.equal(phase.legacy.archive_sha256, "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244"); assert.equal(hash(bytes(phase.legacy.receipt)), phase.legacy.receipt_sha256);
     }
     assert.equal(hash(bytes("frontend/src/components/CspStyle.ts")), "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320", "Exact reviewed CSP facade source required");
-    assert.equal(hash(bytes("frontend/src/components/CspElements.tsx")), "27cf738b5af8a4e4eefab89b513d941261b61d0d41813eca09618ea8a8ef881d", "Exact reviewed CSP component source required");
+    assert.equal(hash(bytes("frontend/src/components/CspElements.tsx")), profile === "normalized" ? "f1c5478b8d243223d16baedb9fc6f0ced38f073377e0d7393e252b5a598b32c3" : "27cf738b5af8a4e4eefab89b513d941261b61d0d41813eca09618ea8a8ef881d", "Exact reviewed CSP component source required");
     const manifestBytes = bytes("frontend/package.json"), lockBytes = bytes("frontend/package-lock.json"), manifest = JSON.parse(manifestBytes), lock = JSON.parse(lockBytes);
     if (profile === "original") {
       assert.equal(hash(manifestBytes), "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9", "Original frontend manifest bytes required");

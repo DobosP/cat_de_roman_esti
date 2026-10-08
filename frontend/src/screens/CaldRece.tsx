@@ -7,7 +7,7 @@ import { Csp, CspMotion } from "../components/CspStyle";
 // best-first); this component only renders what it returns and surfaces errors as toasts.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { AnimatePresence, m } from "motion/react";
 import { Button, type ToastKind } from "@roedu/ui";
 import { GameShell } from "../components/GameShell";
 import { GameIntro } from "../components/GameIntro";

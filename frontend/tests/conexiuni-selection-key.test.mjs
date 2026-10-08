@@ -13,7 +13,7 @@ function actualSelectionKey() {
   assert.equal(lock.packages["node_modules/@typescript/typescript6"].version, "6.0.2");
   parserBinding(fileURLToPath(new URL("../", import.meta.url)), ts);
   const configFile = fileURLToPath(new URL("../tsconfig.json", import.meta.url));
-  const config = ts.readConfigFile(configFile, ts.sys.readFile);
+  const config = ts.readConfigFile(configFile, (filename) => ts.sys.readFile(filename));
   assert.equal(config.error, undefined);
   const parsed = ts.parseJsonConfigFileContent(config.config, ts.sys,
     fileURLToPath(new URL("../", import.meta.url)), undefined, configFile);

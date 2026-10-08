@@ -8,7 +8,7 @@ import { Csp, CspMotion } from "./CspStyle";
 // the replay handler, and onExit.
 
 import type { ReactNode } from "react";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { Badge, Button } from "@roedu/ui";
 import { Confetti } from "./Confetti";
 import { StartFailureNotice } from "./StartFailureNotice";

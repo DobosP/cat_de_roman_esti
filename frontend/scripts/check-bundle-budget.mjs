@@ -83,7 +83,7 @@ export function collectInitialBundleFiles(manifest, { eagerRoots = [] } = {}) {
   // Validate eager closures first so an ordinary shared visit cannot hide bad assets.
   for (const key of eagerRoots) visit(key, true);
   for (const entry of entries) visit(entry);
-  return [...files].sort();
+  return [...files].sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
 }
 
 function resolveInside(root, relativePath) {
@@ -116,8 +116,8 @@ export function assertRomanianFontSubsets(manifest) {
   const actual = Object.values(manifest)
     .map((chunk) => chunk?.src)
     .filter((source) => typeof source === "string" && source.endsWith(".woff2"))
-    .sort();
-  const expected = [...ROMANIAN_FONT_SOURCES].sort();
+    .sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
+  const expected = [...ROMANIAN_FONT_SOURCES].sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
   if (JSON.stringify(actual) !== JSON.stringify(expected)) {
     throw new Error(
       "Font assets must be exactly the Fredoka/Inter Latin and Latin Extended subsets; " +

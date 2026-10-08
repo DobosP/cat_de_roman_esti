@@ -28,7 +28,7 @@ function installedCompilerOptions() {
   assert.equal(compiler.name, "typescript");
   assert.equal(compiler.version, lock.packages["node_modules/typescript"].version,
     "the actual native CLI compiler must match the owning lock");
-  const config = ts.readConfigFile(configPath, ts.sys.readFile);
+  const config = ts.readConfigFile(configPath, (filename) => ts.sys.readFile(filename));
   assert.equal(config.error, undefined, config.error ? diagnosticsText([config.error]) : "");
   const parsed = ts.parseJsonConfigFileContent(config.config, ts.sys, frontend, undefined, configPath);
   assert.equal(parsed.errors.length, 0, diagnosticsText(parsed.errors));

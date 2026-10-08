@@ -3,7 +3,7 @@ import { Csp } from "../components/CspStyle";
 // submits immediately: no drag gesture, no extra confirmation, no client-side answer map.
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m, useIsPresent } from "framer-motion";
+import { AnimatePresence, m, useIsPresent } from "motion/react";
 import { Button, type ToastKind } from "@roedu/ui";
 import {
   acquireFlight,

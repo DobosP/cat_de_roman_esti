@@ -3,7 +3,7 @@
 // motion by rendering nothing. Parent must be position:relative + overflow:hidden
 // (the .confetti-layer is absolutely positioned and clipped to it).
 
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "motion/react";
 import { CspMotion } from "./CspStyle";
 
 const PALETTE = ["#ffd166", "#ff5470", "#4ea8ff", "#54e39d", "#c689ff"];

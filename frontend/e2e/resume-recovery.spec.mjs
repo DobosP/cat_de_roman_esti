@@ -310,7 +310,8 @@ test.describe("V74 saved-game recovery", () => {
     const removeBarrier = `${activeKey(game)}_score_test_barrier`;
     for (const tab of [page, otherTab]) {
       await tab.addInitScript(({ active, barrier }) => {
-        const originalRemove = Storage.prototype.removeItem;
+        const originalRemove = Object.getOwnPropertyDescriptor(Storage.prototype, "removeItem")?.value;
+        if (typeof originalRemove !== "function") throw new Error("Native Storage.removeItem data method required");
         Storage.prototype.removeItem = function removeItem(key) {
           if (key !== active || localStorage.getItem(`${barrier}_done`) === "1") {
             return originalRemove.call(this, key);

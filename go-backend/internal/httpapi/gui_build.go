@@ -9,9 +9,13 @@ import (
 
 func (s *Server) initGUIBuild(assets, metadata fs.FS, mode string) {
 	s.guiBuild = nil
-	if (mode != "" && mode != "current") || s.managedUI == nil || s.managedUIError != nil { return }
+	if (mode != "" && mode != "current") || s.managedUI == nil || s.managedUIError != nil {
+		return
+	}
 	identity, err := guibuild.Load(assets, metadata)
-	if err == nil { s.guiBuild = identity }
+	if err == nil {
+		s.guiBuild = identity
+	}
 }
 
 func (s *Server) serveGUIBuild(w http.ResponseWriter, r *http.Request) {

@@ -7,12 +7,18 @@ import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 export const STYLE_OPERATION = "plan-original-styles";
 export const NORMALIZED_STYLE_OPERATION = "plan-normalized-styles";
-export const PLANNER_SHA256 = "e6e82c02fe413a35dbce33380e8575bcfe296905327b4e3f0f7242c070732231";
+export const PLANNER_SHA256 = "794cd9a1363280d5d62abbd6b7fbe5b4b7edbb061ec893b3664ac06c4d1d6713";
 const MOTION_REGRESSION_INPUTS = {
   "frontend/testdata/motion-layout-shadow/runner.test.mjs": "9d1b7ef60605f46d04bd785e70d34dd53a82fd61bb1a4b7cf151b299cf6f63b1",
   "frontend/testdata/motion-layout-shadow/index.html": "4298902a46db2d2e4327577cb3fc542422875f960fd299c39a5f2f8dfe9bb125",
   "frontend/testdata/motion-layout-shadow/entry.tsx": "323e97978e5e2622cb8f17274c34968c5be1460e3751c014f41a4b2398328b3c",
   "frontend/testdata/motion-layout-shadow/fixture.css": "33ac7e864f0ce21bbb83615e6812305eac5f2a215fa438692a4076a0a40681cd"
+};
+const NORMALIZED_MOTION_REGRESSION_INPUTS = {
+  ...MOTION_REGRESSION_INPUTS,
+  "frontend/testdata/motion-layout-shadow/runner.test.mjs": "7dc42b815ce7107bbfd7e2edb4f02bba50c34035fad9663ff8a4067c0fc10820",
+  "frontend/testdata/motion-layout-shadow/entry.tsx": "ab648bb9388371341a322f978bfd37665802ad41a26a3d802d4fd1b30df00150",
+  "frontend/testdata/motion-layout-shadow/tsconfig.json": "8634d250c817477d1f2a4c259562b4bc8dc5920ca1a69ea6db2fe083e3706bb4",
 };
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const HASH = /^[0-9a-f]{64}$/;
@@ -244,6 +250,7 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
         "frontend/package.json": "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a",
         "frontend/package-lock.json": "78ba37afe99d18ebcb6a4be54eaab28d2b7084d0a2cc32ae476c0a20ca7224a2",
         "frontend/scripts/compiler-runtime.mjs": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12",
+        "frontend/src/components/CspElements.tsx": "f1c5478b8d243223d16baedb9fc6f0ced38f073377e0d7393e252b5a598b32c3",
       });
       delete fixed["frontend/src/screens/Alchimie.tsx"]; delete fixed["frontend/src/screens/Conexiuni.tsx"];
       delete fixed["cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"];
@@ -373,7 +380,7 @@ function runStyleOperation(hook, configured, request, environment, operation) {
     const components = hash(read(root, "frontend/src/components/CspElements.tsx", identity.inputs));
     assert.equal(units, "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873", "Exact sealed Part A interface overlay required");
     assert.equal(facade, "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320");
-    assert.equal(components, "27cf738b5af8a4e4eefab89b513d941261b61d0d41813eca09618ea8a8ef881d");
+    assert.equal(components, operation === NORMALIZED_STYLE_OPERATION ? "f1c5478b8d243223d16baedb9fc6f0ced38f073377e0d7393e252b5a598b32c3" : "27cf738b5af8a4e4eefab89b513d941261b61d0d41813eca09618ea8a8ef881d");
     protectedBefore = captureProtected(root, configReceipt(identity));
     attempt = `.gate/gen/styles/operations/style-operation-${hook.context.invocation}`;
     const directory = sourcePath(root, attempt, true); fs.mkdirSync(path.dirname(directory), { recursive: true }); fs.mkdirSync(directory);
@@ -394,7 +401,7 @@ function runStyleOperation(hook, configured, request, environment, operation) {
   });
   if (passed()) hook.check("cat-motion-layout-shadow-regression", () => {
     const inputs = {};
-    for (const [file, expected] of Object.entries(MOTION_REGRESSION_INPUTS)) {
+    for (const [file, expected] of Object.entries(operation === NORMALIZED_STYLE_OPERATION ? NORMALIZED_MOTION_REGRESSION_INPUTS : MOTION_REGRESSION_INPUTS)) {
       assert.equal(hash(read(root, file, inputs)), expected, `Exact reviewed Motion regression source required: ${file}`);
     }
     const prefix = ".gate/gen/motion-layout-shadow", before = new Map();

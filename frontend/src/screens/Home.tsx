@@ -4,7 +4,7 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { Badge, Button, type ToastKind } from "@roedu/ui";
 import {
   GAMES,
@@ -93,7 +93,7 @@ export default function Home({
       const path = challenge
         ? `${game.path}?${game.key === "alchimie" ? "mode=challenges&" : ""}challenge=daily`
         : game.path;
-      navigate(path);
+      void navigate(path);
     },
     [navigate],
   );

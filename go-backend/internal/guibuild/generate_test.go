@@ -74,9 +74,9 @@ func TestGenerateCopiesExactLockBytesAndExplicitSourceBinding(t *testing.T) {
 
 func TestGenerateFailureRemovesEarlierDescriptor(t *testing.T) {
 	cases := []struct {
-		name string
-		sha string
-		tree string
+		name   string
+		sha    string
+		tree   string
 		change func(*testing.T, string)
 	}{
 		{"empty SHA", "", fixtureTree, nil},

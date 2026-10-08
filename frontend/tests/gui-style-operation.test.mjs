@@ -161,7 +161,7 @@ const contextMutations = [
   ["bootstrap extra field", (item) => { json(item.root, ".gate/gen/bootstrap-execution.json", { ...item.bootstrap, ignore_failed: true }); }],
   ["source request mismatch", (item) => { json(item.root, "scripts/gui-gen-request.json", { ...request, operation: "capture-original-baseline" }); }],
 ];
-for (const [name, mutate] of contextMutations) test(`current style binding refuses ${name}`, (t) => {
+for (const [name, mutate] of contextMutations) test(`current style binding refuses ${String(name)}`, (t) => {
   const item = fixture(t); mutate(item); assert.throws(() => identity(item));
 });
 for (const value of ["1", undefined]) test(`style planning refuses resolver state ${String(value)}`, (t) => {
@@ -262,7 +262,7 @@ const outputMutations = [
   ["failure selects candidate", (proposal) => { proposal.summary.converted = `${proposal.relative}/candidate`; }],
   ["failure says ready", (proposal) => { proposal.summary.application_ready = true; }],
 ];
-for (const [name, mutate, old] of outputMutations) test(`planner report refuses ${name}`, (t) => {
+for (const [name, mutate, old] of outputMutations) test(`planner report refuses ${String(name)}`, (t) => {
   const item = fixture(t), proposal = failedProposal(item); mutate(proposal);
   assert.throws(() => validatePlannerOutput(item.root, proposal.summary, proposal.bound, old ? [proposal.relative] : []));
 });
@@ -364,7 +364,7 @@ const proposalMutations = [
   ["compiler package identity mismatch", (item, proposal) => { proposal.report.bindings.typescript.version = "other"; resealDataFixture(item, proposal); }],
   ["closed file metadata violation", (item, proposal) => { proposal.report.files[0].apply = true; resealDataFixture(item, proposal); }],
 ];
-for (const [name, mutate] of proposalMutations) test(`proposal byte guard refuses ${name}`, (t) => {
+for (const [name, mutate] of proposalMutations) test(`proposal byte guard refuses ${String(name)}`, (t) => {
   const item = normalizedFixture(t), proposal = proposalBytesFixture(item); mutate(item, proposal);
   assert.throws(() => validatePlannerOutput(item.root, proposal.summary, proposal.bound));
 });
@@ -383,7 +383,7 @@ for (const [name, mutate] of [
   ["missing copied owning config binding", (report) => { report.retained_native_files = report.retained_native_files.filter((item) => !item.file.endsWith("/candidate-graph/frontend/tsconfig.json")); }],
   ["old owner preimage claim", (report) => { report.bindings.current_owners["frontend/src/screens/Conexiuni.tsx"].source_sha256 = "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338"; }],
   ["archive member hash substitution", (report) => { report.bindings.frozen_renderer.member.sha256 = "d".repeat(64); }],
-]) test(`normalized proposal refuses ${name}`, (t) => {
+]) test(`normalized proposal refuses ${String(name)}`, (t) => {
   const item = normalizedFixture(t), proposal = proposalBytesFixture(item); mutate(proposal.report); resealDataFixture(item, proposal);
   assert.throws(() => validatePlannerOutput(item.root, proposal.summary, proposal.bound));
 });

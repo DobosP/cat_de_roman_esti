@@ -224,7 +224,7 @@ test("real Perechi terminal loss moves keyboard-owned tile focus to the authorit
     [steps[0].payload.ids[1], steps[2].payload.ids[0]],
   ];
   expect(initial.remaining_mistakes).toBe(wrongIds.length);
-  expect(new Set(wrongIds.map((ids) => [...ids].sort().join("+"))).size).toBe(wrongIds.length);
+  expect(new Set(wrongIds.map((ids) => [...ids].sort((left, right) => left < right ? -1 : left > right ? 1 : 0).join("+"))).size).toBe(wrongIds.length);
   for (const [index, ids] of wrongIds.entries()) {
     const step = { action: "match", payload: { ids } };
     const focused = tile(page, perechi, state.tiles.find(({ id }) => id === ids[1]).label);

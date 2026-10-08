@@ -1,6 +1,6 @@
 import { Csp, CspMotion } from "../components/CspStyle";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { AnimatePresence, m } from "motion/react";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
   type Difficulty,

@@ -4,19 +4,20 @@ import { Button } from "@roedu/ui";
 import { GAMES } from "../games";
 
 type Props = { children: ReactNode; pathname: string };
+type State = { failed: boolean; pathname: string };
 
 /** Keep failed lazy content recoverable without retrying or deleting saved play. */
-export class RouteErrorBoundary extends Component<Props, { failed: boolean }> {
-  state = { failed: false };
+export class RouteErrorBoundary extends Component<Props, State> {
+  state: State = { failed: false, pathname: this.props.pathname };
 
   static getDerivedStateFromError() {
     return { failed: true };
   }
 
-  componentDidUpdate(previous: Props) {
-    if (previous.pathname !== this.props.pathname && this.state.failed) {
-      this.setState({ failed: false });
-    }
+  // Reconcile only the pathname; healthy chrome and exiting screens keep their
+  // identities. Same-path renders never retry failed lazy content.
+  static getDerivedStateFromProps({ pathname }: Props, state: State) {
+    return pathname !== state.pathname ? { failed: false, pathname } : null;
   }
 
   // A stable callback focuses the heading only when the failure screen mounts,

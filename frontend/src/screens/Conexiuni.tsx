@@ -8,7 +8,7 @@ import { Csp, CspButton, CspMotion } from "../components/CspStyle";
 // what it returns and surfaces a personal best + a shareable result on finish.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { AnimatePresence, m } from "motion/react";
 import { ApiError } from "../api/client";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import {

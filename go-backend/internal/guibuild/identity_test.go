@@ -27,9 +27,9 @@ func fixtureDigest(data []byte) string {
 
 func fixtureIdentity(manifest, lock []byte) health.Identity {
 	return health.Identity{
-		SHA: fixtureSHA,
-		TreeSHA256: fixtureTree,
-		ManifestSHA256: fixtureDigest(manifest),
+		SHA:                fixtureSHA,
+		TreeSHA256:         fixtureTree,
+		ManifestSHA256:     fixtureDigest(manifest),
 		VersionsLockSHA256: fixtureDigest(lock),
 	}
 }
@@ -50,7 +50,7 @@ func fixtureFiles(t *testing.T) (fstest.MapFS, fstest.MapFS, health.Identity) {
 		ManifestPath: &fstest.MapFile{Data: bytes.Clone(fixtureManifest), Mode: 0644},
 	}
 	metadata := fstest.MapFS{
-		DescriptorPath: &fstest.MapFile{Data: fixtureDescriptor(t, identity), Mode: 0644},
+		DescriptorPath:   &fstest.MapFile{Data: fixtureDescriptor(t, identity), Mode: 0644},
 		VersionsLockPath: &fstest.MapFile{Data: bytes.Clone(fixtureLock), Mode: 0644},
 	}
 	return assets, metadata, identity
@@ -101,7 +101,7 @@ func TestLoadRejectsMissingInputs(t *testing.T) {
 
 func TestLoadRejectsMalformedDescriptor(t *testing.T) {
 	cases := []struct {
-		name string
+		name   string
 		change func([]byte) []byte
 	}{
 		{"empty", func([]byte) []byte { return nil }},
@@ -111,7 +111,9 @@ func TestLoadRejectsMalformedDescriptor(t *testing.T) {
 		{"extra", func(data []byte) []byte { return append([]byte(`{"unexpected":"value",`), data[1:]...) }},
 		{"duplicate", func(data []byte) []byte { return append([]byte(`{"sha":"`+fixtureSHA+`",`), data[1:]...) }},
 		{"wrong case", func(data []byte) []byte { return bytes.Replace(data, []byte(`"sha"`), []byte(`"SHA"`), 1) }},
-		{"non-string", func(data []byte) []byte { return bytes.Replace(data, []byte(`"sha":"`+fixtureSHA+`"`), []byte(`"sha":42`), 1) }},
+		{"non-string", func(data []byte) []byte {
+			return bytes.Replace(data, []byte(`"sha":"`+fixtureSHA+`"`), []byte(`"sha":42`), 1)
+		}},
 		{"missing field", func(data []byte) []byte { return bytes.Replace(data, []byte(`"sha":"`+fixtureSHA+`",`), nil, 1) }},
 		{"trailing object", func(data []byte) []byte { return append(data, []byte(`{}`)...) }},
 		{"trailing scalar", func(data []byte) []byte { return append(data, []byte(`true`)...) }},
@@ -127,7 +129,7 @@ func TestLoadRejectsMalformedDescriptor(t *testing.T) {
 
 func TestLoadRejectsInvalidOrMismatchedBindings(t *testing.T) {
 	cases := []struct {
-		name string
+		name   string
 		change func(*health.Identity)
 	}{
 		{"short SHA", func(i *health.Identity) { i.SHA = "1" }},
@@ -199,10 +201,10 @@ func TestLoadRejectsOversizedAndNonRegularInputs(t *testing.T) {
 func TestLoadIgnoresRuntimeEnvironmentClaims(t *testing.T) {
 	assets, metadata, expected := fixtureFiles(t)
 	for name, value := range map[string]string{
-		"GATE_SHA": strings.Repeat("a", 40),
-		"GATE_TREE_SHA256": strings.Repeat("b", 64),
-		"GATE_APP_IMAGE_ID": "sha256:" + strings.Repeat("c", 64),
-		"GATE_MANIFEST_SHA256": strings.Repeat("d", 64),
+		"GATE_SHA":                  strings.Repeat("a", 40),
+		"GATE_TREE_SHA256":          strings.Repeat("b", 64),
+		"GATE_APP_IMAGE_ID":         "sha256:" + strings.Repeat("c", 64),
+		"GATE_MANIFEST_SHA256":      strings.Repeat("d", 64),
 		"GATE_VERSIONS_LOCK_SHA256": strings.Repeat("e", 64),
 	} {
 		t.Setenv(name, value)

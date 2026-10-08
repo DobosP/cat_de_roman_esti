@@ -39,30 +39,50 @@ func TestManagedSPACompiledCurrentAndFrozenLegacy(t *testing.T) {
 		t.Run(mode, func(t *testing.T) {
 			t.Setenv("CAT_UI", mode)
 			root := "dist"
-			if mode == "legacy" { root = "legacy" }
+			if mode == "legacy" {
+				root = "legacy"
+			}
 			index, err := fs.ReadFile(embedfs.Files, root+"/index.html")
-			if err != nil { t.Fatalf("owning frontend build and assets-sync required: %v", err) }
+			if err != nil {
+				t.Fatalf("owning frontend build and assets-sync required: %v", err)
+			}
 			s := testServer(t)
 			if s.StaticRoot != "" || s.managedUIError != nil || s.managedUI == nil {
 				t.Fatalf("default server did not admit compiled %s: %v", mode, s.managedUIError)
 			}
 			w := managedSPARequest(s, "GET", "/intrusul?challenge=daily")
-			if w.Code != 200 { t.Fatal("compiled selected tree was not the SPA deep-link response") }
+			if w.Code != 200 {
+				t.Fatal("compiled selected tree was not the SPA deep-link response")
+			}
 			if mode == "legacy" {
-				if !bytes.Equal(w.Body.Bytes(), index) { t.Fatal("compiled frozen legacy response changed bytes") }
-			} else { assertManagedCurrentIndex(t, w, index) }
+				if !bytes.Equal(w.Body.Bytes(), index) {
+					t.Fatal("compiled frozen legacy response changed bytes")
+				}
+			} else {
+				assertManagedCurrentIndex(t, w, index)
+			}
 			if mode == "legacy" && fmt.Sprintf("%x", sha256.Sum256(index)) != "6ef9e2cd5334b0e89fe078f0bf2c3c9b3b94360ad013c7740db5cc205bd3feeb" {
 				t.Fatal("compiled rollback index differs from the sealed thirty-file original")
 			}
 			manifestBytes, err := fs.ReadFile(embedfs.Files, root+"/.vite/manifest.json")
-			if err != nil { t.Fatal(err) }
-			var manifest map[string]struct { File string `json:"file"` }
-			if err := json.Unmarshal(manifestBytes, &manifest); err != nil { t.Fatal(err) }
+			if err != nil {
+				t.Fatal(err)
+			}
+			var manifest map[string]struct {
+				File string `json:"file"`
+			}
+			if err := json.Unmarshal(manifestBytes, &manifest); err != nil {
+				t.Fatal(err)
+			}
 			entry := manifest["index.html"].File
 			asset, err := fs.ReadFile(embedfs.Files, root+"/"+entry)
-			if err != nil { t.Fatal(err) }
+			if err != nil {
+				t.Fatal(err)
+			}
 			w = managedSPARequest(s, "GET", "/"+entry)
-			if w.Code != 200 || !bytes.Equal(w.Body.Bytes(), asset) { t.Fatal("SDK static response differs from the selected compiled manifest entry") }
+			if w.Code != 200 || !bytes.Equal(w.Body.Bytes(), asset) {
+				t.Fatal("SDK static response differs from the selected compiled manifest entry")
+			}
 		})
 	}
 }
@@ -71,11 +91,15 @@ func TestManagedSPADeepLinksAndAPIRouting(t *testing.T) {
 	s := testServer(t)
 	var err error
 	s.managedUI, err = newManagedSPA(managedSPAFixture(), "current")
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	s.managedUIError = nil
 	for _, path := range []string{"/", "/intrusul", "/alchimie?mode=explore", "/not-a-route"} {
 		w := managedSPARequest(s, "GET", path)
-		if w.Code != 200 { t.Fatalf("SPA fallback failed for %s: %d", path, w.Code) }
+		if w.Code != 200 {
+			t.Fatalf("SPA fallback failed for %s: %d", path, w.Code)
+		}
 		assertManagedCurrentIndex(t, w, s.managedUI.index)
 	}
 	for _, path := range []string{"/api", "/api/no-such-endpoint", "/api/wordgames/unknown/games"} {
@@ -85,7 +109,9 @@ func TestManagedSPADeepLinksAndAPIRouting(t *testing.T) {
 		}
 	}
 	w := managedSPARequest(s, "GET", "/api/health")
-	if w.Code != 200 || w.Header().Get("Content-Type") != "application/json" { t.Fatal("known API stopped being native JSON") }
+	if w.Code != 200 || w.Header().Get("Content-Type") != "application/json" {
+		t.Fatal("known API stopped being native JSON")
+	}
 }
 
 func TestManagedSPASDKAssetsAndMethodContracts(t *testing.T) {
@@ -93,7 +119,9 @@ func TestManagedSPASDKAssetsAndMethodContracts(t *testing.T) {
 	files := managedSPAFixture()
 	var err error
 	s.managedUI, err = newManagedSPA(files, "")
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	s.managedUIError = nil
 	asset := "/assets/app-1234abcd.js"
 	w := managedSPARequest(s, "GET", asset)
@@ -101,50 +129,76 @@ func TestManagedSPASDKAssetsAndMethodContracts(t *testing.T) {
 		t.Fatalf("actual SDK static handler did not serve selected embedded bytes: %d %v", w.Code, w.Header())
 	}
 	w = managedSPARequest(s, "HEAD", asset)
-	if w.Code != 200 || w.Body.Len() != 0 { t.Fatal("embedded asset HEAD exposed a body") }
+	if w.Code != 200 || w.Body.Len() != 0 {
+		t.Fatal("embedded asset HEAD exposed a body")
+	}
 	for _, path := range []string{"/", "/intrusul", asset} {
 		w = managedSPARequest(s, "POST", path)
-		if w.Code != 405 || w.Header().Get("Allow") != "GET, HEAD" || w.Body.Len() != 0 { t.Fatalf("managed UI method contract: %s", path) }
+		if w.Code != 405 || w.Header().Get("Allow") != "GET, HEAD" || w.Body.Len() != 0 {
+			t.Fatalf("managed UI method contract: %s", path)
+		}
 	}
 	w = managedSPARequest(s, "POST", "/index.html")
-	if w.Code != 302 || w.Header().Get("Location") != "/" { t.Fatal("index redirect changed") }
+	if w.Code != 302 || w.Header().Get("Location") != "/" {
+		t.Fatal("index redirect changed")
+	}
 }
 
 func TestManagedSPARefusesPrivateAndMissingAssets(t *testing.T) {
 	s := testServer(t)
 	var err error
 	s.managedUI, err = newManagedSPA(managedSPAFixture(), "")
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	s.managedUIError = nil
 	for _, path := range []string{"/.vite/manifest.json", "/.keep", "/assets/../index.html", "/assets/escape%5C.js", "/assets/missing.js", "/assets/app-1234abcd.js.gz", "/missing.json", "/assets//app-1234abcd.js"} {
 		w := managedSPARequest(s, "GET", path)
-		if w.Code != 404 || w.Body.Len() != 0 { t.Fatalf("private or missing asset escaped refusal: %s %d %s", path, w.Code, w.Body.String()) }
+		if w.Code != 404 || w.Body.Len() != 0 {
+			t.Fatalf("private or missing asset escaped refusal: %s %d %s", path, w.Code, w.Body.String())
+		}
 	}
 }
 
 func TestManagedSPARejectsMalformedOrUnconfinedInput(t *testing.T) {
-	if _, err := newManagedSPA(managedSPAFixture(), "../../private"); err == nil { t.Fatal("unbounded CAT_UI selection accepted") }
+	if _, err := newManagedSPA(managedSPAFixture(), "../../private"); err == nil {
+		t.Fatal("unbounded CAT_UI selection accepted")
+	}
 	for _, change := range []func(fstest.MapFS){
 		func(files fstest.MapFS) { delete(files, "dist/assets/app-1234abcd.js") },
-		func(files fstest.MapFS) { files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"../private.js","isEntry":true}}`) },
-		func(files fstest.MapFS) { files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"assets/app-1234abcd.js","imports":["missing"],"isEntry":true}}`) },
+		func(files fstest.MapFS) {
+			files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"../private.js","isEntry":true}}`)
+		},
+		func(files fstest.MapFS) {
+			files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"assets/app-1234abcd.js","imports":["missing"],"isEntry":true}}`)
+		},
 		func(files fstest.MapFS) { files["dist/index.html"].Data = nil },
-		func(files fstest.MapFS) { files["dist/assets/escape.js"] = &fstest.MapFile{Mode: fs.ModeSymlink, Data: []byte("private")} },
+		func(files fstest.MapFS) {
+			files["dist/assets/escape.js"] = &fstest.MapFile{Mode: fs.ModeSymlink, Data: []byte("private")}
+		},
 	} {
 		files := managedSPAFixture()
 		change(files)
-		if _, err := newManagedSPA(files, "current"); err == nil { t.Fatal("invalid managed bundle admitted") }
+		if _, err := newManagedSPA(files, "current"); err == nil {
+			t.Fatal("invalid managed bundle admitted")
+		}
 	}
 }
 
 func TestManagedSPAUnbuiltScaffoldDoesNotAdmitUI(t *testing.T) {
 	s := testServer(t)
 	s.managedUI, s.managedUIError = newManagedSPA(fstest.MapFS{"dist/.keep": &fstest.MapFile{}}, "current")
-	if s.managedUI != nil || s.managedUIError == nil { t.Fatal("empty scaffold became a usable UI bundle") }
+	if s.managedUI != nil || s.managedUIError == nil {
+		t.Fatal("empty scaffold became a usable UI bundle")
+	}
 	w := managedSPARequest(s, "GET", "/")
-	if w.Code != 503 || w.Body.String() != `{"detail":"Managed UI unavailable"}` { t.Fatal("unbuilt UI earned a successful response") }
+	if w.Code != 503 || w.Body.String() != `{"detail":"Managed UI unavailable"}` {
+		t.Fatal("unbuilt UI earned a successful response")
+	}
 	w = managedSPARequest(s, "GET", "/api/health")
-	if w.Code != 200 || w.Header().Get("Content-Type") != "application/json" { t.Fatal("UI admission failure changed native API availability") }
+	if w.Code != 200 || w.Header().Get("Content-Type") != "application/json" {
+		t.Fatal("UI admission failure changed native API availability")
+	}
 }
 
 func TestManagedSPANonHexViteCacheUsesActualSDKStatus(t *testing.T) {
@@ -156,7 +210,9 @@ func TestManagedSPANonHexViteCacheUsesActualSDKStatus(t *testing.T) {
 	files["dist/index.html"].Data = bytes.Replace(files["dist/index.html"].Data, []byte("/assets/app-1234abcd.js"), []byte(asset), 1)
 	var err error
 	s.managedUI, err = newManagedSPA(files, "current")
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	s.managedUIError = nil
 	var validator string
 	for _, method := range []string{"GET", "HEAD"} {
@@ -164,12 +220,20 @@ func TestManagedSPANonHexViteCacheUsesActualSDKStatus(t *testing.T) {
 		if w.Code != 200 || w.Header().Get("Cache-Control") != "max-age=315360000, public, immutable" {
 			t.Fatalf("non-hex Vite hash lost Cat's cache contract: %s %d %v", method, w.Code, w.Header())
 		}
-		if method == "GET" && !bytes.Equal(w.Body.Bytes(), files["dist"+asset].Data) { t.Fatal("cache adapter changed SDK asset bytes") }
-		if method == "HEAD" && w.Body.Len() != 0 { t.Fatal("cache adapter changed SDK HEAD") }
+		if method == "GET" && !bytes.Equal(w.Body.Bytes(), files["dist"+asset].Data) {
+			t.Fatal("cache adapter changed SDK asset bytes")
+		}
+		if method == "HEAD" && w.Body.Len() != 0 {
+			t.Fatal("cache adapter changed SDK HEAD")
+		}
 		if method == "GET" {
 			validator = w.Header().Get("ETag")
-			if validator == "" { t.Fatal("actual SDK asset response has no conditional validator") }
-		} else if w.Header().Get("ETag") != validator { t.Fatal("SDK HEAD validator differs from GET") }
+			if validator == "" {
+				t.Fatal("actual SDK asset response has no conditional validator")
+			}
+		} else if w.Header().Get("ETag") != validator {
+			t.Fatal("SDK HEAD validator differs from GET")
+		}
 	}
 	rangeRequest := httptest.NewRequest("GET", asset, nil)
 	rangeRequest.Header.Set("Range", "bytes=2-5")
@@ -189,16 +253,24 @@ func TestManagedSPANonHexViteCacheUsesActualSDKStatus(t *testing.T) {
 	conditionalRequest.Header.Set("If-None-Match", `"cat-unmatched-validator"`)
 	conditionalResponse = httptest.NewRecorder()
 	s.ServeHTTP(conditionalResponse, conditionalRequest)
-	if conditionalResponse.Code != 200 || !bytes.Equal(conditionalResponse.Body.Bytes(), files["dist"+asset].Data) || conditionalResponse.Header().Get("ETag") != validator || conditionalResponse.Header().Get("Cache-Control") != "max-age=315360000, public, immutable" { t.Fatal("nonmatching validator incorrectly suppressed the actual SDK asset") }
+	if conditionalResponse.Code != 200 || !bytes.Equal(conditionalResponse.Body.Bytes(), files["dist"+asset].Data) || conditionalResponse.Header().Get("ETag") != validator || conditionalResponse.Header().Get("Cache-Control") != "max-age=315360000, public, immutable" {
+		t.Fatal("nonmatching validator incorrectly suppressed the actual SDK asset")
+	}
 	r := httptest.NewRequest("GET", asset, nil)
 	r.Header.Set("Range", "bytes=999999-")
 	w := httptest.NewRecorder()
 	s.ServeHTTP(w, r)
-	if w.Code != 416 || strings.Contains(w.Header().Get("Cache-Control"), "immutable") { t.Fatalf("failed SDK range gained immutable caching: %d %v", w.Code, w.Header()) }
+	if w.Code != 416 || strings.Contains(w.Header().Get("Cache-Control"), "immutable") {
+		t.Fatalf("failed SDK range gained immutable caching: %d %v", w.Code, w.Header())
+	}
 	for _, path := range []string{"/assets/Missing-B_1k6UL8.js", "/assets/../AccountBar-B_1k6UL8.js", "/.vite/manifest.json"} {
 		w = managedSPARequest(s, "GET", path)
-		if w.Code != 404 || strings.Contains(w.Header().Get("Cache-Control"), "immutable") { t.Fatalf("refused asset gained immutable caching: %s %d %v", path, w.Code, w.Header()) }
+		if w.Code != 404 || strings.Contains(w.Header().Get("Cache-Control"), "immutable") {
+			t.Fatalf("refused asset gained immutable caching: %s %d %v", path, w.Code, w.Header())
+		}
 	}
 	w = managedSPARequest(s, "POST", asset)
-	if w.Code != 405 || strings.Contains(w.Header().Get("Cache-Control"), "immutable") { t.Fatal("non-GET/HEAD request gained immutable caching") }
+	if w.Code != 405 || strings.Contains(w.Header().Get("Cache-Control"), "immutable") {
+		t.Fatal("non-GET/HEAD request gained immutable caching")
+	}
 }

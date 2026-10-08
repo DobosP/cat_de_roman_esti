@@ -96,13 +96,13 @@ for (const reversed of [false, true]) {
     const blocked = page.getByRole("button", { name: "Schimbă o piesă", exact: true });
     await expect(blocked).toBeDisabled();
     const selected = page.locator(`${game.board} button[aria-pressed="true"]`);
-    const labels = ids.map((id) => initial.tiles.find((item) => item.id === id).label).sort();
-    expect((await selected.allTextContents()).map((text) => text.trim()).sort()).toEqual(labels);
+    const labels = ids.map((id) => initial.tiles.find((item) => item.id === id).label).sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
+    expect((await selected.allTextContents()).map((text) => text.trim()).sort((left, right) => left < right ? -1 : left > right ? 1 : 0)).toEqual(labels);
 
     const before = await page.locator(`${game.board} button`).allTextContents();
     await page.getByRole("button", { name: "Amestecă", exact: true }).click();
     await expect.poll(() => page.locator(`${game.board} button`).allTextContents()).not.toEqual(before);
-    expect((await selected.allTextContents()).map((text) => text.trim()).sort()).toEqual(labels);
+    expect((await selected.allTextContents()).map((text) => text.trim()).sort((left, right) => left < right ? -1 : left > right ? 1 : 0)).toEqual(labels);
     await expect(guidance).toBeVisible();
     await expect(blocked).toBeDisabled();
     // Native HTMLElement.click respects the disabled control. It cannot spend
@@ -136,7 +136,7 @@ for (const reversed of [false, true]) {
     expect(corrected.solved_count).toBe(1);
     expect(corrected.mistakes).toBe(oneAway.mistakes);
     expect(posts).toHaveLength(2);
-    expect([...posts[1].body.ids].sort()).toEqual([...correctIds].sort());
+    expect([...posts[1].body.ids].sort((left, right) => left < right ? -1 : left > right ? 1 : 0)).toEqual([...correctIds].sort((left, right) => left < right ? -1 : left > right ? 1 : 0));
     await expect(page.locator(`${game.board} button`)).toHaveCount(12);
     await expect(guidance).toHaveCount(0);
     await expect(page.locator(`${game.board} button[aria-pressed="true"]`)).toHaveCount(0);

@@ -56,11 +56,56 @@
         "CspMotion.div": "div",
         "CspMotion.button": "button",
         "CspMotion.span": "span",
-        "CspMotion.p": "p"
+        "CspMotion.p": "p",
+        "CspDiv": "div",
+        "CspSpan": "span",
+        "CspStrong": "strong",
+        "CspP": "p",
+        "CspForm": "form",
+        "CspH1": "h1",
+        "CspH2": "h2",
+        "CspHeader": "header",
+        "CspSection": "section",
+        "CspLabel": "label",
+        "CspSelect": "select",
+        "CspInput": "input",
+        "CspNativeButton": "button",
+        "CspSummary": "summary",
+        "CspA": "a",
+        "CspOl": "ol",
+        "CspUl": "ul",
+        "CspLi": "li",
+        "CspFooter": "footer",
+        "CspSmall": "small",
+        "MotionDiv": "div",
+        "MotionButton": "button",
+        "MotionSpan": "span",
+        "MotionP": "p",
+        "m.div": "div",
+        "m.button": "button",
+        "m.span": "span",
+        "m.p": "p"
       }
     }
   },
   "overrides": [
+    {
+      "files": [
+        "e2e/**/*.mjs",
+        "testdata/motion-layout-shadow/runner.test.mjs"
+      ],
+      "globals": {
+        "MouseEvent": "readonly",
+        "MutationObserver": "readonly",
+        "Node": "readonly",
+        "document": "readonly",
+        "getComputedStyle": "readonly",
+        "innerWidth": "readonly",
+        "matchMedia": "readonly",
+        "requestAnimationFrame": "readonly",
+        "window": "readonly"
+      }
+    },
     {
       "files": [
         "**/*.ts",

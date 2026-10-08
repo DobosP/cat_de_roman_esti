@@ -25,7 +25,7 @@ function admit() {
   assert.equal(fs.realpathSync.native(root), root); assert.ok(!rootStat.isSymbolicLink());
   const inputs = new Map();
   function regular(relative, directory = false) {
-    assert.ok(typeof relative === "string" && relative && !relative.startsWith("/") && !/[\\:\x00-\x1f]/.test(relative));
+    assert.ok(typeof relative === "string" && relative && !relative.startsWith("/") && !Array.from(relative).some((character) => { const code = character.charCodeAt(0); return code === 92 || code === 58 || code <= 31; }));
     const parts = relative.split("/"); assert.ok(parts.every((part) => /^[A-Za-z0-9_@.-]+$/.test(part) && ![".", ".."].includes(part)));
     let file = root;
     for (let index = 0; index < parts.length; index++) {
@@ -150,7 +150,7 @@ function admit() {
   assert.equal(JSON.parse(read("frontend/node_modules/playwright/package.json")).version, "1.63.0");
   for (const name of ["vite", "@vitejs/plugin-react"]) versions[name] = JSON.parse(read(`frontend/node_modules/${name}/package.json`)).version;
   assert.equal(hash(read("frontend/vendor/roedu-ui-0.3.0.tgz")), "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244");
-  for (const file of ["frontend/testdata/motion-layout-shadow/index.html", "frontend/testdata/motion-layout-shadow/entry.tsx", "frontend/testdata/motion-layout-shadow/fixture.css", "frontend/testdata/motion-layout-shadow/runner.test.mjs", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx", "frontend/src/components/cssUnits.ts", "frontend/src/styles/csp-style.css", "frontend/src/styles/arcade.css", "frontend/src/styles/conexiuni.css", "frontend/src/styles/contexto.css", "frontend/src/theme.ts", "frontend/src/games.ts", "frontend/src/screens/Conexiuni.tsx", "frontend/src/screens/CaldRece.tsx", "frontend/node_modules/@roedu/ui/dist/index.js", "frontend/node_modules/motion-dom/dist/es/projection/styles/scale-box-shadow.mjs", "frontend/node_modules/motion-dom/dist/es/projection/styles/scale-correction.mjs", "frontend/node_modules/motion-dom/dist/es/render/utils/is-forced-motion-value.mjs", "frontend/node_modules/motion-dom/dist/es/render/html/utils/scrape-motion-values.mjs", "frontend/node_modules/motion-dom/dist/es/projection/node/create-projection-node.mjs"]) read(file);
+  for (const file of ["frontend/testdata/motion-layout-shadow/index.html", "frontend/testdata/motion-layout-shadow/tsconfig.json", "frontend/testdata/motion-layout-shadow/entry.tsx", "frontend/testdata/motion-layout-shadow/fixture.css", "frontend/testdata/motion-layout-shadow/runner.test.mjs", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx", "frontend/src/components/cssUnits.ts", "frontend/src/styles/csp-style.css", "frontend/src/styles/arcade.css", "frontend/src/styles/conexiuni.css", "frontend/src/styles/contexto.css", "frontend/src/theme.ts", "frontend/src/games.ts", "frontend/src/screens/Conexiuni.tsx", "frontend/src/screens/CaldRece.tsx", "frontend/node_modules/@roedu/ui/dist/index.js", "frontend/node_modules/motion-dom/dist/es/projection/styles/scale-box-shadow.mjs", "frontend/node_modules/motion-dom/dist/es/projection/styles/scale-correction.mjs", "frontend/node_modules/motion-dom/dist/es/render/utils/is-forced-motion-value.mjs", "frontend/node_modules/motion-dom/dist/es/render/html/utils/scrape-motion-values.mjs", "frontend/node_modules/motion-dom/dist/es/projection/node/create-projection-node.mjs"]) read(file);
   const conex = read("frontend/src/screens/Conexiuni.tsx").toString(), cald = read("frontend/src/screens/CaldRece.tsx").toString();
   assert.ok(conex.includes('boxShadow: isSel ? `0 0 18px -6px ${DEF.accent}` : undefined'));
   assert.ok(cald.includes('boxShadow: isLatest ? `0 0 22px -10px ${color}` : undefined'));
@@ -212,6 +212,7 @@ test("actual original and corrected layout shadows counter-scale while frozen CS
       caller_streams: "Actual hook.run Node stdout/stderr and command receipt are available after this process returns; preserve the complete primary target beside this case." },
     cases: [], csp: { policy: CSP }, qualified_device: false, production_or_gameplay_qualified: false, automatic_fresh_survival: "UNSET" };
   let browser, server;
+  const failures = [];
   try {
     report.parser_controls = [];
     for (const [raw, equivalent, expected] of [
@@ -406,18 +407,21 @@ test("actual original and corrected layout shadows counter-scale while frozen CS
     }
     for (const [file, bytes] of authority.inputs) assert.deepEqual(authority.read(file), bytes, "Execution source or bootstrap input changed");
     assert.ok(logs.requests.every((request) => !request.path.startsWith("/api/"))); report.status = "pass";
-  } catch (error) { report.status = "fail"; report.error = { message: error.message, stack: error.stack }; throw error; }
+  } catch (error) { report.status = "fail"; report.error = { message: error.message, stack: error.stack }; failures.push(error); }
   finally {
-    let closeError;
     try { if (browser) await browser.close(); }
-    catch (error) { closeError = error; report.status = "fail"; report.browser_close_error = error.message; }
+    catch (error) { failures.push(error); report.status = "fail"; report.browser_close_error = error.message; }
     try { if (server) await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve())); }
-    catch (error) { closeError = closeError || error; report.status = "fail"; report.server_close_error = error.message; }
+    catch (error) { failures.push(error); report.status = "fail"; report.server_close_error = error.message; }
     report.execution.finished = new Date().toISOString();
     report.source_inputs = [...authority.inputs].map(([file, bytes]) => ({ path: file, bytes: bytes.length, sha256: hash(bytes) }));
-    write("observations.json", report.cases); write("runtime-and-sources.json", { actual_primary: report.actual_primary, runtime: report.runtime, source_inputs: report.source_inputs, execution: report.execution });
-    write("build.log.json", logs.build); write("browser-console.log.json", logs.browser); write("browser-errors.log.json", logs.errors); write("server-requests.log.json", logs.requests); write("report.json", report);
-    t.diagnostic(`Retain complete actual case ${directory}, built dist, source inputs, observations and actual ROOT ${authority.root}/${report.actual_primary.target} command/config/bootstrap streams before every fresh/reset. No automatic physical survival is claimed.`);
-    if (closeError) throw closeError;
+    try {
+      write("observations.json", report.cases); write("runtime-and-sources.json", { actual_primary: report.actual_primary, runtime: report.runtime, source_inputs: report.source_inputs, execution: report.execution });
+      write("build.log.json", logs.build); write("browser-console.log.json", logs.browser); write("browser-errors.log.json", logs.errors); write("server-requests.log.json", logs.requests); write("report.json", report);
+    } catch (error) { failures.push(error); report.status = "fail"; report.retention_error = error.message; }
+    try { t.diagnostic(`Retain complete actual case ${directory}, built dist, source inputs, observations and actual ROOT ${authority.root}/${report.actual_primary.target} command/config/bootstrap streams before every fresh/reset. No automatic physical survival is claimed.`); }
+    catch (error) { failures.push(error); }
   }
+  if (failures.length === 1) throw failures[0];
+  if (failures.length > 1) throw new AggregateError(failures, "Motion execution or cleanup failed", { cause: failures[0] });
 });

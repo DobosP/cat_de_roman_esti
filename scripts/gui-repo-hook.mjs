@@ -2,6 +2,7 @@ import * as fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { resolveHookRuntime } from "./gui-hook-runtime.mjs";
+import { runNativeSourcePreflight } from "./gui-native-preflight.mjs";
 import { createHash } from "node:crypto";
 import { validGenRequest, runOriginalStyleOperation, NORMALIZED_STYLE_OPERATION, runNormalizedStyleOperation } from "./gui-style-operation.mjs";
 
@@ -54,7 +55,7 @@ function nativeUnit() {
   command("cat-unit-assets", "node", ["scripts/gui-assets.mjs", "sync"]);
   for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
     hook.check(`cat-${name}-race`, () => {
-      const output = hook.run("go", ["test", "-race", "-json", "./..."], path.join(root, module));
+      const output = hook.run("go", ["test", "-race", "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
       const skipped = output.split("\n").filter((line) => line.startsWith("{")).map((line) => JSON.parse(line)).filter((event) => event.Action === "skip");
       hook.assert("Only explicit native PG tests may skip without DSN", () => skipped.every((event) =>
         module === "go-backend" && ["github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts", "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"].includes(event.Package)));
@@ -112,11 +113,75 @@ switch (target) {
       const artifacts = `${directory}/normalized-react`;
       try {
         setup("cat-normalized");
-        if (allPassed()) frontendBuild("cat-normalized");
+        const setupPassed = hook.checks.at(-1)?.status === "pass";
+        let typesPassed = false;
+        if (setupPassed) {
+          normalizedContract("cat-normalized-bundle-contract", "tests/bundle-budget.test.mjs", 11);
+          command("cat-normalized-sdk-allocation-audit", "node", ["scripts/gui-sdk-allocation-audit.mjs"], frontend, { NODE_ENV: "production" });
+          command("cat-normalized-native-types", "npm", ["run", "typecheck"], frontend);
+          typesPassed = hook.checks.at(-1)?.status === "pass";
+          command("cat-normalized-frontend-lint", "npm", ["run", "lint"], frontend);
+          normalizedContract("cat-normalized-api-consumer-contract", "tests/gui-api-consumer-contract.test.mjs", 2);
+          normalizedContract("cat-normalized-selection-key-contract", "tests/conexiuni-selection-key.test.mjs", 3);
+        }
+        // These independent native checks run even when formatting/lint failed.
+        runNativeSourcePreflight(hook);
+        if (setupPassed && typesPassed) {
+          hook.check("cat-normalized-fresh-build-output", () => {
+            hook.assert("Only the owned frontend output is cleared", () => fs.realpathSync(frontend) === frontend);
+            const output = path.join(frontend, "dist");
+            if (fs.existsSync(output)) {
+              const stat = fs.lstatSync(output);
+              hook.assert("Managed dist is an unaliased directory", () => stat.isDirectory() && !stat.isSymbolicLink() && fs.realpathSync(output) === output);
+              fs.rmSync(output, { recursive: true });
+            }
+          });
+          if (hook.checks.at(-1)?.status === "pass") {
+            try { frontendBuild("cat-normalized"); }
+            finally {
+              // A budget failure after Vite must retain its actual fresh output.
+              if (fs.existsSync(path.join(frontend, "dist/.vite/manifest.json"))) {
+                command("cat-normalized-startup-measurement", "node", ["scripts/gui-startup-inventory.mjs"]);
+              }
+            }
+          }
+        }
         if (allPassed()) command("cat-normalized-assets-sync", "node", ["scripts/gui-assets.mjs", "sync"]);
+        if (allPassed()) {
+          try {
+            command("cat-normalized-gui-identity", "go", ["run", "./cmd/cat-gui-build", "--root", "..", "--sha", hook.context.sha,
+              "--tree-sha256", hook.context.tree_sha256], path.join(root, "go-backend"));
+          } finally {
+            const action = hook.actions.findLast((item) => item.kind === "command");
+            if (action) {
+              const output = path.join(root, artifacts, "identity-generation");
+              fs.mkdirSync(output, { recursive: true });
+              fs.writeFileSync(path.join(output, "command.json"), JSON.stringify(action, null, 2) + "\n");
+              fs.copyFileSync(path.join(root, action.stdout_log), path.join(output, "stdout.log"));
+              fs.copyFileSync(path.join(root, action.stderr_log), path.join(output, "stderr.log"));
+            }
+          }
+        }
         if (allPassed()) binaries("cat-normalized");
-        if (allPassed()) normalizedContract("cat-normalized-api-consumer-contract", "tests/gui-api-consumer-contract.test.mjs", 2);
-        if (allPassed()) normalizedContract("cat-normalized-selection-key-contract", "tests/conexiuni-selection-key.test.mjs", 3);
+        if (allPassed()) {
+          for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
+            hook.check(`cat-normalized-${name}-race`, () => {
+              const output = hook.run("go", ["test", "-race", "-count=1", "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
+              const events = output.split("\n").filter((line) => line.startsWith("{")).map((line) => JSON.parse(line));
+              const skipped = events.filter((event) => event.Action === "skip");
+              hook.assert("Only explicit existing native PG tests may skip without DSN", () => skipped.every((event) => module === "go-backend"
+                && ["github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts", "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"].includes(event.Package)));
+              if (module === "go-backend") {
+                const expected = ["TestManagedSPACompiledCurrentAndFrozenLegacy", "TestManagedSPADeepLinksAndAPIRouting", "TestManagedSPASDKAssetsAndMethodContracts",
+                  "TestManagedSPARefusesPrivateAndMissingAssets", "TestManagedSPARejectsMalformedOrUnconfinedInput", "TestManagedSPAUnbuiltScaffoldDoesNotAdmitUI", "TestManagedSPANonHexViteCacheUsesActualSDKStatus"];
+                const packageName = "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi";
+                hook.assert("All seven actual managed SPA tests execute and pass once", () => expected.every((test) => ["run", "pass"].every((action) => events.filter((event) => event.Package === packageName && event.Test === test && event.Action === action).length === 1))
+                  && !events.some((event) => event.Package === packageName && expected.includes(event.Test) && ["skip", "fail"].includes(event.Action)));
+              }
+            });
+            command(`cat-normalized-${name}-vet`, "go", ["vet", "./..."], path.join(root, module));
+          }
+        }
         if (allPassed()) hook.check("cat-normalized-sealed-react-runtime", () => {
           const output = hook.run("node", ["scripts/gui-original-execution.mjs", "normalized-react"], root, environment);
           const native = JSON.parse(output);
@@ -130,7 +195,9 @@ switch (target) {
         });
         if (allPassed()) command("cat-normalized-complete-browser", "node", ["scripts/gui-full-browser.mjs", "normalized-react"], root, environment);
       } finally {
-        if (fs.existsSync(path.join(root, artifacts))) retainArtifacts(artifacts);
+        for (const relative of [artifacts, `${directory}/frontend-lint`, "go-backend/embedfs/build/dist"]) {
+          if (fs.existsSync(path.join(root, relative))) retainArtifacts(relative);
+        }
       }
       break;
     }
@@ -214,7 +281,7 @@ switch (target) {
     for (const [name, flag] of [["accounts", "accounts.database"], ["httpapi", "arcade.database"]]) {
       hook.check(`cat-pg-${name}`, () => {
         hook.assert("Explicit compose disposable DSN required", () => Boolean(process.env.GATE_DB_DSN));
-        const output = hook.run("go", ["test", "-race", "-json", `./internal/${name}`, `-${flag}`, process.env.GATE_DB_DSN], path.join(root, "go-backend"));
+        const output = hook.run("go", ["test", "-race", "-json", `./internal/${name}`, `-${flag}`, process.env.GATE_DB_DSN], path.join(root, "go-backend"), { CGO_ENABLED: "1" });
         hook.assert("Full PG lane has zero skipped tests", () => !output.split("\n").filter((line) => line.startsWith("{")).map((line) => JSON.parse(line)).some((event) => event.Action === "skip"));
       });
     }

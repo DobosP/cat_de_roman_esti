@@ -95,11 +95,41 @@ if (ast.child.stdout) process.stderr.write(ast.child.stdout);
 let astReport;
 try { astReport = JSON.parse(ast.child.stdout); }
 catch { astReport = null; }
-const status = commands.every((command) => command.exit_code === 0 && !command.signal && !command.error)
+const sdkArtifacts = [];
+let sdkRetentionError = null;
+try {
+  if (astReport) {
+    assert.ok(Array.isArray(astReport.artifacts), "Actual SDK AST artifact inventory required");
+    const seen = new Set();
+    for (const specification of astReport.artifacts) {
+      const matched = typeof specification === "string" && /^(\.gate\/(?:unit|full)\/ast-native\/scan-[A-Za-z0-9_-]+\/\d{4}\.(?:stdout\.json|stderr\.log|receipt\.json)) sha256:([a-f0-9]{64})$/.exec(specification);
+      assert.ok(matched, "Unsupported SDK AST artifact reference");
+      const [, originalPath, expectedHash] = matched;
+      assert.ok(!seen.has(originalPath), "Duplicate SDK AST artifact reference"); seen.add(originalPath);
+      const bytes = fs.readFileSync(regularPath(root, originalPath));
+      assert.equal(hash(bytes), expectedHash, "Actual SDK AST artifact hash differs");
+      // Preserve the SDK's reported physical namespace and receipt bytes. This
+      // copy belongs to the caller's existing retained lint directory, so the
+      // hook can retain it without inventing a SDK GEN/full target.
+      const retainedPath = `${relative}/sdk-ast-retained/${originalPath}`;
+      const destination = regularPath(root, retainedPath, true);
+      fs.mkdirSync(path.dirname(destination), { recursive: true, mode: 0o700 });
+      fs.writeFileSync(destination, bytes, { flag: "wx", mode: 0o600 });
+      assert.equal(hash(fs.readFileSync(destination)), expectedHash);
+      artifacts.push(specification, `${retainedPath} sha256:${expectedHash}`);
+      sdkArtifacts.push({ path: originalPath, sha256: expectedHash, retained_path: retainedPath });
+    }
+  }
+} catch (error) {
+  sdkRetentionError = error instanceof Error ? error.message : String(error);
+  process.stderr.write(`SDK AST evidence retention failed: ${sdkRetentionError}\n`);
+}
+const status = sdkRetentionError === null && commands.every((command) => command.exit_code === 0 && !command.signal && !command.error)
   && astReport?.schema === 1 && astReport.check === "v11-lint" && astReport.status === "pass" ? "pass" : "fail";
 const report = { schema: 1, check: "cat-frontend-lint", status, sha: descriptor.sha, tree_sha256: descriptor.tree_sha256,
   toolchain_digest: descriptor.toolchain_digest, config_sha256: descriptor.config_sha256, source_files: files,
-  commands, artifacts, kit_ast: astReport, capability_equivalence: "PENDING_ACTUAL_ENGINE_PROBE" };
+  commands, artifacts, kit_ast: astReport, sdk_artifacts: sdkArtifacts,
+  sdk_artifact_retention: { status: sdkRetentionError ? "fail" : astReport ? "pass" : "unavailable", ...(sdkRetentionError ? { reason: sdkRetentionError } : {}) }, capability_equivalence: "PENDING_ACTUAL_ENGINE_PROBE" };
 fs.writeFileSync(path.join(output, "report.json"), JSON.stringify(report, null, 2) + "\n", { flag: "wx", mode: 0o600 });
 process.stdout.write(JSON.stringify(report) + "\n");
 process.exitCode = status === "pass" ? 0 : 1;

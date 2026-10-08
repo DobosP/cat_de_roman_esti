@@ -5,7 +5,7 @@ import { Csp, CspButton, CspMotion } from "../components/CspStyle";
 // id until the server reveals it on a win.
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { AnimatePresence, m } from "motion/react";
 import { useLocation } from "react-router-dom";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {

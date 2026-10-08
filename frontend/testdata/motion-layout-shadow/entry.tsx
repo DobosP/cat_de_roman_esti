@@ -28,25 +28,25 @@ type BrokenProps<K extends "button" | "div"> = Omit<HTMLMotionProps<K>, "style" 
 
 // Frozen negative-control mechanism, not a substitute styling engine. These use
 // the real preserved SDK hook and deliberately omit Motion's style-value input.
-function FrozenCssomButton({ css, ref, ...props }: BrokenProps<"button">) {
+export function FrozenCssomButton({ css, ref, ...props }: BrokenProps<"button">) {
   const cssRef = useCspSafeStyle<HTMLButtonElement>(normalizeExplicitCss(css), ref);
   return <m.button {...props} ref={cssRef} />;
 }
-function FrozenCssomDiv({ css, ref, ...props }: BrokenProps<"div">) {
+export function FrozenCssomDiv({ css, ref, ...props }: BrokenProps<"div">) {
   const cssRef = useCspSafeStyle<HTMLDivElement>(normalizeExplicitCss(css), ref);
   return <m.div {...props} ref={cssRef} />;
 }
 
 // The positive control admits only the original narrow Motion shadow channel.
 // All remaining CSS uses the exact same actual SDK boundary as the other arms.
-function OriginalShadowButton({ css, ref, ...props }: BrokenProps<"button">) {
+export function OriginalShadowButton({ css, ref, ...props }: BrokenProps<"button">) {
   const declarations = normalizeExplicitCss(css);
   const motionStyle: { boxShadow: string | undefined } = { boxShadow: declarations?.boxShadow };
   if (declarations) delete declarations.boxShadow;
   const cssRef = useCspSafeStyle<HTMLButtonElement>(declarations, ref);
   return createElement(m.button, { ...props, ref: cssRef, style: motionStyle });
 }
-function OriginalShadowDiv({ css, ref, ...props }: BrokenProps<"div">) {
+export function OriginalShadowDiv({ css, ref, ...props }: BrokenProps<"div">) {
   const declarations = normalizeExplicitCss(css);
   const motionStyle: { boxShadow: string | undefined } = { boxShadow: declarations?.boxShadow };
   if (declarations) delete declarations.boxShadow;
@@ -81,7 +81,7 @@ const lens = {
 declare global { interface Window { __motionLayoutShadow: typeof lens } }
 Object.defineProperty(window, "__motionLayoutShadow", { value: lens, writable: false });
 
-function Card({ owner, variant, active, large }: { owner: Owner; variant: Variant; active: boolean; large: boolean }) {
+export function Card({ owner, variant, active, large }: { owner: Owner; variant: Variant; active: boolean; large: boolean }) {
   const isSel = active, isLatest = active;
   const ref = useRef<HTMLElement | null>(null);
   const observe = (event: string) => () => events.push({ owner, variant, event, time: performance.now() });
@@ -127,7 +127,7 @@ function Card({ owner, variant, active, large }: { owner: Owner; variant: Varian
   return <CspMotion.div {...motion} ref={ref as Ref<HTMLDivElement>} css={css}>Idee de test</CspMotion.div>;
 }
 
-function Scene({ owner }: { owner: Owner }) {
+export function Scene({ owner }: { owner: Owner }) {
   const [large, setLarge] = useState(false), [active, setActive] = useState(true);
   return <main className="fixture-root">
     <h1>Private {owner} layout-shadow capability</h1>
@@ -146,7 +146,7 @@ function Scene({ owner }: { owner: Owner }) {
 
 
 type GuardKind = "raw-style" | "getter" | "numeric-shadow" | "layout-radius";
-function GuardProbe({ kind }: { kind: GuardKind }) {
+export function GuardProbe({ kind }: { kind: GuardKind }) {
   let css: unknown = { boxShadow: "0 0 18px -6px #54e39d" };
   const extra: Record<string, unknown> = {};
   if (kind === "raw-style") extra.style = { color: "red" };

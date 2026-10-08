@@ -137,7 +137,9 @@ export async function normalizedReactAdmission() {
   for (const file of ["scripts/gui-original-execution.mjs", "scripts/gui-full-browser.mjs", "scripts/gui-repo-hook.mjs", "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs",
     "frontend/playwright.gui.config.mjs", "frontend/playwright.config.mjs", "frontend/e2e/games.mjs", "frontend/e2e/native-plan.mjs", "frontend/e2e/seeded-starts.json",
     "frontend/e2e/alchimie-111-checkpoint.json", "frontend/e2e/alchimie-221-checkpoint.json", "frontend/e2e/alchimie-221-expanded-checkpoint.json",
-    "frontend/node_modules/@playwright/test/cli.js", "scripts/gui-assets.mjs", "frontend/vite.config.ts", "frontend/tsconfig.json",
+    "frontend/node_modules/@playwright/test/cli.js", "scripts/gui-assets.mjs", "scripts/gui-native-preflight.mjs", "scripts/gui-startup-inventory.mjs",
+    "frontend/scripts/check-bundle-budget.mjs", "frontend/scripts/gui-lint.mjs", "frontend/tests/bundle-budget.test.mjs",
+    "frontend/vite.config.ts", "frontend/tsconfig.json",
     "frontend/tests/gui-api-consumer-contract.test.mjs", "frontend/tests/conexiuni-selection-key.test.mjs",
     "frontend/tests/fixtures/gui-api-consumer-contract.ts", "frontend/tests/fixtures/gui-api-consumer-tsconfig.json"]) input(file);
   function managedFiles(directory, prefix = "") {
@@ -160,8 +162,17 @@ export async function normalizedReactAdmission() {
   assert.deepEqual(legacyFiles, legacy.files.map((item) => item.path), "Embedded legacy asset set differs from its frozen proof");
   assert.ok(legacyFiles.includes("index.html") && legacyFiles.includes(".vite/manifest.json"));
   for (const item of legacy.files) { const data = input(`go-backend/embedfs/legacy/${item.path}`); assert.equal(data.length, item.bytes); assert.equal(hash(data), item.sha256, "Embedded legacy bytes differ from the frozen proof"); }
+  assert.equal(input("go-backend/embedfs/build/dist/.keep").length, 0, "Private build scaffold must stay empty");
+  const identityPath = "go-backend/embedfs/build/dist/.gui-build.json", identity = json(identityPath);
+  assert.deepEqual(Object.keys(identity).sort(), ["manifest_sha256", "sha", "tree_sha256", "versions_lock_sha256"]);
+  assert.equal(identity.sha, descriptor.sha); assert.equal(identity.tree_sha256, descriptor.tree_sha256);
+  assert.equal(identity.manifest_sha256, hash(input("go-backend/embedfs/dist/.vite/manifest.json")));
+  assert.deepEqual(input("go-backend/embedfs/build/dist/versions.lock.json"), input("versions.lock.json"));
+  assert.equal(identity.versions_lock_sha256, hash(input("versions.lock.json")));
+  for (const file of ["go-backend/cmd/cat-gui-build/main.go", "go-backend/internal/guibuild/generate.go", "go-backend/internal/guibuild/identity.go",
+    "go-backend/embedfs/assets.go", "go-backend/internal/httpapi/gui_build.go", "go-backend/internal/httpapi/managed_nonce.go"]) input(file);
   return { inputs: [...inputs.values()], installed_versions: installed, native_compiler: compiler, parser_api: parser,
-    managed_build: { source: "frontend/dist", embedded: "go-backend/embedfs/dist", files: distFiles, legacy: { proof: "legacy/original-bundle.json", archive: legacy.archive, sha256: legacy.sha256, files: legacyFiles } },
+    managed_build: { source: "frontend/dist", embedded: "go-backend/embedfs/dist", files: distFiles, identity: { path: identityPath, ...identity }, legacy: { proof: "legacy/original-bundle.json", archive: legacy.archive, sha256: legacy.sha256, files: legacyFiles } },
     runtime_dependencies: Object.fromEntries(["react", "react-dom", "motion", "framer-motion"].map((name) => [name, installed[name]])),
     ui_adoption: phase, original_receipt: { path: phase.legacy.receipt, sha256: hash(receiptBytes) },
     sealed_fixtures: receipt.fixtures.map(({ id, suite, assertions }) => ({ id, suite, assertions: assertions.map(({ id }) => id) })) };

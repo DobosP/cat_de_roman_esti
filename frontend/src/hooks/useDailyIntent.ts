@@ -19,7 +19,7 @@ export function useDailyIntent(): DailyIntent {
     if (!params.has("challenge")) return;
     params.delete("challenge");
     const search = params.toString();
-    navigate({ pathname: location.pathname, search: search ? `?${search}` : "", hash: location.hash }, { replace: true });
+    void navigate({ pathname: location.pathname, search: search ? `?${search}` : "", hash: location.hash }, { replace: true });
   };
   return { active, consume };
 }

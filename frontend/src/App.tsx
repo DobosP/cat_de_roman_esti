@@ -5,7 +5,7 @@
 
 import { lazy, Suspense, useCallback, useRef, useState, type ReactNode } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { AnimatePresence, domAnimation, LazyMotion, m, MotionConfig } from "framer-motion";
+import { AnimatePresence, domAnimation, LazyMotion, m, MotionConfig } from "motion/react";
 import { ToastStack, type ToastData, type ToastKind } from "@roedu/ui";
 import Home from "./screens/Home";
 import { RouteErrorBoundary } from "./components/RouteErrorBoundary";

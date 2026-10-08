@@ -1,10 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { guiSdkAllocationPlugin } from "./scripts/gui-sdk-allocation-plugin.mts";
 
 // Asset sync copies this managed build into the native server's embedded tree.
 // The development proxy keeps the SPA and API on the same browser origin.
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), guiSdkAllocationPlugin()],
   build: {
     outDir: "dist",
     emptyOutDir: true,
@@ -12,6 +13,13 @@ export default defineConfig({
     // chunks stay outside the first-load budget because browsers fetch them on play.
     manifest: true,
     sourcemap: false,
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [{ name: "startup", tags: ["$initial"] }],
+        },
+      },
+    },
   },
   server: {
     port: 5173,

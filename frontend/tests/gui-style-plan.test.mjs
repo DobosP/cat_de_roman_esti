@@ -251,7 +251,7 @@ function publicationFixture(t, label, body) {
   const closed = (value, fields, optional = []) => value && typeof value === "object" && !Array.isArray(value)
     && fields.every(key => Object.hasOwn(value, key)) && Object.keys(value).every(key => fields.includes(key) || optional.includes(key));
   const literal = (name, dot = false) => {
-    assert.ok(typeof name === "string" && (dot && name === "." || name && !name.startsWith("/") && !/[\\:\x00-\x1f\x7f]/.test(name)
+    assert.ok(typeof name === "string" && (dot && name === "." || name && !name.startsWith("/") && !Array.from(name).some((character) => { const code = character.charCodeAt(0); return code === 92 || code === 58 || code <= 31 || code === 127; })
       && name.split("/").every(part => /^[A-Za-z0-9_@.-]+$/.test(part) && part !== "." && part !== ".."
         && !part.endsWith(".") && !/^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i.test(part))), "Literal confined path required");
     return name;
@@ -367,11 +367,11 @@ function publicationFixture(t, label, body) {
   }
   assert.equal(used.size, listed.size); assert.equal(listed.size, bootstrap.actions.length * 2); assert.ok(configCommands > 0);
   const sourceInputs = [
-    ["scripts/gui-style-plan.mjs", "e6e82c02fe413a35dbce33380e8575bcfe296905327b4e3f0f7242c070732231"],
+    ["scripts/gui-style-plan.mjs", "794cd9a1363280d5d62abbd6b7fbe5b4b7edbb061ec893b3664ac06c4d1d6713"],
     ["frontend/tests/fixtures/gui-style-plan.json", "24bdcb858dcc74878e99aca0de338bf335cf3b1b3c14e8b68820fca1be9ca8b9"],
     ["frontend/src/components/cssUnits.ts", "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873"],
     ["frontend/src/components/CspStyle.ts", "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320"],
-    ["frontend/src/components/CspElements.tsx", "27cf738b5af8a4e4eefab89b513d941261b61d0d41813eca09618ea8a8ef881d"],
+    ["frontend/src/components/CspElements.tsx", "f1c5478b8d243223d16baedb9fc6f0ced38f073377e0d7393e252b5a598b32c3"],
   ].map(([name, expected]) => { const bytes = read(name); assert.equal(sha(bytes), expected); return { path: name, bytes: bytes.length, sha256: expected }; });
   const testBytes = read("frontend/tests/gui-style-plan.test.mjs");
   sourceInputs.push({ path: "frontend/tests/gui-style-plan.test.mjs", bytes: testBytes.length, sha256: sha(testBytes) });

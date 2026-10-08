@@ -1,5 +1,5 @@
 import { createElement, type ComponentPropsWithRef, type CSSProperties, type Ref } from "react";
-import { m, type HTMLMotionProps } from "framer-motion";
+import { m, type HTMLMotionProps } from "motion/react";
 import { Button, useCspSafeStyle, type ButtonProps } from "@roedu/ui";
 import { normalizeExplicitCss, type UnitlessProperty } from "./cssUnits";
 import "../styles/csp-style.css";
