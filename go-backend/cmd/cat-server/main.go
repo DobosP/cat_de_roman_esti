@@ -23,6 +23,10 @@ import (
 )
 
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "healthcheck" {
+		if err := guiHealthcheck(os.Args[1:], os.Stdout); err != nil { log.Fatal(err) }
+		return
+	}
 	addr := flag.String("listen", "127.0.0.1:8081", "HTTP bind address")
 	migrate := flag.Bool("migrate", false, "apply native account schema to configured PostgreSQL")
 	replay := flag.Bool("replay", false, "offline JSON-lines HTTP request replay on stdin/stdout")

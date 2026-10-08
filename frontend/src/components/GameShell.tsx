@@ -1,3 +1,4 @@
+import { Csp } from "./CspStyle";
 // GameShell — a shared header for every word game so the arcade feels cohesive.
 //
 // Renders a consistent "← Ieși" navigation button (left) and a right-aligned slot for the
@@ -53,8 +54,8 @@ export function GameShell({
 
   return (
     <>
-      <div ref={headerRef} className="row spread game-shell-header" style={{ gap: 12 }}>
-        <div className="row game-shell-main" style={{ gap: 10, alignItems: "center" }}>
+      <Csp.div ref={headerRef} className="row spread game-shell-header" css={{ gap: "12px" }}>
+        <Csp.div className="row game-shell-main" css={{ gap: "10px", alignItems: "center" }}>
           <Button
             variant="secondary"
             size="sm"
@@ -67,20 +68,20 @@ export function GameShell({
             {busy ? "Se pregătește…" : "Ieși"}
           </Button>
           {title && (
-            <strong
+            <Csp.strong
               className="game-shell-title"
-              style={{ fontFamily: "var(--font-display)", color: accent, fontSize: "1.05rem" }}
+              css={{ fontFamily: "var(--font-display)", color: accent, fontSize: "1.05rem" }}
             >
               {title}
-            </strong>
+            </Csp.strong>
           )}
-        </div>
+        </Csp.div>
         {children && (
           <div className="game-shell-status">
             {children}
           </div>
         )}
-      </div>
+      </Csp.div>
       {helpGame && <GameHelp game={helpGame} />}
     </>
   );

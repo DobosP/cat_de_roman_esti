@@ -26,6 +26,7 @@ require (
 	github.com/DobosP/cat_de_roman_esti/shared-go/authcore v0.0.0
 	github.com/DobosP/roedu-ui/web-kit v0.0.0-core-v1.2
 	github.com/jackc/pgx/v5 v5.11.0
+	golang.org/x/net v0.59.0
 )
 
 replace github.com/DobosP/roedu-ui/web-kit => ./third_party/webkit

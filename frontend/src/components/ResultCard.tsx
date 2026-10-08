@@ -1,3 +1,4 @@
+import { Csp, CspMotion } from "./CspStyle";
 // ResultCard — the shared end-of-game card used by every word game so winning, losing,
 // the score read-out, the "Record!" celebration, and the share/copy + replay actions all
 // look and behave identically across the arcade. Wins get a confetti burst (skipped
@@ -67,16 +68,16 @@ export function ResultCard({
 }) {
   const ring = won ? accent : "var(--surface-border-strong)";
   return (
-    <m.div
+    <CspMotion.div
       className="card center col"
       initial={{ scale: 0.88, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", stiffness: 240, damping: 18 }}
       role="status"
       aria-live="polite"
-      style={{
-        gap: 10,
-        padding: 24,
+      css={{
+        gap: "10px",
+        padding: "24px",
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
@@ -85,33 +86,33 @@ export function ResultCard({
       }}
     >
       {won && <Confetti accent={accent} />}
-      <m.div
-        style={{ fontSize: "2.6rem", lineHeight: 1 }}
+      <CspMotion.div
+        css={{ fontSize: "2.6rem", lineHeight: 1 }}
         aria-hidden
         initial={{ scale: 0.4, rotate: won ? -14 : 0 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.08 }}
       >
         {icon}
-      </m.div>
-      <h2 style={{ margin: "2px 0", color: won ? accent : "var(--text)" }}>{title}</h2>
+      </CspMotion.div>
+      <Csp.h2 css={{ margin: "2px 0", color: won ? accent : "var(--text)" }}>{title}</Csp.h2>
 
       {children && (
-        <div className="muted" style={{ margin: 0, fontSize: "0.95rem" }}>
+        <Csp.div className="muted" css={{ margin: "0px", fontSize: "0.95rem" }}>
           {children}
-        </div>
+        </Csp.div>
       )}
 
       {score !== undefined && (
-        <div className="col center" style={{ gap: 4, marginTop: 4 }}>
-          <span className="faint" style={{ fontSize: "0.72rem", letterSpacing: "0.08em" }}>
+        <Csp.div className="col center" css={{ gap: "4px", marginTop: "4px" }}>
+          <Csp.span className="faint" css={{ fontSize: "0.72rem", letterSpacing: "0.08em" }}>
             {scoreLabel}
-          </span>
-          <m.div
+          </Csp.span>
+          <CspMotion.div
             initial={{ scale: 0.7 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.15 }}
-            style={{
+            css={{
               fontFamily: "var(--font-display)",
               fontWeight: 700,
               fontSize: "2.2rem",
@@ -120,7 +121,7 @@ export function ResultCard({
             }}
           >
             {score}
-          </m.div>
+          </CspMotion.div>
           {isRecord && (
             <m.span
               initial={{ scale: 0.6, opacity: 0 }}
@@ -139,11 +140,11 @@ export function ResultCard({
               <Badge tone="success">★ Recordul acestei provocări</Badge>
             </m.span>
           )}
-        </div>
+        </Csp.div>
       )}
 
       <StartFailureNotice failed={startFailed} reserveSpace={Boolean(onReplay)} />
-      <div className="row center wrap" style={{ gap: 12, marginTop: 12, position: "relative" }}>
+      <Csp.div className="row center wrap" css={{ gap: "12px", marginTop: "12px", position: "relative" }}>
         {onReplay && (
           <Button onClick={onReplay} disabled={actionsBusy}>
             {actionsBusy ? "Se pregătește…" : replayLabel}
@@ -164,7 +165,7 @@ export function ResultCard({
             Meniu
           </Button>
         )}
-      </div>
-    </m.div>
+      </Csp.div>
+    </CspMotion.div>
   );
 }

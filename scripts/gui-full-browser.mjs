@@ -216,23 +216,39 @@ try {
   const routes = ["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie?mode=challenges", "/alchimie?mode=explore", "/cald-rece", "/lant", "/clasament"];
   for (const route of routes) {
     const page = await browser.newPage({ reducedMotion: "no-preference" });
-    page.on("console", (message) => { if (/Content Security Policy|Refused to (?:execute|apply|load)/i.test(message.text())) violations.push({ route, message: message.text() }); });
+    page.on("console", (message) => { if (/Content Security Policy|Refused to (?:execute|apply|load)/i.test(message.text())) violations.push({ route, message: "CSP refusal observed (detail withheld)" }); });
     await page.addInitScript(() => {
       window.__cspViolations = [];
-      document.addEventListener("securitypolicyviolation", (event) => window.__cspViolations.push({ directive: event.violatedDirective, blocked: event.blockedURI }));
+      document.addEventListener("securitypolicyviolation", (event) => window.__cspViolations.push({ directive: event.violatedDirective, effectiveDirective: event.effectiveDirective, disposition: event.disposition, blocked: ["inline", "eval", "wasm-eval", "trusted-types-policy", "trusted-types-sink"].includes(event.blockedURI) ? event.blockedURI : "[redacted]" }));
     });
     const html = await page.goto(new URL(route, process.env.GATE_APP_URL).href);
     const header = process.env.CSP_STAGE === "enforced" ? "content-security-policy" : "content-security-policy-report-only";
     assert.ok(html.headers()[header], `Actual ${header} required`);
-    if (process.env.CSP_STAGE === "enforced") assert.equal(html.headers()["content-security-policy-report-only"], undefined);
+    if (process.env.CSP_STAGE === "enforced") {
+      // The shipped SDK deliberately inventories Trusted Types independently.
+      // Strict CSP stays enforced; no event or console failure is waived below.
+      assert.equal(html.headers()["content-security-policy-report-only"],
+        "require-trusted-types-for 'script'; trusted-types roedu roedu-hovercard roedu-islands; report-uri /csp-report");
+    }
+    const headerNonce = html.headers()[header].match(/script-src 'self' 'nonce-([^']+)' 'strict-dynamic'/)?.[1];
+    assert.match(headerNonce || "", /^[A-Za-z0-9+/]{32}$/);
+    assert.ok(html.headers()[header].includes("style-src 'self' 'nonce-" + headerNonce + "'"));
+    assert.ok(html.headers()[header].includes("script-src-attr 'none'"));
+    assert.ok(html.headers()[header].includes("style-src-attr 'none'"));
     await page.locator(".screen").first().waitFor();
     const observation = await page.evaluate(() => {
       const scripts = [...document.querySelectorAll("script")], module = scripts.find((item) => item.type === "module");
       const css = [...document.querySelectorAll('link[rel="stylesheet"]')].map((item) => item.href);
       const preloads = [...document.querySelectorAll('link[rel="modulepreload"]')].map((item) => item.href);
-      return { nonces: scripts.map((item) => item.nonce), module: module?.src, css, preloads, json: scripts.filter((item) => item.type === "application/json").length, violations: window.__cspViolations };
+      const metas = [...document.querySelectorAll('meta[property="csp-nonce"]')];
+      const assetNonces = [...document.querySelectorAll('link[rel="stylesheet"],link[rel="modulepreload"]')].map((item) => item.nonce);
+      return { nonces: scripts.map((item) => item.nonce), meta: metas.map((item) => ({ content: item.content, nonce: item.nonce })), assetNonces,
+        module: module?.src, css, preloads, json: scripts.filter((item) => item.type === "application/json").length, violations: window.__cspViolations };
     });
-    assert.ok(observation.nonces.length > 0 && observation.nonces.every((nonce) => nonce && nonce === observation.nonces[0]));
+    assert.ok(observation.nonces.length > 0 && observation.nonces.every((nonce) => nonce === headerNonce));
+    assert.deepEqual(observation.meta, [{ content: headerNonce, nonce: headerNonce }]);
+    assert.ok(observation.assetNonces.length > 0 && observation.assetNonces.every((nonce) => nonce === headerNonce));
+    assert.ok(!observations.some((item) => item.nonce_sha256 === hash(headerNonce)), "Actual document request reused a nonce");
     assert.ok(observation.module); assert.ok(observation.css.length > 0);
     violations.push(...observation.violations.map((item) => ({ route, ...item })));
     observations.push({ page: route, nonce_sha256: hash(observation.nonces[0]), scripts: observation.nonces.length, json: observation.json,

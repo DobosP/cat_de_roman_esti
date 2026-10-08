@@ -26,6 +26,7 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/lant"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/perechi"
 	"github.com/DobosP/cat_de_roman_esti/shared-go/authcore"
+	"github.com/DobosP/roedu-ui/web-kit/health"
 )
 
 const prefix = "/api/wordgames/intrusul/games"
@@ -45,6 +46,7 @@ type Server struct {
 	StaticRoot          string
 	managedUI           *managedSPA
 	managedUIError      error
+	guiBuild            *health.Identity
 	allowedHosts        []string
 	perechi             *perechi.Service
 	conexiuni           *conexiuni.Service
@@ -56,7 +58,9 @@ type Server struct {
 
 func New(c *content.Content) *Server {
 	s := &Server{game: intrusul.New(c), content: c, allowedHosts: configuredHosts()}
-	s.managedUI, s.managedUIError = newManagedSPA(embedfs.Files, os.Getenv("CAT_UI"))
+	mode := os.Getenv("CAT_UI")
+	s.managedUI, s.managedUIError = newManagedSPA(embedfs.Files, mode)
+	s.initGUIBuild(embedfs.Files, embedfs.BuildIdentity, mode)
 	s.perechi = perechi.New(c)
 	s.conexiuni = conexiuni.New(c)
 	s.contexto = contexto.New(c)
@@ -143,6 +147,10 @@ func (s *Server) serveHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.URL.Path == "/healthz" {
 		write(w, r, 200, map[string]any{"ok": true})
+		return
+	}
+	if r.URL.Path == "/api/gui-build" {
+		s.serveGUIBuild(w, r)
 		return
 	}
 	if !strings.HasPrefix(r.URL.Path, "/api/wordgames/intrusul") {

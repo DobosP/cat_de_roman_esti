@@ -1,3 +1,4 @@
+import { Csp } from "./CspStyle";
 // GameIntro — the shared "before you play" card: icon, title, tag, how-to,
 // difficulty (passed as children), the primary start action and the daily
 // challenge. All four games previously hand-rolled this with drifting styles.
@@ -84,28 +85,28 @@ export function GameIntro({
         boxShadow: glow ? `0 0 80px -30px ${glow}, var(--shadow-card)` : undefined,
       }}
     >
-      <div
+      <Csp.div
         className="game-intro-icon"
         aria-hidden
-        style={{ background: `${accent}22`, borderColor: `${accent}55` }}
+        css={{ background: `${accent}22`, borderColor: `${accent}55` }}
       >
         {icon}
-      </div>
-      <div className="col center" style={{ gap: 6 }}>
-        <h2 style={{ color: accent, fontSize: "1.7rem" }}>{title}</h2>
+      </Csp.div>
+      <Csp.div className="col center" css={{ gap: "6px" }}>
+        <Csp.h2 css={{ color: accent, fontSize: "1.7rem" }}>{title}</Csp.h2>
         {tag && (
           <Badge color={accent} size="sm">
             {tag}
           </Badge>
         )}
-      </div>
+      </Csp.div>
       <div className="muted game-intro-description">{description}</div>
       {steps && <PlayGuide steps={steps} />}
 
       {children && <div className="col game-intro-extras">{children}</div>}
 
       {resumeRecovery && (
-        <div className="card col" role="alert" style={{ gap: 10, padding: 14, width: "100%" }}>
+        <Csp.div className="card col" role="alert" css={{ gap: "10px", padding: "14px", width: "100%" }}>
           <strong>
             {resumeRecovery.kind === "failed"
               ? "Nu am putut relua jocul salvat. Nu l-am șters."
@@ -118,11 +119,11 @@ export function GameIntro({
                 : "Încarcă jocul curent"}
             </Button>
           )}
-        </div>
+        </Csp.div>
       )}
 
       <StartFailureNotice failed={startFailed} />
-      <div className="row center wrap game-intro-actions" style={{ gap: 12, marginTop: 6 }}>
+      <Csp.div className="row center wrap game-intro-actions" css={{ gap: "12px", marginTop: "6px" }}>
         <Button autoFocus onClick={consumeThen(dailyFirst ? onDaily : onStart)} disabled={starting} size="lg">
           {dailyFirst ? "Joacă provocarea zilei" : startLabel}
         </Button>
@@ -136,12 +137,12 @@ export function GameIntro({
             {!dailyFirst && <span aria-hidden>📅</span>} {dailyFirst ? "Joacă liber" : dailyLabel}
           </Button>
         )}
-      </div>
+      </Csp.div>
 
       {best && (
-        <p className="faint" style={{ margin: 0, fontSize: "0.82rem" }}>
-          Recordul tău: <strong style={{ color: accent }}>{best.score}</strong> · {displayDetail(best.detail)}
-        </p>
+        <Csp.p className="faint" css={{ margin: "0px", fontSize: "0.82rem" }}>
+          Recordul tău: <Csp.strong css={{ color: accent }}>{best.score}</Csp.strong> · {displayDetail(best.detail)}
+        </Csp.p>
       )}
     </CspMotion.div>
   );

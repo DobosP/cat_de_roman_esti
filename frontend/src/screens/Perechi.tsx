@@ -1,3 +1,4 @@
+import { Csp } from "../components/CspStyle";
 // Perechi — eight visible words, four semantic matches. Choosing the second tile
 // submits immediately: no drag gesture, no extra confirmation, no client-side answer map.
 
@@ -508,7 +509,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   if (!state) {
     return (
       <div className="screen-pad fill">
-        <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
+        <Csp.div className="container col game-container" css={{ gap: "18px", paddingBottom: "32px" }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={loading} />
           <GameIntro
             startFailed={startFailed}
@@ -524,11 +525,11 @@ export default function Perechi({ onExit, onToast }: Props) {
             glow={DEF.glow}
             description={
               <>
-                <p style={{ margin: 0 }}>Opt cuvinte ascund patru perechi cu sens.</p>
+                <Csp.p css={{ margin: "0px" }}>Opt cuvinte ascund patru perechi cu sens.</Csp.p>
                 {starterVisible && (
-                  <p className="faint" style={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
+                  <Csp.p className="faint" css={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
                     Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.
-                  </p>
+                  </Csp.p>
                 )}
               </>
             }
@@ -543,7 +544,7 @@ export default function Perechi({ onExit, onToast }: Props) {
             onDaily={() => void start({ daily: todayLocal() })}
             starting={loading}
           />
-        </div>
+        </Csp.div>
       </div>
     );
   }
@@ -553,7 +554,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   const selectedTile = activeTiles.find((tile) => tile.id === selected);
   return (
     <div className="screen-pad fill perechi-game">
-      <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
+      <Csp.div className="container col game-container" css={{ gap: "14px", paddingBottom: "32px" }}>
         <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} />}
@@ -567,7 +568,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         </GameShell>
 
         {!finished && actionSync && (
-          <div className="card col perechi-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+          <Csp.div className="card col perechi-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
             <span>{actionSync.kind === "changed"
               ? "Încarcă jocul curent pentru a continua."
@@ -575,7 +576,7 @@ export default function Perechi({ onExit, onToast }: Props) {
             <Button type="button" onClick={(event) => void retryActionSync(event.currentTarget)} disabled={busy || !isPresent}>
               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
             </Button>
-          </div>
+          </Csp.div>
         )}
 
         {!finished && !actionSync && (
@@ -714,9 +715,9 @@ export default function Perechi({ onExit, onToast }: Props) {
             >
               <div className="perechi-solution">
                 {!state.won && (
-                  <p style={{ margin: "0 0 2px" }}>
+                  <Csp.p css={{ margin: "0 0 2px" }}>
                     Ai găsit {state.solved_count} din 4 perechi.
-                  </p>
+                  </Csp.p>
                 )}
                 {state.solution.map((pair) => (
                   <span key={pair.tiles.map((tile) => tile.id).join("+")}>
@@ -728,7 +729,7 @@ export default function Perechi({ onExit, onToast }: Props) {
             </ResultCard>
           </div>
         )}
-      </div>
+      </Csp.div>
     </div>
   );
 }

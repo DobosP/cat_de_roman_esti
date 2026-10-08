@@ -1,10 +1,10 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-10-04
+Last verified: 2026-10-08 — documentation/source review only; amended runtime gates NOT RUN.
 
 ## Native serving gates
 
-Go 1.27.1 serves the arcade, accounts/proposals and native content/tooling; Node 24 builds the SPA.
+Go 1.27.1 serves the arcade, accounts/proposals and native content/tooling; selected Node 26.10.0/npm 12.2.0 SPA tooling follows [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md).
 [ADR-0162](adr/0162-select-go-production-backend.md) and [ADR-0163](adr/0163-complete-native-go-accounts.md)
 record serving boundaries; [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md)
 records native operator/review rails. Python commands below are optional independent references.
@@ -47,7 +47,7 @@ Other supported Python versions test the retained implementation without regener
 | Reference/content lint | `<interp> -m ruff check` | `All checks passed!` |
 
 `pyproject.toml` adds `-q`; use `-o addopts=""` when recording assertion totals.
-Node 24 is the qualified frontend build environment; verify `node -v`/`npm -v` before use.
+Original Node 24 qualification is historical; selected ADR-0184 tooling needs actual owning Linux context/version evidence and complete normalized qualification.
 Playwright setup uses `npx playwright install chromium`; `CDR_E2E_PORT` and
 `CDR_E2E_OUTPUT_DIR` scope the local server and scratch receipts. Private answer helpers run Go; `CDR_BROWSER_PLAN_BINARY` selects the scratch planner.
 Windows targeted reference tests use `PYTHONUTF8=1`; the full Unix `resource`-using suite needs WSL.
@@ -58,8 +58,10 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
 1. Run docs/whitespace gates; documentation-only changes need no game or asset rebuild.
 2. Native behavior changes run focused Go race/vet and applicable PG/HTTP release lanes.
 3. Content changes run native source/operator/rail freshness and independent review contracts.
-4. Frontend JS/TS/CSS changes run frontend/build/browser gates and commit regenerated
-   original30 preservation and managed output/retirement per ADR-0184; backend/docs-only edits do not regenerate it.
+4. Frontend JS/TS/CSS changes run applicable frontend/build/browser gates. Keep original30 frozen;
+   managed output sync and reviewed source retirement follow ADR-0184; backend/docs-only edits do not regenerate output.
+   After integration, [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) counts entry+mandatory AccountBar recursive static JS/CSS once in the build check.
+   Default helper/frozen historical closures stay static-only; source is unapplied/unqualified and amended tests NOT RUN. All native/privacy/browser checks remain.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
 
 ## Known load-sensitive reference check
@@ -71,6 +73,6 @@ Reference `tests/accounts/` collection requires `CAT_ACCOUNTS_ENABLED=1`.
 Current content expectations: [ADR-0116](adr/0116-share-current-content-test-expectations.md),
 `tests/current_content.py` and `tests/content_scenarios.py`; historical pins remain separate.
 
-Complete native-only qualification: `scripts/qualify_go_toolchain.sh`, documented in
-[NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md), requires explicit disposable PG and task scratch,
-Go 1.27.1/Node 24, Python/Rust absent from PATH; no missing required gate becomes a skip.
+The separate `scripts/qualify_go_toolchain.sh` source alignment prepares exact Node 26.10.0 per [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md); **UNAPPLIED, UNQUALIFIED, NOT RUN**.
+It remains separate from the owning GUI wrapper; actual Linux/version/lint context, disposable PG/task scratch and all native/privacy/browser qualification obligations remain.
+[ADR-0168](adr/0168-qualify-complete-native-toolchain.md) retains historical Node 24 proof; [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md) records the pending aligned recipe. No missing required gate becomes a skip.

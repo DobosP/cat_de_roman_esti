@@ -17,7 +17,7 @@ import (
 func managedSPAFixture() fstest.MapFS {
 	files := fstest.MapFS{}
 	for _, root := range []string{"dist", "legacy"} {
-		files[root+"/index.html"] = &fstest.MapFile{Data: []byte("<!doctype html><main>" + root + "</main>")}
+		files[root+"/index.html"] = &fstest.MapFile{Data: []byte("<!doctype html><html lang=\"ro\"><head><script type=\"module\" crossorigin src=\"/assets/app-1234abcd.js\"></script><link rel=\"stylesheet\" crossorigin href=\"/assets/app-1234abcd.css\"></head><body><div id=\"root\"></div><!--" + root + "--></body></html>")}
 		files[root+"/.vite/manifest.json"] = &fstest.MapFile{Data: []byte(`{"index.html":{"file":"assets/app-1234abcd.js","isEntry":true,"css":["assets/app-1234abcd.css"]}}`)}
 		files[root+"/assets/app-1234abcd.js"] = &fstest.MapFile{Data: []byte("console.log('" + root + "');")}
 		files[root+"/assets/app-1234abcd.css"] = &fstest.MapFile{Data: []byte("body{color:navy}")}
@@ -47,9 +47,10 @@ func TestManagedSPACompiledCurrentAndFrozenLegacy(t *testing.T) {
 				t.Fatalf("default server did not admit compiled %s: %v", mode, s.managedUIError)
 			}
 			w := managedSPARequest(s, "GET", "/intrusul?challenge=daily")
-			if w.Code != 200 || !bytes.Equal(w.Body.Bytes(), index) {
-				t.Fatal("compiled selected tree was not the SPA deep-link response")
-			}
+			if w.Code != 200 { t.Fatal("compiled selected tree was not the SPA deep-link response") }
+			if mode == "legacy" {
+				if !bytes.Equal(w.Body.Bytes(), index) { t.Fatal("compiled frozen legacy response changed bytes") }
+			} else { assertManagedCurrentIndex(t, w, index) }
 			if mode == "legacy" && fmt.Sprintf("%x", sha256.Sum256(index)) != "6ef9e2cd5334b0e89fe078f0bf2c3c9b3b94360ad013c7740db5cc205bd3feeb" {
 				t.Fatal("compiled rollback index differs from the sealed thirty-file original")
 			}
@@ -74,9 +75,8 @@ func TestManagedSPADeepLinksAndAPIRouting(t *testing.T) {
 	s.managedUIError = nil
 	for _, path := range []string{"/", "/intrusul", "/alchimie?mode=explore", "/not-a-route"} {
 		w := managedSPARequest(s, "GET", path)
-		if w.Code != 200 || !bytes.Equal(w.Body.Bytes(), s.managedUI.index) || w.Header().Get("Cache-Control") != "no-cache" {
-			t.Fatalf("SPA fallback failed for %s: %d", path, w.Code)
-		}
+		if w.Code != 200 { t.Fatalf("SPA fallback failed for %s: %d", path, w.Code) }
+		assertManagedCurrentIndex(t, w, s.managedUI.index)
 	}
 	for _, path := range []string{"/api", "/api/no-such-endpoint", "/api/wordgames/unknown/games"} {
 		w := managedSPARequest(s, "GET", path)
@@ -152,7 +152,8 @@ func TestManagedSPANonHexViteCacheUsesActualSDKStatus(t *testing.T) {
 	files := managedSPAFixture()
 	asset := "/assets/AccountBar-B_1k6UL8.js"
 	files["dist"+asset] = &fstest.MapFile{Data: []byte("console.log('non-hex-vite-hash');")}
-	files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"assets/AccountBar-B_1k6UL8.js","isEntry":true}}`)
+	files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"assets/AccountBar-B_1k6UL8.js","isEntry":true,"css":["assets/app-1234abcd.css"]}}`)
+	files["dist/index.html"].Data = bytes.Replace(files["dist/index.html"].Data, []byte("/assets/app-1234abcd.js"), []byte(asset), 1)
 	var err error
 	s.managedUI, err = newManagedSPA(files, "current")
 	if err != nil { t.Fatal(err) }

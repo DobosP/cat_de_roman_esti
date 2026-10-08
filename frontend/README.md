@@ -1,6 +1,6 @@
 # cat_de_roman_esti — frontend
 
-Text-only word-game arcade SPA: **React 19.2 + Vite 8.1 + TypeScript** (no graph
+Text-only word-game arcade SPA: **React 19.2.7 + Vite 8.3.3 + TypeScript 7.0.2** (no graph
 visualization — the old force-graph SPA was removed 2026-06-22, see
 `../docs/adr/0001-pivot-to-word-game-arcade.md`).
 
@@ -12,7 +12,7 @@ no secrets ever live in the client.
 ## Develop
 
 ```bash
-npm install
+npm ci
 npm run dev          # Vite dev server on http://localhost:5173
 ```
 
@@ -29,25 +29,45 @@ make dev             # Go API + Vite frontend development
 
 ```bash
 npm test             # node --test tests/*.test.mjs (frontend contracts, CI step)
-npm run lint         # ESLint 10 flat-config checks
-npm run typecheck    # tsc --noEmit
-npm run build        # typecheck + Vite build + initial-transfer/font gates
+npm run lint         # owning GUI gate: Oxlint/tsgolint + native/SDK AST contracts
+npm run typecheck    # verified native TypeScript 7 --noEmit
+npm run build        # native typecheck + Vite build + startup-transfer/font gates
 ```
 
-`vite build` emits the static SPA into `../cat_de_roman_esti/web/static`
-(`build.outDir`, `emptyOutDir: true`) — the tracked bundle served by the Go runtime.
-The browser implementation remains React/TypeScript/JavaScript; the backend migration
-does not convert that frontend to Go.
-The post-build check follows recursive static imports in Vite's manifest, enforces
-the 120 KiB initial JS/CSS gzip ceiling, and verifies that only Latin + Latin
-Extended Fredoka/Inter fonts shipped (ADR-0020). If the build is absent the native backend
-serves a "run npm run build" placeholder instead of 500-ing.
+The selected Node 26.10.0/npm 12.2.0 toolchain and managed-output prerequisites are
+recorded in [ADR-0184](../docs/adr/0184-native-spa-toolchain-and-managed-output.md).
+`vite build` emits `frontend/dist`; the owning asset sync copies the managed
+output to `go-backend/embedfs/dist` before rebuilding the Go server. The original
+tracked 30-file `web/static` bundle and legacy archive stay frozen. An absent
+managed index returns HTTP 503; build alone does not update an existing server binary.
+The lint entry point requires the owning Linux wrapper's current context, selected
+configuration and installed kit. Complete normalized validation remains pending.
+
+[ADR-0185](../docs/adr/0185-accepted-eager-startup-bundle-accounting.md) records Paul's accepted
+startup calculation: all entry/static JS/CSS plus the immediately mounted
+`src/components/AccountBar.tsx` root and its recursive static dependencies,
+counted once across shared files/cycles. Missing mandatory roots/imports or emitted
+assets refuse the check. Other dynamic game routes and further lazy children remain
+excluded. `checkInitialBundle` always requires AccountBar after integration;
+default `collectInitialBundleFiles(manifest)` callers and frozen historical
+closures retain their static-only scope.
+
+The separate two-path calculator amendment is source-accepted, **UNAPPLIED and
+UNQUALIFIED**. Its four retained and seven new tests (11 total) are **NOT RUN**
+under the amended source; current manifest/startup gzip measurements are unacquired.
+The frontend default remains 120 KiB (122,880 bytes), summing each selected JS/CSS
+file's gzip level-9 size; existing limit configuration and Latin/Latin Extended
+Fredoka/Inter subset checks remain. Fonts are checked separately from JS/CSS bytes.
+The canonical 40,960-byte JS ceiling/30,720-byte target and separate CSS policy
+remain independent requirements; no new total, savings or compliance is claimed.
 
 ## Layout
 
 Browser journeys follow [ADR-0098](../docs/adr/0098-protect-real-browser-game-journeys.md).
-The canonical runner builds/starts Go. Python web dependencies available as `python3`
-provide only offline fixture-answer helpers. Run:
+The current runner starts an already-built Go server (`CDR_NATIVE_BINARY`, default
+`build/cat-server`) and uses the native private `cat-browser-plan` helper.
+Complete the owning managed-assets/server/planner prerequisites before these Linux
+browser steps; Python helpers below are optional offline references:
 
 ```bash
 npm ci
@@ -56,8 +76,8 @@ npm run build
 npm run test:e2e
 ```
 
-The runner starts its own native anonymous Go server on port 8138 (`CDR_E2E_PORT` overrides it). On the fleet host, put
-the project `.venv/bin` and the Node 24 runtime first on `PATH`. Failure artifacts live
+The runner starts its own native anonymous Go server on port 8138 (`CDR_E2E_PORT` overrides it).
+Use the selected Node 26 toolchain and the owning built server/planner inputs. Failure artifacts live
 in ignored `test-results/`; `CDR_E2E_OUTPUT_DIR` can redirect them. The frozen public
 seeded starts are in `e2e/seeded-starts.json`; regenerate only after an intentional,
 reviewed selection change with `PYTHONPATH=.. python3 e2e/solutions.py --write-starts`.
@@ -124,10 +144,12 @@ src/
 ## Notes
 
 - Styling is plain CSS with CSS variables; there is no Tailwind/PostCSS layer.
-- Tooling is pinned by the lockfile to ESLint 10.7 flat config, typescript-eslint
-  8.63, and TypeScript 5.9; TypeScript 7 is not yet in typescript-eslint's peer range.
-- Per ADR-0020, frontend source changes include the matching tracked `web/static`
-  bundle and `.vite/manifest.json`; backend-only changes leave that bundle alone.
+- Selected tooling and managed-output handling follow [ADR-0184](../docs/adr/0184-native-spa-toolchain-and-managed-output.md).
+  Native TypeScript 7 owns diagnostics; the separately bound TypeScript 6 package is
+  for required AST/transpilation APIs. Current normalized gate qualification is pending.
+- Preserve the frozen original30 files/archive; managed output sync and reviewed source
+  retirement follow ADR-0184. Historical reports keep their captured closure scopes;
+  [ADR-0185](../docs/adr/0185-accepted-eager-startup-bundle-accounting.md) does not recompute them.
 - The Go backend also exposes `GET /api/health` and `GET /api/manifest` (offline-KG trust
   manifest with stable OpenAPI operationIds) — the mobile client contract lives in
   `../docs/MOBILE_CONTRACT.md`.

@@ -1,3 +1,4 @@
+import { Csp, CspMotion } from "../components/CspStyle";
 // CaldRece — "Cald sau Rece" (Contexto/Semantle-style) screen.
 //
 // A hidden secret concept lives on the server. The player types concept guesses; each
@@ -122,53 +123,53 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
   const color = barColor(g);
   const pct = Math.max(2, Math.min(100, g.closeness));
   return (
-    <m.div
+    <CspMotion.div
       layout
       initial={isLatest ? { opacity: 0, y: -10, scale: 0.97 } : false}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
       className="card contexto-guess-row"
-      style={{
+      css={{
         position: "relative",
         overflow: "hidden",
         padding: "10px 14px",
         display: "grid",
-        gap: 8,
+        gap: "8px",
         borderColor: isLatest ? color : "var(--surface-border)",
         boxShadow: isLatest ? `0 0 22px -10px ${color}` : undefined,
       }}
     >
       {/* hot/cold fill bar */}
-      <div
+      <Csp.div
         aria-hidden
-        style={{
+        css={{
           position: "absolute",
-          inset: 0,
+          inset: "0px",
           width: `${pct}%`,
           background: `linear-gradient(90deg, ${color}26, ${color}0d)`,
           transition: "width 0.5s cubic-bezier(0.2,0.7,0.3,1)",
         }}
       />
-      <div
+      <Csp.div
         className="row spread"
-        style={{ position: "relative", gap: 10, alignItems: "center" }}
+        css={{ position: "relative", gap: "10px", alignItems: "center" }}
       >
-        <span className="row" style={{ gap: 8, alignItems: "center" }}>
-          <span aria-hidden style={{ fontSize: "1.1rem" }}>
+        <Csp.span className="row" css={{ gap: "8px", alignItems: "center" }}>
+          <Csp.span aria-hidden css={{ fontSize: "1.1rem" }}>
             {TEMP_ICON[g.temperature]}
-          </span>
-          <strong style={{ fontSize: "0.98rem" }}>{g.label}</strong>
-        </span>
-        <span className="row" style={{ gap: 8, alignItems: "center" }}>
-          <span
+          </Csp.span>
+          <Csp.strong css={{ fontSize: "0.98rem" }}>{g.label}</Csp.strong>
+        </Csp.span>
+        <Csp.span className="row" css={{ gap: "8px", alignItems: "center" }}>
+          <Csp.span
             className="badge"
-            style={{ borderColor: color, color: color, fontWeight: 700 }}
+            css={{ borderColor: color, color: color, fontWeight: 700 }}
           >
             {TEMP_LABEL[g.temperature]}
-          </span>
-          <span
+          </Csp.span>
+          <Csp.span
             className="badge"
-            style={{
+            css={{
               borderColor: color,
               color: color,
               fontWeight: 800,
@@ -177,10 +178,10 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
             title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)"
           >
             #{g.rank}
-          </span>
-        </span>
-      </div>
-    </m.div>
+          </Csp.span>
+        </Csp.span>
+      </Csp.div>
+    </CspMotion.div>
   );
 }
 
@@ -646,13 +647,13 @@ export default function CaldRece({
   if (showIntro) {
     return (
       <div className="screen-pad fill">
-        <div
+        <Csp.div
           className="container col game-container"
-          style={{ gap: 18, paddingBlock: 8 }}
+          css={{ gap: "18px", paddingBlock: "8px" }}
         >
-          <div style={{ width: "100%" }}>
+          <Csp.div css={{ width: "100%" }}>
             <GameShell onExit={handleExit} accent={DEF.accent} busy={busy} />
-          </div>
+          </Csp.div>
 
           <GameIntro
             startFailed={startFailed}
@@ -667,9 +668,9 @@ export default function CaldRece({
             accent={DEF.accent}
             glow={DEF.glow}
             description={
-              <p style={{ margin: 0 }}>
+              <Csp.p css={{ margin: "0px" }}>
                 Găsește secretul urmărind cât de cald e fiecare cuvânt.
-              </p>
+              </Csp.p>
             }
             steps={[
               { icon: "⌨️", label: "Scrie un cuvânt" },
@@ -684,7 +685,7 @@ export default function CaldRece({
             starting={busy}
           >
             <GameSetupOptions>
-              <div style={{ width: "100%", maxWidth: 420 }}>
+              <Csp.div css={{ width: "100%", maxWidth: "420px" }}>
                 <DifficultyPicker
                   options={DIFFICULTIES}
                   value={difficulty}
@@ -693,8 +694,8 @@ export default function CaldRece({
                     setDifficulty(id);
                   }}
                 />
-              </div>
-              <div style={{ width: "100%", maxWidth: 420 }}>
+              </Csp.div>
+              <Csp.div css={{ width: "100%", maxWidth: "420px" }}>
                 <CategoryPicker
                   game="contexto"
                   difficulty={difficulty}
@@ -706,10 +707,10 @@ export default function CaldRece({
                   onInvalid={() => setCategory(null)}
                   accent={DEF.accent}
                 />
-              </div>
+              </Csp.div>
             </GameSetupOptions>
           </GameIntro>
-        </div>
+        </Csp.div>
       </div>
     );
   }
@@ -721,7 +722,7 @@ export default function CaldRece({
     // (worst with the keyboard up), stranding the guesses; single-scroll keeps every
     // guess reachable at any height.
     <div className="screen-pad fill contexto-screen">
-      <div className="container col game-container" style={{ gap: 12, paddingBlock: 8 }}>
+      <Csp.div className="container col game-container" css={{ gap: "12px", paddingBlock: "8px" }}>
         {/* header */}
         <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={busy && finished}>
           <Hud>
@@ -745,7 +746,7 @@ export default function CaldRece({
         {/* The guess field stays within reach while the ranked words scroll. */}
         <div className="contexto-sticky-controls">
           {actionSync && !finished && (
-            <div className="card col contexto-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+            <Csp.div className="card col contexto-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
               <span>
                 {actionSync.kind === "failed"
                   ? "Nu am putut verifica dacă acțiunea s-a înregistrat. Verifică jocul înainte să continui."
@@ -754,9 +755,9 @@ export default function CaldRece({
               <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
                 {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
               </Button>
-            </div>
+            </Csp.div>
           )}
-          <form onSubmit={handleGuess} className="row contexto-input-bar" style={{ gap: 8 }}>
+          <Csp.form onSubmit={handleGuess} className="row contexto-input-bar" css={{ gap: "8px" }}>
             <input
               ref={inputRef}
               className="field fill"
@@ -790,7 +791,7 @@ export default function CaldRece({
             >
               Ghicește
             </Button>
-          </form>
+          </Csp.form>
           <p id="contexto-rank-guide" className="faint contexto-rank-guide">
             Un număr mai mic = mai aproape. <strong>#1 este ținta.</strong>
           </p>
@@ -825,7 +826,7 @@ export default function CaldRece({
           </div>}
 
           <GameOptions game={GAME_KEY} help={false}>
-            <div className="row wrap" style={{ gap: 8 }}>
+            <Csp.div className="row wrap" css={{ gap: "8px" }}>
               <StatBadge
                 label="Mod"
                 value={
@@ -843,7 +844,7 @@ export default function CaldRece({
                   accent={categoryColor(state.board_category)}
                 />
               )}
-            </div>
+            </Csp.div>
             <Button
               type="button"
               variant="secondary"
@@ -944,26 +945,26 @@ export default function CaldRece({
 
         <AnimatePresence>
           {!finished && recovery && (
-            <m.div
+            <CspMotion.div
               key={`${recovery.tone}-${recovery.message}`}
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               className="card"
-              style={{
-                padding: 12,
+              css={{
+                padding: "12px",
                 borderColor: recovery.tone === "warning" ? "var(--warn)" : DEF.accent,
               }}
             >
-              <div className="col" style={{ gap: 8 }}>
+              <Csp.div className="col" css={{ gap: "8px" }}>
                 <span>
-                  <span aria-hidden="true" style={{ marginRight: 6 }}>
+                  <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
                     {recovery.tone === "warning" ? "⚠" : "ℹ"}
-                  </span>
+                  </Csp.span>
                   {recovery.message}
                 </span>
                 {recovery.choices.length > 0 ? (
-                  <div className="row wrap" style={{ gap: 8 }}>
+                  <Csp.div className="row wrap" css={{ gap: "8px" }}>
                     <span className="faint">Variante de scriere:</span>
                     {recovery.choices.map((choice) => (
                       <Button
@@ -980,10 +981,10 @@ export default function CaldRece({
                         {choice}
                       </Button>
                     ))}
-                  </div>
+                  </Csp.div>
                 ) : null}
                 {recovery.confirm ? (
-                  <div className="row wrap" style={{ gap: 8 }}>
+                  <Csp.div className="row wrap" css={{ gap: "8px" }}>
                     <Button
                       type="button"
                       className="contexto-confirm-chip"
@@ -996,53 +997,53 @@ export default function CaldRece({
                       Joacă {recovery.confirm.label}
                     </Button>
                     <span className="faint">sau corectează textul.</span>
-                  </div>
+                  </Csp.div>
                 ) : null}
-              </div>
-            </m.div>
+              </Csp.div>
+            </CspMotion.div>
           )}
         </AnimatePresence>
 
         {(state?.clue || state?.warm_clue) && !finished && (
-          <div
+          <Csp.div
             className="col"
-            style={{ gap: 8 }}
+            css={{ gap: "8px" }}
             aria-label="Indicii folosite"
             aria-live="polite"
           >
             {state.clue && (
-              <div
+              <Csp.div
                 className="row spread"
-                style={{
-                  gap: 10,
+                css={{
+                  gap: "10px",
                   alignItems: "center",
                   padding: "9px 12px",
-                  borderRadius: 12,
+                  borderRadius: "12px",
                   border: `1px solid ${DEF.accent}66`,
                   background: `${DEF.accent}12`,
                 }}
               >
-                <span className="muted" style={{ fontSize: "0.82rem" }}>
+                <Csp.span className="muted" css={{ fontSize: "0.82rem" }}>
                   🧭 Categorie
-                </span>
+                </Csp.span>
                 <strong>{state.clue.category.label}</strong>
-              </div>
+              </Csp.div>
             )}
             {state.warm_clue && (
-              <div
+              <Csp.div
                 className="row spread"
-                style={{
-                  gap: 10,
+                css={{
+                  gap: "10px",
                   alignItems: "center",
                   padding: "10px 12px",
-                  borderRadius: 12,
+                  borderRadius: "12px",
                   border: "1px solid #f4a25999",
                   background: "rgba(244, 162, 89, 0.12)",
                 }}
               >
-                <span className="muted" style={{ fontSize: "0.82rem" }}>
+                <Csp.span className="muted" css={{ fontSize: "0.82rem" }}>
                   🔥 Încearcă
-                </span>
+                </Csp.span>
                 <button
                   type="button"
                   className="contexto-warm-clue-button"
@@ -1067,9 +1068,9 @@ export default function CaldRece({
                 >
                   #{state.warm_clue.rank}
                 </span>
-              </div>
+              </Csp.div>
             )}
-          </div>
+          </Csp.div>
         )}
 
         {/* One short, server-authored comparison for the accepted guess just played. */}
@@ -1124,19 +1125,19 @@ export default function CaldRece({
               onOptions={showOptions}
               onExit={handleExit}
             >
-              <span style={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
+              <Csp.span css={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
                 {state.target.label}
-              </span>
+              </Csp.span>
               {state.target.description && (
-                <span style={{ fontSize: "0.85rem" }}>{state.target.description}</span>
+                <Csp.span css={{ fontSize: "0.85rem" }}>{state.target.description}</Csp.span>
               )}
               {won && recovery?.message ? (
-                <span className="muted" style={{ display: "block", marginTop: 8 }}>
-                  <span aria-hidden="true" style={{ marginRight: 6 }}>
+                <Csp.span className="muted" css={{ display: "block", marginTop: "8px" }}>
+                  <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
                     ℹ
-                  </span>
+                  </Csp.span>
                   {recovery.message}
-                </span>
+                </Csp.span>
               ) : null}
             </ResultCard>
           )}
@@ -1144,34 +1145,34 @@ export default function CaldRece({
 
         {/* best so far */}
         {!finished && bestGuess && (
-          <p className="faint center" style={{ fontSize: "0.82rem", margin: 0 }}>
+          <Csp.p className="faint center" css={{ fontSize: "0.82rem", margin: "0px" }}>
             Cel mai aproape:{" "}
-            <strong style={{ color: barColor(bestGuess) }}>
+            <Csp.strong css={{ color: barColor(bestGuess) }}>
               {bestGuess.label}
-            </strong>{" "}
+            </Csp.strong>{" "}
             <span title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)">
               (#{bestGuess.rank})
             </span>
-          </p>
+          </Csp.p>
         )}
 
         <h2 className="contexto-list-title">
           {guessView === "best" ? "Cele mai apropiate cuvinte" : "Ultimele încercări"}
         </h2>
         {/* Bune keeps server rank order; Recente uses stable server attempt ordinals. */}
-        <div id="contexto-guess-list" className="col" style={{ gap: 8 }}>
+        <Csp.div id="contexto-guess-list" className="col" css={{ gap: "8px" }}>
           {guesses.length === 0 && !finished && (
-            <p className="faint center" style={{ marginTop: 24 }}>
+            <Csp.p className="faint center" css={{ marginTop: "24px" }}>
               Sensul contează, nu literele. Începe cu orice idee!
-            </p>
+            </Csp.p>
           )}
           <AnimatePresence initial={false}>
             {displayedGuesses.map((g) => (
               <GuessRow key={g.id} g={g} isLatest={g.id === latestId} />
             ))}
           </AnimatePresence>
-        </div>
-      </div>
+        </Csp.div>
+      </Csp.div>
     </div>
   );
 }

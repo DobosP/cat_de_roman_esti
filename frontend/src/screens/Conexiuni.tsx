@@ -1,3 +1,4 @@
+import { Csp, CspButton, CspMotion } from "../components/CspStyle";
 // Conexiuni — NYT Connections over the Romanian KG. Text-only: a 4x4 grid of selectable
 // tile buttons. Pick exactly 4 and "Verifică"; the server says whether they share a
 // category (locks it as a coloured row) or not (one_away feedback + a lost life). Win when
@@ -534,8 +535,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // ----------------------------------------------------------------- INTRO
   if (!state) {
     return (
-      <div className="screen-pad fill connections-screen" style={{ overflowY: "auto" }}>
-        <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
+      <Csp.div className="screen-pad fill connections-screen" css={{ overflowY: "auto" }}>
+        <Csp.div className="container col game-container" css={{ gap: "18px", paddingBottom: "32px" }}>
           <GameShell onExit={handleExit} accent={DEF.accent} busy={loading} />
 
           <GameIntro
@@ -551,9 +552,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             accent={DEF.accent}
             glow={DEF.glow}
             description={
-              <p style={{ margin: 0 }}>
+              <Csp.p css={{ margin: "0px" }}>
                 Găsește patru grupuri ascunse printre cele 16 cuvinte.
-              </p>
+              </Csp.p>
             }
             steps={[
               { icon: "👆", label: "Alege patru" },
@@ -589,15 +590,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             />
             </GameSetupOptions>
           </GameIntro>
-        </div>
-      </div>
+        </Csp.div>
+      </Csp.div>
     );
   }
 
   // ----------------------------------------------------------------- BOARD
   return (
-    <div className="screen-pad fill connections-screen" style={{ overflowY: "auto" }}>
-      <div className="container col game-container connections-game" style={{ gap: 12, paddingBottom: 24 }}>
+    <Csp.div className="screen-pad fill connections-screen" css={{ overflowY: "auto" }}>
+      <Csp.div className="container col game-container connections-game" css={{ gap: "12px", paddingBottom: "24px" }}>
         {/* Header */}
         <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={loading}>
           <Hud><StatBadge label="Grupuri" value={`${state.solved.length}/4`} accent={DEF.accent} /></Hud>
@@ -653,7 +654,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         )}
 
         {!finished && actionSync ? (
-          <div className="card col connections-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+          <Csp.div className="card col connections-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
             <span>{actionSync.kind === "changed"
               ? "Încarcă jocul curent pentru a continua."
@@ -661,7 +662,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
             </Button>
-          </div>
+          </Csp.div>
         ) : null}
 
         {/* Feedback stays immediately before the board. */}
@@ -701,21 +702,21 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
         {/* Active board */}
         {!finished && (
-          <m.div
+          <CspMotion.div
             key={shake}
             animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
             transition={{ duration: 0.4 }}
             className="connections-grid"
-            style={{
+            css={{
               display: "grid",
-              gap: 8,
+              gap: "8px",
             }}
           >
             <AnimatePresence initial={false}>
               {remainingTiles.map((t) => {
                 const isSel = selected.includes(t.id);
                 return (
-                  <m.button
+                  <CspMotion.button
                     key={t.id}
                     type="button"
                     layout
@@ -730,15 +731,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                     disabled={actionsLocked}
                     aria-pressed={isSel}
                     title={t.label}
-                    className="card center connection-tile"
-                    style={{
+                    className={("card center connection-tile") + (actionsLocked && !isSel ? " csp-motion-opacity-55" : "")}
+                    css={{
                       padding: "12px 6px",
-                      minHeight: 64,
+                      minHeight: "64px",
                       cursor: actionsLocked ? "default" : "pointer",
                       textAlign: "center",
                       fontSize: "0.82rem",
                       lineHeight: 1.15,
-                      opacity: actionsLocked && !isSel ? 0.55 : 1,
                       borderColor: isSel ? DEF.accent : "var(--surface-border)",
                       background: isSel
                         ? `color-mix(in srgb, var(--surface) 65%, ${DEF.accent})`
@@ -749,17 +749,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                     }}
                   >
                     {t.label}
-                  </m.button>
+                  </CspMotion.button>
                 );
               })}
             </AnimatePresence>
-          </m.div>
+          </CspMotion.div>
         )}
 
         {/* Controls */}
         {!finished && (
-          <div className="col game-action-dock connections-actions" style={{ gap: 8 }}>
-            <div className="row center wrap game-action-buttons" style={{ gap: 12 }}>
+          <Csp.div className="col game-action-dock connections-actions" css={{ gap: "8px" }}>
+            <Csp.div className="row center wrap game-action-buttons" css={{ gap: "12px" }}>
               <Button
                 type="button"
                 variant="secondary"
@@ -777,15 +777,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               >
                 Golește
               </Button>
-                  <Button
+                  <CspButton
                     type="button"
                     disabled={actionsLocked || selected.length !== GROUP_SIZE || exactBlockedRetry}
                     onClick={submit}
-                    style={{ borderColor: DEF.accent }}
+                    css={{ borderColor: DEF.accent }}
                   >
                     {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
-                  </Button>
-            </div>
+                  </CspButton>
+            </Csp.div>
             {state.clue_available ? (
               <div className="connections-hint-action">
               <Button
@@ -818,14 +818,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 {cluesUsed >= MAX_CLUES ? "Indicii folosite" : `Indiciu disponibil după încă ${clueMistakesRemaining} ${clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}.`}
               </p>
             )}
-            <span className="faint center fine-only" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
+            <Csp.span className="faint center fine-only" css={{ fontSize: "0.72rem", opacity: 0.7 }}>
               Enter = verifică · Esc = golește
-            </span>
-          </div>
+            </Csp.span>
+          </Csp.div>
         )}
 
         <GameOptions game={GAME_KEY}>
-          <div className="row wrap" style={{ gap: 8 }}>
+          <Csp.div className="row wrap" css={{ gap: "8px" }}>
             {state.daily && (
               <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} title="Provocarea zilei" />
             )}
@@ -837,15 +837,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 accent={categoryColor(state.board_category)}
               />
             )}
-          </div>
+          </Csp.div>
         </GameOptions>
 
         {/* Lose reveal */}
         {state.lost && state.solution && (
-          <div className="col" style={{ gap: 8 }}>
-            <span className="faint" style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}>
+          <Csp.div className="col" css={{ gap: "8px" }}>
+            <Csp.span className="faint" css={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}>
               GRUPURILE RĂMASE
-            </span>
+            </Csp.span>
             {state.solution
               .filter((group) => !state.solved.some((solved) => solved.key === group.key))
               .map((g, index) => (
@@ -856,7 +856,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                   dim
                 />
               ))}
-          </div>
+          </Csp.div>
         )}
 
         {/* Finish banner */}
@@ -888,8 +888,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             </ResultCard>
           )}
         </AnimatePresence>
-      </div>
-    </div>
+      </Csp.div>
+    </Csp.div>
   );
 }
 
@@ -903,29 +903,29 @@ function SolvedRow({
   dim?: boolean;
 }) {
   return (
-    <m.div
+    <CspMotion.div
       layout
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: dim ? 0.7 : 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
       className="card col"
-      style={{
-        padding: 12,
-        gap: 6,
+      css={{
+        padding: "12px",
+        gap: "6px",
         borderColor: color,
         background: `color-mix(in srgb, var(--surface) 78%, ${color})`,
       }}
     >
-      <span style={{ fontWeight: 700, color: "var(--text)", letterSpacing: "0.03em" }}>
+      <Csp.span css={{ fontWeight: 700, color: "var(--text)", letterSpacing: "0.03em" }}>
         {group.label}
-      </span>
-      <div className="row wrap" style={{ gap: 6 }}>
+      </Csp.span>
+      <Csp.div className="row wrap" css={{ gap: "6px" }}>
         {group.tiles.map((t) => (
-          <span key={t.id} className="chip" style={{ borderColor: color }}>
+          <Csp.span key={t.id} className="chip" css={{ borderColor: color }}>
             {t.label}
-          </span>
+          </Csp.span>
         ))}
-      </div>
-    </m.div>
+      </Csp.div>
+    </CspMotion.div>
   );
 }

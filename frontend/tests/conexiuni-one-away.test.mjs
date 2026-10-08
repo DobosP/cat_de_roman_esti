@@ -7,12 +7,19 @@ const screen = readFileSync(
   "utf8",
 );
 
+const selectionKeySource = readFileSync(
+  new URL("../src/conexiuniSelectionKey.ts", import.meta.url),
+  "utf8",
+);
+
 test("Conexiuni treats a retained one-away selection as an order-independent set", () => {
+  assert.match(screen, /import \{ selectionKey \} from "\.\.\/conexiuniSelectionKey";/);
   assert.match(
-    screen,
+    selectionKeySource,
     /selectionKey = \(ids: readonly string\[\]\) => JSON\.stringify\(\[\.\.\.ids\]\.sort\(\)\)/,
   );
   assert.match(screen, /selectionKey\(selected\) === blockedGuess\.key/);
+  assert.match(screen, /const guessKey = selectionKey\(guess\);/);
 });
 
 test("Conexiuni snapshots and retains only a recoverable one-away guess", () => {

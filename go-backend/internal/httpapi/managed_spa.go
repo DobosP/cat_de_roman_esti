@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/DobosP/roedu-ui/web-kit/assets"
+    "github.com/DobosP/roedu-ui/web-kit/csp"
 	kitstatic "github.com/DobosP/roedu-ui/web-kit/static"
 )
 
@@ -15,6 +16,8 @@ type managedSPA struct {
 	files fs.FS
 	index []byte
 	static http.Handler
+	nonceShell *managedNonceShell
+	indexHandler http.Handler
 }
 
 // The SDK recognizes hexadecimal hashes. Cat's Vite hashes also contain other
@@ -71,11 +74,24 @@ func newManagedSPA(files fs.ReadDirFS, mode string) (*managedSPA, error) {
 	if len(index) == 0 { return nil, fmt.Errorf("empty managed UI index") }
 	selected, err := fs.Sub(files, root)
 	if err != nil { return nil, err }
-	return &managedSPA{files: selected, index: index, static: kitstatic.Handler(files, kitstatic.Options{Prefix: root})}, nil
+	ui := &managedSPA{files: selected, index: index, static: kitstatic.Handler(files, kitstatic.Options{Prefix: root})}
+	if root == "dist" {
+		ui.nonceShell, err = newManagedNonceShell(index, manifest)
+		if err != nil { return nil, err }
+	}
+	if err := ui.installIndexHandler(); err != nil { return nil, err }
+	return ui, nil
 }
 
 func (s *Server) managedWebsite(w http.ResponseWriter, r *http.Request) bool {
 	requestPath := r.URL.Path
+	if requestPath == "/csp-report" {
+		// Acknowledge bounded browser reports without retaining private URLs,
+		// samples or user data. Host/body/CORS/account ordering already ran.
+		websiteHeaders(w)
+		csp.ReportHandler(nil).ServeHTTP(w, r)
+		return true
+	}
 	if requestPath == "/api" || strings.HasPrefix(requestPath, "/api/") { return false }
 	// Embedded files have no disk escape; private manifests and scaffold are
 	// still refused rather than accidentally receiving the SPA fallback.
@@ -119,7 +135,7 @@ func (s *Server) managedWebsite(w http.ResponseWriter, r *http.Request) bool {
 		websiteBytes(w, r, 404, "text/html; charset=utf-8", nil)
 		return true
 	}
-	w.Header().Set("Cache-Control", "no-cache")
-	websiteBytes(w, r, 200, "text/html; charset=utf-8", s.managedUI.index)
+	websiteHeaders(w)
+	s.managedUI.indexHandler.ServeHTTP(w, r)
 	return true
 }

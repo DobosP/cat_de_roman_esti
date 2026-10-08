@@ -9,7 +9,7 @@ CDR_TOOLCHAIN_SCRATCH="$(realpath -m "$CDR_TOOLCHAIN_SCRATCH")"
 case "$CDR_TOOLCHAIN_SCRATCH" in "$(realpath -m "$HOME/work/_temp")/"*) ;; *) printf 'Scratch must be under ~/work/_temp/\n' >&2; exit 2;; esac
 if command -v python python3 python3.12 python3.14 rustc cargo; then printf 'Qualification requires Python/Rust absent from PATH\n' >&2; exit 2; fi
 [ "$(go version)" = 'go version go1.27.1 linux/amd64' ] || { printf 'Qualified Go 1.27.1 linux/amd64 is required\n' >&2; exit 2; }
-[[ "$(node --version)" == v24.* ]] || { printf 'Qualified Node 24 is required\n' >&2; exit 2; }
+[[ "$(node --version)" == v26.10.0 ]] || { printf 'Selected Node 26.10.0 is required\n' >&2; exit 2; }
 mkdir -p "$CDR_TOOLCHAIN_SCRATCH/bin" "$CDR_TOOLCHAIN_SCRATCH/go-cache" "$CDR_TOOLCHAIN_SCRATCH/go-tmp" "$CDR_TOOLCHAIN_SCRATCH/tmp" "$CDR_TOOLCHAIN_SCRATCH/receipts"
 export GOMAXPROCS=2 GOFLAGS=-p=2 GOCACHE="$CDR_TOOLCHAIN_SCRATCH/go-cache" GOTMPDIR="$CDR_TOOLCHAIN_SCRATCH/go-tmp" TMPDIR="$CDR_TOOLCHAIN_SCRATCH/tmp"
 [ -z "$(gofmt -l go-backend shared-go/authcore)" ]

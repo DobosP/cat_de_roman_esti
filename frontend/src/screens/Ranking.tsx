@@ -1,3 +1,4 @@
+import { Csp } from "../components/CspStyle";
 // Ranking — the public online leaderboard (one view per game). Anyone can view it; a line
 // only appears here for players who signed in and opted into the ranking. The signed-in
 // viewer sees their own rank highlighted.
@@ -38,14 +39,14 @@ export default function Ranking() {
   const meIsVisible = entries.some((row) => row.is_me);
 
   return (
-    <div className="screen-pad fill" style={{ overflowY: "auto" }}>
-      <div className="container col" style={{ gap: 20, paddingBlock: 16 }}>
-        <div className="row spread" style={{ alignItems: "center" }}>
-          <h1 style={{ margin: 0 }}>🏆 Clasament</h1>
+    <Csp.div className="screen-pad fill" css={{ overflowY: "auto" }}>
+      <Csp.div className="container col" css={{ gap: "20px", paddingBlock: "16px" }}>
+        <Csp.div className="row spread" css={{ alignItems: "center" }}>
+          <Csp.h1 css={{ margin: "0px" }}>🏆 Clasament</Csp.h1>
           <button type="button" className="account-btn" onClick={() => navigate("/")}>
             ← Acasă
           </button>
-        </div>
+        </Csp.div>
 
         <label className="ranking-game-select">
           <span>Alege jocul</span>
@@ -76,9 +77,9 @@ export default function Ranking() {
           ))}
         </div>
 
-        <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
+        <Csp.p className="muted" css={{ margin: "0px", fontSize: "0.9rem" }}>
           Recorduri verificate de joc · maximum 1000 de puncte.
-        </p>
+        </Csp.p>
 
         {loading && (
           <div
@@ -115,46 +116,46 @@ export default function Ranking() {
         )}
 
         {!loading && !error && entries.length === 0 && (
-          <div className="card center muted" style={{ minHeight: 100, padding: 18 }}>
+          <Csp.div className="card center muted" css={{ minHeight: "100px", padding: "18px" }}>
             Încă nimeni în clasament la acest joc. Intră cu Google și fii primul!
-          </div>
+          </Csp.div>
         )}
 
         {!loading && !error && entries.length > 0 && (
-          <div className="col" style={{ gap: 6 }}>
+          <Csp.div className="col" css={{ gap: "6px" }}>
             {entries.map((row, index) => (
-              <div
+              <Csp.div
                 key={`${row.rank}-${row.name}-${index}`}
                 className={`card row spread rank-row${row.is_me ? " rank-row--me" : ""}`}
-                style={{ padding: "10px 14px", alignItems: "center" }}
+                css={{ padding: "10px 14px", alignItems: "center" }}
               >
-                <div className="row" style={{ gap: 12, minWidth: 0, alignItems: "center" }}>
+                <Csp.div className="row" css={{ gap: "12px", minWidth: "0px", alignItems: "center" }}>
                   <span className={`rank-num rank-num--${row.rank <= 3 ? row.rank : "n"}`}>
                     {row.rank}
                   </span>
-                  <strong style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <Csp.strong css={{ overflow: "hidden", textOverflow: "ellipsis" }}>
                     {row.name}
-                  </strong>
-                </div>
-                <strong style={{ fontVariantNumeric: "tabular-nums" }}>{row.score} pct</strong>
-              </div>
+                  </Csp.strong>
+                </Csp.div>
+                <Csp.strong css={{ fontVariantNumeric: "tabular-nums" }}>{row.score} pct</Csp.strong>
+              </Csp.div>
             ))}
-          </div>
+          </Csp.div>
         )}
 
         {data?.me && !loading && !error && !meIsVisible && (
-          <div className="card row spread rank-row rank-row--me" style={{ padding: "12px 14px" }}>
+          <Csp.div className="card row spread rank-row rank-row--me" css={{ padding: "12px 14px" }}>
             <strong>Locul tău: #{data.me.rank}</strong>
-            <strong style={{ fontVariantNumeric: "tabular-nums" }}>{data.me.score} pct</strong>
-          </div>
+            <Csp.strong css={{ fontVariantNumeric: "tabular-nums" }}>{data.me.score} pct</Csp.strong>
+          </Csp.div>
         )}
 
         {data && !data.me && !loading && (
-          <p className="faint" style={{ fontSize: "0.85rem" }}>
+          <Csp.p className="faint" css={{ fontSize: "0.85rem" }}>
             Pentru a apărea, intră în cont și activează clasamentul din meniul profilului.
-          </p>
+          </Csp.p>
         )}
-      </div>
-    </div>
+      </Csp.div>
+    </Csp.div>
   );
 }

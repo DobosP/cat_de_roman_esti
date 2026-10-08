@@ -1,3 +1,4 @@
+import { Csp } from "../components/CspStyle";
 // Intrusul — tap the one concept that does not belong with the other three.
 // Every decision and point comes from the server; the browser only adds compact,
 // touch-first feedback around the earned public state.
@@ -389,7 +390,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   if (!state) {
     return (
       <div className="screen-pad fill">
-        <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
+        <Csp.div className="container col game-container" css={{ gap: "18px", paddingBottom: "32px" }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={loading} />
           <GameIntro
             startFailed={startFailed}
@@ -405,11 +406,11 @@ export default function Intrusul({ onExit, onToast }: Props) {
             glow={DEF.glow}
             description={
               <>
-                <p style={{ margin: 0 }}>Trei cuvinte au ceva în comun. Unul nu.</p>
+                <Csp.p css={{ margin: "0px" }}>Trei cuvinte au ceva în comun. Unul nu.</Csp.p>
                 {starterVisible && (
-                  <p className="faint" style={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
+                  <Csp.p className="faint" css={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
                     Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.
-                  </p>
+                  </Csp.p>
                 )}
               </>
             }
@@ -424,7 +425,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             onDaily={() => void start({ daily: todayLocal() })}
             starting={loading}
           />
-        </div>
+        </Csp.div>
       </div>
     );
   }
@@ -432,7 +433,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const wrong = new Set(state.wrong_ids);
   return (
     <div className="screen-pad fill intrusul-game">
-      <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
+      <Csp.div className="container col game-container" css={{ gap: "14px", paddingBottom: "32px" }}>
         <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} />}
@@ -445,7 +446,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         </GameShell>
 
         {!finished && actionSync && (
-          <div className="card col intrusul-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+          <Csp.div className="card col intrusul-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
             <span>{actionSync.kind === "changed"
               ? "Încarcă jocul curent pentru a continua."
@@ -453,7 +454,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             <Button type="button" onClick={() => void retryActionSync()} disabled={busy || !isPresent}>
               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
             </Button>
-          </div>
+          </Csp.div>
         )}
 
         {!finished && !actionSync && (
@@ -580,7 +581,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             </div>
           </ResultCard>
         )}
-      </div>
+      </Csp.div>
     </div>
   );
 }

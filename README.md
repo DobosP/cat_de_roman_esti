@@ -37,7 +37,7 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
   ([native tooling](docs/NATIVE_TOOLCHAIN.md), [ADR-0166](docs/adr/0166-native-content-operators-and-builder-rails.md)).
 - **Python/Rust** sources, tests and rollback profiles remain independent references.
   Legacy Python web dependencies are pinned by `constraints.txt`.
-- Frontend: React 19.2 + Vite 8.1 + TypeScript, Node 24 — see [`frontend/README.md`](frontend/README.md).
+- Frontend: React 19.2.7 + Vite 8.3.3 + TypeScript 7.0.2; selected Node 26.10.0/npm 12.2.0 ([ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)). [Startup accounting](docs/adr/0185-accepted-eager-startup-bundle-accounting.md) is owner-accepted, source-unapplied and unqualified; see [`frontend/README.md`](frontend/README.md).
 - Native bounded RO-EDU REST client and provenance-preserving fixture/smoke operators;
   the original vendored Python client remains an independent reference.
 - Native race/vet/source/HTTP/browser gates; retained `pytest`/`ruff` reference commands
@@ -78,9 +78,15 @@ Install the qualified Go 1.27.1 compiler, then:
 # open http://127.0.0.1:8000
 ```
 
-The launcher builds Go with an incremental cache under `~/work/_temp/` and builds
-React only when its compiled bundle is missing. Node 24 is needed for that frontend
-build. `PORT=9000 ./run.sh` changes the listener; a busy port fails explicitly.
+The retained launcher builds Go with an incremental cache under `~/work/_temp/`
+and still checks the historical tracked SPA output. Its Node 24 messages and missing
+managed-asset sync do not establish selected-toolchain qualification. Current managed
+build/sync prerequisites follow [ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)
+and [STATUS](docs/STATUS.md); their complete normalized qualification remains pending.
+The separate standalone qualifier alignment prepares the exact Node 26.10.0 guard per ADR-0184;
+it is **UNAPPLIED, UNQUALIFIED and NOT RUN**, and separate from the owning GUI wrapper.
+Its retained checks and pending qualification are described in [NATIVE_TOOLCHAIN](docs/NATIVE_TOOLCHAIN.md).
+`PORT=9000 ./run.sh` changes the listener; a busy port fails explicitly.
 Native source/build/operator and qualification commands are in
 [`docs/NATIVE_TOOLCHAIN.md`](docs/NATIVE_TOOLCHAIN.md); Python remains an optional oracle.
 
@@ -109,6 +115,8 @@ nonroot runtime contains the executable, compiled static files and an HTTP healt
 probe; it contains no Python server. Local and anonymous-production Compose use
 this image, a read-only application filesystem and container port 8000, matching
 Caddy. Change the local published port with `PORT=9000 docker compose up`.
+The retained root recipe still uses Node 24/historical output and needs managed
+pre-image alignment; selected consumer image binding/qualification remains pending.
 
 The public runtime is anonymous; accounts and submissions remain off. Native account
 staging uses the canonical Go image through `docker-compose.accounts.yml` or
@@ -136,11 +144,12 @@ go -C go-backend run ./cmd/cat-doc-check --root ..
 Game/content tests use bundled fixtures and local fake providers, with no live upstream.
 Native account and combined HTTP release gates also require an explicit disposable
 PostgreSQL fixture; ordinary Go runs skip those contracts when no DSN is supplied.
-The complete native-only gate is `scripts/qualify_go_toolchain.sh`, with explicit task
-scratch/PG and Python/Rust absent from PATH. Retained Python validators/Ruff/pytest are
-optional independent references, with complete commands in
-[`docs/agent-testing.md`](docs/agent-testing.md). The active Python reference CI job remains
-automatic until the exact manual-routing proposal receives human approval (ADR-0168).
+The separate source alignment of `scripts/qualify_go_toolchain.sh` follows the exact selected Node 26.10.0 pin
+([ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)); application, execution and complete qualification remain pending.
+Explicit task scratch/PG and all independent native obligations remain; see [NATIVE_TOOLCHAIN](docs/NATIVE_TOOLCHAIN.md). Retained Python validators/Ruff/pytest are optional independent
+references; commands and the owning GUI context are in
+[`docs/agent-testing.md`](docs/agent-testing.md). GitHub Actions use manual dispatch;
+retained Python/Rust reference jobs are opt-in ([ADR-0164](docs/adr/0164-manual-github-actions.md)).
 
 ## Contributing
 

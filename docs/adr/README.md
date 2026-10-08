@@ -125,3 +125,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0183](0183-v1-7-single-salary-input-admission.md) — admit the exact singular salary input and one-word batch disposition to supported qualification.
 
 - [0184](0184-native-spa-toolchain-and-managed-output.md) — native SPA tooling/managed-output prerequisites; runtime validation pending. ADR0183/Source7 preserved.
+
+- [0185](0185-accepted-eager-startup-bundle-accounting.md) — owner-accepted AccountBar startup JS/CSS accounting; unchanged limits, source amendment unapplied and Linux qualification pending.

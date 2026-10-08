@@ -1,8 +1,8 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-08 — Source6/Source7 facts remain below; GUI source-only Windows checkpoint is NOT newly runtime-qualified (no handover tests). [Pickup](GUI_MIGRATION_HANDOFF.md). V1.7 [tocător R2 research](reviews/v1-7-recognizable-content/tocator-sense-and-migration-r2.md): manual-chopper sense excluded, bread-cutting evidence/migration cases added; pool1researched/4held/1selected, no installed growth. Loop paused; independent factual/quality research accepted, [source/JSON/whitespace/native docs PASS](reviews/v1-7-recognizable-content/tocator-verification-r2.json).
+Last verified: 2026-10-08 — Linux resumed from Windows carriers f3d4744/core553b87b. Exact38+eager2+Cat9+Node6 applied; skip/EOF source successors recorded. OwningHTML deps PASS9fe95709/xnet0.59; native formatting/build/11contracts/900/Node3/CSP/image/full NOTYETqualified. Source7/R2 history and alllimits retained. [Current handover](GUI_MIGRATION_HANDOFF.md).
 
-- **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
+- **GUI Linux resumed:** exact Windows carriers source-applied on59a9a568: accepted15 styles, managed nonce/CSP, compiled identity/image/health, eager AccountBar accounting and Node26.10.0 qualifier. This combined source is NOT runtime-qualified; old original900/native7/Motion14/deps proofs retain their scopes. [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) keeps122880/40960/30720 ceilings unchanged; fresh11contracts/startup inventory/native/full replay/CSP/image/Node3/lint/unit/KIT_BUMP pending. New HTML metadata import requires owningdeps/tidy. Linux active; Windows paused; phone/M2 closed.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
 ## Current state
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   (a time cap would break deterministic dailies); older stored score details keep ISO dates
   but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
 ## Doc map
-- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0183), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.
+- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest [0185](adr/0185-accepted-eager-startup-bundle-accounting.md)), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.

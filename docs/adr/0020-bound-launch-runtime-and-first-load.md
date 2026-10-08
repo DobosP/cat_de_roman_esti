@@ -1,7 +1,7 @@
 # ADR-0020: Bound the launch runtime and first load
 
 Date: 2026-07-11
-Status: partially superseded by ADR-0184 for tooling/lint and generated-output handling; bounded session/input and120KiB acceptance remain
+Status: partially superseded by ADR-0184 for tooling/lint and generated-output handling, and ADR-0185 for first-load JS/CSS accounting; bounded session/input limits and the 120 KiB default ceiling remain
 
 ## Decision
 

@@ -4,6 +4,12 @@ import { resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const DEFAULT_INITIAL_GZIP_LIMIT_KIB = 120;
+
+// App mounts this lazy component on every route before any play action.
+// The key is Vite's source-relative manifest identity, not a chunk filename.
+const REQUIRED_INITIAL_EAGER_ROOTS = Object.freeze([
+  "src/components/AccountBar.tsx",
+]);
 export const ROMANIAN_FONT_SOURCES = [
   "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
   "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
@@ -21,10 +27,10 @@ function isCodeOrStyle(path) {
 }
 
 /**
- * Return the JS/CSS files required by every entry before any dynamic import.
- * Vite's `imports` edges are static; `dynamicImports` are intentionally excluded.
+ * Return entry/static JS/CSS, optionally including explicit eagerly mounted roots.
+ * Only each root's static `imports` are followed; other dynamic edges stay excluded.
  */
-export function collectInitialBundleFiles(manifest) {
+export function collectInitialBundleFiles(manifest, { eagerRoots = [] } = {}) {
   const entries = Object.entries(manifest)
     .filter(([, chunk]) => chunk?.isEntry)
     .map(([key]) => key);
@@ -32,14 +38,37 @@ export function collectInitialBundleFiles(manifest) {
     throw new Error("Vite manifest contains no entry chunk");
   }
 
+  if (!Array.isArray(eagerRoots) || eagerRoots.length > Object.keys(manifest).length) {
+    throw new Error("Vite required eager roots must be a bounded manifest-key array");
+  }
+  for (const key of eagerRoots) {
+    if (typeof key !== "string" || !key || !Object.hasOwn(manifest, key)) {
+      throw new Error("Vite manifest is missing a required eager root: " + String(key));
+    }
+  }
+
   const visited = new Set();
   const files = new Set();
 
-  function visit(key) {
+  function visit(key, required = false) {
     if (visited.has(key)) return;
     const chunk = manifest[key];
     if (!chunk) {
       throw new Error(`Vite manifest references missing static import: ${key}`);
+    }
+    if (required) {
+      if (typeof chunk.file !== "string" || !isCodeOrStyle(chunk.file)) {
+        throw new Error(`Vite manifest is missing a required eager asset: ${key}`);
+      }
+      if (chunk.css !== undefined && (!Array.isArray(chunk.css)
+        || chunk.css.some((css) => typeof css !== "string" || !isCodeOrStyle(css)))) {
+        throw new Error(`Vite manifest has invalid required eager assets: ${key}`);
+      }
+      if (chunk.imports !== undefined && (!Array.isArray(chunk.imports)
+        || chunk.imports.some((imported) => typeof imported !== "string" || !imported
+          || !Object.hasOwn(manifest, imported)))) {
+        throw new Error(`Vite manifest references a missing required eager import: ${key}`);
+      }
     }
     visited.add(key);
     if (typeof chunk.file === "string" && isCodeOrStyle(chunk.file)) {
@@ -48,9 +77,11 @@ export function collectInitialBundleFiles(manifest) {
     for (const css of chunk.css ?? []) {
       if (typeof css === "string" && isCodeOrStyle(css)) files.add(css);
     }
-    for (const imported of chunk.imports ?? []) visit(imported);
+    for (const imported of chunk.imports ?? []) visit(imported, required);
   }
 
+  // Validate eager closures first so an ordinary shared visit cannot hide bad assets.
+  for (const key of eagerRoots) visit(key, true);
   for (const entry of entries) visit(entry);
   return [...files].sort();
 }
@@ -103,7 +134,9 @@ export function checkInitialBundle({
   const manifestPath = resolve(outputDir, ".vite", "manifest.json");
   const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
   const fonts = assertRomanianFontSubsets(manifest);
-  const measurements = measureGzipFiles(outputDir, collectInitialBundleFiles(manifest));
+  const measurements = measureGzipFiles(outputDir, collectInitialBundleFiles(manifest, {
+    eagerRoots: REQUIRED_INITIAL_EAGER_ROOTS,
+  }));
   const totalBytes = measurements.reduce((total, item) => total + item.bytes, 0);
   const limitBytes = limitKiB * 1024;
 

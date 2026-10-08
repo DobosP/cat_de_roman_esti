@@ -1,3 +1,4 @@
+import { Csp, CspMotion } from "../components/CspStyle";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
@@ -75,42 +76,42 @@ type RecoveryFeedback = {
 
 function Breadcrumb({ path }: { path: PathStep[] }) {
   return (
-    <div className="row wrap breadcrumb-trail" role="group" aria-label="Traseul parcurs"
-      tabIndex={0} style={{ gap: 6, alignItems: "center" }}>
+    <Csp.div className="row wrap breadcrumb-trail" role="group" aria-label="Traseul parcurs"
+      tabIndex={0} css={{ gap: "6px", alignItems: "center" }}>
       <AnimatePresence initial={false}>
         {path.map((step, i) => (
-          <m.span
+          <CspMotion.span
             key={`${step.id}-${i}`}
             layout
             initial={{ opacity: 0, scale: 0.8, y: -6 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 420, damping: 26 }}
             className="row lant-trail-step"
-            style={{ gap: 6, alignItems: "center" }}
+            css={{ gap: "6px", alignItems: "center" }}
           >
             {i > 0 && (
-              <span
+              <Csp.span
                 className="faint lant-trail-relation"
-                style={{ fontSize: "0.7rem" }}
+                css={{ fontSize: "0.7rem" }}
                 title={step.relation}
               >
                 ―{step.relation ? ` ${step.relation} →` : " →"}
-              </span>
+              </Csp.span>
             )}
-            <span
+            <Csp.span
               className="chip"
-              style={{
+              css={{
                 borderColor: i === path.length - 1 ? DEF.accent : undefined,
                 color: i === path.length - 1 ? DEF.accent : undefined,
                 fontWeight: i === path.length - 1 ? 700 : undefined,
               }}
             >
               {step.label}
-            </span>
-          </m.span>
+            </Csp.span>
+          </CspMotion.span>
         ))}
       </AnimatePresence>
-    </div>
+    </Csp.div>
   );
 }
 
@@ -581,7 +582,7 @@ export default function Lant({
     return (
       <div className="screen-pad fill" aria-busy={creating}>
         {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
-        <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
+        <Csp.div inert={creating} className="container col game-container" css={{ gap: "18px" }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
 
           <GameIntro
@@ -597,10 +598,10 @@ export default function Lant({
             accent={DEF.accent}
             glow={DEF.glow}
             description={
-              <div className="col" style={{ gap: 8 }}>
-                <p style={{ margin: 0 }}>
+              <Csp.div className="col" css={{ gap: "8px" }}>
+                <Csp.p css={{ margin: "0px" }}>
                   Ajungi la țintă prin concepte legate direct.
-                </p>
+                </Csp.p>
                 <Button
                   type="button"
                   variant="secondary"
@@ -620,7 +621,7 @@ export default function Lant({
                     <li>Limită: 64 de salturi pe lanț.</li>
                   </ul>
                 )}
-              </div>
+              </Csp.div>
             }
             steps={[
               { icon: "👆", label: "Alege o legătură" },
@@ -656,7 +657,7 @@ export default function Lant({
               />
             </GameSetupOptions>
           </GameIntro>
-        </div>
+        </Csp.div>
       </div>
     );
   }
@@ -680,19 +681,19 @@ export default function Lant({
         <section className="card lant-route" aria-label="Poziția și ținta">
           <div className="lant-current" aria-live={won ? "off" : "polite"} aria-atomic="true">
             <span className="faint">EȘTI ACUM LA</span>
-            <div
+            <Csp.div
               className="lant-route-word"
-              style={{ color: won ? TARGET_COLOR : DEF.accent }}
+              css={{ color: won ? TARGET_COLOR : DEF.accent }}
             >
               {state.current.label}
-            </div>
+            </Csp.div>
           </div>
           <span className="lant-route-arrow muted" aria-hidden>→</span>
           <div className="lant-target">
             <span className="faint">ȚINTĂ</span>
-            <strong className="lant-route-word" style={{ color: TARGET_COLOR }}>
+            <Csp.strong className="lant-route-word" css={{ color: TARGET_COLOR }}>
               {state.target.label}
-            </strong>
+            </Csp.strong>
           </div>
           {state.target.description && (
             <p className="muted lant-target-description">{state.target.description}</p>
@@ -701,9 +702,9 @@ export default function Lant({
 
         {!won && state.choices?.length > 0 ? (
           <section ref={choicesRef} className="lant-choice-panel col" aria-labelledby="lant-choice-title">
-            <div className="spread row" style={{ gap: 10, alignItems: "baseline" }}>
+            <Csp.div className="spread row" css={{ gap: "10px", alignItems: "baseline" }}>
               <strong id="lant-choice-title">Atinge următorul cuvânt</strong>
-            </div>
+            </Csp.div>
             <div className="lant-choice-grid">
               {state.choices.map((choice) => (
                 <button
@@ -766,28 +767,28 @@ export default function Lant({
             onExit={exitSafely}
             replayLabel="Încă un lanț →"
           >
-            Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}
-            în <strong style={{ color: "var(--text)" }}>{state.moves}</strong>{" "}
+            Ai ajuns la <Csp.strong css={{ color: "var(--text)" }}>{state.target.label}</Csp.strong>{" "}
+            în <Csp.strong css={{ color: "var(--text)" }}>{state.moves}</Csp.strong>{" "}
             {roNoun(state.moves, "salt", "salturi")} (drumul cel mai scurt: {state.optimal}).
             {recovery?.message ? (
-              <span className="muted" style={{ display: "block", marginTop: 8 }}>
-                <span aria-hidden="true" style={{ marginRight: 6 }}>
+              <Csp.span className="muted" css={{ display: "block", marginTop: "8px" }}>
+                <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
                   ℹ
-                </span>
+                </Csp.span>
                 {recovery.message}
-              </span>
+              </Csp.span>
             ) : null}
           </ResultCard>
         ) : (
-          <m.div
+          <CspMotion.div
             key={shake}
             animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
             transition={{ duration: 0.32 }}
             className="col"
-            style={{ gap: 10 }}
+            css={{ gap: "10px" }}
           >
         {actionSync ? (
-          <div className="card col lant-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+          <Csp.div className="card col lant-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
             <span>{actionSync.kind === "changed"
               ? "Încarcă jocul curent pentru a continua."
@@ -795,11 +796,11 @@ export default function Lant({
             <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
             </Button>
-          </div>
+          </Csp.div>
         ) : null}
 
-            <div className="row word-hop-input" style={{ gap: 8 }}>
-              <input
+            <Csp.div className="row word-hop-input" css={{ gap: "8px" }}>
+              <Csp.input
                 ref={inputRef}
                 className="field fill"
                 placeholder="Sau scrie alt concept…"
@@ -816,7 +817,7 @@ export default function Lant({
                 spellCheck={false}
                 enterKeyHint="send"
                 aria-label="Următorul concept"
-                style={{ flex: 1 }}
+                css={{ flex: 1 }}
               />
               <Button
                 type="button"
@@ -825,9 +826,9 @@ export default function Lant({
               >
                 {busy ? "…" : "Salt"}
               </Button>
-            </div>
+            </Csp.div>
 
-            <div className="row wrap lant-tools" style={{ gap: 8 }}>
+            <Csp.div className="row wrap lant-tools" css={{ gap: "8px" }}>
               <Button
                 type="button"
                 variant="secondary"
@@ -856,31 +857,31 @@ export default function Lant({
                   ? "💡 Mai clar"
                   : "💡 Indiciu"}
               </Button>
-            </div>
+            </Csp.div>
 
             <AnimatePresence>
               {recovery && (
-                <m.div
+                <CspMotion.div
                   key={`${recovery.tone}-${recovery.message}`}
                   initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   className="card"
-                  style={{
-                    padding: 12,
+                  css={{
+                    padding: "12px",
                     borderColor:
                       recovery.tone === "warning" ? "var(--bad)" : DEF.accent,
                   }}
                 >
-                  <div className="col" style={{ gap: 8 }}>
+                  <Csp.div className="col" css={{ gap: "8px" }}>
                     <span>
-                      <span aria-hidden="true" style={{ marginRight: 6 }}>
+                      <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
                         {recovery.tone === "warning" ? "⚠" : "ℹ"}
-                      </span>
+                      </Csp.span>
                       {recovery.message}
                     </span>
                     {recovery.choices.length > 0 ? (
-                      <div className="row wrap" style={{ gap: 8 }}>
+                      <Csp.div className="row wrap" css={{ gap: "8px" }}>
                         <span className="faint">Ai vrut să scrii:</span>
                         {recovery.choices.map((choice) => (
                           <Button
@@ -896,26 +897,26 @@ export default function Lant({
                             {choice}
                           </Button>
                         ))}
-                      </div>
+                      </Csp.div>
                     ) : null}
-                  </div>
-                </m.div>
+                  </Csp.div>
+                </CspMotion.div>
               )}
             </AnimatePresence>
 
             <AnimatePresence>
               {hint && (hint.stage || hint.hint) && (
-                <m.div
+                <CspMotion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   className="card lant-hint-panel"
-                  style={{ padding: 12, borderColor: "var(--warn)" }}
+                  css={{ padding: "12px", borderColor: "var(--warn)" }}
                   role="status"
                   aria-live="polite"
                 >
-                  <div className="col" style={{ gap: 8 }}>
-                    <strong style={{ color: "var(--warn)", fontSize: "0.8rem" }}>
+                  <Csp.div className="col" css={{ gap: "8px" }}>
+                    <Csp.strong css={{ color: "var(--warn)", fontSize: "0.8rem" }}>
                       {hint.stage === "direction"
                         ? "O DIRECȚIE"
                         : hint.stage === "alternatives"
@@ -923,11 +924,11 @@ export default function Lant({
                           : hint.stage === "backtrack"
                             ? "UN PAS ÎNAPOI"
                             : "UN SALT"}
-                    </strong>
+                    </Csp.strong>
                     {hint.message ? (
-                      <span className="muted" style={{ fontSize: "0.85rem" }}>
+                      <Csp.span className="muted" css={{ fontSize: "0.85rem" }}>
                         {hint.message}
-                      </span>
+                      </Csp.span>
                     ) : null}
                     {hintRemaining !== null && (
                       <span className="muted">
@@ -937,7 +938,7 @@ export default function Lant({
                       </span>
                     )}
                     {hint.alternatives_choices?.length ? (
-                      <div className="row wrap" style={{ gap: 8 }}>
+                      <Csp.div className="row wrap" css={{ gap: "8px" }}>
                         {hint.alternatives_choices.map((choice) => (
                           <Button
                             key={`${choice.label}-${choice.relation}`}
@@ -951,7 +952,7 @@ export default function Lant({
                             {choice.label}
                           </Button>
                         ))}
-                      </div>
+                      </Csp.div>
                     ) : null}
                     {hint.hint ? (
                       <button
@@ -968,11 +969,11 @@ export default function Lant({
                         {hint.relation ? ` · ${hint.relation}` : ""}
                       </button>
                     ) : null}
-                  </div>
-                </m.div>
+                  </Csp.div>
+                </CspMotion.div>
               )}
             </AnimatePresence>
-          </m.div>
+          </CspMotion.div>
         )}
 
         <GameOptions game="lant">

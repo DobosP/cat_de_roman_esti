@@ -1,3 +1,4 @@
+import { Csp } from "./CspStyle";
 // CategoryPicker — chip row for choosing a game's category/theme (ADR-0011).
 // The unfiltered mix (no category) keeps the curated-first default; the rest come
 // from /api/categories filtered to what THIS game can actually start. Renders
@@ -66,14 +67,14 @@ export function CategoryPicker({
   ) => {
     const selected = value === key;
     return (
-      <button
+      <Csp.button
         key={key ?? "__mix__"}
         type="button"
         className="chip"
         aria-pressed={selected}
         onClick={() => onChange(key)}
         title={kind === "pop" ? "Cultură pop" : undefined}
-        style={{
+        css={{
           cursor: "pointer",
           borderColor: selected ? color : "var(--surface-border)",
           background: selected
@@ -84,7 +85,7 @@ export function CategoryPicker({
         }}
       >
         {label}
-      </button>
+      </Csp.button>
     );
   };
 
@@ -96,27 +97,27 @@ export function CategoryPicker({
   };
 
   return (
-    <div className="col" style={{ gap: 8 }}>
-      <span
+    <Csp.div className="col" css={{ gap: "8px" }}>
+      <Csp.span
         className="faint"
-        style={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
+        css={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
         id="category-label"
       >
         CATEGORIE
-      </span>
-      <div
+      </Csp.span>
+      <Csp.div
         className="row wrap category-picker-options"
         role="group"
         aria-labelledby="category-label"
-        style={{ gap: 6 }}
+        css={{ gap: "6px" }}
       >
         {chip(null, "Toate temele", accent)}
         {pop.map(chipFor)}
         {serious.map(chipFor)}
-      </div>
-      <span className="faint category-picker-note" style={{ fontSize: "0.72rem" }}>
+      </Csp.div>
+      <Csp.span className="faint category-picker-note" css={{ fontSize: "0.72rem" }}>
         Tema se aplică doar jocurilor libere.
-      </span>
-    </div>
+      </Csp.span>
+    </Csp.div>
   );
 }

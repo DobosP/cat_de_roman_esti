@@ -50,3 +50,10 @@ cat_accounts.sqlite3
 !/go-backend/embedfs/dist/.keep
 /go-backend/embedfs/legacy/**
 !/go-backend/embedfs/legacy/.keep
+
+# Private GUI identity outputs; only the empty embedding scaffold is source.
+!/go-backend/embedfs/build/
+/go-backend/embedfs/build/*
+!/go-backend/embedfs/build/dist/
+/go-backend/embedfs/build/dist/**
+!/go-backend/embedfs/build/dist/.keep

@@ -1,4 +1,5 @@
-import type { CSSProperties, ReactNode } from "react";
+import { Csp } from "./CspStyle";
+import type { ReactNode } from "react";
 
 export interface PlayGuideStep {
   icon: ReactNode;
@@ -51,9 +52,9 @@ export function NextMove({
   className?: string;
 }) {
   return (
-    <div
+    <Csp.div
       className={`next-move${ready ? " next-move--ready" : ""}${className ? ` ${className}` : ""}`}
-      style={{ "--cue-accent": accent } as CSSProperties}
+      css={{ "--cue-accent": accent }}
     >
       <span className="next-move-icon" aria-hidden>
         {icon}
@@ -70,6 +71,6 @@ export function NextMove({
       </span>
       {progress && <span className="next-move-progress">{progress}</span>}
       {action && <span className="next-move-action">{action}</span>}
-    </div>
+    </Csp.div>
   );
 }

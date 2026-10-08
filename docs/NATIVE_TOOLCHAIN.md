@@ -1,11 +1,12 @@
 # Native tooling qualification
 
-Last verified: 2026-10-05
+Last verified: 2026-10-08 — source/documentation review only; qualifier alignment UNAPPLIED, UNQUALIFIED, NOT RUN.
 
 The tooling boundaries and retention requirements are recorded in
 [ADR-0169](adr/0169-native-terminal-and-rest-tools.md) and
-[ADR-0165](adr/0165-native-source-build-and-qualification.md). Complete clean-source
-qualification passes under [ADR-0168](adr/0168-qualify-complete-native-toolchain.md);
+[ADR-0165](adr/0165-native-source-build-and-qualification.md). [ADR-0168](adr/0168-qualify-complete-native-toolchain.md)
+retains the historical complete clean-source Node 24 qualification. Selected Node 26.10.0/npm 12.2.0
+follow [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md); the separate qualifier guard alignment is source-only and unqualified.
 CI follows accepted manual policy (ADR-0164); native gates default, references opt-in. Current gates are in [STATUS](STATUS.md).
 These local tools never add a public solution endpoint.
 
@@ -87,15 +88,23 @@ products/cache stay in workspace scratch. A failed/unhealthy online health probe
 offline fixture, matching the original terminal behavior. A healthy server's content,
 availability or legal-provenance refusal remains a failure.
 
-The complete integration entrypoint is `scripts/qualify_go_toolchain.sh`. It requires
-`CDR_TOOLCHAIN_SCRATCH` under `~/work/_temp/`, an explicit disposable fixture in
-`CDR_NATIVE_TEST_DSN`, qualified Go 1.27.1 and Node 24, and a `PATH` containing the native
-build/Git/shell utilities with Python/Rust absent. It runs source/operator/builder checks,
+The standalone integration entrypoint is `scripts/qualify_go_toolchain.sh`. After guarded integration of
+this separate alignment, its prechecks require exact Go 1.27.1 linux/amd64 and selected Node 26.10.0 per ADR-0184.
+It retains `CDR_TOOLCHAIN_SCRATCH` under `~/work/_temp/`, an explicit disposable fixture in
+`CDR_NATIVE_TEST_DSN`, and a `PATH` containing native build/Git/shell utilities with Python/Rust absent.
+Its retained command sequence includes source/operator/builder checks,
 native race/vet, both explicit PostgreSQL release lanes, native compiled HTTP parity,
 synthetic HTTP smoke/benchmark, Node gates and all browser cases. Its exit status cannot
 turn missing required infrastructure into a skip. Default hermetic Go runs retain their
 optional-PG markers; the explicit release lanes execute those same tests against the
 supplied disposable database. Provider mocks remain local; production flags are unchanged.
+
+The exact Node predicate/diagnostic alignment and dependent guide corrections are **SOURCE ONLY,
+UNAPPLIED, UNQUALIFIED and NOT RUN**. No new toolchain policy or qualification result is recorded.
+The standalone recipe is separate from the owning GUI wrapper. Genuine Linux version/selected-kit lint
+context, all native/PG/browser checks and managed current/legacy asset proof remain future obligations.
+Its existing command order and `--static-root cat_de_roman_esti/web/static` argument are unchanged;
+this guard correction supplies no managed-output, canonical GREEN unit/KIT_BUMP or device/phase proof.
 
 Tagged app-pack input: native terminal `--offline --fixture <tagged.json>` auto-detects
 public tagged envelopes. Bounded `internal/apppack` contracts preserve tags/facets and

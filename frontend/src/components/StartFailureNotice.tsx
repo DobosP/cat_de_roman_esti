@@ -1,3 +1,4 @@
+import { Csp } from "./CspStyle";
 import { useLayoutEffect, useRef } from "react";
 
 /** A failed new round remains visible until the player retries or resumes a game. */
@@ -14,14 +15,14 @@ export function StartFailureNotice({ failed, reserveSpace = false }: {
 
   if (!failed && !reserveSpace) return null;
   return (
-    <p
+    <Csp.p
       ref={noticeRef}
       className="card start-failure-notice"
       role={failed ? "alert" : undefined}
       aria-hidden={!failed || undefined}
-      style={{ padding: 14, margin: 0, visibility: failed ? "visible" : "hidden" }}
+      css={{ padding: "14px", margin: "0px", visibility: failed ? "visible" : "hidden" }}
     >
       Nu am putut porni jocul. Am păstrat opțiunile alese. Poți încerca din nou.
-    </p>
+    </Csp.p>
   );
 }

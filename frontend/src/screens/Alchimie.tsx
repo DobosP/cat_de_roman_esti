@@ -1,3 +1,4 @@
+import { Csp, CspButton, CspMotion } from "../components/CspStyle";
 // Alchimie — Infinite-Craft over the Romanian KG. Text-only: the inventory is a grid of
 // clickable concepts: a first tap selects, a second tap crafts their shared neighbour(s).
 // Server-authoritative: we render whatever the backend returns and never know the target
@@ -662,7 +663,7 @@ function AlchimieChallenge({
     return (
       <div className="screen-pad fill alchemy-screen alchemy-intro" aria-busy={creating}>
         {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
-        <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
+        <Csp.div inert={creating} className="container col game-container" css={{ gap: "18px" }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
           <AlchimieModes mode="challenges" busy={creating || loading} />
 
@@ -680,10 +681,10 @@ function AlchimieChallenge({
             glow={DEF.glow}
             best={best}
             description={
-              <p style={{ margin: 0 }}>
+              <Csp.p css={{ margin: "0px" }}>
                 Atinge un cuvânt, apoi altul: se combină imediat. Descoperă cuvinte noi până creezi ținta.
                 {" "}Perechile fără rezultat nu scad scorul.
-              </p>
+              </Csp.p>
             }
             steps={[
               { icon: "👆", label: "Atinge un cuvânt" },
@@ -721,13 +722,13 @@ function AlchimieChallenge({
               </div>
             </details>
           </GameIntro>
-        </div>
+        </Csp.div>
       </div>
     );
   }
 
   return (
-    <div className="screen-pad fill alchemy-screen" style={{ overflowY: "auto" }} aria-busy={creating}>
+    <Csp.div className="screen-pad fill alchemy-screen" css={{ overflowY: "auto" }} aria-busy={creating}>
       {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
       <div inert={creating} className="container col game-container alchemy-game">
         {/* Header */}
@@ -791,7 +792,7 @@ function AlchimieChallenge({
               </AnimatePresence>
 
               {!won && actionSync ? (
-                <div className="card col alchemy-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+                <Csp.div className="card col alchemy-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
                   <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
                   <span>{actionSync.kind === "changed"
                     ? "Încarcă jocul curent pentru a continua."
@@ -799,18 +800,18 @@ function AlchimieChallenge({
                   <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
                     {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
                   </Button>
-                </div>
+                </Csp.div>
               ) : null}
 
               {!won && state.earned_hint ? (
-                <div className="card alchemy-earned-hint" role="status" style={{ padding: 12, borderColor: GOLD }}>
+                <Csp.div className="card alchemy-earned-hint" role="status" css={{ padding: "12px", borderColor: GOLD }}>
                   {state.earned_hint.message}
-                </div>
+                </Csp.div>
               ) : null}
 
               {state.hint_available && (
                 <div className="alchemy-assistance">
-                  <Button
+                  <CspButton
                     type="button"
                     variant="secondary"
                     disabled={actionsLocked}
@@ -821,10 +822,10 @@ function AlchimieChallenge({
                         : "Îți arată o pereche utilă"
                     }
                     aria-describedby="alchemy-hint-cost"
-                    style={{ borderColor: GOLD, color: GOLD }}
+                    css={{ borderColor: GOLD, color: GOLD }}
                   >
                     💡 Indiciu
-                  </Button>
+                  </CspButton>
                   <span id="alchemy-hint-cost">Folosește un indiciu · penalizare de 150 puncte.</span>
                 </div>
               )}
@@ -852,7 +853,7 @@ function AlchimieChallenge({
                   aria-label="Filtrează inventarul"
                 >
                   {(["useful", "recent", "all"] as InventoryView[]).map((view) => (
-                    <button
+                    <Csp.button
                       key={view}
                       type="button"
                       aria-pressed={inventoryView === view}
@@ -862,13 +863,13 @@ function AlchimieChallenge({
                         setInventoryView(view);
                         setInventoryQuery("");
                       }}
-                      style={{
+                      css={{
                         borderColor: inventoryView === view ? DEF.accent : undefined,
                         color: inventoryView === view ? "var(--text)" : undefined,
                       }}
                     >
                       {INVENTORY_VIEW_LABEL[view]} {inventoryCounts[view]}
-                    </button>
+                    </Csp.button>
                   ))}
                 </div>
                 <div className="alchemy-search-row">
@@ -916,7 +917,7 @@ function AlchimieChallenge({
                       ? `${item.label}, gata pentru o combinație utilă`
                       : item.label;
                   return (
-                    <m.button
+                    <CspMotion.button
                       key={item.id}
                       ref={(node) => {
                         if (node) inventoryButtons.current.set(item.id, node);
@@ -967,8 +968,8 @@ function AlchimieChallenge({
                       aria-pressed={isSel}
                       aria-label={accessibleLabel}
                       title={title}
-                      className={`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isFresh ? " alchemy-word--fresh" : ""}${isHint ? " alchemy-word--hint" : ""}${isTried ? " alchemy-word--tried" : ""}${dragOverId === item.id ? " alchemy-word--drop" : ""}`}
-                      style={{
+                      className={(`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isFresh ? " alchemy-word--fresh" : ""}${isHint ? " alchemy-word--hint" : ""}${isTried ? " alchemy-word--tried" : ""}${dragOverId === item.id ? " alchemy-word--drop" : ""}`) + (item.depleted ? " csp-motion-opacity-50" : "")}
+                      css={{
                         cursor: won ? "default" : "pointer",
                         borderColor: isSel
                           ? DEF.accent
@@ -988,7 +989,6 @@ function AlchimieChallenge({
                             : undefined,
                         color: isSel || isFresh ? "var(--text)" : undefined,
                         fontWeight: isCrafted ? 600 : 500,
-                        opacity: item.depleted ? 0.5 : 1,
                         boxShadow:
                           isFresh || isHint
                             ? `0 0 16px -4px ${GOLD}`
@@ -1003,7 +1003,7 @@ function AlchimieChallenge({
                           {isSel ? "✓ Ales" : item.depleted ? "Pus deoparte" : isTried ? "Încercat" : "✦ Nou"}
                         </span>
                       )}
-                    </m.button>
+                    </CspMotion.button>
                   );
                 })}
               </AnimatePresence>
@@ -1013,9 +1013,9 @@ function AlchimieChallenge({
                 </p>
               )}
               {normalizedInventoryQuery && visibleInventory.length === 0 && (
-                <p className="faint center" style={{ gridColumn: "1 / -1", margin: 8 }}>
+                <Csp.p className="faint center" css={{ gridColumn: "1 / -1", margin: "8px" }}>
                   Niciun concept găsit.
-                </p>
+                </Csp.p>
               )}
             </div>
           </section>
@@ -1030,20 +1030,20 @@ function AlchimieChallenge({
             {!won && reactionLog.length > 0 && (
               <details className="alchemy-discoveries">
                 <summary>Descoperiri</summary>
-                <div className="row spread wrap" style={{ gap: 8, alignItems: "center" }}>
-                  <span
+                <Csp.div className="row spread wrap" css={{ gap: "8px", alignItems: "center" }}>
+                  <Csp.span
                     id="alchemy-reaction-log-title"
                     className="faint"
-                    style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
+                    css={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
                   >
                     ULTIMA DESCOPERIRE
-                  </span>
-                  <span className="muted" style={{ fontSize: "0.78rem" }}>
+                  </Csp.span>
+                  <Csp.span className="muted" css={{ fontSize: "0.78rem" }}>
                     {reactionLog.length === 1
                       ? "1 reacție păstrată"
                       : reactionLog.length + " reacții păstrate"}
-                  </span>
-                </div>
+                  </Csp.span>
+                </Csp.div>
 
                 <ReactionRow
                   reaction={reactionLog[0]}
@@ -1056,18 +1056,18 @@ function AlchimieChallenge({
 
                 {reactionLog.length > 1 && (
                   <details className="alchemy-reaction-log">
-                    <summary
+                    <Csp.summary
                       className="chip alchemy-reaction-log-toggle"
-                      style={{
+                      css={{
                         cursor: "pointer",
-                        minHeight: 44,
+                        minHeight: "44px",
                         width: "fit-content",
                         maxWidth: "100%",
                       }}
                     >
                       Vezi jurnalul ({reactionLog.length})
-                    </summary>
-                    <div className="col" style={{ gap: 8, marginTop: 10 }}>
+                    </Csp.summary>
+                    <Csp.div className="col" css={{ gap: "8px", marginTop: "10px" }}>
                       {reactionLog.slice(1).map((reaction) => (
                         <ReactionRow
                           key={
@@ -1083,7 +1083,7 @@ function AlchimieChallenge({
                           onSelect={toggle}
                         />
                       ))}
-                    </div>
+                    </Csp.div>
                   </details>
                 )}
               </details>
@@ -1092,7 +1092,7 @@ function AlchimieChallenge({
             {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
             {!won && (
               <>
-                <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
+                <Csp.div className="row center wrap" css={{ gap: "12px", marginTop: "8px" }}>
                   <Button
                     type="button"
                     variant="secondary"
@@ -1123,7 +1123,7 @@ function AlchimieChallenge({
                   >
                     ⚙ Schimbă opțiunile
                   </Button>
-                </div>
+                </Csp.div>
               </>
             )}
 
@@ -1155,23 +1155,23 @@ function AlchimieChallenge({
               onExit={exitSafely}
             >
               <>
-                <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> în{" "}
+                <Csp.strong css={{ color: "var(--text)" }}>{state.target.label}</Csp.strong> în{" "}
                 {state.moves} {state.moves === 1 ? "combinație" : "combinații"} ·{" "}
                 {state.discovered_count} concepte descoperite.
                 {winningReaction && (
-                  <span style={{ display: "block", marginTop: 8 }}>
-                    <span
+                  <Csp.span css={{ display: "block", marginTop: "8px" }}>
+                    <Csp.span
                       className="faint"
-                      style={{ display: "block", fontSize: "0.72rem" }}
+                      css={{ display: "block", fontSize: "0.72rem" }}
                     >
                       CUM AI FĂURIT-O
-                    </span>
+                    </Csp.span>
                     {winningReaction.parents[0].label} +{" "}
                     {winningReaction.parents[1].label} →{" "}
-                    <strong style={{ color: "var(--text)" }}>
+                    <Csp.strong css={{ color: "var(--text)" }}>
                       {winningReaction.results.map((item) => item.label).join(", ")}
-                    </strong>
-                  </span>
+                    </Csp.strong>
+                  </Csp.span>
                 )}
                 {winningReaction?.results.map((item) => (
                   <EarnedLinks key={item.id} item={item} />
@@ -1181,7 +1181,7 @@ function AlchimieChallenge({
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </Csp.div>
   );
 }
 
@@ -1201,25 +1201,25 @@ function ReactionRow({
   onSelect: (id: string) => void;
 }) {
   return (
-    <div
+    <Csp.div
       className="row wrap"
-      style={{
-        gap: 8,
+      css={{
+        gap: "8px",
         alignItems: "center",
         overflowWrap: "anywhere",
       }}
     >
-      <span className="muted" style={{ lineHeight: 1.45 }}>
+      <Csp.span className="muted" css={{ lineHeight: 1.45 }}>
         {reaction.parents[0].label} + {reaction.parents[1].label} →
-      </span>
-      <span className="row wrap" style={{ gap: 6 }}>
+      </Csp.span>
+      <Csp.span className="row wrap" css={{ gap: "6px" }}>
         {reaction.results.map((item) => {
           const isSelected = selected.includes(item.id);
           const isFresh = freshIds.has(item.id);
           const currentItem = inventoryById.get(item.id);
           const depleted = currentItem?.depleted ?? true;
           return (
-            <button
+            <Csp.button
               key={item.id}
               type="button"
               className="chip alchemy-reaction-result"
@@ -1228,9 +1228,9 @@ function ReactionRow({
               aria-label={depleted ? `${item.label}, pus deoparte` : `Alege ${item.label}`}
               title={depleted ? "Pus deoparte" : "Pune în alambic"}
               onClick={() => onSelect(item.id)}
-              style={{
+              css={{
                 cursor: busy || depleted ? "default" : "pointer",
-                minHeight: 44,
+                minHeight: "44px",
                 maxWidth: "100%",
                 overflowWrap: "anywhere",
                 borderColor: isSelected ? DEF.accent : isFresh ? GOLD : undefined,
@@ -1241,12 +1241,12 @@ function ReactionRow({
             >
               {isFresh ? "NOU · " : ""}
               {item.label}
-            </button>
+            </Csp.button>
           );
         })}
-      </span>
+      </Csp.span>
       {reaction.results.map((item) => <EarnedLinks key={item.id} item={item} />)}
-    </div>
+    </Csp.div>
   );
 }
 
@@ -1277,10 +1277,10 @@ function Slot({
 }) {
   if (!item) return null;
   return (
-    <button
+    <Csp.button
       type="button"
       className="chip alchemy-slot"
-      style={{ borderColor: DEF.accent, color: "var(--text)", minHeight: 44 }}
+      css={{ borderColor: DEF.accent, color: "var(--text)", minHeight: "44px" }}
       onClick={() => onRemove(item.id)}
       disabled={disabled}
       title={`Scoate ${item.label} din alambic`}
@@ -1288,6 +1288,6 @@ function Slot({
     >
       <span className="alchemy-slot-label">{item.label}</span>
       <span aria-hidden>×</span>
-    </button>
+    </Csp.button>
   );
 }

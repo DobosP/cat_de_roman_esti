@@ -1,3 +1,13 @@
+# GUI migration — resumed Linux continuation
+
+Valid until: next source/gate state change; older transfer record follows as history.
+
+Current2026-10-08: Paul resumed this project on Linux. ExactWindows packets were recovered from origin/docs/gui-linux-continuation-20261008 (Catf3d4744/core553b87b), checksum/mode/preimage verified and applied in order. Cat source38, eager2, Cat9/core2 docs andNode6 alignment are applied; sealed originals unchanged. A forbidden Windows-only testskip andextraEOF newline were corrected separately. Latestowningdeps9fe95709 passed realnpm-lock+Gotidy, addingxnet0.59; frontend/qualitylocks unchanged.
+
+Next: admittednativeformat/compile, eleveneagercontracts/newnonce/GUIidentitytests, owninglint/nativeTS7 andnormalized900/Node2+private3/native1207+currentcontent/rails/fullimage/nonce/CSP/privacy. Owner selectsreviewedDockerfile.gui throughrealGATE-CHANGE/trust; finalprotectedSYNC→sameSHAactualtrust+GREENunit→KIT_BUMP stillrequired. React19/UI0.3 remain throughM1; actualnew startupgzip/compliance UNACQUIRED. Thresholds122880combinedJS/CSS and40960JS/30720target unchanged. Phone checkpointUNMET; dependentM2/S0b/teacher/social andunsafeproductionactivationclosed. No newqualifiedidentity orcore1.2repack.
+
+## Previous source-only transfer (historical)
+
 # GUI migration handover — 2026-10-08 Linux → Windows
 
 Valid until: next migration source/gate change. Paul requested a five-minute origin/main checkpoint without further tests. Linux supervisor is PAUSED; native worker and its subagents STOPPED. No tests, builds, deployment or candidate application were run for this handover. This is an UNQUALIFIED SOURCE CHECKPOINT, not a completed migration or release.

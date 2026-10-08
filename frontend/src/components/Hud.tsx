@@ -1,3 +1,4 @@
+import { Csp } from "./CspStyle";
 // Hud — the uniform status cluster next to the GameShell header: small stat
 // badges (moves, lives, difficulty, …) that look identical across all six games.
 
@@ -28,9 +29,9 @@ export function StatBadge({
 /** Right-aligned wrap row for StatBadges + small actions inside a GameShell. */
 export function Hud({ children }: { children: ReactNode }) {
   return (
-    <div className="row wrap hud" role="group" aria-label="Starea jocului"
-      style={{ gap: 8, alignItems: "center" }}>
+    <Csp.div className="row wrap hud" role="group" aria-label="Starea jocului"
+      css={{ gap: "8px", alignItems: "center" }}>
       {children}
-    </div>
+    </Csp.div>
   );
 }
