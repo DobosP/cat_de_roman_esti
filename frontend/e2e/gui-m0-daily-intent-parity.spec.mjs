@@ -154,7 +154,8 @@ for (const game of games) {
         const stable = { ...initial };
         delete stable.game_id;
         expect(stable).toEqual(plan.initial);
-        const terminal = await solve(page, game, plan.steps);
+        const terminal = await solve(page, game, plan.steps,
+          game.derived ? { completionAction: "daily-offer" } : {});
         // Lanț's move response deliberately omits daily; the actual public GET
         // binds the supplied day for every game without inventing response fields.
         const finished = await request.get(gameURL(game, initial.game_id));
@@ -205,7 +206,7 @@ for (const game of games.filter(({ derived }) => derived)) {
     const initial = await realSavedRound(request, game);
     const creates = await rememberAndResume(page, game, initial);
     await expect(page.getByText(BYPASS, { exact: true })).toBeVisible();
-    await solve(page, game, solution(game).steps);
+    await solve(page, game, solution(game).steps, { completionAction: "daily-offer" });
     await expect.poll(() => page.evaluate(([key, gameKey]) =>
       JSON.parse(localStorage.getItem(key) || "{}")[gameKey]?.played ?? 0,
     [SCORE_KEY, game.key])).toBe(1);
@@ -247,7 +248,7 @@ for (const game of games.filter(({ derived }) => derived)) {
     await expect(page.locator(game.board)).toBeVisible();
     await expect(page.locator(".start-failure-notice[role=alert]")).toHaveCount(0);
     expect(creates).toHaveLength(2);
-    await solve(page, game, solution({ ...game, daily: TODAY }).steps);
+    await solve(page, game, solution({ ...game, daily: TODAY }).steps, { completionAction: "daily-free" });
     const replay = page.getByRole("button", { name: "Joacă liber →", exact: true });
     await expect(replay).toBeEnabled();
     await expect(offer).toHaveCount(0);
@@ -261,5 +262,58 @@ for (const game of games.filter(({ derived }) => derived)) {
     expect(nextState.game_id).not.toBe(daily.game_id);
     await expect(page.locator(game.board)).toBeVisible();
     expect(creates).toHaveLength(3);
+  });
+}
+
+for (const game of games.filter(({ derived }) => derived)) {
+  test(`${game.key} an already completed real daily suppresses the daily offer after a saved free win with active intent`, async ({ page, request }) => {
+    await clock(page);
+    await deterministicStarts(page, game);
+    await page.goto(game.path);
+    const first = created(page, game);
+    await page.getByRole("button", { name: "Provocarea zilei", exact: true }).click();
+    const firstResponse = await first;
+    expect(firstResponse.status()).toBe(200);
+    expect(new URL(firstResponse.url()).searchParams.get("daily")).toBe(TODAY);
+    const daily = await firstResponse.json();
+    expect(daily.daily).toBe(TODAY);
+    const dailyWin = await solve(page, game, solution({ ...game, daily: TODAY }).steps, { completionAction: "daily-free" });
+    await expect.poll(async () => (await recentScore(page, game))?.daily).toBe(TODAY);
+    expect((await recentScore(page, game)).score).toBe(dailyWin.score);
+    await expect.poll(() => page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+      .toBeNull();
+
+    // Preserve the real local daily completion while resuming a different real
+    // FREE session. Active intent and a non-daily state isolate dailyPending;
+    // state.daily === TODAY cannot conceal a broken completion check here.
+    const free = await realSavedRound(request, game);
+    expect(free.daily).toBeFalsy();
+    expect(free.game_id).not.toBe(daily.game_id);
+    const creates = await rememberAndResume(page, game, free);
+    expect(new URL(page.url()).searchParams.get("challenge")).toBe("daily");
+    const freeWin = await solve(page, game, solution(game).steps);
+    expect(freeWin.daily).toBeFalsy();
+    const persisted = await request.get(gameURL(game, free.game_id));
+    expect(persisted.status()).toBe(200);
+    const wonFree = await persisted.json();
+    expect(wonFree.won).toBe(true);
+    expect(wonFree.daily).toBeFalsy();
+    expect(new URL(page.url()).searchParams.get("challenge")).toBe("daily");
+    const ordinary = page.getByRole("button", { name: "Încă unul →", exact: true });
+    await expect(ordinary).toBeEnabled();
+    await expect(page.getByRole("button", { name: "Joacă provocarea zilei →", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Joacă liber →", exact: true })).toHaveCount(0);
+    expect(creates).toHaveLength(0);
+
+    const replay = created(page, game);
+    await ordinary.click();
+    const response = await replay;
+    expect(response.status()).toBe(200);
+    expect(new URL(response.url()).searchParams.get("daily")).toBeNull();
+    const next = await response.json();
+    expect(next.daily).toBeFalsy();
+    expect(next.game_id).not.toBe(free.game_id);
+    await expect(page.locator(game.board)).toBeVisible();
+    expect(creates).toHaveLength(1);
   });
 }
