@@ -1,0 +1,25 @@
+{
+  "all14_input_sha_checks_passed_before_failure": true,
+  "archive_manifest_or_product_output_written": false,
+  "cause": "Author omitted creating authorized review reference directory; exactsourcepins, archiveconstruction and bounds had already passed",
+  "exception": "FileNotFoundError: [Errno 2] No such file or directory",
+  "failed_at_utc": "2026-10-08T21:27:18.555728+00:00",
+  "failed_operation": "open exclusive archive output with missing parent D/reference",
+  "failed_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/reference/source6-installed-context-r1.tar.gz",
+  "failed_prewrite_resources": {
+    "disk_free_bytes": 127423401984,
+    "memory_available_bytes": 21161910272
+  },
+  "failed_run_remains_FAIL": true,
+  "input_raw_bytes": 15486397,
+  "preservation_resources": {
+    "checked_at_utc": "2026-10-08T21:27:57.008645+00:00",
+    "disk_free_bytes": 127390552064,
+    "memory_available_bytes": 18858901504,
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-source6-context-publication-failure-r1.json"
+  },
+  "raw_trace": "Traceback (most recent call last):\n  File \"<stdin>\", line 21, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/reference/source6-installed-context-r1.tar.gz'\n",
+  "repair": "Preserve this FAIL; create only D/reference under fresh same-clock resourcecheck, then publish newly authenticated same14actualSource6bytes under originalc774 sourcecutoff. No native work, no source/data/runtime edits, no failedclockreset",
+  "schema": "v1-7-source6-context-source-publication-failure-v1",
+  "source_admission_sha256": "c774d8a0036d4421fa73d0a00648ad7ebce59d54518ac1f1a1cb7bc69d0a68e2"
+}
