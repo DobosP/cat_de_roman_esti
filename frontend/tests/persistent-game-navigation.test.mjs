@@ -8,6 +8,11 @@ const shell = read("../src/components/GameShell.tsx");
 const conexiuni = read("../src/screens/Conexiuni.tsx");
 const activeGame = read("../src/hooks/useActiveGame.ts");
 const css = read("../src/styles/arcade.css");
+const stickyOwnerCss = {
+  "connections-coach-stack": css,
+  "contexto-sticky-controls": read("../src/styles/contexto.css"),
+  "word-hop-input": read("../src/styles/lant.css"),
+};
 
 void test("an ordinary live Conexiuni exit conditionally forgets its pointer while uncertainty and terminal scoring preserve it", () => {
   assert.match(app, /navigate\("\/", \{ replace: true \}\)/);
@@ -45,7 +50,7 @@ void test("narrow screens keep exit visible and offset every second sticky game 
     "word-hop-input",
   ]) {
     assert.match(
-      css,
+      stickyOwnerCss[selector],
       new RegExp(
         "\\." + selector + " \\{[\\s\\S]*?top: var\\(--game-shell-sticky-offset\\);",
       ),

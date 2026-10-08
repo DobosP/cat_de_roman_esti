@@ -65,7 +65,7 @@ void test("Romanian labels wrap on a responsive Connections board and long paths
   assert.match(conexiuniCss, /\.connection-tile \{[^}]*?overflow-wrap: anywhere;[^}]*?white-space: normal/);
   assert.match(conexiuniCss, /@media \(max-width: 640px\)[\s\S]*?\.connection-tile \{[^}]*?min-height: 68px/);
   assert.match(lant, /className="row wrap breadcrumb-trail"/);
-  assert.match(css, /\.breadcrumb-trail \{[\s\S]*?overflow-x: auto/);
+  assert.match(lantCss, /\.breadcrumb-trail \{[\s\S]*?overflow-x: auto/);
   assert.match(lantCss, /\.lant-choice-grid \{[\s\S]*?repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(
     lantCss,

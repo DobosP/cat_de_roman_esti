@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "scope": "complete proven route-exclusive sticky families; source only, actual CSS/browser/budget qualification pending",
+  "source_sha": "86038f1ede2f8dd67bab11c6ee94231b225bba11",
+  "actual_gate_result": "435434933e57e3ffe282e944b8524a1e303363d6be4b63bb5696f6d0eeec4187",
+  "last_actual_startup_bytes": 123454,
+  "unchanged_limit_bytes": 122880,
+  "global_before_bytes": 36812,
+  "global_after_bytes": 35679,
+  "global_before_sha256": "fd74d5cbbc3f5154f33203fc55bf544559d875a8e5f5f44f9aab0ae44add9ac9",
+  "global_after_sha256": "0729f218468e045b80c7a71f9b07dcb0804c93b578e368aa8facbfd717c9c97f",
+  "routes": [
+    {
+      "destination": "frontend/src/styles/contexto.css",
+      "before_sha256": "874b76cefebf0c981889c44474f9b5e6dcb31e973ca3d3b995619acd0d1dcae1",
+      "after_sha256": "7e5c1dca879c01d237f84400444968205bfd28d2f6d244625d784453daeca150",
+      "old_route_suffix_bytes": 3884,
+      "placement": "all complete family fragments precede exact old route suffix; base/640/short-height order retained",
+      "fragments": [
+        {
+          "first_line": 238,
+          "last_line": 250,
+          "source_body_bytes": 400,
+          "source_body_sha256": "320744df3dc45cc55a037113470e79289bcf76819008a7f24302b39f76605b47",
+          "media": null,
+          "moved_body_exact": true
+        },
+        {
+          "first_line": 1433,
+          "last_line": 1435,
+          "source_body_bytes": 76,
+          "source_body_sha256": "ea964ca6e726612f912feb51cd6375483698bdbc6ebe1f6fe300fde90bf2ce07",
+          "media": "@media (max-width: 640px)",
+          "moved_body_exact": true
+        },
+        {
+          "source_group_lines": [
+            1484,
+            1490
+          ],
+          "selector": ".contexto-sticky-controls",
+          "declaration_body_sha256": "46a3d7f228926b165722a5ae8207778ca8931746c61c9d7bef67bd40603b3edc",
+          "media": "@media (max-width: 640px) and (max-height: 600px)",
+          "moved_declaration_body_exact": true
+        }
+      ]
+    },
+    {
+      "destination": "frontend/src/styles/alchimie.css",
+      "before_sha256": "2d5b3fc984415be657c7889aec1a2d596623142ab15099829aa746e02323f6cf",
+      "after_sha256": "33aaf64da35edc6042b6f4392bcce490f9e3f54ba57d49a0c28e3a52932d4471",
+      "old_route_suffix_bytes": 12065,
+      "placement": "all complete family fragments precede exact old route suffix; base/640/short-height order retained",
+      "fragments": [
+        {
+          "first_line": 1438,
+          "last_line": 1444,
+          "source_body_bytes": 176,
+          "source_body_sha256": "8833e9ff880e4e534f5f0fb81a21387177f6300e7bd2d98c4bdc7b7f8dc384cd",
+          "media": "@media (max-width: 640px)",
+          "moved_body_exact": true
+        },
+        {
+          "source_group_lines": [
+            1484,
+            1490
+          ],
+          "selector": ".alchemy-bench",
+          "declaration_body_sha256": "46a3d7f228926b165722a5ae8207778ca8931746c61c9d7bef67bd40603b3edc",
+          "media": "@media (max-width: 640px) and (max-height: 600px)",
+          "moved_declaration_body_exact": true
+        }
+      ]
+    },
+    {
+      "destination": "frontend/src/styles/lant.css",
+      "before_sha256": "0466f3f37c779eb54f83036846eb490f9c5d761cbf67c784a558f00e699f867c",
+      "after_sha256": "def2d82a1f24503762712beec2941bdde08faa95430ca65182059d81a82db684",
+      "old_route_suffix_bytes": 4446,
+      "placement": "all complete family fragments precede exact old route suffix; base/640/short-height order retained",
+      "fragments": [
+        {
+          "first_line": 1370,
+          "last_line": 1372,
+          "source_body_bytes": 64,
+          "source_body_sha256": "888a7cf6820526b0030529279b25b14b1dcbd5ce389cabc2ee2158d53ebd1eee",
+          "media": "@media (max-width: 640px)",
+          "moved_body_exact": true
+        },
+        {
+          "first_line": 1447,
+          "last_line": 1465,
+          "source_body_bytes": 375,
+          "source_body_sha256": "70c7a31d69d57c50931fa226fca83a8e3702cf46abd9362fb7dfaed9b5c72e2c",
+          "media": "@media (max-width: 640px)",
+          "moved_body_exact": true
+        },
+        {
+          "source_group_lines": [
+            1484,
+            1490
+          ],
+          "selector": ".word-hop-input",
+          "declaration_body_sha256": "46a3d7f228926b165722a5ae8207778ca8931746c61c9d7bef67bd40603b3edc",
+          "media": "@media (max-width: 640px) and (max-height: 600px)",
+          "moved_declaration_body_exact": true
+        }
+      ]
+    }
+  ],
+  "source_check_inputs": [
+    {
+      "file": "frontend/tests/persistent-game-navigation.test.mjs",
+      "before_sha256": "bb273907d6febcf14b5394b5a3f39ff77fd536bc387a72cc9d1b6af4f2a59725",
+      "after_sha256": "a491be426b4b1e143673aa09777d463a212526c19941c360edda9b250ad4adab",
+      "change": "same per-selector sticky-offset regex reads exact owning CSS; Conexiuni stays global"
+    },
+    {
+      "file": "frontend/tests/mobile-beginner-ui.test.mjs",
+      "before_sha256": "22e0d6cfb94155f27f380c91febd182f621686084173a89c6ae1e638e3e72c30",
+      "after_sha256": "dd6a8481204cb5bc26b00fda3de7c89b2b1e14e1174480c691f04844b6f06d87",
+      "change": "same breadcrumb overflow regex reads exact Lant owner; all thresholds/cases unchanged"
+    }
+  ],
+  "group_splits": [
+    {
+      "kind": "640px scrollbar",
+      "remaining_global_selector": ".category-picker-options::-webkit-scrollbar",
+      "body_sha256": "beee4614e2d2ec6ba6cfbca27b181c12c4d37ca03c5bfc23d19922b75379d8fd"
+    },
+    {
+      "kind": "short keyboard",
+      "remaining_global_selectors": [
+        ".game-shell-header",
+        ".connections-coach-stack"
+      ],
+      "body_sha256": "46a3d7f228926b165722a5ae8207778ca8931746c61c9d7bef67bd40603b3edc"
+    }
+  ],
+  "preserved": [
+    "same selector/declaration/media bytes",
+    "all exact later route CSS suffixes/scoped overrides",
+    "matching short-height reset for each moved sticky surface",
+    "global shared headers/screenpad/sticky variables/Conexiuni",
+    "global Home/shell/HUD/category/coarsefocus/AccountBar/fonts",
+    "no new imports/loaders/bundler/runtime changes",
+    "all source assertion expressions/thresholds/case identities"
+  ],
+  "qualification": "UNRUN; last actual startup123454 remains574over; no inferred savings"
+}

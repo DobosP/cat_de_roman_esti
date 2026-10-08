@@ -1,3 +1,19 @@
+@media (max-width: 640px) {
+  .alchemy-bench {
+    position: sticky;
+    top: var(--game-shell-sticky-offset);
+    z-index: 7;
+    background: rgba(21, 17, 45, 0.96);
+    backdrop-filter: blur(12px);
+  }
+}
+
+@media (max-width: 640px) and (max-height: 600px) {
+  .alchemy-bench {
+    position: static;
+  }
+}
+
 .alchemy-earned-links {
   flex-basis: 100%;
   min-width: 0;
