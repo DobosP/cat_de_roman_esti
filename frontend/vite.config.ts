@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import { guiSdkAllocationPlugin } from "./scripts/gui-sdk-allocation-plugin.mts";
 
 const accountBarModule = path.resolve("src/components/AccountBar.tsx");
+const mainModule = path.resolve("src/main.tsx");
 
 // Asset sync copies this managed build into the native server's embedded tree.
 // The development proxy keeps the SPA and API on the same browser origin.
@@ -23,9 +24,11 @@ export default defineConfig({
         codeSplitting: {
           groups: [{
             debugName: "startup-entry-and-accountbar",
-            // Coalesce only the existing static entry graph and the mandatory
-            // AccountBar static closure. Dynamic game edges remain separate.
+            // Keep real executable roots separate; only their already-counted
+            // static dependencies share implementation. Never follow dynamic edges.
             name(moduleId, context) {
+              const module = context.getModuleInfo(moduleId);
+              if (moduleId === mainModule || moduleId === accountBarModule || module?.isEntry) return null;
               const pending = [moduleId], seen = new Set<string>();
               while (pending.length > 0) {
                 const current = pending.pop()!;
@@ -33,7 +36,7 @@ export default defineConfig({
                 seen.add(current);
                 const info = context.getModuleInfo(current);
                 if (!info) continue;
-                if (info.isEntry || current === accountBarModule) return "startup";
+                if (info.isEntry || current === mainModule || current === accountBarModule) return "startup";
                 pending.push(...info.importers);
               }
               return null;
