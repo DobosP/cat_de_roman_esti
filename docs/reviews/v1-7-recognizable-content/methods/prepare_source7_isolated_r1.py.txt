@@ -1,0 +1,55 @@
+"""Prepare a new task-owned isolated native Source7 root. Copy bytes only.
+No graph import/generator/tool/native/API invoked here. All future rank/derive and
+candidate/proposal/audit commands are separately admitted native steps.
+"""
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+S=Path('/home/dobo/work/_temp/codex__content-v1-7')
+D=R/'docs/reviews/v1-7-recognizable-content'
+I=S/'source7-stage-r1'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+a=json.loads(Path(sys.argv[1]).read_bytes())
+assert sha(__file__)==a['preparation_method_sha256']
+assert all(sha(R/n)==h for n,h in a['inputs'].items())
+assert all(sha(Path(n))==h for n,h in a['scratch_bindings'].items())
+manifestPath=D/'source7-isolated-copy-manifest-r1.json'
+assert sha(manifestPath)==a['copy_manifest_sha256']
+m=json.loads(manifestPath.read_bytes())
+assert all(sha(R/n)==h for n,h in m['source_files'].items())
+assert all(sha(Path(v['source']))==v['sha256'] for v in m['supported_generated_input_copies'].values())
+draft=D/'source7-authored-draft-r1.json'
+assert sha(draft)==m['draft_source_sha256']==a['source7_sha256']
+tools=S/'source7-tools-r1'
+assert I.parent.resolve(strict=True)==S and not I.exists() and not I.is_symlink()
+assert not tools.exists() and not tools.is_symlink()
+assert not (S/'probe/source7-preparation-result-r1.json').exists()
+I.mkdir(mode=0o700)
+tools.mkdir(mode=0o700)
+written={}
+def publish(relative,blob):
+ target=I/relative
+ assert target.is_relative_to(I)
+ target.parent.mkdir(parents=True,exist_ok=True)
+ with target.open('xb') as out:out.write(blob);out.flush();os.fsync(out.fileno())
+ written[relative]=sha(target)
+try:
+ for n,h in m['source_files'].items():
+  blob=(R/n).read_bytes();assert hashlib.sha256(blob).hexdigest()==h
+  if n in m['supported_generated_input_copies']:
+   v=m['supported_generated_input_copies'][n];blob=Path(v['source']).read_bytes();assert hashlib.sha256(blob).hexdigest()==v['sha256']
+  publish(n,blob)
+ publish(m['isolated_source7_path'],draft.read_bytes())
+ for rail in ('quick','world','extensions'):(I/'native'/rail).mkdir(parents=True)
+ assert all(sha(R/n)==h for n,h in m['source_files'].items())
+ assert all(sha(I/n)==h for n,h in written.items())
+ result={'schema':'v1-7-isolated-source7-preparation-result-r1','status':'ISOLATED_BYTES_PREPARED_ONLY','source7_sha256':sha(I/m['isolated_source7_path']),'copied_files':len(written),'isolated_file_sha256':written,'prior25_archives_preserved':all(sha(I/n)==h for n,h in m['prior25_unique_ancestry_archives'].items()),'all28_archives_preserved':all(sha(I/n)==h for n,h in m['all28_unique_archives'].items()),'native_commands_run':False,'live_sources_unchanged':True,'installation_approval':False}
+except BaseException as exc:
+ result={'schema':'v1-7-isolated-source7-preparation-result-r1','status':'FAILED_RETAIN_PARTIAL_NO_OVERWRITE','error':{'type':type(exc).__name__,'message':str(exc)},'isolated_file_sha256':written,'live_source_mutation':False,'installation_approval':False}
+ with (S/'probe/source7-preparation-result-r1.json').open('x') as out:json.dump(result,out,sort_keys=True,indent=2);out.write('\n')
+ raise
+else:
+ with (S/'probe/source7-preparation-result-r1.json').open('x') as out:json.dump(result,out,sort_keys=True,indent=2);out.write('\n')
