@@ -13,7 +13,7 @@ export const ROMANIAN_FONT_SOURCES = [
 
 const SCRIPT_PATH = fileURLToPath(import.meta.url);
 const DEFAULT_OUTPUT_DIR = fileURLToPath(
-  new URL("../../cat_de_roman_esti/web/static/", import.meta.url),
+  new URL("../dist/", import.meta.url),
 );
 
 function isCodeOrStyle(path) {

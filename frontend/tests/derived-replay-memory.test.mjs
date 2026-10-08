@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import ts from "typescript";
+import ts from "@typescript/typescript6";
 
 const STORAGE_KEY = "cat_derived_replay_v1";
 const source = readFileSync(new URL("../src/derivedReplay.ts", import.meta.url), "utf8");

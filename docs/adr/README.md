@@ -113,3 +113,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0177](0177-resume-linux-v1-5-qualification.md) — resume owner-requested Linux V1.5 with bounded native admission.
 
 - [0178](0178-v1-5-hot-chocolate-discovery.md) — one reviewed world-local hot-chocolate discovery with preserved progress and native gates.
+
+- [0184](0184-native-spa-toolchain-and-managed-output.md) — native SPA tooling/managed-output prerequisites; runtime validation pending (0183 is already claimed by the independent V1.7 content branch).

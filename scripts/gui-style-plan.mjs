@@ -2,8 +2,18 @@ import * as fs from "node:fs";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";
-import { fileURLToPath } from "node:url";
-import ts from "../frontend/node_modules/typescript/lib/typescript.js";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { createRequire } from "node:module";
+import { spawnSync } from "node:child_process";
+import { nativeCompiler, parserBinding } from "../frontend/scripts/compiler-runtime.mjs";
+import { readNormalizedFrozenRenderer } from "./gui-style-operation.mjs";
+
+const frontend = fileURLToPath(new URL("../frontend/", import.meta.url));
+const require = createRequire(path.join(frontend, "package.json"));
+const compilerVersion = JSON.parse(fs.readFileSync(path.join(frontend, "package.json"))).devDependencies.typescript;
+const parserEntry = require.resolve(compilerVersion === "7.0.2" ? "@typescript/typescript6" : "typescript");
+const loadedParser = await import(pathToFileURL(parserEntry).href);
+const ts = loadedParser.default ?? loadedParser;
 
 const hash = (data) => createHash("sha256").update(data).digest("hex");
 export function bindSourceInput(inputs, file, data) {
@@ -17,6 +27,12 @@ const motionTags = new Set(["m.div", "m.button", "m.span", "m.p"]);
 export const ORIGINAL_OWNERS = Object.freeze({
   "frontend/src/screens/Alchimie.tsx": { opacity: 0.5, className: "csp-motion-opacity-50", source_sha256: "d5f299fc3189e887147779c19d39218dc9bd60b717d3f598cdfbbb62760fa53b" },
   "frontend/src/screens/Conexiuni.tsx": { opacity: 0.55, className: "csp-motion-opacity-55", source_sha256: "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338" },
+});
+export const NORMALIZED_INPUTS = Object.freeze({
+  "frontend/package.json": "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a",
+  "frontend/package-lock.json": "78ba37afe99d18ebcb6a4be54eaab28d2b7084d0a2cc32ae476c0a20ca7224a2",
+  "frontend/tsconfig.json": "81dbe0e79cad7363ee3e83e4683cb5f382560608a592b91b5f0f903f2385b963",
+  "frontend/scripts/compiler-runtime.mjs": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12",
 });
 
 export function absolutePath(value) {
@@ -151,10 +167,13 @@ function assertOwnerPreserved(source, owner) {
   }
 }
 
-export function analyzeStyles(program, { root, unitless, readBytes, makeHost = (options) => ts.createCompilerHost(options, true) }) {
-  const result = { schema: 2, status: "fail", application_ready: false, diagnostics: diagnostics(ts.getPreEmitDiagnostics(program)), candidate_diagnostics: [], sites: [], manual: [], owners: [], proposals: [], files: [] };
+export function analyzeStyles(program, { root, unitless, readBytes, makeHost = (options) => ts.createCompilerHost(options, true),
+  authoritativeDiagnostics, diagnoseCandidate, owners = ORIGINAL_OWNERS }) {
+  // The default is a parser/checker unit or original-profile check. Normalized
+  // product diagnostics are supplied solely by the owning native7 CLI below.
+  const result = { schema: 2, status: "fail", application_ready: false, diagnostics: authoritativeDiagnostics ?? diagnostics(ts.getPreEmitDiagnostics(program)), candidate_diagnostics: [], sites: [], manual: [], owners: [], proposals: [], files: [] };
   if (result.diagnostics.length) return result;
-  const checker = program.getTypeChecker(), units = new Set(uniqueList(unitless)), ownerCounts = Object.fromEntries(Object.keys(ORIGINAL_OWNERS).map((file) => [file, 0]));
+  const checker = program.getTypeChecker(), units = new Set(uniqueList(unitless)), ownerCounts = Object.fromEntries(Object.keys(owners).map((file) => [file, 0]));
   const sources = program.getSourceFiles().filter((source) => source.fileName.endsWith(".tsx")).map((source) => {
     try { return { source, relative: repoRelative(root, source.fileName) }; }
     catch { result.manual.push({ file: source.fileName, reason: "TSX path escapes repo" }); return null; }
@@ -192,8 +211,8 @@ export function analyzeStyles(program, { root, unitless, readBytes, makeHost = (
         if (keys.has(key) || key === "__proto__" || !key.startsWith("--") && !checker.getPropertyOfType(closedContext, key)) { fail(`Duplicate or unsupported CSS property: ${key}`); continue; }
         keys.add(key); const kinds = classifyCssValue(checker, value);
         if (!kinds) { fail(`Uncertain or unsupported CSS value type: ${key}`); continue; }
-        if (site.tag === "m.button" && key === "opacity" && Object.hasOwn(ORIGINAL_OWNERS, relative)) {
-          const owner = ORIGINAL_OWNERS[relative], classAttribute = attributes.find((attr) => ts.isJsxAttribute(attr) && attr.name.text === "className");
+        if (site.tag === "m.button" && key === "opacity" && Object.hasOwn(owners, relative)) {
+          const owner = owners[relative], classAttribute = attributes.find((attr) => ts.isJsxAttribute(attr) && attr.name.text === "className");
           if (!ts.isConditionalExpression(value) || !matchesOwner(relative, value.condition) || signedNumericLiteral(value.whenTrue) !== owner.opacity || signedNumericLiteral(value.whenFalse) !== 1 || !classAttribute?.initializer) { fail("Exact original Motion opacity owner required"); continue; }
           let oldClass;
           if (ts.isStringLiteral(classAttribute.initializer)) oldClass = JSON.stringify(classAttribute.initializer.text);
@@ -258,7 +277,7 @@ export function analyzeStyles(program, { root, unitless, readBytes, makeHost = (
   for (const [file, count] of Object.entries(ownerCounts)) if (count !== 1) result.manual.push({ file, reason: `Exactly one original Motion owner required, observed${count}` });
   if (!result.sites.length) result.manual.push({ reason: "No original style sites discovered" });
   if (!result.manual.length) {
-    try { result.candidate_diagnostics = candidateDiagnostics(program, result.files, makeHost); }
+    try { result.candidate_diagnostics = diagnoseCandidate ? diagnoseCandidate(result.files) : candidateDiagnostics(program, result.files, makeHost); }
     catch (error) { result.manual.push({ reason: `Candidate semantic check unresolved: ${error.message}` }); }
   }
   result.proposals = result.files.map(({ text: _text, absolute: _absolute, ...file }) => file);
@@ -282,11 +301,26 @@ function safePath(root, relative) {
 function readSafe(root, relative) {
   const file = safePath(root, relative); assert.ok(fs.lstatSync(file).isFile(), "Regular source file required"); return fs.readFileSync(file);
 }
-function publishOwnedStylePlan(root, plan, bindings) {
+function ownStyleRun(root) {
   const id = randomUUID(), relative = `.gate/gen/styles/runs/style-plan-${id}`;
   const parent = safePath(root, ".gate/gen/styles/runs"); fs.mkdirSync(parent, { recursive: true });
   const directory = safePath(root, relative); fs.mkdirSync(directory);
+  return { id, relative, directory };
+}
+function retainedNativeFiles(root, relative) {
+  const rows = [], directory = safePath(root, `${relative}/native`);
+  if (!fs.existsSync(directory)) return rows;
+  function walk(file) {
+    const full = safePath(root, file), stat = fs.lstatSync(full);
+    if (stat.isDirectory()) for (const child of fs.readdirSync(full).sort()) walk(`${file}/${child}`);
+    else { assert.ok(stat.isFile()); const bytes = fs.readFileSync(full); rows.push({ file, bytes: bytes.length, sha256: hash(bytes) }); }
+  }
+  walk(`${relative}/native`); return rows;
+}
+function publishOwnedStylePlan(root, plan, bindings, owned) {
+  const { id, relative, directory } = owned ?? ownStyleRun(root);
   const report = { ...plan, files: plan.files.map(({ text: _text, absolute: _absolute, ...file }) => file), bindings, plan_id: id, output: relative, converted: null, report_json: `${relative}/report.json`, mode: "source-plan-only-product-files-unmodified" };
+  if (bindings.profile === "normalized") report.retained_native_files = retainedNativeFiles(root, relative);
   // Each attempt owns a newly and exclusively created directory. Earlier reports
   // and trees remain immutable history; only this returned run can publish a path.
   fs.writeFileSync(safePath(root, `${relative}/analysis.json`), JSON.stringify({ ...report, application_ready: false }, null, 2) + "\n", { flag: "wx" });
@@ -311,8 +345,8 @@ function publishOwnedStylePlan(root, plan, bindings) {
     fs.writeFileSync(safePath(root, report.report_json), JSON.stringify(report, null, 2) + "\n", { flag: "wx" }); return report;
   }
 }
-export function publishStylePlan(root, plan, bindings = {}) {
-  try { return publishOwnedStylePlan(root, plan, bindings); }
+export function publishStylePlan(root, plan, bindings = {}, owned) {
+  try { return publishOwnedStylePlan(root, plan, bindings, owned); }
   catch (error) {
     // If even a safe report cannot be written, return failure to stdout. Do not
     // retry the unsafe/unwritable path or remove any prior/partial evidence.
@@ -323,45 +357,153 @@ export function publishStylePlan(root, plan, bindings = {}) {
   }
 }
 
-export function main() {
+export function nativeDiagnosticResult(child) {
+  assert.ok(Number.isInteger(child.status), "Native compiler must return an actual exit status");
+  assert.ok(!child.error && !child.signal, "Native compiler launch or signal failure");
+  const output = `${child.stdout ?? ""}${child.stderr ?? ""}`;
+  if (child.status === 0) { assert.equal(output.trim(), "", "Successful native typecheck emitted unexplained output"); return []; }
+  assert.ok(output.trim(), "Native compiler refusal must retain diagnostics");
+  return [{ code: "native-tsc-exit", category: "Error", compiler: "typescript@7.0.2 native CLI", exit_code: child.status, message: output }];
+}
+function normalizedBindings(root, bytes, manifest, lock, bindings) {
+  for (const [file, expected] of Object.entries(NORMALIZED_INPUTS)) assert.equal(hash(bytes(file)), expected, `Current reviewed normalized input required: ${file}`);
+  const selected = JSON.parse(bytes("versions.lock.json")).tools;
+  for (const [name, version] of [["react", "19.2.7"], ["react-dom", "19.2.7"], ["motion", "14.0.0"], ["framer-motion", "14.0.0"], ["motion-dom", "14.0.0"], ["typescript", "7.0.2"], ["@typescript/typescript6", "6.0.2"]]) {
+    const installed = JSON.parse(bytes(`frontend/node_modules/${name}/package.json`)), locked = lock.packages[`node_modules/${name}`];
+    assert.equal(installed.name, name); assert.equal(installed.version, version); assert.equal(locked.version, version);
+    if (!["react", "react-dom", "motion-dom"].includes(name)) assert.equal(selected.find((item) => item.tool === name)?.version, version);
+    bindings[name] = { version, resolved: locked.resolved, integrity: locked.integrity };
+  }
+  assert.equal(manifest.dependencies.motion, "14.0.0"); assert.ok(!Object.hasOwn(manifest.dependencies, "framer-motion"));
+  assert.equal(manifest.devDependencies.typescript, "7.0.2"); assert.equal(manifest.devDependencies["@typescript/typescript6"], "6.0.2");
+  assert.equal(lock.packages["node_modules/motion"].dependencies["framer-motion"], "14.0.0");
+  const approval = selected.find((item) => item.tool === "@typescript/typescript6"); assert.equal(approval.status, "optional"); assert.ok(approval.exception && approval.approved_by);
+  bindings.parser = parserBinding(path.join(root, "frontend"), ts);
+  assert.equal(bindings.parser.package.version, "6.0.2"); assert.equal(bindings.parser.implementation.version, "6.0.3");
+  assert.equal(lock.packages["node_modules/@typescript/old"].name, "typescript"); assert.equal(lock.packages["node_modules/@typescript/old"].version, "6.0.3");
+  bytes(repoRelative(root, bindings.parser.package.path)); bytes(repoRelative(root, parserEntry));
+  bytes(repoRelative(root, bindings.parser.implementation.path)); bytes("frontend/node_modules/@typescript/old/package.json");
+  assert.equal(bindings.parser.implementation.entry_sha256, "569177652966bd528c319171c7dd22860dbf72bde116cbc4f644f1d02bb12e39", "Exact approved6.0.3 parser payload required");
+  assert.equal(hash(bytes(repoRelative(root, parserEntry))), "d3f3cd2b04b7f466f4484df921b744223f7bd1f3e353ec9110bdf52695b983d5", "Exact published6.0.2 wrapper payload required");
+  bindings.parser.locked_implementation = { ...lock.packages["node_modules/@typescript/old"] };
+  bindings.native_compiler = nativeCompiler(path.join(root, "frontend"));
+  bytes(repoRelative(root, bindings.native_compiler.package.path)); bytes(repoRelative(root, bindings.native_compiler.executable));
+  for (const file of ["frontend/node_modules/typescript/lib/tsc.js", "frontend/node_modules/typescript/lib/getExePath.js"]) bytes(file);
+  const nativeName = `@typescript/typescript-${process.platform}-${process.arch}`, nativeManifest = `frontend/node_modules/${nativeName}/package.json`;
+  const installedNative = JSON.parse(bytes(nativeManifest)); assert.equal(installedNative.name, nativeName); assert.equal(installedNative.version, "7.0.2"); assert.equal(lock.packages[`node_modules/${nativeName}`].version, "7.0.2");
+  const nativeExecutable = `frontend/node_modules/${nativeName}/lib/tsc${process.platform === "win32" ? ".exe" : ""}`, nativeBytes = bytes(nativeExecutable);
+  bindings.native_payload = { name: nativeName, version: "7.0.2", manifest: nativeManifest, executable: nativeExecutable, executable_sha256: hash(nativeBytes) };
+  bindings.native_checks = [];
+}
+function nativeCheck(root, owned, bindings, role, project) {
+  const relative = `${owned.relative}/native/${role}`, cwd = path.join(root, "frontend");
+  fs.mkdirSync(safePath(root, relative), { recursive: true });
+  const args = ["--project", project, "--noEmit", "--pretty", "false"], started = new Date().toISOString();
+  const child = spawnSync(bindings.native_compiler.executable, args, { cwd, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 });
+  const record = { role, compiler: "typescript@7.0.2 native CLI", command: bindings.native_compiler.executable, args, cwd: "frontend", started, finished: new Date().toISOString(), exit_code: child.status,
+    ...(child.error ? { error: child.error.message } : {}), ...(child.signal ? { signal: child.signal } : {}) };
+  for (const stream of ["stdout", "stderr"]) {
+    const data = Buffer.from(child[stream] ?? ""), file = `${relative}/${stream}.log`;
+    fs.writeFileSync(safePath(root, file), data, { flag: "wx" }); record[stream] = { file, bytes: data.length, sha256: hash(data) };
+  }
+  fs.writeFileSync(safePath(root, `${relative}/command.json`), JSON.stringify(record, null, 2) + "\n", { flag: "wx" });
+  bindings.native_checks.push(record); return nativeDiagnosticResult(child);
+}
+function candidateProject(root, owned, files, bytes) {
+  const graph = `${owned.relative}/native/candidate-graph`, replacements = new Map(files.map((file) => [file.file, file]));
+  const copied = new Set();
+  function copy(relative) {
+    const data = bytes(relative), replacement = replacements.get(relative), output = replacement ? Buffer.from(replacement.text) : data;
+    if (replacement) { assert.equal(hash(data), replacement.before_sha256); assert.equal(hash(output), replacement.after_sha256); }
+    const destination = safePath(root, `${graph}/${relative}`); fs.mkdirSync(path.dirname(destination), { recursive: true }); fs.writeFileSync(destination, output, { flag: "wx" }); copied.add(relative);
+  }
+  function walk(relative, declarationsOnly = false) {
+    const file = safePath(root, relative), stat = fs.lstatSync(file);
+    if (stat.isDirectory()) for (const name of fs.readdirSync(file).sort()) { if (declarationsOnly && name === ".bin") continue; walk(`${relative}/${name}`, declarationsOnly); }
+    else { assert.ok(stat.isFile(), "Private compiler graph cannot contain aliases or nonregular files"); if (!declarationsOnly || /\.(?:json|[cm]?tsx?)$/.test(relative)) copy(relative); }
+  }
+  walk("frontend/src"); walk("frontend/node_modules", true);
+  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts"]) copy(file);
+  assert.ok(files.every((file) => copied.has(file.file)), "All candidate sources must enter the native compiler graph");
+  return safePath(root, `${graph}/frontend/tsconfig.json`);
+}
+function bindNativeProjectInputs(root, bytes) {
+  function walk(relative, declarationsOnly = false) {
+    const file = safePath(root, relative), stat = fs.lstatSync(file);
+    if (stat.isDirectory()) for (const name of fs.readdirSync(file).sort()) { if (declarationsOnly && name === ".bin") continue; walk(`${relative}/${name}`, declarationsOnly); }
+    else { assert.ok(stat.isFile(), "Native source/declaration/package input must be regular"); if (!declarationsOnly || /\.(?:json|[cm]?tsx?)$/.test(relative)) bytes(relative); }
+  }
+  walk("frontend/src"); walk("frontend/node_modules", true); bytes("frontend/vite.config.ts");
+}
+
+export function main(profile = "original") {
   const root = fs.realpathSync(process.cwd()), bindings = {}, empty = { schema: 2, status: "fail", application_ready: false, diagnostics: [], candidate_diagnostics: [], sites: [], manual: [], owners: [], proposals: [], files: [] };
+  let owned;
   try {
+    assert.ok(["original", "normalized"].includes(profile), "Explicit known style profile required");
+    if (profile === "normalized") { bindings.profile = profile; owned = ownStyleRun(root); }
     assert.match(process.env.GATE_SHA ?? "", /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/, "Actual wrapper source identity required");
     assert.match(process.env.GATE_TREE_SHA256 ?? "", /^[a-f0-9]{64}$/, "Actual wrapper tree identity required");
     assert.match(process.env.TOOLCHAIN_DIGEST ?? "", /^sha256:[a-f0-9]{64}$/, "Actual toolchain identity required");
     bindings.sha = process.env.GATE_SHA; bindings.tree_sha256 = process.env.GATE_TREE_SHA256; bindings.toolchain_digest = process.env.TOOLCHAIN_DIGEST; bindings.inputs = {};
     const bytes = (file) => bindSourceInput(bindings.inputs, file, readSafe(root, file));
+    if (profile === "normalized") {
+      const request = JSON.parse(bytes("scripts/gui-gen-request.json"));
+      assert.deepEqual(request, { schema: 1, operation: "plan-normalized-styles", fixtures: "frontend/e2e/original/runtime.spec.mjs" });
+      const descriptorBytes = bytes(".gate/wrapper-current.json"), descriptor = JSON.parse(descriptorBytes);
+      assert.equal(descriptor.target, "gen"); assert.equal(descriptor.sha, bindings.sha); assert.equal(descriptor.tree_sha256, bindings.tree_sha256); assert.equal(descriptor.toolchain_digest, bindings.toolchain_digest);
+      assert.deepEqual(bytes(".gate/gen/wrapper-current.json"), descriptorBytes); assert.equal(descriptor.config_path, ".gate/gen/wrapper-kit-config.json");
+      const configBytes = bytes(descriptor.config_path), frozenConfig = JSON.parse(configBytes); assert.equal(hash(configBytes), descriptor.config_file_sha256);
+      assert.equal(hash(JSON.stringify(frozenConfig.config)), descriptor.config_sha256);
+      const phase = frozenConfig.config.ui_adoption; assert.equal(phase?.mode, "staged-react"); assert.equal(phase.until, "S1-M2"); assert.equal(phase.legacy.version, "0.3.0");
+      assert.equal(phase.legacy.archive_sha256, "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244"); assert.equal(hash(bytes(phase.legacy.receipt)), phase.legacy.receipt_sha256);
+    }
     assert.equal(hash(bytes("frontend/src/components/CspStyle.ts")), "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320", "Exact reviewed CSP facade source required");
     assert.equal(hash(bytes("frontend/src/components/CspElements.tsx")), "27cf738b5af8a4e4eefab89b513d941261b61d0d41813eca09618ea8a8ef881d", "Exact reviewed CSP component source required");
     const manifestBytes = bytes("frontend/package.json"), lockBytes = bytes("frontend/package-lock.json"), manifest = JSON.parse(manifestBytes), lock = JSON.parse(lockBytes);
-    assert.equal(hash(manifestBytes), "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9", "Original frontend manifest bytes required");
-    assert.equal(hash(lockBytes), "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c", "Original frontend lock bytes required");
+    if (profile === "original") {
+      assert.equal(hash(manifestBytes), "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9", "Original frontend manifest bytes required");
+      assert.equal(hash(lockBytes), "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c", "Original frontend lock bytes required");
+    }
     assert.equal(manifest.dependencies["@roedu/ui"], "file:vendor/roedu-ui-0.3.0.tgz");
     assert.equal(hash(bytes("frontend/vendor/roedu-ui-0.3.0.tgz")), "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244", "Original SDK bytes required");
-    for (const [name, version] of [["react-dom", "19.2.7"], ["typescript", "5.9.3"]]) {
+    if (profile === "normalized") normalizedBindings(root, bytes, manifest, lock, bindings);
+    else for (const [name, version] of [["react-dom", "19.2.7"], ["typescript", "5.9.3"]]) {
       const installed = JSON.parse(bytes(`frontend/node_modules/${name}/package.json`));
       assert.equal(installed.name, name); assert.equal(installed.version, version); assert.equal(lock.packages[`node_modules/${name}`].version, version);
       bindings[name] = { version: installed.version, resolved: lock.packages[`node_modules/${name}`].resolved, integrity: lock.packages[`node_modules/${name}`].integrity };
     }
-    assert.equal(ts.version, bindings.typescript.version); bytes("frontend/node_modules/typescript/lib/typescript.js");
+    if (profile === "original") { assert.equal(ts.version, bindings.typescript.version); bytes("frontend/node_modules/typescript/lib/typescript.js"); }
     assert.equal(absolutePath(fs.realpathSync(fileURLToPath(import.meta.url))), absolutePath(fs.realpathSync(safePath(root, "scripts/gui-style-plan.mjs"))), "Executing planner must be the bound repository script");
     const scriptBytes = bytes("scripts/gui-style-plan.mjs"); assert.equal(hash(scriptBytes), hash(fs.readFileSync(fileURLToPath(import.meta.url))), "Executing planner bytes differ");
     const renderer = extractRendererUnitless(bytes("frontend/node_modules/react-dom/cjs/react-dom-client.development.js"));
     const policy = extractUnitlessPolicy(bytes("frontend/src/components/cssUnits.ts")); assert.deepEqual(policy, renderer, "Policy must equal actual pinned renderer");
-    const frozen = bytes("cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"); assert.equal(hash(frozen), "3aeceaed54e6d8614fa85e68bcf2a5c6ab1a7619bf20f7184624d475259be93a");
+    let frozen;
+    if (profile === "normalized") {
+      bytes("scripts/gui-style-operation.mjs");
+      const archived = readNormalizedFrozenRenderer(bytes); frozen = archived.bytes; bindings.frozen_renderer = archived.binding;
+    } else { frozen = bytes("cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"); assert.equal(hash(frozen), "3aeceaed54e6d8614fa85e68bcf2a5c6ab1a7619bf20f7184624d475259be93a"); }
     const frozenList = frozen.toString().match(/animationIterationCount.{0,1800}WebkitLineClamp/g); assert.equal(frozenList?.length, 1); assert.deepEqual(policy, frozenList[0].split(" "), "Exact original frozen renderer policy required");
-    for (const [file, owner] of Object.entries(ORIGINAL_OWNERS)) assert.equal(hash(bytes(file)), owner.source_sha256, "Exact original Motion owner source bytes required");
+    const owners = Object.fromEntries(Object.entries(ORIGINAL_OWNERS).map(([file, owner]) => {
+      const actual = hash(bytes(file));
+      if (profile === "original") assert.equal(actual, owner.source_sha256, "Exact original Motion owner source bytes required");
+      return [file, { ...owner, source_sha256: actual }];
+    }));
+    if (profile === "normalized") bindings.current_owners = owners;
     const configBytes = bytes("frontend/tsconfig.json");
     assert.equal(hash(configBytes), "81dbe0e79cad7363ee3e83e4683cb5f382560608a592b91b5f0f903f2385b963", "Exact original semantic config bytes required");
     const configFile = path.join(root, "frontend/tsconfig.json"), read = ts.readConfigFile(configFile, () => configBytes.toString());
     const parsed = read.error ? null : ts.parseJsonConfigFileContent(read.config, ts.sys, path.join(root, "frontend"));
-    if (read.error || parsed.errors.length) return publishStylePlan(root, { ...empty, diagnostics: diagnostics(read.error ? [read.error] : parsed.errors) }, bindings);
+    if (read.error || parsed.errors.length) return publishStylePlan(root, { ...empty, ...(profile === "normalized" ? { manual: [{ reason: "AST parser cannot resolve the owning config", parser_diagnostics: diagnostics(read.error ? [read.error] : parsed.errors) }] } : { diagnostics: diagnostics(read.error ? [read.error] : parsed.errors) }) }, bindings, owned);
     assert.equal(parsed.options.strict, true); assert.equal(parsed.options.noUnusedLocals, true); assert.equal(parsed.options.noUnusedParameters, true); assert.ok(!parsed.options.noCheck, "Semantic diagnostics cannot be disabled");
-    const program = ts.createProgram(parsed.fileNames, parsed.options), plan = analyzeStyles(program, { root, unitless: policy, readBytes: (file) => bytes(repoRelative(root, file)) });
-    return publishStylePlan(root, plan, bindings);
-  } catch (error) { return publishStylePlan(root, { ...empty, manual: [{ reason: error.message }] }, bindings); }
+    if (profile === "normalized") bindNativeProjectInputs(root, bytes);
+    const authoritativeDiagnostics = profile === "normalized" ? nativeCheck(root, owned, bindings, "before", safePath(root, "frontend/tsconfig.json")) : undefined;
+    const program = ts.createProgram(parsed.fileNames, parsed.options), plan = analyzeStyles(program, { root, unitless: policy, owners, authoritativeDiagnostics,
+      readBytes: (file) => bytes(repoRelative(root, file)), ...(profile === "normalized" ? { diagnoseCandidate: (files) => nativeCheck(root, owned, bindings, "candidate", candidateProject(root, owned, files, bytes)) } : {}) });
+    return publishStylePlan(root, plan, bindings, owned);
+  } catch (error) { return publishStylePlan(root, { ...empty, manual: [{ reason: error.message }] }, bindings, owned); }
 }
 
 if (process.argv[1] && absolutePath(path.resolve(process.argv[1])) === absolutePath(fileURLToPath(import.meta.url))) {
-  const report = main(); process.stdout.write(JSON.stringify({ ...report, sites: undefined, files: undefined, owners: undefined }, null, 2) + "\n"); process.exitCode = report.status === "pass" && report.application_ready ? 0 : 1;
+  const report = main(process.argv[2] ?? "original"); process.stdout.write(JSON.stringify({ ...report, sites: undefined, files: undefined, owners: undefined }, null, 2) + "\n"); process.exitCode = report.status === "pass" && report.application_ready ? 0 : 1;
 }

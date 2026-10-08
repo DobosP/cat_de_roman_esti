@@ -31,20 +31,13 @@ export function SoundToggle({ compact = false }: { compact?: boolean }) {
   return (
     <button
       type="button"
-      className="btn btn-ghost sound-toggle"
+      className={`btn btn-ghost sound-toggle${compact ? " sound-toggle--compact" : ""}`}
       onClick={handleClick}
       aria-pressed={!muted}
       aria-label={label}
       title={label}
-      style={{
-        padding: compact ? "8px 10px" : "10px 12px",
-        minWidth: 44,
-        minHeight: 44,
-        justifyContent: "center",
-        lineHeight: 1,
-      }}
     >
-      <span aria-hidden style={{ fontSize: "1.1rem" }}>
+      <span aria-hidden className="sound-toggle-icon">
         {muted ? "🔇" : "🔊"}
       </span>
     </button>

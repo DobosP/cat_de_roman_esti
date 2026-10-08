@@ -5,8 +5,10 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
 
-const root = process.cwd(), originalProfile = process.argv[2] === "original";
-const output = originalProfile ? ".gate/gen/original/complete-browser" : ".gate/full";
+const root = process.cwd(), originalProfile = process.argv[2] === "original", normalizedProfile = process.argv[2] === "normalized-react";
+const reactProfile = originalProfile || normalizedProfile;
+const { normalizedReactAdmission, recheckNormalizedReactInputs } = normalizedProfile ? await import("./gui-original-execution.mjs") : {};
+const output = originalProfile ? ".gate/gen/original/complete-browser" : normalizedProfile ? ".gate/gen/normalized-react/complete-browser" : ".gate/full";
 fs.mkdirSync(output, { recursive: true });
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 function collect(report) {
@@ -25,11 +27,11 @@ function collect(report) {
 const key = (item) => `${item.project}:${item.file}:${item.title}`;
 function playwright(list) {
   const args = ["node_modules/@playwright/test/cli.js", "test", "--config", "playwright.gui.config.mjs", "--reporter=json", ...(list ? ["--list"] : [])];
-  if (originalProfile) args.push("--output", "../.gate/gen/original/complete-browser/browser-output");
+  if (reactProfile) args.push("--output", `../${output}/browser-output`);
   const started = new Date().toISOString();
-  const child = spawnSync(originalProfile ? process.execPath : "node", args, { cwd: path.join(root, "frontend"), env: process.env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const child = spawnSync(reactProfile ? process.execPath : "node", args, { cwd: path.join(root, "frontend"), env: process.env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
   fs.writeFileSync(`${output}/playwright-${list ? "list" : "actual"}.json`, child.stdout || "");
-  if (originalProfile) {
+  if (reactProfile) {
     const name = list ? "discovery" : "execution";
     const stdout = `${output}/${name}-stdout.log`, stderr = `${output}/${name}-stderr.log`;
     fs.writeFileSync(stdout, child.stdout || ""); fs.writeFileSync(stderr, child.stderr || "");
@@ -51,7 +53,7 @@ function executeMatrix(discovery) {
   const inventoryBytes = fs.readFileSync("frontend/e2e/gui-inventory.json"), expected = JSON.parse(inventoryBytes).cases;
   assert.ok(expected.length > 0); assert.equal(new Set(expected.map(key)).size, expected.length);
   assert.deepEqual(discovery.map(key).sort(), expected.map(key).sort(), "Discovery must equal committed case matrix");
-  const fixtureSources = originalProfile ? [...new Set(expected.map((item) => item.file))].sort().map((file) => {
+  const fixtureSources = reactProfile ? [...new Set(expected.map((item) => item.file))].sort().map((file) => {
     assert.ok(file.startsWith("frontend/e2e/"), "Original fixture must stay inside the existing browser suite");
     return originalInput(file);
   }) : null;
@@ -122,6 +124,36 @@ function originalPrerequisites() {
     receipt.runtime_sdk.entry_sha256, "Installed original SDK entry differs from the already verified sealed archive");
   return inputs;
 }
+async function normalizedPrerequisites() {
+  const admission = await normalizedReactAdmission();
+  const inputs = [...admission.inputs, ...[".gate/gen/normalized-react/evidence/native-report.json", ".gate/gen/normalized-react/evidence/source-hashes.json",
+    ".gate/gen/normalized-react/playwright.json", ".gate/gen/normalized-react/playwright-command.json"].map(originalInput)];
+  const native = JSON.parse(fs.readFileSync(".gate/gen/normalized-react/evidence/native-report.json"));
+  assert.equal(native.check, "cat-normalized-react-runtime-execution"); assert.equal(native.status, "pass"); assert.equal(native.mode, "normalized-react");
+  assert.equal(native.sha, process.env.GATE_SHA); assert.equal(native.tree_sha256, process.env.GATE_TREE_SHA256); assert.equal(native.toolchain_digest, process.env.TOOLCHAIN_DIGEST);
+  assert.equal(native.canonical_full, false); assert.equal(native.app_image_id, null);
+  assert.deepEqual(native.admission, admission); assert.deepEqual(native.runtime_dependencies, admission.runtime_dependencies);
+  const browser = JSON.parse(fs.readFileSync(".gate/gen/normalized-react/playwright.json"));
+  assert.equal(browser.status, "pass"); assert.equal(browser.cases.length, 16); assert.equal(browser.fixtures.length, 16);
+  for (const item of browser.cases) { assert.equal(item.status, "passed"); assert.equal(item.retry, 0); assert.equal(item.expectedStatus, "passed"); assert.deepEqual(item.errors, []); }
+  assert.deepEqual(native.fixtures.map(({ id, suite, assertions, executed }) => ({ id, suite, assertions, executed })), browser.fixtures.map(({ id, suite, assertions, executed }) => ({ id, suite, assertions, executed })));
+  assert.deepEqual(native.fixtures.map(({ id, suite, assertions }) => ({ id, suite, assertions: assertions.map(({ id }) => id) })).sort((a, b) => a.id.localeCompare(b.id)), [...admission.sealed_fixtures].sort((a, b) => a.id.localeCompare(b.id)));
+  for (const item of native.fixtures) { assert.equal(item.executed, true); for (const assertion of item.assertions) { assert.equal(assertion.executed, true); assert.equal(assertion.status, "pass"); } }
+  for (const record of [native.dependency_graph.manifest, native.dependency_graph.lock, ...native.fixtures.map((item) => item.source)]) {
+    const input = originalInput(record.path); assert.equal(input.sha256, record.sha256); inputs.push(input);
+  }
+  assert.equal(native.dependency_graph.manifest.sha256, admission.inputs.find((item) => item.path === "frontend/package.json").sha256);
+  assert.equal(native.dependency_graph.lock.sha256, admission.inputs.find((item) => item.path === "frontend/package-lock.json").sha256);
+  const sourceHashes = JSON.parse(fs.readFileSync(".gate/gen/normalized-react/evidence/source-hashes.json"));
+  assert.equal(sourceHashes.sha, process.env.GATE_SHA);
+  for (const record of sourceHashes.files) { const input = originalInput(record.path); assert.equal(input.sha256, record.sha256); inputs.push(input); }
+  const command = JSON.parse(fs.readFileSync(".gate/gen/normalized-react/playwright-command.json"));
+  assert.equal(command.exit_code, 0); assert.equal(command.command, process.execPath);
+  assert.deepEqual(command.args, ["frontend/node_modules/@playwright/test/cli.js", "test", "--config", "frontend/playwright.original.config.mjs", "--output", ".gate/gen/normalized-react/browser-output"]);
+  for (const log of [command.stdout, command.stderr]) { const input = originalInput(log.path); assert.equal(input.sha256, log.sha256); inputs.push(input); }
+  return { admission, inputs };
+}
+const normalized = normalizedProfile ? await normalizedPrerequisites() : null;
 const originalInputs = originalProfile ? originalPrerequisites() : null;
 const discovery = collect(playwright(true));
 if (process.argv[2] === "inventory") {
@@ -132,17 +164,18 @@ if (process.argv[2] === "inventory") {
   process.stdout.write(`Actual discovered cases: ${cases.length}\n`);
   process.exit(0);
 }
-if (originalProfile) {
+if (reactProfile) {
   const { inventoryBytes, expected, report, cases, fixtureSources } = executeMatrix(discovery);
-  for (const input of [...originalInputs, ...fixtureSources]) assert.deepEqual(originalInput(input.path), input, "Original execution changed a bound input");
+  for (const input of [...(originalInputs || normalized.inputs), ...fixtureSources]) assert.deepEqual(originalInput(input.path), input, "Original execution changed a bound input");
+  if (normalizedProfile) recheckNormalizedReactInputs(normalized.admission);
   const commands = ["discovery", "execution"].map((name) => originalInput(`${output}/${name}-command.json`));
   const reports = ["list", "actual"].map((name) => originalInput(`${output}/playwright-${name}.json`));
   const actual = {
-    schema: 1, check: "cat-original-complete-browser", status: "pass", mode: "original-react",
+    schema: 1, check: normalizedProfile ? "cat-normalized-react-complete-browser" : "cat-original-complete-browser", status: "pass", mode: normalizedProfile ? "normalized-react" : "original-react",
     proof_scope: "owning-gen-built-native-server-complete-browser-matrix", canonical_full: false, app_image_id: null,
     sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256,
     toolchain_digest: process.env.TOOLCHAIN_DIGEST, dirty: process.env.GATE_DIRTY === "true",
-    inputs: originalInputs, fixture_sources: fixtureSources, inventory_sha256: hash(inventoryBytes),
+    inputs: originalInputs || normalized.inputs, ...(normalizedProfile ? { admission: normalized.admission } : {}), fixture_sources: fixtureSources, inventory_sha256: hash(inventoryBytes),
     commands, reports, expected_count: expected.length, stats: report.stats, cases,
   };
   fs.writeFileSync(`${output}/report.json`, JSON.stringify(actual, null, 2) + "\n");

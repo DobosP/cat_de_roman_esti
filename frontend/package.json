@@ -3,40 +3,42 @@
   "private": true,
   "version": "1.0.1",
   "type": "module",
-  "description": "Animated semantic-hop game SPA (cat_de_roman_esti) — React + Vite + TypeScript.",
+  "description": "Animated semantic-hop game SPA (cat_de_roman_esti) \u2014 React + Vite + TypeScript.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build && npm run check:bundle",
+    "build": "node scripts/native-tsc.mjs --noEmit && vite build && npm run check:bundle",
     "check:bundle": "node scripts/check-bundle-budget.mjs",
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs",
     "test:e2e": "playwright test",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "typecheck": "node scripts/native-tsc.mjs --noEmit",
+    "lint": "node scripts/gui-lint.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fredoka": "^5.2.10",
     "@fontsource-variable/inter": "^5.2.8",
     "@roedu/ui": "file:vendor/roedu-ui-0.3.0.tgz",
-    "framer-motion": "^12.42.2",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "react-router-dom": "^7.18.2"
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-router-dom": "^7.18.2",
+    "motion": "14.0.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
-    "@eslint/js": "^10.0.1",
     "@playwright/test": "1.63.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
-    "eslint": "^10.7.0",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.3",
-    "globals": "^17.7.0",
     "typescript": "7.0.2",
-    "typescript-eslint": "^8.63.0",
     "vite": "8.3.3",
-    "@roedu/web-kit": "file:vendor/roedu-web-kit-0.1.2.tgz"
+    "@roedu/web-kit": "file:vendor/roedu-web-kit-0.1.2.tgz",
+    "oxlint": "1.87.0",
+    "oxlint-tsgolint": "7.0.2003",
+    "@ast-grep/cli": "0.45.3",
+    "@typescript/typescript6": "6.0.2"
+  },
+  "engines": {
+    "node": ">=26.10.0",
+    "npm": ">=12.2.0"
   }
 }

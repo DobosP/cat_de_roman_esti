@@ -3,13 +3,34 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
+import { DEFAULT_INITIAL_GZIP_LIMIT_KIB, assertRomanianFontSubsets, collectInitialBundleFiles, measureGzipFiles } from "../frontend/scripts/check-bundle-budget.mjs";
 
 const root = process.cwd(), mode = process.argv[2];
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const frozenLegacySHA256 = "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65";
+function safeRelative(value) {
+  if (typeof value !== "string" || !value || value.startsWith("/") || /[\\:\x00-\x1f\x7f]/.test(value)
+    || value.split("/").some((part) => !part || part === "." || part === "..")) throw new Error("Unsafe managed asset path");
+  return value;
+}
+function confined(relative, missing = false) {
+  const parts = safeRelative(relative).split("/");
+  let cursor = root;
+  for (const [index, part] of parts.entries()) {
+    cursor = path.join(cursor, part);
+    let stat;
+    try { stat = fs.lstatSync(cursor); }
+    catch (error) { if (missing && error.code === "ENOENT") continue; throw error; }
+    if (stat.isSymbolicLink() || (!stat.isDirectory() && !stat.isFile())
+      || (index < parts.length - 1 && !stat.isDirectory())) throw new Error("Nonregular managed asset path");
+  }
+  return cursor;
+}
 function files(directory, prefix = "") {
+  if (!fs.lstatSync(directory).isDirectory() || fs.lstatSync(directory).isSymbolicLink()) throw new Error("Asset directory refused");
   return fs.readdirSync(directory, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name)).flatMap((entry) => {
     if (entry.isSymbolicLink()) throw new Error("Asset symlink refused");
-    const relative = prefix + entry.name;
+    const relative = safeRelative(prefix + entry.name);
     if (entry.isDirectory()) return files(path.join(directory, entry.name), relative + "/");
     if (!entry.isFile()) throw new Error("Nonregular asset refused");
     return [{ file: relative, bytes: fs.readFileSync(path.join(directory, entry.name)) }];
@@ -21,7 +42,7 @@ function replace(destination, source) {
     if (name !== ".keep") fs.rmSync(path.join(destination, name), { recursive: true, force: true });
   }
   for (const item of source) {
-    if (!item.file || item.file.startsWith("/") || item.file.split("/").some((part) => !part || part === ".." || part === ".")) throw new Error("Unsafe managed asset path");
+    safeRelative(item.file);
     const file = path.join(destination, item.file);
     fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, item.bytes);
   }
@@ -42,15 +63,47 @@ if (mode === "freeze") {
   fs.writeFileSync("legacy/original-bundle.json", JSON.stringify(proof, null, 2) + "\n");
   process.stdout.write(JSON.stringify(proof) + "\n");
 } else if (mode === "sync") {
-  const proof = JSON.parse(fs.readFileSync("legacy/original-bundle.json"));
-  const data = fs.readFileSync(proof.archive);
-  if (hash(data) !== proof.sha256 || fs.readFileSync(proof.archive + ".sha256", "utf8") !== `${proof.sha256}  ${path.basename(proof.archive)}\n`) throw new Error("Legacy hash/sidecar mismatch");
-  const entries = readTarGz(data), old = [...entries].filter(([, entry]) => entry.type === "file").map(([file, entry]) => ({ file, bytes: entry.data }));
-  if (old.length !== proof.files.length || proof.files.some((item) => hash(entries.get(item.path).data) !== item.sha256)) throw new Error("Legacy file proof mismatch");
-  const source = path.join(root, "frontend/dist");
-  if (!fs.existsSync(path.join(source, ".vite/manifest.json"))) throw new Error("Build managed frontend/dist before asset sync");
-  const current = files(source);
-  replace(path.join(root, "go-backend/embedfs/dist"), current);
-  replace(path.join(root, "go-backend/embedfs/legacy"), old);
-  process.stdout.write(JSON.stringify({ schema: 1, dist_files: current.length, legacy_files: old.length, legacy_sha256: proof.sha256 }) + "\n");
+  const proof = JSON.parse(fs.readFileSync(confined("legacy/original-bundle.json")));
+  if (proof.schema !== 1 || proof.sha256 !== frozenLegacySHA256 || !proof.archive?.startsWith("legacy/")
+    || !Array.isArray(proof.files) || proof.files.length !== 30) throw new Error("Exact frozen legacy proof required");
+  const data = fs.readFileSync(confined(proof.archive));
+  if (hash(data) !== frozenLegacySHA256 || fs.readFileSync(confined(proof.archive + ".sha256"), "utf8") !== `${proof.sha256}  ${path.basename(proof.archive)}\n`) throw new Error("Legacy hash/sidecar mismatch");
+  const entries = readTarGz(data), old = [...entries].map(([file, entry]) => {
+    safeRelative(file);
+    if (entry.type !== "file") throw new Error("Legacy archive must contain only regular members");
+    return { file, bytes: entry.data };
+  });
+  const proved = new Set();
+  if (old.length !== 30 || proof.files.some((item) => {
+    safeRelative(item.path);
+    const entry = entries.get(item.path), duplicate = proved.has(item.path);
+    proved.add(item.path);
+    return duplicate || !entry || entry.data.length !== item.bytes || hash(entry.data) !== item.sha256;
+  })) throw new Error("Legacy file proof mismatch");
+  const source = confined("frontend/dist");
+  const current = files(source), indexed = new Map(current.map((item) => [item.file, item.bytes]));
+  if (!indexed.has("index.html") || !indexed.has(".vite/manifest.json")) throw new Error("Build managed frontend/dist before asset sync");
+  const manifest = JSON.parse(indexed.get(".vite/manifest.json"));
+  if (!manifest["index.html"]?.isEntry) throw new Error("Managed index entry required");
+  for (const entry of Object.values(manifest)) {
+    for (const file of [entry.file, ...entry.css ?? [], ...entry.assets ?? []]) {
+      safeRelative(file);
+      if (!indexed.has(file)) throw new Error(`Missing managed manifest asset: ${file}`);
+    }
+    for (const key of [...entry.imports ?? [], ...entry.dynamicImports ?? []]) {
+      if (!manifest[key]) throw new Error(`Missing managed manifest import: ${key}`);
+    }
+  }
+  assertRomanianFontSubsets(manifest);
+  const initialGzipBytes = measureGzipFiles(source, collectInitialBundleFiles(manifest)).reduce((sum, item) => sum + item.bytes, 0);
+  if (initialGzipBytes > DEFAULT_INITIAL_GZIP_LIMIT_KIB * 1024) throw new Error("Managed initial bundle exceeds unchanged 120 KiB ceiling");
+  const destinations = ["go-backend/embedfs/dist", "go-backend/embedfs/legacy"].map((relative) => confined(relative, true));
+  // Check both existing trees before mutating either managed destination.
+  for (const destination of destinations) if (fs.existsSync(destination)) files(destination);
+  replace(destinations[0], current); replace(destinations[1], old);
+  const rows = (items) => items.map((item) => ({ path: item.file, bytes: item.bytes.length, sha256: hash(item.bytes) }));
+  process.stdout.write(JSON.stringify({ schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256,
+    toolchain_digest: process.env.TOOLCHAIN_DIGEST, dist_files: current.length, legacy_files: old.length,
+    legacy_sha256: proof.sha256, manifest_sha256: hash(indexed.get(".vite/manifest.json")), initial_gzip_bytes: initialGzipBytes,
+    dist: rows(current), legacy: rows(old) }) + "\n");
 } else throw new Error("Expected sync or freeze");

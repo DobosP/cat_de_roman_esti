@@ -31,7 +31,7 @@ export class RouteErrorBoundary extends Component<Props, { failed: boolean }> {
     const game = GAMES.some((g) => this.props.pathname.startsWith(g.path));
     return (
       <div className="screen screen-pad">
-        <section className="container card col" role="alert" style={{ padding: 24, gap: 16 }}>
+        <section className="container card col route-error-content" role="alert">
           <h1 tabIndex={-1} ref={this.focusHeading}>
             {game ? "Nu am putut încărca jocul." : "Nu am putut încărca pagina."}
           </h1>

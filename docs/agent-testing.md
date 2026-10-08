@@ -17,7 +17,7 @@ records native operator/review rails. Python commands below are optional indepen
 | Native combined HTTP release | `go -C go-backend test -race ./internal/httpapi -arcade.database <disposable-dsn>` | real signup/consent/game ownership/credit/erase races pass |
 | Native source freshness | `go -C go-backend run ./cmd/cat-content validate --root .. && go -C go-backend run ./cmd/cat-content export --root .. --check` | complete source gates and exact sealed export |
 | Independent frozen HTTP | `go -C go-backend run ./cmd/cat-qualify parity --binary <native-binary>` | all 1207 independent expected responses/source bindings |
-| Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | tracked `web/static` bundle; no frontend language migration |
+| Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | original30 frozen; managed output/retirement per ADR-0184 |
 | Browser | `cd frontend && npm run test:e2e` after build/browser setup | Go server/private planner; six real journeys on desktop/mobile |
 | Native docs | `go -C go-backend run ./cmd/cat-doc-check --root ..` | empty error/budget arrays |
 | Whitespace | `git diff --check` | no output |
@@ -59,7 +59,7 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
 2. Native behavior changes run focused Go race/vet and applicable PG/HTTP release lanes.
 3. Content changes run native source/operator/rail freshness and independent review contracts.
 4. Frontend JS/TS/CSS changes run frontend/build/browser gates and commit regenerated
-   `web/static` plus `.vite/manifest.json` (ADR-0020); backend/docs-only edits do not regenerate it.
+   original30 preservation and managed output/retirement per ADR-0184; backend/docs-only edits do not regenerate it.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
 
 ## Known load-sensitive reference check

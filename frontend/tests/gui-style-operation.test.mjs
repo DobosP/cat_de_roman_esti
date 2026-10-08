@@ -4,8 +4,8 @@ import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import test from "node:test";
-import { STYLE_OPERATION, PLANNER_SHA256, validGenRequest, sourcePath, readStyleIdentity,
-  captureProtected, assertProtectedUnchanged, validatePlannerOutput } from "../../scripts/gui-style-operation.mjs";
+import { STYLE_OPERATION, NORMALIZED_STYLE_OPERATION, PLANNER_SHA256, validGenRequest, sourcePath, readStyleIdentity,
+  captureProtected, assertProtectedUnchanged, validatePlannerOutput, readNormalizedFrozenRenderer } from "../../scripts/gui-style-operation.mjs";
 
 // These are protocol/data fixtures, never actual wrapper/bootstrap/planner receipts.
 // Only a separately authorized native owning gen may earn planning evidence.
@@ -60,7 +60,7 @@ function nativeStaging() {
   return { directory: current, descriptor_sha256: sha(descriptorBytes), target: actual.target,
     wrapper_invocation: actual.invocation, sha: actual.sha, tree_sha256: actual.tree_sha256, toolchain_digest: actual.toolchain_digest };
 }
-function fixture(t) {
+function fixture(t, { selectedRequest = request, configured = configuration } = {}) {
   const native = nativeStaging(); // No physical fixture write precedes this actual guard.
   const stagingRoot = fs.mkdtempSync(path.join(native.directory, "NON-RELEASE-")); fs.chmodSync(stagingRoot, 0o700);
   const root = path.join(stagingRoot, "fixture");
@@ -89,11 +89,11 @@ function fixture(t) {
   write(root, "NON-RELEASE-FIXTURE.txt", "Synthetic operation protocol evidence only. Never an actual gate or release receipt.\n");
   const context = { root, target: "gen", invocation: randomUUID(), sha: "a".repeat(40), tree_sha256: "b".repeat(64), dirty: true,
     toolchain_digest: "sha256:" + "c".repeat(64), parallel: 2, stage: "report-only", started: "2000-01-01T00:00:02.000Z" };
-  const rawConfig = JSON.stringify(configuration) + "\n", stdout = `.gate/gen/logs/${context.invocation}-bootstrap-config-0.stdout.log`;
+  const rawConfig = JSON.stringify(configured) + "\n", stdout = `.gate/gen/logs/${context.invocation}-bootstrap-config-0.stdout.log`;
   const stderr = `.gate/gen/logs/${context.invocation}-bootstrap-config-0.stderr.log`;
-  write(root, stdout, rawConfig); write(root, stderr, ""); json(root, "scripts/gui-gen-request.json", request);
+  write(root, stdout, rawConfig); write(root, stderr, ""); json(root, "scripts/gui-gen-request.json", selectedRequest);
   const captured = { schema: 1, target: "gen", sha: context.sha, tree_sha256: context.tree_sha256, toolchain_digest: context.toolchain_digest,
-    config: structuredClone(configuration), config_sha256: sha(JSON.stringify(configuration)),
+    config: structuredClone(configured), config_sha256: sha(JSON.stringify(configured)),
     command: { command: "task", args: ["--silent", "repo:kit-config"], exit_code: 0, duration_ms: 0,
       stdout_sha256: sha(rawConfig), stderr_sha256: sha("") } };
   const configPath = ".gate/gen/wrapper-kit-config.json"; json(root, configPath, captured);
@@ -102,7 +102,7 @@ function fixture(t) {
     config_file_sha256: sha(fs.readFileSync(sourcePath(root, configPath))) };
   json(root, ".gate/wrapper-current.json", current); json(root, ".gate/gen/wrapper-current.json", current);
   const bootstrap = { schema: 1, target: "gen", invocation: context.invocation, sha: context.sha, tree_sha256: context.tree_sha256,
-    toolchain_digest: context.toolchain_digest, started: "2000-01-01T00:00:00.000Z", config: structuredClone(configuration),
+    toolchain_digest: context.toolchain_digest, started: "2000-01-01T00:00:00.000Z", config: structuredClone(configured),
     config_sha256: current.config_sha256, wrapper_target: "gen", wrapper_config: configPath, wrapper_config_sha256: current.config_file_sha256,
     wrapper_invocation: current.invocation, wrapper_descriptor: ".gate/wrapper-current.json",
     wrapper_descriptor_sha256: sha(fs.readFileSync(sourcePath(root, ".gate/wrapper-current.json"))),
@@ -111,11 +111,18 @@ function fixture(t) {
       stdout_sha256: sha(rawConfig), stderr_sha256: sha(""), stdout_log: stdout, stderr_log: stderr }],
     artifacts: [`${stdout} sha256:${sha(rawConfig)}`, `${stderr} sha256:${sha("")}`], finished: "2000-01-01T00:00:01.000Z" };
   json(root, ".gate/gen/bootstrap-execution.json", bootstrap);
-  return { root, stagingRoot, context, current, captured, bootstrap, stdout, stderr };
+  if (configured.ui_adoption) write(root, configured.ui_adoption.legacy.receipt, fs.readFileSync(sourcePath(repository, configured.ui_adoption.legacy.receipt)));
+  return { root, stagingRoot, context, current, captured, bootstrap, stdout, stderr, configured, selectedRequest };
 }
-const identity = (item, env = { GATE_VERSIONS_RESOLVE: "0" }) => readStyleIdentity(item.context, configuration, request, env);
+const identity = (item, env = { GATE_VERSIONS_RESOLVE: "0" }) => readStyleIdentity(item.context, item.configured, item.selectedRequest, env);
+function normalizedFixture(t) {
+  nativeStaging();
+  const current = load(repository, ".gate/wrapper-current.json"), configured = load(repository, current.config_path).config;
+  assert.ok(configured.ui_adoption, "Actual staged SDK phase required for normalized data fixtures");
+  return fixture(t, { selectedRequest: { ...request, operation: NORMALIZED_STYLE_OPERATION }, configured });
+}
 
-for (const operation of ["qualify-original-react", "capture-original-baseline", STYLE_OPERATION]) test(`exact gen request admits ${operation}`, () => {
+for (const operation of ["qualify-original-react", "capture-original-baseline", "replay-normalized-react", STYLE_OPERATION, NORMALIZED_STYLE_OPERATION]) test(`exact gen request admits ${operation}`, () => {
   assert.equal(validGenRequest({ ...request, operation }), true);
 });
 const badRequests = [
@@ -268,28 +275,69 @@ test("modified planner input bytes refuse even on a failure report", (t) => {
 });
 
 function proposalBytesFixture(item) {
-  // Hash/path protocol only. These synthetic dependency bytes are not a renderer
-  // or compiler witness, and this fixture never calls the actual planner process.
+  // Hash/path protocol only. All command records below are explicitly synthetic
+  // NON-RELEASE data, never passed to the actual hook as successful execution.
+  // The compiler/renderer markers are never imported or executed.
   const bound = identity(item), id = randomUUID(), relative = `.gate/gen/styles/runs/style-plan-${id}`;
   const copied = ["scripts/gui-style-plan.mjs", "frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json",
     "frontend/src/components/cssUnits.ts", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx", "frontend/src/screens/Alchimie.tsx", "frontend/src/screens/Conexiuni.tsx",
-    "frontend/vendor/roedu-ui-0.3.0.tgz", "cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"];
+    "frontend/src/screens/Home.tsx", "frontend/src/screens/Perechi.tsx", "frontend/scripts/compiler-runtime.mjs", "frontend/vite.config.ts", "versions.lock.json",
+    "frontend/vendor/roedu-ui-0.3.0.tgz", "legacy/original-bundle.json", "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs",
+    "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz",
+    "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz.sha256"];
   for (const file of copied) write(item.root, file, fs.readFileSync(sourcePath(repository, file)));
-  for (const [name, version] of [["react-dom", "19.2.7"], ["typescript", "5.9.3"]]) json(item.root, `frontend/node_modules/${name}/package.json`, { name, version });
+  const packages = [["react-dom", "19.2.7"], ["typescript", "7.0.2"], ["@typescript/typescript6", "6.0.2"], ["motion", "14.0.0"], ["framer-motion", "14.0.0"], ["motion-dom", "14.0.0"]];
+  for (const [name, version] of packages) json(item.root, `frontend/node_modules/${name}/package.json`, { name, version, ...(name === "typescript" ? { bin: { tsc: "./bin/tsc" } } : {}) });
+  json(item.root, "frontend/node_modules/@typescript/old/package.json", { name: "typescript", version: "6.0.3" });
+  const nativeName = `@typescript/typescript-${process.platform}-${process.arch}`, nativeManifest = `frontend/node_modules/${nativeName}/package.json`, nativeExecutable = `frontend/node_modules/${nativeName}/lib/tsc${process.platform === "win32" ? ".exe" : ""}`;
+  json(item.root, nativeManifest, { name: nativeName, version: "7.0.2" });
+  write(item.root, nativeExecutable, "NON-RELEASE data-only native payload marker; never executable\n");
   write(item.root, "frontend/node_modules/react-dom/cjs/react-dom-client.development.js", "/* data-only renderer fixture; never executed */\n");
-  write(item.root, "frontend/node_modules/typescript/lib/typescript.js", "/* data-only compiler fixture; never executed */\n");
-  const inputs = {};
-  for (const file of [...copied, "frontend/node_modules/react-dom/package.json", "frontend/node_modules/typescript/package.json",
-    "frontend/node_modules/react-dom/cjs/react-dom-client.development.js", "frontend/node_modules/typescript/lib/typescript.js"]) {
-    const bytes = fs.readFileSync(sourcePath(item.root, file)); inputs[file] = { sha256: sha(bytes), bytes: bytes.length };
-  }
-  const lock = load(item.root, "frontend/package-lock.json"), bindings = { sha: bound.sha, tree_sha256: bound.tree_sha256, toolchain_digest: bound.toolchain_digest, inputs };
-  for (const name of ["react-dom", "typescript"]) {
-    const entry = lock.packages[`node_modules/${name}`]; bindings[name] = { version: entry.version, resolved: entry.resolved, integrity: entry.integrity };
-  }
+  for (const file of ["frontend/node_modules/typescript/bin/tsc", "frontend/node_modules/typescript/lib/tsc.js", "frontend/node_modules/typescript/lib/getExePath.js"]) write(item.root, file, "/* NON-RELEASE data-only compiler marker; never executed */\n");
+  // These are copied published payload bytes solely for hash-binding controls.
+  // No parser API or native process is called by this proposal fixture.
+  for (const file of ["frontend/node_modules/@typescript/typescript6/lib/typescript.js", "frontend/node_modules/@typescript/old/lib/typescript.js"]) write(item.root, file, fs.readFileSync(sourcePath(repository, file)));
   const file = "frontend/src/screens/Fixture.tsx", before = "data-only original source\n", after = "data-only proposed source\n";
   write(item.root, file, before); write(item.root, `${relative}/candidate/${file}`, after);
-  const report = { schema: 2, status: "pass", application_ready: true, diagnostics: [], candidate_diagnostics: [], sites: [], manual: [], owners: [], proposals: [],
+  const inputs = {};
+  function bind(file) {
+    const bytes = fs.readFileSync(sourcePath(item.root, file)); inputs[file] = { sha256: sha(bytes), bytes: bytes.length };
+  }
+  copied.forEach(bind); bind(file);
+  function walk(relative, callback) {
+    const full = sourcePath(item.root, relative), stat = fs.lstatSync(full);
+    if (stat.isDirectory()) for (const name of fs.readdirSync(full).sort()) walk(`${relative}/${name}`, callback);
+    else { assert.ok(stat.isFile()); callback(relative); }
+  }
+  walk("frontend/node_modules", bind);
+  const lock = load(item.root, "frontend/package-lock.json"), bindings = { profile: "normalized", sha: bound.sha, tree_sha256: bound.tree_sha256, toolchain_digest: bound.toolchain_digest, inputs };
+  bindings.frozen_renderer = readNormalizedFrozenRenderer((name) => fs.readFileSync(sourcePath(item.root, name))).binding;
+  for (const [name] of packages) {
+    const entry = lock.packages[`node_modules/${name}`]; bindings[name] = { version: entry.version, resolved: entry.resolved, integrity: entry.integrity };
+  }
+  bindings.current_owners = {};
+  const owners = [];
+  for (const [ownerFile, opacity, className] of [["frontend/src/screens/Alchimie.tsx", 0.5, "csp-motion-opacity-50"], ["frontend/src/screens/Conexiuni.tsx", 0.55, "csp-motion-opacity-55"]]) {
+    bindings.current_owners[ownerFile] = { opacity, className, source_sha256: inputs[ownerFile].sha256 }; owners.push({ file: ownerFile, owner_class: className });
+  }
+  const executable = sourcePath(item.root, "frontend/node_modules/typescript/bin/tsc");
+  bindings.native_compiler = { executable, package: { name: "typescript", version: "7.0.2", path: sourcePath(item.root, "frontend/node_modules/typescript/package.json"), sha256: inputs["frontend/node_modules/typescript/package.json"].sha256 }, executable_sha256: inputs["frontend/node_modules/typescript/bin/tsc"].sha256 };
+  bindings.native_payload = { name: nativeName, version: "7.0.2", manifest: nativeManifest, executable: nativeExecutable, executable_sha256: inputs[nativeExecutable].sha256 };
+  bindings.parser = { package: { name: "@typescript/typescript6", version: "6.0.2", path: sourcePath(item.root, "frontend/node_modules/@typescript/typescript6/package.json"), sha256: inputs["frontend/node_modules/@typescript/typescript6/package.json"].sha256 },
+    implementation: { name: "typescript", version: "6.0.3", path: sourcePath(item.root, "frontend/node_modules/@typescript/old/lib/typescript.js"), manifest_sha256: inputs["frontend/node_modules/@typescript/old/package.json"].sha256, entry_sha256: inputs["frontend/node_modules/@typescript/old/lib/typescript.js"].sha256 },
+    role: "AST/transpilation only; native7 is authoritative for typechecking", locked_implementation: lock.packages["node_modules/@typescript/old"] };
+  const graph = `${relative}/native/candidate-graph`;
+  function graphCopy(name) { const bytes = name === file ? after : fs.readFileSync(sourcePath(item.root, name)); write(item.root, `${graph}/${name}`, bytes); }
+  walk("frontend/src", graphCopy); walk("frontend/node_modules", (name) => { if (/\.(?:json|[cm]?tsx?)$/.test(name)) graphCopy(name); });
+  for (const name of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts"]) graphCopy(name);
+  bindings.native_checks = ["before", "candidate"].map((role) => {
+    const record = { role, compiler: "typescript@7.0.2 native CLI", command: executable, args: ["--project", role === "before" ? sourcePath(item.root, "frontend/tsconfig.json") : sourcePath(item.root, `${graph}/frontend/tsconfig.json`), "--noEmit", "--pretty", "false"], cwd: "frontend", started: "2000-01-01T00:00:00.000Z", finished: "2000-01-01T00:00:00.000Z", exit_code: 0 };
+    for (const stream of ["stdout", "stderr"]) { const name = `${relative}/native/${role}/${stream}.log`; write(item.root, name, ""); record[stream] = { file: name, bytes: 0, sha256: sha("") }; }
+    json(item.root, `${relative}/native/${role}/command.json`, record); return record;
+  });
+  const retained_native_files = [];
+  walk(`${relative}/native`, (name) => { const bytes = fs.readFileSync(sourcePath(item.root, name)); retained_native_files.push({ file: name, bytes: bytes.length, sha256: sha(bytes) }); });
+  const report = { schema: 2, status: "pass", application_ready: true, diagnostics: [], candidate_diagnostics: [], sites: [], manual: [], owners, proposals: [], retained_native_files,
     files: [{ file, before_sha256: sha(before), after_sha256: sha(after) }], bindings, plan_id: id, output: relative,
     converted: `${relative}/candidate`, report_json: `${relative}/report.json`, mode: "source-plan-only-product-files-unmodified" };
   json(item.root, report.report_json, report); json(item.root, `${relative}/analysis.json`, { ...report, application_ready: false, converted: null });
@@ -301,8 +349,8 @@ function resealDataFixture(item, proposal) {
   proposal.summary = structuredClone(proposal.report);
 }
 test("a closed data-only proposal byte map validates without becoming actual planner or manager evidence", (t) => {
-  const item = fixture(t), proposal = proposalBytesFixture(item), checked = validatePlannerOutput(item.root, proposal.summary, proposal.bound);
-  assert.equal(checked.report.converted, `${proposal.relative}/candidate`); assert.equal(checked.artifacts.length, 3);
+  const item = normalizedFixture(t), proposal = proposalBytesFixture(item), checked = validatePlannerOutput(item.root, proposal.summary, proposal.bound);
+  assert.equal(checked.report.converted, `${proposal.relative}/candidate`); assert.equal(checked.artifacts.length, 3 + proposal.report.retained_native_files.length);
   assert.equal(Object.hasOwn(checked.report, "manager_approved"), false);
   // This is a private data fixture, never fed to the owning hook as a passing run.
 });
@@ -317,7 +365,26 @@ const proposalMutations = [
   ["closed file metadata violation", (item, proposal) => { proposal.report.files[0].apply = true; resealDataFixture(item, proposal); }],
 ];
 for (const [name, mutate] of proposalMutations) test(`proposal byte guard refuses ${name}`, (t) => {
-  const item = fixture(t), proposal = proposalBytesFixture(item); mutate(item, proposal);
+  const item = normalizedFixture(t), proposal = proposalBytesFixture(item); mutate(item, proposal);
+  assert.throws(() => validatePlannerOutput(item.root, proposal.summary, proposal.bound));
+});
+test("original profile still refuses the current normalized graph and request", (t) => {
+  const item = normalizedFixture(t), proposal = proposalBytesFixture(item);
+  assert.throws(() => validatePlannerOutput(item.root, proposal.summary, { ...proposal.bound, operation: STYLE_OPERATION }), /profile/);
+  proposal.report.bindings.profile = "original"; resealDataFixture(item, proposal);
+  assert.throws(() => validatePlannerOutput(item.root, proposal.summary, { ...proposal.bound, operation: STYLE_OPERATION }), /Original frozen renderer bytes required|Original compiler API bytes required|Exact reviewed planner source identity required/);
+});
+for (const [name, mutate] of [
+  ["missing native candidate check", (report) => { report.bindings.native_checks.pop(); }],
+  ["parser labeled as compiler", (report) => { report.bindings.parser.role = "native7 authoritative"; }],
+  ["failed native before status", (report) => { report.bindings.native_checks[0].exit_code = 1; }],
+  ["native candidate paths override", (report) => { report.bindings.native_checks[1].args.push("--paths", "unsafe"); }],
+  ["native payload substitution", (report) => { report.bindings.native_payload.executable_sha256 = "d".repeat(64); }],
+  ["missing copied owning config binding", (report) => { report.retained_native_files = report.retained_native_files.filter((item) => !item.file.endsWith("/candidate-graph/frontend/tsconfig.json")); }],
+  ["old owner preimage claim", (report) => { report.bindings.current_owners["frontend/src/screens/Conexiuni.tsx"].source_sha256 = "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338"; }],
+  ["archive member hash substitution", (report) => { report.bindings.frozen_renderer.member.sha256 = "d".repeat(64); }],
+]) test(`normalized proposal refuses ${name}`, (t) => {
+  const item = normalizedFixture(t), proposal = proposalBytesFixture(item); mutate(proposal.report); resealDataFixture(item, proposal);
   assert.throws(() => validatePlannerOutput(item.root, proposal.summary, proposal.bound));
 });
 
@@ -328,7 +395,7 @@ test("real createHook records a controlled unit-fixture refusal and retained evi
   const { createHook, validateHookReport } = await import(pathToFileURL(sourcePath(repository, `${frozen.config.npm_dir}/scripts/run-task.mjs`)).href);
   const item = fixture(t), helper = fs.readFileSync(sourcePath(repository, "scripts/gui-style-operation.mjs"));
   write(item.root, "scripts/gui-style-operation.mjs", helper);
-  for (const file of ["scripts/gui-style-plan.mjs", "scripts/gui-repo-hook.mjs", "frontend/src/components/cssUnits.ts", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx"]) {
+  for (const file of ["scripts/gui-style-plan.mjs", "scripts/gui-repo-hook.mjs", "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs", "frontend/src/components/cssUnits.ts", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx"]) {
     write(item.root, file, fs.readFileSync(sourcePath(repository, file)));
   }
   assert.equal(sha(fs.readFileSync(sourcePath(item.root, "scripts/gui-style-plan.mjs"))), PLANNER_SHA256);

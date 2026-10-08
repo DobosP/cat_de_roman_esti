@@ -1,0 +1,131 @@
+{
+  "plugins": [
+    "eslint",
+    "typescript",
+    "react",
+    "jsx-a11y",
+    "oxc"
+  ],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "no-debugger": "error",
+    "no-undef": "error",
+    "no-unexpected-multiline": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "caughtErrors": "all"
+      }
+    ],
+    "no-fallthrough": "error",
+    "no-empty": "error",
+    "no-prototype-builtins": "error"
+  },
+  "settings": {
+    "jsx-a11y": {
+      "components": {
+        "Button": "button",
+        "CspButton": "button",
+        "Csp.div": "div",
+        "Csp.span": "span",
+        "Csp.strong": "strong",
+        "Csp.p": "p",
+        "Csp.form": "form",
+        "Csp.h1": "h1",
+        "Csp.h2": "h2",
+        "Csp.header": "header",
+        "Csp.section": "section",
+        "Csp.label": "label",
+        "Csp.select": "select",
+        "Csp.input": "input",
+        "Csp.button": "button",
+        "Csp.summary": "summary",
+        "Csp.a": "a",
+        "Csp.ol": "ol",
+        "Csp.ul": "ul",
+        "Csp.li": "li",
+        "Csp.footer": "footer",
+        "Csp.small": "small",
+        "CspMotion.div": "div",
+        "CspMotion.button": "button",
+        "CspMotion.span": "span",
+        "CspMotion.p": "p"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
+      "env": {
+        "browser": true,
+        "node": false
+      },
+      "rules": {
+        "no-undef": "off",
+        "no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_"
+          }
+        ],
+        "typescript/ban-ts-comment": "error",
+        "typescript/no-array-constructor": "error",
+        "typescript/no-duplicate-enum-values": "error",
+        "typescript/no-empty-object-type": "error",
+        "typescript/no-explicit-any": "error",
+        "typescript/no-extra-non-null-assertion": "error",
+        "typescript/no-misused-new": "error",
+        "typescript/no-namespace": "error",
+        "typescript/no-non-null-asserted-optional-chain": "error",
+        "typescript/no-require-imports": "error",
+        "typescript/no-this-alias": "error",
+        "typescript/no-unnecessary-type-constraint": "error",
+        "typescript/no-unsafe-declaration-merging": "error",
+        "typescript/no-unsafe-function-type": "error",
+        "typescript/no-wrapper-object-types": "error",
+        "typescript/prefer-as-const": "error",
+        "typescript/prefer-namespace-keyword": "error",
+        "typescript/triple-slash-reference": "error",
+        "typescript/no-floating-promises": [
+          "error",
+          {
+            "ignoreVoid": true
+          }
+        ],
+        "react/rules-of-hooks": "error",
+        "react/exhaustive-deps": "warn",
+        "react/refs": "error",
+        "react/immutability": "error",
+        "react/purity": "error",
+        "react/set-state-in-render": "error",
+        "react/static-components": "error",
+        "react/use-memo": "error",
+        "react/preserve-manual-memoization": "error",
+        "react/globals": "error",
+        "react/error-boundaries": "error",
+        "react/unsupported-syntax": "warn",
+        "react/incompatible-library": "warn",
+        "react/set-state-in-effect": "off",
+        "react/only-export-components": [
+          "error",
+          {
+            "allowConstantExport": true
+          }
+        ]
+      }
+    }
+  ]
+}

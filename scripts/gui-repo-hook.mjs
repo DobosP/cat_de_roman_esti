@@ -3,7 +3,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { resolveHookRuntime } from "./gui-hook-runtime.mjs";
 import { createHash } from "node:crypto";
-import { validGenRequest, runOriginalStyleOperation } from "./gui-style-operation.mjs";
+import { validGenRequest, runOriginalStyleOperation, NORMALIZED_STYLE_OPERATION, runNormalizedStyleOperation } from "./gui-style-operation.mjs";
 
 const target = process.argv[2], invocation = process.argv[3];
 const root = process.cwd();
@@ -33,7 +33,25 @@ function binaries(prefix) {
     if (fs.existsSync(path.join(scratch, name))) hook.artifact(`${directory}/${name}`);
   }
 }
+function retainArtifacts(relative) {
+  for (const entry of fs.readdirSync(path.join(root, relative), { withFileTypes: true })) {
+    const file = `${relative}/${entry.name}`;
+    if (entry.isDirectory()) retainArtifacts(file);
+    else { if (!entry.isFile()) throw new Error("Nonregular normalized browser artifact refused"); hook.artifact(file); }
+  }
+}
+function normalizedContract(check, file, count) {
+  hook.check(check, () => {
+    const output = hook.run("node", ["--test", "--test-reporter=tap", file], frontend);
+    const summary = (name) => [...output.matchAll(new RegExp(`^# ${name} (\\d+)$`, "gm"))].map((match) => Number(match[1]));
+    hook.assert("Actual contract count and zero skips/failures", () => JSON.stringify(summary("tests")) === JSON.stringify([count])
+      && JSON.stringify(summary("pass")) === JSON.stringify([count])
+      && ["fail", "cancelled", "skipped", "todo"].every((name) => JSON.stringify(summary(name)) === "[0]"));
+  });
+}
 function nativeUnit() {
+  frontendBuild("cat-unit");
+  command("cat-unit-assets", "node", ["scripts/gui-assets.mjs", "sync"]);
   for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
     hook.check(`cat-${name}-race`, () => {
       const output = hook.run("go", ["test", "-race", "-json", "./..."], path.join(root, module));
@@ -49,7 +67,6 @@ function nativeUnit() {
   command("cat-frontend-unit", "npm", ["test"], frontend);
   command("cat-frontend-lint", "npm", ["run", "lint"], frontend);
   command("cat-frontend-types", "npm", ["run", "typecheck"], frontend);
-  frontendBuild("cat-unit");
   command("cat-docs-gate", "python3", [path.join(kitRoot, "lint/check_docs.py"), "."]);
 }
 switch (target) {
@@ -58,12 +75,21 @@ switch (target) {
     hook.check("npm-lock", () => {
       const primary = JSON.parse(fs.readFileSync(".gate/wrapper-current.json")).target;
       const request = JSON.parse(fs.readFileSync("scripts/gui-deps-request.json"));
-      hook.assert("Explicit auxiliary-only dependency request", () => request.schema === 1 && request.scope === "baseline-quality-only" && Object.keys(request).length === 2);
-      const onlyQuality = primary === "deps";
+      hook.assert("Explicit closed dependency scope", () => request.schema === 1 && ["baseline-quality-only", "frontend-and-quality"].includes(request.scope) && Object.keys(request).length === 2);
+      const onlyQuality = primary === "deps" && request.scope === "baseline-quality-only";
       const before = ["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz"].map((file) => hash(fs.readFileSync(file)));
       for (const module of [...(onlyQuality ? [] : ["frontend"]), "tools/gui-baseline-quality"]) hook.run("npm", ["install", "--package-lock-only", "--ignore-scripts"], path.join(root, module));
       if (onlyQuality) hook.assert("Original frontend graph and SDK bytes stayed exact", () => ["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz"].every((file, index) => hash(fs.readFileSync(file)) === before[index]));
     });
+    const dependencyRequest = JSON.parse(fs.readFileSync("scripts/gui-deps-request.json"));
+    if (dependencyRequest.scope === "frontend-and-quality") {
+      setup("cat-deps");
+      if (hook.checks.every((item) => item.status === "pass")) {
+        command("cat-installed-toolchain-probe", "node", ["scripts/gui-toolchain-probe.mjs"]);
+        const probe = `${directory}/toolchain-probe`;
+        if (fs.existsSync(path.join(root, probe))) for (const name of fs.readdirSync(path.join(root, probe))) hook.artifact(`${probe}/${name}`);
+      }
+    }
     hook.check("go-mod-tidy", () => {
       for (const module of ["go-backend", "shared-go/authcore"]) hook.run("go", ["mod", "tidy"], path.join(root, module));
     });
@@ -74,6 +100,38 @@ switch (target) {
     if (hook.checks.some((item) => item.status !== "pass")) break;
     if (request.operation === "plan-original-styles") {
       runOriginalStyleOperation(hook, config, request);
+      break;
+    }
+    if (request.operation === NORMALIZED_STYLE_OPERATION) {
+      runNormalizedStyleOperation(hook, config, request, process.env);
+      break;
+    }
+    if (request.operation === "replay-normalized-react") {
+      const allPassed = () => hook.checks.every((item) => item.status === "pass");
+      const environment = { CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan") };
+      const artifacts = `${directory}/normalized-react`;
+      try {
+        setup("cat-normalized");
+        if (allPassed()) frontendBuild("cat-normalized");
+        if (allPassed()) command("cat-normalized-assets-sync", "node", ["scripts/gui-assets.mjs", "sync"]);
+        if (allPassed()) binaries("cat-normalized");
+        if (allPassed()) normalizedContract("cat-normalized-api-consumer-contract", "tests/gui-api-consumer-contract.test.mjs", 2);
+        if (allPassed()) normalizedContract("cat-normalized-selection-key-contract", "tests/conexiuni-selection-key.test.mjs", 3);
+        if (allPassed()) hook.check("cat-normalized-sealed-react-runtime", () => {
+          const output = hook.run("node", ["scripts/gui-original-execution.mjs", "normalized-react"], root, environment);
+          const native = JSON.parse(output);
+          hook.assert("Actual normalized sealed React outcome", () => native.check === "cat-normalized-react-runtime-execution" && native.status === "pass"
+            && native.mode === "normalized-react" && native.sha === hook.context.sha && native.tree_sha256 === hook.context.tree_sha256
+            && native.toolchain_digest === hook.context.toolchain_digest && native.canonical_full === false && native.app_image_id === null);
+          hook.assert("Normalized native report is retained actual stdout", () => fs.readFileSync(path.join(root, `${artifacts}/evidence/native-report.json`), "utf8") === output);
+          const action = hook.actions.findLast((item) => item.kind === "command");
+          fs.copyFileSync(path.join(root, action.stdout_log), path.join(root, `${artifacts}/sealed-stdout.log`));
+          fs.copyFileSync(path.join(root, action.stderr_log), path.join(root, `${artifacts}/sealed-stderr.log`));
+        });
+        if (allPassed()) command("cat-normalized-complete-browser", "node", ["scripts/gui-full-browser.mjs", "normalized-react"], root, environment);
+      } finally {
+        if (fs.existsSync(path.join(root, artifacts))) retainArtifacts(artifacts);
+      }
       break;
     }
     // Plain gen is the E1 original route; it deliberately runs actual prerequisites

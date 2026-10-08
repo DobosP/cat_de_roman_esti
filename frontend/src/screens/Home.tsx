@@ -136,10 +136,10 @@ export default function Home({
   );
 
   return (
-    <div className="screen-pad fill" style={{ overflowY: "auto" }}>
-      <div className="container col" style={{ gap: 28, paddingBlock: 16 }}>
-        <header className="col" style={{ gap: 10 }}>
-          <div className="row spread" style={{ gap: 12, alignItems: "flex-start" }}>
+    <div className="screen-pad fill home-screen">
+      <div className="container col home-content">
+        <header className="col home-header">
+          <div className="row spread home-heading-row">
             <h1 className="hero-title" aria-label="Cât de român ești?">
               {TITLE_WORDS.map((word, i) => (
                 <m.span
@@ -158,17 +158,16 @@ export default function Home({
                 </m.span>
               ))}
             </h1>
-            <div className="col center" style={{ gap: 8 }}>
+            <div className="col center home-controls">
               <SoundToggle />
               <Badge size="sm">{RELEASE_LABEL}</Badge>
             </div>
           </div>
           <m.p
-            className="muted"
+            className="muted home-description"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35, duration: 0.5 }}
-            style={{ maxWidth: 640, fontSize: "1.05rem", margin: 0 }}
           >
             De la Ștefan cel Mare la Las Fierbinți: șase jocuri scurte din cultura și
             viața românească.
@@ -197,20 +196,16 @@ export default function Home({
                 whileTap={{ scale: 0.97 }}
                 className={`card game-card${g.featured ? " game-card--featured" : ""}${
                   completedToday ? " game-card--daily-complete" : ""
-                }`}
+                } home-game--${g.key}`}
               >
                 <div
                   aria-hidden
                   className="game-card-halo"
-                  style={{
-                    background: `radial-gradient(190px 130px at 100% 0%, ${g.glow}26, transparent 70%)`,
-                  }}
                 />
-                <div className="row spread" style={{ position: "relative" }}>
+                <div className="row spread home-game-card-heading">
                   <span
                     className="game-card-icon"
                     aria-hidden
-                    style={{ background: `${g.accent}1f`, borderColor: `${g.accent}55` }}
                   >
                     {g.icon}
                   </span>
@@ -218,19 +213,19 @@ export default function Home({
                     {completedToday ? "Azi ✓" : g.featured ? "Începe aici" : g.tag}
                   </Badge>
                 </div>
-                <strong className="game-card-title" style={{ color: g.accent }}>
+                <strong className="game-card-title">
                   {g.title}
                 </strong>
                 <p className="muted game-card-blurb">{g.blurb}</p>
-                <span className="row game-card-footer" style={{ gap: 10 }}>
-                  <span className="game-card-cta" style={{ color: g.accent }}>
+                <span className="row game-card-footer">
+                  <span className="game-card-cta">
                     Joacă →
                   </span>
                   {isStarterGame(g.key) && needsDerivedStarter(g.key) && (
                     <span className="faint">🌱 Nivel de început</span>
                   )}
                   {board[g.key]?.best && (
-                    <span className="faint" style={{ fontSize: "0.8rem" }}>
+                    <span className="faint home-game-card-record">
                       ★ record {board[g.key]!.best!.score}
                     </span>
                   )}
@@ -244,7 +239,7 @@ export default function Home({
           <div className="daily-circuit-head">
             <div className="row daily-circuit-title">
               <span className="daily-circuit-sun" aria-hidden>☀️</span>
-              <div className="col" style={{ gap: 2 }}>
+              <div className="col home-daily-title-copy">
                 <h2 id="daily-circuit-title">Circuitul de azi</h2>
                 <p className="muted">Doar pe acest dispozitiv.</p>
                 {dailyStreak >= 1 && (
@@ -326,8 +321,8 @@ export default function Home({
           </div>
         )}
 
-        <section className="col history-section" style={{ gap: 14 }} hidden={playedTotal === 0}>
-          <div className="row spread wrap" style={{ gap: 12, alignItems: "center" }}>
+        <section className="col history-section" hidden={playedTotal === 0}>
+          <div className="row spread wrap home-history-heading">
             <div className="segment history-tabs" role="group" aria-label="Istoric">
               {(["top", "today", "recent"] as const).map((tab) => (
                 <button
@@ -341,7 +336,7 @@ export default function Home({
                 </button>
               ))}
             </div>
-            <div className="row wrap" style={{ gap: 8 }}>
+            <div className="row wrap home-history-actions">
               <Button variant="secondary" size="sm" onClick={handleExport} disabled={playedTotal === 0}>
                 <span aria-hidden>⬇</span> Export
               </Button>
@@ -353,28 +348,27 @@ export default function Home({
 
           <div className="totals-grid">
             {totals.map((row) => (
-              <div key={row.key} className="card" style={{ padding: 14, display: "grid", gap: 8 }}>
-                <div className="row spread" style={{ gap: 8 }}>
+              <div key={row.key} className={`card home-total-card home-game--${row.key}`}>
+                <div className="row spread home-total-heading">
                   <Badge color={row.accent} size="sm">
                     {row.title}
                   </Badge>
-                  <strong style={{ fontVariantNumeric: "tabular-nums" }}>
+                  <strong className="home-tabular">
                     {row.record?.played ?? 0}
                   </strong>
                 </div>
-                <ScoreLine entry={row.record?.best ?? null} accent={row.accent} empty="Fără scor" />
+                <ScoreLine entry={row.record?.best ?? null} empty="Fără scor" />
               </div>
             ))}
           </div>
 
           {historyTab === "recent" && (
-            <label className="row" style={{ gap: 8, alignSelf: "flex-start" }}>
-              <span className="faint" style={{ fontSize: "0.78rem" }}>Joc</span>
+            <label className="row home-history-filter">
+              <span className="faint home-history-filter-label">Joc</span>
               <select
                 value={gameFilter}
                 onChange={(event) => setGameFilter(event.target.value as GameKey | "all")}
-                className="field"
-                style={{ width: 210, padding: "9px 12px" }}
+                className="field home-history-filter-select"
               >
                 <option value="all">Toate</option>
                 {GAMES.map((game) => (
@@ -409,10 +403,10 @@ export default function Home({
           type="file"
           accept="application/json,.json"
           onChange={handleImport}
-          style={{ display: "none" }}
+          className="home-import-input"
         />
 
-        <p className="faint" style={{ fontSize: "0.8rem" }}>
+        <p className="faint home-footer">
           Toate cele șase jocuri folosesc aceeași hartă de legături culturale românești.
         </p>
       </div>
@@ -423,35 +417,34 @@ export default function Home({
 function HistoryRows({ rows, empty }: { rows: GameScoreEntry[]; empty: string }) {
   if (rows.length === 0) {
     return (
-      <div className="card center muted" style={{ minHeight: 82, padding: 18 }}>
+      <div className="card center muted home-history-empty">
         {empty}
       </div>
     );
   }
   return (
-    <div className="col" style={{ gap: 8 }}>
+    <div className="col home-history-list">
       {rows.map((entry, index) => (
         <div
           key={`${entry.game}-${entry.at}-${entry.score}-${index}`}
-          className="card row spread wrap"
-          style={{ gap: 12, padding: "12px 14px", alignItems: "center" }}
+          className="card row spread wrap home-history-row"
         >
-          <div className="row" style={{ gap: 10, minWidth: 0 }}>
-            <span className="faint" style={{ width: 24, textAlign: "right" }}>
+          <div className="row home-history-description">
+            <span className="faint home-history-rank">
               {index + 1}
             </span>
-            <div className="col" style={{ gap: 2, minWidth: 0 }}>
+            <div className="col home-history-detail">
               <strong>{GAME_TITLES[entry.game as GameKey] ?? entry.game}</strong>
-              <span className="muted" style={{ fontSize: "0.84rem" }}>
+              <span className="muted home-history-detail-copy">
                 {displayDetail(entry.detail)}
               </span>
             </div>
           </div>
-          <div className="row" style={{ gap: 12, alignItems: "center" }}>
-            <span className="faint" style={{ fontSize: "0.78rem" }}>
+          <div className="row home-history-score">
+            <span className="faint home-history-time">
               {formatWhen(entry.at)}
             </span>
-            <strong style={{ fontVariantNumeric: "tabular-nums" }}>{entry.score}</strong>
+            <strong className="home-tabular">{entry.score}</strong>
           </div>
         </div>
       ))}
@@ -461,20 +454,18 @@ function HistoryRows({ rows, empty }: { rows: GameScoreEntry[]; empty: string })
 
 function ScoreLine({
   entry,
-  accent,
   empty,
 }: {
   entry: ScoreEntry | null;
-  accent: string;
   empty: string;
 }) {
-  if (!entry) return <span className="muted" style={{ fontSize: "0.86rem" }}>{empty}</span>;
+  if (!entry) return <span className="muted home-score-empty">{empty}</span>;
   return (
-    <div className="row spread" style={{ gap: 8, alignItems: "baseline" }}>
-      <span className="muted" style={{ fontSize: "0.82rem" }}>
+    <div className="row spread home-score-line">
+      <span className="muted home-score-detail">
         {displayDetail(entry.detail)}
       </span>
-      <strong style={{ color: accent, fontVariantNumeric: "tabular-nums" }}>
+      <strong className="home-score-value home-tabular">
         {entry.score}
       </strong>
     </div>

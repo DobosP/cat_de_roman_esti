@@ -542,9 +542,229 @@ input:focus-visible {
 .sound-toggle {
   display: inline-flex;
   align-items: center;
+  padding: 10px 12px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  line-height: 1;
+}
+
+.sound-toggle.sound-toggle--compact {
+  padding: 8px 10px;
+}
+
+.sound-toggle .sound-toggle-icon {
+  font-size: 1.1rem;
+}
+
+.route-error-content {
+  padding: 24px;
+  gap: 16px;
 }
 
 /* ------------------------------------------------------------------ home / hero */
+.home-screen {
+  overflow-y: auto;
+}
+
+.home-screen .home-content {
+  gap: 28px;
+  padding-block: 16px;
+}
+
+.home-screen .home-header {
+  gap: 10px;
+}
+
+.home-screen .home-heading-row {
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.home-screen .home-controls {
+  gap: 8px;
+}
+
+.home-screen .home-description {
+  max-width: 640px;
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+/* Exact GAMES colors, including the original hex alpha bytes. These variables
+   belong only to lobby cards and totals, rather than changing the game themes. */
+.home-screen .home-game--alchimie {
+  --home-game-accent: #c689ff;
+  --home-game-halo: #e3ccff26;
+  --home-game-icon-background: #c689ff1f;
+  --home-game-icon-border: #c689ff55;
+}
+
+.home-screen .home-game--intrusul {
+  --home-game-accent: #ffcf5c;
+  --home-game-halo: #ffe7a326;
+  --home-game-icon-background: #ffcf5c1f;
+  --home-game-icon-border: #ffcf5c55;
+}
+
+.home-screen .home-game--perechi {
+  --home-game-accent: #ff78b7;
+  --home-game-halo: #ffc4df26;
+  --home-game-icon-background: #ff78b71f;
+  --home-game-icon-border: #ff78b755;
+}
+
+.home-screen .home-game--conexiuni {
+  --home-game-accent: #54e39d;
+  --home-game-halo: #abf2cd26;
+  --home-game-icon-background: #54e39d1f;
+  --home-game-icon-border: #54e39d55;
+}
+
+.home-screen .home-game--contexto {
+  --home-game-accent: #ff8a5c;
+  --home-game-halo: #ffc9a326;
+  --home-game-icon-background: #ff8a5c1f;
+  --home-game-icon-border: #ff8a5c55;
+}
+
+.home-screen .home-game--lant {
+  --home-game-accent: #4fd8e0;
+  --home-game-halo: #a9f0f526;
+  --home-game-icon-background: #4fd8e01f;
+  --home-game-icon-border: #4fd8e055;
+}
+
+.home-screen .game-card-halo {
+  background: radial-gradient(190px 130px at 100% 0%, var(--home-game-halo), transparent 70%);
+}
+
+.home-screen .home-game-card-heading {
+  position: relative;
+}
+
+.home-screen .game-card-icon {
+  background: var(--home-game-icon-background);
+  border-color: var(--home-game-icon-border);
+}
+
+.home-screen .game-card-title,
+.home-screen .game-card-cta,
+.home-screen .home-score-value {
+  color: var(--home-game-accent);
+}
+
+.home-screen .game-card-footer {
+  gap: 10px;
+}
+
+.home-screen .home-game-card-record,
+.home-screen .home-footer {
+  font-size: 0.8rem;
+}
+
+.home-screen .home-daily-title-copy {
+  gap: 2px;
+}
+
+.home-screen .history-section {
+  gap: 14px;
+}
+
+.home-screen .home-history-heading {
+  gap: 12px;
+  align-items: center;
+}
+
+.home-screen .home-history-actions {
+  gap: 8px;
+}
+
+.home-screen .home-total-card {
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.home-screen .home-total-heading {
+  gap: 8px;
+}
+
+.home-screen .home-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.home-screen .home-history-filter {
+  gap: 8px;
+  align-self: flex-start;
+}
+
+.home-screen .home-history-filter-label,
+.home-screen .home-history-time {
+  font-size: 0.78rem;
+}
+
+.home-screen .home-history-filter-select {
+  width: 210px;
+  padding: 9px 12px;
+}
+
+.home-screen .home-import-input {
+  display: none;
+}
+
+.home-screen .home-history-empty {
+  min-height: 82px;
+  padding: 18px;
+}
+
+.home-screen .home-history-list {
+  gap: 8px;
+}
+
+.home-screen .home-history-row {
+  gap: 12px;
+  padding: 12px 14px;
+  align-items: center;
+}
+
+.home-screen .home-history-description {
+  gap: 10px;
+  min-width: 0;
+}
+
+.home-screen .home-history-rank {
+  width: 24px;
+  text-align: right;
+}
+
+.home-screen .home-history-detail {
+  gap: 2px;
+  min-width: 0;
+}
+
+.home-screen .home-history-detail-copy {
+  font-size: 0.84rem;
+}
+
+.home-screen .home-history-score {
+  gap: 12px;
+  align-items: center;
+}
+
+.home-screen .home-score-empty {
+  font-size: 0.86rem;
+}
+
+.home-screen .home-score-line {
+  gap: 8px;
+  align-items: baseline;
+}
+
+.home-screen .home-score-detail {
+  font-size: 0.82rem;
+}
+
 .hero-title {
   display: flex;
   flex-wrap: wrap;
