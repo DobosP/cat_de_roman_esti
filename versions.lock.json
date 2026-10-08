@@ -140,11 +140,10 @@
       "dependants": [
         "vite"
       ],
-      "version": "1.2.12",
-      "source": "https://registry.npmjs.org/rolldown/1.2.12",
-      "date": "2026-10-06",
-      "notes": "resolved through vite's ~1.2.11 range; checked in package-lock.json only",
-      "released": "2026-09-30"
+      "version": "1.2.13",
+      "source": "https://registry.npmjs.org/rolldown/1.2.13",
+      "date": "2026-10-08",
+      "notes": "Forward pin from genuine Cat frontend/bootstrap npm-generated locks and installed Rolldown1.2.13/Vite8.3.3 metadata retained in cat-core-v14-normalized-GEN-native27-budget-lint-fail-20261008. Vite's published ~1.2.11 edge admits this stable patch; sole parent remains vite, no direct import/dependency or toolchain rebuild. Owning deps must generate and verify the exact selected lock; registry overshoot fails."
     },
     {
       "tool": "esbuild",
@@ -945,5 +944,5 @@
     "source": "Paul explicitly acknowledged ACK 1–6 and PostgreSQL 16 in the GUI migration parent chat on 2026-10-06, then authorized end-to-end implementation, no further permission questions, parent review/landing and cleanup of completed managed work.",
     "authority": "direct human launch authorization, not physical/release evidence"
   },
-  "core_tag": "core-v1.4"
+  "core_tag": "core-v1.5"
 }
