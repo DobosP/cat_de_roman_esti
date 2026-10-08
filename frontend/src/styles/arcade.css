@@ -390,17 +390,6 @@ input:focus-visible {
   background: var(--roedu-color-surface);
 }
 
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  background: var(--roedu-color-surface);
-  border: 1px solid var(--roedu-color-border);
-}
 
 /* ------------------------------------------------------------------ surfaces (legacy bridge) */
 .card {
@@ -488,10 +477,6 @@ input:focus-visible {
   .roedu-button,
   button {
     min-height: 44px;
-  }
-  .chip {
-    min-height: 44px;
-    padding: 8px 14px;
   }
 }
 
@@ -1241,9 +1226,6 @@ input:focus-visible {
   justify-content: flex-end;
 }
 
-.category-picker-options {
-  min-width: 0;
-}
 
 
 
@@ -1353,9 +1335,6 @@ input:focus-visible {
     min-width: 0;
   }
 
-  .category-picker-options::-webkit-scrollbar {
-    display: none;
-  }
 
   .hud > * {
     max-width: 100%;
@@ -1387,18 +1366,6 @@ input:focus-visible {
     width: 100%;
   }
 
-  .category-picker-options {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    margin-inline: -16px;
-    padding-inline: 16px;
-    scrollbar-width: none;
-  }
-
-  .category-picker-options > .chip {
-    flex: 0 0 auto;
-  }
 
   .next-move {
     gap: 8px;

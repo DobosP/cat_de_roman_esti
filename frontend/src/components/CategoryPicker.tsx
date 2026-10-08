@@ -13,6 +13,7 @@ import {
   type Difficulty,
   type GameKey,
 } from "../api/meta";
+import "../styles/category-picker.css";
 
 export function CategoryPicker({
   game,

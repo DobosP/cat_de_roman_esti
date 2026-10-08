@@ -6,6 +6,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const guide = read("../src/components/PlayGuide.tsx");
 const intro = read("../src/components/GameIntro.tsx");
 const css = read("../src/styles/arcade.css");
+const categoryCss = read("../src/styles/category-picker.css");
 const alchimieCss = read("../src/styles/alchimie.css");
 const conexiuniCss = read("../src/styles/conexiuni.css");
 const lantCss = read("../src/styles/lant.css");
@@ -44,9 +45,9 @@ void test("all games teach the loop with a semantic three-step guide", () => {
 
 void test("mobile layout wraps status and keeps category rails compact with 44px targets", () => {
   assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.roedu-btn,[\s\S]*?min-height: 44px/);
-  assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.chip \{[\s\S]*?min-height: 44px/);
+  assert.match(categoryCss, /@media \(pointer: coarse\)[\s\S]*?\.chip \{[\s\S]*?min-height: 44px/);
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.hud \{\s*width: 100%;\s*flex-wrap: wrap;/);
-  assert.match(css, /\.category-picker-options \{[\s\S]*?flex-wrap: nowrap;[\s\S]*?overflow-x: auto/);
+  assert.match(categoryCss, /\.category-picker-options \{[\s\S]*?flex-wrap: nowrap;[\s\S]*?overflow-x: auto/);
   assert.match(alchimieCss, /\.alchemy-screen \.alchemy-bench[^}]*?position: static/);
   assert.match(alchimie, /className="alchemy-slot-label"/);
   assert.match(alchimieCss, /\.alchemy-slot-label \{[^}]*?white-space: normal[^}]*?overflow-wrap: anywhere/);

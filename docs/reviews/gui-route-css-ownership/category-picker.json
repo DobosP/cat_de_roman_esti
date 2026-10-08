@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "scope": "one ordinary shared CategoryPicker stylesheet + exact2 static opacity ownership rules; source only/unrun",
+  "source_sha": "7bc5b17bc727e5e7f8e65117b4e3dae19f0811dc",
+  "actual_gate_result": "10ed668461b4ee1f31ce7fac479593635ad2eab4fcb121e399757c8f6e5e36f3",
+  "last_actual_startup_bytes": 123163,
+  "unchanged_limit_bytes": 122880,
+  "global": {
+    "file": "frontend/src/styles/arcade.css",
+    "before_sha256": "c848b1054b43aa12f95fea8c384af56172c1d368db7a4d56d75a60c756cd149f",
+    "after_sha256": "9cf483a1cc3e2bc631e7b2fa1909ecb7c8026a494e0d4e7ae7e976260e379346",
+    "removed_raw_bytes": 671,
+    "fragments": [
+      {
+        "first_line": 393,
+        "last_line": 403,
+        "body_bytes": 244,
+        "body_sha256": "e354c1951f476ed8748509860aad4a3f85a85ecb80bd296d096750d392de2d77",
+        "media": null,
+        "selector_declaration_bytes": "exact"
+      },
+      {
+        "first_line": 492,
+        "last_line": 495,
+        "body_bytes": 59,
+        "body_sha256": "01450b2775e21d8c7259fd65a3c91be1f70093f690503d846205fa2f091119ce",
+        "media": "@media (pointer: coarse)",
+        "selector_declaration_bytes": "exact"
+      },
+      {
+        "first_line": 1244,
+        "last_line": 1246,
+        "body_bytes": 45,
+        "body_sha256": "0a4b574de45c58bee355f62b3f36b7160354d5fc2d729d0385edcef6226e1777",
+        "media": null,
+        "selector_declaration_bytes": "exact"
+      },
+      {
+        "first_line": 1356,
+        "last_line": 1358,
+        "body_bytes": 71,
+        "body_sha256": "c4afefae5c222b05e42d88ff6d51f98bb84d80a8793e2e6fe80cc9281426198b",
+        "media": "@media (max-width: 640px)",
+        "selector_declaration_bytes": "exact"
+      },
+      {
+        "first_line": 1390,
+        "last_line": 1401,
+        "body_bytes": 252,
+        "body_sha256": "89008b66102cce41220f41e0b045e0e2fe32539b16c15122b486ae284ca5f647",
+        "media": "@media (max-width: 640px)",
+        "selector_declaration_bytes": "exact"
+      }
+    ]
+  },
+  "category_css": {
+    "file": "frontend/src/styles/category-picker.css",
+    "before": "ABSENT in Git and filesystem",
+    "bytes": 764,
+    "sha256": "78f5e69ee6759bb20923e18c2c7294e14d475f3931c2999cc78e2f4f1c1142dd",
+    "order": "exact base chip -> coarse chip -> category base -> 640 scrollbar -> 640 rail/child"
+  },
+  "component": {
+    "file": "frontend/src/components/CategoryPicker.tsx",
+    "before_sha256": "3d9d50768ecce3aff65518b8a5e4f4d6d90ebb8a58fb55e4bbfd5783e8df7680",
+    "after_sha256": "475b6bcb65ef123ba95e995e8e83577703674d941e5f897458b4cc7519ef11c5",
+    "only_delta": "import \"../styles/category-picker.css\";",
+    "import_count": 1
+  },
+  "delivery": "manifest/source DFS proves CategoryPicker loaded statically by Alchimie/CaldRece/Conexiuni/Lant, including Explore viaAlchimie; these andCategoryPicker are all plain .chip consumers; entry/AccountBar/Ranking/Intrusul/Perechi are not consumers",
+  "csp_style": {
+    "file": "frontend/src/styles/csp-style.css",
+    "before_sha256": "98dedfc773bc851a37bdde70b908feb7f1217df4cdf89c0668c991a1ef4930c0",
+    "after_sha256": "0ecd75041fe9ff47182c42f5f05699bf1d206aefa8b2439de424ac52db4a3437",
+    "after_contents": "exact original comment line only; original CspElements CSS import unchanged"
+  },
+  "opacity_fallbacks": [
+    {
+      "source": "frontend/src/styles/csp-style.css",
+      "destination": "frontend/src/styles/alchimie.css",
+      "consumer": "frontend/src/screens/Alchimie.tsx",
+      "body_bytes": 40,
+      "body_sha256": "385abaae6ebc85e448278e77ad2f95607e4c013cfd0136cf8a341445603e74f4",
+      "before_sha256": "33aaf64da35edc6042b6f4392bcce490f9e3f54ba57d49a0c28e3a52932d4471",
+      "after_sha256": "5063a621ad0e6231bb9e5576418ee0fe963ad42fe01125d0ad07b2c0fb49dac4",
+      "priority": "ordinary unchanged .5/.55 class declaration remains below Motion inline writes",
+      "old_route_suffix": "exact bytes retained"
+    },
+    {
+      "source": "frontend/src/styles/csp-style.css",
+      "destination": "frontend/src/styles/conexiuni.css",
+      "consumer": "frontend/src/screens/Conexiuni.tsx",
+      "body_bytes": 41,
+      "body_sha256": "aa428eceb4b0aaa9cd89b1e28f9b3449e9df969eba47cff406d8d5089077bf26",
+      "before_sha256": "0719f2619b2652c138f54f209fa7514d4410bfe62dab1d850bf431e38b5e8e3f",
+      "after_sha256": "279969216455cc28b4f2dd4c6f4556c9f7eec75782a18584fa8131286b7f5a98",
+      "priority": "ordinary unchanged .5/.55 class declaration remains below Motion inline writes",
+      "old_route_suffix": "exact bytes retained"
+    }
+  ],
+  "preserved": [
+    "all original selector/property/media bytes",
+    "global button44/coarse/reset/focus/screenpad/variables/game-container/sharedrules",
+    "account-chip and AccountBar mandatory closure/fonts/realroots",
+    "same source/browser assertions/callbacks/cases and all budgets",
+    "no loader/plugin/registry/dependency/bundler changes"
+  ],
+  "qualification": "UNRUN; no inferred283byte saving/rendered/current900 pass",
+  "source_check_input_ledger": {
+    "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/category-css-assert-inputs-before-20261008/ledger.json",
+    "sha256": "393e43d3f5043abe9d253575e23fcc494445d45161a3d00669a3bd035442dfb4",
+    "facts": "reverseinputsubstitutions restore all original bytes; globalbutton44 remains on globalCSS; chip/rail predicates readcategoryCss"
+  }
+}

@@ -1,0 +1,43 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: var(--roedu-color-surface);
+  border: 1px solid var(--roedu-color-border);
+}
+
+@media (pointer: coarse) {
+  .chip {
+    min-height: 44px;
+    padding: 8px 14px;
+  }
+}
+
+.category-picker-options {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .category-picker-options::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .category-picker-options {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    scrollbar-width: none;
+  }
+
+  .category-picker-options > .chip {
+    flex: 0 0 auto;
+  }
+}
