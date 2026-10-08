@@ -29,7 +29,7 @@ function retain(name, bytes) {
   artifacts.push(`${relative}/${name} sha256:${digest}`);
   return { path: `${relative}/${name}`, sha256: digest, bytes: Buffer.byteLength(bytes) };
 }
-let failure;
+let failure, failed = false;
 try {
   const inputs = boundSdkAllocationInputs(frontend);
   const annotated = annotateUnusedSdkAllocations(inputs.uiSource);
@@ -143,13 +143,14 @@ try {
     button_renderer_sha256: allocationHash(traces.after[0].source), used_body_sha256: usedBodies,
     button_output_ref_and_callback_equal: true, before_bundle: bundles.before.output, after_bundle: bundles.after.output };
 } catch (error) {
+  failed = true;
   failure = error instanceof Error ? error.message : String(error);
 }
-const report = { schema: 1, check: "cat-sdk-allocation-causality", status: failure ? "fail" : "pass",
+const report = { schema: 1, check: "cat-sdk-allocation-causality", status: failed ? "fail" : "pass",
   scope: "isolated actual Rolldown bundles and bound production React allocations",
   application_qualified: false, startup_budget_qualified: false, full_game_replay_qualified: false,
   sha: context.sha, tree_sha256: context.tree_sha256, toolchain_digest: context.toolchain_digest,
-  invocation: context.invocation, observations, ...(failure ? { failure } : {}), artifacts };
+  invocation: context.invocation, observations, ...(failed ? { failure } : {}), artifacts };
 fs.writeFileSync(path.join(directory, "report.json"), JSON.stringify(report, null, 2) + "\n", { flag: "wx", mode: 0o600 });
 process.stdout.write(JSON.stringify(report) + "\n");
-process.exitCode = failure ? 1 : 0;
+process.exitCode = failed ? 1 : 0;
