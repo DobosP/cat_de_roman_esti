@@ -1,0 +1,18 @@
+import datetime,hashlib,json,pathlib,subprocess
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6');S=pathlib.Path('/home/dobo/work/_temp/codex__content-v1-6');D=R/'docs/reviews/v1-6-everyday-inputs';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+ad=json.loads((D/'source6-installed-factual-review-admission-r1.json').read_bytes());commands=[]
+for rail,scope in ad['scope'].items():
+ d=D/'native'/rail
+ assert sha(R/scope['source_path'])==scope['source_sha256']
+ for role in ['factual','quality']:
+  p=d/('installed-final-'+role+'-review-r1.json');r=json.loads(p.read_bytes());assert r['role']==role and r['verdict']=='accept'
+  assert r['reviewer']=='/root/'+('v16_native_raw_factual' if role=='factual' else 'v16_raw_quality')
+  assert r['catalog_sha256']==scope['artifact_sha256'];assert r['live_audit_sha256' if rail=='extensions' else 'audit_sha256']==scope['audit_sha256']
+ argv=[str(S/'probe/frozen-tools-r1/cat-content-rail'),rail,'--root',str(R),'--source',str(R/scope['source_path'])]
+ for flag,key in [('candidate','candidate'),('factual-review','factual_review'),('quality-review','quality_review'),('proposal','proposal')]:
+  assert sha(R/scope[key]['path'])==scope[key]['sha256'];argv+=['--'+flag,str(R/scope[key]['path'])]
+ assert sha(R/scope['audit_path'])==scope['audit_sha256']
+ out=d/'installed-authority-entry-r1.json';assert not out.exists()
+ argv+=['--live-audit',str(R/scope['audit_path']),'--final-factual-review',str(d/'installed-final-factual-review-r1.json'),'--final-quality-review',str(d/'installed-final-quality-review-r1.json'),'--expected-sha256',scope['artifact_sha256'],'--installed-authority-out',str(out)]
+ commands.append({'name':'native-'+rail+'-authority-entry','argv':argv})
+out=D/'authority-entry-commands-r1.json';assert not out.exists();out.write_text(json.dumps(commands,indent=2)+'\n');print('Prepared three exact native installed-authority commands; no native execution or metadata mutation')

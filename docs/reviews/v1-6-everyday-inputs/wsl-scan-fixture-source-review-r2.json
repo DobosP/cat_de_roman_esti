@@ -1,0 +1,36 @@
+{
+  "schema": "v1-6-wsl-scan-fixture-independent-source-review-r2",
+  "checked_at_utc": "2026-10-07T08:39:31Z",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "ACCEPT",
+  "scope": "SOURCE_ONLY_SYNTHETIC_PARITY_AND_ONE_ACTUAL_SCAN",
+  "source_accepted": true,
+  "valid_until": "Exact bound fixture/scanner bytes or scope changes; preserve this review and obtain a new exact review.",
+  "bindings": {
+    "methods/check_scan_parity_wsl_r2.py.txt": "25aa2d2dd1f6e860739bce975c525d154aae81edf06898564b38d3e80bebe6a0",
+    "methods/run_worktree_lane_wsl_r2.py.txt": "7d429f4c200525ba34f2c731ca19cf3771ef076eb70b09fc2f1ee7020284ae90",
+    "methods/run_worktree_lane_wsl_r3.py.txt": "09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d"
+  },
+  "findings": [],
+  "accepted_source_properties": [
+    "Identical old/new synthetic20-to35-byte parity, hardlink/file-symlink treatment, directory/dangling-link exclusion, absent-root, signal/error and method-hash assertions remain.",
+    "Only the accepted R3 scanner observes the actual task tree. The old full-tree call and old/new actual-count assertion are removed.",
+    "Report explicitly says actual_old_tree_scan_completed=false and scopes evidence as synthetic old/new parity plus one fresh actual R3 scan.",
+    "No old actual scan completion, actual old/new parity or Windows-helper qualification is inferred.",
+    "sys.dont_write_bytecode=True precedes method imports; writes are confined to fresh owned fixture scratch and no application/native command is launched."
+  ],
+  "execution_preconditions": [
+    "Fresh measured admission and an external30second invocation bound with normal successful report publication/exit.",
+    "Bind exact source hashes and use a fresh owned fixture directory; preserve the incomplete R1 full-scanner fixture instead of relabelling it.",
+    "Inspect actual synthetic assertions, candidate scan timing/count, post-source hashes, report and exit.",
+    "Separate current runtime/readset freeze and whole-native-campaign accounting remain necessary; this fixture is not release qualification."
+  ],
+  "execution": {
+    "application": 0,
+    "native": 0,
+    "fixture": 0,
+    "method_imports": 0,
+    "review_receipts_written": 1
+  },
+  "limitations": "No fixture was run. Prior R3 single-scan/Windows enumeration observations are parent-supplied evidence and not independently executed or adopted as an old actual scan pass by this review."
+}

@@ -1,0 +1,221 @@
+{
+  "actual_failure": {
+    "child_elapsed_seconds": 25.481434501998592,
+    "exit_code": 1,
+    "failure": {
+      "message": "fixture work budget exhausted",
+      "type": "TimeoutError"
+    },
+    "fallback_cleanup_needed": true,
+    "intended_active_child_grandchild_marker_created": false,
+    "intended_step1_launched": false,
+    "native_Go_or_application_executions": 0,
+    "nonce": "3245862cd0154bf9a3558d99e0d8b2f0",
+    "observations": {},
+    "parent_elapsed_seconds": 25.9494568,
+    "prefix_completed": false,
+    "total_budget_seconds": 30,
+    "work_budget_seconds": 24,
+    "work_finished_elapsed_seconds": null
+  },
+  "all_prior_failures_preserved": true,
+  "bindings": {
+    "methods/check_runner_signal_wsl_actual_r13.py.txt": "234178e492b53001ff78bd5dd8eeb7fe4723b71f4d396ac94d5c9b263ea05f8e",
+    "methods/run_worktree_lane_wsl_r12.py.txt": "77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0",
+    "r4-r2-signal-427bc04759212a7c-result.json": "af8b98baaf49189e36646881934e6558916f078e6e40b8a78055d39f9b6a436c",
+    "r4-r2-signal-427bc04759212a7c-step-0-result.json": "51e2a9a7439bef711cbf5fe24ffd157791a140fbff41c93e75521920db64e923",
+    "v1-6-wsl-native-r1-result.json": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "wsl-descriptor-copy-pure-r2-result.json": "8acce1cf481f8893d556de44f58597c51ef0385323986eff494370a80ef54300",
+    "wsl-descriptor-copy-pure-r3-result.json": "813f0984ee6b200adbfbf0bce1b66cd6e205283469667a1d715107b411bfc334",
+    "wsl-r12-actual-active-parent.json": "de75c6f3ae77aa3e5c4cda5d0243b9481b49cdb62f932c01ab7a1362909c4ad8",
+    "wsl-r12-actual-active-r13-failure-result.json": "786f4cd1fa0c7e018e633679ca009c1485dbfc61ac6ac2addcac34d3ff2df7f0",
+    "wsl-r12-actual-active-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-r12-actual-active-stdout.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-runtime-mirror-r2-failure-result.json": "4d9f4e3aa847f529a0555e07eb48a4d61f1c6905e7a0b6bec47c0a209a0dad9a",
+    "wsl-runtime-mirror-r6-result.json": "efa8509d719fc2507248873a76c6059907a78f6839a96409769119befe0f1238"
+  },
+  "bounded_next_design": "A new active-only fixture may put owned child/grandchild at step0 and forbidden successor atstep1 while keeping real R12 guards, exact namespaces/mirror/mode,24/30 caps and cumulative baseline. Separate real queued prefix fixture must remain mandatory for serial-prefix coverage; no identical retry or failure reclassification.",
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "durable_runner_outcome": {
+    "deadline_utc": "2026-10-07T14:15:53.804993+00:00",
+    "fresh_campaign_start_size": 1210827983,
+    "lane": "r4-r2-signal-427bc04759212a7c",
+    "next_index": 1,
+    "original_start_size": 752431588,
+    "peak_group_RSS_bytes": 8929280,
+    "peak_sampled_incremental_bytes": 458448820,
+    "pending": null,
+    "pre_post_checks_all_true": true,
+    "publication_including_increment_upper_bound": 525557684,
+    "status": "failed",
+    "step0_child_exit_code": 0,
+    "step0_cleanup": null,
+    "step0_guard": "catchable-signal-finalization",
+    "step0_receipt_sha256_matches_state": true,
+    "step0_received_signal": 15,
+    "step0_status": "failed"
+  },
+  "fixture_pass": false,
+  "helper_registry": {
+    "new_six_bound_terminal_receipts": [
+      {
+        "confirmed_worker_launcher_exit_empty_closed_job": true,
+        "elapsed_seconds": 1.0470000000022992,
+        "launcher": {
+          "creation_time_100ns": 134358549778003397,
+          "pid": 49860
+        },
+        "nonce": "0f492f7944af4a39be5091025ad233e6",
+        "parent": {
+          "creation_time_100ns": 134358549775377917,
+          "pid": 46020
+        },
+        "sha256": "777b9e04eb5b547cb7971fc5c7b73f92e2c1c976e7182b484d8398ec4bb3b899",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358549778547423,
+          "pid": 14844
+        }
+      },
+      {
+        "confirmed_worker_launcher_exit_empty_closed_job": true,
+        "elapsed_seconds": 0.9529999999977008,
+        "launcher": {
+          "creation_time_100ns": 134358549565854606,
+          "pid": 46924
+        },
+        "nonce": "154330d0309b475daf6b406bb0400a56",
+        "parent": {
+          "creation_time_100ns": 134358549562733944,
+          "pid": 39988
+        },
+        "sha256": "61b8f00117874b23afd4198577d5d7264a2e936aa77339e0417a7e293a1d95a1",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358549566402455,
+          "pid": 34132
+        }
+      },
+      {
+        "confirmed_worker_launcher_exit_empty_closed_job": true,
+        "elapsed_seconds": 0.9850000000005821,
+        "launcher": {
+          "creation_time_100ns": 134358549742205793,
+          "pid": 47116
+        },
+        "nonce": "2a6a22a356514e07ae074cca36ee87ec",
+        "parent": {
+          "creation_time_100ns": 134358549739838058,
+          "pid": 6148
+        },
+        "sha256": "430f6749309840c5b9fc0e2fff9b552ca8766d5a3262a722cde17b0a83725e87",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358549742702622,
+          "pid": 28296
+        }
+      },
+      {
+        "confirmed_worker_launcher_exit_empty_closed_job": true,
+        "elapsed_seconds": 0.8600000000005821,
+        "launcher": {
+          "creation_time_100ns": 134358549710087960,
+          "pid": 24320
+        },
+        "nonce": "2bdbf2f29f294fb69a9be5f18c45b80b",
+        "parent": {
+          "creation_time_100ns": 134358549707729509,
+          "pid": 38276
+        },
+        "sha256": "a89c7dcd625a132f19b452807d1abd6fc0e226a9b57fdf82550daab92f047293",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358549710554720,
+          "pid": 54344
+        }
+      },
+      {
+        "confirmed_worker_launcher_exit_empty_closed_job": true,
+        "elapsed_seconds": 0.9220000000022992,
+        "launcher": {
+          "creation_time_100ns": 134358549620429458,
+          "pid": 53672
+        },
+        "nonce": "e5ef216ea74a4255a18ee571749f80f3",
+        "parent": {
+          "creation_time_100ns": 134358549617644493,
+          "pid": 42972
+        },
+        "sha256": "a86b12cb47d2a115f555bd8276ea0750bd6428a5595b6b922c08cf810d06e277",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358549620968121,
+          "pid": 13784
+        }
+      },
+      {
+        "confirmed_worker_launcher_exit_empty_closed_job": true,
+        "elapsed_seconds": 0.9529999999977008,
+        "launcher": {
+          "creation_time_100ns": 134358549653426051,
+          "pid": 40840
+        },
+        "nonce": "e69ca62020e349f69cea357fc3a4a480",
+        "parent": {
+          "creation_time_100ns": 134358549650823747,
+          "pid": 47544
+        },
+        "sha256": "0f410ae120ef24f9bc78039a56904fb129d968a84655b94c9bc9865b83c39683",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358549653952139,
+          "pid": 23128
+        }
+      }
+    ],
+    "original_R2_failed_pending_history_preserved": true,
+    "pending_or_unknown_or_orphan_or_unconfirmed_entries": [],
+    "retained_sidecars": 291,
+    "terminal_receipts": 291
+  },
+  "interpretation": "Six fresh helper calls each completed in .860-1.047s, but those durations do not isolate total scanner/readset/publication overhead. This failed active serial two-command setup did not reach intended monitoring state within24s. Do not count a successful prefix or active child/grandchild cleanup case.",
+  "native_pass": false,
+  "original_failed_clock_renewed": false,
+  "original_retained_bindings": {
+    "probe/r4-r2-signal-427bc04759212a7c-r4-r2-state.json": "14ee831422ad34d9de42cc3e1f7ae2d99e954d7c3ab753f6bb8b321bd70886ae",
+    "probe/windows-size-helper-r2/27a9d5d9e8c54627aefa0c353dcc5dcb.json": "131afdd601012e58f3395b7be3f429e79453f20d9dfa6ea1b2a6a0676fe04e2b",
+    "probe/wsl-r12-actual-active-3245862cd0154bf9a3558d99e0d8b2f0/admission.json": "0e10bd9beadaab9e39519c1894a914318e6f16c96123a6cd26ab35f58b26a532",
+    "probe/wsl-r12-actual-active-3245862cd0154bf9a3558d99e0d8b2f0/check-result.json": "786f4cd1fa0c7e018e633679ca009c1485dbfc61ac6ac2addcac34d3ff2df7f0",
+    "probe/wsl-r12-actual-active-3245862cd0154bf9a3558d99e0d8b2f0/child.py": "b20b2eaab3ffce80d33e049c777c0d18607aa98ac34e07332af1b6c1157ced4f",
+    "probe/wsl-r12-actual-active-3245862cd0154bf9a3558d99e0d8b2f0/immutable-input.txt": "75b0abc8e8a29d42c03468290804ba32e9e525181e5d54551488e7d29c769cad"
+  },
+  "ownership_closure_observation": {
+    "Windows_parent_PID14316_absent": true,
+    "linux_readonly_process_audit_at_utc": "2026-10-07T14:01:18.210725+00:00",
+    "matching_live_runner_fixture_owned_child_processes": [],
+    "no_reviewer_signals_sent": true,
+    "scope": "Fresh absence observations plus terminal empty-job/exit proofs; no claim of intended active group-cleanup coverage because its child/grandchild never launched.",
+    "six_helper_parent_launcher_worker_original_PIDs_all_absent": true
+  },
+  "prerequisite_pins": {
+    "Python_version": "3.14.4",
+    "closed_qualified_mirror_receipt_unchanged": true,
+    "fresh_materialized_fixture_and_runner_hashes_exact": true,
+    "immediate_parent_Python_pre_post": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+    "manifest_unchanged_five_bindings_fresh_exact": true,
+    "ordinary_nonoptimized_B": true
+  },
+  "raw_capture": {
+    "capture_note": "Parent capture expected result.json although active mode writes check-result.json. Recovered exact existing terminal evidence is retained separately; raw capture and parent were preserved.",
+    "parent_unchanged": true,
+    "stderr_empty": true,
+    "stdout_empty": true,
+    "terminal_original_matches_recovered_D_bytes": true,
+    "terminal_original_path": "S/probe/wsl-r12-actual-active-3245862cd0154bf9a3558d99e0d8b2f0/check-result.json"
+  },
+  "reviewed_at_utc": "2026-10-07T14:03:19.835897+00:00",
+  "reviewer": "/root/continuation_audit, independent evidence reviewer",
+  "schema": "v1-6-r12-actual-active-r13-failure-evidence-review-r1",
+  "valid_until": "Historical failed attempt; never grants actual fixture or native qualification. New materially different source requires independent review.",
+  "verdict": "ACCEPT_FAILURE_PRESERVATION_ONLY"
+}

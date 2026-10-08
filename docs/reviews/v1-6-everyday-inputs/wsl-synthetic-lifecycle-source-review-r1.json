@@ -1,0 +1,42 @@
+{
+  "schema": "v1-6-wsl-synthetic-lifecycle-independent-source-review-r1",
+  "checked_at_utc": "2026-10-07T08:39:31Z",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "REQUEST_CHANGES",
+  "scope": "SOURCE_ONLY",
+  "source_accepted": false,
+  "valid_until": "Bound harness/runner bytes or controlled-root scope changes; preserve this receipt and obtain a new exact review.",
+  "bindings": {
+    "methods/check_runner_signal_wsl_synthetic_r1.py.txt": "639a2125b58e386b3b22e3d092495cd4d97158a4b195b7ce4dfc5c398b667579",
+    "methods/run_worktree_lane_wsl_r3.py.txt": "09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d"
+  },
+  "findings": [
+    {
+      "id": "SYNTHETIC-R1-F1",
+      "priority": 2,
+      "title": "Disable bytecode output before importing the actual bound method",
+      "file": "methods/check_runner_signal_wsl_synthetic_r1.py.txt",
+      "source_lines": "23-28,39-50,130-139,240-257,273-274",
+      "evidence": "The harness load_bound_runner and both generated wrappers use SourceFileLoader to import the actual method path. Neither sets sys.dont_write_bytecode before import; wrapper Popen calls inherit the caller environment. The manifest PYTHONDONTWRITEBYTECODE setting applies only later to commands launched by the runner.",
+      "failure_trace": "With normal Python bytecode caching enabled, imports can create __pycache__ beside the actual task method, outside the controlled synthetic roots and their size accounting. This violates the fixture's declared write containment even though source bytes remain unchanged.",
+      "required_change": "Set sys.dont_write_bytecode=True in the harness and both generated wrappers before any bound-method import, or explicitly enforce an equivalent environment/-B requirement for all of those processes."
+    }
+  ],
+  "accepted_design_properties": [
+    "The controlled synthetic-root design itself is valid for Python-only lifecycle logic, with separate actual-root accounting evidence retained.",
+    "Both wrappers bind the exact accepted R3 source hash, import that source with SourceFileLoader and override only R/S/D before main.",
+    "Manifest runner_sha256 binds original SOURCE rather than wrapper bytes, while pre/post readsets protect both source and wrappers.",
+    "Production signal handlers, fixed resource predicates/caps, prefix/ownership checks and deliberate finalization digest fault injection remain.",
+    "Scope labels distinguish synthetic-root lifecycle/finalization from full-root execution."
+  ],
+  "fixture_execution_approved": false,
+  "native_campaign_execution_approved": false,
+  "execution": {
+    "application": 0,
+    "native": 0,
+    "fixture": 0,
+    "method_imports": 0,
+    "review_receipts_written": 1
+  },
+  "preserved_failures": "Prior full-root lifecycle timeout and incomplete full old/new scanner fixture remain failed/incomplete; no clock, cap or success history is reset."
+}

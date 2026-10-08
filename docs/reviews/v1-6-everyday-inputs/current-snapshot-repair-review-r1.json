@@ -1,0 +1,326 @@
+{
+ "checked_at_utc": "2026-10-07T03:56:14.558323+00:00",
+ "decision": {
+  "blocking_findings": [],
+  "changes_required": [],
+  "corrected_tests_passed": false,
+  "full_history_runtime_authority_release_or_assembled_approval": false,
+  "selector_implementation_reviewed": false,
+  "source_review_only": true,
+  "verdict": "accept_exact_current_snapshot_optional_alias_fix_and_offline_host_profile_for_full489_rerun"
+ },
+ "exact_current_snapshot_change": {
+  "after_sha256": "3bbe432de9edd0a45b9d2c55c22a256ae58c63a2a554b7737a19c1e7674dbfbe",
+  "all6artifact_pins_rehashed": {
+   "cat_de_roman_esti/fixtures/board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+   "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+   "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+   "cat_de_roman_esti/fixtures/quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+   "tests/fixtures/cat_mobile_app_pack_contract.json": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae"
+  },
+  "all_other_current_fields_and_code_unchanged": true,
+  "before_archive_sha256": "b2e241355b79a4f4a802fee3e241a7b90dd3195fd826144968b28edae7171c4f",
+  "before_sha256": "6fe13e78616826b4e5ccc8f66b6d4f43dd7d82c048b944a4a2e07a7f1238d509",
+  "exact8byte_substitutions_reconstruct_after_file": true,
+  "fixed_literal_expectations_remain_static": true,
+  "only5artifact_pins_changed": true,
+  "semantic_changed_paths": [
+   {
+    "after": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+    "before": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+    "path": [
+     "artifact_sha256",
+     "cat_de_roman_esti/fixtures/board_rankings_v37.json"
+    ]
+   },
+   {
+    "after": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+    "before": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+    "path": [
+     "artifact_sha256",
+     "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
+    ]
+   },
+   {
+    "after": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+    "before": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "path": [
+     "artifact_sha256",
+     "cat_de_roman_esti/fixtures/kg_sample.json"
+    ]
+   },
+   {
+    "after": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+    "before": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+    "path": [
+     "artifact_sha256",
+     "cat_de_roman_esti/fixtures/quick_games_v92.json"
+    ]
+   },
+   {
+    "after": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae",
+    "before": "2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8",
+    "path": [
+     "artifact_sha256",
+     "tests/fixtures/cat_mobile_app_pack_contract.json"
+    ]
+   },
+   {
+    "after": "fixture-v1-6-everyday-inputs",
+    "before": "fixture-v1-4-time-links",
+    "path": [
+     "build_version"
+    ]
+   },
+   {
+    "after": 8679,
+    "before": 8677,
+    "path": [
+     "kg_counts",
+     "aliases"
+    ]
+   },
+   {
+    "after": "7410c200f06f24a23581a78c8804a685013c1aaffa878a6a46388bb8369f44de",
+    "before": "cbd1592e1103e0b0fb7d6945ae4440b50280fa29ae88c91e40a7dab864bd695d",
+    "path": [
+     "payload_sha256",
+     "fixture_content"
+    ]
+   }
+  ],
+  "unchanged_pack_hash": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+ },
+ "execution": {
+  "code_fixture_runtime_environment_writes": 0,
+  "commits": 0,
+  "process_max_RSS_bytes": 142778368,
+  "pytest_Go_native_commands_or_appimports": 0,
+  "sole_written_file": "docs/reviews/v1-6-everyday-inputs/current-snapshot-repair-review-r1.json",
+  "source_hash_JSON_AST_XML_comparisons_only": true,
+  "subagents": 0
+ },
+ "failed_run_and_host_profile": {
+  "R1_status": "FAIL preserved. Complete collection+execution finished,not a partial or silently skipped run. No prior failure is relabeled passing.",
+  "actual_JUnit_total": 489,
+  "actual_failed": 17,
+  "actual_passed": 472,
+  "actual_skipped": 0,
+  "causes_supported": "15current-snapshot mismatches;oneoptionalaliasesKeyError;oneHTTP400 with unchanged api_win explicitlyusinglocalhost while the recorded offline profile admits onlytestserver/example.com.",
+  "exact_failed_case_set_matches_triage": true,
+  "host_judgment": "Source/config evidence supports this explicit offline-host addition. No wildcard,productionpolicy edit or weakenedHTTPstatus assertion is required;actualAPI success remains pending rerun.",
+  "offline_next_profile": "CAT_ALLOWED_HOSTS=testserver,example.com,localhost only for separately admitted validation.",
+  "production_settings_code_unchanged": true
+ },
+ "historical_preservation": {
+  "all_original19testmodule_hashes_equal_previous_review": true,
+  "newtest_only_one_accessor_assertion_expression_changed": true,
+  "no_skips_deselections_or_case_removal": true,
+  "old500assertions_not_edited_by_this_repair": true,
+  "old_historical_literals_contexts_receipts_and_archives_unchanged": true
+ },
+ "independent_source6_proof": {
+  "KG_build_version": "fixture-v1-6-everyday-inputs",
+  "actual_source8": {
+   "alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+   "alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+   "board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+   "derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+   "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+   "quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+   "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "canonical_method": "Pure data.py-equivalent record-id sorting of allkg_nodes/kg_edges/kg_puzzles,UTF8 sorted-key compactJSON,SHA256,then sha256: prefix;no application import. CURRENT_CONTENT stores the64hex suffix as its existing contract requires.",
+  "captured_manifest_case923_agrees": true,
+  "complete_native_bundle_delta_fields": 31,
+  "complete_native_bundle_delta_recomputed": true,
+  "distinction": "Mobile public projection excludes private alias content;its9b8e3040digest remains fixed while the fullfixture/API manifest hash changes to7410c200.",
+  "full_fixture_content_hash": "sha256:7410c200f06f24a23581a78c8804a685013c1aaffa878a6a46388bb8369f44de",
+  "mobile_build_version": "fixture-v1-6-everyday-inputs",
+  "mobile_content_hash_unchanged": "sha256:9b8e304038ae5750d15eb804145dae4428f8fb8289d15873660669865234a0b3",
+  "native_bundle_bytes": 7272424,
+  "native_bundle_digest_file_sha256": "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d",
+  "native_bundle_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+  "native_edges_packitems_boards_exact_old_Source5": true
+ },
+ "metadata_calculator_failure": {
+  "chronology_limit": "Pre-write failure chronology is retained from the bound preparation receipt;this source review did not execute that failed calculation.",
+  "preserved_as_recorded": "First metadata calculation assertion stopped before code writes: it omitted record-id sorting and sha256: manifest prefix. Exact data.py canonical algorithm independently recomputed7410c200 and matched already independently accepted manifest value before edits. No wrongpin was written.",
+  "review_basis": "This acceptance uses independent canonical recomputation matching already accepted7410c200manifest,exact before/after archives and only8final substitutions. No incorrectpin appears in the resulting delta. The initial failed calculation is not reclassified as successful."
+ },
+ "optional_alias_test_fix": {
+  "actual_nodes": 2419,
+  "after_sha256": "d504dedcc815f20b6b8e8b45a7a893fb2a6afd1b29ec21eed923d19737596a39",
+  "aliases_total": 8679,
+  "all_other_new_test_bytes_identical": true,
+  "assertion_count_unchanged": 34,
+  "before_archive_sha256": "60d98b8c0cdd5ecb2bcaf2dd7626c434fcdfab48fe47a228d3035e8f5faba1e3",
+  "before_sha256": "d481ecb5e7e040092a659ac1fdea6fb2a7c71bd0233bdaeaf50585971db39764",
+  "expected8679_retained": true,
+  "judgment": "The50legitimate no-alias nodes contribute0;allstored aliases still count. Default applies only to missing key,so malformed present values are not broadly swallowed. Complete source hash and exact two-form delta assertions remain intact.",
+  "nodes_without_optional_alias_field": 50,
+  "only_change": "len(n[\"aliases\"]) becomes len(n.get(\"aliases\", [])) in the new V1.6 aggregate assertion.",
+  "testnames_and_parametrizations_retained": true
+ },
+ "preserved_expected_content": {
+  "KG_counts": {
+   "aliases": 8679,
+   "edges": 9473,
+   "nodes": 2419,
+   "puzzles": 180
+  },
+  "derived_counts": {
+   "by_game": {
+    "intrusul": 183,
+    "perechi": 153
+   },
+   "sources_by_game": {
+    "intrusul": 66,
+    "perechi": 51
+   },
+   "starter_by_game": {
+    "intrusul": 24,
+    "perechi": 26
+   },
+   "total": 336
+  },
+  "every_other_payload_counter_feedback_opener_projection_expectation_byte_unchanged": true,
+  "game_inventory": {
+   "alchimie": [
+    83,
+    80,
+    3
+   ],
+   "conexiuni": [
+    245,
+    245,
+    0
+   ],
+   "contexto": [
+    265,
+    263,
+    2
+   ],
+   "lant": [
+    123,
+    121,
+    2
+   ]
+  },
+  "limit": "Current behavioral-profile/opener values were not recomputed by executing engines here. They retain prior independent evidence and must be re-exercised by the full489rerun;none was loosened to bypass failures.",
+  "mobile_counts": {
+   "edges": 9473,
+   "nodes": 2419,
+   "puzzles": 180
+  },
+  "pack_counts": {
+   "alchimie": 83,
+   "conexiuni": 245,
+   "contexto": 265,
+   "lant": 123
+  },
+  "pack_high_water": {
+   "alchimie": 107,
+   "conexiuni": 374,
+   "contexto": 377,
+   "lant": 246
+  },
+  "pack_status_counts": {
+   "approved": 709,
+   "pending": 7
+  },
+  "quick_counts": {
+   "authored_by_game": {
+    "intrusul": 45,
+    "perechi": 40
+   },
+   "by_game": {
+    "intrusul": 228,
+    "perechi": 193
+   },
+   "starter_by_game": {
+    "intrusul": 62,
+    "perechi": 61
+   },
+   "total": 421
+  },
+  "quick_selectable_counts": {
+   "by_game": {
+    "intrusul": 226,
+    "perechi": 192
+   },
+   "preferred_by_game": {
+    "intrusul": 188,
+    "perechi": 153
+   },
+   "total": 418
+  },
+  "ranking_counts": {
+   "approved": 709,
+   "by_game": {
+    "alchimie": 83,
+    "conexiuni": 245,
+    "contexto": 265,
+    "lant": 123
+   },
+   "eligible_by_game": {
+    "alchimie": 68,
+    "conexiuni": 83,
+    "contexto": 255,
+    "lant": 121
+   },
+   "pilot_eligible": 527,
+   "total": 716
+  },
+  "recomputed_unchanged_payload_hashes": {
+   "frozen_derived_boards": "993e4e04834d2ab446ec28dd593177e071b11b881e49f941f677e0eaf66d01d4",
+   "kg_edges": "da70ba04ab4f8863775e97eb179bca549d60fe16e9b8d9eee7ff29f6b96492c7",
+   "kg_nodes_without_aliases": "50845eaeb21fc29d968914cbf23d71465c8d6894f867281dcc5481031f97a87c",
+   "kg_puzzles": "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc",
+   "ranking_rows": "4c86e3531b6199b87d2672db01d44123cd6d11fe56e0a33e78eaec8f3f3201e0"
+  }
+ },
+ "purpose_and_policy": {
+  "authority": "ADR-0116 explicitly makes CURRENT_CONTENT a manually authored immutable expectation for current artifacts,payload hashes and inventories;historical wave/review/preapply/dossier/ledger/reconstruction pins remain with their owning tests.",
+  "finding": "The15failures compare actual current fixtures/build/version/mobile metadata against CURRENT_CONTENT references. Updating these8literals after independent artifact checks follows their existing assertion meaning. No expected value is computed from fixtures at test runtime;the dataclass and frozen mappings remain unchanged."
+ },
+ "readset_sha256": {
+  "cat_de_roman_esti/data.py": "dfd183e5a653d64d75ac8f509a2c4b70d33bc76b9cf9c005b2280ce470bb74dc",
+  "cat_de_roman_esti/web/settings.py": "dfab2b84e60bd6245ecdb5571580d753b786bd849e02fb564e34104433684e36",
+  "docs/adr/0116-share-current-content-test-expectations.md": "6f072434351764e4cef238e8f44e0251064c70e99806c69e562d3fc6d1062ce6",
+  "docs/agent-testing.md": "8bf486174b59ecb3e987c53201329f061a6369fa61941006cea0f3830be74b34",
+  "docs/reviews/v1-6-everyday-inputs/current-snapshot-repair-proposal-r1.json": "c420c2be54e71547e51f69e28d744fcb9c1b84a3a92e5175e4dba6285ec9df74",
+  "docs/reviews/v1-6-everyday-inputs/history-r1-failure-triage.json": "7772199e364f85120f404dc92f19012d6cd0bb387c923ebe751519741b10514c",
+  "docs/reviews/v1-6-everyday-inputs/methods/current_content.py.before-current-snapshot-fix.gz": "b2e241355b79a4f4a802fee3e241a7b90dd3195fd826144968b28edae7171c4f",
+  "docs/reviews/v1-6-everyday-inputs/methods/test_v1_6_content_history.py.before-current-snapshot-fix.gz": "60d98b8c0cdd5ecb2bcaf2dd7626c434fcdfab48fe47a228d3035e8f5faba1e3",
+  "docs/reviews/v1-6-everyday-inputs/reference/bundle-delta-r1.json": "b0c2f21a0f1a9d861f54b8a5f1cfeb520ece451af78bd166327c8eea3371ce6c",
+  "docs/reviews/v1-6-everyday-inputs/reference/current-http-corpus-r1.json.gz": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+  "docs/reviews/v1-6-everyday-inputs/reference/historical-source5-context.tar.gz": "ffffa21ccf11f79d817c529123f2583824c62fefaabd17a5887e7ce809507e48",
+  "docs/reviews/v1-6-everyday-inputs/reference/history-r1-results.xml.gz": "c324a15a7cc14df9e7601f899b3207b9389c4ec7951bfbb4c89d2992757da836",
+  "docs/reviews/v1-6-everyday-inputs/source6-capture-and-current-input-review-r1.json": "da15a5c5a0e34ca4ec8cc79d7aca2334ddbaee6d37fd5021361c59d5cde60df6",
+  "docs/reviews/v1-6-everyday-inputs/source6-current-snapshot-selector-preparation-admission-r1.json": "192af7a7b79696f8fbd37798aeb400ff3fdbd54edfbd21fe37f45c7967151f1c",
+  "docs/reviews/v1-6-everyday-inputs/source6-history-code-review-r1.json": "f3f4076d34e1b2f27a4454f70e14ac2c7408dd7a3fd4ab19123017c49ddbc304",
+  "docs/reviews/v1-6-everyday-inputs/source6-history-gates-r1-admission.json": "220dac3207e4e52fe7c884c5ea8afe2a1698be1e02e41a30253f205f68c8b451",
+  "docs/reviews/v1-6-everyday-inputs/source6-history-gates-r1-result.json": "427ac4873591a0adb92f2ac7be9972938316767b8d185abf5e971ab90b3332a4",
+  "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+  "go-backend/internal/content/digest.go": "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d",
+  "tests/current_content.py": "3bbe432de9edd0a45b9d2c55c22a256ae58c63a2a554b7737a19c1e7674dbfbe",
+  "tests/test_v1_6_content_history.py": "d504dedcc815f20b6b8e8b45a7a893fb2a6afd1b29ec21eed923d19737596a39",
+  "tests/test_v1_content_history.py": "5a76788a5a3791177f17355326e534db97c6fda9be5f47e737aa8e17c9e1acdc",
+  "tests/test_v1_recipe_refresh.py": "50e48d41d1e6f3f965beafe0b2fa29148ced8e32ebee5c188be2aac487868bd2",
+  "tests/test_v50_synonyms_basic_words.py": "14f2e52e154e2e383ebf266b5369f9543381473688077e3960df42689a89fc3e",
+  "tests/test_v54_people_morphology.py": "22f205a9a52938b700291229746c0fc3d943e562ca90b41f3ddaffcad3563113",
+  "tests/test_v72_romanian_dishes_and_pastries_morphology.py": "c842eaf5d5a18afa6158d6c122b38266c4d9d0f98d833d1b3bd2c4d5214afb87"
+ },
+ "required_next": [
+  "Rerun the complete20module489case selection,including everyoriginal17failure,under a fresh measured admission with explicit offline localhost profile. No deselection,xfail/skip or reduced count.",
+  "Run appropriate source lint/checks after the exact changes and preserve new receipts alongside R1failure.",
+  "Review and qualify HTTP Source8 selector separately after its author finishes;this receipt grants no selectorcode approval.",
+  "Keep currentauthority/fullrelease/native/shared/reference/history/assembled gates separate;test repair readiness does not mean those gates passed."
+ ],
+ "reviewer": "/root/v16_raw_quality",
+ "schema": "v1-6-independent-current-snapshot-repair-review-r1",
+ "valid_until": "Any bound repair source,artifact,archive or scope changes;renew affected review. Full489execution and its original failure cases remain pending."
+}

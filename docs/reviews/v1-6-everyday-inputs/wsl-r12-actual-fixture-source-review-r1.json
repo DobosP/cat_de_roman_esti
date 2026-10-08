@@ -1,0 +1,32 @@
+{
+  "bytes": 24790,
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "execution_authorized": false,
+  "finding": {
+    "id": "F1",
+    "issue": "24-second work deadline limits waits/polling, but receipt/readset/mode validations after child exit are not checked against24s. All modes can finish that work after24 and report passed when total<=30. Finalization/queued also clamp expired remaining work timeout to0.1s rather than explicitly refusing.",
+    "lines": "144-148,190-196,305-318,387-402",
+    "priority": 1,
+    "required_fix": "Preserve this unexecuted variant; append a narrow source capturing/checking work_finished_elapsed_seconds<=24 after all assertions and before report publication in each mode. Keep30s total and cleanup/report allowance unchanged, with positive remaining work checked for launches/waits. Do not treat wait timeout alone as final work-duration proof."
+  },
+  "lines": 425,
+  "native_pass": false,
+  "old_failures_preserved": true,
+  "original_failed_clock_renewed": false,
+  "otherwise_accepted_source_scope": [
+    "Exact unredirected regular single-link R12 runner77f94dce..., owned four-byte off modeb470b84c..., closed copy receipt efa8509d... and direct new mirror43a6894f... bound. Independent complete-copy evidence ec334436... already accepts metadata preparation only.",
+    "Fresh namespace109/161 and historical752431588 baseline/wholeX/both volumes unchanged; actual production runner imported/executed with correct handlers and protected wrapper/source/mode/copy proof readsets.",
+    "Active serial first pass+secondpending signal checks preserved; owned group identities/startticks checked before fallback group signalling, never arbitrary groups.",
+    "Finalization injects SIGINT at exact production log digest; queued injects SIGTERM at postcommit unmask and requires completed prefix preserved plus next child never launched.",
+    "Python-B/opt0 prevents bytecode/disabled assertions; only bounded Python fixture children, no application/Go commands."
+  ],
+  "reviewed_at_utc": "2026-10-07T13:45:36.308775+00:00",
+  "reviewer": "/root/continuation_audit, independent source reviewer",
+  "schema": "v1-6-r12-actual-fixture-source-review-r1",
+  "scope": "Full425-line actual fixture and bound R12/mirror/mode/source dependency semantics; no fixture/helper/Go/native execution.",
+  "source_binding": {
+    "methods/check_runner_signal_wsl_actual_r12.py.txt": "0aa74357d2b19cc39d02f7ea0fcc407d760e4d09c786e621bbdb967625ecd4d3"
+  },
+  "valid_until": "New immutable source with timing proof may be reviewed independently; retain this rejection as history.",
+  "verdict": "REQUEST_CHANGES"
+}

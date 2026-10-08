@@ -1,0 +1,94 @@
+"""Bounded Linux/Windows fresh-size parity; metadata only, no application launch.
+
+CLI: python3 -B fixture.py NEW_OWNED_PROBE_DIRECTORY
+The six static real roots compare exactly. The dynamic probe root permits only
+its newly owned helper metadata delta, bounded by the existing publication reserve.
+"""
+import hashlib, importlib.machinery, importlib.util, json, os, signal, sys, time
+from pathlib import Path
+sys.dont_write_bytecode=True
+R=Path('/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S=Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+D=R/'docs/reviews/v1-6-everyday-inputs'
+PINS={'run_worktree_lane_wsl_r3.py.txt':'09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d',
+      'run_worktree_lane_wsl_r6.py.txt':'855f4fe07fd64347ff4024db12526659ddcde5a42f655e752d2153d8909e7297'}
+def load(name,filename):
+    path=D/'methods'/filename
+    assert hashlib.sha256(path.read_bytes()).hexdigest()==PINS[filename]
+    loader=importlib.machinery.SourceFileLoader(name,str(path))
+    module=importlib.util.module_from_spec(importlib.util.spec_from_loader(name,loader))
+    loader.exec_module(module)
+    return module
+
+def main():
+    started=time.monotonic()
+    directory=Path(sys.argv[1]).resolve()
+    if directory==S/'probe' or not directory.is_relative_to((S/'probe').resolve()):
+        raise ValueError('outside owned probe')
+    directory.mkdir(mode=0o700)
+    report={'schema':'v1-6-wsl-windows-fresh-parity-r1','passed':False,'budget_seconds':60,
+            'application_or_go_executions':0,'bindings':PINS,'checks':{}}
+    try:
+        old=load('linux_reference','run_worktree_lane_wsl_r3.py.txt')
+        new=load('windows_candidate','run_worktree_lane_wsl_r6.py.txt')
+        tree=directory/'tree';tree.mkdir();(tree/'nested').mkdir()
+        (tree/'plain').write_bytes(b'abc');(tree/'.hidden').write_bytes(b'xy')
+        (tree/'nested/deep').write_bytes(b'123456789')
+        os.link(tree/'plain',tree/'hardlink')
+        os.symlink(tree/'plain',tree/'filelink')
+        os.symlink(tree/'nested',tree/'dirlink',target_is_directory=True)
+        os.symlink(tree/'missing',tree/'dangling')
+        assert old.measured_size([tree])==new.measured_size([tree])==20
+        report['checks']['regular_hidden_nested_hardlink_filelink_dirlink_dangling']=True
+        (tree/'plain').write_bytes(b'abcdefgh')
+        assert old.measured_size([tree])==new.measured_size([tree])==35
+        report['checks']['fresh_change_recounted']=True
+        assert old.measured_size([directory/'absent'])==new.measured_size([directory/'absent'])==0
+        report['checks']['missing_root_zero']=True
+        new.received_signal=signal.SIGTERM
+        try:
+            new.measured_size([tree],interruptible=True)
+            raise AssertionError('signal did not refuse')
+        except InterruptedError:report['checks']['catchable_signal_refused']=True
+        finally:new.received_signal=None
+        real_stat=Path.stat
+        def denied(self,*,follow_symlinks=True):
+            if self==tree/'filelink' and follow_symlinks:
+                raise PermissionError('controlled deferred-following-stat refusal')
+            return real_stat(self,follow_symlinks=follow_symlinks)
+        Path.stat=denied
+        try:
+            new.measured_size([tree])
+            raise AssertionError('deferred permission error did not refuse')
+        except PermissionError:report['checks']['deferred_io_failure_closed']=True
+        finally:Path.stat=real_stat
+        roots=new.measurement_roots({'additional_measure_dirs':[str(S/'tools')]})
+        static=[p for p in roots if p!=S/'probe']
+        before=time.monotonic();linux_bytes=old.measured_size(static)
+        linux_seconds=time.monotonic()-before
+        before=time.monotonic();windows_bytes=new.measured_size(static)
+        windows_seconds=time.monotonic()-before
+        assert windows_bytes==linux_bytes
+        report['checks']['all_six_static_real_roots_exact']=True
+        report['static_real_roots']=[str(p) for p in static]
+        report['static_real_roots_bytes']=linux_bytes
+        report['timings']={'linux_static_scan_seconds':linux_seconds,'windows_static_scan_seconds':windows_seconds}
+        probe_before=old.measured_size([S/'probe'])
+        hybrid_probe=new.measured_size([S/'probe'])
+        probe_after=old.measured_size([S/'probe'])
+        assert abs(hybrid_probe-probe_before)<=64<<10
+        assert abs(probe_after-probe_before)<=64<<10
+        assert abs(hybrid_probe-probe_after)<=64<<10
+        report['checks']['actual_probe_self_metadata_difference_bounded64KiB']=True
+        report['probe_bytes']={'linux_before':probe_before,'hybrid':hybrid_probe,'linux_after':probe_after}
+        new.validate_prior_windows_receipts(S/'probe/windows-size-helper-r2')
+        report['checks']['all_prior_helper_cleanup_confirmed']=True
+        assert all(hashlib.sha256((D/'methods'/name).read_bytes()).hexdigest()==sha for name,sha in PINS.items())
+        report['elapsed_seconds']=time.monotonic()-started
+        report['passed']=report['elapsed_seconds']<=60
+    except BaseException as error:
+        report.update(error=type(error).__name__,detail=str(error)[:2048],elapsed_seconds=time.monotonic()-started)
+    (directory/'check-result.json').write_text(json.dumps(report,sort_keys=True,indent=2)+'\n')
+    print(json.dumps(report))
+    return 0 if report['passed'] else 1
+if __name__=='__main__':raise SystemExit(main())

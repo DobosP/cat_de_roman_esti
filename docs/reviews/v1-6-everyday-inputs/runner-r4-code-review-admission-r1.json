@@ -1,0 +1,22 @@
+{
+  "schema": "v1-6-runner-r4-independent-source-review-admission-r1",
+  "started_at_utc": "2026-10-07T06:28:53.511292+00:00",
+  "deadline_utc": "2026-10-07T06:48:53.511292+00:00",
+  "metadata_reserve_seconds": 180,
+  "inclusive_agents_max": 3,
+  "agents": [
+    "/root",
+    "/root/v16_finish_qualification",
+    "/root/v16_native_raw_factual"
+  ],
+  "disk_free_bytes": 231034757120,
+  "memory_available_bytes": 21012447232,
+  "native_execution": false,
+  "methods": {
+    "/home/dobo/work/_temp/codex__content-v1-6/probe/run_worktree_lane_r4.py": "3e914113179052a5b106204387506e22b61f081f711c90d015932e2e6badde59",
+    "/home/dobo/work/_temp/codex__content-v1-6/probe/check_runner_signal_r4.py": "25e2fa82e901db6ff588ef5e811bb06c3dfe5244db8b294a14fdd12526355b64"
+  },
+  "preparation_sha256": "54b0e34ef0d91fa61b9465c59e219eb9f93f6eb2236633434e63a0dff3bb25ce",
+  "partition_plan_sha256": "ced57aa091651b3a3dc372799d14d0fc0daa46a31a36560590aa971caf70e52d",
+  "scope": "Independent review only: signal cleanup, failed/pending state refusal, single immutable cumulative20min deadline and original wholeR+S diskbaseline across one-step invocations, unchanged resourcefloors/RSS/Go settings; bounded owned Python-only fixture method. No execution or source changes. Reviewer owns only runner-r4-code-review-r1.json."
+}

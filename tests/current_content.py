@@ -100,25 +100,25 @@ class CurrentContentSnapshot:
 
 
 CURRENT_CONTENT = CurrentContentSnapshot(
-    build_version='fixture-v1-4-time-links',
+    build_version='fixture-v1-6-everyday-inputs',
     artifact_sha256=_frozen({
         'cat_de_roman_esti/fixtures/kg_sample.json': (
-            '0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6'
+            '63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf'
         ),
         'cat_de_roman_esti/fixtures/games_pack.json': (
             'e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8'
         ),
         'cat_de_roman_esti/fixtures/board_rankings_v37.json': (
-            '58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef'
+            '036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31'
         ),
         'cat_de_roman_esti/fixtures/derived_catalog_v38.json': (
-            '25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01'
+            'fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a'
         ),
         'cat_de_roman_esti/fixtures/quick_games_v92.json': (
-            'a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609'
+            '0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345'
         ),
         'tests/fixtures/cat_mobile_app_pack_contract.json': (
-            '2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8'
+            '282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae'
         ),
     }),
     payload_sha256=_frozen({
@@ -135,12 +135,12 @@ CURRENT_CONTENT = CurrentContentSnapshot(
         ),
         # Public projection and full fixture/API hashes bind distinct contracts.
         'mobile_content': '9b8e304038ae5750d15eb804145dae4428f8fb8289d15873660669865234a0b3',
-        'fixture_content': 'cbd1592e1103e0b0fb7d6945ae4440b50280fa29ae88c91e40a7dab864bd695d',
+        'fixture_content': '7410c200f06f24a23581a78c8804a685013c1aaffa878a6a46388bb8369f44de',
     }),
     kg_counts=_frozen({
         'nodes': 2419,
         'edges': 9473,
-        'aliases': 8677,
+        'aliases': 8679,
         'puzzles': 180,
     }),
     mobile_counts=_frozen({

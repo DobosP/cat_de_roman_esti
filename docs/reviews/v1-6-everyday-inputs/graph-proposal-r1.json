@@ -1,0 +1,152 @@
+{
+  "schema": "v1-6-graph-editorial-proposal-v1",
+  "revision": 1,
+  "author": "/root",
+  "checked_on": "2026-10-07",
+  "valid_until": "Any bound module/proposal/snapshot/source/runtime dependency changes; repeat affected exact reviews.",
+  "baseline_commit": "7806eecdf10f32763218a58a4e1e58b77c9e1a89",
+  "source_module": "scripts/everyday_inputs_v1_6_data.py",
+  "source_module_sha256": "9a932fe50589cd67a0073be2a02a0e8a7dd61c2d5f973b39adb83770abbea8f3",
+  "selected_pool_records": [
+    {
+      "id": "v16-lex-drapel",
+      "revision": 2,
+      "path": "docs/reviews/v1-6-everyday-inputs/selection-snapshots/v16-lex-drapel-r2.json",
+      "sha256": "a989814bbe3eda0b844331f5749d34a90b4fe26584caed730e2e97a82ecbc114"
+    },
+    {
+      "id": "v16-lex-untdelemn",
+      "revision": 2,
+      "path": "docs/reviews/v1-6-everyday-inputs/selection-snapshots/v16-lex-untdelemn-r2.json",
+      "sha256": "26d0e981822c268f70527eb4caff9fe031078f69968a1be6f11b54b4d594b921"
+    }
+  ],
+  "nodes": [],
+  "edges": [],
+  "lexical_families": [
+    {
+      "node_id": "n_v4ist_steag",
+      "headword": "drapel",
+      "forms": [
+        "drapel"
+      ],
+      "sense": "Physical flag/emblem represented by existing Steag; preserve specific Drapelul României owner, and exclude technical/figurative whole-sense claims.",
+      "node_snapshot": {
+        "id": "n_v4ist_steag",
+        "node_type": "concept",
+        "label_ro": "Steag",
+        "category": "istorie",
+        "description": "Simbol al unei țări, armate sau mișcări istorice.",
+        "salience": 0.7944,
+        "difficulty_tier": "easy",
+        "degree": 5,
+        "aliases": [
+          "steagul",
+          "steaguri",
+          "steagurile"
+        ]
+      },
+      "unselected_observed_forms": [
+        "drapele"
+      ],
+      "independent_raw_acceptance": false
+    },
+    {
+      "node_id": "n_v24_food_pantry_ulei",
+      "headword": "untdelemn",
+      "forms": [
+        "untdelemn"
+      ],
+      "sense": "Existing culinary edible vegetable oil only; exclude motor/mineral oil, regional ulei homonym and universal olive-only identification.",
+      "node_snapshot": {
+        "id": "n_v24_food_pantry_ulei",
+        "node_type": "concept",
+        "label_ro": "Ulei",
+        "category": "gastronomie",
+        "description": "Concept cotidian din grupul «ingrediente de bază»: Ulei.",
+        "salience": 0.88,
+        "difficulty_tier": "easy",
+        "degree": 6,
+        "aliases": [
+          "uleiul",
+          "uleiuri",
+          "uleiurile",
+          "uleiului",
+          "uleiurilor"
+        ]
+      },
+      "unselected_observed_forms": [
+        "untdelemnuri"
+      ],
+      "independent_raw_acceptance": false
+    }
+  ],
+  "counting": {
+    "new_shared_concepts": 0,
+    "new_world_concepts": 0,
+    "qualified_synonym_families_proposed": 2,
+    "singular_input_forms_proposed": 2,
+    "new_grammatical_inflections_proposed": 0,
+    "new_links": 0,
+    "new_curated_rounds": 0,
+    "new_target_approvals": 0,
+    "installed_additions": 0
+  },
+  "ordinary_baseline_cases": [
+    {
+      "headword": "drapel",
+      "canonical": "Steag",
+      "curated_id": "ct_istorie_368",
+      "seed": 36,
+      "selector": {
+        "difficulty": "usor",
+        "category": null
+      },
+      "baseline_result": "unknown,0attempts,no suggestions; canonical rank5,distance1,closeness99"
+    },
+    {
+      "headword": "untdelemn",
+      "canonical": "Ulei",
+      "curated_id": "ct_gastronomie_347",
+      "seed": 3,
+      "selector": {
+        "difficulty": "usor",
+        "category": null
+      },
+      "baseline_result": "unknown,0attempts,no suggestions; canonical rank2,distance1,closeness99"
+    }
+  ],
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+    "go-backend/internal/content/bundled.json": "c1fff429992c69926aafb07f5b015f890a82c7c01cc5230107bdaf481bca5993",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "a4ace0908e17611d6aebbbbe1121a26df2c462caaa7baaa9d8981d936df89c0e",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "scripts/basic_words_v33_data.py": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033",
+    "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+    "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+    "docs/reviews/v1-6-everyday-inputs/lexical-primary-b.json": "0416abb045740f5cd31a4446f101942cabb211ccb01e7eab2e70a099eaa1a140",
+    "docs/reviews/v1-6-everyday-inputs/identity-deck-screen-r1.json": "122ba50ba17de0e15e0f955e9c80083225d4803d29c0643039a3315b38af10a8",
+    "docs/reviews/v1-6-everyday-inputs/native-input-baseline-summary-r1.json": "5273a55f5f604cec28bf4469593c2654f1229fc03f0987090235c0cd56dbd4fd",
+    "docs/reviews/v1-6-everyday-inputs/native-input-baseline-transcript-r1.json.gz": "bd83516c742dd85e364728ebda070aa6c3c6a8d9331a5311c0039ed9f7d8cdbd",
+    "docs/reviews/v1-6-everyday-inputs/baseline-readiness-review-r1.json": "f47971f1c5879e03c5540046f85868f4b9dd16e31fd421a10c01dd904280d10d",
+    "docs/reviews/v1-6-everyday-inputs/research-pool-r2-before-selection.json.gz": "f84f4b941ee3d6e905bdb205f965c31c0e2f8a0d3c336a2c60f151d7271873a7"
+  },
+  "installation_rail": "scripts/apply_common_words_v24.py --data-module everyday_inputs_v1_6_data; nonmutating --dry-run and isolated supported materialization require separate measured admission. No direct fixture edits. Installation only after exact accepted factual/quality/prospective evidence.",
+  "acceptance_requirements": [
+    "Independent exact factual review of both headwords, qualified senses, normalized owners, primary evidence/access/license limits.",
+    "Independent quality review, complete prospective all-game/terminal/identity/fuzzy/ordinaryplay/privacy/score/hint/history evidence on exact supported-generator-produced candidate.",
+    "Supported accepted graph transaction, Source6 exact reviewed Source5parent22b7853e, full affected catalogs/reviews/authority/export/reference/history/native checks; no stale judgments.",
+    "Independent exact assembled acceptance and green local landing before a new version."
+  ],
+  "pending": [
+    "Raw factual and raw quality acceptance",
+    "Nonmutating supported preflight",
+    "Actual isolated supported materialization and all-game/terminal/fuzzy/prospective HTTP evidence",
+    "Source6 and installed audits/current authority/full verification/local landing"
+  ],
+  "installation_approval": false
+}

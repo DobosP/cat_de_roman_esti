@@ -1,0 +1,44 @@
+{
+  "schema": "v1-6-wsl-scan-fixture-independent-source-review-r1",
+  "checked_at_utc": "2026-10-07T08:31:23Z",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "ACCEPT",
+  "scope": "SOURCE_ONLY",
+  "source_accepted": true,
+  "valid_until": "Bound fixture/scanner bytes, fixture scope or mount assumptions change; preserve this review and obtain a new exact review.",
+  "bindings": {
+    "methods/check_scan_parity_wsl_r1.py.txt": "8ad33ed3956308b05ba7f92b1f13d092bbbe69d15bf17301448568bed8760ee9",
+    "methods/run_worktree_lane_wsl_r2.py.txt": "7d429f4c200525ba34f2c731ca19cf3771ef076eb70b09fc2f1ee7020284ae90",
+    "methods/run_worktree_lane_wsl_r3.py.txt": "09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d"
+  },
+  "findings": [],
+  "accepted_source_properties": [
+    "Synthetic20-byte expected total is correct: plain3, hardlink3, filelink3, hidden2 and nested9; directory symlink and dangling link add no bytes.",
+    "Changing plain to8bytes updates its hardlink and file-symlink counts, so the fresh expected total35 is correct. Both scanners must recount and agree.",
+    "Absent roots must return0. Received SIGTERM in interruptible scanning must raise InterruptedError; the flag is restored afterward.",
+    "Controlled os.scandir PermissionError must propagate; the monkeypatch is restored in finally.",
+    "Actual mounted-task-tree benchmark compares original and candidate total sizes and reports independent elapsed durations; it does not import or execute the application.",
+    "Exact parent/candidate method bytes are hashed before imports and rehashed after comparison. The fixture writes only its fresh owned scratch directory and disables Python bytecode output."
+  ],
+  "runtime_contract": {
+    "reported_acceptance_seconds": 30,
+    "performance_claim": "Only observed elapsed durations and equal aggregate counts may be claimed after actual execution; no speedup is established by this source review.",
+    "external_bound_required": "Apply an external bounded invocation deadline and inspect nonzero exits/timeouts. The fixture's30second acceptance check occurs after sequential scans, so its source alone is not a hard preemptive wall-clock guarantee.",
+    "report_publication": "Treat successful report publication and normal exit within the external admitted window as necessary evidence; no source-level pass is claimed."
+  },
+  "benchmark_limits": "Rechecking method hashes proves bound scanner-source stability. Equal aggregate task-tree sizes do not prove complete runtime-content immutability; preserve the separate current runtime/readset freeze and quiesce competing writers for the benchmark.",
+  "remaining_execution_preconditions": [
+    "Fresh measured admission and exact fixture/scanner hashes before invocation.",
+    "Fresh directory strictly inside owned S/probe; no reuse of the failed R2 fixture directory/window.",
+    "Run under the actual WSL mount with externally bounded lifetime and inspect synthetic assertions, actual timings, post-source hashes, report and exit.",
+    "Preserve failed R2 active fixture as failed. Scanner parity fixture execution and lifecycle active/finalization evidence remain pending until their actual accepted results."
+  ],
+  "execution": {
+    "application": 0,
+    "native": 0,
+    "fixture": 0,
+    "method_imports": 0,
+    "review_receipts_written": 1
+  },
+  "limitations": "No filesystem/symlink capability, timing, parity outcome, lifecycle result or release qualification is established by this source review."
+}

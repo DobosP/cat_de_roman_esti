@@ -1,0 +1,184 @@
+"""Pure Python regression revision2 of the R7 Windows receipt registry classifier.
+
+CLI: fixture.py NEW_OWNED_DIRECTORY RUNNER_PATH EXACT_RUNNER_SHA256
+Only tiny synthetic files and an inert runner import; no native helper or Go command.
+"""
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+import time
+
+STARTED = time.monotonic()
+sys.dont_write_bytecode = True
+S = Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+MAX_SECONDS = 10
+MAX_FILE = 32 << 10
+UUID = 'a' * 32
+EXPECTED_RUNNER_SHA256 = '20bd802f4263111999cc5471897827b3916d9ba48fc933678cd7851703c29ae2'
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def write(path, value):
+    blob = value if isinstance(value, bytes) else json.dumps(value).encode('utf-8') + b'\n'
+    if len(blob) > MAX_FILE:
+        raise ValueError('synthetic fixture file32KiB')
+    with path.open('xb') as stream:
+        stream.write(blob)
+
+
+def snapshot(folder):
+    values = {}
+    for entry in folder.iterdir():
+        metadata = entry.lstat()
+        value = {'mode': metadata.st_mode, 'size': metadata.st_size}
+        if stat.S_ISREG(metadata.st_mode):
+            value['sha256'] = digest(entry)
+        elif stat.S_ISLNK(metadata.st_mode):
+            value['target'] = os.readlink(entry)
+        values[entry.name] = value
+    return values
+
+
+def main(directory, runner_path, runner_sha):
+    directory = Path(directory).resolve()
+    fixture_base = (S / 'probe/windows-receipt-registry-fixtures').resolve()
+    if directory == fixture_base or not directory.is_relative_to(fixture_base):
+        raise ValueError('new owned fixture directory required')
+    runner_path = Path(runner_path).resolve()
+    if runner_sha != EXPECTED_RUNNER_SHA256 or digest(runner_path) != runner_sha:
+        raise RuntimeError('exact runner source binding required')
+    directory.mkdir(parents=True, exist_ok=False)
+    report = {'schema': 'v1-6-pure-windows-receipt-registry-fixture-r2', 'passed': False,
+              'runner_sha256': runner_sha, 'fixture_sha256': digest(__file__),
+              'native_or_Go_executions': 0, 'synthetic_cleanup_flags_are_not_process_exit_proof': True,
+              'cases': []}
+    output = directory / 'check-result.json'
+    def publish():
+        blob = json.dumps(report, indent=2).encode('utf-8') + b'\n'
+        if len(blob) > 128 << 10:
+            raise ValueError('fixture report128KiB')
+        output.write_bytes(blob)
+    publish()
+    loader = importlib.machinery.SourceFileLoader('pure_registry_fixture_runner', str(runner_path))
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    runner = importlib.util.module_from_spec(spec)
+    loader.exec_module(runner)
+    validator = getattr(runner, 'validate_prior_windows_receipts', None)
+    if not callable(validator):
+        raise RuntimeError('new isolated registry validator unavailable')
+    attempted_native = []
+    def denied(*args, **kwargs):
+        attempted_native.append('native call attempted')
+        raise AssertionError('pure registry fixture forbids subprocess/native execution')
+    runner.subprocess.run = denied
+    runner.subprocess.Popen = denied
+    def terminal(folder, status='completed', **changes):
+        value = {'schema': 'v1-6-windows-fresh-size-helper-r2', 'nonce': UUID,
+                 'receipt_path': runner.windows_path(folder / (UUID + '.json')),
+                 'status': status, 'phase': status,
+                 'worker_exit_confirmed': True, 'launcher_exit_confirmed': True, 'job_empty': True}
+        value.update(changes)
+        return value
+    def final(folder, value=None):
+        write(folder / (UUID + '.json'), terminal(folder) if value is None else value)
+    def worker_output(folder):
+        # This legitimate sidecar is TWO JSON records, so broad '*.json' parsing fails.
+        blob = json.dumps({'schema': 'v1-6-windows-size-worker-ready-r2', 'nonce': UUID}).encode() + b'\n'
+        blob += json.dumps({'regular_bytes': 17, 'deferred': []}).encode() + b'\n'
+        write(folder / (UUID + '.worker-output.json'), blob)
+        try:
+            json.loads(blob)
+        except json.JSONDecodeError:
+            return
+        raise AssertionError('two-record sidecar did not reproduce the old parsing defect')
+    def case(label, prepare, accepts=False, repeats=1):
+        if time.monotonic() - STARTED > MAX_SECONDS:
+            raise TimeoutError('pure registry fixture10s')
+        folder = directory / label / 'registry'
+        folder.mkdir(parents=True)
+        prepare(folder)
+        before = snapshot(folder)
+        outcomes = []
+        for _ in range(repeats):
+            try:
+                validator(folder)
+            except (ValueError, RuntimeError, OSError) as exc:
+                outcomes.append({'accepted': False, 'exception': type(exc).__name__})
+            else:
+                outcomes.append({'accepted': True})
+        if any(value['accepted'] is not accepts for value in outcomes):
+            raise AssertionError('registry expectation failed: ' + label)
+        if snapshot(folder) != before:
+            raise AssertionError('registry checker mutated fixture entries: ' + label)
+        report['cases'].append({'name': label, 'expected_accept': accepts, 'calls': outcomes,
+                                'all_input_entries_preserved': True})
+        publish()
+    try:
+        case('empty-registry', lambda p: None, accepts=True, repeats=2)
+        case('repeat-terminal-plus-two-record-output', lambda p: (final(p), worker_output(p)), accepts=True, repeats=3)
+        case('confirmed-failed-terminal-plus-output', lambda p: (final(p, terminal(p, status='failed')), worker_output(p)), accepts=True, repeats=2)
+        # New prelaunch records cannot be silently retired by generic exit flags.
+        for key in ('launcher_not_created', 'worker_not_created'):
+            case('confirmed-failed-null-identities-' + key,
+                 lambda p, key=key: final(p, terminal(p, status='failed',
+                     parent=None, launcher=None, worker=None, **{key: True})))
+        case('orphan-worker-output', worker_output)
+        case('orphan-pending', lambda p: write(p / (UUID + '.json.pending'), b'{}\n'))
+        case('pending-beside-confirmed-final', lambda p: (final(p), write(p / (UUID + '.json.pending'), b'{}\n')))
+        for key in ('worker_exit_confirmed', 'launcher_exit_confirmed', 'job_empty'):
+            case('incomplete-' + key, lambda p, key=key: final(p, terminal(p, **{key: False})))
+            case('wrong-type-' + key, lambda p, key=key: final(p, terminal(p, **{key: 1})))
+        case('malformed-final-json', lambda p: write(p / (UUID + '.json'), b'{invalid}\n'))
+        case('final-is-not-object', lambda p: write(p / (UUID + '.json'), b'[]\n'))
+        case('wrong-final-schema', lambda p: final(p, terminal(p, schema='unqualified')))
+        case('wrong-nonce', lambda p: final(p, terminal(p, nonce='b' * 32)))
+        case('wrong-receipt-path', lambda p: final(p, terminal(p, receipt_path=runner.windows_path(p / ('b' * 32 + '.json')))))
+        case('nonterminal-status', lambda p: final(p, terminal(p, status='pending')))
+        case('oversized-final', lambda p: final(p, terminal(p, padding='x' * (16 << 10))))
+        case('unknown-text-entry', lambda p: write(p / 'unknown.txt', b'x'))
+        case('unknown-json-name', lambda p: write(p / 'unknown.json', b'{}\n'))
+        case('uppercase-uuid-name', lambda p: write(p / (UUID.upper() + '.json'), b'{}\n'))
+        case('directory-final', lambda p: (p / (UUID + '.json')).mkdir())
+        case('directory-output', lambda p: (final(p), (p / (UUID + '.worker-output.json')).mkdir()))
+        case('directory-pending', lambda p: (final(p), (p / (UUID + '.json.pending')).mkdir()))
+        def final_symlink(folder):
+            target = folder.parent / 'owned-target.json'
+            write(target, terminal(folder))
+            (folder / (UUID + '.json')).symlink_to(target)
+        case('symlink-final', final_symlink)
+        def output_symlink(folder):
+            final(folder)
+            target = folder.parent / 'owned-output'
+            write(target, b'{}\n{}\n')
+            (folder / (UUID + '.worker-output.json')).symlink_to(target)
+        case('symlink-output', output_symlink)
+        if attempted_native:
+            raise AssertionError('native execution was attempted')
+        if runner_sha != EXPECTED_RUNNER_SHA256 or digest(runner_path) != runner_sha:
+            raise RuntimeError('runner source changed during fixture')
+        report['passed'] = True
+    except BaseException as exc:
+        report.update(failure=type(exc).__name__, detail=str(exc)[:2048])
+    report.update(elapsed_seconds=time.monotonic() - STARTED,
+                  native_calls_attempted=len(attempted_native), cases_completed=len(report['cases']))
+    if report['elapsed_seconds'] > MAX_SECONDS:
+        report['passed'] = False
+        report['failure'] = 'pure registry fixture10s'
+    publish()
+    print(json.dumps({'passed': report['passed'], 'receipt_path': str(output),
+                      'elapsed_seconds': report['elapsed_seconds'], 'cases_completed': len(report['cases'])}))
+    return 0 if report['passed'] else 1
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        raise SystemExit('fixture.py NEW_OWNED_DIRECTORY RUNNER_PATH EXACT_RUNNER_SHA256')
+    raise SystemExit(main(*sys.argv[1:]))

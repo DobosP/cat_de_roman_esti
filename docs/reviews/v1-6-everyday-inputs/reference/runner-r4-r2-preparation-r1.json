@@ -1,0 +1,93 @@
+{
+ "bindings": {
+  "native-coverage-partition-plan-r2.json": "ced57aa091651b3a3dc372799d14d0fc0daa46a31a36560590aa971caf70e52d",
+  "reference/runner-r4-preparation-r1.json": "54b0e34ef0d91fa61b9465c59e219eb9f93f6eb2236633434e63a0dff3bb25ce",
+  "runner-r4-code-review-r1.json": "b002ee2aca040bff0be66d36761d95693daed4017e0719c5e958384ae10f4f52",
+  "runner-r4-r2-preparation-admission-r1.json": "b0b872cbf4e3ca5f6f90be3f47b17b88f0ce6accd1a423395719cceabb36d45d",
+  "runtime-freeze-r1.json": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7",
+  "source6-contentrails-group-b-interruption-r1.json": "98e1a9ed314e31db58f1b9936294c2aa36fd2120710a1719e69c36a3d608f877"
+ },
+ "checked_at_utc": "2026-10-07T07:01:37.322040+00:00",
+ "execution": {
+  "application_imports_tests_builds": 0,
+  "application_runtime_tests_fixtures_authority_edits": 0,
+  "commits": 0,
+  "native_mock_fixture_commands": 0,
+  "process_max_RSS_bytes": 26320896,
+  "subagents": 0
+ },
+ "files": {
+  "/home/dobo/work/_temp/codex__content-v1-6/probe/check_runner_signal_r4_r2.py": {
+   "bytes": 15492,
+   "mtime_utc": "2026-10-07T06:58:54.741785+00:00",
+   "sha256": "7cd74d8fff6be373412cfbcb8747e4810d4c99b5bf436afc1e1887d74e777090"
+  },
+  "/home/dobo/work/_temp/codex__content-v1-6/probe/run_worktree_lane_r4_r2.py": {
+   "bytes": 27734,
+   "mtime_utc": "2026-10-07T06:58:54.745785+00:00",
+   "sha256": "455c2669b6d9c85912796e3b08606af87acb1fdba0491f01efee03c322881504"
+  },
+  "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/methods/check_runner_signal_r4_r2.py.txt": {
+   "bytes": 15492,
+   "mtime_utc": "2026-10-07T06:58:54.741785+00:00",
+   "sha256": "7cd74d8fff6be373412cfbcb8747e4810d4c99b5bf436afc1e1887d74e777090"
+  },
+  "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/methods/run_worktree_lane_r4_r2.py.txt": {
+   "bytes": 27734,
+   "mtime_utc": "2026-10-07T06:58:54.745785+00:00",
+   "sha256": "455c2669b6d9c85912796e3b08606af87acb1fdba0491f01efee03c322881504"
+  }
+ },
+ "findings_addressed": {
+  "R4-F1": {
+   "change": "Publication reserves64MiB INSIDE unchanged1GiB increment/16GiB remaining-disk floor. Total encoded step/state/cumulative images are capped16MiB;64MiB conservatively covers two simultaneous copies, atomic temporary/link/replacement coexistence, failed current-step rewrites and filesystem overhead. It is not an increased resource limit.",
+   "checks": "Actual wholeR+declaredS size/free/memory sampled before publication; reserve availability and encoding cap are required for acceptance. Outcome files are then fsynced while campaign state remains pending, followed by a fresh actual size/floor/deadline check that includes those writes and charges remaining final state acknowledgement. Reservation excess or final check failure converts the current result to failed.",
+   "reported": "Sampled pre-publication size/increment, reserved included increment/peak upper bounds, free-space sample/lower bound and metadata charge are in the outcome. Failure publication is explicitly not qualification."
+  },
+  "R4-F2": {
+   "change": "main reads manifest_path.read_bytes once; SHA256 and json.loads consume that exact immutable byte buffer.",
+   "immutability": "Exact buffer rechecked immediately before Popen and at pre/post outcome publication boundaries. Detected drift fails/refuses instead of associating changed argv with the old manifest identity. Prefix SHA/deadline/baseline checks remain."
+  },
+  "R4-F3": {
+   "change": "Log hashing finishes before signal-masked metadata finalization. Already handled and pending SIGTERM/SIGINT are checked; late pending signals after outcome fsync/accounting convert the still-uncommitted current-step receipt and cumulative result to failure. Old successful prefix receipts are never rewritten.",
+   "coherence": "Campaign flock stays held and disk state stays pending through verification, preventing concurrent continuation on provisional outcomes. Failed finalization rewrites only this owned uncommitted step, then writes failed state. Return uses final outcome, not a pre-log cached passed flag. No active child remains at commitment.",
+   "success_boundary": "Final empty pending-signal snapshot AFTER durable outcome files, manifest recheck and final accounting. Only the bounded state acknowledgement remains, covered by reserved bytes. Catchable signals after this completed-outcome boundary stay deferred until this one-step process exits; they do not retroactively invalidate completed command work."
+  }
+ },
+ "fixture_interface": {
+  "active": "Default active mode retains successfulprefix then owned Pythonchild+grandchild, closedstdout, SIGTERM onlyguard, durablefailure/inputhashes/no-live-group, unchangedbaseline/deadline/start and failedresume/index0reset refusals. It invokes the newR4-r2 runner/state namespace.",
+  "bound": "Each mode has≤30second acceptance budget and owned cleanup. Both modes remain UNEXECUTED and need independent review/admission. Future actualB requires accepted fixture evidence for both.",
+  "command": "qualified_python check_runner_signal_r4_r2.py NEW_DIRECTORY_UNDER_OWN_PROBE [active|finalization]",
+  "finalization": "Separate explicitly controlled Python-only mode. Tests exact publication_guard boundary values without allocating1GiB or relaxing limits. A wrapper imports the exact runner and injects SIGINT at log-digest observation, while returning the original digest; a tiny Python command has already completed. Requires nativeexit0 but failed step/state/result with actualSIGINT and exactreadsets. This controlled fault-injection is distinguished from unmodified actualB execution.",
+  "no_application_execution": true
+ },
+ "prepared_by": "/root/v16_source6_plan",
+ "preserved_contract": {
+  "limits": "17GiB initial disk,16GiB remaining disk/memory,2GiB whole-owned-group RSS,1GiB cumulative net size,Go2 jobs/threads,180s metadata reserve and195s prelaunch cutoff retained.",
+  "one_campaign": "ActualB uses one NEW immutable20minute campaign for5/5/5/4 disjoint tests thenCLI/vet. Sequential step invocations preserve baseline/deadline/start and refuse pending/failed/reset states. Original interruptedB remains failed; cause unknown.",
+  "ownership": "Original separate-session, pending identity,start_ticks,WNOWAIT and verified-owned-group cleanup retained. Catchable active-child cleanup remains bounded; no SIGKILL/host-loss/uninterruptible-kernel/storage guarantee.",
+  "readsets": "Full per-step input and post-source checks remain. OriginalR3/R4/harness and all applicationruntime109/source8/rubric remain exact."
+ },
+ "remaining": [
+  "Independent exact R4-r2 lifecycle/publication/state review before any fixture execution.",
+  "Separately admit and inspect both bounded Python-only fixture modes; no actual pass claimed.",
+  "After accepted fixture evidence, run exhaustiveBpartitions+CLI/vet under one newfixed20minute cumulative manifest.",
+  "Root owns finalV1.6 qualification, landing/pushoriginmain and stop; noV1.7 scope or worker push."
+ ],
+ "schema": "v1-6-runner-r4-r2-source-repair-preparation-r1",
+ "static_validation": {
+  "exact_inert_copies": true,
+  "fixture_or_native_behavior_proven": false,
+  "frozen109_runtime_plus_source8_rubric_rehashed_exact": true,
+  "old_methods_unchanged": true,
+  "runner_harness_and_two_embedded_fixture_scripts_AST_parsed": true
+ },
+ "status": "SOURCE_FROZEN_UNEXECUTED_REQUIRES_INDEPENDENT_REVIEW",
+ "timing": {
+  "all_source_mtimes_before_cutoff": true,
+  "prior_receipt_timing_failure": "OriginalR4 before-reserve receipt assertion failure and later truthful reserve receipt remain unchanged; no clocks or history reset.",
+  "receipt_during_metadata_reserve": true,
+  "source_cutoff_utc": "2026-10-07T07:00:33.666191+00:00"
+ },
+ "valid_until": "Any versioned source, limit/readset/publication/ownership semantics change; renew affected review before execution."
+}

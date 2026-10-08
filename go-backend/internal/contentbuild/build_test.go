@@ -45,7 +45,7 @@ func clone(t *testing.T, m map[string]any) map[string]any {
 }
 
 // source4ArchivedBundle authenticates the complete frozen predecessor rather
-// than reconstructing old expectations from current Source5 content.
+// than reconstructing old expectations from current content.
 func source4ArchivedBundle(t *testing.T) []byte {
 	t.Helper()
 	f, e := os.Open(filepath.Join(repoRoot(t), "go-backend/internal/alchimie_explore/testdata/bundled-v1-4.json.gz"))
@@ -73,7 +73,7 @@ func source4ArchivedBundle(t *testing.T) []byte {
 // It never replaces a serving fixture or reconstructs an old node snapshot.
 func source4HistoricalRoot(t *testing.T) string {
 	t.Helper()
-	original := repoRoot(t)
+	original := source5HistoricalRoot(t)
 	root := t.TempDir()
 	archived, e := decodeObject(source4ArchivedBundle(t))
 	if e != nil {
@@ -116,9 +116,9 @@ func source4HistoricalRoot(t *testing.T) string {
 func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 	root := source4HistoricalRoot(t)
 	// Preserve this test's original Source4 literals in their genuine archive
-	// context, with a real Build over exact historical fixture bytes. The Source5
-	// test below still rebuilds current sources,
-	// checks the actual installed export/pin, and covers the new world inventory.
+	// context, with a real Build over exact historical fixture bytes. Source5
+	// below independently rebuilds its immutable world-only release context.
+	historicalSource45ReviewedPins(t)
 	old := source4ArchivedBundle(t)
 	b, e := Build(root)
 	if e != nil {
@@ -165,7 +165,8 @@ func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 }
 
 func TestRebuildSource5WorldOnlyReviewedBundleAndPin(t *testing.T) {
-	root := repoRoot(t)
+	root := source5HistoricalRoot(t)
+	historicalSource45ReviewedPins(t)
 	b, e := Build(root)
 	if e != nil {
 		t.Fatal(e)

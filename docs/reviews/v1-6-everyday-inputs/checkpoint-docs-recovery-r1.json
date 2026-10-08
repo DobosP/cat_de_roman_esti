@@ -1,0 +1,46 @@
+{
+  "schema": "v1-6-docs-recovery-r1",
+  "status": "GREEN: DOCUMENTATION ONLY",
+  "admission_sha256": "26880998217f1dea5db52db17b859b3f0b5f747733592a49ab8ac4c98e311346",
+  "started_at_utc": "2026-10-06T22:20:47.674199+00:00",
+  "finished_at_utc": "2026-10-06T22:20:48.084729+00:00",
+  "results": [
+    {
+      "command": "qualified cat-doc-check --root task",
+      "exit": 0,
+      "seconds": 0.25252132400055416,
+      "max_RSS_KiB": 12032,
+      "minimum_sampled_available_memory_bytes": 18886033408,
+      "minimum_sampled_free_disk_bytes": 227262754816,
+      "guard_failure": null,
+      "output": {
+        "files": 46,
+        "dead_links": [],
+        "stale_terms": [],
+        "retired_verbs": [],
+        "orphans": [],
+        "budgets": []
+      }
+    },
+    {
+      "command": "qualified cat-doc-check --root task",
+      "exit": 0,
+      "seconds": 0.14654479700038792,
+      "max_RSS_KiB": 12800,
+      "minimum_sampled_available_memory_bytes": 18926424064,
+      "minimum_sampled_free_disk_bytes": 227262734336,
+      "guard_failure": null,
+      "output": {
+        "files": 46,
+        "dead_links": [],
+        "stale_terms": [],
+        "retired_verbs": [],
+        "orphans": [],
+        "budgets": []
+      }
+    }
+  ],
+  "prior_failure_status": "Original concurrency cap FAIL and native preflight refusal remain historical; not rerun or reclassified.",
+  "game_and_install_gates": "NOT RUN; no runtime/candidate/source6 change",
+  "whitespace": "Default working/staged checks required before commit; no historical CRLF waiver."
+}

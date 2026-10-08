@@ -1,0 +1,156 @@
+{
+  "schema": "v1-6-linux-complete-native-evidence-independent-review-r1",
+  "checked_at_utc": "2026-10-07T18:04:20.475363+00:00",
+  "reviewer": "/root/v16_linux_finish/linux_runner_review",
+  "scope": "Actual complete complementary 19-case compiled-race campaign plus final CLI race and backend vet. Verify immutable evidence/clock/readsets/binary/resources and exact 24-case contentrails coverage with the existing accepted five-World cohort. Source/evidence inspection only; no reviewer native/Go/application execution or source changes.",
+  "valid_until": "Relevant current source/runtime/authority/binary bindings change or accepted raw evidence is altered. Later documentation-only finalization does not rewrite the immutable successful campaign.",
+  "files": {
+    "linux-final-source-admission-r1.json": {
+      "bytes": 745,
+      "sha256": "87bd42e0a827b0ada5b33dd610c0b4e1f7eb189f213a8f5bc6ab594c67fd17de"
+    },
+    "linux-complementary19-summary-r1.json": {
+      "bytes": 2723,
+      "sha256": "f95df29972b577b5425086f7e91a2b7de9c0700bf72dc096bc3d05afb911aad7"
+    },
+    "linux-native-complete-evidence-r1.tar.gz": {
+      "bytes": 724142,
+      "sha256": "1fb8e7d5b7cf454f74d29910943e811a6a35421ed400b9fed64d1c1048aa37f0"
+    },
+    "linux-native-complete-evidence-manifest-r1.json": {
+      "bytes": 5748,
+      "sha256": "cce2c130d11d38de25605273f98707de19460099bd70bcbb69ec3d6066fb9a1a"
+    },
+    "linux-complementary19-r1-admission.json": {
+      "bytes": 345375,
+      "sha256": "440bd111cb210112d7a915fbed698dde49382ec16963b07b4ebf2a37bf3b6352"
+    },
+    "linux-complementary19-r1-result.json": {
+      "bytes": 2171286,
+      "sha256": "8bcd4f5e3bd33e6d35acd594d7c954a0fefc8181ad1f20b6549e32197dd406f6"
+    },
+    "linux-build-provenance-review-r1.json": {
+      "bytes": 4685,
+      "sha256": "2034de4e0a3264cb247d182f16d82c5f065862aba403c3bceb74a1dbb264fc50"
+    },
+    "linux-lifecycle-and-native-plan-review-r1.json": {
+      "bytes": 9347,
+      "sha256": "698caca99a24573e48398e12f419095bb11654f45800560c8fb84a8c06bedc84"
+    },
+    "linux-native-plan-r1.json": {
+      "bytes": 178272,
+      "sha256": "875bdbf12ce5639f7ba8ee66ec7203d6c03695d569276b61a9d0066d8085531d"
+    },
+    "source6-world-http-summary-r2.json": {
+      "bytes": 3376,
+      "sha256": "b2117558a6e0a17ac8bda01d2bdae15baea62349ef8ecfc78bf8f59cf864d663"
+    },
+    "source6-contentrails-group-a-and-http-r2-admission.json": {
+      "bytes": 435454,
+      "sha256": "791a899bdd78107d773f9328581d97068ca43ce2cbf5f2a8be94e9fe5f278141"
+    },
+    "source6-contentrails-group-a-and-http-r2-result.json": {
+      "bytes": 181981,
+      "sha256": "1c599f024d4f5ff4164bdf8639a1bd70320c5bb38c860aac153e4e76b76594b6"
+    },
+    "runtime-freeze-r1.json": {
+      "bytes": 18683,
+      "sha256": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7"
+    },
+    "source6-authority-summary-r1.json": {
+      "bytes": 4604,
+      "sha256": "f9e42daee2f2e4356426fdfbc028f61dc45c35ecb45512fb45e729b9964f48da"
+    }
+  },
+  "verdict": "ACCEPT_COMPLETE_NATIVE_EVIDENCE_ONLY",
+  "checks": {
+    "archive": "All 30 regular archive members match exact manifest sizes/SHA-256 values and current task/scratch originals. Includes all build/native admissions, immutable receipts, cumulative outcomes, original raw logs, states and lock files; no raw member omitted from the manifest.",
+    "plan_and_admission": "All six exact argv/name sequences, caps and disjoint measurement roots equal the accepted plan. The native admission adds actual race binary and prerequisite evidence protection. Fresh disk 230786084864 bytes and MemAvailable 40677699584 bytes exceed required floors.",
+    "binary_provenance": {
+      "sha256": "84c22158a6a16fa6557e4d26a1ce41901a49b05268b9340cdca9ce590e458c56",
+      "current_exact": true,
+      "Go": "1.27.1 linux/amd64",
+      "race_instrumented": true,
+      "basis": "Independent accepted build provenance, actual version/build information/list output and binary pin included in every native step scratch readset."
+    },
+    "clock": {
+      "checked_at_utc": "2026-10-07T17:47:27.525536+00:00",
+      "campaign_started_at_utc": "2026-10-07T17:47:27.645509+00:00",
+      "deadline_utc": "2026-10-07T18:07:27.525536+00:00",
+      "original_start_size": 2373170933,
+      "elapsed_to_final_native_row_seconds": 671.979031,
+      "final_native_row_finished_at_utc": "2026-10-07T17:58:39.624540+00:00",
+      "observed_final_state_mtime_utc": "2026-10-07T17:58:40.241782+00:00",
+      "all_rows_and_final_state_before_180_second_metadata_cutoff": true,
+      "one_1200_second_deadline_and_baseline": true,
+      "no_prior_failed_clock_reset": true
+    },
+    "publication_chain": "State and cumulative outcome both completed, pending null, next_index 6 and all_steps_completed true. Every exact immutable step digest matches state and every parsed step equals its cumulative row. All six manifest hashes, campaign starts, original baselines/deadlines and argv/index/name values match their admission. No child cleanup error or unresolved live descendant is reported.",
+    "readsets": "All six steps contain 1278 successful pre and 1278 successful post checks: 1270 task inputs and eight scratch bindings. Independent current hash verification also found all task/scratch pins exact at review; subsequent authorized documentation updates are outside application bindings and do not retroactively change the recorded native outcome.",
+    "protected_current_scope": "All 109 frozen runtime hashes, eight physical source files plus rubric, actual Source6 authority JSON/pin and current compiler/test source bindings remain exact. Current relevant original five-World context bindings (212 source/runtime-related files) match their passing admission.",
+    "logs_and_test_coverage": {
+      "raw_log_hashes_exact": true,
+      "top_level_RUN_names": [
+        "TestInstalledAuthorityEmptyKeepsHistoricalBaselineAndPinIsSeparate",
+        "TestReviewedInstalledVersionTwoReconstructsWithoutRelabelingV1",
+        "TestFutureInstalledParentChainRequiresExactSequentialReviewedPredecessor",
+        "TestCompleteIndependentJudgmentsSourcesAndCandidateBinding",
+        "TestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval",
+        "TestInstalledAuthorityPinExclusionPermitsOnlyDigestMetadata",
+        "TestInstalledAuthoritySchemaPinAndSequentialChainRefusals",
+        "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes",
+        "TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal",
+        "TestLoadedCustomSourceCASRefusesChangedFlagFile",
+        "TestInstalledAuthorityProtectedDocumentReaderRefusals",
+        "TestInstalledAuthorityCannotBeGrantedByPinsWithoutCurrentReviews",
+        "TestStrictPrivateSourceAndReviewJSON",
+        "TestSharedGuardedTransactionsRollbackAndRefuseStaleReadsets",
+        "TestProspectiveWorldAuditRefusesMalformedGraphBeforeReplay",
+        "TestInstalledAuthorityDraftOutputCannotOverwriteAuthorityOrRuntime",
+        "TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse",
+        "TestSourceShapeAndVersionParentRefuseBeforeConstruction",
+        "TestOutputCannotFollowSymlinkOrOverwriteFixtures"
+      ],
+      "top_level_PASS_names_exactly_equal_RUN": true,
+      "partition_sizes": [
+        5,
+        5,
+        5,
+        4
+      ],
+      "duplicates": 0,
+      "skipped": 0,
+      "test_failure_or_guard": false,
+      "subtests": "Nested missing-review/rehash-tamper/symlink refusal subtests retain their actual RUN/PASS lines. No test assertion or source modification accompanies these runs.",
+      "previous_five_world": "Existing source6-world-http-summary-r2 and exact execution/admission SHA binding pass; reviewed formatted source and relevant current pins remain unchanged. The five earlier -race/-count=1 cases plus these nineteen are disjoint and exactly equal the complete current 24-function source/actual compiled enumeration."
+    },
+    "final_cli_race": "Exact go test -race -count=1 ./cmd/cat-content-rail exits zero and raw log reports PASS. No cached test result substitution.",
+    "backend_vet": "Exact go vet ./... exits zero with empty successful raw output, preserving complete backend scope.",
+    "resources": {
+      "peak_sampled_child_process_group_RSS_bytes": 702844928,
+      "peak_sampled_cumulative_incremental_bytes": 59920318,
+      "largest_publication_inclusive_upper_bound_bytes": 70687890,
+      "RSS_cap_bytes": 2147483648,
+      "growth_cap_bytes": 1073741824,
+      "publication_accounting_verified": true,
+      "disk_memory_floor_bytes": 17179869184,
+      "original_limits_and_metadata_reserve_unchanged": true,
+      "qualified_Go_threads_jobs": 2
+    },
+    "resources_detail": "Every publication receipt includes atomic temporary/final outputs, its original baseline, the bounded allowance, a reserved disk lower bound above 16 GiB and MemAvailable above 16 GiB. The same new cumulative baseline and deadline span all four groups plus CLI/vet; each inner timeout does not grant extra campaign time."
+  },
+  "historical_failures": "All prior failed/interrupted Linux and Windows campaigns, resource refusals, timing/concurrency failures and test-context repairs remain historical failures with their original receipts. This new complete materially different Linux compiled-binary campaign supplies missing evidence; it does not relabel or resume failed lanes.",
+  "remaining_release_scope": "Documentation/default whitespace/pool landing state, complete gate inventory and independent exact assembled release review remain separate responsibilities. No release, installation or landing acceptance is granted by this evidence review.",
+  "assembled_or_landing_approval": false,
+  "application_or_source_changes_by_reviewer": false,
+  "reviewer_execution": {
+    "native": 0,
+    "Go": 0,
+    "application": 0,
+    "test": 0,
+    "fixture": 0,
+    "source_evidence_hash_reads": true,
+    "read_only_schema_lookup_errors": "Two inspection snippets initially treated the runtime list as a map and the rubric key as a filename. Corrected direct schema-specific hash reads passed; neither snippet mutated files or executed qualification commands.",
+    "review_receipts_written": 1
+  }
+}

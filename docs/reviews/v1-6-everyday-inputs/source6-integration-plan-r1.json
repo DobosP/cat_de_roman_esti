@@ -1,0 +1,82 @@
+{
+  "schema": "v1-6-source6-integration-plan-r1",
+  "checked_at_utc": "2026-10-07T00:30:34.412493+00:00",
+  "planner": "/root/v16_source6_plan",
+  "scope": "Read-only actual operator source and landed precedent inspection; no source6 or tool commands executed.",
+  "code_bindings": {
+    "go-backend/cmd/cat-content-rail/main.go": "66aa1433d6eda62c084fc656f8a03990708677639e54aa3ec4dc1c188f6636a8",
+    "go-backend/internal/contentrails/source.go": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+    "go-backend/internal/contentrails/shape.go": "ee73f903a862de0601685e7bce1204e80d8235eb46befd1dabdd20ce806497de",
+    "go-backend/internal/contentrails/world.go": "f4d4e878ab739f06e45907f2431152d9e43df2a8a0d266dbb830339e48e9196f",
+    "go-backend/internal/contentrails/quick.go": "75e16613164e35e3c6260b208a98dd152174aeebe329c9ed75a0a72cfe89dd9f",
+    "go-backend/internal/contentrails/extensions.go": "c3c5166b6b6975128da9884c70921c7552ce83140575f5b5e90106dffa6c07af",
+    "go-backend/internal/contentrails/review.go": "065af97857dba7e1c4f72b61a69b1948fa3b1b04fb4bbd276554d58094d9dfc8",
+    "go-backend/internal/contentrails/rail.go": "ab1f5353f7780342e7f5171d724a389f3f36a9853d9dc7df3a074a0d77ff6603",
+    "go-backend/internal/contentbuild/build.go": "ccb575e94fa2615eb0712b6852b7e8936048457a84b67b2762d9d83da769c44b",
+    "go-backend/internal/contentops/command.go": "6a17c5c08d694eb1dd5c092d42240be64929d877563b3ec2a5019d301ea49e4c",
+    "go-backend/internal/contentops/derive.go": "589d7f47704f74dabd1d5a3aed6094d42a978173c6ce89e82f733d5bf12601ae",
+    "go-backend/internal/contentrails/sources/authored-v5.json": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585"
+  },
+  "root_symbol": "R is a complete isolated root using exact candidate in both KG copies; S is authored Source6 JSON. These are command templates, not commands executed.",
+  "steps": [
+    {
+      "step": 1,
+      "action": "Author Source6; no native create-source command exists. Preserve authored Quick/World/Extensions definitions and four legacy_sources entries, set version6/reviewed base_commit/exact Source5parent22b7853e. Advance world_previous/world_candidate and factual/quality archive refs to actual V1.5 candidate/reviews; preserve all22old archive entries/bytes.",
+      "guards": "World installed fixture remains exact Source5 identity/mechanics/history for public predecessor check. No fabricated eleventh history: mechanics are unchanged."
+    },
+    {
+      "step": 2,
+      "commands": [
+        "cat-content-ops rank --root R --write",
+        "cat-content-ops derive --root R --write"
+      ],
+      "proof": "Supported mirrored builders; compare all716ranking rows and336derived payloads, retain only reviewed actual metadata/snapshot deltas."
+    },
+    {
+      "step": 3,
+      "commands": [
+        "cat-content-rail quick --root R --source S --candidate-out QUICK_CANDIDATE",
+        "cat-content-rail world --root R --source S --candidate-out WORLD_CANDIDATE",
+        "cat-content-rail extensions --root R --source S --candidate-out EXTENSIONS_CANDIDATE"
+      ],
+      "approval": "Candidate generation is approval-free; not installation. Source6 must be available before current runtime-source audits."
+    },
+    {
+      "step": 4,
+      "action": "Independent complete native raw factual/quality reviews: Quick85items, World352recipes/252concepts+world verdict, Extensions49items. Exact candidate/concept hashes and checked sources. Unchanged judgments may be expressly inherited from exact previous records; Ulei World concept cannot be inherited because snapshot aliases change.",
+      "commands": [
+        "cat-content-rail RAIL --root R --source S --candidate C --factual-review F --quality-review Q --proposal P"
+      ],
+      "ordering": "Build/audit/stage accepted World and Quick before Extensions proposal. Extensions calls contentbuild.Load(R), requiring coherent source8, regenerated ranking/derived, reviewed Quick/World and reviewed derived/Quick pin transitions."
+    },
+    {
+      "step": 5,
+      "commands": [
+        "cat-content-rail RAIL --root R --audit-catalog P --audit-out A",
+        "cat-content-rail RAIL --root R --source S --candidate C --factual-review F --quality-review Q --proposal P --live-audit A --final-factual-review FF --final-quality-review FQ --expected-sha256 SHA --write"
+      ],
+      "guards": "Same reviewers as raw roles. Fresh audit/finals immediately before EACH install; every install changes source8 audit bindings. Quick/World finals use audit_sha256; Extensions uses live_audit_sha256. Never reuse stale audit/finals."
+    },
+    {
+      "step": 6,
+      "commands": [
+        "cat-content validate --root R",
+        "cat-content export --root R",
+        "cat-content export --root R --check",
+        "cat-mobile-pack --root R",
+        "cat-mobile-pack --root R --check"
+      ],
+      "history": "Preserve Source5 assertions/corpora in true immutable contexts; Source5 rebuild test may not be simply repinned. Add exact V1.6 inverse ahead of V1.5 history chain, retaining whole bytes/literals. Produce independent current1207Django corpus with strictcomplete-source8 selection, all5oldfamilies retained."
+    },
+    {
+      "step": 7,
+      "action": "Freeze ALL runtime/export/reference changes before fresh installed audits and same-role finals for three adopted rails. Generate each exact native entry with --installed-authority-out instead of --write, append Source6 chain entry and replace adopted manifest entries, update only metadata digest pin, rebuild metadata-embedding tools and strictdefaultallfourcheck. Reserve remains original archive.",
+      "commands": [
+        "cat-content-rail RAIL --root R --source S --candidate C --factual-review F --quality-review Q --proposal P --live-audit A --final-factual-review FF --final-quality-review FQ --expected-sha256 SHA --installed-authority-out ENTRY",
+        "cat-content-rail all --root R --check"
+      ],
+      "precedent": "V1.5 reference/methods/prepare_authority.py.txt and assemble_authority.py.txt. Installed-only World reconstruction path stays private; public predecessor guard unchanged."
+    }
+  ],
+  "remaining_before_adoption": "Finalize exact raw graph quality after named native controls and fresh World/native source-history evidence; full native/shared race-vet, current HTTP/reference/authority/source/export gates, independent assembled acceptance and local green landing. No push/deploy."
+}

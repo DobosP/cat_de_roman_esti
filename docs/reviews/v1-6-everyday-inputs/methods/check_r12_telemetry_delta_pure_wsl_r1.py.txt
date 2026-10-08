@@ -1,0 +1,229 @@
+"""Minimal exact-R12 telemetry delta controls; no R11 suite repetition.
+
+CLI: python3 -B fixture.py UUID32 EXACT_FIXTURE_SHA EXACT_R12_PATH
+Fresh tiny ext4-owned mode files only; no Go/helper/child or global telemetry
+setting. Namespace checks are stubbed only for isolated pre/post mode controls.
+"""
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import resource
+import signal
+import stat
+import sys
+import time
+import types
+from unittest import mock
+
+STARTED = time.monotonic()
+R12_SHA = '77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0'
+MODE_SHA = 'b470b84cf0cd3189e10615bffea7d5cbd9f61134ba1c2cfd513ddd45b776a5f6'
+PARENT = Path('/home/paul_work/work/_temp/codex__content-v1-6/r12-telemetry-pure-fixtures-r1')
+CASES = []
+report_path = None
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def guard():
+    if time.monotonic() - STARTED >= 10:
+        raise TimeoutError('telemetry delta fixture10seconds')
+    if resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024 > 2 << 30:
+        raise RuntimeError('telemetry delta fixture RSS2GiB')
+
+
+def chain(path):
+    for node in reversed([Path(path), *Path(path).parents]):
+        if not stat.S_ISDIR(node.lstat().st_mode) or node.resolve(strict=True) != node:
+            raise ValueError('fixture ancestor redirected/non-directory')
+
+
+def write(path, blob):
+    guard()
+    if len(blob) > 128 << 10:
+        raise ValueError('fixture image128KiB')
+    with Path(path).open('xb') as out:
+        out.write(blob)
+        out.flush()
+        os.fsync(out.fileno())
+    guard()
+
+
+def case(name, function, wanted=None):
+    guard()
+    if wanted is None:
+        if function() is not True:
+            raise RuntimeError(name + ': expected True')
+    else:
+        try:
+            function()
+        except wanted:
+            pass
+        else:
+            raise RuntimeError(name + ': expected ' + wanted.__name__)
+    guard()
+    CASES.append(name)
+
+
+def main():
+    global report_path
+    if len(sys.argv) != 4 or not re.fullmatch(r'[0-9a-f]{32}', sys.argv[1]) or not re.fullmatch(r'[0-9a-f]{64}', sys.argv[2]):
+        raise ValueError('fresh UUID32 fixture SHA and exact R12 source required')
+    nonce, own_sha, method = sys.argv[1:]
+    if not sys.dont_write_bytecode or sys.flags.optimize != 0 or digest(__file__) != own_sha or digest(method) != R12_SHA:
+        raise RuntimeError('ordinary nonoptimized Python -B/exact source pins required')
+    chain(PARENT.parent)
+    try:
+        PARENT.lstat()
+    except FileNotFoundError:
+        PARENT.mkdir(mode=0o700)
+    chain(PARENT)
+    root = PARENT / nonce
+    root.mkdir(mode=0o700)
+    chain(root)
+    report_path = root / 'result.json'
+    loader = importlib.machinery.SourceFileLoader('pure_exact_telemetry_r12', method)
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    m = importlib.util.module_from_spec(spec)
+    loader.exec_module(m)  # main/handlers/metadata helpers remain inactive.
+    if m.TELEMETRY_MODE_SHA != MODE_SHA:
+        raise RuntimeError('R12 mode binding changed')
+    def deny(*args, **kwargs):
+        raise RuntimeError('telemetry pure fixture child denied')
+    m.subprocess = types.SimpleNamespace(run=deny, Popen=deny)
+    m.S, m.X, m.R = root / 'task-scratch', root / 'task-X', root / 'task-R'
+    for directory in (m.S, m.X, m.R, root / 'mode-variants'):
+        directory.mkdir(mode=0o700)
+    mode = root / 'mode-variants/normal-mode'
+    write(mode, b'off\n')
+    if digest(mode) != MODE_SHA:
+        raise RuntimeError('literal four off bytes differ from exact mode pin')
+    m.TELEMETRY_MODE = mode
+    mirror = m.X / 'runtime-readset-mirror-r1' / ('a' * 32)
+    mirror.mkdir(mode=0o700, parents=True)
+    manifest = {'execution_mirror': str(mirror)}
+    expected = {'GOMAXPROCS': '2', 'GOFLAGS': '-p=2 -mod=readonly', 'GOPROXY': 'off',
+        'GOTOOLCHAIN': 'local', 'GOWORK': 'off', 'GOROOT': str(m.S / 'tools/go'),
+        'GOCACHE': str(m.S / 'gocache'), 'GOMODCACHE': str(m.S / 'gomodcache'),
+        'GOPATH': str(m.S / 'gopath'), 'GOTMPDIR': str(m.S / 'tmp'),
+        'TMPDIR': str(m.X / 'runtime-test-tmp-r1' / mirror.name),
+        'GOMEMLIMIT': '1536MiB', 'TEST_TELEMETRY_DIR': str(mode.parent)}
+    case('exact-owned-off-mode-accepted', m.owned_telemetry_mode)
+    def fixed_and_inherited_removed():
+        with mock.patch.dict(os.environ, {'GO_TELEMETRY_CHILD': '1', 'GO_TELEMETRY_CHILD_UPLOAD': '1',
+                'TEST_TELEMETRY_DIR': '/controlled/foreign-mode', 'PURE_FIXTURE_PARENT': 'owned-sentinel'}):
+            values = m.environment(manifest)
+            return (all(values.get(key) == value for key, value in expected.items())
+                and 'GO_TELEMETRY_CHILD' not in values and 'GO_TELEMETRY_CHILD_UPLOAD' not in values
+                and values.get('PURE_FIXTURE_PARENT') == 'owned-sentinel'
+                and values['PATH'].startswith(str(m.S / 'tools/go/bin') + os.pathsep))
+    case('fixed-environment-removes-inherited-child-vars-and-overrides-mode-parent', fixed_and_inherited_removed)
+    for key, value in (('GO_TELEMETRY_CHILD', '0'), ('GO_TELEMETRY_CHILD_UPLOAD', '')):
+        case('manifest-' + key + '-presence-refused', lambda key=key, value=value: m.environment(dict(manifest, environment={key: value})), ValueError)
+    case('manifest-foreign-telemetry-dir-refused', lambda: m.environment(dict(manifest, environment={'TEST_TELEMETRY_DIR': '/controlled/foreign-mode'})), ValueError)
+    case('manifest-exact-telemetry-dir-accepted', lambda: m.environment(dict(manifest, environment={'TEST_TELEMETRY_DIR': str(mode.parent)}))['TEST_TELEMETRY_DIR'] == str(mode.parent))
+    def using(path, function):
+        saved = m.TELEMETRY_MODE
+        m.TELEMETRY_MODE = path
+        try:
+            return function()
+        finally:
+            m.TELEMETRY_MODE = saved
+    wrong = mode.parent / 'wrong-mode'
+    write(wrong, b'on\n')
+    case('different-mode-bytes-refused', lambda: using(wrong, m.owned_telemetry_mode), ValueError)
+    link = mode.parent / 'symlink-mode'
+    link.symlink_to(mode)
+    case('symlink-mode-refused', lambda: using(link, m.owned_telemetry_mode), ValueError)
+    hard = mode.parent / 'hardlink-mode'
+    write(hard, b'off\n')
+    os.link(hard, mode.parent / 'retained-hardlink')
+    case('hardlink-mode-refused', lambda: using(hard, m.owned_telemetry_mode), ValueError)
+    directory = mode.parent / 'directory-mode'
+    directory.mkdir(mode=0o700)
+    case('directory-mode-refused', lambda: using(directory, m.owned_telemetry_mode), ValueError)
+    case('missing-mode-propagates', lambda: using(mode.parent / 'never-created', m.owned_telemetry_mode), FileNotFoundError)
+    real_lstat = Path.lstat
+    real_digest = m.digest
+    def denied_lstat(path, *args, **kwargs):
+        if Path(path) == mode:
+            raise PermissionError('controlled mode lstat denial')
+        return real_lstat(path, *args, **kwargs)
+    def denied_digest(path):
+        if Path(path) == mode:
+            raise PermissionError('controlled mode digest denial')
+        return real_digest(path)
+    with mock.patch.object(Path, 'lstat', denied_lstat):
+        case('mode-lstat-PermissionError-propagates', m.owned_telemetry_mode, PermissionError)
+    with mock.patch.object(m, 'digest', denied_digest):
+        case('mode-digest-PermissionError-propagates', m.owned_telemetry_mode, PermissionError)
+    # Namespace controls are unchanged R11 evidence and deliberately stubbed.
+    m.namespace_checks = lambda value: ({'pure:namespace-stub': True}, {})
+    def readset_good(phase):
+        checks, failures = m.readset(manifest, phase)
+        return checks.get('owned-telemetry-mode:off-shape-hash') is True and failures == {}
+    def readset_failed(phase):
+        checks, failures = m.readset(manifest, phase)
+        return checks.get('namespace:fresh-enumeration') is False and set(failures) == {'namespace:fresh-enumeration'}
+    for phase in ('pre', 'post'):
+        case('fresh-mode-' + phase + '-accepted', lambda phase=phase: readset_good(phase))
+    with mock.patch.object(m, 'digest', denied_digest):
+        case('mode-digest-IO-pre-readset-failed-closed', lambda: readset_failed('pre'))
+    with mock.patch.object(Path, 'lstat', denied_lstat):
+        case('mode-lstat-IO-post-readset-failed-closed', lambda: readset_failed('post'))
+    # Mutate only the exact freshly created fixture mode, preserving the bad
+    # bytes separately above. This proves each readset reopens/rechecks it.
+    def mutate(blob):
+        guard()
+        if not stat.S_ISREG(mode.lstat().st_mode) or mode.lstat().st_nlink != 1 or mode.resolve(strict=True) != mode:
+            raise ValueError('owned fixture mode mutation target changed')
+        with mode.open('wb') as out:
+            out.write(blob)
+            out.flush()
+            os.fsync(out.fileno())
+        guard()
+    for phase in ('pre', 'post'):
+        mutate(b'on\n')
+        case('fresh-same-path-mode-byte-change-' + phase + '-refused', lambda phase=phase: readset_failed(phase))
+        mutate(b'off\n')
+    case('restored-mode-pre-and-post-fresh-accepted', lambda: readset_good('pre') and readset_good('post'))
+    if digest(__file__) != own_sha or digest(method) != R12_SHA or digest(mode) != MODE_SHA:
+        raise RuntimeError('fixture/source/final exact mode changed')
+    guard()
+    return {'schema': 'v1-6-r12-telemetry-pure-delta-r1', 'passed': True,
+        'fixture_sha256': own_sha, 'runner_sha256': R12_SHA, 'mode_sha256': MODE_SHA,
+        'cases': CASES, 'case_count': len(CASES), 'owned_ext4_root': str(root),
+        'elapsed_seconds': time.monotonic() - STARTED, 'children_or_native_commands': 0,
+        'global_or_original_task_telemetry_mode_changed': False, 'fixture_same_path_mode_mutations': 4,
+        'fixed_environment_names_checked': sorted(expected), 'inherited_environment_values_printed': False,
+        'unchanged_R11_cases_reexecuted': 0, 'namespace_checks_stubbed_for_mode_delta_only': True,
+        'no_deletions': True, 'claim_limit': 'Pure R12 environment/mode controls only; no native, OS child-exit, host admission or global telemetry-setting evidence.'}
+
+
+if __name__ == '__main__':
+    def interrupted(number, frame):
+        raise InterruptedError('telemetry pure fixture signal ' + str(number))
+    signal.signal(signal.SIGTERM, interrupted)
+    signal.signal(signal.SIGINT, interrupted)
+    signal.signal(signal.SIGALRM, interrupted)
+    signal.setitimer(signal.ITIMER_REAL, 10)
+    result = {'schema': 'v1-6-r12-telemetry-pure-delta-r1', 'passed': False}
+    code = 1
+    try:
+        result = main()
+        code = 0
+    except BaseException as exc:
+        result.update(error=type(exc).__name__ + ': ' + str(exc), cases=CASES, elapsed_seconds=time.monotonic() - STARTED)
+    try:
+        if report_path is not None:
+            write(report_path, (json.dumps(result, sort_keys=True, indent=2) + '\n').encode())
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+    print(json.dumps(result, sort_keys=True))
+    raise SystemExit(code)

@@ -1,0 +1,476 @@
+{
+  "schema": "v1-6-wsl-r9-fixture-evidence-review-r1",
+  "valid_until": "Any bound method, result, historical evidence, registry record, resource contract, or host execution path changes — then treat as history.",
+  "reviewed_at_utc": "2026-10-07 10:50:41 UTC",
+  "reviewer": "continuation_audit; independent of runner and helper authors",
+  "verdict": "ACCEPT_BOUND_FIXTURE_QUALIFICATION_FOR_FRESH_NATIVE_ADMISSION",
+  "scope": "Read-only inspection and SHA-256 binding of exact accepted methods, recorded fixture results, original raw lifecycle state and receipts, helper registry and retained historical evidence, and immutable archive scope. This review does not execute application code, fixtures, Go, native campaign commands, or OS identity probes.",
+  "source_sha256": {
+    "methods/run_worktree_lane_wsl_r9.py.txt": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+    "methods/check_runner_signal_wsl_actual_r9.py.txt": "b1690655242067646e16a855b8df5330967de4aa0251d9d8be5ccdd506abdd76",
+    "methods/check_scan_parity_wsl_windows_r4.py.txt": "602bf85c3677a303fc21f1a5ac14ab8c0635f42ae4b153a00f2e6c4f594e2836",
+    "methods/windows_size_helper_wsl_r4.py.txt": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+    "methods/check_windows_size_helper_wsl_r3.py.txt": "906f14d55933a73bbae1d8704b399c07ad499bab33b4cbc0f3804c5ff0751271",
+    "methods/check_windows_receipt_registry_wsl_r4.py.txt": "b05018af3efc6d015b6f994508c5981b373fc689b59fe7b78437be449a4d7b60",
+    "methods/check_windows_hard_working_set_proofs_wsl_r2.py.txt": "50c94658822b763a09162a16b51ee1cdb8cf098b41be09339e87061b96ca9ffb",
+    "methods/check_windows_historical_registry_guard_wsl_r1.py.txt": "402fdf87cb8f71fbe31edf3c708a465abf56fcfdf993bcf5078dc90b7c6746ae"
+  },
+  "result_sha256": {
+    "windows-receipt-registry-r4-result.json": "ad531fe72694a013e09ea03de1a342a0666aa30bd24350f70844d635e0fa28f2",
+    "windows-hard-working-set-proofs-r2-result.json": "52ff1c1261c977c39dcbe54e2bbc1170b356aea3d0d8a43028314e95a51f6b09",
+    "windows-historical-registry-guard-r1-result.json": "0d8231053e9b2cda196c6967aea390236408e7eedad397672c74f33390beb3ed",
+    "wsl-windows-parity-r4-result.json": "c2516e5c6de5cf85f5812a02b502488276a3e015cce7c9a490d16eb84d578a66",
+    "wsl-r9-actual-active-result.json": "6df50a7980a3abfca8a7663683c0f05462150ab9aed32bcd2095e7662778cde2",
+    "wsl-r9-actual-finalization-result.json": "30bfa8257ef91494290d62f97db8d3d2c2f9846b2873664d67be12d170bb529c"
+  },
+  "prior_review_sha256": {
+    "wsl-r9-source-review-r1.json": "757be635eef2329da62f8aa2a9e2ad20467db29ca2b660c610ebea077fc9eb80",
+    "wsl-r9-pure-fixtures-source-review-r1.json": "6f3bd2bd3384e934951bbfe092f1f933a302b30332f3e03ea1885969c4b44831",
+    "windows-helper-r4-source-review-r1.json": "fe162837ee382e1237c85db7c344fb2c381d0f0932127b33e06a5376d67ef1d0",
+    "windows-helper-r4-fixture-evidence-review-r1.json": "78d62d95b991f55677cd02365d6fb9bb6101675a86f03ac7abb592e2bdebb21b"
+  },
+  "findings": [],
+  "pure_fixture_evidence": {
+    "registry": {
+      "cases": 29,
+      "elapsed_seconds": 2.4817771289999655
+    },
+    "hard_working_set_proofs": {
+      "cases": 173,
+      "elapsed_seconds": 4.419247059999179
+    },
+    "historical_guard": {
+      "cases": 15,
+      "elapsed_seconds": 7.453029722999418
+    },
+    "total_cases": 217,
+    "every_recorded_outcome_matches_expected_accept": true,
+    "each_result_copy_matches_original_check_result_sha256": true,
+    "exact_method_bindings": true,
+    "recorded_input_preservation": true,
+    "no_native_calls_in_pure_fixture_scope": true,
+    "historical_guard_scope": "Owned synthetic roots and digest stub test guard semantics only; actual historical pins were checked separately in this review."
+  },
+  "parity_evidence": {
+    "recorded_pass": true,
+    "elapsed_seconds": 43.43087407300118,
+    "total_cap_seconds": 60,
+    "static_root_count": 6,
+    "static_roots": [
+      "S/gocache",
+      "S/tmp",
+      "S/gopath",
+      "S/gomodcache",
+      "R",
+      "S/tools"
+    ],
+    "linux_static_seconds": 32.35490551100156,
+    "windows_static_seconds": 1.1424601809994783,
+    "identical_static_bytes": 748343738,
+    "dynamic_probe_linux_before": 1230424,
+    "dynamic_probe_hybrid": 1234190,
+    "dynamic_probe_linux_after": 1242064,
+    "dynamic_probe_max_pair_difference_bytes": 11640,
+    "dynamic_probe_bound_bytes": 65536,
+    "synthetic_counts_before_after": [
+      20,
+      35
+    ],
+    "recorded_absent_root_count": 0,
+    "recorded_fresh_link_permission_error_signal_and_cleanup_checks": true,
+    "result_copy_matches_original": true,
+    "scope_limit": "Static roots have exact old-R3/new-R9 parity. Dynamic probe growth has only the explicitly bounded 64 KiB metadata observation, with no exact dynamic parity claim."
+  },
+  "lifecycle_evidence": {
+    "active": {
+      "fixture_pass": true,
+      "elapsed_seconds": 14.39569518299868,
+      "total_cap_seconds": 30,
+      "lane": "r4-r2-signal-7acae0d53cc0244e",
+      "state_status": "failed",
+      "state_next_index": 2,
+      "pending": null,
+      "original_baseline_bytes": 749595063,
+      "original_deadline_utc": "2026-10-07T11:01:16.038138+00:00",
+      "original_start_utc": "2026-10-07T10:41:16.339636+00:00",
+      "successful_prefix_exit_code": 0,
+      "successful_prefix_preserved": true,
+      "interrupted_step_exit_code": 143,
+      "received_signal": 15,
+      "guard": "catchable-signal",
+      "recorded_owned_group_cleanup_remaining_live": [],
+      "recorded_cleanup_error": null,
+      "cleanup_seconds": 0.086,
+      "input_log_step_and_manifest_bindings_match": true,
+      "metadata_publication_reserve_bytes": 67108864,
+      "final_atomic_publication_included": true,
+      "cumulative_peak_upper_bound_bytes": 67202157,
+      "recorded_floor_and_limit_checks_preserved": true,
+      "recorded_reset_and_resume_refusal": true,
+      "fallback_cleanup_used": false
+    },
+    "finalization": {
+      "fixture_pass": true,
+      "elapsed_seconds": 9.22950634100016,
+      "total_cap_seconds": 30,
+      "lane": "r4-r2-finalize-b5a1c2d3d4e07ba5",
+      "state_status": "failed",
+      "state_next_index": 1,
+      "pending": null,
+      "original_baseline_bytes": 749722100,
+      "original_deadline_utc": "2026-10-07T11:01:44.329833+00:00",
+      "original_start_utc": "2026-10-07T10:41:44.671597+00:00",
+      "child_exit_code": 0,
+      "received_signal": 2,
+      "guard": "catchable-signal-finalization",
+      "production_log_digest_signal_injection_recorded": true,
+      "input_log_step_and_manifest_bindings_match": true,
+      "metadata_publication_reserve_bytes": 67108864,
+      "final_atomic_publication_included": true,
+      "cumulative_peak_upper_bound_bytes": 67158560,
+      "recorded_floor_and_limit_checks_preserved": true
+    },
+    "result_copies_match_original_check_results": true,
+    "both_full_accounting_root_sets_include_sdk_tools": true,
+    "state_cumulative_baseline_deadline_start_consistency": [
+      {
+        "state_cumulative_start_matches": true,
+        "prefix_step_hashes_match": true,
+        "manifest_hash_matches": true,
+        "state_cumulative_deadline_matches": true,
+        "next_index": 2,
+        "pending": null,
+        "state_cumulative_baseline_matches": true,
+        "input_hashes_match": true,
+        "lane": "r4-r2-signal-7acae0d53cc0244e",
+        "status": "failed",
+        "log_hashes_match": true
+      },
+      {
+        "state_cumulative_start_matches": true,
+        "prefix_step_hashes_match": true,
+        "manifest_hash_matches": true,
+        "state_cumulative_deadline_matches": true,
+        "next_index": 1,
+        "pending": null,
+        "state_cumulative_baseline_matches": true,
+        "input_hashes_match": true,
+        "lane": "r4-r2-finalize-b5a1c2d3d4e07ba5",
+        "status": "failed",
+        "log_hashes_match": true
+      }
+    ],
+    "interpretation": "Expected catchable interruption and late-finalization failures are preserved as failed lane receipts. Those controlled failures support fixture PASS; they are not native campaign PASS.",
+    "scope_limit": "Recorded ownership and quiescence proofs were inspected; the reviewer did not repeat live OS identity checks. No SIGKILL or host-loss guarantee is asserted."
+  },
+  "raw_lifecycle_bindings": {
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\signal-actual-r9-active-reviewed-1\\admission.json": "897723dd6a1b5bfad3a8e8aa716f2bbeaf8dad54a467320a815f8d7fd00c77d4",
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\r4-r2-signal-7acae0d53cc0244e-r4-r2-state.json": "92e2bd10df98f13a6c9fd3061d4eea755b3db0e77b492eb4ffd02a5ac90da169",
+    "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-6\\docs\\reviews\\v1-6-everyday-inputs\\r4-r2-signal-7acae0d53cc0244e-result.json": "b05d5a27efa3c3afefe8e3ae80e64b72cc759014260c9ae5ca18963a6eb6b764",
+    "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-6\\docs\\reviews\\v1-6-everyday-inputs\\r4-r2-signal-7acae0d53cc0244e-step-0-result.json": "6cc328b6055874ac0902651d6635dbd5313281fb35af7b7e449d6df004a6dbf5",
+    "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-6\\docs\\reviews\\v1-6-everyday-inputs\\r4-r2-signal-7acae0d53cc0244e-step-1-result.json": "86d85fb917a66211ef05117d85027067680277ce5510e75af7f1d8f12f1e2257",
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\r4-r2-signal-7acae0d53cc0244e-0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\r4-r2-signal-7acae0d53cc0244e-1.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/run_worktree_lane_wsl_r9.py": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+    "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/signal-actual-r9-active-reviewed-1/child.py": "b20b2eaab3ffce80d33e049c777c0d18607aa98ac34e07332af1b6c1157ced4f",
+    "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/signal-actual-r9-active-reviewed-1/immutable-input.txt": "75b0abc8e8a29d42c03468290804ba32e9e525181e5d54551488e7d29c769cad",
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\signal-actual-r9-finalization-reviewed-1\\admission.json": "6165e1d3f8e7f12de4467a8e0e829a08c225c6a96de2bf7e489ad0ebf1c88886",
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\r4-r2-finalize-b5a1c2d3d4e07ba5-r4-r2-state.json": "b879673f8d0b76ee34cdfdc3cf87222db1f949551a949a0f04aebd6e86776247",
+    "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-6\\docs\\reviews\\v1-6-everyday-inputs\\r4-r2-finalize-b5a1c2d3d4e07ba5-result.json": "cc72f3bc6884a08af3b53e9705866f0adea9a9e3d2ab183a8f7ecad1677b91e4",
+    "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-6\\docs\\reviews\\v1-6-everyday-inputs\\r4-r2-finalize-b5a1c2d3d4e07ba5-step-0-result.json": "586e3c64b8b058e269473a19203fee59eb676618be3768c31104679ef5914047",
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\r4-r2-finalize-b5a1c2d3d4e07ba5-0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/signal-actual-r9-finalization-reviewed-1/inject_late_signal.py": "052184532f58aff3e8d8434c22e82000ba8f61e8802ffd75266e708189f47cc3"
+  },
+  "helper_registry_evidence": {
+    "registry": "S/probe/windows-size-helper-r4",
+    "terminal_record_count": 24,
+    "retained_worker_output_sidecar_count": 24,
+    "pending_or_unknown_or_orphan_entries": 0,
+    "all_terminal_records_have_typed_confirmed_worker_and_launcher_exit_job_empty_and_closed": true,
+    "all_four_pid_creation_bound_hard_working_set_proofs_match": true,
+    "hard_working_set_minimum_bytes": 1048576,
+    "hard_working_set_maximum_bytes": 67108864,
+    "hard_max_flag": 4,
+    "hard_max_disable_flag_absent": 8,
+    "job_limit_flags": 8968,
+    "process_and_aggregate_commit_bytes": 67108864,
+    "active_process_limit": 2,
+    "every_elapsed_seconds_below": 4,
+    "deliberate_hung_fixture_failure_retained": true,
+    "terminal_records": [
+      {
+        "elapsed_seconds": 0.2969999999986612,
+        "status": "completed",
+        "sha256": "d9fb705c23b1a2c158b816dc75428953b7b9bb24c3ac888a7832816f057b561d",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "00443e2b5987423b8861c545d88b72af",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.3430000000007567,
+        "status": "completed",
+        "sha256": "1f5c8d695219498ccac89cedcc2b21c1babfaa2fd43a245744d2be7a86d0df31",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "048e357c7f2c4f3fb25348aa916cde29",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.6409999999996217,
+        "status": "completed",
+        "sha256": "7485b8cd27bb688752f7ff4e4f4e2e2d923b1b6f89b740d4a11a592dde015a28",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "063c6b2f281847f885fa8fb2503d75c6",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.6100000000005821,
+        "status": "completed",
+        "sha256": "af6575ea1d6add694b7b11177af5d5e236e5ef1139efafda5df3d6a9aa8effc2",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "1269616f31f34086920aa83e55719e3f",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.7030000000013388,
+        "status": "completed",
+        "sha256": "7ca26882e3a494ab3d3a67bcd15accf390079b20f78c13cfacd31d3b4bbf4c71",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "271d723225ee419a85c986e2d0814113",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.31199999999989814,
+        "status": "completed",
+        "sha256": "e9fa92f8be5be7222500bd7a11f29a4ba519f311b1dfd67366f3a82a4d4344ce",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "276a177d1e334f95889e2b618be8b2b5",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.75,
+        "status": "completed",
+        "sha256": "afae6d716db819f88edd8bdb01997bda932f7dae43253a356d856a2a0f9aa799",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "2eb8d493599d4641a6fdce1f6725014c",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.7029999999995198,
+        "status": "completed",
+        "sha256": "17378e7e6a31534ab98f1e87d634029c43e3e8635e9eb0df671345194e3e9e82",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "336ce6a9700c4a30a75d150bda89fa06",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.6720000000004802,
+        "status": "completed",
+        "sha256": "101febd67f91e5b814bc6d13bc8af590b0324eee3879f12d8d709d5dc454bbd2",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "33b3efa3a22b4a979e850323087cfd2a",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.6869999999998981,
+        "status": "completed",
+        "sha256": "84ca61075f9c6ecee604116caa021a4f95ac7568b08988718ca35297fdc6585c",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "34c9f8c55f6143dba9e18283cff20201",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.75,
+        "status": "completed",
+        "sha256": "6652c15768d25d319b690c0c483ba96e5e4230cbb45492d8dbaf42aca27ce973",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "381ef3fcc54b4944a124429c786fc654",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.2819999999992433,
+        "status": "completed",
+        "sha256": "72afd1410199508940a4e0d43f5f38b8ae37747e2486308dca869645a39ad60e",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "3aa64ad15cf04daca2f5b506322d1a20",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.7030000000013388,
+        "status": "completed",
+        "sha256": "0a05d9542bca9f7e5a3a9d611f7cb221acc92e3488dd3751d4e648ac7c1ab7af",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "558ab8dc607f453a864bfc804647d558",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.7180000000007567,
+        "status": "completed",
+        "sha256": "fdfb45ed8bb722581a80885bf3cd3eec4bf14df33190c857155bad19c3c5e7a3",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "596253b1dcdc48a9b9c1fdb08416c582",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 1.9219999999986612,
+        "status": "failed",
+        "sha256": "9a3f82230bb0d70f0814f8f43963f298eb9b294662c7331a777df441fa8da4bd",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "68eb51ce87614830bd9ce8dc8ad80266",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.375,
+        "status": "completed",
+        "sha256": "e142c5c55273fc30977bddd7dd099a0a66c31d2fb1708275db964042486116a3",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "6976df3115f140ecbb9a9b2a03d738ae",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.7809999999990396,
+        "status": "completed",
+        "sha256": "82af9942525e02b54aea79a0bdb22ec5da8b3bf63e5dab3eaff3a75a357e6705",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "83355458392c4593a92f44308fac2238",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.7340000000003783,
+        "status": "completed",
+        "sha256": "bedf504f2e67992f1e1e319ab47481909e8d212fa5782f5a65439a1db855e42a",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "93ef4a9571094269a05b84543d441669",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.75,
+        "status": "completed",
+        "sha256": "2c61db4f443fea0ebef06c58b0dcf1b01c9c7eed500fc42e5972a2c5a0e7a983",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "9b8249ef88c6411ba0f5da4164576b2a",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.3279999999995198,
+        "status": "completed",
+        "sha256": "b6bc166ae039df251d8ebee058414e08706fa88508064438b44ee433662e879f",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "9bf72fcb27394eb187746b9547596d19",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.3440000000009604,
+        "status": "completed",
+        "sha256": "4eb9a580f080cf6fafc718f32dcb8a7f2a69345a529fcc6ace54fb2474056f45",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "9c9328f4720c44b09dfdab7e51bccb96",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.7819999999992433,
+        "status": "completed",
+        "sha256": "e525a34b9c4938bf25b91b2f1e79303e73626fc90ea6712538fdce2f3ae3f03a",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "a5898da7c67e4be3ae0dd36d08a7b284",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.6710000000002765,
+        "status": "completed",
+        "sha256": "e3d849abb8c0cc19b1ffeadb149fb14c6b10ae17baf27883b5d4d60008060bc4",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "ccaa9484861f47878674e4188eb353e8",
+        "job_limits_correct": true
+      },
+      {
+        "elapsed_seconds": 0.7810000000008586,
+        "status": "completed",
+        "sha256": "8f99cd4b23454889e7262478fc5bce048ddb36151de397c9c8f4a438c7b45ac2",
+        "all_four_quota_identities_match": true,
+        "typed_cleanup_confirmed": true,
+        "nonce": "fa35d765ff1143b4bfca649aeb0eb1c4",
+        "job_limits_correct": true
+      }
+    ],
+    "historical_r2": {
+      "entry_count": 1,
+      "nonce": "27a9d5d9e8c54627aefa0c353dcc5dcb",
+      "original_pending_sha256": "131afdd601012e58f3395b7be3f429e79453f20d9dfa6ea1b2a6a0676fe04e2b",
+      "output_sidecar_absent": true,
+      "original_unconfirmed_cleanup_flags_unchanged": true,
+      "all_six_r9_historical_pins_match": true,
+      "original_failure_sha256": "140e961e8ed5833d5e3209121d6fc0c12e0d613f6785bff104246f18ebb6dbb1",
+      "decision_sha256": "9568ea89da271a71475f6f5fa2858aa40a466983dd49c7fb56324a2af49052a4",
+      "independent_retirement_review_sha256": "f08ba7eb9f9c09db173f4ce77488038a927f862ca669ede20742c56fddef3425",
+      "original_helper_sha256": "c708c0c88a8f8cd4ef76857dd9f03bbac4cf77f74d45548e0247c4051dda39d8",
+      "scope": "Only the independently accepted specific no-worker prelaunch retirement is recognized. No cleanup-success or native-PASS conversion."
+    },
+    "never_invoked_r3_registry_absent": true
+  },
+  "archive_evidence": {
+    "incomplete_r1": {
+      "path": "wsl-r9-qualification-fixtures-evidence-r1.tar.gz",
+      "sha256": "ff2ddc971933d4b33787bb3d13994a36a9ffa512fb752598dd6ecd9370d58335",
+      "bytes": 3892,
+      "status": "PRESERVED_INCOMPLETE_ARCHIVE_HISTORY",
+      "scope": "Windows tar could not read a Linux symlink; this artifact supplies no complete archive claim and does not change fixture verdicts."
+    },
+    "fixture_tree_r2": {
+      "path": "wsl-r9-qualification-fixtures-evidence-r2.tar.gz",
+      "sha256": "b7d1983961a538e09cf13dc02225eccaa0663a18a8b4ebef7dab61f68ccd88de",
+      "bytes": 32407,
+      "listed_members": 528,
+      "scope": "Six original reviewed fixture directories, including admissions, check results, tiny pure-case files and link fixtures; outer lane files are bound by the separate addendum."
+    },
+    "raw_addendum_r1": {
+      "path": "wsl-r9-lifecycle-helper-evidence-r1.tar.gz",
+      "sha256": "ed6713662a8ca211c7f0ee5f0963c719b5cece57605fe598e5b1483e7126d336",
+      "listed_members": 62,
+      "indexed_original_files": 61,
+      "all_61_indexed_hashes_match_retained_originals": true,
+      "scope_counts": {
+        "states": 2,
+        "logs": 3,
+        "locks": 2,
+        "step_receipts": 3,
+        "cumulative_receipts": 2,
+        "r2_original_pending": 1,
+        "r4_terminal_records": 24,
+        "r4_worker_output_sidecars": 24
+      },
+      "exact_index": "exact-sha256-index.json",
+      "originals_retained": true,
+      "scope_limit": "Archive bytes and member scope are bound; the embedded index was independently compared with all 61 retained originals. The reviewer did not execute fixture code or restore archives."
+    }
+  },
+  "qualification_limits": [
+    "Acceptance permits preparation of fresh native admission only. No native campaign manifest, campaign clock, native command execution or native PASS is established by these fixture results.",
+    "Native admission must freshly establish resources, exact method/interpreter/read-set bindings, historical and active registry guards, and the unchanged bounded native specification before launch.",
+    "The immutable native baseline and deadline, 20-minute total cap, original disk and memory floors, 2 GiB native RSS ceiling, 1 GiB cumulative measured growth, Go concurrency bounds and publication reserves remain required.",
+    "Earlier failed runner/helper/scanner attempts and incomplete archives remain preserved with their original verdicts. This acceptance neither resets a campaign baseline or clock nor retrospectively rescores a failure.",
+    "Only the exact accepted sources and observed host path are qualified. A source, runtime, registry, accounting-root or host-path change requires the applicable review and qualification again."
+  ]
+}

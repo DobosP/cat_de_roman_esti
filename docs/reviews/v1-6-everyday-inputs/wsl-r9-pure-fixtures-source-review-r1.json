@@ -1,0 +1,54 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:34:33Z",
+  "scope": "PURE_PARSER_AND_SYNTHETIC_GUARD_SOURCE_ONLY",
+  "verdict": "ACCEPT_SOURCE_ONLY_PURE_FIXTURES",
+  "append_only": true,
+  "bindings": {
+    "methods/check_windows_receipt_registry_wsl_r4.py.txt": "b05018af3efc6d015b6f994508c5981b373fc689b59fe7b78437be449a4d7b60",
+    "methods/check_windows_hard_working_set_proofs_wsl_r2.py.txt": "50c94658822b763a09162a16b51ee1cdb8cf098b41be09339e87061b96ca9ffb",
+    "methods/check_windows_historical_registry_guard_wsl_r1.py.txt": "402fdf87cb8f71fbe31edf3c708a465abf56fcfdf993bcf5078dc90b7c6746ae",
+    "methods/run_worktree_lane_wsl_r9.py.txt": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213"
+  },
+  "component_verdicts": {
+    "receipt_registry_r4": "ACCEPT_SOURCE_ONLY_PURE_FIXTURE",
+    "hard_quota_proofs_r2": "ACCEPT_SOURCE_ONLY_PURE_FIXTURE",
+    "historical_registry_guard_r1": "ACCEPT_SOURCE_ONLY_SYNTHETIC_GUARD_FIXTURE"
+  },
+  "reviewer_execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "findings": [],
+  "accepted_source_properties": {
+    "common": [
+      "All import exact hardcoded R9 source bytes with bytecode disabled into inert modules, invoke only isolated validator functions and explicitly deny subprocess run/Popen.",
+      "Every fixture requires a fresh directory inside its dedicated owned probe subtree, bounds individual synthetic files32KiB and reports128KiB, rechecks runner source after validation, and refuses acceptance after ten elapsed seconds.",
+      "No application, Go, native helper, child process, live OS quota or process-exit operation exists in these fixture paths."
+    ],
+    "receipt_registry": [
+      "Only source pin/schema/header changed from reviewed29-case R2 classifier fixture. All29 expected terminal/sidecar/cleanup/nonregular/unknown/prelaunch refusal cases and repeated two-line-output acceptance remain, with entry snapshots preserved."
+    ],
+    "hard_quota_proofs": [
+      "Exactly173 cases are constructed: three positive cases and170 negative cases. Full valid four-role proof records bind distinct parent/launcher/worker identities, self proof to worker, ownership/membership/suspension/admission booleans, completion readbacks and exact Job64MiB/active2/configured8968/closed state.",
+      "Negative cases cover missing/extra/nondict roles, wrong PID/creation or float/bool identities, scope/ownership booleans with false/int impostors, exact bounds and hard flags, absent/nonpositive identities, Job/exact membership and suspension, missing/stale/soft completion snapshots, Job limits/config/close and nondict/negative flag quota values.",
+      "Each input is exclusively written, hashed, and compared to both preserved bytes and in-memory JSON after parser calls. Both the exact173 coverage count and no-native condition must hold before pass."
+    ],
+    "historical_guard": [
+      "Exactly15 cases use only newly owned tiny R/S/D roots. Module roots and digest are saved/restored; no real historical registry is passed to the guard.",
+      "Digest stub accepts only the six exact owned placeholder paths, maps unchanged placeholder bytes to frozen expected hashes and returns real SHA-256 on mutation. Accepted cases require all six digest calls; this is explicitly synthetic error/identity routing, not historical evidence verification.",
+      "Absent/empty R3 accept. Denied R3 lstat/iteration must propagate PermissionError; regular/symlink/nonempty R3 refuse. R2 regular/symlink registry, original directory/symlink/missing/renamed/extra/mutated bytes refuse.",
+      "Path method patches apply only to the exact synthetic R3 path, delegate all other operations and are restored by context managers. Before/after recursive lstat snapshots do not follow directory symlinks and require every owned entry unchanged."
+    ]
+  },
+  "claim_limits": [
+    "Synthetic cleanup flags are not process-exit evidence; hard quota parser records are not live OS enforcement; digest stub is not validation of actual historical hashes.",
+    "Source review establishes the intended fixture coverage and isolation only; no actual pass or runtime is asserted."
+  ],
+  "execution_preconditions": [
+    "This exact source acceptance permits the requested three pure fixtures against exact R9 bytes in fresh owned directories, using ordinary nonoptimized Python and external ten-second per-fixture bounds.",
+    "Keep every failed/incomplete receipt; elapsed cutoff or missing final receipt cannot qualify a pass.",
+    "A pure historical-guard pass does not replace the caller's real exact R2 retirement bindings or permit a generic pending failure exception.",
+    "Full actual-root parity/performance and active/finalization R9 lifecycle evidence, followed by unchanged fresh native resource admission, remain required before Go/native commands."
+  ]
+}

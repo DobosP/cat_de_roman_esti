@@ -1,0 +1,109 @@
+"""Run the existing graph transaction against five task-owned scratch mirrors only."""
+import contextlib
+import hashlib
+import io
+import json
+import pathlib
+import resource
+import sys
+import time
+
+R = pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S = pathlib.Path('/home/dobo/work/_temp/codex__content-v1-6/probe/materialization-r1')
+D = R / 'docs/reviews/v1-6-everyday-inputs'
+sys.path[:0] = [str(R), str(R / 'scripts')]
+resource.setrlimit(resource.RLIMIT_AS, (2 * 1024**3, 2 * 1024**3))
+sha = lambda p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+read = lambda p: json.loads(pathlib.Path(p).read_bytes())
+admission = read(sys.argv[1])
+assert sha(D / 'graph-proposal-r1.json') == admission['proposal_sha256']
+assert sha(R / 'scripts/everyday_inputs_v1_6_data.py') == admission['module_sha256']
+assert sha(D / 'graph-factual-review-r1.json') == admission['factual_review_sha256']
+assert sha(D / 'graph-quality-prospective-r1.json') == admission['prospective_review_sha256']
+assert not S.exists(), 'Never overwrite a previous materialization or failed attempt'
+S.mkdir()
+originals = {
+ 'package/kg_sample.json': R / 'cat_de_roman_esti/fixtures/kg_sample.json',
+ 'tests/kg_sample.json': R / 'tests/fixtures/kg_sample.json',
+ 'package/games_pack.json': R / 'cat_de_roman_esti/fixtures/games_pack.json',
+ 'tests/games_pack.json': R / 'tests/fixtures/games_pack.json',
+ 'tests/mobile.json': R / 'tests/fixtures/cat_mobile_app_pack_contract.json',
+}
+base = read(originals['package/kg_sample.json'])
+for name, source in originals.items():
+ for prefix in ('baseline', 'candidate'):
+  target = S / prefix / name
+  target.parent.mkdir(parents=True, exist_ok=True)
+  target.write_bytes(source.read_bytes())
+import apply_common_words_v24 as A
+import densify_content as G
+import validate_fixture as V
+import validate_games_pack as P
+pkg = S / 'candidate/package/kg_sample.json'
+test = S / 'candidate/tests/kg_sample.json'
+pp = S / 'candidate/package/games_pack.json'
+pt = S / 'candidate/tests/games_pack.json'
+mobile = S / 'candidate/tests/mobile.json'
+A.FIXTURE_COPIES = (pkg, test)
+A.PACK_COPIES = (pp, pt)
+A.MOBILE_CONTRACT = mobile
+A.TRANSACTION_FILES = (*A.FIXTURE_COPIES, *A.PACK_COPIES, mobile)
+G.PACKAGE_FIXTURE = V.PACKAGE_FIXTURE = V.DEFAULT_FIXTURE = pkg
+G.TESTS_FIXTURE = V.TESTS_FIXTURE = test
+P.PACKAGE_KG, P.TESTS_KG, P.PACKAGE_PACK, P.TESTS_PACK = pkg, test, pp, pt
+assert all(p.is_relative_to(S) for p in A.TRANSACTION_FILES)
+# Preserve exact generator bytes if an original validator refuses them; errors are
+# returned untouched and the supported transaction still rolls back all five mirrors.
+original_validate = G.validate_fixture
+observations = []
+def observe(path):
+ if read(pkg)['meta']['build_version'] == 'fixture-v1-6-everyday-inputs':
+  (S / 'generator-produced-kg.json').write_bytes(pkg.read_bytes())
+  (S / 'generator-produced-mirror.json').write_bytes(test.read_bytes())
+ errors = original_validate(path)
+ observations.append({'path': str(path), 'errors': errors, 'mirrors_equal': pkg.read_bytes() == test.read_bytes()})
+ return errors
+G.validate_fixture = observe
+begin = time.monotonic()
+log = io.StringIO()
+failure = None
+try:
+ with contextlib.redirect_stdout(log), contextlib.redirect_stderr(log):
+  A.apply(dry_run=False, module_name='everyday_inputs_v1_6_data')
+except BaseException as exc:
+ failure = {'type': type(exc).__name__, 'message': str(exc)}
+finally:
+ (S / 'transaction.log').write_text(log.getvalue())
+ unchanged = {str(p.relative_to(R)): sha(p) == sha(S / 'baseline' / name) for name, p in originals.items()}
+ assert all(unchanged.values()), 'Installed transaction inputs changed'
+ result = {'schema': 'v1-6-isolated-materialization-r1', 'failure': failure,
+  'elapsed_seconds': time.monotonic() - begin, 'max_RSS_KiB': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+  'installed_transaction_files_unchanged': unchanged, 'validation_observations': observations,
+  'mirrors_equal': pkg.read_bytes() == test.read_bytes(), 'log_sha256': sha(S / 'transaction.log'),
+  'factual_review_sha256': admission['factual_review_sha256'],
+  'proposal_sha256': admission['proposal_sha256'], 'module_sha256': admission['module_sha256'],
+  'raw_quality_acceptance': False, 'installation_approval': False}
+ if failure:
+  result['rollback_restored_all_five'] = all((S / 'candidate' / name).read_bytes() == (S / 'baseline' / name).read_bytes() for name in originals)
+ else:
+  candidate = read(pkg)
+  before = {n['id']: n for n in base['kg_nodes']}
+  after = {n['id']: n for n in candidate['kg_nodes']}
+  expected = {'n_v4ist_steag': 'drapel', 'n_v24_food_pantry_ulei': 'untdelemn'}
+  deltas = {nid: {'before': before[nid], 'after': after[nid]} for nid in before if before[nid] != after.get(nid)}
+  assert before.keys() == after.keys() and set(deltas) == set(expected)
+  for nid, word in expected.items():
+   wanted = dict(before[nid]); wanted['aliases'] = before[nid]['aliases'] + [word]
+   assert after[nid] == wanted, 'Unexpected node/form mutation'
+  assert candidate['kg_edges'] == base['kg_edges'], 'Topology delta forbidden'
+  assert candidate['kg_puzzles'] == base['kg_puzzles'], 'Historical terminal delta forbidden'
+  assert pp.read_bytes() == originals['package/games_pack.json'].read_bytes()
+  assert pt.read_bytes() == originals['tests/games_pack.json'].read_bytes()
+  result.update({'candidate_sha256': sha(pkg), 'candidate_path': str(pkg),
+   'counts': {'nodes': len(after), 'edges': len(candidate['kg_edges']), 'stored_aliases': sum(len(n.get('aliases', [])) for n in after.values()), 'puzzles': len(candidate['kg_puzzles'])},
+   'exact_node_deltas': deltas, 'all_old_edges_and_terminal_payloads_exact': True,
+   'all_old_nodes_except_two_appended_forms_exact': True, 'pack_mirrors_unchanged': True})
+ (S / 'result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+ print(json.dumps(result, ensure_ascii=False), flush=True)
+if failure:
+ raise SystemExit(1)

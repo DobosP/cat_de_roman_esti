@@ -1,0 +1,43 @@
+{
+  "artifact_bindings": {
+    "wsl-descriptor-copy-pure-r3-parent.json": "c391fdd777f2c810bb020973b5b7bcfcb59e43f13f78283d948e0886d2dd7b42",
+    "wsl-descriptor-copy-pure-r3-result.json": "813f0984ee6b200adbfbf0bce1b66cd6e205283469667a1d715107b411bfc334",
+    "wsl-descriptor-copy-pure-r3-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-descriptor-copy-pure-r3-stdout.json": "df3ce9642fc80c9ff7715dac1a86e1a3bee4a15921b65162dce0d8ce08ee2dbd"
+  },
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "checks": [
+    "Original/copied stdout exactdf3ce964... and result exact813f0984... semantically agree. Original C result byte-exact; stderr empty; parent hashes and immediate Linux Python52e0/version3.14.4/opt0/-B pre/post match.",
+    "Live materialized fixturec91162be... and copy342a0708... freshly match captured pre/post bindings.",
+    "Original C source5 root retains exact23-byte payload and no retained-root target; original source8 contains retained23-byte payload but no FIFO leaf, coherent with refused C rename behavior and unsupported mkfifo.",
+    "Seven published passed cases cover normal C-to-ext4 copying, ext4 parent/root/symlink edge adversaries, conditional C held-root behavior and C leaf symlink/hardlink guards."
+  ],
+  "copy_method_sha256": "342a070872792b0203ec4f074a4cabca4579f4c8bcd8bb2b66246f8b79c01110",
+  "fixture_sha256": "c91162be1b7c4d7d623b234ed18681ed0db2ca149bf76c58037babdd4976d26c",
+  "installation_approval": false,
+  "limits": [
+    "Full32-case fixture did not pass. Runtime/mutation/acquisition/signal/FD/publication cases following FIFO did not execute.",
+    "No copy preparation, metadata helper or native Go campaign was invoked by this pure fixture.",
+    "This failure preserves the host-specific unsupported operation; it neither falsifies the source guard nor qualifies actual copy/resources/native execution.",
+    "This bounded audit checked C/raw source/capture artifacts; it did not newly rehash every retained ext4 adversary artifact."
+  ],
+  "native_pass": false,
+  "next_scope": "Separate R4 host-adapted synthetic FIFO/mutation fixture may run only after exact source acceptance; retain R3 and R2 failures unchanged.",
+  "nonce": "7a83ecd7565e490abd71b1ebbce44765",
+  "observed": {
+    "child_elapsed_seconds": 0.6091192909989331,
+    "completed_cases": 7,
+    "expected_cases": 32,
+    "failure": "OSError errno95 Operation not supported at C fixture os.mkfifo before the production leaf read/open guard",
+    "parent_elapsed_seconds": 1.4457508,
+    "parent_exit_code": 1,
+    "status": "FAILED",
+    "stderr_bytes": 0
+  },
+  "original_failed_native_R1_clock_renewed": false,
+  "original_failures_preserved": true,
+  "reviewed_at_utc": "2026-10-07T13:18:42.104894+00:00",
+  "reviewer": "/root/continuation_audit, independent reviewer",
+  "schema": "v1-6-descriptor-copy-pure-r3-failure-evidence-review-r1",
+  "verdict": "ACCEPT_PRESERVED_FAILED_FIXTURE_EVIDENCE"
+}

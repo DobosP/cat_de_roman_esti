@@ -114,4 +114,14 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 
 - [0178](0178-v1-5-hot-chocolate-discovery.md) — one reviewed world-local hot-chocolate discovery with preserved progress and native gates.
 
-- [0184](0184-native-spa-toolchain-and-managed-output.md) — native SPA tooling/managed-output prerequisites; runtime validation pending (0183 is already claimed by the independent V1.7 content branch).
+- [0179](0179-resume-v1-6-in-original-chat.md) — continue the existing V1.6 task and sequential version loop in the original chat with unchanged gates.
+
+- [0180](0180-stop-windows-loop-publish-linux-checkpoint.md) — stop the Windows version loop and publish the explicitly requested partial V1.6 feature checkpoint for Linux.
+
+- [0181](0181-resume-linux-v1-6-finish.md) — resume the existing Linux V1.6 qualification and human-requested iteration loop.
+
+- [0182](0182-v1-6-reviewed-singular-inputs.md) — two qualified singular synonym inputs with native Source6/current authority and preserved history.
+
+- [0183](0183-v1-7-single-salary-input-admission.md) — admit the exact singular salary input and one-word batch disposition to supported qualification.
+
+- [0184](0184-native-spa-toolchain-and-managed-output.md) — native SPA tooling/managed-output prerequisites; runtime validation pending (0183 belongs to the independent V1.7 branch).

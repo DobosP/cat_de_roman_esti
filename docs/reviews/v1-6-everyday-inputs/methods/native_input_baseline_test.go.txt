@@ -1,0 +1,147 @@
+package httpapi
+
+// Research-only overlay test. It loads the unchanged sealed content and invokes
+// ordinary selectors and public HTTP handlers. It never modifies content or sessions.
+import (
+ "bytes"
+ "encoding/json"
+ "fmt"
+ "math/big"
+ "net/http/httptest"
+ "os"
+ "reflect"
+ "strings"
+ "testing"
+
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/pack"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom"
+)
+
+func TestV16OrdinaryInputBaselineResearch(t *testing.T) {
+ t.Setenv("CAT_ALLOWED_HOSTS", "testserver,example.com")
+ c, err := content.Load()
+ if err != nil { t.Fatal(err) }
+ type row struct { Curated, Target, Novel, Canonical, Owner string; Extras []string }
+ cases := []row{
+  {"ct_istorie_368", "n_alba_iulia", "drapel", "Steag", "n_v4ist_steag", []string{"Marea Unire 1918", "Revoluția din 1989"}},
+  {"ct_gastronomie_347", "n_v87_food_chec", "untdelemn", "Ulei", "n_v24_food_pantry_ulei", []string{"Zahăr", "Făină"}},
+ }
+ report := map[string]any{"schema":"v1-6-ordinary-http-baseline-research-r1", "scope":"Unchanged installed baseline only; in-process HTTP handlers, not TCP/browser or prospective installation", "default_selector":map[string]any{"difficulty":"usor","category":"","daily":false,"exclusions":false}, "seed_bound_inclusive":[]int{0,511}, "max_sessions":4, "max_requests":80, "content_mutation":false}
+ transcript := []map[string]any{}
+ observations := []map[string]any{}
+ seeds := map[string]int64{}
+ t.Cleanup(func() {
+  report["test_failed"] = t.Failed(); report["transcript"] = transcript; report["observations"] = observations; report["seeds"] = seeds
+  b,e := json.MarshalIndent(report,"","  "); if e != nil { t.Error(e); return }
+  path := os.Getenv("V16_BASELINE_REPORT"); if path == "" { t.Error("missing report path"); return }
+  if e=os.WriteFile(path,append(b,'\n'),0600);e!=nil { t.Error(e) }
+ })
+ picker := pack.New(c)
+ draws := 0
+ for seed := int64(0); seed <= 511 && len(seeds)<len(cases); seed++ {
+  chosen := picker.PickSeeded("contexto",pyrandom.New(big.NewInt(seed)),pack.PickOptions{Category:"",Difficulty:"usor",FilteredShelfWeights:true})
+  draws++
+  if chosen==nil { continue }
+  for _,r := range cases {
+   if chosen.ID==r.Curated {
+    if chosen.Payload["target"]!=r.Target { t.Fatalf("selected target drift: %v",chosen) }
+    if _,found:=seeds[r.Curated];!found { seeds[r.Curated]=seed }
+   }
+  }
+ }
+ report["picker_draws"] = draws
+ if len(seeds)!=len(cases) { t.Fatalf("no ordinary case within fixed seed bound: %v",seeds) }
+ number := func(v any) int { f,ok:=v.(float64);if !ok {t.Fatalf("not a JSON number: %T %v",v,v)};return int(f) }
+ for _,r := range cases {
+  s:=New(c)
+  var canonicalFeedback map[string]any
+  for _,arm:=range []string{"novel_then_canonical","canonical_control"} {
+   obs:=map[string]any{"curated_id":r.Curated,"target_id":r.Target,"seed":seeds[r.Curated],"arm":arm,"novel":r.Novel,"canonical":r.Canonical}
+   observations=append(observations,obs)
+   request:=func(label,method,path string,body any,privacy bool) (int,map[string]any) {
+    t.Helper()
+    if len(transcript)>=80 {t.Fatal("request cap reached")}
+    var data []byte
+    if body!=nil {data,_=json.Marshal(body)}
+    req:=httptest.NewRequest(method,"http://testserver"+path,bytes.NewReader(data));req.Header.Set("Content-Type","application/json")
+    rec:=httptest.NewRecorder();s.ServeHTTP(rec,req)
+    response:=map[string]any{}
+    if err:=json.Unmarshal(rec.Body.Bytes(),&response);err!=nil {t.Fatalf("non-JSON response %d: %s",rec.Code,rec.Body.String())}
+    transcript=append(transcript,map[string]any{"case":r.Curated,"arm":arm,"label":label,"method":method,"path":path,"request":body,"status":rec.Code,"response":response})
+    if privacy {
+     for _,key:=range []string{"target","score","share","curated_id","curatedId"} {if _,ok:=response[key];ok {t.Fatalf("private field %s exposed at %s",key,label)}}
+     raw:=rec.Body.String()
+     for _,secret:=range []string{r.Target,c.Labels[r.Target],r.Curated} {if strings.Contains(raw,secret) {t.Fatalf("target/curated identity exposed at %s",label)}}
+    }
+    return rec.Code,response
+   }
+   getState:=func(label,base string,expected map[string]any) {
+    status,got:=request(label,"GET",base,nil,true)
+    if status!=200 {t.Fatalf("GET %s status %d",label,status)}
+    for _,key:=range []string{"attempts","guesses","clues_used","won"} {
+     old,present:=expected[key];current,found:=got[key]
+     if !present || !found || !reflect.DeepEqual(old,current) {t.Fatalf("GET %s field %s drift: %v vs %v",label,key,old,current)}
+    }
+   }
+   status,initial:=request("create","POST",fmt.Sprintf("/api/wordgames/contexto/games?seed=%d&difficulty=usor",seeds[r.Curated]),nil,true)
+   if status!=200 || initial["won"]!=false || number(initial["attempts"])!=0 {t.Fatalf("create: %d %v",status,initial)}
+   id,ok:=initial["game_id"].(string);if !ok {t.Fatal("missing session")};base:="/api/wordgames/contexto/games/"+id
+   curated,finished,won,score,found:=s.contexto.Progress(id)
+   if !found || curated!=r.Curated || finished || won || score!=-1 {t.Fatalf("ordinary selection mismatch: %s %v %v %d",curated,finished,won,score)}
+   getState("initial_get",base,initial)
+   status,_=request("unearned_clue","POST",base+"/clue",nil,true);if status!=400 {t.Fatalf("unearned clue status %d",status)}
+   if arm=="novel_then_canonical" {
+    status,first:=request("novel_first","POST",base+"/guess",map[string]any{"text":r.Novel},true)
+    if status!=200 {t.Fatalf("novel returned %d",status)}
+    status,repeat:=request("novel_repeat","POST",base+"/guess",map[string]any{"text":r.Novel},true)
+    if status!=200 || number(repeat["attempts"])!=number(first["attempts"]) {t.Fatal("novel repeat charged")}
+    for _,observed:=range []map[string]any{first,repeat} {
+     if observed["ok"]==false || observed["needs_confirmation"]==true {
+      guesses,present:=observed["guesses"].([]any)
+      if number(observed["attempts"])!=0 || !present || len(guesses)!=0 {t.Fatal("unknown or unconfirmed input charged an attempt")}
+     }
+    }
+    novelState:=repeat
+    obs["novel_initial_response"]=first
+    if first["needs_confirmation"]==true {
+     token,ok:=first["resolved_token"].(string);if !ok {t.Fatal("missing confirmation token")}
+     status,confirmed:=request("novel_confirm_once","POST",base+"/guess",map[string]any{"text":r.Novel,"confirm":token},true)
+     if status!=200 {t.Fatalf("confirmation %d",status)};obs["novel_confirmation_response"]=confirmed;novelState=confirmed
+    }
+    getState("after_novel_get",base,novelState)
+   }
+   status,canonical:=request("canonical_first","POST",base+"/guess",map[string]any{"text":r.Canonical},true)
+   if status!=200 || canonical["ok"]!=true || canonical["won"]!=false {t.Fatalf("canonical %d %v",status,canonical)}
+   guess,ok:=canonical["guess"].(map[string]any);if !ok || guess["id"]!=r.Owner {t.Fatalf("canonical owner mismatch %v",guess)}
+   feedback:=map[string]any{}
+   for _,key:=range []string{"id","label","distance","rank","temperature","closeness"} {feedback[key]=guess[key]}
+   obs["canonical_feedback"]=feedback
+   if canonicalFeedback==nil {canonicalFeedback=feedback} else if !reflect.DeepEqual(canonicalFeedback,feedback) {t.Fatal("same-seed canonical feedback changed between fresh arms")}
+   status,repeated:=request("canonical_repeat","POST",base+"/guess",map[string]any{"text":r.Canonical},true)
+   if status!=200 || number(repeated["attempts"])!=number(canonical["attempts"]) {t.Fatal("canonical repeat charged")}
+   getState("after_canonical_get",base,repeated)
+   last:=repeated
+   for _,extra:=range r.Extras {
+    if number(last["attempts"])>=3 {break}
+    status,last=request("earned_extra","POST",base+"/guess",map[string]any{"text":extra},true)
+    if status!=200 || last["ok"]!=true || last["won"]!=false {t.Fatalf("bounded extra failed: %s %v",extra,last)}
+   }
+   if number(last["attempts"])<3 {t.Fatal("three successful guesses not reached within two extra guesses")}
+   status,clue:=request("earned_clue","POST",base+"/clue",nil,true)
+   if status!=200 || clue["clue_kind"]!="category" || number(clue["clues_used"])!=1 {t.Fatalf("earned clue %d %v",status,clue)}
+   getState("after_clue_get",base,clue)
+   status,terminal:=request("solve","POST",base+"/guess",map[string]any{"text":c.Labels[r.Target]},false)
+   if status!=200 || terminal["won"]!=true {t.Fatalf("solve failed %d %v",status,terminal)}
+   expectedScore:=max(50,1000-60*(number(terminal["attempts"])-1)-120*number(terminal["clues_used"]))
+   if number(terminal["score"])!=expectedScore || terminal["share"]==nil {t.Fatal("terminal scoring/share mismatch")}
+   status,recovered:=request("terminal_get","GET",base,nil,false)
+   if status!=200 || !reflect.DeepEqual(recovered["target"],terminal["target"]) || recovered["score"]!=terminal["score"] || recovered["share"]!=terminal["share"] {t.Fatal("terminal recovery mismatch")}
+   cid,done,won,finalScore,exists:=s.contexto.Progress(id)
+   if !exists || cid!=r.Curated || !done || !won || finalScore!=expectedScore {t.Fatal("terminal progress mismatch")}
+   obs["final_attempts"]=terminal["attempts"];obs["final_score"]=expectedScore
+  }
+ }
+ report["request_count"]=len(transcript)
+ t.Logf("baseline complete: draws=%d seeds=%v sessions=4 requests=%d",draws,seeds,len(transcript))
+}

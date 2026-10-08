@@ -1,0 +1,105 @@
+{
+  "component_verdicts": {
+    "focused_fixture_r2": "REQUEST_CHANGES",
+    "generic_capture_r2": "ACCEPT_SOURCE_ONLY_REUSED_EXACT_BYTES",
+    "runner_r14": "ACCEPT_SOURCE_ONLY"
+  },
+  "coverage_clarifications_not_runner_defects": [
+    {
+      "lines": [
+        79,
+        102
+      ],
+      "observation": "The active lstat peak2 proves two executing workers but does not dynamically prove two unfinished submissions; the runner queue cap is verified statically.",
+      "recommended": "Instrument submit/done callbacks if execution receipt claims max2 outstanding futures."
+    },
+    {
+      "lines": [
+        53,
+        60
+      ],
+      "observation": "The mutation is made before the first validation, so this case does not prove the same path is reread after a prior accepted sweep.",
+      "recommended": "Validate first, mutate the same file, then require refusal."
+    },
+    {
+      "lines": [
+        129,
+        137
+      ],
+      "observation": "The self-SIGTERM fires after real shutdown returns. This proves the post-join signal boundary, not a signal delivered while a sibling remains in flight.",
+      "recommended": "Use precise post-join case/receipt naming; separate in-flight join coverage would need bounded releasable barriers."
+    },
+    {
+      "lines": [
+        138,
+        140
+      ],
+      "observation": "The noninterruptible case only requires no exception, without checking every lstat/final read under the pending signal.",
+      "recommended": "Count all8 lstats and4 reads under the pending flag to support the case name."
+    }
+  ],
+  "exact_source_sha256": {
+    "methods/check_r14_registry_delta_pure_wsl_r2.py.txt": "d323dcb88b7971f7733e178bd00dde046f6049f1e5d5a1f04fdd2e530f0c1af2",
+    "methods/invoke_pure_capture_r2.ps1.txt": "37e8a68ea8d3432f2697f964d190751fd7487a79cc22fc0cd17b3d5b7b33a3f9",
+    "methods/run_worktree_lane_wsl_r14.py.txt": "42543f0b8a6e9f37a55410ec1800b59c91b61f069c9913309cde9371f6501144"
+  },
+  "findings": [
+    {
+      "file": "methods/check_r14_registry_delta_pure_wsl_r2.py.txt",
+      "id": "F1",
+      "issue": "Every SIGTERM increments the real-self-delivery count and sets only the runner flag. case() clears that flag between cases; guard() and PASS do not distinguish or refuse unexpected SIGTERM. An unexpected cancellation during a default noninterruptible sweep can therefore be erased and the controlled fixture still report PASS.",
+      "lines": [
+        30,
+        32,
+        44,
+        45,
+        148
+      ],
+      "required_repair": "Append a new fixture revision with a planned-delivery marker around its one os.kill, a separately retained unexpected-signal flag refused by guard/before success, and exact expected self-delivery count1. Preserve R2 bytes and do not execute it.",
+      "severity": "blocking-fixture"
+    }
+  ],
+  "fixture_scope": {
+    "declared_cases": 25,
+    "exact_bound_runner": "42543f0b8a6e9f37a55410ec1800b59c91b61f069c9913309cde9371f6501144",
+    "real_intended_self_signal": "SIGTERM at final post-shutdown boundary",
+    "retained_draft_r1_sha256": "4f2991f86ac46923561f2b70e96b11b124d736275a51e1e944e83c3ebf26ada2",
+    "source_only_unexecuted": true,
+    "tiny_owned_C_ledgers_only_no_host_helper_or_native_call": "reviewed static source"
+  },
+  "remaining_preconditions": [
+    "Repair and independently review exact fixture bytes before any pure execution.",
+    "Actual bounded pure evidence is required; source acceptance grants no timing or lifecycle qualification.",
+    "Retargeted actual/refusal sources require their own exact-source review before execution.",
+    "Finalization6-count and queued8-count24s feasibility is unproved; no performance guarantee follows from two threads.",
+    "Original nativeR1 failed clock, all preserved lifecycle failures and baseline752431588 remain immutable."
+  ],
+  "review_execution": "No candidate code, pool, signal, helper, Go or native command executed by reviewer. Source reads, hashes, AST comparisons only.",
+  "reviewed_at_utc": "2026-10-07T15:53:34.331448+00:00",
+  "reviewer": "independent continuation_audit",
+  "runner_scope": {
+    "all_limits_roots_baseline_clock_readsets_history_publication_protocols_unchanged": true,
+    "all_observed_done_errors_checked_before_consume_refill": true,
+    "all_sidecar_pending_orphan_checks_before_final_snapshot_phase": true,
+    "bounded_workers": 2,
+    "cancel_queued_and_join_every_running_worker_on_all_outcomes": true,
+    "changed_functions": [
+      "validate_prior_windows_receipts",
+      "main"
+    ],
+    "final_main_signal_check_after_join": true,
+    "fresh_lstat_every_entry": true,
+    "kernel_uninterruptible_wait_hostloss_guarantee_not_claimed": true,
+    "maximum_unfinished_futures_source_bound": 2,
+    "no_cross_call_cached_count_or_hash_or_snapshot": true,
+    "no_raw_registry_corpus_retained": true,
+    "noninterruptible_default_completes_valid_sweep": true,
+    "one_pool_reused_for_two_phases": true,
+    "other_R13_function_ASTs_unchanged_except_main_usage_string": true,
+    "same_schema_nonce_path_not_created_terminal_cleanup_predicates": true,
+    "signal_check_before_submissions_and_in_waits": true,
+    "single_fresh_bounded_snapshot_read_bytes": 16385
+  },
+  "schema": "v1-6-r14-registry-source-review-r1",
+  "source_materialized_runner_sha256": "42543f0b8a6e9f37a55410ec1800b59c91b61f069c9913309cde9371f6501144"
+}

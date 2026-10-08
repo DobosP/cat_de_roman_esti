@@ -1,0 +1,209 @@
+"""Pure Python R8 identity-bound hard working-set proof parser regression.
+
+CLI: fixture.py NEW_OWNED_DIRECTORY RUNNER_PATH EXACT_RUNNER_SHA256
+Synthetic records test parsing only; never OS quotas, process exit or Job evidence.
+No Go, children, native helper or foreign process inspection/signalling.
+"""
+import copy
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+from pathlib import Path
+import sys
+import time
+
+STARTED = time.monotonic()
+sys.dont_write_bytecode = True
+S = Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+EXPECTED_RUNNER_SHA256 = '977f90489c60056fe6579e94c695bbbb01425fad1dde4748089ce5ff7fb9820e'
+MAX_SECONDS = 10
+MAX_FILE = 32 << 10
+ROLES = ('parent', 'launcher', 'worker', 'worker_self')
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def quota():
+    return {'minimum_bytes': 1 << 20, 'maximum_bytes': 64 << 20, 'enforcement_flags': 6}
+
+
+def accepted_record():
+    identities = {role: {'pid': 101 + index, 'creation_time_100ns': 100000001 + index}
+                  for index, role in enumerate(('parent', 'launcher', 'worker'))}
+    scopes = {'parent': 'parent-own-current-process', 'launcher': 'exact-owned-windows-job',
+              'worker': 'exact-owned-windows-job', 'worker_self': 'worker-own-current-process'}
+    proofs = {}
+    for role in ROLES:
+        identity = identities['worker' if role == 'worker_self' else role]
+        proofs[role] = dict(identity, **quota(), ownership_scope=scopes[role], hard_max_verified=True,
+                           identity_verified_before_quota=True, before_traversal=True, quota_call_succeeded=True,
+                           job_membership_verified_before_quota=role != 'parent',
+                           exact_owned_job_membership_verified_before_quota=role in ('launcher', 'worker'),
+                           enforced_while_suspended=role == 'launcher')
+    return dict(identities, hard_working_set_proofs=proofs,
+                launcher_working_set_before_traversal=quota(), parent_working_set_at_completion=quota(),
+                worker_working_set_at_completion=quota(), job_setup={'configured': True, 'limit_flags': 8968},
+                job_memory_limit_bytes=64 << 20, process_memory_limit_bytes=64 << 20,
+                job_active_process_limit=2, job_closed_confirmed=True)
+
+
+def main(directory, runner_path, runner_sha):
+    directory = Path(directory).resolve()
+    fixture_base = (S / 'probe/windows-hard-working-set-proof-fixtures').resolve()
+    if directory == fixture_base or not directory.is_relative_to(fixture_base):
+        raise ValueError('new owned fixture directory required')
+    runner_path = Path(runner_path).resolve()
+    if runner_sha != EXPECTED_RUNNER_SHA256 or digest(runner_path) != runner_sha:
+        raise RuntimeError('exact R8 runner source binding required')
+    directory.mkdir(parents=True, exist_ok=False)
+    report = {'schema': 'v1-6-pure-windows-hard-working-set-proof-fixture-r1', 'passed': False,
+              'runner_sha256': runner_sha, 'fixture_sha256': digest(__file__), 'cases': [],
+              'native_or_Go_executions': 0, 'synthetic_records_are_not_OS_quota_or_exit_evidence': True}
+    output = directory / 'check-result.json'
+    def publish():
+        blob = json.dumps(report, indent=2).encode('utf-8') + b'\n'
+        if len(blob) > 128 << 10:
+            raise ValueError('fixture report128KiB')
+        output.write_bytes(blob)
+    publish()
+    loader = importlib.machinery.SourceFileLoader('pure_hard_working_set_fixture_runner', str(runner_path))
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    runner = importlib.util.module_from_spec(spec)
+    loader.exec_module(runner)
+    validators = {name: getattr(runner, name, None) for name in
+                  ('validate_hard_working_set_quota', 'validate_hard_working_set_proofs')}
+    if not all(callable(value) for value in validators.values()):
+        raise RuntimeError('isolated strict proof parsers unavailable')
+    attempted_native = []
+    def denied(*args, **kwargs):
+        attempted_native.append('native call attempted')
+        raise AssertionError('pure proof fixture forbids subprocess/native execution')
+    runner.subprocess.run = denied
+    runner.subprocess.Popen = denied
+    def case(label, value, accepts=False, parser='validate_hard_working_set_proofs', repeats=1):
+        if time.monotonic() - STARTED >= MAX_SECONDS or len(report['cases']) >= 256:
+            raise TimeoutError('pure proof fixture10s/256cases')
+        before = json.dumps(value, sort_keys=True).encode('utf-8') + b'\n'
+        if len(before) > MAX_FILE:
+            raise ValueError('synthetic proof32KiB')
+        input_path = directory / (label + '.json')
+        with input_path.open('xb') as stream:
+            stream.write(before)
+        outcomes = []
+        for _ in range(repeats):
+            try:
+                validators[parser](value)
+            except (ValueError, RuntimeError, OSError) as exc:
+                outcomes.append({'accepted': False, 'exception': type(exc).__name__})
+            else:
+                outcomes.append({'accepted': True})
+        if any(result['accepted'] is not accepts for result in outcomes):
+            raise AssertionError('strict proof expectation failed: ' + label)
+        if json.dumps(value, sort_keys=True).encode('utf-8') + b'\n' != before or input_path.read_bytes() != before:
+            raise AssertionError('proof parser mutated fixture input: ' + label)
+        report['cases'].append({'name': label, 'parser': parser, 'expected_accept': accepts,
+                                'calls': outcomes, 'input_sha256': hashlib.sha256(before).hexdigest(),
+                                'synthetic_input_preserved': True})
+        publish()
+        if time.monotonic() - STARTED >= MAX_SECONDS:
+            raise TimeoutError('pure proof fixture10s')
+    def mutate(label, path, replacement, delete=False):
+        value = accepted_record()
+        target = value
+        for key in path[:-1]:
+            target = target[key]
+        if delete:
+            del target[path[-1]]
+        else:
+            target[path[-1]] = replacement
+        case(label, value)
+    try:
+        case('accepted-four-identity-bound-roles-and-complete-job-readbacks', accepted_record(), accepts=True, repeats=3)
+        case('accepted-quota-hardmax-only4', dict(quota(), enforcement_flags=4), accepts=True,
+             parser='validate_hard_working_set_quota', repeats=2)
+        case('accepted-quota-hardmax-and-min-disable6', quota(), accepts=True,
+             parser='validate_hard_working_set_quota', repeats=2)
+        for role in ROLES:
+            mutate('missing-role-' + role, ('hard_working_set_proofs', role), None, delete=True)
+            mutate('nondict-role-' + role, ('hard_working_set_proofs', role), [])
+            for key in ('pid', 'creation_time_100ns'):
+                original = accepted_record()['hard_working_set_proofs'][role][key]
+                mutate('wrong-' + role + '-' + key, ('hard_working_set_proofs', role, key), original + 1)
+                mutate('float-' + role + '-' + key, ('hard_working_set_proofs', role, key), float(original))
+                mutate('bool-' + role + '-' + key, ('hard_working_set_proofs', role, key), True)
+            mutate('wrong-scope-' + role, ('hard_working_set_proofs', role, 'ownership_scope'), 'unowned-or-stale')
+            for key in ('hard_max_verified', 'identity_verified_before_quota', 'before_traversal', 'quota_call_succeeded'):
+                mutate('false-' + role + '-' + key, ('hard_working_set_proofs', role, key), False)
+                mutate('int-' + role + '-' + key, ('hard_working_set_proofs', role, key), 1)
+            for key, replacement, suffix in (
+                ('maximum_bytes', (64 << 20) + 4096, 'over64'), ('minimum_bytes', 4096, 'wrongminimum'),
+                ('maximum_bytes', float(64 << 20), 'floatmax'), ('minimum_bytes', float(1 << 20), 'floatmin'),
+                ('maximum_bytes', True, 'boolmax'), ('minimum_bytes', True, 'boolmin'),
+                ('enforcement_flags', 2, 'missing-hardmaxbit'), ('enforcement_flags', 12, 'max-disable8'),
+                ('enforcement_flags', 6.0, 'floatflags'), ('enforcement_flags', True, 'boolflags')):
+                mutate('quota-' + role + '-' + suffix, ('hard_working_set_proofs', role, key), replacement)
+        mutate('extra-role', ('hard_working_set_proofs', 'unowned'), {})
+        mutate('missing-proofs', ('hard_working_set_proofs',), None, delete=True)
+        mutate('nondict-proofs', ('hard_working_set_proofs',), [])
+        for identity_role in ('parent', 'launcher', 'worker'):
+            mutate('missing-identity-' + identity_role, (identity_role,), None, delete=True)
+            mutate('nondict-identity-' + identity_role, (identity_role,), [])
+            for key in ('pid', 'creation_time_100ns'):
+                mutate('nonpositive-identity-' + identity_role + '-' + key, (identity_role, key), 0)
+        for role in ('launcher', 'worker', 'worker_self'):
+            for replacement, suffix in ((False, 'false'), (1, 'int')):
+                mutate('membership-' + role + '-' + suffix,
+                       ('hard_working_set_proofs', role, 'job_membership_verified_before_quota'), replacement)
+        for role in ('launcher', 'worker'):
+            for replacement, suffix in ((False, 'false'), (1, 'int')):
+                mutate('exact-membership-' + role + '-' + suffix,
+                       ('hard_working_set_proofs', role, 'exact_owned_job_membership_verified_before_quota'), replacement)
+        mutate('launcher-not-suspended', ('hard_working_set_proofs', 'launcher', 'enforced_while_suspended'), False)
+        mutate('launcher-suspended-int', ('hard_working_set_proofs', 'launcher', 'enforced_while_suspended'), 1)
+        for key in ('launcher_working_set_before_traversal', 'parent_working_set_at_completion', 'worker_working_set_at_completion'):
+            mutate('missing-readback-' + key, (key,), None, delete=True)
+            mutate('stale-readback-' + key, (key,), dict(quota(), maximum_bytes=128 << 20))
+            mutate('soft-readback-' + key, (key,), dict(quota(), enforcement_flags=2))
+        for key, wanted in (('job_memory_limit_bytes', 64 << 20), ('process_memory_limit_bytes', 64 << 20), ('job_active_process_limit', 2)):
+            mutate('missing-job-bound-' + key, (key,), None, delete=True)
+            mutate('larger-job-bound-' + key, (key,), wanted + 1)
+            mutate('float-job-bound-' + key, (key,), float(wanted))
+            mutate('bool-job-bound-' + key, (key,), True)
+        mutate('missing-job-setup', ('job_setup',), None, delete=True)
+        mutate('nondict-job-setup', ('job_setup',), [])
+        mutate('job-configured-false', ('job_setup', 'configured'), False)
+        mutate('job-configured-int', ('job_setup', 'configured'), 1)
+        mutate('unsupported-job-working-set-flag', ('job_setup', 'limit_flags'), 8969)
+        mutate('float-job-flags', ('job_setup', 'limit_flags'), 8968.0)
+        mutate('bool-job-flags', ('job_setup', 'limit_flags'), True)
+        mutate('job-closed-false', ('job_closed_confirmed',), False)
+        mutate('job-closed-int', ('job_closed_confirmed',), 1)
+        mutate('missing-job-closed', ('job_closed_confirmed',), None, delete=True)
+        for label, value in (('quota-none', None), ('quota-list', []), ('quota-empty', {}),
+                             ('quota-negative-flags', dict(quota(), enforcement_flags=-1))):
+            case(label, value, parser='validate_hard_working_set_quota')
+        if attempted_native:
+            raise AssertionError('native execution was attempted')
+        if digest(runner_path) != runner_sha:
+            raise RuntimeError('runner source changed during fixture')
+        report['passed'] = True
+    except BaseException as exc:
+        report.update(failure=type(exc).__name__, detail=str(exc)[:2048])
+    report.update(elapsed_seconds=time.monotonic() - STARTED,
+                  native_calls_attempted=len(attempted_native), cases_completed=len(report['cases']))
+    if report['elapsed_seconds'] >= MAX_SECONDS:
+        report['passed'] = False
+        report['failure'] = 'pure proof fixture10s'
+    publish()
+    print(json.dumps({'passed': report['passed'], 'receipt_path': str(output),
+                      'elapsed_seconds': report['elapsed_seconds'], 'cases_completed': len(report['cases'])}))
+    return 0 if report['passed'] else 1
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        raise SystemExit('fixture.py NEW_OWNED_DIRECTORY RUNNER_PATH EXACT_RUNNER_SHA256')
+    raise SystemExit(main(*sys.argv[1:]))

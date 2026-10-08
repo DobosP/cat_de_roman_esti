@@ -1,0 +1,88 @@
+{
+  "binary": {
+    "ELF": "64-bit little-endian x86-64",
+    "build_id": "WsA-pif-vKRB9Yg9paOf/VdiDpFJISfGU-K1pSIVL/zrzbk64yFQJ9ttbSTU6V/ptRuyvD54OyEudKbTtT1",
+    "bytes": 24391943,
+    "creation_utc": "2026-10-07T11:06:03.0939645Z",
+    "first_step2_package_event_utc": "2026-10-07T11:06:08.216560740Z",
+    "go_version": "go1.27.1",
+    "interpreter": "/lib64/ld-linux-x86-64.so.2",
+    "lastwrite_utc": "2026-10-07T11:06:08.2146704Z",
+    "path": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\tmp\\go-build1765588681\\b001\\contentrails.test",
+    "settings": [
+      "-race=true",
+      "CGO_ENABLED=1",
+      "linux/amd64/v1"
+    ],
+    "sha256": "5447fd92d29052fd072e032aeb45b384bdca204279360a105086e96b071cd66b"
+  },
+  "clock_renewed": false,
+  "evidence": [
+    "ELF buildinfo matches Go1.27.1 race, expected backend/test package/local authcore replacement and public dependency versions.",
+    "BuildID middle pair matches retained generated-main archive; selected28 local/test/race output SHA-named cache files checked, not all304 linked packages.",
+    "Generated testmain has all24 tests including required19, no custom TestMain; debug table absent as normal go test OmitDebug, Go pclntab present.",
+    "Five exact embedded blobs match canonical bytes: bundled content, Unicode/provenance rules, authored-v1, installed-authorities.",
+    "Original step2 times/readset1265 pre/post match retained artifact; fresh1257 unchanged canonical admitted inputs matched, excluding only two reviewed post-closure docs. Failed test outcome does not invalidate executable."
+  ],
+  "findings": [],
+  "installation_approval": false,
+  "metadata_sha256": {
+    "_testmain.go": "f858599ef61ae3af260454b4455aff4617fbd71eb211dc444477583e6c2917e9",
+    "contentrails_archive": "fc4ad606eed370f6fec074f751966b9b6cc4ae2a2dc28df66c461e12806f1a79",
+    "failed_step2": "5568d8a515a32307c21e285c5e2a61193ff7215b0f5d0be3290e51c7d9618797",
+    "failure_review": "2629cd29633127bb8734262517e35656711e54bbfbf07a8367775dc59a06f6ab",
+    "importcfg.link": "ac81c1970e656849fcbd8b93f2d949db42c4885650d326d56080053fa6337858",
+    "main_archive": "adfabc66d8acb0fe25673e1071f1aa6a743e6ec86929241823cf98fd9c39946e",
+    "original_admission": "e104bffd2bb7d2c7030126258f357bd0681f63f644ef5920e16c89b2cf41a721",
+    "runtime_race_archive": "62784ae2a492c8f6d98d25ea720e53a334f6c480b23b3285e6f44a74c9b5108f"
+  },
+  "native_execution_by_reviewer": false,
+  "original_native_R1_remains_failed": true,
+  "performance_limits": [
+    "IO profile supports exploration, not race CPU or19-in20minutes guarantee.",
+    "AllFour remained incomplete after >184seconds in failed R1; graph/JSON/reconstruction CPU remains.",
+    "Canonical pre/post hashes and builtin first compile remain accounted."
+  ],
+  "prerequisites": [
+    "Exact binary/metadata/interpreter/SDK/source pins before/after.",
+    "Qualified complete runtime/source/archive/authority/test-fixture mirror closure with canonical AND mirror namespace equality.",
+    "Per-step fresh canonical runtime109 namespace and canonical .go including test source namespace equality, plus mirror runtime109 namespace, preserving unknown-file detection lost by relocation.",
+    "Full canonical known-file guards remain; no cached digests. Same native ABI/CGO/race environment, no source patches.",
+    "Exact19 run/pass inventory/packagePASS/exit0, no missing/extra/skip/cache/duplicate events, race/converter failure rejection.",
+    "Whole C/ext4 scratch from752431588 baseline; original failed R1 clock/result/peak retained.",
+    "Fresh material adaptation qualification before any new native admission; canonical docs genuine Git only."
+  ],
+  "reviewed_at_utc": "2026-10-07T12:21:15.389276+00:00",
+  "reviewer": "/root/continuation_audit, independent reviewer",
+  "schema": "v1-6-retained-contentrails-binary-provenance-review-r1",
+  "scope": "Read/hash and offline ELF/testmain/importcfg/relevant cache parsing plus targeted local qualified SDK/game source. No executable/Go tool/application/helper/copy/native execution.",
+  "sdk_source_sha256": {
+    "cmd/go/internal/cache/cache.go": "22da4896758772a443d90dd148719866d20e811bfefd3668597eae083b6f39b2",
+    "cmd/go/internal/test/test.go": "ce0bfdd1686ff4d58fd013848066a27b509d76ada665712fbb2746d101537172",
+    "cmd/go/internal/test/testflag.go": "5fdf7f4c3b57158231bd3b8fea988e6a21c716fa56032848a7a181f28379b50d",
+    "cmd/go/internal/tool/tool.go": "f56daeda08b9d783d74e4598114bc8e04aa22cafae1596205dbb1dc17026bb50",
+    "cmd/go/internal/work/buildid.go": "6de8324513d2a5f9f629e8ae7ede623d1e87ef7b826fd1441265fc845a256555",
+    "cmd/test2json/main.go": "98613882be8e9dcfed687f594b253b2a0474771981099174406ad74bb377b5c7",
+    "cmd/test2json/signal_unix.go": "12f9f0eabe52f66b55db64e4d917573142ee1c0cb81e73af5b0a99408cf7b3ca",
+    "debug/buildinfo/buildinfo.go": "5e4064efa60e5fb768ffbf49f44bb6dd037fe35d3245ba9573881adef2f9c097"
+  },
+  "split_execution": {
+    "all19": "Fresh5/5/5/4 again; no old PASS result reuse.",
+    "converter": "Pinned official Go tool test2json -p exact-contentrails-package -t retained-binary; builtin fallback builds cmd/test2json under modload.NoRoot, ignoring go.mod/go.work (tool.go334-349).",
+    "equivalence_limits": [
+      "Converter preserves binary/race execution and failure exit; not Go-test build/vet orchestration or exact text summary.",
+      "No standalone Go-test backup timeout; original external fixed deadline/owned-session resource/cleanup supervision mandatory.",
+      "Direct binary flags use -test.*, package cwd/PWD coherent; ext4 TMPDIR clones.",
+      "First converter build remains inside campaign; canonical CLI race/vet/genuine Git docs required. -c skips automatic test vet."
+    ],
+    "required_flags": [
+      "-test.v=test2json",
+      "-test.paniconexit0",
+      "-test.run=<exact anchored group>",
+      "-test.count=1",
+      "-test.timeout=18m"
+    ]
+  },
+  "valid_until": "Bound source or evidence changes; retain as append-only history.",
+  "verdict": "ACCEPT_RETAINED_RACE_EXECUTABLE_PROVENANCE_AND_SPLIT_EXECUTION_DESIGN_ONLY"
+}

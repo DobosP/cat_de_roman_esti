@@ -57,7 +57,7 @@ func TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes(t *testing.
 	}
 }
 func TestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix(t *testing.T) {
-	root, _ := historicalWorldRoot(t)
+	root := rootPath(t)
 	quick, err := fixture(root, "quick_games_v92.json")
 	if err != nil {
 		t.Fatal(err)
@@ -69,11 +69,12 @@ func TestNativeAuditsNaturalSelectionGoalsRecipesAndEveryHistoricalPrefix(t *tes
 	if len(rows(q["replays"])) != 85 || q["core_boards_preserved"] != true {
 		t.Fatal("quick audit coverage")
 	}
-	world, err := fixture(root, "alchimie_discovery_world_v92.json")
+	worldRoot, _ := historicalWorldRoot(t)
+	world, err := fixture(worldRoot, "alchimie_discovery_world_v92.json")
 	if err != nil {
 		t.Fatal(err)
 	}
-	w, err := auditWorld(root, world)
+	w, err := auditWorld(worldRoot, world)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -1,0 +1,2271 @@
+{
+  "schema": "v1-6-pure-windows-hard-working-set-proof-fixture-r2",
+  "passed": true,
+  "runner_sha256": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+  "fixture_sha256": "50c94658822b763a09162a16b51ee1cdb8cf098b41be09339e87061b96ca9ffb",
+  "cases": [
+    {
+      "name": "accepted-four-identity-bound-roles-and-complete-job-readbacks",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": true,
+      "calls": [
+        {
+          "accepted": true
+        },
+        {
+          "accepted": true
+        },
+        {
+          "accepted": true
+        }
+      ],
+      "input_sha256": "4c46388c7c79543fd4cfa4257670269662e7ce28b3a2545bff5d29ba8182d87d",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "accepted-quota-hardmax-only4",
+      "parser": "validate_hard_working_set_quota",
+      "expected_accept": true,
+      "calls": [
+        {
+          "accepted": true
+        },
+        {
+          "accepted": true
+        }
+      ],
+      "input_sha256": "86381f2872c420f5c2b539363c8a65a94777009d346384fef1cf181a86f6b018",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "accepted-quota-hardmax-and-min-disable6",
+      "parser": "validate_hard_working_set_quota",
+      "expected_accept": true,
+      "calls": [
+        {
+          "accepted": true
+        },
+        {
+          "accepted": true
+        }
+      ],
+      "input_sha256": "751e4e7d3daa4368dd016fa88d9e7d589774af5cfc97462bde85c38086bab97f",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-role-parent",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4920ca63752e954e92196956bd40d1a85a1994f3e2ab420a8e041217911ef8b8",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-role-parent",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "a6a884aa0284a10926d94a4c75b1446d6f70b4796f83b8a71c7bf16535300c58",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-parent-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "7b030652bf9b9a4a8156da383c73a6e5be936276407042be6e6ae081eda88bb8",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-parent-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "9f1c330c33365ef045d797400704cb8bccd654dc041522832429731a0ea9f5cb",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-parent-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4f2e3ae6f4f408191f09f6f43e7a5d22bfccd1e600ca119e6aa17fa04f9c430c",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-parent-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "574eee4cc16dfeeeba1992ee69614626711bceff958845f1fa3cf56696a278ab",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-parent-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "664b8812eefa5ad95a2fdbe4fa751183390751cb0e657146168ac1b24134d009",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-parent-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "e9d9ea93682d075df73b09b449ee9aeca8f3627ce5d5de72e59f359163a09da1",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-scope-parent",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "0347262686e258bda7f40c5a314ae960b5b2fc962c8e04c9b59e5bd0e4c17086",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-parent-hard_max_verified",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4f66ed2778ea92259cef8d23f75f85d922e93441a0f849019f75f7f2876750fa",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-parent-hard_max_verified",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4ae997fb687b70274b3f42243a89164721cb90a616cf75b8abad255533274e02",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-parent-identity_verified_before_quota",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4df7a46ab993e0b1692a0b174eff4c4a0ec1b18ac84d6d1a73272b974aef8078",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-parent-identity_verified_before_quota",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "2709a637e77c7f716fb5529523a891b97ad8d60f35548dae630de0fecc8fd3a3",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-parent-before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "1a80bb54f1b9367b1d7d637c8e4d4db4951c74f6d21c79de71fe9f68ca16592d",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-parent-before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "42931d2612693d7be44a5f73b407f784ec84818e3f7e4fd1004a2c4c8bf3b903",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-parent-quota_call_succeeded",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "f93d87517b87d8c76f29c469a0f7772125681d3c3f7786517a239021f8be67cb",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-parent-quota_call_succeeded",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "26895ff34726c29bf14aaa0f25e39a51a8880979b280b158512cb9c3d51c31a0",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-over64",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ade0f6eb3a0baaad25f3142021daaf097eacf43c73c953dbaa9e970080b56a64",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-wrongminimum",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "847cd4a670a8c285c39f8bd1ef8ab26251aaaee62675ad3f37932197a4ae3141",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-floatmax",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "15f457e8593c3a3c41f6cbaf1b6f73c1a321f321d85ebc0e96de13ef51b35f2b",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-floatmin",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "c36599a573738132aae1997b51d2d820257496c82e02d4e3c8efa71058ec395a",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-boolmax",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b37d47258af948d61266acd4b3a4adafe36f60c704425271d7685eb7bac0a1eb",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-boolmin",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "96b1509fc6454b58d120864ff0e97ca148a047208b57e102f25f047a60498114",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-missing-hardmaxbit",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "2a4e419d401f4d7855d28a69438013ac615863019df04b0fc944f25a170c84b7",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-max-disable8",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "44dab91c910a068897faff81c82eace39738fb40d1fd47eda00f95cc0e4eb030",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-floatflags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "032959657d83a40d65b721b4796675637848c65e4072ad680549c73adfd872d6",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-parent-boolflags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "94c6784891e93450bad511f99d09ea19cdf39388a4f59dea6e7e27ad9ddcc948",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-role-launcher",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "78b275599368500ce3ddd41bd1b11fc6fff275c0696caac82d2a7a9e20dc0715",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-role-launcher",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "f9ab0308140e571a42cc65ac6f296a3d69bd2cb58e2db88d81596622cfd9d660",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-launcher-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "aa471360a623424011b6712fe7fc9f6549dd6d68e47a6848a86b06396a1af3b3",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-launcher-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "3a18f25d2c84e00f96011a255c01e805bc46b4c7b6518a1279f706fa1ffc786b",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-launcher-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ed69540ed425e20f1c03c9df8245c3df73493d4dc85ef20d156ab10eba7ea362",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-launcher-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "0dda94e142108fcddac62ce8f70de02412bed2727d0a27cb38105b96fcc2615e",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-launcher-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b238040c0aa947c7cb397fb4c951d2b0f4f703d2569fda1afc1178f8bf0c364c",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-launcher-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "8c79de2189d1ff32239c2ccb3178ce332942ec8502df91bcac4a26a1cfb63b71",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-scope-launcher",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "30575a51294bbed8e4c9feac229d3a20e795d35027d07227da755aa7fe99d183",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-launcher-hard_max_verified",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "1437c88b967d140129e3f8a102d507c886e5501e0ffe461607e49510a43d0a2c",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-launcher-hard_max_verified",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b30951d367c7cbc16c7d5b1c9abbff4ffe4948a82841fbc749e6b6fa58333486",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-launcher-identity_verified_before_quota",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "8a5494208a3bb47a79b636b308e57a66b5bcde878903ff05364364ae35c51be2",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-launcher-identity_verified_before_quota",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "80451286eb7c13cd4b402be00c5b66febb88c68c019fd43e3159a002c83a27af",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-launcher-before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "f2cdd26d2c695dedc42d5da6860f95f24bb1a0422c89577213ffaf567ef4355e",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-launcher-before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ef1cc7af191c11ac824c1feb27e26efe96fb667d14654b18b4f948fbfbffb810",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-launcher-quota_call_succeeded",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "0ed63fad6c9019f9fa4b3961ce1866829b52fdf888ccd0a90415d05c8d6de8dc",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-launcher-quota_call_succeeded",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "7ec77eaf12f2e943465c9ca1761e885e18dc3bd27deadaca59a638c957f89c88",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-over64",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "8093e839606a80688fa05617d8efb5a6517171c2746a7b90ec22dff6dcd6d2f1",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-wrongminimum",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "c3e8ed97c6a1d464eef93bb1e425dfa72f19898eba8e7adaa2219cda8c3e2c14",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-floatmax",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "be6e03a6532e385e738a6525879c889303a641adb296df909b85d7a777341415",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-floatmin",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "89934afaace5e5b3a48ace6b46caaae8e41d6073e287730c684842d19f1109b4",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-boolmax",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "e9023a0cd4b7fc6c2f3bad8504e60fe8bb0396499fb8bb2a616ba9a7992db4f5",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-boolmin",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "49488ea2756b9d6036f232dff7486ef8e88ccced223c3976739680e94f27c767",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-missing-hardmaxbit",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "0554fcf483cf740e439a35c1bad17d43ef21008ee7a73adafc65f4a8d725055e",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-max-disable8",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "0405ebc2f73c13849aa151957a19787842f02e8935a3b312fc1e92f9f598c434",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-floatflags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "7cc96b6e14eb7dc1e92d5640dc4bf03f0fdef19282e827c97fcd575cfcb97087",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-launcher-boolflags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "12d5e825177922050c37b2f28a442350522f1bd2c76c6c613f21b2bd9ee64c15",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-role-worker",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "9c22a4571146d8529abbbbd0bad147d0e43fdc30a4ad3074ed62a4a8cb9b3619",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-role-worker",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "67c8453fa46b48d5a54f585bc23a194ffc6d6ee4ad3c263e4cfa2f5b77f67f40",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-worker-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "5debf750a21afa0ded37b5c6ef52f2ba87c43b4148eb8cea6cb565398ee67443",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-worker-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "965e73badfefae85985898ba113728af26f3dda3d152a6784700aaba3fcc3ac5",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-worker-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "9d953074828270e5cf6fefc6ea8ce9c854d77f1336e7e6f769a94a77959126b4",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-worker-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b2f969571906855a6e9a4ee836d18034c719dad5ef89b1b2a4bd69184a995257",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-worker-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "cea10187b1e5cb85f0f2fd0156fae27e32afce8d0c82bdebf2163d5749c85350",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-worker-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "cf0ce3cdbb4ecbfb9e2fcff64f34f93790bddaedf5030b1ca333d3d366838139",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-scope-worker",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "945b16955fbf8ab105b7ada4f0a8ea3606cfce8057056f72e7c0654ba998eade",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-worker-hard_max_verified",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "3a045fdf3f91dab85c3338d0d2a17eb0ac25e05f896f842f1f4238867f1a823e",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-worker-hard_max_verified",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "76060f6f56595b338649748c757b9f85f9a5a70eb9fa74025dd104db6ef1bf3e",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-worker-identity_verified_before_quota",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "369abbd5bd4c41b8480ecf28a16c3ad5053ed5838c325fa88a51f1db742140e7",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-worker-identity_verified_before_quota",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "436467cf919a6fedd1d62468306cb99b31bacd72705bcc5d45d40ebe677a9aaa",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-worker-before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "a9e5128ddbee8cbe2d51f4f489b43060213093270a656b525a129ab321759897",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-worker-before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "c7f179c18b3e4efbc0a81ab13f5d7e6a39e8cf3923506a28d721290be6463a84",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-worker-quota_call_succeeded",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "e5a8b6f6644b920b8c1004039f4dec454d5410a2dc957401d417bff6fae7eba1",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-worker-quota_call_succeeded",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "662808e94c104e93d4e0e10e7c693e91cb239d31a9091125717532c4930620d4",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-over64",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "c8e55169bab529d87d0404e90f3d19a7a6462dbb4a6f049d64422b1c3639c3e1",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-wrongminimum",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4ed1c9c8d922bee344272e005b902b6497bc7503437eca1f1565b130a8268e52",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-floatmax",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "de5da1456a36ae8a80519d942098fe908a32b1f25eb5a5bfacb4ac4394086c1b",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-floatmin",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "c4c3026430f6a5741e6a147af922cb395ec6c4f2efba7daccf0453adc47dbd89",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-boolmax",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "c045020678effec680a83d967c620636a11a328dddb490a0f31294b1c5f7621d",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-boolmin",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "78b874ffc169101de10403c2169bfd0d0d45bb99434760c60f897143fa8c1dee",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-missing-hardmaxbit",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "a7255a5cea59aafd6a7f564650ac29bacde910e7e4926de489463df3852f8ebc",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-max-disable8",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "3ac7aced633304078b70d50ecffbb7d971dfd00c49154a043268d378e0f5529d",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-floatflags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "29a960ed2607b1bbfc1807ee398e39aba96ebc48642cb29fbe7f9fdd8b2d061c",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker-boolflags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b9ec0b40d964e248b7ae7ae5872437d6d3071d3307b4e3836938ce2a86144be3",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-role-worker_self",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "7e1f871bef4994787f81686c621eebb140bd572d0a731671ed3b7a1497d9da73",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-role-worker_self",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "8b71da1b173b6da2d3673bcc6b9f37fcf93f966093b3b379e8eec3e9b2d6c414",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-worker_self-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "01ab81fcb177c469f4f1218b13befd9bd8fdbcf1d6628fda92252c8217314716",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-worker_self-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4cad16e84c485de82de0c080af9856af4695f491e739a56da24d53674a858744",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-worker_self-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "22cf76867f01058ca2bca6b3c7442c16836b5b3e4ce818e1fd274076ae4387e8",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-worker_self-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "875a20f327540c914de02508d07188d6456c3da14c87ffc8a6dde1065f7940c6",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-worker_self-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4c7cc9e460c6d13a4e1766fe6bbb6ebbc0c76e11a24ce28d1496721f92c95f79",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-worker_self-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "32ba2137989f138b10b4ac199ccc8a112802332330d24f602ed393fe445c3317",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "wrong-scope-worker_self",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "25b79239c76f4762ef57933e6dea17ac38621554f2683f493695e84d422edfba",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-worker_self-hard_max_verified",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ace53806ccbc43e0c6ef1d25d7d52ef1c822190b3dd182388999d5d62790a4d0",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-worker_self-hard_max_verified",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "900b54a8b41df5cb31ae30de82ebdd8d08b85442438bd490239ed6f1dbaed1af",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-worker_self-identity_verified_before_quota",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "6de3e631e7c39dde0a95d360e380e79926ce4041ac3b018a918954d7539f93d1",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-worker_self-identity_verified_before_quota",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "30e40c39ce2d99cbb4a9ec407d45dc9ed47ee652f2187a7ed2ef7968483090f6",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-worker_self-before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "14109ec5e8a398e2db5a4553cd704ded7d114cc1e34a990feffbc92700d6382f",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-worker_self-before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "79947511a6f24503c671fb2235f6bf4dc7f328552710a55afc12fcc19196579c",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "false-worker_self-quota_call_succeeded",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "480d955ced6db10d7982911a823606658af041d54475aded9a61cacc2217d2e2",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "int-worker_self-quota_call_succeeded",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "bc247a29f13c37694050ea1fce931a841d84070c04413d4460e53b351e6096a2",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-over64",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "a1a9ed777869eab00d0995ce7dc9bd9f8f3e0214dd48112b6ce50a30b7eec0a3",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-wrongminimum",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "60d41933b649a377caaeddcaeb0ff6d293624c0660dc2fcb1eb7f5f2e9b83a51",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-floatmax",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "d8fdd182dabb3a99f156d876dec533da0032be43ff70fcf6b5f9dd5de823928a",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-floatmin",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "af950c3a3f302769b8ba9c338c734f5e28a4def1945a79ec9ec350179e480e8e",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-boolmax",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "80b739ec20f5f4e3f473e26ae6112caad34de5e206482c8a4d5ab851e9adfc52",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-boolmin",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "57fe86308b43f4aaaa0380133866d05d7ca7498de0e685c3f5936b82a1671a85",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-missing-hardmaxbit",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ad4b9d2e276bfb1c29ad592bc878367f881968ac58f54534de7957e1931a038a",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-max-disable8",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "6f29862ef51764b20a4e14eb733e7fca006e7e11686b6eed78447dee9484bd67",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-floatflags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "d5afe1425f82a67bfa1d77f6716f9d6227641cc7c17fd6989cdf4f59c69dc3fc",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-worker_self-boolflags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "8fae86e988ca7ba64b6339e66e62d28b0a78af668bbe6a7046d295c94a4c4711",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "extra-role",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "37b28387de32652de276c6b2a11acfba11eed2b170d9ede8cf2226f15c387d37",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-proofs",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "acb4ac74667d54105392a95bd98fd36be5f436a99b3a71563108499dc991cca7",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-proofs",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "91e1f2b46a82cc66ade8e2b28746862999bab7d60166fbce2f95a2d3ed018dbc",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-identity-parent",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "38d1c4bed1862e15ba7639770cc2e8fa2b2fbd67b4d1cbea133aa7848105722f",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-identity-parent",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "da905a9b1a91eb76ce917d161532855b8f528beda62d400a0259b4a1aae3deed",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nonpositive-identity-parent-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "e9ecb589bb828409d7f3c80ed43d0ca2348bcf21c6ef0c73013a8e1ae66140d5",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nonpositive-identity-parent-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "9246f4b61d1de2dc29cfdb56e33282e59ee5e9eb72da75d8a99a9c436a839740",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-identity-launcher",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "54eb5d788efd36f9abd46e1e9f189b92e4c2265b6db06462a47a97d9dc955880",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-identity-launcher",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b5ddb9f3cdd45b17d2434f4a7e3bfa1dfc2f47fc5f0ee2277389ffcb882103f8",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nonpositive-identity-launcher-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "f22a958a47accd5973a2caee194bfdf94d81bd2c7cc5161f23e759835e3a4937",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nonpositive-identity-launcher-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "a14c5a57793faa9a9b32cf929af8923514d3748111d37fd20247ec735033e181",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-identity-worker",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "1ecf7b4371c7903405e4af83e8eda20d57eb552998d90e19969ed46aeeec4439",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-identity-worker",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "aa44a415b73a6739d31b3dc10615247d54c79def743da13a2278a1b6795816af",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nonpositive-identity-worker-pid",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "a0c912b86e069f68d87175716d6730c58b2814c50fb873605731ecab35fdc0f3",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nonpositive-identity-worker-creation_time_100ns",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "41a3ae23eeb90e9b19afa8caeb5d440cbdcefa75d983abd1be2e4e5cd3627a77",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "membership-launcher-false",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "abae06babaa596b8eb18128a4ba8280399262ac1e163c4c904c0413d2c666a04",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "membership-launcher-int",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4e5bc2ba60f275dc0551a675299164e86ee2a3a6763edf0dbfb51a468b142f20",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "membership-worker-false",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b955f5cf102bae483b74bcd4e6619ef7c7214b6dc56517ab5acf354ddcfca4bc",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "membership-worker-int",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "1305329f5a08db28c2085184f72bde3321eea6dc66d0bcc26ff7fa574d7bc3b2",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "membership-worker_self-false",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "fc3895a8cf118dae22572996c7b93a7ca5a6f13e8a8aeaa90e5782413a2d4bfe",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "membership-worker_self-int",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "80a6410ec8fc769a26564018feba3654c517c706a5a25f845e74b80528266352",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "exact-membership-launcher-false",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b6c3a73e39b5ec444b6e7fb387cf539917dde30d7888f144e97707160ff803bf",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "exact-membership-launcher-int",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "39183a9f05130bc6f1441ba4f5c5609debdbcfb12a2c6b3999d83746f1ff794d",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "exact-membership-worker-false",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "e9cfccbdd61207d74103a1ef58a886e15ca6102708e645b64507dec846c64bd0",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "exact-membership-worker-int",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ee572dcfae3be92dc9765632011e411671b2dce9d5fe7a08509397f896187f4c",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "launcher-not-suspended",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "d4781f97e41201e5c5ffbf82e91a5026d1561fb7bc07c8f33fc50d2b4923c127",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "launcher-suspended-int",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4d6889a8d5a94d272b7b3c060d340a4136868a2a1e9d3387821dbd8cf556f79d",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-readback-launcher_working_set_before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "3b6e96dbc0fb0f76df955adf1db8b11bf7d5ac70ebc1c47aad95e667cec5012b",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "stale-readback-launcher_working_set_before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "364befa4836258180e0cbb26180ddb2f00b86d6d4ceca067fc7b9a8eb97103ef",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "soft-readback-launcher_working_set_before_traversal",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ffb2b345892ca910b9fc0b1e9e7b04c82807795d19a5d8be005dff345b9c6cfa",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-readback-parent_working_set_at_completion",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "4021ed4b7e2d604a7be4aede151f8f1027e64a69ffd386412133111b2f34f924",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "stale-readback-parent_working_set_at_completion",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "863c37fc07a214207e52e80d4780c67869bb997019377691478ae56872c752f5",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "soft-readback-parent_working_set_at_completion",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "c0504d6cb199a7aaebd6557816b81a59a582433435cbee532ecc284da71733ac",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-readback-worker_working_set_at_completion",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "2b57fd0388990fe7619bd2b52abdd5c440c9b3ccb02ebf85b8aae8d7cd01f0eb",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "stale-readback-worker_working_set_at_completion",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "e943facd52796bc268c29342d6b209ea7f188d3b40e9211b5663d16847f14bdf",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "soft-readback-worker_working_set_at_completion",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "6d62ab936de3c93c856d2a6638f357375f81138f2afd6964ab0386b8660ce25d",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-job-bound-job_memory_limit_bytes",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ec91cb3a7d1e9e0b00076567d0d3dae06df3371e487c5391de926832f73f0166",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "larger-job-bound-job_memory_limit_bytes",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "2198e1f806944e444836375f6b5250ac71b7a592f7b26e588dc7567e1153fea9",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-job-bound-job_memory_limit_bytes",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "170bde97dcbe7139e6f416c400f2860d9a7ec401e275419f1b5db500ba0a8a97",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-job-bound-job_memory_limit_bytes",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "9fa922fb3e511a572f7f07565c0bb06e2a4de7ba6de21b387cc625ac3ac13cb9",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-job-bound-process_memory_limit_bytes",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "293dc7a795a10eb7cf93236c211f26c7ca05f2959991c062ef5f65713e3b5620",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "larger-job-bound-process_memory_limit_bytes",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "cfa1935608799526a6851bab82f024ca1a912faff320ca4834ff9d1d51e7be0d",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-job-bound-process_memory_limit_bytes",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "7d85e08ab81b16e998b2584dfbe15b35e2de53a13eba5bb054314200b92f9241",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-job-bound-process_memory_limit_bytes",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "f1336eb013f87e5d64659e97897455e5f6c4aaa4f691636cc747c243d2a92f29",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-job-bound-job_active_process_limit",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ec9e9333b23913b4fa497c9d2ab8a775bd12d0970f330c88457775ef1648677c",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "larger-job-bound-job_active_process_limit",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "7657454c722d9d7c6c24650ee897758f28fd0d9c7516ece03a6fc3af82eae520",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-job-bound-job_active_process_limit",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "e6ea37f9e7de9521341b4784e5c4126cf43640b67529044a5a40eeb0df6f458e",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-job-bound-job_active_process_limit",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "8556c2460354bc6585d2ee01cab51901413dbd5f5374e26cab894fd7d18f3dce",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-job-setup",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "b6cecf2ee8983eb241c76fdbb2b59eeca0b4ce7b2433b5a2b1fb29b93e7b81e6",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "nondict-job-setup",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "7c971b45f02a7a11b27248bb80ab80f27d5fb6a07dfa44b86a973c16f0727ccc",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "job-configured-false",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "f0421f9d8e9a76c0da003c1825d54969b25c199837aac0f76a521f8c07afc018",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "job-configured-int",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "6cd97d4cbc5561a8ba22b8f33fb68f1b3dbdd71b120306c10a25cc48771822ec",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "unsupported-job-working-set-flag",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "5861f519dc6cb15df31bb148727ac919b1c22aca25dafc60cf4391c2768a96c1",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "float-job-flags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "56e0dc9b5608bbc224b75e0e4ae7d02a4af872d32bdbec64a62b9447b4264252",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "bool-job-flags",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "6e0ceccac052701e1ddb5af95af82a83a3fa37211676c49478659ed91de1a1ef",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "job-closed-false",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "f225e0fdba9a1c33a89a20d048edf16ad2729758d3f23203e72d5ec5b87e01bb",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "job-closed-int",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ccc19af39339c76d1c45c189a5e0accfb81538d08eaedc2c85e6a176e05b6cd5",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "missing-job-closed",
+      "parser": "validate_hard_working_set_proofs",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "fa62cc115eb79509dd8bc9c351e36b85fd9c86b7f32c1104af0c71ef33cdda18",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-none",
+      "parser": "validate_hard_working_set_quota",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-list",
+      "parser": "validate_hard_working_set_quota",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-empty",
+      "parser": "validate_hard_working_set_quota",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "synthetic_input_preserved": true
+    },
+    {
+      "name": "quota-negative-flags",
+      "parser": "validate_hard_working_set_quota",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "input_sha256": "ca75a82773f44319374c9972c58ceff68a1de51b4f885cd1cbdb577bec09f276",
+      "synthetic_input_preserved": true
+    }
+  ],
+  "native_or_Go_executions": 0,
+  "synthetic_records_are_not_OS_quota_or_exit_evidence": true,
+  "elapsed_seconds": 4.419247059999179,
+  "native_calls_attempted": 0,
+  "cases_completed": 173
+}

@@ -1,0 +1,60 @@
+{
+  "all_prior_failures_preserved": true,
+  "bindings": {
+    "methods/check_r12_failed_lane_cli_wsl_r1.py.txt": "54d69214bd236a8d9a099f00d2ef47e6bef8331ccb321da6b7d445d82ca4e36a",
+    "methods/check_runner_signal_wsl_actual_r16.py.txt": "4d5ef75cb3ad5f67e42d237c6bd5f7fb2af38a233b5e0273c481c1d45b950de5",
+    "methods/invoke_r12_failed_lane_cli_capture_r1.ps1.txt": "b3920dde73bea0b600f70cf488944b5ba02744be940f392dfe8cd5fcce55cc7a",
+    "methods/run_worktree_lane_wsl_r12.py.txt": "77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0"
+  },
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "components": {
+    "parent_wrapper": "ACCEPT_CAPTURE_SOURCE_ONLY_DEPENDENT_EXECUTION_HELD",
+    "refusal_fixture": "REQUEST_CHANGES"
+  },
+  "execution_authorized": false,
+  "findings": [
+    {
+      "id": "F1",
+      "issue": "Flag-only signals can arrive after passed/received_signal snapshot but before pending write/fsync/replace/directoryfsync finishes; no final signal recheck precedes exitPASS. A pre-completed-terminal signal can leave a stale passed receipt and exit0.",
+      "lines": "44-49,315-341",
+      "priority": 1,
+      "required_fix": "Preserve R1. Append bounded coherent terminal handling for pre-boundary signals, retaining any completion attempt and publishing a failed terminal image; enforce original30 total/reserve and do not returnPASS when a signal was pending before completed publication."
+    },
+    {
+      "id": "F2",
+      "issue": "Six target files are opened/read before their exact owned expected locations are validated; a malformed bound target can cause a read outside the declared wave/probe receipt scope before refusal.",
+      "lines": "96-113",
+      "priority": 2,
+      "required_fix": "Validate every target scope/path and derive exact manifest-owned paths before any of the six receipt reads, retaining single-link/unredirected/hash/size guards."
+    },
+    {
+      "id": "F3",
+      "issue": "Exact-empty CLI stderr conflicts with an existing Python3.14 SyntaxWarning in pinned R12. A read-only compile-to-code diagnostic without executing candidate code observed line832: return in a finally block. Ordinary-B CLI startup emits the diagnostic unless warning behavior is explicitly controlled.",
+      "lines": "266-267,282-284",
+      "priority": 2,
+      "required_fix": "Retain the known diagnostic evidence and narrowly validate exact source-bound stderr, or explicitly review a narrow warning policy. Reject arbitrary stderr; preserve exact exit2 and specific JSON error checks."
+    }
+  ],
+  "native_pass": false,
+  "original_failed_clock_renewed": false,
+  "otherwise_accepted_scope": [
+    "Closed successful R16 active check/parent and failed lane manifest/state/cumulative/step0/protected pins, original1200-second deadline and752431588 baseline are bound. Specific continuation1/reset0 errors require real OS CLI exit2 and exact JSON.",
+    "Fresh whole mixed-root pre/post accounting and original growth/dual-volume/memory/RSS controls, positive24 work guards and explicit final24 proof remain; no new admission or clock.",
+    "Popen child bookkeeping uses flag-only handlers and exact PID/PGID/SID ownership; fallback cleanup uncertain remains failed.",
+    "Parent capture requires fresh labels before launch, exact materialization/binding pre/post, immediate Python captures, correct check-result.json and exit/pass/24-work/30-total acceptance.35s watchdog is recovery only; on timeout it does not prove Linux actor exit and explicitly requires ownership inspection."
+  ],
+  "reviewed_at_utc": "2026-10-07T14:36:52.302943+00:00",
+  "reviewer": "/root/continuation_audit, independent source reviewer",
+  "schema": "v1-6-r12-actual-failed-lane-cli-source-review-r1",
+  "scope": "Full345-line refusal Python and45-line capture PowerShell source; static compile diagnostic only for accepted R12, no candidate execution.",
+  "static_compile_observation": {
+    "candidate_code_executed": false,
+    "interpreter": "/usr/bin/python3.14, accepted52e0...",
+    "source": "exact materialized R12,77f94...",
+    "warning_category": "SyntaxWarning",
+    "warning_line": 832,
+    "warning_message": "'return' in a 'finally' block"
+  },
+  "valid_until": "Rejected unexecuted source remains history; an append-only corrected exact variant requires independent review.",
+  "verdict": "REQUEST_CHANGES"
+}

@@ -1,5 +1,9 @@
 # cat_de_roman_esti
 
+V1.6 continues as an unmerged checkpoint on `codex/content-v1-6`; see the
+[current qualification](docs/reviews/v1-6-everyday-inputs/README.md) and
+[continuation decision](docs/adr/0181-resume-linux-v1-6-finish.md). Native content gates passed; the reviewed whole-branch whitespace repair passed, and final exact assembled review remains before landing.
+
 A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in
 `docs/STATUS.md`; no graph visualization). Alchimie exploration also has its

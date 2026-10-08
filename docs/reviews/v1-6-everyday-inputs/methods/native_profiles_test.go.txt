@@ -1,0 +1,426 @@
+// Research-only overlay source. Fresh execution admission and the independently
+// reviewed content.V16ResearchCandidate helper are required. This is not a sealed
+// candidate export, current-authority proof, target approval, or HTTP/browser test.
+package contexto
+
+import (
+    "crypto/sha256"
+    "encoding/hex"
+    "encoding/json"
+    "fmt"
+    "hash"
+    "math"
+    "math/big"
+    "os"
+    "path/filepath"
+    "reflect"
+    "sort"
+    "testing"
+    "time"
+
+    "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+    "github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
+    "github.com/DobosP/cat_de_roman_esti/go-backend/internal/pack"
+    "github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom"
+)
+
+const v16CandidateKG = "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+const v16BaselineKG = "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+
+// JSONL records go directly to disk, so a killed run leaves its completed records.
+// Cleanup adds a terminal receipt on ordinary failures/panics/Goexit. A hard kill
+// cannot guarantee cleanup: absence of that terminal receipt means INCOMPLETE.
+// No more than 8 MiB is emitted; overflow fails with explicit incomplete coverage.
+type v16Proof struct {
+    t *testing.T
+    file *os.File
+    bytes int
+    counts map[string]int
+    differences map[string]int
+    complete bool
+    stage string
+}
+
+func v16OpenProof(t *testing.T) *v16Proof {
+    t.Helper()
+    path := os.Getenv("V16_NATIVE_PROFILES_REPORT")
+    if path == "" || !filepath.IsAbs(path) { t.Fatal("V16_NATIVE_PROFILES_REPORT must be a fresh absolute scratch JSONL path") }
+    f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
+    if err != nil { t.Fatal(err) }
+    p := &v16Proof{t:t, file:f, counts:map[string]int{}, differences:map[string]int{}, stage:"starting"}
+    t.Cleanup(func() {
+        // Reserve 64 KiB for this final record even if a delta exhausted the budget.
+        row := map[string]any{"kind":"terminal", "at":time.Now().UTC().Format(time.RFC3339Nano), "complete":p.complete, "test_failed":t.Failed(), "last_stage":p.stage, "counts":p.counts, "differences":p.differences, "bytes_before_terminal":p.bytes, "qualification":"research_only; no sealed export, current authority, target approval, human or HTTP evidence"}
+        raw, err := json.Marshal(row)
+        if err == nil { _, err = f.Write(append(raw, '\n')) }
+        if err != nil { t.Errorf("final proof receipt: %v", err) }
+        if err := f.Sync(); err != nil { t.Errorf("proof sync: %v", err) }
+        if err := f.Close(); err != nil { t.Errorf("proof close: %v", err) }
+    })
+    return p
+}
+func (p *v16Proof) emit(row any) {
+    p.t.Helper()
+    raw, err := json.Marshal(row)
+    if err != nil { p.t.Fatalf("proof encoding at %s: %v", p.stage, err) }
+    if p.bytes+len(raw)+1 > (8<<20)-(64<<10) { p.t.Fatal("proof byte ceiling reached; coverage incomplete, inspect retained JSONL") }
+    n, err := p.file.Write(append(raw,'\n')); p.bytes += n
+    if err != nil { p.t.Fatalf("proof write: %v",err) }
+}
+func (p *v16Proof) same(scope, key string, before, after any) bool {
+    p.counts[scope]++
+    if reflect.DeepEqual(before,after) { return true }
+    p.differences[scope]++
+    p.emit(map[string]any{"kind":"unexpected_delta", "scope":scope,"key":key,"before":before,"after":after})
+    return false
+}
+func (p *v16Proof) need(ok bool, message string) {
+    p.t.Helper()
+    if !ok { p.emit(map[string]any{"kind":"failed_precondition","stage":p.stage,"message":message}); p.t.Fatal(message) }
+}
+func v16Digest(v any) string {
+    raw, err := json.Marshal(v)
+    if err != nil { panic(err) }
+    digest := sha256.Sum256(raw)
+    return hex.EncodeToString(digest[:])
+}
+func v16HashRow(h hash.Hash, row any) {
+    raw, err := json.Marshal(row)
+    if err != nil { panic(err) }
+    h.Write(raw); h.Write([]byte{'\n'})
+}
+func v16Bits(values []float64) []uint64 {
+    out := make([]uint64,len(values)); for i,v := range values { out[i]=math.Float64bits(v) }; return out
+}
+func v16ProfileView(v *profile) any {
+    buckets := map[int][]uint64{}
+    for k,row := range v.Buckets { buckets[k]=v16Bits(row) }
+    return struct { Dist []int32; WeightedBits []uint64; Buckets map[int][]uint64; Closer map[int]int; Reachable int }{v.Dist,v16Bits(v.Weighted),buckets,v.Closer,v.Reachable}
+}
+// The production FIFO limit remains 256. Only this serial test's own service
+// pointer is detached from its Content shared cache; each fresh private cache
+// retains one target. No live process, production limit, or cache code is changed.
+func v16FreshProfile(s *Service,target string) *profile {
+    s.profiles=&profileCache{values:map[string]*profile{}}
+    return s.profile(target)
+}
+type v16FeedbackRow struct {
+    ID,Label,Submitted,Anchor,Temperature,WinnerID string
+    Reachable bool
+    Distance,Rank,Closeness,Penalty int
+    AnchorDistance int32
+    AnchorWeightedBits uint64
+}
+func v16Feedback(s *Service,v *game,id string,term *projection) v16FeedbackRow {
+    submitted,label,publicID,penalty := id,s.g.Label(id),id,0
+    if term!=nil { submitted=s.projectionAnchor(term,v.Target); label=term.Label; publicID=term.PublicID; penalty=term.RankPenalty }
+    sc:=s.score(v,submitted,term!=nil,penalty)
+    d:=999; if sc.Reachable { d=sc.Distance }
+    row:=v16FeedbackRow{ID:publicID,Label:label,Submitted:submitted,Anchor:sc.Anchor,Temperature:temperature(v,sc),Reachable:sc.Reachable,Distance:d,Rank:sc.Rank,Closeness:closeness(v,sc),Penalty:penalty,AnchorDistance:-1,AnchorWeightedBits:math.Float64bits(math.Inf(1))}
+    if ix,ok:=s.g.Index(sc.Anchor); ok { row.AnchorDistance=v.Profile.Dist[ix]; row.AnchorWeightedBits=math.Float64bits(v.Profile.Weighted[ix]) }
+    // Matches GuessInput's winner test; a proxy/exact-pair anchor is not a win.
+    if term==nil && submitted==v.Target { row.WinnerID=v.Target }
+    return row
+}
+type v16Resolution struct {
+    Normalized,Owner,Fuzzy string
+    Blocked bool
+    Suggestions []string
+    Projection *projection
+    ProjectionSuggestions []projection
+}
+func v16Resolve(s *Service,text string,full bool) v16Resolution {
+    key:=s.g.Normalize(text)
+    row:=v16Resolution{Normalized:key,Owner:s.g.Resolve(text),Fuzzy:s.g.ResolveFuzzy(text),Blocked:s.g.ReviewedUnresolved(text),Projection:s.projections[key]}
+    if full {
+        row.Suggestions=s.g.Suggest(text,3)
+        row.ProjectionSuggestions=[]projection{}
+        for _,term:=range s.suggestProjection(text) { row.ProjectionSuggestions=append(row.ProjectionSuggestions,*term) }
+    }
+    return row
+}
+func v16SanitizeBody(body map[string]any) map[string]any {
+    if body==nil { return nil }
+    out:=map[string]any{}
+    for key,value:=range body { if key!="game_id" && key!="resolved_token" { out[key]=value } }
+    if _,ok:=body["resolved_token"]; ok { out["confirmation_token_present"]=true }
+    return out
+}
+type v16InputOutcome struct {
+    First,Confirmed map[string]any
+    FirstError,ConfirmedError *gameapi.Error
+}
+// Constructed, single-input service probe. The four target contexts cover the
+// actual warm cases and both owner-as-target wrong-win boundaries. No selector
+// claim follows from these probes. Session tokens are omitted only from equality.
+func v16InputProbe(p *v16Proof,s *Service,target,text string) v16InputOutcome {
+    v:=s.build(target,"usor",nil,"")
+    id,err:=s.store.Create(v); p.need(err==nil,"create finite input probe")
+    defer s.store.Delete(id)
+    body,apierr:=s.Guess(id,text,"")
+    outcome:=v16InputOutcome{First:v16SanitizeBody(body),FirstError:apierr}
+    if apierr!=nil { p.need(v.Attempts==0 && len(v.Guesses)==0 && !v.Won,"invalid input charged attempt") }
+    if apierr==nil {
+        won,_:=body["won"].(bool)
+        for _,field:=range []string{"target","score","share","curated_id"} {
+            if !won { _,leak:=body[field]; p.need(!leak,"unearned private field: "+field) }
+        }
+        if ok,_:=body["ok"].(bool); !ok {
+            p.need(v.Attempts==0 && len(v.Guesses)==0 && !v.Won,"unknown or confirmation request charged attempt")
+        }
+        if labels,ok:=body["suggestions"].([]string); ok {
+            for _,label:=range labels {
+                owner:=s.g.Resolve(label)
+                p.need(owner=="" || s.feedbackAnchor(owner,target,true)!=target,"suggestion leaked native target anchor")
+                for _,term:=range s.data.Terms { if term.Label==label { p.need(s.feedbackAnchor(s.projectionAnchor(&term,target),target,false)!=target,"suggestion leaked projected target anchor") } }
+            }
+        }
+        if needed,_:=body["needs_confirmation"].(bool); needed {
+            token,ok:=body["resolved_token"].(string); p.need(ok && token!="","confirmation token missing")
+            p.need(body["resolved_label"]!=s.g.Label(target),"confirmation leaked target label")
+            confirmed,e:=s.Guess(id,text,token)
+            outcome.Confirmed=v16SanitizeBody(confirmed); outcome.ConfirmedError=e
+            p.need(e==nil,"valid confirmation rejected")
+        }
+        if v.Won { p.need(s.g.Resolve(text)==target || s.g.ResolveFuzzy(text)==target,"wrong-owner win") }
+    }
+    return outcome
+}
+
+func TestV16ProspectiveCaldProfilesResearch(t *testing.T) {
+    p:=v16OpenProof(t)
+    p.emit(map[string]any{"kind":"start","at":time.Now().UTC().Format(time.RFC3339Nano),"test":"TestV16ProspectiveCaldProfilesResearch","candidate_kg_sha256":v16CandidateKG,"baseline_kg_sha256":v16BaselineKG,"format":"bounded JSONL; only a terminal complete=true record proves full method coverage","limits":[]string{"Research helper changes only the actual generated aliases/index before engines are constructed; metadata and source manifests stay baseline","No Source6/sealed-export/current-authority qualification, new C3 target approval, human enjoyment, ordinary HTTP or all-history proof","Three-farthest clue states are constructed finite probes; every player history is not enumerated","Unknown-query search is the fixed29 and existing19 corpus; no universal fuzzy-invariance claim","Private profile cache reset is research memory handling, not production behavior validation"}})
+    p.stage="source_pins"
+    root,err:=filepath.Abs("../../.."); p.need(err==nil,"locate root from contexto package test directory")
+    pins:=map[string]string{
+        "go-backend/internal/contexto/service.go":"0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4",
+        "go-backend/internal/graph/service.go":"a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+        "go-backend/internal/graph/dense.go":"8d74b34539798ac0d64118c390d3a764f5205246cfdf29e8884ea6e760ba96e1",
+        "go-backend/internal/pack/pack.go":"a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7",
+        "go-backend/internal/graph/testdata/python_graph.json":"823fe4153abe826c03aaff8479773bc0c22b3659ad22b800c3d56d2ec629a83a",
+        "go-backend/internal/content/bundled.json":"c1fff429992c69926aafb07f5b015f890a82c7c01cc5230107bdaf481bca5993",
+        "cat_de_roman_esti/fixtures/games_pack.json":"e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    }
+    paths:=make([]string,0,len(pins)); for path:=range pins { paths=append(paths,path) }; sort.Strings(paths)
+    for _,path:=range paths {
+        data,e:=os.ReadFile(filepath.Join(root,path)); p.need(e==nil,"read source pin "+path)
+        digest:=fmt.Sprintf("%x",sha256.Sum256(data)); p.need(digest==pins[path],"source drift: "+path)
+        p.emit(map[string]any{"kind":"source_pin","path":path,"sha256":digest})
+    }
+    methodPath:=filepath.Join(root,"docs/reviews/v1-6-everyday-inputs/methods/native_profiles_test.go.txt")
+    method,e:=os.ReadFile(methodPath); p.need(e==nil,"read method source")
+    p.emit(map[string]any{"kind":"method_binding","sha256":fmt.Sprintf("%x",sha256.Sum256(method)),"policy":"Exact graph source pin preserves Suggest .78; ResolveFuzzy .84 candidates/.90 winner/.06 margin; reviewed paște and intrigii blocks"})
+    before,e:=content.Load(); p.need(e==nil,"load sealed baseline")
+    after,e:=content.V16ResearchCandidate(); p.need(e==nil,"load verified actual-candidate research adapter: "+fmt.Sprint(e))
+    p.need(before.Sources["kg_sample.json"]==v16BaselineKG,"baseline source identity")
+    p.need(before!=nil && after!=nil,"content loaders returned nil")
+    p.need(len(before.Nodes)==2419 && len(after.Nodes)==2419,"exact2419 nodes")
+    p.need(len(before.NormalizedIndex)==13512 && len(after.NormalizedIndex)==13514,"exact13512→13514 keys")
+    p.need(len(before.Edges)==9473 && len(after.Edges)==9473,"exact9473 edges")
+    p.need(reflect.DeepEqual(before.Edges,after.Edges),"edges changed")
+    p.need(reflect.DeepEqual(before.PackItems,after.PackItems),"pack/status/eligibility/selection weight changed")
+    p.need(reflect.DeepEqual(before.ContextoData,after.ContextoData),"projection/proxy/ingredient/exact-pair policy changed")
+    p.need(reflect.DeepEqual(before.Sources,after.Sources) && reflect.DeepEqual(before.Manifest,after.Manifest) && reflect.DeepEqual(before.Metadata,after.Metadata),"research metadata/source manifests must remain baseline")
+    p.need(reflect.DeepEqual(before.NormalizationMap,after.NormalizationMap) && reflect.DeepEqual(before.AccentNormalizationMap,after.AccentNormalizationMap) && reflect.DeepEqual(before.CasefoldMap,after.CasefoldMap),"normalization policy changed")
+    additions:=map[string]string{"drapel":"n_v4ist_steag","untdelemn":"n_v24_food_pantry_ulei"}
+    byID:=map[string]content.Node{}; for _,n:=range after.Nodes { byID[n.ID]=n }; p.need(len(byID)==2419,"duplicate candidate node ID")
+    oldForms,newForms:=0,0
+    for _,n:=range before.Nodes {
+        want:=n; want.Aliases=append([]string(nil),n.Aliases...)
+        for form,id:=range additions { if n.ID==id { want.Aliases=append(want.Aliases,form) } }
+        got,ok:=byID[n.ID]; p.need(ok,"old node removed")
+        // Preserve nil/empty representation for nodes with no added aliases.
+        if len(want.Aliases)==0 { want.Aliases=n.Aliases }
+        p.need(reflect.DeepEqual(want,got),"unexpected node/stored-form delta: "+n.ID)
+        oldForms+=len(n.Aliases); newForms+=len(got.Aliases)
+    }
+    p.need(oldForms==8677 && newForms==8679,"exact8677→8679 stored aliases (2419 labels separately)")
+    a,b:=New(before),New(after)
+    ids:=a.g.AllIDs(); p.need(reflect.DeepEqual(ids,b.g.AllIDs()),"native ID order drift")
+    p.need(len(a.projectionKeys)==464 && len(b.projectionKeys)==464,"exact464 projections")
+    p.need(reflect.DeepEqual(a.projectionKeys,b.projectionKeys),"projection keys drift")
+    for form,id:=range additions {
+        p.need(before.NormalizedIndex[form]=="" && after.NormalizedIndex[form]==id,"unexpected added-key owner")
+        p.need(a.projections[form]==nil && b.projections[form]==nil,"new alias collides with projection")
+        p.emit(map[string]any{"kind":"stored_form_delta","form":form,"before_owner":"","after_owner":id})
+    }
+    p.stage="old_identity"
+    keys:=make([]string,0,len(before.NormalizedIndex)); for key:=range before.NormalizedIndex { keys=append(keys,key) }; sort.Strings(keys)
+    identityHashes:=[2]hash.Hash{sha256.New(),sha256.New()}
+    for _,key:=range keys {
+        old,new:=v16Resolve(a,key,false),v16Resolve(b,key,false)
+        p.need(old.Owner==before.NormalizedIndex[key],"baseline index and resolver disagree: "+key)
+        p.same("old_normalized_identity",key,old,new)
+        v16HashRow(identityHashes[0],[]any{key,old}); v16HashRow(identityHashes[1],[]any{key,new})
+    }
+    p.emit(map[string]any{"kind":"identity_receipt","count":len(keys),"before_sha256":fmt.Sprintf("%x",identityHashes[0].Sum(nil)),"after_sha256":fmt.Sprintf("%x",identityHashes[1].Sum(nil)),"scope":"Resolve/ResolveFuzzy owners, protected block, normalized key and projection precedence; Suggest is bounded to the fixed/corpus probes"})
+    for _,key:=range a.projectionKeys { p.same("projection_identity",key,v16Resolve(a,key,false),v16Resolve(b,key,false)) }
+    p.stage="fixed_fuzzy_and_service_inputs"
+    fixed:=[]string{"drapel","DRAPEL"," drapel ","drapele","drapelul","draple","Steag","steagul","Drapelul României","tricolorul","steagul României","drapelul tricolor","drapelul național","albastru galben roșu","untdelemn","UNTDELEMN"," untdelemn ","untdelemnuri","undelemn","unt-de-lemn","Ulei","uleiuri","ulei de motor","ulei mineral","uleie","paște","paștele","intrigii","intrigilor"}
+    p.need(len(fixed)==29,"fixed29 query coverage")
+    var corpus struct { Texts []struct { Text,Normalized,Resolved,Fuzzy string; Unresolved bool; Suggestions []string } }
+    data,e:=os.ReadFile(filepath.Join(root,"go-backend/internal/graph/testdata/python_graph.json")); p.need(e==nil,"read regression corpus")
+    p.need(json.Unmarshal(data,&corpus)==nil && len(corpus.Texts)==19,"existing19 regression cases")
+    for _,row:=range corpus.Texts {
+        observed:=v16Resolve(a,row.Text,true)
+        p.need(observed.Normalized==row.Normalized && observed.Owner==row.Resolved && observed.Fuzzy==row.Fuzzy && observed.Blocked==row.Unresolved && reflect.DeepEqual(observed.Suggestions,row.Suggestions),"baseline regression corpus mismatch: "+row.Text)
+    }
+    queries:=append([]string(nil),fixed...); for _,row:=range corpus.Texts { queries=append(queries,row.Text) }
+    for qi,text:=range queries {
+        old,new:=v16Resolve(a,text,true),v16Resolve(b,text,true)
+        changed:=!reflect.DeepEqual(old,new)
+        p.counts["fuzzy_queries"]++; if changed { p.counts["fuzzy_query_deltas"]++ }
+        // All48 rows, including unchanged rows, are retained for independent judgment.
+        p.emit(map[string]any{"kind":"fuzzy_observation","index":qi,"source":map[bool]string{true:"fixed29",false:"existing19"}[qi<29],"text":text,"changed":changed,"before":old,"after":new,"judgment":"observed; changed typo/inflection outcomes require independent quality judgment; no stored-family expansion"})
+        if new.Blocked { p.need(new.Owner=="" && new.Fuzzy=="" && len(new.Suggestions)==0,"paște protection changed") }
+        if new.Normalized=="intrigii" || new.Normalized=="intrigilor" { p.need(new.Fuzzy=="","intrigii fuzzy block changed") }
+        for _,target:=range []string{"n_alba_iulia","n_v87_food_chec","n_v4ist_steag","n_v24_food_pantry_ulei"} {
+            oldInput,newInput:=v16InputProbe(p,a,target,text),v16InputProbe(p,b,target,text)
+            p.counts["service_input_pairs"]++
+            if owner:=additions[new.Normalized]; owner!="" {
+                p.need(new.Owner==owner && newInput.FirstError==nil && newInput.First["ok"]==true && newInput.First["attempts"]==1,"new headword failed direct first guess")
+                _,confirmation:=newInput.First["confirmation_token_present"]; p.need(!confirmation,"new exact headword requested confirmation")
+                guess,ok:=newInput.First["guess"].(map[string]any); p.need(ok && guess["id"]==owner,"new exact headword wrong identity")
+                p.need(newInput.First["won"]==(owner==target),"new exact headword wrong winner identity")
+                p.counts["direct_alias_case_contexts"]++
+            }
+            if !reflect.DeepEqual(oldInput,newInput) { p.counts["service_input_deltas"]++; p.emit(map[string]any{"kind":"service_input_delta","index":qi,"text":text,"constructed_target":target,"before":oldInput,"after":newInput,"judgment":"observed; independent quality review pending"}) }
+            for _,s:=range []*Service{a,b} { p.need(s.store.Len()==0,"probe session leaked"); s.profiles=&profileCache{values:map[string]*profile{}} }
+        }
+    }
+    p.stage="pack_profiles"
+    // The sealed export intentionally contains only the263 approved records.
+    // Enumerate all265 source records without inserting pending items into any
+    // serving selection pool. The generated candidate preserves this pack hash.
+    var sourcePack struct { Contexto []struct { ID,Target,Difficulty,Category,Status,Source string } }
+    packData,e:=os.ReadFile(filepath.Join(root,"cat_de_roman_esti/fixtures/games_pack.json")); p.need(e==nil,"read full source pack")
+    p.need(json.Unmarshal(packData,&sourcePack)==nil,"parse full source pack")
+    targets:=sourcePack.Contexto
+    p.need(len(targets)==265,"all265 curated Cald records including pending")
+    sort.Slice(targets,func(i,j int)bool{return targets[i].ID<targets[j].ID})
+    nativeItems:=map[string]*content.PackItem{}
+    for _,item:=range a.pack.Pool("contexto",pack.PickOptions{}) { nativeItems[item.ID]=item }
+    p.need(len(nativeItems)==263 && before.PackRanked && after.PackRanked,"sealed263 approved ranked selection records")
+    p.emit(map[string]any{"kind":"source_inventory","full_cald":265,"sealed_approved_cald":263,"stored_aliases_before":oldForms,"stored_aliases_after":newForms,"labels":2419,"label_plus_alias_forms_before":oldForms+2419,"label_plus_alias_forms_after":newForms+2419,"pending_scope":"Only full-source profile probes; no pending insertion into native selection"})
+    statuses:=map[string]int{}
+    for _,item:=range targets {
+        target:=item.Target; p.need(a.g.Exists(target),"invalid pack target")
+        statuses[item.Status]++
+        eligible,storedWeight:=false,0
+        if native:=nativeItems[item.ID]; native!=nil {
+            p.need(item.Status=="approved" && native.Status==item.Status && native.Payload["target"]==target && native.Difficulty==item.Difficulty && native.Category==item.Category,"source/sealed pack record disagreement")
+            eligible,storedWeight=native.PilotEligible,native.SelectionWeight
+        } else { p.need(item.Status=="pending","approved source record missing from sealed pool") }
+        ap,bp:=v16FreshProfile(a,target),v16FreshProfile(b,target)
+        av,bv:=a.build(target,item.Difficulty,nil,""),b.build(target,item.Difficulty,nil,"")
+        oldView,newView:=v16ProfileView(ap),v16ProfileView(bp)
+        p.same("full_profiles",item.ID,oldView,newView)
+        oldWin,newWin:=v16InputProbe(p,a,target,a.g.Label(target)),v16InputProbe(p,b,target,b.g.Label(target))
+        p.need(oldWin.FirstError==nil && newWin.FirstError==nil && oldWin.First["won"]==true && newWin.First["won"]==true,"canonical target does not win: "+item.ID)
+        oldAnswer,oldOK:=oldWin.First["target"].(map[string]any); newAnswer,newOK:=newWin.First["target"].(map[string]any)
+        p.need(oldOK && newOK && oldAnswer["id"]==target && newAnswer["id"]==target,"actual canonical winner identity drift")
+        p.same("actual_canonical_winners",item.ID,oldWin,newWin)
+        hashes:=[4]hash.Hash{sha256.New(),sha256.New(),sha256.New(),sha256.New()}
+        cold:=make([]v16FeedbackRow,0,len(ids))
+        for _,id:=range ids {
+            old,new:=v16Feedback(a,av,id,nil),v16Feedback(b,bv,id,nil)
+            p.same("native_feedback_pairs",item.ID+"/"+id,old,new)
+            p.same("anchor_policy_pairs",item.ID+"/"+id,[]string{a.feedbackAnchor(id,target,false),a.feedbackAnchor(id,target,true)},[]string{b.feedbackAnchor(id,target,false),b.feedbackAnchor(id,target,true)})
+            v16HashRow(hashes[0],old); v16HashRow(hashes[1],new)
+            if id!=target { cold=append(cold,old) }
+        }
+        for _,key:=range a.projectionKeys {
+            old,new:=v16Feedback(a,av,"",a.projections[key]),v16Feedback(b,bv,"",b.projections[key])
+            p.same("projection_feedback_pairs",item.ID+"/"+key,old,new)
+            p.need(old.WinnerID=="" && new.WinnerID=="","projection gained winner identity")
+            v16HashRow(hashes[2],[]any{key,old}); v16HashRow(hashes[3],[]any{key,new})
+        }
+        // Three farthest baseline native feedback guesses, shared unchanged IDs.
+        // Unreachable feedback uses999; ties: rank descending,distance descending,ID.
+        sort.Slice(cold,func(i,j int)bool { x,y:=cold[i],cold[j]; if x.Rank!=y.Rank{return x.Rank>y.Rank}; if x.Distance!=y.Distance{return x.Distance>y.Distance}; return x.ID<y.ID })
+        p.need(len(cold)>=3,"three old nonwinning guesses unavailable")
+        coldIDs:=[]string{cold[0].ID,cold[1].ID,cold[2].ID}
+        oldClue,newClue:=v16ClueProbe(p,a,target,item.Difficulty,coldIDs),v16ClueProbe(p,b,target,item.Difficulty,coldIDs)
+        p.same("clue_profiles",item.ID,oldClue,newClue)
+        p.emit(map[string]any{"kind":"target_receipt","pack_id":item.ID,"target":target,"status":item.Status,"pilot_eligible":eligible,"selection_weight":storedWeight,"native_count":len(ids),"projection_count":len(a.projectionKeys),"reachable_before":ap.Reachable,"reachable_after":bp.Reachable,"profile_before_sha256":v16Digest(oldView),"profile_after_sha256":v16Digest(newView),"native_before_sha256":fmt.Sprintf("%x",hashes[0].Sum(nil)),"native_after_sha256":fmt.Sprintf("%x",hashes[1].Sum(nil)),"projection_before_sha256":fmt.Sprintf("%x",hashes[2].Sum(nil)),"projection_after_sha256":fmt.Sprintf("%x",hashes[3].Sum(nil)),"cold_guess_ids":coldIDs,"clue_before":oldClue,"clue_after":newClue})
+        p.counts["pack_targets"]++
+    }
+    p.need(statuses["approved"]==263 && statuses["pending"]==2 && len(statuses)==2,"263approved/2pending retained")
+    for _,s:=range []*Service{a,b} { s.profiles=&profileCache{values:map[string]*profile{}} }
+    p.stage="mined_eligibility"
+    miningHashes:=[2]hash.Hash{sha256.New(),sha256.New()}
+    highA,highB:=a.g.BySalience(.6,true),b.g.BySalience(.6,true)
+    lowA,lowB:=a.g.BySalience(0,false),b.g.BySalience(0,false)
+    p.same("mining_salience_order","easy",highA,highB); p.same("mining_salience_order","hard",lowA,lowB)
+    for _,id:=range ids {
+        old,new:=v16Mining(a,id),v16Mining(b,id)
+        p.same("mined_targets",id,old,new)
+        v16HashRow(miningHashes[0],[]any{id,old}); v16HashRow(miningHashes[1],[]any{id,new})
+    }
+    p.emit(map[string]any{"kind":"mining_receipt","targets":len(ids),"before_sha256":fmt.Sprintf("%x",miningHashes[0].Sum(nil)),"after_sha256":fmt.Sprintf("%x",miningHashes[1].Sum(nil)),"policy":"CreateWithExclusions: preferred reachable>=120 and responsive distances1..5>=40; fallback reachable>=120; final largest-component fallback subject to category120 refusal. Easy salience>=.6 when nonempty; hard lower half of ascending salience. All IDs measured; incoming>=5 is a separate unchanged C3 numeric floor, never target approval."})
+    p.stage="ordinary_weights"
+    categories:=append([]string{""},before.CategoryOrder...)
+    for _,cat:=range categories { for _,difficulty:=range []string{"usor","normal","greu"} {
+        opts:=pack.PickOptions{Category:cat,Difficulty:difficulty,FilteredShelfWeights:true}
+        old,new:=v16Weights(a,opts),v16Weights(b,opts)
+        p.same("ordinary_weight_shelves",cat+"/"+difficulty,old,new)
+        picks:=map[string][]string{}
+        for _,seed:=range []int64{0,3,36,99} {
+            x:=a.pack.PickSeeded("contexto",pyrandom.New(big.NewInt(seed)),opts); y:=b.pack.PickSeeded("contexto",pyrandom.New(big.NewInt(seed)),opts)
+            xid,yid:="",""; if x!=nil{xid=x.ID}; if y!=nil{yid=y.ID}
+            p.same("ordinary_seeded_choices",fmt.Sprintf("%s/%s/%d",cat,difficulty,seed),xid,yid)
+            picks[fmt.Sprint(seed)]=[]string{xid,yid}
+        }
+        p.emit(map[string]any{"kind":"weight_shelf","category":cat,"difficulty":difficulty,"before":old,"after":new,"finite_seeded_choices":picks})
+    } }
+    p.need(p.counts["pack_targets"]==265 && p.counts["native_feedback_pairs"]==641035 && p.counts["projection_feedback_pairs"]==122960,"complete265target feedback matrix coverage")
+    p.need(p.counts["old_normalized_identity"]==13512 && p.counts["projection_identity"]==464 && p.counts["mined_targets"]==2419,"complete identity/projection/mining coverage")
+    p.need(p.counts["fuzzy_queries"]==48 && p.counts["service_input_pairs"]==192 && p.counts["clue_profiles"]==265 && p.counts["actual_canonical_winners"]==265 && p.counts["direct_alias_case_contexts"]==24,"complete fixed29+corpus19/input/clue/winner coverage")
+    p.stage="complete"
+    p.complete=true
+    unexpected:=0; for _,n:=range p.differences {unexpected+=n}
+    if unexpected!=0 { t.Errorf("%d unexpected preservation differences; exact rows retained in proof",unexpected) }
+    t.Logf("research coverage complete:265 targets,641035 native pairs,122960 projection pairs,2419 mining profiles,13512 old keys; %d fuzzy and %d service-input changes require review",p.counts["fuzzy_query_deltas"],p.counts["service_input_deltas"])
+}
+
+type v16ClueResult struct { Before map[string]any; Category,Warmer map[string]any; CategoryError,WarmerError *gameapi.Error; Final map[string]any }
+func v16ClueProbe(p *v16Proof,s *Service,target,difficulty string,ids []string) v16ClueResult {
+    v:=s.build(target,difficulty,nil,"")
+    for _,id:=range ids {
+        row:=v16Feedback(s,v,id,nil)
+        v.Attempts++; v.Order=append(v.Order,id)
+        v.Guesses[id]=&record{ID:id,Label:row.Label,Distance:row.Distance,Closeness:row.Closeness,Rank:row.Rank,Temperature:row.Temperature,Anchor:row.Anchor,Attempt:v.Attempts}
+    }
+    sid,err:=s.store.Create(v); p.need(err==nil,"create constructed clue session"); defer s.store.Delete(sid)
+    out:=v16ClueResult{Before:s.clueView(v)}
+    body,e:=s.Clue(sid); out.Category=v16SanitizeBody(body); out.CategoryError=e
+    body,e=s.Clue(sid); out.Warmer=v16SanitizeBody(body); out.WarmerError=e
+    out.Final=s.clueView(v)
+    p.need(!v.Won && len(v.Guesses)==3 && v.Attempts==3,"clue changed guesses or winner")
+    if v.Warm!=nil { p.need(v.Warm.Label!=s.g.Label(target),"warmer clue exposed target") }
+    return out
+}
+type v16MiningRow struct { Reachable,Responsive int; Preferred,Fallback,C3NumericFloor bool; Incoming []string; Category string; SalienceBits uint64 }
+func v16Mining(s *Service,id string) v16MiningRow {
+    dist:=s.g.DistancesToDense(id)
+    row:=v16MiningRow{Incoming:[]string{},Category:s.g.Node(id).Category,SalienceBits:math.Float64bits(s.g.Salience(id))}
+    for _,d:=range dist { if d>=0 {row.Reachable++}; if d>=1 && d<=5 {row.Responsive++} }
+    seen:=map[string]bool{}
+    for _,previous:=range s.g.PredecessorIDs(id) { if previous!=id && s.g.Exists(previous) && !seen[previous] {seen[previous]=true;row.Incoming=append(row.Incoming,previous)} }
+    sort.Strings(row.Incoming)
+    row.Preferred=row.Reachable>=120 && row.Responsive>=40; row.Fallback=row.Reachable>=120; row.C3NumericFloor=len(row.Incoming)>=5
+    return row
+}
+type v16WeightRow struct { ID string; PilotScore,StoredWeight,EffectiveWeight int; Eligible bool; Status string }
+func v16Weights(s *Service,opts pack.PickOptions) []v16WeightRow {
+    pool:=s.pack.Pool("contexto",opts)
+    eligible:=[]*content.PackItem{}; for _,v:=range pool {if v.PilotEligible{eligible=append(eligible,v)}}
+    sort.Slice(eligible,func(i,j int)bool{if eligible[i].PilotScore!=eligible[j].PilotScore{return eligible[i].PilotScore>eligible[j].PilotScore};return eligible[i].ID<eligible[j].ID})
+    effective:=map[string]int{}
+    // Mirrors the exact pinned private pack.weights arithmetic for a complete
+    // shelf receipt; PickSeeded above separately invokes the actual policy.
+    for i,v:=range eligible {effective[v.ID]=5-min(4,5*i/len(eligible))}
+    out:=[]v16WeightRow{}
+    for _,v:=range pool {out=append(out,v16WeightRow{v.ID,v.PilotScore,v.SelectionWeight,effective[v.ID],v.PilotEligible,v.Status})}
+    return out
+}

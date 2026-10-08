@@ -1,0 +1,138 @@
+{
+ "Extensions_order": {
+  "later_audits": "Go pin changes alter a runtime hash. Final installed audits/finals for all three adopted rails must follow the final runtime/export/reference freeze; installed authority and release remain unaccepted.",
+  "native_pin_changes": {
+   "go-backend/internal/contentbuild/build.go": {
+    "derived_catalog_v38.json": {
+     "after": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+     "before": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01"
+    },
+    "quick_games_v92.json": {
+     "after": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+     "before": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+    }
+   }
+  },
+  "no_circular_bypass": "No fixed World or Extensions pin exists in reviewedPins. Existing validateExtensions checks its historical catalog shape/reviews/fingerprints and well-formed binding hashes; it does not equate the old catalog KG binding to current source8. Its qualified old bytes can therefore remain until the new Extensions proposal/audit/finals support replacement.",
+  "order": [
+   "After confirmed exact worktree readset, separately admitted supported World --write may use exact candidate/raw reviews/proposal/audit/same-role finals/expectedSHA. World mutation makes old Quick source bindings stale.",
+   "Obtain fresh Quick native audit and same-role finals for the actual post-World readset; then supported Quick --write.",
+   "After accepted staged Quick, independently review the exact derived/Quick compiled pin substitutions, rebuild native tools, then build Extensions proposal using its already-reviewed exact candidate/raw reviews. Do not change archived sources or suppress stale-source refusals."
+  ],
+  "python_reference_pins": "Same two hashes later update DEFAULT_DERIVED_CATALOG_SHA256 in wordgames/derived_catalog.py and CATALOG_SHA256 in wordgames/quick_catalog.py for current independent reference loaders; native Extensions does not execute Python.",
+  "source_fact": "contentrails/extensions.go:55 calls contentbuild.Load(root), which performs complete Build over source8, including compiled reviewedPins and current ranking/Quick/World validation."
+ },
+ "World_audit_portability": {
+  "code": "RuntimeHashes stores relative paths plus hashes; bindings stores eight source digests plus rubric. ConfirmFinal compares these exact values and proposal/audit/final role identities; no absolute-root value is compared.",
+  "conditional_result": "Once supported graph/Source6/rank/derive yields the exact saved readset, relocation alone requires no new native audit under actual ConfirmFinal. Any runtime/source mismatch requires a fresh audit and same-role finals.",
+  "current_worktree_to_saved_audit_diffs": {
+   "runtime": "Only missing authored-v6.json; all108 existing audited runtime files match.",
+   "sources": [
+    "kg_sample.json",
+    "board_rankings_v37.json",
+    "derived_catalog_v38.json"
+   ]
+  },
+  "review_scope_limit": "Saved factual final c9b4375a explicitly says bound isolated root/readset only; quality final3ba012b8 says current readset only. Root will obtain explicit same-reviewer applicability confirmation to actual-worktree hash equality before a separately admitted World --write; this review does not broaden those judgments."
+ },
+ "accepted_method_elements": [
+  "Original apply_common_words_v24.apply(dry_run=False,module_name=everyday_inputs_v1_6_data) runs on its actual default five paths; no generator monkeypatch or generated-fixture copy is present.",
+  "Exact graph proposal, factual/quality evidence, selected source records, fixed data module and inputs are checked before the supported transaction.",
+  "Post-generation exact hashes are checked for all five transaction files; Source6 bytes are the exact authored draft, not a rewritten version or serving fixture.",
+  "Original A.apply catches BaseException and invokes its original A._restore; wrapper must extend interruption safety without weakening that transaction."
+ ],
+ "bindings": {
+  "graph-factual-review-r1.json": "7bc364f970b45f8011ba081bfadadb8521f6e2e951cae9dd211e8f15124fe713",
+  "graph-proposal-r1.json": "4db45b490f1a431055390a4147222a10d4403596272e2135d6d88303f13a6ab6",
+  "native/quick/proposal.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+  "native/world/candidate.json": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04",
+  "native/world/factual-review.json": "fedcff86e30edf5f9033f7c0808eb6f54ef8d8845a6ab82f08c0945a268aa0ce",
+  "native/world/final-factual-review-r1.json": "c9b4375a19de9bf457e72637e2c837d39c422b550229a9e622386345618f0e9d",
+  "native/world/final-quality-review-r1.json": "3ba012b87f2e294be17e3e7dc8071ad991bd7dbc3b30a8f8d7322393f1186e5e",
+  "native/world/proposal.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+  "native/world/prospective-audit-r1.json": "2a6db5a75c385030b4e8ef73962f898f6a2ac933226e84d3d90b1a957b3fdac8",
+  "native/world/quality-review.json": "2096d85b045a71466c4e9535414939788ea6f0469dbce42babe1389c5f4c5120",
+  "remaining-native-controls-quality-r1.json": "4149550d7b4c413a1faba095bf337d14035e42ed0d81c5c2d0467a78c1b2e53c",
+  "source6-authored-draft-r1.json": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+  "source6-generated-candidates-r1.json": "40bd46d76b61a74e80ec2c4493da973251b5152d6a2074068d393c362c9afde3",
+  "source6-worktree-staging-preparation-admission-r1.json": "19c117a5f5bc3e2c72c570e403dfae7da956253781876eeb7e22adecafb573d0"
+ },
+ "changes_required": [
+  {
+   "finding": "SIGTERM can arrive after os.replace(source_temp, source_target) succeeds but before source_created=True. The exception path then restores graph bytes while leaving newly published Source6.",
+   "id": "publication-interruption",
+   "repair": "Protect publication and ownership bookkeeping from SIGTERM as one critical section; preserve supported graph rollback."
+  },
+  {
+   "finding": "The exists check followed by os.replace does not atomically refuse a concurrent target creation; replace can overwrite it.",
+   "id": "publication-no-clobber",
+   "repair": "Publish with an atomic operation that refuses an existing target, such as same-filesystem os.link to the absent target, then remove the owned scratch temporary. Track target ownership by inode and exact expected bytes before any rollback deletion."
+  },
+  {
+   "finding": "A._restore raising skips authored Source6 cleanup, and the active signal handler can interrupt cleanup again.",
+   "id": "cleanup-completeness",
+   "repair": "Ignore repeated SIGTERM during rollback; independently attempt graph restore, mode restore and owned Source6 cleanup, retain the primary failure and record cleanup failures."
+  },
+  {
+   "finding": "Original A._restore verifies byte equality only; A._atomic_write replaces via temporary files and does not preserve original modes.",
+   "id": "file-metadata",
+   "repair": "Capture the original five transaction-file modes and reapply/verify them after success and rollback if claiming metadata preservation. Do not alter A.apply."
+  },
+  {
+   "finding": "The finally block can overwrite an earlier graph-source6-worktree-staging-r1-result.json on a retry that failed before leaving source_temp or Source6.",
+   "id": "prior-result-preservation",
+   "repair": "Refuse a pre-existing result before mutation and use a distinct R2 method/result identity."
+  }
+ ],
+ "checked_at_utc": "2026-10-07T01:41:12.077869+00:00",
+ "code_bindings": {
+  "cat_de_roman_esti/wordgames/derived_catalog.py": "5b0797723812b4b0ff35550c5d524e6306a32ad4cc895436c49e71cc1ed97b63",
+  "cat_de_roman_esti/wordgames/quick_catalog.py": "68b8ad75d1b9fbe0563585811e0b8bb9f7272e3847909cab883384958ad71ded",
+  "go-backend/internal/contentbuild/build.go": "ccb575e94fa2615eb0712b6852b7e8936048457a84b67b2762d9d83da769c44b",
+  "go-backend/internal/contentbuild/catalogs.go": "eb0239ed9b57524b2e6a18aa3d5757650de17c674e6fee071a724037c6f78c77",
+  "go-backend/internal/contentbuild/world.go": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+  "go-backend/internal/contentrails/extensions.go": "c3c5166b6b6975128da9884c70921c7552ce83140575f5b5e90106dffa6c07af",
+  "go-backend/internal/contentrails/rail.go": "ab1f5353f7780342e7f5171d724a389f3f36a9853d9dc7df3a074a0d77ff6603",
+  "go-backend/internal/contentrails/source.go": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+  "go-backend/internal/contentrails/world.go": "f4d4e878ab739f06e45907f2431152d9e43df2a8a0d266dbb830339e48e9196f",
+  "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+  "scripts/everyday_inputs_v1_6_data.py": "9a932fe50589cd67a0073be2a02a0e8a7dd61c2d5f973b39adb83770abbea8f3"
+ },
+ "decision": {
+  "installation_or_release_approval": false,
+  "method_execution_approved": false,
+  "native_execution_performed": false,
+  "scope": "Exact inert R1 graph+authored-Source6 wrapper and source-backed staging order; R1 remains unexecuted. Root acknowledged the findings and will supply distinct R2 source for separate review.",
+  "verdict": "REQUEST_CHANGES"
+ },
+ "execution": {
+  "builds_tests_engines": 0,
+  "deadline_minus120s_preserved": true,
+  "native_commands": 0,
+  "process_max_RSS_bytes": 19136512,
+  "runtime_fixture_source_changes": 0,
+  "sole_output": "docs/reviews/v1-6-everyday-inputs/source6-worktree-staging-method-review-r1.json"
+ },
+ "method": {
+  "AST_syntax_pass": true,
+  "bytes": 4226,
+  "path": "docs/reviews/v1-6-everyday-inputs/methods/stage_graph_source6_r1.py.txt",
+  "scratch_exact": true,
+  "scratch_path": "/home/dobo/work/_temp/codex__content-v1-6/probe/stage_graph_source6_r1.py",
+  "sha256": "836b9145c12171441a91f844cb7d296b047d922a00daa8890a6978738852dd0f"
+ },
+ "next_execution_scope": {
+  "assertion_coverage": "expected_after_graph has exact five A.TRANSACTION_FILES. Complete expected_after has10 paths: those five, both ranking copies, both derived copies, authored Source6. Eight paths change bytes/presence including new Source6; both pack mirrors stay unchanged.",
+  "isolated_historical_root": "Retain source6-stage-r1 unchanged.",
+  "order": [
+   "Supported original graph transaction; both KG mirrors must equal63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf; mobile282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae; pack mirrors remain e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8.",
+   "Publish exact authored-v6.json a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611 with unchanged base_commit cf0da492d11552dae2a30048b6a402a3c0bad0d5 and exact Source5 parent22b7853e.",
+   "cat-content-ops rank --root WORKTREE --write, then derive --root WORKTREE --write. Both ranking mirrors must equal036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31; both derived mirrors fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a.",
+   "Read/hash exact actual109 runtime entries and source8+rubric against saved World audit, retaining Source5 World predecessor; no code pin/export/authority edits in this phase."
+  ],
+  "phase": "Graph, exact authored Source6, then supported rank and derive only. World --write excluded until separate same-reviewer actual-worktree applicability confirmation and execution admission."
+ },
+ "reviewer": "/root/v16_source6_plan",
+ "schema": "v1-6-independent-worktree-staging-method-review-r1",
+ "valid_until": "A changed wrapper needs distinct review. The source-backed ordering and pin values remain conditional on exact bound artifacts and code."
+}

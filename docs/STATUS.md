@@ -1,7 +1,8 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-08 — Original900/16-78 + original30 retained; normalizeddeps3 PASS(nativeTS7/API6/Motion14/Oxlint1.87). Fresh styleGEN PASS160sites/15files/native7/Motion14; candidateaccepted/unapplied(resultfbe9ce45/capture452f1189). Go-only scope refused missingmandatorynpm-lock(captured7c533f20); unsupportedextensionremoved, existingbaseline-quality-only selected. [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md);40KiB/M0/M1/KIT_BUMP/full/device/UI activation unearned.
+Last verified: 2026-10-08 — V1.6/Source6 qualification remains as recorded below; GUI source-only Windows checkpoint is NOT newly runtime-qualified (no handover tests). See [handover](GUI_MIGRATION_HANDOFF.md).
 
+- **GUI checkpoint:** core-v1.2 released; normalized style15 source accepted/unapplied; dependency64ea PASS. Actual replay900/Node3/lint/unit/full/CSP/device/KIT_BUMP pending. Linux worker/supervisor stopped at Paul's handover request.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
 ## Current state
@@ -46,7 +47,7 @@ Last verified: 2026-10-08 — Original900/16-78 + original30 retained; normalize
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Task KG: `fixture-v1-4-time-links`, 2419 nodes/9473 links/8677 forms/180 exact puzzles.
+Qualified Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
@@ -55,18 +56,18 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Current artifact pins
+## Current qualified V1.6 pins
 
-- alchimie_discovery_world_v92.json: `196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086`
-- alchimie_recipe_extensions_v92.json: `1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7`
-- quick_games_v92.json: `a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609`
+- alchimie_discovery_world_v92.json: `8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad`
+- alchimie_recipe_extensions_v92.json: `d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc`
+- quick_games_v92.json: `0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef`
-- derived_catalog_v38.json: `25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01`
+- board_rankings_v37.json: `036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31`
+- derived_catalog_v38.json: `fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6`
-- cat_mobile_app_pack_contract.json: `2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8`
+- kg_sample.json: `63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf`
+- cat_mobile_app_pack_contract.json: `282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -107,7 +108,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-  V1.5/Source5 World landed locally e8c4bbc; Quick/Extensions retain Source4. [Hot chocolate](reviews/v1-5-hot-chocolate/README.md) adds one world-local concept/recipe; both i02 links stay held and the Contexto projection stays exact. Fresh 108-source audits/finals, strict all-four authority, 33 goal modes/148 discoveries/1156 prefixes, 60-request journey, 1207 HTTP parity, smoke151/assets28, 425 reference checks, export/rank/derive/mobile and shared race/vet pass. All 27 backend test packages have passing race coverage; the 24 content-rail cases use exhaustive 5/19 groups; vet passes. Exact assembled review62817bd1 accepted684b29b; local landing e8c4bbc complete.
+- **V1.6/Source6 published dccd401:** exact1b38 content, assembledACCEPT9a0ce834 and all required gates; [landing](reviews/v1-6-everyday-inputs/landing.json), [ledger](reviews/v1-6-everyday-inputs/verification.json), [ADR-0182](adr/0182-v1-6-reviewed-singular-inputs.md). Two genuine families/two singular forms (drapel→Steag, untdelemn→culinaryUlei); zero concepts, edges, targets, rounds or eligible/preferred growth. Verified-merged task cleanup followed exact SDK preservation; other owners remain untouched. **V1.7 remains uninstalled:** one selected singular employee-pay leafă→Salary family/form, zero installed additions; [pool](content-pool/v1-7-recognizable-content/pool.json), [current review](reviews/v1-7-recognizable-content/README.md), [ADR-0183](adr/0183-v1-7-single-salary-input-admission.md). Final exact factual/quality/one-literal disposition accepted; all declared prospective feedback/fuzzy/ordinary play/reference/Lanț/terminal/World/history proofs are complete with their stated research-only provenance. Source7 drafte95ebf93 names exact reviewed Source6 parent and retains all25 prior archives plus3 Source6 World records. Nine supported isolated native preparation steps passed; exact Quickc93a2656/World890566e9/Extensionsf3e316bf candidates have complete fresh factual and quality reviews, with identical authored semantics. Independent identity review verified484 lossless archive members/554 initial pins/418 current outputs and authorized rank/derive mirror-pair changes only. Original incomplete source review and all earlier resource/native/clock/format/assertion failures remain history. Supported Quick proposal34c11c48/audita15b2f58 (85 boards/460 requests) and World proposal1fcd017b/auditcafdd235 (33 goal modes/148 discoveries/ten1156 prefixes) passed. Root runtime-source dictionary assumption failed after the two native Quick steps; original9a88 stopped, actual Quick independently verified, minimal list-schema repair/new World-only bfc lane passed without replay/reset. Fresh same-role World finals and one-target method accepted; guarded f494 changed ONLY scratch World8f→1f,1065 non-target pins/runtime110 exact, source9 onlyWorld changed. Independent actual transition fcd679e4/lossless25-member archive accepts isolated identity only. Fresh Quick audit/finals are next because old a15/caf audits are stale after World transition. Quick/Extensions transitions/reviewed pin/tool updates, supported live graph/Source7 transaction, installed history/full-byte inverse/current authority, full required gates and exact assembled local acceptance remain pending. Main/origin and installed Source6 pins/counts stay unchanged; Owner authorized SOURCE-ONLY origin/main checkpoint publication and needed feature/WIP branches for Windows reboot handoff; V1.7 release/deployment/PG/provider activation remains unapproved. Linux heartbeat paused.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -116,5 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
   (a time cap would break deterministic dailies); older stored score details keep ISO dates
   but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
 ## Doc map
-
-- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0178), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.
+- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0183), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.

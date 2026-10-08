@@ -1,0 +1,64 @@
+{
+  "schema": "v1-6-independent-current-http-capture-delta-r1",
+  "checked_at_utc": "2026-10-07T03:35:59.367050+00:00",
+  "current_corpus_sha256": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+  "old_corpus_sha256": "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519",
+  "producer_sha256": "76cbc80cbd9b93bfdd07dea6709e59371858fc936fd2539d3395fbc1c1633e5d",
+  "current_binary_sha256": "48e262da96f04a697391973d40f04e8a703a5db77b50d59c9326381d20e19c59",
+  "execution_result_sha256": "3b0fa1400a519d1faa60fc627fd157e27d31dfe7faf46117a30952439f0043e0",
+  "same_requests_status_order": 1207,
+  "identical_response_bodies": 1206,
+  "changed_response_bodies": [
+    {
+      "index": 923,
+      "request": {
+        "body": "",
+        "method": "GET",
+        "path": "/api/manifest"
+      },
+      "before_body": {
+        "app": "cat_de_roman_esti",
+        "build_version": "fixture-v1-4-time-links",
+        "content_hash": "sha256:cbd1592e1103e0b0fb7d6945ae4440b50280fa29ae88c91e40a7dab864bd695d",
+        "counts": {
+          "edges": 9473,
+          "nodes": 2419,
+          "puzzles": 180
+        },
+        "generated_at": "2026-06-21T00:00:00Z",
+        "manifest_version": 1,
+        "schema_version": 1
+      },
+      "after_body": {
+        "app": "cat_de_roman_esti",
+        "build_version": "fixture-v1-6-everyday-inputs",
+        "content_hash": "sha256:7410c200f06f24a23581a78c8804a685013c1aaffa878a6a46388bb8369f44de",
+        "counts": {
+          "edges": 9473,
+          "nodes": 2419,
+          "puzzles": 180
+        },
+        "generated_at": "2026-06-21T00:00:00Z",
+        "manifest_version": 1,
+        "schema_version": 1
+      }
+    }
+  ],
+  "complete_current_source8": {
+    "alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+    "alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+    "board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+    "derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+    "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+    "quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+    "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "raw_bytes": 696176,
+  "compressed_bytes": 33785,
+  "all_protected_at_completion": 1809,
+  "expected_response_author": "Actual current independent Django application; original preserved producer logic; native child replay matched all1207.",
+  "runtime_golden_installation": false,
+  "selector_changes": false,
+  "approval_scope": "Observation/delta only; independent exact review required."
+}

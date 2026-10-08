@@ -1,0 +1,38 @@
+{
+  "schema": "v1-6-contentrails-historical-context-source-preparation-r1",
+  "started_at_utc": "2026-10-07T05:09:27.623363+00:00",
+  "deadline_utc": "2026-10-07T05:29:27.623363+00:00",
+  "metadata_reserve_seconds": 180,
+  "inclusive_agents_max": 3,
+  "agents": [
+    "/root",
+    "/root/v16_finish_qualification",
+    "/root/v16_source6_plan"
+  ],
+  "disk_free_bytes": 233008136192,
+  "memory_available_bytes": 22764421120,
+  "native_execution": false,
+  "scope": "Author narrow test-only genuine Source4/Source5 contexts for two failed contentrails tests and their existing mutation subtests. Preserve all original assertions/literals/test coverage. Current Quick/Extensions remain on coherent current source root; historical World gets exact old KG/World. No production/source8/runtime109/pin/authority or old reference modifications. Independent review required before execution.",
+  "failed_result_sha256": "c7e5bc653e7f4dd51e7b11a823d42236d1a40a744e267367e4325d1b2fa0736f",
+  "before": {
+    "go-backend/internal/contentrails/rail_test.go": {
+      "before_sha256": "db3d6a1899c3fe87424c2cf7ab929c819458e4b822e052fb01a4705e62518b11",
+      "archive_path": "docs/reviews/v1-6-everyday-inputs/methods/rail_test.before-historical-context-r1.go.gz",
+      "archive_sha256": "a90fe9df7e27faa7e57544d88d37fad5418ff917fd0d092edeefe2399ed78072"
+    },
+    "go-backend/internal/contentrails/world_installed_test.go": {
+      "before_sha256": "4037f1931e0af37ed90cc1fae1b72893900227103b3ac7768c536d3c4dcb221e",
+      "archive_path": "docs/reviews/v1-6-everyday-inputs/methods/world_installed_test.before-historical-context-r1.go.gz",
+      "archive_sha256": "06528edd8a0fc5403747dacbfc5c14f142156cccdb4051a09d688c96b39f3d45"
+    }
+  },
+  "frozen_runtime_sha256": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7",
+  "immutable_context_archive_sha256": "ffffa21ccf11f79d817c529123f2583824c62fefaabd17a5887e7ce809507e48",
+  "immutable_context_manifest_sha256": "47d93bbae6a5a6f5eec031a09568c20e2f81887598cff9fff9120c9eeff2a48c",
+  "allowed_existing_edits": [
+    "go-backend/internal/contentrails/rail_test.go",
+    "go-backend/internal/contentrails/world_installed_test.go"
+  ],
+  "allowed_new_helper": "go-backend/internal/contentrails/historical_context_v16_test.go",
+  "author_receipt": "docs/reviews/v1-6-everyday-inputs/reference/contentrails-historical-context-preparation-r1.json"
+}

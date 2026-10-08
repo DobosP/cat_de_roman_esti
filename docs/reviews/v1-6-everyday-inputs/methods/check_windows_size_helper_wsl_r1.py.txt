@@ -1,0 +1,210 @@
+"""Controlled native-Windows fixture for the fresh-size Job Object helper.
+
+CLI: fixture.py NEW_OWNED_FIXTURE_DIRECTORY HELPER_PATH EXACT_HELPER_SHA256
+No Go, network, application execution or deletion; all calls leave owned receipts.
+"""
+import ctypes
+from ctypes import wintypes
+import hashlib
+import json
+import os
+from pathlib import Path
+import struct
+import subprocess
+import sys
+import time
+import uuid
+
+STARTED = time.monotonic()
+sys.dont_write_bytecode = True
+S = Path('C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+PYTHON = Path('C:/Users/Paul Work/AppData/Local/hermes/hermes-agent/venv/Scripts/python.exe')
+PYTHON_SHA = '885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8'
+K = ctypes.WinDLL('kernel32', use_last_error=True)
+for name, arguments, result in (
+    ('OpenProcess', (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD), wintypes.HANDLE),
+    ('GetProcessTimes', (wintypes.HANDLE, ctypes.POINTER(wintypes.FILETIME), ctypes.POINTER(wintypes.FILETIME), ctypes.POINTER(wintypes.FILETIME), ctypes.POINTER(wintypes.FILETIME)), wintypes.BOOL),
+    ('WaitForSingleObject', (wintypes.HANDLE, wintypes.DWORD), wintypes.DWORD),
+    ('CloseHandle', (wintypes.HANDLE,), wintypes.BOOL),
+    ('SetFileAttributesW', (wintypes.LPCWSTR, wintypes.DWORD), wintypes.BOOL),
+    ('GetFileAttributesW', (wintypes.LPCWSTR,), wintypes.DWORD),
+    ('CreateFileW', (wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE), wintypes.HANDLE),
+    ('DeviceIoControl', (wintypes.HANDLE, wintypes.DWORD, ctypes.c_void_p, wintypes.DWORD, ctypes.c_void_p, wintypes.DWORD, ctypes.POINTER(wintypes.DWORD), ctypes.c_void_p), wintypes.BOOL),
+):
+    function = getattr(K, name)
+    function.argtypes, function.restype = arguments, result
+
+def checked(value):
+    if not value:
+        raise ctypes.WinError(ctypes.get_last_error())
+    return value
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+def identity_quiescent(identity):
+    if not isinstance(identity, dict) or type(identity.get('pid')) is not int or type(identity.get('creation_time_100ns')) is not int:
+        raise ValueError('exact process identity required')
+    handle = K.OpenProcess(0x100000 | 0x1000, False, identity['pid'])
+    if not handle:
+        if ctypes.get_last_error() == 87:
+            return {'pid': identity['pid'], 'original_identity_quiescent': True, 'reason': 'PID absent'}
+        raise ctypes.WinError(ctypes.get_last_error())
+    try:
+        c, e, k, u = (wintypes.FILETIME() for _ in range(4))
+        checked(K.GetProcessTimes(handle, ctypes.byref(c), ctypes.byref(e), ctypes.byref(k), ctypes.byref(u)))
+        actual = (int(c.dwHighDateTime) << 32) | int(c.dwLowDateTime)
+        if actual != identity['creation_time_100ns']:
+            return {'pid': identity['pid'], 'original_identity_quiescent': True, 'reason': 'PID reused; different creation identity left alone'}
+        if K.WaitForSingleObject(handle, 0) != 0:
+            raise RuntimeError('exact owned Windows process still running')
+        return {'pid': identity['pid'], 'original_identity_quiescent': True, 'reason': 'matching process handle signalled exit'}
+    finally:
+        checked(K.CloseHandle(handle))
+
+def junction(path, target):
+    # An owned NTFS mount-point reparse entry needs no symlink privilege or shell command.
+    path.mkdir()
+    substitute = ('\\??\\' + str(target)).encode('utf-16-le')
+    display = str(target).encode('utf-16-le')
+    names = substitute + b'\0\0' + display + b'\0\0'
+    data = struct.pack('<IHHHHHH', 0xA0000003, 8 + len(names), 0,
+                       0, len(substitute), len(substitute) + 2, len(display)) + names
+    handle = K.CreateFileW(str(path), 0x40000000, 7, None, 3, 0x02000000 | 0x00200000, None)
+    if handle == ctypes.c_void_p(-1).value:
+        raise ctypes.WinError(ctypes.get_last_error())
+    try:
+        returned = wintypes.DWORD()
+        checked(K.DeviceIoControl(handle, 0x000900A4, data, len(data), None, 0, ctypes.byref(returned), None))
+    finally:
+        checked(K.CloseHandle(handle))
+    if not path.stat(follow_symlinks=False).st_file_attributes & 0x400:
+        raise RuntimeError('controlled junction was not a reparse entry')
+
+def write_report(path, report):
+    blob = json.dumps(report, indent=2).encode('utf-8') + b'\n'
+    if len(blob) > 128 << 10:
+        raise ValueError('fixture receipt bound')
+    with path.open('wb') as stream:
+        stream.write(blob)
+        stream.flush()
+        os.fsync(stream.fileno())
+
+def main(directory, helper, helper_sha):
+    if sys.platform != 'win32' or sys.version.split()[0] != '3.11.15' or Path(sys.executable).resolve() != PYTHON.resolve() or digest(PYTHON) != PYTHON_SHA:
+        raise RuntimeError('exact native Windows interpreter required')
+    base = (S / 'probe/windows-size-helper-fixtures').resolve()
+    directory = Path(directory).resolve()
+    if directory == base or os.path.commonpath((str(directory), str(base))) != str(base):
+        raise ValueError('new owned fixture directory required')
+    helper = Path(helper).resolve()
+    if digest(helper) != helper_sha:
+        raise RuntimeError('exact helper binding required')
+    directory.mkdir(parents=True, exist_ok=False)
+    tree = directory / 'tree'
+    tree.mkdir()
+    calls = []
+    report = {'schema': 'v1-6-controlled-windows-size-helper-fixture-r1',
+              'passed': False, 'helper_sha256': helper_sha, 'interpreter_sha256': PYTHON_SHA,
+              'fixture_sha256': digest(__file__), 'calls': calls,
+              'application_or_Go_executions': 0, 'foreign_processes_signalled': 0,
+              'all_original_process_identities_quiescent': False}
+    report_path = directory / 'check-result.json'
+    write_report(report_path, report)
+    def call(label, hang=False):
+        if time.monotonic() - STARTED >= 25:
+            raise TimeoutError('fixture total25s')
+        receipt = S / 'probe/windows-size-helper-r2' / (uuid.uuid4().hex + '.json')
+        argv = [str(PYTHON), '-B', str(helper), str(receipt)]
+        if hang:
+            argv.append('--fixture-hang')
+        argv.append(tree.as_posix())
+        began = time.monotonic()
+        item = {'label': label, 'receipt_path': str(receipt), 'status': 'pending'}
+        calls.append(item)
+        write_report(report_path, report)
+        process = subprocess.Popen(argv, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
+        try:
+            stdout, stderr = process.communicate(timeout=5)
+        except subprocess.TimeoutExpired:
+            # Do not mistake terminating a venv redirector for terminating the helper.
+            item.update(status='cleanup-uncertain', parent_call_elapsed_seconds=time.monotonic() - began)
+            raise RuntimeError('native helper call timeout; preserve pending identities and stop')
+        elapsed = time.monotonic() - began
+        if len(stdout) > 1 << 20 or len(stderr) > 1 << 20 or elapsed > 4:
+            raise RuntimeError('helper parent/output bound')
+        value = json.loads(stdout)
+        saved = json.loads(receipt.read_bytes())
+        if value != saved or len(receipt.read_bytes()) > 16 << 10:
+            raise RuntimeError('final stdout/receipt mismatch or16KiB bound')
+        if value.get('schema') != 'v1-6-windows-fresh-size-helper-r2' or value.get('roots') != [tree.as_posix()]:
+            raise RuntimeError('helper schema/roots mismatch')
+        if value.get('helper_sha256') != helper_sha or value.get('interpreter_sha256') != PYTHON_SHA or value.get('python_version') != '3.11.15':
+            raise RuntimeError('helper source/host bindings')
+        for key in ('worker_exit_confirmed', 'launcher_exit_confirmed', 'job_empty'):
+            if value.get(key) is not True:
+                raise RuntimeError('unconfirmed owned job cleanup: ' + key)
+        if not 0 <= value['elapsed_seconds'] < 4 or not 0 < value['peak_job_memory_bytes'] <= 64 << 20:
+            raise RuntimeError('helper job/time bound')
+        quiescence = {key: identity_quiescent(value[key]) for key in ('parent', 'launcher', 'worker')}
+        item.update(status='cleanup-confirmed', exit_code=process.returncode,
+                    parent_call_elapsed_seconds=elapsed, identities=value,
+                    identity_quiescence=quiescence)
+        if hang:
+            if process.returncode == 0 or value.get('status') != 'failed' or value.get('job_terminated') is not True:
+                raise RuntimeError('hung-worker refusal missing')
+            if not value.get('failure', '').startswith('TimeoutError:') or value.get('worker_exit_elapsed_seconds', 99) > 2:
+                raise RuntimeError('hung-worker watchdog/exit cap missing')
+        else:
+            if process.returncode != 0 or value.get('status') != 'completed' or value.get('failure') is not None or not 0 < value.get('peak_working_set_bytes', 0) <= 64 << 20:
+                raise RuntimeError('normal metadata call failed')
+        if digest(helper) != helper_sha or digest(PYTHON) != PYTHON_SHA:
+            raise RuntimeError('bindings drift during fixture call')
+        write_report(report_path, report)
+        return value
+    try:
+        (tree / 'plain').write_bytes(b'abc')
+        (tree / 'hidden').write_bytes(b'xy')
+        attributes = K.GetFileAttributesW(str(tree / 'hidden'))
+        if attributes == 0xFFFFFFFF:
+            raise ctypes.WinError(ctypes.get_last_error())
+        checked(K.SetFileAttributesW(str(tree / 'hidden'), attributes | 2))
+        nested = tree / 'nested'
+        nested.mkdir()
+        (nested / 'nine').write_bytes(b'123456789')
+        os.link(tree / 'plain', tree / 'hardlink')
+        junction(tree / 'junction-live', nested)
+        junction(tree / 'junction-missing', directory / 'missing-target')
+        initial = call('regular-hidden-hardlinks-and-deferred-junctions')
+        expected_deferred = {str(tree / 'junction-live'), str(tree / 'junction-missing')}
+        if initial['regular_bytes'] != 17 or set(initial['deferred']) != expected_deferred or len(initial['deferred']) != 2:
+            raise RuntimeError('initial exact metadata/deferred coverage')
+        (tree / 'plain').write_bytes(b'12345678')
+        (tree / 'added').write_bytes(b'12345')
+        fresh = call('fresh-hardlink-change-and-new-file')
+        if fresh['regular_bytes'] != 32 or set(fresh['deferred']) != expected_deferred:
+            raise RuntimeError('fresh traversal did not observe changes')
+        (directory / 'allow-hung-worker.json').write_bytes(json.dumps({
+            'schema': 'v1-6-controlled-hung-worker', 'helper_sha256': helper_sha}).encode())
+        call('injected-hung-worker-job-termination-and-exit-proof', hang=True)
+        report.update(passed=True, all_original_process_identities_quiescent=True,
+                      tests={'normal_regular_bytes': 17, 'fresh_regular_bytes': 32,
+                             'hidden_file_included': True, 'hardlinks_counted_each_path': True,
+                             'two_reparse_entries_deferred': True, 'hung_worker_job_killed': True,
+                             'actual_parent_launcher_worker_creation_identities_checked': True})
+    except BaseException as exc:
+        report.update(failure=type(exc).__name__, detail=str(exc)[:2048])
+    report['elapsed_seconds'] = time.monotonic() - STARTED
+    if report['elapsed_seconds'] > 25:
+        report['passed'] = False
+        report['failure'] = 'fixture total25s'
+    write_report(report_path, report)
+    print(json.dumps({'passed': report['passed'], 'receipt_path': str(report_path),
+                      'elapsed_seconds': report['elapsed_seconds']}))
+    return 0 if report['passed'] else 1
+
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        raise SystemExit('fixture.py NEW_OWNED_FIXTURE_DIRECTORY HELPER_PATH EXACT_HELPER_SHA256')
+    raise SystemExit(main(*sys.argv[1:]))

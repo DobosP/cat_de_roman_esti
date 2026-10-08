@@ -1622,3 +1622,110 @@ Preparation only: [review keeper](docs/reviews/gui-motion-baseline/README.md) pr
 Valid until: a later content/source change — then treat this as history.
 
 Exact684b29b independently accepted62817bd1 and locally landed e8c4bbc. Adds one world-local Ciocolată caldă concept and one earned Milk/Chocolate recipe; world252/352/148,10books/1156savedprefixes. Shared KG/forms/synonyms/links/curated pools unchanged. All425reference,1207HTTP,151/28smoke and complete native/shared race/vet/authority/source gates qualified; original18mtimeout retained with exhaustive passing24case5/19groups. GUI keeper84fc retained. No push/deployment.
+
+
+## V1.6 bounded lexical research — 2026-10-07
+
+Valid until: source, identity, consumer or selected scope changes — then repeat affected checks.
+
+Six hypotheses screened against actual normalized owners, sealed index, current decks,
+projections, world and tombstones. Primary Academy dictionary/DOOM and original publisher
+sources support scoped drapel, untdelemn and continued i05-lex-01 leafă R2 research; three
+other leads remain held. Original leafă R1/access limits remain recorded. No selected forms,
+concepts, links, targets, rounds, source or runtime mutation; no game-gate pass inferred.
+[Research checkpoint](docs/reviews/v1-6-everyday-inputs/README.md) binds exact source/quality
+receipts and the next ordinary typed-play checks. Brief4-over-3 worker overlap is a failed source constraint; later memory headroom refused native docs before launch. A later separately admitted documentation check supports research checkpoint persistence only; the earlier failures remain history. This is not a release. Main stays clean; no push/deployment.
+
+
+V1.6 ordinary input follow-up: actual54-request native HTTP-handler baseline at ordinary
+seeds36/3 demonstrates missing drapel/untdelemn with canonicalSteag/Ulei rank5/2. Four
+sessions preserve private Get, repeats, earned clues and700score recovery; all bound runtime
+bytes remain exact. Independent review supports only those two R2records becoming ready
+for refinement; leafă remains researched and3holds persist. No selected candidate or release.
+
+
+V1.6 exact proposal/materialization: selected two immutable R2records, with current R3
+handoff metadata; raw factual review accepts only the qualified singulars. Independent
+quality remains pending and specifies finite all-game/fuzzy/prospective cases. Repaired
+method passed supported isolated preflight/apply: candidate63f0dcd7 contains2419/9473/8679/180,
+exactly2added forms; all other node fields/edges/terminal/pack payloads and installed bytes
+preserved. Generated artifacts are archived; no Source6/installation/landing or pool growth
+is claimed. Final quality and native prospective/full downstream gates remain required.
+
+
+V1.6 prospective evidence: reviewed methods executed against exact generated aliases/index
+with transparent research-only provenance. Native56-request two-order gameplay and full
+Cald/identity/mining/finite-fuzzy profiles pass; exhaustive reference1776cases complete.
+Independent6194505d review accepts12lexical/36service and6reference changes as explained;
+only2storedforms, no other inventory growth. Three source/snapshot guards correctly refuse
+stale candidate bindings. Proper Source6/currentauthority/history, specific-flag/nativeLanț/
+terminal controls, fullgates and finalquality/assembled acceptance remain pending. Installed
+Source5 unchanged; all actual observations and partial-method history are archived.
+
+
+V1.6 remaining controls: repaired typed-nil harness failure remains failed history; fresh
+R2passes specificflag nonwinning,18+4nativeLanț state cases and all180terminal puzzles×2modes
+plus36numbered/8invalid controls. Original numbered-only terminal semantics preserved.
+Independent4149550d accepts exact rawgraphquality for supported staging, not Source6 or
+installation. Fresh Ulei concept/source catalog/audit/history/currentauthority/fullrelease
+checks remain; inspected actual operator sequence saved. Installed Source5 remains exact.
+
+
+Controls persistence correction: staged whitespace rejected a trailing blank line in the
+archived Lanț source view, but a non-fail-fast shell continued to commit66d43a5. No mainmerge.
+Exact tested/reviewed aa8dc4f1 bytes retained in lossless archive/Git; currentview removes
+only one LF. Review hashes remain historical exact bindings. Follow-up must pass default
+working/staged diff checks with set-e; no data/assertion/runtime change or old failure erased.
+
+
+## 2026-10-07 — V1.6 isolated Source6 candidates
+
+Prepared exact task-owned Source6a086dc2a with Source5parent22b7853e and all25 reachable
+archives (22 old plus three V1.5 World records). Initial non-Git VCS-stamping tool-build
+failure is preserved; independently reviewed R2 disables stamping only. All seven native
+steps pass, producing unchanged716 ranking rows/336 derived payloads and three candidates.
+Only Ulei World snapshot adds untdelemn; authored content/mechanics/history remain exact.
+Installed Source5/main are untouched. Fresh native reviews, audits/finals, history/current
+authority, full release checks and assembled acceptance remain required.
+
+Complete native raw factual/quality reviews cover85Quick/352World recipes+252concepts/
+49Extensions, including fresh Ulei concept/seven recipes/one Perechi board. Native Quick
+proposal/audit passes85ordinary replays/460HTTP; World passes33goal modes,148discoveries
+and1156saved prefixes across10books. Both actual proposals and audits remain isolated;
+915protected files stay exact. Same-role World prospective finals accept exact proposal8f013a8f/audit2a6db5a7 only;
+Quick needs a fresh audit/final after World staging. No serving export/authority/release
+or V1.6 landing is inferred from these intermediate gates.
+
+
+## 2026-10-07 — V1.6 complete native source staging
+
+Graph two forms/Source6/rank/derive, World8f013a8f, Quick0c79b9c5 and Extensionsd94647e7
+were staged through supported transactions and exact independent review gates. Initial
+worktree increment accounting gap remains explicit; correctedwholeR guard and fresh
+nonmutating qualification passed. Memory preflight refusals remain preserved. Native
+source validation/export/check now pass for e0cfe93d7272424bytes; no currentauthority or
+release claim. Immutable Source4/Source5 rebuild race checks pass with old assertions.
+Strict history, current sealed-input and independent1207capture methods are source-ready
+and awaiting independent review/execution. Main remains unchanged and clean; no push.
+
+## V1.6 owner pause for Windows continuation — 2026-10-07
+
+Valid until: owner resumes the exact continuation branch — then treat as history.
+
+Qualification paused before completion for immediate restart. Source6 staging and several gates pass, but all19 complementary contentrail cases remain unqualified after the stopped external-wrapper interruption. R4-R2 review and both fixture modes are pending; no assembled release acceptance or V1.6 landing. Durable continuation: `docs/reviews/v1-6-everyday-inputs/continuation-checkpoint-r1.json`. Finish V1.6 later, root publishes green main, then stop; noV1.7.
+
+Previous task STATUS paragraph, preserved as superseded history:
+
+V1.5/Source5 World landed locally e8c4bbc; Quick/Extensions retain Source4. [Hot chocolate](reviews/v1-5-hot-chocolate/README.md) adds one world-local concept/recipe; both i02 links stay held and the Contexto projection stays exact. Fresh 108-source audits/finals, strict all-four authority, 33 goal modes/148 discoveries/1156 prefixes, 60-request journey, 1207 HTTP parity, smoke151/assets28, 425 reference checks, export/rank/derive/mobile and shared race/vet pass. All 27 backend test packages have passing race coverage; the 24 content-rail cases use exhaustive 5/19 groups; vet passes. Exact assembled review62817bd1 accepted684b29b; local landing e8c4bbc complete. V1.6 [source screen](reviews/v1-6-everyday-inputs/README.md) records2selected/1researched/3held. Actual54-request baseline proves drapel/untdelemn missing typed guesses while canonicalSteag/Ulei rank5/2; leafă still needs a case, cucuruz already owned, gazetă broader, Geamantan/Valiză absent. Exact two-singular proposal/raw facts and supported isolated candidate63f0dcd7 are recorded:2forms,0other node/edge/puzzle/pack deltas. Native56-request prospective play,265target/2419mining profiles and1776reference cases pass with12lexical/36service deltas and6explained reference changes. Specificflag/nativeLanț/terminal controls pass; independent4149550d accepts exact rawgraphquality for staging. Isolated Source6a086dc2a candidates and native716ranking/336derived rebuilds pass; only Ulei World snapshot adds untdelemn, all mechanics/boards exact. Fresh native raw reviews cover85Quick/352recipes+252concepts/49Extensions. Quick85/460HTTP and World33modes/148discoveries/1156prefix native prospective audits pass; same-role World prospective finals accept only exact staging. Task graph/Source6/rank/derive match the exact candidate (8679forms). Corrected whole-worktree guard and fresh native actual-root requalification pass; original accounting gap remains history. World8f013a8f and Quick0c79b9c5 were staged through guarded native transactions and same-role finals; a Quick memory refusal remains preserved. Extensionsd94647e7 is staged through native finals; complete source validation and native exporte0cfe93d/7272424bytes pass. Source4/Source5 historical rebuild race checks pass with old assertions intact. Strict history/current-input/capture methods await independent review and execution; currentauthority/fullrelease remain pending. Earlier worker/resource failures remain history.
+
+## V1.6 Windows transport history, superseded by Linux resume
+
+Valid until: ADR-0181 Linux resume — then treat as history.
+
+- V1.5/Source5 remains qualified main6a233279; shared checkout clean. V1.6 is partial/unmerged on canonical `codex/content-v1-6`; [ADR-0179](adr/0179-resume-v1-6-in-original-chat.md) records the loop here. Exactly2 staged singular forms (drapel→Steag, untdelemn→culinaryUlei), zero new nodes/edges/targets/rounds. Frozen runtime109/source8/rubric and existing Source6/489reference/native/HTTP proofs remain exact. Original Linux/Windows runner failures are retained. Go1.27.1 SDK, WSL primitives, independent R9/helperR4 source+controlled Windows evidence,217 pure cases, full-root parity and both actual lifecycle fixtures pass their scopes. Source-onlyR3 and exact immutable nativeR1 admission were independently accepted. NativeR1 step0 lockedmodules and step1five race cases pass; step2 stopped at metadata-time-reserve11:10:28UTC, original deadline11:13:13/baseline752431588 unchanged. PeakRSS490426368/growth580340038 stay below2GiB/1GiB; SIGTERM cleanup0.026s leaves no owned processes. All1265 pre/post bindings pass. [Exact raw evidence](reviews/v1-6-everyday-inputs/wsl-native-campaign-r1-evidence.tar.gz) retains receipts/logs/helper history/old docs; interrupted assertions are unqualified. Fourteen complementary cases, finalCLI/vet/docs/pool/assembled acceptance and green landing remain pending. Pool stays2selected/1researched/3held/0integrated. Independent failed-campaign and bounded synthetic IO evidence reviews pass their scopes: matched260files/36MiB in37.415s; ext4 write/copy/stat/hash faster, fsync slower. Linux scratch is counted. Exact split-binary provenance/R11 source pass scope reviews; per-step canonical+mirror109 and compiler161 namespaces are required. Source-accepted mirrorR2 preparation stopped at40s after127/172files; partials/rawfailure retained, no native launched. R11 pure57 cases pass scoped review; R12 owned-telemetry source and descriptor copyR6 source are accepted. Descriptor fixtures retain full failures2/31 on C held-root rename and7/32 on unsupported C FIFO; host-faithful descriptor32 and telemetry20 controls pass scoped evidence reviews. Complete mirrorR6 is independently accepted for metadata:172readers/57,335,773bytes,109runtime exact,22.832s work/31.685s host,29,999,104RSS/growth457,191,007 under unchanged caps;285terminal helpers clean. ActualR13 failed before target launch at24s; R15 real owned cleanup/readsets/no-successor passed their raw scope but the whole fixture FAILED24.008s at reset-refusal timeout, preserved independently. R16 active-only also FAILED25.678s at guard-exit timeout; independent failure preservation confirms owned process absence and299terminal/299sidecar helpers clean. Source-accepted R13 adds early signal checks only to already-interrupted accounting; accepted measurements/publication counts/post-readsets retain every guard. Focused delta24 controls pass scoped review. R17 actual active passes23.368s work/23.885s host with0.093s owned cleanup; exact failed-lane CLI continuation/reset refusals pass14.197s work/14.753s host, independently accepted with original clock/baseline/pins unchanged. Finalization/queued and native throughput remain unqualified. R14 bounded two-worker fresh registry source and focused25 controls are independently accepted; R18 actual active passes16.526s work/16.890s host but independent active/binding review was interrupted by the human stop. R18 finalization/queued/CLI-refusal and new native campaign are unexecuted. Every receipt/readset/resource guard and fixed budget remains required. All19 require a complete accepted campaign; no identical retry or renewed failed clock. [Current evidence](reviews/v1-6-everyday-inputs/README.md). [ADR-0180](adr/0180-stop-windows-loop-publish-linux-checkpoint.md) records the stopped loop and human-authorized WIP origin publication; no green landing/version advance is claimed. Continue qualification on Linux.
+
+### V1.6 green main landing — 2026-10-07
+
+Valid until: Source6 is superseded — then treat as history.
+
+Root fast-forwarded independently accepted1b38 content plus acknowledged848589d acceptance metadata to main, then marked only the two selected singular records integrated. All109runtime/source8 hashes and default whole-version whitespace verified on main. Original R2 snapshots, R3pool, held records, resource/runner/native failures and38Windowsraw originals remain preserved. Root extra pre-merge check assumed the wrong manifest shape and the shell continued; corrected list-based verification passed before publication, and later scripts use set-e. V1.6 origin/main push remains explicitly authorized; later waves are local until separately authorized. No deployment.

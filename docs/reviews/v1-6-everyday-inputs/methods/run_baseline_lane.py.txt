@@ -1,0 +1,48 @@
+import datetime,hashlib,json,os,pathlib,shutil,signal,subprocess,sys,time
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6');S=pathlib.Path('/home/dobo/work/_temp/codex__content-v1-6');D=R/'docs/reviews/v1-6-everyday-inputs'
+manifest=pathlib.Path(sys.argv[1]);m=json.loads(manifest.read_bytes());now=lambda:datetime.datetime.now(datetime.timezone.utc);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();deadline=datetime.datetime.fromisoformat(m['deadline_utc'])
+assert sha(pathlib.Path(__file__))==m['runner_sha256'];assert all(sha(R/p)==v for p,v in m['inputs'].items());assert all(sha(pathlib.Path(p))==v for p,v in m.get('scratch_bindings',{}).items())
+mem=lambda:{a:int(b.split()[0])*1024 for a,b in (l.split(':',1) for l in open('/proc/meminfo'))}['MemAvailable']
+assert shutil.disk_usage(R).free>=17*2**30 and mem()>=16*2**30
+measure_dirs=[S/'probe',S/'gocache',S/'tmp',S/'gopath',D]
+for extra in m.get('additional_measure_dirs',[]):
+ p=pathlib.Path(extra).resolve();assert p.is_relative_to(S);measure_dirs.append(p)
+def size():
+ total=0
+ for directory in measure_dirs:
+  for p in directory.rglob('*'):
+   try:
+    if p.is_file():total+=p.stat().st_size
+   except FileNotFoundError:pass
+ return total
+start_size=size();results=[];env=dict(os.environ);env.update({'GOMAXPROCS':'2','GOFLAGS':'-p=2 -mod=readonly','GOPROXY':'off','GOTOOLCHAIN':'local','GOWORK':'off','GOROOT':str(S/'tools/go'),'GOCACHE':str(S/'gocache'),'GOMODCACHE':'/home/dobo/go/pkg/mod','GOPATH':str(S/'gopath'),'GOTMPDIR':str(S/'tmp'),'TMPDIR':str(S/'tmp'),'GOMEMLIMIT':'1536MiB','CAT_ACCOUNTS_ENABLED':'0','CAT_ALLOWED_HOSTS':'testserver,example.com'});env['PATH']=str(S/'tools/go/bin')+os.pathsep+env.get('PATH','');env.update(m.get('environment',{}))
+for index,step in enumerate(m['commands']):
+ assert now()<deadline-datetime.timedelta(seconds=60)
+ log=S/'probe'/(m['lane']+'-'+str(index)+'.log');started=now();peak=0;guard=None
+ with log.open('w') as out:
+  p=subprocess.Popen(step['argv'],cwd=R,env=env,stdout=out,stderr=subprocess.STDOUT,start_new_session=True)
+  while p.poll() is None:
+   rss=0
+   for path in pathlib.Path('/proc').iterdir():
+    if not path.name.isdigit():continue
+    try:
+     if os.getpgid(int(path.name))==p.pid:
+      for line in (path/'status').read_text().splitlines():
+       if line.startswith('VmRSS:'):rss+=int(line.split()[1])*1024;break
+    except (OSError,ProcessLookupError):pass
+   peak=max(peak,rss)
+   if peak>2*2**30:guard='process-group-RSS2GiB'
+   elif shutil.disk_usage(R).free<16*2**30 or mem()<16*2**30:guard='remaining-disk-or-memory-floor16GiB'
+   elif size()-start_size>2**30:guard='incremental1GiB'
+   elif now()>=deadline-datetime.timedelta(seconds=45):guard='metadata-time-reserve'
+   if guard:
+    os.killpg(p.pid,signal.SIGTERM)
+    try:p.wait(timeout=5)
+    except subprocess.TimeoutExpired:os.killpg(p.pid,signal.SIGKILL);p.wait()
+    break
+   time.sleep(.5)
+  code=p.wait()
+ result={'name':step['name'],'argv':step['argv'],'started_at_utc':started.isoformat(),'finished_at_utc':now().isoformat(),'elapsed_seconds':(now()-started).total_seconds(),'exit_code':code,'guard':guard,'peak_group_RSS_bytes':peak,'log_sha256':sha(log),'log_text':log.read_text()};results.append(result)
+ print(json.dumps({k:result[k] for k in ['name','exit_code','guard','elapsed_seconds','peak_group_RSS_bytes']}),flush=True)
+ if code or guard:break
+end=now();checks={p:sha(R/p)==v for p,v in m['unchanged'].items()};checks.update({p:sha(pathlib.Path(p))==v for p,v in m.get('scratch_bindings',{}).items()});checks.update({p:sha(R/p)==v for p,v in m.get('expected_after',{}).items()});r={'lane':m['lane'],'manifest_sha256':sha(manifest),'checked_at_utc':end.isoformat(),'deadline_pass':end<deadline,'steps':results,'all_steps_completed':len(results)==len(m['commands']),'incremental_bytes':size()-start_size,'unchanged':checks,'installation_approval':False};(D/(m['lane']+'-result.json')).write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n');assert all(checks.values());assert end<deadline;sys.exit(int(any(x['exit_code'] or x['guard'] for x in results)))

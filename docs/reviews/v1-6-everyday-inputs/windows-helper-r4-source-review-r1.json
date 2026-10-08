@@ -1,0 +1,66 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:23:51Z",
+  "scope": "SOURCE_ONLY",
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "append_only": true,
+  "bindings": {
+    "methods/windows_size_helper_wsl_r4.py.txt": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+    "methods/check_windows_size_helper_wsl_r3.py.txt": "906f14d55933a73bbae1d8704b399c07ad499bab33b4cbc0f3804c5ff0751271",
+    "windows-working-set-r1-result.json": "cdeeca0e2946b32b35b24585bdd6aad39c63f0ac76e9191e56b00d69fe2a0ee1",
+    "windows-host-diagnostics-evidence-review-r1.json": "e8b4ec1f8a4dd8460dc23eb451832575121cb5233a9e5f9ed4cdfbd30fe13493"
+  },
+  "component_verdicts": {
+    "windows_helper_r4": "ACCEPT_SOURCE_ONLY",
+    "controlled_windows_fixture_r3": "ACCEPT_SOURCE_ONLY"
+  },
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "findings": [],
+  "accepted_source_properties": [
+    "Only unsupported Job working-set configuration is replaced by per-owned-process hard working-set enforcement; aggregate/process committed-memory64MiB, active-process2, kill-on-close, suspended atomic JOB_LIST assignment and all original ownership/deadline/publication limits remain.",
+    "working_set_enforce verifies handle GetProcessId and creation time before every setter. Cross-process calls additionally require exact owned Job membership; own-process calls require current-process pseudohandle, exact own identity and permitted own scope. No token/privilege/account/administrative mutation is added.",
+    "Parent hard quota proof precedes Job/child creation. The atomically Job-owned suspended venv launcher is identity/job verified and quota-enforced before ResumeThread; the CreateProcess handle provides the needed quota/query rights.",
+    "Actual worker handle explicitly requests SYNCHRONIZE, PROCESS_QUERY_LIMITED_INFORMATION and PROCESS_SET_QUOTA. Worker PID/creation and exact Job membership are verified before quota setter, and self-proof is bound to that same identity before traversal permission.",
+    "Worker enforces its own1MiB/64MiB hard maximum before ready/root validation. Exact quota readbacks are required after handshake, every traversal budget and normal work completion; parent fresh completion and launcher fresh pre-traversal readbacks are retained.",
+    "Maximum must equal64MiB with hard-max-enable flag4 present and max-disable8 absent; memory peak checks retain64MiB. Four role proofs bind parent, suspended launcher, worker and worker self to identities/ownership/traversal ordering.",
+    "Fixture requires all four exact role proofs on normal initial, fresh mutation and controlled hung-worker calls; requires launcher suspended proof, parent/launcher readbacks and normal worker completion quota, unchanged Job flags8968/64MiB/active2, actual process quiescence and original17-to32 byte counts/junction deferral.",
+    "Existing no-created-process failure reporting, exact raw stdout/stderr preservation, fixed interpreter/source pins, worker2s/parent4s/hard3.7s guard,16KiB final receipt,1MiB worker output and owned Job cleanup remain. New R4 registry preserves prior variants and histories."
+  ],
+  "primary_references": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessid",
+      "supports": "PID read requires process-query information rights."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/process-security-and-access-rights",
+      "supports": "PROCESS_SET_QUOTA0x100, query-limited0x1000, synchronize0x100000; CreateProcess returned process handle has full access."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-setprocessworkingsetsizeex",
+      "supports": "Working-set setter needs quota rights; flag4 enforces maximum and flag8 disables that enforcement."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-getprocessworkingsetsizeex",
+      "supports": "Readback rights and minimum/maximum/enforcement flag outputs."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-getprocessmemoryinfo",
+      "supports": "Process memory snapshot API contract."
+    }
+  ],
+  "claim_limits": [
+    "Observed own-process API success is precedent for attempting this new source; it is not cross-process host support, hard quota inheritance, fixture pass or helper performance proof.",
+    "Removing the rejected Job working-set flag is acceptable in this source scope only because explicit checked hard64MiB maxima replace it for every owned role while committed-memory ceilings stay64MiB.",
+    "Per-entry quota readback overhead is unmeasured; exact whole-root performance under the fixed deadline must qualify independently.",
+    "No exact caller R8 or its fixtures have been reviewed by this receipt."
+  ],
+  "execution_preconditions": [
+    "Run the exact source-accepted Windows fixture R3 against exact helper R4 with the pinned interpreter, fresh owned paths and the existing external fixture bound. This is explicit source acceptance for that requested controlled fixture only.",
+    "Retain all raw streams/results and failed or pending registry receipts. Any timeout or API/identity failure stays failed and blocks new admission pending exact ownership resolution.",
+    "A caller must independently validate all role proofs and hard readbacks, pin R4 source/new registry and preserve exact historical R2 retirement plus refusal of any new unresolved/prelaunch records.",
+    "Actual-root fresh parity, active/finalization lifecycle and original fresh resource admission remain mandatory before native commands; no caps, clocks or baselines may reset."
+  ]
+}

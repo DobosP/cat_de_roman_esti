@@ -1,0 +1,45 @@
+{
+  "component_verdicts": {
+    "R3": "REQUEST_CHANGES",
+    "R4": "REQUEST_CHANGES"
+  },
+  "execution_authorized": false,
+  "findings": [
+    {
+      "R4_status": "R4 explicitly closes anchor on synchronous initial fstat failure, resolving this narrow synchronous gap.",
+      "id": "F1",
+      "issue": "Anchor opened before constructor try/records registration. Initial fstat exception leaves FD unrecorded; author correctly identified and preserved variant.",
+      "lines": "132-136",
+      "priority": 1,
+      "variant": "R3"
+    },
+    {
+      "claim_limit": "Normal process exit closes leaked FDs, but does not establish the promised explicit cleanup proof before publication.",
+      "id": "F2",
+      "issue": "Catchable SIGTERM/SIGINT/SIGALRM handler raises immediately through profile.on_signal outside helper waits. Naked os.open acquisition is followed by counters/setup before try/finally installation or FD ownership registration. A signal in these transitions can leave an untracked directory/file/scan FD. Failure publication can claim all_owned_directory_descriptors_closed=True while that FD remains open until process exit.",
+      "lines": "78-81,132-135,173-175,258-260,314-318,366-368,585",
+      "priority": 1,
+      "required_fix": "New append-only source: protect each acquisition-to-ownership transition from raising catchable handlers, or immediately register all acquired FDs in a cleanup owner before any handler can raise. Include scan and file FDs, not only constructor anchor. Preserve original signal failure/late-publication semantics and caps. Add controlled interruption at successful-open/counter-bookkeeping plus restored FD-count proof to bound pure fixture.",
+      "variant": "R4 (also R3)"
+    }
+  ],
+  "installation_approval": false,
+  "original_failed_native_and_copy_preserved": true,
+  "otherwise_reviewed": [
+    "Held directory root/parent-child dev+inode edge map freshly verified before/after phases; detects renamed/replaced named ancestry, not merely unchanged open FDs.",
+    "Per-leaf nofollow named stat/open/fstat identity before/after, exact source pre/stream/post/destination/final hashes;1MiB stream guards and progress checks.",
+    "Fresh complete canonical/mirror runtime109 before/final and exact172 files/membership; retained source/file/authority closure pins.",
+    "Same two original-seven-root R9/R4 accounting calls plus wholeX fresh traversal, original752431588 baseline/1GiB, stricter64MiB growth/512KiB publication reserve/128KiB report/40work50total/both-volume floors/2GiB RSS retained.",
+    "R2failed partial unchanged, fresh UUID only, no deletion or resume, bounded phase timing/counter observations not accounting substitutions."
+  ],
+  "reviewed_at_utc": "2026-10-07T12:46:39.678361+00:00",
+  "reviewer": "/root/continuation_audit, independent source reviewer",
+  "schema": "v1-6-runtime-mirror-descriptor-source-review-r1",
+  "scope": "Full613-line R3 and exact618-line R4 delta, accepted profile signal/guard dependencies. No copy/helper/fault fixture/Go/native execution.",
+  "sources": {
+    "methods/prepare_runtime_readset_mirror_wsl_r3.py.txt": "e76ab0e26ee2f63006227e6f11f95e92659e464b23c0255bbcd6bdaa29ae7c2f",
+    "methods/prepare_runtime_readset_mirror_wsl_r4.py.txt": "51e615d5d679a2040eeb98306ff3fe302289abee4bc1faec4000e95006309900"
+  },
+  "valid_until": "Bound sources change; preserve rejected variants as history.",
+  "verdict": "REQUEST_CHANGES"
+}

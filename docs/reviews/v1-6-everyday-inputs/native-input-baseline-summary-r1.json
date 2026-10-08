@@ -1,0 +1,132 @@
+{
+  "schema": "v1-6-native-baseline-summary-r1",
+  "recorded_at_utc": "2026-10-06T22:35:12.537984+00:00",
+  "baseline_commit": "0b9c22bcca0da5cf00a31203e6b1c9173d525b56",
+  "method_sha256": "014b1e566f021a07982e2f0d0f49823d1dd857991cdf85b62d11bfdf4d72b4f7",
+  "method_review_sha256": "c1d573659ea63c744471772d796618296dd8e8f451b1cbe2d4de8a6c1abd1f17",
+  "admission_sha256": "5c67b765e346cf1f1c22cf791a49e67fcc9e1c276d1890b37ac7484d77d4df22",
+  "result_sha256": "ad65698a1f9753a232c0bf997ea1b6986544bd106d45fad87660493115e0f016",
+  "transcript": {
+    "path": "docs/reviews/v1-6-everyday-inputs/native-input-baseline-transcript-r1.json.gz",
+    "gzip_sha256": "bd83516c742dd85e364728ebda070aa6c3c6a8d9331a5311c0039ed9f7d8cdbd",
+    "raw_sha256": "0f8f53c4aaed649f46e8fb727ba8d64b169de6f14c2da68ecab8d9e2c2746966",
+    "raw_bytes": 67963
+  },
+  "picker_draws": 37,
+  "seeds": {
+    "ct_gastronomie_347": 3,
+    "ct_istorie_368": 36
+  },
+  "sessions": 4,
+  "requests": 54,
+  "observations": [
+    {
+      "arm": "novel_then_canonical",
+      "canonical": "Steag",
+      "canonical_feedback": {
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v4ist_steag",
+        "label": "Steag",
+        "rank": 5,
+        "temperature": "Fierbinte"
+      },
+      "curated_id": "ct_istorie_368",
+      "final_attempts": 4,
+      "final_score": 700,
+      "novel": "drapel",
+      "novel_initial_response": {
+        "attempts": 0,
+        "clue_available": false,
+        "clues_used": 0,
+        "guesses": [],
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "ok": false,
+        "reachable_count": 2356,
+        "suggestions": [],
+        "won": false
+      },
+      "seed": 36,
+      "target_id": "n_alba_iulia"
+    },
+    {
+      "arm": "canonical_control",
+      "canonical": "Steag",
+      "canonical_feedback": {
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v4ist_steag",
+        "label": "Steag",
+        "rank": 5,
+        "temperature": "Fierbinte"
+      },
+      "curated_id": "ct_istorie_368",
+      "final_attempts": 4,
+      "final_score": 700,
+      "novel": "drapel",
+      "seed": 36,
+      "target_id": "n_alba_iulia"
+    },
+    {
+      "arm": "novel_then_canonical",
+      "canonical": "Ulei",
+      "canonical_feedback": {
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v24_food_pantry_ulei",
+        "label": "Ulei",
+        "rank": 2,
+        "temperature": "Fierbinte"
+      },
+      "curated_id": "ct_gastronomie_347",
+      "final_attempts": 4,
+      "final_score": 700,
+      "novel": "untdelemn",
+      "novel_initial_response": {
+        "attempts": 0,
+        "clue_available": false,
+        "clues_used": 0,
+        "guesses": [],
+        "message": "Cuvântul nu este încă în vocabularul jocului. Nu ai pierdut nicio încercare.",
+        "ok": false,
+        "reachable_count": 2356,
+        "suggestions": [],
+        "won": false
+      },
+      "seed": 3,
+      "target_id": "n_v87_food_chec"
+    },
+    {
+      "arm": "canonical_control",
+      "canonical": "Ulei",
+      "canonical_feedback": {
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v24_food_pantry_ulei",
+        "label": "Ulei",
+        "rank": 2,
+        "temperature": "Fierbinte"
+      },
+      "curated_id": "ct_gastronomie_347",
+      "final_attempts": 4,
+      "final_score": 700,
+      "novel": "untdelemn",
+      "seed": 3,
+      "target_id": "n_v87_food_chec"
+    }
+  ],
+  "verified": "Ordinary default easy/no-category selection, baseline unknown/no-charge responses, exact canonical identity/warm feedback, repeated-input no-extra-attempt, preterminal HTTP Get200/state/privacy, earned category clue and terminal700score/share/Progress recovery.",
+  "not_verified": "No prospective aliases, all-game impact, installation acceptance, source6, target/recipe/round change, human enjoyment, browser or TCP journey.",
+  "resource": "Execution lane GREEN within unchanged20min/2GiBgroupRSS/1GiB increment/16GiBfloor; peak sampled groupRSS527728640bytes, incremental181706163bytes. Earlier source concurrency failure and docs refusal remain unchanged history.",
+  "runtime_bindings_unchanged": 133,
+  "installed_delta": {
+    "shared_concepts": 0,
+    "world_concepts": 0,
+    "genuine_synonym_families": 0,
+    "accepted_forms": 0,
+    "links": 0,
+    "curated_rounds": 0,
+    "eligible_pool": 0,
+    "preferred_pool": 0
+  }
+}

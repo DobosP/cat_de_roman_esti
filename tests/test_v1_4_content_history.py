@@ -37,6 +37,8 @@ def current(filename: str) -> dict:
         "tests/fixtures" if filename.startswith("cat_mobile") else ("cat_de_roman_esti/fixtures")
     )
     latest = json.loads((ROOT / directory / filename).read_bytes())
+    if filename in history._V1_4_BASELINE:
+        latest = history.before_v1_6_artifact(latest, filename)
     return history.before_v1_5_world_catalog(latest, filename)
 
 

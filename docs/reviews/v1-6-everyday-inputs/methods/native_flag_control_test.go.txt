@@ -1,0 +1,92 @@
+package contexto
+
+// Controlled negative target replay only: this creates no curated target and
+// makes no ordinary-selection or installed Source6 qualification claim.
+import (
+ "encoding/json"
+ "fmt"
+ "os"
+ "reflect"
+ "strings"
+ "testing"
+
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+)
+
+func TestV16SpecificFlagNegativeControlResearch(t *testing.T) {
+ const target="n_v21soc_drapelul_romaniei"
+ const generic="n_v4ist_steag"
+ rows:=[]map[string]any{}
+ complete:=false
+ t.Cleanup(func(){
+  report:=map[string]any{"schema":"v1-6-specific-flag-negative-control-r1","complete":complete,"test_failed":t.Failed(),"controlled_target":target,"generic_owner":generic,"candidate_kg_sha256":"63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf","planned_sessions":4,"sessions_created":len(rows),"provenance":"One baseline canonical and three candidate controlled semantic replays. No ordinary selection/new target approval; candidate adapter is research-only with baseline manifests, not sealed Source6.","observations":rows}
+  raw,e:=json.MarshalIndent(report,"","  ");if e!=nil{t.Error(e);return}
+  if len(raw)>128<<10{t.Error("flag report cap");return}
+  path:=os.Getenv("V16_FLAG_CONTROLS_REPORT");if path==""{t.Error("missing output");return}
+  f,e:=os.OpenFile(path,os.O_WRONLY|os.O_CREATE|os.O_EXCL,0600);if e!=nil{t.Error(e);return}
+  _,e=f.Write(append(raw,'\n'));if e!=nil{t.Error(e)};if e=f.Close();e!=nil{t.Error(e)}
+ })
+ var baselineFeedback map[string]any
+ calls:=0
+ for _,arm:=range []string{"baseline_canonical","candidate_alias_first","candidate_canonical_first","candidate_fuzzy"} {
+  var c *content.Content;var err error
+  if arm=="baseline_canonical"{c,err=content.Load()}else{c,err=content.V16ResearchCandidate()}
+  if err!=nil{t.Fatal(err)}
+  s:=New(c)
+  if !s.g.Exists(target)||s.g.Resolve("tricolorul")!=target||s.g.Resolve("Steag")!=generic{t.Fatal("specific/generic baseline identity drift")}
+  id,createErr:=s.store.Create(s.build(target,"normal",nil,""));if createErr!=nil{t.Fatal(createErr)}
+  row:=map[string]any{"arm":arm,"replay":"controlled existing target, no curated ID injected"};rows=append(rows,row)
+  private:=func(label string,body map[string]any){
+   t.Helper();raw,_:=json.Marshal(body)
+   for _,key:=range []string{"target","score","share"}{if _,found:=body[key];found{t.Fatalf("private %s at%s",key,label)}}
+   if strings.Contains(string(raw),target)||strings.Contains(string(raw),s.g.Label(target)){t.Fatalf("specific answer leaked at%s",label)}
+  }
+  get:=func(label string,expected map[string]any)map[string]any{
+   t.Helper();calls++;body,e:=s.Get(id);if e!=nil{t.Fatalf("Get%s:%v",label,e)};private(label,body)
+   if expected!=nil{for _,k:=range []string{"attempts","guesses","clues_used","won"}{if !reflect.DeepEqual(body[k],expected[k]){t.Fatalf("Get%s %s drift",label,k)}}}
+   row[label]=body;return body
+  }
+  initial:=get("initial_get",nil)
+  if initial["attempts"]!=0||initial["won"]!=false||initial["clues_used"]!=0{t.Fatal("nonfresh control")}
+  guess:=func(label,text,token string)map[string]any{
+   t.Helper();calls++;body,e:=s.Guess(id,text,token);if e!=nil{t.Fatalf("%s:%v",label,e)};row[label]=body;return body
+  }
+  var last map[string]any
+  if arm=="candidate_fuzzy"{
+   first:=guess("unconfirmed_plural","drapele","");private("unconfirmed_plural",first)
+   gs,ok:=first["guesses"].([]map[string]any)
+   if first["ok"]!=false||first["needs_confirmation"]!=true||first["resolved_label"]!="Steag"||first["attempts"]!=0||!ok||len(gs)!=0||first["won"]!=false{t.Fatalf("expected harmless generic confirmation:%v",first)}
+   get("unconfirmed_get",first)
+   token,ok:=first["resolved_token"].(string);if !ok||token==""{t.Fatal("missing confirmation")}
+   last=guess("confirmed_generic_plural","drapele",token)
+  }else{
+   forms:=[]string{"Steag","steagul","Steag"}
+   if arm=="candidate_alias_first"{forms=[]string{"drapel","Steag","drapel"}}
+   if arm=="candidate_canonical_first"{forms=[]string{"Steag","drapel","Steag"}}
+   for i,text:=range forms{
+    last=guess(fmt.Sprintf("generic_%d",i),text,"");private("generic",last)
+    if last["ok"]!=true||last["won"]!=false||last["attempts"]!=1||last["needs_confirmation"]==true{t.Fatalf("generic flag became specific win/duplicate charge:%v",last)}
+    gr,ok:=last["guess"].(map[string]any);if !ok||gr["id"]!=generic{t.Fatal("generic owner changed")}
+    gs,ok:=last["guesses"].([]map[string]any);if !ok||len(gs)!=1{t.Fatal("generic forms split guesses")}
+   }
+  }
+  private("generic_final",last)
+  if last["ok"]!=true||last["won"]!=false||last["attempts"]!=1{t.Fatal("generic exact/fuzzy became specific win")}
+  gr,ok:=last["guess"].(map[string]any);if !ok||gr["id"]!=generic||gr["distance"]!=1{t.Fatalf("wrong generic result:%v",gr)}
+  feedback:=map[string]any{};for _,k:=range []string{"id","label","distance","rank","temperature","closeness"}{feedback[k]=gr[k]}
+  if baselineFeedback==nil{baselineFeedback=feedback}else if !reflect.DeepEqual(baselineFeedback,feedback){t.Fatal("generic feedback changed across controls")}
+  get("generic_get",last)
+  cid,finished,won,score,found:=s.Progress(id)
+  if !found||cid!=""||finished||won||score!=-1{t.Fatal("generic input created terminal/curated progress")}
+  terminal:=guess("specific_alias_win","tricolorul","")
+  if terminal["ok"]!=true||terminal["won"]!=true||terminal["attempts"]!=2||terminal["clues_used"]!=0||terminal["score"]!=940||terminal["share"]==nil{t.Fatalf("specific identity terminal:%v",terminal)}
+  finalTarget,ok:=terminal["target"].(map[string]any);if !ok||finalTarget["id"]!=target{t.Fatal("wrong target win")}
+  calls++;recovered,getErr:=s.Get(id);if getErr!=nil{t.Fatal(getErr)};row["terminal_get"]=recovered
+  for _,k:=range []string{"target","attempts","guesses","clues_used","won","score","share"}{if !reflect.DeepEqual(recovered[k],terminal[k]){t.Fatalf("terminal Get %s drift",k)}}
+  cid,finished,won,score,found=s.Progress(id)
+  if !found||cid!=""||!finished||!won||score!=940{t.Fatal("specific terminal progress mismatch")}
+ }
+ if calls!=28{t.Fatalf("control call count %d",calls)}
+ complete=true
+ t.Logf("specific flag control:4sessions,%dservice calls,generic never wins specific target",calls)
+}

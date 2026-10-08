@@ -1,0 +1,41 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:01:39Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "bindings": {
+    "methods/windows_size_helper_wsl_r3.py.txt": "6404cd2f50998a2a06f3459afd4605a349a6c9c90690eba9d666b6b4caceeb23",
+    "methods/check_windows_size_helper_wsl_r2.py.txt": "37e40449e4d506b9149eefeee83f106b2d8b3bc6550824e7a6e9f95b522da48a",
+    "windows-helper-r2-specific-prelaunch-retirement-r1.json": "9568ea89da271a71475f6f5fa2858aa40a466983dd49c7fb56324a2af49052a4",
+    "windows-helper-r2-specific-retirement-review-r1.json": "f08ba7eb9f9c09db173f4ce77488038a927f862ca669ede20742c56fddef3425"
+  },
+  "component_verdicts": {
+    "helper_r3": "ACCEPT_SOURCE_ONLY",
+    "windows_fixture_r2": "ACCEPT_SOURCE_ONLY"
+  },
+  "findings": [],
+  "accepted_source_properties": [
+    "R3 moves CreateJobObject and SetInformationJobObject under the try/finally cleanup scope, records setup ABI sizes/flags/configuration stage and captures exception type, exact failure stage and Winerror. The original R2 failure evidence remains intact.",
+    "The only registry change is the fresh R3 directory, conditional on the narrowly accepted exact R2 prelaunch retirement. The existing terminal protocol schema stays R2; no cap or ownership rule is relaxed.",
+    "When no successful native process creation occurs, R3 records explicit launcher_not_created and worker_not_created proof with null identities, zero process-memory evidence and closed/absent job. This is a failed setup result, not fabricated process identities or native success. A caller must distinguish this proof from actual launched-process exit evidence.",
+    "After successful process creation, suspended atomic Job assignment, actual PID-plus-creation membership proof, durable ownership before traversal grant, 64MiB process/job limits, two-process bound, 1.9s cutoff/2s work, 3.7s hard guard/4s total and real cleanup checks are unchanged.",
+    "Fixture R2 records its native venv-call launcher PID/creation identity immediately after Popen, saves stdout/stderr to exclusive owned files with hashes/size/truncation facts and exit code before shape or JSON assertions, and records launcher quiescence before result parsing.",
+    "Normal fresh 17-to-32 byte counts, hidden/hardlink accounting, live/missing junction deferral, hung-worker Job termination and parent/launcher/worker creation-identity quiescence assertions remain unchanged; timeout remains cleanup-uncertain and stops."
+  ],
+  "claim_limits": [
+    "R3 repairs reporting and cleanup-scope gaps, not the host's observed SetInformationJobObject failure itself.",
+    "Source acceptance neither proves Windows ABI support nor changes failed R2 execution into passing evidence.",
+    "Explicit no-created-process flags in a failed R3 setup result require a separately reviewed disposition; they must not be silently accepted as an actual-worker exit by the caller."
+  ],
+  "execution_preconditions": [
+    "Run a separately source-accepted setup-only diagnostic first; its alternate no-working-set probe is diagnosis and does not authorize production relaxation.",
+    "Invoke exact helper R3 and fixture R2 bytes with the pinned Windows interpreter and fresh owned paths, under the unchanged external fixture bound.",
+    "Retain raw streams and all terminal or pending failed receipts. Any timeout/uncertain cleanup blocks further helper admission until exact ownership is resolved.",
+    "A new caller must pin helper R3, use the correct registry and preserve the accepted R2 retirement bindings; actual-root scanner/lifecycle/resource admission remain required before native commands."
+  ]
+}

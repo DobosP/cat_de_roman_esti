@@ -1,0 +1,36 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T09:48:40Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "bindings": {
+    "methods/check_scan_parity_wsl_windows_r1.py.txt": "5273365108b1dd58943fcc2535bd4b7b003b5a824d2e14c181bd808846b2a3e8",
+    "methods/run_worktree_lane_wsl_r3.py.txt": "09ecd8b853772948c2548390ff20e477a856c65363502d1611b73f905090214d",
+    "methods/run_worktree_lane_wsl_r6.py.txt": "855f4fe07fd64347ff4024db12526659ddcde5a42f655e752d2153d8909e7297",
+    "methods/windows_size_helper_wsl_r2.py.txt": "c708c0c88a8f8cd4ef76857dd9f03bbac4cf77f74d45548e0247c4051dda39d8"
+  },
+  "findings": [],
+  "accepted_source_properties": [
+    "Imports pinned original R3 and candidate R6 source bytes with bytecode disabled and rechecks both bindings after accounting; no application or Go launch.",
+    "Synthetic fresh regular/hidden/nested/hardlink/file-symlink accounting is correctly 20 bytes initially and 35 after mutating the shared plain/hardlink/filelink target. Directory and dangling symlinks contribute zero; absent root contributes zero.",
+    "Signal refusal is exercised before helper launch. A controlled PermissionError from the fresh following-stat file-symlink fallback must propagate; Path.stat is restored in finally.",
+    "The six actual static measurement roots, including SDK tools and caches, compare complete fresh R3 and R6 totals exactly; no root exclusions or cached/baseline-derived values.",
+    "The dynamic actual probe is explicitly a bounded self-metadata observation, not an exact-parity claim: Linux before/after and hybrid observations must differ pairwise by at most 64KiB within the existing publication headroom.",
+    "After all accounting the real registry validator requires confirmed prior helper cleanup. Acceptance remains bounded to 60 elapsed seconds."
+  ],
+  "claim_limits": [
+    "The dynamic probe delta bound does not independently attribute every changed byte to helper metadata; run with other writers quiet and inspect generated owned receipts.",
+    "The six static comparisons assume those roots remain quiescent during both scans; source review alone does not prove actual parity or host performance."
+  ],
+  "execution_preconditions": [
+    "Run exact reviewed bytes with ordinary nonoptimized Python and an external 60s watchdog; post-hoc elapsed checks do not preempt a blocking Linux metadata scan.",
+    "Keep static accounting roots quiet for both observations, retain exact root list, totals, timings and durable fixture receipt.",
+    "Verify real worker/launcher PID-plus-creation quiescence and clean registry after any external timeout; incomplete or failed runs stay failed.",
+    "Passing this scanner fixture still requires actual-root R6 active and finalization lifecycle execution and fresh original admission before native commands."
+  ]
+}

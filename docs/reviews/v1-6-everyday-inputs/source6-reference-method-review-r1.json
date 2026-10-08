@@ -1,0 +1,236 @@
+{
+ "bindings": {
+  "methods/native_candidate_http_test.go.txt": "100f0dc8f954f1a3fcc0dfdf1c42f51869282aeed29211b6b0e4b1e263fccecb",
+  "methods/qualified_input_http_r1.go.txt": "c5c5dc652f064c41b7cd57990e0b66daccf2290fdfade0346cab1d305cfb1d20",
+  "methods/run_worktree_lane_r2.py.txt": "f2f7790b3f5182f812b5b42b2469530da2c0c593d50d46b306f15075a073f4a3",
+  "methods/run_worktree_lane_r3.py.txt": "0404337d2847bb9857a1890d107ac76feea66c82549d0620138d826fee70fe34",
+  "prospective-method-review-r1.json": "62903e7873ba078405aa23581a74a7932e32fd11b66d8116c10b6747af287367",
+  "prospective-native-http-r1.json.gz": "f278e1125f31adb003b38861051b6eb4af09e3d56cfedcb2a6b1460a06650f14",
+  "reference/capture-preparation-r1.json": "7ab0a0fad5c9a90fa1086a717370ec1a185f1a6fe0d3f548b4eb73ead1b0ef7e",
+  "reference/capture_reference_v1_6.py.txt": "76cbc80cbd9b93bfdd07dea6709e59371858fc936fd2539d3395fbc1c1633e5d",
+  "reference/qualified-input-preparation-r1.json": "96047bf7dcf1cf9446e998a10ce6cbc852be897a26fc13284b77bd29c32b2943",
+  "source6-export-summary-r1.json": "be9ea737529d91b683b27ff7d52e548e2c6c9165bc762efb9528b29e7f56e278",
+  "source6-reference-method-review-admission-r1.json": "2ec611bca94424ff938d149bdb2b8d1202f660a27f55d2c13974ef9fab35d442",
+  "source6-worktree-guard-review-r1.json": "3eeefa1b933af59520b7e3163acab0404a9ee2286c9cdf025f907e8182e82ea0"
+ },
+ "capture_review": {
+  "Python_AST_parse_only": true,
+  "benchmark": "--benchmark absent; its optional1000create+1000GET loop cannot run under reviewed argv. --report is not used because original producer writes it only in benchmark mode.",
+  "binary_argv": [
+   "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+   "/home/dobo/work/_temp/codex__content-v1-6/probe/capture_reference_v1_6.py",
+   "--binary",
+   "/home/dobo/work/_temp/codex__content-v1-6/source6-tools-export-r1/cat-server",
+   "--runtime",
+   "go"
+  ],
+  "capture_output_parent_exists": true,
+  "coverage": "Original finite1207-case workflow preserved, including malformed boundaries, all six games and exploration. Actual output must still be checked for exactly1207 ordered cases after execution; the producer prints its count rather than enforcing that fixed count internally.",
+  "environment_fixed_flags": {
+   "CAT_ACCOUNTS_ENABLED": "0",
+   "CAT_ALLOWED_HOSTS": "testserver,example.com",
+   "CAT_DEBUG": "1",
+   "CAT_MAX_REQUEST_BYTES": "65536",
+   "CAT_MAX_SESSIONS_PER_GAME": "1000",
+   "CAT_SESSION_TTL_SECONDS": "7200",
+   "CAT_SUBMISSIONS_ENABLED": "0",
+   "DJANGO_SETTINGS_MODULE": "cat_de_roman_esti.web.settings",
+   "PYTHONDONTWRITEBYTECODE": "1",
+   "PYTHONPATH": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6"
+  },
+  "exact_changes": [
+   {
+    "kind": "task_root",
+    "new": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6",
+    "old": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-5"
+   },
+   {
+    "kind": "output_path",
+    "new": "/home/dobo/work/_temp/codex__content-v1-6/current-reference-v1-6/outputs/python-http-parity-v1-6.json.gz",
+    "old": "/home/dobo/work/_temp/codex__content-v1-5/current-reference-v1-5/outputs/python-http-parity-v1-5.json.gz"
+   },
+   {
+    "kind": "reference_label",
+    "new": "Independent Django application; V1.6 two reviewed singular inputs drapel and untdelemn in actual Source6 a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611; actual sealed export e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877; preserved V1.5 producer 1ecbc19936388363c6eb1e3b8bb764b0b0d527dd9ba46fbc47b8e8c4113d605a; capture does not itself confer current authority or release approval",
+    "old": "Independent Django application; V1.5 reviewed world-only sources at baseline a4f42f176b06276a3d46f3da40373cecfb70f7ac; native world proposal 196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086; preserved capture author a6d7055b3438fae159f8aa1603b02890e57ca910a09613df38f1a8d8d68783cc"
+   }
+  ],
+  "expected_responses_authored_by": "Current independent Django TestClient status/body. Native --replay child is compared only; frozen_rows append response.status_code and expected from Django, never native.body. Bundled.json supplies source8 metadata only, separately checked against actual files.",
+  "normalization": "Original session-ID normalization/mapping retained; all response payload comparisons otherwise exact.",
+  "only_three_substitutions": true,
+  "oracle_driving": "Existing private Django session reads choose gameplay inputs for complete journeys; no expected response is copied from a native answer or old corpus.",
+  "outer_output_root_to_measure": "/home/dobo/work/_temp/codex__content-v1-6/current-reference-v1-6",
+  "output": "/home/dobo/work/_temp/codex__content-v1-6/current-reference-v1-6/outputs/python-http-parity-v1-6.json.gz",
+  "output_absent": true,
+  "postcapture_boundary": "Require successful producer and child exits, complete actual gzip, exact source8 and all1207 ordered independent responses, before independent response-delta judgment. No sixth corpus or selector is authored here; preserve five historical corpora and exact complete-source selection refusals.",
+  "privacy_scope": "In-process reference/native replay only; no TCP, browser or human-play result.",
+  "request_case_order_normalization_assertions_child_replay_and_capture_control_flow_unchanged": true,
+  "reverse_restores_exact_V15_bytes": true,
+  "reviewed_execution_argv_with_override_clear": [
+   "env",
+   "-u",
+   "CAT_KG_FIXTURE",
+   "-u",
+   "CAT_GAMES_PACK",
+   "-u",
+   "CAT_BOARD_RANKINGS",
+   "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+   "/home/dobo/work/_temp/codex__content-v1-6/probe/capture_reference_v1_6.py",
+   "--binary",
+   "/home/dobo/work/_temp/codex__content-v1-6/source6-tools-export-r1/cat-server",
+   "--runtime",
+   "go"
+  ],
+  "verdict": "ACCEPT_METHOD"
+ },
+ "checked_at_utc": "2026-10-07T03:20:15.245975+00:00",
+ "current_readset_verification": {
+  "all4_export_tool_hashes_current": true,
+  "all_hashes_current": true,
+  "capture_readset_canonical_sha256": "f2c3977f064a941a2c34564aa751284d74f202148dea96b979a29dd2455d0f68",
+  "capture_readset_location": "reference/capture-preparation-r1.json#/readset",
+  "digest_go_sha256": "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d",
+  "exact_source8": {
+   "alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+   "alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+   "board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+   "derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+   "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+   "kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+   "quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+   "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "fresh_server_binary": {
+   "path": "/home/dobo/work/_temp/codex__content-v1-6/source6-tools-export-r1/cat-server",
+   "sha256": "48e262da96f04a697391973d40f04e8a703a5db77b50d59c9326381d20e19c59"
+  },
+  "inert_executable_R3_copy_exact": true,
+  "inert_executable_capture_copy_exact": true,
+  "qualified_readset_canonical_sha256": "fe169f49810c114d50f5a14ec57283b8aeea7b464ee4be4d32daa76845594431",
+  "qualified_readset_location": "reference/qualified-input-preparation-r1.json#/current_source_readset",
+  "sealed_bundle_bytes": 7272424,
+  "sealed_bundle_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+  "verified_counts": {
+   "Python_runtime_files": 52,
+   "actual_source_files": 8,
+   "historical_HTTP_corpora": 5,
+   "native_production_files": 97,
+   "qualified_method_current_readset": 10,
+   "support_files": 11
+  }
+ },
+ "decision": {
+  "current_expected_response_or_corpus_accepted": false,
+  "execution_configuration_required": [
+   "Use runnerR3 and limits.metadata_reserve_seconds=180 in each fresh execution admission.",
+   "Set V16_QUALIFIED_HTTP_REPORT to the reviewed measured probe subdirectory and create its absent parent before the test.",
+   "Explicitly include current-reference-v1-6 in capture additional_measure_dirs.",
+   "Wrap actual producer/test argv with env -u for the three named content overrides; never inspect or print their values."
+  ],
+  "installed_authority_release_landing_accepted": false,
+  "qualified_input_and_capture_need_separate_fresh_execution_admissions": true,
+  "source_changes_required": [],
+  "verdict": "ACCEPT_SOURCE_METHODS_AND_RUNNER"
+ },
+ "excluded_claims": [
+  "No producer/test/build/native engine was run by this reviewer.",
+  "No expected current response, captured Source6 corpus, new selector, current installed authority or release is approved.",
+  "No earlier failed execution or resource refusal is erased or converted to PASS.",
+  "History/inverse assertions belong to the separate history reviewer."
+ ],
+ "execution": {
+  "builds_tests_captures": 0,
+  "code_runtime_fixture_corpus_or_authority_edits": 0,
+  "deadline_minus180s_preserved": true,
+  "native_commands": 0,
+  "process_max_RSS_bytes": 48390144,
+  "sole_output": "docs/reviews/v1-6-everyday-inputs/source6-reference-method-review-r1.json",
+  "subagents": 0
+ },
+ "inspected_runtime_and_regression_bindings": {
+  "go-backend/internal/content/content.go": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+  "go-backend/internal/content/digest.go": "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d",
+  "go-backend/internal/httpapi/reviewed_synonym_inputs_test.go": "67d4597e4a08c78c513a767b64ad9ddb37ea5d1c3ec57eafa08dd7249c5be633",
+  "go-backend/internal/httpapi/server.go": "8786ad6d0d5781c19dcb34fe0c258310b033a3500217855f078deef9c15325e9",
+  "go-backend/internal/httpgolden/golden.go": "b892cff05b5a68d03b90f8874cec77914f1b71f27192df5a519f43a0a64c3c45"
+ },
+ "original_capture": {
+  "path": "docs/reviews/v1-5-hot-chocolate/reference/capture-producer.py.txt",
+  "sha256": "1ecbc19936388363c6eb1e3b8bb764b0b0d527dd9ba46fbc47b8e8c4113d605a"
+ },
+ "permanent_regression_review": {
+  "actual_content_Load_without_mutation": true,
+  "coverage": "Each alias-first/canonical-first arm uses create+initialGET and four spelling guesses each followed byGET. Exact owner/canonical label, one nonwinning attempt/guess slot, complete feedback equivalence across spellings/order and recovery are checked. Uppercase/whitespace variants exercise existing normalization; no extra stored family forms are asserted.",
+  "execution_status": "Uncompiled/unexecuted; no test pass claimed.",
+  "handler_requests": 40,
+  "no_release_digest_selected_target_or_numerical_rank_pin": true,
+  "no_seed_search_or_session_injection": true,
+  "ordinary_public_creation": true,
+  "path": "go-backend/internal/httpapi/reviewed_synonym_inputs_test.go",
+  "privacy": "Recursive target/solution/score/share/curated identity field exclusion over these nonterminal replies.",
+  "sessions": 4,
+  "sha256": "67d4597e4a08c78c513a767b64ad9ddb37ea5d1c3ec57eafa08dd7249c5be633",
+  "test": "TestReviewedSynonymInputsUseOnePublicGuessSlot",
+  "verdict": "ACCEPT_SOURCE"
+ },
+ "qualified_input_method_review": {
+  "Go_source_only": "Read/diff reviewed, not compiled, run or gofmt-qualified.",
+  "accepted_original_sha256": "100f0dc8f954f1a3fcc0dfdf1c42f51869282aeed29211b6b0e4b1e263fccecb",
+  "additional_assertions": "Separately declared three distinct nonwinning owner IDs with attempt numbers1..3 and original owner retained; exact terminal target and exact four-attempt share. Go share literal decoded and compared to all four prior transcripts; it has three real newline characters and matches exactly. These prior observations establish expectations, not a new sealed execution result.",
+  "all_declared13_transformations_reverse_exactly": true,
+  "loader_binding_changes": "Original research candidate loader replaced by content.Load with exact bundle/digest/source8 hashes before and after, exact compiledSources map, and DeepEqual to separately decoded on-disk sealed export before New(c). Original content.Load verifies its compiled embedded digest. No c.Nodes/aliases/index/source metadata replacement or private session insertion occurs.",
+  "method_sha256": "c5c5dc652f064c41b7cd57990e0b66daccf2290fdfade0346cab1d305cfb1d20",
+  "overlay": "Only add the inert c5c5dc65 method as virtual go-backend/internal/httpapi/qualified_input_http_r1_test.go; no existing production source replacement. Overlay map and scratch Go copy are not yet present and must be bound exactly in the new admission.",
+  "preserved_assertions": "Initial/private/intermediate/terminal GET, direct canonical owner, shared attempt/guess slot, repeat handling, warmth, earned clue, score/share and Progress all preserved from accepted original source.",
+  "private_reads": "Read-only Progress checks assert ordinary selection and final state; requests create and mutate every session through normal public handlers.",
+  "protocol": {
+   "arms": [
+    "alias_first",
+    "canonical_first"
+   ],
+   "canonical_ranks": [
+    5,
+    2
+   ],
+   "category": "",
+   "closeness": 99,
+   "daily": false,
+   "difficulty": "usor",
+   "distance": 1,
+   "earned_category_clues": 1,
+   "exclusions": false,
+   "extra_nonwinning_guesses_each": 2,
+   "ordinary_seeds": [
+    36,
+    3
+   ],
+   "request_cap": 80,
+   "requests_each": 14,
+   "required_requests": 56,
+   "sessions": 4,
+   "terminal_attempts": 4,
+   "terminal_score": 700,
+   "total_unique_nonwinning_guess_slots_each": 3
+  },
+  "report_absent": true,
+  "report_gates": "complete remains false until exact56 requests finish; cleanup records post-binding equality, test_failed and observations/transcript; output capped256KiB. Actual acceptance needs exit0 plus complete=true,test_failed=false,post_bindings_unchanged=true,request_count56 and four observations.",
+  "report_parent_currently_absent": true,
+  "report_setup": "Create the task-owned probe/qualified-input-r1 directory before execution; os.WriteFile does not create it. Override the earlier proposed sibling output environment value with this measured path.",
+  "reviewed_report_path": "/home/dobo/work/_temp/codex__content-v1-6/probe/qualified-input-r1/report.json",
+  "verdict": "ACCEPT_METHOD"
+ },
+ "reviewer": "/root/v16_source6_plan",
+ "runner_R3_review": {
+  "180_second_configuration": "Declare limits.metadata_reserve_seconds=180, giving pre-step cutoff195 seconds before deadline and monitored stop at180 seconds before deadline. A top-level-only field would not configure this runner.",
+  "full_diff": "Adds reserve_seconds=m.get(limits,{}).get(metadata_reserve_seconds,45) with exact int check45..300; pre-step60 becomes reserve+15 and loop45 becomes reserve. Everything else is unchanged.",
+  "limitations": "Reserve is a monitored cutoff with existing sampling/cleanup semantics, not a guaranteed hard wall-clock return. No earlier run is relabeled or resource qualification inferred.",
+  "other_guards": "Whole worktree and scratch accounting,2GiB sampled process-group RSS,1GiB incremental limit,17GiB starting disk/16GiB disk-memory floors,Go2/offline module environment,signal/grace handling and stop-on-failure unchanged.",
+  "output_accounting": "Probe report is covered by existingS/probe. Add only disjointS/current-reference-v1-6 for capture; R contains docs once. Current default roots plus this capture root are pairwise disjoint.",
+  "sha256": "0404337d2847bb9857a1890d107ac76feea66c82549d0620138d826fee70fe34",
+  "strict_type": "bool, float and out-of-range values are refused before commands; default45 retains former behavior.",
+  "unchanged_R2_sha256": "f2f7790b3f5182f812b5b42b2469530da2c0c593d50d46b306f15075a073f4a3",
+  "verdict": "ACCEPT_SOURCE"
+ },
+ "schema": "v1-6-independent-reference-capture-input-regression-runner-method-review-r1",
+ "valid_until": "Any bound method, production readset, source8, bundle, binary, output scope or execution configuration changes; renew affected review. Fresh execution receipts and independent result reviews remain required."
+}

@@ -1,0 +1,106 @@
+{
+  "schema": "v1-6-Windows38-LF-actual-evidence-independent-review-r1",
+  "checked_at_utc": "2026-10-07T18:24:57.846473+00:00",
+  "reviewer": "/root/v16_linux_finish/linux_runner_review",
+  "scope": "Independent verification of actual exact 38-file CRLF-to-LF documentary migration, raw historical proof preservation, unchanged serving/compiler/native bindings and default full-branch working/staged whitespace. No native/Go/application execution or migration writes by reviewer.",
+  "valid_until": "A relevant migrated view/archive/mapping/native binding changes. Repeat default aggregate whitespace after later staged documentation changes before commit.",
+  "files": {
+    "windows-LF-source-admission-r1.json": {
+      "bytes": 740,
+      "sha256": "7b0e455dcbecec13eeb91c98a459bb54b065118afdce90ef78bd75151933371a"
+    },
+    "windows38-LF-readability-proposal-r1.json": {
+      "bytes": 16560,
+      "sha256": "11a7336f4a6848779ecfc74c519d4407f8489f9cbfd0d213fc68f5743682ff41"
+    },
+    "windows38-LF-source-review-r1.json": {
+      "bytes": 6407,
+      "sha256": "14921f691494fd3c8e403828a66e46ad3f134af426dc98aeb929356d51bb036c"
+    },
+    "windows38-LF-migration-result-r1.json": {
+      "bytes": 5516,
+      "sha256": "d4712f7f98e8eee07d9ac97bd341d383099ac49dd3a6eea69d0e14d88911d859"
+    },
+    "windows38-original-rawbytes-r1.tar.gz": {
+      "bytes": 171126,
+      "sha256": "2bc7fca4dd9dc9c0e69c39b320d724e5db71cb7de5f6af3f1e0c683f5c2eb55a"
+    },
+    "windows-new-crlf-aggregate-failure-r1.json": {
+      "bytes": 5270,
+      "sha256": "9b55a8d166aa6a63ad798249add76e23d3d76f4792ccc7937a8d5f13d3e2976f"
+    },
+    "windows-new-crlf-aggregate-failure-r1.stdout.gz": {
+      "bytes": 198595,
+      "sha256": "401f24ff65b8df3b1a9e3da0e9509bef955289ccd282c20cae118f8aa51c57a8"
+    },
+    "linux-native-complete-evidence-r1.tar.gz": {
+      "bytes": 724142,
+      "sha256": "1fb8e7d5b7cf454f74d29910943e811a6a35421ed400b9fed64d1c1048aa37f0"
+    },
+    "linux-native-complete-evidence-manifest-r1.json": {
+      "bytes": 5748,
+      "sha256": "cce2c130d11d38de25605273f98707de19460099bd70bcbb69ec3d6066fb9a1a"
+    },
+    "linux-complementary19-r1-admission.json": {
+      "bytes": 345375,
+      "sha256": "440bd111cb210112d7a915fbed698dde49382ec16963b07b4ebf2a37bf3b6352"
+    },
+    "linux-complete-native-evidence-review-r1.json": {
+      "bytes": 10254,
+      "sha256": "17f60e8a237dc4d1cd0e7f8ba1a00f79e3fc993e015e93a3fffeb2cfa24b9fbf"
+    },
+    "runtime-freeze-r1.json": {
+      "bytes": 18683,
+      "sha256": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7"
+    }
+  },
+  "verdict": "ACCEPT_EXACT_LF_MIGRATION_EVIDENCE_ONLY",
+  "checks": {
+    "actual_postimages": "All38 current paths equal raw archive bytes transformed only by CRLF→LF; each exact size/SHA matches the independently source-reviewed proposal. Exactly5557 replacements,551843 raw bytes and546286 LF-view bytes; no bare CR remains in the views. JSON values, Python method ASTs and decoded text lines remain identical.",
+    "original_provenance": "All38 raw archive members exactly equal original Git9cc667b4f9d5afadf710a009630eb55400d2878a bytes and proposal raw hashes/sizes. Archive remains SHA2bc7fca4dd9dc9c0e69c39b320d724e5db71cb7de5f6af3f1e0c683f5c2eb55a. Failed aggregate stdout gzip and its original failure record remain immutable, including5557 error headers/38 text paths.",
+    "migration_receipt": "Actual changed-path list equals the exact proposal38 set. Proposal/source-review/archive hashes bind the intended transformation. Migration receipt18:21:37 initially says whitespace_pending true; it predates the later successful checks and is not rewritten to claim it had already passed.",
+    "historical_native_mapping": "Exactly16 migrated paths occur in the immutable completed Linux native input map. Their old admission SHA values each match exact raw archive members. The migration receipt explicitly lists those16 and states that old SHA resolves archived raw bytes while current LF view has a new digest and grants no historical execution approval. No false current-all1278 input claim is introduced.",
+    "proof_preservation": "The complete native archive SHA1fb8e7d5b7cf454f74d29910943e811a6a35421ed400b9fed64d1c1048aa37f0 and all30 member hashes/sizes remain exact. Native success receipts, original clocks, binary source evidence and prior failures are not rewritten or rebound.",
+    "current_execution_bindings": "All109 frozen serving-runtime hashes, source8 plus rubric, all161 current Go/compiler/test source hashes and actual authority JSON/pin remain exact. AllSource1–6 source files and their25 unique archive bindings remain exact. These files are disjoint from the38 readable Windows views. The full chain check explicitly includes originalSource1 in addition to the versions2–6 registry entries.",
+    "default_whitespace": [
+      {
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "6a2332795dc5fa2db3eb61e196ab7ab820e76caa"
+        ],
+        "reviewer_observed_exit_code": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0
+      },
+      {
+        "argv": [
+          "git",
+          "diff",
+          "--cached",
+          "--check",
+          "6a2332795dc5fa2db3eb61e196ab7ab820e76caa"
+        ],
+        "reviewer_observed_exit_code": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0
+      }
+    ],
+    "default_gate_scope": "Checks use the actual qualified baseline and the whole current working/staged branch delta, including the newly repaired Windows files. No ignore-space option, whitespace setting change, binary EOL alteration or historical12-CRLF waiver is used."
+  },
+  "no_method_execution_approval": "NewLF hashes describe readable historical views only. Existing reviewed raw methods retain their original exact-byte authority through the archive; no new Windows supervision or application campaign is approved.",
+  "remaining": "Final current ledger/docs staging and native docs check, default aggregate checks after final staging, then independent assembled review of the exact committed release revision. This receipt accepts only formatting/provenance/gate evidence.",
+  "historical_failures_reclassified": false,
+  "assembled_installation_or_landing_approval": false,
+  "reviewer_execution": {
+    "native": 0,
+    "Go": 0,
+    "application": 0,
+    "tests": 0,
+    "migration_writes": 0,
+    "read_only_Git_and_integrity_checks": true,
+    "inspection_correction": "An initial archive-count assertion omitted originalSource1; the complete Source1–6 check then verified all25 unchanged archives. No artifact changed during inspection.",
+    "review_receipts_written": 1
+  }
+}

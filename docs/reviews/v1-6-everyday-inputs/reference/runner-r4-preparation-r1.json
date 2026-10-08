@@ -1,0 +1,93 @@
+{
+ "bindings": {
+  "methods/run_worktree_lane_r3.py.txt": "0404337d2847bb9857a1890d107ac76feea66c82549d0620138d826fee70fe34",
+  "native-coverage-partition-plan-r2.json": "ced57aa091651b3a3dc372799d14d0fc0daa46a31a36560590aa971caf70e52d",
+  "runner-r4-preparation-admission-r1.json": "8dc6a26d9205ea5ee2e19a6fb48c2355b4ef8c9d82c78373f77d47f3e36b81be",
+  "runtime-freeze-r1.json": "795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7",
+  "source6-contentrails-group-b-interruption-r1.json": "98e1a9ed314e31db58f1b9936294c2aa36fd2120710a1719e69c36a3d608f877"
+ },
+ "campaign_contract": {
+  "accounting": "Whole R plus S/probe,gocache,tmp,gopath and declared own-S extras. Overlap refuses; docs counted once. Baseline persists across invocations. Monitoring disk scans notice signal flag.",
+  "durability": "Exclusive per-step receipts; fsynced atomic state/cumulative result writes. Old prefix receipts remain exact. stdout uses small os.write summaries with OSError caught, so closed pipes do not control file receipts.",
+  "environment": "Qualified offline/module/cache controls retained; conflicting fixed Go environment overrides refuse.",
+  "initialization": "Index0 refuses an existing state/result, creates state no-clobber, and acquires nonblocking flock. Concurrent invocation cannot consume the same prefix.",
+  "invocation": "qualified_python run_worktree_lane_r4.py ADMISSION_JSON STEP_INDEX",
+  "limits": "17GiB initial disk;16GiB remaining disk and memory;2GiB sampled whole child-group RSS;1GiB cumulative net file-size increment;Go2 threads/jobs;180second reserve and195second prelaunch cutoff. Manifest span is at most1200seconds.",
+  "ownership": "Pending preflight/spawning metadata precedes Popen. PID,PGID,SID,start_ticks are durably stored before monitoring. Each native child starts a new session. WNOWAIT leaves leader waitable until group empty, preventing leader PID reuse during cleanup.",
+  "readsets": "Inputs/scratch checked each step before command; unchanged/scratch/expected_after checked after every step including failure. Frozen qualification scope has no protected-source mutation.",
+  "resume": "Only exact ready successful prefix may continue. Per-step immutable receipts must match hash, command/index, result and original baseline/deadline/start. Pending/failed/completed states cannot retry/reset.",
+  "shape": "One new fixed20minute campaign: disjoint round-robin5/5/5/4 covering all19 Bcases, thenCLI/vet. Separate invocations share the same manifest SHA, original disk baseline and deadline."
+ },
+ "checked_at_utc": "2026-10-07T06:28:04.443831+00:00",
+ "execution": {
+  "application_imports_tests_builds": 0,
+  "application_runtime_tests_fixtures_authority_edits": 0,
+  "commits": 0,
+  "fixture_runs": 0,
+  "native_commands": 0,
+  "process_max_RSS_bytes": 25026560,
+  "subagents": 0
+ },
+ "failure_history": "Preserve wrapper exit143 and surviving owned Go process as interrupted resource qualification. Cause unknown; no proven timeout or retrospective PASS. R3 remains unchanged.",
+ "files": {
+  "/home/dobo/work/_temp/codex__content-v1-6/probe/check_runner_signal_r4.py": {
+   "bytes": 9872,
+   "mtime_utc": "2026-10-07T06:23:35.253016+00:00",
+   "sha256": "25e2fa82e901db6ff588ef5e811bb06c3dfe5244db8b294a14fdd12526355b64"
+  },
+  "/home/dobo/work/_temp/codex__content-v1-6/probe/run_worktree_lane_r4.py": {
+   "bytes": 20107,
+   "mtime_utc": "2026-10-07T06:25:19.546365+00:00",
+   "sha256": "3e914113179052a5b106204387506e22b61f081f711c90d015932e2e6badde59"
+  },
+  "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/methods/check_runner_signal_r4.py.txt": {
+   "bytes": 9872,
+   "mtime_utc": "2026-10-07T06:23:35.253016+00:00",
+   "sha256": "25e2fa82e901db6ff588ef5e811bb06c3dfe5244db8b294a14fdd12526355b64"
+  },
+  "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/methods/run_worktree_lane_r4.py.txt": {
+   "bytes": 20107,
+   "mtime_utc": "2026-10-07T06:25:19.546365+00:00",
+   "sha256": "3e914113179052a5b106204387506e22b61f081f711c90d015932e2e6badde59"
+  }
+ },
+ "fixture_harness": {
+  "budget": "24second work deadline plus6seconds cleanup/report reserve; PASS requires elapsed<=30seconds and no fallback cleanup. Original resource floors/caps remain active.",
+  "fallback": "Only own guard or birth/PGID/SID-proven fixture group may be stopped. Any fallback makes the fixture check fail.",
+  "invocation": "qualified_python check_runner_signal_r4.py NEW_DIRECTORY_UNDER_OWN_PROBE",
+  "native_application_execution": 0,
+  "scenario": "Tiny Python step0 succeeds; step1 creates owned child+grandchild in one separate group. Wait for marker and durable ownership, close guard stdout, SIGTERM only guard PID. Require durable failed result, no live fixture processes, exact inputs, retained successful prefix/baseline/deadline/start, refusal of step2 and index0 reset.",
+  "status": "Prepared only; independent source review required before fixture execution."
+ },
+ "prepared_by": "/root/v16_source6_plan",
+ "remaining": [
+  "Independent source/state-machine/lifecycle review; no executable approval by this author receipt.",
+  "Separately admitted bounded Python-only signal fixture and inspection of durable failed receipt/owned-group cleanup.",
+  "Only after accepted fixture evidence, fresh cumulative20minute actualB campaign with sequential indices, full19 coverage thenCLI/vet. Failed old window remains immutable."
+ ],
+ "schema": "v1-6-runner-r4-source-preparation-r1",
+ "signal_contract": {
+  "cleanup": "SIGTERM then up to4seconds grace; SIGKILL if required; remaining-live-group polling capped5seconds total. Unconfirmed cleanup remains failed with evidence. Repeated catchable signals do not raise during cleanup.",
+  "handler": "Record first signal without raising during Popen ownership bookkeeping. Monitor marks interruption failed and cleans only verified active owned child group.",
+  "limits": "No SIGKILL/host-loss/uninterruptible-kernel-wait/unavailable-storage safety claim. Such loss can leave pending state, which refuses automatic continuation. This source phase proves no dynamic cleanup outcome.",
+  "signals": [
+   "SIGTERM",
+   "SIGINT"
+  ]
+ },
+ "static_checks": {
+  "all109_frozen_runtime_and_source8_rubric_current": true,
+  "copies_exact": true,
+  "partition19_disjoint_exhaustive": true,
+  "runner_harness_and_embedded_child_Python_AST_parsed": true,
+  "source_error_history": "Initial AST found0600 Python literal, corrected to0o600 before source freeze. Intermediate tool-input quoting error wrote no harness. No executable fixture or application was run."
+ },
+ "status": "SOURCE_FROZEN_UNEXECUTED_REQUIRES_INDEPENDENT_REVIEW",
+ "timing": {
+  "all_four_source_file_mtimes_before_cutoff": true,
+  "note": "An initial metadata-write before-reserve assertion fired and wrote no receipt. No source changed afterward; this receipt records completed pre-reserve source honestly, within the absolute deadline.",
+  "receipt_written_during_metadata_reserve": true,
+  "source_cutoff_utc": "2026-10-07T06:26:18.315693+00:00"
+ },
+ "valid_until": "Any source, fixed-budget/readset or ownership/state semantics change requires renewed review before execution."
+}

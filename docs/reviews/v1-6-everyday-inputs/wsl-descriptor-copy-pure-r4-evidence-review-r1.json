@@ -1,0 +1,46 @@
+{
+  "all_prior_failures_retained": true,
+  "artifact_bindings": {
+    "wsl-descriptor-copy-pure-r4-parent.json": "5847fbf219af321d8a163182730a69e414b061bf617fcde18b0f1f894787919e",
+    "wsl-descriptor-copy-pure-r4-result.json": "459ef8c3c38a886d61c7bf4d48931a96cd452234f87abaeaf780682987ca381d",
+    "wsl-descriptor-copy-pure-r4-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-descriptor-copy-pure-r4-stdout.json": "86eee6e19ef00e91636835a192bfbbb5a84fd3da451363ec16feb68a3bf57f19"
+  },
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "fixture": "descriptor-copy-pure-r4",
+  "independent_checks": [
+    "All32 unique accepted-source case names present. Exact raw original/copied stdout/result semantic equality, parent exit/bounds/hash fields consistent; stderr empty.",
+    "All four current materialized relevant sources freshly match bound bytes.",
+    "Original C result exact459ef8c3...; live signal publication terminal failed(received15) SHA2bb2980ef4cbde4d5cd2980175e6ff0c018e941a98398dd983dfa77c3c07e14b, completion-attempt retained SHA bf311a84d566e741d50120e431b5fa62624ba47667827b4cde7da1926bab4c4d. Occupied-transition sentinel retained exact78e66a09029a19479548f1d3e724767e53af4c1850f9120ff1a04f24735c43d7.",
+    "Read-only ext4 audit found the intentional FIFO and parent symlink retained in new fixture root; no FIFO read or candidate invocation."
+  ],
+  "installation_approval": false,
+  "interpreter_evidence": "Parent records immediate pre/post Linux Python52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41,3.14.4,opt0,no_bytecode; no prior pure-run prehash gap is claimed for these executions.",
+  "limits": [
+    "Resource interfaces mocked; signals are controlled callbacks, not actual OS delivery timing.",
+    "Closed-FD counter describes checked references including file/scan descriptors and possible reused numbers, not a unique directory/process cleanup inventory.",
+    "Pure32 cases do not establish full172 mirror parity, original-baseline growth, host resource floors, Windows helper ownership or native execution."
+  ],
+  "native_pass": false,
+  "next_requirement": "Exact accepted R6 may undergo one separately bounded fresh40s-work/50s-total actual preparation with all original floors/caps/baseline/ownership guards. Native gates remain pending.",
+  "nonce": "d4a778df1cb946d28a9d4377a2411b29",
+  "observed": {
+    "C_held_root_rename_behavior": "errno13 refusal with fresh named edges intact",
+    "child_elapsed_seconds": 2.89922437900168,
+    "exit_code": 0,
+    "parent_elapsed_seconds": 3.4841272,
+    "passed_cases": 32,
+    "recorded_closed_FD_references": 569,
+    "report_bytes": 3746
+  },
+  "original_failed_native_R1_clock_renewed": false,
+  "read_only_audit_performed": true,
+  "reviewed_at_utc": "2026-10-07T13:24:58.239146+00:00",
+  "reviewer": "/root/continuation_audit, independent evidence reviewer",
+  "schema": "v1-6-pure-controlled-fixture-evidence-review-r1",
+  "source_bindings": {
+    "methods/check_descriptor_copy_pure_wsl_r4.py.txt": "0b657d10d6fb1e5c8bc0a0275d9a496d9e0629323257e79e9728a573aecdab7f",
+    "methods/prepare_runtime_readset_mirror_wsl_r6.py.txt": "342a070872792b0203ec4f074a4cabca4579f4c8bcd8bb2b66246f8b79c01110"
+  },
+  "verdict": "ACCEPT_PURE_CONTROLLED_FIXTURE_OBSERVATION_ONLY"
+}

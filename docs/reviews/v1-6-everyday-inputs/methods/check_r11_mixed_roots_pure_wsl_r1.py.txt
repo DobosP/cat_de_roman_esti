@@ -1,0 +1,368 @@
+"""Pure R11 flow fixture; Windows replies, floors and dispatch are synthetic.
+
+CLI: python3 -B fixture.py UUID32 EXACT_FIXTURE_SHA RUNNER_PATH
+No child/helper/native command. Small fresh owned C/ext4 trees remain as evidence.
+This tests actual imported R11 functions; synthetic receipts are never OS proof.
+"""
+import datetime
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import resource
+import signal
+import stat
+import sys
+import time
+import types
+from unittest import mock
+
+STARTED = time.monotonic()
+RUNNER_SHA = '9ee99583a45573acba664fe04530cf281ce5c4ef9858eae2907a0ad2207a2d4e'
+C_PARENT = Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/r11-mixed-pure-fixtures-r1')
+X_PARENT = Path('/home/paul_work/work/_temp/codex__content-v1-6/r11-mixed-pure-fixtures-r1')
+GIB = 1 << 30
+CASES = []
+report_path = None
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def guard():
+    if time.monotonic() - STARTED >= 10:
+        raise TimeoutError('pure fixture10seconds')
+    if resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024 > 2 * GIB:
+        raise RuntimeError('pure fixture RSS2GiB')
+
+
+def chain(path):
+    for value in reversed([Path(path), *Path(path).parents]):
+        if not stat.S_ISDIR(value.lstat().st_mode) or value.resolve(strict=True) != value:
+            raise ValueError('fixture ancestor redirected/non-directory')
+
+
+def write(path, blob):
+    guard()
+    if len(blob) > 128 << 10:
+        raise ValueError('fixture image128KiB')
+    with Path(path).open('xb') as f:
+        f.write(blob)
+        f.flush()
+        os.fsync(f.fileno())
+
+
+def case(name, function, wanted=None):
+    guard()
+    if wanted is None:
+        value = function()
+        if value is not True:
+            raise RuntimeError(name + ': expected True')
+    else:
+        try:
+            function()
+        except wanted:
+            pass
+        else:
+            raise RuntimeError(name + ': expected ' + wanted.__name__)
+    CASES.append(name)
+
+
+def synthetic_reply(m, requested, receipt):
+    quota = {'minimum_bytes': 1 << 20, 'maximum_bytes': 64 << 20, 'enforcement_flags': 6}
+    ids = {role: {'pid': 100 + i, 'creation_time_100ns': 200 + i} for i, role in enumerate(('parent', 'launcher', 'worker'))}
+    proofs = {}
+    for role, scope in (('parent', 'parent-own-current-process'), ('launcher', 'exact-owned-windows-job'), ('worker', 'exact-owned-windows-job'), ('worker_self', 'worker-own-current-process')):
+        proof = dict(quota, **ids['worker' if role == 'worker_self' else role], ownership_scope=scope,
+                     hard_max_verified=True, identity_verified_before_quota=True, before_traversal=True,
+                     quota_call_succeeded=True, job_membership_verified_before_quota=True,
+                     exact_owned_job_membership_verified_before_quota=True)
+        if role == 'launcher':
+            proof['enforced_while_suspended'] = True
+        proofs[role] = proof
+    return dict(ids, schema='v1-6-windows-fresh-size-helper-r2', nonce=receipt.stem,
+                roots=requested, receipt_path=m.windows_path(receipt), status='completed', regular_bytes=37,
+                worker_exit_confirmed=True, launcher_exit_confirmed=True, job_empty=True,
+                elapsed_seconds=.01, peak_job_memory_bytes=1, peak_working_set_bytes=1,
+                helper_sha256=m.WINDOWS_HELPER_SHA, interpreter_sha256=m.WINDOWS_PYTHON_SHA,
+                python_version='3.11.15', deferred=[], hard_working_set_proofs=proofs,
+                launcher_working_set_before_traversal=quota, parent_working_set_at_completion=quota,
+                worker_working_set_at_completion=quota, job_setup={'configured': True, 'limit_flags': 8968},
+                job_memory_limit_bytes=64 << 20, process_memory_limit_bytes=64 << 20,
+                job_active_process_limit=2, job_closed_confirmed=True,
+                synthetic_fixture_reply_not_OS_evidence=True)
+
+
+def main():
+    global report_path
+    if len(sys.argv) != 4 or not re.fullmatch(r'[0-9a-f]{32}', sys.argv[1]) or not re.fullmatch(r'[0-9a-f]{64}', sys.argv[2]):
+        raise ValueError('UUID32 fixture SHA runner path required')
+    nonce, own_sha, runner_path = sys.argv[1:]
+    if not sys.dont_write_bytecode or sys.flags.optimize != 0 or digest(__file__) != own_sha or digest(runner_path) != RUNNER_SHA:
+        raise RuntimeError('ordinary Python -B/exact pins required')
+    for parent in (C_PARENT, X_PARENT):
+        chain(parent.parent)
+        try:
+            parent.lstat()
+        except FileNotFoundError:
+            parent.mkdir(mode=0o700)
+        chain(parent)
+    croot, xroot = C_PARENT / nonce, X_PARENT / nonce
+    for root in (croot, xroot):
+        root.mkdir(mode=0o700)  # exclusive; no existing target or deletion
+        chain(root)
+    report_path = croot / 'result.json'
+    loader = importlib.machinery.SourceFileLoader('pure_mixed_r11', runner_path)
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    m = importlib.util.module_from_spec(spec)
+    loader.exec_module(m)  # main/handlers never invoked by import
+    m.R, m.S, m.D, m.X = croot / 'repo', croot / 'scratch', croot / 'reports', xroot / 'linux-role'
+    for root in (m.R, m.S, m.D, m.X, m.S / 'probe', m.S / 'gocache', m.S / 'tmp', m.S / 'gopath', m.S / 'gomodcache', m.S / 'tools'):
+        root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    actual_digest = m.digest
+    m.digest = lambda path: m.WINDOWS_HELPER_SHA if Path(path) == m.WINDOWS_HELPER else m.WINDOWS_PYTHON_SHA if Path(path) == m.WINDOWS_PYTHON else actual_digest(path)
+    m.validate_specific_retired_r2_registry = lambda: None  # unrelated history guard qualified separately
+    calls = []
+    def fake_run(argv, **kwargs):
+        guard()
+        if argv[:3] != [str(m.WINDOWS_PYTHON), '-B', m.windows_path(m.WINDOWS_HELPER)] or kwargs != {'stdout': -1, 'stderr': -1, 'timeout': 5, 'check': True}:
+            raise RuntimeError('unexpected mocked metadata command')
+        receipt = Path('/mnt/c/' + argv[3][3:])
+        if receipt.parent != m.S / 'probe/windows-size-helper-r4':
+            raise ValueError('mock receipt escape')
+        reply = synthetic_reply(m, argv[4:], receipt)
+        blob = json.dumps(reply, sort_keys=True).encode()
+        write(receipt, blob)
+        calls.append(argv[4:])
+        return types.SimpleNamespace(stdout=blob, stderr=b'', returncode=0)
+    def deny_child(*args, **kwargs):
+        raise RuntimeError('pure fixture child denied')
+    m.subprocess = types.SimpleNamespace(PIPE=-1, run=fake_run, Popen=deny_child)
+    manifest = {'additional_measure_dirs': [str(m.S / 'tools'), str(m.X)]}
+    roots = m.measurement_roots(manifest)
+    case('eight-original-C-plus-whole-X-roots', lambda: len(roots) == 8 and roots[-1] == m.X)
+    case('fresh-empty-mixed-total', lambda: m.measured_size(roots) == 37)
+    new = m.X / 'new.bin'
+    write(new, b'abc')
+    case('fresh-create-counted', lambda: m.measured_size(roots) == 40)
+    with new.open('ab') as f:
+        f.write(b'de')
+    case('fresh-growth-counted', lambda: m.measured_size(roots) == 42)
+    new.unlink()  # only exact fixture-owned newly created file
+    case('fresh-owned-removal-counted', lambda: m.measured_size(roots) == 37)
+    write(m.X / '.hidden', b'hello')
+    os.link(m.X / '.hidden', m.X / 'hardlink')
+    case('hidden-and-hardlink-logical-bytes-counted', lambda: m.measured_size(roots) == 47)
+    scan = m.os.scandir
+    def denied(path):
+        if Path(path) == m.X:
+            raise PermissionError('controlled owned Linux root denial')
+        return scan(path)
+    with mock.patch.object(m.os, 'scandir', side_effect=denied):
+        case('PermissionError-propagates', lambda: m.measured_size(roots), PermissionError)
+    case('missing-whole-X-refused', lambda: m.measurement_roots({'additional_measure_dirs': [str(m.S / 'tools')]}), ValueError)
+    case('X-child-instead-of-whole-X-refused', lambda: m.measurement_roots({'additional_measure_dirs': [str(m.X / 'child')]}), ValueError)
+    case('foreign-root-refused', lambda: m.measurement_roots({'additional_measure_dirs': [str(xroot)]}), ValueError)
+    case('overlapping-S-refused', lambda: m.measurement_roots({'additional_measure_dirs': [str(m.S), str(m.X)]}), ValueError)
+    real_size = m.measured_size
+    m.measured_size = lambda *args, **kwargs: m.HISTORICAL_GROWTH_BASELINE + 1
+    high = lambda path: types.SimpleNamespace(free=20 * GIB)
+    m.shutil = types.SimpleNamespace(disk_usage=high)
+    m.memory_available = lambda: 20 * GIB
+    def budget(first=False):
+        state = {'original_start_size': m.HISTORICAL_GROWTH_BASELINE, 'peak_sampled_incremental_bytes': 0}
+        return m.budget(roots, state, m.now() + datetime.timedelta(seconds=1200), first=first)[0]
+    case('both-floors-positive', lambda: budget(True) is None)
+    for role, low_path in (('C', m.R), ('X', m.X)):
+        for first, floor in ((True, 17), (False, 16)):
+            m.shutil.disk_usage = lambda path, low=low_path, f=floor: types.SimpleNamespace(free=(f * GIB - 1) if Path(path) == low else 20 * GIB)
+            case(role + '-floor-' + str(floor), lambda first=first: budget(first) == 'remaining-disk-or-memory-floor')
+    m.shutil.disk_usage = high
+    m.memory_available = lambda: 16 * GIB - 1
+    case('WSL-memory-floor', lambda: budget() == 'remaining-disk-or-memory-floor')
+    m.memory_available = lambda: 20 * GIB
+    m.measured_size = lambda *args, **kwargs: m.HISTORICAL_GROWTH_BASELINE + GIB + 1
+    case('original-baseline-growth-cap', lambda: budget() == 'cumulative-incremental1GiB')
+    m.measured_size = lambda *args, **kwargs: m.HISTORICAL_GROWTH_BASELINE + 1
+    state = {'original_start_size': m.HISTORICAL_GROWTH_BASELINE, 'peak_sampled_incremental_bytes': 0}
+    case('fixed-reserve-cutoff', lambda: m.budget(roots, state, m.now() + datetime.timedelta(seconds=179))[0] == 'metadata-time-reserve')
+    mirror_parent = m.X / 'runtime-readset-mirror-r1'
+    mirror = mirror_parent / ('a' * 32)
+    for directory in (mirror / 'go-backend/internal/contentrails', mirror / 'go-backend/cmd/cat-content-rail'):
+        directory.mkdir(parents=True)
+    mirrored = dict(execution_mirror=str(mirror))
+    case('direct-UUID-mirror-accepted', lambda: m.qualified_mirror(mirrored) == mirror)
+    case('closed-mirror-cwd-accepted', lambda: m.qualified_step_cwd(mirrored, {'cwd': str(mirror / 'go-backend/internal/contentrails')}) == mirror / 'go-backend/internal/contentrails')
+    case('canonical-cwd-accepted', lambda: m.qualified_step_cwd(mirrored, {'cwd': str(m.R)}) == m.R)
+    for name, value in [('bad-UUID', mirror_parent / 'bad'), ('foreign-mirror', xroot / ('b' * 32)), ('nested-mirror', mirror / ('c' * 32))]:
+        case(name, lambda v=value: m.qualified_mirror({'execution_mirror': str(v)}), ValueError)
+    link = mirror_parent / ('d' * 32)
+    link.symlink_to(mirror, target_is_directory=True)
+    case('symlink-mirror-refused', lambda: m.qualified_mirror({'execution_mirror': str(link)}), ValueError)
+    case('foreign-cwd-refused', lambda: m.qualified_step_cwd(mirrored, {'cwd': str(xroot)}), ValueError)
+    case('TMPDIR-fixed-to-mirror-UUID', lambda: m.environment(mirrored)['TMPDIR'] == str(m.X / 'runtime-test-tmp-r1' / mirror.name))
+    case('TMPDIR-override-refused', lambda: m.environment(dict(mirrored, environment={'TMPDIR': str(m.S / 'tmp')})), ValueError)
+    # Actual namespace/readset flow on closed tiny owned roots. These names
+    # model the count/selection contract, not the real 109 protected bindings.
+    namespace_paths = [f'go-backend/ns/n{i:03}.go' for i in range(109)]
+    canonical_test = 'go-backend/ns/n000_test.go'
+    for root in (m.R, mirror):
+        for directory in (root / 'go-backend/ns', root / 'shared-go/authcore'):
+            directory.mkdir(parents=True, exist_ok=True)
+        for relative in namespace_paths:
+            write(root / relative, b'package ns\n')
+    write(m.R / canonical_test, b'package ns\n')
+    namespace_manifest = dict(mirrored, runtime_namespace=namespace_paths,
+                              canonical_go_namespace=sorted(namespace_paths + [canonical_test]))
+    def namespace_good():
+        checks, failures = m.namespace_checks(namespace_manifest)
+        return len(checks) == 3 and all(checks.values()) and failures == {}
+    def namespace_failure(wanted):
+        checks, failures = m.namespace_checks(namespace_manifest)
+        return set(failures) == set(wanted) and all(checks[key] is False for key in wanted)
+    def readset_good(phase):
+        checks, failures = m.readset(namespace_manifest, phase)
+        return len(checks) == 3 and all(checks.values()) and failures == {}
+    def readset_failed(phase, wanted):
+        checks, failures = m.readset(namespace_manifest, phase)
+        return set(failures) == set(wanted) and all(checks[key] is False for key in wanted)
+    case('namespace-exact-synthetic-109-runtime-and-110-compiler', namespace_good)
+    for phase in ('pre', 'post'):
+        case('namespace-fresh-' + phase + '-accepted', lambda phase=phase: readset_good(phase))
+    namespace_mutations = []
+    extra = m.R / 'go-backend/ns/extra.go'
+    write(extra, b'package ns\n')
+    wanted = {'namespace:canonical-runtime109', 'namespace:canonical-compiler-go'}
+    case('canonical-extra-runtime-and-compiler-refused', lambda: namespace_failure(wanted))
+    for phase in ('pre', 'post'):
+        case('canonical-extra-' + phase + '-readset-refused', lambda phase=phase: readset_failed(phase, wanted))
+    extra.unlink(); namespace_mutations.append(str(extra))
+    extra_test = m.R / 'go-backend/ns/extra_test.go'
+    write(extra_test, b'package ns\n')
+    case('canonical-extra-test-source-refused', lambda: namespace_failure({'namespace:canonical-compiler-go'}))
+    extra_test.unlink(); namespace_mutations.append(str(extra_test))
+    for role, root, wanted in (
+            ('canonical', m.R, {'namespace:canonical-runtime109', 'namespace:canonical-compiler-go'}),
+            ('mirror', mirror, {'namespace:mirror-runtime109'})):
+        absent = root / namespace_paths[1]
+        absent.unlink(); namespace_mutations.append(str(absent))
+        case(role + '-missing-selected-file-refused', lambda wanted=wanted: namespace_failure(wanted))
+        write(absent, b'package ns\n')
+    extra_mirror = mirror / 'go-backend/ns/extra.go'
+    write(extra_mirror, b'package ns\n')
+    case('mirror-extra-runtime-refused', lambda: namespace_failure({'namespace:mirror-runtime109'}))
+    extra_mirror.unlink(); namespace_mutations.append(str(extra_mirror))
+    symlink = mirror / 'go-backend/ns/symlink.go'
+    symlink.symlink_to(mirror / namespace_paths[0])
+    case('selected-symlink-refused', namespace_good, ValueError)
+    for phase in ('pre', 'post'):
+        case('selected-symlink-' + phase + '-readset-failed-closed', lambda phase=phase: readset_failed(phase, {'namespace:fresh-enumeration'}))
+    symlink.unlink(); namespace_mutations.append(str(symlink))
+    hardlink = mirror / 'go-backend/ns/owned-link-holder'
+    os.link(mirror / namespace_paths[0], hardlink)
+    case('selected-original-hardlink-refused', namespace_good, ValueError)
+    hardlink.unlink(); namespace_mutations.append(str(hardlink))
+    fifo = mirror / 'go-backend/ns/pipe.go'
+    os.mkfifo(fifo, mode=0o600)
+    case('selected-nonregular-fifo-refused', namespace_good, ValueError)
+    fifo.unlink(); namespace_mutations.append(str(fifo))
+    for role, root in (('canonical', m.R), ('mirror', mirror)):
+        denied_directory = root / 'go-backend/ns'
+        def denied_namespace(path, target=denied_directory):
+            if Path(path) == target:
+                raise PermissionError('controlled namespace enumeration denial')
+            return scan(path)
+        with mock.patch.object(m.os, 'scandir', side_effect=denied_namespace):
+            case(role + '-namespace-PermissionError-propagates', namespace_good, PermissionError)
+            for phase in ('pre', 'post'):
+                case(role + '-namespace-' + phase + '-PermissionError-fails-closed', lambda phase=phase: readset_failed(phase, {'namespace:fresh-enumeration'}))
+    case('namespace-restored-final-exact', namespace_good)
+    for field in ('runtime_namespace', 'canonical_go_namespace'):
+        duplicate = dict(namespace_manifest)
+        duplicate[field] = duplicate[field] + [duplicate[field][0]]
+        case(field + '-duplicate-manifest-refused', lambda value=duplicate: m.namespace_checks(value), ValueError)
+    # Actual main/all dispatch flow, with step execution/prefix proof mocked.
+    # This is scheduling control only; real lifecycle/receipts have separate gates.
+    m.load_prefix = lambda *args: []
+    real_signal = m.signal
+    def serial_test(kind):
+        lane = 'pure-r11-' + kind
+        saved_argv = sys.argv[:]
+        attempted, launched = [], []
+        now = m.now()
+        admission = dict(manifest, lane=lane, runner_sha256=RUNNER_SHA,
+                         checked_at_utc=now.isoformat(), deadline_utc=(now + datetime.timedelta(seconds=1200)).isoformat(),
+                         historical_growth_baseline=m.HISTORICAL_GROWTH_BASELINE,
+                         limits={'RSS_bytes': 2 * GIB, 'incremental_bytes': GIB, 'start_disk_floor_bytes': 17 * GIB,
+                                 'remaining_disk_memory_floor_bytes': 16 * GIB, 'GOMAXPROCS': 2, 'build_jobs': 2, 'metadata_reserve_seconds': 180},
+                         commands=[{'name': 'synthetic-' + str(i), 'argv': ['NO_CHILD']} for i in range(3)])
+        path = croot / (lane + '.json')
+        write(path, json.dumps(admission).encode())
+        def step(man, mpath, image, index, current, state_path, *args):
+            attempted.append(index)
+            if m.received_signal is not None:
+                return 2
+            if kind == 'failed':
+                return 7
+            launched.append(index)
+            if current['original_start_size'] != m.HISTORICAL_GROWTH_BASELINE:
+                raise RuntimeError('serial original baseline changed')
+            current.update(next_index=index + 1, status='ready', pending=None)
+            m.write_json(state_path, current)
+            return 0
+        def unmask(*args):
+            if kind == 'queued-term':
+                m.received_signal = signal.SIGTERM
+            elif kind == 'queued-int':
+                m.received_signal = signal.SIGINT
+        m.signal = types.SimpleNamespace(SIG_UNBLOCK=real_signal.SIG_UNBLOCK, pthread_sigmask=unmask)
+        m.run_step = step
+        m.received_signal = None
+        try:
+            sys.argv = [runner_path, str(path), 'all']
+            result = m.main()
+            return (result, attempted, launched) == ((7, [0], []) if kind == 'failed' else (2, [0, 1], [0]) if kind.startswith('queued-') else (0, [0, 1, 2], [0, 1, 2]))
+        finally:
+            sys.argv = saved_argv
+            m.received_signal = None
+            m.signal = real_signal
+    for kind in ('passed', 'failed', 'queued-term', 'queued-int'):
+        case('serial-' + kind, lambda kind=kind: serial_test(kind))
+    if digest(runner_path) != RUNNER_SHA or digest(__file__) != own_sha:
+        raise RuntimeError('source changed during pure fixture')
+    guard()
+    return {'schema': 'v1-6-r11-mixed-roots-pure-fixture-r1', 'passed': True,
+            'fixture_sha256': own_sha, 'runner_sha256': RUNNER_SHA,
+            'cases': CASES, 'case_count': len(CASES), 'metadata_interface_calls': len(calls),
+            'elapsed_seconds': time.monotonic() - STARTED, 'C_owned_root': str(croot), 'ext4_owned_root': str(xroot),
+            'children_or_native_commands': 0, 'synthetic_Windows_replies_floors_dispatch_not_OS_exit_or_host_evidence': True,
+            'actual_code_tested': ['measurement_roots', 'measured_size mixed routing/addition', 'linux_measured_size fresh traversal', 'budget', 'qualified_mirror', 'qualified_step_cwd', 'environment', 'main serial control', 'source_namespaces', 'namespace_checks', 'readset pre/post namespace failure routing'],
+            'mocked_scope': ['Windows source binding/history and subprocess response', 'resource floors', 'run_step and load_prefix for dispatch-only cases'],
+            'owned_fixture_file_deletions': 1 + len(namespace_mutations), 'namespace_control_mutations': namespace_mutations, 'other_cleanup': 0}
+
+
+if __name__ == '__main__':
+    def interrupt(number, frame):
+        raise InterruptedError('pure fixture signal ' + str(number))
+    signal.signal(signal.SIGTERM, interrupt)
+    signal.signal(signal.SIGINT, interrupt)
+    signal.signal(signal.SIGALRM, interrupt)
+    signal.setitimer(signal.ITIMER_REAL, 10)
+    result = {'schema': 'v1-6-r11-mixed-roots-pure-fixture-r1', 'passed': False}
+    exit_code = 1
+    try:
+        result = main()
+        exit_code = 0
+    except BaseException as exc:
+        result.update(error=type(exc).__name__ + ': ' + str(exc), cases=CASES, elapsed_seconds=time.monotonic() - STARTED)
+    try:
+        if report_path is not None:
+            write(report_path, (json.dumps(result, sort_keys=True, indent=2) + '\n').encode())
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+    print(json.dumps(result, sort_keys=True))
+    raise SystemExit(exit_code)

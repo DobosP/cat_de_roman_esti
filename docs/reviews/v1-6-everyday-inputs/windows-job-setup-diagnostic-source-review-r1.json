@@ -1,0 +1,36 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:01:39Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "REQUEST_CHANGES_SOURCE_ONLY",
+  "bindings": {
+    "methods/check_windows_job_setup_wsl_r1.py.txt": "ca7c787042088f9c3f3a53f1030ace68d5d8325843685359e20da012effb496a",
+    "methods/windows_size_helper_wsl_r3.py.txt": "6404cd2f50998a2a06f3459afd4605a349a6c9c90690eba9d666b6b4caceeb23"
+  },
+  "findings": [
+    {
+      "id": "DIAG-R1-F1",
+      "priority": "P2",
+      "file": "methods/check_windows_job_setup_wsl_r1.py.txt",
+      "start_line": 105,
+      "end_line": 124,
+      "title": "Final work can exceed two seconds and still report diagnostic completion",
+      "detail": "The two-second work cutoff is checked only before each configuration probe. The final SetInformationJobObject call, Job-empty query and receipt publication can return after two seconds, after which line 124 marks diagnostic_completed. Final acceptance at lines 146-148 checks only the four-second total. The 3.7-second hard guard limits liveness but does not prevent a 2-to-3.7-second work phase from claiming completion.",
+      "requested_change": "Preserve R1 and create a new diagnostic revision that captures the work-finished elapsed time after the final work API/query and refuses completion if the unchanged two-second bound has been reached. Retain the four-second total and hard guard, and record the captured work time."
+    }
+  ],
+  "accepted_source_properties": [
+    "Imports exact helper definitions without calling either worker or supervisor. The diagnostic creates one anonymous empty Job and never calls CreateProcessW or another child-launch API.",
+    "Captures structure sizes/offsets and immediate CreateJob/SetInformationJob API results plus Winerror; both exact flags and the same-64MiB/no-working-set alternate are explicitly diagnostic observations only.",
+    "Empty-job query and close are guarded; source/interpreter pins, 16KiB exclusive/atomic receipt bounds and the 3.7s hard total guard remain. A missing or pending receipt makes no completion claim."
+  ],
+  "execution_preconditions": [
+    "Do not execute R1 for the requested bounded diagnostic qualification; review the new exact source revision first.",
+    "The diagnostic cannot qualify the helper or native campaign, and alternate flags do not authorize production changes."
+  ]
+}

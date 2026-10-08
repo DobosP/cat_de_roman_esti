@@ -1,0 +1,23 @@
+{
+  "schema": "v1-6-selector-review-source-admission-r1",
+  "started_at_utc": "2026-10-07T04:00:23.812115+00:00",
+  "deadline_utc": "2026-10-07T04:20:23.812115+00:00",
+  "metadata_reserve_seconds": 180,
+  "inclusive_agents_max": 3,
+  "agents": [
+    "/root",
+    "/root/v16_finish_qualification",
+    "/root/v16_raw_quality"
+  ],
+  "disk_free_bytes": 235572314112,
+  "memory_available_bytes": 31399829504,
+  "scope": "Independent source-only strict sixth HTTP selector and historical Source5 test context review. No native execution or runtime edits; reviewer owns only new review receipt.",
+  "inputs": {
+    "go-backend/internal/httpgolden/golden.go": "65540cb714ff875975777089217b4750dd9e22b39493659261ff86fa5afcee13",
+    "go-backend/internal/httpgolden/golden_test.go": "f7db694d84f652d3a4aa7776b17aef2ac22d5558bccb6a334561a76326bdf952",
+    "go-backend/internal/httpgolden/source6_test.go": "130e0b3de2f224de8d516fef6b919cdde74ecf9c07cabb3b27f09f410a3d5d5f",
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-6.json.gz": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+    "docs/reviews/v1-6-everyday-inputs/reference/http-selector-preparation-r1.json": "937e99b1fcc8248e6c8dcc630d534622856692fa8a68e89ec81b6d3ba0a771b2",
+    "docs/reviews/v1-6-everyday-inputs/reference/historical-source5-context.tar.gz": "ffffa21ccf11f79d817c529123f2583824c62fefaabd17a5887e7ce809507e48"
+  }
+}

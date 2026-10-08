@@ -1,0 +1,201 @@
+{
+  "actual_failure": {
+    "child_elapsed_seconds": 24.008184693000658,
+    "exit_code": 1,
+    "failure_operation": "CLI reset index0 timed out after0.23708951699882164 remaining work seconds",
+    "failure_type": "TimeoutExpired",
+    "fallback_cleanup_needed": false,
+    "final_work_proof": null,
+    "native_Go_or_application_executions": 0,
+    "nonce": "d3aff89163de455ba5f6f02e23cef65f",
+    "parent_elapsed_seconds": 24.4476171,
+    "passed": false,
+    "total_budget_seconds": 30,
+    "work_budget_seconds": 24
+  },
+  "all_prior_failures_preserved": true,
+  "bindings": {
+    "methods/check_runner_signal_wsl_actual_r15.py.txt": "c299824538413b506809ecb09994d8fbf516fdb862ccd12f97eadd6ebee04355",
+    "methods/run_worktree_lane_wsl_r12.py.txt": "77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0",
+    "r14-active-ca4699c5be62a26a-result.json": "970115f1c4e7feda2b8b3ae8ef2e649f37b6aa50cd346eb1481609adf6873fb8",
+    "r14-active-ca4699c5be62a26a-step-0-result.json": "5140995e49b01b7a7034902c224cdad8ae81e4ae634b23bdc954f0da59f8a107",
+    "v1-6-wsl-native-r1-result.json": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "wsl-r12-actual-active-r13-failure-result.json": "786f4cd1fa0c7e018e633679ca009c1485dbfc61ac6ac2addcac34d3ff2df7f0",
+    "wsl-r12-actual-active-r15-parent.json": "446aba3c6d6251b7b59daba5218e7c87737cf1ee856fa9d656c050a2866b36e9",
+    "wsl-r12-actual-active-r15-result.json": "bebf432a9dfceabc31e3646902c9099746e81f490d911c9452668b50603c5938",
+    "wsl-r12-actual-active-r15-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-r12-actual-active-r15-stdout.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wsl-runtime-mirror-r6-result.json": "efa8509d719fc2507248873a76c6059907a78f6839a96409769119befe0f1238"
+  },
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "durable_outcome": {
+    "campaign_started_at_utc": "2026-10-07T14:13:04.707122+00:00",
+    "cleanup": {
+      "actions": [
+        "SIGTERM_owned_group"
+      ],
+      "elapsed_seconds": 0.08697031100018648,
+      "error": null,
+      "remaining_live_members": []
+    },
+    "deadline_utc": "2026-10-07T14:33:04.348480+00:00",
+    "fresh_campaign_start_size": 1211042426,
+    "lane": "r14-active-ca4699c5be62a26a",
+    "next_index": 1,
+    "original_start_size": 752431588,
+    "peak_group_RSS_bytes": 9883648,
+    "peak_sampled_incremental_bytes": 458638218,
+    "pending": null,
+    "pre_post_checks_all_true": true,
+    "publication_including_increment_upper_bound": 525747082,
+    "state_status": "failed",
+    "step0_exit_code": 143,
+    "step0_received_signal": 15,
+    "step0_status": "failed"
+  },
+  "fixture_pass": false,
+  "helper_registry": {
+    "bad": [],
+    "new_terminals_all_worker_launcher_exit_empty_closed_job_confirmed": true,
+    "orphan": [],
+    "recent": [
+      {
+        "elapsed_seconds": 1.0620000000017171,
+        "launcher": {
+          "creation_time_100ns": 134358560062840980,
+          "pid": 38952
+        },
+        "name": "103a340e7c594aac98dd2b907360e206.json",
+        "parent": {
+          "creation_time_100ns": 134358560060225230,
+          "pid": 40508
+        },
+        "sha256": "a9815e0a76ffcd8a20b451a07b1bf2ca132801ad467160c674a81c1791918303",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358560063386080,
+          "pid": 41376
+        }
+      },
+      {
+        "elapsed_seconds": 1.1409999999996217,
+        "launcher": {
+          "creation_time_100ns": 134358559928939680,
+          "pid": 42340
+        },
+        "name": "3e9add60b6174a9db383b3b6bdd9663e.json",
+        "parent": {
+          "creation_time_100ns": 134358559926336140,
+          "pid": 37504
+        },
+        "sha256": "1341c660f679048222c267af9fa94a67148beca263de61e4154043ccfb272b20",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358559929531950,
+          "pid": 6700
+        }
+      },
+      {
+        "elapsed_seconds": 1.139999999999418,
+        "launcher": {
+          "creation_time_100ns": 134358559871551730,
+          "pid": 44824
+        },
+        "name": "819bb05d3c154b5c85c0936ba3d2f83c.json",
+        "parent": {
+          "creation_time_100ns": 134358559868888670,
+          "pid": 49364
+        },
+        "sha256": "13d505d8125b79234c74607736651294ce28f21162231e93c237050cde8e2880",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358559872093980,
+          "pid": 43804
+        }
+      },
+      {
+        "elapsed_seconds": 1.1719999999986612,
+        "launcher": {
+          "creation_time_100ns": 134358560024880140,
+          "pid": 44136
+        },
+        "name": "8c4bec5cd424435eb8d4fb6f5a40ff44.json",
+        "parent": {
+          "creation_time_100ns": 134358560022122100,
+          "pid": 53776
+        },
+        "sha256": "036351e7ab33b34423e0708d4267e1b2dc0e6a9e1adb8c44fdc36f2c2faac48c",
+        "status": "completed",
+        "worker": {
+          "creation_time_100ns": 134358560025467140,
+          "pid": 23040
+        }
+      }
+    ],
+    "sidecars": 295,
+    "terminals": 295
+  },
+  "interpretation": [
+    "This entire R15 fixture remains failed; observations are empty and final work proof is null.",
+    "Raw durable lane and owned marker directly evidence intended active group launch, guard SIGTERM, group cleanup and failed terminal outcome. This does not convert the failed fixture into accepted active coverage.",
+    "Exact source control flow implies all assertions before the CLI-refusal loop and the first continuation1 refusal assertion succeeded because TimeoutExpired names the later reset0 invocation. There is no separate captured continuation output or timing proof, so this inference is not a standalone CLI-refusal gate.",
+    "A separate materially different active-only fixture may remove CLI calls only if both actual continuation/reset refusal assertions remain mandatory in their own bounded actual fixture with explicit errors, unchanged closed-lane hashes/pins, full resource guards and original lane deadline/baseline preserved; queued prefix remains a separate mandatory actual gate."
+  ],
+  "live_unchanged_manifest_checks": {
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/go-tool-telemetry-r1/mode": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/run_worktree_lane_wsl_r12.py": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/wsl-r12-actual-active-r15-d3aff89163de455ba5f6f02e23cef65f/child.py": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/wsl-r12-actual-active-r15-d3aff89163de455ba5f6f02e23cef65f/immutable-input.txt": true,
+    "/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6/docs/reviews/v1-6-everyday-inputs/wsl-runtime-mirror-r6-result.json": true
+  },
+  "native_pass": false,
+  "original_failed_clock_renewed": false,
+  "original_retained_bindings": {
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-6\\probe\\r14-active-ca4699c5be62a26a-r4-r2-state.json": "9277338eeda44412e9d48af3b9f1325d7d0cb9a12478778ef7593d283161780f",
+    "admission.json": "67b73268dfc15ae6f62e1faf91918d17ce4ad9141b1ce76beac9150a5d77497b",
+    "check-result.json": "bebf432a9dfceabc31e3646902c9099746e81f490d911c9452668b50603c5938",
+    "child.py": "b20b2eaab3ffce80d33e049c777c0d18607aa98ac34e07332af1b6c1157ced4f",
+    "immutable-input.txt": "75b0abc8e8a29d42c03468290804ba32e9e525181e5d54551488e7d29c769cad",
+    "owned-processes.json": "6fc4bd1d10310b6b11f858b6297973384d1420ee7a52a2151906f4bfebed5048"
+  },
+  "ownership_observation": {
+    "Windows_parent20672_and12_helper_PIDs_absent": true,
+    "forbidden_successor_marker_absent": true,
+    "linux_audit_at_utc": "2026-10-07T14:18:41.289419+00:00",
+    "matching_live_fixture_runner_owned_child_processes": [],
+    "original_child_grandchild_PIDs_absent": true,
+    "original_marker": {
+      "child": {
+        "pgid": 289947,
+        "pid": 289947,
+        "sid": 289947,
+        "start_ticks": 2430887
+      },
+      "grandchild": {
+        "pgid": 289947,
+        "pid": 289950,
+        "sid": 289947,
+        "start_ticks": 2430896
+      }
+    },
+    "reviewer_signals_sent": false
+  },
+  "prerequisites": {
+    "closed_mirror_result_unchanged": true,
+    "materialized_fixture_c299_runner77f94_and_current_Python52e0_readonly_rehash_exact": true,
+    "old_R13_failed_result_786f4_and_original_native_failure_fa093_unchanged": true
+  },
+  "raw_capture": {
+    "fixture_c299_pre_post_exact": true,
+    "immediate_Python_pre_post": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+    "ordinary_nonoptimized_B": true,
+    "original_check_result_matches_D": true,
+    "stderr_empty": true,
+    "stdout_empty": true
+  },
+  "reviewed_at_utc": "2026-10-07T14:19:46.924Z",
+  "reviewer": "/root/continuation_audit, independent evidence reviewer",
+  "schema": "v1-6-r12-actual-active-r15-failure-evidence-review-r1",
+  "valid_until": "Historical failed attempt; no fixture or native qualification. New bounded coverage sources require independent exact review.",
+  "verdict": "ACCEPT_FAILURE_PRESERVATION_ONLY"
+}

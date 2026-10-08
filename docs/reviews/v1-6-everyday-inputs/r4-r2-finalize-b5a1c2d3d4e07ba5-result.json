@@ -1,0 +1,76 @@
+{
+  "all_steps_completed": false,
+  "campaign_started_at_utc": "2026-10-07T10:41:44.671597+00:00",
+  "deadline_utc": "2026-10-07T11:01:44.329833+00:00",
+  "installation_approval": false,
+  "lane": "r4-r2-finalize-b5a1c2d3d4e07ba5",
+  "manifest_sha256": "6165e1d3f8e7f12de4467a8e0e829a08c225c6a96de2bf7e489ad0ebf1c88886",
+  "original_start_size": 749722100,
+  "peak_sampled_incremental_bytes": 49696,
+  "publication_accounting": {
+    "atomic_temporaries_and_final_outputs_included": true,
+    "disk_free_before_publication": 28384956416,
+    "encoded_total_limit_bytes": 16777216,
+    "included_increment_upper_bound": 67158560,
+    "memory_available_before_publication": 35843608576,
+    "original_start_size": 749722100,
+    "peak_including_publication_upper_bound": 67158560,
+    "reserved_disk_lower_bound": 28317847552,
+    "reserved_publication_bytes_inside_limits": 67108864,
+    "sampled_increment_before_publication": 49696,
+    "size_before_publication": 749771796
+  },
+  "schema": "v1-6-cumulative-worktree-runner-r4-r2",
+  "status": "failed",
+  "steps": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-c",
+        "pass"
+      ],
+      "campaign_started_at_utc": "2026-10-07T10:41:44.671597+00:00",
+      "cleanup": null,
+      "deadline_utc": "2026-10-07T11:01:44.329833+00:00",
+      "exit_code": 0,
+      "failure": null,
+      "finished_at_utc": "2026-10-07T10:41:50.649326+00:00",
+      "guard": "catchable-signal-finalization",
+      "incremental_bytes_from_original_baseline": 37598,
+      "index": 0,
+      "log_bytes": 0,
+      "log_path": "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/r4-r2-finalize-b5a1c2d3d4e07ba5-0.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_text": "",
+      "manifest_sha256": "6165e1d3f8e7f12de4467a8e0e829a08c225c6a96de2bf7e489ad0ebf1c88886",
+      "name": "tiny-child-before-late-signal",
+      "original_start_size": 749722100,
+      "peak_group_RSS_bytes": 9633792,
+      "post_checks": {
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/run_worktree_lane_wsl_r9.py": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/signal-actual-r9-finalization-reviewed-1/inject_late_signal.py": true
+      },
+      "pre_checks": {
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/run_worktree_lane_wsl_r9.py": true,
+        "/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6/probe/signal-actual-r9-finalization-reviewed-1/inject_late_signal.py": true
+      },
+      "publication_accounting": {
+        "atomic_temporaries_and_final_outputs_included": true,
+        "disk_free_before_publication": 28384956416,
+        "encoded_total_limit_bytes": 16777216,
+        "included_increment_upper_bound": 67158560,
+        "memory_available_before_publication": 35843608576,
+        "original_start_size": 749722100,
+        "peak_including_publication_upper_bound": 67158560,
+        "reserved_disk_lower_bound": 28317847552,
+        "reserved_publication_bytes_inside_limits": 67108864,
+        "sampled_increment_before_publication": 49696,
+        "size_before_publication": 749771796
+      },
+      "received_signal": 2,
+      "signal_commit_policy": "Signals before the final empty pending-signal snapshot fail this step. That snapshot follows fsynced outcome publication, manifest recheck and final accounting. State acknowledgement then uses reserved bytes. Signals after this completed-outcome boundary stay deferred until exit; they do not retroactively invalidate a completed command. No child remains.",
+      "started_at_utc": "2026-10-07T10:41:46.076174+00:00",
+      "status": "failed"
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "schema": "v1-6-history-source-preparation-r2",
+  "valid_until": "Any bound source, archive, receipt, helper or admitted method changes; then review and qualify again. Native/pytest/reference execution requires separate admission.",
+  "checked_at_utc": "2026-10-07T03:11:51.748012+00:00",
+  "admission": "docs/reviews/v1-6-everyday-inputs/source6-reference-history-preparation-admission-r2.json",
+  "baseline_commit": "6a2332795dc5fa2db3eb61e196ab7ab820e76caa",
+  "worker": "/root/v16_historical_contexts",
+  "scope": "Source-only implementation and byte/AST comparison. No application import, Go invocation, tests, pytest collection, capture, current fixture/corpus edit, production loader/authority change or commit performed.",
+  "owned_source_sha256": {
+    "tests/content_history.py": "80fd1dc7920f3fda5dccf87f67122039e62ac919baa5492fe4aaf24181b02ca0",
+    "tests/test_v1_4_content_history.py": "cb7f1114ec7ececbe59c0d25e0bb315c80ed5ab41c60398d1810c7afb7bd8810",
+    "tests/test_v1_5_world_history.py": "c471f5fad6a4aa186e33c6047086d4257c1efa804936a7d4d3f35ad7875b2f6b",
+    "tests/test_v1_6_content_history.py": "d481ecb5e7e040092a659ac1fdea6fb2a7c71bd0233bdaeaf50585971db39764",
+    "go-backend/internal/contentbuild/source6_build_test.go": "9b53599fbfb730e57ed2725d471b98d5b894f4b06a95c508c452f3551e23f820"
+  },
+  "receipt": {
+    "path": "docs/reviews/v1-6-everyday-inputs/reference/history-delta-r2.json",
+    "sha256": "ae25a9e99cb64bf766b1d88513d68990bc7266b755fbfe9480f2c10dd7dd2acb",
+    "files": 8,
+    "bound_provenance_documents": 41
+  },
+  "complete_json_comparison": {
+    "path": "docs/reviews/v1-6-everyday-inputs/reference/history-comparison-r2.json",
+    "sha256": "f4c1f69f5cc91c9a79b0d3483930d859894476593519027eb8f0f21d89035ac2",
+    "changed_field_entries": {
+      "kg_sample.json": 4,
+      "games_pack.json": 0,
+      "board_rankings_v37.json": 1,
+      "derived_catalog_v38.json": 2,
+      "cat_mobile_app_pack_contract.json": 1,
+      "quick_games_v92.json": 8,
+      "alchimie_discovery_world_v92.json": 12,
+      "alchimie_recipe_extensions_v92.json": 6
+    },
+    "whole_raw_bytes_equal_original_encoding": true
+  },
+  "archives": {
+    "history-source5-kg_sample.json.gz": {
+      "sha256": "9a14d939b3b1e26a1f8289a22082f353515af6b537dfd9cf73ecdbd2f5ea895b",
+      "bytes": 432963,
+      "original_path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "raw_sha256": "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6",
+      "git_bytes_exact": true
+    },
+    "history-source5-games_pack.json.gz": {
+      "sha256": "d9992c5d59b32eaee1172f547376341e847b983ab453c351176816abc1ad767d",
+      "bytes": 61927,
+      "original_path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "raw_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "git_bytes_exact": true
+    },
+    "history-source5-board_rankings_v37.json.gz": {
+      "sha256": "458dabfc9a9aaa64570e6a1d2deb9c6e92ec650d2589942c6a7166b8c5dde7b3",
+      "bytes": 9725,
+      "original_path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+      "raw_sha256": "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef",
+      "git_bytes_exact": true
+    },
+    "history-source5-derived_catalog_v38.json.gz": {
+      "sha256": "36e7b60defeb48ad22fd78ed206264a527d756da945e16470cbdb6cf99c23602",
+      "bytes": 26549,
+      "original_path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      "raw_sha256": "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01",
+      "git_bytes_exact": true
+    },
+    "history-source5-cat_mobile_app_pack_contract.json.gz": {
+      "sha256": "7f9f530c1c9e2f8111fde0177bf3f41bdca6e73288ca998dd389cad813ac39b3",
+      "bytes": 144310,
+      "original_path": "tests/fixtures/cat_mobile_app_pack_contract.json",
+      "raw_sha256": "2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8",
+      "git_bytes_exact": true
+    },
+    "history-source5-quick_games_v92.json.gz": {
+      "sha256": "7248dcc3ffab2895b811e95710d917f8ff240269ba7ceab6d403ba3410d953ba",
+      "bytes": 53658,
+      "original_path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+      "raw_sha256": "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609",
+      "git_bytes_exact": true
+    },
+    "history-source5-alchimie_discovery_world_v92.json.gz": {
+      "sha256": "c74170d8b3581740027d5133ab0066c55f201b49520c345dfafd5008ae18bdc9",
+      "bytes": 82292,
+      "original_path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "raw_sha256": "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086",
+      "git_bytes_exact": true
+    },
+    "history-source5-alchimie_recipe_extensions_v92.json.gz": {
+      "sha256": "b82d2ef88d01d8d2e59994446c7aafc815a4d984088eff398aa4d92ed6b0305d",
+      "bytes": 49819,
+      "original_path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+      "raw_sha256": "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7",
+      "git_bytes_exact": true
+    }
+  },
+  "inverse_contract": [
+    "Independent literal before/after hashes cover KG/ranking/derived/mobile/three catalogues and unchanged pack. Every operation requires exact complete bytes before mutation and exact archived complete bytes afterwards; all inverses deep-copy and preserve order.",
+    "Graph inverse removes only drapel from n_v4ist_steag and untdelemn from n_v24_food_pantry_ulei, reverses two metadata fields and source-bound rank/derived/mobile headers. All node rows, edges, puzzles, board rows and pack must otherwise equal immutable Source5.",
+    "Catalogue inverse first requires exact native proposal bytes and candidate binding. Only explicit review/source metadata fields are restored from genuine baseline; Quick/World additionally remove only Ulei snapshot untdelemn. Full baseline object/encoding equality protects all recipes/goals/history/books and unchanged fields.",
+    "V1.6 inversion precedes the existing V1.5 and V1.4 chains. Old pins/assertions/receipts remain. V1.5 current() reads actual archived Source5 World; V1.4 current() peels only V1.6 before its old AFTER assertions.",
+    "Historical Source4 World uses archived Source4/5 KG in a bounded temporary context. Both service and world caches clear before/after, and monkeypatch restores KG environment and world path even on body failure. Real current Source6 loaders receive separate regression coverage.",
+    "Historical archives are read with 2 MiB compressed/16 MiB expanded limits and fixed compressed/raw hashes. The cache contains at most eight immutable byte strings. No serving fixture is rewritten."
+  ],
+  "old_source_preservation": {
+    "tests/content_history.py": {
+      "baseline_sha256": "875b7ac6ac863c1a480862256e0ebfbe3577ac131bd339f11a832db57dbc48e5",
+      "new_sha256": "80fd1dc7920f3fda5dccf87f67122039e62ac919baa5492fe4aaf24181b02ca0",
+      "original_assertions": 448,
+      "all_original_assertion_ASTs_preserved": true,
+      "all_original_64_hex_literal_occurrences_preserved": true,
+      "original_test_functions": 0,
+      "test_names_and_parametrizations_unchanged": true
+    },
+    "tests/test_v1_4_content_history.py": {
+      "baseline_sha256": "a7ede49356f509c8c217be6bf0da71c4c3b129fdbcac5387f5bb8943175ff406",
+      "new_sha256": "cb7f1114ec7ececbe59c0d25e0bb315c80ed5ab41c60398d1810c7afb7bd8810",
+      "original_assertions": 33,
+      "all_original_assertion_ASTs_preserved": true,
+      "all_original_64_hex_literal_occurrences_preserved": true,
+      "original_test_functions": 11,
+      "test_names_and_parametrizations_unchanged": true
+    },
+    "tests/test_v1_5_world_history.py": {
+      "baseline_sha256": "ac3272dd65145d791eeb6f7549b11f87f1321074ad36720f080d5236be8d9646",
+      "new_sha256": "c471f5fad6a4aa186e33c6047086d4257c1efa804936a7d4d3f35ad7875b2f6b",
+      "original_assertions": 19,
+      "all_original_assertion_ASTs_preserved": true,
+      "all_original_64_hex_literal_occurrences_preserved": true,
+      "original_test_functions": 5,
+      "test_names_and_parametrizations_unchanged": true
+    }
+  },
+  "new_regression_source": {
+    "python_file": "tests/test_v1_6_content_history.py",
+    "statically_enumerated_cases": 64,
+    "collected_or_run": false,
+    "coverage": [
+      "eight complete-byte restores/nonmutation/idempotence",
+      "32 header/record/order/duplicate refusals",
+      "exact two aliases/8679 forms/no other graph change",
+      "four unreviewed alias mutations",
+      "three repinned catalogue forgeries",
+      "12 forged/repinned receipt refusals",
+      "mixed KG binding and altered previous history",
+      "V1.5/V1.4 world chain",
+      "normal and failing historical loader restoration"
+    ],
+    "go_file": "go-backend/internal/contentbuild/source6_build_test.go",
+    "go_test": "TestRebuildSource6TwoAliasReviewedBundleAndPin",
+    "go_coverage": "Real current Build, exact 7272424-byte e0cfe93d bundle, c0bededc digest, all eight literal source hashes, two exact appended aliases/normalized ownership, old node rows/edges/boards and 252/352/10 world mechanics/history preserved."
+  },
+  "original_reference_coverage": {
+    "original17modules_cases": 394,
+    "original19modules_cases": 425,
+    "modules": [
+      "tests/test_v1_4_content_history.py",
+      "tests/test_v1_3_content_history.py",
+      "tests/test_v1_2_content_history.py",
+      "tests/test_v1_content_history.py",
+      "tests/test_v93_content_history.py",
+      "tests/test_v94_content_history.py",
+      "tests/test_v95_content_history.py",
+      "tests/test_v96_content_history.py",
+      "tests/test_v97_content_history.py",
+      "tests/test_quick_catalog_v92.py",
+      "tests/test_v54_people_morphology.py",
+      "tests/test_v72_romanian_dishes_and_pastries_morphology.py",
+      "tests/test_v47_contexto_pending_gate.py",
+      "tests/test_v80_clatite_target.py",
+      "tests/test_v33_basic_words.py",
+      "tests/test_v1_recipe_refresh.py",
+      "tests/test_v50_synonyms_basic_words.py",
+      "tests/test_v1_5_world_history.py",
+      "tests/test_v97_world_quality.py"
+    ],
+    "status": "Prior counts retained; no collection or execution in this lane. New 64 cases are additive, so expected combined count is 489 subject to actual collection."
+  },
+  "required_next_commands": [
+    "gofmt -w go-backend/internal/contentbuild/source6_build_test.go",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m ruff check tests/content_history.py tests/test_v1_4_content_history.py tests/test_v1_5_world_history.py tests/test_v1_6_content_history.py",
+    "go -C go-backend test -race -count=1 -run '^(TestRebuildCurrentReviewedBundleAndPin|TestRebuildSource5WorldOnlyReviewedBundleAndPin|TestHistoricalSource45ReviewedPinsRestore|TestRebuildSource6TwoAliasReviewedBundleAndPin)$' ./internal/contentbuild",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q tests/test_v1_6_content_history.py tests/test_v1_5_world_history.py tests/test_v1_4_content_history.py -o addopts= -o cache_dir=/home/dobo/work/_temp/codex__content-v1-6/pytest-cache-v16-history",
+    "Run all original 19 modules plus new test_v1_6_content_history.py without skip/deselection; confirm 425 preserved and 64 additive cases, then full required gates under new resource admission."
+  ],
+  "remaining_limits": [
+    "Go source is not formatted or compiled here; independent review and targeted race checks remain pending.",
+    "Python AST/line-length and immutable archive/comparison checks are source checks only. Ruff, collection, new tests and all original historical tests remain unexecuted in this lane.",
+    "No current authority, new HTTP corpus, release qualification, landing, push or deployment is claimed."
+  ],
+  "status": "Source preparation complete for independent method/history review and separately admitted executable verification."
+}

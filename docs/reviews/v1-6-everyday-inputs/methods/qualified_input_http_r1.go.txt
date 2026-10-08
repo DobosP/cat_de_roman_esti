@@ -1,0 +1,182 @@
+package httpapi
+
+// Release-specific Source6 qualification, prepared but not executed. The embedded
+// content.Load result must equal the exact on-disk sealed export and all eight
+// actual fixture digests. Ordinary public handlers create and mutate every session;
+// no research alias/index overlay, metadata rewrite, or private session injection.
+import (
+ "bytes"
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "net/http/httptest"
+ "os"
+ "path/filepath"
+ "reflect"
+ "strings"
+ "testing"
+
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+)
+
+func TestV16QualifiedOrdinaryInputHTTP(t *testing.T) {
+ t.Setenv("CAT_ALLOWED_HOSTS", "testserver,example.com")
+ taskRoot := os.Getenv("V16_QUALIFIED_ROOT")
+ if taskRoot != "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-6" { t.Fatal("exact current task root required") }
+ expectedSources := map[string]string{
+  "alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+  "alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
+  "board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+  "derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+  "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+  "kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+  "quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+  "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+ }
+ bindings := map[string]string{
+  "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+  "go-backend/internal/content/digest.go": "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d",
+ }
+ for name,digest := range expectedSources { bindings["cat_de_roman_esti/fixtures/"+name] = digest }
+ verifyBindings := func() bool {
+  t.Helper()
+  valid := true
+  for name,expected := range bindings {
+   raw,e := os.ReadFile(filepath.Join(taskRoot,name))
+   if e != nil { t.Errorf("read binding %s: %v",name,e);valid=false;continue }
+   if fmt.Sprintf("%x",sha256.Sum256(raw)) != expected { t.Errorf("binding drift: %s",name);valid=false }
+  }
+  return valid
+ }
+ if !verifyBindings() { t.Fatal("source/export bindings invalid before qualification") }
+ c, err := content.Load()
+ if err != nil { t.Fatal(err) }
+ if !reflect.DeepEqual(c.Sources,expectedSources) { t.Fatal("embedded exact eight-source identity mismatch") }
+ rawBundle,err := os.ReadFile(filepath.Join(taskRoot,"go-backend/internal/content/bundled.json"))
+ if err != nil || len(rawBundle) != 7272424 { t.Fatalf("sealed bundle read/size: %v %d",err,len(rawBundle)) }
+ diskContent,err := content.Decode(rawBundle)
+ if err != nil || !reflect.DeepEqual(c,diskContent) { t.Fatalf("embedded content differs from actual sealed bundle: %v",err) }
+ type row struct { Curated, Target, Novel, Canonical, Owner string; Rank int; Extras []string }
+ cases := []row{
+  {"ct_istorie_368", "n_alba_iulia", "drapel", "Steag", "n_v4ist_steag", 5, []string{"Marea Unire 1918", "Revoluția din 1989"}},
+  {"ct_gastronomie_347", "n_v87_food_chec", "untdelemn", "Ulei", "n_v24_food_pantry_ulei", 2, []string{"Zahăr", "Făină"}},
+ }
+ report := map[string]any{"schema":"v1-6-qualified-ordinary-http-r1", "scope":"Actual content.Load sealed Source6 export; in-process ordinary public HTTP handlers. This run does not confer current authority, full release, TCP/browser or human evidence", "bundle_sha256":"e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877", "source8":expectedSources, "default_selector":map[string]any{"difficulty":"usor","category":"","daily":false,"exclusions":false}, "picker_search_rerun":false, "max_sessions":4, "max_requests":80, "planned_requests":56, "installed_content_mutation":false, "research_overlay_used":false, "complete":false}
+ transcript := []map[string]any{}
+ observations := []map[string]any{}
+ seeds := map[string]int64{"ct_istorie_368":36,"ct_gastronomie_347":3}
+ t.Cleanup(func() {
+  report["post_bindings_unchanged"] = verifyBindings()
+  report["test_failed"] = t.Failed(); report["transcript"] = transcript; report["observations"] = observations; report["seeds"] = seeds
+  b,e := json.MarshalIndent(report,"","  "); if e != nil { t.Error(e); return }
+  path := os.Getenv("V16_QUALIFIED_HTTP_REPORT"); if path == "" { t.Error("missing report path"); return }
+  if len(b)+1 > 256*1024 { t.Error("report exceeds256KiB"); return }
+  if e=os.WriteFile(path,append(b,'\n'),0600);e!=nil { t.Error(e) }
+ })
+ number := func(v any) int { f,ok:=v.(float64);if !ok {t.Fatalf("not a JSON number: %T %v",v,v)};return int(f) }
+ for _,r := range cases {
+  s:=New(c)
+  var canonicalFeedback map[string]any
+  for _,arm:=range []string{"alias_first","canonical_first"} {
+   obs:=map[string]any{"curated_id":r.Curated,"target_id":r.Target,"seed":seeds[r.Curated],"arm":arm,"novel":r.Novel,"canonical":r.Canonical}
+   observations=append(observations,obs)
+   request:=func(label,method,path string,body any,privacy bool) (int,map[string]any) {
+    t.Helper()
+    if len(transcript)>=80 {t.Fatal("request cap reached")}
+    var data []byte
+    if body!=nil {data,_=json.Marshal(body)}
+    req:=httptest.NewRequest(method,"http://testserver"+path,bytes.NewReader(data));req.Header.Set("Content-Type","application/json")
+    rec:=httptest.NewRecorder();s.ServeHTTP(rec,req)
+    response:=map[string]any{}
+    if err:=json.Unmarshal(rec.Body.Bytes(),&response);err!=nil {t.Fatalf("non-JSON response %d: %s",rec.Code,rec.Body.String())}
+    transcript=append(transcript,map[string]any{"case":r.Curated,"arm":arm,"label":label,"method":method,"path":path,"request":body,"status":rec.Code,"response":response})
+    if privacy {
+     for _,key:=range []string{"target","score","share","curated_id","curatedId"} {if _,ok:=response[key];ok {t.Fatalf("private field %s exposed at %s",key,label)}}
+     raw:=rec.Body.String()
+     for _,secret:=range []string{r.Target,c.Labels[r.Target],r.Curated} {if strings.Contains(raw,secret) {t.Fatalf("target/curated identity exposed at %s",label)}}
+    }
+    return rec.Code,response
+   }
+   getState:=func(label,base string,expected map[string]any) {
+    status,got:=request(label,"GET",base,nil,true)
+    if status!=200 {t.Fatalf("GET %s status %d",label,status)}
+    for _,key:=range []string{"attempts","guesses","clues_used","won"} {
+     old,present:=expected[key];current,found:=got[key]
+     if !present || !found || !reflect.DeepEqual(old,current) {t.Fatalf("GET %s field %s drift: %v vs %v",label,key,old,current)}
+    }
+   }
+   status,initial:=request("create","POST",fmt.Sprintf("/api/wordgames/contexto/games?seed=%d&difficulty=usor",seeds[r.Curated]),nil,true)
+   if status!=200 || initial["won"]!=false || number(initial["attempts"])!=0 {t.Fatalf("create: %d %v",status,initial)}
+   id,ok:=initial["game_id"].(string);if !ok {t.Fatal("missing session")};base:="/api/wordgames/contexto/games/"+id
+   curated,finished,won,score,found:=s.contexto.Progress(id)
+   if !found || curated!=r.Curated || finished || won || score!=-1 {t.Fatalf("ordinary selection mismatch: %s %v %v %d",curated,finished,won,score)}
+   getState("initial_get",base,initial)
+   status,_=request("unearned_clue","POST",base+"/clue",nil,true);if status!=400 {t.Fatalf("unearned clue status %d",status)}
+   firstText,alternate:=r.Novel,r.Canonical
+   if arm=="canonical_first" {firstText,alternate=r.Canonical,r.Novel}
+   assertGuess:=func(label string,status int,body map[string]any) map[string]any {
+    if status!=200 || body["ok"]!=true || body["won"]!=false || body["needs_confirmation"]==true || number(body["attempts"])!=1 {t.Fatalf("%s did not share one direct canonical attempt: %d %v",label,status,body)}
+    guess,ok:=body["guess"].(map[string]any)
+    if !ok || guess["id"]!=r.Owner || number(guess["distance"])!=1 || number(guess["rank"])!=r.Rank || number(guess["closeness"])!=99 {t.Fatalf("%s canonical warmth/owner drift: %v",label,guess)}
+    return guess
+   }
+   status,first:=request("first_form","POST",base+"/guess",map[string]any{"text":firstText},true)
+   guess:=assertGuess("first_form",status,first)
+   status,repeat:=request("first_repeat","POST",base+"/guess",map[string]any{"text":firstText},true)
+   assertGuess("first_repeat",status,repeat)
+   status,alternateReply:=request("alternate_form","POST",base+"/guess",map[string]any{"text":alternate},true)
+   assertGuess("alternate_form",status,alternateReply)
+   status,repeated:=request("alternate_repeat","POST",base+"/guess",map[string]any{"text":alternate},true)
+   assertGuess("alternate_repeat",status,repeated)
+   for _,reply:=range []map[string]any{first,repeat,alternateReply,repeated} {
+    guesses,ok:=reply["guesses"].([]any);if !ok || len(guesses)!=1 {t.Fatal("spellings created separate guess slots")}
+   }
+   obs["first_spelling"]=firstText;obs["alternate_spelling"]=alternate
+   obs["first_response"]=first;obs["alternate_response"]=alternateReply
+   feedback:=map[string]any{}
+   for _,key:=range []string{"id","label","distance","rank","temperature","closeness"} {feedback[key]=guess[key]}
+   obs["canonical_feedback"]=feedback
+   if canonicalFeedback==nil {canonicalFeedback=feedback} else if !reflect.DeepEqual(canonicalFeedback,feedback) {t.Fatal("canonical feedback changed across input orders")}
+   getState("after_forms_get",base,repeated)
+   last:=repeated
+   for _,extra:=range r.Extras {
+    if number(last["attempts"])>=3 {break}
+    status,last=request("earned_extra","POST",base+"/guess",map[string]any{"text":extra},true)
+    if status!=200 || last["ok"]!=true || last["won"]!=false {t.Fatalf("bounded extra failed: %s %v",extra,last)}
+   }
+   if number(last["attempts"])!=3 {t.Fatal("expected exactly three successful nonwinning guesses after two extras")}
+   uniqueGuesses,ok:=last["guesses"].([]any)
+   if !ok || len(uniqueGuesses)!=3 { t.Fatal("three nonwinning attempts must occupy exactly three guess slots") }
+   seenGuesses:=map[string]bool{}
+   seenAttempts:=map[int]bool{}
+   for _,value:=range uniqueGuesses {
+    item,ok:=value.(map[string]any);if !ok {t.Fatal("invalid guess record")}
+    owner,ok:=item["id"].(string);if !ok || owner=="" || owner==r.Target || seenGuesses[owner] {t.Fatal("extras did not give three unique nonwinning guesses")}
+    attempt:=number(item["attempt_number"]);if attempt<1 || attempt>3 || seenAttempts[attempt] {t.Fatal("nonwinning attempt sequence drift")}
+    seenGuesses[owner]=true;seenAttempts[attempt]=true
+   }
+   if !seenGuesses[r.Owner] {t.Fatal("reviewed canonical owner disappeared before clue")}
+   status,clue:=request("earned_clue","POST",base+"/clue",nil,true)
+   if status!=200 || clue["clue_kind"]!="category" || number(clue["clues_used"])!=1 {t.Fatalf("earned clue %d %v",status,clue)}
+   getState("after_clue_get",base,clue)
+   status,terminal:=request("solve","POST",base+"/guess",map[string]any{"text":c.Labels[r.Target]},false)
+   if status!=200 || terminal["won"]!=true {t.Fatalf("solve failed %d %v",status,terminal)}
+   if number(terminal["attempts"])!=4 || number(terminal["clues_used"])!=1 || number(terminal["score"])!=700 {t.Fatalf("exact terminal counts/score drift: %v",terminal)}
+   expectedScore:=max(50,1000-60*(number(terminal["attempts"])-1)-120*number(terminal["clues_used"]))
+   if number(terminal["score"])!=expectedScore || terminal["share"]==nil {t.Fatal("terminal scoring/share mismatch")}
+   if terminal["share"] != "cat_de_roman_esti · Cald sau Rece\n🟩🟩🟩🎯\n4 încercări\nindiciu x1" {t.Fatal("exact reviewed four-attempt share changed")}
+   target,ok:=terminal["target"].(map[string]any)
+   if !ok || target["id"]!=r.Target || target["label"]!=c.Labels[r.Target] {t.Fatal("terminal target identity drift")}
+   status,recovered:=request("terminal_get","GET",base,nil,false)
+   if status!=200 || !reflect.DeepEqual(recovered["target"],terminal["target"]) || recovered["score"]!=terminal["score"] || recovered["share"]!=terminal["share"] {t.Fatal("terminal recovery mismatch")}
+   for _,key:=range []string{"attempts","guesses","clues_used","won"} {if !reflect.DeepEqual(recovered[key],terminal[key]) {t.Fatalf("terminal GET %s drift",key)}}
+   cid,done,won,finalScore,exists:=s.contexto.Progress(id)
+   if !exists || cid!=r.Curated || !done || !won || finalScore!=expectedScore {t.Fatal("terminal progress mismatch")}
+   obs["final_attempts"]=terminal["attempts"];obs["final_score"]=expectedScore
+  }
+ }
+ if len(transcript)!=56 {t.Fatalf("finite protocol request count: %d",len(transcript))}
+ report["request_count"]=len(transcript)
+ report["complete"]=true
+ t.Logf("sealed-bundle qualification complete: fixed seeds=%v sessions=4 requests=%d",seeds,len(transcript))
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:26:52Z",
+  "scope": "SOURCE_ONLY",
+  "verdict": "REQUEST_CHANGES_SOURCE_ONLY",
+  "append_only": true,
+  "bindings": {
+    "methods/run_worktree_lane_wsl_r8.py.txt": "977f90489c60056fe6579e94c695bbbb01425fad1dde4748089ce5ff7fb9820e",
+    "methods/check_runner_signal_wsl_actual_r8.py.txt": "97c340c3a230421c7ce33cef4495e288e096d8aeda8a0f92eded4fe3181e9b1b",
+    "methods/check_scan_parity_wsl_windows_r3.py.txt": "03f491a897e6f75c97b81b2b5b91478d1cd94066920efc7a2d727b7e42dda6d3",
+    "methods/windows_size_helper_wsl_r4.py.txt": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7"
+  },
+  "component_verdicts": {
+    "runner_r8": "REQUEST_CHANGES_SOURCE_ONLY",
+    "actual_root_lifecycle_fixture_r8": "ACCEPT_SOURCE_ONLY_CALLER_EXECUTION_BLOCKED",
+    "windows_scanner_parity_fixture_r3": "ACCEPT_SOURCE_ONLY_CALLER_EXECUTION_BLOCKED"
+  },
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "findings": [
+    {
+      "id": "R8-F1",
+      "priority": "P1",
+      "file": "methods/run_worktree_lane_wsl_r8.py.txt",
+      "start_line": 239,
+      "end_line": 241,
+      "title": "Inaccessible historical R3 registry can be treated as absent",
+      "detail": "The never-invoked registry guard uses Path.exists(). On the actual Python3.14 host, exists() suppresses every operating-system OSError and returns false for inaccessible/invalid paths as well as missing paths. A PermissionError while inspecting an R3 registry therefore skips its enumeration, allowing new R4 work despite inability to establish that no unreviewed R3 work exists. This violates the guard's required failure behavior.",
+      "requested_change": "Preserve R8 and prepare a new caller revision using fresh lstat/stat with only FileNotFoundError treated as absence, require an actual directory rather than a symlink/non-directory, and propagate every other lookup/enumeration IO error. Add controlled missing/empty/nonempty/non-directory/symlink and denied-stat/enumeration cases to the pure guard fixture."
+    }
+  ],
+  "reference": {
+    "url": "https://docs.python.org/3.14/library/pathlib.html#querying-file-type-and-status",
+    "supports": "Python3.14 file-status predicates suppress all OSError; stat/lstat distinguish missing paths from access and other IO failures."
+  },
+  "accepted_source_properties": [
+    "New helper R4 path/hash/registry bindings match the independently accepted helper and the original exact R2 retirement pins remain unchanged.",
+    "Hard-quota validation requires exact integer1MiB/64MiB bounds, nonnegative integer flags with hard-max4 and no max-disable8, all four role identities/scopes/true admission proofs, Job/exact Job membership, suspended launcher proof and all completion/pre-traversal readbacks.",
+    "Caller requires exact configured Job flags8968, unchanged64MiB process/job committed-memory bounds and active2, confirmed Job close, existing actual identity/exit/job-empty/source/time/output checks before accepting total or deferred paths.",
+    "Original roots, fresh Linux following-stat/error semantics, prefix/publication/signal/state logic and fixed native campaign limits/deadline/baseline are unchanged.",
+    "Actual-root lifecycle fixture changes only the two R8 runner filename references; SDK tools/full accounting roots and24s work/30s total acceptance remain.",
+    "Scanner parity fixture changes only candidate source/schema and R4 registry references; controlled20-to35 fresh counts, signal/deferred PermissionError checks, six static actual-root exact comparisons, dynamic probe <=64KiB observation and60s total remain."
+  ],
+  "execution_preconditions": [
+    "Do not execute R8 caller-based fixtures for qualification until a new exact source repair is independently accepted.",
+    "Run source-accepted pure hard-quota negative and historical-registry guard cases against the repaired caller.",
+    "Accepted Windows helper fixture execution is independent of this rejected caller; it grants no caller/native pass.",
+    "Preserve the rejected R8 and all original history/failure receipts. Fresh whole-root parity/lifecycle/resource admission remain required with no clock/cap reset."
+  ]
+}

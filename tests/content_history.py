@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import gzip
 import hashlib
+import io
 import json
 from collections import Counter
 from contextlib import contextmanager
 from copy import deepcopy
+from functools import lru_cache
 from pathlib import Path
 
 _V1_RECEIPT = Path(__file__).resolve().parents[1] / (
@@ -846,6 +849,403 @@ def before_v96_artifact(current: dict, filename: str) -> dict:
 
 
 
+# V1.6 is a finite two-form change over immutable git 6a233279. These pins
+# are actual installed native outputs, independently separate from the receipt.
+_V1_6_ROOT = Path(__file__).resolve().parents[1]
+_V1_6_RECEIPT = _V1_6_ROOT / "docs/reviews/v1-6-everyday-inputs/reference/history-delta-r2.json"
+_V1_6_RECEIPT_SHA256 = "ae25a9e99cb64bf766b1d88513d68990bc7266b755fbfe9480f2c10dd7dd2acb"
+_V1_6_BASELINE = {
+    "kg_sample.json": (
+        "0cd40cc968d61ed197a0d41b8f5ccf54ad9216c967d044fbd74243fcb5c1e2d6"
+    ),
+    "games_pack.json": (
+        "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+    ),
+    "board_rankings_v37.json": (
+        "58fa3d6b02b983cdfed05c9383057acfaccbd200612d3eb97e8279318b1f55ef"
+    ),
+    "derived_catalog_v38.json": (
+        "25059439b5c46a04263c229a8a3b9b4fc285240af60e15b7f1fdffa1a98f0c01"
+    ),
+    "cat_mobile_app_pack_contract.json": (
+        "2f756c7d71f65a1367648d477c67d6d1af0bd19411149667b77f3cf77a6153b8"
+    ),
+    "quick_games_v92.json": (
+        "a21b3c6e50be6947ea8b9ac181f337566db9e4809dd5165a203338fff20d8609"
+    ),
+    "alchimie_discovery_world_v92.json": (
+        "196e0b72310e6ec7b9b18254b4b95a307d9ae7a9ecb97f3670b66f24ff071086"
+    ),
+    "alchimie_recipe_extensions_v92.json": (
+        "1dd346c1786ea39d241f534e6a411c1297160771d3fbfa7f89a47fd22f586fb7"
+    ),
+}
+_V1_6_AFTER = {
+    "kg_sample.json": (
+        "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+    ),
+    "games_pack.json": (
+        "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+    ),
+    "board_rankings_v37.json": (
+        "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31"
+    ),
+    "derived_catalog_v38.json": (
+        "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+    ),
+    "cat_mobile_app_pack_contract.json": (
+        "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae"
+    ),
+    "quick_games_v92.json": (
+        "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345"
+    ),
+    "alchimie_discovery_world_v92.json": (
+        "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad"
+    ),
+    "alchimie_recipe_extensions_v92.json": (
+        "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc"
+    ),
+}
+_V1_6_ARCHIVES = {
+    "kg_sample.json": (
+        "9a14d939b3b1e26a1f8289a22082f353515af6b537dfd9cf73ecdbd2f5ea895b"
+    ),
+    "games_pack.json": (
+        "d9992c5d59b32eaee1172f547376341e847b983ab453c351176816abc1ad767d"
+    ),
+    "board_rankings_v37.json": (
+        "458dabfc9a9aaa64570e6a1d2deb9c6e92ec650d2589942c6a7166b8c5dde7b3"
+    ),
+    "derived_catalog_v38.json": (
+        "36e7b60defeb48ad22fd78ed206264a527d756da945e16470cbdb6cf99c23602"
+    ),
+    "cat_mobile_app_pack_contract.json": (
+        "7f9f530c1c9e2f8111fde0177bf3f41bdca6e73288ca998dd389cad813ac39b3"
+    ),
+    "quick_games_v92.json": (
+        "7248dcc3ffab2895b811e95710d917f8ff240269ba7ceab6d403ba3410d953ba"
+    ),
+    "alchimie_discovery_world_v92.json": (
+        "c74170d8b3581740027d5133ab0066c55f201b49520c345dfafd5008ae18bdc9"
+    ),
+    "alchimie_recipe_extensions_v92.json": (
+        "b82d2ef88d01d8d2e59994446c7aafc815a4d984088eff398aa4d92ed6b0305d"
+    ),
+}
+_V1_6_DOCUMENTS = {
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/actual-worktree-audit-r1.json": (
+        "6d6010f25e300129dada414fe881d35c12592f536deae3ecca55c12b5c075428"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/candidate.json": (
+        "09cb6222c91015c499173f58f95d6040c7495846fca998d594778342b14ce458"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/factual-review.json": (
+        "c91f60f37d8a16f07bc1adc42f326d2d60c53514c548b7a17ed698798226ef75"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/final-factual-evidence-r1.json": (
+        "3163ab65ab9b2e42e8ff5d07b4c894572b0e740fd6e1a7b0af8235daab96b3ee"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/final-factual-review-r1.json": (
+        "0bcb01a91cb8db1beb5d17a54028c39c2a0a7d975e42d690414368c0b9f6b3d5"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/final-quality-evidence-r1.json": (
+        "a95f997a968115fd256354cc52493edecc4fc73a1ef8373e0903afd43dacb353"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/final-quality-review-r1.json": (
+        "b7bef9a901e33abb765569bea09110b0f2151e918cabdf1058481279a67d8dd4"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/proposal.json": (
+        "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/extensions/quality-review.json": (
+        "8be16d03ced69a4b79c29d1a9bf46096ce0bdf1d2e201ffb76670e809286cc01"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/actual-worktree-audit-r1.json": (
+        "2f8ddd81961c6c146dec89589ab88b4b8bcfe6c3c6a7c16a39f36ef7c7d867eb"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/candidate.json": (
+        "1950ad42444168c5fb3c1350dc53edde74198e3d9fc16db831fda2ebf17a3c6a"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/factual-review.json": (
+        "339d07c57f2318b83af5aae078a284a374f41ce95e2bba24bdc86eb67991a0d3"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/final-factual-evidence-r1.json": (
+        "a44685032c9bc2d644586bc6d3eb272dcdbd06c2be50051b859ed8a38692ce5a"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/final-factual-review-r1.json": (
+        "7644654e3c31d6c0c0d8505a149a22017d60f1518db27bb56a61e836a767467e"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/final-quality-evidence-r1.json": (
+        "05e5eaf754845f9d54242bada50c8679ffdadbbf89c986757b5d7f08dc79758f"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/final-quality-review-r1.json": (
+        "a30b4600ea9fd5fcef53e4551cf09c1e11af1fb07fc85a64fdf3e96d69373548"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/proposal.json": (
+        "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/prospective-audit-r1.json": (
+        "d56f405f066993ca1217988076dd3a38b17386e639e07470abf7a495b4858660"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/quick/quality-review.json": (
+        "8ee6c4c400f94bcaa3176bdfa4c5a234fc423c53142be2a9073652716e84df8b"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/raw-factual-evidence-r1.json": (
+        "181defc0ec9035b30cfdabc1349a0e89629dd9d098aefaa48b9927098b7dab8b"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/raw-quality-evidence-r1.json": (
+        "ef44112cd14e558f00c716ee3f0683551d34c4b2fa07d30a0e520fd9124bd469"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/actual-worktree-audit-r1.json": (
+        "2a6db5a75c385030b4e8ef73962f898f6a2ac933226e84d3d90b1a957b3fdac8"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/candidate.json": (
+        "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/factual-review.json": (
+        "fedcff86e30edf5f9033f7c0808eb6f54ef8d8845a6ab82f08c0945a268aa0ce"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-factual-evidence-r1.json": (
+        "69ff5f749acaf62a33bf15f91b62d38948d59508e26742054798964de4e9c985"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-factual-evidence-r2.json": (
+        "d85039d054e5ebbea3c14ecfd644ebd589e2f0fb87e9841301ed253882cff4d5"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-factual-review-r1.json": (
+        "c9b4375a19de9bf457e72637e2c837d39c422b550229a9e622386345618f0e9d"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-factual-review-r2.json": (
+        "1777295e83470bd03e51ba49c3e9112336add635a7bfed13f50bf6b6da5f04a7"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-quality-evidence-r1.json": (
+        "e5f0556eb87f6cb36edc0bc3d9d4f13939cddb86b9d38c29130b1d7fd54701b8"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-quality-evidence-r2.json": (
+        "2f19ff2b6886c77158be4cf5b74a8fa67a444c7fdd2d8d9a2d0f8a9ff2b6d027"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-quality-review-r1.json": (
+        "3ba012b87f2e294be17e3e7dc8071ad991bd7dbc3b30a8f8d7322393f1186e5e"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/final-quality-review-r2.json": (
+        "9d0f8fb0f5188dc8d4fdb390c85885349faa25a8fe5dd6470721762682da3912"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/proposal.json": (
+        "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/prospective-audit-r1.json": (
+        "2a6db5a75c385030b4e8ef73962f898f6a2ac933226e84d3d90b1a957b3fdac8"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/native/world/quality-review.json": (
+        "2096d85b045a71466c4e9535414939788ea6f0469dbce42babe1389c5f4c5120"
+    ),
+    "go-backend/internal/contentrails/sources/authored-v6.json": (
+        "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+    ),
+    "go-backend/internal/contentrails/sources/authored-v5.json": (
+        "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/source6-export-summary-r1.json": (
+        "be9ea737529d91b683b27ff7d52e548e2c6c9165bc762efb9528b29e7f56e278"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/graph-proposal-r1.json": (
+        "4db45b490f1a431055390a4147222a10d4403596272e2135d6d88303f13a6ab6"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/graph-factual-review-r1.json": (
+        "7bc364f970b45f8011ba081bfadadb8521f6e2e951cae9dd211e8f15124fe713"
+    ),
+    "docs/reviews/v1-6-everyday-inputs/remaining-native-controls-quality-r1.json": (
+        "4149550d7b4c413a1faba095bf337d14035e42ed0d81c5c2d0467a78c1b2e53c"
+    ),
+}
+_V1_6_CATALOGS = {
+    "quick_games_v92.json", "alchimie_discovery_world_v92.json",
+    "alchimie_recipe_extensions_v92.json",
+}
+_V1_6_ALIASES = {
+    "n_v4ist_steag": (["steagul", "steaguri", "steagurile"], "drapel"),
+    "n_v24_food_pantry_ulei": (
+        ["uleiul", "uleiuri", "uleiurile", "uleiului", "uleiurilor"], "untdelemn",
+    ),
+}
+
+
+def _v1_6_bytes(value: dict, filename: str) -> bytes:
+    indent = 2 if filename == "kg_sample.json" or filename in _V1_6_CATALOGS else 1
+    return (json.dumps(value, ensure_ascii=False, indent=indent) + "\n").encode()
+
+
+@lru_cache(maxsize=8)
+def historical_source5_bytes(filename: str) -> bytes:
+    """Read authenticated immutable source bytes; never derive old expected payloads."""
+    assert filename in _V1_6_BASELINE
+    directory = _V1_6_ROOT / "docs/reviews/v1-6-everyday-inputs/reference"
+    path = directory / ("history-source5-" + filename + ".gz")
+    with path.open("rb") as stream:
+        compressed = stream.read((2 << 20) + 1)
+    assert len(compressed) <= 2 << 20
+    assert hashlib.sha256(compressed).hexdigest() == _V1_6_ARCHIVES[filename]
+    with gzip.GzipFile(fileobj=io.BytesIO(compressed)) as stream:
+        raw = stream.read((16 << 20) + 1)
+    assert len(raw) <= 16 << 20
+    assert hashlib.sha256(raw).hexdigest() == _V1_6_BASELINE[filename]
+    assert _v1_6_bytes(json.loads(raw), filename) == raw
+    return raw
+
+
+def _v1_6_receipt() -> dict:
+    raw = _V1_6_RECEIPT.read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == _V1_6_RECEIPT_SHA256
+    receipt = json.loads(raw)
+    assert set(receipt) == {
+        "schema", "baseline_commit", "source6_sha256", "parent_source5_sha256",
+        "files", "documents_sha256",
+    }
+    assert receipt["schema"] == "v1-6-exact-history-delta-v1"
+    assert receipt["baseline_commit"] == "6a2332795dc5fa2db3eb61e196ab7ab820e76caa"
+    assert receipt["source6_sha256"] == (
+        "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+    )
+    assert receipt["parent_source5_sha256"] == (
+        "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585"
+    )
+    assert set(receipt["files"]) == set(_V1_6_BASELINE)
+    assert receipt["documents_sha256"] == _V1_6_DOCUMENTS
+    for path, expected in _V1_6_DOCUMENTS.items():
+        assert hashlib.sha256((_V1_6_ROOT / path).read_bytes()).hexdigest() == expected
+    for name, row in receipt["files"].items():
+        assert set(row) == {
+            "path", "before_sha256", "after_sha256", "before_archive",
+            "before_archive_sha256", "before_bytes", "after_bytes", "metadata",
+        }
+        directory = ("tests/fixtures/" if name.startswith("cat_mobile")
+                     else "cat_de_roman_esti/fixtures/")
+        assert row["path"] == directory + name
+        assert row["before_sha256"] == _V1_6_BASELINE[name]
+        assert row["after_sha256"] == _V1_6_AFTER[name]
+        assert row["before_archive"] == "history-source5-" + name + ".gz"
+        assert row["before_archive_sha256"] == _V1_6_ARCHIVES[name]
+        assert row["before_bytes"] == len(historical_source5_bytes(name))
+        if name not in _V1_6_CATALOGS:
+            assert row["metadata"] == {}
+    return receipt
+
+
+def _v1_6_finish(restored: dict, before: dict, filename: str) -> dict:
+    assert restored == before
+    assert _v1_6_bytes(restored, filename) == historical_source5_bytes(filename)
+    assert hashlib.sha256(_v1_6_bytes(restored, filename)).hexdigest() == _V1_6_BASELINE[filename]
+    return restored
+
+
+def before_v1_6_artifact(current: dict, filename: str) -> dict:
+    """Peel exactly two alias appends and their dependent source headers."""
+    assert filename in _V1_4_BASELINE
+    digest = hashlib.sha256(_v1_6_bytes(current, filename)).hexdigest()
+    earlier = {_V1_6_BASELINE[filename], _V1_4_BASELINE[filename], _V1_3_BASELINE[filename]}
+    if digest in earlier:
+        return deepcopy(current)
+    assert digest == _V1_6_AFTER[filename]
+    receipt = _v1_6_receipt()
+    assert len(_v1_6_bytes(current, filename)) == receipt["files"][filename]["after_bytes"]
+    before = json.loads(historical_source5_bytes(filename))
+    assert set(current) == set(before)
+    restored = deepcopy(current)
+    if filename == "kg_sample.json":
+        assert len(current["kg_nodes"]) == 2419
+        assert current["kg_edges"] == before["kg_edges"] and len(current["kg_edges"]) == 9473
+        assert current["kg_puzzles"] == before["kg_puzzles"] and len(current["kg_puzzles"]) == 180
+        assert [n["id"] for n in current["kg_nodes"]] == [n["id"] for n in before["kg_nodes"]]
+        assert len({n["id"] for n in current["kg_nodes"]}) == 2419
+        for node in restored["kg_nodes"]:
+            if node["id"] in _V1_6_ALIASES:
+                aliases, added = _V1_6_ALIASES[node["id"]]
+                assert node["aliases"] == [*aliases, added]
+                node["aliases"] = list(aliases)
+        assert restored["kg_nodes"] == before["kg_nodes"]
+        assert set(current["meta"]) == set(before["meta"])
+        assert current["meta"]["build_version"] == "fixture-v1-6-everyday-inputs"
+        assert current["meta"]["note"] == (
+            "V1.6: two qualified singular synonym inputs for existing flag and edible-oil concepts."
+        )
+        for field in ("build_version", "note"):
+            restored["meta"][field] = before["meta"][field]
+    elif filename in {"board_rankings_v37.json", "derived_catalog_v38.json"}:
+        assert current["boards"] == before["boards"]
+        assert len(current["boards"]) == (716 if filename.startswith("board_rankings") else 336)
+        assert current["meta"]["kg_sha256"] == _V1_6_AFTER["kg_sample.json"]
+        restored["meta"]["kg_sha256"] = _V1_6_BASELINE["kg_sample.json"]
+        if filename == "derived_catalog_v38.json":
+            assert current["meta"]["v37_rankings_sha256"] == _V1_6_AFTER["board_rankings_v37.json"]
+            restored["meta"]["v37_rankings_sha256"] = _V1_6_BASELINE["board_rankings_v37.json"]
+    elif filename == "cat_mobile_app_pack_contract.json":
+        assert current["manifest"]["build_version"] == "fixture-v1-6-everyday-inputs"
+        restored["manifest"]["build_version"] = "fixture-v1-4-time-links"
+        for field in ("kg_nodes", "kg_edges", "kg_puzzles"):
+            assert current[field] == before[field]
+    else:
+        # The unchanged pack is accepted only through its complete baseline hash.
+        raise AssertionError("Unreviewed V1.6 artifact delta")
+    return _v1_6_finish(restored, before, filename)
+
+
+def before_v1_6_catalog(current: dict, filename: str) -> dict:
+    """Restore signed headers and the one Ulei snapshot; no recipes/history change."""
+    assert filename in _V1_6_CATALOGS
+    digest = hashlib.sha256(_v1_6_bytes(current, filename)).hexdigest()
+    earlier = {_V1_6_BASELINE[filename], _V1_4_CATALOG_BASELINE[filename],
+               _V1_3_CATALOG_BASELINE[filename], _V1_4_CATALOG_AFTER[filename]}
+    if digest in earlier:
+        return deepcopy(current)
+    assert digest == _V1_6_AFTER[filename]
+    receipt = _v1_6_receipt()
+    row = receipt["files"][filename]
+    assert len(_v1_6_bytes(current, filename)) == row["after_bytes"]
+    before = json.loads(historical_source5_bytes(filename))
+    assert set(current) == set(before)
+    fields = {"bindings", "candidate_sha256"}
+    fields.add("semantic_reviews" if filename.startswith("alchimie_recipe") else "reviews")
+    if filename.startswith("alchimie_discovery"):
+        fields.add("native_source_version")
+        assert current["native_source_version"] == 6 and before["native_source_version"] == 5
+    rail = {"quick_games_v92.json": "quick",
+            "alchimie_discovery_world_v92.json": "world",
+            "alchimie_recipe_extensions_v92.json": "extensions"}[filename]
+    rail_root = f"docs/reviews/v1-6-everyday-inputs/native/{rail}/"
+    assert current["candidate_sha256"] == _V1_6_DOCUMENTS[rail_root + "candidate.json"]
+    proposal = (_V1_6_ROOT / (rail_root + "proposal.json")).read_bytes()
+    assert hashlib.sha256(proposal).hexdigest() == _V1_6_AFTER[filename]
+    assert _v1_6_bytes(current, filename) == proposal
+    metadata = row["metadata"]
+    assert set(metadata) == {"before", "after"}
+    assert set(metadata["before"]) == set(metadata["after"]) == fields
+    assert metadata["before"] == {key: before[key] for key in fields}
+    assert metadata["after"] == {key: current[key] for key in fields}
+    restored = deepcopy(current)
+    for field in fields:
+        restored[field] = deepcopy(before[field])
+    aliases, added = _V1_6_ALIASES["n_v24_food_pantry_ulei"]
+    if filename == "quick_games_v92.json":
+        assert len(current["boards"]) == len(current["authored"]) == 85
+        assert current["boards"] == before["boards"] and current["authored"] == before["authored"]
+        assert current["nodes"]["n_v24_food_pantry_ulei"]["aliases"] == [*aliases, added]
+        restored["nodes"]["n_v24_food_pantry_ulei"]["aliases"] = list(aliases)
+    elif filename == "alchimie_discovery_world_v92.json":
+        assert len(current["concepts"]) == 252 and len(current["recipes"]) == 352
+        assert len(current["compatible_versions"]) == 10 and len(current["goals"]) == 32
+        assert [c["id"] for c in current["concepts"]] == [c["id"] for c in before["concepts"]]
+        assert len({c["id"] for c in current["concepts"]}) == 252
+        for field in ("recipes", "goals", "world", "unlocks", "compatible_versions"):
+            assert current[field] == before[field]
+        for concept in restored["concepts"]:
+            if concept["id"] == "n_v24_food_pantry_ulei":
+                assert concept["snapshot"]["aliases"] == [*aliases, added]
+                concept["snapshot"]["aliases"] = list(aliases)
+    else:
+        assert current["boards"] == before["boards"] and len(current["boards"]) == 27
+        assert sum(len(b["additions"]) for b in current["boards"]) == 49
+    return _v1_6_finish(restored, before, filename)
+
+
 def _v1_4_graph_receipt() -> dict:
     blob = _V1_4_GRAPH_RECEIPT.read_bytes()
     assert hashlib.sha256(blob).hexdigest() == _V1_4_GRAPH_RECEIPT_SHA256
@@ -895,6 +1295,7 @@ def _v1_4_graph_receipt() -> dict:
 
 def before_v1_4_artifact(current: dict, filename: str) -> dict:
     """Peel only actual V1.4 graph/header/public-mobile writes back to git46641d6."""
+    current = before_v1_6_artifact(current, filename)
     assert filename in _V1_4_BASELINE
     receipt = _v1_4_graph_receipt()
     current_hash = _v1_3_artifact_digest(current, filename)
@@ -992,6 +1393,8 @@ _V1_5_LEGACY_WORLD_SOURCE_SHA256 = (
 
 def before_v1_5_world_catalog(current: dict, filename: str) -> dict:
     """Reverse only the exact reviewed hot-chocolate world into complete V1.4."""
+    if filename in _V1_6_CATALOGS:
+        current = before_v1_6_catalog(current, filename)
     if filename != _V1_5_WORLD_NAME:
         return deepcopy(current)
     current_hash = _v1_3_catalog_digest(current)
@@ -1045,10 +1448,14 @@ def before_v1_5_world_catalog(current: dict, filename: str) -> dict:
 
 
 @contextmanager
-def historical_v1_4_world(monkeypatch):
+def historical_v1_4_world(monkeypatch, temporary_root: Path):
     """Keep old literal tests on a genuine pinned loader context, then restore it."""
     from cat_de_roman_esti.wordgames import discovery_world as world_loader
+    from cat_de_roman_esti.wordgames import service as service_loader
 
+    fixture = temporary_root / "cat_de_roman_esti/fixtures/kg_sample.json"
+    fixture.parent.mkdir(parents=True)
+    fixture.write_bytes(historical_source5_bytes("kg_sample.json"))
     root = Path(__file__).resolve().parents[1]
     source = root / "scripts/alchimie_discovery_recipe_source.py"
     assert hashlib.sha256(source.read_bytes()).hexdigest() == (
@@ -1058,11 +1465,14 @@ def historical_v1_4_world(monkeypatch):
         _V1_5_WORLD_BEFORE_SHA256
     )
     world_loader._load_world.cache_clear()
+    service_loader.get_service.cache_clear()
     with monkeypatch.context() as scoped:
+        scoped.setenv("CAT_KG_FIXTURE", str(fixture))
         scoped.setattr(world_loader, "CATALOG_PATH", _V1_5_WORLD_BEFORE)
         try:
             yield world_loader.get_world()
         finally:
+            service_loader.get_service.cache_clear()
             world_loader._load_world.cache_clear()
 
 

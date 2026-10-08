@@ -1,0 +1,37 @@
+{
+  "schema": "v1-6-source-stop-r1",
+  "stopped_at_utc": "2026-10-06T22:09:13.599726+00:00",
+  "admission_sha256": "55f94391bb6a449371f32979ff2225856c4625117e6b8862d677b2cdf63bf4f0",
+  "deadline_utc": "2026-10-06T22:11:22.892342+00:00",
+  "before_deadline": true,
+  "resource_status": "FAIL: inclusive active-agent concurrency briefly4 against declared workers_max3; original admission not amended",
+  "concurrency_failure": {
+    "declared_maximum": 3,
+    "conservative_inclusive_observed_maximum": 4,
+    "cause": "Root spawned quality reviewer before source researcher B completed, overlapping root and three children.",
+    "response": "All finite source/review work stopped. No installation acceptance or full resource PASS. Future admission counts root explicitly; wait for worker completion before replacement."
+  },
+  "other_measurements": {
+    "disk_free_gib": 212.08739471435547,
+    "mem_available_gib": 12.793251037597656,
+    "durable_research_bytes": 130364,
+    "peak_worker_browser_RSS": "NOT MEASURED; no memory compliance certification",
+    "heavy_lanes": 0
+  },
+  "frozen_research": {
+    "docs/reviews/v1-6-everyday-inputs/lexical-primary-a.json": "166c9b5fadba738ab659748bc15221a146ca7a6853658a15331fc6d4c212f122",
+    "docs/reviews/v1-6-everyday-inputs/lexical-primary-b.json": "0416abb045740f5cd31a4446f101942cabb211ccb01e7eab2e70a099eaa1a140",
+    "docs/reviews/v1-6-everyday-inputs/identity-deck-screen-r1.json": "122ba50ba17de0e15e0f955e9c80083225d4803d29c0643039a3315b38af10a8",
+    "docs/reviews/v1-6-everyday-inputs/research-quality-r1.json": "57e186b2157343c10833340871509f1f42d701af140dc513508bededa8ed33c0",
+    "docs/content-pool/v1-6-everyday-inputs/pool.json": "fce2af89c2093bfb7d83b025df7ab872f42aac0108e5a269eac767b88a257e09"
+  },
+  "installed_source_method_bindings_unchanged": 10,
+  "runtime_change": false,
+  "selection_or_installation_approval": false,
+  "pool_states": {
+    "researched": 3,
+    "held": 3,
+    "selected": 0,
+    "integrated": 0
+  }
+}

@@ -1,0 +1,185 @@
+"""Focused R14 bounded fresh registry controls; no helper or native executions.
+Usage: qualified Python -B FILE UUID32 FIXTURE_SHA256 COPIED_R14_METHOD.py
+Tiny controlled ledgers, bounded IO delays and real self-SIGTERM only.
+"""
+import contextlib,hashlib,importlib.util,io,json,os,re,signal,stat,sys,threading,time,warnings
+from pathlib import Path
+S=Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+ROOT=S/'probe/r14-registry-delta-r4'
+METHOD_SHA='42543f0b8a6e9f37a55410ec1800b59c91b61f069c9913309cde9371f6501144'
+EXPECTED_CASES=25
+@contextlib.contextmanager
+def patched(obj,name,value):
+    old=getattr(obj,name);setattr(obj,name,value)
+    try:yield
+    finally:setattr(obj,name,old)
+def main():
+    started=time.monotonic();cases=[];error=None;module=None;deliveries=0;planned_signal=False;unplanned_signal=None
+    if not sys.dont_write_bytecode or sys.flags.optimize:raise ValueError('ordinary qualified -B required')
+    if len(sys.argv)!=4 or not re.fullmatch('[0-9a-f]{32}',sys.argv[1]):raise ValueError('fresh UUID required')
+    own=Path(__file__);method=Path(sys.argv[3])
+    if hashlib.sha256(own.read_bytes()).hexdigest()!=sys.argv[2]:raise ValueError('fixture bytes changed')
+    if method!=S/'probe/run_worktree_lane_wsl_r14.py':raise ValueError('exact method path required')
+    if method.resolve()!=method or method.lstat().st_nlink!=1 or hashlib.sha256(method.read_bytes()).hexdigest()!=METHOD_SHA:raise ValueError('method bytes changed')
+    ROOT.mkdir(exist_ok=True);folder=ROOT/sys.argv[1];folder.mkdir(mode=0o700)
+    if folder.resolve()!=folder:raise ValueError('owned unredirected fixture directory required')
+    spec=importlib.util.spec_from_file_location('focused_r14_registry',method);module=importlib.util.module_from_spec(spec)
+    with warnings.catch_warnings(record=True) as diagnostics:
+        warnings.simplefilter('always',SyntaxWarning);spec.loader.exec_module(module)
+    prior={n:signal.getsignal(n) for n in (signal.SIGTERM,signal.SIGALRM)}
+    def term(number,frame):
+        nonlocal deliveries,unplanned_signal
+        if not planned_signal:
+            unplanned_signal=number
+            raise InterruptedError("unplanned fixture cancellation")
+        deliveries+=1;module.on_signal(number,frame)
+    def alarm(number,frame):raise TimeoutError('pure10second watchdog')
+    signal.signal(signal.SIGTERM,term);signal.signal(signal.SIGALRM,alarm);signal.setitimer(signal.ITIMER_REAL,10)
+    def guard():
+        if unplanned_signal is not None:raise InterruptedError("unplanned cancellation retained")
+        if time.monotonic()-started>=10:raise TimeoutError('pure10second budget')
+        rows=Path('/proc/self/status').read_text().splitlines()
+        rss=[int(row.split()[1])*1024 for row in rows if row.startswith('VmRSS:')]
+        if len(rss)!=1 or rss[0]>2*(1<<30):raise RuntimeError('pure RSS cap')
+    def must_raise(kind,call):
+        try:call()
+        except kind:return
+        raise AssertionError('expected '+kind.__name__)
+    def case(name,call):
+        guard();module.received_signal=None;call();guard();cases.append({'name':name,'passed':True})
+    def registry(name,count=2):
+        d=folder/name;d.mkdir()
+        for n in range(1,count+1):
+            nonce='%032x'%n;p=d/(nonce+'.json')
+            value={'schema':'v1-6-windows-fresh-size-helper-r2','nonce':nonce,'receipt_path':module.windows_path(p),'status':'completed','worker_exit_confirmed':True,'launcher_exit_confirmed':True,'job_empty':True}
+            p.write_text(json.dumps(value));(d/(nonce+'.worker-output.json')).write_text('{}')
+        return d
+    def mutate(name,key,value,kind=RuntimeError):
+        d=registry(name)
+        if name=='mutated':module.validate_prior_windows_receipts(d)
+        p=d/('%032x.json'%1);v=json.loads(p.read_text());v[key]=value;p.write_text(json.dumps(v))
+        must_raise(kind,lambda:module.validate_prior_windows_receipts(d))
+    original_lstat=Path.lstat;original_open=Path.open;original_iter=Path.iterdir
+    try:
+        valid=registry('valid',4)
+        case('all-valid',lambda:module.validate_prior_windows_receipts(valid))
+        case('fresh-receipt-mutation',lambda:mutate('mutated','job_empty',False))
+        for key,value in [('schema','wrong'),('nonce','wrong'),('receipt_path','C:/foreign.json'),('status','pending'),('launcher_not_created',True),('worker_not_created',True),('worker_exit_confirmed',1),('launcher_exit_confirmed',False),('job_empty',None)]:
+            case('reject-'+key,lambda k=key,v=value:mutate(k,k,v))
+        def malformed(name,value,kind):
+            d=registry(name);(d/('%032x.json'%1)).write_text(value);must_raise(kind,lambda:module.validate_prior_windows_receipts(d))
+        case('malformed-json',lambda:malformed('malformed','{',json.JSONDecodeError))
+        case('nonobject-json',lambda:malformed('nonobject','[]',RuntimeError))
+        case('oversize-bounded-read',lambda:malformed('oversize',' '*(16*1024+1),ValueError))
+        def boundary():
+            d=registry('boundary');p=d/('%032x.json'%1);value=p.read_text();p.write_text(value+' '*(16*1024-len(value)));module.validate_prior_windows_receipts(d)
+        case('exact-16KiB-accepted',boundary)
+        def sidecar(name,extra):
+            d=registry(name);(d/extra).write_text('{}');must_raise(RuntimeError,lambda:module.validate_prior_windows_receipts(d))
+        case('pending-refused',lambda:sidecar('pending','%032x.json.pending'%1))
+        case('orphan-refused',lambda:sidecar('orphan','%032x.worker-output.json'%99))
+        case('unknown-refused',lambda:sidecar('unknown','alien.json'))
+        def nonregular():
+            d=registry('nonregular');(d/('%032x.json'%99)).mkdir();must_raise(RuntimeError,lambda:module.validate_prior_windows_receipts(d))
+        case('nonregular-refused',nonregular)
+        def bounded_fresh():
+            reads=[];types=[];active=0;peak=0;unfinished=0;future_peak=0;lock=threading.Lock()
+            real_submit=module.ThreadPoolExecutor.submit
+            def submit(executor,*a,**kw):
+                nonlocal unfinished,future_peak
+                with lock:unfinished+=1;future_peak=max(future_peak,unfinished)
+                try:f=real_submit(executor,*a,**kw)
+                except BaseException:
+                    with lock:unfinished-=1
+                    raise
+                def completed(future):
+                    nonlocal unfinished
+                    with lock:unfinished-=1
+                f.add_done_callback(completed);return f
+            def observed_type(p,*a,**kw):
+                nonlocal active,peak
+                if p.parent!=valid:return original_lstat(p,*a,**kw)
+                with lock:active+=1;peak=max(peak,active);types.append(p.name)
+                try:time.sleep(.015);return original_lstat(p,*a,**kw)
+                finally:
+                    with lock:active-=1
+            class Reader:
+                def __init__(self,h):self.h=h
+                def __enter__(self):return self
+                def __exit__(self,*args):self.h.close()
+                def read(self,size=-1):
+                    assert size==16*1024+1
+                    with lock:reads.append(size)
+                    return self.h.read(size)
+            def opened(p,*a,**kw):
+                h=original_open(p,*a,**kw)
+                return Reader(h) if p.parent==valid and re.fullmatch('[0-9a-f]{32}.json',p.name) else h
+            with patched(Path,'lstat',observed_type),patched(Path,'open',opened),patched(module.ThreadPoolExecutor,'submit',submit):
+                module.validate_prior_windows_receipts(valid);module.validate_prior_windows_receipts(valid)
+            assert active==0 and peak==2 and unfinished==0 and future_peak==2 and len(types)==16 and len(reads)==8
+        case('two-workers-fresh-all-types-bounded-reads-twice',bounded_fresh)
+        def joined_error():
+            d=registry('join-error');barrier=threading.Barrier(2);active=0;ended=[];lock=threading.Lock();calls=0
+            def observed(p,*a,**kw):
+                nonlocal active,calls
+                if p.parent!=d:return original_lstat(p,*a,**kw)
+                with lock:active+=1;calls+=1;index=calls
+                try:
+                    if index<=2:barrier.wait(timeout=1)
+                    if index==1:raise PermissionError('controlled lstat denial')
+                    time.sleep(.03);return original_lstat(p,*a,**kw)
+                finally:
+                    with lock:active-=1;ended.append(index)
+            with patched(Path,'lstat',observed):must_raise(PermissionError,lambda:module.validate_prior_windows_receipts(d))
+            assert active==0 and 2 in ended and calls<=2
+        case('error-stops-refill-and-joins-other-worker',joined_error)
+        def read_denied():
+            def denied(p,*a,**kw):
+                if p.parent==valid and re.fullmatch('[0-9a-f]{32}.json',p.name):raise PermissionError('controlled read denial')
+                return original_open(p,*a,**kw)
+            with patched(Path,'open',denied):must_raise(PermissionError,lambda:module.validate_prior_windows_receipts(valid))
+        case('fresh-read-denial-propagates',read_denied)
+        def early():
+            module.received_signal=signal.SIGTERM
+            def denied(*a,**kw):raise AssertionError('early signal performed IO')
+            with patched(Path,'iterdir',denied),patched(Path,'lstat',denied),patched(Path,'open',denied):must_raise(InterruptedError,lambda:module.validate_prior_windows_receipts(valid,True))
+        case('entry-interruption-performs-no-IO',early)
+        def drain():
+            nonlocal planned_signal
+            executor=module.ThreadPoolExecutor;real=executor.shutdown;fired=[]
+            def shutdown(self,*a,**kw):
+                nonlocal planned_signal
+                value=real(self,*a,**kw)
+                if not fired:
+                    fired.append(True);planned_signal=True
+                    try:os.kill(os.getpid(),signal.SIGTERM)
+                    finally:planned_signal=False
+                return value
+            with patched(executor,'shutdown',shutdown):must_raise(InterruptedError,lambda:module.validate_prior_windows_receipts(valid,True))
+            assert fired==[True]
+        case('real-self-SIGTERM-after-final-join-refuses',drain)
+        def complete():
+            module.received_signal=signal.SIGTERM;types=[];reads=[];lock=threading.Lock()
+            def observed_type(p,*a,**kw):
+                if p.parent==valid:
+                    with lock:types.append(p.name)
+                return original_lstat(p,*a,**kw)
+            def opened(p,*a,**kw):
+                if p.parent==valid and re.fullmatch('[0-9a-f]{32}.json',p.name):
+                    with lock:reads.append(p.name)
+                return original_open(p,*a,**kw)
+            with patched(Path,'lstat',observed_type),patched(Path,'open',opened):module.validate_prior_windows_receipts(valid)
+            assert len(types)==8 and len(reads)==4
+        case('noninterruptible-publication-completes-all',complete)
+        assert len(cases)==EXPECTED_CASES and deliveries==1 and unplanned_signal is None
+        assert hashlib.sha256(method.read_bytes()).hexdigest()==METHOD_SHA;guard()
+    except BaseException as exc:error={'type':type(exc).__name__,'message':str(exc)[:2048]}
+    finally:
+        signal.setitimer(signal.ITIMER_REAL,0)
+        for number,handler in prior.items():signal.signal(number,handler)
+        elapsed=time.monotonic()-started
+        report={'schema':'v1-6-r14-registry-delta-pure-r1','passed':error is None and len(cases)==EXPECTED_CASES and elapsed<10 and deliveries==1 and unplanned_signal is None,'case_count':len(cases),'expected_cases':EXPECTED_CASES,'cases':cases,'error':error,'elapsed_seconds':elapsed,'budget_seconds':10,'method_sha256':METHOD_SHA,'fixture_sha256':sys.argv[2],'real_self_signal_deliveries':deliveries,'unplanned_signal':unplanned_signal,'compile_diagnostics':[str(v.message) for v in diagnostics],'scope':'tiny synthetic ledgers; real self-signal and controlled IO delays; no helper/native execution','native_application_helper_executions':0,'old_217_57_20_24_controls_rerun':False}
+        blob=(json.dumps(report,sort_keys=True,indent=2)+'\n').encode();assert len(blob)<128<<10
+        with (folder/'result.json').open('xb') as h:h.write(blob)
+    print(json.dumps(report,sort_keys=True));return 0 if report['passed'] else 1
+if __name__=='__main__':raise SystemExit(main())

@@ -1,0 +1,22 @@
+{
+  "schema": "v1-6-docs-preflight-refusal-r1",
+  "recorded_at_utc": "2026-10-06T22:10:20.301687+00:00",
+  "status": "REFUSED BEFORE NATIVE SUBPROCESS",
+  "required_start_disk_gib": 17,
+  "required_available_memory_gib": 16,
+  "nearest_pre_guard_sample": {
+    "disk_free_gib": 212.08739471435547,
+    "mem_available_gib": 12.793251037597656,
+    "durable_research_bytes": 130364,
+    "peak_worker_browser_RSS": "NOT MEASURED; no memory compliance certification",
+    "heavy_lanes": 0
+  },
+  "exact_failed_guard": "assert free >= 17*2**30 and available >= 16*2**30",
+  "exact_guard_values": "Not emitted by failed guard; source-stop sample immediately before guard is retained, not mislabelled as the assertion values.",
+  "script_sha256": "035cdd9cbd6646eb3d82fdc515ed0fa4304ff9dbc2a614e510310c619ffc82d6",
+  "error": "AssertionError at finish_source_checkpoint.py:11 before documentation admission and subprocess creation.",
+  "native_docs": "NOT RUN",
+  "commit": "NOT CREATED; required documentation gate remains unrun",
+  "runtime_mutation": false,
+  "response": "No threshold reduction or repeated unchanged guard. Preserve uncommitted research; resume docs check only after meaningful headroom recovery and separate measured admission. Source lane remains stopped and its concurrency failure remains failed."
+}

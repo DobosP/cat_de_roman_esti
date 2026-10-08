@@ -1,0 +1,60 @@
+{
+  "R1_preserved_unexecuted_rejected": true,
+  "actual_binding_not_yet_created_or_reviewed": true,
+  "all_prior_failures_preserved": true,
+  "bindings": {
+    "methods/check_r12_failed_lane_cli_wsl_r1.py.txt": "54d69214bd236a8d9a099f00d2ef47e6bef8331ccb321da6b7d445d82ca4e36a",
+    "methods/check_r12_failed_lane_cli_wsl_r2.py.txt": "6aee5941ec92f28c0c2934f9cfd87ff233c6ea1dc49bd9d34d8b05385f721f97",
+    "methods/check_runner_signal_wsl_actual_r16.py.txt": "4d5ef75cb3ad5f67e42d237c6bd5f7fb2af38a233b5e0273c481c1d45b950de5",
+    "methods/invoke_r12_failed_lane_cli_capture_r1.ps1.txt": "b3920dde73bea0b600f70cf488944b5ba02744be940f392dfe8cd5fcce55cc7a",
+    "methods/invoke_r12_failed_lane_cli_capture_r2.ps1.txt": "6f067a1f5952e1261921614ee77b188d7e4a838442a539a815bf37d1b583179e",
+    "methods/run_worktree_lane_wsl_r12.py.txt": "77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0",
+    "wsl-r12-actual-failed-lane-cli-source-review-r1.json": "47a28e3400a88dadbe54ca367605fbaa5973f27f5c73f854350d6e14e45ef76b"
+  },
+  "candidate_or_fixture_executed_by_reviewer": false,
+  "components": {
+    "parent_wrapper": "ACCEPT_CAPTURE_SOURCE_ONLY",
+    "refusal_fixture": "ACCEPT_SOURCE_ONLY"
+  },
+  "exact_fixture_source_prerequisite_accepted": true,
+  "execution_preconditions": [
+    "R16 active must first close successful with exact source4d5e..., runner77f94..., Python52e0.../ordinary-B and original mirror/mode/readset guards.",
+    "Generate dedicated wsl-r12-failed-lane-refusal-binding-r2.json from that exact closed lane and obtain independent metadata review of six actual bindings before invocation. No rewriting deadline or baseline; old lane must remain live before/after both refusal calls.",
+    "Root captures unique R2 labels and all raw CLI outputs, parent/terminal/attempt histories; task roots quiet during actual accounting. No new retry/clock for a failed attempt.",
+    "Fresh actor absence and helper terminal cleanup/history checks precede further work after any failure. Finalization and queued actual prefix gates remain independently mandatory."
+  ],
+  "findings": [],
+  "fixture_bytes": 23514,
+  "fixture_lines": 422,
+  "native_pass": false,
+  "original_failed_clock_renewed": false,
+  "preserved_requirements": [
+    "Real R12 OS CLI continuation1 and reset0, correct specific errors, immutable closed R16 manifest/state/cumulative/step/check/parent/pins and original1200-second deadline/base752431588 unchanged.",
+    "Fresh full mixed C+X pre/post accounting,17/16GiB both-volume floors/Mem, original1GiB cumulative growth with128KiB report reserve,2GiB RSS, positive work checks and finalwork<=24/total<=30 unchanged.",
+    "Exact child PID/PGID/SID ownership/exit and no-descendant checks; failed/uncertain cleanup stays failed, no arbitrary process signals.",
+    "Wrapper checks fresh revision labels before launch, exact materialization/binding pre/post pins, immediate Python capture, correct check-result.json and parent/child30/work24.35s recovery timeout is not acceptance and does not prove Linux cleanup."
+  ],
+  "resolved_findings": [
+    {
+      "id": "F1",
+      "lines": "185-257,399-418",
+      "repair": "Catchable signals are blocked before initial terminal snapshot. Initial image is exclusively written/fsynced/replaced and directory-fsynced, then fresh total-time/pending-signal snapshot sets completed boundary. Pre-boundary signal or late publication makes passed=false and publishes bounded failure image, retaining exact initial attempt through exclusive hardlink with regular/hash/inode/link proofs; final single-link images and directoryfsync checked. Original128KiB reserve covers three32KiB images plus32KiB overhead. IO/path occupancy/timeout failures cannot grant acceptance."
+    },
+    {
+      "id": "F2",
+      "lines": "78-118",
+      "repair": "Fixed dedicated bindingR2 path and all six exact owned targets validated lexically before any receipt read. Direct R16 UUID directory and resolved ancestry, fixed parent path, single-link/unredirected/bounded/hash guards retained."
+    },
+    {
+      "id": "F3",
+      "lines": "347-352,414",
+      "repair": "Real CLI gets explicit -W ignore::SyntaxWarning while ordinary nonoptimized-B retained. This category-specific diagnostic policy is accepted only for this exact pinned R12 CLI and known Python3.14 source warning; explicit policy recorded, no claim warning absent, no user/global/native warning change. All other stderr still forbidden and exact exit2/specific refused JSON mandatory."
+    }
+  ],
+  "reviewed_at_utc": "2026-10-07T14:43:32.793274+00:00",
+  "reviewer": "/root/continuation_audit, independent source reviewer",
+  "schema": "v1-6-r12-actual-failed-lane-cli-source-review-r2",
+  "scope": "Narrow append-only R2 repair against full R1 review plus complete new terminal publication method and capture retarget diff. No candidate execution.",
+  "valid_until": "Source-only evidence; any candidate/dependency/closed binding change requires exact review.",
+  "verdict": "ACCEPT_SOURCE_ONLY"
+}

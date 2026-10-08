@@ -1,0 +1,319 @@
+{
+  "schema": "v1-6-pure-windows-receipt-registry-fixture-r1",
+  "passed": true,
+  "runner_sha256": "855f4fe07fd64347ff4024db12526659ddcde5a42f655e752d2153d8909e7297",
+  "fixture_sha256": "af00a02e6c5ceb76e398fa7ee7dcecb176798be417fda2688074678ce7382137",
+  "native_or_Go_executions": 0,
+  "synthetic_cleanup_flags_are_not_process_exit_proof": true,
+  "cases": [
+    {
+      "name": "empty-registry",
+      "expected_accept": true,
+      "calls": [
+        {
+          "accepted": true
+        },
+        {
+          "accepted": true
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "repeat-terminal-plus-two-record-output",
+      "expected_accept": true,
+      "calls": [
+        {
+          "accepted": true
+        },
+        {
+          "accepted": true
+        },
+        {
+          "accepted": true
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "confirmed-failed-terminal-plus-output",
+      "expected_accept": true,
+      "calls": [
+        {
+          "accepted": true
+        },
+        {
+          "accepted": true
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "orphan-worker-output",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "orphan-pending",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "pending-beside-confirmed-final",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "incomplete-worker_exit_confirmed",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "wrong-type-worker_exit_confirmed",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "incomplete-launcher_exit_confirmed",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "wrong-type-launcher_exit_confirmed",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "incomplete-job_empty",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "wrong-type-job_empty",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "malformed-final-json",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "JSONDecodeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "final-is-not-object",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "wrong-final-schema",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "wrong-nonce",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "wrong-receipt-path",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "nonterminal-status",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "oversized-final",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "ValueError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "unknown-text-entry",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "unknown-json-name",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "uppercase-uuid-name",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "directory-final",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "directory-output",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "directory-pending",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "symlink-final",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    },
+    {
+      "name": "symlink-output",
+      "expected_accept": false,
+      "calls": [
+        {
+          "accepted": false,
+          "exception": "RuntimeError"
+        }
+      ],
+      "all_input_entries_preserved": true
+    }
+  ],
+  "elapsed_seconds": 3.0618507500003034,
+  "native_calls_attempted": 0,
+  "cases_completed": 27
+}

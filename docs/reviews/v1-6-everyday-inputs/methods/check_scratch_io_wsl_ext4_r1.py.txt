@@ -1,0 +1,529 @@
+"""Matched synthetic filesystem evidence only; not a native gate or clock renewal.
+
+Usage: python3 -B check_scratch_io_wsl_ext4_r1.py UUID32 EXACT_SOURCE_SHA256
+Requires exclusive ownership of this task's measured roots during the profile.
+No cache eviction, application input, Go invocation, mirror copy or deletion.
+SIGTERM/SIGINT and the local timer produce failed receipts when storage permits.
+SIGKILL, host loss and uninterruptible filesystem waits are not claimed safe.
+"""
+import datetime
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import resource
+import signal
+import stat
+import sys
+import time
+
+STARTED = time.monotonic()
+CPU_STARTED = time.process_time()
+WORK_SECONDS = 40
+TOTAL_SECONDS = 50
+GIB = 1 << 30
+ORIGINAL_BASELINE = 752431588
+PROFILE_GROWTH_CAP = 64 << 20
+REPORT_CAP = 128 << 10
+PUBLICATION_RESERVE = 512 << 10  # INSIDE the64MiB and original1GiB caps.
+R = Path('/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S = Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+D = R / 'docs/reviews/v1-6-everyday-inputs'
+X_HOME = Path('/home/paul_work')
+X_TASK = X_HOME / 'work/_temp/codex__content-v1-6'
+C_BASE = S / 'probe/io-profile-r1'
+X_BASE = X_TASK / 'io-profile-r1'
+RUNNER = S / 'probe/run_worktree_lane_wsl_r9.py'
+RUNNER_SHA = '4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213'
+HELPER_SHA = '67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7'
+FAILED_NATIVE = D / 'v1-6-wsl-native-r1-result.json'
+FAILED_NATIVE_SHA = 'fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2'
+SMALL = bytes(range(256)) * 64
+LARGE_BLOCK = bytes(range(256)) * 256
+SMALL_SHA = hashlib.sha256(SMALL).hexdigest()
+LARGE_SHA = hashlib.sha256(LARGE_BLOCK * 128).hexdigest()
+PROFILE_PAYLOAD_BYTES = 36 << 20
+received_signal = None
+helper_active = False
+runner = None
+last_accounting = None
+helper_calls = 0
+helper_completed_calls = 0
+receipt_root = None
+peak_rss = 0
+
+
+def utc():
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+
+def on_signal(number, frame):
+    global received_signal
+    if received_signal is None:
+        received_signal = number
+    if runner is not None:
+        runner.received_signal = number
+    # Never interrupt the reviewed subprocess ownership/wait protocol midway.
+    if not helper_active:
+        raise InterruptedError('catchable signal ' + str(number))
+
+
+def hash_file(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as source:
+        while True:
+            chunk = source.read(64 << 10)
+            if not chunk:
+                break
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def directory_chain(path):
+    path = Path(path)
+    if not path.is_absolute() or '..' in path.parts:
+        raise ValueError('absolute literal root required')
+    for item in [Path(path.anchor), *list(reversed(path.parents)), path]:
+        mode = item.lstat().st_mode
+        if not stat.S_ISDIR(mode) or item.resolve(strict=True) != item:
+            raise ValueError('non-directory or redirected ancestor: ' + str(item))
+    return path
+
+
+def absent(path):
+    try:
+        Path(path).lstat()
+    except FileNotFoundError:
+        return
+    raise FileExistsError('fresh owned path already exists: ' + str(path))
+
+
+def free_bytes(path):
+    v = os.statvfs(path)
+    return v.f_bavail * v.f_frsize
+
+
+def mem_available():
+    with open('/proc/meminfo') as source:
+        for line in source:
+            if line.startswith('MemAvailable:'):
+                return int(line.split()[1]) * 1024
+    raise RuntimeError('MemAvailable unavailable')
+
+
+def rss_bytes():
+    global peak_rss
+    current = None
+    with open('/proc/self/status') as source:
+        for line in source:
+            if line.startswith('VmRSS:'):
+                current = int(line.split()[1]) * 1024
+                break
+    if current is None:
+        raise RuntimeError('RSS unavailable')
+    peak_rss = max(peak_rss, current, int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) * 1024)
+    return peak_rss
+
+
+def mount_info(path):
+    matches = []
+    with open('/proc/self/mountinfo') as source:
+        for line in source:
+            left, right = line.rstrip('\n').split(' - ', 1)
+            fields = left.split()
+            mount = re.sub(r'\\([0-7]{3})', lambda m: chr(int(m.group(1), 8)), fields[4])
+            p = Path(mount)
+            if path == p or path.is_relative_to(p):
+                matches.append((len(mount), {'mount': mount, 'filesystem': right.split()[0], 'device': fields[2]}))
+    if not matches:
+        raise RuntimeError('filesystem identity unavailable')
+    return max(matches, key=lambda v: v[0])[1]
+
+
+def io_counters():
+    try:
+        with open('/proc/self/io') as source:
+            values = dict(line.strip().split(': ', 1) for line in source)
+        return {'supported': True, 'values': {key: int(value) for key, value in values.items()}}
+    except FileNotFoundError:
+        return {'supported': False, 'reason': 'proc-self-io-absent'}
+    # Permission, malformed and other I/O errors refuse the profile.
+
+
+def guard(work=True, first=False):
+    if received_signal is not None:
+        raise InterruptedError('catchable signal ' + str(received_signal))
+    elapsed = time.monotonic() - STARTED
+    if elapsed >= (WORK_SECONDS if work else TOTAL_SECONDS):
+        raise TimeoutError('profile work/total deadline')
+    floor = (17 if first else 16) * GIB
+    if free_bytes(R) < floor or free_bytes(X_HOME) < floor or mem_available() < 16 * GIB:
+        raise RuntimeError('both-volume disk or WSL-memory floor')
+    if rss_bytes() > 2 * GIB:
+        raise RuntimeError('process RSS2GiB')
+    if last_accounting is not None:
+        # Reserve ALL permitted profile growth, including reports/helper receipts,
+        # at EVERY operation. The original baseline is never replaced.
+        if last_accounting['total_bytes'] - ORIGINAL_BASELINE + PROFILE_GROWTH_CAP > GIB:
+            raise RuntimeError('original-baseline1GiB headroom')
+
+
+def operation(function, *args):
+    guard()
+    value = function(*args)
+    guard()
+    return value
+
+
+def exclusive_json(path, value, work=False):
+    guard(work=work)
+    blob = (json.dumps(value, sort_keys=True, indent=2) + '\n').encode()
+    if len(blob) > REPORT_CAP:
+        raise ValueError('report128KiB')
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    try:
+        with os.fdopen(fd, 'wb') as out:
+            out.write(blob)
+            out.flush()
+            os.fsync(out.fileno())
+    finally:
+        # fdopen owns the descriptor; no unknown path is removed on failure.
+        pass
+    directory_fd = os.open(Path(path).parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
+    guard(work=work)
+    return {'path': str(path), 'bytes': len(blob), 'sha256': hashlib.sha256(blob).hexdigest()}
+
+
+def load_runner():
+    global runner
+    if not sys.dont_write_bytecode or sys.flags.optimize != 0:
+        raise RuntimeError('ordinary nonoptimized Python -B required')
+    if hash_file(RUNNER) != RUNNER_SHA:
+        raise RuntimeError('exact R9 source required')
+    loader = importlib.machinery.SourceFileLoader('io_profile_exact_r9', str(RUNNER))
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    module = importlib.util.module_from_spec(spec)
+    loader.exec_module(module)  # Reviewed inert import; __main__ is not invoked.
+    if hash_file(RUNNER) != RUNNER_SHA or module.R != R or module.S != S or module.WINDOWS_HELPER_SHA != HELPER_SHA:
+        raise RuntimeError('runner source/roots/helper pin changed')
+    original_subprocess = module.subprocess
+    real_run = original_subprocess.run
+
+    class MetadataOnly:
+        PIPE = original_subprocess.PIPE
+
+        @staticmethod
+        def run(argv, **kwargs):
+            global helper_calls
+            expected_roots = module.measurement_roots({'additional_measure_dirs': [str(S / 'tools')]})
+            expected_prefix = [str(module.WINDOWS_PYTHON), '-B', module.windows_path(module.WINDOWS_HELPER)]
+            if not isinstance(argv, list) or argv[:3] != expected_prefix or argv[4:] != [module.windows_path(p) for p in expected_roots]:
+                raise RuntimeError('only exact R9/R4 original-seven-root metadata invocation admitted')
+            receipt = Path('/mnt/c/' + argv[3][3:])
+            if not re.fullmatch(r'[0-9a-f]{32}\.json', receipt.name) or receipt.parent != S / 'probe/windows-size-helper-r4':
+                raise RuntimeError('helper receipt outside exact owned registry')
+            if kwargs != {'stdout': original_subprocess.PIPE, 'stderr': original_subprocess.PIPE, 'timeout': 5, 'check': True}:
+                raise RuntimeError('reviewed helper subprocess policy changed')
+            if helper_calls >= 2:
+                raise RuntimeError('only before/after metadata helper calls admitted')
+            helper_calls += 1
+            return real_run(argv, **kwargs)
+
+    module.subprocess = MetadataOnly
+    runner = module
+    return module
+
+
+def accounting(roots, work):
+    global helper_active, helper_completed_calls
+    guard(work=work)
+    if time.monotonic() - STARTED >= (WORK_SECONDS if work else TOTAL_SECONDS) - 6:
+        raise TimeoutError('no helper/accounting reserve remaining')
+    helper_active = True
+    try:
+        c_bytes = runner.measured_size(roots, interruptible=True)
+        helper_completed_calls += 1
+    finally:
+        helper_active = False
+    guard(work=work)
+    # Preserve the independently reviewed Linux fresh traversal unchanged.
+    x_bytes = runner.linux_measured_size([X_TASK], interruptible=True)
+    guard(work=work)
+    runner.validate_prior_windows_receipts(S / 'probe/windows-size-helper-r4')
+    if hash_file(RUNNER) != RUNNER_SHA:
+        raise RuntimeError('R9 changed during profile')
+    return {'sampled_at_utc': utc(), 'C_bytes': c_bytes, 'ext4_owned_bytes': x_bytes,
+            'total_bytes': c_bytes + x_bytes, 'growth_from_retained_original_baseline': c_bytes + x_bytes - ORIGINAL_BASELINE,
+            'C_free_bytes': free_bytes(R), 'ext4_free_bytes': free_bytes(X_HOME),
+            'WSL_MemAvailable_bytes': mem_available()}
+
+
+def mkdir(path):
+    absent(path)
+    os.mkdir(path, 0o700)
+    directory_chain(path)
+
+
+def write_payload(path, large):
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(fd, 'wb') as target:
+        if large:
+            for _ in range(128):
+                guard()
+                target.write(LARGE_BLOCK)
+                guard()
+        else:
+            target.write(SMALL)
+        target.flush()
+
+
+def copy_payload(source, target):
+    if not stat.S_ISREG(source.lstat().st_mode):
+        raise ValueError('copy source is not regular')
+    fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    with source.open('rb') as inp, os.fdopen(fd, 'wb') as out:
+        while True:
+            guard()
+            chunk = inp.read(64 << 10)
+            if not chunk:
+                break
+            out.write(chunk)
+            guard()
+        out.flush()
+
+
+def fresh_stat(path, expected):
+    value = path.lstat()
+    if not stat.S_ISREG(value.st_mode) or value.st_size != expected or value.st_nlink != 1:
+        raise ValueError('synthetic file shape/size/link drift')
+    return value.st_size
+
+
+def read_sha(path, expected):
+    h = hashlib.sha256()
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, 'rb') as inp:
+        if not stat.S_ISREG(os.fstat(inp.fileno()).st_mode):
+            raise ValueError('hash input nonregular')
+        while True:
+            guard()
+            chunk = inp.read(64 << 10)
+            if not chunk:
+                break
+            h.update(chunk)
+            guard()
+    actual = h.hexdigest()
+    if actual != expected:
+        raise ValueError('synthetic SHA parity failed')
+    return actual
+
+
+def fsync_file(path):
+    fd = os.open(path, os.O_RDWR | os.O_NOFOLLOW)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def fsync_dir(path):
+    fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def timed_phase(name, function):
+    guard()
+    started, cpu, io = time.monotonic(), time.process_time(), io_counters()
+    result = function()
+    guard()
+    end_io = io_counters()
+    return {'name': name, 'wall_seconds': time.monotonic() - started,
+            'cpu_seconds': time.process_time() - cpu, 'proc_self_io_before': io,
+            'proc_self_io_after': end_io, 'result': result}
+
+
+def workload(root):
+    files = [(Path('src') / ('d%02d' % (i // 8)) / ('f%02d.bin' % i), False) for i in range(64)]
+    files.append((Path('src/large.bin'), True))
+    dirs = [root / 'src', root / 'dst']
+    dirs += [root / group / ('d%02d' % i) for group in ('src', 'dst') for i in range(8)]
+    def write():
+        for directory in dirs:
+            operation(mkdir, directory)
+        for relative, large in files:
+            operation(write_payload, root / relative, large)
+        return {'files': 65, 'bytes': 9 << 20, 'directories': 18}
+    def copy():
+        for relative, _ in files:
+            operation(copy_payload, root / relative, root / 'dst' / relative.relative_to('src'))
+        return {'files': 65, 'bytes': 9 << 20}
+    all_files = [(root / relative, large) for relative, large in files]
+    all_files += [(root / 'dst' / relative.relative_to('src'), large) for relative, large in files]
+    def stats():
+        total = 0
+        for path, large in all_files:
+            total += operation(fresh_stat, path, (8 << 20) if large else (16 << 10))
+        return {'files': len(all_files), 'bytes': total}
+    def reads():
+        manifest = []
+        for path, large in all_files:
+            digest = operation(read_sha, path, LARGE_SHA if large else SMALL_SHA)
+            manifest.append([str(path.relative_to(root)), (8 << 20) if large else (16 << 10), digest])
+        return {'files': len(all_files), 'manifest_sha256': hashlib.sha256(json.dumps(manifest, separators=(',', ':')).encode()).hexdigest()}
+    def syncs():
+        for path, _ in all_files:
+            operation(fsync_file, path)
+        for directory in dirs + [root]:
+            operation(fsync_dir, directory)
+        return {'fresh_file_fsync_calls': 130, 'directory_fsync_calls': 19}
+    return [timed_phase(name, function) for name, function in
+            [('write', write), ('copy', copy), ('fresh-stat', stats), ('read-sha256', reads), ('fresh-fsync', syncs)]]
+
+
+def main(report):
+    global last_accounting, receipt_root
+    if len(sys.argv) != 3 or not re.fullmatch(r'[0-9a-f]{32}', sys.argv[1]) or not re.fullmatch(r'[0-9a-f]{64}', sys.argv[2]):
+        raise ValueError('UUID32 and exact source SHA256 required')
+    nonce, source_sha = sys.argv[1:]
+    if not sys.dont_write_bytecode or sys.flags.optimize != 0:
+        raise RuntimeError('ordinary nonoptimized Python -B required')
+    if hash_file(__file__) != source_sha:
+        raise RuntimeError('profile source binding differs')
+    directory_chain(R)
+    directory_chain(S / 'probe')
+    directory_chain(X_HOME)
+    if mount_info(X_HOME)['filesystem'] != 'ext4' or X_HOME.stat().st_dev == R.stat().st_dev:
+        raise RuntimeError('owned Linux root is not distinct ext4')
+    guard(first=True)
+    c_target, x_target = C_BASE / nonce, X_BASE / nonce
+    for base, target in ((C_BASE, c_target), (X_BASE, x_target)):
+        absent(target)
+        try:
+            directory_chain(base)
+        except FileNotFoundError:
+            pass
+    # This is the first profile, not a reusable mirror or existing ext4 workload.
+    try:
+        directory_chain(X_TASK)
+        if any(X_TASK.iterdir()):
+            raise RuntimeError('ext4 task root must be fresh or empty')
+    except FileNotFoundError:
+        pass
+    if hash_file(FAILED_NATIVE) != FAILED_NATIVE_SHA:
+        raise RuntimeError('retained failed native result changed')
+    failure = json.loads(FAILED_NATIVE.read_bytes())
+    if failure.get('status') != 'failed' or failure.get('original_start_size') != ORIGINAL_BASELINE or failure.get('all_steps_completed') is not False:
+        raise RuntimeError('original failed campaign/baseline required')
+    module = load_runner()
+    roots = module.measurement_roots({'additional_measure_dirs': [str(S / 'tools')]})
+    if len(roots) != 7:
+        raise RuntimeError('exact original seven C roots required')
+    last_accounting = accounting(roots, work=True)
+    before = dict(last_accounting)
+    guard(first=True)
+    for path in (X_HOME / 'work', X_HOME / 'work/_temp', X_TASK, X_BASE, C_BASE):
+        try:
+            directory_chain(path)
+        except FileNotFoundError:
+            operation(mkdir, path)
+    operation(mkdir, c_target)
+    operation(mkdir, x_target)
+    receipt_root = c_target
+    report.update(nonce=nonce, checked_at_utc=utc(), original_baseline_bytes=ORIGINAL_BASELINE,
+                  baseline_origin_sha256=FAILED_NATIVE_SHA, accounting_before=before,
+                  roots_C=[str(p) for p in roots], ext4_accounting_root=str(X_TASK),
+                  profile_roots={'NTFS': str(c_target), 'ext4': str(x_target)},
+                  source_bindings={'profile': source_sha, 'R9': RUNNER_SHA, 'R4': HELPER_SHA,
+                                   'Windows_python': module.WINDOWS_PYTHON_SHA,
+                                   'Linux_python_path': sys.executable, 'Linux_python_sha256': hash_file(sys.executable)},
+                  filesystem_identities={'C': mount_info(R), 'ext4': mount_info(X_HOME)},
+                  no_original_data_writes=True, source_or_native_tests_executed=0,
+                  limits={'work_seconds': 40, 'total_seconds': 50, 'RSS_bytes': 2 * GIB,
+                          'original_baseline_growth_bytes': GIB, 'profile_growth_bytes': PROFILE_GROWTH_CAP,
+                          'report_bytes': REPORT_CAP, 'publication_reserve_inside_caps': PUBLICATION_RESERVE})
+    exclusive_json(c_target / 'pending.json', dict(report, status='pending'), work=True)
+    report['workloads'] = {'NTFS': workload(c_target), 'ext4': workload(x_target)}
+    left = next(p['result'] for p in report['workloads']['NTFS'] if p['name'] == 'read-sha256')
+    right = next(p['result'] for p in report['workloads']['ext4'] if p['name'] == 'read-sha256')
+    if left != right:
+        raise RuntimeError('matched fresh SHA manifest parity failed')
+    finished = time.monotonic() - STARTED
+    if finished >= WORK_SECONDS:
+        raise TimeoutError('completed workload exceeded40seconds')
+    report['work_finished_elapsed_seconds'] = finished
+    after = accounting(roots, work=False)
+    profile_growth_upper = after['total_bytes'] - before['total_bytes'] + PUBLICATION_RESERVE
+    if profile_growth_upper > PROFILE_GROWTH_CAP or after['growth_from_retained_original_baseline'] + PUBLICATION_RESERVE > GIB:
+        raise RuntimeError('fresh after-accounting growth bound')
+    if after['C_free_bytes'] - PUBLICATION_RESERVE < 16 * GIB or after['ext4_free_bytes'] - PUBLICATION_RESERVE < 16 * GIB:
+        raise RuntimeError('final-publication floor reserve')
+    report.update(accounting_after_fresh_sample=after, final_publication_growth_upper_bound=profile_growth_upper,
+                  synthetic_payload_bytes=PROFILE_PAYLOAD_BYTES, matched_hash_parity=True,
+                  accounting_sample_precedes_final_report=True,
+                  helper_calls=helper_calls, windows_metadata_cleanup='confirmed_by_exact_R9_final_receipts',
+                  elapsed_seconds_before_publication=time.monotonic() - STARTED,
+                  cpu_seconds=time.process_time() - CPU_STARTED, peak_process_RSS_bytes=rss_bytes())
+    if hash_file(__file__) != source_sha or hash_file(FAILED_NATIVE) != FAILED_NATIVE_SHA:
+        raise RuntimeError('profile/failure proof changed during run')
+    guard(work=False)
+    return report
+
+
+if __name__ == '__main__':
+    signal.signal(signal.SIGTERM, on_signal)
+    signal.signal(signal.SIGINT, on_signal)
+    signal.signal(signal.SIGALRM, on_signal)
+    signal.setitimer(signal.ITIMER_REAL, TOTAL_SECONDS)
+    report = {'schema': 'v1-6-matched-scratch-io-profile-r1', 'status': 'failed',
+              'qualification_scope': 'synthetic_metadata_and_io_only',
+              'claim_limit': 'Does not prove NTFS caused the failed lane or predict native build/CPU/race throughput. No R1 clock renewal, resume or native PASS.',
+              'exclusive_task_root_ownership_required': True,
+              'cache_state': 'ordinary cached filesystem operations; no eviction or cold-cache claim',
+              'retained_files': True, 'cleanup_or_deletions': 0}
+    exit_code = 1
+    try:
+        main(report)
+        report['status'] = 'completed_synthetic_io_profile'
+        exit_code = 0
+    except BaseException as exc:
+        report.update(status='failed', failure=type(exc).__name__ + ': ' + str(exc),
+                      received_signal=received_signal, windows_metadata_cleanup='unconfirmed',
+                      elapsed_seconds_before_publication=time.monotonic() - STARTED)
+        if runner is not None and not helper_active and helper_completed_calls == helper_calls:
+            try:
+                runner.validate_prior_windows_receipts(S / 'probe/windows-size-helper-r4')
+                report['windows_metadata_cleanup'] = 'confirmed_existing_terminal_registry'
+            except BaseException as cleanup_exc:
+                report['cleanup_failure'] = type(cleanup_exc).__name__ + ': ' + str(cleanup_exc)
+    try:
+        # Failure finalization gets the reserved total budget, not another work window.
+        received_signal = None
+        if runner is not None:
+            runner.received_signal = None
+        if receipt_root is None:
+            raise RuntimeError('fresh owned receipt root unavailable; no fallback original-root write')
+        report['publication_started_elapsed_seconds'] = time.monotonic() - STARTED
+        proof = exclusive_json(receipt_root / 'result.json', report, work=False)
+        total_elapsed = time.monotonic() - STARTED
+        if total_elapsed >= TOTAL_SECONDS:
+            raise TimeoutError('publication exceeded total50seconds; receipt not accepted')
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        print(json.dumps({'status': report['status'], 'exit_code': exit_code,
+                          'total_elapsed_seconds': total_elapsed, 'result': proof}, sort_keys=True))
+    except BaseException as exc:
+        exit_code = 1
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        print(json.dumps({'status': 'failed_publication', 'error': type(exc).__name__ + ': ' + str(exc),
+                          'owned_receipt_root': str(receipt_root) if receipt_root else None,
+                          'total_elapsed_seconds': time.monotonic() - STARTED}, sort_keys=True))
+    raise SystemExit(exit_code)

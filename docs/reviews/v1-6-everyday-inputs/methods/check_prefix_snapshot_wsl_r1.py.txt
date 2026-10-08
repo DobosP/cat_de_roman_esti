@@ -1,0 +1,86 @@
+"""Bounded source regression for prefix receipt snapshot binding and owned cache accounting."""
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+from pathlib import Path
+import sys
+import time
+sys.dont_write_bytecode=True
+R=Path("/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6")
+S=Path("/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6")
+D=R/"docs/reviews/v1-6-everyday-inputs"
+def load(name,path):
+    loader=importlib.machinery.SourceFileLoader(name,str(path))
+    spec=importlib.util.spec_from_loader(name,loader)
+    module=importlib.util.module_from_spec(spec)
+    loader.exec_module(module)
+    return module
+def main():
+    start=time.monotonic()
+    directory=Path(sys.argv[1]).resolve()
+    if directory==S/"probe" or not directory.is_relative_to((S/"probe").resolve()):
+        raise ValueError("fixture directory must be inside owned probe")
+    directory.mkdir(mode=0o700)
+    paths={"old":D/"methods/run_worktree_lane_r4_r2.py.txt","new":D/"methods/run_worktree_lane_wsl_r2.py.txt"}
+    bindings={name:hashlib.sha256(path.read_bytes()).hexdigest() for name,path in paths.items()}
+    manifest_sha="a"*64
+    deadline="2026-10-07T12:20:00+00:00"
+    began="2026-10-07T12:00:00+00:00"
+    manifest={"lane":"prefix-snapshot","deadline_utc":deadline,"commands":[{"name":"prefix","argv":["python3","-c","pass"]}]}
+    receipt=directory/"prefix-snapshot-step-0-result.json"
+    row={"index":0,"manifest_sha256":manifest_sha,"name":"prefix","argv":["python3","-c","pass"],"exit_code":0,"guard":None,"status":"passed","original_start_size":0,"deadline_utc":deadline,"campaign_started_at_utc":began,"evidence":"original"}
+    raw=(json.dumps(row,sort_keys=True)+"\n").encode()
+    tampered=dict(row,evidence="tampered")
+    changed=(json.dumps(tampered,sort_keys=True)+"\n").encode()
+    state={"manifest_sha256":manifest_sha,"deadline_utc":deadline,"measurement_roots":[str(directory)],"status":"ready","pending":None,"next_index":1,"original_start_size":0,"campaign_started_at_utc":began,"steps":[{"receipt_path":str(receipt),"receipt_sha256":hashlib.sha256(raw).hexdigest()}]}
+    old=load("old_guard_snapshot",paths["old"]);old.D=directory
+    new=load("new_guard_snapshot",paths["new"]);new.D=directory
+    receipt.write_bytes(raw)
+    actual_digest=old.digest
+    def swap_after_digest(path):
+        result=actual_digest(path)
+        if Path(path)==receipt:
+            receipt.write_bytes(changed)
+        return result
+    old.digest=swap_after_digest
+    observed=old.load_prefix(state,manifest,1,manifest_sha,[directory])
+    assert observed[0]["evidence"]=="tampered", "original defect was not reproduced"
+    receipt.write_bytes(raw)
+    actual_read=Path.read_bytes
+    reads=0
+    def snapshot_then_swap(path):
+        nonlocal reads
+        value=actual_read(path)
+        if path==receipt:
+            reads+=1
+            receipt.write_bytes(changed)
+        return value
+    Path.read_bytes=snapshot_then_swap
+    try:
+        accepted=new.load_prefix(state,manifest,1,manifest_sha,[directory])
+    finally:
+        Path.read_bytes=actual_read
+    assert reads==1 and accepted[0]["evidence"]=="original"
+    refused=False
+    try:
+        new.load_prefix(state,manifest,1,manifest_sha,[directory])
+    except ValueError as exc:
+        refused=str(exc)=="successful prefix receipt changed"
+    assert refused, "pre-existing receipt drift must refuse"
+    new.S=directory/"scratch";new.R=directory/"tree"
+    cache=new.S/"gomodcache";cache.mkdir(parents=True)
+    new.R.mkdir()
+    roots=new.measurement_roots({})
+    assert cache.resolve() in roots
+    before=new.measured_size(roots)
+    (cache/"owned-module.txt").write_bytes(b"x"*8192)
+    assert new.measured_size(roots)-before==8192
+    assert all(hashlib.sha256(path.read_bytes()).hexdigest()==bindings[name] for name,path in paths.items())
+    elapsed=time.monotonic()-start
+    assert elapsed<=30
+    report={"schema":"v1-6-wsl-prefix-snapshot-regression-r1","passed":True,"elapsed_seconds":elapsed,"budget_seconds":30,"bindings":bindings,"original_separate_read_defect_reproduced":True,"new_prefix_read_count":reads,"new_parsed_evidence_matches_hashed_buffer":True,"preexisting_drift_refused":True,"owned_modulecache_counted_bytes":8192,"application_or_native_executions":0}
+    (directory/"check-result.json").write_text(json.dumps(report,sort_keys=True,indent=2)+"\n",encoding="utf-8")
+    print(json.dumps(report))
+if __name__=="__main__":
+    main()

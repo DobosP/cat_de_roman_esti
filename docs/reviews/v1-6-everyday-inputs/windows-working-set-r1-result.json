@@ -1,0 +1,82 @@
+{
+  "schema": "v1-6-windows-own-hard-working-set-diagnostic-r1",
+  "status": "diagnostic_completed",
+  "parent_pid": 21284,
+  "parent_creation_time_100ns": 134358417037264632,
+  "diagnostic_sha256": "b62e344845779a26833060b5d7bf30daf9d7c971c4aac9fb3e364f1584121e28",
+  "interpreter_sha256": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+  "child_process_creations": 0,
+  "native_or_application_tests": 0,
+  "token_adjustments": 0,
+  "system_or_account_changes": 0,
+  "own_process_state_lifetime": "until this diagnostic process exits",
+  "helper_execution_or_qualification": false,
+  "token_handle_closed_confirmed": true,
+  "requested_minimum_working_set_bytes": 1048576,
+  "requested_maximum_working_set_bytes": 67108864,
+  "requested_enforcement_flags": 4,
+  "hard_max_verified": true,
+  "abi": {
+    "pointer_bytes": 8,
+    "luid_bytes": 8,
+    "privilege_entry_bytes": 12,
+    "privileges_offset": 4
+  },
+  "memory_before": {
+    "working_set_bytes": 19750912,
+    "peak_working_set_bytes": 19750912,
+    "committed_bytes": 10858496,
+    "peak_committed_bytes": 10858496
+  },
+  "working_set_before": {
+    "returned_success": true,
+    "winerror": 0,
+    "minimum_bytes": 204800,
+    "maximum_bytes": 1413120,
+    "enforcement_flags": 10
+  },
+  "relevant_current_token_privileges": {
+    "SeIncreaseWorkingSetPrivilege": {
+      "present": true,
+      "attributes": 0,
+      "enabled": false,
+      "enabled_by_default": false
+    },
+    "SeIncreaseQuotaPrivilege": {
+      "present": false,
+      "enabled": false,
+      "enabled_by_default": false
+    },
+    "SeIncreaseBasePriorityPrivilege": {
+      "present": false,
+      "enabled": false,
+      "enabled_by_default": false
+    }
+  },
+  "set_hard_max": {
+    "returned_success": true,
+    "winerror": 0
+  },
+  "working_set_after": {
+    "returned_success": true,
+    "winerror": 0,
+    "minimum_bytes": 1048576,
+    "maximum_bytes": 67108864,
+    "enforcement_flags": 6
+  },
+  "memory_after": {
+    "working_set_bytes": 20238336,
+    "peak_working_set_bytes": 20238336,
+    "committed_bytes": 10858496,
+    "peak_committed_bytes": 10858496
+  },
+  "working_set_at_work_completion": {
+    "returned_success": true,
+    "winerror": 0,
+    "minimum_bytes": 1048576,
+    "maximum_bytes": 67108864,
+    "enforcement_flags": 6
+  },
+  "work_finished_elapsed_seconds": 0.01599999999962165,
+  "elapsed_seconds": 0.01599999999962165
+}

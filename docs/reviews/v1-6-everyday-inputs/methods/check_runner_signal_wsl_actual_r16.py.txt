@@ -1,0 +1,466 @@
+"""Actual mixed-root Python-only WSL fixture R16 for the exact R12 serial runner; no application execution.
+Usage: qualified_python check_runner_signal_wsl_actual_r16.py NEW_DIRECTORY_UNDER_OWN_PROBE [active|finalization|queued]
+Active isolates real child/grandchild cleanup; the separate real queued-prefix gate remains mandatory.
+Work has24seconds; six further seconds are reserved for owned cleanup/reporting.
+"""
+import datetime
+import hashlib
+import json
+import os
+from pathlib import Path
+import signal
+import stat
+import subprocess
+import sys
+if not sys.dont_write_bytecode or sys.flags.optimize != 0:
+    raise RuntimeError("ordinary nonoptimized qualified Python -B required")
+import time
+
+R = Path('/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S = Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+D = R / 'docs/reviews/v1-6-everyday-inputs'
+X = Path('/home/paul_work/work/_temp/codex__content-v1-6')
+RUNNER_SHA = '77f94dcea4518a9bc54cea1b3f5f05f5a88e849ef62d051fde6bb7ddba9021a0'
+MODE = S / 'probe/go-tool-telemetry-r1/mode'
+MODE_SHA = 'b470b84cf0cd3189e10615bffea7d5cbd9f61134ba1c2cfd513ddd45b776a5f6'
+MIRROR = X / 'runtime-readset-mirror-r1/43a6894fd7a94b3587c744815884c9f3'
+COPY_RESULT = D / 'wsl-runtime-mirror-r6-result.json'
+COPY_RESULT_SHA = 'efa8509d719fc2507248873a76c6059907a78f6839a96409769119befe0f1238'
+
+
+def exact_bindings():
+    # Parent must obtain independent acceptance of this exact closed copy before
+    # execution. This fixture's manifest is Python-only, never native admission.
+    runner = S / 'probe/run_worktree_lane_wsl_r12.py'
+    for path, wanted in ((runner, RUNNER_SHA), (MODE, MODE_SHA), (COPY_RESULT, COPY_RESULT_SHA)):
+        value = path.lstat()
+        if (not stat.S_ISREG(value.st_mode) or value.st_nlink != 1 or
+                path.resolve(strict=True) != path or sha(path) != wanted):
+            raise ValueError('exact unredirected fixture runner/mode/copy proof required')
+    if not MIRROR.is_dir() or MIRROR.resolve(strict=True) != MIRROR:
+        raise ValueError('closed direct mirror root differs')
+    result = json.loads(COPY_RESULT.read_bytes())
+    if (result.get('status') != 'completed_metadata_mirror_preparation' or
+            result.get('mirror') != str(MIRROR) or result.get('original_baseline_bytes') != 752431588 or
+            result.get('parity', {}).get('reader_files') != 172 or
+            result['parity'].get('reader_bytes') != 57335773 or
+            result['parity'].get('exact_runtime_files') != 109 or
+            result['parity'].get('canonical_runtime_inventory_after_copy_exact') is not True or
+            result['parity'].get('all_source_destination_hashes_exact') is not True):
+        raise ValueError('exact completed mirror parity receipt required')
+    return {str(MODE): MODE_SHA, str(COPY_RESULT): COPY_RESULT_SHA}
+
+
+def exact_row_mode(row):
+    if (row['pre_checks'].get('owned-telemetry-mode:off-shape-hash') is not True or
+            row['post_checks'].get('owned-telemetry-mode:off-shape-hash') is not True):
+        raise AssertionError('fresh pre/post task-owned off mode proof required')
+
+
+def namespace_manifest():
+    path = D / 'wsl-native-namespace-spec-r1.json'
+    if sha(path) != '2e4a9543c414de1ed1e406febc5b7eb09ccac095e8f6e3b1237feb2421906825':
+        raise ValueError('namespace fixture binding differs')
+    obj = json.loads(path.read_bytes())
+    return {key:obj[key] for key in ('runtime_namespace','canonical_go_namespace')}
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+def info(pid):
+    try:
+        fields = (Path('/proc') / str(pid) / 'stat').read_text().rsplit(')', 1)[1].split()
+        return {'pid': pid, 'state': fields[0], 'pgid': int(fields[2]),
+                'sid': int(fields[3]), 'start_ticks': int(fields[19])}
+    except (OSError, ValueError, IndexError):
+        return None
+
+def live(pid):
+    value = info(pid)
+    return value is not None and value['state'] not in ('Z', 'X')
+
+def main():
+    started = time.monotonic()
+    work_deadline, hard_deadline = started + 24, started + 30
+    directory = Path(sys.argv[1]).resolve()
+    if not directory.is_relative_to(S / 'probe') or directory == S / 'probe':
+        raise ValueError('check directory must be inside owned probe')
+    directory.mkdir(mode=0o700)
+    runner = S / 'probe/run_worktree_lane_wsl_r12.py'
+    bindings = exact_bindings()
+    lane = 'r16-active-' + hashlib.sha256(str(directory).encode()).hexdigest()[:16]
+    state_path = S / 'probe' / (lane + '-r4-r2-state.json')
+    result_path = D / (lane + '-result.json')
+    marker, never = directory / 'owned-processes.json', directory / 'must-not-run.txt'
+    child_source = directory / 'child.py'
+    child_source.write_text("""import json,os,pathlib,signal,subprocess,sys,time
+marker=pathlib.Path(sys.argv[1])
+grand=subprocess.Popen([sys.executable,"-c","import time; time.sleep(60)"])
+def identity(pid):
+ f=pathlib.Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split()
+ return {'pid':pid,'pgid':int(f[2]),'sid':int(f[3]),'start_ticks':int(f[19])}
+def stopped(signum,frame):
+ try:
+  grand.terminate()
+  grand.wait(timeout=1)
+ except ProcessLookupError:
+  pass
+ finally:
+  raise SystemExit(128+signum)
+signal.signal(signal.SIGTERM,stopped)
+signal.signal(signal.SIGINT,stopped)
+marker.write_text(json.dumps({'child':identity(os.getpid()),'grandchild':identity(grand.pid)}))
+while True: time.sleep(.1)
+""")
+    protected = directory / 'immutable-input.txt'
+    protected.write_text('R4 owned lifecycle fixture\n')
+    expected = {str(p): sha(p) for p in (protected, child_source, runner)}
+    expected.update(bindings)
+    current = datetime.datetime.now(datetime.timezone.utc)
+    manifest = {'schema': 'v1-6-r4-python-only-signal-fixture', 'lane': lane,
+                'runner_sha256': sha(runner), 'checked_at_utc': current.isoformat(),
+                'deadline_utc': (current + datetime.timedelta(minutes=20)).isoformat(),
+                'inputs': expected, 'unchanged': expected, 'scratch_bindings': {}, 'expected_after': {},
+                'additional_measure_dirs': [str(S / 'tools'),str(X)],
+                'historical_growth_baseline':752431588,
+                'execution_mirror':str(MIRROR),
+                'environment': {'PYTHONDONTWRITEBYTECODE': '1'},
+                'limits': {'RSS_bytes': 2 * 2**30, 'incremental_bytes': 2**30,
+                           'start_disk_floor_bytes': 17 * 2**30,
+                           'remaining_disk_memory_floor_bytes': 16 * 2**30,
+                           'GOMAXPROCS': 2, 'build_jobs': 2, 'metadata_reserve_seconds': 180},
+                'commands': [
+                    {'name': 'owned-python-child-and-grandchild', 'argv': [sys.executable, str(child_source), str(marker)]},
+                    {'name': 'forbidden-after-failure', 'argv': [sys.executable, '-c',
+                     'from pathlib import Path; Path(' + repr(str(never)) + ').write_text("bad")']},
+                ]}
+    manifest.update(namespace_manifest())
+    manifest_path = directory / 'admission.json'
+    manifest_path.write_text(json.dumps(manifest, sort_keys=True, indent=2) + '\n')
+    guard = ownership = failure = None
+    fallback_cleanup = False
+    observations = {}
+    work_finished_elapsed_seconds = None
+    def remaining():
+        left = work_deadline - time.monotonic()
+        if left <= 0:
+            raise TimeoutError('fixture work budget exhausted')
+        return left
+    try:
+        remaining()  # No owned launch is admitted after the 24-second work cutoff.
+        guard = subprocess.Popen([sys.executable, str(runner), str(manifest_path), 'all'],
+                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT, start_new_session=True)
+        while True:
+            remaining()
+            try:
+                ownership = json.loads(marker.read_bytes())
+                pending = json.loads(state_path.read_bytes())
+                if pending['pending']['phase'] == 'monitoring' and pending['pending']['pid'] == ownership['child']['pid']:
+                    break
+            except (OSError, ValueError, TypeError, KeyError):
+                pass
+            if guard.poll() is not None:
+                raise AssertionError('guard ended before owned marker/ownership state')
+            time.sleep(.05)
+        initial = pending
+        assert initial['status']=='pending' and initial['next_index']==0 and initial['steps']==[]
+        assert initial['pending']['index']==0 and initial['pending']['phase']=='monitoring'
+        assert initial['original_start_size']==752431588 and initial['fresh_campaign_start_size']>752431588
+        assert str(X) in initial['measurement_roots']
+        assert ownership['child']['pgid'] == ownership['child']['pid']
+        assert ownership['grandchild']['pgid'] == ownership['child']['pid']
+        guard.stdout.close()
+        os.kill(guard.pid, signal.SIGTERM)
+        # Supervisor exit includes its real post-checks and guarded durable publication.
+        # This wait remains inside the same 24-second work cutoff.
+        guard.wait(timeout=remaining())
+        assert guard.returncode != 0
+        final = json.loads(state_path.read_bytes())
+        result = json.loads(result_path.read_bytes())
+        assert final['status'] == 'failed' and result['status'] == 'failed'
+        assert len(final['steps'])==len(result['steps'])==1 and final['next_index']==1
+        assert final['original_start_size'] == initial['original_start_size']
+        assert final['deadline_utc'] == initial['deadline_utc'] == manifest['deadline_utc']
+        assert final['campaign_started_at_utc'] == initial['campaign_started_at_utc']
+        stopped = result['steps'][0]
+        assert stopped['index']==0 and stopped['argv']==manifest['commands'][0]['argv']
+        assert stopped['name']=='owned-python-child-and-grandchild'
+        assert stopped['received_signal'] == signal.SIGTERM and stopped['status'] == 'failed'
+        assert stopped['cleanup']['remaining_live_members'] == [] and stopped['cleanup']['error'] is None
+        assert all(stopped['pre_checks'].values()) and all(stopped['post_checks'].values())
+        exact_row_mode(stopped)
+        assert not live(ownership['child']['pid']) and not live(ownership['grandchild']['pid'])
+        failed_state_hash = sha(state_path)
+        assert sha(state_path)==failed_state_hash
+        assert not never.exists() and all(sha(p) == h for p, h in expected.items())
+        exact_bindings()
+        observations = {'scope':'active-owned-child-and-grandchild-cleanup',
+                        'owned_target_step0_launched':True,'forbidden_successor_not_launched':True,
+                        'real_queued_prefix_gate_remains_separate_and_mandatory':True,
+                        'whole_Linux_scratch_counted':True,'historical_baseline_not_reset':True,
+                        'baseline_deadline_start_preserved': True,
+                        'closed_stdout_durable_failed_receipt': True, 'SIGTERM_only_guard_pid': True,
+                        'owned_child_and_grandchild_not_live': True,
+                        'separate_real_failed_lane_cli_refusal_gate_mandatory':True,
+                        'input_hashes_exact': True, 'runner_result_sha256': sha(result_path),
+                        'exact_task_off_mode_pre_post':True, 'copy_result_sha256':COPY_RESULT_SHA}
+        work_finished_elapsed_seconds = time.monotonic() - started
+        if work_finished_elapsed_seconds > 24:
+            raise TimeoutError('fixture success validations exceeded 24-second work budget')
+        remaining()
+    except BaseException as exc:
+        failure = {'type': type(exc).__name__, 'message': str(exc)}
+    finally:
+        if guard is not None and guard.poll() is None:
+            fallback_cleanup = True
+            guard.terminate()
+            try:
+                guard.wait(timeout=max(.1, min(5, hard_deadline - time.monotonic())))
+            except subprocess.TimeoutExpired:
+                guard.kill()
+                guard.wait(timeout=.2)
+        if ownership is not None:
+            pgid = ownership['child']['pgid']
+            proven = False
+            for expected_owner in ownership.values():
+                actual = info(expected_owner['pid'])
+                if actual is not None and actual['start_ticks'] == expected_owner['start_ticks'] and actual['pgid'] == pgid and actual['sid'] == pgid:
+                    proven = True
+            if proven and any(live(value['pid']) for value in ownership.values()):
+                fallback_cleanup = True
+                os.killpg(pgid, signal.SIGTERM)
+                while time.monotonic() < hard_deadline - 1 and any(live(value['pid']) for value in ownership.values()):
+                    time.sleep(.05)
+                if any(live(value['pid']) for value in ownership.values()):
+                    os.killpg(pgid, signal.SIGKILL)
+        result = {'schema': 'v1-6-r4-python-only-signal-check', 'runner_sha256': sha(runner),
+                  'elapsed_seconds': time.monotonic() - started, 'budget_seconds': 30,
+                  'work_finished_elapsed_seconds': work_finished_elapsed_seconds, 'work_budget_seconds': 24,
+                  'failure': failure, 'fallback_cleanup_needed': fallback_cleanup,
+                  'observations': observations, 'native_Go_or_application_executions': 0, 'copy_result_sha256':COPY_RESULT_SHA,
+                  'task_owned_mode_sha256':MODE_SHA, 'execution_mirror':str(MIRROR),
+                  'no_foreign_process_signalled': True, 'SIGKILL_hostloss_guarantee': False}
+        result['passed'] = (failure is None and not fallback_cleanup and
+                            work_finished_elapsed_seconds is not None and
+                            work_finished_elapsed_seconds <= 24 and result['elapsed_seconds'] <= 30)
+        (directory / 'check-result.json').write_text(json.dumps(result, sort_keys=True, indent=2) + '\n')
+    return 0 if result['passed'] else 1
+
+
+def finalization_check():
+    # A separately bounded Python-only fixture. The wrapper injects SIGINT only
+    # at log hashing and returns the original digest; application data is absent.
+    import importlib.util
+    start = time.monotonic()
+    work_deadline, deadline = start + 24, start + 30
+    directory = Path(sys.argv[1]).resolve()
+    if not directory.is_relative_to(S / 'probe') or directory == S / 'probe':
+        raise ValueError('owned probe directory required')
+    directory.mkdir(mode=0o700)
+    runner = S / 'probe/run_worktree_lane_wsl_r12.py'
+    bindings = exact_bindings()
+    spec = importlib.util.spec_from_file_location('r4r2_guard_fixture', runner)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    # Controlled boundary values exercise the exact predicate used by the real
+    # supervisor, without allocating1GiB or altering real resource thresholds.
+    allowance = module.PUBLICATION_ALLOWANCE
+    cap = module.GIB
+    assert module.publication_guard(cap-allowance, 16*cap+allowance, 16*cap, 1024, False) is None
+    assert module.publication_guard(cap-allowance+1, 16*cap+allowance, 16*cap, 1024, False)
+    assert module.publication_guard(0, 16*cap+allowance-1, 16*cap, 1024, False)
+    assert module.publication_guard(0, 17*cap, 16*cap, module.MAX_PUBLICATION_ENCODING+1, False)
+    lane = 'r4-r2-finalize-' + hashlib.sha256(str(directory).encode()).hexdigest()[:16]
+    manifest_path = directory / 'admission.json'
+    marker = directory / 'late-signal.json'
+    wrapper = directory / 'inject_late_signal.py'
+    wrapper.write_text("""import importlib.util,json,os,pathlib,signal,sys
+sys.dont_write_bytecode=True
+runner=pathlib.Path(sys.argv[1]); admission=sys.argv[2]; marker=pathlib.Path(sys.argv[3])
+spec=importlib.util.spec_from_file_location('owned_guard',runner)
+m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+real=m.digest;fired=False
+def observed(path):
+ global fired
+ if pathlib.Path(path).suffix=='.log' and not fired:
+  fired=True
+  marker.write_text(json.dumps({'phase':'log-hashing','signal':int(signal.SIGINT),'pid':os.getpid()}))
+  os.kill(os.getpid(),signal.SIGINT)
+ return real(path)
+m.digest=observed
+signal.signal(signal.SIGTERM,m.on_signal);signal.signal(signal.SIGINT,m.on_signal)
+sys.argv=[str(runner),admission,'0']
+raise SystemExit(m.main())
+""")
+    current = datetime.datetime.now(datetime.timezone.utc)
+    protected = {str(runner): sha(runner), str(wrapper): sha(wrapper)}
+    protected.update(bindings)
+    manifest = {'lane':lane,'runner_sha256':sha(runner),'checked_at_utc':current.isoformat(),
+                'deadline_utc':(current+datetime.timedelta(minutes=20)).isoformat(),
+                'inputs':protected,'unchanged':protected,'scratch_bindings':{},'expected_after':{},
+                'additional_measure_dirs':[str(S/'tools'),str(X)],
+                'historical_growth_baseline':752431588,
+                'execution_mirror':str(MIRROR),
+                'environment':{'PYTHONDONTWRITEBYTECODE':'1'},
+                'limits':{'RSS_bytes':2*cap,'incremental_bytes':cap,'start_disk_floor_bytes':17*cap,
+                          'remaining_disk_memory_floor_bytes':16*cap,'GOMAXPROCS':2,'build_jobs':2,
+                          'metadata_reserve_seconds':180},
+                'commands':[{'name':'tiny-child-before-late-signal','argv':[sys.executable,'-c','pass']}]}
+    manifest.update(namespace_manifest())
+    manifest_path.write_text(json.dumps(manifest,sort_keys=True,indent=2)+'\n')
+    guard = None
+    failure = None
+    work_finished_elapsed_seconds = None
+    def remaining():
+        left = work_deadline - time.monotonic()
+        if left <= 0:
+            raise TimeoutError('fixture work budget exhausted')
+        return left
+    try:
+        remaining()  # Reserve is for cleanup/reporting, never a new work launch.
+        guard = subprocess.Popen([sys.executable,str(wrapper),str(runner),str(manifest_path),str(marker)],
+                                 stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
+        guard.wait(timeout=remaining())
+        assert guard.returncode != 0 and marker.exists()
+        state=json.loads((S/'probe'/(lane+'-r4-r2-state.json')).read_bytes())
+        result=json.loads((D/(lane+'-result.json')).read_bytes())
+        row=result['steps'][0]
+        assert state['status']==result['status']=='failed'
+        assert row['exit_code']==0 and row['received_signal']==signal.SIGINT
+        assert row['guard'] and row['status']=='failed'
+        assert all(row['pre_checks'].values()) and all(row['post_checks'].values())
+        exact_row_mode(row)
+        exact_bindings()
+        assert all(sha(p)==h for p,h in protected.items())
+        assert row['publication_accounting']['atomic_temporaries_and_final_outputs_included']
+        assert row['publication_accounting']['reserved_publication_bytes_inside_limits']==allowance
+        work_finished_elapsed_seconds = time.monotonic() - start
+        if work_finished_elapsed_seconds > 24:
+            raise TimeoutError('fixture success validations exceeded 24-second work budget')
+        remaining()
+    except BaseException as exc:
+        failure={'type':type(exc).__name__,'message':str(exc)}
+    finally:
+        if guard is not None and guard.poll() is None:
+            guard.terminate()
+            try: guard.wait(timeout=max(.1,min(5,deadline-time.monotonic())))
+            except subprocess.TimeoutExpired:
+                guard.kill();guard.wait(timeout=.2)
+        report={'schema':'v1-6-r4-r2-finalization-fixture','failure':failure,
+                'elapsed_seconds':time.monotonic()-start,'budget_seconds':30,
+                'work_finished_elapsed_seconds':work_finished_elapsed_seconds,'work_budget_seconds':24,
+                'controlled_predicate_boundary_checks':True,
+                'controlled_log_digest_signal_injection':True,
+                'manifest_hash_parse':'production source uses one buffer; no fixture manifest substitution',
+                'native_application_executions':0,'runner_sha256':sha(runner),
+                'copy_result_sha256':COPY_RESULT_SHA,'task_owned_mode_sha256':MODE_SHA,
+                'execution_mirror':str(MIRROR),'exact_task_off_mode_pre_post':failure is None}
+        report['passed']=(failure is None and work_finished_elapsed_seconds is not None and
+                          work_finished_elapsed_seconds<=24 and report['elapsed_seconds']<=30)
+        (directory/'check-result.json').write_text(json.dumps(report,sort_keys=True,indent=2)+'\n')
+    return 0 if report['passed'] else 1
+
+def queued_boundary_check():
+    started = time.monotonic()
+    work_deadline = started + 24
+    directory = Path(sys.argv[1]).resolve()
+    if not directory.is_relative_to(S / 'probe') or directory == S / 'probe':
+        raise ValueError('owned probe required')
+    directory.mkdir(mode=0o700)
+    runner = S / 'probe/run_worktree_lane_wsl_r12.py'
+    bindings = exact_bindings()
+    lane = 'r12-queued-' + hashlib.sha256(str(directory).encode()).hexdigest()[:16]
+    marker, never = directory/'queued-signal.json', directory/'must-not-launch.txt'
+    wrapper = directory/'inject_postcommit_queued.py'
+    wrapper.write_text("""import importlib.util,json,os,pathlib,signal,sys
+sys.dont_write_bytecode=True
+runner=pathlib.Path(sys.argv[1]); admission=sys.argv[2]; marker=pathlib.Path(sys.argv[3])
+spec=importlib.util.spec_from_file_location('owned_guard',runner)
+m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+real=m.signal.pthread_sigmask;fired=False
+def unmask(how,signals):
+ global fired
+ if how==signal.SIG_UNBLOCK and not fired:
+  fired=True;marker.write_text(json.dumps({'phase':'after-first-durable-commit','pid':os.getpid()}))
+  os.kill(os.getpid(),signal.SIGTERM)
+ return real(how,signals)
+m.signal.pthread_sigmask=unmask
+signal.signal(signal.SIGTERM,m.on_signal);signal.signal(signal.SIGINT,m.on_signal)
+sys.argv=[str(runner),admission,'all']
+raise SystemExit(m.main())
+""")
+    protected = {str(p):sha(p) for p in (runner,wrapper)}
+    protected.update(bindings)
+    current=datetime.datetime.now(datetime.timezone.utc)
+    manifest={'lane':lane,'runner_sha256':sha(runner),'checked_at_utc':current.isoformat(),
+              'deadline_utc':(current+datetime.timedelta(minutes=20)).isoformat(),
+              'inputs':protected,'unchanged':protected,'scratch_bindings':{},'expected_after':{},
+              'additional_measure_dirs':[str(S/'tools'),str(X)],
+              'historical_growth_baseline':752431588,
+              'execution_mirror':str(MIRROR),
+              'environment':{'PYTHONDONTWRITEBYTECODE':'1'},
+              'limits':{'RSS_bytes':2*2**30,'incremental_bytes':2**30,'start_disk_floor_bytes':17*2**30,
+                        'remaining_disk_memory_floor_bytes':16*2**30,'GOMAXPROCS':2,'build_jobs':2,'metadata_reserve_seconds':180},
+              'commands':[{'name':'successful-prefix','argv':[sys.executable,'-c','pass']},
+                          {'name':'forbidden-queued-stop','argv':[sys.executable,'-c','from pathlib import Path; Path('+repr(str(never))+').write_text("bad")']}]}
+    manifest.update(namespace_manifest())
+    admission=directory/'admission.json';admission.write_text(json.dumps(manifest,sort_keys=True,indent=2)+'\n')
+    guard=None;failure=None;result={};fallback=False
+    work_finished_elapsed_seconds=None
+    def remaining():
+        left=work_deadline-time.monotonic()
+        if left<=0:
+            raise TimeoutError('fixture work budget exhausted')
+        return left
+    try:
+        remaining()  # Refuse expiry before Popen rather than borrowing cleanup time.
+        guard=subprocess.Popen([sys.executable,str(wrapper),str(runner),str(admission),str(marker)],
+                               stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
+        guard.wait(timeout=remaining())
+        state=json.loads((S/'probe'/(lane+'-r4-r2-state.json')).read_bytes())
+        result=json.loads((D/(lane+'-result.json')).read_bytes())
+        assert guard.returncode!=0 and marker.exists() and not never.exists()
+        assert state['status']==result['status']=='failed' and state['pending'] is None
+        assert state['original_start_size']==result['original_start_size']==752431588
+        assert state['deadline_utc']==result['deadline_utc']==manifest['deadline_utc']
+        assert len(result['steps'])==2 and result['steps'][0]['status']=='passed'
+        row=result['steps'][1]
+        assert row['received_signal']==signal.SIGTERM and row['status']=='failed' and row['exit_code'] is None and row['cleanup'] is None
+        assert all(sha(p)==h for p,h in protected.items())
+        assert all(result['steps'][0]['pre_checks'].values()) and all(result['steps'][0]['post_checks'].values())
+        assert all(row['post_checks'].values())
+        exact_row_mode(result['steps'][0])
+        assert row['post_checks'].get('owned-telemetry-mode:off-shape-hash') is True
+        exact_bindings()
+        work_finished_elapsed_seconds=time.monotonic()-started
+        if work_finished_elapsed_seconds>24:
+            raise TimeoutError('fixture success validations exceeded 24-second work budget')
+        remaining()
+    except BaseException as exc:
+        failure={'type':type(exc).__name__,'message':str(exc)}
+    finally:
+        if guard is not None and guard.poll() is None:
+            fallback=True;guard.terminate()
+            try:guard.wait(timeout=max(.1,30-(time.monotonic()-started)))
+            except subprocess.TimeoutExpired:guard.kill();guard.wait(timeout=1)
+    report={'schema':'v1-6-r12-queued-boundary-fixture',
+            'status':'passed' if (failure is None and not fallback and
+                                  work_finished_elapsed_seconds is not None and
+                                  work_finished_elapsed_seconds<=24) else 'failed',
+            'scope':'controlled-queued-signal-between-durable-serial-steps','failure':failure,'fallback_cleanup':fallback,
+            'elapsed_seconds':time.monotonic()-started,'fixture_runner_sha256':sha(runner),
+            'work_finished_elapsed_seconds':work_finished_elapsed_seconds,'work_budget_seconds':24,
+            'first-prefix-remains-pass':result.get('steps',[{}])[0].get('status')=='passed',
+            'next-child-never-launched':not never.exists(),'result_sha256':sha(D/(lane+'-result.json')) if result else None,
+            'copy_result_sha256':COPY_RESULT_SHA,'task_owned_mode_sha256':MODE_SHA,
+            'execution_mirror':str(MIRROR),'exact_task_off_mode_pre_post':failure is None}
+    (directory/'result.json').write_text(json.dumps(report,sort_keys=True,indent=2)+'\n')
+    print(json.dumps(report,sort_keys=True));return 0 if report['status']=='passed' and report['elapsed_seconds']<30 else 1
+
+
+if __name__ == '__main__':
+    mode = sys.argv[2] if len(sys.argv) > 2 else 'active'
+    if mode not in ('active', 'finalization', 'queued'):
+        raise ValueError('mode must be active, finalization or queued')
+    raise SystemExit(finalization_check() if mode == 'finalization' else queued_boundary_check() if mode=='queued' else main())

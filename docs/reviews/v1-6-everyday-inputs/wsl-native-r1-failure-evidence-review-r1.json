@@ -1,0 +1,220 @@
+{
+  "schema": "v1-6-wsl-native-r1-failure-evidence-review-r1",
+  "valid_until": "Bound failure evidence or exact source changes; preserve this review as history. R1 remains permanently failed with its original immutable clock and baseline.",
+  "reviewed_at_utc": "2026-10-07T11:19:59Z",
+  "reviewer": "/root/continuation_audit, independent evidence/source reviewer",
+  "verdict": "ACCEPT_PRESERVED_FAILED_CLOSED_CAMPAIGN_EVIDENCE",
+  "scope": "Read/hash/parse of immutable original admission, state, step/cumulative receipts, Go JSON logs, helper registry, failure archive and targeted test/runner source. No Go/application/fixture/helper execution, signals, restoration, process or resource probe, clock renewal, source mutation or protected input edit by reviewer.",
+  "evidence_sha256": {
+    "wsl-native-admission-r1.json": "e104bffd2bb7d2c7030126258f357bd0681f63f644ef5920e16c89b2cf41a721",
+    "wsl-native-admission-review-r1.json": "a6b07595848e79aeac4fb6f6cfa5f6dff7817222ce644f20ae65580482d67954",
+    "v1-6-wsl-native-r1-result.json": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "v1-6-wsl-native-r1-step-0-result.json": "87b43e29e3113d6409d694b17d3eaf263996ac6292a96c7e489f44c7ab8d9012",
+    "v1-6-wsl-native-r1-step-1-result.json": "889117d951894f8a33373404b510db69d9c4065ca127b70c54117c439de1163b",
+    "v1-6-wsl-native-r1-step-2-result.json": "5568d8a515a32307c21e285c5e2a61193ff7215b0f5d0be3290e51c7d9618797",
+    "S/probe/v1-6-wsl-native-r1-r4-r2-state.json": "a40a48479738eec90c65895f3b8c650654ec0da5d6773a0ecb33ba1c003e7f33",
+    "S/probe/v1-6-wsl-native-r1-0.log": "f99d841a16f61aa392a2340f1999062c59f73d63ed8b526ce0612f8d0f7b782c",
+    "S/probe/v1-6-wsl-native-r1-1.log": "a5d651008724c909d16c99a50e36d46d7e1288c795fa1f4f2d00e1435f1c5495",
+    "S/probe/v1-6-wsl-native-r1-2.log": "4ea407e12718ae761069435ead97b8a3891339310d24683f4efb589f39d5d726",
+    "wsl-native-campaign-r1-evidence.tar.gz": "e8ae707d6c1a3caaa62fb00200be068d54c361523a3f4f038c2a1a354e91dacd"
+  },
+  "runner_sha256": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+  "helper_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+  "findings": [],
+  "failure": {
+    "lane": "v1-6-wsl-native-r1",
+    "checked_at_utc": "2026-10-07T10:53:13.928421+00:00",
+    "campaign_started_at_utc": "2026-10-07T10:56:12.301358+00:00",
+    "deadline_utc": "2026-10-07T11:13:13.928421+00:00",
+    "original_start_size_bytes": 752431588,
+    "recorded_step_finished_at_utc": "2026-10-07T11:10:28.018084+00:00",
+    "status": "failed",
+    "all_steps_completed": false,
+    "guard": "metadata-time-reserve",
+    "failure_type": "RuntimeError",
+    "original_exact_1200_second_admission_window_preserved": true,
+    "state_status": "failed",
+    "state_next_index": 3,
+    "state_pending": null,
+    "retry_refusal_source": "methods/run_worktree_lane_wsl_r9.py.txt:455 requires ready state, exact successful prefix and index. Failed R1 state cannot resume.",
+    "native_pass": false,
+    "prefix": [
+      {
+        "index": 0,
+        "status": "passed",
+        "name": "locked-public-module-prerequisites",
+        "exit_code": 0,
+        "wall_seconds": 63.711149,
+        "scope": "Locked public modules verified in both modules; mod/sum unchanged; no application build/test by this step."
+      },
+      {
+        "index": 1,
+        "status": "passed",
+        "name": "complementary-contentrails-0-race",
+        "exit_code": 0,
+        "wall_seconds": 381.919186,
+        "passed_top_level_tests": 5,
+        "scope": "Exact first five-test partition completed with -race -count=1; preserved passing prefix."
+      },
+      {
+        "index": 2,
+        "status": "failed",
+        "name": "complementary-contentrails-1-race",
+        "wall_seconds": 291.869458,
+        "scope": "Two individual pass events precede incomplete AllFourBaselineArtifacts test; the five-test partition and remainder of campaign did not pass."
+      }
+    ],
+    "prefix_receipt_hashes_state_cumulative_rows_log_hashes_manifest_baseline_deadline_and_campaign_start_all_match": true,
+    "cleanup": {
+      "actions": [
+        "SIGTERM_owned_group"
+      ],
+      "elapsed_seconds": 0.026291806001609075,
+      "error": null,
+      "remaining_live_members": []
+    },
+    "cleanup_scope": "Recorded owned process-group cleanup is accepted as preserved evidence. Reviewer did not rerun live process identity probes.",
+    "no_clock_renewal_or_retry_authorized": true
+  },
+  "resources": {
+    "peak_group_RSS_bytes": 490426368,
+    "RSS_limit_bytes": 2147483648,
+    "peak_sampled_incremental_bytes": 580340038,
+    "incremental_limit_bytes": 1073741824,
+    "final_size_before_publication_bytes": 1058581050,
+    "publication_disk_free_bytes": 27878600704,
+    "publication_MemAvailable_bytes": 35727880192,
+    "remaining_disk_memory_floor_bytes": 17179869184,
+    "reserved_publication_bytes_inside_limits": 67108864,
+    "publication_encoded_limit_bytes": 16777216,
+    "atomic_temporaries_and_final_outputs_included": true,
+    "recorded_failure_due_to_time_reserve_not_memory_or_growth": true
+  },
+  "readsets": {
+    "admission_input_count": 1259,
+    "scratch_pin_count": 6,
+    "each_of_three_steps_recorded_pre_and_post_count": 1265,
+    "every_recorded_pre_post_check_true": true,
+    "current_repository_input_hashes_rechecked": 1259,
+    "current_exact_repository_matches": 1257,
+    "current_exact_scratch_matches": 6,
+    "total_current_bound_input_bytes": 113541951,
+    "postclosure_documentation_only_changes": [
+      {
+        "path": "docs/STATUS.md",
+        "admission_and_archived_sha256": "798b977e20d4a8d775ed0a36cdc3510874f446dccf13eec35c74d8cda9d7f18a",
+        "current_sha256": "56a567e9dd3b11f450fc356e0074f73d7eeeef2c12df8004853c237693771906"
+      },
+      {
+        "path": "docs/reviews/v1-6-everyday-inputs/README.md",
+        "admission_and_archived_sha256": "e819000180ccb78ae9f935335e2ed16c4cc81f8abd8fbcd9fbfdd6cc2f0664d6",
+        "current_sha256": "4611c8e42b0e7e65974bfd5cfe9853a88ede353048cad5e0e808878def44e07f"
+      }
+    ],
+    "archive_root_README_sha256_matches_live_and_admission": "33e63638261218a48273451b3484c8fbc3d939cde5e10ccdf5bc539ecb335cd7",
+    "interpretation": "Parent reported these two current documentation edits only after failure closure. Their exact pre-edit bytes are frozen in the failure archive and independently match admission pins. Every other bound input and scratch pin remains exact; no runtime, source, test or installed content mutation was found."
+  },
+  "preservation": {
+    "archive_bytes": 540786,
+    "archive_members": 578,
+    "indexed_original_files": 577,
+    "indexed_live_original_hashes_matched": 574,
+    "frozen_document_members": 3,
+    "all_three_archived_document_hashes_bound": true,
+    "original_admission_state_receipts_logs_untouched": true,
+    "helper_registry": {
+      "terminal_records": 280,
+      "worker_output_sidecars": 280,
+      "new_records_after_campaign_start": 256,
+      "unknown_pending_or_orphan_entries": 0,
+      "unconfirmed_typed_cleanup_records": 0,
+      "wrong_helper_pins": 0,
+      "terminal_failed_records": 1,
+      "failed_record_scope": "The previously accepted deliberate hung-worker fixture is the sole failed helper terminal; no new unconfirmed helper cleanup."
+    },
+    "historical_r2": {
+      "original_pending_sha256": "131afdd601012e58f3395b7be3f429e79453f20d9dfa6ea1b2a6a0676fe04e2b",
+      "original_failure_sha256": "140e961e8ed5833d5e3209121d6fc0c12e0d613f6785bff104246f18ebb6dbb1",
+      "all_six_specific_retirement_source_original_copy_and_review_hashes_match": true,
+      "original_false_cleanup_flags_retained": true
+    },
+    "historical_r3_registry_absent": true
+  },
+  "timing_evidence": {
+    "admission_to_runner_campaign_start_seconds": 178.373,
+    "available_seconds_from_runner_start_to_nominal_active_reserve_boundary": 841.627,
+    "first_race_row_to_first_Go_package_start_seconds": 181.906,
+    "first_race_package_elapsed_seconds": 179.961,
+    "first_race_row_total_seconds": 381.919186,
+    "first_race_after_package_pass_to_row_finish_seconds": 20.05232,
+    "second_race_row_to_first_Go_package_start_seconds": 32.068,
+    "first_five_test_elapsed_seconds": [
+      9.96,
+      80.66,
+      63.58,
+      9.34,
+      15.19
+    ],
+    "second_partition_completed_test_elapsed_seconds": [
+      0,
+      60.74
+    ],
+    "allfour_run_event_utc": "2026-10-07T11:07:09.170629+00:00",
+    "allfour_run_to_nominal_active_reserve_boundary_seconds": 184.758,
+    "allfour_completed_pass_or_fail_events": 0,
+    "qualification_limit": "The pre-package interval includes preflight read-set/budget work and Go startup/build/link. Cold-minus-warm excess is consistent with initial race compilation, but the logs do not separately instrument compilation, IO wait, CPU or supervisor cost. Do not label all 181.906 seconds as compilation or assert NTFS as sole cause."
+  },
+  "source_bottleneck_evidence": [
+    {
+      "path": "go-backend/internal/contentrails/installed_test.go",
+      "lines": "20-63,192-209,213-258,343-363",
+      "observation": "Installed fixture tests clone protected source inputs, construct candidate/proposal/audit/installed authority and perform exact reconstruction. The schema and chain tests repeat this fixture construction."
+    },
+    {
+      "path": "go-backend/internal/contentrails/rail_test.go",
+      "lines": "45-57,229-255,419-445",
+      "observation": "AllFour delegates to CheckAll. cloneRoot copies the entire production inputReadPaths set with ReadFile, MkdirAll and WriteFile into t.TempDir. Runtime manifest test traverses and hashes the clone twice."
+    },
+    {
+      "path": "go-backend/internal/contentrails/rail.go",
+      "lines": "160-227,230-252,515-600",
+      "observation": "CheckAll reconstructs all four rails. RuntimeHashes freshly walks runtime roots and reads every included file; inputReadPaths includes installed source/document chain, immutable archives and fixture mirrors."
+    },
+    {
+      "path": "go-backend/internal/contentrails/installed.go",
+      "lines": "230-291",
+      "observation": "An installed reconstruction revalidates registered documents and sources, builds the proposal, confirms final review/audit, validates installed bytes and freshly compares runtime/source inventories before and after."
+    },
+    {
+      "path": "go-backend/internal/contentbuild/graph.go",
+      "lines": "84-93",
+      "observation": "SourceGraph reads and strictly decodes the 3,674,955-byte KG and constructs graph data. JSON/graph compute remains a possible test-body cost independent of filesystem metadata."
+    },
+    {
+      "path": "methods/run_worktree_lane_wsl_r9.py.txt",
+      "lines": "207-236,308-382,385-405,664-675",
+      "observation": "Every active monitor refresh performs fresh size accounting, checks all prior helper registry receipts and launches a bounded helper, then sleeps0.5s. The registry grew from24 to280 receipts. Every command pre/post freshly hashes1265 bindings. This protects ownership/resources but adds measured metadata activity; no elapsed breakdown permits assigning its total cost."
+    }
+  ],
+  "useful_next_prerequisite": {
+    "recommendation": "Prepare a source-reviewed bounded NTFS-versus-ext4 scratch path comparison and mixed-volume accounting design before proposing any materially new native campaign.",
+    "first_scope": "Keep canonical R and failed R1 artifacts untouched. Use freshly owned tiny ext4 scratch under an explicit task directory and an equally fresh /mnt/c comparison directory. Compare identical file read/hash, mkdir/write and fresh tree-size workloads representative of cloneRoot/cache/temp operations; use the same limits and byte inventory. Record wall/CPU/IO evidence where available rather than infer from total time.",
+    "expected_material_adaptation": "If the qualified comparison demonstrates benefit, adapt only owned GOTMPDIR/TMPDIR/GOCACHE/GOMODCACHE/GOPATH to ext4, and source-review exact path/root changes. Canonical production R remains on C: initially. Consider an exact read-set-bound ext4 execution mirror only if canonical source reads remain the demonstrated bottleneck.",
+    "accounting_requirements": [
+      "Freshly count all owned roots on both C: and ext4, including execution mirrors, caches, module cache, SDK and probe/report files, without overlaps or exclusions.",
+      "Preserve one immutable baseline and deadline for any separately authorized future campaign. R1 stays failed; no reuse/renewal of its clock.",
+      "Enforce actual disk floors on every involved filesystem and backing C: volume; a WSL virtual disk does not remove C: growth pressure.",
+      "Bind any mirror to exact canonical input bytes, qualify pre/post canonical and mirror read sets, and include all duplicate bytes in the new owned footprint.",
+      "Retain fail-closed IO/signal/cleanup/publication semantics. The current Windows-only path conversion cannot account for ext4; a separately reviewed mixed scanner is required.",
+      "A speed probe is prerequisite evidence only, not a substitute for the remaining test/CLI/vet/docs/assembled gates. No unreviewed native warm-up, cache-only repeat or broader test command is authorized by this review."
+    ],
+    "limitation": "Ext4 benefit is an inference to test, not a demonstrated speedup. The recorded expensive test bodies and incomplete AllFour reconstruction mean cache warming alone cannot establish completion within unchanged20-minute bounds."
+  },
+  "outstanding_qualification": [
+    "The first exact five-test partition is preserved passing prefix evidence.",
+    "Fourteen of the original nineteen test functions still lack a completed qualified partition; two isolated pass events inside failed step2 do not convert that partition to PASS.",
+    "Final CLI race, all-backend vet, documentation gate, final independent assembled acceptance and landing remain unqualified.",
+    "Source6 installed content remains bound and unchanged; do not reapply content transactions.",
+    "No new admission, native PASS, deployment, push, landing, clock reset or deletion approval is granted."
+  ]
+}

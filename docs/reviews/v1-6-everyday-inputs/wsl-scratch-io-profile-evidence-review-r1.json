@@ -1,0 +1,248 @@
+{
+  "schema": "v1-6-wsl-scratch-io-profile-evidence-review-r1",
+  "valid_until": "Any bound method/result/capture, retained synthetic files, history/source binding or host path changes — preserve as history and review applicable new evidence.",
+  "reviewed_at_utc": "2026-10-07 11:55:19 UTC",
+  "reviewer": "/root/continuation_audit; independent of profile author and executor",
+  "verdict": "ACCEPT_BOUND_SYNTHETIC_IO_PROFILE_OBSERVATION_ONLY",
+  "scope": "Independent read/hash/parse of exact report, parent stdout/stderr/exit/time capture, retained synthetic file sizes/link counts/bytes/SHA manifests on C and ext4, two original metadata helper receipts and source/history preservation. Read-only Python standard-library file hashing through WSL was used for evidence inspection; no profile, helper, fixture, Go/application or native campaign was executed by reviewer.",
+  "nonce": "ec561abf57bf47ada35787b989a424e7",
+  "bindings": {
+    "method_sha256": "121490ad8322f74064d7abf953b38773fcc76622873b973142d7d4609fe7dda7",
+    "source_review_sha256": "910e3ab96ea7958912c08277d44ad6ae629e0f1f0c1ddef3616d1c7b3ff719d0",
+    "result": {
+      "path": "wsl-scratch-io-profile-r1-result.json",
+      "sha256": "7870b44db522f040ed1bd3d5020f4558c0ea717f1aa43efcf6c64a9ffbc08776",
+      "bytes": 8674
+    },
+    "parent": {
+      "path": "wsl-scratch-io-profile-r1-parent-result.json",
+      "sha256": "8c144a3ed5f42493a256c4d687d6acb21937d9e696219f664ddc61fe08ef2098"
+    },
+    "stdout": {
+      "path": "wsl-scratch-io-profile-r1-stdout.txt",
+      "sha256": "2cb9a340420cb8eb9b2988917d243ac5b87cc0990a7ecab2fac481d1fa1e8497"
+    },
+    "stderr": {
+      "path": "wsl-scratch-io-profile-r1-stderr.txt",
+      "sha256": "aadde31d519d4e8655d3e8ef15316f6e71695ae8e35a431d97116a1842336cec"
+    },
+    "original_pending": {
+      "path": "S/probe/io-profile-r1/ec561abf57bf47ada35787b989a424e7/pending.json",
+      "sha256": "fc3890b31b2910c1634c42a5626b2b1bed5dfc03ed75fc70eb5eb47bec80a33a"
+    },
+    "R9_sha256": "4b73c4f9adf740c74dd0400bbe2969a1148bb1bf660fefaab3d17f3f2cab9213",
+    "R4_sha256": "67d87aefb706dab9ae83ff19c7bfaa1f4e4b54110f8449dff5b53bd092e934f7",
+    "Windows_interpreter_sha256": "885aba098e6bec68979345dfa6b9b9af497ccc2638f1c7f21883f7c361043ae8",
+    "Linux_interpreter_path": "/usr/bin/python3.14",
+    "Linux_interpreter_sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41"
+  },
+  "findings": [],
+  "invocation": {
+    "recorded_parent_exit_code": 0,
+    "recorded_stdout_exit_code": 0,
+    "stdout_status": "completed_synthetic_io_profile",
+    "report_status": "completed_synthetic_io_profile",
+    "parent_host_elapsed_seconds": 37.41484131400102,
+    "child_total_elapsed_seconds": 37.170321166000576,
+    "work_finished_elapsed_seconds": 29.084308006000356,
+    "work_cap_seconds": 40,
+    "total_cap_seconds": 50,
+    "ordinary_nonoptimized_python": true,
+    "source_and_interpreter_pre_post_hashes_exact": true,
+    "current_profile_R9_R4_materialized_source_hashes_exact": true,
+    "current_Linux_interpreter_hash_independently_rechecked": true,
+    "exact_parent_stdout_stderr_report_copies_match_retained_originals": true,
+    "stdout_result_size_and_digest_match_original_report": true,
+    "stderr_observation": "Retained241-byte SyntaxWarning on parsing accepted R9's return in finally. Runner main/run_step was not invoked by this synthetic profile. Parent and child exited0; no unreported helper/application failure inferred from this warning."
+  },
+  "payload_evidence": {
+    "live_verification": {
+      "NTFS": {
+        "all_payload_shapes_hashes_exact": true,
+        "all_retained_files": 132,
+        "canonical_sorted_manifest_sha256": "92a4a012ef34d0817838a18272c13f928004f91580939eb92f06e845efa1d994",
+        "issues": [],
+        "missing_files": [],
+        "payload_bytes": 18874368,
+        "payload_files": 130,
+        "profile_source_manifest_sha256": "d4957ef5f299877c63f11407d190dfb57e43568bbecd991287290a53d07366a4",
+        "unexpected_files": []
+      },
+      "ext4": {
+        "all_payload_shapes_hashes_exact": true,
+        "all_retained_files": 130,
+        "canonical_sorted_manifest_sha256": "92a4a012ef34d0817838a18272c13f928004f91580939eb92f06e845efa1d994",
+        "issues": [],
+        "missing_files": [],
+        "payload_bytes": 18874368,
+        "payload_files": 130,
+        "profile_source_manifest_sha256": "d4957ef5f299877c63f11407d190dfb57e43568bbecd991287290a53d07366a4",
+        "unexpected_files": []
+      },
+      "interpreter_sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+      "paired_exact": true
+    },
+    "combined_payload_bytes": 37748736,
+    "expected_per_filesystem_payload_bytes": 18874368,
+    "payload_files_per_filesystem": 130,
+    "expected_single_regular_link_count": 1,
+    "source_order_relative_manifest_sha256": "d4957ef5f299877c63f11407d190dfb57e43568bbecd991287290a53d07366a4",
+    "matching_sorted_manifest_sha256": "92a4a012ef34d0817838a18272c13f928004f91580939eb92f06e845efa1d994",
+    "no_unexpected_or_missing_files": true,
+    "current_retained_roots": {
+      "C": "S/probe/io-profile-r1/ec561abf57bf47ada35787b989a424e7",
+      "ext4": "/home/paul_work/work/_temp/codex__content-v1-6/io-profile-r1/ec561abf57bf47ada35787b989a424e7"
+    },
+    "pending_history_retained": true,
+    "root_reported_filesystems": {
+      "C": "9p mounted /mnt/c device0:84",
+      "ext4": "ext4 mounted / device8:32"
+    }
+  },
+  "accounting": {
+    "original_baseline_bytes": 752431588,
+    "original_failed_native_sha256": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "before_C_bytes": 1060037337,
+    "before_ext4_owned_bytes": 0,
+    "before_total_bytes": 1060037337,
+    "after_C_bytes": 1078926816,
+    "after_ext4_owned_bytes": 18874368,
+    "after_total_bytes": 1097801184,
+    "after_growth_from_retained_original_baseline_bytes": 345369596,
+    "original_growth_cap_bytes": 1073741824,
+    "fresh_profile_growth_plus_publication_upper_bound_bytes": 38288135,
+    "profile_growth_cap_bytes": 67108864,
+    "publication_reserve_inside_caps_bytes": 524288,
+    "arithmetic_independently_matches": true,
+    "final_report_bytes": 8674,
+    "report_cap_bytes": 131072,
+    "after_C_free_bytes": 27213348864,
+    "after_ext4_free_bytes": 992816472064,
+    "after_WSL_MemAvailable_bytes": 32990138368,
+    "remaining_floor_bytes": 17179869184,
+    "peak_process_RSS_bytes": 26894336,
+    "RSS_cap_bytes": 2147483648,
+    "fresh_after_sample_precedes_final_report": true,
+    "interpretation": "Recorded complete seven C roots plus all owned X_TASK bytes retain the original baseline. Final-publication reserve is charged inside64MiB profile/1GiB original growth and both-volume disk floors. Reviewer inspected arithmetic and exact receipt fields, rather than rerunning whole-root accounting or resource probes."
+  },
+  "helper_evidence": {
+    "exact_calls": 2,
+    "before": {
+      "nonce": "138acd5f25964cfa880043c719e259f1",
+      "sha256": "260964232663775b5f223bf7fa86e46275023fd317d9d738e5d590c0bc461f5d",
+      "status": "completed",
+      "elapsed_seconds": 1.1569999999992433,
+      "regular_bytes": 1060035991,
+      "peak_job_memory_bytes": 14446592,
+      "peak_working_set_bytes": 20643840
+    },
+    "after": {
+      "nonce": "0586d89553244f11b074e52f0306ff15",
+      "sha256": "ed06d35f2409e03cf6b5fbb22207b05ac86125167dbe8b57de49315c7e80355e",
+      "status": "completed",
+      "elapsed_seconds": 1.0460000000002765,
+      "regular_bytes": 1078925470,
+      "peak_job_memory_bytes": 14594048,
+      "peak_working_set_bytes": 20754432
+    },
+    "C_deferred_fallback_bytes_each_sample": 1346,
+    "original_seven_roots_exact": true,
+    "typed_confirmed_worker_launcher_exit_job_empty_job_close": true,
+    "all_four_PID_creation_bound_quota_proofs_exact": true,
+    "quota_minimum_bytes": 1048576,
+    "quota_maximum_bytes": 67108864,
+    "enforcement_flags": 6,
+    "flag4_present_flag8_absent": true,
+    "launcher_suspended_enforcement": true,
+    "before_traversal_and_completion_readbacks_valid": true,
+    "job_limit_flags": 8968,
+    "process_and_aggregate_commit_bytes": 67108864,
+    "job_active_process_limit": 2,
+    "current_registry_terminal_records": 282,
+    "current_matching_sidecars": 282,
+    "unknown_pending_or_orphan_entries": 0,
+    "cleanup_unconfirmed_records": 0,
+    "scope": "Recorded ownership/cleanup proofs accepted; reviewer did not repeat live OS process-quiescence probes."
+  },
+  "timings_seconds": [
+    {
+      "phase": "write",
+      "NTFS_wall": 2.48320048000096,
+      "ext4_wall": 0.8393291930005944,
+      "NTFS_CPU": 0.43672698899999984,
+      "ext4_CPU": 0.22430299499999995
+    },
+    {
+      "phase": "copy",
+      "NTFS_wall": 2.745195550000062,
+      "ext4_wall": 1.2233318649996363,
+      "NTFS_CPU": 0.5296862159999998,
+      "ext4_CPU": 0.3227543490000002
+    },
+    {
+      "phase": "fresh-stat",
+      "NTFS_wall": 1.0842711580007744,
+      "ext4_wall": 0.5775319040003524,
+      "NTFS_CPU": 0.20133712999999975,
+      "ext4_CPU": 0.13972233299999992
+    },
+    {
+      "phase": "read-sha256",
+      "NTFS_wall": 4.424124656999993,
+      "ext4_wall": 3.1992065449994698,
+      "NTFS_CPU": 0.889921798,
+      "ext4_CPU": 0.7310704670000003
+    },
+    {
+      "phase": "fresh-fsync",
+      "NTFS_wall": 1.6978082149998954,
+      "ext4_wall": 2.5501920149999933,
+      "NTFS_CPU": 0.2558870099999999,
+      "ext4_CPU": 0.2968849889999996
+    }
+  ],
+  "timing_limitations": [
+    "NTFS-first fixed order, one paired synthetic observation, ordinary cached data and repeated guard overhead inside phase timing.",
+    "The recorded /proc/self/io source was absent for every phase. Unsupported IO counters were preserved explicitly; no IO-wait or throughput breakdown is fabricated.",
+    "The profile process's6.101243446 CPU seconds excludes aggregate Windows metadata helper CPU and any native compiler/race workload.",
+    "Ext4 was faster for four phases, while ext4 fsync was slower. Do not report a universal filesystem speedup or assert that NTFS solely caused nativeR1 failure."
+  ],
+  "preserved_history": {
+    "failed_native_result_sha256": "fa093d1b987d5d24758a618fc5f6e92b45675aa6a7143cc295d8f9eb7b34d6c2",
+    "failed_native_state_sha256": "a40a48479738eec90c65895f3b8c650654ec0da5d6773a0ecb33ba1c003e7f33",
+    "passing_step0_sha256": "87b43e29e3113d6409d694b17d3eaf263996ac6292a96c7e489f44c7ab8d9012",
+    "passing_step1_sha256": "889117d951894f8a33373404b510db69d9c4065ca127b70c54117c439de1163b",
+    "failed_step2_sha256": "5568d8a515a32307c21e285c5e2a61193ff7215b0f5d0be3290e51c7d9618797",
+    "immutable_native_admission_sha256": "e104bffd2bb7d2c7030126258f357bd0681f63f644ef5920e16c89b2cf41a721",
+    "all_five_original_failure_state_prefix_admission_bindings_unchanged": true,
+    "repository_input_recheck": {
+      "exact_live_matches": 1257,
+      "known_documentation_only_postfailure_differences": [
+        "docs/STATUS.md",
+        "docs/reviews/v1-6-everyday-inputs/README.md"
+      ],
+      "documentation_current_bytes_unchanged_since_failure_evidence_review": true,
+      "all_source_runtime_tests_and_installed_content_bindings_exact": true
+    },
+    "original_R2_pending_and_failed_fixture_hashes_unchanged": true,
+    "all_R2_specific_retirement_pins_unchanged": true,
+    "never_invoked_R3_registry_absent": true,
+    "no_clock_renewal_or_native_resume": true
+  },
+  "qualified_inference": "Evidence supports exploring a separately reviewed path-only scratch/source adaptation with complete mixed-volume accounting. It does not establish native Go/CPU/race throughput, full mirror correctness or completion of19 race functions inside20minutes.",
+  "no_authorization_for": [
+    "R1 clock reset/renewal or retry",
+    "native campaign admission or native PASS",
+    "unreviewed mirror/root accounting changes",
+    "removing retained profile or failed evidence",
+    "landing, push or deployment"
+  ],
+  "execution": {
+    "profile_or_fixture_runs_by_reviewer": 0,
+    "metadata_helper_runs_by_reviewer": 0,
+    "native_Go_application_runs_by_reviewer": 0,
+    "clock_renewals": 0,
+    "source_edits": 0,
+    "sole_write": "wsl-scratch-io-profile-evidence-review-r1.json"
+  }
+}

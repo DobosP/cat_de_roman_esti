@@ -1,0 +1,324 @@
+"""Source-reviewed metadata preparation only; no Go/binary/native execution.
+
+Usage: python3 -B prepare_runtime_readset_mirror_wsl_r1.py UUID32 EXACT_SOURCE_SHA
+Creates one fresh ext4 reader mirror and empty runtime tmp root. No deletion.
+Imports exact accepted profile/R9 inertly, retaining50s total/40s work and all
+resource/ownership guards. SIGKILL/host loss/uninterruptible IO are not safe.
+"""
+import contextlib
+import datetime
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import signal
+import stat
+import sys
+import time
+
+STARTED = time.monotonic()
+CPU_STARTED = time.process_time()
+R = Path('/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-6')
+S = Path('/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-6')
+D = R / 'docs/reviews/v1-6-everyday-inputs'
+X = Path('/home/paul_work/work/_temp/codex__content-v1-6')
+PLAN = D / 'wsl-mixed-volume-adaptation-plan-r1.json'
+PLAN_SHA = '3a24afc4fbdce982c454749b1f5752b291bc7c81e35e408210f354cf19058091'
+PROFILE = S / 'probe/check_scratch_io_wsl_ext4_r1.py'
+PROFILE_SHA = '121490ad8322f74064d7abf953b38773fcc76622873b973142d7d4609fe7dda7'
+FREEZE = D / 'runtime-freeze-r1.json'
+FREEZE_SHA = '795551fde73f1d9a11cd8fb4a4e1af855c1bf2a4f23037be8ca0e9591e937ec7'
+ORIGINAL_BASELINE = 752431588
+GROWTH_CAP = 64 << 20
+PUBLICATION_RESERVE = 512 << 10  # Included INSIDE64MiB and original1GiB.
+p = None
+receipt_root = None
+before = None
+mirror = None
+copied = []
+
+
+def hash_file(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as source:
+        for chunk in iter(lambda: source.read(64 << 10), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def load_profile():
+    if not sys.dont_write_bytecode or sys.flags.optimize != 0:
+        raise RuntimeError('ordinary nonoptimized Python -B required before import')
+    if hash_file(PROFILE) != PROFILE_SHA:
+        raise RuntimeError('accepted profile source changed')
+    loader = importlib.machinery.SourceFileLoader('runtime_mirror_exact_profile', str(PROFILE))
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    module = importlib.util.module_from_spec(spec)
+    loader.exec_module(module)  # __main__ and the synthetic workload never run.
+    if hash_file(PROFILE) != PROFILE_SHA or module.R != R or module.S != S or module.X_TASK != X:
+        raise RuntimeError('profile source/roots changed during import')
+    module.STARTED = STARTED
+    module.CPU_STARTED = CPU_STARTED
+    return module
+
+
+def on_signal(number, frame):
+    if p is None:
+        raise InterruptedError('catchable signal before reviewed import')
+    p.on_signal(number, frame)  # Defers interruption only inside owned helper wait.
+
+
+def metadata(path):
+    value = path.lstat()
+    if not stat.S_ISREG(value.st_mode) or value.st_nlink != 1 or path.resolve(strict=True) != path:
+        raise RuntimeError('single-link regular unredirected file required: ' + str(path))
+    return value
+
+
+def identity(value):
+    return (value.st_dev, value.st_ino, value.st_size, value.st_mtime_ns, value.st_ctime_ns, value.st_nlink)
+
+
+def ensure_dirs(root, relative_parent):
+    current = root
+    for part in relative_parent.parts:
+        current = current / part
+        try:
+            p.directory_chain(current)
+        except FileNotFoundError:
+            p.operation(p.mkdir, current)
+
+
+def copy_one(row):
+    relative = Path(row['path'])
+    source, target = R / relative, mirror / relative
+    p.guard()
+    p.directory_chain(source.parent)
+    initial = metadata(source)
+    if initial.st_size != row['bytes'] or p.operation(hash_file, source) != row['sha256']:
+        raise RuntimeError('canonical source preimage differs: ' + row['path'])
+    ensure_dirs(mirror, relative.parent)
+    p.directory_chain(target.parent)
+    p.absent(target)
+    h = hashlib.sha256()
+    size = 0
+    with contextlib.ExitStack() as handles:
+        inp = handles.enter_context(os.fdopen(os.open(source, os.O_RDONLY | os.O_NOFOLLOW), 'rb'))
+        if identity(os.fstat(inp.fileno())) != identity(initial):
+            raise RuntimeError('source identity changed before open')
+        out = handles.enter_context(os.fdopen(os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600), 'wb'))
+        while True:
+            p.guard()
+            chunk = inp.read(64 << 10)
+            if not chunk:
+                break
+            size += len(chunk)
+            if size > row['bytes'] or size > GROWTH_CAP:
+                raise RuntimeError('source/copy byte bound')
+            h.update(chunk)
+            out.write(chunk)
+            p.guard()
+        out.flush()
+        os.fsync(out.fileno())
+        if identity(os.fstat(inp.fileno())) != identity(initial):
+            raise RuntimeError('source identity changed during copy')
+    if size != row['bytes'] or h.hexdigest() != row['sha256']:
+        raise RuntimeError('streamed copy hash/size differs')
+    if identity(metadata(source)) != identity(initial) or p.operation(hash_file, source) != row['sha256']:
+        raise RuntimeError('canonical source postimage differs')
+    destination = metadata(target)
+    if destination.st_size != row['bytes'] or p.operation(hash_file, target) != row['sha256']:
+        raise RuntimeError('fresh destination hash/size differs')
+    p.operation(p.fsync_dir, target.parent)
+    p.guard()
+    return {'path': row['path'], 'bytes': size, 'sha256': h.hexdigest(),
+            'source_dev': initial.st_dev, 'source_ino': initial.st_ino,
+            'destination_dev': destination.st_dev, 'destination_ino': destination.st_ino,
+            'source_unchanged': True, 'fresh_destination_verified': True}
+
+
+def exact_parity(entries, runtime):
+    expected = {row['path']: row for row in entries}
+    found = {}
+    pending = [mirror]
+    while pending:
+        p.guard()
+        directory = pending.pop()
+        p.directory_chain(directory)
+        with os.scandir(directory) as values:
+            for entry in values:
+                p.guard()
+                path = Path(entry.path)
+                mode = path.lstat().st_mode
+                if stat.S_ISDIR(mode):
+                    pending.append(path)
+                elif stat.S_ISREG(mode):
+                    relative = path.relative_to(mirror).as_posix()
+                    if relative not in expected or relative in found:
+                        raise RuntimeError('extra or duplicate mirror entry')
+                    row = expected[relative]
+                    if metadata(path).st_size != row['bytes'] or p.operation(hash_file, path) != row['sha256']:
+                        raise RuntimeError('mirror parity differs')
+                    found[relative] = row['sha256']
+                else:
+                    raise RuntimeError('mirror nonregular entry or redirect')
+    if set(found) != set(expected):
+        raise RuntimeError('missing mirror reader files')
+    # Faithfully reproduce existing runtimePaths file membership on this mirror.
+    actual_runtime = {}
+    for relative, digest in found.items():
+        path = Path(relative)
+        if not relative.startswith(('go-backend/', 'shared-go/authcore/')):
+            continue
+        if any(part == 'testdata' or part == 'node_modules' or part.startswith('.') for part in path.parts[:-1]):
+            continue
+        name = path.name
+        if name.endswith('_test.go') or relative in ('go-backend/internal/contentrails/sources/installed-authorities.json', 'go-backend/internal/contentrails/installed_authorities_pin.go'):
+            continue
+        if name.endswith('.go') or name in ('go.mod', 'go.sum', 'rules_unicode15.json', 'provenance.json', 'rules_provenance.json', 'bundled.json') or '/contentrails/sources/' in relative and name.endswith('.json'):
+            actual_runtime[relative] = digest
+    wanted = {row['path']: row['sha256'] for row in runtime}
+    if len(wanted) != 109 or actual_runtime != wanted:
+        raise RuntimeError('exact runtime109 enumeration/parity differs')
+    # A FINAL fresh pass over all canonical sources proves they stayed unchanged.
+    for row in entries:
+        p.guard()
+        source = R / row['path']
+        p.directory_chain(source.parent)
+        if metadata(source).st_size != row['bytes'] or p.operation(hash_file, source) != row['sha256']:
+            raise RuntimeError('canonical final parity differs')
+    return {'reader_files': len(found), 'reader_bytes': sum(row['bytes'] for row in entries),
+            'exact_runtime_files': 109, 'all_source_destination_hashes_exact': True}
+
+
+def main(report):
+    global p, receipt_root, before, mirror
+    if len(sys.argv) != 3 or not re.fullmatch(r'[0-9a-f]{32}', sys.argv[1]) or not re.fullmatch(r'[0-9a-f]{64}', sys.argv[2]):
+        raise ValueError('fresh UUID32 and exact source SHA required')
+    nonce, own_sha = sys.argv[1:]
+    if hash_file(__file__) != own_sha or hash_file(PLAN) != PLAN_SHA or hash_file(FREEZE) != FREEZE_SHA:
+        raise RuntimeError('source/plan/freeze pins differ')
+    p = load_profile()
+    p.directory_chain(R)
+    p.directory_chain(S / 'probe')
+    p.directory_chain(X)
+    if p.mount_info(X)['filesystem'] != 'ext4' or X.stat().st_dev == R.stat().st_dev:
+        raise RuntimeError('actual distinct ext4 root required')
+    if p.hash_file(p.FAILED_NATIVE) != p.FAILED_NATIVE_SHA or p.ORIGINAL_BASELINE != ORIGINAL_BASELINE:
+        raise RuntimeError('original failed result/baseline changed')
+    plan = json.loads(PLAN.read_bytes())
+    freeze = json.loads(FREEZE.read_bytes())
+    entries = plan['runtime_mirror']['entries']
+    if plan.get('status') != 'SOURCE_ONLY_PLAN_NOT_AN_ADMISSION' or len(entries) != 172 or sum(row['bytes'] for row in entries) != 57335773:
+        raise RuntimeError('exact bounded reader manifest shape')
+    paths = [row['path'] for row in entries]
+    if len(paths) != len(set(paths)) or any(Path(v).is_absolute() or '..' in Path(v).parts or '\\' in v for v in paths):
+        raise RuntimeError('reader path duplicate/escape')
+    for row in entries:
+        if type(row.get('bytes')) is not int or not 0 < row['bytes'] <= 16 << 20 or not re.fullmatch(r'[0-9a-f]{64}', row.get('sha256', '')):
+            raise RuntimeError('bounded regular reader binding required')
+    p.guard(first=True)
+    module = p.load_runner()
+    roots = module.measurement_roots({'additional_measure_dirs': [str(S / 'tools')]})
+    before = p.accounting(roots, work=True)
+    p.last_accounting = before
+    p.guard(first=True)
+    c_parent = S / 'probe/runtime-mirror-prep-r1'
+    x_parent = X / 'runtime-readset-mirror-r1'
+    t_parent = X / 'runtime-test-tmp-r1'
+    receipt_root = c_parent / nonce
+    mirror = x_parent / nonce
+    tmp = t_parent / nonce
+    for target in (receipt_root, mirror, tmp):
+        p.absent(target)
+    for parent in (c_parent, x_parent, t_parent):
+        try:
+            p.directory_chain(parent)
+        except FileNotFoundError:
+            p.operation(p.mkdir, parent)
+    for target in (receipt_root, mirror, tmp):
+        p.operation(p.mkdir, target)
+    report.update(nonce=nonce, source_sha256=own_sha, plan_sha256=PLAN_SHA,
+                  accepted_profile_sha256=PROFILE_SHA, runtime_freeze_sha256=FREEZE_SHA,
+                  original_baseline_bytes=ORIGINAL_BASELINE, accounting_before=before,
+                  canonical_R=str(R), complete_ext4_accounting_root=str(X),
+                  mirror=str(mirror), runtime_TMPDIR=str(tmp), original_C_roots=[str(v) for v in roots])
+    p.exclusive_json(receipt_root / 'pending.json', dict(report, status='pending'), work=True)
+    for row in entries:
+        copied.append(p.operation(copy_one, row))
+    report['parity'] = p.operation(exact_parity, entries, freeze['runtime_sources'])
+    if any(tmp.iterdir()):
+        raise RuntimeError('new runtime tmp was unexpectedly populated')
+    p.operation(p.fsync_dir, mirror)
+    p.operation(p.fsync_dir, tmp)
+    work_finished = time.monotonic() - STARTED
+    if work_finished >= 40:
+        raise TimeoutError('copy/parity work exceeded40seconds')
+    report['work_finished_elapsed_seconds'] = work_finished
+    after = p.accounting(roots, work=False)
+    growth = after['total_bytes'] - before['total_bytes'] + PUBLICATION_RESERVE
+    if growth > GROWTH_CAP or after['growth_from_retained_original_baseline'] + PUBLICATION_RESERVE > 1 << 30:
+        raise RuntimeError('fresh mixed-root original/profile growth bound')
+    if min(after['C_free_bytes'], after['ext4_free_bytes']) - PUBLICATION_RESERVE < 16 << 30:
+        raise RuntimeError('final publication remaining-volume floors')
+    if hash_file(__file__) != own_sha or hash_file(PLAN) != PLAN_SHA or hash_file(FREEZE) != FREEZE_SHA or hash_file(PROFILE) != PROFILE_SHA or p.hash_file(p.FAILED_NATIVE) != p.FAILED_NATIVE_SHA:
+        raise RuntimeError('source/proof changed during preparation')
+    report.update(accounting_after_fresh_sample=after, publication_reserve_inside_caps=PUBLICATION_RESERVE,
+                  preparation_growth_upper_bound_bytes=growth, copied=copied,
+                  Windows_metadata_cleanup='confirmed_by_exact_R9_terminal_receipts',
+                  peak_process_RSS_bytes=p.rss_bytes(), cpu_seconds=time.process_time() - CPU_STARTED,
+                  source_files_unchanged=True, no_deletions=True, runtime_TMPDIR_empty=True)
+    p.guard(work=False)
+
+
+if __name__ == '__main__':
+    signal.signal(signal.SIGTERM, on_signal)
+    signal.signal(signal.SIGINT, on_signal)
+    signal.signal(signal.SIGALRM, on_signal)
+    signal.setitimer(signal.ITIMER_REAL, 50)
+    report = {'schema': 'v1-6-runtime-readset-mirror-preparation-r1', 'status': 'failed',
+              'scope': 'byte_copy_and_fresh_metadata_parity_only', 'native_commands_executed': 0,
+              'claim_limit': 'Preparation is not native qualification, race coverage, installation approval or R1 clock renewal.',
+              'all_partial_outputs_retained': True, 'exclusive_task_root_ownership_required': True}
+    exit_code = 1
+    try:
+        main(report)
+        report['status'] = 'completed_metadata_mirror_preparation'
+        exit_code = 0
+    except BaseException as exc:
+        report.update(status='failed', failure=type(exc).__name__ + ': ' + str(exc),
+                      completed_file_count=len(copied), Windows_metadata_cleanup='unconfirmed',
+                      mirror=str(mirror) if mirror else None,
+                      received_signal=p.received_signal if p is not None else None)
+        if p is not None and p.runner is not None and not p.helper_active and p.helper_calls == p.helper_completed_calls:
+            try:
+                p.runner.validate_prior_windows_receipts(S / 'probe/windows-size-helper-r4')
+                report['Windows_metadata_cleanup'] = 'confirmed_existing_terminal_registry'
+            except BaseException as cleanup:
+                report['cleanup_failure'] = type(cleanup).__name__ + ': ' + str(cleanup)
+    try:
+        if p is None or receipt_root is None:
+            raise RuntimeError('no safe owned receipt root; capture stdout refusal')
+        # Only reserved failure/publication work continues, never the failed copy.
+        p.received_signal = None
+        if p.runner is not None:
+            p.runner.received_signal = None
+        report['elapsed_seconds_before_publication'] = time.monotonic() - STARTED
+        proof = p.exclusive_json(receipt_root / 'result.json', report, work=False)
+        elapsed = time.monotonic() - STARTED
+        if elapsed >= 50:
+            raise TimeoutError('publication exceeded50seconds; receipt not accepted')
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        print(json.dumps({'status': report['status'], 'exit_code': exit_code,
+                          'total_elapsed_seconds': elapsed, 'result': proof}, sort_keys=True))
+    except BaseException as exc:
+        exit_code = 1
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        print(json.dumps({'status': 'failed_publication', 'error': type(exc).__name__ + ': ' + str(exc),
+                          'owned_receipt_root': str(receipt_root) if receipt_root else None,
+                          'mirror': str(mirror) if mirror else None,
+                          'total_elapsed_seconds': time.monotonic() - STARTED}, sort_keys=True))
+    raise SystemExit(exit_code)

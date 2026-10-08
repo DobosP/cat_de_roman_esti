@@ -1,0 +1,83 @@
+{
+  "schema": "v1-6-linux-runner-r4-r3-independent-source-review-r1",
+  "checked_at_utc": "2026-10-07T17:34:14.509291+00:00",
+  "reviewer": "/root/v16_linux_finish/linux_runner_review",
+  "valid_until": "Either reviewed source byte sequence or the bounded Linux-only scope changes; obtain a fresh exact review then.",
+  "scope": "Full 571-line Linux runner and 274-line mechanical lifecycle harness; exact R4-R2-to-R4-R3 delta and prior source request changes. Source review only; no fixture, native, Go, application or method execution.",
+  "files": {
+    "methods/run_worktree_lane_r4_r3.py.txt": {
+      "bytes": 27801,
+      "sha256": "a7deb39ed747c68bc029da3ea7d02485096d6ff6ef531aa2b948ffc3e28a0b73"
+    },
+    "methods/check_runner_signal_r4_r3.py.txt": {
+      "bytes": 15492,
+      "sha256": "21606efc94fd281022f92d7790b8c3e0a050beb7ddbe0a2a749d08aa4b59385c"
+    },
+    "methods/run_worktree_lane_r4_r2.py.txt": {
+      "bytes": 27734,
+      "sha256": "455c2669b6d9c85912796e3b08606af87acb1fdba0491f01efee03c322881504"
+    },
+    "methods/check_runner_signal_r4_r2.py.txt": {
+      "bytes": 15492,
+      "sha256": "7cd74d8fff6be373412cfbcb8747e4810d4c99b5bf436afc1e1887d74e777090"
+    },
+    "linux-resume-source-admission-r1.json": {
+      "bytes": 631,
+      "sha256": "8b9ae8cf126dbf385f5a03827f81ffff81548f1fa053b2d45a326b0bf170a79b"
+    },
+    "runner-r4-r2-source-review-r2.json": {
+      "bytes": 2855,
+      "sha256": "01566b2fb495e4b813b3dae7875e7e5199942bd7c0fa7e7d592f9baefa9dc33d"
+    }
+  },
+  "prior_finding": {
+    "id": "R4-R2-F1",
+    "status": "ADDRESSED_SOURCE",
+    "lines": "runner 263-266",
+    "reason": "Each successful-prefix receipt is read into receipt_bytes once. The SHA-256 comparison and JSON parse consume that same immutable byte buffer. No second path read supplies evidence under a different stored digest."
+  },
+  "exact_delta": {
+    "runner_semantic_changes": [
+      "One-buffer prior-receipt hash/parse repair at lines 263-266."
+    ],
+    "runner_other_changes": "Usage, result schema, state namespace and lock namespace mechanically identify R4-R3. Fixed deadlines, limits, process-session ownership, readsets, accounting roots, final publication and catchable-signal policy are unchanged.",
+    "harness_changes": "Mechanical runner path, lane, state-path, usage and report-schema revision names only. One importlib module nickname remains r4r2_guard_fixture but has no behavior or evidence effect.",
+    "new_namespace_policy": "New source revision does not convert a prior failed or pending campaign into a resumable successful prefix. Main refuses an existing result or R4-R3 state at index zero; continuation requires the exact manifest, original baseline/deadline/start and successful receipt chain."
+  },
+  "full_source_assessment": {
+    "campaign_limits": "Exactly 2 GiB sampled child-process-group RSS, 1 GiB cumulative file growth, 17 GiB start disk, 16 GiB remaining disk/MemAvailable, GOMAXPROCS/build jobs 2, 180-second metadata reserve, one fixed deadline no longer than 20 minutes.",
+    "accounting": "Whole task root plus nonoverlapping owned probe/cache/tmp/gopath and explicit owned extra roots remain measured. Publication reserves 64 MiB inside the original growth/floor limits and bounds three encoded images to 16 MiB; post-publication checks precede final state acknowledgement.",
+    "ownership_cleanup": "The runner starts an owned session, records PID/PGID/SID/start ticks, retains the waitable leader before group cleanup and verifies live-member absence. Catchable signals mark failure and attempt owned group cleanup; host loss, SIGKILL and uninterruptible storage/kernel behavior are expressly outside its guarantee.",
+    "input_identity": "Admission hash/parse use one buffer and exact admission bytes are rechecked before launch and publication. Pre/post readsets and exact successful-prefix receipt hashes remain mandatory.",
+    "publication": "Campaign flock, pending state, exclusive new step publication, fsynced atomic JSON publication and the explicit empty-pending-signal commit boundary remain unchanged. Before-boundary SIGTERM/SIGINT fails the uncommitted step; after-boundary signals do not retroactively erase a completed child with no live descendants."
+  },
+  "fixture_sufficiency": {
+    "source_verdict": "SUFFICIENT_FOR_THE_TWO_DECLARED_CONTROLLED_LINUX_MODES",
+    "active": "Exercises a genuine successful prefix, owned child plus grandchild, closing the guard stdout pipe, SIGTERM to the guard PID, durable failed state, preserved original baseline/deadline/start/prefix, exact readsets, child absence, and refusal of successor/index-zero reset. Fallback cleanup or more than 30 seconds prevents fixture PASS.",
+    "finalization": "Exercises exact publication predicate boundary values and controlled SIGINT during real log hashing, preserving the original log digest. Requires failed durable state despite child exit 0, exact protected hashes and inclusion of atomic publication accounting; more than 30 seconds prevents PASS.",
+    "one_buffer_fix": "Its correctness follows directly from the single immutable buffer used by both hash and parse; this review does not claim a separately executed concurrent-tamper fixture.",
+    "limits": "These are Python-only source-defined controls, not completed host evidence, native throughput qualification, a Windows/WSL subsystem qualification, or application correctness. They do not establish SIGKILL/host-loss safety or unseen signal timings."
+  },
+  "findings": [],
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "source_accepted": true,
+  "execution_authority": {
+    "bounded_fixture_modes": [
+      "active",
+      "finalization"
+    ],
+    "condition": "Only the exact reviewed bytes, copied with exact digest equality into own task scratch, may undergo those two controlled modes under separately recorded fresh headroom and finite fixture admission. Preserve every raw outcome, including failures.",
+    "native_campaign_execution_approved": false,
+    "native_condition": "Actual successful controlled host outcomes and their independent evidence review plus a fresh exact finite native campaign admission are still required before the application/native qualification lane.",
+    "application_installation_or_landing_approved": false
+  },
+  "execution": {
+    "fixture": 0,
+    "native": 0,
+    "Go": 0,
+    "application": 0,
+    "method": 0,
+    "review_receipts_written": 1
+  },
+  "historical_failures": "No original Linux/Windows failure, incomplete native case, refused admission, budget expiry or concurrency failure is waived, reclassified or reset. This receipt does not alter runtime data, tests, quality thresholds or production guards."
+}

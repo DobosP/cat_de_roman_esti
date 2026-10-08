@@ -1,0 +1,27 @@
+{
+  "schema": "v1-6-exact-proposal-source-admission-r1",
+  "baseline_commit": "7806eecdf10f32763218a58a4e1e58b77c9e1a89",
+  "started_at_utc": "2026-10-06T22:50:21.980785+00:00",
+  "deadline_utc": "2026-10-06T23:10:21.980785+00:00",
+  "metadata_reserve_seconds": 180,
+  "scope": "Freeze exactly two R2singular-headword records, author supported graph-alias module/proposal, independent exact factual and prospective-quality scrutiny. No executable preflight/materialization/native campaign or installed mutation in this source lane.",
+  "inclusive_active_agents_max": 3,
+  "roles": [
+    "root author/integrator",
+    "independent factual reviewer",
+    "independent quality/prospective reviewer"
+  ],
+  "worker_local_RSS_cap_bytes": 536870912,
+  "worker_source_increment_cap_bytes": 10485760,
+  "memory_available_bytes": 28678565888,
+  "disk_free_bytes": 225738162176,
+  "qualified_critical_hashes": {
+    "tools/go1.27.1.linux-amd64.tar.gz": true,
+    "tools/go/bin/go": true,
+    "tools/go/bin/gofmt": true,
+    "tools/go/pkg/tool/linux_amd64/compile": true,
+    "tools/go/pkg/tool/linux_amd64/link": true,
+    "tools/go/VERSION": true
+  },
+  "next_executable_lane_requires_fresh_separate_admission": true
+}

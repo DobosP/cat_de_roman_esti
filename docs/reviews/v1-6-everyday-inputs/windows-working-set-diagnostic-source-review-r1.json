@@ -1,0 +1,60 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T10:13:05Z",
+  "scope": "SOURCE_ONLY_OWN_PROCESS_DIAGNOSTIC",
+  "verdict": "ACCEPT_SOURCE_ONLY_NO_CHILD_OWN_PROCESS_DIAGNOSTIC",
+  "append_only": true,
+  "bindings": {
+    "methods/check_windows_working_set_wsl_r1.py.txt": "b62e344845779a26833060b5d7bf30daf9d7c971c4aac9fb3e364f1584121e28"
+  },
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "findings": [],
+  "accepted_source_properties": [
+    "Only the current-process pseudohandle is used for working-set operations and creation identity; no foreign process is opened, signalled or modified and no child, Job, worker, helper or application is invoked.",
+    "Current-process token opens with TOKEN_QUERY only. TokenPrivileges is read into a bounded <=64KiB buffer with count, offset and entry-size checks; only three predeclared relevant privilege names/attributes are recorded. No token adjustment, privilege enable/grant, account or administrative change API exists in the source.",
+    "SetProcessWorkingSetSizeEx attempts minimum1MiB, maximum64MiB and HARDWS_MAX_ENABLE flag4 on this short-lived process. Success requires exact minimum/maximum readback, maximum enforcement present and maximum-disable flag8 absent; a second work-completion read must preserve those settings.",
+    "Initial and final work memory snapshots require current/peak working set and current/peak committed memory <=64MiB. An API failure is captured with immediate Winerror and failed status, never converted into support or qualification.",
+    "Work-finished elapsed time is captured and completion refuses >=2s. The 3.7s self-exit guard and final <4s acceptance remain; token handle is closed in finally and close failure refuses completion.",
+    "Pinned Windows Python3.11.15 and source hashes are rechecked; a fresh UUID32 owned receipt is no-clobber initially and atomically updated with <=16KiB encoded snapshots. Pending or failed output remains evidence."
+  ],
+  "primary_references": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-setprocessworkingsetsizeex",
+      "supports": "Process working-set API signature, flag4 hard maximum, flag8 maximum disable, and privilege-dependent API failure semantics."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-getprocessworkingsetsizeex",
+      "supports": "Minimum/maximum SIZE_T outputs and enforcement flag readback."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-openprocesstoken",
+      "supports": "Token open and CloseHandle contract."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-gettokeninformation",
+      "supports": "TOKEN_QUERY for privilege information and bounded return-buffer contract."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-token_privileges",
+      "supports": "Privilege count plus variable LUID_AND_ATTRIBUTES array layout."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-lookupprivilegevaluew",
+      "supports": "Read-only local lookup from known privilege name to LUID."
+    }
+  ],
+  "claim_limits": [
+    "Source review does not prove this host supports the requested hard maximum without adjustment; the exact runtime result must be recorded.",
+    "A successful own-process diagnostic would qualify only this API observation. It does not repair Job working-set support, accept a new production helper design, prove launcher/worker inheritance, or admit native commands.",
+    "The diagnostic's process-local working-set state ends when that process exits; no persistent host privilege or account setting is requested."
+  ],
+  "execution_preconditions": [
+    "Execute exactly the bound diagnostic bytes with pinned Windows Python3.11.15, a fresh UUID32 result in windows-working-set-r1 and an external four-second total watchdog.",
+    "Retain raw output and pending/failed receipt on every failure or timeout; verify the diagnostic's exact PID-plus-creation exit before any later action.",
+    "No privilege enabling/grant or production memory-ceiling change is authorized by this source acceptance.",
+    "All production helper changes, fixture passes, actual-root lifecycle/parity and original resource admission remain independently required."
+  ]
+}

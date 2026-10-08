@@ -1,0 +1,65 @@
+{
+  "schema": "v1-6-flag-control-method-review-r2",
+  "reviewer": "independent source-only method reviewer",
+  "reviewed_at_utc": "2026-10-07T00:32:36Z",
+  "verdict": "accept_exact_repaired_flag_method_for_fresh_bounded_execution",
+  "blockers": [],
+  "scope": "Static repair review only. The earlier source review missed the typed-nil harness defect. R1 remains a failed execution; this review does not turn it into a pass or infer a game regression.",
+  "bindings": {
+    "original_method": {
+      "path": "docs/reviews/v1-6-everyday-inputs/methods/native_flag_control_initial_test.go.txt",
+      "sha256": "f82ed3841dc85ab899163b08f69797975986693724f3b0a176a7da2debbe57b0",
+      "status": "preserved_failed_method_history"
+    },
+    "repaired_method": {
+      "path": "docs/reviews/v1-6-everyday-inputs/methods/native_flag_control_test.go.txt",
+      "sha256": "4ee72857f190116c6d6e5ae52a314629d0f41178472e0ab235366838e4db7984",
+      "status": "accepted_source_only_execution_pending"
+    },
+    "failure_receipt": {
+      "path": "docs/reviews/v1-6-everyday-inputs/flag-control-harness-failure-r1.json",
+      "sha256": "2653e26813bb6b00bef0c5320cede4362cb8576ce59ce14738e3bd07291d1800"
+    },
+    "failed_lane_result": {
+      "path": "docs/reviews/v1-6-everyday-inputs/remaining-native-controls-r1-result.json",
+      "sha256": "799ea688e17713f98e6157da836e6dc301471bfa19b63597210663acb259db8e"
+    },
+    "failed_log": {
+      "path": "/home/dobo/work/_temp/codex__content-v1-6/probe/remaining-native-controls-r1-0.log",
+      "sha256": "0873824047547741844beb9ad5e86da0df500d9c23dd5543de23b5d2c0866724"
+    },
+    "partial_report": {
+      "path": "/home/dobo/work/_temp/codex__content-v1-6/probe/remaining-controls-r1/flag-controls.json",
+      "sha256": "9cebc9ec129c728ef51f6a9c0391193106f966dd3067fb83407a216b0646e400"
+    },
+    "repair_source_admission": {
+      "path": "docs/reviews/v1-6-everyday-inputs/flag-control-repair-admission-r2.json",
+      "sha256": "0fe2f464441e1df65b9de9c9243b27cdfbfcc62e1b387bbcdbd65525664f3efc"
+    },
+    "unchanged_lant_method_sha256": "aa8dc4f1694233e1ee27adf7aa248b11d1d1700cf00b169b3b06b7851373733a",
+    "unchanged_terminal_method_sha256": "1b51b28cf52aa4068aedb8da614fbe02539d4807681d31b629a4b5d0db166c4b",
+    "prior_method_review_sha256": "e50be9eb9e58994ca19c423b163d0b238760519979002782edd52d9591cf90b9",
+    "candidate_kg_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+  },
+  "failure_assessment": [
+    "Read native Store.Create and Contexto.Get signatures: Create returns error while Get returns *gameapi.Error. The original same-scope recovered,e := Get reused the error interface introduced by Create; a nil pointer converted to that interface makes e != nil true. The recorded line 84 <nil> failure matches this harness error.",
+    "The failed report is complete false/test_failed true and contains exactly one baseline_canonical observation row. Its old sessions:4 field was a plan, not four completed sessions. Baseline generic guesses were nonwinning and the specific alias reached attempt 2/score 940; terminal Get recording/verification and final Progress were not completed. No candidate flag arm completed, and the outer runner stopped before Lanț or terminal execution.",
+    "The original method, partial report, failure log and R1 lane result remain failed historical evidence. Partial successful assertions are not a completed flag control or native qualification."
+  ],
+  "repair_assessment": [
+    "Exact diff contains only three changes: sessions becomes planned_sessions plus sessions_created=len(rows); Store.Create uses a distinct createErr; terminal Get uses a fresh getErr. The new getErr retains *gameapi.Error type and is compared directly with nil.",
+    "All owner, generic nonwin, fuzzy confirmation, repeat/attempt, feedback, privacy, terminal recovery, score 940 and Progress assertions remain intact. The 28 counter still covers Get/Guess only, with eight planned separate Progress inspections.",
+    "Verified unchanged Lanț and terminal method hashes. Their prior source-method acceptance remains applicable; both are still unrun. No production/runtime/content edit is part of this repair."
+  ],
+  "allowed_next_lane": "A fresh measured finite execution admission may run the exact repaired flag method followed by the still-unrun accepted Lanț and terminal methods, retaining the existing research-adapter and baseline/candidate/index constraints. Preserve R1 FAIL history and new partial/error receipts. Require successful process/test exits, expected complete coverage, complete true and failed/test_failed false before assessing results.",
+  "pending": "Repaired-method execution, independent result assessment, current Source6 and snapshot/authority/export rails, world-history replays, affected integrated gates, final raw quality and independent assembled acceptance all remain pending. No installation, landing or ordinary Lanț/terminal benefit follows from this review.",
+  "review_execution": {
+    "method_test_build_profile_execution": 0,
+    "browser_execution": 0,
+    "content_runtime_pool_or_method_edits": 0,
+    "commits": 0,
+    "sole_written_file": "docs/reviews/v1-6-everyday-inputs/flag-control-method-review-r2.json",
+    "max_bytes": 6144
+  },
+  "valid_until": "Any bound repaired method, unchanged dependent method, adapter, candidate, baseline or relevant native API change."
+}

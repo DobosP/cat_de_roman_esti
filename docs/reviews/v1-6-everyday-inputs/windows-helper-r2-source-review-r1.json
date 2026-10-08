@@ -1,0 +1,50 @@
+{
+  "schema": "v1-6-independent-source-review",
+  "reviewer": "/root/continuation_audit",
+  "reviewed_at_utc": "2026-10-07T09:44:35Z",
+  "scope": "SOURCE_ONLY",
+  "execution_performed": false,
+  "fixture_pass_claimed": false,
+  "native_campaign_admitted": false,
+  "append_only": true,
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "bindings": {
+    "methods/windows_size_helper_wsl_r2.py.txt": "c708c0c88a8f8cd4ef76857dd9f03bbac4cf77f74d45548e0247c4051dda39d8",
+    "methods/check_windows_size_helper_wsl_r1.py.txt": "23d827142fd17693620774be03e3221b9ca4082fab65ecb684d20787e3934bf7"
+  },
+  "component_verdicts": {
+    "windows_helper_r2": "ACCEPT_SOURCE_ONLY",
+    "windows_helper_fixture_r1": "ACCEPT_SOURCE_ONLY"
+  },
+  "findings": [],
+  "accepted_source_properties": [
+    "Exact interpreter path, SHA-256 and Python 3.11.15 pins; bytecode disabled; source pins checked by parent and actual worker.",
+    "Noninheritable Windows Job handle with kill-on-close, process/job memory bounds of 64MiB and active-process limit two; job assignment through PROC_THREAD_ATTRIBUTE_JOB_LIST occurs atomically when creating the suspended venv launcher.",
+    "Writable Unicode command buffer, explicit application path, CREATE_NO_WINDOW, CREATE_SUSPENDED and EXTENDED_STARTUPINFO_PRESENT; exact launcher job membership checked before resume.",
+    "Actual metadata worker ready handshake binds nonce, source bytes, PID and creation time; OpenProcess identity and exact job membership checked, owned-worker receipt persisted before traversal permission.",
+    "Fresh scandir metadata traversal; reparse and nonstandard entries deferred to Linux; no cross-call cache or changed resource baseline. Missing paths skipped; other directory IO errors fail rather than grant a passing count.",
+    "1.9s work cutoff within 2s worker limit; 3.7s hard supervisor guard within 4s parent bound. Termination uses the owned Job; success requires worker and launcher handles signaled plus zero active Job processes.",
+    "Per-call no-clobber registry receipt; final stdout equals bounded 16KiB receipt. Hard exit leaves an unconfirmed receipt requiring caller refusal and cannot claim cleanup success.",
+    "Fixture source checks synthetic 17 then 32 regular-file bytes including hidden and hardlink entries, defers live/missing NTFS junctions, binds exact helper/interpreter bytes, and checks PID+creation quiescence after success and controlled hung-worker failure."
+  ],
+  "handle_inheritance_note": "The source sets bInheritHandles=True with inheritable stdin and output handles. It does not use PROC_THREAD_ATTRIBUTE_HANDLE_LIST. Microsoft documents HANDLE_LIST as an optional mechanism for restricting inherited handles; its absence is recorded rather than treated as an API requirement. The Job handle itself is noninheritable.",
+  "references": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects",
+      "supports": "Child process job inheritance and termination on closing the final kill-on-close Job handle."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw",
+      "supports": "Writable Unicode command buffer, explicit application path, extended startup information, and inherited-handle behavior."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-updateprocthreadattribute",
+      "supports": "Optional HANDLE_LIST restriction and inherited-handle requirements when that attribute is used."
+    }
+  ],
+  "execution_preconditions": [
+    "Run the exact accepted controlled Windows fixture with an external bound and capture durable results; source review does not prove this host's Windows ABI or Job support.",
+    "Any external timeout or unconfirmed cleanup remains a failure; verify exact Windows PID plus creation identities before another call.",
+    "No native campaign until the repaired caller, actual-root lifecycle fixture, fresh whole-root accounting and original resource admission all qualify."
+  ]
+}

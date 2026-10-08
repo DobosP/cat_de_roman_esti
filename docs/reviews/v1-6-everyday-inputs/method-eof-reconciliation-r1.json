@@ -1,0 +1,17 @@
+{
+  "schema": "v1-6-method-eof-reconciliation-r1",
+  "recorded_at_utc": "2026-10-07T00:48:55.702218+00:00",
+  "failed_commit": "66d43a512c7cced5c61a91dc45e67ad808e124c4",
+  "failure": "git diff --cached --check reported new blank line at EOF in new native_lant_controls_test.go.txt. Shell command block lacked fail-fast handling and continued to task-branch commit. No main merge occurred.",
+  "tested_method_sha256": "aa8dc4f1694233e1ee27adf7aa248b11d1d1700cf00b169b3b06b7851373733a",
+  "tested_method_git_reference": "66d43a512c7cced5c61a91dc45e67ad808e124c4:docs/reviews/v1-6-everyday-inputs/methods/native_lant_controls_test.go.txt",
+  "exact_tested_method_archive": "docs/reviews/v1-6-everyday-inputs/methods/native_lant_controls_tested_r1.go.txt.gz",
+  "archive_sha256": "dc717f4f9d381bf4b0fd597c5719a500469e1c6477ece95c91760a83b3756985",
+  "current_readable_view": "docs/reviews/v1-6-everyday-inputs/methods/native_lant_controls_test.go.txt",
+  "current_view_sha256": "f46cc23db1248fe0a6b6622e7aaa5f1e2ff5838b325d423749740d90c98c628e",
+  "exact_relation": "view bytes plus one final LF equal tested bytes; no other byte or Go token changes",
+  "review_interpretation": "Existing exact method/execution/quality reviews bind original tested bytes, now available from archive or stated Git object. Their hashes are not rewritten to match the trimmed view. This is provenance reconciliation, not a new game test or judgment.",
+  "native_engine_rerun": false,
+  "fixture_or_runtime_change": false,
+  "prevention": "Use fail-fast command blocks for every check/commit; any nonzero gate stops before commit."
+}
