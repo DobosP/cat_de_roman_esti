@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-09 — Actual GEN at e949167 cleared unchanged startup budget:122743/122880 bytes. Native backend stopped on stale Source6 content-audit runtime bindings; current900/unit/full/image/device/KIT_BUMP remain pending. Fresh independent factual/quality reviews accept unchanged Source6 content; supported proposal/audit refresh and independent HTTP recapture are pending. [Current handover](GUI_MIGRATION_HANDOFF.md).
+Last verified: 2026-10-09 — Actual GEN at e949167 cleared unchanged startup budget:122743/122880 bytes, then stopped on stale Source6 audit bindings. Fresh reviews/three guarded metadata stages/nativevalidate/export/check passed; one Extensions old-Quick-pin refusal is preserved separately. New bundlea220c22e changes only reviewer metadata/three source digests; originalSource6 tests retain all assertions in a pinned historical context. Fresh independent1207 capture/current authority/current900/unit/full/image/device/KIT_BUMP remain pending. [Current handover](GUI_MIGRATION_HANDOFF.md).
 
 - **GUI Linux current:** reviewed Windows+native source/lazyCSS/AccountBar split are integrated; actual core1.5WK0.1.5/Rolldown1.2.13 deps align. Captured e949167 GEN passed compiler/lint/causal/pure/docs/format/build/assets/identity/binaries; backend race1263pass/1stale-authority failure/17DBskips, browser900 not reached. Real entry/AccountBar closure/fonts and122880/40960/30720 remainhard ([ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md)). New genuine Source6 [raw reviews](reviews/gui-source6-runtime-requalification/quality-evidence.md) preserve gameplay/reference sets; proposals/install/export/currentoracle/native/full qualification pending. Original900/1207 proofs remain immutable history. Phone/M2/S0b/productionclosed.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
@@ -56,7 +56,9 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Current qualified V1.6 pins
+## Original qualified V1.6 pins
+
+Published Source6 identities below remain immutable history. GUI runtime metadata successors are staged under [fresh reviews](reviews/gui-source6-runtime-requalification/quality-evidence.md); final installed authority, regenerated export and independent1207 qualification remain pending.
 
 - alchimie_discovery_world_v92.json: `8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad`
 - alchimie_recipe_extensions_v92.json: `d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc`
