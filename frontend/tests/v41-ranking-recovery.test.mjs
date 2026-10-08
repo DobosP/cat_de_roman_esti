@@ -4,7 +4,7 @@ import test from "node:test";
 
 const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const ranking = read("../src/screens/Ranking.tsx");
-const css = read("../src/styles/arcade.css");
+const css = read("../src/styles/ranking.css");
 
 void test("ranking retries the selected game from a clean request state", () => {
   assert.match(ranking, /const \[attempt, setAttempt\] = useState\(0\)/);

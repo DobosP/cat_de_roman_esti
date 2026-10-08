@@ -14,7 +14,7 @@ const perechi = read("../src/screens/Perechi.tsx");
 const replayMemory = read("../src/derivedReplay.ts");
 const intrusulCss = read("../src/styles/intrusul.css");
 const perechiCss = read("../src/styles/perechi.css");
-const arcadeCss = read("../src/styles/arcade.css");
+const rankingCss = read("../src/styles/ranking.css");
 const html = read("../index.html");
 
 void test("V38 lobby is six games in the tested fun-first order", () => {
@@ -98,6 +98,6 @@ void test("earned feedback is short, announced and server score stays terminal-o
 void test("six-game ranking navigation switches to a native control on phones", () => {
   assert.match(ranking, /className="ranking-game-select"/);
   assert.match(ranking, /className="segment ranking-game-tabs"/);
-  assert.match(arcadeCss, /@media \(max-width: 640px\)[\s\S]*?\.ranking-game-tabs \{ display: none; \}/);
-  assert.match(arcadeCss, /\.ranking-game-select \.field \{ min-height: 44px; \}/);
+  assert.match(rankingCss, /@media \(max-width: 640px\)[\s\S]*?\.ranking-game-tabs \{ display: none; \}/);
+  assert.match(rankingCss, /\.ranking-game-select \.field \{ min-height: 44px; \}/);
 });

@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "scope": "ordinary CSS ownership of already-lazy Ranking; source only/unrun",
+  "source_sha": "18697d9e481192f457f229da6a03a0a61387b867",
+  "actual_gate_result": "ec2a59debd3cb592bca8354fec5ee7f6f54cb6cd0d2f6c54f888e403e731ac39",
+  "last_actual_startup_bytes": 123313,
+  "unchanged_limit_bytes": 122880,
+  "source": {
+    "file": "frontend/src/styles/arcade.css",
+    "first_line": 1570,
+    "last_line": 1609,
+    "before_sha256": "0729f218468e045b80c7a71f9b07dcb0804c93b578e368aa8facbfd717c9c97f",
+    "after_sha256": "c848b1054b43aa12f95fea8c384af56172c1d368db7a4d56d75a60c756cd149f",
+    "removed_raw_bytes": 1039
+  },
+  "destination": {
+    "file": "frontend/src/styles/ranking.css",
+    "before": "ABSENT in Git and filesystem",
+    "bytes": 1039,
+    "sha256": "d2ba45a501bcc766c87f0ebaecd031677e27112369c8b2c287a3fda039a38a9b",
+    "contents": "literal complete source fragment including unchanged max-width640 media; no wrapper/property/selector edits"
+  },
+  "screen": {
+    "file": "frontend/src/screens/Ranking.tsx",
+    "before_sha256": "712544cd92f781a896f3eb9572a628176bb39f5bfd7e9839eeb549238bb4c504",
+    "after_sha256": "0aad3d8faa263e9c54e1539212a394dd7b14a4bc41c7e60bc0ce3bcf9a7ac116",
+    "only_delta": "import \"../styles/ranking.css\";",
+    "import_count": 1,
+    "loading": "existing App lazy /clasament route; no eager JS import added"
+  },
+  "ownership": [
+    "all selected rank-row/rank-num/ranking-game/state selectors consumed only by Ranking",
+    "scoped .ranking-state .account-btn requires Ranking ancestor; generic AccountBar styles remain global",
+    "Home-history-rank/tokens/utilities/unproven rank-legend/reduced-motion!important unchanged"
+  ],
+  "qualification": "UNRUN; no inferred433byte saving/pixel/current900 pass",
+  "source_check_input_ledger": {
+    "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/ranking-css-assert-inputs-before-20261008/ledger.json",
+    "sha256": "88562a5fef7f3307cf715b000adc2b6d622de89ff32d692d78377552d289ff98",
+    "facts": "reversing stylesheet input substitutions restores entire old files; predicates/callbacks/cases unchanged"
+  },
+  "source_check_inputs": [
+    {
+      "file": "frontend/tests/v38-six-game-ui.test.mjs",
+      "before_sha256": "ff52be3d668110fcc56a9ce172d6ff494704cf54ba5f68d89718061ff40b68de",
+      "after_sha256": "133e0ed7159db06e14c32db7f46e41a7b3c768bbc007b46534d2b0e7f178e3cc"
+    },
+    {
+      "file": "frontend/tests/v41-ranking-recovery.test.mjs",
+      "before_sha256": "3f049675e759953b45c3d906118038a75910f9138345a700e2c793a986be07cc",
+      "after_sha256": "d43b078135fd26007e6de4ca9495c1c3cc84094007c4422ba50ad1d948f32b87"
+    }
+  ]
+}

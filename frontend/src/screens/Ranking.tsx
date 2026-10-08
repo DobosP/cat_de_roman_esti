@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthError, getRanking, type RankingResponse } from "../api/auth";
 import { GAMES, type GameKey } from "../games";
+import "../styles/ranking.css";
 
 type RankingError = "unavailable" | "failed";
 
