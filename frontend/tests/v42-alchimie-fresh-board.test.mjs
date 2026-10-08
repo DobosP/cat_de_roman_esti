@@ -11,7 +11,7 @@ const footer = screen.slice(
   screen.indexOf("{/* Win banner */}"),
 );
 
-test("closed game options offer a fresh board without leaving the game", () => {
+void test("closed game options offer a fresh board without leaving the game", () => {
   assert.match(screen, /const \[menuOpen, setMenuOpen\] = useState\(false\)/);
   assert.match(screen, /<details className="alchemy-menu" open=\{menuOpen\}/);
   assert.ok(screen.indexOf('<details className="alchemy-menu"') < screen.indexOf("{/* Footer actions"));
@@ -38,7 +38,7 @@ test("closed game options offer a fresh board without leaving the game", () => {
   );
 });
 
-test("the new action keeps a 44px touch target", () => {
+void test("the new action keeps a 44px touch target", () => {
   assert.match(
     css,
     /@media \(pointer: coarse\)[\s\S]*?\.roedu-btn,[\s\S]*?min-height: 44px/,

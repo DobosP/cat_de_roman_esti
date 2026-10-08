@@ -58,7 +58,7 @@ function* permutations(values) {
   }
 }
 
-test("retained selection identity is permutation-equivalent without mutating caller arrays", () => {
+void test("retained selection identity is permutation-equivalent without mutating caller arrays", () => {
   const selectionKey = actualSelectionKey();
   const retained = Object.freeze(["tile-c", "tile-a", "tile-d", "tile-b"]);
   const retainedKey = selectionKey(retained);
@@ -73,7 +73,7 @@ test("retained selection identity is permutation-equivalent without mutating cal
   assert.equal(checked, 24);
 });
 
-test("different opaque selections and multiplicities keep distinct identities", () => {
+void test("different opaque selections and multiplicities keep distinct identities", () => {
   const selectionKey = actualSelectionKey();
   assert.notEqual(selectionKey(["a", "bc"]), selectionKey(["ab", "c"]));
   assert.notEqual(selectionKey(["a,b", "c"]), selectionKey(["a", "b,c"]));
@@ -83,7 +83,7 @@ test("different opaque selections and multiplicities keep distinct identities", 
   assert.notEqual(selectionKey([]), selectionKey([""]));
 });
 
-test("selection keys preserve lossless JSON encoding of complete opaque IDs", () => {
+void test("selection keys preserve lossless JSON encoding of complete opaque IDs", () => {
   const selectionKey = actualSelectionKey();
   const ids = ["[brackets]", "Șir / ? # %", "back\\slash", "line\nbreak", "nul\u0000inside", "quote\"inside"];
   const before = [...ids];

@@ -10,14 +10,14 @@ const perechi = read("../src/screens/Perechi.tsx");
 const perechiCss = read("../src/styles/perechi.css");
 const resultCard = read("../src/components/ResultCard.tsx");
 
-test("Intrusul HUD omits source difficulty that does not describe puzzle state", () => {
+void test("Intrusul HUD omits source difficulty that does not describe puzzle state", () => {
   assert.doesNotMatch(intrusul, /DIFFICULTY_LABEL/);
   assert.doesNotMatch(intrusul, /label="NIVEL"/);
   assert.match(intrusul, /label="GREȘELI"/);
   assert.match(intrusul, /state\.daily && <StatBadge label="ZILNIC"/);
 });
 
-test("Perechi removes solved grid tiles but keeps earned pair history", () => {
+void test("Perechi removes solved grid tiles but keeps earned pair history", () => {
   assert.match(perechi, /const activeTiles = state\.tiles\.filter\(\(tile\) => !tile\.solved\)/);
   assert.match(perechi, /activeTiles\.map\(\(tile\) =>/);
   assert.match(perechi, /state\.solved_pairs\.map\(\(pair\) =>/);
@@ -26,7 +26,7 @@ test("Perechi removes solved grid tiles but keeps earned pair history", () => {
   assert.doesNotMatch(perechiCss, /\.perechi-tile--solved/);
 });
 
-test("Perechi focus follows the next active tile and wraps in board order", () => {
+void test("Perechi focus follows the next active tile and wraps in board order", () => {
   const tiles = [
     { id: "a", solved: false },
     { id: "b", solved: true },
@@ -47,7 +47,7 @@ test("Perechi focus follows the next active tile and wraps in board order", () =
   );
 });
 
-test("Perechi moves focus only when a focused solved tile disappears", () => {
+void test("Perechi moves focus only when a focused solved tile disappears", () => {
   assert.match(
     perechi,
     /focusedTileBeforeMutation\.current =\s*ids\.find\(\(id\) => tileRefs\.current\.get\(id\) === document\.activeElement\)/,
@@ -62,7 +62,7 @@ test("Perechi moves focus only when a focused solved tile disappears", () => {
   assert.match(perechi, /target\.focus\(\)/);
 });
 
-test("daily derived results identify free play while normal replay keeps its default", () => {
+void test("daily derived results identify free play while normal replay keeps its default", () => {
   for (const screen of [intrusul, perechi]) {
     assert.match(
       screen,
@@ -73,7 +73,7 @@ test("daily derived results identify free play while normal replay keeps its def
   assert.match(resultCard, /replayLabel = "Încă unul →"/);
 });
 
-test("UI clarity additions do not reference private derived metadata", () => {
+void test("UI clarity additions do not reference private derived metadata", () => {
   for (const source of [intrusul, perechi]) {
     assert.doesNotMatch(
       source,

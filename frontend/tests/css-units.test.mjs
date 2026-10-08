@@ -11,18 +11,18 @@ const { assertExplicitCss, normalizeExplicitCss, cssLength } = await import(
   `data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`
 );
 
-test("an absent CSS bag stays absent and an empty bag stays empty", () => {
+void test("an absent CSS bag stays absent and an empty bag stays empty", () => {
   assert.equal(assertExplicitCss(undefined), undefined);
   assert.equal(normalizeExplicitCss(undefined), undefined);
   assert.deepEqual(normalizeExplicitCss({}), {});
 });
 
-test("React unitless columnCount uses a string before the preserved SDK hook", () => {
+void test("React unitless columnCount uses a string before the preserved SDK hook", () => {
   assert.equal(assertExplicitCss({ columnCount: 2 }), undefined);
   assert.deepEqual(normalizeExplicitCss({ columnCount: 2 }), { columnCount: "2" });
 });
 
-test("finite unitless and custom numbers serialize without implicit px", () => {
+void test("finite unitless and custom numbers serialize without implicit px", () => {
   assert.deepEqual(normalizeExplicitCss({
     opacity: 0.55, fontWeight: 600, zIndex: 0, lineHeight: 1.15,
     WebKitBoxFlexGroup: 2, "--cue-count": 2, "--cue-offset": -2,
@@ -32,7 +32,7 @@ test("finite unitless and custom numbers serialize without implicit px", () => {
   });
 });
 
-test("dimensional numbers require explicit units, including zero and negatives", () => {
+void test("dimensional numbers require explicit units, including zero and negatives", () => {
   for (const value of [0, -0, 12, -2]) {
     for (const validate of [assertExplicitCss, normalizeExplicitCss]) {
       assert.throws(() => validate({ marginTop: value }), /CSS length requires explicit units: marginTop/);
@@ -43,14 +43,14 @@ test("dimensional numbers require explicit units, including zero and negatives",
   });
 });
 
-test("strings retain their exact declarations without source mutation", () => {
+void test("strings retain their exact declarations without source mutation", () => {
   const input = Object.freeze({ width: "12px", gap: "0.5rem", gridColumn: "1 / -1", "--cue-accent": "#ffd166" });
   const declarations = normalizeExplicitCss(input);
   assert.deepEqual(declarations, input);
   assert.notEqual(declarations, input);
 });
 
-test("undefined declarations and omitted keys retain the hook input shape", () => {
+void test("undefined declarations and omitted keys retain the hook input shape", () => {
   const input = { color: "red", background: undefined, opacity: 0 };
   const declarations = normalizeExplicitCss(input);
   assert.deepEqual(declarations, { color: "red", background: undefined, opacity: "0" });
@@ -60,7 +60,7 @@ test("undefined declarations and omitted keys retain the hook input shape", () =
   assert.deepEqual(normalizeExplicitCss({ color: undefined }), { color: undefined });
 });
 
-test("cssLength preserves strings and absence and serializes finite lengths", () => {
+void test("cssLength preserves strings and absence and serializes finite lengths", () => {
   assert.equal(cssLength(undefined), undefined);
   assert.equal(cssLength("auto"), "auto");
   assert.equal(cssLength("0.5rem"), "0.5rem");
@@ -73,7 +73,7 @@ test("cssLength preserves strings and absence and serializes finite lengths", ()
   }
 });
 
-test("nonfinite numbers are refused for unitless, custom and dimensional declarations", () => {
+void test("nonfinite numbers are refused for unitless, custom and dimensional declarations", () => {
   for (const property of ["opacity", "--cue-count", "width"]) {
     for (const value of [NaN, Infinity, -Infinity]) {
       for (const validate of [assertExplicitCss, normalizeExplicitCss]) {
@@ -83,7 +83,7 @@ test("nonfinite numbers are refused for unitless, custom and dimensional declara
   }
 });
 
-test("CSS bags reject primitives, arrays and nonplain prototypes", () => {
+void test("CSS bags reject primitives, arrays and nonplain prototypes", () => {
   class CssBag { opacity = 1; }
   for (const input of [null, 0, "opacity", true, Symbol("css"), 1n, () => {}, [], new Date(0), new CssBag(), Object.create({ opacity: 1 })]) {
     for (const validate of [assertExplicitCss, normalizeExplicitCss]) {
@@ -92,7 +92,7 @@ test("CSS bags reject primitives, arrays and nonplain prototypes", () => {
   }
 });
 
-test("plain bags may have a null prototype and frozen own data entries", () => {
+void test("plain bags may have a null prototype and frozen own data entries", () => {
   const input = Object.create(null);
   input.opacity = 0.5;
   input["--cue-accent"] = "gold";
@@ -101,7 +101,7 @@ test("plain bags may have a null prototype and frozen own data entries", () => {
   assert.deepEqual(normalizeExplicitCss(input), { opacity: "0.5", "--cue-accent": "gold" });
 });
 
-test("unsupported values are refused even for custom declarations", () => {
+void test("unsupported values are refused even for custom declarations", () => {
   for (const value of [null, true, {}, [], () => {}, Symbol("value"), 1n]) {
     for (const validate of [assertExplicitCss, normalizeExplicitCss]) {
       assert.throws(() => validate({ "--cue-count": value }), /Unsupported CSS value: --cue-count/);
@@ -109,7 +109,7 @@ test("unsupported values are refused even for custom declarations", () => {
   }
 });
 
-test("enumerable accessor declarations are refused without invoking them", () => {
+void test("enumerable accessor declarations are refused without invoking them", () => {
   let reads = 0, writes = 0;
   const getter = Object.defineProperty({}, "opacity", { enumerable: true, get() { reads += 1; return 1; } });
   const setter = Object.defineProperty({}, "opacity", { enumerable: true, set() { writes += 1; } });
@@ -122,7 +122,7 @@ test("enumerable accessor declarations are refused without invoking them", () =>
   assert.equal(writes, 0);
 });
 
-test("nonenumerable and symbol properties remain outside CSS declaration entries", () => {
+void test("nonenumerable and symbol properties remain outside CSS declaration entries", () => {
   let reads = 0;
   const input = { opacity: 0.5 };
   Object.defineProperty(input, "width", { get() { reads += 1; return 12; } });

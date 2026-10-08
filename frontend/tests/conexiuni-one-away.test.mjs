@@ -12,7 +12,7 @@ const selectionKeySource = readFileSync(
   "utf8",
 );
 
-test("Conexiuni treats a retained one-away selection as an order-independent set", () => {
+void test("Conexiuni treats a retained one-away selection as an order-independent set", () => {
   assert.match(screen, /import \{ selectionKey \} from "\.\.\/conexiuniSelectionKey";/);
   assert.match(
     selectionKeySource,
@@ -22,7 +22,7 @@ test("Conexiuni treats a retained one-away selection as an order-independent set
   assert.match(screen, /const guessKey = selectionKey\(guess\);/);
 });
 
-test("Conexiuni snapshots and retains only a recoverable one-away guess", () => {
+void test("Conexiuni snapshots and retains only a recoverable one-away guess", () => {
   assert.match(screen, /const guess = \[\.\.\.selected\];/);
   assert.match(screen, /recoverableOneAway = Boolean\(res\.one_away && !res\.lost\)/);
   assert.match(
@@ -36,7 +36,7 @@ test("Conexiuni snapshots and retains only a recoverable one-away guess", () => 
   );
 });
 
-test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths", () => {
+void test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths", () => {
   assert.match(
     screen,
     /selected\.length !== GROUP_SIZE \|\| actionsLocked \|\| exactBlockedRetry/,
@@ -52,7 +52,7 @@ test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths",
   assert.match(screen, /exactBlockedRetry \? "Schimbă o piesă" : "Verifică"/);
 });
 
-test("Conexiuni preserves only a still-visible server-rejected duplicate", () => {
+void test("Conexiuni preserves only a still-visible server-rejected duplicate", () => {
   assert.match(
     screen,
     /if \(!fresh\.won && !fresh\.lost\) \{\s*const freshAvailable = unsolvedTileIds\(fresh\);\s*if \(duplicate && duplicate\.guess\.every\(\(id\) => freshAvailable\.has\(id\)\)\) \{\s*setSelected\(duplicate\.guess\);/,
@@ -72,13 +72,13 @@ test("Conexiuni preserves only a still-visible server-rejected duplicate", () =>
   );
 });
 
-test("Conexiuni never turns a generic duplicate rejection into one-away feedback", () => {
+void test("Conexiuni never turns a generic duplicate rejection into one-away feedback", () => {
   assert.match(screen, /setBlockedGuess\(\{ key: selectionKey\(duplicate\.guess\), oneAway: false \}\)/);
   assert.match(screen, /feedback = blockedGuess\?\.oneAway \? ONE_AWAY_GUIDANCE : hint/);
   assert.doesNotMatch(screen, /blockedGuess !== null \? ONE_AWAY_GUIDANCE/);
 });
 
-test("mobile recovery and clues stay in normal flow immediately above the board", () => {
+void test("mobile recovery and clues stay in normal flow immediately above the board", () => {
   const coach = screen.indexOf('className="connections-coach-stack"');
   const coachEnd = screen.indexOf("\n          </div>\n        )}", coach);
   const guidance = screen.indexOf('className="card connections-feedback col"');
@@ -99,7 +99,7 @@ test("mobile recovery and clues stay in normal flow immediately above the board"
   assert.match(screen, /actionOwner, ticket, conexiuniApi\.get/);
 });
 
-test("authoritative refresh retires invisible selections without duplicating terminal errors", () => {
+void test("authoritative refresh retires invisible selections without duplicating terminal errors", () => {
   assert.match(screen, /fresh\.solved\.flatMap\(\(group\) => group\.tiles\.map/);
   assert.match(screen, /current\.filter\(\(id\) => available\.has\(id\)\)/);
   assert.match(
@@ -112,7 +112,7 @@ test("authoritative refresh retires invisible selections without duplicating ter
   assert.doesNotMatch(reconcile, /ONE_AWAY_GUIDANCE|\.one_away/);
 });
 
-test("the sticky coach keeps the bounded mistake budget visible without membership", () => {
+void test("the sticky coach keeps the bounded mistake budget visible without membership", () => {
   assert.match(screen, /className="connections-lives"/);
   assert.match(screen, /role="img"/);
   assert.match(
@@ -128,7 +128,7 @@ test("the sticky coach keeps the bounded mistake budget visible without membersh
   assert.match(screen, /clueMessages\.map\(\(\{ key, message \}\) => \([\s\S]*?role="status"/);
 });
 
-test("Indiciu unlocks up to a second clue and reflects remaining availability", () => {
+void test("Indiciu unlocks up to a second clue and reflects remaining availability", () => {
   assert.match(screen, /const MAX_CLUES = 2;/);
   assert.match(screen, /const CLUE_MISTAKES_BASE = 2;/);
   assert.match(screen, /const cluesUsed = state\?\.clues_used \?\? 0;/);

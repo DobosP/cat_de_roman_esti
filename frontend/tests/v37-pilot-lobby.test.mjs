@@ -7,7 +7,7 @@ const games = read("../src/games.ts");
 const home = read("../src/screens/Home.tsx");
 const css = read("../src/styles/arcade.css");
 
-test("pilot lobby keeps the provisional fun-first game order", () => {
+void test("pilot lobby keeps the provisional fun-first game order", () => {
   const legacy = new Set(["alchimie", "conexiuni", "contexto", "lant"]);
   const order = [...games.matchAll(/^\s+key: "([^"]+)",$/gm)]
     .map((match) => match[1])
@@ -15,7 +15,7 @@ test("pilot lobby keeps the provisional fun-first game order", () => {
   assert.deepEqual(order, ["alchimie", "conexiuni", "contexto", "lant"]);
 });
 
-test("only Intrusul receives the terse first-play highlight", () => {
+void test("only Intrusul receives the terse first-play highlight", () => {
   assert.equal((games.match(/featured: true/g) ?? []).length, 1);
   assert.match(games, /key: "intrusul"[\s\S]*?featured: true/);
   assert.equal((home.match(/Începe aici/g) ?? []).length, 2);
@@ -33,7 +33,7 @@ test("only Intrusul receives the terse first-play highlight", () => {
   assert.doesNotMatch(`${games}\n${home}`, /boardRank|board_score|qualityScore|pilotRank/i);
 });
 
-test("first-time players see games without an empty history wall", () => {
+void test("first-time players see games without an empty history wall", () => {
   assert.match(home, /<section className="col history-section"[^>]*hidden=\{playedTotal === 0\}>/);
   assert.match(home, /hidden=\{playedTotal === 0\}[\s\S]*?history-tabs[\s\S]*?totals-grid[\s\S]*?<HistoryRows/);
   assert.match(home, /playedTotal === 0[\s\S]*?first-play-tools[\s\S]*?Importă istoricul/);
@@ -42,7 +42,7 @@ test("first-time players see games without an empty history wall", () => {
   assert.match(css, /\.history-section\[hidden\] \{\s*display: none/);
 });
 
-test("the existing responsive grid keeps one-column phone cards", () => {
+void test("the existing responsive grid keeps one-column phone cards", () => {
   assert.match(
     css,
     /\.games-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(min\(100%, 320px\), 1fr\)\)/,

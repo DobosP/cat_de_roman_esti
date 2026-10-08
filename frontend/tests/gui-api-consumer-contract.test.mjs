@@ -36,7 +36,7 @@ function installedCompilerOptions() {
   return parsed.options;
 }
 
-test("real TypeScript consumers retain the exported game API property, union and private-key contracts", () => {
+void test("real TypeScript consumers retain the exported game API property, union and private-key contracts", () => {
   installedCompilerOptions();
   const cli = nativeCompiler(frontend).executable;
   const version = spawnSync(cli, ["--version"], { cwd: frontend, encoding: "utf8" });
@@ -81,7 +81,7 @@ function loadActualModule(path, dependencies, document, options) {
   return exported;
 }
 
-test("actual requestClue encodes opaque reserved-character IDs through the real app client and shared SDK", async () => {
+void test("actual requestClue encodes opaque reserved-character IDs through the real app client and shared SDK", async () => {
   // Only the fetch boundary is substituted. The ID and reply are explicitly
   // NON-NATIVE transport data: they do not claim server acceptance or privacy qualification.
   const replies = ["rundă/segment?x=1#% Ș", "opaque%2Falready"].map((game_id) => ({

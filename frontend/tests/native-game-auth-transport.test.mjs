@@ -15,7 +15,7 @@ function loadModule(path, dependencies, document) {
   return exported;
 }
 
-test("native gameplay sends real same-origin account credentials and CSRF through the shared transport", async () => {
+void test("native gameplay sends real same-origin account credentials and CSRF through the shared transport", async () => {
   const document = { cookie: "csrftoken=synthetic-proof; unrelated=ignored" };
   const auth = loadModule("../src/api/auth.ts", {}, document);
   const client = loadModule("../src/api/client.ts", { "@roedu/ui": sharedClient, "./auth": auth }, document);

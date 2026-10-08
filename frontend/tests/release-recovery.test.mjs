@@ -58,7 +58,7 @@ function harness(initialMarker = null) {
   };
 }
 
-test("a stale lazy chunk reloads once and prevents Vite's rejected import", () => {
+void test("a stale lazy chunk reloads once and prevents Vite's rejected import", () => {
   const app = harness();
   installReleaseRecovery(app);
 
@@ -75,7 +75,7 @@ test("a stale lazy chunk reloads once and prevents Vite's rejected import", () =
   assert.equal(app.reloads(), 1);
 });
 
-test("the loop guard follows client-side navigation before a lazy import fails", () => {
+void test("the loop guard follows client-side navigation before a lazy import fails", () => {
   const app = harness();
   installReleaseRecovery(app);
   app.location.pathname = "/perechi";
@@ -86,7 +86,7 @@ test("the loop guard follows client-side navigation before a lazy import fails",
   assert.equal(app.reloads(), 1);
 });
 
-test("a slow failed chunk cannot outlive the guard and reload every document", (t) => {
+void test("a slow failed chunk cannot outlive the guard and reload every document", (t) => {
   t.mock.timers.enable({ apis: ["setTimeout"] });
   let marker = null;
   let reloads = 0;
@@ -104,7 +104,7 @@ test("a slow failed chunk cannot outlive the guard and reload every document", (
   assert.equal(marker, "/intrusul?daily=2026-07-30");
 });
 
-test("cleanup removes the global listener", () => {
+void test("cleanup removes the global listener", () => {
   const app = harness();
   const cleanup = installReleaseRecovery(app);
   cleanup();
@@ -113,7 +113,7 @@ test("cleanup removes the global listener", () => {
   assert.equal(app.reloads(), 0);
 });
 
-test("a denied default sessionStorage getter cannot abort application startup", (t) => {
+void test("a denied default sessionStorage getter cannot abort application startup", (t) => {
   const descriptor = Object.getOwnPropertyDescriptor(globalThis, "sessionStorage");
   Object.defineProperty(globalThis, "sessionStorage", {
     configurable: true,
@@ -138,7 +138,7 @@ test("a denied default sessionStorage getter cannot abort application startup", 
 });
 
 for (const failure of ["getItem", "setItem", "silentWrite", "readBack"]) {
-  test(`denied or ineffective storage (${failure}) cannot start a reload loop`, () => {
+  void test(`denied or ineffective storage (${failure}) cannot start a reload loop`, () => {
     const app = harness();
     let reads = 0;
     app.storage = {
@@ -160,7 +160,7 @@ for (const failure of ["getItem", "setItem", "silentWrite", "readBack"]) {
   });
 }
 
-test("a pending reload stays bounded even if the persisted marker is removed", () => {
+void test("a pending reload stays bounded even if the persisted marker is removed", () => {
   const app = harness();
   installReleaseRecovery(app);
   app.dispatch();
@@ -170,7 +170,7 @@ test("a pending reload stays bounded even if the persisted marker is removed", (
   assert.equal(app.prevented(), 2);
 });
 
-test("the durable marker prevents recovery from looping across documents", (t) => {
+void test("the durable marker prevents recovery from looping across documents", (t) => {
   t.mock.timers.enable({ apis: ["setTimeout"] });
   const initial = harness();
   installReleaseRecovery(initial);

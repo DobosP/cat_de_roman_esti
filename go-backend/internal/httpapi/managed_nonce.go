@@ -39,6 +39,95 @@ func managedTagInsertion(raw []byte, start int) (int, error) {
 	return start + end, nil
 }
 
+// x/net/html removes duplicate attributes while tokenizing, before Token or
+// TagAttr exposes them. Check raw names without rewriting bytes or treating
+// attribute-like text inside a quoted/unquoted value as another attribute.
+func checkManagedRawAttributes(raw []byte) error {
+	space := func(c byte) bool {
+		return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f'
+	}
+	end := len(raw) - 1
+	if end < 2 || raw[0] != '<' || raw[end] != '>' {
+		return fmt.Errorf("malformed managed raw tag")
+	}
+	i := 1
+	for i < end && !space(raw[i]) && raw[i] != '/' {
+		i++
+	}
+	names := map[string]bool{}
+	for i < end {
+		for i < end && space(raw[i]) {
+			i++
+		}
+		if i == end {
+			break
+		}
+		if raw[i] == '/' {
+			if i+1 != end {
+				return fmt.Errorf("ambiguous managed self-closing tag")
+			}
+			break
+		}
+		start := i
+		for i < end && !space(raw[i]) && raw[i] != '=' && raw[i] != '/' {
+			if raw[i] < 0x21 || raw[i] > 0x7e || strings.ContainsRune("\"'<>`", rune(raw[i])) {
+				return fmt.Errorf("unsupported managed raw attribute name")
+			}
+			i++
+		}
+		if i == start {
+			return fmt.Errorf("empty managed raw attribute name")
+		}
+		name := strings.ToLower(string(raw[start:i])) // Admitted names are ASCII.
+		if names[name] {
+			return fmt.Errorf("duplicate managed attribute")
+		}
+		names[name] = true
+		for i < end && space(raw[i]) {
+			i++
+		}
+		if i == end || raw[i] != '=' {
+			continue // Boolean attribute, such as crossorigin.
+		}
+		i++
+		for i < end && space(raw[i]) {
+			i++
+		}
+		if i == end {
+			return fmt.Errorf("missing managed raw attribute value")
+		}
+		if raw[i] == '\'' || raw[i] == '"' {
+			quote := raw[i]
+			i++
+			for i < end && raw[i] != quote {
+				if raw[i] == 0 {
+					return fmt.Errorf("invalid managed raw attribute value")
+				}
+				i++
+			}
+			if i == end {
+				return fmt.Errorf("unfinished managed quoted attribute")
+			}
+			i++
+			if i < end && !space(raw[i]) && raw[i] != '/' {
+				return fmt.Errorf("unseparated managed raw attribute")
+			}
+		} else {
+			start = i
+			for i < end && !space(raw[i]) {
+				if raw[i] == 0 || strings.ContainsRune("\"'<=`>", rune(raw[i])) {
+					return fmt.Errorf("ambiguous managed unquoted attribute")
+				}
+				i++
+			}
+			if i == start {
+				return fmt.Errorf("missing managed unquoted attribute")
+			}
+		}
+	}
+	return nil
+}
+
 func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonceShell, error) {
 	if manifest == nil {
 		return nil, fmt.Errorf("managed nonce shell requires manifest")
@@ -98,6 +187,9 @@ func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonc
 		raw := z.Raw()
 		start := position
 		position += len(raw)
+		// Token/TagName/TagAttr can normalize the tokenizer's buffer in place.
+		// Read raw names and insertion bytes from our exact immutable copy.
+		raw = shell.index[start:position]
 		if kind == html.ErrorToken {
 			if z.Err() != io.EOF {
 				return nil, fmt.Errorf("managed HTML tokenization: %w", z.Err())
@@ -106,6 +198,11 @@ func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonc
 				return nil, fmt.Errorf("unfinished managed HTML token")
 			}
 			break
+		}
+		if kind == html.StartTagToken || kind == html.SelfClosingTagToken {
+			if err := checkManagedRawAttributes(raw); err != nil {
+				return nil, err
+			}
 		}
 		token := z.Token()
 		if inScript {

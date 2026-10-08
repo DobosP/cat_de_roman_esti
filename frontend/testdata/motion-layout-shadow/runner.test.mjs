@@ -186,7 +186,7 @@ function shadow(css) {
   return lengths;
 }
 
-test("actual original and corrected layout shadows counter-scale while frozen CSSOM-only control fails", { timeout: 120_000 }, async (t) => {
+void test("actual original and corrected layout shadows counter-scale while frozen CSSOM-only control fails", { timeout: 120_000 }, async (t) => {
   const authority = admit(); // No Vite/React/browser import or output allocation before admission.
   const parent = `.gate/${authority.actual.target}/motion-layout-shadow`;
   // Wrapper-owned roots retain their native mode; admission still proves their

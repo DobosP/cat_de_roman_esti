@@ -34,7 +34,7 @@ function intentAt(search, pathname = "/lant") {
   return useDailyIntent();
 }
 
-test("the circuit intent is single-use and keeps every other query param", () => {
+void test("the circuit intent is single-use and keeps every other query param", () => {
   const alchimie = intentAt("?mode=challenges&challenge=daily", "/alchimie");
   assert.equal(alchimie.active, true);
   alchimie.consume();
@@ -52,7 +52,7 @@ test("the circuit intent is single-use and keeps every other query param", () =>
   assert.deepEqual(globalThis.__intentNavigations, [], "no history write without an intent");
 });
 
-test("GameIntro consumes the intent from both start buttons and swaps only their order", () => {
+void test("GameIntro consumes the intent from both start buttons and swaps only their order", () => {
   assert.match(intro, /import \{ useDailyIntent \} from "\.\.\/hooks\/useDailyIntent";/);
   assert.doesNotMatch(intro, /location\.search/);
   assert.match(intro, /const dailyFirst = Boolean\(onDaily\) && intent\.active;/);
@@ -62,7 +62,7 @@ test("GameIntro consumes the intent from both start buttons and swaps only their
   assert.equal(intro.match(/onClick=\{consumeThen\(/g)?.length, 2);
 });
 
-test("resuming a saved free round from the circuit tells the player the daily still waits", () => {
+void test("resuming a saved free round from the circuit tells the player the daily still waits", () => {
   assert.match(resume, /onDailyBypassed\?: \(\) => void;/);
   assert.match(resume, /if \(!dailyIntent\.active\) return false;/);
   // Only today's daily uses up the intent; an older day's daily keeps it silently.
@@ -87,7 +87,7 @@ test("resuming a saved free round from the circuit tells the player the daily st
   }
 });
 
-test("Intrusul and Perechi free results lead back to today's unfinished circuit daily", () => {
+void test("Intrusul and Perechi free results lead back to today's unfinished circuit daily", () => {
   for (const name of ["Intrusul", "Perechi"]) {
     const screen = screens[name];
     assert.match(
@@ -111,7 +111,7 @@ test("Intrusul and Perechi free results lead back to today's unfinished circuit 
   }
 });
 
-test("daily badges show the Romanian dd.mm.yyyy date while seeds keep the raw key", async () => {
+void test("daily badges show the Romanian dd.mm.yyyy date while seeds keep the raw key", async () => {
   const { displayDetail, formatDayKey, roNoun } = await importTs(read("../src/share.ts"));
   assert.equal(formatDayKey("2026-09-23"), "23.09.2026");
   // Stored details keep raw keys for dedupe; history and records show them as dd.mm.yyyy.

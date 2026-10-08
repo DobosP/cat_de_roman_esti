@@ -7,7 +7,7 @@ const api = read("../src/api/contexto.ts");
 const screen = read("../src/screens/CaldRece.tsx");
 const css = read("../src/styles/arcade.css");
 
-test("accepted guesses type stable ordinals and bounded server comparison kinds", () => {
+void test("accepted guesses type stable ordinals and bounded server comparison kinds", () => {
   const guess = api.match(/export interface Guess[\s\S]*?\n}/);
   const feedback = api.match(/export interface GuessFeedback[\s\S]*?\n}/);
   const accepted = api.match(/export interface GuessAccepted[\s\S]*?\n}/);
@@ -22,7 +22,7 @@ test("accepted guesses type stable ordinals and bounded server comparison kinds"
   assert.match(accepted[0], /feedback: GuessFeedback/);
 });
 
-test("Bune and Recente use server rank order and stable attempt ordinals", () => {
+void test("Bune and Recente use server rank order and stable attempt ordinals", () => {
   assert.match(screen, /type GuessView = "best" \| "recent"/);
   assert.match(screen, /right\.attempt_number - left\.attempt_number/);
   assert.match(screen, /role="group"\s*aria-label="Ordinea încercărilor"/);
@@ -35,7 +35,7 @@ test("Bune and Recente use server rank order and stable attempt ordinals", () =>
   assert.match(css, /\.contexto-guess-tabs button \{[\s\S]*?min-height: 44px/);
 });
 
-test("the latest accepted guess renders exactly one server-authored comparison", () => {
+void test("the latest accepted guess renders exactly one server-authored comparison", () => {
   assert.match(screen, /setFeedback\(res\.feedback\)/);
   assert.match(screen, /!finished && latestGuess && feedback/);
   assert.match(screen, /className=\{`contexto-comparison contexto-comparison--\$\{feedback\.kind\}`\}/);
@@ -44,7 +44,7 @@ test("the latest accepted guess renders exactly one server-authored comparison",
   assert.match(css, /\.contexto-comparison \{[\s\S]*?min-height: 44px/);
 });
 
-test("terminal results and clue cards each have one announcement owner", () => {
+void test("terminal results and clue cards each have one announcement owner", () => {
   assert.doesNotMatch(screen, /<NextMove/);
   const clueTry = screen.match(
     /try \{\s*const res = await contextoApi\.requestClue\(state\.game_id\);[\s\S]*?\n {4}\} catch/,
@@ -54,7 +54,7 @@ test("terminal results and clue cards each have one announcement owner", () => {
   assert.match(screen, /aria-label="Indicii folosite"\s*aria-live="polite"/);
 });
 
-test("the guess form exposes the paid clue while optional controls stay in the menu", () => {
+void test("the guess form exposes the paid clue while optional controls stay in the menu", () => {
   const form = screen.indexOf('<form onSubmit={handleGuess} className="row contexto-input-bar"');
   const actions = screen.indexOf('className="contexto-action-row"', form);
   const hudEnd = screen.indexOf("</Hud>");
@@ -72,7 +72,7 @@ test("the guess form exposes the paid clue while optional controls stay in the m
   assert.match(css, /\.contexto-action-row \.roedu-btn,[\s\S]*?min-height: 44px/);
 });
 
-test("rules sit below the clue/options row and exhausted clues explain themselves", () => {
+void test("rules sit below the clue/options row and exhausted clues explain themselves", () => {
   const tools = screen.indexOf('<div className="contexto-tools">');
   const toolsEnd = screen.indexOf("</GameOptions>", tools);
   const help = screen.indexOf("<GameHelp game={GAME_KEY} />");
@@ -85,7 +85,7 @@ test("rules sit below the clue/options row and exhausted clues explain themselve
   assert.doesNotMatch(screen, />\s*Răspuns\s*</);
 });
 
-test("reveal requires an inline confirmation and the first tap cannot call giveup", () => {
+void test("reveal requires an inline confirmation and the first tap cannot call giveup", () => {
   const firstTapStart = screen.indexOf("const requestRevealConfirmation");
   const firstTapEnd = screen.indexOf("const showOptions", firstTapStart);
   const firstTap = screen.slice(firstTapStart, firstTapEnd);
@@ -97,7 +97,7 @@ test("reveal requires an inline confirmation and the first tap cannot call giveu
   assert.match(screen, /const handleGiveUp[\s\S]*?contextoApi\.giveUp\(state\.game_id\)/);
 });
 
-test("guess, clue, and game lifecycle dismiss an armed reveal", () => {
+void test("guess, clue, and game lifecycle dismiss an armed reveal", () => {
   const clears = screen.match(/setConfirmReveal\(false\)/g) ?? [];
   assert.ok(clears.length >= 10);
   assert.match(screen, /const handleGuess[\s\S]*?setConfirmReveal\(false\)/);

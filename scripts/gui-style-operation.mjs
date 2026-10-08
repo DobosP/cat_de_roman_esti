@@ -16,7 +16,7 @@ const MOTION_REGRESSION_INPUTS = {
 };
 const NORMALIZED_MOTION_REGRESSION_INPUTS = {
   ...MOTION_REGRESSION_INPUTS,
-  "frontend/testdata/motion-layout-shadow/runner.test.mjs": "7dc42b815ce7107bbfd7e2edb4f02bba50c34035fad9663ff8a4067c0fc10820",
+  "frontend/testdata/motion-layout-shadow/runner.test.mjs": "1fdff5e7a0e93cef2556468f9070ac9dc597b43bce6a977b7638c28be65645ac",
   "frontend/testdata/motion-layout-shadow/entry.tsx": "ab648bb9388371341a322f978bfd37665802ad41a26a3d802d4fd1b30df00150",
   "frontend/testdata/motion-layout-shadow/tsconfig.json": "8634d250c817477d1f2a4c259562b4bc8dc5920ca1a69ea6db2fe083e3706bb4",
 };

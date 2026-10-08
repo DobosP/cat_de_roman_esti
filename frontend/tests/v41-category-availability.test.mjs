@@ -12,7 +12,7 @@ const screens = {
   alchimie: read("../src/screens/Alchimie.tsx"),
 };
 
-test("category metadata types the exact game and difficulty availability matrix", () => {
+void test("category metadata types the exact game and difficulty availability matrix", () => {
   assert.match(meta, /export type Difficulty = "usor" \| "normal" \| "greu"/);
   assert.match(
     meta,
@@ -20,7 +20,7 @@ test("category metadata types the exact game and difficulty availability matrix"
   );
 });
 
-test("the picker shows exact playable shelves and clears a stale selection", () => {
+void test("the picker shows exact playable shelves and clears a stale selection", () => {
   assert.match(
     picker,
     /const visible = \(categories \?\? \[\]\)\.filter\([\s\S]*?category\.available_by_difficulty\[game\]\[difficulty\]/,
@@ -34,7 +34,7 @@ test("the picker shows exact playable shelves and clears a stale selection", () 
   assert.match(picker, /chip\(null, "Toate temele", accent\)/);
 });
 
-test("all four configurable game screens bind category availability to difficulty", () => {
+void test("all four configurable game screens bind category availability to difficulty", () => {
   for (const [game, source] of Object.entries(screens)) {
     assert.match(
       source,

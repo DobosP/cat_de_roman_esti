@@ -10,7 +10,7 @@ const resultCard = read("../src/components/ResultCard.tsx");
 const gameShell = read("../src/components/GameShell.tsx");
 
 for (const game of ["intrusul", "perechi"]) {
-  test(`${game} retry preserves the exact public earned snapshot after read failure`, async () => {
+  void test(`${game} retry preserves the exact public earned snapshot after read failure`, async () => {
     const owner = createGameActionOwner({ peek: () => "owned", isCurrent: (id) => id === "owned" });
     const snapshot = game === "intrusul"
       ? { game_id: "owned", wrong_ids: ["one"], attempts: 1, mistakes: 1, hints_used: 1, clue: { label: "group", message: "earned clue" }, won: false, lost: false }
@@ -28,7 +28,7 @@ for (const game of ["intrusul", "perechi"]) {
   });
 }
 
-test("create and replay are single-flight with visible result busy state", () => {
+void test("create and replay are single-flight with visible result busy state", () => {
   for (const screen of [intrusul, perechi]) {
     assert.match(screen, /const startInFlight = useRef\(false\)/);
     assert.match(screen, /if \(!acquireFlight\(startInFlight\)\) return/);
@@ -46,7 +46,7 @@ test("create and replay are single-flight with visible result busy state", () =>
   assert.match(gameShell, /busy \? "Se pregătește…" : "Ieși"/);
 });
 
-test("quick games explain locked hints and visibly price only the available hint action", () => {
+void test("quick games explain locked hints and visibly price only the available hint action", () => {
   assert.match(intrusul, /<span className="intrusul-hint-status">Indiciu disponibil după prima greșeală\.<\/span>/);
   assert.match(perechi, /<span className="perechi-hint-status">Indiciu disponibil după două greșeli\.<\/span>/);
   for (const screen of [intrusul, perechi]) {

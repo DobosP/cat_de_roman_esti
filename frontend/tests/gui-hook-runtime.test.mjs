@@ -153,7 +153,7 @@ function fileSnapshot(root) {
   return closure.map(name => [name, digest(fs.readFileSync(path.join(root, bootstrap, name)))]);
 }
 
-test('deps selects the committed helper while the configured installed package is absent', { concurrency: false }, t => {
+void test('deps selects the committed helper while the configured installed package is absent', { concurrency: false }, t => {
   const f = fixture(t);
   const before = fileSnapshot(f.root);
   const result = resolve(f, 'deps');
@@ -164,12 +164,12 @@ test('deps selects the committed helper while the configured installed package i
   assert.deepEqual(fileSnapshot(f.root), before);
   assert.deepEqual(f.config, base);
 });
-test('setup supports the real gen missing-runner projection without a setup CLI target', { concurrency: false }, t => {
+void test('setup supports the real gen missing-runner projection without a setup CLI target', { concurrency: false }, t => {
   const f = fixture(t, 'gen');
   assert.equal(resolve(f, 'setup').mode, 'committed-bootstrap-helper');
   assert.equal(fs.existsSync(path.join(f.root, selected)), false);
 });
-test('the actual eight-field captured producer shape is structurally accepted without execution evidence', { concurrency: false }, t => {
+void test('the actual eight-field captured producer shape is structurally accepted without execution evidence', { concurrency: false }, t => {
   const f = fixture(t);
   const captured = JSON.parse(fs.readFileSync(path.join(f.root, '.gate/kit-sync/wrapper-kit-config.json')));
   assert.deepEqual(Object.keys(captured), ['schema', 'target', 'sha', 'tree_sha256',
@@ -183,7 +183,7 @@ for (const [label, mutate] of [
   ['missing config field', captured => { delete captured.config; }],
   ['extra captured field', captured => { captured.extra = 'synthetic'; }],
 ]) {
-  test('closed actual captured shape rejects ' + label, { concurrency: false }, t => {
+  void test('closed actual captured shape rejects ' + label, { concurrency: false }, t => {
     const f = fixture(t);
     editPrivateCapture(f, mutate);
     assert.throws(() => resolve(f, 'deps'), /current frozen config bytes or identity differ/);
@@ -202,21 +202,21 @@ for (const [label, mutate] of [
   ['nonstring stdout hash', command => { command.stdout_sha256 = ['a'.repeat(64)]; }],
   ['extra command field', command => { command.claimed_execution = true; }],
 ]) {
-  test('actual command witness rejects ' + label, { concurrency: false }, t => {
+  void test('actual command witness rejects ' + label, { concurrency: false }, t => {
     const f = fixture(t);
     editPrivateCapture(f, captured => mutate(captured.command));
     assert.throws(() => resolve(f, 'deps'), /current config command witness differs/);
   });
 }
 for (const target of ['gen', 'unit', 'full', 'build']) {
-  test('generic ' + target + ' refuses absent configured package without bootstrap fallback', { concurrency: false }, t => {
+  void test('generic ' + target + ' refuses absent configured package without bootstrap fallback', { concurrency: false }, t => {
     const f = fixture(t, target);
     assert.throws(() => resolve(f, target), /ENOENT/);
     assert.equal(fs.existsSync(path.join(f.root, selected)), false);
     assert.deepEqual(fileSnapshot(f.root).length, closure.length);
   });
 }
-test('generic lookup uses only its explicit selected locator and returns no qualifying report', { concurrency: false }, t => {
+void test('generic lookup uses only its explicit selected locator and returns no qualifying report', { concurrency: false }, t => {
   const f = fixture(t, 'gen');
   installInertSelection(f);
   const result = resolve(f, 'gen');
@@ -225,7 +225,7 @@ test('generic lookup uses only its explicit selected locator and returns no qual
   assert.deepEqual(Object.keys(result).sort(), ['mode', 'url', 'wrapper_invocation', 'wrapper_target']);
   for (const field of ['status', 'checks', 'actions', 'ui_adoption', 'installed', 'release']) assert.equal(Object.hasOwn(result, field), false);
 });
-test('setup/deps resolution does not call generic main or old loadKit qualification', { concurrency: false }, t => {
+void test('setup/deps resolution does not call generic main or old loadKit qualification', { concurrency: false }, t => {
   const f = fixture(t, 'unit');
   const result = resolve(f, 'setup');
   assert.equal(result.mode, 'committed-bootstrap-helper');
@@ -233,7 +233,7 @@ test('setup/deps resolution does not call generic main or old loadKit qualificat
   assert.equal(fs.existsSync(path.join(f.root, 'kit')), false);
   assert.equal(fs.existsSync(path.join(f.root, 'frontend/package-lock.json')), false);
 });
-test('a resolved URL cannot substitute for the actual setup process witness/report', { concurrency: false }, async t => {
+void test('a resolved URL cannot substitute for the actual setup process witness/report', { concurrency: false }, async t => {
   const f = fixture(t);
   const result = resolve(f, 'deps');
   const { validateSetupWitness } = await pinnedValidators(f);
@@ -242,7 +242,7 @@ test('a resolved URL cannot substitute for the actual setup process witness/repo
     exit_code: 0, duration_ms: 0, report: result }, { ...identity, invocation: randomUUID() }));
   assert.equal(fs.existsSync(path.join(f.root, '.gate/setup/result.json')), false);
 });
-test('dependency bridge requires actual successful lock/tidy actions in addition to resolution', { concurrency: false }, async t => {
+void test('dependency bridge requires actual successful lock/tidy actions in addition to resolution', { concurrency: false }, async t => {
   const f = fixture(t);
   const { validateDependencyActions } = await pinnedValidators(f);
   assert.throws(() => validateDependencyActions([]), /Actual sanctioned dependency command missing/);
@@ -251,7 +251,7 @@ test('dependency bridge requires actual successful lock/tidy actions in addition
   assert.throws(() => validateDependencyActions(failedLock), /Actual sanctioned dependency command missing/);
   assert.equal(fs.existsSync(path.join(f.root, 'frontend/package-lock.json')), false);
 });
-test('a synthetic valid-shaped npm action cannot hide missing or failed Go tidy evidence', { concurrency: false }, async t => {
+void test('a synthetic valid-shaped npm action cannot hide missing or failed Go tidy evidence', { concurrency: false }, async t => {
   const f = fixture(t);
   const { validateDependencyActions } = await pinnedValidators(f);
   // Counterexample data only: neither command was executed or attested here.
@@ -264,18 +264,18 @@ test('a synthetic valid-shaped npm action cannot hide missing or failed Go tidy 
   assert.equal(fs.existsSync(path.join(f.root, 'go-backend/go.mod')), false);
 });
 for (const bad of ['../outside', '/outside', 'frontend\\alias', 'frontend/C:alias', 'frontend/con', 'frontend/alias.']) {
-  test('unsafe configured locator refuses before helper resolution: ' + bad, { concurrency: false }, t => {
+  void test('unsafe configured locator refuses before helper resolution: ' + bad, { concurrency: false }, t => {
     const f = fixture(t, 'gen');
     f.config.npm_dir = bad;
     assert.throws(() => resolve(f, 'gen'), /unsafe literal relative path/);
   });
 }
-test('changed actual repo configuration refuses instead of mutating captured configuration', { concurrency: false }, t => {
+void test('changed actual repo configuration refuses instead of mutating captured configuration', { concurrency: false }, t => {
   const f = fixture(t);
   f.config.npm_dir = 'tools/another-helper';
   assert.throws(() => resolve(f, 'deps'), /complete frozen configuration differs/);
 });
-test('the complete staged phase is retained and changed phase evidence refuses', { concurrency: false }, t => {
+void test('the complete staged phase is retained and changed phase evidence refuses', { concurrency: false }, t => {
   const phase = { mode: 'staged-react', until: 'S1-M2', legacy: { version: '0.3.0',
     archive_sha256: '1'.repeat(64), source_sha: '2'.repeat(40),
     receipt: 'docs/reviews/SYNTHETIC-NON-RELEASE/receipt.json', receipt_sha256: '3'.repeat(64) } };
@@ -287,12 +287,12 @@ test('the complete staged phase is retained and changed phase evidence refuses',
   f.config.ui_adoption.legacy.receipt_sha256 = '4'.repeat(64);
   assert.throws(() => resolve(f, 'deps'), /complete frozen configuration differs/);
 });
-test('captured config byte drift refuses even before a configuration comparison', { concurrency: false }, t => {
+void test('captured config byte drift refuses even before a configuration comparison', { concurrency: false }, t => {
   const f = fixture(t);
   fs.appendFileSync(path.join(f.root, '.gate/kit-sync/wrapper-kit-config.json'), '\n ');
   assert.throws(() => resolve(f, 'deps'), /current frozen config bytes or identity differ/);
 });
-test('wrapper W is preserved independently of a distinct caller hook I', { concurrency: false }, t => {
+void test('wrapper W is preserved independently of a distinct caller hook I', { concurrency: false }, t => {
   const f = fixture(t);
   const callerI = randomUUID();
   const result = resolve(f, 'deps');
@@ -300,17 +300,17 @@ test('wrapper W is preserved independently of a distinct caller hook I', { concu
   assert.equal(result.wrapper_invocation, f.wrapperW);
   assert.equal(Object.hasOwn(result, 'invocation'), false);
 });
-test('bootstrap payload drift refuses even with an otherwise bound current descriptor', { concurrency: false }, t => {
+void test('bootstrap payload drift refuses even with an otherwise bound current descriptor', { concurrency: false }, t => {
   const f = fixture(t);
   fs.appendFileSync(path.join(f.root, bootstrap, 'scripts/run-task.mjs'), '\n// private mutation\n');
   assert.throws(() => resolve(f, 'deps'), /reviewed committed bootstrap source drift/);
 });
-test('transitive schema drift refuses before exposing a module URL', { concurrency: false }, t => {
+void test('transitive schema drift refuses before exposing a module URL', { concurrency: false }, t => {
   const f = fixture(t);
   fs.appendFileSync(path.join(f.root, bootstrap, 'schemas/ui-adoption.schema.json'), '\n ');
   assert.throws(() => resolve(f, 'deps'), /reviewed committed bootstrap source drift/);
 });
-test('runtime symlink components refuse for committed bootstrap', { concurrency: false }, t => {
+void test('runtime symlink components refuse for committed bootstrap', { concurrency: false }, t => {
   const f = fixture(t);
   const original = path.join(f.root, bootstrap, 'scripts/run-task.mjs');
   const retained = original + '.retained';
@@ -318,7 +318,7 @@ test('runtime symlink components refuse for committed bootstrap', { concurrency:
   fs.symlinkSync(retained, original);
   assert.throws(() => resolve(f, 'deps'), /symlink runtime or configuration component/);
 });
-test('runtime symlink components refuse for the generic selected module', { concurrency: false }, t => {
+void test('runtime symlink components refuse for the generic selected module', { concurrency: false }, t => {
   const f = fixture(t, 'gen');
   installInertSelection(f);
   const source = path.join(f.root, selected, 'scripts/run-task.mjs');
@@ -327,7 +327,7 @@ test('runtime symlink components refuse for the generic selected module', { conc
   fs.symlinkSync(retained, source);
   assert.throws(() => resolve(f, 'gen'), /symlink runtime or configuration component/);
 });
-test('a symlinked selected directory refuses before following its module', { concurrency: false }, t => {
+void test('a symlinked selected directory refuses before following its module', { concurrency: false }, t => {
   const f = fixture(t, 'gen');
   installInertSelection(f);
   const original = path.join(f.root, 'frontend'), retained = original + '.retained';
@@ -335,31 +335,31 @@ test('a symlinked selected directory refuses before following its module', { con
   fs.symlinkSync(retained, original, 'dir');
   assert.throws(() => resolve(f, 'gen'), /symlink runtime or configuration component/);
 });
-test('the captured configuration cannot be read through a symlink', { concurrency: false }, t => {
+void test('the captured configuration cannot be read through a symlink', { concurrency: false }, t => {
   const f = fixture(t);
   const original = path.join(f.root, '.gate/kit-sync/wrapper-kit-config.json'), retained = original + '.retained';
   fs.renameSync(original, retained);
   fs.symlinkSync(retained, original);
   assert.throws(() => resolve(f, 'deps'), /symlink runtime or configuration component/);
 });
-test('a symlinked root alias cannot grant runtime authority', { concurrency: false }, t => {
+void test('a symlinked root alias cannot grant runtime authority', { concurrency: false }, t => {
   const f = fixture(t);
   const alias = path.join(f.root, 'private-root-alias');
   fs.symlinkSync(f.root, alias, 'dir');
   assert.throws(() => resolveHookRuntime(alias, 'deps', f.config), /nonregular root or ancestor/);
 });
-test('package owner mismatch refuses without an alternative locator', { concurrency: false }, t => {
+void test('package owner mismatch refuses without an alternative locator', { concurrency: false }, t => {
   const f = fixture(t, 'gen');
   installInertSelection(f);
   fs.writeFileSync(path.join(f.root, selected, 'package.json'), JSON.stringify({ name: '@unknown/owner', version: '0.1.1' }));
   assert.throws(() => resolve(f, 'gen'), /runtime module owner identity differs/);
 });
-test('an unbound source/image environment refuses even if the config checksum is valid', { concurrency: false }, t => {
+void test('an unbound source/image environment refuses even if the config checksum is valid', { concurrency: false }, t => {
   const f = fixture(t);
   process.env.GATE_SHA = 'd'.repeat(40);
   assert.throws(() => resolve(f, 'deps'), /closed current wrapper source\/tree\/image identity/);
 });
-test('a descriptor cannot redirect its current config read to another path', { concurrency: false }, t => {
+void test('a descriptor cannot redirect its current config read to another path', { concurrency: false }, t => {
   const f = fixture(t);
   const name = path.join(f.root, '.gate/wrapper-current.json');
   const descriptor = JSON.parse(fs.readFileSync(name));
@@ -367,16 +367,16 @@ test('a descriptor cannot redirect its current config read to another path', { c
   fs.writeFileSync(name, JSON.stringify(descriptor));
   assert.throws(() => resolve(f, 'deps'), /current primary config reference differs/);
 });
-test('historical or mismatched primary target cannot authorize this hook', { concurrency: false }, t => {
+void test('historical or mismatched primary target cannot authorize this hook', { concurrency: false }, t => {
   const f = fixture(t, 'unit');
   assert.throws(() => resolve(f, 'deps'), /deps primary projection refused/);
   assert.throws(() => resolve(f, 'gen'), /hook primary projection refused/);
 });
-test('an invented standalone setup primary cannot supply wrapper authority', { concurrency: false }, t => {
+void test('an invented standalone setup primary cannot supply wrapper authority', { concurrency: false }, t => {
   const f = fixture(t, 'setup');
   assert.throws(() => resolve(f, 'setup'), /closed current wrapper source\/tree\/image identity/);
 });
-test('unsafe root aliases and unsupported hooks refuse before resolution', { concurrency: false }, t => {
+void test('unsafe root aliases and unsupported hooks refuse before resolution', { concurrency: false }, t => {
   const f = fixture(t);
   assert.throws(() => resolveHookRuntime(f.root + '/..', 'deps', f.config), /canonical absolute root/);
   assert.throws(() => resolveHookRuntime(f.root, 'fabricated-setup-cli', f.config), /unsupported actual Cat repo hook target/);

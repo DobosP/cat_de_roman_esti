@@ -12,7 +12,7 @@ const escape = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const columnRules = (css, grid) => [...css.matchAll(new RegExp(`${escape(grid)} \\{([^}]*)\\}`, "g"))]
   .map(([, body]) => body).filter((body) => body.includes("grid-template-columns"));
 
-test("word boards step through 4, 2 or 1 columns and never auto-fit a ragged row", () => {
+void test("word boards step through 4, 2 or 1 columns and never auto-fit a ragged row", () => {
   for (const { root, grid, css } of boards) {
     assert.match(css, new RegExp(`${escape(root)} \\.game-container \\{\\s*container-type: inline-size;\\s*\\}`), root);
     const rules = columnRules(css, grid);
@@ -28,13 +28,13 @@ test("word boards step through 4, 2 or 1 columns and never auto-fit a ragged row
   }
 });
 
-test("quick games keep two columns below a desktop viewport", () => {
+void test("quick games keep two columns below a desktop viewport", () => {
   for (const { grid, css } of boards.slice(1)) {
     assert.match(css, new RegExp(`@media \\(min-width: 760px\\) \\{\\s*@container \\(width >= calc\\(34rem \\+ \\d+px\\)\\) \\{\\s*${escape(grid)} \\{\\s*grid-template-columns: repeat\\(4`), grid);
   }
 });
 
-test("Lant stacks its route and Alchimie trades inventory columns for whole long words", () => {
+void test("Lant stacks its route and Alchimie trades inventory columns for whole long words", () => {
   const lant = read("../src/styles/lant.css");
   assert.match(lant, /@media \(max-width: 30em\) \{\s*\.lant-route \{\s*grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(lant, /@media \(max-width: 30em\)[\s\S]*?\.lant-route-arrow \{\s*transform: rotate\(90deg\);\s*justify-self: start;/);

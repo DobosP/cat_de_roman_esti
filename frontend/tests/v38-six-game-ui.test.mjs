@@ -17,7 +17,7 @@ const perechiCss = read("../src/styles/perechi.css");
 const arcadeCss = read("../src/styles/arcade.css");
 const html = read("../index.html");
 
-test("V38 lobby is six games in the tested fun-first order", () => {
+void test("V38 lobby is six games in the tested fun-first order", () => {
   const order = [...games.matchAll(/^\s+key: "([^"]+)",$/gm)].map((match) => match[1]);
   assert.deepEqual(order, [
     "alchimie",
@@ -35,7 +35,7 @@ test("V38 lobby is six games in the tested fun-first order", () => {
   assert.doesNotMatch(html, /Patru jocuri/);
 });
 
-test("new game screens and their styles stay behind lazy routes", () => {
+void test("new game screens and their styles stay behind lazy routes", () => {
   assert.match(app, /const Intrusul = lazy\(\(\) => import\("\.\/screens\/Intrusul"\)\)/);
   assert.match(app, /const Perechi = lazy\(\(\) => import\("\.\/screens\/Perechi"\)\)/);
   assert.match(app, /path="\/intrusul"/);
@@ -44,7 +44,7 @@ test("new game screens and their styles stay behind lazy routes", () => {
   assert.match(perechi, /import "\.\.\/styles\/perechi\.css"/);
 });
 
-test("personalized starts and replay fatigue use only non-daily query inputs", () => {
+void test("personalized starts and replay fatigue use only non-daily query inputs", () => {
   for (const api of [intrusulApi, perechiApi]) {
     assert.match(api, /if \(!opts\.daily && opts\.starter !== undefined\)/);
     assert.match(api, /query\.set\("starter", opts\.starter \? "1" : "0"\)/);
@@ -70,7 +70,7 @@ test("personalized starts and replay fatigue use only non-daily query inputs", (
   assert.doesNotMatch(replayMemory, /sourceId|catalogId|solution/);
 });
 
-test("both boards remain tap-first with touch-sized controls", () => {
+void test("both boards remain tap-first with touch-sized controls", () => {
   for (const [screen, css] of [
     [intrusul, intrusulCss],
     [perechi, perechiCss],
@@ -82,7 +82,7 @@ test("both boards remain tap-first with touch-sized controls", () => {
   }
 });
 
-test("earned feedback is short, announced and server score stays terminal-only", () => {
+void test("earned feedback is short, announced and server score stays terminal-only", () => {
   assert.match(intrusul, /role="status"\s+aria-live="polite"/);
   assert.match(perechi, /role="status"\s+aria-live="polite"/);
   assert.match(intrusul, /!finished && state\.clue/);
@@ -95,7 +95,7 @@ test("earned feedback is short, announced and server score stays terminal-only",
   }
 });
 
-test("six-game ranking navigation switches to a native control on phones", () => {
+void test("six-game ranking navigation switches to a native control on phones", () => {
   assert.match(ranking, /className="ranking-game-select"/);
   assert.match(ranking, /className="segment ranking-game-tabs"/);
   assert.match(arcadeCss, /@media \(max-width: 640px\)[\s\S]*?\.ranking-game-tabs \{ display: none; \}/);

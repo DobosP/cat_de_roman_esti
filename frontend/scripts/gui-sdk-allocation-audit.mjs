@@ -84,7 +84,7 @@ try {
   for (const [label, source] of [["before", inputs.uiSource], ["after", annotated]]) {
     const logs = [];
     const generated = await build({ root: frontend, configFile: false, logLevel: "silent",
-      plugins: [{ name: "cat-sdk-allocation-audit-input", resolveId(id) {
+      plugins: [{ name: "cat-sdk-allocation-audit-input", enforce: "pre", resolveId(id) {
         if (id === entry || id === sourceId) return id;
         if (id === "react") return { id: tracerPath, external: true };
         if (id === "react/jsx-runtime") return { id: jsxPath, external: true };
@@ -102,9 +102,12 @@ try {
     const outputs = Array.isArray(generated) ? generated.flatMap((item) => item.output) : generated.output;
     assert.equal(outputs.length, 1, "Isolated allocation bundle must be one actual chunk");
     assert.equal(outputs[0].type, "chunk");
-    assert.equal(logs.length, 0, "Isolated allocation bundle emitted diagnostics");
-    bundles[label] = { code: outputs[0].code,
+    const observedImports = [...outputs[0].imports].sort();
+    const imports = retain(`${label}.imports.json`, JSON.stringify(observedImports, null, 2) + "\n");
+    bundles[label] = { code: outputs[0].code, imports,
       output: retain(`${label}.mjs`, outputs[0].code), logs: retain(`${label}.logs.json`, JSON.stringify(logs) + "\n") };
+    assert.deepEqual(observedImports, [tracerPath, jsxPath].sort(), "Isolated bundle bypassed the bound React observer or production JSX external");
+    assert.equal(logs.length, 0, "Isolated allocation bundle emitted diagnostics");
   }
   const tracer = await import(pathToFileURL(tracerPath).href);
   observations.production_forward_ref = { ...observations.production_forward_ref, ...tracer.productionProbe };
@@ -144,7 +147,8 @@ try {
   observations.causality = { control_allocations: traces.before.length, annotated_allocations: traces.after.length,
     removed: SDK_UNUSED_ALLOCATIONS.map(({ component }) => component), retained: ["Button", ...Object.keys(usedBodies)],
     button_renderer_sha256: allocationHash(traces.after[0].source), used_body_sha256: usedBodies,
-    button_output_ref_and_callback_equal: true, before_bundle: bundles.before.output, after_bundle: bundles.after.output };
+    button_output_ref_and_callback_equal: true, before_bundle: bundles.before.output, after_bundle: bundles.after.output,
+    before_external_imports: bundles.before.imports, after_external_imports: bundles.after.imports };
 } catch (error) {
   failed = true;
   failure = error instanceof Error ? error.message : String(error);

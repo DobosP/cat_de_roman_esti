@@ -39,7 +39,7 @@ function entry(score, daily, at, detail = `scor ${score}`) {
 
 test.beforeEach(() => storage.clear());
 
-test("daily circuit has the exact six-game product order and an empty safe default", () => {
+void test("daily circuit has the exact six-game product order and an empty safe default", () => {
   const circuit = scores.buildDailyCircuit({}, "2026-07-23");
 
   assert.deepEqual(
@@ -66,7 +66,7 @@ test("daily circuit has the exact six-game product order and an empty safe defau
   assert.equal(impossibleDay.completed, 0);
 });
 
-test("zero-score runs count, best daily scores win, and every score is clamped", () => {
+void test("zero-score runs count, best daily scores win, and every score is clamped", () => {
   const day = "2026-07-23";
   const circuit = scores.buildDailyCircuit(
     {
@@ -98,7 +98,7 @@ test("zero-score runs count, best daily scores win, and every score is clamped",
   assert.ok(circuit.total <= 6_000);
 });
 
-test("malformed and imported histories stay deterministic and local", () => {
+void test("malformed and imported histories stay deterministic and local", () => {
   const day = "2026-07-23";
   const malformed = scores.buildDailyCircuit(
     {
@@ -136,7 +136,7 @@ test("malformed and imported histories stay deterministic and local", () => {
   assert.equal(JSON.parse(storage.getItem(STORAGE_KEY)).alchimie.recent[0].score, 0);
 });
 
-test("Home renders local-only circuit actions and keeps completed rows read-only", () => {
+void test("Home renders local-only circuit actions and keeps completed rows read-only", () => {
   assert.match(homeSource, /buildDailyCircuit\(board, today\)/);
   assert.match(homeSource, /Circuitul de azi/);
   assert.match(homeSource, /Doar pe acest dispozitiv\./);
@@ -177,7 +177,7 @@ test("Home renders local-only circuit actions and keeps completed rows read-only
   assert.doesNotMatch(`${circuitMarkup}\n${helperSource}`, /fetch\(|\/api\/|telemetry|upload/i);
 });
 
-test("circuit markup exposes headings, status text, and a labelled progress list", () => {
+void test("circuit markup exposes headings, status text, and a labelled progress list", () => {
   assert.match(
     homeSource,
     /<section className="card daily-circuit" aria-labelledby="daily-circuit-title">/,
@@ -197,7 +197,7 @@ test("circuit markup exposes headings, status text, and a labelled progress list
   assert.match(homeSource, /aria-label=\{`Joacă \$\{g\.title\} — \$\{/);
 });
 
-test("daily circuit CSS is mobile-first, compact, and scales to desktop", () => {
+void test("daily circuit CSS is mobile-first, compact, and scales to desktop", () => {
   assert.match(
     cssSource,
     /\.daily-circuit-games\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/s,

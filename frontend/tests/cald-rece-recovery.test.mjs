@@ -6,7 +6,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const api = read("../src/api/contexto.ts");
 const screen = read("../src/screens/CaldRece.tsx");
 
-test("Cald sau Rece types the server-authored recovery fields", () => {
+void test("Cald sau Rece types the server-authored recovery fields", () => {
   const rejected = api.match(/export interface GuessRejected[\s\S]*?\n}/);
   const accepted = api.match(/export interface GuessAccepted[\s\S]*?\n}/);
   assert.ok(rejected);
@@ -15,7 +15,7 @@ test("Cald sau Rece types the server-authored recovery fields", () => {
   assert.match(accepted[0], /message\?: string/);
 });
 
-test("unknown concepts become persistent recovery without a duplicate toast", () => {
+void test("unknown concepts become persistent recovery without a duplicate toast", () => {
   const start = screen.indexOf("if (!res.ok) {");
   const end = screen.indexOf('setText("");', start);
   assert.notEqual(start, -1);
@@ -32,7 +32,7 @@ test("unknown concepts become persistent recovery without a duplicate toast", ()
   );
 });
 
-test("safe suggestions fill and focus the input but never submit", () => {
+void test("safe suggestions fill and focus the input but never submit", () => {
   const start = screen.indexOf("recovery.choices.map((choice)");
   const end = screen.indexOf("))}", start);
   assert.notEqual(start, -1);
@@ -44,7 +44,7 @@ test("safe suggestions fill and focus the input but never submit", () => {
   assert.doesNotMatch(choices, /handleGuess|submitGuess/);
 });
 
-test("accepted autocorrection remains visible, including on a corrected win", () => {
+void test("accepted autocorrection remains visible, including on a corrected win", () => {
   assert.match(
     screen,
     /if \(res\.message\) \{\s*setRecovery\(\{ message: res\.message, choices: \[\], tone: "info" \}\);/,
@@ -55,7 +55,7 @@ test("accepted autocorrection remains visible, including on a corrected win", ()
   assert.match(result[0], /\{recovery\.message\}/);
 });
 
-test("recovery clears on explicit input and lifecycle transitions", () => {
+void test("recovery clears on explicit input and lifecycle transitions", () => {
   assert.match(
     screen,
     /active\.remember\(fresh\.game_id\);[\s\S]{0,300}setLatestId\(null\);[\s\S]{0,220}setText\(""\);\s*setRecovery\(null\);/,

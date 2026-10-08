@@ -122,7 +122,7 @@ function normalizedFixture(t) {
   return fixture(t, { selectedRequest: { ...request, operation: NORMALIZED_STYLE_OPERATION }, configured });
 }
 
-for (const operation of ["qualify-original-react", "capture-original-baseline", "replay-normalized-react", STYLE_OPERATION, NORMALIZED_STYLE_OPERATION]) test(`exact gen request admits ${operation}`, () => {
+for (const operation of ["qualify-original-react", "capture-original-baseline", "replay-normalized-react", STYLE_OPERATION, NORMALIZED_STYLE_OPERATION]) void test(`exact gen request admits ${operation}`, () => {
   assert.equal(validGenRequest({ ...request, operation }), true);
 });
 const badRequests = [
@@ -131,9 +131,9 @@ const badRequests = [
   ["extra field", { ...request, apply: true }], ["missing field", { schema: 1, operation: STYLE_OPERATION }],
   ["inherited fields", Object.assign(Object.create({ fixtures: request.fixtures }), { schema: 1, operation: STYLE_OPERATION })],
 ];
-for (const [name, value] of badRequests) test(`gen request refuses ${name}`, () => assert.equal(validGenRequest(value), false));
+for (const [name, value] of badRequests) void test(`gen request refuses ${name}`, () => assert.equal(validGenRequest(value), false));
 
-test("data fixture binds separate wrapper W and runner I without app-image qualification", (t) => {
+void test("data fixture binds separate wrapper W and runner I without app-image qualification", (t) => {
   const item = fixture(t), bound = identity(item);
   assert.equal(bound.wrapper_invocation, item.current.invocation); assert.equal(bound.invocation, item.context.invocation);
   assert.notEqual(bound.wrapper_invocation, bound.invocation); assert.equal(bound.app_image_id, null);
@@ -161,32 +161,32 @@ const contextMutations = [
   ["bootstrap extra field", (item) => { json(item.root, ".gate/gen/bootstrap-execution.json", { ...item.bootstrap, ignore_failed: true }); }],
   ["source request mismatch", (item) => { json(item.root, "scripts/gui-gen-request.json", { ...request, operation: "capture-original-baseline" }); }],
 ];
-for (const [name, mutate] of contextMutations) test(`current style binding refuses ${String(name)}`, (t) => {
+for (const [name, mutate] of contextMutations) void test(`current style binding refuses ${String(name)}`, (t) => {
   const item = fixture(t); mutate(item); assert.throws(() => identity(item));
 });
-for (const value of ["1", undefined]) test(`style planning refuses resolver state ${String(value)}`, (t) => {
+for (const value of ["1", undefined]) void test(`style planning refuses resolver state ${String(value)}`, (t) => {
   assert.throws(() => identity(fixture(t), { GATE_VERSIONS_RESOLVE: value }));
 });
-test("a caller cannot substitute an app, locator or source phase into frozen configuration", (t) => {
+void test("a caller cannot substitute an app, locator or source phase into frozen configuration", (t) => {
   for (const config of [{ ...configuration, app: "other" }, { ...configuration, npm_dir: "../escape" },
     { ...configuration, ui_adoption: { mode: "staged-react", until: "later", legacy: {} } }, { ...configuration, unexpected: true }]) {
     assert.throws(() => readStyleIdentity(fixture(t).context, config, request, { GATE_VERSIONS_RESOLVE: "0" }));
   }
 });
 
-test("source paths refuse streams, escapes and reserved components", (t) => {
+void test("source paths refuse streams, escapes and reserved components", (t) => {
   const item = fixture(t);
   for (const name of ["../outside", "scripts/x:stream", "scripts/NUL", "scripts/COM1.txt", "scripts/trailing.", "scripts/a\\b", "/tmp/outside"]) {
     assert.throws(() => sourcePath(item.root, name, true));
   }
 });
-test("a symlink ancestor cannot select or publish an artifact outside the fixture", (t) => {
+void test("a symlink ancestor cannot select or publish an artifact outside the fixture", (t) => {
   const item = fixture(t), outside = path.join(item.stagingRoot, "private-owned-outside-probe"); fs.mkdirSync(outside, { mode: 0o700 });
   fs.symlinkSync(outside, path.join(item.root, "linked"), "dir");
   assert.throws(() => sourcePath(item.root, "linked/evidence.json", true));
   assert.deepEqual(fs.readdirSync(outside), []);
 });
-test("protected source additions and byte mutations refuse while old failure evidence stays exact", (t) => {
+void test("protected source additions and byte mutations refuse while old failure evidence stays exact", (t) => {
   const item = fixture(t); write(item.root, "frontend/src/keep.ts", "old\n");
   write(item.root, ".gate/gen/styles/runs/style-plan-old/analysis.json", "retained failure\n");
   const before = captureProtected(item.root);
@@ -196,7 +196,7 @@ test("protected source additions and byte mutations refuse while old failure evi
   assert.throws(() => assertProtectedUnchanged(before, captureProtected(item.root)));
   assert.equal(fs.readFileSync(path.join(item.root, ".gate/gen/styles/runs/style-plan-old/analysis.json"), "utf8"), "retained failure\n");
 });
-test("the exact protected map permits only fresh planner runs", (t) => {
+void test("the exact protected map permits only fresh planner runs", (t) => {
   const item = fixture(t), before = captureProtected(item.root);
   write(item.root, ".gate/gen/styles/runs/style-plan-unit/analysis.json", "unit fixture\n");
   assertProtectedUnchanged(before, captureProtected(item.root));
@@ -204,7 +204,7 @@ test("the exact protected map permits only fresh planner runs", (t) => {
   assert.throws(() => assertProtectedUnchanged(before, captureProtected(item.root)));
 });
 
-for (const mutation of ["sibling bytes", "nested bytes", "nested addition"]) test(`actual original proof directory refuses ${mutation} without a staged phase`, (t) => {
+for (const mutation of ["sibling bytes", "nested bytes", "nested addition"]) void test(`actual original proof directory refuses ${mutation} without a staged phase`, (t) => {
   const item = fixture(t), directory = "docs/reviews/gui-original-react";
   assert.equal(Object.hasOwn(configuration, "ui_adoption"), false);
   const evidence = [
@@ -248,7 +248,7 @@ function failedProposal(item) {
   json(item.root, `${relative}/analysis.json`, report); json(item.root, report.report_json, report);
   return { bound, report, summary: structuredClone(report), relative };
 }
-test("a data-only refusal retains its actual fresh files without a converted path", (t) => {
+void test("a data-only refusal retains its actual fresh files without a converted path", (t) => {
   const item = fixture(t), proposal = failedProposal(item);
   const checked = validatePlannerOutput(item.root, proposal.summary, proposal.bound);
   assert.equal(checked.report.status, "fail"); assert.equal(checked.report.converted, null);
@@ -262,11 +262,11 @@ const outputMutations = [
   ["failure selects candidate", (proposal) => { proposal.summary.converted = `${proposal.relative}/candidate`; }],
   ["failure says ready", (proposal) => { proposal.summary.application_ready = true; }],
 ];
-for (const [name, mutate, old] of outputMutations) test(`planner report refuses ${String(name)}`, (t) => {
+for (const [name, mutate, old] of outputMutations) void test(`planner report refuses ${String(name)}`, (t) => {
   const item = fixture(t), proposal = failedProposal(item); mutate(proposal);
   assert.throws(() => validatePlannerOutput(item.root, proposal.summary, proposal.bound, old ? [proposal.relative] : []));
 });
-test("modified planner input bytes refuse even on a failure report", (t) => {
+void test("modified planner input bytes refuse even on a failure report", (t) => {
   const item = fixture(t), proposal = failedProposal(item); write(item.root, "frontend/src/fixture.ts", "original\n");
   proposal.report.bindings.inputs["frontend/src/fixture.ts"] = { bytes: 9, sha256: sha("original\n") };
   json(item.root, proposal.report.report_json, proposal.report); json(item.root, `${proposal.relative}/analysis.json`, proposal.report);
@@ -348,7 +348,7 @@ function resealDataFixture(item, proposal) {
   json(item.root, `${proposal.relative}/analysis.json`, { ...proposal.report, application_ready: false, converted: null });
   proposal.summary = structuredClone(proposal.report);
 }
-test("a closed data-only proposal byte map validates without becoming actual planner or manager evidence", (t) => {
+void test("a closed data-only proposal byte map validates without becoming actual planner or manager evidence", (t) => {
   const item = normalizedFixture(t), proposal = proposalBytesFixture(item), checked = validatePlannerOutput(item.root, proposal.summary, proposal.bound);
   assert.equal(checked.report.converted, `${proposal.relative}/candidate`); assert.equal(checked.artifacts.length, 3 + proposal.report.retained_native_files.length);
   assert.equal(Object.hasOwn(checked.report, "manager_approved"), false);
@@ -364,11 +364,11 @@ const proposalMutations = [
   ["compiler package identity mismatch", (item, proposal) => { proposal.report.bindings.typescript.version = "other"; resealDataFixture(item, proposal); }],
   ["closed file metadata violation", (item, proposal) => { proposal.report.files[0].apply = true; resealDataFixture(item, proposal); }],
 ];
-for (const [name, mutate] of proposalMutations) test(`proposal byte guard refuses ${String(name)}`, (t) => {
+for (const [name, mutate] of proposalMutations) void test(`proposal byte guard refuses ${String(name)}`, (t) => {
   const item = normalizedFixture(t), proposal = proposalBytesFixture(item); mutate(item, proposal);
   assert.throws(() => validatePlannerOutput(item.root, proposal.summary, proposal.bound));
 });
-test("original profile still refuses the current normalized graph and request", (t) => {
+void test("original profile still refuses the current normalized graph and request", (t) => {
   const item = normalizedFixture(t), proposal = proposalBytesFixture(item);
   assert.throws(() => validatePlannerOutput(item.root, proposal.summary, { ...proposal.bound, operation: STYLE_OPERATION }), /profile/);
   proposal.report.bindings.profile = "original"; resealDataFixture(item, proposal);
@@ -383,12 +383,12 @@ for (const [name, mutate] of [
   ["missing copied owning config binding", (report) => { report.retained_native_files = report.retained_native_files.filter((item) => !item.file.endsWith("/candidate-graph/frontend/tsconfig.json")); }],
   ["old owner preimage claim", (report) => { report.bindings.current_owners["frontend/src/screens/Conexiuni.tsx"].source_sha256 = "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338"; }],
   ["archive member hash substitution", (report) => { report.bindings.frozen_renderer.member.sha256 = "d".repeat(64); }],
-]) test(`normalized proposal refuses ${String(name)}`, (t) => {
+]) void test(`normalized proposal refuses ${String(name)}`, (t) => {
   const item = normalizedFixture(t), proposal = proposalBytesFixture(item); mutate(proposal.report); resealDataFixture(item, proposal);
   assert.throws(() => validatePlannerOutput(item.root, proposal.summary, proposal.bound));
 });
 
-test("real createHook records a controlled unit-fixture refusal and retained evidence without a feigned command or qualification", async (t) => {
+void test("real createHook records a controlled unit-fixture refusal and retained evidence without a feigned command or qualification", async (t) => {
   // The API is the actual configured selected implementation, not a test clone.
   const outer = JSON.parse(fs.readFileSync(sourcePath(repository, ".gate/wrapper-current.json")));
   const frozen = JSON.parse(fs.readFileSync(sourcePath(repository, outer.config_path)));

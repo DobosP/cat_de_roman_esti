@@ -7,7 +7,7 @@ const screen = read("../src/screens/Alchimie.tsx");
 const api = read("../src/api/alchimie.ts");
 const css = read("../src/styles/alchimie.css");
 
-test("inventory offers short recent/useful/all views from server metadata", () => {
+void test("inventory offers short recent/useful/all views from server metadata", () => {
   assert.match(api, /recent: boolean/);
   assert.match(api, /useful: boolean/);
   assert.match(api, /ready: boolean/);
@@ -31,7 +31,7 @@ test("inventory offers short recent/useful/all views from server metadata", () =
   assert.ok(screen.indexOf('className="alchemy-inventory-grid"') > toolsEnd);
 });
 
-test("compact search opens the full accent-insensitive encyclopedia", () => {
+void test("compact search opens the full accent-insensitive encyclopedia", () => {
   assert.match(
     screen,
     /function normalizeInventorySearch[\s\S]*?normalize\("NFD"\)[\s\S]*?replace\(\/\\p\{M\}\/gu, ""\)[\s\S]*?toLocaleLowerCase\("ro-RO"\)/,
@@ -52,7 +52,7 @@ test("compact search opens the full accent-insensitive encyclopedia", () => {
   );
 });
 
-test("depleted ingredients leave the active workspace but remain in all", () => {
+void test("depleted ingredients leave the active workspace but remain in all", () => {
   assert.match(
     screen,
     /if \(inventoryView === "all"\) return true;[\s\S]*?item\.recent && !item\.depleted[\s\S]*?item\.useful && !item\.depleted/,
@@ -62,7 +62,7 @@ test("depleted ingredients leave the active workspace but remain in all", () => 
   assert.match(screen, /inventory_summary\.depleted/);
 });
 
-test("word tiles keep concise states while server readiness stays accessible", () => {
+void test("word tiles keep concise states while server readiness stays accessible", () => {
   assert.match(screen, /item\.ready[\s\S]*?gata pentru o combinație utilă/);
   assert.match(screen, /aria-label=\{accessibleLabel\}/);
   assert.match(
@@ -74,13 +74,13 @@ test("word tiles keep concise states while server readiness stays accessible", (
   assert.match(screen, /item\.depleted[\s\S]*?\$\{item\.label\}, pus deoparte/);
 });
 
-test("combine contract exposes only bounded memory count and current retry verdict", () => {
+void test("combine contract exposes only bounded memory count and current retry verdict", () => {
   assert.match(api, /attempted_count: number/);
   assert.match(api, /already_tried: boolean/);
   assert.doesNotMatch(api, /attempted_pairs|attempted_partner|recipe_ids/);
 });
 
-test("inventory uses touch-sized tiles and two columns on mobile", () => {
+void test("inventory uses touch-sized tiles and two columns on mobile", () => {
   assert.match(css, /\.alchemy-inventory-grid \{[^}]*?repeat\(3, minmax\(0, 1fr\)\)/);
   const tileRules = [...css.matchAll(/\.alchemy-inventory-grid > \.alchemy-word \{[^}]*?min-height: (\d+)px/g)];
   assert.ok(tileRules.length >= 2, "desktop and mobile tile sizes are declared");
@@ -91,7 +91,7 @@ test("inventory uses touch-sized tiles and two columns on mobile", () => {
   );
 });
 
-test("progressive hint types keep the first hint output-only", () => {
+void test("progressive hint types keep the first hint output-only", () => {
   assert.match(api, /hint_kind: "output" \| "category" \| "pair" \| "none"/);
   assert.match(api, /hint_output: \{ label: string \} \| null/);
   assert.match(screen, /state\.hint_stage === "output"/);

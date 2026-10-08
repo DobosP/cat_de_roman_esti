@@ -160,6 +160,11 @@ func (s *Server) managedWebsite(w http.ResponseWriter, r *http.Request) bool {
 			websiteHeaders(w)
 			response := &managedAssetResponse{ResponseWriter: w, immutable: immutableViteAsset.MatchString(requestPath)}
 			s.managedUI.static.ServeHTTP(response, r)
+			// A successful SDK HEAD can return headers without writing a status
+			// or body. Finalize net/http's implicit 200 only after it returns.
+			if !response.wroteHeader {
+				response.WriteHeader(http.StatusOK)
+			}
 			return true
 		}
 	}

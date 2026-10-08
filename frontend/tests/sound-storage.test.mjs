@@ -10,7 +10,7 @@ const compiled = ts.transpileModule(source, {
 const moduleUrl = `data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`;
 
 for (const reducedMotion of [false, true]) {
-  test(`denied storage at module import keeps sound usable (reduced motion: ${reducedMotion})`, async (t) => {
+  void test(`denied storage at module import keeps sound usable (reduced motion: ${reducedMotion})`, async (t) => {
     const descriptors = ["localStorage", "window"].map((key) => [key, Object.getOwnPropertyDescriptor(globalThis, key)]);
     t.after(() => {
       for (const [key, descriptor] of descriptors) {

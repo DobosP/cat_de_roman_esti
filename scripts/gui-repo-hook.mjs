@@ -161,6 +161,7 @@ switch (target) {
         command("cat-normalized-fresh-build-output", "node", ["scripts/gui-assets.mjs", "prepare"]);
         // These independent native checks run even when formatting/lint failed.
         runNativeSourcePreflight(hook);
+        command("cat-normalized-doc-check", "go", ["run", "./cmd/cat-doc-check", "--root", "..", "--inventory", "docs/tracked-markdown.json"], path.join(root, "go-backend"));
         if (setupPassed && typesPassed) {
           managedFrontendBuild("cat-normalized", true);
           if (passed("cat-normalized-fresh-build-output") && fs.existsSync(path.join(frontend, "dist/.vite/manifest.json"))) {

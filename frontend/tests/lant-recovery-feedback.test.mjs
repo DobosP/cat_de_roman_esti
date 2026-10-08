@@ -6,7 +6,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const api = read("../src/api/lant.ts");
 const screen = read("../src/screens/Lant.tsx");
 
-test("Lanț client preserves bounded server recovery fields", () => {
+void test("Lanț client preserves bounded server recovery fields", () => {
   const choice = api.match(/export interface LantChoice[\s\S]*?\n}/);
   const progress = api.match(/export interface LantProgress[\s\S]*?\n}/);
   const state = api.match(/export interface LantState[\s\S]*?\n}/);
@@ -38,7 +38,7 @@ test("Lanț client preserves bounded server recovery fields", () => {
   assert.match(hint[0], /alternatives_choices\?: LantChoice\[\]/);
 });
 
-test("Lanț keeps move recovery visible and exposes fuzzy spelling choices", () => {
+void test("Lanț keeps move recovery visible and exposes fuzzy spelling choices", () => {
   assert.match(screen, /choices: res\.suggestions \?\? \[\]/);
   assert.match(screen, /tone: res\.dead_end \? "warning" : "info"/);
   assert.match(
@@ -58,13 +58,13 @@ test("Lanț keeps move recovery visible and exposes fuzzy spelling choices", () 
   );
 });
 
-test("Lanț preserves an autocorrection message when the corrected hop wins", () => {
+void test("Lanț preserves an autocorrection message when the corrected hop wins", () => {
   const result = screen.match(/<ResultCard[\s\S]*?<\/ResultCard>/);
   assert.ok(result);
   assert.match(result[0], /recovery\?\.message/);
 });
 
-test("Lanț renders local relation chips and keeps free typing available", () => {
+void test("Lanț renders local relation chips and keeps free typing available", () => {
   assert.match(screen, /label: "Alege o legătură"/);
   assert.match(screen, /state\.choices\.map\(\(choice\)/);
   assert.match(screen, /className="lant-choice"/);
@@ -73,7 +73,7 @@ test("Lanț renders local relation chips and keeps free typing available", () =>
   assert.match(screen, /placeholder="Sau scrie alt concept…"/);
 });
 
-test("Lanț renders coarse move progress and highlights recommended undo", () => {
+void test("Lanț renders coarse move progress and highlights recommended undo", () => {
   assert.match(screen, /const PROGRESS_ICON/);
   assert.match(screen, /className=\{"lant-progress lant-progress--" \+ progress\.kind\}/);
   assert.match(screen, /<strong>\{progress\.message\}<\/strong>/);
@@ -83,7 +83,7 @@ test("Lanț renders coarse move progress and highlights recommended undo", () =>
   assert.match(screen, /Înapoi · recomandat/);
 });
 
-test("Lanț renders the directional progress cue for any server-sent difficulty, including normal (ADR-0046)", () => {
+void test("Lanț renders the directional progress cue for any server-sent difficulty, including normal (ADR-0046)", () => {
   // The progress cue is driven only by whether the server attached `progress` to the
   // move response (usor/normal); the screen never re-gates rendering on difficulty.
   const progressBlock = screen.match(
@@ -94,7 +94,7 @@ test("Lanț renders the directional progress cue for any server-sent difficulty,
   assert.match(screen, /setProgress\(res\.progress \?\? null\)/);
 });
 
-test("Lanț intro discloses the corridor/detour mix, free undo, free typing, and the 64-move cap", () => {
+void test("Lanț intro discloses the corridor/detour mix, free undo, free typing, and the 64-move cap", () => {
   assert.match(screen, /const \[showHow, setShowHow\] = useState\(false\)/);
   assert.match(screen, /className="lant-intro-disclosure-toggle"/);
   assert.match(screen, /aria-expanded=\{showHow\}/);
@@ -108,7 +108,7 @@ test("Lanț intro discloses the corridor/detour mix, free undo, free typing, and
   assert.match(screen, /64 de salturi pe lanț/);
 });
 
-test("Lanț renders progressive direction, alternatives, and one-hop help", () => {
+void test("Lanț renders progressive direction, alternatives, and one-hop help", () => {
   assert.match(screen, /hint\.stage === "direction"/);
   assert.match(screen, /hint\.stage === "alternatives"/);
   assert.match(screen, /hint\.alternatives_choices\?\.length/);
@@ -120,7 +120,7 @@ test("Lanț renders progressive direction, alternatives, and one-hop help", () =
   assert.doesNotMatch(screen, /DOUĂ VARIANTE/);
 });
 
-test("Lanț turns revisit traps into a recommendation on the existing free-undo action", () => {
+void test("Lanț turns revisit traps into a recommendation on the existing free-undo action", () => {
   assert.match(screen, /hint\.stage === "backtrack"/);
   assert.match(screen, /UN PAS ÎNAPOI/);
   assert.match(screen, /state\.backtrack_recommended \|\| hint\?\.stage === "backtrack"/);
@@ -128,7 +128,7 @@ test("Lanț turns revisit traps into a recommendation on the existing free-undo 
   assert.match(screen, /onClick=\{\(\) => void handleUndo\(\)\}/);
 });
 
-test("Lanț spelling recovery fills focus only fine pointers; exact hint choices make a deliberate hop", () => {
+void test("Lanț spelling recovery fills focus only fine pointers; exact hint choices make a deliberate hop", () => {
   assert.match(
     screen,
     /const focusInputForFinePointer = useCallback[\s\S]*?matchMedia\("\(pointer: fine\)"\)\.matches[\s\S]*?inputRef\.current\?\.focus\(\)/,
@@ -158,7 +158,7 @@ test("Lanț spelling recovery fills focus only fine pointers; exact hint choices
   );
 });
 
-test("Lanț give-up forgets only a settled live board and reopens the intro", () => {
+void test("Lanț give-up forgets only a settled live board and reopens the intro", () => {
   const handler = screen.match(/const abandonChain = useCallback\(\(\) => \{[\s\S]*?\n {2}\}, \[/);
   assert.ok(handler);
   const body = handler[0];
@@ -175,7 +175,7 @@ test("Lanț give-up forgets only a settled live board and reopens the intro", ()
   assert.match(options, /Începe alt lanț/);
 });
 
-test("Lanț announces the new position and counts jumps with one word", () => {
+void test("Lanț announces the new position and counts jumps with one word", () => {
   assert.match(screen, /<div className="lant-current" aria-live=\{won \? "off" : "polite"\} aria-atomic="true">/);
   assert.match(screen, /label="SALTURI"/);
   assert.match(screen, /roNoun\(state\.moves, "salt", "salturi"\)/);

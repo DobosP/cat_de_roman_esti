@@ -36,7 +36,7 @@ test.beforeEach(() => {
   globalThis.localStorage = storage;
 });
 
-test("a first 0-point loss is history, never a record; a later win is", async () => {
+void test("a first 0-point loss is history, never a record; a later win is", async () => {
   const loss = await scores.recordScoreCompletionOnce(
     "conexiuni",
     "11111111-1111-1111-1111-111111111111",
@@ -64,7 +64,7 @@ test("a first 0-point loss is history, never a record; a later win is", async ()
   assert.equal(scores.recentScores("conexiuni").length, 3);
 });
 
-test("a saved 0-point best from an older build normalises away", () => {
+void test("a saved 0-point best from an older build normalises away", () => {
   const loss = { score: 0, detail: "pierdut · 4 greșeli", at: 10 };
   storage.setItem(
     SCORE_KEY,
@@ -86,7 +86,7 @@ test("a saved 0-point best from an older build normalises away", () => {
   assert.equal(record.recent.length, 2);
 });
 
-test("import never revives a 0-point best", () => {
+void test("import never revives a 0-point best", () => {
   const loss = { score: 0, detail: "pierdut", at: 10 };
   scores.importScores(
     JSON.stringify({ games: { perechi: { best: loss, played: 1, recent: [loss] } } }),
@@ -95,7 +95,7 @@ test("import never revives a 0-point best", () => {
   assert.equal(scores.timesPlayed("perechi"), 1);
 });
 
-test("an unusable import file throws one plain Romanian message and changes nothing", () => {
+void test("an unusable import file throws one plain Romanian message and changes nothing", () => {
   scores.recordScore("intrusul", 500, "câștigat");
   const before = storage.getItem(SCORE_KEY);
   for (const raw of ['{"games":{}}', "nu este json", "[]", '"text"']) {
@@ -104,7 +104,7 @@ test("an unusable import file throws one plain Romanian message and changes noth
   assert.equal(storage.getItem(SCORE_KEY), before);
 });
 
-test("a lost daily stays counted in the circuit after many later plays", () => {
+void test("a lost daily stays counted in the circuit after many later plays", () => {
   const day = "2026-09-23";
   const loss = scores.recordScore("conexiuni", 0, "pierdut", { puzzleKey: `daily-${day}`, daily: day });
   assert.equal(loss.isBest, false);

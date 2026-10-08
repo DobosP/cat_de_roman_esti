@@ -6,7 +6,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const ranking = read("../src/screens/Ranking.tsx");
 const css = read("../src/styles/arcade.css");
 
-test("ranking retries the selected game from a clean request state", () => {
+void test("ranking retries the selected game from a clean request state", () => {
   assert.match(ranking, /const \[attempt, setAttempt\] = useState\(0\)/);
   assert.match(ranking, /setLoading\(true\);\s+setError\(null\);\s+setData\(null\);/);
   assert.match(ranking, /getRanking\(game, 50\)/);
@@ -15,7 +15,7 @@ test("ranking retries the selected game from a clean request state", () => {
   assert.match(ranking, />\s*Reîncearcă\s*<\/button>/);
 });
 
-test("accounts-off and transient failures have distinct next actions", () => {
+void test("accounts-off and transient failures have distinct next actions", () => {
   assert.match(ranking, /reason instanceof AuthError && reason\.status === 404/);
   assert.match(ranking, /Clasamentul nu este activ aici\./);
   assert.match(ranking, /error === "unavailable"/);
@@ -24,7 +24,7 @@ test("accounts-off and transient failures have distinct next actions", () => {
   assert.match(ranking, /Nu am putut încărca clasamentul\./);
 });
 
-test("loading and errors are announced in a centered touch-safe state card", () => {
+void test("loading and errors are announced in a centered touch-safe state card", () => {
   assert.match(
     ranking,
     /className="card ranking-state muted"\s+role="status"\s+aria-live="polite"\s+aria-busy="true"/,

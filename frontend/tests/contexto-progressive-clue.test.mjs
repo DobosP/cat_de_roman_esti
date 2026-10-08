@@ -11,7 +11,7 @@ const css = readFileSync(
   "utf8",
 );
 
-test("Cald sau Rece labels the next server-authored clue stage", () => {
+void test("Cald sau Rece labels the next server-authored clue stage", () => {
   assert.match(screen, /const clueActionLabel = state\?\.clue_available/);
   assert.match(screen, /state\.next_clue_kind === "warmer"/);
   assert.match(screen, /\? "Mai cald"\s*: "Indiciu"/);
@@ -22,7 +22,7 @@ test("Cald sau Rece labels the next server-authored clue stage", () => {
   assert.match(screen, /setState\(res\)/);
 });
 
-test("compact clue cards keep category and warmer word visible on mobile", () => {
+void test("compact clue cards keep category and warmer word visible on mobile", () => {
   assert.match(screen, /\(state\?\.clue \|\| state\?\.warm_clue\) && !finished/);
   assert.match(screen, /🧭 Categorie/);
   assert.match(screen, /🔥 Încearcă/);
@@ -31,7 +31,7 @@ test("compact clue cards keep category and warmer word visible on mobile", () =>
   assert.match(screen, /aria-label="Indicii folosite"/);
 });
 
-test("the warmer word is a phone-safe fill action", () => {
+void test("the warmer word is a phone-safe fill action", () => {
   assert.match(screen, /className="contexto-warm-clue-button"/);
   assert.match(screen, /aria-label=\{`Pune \$\{state\.warm_clue\.label\} în câmpul de răspuns`\}/);
   assert.match(screen, /setText\(word\)/);
@@ -39,14 +39,14 @@ test("the warmer word is a phone-safe fill action", () => {
   assert.match(css, /\.contexto-warm-clue-button \{[\s\S]*?min-height: 44px/);
 });
 
-test("guess responses retain progressive clue state from the server", () => {
+void test("guess responses retain progressive clue state from the server", () => {
   const nextKindUpdates = screen.match(/next_clue_kind: res\.next_clue_kind/g) ?? [];
   const warmUpdates = screen.match(/warm_clue: res\.warm_clue \?\? prev\.warm_clue/g) ?? [];
   assert.equal(nextKindUpdates.length, 2);
   assert.equal(warmUpdates.length, 2);
 });
 
-test("a rejected stale clue refreshes authoritative availability", () => {
+void test("a rejected stale clue refreshes authoritative availability", () => {
   const start = screen.indexOf("const handleClue = useCallback");
   const end = screen.indexOf("const handleGiveUp = useCallback", start);
   assert.ok(start >= 0 && end > start);

@@ -10,11 +10,11 @@ const lant = read("../src/screens/Lant.tsx");
 const conexiuni = read("../src/screens/Conexiuni.tsx");
 const app = read("../src/App.tsx");
 
-test("route presence keys the direct Suspense child so exit animations can finish", () => {
+void test("route presence keys the direct Suspense child so exit animations can finish", () => {
   assert.match(app, /<AnimatePresence mode="wait">\s*<Suspense\s+key=\{location\.pathname\}/);
 });
 
-test("daily games consistently carry the selected difficulty", () => {
+void test("daily games consistently carry the selected difficulty", () => {
   assert.match(
     alchimie,
     /onDaily=\{\(\) => void start\(\{ difficulty, daily: todayLocal\(\) \}\)\}/,
@@ -30,7 +30,7 @@ test("daily games consistently carry the selected difficulty", () => {
   assert.match(conexiuni, /create\(\{ daily: todayLocal\(\), difficulty \}\)/);
 });
 
-test("all result screens offer immediate replay and a distinct options action", () => {
+void test("all result screens offer immediate replay and a distinct options action", () => {
   for (const source of [alchimie, caldRece]) {
     assert.match(source, /onReplay=\{\(\) =>[\s\S]{0,180}void start\(\{/);
     assert.match(source, /onOptions=/);
@@ -41,7 +41,7 @@ test("all result screens offer immediate replay and a distinct options action", 
   assert.match(conexiuni, /onOptions=/);
 });
 
-test("Lanț reports its optimal benchmark without inventing distance after detours", () => {
+void test("Lanț reports its optimal benchmark without inventing distance after detours", () => {
   assert.doesNotMatch(lant, /state\.optimal - state\.moves/);
   assert.match(lant, /return state\.moves - state\.optimal/);
   const options = lant.slice(lant.indexOf('<GameOptions game="lant">'), lant.indexOf("</GameOptions>"));
@@ -51,7 +51,7 @@ test("Lanț reports its optimal benchmark without inventing distance after detou
   assert.match(lant, /const hintRemaining = hint\?\.remaining \?\? null/);
 });
 
-test("Romanian-first shell copy keeps the brand and game rules truthful", () => {
+void test("Romanian-first shell copy keeps the brand and game rules truthful", () => {
   const index = read("../index.html");
   const home = read("../src/screens/Home.tsx");
   const intro = read("../src/components/GameIntro.tsx");

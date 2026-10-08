@@ -20,7 +20,7 @@ const state = (overrides = {}) => ({
   progress: { world_id: "kitchen-v1", recipe_hash: HASH, discoveries: [["flour", "water"]] }, ...overrides,
 });
 
-test("collection stores replay instructions and resumes without private recipe-book data", async () => {
+void test("collection stores replay instructions and resumes without private recipe-book data", async () => {
   const store = storage();
   const result = await save(state({ private_book: "never persisted" }), null, store, null);
   assert.equal(result.kind, "saved");
@@ -30,7 +30,7 @@ test("collection stores replay instructions and resumes without private recipe-b
   assert.equal(value.value.private_book, undefined);
 });
 
-test("malformed and excessive checkpoints are preserved and never overwritten", async () => {
+void test("malformed and excessive checkpoints are preserved and never overwritten", async () => {
   for (const raw of ["{broken", "null", "x".repeat(65537), JSON.stringify({ version: 1, ...state({ progress: { world_id: "kitchen-v1", recipe_hash: HASH, discoveries: Array(257).fill(["a", "b"]) } }) })]) {
     const store = storage();
     store.setItem(key, raw);
@@ -40,7 +40,7 @@ test("malformed and excessive checkpoints are preserved and never overwritten", 
   }
 });
 
-test("large earned collections remain readable through the 256-craft checkpoint boundary", async () => {
+void test("large earned collections remain readable through the 256-craft checkpoint boundary", async () => {
   const store = storage();
   let expected = null;
   for (const count of [129, 200, 256]) {
@@ -57,7 +57,7 @@ test("large earned collections remain readable through the 256-craft checkpoint 
   assert.equal(store.getItem(key), expected);
 });
 
-test("the 64 KiB checkpoint limit counts UTF-8 bytes and preserves a smaller valid save", async () => {
+void test("the 64 KiB checkpoint limit counts UTF-8 bytes and preserves a smaller valid save", async () => {
   const store = storage();
   const original = await save(state(), null, store, null);
   const oversized = state({ progress: {
@@ -75,7 +75,7 @@ test("the 64 KiB checkpoint limit counts UTF-8 bytes and preserves a smaller val
   assert.equal(store.getItem(key), raw);
 });
 
-test("an older revision cannot replace a more advanced tab", async () => {
+void test("an older revision cannot replace a more advanced tab", async () => {
   const store = storage();
   const current = await save(state({ revision: 5, goal_id: "bread" }), null, store, null);
   assert.equal((await save(state({ revision: 2 }), current.raw, store, null)).kind, "changed");
@@ -83,7 +83,7 @@ test("an older revision cannot replace a more advanced tab", async () => {
   assert.equal(read(store).value.revision, 5);
 });
 
-test("a server-restored collection replaces its exact old-book checkpoint with the current binding", async () => {
+void test("a server-restored collection replaces its exact old-book checkpoint with the current binding", async () => {
   const store = storage();
   const original = await save(state({ revision: 5, goal_id: "bread" }), null, store, null);
   const restored = state({
@@ -99,7 +99,7 @@ test("a server-restored collection replaces its exact old-book checkpoint with t
   assert.deepEqual(current.compatible_recipe_hashes, [HASH]);
 });
 
-test("a late old-version discovery joins a compatible migrated checkpoint without downgrading it", async () => {
+void test("a late old-version discovery joins a compatible migrated checkpoint without downgrading it", async () => {
   const store = storage();
   const original = await save(state(), null, store, null);
   const restored = state({
@@ -120,7 +120,7 @@ test("a late old-version discovery joins a compatible migrated checkpoint withou
   assert.equal(current.needs_restore, true);
 });
 
-test("a newer response upgrades a concurrent old-book union and keeps compatibility for later replies", async () => {
+void test("a newer response upgrades a concurrent old-book union and keeps compatibility for later replies", async () => {
   const store = storage();
   const original = await save(state(), null, store, null);
   await save(state({ revision: 2, goal_id: "bread", progress: {
@@ -140,7 +140,7 @@ test("a newer response upgrades a concurrent old-book union and keeps compatibil
   assert.equal(current.needs_restore, true);
 });
 
-test("late discoveries from both earlier worlds merge into a larger third-version collection", async () => {
+void test("late discoveries from both earlier worlds merge into a larger third-version collection", async () => {
   const store = storage();
   const middleHash = "b".repeat(64);
   const newestHash = "c".repeat(64);
@@ -173,7 +173,7 @@ test("late discoveries from both earlier worlds merge into a larger third-versio
   assert.equal(current.value.needs_restore, true);
 });
 
-test("an unrelated recipe book cannot overwrite or merge with a migrated checkpoint", async () => {
+void test("an unrelated recipe book cannot overwrite or merge with a migrated checkpoint", async () => {
   const store = storage();
   const original = await save(state(), null, store, null);
   const restored = state({
@@ -188,7 +188,7 @@ test("an unrelated recipe book cannot overwrite or merge with a migrated checkpo
   assert.equal(store.getItem(key), migrated.raw);
 });
 
-test("concurrent discoveries in separate sessions form a replayable union", async () => {
+void test("concurrent discoveries in separate sessions form a replayable union", async () => {
   const store = storage();
   const original = await save(state(), null, store, null);
   await save(state({ game_id: "second", progress: { world_id: "kitchen-v1", recipe_hash: HASH, discoveries: [["flour", "water"], ["dough", "heat"]] } }), original.raw, store, null);
@@ -203,14 +203,14 @@ test("concurrent discoveries in separate sessions form a replayable union", asyn
   assert.equal(read(store).value.game_id, "restored");
 });
 
-test("union keeps ingredient order, drops duplicate pairs, and respects world and size bounds", () => {
+void test("union keeps ingredient order, drops duplicate pairs, and respects world and size bounds", () => {
   assert.deepEqual(merge({ world_id: "a", recipe_hash: HASH, discoveries: [["a", "b"]] }, { world_id: "a", recipe_hash: HASH, discoveries: [["b", "a"], ["c", "d"]] }).discoveries, [["a", "b"], ["c", "d"]]);
   assert.equal(merge({ world_id: "a", recipe_hash: HASH, discoveries: [] }, { world_id: "b", recipe_hash: HASH, discoveries: [] }), null);
   assert.equal(merge({ world_id: "a", recipe_hash: HASH, discoveries: [] }, { world_id: "a", recipe_hash: "b".repeat(64), discoveries: [] }), null);
   assert.equal(merge({ world_id: "a", recipe_hash: HASH, discoveries: Array.from({ length: 256 }, (_, i) => [`a${i}`, "b"]) }, { world_id: "a", recipe_hash: HASH, discoveries: [["extra", "b"]] }), null);
 });
 
-test("a checkpoint requires the exact lowercase recipe-book binding", () => {
+void test("a checkpoint requires the exact lowercase recipe-book binding", () => {
   for (const recipe_hash of [undefined, "a".repeat(63), "A".repeat(64), "z".repeat(64)]) {
     const store = storage();
     store.setItem(key, JSON.stringify({ version: 1, ...state({ progress: { world_id: "kitchen-v1", recipe_hash, discoveries: [] } }) }));
@@ -218,7 +218,7 @@ test("a checkpoint requires the exact lowercase recipe-book binding", () => {
   }
 });
 
-test("legacy saves remain readable while compatibility metadata stays bounded and well formed", () => {
+void test("legacy saves remain readable while compatibility metadata stays bounded and well formed", () => {
   const store = storage();
   const legacy = { version: 1, ...state() };
   delete legacy.compatible_recipe_hashes;
@@ -230,7 +230,7 @@ test("legacy saves remain readable while compatibility metadata stays bounded an
   }
 });
 
-test("nine through sixteen compatible books remain usable after the first owned save", async () => {
+void test("nine through sixteen compatible books remain usable after the first owned save", async () => {
   for (const count of [9, 16]) {
     const store = storage();
     const compatible_recipe_hashes = Array.from({ length: count }, (_, i) => i.toString(16).padStart(64, "0"));
@@ -250,7 +250,7 @@ test("nine through sixteen compatible books remain usable after the first owned 
   }
 });
 
-test("the bundled world's compatibility metadata survives an owned update and reload", async () => {
+void test("the bundled world's compatibility metadata survives an owned update and reload", async () => {
   const catalog = JSON.parse(readFileSync(new URL("../../cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json", import.meta.url), "utf8"));
   const compatible_recipe_hashes = catalog.compatible_versions.map((version) => version.recipe_hash);
   const store = storage();
@@ -270,14 +270,14 @@ test("the bundled world's compatibility metadata survives an owned update and re
   assert.equal(restored.value.recipes, undefined);
 });
 
-test("unavailable storage reports explicitly without crashing play", async () => {
+void test("unavailable storage reports explicitly without crashing play", async () => {
   const broken = { getItem() { throw new Error("blocked"); }, setItem() { throw new Error("blocked"); } };
   assert.equal(read(broken).kind, "unavailable");
   assert.equal((await save(state(), null, broken, null)).kind, "unavailable");
   assert.equal((await save(state(), null, null, null)).kind, "unavailable");
 });
 
-test("browser locks serialize competing saves and preserve both discoveries", async () => {
+void test("browser locks serialize competing saves and preserve both discoveries", async () => {
   const store = storage();
   let tail = Promise.resolve();
   const locks = { request(_name, callback) { const result = tail.then(callback); tail = result; return result; } };
@@ -289,7 +289,7 @@ test("browser locks serialize competing saves and preserve both discoveries", as
   assert.equal(read(store).value.needs_restore, true);
 });
 
-test("a screen leaving while its storage lock waits cannot write afterward", async () => {
+void test("a screen leaving while its storage lock waits cannot write afterward", async () => {
   const store = storage();
   const result = await save(state(), null, store, { request: (_name, callback) => callback() }, () => false);
   assert.equal(result.kind, "changed");

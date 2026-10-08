@@ -9,7 +9,7 @@ const screens = {
   conexiuni: "Conexiuni", contexto: "CaldRece", lant: "Lant",
 };
 
-test("every live game has concise guidance for goal, feedback and recovery", () => {
+void test("every live game has concise guidance for goal, feedback and recovery", () => {
   assert.deepEqual(Object.keys(GAME_HELP).sort(), Object.keys(screens).sort());
   for (const [key, screen] of Object.entries(screens)) {
     assert.deepEqual(Object.keys(GAME_HELP[key]), ["goal", "feedback", "recovery"]);
@@ -31,7 +31,7 @@ test("every live game has concise guidance for goal, feedback and recovery", () 
   }
 });
 
-test("help explains different kinds of relationship without revealing a board answer", () => {
+void test("help explains different kinds of relationship without revealing a board answer", () => {
   assert.match(GAME_HELP.alchimie.feedback, /legăturile dintre rezultat/);
   assert.match(GAME_HELP.perechi.goal, /nu trebuie să fie sinonime/);
   assert.match(GAME_HELP.intrusul.goal, /nu aparține acelui grup/);
@@ -40,7 +40,7 @@ test("help explains different kinds of relationship without revealing a board an
   assert.match(GAME_HELP.lant.feedback, /poate apropia sau ocoli/);
 });
 
-test("rules use a closed native disclosure with no session or clue side effects", () => {
+void test("rules use a closed native disclosure with no session or clue side effects", () => {
   const component = read("../src/components/GameHelp.tsx");
   assert.match(component, /<details className="game-help">/);
   assert.match(component, /<summary>Reguli și ajutor<\/summary>/);
@@ -55,7 +55,7 @@ test("rules use a closed native disclosure with no session or clue side effects"
   assert.doesNotMatch(options, /\bopen=|useEffect|useState|fetch|Api|onClick|localStorage/);
 });
 
-test("earned Alchimie evidence preserves the server's oriented relationship", () => {
+void test("earned Alchimie evidence preserves the server's oriented relationship", () => {
   const screen = read("../src/screens/Alchimie.tsx");
   const renderer = screen.slice(screen.indexOf("function EarnedLinks"), screen.indexOf("function Slot"));
   assert.match(renderer, /if \(!item\.links\?\.length\) return null/);

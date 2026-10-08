@@ -113,7 +113,7 @@ const assertFailed = (plan) => {
   assert.ok(plan.diagnostics.length || plan.candidate_diagnostics.length || plan.manual.length, "Failure must retain an actionable reason");
 };
 
-test("repeated source reads cannot replace a previously checked provenance binding", () => {
+void test("repeated source reads cannot replace a previously checked provenance binding", () => {
   const inputs = {}, original = Buffer.from("original-owner");
   assert.equal(bindSourceInput(inputs, "frontend/src/screens/Alchimie.tsx", original), original);
   const record = inputs["frontend/src/screens/Alchimie.tsx"];
@@ -124,19 +124,19 @@ test("repeated source reads cannot replace a previously checked provenance bindi
   assert.deepEqual(record, { sha256: sha(original), bytes: original.length });
 });
 
-test("native CLI diagnostic data retains failures and refuses launch or unexplained-success shapes", () => {
+void test("native CLI diagnostic data retains failures and refuses launch or unexplained-success shapes", () => {
   // Pure data controls; no command is run and no synthetic native receipt is earned.
   assert.deepEqual(nativeDiagnosticResult({ status: 0, stdout: "", stderr: "" }), []);
   const message = "src/fixture.tsx(1,1): error TS2322: incompatible value\n";
   assert.deepEqual(nativeDiagnosticResult({ status: 1, stdout: message, stderr: "" }), [{ code: "native-tsc-exit", category: "Error", compiler: "typescript@7.0.2 native CLI", exit_code: 1, message }]);
   for (const child of [{ status: null, error: Error("launch") }, { status: 0, error: Error("launch") }, { status: 0, signal: "SIGTERM" }, { status: 0, stdout: message }, { status: 1, stdout: "" }]) assert.throws(() => nativeDiagnosticResult(child));
 });
-test("authoritative before diagnostics stop source proposals before any candidate check", () => {
+void test("authoritative before diagnostics stop source proposals before any candidate check", () => {
   const failure = [{ code: "native-tsc-exit", message: "DATA ONLY native before refusal" }];
   const plan = analyze('export const View = () => <div style={{ gap: 4 }} />;', { authoritativeDiagnostics: failure, diagnoseCandidate: () => assert.fail("Refused before check reached candidate") });
   assertFailed(plan); assert.deepEqual(plan.diagnostics, failure); assert.deepEqual(plan.sites, []);
 });
-test("authoritative candidate diagnostics revoke every proposal while retaining causal inputs", () => {
+void test("authoritative candidate diagnostics revoke every proposal while retaining causal inputs", () => {
   let observed;
   const failure = [{ code: "native-tsc-exit", message: "DATA ONLY native candidate refusal" }];
   const plan = analyze('export const View = () => <div style={{ gap: 4 }} />;', { authoritativeDiagnostics: [], diagnoseCandidate: (files) => { observed = files; return failure; } });
@@ -145,7 +145,7 @@ test("authoritative candidate diagnostics revoke every proposal while retaining 
   assert.ok(plan.proposals.length === 3 && plan.owners.length === 2);
 });
 
-test("paths normalize both separators and confine whole segments", () => {
+void test("paths normalize both separators and confine whole segments", () => {
   assert.equal(repoRelative("C:\\work\\cat", "C:\\work\\cat\\frontend\\src\\Cue.tsx"), "frontend/src/Cue.tsx");
   assert.equal(repoRelative("C:/work/cat", "C:/work/cat/frontend/src/../src/Cue.tsx"), "frontend/src/Cue.tsx");
   assert.equal(repoRelative("/work/cat", "/work/cat/frontend/src/Cue.tsx"), "frontend/src/Cue.tsx");
@@ -155,7 +155,7 @@ test("paths normalize both separators and confine whole segments", () => {
   for (const file of ["relative/path", "C:relative", "//server/share/file", "C:/file\0"]) assert.throws(() => absolutePath(file));
   assert.throws(() => repoRelative("C:/work/cat", "C:relative"));
 });
-test("actual parser accepts only the pinned71 declaration or assignment form", () => {
+void test("actual parser accepts only the pinned71 declaration or assignment form", () => {
   const literal = JSON.stringify(unitless.join(" "));
   for (const code of [`const unitlessNumbers = new Set(${literal}.split(" "));`, `unitlessNumbers = new Set(${literal}.split(" "));`]) assert.deepEqual(extractRendererUnitless(Buffer.from(code)), unitless);
   assert.equal(unitless.length, 71); assert.ok(unitless.includes("WebKitBoxFlexGroup"));
@@ -169,34 +169,34 @@ test("actual parser accepts only the pinned71 declaration or assignment form", (
   assert.throws(() => extractRendererUnitless(Buffer.from(`const unitlessNumbers = new Set(${JSON.stringify(duplicate.join(" "))}.split(" "));`)));
   assert.throws(() => extractUnitlessPolicy(Buffer.from('const UNITLESS_PROPERTIES = ["opacity"] as const;')));
 });
-test("edit ranges are validated before any transformed text is returned", () => {
+void test("edit ranges are validated before any transformed text is returned", () => {
   assert.equal(applyEdits("abcd", [{ start: 1, end: 3, value: "x" }]), "axd");
   assert.equal(applyEdits("abcd", [{ start: 0, end: 0, value: "!" }, { start: 0, end: 1, value: "A" }]), "!Abcd");
   for (const edits of [ [{ start: -1, end: 1, value: "x" }], [{ start: 0, end: 5, value: "x" }], [{ start: 0, end: 2, value: "x" }, { start: 1, end: 3, value: "y" }], [{ start: 1, end: 1, value: "x" }, { start: 1, end: 1, value: "y" }] ]) assert.throws(() => applyEdits("abcd", edits));
 });
-for (const fixture of fixtures.passing) test(fixture.name, () => {
+for (const fixture of fixtures.passing) void test(fixture.name, () => {
   const plan = analyze(fixture.body);
   assert.equal(plan.status, "pass", JSON.stringify(plan)); assert.equal(plan.application_ready, true);
   assert.deepEqual(plan.diagnostics, []); assert.deepEqual(plan.candidate_diagnostics, []);
   for (const expected of fixture.expected) assert.ok(textOf(plan).includes(expected), expected);
   for (const absent of fixture.absent ?? []) assert.ok(!textOf(plan).includes(absent), absent);
 });
-for (const fixture of fixtures.refusing) test(fixture.name, () => {
+for (const fixture of fixtures.refusing) void test(fixture.name, () => {
   const plan = analyze(fixture.body); assertFailed(plan);
   if (fixture.candidate_diagnostics) { assert.deepEqual(plan.diagnostics, []); assert.ok(plan.candidate_diagnostics.some((item) => item.code === 6133)); }
 });
-test("Windows virtual source paths produce the same repo-relative plan", () => {
+void test("Windows virtual source paths produce the same repo-relative plan", () => {
   const body = "export function Fixture() { return <div style={{ width: 1 }} />; }";
   const posix = analyze(body), windows = analyze(body, { root: "C:/virtual-cat" });
   assert.equal(windows.status, "pass", JSON.stringify(windows)); assert.equal(posix.status, "pass", JSON.stringify(posix));
   assert.deepEqual(windows.files.map(({ file, text }) => ({ file, text })), posix.files.map(({ file, text }) => ({ file, text })));
 });
-test("canonical case aliases still check transformed semantic bytes", () => {
+void test("canonical case aliases still check transformed semantic bytes", () => {
   const plan = analyze("import { m } from 'framer-motion'; export function Fixture() { return <m.div style={{ width: 1 }} />; }", { candidateCaseAliases: true });
   assertFailed(plan); assert.deepEqual(plan.diagnostics, []);
   assert.ok(plan.candidate_diagnostics.some((item) => item.code === 6133), JSON.stringify(plan));
 });
-test("both original Motion owners preserve every non-style/class attribute byte", () => {
+void test("both original Motion owners preserve every non-style/class attribute byte", () => {
   const plan = analyze("export function Fixture() { return <div style={{ width: 1 }} />; }");
   assert.equal(plan.status, "pass", JSON.stringify(plan)); assert.equal(plan.owners.length, 2);
   for (const owner of plan.owners) {
@@ -217,7 +217,7 @@ for (const [file, from, replacement] of [
     "style={{\n    gap: 4,\n    opacity: item.depleted ? 0.5 : 1,\n  }}"],
   ["frontend/src/screens/Conexiuni.tsx", "style={{ opacity: actionsLocked && !isSel ? 0.55 : 1, gap: 4 }}",
     "style={{\n    opacity: actionsLocked && !isSel ? 0.55 : 1, // retain ownership note\n    gap: 4,\n  }}"],
-]) test(`Motion opacity member removal preserves adjacent text without trailing whitespace: ${file}`, () => {
+]) void test(`Motion opacity member removal preserves adjacent text without trailing whitespace: ${file}`, () => {
   assert.ok(owners[file].includes(from));
   const plan = analyze("export function Fixture() { return <div style={{ width: 1 }} />; }", {
     changes: { [file]: owners[file].replace(from, replacement) },
@@ -230,11 +230,11 @@ for (const [file, from, replacement] of [
   if (replacement.includes("// retain ownership note")) assert.ok(output.includes("// retain ownership note"));
 });
 
-for (const fixture of fixtures.owner_mutations) test(fixture.name, () => {
+for (const fixture of fixtures.owner_mutations) void test(fixture.name, () => {
   assert.ok(owners[fixture.file].includes(fixture.find));
   assertFailed(analyze("export function Fixture() { return <div style={{ width: 1 }} />; }", { changes: { [fixture.file]: owners[fixture.file].replace(fixture.find, fixture.replace) } }));
 });
-test("missing and duplicate original owners fail the whole plan", () => {
+void test("missing and duplicate original owners fail the whole plan", () => {
   const body = "export function Fixture() { return <div style={{ width: 1 }} />; }";
   assertFailed(analyze(body, { omit: ["frontend/src/screens/Alchimie.tsx"] }));
   const file = "frontend/src/screens/Alchimie.tsx";
@@ -436,7 +436,7 @@ function publicationFixture(t, label, body) {
   } finally { retain("finally-success-or-real-failure"); }
 }
 
-test("publication retains prior artifacts and failure evidence without selecting a tree", t => publicationFixture(t, "prior-artifacts", (root, _probe, retain) => {
+void test("publication retains prior artifacts and failure evidence without selecting a tree", t => publicationFixture(t, "prior-artifacts", (root, _probe, retain) => {
   const old = path.join(root, ".gate/gen/styles/converted/frontend/src/old.tsx");
   fs.mkdirSync(path.dirname(old), { recursive: true }); fs.writeFileSync(old, "prior-evidence", { flag: "wx" });
   retain("prior-artifact-before-assertions");
@@ -452,7 +452,7 @@ test("publication retains prior artifacts and failure evidence without selecting
   }
   assert.notEqual(first.output, second.output); assert.equal(fs.readFileSync(old, "utf8"), "prior-evidence");
 }));
-test("a publication hash failure preserves partial evidence and publishes no tree path", t => publicationFixture(t, "partial-hash-failure", (root, _probe, retain) => {
+void test("a publication hash failure preserves partial evidence and publishes no tree path", t => publicationFixture(t, "partial-hash-failure", (root, _probe, retain) => {
   const valid = analyze("export function Fixture() { return <div style={{ width: 1 }} />; }");
   assert.equal(valid.status, "pass", JSON.stringify(valid));
   const plan = { ...valid, files: valid.files.map((file, index) => index === 0 ? { ...file, after_sha256: "0".repeat(64) } : file) };
@@ -464,7 +464,7 @@ test("a publication hash failure preserves partial evidence and publishes no tre
   assert.ok(fs.existsSync(path.join(root, report.report_json)));
   assert.ok(!fs.existsSync(path.join(root, report.output, "report.json")));
 }));
-test("publication refuses stream/reserved path components without exposing a tree", t => {
+void test("publication refuses stream/reserved path components without exposing a tree", t => {
   for (const file of ["frontend/src/old.tsx:stream.tsx", "frontend/src/CON.tsx", "frontend/src/LPT1.tsx", "frontend/src/trailing./Cue.tsx"]) {
     publicationFixture(t, "reserved-component:" + file, (root, _probe, retain) => {
       const report = publishStylePlan(root, { status: "pass", application_ready: true, files: [{ file, text: "cue", after_sha256: sha("cue") }], manual: [], diagnostics: [], candidate_diagnostics: [] });
@@ -474,7 +474,7 @@ test("publication refuses stream/reserved path components without exposing a tre
     });
   }
 });
-test("publication refuses a symlinked output ancestor and retains the other tree", t => publicationFixture(t, "literal-symlink-probe", (root, probe, retain) => {
+void test("publication refuses a symlinked output ancestor and retains the other tree", t => publicationFixture(t, "literal-symlink-probe", (root, probe, retain) => {
   const other = path.join(probe, "referent"); fs.mkdirSync(other, { mode: 0o700 });
   fs.writeFileSync(path.join(other, "kept.txt"), "other-evidence", { flag: "wx" });
   fs.symlinkSync(other, path.join(root, ".gate"), "dir");

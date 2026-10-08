@@ -117,6 +117,8 @@ func TestManagedNonceShellRefusals(t *testing.T) {
 		{"malformed script close", "</script>", "</script forged>"},
 		{"inline script", "</script>", "alert(1)</script>"}, {"unterminated script", "</script>", ""},
 		{"duplicate src", " crossorigin src=", ` src="/assets/app-1234abcd.js" crossorigin src=`},
+		{"duplicate src mixed case", " crossorigin src=", ` SRC="/assets/app-1234abcd.js" crossorigin src=`},
+		{"duplicate src HTML whitespace", " crossorigin src=", "\tSRC='/assets/app-1234abcd.js'\f crossOrigin\r\nsrc="},
 		{"forged nonce", " crossorigin src=", ` nonce="forged" crossorigin src=`},
 		{"unbound attribute", " crossorigin src=", ` integrity="unbound" crossorigin src=`},
 		{"credentialed module", " crossorigin src=", ` crossorigin="use-credentials" src=`},
@@ -136,6 +138,8 @@ func TestManagedNonceShellRefusals(t *testing.T) {
 		{"nonce meta property", "<head>", `<head><meta property="csp-nonce" content="forged">`},
 		{"nonce meta name", "<head>", `<head><meta name="CSP-NONCE" content="forged">`},
 		{"duplicate meta attr", "<head>", `<head><meta property="x" property="csp-nonce">`},
+		{"duplicate meta attr mixed case", "<head>", `<head><meta PROPERTY='x' property="csp-nonce">`},
+		{"duplicate unquoted meta attr", "<head>", `<head><meta property=x PROPERTY=csp-nonce>`},
 		{"policy meta", "<head>", `<head><meta http-equiv="Content-Security-Policy" content="default-src *">`},
 		{"base URL", "<head>", `<head><base href="https://invalid.example/">`},
 		{"inline style", "<head>", "<head><style>body{color:red}</style>"},
@@ -162,6 +166,34 @@ func TestManagedNonceShellRefusals(t *testing.T) {
 	}
 	if shell, err := newManagedNonceShell([]byte(nonceFixtureIndex), nil); err == nil || shell != nil {
 		t.Fatal("nil manifest admitted")
+	}
+	// Valid raw boundaries must still admit an unchanged shell. These values
+	// contain name-like text, entities and URL slashes but no duplicate names.
+	for _, boundary := range []struct{ old, next string }{
+		{"<head>", `<head><meta name="description" content='property="x" property="y" / &amp; src=sample'>`},
+		{"<head>", `<head><meta name='description' content="property='x' property='y' / &quot;src=sample&quot;">`},
+		{"<head>", `<head><meta name=description content=/assets/path/to/value/>`},
+		{`src="/assets/app-1234abcd.js"`, `src=/assets/app-1234abcd.js`},
+		{`src="/assets/app-1234abcd.js"`, `src='/assets/app&#45;1234abcd.js'`},
+		{`href="/assets/app-1234abcd.css"`, `href='/assets/app&#45;1234abcd.css'`},
+	} {
+		source := strings.Replace(nonceFixtureIndex, boundary.old, boundary.next, 1)
+		shell, err := newManagedNonceShell([]byte(source), manifest)
+		if err != nil || shell == nil {
+			t.Fatalf("valid raw value boundary refused: %s: %v", boundary.next, err)
+		}
+		if !bytes.Equal(shell.index, []byte(source)) {
+			t.Fatal("raw boundary admission rewrote original bytes")
+		}
+		body, err := shell.render(csp.WithNonce(context.Background(), "raw-boundary-test-nonce"))
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = bytes.Replace(body, []byte(`<meta property="csp-nonce" content="raw-boundary-test-nonce" nonce="raw-boundary-test-nonce">`), nil, 1)
+		body = bytes.ReplaceAll(body, []byte(` nonce="raw-boundary-test-nonce"`), nil)
+		if !bytes.Equal(body, []byte(source)) {
+			t.Fatal("nonce insertion changed original raw value or byte offset")
+		}
 	}
 }
 

@@ -17,7 +17,7 @@ function callback(name) {
 const combine = callback("doCombine");
 const toggle = callback("toggle");
 
-test("empty reaction recovery uses an unordered pair key", () => {
+void test("empty reaction recovery uses an unordered pair key", () => {
   assert.match(
     screen,
     /function pairKey[\s\S]*?ids\.length === 2[\s\S]*?JSON\.stringify\(\[\.\.\.ids\]\.sort\(\)\)/,
@@ -28,7 +28,7 @@ test("empty reaction recovery uses an unordered pair key", () => {
   );
 });
 
-test("an authoritative empty response retains one ingredient for the next tap", () => {
+void test("an authoritative empty response retains one ingredient for the next tap", () => {
   assert.match(
     combine,
     /const recoverableEmpty = res\.discovered\.length === 0 && !res\.won/,
@@ -51,7 +51,7 @@ test("an authoritative empty response retains one ingredient for the next tap", 
   assert.doesNotMatch(rejected, /setSelected|setEmptyPairKey/);
 });
 
-test("a second distinct ingredient submits through the single owned action path", () => {
+void test("a second distinct ingredient submits through the single owned action path", () => {
   assert.match(toggle, /startInFlight\.current \|\| actionsLocked \|\| won \|\| actionOwner\.hasPending\(\)/);
   assert.match(toggle, /void doCombine\(\[selected\[0\], id\]\)/);
   assert.doesNotMatch(toggle, /alchimieApi\.combine/);
@@ -72,13 +72,13 @@ test("a second distinct ingredient submits through the single owned action path"
   );
 });
 
-test("a sole useful discovery becomes the next anchor without another selection", () => {
+void test("a sole useful discovery becomes the next anchor without another selection", () => {
   assert.match(combine, /const usableDiscoveries = res\.inventory\.filter\(\(item\) =>\s*item\.useful && !item\.depleted && res\.discovered\.some\(\(fresh\) => fresh\.id === item\.id\)/);
   assert.match(combine, /setSelected\(!res\.won && usableDiscoveries\.length === 1 \? \[usableDiscoveries\[0\]\.id\] : \[\]\)/);
   assert.match(combine, /setEmptyPairKey\(null\)/);
 });
 
-test("cancelling the anchor or changing games clears the immediate retry block", () => {
+void test("cancelling the anchor or changing games clears the immediate retry block", () => {
   assert.match(toggle, /selected\[0\] === id[\s\S]*?clearSelection\(\)/);
   const clear = callback("clearSelection");
   assert.match(clear, /startInFlight\.current \|\| actionsLocked \|\| actionOwner\.hasPending\(\)/);
@@ -93,7 +93,7 @@ test("cancelling the anchor or changing games clears the immediate retry block",
   }
 });
 
-test("Escape cancels without a global Enter submit or a separate combine button", () => {
+void test("Escape cancels without a global Enter submit or a separate combine button", () => {
   const keyboardStart = screen.indexOf("const onKey = (event: KeyboardEvent)");
   const keyboardEnd = screen.indexOf('window.addEventListener("keydown", onKey)', keyboardStart);
   assert.ok(keyboardStart >= 0 && keyboardEnd > keyboardStart);
@@ -106,7 +106,7 @@ test("Escape cancels without a global Enter submit or a separate combine button"
   assert.doesNotMatch(screen, /onClick=\{doCombine\}|aria-label="Combină cele două concepte selectate"|>\s*Golește\s*</);
 });
 
-test("removing the anchor preserves keyboard focus and a 44px touch target", () => {
+void test("removing the anchor preserves keyboard focus and a 44px touch target", () => {
   assert.match(
     screen,
     /<Slot[\s\S]{0,160}item=\{selectedItems\[0\]\}[\s\S]{0,160}onRemove=\{removeFromBench\}/,

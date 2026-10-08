@@ -37,8 +37,8 @@ func writeInventorySource(t *testing.T, root, name, text string) {
 func writeInventory(t *testing.T, file string, paths []string) {
 	t.Helper()
 	raw, err := json.Marshal(struct {
-		Schema int `json:"schema"`
-		Paths []string `json:"paths"`
+		Schema int      `json:"schema"`
+		Paths  []string `json:"paths"`
 	}{Schema: 1, Paths: paths})
 	if err != nil {
 		t.Fatal(err)
@@ -126,8 +126,8 @@ func TestInventoryRejectsMalformedAndUnsafeInput(t *testing.T) {
 		paths[i] = fmt.Sprintf("%05d.md", i)
 	}
 	raw, err := json.Marshal(struct {
-		Schema int `json:"schema"`
-		Paths []string `json:"paths"`
+		Schema int      `json:"schema"`
+		Paths  []string `json:"paths"`
 	}{Schema: 1, Paths: paths})
 	if err != nil {
 		t.Fatal(err)

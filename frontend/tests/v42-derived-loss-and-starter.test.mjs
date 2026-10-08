@@ -9,7 +9,7 @@ const perechi = read("../src/screens/Perechi.tsx");
 const STARTER_LINE =
   "Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.";
 
-test("Intrusul and Perechi show the starter-shelf hint only pre-graduation", () => {
+void test("Intrusul and Perechi show the starter-shelf hint only pre-graduation", () => {
   for (const source of [intrusul, perechi]) {
     assert.match(
       source,
@@ -28,7 +28,7 @@ test("Intrusul and Perechi show the starter-shelf hint only pre-graduation", () 
   }
 });
 
-test("Intrusul loss reveal names the intruder and the group without leaking pre-terminal", () => {
+void test("Intrusul loss reveal names the intruder and the group without leaking pre-terminal", () => {
   assert.match(
     intrusul,
     /Intrusul era: \{state\.solution\.intruder\.label\}\.\s*<\/strong>/,
@@ -42,7 +42,7 @@ test("Intrusul loss reveal names the intruder and the group without leaking pre-
   assert.match(intrusul, /\{state\.won \? \(/);
 });
 
-test("Perechi loss reveal states earned progress out of four using session-known solved_count", () => {
+void test("Perechi loss reveal states earned progress out of four using session-known solved_count", () => {
   assert.match(
     perechi,
     /\{!state\.won && \(\s*<p style=\{\{ margin: "0 0 2px" \}\}>\s*Ai găsit \{state\.solved_count\} din 4 perechi\.\s*<\/p>\s*\)\}/,

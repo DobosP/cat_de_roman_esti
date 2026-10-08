@@ -15,7 +15,7 @@ const conexiuni = read("../src/screens/Conexiuni.tsx");
 const intrusul = read("../src/screens/Intrusul.tsx");
 const perechi = read("../src/screens/Perechi.tsx");
 
-test("all games teach the loop with a semantic three-step guide", () => {
+void test("all games teach the loop with a semantic three-step guide", () => {
   assert.match(guide, /<ol className="play-guide"/);
   assert.match(guide, /<li className="play-guide-step"/);
   assert.match(intro, /steps\?: PlayGuideStep\[\]/);
@@ -41,7 +41,7 @@ test("all games teach the loop with a semantic three-step guide", () => {
   }
 });
 
-test("mobile layout wraps status and keeps category rails compact with 44px targets", () => {
+void test("mobile layout wraps status and keeps category rails compact with 44px targets", () => {
   assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.roedu-btn,[\s\S]*?min-height: 44px/);
   assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.chip \{[\s\S]*?min-height: 44px/);
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.hud \{\s*width: 100%;\s*flex-wrap: wrap;/);
@@ -58,7 +58,7 @@ test("mobile layout wraps status and keeps category rails compact with 44px targ
   assert.ok(coach > 0 && coachEnd > coach && feedback > coachEnd);
 });
 
-test("Romanian labels wrap on a responsive Connections board and long paths scroll", () => {
+void test("Romanian labels wrap on a responsive Connections board and long paths scroll", () => {
   // conexiuni-simpler-ui.spec.mjs checks real word bounds at normal and doubled text.
   assert.doesNotMatch(conexiuni, /gridTemplateColumns/);
   assert.match(conexiuniCss, /\.connection-tile \{[^}]*?overflow-wrap: anywhere;[^}]*?white-space: normal/);
@@ -78,7 +78,7 @@ test("Romanian labels wrap on a responsive Connections board and long paths scro
   assert.match(css, /\.lant-choice span \{[\s\S]*?font-size: 0\.75rem/);
 });
 
-test("global shortcuts ignore focused controls instead of double-submitting", () => {
+void test("global shortcuts ignore focused controls instead of double-submitting", () => {
   const selector = /target\?\.closest\(\s*'button, a, input, textarea, select, summary, \[role="button"\], \[contenteditable="true"\]'/;
   for (const screen of [lant, conexiuni]) {
     assert.match(screen, /e\.defaultPrevented/);
@@ -89,7 +89,7 @@ test("global shortcuts ignore focused controls instead of double-submitting", ()
   assert.doesNotMatch(alchimie, /(?:event|e)\.key === "Enter"/);
 });
 
-test("touch users get visible rank meaning and important feedback is announced", () => {
+void test("touch users get visible rank meaning and important feedback is announced", () => {
   assert.match(caldRece, /aria-describedby="contexto-rank-guide"/);
   assert.match(caldRece, /<p id="contexto-rank-guide"[^>]*>\s*Un număr mai mic = mai aproape\. <strong>#1 este ținta\.<\/strong>/);
   assert.ok(caldRece.indexOf('<p id="contexto-rank-guide"') < caldRece.indexOf("<GameOptions"), "rank meaning stays visible outside optional tools");

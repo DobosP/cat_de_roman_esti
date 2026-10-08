@@ -13,7 +13,7 @@ import {
   parseLimitKiB,
 } from "../scripts/check-bundle-budget.mjs";
 
-test("initial bundle follows recursive static imports but excludes dynamic routes", () => {
+void test("initial bundle follows recursive static imports but excludes dynamic routes", () => {
   const manifest = {
     "src/main.tsx": {
       file: "assets/index.js",
@@ -41,7 +41,7 @@ test("initial bundle follows recursive static imports but excludes dynamic route
   ]);
 });
 
-test("gzip measurement reads only manifest-selected output files", () => {
+void test("gzip measurement reads only manifest-selected output files", () => {
   const root = mkdtempSync(join(tmpdir(), "cat-bundle-budget-"));
   try {
     mkdirSync(join(root, "assets"));
@@ -55,14 +55,14 @@ test("gzip measurement reads only manifest-selected output files", () => {
   }
 });
 
-test("budget configuration rejects zero, non-numeric, and infinite values", () => {
+void test("budget configuration rejects zero, non-numeric, and infinite values", () => {
   assert.equal(parseLimitKiB("120"), 120);
   for (const bad of ["0", "-1", "wat", "Infinity"]) {
     assert.throws(() => parseLimitKiB(bad), /must be a positive number/);
   }
 });
 
-test("font guard requires both Romanian-capable subsets for both families", () => {
+void test("font guard requires both Romanian-capable subsets for both families", () => {
   const manifest = Object.fromEntries(
     ROMANIAN_FONT_SOURCES.map((src, index) => [`font-${index}`, { src }]),
   );
@@ -183,7 +183,7 @@ function eagerAccountMeasurements(root, manifest) {
   return { staticMeasurements, fullMeasurements, staticBytes, fullBytes, limitKiB };
 }
 
-test("explicit eager account roots include recursive JS/CSS once and exclude game routes", () => {
+void test("explicit eager account roots include recursive JS/CSS once and exclude game routes", () => {
   const manifest = eagerAccountManifest();
   assert.deepEqual(collectInitialBundleFiles(manifest), eagerAccountStaticFiles);
   const selected = collectInitialBundleFiles(manifest, { eagerRoots: [eagerAccountRoot] });
@@ -193,7 +193,7 @@ test("explicit eager account roots include recursive JS/CSS once and exclude gam
   assert.equal(selected.includes("assets/Game.css"), false);
 });
 
-test("explicit eager account roots reject missing or malformed chunk files", () => {
+void test("explicit eager account roots reject missing or malformed chunk files", () => {
   for (const file of [undefined, null, 42, "", "assets/account.png"]) {
     const manifest = eagerAccountManifest();
     if (file === undefined) {
@@ -216,7 +216,7 @@ test("explicit eager account roots reject missing or malformed chunk files", () 
   );
 });
 
-test("initial budget counts eager account bytes that the static-only closure misses", () => {
+void test("initial budget counts eager account bytes that the static-only closure misses", () => {
   const root = mkdtempSync(join(tmpdir(), "cat-eager-account-budget-"));
   try {
     const manifest = writeEagerAccountOutput(root);
@@ -245,7 +245,7 @@ test("initial budget counts eager account bytes that the static-only closure mis
   }
 });
 
-test("initial budget requires the account root even when the caller supplies empty eager roots", () => {
+void test("initial budget requires the account root even when the caller supplies empty eager roots", () => {
   const root = mkdtempSync(join(tmpdir(), "cat-required-account-root-"));
   try {
     const manifest = writeEagerAccountOutput(root);
@@ -264,7 +264,7 @@ test("initial budget requires the account root even when the caller supplies emp
   }
 });
 
-test("initial budget fails closed for missing account JS, CSS, or nested import output", () => {
+void test("initial budget fails closed for missing account JS, CSS, or nested import output", () => {
   for (const missingFile of ["assets/account.js", "assets/account.css", "assets/account-nested.js"]) {
     const root = mkdtempSync(join(tmpdir(), "cat-missing-account-output-"));
     try {
@@ -287,7 +287,7 @@ test("initial budget fails closed for missing account JS, CSS, or nested import 
   }
 });
 
-test("eager root options require bounded own string keys and deduplicate repeated roots", () => {
+void test("eager root options require bounded own string keys and deduplicate repeated roots", () => {
   const manifest = eagerAccountManifest();
   assert.deepEqual(
     collectInitialBundleFiles(manifest, { eagerRoots: [eagerAccountRoot, eagerAccountRoot] }),
@@ -315,7 +315,7 @@ test("eager root options require bounded own string keys and deduplicate repeate
   );
 });
 
-test("eager account closure rejects malformed shared files, CSS, and static import edges", () => {
+void test("eager account closure rejects malformed shared files, CSS, and static import edges", () => {
   const cases = [
     {
       name: "shared entry import file",

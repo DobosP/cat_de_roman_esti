@@ -37,7 +37,7 @@ globalThis.localStorage = storage;
 
 test.beforeEach(() => storage.clear());
 
-test("keeps exactly one opaque completed id per derived game", () => {
+void test("keeps exactly one opaque completed id per derived game", () => {
   replay.rememberDerivedReplayId("intrusul", "session-intrusul-old");
   replay.rememberDerivedReplayId("intrusul", "session-intrusul-new");
   replay.rememberDerivedReplayId("perechi", "session-perechi");
@@ -53,7 +53,7 @@ test("keeps exactly one opaque completed id per derived game", () => {
   });
 });
 
-test("migrates the bounded direct-map shape and discards unknown fields", () => {
+void test("migrates the bounded direct-map shape and discards unknown fields", () => {
   storage.setItem(
     STORAGE_KEY,
     JSON.stringify({
@@ -74,7 +74,7 @@ test("migrates the bounded direct-map shape and discards unknown fields", () => 
   });
 });
 
-test("rejects oversized and control-character ids without replacing good memory", () => {
+void test("rejects oversized and control-character ids without replacing good memory", () => {
   replay.rememberDerivedReplayId("intrusul", "valid-session");
   replay.rememberDerivedReplayId("intrusul", "x".repeat(129));
   replay.rememberDerivedReplayId("perechi", "bad\nvalue");
@@ -86,7 +86,7 @@ test("rejects oversized and control-character ids without replacing good memory"
   ]);
 });
 
-test("malformed and future-version documents fail safely without being overwritten", () => {
+void test("malformed and future-version documents fail safely without being overwritten", () => {
   storage.setItem(STORAGE_KEY, "{not json");
   assert.equal(replay.lastDerivedReplayId("intrusul"), null);
   assert.equal(storage.getItem(STORAGE_KEY), "{not json");
@@ -100,7 +100,7 @@ test("malformed and future-version documents fail safely without being overwritt
   assert.equal(storage.getItem(STORAGE_KEY), future);
 });
 
-test("denied storage getter leaves anonymous replay playable without erasing memory", (t) => {
+void test("denied storage getter leaves anonymous replay playable without erasing memory", (t) => {
   storage.setItem(STORAGE_KEY, "existing replay memory");
   const descriptor = Object.getOwnPropertyDescriptor(globalThis, "localStorage");
   Object.defineProperty(globalThis, "localStorage", {

@@ -18,7 +18,7 @@ function deferred() {
   return { promise, resolve, reject };
 }
 
-test("one frozen ticket owns the action and an unrelated finish cannot release it", () => {
+void test("one frozen ticket owns the action and an unrelated finish cannot release it", () => {
   const owner = createGameActionOwner(pointer());
   const ticket = owner.begin("game-a");
   assert.ok(ticket);
@@ -32,7 +32,7 @@ test("one frozen ticket owns the action and an unrelated finish cannot release i
   assert.ok(owner.begin("game-a"));
 });
 
-test("a successful recovery performs one read and returns the exact authoritative state", async () => {
+void test("a successful recovery performs one read and returns the exact authoritative state", async () => {
   const owner = createGameActionOwner(pointer());
   const ticket = owner.begin("game-a");
   const state = { game_id: "game-a", won: true, guesses: [{ id: "earned" }], score: 900 };
@@ -48,7 +48,7 @@ test("a successful recovery performs one read and returns the exact authoritativ
   assert.equal(owner.hasPending(), true); // The caller still owns adoption and cleanup.
 });
 
-test("a failed read has no stale substitute or automatic retry", async () => {
+void test("a failed read has no stale substitute or automatic retry", async () => {
   const owner = createGameActionOwner(pointer());
   const ticket = owner.begin("game-a");
   let reads = 0;
@@ -60,7 +60,7 @@ test("a failed read has no stale substitute or automatic retry", async () => {
   assert.equal(reads, 1);
 });
 
-test("an owned missing-session read is classified without changing the pointer", async () => {
+void test("an owned missing-session read is classified without changing the pointer", async () => {
   const active = pointer();
   const owner = createGameActionOwner(active);
   const ticket = owner.begin("game-a");
@@ -71,7 +71,7 @@ test("an owned missing-session read is classified without changing the pointer",
   assert.equal(active.peek(), "game-a");
 });
 
-test("unmount or cancellation suppresses a late successful read", async () => {
+void test("unmount or cancellation suppresses a late successful read", async () => {
   const owner = createGameActionOwner(pointer());
   const ticket = owner.begin("game-a");
   const held = deferred();
@@ -82,7 +82,7 @@ test("unmount or cancellation suppresses a late successful read", async () => {
   assert.equal(owner.finish(ticket), false);
 });
 
-test("an invalidated action cannot finish or adopt over a new same-ID operation", async () => {
+void test("an invalidated action cannot finish or adopt over a new same-ID operation", async () => {
   const owner = createGameActionOwner(pointer());
   const old = owner.begin("game-a");
   const held = deferred();
@@ -96,7 +96,7 @@ test("an invalidated action cannot finish or adopt over a new same-ID operation"
   assert.equal(owner.hasPending(), true);
 });
 
-test("a different saved game before recovery prevents even the old GET", async () => {
+void test("a different saved game before recovery prevents even the old GET", async () => {
   const active = pointer();
   const owner = createGameActionOwner(active);
   const ticket = owner.begin("game-a");
@@ -111,7 +111,7 @@ test("a different saved game before recovery prevents even the old GET", async (
   assert.equal(active.peek(), "game-b");
 });
 
-test("beginning from a displayed old round pauses before work when another ID is already saved", async () => {
+void test("beginning from a displayed old round pauses before work when another ID is already saved", async () => {
   const active = pointer("game-b");
   const owner = createGameActionOwner(active);
   const ticket = owner.begin("game-a");
@@ -128,7 +128,7 @@ test("beginning from a displayed old round pauses before work when another ID is
 });
 
 for (const response of ["success", "missing", "failed"]) {
-  test(`a pointer change during a ${response} read suppresses adoption and pointer cleanup`, async () => {
+  void test(`a pointer change during a ${response} read suppresses adoption and pointer cleanup`, async () => {
     const active = pointer();
     const owner = createGameActionOwner(active);
     const ticket = owner.begin("game-a");
@@ -144,7 +144,7 @@ for (const response of ["success", "missing", "failed"]) {
   });
 }
 
-test("a locally owned round can recover when browser storage is unavailable", async () => {
+void test("a locally owned round can recover when browser storage is unavailable", async () => {
   const active = pointer(null);
   const owner = createGameActionOwner(active);
   const ticket = owner.begin("game-a");
@@ -156,7 +156,7 @@ test("a locally owned round can recover when browser storage is unavailable", as
   assert.equal(active.peek(), null);
 });
 
-test("a new stored pointer disowns a formerly local-only recovery", async () => {
+void test("a new stored pointer disowns a formerly local-only recovery", async () => {
   const active = pointer(null);
   const owner = createGameActionOwner(active);
   const ticket = owner.begin("game-a");
@@ -168,14 +168,14 @@ test("a new stored pointer disowns a formerly local-only recovery", async () => 
 });
 
 for (const state of [{ game_id: "other", won: true, score: 1000 }, { won: true }]) {
-  test(`a mismatched or missing response ID cannot become the owned state (${state.game_id})`, async () => {
+  void test(`a mismatched or missing response ID cannot become the owned state (${state.game_id})`, async () => {
     const owner = createGameActionOwner(pointer());
     const ticket = owner.begin("game-a");
     assert.deepEqual(await recoverOwnedGameAction(owner, ticket, async () => state), { kind: "failed" });
   });
 }
 
-test("manual recovery can acquire a fresh read after a failed one finishes", async () => {
+void test("manual recovery can acquire a fresh read after a failed one finishes", async () => {
   const owner = createGameActionOwner(pointer());
   const failed = owner.begin("game-a");
   let reads = 0;

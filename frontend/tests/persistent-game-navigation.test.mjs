@@ -9,7 +9,7 @@ const conexiuni = read("../src/screens/Conexiuni.tsx");
 const activeGame = read("../src/hooks/useActiveGame.ts");
 const css = read("../src/styles/arcade.css");
 
-test("an ordinary live Conexiuni exit conditionally forgets its pointer while uncertainty and terminal scoring preserve it", () => {
+void test("an ordinary live Conexiuni exit conditionally forgets its pointer while uncertainty and terminal scoring preserve it", () => {
   assert.match(app, /navigate\("\/", \{ replace: true \}\)/);
 
   const exit = conexiuni.match(
@@ -25,14 +25,14 @@ test("an ordinary live Conexiuni exit conditionally forgets its pointer while un
   assert.doesNotMatch(activeGame, /localStorage\.clear\(\)/);
 });
 
-test("Escape still clears a Conexiuni selection", () => {
+void test("Escape still clears a Conexiuni selection", () => {
   assert.match(
     conexiuni,
     /e\.key === "Escape" \|\| e\.key === "Backspace"[\s\S]*?clearSelection\(\)/,
   );
 });
 
-test("narrow screens keep exit visible and offset every second sticky game surface", () => {
+void test("narrow screens keep exit visible and offset every second sticky game surface", () => {
   assert.match(shell, /aria-label=\{busy \? "Se pregătește jocul" : "Ieși la lista de jocuri"\}/);
   assert.match(shell, /\{busy \? "Se pregătește…" : "Ieși"\}/);
   assert.match(
@@ -58,7 +58,7 @@ test("narrow screens keep exit visible and offset every second sticky game surfa
   assert.doesNotMatch(css, /\.game-shell-title \{[^}]*clip:/);
 });
 
-test("only the compact Conexiuni coach sticks; feedback remains before the board", () => {
+void test("only the compact Conexiuni coach sticks; feedback remains before the board", () => {
   const coach = conexiuni.indexOf('className="connections-coach-stack"');
   const coachEnd = conexiuni.indexOf("\n          </div>\n        )}", coach);
   const feedback = conexiuni.indexOf('className="card connections-feedback col"');
@@ -66,7 +66,7 @@ test("only the compact Conexiuni coach sticks; feedback remains before the board
   assert.ok(coach > 0 && coachEnd > coach && feedback > coachEnd && board > feedback);
 });
 
-test("Conexiuni explains every difficulty with visible plain-language copy", () => {
+void test("Conexiuni explains every difficulty with visible plain-language copy", () => {
   assert.match(
     conexiuni,
     /\{ id: "usor", label: DIFF_LABEL\.usor, hint: "grupuri clare" \}/,

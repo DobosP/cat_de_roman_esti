@@ -75,7 +75,7 @@ function complete(game, gameId, runtime = {}) {
   );
 }
 
-test("one shared lock records concurrent claims for one terminal session once", async () => {
+void test("one shared lock records concurrent claims for one terminal session once", async () => {
   const locks = new SerialLocks();
   const [left, right] = await Promise.all([
     complete("contexto", "11111111-1111-1111-1111-111111111111", { locks }),
@@ -89,7 +89,7 @@ test("one shared lock records concurrent claims for one terminal session once", 
   assert.deepEqual(new Set(locks.names), new Set(["cat_wordgame_scores_v1_transaction"]));
 });
 
-test("queued completions use the lock-time clock when tabs acquire out of call order", async (t) => {
+void test("queued completions use the lock-time clock when tabs acquire out of call order", async (t) => {
   const queued = [];
   const locks = {
     request(_name, callback) {
@@ -120,7 +120,7 @@ test("queued completions use the lock-time clock when tabs acquire out of call o
   assert.deepEqual(receipts().contexto, [{ id: gameId, at: NOW + 1 }]);
 });
 
-test("different completed IDs and different games each record under the shared lock", async () => {
+void test("different completed IDs and different games each record under the shared lock", async () => {
   const locks = new SerialLocks();
   const outcomes = await Promise.all([
     complete("intrusul", "22222222-2222-2222-2222-222222222222", { locks }),
@@ -134,7 +134,7 @@ test("different completed IDs and different games each record under the shared l
   assert.equal(scores.recentScores().length, 3);
 });
 
-test("the no-Web-Locks fallback preserves play and deduplicates sequential reloads", async () => {
+void test("the no-Web-Locks fallback preserves play and deduplicates sequential reloads", async () => {
   const first = await complete("alchimie", "55555555-5555-5555-5555-555555555555", {
     locks: null,
   });
@@ -158,7 +158,7 @@ test("the no-Web-Locks fallback preserves play and deduplicates sequential reloa
   assert.equal(scores.timesPlayed("alchimie"), 2);
 });
 
-test("receipt normalization expires stale rows and rejects malformed or future rows", async () => {
+void test("receipt normalization expires stale rows and rejects malformed or future rows", async () => {
   storage.setItem(SCORE_KEY, JSON.stringify({
     [RECEIPTS_KEY]: { version: 1, games: {
       lant: [
@@ -177,7 +177,7 @@ test("receipt normalization expires stale rows and rejects malformed or future r
   assert.deepEqual(new Set(rows.map(({ id }) => id)), new Set(["stale-id", "current-id"]));
 });
 
-test("the private receipt ledger stays capped at 1,000 rows per game", async () => {
+void test("the private receipt ledger stays capped at 1,000 rows per game", async () => {
   const rows = Array.from({ length: 1_005 }, (_, index) => ({
     id: `old-${String(index).padStart(4, "0")}`,
     at: NOW - index - 1,
@@ -193,7 +193,7 @@ test("the private receipt ledger stays capped at 1,000 rows per game", async () 
   assert.equal(new Set(retained.map(({ id }) => id)).size, 1_000);
 });
 
-test("exports and account-facing rows omit receipts; ordinary writes preserve them", async () => {
+void test("exports and account-facing rows omit receipts; ordinary writes preserve them", async () => {
   const gameId = "77777777-7777-7777-7777-777777777777";
   await complete("perechi", gameId, { locks: null });
 
@@ -216,7 +216,7 @@ test("exports and account-facing rows omit receipts; ordinary writes preserve th
   assert.deepEqual(receipts(), {});
 });
 
-test("a failed atomic write persists neither the score nor its receipt", async () => {
+void test("a failed atomic write persists neither the score nor its receipt", async () => {
   storage.setItem(SCORE_KEY, JSON.stringify({
     contexto: {
       best: null, played: 3, recent: [], completedNonDaily: true,
@@ -245,7 +245,7 @@ test("a failed atomic write persists neither the score nor its receipt", async (
   assert.deepEqual(receipts(), {});
 });
 
-test("unavailable browser storage never blocks terminal play", async () => {
+void test("unavailable browser storage never blocks terminal play", async () => {
   const unavailable = {
     getItem() { throw new Error("unavailable"); },
     setItem() { throw new Error("unavailable"); },

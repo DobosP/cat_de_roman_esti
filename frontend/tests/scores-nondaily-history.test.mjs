@@ -39,7 +39,7 @@ function lose(game, attempt) {
   scores.recordScore(game, 0, `pierdut ${attempt}`);
 }
 
-test("one or two normal losses keep the derived starter shelf", () => {
+void test("one or two normal losses keep the derived starter shelf", () => {
   assert.equal(scores.needsDerivedStarter("intrusul"), true);
   lose("intrusul", 1);
   assert.equal(scores.needsDerivedStarter("intrusul"), true);
@@ -51,7 +51,7 @@ test("one or two normal losses keep the derived starter shelf", () => {
   assert.equal(record.nonDailyWon, false);
 });
 
-test("one positive normal result graduates immediately", () => {
+void test("one positive normal result graduates immediately", () => {
   scores.recordScore("perechi", 100, "câștigat");
   lose("perechi", 2);
   assert.equal(scores.needsDerivedStarter("perechi"), false);
@@ -61,7 +61,7 @@ test("one positive normal result graduates immediately", () => {
   assert.equal(record.nonDailyWon, true);
 });
 
-test("three normal losses graduate without trapping a player on starters", () => {
+void test("three normal losses graduate without trapping a player on starters", () => {
   lose("intrusul", 1);
   lose("intrusul", 2);
   lose("intrusul", 3);
@@ -71,7 +71,7 @@ test("three normal losses graduate without trapping a player on starters", () =>
   assert.equal(scores.scoreBoard().intrusul.nonDailyCompletions, 3);
 });
 
-test("daily results never advance attempts or mastery", () => {
+void test("daily results never advance attempts or mastery", () => {
   for (let day = 1; day <= 4; day += 1) {
     scores.recordScore("perechi", day === 4 ? 1_000 : 0, `zilnic ${day}`, {
       daily: `2026-08-${String(day).padStart(2, "0")}`,
@@ -84,7 +84,7 @@ test("daily results never advance attempts or mastery", () => {
   assert.equal(scores.needsDerivedStarter("perechi"), true);
 });
 
-test("bounded progress survives the recent 50-entry window", () => {
+void test("bounded progress survives the recent 50-entry window", () => {
   lose("perechi", 1);
   lose("perechi", 2);
   lose("perechi", 3);
@@ -113,7 +113,7 @@ test("bounded progress survives the recent 50-entry window", () => {
   assert.equal(scores.needsDerivedStarter("intrusul"), false);
 });
 
-test("legacy history infers mastery without treating unknown completion as a win", () => {
+void test("legacy history infers mastery without treating unknown completion as a win", () => {
   storage.setItem(
     STORAGE_KEY,
     JSON.stringify({
@@ -152,7 +152,7 @@ test("legacy history infers mastery without treating unknown completion as a win
   assert.equal(scores.needsDerivedStarter("intrusul"), true);
 });
 
-test("imports merge bounded attempts by max and mastery by OR", () => {
+void test("imports merge bounded attempts by max and mastery by OR", () => {
   lose("perechi", 1);
 
   const importedLosses = {
@@ -196,7 +196,7 @@ test("imports merge bounded attempts by max and mastery by OR", () => {
   assert.equal(exported.games.perechi.nonDailyWon, true);
 });
 
-test("progress is capped and malformed storage defaults safely to starter", () => {
+void test("progress is capped and malformed storage defaults safely to starter", () => {
   storage.setItem(
     STORAGE_KEY,
     JSON.stringify({

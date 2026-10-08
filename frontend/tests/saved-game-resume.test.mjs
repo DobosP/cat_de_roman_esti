@@ -29,7 +29,7 @@ function subscribe(resume, events) {
   });
 }
 
-test("no saved id completes without loading or clearing storage", async () => {
+void test("no saved id completes without loading or clearing storage", async () => {
   let loads = 0;
   const { active, resume } = attempt({ id: null, load: async () => { loads += 1; } });
   const events = [];
@@ -41,7 +41,7 @@ test("no saved id completes without loading or clearing storage", async () => {
   assert.deepEqual(events, [["pending", false]]);
 });
 
-test("live and terminal saved games are adopted and remain remembered", async () => {
+void test("live and terminal saved games are adopted and remain remembered", async () => {
   for (const finished of [false, true]) {
     let loads = 0;
     const state = { finished, difficulty: "greu", board_category: "istorie" };
@@ -55,7 +55,7 @@ test("live and terminal saved games are adopted and remain remembered", async ()
   }
 });
 
-test("404 conditionally clears its ID while a transient failure retains it", async () => {
+void test("404 conditionally clears its ID while a transient failure retains it", async () => {
   const missing = Object.assign(new Error("expired"), { status: 404 });
   const expired = attempt({ load: async () => { throw missing; } });
   const expiredEvents = [];
@@ -74,7 +74,7 @@ test("404 conditionally clears its ID while a transient failure retains it", asy
   assert.deepEqual(transientEvents, [["pending", true], ["failed", offline], ["pending", false]]);
 });
 
-test("late success, 404, and transient outcomes cannot overwrite a newer pointer", async () => {
+void test("late success, 404, and transient outcomes cannot overwrite a newer pointer", async () => {
   for (const result of ["success", "missing", "failed"]) {
     let settle;
     const response = new Promise((resolve, reject) => { settle = result === "success" ? resolve : reject; });
@@ -90,7 +90,7 @@ test("late success, 404, and transient outcomes cannot overwrite a newer pointer
   }
 });
 
-test("a settled outcome is rechecked before delivery", async () => {
+void test("a settled outcome is rechecked before delivery", async () => {
   const { active, resume } = attempt({ load: async () => ({ finished: false }) });
   assert.equal((await resume.runOnce()).kind, "resumed");
   active.id = "game-2";
@@ -99,7 +99,7 @@ test("a settled outcome is rechecked before delivery", async () => {
   assert.deepEqual(events, [["pending", true], ["changed", true], ["pending", false]]);
 });
 
-test("StrictMode resubscribe shares one request and unmount suppresses delivery", async () => {
+void test("StrictMode resubscribe shares one request and unmount suppresses delivery", async () => {
   let resolveLoad; let loads = 0;
   const loaded = new Promise((resolve) => { resolveLoad = resolve; });
   const { resume } = attempt({ load: async () => { loads += 1; return loaded; } });
@@ -111,7 +111,7 @@ test("StrictMode resubscribe shares one request and unmount suppresses delivery"
   assert.deepEqual(second, [["pending", true], ["resumed", { finished: false }, { gameId: "game-1", terminal: false }], ["pending", false]]);
 });
 
-test("cancel before create prevents an old resume from clearing the new loading owner", async () => {
+void test("cancel before create prevents an old resume from clearing the new loading owner", async () => {
   let resolveLoad;
   const loaded = new Promise((resolve) => { resolveLoad = resolve; });
   const { resume } = attempt({ load: async () => loaded });
@@ -124,7 +124,7 @@ test("cancel before create prevents an old resume from clearing the new loading 
   assert.deepEqual(events, [["pending", true], ["create-pending", true]]);
 });
 
-test("unmounted terminal/transient retain their ID; unmounted 404 clears only its ID", async () => {
+void test("unmounted terminal/transient retain their ID; unmounted 404 clears only its ID", async () => {
   for (const result of ["terminal", "failed", "missing", "replaced-missing"]) {
     let settle;
     const loaded = new Promise((resolve, reject) => { settle = result === "terminal" ? resolve : reject; });
@@ -138,7 +138,7 @@ test("unmounted terminal/transient retain their ID; unmounted 404 clears only it
   }
 });
 
-test("a retry attempt snapshots the latest pointer and loads it once", async () => {
+void test("a retry attempt snapshots the latest pointer and loads it once", async () => {
   const active = savedPointer(); const loads = [];
   const load = async (id) => { loads.push(id); if (id === "game-1") throw new Error("offline"); return { finished: false }; };
   assert.equal((await attempt({ active, load }).resume.runOnce()).kind, "failed");

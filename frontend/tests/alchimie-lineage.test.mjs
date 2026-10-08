@@ -5,7 +5,7 @@ import test from "node:test";
 const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const screen = read("../src/screens/Alchimie.tsx");
 
-test("Alchimie derives a bounded newest-first journal from server inventory", () => {
+void test("Alchimie derives a bounded newest-first journal from server inventory", () => {
   assert.match(screen, /const REACTION_LOG_LIMIT = 12/);
   assert.match(screen, /item\.parents !== null/);
   assert.match(screen, /previous\?\.ingredientKey === ingredientKey/);
@@ -14,7 +14,7 @@ test("Alchimie derives a bounded newest-first journal from server inventory", ()
   assert.doesNotMatch(screen, /useState<Reaction/);
 });
 
-test("earned reaction history remains available inside closed game options", () => {
+void test("earned reaction history remains available inside closed game options", () => {
   assert.match(screen, /const \[menuOpen, setMenuOpen\] = useState\(false\)/);
   const menuStart = screen.indexOf('<details className="alchemy-menu"');
   const historyStart = screen.indexOf('<details className="alchemy-discoveries">');
@@ -30,7 +30,7 @@ test("earned reaction history remains available inside closed game options", () 
   );
 });
 
-test("journal results reuse the shared ingredient interaction and keep 44px targets", () => {
+void test("journal results reuse the shared ingredient interaction and keep 44px targets", () => {
   const start = screen.indexOf("function ReactionRow");
   const end = screen.indexOf("function Slot", start);
   assert.notEqual(start, -1);
@@ -50,7 +50,7 @@ test("journal results reuse the shared ingredient interaction and keep 44px targ
   assert.match(screen, /onSelect=\{toggle\}/);
 });
 
-test("accepted empty combines use one persistent feedback path", () => {
+void test("accepted empty combines use one persistent feedback path", () => {
   assert.match(
     screen,
     /let feedback = res\.message;[\s\S]*?recoverableEmpty && !res\.already_tried[\s\S]*?feedback \+= " Primul cuvânt rămâne ales\. Atinge alt partener\.";[\s\S]*?recoverableEmpty && res\.hint_available[\s\S]*?feedback \+= " Apasă „Indiciu” dacă te-ai blocat\.";[\s\S]*?setLastMessage\(feedback\)/,
@@ -65,7 +65,7 @@ test("accepted empty combines use one persistent feedback path", () => {
   assert.doesNotMatch(emptyBranch, /onToast/);
 });
 
-test("combine feedback has one nonterminal and one terminal announcement owner", () => {
+void test("combine feedback has one nonterminal and one terminal announcement owner", () => {
   assert.doesNotMatch(screen, /<NextMove/);
   assert.match(screen, /\{lastMessage && !won && \(/);
   assert.match(

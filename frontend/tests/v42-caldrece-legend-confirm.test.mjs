@@ -7,7 +7,7 @@ const api = read("../src/api/contexto.ts");
 const screen = read("../src/screens/CaldRece.tsx");
 const css = read("../src/styles/arcade.css");
 
-test("the cold half is split into six tiers everywhere the client renders them", () => {
+void test("the cold half is split into six tiers everywhere the client renders them", () => {
   const temperature = api.match(/export type Temperature =[\s\S]*?;/);
   assert.ok(temperature);
   for (const tier of ["Gasit", "Fierbinte", "Cald", "Caldut", "Rece", "Foarte rece", "Inghetat"]) {
@@ -32,7 +32,7 @@ test("the cold half is split into six tiers everywhere the client renders them",
   assert.match(screen, /"Foarte rece": "Foarte rece",/);
 });
 
-test("the rank direction is explained beside the input without a help action", () => {
+void test("the rank direction is explained beside the input without a help action", () => {
   const legend = screen.match(/<p id="contexto-rank-guide"[\s\S]*?<\/p>/);
   assert.ok(legend);
   assert.match(legend[0], /Un număr mai mic = mai aproape\./);
@@ -42,7 +42,7 @@ test("the rank direction is explained beside the input without a help action", (
   assert.ok(screen.indexOf('id="contexto-rank-guide"') < screen.indexOf('id="contexto-guess-list"'));
 });
 
-test("a fuzzy correction is offered as an explicit chip and only then costs an attempt", () => {
+void test("a fuzzy correction is offered as an explicit chip and only then costs an attempt", () => {
   const rejected = api.match(/export interface GuessRejected[\s\S]*?\n}/);
   assert.ok(rejected);
   assert.match(rejected[0], /needs_confirmation\?: true/);
@@ -69,7 +69,7 @@ test("a fuzzy correction is offered as an explicit chip and only then costs an a
   assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.roedu-btn,[\s\S]*?min-height: 44px/);
 });
 
-test("the typed text survives a confirmation request so it stays correctable", () => {
+void test("the typed text survives a confirmation request so it stays correctable", () => {
   // setText("") runs only on the accepted branch, after the !res.ok early return.
   const start = screen.indexOf("const handleGuess = useCallback");
   const end = screen.indexOf("const handleClue = useCallback", start);

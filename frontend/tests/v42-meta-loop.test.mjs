@@ -38,13 +38,13 @@ test.beforeEach(() => storage.clear());
 
 // ------------------------------------------------------------------ (a) local daily streak
 
-test("same-day recording is idempotent", () => {
+void test("same-day recording is idempotent", () => {
   scores.recordScore("alchimie", 100, "azi 1", { daily: "2026-07-20" });
   scores.recordScore("intrusul", 0, "azi 2", { daily: "2026-07-20" });
   assert.equal(scores.getDailyStreak("2026-07-20"), 1);
 });
 
-test("a consecutive calendar day increments the streak", () => {
+void test("a consecutive calendar day increments the streak", () => {
   scores.recordScore("alchimie", 100, "ziua 1", { daily: "2026-07-20" });
   scores.recordScore("perechi", 0, "ziua 2", { daily: "2026-07-21" });
   assert.equal(scores.getDailyStreak("2026-07-21"), 2);
@@ -52,7 +52,7 @@ test("a consecutive calendar day increments the streak", () => {
   assert.equal(scores.getDailyStreak("2026-07-22"), 2);
 });
 
-test("a gap resets the streak to 1", () => {
+void test("a gap resets the streak to 1", () => {
   scores.recordScore("alchimie", 100, "ziua 1", { daily: "2026-07-20" });
   scores.recordScore("perechi", 0, "ziua 2", { daily: "2026-07-21" });
   scores.recordScore("conexiuni", 0, "revenire", { daily: "2026-07-25" });
@@ -61,12 +61,12 @@ test("a gap resets the streak to 1", () => {
   assert.equal(scores.getDailyStreak("2026-07-27"), 0);
 });
 
-test("zero-score daily completions still count toward the streak", () => {
+void test("zero-score daily completions still count toward the streak", () => {
   scores.recordScore("lant", 0, "pierdut", { daily: "2026-07-20" });
   assert.equal(scores.getDailyStreak("2026-07-20"), 1);
 });
 
-test("malformed or absent streak payloads never throw and recompute conservatively", () => {
+void test("malformed or absent streak payloads never throw and recompute conservatively", () => {
   assert.equal(scores.getDailyStreak("2026-07-20"), 0);
 
   storage.setItem(STORAGE_KEY, "{not json");
@@ -101,7 +101,7 @@ test("malformed or absent streak payloads never throw and recompute conservative
   assert.equal(scores.getDailyStreak("2026-07-20"), 0);
 });
 
-test("importing history never overwrites the existing local streak", () => {
+void test("importing history never overwrites the existing local streak", () => {
   scores.recordScore("alchimie", 100, "ziua 1", { daily: "2026-07-20" });
   scores.recordScore("perechi", 0, "ziua 2", { daily: "2026-07-21" });
   assert.equal(scores.getDailyStreak("2026-07-21"), 2);
@@ -114,7 +114,7 @@ test("importing history never overwrites the existing local streak", () => {
   assert.equal(scores.getDailyStreak("2026-07-21"), 2);
 });
 
-test("imported daily rows cannot create a streak on a fresh device", () => {
+void test("imported daily rows cannot create a streak on a fresh device", () => {
   scores.importScores(
     JSON.stringify({
       games: {
@@ -134,19 +134,19 @@ test("imported daily rows cannot create a streak on a fresh device", () => {
   });
 });
 
-test("export leaves the device-local streak out of portable history", () => {
+void test("export leaves the device-local streak out of portable history", () => {
   scores.recordScore("alchimie", 10, "local", { daily: "2026-07-20" });
   const exported = JSON.parse(scores.exportScores());
   assert.equal(exported.games._streak, undefined);
 });
 
-test("clearing scores also clears the local streak", () => {
+void test("clearing scores also clears the local streak", () => {
   scores.recordScore("alchimie", 100, "ziua 1", { daily: "2026-07-20" });
   scores.clearScores();
   assert.equal(scores.getDailyStreak("2026-07-20"), 0);
 });
 
-test("Home shows the fire streak chip only from one day, with correct Romanian pluralization", () => {
+void test("Home shows the fire streak chip only from one day, with correct Romanian pluralization", () => {
   assert.match(homeSource, /getDailyStreak\(today\)/);
   assert.match(homeSource, /dailyStreak >= 1/);
   assert.match(
@@ -157,7 +157,7 @@ test("Home shows the fire streak chip only from one day, with correct Romanian p
 
 // ------------------------------------------------------------------ (b) diploma de român
 
-test("the diploma stamp renders only once the circuit is 6/6", () => {
+void test("the diploma stamp renders only once the circuit is 6/6", () => {
   assert.match(homeSource, /circuit\.completed === 6 &&/);
   const diplomaBlock = homeSource.slice(
     homeSource.indexOf("circuit.completed === 6 &&"),
@@ -169,7 +169,7 @@ test("the diploma stamp renders only once the circuit is 6/6", () => {
   assert.match(diplomaBlock, /handleDiplomaShare/);
 });
 
-test("the diploma share text matches the specified copy and reuses the existing share/copy helpers", () => {
+void test("the diploma share text matches the specified copy and reuses the existing share/copy helpers", () => {
   assert.match(
     homeSource,
     /Cât de român ești\? Circuit 6\/6 azi · \$\{circuit\.total\} pct · Joacă: \$\{appUrl\(\)\}`/,
@@ -180,7 +180,7 @@ test("the diploma share text matches the specified copy and reuses the existing 
 
 // ------------------------------------------------------------------ (c) starter chip
 
-test("the starter chip appears on Intrusul/Perechi cards only pre-graduation", () => {
+void test("the starter chip appears on Intrusul/Perechi cards only pre-graduation", () => {
   assert.match(
     homeSource,
     /isStarterGame\(g\.key\) && needsDerivedStarter\(g\.key\) && \(/,
@@ -194,7 +194,7 @@ test("the starter chip appears on Intrusul/Perechi cards only pre-graduation", (
 
 // ------------------------------------------------------------------ (d) value prop tagline
 
-test("the hero tagline names the cultural range and keeps the h1 untouched", () => {
+void test("the hero tagline names the cultural range and keeps the h1 untouched", () => {
   assert.match(
     homeSource,
     /De la Ștefan cel Mare la Las Fierbinți: șase jocuri scurte din cultura și\s*viața românească\./,
@@ -205,7 +205,7 @@ test("the hero tagline names the cultural range and keeps the h1 untouched", () 
 
 // ------------------------------------------------------------------ CSS anchor
 
-test("meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px", () => {
+void test("meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px", () => {
   assert.match(cssSource, /V42 section: meta-loop/);
   assert.match(cssSource, /@media \(pointer: coarse\)[\s\S]*?\.roedu-btn,[\s\S]*?min-height: 44px/);
   assert.match(
@@ -214,7 +214,7 @@ test("meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44
   );
 });
 
-test("optional account controls stay outside the initial bundle graph", () => {
+void test("optional account controls stay outside the initial bundle graph", () => {
   assert.match(appSource, /const AccountBar = lazy\(\(\) => import\("\.\/components\/AccountBar"\)\)/);
   assert.doesNotMatch(appSource, /import AccountBar from/);
 });
