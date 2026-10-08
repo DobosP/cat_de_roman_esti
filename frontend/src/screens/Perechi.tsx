@@ -347,7 +347,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     [actionOwner, active, mayAdoptAction, onToast, queueFocusAfterUpdate],
   );
 
-  const retryActionSync = useCallback(async () => {
+  const retryActionSync = useCallback(async (retryOrigin: HTMLButtonElement) => {
     if (!isPresent || !state || busy || !actionSync) return;
     if (actionSync.kind === "changed") {
       actionOwner.invalidate();
@@ -367,6 +367,17 @@ export default function Perechi({ onExit, onToast }: Props) {
       actionOwner.finish(ticket);
       setActionSync({ ...actionSync, kind: "changed" });
       return;
+    }
+    const focused = focusedTileBeforeMutation.current;
+    if (action === "match" && focused) {
+      // A deliberate retry continues the same tile claim from this control.
+      // Moving elsewhere before or during the read still supersedes the claim.
+      if (focusStillOwned(retryOrigin)) {
+        focusedTileBeforeMutation.current = { ...focused, origin: retryOrigin };
+      } else {
+        pendingFocus.current = null;
+        focusedTileBeforeMutation.current = null;
+      }
     }
     setBusy(true);
     try {
@@ -561,7 +572,7 @@ export default function Perechi({ onExit, onToast }: Props) {
             <span>{actionSync.kind === "changed"
               ? "Încarcă jocul curent pentru a continua."
               : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă alegere sau de un indiciu."}</span>
-            <Button type="button" onClick={() => void retryActionSync()} disabled={busy || !isPresent}>
+            <Button type="button" onClick={(event) => void retryActionSync(event.currentTarget)} disabled={busy || !isPresent}>
               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
             </Button>
           </div>
