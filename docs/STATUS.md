@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-08 — Source6/Source7 facts remain below; GUI source-only Windows checkpoint is NOT newly runtime-qualified (no handover tests). [Pickup](GUI_MIGRATION_HANDOFF.md).
+Last verified: 2026-10-08 — Source6/Source7 facts remain below; GUI source-only Windows checkpoint is NOT newly runtime-qualified (no handover tests). [Pickup](GUI_MIGRATION_HANDOFF.md). V1.7 [tocător R2 research](reviews/v1-7-recognizable-content/tocator-sense-and-migration-r2.md): manual-chopper sense excluded, bread-cutting evidence/migration cases added; pool1researched/4held/1selected, no installed growth. Loop paused; independent factual/quality research accepted, [source/JSON/whitespace/native docs PASS](reviews/v1-7-recognizable-content/tocator-verification-r2.json).
 
 - **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.

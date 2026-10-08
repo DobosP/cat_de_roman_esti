@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "valid_until": "Research/report/pool/protected source or required gate implementation changes.",
+  "date": "2026-10-08",
+  "task_base_commit": "ff7fb05d8cb80518833f10ca410e2581ba0b4725",
+  "scope": "Documentation and source-research verification only. No game handler/prospective candidate/native gameplay/Source7 transaction or full release qualification.",
+  "source_invariants": {
+    "schema_version": 1,
+    "valid_until": "Candidate/report bytes, installed data, checked ownership or task scope changes.",
+    "time_utc": "2026-10-08T08:49:48.621445+00:00",
+    "scope": "source-only research invariants; no public handler, prospective/native play or adoption execution",
+    "outcome": "PASS",
+    "counts": {
+      "records": 6,
+      "researched": 1,
+      "held": 4,
+      "selected": 1,
+      "integrated": 0,
+      "ready_for_refinement": 0
+    },
+    "unchanged_other_record_raw_spans": {
+      "i05-lex-01": "8abe83f2df2254a885b51b4aa375be0a0341e73bb6ba84fcec295e3508eca4ce",
+      "v17-world-compot": "f9d4e63d1ba78c850898c99e6a93642f15ef395f6d759b5781828b326faf03d8",
+      "v17-world-sandvis": "de76eea2186d2189df4b80ed5d6a484be7e34410639f375dc5b5b935adc550ee",
+      "v17-link-scrisoare-plic": "d511f5b7097dee54247d370d4ba9b0e7544deae85483d9a8439395ca0c5d8d6b",
+      "v17-link-busola-nord": "86cbbf545766b681f92b8d56767c033dcc4f73cd5a229a38e4b19064fe88209f"
+    },
+    "all_existing_report_hashes_exact": true,
+    "protected_readset_exact": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+      "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+      "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+      "go-backend/internal/contexto/service.go": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4",
+      "docs/reviews/v1-7-recognizable-content/primary-object-link-sources-r1.json": "13c0613c19efb1dbf8693b3eaa0c2bc833513e6b401ac6f8496cba387975debd",
+      "docs/reviews/v1-7-recognizable-content/identity-deck-screen-r1.json": "629fdc1bf1c31b3ac54fe5c72f2f872ee86b90e1a3fbba641b9343b8f4b4663d",
+      "docs/reviews/v1-7-recognizable-content/windows-source-checkpoint-handoff-r1.json": "808ac4e130dafa4d163e2d8ca3a45980457712c7031a6ae5021cc3993cff9bab"
+    },
+    "current_projection_row_exact": true,
+    "distinct_hypothesized_neighbors": 4,
+    "same_category_hypotheses": 3,
+    "approved_new_edges": 0,
+    "status_lines": 120,
+    "no_changes_outside_owned_docs": true,
+    "pool_sha256": "300e17a08cc8ba748da138278201d3b195c65e59e60224a0fe2da0852542bc17",
+    "report_sha256": "995ac321b7fac995ef515a047ea9046da128b5df652137bd546dc0f1041343bd",
+    "analysis_sha256": "9b8bce60a6861bb6e3f77ea45ef01fec3de867e177fe1c4a29b9aab12ebe9685"
+  },
+  "independent_reviews_sha256": "f3e66f27185b1bfd0ac829e75122a59bfa227c112c518b949ac257752ad62030",
+  "checks": {
+    "source_json_invariants": "PASS: five other records raw-byte exact, all old report hashes exact, seven protected paths and Source6 KG/bundle exact, current projection and counts exact, only owned docs changed",
+    "git_diff_check": "PASS",
+    "native_docs": {
+      "command": "task scratch/cat-doc-check.exe --root task worktree",
+      "exit_code": 0,
+      "report": {
+        "files": 59,
+        "dead_links": [],
+        "stale_terms": [],
+        "retired_verbs": [],
+        "orphans": [],
+        "budgets": []
+      }
+    }
+  },
+  "documentation_tool": {
+    "existing_sdk_version": "go1.27.1 linux/amd64",
+    "existing_sdk_binary_sha256": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624",
+    "checker_binary_sha256": "ef10dd674639a612e95fb17446c20bd3c4bffd7d8c592c4849f195e8afc936af",
+    "build_scope": "Unchanged native doccheck source, GOOS=windows/GOARCH=amd64/CGO0/GOMAXPROCS2/build-p2/buildvcsfalse, task-owned cache/tmp; GOPROXYoff/GOSUMDBoff/GOTOOLCHAINlocal; one successful120second-bounded existing-WSL attempt. No installation/download or environment repair.",
+    "resource_limit": "Compiler/group RSS unmeasured; no full native resource qualification is claimed."
+  },
+  "final_source_sample": {
+    "time_utc": "2026-10-08T08:54:44.052473+00:00",
+    "free_disk_bytes": 26539773952,
+    "available_physical_bytes": 33727234048,
+    "task_scratch_bytes": 51888430,
+    "remaining_disk_memory_floors_met": true,
+    "scratch_growth_below_1GiB": true
+  },
+  "candidate_status": {
+    "record": "v17-house-tocator",
+    "revision": 2,
+    "state": "researched",
+    "approved_graph_edges": 0,
+    "installed_additions": 0,
+    "migration_option_selected": false,
+    "new_target_selected": false
+  }
+}

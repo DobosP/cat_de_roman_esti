@@ -15,7 +15,9 @@
     "identity-deck-screen-r1.json": "629fdc1bf1c31b3ac54fe5c72f2f872ee86b90e1a3fbba641b9343b8f4b4663d",
     "primary-recipe-sources-r1.json": "f27d0ffdf9a3f99e97efa2713cd571c59d881864de45f279c6f068773a08b2bf",
     "primary-object-link-sources-r1.json": "13c0613c19efb1dbf8693b3eaa0c2bc833513e6b401ac6f8496cba387975debd",
-    "primary-leafa-refresh-r1.json": "f8b9106b73cfe05763e0e6a1a9e5b71828ba4ce2cda2975557ebed88bd0bc71f"
+    "primary-leafa-refresh-r1.json": "f8b9106b73cfe05763e0e6a1a9e5b71828ba4ce2cda2975557ebed88bd0bc71f",
+    "tocator-source-analysis-r2.json": "9b8bce60a6861bb6e3f77ea45ef01fec3de867e177fe1c4a29b9aab12ebe9685",
+    "tocator-sense-and-migration-r2.md": "995ac321b7fac995ef515a047ea9046da128b5df652137bd546dc0f1041343bd"
   },
   "records": [
     {
@@ -731,19 +733,21 @@
     },
     {
       "id": "v17-house-tocator",
-      "revision": 1,
+      "revision": 2,
       "state": "researched",
       "origin_track": "discovery",
       "baseline_commit": "a34a6ade957436d89b6c9b1424babf763ad1f9d1",
-      "checked_on": "2026-10-07",
-      "label_ro": "Tocător de bucătărie",
-      "sense": "Physical chopping board, excluding electric food chopper/appliance and other meanings",
-      "category": "household/culinary/orientation research",
+      "checked_on": "2026-10-08",
+      "label_ro": "Tocător (placă pentru tăiat alimente)",
+      "sense": "Passive flat food-support surface used with a separate knife; exclude integral bowl/blade choppers whether hand-powered or electric. Editorial sense, no native forms approved.",
+      "category": "gastronomie hypothesis; uninstalled",
       "novelty": "new_shared_concept",
       "identity_checks": {
         "report": "docs/reviews/v1-7-recognizable-content/identity-deck-screen-r1.json",
         "sha256": "629fdc1bf1c31b3ac54fe5c72f2f872ee86b90e1a3fbba641b9343b8f4b4663d",
-        "note": "Base sealed index and separate sealed/reference projection namespaces checked; no base-index absence establishes actual rejected input."
+        "note": "Base sealed index and separate sealed/reference projection namespaces checked; no base-index absence establishes actual rejected input.",
+        "current_source_analysis": "docs/reviews/v1-7-recognizable-content/tocator-source-analysis-r2.json",
+        "current_source_analysis_sha256": "9b8bce60a6861bb6e3f77ea45ef01fec3de867e177fe1c4a29b9aab12ebe9685"
       },
       "player_benefit": "Potential shared-KG representation of an already exposed guess-only physical-board descriptor with truthful specific links; no new global word/world exposure or warmer-guess promise.",
       "games": [
@@ -757,6 +761,12 @@
           "claim_specific_report": "primary-object-link-sources-r1.json",
           "sha256": "13c0613c19efb1dbf8693b3eaa0c2bc833513e6b401ac6f8496cba387975debd",
           "claim": "Use exact scoped facts/counterexamples in this frozen report; no strength/direction/candidate approved."
+        },
+        {
+          "evidence_state": "research_only_unapproved_relations",
+          "claim_specific_report": "tocator-sense-and-migration-r2.md",
+          "sha256": "995ac321b7fac995ef515a047ea9046da128b5df652137bd546dc0f1041343bd",
+          "claim": "Knife use, vegetable preparation, explicit bread cutting, and qualified some-oak-models material hypothesis; four distinct owners/three same-category hypotheses, zero approved edges and no target5incoming proof."
         }
       ],
       "sources": [
@@ -814,28 +824,81 @@
           "supports": "Tocător names a powered household food chopper with a bowl and cutting blades.",
           "scope_limits": "Bare tocător and even household kitchen context do not uniquely identify a chopping board. Person/adjectival senses were not independently verified in an original Academy semantic entry; they remain unapproved counter-sense leads.",
           "reuse_license": "No open redistribution license verified. Original factual paraphrase and URL only; no source text, images, recipe directions or dictionary data copied."
+        },
+        {
+          "id": "tefal-manual-counter-sense",
+          "url": "https://www.tefal.ro/articole-de-bucatarie/tocatoare-manuale",
+          "publisher": "Tefal",
+          "kind": "primary manufacturer or institutional teaching source",
+          "accessed_on": "2026-10-08",
+          "access": "Manufacturer category product titles: retrieved lines140/153.",
+          "supports": "Manual bowl/blade choppers also named tocatoare; manual/non-electric does not identify a flat board.",
+          "scope_limits": "See claim-specific report; no alias, edge, rank, human recognition or adoption proof.",
+          "reuse_license": "No open redistribution license verified; original factual paraphrase and URL only."
+        },
+        {
+          "id": "ikea-knife-care-refresh",
+          "url": "https://www.ikea.com/ro/ro/rooms/dining/cum-sa-iti-ingrijesti-cutitul-pub0fed03ff/",
+          "publisher": "IKEA of Sweden",
+          "kind": "primary manufacturer or institutional teaching source",
+          "accessed_on": "2026-10-08",
+          "access": "Opened HTML board section lines32-34.",
+          "supports": "Knife and wood/plastic cutting-surface function; no universal wooden composition.",
+          "scope_limits": "See claim-specific report; no alias, edge, rank, human recognition or adoption proof.",
+          "reuse_license": "No open redistribution license verified; original factual paraphrase and URL only."
+        },
+        {
+          "id": "ikea-board-bread",
+          "url": "https://www.ikea.com/ro/ro/p/blandsallad-tocator-bambus-20514027/",
+          "publisher": "IKEA of Sweden",
+          "kind": "primary manufacturer or institutional teaching source",
+          "accessed_on": "2026-10-08",
+          "access": "Opened HTML product-details text lines86-91.",
+          "supports": "This particular board cuts/serves bread; bamboo is not tree-Lemn, oil identity is unverified; do not map it to existing culinary Ulei.",
+          "scope_limits": "See claim-specific report; no alias, edge, rank, human recognition or adoption proof.",
+          "reuse_license": "No open redistribution license verified; original factual paraphrase and URL only."
+        },
+        {
+          "id": "isj-kitchen-terminology",
+          "url": "https://www.isjcta.ro/wp-content/uploads/2021/02/Educatie-tehnologica-si-aplicatii-practice_clasa-a-V-a_material-tip-text_Lectia-Buc%C4%83t%C4%83riai_Autor-Cad%C3%A2r-Emilia-Scoala-Gimnaziala-nr.30-Gheorghe-%C8%9Ai%C8%9Beica-Constan%C8%9Ba.pdf",
+          "publisher": "ISJ Constanta",
+          "kind": "primary manufacturer or institutional teaching source",
+          "accessed_on": "2026-10-08",
+          "access": "Independent researcher opened PDF, page3/zero-based2 utensil list.",
+          "supports": "Planșeta/tocătorul culinary terms listed separately; no synonymy inferred.",
+          "scope_limits": "See claim-specific report; no alias, edge, rank, human recognition or adoption proof.",
+          "reuse_license": "No open redistribution license verified; original factual paraphrase and URL only."
         }
       ],
       "recognition": "Original Romanian publisher/product exposure documented; no human recognition or enjoyment measurement.",
-      "play_sketches": "Hypothesis only; no prospective/native ordinary play run.",
+      "play_sketches": "Unexecuted culinary route and board-guess sketches plus ownership/attempt/win/privacy/history acceptance cases in tocator-sense-and-migration-r2.md; no Alchimie recipe.",
       "risks": [
         "Existing sealed Contexto projection ctxp_7687de8a10648bdf4e3c explicitly anchored Cuțit/penalty0; no silent duplicate or owner migration",
         "Food processor/common headword ambiguity",
         "Optional cheese serving may be too generic or cause competing pairings",
         "New shared node requires honest4incident/2samecategory; no target5incoming relaxation",
-        "Compare current vs prospective ranks/feedback/selection/recipes and historical projection identity"
+        "Compare current vs prospective ranks/feedback/selection/recipes and historical projection identity",
+        "Manual/non-electric choppers also use the headword; planșetă synonymy unverified",
+        "Retaining projection bytes while adding topology can still alter old ranks",
+        "Native forms take precedence; keeping a shadowed row violates collision invariant",
+        "Four incident hypotheses cannot establish five actual incoming target neighbors; source rows have no approved direction/weight"
       ],
       "dependencies": [
         "Exact factual and independent quality/prospective adoption gates",
         "Current Source6 all affected games/fuzzy/feedback/history/private/session/source/authority effects"
       ],
-      "decision": "Four distinct source hypotheses exist: knife use, some wooden models, vegetable cutting, optional cheese serving. Source count/category fit is not editorial4/2 or adoption approval.",
-      "next_action": "Investigate exact current native proxy behavior, label ambiguity and explicit scoped proxy migration/retirement; independently critique four sourced relations and actual normal play before selection.",
+      "decision": "Remain researched. Physical-board sense tightened; explicit bread-cutting support replaces optional-cheese padding in the preferred four-relation hypothesis. No forms, migration option, target, graph/World recipe or adoption selected.",
+      "next_action": "Independently judge the four scoped relations and recognition; freeze one explicit board spelling/identity proposal. Obtain a genuinely useful fifth incoming predecessor before any target proposal, then run bounded normal-play/ownership/history and all affected installed gates via supported transactions.",
       "history": [
         {
           "date": "2026-10-07",
           "author": "/root",
           "action": "Six-lead bounded source screen, no selected snapshot/module/Source7/game data."
+        },
+        {
+          "date": "2026-10-08",
+          "author": "/root",
+          "action": "R2 bounded primary-source and installed-source analysis; added hand-powered counter-sense, explicit bread-cutting relation and retain/retire acceptance matrix. R1 evidence, all other records, selected leafa/Source7/GUI remain exact."
         }
       ],
       "existing_projection": {

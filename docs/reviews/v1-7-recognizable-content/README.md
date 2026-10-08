@@ -2,6 +2,10 @@
 
 Valid until: selected inputs, qualified baseline or human steering change — recheck before installation.
 
+## Current bounded research continuation
+
+Human steering on2026-10-08 prioritizes V1.7 vocabulary/content research and stops session/heartbeat loops. The isolated research branch starts at ff7fb05; installed Source6 and the archived leafă Source7 checkpoint remain exact. [Tocător R2](tocator-sense-and-migration-r2.md) and its [source analysis](tocator-source-analysis-r2.json) resolve the manual-chopper counter-sense, add explicit bread-cutting evidence and compare intentional projection migration options. Only that record advances to revision2/researched; all other records and selected snapshots remain unchanged. No native play/graph/target/adoption or GUI change is claimed. [Independent factual/quality reviews](tocator-independent-reviews-r2.json) accept research only, preserve the first factual correction request and retain route-value/material-link cautions before refinement. [Source/JSON/whitespace and native documentation gates](tocator-verification-r2.json) pass. Research remains uninstalled; no migration option or target is selected.
+
 This bounded wave starts from fully qualified and published V1.6 main `dccd401b390d9d09244b8469f5f0ebcffa190518`.
 [V1.6 landing](../v1-6-everyday-inputs/landing.json) and [assembled acceptance](../v1-6-everyday-inputs/assembled-review.json) retain exact evidence.
 V1.6 added two genuine synonym families/two singular forms; zero concepts, directed links, targets or rounds.
