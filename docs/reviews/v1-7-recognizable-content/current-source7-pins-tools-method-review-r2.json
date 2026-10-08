@@ -1,0 +1,229 @@
+{
+  "schema": "v1-7-isolated-reviewed-pins-and-fresh-tools-method-review-v2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T18:41:46.762713+00:00",
+  "verdict": "accept_exact_R2_staged_pin_metadata_then_separate_fresh_offline_tools_scope_subject_to_conditions",
+  "source_admission_sha256": "7786ee90d318ebb45833ebd37bcab3d27fd6061e84f27150efa244beb9637db7",
+  "source_cutoff_utc": "2026-10-08T18:52:44.948145+00:00",
+  "source_deadline_utc": "2026-10-08T18:55:44.948145+00:00",
+  "source_worker_whole_RSS_measured": false,
+  "dependencies_sha256": {
+    "current-source7-pins-tools-source-admission-r1.json": "7786ee90d318ebb45833ebd37bcab3d27fd6061e84f27150efa244beb9637db7",
+    "current-source7-pins-tools-plan-r2.json": "3c52bffeb9c6422ec0ce04b14491a536f859b21374c5e86470107cd7c4d9de64",
+    "current-source7-pins-tools-readset-r2.json": "ca1bc51ccb9c5bcbe926a46b37e80f15e7c898410b424f6b64c9fddcd2f02319",
+    "current-source7-pins-tools-method-r2.py.txt": "0f30688914e8f54e2e3f6b30afe3635c0ad99b93421b1e6f0f3587c2b2a738e8",
+    "current-source7-pins-tools-change-manifest-r1.json": "6ba7d67e7c74cd6b7a69b2844c8fed82aefc8caba4ad211d1fde3e3617d9f17b",
+    "current-source7-pins-tools-go-build-after-r1.txt": "60d9c5262287d52cf4e2d97fee056f1462cc3c554dd15cfb0ab267a96304dd61",
+    "current-source7-pins-tools-python-derived-after-r1.txt": "f79956b0e88523e2d79b916daf7b04747d6310cb62291644feeb6bc1c0f44be1",
+    "current-source7-pins-tools-python-quick-after-r1.txt": "be3a07e7e32f5b97dfb84a45f0ff4fb75e750fa61b86f129dbb805e85a1751c6",
+    "current-source7-pins-tools-plan-r1.json": "2ad019267f572c7fac0560a20951224382898f569c0e29d11d5ececabadecef8",
+    "current-source7-pins-tools-readset-r1.json": "5691963035c99bf38302148e8f1f3607e3e9f5cdb3b25eccc3b56a1f88f81653",
+    "current-source7-pins-tools-method-r1.py.txt": "049154372a06cf76b1e295f96a2f571f9b6fdd0a8036f0c3c24fdc493bd04e55",
+    "current-source7-quick-transition-actual-review-r1.json": "00d7608bde8a5afaa1f61e3fe1035988f41e4ab5caeeefc327055a41dfe2c9ef",
+    "current-source7-help-evidence-repair-mapping-r1.json": "07f5f17b5e98efebfe64f4301b7414a49534f8fe9f49acf81d9b0aa7868bed6e",
+    "current-source7-help-evidence-repair-review-r1.json": "c90fc5628a2bbceee31eef9ab538341bf266688737dd40a2dc067954da7d66d2"
+  },
+  "precedent_sha256": {
+    "docs/reviews/v1-6-everyday-inputs/source6-reviewed-pin-transition-r1.json": "3f75c09a88175f9e660d3e1c872eab00239adf53d201fec17f2234a7ca3aef8e",
+    "docs/reviews/v1-6-everyday-inputs/source6-reviewed-pin-review-r1.json": "194ede068d5f09fad12f066e89931befaca5d07b88872bfd55ef8aec00755e9a",
+    "docs/adr/0176-preserve-crlf-source-transport.md": "ed575cc8bf6075323a73cdb4a0413c58165685478629797fd61371f46e894abc"
+  },
+  "inspected_guard_implementation_sha256": {
+    "go-backend/internal/contentbuild/build.go": "209f99fcda54dc7f2af2affb8bd188605db4e738c32fb1330f8c1fc3216f6cd5",
+    "go-backend/internal/contentbuild/world.go": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+    "go-backend/internal/contentrails/extensions.go": "c3c5166b6b6975128da9884c70921c7552ce83140575f5b5e90106dffa6c07af",
+    "go-backend/cmd/cat-content/main.go": "58a3a29310b771e27ac4f05bfb6ed0ad9cba6fca646ad9916d93071e64fdd722",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "3852e468567e680d66258a5d1b326bac134c7fcc15ed14b8c4ce45e9e51fe7a0",
+    "cat_de_roman_esti/wordgames/quick_catalog.py": "00a5da384b74d856e16955dd02e515b23902aa754ea13bd673a46219843e4a2d"
+  },
+  "execution_performed": false,
+  "exact_pin_scope": {
+    "target_root": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1",
+    "targets": {
+      "cat_de_roman_esti/wordgames/derived_catalog.py": {
+        "CRLF_count": 0,
+        "after_bytes": 25777,
+        "after_sha256": "f79956b0e88523e2d79b916daf7b04747d6310cb62291644feeb6bc1c0f44be1",
+        "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-python-derived-after-r1.txt",
+        "before_sha256": "3852e468567e680d66258a5d1b326bac134c7fcc15ed14b8c4ce45e9e51fe7a0",
+        "bytes": 25777,
+        "full_byte_inverse_exact": true,
+        "mode": 436,
+        "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/wordgames/derived_catalog.py",
+        "raw_unified_diff": "--- a/cat_de_roman_esti/wordgames/derived_catalog.py\n+++ b/cat_de_roman_esti/wordgames/derived_catalog.py\n@@ -39,7 +39,7 @@\n _PREFERRED_STANDARD_SCORE = 55\n # Updated only with a reviewed, generator-produced bundled artifact.\n DEFAULT_DERIVED_CATALOG_SHA256 = (\n-    \"fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a\"\n+    \"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9\"\n )\n \n _META_FIELDS = {\n",
+        "substitutions": [
+          {
+            "new": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+            "old": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+          }
+        ]
+      },
+      "cat_de_roman_esti/wordgames/quick_catalog.py": {
+        "CRLF_count": 0,
+        "after_bytes": 11253,
+        "after_sha256": "be3a07e7e32f5b97dfb84a45f0ff4fb75e750fa61b86f129dbb805e85a1751c6",
+        "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-python-quick-after-r1.txt",
+        "before_sha256": "00a5da384b74d856e16955dd02e515b23902aa754ea13bd673a46219843e4a2d",
+        "bytes": 11253,
+        "full_byte_inverse_exact": true,
+        "mode": 436,
+        "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/wordgames/quick_catalog.py",
+        "raw_unified_diff": "--- a/cat_de_roman_esti/wordgames/quick_catalog.py\n+++ b/cat_de_roman_esti/wordgames/quick_catalog.py\n@@ -32,7 +32,7 @@\n from .service import get_service\n \n CATALOG_PATH = Path(__file__).resolve().parents[1] / \"fixtures/quick_games_v92.json\"\n-CATALOG_SHA256 = \"0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345\"\n+CATALOG_SHA256 = \"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c\"\n MAX_BOARDS = 256\n MAX_BYTES = 2 * 1024 * 1024\n \n",
+        "substitutions": [
+          {
+            "new": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+            "old": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345"
+          }
+        ]
+      },
+      "go-backend/internal/contentbuild/build.go": {
+        "CRLF_count": 0,
+        "after_bytes": 12306,
+        "after_sha256": "60d9c5262287d52cf4e2d97fee056f1462cc3c554dd15cfb0ab267a96304dd61",
+        "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-go-build-after-r1.txt",
+        "before_sha256": "209f99fcda54dc7f2af2affb8bd188605db4e738c32fb1330f8c1fc3216f6cd5",
+        "bytes": 12306,
+        "full_byte_inverse_exact": true,
+        "mode": 436,
+        "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend/internal/contentbuild/build.go",
+        "raw_unified_diff": "--- a/go-backend/internal/contentbuild/build.go\n+++ b/go-backend/internal/contentbuild/build.go\n@@ -16,7 +16,7 @@\n \n // These are the three review-authority pins retained from the former native\n // exporter. New catalog/reserve versions require an explicitly reviewed pin update.\n-var reviewedPins = map[string]string{\"derived_catalog_v38.json\": \"fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a\", \"quick_games_v92.json\": \"0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345\", \"release_reserve_v1.json\": \"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7\"}\n+var reviewedPins = map[string]string{\"derived_catalog_v38.json\": \"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9\", \"quick_games_v92.json\": \"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c\", \"release_reserve_v1.json\": \"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7\"}\n \n const RubricSHA256 = \"3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101\"\n \n",
+        "substitutions": [
+          {
+            "new": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+            "old": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+          },
+          {
+            "new": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+            "old": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345"
+          }
+        ]
+      }
+    },
+    "literal_substitutions": 4,
+    "files": 3,
+    "each_current_stage_preimage_equals_liveR_bytes": true,
+    "every_afterimage_exact_byte_inverse_recovered": true,
+    "file_lengths_modes_LF_counts_preserved": true,
+    "unchanged_logic_imports_thresholds_and_reserve_pin": true,
+    "frozen12_CRLF_sources_untouched_no_whitespace_waiver": true,
+    "liveR_and_original_stage_changes_authorized": false,
+    "artifact_authority": "Deriveddf3 is the exact supported generated/current staged pair; Quick34c is the exact independently raw-reviewed/fresh-audited/original-role-final guarded scratch output. Changing only metadata pins to those already accepted byte identities does not create new content or weaken loader rules."
+  },
+  "readset_and_metadata_review": {
+    "mutation_inputs": 1910,
+    "mutation_unchanged": 1907,
+    "mutation_scratch_bindings": 1230,
+    "exact_only3_target_exclusions_and_expected_after": {
+      "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/wordgames/derived_catalog.py": "f79956b0e88523e2d79b916daf7b04747d6310cb62291644feeb6bc1c0f44be1",
+      "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/wordgames/quick_catalog.py": "be3a07e7e32f5b97dfb84a45f0ff4fb75e750fa61b86f129dbb805e85a1751c6",
+      "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend/internal/contentbuild/build.go": "60d9c5262287d52cf4e2d97fee056f1462cc3c554dd15cfb0ab267a96304dd61"
+    },
+    "all_current_before_pins_match": true,
+    "fresh_build_inputs": 1910,
+    "fresh_build_unchanged": 1910,
+    "fresh_build_scratch_bindings": 1230,
+    "only3_afterimage_SHA_changes_between_phase_preconditions": true,
+    "actual_prior_docs_native_post_union_size": 3128,
+    "actual_prior_post_union_complete_zero_omissions": true,
+    "current_metadata_sha256": {
+      "docs/STATUS.md": "2e458d232159654ba597f41f7bb3f772d47272a769b3a929f06fe59904294dac",
+      "WORKLOG.md": "73da5dbf4155660c4c961694460673099316b2ac7e781bb1f9dc3331abe654e6",
+      "docs/reviews/v1-7-recognizable-content/README.md": "a5b0701cbbc2ed471d5f36741aa79f5033ff360cab3926d88e505e1fc6c7670e"
+    },
+    "metadata_phase": "Current70ec checkpoint STATUS/WORKLOG/wave README are explicitly pinned. These are phase facts, not rewritten old semantic judgments.",
+    "lossless_help_rebinding": "Readset explicitly binds new readable helpSHA5ade, exact raw gzipc588, mapping07f5 and ACKc90. No row silently expects raw e7 at the replacement text path; original judgments retain archival raw resolution."
+  },
+  "R1_R2_method_review": {
+    "R1": "Preserved inert/unexecuted source packet. Its target rollback-registration bookkeeping gap was source-identified before execution, not an actual failed mutation or retroactively qualified method.",
+    "R2": "Registers target in rollback list BEFORE calling atomic publication; a SIGTERM exception after replacement can still restore its captured beforeimage. Temporary identity is recorded from opened inode and cleanup deletes only that exact regular nonsymlinked inode.",
+    "atomic_write": "Creates owned same-directory temporary, writes/fsyncs exact afterimage/mode, os.replace publishes, directory fsync follows. Sources/afterimages/preimages are hash-bound. Target parent/root checks refuse symlinks.",
+    "failure_and_restoration": "Caught errors/SIGTERM reverse committed targets from captured exact snapshots only when current target is a known before/after image, protecting unexpected external edits. Rollback/cleanup errors remain failure; exclusive local receipt records actual target hashes/modes. Any signal before handlers/early guard failure or SIGKILL/storage loss can leave incomplete temp/receipt evidence: outer failure and actual inspection govern, never presumed restoration.",
+    "scope": "One mutation-only command; no Go/test/native builder/CLI invocation inside metadata writer. No general runner/framework or condition bypass is introduced."
+  },
+  "strict_loader_and_phase_assessment": {
+    "Go": "reviewedPins keeps exact nonempty derived/Quick/reserve digest comparison. No source field filter, empty pin, validation skip or relaxed threshold. All original source8/rubric/mirror/graph/pack/rank/derived/Quick/World/Extensions checks remain.",
+    "Python": "Only DEFAULT_DERIVED_CATALOG_SHA256 and CATALOG_SHA256 literals change. Their normalized text digest/source/rating/structure validation logic remains identical. No Python reference execution is approved in this phase.",
+    "runtime_effect": "Runtime membership/order remains130; only staged contentbuild/build.go SHA209f→60d9 changes. Two Python reference files are separately pinned. Old e247 and other saved runtime audits/finals become historical after this code change and cannot authorize installed authority.",
+    "Extensions_prerequisite": "Existing buildExtensions validates candidate path/hash bindings then calls strict contentbuild.Load. Existing validateExtensions checks old artifact schema/reviews/bounds/wellformed binding digests/core/entry fingerprints without requiring its historical KG digest current, so old Extd946 may remain during coherent source validation. This does not approve a fresh Extensions proposal/audit/write.",
+    "Source7_boundary": "Staged Source8 and review pins can be mechanically qualified by a genuinely rebuilt tool; compiled Source6 bundle/sourceIDs and authority remain baseline. No export/sealed Source7/currentauthority or serving/GUI proof is created by this pin metadata scope."
+  },
+  "exact_future_mutation_command_template": [
+    "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-method-r2.py.txt",
+    "FRESH_MUTATION_ONLY_ADMISSION"
+  ],
+  "exact_future_separate_build_and_validation_commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "GOMODCACHE=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+        "GOPATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+        "GOPROXY=off",
+        "GOSUMDB=off",
+        "GOTOOLCHAIN=local",
+        "GOWORK=off",
+        "GOMAXPROCS=2",
+        "GOFLAGS=-p=2 -mod=readonly",
+        "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend",
+        "build",
+        "-buildvcs=false",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-tools-r1/cat-content",
+        "./cmd/cat-content"
+      ],
+      "name": "build-afterpin-cat-content"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "GOMODCACHE=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+        "GOPATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+        "GOPROXY=off",
+        "GOSUMDB=off",
+        "GOTOOLCHAIN=local",
+        "GOWORK=off",
+        "GOMAXPROCS=2",
+        "GOFLAGS=-p=2 -mod=readonly",
+        "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend",
+        "build",
+        "-buildvcs=false",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-tools-r1/cat-content-rail",
+        "./cmd/cat-content-rail"
+      ],
+      "name": "build-afterpin-cat-content-rail"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-tools-r1/cat-content",
+        "validate",
+        "--root",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1"
+      ],
+      "expected_exitcode": 0,
+      "expected_stdout": "Native sources GREEN\n",
+      "name": "native-current-stage-sources-only-validation"
+    }
+  ],
+  "mandatory_sequential_admission_and_output_conditions": [
+    "First create a NEW mutation-only immutable native admission after this review freezes, binding finalR2 plan/readset/method/manifest/three afterimages/this receipt and all existing current input/producers. Replace the inert FRESH_MUTATION_ONLY_ADMISSION placeholder with its real exact path. Only3 stage target preimages are inputs and excluded from scratch/unchanged; exact3 afterimages are expected_after. Admission self-binding uses existing397686 mechanisms.",
+    "Require passing outer mutation exit/resource/readset/expected_after plus complete local receipt and true afterimage bytes/modes before any consumer. Verify all713 other stage/419 oldstage/liveR files unchanged and all cache/producers exact. Freeze new3target supersession inventory/keeper/external digest with actual producer receipt/log/admission/deadline/baseline; preserve old716 inventory as history. Failed/partial mutation stops; no automatic build or reused failed clock.",
+    "Then separately create genuinely NEW afterimage-bound offline build/validation admission, binding actual mutation result/keeper/afterinventory and this review in addition to final fresh_build readsets. No old beforeimage remains in current preconditions for those3 targets. Existing signed old tools remain immutable; new own current-source7-tools-r1 output namespace must be absent/canonical/nonsymlinked.",
+    "Exact offline builds use own completecache and owned GOPATH, GOPROXY/GOSUMDBoff, GOTOOLCHAINlocal/GOWORKoff/Go2/-modreadonly and isolated -buildvcs=false. No download/tidy/modulegraph edit/modverify/SDKversion or content generator replay. Unexpected dependency/checksum/readonly failure stops.",
+    "Both binary SHAs are unknown until passed producer steps. After each successful build, freeze actual regular binary SHA/bytes plus producing receipt/log/admission/deadline/baseline/current afterimages into exclusive keeper+external digest. Root checks every prior known output/producer hash pre/post. BEFORE cat-content validate consumes new binary, its actual producer keeper and source identities must already be immutable; do not mutate original manifest or invent hashes.",
+    "Each distinct phase gets fresh17GiB startdisk/16GiB remainingdisk+MemAvailable,2GiB sampledgroupRSS/1GiB fullS-Rgrowth/one20minute immutable deadline180second metadata reserve with existing397686; all copy/tool/cache/receipt/keeper/temp growth counted. Root checks full original5187/complete5436/GOPATH1, all old419/current716 files with only explicitly authorized targets, and producer logs/receipts/keepers before/after.",
+    "ValidateSources expected zeroexit and exact Native sources GREEN stdout qualifies only actual parsed Source8/pins/mirrors/rubric/graph/pack/rank/derived/Quick/World/Extensions mechanical source validation. Publish independent actual result before any further candidate/proposal/audit/write. No catalogue or serving export is written by validation."
+  ],
+  "not_granted": [
+    "Actual mutation/build/validation result before execution and independent review",
+    "LiveR pin/source/data or original-stage modification",
+    "Extensions candidate/proposal/audit/write or serving export",
+    "SealedSource7/currentauthority/installedhistory/fullbackend/fullreference/GUI gates",
+    "Release/landing/push/deployment or new content breadth"
+  ],
+  "old_failures": "All prior source timing/native resource/root checker/whitespace/cache failures remain failed and bound to original clocks; this scope neither waives nor retroactively passes them."
+}

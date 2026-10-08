@@ -1,0 +1,45 @@
+{
+  "schema": "v1-7-Extensions-exact-native-ordered-edge-source-ack-v2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T19:12:37.425281+00:00",
+  "verdict": "accept_exact_native_ordered_pair_edge_comparison_only",
+  "source_admission_sha256": "679b7bc8b1574f238af9d432d2df2d3f98c532e8b4f5418861c5076ef6e0cff3",
+  "source_cutoff_utc": "2026-10-08T19:19:15.417042+00:00",
+  "original_deadline_utc": "2026-10-08T19:22:15.417042+00:00",
+  "clock_not_reset": true,
+  "source_worker_whole_RSS_measured": false,
+  "dependencies_sha256": {
+    "current-source7-extensions-binding-repair-source-admission-r2.json": "679b7bc8b1574f238af9d432d2df2d3f98c532e8b4f5418861c5076ef6e0cff3",
+    "current-source7-extensions-root-edgeorder-pre-admission-failure-r2.json": "cf7efa8d4967c65aba98381636d8d96b1961cd5b747f571672a0ccf16b0e27db",
+    "current-source7-extensions-binding-repair-plan-r2.json": "b827044c82f2e6ce1b47d3255da0424f9b23e06e17099784ffa9b29975fad785",
+    "current-source7-extensions-binding-repair-readset-r2.json": "33541e4db9e839ac14de60c558679c9492c6f2fb9071eaecac3c01686c6ae65f",
+    "current-source7-extensions-binding-repair-observations-r2.json": "59ef84f9cc7d5a594bbc71f65397b0f962bada9be3b388c7dc167c18aae2b95d",
+    "current-source7-extensions-binding-repair-method-review-r2.json": "37e4f77784faf86f25aa40392678497208595142cd2fd336098c97d686e08c5e",
+    "current-source7-extensions-proposal-failure-review-r1.json": "9a6588de8d8e69d10d0ed7a3b7639d116b4e36ca03658f3e3b3f4495391b5727",
+    "current-source7-extensions-root-failure-stop-r1.json": "2f93862cbe10a05c34a6b4d2756ebf7ca97d71fd82895eaa95a2d7d58d5c116a"
+  },
+  "source_code_sha256": "c3c5166b6b6975128da9884c70921c7552ce83140575f5b5e90106dffa6c07af",
+  "proposal_sha256": "605690ec6b163ab3860fc57c53c21288b2781b85c77f93e414d63207340119bf",
+  "candidate_sha256": "f3e316bf46063386c8e4c69fdc8c951c02dbfb66ecf4af94b9a784a33a5d3ec2",
+  "exact_predicate_ack": {
+    "edge_ids": "For each output addition, add.edge_ids MUST equal [edge.runtime_edge.id for edge in matching raw candidate.edges], retaining original list order.",
+    "pair": "add.pair MUST equal [parent.id for parent in matching raw candidate.pair], retaining raw parent order.",
+    "native_source": "Existing constructor appends runtime_edge.id while iterating row.edges; it carries pair from row.pair. It does not sort/deduplicate edge IDs.",
+    "all49_ordered_actual_edge_and_pair_matches_independently_verified": true,
+    "incorrect_sort_expectation_counterexamples_independently_verified": 25,
+    "why_sort_is_wrong": "Sorting a set of fixture-edge IDs changes the native ordered representation and discards positional order; it is not the operator contract. Lexicographic edge-ID order is unrelated to the raw parent order.",
+    "no_assertion_dropped_or_data_canonicalized": "Retain exact positional list equality. Do not sort output/candidate data, delete order checks, change native constructor, alter raw fields or lower any gate."
+  },
+  "failure_and_execution_boundary": {
+    "root_extra_predicate": "Unreviewed sorted-fixture-ID equality failed BEFORE any new proposal keeper, outputnamespace, native admission or CLI invocation. This remains a separate pre-admission root checker failure.",
+    "old540": "Original root failure/FAILED_STOP and READY1 identity hash remain unchanged; no audit ran or campaign resumed.",
+    "proposal605_and_candidatef3_unchanged": true,
+    "new_R2_audit_namespace_absent_at_review": true,
+    "no_native_replay_or_code_fixture_pin_change": true
+  },
+  "conditions": [
+    "Add this exact ACK and the cf7 failure/49-comparison artifact as protected known inputs/unchanged in the future fresh audit admission, alongside the existing37e method review and9a proposal identity review.",
+    "Future validated-proposal keeper uses only the reviewed exact3-key native binding comparison plus all49 ordered raw ID/SHA/board/pair/result/edge comparisons, complete core/role/provenance/current pin checks and known605 SHA. No invented sorted-edge predicate is an additional gate.",
+    "All earlier method37e producer/keeper/fresh-resource/output-staging and no-old540-resume conditions remain in force. This narrow source ACK grants no actual audit result, finalquality, guarded write or liveSource7/currentauthority/GUI qualification."
+  ]
+}

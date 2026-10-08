@@ -1,0 +1,58 @@
+"""Atomic reviewed three-file PIN metadata amendment inside NEW isolated stage only."""
+import hashlib,json,os,signal,stat,sys,tempfile,datetime
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+T=Path('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008')
+I=T/'source7-current-stage-r1'
+D=R/'docs/reviews/v1-7-recognizable-content'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+a=json.loads(Path(sys.argv[1]).read_bytes())
+assert sha(__file__)==a['pins_method_sha256']
+assert all(sha(Path(n) if Path(n).is_absolute() else R/n)==v for n,v in a['inputs'].items())
+assert all(sha(n)==v for n,v in a['scratch_bindings'].items())
+M=D/'current-source7-pins-tools-change-manifest-r1.json';assert sha(M)==a['change_manifest_sha256']
+m=json.loads(M.read_bytes())['targets']
+assert I.resolve(strict=True)==I and not I.is_symlink()
+receipt=T/'current-source7-pins-tools-mutation-r2-result.json';assert not receipt.exists() and not receipt.is_symlink()
+snapshots={};committed=[];temps={};errors=[];failure=None
+for n,v in m.items():
+    p=Path(v['path']);assert p==I/n and not p.is_symlink() and stat.S_ISREG(p.lstat().st_mode)
+    for parent in p.parents:
+        if parent==I:break
+        assert not parent.is_symlink()
+    assert sha(p)==v['before_sha256'] and stat.S_IMODE(p.stat().st_mode)==v['mode']
+    assert sha(v['afterimage_path'])==v['after_sha256']
+    snapshots[n]=p.read_bytes()
+def interrupted(signum,frame):raise RuntimeError('Interrupted pin metadata publication; restore exact snapshots')
+signal.signal(signal.SIGTERM,interrupted)
+def publish(p,blob,mode):
+    with tempfile.NamedTemporaryFile(prefix='.owned-v17-pins-',dir=p.parent,delete=False) as f:
+        q=Path(f.name);info=os.fstat(f.fileno());temps[q]=(info.st_dev,info.st_ino);f.write(blob);f.flush();os.fsync(f.fileno());os.fchmod(f.fileno(),mode)
+    os.replace(q,p);temps.pop(q)
+    fd=os.open(p.parent,os.O_RDONLY)
+    try:os.fsync(fd)
+    finally:os.close(fd)
+try:
+    for n,v in m.items():
+        p=Path(v['path']);assert sha(p)==v['before_sha256']
+        committed.append(n);publish(p,Path(v['afterimage_path']).read_bytes(),v['mode'])
+        assert sha(p)==v['after_sha256']
+    assert all(sha(v['path'])==v['after_sha256'] for v in m.values())
+except BaseException as exc:
+    failure={'type':type(exc).__name__,'message':str(exc)};signal.signal(signal.SIGTERM,signal.SIG_IGN)
+    for n in reversed(committed):
+        v=m[n];p=Path(v['path'])
+        try:
+            assert not p.is_symlink() and sha(p) in [v['before_sha256'],v['after_sha256']]
+            publish(p,snapshots[n],v['mode']);assert sha(p)==v['before_sha256']
+        except BaseException as restore:errors.append({'path':str(p),'restore_error':repr(restore)})
+finally:
+    for q,identity in temps.items():
+        try:
+            if q.exists() or q.is_symlink():
+                info=q.lstat();assert stat.S_ISREG(info.st_mode) and not q.is_symlink() and (info.st_dev,info.st_ino)==identity, 'Preserve changed/unverifiable temporary'
+                q.unlink()
+        except BaseException as cleanup:errors.append({'temporary':str(q),'error':repr(cleanup)})
+    result={'complete':failure is None and not errors,'failure':failure,'cleanup_errors':errors,'targets':{n:{'sha256':sha(v['path']),'mode':stat.S_IMODE(Path(v['path']).stat().st_mode)} for n,v in m.items()},'live_R_changed':False,'native_commands_run':False,'finished_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    with receipt.open('x') as f:json.dump(result,f,indent=2,sort_keys=True);f.write('\n')
+if failure or errors:raise SystemExit(1)
