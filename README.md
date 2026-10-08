@@ -2,7 +2,7 @@
 
 Qualified Source6 remains the live content. The isolated V1.7 Source7 candidate
 passed its selected history/current suites: 99 Python cases and 21 Go race tests.
-Live adoption and full qualification remain pending. See [current status](docs/STATUS.md)
+Full qualification inventory is reviewed; missing reference inputs, Source7 HTTP corpus and managed assets remain prerequisites. Live adoption stays pending. See [current status](docs/STATUS.md)
 and the [V1.7 review](docs/reviews/v1-7-recognizable-content/README.md).
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
