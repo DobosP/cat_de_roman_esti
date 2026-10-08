@@ -1,0 +1,440 @@
+{
+  "schema_version": 1,
+  "purpose": "Finite V1.7 source-only research for exactly two already-owned food hypotheses; no selection, factual/quality approval, native execution or installation.",
+  "baseline_commit": "a34a6ade957436d89b6c9b1424babf763ad1f9d1",
+  "checked_at_utc": "2026-10-07T19:35:03.660274+00:00",
+  "admission_ref": "source-screen-admission-r1.json: source cutoff 2026-10-07T19:47:02Z; campaign deadline 19:50:02Z; root plus two source workers maximum.",
+  "method": {
+    "inventories": "Read current KG/world/decks/quick/derived/Lant tombstones and all old content-pool JSON records for both owner IDs or label text. Static read only; parent owns independent complete Unicode15 normalized/projection identity screen.",
+    "search": "Internet search followed by direct original-publisher/food-brand pages. Only the three below are used as fact evidence; search snippets are not substituted for direct opened content.",
+    "limitations": [
+      "No normal selection, HTTP guessing/combination, hint, score, privacy, restore or prospective source/native gates ran.",
+      "Browser and worker peak RSS not measured; no source memory qualification claimed.",
+      "No copied recipe text/images; concise factual paraphrases and claim URLs only."
+    ]
+  },
+  "input_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+    "docs/content-pool/v1-5-discovery-i04/pool-r2.json": "ba9898dc021a0645ee481669acbe468baeb4fea40deae199f7815f3de02fcc67"
+  },
+  "sources": [
+    {
+      "id": "compot-original",
+      "url": "https://pofta-buna.com/compot-de-mere-pentru-iarna-reteta/",
+      "publisher": "Gina Bradea / Poftă bună",
+      "kind": "Original author recipe on her own Romanian site",
+      "published_date": "2018-10-17",
+      "access": {
+        "searched": true,
+        "opened": true,
+        "content": "Readable HTML ingredients, preparation, byline/date and copyright footer; no login needed in web tool."
+      },
+      "license": {
+        "status": "All rights reserved; original footer prohibits republication without author permission. No redistribution permission inferred.",
+        "evidence_location": "Page footer, web open lines 417"
+      },
+      "claims": [
+        {
+          "claim": "This author makes apple compote with apples and water; sugar, sweetener and flavourings are choices. Sliced apples are put in prepared jars, water is added, then jars are heated in a water bath.",
+          "locations": "Ingredients/preparation lines 179–205",
+          "qualifiers": "A specific preserved-apple recipe, not universal completeness or Romanian origin. Jar preparation, heating and later storage are process steps beyond a two-token game foundation."
+        }
+      ],
+      "not_claimed": [
+        "Universal compote recipe",
+        "All compotes have exactly two ingredients",
+        "Population recognition or enjoyment measured",
+        "Safety/storage longevity verified independently"
+      ]
+    },
+    {
+      "id": "sandvis-original",
+      "url": "https://www.lauralaurentiu.ro/retete-culinare/retete-diverse/sandwich-cu-friptura-sfecla-si-crema-liptauer.html",
+      "publisher": "Laura Laurențiu",
+      "kind": "Original authored recipe on her own Romanian site",
+      "published_date": "2014-01-11",
+      "access": {
+        "searched": false,
+        "opened": true,
+        "content": "Readable HTML ingredients/preparation/byline/date/copyright. This URL is already cited by installed sandvis-branza and sandvis-friptura."
+      },
+      "license": {
+        "status": "Author-owned copyrighted content; footer requires written permission for copying/dissemination. No open license inferred.",
+        "evidence_location": "Page footer, web open line 221"
+      },
+      "claims": [
+        {
+          "claim": "This sandwich uses bread rolls, a cottage-cheese and yogurt spread, cooked sliced meat, beetroot and other vegetables/seasonings. It is assembled on cut rolls and covered with the upper bread part.",
+          "locations": "Ingredients/preparation lines 89–129",
+          "qualifiers": "Supports bread with cheese-based filling as part of a sandwich; it does not establish that bread and generic cheese alone reproduce this complete multi-ingredient recipe."
+        }
+      ],
+      "counterexample": "The recipe has multiple additional ingredients and preparation steps, so it cannot justify a universal or complete two-ingredient sandwich."
+    },
+    {
+      "id": "cheese-brand-use",
+      "url": "https://delaco.ro/product/branza-pufoasa-smantana/",
+      "publisher": "Delaco",
+      "kind": "Food-brand original product/use description in Romanian",
+      "published_date": null,
+      "access": {
+        "searched": true,
+        "opened": true,
+        "content": "Readable HTML product description; page includes an old-browser notice but product text is accessible."
+      },
+      "license": {
+        "status": "Unknown permission terms; copyright notice © Delaco 2026 observed. No open license/redistribution approval inferred.",
+        "evidence_location": "Product page footer line 35; legal link not opened."
+      },
+      "claims": [
+        {
+          "claim": "The brand describes its cottage-cheese/cream/salt spread as suitable on bread or biscuits, plain or with vegetables.",
+          "locations": "Product description line 10",
+          "qualifiers": "Specific product serving suggestion. This is not a full sandwich recipe and does not establish that all cheeses have the same preparation or texture."
+        }
+      ]
+    }
+  ],
+  "leads": [
+    {
+      "lead": "Compot / Compot de mere",
+      "state": "held",
+      "sense": "Cooked fruit preparation, here the apple variant; subtype is not a synonym for the generic concept.",
+      "identity": {
+        "shared_world_owner": "n_v20gas_compot",
+        "current_label": "Compot",
+        "stored_aliases": [
+          "compotul",
+          "compoturi",
+          "compot de casă",
+          "compot la borcan"
+        ],
+        "specific_subtype_owner": "No exact Compot de mere shared/world label found in this preliminary screen; absence does not authorize creation.",
+        "deck_uses": [
+          "cx_gastronomie_296 approved: winter pantry group",
+          "cx_gastronomie_299 approved: childhood drinks group"
+        ],
+        "quick_or_derived_direct_owner_uses_found": 0,
+        "existing_incident_edges": [
+          "de6671 Compot↔Fruct, associated_with",
+          "de6672 Compot↔Conserve de iarnă, is_a",
+          "de6673 Compot↔Desert, same_category"
+        ],
+        "incidence_note": "Three existing unique incident links are preserved; this source work does not clear a new shared node against four-incident/two-same-category floors."
+      },
+      "existing_recipes": [
+        {
+          "id": "compot-fruct",
+          "pair": [
+            "n_v4gas_apa",
+            "n_v4gas_fruct"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-mar",
+          "pair": [
+            "n_v24_food_orchard_mar",
+            "n_v4gas_apa"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-pruna",
+          "pair": [
+            "n_v24_food_orchard_pruna",
+            "n_v4gas_apa"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-capsuna",
+          "pair": [
+            "n_v24_food_small_fruit_capsuna",
+            "n_v4gas_apa"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-para",
+          "pair": [
+            "n_v24_food_orchard_para",
+            "n_v4gas_apa"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-cireasa",
+          "pair": [
+            "n_v24_food_small_fruit_cireasa",
+            "n_v4gas_apa"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-strugure",
+          "pair": [
+            "n_v24_food_small_fruit_strugure",
+            "n_v4gas_apa"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-caisa",
+          "pair": [
+            "n_v24_food_summer_fruit_caisa",
+            "n_v4gas_apa"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-piersica",
+          "pair": [
+            "n_v24_food_summer_fruit_piersica",
+            "n_v4gas_apa"
+          ],
+          "result": "n_v20gas_compot"
+        },
+        {
+          "id": "compot-cratita",
+          "pair": [
+            "n_v4gas_fruct",
+            "n_v88_kitchen_cratita"
+          ],
+          "result": "n_v20gas_compot"
+        }
+      ],
+      "exact_foundation": "compot-mar already binds unordered Măr n_v24_food_orchard_mar + Apă n_v4gas_apa to generic Compot n_v20gas_compot.",
+      "source_refs": [
+        "compot-original"
+      ],
+      "hold_reason": "Both generic concept and apple+water foundation are installed. A new Compot de mere output on that pair would collide with/replace the existing deterministic result and manufacture growth from an already expressed subtype. No meaningful ordinary benefit has been demonstrated.",
+      "ordinary_play_hypothesis": "A player may naturally combine earned Măr and Apă to discover the existing Compot. This hypothesis concerns existing play only and is untested here; it is not a new candidate benefit.",
+      "next_action": "Preserve owner/pair and hold this exact growth hypothesis. No variant search or replacement lead in this lane."
+    },
+    {
+      "lead": "Sandviș / Sandviș cu brânză",
+      "state": "held",
+      "sense": "Bread-based snack with filling/topping; cheese subtype is not a synonym for every sandwich.",
+      "identity": {
+        "shared_world_owner": "n_v24_food_snack_sandvis",
+        "current_label": "Sandviș",
+        "stored_aliases": [
+          "sandvișul",
+          "sandvișuri",
+          "sandvici",
+          "sandviciul",
+          "sandviciuri",
+          "sendviș",
+          "sendvișul",
+          "sendvișuri",
+          "sandvișurile"
+        ],
+        "specific_subtype_owner": "No exact Sandviș cu brânză shared/world label found in this preliminary screen; absence does not authorize creation.",
+        "deck_uses": [],
+        "quick_or_derived_direct_owner_uses_found": 0,
+        "existing_incident_edges": [
+          "de7668 Mâncare→Sandviș beginner_entry",
+          "de7669 Sandviș→Casă beginner_exit",
+          "de7670 Ceai→Sandviș served_together",
+          "de7671 Biscuit→Sandviș served_together"
+        ],
+        "incidence_note": "Existing generic edges remain historical stock; this source report makes no independent endorsement or revision."
+      },
+      "existing_recipes": [
+        {
+          "id": "sandvis-branza",
+          "pair": [
+            "n_v2gas_branza",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-telemea",
+          "pair": [
+            "n_gas_telemea",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-friptura",
+          "pair": [
+            "n_v3gas_friptura",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-fasole",
+          "pair": [
+            "n_v42gas_fasole_batuta",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-salata",
+          "pair": [
+            "n_v3gas_salata",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-zacusca",
+          "pair": [
+            "n_gas_zacusca",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-cascaval",
+          "pair": [
+            "n_v20gas_cascaval",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-snitel",
+          "pair": [
+            "n_v20gas_snitel",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-chiftele",
+          "pair": [
+            "n_v20gas_chiftele",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-burduf",
+          "pair": [
+            "n_v42gas_branza_burduf",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-parizer",
+          "pair": [
+            "n_v20gas_parizer",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-pate",
+          "pair": [
+            "n_v42gas_pate",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-pastrama",
+          "pair": [
+            "n_v42gas_pastrama",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-lipie-hummus",
+          "pair": [
+            "alw_food_hummus",
+            "alw_food_lipie"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-vinete",
+          "pair": [
+            "n_gas_salata_vinete",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-crema-branza",
+          "pair": [
+            "alw_food_crema_branza",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-paine-prajita",
+          "pair": [
+            "alw_food_paine_prajita",
+            "n_v2gas_branza"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-focaccia",
+          "pair": [
+            "alw_food_focaccia",
+            "n_v20gas_cascaval"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-omleta",
+          "pair": [
+            "alw_food_omleta",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        },
+        {
+          "id": "sandvis-chiftele-legume",
+          "pair": [
+            "alw_food_chiftele_legume",
+            "n_v4gas_paine"
+          ],
+          "result": "n_v24_food_snack_sandvis"
+        }
+      ],
+      "exact_foundation": "sandvis-branza already binds unordered Brânză n_v2gas_branza + Pâine n_v4gas_paine to generic Sandviș n_v24_food_snack_sandvis.",
+      "source_refs": [
+        "sandvis-original",
+        "cheese-brand-use"
+      ],
+      "prior_rejection": {
+        "record": "i04-world-03 R2",
+        "label": "Sandviș cu ou",
+        "state": "rejected",
+        "reason": "Ou n_v4gas_ou + Pâine n_v4gas_paine already owns friganele-ou → alw_food_friganele; cannot overwrite or add parallel result."
+      },
+      "hold_reason": "The generic identity and cheese+bread recipe already exist, with many productive fillings. Introducing the subtype on the occupied pair would replace current results rather than add a fresh playable association. The old egg-sandwich collision remains rejected.",
+      "ordinary_play_hypothesis": "A player may try owned Pâine with Brânză and obtain the existing Sandviș; later fillings may reach the same result. No new pair, discovery, normal selection or meaningful added play is established here.",
+      "next_action": "Preserve all installed sandwich pairs and hold this exact growth hypothesis. No variant search or replacement lead in this lane."
+    }
+  ],
+  "research_delta": {
+    "investigated_leads": 2,
+    "held_growth_hypotheses": 2,
+    "selected": 0,
+    "new_shared_concepts": 0,
+    "new_world_concepts": 0,
+    "synonym_families": 0,
+    "forms": 0,
+    "edges": 0,
+    "recipes": 0,
+    "curated_rounds": 0,
+    "eligible_preferred_growth": "Not established; no runtime changes."
+  }
+}

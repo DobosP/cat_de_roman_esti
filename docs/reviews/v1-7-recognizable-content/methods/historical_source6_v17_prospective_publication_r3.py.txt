@@ -1,0 +1,200 @@
+#!/usr/bin/env python3
+"""Inert prospective planned-helper proof. Execute only after fresh exact admission.
+
+Seven finite pytest cases in a fresh owned process: originalV50funnel+wholebatch
+using the genuine planned Source6 fixture/metadata context, one candidate341
+singular/all69 contract, cleanup-after-error and three hashrefusals. Not a full
+V50/fullhistorical suite, installedSource7 context, Source7 export or approval.
+No live publication: the only module augmentation is transparent in-memory
+planned append to a child-process reference module. Physical sources stay exact.
+Only the current singular-contract module ROOT temporarily refers to an owned
+byte-identical generated candidate copy; all other tests see truthful liveSource6.
+"""
+from __future__ import annotations
+import argparse
+import datetime as dt
+import hashlib
+import json
+import os
+from pathlib import Path
+import resource
+import signal
+import sys
+import time
+import traceback
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+SCRATCH = Path('/home/dobo/work/_temp/codex__content-v1-7')
+D = ROOT / 'docs/reviews/v1-7-recognizable-content'
+CANDIDATE = SCRATCH / 'probe/materialization-r2/candidate/package/kg_sample.json'
+CANDIDATE_SHA = '3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749'
+BASELINE_SHA = '63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf'
+WORK = SCRATCH / 'probe/historical-context-prospective-r2'
+
+
+def sha(p):
+    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+def read(p):
+    return json.loads(Path(p).read_bytes())
+
+
+def now():
+    return dt.datetime.now(dt.timezone.utc)
+
+
+def abort(*_):
+    raise TimeoutError('original admitted prospective history deadline')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--admission', type=Path, required=True)
+    args = parser.parse_args()
+    ad = read(args.admission)
+    assert ad['method_sha256'] == sha(__file__)
+    began = dt.datetime.fromisoformat(ad['started_at_utc'])
+    deadline = dt.datetime.fromisoformat(ad['deadline_utc'])
+    assert began.tzinfo and deadline.tzinfo and began <= now() < deadline
+    assert 0 < (deadline-began).total_seconds() <= 1200
+    assert not WORK.exists(), 'exclusive attempt only; never overwrite/retry'
+    assert not any(os.environ.get(k) for k in ('CAT_KG_FIXTURE','CAT_GAMES_PACK','CAT_BOARD_RANKINGS'))
+    resource.setrlimit(resource.RLIMIT_AS,(2*1024**3,2*1024**3))
+    signal.signal(signal.SIGALRM,abort)
+    signal.signal(signal.SIGTERM,abort)
+    signal.setitimer(signal.ITIMER_REAL,(deadline-now()).total_seconds())
+    sys.dont_write_bytecode=True
+    sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+    os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings',
+                     CAT_ACCOUNTS_ENABLED='0',CAT_ALLOWED_HOSTS='testserver,example.com',
+                     PYTHONDONTWRITEBYTECODE='1',PYTEST_DISABLE_PLUGIN_AUTOLOAD='1')
+    WORK.mkdir(parents=True)
+    report={'schema':'v17-prospective-planned-source6-context-proof-r2','complete':False,
+        'started_at_utc':now().isoformat(),'method_sha256':sha(__file__),
+        'admission_sha256':sha(args.admission),'baseline_sha256':BASELINE_SHA,
+        'candidate_sha256':CANDIDATE_SHA,'reports':[],'installed_Source7_qualification':False,
+        'physical_source_or_fixture_publication':False,'planned_module_overlay':True}
+    started=time.monotonic()
+    namespace=None;old_namespace=None;staged=[];candidate=None;plugin=None
+    try:
+        for rel,wanted in ad['source_sha256'].items(): assert sha(ROOT/rel)==wanted,rel
+        for path,wanted in ad['scratch_sha256'].items(): assert sha(path)==wanted,path
+        assert sha(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')==BASELINE_SHA
+        assert sha(CANDIDATE)==CANDIDATE_SHA
+        for rel,wanted in ad['planned_source_sha256'].items(): assert sha(ROOT/rel)==wanted,rel
+        tests=(WORK/'test_v50_planned.py',WORK/'test_v17_planned_current.py')
+        sources=(D/'methods/historical_source6_v17_test_v50_r2.py.txt',
+                 D/'methods/historical_source6_v17_current_hold_test_r2.py.txt')
+        for target,source in zip(tests,sources,strict=True):
+            with target.open('xb') as f:f.write(source.read_bytes())
+            assert sha(target)==sha(source)
+            staged.append({'path':str(target),'sha256':sha(target),'source':str(source)})
+        candidate_root=WORK/'candidate-context'
+        candidate=candidate_root/'cat_de_roman_esti/fixtures/kg_sample.json'
+        candidate.parent.mkdir(parents=True)
+        with candidate.open('xb') as f:f.write(CANDIDATE.read_bytes())
+        assert sha(candidate)==CANDIDATE_SHA
+        import django
+        django.setup()
+        import pytest
+        from tests import content_history as history
+        namespace=history.__dict__
+        old_namespace=dict(namespace)
+        append=D/'methods/historical_source6_v17_content_history_append_r2.py.txt'
+        # Explicit child-only proposed helper augmentation; never write/import a fake
+        # physical content_history module or forge Source7/current metadata identity.
+        exec(compile(append.read_bytes(),str(append), 'exec'),namespace)
+        report['planned_history_source']={'unchanged_live_base_sha256':sha(ROOT/'tests/content_history.py'),
+            'proposed_append_sha256':sha(append),'in_memory_only':True}
+
+        class CandidateOnlyContract:
+            collected=[]
+            patched=False
+            patched_module=None
+            original_ROOT=None
+            ROOT_restoration_count=0
+            @pytest.hookimpl(hookwrapper=True)
+            def pytest_runtest_call(self,item):
+                selected=item.name=='test_v17_only_singular_leafa_is_new_and_all_other69_dispositions_stay_exact'
+                previous=None
+                if selected:
+                    assert item.module.ROOT==ROOT
+                    assert self.patched_module is None, 'only one declared candidate ROOT patch'
+                    previous=item.module.ROOT
+                    self.patched_module=item.module
+                    self.original_ROOT=previous
+                    item.module.ROOT=candidate_root
+                    self.patched=True
+                try:
+                    yield
+                finally:
+                    if selected:
+                        item.module.ROOT=previous
+                        self.ROOT_restoration_count+=1
+                        assert item.module.ROOT is self.original_ROOT and item.module.ROOT==ROOT
+            def pytest_collection_finish(self,session):
+                self.collected=[x.nodeid for x in session.items]
+                assert len(self.collected)==7
+            def pytest_runtest_logreport(self,rep):
+                report['reports'].append({'nodeid':rep.nodeid,'when':rep.when,
+                    'outcome':rep.outcome,'duration_seconds':rep.duration,
+                    'longrepr':None if rep.passed else str(rep.longrepr)})
+
+        plugin=CandidateOnlyContract()
+        selectors=[str(tests[0])+'::test_v50_review_funnel_is_exact_complete_and_unanimous',
+                   str(tests[0])+'::test_v50_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors',
+                   str(tests[1])]
+        code=pytest.main(['-q','-c',str(ROOT/'pyproject.toml'),'-p','no:cacheprovider',
+                         '--basetemp',str(WORK/'pytest-temp'),*selectors],plugins=[plugin])
+        report.update(pytest_exit_code=int(code),collected_case_ids=plugin.collected,
+                      current_candidate_ROOT_patch_used=plugin.patched)
+        calls=[x for x in report['reports'] if x['when']=='call']
+        assert code==0 and len(calls)==7 and all(x['outcome']=='passed' for x in report['reports'])
+        assert plugin.patched and sha(candidate)==CANDIDATE_SHA
+        assert sha(tests[0])==staged[0]['sha256'] and sha(tests[1])==staged[1]['sha256']
+        report['complete']=True
+        report['covered_cases']=7
+    except BaseException as exc:
+        report['failure']={'type':type(exc).__name__,'message':str(exc),
+                           'traceback':traceback.format_exc(limit=10)}
+    finally:
+        signal.setitimer(signal.ITIMER_REAL,0)
+        if namespace is not None and old_namespace is not None:
+            for key in tuple(namespace):
+                if key not in old_namespace:namespace.pop(key)
+            namespace.update(old_namespace)
+            report['in_memory_planned_history_namespace_restored']=all(
+                namespace.get(k) is v for k,v in old_namespace.items()) and set(namespace)==set(old_namespace)
+        # This witness is emitted even when a test/setup/call failed. Restoration
+        # is observed after pytest and after the hook's finally, not inferred from
+        # having attempted a patch or from a planned source assignment.
+        ROOT_restored=(plugin is not None and plugin.patched
+            and plugin.patched_module is not None and plugin.original_ROOT==ROOT
+            and plugin.patched_module.ROOT is plugin.original_ROOT
+            and plugin.patched_module.ROOT==ROOT and plugin.ROOT_restoration_count==1)
+        report['current_candidate_ROOT_restored']=ROOT_restored
+        report['current_candidate_ROOT_restoration_count']=0 if plugin is None else plugin.ROOT_restoration_count
+        report['current_candidate_original_ROOT']=None if plugin is None or plugin.original_ROOT is None else str(plugin.original_ROOT)
+        report['current_candidate_final_ROOT']=None if plugin is None or plugin.patched_module is None else str(plugin.patched_module.ROOT)
+        if report['complete'] and not (ROOT_restored and report.get('in_memory_planned_history_namespace_restored',False)):
+            report['complete']=False
+            report['restoration_failure']='required actual ROOT or namespace restoration witness failed'
+        report['staged_test_source_pins']=staged
+        report['baseline_exact']=sha(ROOT/'cat_de_roman_esti/fixtures/kg_sample.json')==BASELINE_SHA
+        report['candidate_exact']=sha(CANDIDATE)==CANDIDATE_SHA
+        report['source_files_exact']=all(sha(ROOT/rel)==wanted for rel,wanted in ad['source_sha256'].items())
+        report['scratch_files_exact']=all(sha(path)==wanted for path,wanted in ad['scratch_sha256'].items())
+        report.update(finished_at_utc=now().isoformat(),elapsed_seconds=time.monotonic()-started,
+            peak_self_RSS_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,
+            native_handler_or_installed_suite_proof=False)
+        path=WORK/'prospective-history-proof.json'
+        with path.open('xb') as f:f.write(json.dumps(report,ensure_ascii=False,sort_keys=True,indent=2).encode()+b'\n')
+        print(json.dumps({'report':str(path),'complete':report['complete'],'sha256':sha(path)}))
+    return 0 if (report['complete'] and report['source_files_exact'] and report['scratch_files_exact']
+                 and report['baseline_exact'] and report['candidate_exact']
+                 and report['current_candidate_ROOT_restored']
+                 and report.get('in_memory_planned_history_namespace_restored',False)) else 1
+
+
+if __name__=='__main__':raise SystemExit(main())

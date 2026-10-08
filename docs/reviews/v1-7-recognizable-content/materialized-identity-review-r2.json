@@ -1,0 +1,160 @@
+{
+  "schema": "v1-7-supported-r2-materialized-identity-review",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-07T22:20:30.325176+00:00",
+  "checked_on": "2026-10-08",
+  "baseline_commit": "4812e0043342f781c3be69fffef5bbe67ffa7cf4",
+  "decision": "ACCEPT_EXACT_GENERATED_IDENTITY_AND_RETAINED_EVIDENCE_ONLY",
+  "scope": "Independent read/decompress/hash/structural comparison of actual supported isolated candidate/archive/result and qualified original execution receipts. No rerun, module import, native test, new source research, ordinary/fuzzy/all-game review or live installation. Materialized identity acceptance grants no final rawquality/hold retirement/Source7/selection/adoption acceptance.",
+  "bindings": {
+    "docs/reviews/v1-7-recognizable-content/materialization-identity-persistence-admission-r2.json": "52750c199d743c32e15c7aaced286c5349ed7a9e937067b67403451887e385cf",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-summary-r2.json": "ca2bb6781dc050d7858b046e04a47bd1b55031a95d722782fd55dc6b60673cf4",
+    "docs/reviews/v1-7-recognizable-content/materialization-archive-manifest-r2.json": "3b53fd5c1e88c246b8e1110ed92977630addcf5b4efb8dda0f89555d0c844fec",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-stop-r2.json": "56ed9f62a05fbdafdc87c3a3ef046d62934bc8543ca40bc6762f7a4601bf6c7e",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-r2-admission.json": "804813aaefd8e358dfc4d4cc41fb9c742dd06bc9d9ae6a953bba0b4608d00060",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-r2-admission-sha256.json": "7e22ef8cba0f1339abd81c9361663887b935bbc68fa9889a5c3ba5b359ac6123",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-r2-state.json": "7a0b9a79b68bb6c091e6782057e0017bdf6131b17e372bdbd6cac59dba565bf2",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-r2-result.json": "ce566e2aa657b80adf48f937b6f193973dda1f5ac49db1033d3e25a2df786cac",
+    "docs/reviews/v1-7-recognizable-content/v17-isolated-materialization-r2-result.json": "54a2f2e3146e0f0f6e9c4baf23817cda782bdcecdad31df3416449a422a987df",
+    "docs/reviews/v1-7-recognizable-content/materialization-method-proposal-r2.json": "7b9f8cc39eddb30b57c07f484dd71a9995264a38879a68060960b8a570e3c163",
+    "docs/reviews/v1-7-recognizable-content/materialization-method-review-r2.json": "ee409f4a7fff2e3783665c673a6062eb1bd0c7d0c1956e4f24d346962d0ace8b",
+    "docs/reviews/v1-7-recognizable-content/materialization-admission-self-binding-ack-r2.json": "e3009ad038285b9a1a10e58ab420bfa94829261742bd9e5794912100ab4a1757",
+    "docs/reviews/v1-7-recognizable-content/methods/materialize_graph_r2.py.txt": "f824437ce5f54740ca14e74ac55be5bc63b6656a07d58a5b976533801842e85c",
+    "docs/reviews/v1-7-recognizable-content/graph-proposal-r3.json": "0caad7bcbe695dda5b92a0f0360038fa2d952e23235d33ba67c61170aff9b354",
+    "scripts/everyday_inputs_v1_7_data_r2.py": "adb25ece1451536cd9732a3bebd1a1e0d9a3794e2234aab70c96d49994ddfb7d",
+    "docs/reviews/v1-7-recognizable-content/v17-isolated-materialization-r2-step-0-result.json": "56531cf7683207bbde4553004d04bced784fda3f8e7ffb766a0c0e14beccd106",
+    "docs/reviews/v1-7-recognizable-content/v17-isolated-materialization-r2-step-1-result.json": "33e44723feb87fa822b1832df05b25ca798d7597eb75487bfd041059d3464d66",
+    "docs/reviews/v1-7-recognizable-content/v17-isolated-materialization-r2-step-2-result.json": "7ad9162b36778eb9f82e7adea566aa36daefd215b2611193f03d6265c3f06e95",
+    "docs/reviews/v1-7-recognizable-content/materialization-r2-raw-evidence.tar.gz": "f7839eda15767907bf5e47014472ad4e89f94d510edd61ac2f1723e3af50b454",
+    "docs/reviews/v1-7-recognizable-content/prospective-kg-r2.json.gz": "b2a1e594267118bb792a462168d4fbb77138b36b4bf962c9d41aaab617994853",
+    "docs/reviews/v1-7-recognizable-content/prospective-kg-mirror-r2.json.gz": "b2a1e594267118bb792a462168d4fbb77138b36b4bf962c9d41aaab617994853",
+    "docs/reviews/v1-7-recognizable-content/prospective-mobile-r2.json.gz": "eb3b5ac1c3987b3e1c6a7d66c69e45aa9feb4f3a9e3fe4db786bfd884c916625",
+    "docs/reviews/v1-7-recognizable-content/isolated-transaction-r2.log.gz": "1c8db99f44bc660e7e1877fbdb8862a93f05e43c81fc209cff89c3f8b08bc581"
+  },
+  "actual_generated_identity": {
+    "candidate_and_mirror_sha256": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+    "mobile_sha256": "95c27815c52af67a1900f8402d272bc1a5d78440f4640abc7fa45704a4033c75",
+    "candidate_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/materialization-r2/candidate/package/kg_sample.json",
+    "supported_transaction_result_sha256": "ce566e2aa657b80adf48f937b6f193973dda1f5ac49db1033d3e25a2df786cac",
+    "counts": {
+      "edges": 9473,
+      "nodes": 2419,
+      "puzzles": 180,
+      "stored_aliases": 8680
+    },
+    "stored_form_delta": 1,
+    "genuine_synonym_family_final_approval": false,
+    "new_shared_or_world_concepts": 0,
+    "new_edges": 0,
+    "new_curated_rounds_or_targets": 0,
+    "only_node_change": "n_v4soc_salariu record equals exact predecessor with singular leafă appended to existing aliases. All other node fields/records, IDs and complete ordering equal.",
+    "graph_metadata_only": {
+      "build_version": {
+        "after": "fixture-v1-7-employee-pay-input",
+        "before": "fixture-v1-6-everyday-inputs"
+      },
+      "note": {
+        "after": "V1.7 R2: one singular employee-pay input; only this batch reconsiders the archived leafă hold.",
+        "before": "V1.6: two qualified singular synonym inputs for existing flag and edible-oil concepts."
+      }
+    },
+    "other_graph_payload": "All top-level/meta key sets exact; every non-meta/non-node payload equal, all9473edge records/order and180terminal records exact.",
+    "pack_mirrors": "Both baseline and candidate package/tests pack bytes equal installed e24eb362 predecessor. No approved/pending record payload/status change.",
+    "mobile": "Exact baseline282f18 bytes preserved; generated95c278 payload equals baseline except manifest.build_version=fixture-v1-7-employee-pay-input.",
+    "generator_observation": "Both generator-produced snapshots exactly equal final candidate/mirror3412064a; original validator returned no errors. Original transaction log reports0nodes/0edges/+1alias, all puzzles regenerated/validated and no staged items. No generated bytes manually edited or recreated by reviewer."
+  },
+  "archive_checks": {
+    "tar_archive_sha256": "f7839eda15767907bf5e47014472ad4e89f94d510edd61ac2f1723e3af50b454",
+    "tar_member_count": 14,
+    "total_uncompressed_member_bytes": 25928875,
+    "every_member_checked": true,
+    "each_member_method": "Verified unique expected names, regular-file type/no path escape, exact raw length/SHA against complete manifest and exact byte equality to its task-owned source. Read without extraction.",
+    "individual_gzip_archives_checked": 4,
+    "each_gzip_method": "Verified compressed SHA and decompressed length/raw SHA plus exact candidate/mirror/mobile/log source bytes.",
+    "predecessor_provenance": "All five archived baseline files are exact current protected physical installed Source6 files; no old expected payload generated from new candidate.",
+    "result_copy_identity": "Tar result member, own scratch result, immutable D copied result ce566e and native step2logged JSON agree."
+  },
+  "actual_current_batch_hold_vectors": {
+    "base70_count": 70,
+    "base_normalized_unique_count": 70,
+    "base70_canonical_sha256": "ca4043ff48dc88bc9b8c0a4ceec634f9f11f2b5743406abe3edd5aff0124dc67",
+    "remaining69_count": 69,
+    "remaining69_canonical_sha256": "112f704026ebc170ae79279c91ef1057e1ab03d5a8724f13baf4e846f237be2f",
+    "remaining_values_order_exact": true,
+    "only_current_batch_reconsideration": true
+  },
+  "hold_vector_limit": "Actual recorded/checked base70normalizedunique and orderedremaining69canonical hashes match the independent earlier AST-extracted source vector. Only current batch leafă/Salary tuple changes. This does not establish other69runtime owner/proxy/unresolved behavior or final retirement; V50/V72/shared importer/test hashes remain unchanged.",
+  "execution_receipt_checks": {
+    "external_admission_sha256": "804813aaefd8e358dfc4d4cc41fb9c742dd06bc9d9ae6a953bba0b4608d00060",
+    "external_keeper_sha256": "7e22ef8cba0f1339abd81c9361663887b935bbc68fa9889a5c3ba5b359ac6123",
+    "all_three_prefix_receipts_and_state_verified": true,
+    "check_method": "Each step file SHA equals immutable state prefix entry and decoded step equals cumulative record; actualname/argv/order match exact three-command admission. State/cumulative/eachstep share original admission804813/originalbaseline1115603978/start22:05:46.952800/deadline22:25:17.201261. State completed,next_index3,pendingnull; raw scratch state equals archived state. Exact current admission file SHA equals external keeper and all manifests; each raw log length/SHA/text checked.",
+    "step_results": [
+      {
+        "index": 0,
+        "name": "qualified-go-version",
+        "receipt_sha256": "56531cf7683207bbde4553004d04bced784fda3f8e7ffb766a0c0e14beccd106",
+        "exit_code": 0,
+        "guard": null,
+        "status": "passed",
+        "sampled_group_RSS_bytes": 0,
+        "pre_pin_checks": 243,
+        "post_pin_checks": 243
+      },
+      {
+        "index": 1,
+        "name": "exact-supported-r2-nonmutating-preflight",
+        "receipt_sha256": "33e44723feb87fa822b1832df05b25ca798d7597eb75487bfd041059d3464d66",
+        "exit_code": 0,
+        "guard": null,
+        "status": "passed",
+        "sampled_group_RSS_bytes": 11821056,
+        "pre_pin_checks": 243,
+        "post_pin_checks": 243
+      },
+      {
+        "index": 2,
+        "name": "supported-isolated-r2-one-form-materialization",
+        "receipt_sha256": "7ad9162b36778eb9f82e7adea566aa36daefd215b2611193f03d6265c3f06e95",
+        "exit_code": 0,
+        "guard": null,
+        "status": "passed",
+        "sampled_group_RSS_bytes": 122265600,
+        "pre_pin_checks": 243,
+        "post_pin_checks": 243
+      }
+    ],
+    "protected_pins_verified_current_and_each_pre_post": 243,
+    "pin_method": "Merged229current immutable source/receipt/code pins and14qualifiedscratch pins; exact path sets and every boolean true in all3pre/post records and final postarchive243checks. Independently hashed all243currentfiles, including actualR2module/currentACK/helper50closure/111runtime/V50/V72/sharedguard/legacytests/own6SDK+7tools+runner; no mismatches.",
+    "failed_R1_preserved": "DifferentR2module/proposal/admission/namespace; failedR1was not retried or relabelled PASS.",
+    "process_limit": "Qualified completed runner success contract includes owned session empty before childwait, every cleanupnull/statuspass and no pending child. Bound stop says native/metadataproducer ended; reviewer did not inspect or stop unrelated processes."
+  },
+  "resource_and_original_clock": {
+    "qualified_native_start_utc": "2026-10-07T22:05:17.201261+00:00",
+    "original_deadline_utc": "2026-10-07T22:25:17.201261+00:00",
+    "metadata_reserve_seconds": 180,
+    "deadline_minus_reserve_utc": "2026-10-07T22:22:17.201261+00:00",
+    "last_native_step_finish": "2026-10-07T22:08:10.236526+00:00",
+    "archive_finish": "2026-10-07T22:11:36.080359+00:00",
+    "stop_metadata_written_at": "2026-10-07T22:11:36.865976+00:00",
+    "all_finish_before_original_reserve": true,
+    "sampled_native_group_RSS_peak": 122265600,
+    "native_full_S_R_sampled_increment_peak": 26186265,
+    "publication_reserved_increment_upper_bound": 93295129,
+    "final_reported_postarchive_increment": 30548525,
+    "verified_bounds": "All three native receipt2GiBRSS/1GiBfullS-Rincrement, fixed20minute deadline/180reserve, immutableoriginalbaseline, each publication reserved disk and available memory≥16GiB and original17GiBstartfloor fields pass. Publication allowances remain inside caps; no child directory double counting or clock reset.",
+    "metadata_measurement_limit": "Bound author summary reports archive duration18.552084seconds and groupRSS120672256bytes. This review verifies archive/finalpin/timestamp identity and those recorded observations, not a fresh independent metadata process/RSS measurement. Source reviewer whole-worker/browserRSS remains unmeasured; no such PASS claimed."
+  },
+  "remaining_gates": [
+    "Fresh exact methods/admissions and actual complete candidate all-game/mining/fuzzy/projection/input effects; fixed29+19queries/≤192service cases, exactLeana and allother69measured baseline dispositions.",
+    "Ordinary knownseed7 actual alias/canonical directsuccess/sharedslot/privateGet/repeats/earnedbankhint/700score/share/Progress; controlledLanț and all180terminal execution; no baseline seedsearch rerun or forcedprivate target.",
+    "Genuine SHA-pinned Source6pre-retirement context retaining every oldV50all-sevenblocked assertion/literal plus newcurrentone-alias/other69/defaultshared-refusal checks; fullWorld33/148/tenbooks1156history and all old corpora/inverses.",
+    "New final rawquality and one-word hold disposition; supportedSource7reviewedSource6parent/all25ancestry and all affected catalogues/source/reviews/export/reference/history/currentauthority, freshinstalledaudits/originalrolefinals/fullrequiredchecks/independentassembledacceptance beforelocalgreenadoption."
+  ],
+  "final_raw_quality_accepted": false,
+  "final_hold_retirement_approved": false,
+  "Source7_approved": false,
+  "installation_approval": false,
+  "source_review_limits": "Own materialization-identity-persistence-admission-r2 SHA52750c19,root+reviewer2inclusive. No additionalagent/primaryresearch/moduleimport/generator/native/profile/other69resolver/runtime/source/pool mutation or commit/push. Only this requested review receipt written, inside original22:12:47.867168→22:29:47.867168sourcecutoff/22:32:47.867168deadline.",
+  "valid_until": "Any bound candidate/archive/method/proposal/review/source/admission/prefix/readset/resource evidence changes; repeat affected identity review. Actual gameplay/final installation evidence remains independently required."
+}

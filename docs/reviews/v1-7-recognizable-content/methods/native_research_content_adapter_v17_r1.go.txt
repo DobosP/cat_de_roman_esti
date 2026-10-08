@@ -1,0 +1,83 @@
+package content
+
+// V17ResearchCandidate constructs a test-only counterfactual in memory. The
+// unchanged sealed export is loaded normally; ONLY generator-produced aliases and
+// independently derived exact normalized owners are transferred before Shared is
+// used. Source/manifest identities intentionally remain BASELINE, so this object
+// is NOT a qualified sealed export, Source7, or installed-authority artifact.
+// This file is compiled only via the explicitly reviewed research test overlay.
+import (
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "os"
+ "reflect"
+)
+
+const v17BaselineKG = "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf"
+const v17CandidateKG = "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749"
+
+type v17Fixture struct {
+ Meta map[string]any `json:"meta"`
+ Nodes []map[string]any `json:"kg_nodes"`
+ Edges []map[string]any `json:"kg_edges"`
+ Puzzles []map[string]any `json:"kg_puzzles"`
+}
+
+func V17ResearchCandidate() (*Content,error) {
+ c,err:=Load(); if err!=nil{return nil,err}
+ if c.Sources["kg_sample.json"]!=v17BaselineKG{return nil,fmt.Errorf("wrong sealed baseline source")}
+ load:=func(env,hash string)(v17Fixture,error){
+  var f v17Fixture
+  path:=os.Getenv(env);if path==""{return f,fmt.Errorf("missing %s",env)}
+  b,e:=os.ReadFile(path);if e!=nil{return f,e}
+  if fmt.Sprintf("%x",sha256.Sum256(b))!=hash{return f,fmt.Errorf("%s hash drift",env)}
+  e=json.Unmarshal(b,&f);return f,e
+ }
+ before,err:=load("V17_BASELINE_KG",v17BaselineKG);if err!=nil{return nil,err}
+ after,err:=load("V17_CANDIDATE_KG",v17CandidateKG);if err!=nil{return nil,err}
+ if len(before.Nodes)!=2419 || len(after.Nodes)!=2419 || len(after.Edges)!=9473 || len(after.Puzzles)!=180 || !reflect.DeepEqual(before.Edges,after.Edges) || !reflect.DeepEqual(before.Puzzles,after.Puzzles){return nil,fmt.Errorf("candidate topology/puzzle drift")}
+ expected:=map[string]string{"n_v4soc_salariu":"leafă"}
+ changed:=map[string][]string{}
+ for i,old:=range before.Nodes {
+  fresh:=after.Nodes[i];id,ok:=old["id"].(string)
+  if !ok || fresh["id"]!=id{return nil,fmt.Errorf("node identity/order drift")}
+  word,selected:=expected[id]
+  if !selected {if !reflect.DeepEqual(old,fresh){return nil,fmt.Errorf("unselected node drift %s",id)};continue}
+  oldAliases,ok:=old["aliases"].([]any);if !ok{return nil,fmt.Errorf("old aliases malformed")}
+  want:=map[string]any{};for k,v:=range old{want[k]=v}
+  appended:=append(append([]any{},oldAliases...),word);want["aliases"]=appended
+  if !reflect.DeepEqual(want,fresh){return nil,fmt.Errorf("unexpected node delta %s",id)}
+  aliases:=[]string{};for _,v:=range appended {a,ok:=v.(string);if !ok{return nil,fmt.Errorf("alias type")};aliases=append(aliases,a)}
+  changed[id]=aliases
+ }
+ if len(changed)!=1{return nil,fmt.Errorf("expected exactly one generated alias delta")}
+ var index struct {
+  Schema string `json:"schema"`
+  Baseline string `json:"baseline_kg_sha256"`
+  Candidate string `json:"candidate_kg_sha256"`
+  Unicode string `json:"unicode_version"`
+  Before map[string]string `json:"baseline_index"`
+  After map[string]string `json:"candidate_index"`
+  Additions map[string]string `json:"index_additions"`
+ }
+ b,err:=os.ReadFile(os.Getenv("V17_CANDIDATE_INDEX"));if err!=nil{return nil,err}
+ if err=json.Unmarshal(b,&index);err!=nil{return nil,err}
+ expectedIndex:=map[string]string{"leafa":"n_v4soc_salariu"}
+ if index.Schema!="v1-7-actual-candidate-research-index-r1" || index.Baseline!=v17BaselineKG || index.Candidate!=v17CandidateKG || index.Unicode!="15.0.0" || len(index.Before)!=13514 || len(index.After)!=13515 || !reflect.DeepEqual(index.Before,c.NormalizedIndex) || !reflect.DeepEqual(index.Additions,expectedIndex){return nil,fmt.Errorf("independent index provenance/baseline drift")}
+ additions:=map[string]string{}
+ for key,owner:=range index.After {
+  if old,exists:=index.Before[key];exists {if old!=owner{return nil,fmt.Errorf("old normalized owner drift")}}else{additions[key]=owner}
+ }
+ if !reflect.DeepEqual(additions,expectedIndex){return nil,fmt.Errorf("unexpected candidate normalized keys")}
+ updated:=0
+ for i:=range c.Nodes {
+  if aliases,ok:=changed[c.Nodes[i].ID];ok {
+   if !reflect.DeepEqual(c.Nodes[i].Aliases,aliases[:len(aliases)-1]){return nil,fmt.Errorf("sealed node aliases differ from actual baseline")}
+   c.Nodes[i].Aliases=append([]string{},aliases...);updated++
+  }
+ }
+ if updated!=1{return nil,fmt.Errorf("missing selected sealed owner")}
+ c.NormalizedIndex=index.After
+ return c,nil
+}

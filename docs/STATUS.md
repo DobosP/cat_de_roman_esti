@@ -1,8 +1,8 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-08 — V1.6/Source6 qualification remains as recorded below; GUI source-only Windows checkpoint is NOT newly runtime-qualified (no handover tests). See [handover](GUI_MIGRATION_HANDOFF.md).
+Last verified: 2026-10-08 — Source6/Source7 facts remain below; GUI source-only Windows checkpoint is NOT newly runtime-qualified (no handover tests). [Pickup](GUI_MIGRATION_HANDOFF.md).
 
-- **GUI checkpoint:** core-v1.2 released; normalized style15 source accepted/unapplied; dependency64ea PASS. Actual replay900/Node3/lint/unit/full/CSP/device/KIT_BUMP pending. Linux worker/supervisor stopped at Paul's handover request.
+- **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
 ## Current state

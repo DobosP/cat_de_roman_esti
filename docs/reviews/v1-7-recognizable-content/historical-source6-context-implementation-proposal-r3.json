@@ -1,0 +1,62 @@
+{
+  "R2conditional_acceptance_not_execution_approval": true,
+  "Source7_created": false,
+  "author": "/root/v17_reference_methods",
+  "baseline_commit": "8149193a179dbd805e75afa581183e8753fa6378",
+  "conditional_R2_review_sha256": "cc4f45524fa35339efb4f093ec6a332f2d4733b221b82d8c321592bdefb9ea81",
+  "decision": "SOURCE_ONLY_FRESH_EXACT_REVIEW_AND_SEPARATE_EXECUTION_ADMISSION_REQUIRED",
+  "exact_diff_provenance": {
+    "new_method_AST_parse_only": true,
+    "patches": [
+      {
+        "new": "            patched=False\n            patched_module=None\n            original_ROOT=None\n            ROOT_restoration_count=0\n            @pytest.hookimpl",
+        "old": "            patched=False\n            @pytest.hookimpl"
+      },
+      {
+        "new": "                    assert self.patched_module is None, 'only one declared candidate ROOT patch'\n                    previous=item.module.ROOT\n                    self.patched_module=item.module\n                    self.original_ROOT=previous\n                    item.module.ROOT=candidate_root",
+        "old": "                    previous=item.module.ROOT\n                    item.module.ROOT=candidate_root"
+      },
+      {
+        "new": "                        item.module.ROOT=previous\n                        self.ROOT_restoration_count+=1\n                        assert item.module.ROOT is self.original_ROOT and item.module.ROOT==ROOT\n            def pytest_collection_finish",
+        "old": "                        item.module.ROOT=previous\n            def pytest_collection_finish"
+      },
+      {
+        "new": "        # This witness is emitted even when a test/setup/call failed. Restoration\n        # is observed after pytest and after the hook's finally, not inferred from\n        # having attempted a patch or from a planned source assignment.\n        ROOT_restored=(plugin is not None and plugin.patched\n            and plugin.patched_module is not None and plugin.original_ROOT==ROOT\n            and plugin.patched_module.ROOT is plugin.original_ROOT\n            and plugin.patched_module.ROOT==ROOT and plugin.ROOT_restoration_count==1)\n        report['current_candidate_ROOT_restored']=ROOT_restored\n        report['current_candidate_ROOT_restoration_count']=0 if plugin is None else plugin.ROOT_restoration_count\n        report['current_candidate_original_ROOT']=None if plugin is None or plugin.original_ROOT is None else str(plugin.original_ROOT)\n        report['current_candidate_final_ROOT']=None if plugin is None or plugin.patched_module is None else str(plugin.patched_module.ROOT)\n        if report['complete'] and not (ROOT_restored and report.get('in_memory_planned_history_namespace_restored',False)):\n            report['complete']=False\n            report['restoration_failure']='required actual ROOT or namespace restoration witness failed'\n        report['staged_test_source_pins']=staged",
+        "old": "        report['staged_test_source_pins']=staged"
+      },
+      {
+        "new": "                 and report['baseline_exact'] and report['candidate_exact']\n                 and report['current_candidate_ROOT_restored']\n                 and report.get('in_memory_planned_history_namespace_restored',False)) else 1",
+        "old": "                 and report['baseline_exact'] and report['candidate_exact']) else 1"
+      }
+    ],
+    "replacement_count": 5,
+    "reverse_all_replacements_equals_exact_R2_source": true
+  },
+  "minimal_R3_repair": [
+    "Track exactlyone patchedmodule/originalROOT; refuse a secondpatch.",
+    "Hookfinally restores exact originalPathobject, countsrestorations and asserts identity+actualRvalue.",
+    "Outerfinally dynamically checks patchedmoduleROOT afterpytest, one restoration and actualR, emits requiredROOTrestored/count/original/final witnesses evenfailure.",
+    "A would-becomplete result becomes incomplete if ROOT/namespace witnessmissing; exit0requires BOTHactual flags alongsideoriginalallsource/candidate/scratchflags."
+  ],
+  "missing_witness_gap": "R2hook source restoredROOT in finally, but rawreport emitted only patch_used. It did not dynamically emit/assert finalROOT restoration or include namespace-restored in exitqualification. R2 never executed; this is a source/required-evidence gap, not failedtest.",
+  "new_method_sha256": "f969a35db115129ee82b955aa7758d2dd6e27816947115bae506bb99ab288416",
+  "oldR2_proposal_sha256": "f3c302332e41ddc0723c851e06f49dc7e7b2ddf3b36cb4d6907d2f1d4f485037",
+  "oldR2_readset_sha256": "a33f7f32c26d5811d651d6f53abd78911b00bed338d68481ff4bdfd0d46f3bd5",
+  "old_method_sha256": "da46b8fea31d53acda6876cd600e3b24b2e6e7521d4cc6c02abe4f60638b7aa0",
+  "planned_live_changes_installed": false,
+  "prepared_at_utc": "2026-10-08T02:53:03.995554+00:00",
+  "preserve_old_world744_failed_clock": true,
+  "readset_sha256": "74fe4bd80b02373eb4d75c7e94dbccefec9b6fa34f3f4719a20ab784c3a18ac6",
+  "required_actual_execution_evidence": [
+    "Exactly7collected/callcases withallsetup/call/teardown phases passed; no skip/deselection.",
+    "current_candidate_ROOT_patch_used=true; current_candidate_ROOT_restored=true; restoration_count=1; original/finalROOTactualR.",
+    "in_memory_planned_history_namespace_restored=true andphysicalsource/fixture/candidate/stagedsource/scratchpinsalltrue.",
+    "Zero child/outerexit andnullresourceguard underfreshfullS-R39768617GiBstart16disk+memory/2GiBRSS1GiBgrowth20min180reserve admission."
+  ],
+  "retirement_or_installation_approval": false,
+  "schema": "v17-prospective-history-restoration-witness-proposal-r3",
+  "source_RSS": "unmeasured; no source memory qualification",
+  "source_admission_sha256": "9014a7645171ee0b47b45467eece698f0d29af0aaca4f04e3ccf9620b9821018",
+  "source_only_unexecuted": true,
+  "unchanged_scope": "Sameoriginal7cases/selectors/allassertions/helper/sourcecopies/candidate341/historical63f+3bbe+0275+69BEFORE3fc/overlay+cleanup/provenance. No newframework/publication/fixture/coretest/source7/data/thresholdchange."
+}

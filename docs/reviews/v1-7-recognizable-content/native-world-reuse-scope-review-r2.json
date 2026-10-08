@@ -1,0 +1,43 @@
+{
+  "schema": "independent-single-unrun-world-probe-scope-review-v1",
+  "reviewer": "v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T03:24:50.798854+00:00",
+  "decision": "ACCEPT_SCOPE_FOR_SEPARATELY_ADMITTED_RESEARCH_PROBE_ONLY",
+  "source_admission_sha256": "2c0f56ef4e871ed9868cfe0452330a254bacea8ab6df0c931f097fd0f2cd8228",
+  "bindings": {
+    "native-world-reuse-scope-proposal-r2.json": "22c5d9288c82e4cf64c64eddb89d1dba6c0a15323469d42f2aae84ee932fd6f9",
+    "native-world-reuse-readset-r2.json": "e3df3da92354431341f24e3cdd4e903ae6a043edd29ba7c54ffd706f662a2c16",
+    "methods/native_world_v17_r1.go.txt": "ee92090ec696fc3630f2cd140f1e8d411131e6da52d45751f20bb21dd8928f0f",
+    "methods/native_research_content_adapter_v17_r1.go.txt": "ed1563a09d66522ec96fb6c571daf71d195b5b8ac0072ec9bea913a876c94671",
+    "native-world-method-review-r1.json": "be80b7831ae0990f871f6ffb3e7de9381addd2d970131fa2a58a87f7ddc75fc9",
+    "native-world-failed-evidence-review-r1.json": "a6d9b1dd1ae92fbfd990257b9dc9403b6cbed68d19d4b65b7ae63db7366dd248",
+    "native-world-failed-archive-manifest-r1.json": "ac975a48c5c6da59bf1780eda324be9969215dcc7b3606f321226d3d9c7531a4"
+  },
+  "known_binary_sha256": "e0c0611ebc18ba11bc039a831d76038c0ea5973ec3984043e6ab291d47d2bfa5",
+  "known_compile_producer_sha256": "ebd0500a50a1fcdd982fa4c65d59de00c547a24f0c100eba3859d6e952dd506d",
+  "findings": [
+    "All 273 normal inputs/unchanged and 30 scratch bindings match currently. Actual two temporary source paths and both probe output paths are absent. The unchanged reviewed World source/helper match their exact pins.",
+    "Known binary hash matches its original compile artifact and the compile producer hash is attested in the preserved failed archive. The old outer compile row remains failed despite inner exit zero, with remaining-disk-or-memory-floor guard. Old state remains failed, next two, pending null and bound to 744.",
+    "A new one-command lane for the previously unrun probe is a distinct finite scope. It reuses known byte identity without promoting old compilation resources or resuming its failed prefix. No compilation, index/profile/HTTP baseline or reference/history replay is proposed.",
+    "The unchanged method uses original auditWorld on a complete private root: all eight actual Source6 source inputs, both KG/pack mirrors and rubric are copied exactly; only generated candidate KG bytes are substituted. Source6 metadata remain transparently baseline.",
+    "Expected scope remains 33 goal modes with 148 discoveries each, 252 concepts, 352 recipes, 10 books and 1,156 saved prefixes; Salary is absent from World concepts/recipes. The 20 public-handler controls compare two fresh states, private recipe/target exposure and four outside-world input refusals followed by unchanged Gets.",
+    "Static audit recipes_private is not proof of HTTP privacy. Dynamic state/privacy assertions and actual reported response count must independently pass."
+  ],
+  "execution_conditions": [
+    "Create separately fresh immutable native admission after measured existing 17-GiB start disk / 16-GiB remaining disk and MemAvailable floors, 2-GiB sampled group RSS, 1-GiB full S/R increment, 20-minute absolute deadline and 180-second reserve. Optional 20-GiB planning margin is not a hard-floor replacement or execution qualification.",
+    "Pin this review, exact proposal/readset and all existing known source/tool/binary/index/compile/producer log/old failed-state identities in immutable pre/post readsets. Freeze new external keeper and digest before the single spawn; verify admission bytes through the existing external expected-SHA mechanism, never circular self hash or admission edits.",
+    "Root must rehash known producers, old logs and state, helper/method/source/SDK/candidate/index/binary and keeper before and after. New prefix starts at zero and must finish completed next one / pending null / exit zero / guard null with identical new admission, roots, baseline and deadline throughout.",
+    "The existing Go check only requires kg_sha256 substring. That check ALONE is insufficient: actual retained strict refusal must equal exactly board rankings: source binding drift: kg_sha256 as mandated by the frozen proposal; any other error is a result rejection.",
+    "Require complete end true / failed false, full prescribed audit counts and all 20 HTTP controls, plus independently verified private-root byte identities. Any resource/hash/nonzero/incomplete failure stops qualification and preserves outputs; no old-prefix resume, recomputed trust baseline or budget reset."
+  ],
+  "limits": {
+    "actual_probe_executed": false,
+    "old_compile_resources_qualified": false,
+    "whole_source_worker_RSS": "unmeasured",
+    "Source7_approved": false,
+    "installed_history_approved": false,
+    "final_raw_quality_approved": false,
+    "hold_retirement_approved": false
+  },
+  "remaining": "Actual World result and fresh independent quality review remain pending, followed by supported Source7 ancestry/catalogue/current-authority/installed-history/full-gate/assembled acceptance."
+}

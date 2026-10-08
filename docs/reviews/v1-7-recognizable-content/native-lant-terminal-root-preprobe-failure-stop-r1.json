@@ -1,0 +1,44 @@
+{
+  "schema": "v1-7-lant-terminal-root-preprobe-failure-stop-v1",
+  "recorded_at_utc": "2026-10-08T01:48:02.976214+00:00",
+  "original_admission_sha256": "c20305a07879d43abbb78da13525bc53bca0da97e0e5d92bc9152a6c22842304",
+  "original_deadline_utc": "2026-10-08T02:00:41.835585+00:00",
+  "original_start_size": 1350630717,
+  "root_campaign_status": "FAILED_BEFORE_ANY_PLAY_PROBE",
+  "root_precheck_failures": [
+    {
+      "failure": "FileNotFoundError",
+      "reason": "Root read-only precheck named state without qualified -r4-r3 suffix; no runner/probe launch.",
+      "wrong_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/v17-lant-terminal-native-r1-state.json",
+      "actual_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/v17-lant-terminal-native-r1-r4-r3-state.json"
+    },
+    {
+      "failure": "AssertionError",
+      "reason": "Later corrected-state check passed all source/output/state assertions, then failed manual MemAvailable>=16GiB gate before any incident write or runner launch.",
+      "exact_assertion_operands": "not emitted; unknown",
+      "near_followup_memory_bytes": 16890482688,
+      "near_followup_label": "Separate later observation, NOT exact assertion operand"
+    }
+  ],
+  "actual_runner_status_preserved": "ready",
+  "actual_runner_next_index": 2,
+  "actual_runner_state_sha256": "0fe9a20d268c3b397c85d5734409a180c83bbc7676b3b815af4863ed5984078d",
+  "passed_producers_only": [
+    0,
+    1
+  ],
+  "Lant_executed": false,
+  "terminal_executed": false,
+  "all286_initial_pins_and_actual_outputs_exact": true,
+  "temporary_sources_removed": true,
+  "root_native_scope_complete": false,
+  "clock_reset": false,
+  "failed_campaign_will_not_resume": true,
+  "meaningful_recovery_observation": {
+    "at_utc": "2026-10-08T01:48:02.976214+00:00",
+    "memory_available_bytes": 25332363264,
+    "disk_free_bytes": 220806189056
+  },
+  "new_scope_required": "New exact independently reviewed two-play-probe lane may reuse these passed known binaries/producers under fresh resources; no SDK/compile/index/profile/HTTP/reference replay.",
+  "installation_approval": false
+}

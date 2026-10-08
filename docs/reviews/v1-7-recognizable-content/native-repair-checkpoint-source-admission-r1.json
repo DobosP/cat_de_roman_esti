@@ -1,0 +1,15 @@
+{
+  "schema": "v1-7-native-failure-repair-checkpoint-source-admission-v1",
+  "checked_at_utc": "2026-10-07T23:50:10.623039+00:00",
+  "source_cutoff_utc": "2026-10-07T23:57:10.623039+00:00",
+  "deadline_utc": "2026-10-08T00:00:10.623039+00:00",
+  "fresh_headroom": {
+    "disk_free_bytes": 221572677632,
+    "memory_available_bytes": 20734726144
+  },
+  "max_agents_including_root": 1,
+  "scope": "Root only preserves exact already frozen native308d failure/archive and sourceR3repair/currentreviews as a clean resumable checkpoint. No unfinished staging writes/reviews, Go/compile/probe/reference replay/Source7/adoption. Original2249 source metadata deadline missed due root not dispatching queued send_message to idle author; record failure explicitly, never reset/retroPASS. Existing valid substantive writes/reviews beforecut retained. Native docs requires separately fresh exact lane.",
+  "source_worker_RSS": "unmeasured; no source memory qualification",
+  "status": "SOURCE_ADMITTED",
+  "original_full_S_R_size": 1259835123
+}

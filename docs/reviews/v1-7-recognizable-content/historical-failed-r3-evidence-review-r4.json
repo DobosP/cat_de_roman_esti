@@ -1,0 +1,31 @@
+{
+  "reviewer": "v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T03:18:55.766232+00:00",
+  "source_admission_sha256": "2c0f56ef4e871ed9868cfe0452330a254bacea8ab6df0c931f097fd0f2cd8228",
+  "review_operations": "Static archive, byte hashes, AST and retained output inspection only; no import, native execution or test replay.",
+  "source_worker_RSS": "Unmeasured; no whole-worker qualification.",
+  "schema": "independent-failed-history-evidence-review-v1",
+  "decision": "ACCEPT_FAILED_EVIDENCE_IDENTITY_ONLY",
+  "bindings": {
+    "historical-failed-r3-raw-r4.tar.gz": "eac4fe3961ff99bb436fcf1ad75b964dfeb5614c15a0719c58e91249f4954263",
+    "historical-failed-r3-archive-manifest-r4.json": "ae0eedb048337a01ad85d2799d590ee4a5529487438b8f01566f248eb6a236d3",
+    "historical-failed-r3-summary-r4.json": "d0e256bedef02d77d738d67d2945506d9fbf230dd37d8c756e5e6ec0e7646709",
+    "historical-failed-r3-preservation-stop-r4.json": "26a0cab0c569392159525da8376b774bbe71f0b12cb5b0cc4b02f73211fbca3b",
+    "historical-failed-r3-accounting-ack-r4.json": "600f31554523d90647f42b5fff9ab8962a69bbde401ff2dde315ed0a36abbb7e",
+    "historical-source6-context-native-admission-r3.json": "656a4e4b6402bd8ec67bbcdb3e73eaacff59c61bf4fdd944de8e54a6ad3200d0"
+  },
+  "findings": [
+    "All 31 regular archive members match declared size and SHA; all 30 recorded external source origins match. Archive contains the raw failed report, producer log, immutable admission/inner admission, state, keeper and unchanged physical Source6/candidate snapshots.",
+    "All 334 protected canonical paths match currently and in recorded pre/post checks. Failed prefix state and cumulative receipt agree with original 656 admission, original baseline and deadline; pending is null and next index is one.",
+    "PluginValidationError rejects formal rep before collection. Actual case-call count and phase-report count are zero; complete is false. Namespace restoration is true, while candidate ROOT was never patched and restoration count is zero.",
+    "The original step exited one with step-failure. Sampled process-group RSS 82,640,896 bytes is a resource observation for this failed command; it grants no prospective test pass.",
+    "Later source preservation and accounting bind their own ab4 admission and clock. R4_unexecuted flags are accurate historical observations at that preservation time, and are not current claims after subsequent fresh R4 execution."
+  ],
+  "limits": {
+    "prospective_cases_qualified": false,
+    "installation_approved": false,
+    "Source7_approved": false,
+    "hold_retirement_approved": false,
+    "failed_clock_reset": false
+  }
+}

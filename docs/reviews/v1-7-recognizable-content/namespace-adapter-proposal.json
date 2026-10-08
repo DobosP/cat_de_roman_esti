@@ -1,0 +1,16 @@
+{
+  "algorithm_change": "none except broadening measurement coverage",
+  "base_method": "docs/reviews/v1-6-everyday-inputs/methods/run_worktree_lane_r4_r3.py.txt",
+  "base_sha256": "a7deb39ed747c68bc029da3ea7d02485096d6ff6ef531aa2b948ffc3e28a0b73",
+  "candidate_method": "docs/reviews/v1-7-recognizable-content/methods/run_owned_full_scratch_lane.py.txt",
+  "candidate_sha256": "397686a51c5f03f207cc450fceda8b88623383a83ab2ecb90a884e6167fa91ee",
+  "changes": [
+    "R/S/D task-owned namespace constants only",
+    "measurement_roots [S,R] includes entire own scratch including SDK/tool binaries; no overlap/double-count"
+  ],
+  "copy_gap": "preserved R1 copy resource limitation; hashes exact; no game/runtime/data changes",
+  "limits": "unchanged17GiBstart/16GiBremainingdisk+memory,2GiBgroupRSS/1GiBincrement/20min,180sreserve,Go2threads/jobs",
+  "namespace_adapter_sha256": "310f250c0e069008f9732bf1e28740d56d534f82c0760ff06a1fc2c008d52491",
+  "next": "independent adapter review then one freshly admitted native baseline version/modules/source/export/defaultall4/docs",
+  "schema": "v1-7-full-scratch-namespace-adapter-proposal-v1"
+}

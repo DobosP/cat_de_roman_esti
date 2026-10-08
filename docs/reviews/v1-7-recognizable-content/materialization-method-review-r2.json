@@ -1,0 +1,105 @@
+{
+  "schema": "v1-7-r2-independent-isolated-materialization-source-method-review",
+  "reviewer": "/root/v17_research_quality",
+  "author": "/root/v17_materialize",
+  "reviewed_at_utc": "2026-10-07T21:59:16.744392+00:00",
+  "checked_on": "2026-10-08",
+  "baseline_commit": "4812e0043342f781c3be69fffef5bbe67ffa7cf4",
+  "decision": "ACCEPT_EXACT_R2_SOURCE_METHOD_FOR_SEPARATELY_ADMITTED_ISOLATED_EXECUTION",
+  "scope": "Fresh static source-method/readset review of exact f824 method/7b9 proposal/e895 manifest. Accepts only future supported own-scratch materialization after all explicit immutable-input/resource conditions. No native/import/apply, materialized identity, final quality/hold retirement/currentSource7/installation approval.",
+  "bindings": {
+    "docs/reviews/v1-7-recognizable-content/materialization-method-proposal-r2.json": "7b9f8cc39eddb30b57c07f484dd71a9995264a38879a68060960b8a570e3c163",
+    "docs/reviews/v1-7-recognizable-content/methods/materialize_graph_r2.py.txt": "f824437ce5f54740ca14e74ac55be5bc63b6656a07d58a5b976533801842e85c",
+    "docs/reviews/v1-7-recognizable-content/materialization-protected-inputs-r2.json": "e8954d6361560523c42c0e3ad2784e50f93618e1a2f61e2edcc615cb3cbe2b5a",
+    "docs/reviews/v1-7-recognizable-content/candidate-method-preparation-admission-r2.json": "38406df1b0e6a839fcd7b094300bcdd65331ee0234f6904d362c5a45d7023318",
+    "docs/reviews/v1-7-recognizable-content/methods/materialize_graph_r1.py.txt": "2c1c28b09766cc9d09e8c33a62d5523ffb6feac745edfd15ca70d043392003f8",
+    "docs/reviews/v1-7-recognizable-content/materialization-method-review-r1.json": "091cfe2c4771f16ae9a5869da75940778cfb1b158e82c0ad165b6c45d96d8365",
+    "docs/reviews/v1-7-recognizable-content/materialization-python-helper-pins-r1.json": "d2f2f42ce6c9b2fae0b6ec0f6df094b6c808abc986ee15a86dbd6f8afcb0a0d7",
+    "docs/reviews/v1-7-recognizable-content/graph-proposal-r3.json": "0caad7bcbe695dda5b92a0f0360038fa2d952e23235d33ba67c61170aff9b354",
+    "scripts/everyday_inputs_v1_7_data_r2.py": "adb25ece1451536cd9732a3bebd1a1e0d9a3794e2234aab70c96d49994ddfb7d",
+    "docs/reviews/v1-7-recognizable-content/raw-factual-review-r2.json": "e975ac126696cabb547a5fb71e19878665ee43fc2baedf7ce351de9b25f8370a",
+    "docs/reviews/v1-7-recognizable-content/raw-quality-prospective-review-r2.json": "38fdf521bd3d2aea18b52b9ecf56f9b0cbeeb4310ee370d7de4ca8dc6154c3be",
+    "docs/reviews/v1-7-recognizable-content/raw-factual-format-binding-r3.json": "6f188d5cd0330ff63680da8884d098a335c022922003e2f0f13838b5388f7d92",
+    "docs/reviews/v1-7-recognizable-content/raw-quality-format-binding-r3.json": "b28223286c41de5082cb43522712e8b234719d8d6c361dc19ff0e42711457ec7",
+    "docs/reviews/v1-7-recognizable-content/hold-disposition-factual-review-r2.json": "e74cd75ef8ad3d005947e32a0b461a55d1d16f085c70a7265e0cdd0aebbdb823",
+    "docs/reviews/v1-7-recognizable-content/hold-disposition-quality-review-r2.json": "effa10dc4e60e32ed081887c0585206251bd48b71374352e7554239f05488d6d",
+    "docs/reviews/v1-7-recognizable-content/selection-snapshots/i05-lex-01-r7-reconsideration.json": "bd1ebaec0b5edb8f95dc21eb1f04bffb2acccf1c4731e060d40e7dde5c9fce6a",
+    "docs/content-pool/v1-7-recognizable-content/pool.json": "e4477bf83e833b1eae3b101705775cd44e27e95280c452060c3b8a23ee32dc0e",
+    "docs/reviews/v1-7-recognizable-content/isolated-materialization-refusal-summary-r1.json": "4b4e89ca3a2ab7af03bd2d466ed66e3192761aa5874d5f8e524a23f9a7e70125"
+  },
+  "scratch_bindings_verified": {
+    "/home/dobo/work/_temp/codex__content-v1-7/cat-content": "5e381ff0489ca735268403e072638751116dd2caa4dc44193c231fa145352b6e",
+    "/home/dobo/work/_temp/codex__content-v1-7/cat-content-ops": "4be33997b10097a89d8412b10b303049fceaedc7d3489f21b1ff7f2ccc884784",
+    "/home/dobo/work/_temp/codex__content-v1-7/cat-content-rail": "bbe6d0fe9e64695cd5cc05bde1fd6b0e995d60eb41c7c693a5f559f0ae6cdf96",
+    "/home/dobo/work/_temp/codex__content-v1-7/cat-doc-check": "3caf29e4181f4aa4eb16ed287e624d78e9baac6c4b4b2b48b981933c8d9509a3",
+    "/home/dobo/work/_temp/codex__content-v1-7/cat-mobile-pack": "8818047da66182bcec7c825a452bb88d29098a7793a2db869b8d4edd7cdb35b6",
+    "/home/dobo/work/_temp/codex__content-v1-7/cat-qualify": "9648c6ef22c9557e1a31858c9c60f3757eef8893eced9864930e493ea4e39837",
+    "/home/dobo/work/_temp/codex__content-v1-7/cat-server": "9c40564c6c8b53045b94f08574af3f6824b250824a46d1bad4dc5a6ee5840da4",
+    "/home/dobo/work/_temp/codex__content-v1-7/probe/run_owned_full_scratch_lane.py": "397686a51c5f03f207cc450fceda8b88623383a83ab2ecb90a884e6167fa91ee",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/VERSION": "25eb74b09036e1ad894fb63b86cb0f0ee53342df8d2e2e860da4ff5079607758",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/gofmt": "86dd91f69254432a37ca365f964720677040fd6f049a412c23e25f8b3812f342",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/pkg/tool/linux_amd64/compile": "3780fc07130d6d45096373acf062cc316940d253e2a1d892ece03a3bdd0d21d4",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/pkg/tool/linux_amd64/link": "a29ac5e8f64111b0b5c5d31e452f18abf7ee79f44b421081b5509c8939d92ba9",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go1.27.1.linux-amd64.tar.gz": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+  },
+  "verified_readsets": {
+    "inputs": 215,
+    "unchanged": 214,
+    "scratch": 14,
+    "mismatches": [],
+    "original_helper_closure50_in_both_sets": true,
+    "actual_R2_module_in_both_sets": true,
+    "only_prepared_manifest_post_omission": "methods/materialize_graph_r2.py.txt; future admission MUST add it to unchanged as below"
+  },
+  "findings": [
+    {
+      "id": "minimal_exact_adaptation",
+      "status": "accepted",
+      "evidence": "Compared source diff against previously accepted2c1 method. Changes are distinct ownmaterialization-r2 namespace, actualR2module/R3proposal/rawR2reviews/currentformatACK verification, schema and post-success already-loaded current-batch hold-vector checks. Original stdout/stderr streaming, five mirrors, original validator observer, BaseException rollback/exception reporting, SIGTERM path and all exact node/meta/non-node/edge/terminal/pack/mobile delta assertions are retained."
+    },
+    {
+      "id": "actual_code_and_ACK_linkage",
+      "status": "accepted",
+      "evidence": "Before S.mkdir/copy/import/apply, method verifies actualadb25module/0caadproposal/rawR2review and bothnewformatACK hashes. It compares each ACK’s actual-module/proposal fields to admission values, all proposal source/snapshot hashes and five input-copy hashes. Current realACK fields match those accesses. Old1f9/b1 review artifacts remain unchanged evidence, not execution pins."
+    },
+    {
+      "id": "five_scratch_mirrors_and_original_guards",
+      "status": "retained",
+      "evidence": "Every A transaction path and G/V/P mirror path targets the unique absent ownS/probe/materialization-r2. Original shared importer/validators/approved-pack/mobile/mirror/final checks and rollback remain byte-bound; observer returns original errors unmodified. No livefixture/source/catalogue/authority write or sourcehold alteration by the method. Current R2batch owns its explicit one-word disposition only."
+    },
+    {
+      "id": "current_batch_vectors",
+      "status": "strengthened_and_exact",
+      "evidence": "After supported success, method reads already imported actualR2module from sys.modules, records actualbase70 count/normalized uniqueness, remaining69 count/order and exactleafă/Salary tuple/map. It asserts both canonical tuple hashes. Independent AST-only inherited-source extraction confirmed base70ca4043ff and orderedremaining69112f7040 exactly; no module import or normalization function was executed by this reviewer. These checks establish vector scope only, not the other69runtime outcomes or finalretirement."
+    },
+    {
+      "id": "complete_helpers_and_source_readsets",
+      "status": "accepted_with_explicit_future_self_protection",
+      "evidence": "All215inputs/214protected values and14SDK/tool/runner scratch hashes checked exact. Originalhelper50closure is wholly covered in both sets; actualR2module/legacyV50/V72/sharedguard/tests/current111nativebindings andnewR3ACKs/handoff are included. Preparedmanifest omits only its executingmethod from postchecks; root confirmed fresh admission will additionally protect method/proposal/readset/review/admission/currentACK/helper receipts as unchanged. No manifest/method rewrite is required."
+    },
+    {
+      "id": "failure_and_resource_limits",
+      "status": "retained",
+      "evidence": "Nonzero supported dryrun/guard prevents dependent apply; S.exists refuses overwrite. Supportedtransaction rollback runs through catchableSIGTERM when possible; method records failures/postcondition failures and leavesheld generated bytes/logs for inspection. Inner result publication/rollback is not SIGKILL/hostloss/storage-failure guaranteed. The unchanged397686outer ownedprocess/fullS-R runner supplies authoritative failed/resource receipts; absence of inner result cannot be promoted to success."
+    }
+  ],
+  "explicit_execution_conditions": [
+    "Freeze this exact source review and create ONE fresh separately measured native admission using unchanged397686runner. Existing17GiBstartdisk/16GiBremainingdisk+MemAvailable,2GiBsampled process-groupRSS/1GiBfullownS-Rincrement/20min/180secondsmetadata reserve/Go2jobs2threads/offlineowncache remain; no failedR1clock reset or overlapping measurement roots.",
+    "Admission inputs AND poststep unchanged must cover every current source/helper, actualadb25module/0caadproposal/snapshot/currenthandoff/rawR2reviews andbothformatACKs. Add methodf824 itself, methodproposal7b9, readsete895, thisreview, the freshadmission and helper/currentACK receipts as immutable pre/post pins. No conflicting overrides. All six qualified ownSDK files/archive, seven current tools and runner14scratchpins must remain checked before/after eachstep.",
+    "Run only actualqualifiedgoversion, originalsupported env-cleared R2--dry-run, then exact own-scratch method under the same immutable freshcampaign deadline. Clear only named development KG/pack/ranking override variables as authored; no production/PG/provider change. A failed guard/preflight or nonzero step blocks dependent execution, preserves receipts and is not retried unchanged.",
+    "Never overwrite/remove failed or interrupted attempts or originalR1failure/candidate source artifacts. Every actual zero-exit GREEN must satisfy all methoddelta/hold-vector/resource/readset conditions. Inspect actual candidate/mirror/mobile/log/rollback/source identity and lossless archives independently before prospective profiles; expected scopes are not achieved results.",
+    "Successful isolated generation grants no final quality/retirement. Actual other69baseline owner/proxy/unresolved dispositions, Leana/fixedfuzzy/private confirmation, complete all-game/mining/projection/terminal/World/history and ordinaryseed7 directalias/canonical/sharedslot/hint700 evidence remain required. Genuine pinnedSource6 context must preserve originalV50 all-seven assertions/literals; do not remove assertions or waive shared gates.",
+    "Final one-word hold disposition/newrawquality, reviewedSource7parent/ancestry/currentcatalogue/source/reviews/installedaudits/originalrolefinals/export/reference/currentauthority and fullmandatory/independentassembledgates remain withheld before localgreenadoption."
+  ],
+  "remaining_method_changes_required": [],
+  "method_imported": false,
+  "native_executed": false,
+  "materialized_identity_approved": false,
+  "final_raw_quality_accepted": false,
+  "final_hold_retirement_approved": false,
+  "Source7_approved": false,
+  "installation_approval": false,
+  "resource_and_clock": "Read/hash/AST/diff source review only under originalcandidate-method-preparation-admission-r2 SHA38406df1,21:52:15.969849→22:09:15.969849substantivecutoff/22:12:15.969849absolute. Root+author+reviewer3inclusive, nootheragent/browser/native/sourcecode/fixture changes. WholeworkerRSSunmeasured; no source memoryPASS or deadline renewal.",
+  "valid_until": "Any bound method/proposal/module/reviews/ACK/snapshot/helper/runner/source/scope changes, or actual evidence contradicting assumptions; repeat affected exact review. All explicit fresh execution conditions must be satisfied."
+}

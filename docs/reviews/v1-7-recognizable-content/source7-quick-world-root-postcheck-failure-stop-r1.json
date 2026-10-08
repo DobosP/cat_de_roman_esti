@@ -1,0 +1,35 @@
+{
+  "schema": "v1-7-source7-quick-world-root-postcheck-failure-stop-v1",
+  "stopped_at_utc": "2026-10-08T06:06:28.619219+00:00",
+  "status": "ROOT_POSTCHECK_SCHEMA_ASSUMPTION_FAILED_STOP_NO_CONTINUATION",
+  "admission_sha256": "9a88f1fa7f0c2add3185964fa680647eb5f06db155ae10980f40218f7a24f9a9",
+  "original_deadline_utc": "2026-10-08T06:20:03.082812+00:00",
+  "original_metadata_reserve_utc": "2026-10-08T06:17:03.082812+00:00",
+  "runner_state_sha256": "58fab205bbe37413e3c1fe6398c2a63ccba477e725f746c4ce6d114e8f4eb0b3",
+  "actual_runner_state": "ready/next_index2/pendingnull; preserved identity, not permission to resume",
+  "native_cumulative_result_sha256": "f373554c437b9de680f211724408165bf28579a74510f4b62d65c1c0305cd233",
+  "native_steps_passed": 2,
+  "World_commands_never_launched": true,
+  "postcheck_failure": {
+    "line": 50,
+    "assertion": "isinstance(payload[runtime_sources],dict)",
+    "actual_runtime_sources_type": "list",
+    "actual_source_bindings_type": "dict",
+    "cause": "Root checker assumed an object rather than the original native RuntimeHashes list schema; no native/audit/candidate/resource failure inferred."
+  },
+  "failed_checker_sha256": "fc11bebe171432e8bc4f47155ae25e237efe8fdcfc47b44322a5baa19b7c2603",
+  "Quick_proposal_sha256": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+  "Quick_audit_sha256": "a15b2f5801e2cbffa036e6c3160a93369506844297db8fe64cc53b8f66791f0c",
+  "native_Quick_observations": {
+    "native_passed": true,
+    "replays": 85,
+    "requests": 460,
+    "runtime_rows": 110
+  },
+  "all1028_initial_pins_unchanged": true,
+  "all2_native_receipts_logs_unchanged": true,
+  "full_S_R_growth_upper": 68584092,
+  "live_Source7_or_graph_installed": false,
+  "installation_approval": false,
+  "remaining": "Independently reviewed narrow root RuntimeHashes-list verification and actual Quick identity; fresh admitted remaining-only Worldproposal/audit lane. Old9a88/rootfailure stays closed, no continuation/reset."
+}

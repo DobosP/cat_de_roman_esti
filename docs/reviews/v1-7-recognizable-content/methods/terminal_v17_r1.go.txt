@@ -1,0 +1,159 @@
+package hopcli
+
+// Research-only overlay using the exact generated candidate fixture through
+// ReadFixture. Play remains numbered-choice-only; aliases grant no CLI text-input
+// benefit. Neither the 180 archived puzzles nor these controls approve a round.
+import (
+ "bufio"
+ "bytes"
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "io"
+ "os"
+ "reflect"
+ "strconv"
+ "strings"
+ "testing"
+)
+
+func TestV17ProspectiveTerminalControlsResearch(t *testing.T) {
+ reportPath:=os.Getenv("V17_TERMINAL_CONTROLS_REPORT");if reportPath=="" {t.Fatal("missing report path")}
+ f,err:=os.OpenFile(reportPath,os.O_CREATE|os.O_EXCL|os.O_WRONLY,0600);if err!=nil {t.Fatal(err)};defer f.Close()
+ emittedBytes:=0
+ emit:=func(v any){raw,e:=json.Marshal(v);if e!=nil {t.Fatal(e)};if emittedBytes+len(raw)+1>12<<20 {t.Fatal("terminal proof exceeds12MiB")};n,e:=f.Write(append(raw,'\n'));emittedBytes+=n;if e!=nil {t.Fatal(e)};if e=f.Sync();e!=nil {t.Fatal(e)}}
+ emit(map[string]any{"record":"start","method":"TestV17ProspectiveTerminalControlsResearch","scope":"ReadFixture of exact baseline/candidate; native current terminal APIs and numbered Play; no synthetic export, new terminal text support, new round or approval","limits":"180 puzzles x 2 modes; 4 fixed control paths x 2 modes x 2 text orders; 3 invalid directions x 2 modes; 8 maximum archived path nodes; sequential; externally bounded 2 GiB process / 1 GiB increment / 20 minutes"})
+ complete:=false;defer func(){emit(map[string]any{"record":"end","complete":complete&&!t.Failed(),"failed":t.Failed()})}()
+ load:=func(env,want string)*Bundle{
+  t.Helper();path:=os.Getenv(env);if path=="" {t.Fatal("missing "+env)}
+  file,e:=os.Open(path);if e!=nil {t.Fatal(e)}
+  h:=sha256.New();n,e:=io.Copy(h,io.LimitReader(file,(32<<20)+1));closeErr:=file.Close();if e!=nil||closeErr!=nil||n>32<<20||fmt.Sprintf("%x",h.Sum(nil))!=want {t.Fatalf("fixture hash/size/read drift %s %v %v",env,e,closeErr)}
+  b,e:=ReadFixture(path);if e!=nil {t.Fatal(e)}
+  emit(map[string]any{"record":"fixture","input":env,"sha256":want,"bytes":n,"nodes":len(b.Raw.Nodes),"edges":len(b.Raw.Edges),"puzzles":len(b.Puzzles)})
+  return b
+ }
+ baseline:=load("V17_BASELINE_KG","63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf")
+ candidate:=load("V17_CANDIDATE_KG","3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749")
+ same:=func(tt *testing.T,a,b any,what string){tt.Helper();if !reflect.DeepEqual(a,b){tt.Fatalf("%s changed",what)}}
+ digest:=func(v any)string{b,e:=json.Marshal(v);if e!=nil {t.Fatal(e)};return fmt.Sprintf("%x",sha256.Sum256(b))}
+ if len(baseline.Puzzles)!=180||len(candidate.Puzzles)!=180||len(candidate.Raw.Nodes)!=2419||len(candidate.Raw.Edges)!=9473 {t.Fatal("frozen inventory drift")}
+ same(t,baseline.Puzzles,candidate.Puzzles,"all parsed puzzles and provenance")
+ same(t,baseline.Raw.Puzzles,candidate.Raw.Puzzles,"raw puzzles and provenance")
+ same(t,baseline.Raw.Edges,candidate.Raw.Edges,"raw edges and provenance")
+ owners:=map[string]string{"n_v4soc_salariu":"leafă"}
+ changed:=0
+ for i,old:=range baseline.Raw.Nodes {
+  fresh:=candidate.Raw.Nodes[i];id,ok:=old["id"].(string);if !ok||fresh["id"]!=id {t.Fatal("node identity/order drift")}
+  alias,selected:=owners[id];if !selected {same(t,old,fresh,"unselected node");continue}
+  changed++
+  a,b:=baseline.Graph.Node(id),candidate.Graph.Node(id);if a==nil||b==nil {t.Fatal("missing owner")}
+  want:=append(append([]string{},a.Aliases...),alias);same(t,want,b.Aliases,"exact alias addition")
+  oldFields,freshFields:=map[string]any{},map[string]any{}
+  for k,v:=range old {if k!="aliases" {oldFields[k]=v}}
+  for k,v:=range fresh {if k!="aliases" {freshFields[k]=v}}
+  same(t,oldFields,freshFields,"selected owner other metadata/provenance")
+  // Parse intentionally has no normalized text index. The interactive entry
+  // point uses numeric options; never inject a research resolver into this API.
+  for _,text:=range []string{a.LabelRO,alias} {if baseline.Graph.Resolve(text)!=""||candidate.Graph.Resolve(text)!="" {t.Fatal("terminal resolver contract changed")}}
+  emit(map[string]any{"record":"owner_metadata","owner":id,"label":b.LabelRO,"before_aliases":a.Aliases,"after_aliases":b.Aliases,"typed_resolver":"unresolved in both native fixture bundles; Play is numbered-only"})
+ }
+ if changed!=1 {t.Fatal("wrong selected owner count")}
+ state:=func(g *Game)map[string]any{return map[string]any{"summary":g.Summary(),"current":g.Current(),"hints":g.Hints(),"options":g.Options()}}
+ checkedPuzzles:=0;modeReplays:=0;ownerPathUses:=0;ownerHintUses:=0;controlCount,invalidCount:=0,0
+ for i,p:=range candidate.Puzzles {
+  if len(p.SolutionPath)<2||len(p.SolutionPath)>8||p.SolutionPath[0]!=p.StartID||p.SolutionPath[len(p.SolutionPath)-1]!=p.TargetID {t.Fatalf("invalid or unbounded actual solution %s",p.ID)}
+  for _,id:=range p.SolutionPath {if _,ok:=owners[id];ok {ownerPathUses++}}
+  for _,id:=range p.HintNeighbors {if _,ok:=owners[id];ok {ownerHintUses++}}
+  checkedPuzzles++
+  for _,mode:=range []string{"easy","hard"} {
+   t.Run(p.ID+"/"+mode,func(tt *testing.T){
+    observations:=[]map[string]any{}
+    defer func(){emit(map[string]any{"record":"puzzle_mode","id":p.ID,"mode":mode,"puzzle_sha256":digest(p),"passed":!tt.Failed(),"observations":observations})}()
+    a,ae:=New(baseline.Graph,baseline.Puzzles[i],mode);b,be:=New(candidate.Graph,p,mode);if ae!=nil||be!=nil {tt.Fatal(ae,be)}
+    compare:=func(tag string){x,y:=state(a),state(b);same(tt,x,y,tag);observations=append(observations,map[string]any{"op":tag,"state_sha256":digest(y),"summary":b.Summary(),"hints":b.Hints(),"options_sha256":digest(b.Options())})}
+    compare("initial")
+    if b.Score()!=0||b.Won()||b.Hops()!=0 {tt.Fatal("initial state")}
+    saved:=state(b);ar,br:=a.Undo(),b.Undo();same(tt,ar,br,"start undo");if br.OK {tt.Fatal("start undo accepted")};same(tt,saved,state(b),"start undo state")
+    ar,br=a.Hop(p.StartID),b.Hop(p.StartID);same(tt,ar,br,"self hop");if br.OK {tt.Fatal("self hop accepted")};same(tt,saved,state(b),"self hop state")
+    var input strings.Builder
+    for step,id:=range p.SolutionPath[1:] {
+     if mode=="easy" {same(tt,[]string{id},b.Hints(),"guaranteed solution hint")} else if len(b.Hints())!=0 {tt.Fatal("hard leaked hints")}
+     option:=0;for k,n:=range b.Options(){if n.ID==id {option=k+1;break}}
+     if option==0 {tt.Fatal("actual canonical step absent from numbered options",id)}
+     input.WriteString(strconv.Itoa(option)+"\n")
+     ar,br=a.Hop(id),b.Hop(id);same(tt,ar,br,"canonical hop result");if !br.OK||b.Hops()!=step+1 {tt.Fatal("canonical hop failed",id,br)}
+     compare("hop")
+    }
+    if !b.Won()||b.Hops()!=p.OptimalHops||b.Hops()!=p.Par||b.Score()!=1000||len(b.Hints())!=0 {tt.Fatal("optimal/par/hint/score drift",b.Summary())}
+    saved=state(b);ar,br=a.Hop(p.StartID),b.Hop(p.StartID);same(tt,ar,br,"won hop");if br.OK||!br.Won {tt.Fatal("won hop contract")};same(tt,saved,state(b),"won repeat state")
+    // Terminal undo reopens a won game and replay restores exactly its score.
+    ar,br=a.Undo(),b.Undo();same(tt,ar,br,"terminal undo");if !br.OK||b.Won()||b.Score()!=0 {tt.Fatal("terminal undo failed")};compare("undo_win")
+    ar,br=a.Hop(p.TargetID),b.Hop(p.TargetID);same(tt,ar,br,"terminal rewin");if !br.OK||!b.Won()||b.Score()!=1000 {tt.Fatal("terminal rewin failed")};compare("rewin")
+    a,ae=New(baseline.Graph,baseline.Puzzles[i],mode);b,be=New(candidate.Graph,p,mode);if ae!=nil||be!=nil {tt.Fatal(ae,be)}
+    var outA,outB bytes.Buffer
+    sa:=Play(a,bufio.NewScanner(strings.NewReader(input.String())),&outA,len(p.SolutionPath))
+    sb:=Play(b,bufio.NewScanner(strings.NewReader(input.String())),&outB,len(p.SolutionPath))
+    same(tt,sa,sb,"numbered Play summary");same(tt,outA.String(),outB.String(),"numbered Play transcript")
+    if sb["won"]!=true||sb["score"]!=1000||!strings.Contains(outB.String(),"WIN!") {tt.Fatal("numbered Play did not solve")}
+    if mode=="hard"&&strings.Contains(outB.String(),"<hint>") {tt.Fatal("hard Play leaked hint")}
+    observations=append(observations,map[string]any{"op":"numbered_play","summary":sb,"input":input.String(),"transcript_sha256":fmt.Sprintf("%x",sha256.Sum256(outB.Bytes()))})
+    modeReplays++
+   })
+  }
+ }
+ if ownerPathUses!=0||ownerHintUses!=0 {t.Fatal("owner exposure changed in archived solutions/hints")}
+ emit(map[string]any{"record":"puzzle_coverage","puzzles":checkedPuzzles,"successful_mode_replays":modeReplays,"owners_in_solution_paths":ownerPathUses,"owners_in_hint_neighbors":ownerHintUses,"new_puzzles":0,"new_approvals":0})
+ type incident struct{start,owner,target,edge string}
+ incidents:=[]incident{
+  {"n_v28_work_occupation_meserie","n_v4soc_salariu","n_v4soc_munca","de8154"},
+  {"n_v4soc_firma","n_v4soc_salariu","n_v3soc_impozit","de5937"},
+  {"n_v20soc_sindicat","n_v4soc_salariu","n_v4soc_munca","de6975"},
+  {"n_v3soc_impozit","n_v4soc_salariu","n_leul_romanesc","de4469"},
+ }
+ for _,row:=range incidents {for _,mode:=range []string{"easy","hard"} {for _,aliasFirst:=range []bool{false,true} {
+  name:=fmt.Sprintf("control/%s/%s/alias-first=%v",row.edge,mode,aliasFirst)
+  t.Run(name,func(tt *testing.T){
+   observations:=[]map[string]any{};defer func(){emit(map[string]any{"record":"control","case":name,"passed":!tt.Failed(),"observations":observations})}()
+   e:=candidate.Graph.Link(row.start,row.owner);if e==nil||e.ID!=row.edge||e.IsDistractor||candidate.Graph.Link(row.owner,row.target)==nil {tt.Fatal("actual control incident/path drift")}
+   optimal,ok:=candidate.Graph.DistancesTo(row.target)[row.start];if !ok||optimal<1 {tt.Fatal("missing directed route")}
+   p:=Puzzle{ID:"research-only/"+row.edge,StartID:row.start,TargetID:row.target,Par:optimal,OptimalHops:optimal,SolutionPath:[]string{row.start,row.owner,row.target}}
+   a,ae:=New(baseline.Graph,p,mode);b,be:=New(candidate.Graph,p,mode);if ae!=nil||be!=nil {tt.Fatal(ae,be)}
+   same(tt,state(a),state(b),"control initial choices/hints")
+   canonical,alias:=candidate.Graph.Label(row.owner),owners[row.owner]
+   first,second:=canonical,alias;if aliasFirst {first,second=second,first}
+   // This is a negative text-entry control: both words are invalid numeric
+   // commands. Actual movement below uses the existing numbered option.
+   var input strings.Builder;input.WriteString(first+"\n"+second+"\n")
+   for _,id:=range []string{row.owner,row.target} {
+    option:=0;for k,n:=range b.Options(){if n.ID==id {option=k+1;break}};if option==0 {tt.Fatal("controlled owner absent from real options")}
+    input.WriteString(strconv.Itoa(option)+"\n")
+    ar,br:=a.Hop(id),b.Hop(id);same(tt,ar,br,"control hop");if !br.OK {tt.Fatal(br)};same(tt,state(a),state(b),"control state")
+    if id==row.owner {saved:=state(b);ar,br=a.Hop(id),b.Hop(id);same(tt,ar,br,"control self repeat");if br.OK {tt.Fatal("self repeat accepted")};same(tt,saved,state(b),"self repeat state")}
+   }
+   wantScore:=max(100,1000-100*max(0,2-optimal));if !b.Won()||b.Hops()!=2||b.Score()!=wantScore {tt.Fatal("control terminal score")}
+   a,ae=New(baseline.Graph,p,mode);b,be=New(candidate.Graph,p,mode);if ae!=nil||be!=nil {tt.Fatal(ae,be)}
+   var outA,outB bytes.Buffer
+   sa:=Play(a,bufio.NewScanner(strings.NewReader(input.String())),&outA,4)
+   sb:=Play(b,bufio.NewScanner(strings.NewReader(input.String())),&outB,4)
+   same(tt,sa,sb,"controlled numbered play");same(tt,outA.String(),outB.String(),"controlled caption/text contract")
+   if b.Hops()!=2||!b.Won()||b.Score()!=wantScore||strings.Count(outB.String(),"? enter ")!=2 {tt.Fatal("numbered-only text rejection/move contract")}
+   observations=append(observations,map[string]any{"input":input.String(),"summary":sb,"transcript":outB.String(),"typed_alias_success":false,"edge":row.edge})
+   controlCount++
+  })
+ }}}
+ // Two nonneighbor Salary cases and forbidden reverse Salary→Meserie, both modes.
+ for _,row:=range []struct{current,owner,target string}{
+  {"n_v4soc_casa","n_v4soc_salariu","n_v3soc_populatie"},
+  {"n_v4ist_steag","n_v4soc_salariu","n_alba_iulia"},
+  {"n_v4soc_salariu","n_v28_work_occupation_meserie","n_v4soc_munca"},
+ } {for _,mode:=range []string{"easy","hard"} {t.Run("invalid/"+row.current+"/"+mode,func(tt *testing.T){
+  passed:=false;defer func(){emit(map[string]any{"record":"invalid_control","current":row.current,"owner":row.owner,"mode":mode,"passed":passed&&!tt.Failed()})}()
+  p:=Puzzle{ID:"research-only/invalid",StartID:row.current,TargetID:row.target,Par:1,OptimalHops:1}
+  a,ae:=New(baseline.Graph,p,mode);b,be:=New(candidate.Graph,p,mode);if ae!=nil||be!=nil {tt.Fatal(ae,be)}
+  if candidate.Graph.Link(row.current,row.owner)!=nil||candidate.Graph.Link(row.current,row.target)==nil {tt.Fatal("control topology drift")}
+  saved:=state(b);ar,br:=a.Hop(row.owner),b.Hop(row.owner);same(tt,ar,br,"invalid result");if br.OK {tt.Fatal("forbidden hop accepted")};same(tt,saved,state(b),"invalid state");same(tt,state(a),state(b),"invalid baseline compatibility");passed=true;invalidCount++
+ })}}
+ if checkedPuzzles!=180||modeReplays!=360||controlCount!=16||invalidCount!=6 {t.Error("incomplete successful native puzzle/control coverage")}
+ emit(map[string]any{"record":"control_coverage","controls":controlCount,"invalid_controls":invalidCount})
+ complete=true
+}

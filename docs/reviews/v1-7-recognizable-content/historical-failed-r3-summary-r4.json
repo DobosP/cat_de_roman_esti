@@ -1,0 +1,66 @@
+{
+  "ROOT_patch_used": "never invoked beforecollection",
+  "ROOT_restoration_count": 0,
+  "ROOT_restored": false,
+  "actual_case_call_count": 0,
+  "actual_report_rows": 0,
+  "all_baseline_candidate_source_scratch_flags_true": true,
+  "archive_member_count": 31,
+  "archive_sha256": "eac4fe3961ff99bb436fcf1ad75b964dfeb5614c15a0719c58e91249f4954263",
+  "collected_IDs_absent": true,
+  "failure_kind": "PluginValidationError",
+  "manifest_sha256": "ae0eedb048337a01ad85d2799d590ee4a5529487438b8f01566f248eb6a236d3",
+  "namespace_restored": true,
+  "new_R4_source_method_sha256": "6cf7e9d0d57594a3223972e7f0ed179a12f9cc48f79b771dbaf5d96d20636746",
+  "new_R4_source_only_unexecuted": true,
+  "no_live_publication_Source7_or_retirement": true,
+  "no_old_failed_clock_reset_or_retry": true,
+  "old_deadline_utc": "2026-10-08T03:19:45.711620+00:00",
+  "old_native_admission_sha256": "656a4e4b6402bd8ec67bbcdb3e73eaacff59c61bf4fdd944de8e54a6ad3200d0",
+  "old_native_exit_code": 1,
+  "old_native_guard": "step-failure",
+  "old_native_sampled_peak_group_RSS_bytes": 82640896,
+  "old_native_status": "FAILED",
+  "old_native_step": 0,
+  "old_world744_failure_independent": true,
+  "physical_Source6_candidate_unchanged": true,
+  "resource_floor_or_RSS_failure": false,
+  "schema": "v17-actual-failed-history-R3-summary-r4",
+  "source_RSS": "unmeasured; no wholeworker qualification",
+  "source_guard_samples": [
+    {
+      "at_utc": "2026-10-08T03:07:11.289868+00:00",
+      "disk_free_bytes": 218910289920,
+      "event": "before-source-preservation",
+      "full_S_R_bytes": 1499644834,
+      "increment_from_new_source_baseline": 63507,
+      "memory_available_bytes": 22854049792
+    },
+    {
+      "at_utc": "2026-10-08T03:07:12.201318+00:00",
+      "disk_free_bytes": 218927673344,
+      "event": "before-lossless-tar",
+      "full_S_R_bytes": 1499644834,
+      "increment_from_new_source_baseline": 63507,
+      "memory_available_bytes": 22963294208
+    },
+    {
+      "at_utc": "2026-10-08T03:07:13.003978+00:00",
+      "disk_free_bytes": 218913169408,
+      "event": "after-lossless-tar",
+      "full_S_R_bytes": 1501162263,
+      "increment_from_new_source_baseline": 1580936,
+      "memory_available_bytes": 22729826304
+    },
+    {
+      "at_utc": "2026-10-08T03:07:13.878910+00:00",
+      "disk_free_bytes": 218893316096,
+      "event": "before-summary",
+      "full_S_R_bytes": 1501265263,
+      "increment_from_new_source_baseline": 1683936,
+      "memory_available_bytes": 22651269120
+    }
+  ],
+  "source_preservation_admission_sha256": "ab4ecfad19bac560cf3ddd10e0095bd9e45e17225d61e2d05501b619c39f7831",
+  "specific_error": "pytest_runtest_logreport(rep) declaresinvalidrep; installedpytest9.1.1spec requiresreport"
+}

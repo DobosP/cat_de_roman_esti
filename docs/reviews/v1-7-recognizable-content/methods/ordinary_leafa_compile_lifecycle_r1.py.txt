@@ -1,0 +1,57 @@
+"""Compile one exact temporary test source, remove it before executing the binary.
+No data/content overlay or fixture write. The already-reviewed outer runner owns
+this process group; catchable group signals reach the Go compiler and this wrapper.
+SIGKILL/host loss cannot promise cleanup: preserve source and stop for inspection.
+"""
+import hashlib
+import json
+import os
+from pathlib import Path
+import signal
+import stat
+import subprocess
+import sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+S=Path('/home/dobo/work/_temp/codex__content-v1-7')
+D=R/'docs/reviews/v1-7-recognizable-content'
+SOURCE=D/'methods/ordinary_leafa_http_r1.go.txt'
+TEMP=R/'go-backend/internal/httpapi/v17_ordinary_leafa_probe_test.go'
+BINARY=S/'probe/ordinary-leafa-baseline-r1.test'
+RECEIPT=S/'probe/ordinary-leafa-compile-lifecycle-r1.json'
+EXPECTED='a9302ed4db84a2370a50d14220e4adbfdcb006860cd3bdaa77961189ef6fbe4d'
+received=None
+
+def on_signal(number,frame):
+ global received
+ if received is None: received=number
+
+for signum in (signal.SIGTERM,signal.SIGINT):signal.signal(signum,on_signal)
+if sys.argv != [str(Path(__file__)), 'build']:raise ValueError('exact build invocation required')
+blob=SOURCE.read_bytes()
+if hashlib.sha256(blob).hexdigest()!=EXPECTED:raise ValueError('method bytes differ')
+if TEMP.exists() or TEMP.is_symlink() or BINARY.exists() or BINARY.is_symlink() or RECEIPT.exists() or RECEIPT.is_symlink():raise ValueError('owned destinations must be absent; no clobber/retry')
+identity=None
+code=None
+cleanup=False
+try:
+ previous=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGTERM,signal.SIGINT})
+ try:
+  fd=os.open(TEMP,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+  with os.fdopen(fd,'wb') as output:
+   identity=os.fstat(output.fileno())
+   output.write(blob);output.flush();os.fsync(output.fileno())
+ finally:signal.pthread_sigmask(signal.SIG_SETMASK,previous)
+ if received is not None:raise InterruptedError('catchable signal before compiler launch')
+ command=[str(S/'tools/go/bin/go'),'-C',str(R/'go-backend'),'test','-c','-race','-o',str(BINARY),'./internal/httpapi']
+ code=subprocess.run(command,check=False).returncode
+ if code!=0:raise RuntimeError('compiler returned'+str(code))
+ if received is not None:raise InterruptedError('catchable signal during compilation')
+ if not BINARY.is_file() or BINARY.is_symlink():raise RuntimeError('compiled binary missing/notregular')
+finally:
+ if identity is not None:
+  current=TEMP.lstat()
+  if not stat.S_ISREG(current.st_mode) or (current.st_dev,current.st_ino)!=(identity.st_dev,identity.st_ino) or hashlib.sha256(TEMP.read_bytes()).hexdigest()!=EXPECTED:
+   raise RuntimeError('temporary source changed: refuse to delete')
+  TEMP.unlink();cleanup=True
+ receipt={'schema':'v1-7-temporary-leafa-compile-lifecycle-r1','method_sha256':EXPECTED,'temporary_source':str(TEMP),'temporary_source_removed':cleanup,'binary_path':str(BINARY),'binary_sha256':hashlib.sha256(BINARY.read_bytes()).hexdigest() if BINARY.is_file() else None,'compiler_exit_code':code,'caught_signal':received,'content_overlay_used':False,'installation_approval':False}
+ with RECEIPT.open('x') as out:json.dump(receipt,out,sort_keys=True,indent=2);out.write('\n');out.flush();os.fsync(out.fileno())

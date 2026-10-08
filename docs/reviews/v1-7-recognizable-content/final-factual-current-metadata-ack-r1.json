@@ -1,0 +1,155 @@
+{
+  "schema": "v1-7-final-factual-current-metadata-ack-r1",
+  "role": "factual",
+  "reviewer": "/root/v17_final_factual",
+  "reviewed_at_utc": "2026-10-08T04:45:27.572348+00:00",
+  "verdict": "acknowledge_current_metadata_phase_only",
+  "decision": "ACK_CURRENT_METADATA_WITH_UNCHANGED_EXACT_CANDIDATE_FACTUAL_SCOPE",
+  "scope": "Original-role narrow source-only factual ACK of current metadata phase2f291 after final exact candidate/disposition recording. The historical6e9 final factual judgment remains bound to cd1 and its original readset. This ACK neither edits nor silently retargets it and supplies no Source7/native/install/release permission.",
+  "old_baseline_commit": "cd1a65c265c537f1f716af616ff4c1e9d7779504",
+  "current_baseline_commit": "2f291e8ce2f3d89befae901e64e4814333887247",
+  "bindings": {
+    "current_metadata_proposal_path": "docs/reviews/v1-7-recognizable-content/final-candidate-current-metadata-proposal-r1.json",
+    "current_metadata_proposal_sha256": "18e3f96bbe87f690950cfc9584710395a6fe61e5e4df4b90486f2df3dfc5c6b3",
+    "source_admission_path": "docs/reviews/v1-7-recognizable-content/source7-preparation-source-admission-r1.json",
+    "source_admission_sha256": "f111dea617e5995e5af7267511a4c6e01f44eed919ba2297b0407a8d82e18836",
+    "old_packet_path": "docs/reviews/v1-7-recognizable-content/final-adoption-review-packet-r1.json",
+    "old_packet_sha256": "4b65d3d22415a28412d298de5a802a417bb72f525be3af7b30a77f308c62739b",
+    "historical_final_factual_path": "docs/reviews/v1-7-recognizable-content/final-raw-factual-review-r1.json",
+    "historical_final_factual_sha256": "6e9af58a4d2611070ff77d58433dc5bfe1c8e83caff5648a78f104a598a7ded3",
+    "historical_final_readset_canonical_sha256": "1a8f089c0cfcc20fbd409f4a935ed9b191797b0acba9a7d10a2b33a29a48e773",
+    "final_quality_sha256": "dacbdc788b4e7ad572ba383288978063000f0376da8541f3a3748b9107ec3e2d",
+    "one_word_disposition_sha256": "afe689d42775bae64fdf85135383cfc1857d74d9795f33ebbb218169b84bc3e0",
+    "ADR0183_sha256": "6a32237c802e5798db5c47f36ad0c5a9e4579e548f6765baf23b999ffefed4bb",
+    "candidate_graph_sha256": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+    "module_sha256": "adb25ece1451536cd9732a3bebd1a1e0d9a3794e2234aab70c96d49994ddfb7d",
+    "graph_proposal_sha256": "0caad7bcbe695dda5b92a0f0360038fa2d952e23235d33ba67c61170aff9b354",
+    "selected_R7_sha256": "bd1ebaec0b5edb8f95dc21eb1f04bffb2acccf1c4731e060d40e7dde5c9fce6a",
+    "reviewed_Source6_parent_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+  },
+  "packet_metadata_change": {
+    "docs/STATUS.md": {
+      "before_sha256": "9511263a94a8c9ea2f84c8aa5b1fb949c9c306ee07e91b7476923af95f581b66",
+      "after_sha256": "3822e0a3134626955cdf70ae5a771ab8addbd5a0abc2ab38c90dff7fca5dc6a8"
+    }
+  },
+  "checks": {
+    "actual_old_STATUS_bytes_read_from_git_cd1": true,
+    "actual_current_STATUS_bytes_read_at_2f291": true,
+    "old_new_STATUS_hashes_exact": true,
+    "only_STATUS_changes_among37_packet_dependencies": true,
+    "other36_packet_bindings_exact": true,
+    "all36_graph_proposal_source_dependencies_in_historical_readset_remain_exact": true,
+    "all_three_final_receipts_exact": true,
+    "current_factual_candidate_meaning_norm_owner_forms_count_and_hold_scope_unchanged": true,
+    "physical_Source6_and_supported_candidate341_unchanged": true,
+    "primary_evidence_and_access_license_limits_unchanged": true,
+    "legacy_V50_V72_shared_gate_all7_assertions_other69_and_old_UNKNOWN_reason_unchanged": true,
+    "remaining_adoption_conditions_retained": true,
+    "historical_final_receipt_not_rewritten": true,
+    "native_import_test_replay_primary_browser_or_source_code_mutation": false
+  },
+  "STATUS_assessment": {
+    "changed_line_count": 2,
+    "change": "Last-verified summary records final exact candidate/disposition acceptance; the existing long V1.7 status entry replaces its final-pending tail with factual6e9,qualitydacbdc,dispositionafe689 and ADR0183 acceptance recording. All earlier status facts and failed/prospective history remain otherwise byte-identical.",
+    "honest_boundary": "Current Source6 remains published and V1.7 uninstalled. Source7/live graph, actual installed history/full inverse/current audits/full gates/independent assembled local landing are explicitly pending. The acceptance being recorded is the exact one singular input/current-batch disposition, not release qualification."
+  },
+  "broader_historical_factual_readset_disclosure": {
+    "historical_entries": 92,
+    "current_exact_entries": 89,
+    "metadata_drifts": {
+      "docs/STATUS.md": {
+        "before_sha256": "9511263a94a8c9ea2f84c8aa5b1fb949c9c306ee07e91b7476923af95f581b66",
+        "after_sha256": "3822e0a3134626955cdf70ae5a771ab8addbd5a0abc2ab38c90dff7fca5dc6a8"
+      },
+      "TASK_BRIEF.md": {
+        "before_sha256": "b2159e3c8a6f0d6f89be67496b15f0cac2726255e8c2e81e20ee00dd8a7c4ea2",
+        "after_sha256": "5be20182b0cebc396e7fa519a7ac610346f2e493a4b9b47dd70824dd764e87ef"
+      },
+      "docs/reviews/v1-7-recognizable-content/README.md": {
+        "before_sha256": "4c41ed2e1e7a18d90346dada0f7bd9caa98e2d4794795d2570b3c4715c35a3cd",
+        "after_sha256": "5f966c32284e3693c7692cf111af79cd50ffc70af94d46b81cafd3a4b0c3dbcf"
+      }
+    },
+    "scope_distinction": "The proposal correctly declares only STATUS drift among its37 packet dependencies. The original factual receipt has a broader92-entry readset; TASK_BRIEF and waveREADME also changed outside that packet. Those differences are disclosed here rather than treating all92 as current-exact.",
+    "wave_README": "Actual Gitcd1 bytes match the original factual hash and are an exact prefix of current bytes. Only the ten-line final-acceptance appendix was added, preserving earlier records and stating uninstalled Source7/full-gate boundaries.",
+    "TASK_BRIEF": "Current task brief was read and bound as current-phase coordination metadata. It preserves candidate341/moduleadb25/proposal0caad/selectedR7, single-literal70→69, all old classifications/conditions and no successful-case replay. Historical task-brief bytes were not reconstructed; the prior hash stays attached to the immutable final receipt. This ACK does not approve the proposed Source7 method or implementation."
+  },
+  "unchanged_factual_scope": {
+    "raw_surface": "leafă",
+    "normalized_surface": "leafa",
+    "owner": "n_v4soc_salariu",
+    "sense": "Ordinary periodic employee pay; no regional-tool/old-mercenary/all-income equivalence.",
+    "global_bare_alias": "A defensible ordinary-pay default inferred from primary/use/game evidence, with no mechanical homonymous-intent filter or population dominance claim.",
+    "current_batch_disposition": "Only the literal leafă omission from inherited70 to exact ordered69, preserving every other hold and all historical review/source/test bytes.",
+    "counting": "One genuine synonym family/one stored singular form; zero new shared/world concepts,edges,targets,curated rounds or eligible/preferred pool growth; installed0 at this phase.",
+    "historical_final_acceptance": "6e9 remains the historical exactcd1 FINAL factual judgment; matching exact quality and one-word disposition exist, but neither alone establishes Source7/current installation or green landing."
+  },
+  "remaining_conditions": [
+    "Source7 candidate/proposal/audit/raw reviews and supported graph/native builder must bind exact reviewed Source6 parenta086 and all25 ancestor archives; affected source/catalogue/export/reference/corpus/history/current-authority inputs require fresh exact bindings.",
+    "Actual installed helper/V50 wrapper/new Source7 CURRENT_CONTENT, complete whole-byte Source6 inverse and full current/historical suites remain independently reviewable and executable qualification work.",
+    "Properly sealed ordinary alias/canonical/hint-score/privacy and World audits remain required; research overlays do not satisfy current Source7 authority.",
+    "Freeze runtime before fresh installed audits and original-role finals; full native/shared race/vet/all24 rails/currentall4/refusals/validate/export/rank/derive/mobile/independent reference/1207HTTP/151TCP+28assets/docs/whole-version whitespace and independent exact assembled acceptance precede local green landing.",
+    "Fresh exact method/resource admission remains separate. No native execution, live installation, remote push or deployment is granted by this metadata ACK."
+  ],
+  "readset_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/STATUS.md": "3822e0a3134626955cdf70ae5a771ab8addbd5a0abc2ab38c90dff7fca5dc6a8",
+    "docs/content-pool/v1-7-recognizable-content/pool.json": "e4477bf83e833b1eae3b101705775cd44e27e95280c452060c3b8a23ee32dc0e",
+    "docs/reviews/v1-7-recognizable-content/complete-native-lant-terminal-quality-review-r2.json": "aca6408d4494393dcd1c0d96751ec2938a50877f9af51bba4c2286177e9f531b",
+    "docs/reviews/v1-7-recognizable-content/complete-native-quality-review-r2.json": "f5e3b86039d0d84c82fc5617190f33a8f6d2ee60d1306a9f242208d3310a275f",
+    "docs/reviews/v1-7-recognizable-content/complete-reference-quality-review-r2.json": "4137efd1861fa05e761c62b6abac82a3f3c5d408432f912e2d98e4edcbbe712b",
+    "docs/reviews/v1-7-recognizable-content/graph-proposal-r3.json": "0caad7bcbe695dda5b92a0f0360038fa2d952e23235d33ba67c61170aff9b354",
+    "docs/reviews/v1-7-recognizable-content/historical-hold-audit-r1.json": "c1c5747f703f41da3dff21b8bc8a461f45101e1b23cb05aa69d8a2bbc7693718",
+    "docs/reviews/v1-7-recognizable-content/historical-hold-disposition-proposal-r2.json": "07a0b72bbf17d1bf39dd578f8bbe74c20a7c230791761d84c8bcd3619f4078fc",
+    "docs/reviews/v1-7-recognizable-content/historical-prospective-quality-review-r4.json": "95e78cf953980cb6fa712cd97481486f1c76845d9e1d4374dc80ab0803f66086",
+    "docs/reviews/v1-7-recognizable-content/historical-prospective-results-summary-r4.json": "18570fcad3c8228d08fd84d8353813d30f2a8e5e0aa34ca6ae97a8b336d3761a",
+    "docs/reviews/v1-7-recognizable-content/hold-disposition-factual-review-r2.json": "e74cd75ef8ad3d005947e32a0b461a55d1d16f085c70a7265e0cdd0aebbdb823",
+    "docs/reviews/v1-7-recognizable-content/hold-disposition-quality-review-r2.json": "effa10dc4e60e32ed081887c0585206251bd48b71374352e7554239f05488d6d",
+    "docs/reviews/v1-7-recognizable-content/materialized-identity-review-r2.json": "bb3149742d243f0495663924495be706942257b8384ca20bccebc40baa8a9c76",
+    "docs/reviews/v1-7-recognizable-content/native-lant-terminal-results-summary-r2.json": "b1e1ecda2074d851e86f60b74aac56e8e49a5bdbe9182b978a9077dd40def97b",
+    "docs/reviews/v1-7-recognizable-content/native-prospective-results-summary-r2.json": "c232662a32f6e56b2b3025a11991bc6722f385f526fd6cdfd507d90a3cbde2cd",
+    "docs/reviews/v1-7-recognizable-content/native-world-actual-quality-review-r2.json": "aad412340313f146bd894396cbdd3315472e853de921aa0351b02be3a0b406af",
+    "docs/reviews/v1-7-recognizable-content/native-world-results-summary-r2.json": "00f28bec341552b3910139c98e559f85b1d44b5e5d78fbaeb573327e76003915",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-baseline-readiness-review-r1.json": "046715b161c97b738cc6579ad06bf7f97329a22d1c09ac030032595d0541eaf1",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-native-baseline-summary-r1.json": "e535d26c3b0b8602a3a96fa7e2457f1cc295643aa00928b4d1437412402532e6",
+    "docs/reviews/v1-7-recognizable-content/primary-leafa-browser-access-r2.json": "1859d56a7f49ac7822ac3fc6d9c4cbb2d053f17f92377bd8354d2be8582a6822",
+    "docs/reviews/v1-7-recognizable-content/raw-factual-format-binding-r3.json": "6f188d5cd0330ff63680da8884d098a335c022922003e2f0f13838b5388f7d92",
+    "docs/reviews/v1-7-recognizable-content/raw-factual-review-r2.json": "e975ac126696cabb547a5fb71e19878665ee43fc2baedf7ce351de9b25f8370a",
+    "docs/reviews/v1-7-recognizable-content/raw-quality-format-binding-r3.json": "b28223286c41de5082cb43522712e8b234719d8d6c361dc19ff0e42711457ec7",
+    "docs/reviews/v1-7-recognizable-content/raw-quality-prospective-review-r2.json": "38fdf521bd3d2aea18b52b9ecf56f9b0cbeeb4310ee370d7de4ca8dc6154c3be",
+    "docs/reviews/v1-7-recognizable-content/reference-completion-results-summary-r2.json": "4dce9e3b9cbe14296f894ca7a764b956adc00665b349e9e3b3f6fce3224ab342",
+    "docs/reviews/v1-7-recognizable-content/selection-snapshots/i05-lex-01-r7-reconsideration.json": "bd1ebaec0b5edb8f95dc21eb1f04bffb2acccf1c4731e060d40e7dde5c9fce6a",
+    "docs/reviews/v50-synonym-basic-word-funnel/vocabulary.json": "b38fb0c106bcb2c1ef0e047b8fe55d111fcda1645fce24beb6f89a247a0700de",
+    "go-backend/internal/content/bundled.json": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+    "go-backend/internal/contentrails/sources/authored-v6.json": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+    "go-backend/internal/contentrails/sources/installed-authorities.json": "e365d23ae9cfd2581e146dccc142818d56cdb90fa292b376378996fba78e9b21",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "scripts/contexto_common_words_v50_data.py": "88f2d58a7f4c77ab08da2eb5cb0864ebc9bf3206c40d7010d77361c50276bd17",
+    "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+    "scripts/everyday_inputs_v1_7_data_r2.py": "adb25ece1451536cd9732a3bebd1a1e0d9a3794e2234aab70c96d49994ddfb7d",
+    "tests/test_v50_synonyms_basic_words.py": "14f2e52e154e2e383ebf266b5369f9543381473688077e3960df42689a89fc3e",
+    "docs/reviews/v1-7-recognizable-content/final-candidate-current-metadata-proposal-r1.json": "18e3f96bbe87f690950cfc9584710395a6fe61e5e4df4b90486f2df3dfc5c6b3",
+    "docs/reviews/v1-7-recognizable-content/source7-preparation-source-admission-r1.json": "f111dea617e5995e5af7267511a4c6e01f44eed919ba2297b0407a8d82e18836",
+    "docs/reviews/v1-7-recognizable-content/final-raw-factual-review-r1.json": "6e9af58a4d2611070ff77d58433dc5bfe1c8e83caff5648a78f104a598a7ded3",
+    "docs/reviews/v1-7-recognizable-content/final-adoption-review-packet-r1.json": "4b65d3d22415a28412d298de5a802a417bb72f525be3af7b30a77f308c62739b",
+    "docs/reviews/v1-7-recognizable-content/final-raw-quality-review-r1.json": "dacbdc788b4e7ad572ba383288978063000f0376da8541f3a3748b9107ec3e2d",
+    "docs/reviews/v1-7-recognizable-content/final-one-word-hold-disposition-review-r1.json": "afe689d42775bae64fdf85135383cfc1857d74d9795f33ebbb218169b84bc3e0",
+    "docs/reviews/v1-7-recognizable-content/README.md": "5f966c32284e3693c7692cf111af79cd50ffc70af94d46b81cafd3a4b0c3dbcf",
+    "TASK_BRIEF.md": "5be20182b0cebc396e7fa519a7ac610346f2e493a4b9b47dd70824dd764e87ef",
+    "docs/adr/0183-v1-7-single-salary-input-admission.md": "6a32237c802e5798db5c47f36ad0c5a9e4579e548f6765baf23b999ffefed4bb",
+    "docs/adr/README.md": "ae9995ac66c4d1dc7d06baa6a23779605da066e2a41eae1034fc775f81808875"
+  },
+  "failure_and_measurement_preservation": "All prior failed/refused prefixes, original source/native clocks and unknown operands remain unchanged. Current metadata does not erase failures, qualify old compilers or reset campaigns. Whole-source/worker RSS remains unmeasured.",
+  "source_clock": {
+    "source_admission_sha256": "f111dea617e5995e5af7267511a4c6e01f44eed919ba2297b0407a8d82e18836",
+    "unchanged_start_utc": "2026-10-08T04:42:44.489825+00:00",
+    "unchanged_source_cutoff_utc": "2026-10-08T04:59:44.489825+00:00",
+    "unchanged_absolute_deadline_utc": "2026-10-08T05:02:44.489825+00:00",
+    "max_agents_including_root": 3,
+    "source_worker_RSS": "Unmeasured; static hashes/Git/source reads and this one receipt only.",
+    "only_written_file": "docs/reviews/v1-7-recognizable-content/final-factual-current-metadata-ack-r1.json"
+  },
+  "valid_until": "Any candidate,meaning,module,proposal,snapshot,primary/evidence/historical disposition or relevant current metadata dependency changes require affected exact fresh review. Original-role installed finals and Source7/full qualification are separate phases."
+}

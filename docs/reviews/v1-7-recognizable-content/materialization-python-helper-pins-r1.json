@@ -1,0 +1,270 @@
+{
+  "checked_at_utc": "2026-10-07T21:02:58.244501+00:00",
+  "dynamic_import_condition": "Current exact local data module explicitly included. Static closure cannot prove arbitrary new dynamic imports; original supported helper sources remain pinned.",
+  "executed": false,
+  "roots": [
+    "scripts/apply_common_words_v24.py",
+    "scripts/densify_content.py",
+    "scripts/validate_fixture.py",
+    "scripts/validate_games_pack.py",
+    "scripts/import_candidates.py",
+    "scripts/everyday_inputs_v1_7_data.py"
+  ],
+  "schema": "v1-7-materialization-static-local-python-dependency-pins-v1",
+  "scope": "AST-only transitive local Python source import closure from supported transaction/module/validator roots; no imports executed or source files changed. Added to fresh execution inputs AND unchanged readset before every step.",
+  "source_admission_sha256": "2671744c17e2de18f7b914caea36aaf6233ae99971ef25418f061fac5260d42e",
+  "source_hashes": {
+    "cat_de_roman_esti/__init__.py": "b3588972f272a69fbc22bb4c7421cbb3f2cd949f15b4ee8ce288fb88c61f83f4",
+    "cat_de_roman_esti/_roedu_client_core.py": "9b79c18a181b624ebab4f5a6abb6bf3483b08b3378e98d6b84a1b8fc51ad72fc",
+    "cat_de_roman_esti/data.py": "dfd183e5a653d64d75ac8f509a2c4b70d33bc76b9cf9c005b2280ce470bb74dc",
+    "cat_de_roman_esti/engine.py": "5c81f86ade0e31838bedcdbc2bf0e4e037cf8d410e0daecca6caa7fa894cb507",
+    "cat_de_roman_esti/graph.py": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0",
+    "cat_de_roman_esti/roedu_client.py": "b8aafe122cb4dee7399bfbd0fcc159e97b39168b30575ccb6b4180cdbf0182eb",
+    "cat_de_roman_esti/wordgames/__init__.py": "9c0d15b79b798a4d6da3181c3909b956b8d11286c8cea448565f6adb82f0adb5",
+    "cat_de_roman_esti/wordgames/categories.py": "718acb594b21d655845809d72321b73da2cdc9986205741c01aa83cf8fc825dd",
+    "cat_de_roman_esti/wordgames/lant_relations.py": "e7b2f429a01d513b3138b04533ed16ccdd0cfdf5bf4caa88ce83c51765d9097c",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/recipe_extensions.py": "138a48aa48390161270ecb76d4c3c6a43971c3600b66d84c782998fafb1afd79",
+    "cat_de_roman_esti/wordgames/service.py": "ac39b40c5cd04c3070da015b2abe2a20276ab725c523948fff65e21a31033bec",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "scripts/basic_words_v28_data.py": "f23b9f5fe2b763f05726213021c2d083b5433bf03a9f68eec6997816d4dcb500",
+    "scripts/basic_words_v29_data.py": "2636ee0ea92aba120709f38f373036f4de950dca685924eea14882c4840a7d4e",
+    "scripts/basic_words_v30_data.py": "cc2eba22243dcd8a096226a0ccd390a5ff5ef4832582707afec7fbab1bb22607",
+    "scripts/basic_words_v31_data.py": "66f4b294533cff6fe10677adf169b4253e55c8ec36b258c265d4bacaeec8379c",
+    "scripts/basic_words_v32_data.py": "2d9f09f0134d9b68b705d5146580809475bdb0d78de7efea9221f9f0e08e276c",
+    "scripts/basic_words_v33_data.py": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033",
+    "scripts/common_words_v24_data.py": "54d75cffb8e5e5b2b4903de9d872bb37495b58b4a7bde5dd076b56fa51a365fb",
+    "scripts/content_file_transaction.py": "79c9e54d501c692816238afd8aea4189bc01d7946f46c8ae840211676c4dbd82",
+    "scripts/contexto_common_words_v50_data.py": "88f2d58a7f4c77ab08da2eb5cb0864ebc9bf3206c40d7010d77361c50276bd17",
+    "scripts/contexto_common_words_v51_data.py": "059e63d9238b12aeeb6a69c112848f6ba6d71597e71c32b7c0e8f7663daf8b04",
+    "scripts/contexto_common_words_v52_data.py": "a7a8213e219a215513c1e67fd87f3452fc6d37b17b9ad18a05ba1426b70e2d80",
+    "scripts/contexto_common_words_v53_data.py": "c10353e7aa5f1fbd5e9d7e7ea6ef4ddb4168ac4408c72b41a6b131da8630fdc6",
+    "scripts/contexto_common_words_v54_data.py": "4873501d99c8956fe33938beafe0f077205b26fb0de36f88c375935f137ecda4",
+    "scripts/contexto_common_words_v55_data.py": "58fbf3fa538f74bb3ee5dbbe3409804630271fad15205a2b45c5ae0486db83fb",
+    "scripts/contexto_common_words_v56_data.py": "72d0c288d400709717a97ce7c10a0f17c13ee0de968a7f38d50b92cd0525571f",
+    "scripts/contexto_common_words_v57_data.py": "f2d741739c04d40095edf61a66582ec3901d942117852bc83302b67e5d5bb9a2",
+    "scripts/contexto_common_words_v58_data.py": "779dd22058a5d196d940900b9d1bdffe92e614eb85d390f9122db81eae5a3b99",
+    "scripts/contexto_common_words_v59_data.py": "ece70efbe8871fa9dfafe02084212d088623f34eee003f57ee4ce6378f67d794",
+    "scripts/contexto_common_words_v60_data.py": "a76cdc4f4c1da877fef6cc8fcb13c40084dae6ca47b1aae3593c1d5acd6a5918",
+    "scripts/contexto_common_words_v61_data.py": "f6f17c8584e861dfd7bd5e137793e97e4adc174b6f7fd87d2fe835065b610007",
+    "scripts/contexto_common_words_v62_data.py": "4e78b343dd8931d8647921970919060ff816b2f4c3372d4c7a681ad2364a6a39",
+    "scripts/contexto_common_words_v63_data.py": "d539ca7effd835b887361572884e120ee42126c5a2039c37e62c4c34eb153330",
+    "scripts/contexto_common_words_v64_data.py": "a5f36259907bc9dedbb6860d6b2da2251beb72b154755132a3eed957feeaf7c8",
+    "scripts/contexto_common_words_v65_data.py": "aee9ac4841dba4684cbfd0e316830fd89ee0b41fe8f331b3dfaf8191416faa00",
+    "scripts/contexto_common_words_v66_data.py": "5132881287e47a49fc7be61d3d11b06d4d3bc16ec6912eb9b2041d5da0c9e0c1",
+    "scripts/contexto_common_words_v67_data.py": "1e1f47371a14d68b0fe0aecd4b620023284b02d569d8a7b8e0f410afa4c7f0ba",
+    "scripts/contexto_common_words_v68_data.py": "641d13b2ce738c053bf3f3d820ab918613c21f5504afb21ab3fd6821adbd40bf",
+    "scripts/contexto_common_words_v70_data.py": "a7007c5d331bab1b8bcf798a20a14766a66a29506dafe807e1702928fde06528",
+    "scripts/contexto_common_words_v71_data.py": "ab55dd00f619c0e0012949e4ec6f227d9e6bb33055bde968097e0699440931a9",
+    "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+    "scripts/critique_pack.py": "ed742cf418f16379c738d00e94c37e06c4c59e5f27b16c426991855c42c1635d",
+    "scripts/densify_content.py": "8ca4e0bff847e4174b274c2389cf22380ce943db57360c7a37d69c8a2c3cc2ce",
+    "scripts/everyday_inputs_v1_7_data.py": "37b0fd5b843d962d886ff660afb64a0c4c1bc844ecdbaae74eb56eecce7b3004",
+    "scripts/import_candidates.py": "09dc1cfaddf7ac8ea4bd4f376efe8e605ede88f1c7a8005fbb0d8caac58d46c2",
+    "scripts/semantic_edge_alias_v25_data.py": "073e8233d64c8fce50defbb8b113d7f29752ceab848d471b3079238b5fad8521",
+    "scripts/validate_fixture.py": "85591c9fa081d14e9400fe3c2119aa5958bd6c2c2aeec365c31102ccd923472f",
+    "scripts/validate_games_pack.py": "5fd3a05b5f38492f1beabdcd85a4b6146a380a7ff152a14f4c003876a0643685"
+  },
+  "static_import_edges": {
+    "cat_de_roman_esti/__init__.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/engine.py",
+      "cat_de_roman_esti/graph.py",
+      "cat_de_roman_esti/roedu_client.py"
+    ],
+    "cat_de_roman_esti/_roedu_client_core.py": [],
+    "cat_de_roman_esti/data.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/engine.py",
+      "cat_de_roman_esti/graph.py"
+    ],
+    "cat_de_roman_esti/engine.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/graph.py"
+    ],
+    "cat_de_roman_esti/graph.py": [],
+    "cat_de_roman_esti/roedu_client.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/_roedu_client_core.py"
+    ],
+    "cat_de_roman_esti/wordgames/__init__.py": [],
+    "cat_de_roman_esti/wordgames/categories.py": [],
+    "cat_de_roman_esti/wordgames/lant_relations.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/wordgames/__init__.py",
+      "cat_de_roman_esti/wordgames/recipe_extensions.py"
+    ],
+    "cat_de_roman_esti/wordgames/packs.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/data.py",
+      "cat_de_roman_esti/wordgames/__init__.py",
+      "cat_de_roman_esti/wordgames/categories.py",
+      "cat_de_roman_esti/wordgames/service.py"
+    ],
+    "cat_de_roman_esti/wordgames/recipe_extensions.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/graph.py"
+    ],
+    "cat_de_roman_esti/wordgames/service.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/data.py",
+      "cat_de_roman_esti/graph.py"
+    ],
+    "scripts/apply_common_words_v24.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/data.py",
+      "cat_de_roman_esti/wordgames/__init__.py",
+      "cat_de_roman_esti/wordgames/packs.py",
+      "cat_de_roman_esti/wordgames/service.py",
+      "scripts/densify_content.py",
+      "scripts/import_candidates.py",
+      "scripts/validate_fixture.py",
+      "scripts/validate_games_pack.py"
+    ],
+    "scripts/basic_words_v28_data.py": [
+      "scripts/common_words_v24_data.py",
+      "scripts/semantic_edge_alias_v25_data.py"
+    ],
+    "scripts/basic_words_v29_data.py": [
+      "scripts/basic_words_v28_data.py"
+    ],
+    "scripts/basic_words_v30_data.py": [
+      "scripts/basic_words_v29_data.py"
+    ],
+    "scripts/basic_words_v31_data.py": [
+      "scripts/basic_words_v30_data.py"
+    ],
+    "scripts/basic_words_v32_data.py": [
+      "scripts/basic_words_v31_data.py"
+    ],
+    "scripts/basic_words_v33_data.py": [
+      "scripts/basic_words_v32_data.py"
+    ],
+    "scripts/common_words_v24_data.py": [],
+    "scripts/content_file_transaction.py": [],
+    "scripts/contexto_common_words_v50_data.py": [
+      "scripts/basic_words_v33_data.py"
+    ],
+    "scripts/contexto_common_words_v51_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v50_data.py"
+    ],
+    "scripts/contexto_common_words_v52_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v51_data.py"
+    ],
+    "scripts/contexto_common_words_v53_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v52_data.py"
+    ],
+    "scripts/contexto_common_words_v54_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v53_data.py"
+    ],
+    "scripts/contexto_common_words_v55_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v54_data.py"
+    ],
+    "scripts/contexto_common_words_v56_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v55_data.py"
+    ],
+    "scripts/contexto_common_words_v57_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v56_data.py"
+    ],
+    "scripts/contexto_common_words_v58_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v57_data.py"
+    ],
+    "scripts/contexto_common_words_v59_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v58_data.py"
+    ],
+    "scripts/contexto_common_words_v60_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v59_data.py"
+    ],
+    "scripts/contexto_common_words_v61_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v60_data.py"
+    ],
+    "scripts/contexto_common_words_v62_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v61_data.py"
+    ],
+    "scripts/contexto_common_words_v63_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v62_data.py"
+    ],
+    "scripts/contexto_common_words_v64_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v63_data.py"
+    ],
+    "scripts/contexto_common_words_v65_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v64_data.py"
+    ],
+    "scripts/contexto_common_words_v66_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v65_data.py"
+    ],
+    "scripts/contexto_common_words_v67_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v66_data.py"
+    ],
+    "scripts/contexto_common_words_v68_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v67_data.py"
+    ],
+    "scripts/contexto_common_words_v70_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v68_data.py"
+    ],
+    "scripts/contexto_common_words_v71_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v70_data.py"
+    ],
+    "scripts/contexto_common_words_v72_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v71_data.py"
+    ],
+    "scripts/critique_pack.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/data.py",
+      "cat_de_roman_esti/wordgames/__init__.py",
+      "cat_de_roman_esti/wordgames/lant_relations.py",
+      "cat_de_roman_esti/wordgames/packs.py",
+      "cat_de_roman_esti/wordgames/service.py"
+    ],
+    "scripts/densify_content.py": [
+      "scripts/validate_fixture.py"
+    ],
+    "scripts/everyday_inputs_v1_7_data.py": [
+      "scripts/basic_words_v33_data.py",
+      "scripts/contexto_common_words_v72_data.py"
+    ],
+    "scripts/import_candidates.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/data.py",
+      "cat_de_roman_esti/wordgames/__init__.py",
+      "cat_de_roman_esti/wordgames/packs.py",
+      "cat_de_roman_esti/wordgames/service.py",
+      "scripts/content_file_transaction.py",
+      "scripts/critique_pack.py",
+      "scripts/densify_content.py",
+      "scripts/validate_games_pack.py"
+    ],
+    "scripts/semantic_edge_alias_v25_data.py": [
+      "scripts/common_words_v24_data.py"
+    ],
+    "scripts/validate_fixture.py": [],
+    "scripts/validate_games_pack.py": [
+      "cat_de_roman_esti/__init__.py",
+      "cat_de_roman_esti/data.py",
+      "cat_de_roman_esti/wordgames/__init__.py",
+      "cat_de_roman_esti/wordgames/packs.py",
+      "cat_de_roman_esti/wordgames/service.py"
+    ]
+  }
+}

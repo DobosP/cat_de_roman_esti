@@ -1,0 +1,95 @@
+{
+  "schema": "v1-7-native-output-staging-source-ack-r1",
+  "reviewer": "/root/v17_raw_factual",
+  "role": "independent_source_implementation_ack",
+  "checked_on": "2026-10-08",
+  "reviewed_at_utc": "2026-10-07T23:16:10.905149+00:00",
+  "verdict": "acknowledge_exact_metadata_staging_procedure_only",
+  "proposal_path": "docs/reviews/v1-7-recognizable-content/native-output-staging-proposal-r1.json",
+  "proposal_sha256": "57bcef43eb8c8cf7d9b3269c92fd2cb5be583be021678428bdde1aea44a51191",
+  "proposal_bytes": 9083,
+  "source_admission_sha256": "9d876d6d6e6a47c7e51a1dc3320d3cf89a1cbd76fe7027525a25029d2936d12d",
+  "baseline_commit": "38a0eda0f3353974216b23e48ba1ad31665f1f77",
+  "readset_sha256": {
+    "docs/reviews/v1-7-recognizable-content/methods/derive_candidate_index_v17_r2.py.txt": "7f7aaf6cfbdcd7e636355e23bd738f3a8a94cee0e8b3db80459f52422154380d",
+    "docs/reviews/v1-7-recognizable-content/methods/native_candidate_http_v17_r2.go.txt": "22572a789eb63321e05dbf3335a3cf62e82adc5c06ba22bec40e1baf7e6027a7",
+    "docs/reviews/v1-7-recognizable-content/methods/native_compile_lifecycle_v17_r2.py.txt": "64325b7a89cf4bc8ea35051acbbbf9f2972b56e547f77b9b284a6b1706051739",
+    "docs/reviews/v1-7-recognizable-content/methods/native_profiles_v17_r1.go.txt": "85bd8f61de6e04278f6e07521f766a72dad6ccb4f0c5c88640ca22ef1d1aa903",
+    "docs/reviews/v1-7-recognizable-content/methods/native_research_content_adapter_v17_r1.go.txt": "ed1563a09d66522ec96fb6c571daf71d195b5b8ac0072ec9bea913a876c94671",
+    "docs/reviews/v1-7-recognizable-content/native-output-staging-source-admission-r1.json": "9d876d6d6e6a47c7e51a1dc3320d3cf89a1cbd76fe7027525a25029d2936d12d",
+    "docs/reviews/v1-7-recognizable-content/native-prospective-method-proposal-r2.json": "f05d13378eb9e3173c5be0b4fea924d2ffb851a138ed12b378480e7e332dfc6c",
+    "docs/reviews/v1-7-recognizable-content/native-prospective-method-review-r2.json": "385bcbe78c9fce19f429764543b6bebc75acf03e8ac79f97330e8669b090a2a9",
+    "docs/reviews/v1-7-recognizable-content/native-prospective-readset-r2.json": "b97c94b5c0629f223565d2b1d9bd2678818e95274b295c64f1e1e6257d2eb635",
+    "docs/reviews/v1-7-recognizable-content/native-output-staging-proposal-r1.json": "57bcef43eb8c8cf7d9b3269c92fd2cb5be583be021678428bdde1aea44a51191"
+  },
+  "runner": {
+    "path": "/home/dobo/work/_temp/codex__content-v1-7/probe/run_owned_full_scratch_lane.py",
+    "sha256": "397686a51c5f03f207cc450fceda8b88623383a83ab2ecb90a884e6167fa91ee"
+  },
+  "independence": {
+    "proposal_or_methods_authored_by_reviewer": false,
+    "actual_method_import_or_native_execution": false,
+    "other_agent_spawned": false,
+    "only_written_file": "docs/reviews/v1-7-recognizable-content/native-output-staging-review-r1.json"
+  },
+  "concrete_implementation_assessment": {
+    "fixed_producers_and_order": "Exactly accepted nativeR2 command sequence0Go/version,1original-normalizer candidate index,2exclusivecompile/removal,3profiles,4ordinaryHTTP. Exact own paths for outputs/state/cumulative/step receipts/logs agree with actual397686runner lane conventions. No executable method/runner/wrapper changes proposed.",
+    "initial_expected_output_provenance": "Root must read successful step1 receipt through the immutable state receiptSHA, then manually verify its actual log bytes against recorded logSHA and parse exactly one emitted index producer JSON. Actual nonsymlink index must match that producer-emitted expectedSHA and all exact baseline63/candidate341/schema/Unicode15/derivation-method7f7/current original-normalizer/input-owner provenance. Root retains this expected digest before compilation, rather than trusting a later freshly hashed mutable file.",
+    "compile_outputs": "Successful step2 exactname/argv/index/manifest/start/deadline/baseline is required. Accepted lifecycle receipt schema remainsr1 despite R2code and supplies exact2contexto/httpapi compilerexit0 records,3source method/temp identities,3removed=true/noerror cleanup outcomes,failure/caught_signalnull and no cleanup_errors. Actual temp paths must be absent including dangling symlinks. Both regular nonsymlink binary digests are checked against its emitted expected hashes, then compile receipt SHA itself is frozen with producing receipt/log provenance.",
+    "external_keeper": "One exclusive/fsynced ≤64KiB keeper at the exact resolved own parent/basename binds original outeradmission rawSHA/path/checked/start/deadline/baseline/roots, producing receipts/logs, index expectedSHA, compile receipt expectedSHA,two binaries and absenttemps, accepted native review and this staging ACK. KeeperSHA is held externally in root memory/message and an exclusive ≤4KiB digest receipt. Keeper has no selfhash and unknown output hashes are not inserted into outeradmission; no circular self-binding or mutable admission rewrite.",
+    "pre_and_post_probes": "Immediately before AND after each probe3/4, root must compare immutable original expected outeradmission/keeper/digestreceipt hashes and all actual generated index/binaries/compile receipt/producer1/2receipt/log bytes. All unchanged static runtime/helper/SDK/candidate/method pins and absenttemps remain checked. No recalculated trust baseline is permitted.",
+    "exact_prefix": "Actual runner load_prefix checks manifestSHA/deadline/roots, ready/pendingnull/nextindex/stepcount, receiptSHA, exactname/argv/index/exit0/guardnull/statuspassed and original_start_size/campaign_started_at. Proposal additionally preserves these originals externally. Required transitions are successfulprefix0..2→probe3→ready/next4 and prefix0..3→probe4→completed/next5,pendingnull; no unguarded binary execution.",
+    "manual_checks_not_builtin": "Actual397686load_prefix does NOT rehash old producing log bytes. Proposal accurately assigns that added producing-log verification to ROOT inline assertions, not to the built-in runner. Existing runner source/hash remains unchanged.",
+    "refusal": "Any missing/symlink/hash/prefix/cleanup/resource/time mismatch blocks dependent work and produces a separately retained bounded staging refusal. Failed/partial runner state and all outputs remain intact; no rewrites, no retry/recomputed keeper trust, no clock reset. An outerpassed command with failed inline postcheck remains unqualified.",
+    "resource_accounting": "Inline metadata phases,≤64KiB keeper and≤4KiB digestreceipt are inside SAME nativecampaign fullS/R increment and immutable≤20min deadline, with headroom/increment/UTC checked before/after and completion before deadline-minus180seconds. Original17/16GiB disk+MemAvailable/2GiBsampledchildgroupRSS/1GiBincrement/Go2/offline limits remain. Root metadata RSS is not falsely called measured process-group RSS."
+  },
+  "pin_validation": {
+    "staging_proposal_bindings_verified": 9,
+    "accepted_native_method_pins_verified": 6,
+    "native_R2_inputs_verified": 232,
+    "native_R2_unchanged_verified": 232,
+    "scratch_tool_candidate_runner_pins_verified": 16,
+    "all_exact": true,
+    "actual_future_output_paths_currently_absent": {
+      "outer_admission": true,
+      "exclusive_keeper": true,
+      "external_keeper_digest_receipt": true,
+      "index": true,
+      "compile_receipt": true,
+      "profiles_binary": true,
+      "http_binary": true
+    },
+    "code_data_or_runner_changed_by_reviewer": false
+  },
+  "ack_scope": "This concretely specifies the output identity condition in nativeR2review385bcbe7 as a bounded root-performed metadata procedure with externally frozen expected hashes. ACK covers source procedure only. No actual keeper/index/binary/probe output exists here and no executing inline implementation or result is being represented as tested/verified.",
+  "mandatory_future_conditions": [
+    "Root separately freezes the exact five-command nativeadmission/environment/readsets once under fresh measured headroom. The planned paths/argv/order cannot be silently changed under this ACK.",
+    "Root must actually perform and durably record every producing-log/pre/post-output/prefix/resource assertion as described; source ACK cannot stand in for those future observations. If original external expected identities are lost, do not reconstruct trust from mutable artifacts; preserve and stop qualification.",
+    "Actual pass outputs require accepted method complete=true/test_failed=false and frozen finitecounts plus independent exact evidence review. Any failed metadata phase remains separately failed; do not label an outerpass overall qualified."
+  ],
+  "unchanged_pending": [
+    "Controlled nativeLanț",
+    "Actual native terminal180",
+    "Proper currentWorld33/148/1156",
+    "Full genuineSource6 historical/current reference and all-seven V50 contracts",
+    "Final prospective quality/oneholdretirement",
+    "QualifiedSource7/export/catalogues/currentauthority/ordinaryinput/fullgates/HTTPcorpus/history/assembled acceptance"
+  ],
+  "failed_reference_preserved": "Earlier R1reference failed campaign remains failed and is not replayed by this procedure;717passed evidence and unqualified inner245 observations do not complete813remaining/bothhold stages. No original failed clock renewal.",
+  "permissions": {
+    "source_metadata_procedure_acknowledged": true,
+    "new_native_execution_permission": false,
+    "final_quality_approved": false,
+    "hold_retirement_approved": false,
+    "Source7_approved": false,
+    "installation_or_release_approved": false
+  },
+  "clock": {
+    "unchanged_source_start_utc": "2026-10-07T23:07:44.307619+00:00",
+    "unchanged_substantive_cutoff_utc": "2026-10-07T23:24:44.307619+00:00",
+    "unchanged_absolute_deadline_utc": "2026-10-07T23:27:44.307619+00:00",
+    "root_plus_reviewer_agents": 2,
+    "worker_RSS": "Unmeasured/no source-memory qualification. Read/hash/source-only review; no imports/Go/browser/native commands."
+  },
+  "valid_until": "Any bound procedure/path/producer/method/runner/readset/scope change; fresh exact ACK required."
+}

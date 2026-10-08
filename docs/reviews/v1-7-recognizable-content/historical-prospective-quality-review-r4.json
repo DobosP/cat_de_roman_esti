@@ -1,0 +1,51 @@
+{
+  "reviewer": "v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T03:18:55.766232+00:00",
+  "source_admission_sha256": "2c0f56ef4e871ed9868cfe0452330a254bacea8ab6df0c931f097fd0f2cd8228",
+  "review_operations": "Static archive, byte hashes, AST and retained output inspection only; no import, native execution or test replay.",
+  "source_worker_RSS": "Unmeasured; no whole-worker qualification.",
+  "schema": "independent-prospective-history-quality-review-v1",
+  "decision": "ACCEPT_COMPLETED_PROSPECTIVE_HELPER_EVIDENCE_ONLY",
+  "bindings": {
+    "historical-prospective-complete-r4-raw.tar.gz": "7af38178dc2f56c469ac1b4962f37e572debd3475e330160611d266afce3ed69",
+    "historical-prospective-complete-archive-manifest-r4.json": "265ab79cd17469557390fdd58b3cb274ac0acf077b03aa829fd2da2fe4605f0a",
+    "historical-prospective-results-summary-r4.json": "18570fcad3c8228d08fd84d8353813d30f2a8e5e0aa34ca6ae97a8b336d3761a",
+    "historical-prospective-preservation-stop-r4.json": "f943da648fa88e04736956f2afbf54495b2ae119a47dad7434ad540a35355181",
+    "historical-prospective-publication-accounting-r4.json": "541e020f1b74f46e1281e816ccc59f1761db445ea860f2b7925b51a29f2013c1",
+    "historical-source6-context-native-admission-r4.json": "8d3c7a4774eeccd06bc10f2e5fd4d2ea4d42e1e77ae83f141c65fe6ee29af87a",
+    "historical-source6-context-inner-admission-r4.json": "1ff8d0d2d49ccf6fdb273de070e15cb108940766d817f1a490bc863a181a9115",
+    "historical-source6-context-implementation-review-r4.json": "862bcd0424911ad19cbe6543d9afb1efc7a09fabf5d71d7ef05fbfbdf226a4fe",
+    "methods/historical_source6_v17_prospective_publication_r4.py.txt": "6cf7e9d0d57594a3223972e7f0ed179a12f9cc48f79b771dbaf5d96d20636746"
+  },
+  "observed_scope": {
+    "cases": 7,
+    "phase_reports": 21,
+    "protected_binding_entries": 344,
+    "unique_canonical_paths": 344,
+    "archive_regular_members": 34
+  },
+  "findings": [
+    "Every archive member and all 34 external regular source origins match declared sizes and hashes. Three owned pytest bookkeeping symlinks have the declared targets, are not followed and are not represented as duplicate regular inputs.",
+    "All seven collected IDs have passed setup, call and teardown, with no skips, failure or longrepr. The producer log, complete report SHA afff7416, original parent/inner admissions, keeper, cumulative receipt and completed state agree.",
+    "Original V50 funnel and whole alias-batch test executed against genuine SHA-pinned physical Source6 bytes and original 3bbe metadata. AST comparison confirms the entire original alias-batch function body and every assertion are preserved within its context; both physical mirrors retain Source6 identity.",
+    "Candidate-only contract uses the exact supported 341 fixture. Direct snapshot comparison confirms only raw singular leafă appended to Salary, with all other nodes/order, 9,473 edges and 180 puzzles unchanged. The 69 remaining dispositions compare against retained actual Source6 BEFORE rows, rather than candidate-derived expectations.",
+    "Cleanup-error and three fail-closed mutations (archive, member pin, snapshot source) passed. Candidate ROOT hook was used only for the new contract, restoration count is one, original/final ROOT equal actual R, and both ROOT and in-memory namespace restoration flags are true. Source, scratch, baseline and candidate exact flags are true.",
+    "All 344 current protected paths and recorded pre/post checks match. Parent 8d3 and inner 1ff8 retain the new original 03:10:18–03:30:18 clock and baseline; step completed 03:10:23 and publication/accounting completed 03:14:14 before the 180-second reserve. This did not resume failed 656.",
+    "Sampled native process-group peak is 141,385,728 bytes; inner self high-water observation is separately 206,811,136 bytes. Final full S/R increment upper bound is 33,430,219 bytes. Isolated archive/readback sampling and unsampled root source verification remain distinct; no whole-worker RSS qualification is asserted.",
+    "A pytest warning for DJANGO_SETTINGS_MODULE is preserved with plugin autoload disabled; it did not skip or alter the seven collected non-Django cases."
+  ],
+  "remaining_blocks": [
+    "World 33 goal modes / 148 discoveries / 10 books / 1,156 saved prefixes and 20 public HTTP controls remain unrun; old World744 outer resource failure remains failed.",
+    "Fresh final raw-quality and explicit current-batch hold-disposition acceptance, supported Source7 exact-parent and ancestry construction, and current authority/catalogue/export/corpus gates remain required.",
+    "This was child-only proposed helper augmentation. Actual installed helper adoption with Source7 metadata, complete byte inverse and full historical/current suites is not qualified by this result.",
+    "Full required native/shared verification and independent assembled exact-revision acceptance precede landing."
+  ],
+  "limits": {
+    "physical_helper_publication": false,
+    "Source7_approved": false,
+    "final_raw_quality_approved": false,
+    "hold_retirement_approved": false,
+    "installed_history_qualified": false,
+    "full_all_game_pass": false
+  }
+}

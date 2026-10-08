@@ -1,0 +1,94 @@
+{
+  "Source7_created": false,
+  "admission_sha256": "6a2b4af04894627b5c0fd1f4bc6e0fe45a7e716ecaa310dcda0dccb5d1ccf68e",
+  "all1775_reference_complete": false,
+  "all_native_step_pre_and_post_checks_true": true,
+  "archive_hold_actual_sample": {
+    "checked_at_utc": "2026-10-07T22:49:27.481891+00:00",
+    "disk_free_bytes": 221400604672,
+    "measured_full_S_R_bytes": 1154059762,
+    "memory_available_bytes": 16476676096
+  },
+  "archive_hold_receipt_sha256": "0dcd649f4ce162f6b8e2f4b7c8b4c10d9777a17eabe9898c60e3467d42e6756c",
+  "baseline_commit": "f4ae23ade4ac17e3ff13f3baefc1ce048f09695e",
+  "completed_substantive_case_count": 962,
+  "cumulative_result_sha256": "0ffaf7149d79ee3bf97f9147e6992a0d354e86dfce518968b61aed0f735a45dd",
+  "executed_steps": 3,
+  "failed_command": "reference-complete-conexiuni",
+  "failed_outer_step": 2,
+  "final_hold_retirement_approved": false,
+  "final_publication_is_trigger_measurement_or_recovery_proof": false,
+  "final_publication_observation": {
+    "atomic_temporaries_and_final_outputs_included": true,
+    "disk_free_before_publication": 221403037696,
+    "encoded_total_limit_bytes": 16777216,
+    "included_increment_upper_bound": 74099819,
+    "memory_available_before_publication": 18315399168,
+    "original_start_size": 1146932118,
+    "peak_including_publication_upper_bound": 74099819,
+    "reserved_disk_lower_bound": 221335928832,
+    "reserved_publication_bytes_inside_limits": 67108864,
+    "sampled_increment_before_publication": 6990955,
+    "size_before_publication": 1153923073
+  },
+  "full_reference_case_count": 1775,
+  "historical_all7_executed": false,
+  "installation_approval": false,
+  "native_failure_trigger_operands": "NOT_EMITTED by reviewed budget monitor; no invented cause or threshold operand",
+  "never_started_reference_stages": [
+    "lant",
+    "alchimie",
+    "quick",
+    "world",
+    "terminal",
+    "lant-inputs"
+  ],
+  "no_active_owned_child_after_runner": true,
+  "old_source_stage_expectations_untouched": true,
+  "original_deadline_utc": "2026-10-07T23:05:56.439814+00:00",
+  "other69_reference_executed": false,
+  "partial_reference_cases": [
+    {
+      "all_case_file_hashes_recorded_in_raw_receipt": true,
+      "case_count": 717,
+      "changed_cases": [
+        "@selection-bindings"
+      ],
+      "inner_method_complete": true,
+      "interpretation": "bounded partial observations only, not complete all-game/current-source/retirement approval",
+      "outer_step_passed": true,
+      "raw_receipt_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/reference-prospective-r1/pack-0-end-receipt.json",
+      "raw_receipt_sha256": "841687acd8ce03e71c5b0a025df9fe7a54be7ca72aa6f13c18a8d7417c8c3d95",
+      "stage": "pack"
+    },
+    {
+      "all_case_file_hashes_recorded_in_raw_receipt": true,
+      "case_count": 245,
+      "changed_cases": [],
+      "inner_method_complete": true,
+      "interpretation": "bounded partial observations only, not complete all-game/current-source/retirement approval",
+      "outer_step_passed": false,
+      "raw_receipt_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/reference-prospective-r1/conexiuni-0-end-receipt.json",
+      "raw_receipt_sha256": "6c844e9c34d2a6785a743c39e4e1065fc392248eb6965d654563ae90a209005a",
+      "stage": "conexiuni"
+    }
+  ],
+  "peak_group_RSS_bytes": 179040256,
+  "peak_sampled_incremental_bytes": 6990955,
+  "pre_post_pin_count_per_step": 267,
+  "protected_runtime_or_candidate_mutated": false,
+  "raw_before_after_case_pairs_and_receipts_preserved": true,
+  "raw_data_directory": "/home/dobo/work/_temp/codex__content-v1-7/probe/reference-prospective-r1",
+  "raw_data_losslessly_archived": false,
+  "recorded_at_utc": "2026-10-07T22:50:34.805840+00:00",
+  "remaining_reference_case_count": 813,
+  "schema": "v17-reference-prospective-partial-summary-r1",
+  "status": "FAILED_PARTIAL_PRESERVED_NO_RETRY",
+  "sticky_outer_guard": "remaining-disk-or-memory-floor",
+  "substantive_command_exit_code": 0,
+  "successful_outer_steps": [
+    0,
+    1
+  ],
+  "valid_until": "Any new resource admission or evidence revision; then this immutable failed campaign remains historical evidence, never a pass."
+}

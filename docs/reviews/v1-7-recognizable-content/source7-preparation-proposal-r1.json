@@ -1,0 +1,160 @@
+{
+  "CLI_phase1_approval_free_commands": [
+    {
+      "argv": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/methods/prepare_source7_isolated_r1.py.txt",
+        "FRESH_NATIVE_ADMISSION_PATH"
+      ],
+      "name": "prepare-isolated-exact-bytes"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/go-backend",
+        "build",
+        "-buildvcs=false",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1/cat-content-ops",
+        "./cmd/cat-content-ops"
+      ],
+      "name": "build-current-isolated-cat-content-ops"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/go-backend",
+        "build",
+        "-buildvcs=false",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1/cat-content-rail",
+        "./cmd/cat-content-rail"
+      ],
+      "name": "build-current-isolated-cat-content-rail"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1/cat-content-ops",
+        "rank",
+        "--root",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1",
+        "--write"
+      ],
+      "name": "supported-rank"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1/cat-content-ops",
+        "derive",
+        "--root",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1",
+        "--write"
+      ],
+      "name": "supported-derive"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1/cat-content-rail",
+        "quick",
+        "--root",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1",
+        "--source",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/go-backend/internal/contentrails/sources/authored-v7.json",
+        "--candidate-out",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/native/quick/candidate.json"
+      ],
+      "name": "quick-candidate"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1/cat-content-rail",
+        "world",
+        "--root",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1",
+        "--source",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/go-backend/internal/contentrails/sources/authored-v7.json",
+        "--candidate-out",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/native/world/candidate.json"
+      ],
+      "name": "world-candidate"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1/cat-content-rail",
+        "extensions",
+        "--root",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1",
+        "--source",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/go-backend/internal/contentrails/sources/authored-v7.json",
+        "--candidate-out",
+        "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1/native/extensions/candidate.json"
+      ],
+      "name": "extensions-candidate"
+    }
+  ],
+  "ancillary_metadata_disclosure": {
+    "actual_current_role_ACKs": {
+      "factual": "1a304892da0dfb001b83e96126b93c9486372173d4a21dd3a7dc634eb42d1c32",
+      "quality": "1a28119912c9e94ea83c17f549b64548abcee0b9f11ee5d587b90993ffa6d522"
+    },
+    "changes": {
+      "docs/STATUS.md": {
+        "current_phase_sha256": "3822e0a3134626955cdf70ae5a771ab8addbd5a0abc2ab38c90dff7fca5dc6a8",
+        "old_inherited_sha256": "df2ed84e0cf005e3ac3d6097df10d1f821c1225d706b311d299e42cb5a3abc16"
+      },
+      "docs/reviews/v1-7-recognizable-content/README.md": {
+        "current_phase_sha256": "5f966c32284e3693c7692cf111af79cd50ffc70af94d46b81cafd3a4b0c3dbcf",
+        "old_inherited_sha256": "4a032cd6e7b3184a7ce4554deab9c459a828697199c47ca23a9323ca1dd871bc"
+      }
+    },
+    "historical_inherited_readset_sha256": "e3df3da92354431341f24e3cdd4e903ae6a043edd29ba7c54ffd706f662a2c16",
+    "ignored_TASK_BRIEF_old_preimage": "Unavailable; no fabricated preimage/hashcomparison. CurrentqualityACK observationremainsindependentfact, not inheritedfilehistory.",
+    "nature": "These ancillary docs are NOT copied isolation/native-source dependencies; newly protectedcurrentphase metadata only, originalreadset/rawjudgmentunchanged."
+  },
+  "author": "/root/v17_materialize",
+  "authored_diff": "ONLYversion6→7/exactparentSource6/reviewedbase2f291/fourworldarchive descriptors→actualSource6Worldcandidate3247/factualfed/quality209. Quick/World/Extensions/legacy4 definitions byte-semantic equal. OriginalSources1–6 immutable, all25priorunique archives+3Source6World=28 retained. No mechanics/history growth.",
+  "base_commit": "2f291e8ce2f3d89befae901e64e4814333887247",
+  "blockers_and_gates": [
+    "Currentmetadata18e3 ACKedbybothoriginalroles; exactcurrentproposal/ACKs/raw6e9/dac/afe/ADR0183 futureinputpins. Originaljudgments/oldmetadatareadsets remain unchanged.",
+    "Candidate generation emits source7native rawrecords, not adoptedcatalogue/currentauthority. Independentcomplete reviews/currentaudits/finals, Source7binding/export/refcorpora/history/currentall4/fullnative+sharedracevet/docs/whitespace/assembled needed beforegreenland.",
+    "LiveSource7 file/source8/runtime/fixtures remain untouched; noGo/gofmt/CLI/native/import/generator executed."
+  ],
+  "code_or_native_executed": false,
+  "copy_manifest_path": "docs/reviews/v1-7-recognizable-content/source7-isolated-copy-manifest-r1.json",
+  "copy_manifest_sha256": "9f24ca11dd96e05a32fca585f06eb5452a1ddb39f6127b12d06f23de099cb8e2",
+  "current_metadata_ACKs": {
+    "final-candidate-current-metadata-proposal-r1.json": "18e3f96bbe87f690950cfc9584710395a6fe61e5e4df4b90486f2df3dfc5c6b3",
+    "final-factual-current-metadata-ack-r1.json": "1a304892da0dfb001b83e96126b93c9486372173d4a21dd3a7dc634eb42d1c32",
+    "final-quality-current-metadata-ack-r1.json": "1a28119912c9e94ea83c17f549b64548abcee0b9f11ee5d587b90993ffa6d522"
+  },
+  "draft_path": "docs/reviews/v1-7-recognizable-content/source7-authored-draft-r1.json",
+  "draft_sha256": "e95ebf937fb435700e6efb88737577b579975d1a3a7a63ab6e41b9a1c6a08ac4",
+  "exact_Source6_parent": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+  "execution_limits": "SOURCEONLYnow/noimports/native.Go2jobs2threads/offlineowncache, fresh17GiBstart16GiBremainingdisk+MemAvailable/2GiBRSS1GiBincrement/fullS-R/20min180reserve existing397686 eachfuturecampaign. Optional20GiBplanningmargin.Strongsignal/storage-limits existing.Copyfailure retainsownpartialroot, neveroverwrites/cleans foreign/unmergedstuff. IsolatedVCSfalse onlyknownV1.6nonGit precedent; no productionVCS waiver.",
+  "fresh_isolated_tools": "/home/dobo/work/_temp/codex__content-v1-7/source7-tools-r1",
+  "input_hash_staging": "Everycopy/method/source/SDK/parent/archives/currentruntime/script/helper pin immutable prepost. Unknownactualgenerated rank/derive/candidate/toolSHAs producedandfrozenexclusiveexternalkeeper withproducerreceipt/log/campaignidentity beforedependentoperations; never amend immutableadmission or forgeSource7metadata. Roothandlesnewreview/actualadmission.",
+  "installation_approval": false,
+  "isolated_copy_scope": {
+    "bytes": 65162116,
+    "files": 411,
+    "replacement_rule": "OnlyisolatedKGmirrors341+mobile95c exactsupportedgeneratedbytes; never livefixture copy/handedit. CurrentSource8 andGo/scriptdeps copiedexact."
+  },
+  "isolated_root": "/home/dobo/work/_temp/codex__content-v1-7/source7-stage-r1",
+  "later_accepted_native_rail_sequence": [
+    "Independentexactnewnative rawfactual+quality completeQuick85/World252concepts352recipes/Ext49; onlyexpresslyreviewed identicalfacts mayinherit.Source bindings alwaysnew.",
+    "cat-content-rail RAIL --root ISOLATED --source AUTHORED7 --candidate C --factual-review F --quality-review Q --proposal P; exactrawreviews required BEFORE proposal, then separate --audit-catalog P --audit-out A; freshsame-role finals+--live-audit A --final-factual-review FF --final-quality-review FQ --expected-sha256 SHA --write onlyafter acceptance.",
+    "WorldandQuick supportedreviewedinstallations/pintransitions mustprecede ExtensionsPROPOSAL since buildExtensions callscontentbuild.Load(root) andneedscoherentcurrentSource8. ExtensionsCANDIDATE generation isapproval-free/precoherence as actualSource6precedent. Neverinvent/handedit staleQuick/World metadata.",
+    "Freezeallruntime/export/history/currentcorpus changes beforefreshinstalledaudits andoriginalrolefinals/currentall4Source7entry. PublicWorldpredecessorguard andprivateinstalledreconstruction stayunchanged. ProperlivegraphadoptionONLYsupportedapply_common_words_v24.py --data-module everyday_inputs_v1_7_data_r2 afterrootauthorizesconcretereviewedstaging—notisolatedcandidatecopy."
+  ],
+  "live_source7_installed": false,
+  "method_path": "docs/reviews/v1-7-recognizable-content/methods/prepare_source7_isolated_r1.py.txt",
+  "method_sha256": "2cb1d6095ea9ee746cb7602129a38f08f8a98441256258b36320556d32e0e767",
+  "prepared_at_utc": "2026-10-08T04:48:19.091060+00:00",
+  "readset_path": "docs/reviews/v1-7-recognizable-content/source7-preparation-readset-r1.json",
+  "readset_sha256": "02f633c621a9d52edc7fefa731b7afd9b90e7c9fe15b8f063793410612e8c6f2",
+  "schema": "v1-7-source7-isolated-preparation-proposal-r1",
+  "source_admission_sha256": "f111dea617e5995e5af7267511a4c6e01f44eed919ba2297b0407a8d82e18836",
+  "source_preparation_assertion_history": "Pre-readset inheritedSTATUS thenREADME pins refused because obsoletephase docs. CurrentSTATUS3822 validatedby18e3/rolesACK; currentREADME5f966 validatedagainstqualityACK explicitlyancillary metadata. No code/runtime/dependencychange, imports/native or oldjudgmentretarget."
+}

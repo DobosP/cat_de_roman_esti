@@ -1,0 +1,53 @@
+{
+  "actual_supported_error": "apply_common_words_v24: ERROR — deferred ambiguous terms were authored into the resolver: ['leafa']; transaction restored",
+  "admission_sha256": "5d33426eaf0528c818c9516c0657281270f2addc4430d55443a9f9618fced08d",
+  "all_197_protected_and_14_scratch_hashes_exact": true,
+  "all_runtime_and_five_physical_transaction_inputs_unchanged": true,
+  "campaign_status": "FAILED_PREFLIGHT_NO_RETRY",
+  "candidate_generated": false,
+  "clock_reset": false,
+  "failed_campaign_is_not_resource_PASS": true,
+  "isolated_materialization_executed": false,
+  "lossless_logs": [
+    {
+      "archive_path": "docs/reviews/v1-7-recognizable-content/isolated-materialization-failed-r1-step-0.log.gz",
+      "archive_sha256": "cd2af9a3c9efcdd5f90d9cb1815ba18261d900d4424604890ee3d5fee8f11b28",
+      "lossless": true,
+      "raw_bytes": 32,
+      "raw_sha256": "f554cfdb85411c2bb1d503df3f53dfbad1f753eb8271938833166a5d26a7547c",
+      "source_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/v17-isolated-materialization-r1-0.log",
+      "step": 0
+    },
+    {
+      "archive_path": "docs/reviews/v1-7-recognizable-content/isolated-materialization-failed-r1-step-1.log.gz",
+      "archive_sha256": "128032ab61940f72997a558a8e589a9b39aec6d0d7e8e1c19e0353bbccda920e",
+      "lossless": true,
+      "raw_bytes": 124,
+      "raw_sha256": "debb6a597ccedd74c17a42b18675251d52803d7ffa5050f85c34ada3c03f44f4",
+      "source_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/v17-isolated-materialization-r1-1.log",
+      "step": 1
+    }
+  ],
+  "metadata_headroom": {
+    "disk_free_bytes": 223413071872,
+    "memory_available_bytes": 24581292032
+  },
+  "module_sha256": "37b0fd5b843d962d886ff660afb64a0c4c1bc844ecdbaae74eb56eecce7b3004",
+  "native_installation_approval": false,
+  "no_active_owned_child": true,
+  "original_start_size": 1114715586,
+  "peak_sampled_incremental_bytes": 110771,
+  "preflight_elapsed_seconds": 2.482915,
+  "preflight_exit_code": 1,
+  "preflight_guard": "step-failure",
+  "preflight_rss_bytes": 15925248,
+  "proposal_sha256": "a53df02974cd2a3b187ed26ed0cd0b3655f16cecc99f3d2f7774cf15d162d45b",
+  "qualified_go_version_passed": true,
+  "recorded_at_utc": "2026-10-07T21:09:25.495555+00:00",
+  "remaining_requirement": "Root must explicitly resolve inherited deferred leafă historical ambiguity in a newly exact-bound module/proposal and independent judgments before any different supported lane. No threshold/gate/deferred-list bypass by materializer.",
+  "result_sha256": "a51fa5436c8c25a789798106c644f7719c25b49fe1c4d03ed19762ff4a2e408e",
+  "schema": "v1-7-supported-preflight-refusal-summary-v1",
+  "source_method_review_sha256": "091cfe2c4771f16ae9a5869da75940778cfb1b158e82c0ad165b6c45d96d8365",
+  "source_method_sha256": "2c1c28b09766cc9d09e8c33a62d5523ffb6feac745edfd15ca70d043392003f8",
+  "step2_skipped_after_failure": true
+}

@@ -1,8 +1,9 @@
 # cat_de_roman_esti
 
-V1.6 continues as an unmerged checkpoint on `codex/content-v1-6`; see the
-[current qualification](docs/reviews/v1-6-everyday-inputs/README.md) and
-[continuation decision](docs/adr/0181-resume-linux-v1-6-finish.md). Native content gates passed; the reviewed whole-branch whitespace repair passed, and final exact assembled review remains before landing.
+V1.6 is independently accepted and published on `origin/main` at `dccd401`.
+V1.7 has complete prospective evidence and reviewed isolated native Source7 candidates;
+live installation and release gates remain pending. See [current status](docs/STATUS.md)
+and the [V1.7 review](docs/reviews/v1-7-recognizable-content/README.md).
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in

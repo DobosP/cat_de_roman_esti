@@ -1,0 +1,89 @@
+{
+  "schema": "v1-7-native-prospective-source-method-review-r1",
+  "reviewer": "/root/v17_raw_factual",
+  "role": "independent_native_source_method",
+  "checked_on": "2026-10-08",
+  "reviewed_at_utc": "2026-10-07T22:40:08.483680+00:00",
+  "verdict": "request_changes",
+  "proposal_path": "docs/reviews/v1-7-recognizable-content/native-prospective-method-proposal-r1.json",
+  "proposal_sha256": "4253cbb826fd7d6d1c2fbf7c6a9371625b888ea8d3b646e2b7999eeea35a30f9",
+  "readset_path": "docs/reviews/v1-7-recognizable-content/native-prospective-readset-r1.json",
+  "readset_sha256": "984ea62ad8e1c96bf5559f5381eecde1f13de2002dc34d27228dc656d2e60134",
+  "baseline_commit": "f4ae23ade4ac17e3ff13f3baefc1ce048f09695e",
+  "candidate_sha256": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+  "methods": {
+    "docs/reviews/v1-7-recognizable-content/methods/derive_candidate_index_v17_r1.py.txt": "e0872204ffd76fd204c976e6e920872d45cbe49c2c61776cc10e72015cc8da6d",
+    "docs/reviews/v1-7-recognizable-content/methods/native_candidate_http_v17_r1.go.txt": "02a686014835a616c64bcb3c7ac7eef401ffc03a19c06a474672dae92145c6bd",
+    "docs/reviews/v1-7-recognizable-content/methods/native_compile_lifecycle_v17_r1.py.txt": "47740eb8a98803aee9da42233a7a247236996848e590546d6d1b213db0f7192f",
+    "docs/reviews/v1-7-recognizable-content/methods/native_deferred69_v17_r1.json": "4e7b8a1490d47362886710a8c1fb1867eba12b94a3d395d06daafd4e7fc0b145",
+    "docs/reviews/v1-7-recognizable-content/methods/native_profiles_v17_r1.go.txt": "85bd8f61de6e04278f6e07521f766a72dad6ccb4f0c5c88640ca22ef1d1aa903",
+    "docs/reviews/v1-7-recognizable-content/methods/native_research_content_adapter_v17_r1.go.txt": "ed1563a09d66522ec96fb6c571daf71d195b5b8ac0072ec9bea913a876c94671"
+  },
+  "independence": {
+    "method_authored_or_changed_by_reviewer": false,
+    "other_new_reference_method_review_read": false,
+    "method_import_compilation_gofmt_or_native_execution": false
+  },
+  "blocking_findings": [
+    {
+      "id": "native-http-completion",
+      "file": "docs/reviews/v1-7-recognizable-content/methods/native_candidate_http_v17_r1.go.txt",
+      "issue": "HTTP report never supplies complete, while proposal acceptance requires complete=true/test_failed=false. Cleanup always records test_failed, transcript/observations, but successful final code only records request_count and logs completion. An absent complete field cannot satisfy the frozen result contract.",
+      "required_narrow_repair": "Initialize a completion boolean false before cleanup/report creation; emit it in cleanup. Set true only after both ordinary arms and exact32 requests complete, with observation/session counts checked. Keep all existing privacy/Get/shared-slot/clue/score/share/Progress assertions and request bounds. Preserve this unexecuted R1 method/proposal; publish new exact method/readset/proposal pins for fresh review."
+    },
+    {
+      "id": "derived-index-exclusive-publication",
+      "file": "docs/reviews/v1-7-recognizable-content/methods/derive_candidate_index_v17_r1.py.txt",
+      "line": 34,
+      "issue": "Index output uses out.is_relative_to(S) and not out.exists(), then write_text. This is not exclusive publication: dangling symlinks evade exists(), write_text follows them, and an existing file appearing between checks is overwritten. Lexical is_relative_to also permits a path with parent components to escape S. Exact future environment makes ordinary intent clear but does not enforce the advertised no-clobber owned-output boundary.",
+      "required_narrow_repair": "Require the one exact expected own scratch index filename, reject existing/symlink destinations and publish with exclusive creation (x/O_EXCL, preferably O_NOFOLLOW) plus flush/fsync. Retain original Unicode15, baseline/candidate SHA,13514→13515/all-old-owner/only-one-new-key assertions and original normalizer. No generic runner framework needed."
+    },
+    {
+      "id": "lifecycle-failure-receipt",
+      "file": "docs/reviews/v1-7-recognizable-content/methods/native_compile_lifecycle_v17_r1.py.txt",
+      "issue": "Finally cleanup raises immediately for a missing/replaced/hash-changed owned temporary source. That skips receipt publication entirely and leaves later genuinely owned unchanged sources unexamined. The source/proposal describe an immutable failure receipt, but this explicit failure path cannot produce it. Partial publication/write failure can also trigger the hash mismatch path. Refusing to delete changed/foreign files is correct and must remain.",
+      "required_narrow_repair": "Collect bounded cleanup outcomes/errors for each of the three owned paths, preserve any path whose inode/type/hash cannot be verified, attempt safe cleanup only for verified-owned paths, then publish an exclusive failure receipt before propagating failure. Receipt must distinguish successfully removed, preserved/unverifiable and never-published sources and retain compiler/signal status. Do not delete foreign/changed sources or turn failure into a pass. Explicit SIGKILL/host-loss/storage-failure limitations remain; no broad process supervisor redesign."
+    }
+  ],
+  "otherwise_reviewed_static_contract": {
+    "actual_API_and_types": "Actual graph.Service Resolve/ResolveFuzzy/Suggest/ReviewedUnresolved, contexto profile/cache/record/build/score/clueView/Guess/Clue/Progress and content.Load signatures inspected. The proposed calls and typed fields match current source; no specific compile-interface mismatch identified. This is static inspection, not a compilation PASS.",
+    "helper_provenance": "Helper content.Load independently decodes the verified sealed baseline into fresh Content. It verifies actual baseline/candidate hashes, node count/order/identities/all unselected node fields, edges/puzzles and exact Salary alias append. It checks independent before-index against sealed13514 owners and exact candidate13515/one leafa addition, then transfers only that alias/index before engines. Baseline Sources/Manifest/Metadata remain deliberately unchanged and are explicitly RESEARCH ONLY, not forged Source7/currentauthority or production mutation.",
+    "full_profile_scope": "All265 full-source Cald records/263sealedapproved,641035native and122960projection feedback pairs,2419mined profiles,13514old identities and464projections have explicit loops/count assertions. Exact graph pins retain .78suggest/.84candidate/.90confidence/.06margin and protectedpaște/intrigii logic. Fixed29 plus19 original graph cases ×4constructed targets produces192 service pairs and24direct-form contexts; Leana and Salary own-target wrong-win controls are included.",
+    "separate69": "Exact ordered69 vector/canonical112f is checked and classified through existing Resolve/ResolveFuzzy/Suggest/projection APIs. No69extra service sessions, fabricated ResolveLexical API or all69unknown claim. Changed fuzzy/suggestion rows are retained for independent quality review.",
+    "ordinary_HTTP": "Two public-created sessions at known normal/Societate seed7 with no baseline seed search/private target injection. Exactly16requests per arm/32total: create/Get/unearnedclue/refusalGet, alias/canonical first+repeats, sharedoneattempt/privateGet, two more unique nonwinning guesses, earned warmerbank3 clue,4attempts/1clue/700win/order-derivedshare/terminalGet/Progress. Exact actual rank15/distance2/closeness99 and private fields/status/state asserted.",
+    "lifecycle_success_path": "Preflight absence checks and O_EXCL/O_NOFOLLOW temporary creation, device/inode/method-hash verification, signal masking and serial two race binaries are suitable on the success path. Three exact source files are removed before independently invoked test binaries. Existing production source files are not overwritten; proposed roots/Go-C arguments use exact R, not accidental cwd. Blocking failure-publication gap above remains.",
+    "precedents": "Accepted V1.6 native_profiles_test.go.txt/native_candidate_http_test.go.txt and current accepted V1.7 ordinary_leafa_compile_lifecycle_r2.py.txt used only as source precedents. Old approvals do not erase newly explicit result/publication requirements."
+  },
+  "pin_validation": {
+    "proposal_method_pins_verified": 6,
+    "readset_inputs_verified": 226,
+    "readset_unchanged_verified": 226,
+    "scratch_tool_candidate_runner_pins_verified": 16,
+    "three_temporary_destinations_currently_absent": true,
+    "all_proposed_bound_inputs_current": true
+  },
+  "future_execution_requirements": [
+    "Freeze repaired exact methods/proposal/readset and get fresh source acceptance before compilation/import/native execution.",
+    "One fresh qualified397686 full-ownedS/R admission with17GiBstartdisk/16GiBremainingdisk+MemAvailable,2GiBsampledgroupRSS/1GiBfullownedincrement/20min/180secondmetadatareserve,Go2threads/jobs/offlineowncache. Original source preparation clock is not reset by repairs.",
+    "Index output and both binary hashes must become immutable stage pins before probe execution, within one execution admission/deadline; verify all protected/hash cleanup boundaries pre/post.",
+    "Successful research results require actual complete=true/test_failed=false and exact finite counts. No final rawquality/hold-retirement/Source7/installation/all-game release follows."
+  ],
+  "pending_not_covered": [
+    "Controlled native Lanț legal/repeat/refusal/reverse/undo/hint/caption/score/privacy replay",
+    "Actual native terminal180 execution/reference",
+    "Proper current native World33modes/148discoveries/1156prefixes",
+    "Genuine Source6 historical V50 all-seven contract and complete reference evidence",
+    "Qualified sealed Source7 ordinary input/currentauthority/export/fullnative/reference/HTTPcorpus/history/assembled review"
+  ],
+  "scope_and_clock": {
+    "source_admission_sha256": "69dbd0dbe687034f9cff0a3df1d264137010e5b5b58311fcff13f657398f9b9a",
+    "unchanged_source_cutoff_utc": "2026-10-07T22:43:56.815927+00:00",
+    "unchanged_absolute_deadline_utc": "2026-10-07T22:46:56.815927+00:00",
+    "root_inclusive_agents_max": 3,
+    "worker_RSS": "Unmeasured/no whole-source memory PASS. No browser/native/game/builder/import execution by reviewer; only safeAST/read-only hash/source/API inspection and this receipt.",
+    "no_method_edits": true
+  },
+  "native_execution_approved": false,
+  "installation_approval": false,
+  "valid_until": "Any bound method/proposal/readset/API/input/scope changes; fresh exact review required."
+}
