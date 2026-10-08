@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "entries": [
+    {
+      "paths": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AccountBar.tsx",
+        "frontend/src/components/AlchimieModes.tsx",
+        "frontend/src/components/CategoryPicker.tsx",
+        "frontend/src/components/CspElements.tsx",
+        "frontend/src/components/GameIntro.tsx",
+        "frontend/src/components/GameOptions.tsx",
+        "frontend/src/components/GameSetupOptions.tsx",
+        "frontend/src/components/GameShell.tsx",
+        "frontend/src/components/Hud.tsx",
+        "frontend/src/components/OptionalChromeBoundary.tsx",
+        "frontend/src/components/PlayGuide.tsx",
+        "frontend/src/components/ResultCard.tsx",
+        "frontend/src/components/RouteErrorBoundary.tsx",
+        "frontend/src/components/SoundToggle.tsx",
+        "frontend/src/components/StartFailureNotice.tsx",
+        "frontend/src/hooks/useActiveGame.ts",
+        "frontend/src/hooks/useAuth.ts",
+        "frontend/src/hooks/useDailyIntent.ts",
+        "frontend/src/hooks/useRecordScore.ts",
+        "frontend/src/hooks/useSavedGameResume.ts",
+        "frontend/src/main.tsx",
+        "frontend/src/screens/Alchimie.tsx",
+        "frontend/src/screens/AlchimieExplore.tsx",
+        "frontend/src/screens/CaldRece.tsx",
+        "frontend/src/screens/Conexiuni.tsx",
+        "frontend/src/screens/Home.tsx",
+        "frontend/src/screens/Intrusul.tsx",
+        "frontend/src/screens/Lant.tsx",
+        "frontend/src/screens/Perechi.tsx",
+        "frontend/src/screens/Ranking.tsx"
+      ],
+      "rules": [
+        "banned-imports"
+      ],
+      "reason": "Exact audited live React19/UI0.3 source during approved M1 staged-react migration; remove on actual S1-M2 active UI/port. No CSP or accessibility exemption.",
+      "expires": "S1-M2"
+    },
+    {
+      "paths": [
+        "frontend/src/main.tsx"
+      ],
+      "rules": [
+        "banned-packages"
+      ],
+      "reason": "Exact live frontend ownership witness for React/@types declaration support in approved React19/UI0.3 M1; remove on actual S1-M2 port. No manifest/root-wide, compat or CSP exemption.",
+      "expires": "S1-M2"
+    }
+  ]
+}

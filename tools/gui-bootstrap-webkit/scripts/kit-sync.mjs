@@ -11,7 +11,7 @@ import { isDeepStrictEqual } from 'node:util';
 const MODULE = 'github.com/DobosP/roedu-ui/web-kit';
 const MAX_ARCHIVE = 128 * 1024 * 1024;
 const GATE_FILES = ['scripts/gate.sh', 'compose.gate.yml', 'Taskfile.yml', 'Dockerfile.toolchain'];
-const GO_DIRS = new Set(['assets', 'static', 'csp', 'island', 'health', 'golden', 'routes', 'engine', 'tokens', 'i18n', 'vm', 'tmplfn', 'ui', 'cmd', 'lint', 'sample', 'testdata']);
+const GO_DIRS = new Set(['assets', 'budget', 'static', 'csp', 'island', 'health', 'golden', 'routes', 'engine', 'tokens', 'i18n', 'vm', 'tmplfn', 'ui', 'cmd', 'lint', 'sample', 'testdata']);
 const NPM_KIT_DIRS = new Set(['vite-preset', 'budget', 'playwright', 'lint', 'scripts', 'templates', 'schemas', 'testdata']);
 const PACKAGE_FILES = new Set(['package.json', 'README.md', 'LICENSE', 'LICENSE.md', 'LICENSE.txt', 'NOTICE']);
 const sha = data => createHash('sha256').update(data).digest('hex');
@@ -506,6 +506,14 @@ function goArchive(data) {
     if (rel.split('/').some(part => ['.git', 'node_modules', '.gate', '.vitest', 'test-results', 'TASK_BRIEF.md', 'TASK_RESULT.md', 'SWARM_RESULT.md'].includes(part) || part === '.env' || part.startsWith('.env.'))) fail(`Excluded cache/secret member in Go archive: ${name}`);
     if (!GO_DIRS.has(first) && !['go.mod', 'go.sum', 'README.md', 'LICENSE', 'LICENSE.md', 'LICENSE.txt'].includes(rel)) fail(`Unknown Go archive path: ${name}`);
     if (GO_DIRS.has(first) && rel === first && entry.type !== 'directory') fail(`Go package directory required: ${name}`);
+    // budget is a mixed Go/npm directory. Only its owning Go source and the
+    // two fixtures read by the actual Go schema test cross this archive boundary.
+    if (first === 'budget') {
+      const directory = rel === 'budget' || rel === 'budget/testdata';
+      const file = /^budget\/[^/]+\.go$/.test(rel) || ['budget/testdata/budgets.seed.json', 'budget/testdata/schema-cases.json'].includes(rel);
+      if (!directory && !file) fail(`Npm or unregistered budget file in Go archive: ${name}`);
+      if (entry.type !== (directory ? 'directory' : 'file')) fail(`Go budget member type mismatch: ${name}`);
+    }
     if (first === 'lint' && rel !== 'lint' && !rel.startsWith('lint/rawcheck/')) fail(`Npm lint file in Go archive: ${name}`);
     if (first === 'sample' && (/(^|\/)(e2e|src|node_modules|package\.json|package-lock\.json|vite\.config\.[^/]+|playwright\.config\.[^/]+)(\/|$)/.test(rel))) fail(`Npm sample file in Go archive: ${name}`);
     if (first === 'testdata' && rel !== 'testdata' && !/^testdata\/(djt|golden|rawcheck)(\/|$)/.test(rel)) fail(`Npm testdata in Go archive: ${name}`);
@@ -515,12 +523,16 @@ function goArchive(data) {
   if (!mod || goRecords(mod).find(record => record.kind === 'module')?.module !== MODULE) fail('Go archive module mismatch');
   return source;
 }
-export function loadKit(root) {
-  root = fs.realpathSync(root);
-  const kitDir = noLinks(root, 'kit');
-  const names = fs.readdirSync(kitDir).sort();
-  for (const name of names) { safePath(name); const stat = fs.lstatSync(path.join(kitDir, name)); if (!stat.isFile() || stat.isSymbolicLink()) fail(`Invalid kit input: ${name}`); }
-  const tagText = fs.readFileSync(noLinks(root, 'kit/CORE_TAG'), 'utf8');
+/** Private canonical byte admission; only source-owned readers call this closure. */
+function admitCanonicalKitBundle(names, readBytes) {
+  if (!Array.isArray(names) || names.some(name => typeof name !== 'string') || new Set(names).size !== names.length || typeof readBytes !== 'function') fail('Canonical kit names/raw reader required');
+  for (const name of names) safePath(name);
+  const read = name => {
+    const data = readBytes(name);
+    if (!Buffer.isBuffer(data)) fail(`Actual kit bytes required: ${name}`);
+    return data;
+  };
+  const tagText = read('CORE_TAG').toString('utf8');
   if (!/^core-v1\.\d+\n?$/.test(tagText)) fail('Malformed committed CORE_TAG');
   const tag = tagText.trim(), goName = `web-kit-go-${tag}.tgz`;
   const uiName = names.find(name => /^roedu-ui-\d+\.\d+\.\d+\.tgz$/.test(name));
@@ -528,7 +540,7 @@ export function loadKit(root) {
   const expected = ['CORE_TAG', 'SHA256SUMS', uiName, kitName, goName];
   if (!uiName || !kitName || names.length !== expected.length || names.some(name => !expected.includes(name))) fail('Kit must contain exactly CORE_TAG, SHA256SUMS and the three archives');
   const sums = new Map();
-  for (const line of fs.readFileSync(noLinks(root, 'kit/SHA256SUMS'), 'utf8').split('\n').filter(Boolean)) {
+  for (const line of read('SHA256SUMS').toString('utf8').split('\n').filter(Boolean)) {
     const match = /^([a-f0-9]{64}) [ *]([^/\\\s]+)$/.exec(line);
     if (!match || sums.has(match[2]) || ![uiName, kitName, goName].includes(match[2])) fail('Malformed/duplicate/unknown SHA256SUMS entry');
     sums.set(match[2], match[1]);
@@ -536,7 +548,7 @@ export function loadKit(root) {
   if (sums.size !== 3) fail('All three archive hashes required');
   const archives = new Map();
   for (const name of [uiName, kitName, goName]) {
-    const data = fs.readFileSync(noLinks(root, `kit/${name}`)); if (sha(data) !== sums.get(name)) fail(`Archive hash mismatch: ${name}`); archives.set(name, data);
+    const data = read(name); if (sha(data) !== sums.get(name)) fail(`Archive hash mismatch: ${name}`); archives.set(name, data);
   }
   const ui = npmArchive(archives.get(uiName), '@roedu/ui', uiName), npm = npmArchive(archives.get(kitName), '@roedu/web-kit', kitName);
   const coreLock = JSON.parse(archiveFile(npm.entries, 'package/versions.lock.json').data.toString('utf8'));
@@ -546,6 +558,13 @@ export function loadKit(root) {
   for (const file of GATE_FILES) templates.set(file, archiveFile(npm.entries, `package/templates/${file === 'scripts/gate.sh' ? 'gate.sh' : file}`));
   const environment = archiveFile(npm.entries, 'package/templates/.gate.env').data.toString('utf8');
   return { tag, ui, npm, source, templates, environment, coreLock, sums };
+}
+export function loadKit(root) {
+  root = fs.realpathSync(root);
+  const kitDir = noLinks(root, 'kit');
+  const names = fs.readdirSync(kitDir).sort();
+  for (const name of names) { safePath(name); const stat = fs.lstatSync(path.join(kitDir, name)); if (!stat.isFile() || stat.isSymbolicLink()) fail(`Invalid kit input: ${name}`); }
+  return admitCanonicalKitBundle(names, name => fs.readFileSync(noLinks(root, `kit/${name}`)));
 }
 function regularFileDestination(root, relative, allowMissing = false) {
   const filename = noLinks(root, relative, allowMissing);
@@ -738,6 +757,14 @@ export function mergeEnvironment(current, template, coreLock) {
   }
   return result;
 }
+function planGoDependencies(root, goDirs, kit, writes, replacements) {
+  for (const directory of goDirs) {
+    const prefix = directory === '.' ? '' : `${directory}/`, vendor = `${prefix}third_party/webkit`;
+    directoryDestination(root, vendor, true); regularTree(noLinks(root, vendor, true)); replacements.set(vendor, kit.source);
+    const goMod = `${prefix}go.mod`, stat = fs.statSync(noLinks(root, goMod));
+    writes.set(goMod, { data: Buffer.from(pinGoMod(fs.readFileSync(noLinks(root, goMod), 'utf8'), kit.tag)), mode: stat.mode & 0o777 });
+  }
+}
 function prepare(root, config, kit, environmentMode = 'source') {
   const cfg = validateConfig(root, config); kit = { ...kit, vendor_dir: cfg.vendor_dir };
   const writes = new Map(), replacements = new Map(), removals = [];
@@ -753,12 +780,7 @@ function prepare(root, config, kit, environmentMode = 'source') {
   if (fs.existsSync(oldVendorDirectory)) for (const name of fs.readdirSync(oldVendorDirectory)) if (/^roedu-(ui|web-kit)-[^/]+\.tgz(?:\.sha256)?$/.test(name)) regularFileDestination(root, `${cfg.vendor_dir}/${name}`);
   const oldVendor = regularTree(oldVendorDirectory);
   for (const filename of oldVendor.keys()) if (/^roedu-(ui|web-kit)-[^/]+\.tgz(?:\.sha256)?$/.test(filename) && !writes.has(`${cfg.vendor_dir}/${filename}`)&&!adoption.preserve.includes(`${cfg.vendor_dir}/${filename}`)) removals.push(`${cfg.vendor_dir}/${filename}`);
-  for (const directory of cfg.go_dirs) {
-    const prefix = directory === '.' ? '' : `${directory}/`, vendor = `${prefix}third_party/webkit`;
-    directoryDestination(root, vendor, true); regularTree(noLinks(root, vendor, true)); replacements.set(vendor, kit.source);
-    const goMod = `${prefix}go.mod`, stat = fs.statSync(noLinks(root, goMod));
-    writes.set(goMod, { data: Buffer.from(pinGoMod(fs.readFileSync(noLinks(root, goMod), 'utf8'), kit.tag)), mode: stat.mode & 0o777 });
-  }
+  planGoDependencies(root, cfg.go_dirs, kit, writes, replacements);
   for (const [destination, entry] of kit.templates) writes.set(destination, entry);
   const currentEnv = fs.readFileSync(noLinks(root, '.gate.env'), 'utf8');
   const sourceEnv = mergeEnvironment(currentEnv, kit.environment, kit.coreLock);
@@ -936,6 +958,213 @@ export function selfTest() {
     fs.writeFileSync(path.join(root, 'Taskfile.repo.yml'), 'original fixture repo task\n');
     fs.mkdirSync(path.join(root, '.codex')); fs.writeFileSync(path.join(root, '.codex/config.toml'), 'original fixture config\n');
     makeKit();
+    checked(checks, 'fixture-canonical-bundle-private-parity', () => {
+      function legacyLoadKitForBundleParity(root) {
+        root = fs.realpathSync(root);
+        const kitDir = noLinks(root, 'kit');
+        const names = fs.readdirSync(kitDir).sort();
+        for (const name of names) { safePath(name); const stat = fs.lstatSync(path.join(kitDir, name)); if (!stat.isFile() || stat.isSymbolicLink()) fail(`Invalid kit input: ${name}`); }
+        const tagText = fs.readFileSync(noLinks(root, 'kit/CORE_TAG'), 'utf8');
+        if (!/^core-v1\.\d+\n?$/.test(tagText)) fail('Malformed committed CORE_TAG');
+        const tag = tagText.trim(), goName = `web-kit-go-${tag}.tgz`;
+        const uiName = names.find(name => /^roedu-ui-\d+\.\d+\.\d+\.tgz$/.test(name));
+        const kitName = names.find(name => /^roedu-web-kit-\d+\.\d+\.\d+\.tgz$/.test(name));
+        const expected = ['CORE_TAG', 'SHA256SUMS', uiName, kitName, goName];
+        if (!uiName || !kitName || names.length !== expected.length || names.some(name => !expected.includes(name))) fail('Kit must contain exactly CORE_TAG, SHA256SUMS and the three archives');
+        const sums = new Map();
+        for (const line of fs.readFileSync(noLinks(root, 'kit/SHA256SUMS'), 'utf8').split('\n').filter(Boolean)) {
+          const match = /^([a-f0-9]{64}) [ *]([^/\\\s]+)$/.exec(line);
+          if (!match || sums.has(match[2]) || ![uiName, kitName, goName].includes(match[2])) fail('Malformed/duplicate/unknown SHA256SUMS entry');
+          sums.set(match[2], match[1]);
+        }
+        if (sums.size !== 3) fail('All three archive hashes required');
+        const archives = new Map();
+        for (const name of [uiName, kitName, goName]) {
+          const data = fs.readFileSync(noLinks(root, `kit/${name}`)); if (sha(data) !== sums.get(name)) fail(`Archive hash mismatch: ${name}`); archives.set(name, data);
+        }
+        const ui = npmArchive(archives.get(uiName), '@roedu/ui', uiName), npm = npmArchive(archives.get(kitName), '@roedu/web-kit', kitName);
+        const coreLock = JSON.parse(archiveFile(npm.entries, 'package/versions.lock.json').data.toString('utf8'));
+        if (coreLock.core_tag !== undefined && coreLock.core_tag !== tag) fail('Npm lock core_tag differs from committed CORE_TAG');
+        const source = goArchive(archives.get(goName));
+        const templates = new Map();
+        for (const file of GATE_FILES) templates.set(file, archiveFile(npm.entries, `package/templates/${file === 'scripts/gate.sh' ? 'gate.sh' : file}`));
+        const environment = archiveFile(npm.entries, 'package/templates/.gate.env').data.toString('utf8');
+        return { tag, ui, npm, source, templates, environment, coreLock, sums };
+      }
+      // SYNTHETIC NON-RELEASE fixture bytes only; no runtime/qualification claim.
+      const beforeRoot = snapshot(root);
+      const files = new Map(fs.readdirSync(path.join(root, 'kit')).sort().map(name => [name, fs.readFileSync(noLinks(root, `kit/${name}`))]));
+      const clone = () => new Map([...files].map(([name, bytes]) => [name, Buffer.from(bytes)]));
+      const readCalls = [];
+      const admit = (input, names = [...input.keys()].sort()) => {
+        readCalls.length = 0;
+        return admitCanonicalKitBundle(names, name => { readCalls.push(name); return input.get(name); });
+      };
+      const resign = input => {
+        input.set('SHA256SUMS', Buffer.from(archiveNames.map(name => `${sha(input.get(name))}  ${name}\n`).join('')));
+        return input;
+      };
+      const replaceArchive = (name, bytes) => resign(new Map([...clone(), [name, bytes]]));
+      const parsed = admit(files), legacy = legacyLoadKitForBundleParity(root);
+      assert.deepEqual(parsed, legacy);
+      assert.deepEqual(loadKit(root), legacy);
+      assert.deepEqual(Object.keys(parsed), ['tag', 'ui', 'npm', 'source', 'templates', 'environment', 'coreLock', 'sums']);
+      assert.deepEqual([...parsed.templates.keys()], GATE_FILES);
+      assert.deepEqual(parsed.environment, envTemplate);
+      assert.deepEqual(readCalls, ['CORE_TAG', 'SHA256SUMS', ...archiveNames]);
+      assert.equal(parsed.tag, tag);
+      assert.equal(parsed.ui.manifest.name, '@roedu/ui');
+      assert.equal(parsed.npm.manifest.name, '@roedu/web-kit');
+      assert.deepEqual(parsed.source.get('tokens/tokens.go').data, sourceFiles.get('web-kit/tokens/tokens.go'));
+      assert.equal(parsed.sums.size, 3);
+      const noLF = clone(); noLF.set('CORE_TAG', Buffer.from(tag)); assert.equal(admit(noLF).tag, tag);
+      const paddedTag = 'core-v1.00', paddedGo = `web-kit-go-${paddedTag}.tgz`, padded = clone();
+      padded.set('CORE_TAG', Buffer.from(paddedTag)); padded.set(paddedGo, padded.get(archiveNames[2])); padded.delete(archiveNames[2]);
+      padded.set('SHA256SUMS', Buffer.from([...padded].filter(([name]) => name.endsWith('.tgz')).map(([name, bytes]) => `${sha(bytes)}  ${name}\n`).join('')));
+      assert.equal(admit(padded).tag, paddedTag); // Exact current decimal family, no new normalization.
+      for (const invalidTag of ['core-v2.0', 'core-v1.0-rc1', ' core-v1.0', 'core-v1.0\r\n']) {
+        const input = clone(); input.set('CORE_TAG', Buffer.from(invalidTag)); assert.throws(() => admit(input), /Malformed committed CORE_TAG/);
+        assert.deepEqual(readCalls, ['CORE_TAG']);
+      }
+      for (const missing of ['SHA256SUMS', ...archiveNames]) {
+        const input = clone(); input.delete(missing); assert.throws(() => admit(input), /exactly CORE_TAG, SHA256SUMS and the three archives/);
+        assert.deepEqual(readCalls, ['CORE_TAG']);
+      }
+      const extra = clone(); extra.set('unexpected.txt', Buffer.from('must never be read'));
+      assert.throws(() => admit(extra), /exactly CORE_TAG, SHA256SUMS and the three archives/); assert.deepEqual(readCalls, ['CORE_TAG']);
+      const wrongGoName = clone(); wrongGoName.set('web-kit-go-core-v2.0.tgz', wrongGoName.get(archiveNames[2])); wrongGoName.delete(archiveNames[2]);
+      assert.throws(() => admit(wrongGoName), /exactly CORE_TAG, SHA256SUMS and the three archives/);
+      assert.throws(() => admit(files, [...files.keys(), 'CORE_TAG']), /Canonical kit names\/raw reader required/); assert.deepEqual(readCalls, []);
+      for (const unsafe of ['../outside', '/outside', 'nested/file', 'unsafe\\file']) {
+        const input = clone(); input.set(unsafe, Buffer.from('inert'));
+        assert.throws(() => admit(input)); assert.ok(!readCalls.includes(unsafe));
+      }
+      const missingTag = clone(); missingTag.delete('CORE_TAG'); assert.throws(() => admit(missingTag), /Actual kit bytes required: CORE_TAG/);
+      const metadata = clone(); metadata.set(archiveNames[0], { data: files.get(archiveNames[0]), sha256: sha(files.get(archiveNames[0])) });
+      assert.throws(() => admit(metadata), /Actual kit bytes required/);
+      const stringTag = clone(); stringTag.set('CORE_TAG', tag); assert.throws(() => admit(stringTag), /Actual kit bytes required/);
+      const sumLines = files.get('SHA256SUMS').toString('utf8').trimEnd().split('\n');
+      for (const badSums of [sumLines.slice(0, 2).join('\n'), [...sumLines, sumLines[0]].join('\n'), [...sumLines, `${'0'.repeat(64)}  unknown.tgz`].join('\n'), `not-a-checksum\n`, sumLines.join('\r\n')]) {
+        const input = clone(); input.set('SHA256SUMS', Buffer.from(badSums)); assert.throws(() => admit(input));
+        assert.deepEqual(readCalls, ['CORE_TAG', 'SHA256SUMS']);
+      }
+      const binaryMarker = clone(); binaryMarker.set('SHA256SUMS', Buffer.from(sumLines.map(line => line.replace('  ', ' *')).join('\n') + '\n'));
+      assert.equal(admit(binaryMarker).sums.size, 3);
+      const blankLines = clone(); blankLines.set('SHA256SUMS', Buffer.from('\n' + sumLines.join('\n\n') + '\n'));
+      assert.equal(admit(blankLines).sums.size, 3);
+      for (const name of archiveNames) {
+        const input = clone(), bytes = input.get(name); bytes[bytes.length - 1] ^= 1;
+        assert.throws(() => admit(input), /Archive hash mismatch/);
+      }
+      assert.throws(() => admit(replaceArchive(archiveNames[0], Buffer.from('not a gzip archive'))));
+      assert.deepEqual(readCalls, ['CORE_TAG', 'SHA256SUMS', ...archiveNames]); // All hashes checked before parser admission.
+      const wrongUi = new Map([['package/package.json', json({ ...uiManifest, name: '@wrong/ui' })], ['package/dist/index.js', Buffer.from('inert')]]);
+      assert.throws(() => admit(replaceArchive(archiveNames[0], fixtureArchive(wrongUi))), /Npm name\/version mismatch/);
+      const wrongVersion = new Map([['package/package.json', json({ ...uiManifest, version: '2.0.0' })], ['package/dist/index.js', Buffer.from('inert')]]);
+      assert.throws(() => admit(replaceArchive(archiveNames[0], fixtureArchive(wrongVersion))), /Npm archive filename\/version mismatch/);
+      const missingUiEntry = new Map([['package/package.json', json(uiManifest)]]);
+      assert.throws(() => admit(replaceArchive(archiveNames[0], fixtureArchive(missingUiEntry))), /Archive file required/);
+      for (const member of ['package/scripts/kit-sync.mjs', 'package/versions.lock.json', ...GATE_FILES.map(name => `package/templates/${name === 'scripts/gate.sh' ? 'gate.sh' : name}`), 'package/templates/.gate.env']) {
+        const payload = new Map(npmKitFiles); payload.delete(member);
+        assert.throws(() => admit(replaceArchive(archiveNames[1], fixtureArchive(payload))), /Archive file required/);
+      }
+      const mismatchedLock = new Map([...npmKitFiles, ['package/versions.lock.json', json({ ...coreLock, core_tag: 'core-v1.1' })]]);
+      assert.throws(() => admit(replaceArchive(archiveNames[1], fixtureArchive(mismatchedLock))), /Npm lock core_tag differs/);
+      const matchingLock = new Map([...npmKitFiles, ['package/versions.lock.json', json({ ...coreLock, core_tag: tag })]]);
+      assert.equal(admit(replaceArchive(archiveNames[1], fixtureArchive(matchingLock))).coreLock.core_tag, tag);
+      const wrongModule = new Map([...sourceFiles, ['web-kit/go.mod', Buffer.from('module example.invalid/wrong\n\ngo 1.27.1\n')]]);
+      assert.throws(() => admit(replaceArchive(archiveNames[2], fixtureArchive(wrongModule))), /Go archive module mismatch/);
+      const npmInGo = new Map([...sourceFiles, ['web-kit/budget/index.mjs', Buffer.from('must not cross Go archive boundary')]]);
+      assert.throws(() => admit(replaceArchive(archiveNames[2], fixtureArchive(npmInGo))), /Npm or unregistered budget file/);
+      assert.deepEqual(snapshot(root), beforeRoot); // Admission itself never materializes product files.
+    });
+    checked(checks, 'fixture-private-go-planning-parity-and-refusal', () => {
+      // Literal pre-extraction loop oracle; this only collects proposals.
+      function originalGoPlanningLoop(root, cfg, kit, writes, replacements) {
+  for (const directory of cfg.go_dirs) {
+    const prefix = directory === '.' ? '' : `${directory}/`, vendor = `${prefix}third_party/webkit`;
+    directoryDestination(root, vendor, true); regularTree(noLinks(root, vendor, true)); replacements.set(vendor, kit.source);
+    const goMod = `${prefix}go.mod`, stat = fs.statSync(noLinks(root, goMod));
+    writes.set(goMod, { data: Buffer.from(pinGoMod(fs.readFileSync(noLinks(root, goMod), 'utf8'), kit.tag)), mode: stat.mode & 0o777 });
+  }
+      }
+      const sourceBefore = snapshot(root), kit = loadKit(root);
+      const sourceEntries = [...kit.source].map(([name, entry]) => [name, entry, entry.data, Buffer.from(entry.data), entry.mode]);
+      const planRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'roedu-kit-go-planning-'));
+      try {
+        fs.cpSync(fixtureRoot, planRoot, { recursive: true });
+        const rootMod = path.join(planRoot, 'go.mod'), serverMod = path.join(planRoot, 'server/go.mod');
+        const rootBytes = Buffer.from(`module example.invalid/root-consumer\n\ngo 1.27.1\nrequire ${MODULE} v0.0.0-${kit.tag}\nreplace ${MODULE} => ./third_party/webkit\n`);
+        fs.writeFileSync(rootMod, rootBytes); fs.chmodSync(rootMod, 0o600); fs.chmodSync(serverMod, 0o640);
+        const serverBytes = fs.readFileSync(serverMod), rootMode = fs.statSync(rootMod).mode & 0o777, serverMode = fs.statSync(serverMod).mode & 0o777;
+        const rootVendor = path.join(planRoot, 'third_party/webkit'), serverVendor = path.join(planRoot, 'server/third_party/webkit');
+        for (const directory of [rootVendor, serverVendor]) { fs.mkdirSync(directory, { recursive: true }); fs.writeFileSync(path.join(directory, 'existing.go'), 'package existing\n'); }
+        const cfg = validateConfig(planRoot, { ...config, go_dirs: ['.', 'server'] }), reversed = validateConfig(planRoot, { ...config, go_dirs: ['server', '.'] });
+        const cfgBefore = [...cfg.go_dirs], reversedBefore = [...reversed.go_dirs];
+        const sentinel = { data: Buffer.from('preserved proposal\n'), mode: 0o601 }, oldModule = { data: Buffer.from('prior proposal\n'), mode: 0o602 }, sentinelTree = new Map([['canary.go', sentinel]]);
+        const retainedEntries = [sentinel, oldModule].map(entry => [entry, entry.data, Buffer.from(entry.data), entry.mode]), retainedTreeKeys = [...sentinelTree.keys()];
+        const assertRetained = () => {
+          for (const [entry, data, bytes, mode] of retainedEntries) { assert.equal(entry.data, data); assert.deepEqual(entry.data, bytes); assert.equal(entry.mode, mode); }
+          assert.deepEqual([...sentinelTree.keys()], retainedTreeKeys); assert.equal(sentinelTree.get('canary.go'), sentinel);
+        };
+        const seeded = () => ({ writes: new Map([['server/go.mod', oldModule], ['unrelated.txt', sentinel]]), replacements: new Map([['third_party/webkit', sentinelTree], ['unrelated-tree', sentinelTree]]) });
+        const compare = (selected, refusal, seed = seeded) => {
+          const original = seed(), projected = seed(), before = snapshot(planRoot);
+          let originalError, projectedError;
+          try { originalGoPlanningLoop(planRoot, selected, kit, original.writes, original.replacements); } catch (error) { originalError = error; }
+          assertRetained();
+          assert.deepEqual(snapshot(planRoot), before);
+          try { planGoDependencies(planRoot, selected.go_dirs, kit, projected.writes, projected.replacements); } catch (error) { projectedError = error; }
+          assertRetained();
+          assert.deepEqual(snapshot(planRoot), before);
+          if (refusal) {
+            assert.ok(originalError instanceof Error); assert.ok(projectedError instanceof Error);
+            assert.match(originalError.message, refusal); assert.equal(projectedError.constructor, originalError.constructor);
+            assert.equal(projectedError.code, originalError.code); assert.equal(projectedError.message, originalError.message);
+          } else { assert.equal(originalError, undefined); assert.equal(projectedError, undefined); }
+          assert.deepEqual([...projected.writes.keys()], [...original.writes.keys()]);
+          for (const [name, entry] of original.writes) {
+            const actual = projected.writes.get(name); assert.ok(Buffer.isBuffer(actual.data)); assert.deepEqual(actual.data, entry.data); assert.equal(actual.mode, entry.mode);
+          }
+          assert.deepEqual([...projected.replacements.keys()], [...original.replacements.keys()]);
+          for (const [name, tree] of original.replacements) assert.equal(projected.replacements.get(name), tree);
+          assert.equal(projected.writes.get('unrelated.txt'), sentinel); assert.equal(projected.replacements.get('unrelated-tree'), sentinelTree);
+          assert.deepEqual(cfg.go_dirs, cfgBefore); assert.deepEqual(reversed.go_dirs, reversedBefore);
+          assert.deepEqual([...kit.source.keys()], sourceEntries.map(([name]) => name));
+          for (const [name, entry, data, bytes, mode] of sourceEntries) { assert.equal(kit.source.get(name), entry); assert.equal(entry.data, data); assert.deepEqual(entry.data, bytes); assert.equal(entry.mode, mode); }
+          assert.deepEqual(snapshot(root), sourceBefore);
+          return projected;
+        };
+        for (const selected of [cfg, reversed]) {
+          const projected = compare(selected);
+          assert.deepEqual([...projected.writes.keys()], ['server/go.mod', 'unrelated.txt', 'go.mod']);
+          assert.deepEqual([...projected.replacements.keys()], ['third_party/webkit', 'unrelated-tree', 'server/third_party/webkit']);
+          assert.equal(projected.replacements.get('third_party/webkit'), kit.source); assert.equal(projected.replacements.get('server/third_party/webkit'), kit.source);
+          assert.deepEqual(projected.writes.get('go.mod').data, rootBytes); assert.equal(projected.writes.get('go.mod').mode, rootMode);
+          assert.deepEqual(projected.writes.get('server/go.mod').data, Buffer.from(serverBytes.toString('utf8').trimEnd() + `\n\nrequire ${MODULE} v0.0.0-${kit.tag}\nreplace ${MODULE} => ./third_party/webkit\n`));
+          assert.equal(projected.writes.get('server/go.mod').mode, serverMode);
+          const ordered = compare(selected, undefined, () => ({ writes: new Map([['unrelated.txt', sentinel]]), replacements: new Map([['unrelated-tree', sentinelTree]]) }));
+          assert.deepEqual([...ordered.writes.keys()], ['unrelated.txt', ...selected.go_dirs.map(directory => directory === '.' ? 'go.mod' : `${directory}/go.mod`)]);
+          assert.deepEqual([...ordered.replacements.keys()], ['unrelated-tree', ...selected.go_dirs.map(directory => directory === '.' ? 'third_party/webkit' : `${directory}/third_party/webkit`)]);
+        }
+        fs.rmSync(serverVendor, { recursive: true }); fs.writeFileSync(serverVendor, 'blocked directory\n');
+        const blocked = compare(cfg, /Directory destination required/);
+        assert.equal(blocked.replacements.has('server/third_party/webkit'), false); assert.equal(blocked.writes.get('server/go.mod'), oldModule); assert.deepEqual(blocked.writes.get('go.mod').data, rootBytes);
+        fs.unlinkSync(serverVendor); fs.mkdirSync(serverVendor); fs.writeFileSync(path.join(serverVendor, 'existing.go'), 'package existing\n');
+        const link = path.join(serverVendor, 'linked'); fs.symlinkSync('../..', link, 'dir');
+        const linked = compare(cfg, /Nonregular tree entry/);
+        assert.equal(linked.replacements.has('server/third_party/webkit'), false); assert.equal(linked.writes.get('server/go.mod'), oldModule); fs.unlinkSync(link);
+        fs.unlinkSync(serverMod);
+        const missing = compare(cfg, /Missing input: server\/go\.mod/);
+        assert.equal(missing.replacements.get('server/third_party/webkit'), kit.source); assert.equal(missing.writes.get('server/go.mod'), oldModule);
+        fs.writeFileSync(serverMod, serverBytes); fs.chmodSync(serverMod, serverMode);
+        fs.writeFileSync(serverMod, `module example.invalid/duplicate-consumer\nrequire ${MODULE} v0.0.0-old\nrequire ${MODULE} v0.0.0-other\n`);
+        const duplicate = compare(cfg, /Duplicate web-kit Go require\/replace/);
+        assert.equal(duplicate.replacements.get('server/third_party/webkit'), kit.source); assert.equal(duplicate.writes.get('server/go.mod'), oldModule);
+        fs.writeFileSync(serverMod, serverBytes); fs.chmodSync(serverMod, serverMode);
+        compare(cfg); assert.deepEqual(snapshot(root), sourceBefore);
+      } finally { fs.rmSync(planRoot, { recursive: true, force: true }); }
+    });
     let deps = 0;
     const depsRunner = (_directory, target) => { assert.equal(target, 'deps'); deps++; return { status: 0, stdout: '', stderr: '' }; };
     checked(checks, 'fixture-sync', () => {
@@ -1048,6 +1277,62 @@ export function selfTest() {
     checked(checks, 'fixture-unknown-paths-before-write', () => {
       makeKit(new Map([['package/unknown/file.js', Buffer.from('unexpected')]])); const before = snapshot(root); assert.throws(() => syncKit(root, config, { depsRunner }), /Unknown npm archive path/); assert.deepEqual(snapshot(root), before);
       makeKit(undefined, new Map([['web-kit/scripts/unknown.mjs', Buffer.from('unexpected')]])); const beforeGo = snapshot(root); assert.throws(() => syncKit(root, config, { depsRunner }), /Unknown Go archive path/); assert.deepEqual(snapshot(root), beforeGo); makeKit();
+    });
+    checked(checks, 'fixture-go-budget-source-delivery', () => {
+      const sourceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+      const names = ['budget/budget.go', 'budget/budget_test.go', 'budget/schema_cases_test.go', 'budget/testdata/budgets.seed.json', 'budget/testdata/schema-cases.json'];
+      const budget = new Map(names.map(name => [`web-kit/${name}`, fs.readFileSync(noLinks(sourceRoot, name))]));
+      // Structural fixture envelope; the budget payload is exact current source.
+      makeKit(new Map([['package/budget/index.mjs', fs.readFileSync(noLinks(sourceRoot, 'budget/index.mjs'))]]), budget);
+      const kit = loadKit(root);
+      assert.deepEqual(kit.npm.entries.get('package/budget/index.mjs').data, fs.readFileSync(noLinks(sourceRoot, 'budget/index.mjs')));
+      for (const name of names) { assert.deepEqual(kit.source.get(name)?.data, budget.get(`web-kit/${name}`)); assert.equal(kit.source.get(name)?.mode, 0o644); }
+      assert.equal(kit.source.has('budget/index.mjs'), false);
+      assert.equal(syncKit(root, config, { depsRunner }).status, 'pass');
+      for (const name of names) {
+        const filename = path.join(root, 'server/third_party/webkit', name);
+        assert.deepEqual(fs.readFileSync(filename), budget.get(`web-kit/${name}`)); assert.equal(fs.statSync(filename).mode & 0o777, 0o644);
+      }
+      assert.equal(fs.existsSync(path.join(root, 'server/third_party/webkit/budget/index.mjs')), false);
+      const repeated = snapshot(root); assert.deepEqual(syncKit(root, config, { depsRunner }).changed, []); assert.deepEqual(snapshot(root), repeated);
+      const filename = path.join(root, 'server/third_party/webkit/budget/budget.go'), original = fs.readFileSync(filename);
+      fs.writeFileSync(filename, 'package changed\n'); assert.throws(() => checkKit(root, config), /Go source drift/); fs.writeFileSync(filename, original);
+      fs.unlinkSync(filename); assert.throws(() => checkKit(root, config), /Go source drift/); fs.writeFileSync(filename, original);
+      assert.equal(checkKit(root, config).status, 'pass'); makeKit(); syncKit(root, config, { depsRunner });
+    });
+    checked(checks, 'fixture-go-budget-refusal-before-write', () => {
+      for (const name of ['budget/index.mjs', 'budget/package.json', 'budget/package-lock.json', 'budget/nested/extra.go', 'budget/testdata/extra.json', 'budget/testdata/index.mjs', 'budget/other.txt', 'budget-extra/extra.go', 'budget/__pycache__/cache.pyc', 'budget/stale.pyc.gz', 'budget/.git/fixture', 'budget/.env.local', 'budget/TASK_RESULT.md']) {
+        makeKit(undefined, new Map([[`web-kit/${name}`, Buffer.from('injected sibling')]]));
+        const before = snapshot(root), previousDeps = deps;
+        assert.throws(() => loadKit(root), /Go archive path|budget file|Python bytecode\/cache|cache\/secret/);
+        assert.throws(() => syncKit(root, config, { depsRunner }), /Go archive path|budget file|Python bytecode\/cache|cache\/secret/);
+        assert.deepEqual(snapshot(root), before); assert.equal(deps, previousDeps);
+      }
+      const reseal = tar => {
+        const bytes = gzipSync(tar), file = archiveNames[2]; fs.writeFileSync(path.join(root, 'kit', file), bytes);
+        const sums = archiveNames.map(name => `${sha(fs.readFileSync(path.join(root, 'kit', name)))}  ${name}\n`).join('');
+        fs.writeFileSync(path.join(root, 'kit/SHA256SUMS'), sums);
+      };
+      const refusal = (tar, pattern) => {
+        makeKit(); reseal(tar); const before = snapshot(root), previousDeps = deps;
+        assert.throws(() => loadKit(root), pattern); assert.throws(() => syncKit(root, config, { depsRunner }), pattern);
+        assert.deepEqual(snapshot(root), before); assert.equal(deps, previousDeps);
+      };
+      for (const name of ['budget', 'budget/testdata']) refusal(fixtureTar(new Map([[`web-kit/${name}`, Buffer.alloc(0)]])), /Go package directory required|member type mismatch/);
+      for (const name of ['budget/budget.go', 'budget/testdata/schema-cases.json']) {
+        const tar = fixtureTar(new Map([[`web-kit/${name}`, Buffer.alloc(0)]]));
+        refusal(patchHeader(tar, header => { header[156] = 53; }), /member type mismatch/);
+      }
+      const directory = name => patchHeader(fixtureTar(new Map([[name, Buffer.alloc(0)]])), header => { header[156] = 53; }).subarray(0, 512);
+      makeKit(); const valid = fixtureTar(sourceFiles), directories = Buffer.concat([directory('web-kit/budget'), directory('web-kit/budget/testdata'), valid]);
+      reseal(directories); assert.equal(loadKit(root).source.has('go.mod'), true); assert.equal(syncKit(root, config, { depsRunner }).status, 'pass');
+      const file = fixtureTar(new Map([['web-kit/budget/budget.go', Buffer.from('package budget\n')]]));
+      for (const type of [49, 50]) refusal(patchHeader(file, header => { header[156] = type; header.write('outside', 157); }), /Unsafe tar entry type/);
+      refusal(patchHeader(file, header => { header.fill(0, 0, 100); header.write('web-kit/budget/../outside', 0); }), /Unsafe path/);
+      refusal(patchHeader(file, header => { header.write('0004644\0', 100); }), /Unsafe tar permissions/);
+      refusal(Buffer.concat([file.subarray(0, file.length - 1024), file]), /Duplicate tar path/);
+      refusal(fixtureTar(new Map([['web-kit/budget/budget.go', Buffer.alloc(0)], ['web-kit/budget/budget.go/child', Buffer.alloc(0)]])), /Tar ancestor is a file/);
+      makeKit();
     });
     checked(checks, 'fixture-python-cache-before-go-write', () => {
       for (const suffix of ['__pycache__/fixture.py', 'nested/__pycache__/fixture.pyc', 'stale.pyc', 'nested/stale.pyo', 'stale.pyc.gz', 'nested/stale.pyo.br']) {
