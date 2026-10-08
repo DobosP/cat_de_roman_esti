@@ -1,121 +1,74 @@
 #!/usr/bin/env bash
-# Native Go arcade launcher and source freshness build gate.
+# Local managed build/run entry points; qualification remains owner-controlled.
 set -euo pipefail
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 cd "$SCRIPT_DIR"
-STATIC_INDEX="$SCRIPT_DIR/cat_de_roman_esti/web/static/index.html"
-FRONTEND_DIR="$SCRIPT_DIR/frontend"
-native_port="${PORT:-8000}"
-native_host="${HOST:-127.0.0.1}"
-native_build_dir="${CDR_TOOLCHAIN_SCRATCH:-$HOME/work/_temp/adhoc-cat-native-$(date +%Y%m%d)}"
-native_repository_key="$(printf '%s' "$SCRIPT_DIR" | cksum)"
-native_repository_key="${native_repository_key%% *}"
-native_binary="$native_build_dir/cat-server-$native_repository_key"
-
-log() { printf '[run] %s\n' "$*"; }
 die() { printf '[run] %s\n' "$*" >&2; exit 1; }
-have() { command -v "$1" >/dev/null 2>&1; }
 
-validate_address() {
-  [[ "$native_port" =~ ^[0-9]{1,5}$ ]] || die "PORT must be an integer from 1 to 65535"
-  (( 10#$native_port >= 1 && 10#$native_port <= 65535 )) || die "PORT must be from 1 to 65535"
-  [ -n "$native_host" ] || die "HOST must not be empty"
-  if [[ "$native_host" == *:* && "$native_host" != \[*\] ]]; then
-    native_address="[$native_host]:$native_port"
-  else
-    native_address="$native_host:$native_port"
-  fi
-}
-
-build_frontend() {
-  have npm || die "npm not found; install Node 24 to build the SPA"
-  (cd "$FRONTEND_DIR" && npm ci && npm run build)
-  [ -f "$STATIC_INDEX" ] || die "SPA build did not produce index.html"
-}
-
-ensure_frontend() {
-  [ -f "$STATIC_INDEX" ] || build_frontend
-}
-
-build_backend() {
-  have go || die "Go not found; install the qualified Go 1.27.1 toolchain"
-  mkdir -p "$native_build_dir/go-cache" "$native_build_dir/go-tmp"
-  log "building Go backend (incremental cache in workspace scratch)"
-  (cd "$SCRIPT_DIR/go-backend"
-    GOMAXPROCS=2 GOFLAGS=-p=2 GOCACHE="$native_build_dir/go-cache" GOTMPDIR="$native_build_dir/go-tmp" \
-      go run ./cmd/cat-content export --root .. --check
-    CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 GOCACHE="$native_build_dir/go-cache" GOTMPDIR="$native_build_dir/go-tmp" \
-      go build -trimpath -ldflags="-s -w" -o "$native_binary.$$" ./cmd/cat-server)
-  mv "$native_binary.$$" "$native_binary"
-}
-
-cmd_run() {
-  validate_address
-  ensure_frontend
-  build_backend
-  log "Go anonymous arcade: http://$native_address (Ctrl-C to stop)"
-  exec "$native_binary" -listen "$native_address"
-}
-
-cmd_dev() {
-  validate_address
-  have npm || die "npm not found; install Node 24 for frontend development"
-  [ "$native_host" = "127.0.0.1" ] && [ "$native_port" = "8000" ] \
-    || die "Vite's checked-in API proxy requires HOST=127.0.0.1 PORT=8000"
-  build_backend
-  "$native_binary" -listen "$native_address" &
-  native_api_pid=$!
-  cleanup() { kill "$native_api_pid" 2>/dev/null || true; wait "$native_api_pid" 2>/dev/null || true; }
-  trap cleanup EXIT
-  trap 'exit 130' INT
-  trap 'exit 143' TERM
-  log "Go API: http://$native_address; Vite UI: http://localhost:5173"
-  log "Restart this command after backend source changes; Vite reloads frontend changes."
-  (cd "$FRONTEND_DIR"
-    [ -d node_modules ] || npm ci
-    npm run dev)
+qualified_checkout() {
+  [[ "${GATE_SHA:-}" =~ ^[0-9a-f]{40}$ && "$GATE_SHA" != 0000000000000000000000000000000000000000 ]] \
+    || die "GATE_SHA must be the explicit owner-qualified source SHA"
+  [[ "${GATE_TREE_SHA256:-}" =~ ^[0-9a-f]{64}$ && "$GATE_TREE_SHA256" != 0000000000000000000000000000000000000000000000000000000000000000 ]] \
+    || die "GATE_TREE_SHA256 must be the explicit owner-qualified source tree"
+  [ "$(git rev-parse --show-toplevel)" = "$SCRIPT_DIR" ] || die "Run from the real repository root"
+  [ "$(git rev-parse HEAD)" = "$GATE_SHA" ] || die "Owner-qualified source SHA does not equal checkout HEAD"
+  [ -z "$(git status --porcelain --untracked-files=normal)" ] || die "Owner-qualified launch requires a clean checkout"
 }
 
 cmd_docker() {
-  validate_address
-  # These values come from the owner's actual same-source pinned-wrapper proof.
-  # Do not synthesize a tree identity or silently substitute the current Git SHA.
-  [[ "${GATE_SHA:-}" =~ ^[0-9a-f]{40}$ ]] || die "GATE_SHA must be the explicit owner-qualified 40-hex source SHA"
-  [[ "${GATE_TREE_SHA256:-}" =~ ^[0-9a-f]{64}$ ]] || die "GATE_TREE_SHA256 must be the explicit owner-qualified 64-hex source tree"
-  have docker || die "Docker not found"
-  docker build --build-arg "GATE_SHA=$GATE_SHA" --build-arg "GATE_TREE_SHA256=$GATE_TREE_SHA256" \
-    -t cat-de-roman-esti:latest "$SCRIPT_DIR"
-  log "Go container: http://$native_address (Ctrl-C to stop)"
-  exec docker run --rm -it --read-only --cap-drop ALL --security-opt no-new-privileges \
-    -p "$native_address:8000" -e CAT_ACCOUNTS_ENABLED=0 cat-de-roman-esti:latest
+  qualified_checkout
+  command -v docker >/dev/null || die "Docker is required"
+  local port="${PORT:-8000}" host="${HOST:-127.0.0.1}" address iid_root iid_dir iid_file image
+  [[ "$port" =~ ^[0-9]{1,5}$ ]] && (( 10#$port >= 1 && 10#$port <= 65535 )) || die "PORT must be from 1 to 65535"
+  [ -n "$host" ] || die "HOST must not be empty"
+  if [[ "$host" == *:* && "$host" != \[*\] ]]; then address="[$host]:$port"; else address="$host:$port"; fi
+  iid_root="$HOME/work/_temp/adhoc-cat-local-docker-$(date +%Y%m%d)"
+  [ "$(realpath -m -- "$iid_root")" = "$iid_root" ] || die "IID scratch path alias refused"
+  (umask 077; mkdir -p -- "$iid_root")
+  iid_dir="$(mktemp -d "$iid_root/build-XXXXXXXX")"
+  iid_file="$iid_dir/image.iid"
+  cleanup_iid() { rm -f -- "$iid_file"; rmdir -- "$iid_dir"; }
+  trap cleanup_iid EXIT
+  # Consume the owner's qualified pair; this does not create qualification.
+  docker build --iidfile "$iid_file" --build-arg "GATE_SHA=$GATE_SHA" --build-arg "GATE_TREE_SHA256=$GATE_TREE_SHA256" "$SCRIPT_DIR"
+  [ -f "$iid_file" ] && [ ! -L "$iid_file" ] || die "Docker did not produce a regular image IID"
+  image="$(cat -- "$iid_file")"
+  [[ "$image" =~ ^sha256:[0-9a-f]{64}$ ]] || die "Docker image IID is malformed"
+  cleanup_iid
+  trap - EXIT
+  exec docker run --pull=never --rm -it --read-only --cap-drop ALL --security-opt no-new-privileges \
+    -p "$address:8000" -e CAT_ACCOUNTS_ENABLED=0 "$image"
 }
 
 usage() {
   cat <<'HELP'
-Cât de român ești? — Go anonymous arcade
+Cât de român ești? — managed local arcade
 
-  ./run.sh [run]   Build Go (and SPA if missing), then serve on localhost:8000.
-  ./run.sh dev     Go API + Vite frontend development server; rerun after Go edits.
-  ./run.sh docker  Build and run the canonical Go image; no Python serving runtime.
-  ./run.sh build   Rebuild the SPA and Go executable, then exit.
+  ./run.sh [run]   Fresh owning-wrapper build, verify its receipt, serve on :8000.
+  ./run.sh build   Fresh owning-wrapper build and verify its actual binary, then exit.
+  ./run.sh dev     Same managed preparation; pinned-container API + Vite HMR on :5173.
+  ./run.sh docker  Canonical Docker build/run alternative for an ordinary clean checkout.
   ./run.sh help    Show this help.
 
-PORT defaults to 8000; HOST defaults to 127.0.0.1. A busy port fails explicitly.
-The docker command requires explicit GATE_SHA/GATE_TREE_SHA256 from the owner's
-actual same-source pinned-wrapper qualification; there are no identity defaults.
-Gameplay uses the reviewed embedded content. Native accounts are optional:
-CAT_ACCOUNTS_ENABLED=1 requires PostgreSQL and an explicit schema migration.
-Google/Facebook buttons appear only when their provider is configured.
-Generated Go binaries/caches live under ~/work/_temp/adhoc-cat-native-YYYYMMDD/.
+All modes require explicit GATE_SHA/GATE_TREE_SHA256 from the owner's same-source
+qualification; there are no identity defaults. run/build/dev require the actual
+fleet task worktree and its trusted gate setup, Docker and Python 3. Compilation
+and installs use the owning pinned wrapper or the canonical Docker recipe.
+The wrapper's real source/tree and binary receipt must match before local execution.
+Accounts and submissions stay off. run accepts HOST/PORT (127.0.0.1:8000 by default).
+dev requires those defaults and publishes only loopback :8000 and :5173. src/index
+changes hot-reload; restart after backend, configuration or dependency changes.
+HMR edits are development only and do not create a new qualified GUI identity.
 HELP
 }
 
 case "${1:-run}" in
-  run|"") cmd_run ;;
-  dev) cmd_dev ;;
-  docker) cmd_docker ;;
-  build) build_frontend; build_backend ;;
+  run|build|dev)
+    [ $# -le 1 ] || die "Unexpected launcher arguments"
+    qualified_checkout
+    exec python3 -I "$SCRIPT_DIR/scripts/gui-local-runner.py" "${1:-run}"
+    ;;
+  docker) [ $# -eq 1 ] || die "Unexpected launcher arguments"; cmd_docker ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
 esac

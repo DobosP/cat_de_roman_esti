@@ -1,0 +1,854 @@
+{
+  "scope": "Actual two-package nativeformat/race acceptance only; no wholebackend/installedauthority/canonical/PG/browser/image/device/fullreleasequalification",
+  "source": "bd762e1e937de372aeaa99244e8a44c1e3254da2",
+  "executionSha256": "ed7aae7514a1600472a2fda9095171bc9ce46acf6026d10de99640223ed8dff6",
+  "stdoutSha256": "8150472c983981410c101c396a4517847112d504738ad119704250737bb1839a",
+  "actualUniquePassedTestActions": 164,
+  "failed": 0,
+  "skipped": 0,
+  "formatFilesNeeded": [],
+  "sourceRowsBeforeAfterUnchanged": 7550,
+  "packages": [
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "action": "pass",
+      "elapsed": 244.47
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "action": "pass",
+      "elapsed": 412.991
+    }
+  ],
+  "passedTests": [
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestCurrentIndependentHTTPParity",
+      "elapsed": 17.54
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestHistoricalFrozenCorpusAndExactReviewedSelection",
+      "elapsed": 14.75
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestRebuildCurrentReviewedBundleAndPin",
+      "elapsed": 35.12
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestUnknownMixedAndPartialSourcesRefuseWithoutRequests",
+      "elapsed": 15.68
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestReferenceSourceBindingAndMismatchFailClosed",
+      "elapsed": 9.4
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSessionAliasesKeepPrefixAndEscapedIdentityDistinct",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestBoundedAnonymousHTTPClient",
+      "elapsed": 0.07
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestCorpusLimitsTrailingFieldsAndMalformedRecords",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestCaptureCanReplayButDoesNotClaimIndependentReference",
+      "elapsed": 5.83
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestBenchmarkBounds",
+      "elapsed": 2.38
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestLocalTransportByteAndDeadlineBounds",
+      "elapsed": 0.01
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV14IndependentCorpusRetainsExactSourceScope",
+      "elapsed": 8.09
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestRebuildSource5WorldOnlyReviewedBundleAndPin",
+      "elapsed": 39.03
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestInitialNativeMigrationReleaseHasPreservedArchiveEvidence",
+      "elapsed": 0.49
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestPinnedUnicodeAndCanonicalEncoding",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/shape",
+      "elapsed": 3.09
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/duplicate",
+      "elapsed": 3.89
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/tier",
+      "elapsed": 4.14
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/own_alias",
+      "elapsed": 4.41
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV15IndependentCorpusRetainsExactWorldOnlySourceScope",
+      "elapsed": 23.25
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/long_alias",
+      "elapsed": 4.94
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/counts",
+      "elapsed": 4.7
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests/missing-world",
+      "elapsed": 3.62
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/endpoint",
+      "elapsed": 4.89
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests/extra-source",
+      "elapsed": 3.67
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/par",
+      "elapsed": 4.75
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests/same-kg-with-mixed-source",
+      "elapsed": 3.62
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests/unknown-world",
+      "elapsed": 3.15
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV15UnknownPartialAndMixedWorldSourcesRefuseBeforeRequests",
+      "elapsed": 18.14
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/hints",
+      "elapsed": 4.13
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/scope",
+      "elapsed": 4.05
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationSelectsExactIndependentCorpus",
+      "elapsed": 4.69
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected/distractor",
+      "elapsed": 4.57
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureMutationsRejected",
+      "elapsed": 49.63
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationPreservesAllSixHistoricalSelections/initial",
+      "elapsed": 3.98
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestPackEnvelopeAndGameplayMutations/conexiuni",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestPackEnvelopeAndGameplayMutations/contexto",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestPackEnvelopeAndGameplayMutations/lant",
+      "elapsed": 0.01
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestPackEnvelopeAndGameplayMutations/alchimie",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationPreservesAllSixHistoricalSelections/v1-2",
+      "elapsed": 3.83
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationPreservesAllSixHistoricalSelections/v1-3",
+      "elapsed": 3.84
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestPackEnvelopeAndGameplayMutations",
+      "elapsed": 8.4
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestDirectedContextoAndSequentialAlchimie",
+      "elapsed": 1.88
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationPreservesAllSixHistoricalSelections/v1-4",
+      "elapsed": 3.61
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/ranking_source_binding",
+      "elapsed": 0.1
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/ranking_formula",
+      "elapsed": 0.13
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/derived_identity",
+      "elapsed": 0.18
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationPreservesAllSixHistoricalSelections/v1-5",
+      "elapsed": 3.52
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/quick_reviews",
+      "elapsed": 0.24
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/quick_formula",
+      "elapsed": 1.23
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/reserve_record",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/world_provenance",
+      "elapsed": 0.47
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/world_archived_fingerprint",
+      "elapsed": 0.58
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/world_historical_recipe",
+      "elapsed": 0.63
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/extensions_entry",
+      "elapsed": 0.3
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations/extensions_pair_overwrite_after_rehash",
+      "elapsed": 0.31
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestEverySourceAuthorityRejectsMutations",
+      "elapsed": 8.08
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestMissingRequiredRubricFailsClosed",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationPreservesAllSixHistoricalSelections/v1-6",
+      "elapsed": 3.6
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationPreservesAllSixHistoricalSelections",
+      "elapsed": 22.84
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestMalformedSourceEncodingAndNumbers",
+      "elapsed": 0.77
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestProvenanceURLPortContract",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestPrivateSourceUnicodeScalarAndDuplicateRefusal",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/changed/alchimie_discovery_world_v92.json",
+      "elapsed": 3.13
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/missing/alchimie_discovery_world_v92.json",
+      "elapsed": 3.11
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/changed/alchimie_recipe_extensions_v92.json",
+      "elapsed": 3.21
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/missing/alchimie_recipe_extensions_v92.json",
+      "elapsed": 3.18
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestFixtureNonnumericSalienceRefusal",
+      "elapsed": 14.45
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/changed/board_rankings_v37.json",
+      "elapsed": 3.14
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/missing/board_rankings_v37.json",
+      "elapsed": 3.08
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/changed/derived_catalog_v38.json",
+      "elapsed": 3.09
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestArchivedV13BundleBytesAndInventoriesStayExact",
+      "elapsed": 8.26
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestHistoricalSource45ReviewedPinsRestore/historical_scope",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestHistoricalSource45ReviewedPinsRestore",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/missing/derived_catalog_v38.json",
+      "elapsed": 2.93
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/changed/games_pack.json",
+      "elapsed": 3.07
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/missing/games_pack.json",
+      "elapsed": 3.05
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/changed/kg_sample.json",
+      "elapsed": 3
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/missing/kg_sample.json",
+      "elapsed": 3.2
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/changed/quick_games_v92.json",
+      "elapsed": 3.31
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/missing/quick_games_v92.json",
+      "elapsed": 3.57
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/changed/release_reserve_v1.json",
+      "elapsed": 3.36
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/missing/release_reserve_v1.json",
+      "elapsed": 3
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/extra",
+      "elapsed": 3
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/nil",
+      "elapsed": 3.15
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources/empty",
+      "elapsed": 2.98
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesChangedMissingExtraAndNilSources",
+      "elapsed": 60
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesProperSource6Mixtures/partial-old-catalogs-1",
+      "elapsed": 3.03
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestRebuildSource6TwoAliasReviewedBundleAndPin",
+      "elapsed": 43.41
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesProperSource6Mixtures/partial-old-catalogs-2",
+      "elapsed": 3.14
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesProperSource6Mixtures/partial-old-catalogs-3",
+      "elapsed": 3.28
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesProperSource6Mixtures/partial-old-catalogs-4",
+      "elapsed": 3.11
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesProperSource6Mixtures/partial-old-catalogs-5",
+      "elapsed": 3.13
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesProperSource6Mixtures/partial-old-catalogs-6",
+      "elapsed": 3.09
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestSource6GUIRequalificationRefusesProperSource6Mixtures",
+      "elapsed": 19.65
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16IndependentCorpusRetainsExactSourceScope",
+      "elapsed": 3.8
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorPreservesAllFiveHistoricalCorpora/initial",
+      "elapsed": 3.74
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorPreservesAllFiveHistoricalCorpora/v1-2",
+      "elapsed": 3.65
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorPreservesAllFiveHistoricalCorpora/v1-3",
+      "elapsed": 3.57
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorPreservesAllFiveHistoricalCorpora/v1-4",
+      "elapsed": 3.77
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestRebuildCurrentSource6ReviewOnlyRequalification",
+      "elapsed": 33.81
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestHistoricalSource6ReviewedPinsRestore/historical_scope",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestHistoricalSource6ReviewedPinsRestore",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestExportTransactionPartialWriteAndGateRollback/existing-postgate",
+      "elapsed": 0.01
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestExportTransactionPartialWriteAndGateRollback/existing-midwrite",
+      "elapsed": 0.01
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestExportTransactionPartialWriteAndGateRollback/absent-postgate",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestExportTransactionPartialWriteAndGateRollback/absent-midwrite",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestExportTransactionPartialWriteAndGateRollback",
+      "elapsed": 0.03
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestExportTransactionLockSymlinkAndSuccessfulPair",
+      "elapsed": 0.01
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+      "test": "TestCanonicalLiteralSeparatorEscapeRoundTrips",
+      "elapsed": 0
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorPreservesAllFiveHistoricalCorpora/v1-5",
+      "elapsed": 3.81
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorPreservesAllFiveHistoricalCorpora",
+      "elapsed": 26.41
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/changed/alchimie_discovery_world_v92.json",
+      "elapsed": 3.72
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/missing/alchimie_discovery_world_v92.json",
+      "elapsed": 3.48
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/changed/alchimie_recipe_extensions_v92.json",
+      "elapsed": 3.36
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/missing/alchimie_recipe_extensions_v92.json",
+      "elapsed": 3.03
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/changed/board_rankings_v37.json",
+      "elapsed": 3.15
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/missing/board_rankings_v37.json",
+      "elapsed": 2.94
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/changed/derived_catalog_v38.json",
+      "elapsed": 3
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/missing/derived_catalog_v38.json",
+      "elapsed": 3.16
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/changed/games_pack.json",
+      "elapsed": 3.27
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/missing/games_pack.json",
+      "elapsed": 3.35
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/changed/kg_sample.json",
+      "elapsed": 3.21
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/missing/kg_sample.json",
+      "elapsed": 3.13
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/changed/quick_games_v92.json",
+      "elapsed": 3.25
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/missing/quick_games_v92.json",
+      "elapsed": 3.14
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/changed/release_reserve_v1.json",
+      "elapsed": 3.1
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/missing/release_reserve_v1.json",
+      "elapsed": 3.36
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/extraneous",
+      "elapsed": 3.16
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/nil",
+      "elapsed": 3.19
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/empty",
+      "elapsed": 3.23
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource/KG-only",
+      "elapsed": 3.42
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesEveryChangedOrMissingSource",
+      "elapsed": 64.66
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/initial/kg_sample.json",
+      "elapsed": 3.07
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/initial/quick_games_v92.json",
+      "elapsed": 3.29
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/initial/alchimie_discovery_world_v92.json",
+      "elapsed": 3.1
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/initial/alchimie_recipe_extensions_v92.json",
+      "elapsed": 3.29
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/initial/board_rankings_v37.json",
+      "elapsed": 3.19
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/initial/derived_catalog_v38.json",
+      "elapsed": 3.01
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-2/derived_catalog_v38.json",
+      "elapsed": 3.07
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-2/kg_sample.json",
+      "elapsed": 2.94
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-2/quick_games_v92.json",
+      "elapsed": 3.2
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-2/alchimie_discovery_world_v92.json",
+      "elapsed": 3.34
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-2/alchimie_recipe_extensions_v92.json",
+      "elapsed": 3.36
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-2/board_rankings_v37.json",
+      "elapsed": 3.28
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-3/kg_sample.json",
+      "elapsed": 3.26
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-3/quick_games_v92.json",
+      "elapsed": 3.36
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-3/alchimie_discovery_world_v92.json",
+      "elapsed": 3.26
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-3/alchimie_recipe_extensions_v92.json",
+      "elapsed": 3.16
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-3/board_rankings_v37.json",
+      "elapsed": 2.91
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-3/derived_catalog_v38.json",
+      "elapsed": 3.05
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-4/alchimie_recipe_extensions_v92.json",
+      "elapsed": 3.1
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-4/board_rankings_v37.json",
+      "elapsed": 3.01
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-4/derived_catalog_v38.json",
+      "elapsed": 3.12
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-4/kg_sample.json",
+      "elapsed": 2.91
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-4/quick_games_v92.json",
+      "elapsed": 3.02
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-4/alchimie_discovery_world_v92.json",
+      "elapsed": 3.04
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-5/kg_sample.json",
+      "elapsed": 2.46
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-5/quick_games_v92.json",
+      "elapsed": 2.86
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-5/alchimie_discovery_world_v92.json",
+      "elapsed": 2.93
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-5/alchimie_recipe_extensions_v92.json",
+      "elapsed": 2.92
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-5/board_rankings_v37.json",
+      "elapsed": 3.07
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources/v1-5/derived_catalog_v38.json",
+      "elapsed": 2.99
+    },
+    {
+      "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+      "test": "TestV16SelectorRefusesMixedHistoricalSources",
+      "elapsed": 94.71
+    }
+  ],
+  "actualResourceObservationDuringRun": {
+    "ownedContainer": "e3ac93eb06a4",
+    "configuredMemoryBytes": 6442450944,
+    "configuredNanoCPUs": 4000000000,
+    "observedMemory": "533.2MiB / 6GiB",
+    "observedCPU": "103.22%",
+    "networkIO": "0B / 0B",
+    "observationScope": "One actuallive sample, not peak; container--rm afterrun"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "scope": "ActualBashsyntax/PythonAST/help/required-inputnegative checks ONLY; no fake PASSreceipt/build/image/app/HMR/currentqualification",
+  "sourceFiles": {
+    "run.sh": "aab4e5803374d0b229aeabbad84e3b7cccd6ac6d75e16d1d8840d3879bf44d4e",
+    "scripts/gui-local-runner.py": "14e832240fa03cb5ef516d09a98566c4331c2c4b5e8904d069c077663c5eebe0"
+  },
+  "bashSyntax": "PASS actualbash-n",
+  "pythonSyntax": "PASS actualast.parse, noimports/execution",
+  "cases": [
+    {
+      "mode": "help",
+      "exit": 0,
+      "scope": "Help only",
+      "stdoutSha256": "2fc7f3ba73647926d98f4ad026b114155cbcb1c617a91704593be1271fb1b5bc"
+    },
+    {
+      "mode": "build",
+      "exit": 1,
+      "scope": "Required-inputrefusal beforebuild/Docker/app",
+      "stdoutSha256": "dd697d4d6049e8d0f5e7f45dd7a3191d58d40c417b23d0ca7528c6f0546fcb54"
+    },
+    {
+      "mode": "run",
+      "exit": 1,
+      "scope": "Required-inputrefusal beforebuild/Docker/app",
+      "stdoutSha256": "dd697d4d6049e8d0f5e7f45dd7a3191d58d40c417b23d0ca7528c6f0546fcb54"
+    },
+    {
+      "mode": "dev",
+      "exit": 1,
+      "scope": "Required-inputrefusal beforebuild/Docker/app",
+      "stdoutSha256": "dd697d4d6049e8d0f5e7f45dd7a3191d58d40c417b23d0ca7528c6f0546fcb54"
+    },
+    {
+      "mode": "docker",
+      "exit": 1,
+      "scope": "Required-inputrefusal beforebuild/Docker/app",
+      "stdoutSha256": "dd697d4d6049e8d0f5e7f45dd7a3191d58d40c417b23d0ca7528c6f0546fcb54"
+    },
+    {
+      "case": "Invalid/placeholderliteralSHArefusal",
+      "exit": 1,
+      "noCommandSubstitution": true
+    },
+    {
+      "case": "Invalid/placeholderliteralSHArefusal",
+      "exit": 1,
+      "noCommandSubstitution": true
+    },
+    {
+      "case": "Invalid/placeholderliteralSHArefusal",
+      "exit": 1,
+      "noCommandSubstitution": true
+    }
+  ],
+  "positiveManagedBuildRunDev": "NOTRUN; actualmatchingownerqualifiedpair required first",
+  "hostToolsInvoked": "bash/python/gitguards only; no Node/npm/Go/Docker or service invoked by negativecases"
+}

@@ -1,28 +1,21 @@
-# Makefile — thin wrappers over ./run.sh for the cat_de_roman_esti web app.
-#
-#   make run      build Go + SPA if missing, then serve the anonymous arcade
-#   make dev      Vite frontend reload + Go API (restart after Go edits)
-#   make docker   docker build + run the production image
-#   make build    rebuild the compiled SPA + Go executable
-#   make help     list targets
-#
-# Pass listener settings through as usual, e.g.: make run PORT=9000
+# Thin wrappers over the owner-bound managed launcher. See ./run.sh help.
+# run/build/dev require the actual trusted fleet worktree; docker is the
+# canonical-image alternative for an ordinary clean checkout. No host toolchains.
 
 .PHONY: run dev docker build help
 .DEFAULT_GOAL := help
 
-run: ## Build Go + SPA if missing, then serve the anonymous arcade
+run: ## Fresh managed build, verify the owning receipt, serve locally
 	./run.sh run
 
-dev: ## Vite frontend reload + Go API (restart after Go edits)
+dev: ## Managed API + pinned-container Vite HMR; development only
 	./run.sh dev
 
-docker: ## docker build + run the production image
+docker: ## Canonical Docker build/run with explicit owner-qualified SHA/tree
 	./run.sh docker
 
-build: ## Rebuild the compiled SPA and Go executable
+build: ## Fresh owning-wrapper build and verified native binary; no start
 	./run.sh build
 
-help: ## Show this help
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
-	  | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-8s\033[0m %s\n", $$1, $$2}'
+help: ## Show launcher requirements and commands
+	./run.sh help

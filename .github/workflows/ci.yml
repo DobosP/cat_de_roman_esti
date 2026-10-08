@@ -8,6 +8,14 @@ name: CI
 on:
   workflow_dispatch:
     inputs:
+      qualified_sha:
+        description: Owner-qualified source SHA from the actual same-source pinned-wrapper proof
+        type: string
+        required: true
+      qualified_tree:
+        description: Owner-qualified source tree SHA256 paired with that source SHA
+        type: string
+        required: true
       run_reference:
         description: Run retained Python reference tests and lint in addition to native gates
         type: boolean
@@ -31,6 +39,8 @@ jobs:
     env:
       GOMAXPROCS: "2"
       GOFLAGS: "-p=2"
+      GATE_SHA: ${{ inputs.qualified_sha }}
+      GATE_TREE_SHA256: ${{ inputs.qualified_tree }}
     services:
       postgres:
         image: postgres:16.14-bookworm
@@ -44,6 +54,18 @@ jobs:
           --health-interval 5s --health-timeout 3s --health-retries 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.qualified_sha }}
+      - name: Validate explicit owner-qualified build inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GATE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$GATE_TREE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          test "$(git rev-parse HEAD)" = "$GATE_SHA"
+          test -z "$(git status --porcelain=v1)"
+          # The owner supplies the actual qualified pair. Format/checkout checks
+          # consume that proof; they do not derive a new qualified tree identity.
       - uses: actions/setup-go@v5
         with:
           go-version: "1.27.1"
@@ -95,7 +117,7 @@ jobs:
       - name: Build canonical Go release container
         env:
           PATH: ${{ steps.native-path.outputs.path }}
-        run: docker build -f Dockerfile -t cat-native-go:ci .
+        run: docker build -f Dockerfile --build-arg "GATE_SHA=$GATE_SHA" --build-arg "GATE_TREE_SHA256=$GATE_TREE_SHA256" -t cat-native-go:ci .
       - name: Verify canonical Go container
         env:
           PATH: ${{ steps.native-path.outputs.path }}
@@ -127,6 +149,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.qualified_sha }}
       - name: Install qualified Rust toolchain
         run: rustup toolchain install 1.98.1 --profile minimal --component rustfmt --component clippy
       - uses: actions/setup-python@v5
@@ -178,6 +202,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.qualified_sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
@@ -223,6 +249,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.qualified_sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
@@ -269,6 +297,8 @@ jobs:
         python-version: ["3.12", "3.14"]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.qualified_sha }}
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -304,6 +334,8 @@ jobs:
         working-directory: frontend
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.qualified_sha }}
 
       - name: Set up Node 24 LTS
         uses: actions/setup-node@v4

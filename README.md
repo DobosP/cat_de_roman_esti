@@ -71,18 +71,20 @@ remains JavaScript in the browser. Build and deployment details are in
 
 ### One command (local)
 
-Install the qualified Go 1.27.1 compiler, then:
+Use the actual trusted fleet task worktree, Docker and Python 3. Supply
+`GATE_SHA` and `GATE_TREE_SHA256` from the owner's matching pinned-wrapper proof:
 
 ```bash
 ./run.sh
 # open http://127.0.0.1:8000
 ```
 
-The retained launcher builds Go with an incremental cache under `~/work/_temp/`
-and still checks the historical tracked SPA output. Its Node 24 messages and missing
-managed-asset sync do not establish selected-toolchain qualification. Current managed
-build/sync prerequisites follow [ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)
-and [STATUS](docs/STATUS.md); their complete normalized qualification remains pending.
+The launcher invokes the existing owning `build` wrapper, then verifies its real
+PASS receipt, source/tree, registered executable and compiled managed-asset identity.
+It uses no host Node/npm/Go compiler, stale static probe or new tree-digest recipe.
+`./run.sh build` performs the same fresh managed preparation without starting an app.
+Current source implementation/static checks do not establish successful launcher,
+HMR or full application qualification; see [STATUS](docs/STATUS.md).
 The separate standalone qualifier alignment prepares the exact Node 26.10.0 guard per ADR-0184;
 it is **UNAPPLIED, UNQUALIFIED and NOT RUN**, and separate from the owning GUI wrapper.
 Its retained checks and pending qualification are described in [NATIVE_TOOLCHAIN](docs/NATIVE_TOOLCHAIN.md).
@@ -98,15 +100,16 @@ Native source/build/operator and qualification commands are in
 ```
 
 Vite reloads frontend changes and proxies `/api` to Go on `127.0.0.1:8000`.
-Restart the command after backend changes. `make run`, `make dev` and `make build`
-wrap the same Go launcher.
+The prepared API and selected Vite run in the same pinned toolchain container,
+with only loopback ports exposed and accounts/submissions off. Source/index changes
+hot-reload; restart after backend, configuration or dependency changes. Development
+edits do not create a new qualified source identity. `make run`, `make dev` and
+`make build` wrap the same launcher and require the same actual qualified pair.
 
 ### Docker
 
 ```bash
 ./run.sh docker
-# or:
-docker compose up --build
 # open http://127.0.0.1:8000
 ```
 
@@ -115,8 +118,12 @@ nonroot runtime contains the executable, compiled static files and an HTTP healt
 probe; it contains no Python server. Local and anonymous-production Compose use
 this image, a read-only application filesystem and container port 8000, matching
 Caddy. Change the local published port with `PORT=9000 docker compose up`.
-The retained root recipe still uses Node 24/historical output and needs managed
-pre-image alignment; selected consumer image binding/qualification remains pending.
+The canonical recipe prepares selected Node/managed embedfs output per
+[ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md). The launcher
+requires the actual owner-qualified pair bound to clean checkout HEAD, builds with
+those explicit arguments and runs the immutable resulting image ID. An ordinary
+clean checkout can use this Docker mode; managed run/build/dev require the fleet
+worktree. Current image binding/qualification remains pending; no deployment follows.
 
 The public runtime is anonymous; accounts and submissions remain off. Native account
 staging uses the canonical Go image through `docker-compose.accounts.yml` or
