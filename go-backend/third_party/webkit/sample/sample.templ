@@ -1,0 +1,44 @@
+package main
+
+// Compiled native equivalent of the sample Pongo2 behavior surface. Four island
+// payloads plus these three behavior payloads retain all seven nonce bindings.
+templ sampleTemplPage(tags templ.Component, islands templ.Component) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>RO-EDU core sample</title>
+			@tags
+		</head>
+		<body class="roedu-root" data-motion="on">
+			<main>
+				<h1>RO-EDU core sample</h1>
+				<p>Compiled templ delivery is ready.</p>
+				<section aria-label="Stress islands">
+					@islands
+				</section>
+				<section aria-label="Behaviors">
+					<roedu-wizard aria-label="Sample wizard">
+						<section data-wizard-panel data-wizard-step="0"><h2>First step</h2><button type="button" data-wizard-next>Next</button></section>
+						<section data-wizard-panel data-wizard-step="1" hidden><h2>Second step</h2><button type="button" data-wizard-back>Back</button><button type="button" data-wizard-submit>Finish</button></section>
+					</roedu-wizard>
+					<roedu-meter data-props="sample-meter-props" aria-label="Sample progress"></roedu-meter>
+					@sampleJSONScript("sample-meter-props", map[string]any{"value": 45, "min": 0, "max": 100})
+					<roedu-speak data-props="sample-speak-props"><button type="button" data-speak>Speak sample</button></roedu-speak>
+					@sampleJSONScript("sample-speak-props", map[string]any{"text": "Bun venit", "lang": "ro-RO"})
+					<roedu-comfort data-props="sample-comfort-props" aria-label="Reading comfort">
+						<button type="button" data-comfort="size">Text size</button>
+						<button type="button" data-comfort="spacing">Spacing</button>
+						<button type="button" data-comfort="font">Font</button>
+						<button type="button" data-comfort="focus">Focus</button>
+						<button type="button" data-comfort="reset">Reset comfort</button>
+					</roedu-comfort>
+					@sampleJSONScript("sample-comfort-props", map[string]any{"surface": "self-paced"})
+					<button type="button" data-hovercard-user="sample-user">Sample person</button>
+					<roedu-hovercard popover="manual" aria-label="Sample person card" data-url="/api/hovercard"></roedu-hovercard>
+				</section>
+			</main>
+		</body>
+	</html>
+}

@@ -1,0 +1,319 @@
+[
+  {
+    "name": "valid-null-global-css",
+    "valid": true,
+    "pointer": [
+      "css",
+      "global",
+      "limit_gz"
+    ],
+    "value": null
+  },
+  {
+    "name": "valid-rtt-zero",
+    "valid": true,
+    "pointer": [
+      "vitals",
+      "throttle",
+      "rtt_ms"
+    ],
+    "value": 0
+  },
+  {
+    "name": "valid-cpu-fraction-above-one",
+    "valid": true,
+    "pointer": [
+      "vitals",
+      "throttle",
+      "cpu"
+    ],
+    "value": 1.5
+  },
+  {
+    "name": "valid-measured-sha40",
+    "valid": true,
+    "pointer": [
+      "measured_at"
+    ],
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+    "name": "valid-measured-sha64",
+    "valid": true,
+    "pointer": [
+      "measured_at"
+    ],
+    "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+    "name": "valid-source-absent",
+    "valid": true,
+    "pointer": [
+      "source"
+    ],
+    "drop": true
+  },
+  {
+    "name": "valid-route-empty-arrays",
+    "valid": true,
+    "pointer": [
+      "routes"
+    ],
+    "value": {
+      "home": {
+        "class": "server-page",
+        "islands": [],
+        "widgets": []
+      }
+    }
+  },
+  {
+    "name": "missing-measured-at",
+    "valid": false,
+    "pointer": [
+      "measured_at"
+    ],
+    "drop": true
+  },
+  {
+    "name": "invalid-measured-sha",
+    "valid": false,
+    "pointer": [
+      "measured_at"
+    ],
+    "value": "not-a-sha"
+  },
+  {
+    "name": "source-null",
+    "valid": false,
+    "pointer": [
+      "source"
+    ],
+    "value": null
+  },
+  {
+    "name": "null-server-limit",
+    "valid": false,
+    "pointer": [
+      "js",
+      "server-page",
+      "limit_gz"
+    ],
+    "value": null
+  },
+  {
+    "name": "null-vendor-limit",
+    "valid": false,
+    "pointer": [
+      "js",
+      "vendor-gated",
+      "maplibre",
+      "limit_gz"
+    ],
+    "value": null
+  },
+  {
+    "name": "missing-cat-target",
+    "valid": false,
+    "pointer": [
+      "js",
+      "cat-initial",
+      "target_gz"
+    ],
+    "drop": true
+  },
+  {
+    "name": "target-on-server",
+    "valid": false,
+    "pointer": [
+      "js",
+      "server-page",
+      "target_gz"
+    ],
+    "value": 1
+  },
+  {
+    "name": "target-on-island",
+    "valid": false,
+    "pointer": [
+      "js",
+      "island-route",
+      "target_gz"
+    ],
+    "value": 1
+  },
+  {
+    "name": "target-on-vendor",
+    "valid": false,
+    "pointer": [
+      "js",
+      "vendor-gated",
+      "maplibre",
+      "target_gz"
+    ],
+    "value": 1
+  },
+  {
+    "name": "target-on-css",
+    "valid": false,
+    "pointer": [
+      "css",
+      "global",
+      "target_gz"
+    ],
+    "value": 1
+  },
+  {
+    "name": "fractional-lcp",
+    "valid": false,
+    "pointer": [
+      "vitals",
+      "lcp_ms"
+    ],
+    "value": 2500.5
+  },
+  {
+    "name": "fractional-inp",
+    "valid": false,
+    "pointer": [
+      "vitals",
+      "inp_ms"
+    ],
+    "value": 200.5
+  },
+  {
+    "name": "fractional-rtt",
+    "valid": false,
+    "pointer": [
+      "vitals",
+      "throttle",
+      "rtt_ms"
+    ],
+    "value": 150.5
+  },
+  {
+    "name": "fractional-down-kbps",
+    "valid": false,
+    "pointer": [
+      "vitals",
+      "throttle",
+      "down_kbps"
+    ],
+    "value": 1600.5
+  },
+  {
+    "name": "cpu-below-one",
+    "valid": false,
+    "pointer": [
+      "vitals",
+      "throttle",
+      "cpu"
+    ],
+    "value": 0.5
+  },
+  {
+    "name": "missing-rtt",
+    "valid": false,
+    "pointer": [
+      "vitals",
+      "throttle",
+      "rtt_ms"
+    ],
+    "drop": true
+  },
+  {
+    "name": "null-rtt",
+    "valid": false,
+    "pointer": [
+      "vitals",
+      "throttle",
+      "rtt_ms"
+    ],
+    "value": null
+  },
+  {
+    "name": "route-missing-islands",
+    "valid": false,
+    "pointer": [
+      "routes"
+    ],
+    "value": {
+      "home": {
+        "class": "server-page",
+        "widgets": []
+      }
+    }
+  },
+  {
+    "name": "route-missing-widgets",
+    "valid": false,
+    "pointer": [
+      "routes"
+    ],
+    "value": {
+      "home": {
+        "class": "server-page",
+        "islands": []
+      }
+    }
+  },
+  {
+    "name": "route-null-islands",
+    "valid": false,
+    "pointer": [
+      "routes"
+    ],
+    "value": {
+      "home": {
+        "class": "server-page",
+        "islands": null,
+        "widgets": []
+      }
+    }
+  },
+  {
+    "name": "route-null-widgets",
+    "valid": false,
+    "pointer": [
+      "routes"
+    ],
+    "value": {
+      "home": {
+        "class": "server-page",
+        "islands": [],
+        "widgets": null
+      }
+    }
+  },
+  {
+    "name": "route-null-island-name",
+    "valid": false,
+    "pointer": [
+      "routes"
+    ],
+    "value": {
+      "home": {
+        "class": "server-page",
+        "islands": [
+          null
+        ],
+        "widgets": []
+      }
+    }
+  },
+  {
+    "name": "route-unknown-key",
+    "valid": false,
+    "pointer": [
+      "routes"
+    ],
+    "value": {
+      "home": {
+        "class": "server-page",
+        "islands": [],
+        "widgets": [],
+        "override": 100000
+      }
+    }
+  }
+]
