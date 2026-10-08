@@ -55,7 +55,7 @@ void test("Romanian-first shell copy keeps the brand and game rules truthful", (
   const index = read("../index.html");
   const home = read("../src/screens/Home.tsx");
   const intro = read("../src/components/GameIntro.tsx");
-  const account = read("../src/components/AccountBar.tsx");
+  const account = read("../src/components/AccountBarContents.tsx");
   const games = read("../src/games.ts");
   const categories = read("../src/categories.ts");
   const share = read("../src/share.ts");

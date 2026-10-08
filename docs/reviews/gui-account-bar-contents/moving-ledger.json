@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "scope": "SOURCE-ONLY React component ownership split; no runtime or bundle qualification",
+  "before": {
+    "path": "frontend/src/components/AccountBar.tsx",
+    "sha256": "f0b48a88da55437a7842ca5bba284514ce1302808204dcab672354c0adc03ec1"
+  },
+  "absent_before": [
+    "frontend/src/components/AccountBarContents.tsx"
+  ],
+  "after": [
+    {
+      "path": "frontend/src/components/AccountBar.tsx",
+      "sha256": "9531ce5789e1cea1407c2a3e35f6719241f68e4d0bd4b9a91924489eaf381c70",
+      "bytes": 205
+    },
+    {
+      "path": "frontend/src/components/AccountBarContents.tsx",
+      "sha256": "59096e13a6fd7f926fd68f756d7144aa9488af56d6c88d7b339fe61ca61be51f",
+      "bytes": 9063
+    }
+  ],
+  "moved_import_and_implementation_bytes_restorable": true,
+  "necessary_transformations": [
+    {
+      "before": "const CURRENT_YEAR = new Date().getFullYear();\n\n",
+      "after": ""
+    },
+    {
+      "before": "export default function AccountBar() {",
+      "after": "export default function AccountBarContents({ currentYear }: { currentYear: number }) {"
+    },
+    {
+      "before": "<AccountSection me={me} refresh={refresh} />",
+      "after": "<AccountSection me={me} refresh={refresh} currentYear={currentYear} />"
+    },
+    {
+      "before": "function AccountSection({\n  me,\n  refresh,\n}: {",
+      "after": "function AccountSection({\n  me,\n  refresh,\n  currentYear,\n}: {"
+    },
+    {
+      "before": "  refresh: () => Promise<void>;\n}) {",
+      "after": "  refresh: () => Promise<void>;\n  currentYear: number;\n}) {"
+    },
+    {
+      "before": "<ConsentGate minAge={me.min_self_consent_age ?? 16} onResolved={refresh} />",
+      "after": "<ConsentGate minAge={me.min_self_consent_age ?? 16} onResolved={refresh} currentYear={currentYear} />"
+    },
+    {
+      "before": "function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () => Promise<void> }) {",
+      "after": "function ConsentGate({ minAge, onResolved, currentYear: CURRENT_YEAR }: { minAge: number; onResolved: () => Promise<void>; currentYear: number }) {"
+    }
+  ],
+  "original_date_initializer_kept_once_in_dynamic_root": true,
+  "new_runtime_or_test_cases": 0
+}

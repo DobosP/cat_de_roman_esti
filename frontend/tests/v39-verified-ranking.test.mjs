@@ -5,7 +5,7 @@ import test from "node:test";
 const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const authApi = read("../src/api/auth.ts");
 const ranking = read("../src/screens/Ranking.tsx");
-const account = read("../src/components/AccountBar.tsx");
+const account = read("../src/components/AccountBarContents.tsx");
 const sync = read("../src/scoreSync.ts");
 
 function withoutComments(source) {

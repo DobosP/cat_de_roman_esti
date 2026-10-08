@@ -52,6 +52,10 @@ test("fictional adult consent copy promises a private copy while declining keeps
   const posts = await accountFixture(page, { ...ADULT, consent_completed: false });
   const gate = page.locator(".account-card").filter({ has: page.getByRole("heading", { name: "Un pas rapid", exact: true }) });
   await expect(gate).toBeVisible();
+  const yearInput = gate.getByRole("spinbutton", { name: "Anul nașterii", exact: true });
+  const browserYear = await page.evaluate(() => new Date().getFullYear());
+  await expect(yearInput).toHaveAttribute("min", "1900");
+  await expect(yearInput).toHaveAttribute("max", String(browserYear));
   await expect(gate.getByText("Progresul rămâne aici. Pentru o copie privată a rezultatelor, confirmă vârsta și acceptă regulile.", { exact: true })).toBeVisible();
   await expect(gate.getByLabel("Poreclă (opțională; necesară doar pentru clasament)", { exact: true })).toBeEditable();
   await expect(gate.getByRole("link", { name: "Politica de confidențialitate", exact: true })).toHaveAttribute("href", "/legal/privacy");

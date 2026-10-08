@@ -1,0 +1,14 @@
+Valid until: the next owning gate captures these source changes — then treat as history.
+
+Source-only authored changes; no tests, parser, browser, wrapper, or SDK executed.
+Preimages are the three adjacent original files, copied before mutation.
+
+Byte counts: consent browser file 7397→7692 (+295); v14 reader 3534→3542 (+8); v39 verified-ranking reader 2663→2671 (+8).
+
+| Owning file | Before SHA256 | After SHA256 | Exact source delta |
+| --- | --- | --- | --- |
+| frontend/e2e/gui-m0-account-copy-parity.spec.mjs | f6a7c4eb51f00b437d5bc823a122e5ad3b1e6db3a4bd7e4c87fce64f6142874d | a26b6250de9df9f5ccafbc4259dbfec4591627e5f52634656852c94e6855c2b9 | +4 lines inside the existing fictional-adult consent case: actual labeled spinbutton; browser Date year; min 1900; max browser year. All original actions/assertions/case identity retained. |
+| frontend/tests/v14-romanian-replay.test.mjs | ed04f7ba55a20768eedafe011fa03ce4e17cde15e85243e182e9a8618b93eda0 | 215ac933fb9a4960f015011b3f5e38478294786090a2ebf1fc5d52fc25d26010 | One reader path: AccountBar.tsx to AccountBarContents.tsx; every predicate/callback/body byte otherwise unchanged. |
+| frontend/tests/v39-verified-ranking.test.mjs | a2ce5a727250d157cba78defb43f5379c0552094f882c33db690721e678f179f | f6173af0f1c759af2c9c1a861a4c5e87f7ea96352ab27d132a6ded6c5a704eb1 | One reader path: AccountBar.tsx to AccountBarContents.tsx; every predicate/callback/body byte otherwise unchanged. |
+
+No local-daily-circuit file changed. Public AccountBar root/manifest/budget/chunk-abort assertions remain on AccountBar.tsx. The sealed original16 runtime fixture was not edited; added browser checks do not qualify native consent or privacy policy.
