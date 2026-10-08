@@ -1,0 +1,74 @@
+{
+  "schema": "v1-7-native-export-root-publication-archive-shape-repair-review-v2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T19:59:10.400890+00:00",
+  "verdict": "accept_narrow_archive_shape_assertion_repair_for_metadata_publication_only",
+  "repair_source_admission_sha256": "e88b591fe70ff6fb3498220538339c443b547791f9faa9c662db6e36fa0283ad",
+  "repair_source_cutoff_utc": "2026-10-08T20:12:47.696580+00:00",
+  "repair_source_deadline_utc": "2026-10-08T20:15:47.696580+00:00",
+  "original_native_publication_reserve_utc": "2026-10-08T20:09:37.119484+00:00",
+  "original_native_bounds_not_extended": true,
+  "source_worker_whole_RSS_measured": false,
+  "dependencies_sha256": {
+    "current-source7-export-archive-shape-repair-source-admission-r1.json": "e88b591fe70ff6fb3498220538339c443b547791f9faa9c662db6e36fa0283ad",
+    "current-source7-export-archive-shape-root-failure-r1.json": "1a540d3c920a174e8106949d62dd61edd5af7cfca4b93cbec04ab0b080832b61",
+    "current-source7-export-archive-shape-repair-plan-r2.json": "9ec9b16c992022828b3db94a7086da672854ee07aba334dca0975a228f2e337d",
+    "current-source7-export-publication-repair-method-r2.py.txt": "4bb1f8658b3b6723797bc6a296e7d11d4840be3555f1343addc2f75cbee07779",
+    "current-source7-isolated-export-native-admission-r1.json": "d4b6dd3af11d8b71ba278419a32b132be37e346e96dc7edfe3654c6b3d4ea6f0",
+    "current-source7-isolated-export-r1-step-0-result.json": "d4b6fff8fe1bf74c3eddc22972ac64bf7df7c2424ba6b808bdd7fd61a2adfc9a",
+    "current-source7-isolated-export-r1-result.json": "197f3167ea7fc058c349148466231040ffa8353be2f4ca9bc9c157b426b2413f"
+  },
+  "failed_publisher_sha256": "19e1f82361b279b369b0a80b02751971e054153c2ce2dcf6d7d49ae841fb68e9",
+  "new_publisher_sha256": "4bb1f8658b3b6723797bc6a296e7d11d4840be3555f1343addc2f75cbee07779",
+  "durable_new_publisher_bytes_equal": true,
+  "precise_correction": {
+    "wrong_R1_predicate": "len(current Source7 archives)==28 conflated the full unique Source1–7 descriptor union with Source7 top-level labels.",
+    "actual_current_Source7": "13 archive labels naming12 unique(path,SHA) descriptors; exact e95/version7/parenta086 preserved.",
+    "actual_Source1_to6_union": 25,
+    "actual_Source1_to7_union": 28,
+    "actual_new_union_members": [
+      {
+        "path": "docs/reviews/v1-6-everyday-inputs/native/world/candidate.json",
+        "sha256": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+      },
+      {
+        "path": "docs/reviews/v1-6-everyday-inputs/native/world/factual-review.json",
+        "sha256": "fedcff86e30edf5f9033f7c0808eb6f54ef8d8845a6ab82f08c0945a268aa0ce"
+      },
+      {
+        "path": "docs/reviews/v1-6-everyday-inputs/native/world/quality-review.json",
+        "sha256": "2096d85b045a71466c4e9535414939788ea6f0469dbce42babe1389c5f4c5120"
+      }
+    ],
+    "all_actual7_source_SHA_shapes_equal_frozen_plan": true,
+    "all28_archived_regular_nonsymlink_file_bytes_match_descriptors": true,
+    "replacement_block": "Keep version7/exact Source6 parent assertion; iterate pinnedSources1–7, require exact descriptor keys/pathSHA currentbytes, count top labels13/currentunique12 and ancestral25→28 union with exactly3 new records.",
+    "only_one_assertion_block_changed_all_other_publisher_bytes_exact": true,
+    "syntax_valid": true,
+    "no_generated_data_or_source_or_native_guard_change": true
+  },
+  "preserved_actual_output_and_failed_boundary": {
+    "native_export_admission_SHA256": "d4b6dd3af11d8b71ba278419a32b132be37e346e96dc7edfe3654c6b3d4ea6f0",
+    "native_export_PASS_status": "Unchanged actual producer evidence; this ACK does not rerun or expand it.",
+    "bundle_SHA256": "078657f392828f2784173684c08d89736e38dae46a0d47c485a3ae5fcf1adc73",
+    "digest_SHA256": "388c8484b949ac173a1edfac5dd2c78f381cad224c754e78d854f31d29dd99ec",
+    "both_actual_output_SHA_values_still_exact": true,
+    "all3267_native_non_target_postpins_current": true,
+    "R1_root_publication": "FAIL before outdir creation/archive/inventory/keeper/consumer. Source prefix contains only reads/assertions until the wrong assertion; write helper was defined but not invoked. Preserve failedscript/operands/failureSHA unchanged.",
+    "current_native_archive_output_directory_absent_at_review": true,
+    "no_native_export_replay_or_dependent_consumer_executed_by_review": true
+  },
+  "conditions": [
+    "Bind this ACK, newmethod4bb, failure1a54, repairplan9ec and actualsource/outputs/producers as immutable preservation inputs; oldR1 publisher remains failed history. This ACK corrects only count/schema metadata, not full export result qualification.",
+    "Corrected archival metadata publication must satisfy BOTH repairsource cutoff/deadline and the EARLIER originalnative publication reserve20:09:37.119484 with original native fullS/Rbaseline/resource limits. New source clock never renews native time/budget. Preserve actual partialmetadata/failure if any guard or deadline fails.",
+    "All unchanged publisher checks remain: exact raw PinBytes/delta/current714 files, stage/runtime/source/cache/producers, fullrecursive delta report, original native bounds and exclusive keeper/inventory outputs. The preserved Python JSON-delta inspection subprocess is metadata readback, not a CLI/game/test/native consumer. No new export/case/tool action or generic framework is introduced.",
+    "No dependent lane2/check/build/sealedgameplay/currentauthority operation before actual successful correctedpublication and immutable known2afterimage keeper. A later independent actual export-result review retains its own required full evidence scope.",
+    "Retain rootR1 FAIL separately from nativeproducer PASS; no retroactive root-pass label, archivecount rewriting, old judgment rebinding or predicate substitution beyond the reviewed block."
+  ],
+  "not_approved": [
+    "Any export replay/CLI/test/Go/nativeconsumer",
+    "LiveR/Source7/pin/bundle/authority/GUI adoption",
+    "Actual full export delta/producer result acceptance by this narrow ACK",
+    "Currentauthority/history/fullbackend/reference/release/landing/remote action"
+  ]
+}

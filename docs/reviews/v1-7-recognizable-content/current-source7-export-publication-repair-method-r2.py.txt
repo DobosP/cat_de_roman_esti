@@ -1,0 +1,80 @@
+from pathlib import Path
+import datetime,gzip,hashlib,json,shutil,subprocess
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7');D=R/'docs/reviews/v1-7-recognizable-content';S=Path('/home/dobo/work/_temp/codex__content-v1-7');T=S/'resume-windows-20261008';I=T/'source7-current-stage-r1'
+def h(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def write(p,x):
+ assert not p.exists(),p;p.write_text(json.dumps(x,sort_keys=True,indent=2,ensure_ascii=False)+'\n')
+ad=D/'current-source7-isolated-export-native-admission-r1.json';a=json.loads(ad.read_text());resultpath=D/'current-source7-isolated-export-r1-result.json';result=json.loads(resultpath.read_text());step=D/'current-source7-isolated-export-r1-step-0-result.json';row=json.loads(step.read_text());assert result['status']=='completed' and result['all_steps_completed'] and row['status']=='passed' and row['exit_code']==0 and row['guard'] is None
+log=Path(row['log_path']);assert h(log)==row['log_sha256'] and log.read_bytes()==b'Native private content exported\n'
+for group in ['unchanged','scratch_bindings']:
+ for k,v in a[group].items():
+  p=Path(k);p=p if p.is_absolute() else R/p;assert p.is_file() and not p.is_symlink() and h(p)==v,k
+plan=json.loads((D/'current-source7-export-tools-method-plan-r2.json').read_text());oldpath=R/'go-backend/internal/content/bundled.json';bundle=I/'go-backend/internal/content/bundled.json';pin=I/'go-backend/internal/content/digest.go';old=json.loads(oldpath.read_text());new=json.loads(bundle.read_text());assert h(oldpath)=='e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877'
+assert bundle.is_file() and pin.is_file() and not bundle.is_symlink() and not pin.is_symlink()
+supp=json.loads((D/'current-source7-export-pin-template-supplement-r2.json').read_text());expected=supp['exact_UTF8_LF_template'].replace('\\n','\n').replace('{actual_bundle_sha256}',h(bundle)).encode();assert pin.read_bytes()==expected
+assert new['schema_version']==2 and new['sources']==plan['expected_current_source8']
+for n,v in new['sources'].items():assert h(I/'cat_de_roman_esti/fixtures'/n)==v
+assert list(new)==list(old)
+changed=[k for k in old if old[k]!=new[k]];assert set(changed)=={'discovery_world','manifest','metadata','nodes','normalized_index','recipe_extensions','sources'},changed
+assert len(new['nodes'])==len(old['nodes'])==2419 and len(new['edges'])==9473
+for x,y in zip(old['nodes'],new['nodes']):
+ assert x['id']==y['id']
+ if x['id']=='n_v4soc_salariu':
+  assert y['aliases']==x['aliases']+['leafă']
+  assert {k:v for k,v in x.items() if k!='aliases'}=={k:v for k,v in y.items() if k!='aliases'}
+ else:assert x==y,x['id']
+assert len(old['normalized_index'])==13514 and len(new['normalized_index'])==13515 and new['normalized_index']['leafa']=='n_v4soc_salariu'
+assert {k:v for k,v in new['normalized_index'].items() if k!='leafa'}==old['normalized_index']
+for key in old['discovery_world']:
+ if key not in ['bindings','candidate_sha256','reviews']:assert new['discovery_world'][key]==old['discovery_world'][key],key
+rawWorld=json.loads((I/'cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json').read_text())
+for key in ['bindings','candidate_sha256','reviews']:assert new['discovery_world'][key]==rawWorld[key],key
+for key in old['recipe_extensions']:
+ if key not in ['bindings','candidate_sha256','semantic_reviews']:assert new['recipe_extensions'][key]==old['recipe_extensions'][key],key
+assert new['recipe_extensions']==json.loads((I/'cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json').read_text())
+kg=json.loads((I/'cat_de_roman_esti/fixtures/kg_sample.json').read_text());assert len(kg['kg_puzzles'])==180
+assert new['manifest']['counts']=={'nodes':2419,'edges':9473,'puzzles':180} and new['manifest']['build_version']==kg['meta']['build_version']
+assert new['metadata']['/api/manifest']==new['manifest']
+assert {k:v for k,v in new['metadata'].items() if k!='/api/manifest'}=={k:v for k,v in old['metadata'].items() if k!='/api/manifest'}
+invpath=T/'current-source7-stage-after-extensions-inventory-r1.json';inv=json.loads(invpath.read_text());files={str(p.relative_to(I)):p for p in I.rglob('*') if p.is_file()};assert set(files)==set(inv['files'])
+mutable={'go-backend/internal/content/bundled.json','go-backend/internal/content/digest.go'};afterfiles={};target_changes=[]
+for n,p in files.items():
+ assert not p.is_symlink();r={'sha256':h(p),'bytes':p.stat().st_size,'mode':p.stat().st_mode&0o777};assert r['mode']==inv['files'][n]['mode'];afterfiles[n]=r
+ if n in mutable:target_changes.append({'path':n,'before':inv['files'][n],'after':r})
+ else:assert r==inv['files'][n],n
+runtime=[]
+for r in inv['runtime_sources']:
+ p=I/r['path'];v=h(p)
+ if r['path'] not in mutable:assert v==r['sha256'],r['path']
+ runtime.append({'path':r['path'],'sha256':v})
+assert len(runtime)==130 and sum(x!=y for x,y in zip(inv['runtime_sources'],runtime))==2
+assert not (I/'.cat-content-ops.lock').exists() and not list((I/'go-backend/internal/content').glob('.cat-content-export-*'))
+source=I/'go-backend/internal/contentrails/sources/authored-v7.json';s=json.loads(source.read_text());assert s['version']==7 and s['parent_source_sha256']=='a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611'
+old_ancestry=set();all_ancestry=set()
+for version in range(1,8):
+ archived_source=json.loads((I/f'go-backend/internal/contentrails/sources/authored-v{version}.json').read_text())
+ for descriptor in archived_source['archives'].values():
+  assert set(descriptor)=={'path','sha256'}
+  archived_path=I/descriptor['path'];assert archived_path.is_file() and not archived_path.is_symlink() and h(archived_path)==descriptor['sha256']
+  pair=(descriptor['path'],descriptor['sha256']);all_ancestry.add(pair)
+  if version<=6:old_ancestry.add(pair)
+assert len(s['archives'])==13 and len({(z['path'],z['sha256']) for z in s['archives'].values()})==12
+assert len(old_ancestry)==25 and len(all_ancestry)==28 and old_ancestry<=all_ancestry and len(all_ancestry-old_ancestry)==3
+outdir=D/'native/source7-export';outdir.mkdir(exist_ok=False)
+raw=bundle.read_bytes();archive=outdir/'bundled-r1.json.gz';archive.write_bytes(gzip.compress(raw,compresslevel=9,mtime=0));assert gzip.decompress(archive.read_bytes())==raw
+pinarchive=outdir/'digest-r1.go.txt';pinarchive.write_bytes(pin.read_bytes())
+delta=json.loads(subprocess.check_output(['/usr/bin/python3',str(S/'probe/current_source7_export_inspect_delta_r1.py')],cwd=R));write(outdir/'whole-bundle-delta-r1.json',delta)
+post=T/'current-source7-stage-after-export-inventory-r1.json';write(post,{'schema':'v1-7-stage-after-supported-private-export-inventory-v1','stage_root':str(I),'before_inventory_path':str(invpath),'before_inventory_sha256':h(invpath),'files':afterfiles,'count':len(afterfiles),'bytes':sum(x['bytes'] for x in afterfiles.values()),'runtime_sources':runtime,'current_source_bindings':inv['current_source_bindings'],'only_two_target_supersessions':target_changes,'not_currentauthority_or_liveR_approval':True})
+keeper=T/'current-source7-export-output-keeper-r1.json';write(keeper,{'schema':'v1-7-supported-private-export-two-output-keeper-v1','created_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'admission_path':str(ad),'admission_sha256':h(ad),'deadline_utc':a['deadline_utc'],'original_start_size':result['original_start_size'],'producer_receipt_path':str(step),'producer_receipt_sha256':h(step),'producer_log_path':str(log),'producer_log_sha256':h(log),'outputs':{str(p):{'sha256':h(p),'bytes':p.stat().st_size,'mode':p.stat().st_mode&0o777} for p in [bundle,pin]},'post_inventory_path':str(post),'post_inventory_sha256':h(post),'raw_bundle_archive_path':str(archive),'raw_bundle_archive_sha256':h(archive),'raw_pin_archive_sha256':h(pinarchive),'whole_delta_path':str(outdir/'whole-bundle-delta-r1.json'),'whole_delta_sha256':h(outdir/'whole-bundle-delta-r1.json'),'all714_other_stage_files_exact':True,'runtime130_exactly_two_hash_changes':True,'source8_and_authored7_parent_28archives_exact':True,'content_Load_or_ordinaryHTTP_not_yet_executed':True})
+assert keeper.stat().st_size<=64*1024
+external=T/'current-source7-export-output-keeper-external-r1.json';write(external,{'keeper_path':str(keeper),'keeper_sha256':h(keeper),'admission_sha256':h(ad)});assert external.stat().st_size<=4096
+for n in ['public-module-cache-inventory-r2.json','public-module-complete-inventory-r1.json']:
+ x=json.loads((T/n).read_text());root=Path(x['cache_root']);fs={str(p.relative_to(root)):p for p in root.rglob('*') if p.is_file()};assert set(fs)==set(x['files'])
+ for k,p in fs.items():assert not p.is_symlink() and h(p)==x['files'][k]['sha256'] and p.stat().st_size==x['files'][k]['bytes'],k
+ for k,v in x.get('GOPATH_files',{}).items():assert h(Path(x['GOPATH_root'])/k)==v['sha256']
+now=datetime.datetime.now(datetime.timezone.utc);assert now<datetime.datetime.fromisoformat(a['metadata_reserve_utc']);size=sum(p.stat().st_size for root in [S,R] for p in root.rglob('*') if p.is_file());growth=size-result['original_start_size'];disk=shutil.disk_usage(S).free;mem=int(next(z.split()[1] for z in Path('/proc/meminfo').read_text().splitlines() if z.startswith('MemAvailable:')))*1024
+assert growth+64*2**20<=2**30 and disk>=16*2**30 and mem>=16*2**30,(growth,disk,mem)
+summary={'schema':'v1-7-supported-isolated-export-results-v1','completed_at_utc':now.isoformat(),'admission_sha256':h(ad),'actual_bundle_sha256':h(bundle),'actual_bundle_bytes':len(raw),'actual_digest_sha256':h(pin),'post_inventory_sha256':h(post),'keeper_sha256':h(keeper),'keeper_external_sha256':h(external),'native_PASS':True,'native_peak_group_RSS_bytes':row['peak_group_RSS_bytes'],'native_increment_bytes':row['incremental_bytes_from_original_baseline'],'root_final_publication_increment_bytes':growth,'publication_upper_with_64MiB_reserve':growth+64*2**20,'recursive_bundle_changed_paths':len(delta['recursive_changed_paths']),'sole_new_raw_alias_and_normalized_owner':True,'all714_other_stage_files_and_all3267_post_pins_exact':True,'runtime130_two_hash_changes_source8_unchanged':True,'source_root_RSS':'unmeasured','no_liveR_source7_currentauthority_fullgates_or_contentLoad_claim':True}
+write(D/'current-source7-isolated-export-results-r1.json',summary)
+write(D/'current-source7-isolated-export-native-stop-r1.json',{'status':'COMPLETE_ISOLATED_EXPORT_PRODUCER_AND_OUTPUT_IDENTITY_ONLY','stopped_at_utc':now.isoformat(),'admission_sha256':h(ad),'original_deadline_utc':a['deadline_utc'],'original_reserve_utc':a['metadata_reserve_utc'],'within_original_reserve':True,'summary_sha256':h(D/'current-source7-isolated-export-results-r1.json'),'source_root_RSS':'unmeasured'})
+print(json.dumps(summary))
