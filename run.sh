@@ -79,8 +79,13 @@ cmd_dev() {
 
 cmd_docker() {
   validate_address
+  # These values come from the owner's actual same-source pinned-wrapper proof.
+  # Do not synthesize a tree identity or silently substitute the current Git SHA.
+  [[ "${GATE_SHA:-}" =~ ^[0-9a-f]{40}$ ]] || die "GATE_SHA must be the explicit owner-qualified 40-hex source SHA"
+  [[ "${GATE_TREE_SHA256:-}" =~ ^[0-9a-f]{64}$ ]] || die "GATE_TREE_SHA256 must be the explicit owner-qualified 64-hex source tree"
   have docker || die "Docker not found"
-  docker build -t cat-de-roman-esti:latest "$SCRIPT_DIR"
+  docker build --build-arg "GATE_SHA=$GATE_SHA" --build-arg "GATE_TREE_SHA256=$GATE_TREE_SHA256" \
+    -t cat-de-roman-esti:latest "$SCRIPT_DIR"
   log "Go container: http://$native_address (Ctrl-C to stop)"
   exec docker run --rm -it --read-only --cap-drop ALL --security-opt no-new-privileges \
     -p "$native_address:8000" -e CAT_ACCOUNTS_ENABLED=0 cat-de-roman-esti:latest
@@ -97,6 +102,8 @@ Cât de român ești? — Go anonymous arcade
   ./run.sh help    Show this help.
 
 PORT defaults to 8000; HOST defaults to 127.0.0.1. A busy port fails explicitly.
+The docker command requires explicit GATE_SHA/GATE_TREE_SHA256 from the owner's
+actual same-source pinned-wrapper qualification; there are no identity defaults.
 Gameplay uses the reviewed embedded content. Native accounts are optional:
 CAT_ACCOUNTS_ENABLED=1 requires PostgreSQL and an explicit schema migration.
 Google/Facebook buttons appear only when their provider is configured.
