@@ -1,0 +1,64 @@
+{
+  "schema": "independent-exact-sixlegacy-acquisition-and-clone-actual-review-v1",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T16:57:44.070015+00:00",
+  "decision": "ACCEPT_ACTUAL_CLONE_AND_SIX_AUTHENTICATED_ACQUISITIONS_ONLY",
+  "source_admission_sha256": "0b04e1dd9a59d81959b78b7a2704f1c296cd7e0faa36f47891115334a9216e4d",
+  "bindings": {
+    "complete-cache-offline-source-admission-r1.json": "0b04e1dd9a59d81959b78b7a2704f1c296cd7e0faa36f47891115334a9216e4d",
+    "legacy-public-module-plan-r2.json": "75f6a872a852c75b426385f46ad44a8a369ab2085fcd980c04ccbc36ca9ea5e5",
+    "legacy-public-module-manifest-r1.json": "cf89e313200e74498594cf3460fd1a09223186701f2c9bf64bbc9e4083c1a12c",
+    "legacy-public-module-method-review-r2.json": "61a18f01f403db78702f789bbd5cad13069e1eec060b08d194ea4b1be9cb00e0",
+    "legacy-public-module-native-admission-r1.json": "e466a0f5380771ba288230aae371ba8a4a63a64285c1f393060dbd98217928f8",
+    "legacy-public-module-acquisition-results-r1.json": "ab7f08efcc1c70b8db0785b2bb7a196f360bb1f40e7ee8c690a7e36666027204",
+    "legacy-public-module-acquisition-r1-result.json": "769550f05ae32cf86cbc9817de8fe29659ff86211cb4fabd98aef7f691134113",
+    "legacy-public-module-acquisition-r1-step-0-result.json": "01e3cc2f0c51563ee0cc48e03cc990ba161958f4f51f8dc0afaf3576030d5b25",
+    "legacy-public-module-acquisition-r1-step-1-result.json": "03e4b25c222604505590bb9d79c4b0919a32c003549836467d0ef6b6e83a70f6",
+    "legacy-public-module-acquisition-log-r1.jsonstream": "49b6d878c997328950ecbbadd7f7601b365230307cf4954b15da93de3c683958",
+    "legacy-public-module-native-stop-r1.json": "78f7d266c730580241bcfa4eda1a4b7e3af8ebd7707d04709e947abd09e84fb9",
+    "legacy-public-module-publication-accounting-r1.json": "c5f9ab3a8972a003328b14e365d104ce759ebcf303fd82c012a9d1b10abb57f0"
+  },
+  "cache_producer_bindings": {
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-cache-inventory-r2.json": "83e830f6408e35feef4963ca69088402289fc0eabf77e18db3a54aba3e355311",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-inventory-r1.json": "c7aab0473f49adffd90b017e12f723425a444ef5f9e57c9aab711a11dbdc3376",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/legacy-cache-clone-inventory-r1.json": "24b6c259a7da165ea7c29d6df4f166e9820fa95cf014224a40569526fbe07741",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/legacy-cache-clone-keeper-r1.json": "2894a63d78d0ed643a7930298ec8065a2a2477b80df3b4c6e2e384da06c4b8a6",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/legacy-cache-clone-keeper-external-r1.json": "92b4b06fd590dff161e46979cbab84c3df30783263aa6627f9de8618b8659132",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-keeper-r1.json": "6b437d71579570eb9865e112d80a3d51a08c3b09efcd308476eba604ad702136"
+  },
+  "observations": {
+    "two_native_steps_passed": true,
+    "current_initial_pins": 250,
+    "original_cache_files": 5187,
+    "new_cache_files": 5436,
+    "new_cache_regular_bytes": 178309101,
+    "legacy_versions": 6,
+    "allowed_inherited_list_updates": 4,
+    "all_other_inherited_files_unchanged": 5183,
+    "new_owned_GOPATH_state_files": 1,
+    "new_owned_state_bytes": 188,
+    "native_peak_sampled_group_RSS_bytes": 20586496,
+    "publication_inclusive_full_S_R_increment_bytes": 180601298,
+    "publication_reserved_upper_bytes": 247710162
+  },
+  "findings": [
+    "Both exact native clone/download argv passed zero exit/guard null; receipts/logs/cumulative/state/admission/original baseline/deadline and all250 pre/post/current readsets agree. Completed next2/pending null.",
+    "Clone keeper froze after cp success and before download, binding full5187-file/881-directory readback and producer hashes. Current original5187 files remain byte/size/type/membership exact; corresponding inherited clone files share no original inode. No old cache deletion or mutation occurred.",
+    "Independently rehashed all5436 new regular files178309101B and exact current membership. Only four declared inherited @v/list files differ; each retains old versions and adds exactly declared legacy versions with matching before/after hashes. Every other5183 inherited file, including prior sumdb lookups/tiles, remains exact.",
+    "Six unique error-free JSON records match frozen paths/versions and all committed GoModSum anchors. Newly reported body h1 sums match recorded sumdb lookup lines under explicit public sumdb-enabled successful qualifiedSDK operation; no committed body anchor exists and none is fabricated. Reviewer has not independently reverified signed-tree cryptography.",
+    "All lookup record file hashes and exact module/body/mod sum lines agree. New owned GOPATH has precisely one188B signed-latest state at pkg/sumdb/sum.golang.org/latest; this and cache lookup/tile state remain separately owned and accounted.",
+    "Root project/local versions/go.mod/go.sumaa0/content/GUI are unchanged; failed ceb20 offline prefix stays stopped and was not retried or resumed. Network bootstrap does not imply current root integrity/build availability.",
+    "Native steps finish16:49:29 and publication closes before original17:04:50 reserve. Sampled20586496B process-group RSS and publication upper247710162B satisfy2GiB/1GiB campaign bounds. Separate root/source RSS is unmeasured. No duplicate bulk archive or downloaded source execution is claimed."
+  ],
+  "scope_limit": "Acquisition authentication/provenance and cache/clone byte identity only; selected downloaded-module h1 integrity, full graph/build/current rail/authority/GUI/Source7 remain separately unqualified.",
+  "next": "Independently reviewed fresh complete-cache offline root verification/current rail build using actual new cache/state and exactaa0 checksum target; precise unresolved prerequisite/error must stop rather than hidden download or failed-clock resume.",
+  "limits": {
+    "actual_acquisition_evidence_accepted": true,
+    "independent_sumdb_signature_reverification": false,
+    "extracted_integrity_fullgraph_build_or_currentauthority_pass": false,
+    "root_versions_source_data_GUI_Source7_changed": false,
+    "new_native_or_network_actions_authorized_by_this_result": false,
+    "source_worker_RSS": "unmeasured",
+    "review_operations": "Static retained JSON/source/hash/cache paths/full inventories/list set/inode/producer/state inspection only; no imports/Go/network/copy/build/test or data edit."
+  }
+}

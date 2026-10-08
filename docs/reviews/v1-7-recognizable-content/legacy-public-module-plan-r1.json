@@ -1,0 +1,91 @@
+{
+  "author": "/root/v17_materialize",
+  "authorized_clone_supersession": {
+    "old_existing_files_allowed_content_updates": [
+      "cache/download/github.com/davecgh/go-spew/@v/list",
+      "cache/download/github.com/stretchr/testify/@v/list",
+      "cache/download/gopkg.in/check.v1/@v/list",
+      "cache/download/gopkg.in/yaml.v3/@v/list"
+    ],
+    "rule": "Only these four @v/list files may supersede clone preimages, with old version-line set retained and only exact requested version lines added; record both pre/post hashes and exact line additions. New objx list is an addition. Every other inherited 5,187 file must keep exact bytes. New metadata/archives/extracted trees are limited to the six requested versions; additional Go sumdb lookup/tile cache entries and own GOPATH signed latest state are allowed bookkeeping, fully inventoried. Unexpected deletion, changed inherited file, unlisted payload, checksum failure or path/type change STOPs and preserves partial new cache. Original cache remains entirely immutable."
+  },
+  "clone_keeper_before_download": "After cp exit0 AND successful outer resource guards, Root enumerates the new clone and reads back EVERY old inventory path: exact names/types/counts/sizes/bytes plus directories, no symlink and no old/new shared inode. Recheck original cache bytes. Publish an exclusive clone keeper and external expected SHA, binding actual inventory, producing step receipt/log SHA, admission SHA/deadline/baseline. Root rehashes producing logs explicitly; the runner alone does not. Download MUST NOT start until this keeper is valid, and every protected readset pin is exact. No generic copy wrapper is introduced.",
+  "execution_performed": false,
+  "explicit_bootstrap_environment": "397686 fixed environment is unchanged. Command-scoped env explicitly chooses only this NEW complete cache plus NEW owned GOPATH, public proxy without direct fallback and checksum database. This is PUBLIC-network acquisition, never described as offline. Prior runner GOPATH=S/gopath was also owned; this separate namespace preserves earlier sumdb state. Qualified sumdb.go shows latest-tree state in GOPATH/pkg/sumdb while lookup/tile cache lives in GOMODCACHE. Public-only empty private filters apply ONLY this exact six-version command; no credentials or private module paths are consulted.",
+  "fresh_paths": {
+    "empty_outside_module_bootstrap": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-bootstrap-r1",
+    "new_complete_cache": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+    "new_owned_sumdb_GOPATH": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+    "source_immutable_cache": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-cache-r1"
+  },
+  "future_exact_commands": [
+    {
+      "argv": [
+        "/bin/cp",
+        "--archive",
+        "--no-clobber",
+        "--",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-cache-r1/.",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1"
+      ],
+      "max_seconds": 180,
+      "name": "clone-immutable-known-cache"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "GOMODCACHE=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+        "GOPATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+        "GOPROXY=https://proxy.golang.org",
+        "GOSUMDB=sum.golang.org",
+        "GOPRIVATE=",
+        "GONOPROXY=",
+        "GONOSUMDB=",
+        "GO111MODULE=on",
+        "GOWORK=off",
+        "GOTOOLCHAIN=local",
+        "GOMAXPROCS=2",
+        "GOFLAGS=-p=2 -mod=readonly",
+        "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-bootstrap-r1",
+        "mod",
+        "download",
+        "-json",
+        "github.com/davecgh/go-spew@v1.1.0",
+        "github.com/stretchr/objx@v0.1.0",
+        "github.com/stretchr/testify@v1.3.0",
+        "github.com/stretchr/testify@v1.7.0",
+        "gopkg.in/check.v1@v0.0.0-20161208181325-20d25e280405",
+        "gopkg.in/yaml.v3@v3.0.0-20200313102051-9f266ea9e77c"
+      ],
+      "max_seconds": 600,
+      "name": "acquire-exact-six-public-versions"
+    }
+  ],
+  "future_offline_followup": "No go.mod/go.sum edits, verification context, rail build or GUI/Source7/currentauthority call in this acquisition scope. A genuinely NEW separately reviewed/admitted OFFLINE genuine-root verify/build may follow successful actual output checks; any remaining graph metadata miss must stop with its exact error, not trigger hidden network or another unchanged retry.",
+  "future_root_setup": "Under a NEW separately measured native admission only, verify the source inventory has exactly 5,187 regular non-symlink files / 175,909,075 bytes and all 881 recorded directories; paths/ancestors must remain safe and source hashes exact. All three destinations must be absent, including dangling symlinks. Root creates ONLY bootstrap and GOPATH by exclusive mkdir under the resolved existing T parent; bootstrap has no go.mod and GOWORK is off. The cp command creates the absent complete-cache destination. No source cache cleanup or overwrite.",
+  "installation_approval": false,
+  "module_manifest_path": "docs/reviews/v1-7-recognizable-content/legacy-public-module-manifest-r1.json",
+  "module_manifest_sha256": "cf89e313200e74498594cf3460fd1a09223186701f2c9bf64bbc9e4083c1a12c",
+  "official_primary_sources": {
+    "outside_module_supported_case": "https://go.dev/src/cmd/go/testdata/script/mod_outside.txt",
+    "qualified_sdk_mod_outside_sha256": "58d4e71b8ec1617e9ecde61b58b9531217696751d8de5f40e5dbdb6972d129df",
+    "qualified_sdk_sumdb_sha256": "7871f270001bd540481a2d0995ace0b7ec714bd4aae13961e24885d67638560a",
+    "reference": "https://go.dev/ref/mod#go-mod-download"
+  },
+  "prepared_at_utc": "2026-10-08T16:40:38.907590+00:00",
+  "project_go_mod_sum_or_data_mutation": false,
+  "readset_path": "docs/reviews/v1-7-recognizable-content/legacy-public-module-readset-r1.json",
+  "readset_sha256": "eb63f2872f9c36baba0d1622b3609b90ba4e83150e52d2f3193862889320f211",
+  "reason": "The failed offline ceb20 prefix stopped on pgpassfile requiring testify v1.3.0 metadata. This DIFFERENT finite prerequisite scope obtains exactly the six previously declared legacy go.mod-only versions; it never resumes that failed prefix.",
+  "resource_boundaries": "One future NEW 20-minute immutable campaign / 180-second final metadata reserve, 17GiB start disk and 16GiB remaining disk+MemAvailable, 2GiB sampled process-group RSS, 1GiB full-owned S/R increment, Go2 threads/jobs; source author/root max3. cp+six acquisition are two serial commands with keeper checks between them. All clone/GOPATH/cache/output growth lies under already accounted S; no budget clock reset or runner rewrite.",
+  "returned_JSON_checks": [
+    "Exactly six unique Path/Version records in frozen order/set; no Error, omitted or unexpected version. Each GoModSum must equal its frozen committed go.mod anchor. Each Sum must be nonempty actual h1 and preserved with its authenticated Go checksum-database lookup/producer provenance; there is NO existing committed body sum comparison for these six. Standard Go successful checksum verification is required, not inferred from syntax alone.",
+    "Info/GoMod/Zip/Dir must be safe resolved entries exclusively under NEW cache, expected exact version path and regular nonsymlink files/directories. No unlisted module body may appear. Project module files and all original cache bytes must remain exact.",
+    "Root freezes actual six JSON bodies/sums/lookup provenance and complete post-download cache inventory in a NEW exclusive keeper/external SHA tied to producing receipt/log/deadline/baseline. Read back all old/new bytes before later consumers. Acquisition identity/authentication remains distinct from extracted-tree integrity/full graph/build qualification."
+  ],
+  "schema": "v1-7-six-legacy-public-module-acquisition-plan-v1",
+  "source_admission_sha256": "7f86e27fbc9ed43364089573cb8a4f342e9a0e53dd23f917fe5754f64537e4c7",
+  "source_baseline": "a676ac894790b4f47c6b1ee677219ed79eee0ea9"
+}

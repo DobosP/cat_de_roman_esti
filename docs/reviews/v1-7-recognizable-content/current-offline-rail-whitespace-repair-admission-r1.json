@@ -1,0 +1,21 @@
+{
+  "schema": "v1-7-final-whitespace-one-newline-repair-admission-v1",
+  "checked_at_utc": "2026-10-08T17:21:16.416990+00:00",
+  "source_cutoff_utc": "2026-10-08T17:25:19.622184+00:00",
+  "deadline_utc": "2026-10-08T17:28:19.622184+00:00",
+  "fresh_headroom": {
+    "disk_free_bytes": 130469761024,
+    "memory_available_bytes": 23248642048
+  },
+  "scope": "Exactly remove one newly appended blank EOF line from WORKLOG, preserveoldbytes/failingdefaultwhitespace check, freshdocs hashbinding under SAMEoriginalcheckpoint deadline/reserve; no code/cache/CLI/source7/clock reset",
+  "failed_command": [
+    "git",
+    "diff",
+    "--check"
+  ],
+  "exact_failure": "WORKLOG.md:1782: new blank line at EOF.",
+  "old_docs_gate_scope_remains_its_exact_bytes": true,
+  "premature_source_stop_sha256": "1e35e8dff811f4d3c5d01349108276286d81d69c2b1a1efb1d07229d24cd5af9",
+  "before_sha256": "518b716046d4e7bdabacf56fa99af63cb06696b44f293b227d4c399ac8b53eb5",
+  "after_sha256": "783f110c9c9206c4b78217ae58f1b3d920327a4736e67c986d527252311a7da2"
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "independent-six-pinned-legacy-public-module-source-review-v2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T16:46:28.926075+00:00",
+  "decision": "ACCEPT_EXACT_R2_CLONE_AND_SIX_PUBLIC_ACQUISITION_METHOD_AFTER_FRESH_ADMISSION",
+  "source_admission_sha256": "7f86e27fbc9ed43364089573cb8a4f342e9a0e53dd23f917fe5754f64537e4c7",
+  "bindings": {
+    "legacy-public-module-source-admission-r1.json": "7f86e27fbc9ed43364089573cb8a4f342e9a0e53dd23f917fe5754f64537e4c7",
+    "legacy-public-module-plan-r2.json": "75f6a872a852c75b426385f46ad44a8a369ab2085fcd980c04ccbc36ca9ea5e5",
+    "legacy-public-module-plan-r1.json": "1a1e7d04c364860c6960aa076dc833ee035dbfbff33fda056d31b7bee9b9d1ca",
+    "legacy-public-module-readset-r1.json": "eb63f2872f9c36baba0d1622b3609b90ba4e83150e52d2f3193862889320f211",
+    "legacy-public-module-manifest-r1.json": "cf89e313200e74498594cf3460fd1a09223186701f2c9bf64bbc9e4083c1a12c",
+    "pinned-go-dependencies-modules-r1.json": "48e9304196f02348efa8c3b0b94f7539d9074a1a4a411e2cdc48dedf7025dbc1",
+    "ownedcache-actual-review-r1.json": "89ee0c91f173d9e0d5ef492275294c40724b14fd5e7bd511d212e7dec17dc7ed"
+  },
+  "verified_current_inputs": {
+    "normal": 221,
+    "unchanged": 221,
+    "scratch": 22,
+    "all_current": true,
+    "legacy_versions": 6,
+    "committed_body_sum_anchors": 0,
+    "committed_GoModSum_anchors": 6
+  },
+  "findings": [
+    "Exact six Path/Version pairs equal the original declared legacy mod-only set and all six GoModSum/anchor lines match current root go.sumaa0. None has a committed body Sum. Public exact download argv matches these six only; no current versions/project checksum/module files are changed.",
+    "Current qualified SDK mod_outside script supports exact outside-project queries without dependency download. SDK checkModSum consults enabled sumdb for sums not already in project sum files; useSumDB is true for these public modules with explicit cleared no-sumdb selectors. Unknown body sums must be recorded as fresh Go/sumdb-authenticated outputs, not invented existing anchors.",
+    "SDK sumdb Read/WriteConfig stores signed latest state under GOPATH/pkg/sumdb; lookup/tile cache is under GOMODCACHE/cache/download/sumdb. Explicit NEW owned GOPATH and NEW complete cache account for both. Prior acquisition already used owned outer S/gopath and remains historically qualified within its original scope.",
+    "All221 normal and22 scratch pins match. New complete-cache/bootstrap/GOPATH destinations are absent/nonsymlink below own S; bootstrap and ancestors have no go.mod. Existing original5187-byte inventory/881 directories remain the immutable clone source.",
+    "Exact cp --archive --no-clobber command creates only absent destination; no helper/framework is added. Actual successful clone must be independently verified for all5187 names/types/sizes/hashes/directories and no original↔clone shared inode before download.",
+    "R2 only replaces planning max_seconds labels with non-operative planning_seconds and clarifies inherited sumdb files remain immutable. Only existing whole20-minute deadline/180-second reserve and resource guards are operative; no per-step180/600-second enforcement is claimed.",
+    "Only four inherited @v/list files may change with exact requested additions/old lines retained. All other inherited files, including every prior sumdb tile/lookup, must stay byte-exact. New version artifacts and new sumdb bookkeeping entries/GOPATH latest state are allowed only under complete exact post-inventory; unexpected old changes stop."
+  ],
+  "mandatory_execution": [
+    "Create a separately fresh immutable TWO-command native admission with existing17-GiB start disk/16-GiB remaining disk and MemAvailable,2-GiB sampled groupRSS,1-GiB full S/R growth,20-minute absolute deadline/180-second reserve,Go2 and unchanged397686 runner. Pin exact R2/readset/manifest/this review/current root/local modules/SDK/sourceDocs/original cache inventory and actual old producer logs/keepers.",
+    "Exclusively create bootstrap and new GOPATH under resolved own parent; keep original cache immutable and entire destination cache absent for cp. Root checks every source inventory path/safe directory before and after BOTH commands; all clone/cache/GOPATH/sumdb/publication growth is counted beneath S.",
+    "After clone exit0/guard null and full actual byte/type/membership/inode checks, freeze clone inventory and producer receipt/log/admission/deadline/baseline in exclusive keeper+external digest BEFORE network consumer. No unknown placeholder, mutated admission or whole-cache trust reset.",
+    "Network child uses exact owned new cache/GOPATH/public proxy+sumdb/private-selector/workspace/local-toolchain settings in frozen argv; this explicit public bootstrap is distinct from later offline qualification and grants no private/direct fallback or source execution.",
+    "Require exactly six unique error-free JSON records matching declared versions, each committed GoModSum equality, nonempty actual h1 body Sum plus successful standard Go checksum-database authentication/provenance. Validate exact safe owned Info/GoMod/Zip/Dir paths. No body equality to nonexistent committed pins is claimed.",
+    "Validate permitted @v/list supersession by exact line sets and pre/post hashes; every other old cloned file and the WHOLE original cache remain identical. New module payloads are confined to the six versions; new lookup/tile files and fresh owned latest state are fully inventoried. Record actual new bodies/sums/cache/GOPATH/inventories/producer lineage in a new keeper before any later consumer.",
+    "Any copy/hash/inode/type/sumdb/checksum/resource/time/nonzero/incomplete/unlisted-state failure stops and preserves this new partial cache under its original clock. Failed ceb20 offline prefix is never continued/retried; later actual offline integrity/current rail availability need independently reviewed fresh scope."
+  ],
+  "limits": {
+    "source_method_accepted": true,
+    "copy_or_Go_or_network_executed_by_reviewer": false,
+    "unknown_legacy_body_pins_fabricated": false,
+    "extracted_integrity_full_graph_or_build_pass": false,
+    "project_sharedcache_or_originalcache_mutation_authorized": false,
+    "GUI_Source7_currentauthority_release_approved": false,
+    "new_runner_framework_or_failed_clock_reset": false,
+    "source_worker_RSS": "unmeasured",
+    "review_operations": "Static current source/hash/path/anchor/local qualified Go API contract inspection only; no imports/copy/Go/network/build/test or source edits."
+  }
+}
