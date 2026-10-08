@@ -7,7 +7,7 @@ import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 export const STYLE_OPERATION = "plan-original-styles";
 export const NORMALIZED_STYLE_OPERATION = "plan-normalized-styles";
-export const PLANNER_SHA256 = "794cd9a1363280d5d62abbd6b7fbe5b4b7edbb061ec893b3664ac06c4d1d6713";
+export const PLANNER_SHA256 = "8121c917f20995afed34d2612c45543b965918a64f7a18b0af4463ca96bf872f";
 const MOTION_REGRESSION_INPUTS = {
   "frontend/testdata/motion-layout-shadow/runner.test.mjs": "9d1b7ef60605f46d04bd785e70d34dd53a82fd61bb1a4b7cf151b299cf6f63b1",
   "frontend/testdata/motion-layout-shadow/index.html": "4298902a46db2d2e4327577cb3fc542422875f960fd299c39a5f2f8dfe9bb125",
@@ -31,7 +31,7 @@ export function readNormalizedFrozenRenderer(readBytes) {
   const proofPath = "legacy/original-bundle.json", archive = "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz";
   const archiveSha = "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65", sidecar = archive + ".sha256";
   const reader = "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs", member = "assets/index-qYTSE3Vo.js";
-  assert.equal(hash(readBytes(reader)), "99c89243c9954206f04d699469983fe5b16adb4e86ba7223377f63ae1736f2e1", "Exact trusted archive reader required");
+  assert.equal(hash(readBytes(reader)), "0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300", "Exact trusted archive reader required");
   const proofBytes = readBytes(proofPath); assert.equal(hash(proofBytes), "5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984", "Exact original30 proof required");
   const proof = JSON.parse(proofBytes); assert.equal(proof.schema, 1); assert.equal(proof.archive, archive); assert.equal(proof.sha256, archiveSha); assert.equal(proof.files.length, 30);
   const sidecarBytes = readBytes(sidecar); assert.equal(hash(sidecarBytes), "0576814384f4013d8c628778a1e57b0a0e1c021642b41cc87253f907fe9d67d5");
@@ -247,8 +247,10 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
     };
     if (normalized) {
       Object.assign(fixed, {
-        "frontend/package.json": "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a",
-        "frontend/package-lock.json": "78ba37afe99d18ebcb6a4be54eaab28d2b7084d0a2cc32ae476c0a20ca7224a2",
+        "frontend/package.json": "844c64659514a174ad033fe6ae2e00e47c9a6788fafac765d8b446d4047ef90e",
+        "frontend/package-lock.json": "4a5eafe6bd10d68dd0cd59cac001eb040cfafc6abbd90f21e97eb3d07560a374",
+        "frontend/tsconfig.json": "c71b02d67f1b304ffd49edbcc5a5dc4a57719176c9d1f83aabef9c5d36d17617",
+        "frontend/tsconfig.tools.json": "3604ec127a7a5fbadbb007409f949230b57cd0ac937fd0e4b1aa7a1cd9ad7754",
         "frontend/scripts/compiler-runtime.mjs": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12",
         "frontend/src/components/CspElements.tsx": "f1c5478b8d243223d16baedb9fc6f0ced38f073377e0d7393e252b5a598b32c3",
       });
@@ -259,7 +261,7 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
         return fs.readFileSync(sourcePath(root, file));
       });
       assert.deepEqual(report.bindings.frozen_renderer, frozen.binding, "True archive member binding required");
-      for (const file of ["versions.lock.json", "frontend/src/screens/Home.tsx", "frontend/src/screens/Perechi.tsx",
+      for (const file of ["frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs", "versions.lock.json", "frontend/src/screens/Home.tsx", "frontend/src/screens/Perechi.tsx",
         "frontend/node_modules/@typescript/typescript6/package.json", "frontend/node_modules/@typescript/old/package.json",
         "frontend/node_modules/motion/package.json", "frontend/node_modules/framer-motion/package.json", "frontend/node_modules/motion-dom/package.json"])
         assert.ok(Object.hasOwn(inputs, file), `Required normalized input missing: ${file}`);
@@ -348,7 +350,7 @@ function validateNativeEvidence(root, report, inputs, wanted) {
       assert.equal(item.sha256, proposed.get(source)?.after_sha256 ?? inputs[source].sha256, "Private graph changed an unproposed input");
     }
   }
-  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", ...proposed.keys()])
+  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs", ...proposed.keys()])
     assert.ok(wanted.has(`${relative}/native/candidate-graph/${file}`), `Owning config or candidate absent from native graph: ${file}`);
   function requireGraph(relative, declarationsOnly = false) {
     const file = sourcePath(root, relative), stat = fs.lstatSync(file);

@@ -61,6 +61,10 @@ const formatFiles = [
   "go-backend/internal/httpapi/gui_build.go",
   "go-backend/internal/httpapi/gui_build_test.go",
   "go-backend/internal/httpapi/gui_kit_assets_contract_test.go",
+  "go-backend/cmd/cat-doc-check/main.go",
+  "go-backend/internal/doccheck/check.go",
+  "go-backend/internal/doccheck/inventory.go",
+  "go-backend/internal/doccheck/inventory_test.go",
 ];
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 function confined(root, relative, missing = false) {
@@ -76,10 +80,11 @@ function confined(root, relative, missing = false) {
   }
   return cursor;
 }
-function admit(hook) {
-  hook.assert("Actual owning Linux GEN context", () => {
+function admit(hook, targets = ["gen"]) {
+  hook.assert("Actual owning Linux native check context", () => {
     const ctx = hook.context;
-    if (process.platform !== "linux" || process.cwd() !== "/work" || ctx.root !== "/work" || ctx.target !== "gen") return false;
+    if (process.platform !== "linux" || process.cwd() !== "/work" || ctx.root !== "/work" || !targets.includes(ctx.target)) return false;
+    const prefix = `.gate/${ctx.target}`;
     const read = (relative) => fs.readFileSync(confined(ctx.root, relative));
     const own = (value, fields) => value && typeof value === "object" && !Array.isArray(value)
       && Object.keys(value).length === fields.length && fields.every((field) => Object.hasOwn(value, field));
@@ -87,12 +92,12 @@ function admit(hook) {
     const hex = /^[a-f0-9]{64}$/;
     const descriptorBytes = read(".gate/wrapper-current.json"), current = JSON.parse(descriptorBytes);
     if (!own(current, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256"])
-      || current.schema !== 1 || current.target !== "gen" || !uuid.test(current.invocation) || !uuid.test(ctx.invocation)
+      || current.schema !== 1 || current.target !== ctx.target || !uuid.test(current.invocation) || !uuid.test(ctx.invocation)
       || current.sha !== ctx.sha || current.sha !== process.env.GATE_SHA
       || current.tree_sha256 !== ctx.tree_sha256 || current.tree_sha256 !== process.env.GATE_TREE_SHA256
       || current.toolchain_digest !== ctx.toolchain_digest || current.toolchain_digest !== process.env.TOOLCHAIN_DIGEST
-      || current.config_path !== ".gate/gen/wrapper-kit-config.json" || !hex.test(current.config_sha256)
-      || !hex.test(current.config_file_sha256) || !read(".gate/gen/wrapper-current.json").equals(descriptorBytes)) return false;
+      || current.config_path !== `${prefix}/wrapper-kit-config.json` || !hex.test(current.config_sha256)
+      || !hex.test(current.config_file_sha256) || !read(`${prefix}/wrapper-current.json`).equals(descriptorBytes)) return false;
     const capturedBytes = read(current.config_path), captured = JSON.parse(capturedBytes);
     if (hash(capturedBytes) !== current.config_file_sha256
       || !own(captured, ["schema", "target", "sha", "tree_sha256", "toolchain_digest", "config", "config_sha256", "command"])
@@ -103,13 +108,13 @@ function admit(hook) {
       || captured.command.command !== "task" || JSON.stringify(captured.command.args) !== '["--silent","repo:kit-config"]'
       || captured.command.exit_code !== 0 || !Number.isInteger(captured.command.duration_ms) || captured.command.duration_ms < 0
       || !hex.test(captured.command.stdout_sha256) || captured.command.stderr_sha256 !== hash("")) return false;
-    const bootstrap = JSON.parse(read(".gate/gen/bootstrap-execution.json"));
+    const bootstrap = JSON.parse(read(`${prefix}/bootstrap-execution.json`));
     if (!own(bootstrap, ["schema", "target", "invocation", "sha", "tree_sha256", "toolchain_digest", "started", "config", "config_sha256",
       "wrapper_target", "wrapper_config", "wrapper_config_sha256", "wrapper_invocation", "wrapper_descriptor", "wrapper_descriptor_sha256", "actions", "artifacts", "finished"])
-      || bootstrap.schema !== 1 || bootstrap.target !== "gen" || bootstrap.invocation !== ctx.invocation
+      || bootstrap.schema !== 1 || bootstrap.target !== ctx.target || bootstrap.invocation !== ctx.invocation
       || ["sha", "tree_sha256", "toolchain_digest"].some((key) => bootstrap[key] !== ctx[key])
       || JSON.stringify(bootstrap.config) !== JSON.stringify(captured.config) || bootstrap.config_sha256 !== current.config_sha256
-      || bootstrap.wrapper_target !== "gen" || bootstrap.wrapper_invocation !== current.invocation
+      || bootstrap.wrapper_target !== ctx.target || bootstrap.wrapper_invocation !== current.invocation
       || bootstrap.wrapper_config !== current.config_path || bootstrap.wrapper_config_sha256 !== hash(capturedBytes)
       || bootstrap.wrapper_descriptor !== ".gate/wrapper-current.json" || bootstrap.wrapper_descriptor_sha256 !== hash(descriptorBytes)
       || !Number.isFinite(Date.parse(ctx.started)) || !Number.isFinite(Date.parse(bootstrap.started)) || !Number.isFinite(Date.parse(bootstrap.finished))
@@ -120,7 +125,7 @@ function admit(hook) {
     const listed = new Map();
     for (const artifact of bootstrap.artifacts) {
       const match = /^(.+) sha256:([a-f0-9]{64})$/.exec(artifact);
-      if (!match || listed.has(match[1]) || !match[1].startsWith(`.gate/gen/logs/${ctx.invocation}-bootstrap-`)
+      if (!match || listed.has(match[1]) || !match[1].startsWith(`${prefix}/logs/${ctx.invocation}-bootstrap-`)
         || hash(read(match[1])) !== match[2]) return false;
       listed.set(match[1], match[2]);
     }
@@ -149,7 +154,39 @@ function bound(hook) {
     invocation: hook.context.invocation, toolchain_digest: process.env.TOOLCHAIN_DIGEST };
 }
 
+export function runDoccheckSourcePreflight(hook) {
+  hook.check("cat-doccheck-source-contracts", () => {
+    admit(hook, ["gen", "unit", "full"]);
+    const args = ["test", "-race", "-json", "-count=1", "./internal/doccheck"];
+    const packageName = `${module}/internal/doccheck`;
+    let output = "", error, commandFailure;
+    try { output = hook.run("go", args, path.join(hook.context.root, "go-backend"), { CGO_ENABLED: "1" }); }
+    catch (failure) { output = failure.stdout ?? ""; error = failure.message; commandFailure = failure; }
+    const action = hook.actions.findLast((item) => item.kind === "command" && item.check === "cat-doccheck-source-contracts");
+    const events = [], malformed = [];
+    for (const [index, line] of output.split("\n").entries()) {
+      if (!line.trim()) continue;
+      try { events.push(JSON.parse(line)); } catch { malformed.push(index + 1); }
+    }
+    const observed = [...new Set(events.filter((event) => event.Test && !event.Test.includes("/")).map((event) => event.Test))].sort((left, right) => left < right ? -1 : left > right ? 1 : 0).map((test) => ({ test,
+      run: events.filter((event) => event.Package === packageName && event.Test === test && event.Action === "run").length,
+      pass: events.filter((event) => event.Package === packageName && event.Test === test && event.Action === "pass").length }));
+    const refused = events.filter((event) => ["skip", "fail"].includes(event.Action));
+    const unexpected = events.filter((event) => event.Package !== packageName);
+    const packagePasses = events.filter((event) => event.Package === packageName && !event.Test && event.Action === "pass").length;
+    const pass = !error && action?.exit_code === 0 && malformed.length === 0 && refused.length === 0 && unexpected.length === 0
+      && packagePasses === 1 && observed.length > 0 && observed.every((item) => item.run === 1 && item.pass === 1);
+    save(hook, `.gate/${hook.context.target}/doccheck-contracts/report.json`, JSON.stringify({ schema: 1, status: pass ? "pass" : "fail",
+      scope: "actual-doccheck-package-and-inventory-causal-tests-not-app-qualification", ...bound(hook), command: "go", args,
+      execution: action, observed_top_test_count: observed.length, observed, package_passes: packagePasses,
+      refused, unexpected, malformed_lines: malformed, ...(error ? { error } : {}) }, null, 2) + "\n");
+    if (commandFailure) throw commandFailure;
+    hook.assert("Actual doccheck package and observed top tests pass; zero skips/failures", () => pass);
+  });
+}
+
 export function runNativeSourcePreflight(hook) {
+  runDoccheckSourcePreflight(hook);
   hook.check("cat-native-source-contracts", () => {
     admit(hook);
     const expected = Object.entries(selected).flatMap(([scope, tests]) => tests.map((test) => ({ package: `${module}/${scope}`, test })));
@@ -204,9 +241,9 @@ export function runNativeSourcePreflight(hook) {
           ...(error ? { error } : {}) });
       } catch (failure) { rows.push({ file: relative, error: failure.message, source_unchanged: false, format_unchanged: false }); }
     }
-    const pass = rows.length === 20 && rows.every((row) => !row.error && row.source_unchanged && row.format_unchanged && row.execution?.exit_code === 0);
+    const pass = rows.length === 24 && rows.every((row) => !row.error && row.source_unchanged && row.format_unchanged && row.execution?.exit_code === 0);
     save(hook, ".gate/gen/native-format/report.json", JSON.stringify({ schema: 1, status: pass ? "pass" : "fail",
-      scope: "actual-native-formatter-diagnostic-source-never-rewritten", ...bound(hook), files: rows }, null, 2) + "\n");
-    hook.assert("All twenty actual gofmt outputs equal unchanged owning source", () => pass);
+      scope: "actual-native-formatter-diagnostic-source-never-rewritten", ...bound(hook), expected_file_count: 24, files: rows }, null, 2) + "\n");
+    hook.assert("All twenty-four actual gofmt outputs equal unchanged owning source", () => pass);
   });
 }

@@ -326,10 +326,14 @@ function publicationFixture(t, label, body) {
   assert.ok(closed(command, ["command", "args", "exit_code", "duration_ms", "stdout_sha256", "stderr_sha256"]));
   assert.equal(command.command, "task"); assert.deepEqual(command.args, ["--silent", "repo:kit-config"]); assert.equal(command.exit_code, 0);
   assert.ok(Number.isInteger(command.duration_ms) && command.duration_ms >= 0); assert.match(command.stdout_sha256, hex); assert.match(command.stderr_sha256, hex);
-  for (const name of [".gate", ".gate/_temp", prefix.slice(0, -1)]) {
+  for (const name of [".gate", prefix.slice(0, -1)]) {
     const file = regular(name, true), stat = fs.lstatSync(file);
-    assert.equal(stat.uid, uid, "Existing private/evidence parents must belong to the real runner"); assert.equal(stat.mode & 0o022, 0, "Shared writable parent refused");
+    assert.equal(stat.uid, uid, "Wrapper evidence ancestors must belong to the real runner");
+    assert.ok([0o755, 0o775].includes(stat.mode & 0o777), "Unexpected ordinary wrapper ancestor mode");
   }
+  const privateParent = fs.lstatSync(regular(".gate/_temp", true));
+  assert.equal(privateParent.uid, uid, "Private staging must belong to the real runner");
+  assert.equal(privateParent.mode & 0o777, 0o700, "Private staging must be owner-only");
   for (const name of [".gate/wrapper-current.json", prefix + "wrapper-current.json", actual.config_path]) {
     const stat = fs.lstatSync(regular(name)); assert.equal(stat.uid, uid); assert.equal(stat.mode & 0o222, 0, "Real wrapper-owned immutable receipt required");
   }
@@ -367,7 +371,7 @@ function publicationFixture(t, label, body) {
   }
   assert.equal(used.size, listed.size); assert.equal(listed.size, bootstrap.actions.length * 2); assert.ok(configCommands > 0);
   const sourceInputs = [
-    ["scripts/gui-style-plan.mjs", "794cd9a1363280d5d62abbd6b7fbe5b4b7edbb061ec893b3664ac06c4d1d6713"],
+    ["scripts/gui-style-plan.mjs", "8121c917f20995afed34d2612c45543b965918a64f7a18b0af4463ca96bf872f"],
     ["frontend/tests/fixtures/gui-style-plan.json", "24bdcb858dcc74878e99aca0de338bf335cf3b1b3c14e8b68820fca1be9ca8b9"],
     ["frontend/src/components/cssUnits.ts", "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873"],
     ["frontend/src/components/CspStyle.ts", "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320"],

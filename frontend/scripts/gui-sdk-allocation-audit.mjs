@@ -1,10 +1,9 @@
 import assert from "node:assert/strict";
-import { createRequire } from "node:module";
 import { randomUUID } from "node:crypto";
 import * as fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { rolldown } from "rolldown";
+import { build } from "vite";
 import {
   SDK_ALLOCATION_BINDING, SDK_UNUSED_ALLOCATIONS, allocationHash,
   annotateUnusedSdkAllocations, assertSdkAllocationBinding, boundSdkAllocationInputs,
@@ -45,18 +44,7 @@ try {
   observations.tamper_refusals = 4;
   observations.source = { before: retain("sdk-original.js", inputs.uiSource),
     after: retain("sdk-annotated.js", annotated), comments_only_restoration: true };
-  const require = createRequire(path.join(frontend, "package.json"));
-  const react = require(inputs.reactProductionPath);
-  let renders = 0;
-  const render = () => { renders++; };
-  const probe = react.forwardRef(render);
-  assert.equal(renders, 0);
-  assert.equal(probe.render, render);
-  assert.equal(probe.$$typeof, Symbol.for("react.forward_ref"));
-  assert.deepEqual(Object.keys(probe).sort(), ["$$typeof", "render"]);
-  observations.production_forward_ref = { renderer_invocations: renders,
-    renderer_identity_preserved: true, own_keys: Object.keys(probe).sort(),
-    source: retain("react-production.cjs", inputs.reactProductionSource) };
+  observations.production_forward_ref = { source: retain("react-production.cjs", inputs.reactProductionSource) };
   observations.packages = inputs.packages.map((pkg) => ({ name: pkg.name, version: pkg.version,
     manifest: retain(`${pkg.name.replaceAll("/", "-").replaceAll("@", "")}-package.json`, fs.readFileSync(pkg.manifestPath)) }));
   const rolldownPath = path.join(frontend, "node_modules/rolldown/package.json");
@@ -65,6 +53,13 @@ try {
   assert.equal(rolldownPackage.name, "rolldown");
   assert.equal(rolldownPackage.version, lock.packages["node_modules/rolldown"].version);
   assert.equal(fs.realpathSync(path.dirname(rolldownPath)), path.dirname(rolldownPath));
+  const viteBytes = fs.readFileSync(path.join(frontend, "node_modules/vite/package.json"));
+  const vitePackage = JSON.parse(viteBytes);
+  assert.equal(vitePackage.name, "vite");
+  assert.equal(vitePackage.version, lock.packages["node_modules/vite"].version);
+  assert.equal(JSON.parse(fs.readFileSync(path.join(frontend, "package.json"))).devDependencies.vite, vitePackage.version);
+  assert.ok(vitePackage.dependencies.rolldown, "Owning Vite must declare the observed engine");
+  observations.vite = { version: vitePackage.version, manifest: retain("vite-package.json", viteBytes) };
   observations.rolldown = { version: rolldownPackage.version, manifest: retain("rolldown-package.json", rolldownBytes) };
   const jsxPath = path.join(frontend, "node_modules/react/cjs/react-jsx-runtime.production.js");
   assert.equal(fs.realpathSync(jsxPath), jsxPath);
@@ -74,16 +69,21 @@ try {
   // React implementation; it never replaces renderer bodies or SDK exports.
   const tracerSource = `import React from ${JSON.stringify(inputs.reactProductionPath)};\n`
     + `export * from ${JSON.stringify(inputs.reactProductionPath)};\n`
+    + "let rendererInvocations = 0;\nconst probeRender = () => { rendererInvocations += 1; };\n"
+    + "const probe = React.forwardRef(probeRender);\n"
+    + "if (rendererInvocations !== 0 || probe.render !== probeRender || probe.$$typeof !== Symbol.for('react.forward_ref') || JSON.stringify(Object.keys(probe).sort()) !== JSON.stringify(['$$typeof', 'render'])) throw new Error('Actual production forwardRef probe differs');\n"
+    + "export const productionProbe = { renderer_invocations: rendererInvocations, renderer_identity_preserved: probe.render === probeRender, own_keys: Object.keys(probe).sort() };\n"
     + "export const allocations = [];\nexport function forwardRef(render) {\n"
     + "  const result = React.forwardRef(render);\n"
-    + "  allocations.push({ source: render.toString(), renderer_identity_preserved: result.render === render });\n"
+    + "  if (result.render !== render || result.$$typeof !== Symbol.for('react.forward_ref') || JSON.stringify(Object.keys(result).sort()) !== JSON.stringify(['$$typeof', 'render'])) throw new Error('Actual production forwardRef result differs');\n"
+    + "  allocations.push({ source: render.toString(), renderer_identity_preserved: result.render === render, own_keys: Object.keys(result).sort() });\n"
     + "  return result;\n}\n";
   observations.tracer = retain("react-allocation-tracer.mjs", tracerSource);
   const entry = "\0cat-sdk-allocation-audit-entry", sourceId = "\0cat-sdk-allocation-audit-source";
   const bundles = {};
   for (const [label, source] of [["before", inputs.uiSource], ["after", annotated]]) {
     const logs = [];
-    const bundle = await rolldown({ input: entry, onLog(level, log) { logs.push({ level, message: log.message }); },
+    const generated = await build({ root: frontend, configFile: false, logLevel: "silent",
       plugins: [{ name: "cat-sdk-allocation-audit-input", resolveId(id) {
         if (id === entry || id === sourceId) return id;
         if (id === "react") return { id: tracerPath, external: true };
@@ -94,17 +94,20 @@ try {
         if (id === sourceId) return source;
         return null;
       } }],
+      build: { write: false, emptyOutDir: false, minify: false,
+        lib: { entry, formats: ["es"], fileName: label },
+        rolldownOptions: { input: entry, onLog(level, log) { logs.push({ level, message: log.message }); }, output: { format: "es", minify: false } },
+      },
     });
-    try {
-      const generated = await bundle.generate({ format: "es", minify: false });
-      assert.equal(generated.output.length, 1, "Isolated allocation bundle must be one actual chunk");
-      assert.equal(generated.output[0].type, "chunk");
-      assert.equal(logs.length, 0, "Isolated allocation bundle emitted diagnostics");
-      bundles[label] = { code: generated.output[0].code,
-        output: retain(`${label}.mjs`, generated.output[0].code), logs: retain(`${label}.logs.json`, JSON.stringify(logs) + "\n") };
-    } finally { await bundle.close(); }
+    const outputs = Array.isArray(generated) ? generated.flatMap((item) => item.output) : generated.output;
+    assert.equal(outputs.length, 1, "Isolated allocation bundle must be one actual chunk");
+    assert.equal(outputs[0].type, "chunk");
+    assert.equal(logs.length, 0, "Isolated allocation bundle emitted diagnostics");
+    bundles[label] = { code: outputs[0].code,
+      output: retain(`${label}.mjs`, outputs[0].code), logs: retain(`${label}.logs.json`, JSON.stringify(logs) + "\n") };
   }
   const tracer = await import(pathToFileURL(tracerPath).href);
+  observations.production_forward_ref = { ...observations.production_forward_ref, ...tracer.productionProbe };
   const exportsByLabel = {}, traces = {};
   for (const label of ["before", "after"]) {
     tracer.allocations.length = 0;
@@ -147,7 +150,7 @@ try {
   failure = error instanceof Error ? error.message : String(error);
 }
 const report = { schema: 1, check: "cat-sdk-allocation-causality", status: failed ? "fail" : "pass",
-  scope: "isolated actual Rolldown bundles and bound production React allocations",
+  scope: "isolated owning Vite bundles and bound production React allocations",
   application_qualified: false, startup_budget_qualified: false, full_game_replay_qualified: false,
   sha: context.sha, tree_sha256: context.tree_sha256, toolchain_digest: context.toolchain_digest,
   invocation: context.invocation, observations, ...(failed ? { failure } : {}), artifacts };

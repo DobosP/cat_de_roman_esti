@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.1",
   "type": "module",
-  "description": "Animated semantic-hop game SPA (cat_de_roman_esti) — React + Vite + TypeScript.",
+  "description": "Animated semantic-hop game SPA (cat_de_roman_esti) \u2014 React + Vite + TypeScript.",
   "scripts": {
     "dev": "vite",
     "build": "node scripts/native-tsc.mjs --noEmit && vite build && npm run check:bundle",
@@ -15,8 +15,8 @@
     "lint": "node scripts/gui-lint.mjs"
   },
   "dependencies": {
-    "@fontsource-variable/fredoka": "^5.2.10",
-    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/fredoka": "5.2.10",
+    "@fontsource-variable/inter": "5.2.8",
     "@roedu/ui": "file:vendor/roedu-ui-0.3.0.tgz",
     "react": "19.2.7",
     "react-dom": "19.2.7",
@@ -35,7 +35,9 @@
     "oxlint": "1.87.0",
     "oxlint-tsgolint": "7.0.2003",
     "@ast-grep/cli": "0.45.3",
-    "@typescript/typescript6": "6.0.2"
+    "@typescript/typescript6": "6.0.2",
+    "@types/node": "26.6.4",
+    "preact-iso": "2.12.2"
   },
   "engines": {
     "node": ">=26.10.0",

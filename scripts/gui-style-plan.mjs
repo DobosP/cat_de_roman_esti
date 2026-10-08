@@ -29,9 +29,10 @@ export const ORIGINAL_OWNERS = Object.freeze({
   "frontend/src/screens/Conexiuni.tsx": { opacity: 0.55, className: "csp-motion-opacity-55", source_sha256: "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338" },
 });
 export const NORMALIZED_INPUTS = Object.freeze({
-  "frontend/package.json": "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a",
-  "frontend/package-lock.json": "78ba37afe99d18ebcb6a4be54eaab28d2b7084d0a2cc32ae476c0a20ca7224a2",
-  "frontend/tsconfig.json": "81dbe0e79cad7363ee3e83e4683cb5f382560608a592b91b5f0f903f2385b963",
+  "frontend/package.json": "844c64659514a174ad033fe6ae2e00e47c9a6788fafac765d8b446d4047ef90e",
+  "frontend/package-lock.json": "4a5eafe6bd10d68dd0cd59cac001eb040cfafc6abbd90f21e97eb3d07560a374",
+  "frontend/tsconfig.json": "c71b02d67f1b304ffd49edbcc5a5dc4a57719176c9d1f83aabef9c5d36d17617",
+  "frontend/tsconfig.tools.json": "3604ec127a7a5fbadbb007409f949230b57cd0ac937fd0e4b1aa7a1cd9ad7754",
   "frontend/scripts/compiler-runtime.mjs": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12",
 });
 
@@ -423,7 +424,7 @@ function candidateProject(root, owned, files, bytes) {
     else { assert.ok(stat.isFile(), "Private compiler graph cannot contain aliases or nonregular files"); if (!declarationsOnly || /\.(?:json|[cm]?tsx?)$/.test(relative)) copy(relative); }
   }
   walk("frontend/src"); walk("frontend/node_modules", true);
-  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts"]) copy(file);
+  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs"]) copy(file);
   assert.ok(files.every((file) => copied.has(file.file)), "All candidate sources must enter the native compiler graph");
   return safePath(root, `${graph}/frontend/tsconfig.json`);
 }
@@ -433,7 +434,8 @@ function bindNativeProjectInputs(root, bytes) {
     if (stat.isDirectory()) for (const name of fs.readdirSync(file).sort()) { if (declarationsOnly && name === ".bin") continue; walk(`${relative}/${name}`, declarationsOnly); }
     else { assert.ok(stat.isFile(), "Native source/declaration/package input must be regular"); if (!declarationsOnly || /\.(?:json|[cm]?tsx?)$/.test(relative)) bytes(relative); }
   }
-  walk("frontend/src"); walk("frontend/node_modules", true); bytes("frontend/vite.config.ts");
+  walk("frontend/src"); walk("frontend/node_modules", true);
+  for (const file of ["frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs"]) bytes(file);
 }
 
 export function main(profile = "original") {
@@ -491,7 +493,7 @@ export function main(profile = "original") {
     }));
     if (profile === "normalized") bindings.current_owners = owners;
     const configBytes = bytes("frontend/tsconfig.json");
-    assert.equal(hash(configBytes), "81dbe0e79cad7363ee3e83e4683cb5f382560608a592b91b5f0f903f2385b963", "Exact original semantic config bytes required");
+    assert.equal(hash(configBytes), profile === "normalized" ? NORMALIZED_INPUTS["frontend/tsconfig.json"] : "81dbe0e79cad7363ee3e83e4683cb5f382560608a592b91b5f0f903f2385b963", "Exact owning semantic config bytes required");
     const configFile = path.join(root, "frontend/tsconfig.json"), read = ts.readConfigFile(configFile, () => configBytes.toString());
     const parsed = read.error ? null : ts.parseJsonConfigFileContent(read.config, ts.sys, path.join(root, "frontend"));
     if (read.error || parsed.errors.length) return publishStylePlan(root, { ...empty, ...(profile === "normalized" ? { manual: [{ reason: "AST parser cannot resolve the owning config", parser_diagnostics: diagnostics(read.error ? [read.error] : parsed.errors) }] } : { diagnostics: diagnostics(read.error ? [read.error] : parsed.errors) }) }, bindings, owned);

@@ -78,8 +78,11 @@ func guarded(lines []string, i int, p *regexp.Regexp) bool {
 	}
 	return false
 }
+func emptyReport() Report {
+	return Report{DeadLinks: []string{}, StaleTerms: []string{}, RetiredVerbs: []string{}, Orphans: []string{}, Budgets: []string{}}
+}
 func Check(root string) (Report, error) {
-	r := Report{DeadLinks: []string{}, StaleTerms: []string{}, RetiredVerbs: []string{}, Orphans: []string{}, Budgets: []string{}}
+	r := emptyReport()
 	root, err := filepath.Abs(root)
 	if err != nil {
 		return r, err
@@ -88,12 +91,19 @@ func Check(root string) (Report, error) {
 	if err != nil {
 		return r, fmt.Errorf("tracked Markdown inventory unavailable")
 	}
+	paths := []string{}
+	for _, f := range strings.Split(string(raw), "\x00") {
+		if f != "" {
+			paths = append(paths, f)
+		}
+	}
+	return checkFiles(root, paths)
+}
+func checkFiles(root string, paths []string) (Report, error) {
+	r := emptyReport()
 	files := []string{}
 	texts := map[string]string{}
-	for _, f := range strings.Split(string(raw), "\x00") {
-		if f == "" {
-			continue
-		}
+	for _, f := range paths {
 		data, err := os.ReadFile(filepath.Join(root, f))
 		if err != nil {
 			return r, err

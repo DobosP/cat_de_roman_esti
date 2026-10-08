@@ -252,7 +252,7 @@ test("a data-only refusal retains its actual fresh files without a converted pat
   const item = fixture(t), proposal = failedProposal(item);
   const checked = validatePlannerOutput(item.root, proposal.summary, proposal.bound);
   assert.equal(checked.report.status, "fail"); assert.equal(checked.report.converted, null);
-  assert.deepEqual(checked.artifacts.sort(), [`${proposal.relative}/analysis.json`, proposal.report.report_json].sort());
+  assert.deepEqual(checked.artifacts.sort((left, right) => left < right ? -1 : left > right ? 1 : 0), [`${proposal.relative}/analysis.json`, proposal.report.report_json].sort((left, right) => left < right ? -1 : left > right ? 1 : 0));
 });
 const outputMutations = [
   ["stdout identity", (proposal) => { proposal.summary.bindings.sha = "d".repeat(40); }],
@@ -279,7 +279,7 @@ function proposalBytesFixture(item) {
   // NON-RELEASE data, never passed to the actual hook as successful execution.
   // The compiler/renderer markers are never imported or executed.
   const bound = identity(item), id = randomUUID(), relative = `.gate/gen/styles/runs/style-plan-${id}`;
-  const copied = ["scripts/gui-style-plan.mjs", "frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json",
+  const copied = ["scripts/gui-style-plan.mjs", "frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs",
     "frontend/src/components/cssUnits.ts", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx", "frontend/src/screens/Alchimie.tsx", "frontend/src/screens/Conexiuni.tsx",
     "frontend/src/screens/Home.tsx", "frontend/src/screens/Perechi.tsx", "frontend/scripts/compiler-runtime.mjs", "frontend/vite.config.ts", "versions.lock.json",
     "frontend/vendor/roedu-ui-0.3.0.tgz", "legacy/original-bundle.json", "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs",
@@ -329,7 +329,7 @@ function proposalBytesFixture(item) {
   const graph = `${relative}/native/candidate-graph`;
   function graphCopy(name) { const bytes = name === file ? after : fs.readFileSync(sourcePath(item.root, name)); write(item.root, `${graph}/${name}`, bytes); }
   walk("frontend/src", graphCopy); walk("frontend/node_modules", (name) => { if (/\.(?:json|[cm]?tsx?)$/.test(name)) graphCopy(name); });
-  for (const name of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts"]) graphCopy(name);
+  for (const name of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs"]) graphCopy(name);
   bindings.native_checks = ["before", "candidate"].map((role) => {
     const record = { role, compiler: "typescript@7.0.2 native CLI", command: executable, args: ["--project", role === "before" ? sourcePath(item.root, "frontend/tsconfig.json") : sourcePath(item.root, `${graph}/frontend/tsconfig.json`), "--noEmit", "--pretty", "false"], cwd: "frontend", started: "2000-01-01T00:00:00.000Z", finished: "2000-01-01T00:00:00.000Z", exit_code: 0 };
     for (const stream of ["stdout", "stderr"]) { const name = `${relative}/native/${role}/${stream}.log`; write(item.root, name, ""); record[stream] = { file: name, bytes: 0, sha256: sha("") }; }
@@ -396,7 +396,18 @@ test("real createHook records a controlled unit-fixture refusal and retained evi
   const item = fixture(t), helper = fs.readFileSync(sourcePath(repository, "scripts/gui-style-operation.mjs"));
   write(item.root, "scripts/gui-style-operation.mjs", helper);
   for (const file of ["scripts/gui-style-plan.mjs", "scripts/gui-repo-hook.mjs", "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs", "frontend/src/components/cssUnits.ts", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx"]) {
-    write(item.root, file, fs.readFileSync(sourcePath(repository, file)));
+    let bytes = fs.readFileSync(sourcePath(repository, file));
+    if (file === "frontend/src/components/CspElements.tsx") {
+      // This one controlled original-profile fixture needs its exact original
+      // adapter. Derive it only by restoring the reviewed Motion import; other
+      // normalized fixtures continue to copy the real current adapter bytes.
+      assert.equal(sha(bytes), "f1c5478b8d243223d16baedb9fc6f0ced38f073377e0d7393e252b5a598b32c3");
+      const text = bytes.toString("utf8"); assert.deepEqual(Buffer.from(text), bytes);
+      const currentImport = 'from "motion/react"'; assert.equal(text.split(currentImport).length - 1, 1);
+      bytes = Buffer.from(text.replace(currentImport, 'from "framer-motion"'));
+      assert.equal(sha(bytes), "27cf738b5af8a4e4eefab89b513d941261b61d0d41813eca09618ea8a8ef881d");
+    }
+    write(item.root, file, bytes);
   }
   assert.equal(sha(fs.readFileSync(sourcePath(item.root, "scripts/gui-style-plan.mjs"))), PLANNER_SHA256);
   const operation = await import(pathToFileURL(sourcePath(item.root, "scripts/gui-style-operation.mjs")).href);
