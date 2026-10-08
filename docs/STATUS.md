@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-08 — GUI clean b63 original GEN: Node2/build/sealed16/78/receipt PASS;900 discovered, exact+6 reviewed. Complete900 NOTRUN. Prior894=883PASS/11FAIL,0skip/retry; original654PASS. Reviewed focus/helper fixes await full execution. [Proof](reviews/gui-original-prerequisites/README.md). Original114111gz>40960; M0/M1/device/UI adoption unqualified.
+Last verified: 2026-10-08 — GUI clean b63 original GEN: Node2/build/sealed16/78/receipt PASS;900 discovered, exact+6 reviewed. Complete900 NOTRUN. Prior894=883PASS/11FAIL,0skip/retry; original654PASS. Reviewed focus/helper fixes await full execution. [Proof](reviews/gui-original-prerequisites/README.md). Original114111gz>40960; M0/M1/device/UI adoption unqualified. Synthetic public Go-kit asset/nonce test authored NOT RUN; parent SDK staging/tidy/tests pending.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
