@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-08 — GUI clean45ed original900/900 once,0skip/retry/flaky/error; Node2 + sealed16/78 PASS. Exact [proof](reviews/gui-original-react/README.md) committed; fresh930 original30freeze PASS, archive742bb111 unchanged. SDK0.3 graph/source static intact; Parent staged-react source contract set; public Go SDK assets/nonce test authored NOT RUN, actual stage/sync/trust next. Original114111gz>40960; M0/M1/canonicalfull/device/UI adoption unqualified.
+Last verified: 2026-10-08 — Original900/16-78 + original30 retained; normalizeddeps3 PASS(nativeTS7/API6/Motion14/Oxlint1.87). Fresh styleGEN PASS160sites/15files/native7/Motion14; candidateaccepted/unapplied(resultfbe9ce45/capture452f1189). Go-only scope refused missingmandatorynpm-lock(captured7c533f20); unsupportedextensionremoved, existingbaseline-quality-only selected. [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md);40KiB/M0/M1/KIT_BUMP/full/device/UI activation unearned.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 

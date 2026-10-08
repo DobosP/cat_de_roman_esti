@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import ts from "typescript";
+import ts from "@typescript/typescript6";
 
 const SCORE_KEY = "cat_wordgame_scores_v1";
 const INVALID_IMPORT = "Fișierul ales nu este un export de istoric valid.";

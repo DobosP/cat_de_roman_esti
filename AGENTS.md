@@ -6,7 +6,7 @@
   SPA (`frontend/`) over the bundled Romanian KG build; `cat_de_roman_esti/web/` is an offline oracle
   `cat_de_roman_esti/fixtures/kg_sample.json` (data.py:27); `./cat-de-roman` builds the native
   original terminal hop game. Word-game/session behavior stays bounded, deterministic, test-covered.
-- Main server: Go (`go-backend/`, qualified 1.27.1), native pgx/shared auth; Node 24 builds the SPA.
+- Main server: Go (`go-backend/`, qualified 1.27.1), native pgx/shared auth; selected Node26 builds the SPA (ADR-0184).
   Go builds content/operators/terminal/tools with pinned Unicode 15; Python/Rust remain optional
   independent references. Django web/accounts are offline oracles. ADR-0162/0163/0165/0166.
 - Status source: `docs/STATUS.md`.
@@ -53,7 +53,7 @@
   `go -C go-backend run ./cmd/cat-content export --root .. --check`; operator rails: agent-testing.
 - Native lint: `go -C go-backend vet ./...`; optional oracle Ruff · Whitespace: `git diff --check`
 - Frontend, only when `frontend/` changes: `cd frontend && npm ci && npm test && npm run lint && npm run build`
-  (native frontend gate); commit the regenerated `cat_de_roman_esti/web/static` + `.vite/manifest.json` with it (ADR-0020).
+  (native frontend gate); frozen original30 and managed output/retirement: ADR-0184 (actual gates required).
 - Run the Go app: `./run.sh`; runtime/release: `docs/NATIVE_BACKENDS.md`; deploy: `docs/DEPLOY.md`.
 
 ## Safety

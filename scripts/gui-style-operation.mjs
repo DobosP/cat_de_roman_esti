@@ -3,11 +3,13 @@ import * as fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 export const STYLE_OPERATION = "plan-original-styles";
-export const PLANNER_SHA256 = "7d13518cea1173752d54d969c88d2ec899c37887830fd2ef5a7bec2ce469310d";
+export const NORMALIZED_STYLE_OPERATION = "plan-normalized-styles";
+export const PLANNER_SHA256 = "e6e82c02fe413a35dbce33380e8575bcfe296905327b4e3f0f7242c070732231";
 const MOTION_REGRESSION_INPUTS = {
-  "frontend/testdata/motion-layout-shadow/runner.test.mjs": "5f172d65ecdb512a76e24f68fa293ef56a0f07a9bcf0b2f36961492b17b042af",
+  "frontend/testdata/motion-layout-shadow/runner.test.mjs": "9d1b7ef60605f46d04bd785e70d34dd53a82fd61bb1a4b7cf151b299cf6f63b1",
   "frontend/testdata/motion-layout-shadow/index.html": "4298902a46db2d2e4327577cb3fc542422875f960fd299c39a5f2f8dfe9bb125",
   "frontend/testdata/motion-layout-shadow/entry.tsx": "323e97978e5e2622cb8f17274c34968c5be1460e3751c014f41a4b2398328b3c",
   "frontend/testdata/motion-layout-shadow/fixture.css": "33ac7e864f0ce21bbb83615e6812305eac5f2a215fa438692a4076a0a40681cd"
@@ -19,9 +21,30 @@ const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const own = (value, keys) => value !== null && typeof value === "object" && !Array.isArray(value)
   && Object.keys(value).length === keys.length && keys.every((key) => Object.hasOwn(value, key));
 
+export function readNormalizedFrozenRenderer(readBytes) {
+  const proofPath = "legacy/original-bundle.json", archive = "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz";
+  const archiveSha = "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65", sidecar = archive + ".sha256";
+  const reader = "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs", member = "assets/index-qYTSE3Vo.js";
+  assert.equal(hash(readBytes(reader)), "99c89243c9954206f04d699469983fe5b16adb4e86ba7223377f63ae1736f2e1", "Exact trusted archive reader required");
+  const proofBytes = readBytes(proofPath); assert.equal(hash(proofBytes), "5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984", "Exact original30 proof required");
+  const proof = JSON.parse(proofBytes); assert.equal(proof.schema, 1); assert.equal(proof.archive, archive); assert.equal(proof.sha256, archiveSha); assert.equal(proof.files.length, 30);
+  const sidecarBytes = readBytes(sidecar); assert.equal(hash(sidecarBytes), "0576814384f4013d8c628778a1e57b0a0e1c021642b41cc87253f907fe9d67d5");
+  assert.equal(sidecarBytes.toString(), `${archiveSha}  ${path.posix.basename(archive)}\n`);
+  const archiveBytes = readBytes(archive); assert.equal(hash(archiveBytes), archiveSha, "Exact accepted original30 archive required");
+  const entries = readTarGz(archiveBytes), proved = new Set(); assert.equal(entries.size, 30);
+  for (const row of proof.files) {
+    assert.ok(!proved.has(row.path), "Duplicate original30 proof member"); proved.add(row.path);
+    const entry = entries.get(row.path); assert.equal(entry?.type, "file", "Regular original30 member required");
+    assert.equal(entry.data.length, row.bytes); assert.equal(hash(entry.data), row.sha256, "Original30 member differs from proof");
+  }
+  const bytes = entries.get(member).data; assert.equal(bytes.length, 350672); assert.equal(hash(bytes), "3aeceaed54e6d8614fa85e68bcf2a5c6ab1a7619bf20f7184624d475259be93a");
+  return { bytes, binding: { source: "archive", proof: proofPath, archive, archive_sha256: archiveSha, sidecar, reader,
+    member: { path: member, bytes: bytes.length, sha256: hash(bytes) } } };
+}
+
 export function validGenRequest(request) {
   return own(request, ["schema", "operation", "fixtures"]) && request.schema === 1
-    && ["qualify-original-react", "capture-original-baseline", STYLE_OPERATION].includes(request.operation)
+    && ["qualify-original-react", "capture-original-baseline", "replay-normalized-react", STYLE_OPERATION, NORMALIZED_STYLE_OPERATION].includes(request.operation)
     && request.fixtures === "frontend/e2e/original/runtime.spec.mjs";
 }
 export function sourcePath(root, relative, missing = false) {
@@ -74,13 +97,14 @@ function configProjection(config) {
 
 /** Current producer fields: wrapper W and runner/bootstrap I are separate links. */
 export function readStyleIdentity(context, configured, request, environment = process.env) {
-  assert.ok(validGenRequest(request) && request.operation === STYLE_OPERATION, "Explicit original-style operation required");
+  assert.ok(validGenRequest(request) && [STYLE_OPERATION, NORMALIZED_STYLE_OPERATION].includes(request.operation), "Explicit style planning operation required");
   assert.equal(context.target, "gen"); assert.match(context.invocation, UUID);
   assert.match(context.sha, /^[0-9a-f]{40}(?:[0-9a-f]{24})?$/); assert.match(context.tree_sha256, HASH);
   assert.match(context.toolchain_digest, IMAGE); assert.equal(typeof context.dirty, "boolean");
   assert.ok(Number.isInteger(context.parallel) && context.parallel >= 1 && ["report-only", "enforced"].includes(context.stage));
   assert.equal(environment.GATE_VERSIONS_RESOLVE, "0", "Style planning forbids version resolution; use plain owning gen");
   const root = context.root, inputs = {}, config = configProjection(configured);
+  if (request.operation === NORMALIZED_STYLE_OPERATION) assert.ok(config.ui_adoption, "Normalized planning requires the actual staged SDK phase");
   assert.deepEqual(JSON.parse(read(root, "scripts/gui-gen-request.json", inputs)), request, "Current source request differs from hook selection");
   const descriptorBytes = read(root, ".gate/wrapper-current.json", inputs), current = JSON.parse(descriptorBytes);
   assert.ok(own(current, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256"]));
@@ -134,7 +158,7 @@ export function readStyleIdentity(context, configured, request, environment = pr
   }
   assert.equal(used.size, listed.size); assert.equal(listed.size, bootstrap.actions.length * 2); assert.ok(actualConfig > 0);
   if (config.ui_adoption) assert.equal(hash(read(root, config.ui_adoption.legacy.receipt, inputs)), config.ui_adoption.legacy.receipt_sha256);
-  return { operation: STYLE_OPERATION, target: "gen", invocation: context.invocation, wrapper_invocation: current.invocation,
+  return { operation: request.operation, target: "gen", invocation: context.invocation, wrapper_invocation: current.invocation,
     sha: context.sha, tree_sha256: context.tree_sha256, dirty: context.dirty, toolchain_image_id: context.toolchain_digest,
     toolchain_digest: context.toolchain_digest, app_image_id: null, parallel: context.parallel, csp_stage: context.stage,
     config, config_sha256: current.config_sha256, inputs };
@@ -180,14 +204,16 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
   assert.equal(summary.output, relative); assert.ok(!previousRuns.includes(relative), "Fresh planner namespace required");
   assert.ok([`${relative}/report.json`, `${relative}/publication-failure.json`].includes(summary.report_json));
   const bytes = fs.readFileSync(sourcePath(root, summary.report_json)), report = JSON.parse(bytes);
-  for (const key of ["schema", "status", "mode", "plan_id", "output", "report_json", "converted", "application_ready", "bindings", "diagnostics", "candidate_diagnostics", "manual"])
+  for (const key of ["schema", "status", "mode", "plan_id", "output", "report_json", "converted", "application_ready", "bindings", "diagnostics", "candidate_diagnostics", "manual", "retained_native_files"])
     assert.deepEqual(report[key], summary[key], `Planner stdout/disk ${key} differs`);
   assert.ok(Array.isArray(report.files) && Array.isArray(report.sites) && Array.isArray(report.owners));
   assert.ok(Array.isArray(report.diagnostics) && Array.isArray(report.candidate_diagnostics) && Array.isArray(report.manual));
   const analysis = JSON.parse(fs.readFileSync(sourcePath(root, `${relative}/analysis.json`)));
   assert.equal(analysis.application_ready, false); assert.equal(analysis.converted, null);
-  for (const key of ["schema", "mode", "plan_id", "output", "bindings"]) assert.deepEqual(analysis[key], report[key]);
+  for (const key of ["schema", "mode", "plan_id", "output", "bindings", "retained_native_files"]) assert.deepEqual(analysis[key], report[key]);
   const inputs = report.bindings.inputs; assert.ok(inputs && typeof inputs === "object" && !Array.isArray(inputs));
+  const normalized = identity.operation === NORMALIZED_STYLE_OPERATION;
+  assert.equal(report.bindings.profile ?? "original", normalized ? "normalized" : "original", "Planner profile differs from explicit operation");
   for (const [file, record] of Object.entries(inputs)) {
     assert.ok(own(record, ["sha256", "bytes"])); const actual = fs.readFileSync(sourcePath(root, file));
     assert.equal(actual.length, record.bytes); assert.equal(hash(actual), record.sha256, `Actual planner input differs: ${file}`);
@@ -198,10 +224,10 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
     for (const file of ["scripts/gui-style-plan.mjs", "frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json",
       "frontend/src/components/cssUnits.ts", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx", "frontend/src/screens/Alchimie.tsx", "frontend/src/screens/Conexiuni.tsx",
       "frontend/node_modules/react-dom/package.json", "frontend/node_modules/react-dom/cjs/react-dom-client.development.js",
-      "frontend/node_modules/typescript/package.json", "frontend/node_modules/typescript/lib/typescript.js",
-      "frontend/vendor/roedu-ui-0.3.0.tgz", "cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"]) assert.ok(Object.hasOwn(inputs, file), `Required actual planner binding missing: ${file}`);
+      "frontend/node_modules/typescript/package.json",
+      "frontend/vendor/roedu-ui-0.3.0.tgz"]) assert.ok(Object.hasOwn(inputs, file), `Required actual planner binding missing: ${file}`);
     assert.equal(inputs["scripts/gui-style-plan.mjs"].sha256, PLANNER_SHA256);
-    for (const [file, expected] of Object.entries({
+    const fixed = {
       "frontend/package.json": "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9",
       "frontend/package-lock.json": "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c",
       "frontend/tsconfig.json": "81dbe0e79cad7363ee3e83e4683cb5f382560608a592b91b5f0f903f2385b963",
@@ -212,8 +238,36 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
       "frontend/src/screens/Conexiuni.tsx": "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338",
       "frontend/vendor/roedu-ui-0.3.0.tgz": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
       "cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js": "3aeceaed54e6d8614fa85e68bcf2a5c6ab1a7619bf20f7184624d475259be93a",
-    })) assert.equal(inputs[file].sha256, expected, `Exact reviewed planner source identity required: ${file}`);
-    for (const [name, version] of [["react-dom", "19.2.7"], ["typescript", "5.9.3"]]) {
+    };
+    if (normalized) {
+      Object.assign(fixed, {
+        "frontend/package.json": "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a",
+        "frontend/package-lock.json": "78ba37afe99d18ebcb6a4be54eaab28d2b7084d0a2cc32ae476c0a20ca7224a2",
+        "frontend/scripts/compiler-runtime.mjs": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12",
+      });
+      delete fixed["frontend/src/screens/Alchimie.tsx"]; delete fixed["frontend/src/screens/Conexiuni.tsx"];
+      delete fixed["cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"];
+      const frozen = readNormalizedFrozenRenderer((file) => {
+        assert.ok(Object.hasOwn(inputs, file), `Required archive-backed renderer input missing: ${file}`);
+        return fs.readFileSync(sourcePath(root, file));
+      });
+      assert.deepEqual(report.bindings.frozen_renderer, frozen.binding, "True archive member binding required");
+      for (const file of ["versions.lock.json", "frontend/src/screens/Home.tsx", "frontend/src/screens/Perechi.tsx",
+        "frontend/node_modules/@typescript/typescript6/package.json", "frontend/node_modules/@typescript/old/package.json",
+        "frontend/node_modules/motion/package.json", "frontend/node_modules/framer-motion/package.json", "frontend/node_modules/motion-dom/package.json"])
+        assert.ok(Object.hasOwn(inputs, file), `Required normalized input missing: ${file}`);
+      const owners = report.bindings.current_owners;
+      assert.ok(own(owners, ["frontend/src/screens/Alchimie.tsx", "frontend/src/screens/Conexiuni.tsx"]));
+      for (const [file, opacity, className] of [["frontend/src/screens/Alchimie.tsx", 0.5, "csp-motion-opacity-50"], ["frontend/src/screens/Conexiuni.tsx", 0.55, "csp-motion-opacity-55"]]) {
+        assert.deepEqual(owners[file], { opacity, className, source_sha256: inputs[file].sha256 });
+        assert.equal(report.owners.filter((owner) => owner.file === file && owner.owner_class === className).length, 1, "One current bound opacity owner required");
+      }
+    } else {
+      assert.ok(Object.hasOwn(inputs, "cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"), "Original frozen renderer bytes required");
+      assert.ok(Object.hasOwn(inputs, "frontend/node_modules/typescript/lib/typescript.js"), "Original compiler API bytes required");
+    }
+    for (const [file, expected] of Object.entries(fixed)) assert.equal(inputs[file]?.sha256, expected, `Exact reviewed planner source identity required: ${file}`);
+    for (const [name, version] of normalized ? [["react-dom", "19.2.7"], ["typescript", "7.0.2"], ["@typescript/typescript6", "6.0.2"], ["motion", "14.0.0"], ["framer-motion", "14.0.0"], ["motion-dom", "14.0.0"]] : [["react-dom", "19.2.7"], ["typescript", "5.9.3"]]) {
       assert.equal(report.bindings[name]?.version, version);
       const installed = JSON.parse(fs.readFileSync(sourcePath(root, `frontend/node_modules/${name}/package.json`)));
       assert.equal(installed.name, name); assert.equal(installed.version, version);
@@ -221,6 +275,7 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
       assert.equal(locked.version, version); assert.equal(locked.resolved, report.bindings[name].resolved); assert.equal(locked.integrity, report.bindings[name].integrity);
     }
     const wanted = new Set([`${relative}/analysis.json`, report.report_json]);
+    if (normalized) validateNativeEvidence(root, report, inputs, wanted);
     for (const file of report.files) {
       assert.ok(own(file, ["file", "before_sha256", "after_sha256"]));
       assert.ok(typeof file.file === "string" && file.file.startsWith("frontend/src/") && file.file.endsWith(".tsx"));
@@ -234,12 +289,81 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
   return { report, artifacts: runFiles(root, relative), report_sha256: hash(bytes) };
 }
 
+function validateNativeEvidence(root, report, inputs, wanted) {
+  const { native_compiler: compiler, native_payload: payload, parser, native_checks: checks } = report.bindings;
+  const relative = report.output, frontend = path.join(root, "frontend");
+  assert.equal(compiler.package.version, "7.0.2"); assert.equal(parser.package.version, "6.0.2"); assert.equal(parser.implementation.version, "6.0.3");
+  assert.equal(parser.role, "AST/transpilation only; native7 is authoritative for typechecking");
+  const installed = JSON.parse(fs.readFileSync(sourcePath(root, "frontend/node_modules/typescript/package.json")));
+  const declared = typeof installed.bin === "string" ? installed.bin : installed.bin?.tsc;
+  assert.ok(typeof declared === "string" && !path.isAbsolute(declared) && !declared.split(/[\\/]/).includes(".."));
+  const executableRelative = path.posix.join("frontend/node_modules/typescript", declared);
+  assert.equal(compiler.executable, sourcePath(root, executableRelative)); assert.equal(compiler.executable_sha256, inputs[executableRelative]?.sha256);
+  assert.equal(compiler.package.path, sourcePath(root, "frontend/node_modules/typescript/package.json")); assert.equal(compiler.package.sha256, inputs["frontend/node_modules/typescript/package.json"].sha256);
+  const lock = JSON.parse(fs.readFileSync(sourcePath(root, "frontend/package-lock.json")));
+  assert.deepEqual(parser.locked_implementation, lock.packages["node_modules/@typescript/old"]);
+  assert.equal(parser.package.path, sourcePath(root, "frontend/node_modules/@typescript/typescript6/package.json"));
+  assert.equal(parser.package.sha256, inputs["frontend/node_modules/@typescript/typescript6/package.json"].sha256);
+  assert.equal(parser.implementation.manifest_sha256, inputs["frontend/node_modules/@typescript/old/package.json"].sha256);
+  const parserRelative = path.relative(root, parser.implementation.path).split(path.sep).join("/");
+  assert.ok(parserRelative.startsWith("frontend/node_modules/@typescript/old/")); assert.equal(parser.implementation.entry_sha256, inputs[parserRelative]?.sha256);
+  assert.equal(parser.implementation.entry_sha256, "569177652966bd528c319171c7dd22860dbf72bde116cbc4f644f1d02bb12e39");
+  assert.equal(inputs["frontend/node_modules/@typescript/typescript6/lib/typescript.js"]?.sha256, "d3f3cd2b04b7f466f4484df921b744223f7bd1f3e353ec9110bdf52695b983d5");
+  const nativeName = `@typescript/typescript-${process.platform}-${process.arch}`;
+  assert.equal(payload.name, nativeName); assert.equal(payload.version, "7.0.2"); assert.equal(payload.manifest, `frontend/node_modules/${nativeName}/package.json`);
+  assert.equal(payload.executable, `frontend/node_modules/${nativeName}/lib/tsc${process.platform === "win32" ? ".exe" : ""}`);
+  assert.equal(payload.executable_sha256, inputs[payload.executable]?.sha256);
+  const nativeManifest = JSON.parse(fs.readFileSync(sourcePath(root, payload.manifest))); assert.equal(nativeManifest.name, nativeName); assert.equal(nativeManifest.version, "7.0.2"); assert.equal(lock.packages[`node_modules/${nativeName}`].version, "7.0.2");
+  for (const file of ["frontend/node_modules/typescript/lib/tsc.js", "frontend/node_modules/typescript/lib/getExePath.js"]) assert.ok(Object.hasOwn(inputs, file));
+  const selected = JSON.parse(fs.readFileSync(sourcePath(root, "versions.lock.json"))).tools;
+  assert.equal(selected.find((item) => item.tool === "typescript")?.version, "7.0.2");
+  const approval = selected.find((item) => item.tool === "@typescript/typescript6"); assert.equal(approval.version, "6.0.2"); assert.equal(approval.status, "optional"); assert.ok(approval.exception && approval.approved_by);
+  assert.ok(Array.isArray(checks) && checks.length === 2); assert.deepEqual(checks.map((item) => item.role), ["before", "candidate"]);
+  for (const check of checks) {
+    assert.equal(check.compiler, "typescript@7.0.2 native CLI"); assert.equal(check.command, compiler.executable); assert.equal(check.cwd, "frontend"); assert.equal(check.exit_code, 0);
+    assert.ok(!check.error && !check.signal && Number.isFinite(Date.parse(check.started)) && Date.parse(check.finished) >= Date.parse(check.started));
+    const project = check.role === "before" ? path.join(frontend, "tsconfig.json") : sourcePath(root, `${relative}/native/candidate-graph/frontend/tsconfig.json`);
+    assert.deepEqual(check.args, ["--project", project, "--noEmit", "--pretty", "false"]);
+    assert.deepEqual(JSON.parse(fs.readFileSync(sourcePath(root, `${relative}/native/${check.role}/command.json`))), check);
+    for (const stream of ["stdout", "stderr"]) {
+      assert.equal(check[stream].file, `${relative}/native/${check.role}/${stream}.log`); assert.equal(check[stream].bytes, 0); assert.equal(check[stream].sha256, hash(""));
+      assert.equal(fs.readFileSync(sourcePath(root, check[stream].file)).length, 0);
+    }
+  }
+  assert.ok(Array.isArray(report.retained_native_files) && report.retained_native_files.length > 6);
+  const proposed = new Map(report.files.map((file) => [file.file, file]));
+  for (const item of report.retained_native_files) {
+    assert.ok(own(item, ["file", "bytes", "sha256"])); assert.ok(item.file.startsWith(`${relative}/native/`) && !wanted.has(item.file)); wanted.add(item.file);
+    const bytes = fs.readFileSync(sourcePath(root, item.file)); assert.equal(bytes.length, item.bytes); assert.equal(hash(bytes), item.sha256);
+    const prefix = `${relative}/native/candidate-graph/`;
+    if (item.file.startsWith(prefix)) {
+      const source = item.file.slice(prefix.length); assert.ok(Object.hasOwn(inputs, source), "Private compiler graph must bind current source/declaration/package bytes");
+      assert.equal(item.sha256, proposed.get(source)?.after_sha256 ?? inputs[source].sha256, "Private graph changed an unproposed input");
+    }
+  }
+  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", ...proposed.keys()])
+    assert.ok(wanted.has(`${relative}/native/candidate-graph/${file}`), `Owning config or candidate absent from native graph: ${file}`);
+  function requireGraph(relative, declarationsOnly = false) {
+    const file = sourcePath(root, relative), stat = fs.lstatSync(file);
+    if (stat.isDirectory()) for (const name of fs.readdirSync(file).sort()) { if (declarationsOnly && name === ".bin") continue; requireGraph(`${relative}/${name}`, declarationsOnly); }
+    else { assert.ok(stat.isFile()); if (!declarationsOnly || /\.(?:json|[cm]?tsx?)$/.test(relative)) assert.ok(wanted.has(`${report.output}/native/candidate-graph/${relative}`), `Incomplete native source/declaration/package graph: ${relative}`); }
+  }
+  requireGraph("frontend/src"); requireGraph("frontend/node_modules", true);
+}
+
 /** Only the actual owning hook calls this. Unit fixture reports never qualify a product. */
 export function runOriginalStyleOperation(hook, configured, request, environment = process.env) {
+  return runStyleOperation(hook, configured, request, environment, STYLE_OPERATION);
+}
+export function runNormalizedStyleOperation(hook, configured, request, environment = process.env) {
+  return runStyleOperation(hook, configured, request, environment, NORMALIZED_STYLE_OPERATION);
+}
+function runStyleOperation(hook, configured, request, environment, operation) {
   const root = hook.context.root; let identity, protectedBefore, attempt, summary, executionError, validated, motionRegression = null;
   const passed = () => hook.checks.every((check) => check.status === "pass");
   const registered = new Set(), artifact = (file) => { if (!registered.has(file)) { hook.artifact(file); registered.add(file); } };
   hook.check("cat-style-current-context", () => hook.assert("Current owning style context and exact reviewed sources", () => {
+    assert.equal(request.operation, operation, "Explicit operation export and request must agree");
     identity = readStyleIdentity(hook.context, configured, request, environment);
     const planner = read(root, "scripts/gui-style-plan.mjs", identity.inputs); assert.equal(hash(planner), PLANNER_SHA256);
     assert.equal(fs.realpathSync(sourcePath(root, "scripts/gui-style-operation.mjs")), fs.realpathSync(fileURLToPath(import.meta.url)), "Executing operation must be this repository module");
@@ -258,9 +382,9 @@ export function runOriginalStyleOperation(hook, configured, request, environment
   }));
   if (!passed()) return;
   hook.check("cat-style-npm-ci", () => hook.run("npm", ["ci", "--no-audit", "--no-fund"], path.join(root, "frontend")));
-  if (passed()) hook.check("cat-original-style-planner", () => {
+  if (passed()) hook.check(operation === NORMALIZED_STYLE_OPERATION ? "cat-normalized-style-planner" : "cat-original-style-planner", () => {
     let stdout;
-    try { stdout = hook.run(process.execPath, ["scripts/gui-style-plan.mjs"], root); }
+    try { stdout = hook.run(process.execPath, ["scripts/gui-style-plan.mjs", ...(operation === NORMALIZED_STYLE_OPERATION ? ["normalized"] : [])], root); }
     catch (error) { executionError = error; stdout = error.stdout; }
     if (typeof stdout === "string" && stdout.trim()) summary = JSON.parse(stdout);
     if (summary) validated = validatePlannerOutput(root, summary, identity, Object.keys(protectedBefore).filter((file) => /^\.gate\/gen\/styles\/runs\/style-plan-[^/]+$/.test(file)));
@@ -293,6 +417,7 @@ export function runOriginalStyleOperation(hook, configured, request, environment
     assert.equal(reports.length, 1, "One actual retained Motion regression report required");
     const bytes = fs.readFileSync(sourcePath(root, reports[0])), report = JSON.parse(bytes);
     assert.equal(report.status, "pass"); assert.equal(report.actual_primary.target, "gen");
+    assert.equal(report.graph_profile, operation === NORMALIZED_STYLE_OPERATION ? "normalized" : "original");
     assert.equal(report.actual_primary.sha, identity.sha); assert.equal(report.actual_primary.tree_sha256, identity.tree_sha256);
     assert.equal(report.actual_primary.toolchain_digest, identity.toolchain_digest);
     assert.equal(report.actual_primary.invocation, identity.wrapper_invocation);
@@ -320,7 +445,7 @@ export function runOriginalStyleOperation(hook, configured, request, environment
     for (const file of files) artifact(file);
     assert.ok(newRuns.length <= 1, "One actual planner call may retain at most one new run");
     if (validated) assert.deepEqual(newRuns, [validated.report.output]);
-    const receipt = { schema: 1, operation: STYLE_OPERATION, scope: "original-style-source-planning-only", status: passed() ? "pass" : "fail",
+    const receipt = { schema: 1, operation, scope: operation === NORMALIZED_STYLE_OPERATION ? "normalized-style-source-planning-only" : "original-style-source-planning-only", status: passed() ? "pass" : "fail",
       identity, planner_report: validated ? { path: validated.report.report_json, sha256: validated.report_sha256 } : null,
       planner_proposal_ready: validated?.report.application_ready === true, manager_approved: false, implementation_ready: false,
       release_qualified: false, checks: hook.checks.map((check) => ({ name: check.name, status: check.status, ...(check.reason ? { reason: check.reason } : {}) })),

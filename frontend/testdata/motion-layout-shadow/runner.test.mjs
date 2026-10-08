@@ -1,6 +1,6 @@
-// Actual isolated React19/Framer12 projected-layout regression. Authored source is not an
-// execution receipt. Explicit original-profile lane, outside default unit discovery.
-// No execution outputs exist until genuine GEN/unit/full admission; original pins never weaken.
+// Actual isolated React19 projected-layout regression. The original Framer12 and
+// normalized Motion/Framer14 graphs have separate exact admission; neither graph
+// is an execution receipt. This explicit lane stays outside default discovery.
 import test from "node:test";
 import assert from "node:assert/strict";
 import * as fs from "node:fs";
@@ -74,10 +74,11 @@ function admit() {
   for (const file of [".gate/wrapper-current.json", prefix + "wrapper-current.json", actual.config_path]) {
     const stat = fs.lstatSync(regular(file)); assert.equal(stat.uid, uid); assert.equal(stat.mode & 0o222, 0);
   }
+  let request;
   if (actual.target === "gen") {
-    const request = JSON.parse(read("scripts/gui-gen-request.json"));
+    request = JSON.parse(read("scripts/gui-gen-request.json"));
     assert.ok(closed(request, ["schema", "operation", "fixtures"])); assert.equal(request.schema, 1);
-    assert.equal(request.operation, "plan-original-styles"); assert.equal(request.fixtures, "frontend/e2e/original/runtime.spec.mjs");
+    assert.ok(["plan-original-styles", "plan-normalized-styles"].includes(request.operation)); assert.equal(request.fixtures, "frontend/e2e/original/runtime.spec.mjs");
   }
   const bootstrap = JSON.parse(read(prefix + "bootstrap-execution.json"));
   assert.ok(closed(bootstrap, ["schema", "target", "invocation", "sha", "tree_sha256", "toolchain_digest", "started", "config", "config_sha256", "wrapper_target", "wrapper_config", "wrapper_config_sha256", "wrapper_invocation", "wrapper_descriptor", "wrapper_descriptor_sha256", "actions", "artifacts", "finished"]));
@@ -111,13 +112,38 @@ function admit() {
   assert.equal(used.size, listed.size); assert.equal(listed.size, bootstrap.actions.length * 2); assert.ok(configurationWitnesses > 0);
   const versions = {};
   const manifestBytes = read("frontend/package.json"), lockBytes = read("frontend/package-lock.json");
-  assert.equal(hash(manifestBytes), "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9");
-  assert.equal(hash(lockBytes), "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c");
+  const graphProfile = hash(manifestBytes) === "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a" ? "normalized" : "original";
+  assert.equal(hash(manifestBytes), graphProfile === "normalized" ? "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a" : "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9");
+  assert.equal(hash(lockBytes), graphProfile === "normalized" ? "78ba37afe99d18ebcb6a4be54eaab28d2b7084d0a2cc32ae476c0a20ca7224a2" : "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c");
+  if (request) assert.equal(request.operation, graphProfile === "normalized" ? "plan-normalized-styles" : "plan-original-styles", "Actual graph must agree with explicit GEN request");
   const manifest = JSON.parse(manifestBytes), lock = JSON.parse(lockBytes);
   assert.equal(manifest.dependencies["@roedu/ui"], "file:vendor/roedu-ui-0.3.0.tgz");
-  for (const [name, version] of [["react", "19.2.7"], ["react-dom", "19.2.7"], ["framer-motion", "12.42.2"], ["motion-dom", "12.42.2"]]) {
+  const motionVersion = graphProfile === "normalized" ? "14.0.0" : "12.42.2", packages = {};
+  for (const [name, version] of [["react", "19.2.7"], ["react-dom", "19.2.7"], ["framer-motion", motionVersion], ["motion-dom", motionVersion], ...(graphProfile === "normalized" ? [["motion", "14.0.0"], ["typescript", "7.0.2"], ["@typescript/typescript6", "6.0.2"]] : [])]) {
     const installed = JSON.parse(read(`frontend/node_modules/${name}/package.json`));
-    assert.equal(installed.version, version); assert.equal(lock.packages[`node_modules/${name}`].version, version); versions[name] = version;
+    assert.equal(installed.name, name); assert.equal(installed.version, version); const locked = lock.packages[`node_modules/${name}`]; assert.equal(locked.version, version); versions[name] = version;
+    packages[name] = { version, resolved: locked.resolved, integrity: locked.integrity };
+  }
+  if (graphProfile === "normalized") {
+    const selected = JSON.parse(read("versions.lock.json")).tools;
+    for (const name of ["motion", "framer-motion", "typescript", "@typescript/typescript6"]) assert.equal(selected.find((item) => item.tool === name)?.version, versions[name]);
+    const approval = selected.find((item) => item.tool === "@typescript/typescript6"); assert.equal(approval.status, "optional"); assert.ok(approval.exception && approval.approved_by);
+    assert.equal(manifest.dependencies.motion, "14.0.0"); assert.ok(!Object.hasOwn(manifest.dependencies, "framer-motion"));
+    assert.equal(lock.packages["node_modules/motion"].dependencies["framer-motion"], "14.0.0");
+    const implementation = JSON.parse(read("frontend/node_modules/@typescript/old/package.json")); assert.equal(implementation.name, "typescript"); assert.equal(implementation.version, "6.0.3");
+    assert.equal(lock.packages["node_modules/@typescript/old"].version, "6.0.3");
+    assert.equal(hash(read("frontend/node_modules/@typescript/old/lib/typescript.js")), "569177652966bd528c319171c7dd22860dbf72bde116cbc4f644f1d02bb12e39");
+    assert.equal(hash(read("frontend/node_modules/@typescript/typescript6/lib/typescript.js")), "d3f3cd2b04b7f466f4484df921b744223f7bd1f3e353ec9110bdf52695b983d5");
+    const phase = config.ui_adoption; assert.ok(closed(phase, ["mode", "until", "legacy"])); assert.equal(phase.mode, "staged-react"); assert.equal(phase.until, "S1-M2");
+    assert.equal(phase.legacy.version, "0.3.0"); assert.equal(phase.legacy.archive_sha256, "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244");
+    assert.equal(hash(read(phase.legacy.receipt)), phase.legacy.receipt_sha256);
+    for (const [file, expected] of Object.entries({
+      "frontend/node_modules/framer-motion/dist/es/index.mjs": "1304c50c9bb56e616959998b3d247049c8c1279806d3b5706d3b7d1a80108b5a",
+      "frontend/node_modules/motion-dom/dist/es/projection/styles/scale-box-shadow.mjs": "eec966af20266e1907d5701768d0ca70a77a6ae3801826914db2102347fc866b",
+      "frontend/node_modules/motion-dom/dist/es/render/utils/is-forced-motion-value.mjs": "04e32214cd575b08916b7a403d624bc45db7d65f25f7416cb825fc1b027b1adc",
+      "frontend/node_modules/motion-dom/dist/es/render/html/utils/scrape-motion-values.mjs": "2e2612169302fcdc1de8583420a2bdfa1075669ab9dd05341a4c3a87454a45b9",
+      "frontend/node_modules/motion-dom/dist/es/projection/node/create-projection-node.mjs": "4af19d2ad9f029f8f94459e57ba0879ff99477ebbb5dba9da830de99ce562736",
+    })) assert.equal(hash(read(file)), expected, `Actual captured Motion14 payload differs: ${file}`);
   }
   assert.equal(JSON.parse(read("frontend/node_modules/@roedu/ui/package.json")).version, "0.3.0"); versions["@roedu/ui"] = "0.3.0";
   assert.equal(JSON.parse(read("frontend/node_modules/@playwright/test/package.json")).version, "1.63.0");
@@ -132,7 +158,7 @@ function admit() {
   assert.ok(cald.includes('"card contexto-guess-row"') && cald.includes("      layout"));
   assert.ok(read("frontend/src/games.ts").toString().includes('accent: "#54e39d"'));
   assert.ok(cald.includes('Cald: "#f4a259"'));
-  return { root, uid, actual, read, regular, inputs, versions, scope: "focused original Motion style.boxShadow ownership model with SDK CSSOM rest; not full-game parity; current App domAnimation is not projected" };
+  return { root, uid, actual, read, regular, inputs, versions, packages, graphProfile, scope: "focused original Motion style.boxShadow ownership model with SDK CSSOM rest; not full-game parity; current App domAnimation is not projected" };
 }
 
 function shadow(css) {
@@ -181,7 +207,7 @@ test("actual original and corrected layout shadows counter-scale while frozen CS
     fs.writeFileSync(file, typeof value === "string" || Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + "\n", { flag: "wx", mode: 0o600 });
   };
   const logs = { build: [], browser: [], errors: [], requests: [] };
-  const report = { schema: 1, status: "running", scope: authority.scope, actual_primary: authority.actual, runtime: authority.versions,
+  const report = { schema: 1, status: "running", scope: authority.scope, graph_profile: authority.graphProfile, runtime_packages: authority.packages, actual_primary: authority.actual, runtime: authority.versions,
     execution: { node: process.version, executable: process.execPath, argv: process.argv, execArgv: process.execArgv, cwd: process.cwd(), started: new Date().toISOString(),
       caller_streams: "Actual hook.run Node stdout/stderr and command receipt are available after this process returns; preserve the complete primary target beside this case." },
     cases: [], csp: { policy: CSP }, qualified_device: false, production_or_gameplay_qualified: false, automatic_fresh_survival: "UNSET" };

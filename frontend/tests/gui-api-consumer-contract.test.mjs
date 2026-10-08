@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { nativeCompiler, parserBinding } from "../scripts/compiler-runtime.mjs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import test from "node:test";
-import ts from "typescript";
+import ts from "@typescript/typescript6";
 import * as sharedClient from "@roedu/ui";
 
 // These are authored contract checks, not a native API/session fixture. The
@@ -21,8 +23,11 @@ function diagnosticsText(diagnostics) {
 
 function installedCompilerOptions() {
   const lock = JSON.parse(readFileSync(new URL("../package-lock.json", import.meta.url), "utf8"));
-  assert.equal(ts.version, lock.packages["node_modules/typescript"].version,
-    "the actual installed compiler must match the owning lock");
+  parserBinding(frontend, ts);
+  const compiler = JSON.parse(readFileSync(new URL("../node_modules/typescript/package.json", import.meta.url), "utf8"));
+  assert.equal(compiler.name, "typescript");
+  assert.equal(compiler.version, lock.packages["node_modules/typescript"].version,
+    "the actual native CLI compiler must match the owning lock");
   const config = ts.readConfigFile(configPath, ts.sys.readFile);
   assert.equal(config.error, undefined, config.error ? diagnosticsText([config.error]) : "");
   const parsed = ts.parseJsonConfigFileContent(config.config, ts.sys, frontend, undefined, configPath);
@@ -32,11 +37,17 @@ function installedCompilerOptions() {
 }
 
 test("real TypeScript consumers retain the exported game API property, union and private-key contracts", () => {
-  const fixture = fileURLToPath(new URL("./fixtures/gui-api-consumer-contract.ts", import.meta.url));
-  const program = ts.createProgram({ rootNames: [fixture], options: installedCompilerOptions() });
-  const diagnostics = ts.getPreEmitDiagnostics(program);
-  assert.equal(diagnostics.length, 0, diagnosticsText(diagnostics));
-  assert.ok(program.getSourceFile(fixture), "the actual consumer fixture must belong to the checked program");
+  installedCompilerOptions();
+  const cli = nativeCompiler(frontend).executable;
+  const version = spawnSync(cli, ["--version"], { cwd: frontend, encoding: "utf8" });
+  const compiler = JSON.parse(readFileSync(new URL("../node_modules/typescript/package.json", import.meta.url), "utf8"));
+  assert.equal(version.status, 0, version.stderr);
+  assert.equal(version.stdout.trim(), `Version ${compiler.version}`);
+  // Exact owning strict options are inherited; this project only selects the
+  // real consumer fixture. TS6 supplies AST/transpile services, never this check.
+  const project = fileURLToPath(new URL("./fixtures/gui-api-consumer-tsconfig.json", import.meta.url));
+  const checked = spawnSync(cli, ["--project", project, "--noEmit"], { cwd: frontend, encoding: "utf8" });
+  assert.equal(checked.status, 0, `${checked.stdout}${checked.stderr}`);
 });
 
 function loadActualModule(path, dependencies, document, options) {

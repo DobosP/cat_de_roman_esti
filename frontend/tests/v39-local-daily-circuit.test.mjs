@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import ts from "typescript";
+import ts from "@typescript/typescript6";
 
 const STORAGE_KEY = "cat_wordgame_scores_v1";
 const scoreSource = readFileSync(new URL("../src/scores.ts", import.meta.url), "utf8");

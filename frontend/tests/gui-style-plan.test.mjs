@@ -3,10 +3,10 @@ import { createHash, randomUUID } from "node:crypto";
 import * as fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
-import ts from "typescript";
+import ts from "@typescript/typescript6";
 import {
   ORIGINAL_OWNERS, bindSourceInput, absolutePath, repoRelative, applyEdits, extractRendererUnitless,
-  extractUnitlessPolicy, analyzeStyles, publishStylePlan,
+  extractUnitlessPolicy, analyzeStyles, publishStylePlan, nativeDiagnosticResult,
 } from "../../scripts/gui-style-plan.mjs";
 
 // This lane exercises parser/checker/planner decisions with narrow virtual JSX
@@ -62,7 +62,7 @@ export function Conexiuni({ actionsLocked, isSel }: { actionsLocked: boolean; is
 }
 `,
 };
-function analyze(body, { root = "/virtual-cat", changes = {}, omit = [], candidateCaseAliases = false } = {}) {
+function analyze(body, { root = "/virtual-cat", changes = {}, omit = [], candidateCaseAliases = false, authoritativeDiagnostics, diagnoseCandidate } = {}) {
   const all = {
     "frontend/src/fixture-types.d.ts": ambient,
     "frontend/src/components/CspStyle.ts": adapter,
@@ -104,7 +104,7 @@ function analyze(body, { root = "/virtual-cat", changes = {}, omit = [], candida
     return host;
   }
   const program = ts.createProgram({ rootNames: [...files.keys()], options, host: makeHost(options) });
-  return analyzeStyles(program, { root, unitless, makeHost, readBytes: (file) => Buffer.from(files.get(absolutePath(file))) });
+  return analyzeStyles(program, { root, unitless, makeHost, authoritativeDiagnostics, diagnoseCandidate, readBytes: (file) => Buffer.from(files.get(absolutePath(file))) });
 }
 const textOf = (plan, file = "frontend/src/screens/Fixture.tsx") => plan.files.find((item) => item.file === file)?.text;
 const assertFailed = (plan) => {
@@ -122,6 +122,27 @@ test("repeated source reads cannot replace a previously checked provenance bindi
   assert.throws(() => bindSourceInput(inputs, "frontend/src/screens/Alchimie.tsx", Buffer.from("changed--owner")), /Repeated source input changed/);
   assert.throws(() => bindSourceInput(inputs, "frontend/src/screens/Alchimie.tsx", Buffer.from("different-length")), /Repeated source input changed/);
   assert.deepEqual(record, { sha256: sha(original), bytes: original.length });
+});
+
+test("native CLI diagnostic data retains failures and refuses launch or unexplained-success shapes", () => {
+  // Pure data controls; no command is run and no synthetic native receipt is earned.
+  assert.deepEqual(nativeDiagnosticResult({ status: 0, stdout: "", stderr: "" }), []);
+  const message = "src/fixture.tsx(1,1): error TS2322: incompatible value\n";
+  assert.deepEqual(nativeDiagnosticResult({ status: 1, stdout: message, stderr: "" }), [{ code: "native-tsc-exit", category: "Error", compiler: "typescript@7.0.2 native CLI", exit_code: 1, message }]);
+  for (const child of [{ status: null, error: Error("launch") }, { status: 0, error: Error("launch") }, { status: 0, signal: "SIGTERM" }, { status: 0, stdout: message }, { status: 1, stdout: "" }]) assert.throws(() => nativeDiagnosticResult(child));
+});
+test("authoritative before diagnostics stop source proposals before any candidate check", () => {
+  const failure = [{ code: "native-tsc-exit", message: "DATA ONLY native before refusal" }];
+  const plan = analyze('export const View = () => <div style={{ gap: 4 }} />;', { authoritativeDiagnostics: failure, diagnoseCandidate: () => assert.fail("Refused before check reached candidate") });
+  assertFailed(plan); assert.deepEqual(plan.diagnostics, failure); assert.deepEqual(plan.sites, []);
+});
+test("authoritative candidate diagnostics revoke every proposal while retaining causal inputs", () => {
+  let observed;
+  const failure = [{ code: "native-tsc-exit", message: "DATA ONLY native candidate refusal" }];
+  const plan = analyze('export const View = () => <div style={{ gap: 4 }} />;', { authoritativeDiagnostics: [], diagnoseCandidate: (files) => { observed = files; return failure; } });
+  assertFailed(plan); assert.deepEqual(plan.diagnostics, []); assert.deepEqual(plan.candidate_diagnostics, failure);
+  assert.ok(observed.length === 3 && observed.every((file) => file.before_sha256 && file.after_sha256 && file.text));
+  assert.ok(plan.proposals.length === 3 && plan.owners.length === 2);
 });
 
 test("paths normalize both separators and confine whole segments", () => {
@@ -346,7 +367,7 @@ function publicationFixture(t, label, body) {
   }
   assert.equal(used.size, listed.size); assert.equal(listed.size, bootstrap.actions.length * 2); assert.ok(configCommands > 0);
   const sourceInputs = [
-    ["scripts/gui-style-plan.mjs", "7d13518cea1173752d54d969c88d2ec899c37887830fd2ef5a7bec2ce469310d"],
+    ["scripts/gui-style-plan.mjs", "e6e82c02fe413a35dbce33380e8575bcfe296905327b4e3f0f7242c070732231"],
     ["frontend/tests/fixtures/gui-style-plan.json", "24bdcb858dcc74878e99aca0de338bf335cf3b1b3c14e8b68820fca1be9ca8b9"],
     ["frontend/src/components/cssUnits.ts", "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873"],
     ["frontend/src/components/CspStyle.ts", "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320"],

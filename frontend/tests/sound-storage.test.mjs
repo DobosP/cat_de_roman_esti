@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import ts from "typescript";
+import ts from "@typescript/typescript6";
 
 const source = readFileSync(new URL("../src/sound.ts", import.meta.url), "utf8");
 const compiled = ts.transpileModule(source, {

@@ -43,3 +43,10 @@ cat_accounts.sqlite3
 # Native GUI gate outputs, never source evidence substitutes
 .gate/
 .vitest/
+
+# Generated native UI bytes; the scaffold remains a source input.
+!/go-backend/embedfs/dist/
+/go-backend/embedfs/dist/**
+!/go-backend/embedfs/dist/.keep
+/go-backend/embedfs/legacy/**
+!/go-backend/embedfs/legacy/.keep

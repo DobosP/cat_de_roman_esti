@@ -61,16 +61,6 @@ func renderLegal(base string, c websiteSettings) string {
 	// describe Romania's statutory 16-year threshold literally, independent of it.
 	return base
 }
-func defaultStaticRoot() string {
-	cwd, _ := os.Getwd()
-	for _, root := range []string{cwd, filepath.Dir(cwd), filepath.Dir(filepath.Dir(cwd))} {
-		p := filepath.Join(root, "cat_de_roman_esti/web/static")
-		if _, err := os.Stat(filepath.Join(p, "index.html")); err == nil {
-			return p
-		}
-	}
-	return "cat_de_roman_esti/web/static"
-}
 func websiteHeaders(w http.ResponseWriter) {
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.Header().Set("Referrer-Policy", "same-origin")
@@ -281,6 +271,9 @@ func (s *Server) website(w http.ResponseWriter, r *http.Request) bool {
 	}
 	if strings.HasPrefix(path, "/api/") {
 		return false
+	}
+	if s.StaticRoot == "" {
+		return s.managedWebsite(w, r)
 	}
 	if file, info, exists := staticFile(s.StaticRoot, path); exists {
 		if strings.HasSuffix(path, "/index.html") {

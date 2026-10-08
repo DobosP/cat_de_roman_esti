@@ -8,12 +8,14 @@ import (
 	"math/big"
 	"net/http"
 	"net/url"
+	"os"
 	"regexp"
 	"strings"
 	"time"
 	"unicode"
 	"unicode/utf8"
 
+	"github.com/DobosP/cat_de_roman_esti/go-backend/embedfs"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie_explore"
@@ -41,6 +43,8 @@ type Server struct {
 	game                *intrusul.Service
 	content             *content.Content
 	StaticRoot          string
+	managedUI           *managedSPA
+	managedUIError      error
 	allowedHosts        []string
 	perechi             *perechi.Service
 	conexiuni           *conexiuni.Service
@@ -52,7 +56,7 @@ type Server struct {
 
 func New(c *content.Content) *Server {
 	s := &Server{game: intrusul.New(c), content: c, allowedHosts: configuredHosts()}
-	s.StaticRoot = defaultStaticRoot()
+	s.managedUI, s.managedUIError = newManagedSPA(embedfs.Files, os.Getenv("CAT_UI"))
 	s.perechi = perechi.New(c)
 	s.conexiuni = conexiuni.New(c)
 	s.contexto = contexto.New(c)
