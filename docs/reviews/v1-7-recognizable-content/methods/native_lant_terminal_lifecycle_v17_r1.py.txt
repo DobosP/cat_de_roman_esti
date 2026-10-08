@@ -1,0 +1,73 @@
+"""Compile exact prospective test sources exclusively, remove them before probes.
+Adapted from accepted ordinary_leafa_compile_lifecycle_r2.py.txt. Original owned
+inode/hash cleanup, signal masking, no-clobber and immutable failure receipt remain.
+Only the unchanged helper and controlled Lanț/terminal sources are temporary; fixtures never change.
+SIGKILL/host loss/storage failure cannot guarantee cleanup; preserve and inspect.
+"""
+import hashlib
+import json
+import os
+from pathlib import Path
+import signal
+import stat
+import subprocess
+import sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+S=Path('/home/dobo/work/_temp/codex__content-v1-7')
+D=R/'docs/reviews/v1-7-recognizable-content'
+SOURCES=[{'source': 'docs/reviews/v1-7-recognizable-content/methods/native_research_content_adapter_v17_r1.go.txt', 'sha256': 'ed1563a09d66522ec96fb6c571daf71d195b5b8ac0072ec9bea913a876c94671', 'temporary': 'go-backend/internal/content/v17_lant_terminal_research_helper_r1.go'}, {'source': 'docs/reviews/v1-7-recognizable-content/methods/native_lant_v17_r1.go.txt', 'sha256': 'b84b726530117575c8904916662fb7193151c06704393c9f0e20335ffda06f77', 'temporary': 'go-backend/internal/lant/v17_lant_controls_probe_r1_test.go'}, {'source': 'docs/reviews/v1-7-recognizable-content/methods/terminal_v17_r1.go.txt', 'sha256': '0a85820e0b225a89ed7b1853349aae486de35e78b7eb41ad0496e7ec76497983', 'temporary': 'go-backend/internal/hopcli/v17_terminal_controls_probe_r1_test.go'}]
+BINARIES=(S/'probe/prospective-native-lant-v17-r1.test',S/'probe/prospective-native-terminal-v17-r1.test')
+RECEIPT=S/'probe/lant-terminal-compile-lifecycle-v17-r1.json'
+received=None
+owned=[]
+codes=[]
+cleanup=[]
+cleanup_observations=[]
+cleanup_errors=[]
+failure=None
+def on_signal(number,frame):
+ global received
+ if received is None:received=number
+for signum in (signal.SIGTERM,signal.SIGINT):signal.signal(signum,on_signal)
+if sys.argv != [str(Path(__file__)), 'build']:raise ValueError('exact build invocation required')
+for row in SOURCES:
+ source=R/row['source'];temp=R/row['temporary'];blob=source.read_bytes()
+ if hashlib.sha256(blob).hexdigest()!=row['sha256']:raise ValueError('method bytes differ')
+ if temp.exists() or temp.is_symlink():raise ValueError('temporary source destination exists; no clobber/retry')
+for path in (*BINARIES,RECEIPT):
+ if path.exists() or path.is_symlink():raise ValueError('owned binary/receipt destination exists; no clobber/retry')
+try:
+ for row in SOURCES:
+  temp=R/row['temporary'];blob=(R/row['source']).read_bytes()
+  if hashlib.sha256(blob).hexdigest()!=row['sha256']:raise ValueError('source changed before publication')
+  previous=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGTERM,signal.SIGINT})
+  try:
+   fd=os.open(temp,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+   with os.fdopen(fd,'wb') as output:
+    identity=os.fstat(output.fileno());owned.append((row,identity))
+    output.write(blob);output.flush();os.fsync(output.fileno())
+  finally:signal.pthread_sigmask(signal.SIG_SETMASK,previous)
+  if received is not None:raise InterruptedError('catchable signal before compiler launch')
+ for package,binary in zip(('./internal/lant','./internal/hopcli'),BINARIES):
+  command=[str(S/'tools/go/bin/go'),'-C',str(R/'go-backend'),'test','-c','-race','-o',str(binary),package]
+  code=subprocess.run(command,check=False).returncode;codes.append({'package':package,'exit_code':code})
+  if code!=0:raise RuntimeError('compiler returned'+str(code))
+  if received is not None:raise InterruptedError('catchable signal during compilation')
+  if not binary.is_file() or binary.is_symlink():raise RuntimeError('compiled binary missing/notregular')
+except BaseException as exc:
+ failure={'type':type(exc).__name__,'message':str(exc)}
+ raise
+finally:
+ for row,identity in reversed(owned):
+  temp=R/row['temporary'];outcome={'path':str(temp),'removed':False,'error':None}
+  try:
+   current=temp.lstat()
+   if not stat.S_ISREG(current.st_mode) or (current.st_dev,current.st_ino)!=(identity.st_dev,identity.st_ino) or hashlib.sha256(temp.read_bytes()).hexdigest()!=row['sha256']:
+    raise RuntimeError('temporary source changed: refuse to delete')
+   temp.unlink();cleanup.append(str(temp));outcome['removed']=True
+  except BaseException as exc:
+   outcome['error']={'type':type(exc).__name__,'message':str(exc)};cleanup_errors.append(outcome['error'])
+  cleanup_observations.append(outcome)
+ receipt={'schema':'v1-7-exclusive-prospective-compile-lifecycle-r1','methods':SOURCES,'failure':failure,'cleanup_observations':cleanup_observations,'cleanup_errors':cleanup_errors,'temporary_sources_removed':cleanup,'all_published_sources_removed':len(cleanup)==len(owned),'binaries':[{'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() and not p.is_symlink() else None} for p in BINARIES],'compiler_results':codes,'caught_signal':received,'research_only_helper_used':True,'installed_data_or_metadata_changed':False,'installation_approval':False}
+ with RECEIPT.open('x') as out:json.dump(receipt,out,sort_keys=True,indent=2);out.write('\n');out.flush();os.fsync(out.fileno())
+ if cleanup_errors:raise RuntimeError('owned source cleanup incomplete; failure receipt preserved; changed/unverifiable paths left intact')
