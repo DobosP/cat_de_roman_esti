@@ -33,6 +33,7 @@ import { useRecordScore } from "../hooks/useRecordScore";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { sound } from "../sound";
 import { categoryColor, categoryLabel } from "../categories";
+import { selectionKey } from "../conexiuniSelectionKey";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { bestScore } from "../scores";
 import { gameByKey } from "../games";
@@ -71,7 +72,6 @@ type StartMode =
   | { kind: "seed"; difficulty: Difficulty }
   | { kind: "daily" };
 
-const selectionKey = (ids: readonly string[]) => JSON.stringify([...ids].sort());
 const ONE_AWAY_GUIDANCE =
   "Aproape: 3 din 4. Schimbă o piesă.";
 type BlockedGuess = { key: string; oneAway: boolean };
