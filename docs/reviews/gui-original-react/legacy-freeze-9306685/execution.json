@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "invocation": "1c0c864f-beec-4d55-98e0-7a1dec14324c",
+  "sha": "93066854f67245d4b70c0ea97dc2401445a3218c",
+  "tree_sha256": "5680879ab9a94f00a64e3815fdbda45b8bc6c5b3dbfd8b02150fa265a3ccbbec",
+  "actions": [
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap reference is source/toolchain/invocation bound",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap receipt hash/identity matches actual bytes",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap log hash matches saved stream",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap log hash matches saved stream",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap log hash matches saved stream",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap log hash matches saved stream",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap command has actual successful bound streams",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap command has actual successful bound streams",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Every bootstrap log belongs to exactly one actual command",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "cat-legacy-freeze",
+      "kind": "command",
+      "command": "node",
+      "argument_count": 2,
+      "args_sha256": "fbab2b6c18272f887137727f2c3d2613ccff56d2f864f2ecf3bbfd4c237d18bb",
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_ms": 127,
+      "stdout_sha256": "ab679fc4def1fed43cf29d48364e74f7e14e32739690331edabb3e4a58104bda",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-cat-legacy-freeze-0.stdout.log",
+      "stderr_log": ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-cat-legacy-freeze-0.stderr.log"
+    }
+  ]
+}

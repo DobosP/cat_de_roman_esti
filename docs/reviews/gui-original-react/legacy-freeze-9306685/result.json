@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "target": "legacy:freeze",
+  "status": "pass",
+  "sha": "93066854f67245d4b70c0ea97dc2401445a3218c",
+  "dirty": false,
+  "tree_sha256": "5680879ab9a94f00a64e3815fdbda45b8bc6c5b3dbfd8b02150fa265a3ccbbec",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "028ab052097aa8ad497732bd9db32e30de9595a69155064d61a5b15d23e1bcbc",
+  "parallel": 2,
+  "started": "2026-10-08T03:55:54.877Z",
+  "finished": "2026-10-08T03:55:55.667Z",
+  "checks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 1
+    },
+    {
+      "name": "cat-legacy-freeze",
+      "status": "pass",
+      "duration_ms": 127
+    }
+  ],
+  "csp": {
+    "stage": "report-only",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {},
+  "artifacts": [
+    ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-bootstrap-config-0.stdout.log sha256:b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+    ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-bootstrap-config-1.stdout.log sha256:b9c1277ac60a8c2f4dfbeed80db0fcfb19195dd614aefe55702876d6e6576574",
+    ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-bootstrap-config-1.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/legacy-freeze/bootstrap-execution.json sha256:de1ec7f0575b0f98a70a0d61088b2c883b85fab17d9824148b970eb78bd0ab60",
+    ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-repo-legacy-freeze-9.stdout.log sha256:4e7cd8143447e605d502d79f0e39dbae42daeef5202ffd8026c76b08fce34753",
+    ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-repo-legacy-freeze-9.stderr.log sha256:decc8cbe4604352b414ea32045c16c172e0cefc46b6326b1865321b8e54eef92",
+    ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-cat-legacy-freeze-0.stdout.log sha256:ab679fc4def1fed43cf29d48364e74f7e14e32739690331edabb3e4a58104bda",
+    ".gate/legacy-freeze/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-cat-legacy-freeze-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz sha256:742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65",
+    "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz.sha256 sha256:0576814384f4013d8c628778a1e57b0a0e1c021642b41cc87253f907fe9d67d5",
+    "legacy/original-bundle.json sha256:5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984",
+    ".gate/legacy-freeze/execution.json sha256:240d56636cdef71b27487d40888bd623c176d992500b919f0a141178da7d9c28"
+  ]
+}
