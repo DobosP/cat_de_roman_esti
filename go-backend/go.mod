@@ -24,7 +24,7 @@ replace github.com/DobosP/cat_de_roman_esti/shared-go/authcore => ../shared-go/a
 
 require (
 	github.com/DobosP/cat_de_roman_esti/shared-go/authcore v0.0.0
-	github.com/DobosP/roedu-ui/web-kit v0.0.0-core-v1.3
+	github.com/DobosP/roedu-ui/web-kit v0.0.0-core-v1.4
 	github.com/jackc/pgx/v5 v5.11.0
 	golang.org/x/net v0.59.0
 )

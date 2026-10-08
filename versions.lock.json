@@ -181,6 +181,20 @@
       "released": "2026-07-06"
     },
     {
+      "tool": "@typescript/old",
+      "kind": "npm",
+      "scope": "core",
+      "status": "transitive-only",
+      "dependants": [
+        "@typescript/typescript6"
+      ],
+      "version": "6.0.3",
+      "source": "https://registry.npmjs.org/typescript/6.0.3",
+      "integrity": "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==",
+      "date": "2026-10-08",
+      "notes": "Published @typescript/typescript6@6.0.2 dependency npm:typescript@^6, captured from genuine Cat npm-ci/lock/installed parser evidence. Canonical package typescript6.0.3 serves the optional JS API only; native typescript7.0.2 compiler floor is unchanged. No direct alias or other parent is admitted."
+    },
+    {
       "tool": "vitest",
       "kind": "npm",
       "scope": "core",
@@ -918,5 +932,5 @@
     "source": "Paul explicitly acknowledged ACK 1–6 and PostgreSQL 16 in the GUI migration parent chat on 2026-10-06, then authorized end-to-end implementation, no further permission questions, parent review/landing and cleanup of completed managed work.",
     "authority": "direct human launch authorization, not physical/release evidence"
   },
-  "core_tag": "core-v1.3"
+  "core_tag": "core-v1.4"
 }
