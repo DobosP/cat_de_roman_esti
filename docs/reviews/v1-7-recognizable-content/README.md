@@ -200,3 +200,20 @@ This is explicitly RESEARCH-ONLY in-memory generatedalias/index transfer into ve
 [Complete archive manifest](native-prospective-complete-archive-manifest-r2.json)15512859 binds43losslessmembers/native481rows/32response transcript/producer lineage/keepers/index/newbin/admissions/logs; archived63b453b retains allbytes.
 Metadata closed00:22:03 before original00:25:50reserve; peaknativeRSS365350912B/archive sampledgroup35549184B/finalfullS-Rgrowth53027706B, all282pins exact, no activechild.
 [Independent actual quality review](complete-native-quality-review-r2.json)f5e3b860 accepts completed declared native research evidence only, after all43tar+2gzip members/481rows/32responses/282pins/old+new lineages and resource clocks; final rawquality/retirement/allgame/Source7 remain withheld. Old failures/rejections/unrun reference813+Conex245qualification/all7/reference69/nativeLanț/terminal/World/fullinstalledhistoricalcontext/finalrawquality/retirement/Source7/assembled release gates remain explicit.
+
+## Complete reference and genuine Source6 historical evidence
+
+[Completion scope](reference-completion-scope-proposal-r2.json)2530cab1/readsetdf2db7dd/[independent ACK](reference-completion-scope-review-r2.json)425ed4f8 freeze1058remaining/requalification case functions with unchanged390reference/964history methods.
+[Source-stop](reference-completion-scope-source-stop-r1.json)abd96ece closesa015source00:41:09→01:01:09/cut00:58:09 before executable admission.
+[Fresh reference admission](reference-completion-native-admission-r2.json)68b66160 separatelymeasures00:51:45→01:11:45UTC/reserve01:08:45,293repo+16tool/candidatepins. All10commands PASS/guardnull, all309pins exact pre/post.
+Actual1058casefunctions:Conex245REQUALIFIED, Lanț124(123routes/allcaptions),Alch84(83profiles/68books521recipes),Quick423,World1,terminal180rawrecords,Salaryincident1.
+The813previouslyunrun functions plus newlyqualifiedConex245 aggregate with retained717previouslyqualifiedpack into1775case functions, no case-function overlap/replay. Board IDs naturally recur in different profile kinds.
+Original6a2bFAILED/oldConex245unqualified remain immutable; newqualification does not retroactively pass the old budget.
+Only newQuickselection-binding sentinel changes to its precise staleKGsource refusal and controlled Salaryalias input mapping changes; all other routes/captions/closures/partitions/payloads/terminalraw records exact.
+Worldgraphsubset succeeds because Salaryisabsent; this is not nativeWorld33/148/1156 qualification.
+OriginalV50 two unchanged test functions actuallyexecute on genuine physical SHA-pinnedSource6, including ALLoriginal seven-blocked assertions/literals.
+All69 reference exactowner/proxy/fuzzy/advisory before/after rows remain unchanged. Installed historical context afterSource7 remains a separate unimplemented gate.
+[Completion summary](reference-completion-results-summary-r2.json)4dce9e3b/[lossless manifest](reference-completion-archive-manifest-r2.json)0fbc6c25 bind1114members/raw40.2MB/archive0275b7cb with allnewcasepairs/2holdoutputs and retainedoldpack lineage.
+Metadata closed01:01:24 before originalreserve/deadline; nativegrouppeak244551680B/archive sampled45879296B/finalfullcampaigngrowth35180049B; [accounting ACK](reference-completion-accounting-ack-r2.json)628fffcf covers every publication.
+A V8 quote SyntaxError before step9 tool dispatch is recorded in metadata; no native attempt/method change or deadline reset occurred.
+[Independent complete-reference actual quality](complete-reference-quality-review-r2.json)4137efd1 accepts completed declared REFERENCE research only after every1114member/1113rawsource/1058newpairs and retained717pairs, genuineV50all7/reference69, all10outersteps/309pins/clock/accounting. It withholds finalretirement/installation. NativeLanțhandlers/original180terminalexecution/nativeWorld33/148/1156/fullinstalledhistoricalcontext/finalrawquality/holdretirement/Source7/currentauthority/fullrelease/assembled acceptance remain required.
