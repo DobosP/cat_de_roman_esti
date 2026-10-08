@@ -6,9 +6,10 @@ export const UNITLESS_PROPERTIES = [
 export type UnitlessProperty = typeof UNITLESS_PROPERTIES[number];
 const unitless = new Set<string>(UNITLESS_PROPERTIES);
 
-export function assertExplicitCss(css: object | undefined): void {
+export function assertExplicitCss(css: unknown): asserts css is Record<string, string | number | undefined> | undefined {
   if (css === undefined) return;
-  if (css === null || Array.isArray(css)) throw new Error("CSS declarations must be a plain bag");
+  if (css === null || typeof css !== "object" || Array.isArray(css) ||
+      ![Object.prototype, null].includes(Object.getPrototypeOf(css))) throw new Error("CSS declarations must be a plain bag");
   for (const [property, value] of Object.entries(css)) {
     if (value === undefined) continue;
     if (typeof value !== "string" && typeof value !== "number") throw new Error(`Unsupported CSS value: ${property}`);
@@ -17,6 +18,13 @@ export function assertExplicitCss(css: object | undefined): void {
       if (!property.startsWith("--") && !unitless.has(property)) throw new Error(`CSS length requires explicit units: ${property}`);
     }
   }
+}
+
+/** Preserve React's unitless numbers through the old SDK's narrower numeric list. */
+export function normalizeExplicitCss(css: unknown): Record<string, string | undefined> | undefined {
+  assertExplicitCss(css);
+  if (css === undefined) return undefined;
+  return Object.fromEntries(Object.entries(css).map(([key, value]) => [key, typeof value === "number" ? String(value) : value]));
 }
 
 export function cssLength(value: string | number | undefined): string | undefined {
