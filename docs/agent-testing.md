@@ -1,10 +1,10 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-10-04
+Last verified: 2026-10-08 — selected toolchain guidance refreshed; current content/GUI qualification in STATUS.
 
 ## Native serving gates
 
-Go 1.27.1 serves the arcade, accounts/proposals and native content/tooling; Node 24 builds the SPA.
+Go 1.27.1 serves the arcade, accounts/proposals and native content/tooling; selected Node26 builds the SPA (ADR-0184).
 [ADR-0162](adr/0162-select-go-production-backend.md) and [ADR-0163](adr/0163-complete-native-go-accounts.md)
 record serving boundaries; [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md)
 records native operator/review rails. Python commands below are optional independent references.
@@ -47,7 +47,7 @@ Other supported Python versions test the retained implementation without regener
 | Reference/content lint | `<interp> -m ruff check` | `All checks passed!` |
 
 `pyproject.toml` adds `-q`; use `-o addopts=""` when recording assertion totals.
-Node 24 is the qualified frontend build environment; verify `node -v`/`npm -v` before use.
+Node26 is selected by ADR-0184; managed-output qualification remains pending; verify `node -v`/`npm -v` before use.
 Playwright setup uses `npx playwright install chromium`; `CDR_E2E_PORT` and
 `CDR_E2E_OUTPUT_DIR` scope the local server and scratch receipts. Private answer helpers run Go; `CDR_BROWSER_PLAN_BINARY` selects the scratch planner.
 Windows targeted reference tests use `PYTHONUTF8=1`; the full Unix `resource`-using suite needs WSL.
@@ -73,4 +73,4 @@ Current content expectations: [ADR-0116](adr/0116-share-current-content-test-exp
 
 Complete native-only qualification: `scripts/qualify_go_toolchain.sh`, documented in
 [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md), requires explicit disposable PG and task scratch,
-Go 1.27.1/Node 24, Python/Rust absent from PATH; no missing required gate becomes a skip.
+Go1.27.1/selectedNode26, Python/Rust absent from PATH; no missing required gate becomes a skip.

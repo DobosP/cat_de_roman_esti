@@ -1,0 +1,66 @@
+{
+  "schema": "independent-actual-current-pure-source6-baseline-review-v1",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T15:21:55.552363+00:00",
+  "decision": "ACCEPT_ACTUAL_EXACT_FOUR_STEP_PURE_SOURCE_EXPORT_QUALIFICATION_ONLY",
+  "source_admission_sha256": "fdfcaab3d9d3ca6dfb6cf403298fb1680b121a13d2363079f1ed90f993b897dd",
+  "source_revision": "59a9a568c445654f69215d735091c9b3e0405831",
+  "bindings": {
+    "linux-resume-review-persistence-admission-r1.json": "fdfcaab3d9d3ca6dfb6cf403298fb1680b121a13d2363079f1ed90f993b897dd",
+    "linux-resume-runtime-plan-r1.json": "cdf3e63e903abf803e5f4793508210f66220d996ec5143dfdeda5114e5c33b1c",
+    "linux-resume-runtime-readset-r1.json": "b409fa19e522944a5cbf88798aa19d7f7e82807dcc9837ae16aa425b0e66e52e",
+    "linux-resume-runtime-method-review-r1.json": "653815f496287a0ab09fb0cefd1c4547c52a80885813f3c129936ed2c02ccb43",
+    "linux-resume-pure-native-admission-r1.json": "a4d84b896fa4a14db4e9dd631ad2ed2407995b4d591fb5621451387fb20b4ccd",
+    "linux-resume-pure-results-r1.json": "d8b8c86bfff9f6abc5705ad812a86165dfb61caf3dd23676361987675f8b4561",
+    "linux-resume-pure-native-stop-r1.json": "a9c9c618fc1b0193029df7dbcd8f8ede670acb2344feddcf0e25fc1738798e8b",
+    "linux-resume-pure-source-r1-result.json": "c3e89a051896d6940ebdba50447d09421817fe1d433ec7bab9c4e764b8a352c0",
+    "linux-resume-pure-source-r1-step-0-result.json": "9146556ee3f0ba2a5e9fdbf1b6251aeab17c051eabfdd47a62eb8b2b04e08524",
+    "linux-resume-pure-source-r1-step-1-result.json": "90990a2c6190f836472960991d14988956d1f8b9103aa8759f13d100873e1336",
+    "linux-resume-pure-source-r1-step-2-result.json": "309bf3b481a2decb405b0d92e78239c964163440cc48e4dbf97ecb6a1c3cc3ba",
+    "linux-resume-pure-source-r1-step-3-result.json": "f5737a5828cc69d1099fdb39533355400037430a9d90800fb1708a720e338e58",
+    "linux-resume-pure-step-0-log-r1.txt": "f554cfdb85411c2bb1d503df3f53dfbad1f753eb8271938833166a5d26a7547c",
+    "linux-resume-pure-step-1-log-r1.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "linux-resume-pure-step-2-log-r1.txt": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+    "linux-resume-pure-step-3-log-r1.txt": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb"
+  },
+  "producer_bindings": {
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/pure-current-binary-keeper-r1.json": "a561650ea6a9e9b74a1a0c88ab788938666d776a24894146219354f7f03cfbf2",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/pure-current-binary-keeper-external-r1.json": "e4f5cd04e52a4e22126c97e762a6f0b8854a2c96097de33065870c2bea86b7e3",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/pure-native-admission-external-r1.json": "a0986a30a479a35a4fa632e6e54fb8782a52cbff07ec2825dc37d9a875c9f555"
+  },
+  "actual_binary_sha256": "3c7d7c1d8e94e563f88d6186bd22d03f25266608352b80d76cdbbf72806c245d",
+  "observations": {
+    "actual_SDK_stdout": "go version go1.27.1 linux/amd64\n",
+    "validation_stdout": "Native sources GREEN\n",
+    "export_check_stdout": "Native private content current\n",
+    "passed_steps": 4,
+    "protected_unique_inputs": 214,
+    "native_peak_sampled_group_RSS_bytes": 85889024,
+    "sampled_peak_incremental_bytes": 24409335,
+    "final_full_S_R_growth_bytes": 18947510,
+    "metadata_publication_upper_increment_bytes": 86056374
+  },
+  "findings": [
+    "All four exact approved SDK/build/validate/export-check argv match immutable a4d84 native admission. Receipts/cumulative/state agree on original baseline/deadline/start; completed next4/pending null, exit0/guard null, all214 recorded pre/post checks and current203 normal+11 scratch hashes exact.",
+    "Current pure binary actualSHA matches keeper; producer receipts/logs and external keeper digest are exact. Keeper froze after build and before both consumers. Four durable raw log copies equal original producer logs; no duplicate full archive is needed.",
+    "Actual current SDK1.27.1 and fresh current-code pure tool independently validate unchanged Source6 source8 and exact existing export. Source8/bundle/digest/authority bytes remain equal their declared original pins, including KG63 and bundlee0cf; no graph/source7 data generation or installation occurred.",
+    "Native completion15:15:16 precedes original15:28:07 reserve/15:31:07 deadline; sampled group85889024B and full S/R/publication accounting remain within admitted2GiB/1GiB and existing disk/memory floors. SDK-only short step reports sampled0 rather than a claim of zero process memory.",
+    "Whole source/root metadata RSS remains unmeasured and is distinct from sampled native process-group qualification. No old failed/resource/clock/method window is retroactively passed or reset.",
+    "This package’s closed stdlib/local/embedded-content dependencies do not establish HTTP/web-kit module integrity, managed assets, serving/GUI parity or current all-four installed authority. Those prerequisites remain unresolved and the known stale-authority distinction remains mandatory."
+  ],
+  "qualified_scope": "Actual current pure Go tool availability and native Source6 content validation/exact export only.",
+  "pending": [
+    "Pinned broader dependency availability/integrity and complete current Go/embed/runtime inputs before current rail/audits.",
+    "GUI/managed-output/current authority and any expected-stale negative control under separate exact admitted scope.",
+    "New Source7 runtime stage, actual fresh same-role/current audits, live transaction/history/inverse/sealed behavior/full required gates/assembled acceptance."
+  ],
+  "limits": {
+    "pure_source_export_pass": true,
+    "broad_module_integrity_pass": false,
+    "HTTP_GUI_managedasset_currentauthority_or_all4_pass": false,
+    "Source7_installed_or_release_approved": false,
+    "old_stage_or_failure_reclassified": false,
+    "source_worker_RSS": "unmeasured",
+    "review_operations": "Static existing source/hash/result/log/prefix/keeper inspection only; no imports/Go/native/test/replay or doc/source mutation."
+  }
+}
