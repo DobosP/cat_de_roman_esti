@@ -1,0 +1,160 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import test from "node:test";
+
+const screen = readFileSync(
+  new URL("../src/screens/Conexiuni.tsx", import.meta.url),
+  "utf8",
+);
+
+const selectionKeySource = readFileSync(
+  new URL("../src/conexiuniSelectionKey.ts", import.meta.url),
+  "utf8",
+);
+
+test("Conexiuni treats a retained one-away selection as an order-independent set", () => {
+  assert.match(screen, /import \{ selectionKey \} from "\.\.\/conexiuniSelectionKey";/);
+  assert.match(
+    selectionKeySource,
+    /selectionKey = \(ids: readonly string\[\]\) => JSON\.stringify\(\[\.\.\.ids\]\.sort\(\)\)/,
+  );
+  assert.match(screen, /selectionKey\(selected\) === blockedGuess\.key/);
+  assert.match(screen, /const guessKey = selectionKey\(guess\);/);
+});
+
+test("Conexiuni snapshots and retains only a recoverable one-away guess", () => {
+  assert.match(screen, /const guess = \[\.\.\.selected\];/);
+  assert.match(screen, /recoverableOneAway = Boolean\(res\.one_away && !res\.lost\)/);
+  assert.match(
+    screen,
+    /if \(recoverableOneAway\) \{\s*setSelected\(guess\);\s*setBlockedGuess\(\{ key: guessKey, oneAway: true \}\);\s*\} else \{\s*setSelected\(\[\]\);\s*setBlockedGuess\(null\);/,
+  );
+  assert.match(screen, /Aproape: 3 din 4\. Schimbă o piesă\./);
+  assert.match(
+    screen,
+    /feedback = blockedGuess\?\.oneAway \? ONE_AWAY_GUIDANCE : hint/,
+  );
+});
+
+test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths", () => {
+  assert.match(
+    screen,
+    /selected\.length !== GROUP_SIZE \|\| actionsLocked \|\| exactBlockedRetry/,
+  );
+  assert.match(
+    screen,
+    /e\.key === "Enter" && selected\.length === GROUP_SIZE && !exactBlockedRetry/,
+  );
+  assert.match(
+    screen,
+    /disabled=\{actionsLocked \|\| selected\.length !== GROUP_SIZE \|\| exactBlockedRetry\}/,
+  );
+  assert.match(screen, /exactBlockedRetry \? "Schimbă o piesă" : "Verifică"/);
+});
+
+test("Conexiuni preserves only a still-visible server-rejected duplicate", () => {
+  assert.match(
+    screen,
+    /if \(!fresh\.won && !fresh\.lost\) \{\s*const freshAvailable = unsolvedTileIds\(fresh\);\s*if \(duplicate && duplicate\.guess\.every\(\(id\) => freshAvailable\.has\(id\)\)\) \{\s*setSelected\(duplicate\.guess\);/,
+  );
+  assert.match(screen, /const unsolvedTileIds = \(fresh: ConexiuniState\)/);
+  assert.match(
+    screen,
+    /if \(res\.correct\) \{[\s\S]{0,180}setSelected\(\[\]\);\s*setBlockedGuess\(null\);/,
+  );
+  assert.match(
+    screen,
+    /const clearSelection = useCallback\([\s\S]{0,180}setBlockedGuess\(null\)/,
+  );
+  assert.match(
+    screen,
+    /if \(changed\) \{\s*sound\.playSelect\(\);\s*setBlockedGuess\(null\);\s*setHint\(null\);/,
+  );
+});
+
+test("Conexiuni never turns a generic duplicate rejection into one-away feedback", () => {
+  assert.match(screen, /setBlockedGuess\(\{ key: selectionKey\(duplicate\.guess\), oneAway: false \}\)/);
+  assert.match(screen, /feedback = blockedGuess\?\.oneAway \? ONE_AWAY_GUIDANCE : hint/);
+  assert.doesNotMatch(screen, /blockedGuess !== null \? ONE_AWAY_GUIDANCE/);
+});
+
+test("mobile recovery and clues stay in normal flow immediately above the board", () => {
+  const coach = screen.indexOf('className="connections-coach-stack"');
+  const coachEnd = screen.indexOf("\n          </div>\n        )}", coach);
+  const guidance = screen.indexOf('className="card connections-feedback col"');
+  const board = screen.indexOf('className="connections-grid"');
+  assert.ok(coach > 0 && coachEnd > coach && guidance > coachEnd && board > guidance);
+  assert.match(
+    screen,
+    /state\?\.clues\.map\(\(clue, index\) => \(\{ key: `clue-\$\{index\}`, message: clue\.message \}\)\)/,
+  );
+  assert.match(
+    screen,
+    /const res = await conexiuniApi\.clue\(state\.game_id\);[\s\S]{0,180}applyAuthoritativeState\(res\)/,
+  );
+  assert.doesNotMatch(screen, /setHint\(res\.clue\.message\)/);
+  assert.doesNotMatch(screen, /onToast\("Indiciu deblocat\./);
+  assert.doesNotMatch(screen, /onToast\("Aproape! 3 din 4\.|onToast\("Nu e grupul/);
+  assert.match(screen, /await reconcileAction\(ticket\)/);
+  assert.match(screen, /actionOwner, ticket, conexiuniApi\.get/);
+});
+
+test("authoritative refresh retires invisible selections without duplicating terminal errors", () => {
+  assert.match(screen, /fresh\.solved\.flatMap\(\(group\) => group\.tiles\.map/);
+  assert.match(screen, /current\.filter\(\(id\) => available\.has\(id\)\)/);
+  assert.match(
+    screen,
+    /setState\(fresh\);[\s\S]{0,240}setBlockedGuess\(null\);\s*setHint\(null\);/,
+  );
+  const reconcile = screen.slice(screen.indexOf("  const reconcileAction ="), screen.indexOf("  const retryActionSync ="));
+  assert.match(reconcile, /applyAuthoritativeState\(fresh\);[\s\S]*if \(!fresh\.won && !fresh\.lost\)/);
+  assert.doesNotMatch(reconcile, /onToast\([^;]+"error"/);
+  assert.doesNotMatch(reconcile, /ONE_AWAY_GUIDANCE|\.one_away/);
+});
+
+test("the sticky coach keeps the bounded mistake budget visible without membership", () => {
+  assert.match(screen, /className="connections-lives"/);
+  assert.match(screen, /role="img"/);
+  assert.match(
+    screen,
+    /aria-label=\{`\$\{state\.lives\} \$\{state\.lives === 1 \? "greșeală disponibilă" : "greșeli disponibile"\}`\}/,
+  );
+  assert.match(screen, /Array\.from\(\{ length: 4 \}/);
+  const clues = screen.match(/const clueMessages = useMemo\([\s\S]*?\n {2}\);/);
+  assert.ok(clues);
+  assert.doesNotMatch(clues[0], /tiles|solution|\.id/);
+  assert.match(screen, /key="connections-feedback"/);
+  assert.match(screen, /\{feedback && \([\s\S]*?role="status"/);
+  assert.match(screen, /clueMessages\.map\(\(\{ key, message \}\) => \([\s\S]*?role="status"/);
+});
+
+test("Indiciu unlocks up to a second clue and reflects remaining availability", () => {
+  assert.match(screen, /const MAX_CLUES = 2;/);
+  assert.match(screen, /const CLUE_MISTAKES_BASE = 2;/);
+  assert.match(screen, /const cluesUsed = state\?\.clues_used \?\? 0;/);
+  assert.match(
+    screen,
+    /const clueMistakesNeeded = CLUE_MISTAKES_BASE \+ cluesUsed;/,
+  );
+  assert.match(
+    screen,
+    /const clueMistakesRemaining = Math\.max\(0, clueMistakesNeeded - \(state\?\.mistakes \?\? 0\)\);/,
+  );
+  // The button stays gated by the server's clue_available flag at every stage...
+  assert.match(screen, /disabled=\{actionsLocked \|\| !state\.clue_available\}/);
+  // ...while its title distinguishes "not yet unlocked" from "both spent".
+  assert.match(
+    screen,
+    /cluesUsed >= MAX_CLUES\s*\?\s*"Indicii epuizate"\s*:\s*`Disponibil după \$\{clueMistakesNeeded\} greșeli`/,
+  );
+  // Disabled controls expose their countdown as visible text on touch screens; once
+  // unlocked after the first clue, a small "1 rămas" suffix marks the second.
+  assert.match(
+    screen,
+    /!state\.clue_available && cluesUsed < MAX_CLUES/,
+  );
+  assert.match(
+    screen,
+    /className="conexiuni-clue-status"> · 1 rămas<\/span>/,
+  );
+});

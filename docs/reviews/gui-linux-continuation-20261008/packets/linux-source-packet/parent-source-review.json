@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "scope": "Reviewed Windows source proposal, not product application or runtime qualification",
+  "sourcePaths": 38,
+  "sourceBytes": 379133,
+  "beforeImages": 24,
+  "newPaths": 14,
+  "baseSource": "ff7fb05d8cb80518833f10ca410e2581ba0b4725",
+  "observedCurrentSource": "59a9a568c445654f69215d735091c9b3e0405831",
+  "reviewedPresealManifest": "aed0391a6acc90635c3da68250a14337d47931aa9ac2cfd1e3ce8c1f0bf26735",
+  "finalManifest": "845e7941ffb646c85c7778a1797cc388943e2c8b5072f8f40cb4dd8f8164ac3a",
+  "combinedPatch": "8e54be60f207e640ab9e33002bfb49a2ba400ee15ce850f53251e508b5860618",
+  "mappingReviewSeal": "ff677642d84c36f614e75cd15a5093de5b4c76f0e5bc18a2d99e41c149feef8b",
+  "mappingReportSha256": "bee8f76c153e1f92a69f82a9e228ec53f8a9763fb650f4ab871b868bb6a621da",
+  "mappingReviewRows": 15,
+  "mappingReviewBytes": 594330,
+  "mappingReviewFailures": 0,
+  "buildV2SourceReviewSeal": "66565ee016d4842425a052f60e76a068e310ea467db620282b6e237e96ad6d08",
+  "checks": [
+    "38selectedsourcehashes and24exactcurrentrawGitblobs/modes",
+    "14actualnewpathabsences",
+    "independentbyteexactcombinedpatchreconstruction",
+    "scratchgitapply--checkexit0ONLY",
+    "rootfinalsharedrepoGitstatusclean"
+  ],
+  "sourceFindings": {
+    "C1": "nonce-compatible inert test shell only, no assertions weakened",
+    "C2": "exact root versions lock COPY into frontend stage before native compiler floor check"
+  },
+  "reviewedAt": "2026-10-08T10:05:52.7831622Z",
+  "productApplied": false,
+  "productCommitted": false,
+  "qualified": false,
+  "runtime": "NOT RUN",
+  "newQualifiedIdentities": "UNSET",
+  "linuxPending": [
+    "genuineowningGo x/net/html dependency metadata",
+    "sourceformatting/compilation/unit/native/lint checks",
+    "trustedimage recipe selection andcanonicalactualsource/image/full gates",
+    "currentSTATUS/ADR integrationafteractualgreenchecks",
+    "owner clean-idle kit sequence andformalKIT_BUMP",
+    "actualbudget/device/M2prerequisites"
+  ]
+}

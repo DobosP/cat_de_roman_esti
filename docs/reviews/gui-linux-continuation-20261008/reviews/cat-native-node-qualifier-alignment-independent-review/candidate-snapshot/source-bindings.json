@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "state": "SIX-PATH EXISTING-DECISION SOURCE ALIGNMENT; UNAPPLIED; UNQUALIFIED; ALL RUNTIME NOT RUN",
+  "pin": "59a9a568c445654f69215d735091c9b3e0405831",
+  "pin_git_tree": "63a846a9974463ba360b4083cc53d0249f92fee7",
+  "observed_head_finish": "59a9a568c445654f69215d735091c9b3e0405831",
+  "shared_porcelain": "",
+  "target_count": 6,
+  "fresh_main_preimages": 2,
+  "dependent_prior_doc_afterimages": 4,
+  "files": [
+    {
+      "path": "scripts/qualify_go_toolchain.sh",
+      "provenance": "FRESH rawmain59a9 beforeimage, exact blob/mode/bytes",
+      "condition": "exact beforeimage blob/SHA/raw bytes and declared mode required",
+      "before": {
+        "mode": "100755",
+        "blob": "48032f620f260148362d37a409353181b0ccd481",
+        "bytes": 4065,
+        "sha256": "c7e65ad67627e5060a154f3aef6091e46057562456a6d704d7d1e7a85d90ab11"
+      },
+      "after": {
+        "mode": "100755",
+        "blob": "485ca13f9dad8dc6ffc7bd3e29ddaa295d15e6ea",
+        "bytes": 4072,
+        "sha256": "912e18cdf2e2101cdd2ba8906139515173eb45e5dd689452282c71c78cf5022d"
+      }
+    },
+    {
+      "path": "docs/NATIVE_TOOLCHAIN.md",
+      "provenance": "FRESH rawmain59a9 beforeimage, exact blob/mode/bytes",
+      "condition": "exact beforeimage blob/SHA/raw bytes and declared mode required",
+      "before": {
+        "mode": "100644",
+        "blob": "144aa318dd3648592a4fdd9c3695be22c76fee3d",
+        "bytes": 6470,
+        "sha256": "fd39105146e7c7a04449f230a763bb54da75b09094d0a021f548c4605cba70b3"
+      },
+      "after": {
+        "mode": "100644",
+        "blob": "3cb71f616636ba7b1ee8ea2194a1339d9f715d4e",
+        "bytes": 7501,
+        "sha256": "2b22b139386206634b56d857f98b6b640b6801fe517cd654da6e2038094ee989"
+      }
+    },
+    {
+      "path": "README.md",
+      "provenance": "EXACT CLOSED Cat9-doc AFTERIMAGE; dependency must be integrated; NOT rawmain",
+      "condition": "exact beforeimage blob/SHA/raw bytes and declared mode required",
+      "before": {
+        "mode": "100644",
+        "blob": "5bc791a90d9cd0e00e0f9f65ffdf730f034cd3b7",
+        "bytes": 12120,
+        "sha256": "5aafd3aab31a8d0476aff309d54e04bf3cf27e9861d02629fa6e61bca647fcef"
+      },
+      "after": {
+        "mode": "100644",
+        "blob": "1b1702d04dc91b4a04d7db2a10bb5f2ff0bb4a99",
+        "bytes": 12446,
+        "sha256": "1a10cb594893496538ef44b302df66cfbb25cade7353726d2c93f3bea2e9364f"
+      }
+    },
+    {
+      "path": "docs/agent-testing.md",
+      "provenance": "EXACT CLOSED Cat9-doc AFTERIMAGE; dependency must be integrated; NOT rawmain",
+      "condition": "exact beforeimage blob/SHA/raw bytes and declared mode required",
+      "before": {
+        "mode": "100644",
+        "blob": "5abf19caa809fbf2d057374f3d10f09c6db42ce6",
+        "bytes": 6597,
+        "sha256": "4f2551c1853f9c1cea4c1e07edf635466e586b6808c1758fc19717b32be1245d"
+      },
+      "after": {
+        "mode": "100644",
+        "blob": "8c00269e2333148de8e23ac99f403f8847bd02d3",
+        "bytes": 6647,
+        "sha256": "bbe0990375030d133a4f82f2ce707f6207b15800191a59f7a4c83bca1df74669"
+      }
+    },
+    {
+      "path": "docs/STATUS.md",
+      "provenance": "EXACT CLOSED Cat9-doc AFTERIMAGE; dependency must be integrated; NOT rawmain",
+      "condition": "exact beforeimage blob/SHA/raw bytes and declared mode required",
+      "before": {
+        "mode": "100644",
+        "blob": "fd3079561dc8bf887415aa2ad4c275185b822ce7",
+        "bytes": 13493,
+        "sha256": "3605b9ca92227e11aab5210bae511f7ba2a242c3560412278e13ce7ce68cfa2e"
+      },
+      "after": {
+        "mode": "100644",
+        "blob": "198356915378b4852de21dfa2ad5cca078a90572",
+        "bytes": 13682,
+        "sha256": "10dfca166b657b73e4b61ef04a66ab9f2eee6ef70b3159c76696a51c9542e43d"
+      }
+    },
+    {
+      "path": "docs/execplans/s1-cat.md",
+      "provenance": "EXACT CLOSED Cat9-doc AFTERIMAGE; dependency must be integrated; NOT rawmain",
+      "condition": "exact beforeimage blob/SHA/raw bytes and declared mode required",
+      "before": {
+        "mode": "100644",
+        "blob": "f48695eadef6a47c781e6d591b659696fe311187",
+        "bytes": 38481,
+        "sha256": "84ec1dc6edba7670ef1a0b3225d4874c7f382dd9d42dde53f688aebb4a84effa"
+      },
+      "after": {
+        "mode": "100644",
+        "blob": "43d45ee0b631e47868ef46c644684fdbe0953c4d",
+        "bytes": 39804,
+        "sha256": "abf3a4d96039b430101eafadd6eefbf9cb8cf34e493da85137f1546240326369"
+      }
+    }
+  ],
+  "predecessor": {
+    "packet": "cat-accepted-calculation-doc-candidate",
+    "identity": {
+      "SEAL.json": "a5e90bd370c1659a3164a011467a7bef396d129a9cf1b75293f535bd4ea9d57b",
+      "SHA256SUMS": "6fc8a9bfa8bb7d51686221bfe767196ae1d2e63e52b8715136368b4bc0603a71",
+      "source-bindings.json": "fa99393d5a653309600e5bca62637c53ee15fd043fa78e0be23ba85b179949d6"
+    },
+    "closed_payload_files": 42,
+    "closed_payload_bytes": 879190,
+    "mutation": "NONE; dependent preimages copied without rewriting any predecessor",
+    "dependency": "Apply Cat9 docs before these4 follow-on documentation hunks"
+  },
+  "integration_order": [
+    "original38 source packet",
+    "separate2 eager-accounting packet",
+    "CLOSED Cat9 docs packet",
+    "separate core2 docs packet, manager-owned external repository",
+    "this separate6 qualifier alignment packet after independent acceptance/exact guards"
+  ],
+  "patch": {
+    "path": "conditional-native-node-qualifier-alignment.patch",
+    "bytes": 18262,
+    "sha256": "b1a180e5e7b5964eb3cdc3b171625353dc375b3cdfb9dc362a2e244b57a9e6be",
+    "scratch_check": "PASS; no application",
+    "windows_filemode": "scratch check disables Windows filemode comparison only; portable patch/script binding preserve100755"
+  },
+  "single_line_script_change": {
+    "old": "[[ \"$(node --version)\" == v24.* ]] || { printf 'Qualified Node 24 is required\\n' >&2; exit 2; }",
+    "new": "[[ \"$(node --version)\" == v26.10.0 ]] || { printf 'Selected Node 26.10.0 is required\\n' >&2; exit 2; }",
+    "old_bytes": 4065,
+    "new_bytes": 4072,
+    "every_other_script_byte_unchanged": true,
+    "mode_before": "100755",
+    "mode_after": "100755",
+    "no_new_parser_or_support_policy": true,
+    "no_npm_guard_or_other_command_change": true
+  },
+  "literal_preservation": {
+    "status_lines": 120,
+    "status_only_changed_line": 5,
+    "other119_status_lines_exact": true,
+    "source6_source7_all_pins_receipts_counts_preserved": true,
+    "agent_testing_lines": 78,
+    "plan_sections": 12,
+    "historical_checked_progress_records_preserved": true,
+    "every_other_plan_line_preserved_except_current_state_and_future_order": true,
+    "no_new_adr": true,
+    "no_product_handover_path": true
+  },
+  "selected_pins": {
+    "node": "26.10.0",
+    "npm": "12.2.0, existing ADR0184 selection; no new script predicate",
+    "go": "go version go1.27.1 linux/amd64, unchanged",
+    "provenance": "existing ADR0184 and root/frontend .nvmrc literal source; engine-strict existing"
+  },
+  "qualification": {
+    "source_application": "UNAPPLIED",
+    "qualified": "NO",
+    "tests_authored": 0,
+    "tests_run": 0,
+    "installed_version_observation": "UNACQUIRED",
+    "standalone_result": "UNACQUIRED",
+    "managed_output_proof": "NOT EARNED",
+    "startup_gzip": "UNACQUIRED",
+    "new_qualified_identity": "NONE"
+  },
+  "independent_review": "CLOSED three-agent source/prose/preservation reviews; no blocker; no writes or runtime execution",
+  "unchanged_rails": "all other script bytes, failure exit2/no-skip, Go/scratch/disposablePG/Python-Rust/privacy/native/browser checks, static-root/order, every numeric budget, frozen/historical evidence, core1.2/release/tag, E3/device/M2/phase/S0b/owner holds",
+  "forbidden_execution": [
+    "product code",
+    "tests",
+    "parsers",
+    "validators",
+    "generators",
+    "compilers",
+    "formatters",
+    "builds",
+    "Docker",
+    "setup",
+    "environment probes"
+  ],
+  "repository_writes": "NONE; no product/index/object/stage/commit/merge/push/reset/cleanup"
+}

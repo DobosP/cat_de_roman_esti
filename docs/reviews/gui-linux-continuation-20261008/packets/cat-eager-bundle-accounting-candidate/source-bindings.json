@@ -1,0 +1,217 @@
+{
+  "schema": 1,
+  "state": "SOURCE ONLY; UNAPPLIED; UNQUALIFIED; ALL RUNTIME NOT RUN",
+  "pin": "59a9a568c445654f69215d735091c9b3e0405831",
+  "pin_git_tree": "63a846a9974463ba360b4083cc53d0249f92fee7",
+  "observed_head_start": "59a9a568c445654f69215d735091c9b3e0405831",
+  "observed_head_finish": "59a9a568c445654f69215d735091c9b3e0405831",
+  "shared_porcelain": "",
+  "target_count": 2,
+  "files": [
+    {
+      "after": {
+        "blob": "c2356eac04b0e2d0ea14c74063488cb0b6e18e5c",
+        "mode": "100644",
+        "bytes": 6339,
+        "sha256": "b8421a4946eff3408abab57856b9147ea54f5b912d7bfb0c8f778ff0695df643"
+      },
+      "before": {
+        "blob": "da749befd46e8acb8964fe24adbbeb99232de698",
+        "mode": "100644",
+        "bytes": 4706,
+        "sha256": "f0dd6193d79fdb42109ec23b32822ecbc67a0ed771dcb55aff8bf815f15e9a92"
+      },
+      "condition": "exact raw beforeimage +100644 mode",
+      "matches_ff7_current_working_and_committed": true,
+      "path": "frontend/scripts/check-bundle-budget.mjs"
+    },
+    {
+      "after": {
+        "blob": "7c4eb96b97646f505187eab27bf68bde35d2b622",
+        "mode": "100644",
+        "bytes": 14509,
+        "sha256": "8ce0366e1418562895c9b3e281e1266cd572e0fe8dbfec015f5c7e838320d70f"
+      },
+      "before": {
+        "blob": "3af738e12141f31b8b66898def3d7abad37f2a2e",
+        "mode": "100644",
+        "bytes": 2529,
+        "sha256": "408b351168a8e72ca6d0db69763e83aab17939c536d621fadadcdfcf35be1554"
+      },
+      "condition": "exact raw beforeimage +100644 mode",
+      "matches_ff7_current_working_and_committed": true,
+      "path": "frontend/tests/bundle-budget.test.mjs"
+    }
+  ],
+  "patch": {
+    "sha256": "e971934f6c57f59d8ca1fd4167bc19d5734898eac063c64be278fee09ce4fda1",
+    "bytes": 17291,
+    "scratch_check": "git apply --check --whitespace=error-all success only; no application",
+    "path": "conditional-eager-accounting.patch"
+  },
+  "invariants": {
+    "default_limit_kib": 120,
+    "preserved_helpers": [
+      {
+        "bytes": 337,
+        "name": "measureGzipFiles",
+        "unchanged": true,
+        "sha256": "deeea4c3c8ae9d64f939ba0c3148b8a7ef42e120720b328e828fbcc626fb3625"
+      },
+      {
+        "bytes": 257,
+        "name": "parseLimitKiB",
+        "unchanged": true,
+        "sha256": "2ceecb6c0956886d2fee6b6a4a34a11fab7226d6037af2c31bd649866342c59a"
+      },
+      {
+        "bytes": 528,
+        "name": "assertRomanianFontSubsets",
+        "unchanged": true,
+        "sha256": "028d06b05c7f726abbe00af805f7d3d3380a7cac931da232bb1db3bdcd8cace4"
+      }
+    ],
+    "zero_skip_source": true,
+    "new_tests_count": 7,
+    "original_tests": "every original body/name/assertion unchanged; only named checkInitialBundle import added",
+    "original_tests_count": 4,
+    "new_test_names": [
+      "explicit eager account roots include recursive JS/CSS once and exclude game routes",
+      "explicit eager account roots reject missing or malformed chunk files",
+      "initial budget counts eager account bytes that the static-only closure misses",
+      "initial budget requires the account root even when the caller supplies empty eager roots",
+      "initial budget fails closed for missing account JS, CSS, or nested import output",
+      "eager root options require bounded own string keys and deduplicate repeated roots",
+      "eager account closure rejects malformed shared files, CSS, and static import edges"
+    ],
+    "fixtures": "ordinary fixed arithmetic synthetic JS/CSS; actual future checker causal excess test; no production measurement"
+  },
+  "eager_binding": {
+    "current_source": "App lazy import and unconditional mount outside Routes; AccountBar returns auth-dependent UI after module load",
+    "historical_manifest_path": "cat_de_roman_esti/web/static/.vite/manifest.json",
+    "historical_manifest_blob": "274396be5ca03191ee229786e13009472ad36eea",
+    "new_build_observation": "NOT RUN",
+    "source_behavior": "entry/default static behavior preserved; explicit eager closure first validates required file/CSS/static imports; cycles/files deduplicate; all unselected dynamic game edges excluded",
+    "historical_ref": "93066854f67245d4b70c0ea97dc2401445a3218c",
+    "historical_manifest_sha256": "9ed68d3ff5f73bec7ced96e100ff5718043bcc7efc85cf3b3916df5c82867827",
+    "production_requirement": "private frozen AccountBar key list passed unconditionally by checkInitialBundle; no caller/environment eager-root opt-out",
+    "historical_manifest_bytes": 6000,
+    "key": "src/components/AccountBar.tsx",
+    "historical_only": true
+  },
+  "input_bindings": [
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "09ab5b8b0e9883617780bea3264a8390be2ba25ba7a45b695a739c1c204329c0",
+      "bytes": 6622,
+      "matches_current_committed": true,
+      "path": "AGENTS.md"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "792ecc571f4c836de01f9e333871ae015fa58113a49143239583cdaa040caa51",
+      "bytes": 13085,
+      "matches_current_committed": true,
+      "path": "docs/STATUS.md"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "e3d1309dc410c770c12c90d227cea4d274b29e48c47d73169b951d840950c56d",
+      "bytes": 158761,
+      "matches_current_committed": true,
+      "path": "docs/PROGRAM.md"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "dd1ebc1068a19e3018eaa6a61ef50cc109881df3604950b1b4842aa7a357f6cc",
+      "bytes": 34513,
+      "matches_current_committed": true,
+      "path": "docs/execplans/s1-cat.md"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "f68c7bf0e60ef05f7f6f03b673a47bb5e0e97c12e81006737772c74e510af03f",
+      "bytes": 2802,
+      "matches_current_committed": true,
+      "path": "docs/adr/0184-native-spa-toolchain-and-managed-output.md"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "b684db705b79980948c942af1ebded2ba7aa95cf278cc3be6e16bf12fd33c6dd",
+      "bytes": 5574,
+      "matches_current_committed": true,
+      "path": "frontend/src/App.tsx"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "f0b48a88da55437a7842ca5bba284514ce1302808204dcab672354c0adc03ec1",
+      "bytes": 8925,
+      "matches_current_committed": true,
+      "path": "frontend/src/components/AccountBar.tsx"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "2abb4595f28d2ea9537ccedba71aea709b6d6bb150c05771f6ca64bd3f55a4cb",
+      "bytes": 886,
+      "matches_current_committed": true,
+      "path": "frontend/vite.config.ts"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a",
+      "bytes": 1391,
+      "matches_current_committed": true,
+      "path": "frontend/package.json"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "79438d217362f1637ab81950ba3b79cb2f67629c0e2a9622b15d3bcd0b39274b",
+      "bytes": 39150,
+      "matches_current_committed": true,
+      "path": "versions.lock.json"
+    },
+    {
+      "captured": "hash only; literal relevant source read",
+      "sha256": "5075ed88e618964fc3cc95092d5b090373c7715d05f605a5d218445c26067a20",
+      "bytes": 7615,
+      "matches_current_committed": true,
+      "path": "scripts/gui-assets.mjs"
+    }
+  ],
+  "earlier_packet": {
+    "source_bindings_sha256": "845e7941ffb646c85c7778a1797cc388943e2c8b5072f8f40cb4dd8f8164ac3a",
+    "checksum_manifest_sha256": "098ce6b04c459416bd492ebf8d674dc634bc2884bab3303eb2100a2d9dce469f",
+    "source_paths": 38,
+    "path": "linux-source-packet",
+    "seal_sha256": "207f1e9aa2f9d6c2b7355fd9ad116bcce9c92a03b85a0fd0102d10fb5cc5fb0e",
+    "integration": "may apply original38-path packet then this exact2-path amendment; original source/evidence is never rewritten",
+    "disjoint_targets": true
+  },
+  "pending": [
+    "manager independent closed-byte review",
+    "Paul Linux tests/lint/typecheck/build and actual AccountBar manifest/complete bundle measurement",
+    "current STATUS/ADR owner integration without Source7 rollback",
+    "actual image/full/original fixture/privacy/CSP/budget/device gates; formal milestones remain pending"
+  ],
+  "executed": [
+    "literal source authoring/reads/hashes",
+    "read-only Git raw source/mode/blob/diff",
+    "scratch applicability check"
+  ],
+  "not_run": [
+    "product code",
+    "tests",
+    "compilers",
+    "parsers",
+    "validators",
+    "generators",
+    "formatters",
+    "builds",
+    "Docker",
+    "setup",
+    "environment probes",
+    "runtime qualification"
+  ],
+  "product_repo_edits": false,
+  "earlier_packet_edits": false
+}

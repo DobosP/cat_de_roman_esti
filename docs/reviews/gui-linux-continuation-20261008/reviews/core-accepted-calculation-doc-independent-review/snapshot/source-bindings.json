@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "state": "OWNER ACCEPTED CAT CALCULATION; CORE DOCUMENTATION SOURCE ONLY; UNAPPLIED; UNQUALIFIED",
+  "pin": "9add2483ea95b4ee4a742b3332002e83b9766e5d",
+  "tree": "a420dc8cf21b90053a047c2f25b883008a96e2e7",
+  "files": [
+    {
+      "path": "README.md",
+      "condition": "Exact raw Git beforeimage/blob/mode100644 required",
+      "before": {
+        "mode": "100644",
+        "blob": "6d1a03a3569206db3e2495221901d75b7bcdc563",
+        "bytes": 7161,
+        "sha256": "9ef26ae471d46cfd141db78a259810793bea0f1f2ef26679522a8aba3936075a"
+      },
+      "after": {
+        "mode": "100644",
+        "bytes": 7743,
+        "sha256": "00efbde51a368239ec523d88a0cca55dffab2f8e7252799582c2c1aceb18f296",
+        "blob": "2f9f225381ada239c83914c52926d76500b386a8"
+      }
+    },
+    {
+      "path": "docs/PROGRAM.md",
+      "condition": "Exact raw Git beforeimage/blob/mode100644 required",
+      "before": {
+        "mode": "100644",
+        "blob": "ee7f98a1e6569fa8d8a779702955f5ff1541197f",
+        "bytes": 162681,
+        "sha256": "0f4b577a9ab05c8998af488c9ac131377e772c48f7842eb15aadabe6bc6746de"
+      },
+      "after": {
+        "mode": "100644",
+        "bytes": 163530,
+        "sha256": "7b28b574d2c37fe309f181ccd31c630bacf1d62439bca1ffa8e2387dff578e38",
+        "blob": "72ef9e84b140fe2d7bab3f0657f82952d6d0a920"
+      }
+    }
+  ],
+  "catProducerSeal": "a5e90bd370c1659a3164a011467a7bef396d129a9cf1b75293f535bd4ea9d57b",
+  "catClarificationSha256": "888010a2f1a23c8573fb68435654d43d90c6ce94d8954981f316a58443ecda02",
+  "reusableClarificationSha256": "888010a2f1a23c8573fb68435654d43d90c6ce94d8954981f316a58443ecda02",
+  "coreRelease": "9e0a88e33d44ba7ce9e84ead890c897b36d41dd4",
+  "tagObject": "b5e1c817608e79411595da7f46618475e92acc13",
+  "runtime": "NOT RUN",
+  "applied": false,
+  "qualified": false,
+  "integrationOrder": [
+    "original38 Cat source",
+    "separate2 Cat eager code",
+    "separate9 Cat docs",
+    "separate2 core docs"
+  ],
+  "scope": "Same narrow PROGRAM clarification; README checkpoint only. No shared SDK contract/core ADR/repacked release.",
+  "scratchApplicability": "git apply --check --verbose on exact captured beforeimages: exit0; CHECK ONLY, no application or product validation",
+  "readmeLines": 120
+}

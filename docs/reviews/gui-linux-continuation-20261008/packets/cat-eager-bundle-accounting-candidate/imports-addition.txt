@@ -1,0 +1,9 @@
+SOURCE ONLY; NOT RUN.
+Append additions-source.mjs to frontend/tests/bundle-budget.test.mjs without changing any existing test name, assertion or fixture.
+In the existing named import from ../scripts/check-bundle-budget.mjs, add exactly:
+  checkInitialBundle,
+No other import changes are needed: assert, mkdtempSync, mkdirSync, rmSync, writeFileSync, tmpdir, join, test, ROMANIAN_FONT_SOURCES, collectInitialBundleFiles, measureGzipFiles and parseLimitKiB are already imported.
+The four Romanian font source metadata fixture entries retain the current ROMANIAN_FONT_SOURCES contract. Font files are not counted in this JS/CSS gate.
+Synthetic JS/CSS contains fixed arithmetic sequences; no randomness, entropy source or measured production claim. Gzip byte limits are derived during future test execution using the actual measured static/full closures.
+The additional eagerRoots property supplied to checkInitialBundle is intentional: it must not allow an empty list to disable the required account root. The proposed public override belongs only to collectInitialBundleFiles.
+No code, parser, formatter, tests, builds, validators or import execution was run while authoring these additions.

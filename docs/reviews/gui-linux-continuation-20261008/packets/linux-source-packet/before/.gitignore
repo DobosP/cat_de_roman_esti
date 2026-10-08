@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Local env / secrets (the example is committed; the real one is not)
+.env
+.env.local
+.env.prod
+.env.anon
+
+# Accounts-mode local dev database (never committed)
+*.sqlite3
+cat_accounts.sqlite3
+
+# Editor / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Workflow scratch — not repo documentation (agent-ops docs/29-doc-governance.md §2)
+/TASK_BRIEF.md
+/TASK_RESULT.md
+/SWARM_RESULT.md
+
+# Native GUI gate outputs, never source evidence substitutes
+.gate/
+.vitest/
+
+# Generated native UI bytes; the scaffold remains a source input.
+!/go-backend/embedfs/dist/
+/go-backend/embedfs/dist/**
+!/go-backend/embedfs/dist/.keep
+/go-backend/embedfs/legacy/**
+!/go-backend/embedfs/legacy/.keep

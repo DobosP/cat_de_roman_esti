@@ -1,0 +1,3 @@
+Read-only capture diagnostic, 2026-10-08:
+Initial shell call used unquoted HEAD^{tree}. PowerShell argument handling produced an ambiguous Git revision error and -encodedCommand-related output. This did not establish a tree identity. The source-only corrective read used the literal quoted revision HEAD^{tree} and returned 63a846a9974463ba360b4083cc53d0249f92fee7. The sealed capture uses explicit GitArguments arrays; no candidate or product code was executed.
+One early multi-file text output was truncated. Needed gate/hook/package/version anchors were reread with bounded literal spans and targeted rg; no inference relies on the truncated tail.

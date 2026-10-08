@@ -1,0 +1,3892 @@
+diff --git a/.gitignore b/.gitignore
+index c631e92..a59cf97 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -50,3 +50,10 @@ cat_accounts.sqlite3
+ !/go-backend/embedfs/dist/.keep
+ /go-backend/embedfs/legacy/**
+ !/go-backend/embedfs/legacy/.keep
++
++# Private GUI identity outputs; only the empty embedding scaffold is source.
++!/go-backend/embedfs/build/
++/go-backend/embedfs/build/*
++!/go-backend/embedfs/build/dist/
++/go-backend/embedfs/build/dist/**
++!/go-backend/embedfs/build/dist/.keep
+diff --git a/Dockerfile.gui b/Dockerfile.gui
+new file mode 100644
+index 0000000..5cdeffc
+--- /dev/null
++++ b/Dockerfile.gui
+@@ -0,0 +1,49 @@
++# syntax=docker/dockerfile:1
++# Consumer GUI image candidate. The trusted wrapper must select this file.
++# Every image/version below is copied from the current versions.lock.json.
++FROM node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33 AS frontend
++WORKDIR /build
++COPY versions.lock.json /build/versions.lock.json
++RUN npm install --global npm@12.2.0
++COPY frontend/package.json frontend/package-lock.json ./frontend/
++COPY frontend/vendor/ ./frontend/vendor/
++WORKDIR /build/frontend
++RUN npm ci
++WORKDIR /build
++COPY frontend/ ./frontend/
++COPY legacy/ ./legacy/
++COPY scripts/gui-assets.mjs ./scripts/gui-assets.mjs
++COPY tools/gui-bootstrap-webkit/scripts/kit-sync.mjs ./tools/gui-bootstrap-webkit/scripts/kit-sync.mjs
++RUN cd frontend && npm run build
++# Owning sync verifies the actual manifest/assets and exact frozen original30.
++RUN node scripts/gui-assets.mjs sync
++
++FROM golang:1.27.1-trixie@sha256:8f58fd67ea075142d947a60e0caa4317746a55118d312f027793d382c7741734 AS backend
++ARG GATE_SHA
++ARG GATE_TREE_SHA256
++ENV GOTOOLCHAIN=local
++WORKDIR /build/go-backend
++COPY shared-go/authcore/ /build/shared-go/authcore/
++COPY go-backend/ ./
++COPY versions.lock.json /build/versions.lock.json
++COPY cat_de_roman_esti/fixtures/ /build/cat_de_roman_esti/fixtures/
++COPY tests/fixtures/kg_sample.json tests/fixtures/games_pack.json /build/tests/fixtures/
++COPY docs/CRITIQUE_RUBRIC.md /build/docs/CRITIQUE_RUBRIC.md
++COPY --from=frontend /build/go-backend/embedfs/dist/ ./embedfs/dist/
++COPY --from=frontend /build/go-backend/embedfs/legacy/ ./embedfs/legacy/
++RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-content export --root .. --check
++# No defaults or environment fallback: failure prevents the app compilation.
++RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-gui-build --root .. --sha "$GATE_SHA" --tree-sha256 "$GATE_TREE_SHA256" \
++    && CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 go build -trimpath -ldflags="-s -w" -o /out/app ./cmd/cat-server
++
++FROM gcr.io/distroless/static-debian13:nonroot@sha256:e2e927ec666bae08560abb3c55d0659eceabb657f56b6782ab500a9fc7f555e3
++WORKDIR /
++COPY --from=backend --chown=nonroot:nonroot /out/app /app
++COPY shared-go/authcore/LICENSE /usr/share/doc/cat-authcore/LICENSE
++ENV CAT_ACCOUNTS_ENABLED=0
++USER nonroot:nonroot
++EXPOSE 8080
++STOPSIGNAL SIGTERM
++HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 CMD ["/app", "healthcheck"]
++ENTRYPOINT ["/app"]
++CMD ["-listen", "0.0.0.0:8080"]
+diff --git a/Dockerfile.gui.dockerignore b/Dockerfile.gui.dockerignore
+new file mode 100644
+index 0000000..ad1a23c
+--- /dev/null
++++ b/Dockerfile.gui.dockerignore
+@@ -0,0 +1,45 @@
++# Closed context for this consumer-only image recipe. No gate/env/scratch inputs.
++**
++!frontend/
++!frontend/**
++frontend/node_modules/
++frontend/dist/
++frontend/.vite/
++frontend/screenshots/
++frontend/.env*
++!go-backend/
++!go-backend/**
++go-backend/embedfs/dist/**
++go-backend/embedfs/legacy/**
++go-backend/embedfs/build/**
++!go-backend/embedfs/dist/.keep
++!go-backend/embedfs/legacy/.keep
++!go-backend/embedfs/build/dist/.keep
++!shared-go/
++!shared-go/authcore/
++!shared-go/authcore/**
++!legacy/
++!legacy/**
++!scripts/
++!scripts/gui-assets.mjs
++!tools/
++!tools/gui-bootstrap-webkit/
++!tools/gui-bootstrap-webkit/scripts/
++!tools/gui-bootstrap-webkit/scripts/kit-sync.mjs
++!cat_de_roman_esti/
++!cat_de_roman_esti/fixtures/
++!cat_de_roman_esti/fixtures/**
++!tests/
++!tests/fixtures/
++!tests/fixtures/kg_sample.json
++!tests/fixtures/games_pack.json
++!docs/
++!docs/CRITIQUE_RUBRIC.md
++!versions.lock.json
++# Reassert local state exclusions below all source admissions.
++**/node_modules/
++**/.git/
++**/.gate/
++**/.env*
++**/__pycache__/
++**/test-results/
+diff --git a/frontend/src/components/CategoryPicker.tsx b/frontend/src/components/CategoryPicker.tsx
+index dc86a6a..44146bf 100644
+--- a/frontend/src/components/CategoryPicker.tsx
++++ b/frontend/src/components/CategoryPicker.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "./CspStyle";
+ // CategoryPicker — chip row for choosing a game's category/theme (ADR-0011).
+ // The unfiltered mix (no category) keeps the curated-first default; the rest come
+ // from /api/categories filtered to what THIS game can actually start. Renders
+@@ -66,14 +67,14 @@ export function CategoryPicker({
+   ) => {
+     const selected = value === key;
+     return (
+-      <button
++      <Csp.button
+         key={key ?? "__mix__"}
+         type="button"
+         className="chip"
+         aria-pressed={selected}
+         onClick={() => onChange(key)}
+         title={kind === "pop" ? "Cultură pop" : undefined}
+-        style={{
++        css={{
+           cursor: "pointer",
+           borderColor: selected ? color : "var(--surface-border)",
+           background: selected
+@@ -84,7 +85,7 @@ export function CategoryPicker({
+         }}
+       >
+         {label}
+-      </button>
++      </Csp.button>
+     );
+   };
+ 
+@@ -96,27 +97,27 @@ export function CategoryPicker({
+   };
+ 
+   return (
+-    <div className="col" style={{ gap: 8 }}>
+-      <span
++    <Csp.div className="col" css={{ gap: "8px" }}>
++      <Csp.span
+         className="faint"
+-        style={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
++        css={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
+         id="category-label"
+       >
+         CATEGORIE
+-      </span>
+-      <div
++      </Csp.span>
++      <Csp.div
+         className="row wrap category-picker-options"
+         role="group"
+         aria-labelledby="category-label"
+-        style={{ gap: 6 }}
++        css={{ gap: "6px" }}
+       >
+         {chip(null, "Toate temele", accent)}
+         {pop.map(chipFor)}
+         {serious.map(chipFor)}
+-      </div>
+-      <span className="faint category-picker-note" style={{ fontSize: "0.72rem" }}>
++      </Csp.div>
++      <Csp.span className="faint category-picker-note" css={{ fontSize: "0.72rem" }}>
+         Tema se aplică doar jocurilor libere.
+-      </span>
+-    </div>
++      </Csp.span>
++    </Csp.div>
+   );
+ }
+diff --git a/frontend/src/components/DifficultyPicker.tsx b/frontend/src/components/DifficultyPicker.tsx
+index 6655d69..a4977fc 100644
+--- a/frontend/src/components/DifficultyPicker.tsx
++++ b/frontend/src/components/DifficultyPicker.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "./CspStyle";
+ // DifficultyPicker — a shared segmented control for the three difficulty tiers so every
+ // game's intro card picks difficulty the same way (same look, tap-targets, a11y wiring).
+ //
+@@ -23,14 +24,14 @@ export function DifficultyPicker<T extends string>({
+   label?: string;
+ }) {
+   return (
+-    <div className="col" style={{ gap: 8 }}>
+-      <span
++    <Csp.div className="col" css={{ gap: "8px" }}>
++      <Csp.span
+         className="faint"
+-        style={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
++        css={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
+         id="difficulty-label"
+       >
+         {label}
+-      </span>
++      </Csp.span>
+       <div className="segment" role="group" aria-labelledby="difficulty-label">
+         {options.map((o) => (
+           <button
+@@ -45,6 +46,6 @@ export function DifficultyPicker<T extends string>({
+           </button>
+         ))}
+       </div>
+-    </div>
++    </Csp.div>
+   );
+ }
+diff --git a/frontend/src/components/GameIntro.tsx b/frontend/src/components/GameIntro.tsx
+index f857b78..0f61f96 100644
+--- a/frontend/src/components/GameIntro.tsx
++++ b/frontend/src/components/GameIntro.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "./CspStyle";
+ // GameIntro — the shared "before you play" card: icon, title, tag, how-to,
+ // difficulty (passed as children), the primary start action and the daily
+ // challenge. All four games previously hand-rolled this with drifting styles.
+@@ -84,28 +85,28 @@ export function GameIntro({
+         boxShadow: glow ? `0 0 80px -30px ${glow}, var(--shadow-card)` : undefined,
+       }}
+     >
+-      <div
++      <Csp.div
+         className="game-intro-icon"
+         aria-hidden
+-        style={{ background: `${accent}22`, borderColor: `${accent}55` }}
++        css={{ background: `${accent}22`, borderColor: `${accent}55` }}
+       >
+         {icon}
+-      </div>
+-      <div className="col center" style={{ gap: 6 }}>
+-        <h2 style={{ color: accent, fontSize: "1.7rem" }}>{title}</h2>
++      </Csp.div>
++      <Csp.div className="col center" css={{ gap: "6px" }}>
++        <Csp.h2 css={{ color: accent, fontSize: "1.7rem" }}>{title}</Csp.h2>
+         {tag && (
+           <Badge color={accent} size="sm">
+             {tag}
+           </Badge>
+         )}
+-      </div>
++      </Csp.div>
+       <div className="muted game-intro-description">{description}</div>
+       {steps && <PlayGuide steps={steps} />}
+ 
+       {children && <div className="col game-intro-extras">{children}</div>}
+ 
+       {resumeRecovery && (
+-        <div className="card col" role="alert" style={{ gap: 10, padding: 14, width: "100%" }}>
++        <Csp.div className="card col" role="alert" css={{ gap: "10px", padding: "14px", width: "100%" }}>
+           <strong>
+             {resumeRecovery.kind === "failed"
+               ? "Nu am putut relua jocul salvat. Nu l-am șters."
+@@ -118,11 +119,11 @@ export function GameIntro({
+                 : "Încarcă jocul curent"}
+             </Button>
+           )}
+-        </div>
++        </Csp.div>
+       )}
+ 
+       <StartFailureNotice failed={startFailed} />
+-      <div className="row center wrap game-intro-actions" style={{ gap: 12, marginTop: 6 }}>
++      <Csp.div className="row center wrap game-intro-actions" css={{ gap: "12px", marginTop: "6px" }}>
+         <Button autoFocus onClick={consumeThen(dailyFirst ? onDaily : onStart)} disabled={starting} size="lg">
+           {dailyFirst ? "Joacă provocarea zilei" : startLabel}
+         </Button>
+@@ -136,12 +137,12 @@ export function GameIntro({
+             {!dailyFirst && <span aria-hidden>📅</span>} {dailyFirst ? "Joacă liber" : dailyLabel}
+           </Button>
+         )}
+-      </div>
++      </Csp.div>
+ 
+       {best && (
+-        <p className="faint" style={{ margin: 0, fontSize: "0.82rem" }}>
+-          Recordul tău: <strong style={{ color: accent }}>{best.score}</strong> · {displayDetail(best.detail)}
+-        </p>
++        <Csp.p className="faint" css={{ margin: "0px", fontSize: "0.82rem" }}>
++          Recordul tău: <Csp.strong css={{ color: accent }}>{best.score}</Csp.strong> · {displayDetail(best.detail)}
++        </Csp.p>
+       )}
+     </CspMotion.div>
+   );
+diff --git a/frontend/src/components/GameShell.tsx b/frontend/src/components/GameShell.tsx
+index 66802cb..b485117 100644
+--- a/frontend/src/components/GameShell.tsx
++++ b/frontend/src/components/GameShell.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "./CspStyle";
+ // GameShell — a shared header for every word game so the arcade feels cohesive.
+ //
+ // Renders a consistent "← Ieși" navigation button (left) and a right-aligned slot for the
+@@ -53,8 +54,8 @@ export function GameShell({
+ 
+   return (
+     <>
+-      <div ref={headerRef} className="row spread game-shell-header" style={{ gap: 12 }}>
+-        <div className="row game-shell-main" style={{ gap: 10, alignItems: "center" }}>
++      <Csp.div ref={headerRef} className="row spread game-shell-header" css={{ gap: "12px" }}>
++        <Csp.div className="row game-shell-main" css={{ gap: "10px", alignItems: "center" }}>
+           <Button
+             variant="secondary"
+             size="sm"
+@@ -67,20 +68,20 @@ export function GameShell({
+             {busy ? "Se pregătește…" : "Ieși"}
+           </Button>
+           {title && (
+-            <strong
++            <Csp.strong
+               className="game-shell-title"
+-              style={{ fontFamily: "var(--font-display)", color: accent, fontSize: "1.05rem" }}
++              css={{ fontFamily: "var(--font-display)", color: accent, fontSize: "1.05rem" }}
+             >
+               {title}
+-            </strong>
++            </Csp.strong>
+           )}
+-        </div>
++        </Csp.div>
+         {children && (
+           <div className="game-shell-status">
+             {children}
+           </div>
+         )}
+-      </div>
++      </Csp.div>
+       {helpGame && <GameHelp game={helpGame} />}
+     </>
+   );
+diff --git a/frontend/src/components/Hud.tsx b/frontend/src/components/Hud.tsx
+index 3fe9556..652dd58 100644
+--- a/frontend/src/components/Hud.tsx
++++ b/frontend/src/components/Hud.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "./CspStyle";
+ // Hud — the uniform status cluster next to the GameShell header: small stat
+ // badges (moves, lives, difficulty, …) that look identical across all six games.
+ 
+@@ -28,9 +29,9 @@ export function StatBadge({
+ /** Right-aligned wrap row for StatBadges + small actions inside a GameShell. */
+ export function Hud({ children }: { children: ReactNode }) {
+   return (
+-    <div className="row wrap hud" role="group" aria-label="Starea jocului"
+-      style={{ gap: 8, alignItems: "center" }}>
++    <Csp.div className="row wrap hud" role="group" aria-label="Starea jocului"
++      css={{ gap: "8px", alignItems: "center" }}>
+       {children}
+-    </div>
++    </Csp.div>
+   );
+ }
+diff --git a/frontend/src/components/PlayGuide.tsx b/frontend/src/components/PlayGuide.tsx
+index 93b9cc4..99d0a50 100644
+--- a/frontend/src/components/PlayGuide.tsx
++++ b/frontend/src/components/PlayGuide.tsx
+@@ -1,4 +1,5 @@
+-import type { CSSProperties, ReactNode } from "react";
++import { Csp } from "./CspStyle";
++import type { ReactNode } from "react";
+ 
+ export interface PlayGuideStep {
+   icon: ReactNode;
+@@ -51,9 +52,9 @@ export function NextMove({
+   className?: string;
+ }) {
+   return (
+-    <div
++    <Csp.div
+       className={`next-move${ready ? " next-move--ready" : ""}${className ? ` ${className}` : ""}`}
+-      style={{ "--cue-accent": accent } as CSSProperties}
++      css={{ "--cue-accent": accent }}
+     >
+       <span className="next-move-icon" aria-hidden>
+         {icon}
+@@ -70,6 +71,6 @@ export function NextMove({
+       </span>
+       {progress && <span className="next-move-progress">{progress}</span>}
+       {action && <span className="next-move-action">{action}</span>}
+-    </div>
++    </Csp.div>
+   );
+ }
+diff --git a/frontend/src/components/ResultCard.tsx b/frontend/src/components/ResultCard.tsx
+index 5a1a73e..5ac8ea9 100644
+--- a/frontend/src/components/ResultCard.tsx
++++ b/frontend/src/components/ResultCard.tsx
+@@ -1,3 +1,4 @@
++import { Csp, CspMotion } from "./CspStyle";
+ // ResultCard — the shared end-of-game card used by every word game so winning, losing,
+ // the score read-out, the "Record!" celebration, and the share/copy + replay actions all
+ // look and behave identically across the arcade. Wins get a confetti burst (skipped
+@@ -67,16 +68,16 @@ export function ResultCard({
+ }) {
+   const ring = won ? accent : "var(--surface-border-strong)";
+   return (
+-    <m.div
++    <CspMotion.div
+       className="card center col"
+       initial={{ scale: 0.88, opacity: 0 }}
+       animate={{ scale: 1, opacity: 1 }}
+       transition={{ type: "spring", stiffness: 240, damping: 18 }}
+       role="status"
+       aria-live="polite"
+-      style={{
+-        gap: 10,
+-        padding: 24,
++      css={{
++        gap: "10px",
++        padding: "24px",
+         textAlign: "center",
+         position: "relative",
+         overflow: "hidden",
+@@ -85,33 +86,33 @@ export function ResultCard({
+       }}
+     >
+       {won && <Confetti accent={accent} />}
+-      <m.div
+-        style={{ fontSize: "2.6rem", lineHeight: 1 }}
++      <CspMotion.div
++        css={{ fontSize: "2.6rem", lineHeight: 1 }}
+         aria-hidden
+         initial={{ scale: 0.4, rotate: won ? -14 : 0 }}
+         animate={{ scale: 1, rotate: 0 }}
+         transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.08 }}
+       >
+         {icon}
+-      </m.div>
+-      <h2 style={{ margin: "2px 0", color: won ? accent : "var(--text)" }}>{title}</h2>
++      </CspMotion.div>
++      <Csp.h2 css={{ margin: "2px 0", color: won ? accent : "var(--text)" }}>{title}</Csp.h2>
+ 
+       {children && (
+-        <div className="muted" style={{ margin: 0, fontSize: "0.95rem" }}>
++        <Csp.div className="muted" css={{ margin: "0px", fontSize: "0.95rem" }}>
+           {children}
+-        </div>
++        </Csp.div>
+       )}
+ 
+       {score !== undefined && (
+-        <div className="col center" style={{ gap: 4, marginTop: 4 }}>
+-          <span className="faint" style={{ fontSize: "0.72rem", letterSpacing: "0.08em" }}>
++        <Csp.div className="col center" css={{ gap: "4px", marginTop: "4px" }}>
++          <Csp.span className="faint" css={{ fontSize: "0.72rem", letterSpacing: "0.08em" }}>
+             {scoreLabel}
+-          </span>
+-          <m.div
++          </Csp.span>
++          <CspMotion.div
+             initial={{ scale: 0.7 }}
+             animate={{ scale: 1 }}
+             transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.15 }}
+-            style={{
++            css={{
+               fontFamily: "var(--font-display)",
+               fontWeight: 700,
+               fontSize: "2.2rem",
+@@ -120,7 +121,7 @@ export function ResultCard({
+             }}
+           >
+             {score}
+-          </m.div>
++          </CspMotion.div>
+           {isRecord && (
+             <m.span
+               initial={{ scale: 0.6, opacity: 0 }}
+@@ -139,11 +140,11 @@ export function ResultCard({
+               <Badge tone="success">★ Recordul acestei provocări</Badge>
+             </m.span>
+           )}
+-        </div>
++        </Csp.div>
+       )}
+ 
+       <StartFailureNotice failed={startFailed} reserveSpace={Boolean(onReplay)} />
+-      <div className="row center wrap" style={{ gap: 12, marginTop: 12, position: "relative" }}>
++      <Csp.div className="row center wrap" css={{ gap: "12px", marginTop: "12px", position: "relative" }}>
+         {onReplay && (
+           <Button onClick={onReplay} disabled={actionsBusy}>
+             {actionsBusy ? "Se pregătește…" : replayLabel}
+@@ -164,7 +165,7 @@ export function ResultCard({
+             Meniu
+           </Button>
+         )}
+-      </div>
+-    </m.div>
++      </Csp.div>
++    </CspMotion.div>
+   );
+ }
+diff --git a/frontend/src/components/StartFailureNotice.tsx b/frontend/src/components/StartFailureNotice.tsx
+index 84d897c..27f9556 100644
+--- a/frontend/src/components/StartFailureNotice.tsx
++++ b/frontend/src/components/StartFailureNotice.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "./CspStyle";
+ import { useLayoutEffect, useRef } from "react";
+ 
+ /** A failed new round remains visible until the player retries or resumes a game. */
+@@ -14,14 +15,14 @@ export function StartFailureNotice({ failed, reserveSpace = false }: {
+ 
+   if (!failed && !reserveSpace) return null;
+   return (
+-    <p
++    <Csp.p
+       ref={noticeRef}
+       className="card start-failure-notice"
+       role={failed ? "alert" : undefined}
+       aria-hidden={!failed || undefined}
+-      style={{ padding: 14, margin: 0, visibility: failed ? "visible" : "hidden" }}
++      css={{ padding: "14px", margin: "0px", visibility: failed ? "visible" : "hidden" }}
+     >
+       Nu am putut porni jocul. Am păstrat opțiunile alese. Poți încerca din nou.
+-    </p>
++    </Csp.p>
+   );
+ }
+diff --git a/frontend/src/screens/Alchimie.tsx b/frontend/src/screens/Alchimie.tsx
+index fcc4393..d7db7cf 100644
+--- a/frontend/src/screens/Alchimie.tsx
++++ b/frontend/src/screens/Alchimie.tsx
+@@ -1,3 +1,4 @@
++import { Csp, CspButton, CspMotion } from "../components/CspStyle";
+ // Alchimie — Infinite-Craft over the Romanian KG. Text-only: the inventory is a grid of
+ // clickable concepts: a first tap selects, a second tap crafts their shared neighbour(s).
+ // Server-authoritative: we render whatever the backend returns and never know the target
+@@ -662,7 +663,7 @@ function AlchimieChallenge({
+     return (
+       <div className="screen-pad fill alchemy-screen alchemy-intro" aria-busy={creating}>
+         {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
+-        <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
++        <Csp.div inert={creating} className="container col game-container" css={{ gap: "18px" }}>
+           <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
+           <AlchimieModes mode="challenges" busy={creating || loading} />
+ 
+@@ -680,10 +681,10 @@ function AlchimieChallenge({
+             glow={DEF.glow}
+             best={best}
+             description={
+-              <p style={{ margin: 0 }}>
++              <Csp.p css={{ margin: "0px" }}>
+                 Atinge un cuvânt, apoi altul: se combină imediat. Descoperă cuvinte noi până creezi ținta.
+                 {" "}Perechile fără rezultat nu scad scorul.
+-              </p>
++              </Csp.p>
+             }
+             steps={[
+               { icon: "👆", label: "Atinge un cuvânt" },
+@@ -721,13 +722,13 @@ function AlchimieChallenge({
+               </div>
+             </details>
+           </GameIntro>
+-        </div>
++        </Csp.div>
+       </div>
+     );
+   }
+ 
+   return (
+-    <div className="screen-pad fill alchemy-screen" style={{ overflowY: "auto" }} aria-busy={creating}>
++    <Csp.div className="screen-pad fill alchemy-screen" css={{ overflowY: "auto" }} aria-busy={creating}>
+       {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
+       <div inert={creating} className="container col game-container alchemy-game">
+         {/* Header */}
+@@ -791,7 +792,7 @@ function AlchimieChallenge({
+               </AnimatePresence>
+ 
+               {!won && actionSync ? (
+-                <div className="card col alchemy-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
++                <Csp.div className="card col alchemy-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
+                   <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+                   <span>{actionSync.kind === "changed"
+                     ? "Încarcă jocul curent pentru a continua."
+@@ -799,18 +800,18 @@ function AlchimieChallenge({
+                   <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+                     {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+                   </Button>
+-                </div>
++                </Csp.div>
+               ) : null}
+ 
+               {!won && state.earned_hint ? (
+-                <div className="card alchemy-earned-hint" role="status" style={{ padding: 12, borderColor: GOLD }}>
++                <Csp.div className="card alchemy-earned-hint" role="status" css={{ padding: "12px", borderColor: GOLD }}>
+                   {state.earned_hint.message}
+-                </div>
++                </Csp.div>
+               ) : null}
+ 
+               {state.hint_available && (
+                 <div className="alchemy-assistance">
+-                  <Button
++                  <CspButton
+                     type="button"
+                     variant="secondary"
+                     disabled={actionsLocked}
+@@ -821,10 +822,10 @@ function AlchimieChallenge({
+                         : "Îți arată o pereche utilă"
+                     }
+                     aria-describedby="alchemy-hint-cost"
+-                    style={{ borderColor: GOLD, color: GOLD }}
++                    css={{ borderColor: GOLD, color: GOLD }}
+                   >
+                     💡 Indiciu
+-                  </Button>
++                  </CspButton>
+                   <span id="alchemy-hint-cost">Folosește un indiciu · penalizare de 150 puncte.</span>
+                 </div>
+               )}
+@@ -852,7 +853,7 @@ function AlchimieChallenge({
+                   aria-label="Filtrează inventarul"
+                 >
+                   {(["useful", "recent", "all"] as InventoryView[]).map((view) => (
+-                    <button
++                    <Csp.button
+                       key={view}
+                       type="button"
+                       aria-pressed={inventoryView === view}
+@@ -862,13 +863,13 @@ function AlchimieChallenge({
+                         setInventoryView(view);
+                         setInventoryQuery("");
+                       }}
+-                      style={{
++                      css={{
+                         borderColor: inventoryView === view ? DEF.accent : undefined,
+                         color: inventoryView === view ? "var(--text)" : undefined,
+                       }}
+                     >
+                       {INVENTORY_VIEW_LABEL[view]} {inventoryCounts[view]}
+-                    </button>
++                    </Csp.button>
+                   ))}
+                 </div>
+                 <div className="alchemy-search-row">
+@@ -916,7 +917,7 @@ function AlchimieChallenge({
+                       ? `${item.label}, gata pentru o combinație utilă`
+                       : item.label;
+                   return (
+-                    <m.button
++                    <CspMotion.button
+                       key={item.id}
+                       ref={(node) => {
+                         if (node) inventoryButtons.current.set(item.id, node);
+@@ -967,8 +968,8 @@ function AlchimieChallenge({
+                       aria-pressed={isSel}
+                       aria-label={accessibleLabel}
+                       title={title}
+-                      className={`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isFresh ? " alchemy-word--fresh" : ""}${isHint ? " alchemy-word--hint" : ""}${isTried ? " alchemy-word--tried" : ""}${dragOverId === item.id ? " alchemy-word--drop" : ""}`}
+-                      style={{
++                      className={(`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isFresh ? " alchemy-word--fresh" : ""}${isHint ? " alchemy-word--hint" : ""}${isTried ? " alchemy-word--tried" : ""}${dragOverId === item.id ? " alchemy-word--drop" : ""}`) + (item.depleted ? " csp-motion-opacity-50" : "")}
++                      css={{
+                         cursor: won ? "default" : "pointer",
+                         borderColor: isSel
+                           ? DEF.accent
+@@ -988,7 +989,6 @@ function AlchimieChallenge({
+                             : undefined,
+                         color: isSel || isFresh ? "var(--text)" : undefined,
+                         fontWeight: isCrafted ? 600 : 500,
+-                        opacity: item.depleted ? 0.5 : 1,
+                         boxShadow:
+                           isFresh || isHint
+                             ? `0 0 16px -4px ${GOLD}`
+@@ -1003,7 +1003,7 @@ function AlchimieChallenge({
+                           {isSel ? "✓ Ales" : item.depleted ? "Pus deoparte" : isTried ? "Încercat" : "✦ Nou"}
+                         </span>
+                       )}
+-                    </m.button>
++                    </CspMotion.button>
+                   );
+                 })}
+               </AnimatePresence>
+@@ -1013,9 +1013,9 @@ function AlchimieChallenge({
+                 </p>
+               )}
+               {normalizedInventoryQuery && visibleInventory.length === 0 && (
+-                <p className="faint center" style={{ gridColumn: "1 / -1", margin: 8 }}>
++                <Csp.p className="faint center" css={{ gridColumn: "1 / -1", margin: "8px" }}>
+                   Niciun concept găsit.
+-                </p>
++                </Csp.p>
+               )}
+             </div>
+           </section>
+@@ -1030,20 +1030,20 @@ function AlchimieChallenge({
+             {!won && reactionLog.length > 0 && (
+               <details className="alchemy-discoveries">
+                 <summary>Descoperiri</summary>
+-                <div className="row spread wrap" style={{ gap: 8, alignItems: "center" }}>
+-                  <span
++                <Csp.div className="row spread wrap" css={{ gap: "8px", alignItems: "center" }}>
++                  <Csp.span
+                     id="alchemy-reaction-log-title"
+                     className="faint"
+-                    style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
++                    css={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
+                   >
+                     ULTIMA DESCOPERIRE
+-                  </span>
+-                  <span className="muted" style={{ fontSize: "0.78rem" }}>
++                  </Csp.span>
++                  <Csp.span className="muted" css={{ fontSize: "0.78rem" }}>
+                     {reactionLog.length === 1
+                       ? "1 reacție păstrată"
+                       : reactionLog.length + " reacții păstrate"}
+-                  </span>
+-                </div>
++                  </Csp.span>
++                </Csp.div>
+ 
+                 <ReactionRow
+                   reaction={reactionLog[0]}
+@@ -1056,18 +1056,18 @@ function AlchimieChallenge({
+ 
+                 {reactionLog.length > 1 && (
+                   <details className="alchemy-reaction-log">
+-                    <summary
++                    <Csp.summary
+                       className="chip alchemy-reaction-log-toggle"
+-                      style={{
++                      css={{
+                         cursor: "pointer",
+-                        minHeight: 44,
++                        minHeight: "44px",
+                         width: "fit-content",
+                         maxWidth: "100%",
+                       }}
+                     >
+                       Vezi jurnalul ({reactionLog.length})
+-                    </summary>
+-                    <div className="col" style={{ gap: 8, marginTop: 10 }}>
++                    </Csp.summary>
++                    <Csp.div className="col" css={{ gap: "8px", marginTop: "10px" }}>
+                       {reactionLog.slice(1).map((reaction) => (
+                         <ReactionRow
+                           key={
+@@ -1083,7 +1083,7 @@ function AlchimieChallenge({
+                           onSelect={toggle}
+                         />
+                       ))}
+-                    </div>
++                    </Csp.div>
+                   </details>
+                 )}
+               </details>
+@@ -1092,7 +1092,7 @@ function AlchimieChallenge({
+             {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
+             {!won && (
+               <>
+-                <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
++                <Csp.div className="row center wrap" css={{ gap: "12px", marginTop: "8px" }}>
+                   <Button
+                     type="button"
+                     variant="secondary"
+@@ -1123,7 +1123,7 @@ function AlchimieChallenge({
+                   >
+                     ⚙ Schimbă opțiunile
+                   </Button>
+-                </div>
++                </Csp.div>
+               </>
+             )}
+ 
+@@ -1155,23 +1155,23 @@ function AlchimieChallenge({
+               onExit={exitSafely}
+             >
+               <>
+-                <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> în{" "}
++                <Csp.strong css={{ color: "var(--text)" }}>{state.target.label}</Csp.strong> în{" "}
+                 {state.moves} {state.moves === 1 ? "combinație" : "combinații"} ·{" "}
+                 {state.discovered_count} concepte descoperite.
+                 {winningReaction && (
+-                  <span style={{ display: "block", marginTop: 8 }}>
+-                    <span
++                  <Csp.span css={{ display: "block", marginTop: "8px" }}>
++                    <Csp.span
+                       className="faint"
+-                      style={{ display: "block", fontSize: "0.72rem" }}
++                      css={{ display: "block", fontSize: "0.72rem" }}
+                     >
+                       CUM AI FĂURIT-O
+-                    </span>
++                    </Csp.span>
+                     {winningReaction.parents[0].label} +{" "}
+                     {winningReaction.parents[1].label} →{" "}
+-                    <strong style={{ color: "var(--text)" }}>
++                    <Csp.strong css={{ color: "var(--text)" }}>
+                       {winningReaction.results.map((item) => item.label).join(", ")}
+-                    </strong>
+-                  </span>
++                    </Csp.strong>
++                  </Csp.span>
+                 )}
+                 {winningReaction?.results.map((item) => (
+                   <EarnedLinks key={item.id} item={item} />
+@@ -1181,7 +1181,7 @@ function AlchimieChallenge({
+           )}
+         </AnimatePresence>
+       </div>
+-    </div>
++    </Csp.div>
+   );
+ }
+ 
+@@ -1201,25 +1201,25 @@ function ReactionRow({
+   onSelect: (id: string) => void;
+ }) {
+   return (
+-    <div
++    <Csp.div
+       className="row wrap"
+-      style={{
+-        gap: 8,
++      css={{
++        gap: "8px",
+         alignItems: "center",
+         overflowWrap: "anywhere",
+       }}
+     >
+-      <span className="muted" style={{ lineHeight: 1.45 }}>
++      <Csp.span className="muted" css={{ lineHeight: 1.45 }}>
+         {reaction.parents[0].label} + {reaction.parents[1].label} →
+-      </span>
+-      <span className="row wrap" style={{ gap: 6 }}>
++      </Csp.span>
++      <Csp.span className="row wrap" css={{ gap: "6px" }}>
+         {reaction.results.map((item) => {
+           const isSelected = selected.includes(item.id);
+           const isFresh = freshIds.has(item.id);
+           const currentItem = inventoryById.get(item.id);
+           const depleted = currentItem?.depleted ?? true;
+           return (
+-            <button
++            <Csp.button
+               key={item.id}
+               type="button"
+               className="chip alchemy-reaction-result"
+@@ -1228,9 +1228,9 @@ function ReactionRow({
+               aria-label={depleted ? `${item.label}, pus deoparte` : `Alege ${item.label}`}
+               title={depleted ? "Pus deoparte" : "Pune în alambic"}
+               onClick={() => onSelect(item.id)}
+-              style={{
++              css={{
+                 cursor: busy || depleted ? "default" : "pointer",
+-                minHeight: 44,
++                minHeight: "44px",
+                 maxWidth: "100%",
+                 overflowWrap: "anywhere",
+                 borderColor: isSelected ? DEF.accent : isFresh ? GOLD : undefined,
+@@ -1241,12 +1241,12 @@ function ReactionRow({
+             >
+               {isFresh ? "NOU · " : ""}
+               {item.label}
+-            </button>
++            </Csp.button>
+           );
+         })}
+-      </span>
++      </Csp.span>
+       {reaction.results.map((item) => <EarnedLinks key={item.id} item={item} />)}
+-    </div>
++    </Csp.div>
+   );
+ }
+ 
+@@ -1277,10 +1277,10 @@ function Slot({
+ }) {
+   if (!item) return null;
+   return (
+-    <button
++    <Csp.button
+       type="button"
+       className="chip alchemy-slot"
+-      style={{ borderColor: DEF.accent, color: "var(--text)", minHeight: 44 }}
++      css={{ borderColor: DEF.accent, color: "var(--text)", minHeight: "44px" }}
+       onClick={() => onRemove(item.id)}
+       disabled={disabled}
+       title={`Scoate ${item.label} din alambic`}
+@@ -1288,6 +1288,6 @@ function Slot({
+     >
+       <span className="alchemy-slot-label">{item.label}</span>
+       <span aria-hidden>×</span>
+-    </button>
++    </Csp.button>
+   );
+ }
+diff --git a/frontend/src/screens/CaldRece.tsx b/frontend/src/screens/CaldRece.tsx
+index 53fb949..f73ab62 100644
+--- a/frontend/src/screens/CaldRece.tsx
++++ b/frontend/src/screens/CaldRece.tsx
+@@ -1,3 +1,4 @@
++import { Csp, CspMotion } from "../components/CspStyle";
+ // CaldRece — "Cald sau Rece" (Contexto/Semantle-style) screen.
+ //
+ // A hidden secret concept lives on the server. The player types concept guesses; each
+@@ -122,53 +123,53 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
+   const color = barColor(g);
+   const pct = Math.max(2, Math.min(100, g.closeness));
+   return (
+-    <m.div
++    <CspMotion.div
+       layout
+       initial={isLatest ? { opacity: 0, y: -10, scale: 0.97 } : false}
+       animate={{ opacity: 1, y: 0, scale: 1 }}
+       transition={{ type: "spring", stiffness: 380, damping: 28 }}
+       className="card contexto-guess-row"
+-      style={{
++      css={{
+         position: "relative",
+         overflow: "hidden",
+         padding: "10px 14px",
+         display: "grid",
+-        gap: 8,
++        gap: "8px",
+         borderColor: isLatest ? color : "var(--surface-border)",
+         boxShadow: isLatest ? `0 0 22px -10px ${color}` : undefined,
+       }}
+     >
+       {/* hot/cold fill bar */}
+-      <div
++      <Csp.div
+         aria-hidden
+-        style={{
++        css={{
+           position: "absolute",
+-          inset: 0,
++          inset: "0px",
+           width: `${pct}%`,
+           background: `linear-gradient(90deg, ${color}26, ${color}0d)`,
+           transition: "width 0.5s cubic-bezier(0.2,0.7,0.3,1)",
+         }}
+       />
+-      <div
++      <Csp.div
+         className="row spread"
+-        style={{ position: "relative", gap: 10, alignItems: "center" }}
++        css={{ position: "relative", gap: "10px", alignItems: "center" }}
+       >
+-        <span className="row" style={{ gap: 8, alignItems: "center" }}>
+-          <span aria-hidden style={{ fontSize: "1.1rem" }}>
++        <Csp.span className="row" css={{ gap: "8px", alignItems: "center" }}>
++          <Csp.span aria-hidden css={{ fontSize: "1.1rem" }}>
+             {TEMP_ICON[g.temperature]}
+-          </span>
+-          <strong style={{ fontSize: "0.98rem" }}>{g.label}</strong>
+-        </span>
+-        <span className="row" style={{ gap: 8, alignItems: "center" }}>
+-          <span
++          </Csp.span>
++          <Csp.strong css={{ fontSize: "0.98rem" }}>{g.label}</Csp.strong>
++        </Csp.span>
++        <Csp.span className="row" css={{ gap: "8px", alignItems: "center" }}>
++          <Csp.span
+             className="badge"
+-            style={{ borderColor: color, color: color, fontWeight: 700 }}
++            css={{ borderColor: color, color: color, fontWeight: 700 }}
+           >
+             {TEMP_LABEL[g.temperature]}
+-          </span>
+-          <span
++          </Csp.span>
++          <Csp.span
+             className="badge"
+-            style={{
++            css={{
+               borderColor: color,
+               color: color,
+               fontWeight: 800,
+@@ -177,10 +178,10 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
+             title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)"
+           >
+             #{g.rank}
+-          </span>
+-        </span>
+-      </div>
+-    </m.div>
++          </Csp.span>
++        </Csp.span>
++      </Csp.div>
++    </CspMotion.div>
+   );
+ }
+ 
+@@ -646,13 +647,13 @@ export default function CaldRece({
+   if (showIntro) {
+     return (
+       <div className="screen-pad fill">
+-        <div
++        <Csp.div
+           className="container col game-container"
+-          style={{ gap: 18, paddingBlock: 8 }}
++          css={{ gap: "18px", paddingBlock: "8px" }}
+         >
+-          <div style={{ width: "100%" }}>
++          <Csp.div css={{ width: "100%" }}>
+             <GameShell onExit={handleExit} accent={DEF.accent} busy={busy} />
+-          </div>
++          </Csp.div>
+ 
+           <GameIntro
+             startFailed={startFailed}
+@@ -667,9 +668,9 @@ export default function CaldRece({
+             accent={DEF.accent}
+             glow={DEF.glow}
+             description={
+-              <p style={{ margin: 0 }}>
++              <Csp.p css={{ margin: "0px" }}>
+                 Găsește secretul urmărind cât de cald e fiecare cuvânt.
+-              </p>
++              </Csp.p>
+             }
+             steps={[
+               { icon: "⌨️", label: "Scrie un cuvânt" },
+@@ -684,7 +685,7 @@ export default function CaldRece({
+             starting={busy}
+           >
+             <GameSetupOptions>
+-              <div style={{ width: "100%", maxWidth: 420 }}>
++              <Csp.div css={{ width: "100%", maxWidth: "420px" }}>
+                 <DifficultyPicker
+                   options={DIFFICULTIES}
+                   value={difficulty}
+@@ -693,8 +694,8 @@ export default function CaldRece({
+                     setDifficulty(id);
+                   }}
+                 />
+-              </div>
+-              <div style={{ width: "100%", maxWidth: 420 }}>
++              </Csp.div>
++              <Csp.div css={{ width: "100%", maxWidth: "420px" }}>
+                 <CategoryPicker
+                   game="contexto"
+                   difficulty={difficulty}
+@@ -706,10 +707,10 @@ export default function CaldRece({
+                   onInvalid={() => setCategory(null)}
+                   accent={DEF.accent}
+                 />
+-              </div>
++              </Csp.div>
+             </GameSetupOptions>
+           </GameIntro>
+-        </div>
++        </Csp.div>
+       </div>
+     );
+   }
+@@ -721,7 +722,7 @@ export default function CaldRece({
+     // (worst with the keyboard up), stranding the guesses; single-scroll keeps every
+     // guess reachable at any height.
+     <div className="screen-pad fill contexto-screen">
+-      <div className="container col game-container" style={{ gap: 12, paddingBlock: 8 }}>
++      <Csp.div className="container col game-container" css={{ gap: "12px", paddingBlock: "8px" }}>
+         {/* header */}
+         <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={busy && finished}>
+           <Hud>
+@@ -745,7 +746,7 @@ export default function CaldRece({
+         {/* The guess field stays within reach while the ranked words scroll. */}
+         <div className="contexto-sticky-controls">
+           {actionSync && !finished && (
+-            <div className="card col contexto-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
++            <Csp.div className="card col contexto-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
+               <span>
+                 {actionSync.kind === "failed"
+                   ? "Nu am putut verifica dacă acțiunea s-a înregistrat. Verifică jocul înainte să continui."
+@@ -754,9 +755,9 @@ export default function CaldRece({
+               <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+                 {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+               </Button>
+-            </div>
++            </Csp.div>
+           )}
+-          <form onSubmit={handleGuess} className="row contexto-input-bar" style={{ gap: 8 }}>
++          <Csp.form onSubmit={handleGuess} className="row contexto-input-bar" css={{ gap: "8px" }}>
+             <input
+               ref={inputRef}
+               className="field fill"
+@@ -790,7 +791,7 @@ export default function CaldRece({
+             >
+               Ghicește
+             </Button>
+-          </form>
++          </Csp.form>
+           <p id="contexto-rank-guide" className="faint contexto-rank-guide">
+             Un număr mai mic = mai aproape. <strong>#1 este ținta.</strong>
+           </p>
+@@ -825,7 +826,7 @@ export default function CaldRece({
+           </div>}
+ 
+           <GameOptions game={GAME_KEY} help={false}>
+-            <div className="row wrap" style={{ gap: 8 }}>
++            <Csp.div className="row wrap" css={{ gap: "8px" }}>
+               <StatBadge
+                 label="Mod"
+                 value={
+@@ -843,7 +844,7 @@ export default function CaldRece({
+                   accent={categoryColor(state.board_category)}
+                 />
+               )}
+-            </div>
++            </Csp.div>
+             <Button
+               type="button"
+               variant="secondary"
+@@ -944,26 +945,26 @@ export default function CaldRece({
+ 
+         <AnimatePresence>
+           {!finished && recovery && (
+-            <m.div
++            <CspMotion.div
+               key={`${recovery.tone}-${recovery.message}`}
+               initial={{ opacity: 0, y: -6 }}
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, y: -6 }}
+               className="card"
+-              style={{
+-                padding: 12,
++              css={{
++                padding: "12px",
+                 borderColor: recovery.tone === "warning" ? "var(--warn)" : DEF.accent,
+               }}
+             >
+-              <div className="col" style={{ gap: 8 }}>
++              <Csp.div className="col" css={{ gap: "8px" }}>
+                 <span>
+-                  <span aria-hidden="true" style={{ marginRight: 6 }}>
++                  <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
+                     {recovery.tone === "warning" ? "⚠" : "ℹ"}
+-                  </span>
++                  </Csp.span>
+                   {recovery.message}
+                 </span>
+                 {recovery.choices.length > 0 ? (
+-                  <div className="row wrap" style={{ gap: 8 }}>
++                  <Csp.div className="row wrap" css={{ gap: "8px" }}>
+                     <span className="faint">Variante de scriere:</span>
+                     {recovery.choices.map((choice) => (
+                       <Button
+@@ -980,10 +981,10 @@ export default function CaldRece({
+                         {choice}
+                       </Button>
+                     ))}
+-                  </div>
++                  </Csp.div>
+                 ) : null}
+                 {recovery.confirm ? (
+-                  <div className="row wrap" style={{ gap: 8 }}>
++                  <Csp.div className="row wrap" css={{ gap: "8px" }}>
+                     <Button
+                       type="button"
+                       className="contexto-confirm-chip"
+@@ -996,53 +997,53 @@ export default function CaldRece({
+                       Joacă {recovery.confirm.label}
+                     </Button>
+                     <span className="faint">sau corectează textul.</span>
+-                  </div>
++                  </Csp.div>
+                 ) : null}
+-              </div>
+-            </m.div>
++              </Csp.div>
++            </CspMotion.div>
+           )}
+         </AnimatePresence>
+ 
+         {(state?.clue || state?.warm_clue) && !finished && (
+-          <div
++          <Csp.div
+             className="col"
+-            style={{ gap: 8 }}
++            css={{ gap: "8px" }}
+             aria-label="Indicii folosite"
+             aria-live="polite"
+           >
+             {state.clue && (
+-              <div
++              <Csp.div
+                 className="row spread"
+-                style={{
+-                  gap: 10,
++                css={{
++                  gap: "10px",
+                   alignItems: "center",
+                   padding: "9px 12px",
+-                  borderRadius: 12,
++                  borderRadius: "12px",
+                   border: `1px solid ${DEF.accent}66`,
+                   background: `${DEF.accent}12`,
+                 }}
+               >
+-                <span className="muted" style={{ fontSize: "0.82rem" }}>
++                <Csp.span className="muted" css={{ fontSize: "0.82rem" }}>
+                   🧭 Categorie
+-                </span>
++                </Csp.span>
+                 <strong>{state.clue.category.label}</strong>
+-              </div>
++              </Csp.div>
+             )}
+             {state.warm_clue && (
+-              <div
++              <Csp.div
+                 className="row spread"
+-                style={{
+-                  gap: 10,
++                css={{
++                  gap: "10px",
+                   alignItems: "center",
+                   padding: "10px 12px",
+-                  borderRadius: 12,
++                  borderRadius: "12px",
+                   border: "1px solid #f4a25999",
+                   background: "rgba(244, 162, 89, 0.12)",
+                 }}
+               >
+-                <span className="muted" style={{ fontSize: "0.82rem" }}>
++                <Csp.span className="muted" css={{ fontSize: "0.82rem" }}>
+                   🔥 Încearcă
+-                </span>
++                </Csp.span>
+                 <button
+                   type="button"
+                   className="contexto-warm-clue-button"
+@@ -1067,9 +1068,9 @@ export default function CaldRece({
+                 >
+                   #{state.warm_clue.rank}
+                 </span>
+-              </div>
++              </Csp.div>
+             )}
+-          </div>
++          </Csp.div>
+         )}
+ 
+         {/* One short, server-authored comparison for the accepted guess just played. */}
+@@ -1124,19 +1125,19 @@ export default function CaldRece({
+               onOptions={showOptions}
+               onExit={handleExit}
+             >
+-              <span style={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
++              <Csp.span css={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
+                 {state.target.label}
+-              </span>
++              </Csp.span>
+               {state.target.description && (
+-                <span style={{ fontSize: "0.85rem" }}>{state.target.description}</span>
++                <Csp.span css={{ fontSize: "0.85rem" }}>{state.target.description}</Csp.span>
+               )}
+               {won && recovery?.message ? (
+-                <span className="muted" style={{ display: "block", marginTop: 8 }}>
+-                  <span aria-hidden="true" style={{ marginRight: 6 }}>
++                <Csp.span className="muted" css={{ display: "block", marginTop: "8px" }}>
++                  <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
+                     ℹ
+-                  </span>
++                  </Csp.span>
+                   {recovery.message}
+-                </span>
++                </Csp.span>
+               ) : null}
+             </ResultCard>
+           )}
+@@ -1144,34 +1145,34 @@ export default function CaldRece({
+ 
+         {/* best so far */}
+         {!finished && bestGuess && (
+-          <p className="faint center" style={{ fontSize: "0.82rem", margin: 0 }}>
++          <Csp.p className="faint center" css={{ fontSize: "0.82rem", margin: "0px" }}>
+             Cel mai aproape:{" "}
+-            <strong style={{ color: barColor(bestGuess) }}>
++            <Csp.strong css={{ color: barColor(bestGuess) }}>
+               {bestGuess.label}
+-            </strong>{" "}
++            </Csp.strong>{" "}
+             <span title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)">
+               (#{bestGuess.rank})
+             </span>
+-          </p>
++          </Csp.p>
+         )}
+ 
+         <h2 className="contexto-list-title">
+           {guessView === "best" ? "Cele mai apropiate cuvinte" : "Ultimele încercări"}
+         </h2>
+         {/* Bune keeps server rank order; Recente uses stable server attempt ordinals. */}
+-        <div id="contexto-guess-list" className="col" style={{ gap: 8 }}>
++        <Csp.div id="contexto-guess-list" className="col" css={{ gap: "8px" }}>
+           {guesses.length === 0 && !finished && (
+-            <p className="faint center" style={{ marginTop: 24 }}>
++            <Csp.p className="faint center" css={{ marginTop: "24px" }}>
+               Sensul contează, nu literele. Începe cu orice idee!
+-            </p>
++            </Csp.p>
+           )}
+           <AnimatePresence initial={false}>
+             {displayedGuesses.map((g) => (
+               <GuessRow key={g.id} g={g} isLatest={g.id === latestId} />
+             ))}
+           </AnimatePresence>
+-        </div>
+-      </div>
++        </Csp.div>
++      </Csp.div>
+     </div>
+   );
+ }
+diff --git a/frontend/src/screens/Conexiuni.tsx b/frontend/src/screens/Conexiuni.tsx
+index 0447371..6034c1b 100644
+--- a/frontend/src/screens/Conexiuni.tsx
++++ b/frontend/src/screens/Conexiuni.tsx
+@@ -1,3 +1,4 @@
++import { Csp, CspButton, CspMotion } from "../components/CspStyle";
+ // Conexiuni — NYT Connections over the Romanian KG. Text-only: a 4x4 grid of selectable
+ // tile buttons. Pick exactly 4 and "Verifică"; the server says whether they share a
+ // category (locks it as a coloured row) or not (one_away feedback + a lost life). Win when
+@@ -534,8 +535,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+   // ----------------------------------------------------------------- INTRO
+   if (!state) {
+     return (
+-      <div className="screen-pad fill connections-screen" style={{ overflowY: "auto" }}>
+-        <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
++      <Csp.div className="screen-pad fill connections-screen" css={{ overflowY: "auto" }}>
++        <Csp.div className="container col game-container" css={{ gap: "18px", paddingBottom: "32px" }}>
+           <GameShell onExit={handleExit} accent={DEF.accent} busy={loading} />
+ 
+           <GameIntro
+@@ -551,9 +552,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+             accent={DEF.accent}
+             glow={DEF.glow}
+             description={
+-              <p style={{ margin: 0 }}>
++              <Csp.p css={{ margin: "0px" }}>
+                 Găsește patru grupuri ascunse printre cele 16 cuvinte.
+-              </p>
++              </Csp.p>
+             }
+             steps={[
+               { icon: "👆", label: "Alege patru" },
+@@ -589,15 +590,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+             />
+             </GameSetupOptions>
+           </GameIntro>
+-        </div>
+-      </div>
++        </Csp.div>
++      </Csp.div>
+     );
+   }
+ 
+   // ----------------------------------------------------------------- BOARD
+   return (
+-    <div className="screen-pad fill connections-screen" style={{ overflowY: "auto" }}>
+-      <div className="container col game-container connections-game" style={{ gap: 12, paddingBottom: 24 }}>
++    <Csp.div className="screen-pad fill connections-screen" css={{ overflowY: "auto" }}>
++      <Csp.div className="container col game-container connections-game" css={{ gap: "12px", paddingBottom: "24px" }}>
+         {/* Header */}
+         <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={loading}>
+           <Hud><StatBadge label="Grupuri" value={`${state.solved.length}/4`} accent={DEF.accent} /></Hud>
+@@ -653,7 +654,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+         )}
+ 
+         {!finished && actionSync ? (
+-          <div className="card col connections-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
++          <Csp.div className="card col connections-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
+             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+             <span>{actionSync.kind === "changed"
+               ? "Încarcă jocul curent pentru a continua."
+@@ -661,7 +662,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+             <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+             </Button>
+-          </div>
++          </Csp.div>
+         ) : null}
+ 
+         {/* Feedback stays immediately before the board. */}
+@@ -701,21 +702,21 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+ 
+         {/* Active board */}
+         {!finished && (
+-          <m.div
++          <CspMotion.div
+             key={shake}
+             animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
+             transition={{ duration: 0.4 }}
+             className="connections-grid"
+-            style={{
++            css={{
+               display: "grid",
+-              gap: 8,
++              gap: "8px",
+             }}
+           >
+             <AnimatePresence initial={false}>
+               {remainingTiles.map((t) => {
+                 const isSel = selected.includes(t.id);
+                 return (
+-                  <m.button
++                  <CspMotion.button
+                     key={t.id}
+                     type="button"
+                     layout
+@@ -730,15 +731,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+                     disabled={actionsLocked}
+                     aria-pressed={isSel}
+                     title={t.label}
+-                    className="card center connection-tile"
+-                    style={{
++                    className={("card center connection-tile") + (actionsLocked && !isSel ? " csp-motion-opacity-55" : "")}
++                    css={{
+                       padding: "12px 6px",
+-                      minHeight: 64,
++                      minHeight: "64px",
+                       cursor: actionsLocked ? "default" : "pointer",
+                       textAlign: "center",
+                       fontSize: "0.82rem",
+                       lineHeight: 1.15,
+-                      opacity: actionsLocked && !isSel ? 0.55 : 1,
+                       borderColor: isSel ? DEF.accent : "var(--surface-border)",
+                       background: isSel
+                         ? `color-mix(in srgb, var(--surface) 65%, ${DEF.accent})`
+@@ -749,17 +749,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+                     }}
+                   >
+                     {t.label}
+-                  </m.button>
++                  </CspMotion.button>
+                 );
+               })}
+             </AnimatePresence>
+-          </m.div>
++          </CspMotion.div>
+         )}
+ 
+         {/* Controls */}
+         {!finished && (
+-          <div className="col game-action-dock connections-actions" style={{ gap: 8 }}>
+-            <div className="row center wrap game-action-buttons" style={{ gap: 12 }}>
++          <Csp.div className="col game-action-dock connections-actions" css={{ gap: "8px" }}>
++            <Csp.div className="row center wrap game-action-buttons" css={{ gap: "12px" }}>
+               <Button
+                 type="button"
+                 variant="secondary"
+@@ -777,15 +777,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+               >
+                 Golește
+               </Button>
+-                  <Button
++                  <CspButton
+                     type="button"
+                     disabled={actionsLocked || selected.length !== GROUP_SIZE || exactBlockedRetry}
+                     onClick={submit}
+-                    style={{ borderColor: DEF.accent }}
++                    css={{ borderColor: DEF.accent }}
+                   >
+                     {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
+-                  </Button>
+-            </div>
++                  </CspButton>
++            </Csp.div>
+             {state.clue_available ? (
+               <div className="connections-hint-action">
+               <Button
+@@ -818,14 +818,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+                 {cluesUsed >= MAX_CLUES ? "Indicii folosite" : `Indiciu disponibil după încă ${clueMistakesRemaining} ${clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}.`}
+               </p>
+             )}
+-            <span className="faint center fine-only" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
++            <Csp.span className="faint center fine-only" css={{ fontSize: "0.72rem", opacity: 0.7 }}>
+               Enter = verifică · Esc = golește
+-            </span>
+-          </div>
++            </Csp.span>
++          </Csp.div>
+         )}
+ 
+         <GameOptions game={GAME_KEY}>
+-          <div className="row wrap" style={{ gap: 8 }}>
++          <Csp.div className="row wrap" css={{ gap: "8px" }}>
+             {state.daily && (
+               <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} title="Provocarea zilei" />
+             )}
+@@ -837,15 +837,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+                 accent={categoryColor(state.board_category)}
+               />
+             )}
+-          </div>
++          </Csp.div>
+         </GameOptions>
+ 
+         {/* Lose reveal */}
+         {state.lost && state.solution && (
+-          <div className="col" style={{ gap: 8 }}>
+-            <span className="faint" style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}>
++          <Csp.div className="col" css={{ gap: "8px" }}>
++            <Csp.span className="faint" css={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}>
+               GRUPURILE RĂMASE
+-            </span>
++            </Csp.span>
+             {state.solution
+               .filter((group) => !state.solved.some((solved) => solved.key === group.key))
+               .map((g, index) => (
+@@ -856,7 +856,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+                   dim
+                 />
+               ))}
+-          </div>
++          </Csp.div>
+         )}
+ 
+         {/* Finish banner */}
+@@ -888,8 +888,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
+             </ResultCard>
+           )}
+         </AnimatePresence>
+-      </div>
+-    </div>
++      </Csp.div>
++    </Csp.div>
+   );
+ }
+ 
+@@ -903,29 +903,29 @@ function SolvedRow({
+   dim?: boolean;
+ }) {
+   return (
+-    <m.div
++    <CspMotion.div
+       layout
+       initial={{ scale: 0.9, opacity: 0 }}
+       animate={{ scale: 1, opacity: dim ? 0.7 : 1 }}
+       transition={{ type: "spring", stiffness: 260, damping: 20 }}
+       className="card col"
+-      style={{
+-        padding: 12,
+-        gap: 6,
++      css={{
++        padding: "12px",
++        gap: "6px",
+         borderColor: color,
+         background: `color-mix(in srgb, var(--surface) 78%, ${color})`,
+       }}
+     >
+-      <span style={{ fontWeight: 700, color: "var(--text)", letterSpacing: "0.03em" }}>
++      <Csp.span css={{ fontWeight: 700, color: "var(--text)", letterSpacing: "0.03em" }}>
+         {group.label}
+-      </span>
+-      <div className="row wrap" style={{ gap: 6 }}>
++      </Csp.span>
++      <Csp.div className="row wrap" css={{ gap: "6px" }}>
+         {group.tiles.map((t) => (
+-          <span key={t.id} className="chip" style={{ borderColor: color }}>
++          <Csp.span key={t.id} className="chip" css={{ borderColor: color }}>
+             {t.label}
+-          </span>
++          </Csp.span>
+         ))}
+-      </div>
+-    </m.div>
++      </Csp.div>
++    </CspMotion.div>
+   );
+ }
+diff --git a/frontend/src/screens/Intrusul.tsx b/frontend/src/screens/Intrusul.tsx
+index 00ec8f1..d910840 100644
+--- a/frontend/src/screens/Intrusul.tsx
++++ b/frontend/src/screens/Intrusul.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "../components/CspStyle";
+ // Intrusul — tap the one concept that does not belong with the other three.
+ // Every decision and point comes from the server; the browser only adds compact,
+ // touch-first feedback around the earned public state.
+@@ -389,7 +390,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
+   if (!state) {
+     return (
+       <div className="screen-pad fill">
+-        <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
++        <Csp.div className="container col game-container" css={{ gap: "18px", paddingBottom: "32px" }}>
+           <GameShell onExit={exitSafely} accent={DEF.accent} busy={loading} />
+           <GameIntro
+             startFailed={startFailed}
+@@ -405,11 +406,11 @@ export default function Intrusul({ onExit, onToast }: Props) {
+             glow={DEF.glow}
+             description={
+               <>
+-                <p style={{ margin: 0 }}>Trei cuvinte au ceva în comun. Unul nu.</p>
++                <Csp.p css={{ margin: "0px" }}>Trei cuvinte au ceva în comun. Unul nu.</Csp.p>
+                 {starterVisible && (
+-                  <p className="faint" style={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
++                  <Csp.p className="faint" css={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
+                     Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.
+-                  </p>
++                  </Csp.p>
+                 )}
+               </>
+             }
+@@ -424,7 +425,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
+             onDaily={() => void start({ daily: todayLocal() })}
+             starting={loading}
+           />
+-        </div>
++        </Csp.div>
+       </div>
+     );
+   }
+@@ -432,7 +433,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
+   const wrong = new Set(state.wrong_ids);
+   return (
+     <div className="screen-pad fill intrusul-game">
+-      <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
++      <Csp.div className="container col game-container" css={{ gap: "14px", paddingBottom: "32px" }}>
+         <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
+           <Hud>
+             {state.daily && <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} />}
+@@ -445,7 +446,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
+         </GameShell>
+ 
+         {!finished && actionSync && (
+-          <div className="card col intrusul-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
++          <Csp.div className="card col intrusul-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
+             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+             <span>{actionSync.kind === "changed"
+               ? "Încarcă jocul curent pentru a continua."
+@@ -453,7 +454,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
+             <Button type="button" onClick={() => void retryActionSync()} disabled={busy || !isPresent}>
+               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+             </Button>
+-          </div>
++          </Csp.div>
+         )}
+ 
+         {!finished && !actionSync && (
+@@ -580,7 +581,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
+             </div>
+           </ResultCard>
+         )}
+-      </div>
++      </Csp.div>
+     </div>
+   );
+ }
+diff --git a/frontend/src/screens/Lant.tsx b/frontend/src/screens/Lant.tsx
+index a76ef3a..820bf93 100644
+--- a/frontend/src/screens/Lant.tsx
++++ b/frontend/src/screens/Lant.tsx
+@@ -1,3 +1,4 @@
++import { Csp, CspMotion } from "../components/CspStyle";
+ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+ import { AnimatePresence, m } from "framer-motion";
+ import { Button, Spinner, type ToastKind } from "@roedu/ui";
+@@ -75,42 +76,42 @@ type RecoveryFeedback = {
+ 
+ function Breadcrumb({ path }: { path: PathStep[] }) {
+   return (
+-    <div className="row wrap breadcrumb-trail" role="group" aria-label="Traseul parcurs"
+-      tabIndex={0} style={{ gap: 6, alignItems: "center" }}>
++    <Csp.div className="row wrap breadcrumb-trail" role="group" aria-label="Traseul parcurs"
++      tabIndex={0} css={{ gap: "6px", alignItems: "center" }}>
+       <AnimatePresence initial={false}>
+         {path.map((step, i) => (
+-          <m.span
++          <CspMotion.span
+             key={`${step.id}-${i}`}
+             layout
+             initial={{ opacity: 0, scale: 0.8, y: -6 }}
+             animate={{ opacity: 1, scale: 1, y: 0 }}
+             transition={{ type: "spring", stiffness: 420, damping: 26 }}
+             className="row lant-trail-step"
+-            style={{ gap: 6, alignItems: "center" }}
++            css={{ gap: "6px", alignItems: "center" }}
+           >
+             {i > 0 && (
+-              <span
++              <Csp.span
+                 className="faint lant-trail-relation"
+-                style={{ fontSize: "0.7rem" }}
++                css={{ fontSize: "0.7rem" }}
+                 title={step.relation}
+               >
+                 ―{step.relation ? ` ${step.relation} →` : " →"}
+-              </span>
++              </Csp.span>
+             )}
+-            <span
++            <Csp.span
+               className="chip"
+-              style={{
++              css={{
+                 borderColor: i === path.length - 1 ? DEF.accent : undefined,
+                 color: i === path.length - 1 ? DEF.accent : undefined,
+                 fontWeight: i === path.length - 1 ? 700 : undefined,
+               }}
+             >
+               {step.label}
+-            </span>
+-          </m.span>
++            </Csp.span>
++          </CspMotion.span>
+         ))}
+       </AnimatePresence>
+-    </div>
++    </Csp.div>
+   );
+ }
+ 
+@@ -581,7 +582,7 @@ export default function Lant({
+     return (
+       <div className="screen-pad fill" aria-busy={creating}>
+         {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
+-        <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
++        <Csp.div inert={creating} className="container col game-container" css={{ gap: "18px" }}>
+           <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
+ 
+           <GameIntro
+@@ -597,10 +598,10 @@ export default function Lant({
+             accent={DEF.accent}
+             glow={DEF.glow}
+             description={
+-              <div className="col" style={{ gap: 8 }}>
+-                <p style={{ margin: 0 }}>
++              <Csp.div className="col" css={{ gap: "8px" }}>
++                <Csp.p css={{ margin: "0px" }}>
+                   Ajungi la țintă prin concepte legate direct.
+-                </p>
++                </Csp.p>
+                 <Button
+                   type="button"
+                   variant="secondary"
+@@ -620,7 +621,7 @@ export default function Lant({
+                     <li>Limită: 64 de salturi pe lanț.</li>
+                   </ul>
+                 )}
+-              </div>
++              </Csp.div>
+             }
+             steps={[
+               { icon: "👆", label: "Alege o legătură" },
+@@ -656,7 +657,7 @@ export default function Lant({
+               />
+             </GameSetupOptions>
+           </GameIntro>
+-        </div>
++        </Csp.div>
+       </div>
+     );
+   }
+@@ -680,19 +681,19 @@ export default function Lant({
+         <section className="card lant-route" aria-label="Poziția și ținta">
+           <div className="lant-current" aria-live={won ? "off" : "polite"} aria-atomic="true">
+             <span className="faint">EȘTI ACUM LA</span>
+-            <div
++            <Csp.div
+               className="lant-route-word"
+-              style={{ color: won ? TARGET_COLOR : DEF.accent }}
++              css={{ color: won ? TARGET_COLOR : DEF.accent }}
+             >
+               {state.current.label}
+-            </div>
++            </Csp.div>
+           </div>
+           <span className="lant-route-arrow muted" aria-hidden>→</span>
+           <div className="lant-target">
+             <span className="faint">ȚINTĂ</span>
+-            <strong className="lant-route-word" style={{ color: TARGET_COLOR }}>
++            <Csp.strong className="lant-route-word" css={{ color: TARGET_COLOR }}>
+               {state.target.label}
+-            </strong>
++            </Csp.strong>
+           </div>
+           {state.target.description && (
+             <p className="muted lant-target-description">{state.target.description}</p>
+@@ -701,9 +702,9 @@ export default function Lant({
+ 
+         {!won && state.choices?.length > 0 ? (
+           <section ref={choicesRef} className="lant-choice-panel col" aria-labelledby="lant-choice-title">
+-            <div className="spread row" style={{ gap: 10, alignItems: "baseline" }}>
++            <Csp.div className="spread row" css={{ gap: "10px", alignItems: "baseline" }}>
+               <strong id="lant-choice-title">Atinge următorul cuvânt</strong>
+-            </div>
++            </Csp.div>
+             <div className="lant-choice-grid">
+               {state.choices.map((choice) => (
+                 <button
+@@ -766,28 +767,28 @@ export default function Lant({
+             onExit={exitSafely}
+             replayLabel="Încă un lanț →"
+           >
+-            Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}
+-            în <strong style={{ color: "var(--text)" }}>{state.moves}</strong>{" "}
++            Ai ajuns la <Csp.strong css={{ color: "var(--text)" }}>{state.target.label}</Csp.strong>{" "}
++            în <Csp.strong css={{ color: "var(--text)" }}>{state.moves}</Csp.strong>{" "}
+             {roNoun(state.moves, "salt", "salturi")} (drumul cel mai scurt: {state.optimal}).
+             {recovery?.message ? (
+-              <span className="muted" style={{ display: "block", marginTop: 8 }}>
+-                <span aria-hidden="true" style={{ marginRight: 6 }}>
++              <Csp.span className="muted" css={{ display: "block", marginTop: "8px" }}>
++                <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
+                   ℹ
+-                </span>
++                </Csp.span>
+                 {recovery.message}
+-              </span>
++              </Csp.span>
+             ) : null}
+           </ResultCard>
+         ) : (
+-          <m.div
++          <CspMotion.div
+             key={shake}
+             animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
+             transition={{ duration: 0.32 }}
+             className="col"
+-            style={{ gap: 10 }}
++            css={{ gap: "10px" }}
+           >
+         {actionSync ? (
+-          <div className="card col lant-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
++          <Csp.div className="card col lant-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
+             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+             <span>{actionSync.kind === "changed"
+               ? "Încarcă jocul curent pentru a continua."
+@@ -795,11 +796,11 @@ export default function Lant({
+             <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+             </Button>
+-          </div>
++          </Csp.div>
+         ) : null}
+ 
+-            <div className="row word-hop-input" style={{ gap: 8 }}>
+-              <input
++            <Csp.div className="row word-hop-input" css={{ gap: "8px" }}>
++              <Csp.input
+                 ref={inputRef}
+                 className="field fill"
+                 placeholder="Sau scrie alt concept…"
+@@ -816,7 +817,7 @@ export default function Lant({
+                 spellCheck={false}
+                 enterKeyHint="send"
+                 aria-label="Următorul concept"
+-                style={{ flex: 1 }}
++                css={{ flex: 1 }}
+               />
+               <Button
+                 type="button"
+@@ -825,9 +826,9 @@ export default function Lant({
+               >
+                 {busy ? "…" : "Salt"}
+               </Button>
+-            </div>
++            </Csp.div>
+ 
+-            <div className="row wrap lant-tools" style={{ gap: 8 }}>
++            <Csp.div className="row wrap lant-tools" css={{ gap: "8px" }}>
+               <Button
+                 type="button"
+                 variant="secondary"
+@@ -856,31 +857,31 @@ export default function Lant({
+                   ? "💡 Mai clar"
+                   : "💡 Indiciu"}
+               </Button>
+-            </div>
++            </Csp.div>
+ 
+             <AnimatePresence>
+               {recovery && (
+-                <m.div
++                <CspMotion.div
+                   key={`${recovery.tone}-${recovery.message}`}
+                   initial={{ opacity: 0, y: -6 }}
+                   animate={{ opacity: 1, y: 0 }}
+                   exit={{ opacity: 0, y: -6 }}
+                   className="card"
+-                  style={{
+-                    padding: 12,
++                  css={{
++                    padding: "12px",
+                     borderColor:
+                       recovery.tone === "warning" ? "var(--bad)" : DEF.accent,
+                   }}
+                 >
+-                  <div className="col" style={{ gap: 8 }}>
++                  <Csp.div className="col" css={{ gap: "8px" }}>
+                     <span>
+-                      <span aria-hidden="true" style={{ marginRight: 6 }}>
++                      <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
+                         {recovery.tone === "warning" ? "⚠" : "ℹ"}
+-                      </span>
++                      </Csp.span>
+                       {recovery.message}
+                     </span>
+                     {recovery.choices.length > 0 ? (
+-                      <div className="row wrap" style={{ gap: 8 }}>
++                      <Csp.div className="row wrap" css={{ gap: "8px" }}>
+                         <span className="faint">Ai vrut să scrii:</span>
+                         {recovery.choices.map((choice) => (
+                           <Button
+@@ -896,26 +897,26 @@ export default function Lant({
+                             {choice}
+                           </Button>
+                         ))}
+-                      </div>
++                      </Csp.div>
+                     ) : null}
+-                  </div>
+-                </m.div>
++                  </Csp.div>
++                </CspMotion.div>
+               )}
+             </AnimatePresence>
+ 
+             <AnimatePresence>
+               {hint && (hint.stage || hint.hint) && (
+-                <m.div
++                <CspMotion.div
+                   initial={{ opacity: 0, height: 0 }}
+                   animate={{ opacity: 1, height: "auto" }}
+                   exit={{ opacity: 0, height: 0 }}
+                   className="card lant-hint-panel"
+-                  style={{ padding: 12, borderColor: "var(--warn)" }}
++                  css={{ padding: "12px", borderColor: "var(--warn)" }}
+                   role="status"
+                   aria-live="polite"
+                 >
+-                  <div className="col" style={{ gap: 8 }}>
+-                    <strong style={{ color: "var(--warn)", fontSize: "0.8rem" }}>
++                  <Csp.div className="col" css={{ gap: "8px" }}>
++                    <Csp.strong css={{ color: "var(--warn)", fontSize: "0.8rem" }}>
+                       {hint.stage === "direction"
+                         ? "O DIRECȚIE"
+                         : hint.stage === "alternatives"
+@@ -923,11 +924,11 @@ export default function Lant({
+                           : hint.stage === "backtrack"
+                             ? "UN PAS ÎNAPOI"
+                             : "UN SALT"}
+-                    </strong>
++                    </Csp.strong>
+                     {hint.message ? (
+-                      <span className="muted" style={{ fontSize: "0.85rem" }}>
++                      <Csp.span className="muted" css={{ fontSize: "0.85rem" }}>
+                         {hint.message}
+-                      </span>
++                      </Csp.span>
+                     ) : null}
+                     {hintRemaining !== null && (
+                       <span className="muted">
+@@ -937,7 +938,7 @@ export default function Lant({
+                       </span>
+                     )}
+                     {hint.alternatives_choices?.length ? (
+-                      <div className="row wrap" style={{ gap: 8 }}>
++                      <Csp.div className="row wrap" css={{ gap: "8px" }}>
+                         {hint.alternatives_choices.map((choice) => (
+                           <Button
+                             key={`${choice.label}-${choice.relation}`}
+@@ -951,7 +952,7 @@ export default function Lant({
+                             {choice.label}
+                           </Button>
+                         ))}
+-                      </div>
++                      </Csp.div>
+                     ) : null}
+                     {hint.hint ? (
+                       <button
+@@ -968,11 +969,11 @@ export default function Lant({
+                         {hint.relation ? ` · ${hint.relation}` : ""}
+                       </button>
+                     ) : null}
+-                  </div>
+-                </m.div>
++                  </Csp.div>
++                </CspMotion.div>
+               )}
+             </AnimatePresence>
+-          </m.div>
++          </CspMotion.div>
+         )}
+ 
+         <GameOptions game="lant">
+diff --git a/frontend/src/screens/Perechi.tsx b/frontend/src/screens/Perechi.tsx
+index 96aeced..3dad51b 100644
+--- a/frontend/src/screens/Perechi.tsx
++++ b/frontend/src/screens/Perechi.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "../components/CspStyle";
+ // Perechi — eight visible words, four semantic matches. Choosing the second tile
+ // submits immediately: no drag gesture, no extra confirmation, no client-side answer map.
+ 
+@@ -508,7 +509,7 @@ export default function Perechi({ onExit, onToast }: Props) {
+   if (!state) {
+     return (
+       <div className="screen-pad fill">
+-        <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
++        <Csp.div className="container col game-container" css={{ gap: "18px", paddingBottom: "32px" }}>
+           <GameShell onExit={exitSafely} accent={DEF.accent} busy={loading} />
+           <GameIntro
+             startFailed={startFailed}
+@@ -524,11 +525,11 @@ export default function Perechi({ onExit, onToast }: Props) {
+             glow={DEF.glow}
+             description={
+               <>
+-                <p style={{ margin: 0 }}>Opt cuvinte ascund patru perechi cu sens.</p>
++                <Csp.p css={{ margin: "0px" }}>Opt cuvinte ascund patru perechi cu sens.</Csp.p>
+                 {starterVisible && (
+-                  <p className="faint" style={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
++                  <Csp.p className="faint" css={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
+                     Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.
+-                  </p>
++                  </Csp.p>
+                 )}
+               </>
+             }
+@@ -543,7 +544,7 @@ export default function Perechi({ onExit, onToast }: Props) {
+             onDaily={() => void start({ daily: todayLocal() })}
+             starting={loading}
+           />
+-        </div>
++        </Csp.div>
+       </div>
+     );
+   }
+@@ -553,7 +554,7 @@ export default function Perechi({ onExit, onToast }: Props) {
+   const selectedTile = activeTiles.find((tile) => tile.id === selected);
+   return (
+     <div className="screen-pad fill perechi-game">
+-      <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
++      <Csp.div className="container col game-container" css={{ gap: "14px", paddingBottom: "32px" }}>
+         <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
+           <Hud>
+             {state.daily && <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} />}
+@@ -567,7 +568,7 @@ export default function Perechi({ onExit, onToast }: Props) {
+         </GameShell>
+ 
+         {!finished && actionSync && (
+-          <div className="card col perechi-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
++          <Csp.div className="card col perechi-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
+             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+             <span>{actionSync.kind === "changed"
+               ? "Încarcă jocul curent pentru a continua."
+@@ -575,7 +576,7 @@ export default function Perechi({ onExit, onToast }: Props) {
+             <Button type="button" onClick={(event) => void retryActionSync(event.currentTarget)} disabled={busy || !isPresent}>
+               {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+             </Button>
+-          </div>
++          </Csp.div>
+         )}
+ 
+         {!finished && !actionSync && (
+@@ -714,9 +715,9 @@ export default function Perechi({ onExit, onToast }: Props) {
+             >
+               <div className="perechi-solution">
+                 {!state.won && (
+-                  <p style={{ margin: "0 0 2px" }}>
++                  <Csp.p css={{ margin: "0 0 2px" }}>
+                     Ai găsit {state.solved_count} din 4 perechi.
+-                  </p>
++                  </Csp.p>
+                 )}
+                 {state.solution.map((pair) => (
+                   <span key={pair.tiles.map((tile) => tile.id).join("+")}>
+@@ -728,7 +729,7 @@ export default function Perechi({ onExit, onToast }: Props) {
+             </ResultCard>
+           </div>
+         )}
+-      </div>
++      </Csp.div>
+     </div>
+   );
+ }
+diff --git a/frontend/src/screens/Ranking.tsx b/frontend/src/screens/Ranking.tsx
+index 873d966..dfca15f 100644
+--- a/frontend/src/screens/Ranking.tsx
++++ b/frontend/src/screens/Ranking.tsx
+@@ -1,3 +1,4 @@
++import { Csp } from "../components/CspStyle";
+ // Ranking — the public online leaderboard (one view per game). Anyone can view it; a line
+ // only appears here for players who signed in and opted into the ranking. The signed-in
+ // viewer sees their own rank highlighted.
+@@ -38,14 +39,14 @@ export default function Ranking() {
+   const meIsVisible = entries.some((row) => row.is_me);
+ 
+   return (
+-    <div className="screen-pad fill" style={{ overflowY: "auto" }}>
+-      <div className="container col" style={{ gap: 20, paddingBlock: 16 }}>
+-        <div className="row spread" style={{ alignItems: "center" }}>
+-          <h1 style={{ margin: 0 }}>🏆 Clasament</h1>
++    <Csp.div className="screen-pad fill" css={{ overflowY: "auto" }}>
++      <Csp.div className="container col" css={{ gap: "20px", paddingBlock: "16px" }}>
++        <Csp.div className="row spread" css={{ alignItems: "center" }}>
++          <Csp.h1 css={{ margin: "0px" }}>🏆 Clasament</Csp.h1>
+           <button type="button" className="account-btn" onClick={() => navigate("/")}>
+             ← Acasă
+           </button>
+-        </div>
++        </Csp.div>
+ 
+         <label className="ranking-game-select">
+           <span>Alege jocul</span>
+@@ -76,9 +77,9 @@ export default function Ranking() {
+           ))}
+         </div>
+ 
+-        <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
++        <Csp.p className="muted" css={{ margin: "0px", fontSize: "0.9rem" }}>
+           Recorduri verificate de joc · maximum 1000 de puncte.
+-        </p>
++        </Csp.p>
+ 
+         {loading && (
+           <div
+@@ -115,46 +116,46 @@ export default function Ranking() {
+         )}
+ 
+         {!loading && !error && entries.length === 0 && (
+-          <div className="card center muted" style={{ minHeight: 100, padding: 18 }}>
++          <Csp.div className="card center muted" css={{ minHeight: "100px", padding: "18px" }}>
+             Încă nimeni în clasament la acest joc. Intră cu Google și fii primul!
+-          </div>
++          </Csp.div>
+         )}
+ 
+         {!loading && !error && entries.length > 0 && (
+-          <div className="col" style={{ gap: 6 }}>
++          <Csp.div className="col" css={{ gap: "6px" }}>
+             {entries.map((row, index) => (
+-              <div
++              <Csp.div
+                 key={`${row.rank}-${row.name}-${index}`}
+                 className={`card row spread rank-row${row.is_me ? " rank-row--me" : ""}`}
+-                style={{ padding: "10px 14px", alignItems: "center" }}
++                css={{ padding: "10px 14px", alignItems: "center" }}
+               >
+-                <div className="row" style={{ gap: 12, minWidth: 0, alignItems: "center" }}>
++                <Csp.div className="row" css={{ gap: "12px", minWidth: "0px", alignItems: "center" }}>
+                   <span className={`rank-num rank-num--${row.rank <= 3 ? row.rank : "n"}`}>
+                     {row.rank}
+                   </span>
+-                  <strong style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
++                  <Csp.strong css={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+                     {row.name}
+-                  </strong>
+-                </div>
+-                <strong style={{ fontVariantNumeric: "tabular-nums" }}>{row.score} pct</strong>
+-              </div>
++                  </Csp.strong>
++                </Csp.div>
++                <Csp.strong css={{ fontVariantNumeric: "tabular-nums" }}>{row.score} pct</Csp.strong>
++              </Csp.div>
+             ))}
+-          </div>
++          </Csp.div>
+         )}
+ 
+         {data?.me && !loading && !error && !meIsVisible && (
+-          <div className="card row spread rank-row rank-row--me" style={{ padding: "12px 14px" }}>
++          <Csp.div className="card row spread rank-row rank-row--me" css={{ padding: "12px 14px" }}>
+             <strong>Locul tău: #{data.me.rank}</strong>
+-            <strong style={{ fontVariantNumeric: "tabular-nums" }}>{data.me.score} pct</strong>
+-          </div>
++            <Csp.strong css={{ fontVariantNumeric: "tabular-nums" }}>{data.me.score} pct</Csp.strong>
++          </Csp.div>
+         )}
+ 
+         {data && !data.me && !loading && (
+-          <p className="faint" style={{ fontSize: "0.85rem" }}>
++          <Csp.p className="faint" css={{ fontSize: "0.85rem" }}>
+             Pentru a apărea, intră în cont și activează clasamentul din meniul profilului.
+-          </p>
++          </Csp.p>
+         )}
+-      </div>
+-    </div>
++      </Csp.div>
++    </Csp.div>
+   );
+ }
+diff --git a/frontend/tests/conexiuni-one-away.test.mjs b/frontend/tests/conexiuni-one-away.test.mjs
+index 08a45d6..e3768c2 100644
+--- a/frontend/tests/conexiuni-one-away.test.mjs
++++ b/frontend/tests/conexiuni-one-away.test.mjs
+@@ -7,12 +7,19 @@ const screen = readFileSync(
+   "utf8",
+ );
+ 
++const selectionKeySource = readFileSync(
++  new URL("../src/conexiuniSelectionKey.ts", import.meta.url),
++  "utf8",
++);
++
+ test("Conexiuni treats a retained one-away selection as an order-independent set", () => {
++  assert.match(screen, /import \{ selectionKey \} from "\.\.\/conexiuniSelectionKey";/);
+   assert.match(
+-    screen,
++    selectionKeySource,
+     /selectionKey = \(ids: readonly string\[\]\) => JSON\.stringify\(\[\.\.\.ids\]\.sort\(\)\)/,
+   );
+   assert.match(screen, /selectionKey\(selected\) === blockedGuess\.key/);
++  assert.match(screen, /const guessKey = selectionKey\(guess\);/);
+ });
+ 
+ test("Conexiuni snapshots and retains only a recoverable one-away guess", () => {
+diff --git a/go-backend/cmd/cat-gui-build/main.go b/go-backend/cmd/cat-gui-build/main.go
+new file mode 100644
+index 0000000..3c36262
+--- /dev/null
++++ b/go-backend/cmd/cat-gui-build/main.go
+@@ -0,0 +1,25 @@
++// cat-gui-build bakes GUI identity before compiling the owning app image.
++package main
++
++import (
++	"flag"
++	"fmt"
++	"os"
++
++	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/guibuild"
++)
++
++func main() {
++	root := flag.String("root", "", "repository build root")
++	sha := flag.String("sha", "", "canonical wrapper Git SHA")
++	tree := flag.String("tree-sha256", "", "canonical wrapper source snapshot SHA256")
++	flag.Parse()
++	if *root == "" || *sha == "" || *tree == "" || flag.NArg() != 0 {
++		fmt.Fprintln(os.Stderr, "explicit root, sha and tree-sha256 flags are required")
++		os.Exit(2)
++	}
++	if err := guibuild.Generate(*root, *sha, *tree); err != nil {
++		fmt.Fprintln(os.Stderr, "GUI build identity generation failed:", err)
++		os.Exit(1)
++	}
++}
+diff --git a/go-backend/cmd/cat-server/gui_health.go b/go-backend/cmd/cat-server/gui_health.go
+new file mode 100644
+index 0000000..2ede9f0
+--- /dev/null
++++ b/go-backend/cmd/cat-server/gui_health.go
+@@ -0,0 +1,14 @@
++package main
++
++import (
++	"context"
++	"io"
++
++	"github.com/DobosP/roedu-ui/web-kit/health"
++)
++
++// The canonical compose app invokes /app healthcheck. Dockerfile.gui binds its
++// server to 8080; this command uses the existing SDK's bounded native probe.
++func guiHealthcheck(args []string, out io.Writer) error {
++	return health.Command(context.Background(), args, out, health.Options{URL: "http://127.0.0.1:8080/healthz"})
++}
+diff --git a/go-backend/cmd/cat-server/gui_health_test.go b/go-backend/cmd/cat-server/gui_health_test.go
+new file mode 100644
+index 0000000..e19d0d0
+--- /dev/null
++++ b/go-backend/cmd/cat-server/gui_health_test.go
+@@ -0,0 +1,16 @@
++package main
++
++import (
++	"bytes"
++	"strings"
++	"testing"
++)
++
++func TestGUIHealthcheckRejectsUnsupportedInvocation(t *testing.T) {
++	for _, args := range [][]string{{}, {"other"}, {"healthcheck", "unexpected"}, {"healthcheck", "--engines", "extra"}} {
++		var output bytes.Buffer
++		if err := guiHealthcheck(args, &output); err == nil || !strings.Contains(err.Error(), "usage:") || output.Len() != 0 {
++			t.Fatalf("unsupported healthcheck accepted: args=%v, error=%v, output=%q", args, err, output.String())
++		}
++	}
++}
+diff --git a/go-backend/cmd/cat-server/main.go b/go-backend/cmd/cat-server/main.go
+index 93d8f14..d8c812e 100644
+--- a/go-backend/cmd/cat-server/main.go
++++ b/go-backend/cmd/cat-server/main.go
+@@ -23,6 +23,10 @@ import (
+ )
+ 
+ func main() {
++	if len(os.Args) > 1 && os.Args[1] == "healthcheck" {
++		if err := guiHealthcheck(os.Args[1:], os.Stdout); err != nil { log.Fatal(err) }
++		return
++	}
+ 	addr := flag.String("listen", "127.0.0.1:8081", "HTTP bind address")
+ 	migrate := flag.Bool("migrate", false, "apply native account schema to configured PostgreSQL")
+ 	replay := flag.Bool("replay", false, "offline JSON-lines HTTP request replay on stdin/stdout")
+diff --git a/go-backend/embedfs/assets.go b/go-backend/embedfs/assets.go
+index abacc2a..1572405 100644
+--- a/go-backend/embedfs/assets.go
++++ b/go-backend/embedfs/assets.go
+@@ -7,3 +7,8 @@ import "embed"
+ // compiling a server. all: also retains the private Vite manifests and scaffold.
+ //go:embed all:dist all:legacy
+ var Files embed.FS
++
++// BuildIdentity is private generated metadata, separate from the exact managed
++// dist/legacy asset inventories. Missing metadata never qualifies a build.
++//go:embed all:build/dist
++var BuildIdentity embed.FS
+diff --git a/go-backend/embedfs/build/dist/.keep b/go-backend/embedfs/build/dist/.keep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/go-backend/internal/guibuild/generate.go b/go-backend/internal/guibuild/generate.go
+new file mode 100644
+index 0000000..1760953
+--- /dev/null
++++ b/go-backend/internal/guibuild/generate.go
+@@ -0,0 +1,80 @@
++package guibuild
++
++import (
++	"encoding/json"
++	"fmt"
++	"os"
++	"path/filepath"
++
++	"github.com/DobosP/roedu-ui/web-kit/health"
++)
++
++func outputDirectory(root string) (string, error) {
++	cursor := root
++	for _, part := range []string{"go-backend", "embedfs", "build", "dist"} {
++		cursor = filepath.Join(cursor, part)
++		info, err := os.Lstat(cursor)
++		if os.IsNotExist(err) {
++			if err := os.Mkdir(cursor, 0755); err != nil { return "", err }
++			continue
++		}
++		if err != nil { return "", err }
++		if info.Mode()&os.ModeSymlink != 0 || !info.IsDir() { return "", fmt.Errorf("GUI build output ancestor refused") }
++	}
++	return cursor, nil
++}
++
++func writeAtomic(directory, name string, data []byte) error {
++	destination := filepath.Join(directory, name)
++	if info, err := os.Lstat(destination); err == nil {
++		if !info.Mode().IsRegular() { return fmt.Errorf("GUI build output is not regular") }
++	} else if !os.IsNotExist(err) { return err }
++	file, err := os.CreateTemp(directory, ".gui-build-*")
++	if err != nil { return err }
++	temporary := file.Name()
++	defer os.Remove(temporary)
++	if err := file.Chmod(0644); err != nil { file.Close(); return err }
++	if _, err := file.Write(data); err != nil { file.Close(); return err }
++	if err := file.Close(); err != nil { return err }
++	return os.Rename(temporary, destination)
++}
++
++// Generate is called only after the image's real frontend build and owning
++// assets sync. SHA/tree are explicit canonical Docker build arguments, never
++// ambient runtime environment or a locally invented source snapshot recipe.
++func Generate(root, sha, tree string) (result error) {
++	root, err := filepath.Abs(root)
++	if err != nil { return err }
++	resolved, err := filepath.EvalSymlinks(root)
++	if err != nil { return err }
++	if resolved != root { return fmt.Errorf("GUI build root alias refused") }
++	info, err := os.Lstat(root)
++	if err != nil { return err }
++	if info.Mode()&os.ModeSymlink != 0 || !info.IsDir() { return fmt.Errorf("GUI build root refused") }
++	directory, err := outputDirectory(root)
++	if err != nil { return err }
++	descriptor := filepath.Join(directory, filepath.Base(DescriptorPath))
++	if info, err := os.Lstat(descriptor); err == nil {
++		if !info.Mode().IsRegular() { return fmt.Errorf("GUI build descriptor output refused") }
++		if err := os.Remove(descriptor); err != nil { return err }
++	} else if !os.IsNotExist(err) { return err }
++	// A failed regeneration cannot leave an earlier qualifying descriptor.
++	defer func() { if result != nil { _ = os.Remove(descriptor) } }()
++	inputs := os.DirFS(root)
++	manifest, err := readRegular(inputs, "go-backend/embedfs/"+ManifestPath, 4*1024*1024)
++	if err != nil { return err }
++	lock, err := readRegular(inputs, "versions.lock.json", 2*1024*1024)
++	if err != nil { return err }
++	identity, err := health.NewIdentity(sha, tree, manifest, lock)
++	if err != nil { return err }
++	data, err := json.Marshal(identity)
++	if err != nil { return err }
++	data = append(data, '\n')
++	if err := writeAtomic(directory, filepath.Base(VersionsLockPath), lock); err != nil { return err }
++	if err := writeAtomic(directory, filepath.Base(DescriptorPath), data); err != nil { return err }
++	embedded := os.DirFS(filepath.Join(root, "go-backend", "embedfs"))
++	verified, err := Load(embedded, embedded)
++	if err != nil { return err }
++	if *verified != *identity { return fmt.Errorf("GUI build output verification failed") }
++	return nil
++}
+diff --git a/go-backend/internal/guibuild/generate_test.go b/go-backend/internal/guibuild/generate_test.go
+new file mode 100644
+index 0000000..c5b676d
+--- /dev/null
++++ b/go-backend/internal/guibuild/generate_test.go
+@@ -0,0 +1,267 @@
++package guibuild
++
++import (
++	"bytes"
++	"os"
++	"path/filepath"
++	"runtime"
++	"strings"
++	"testing"
++)
++
++func fixtureSourceTree(t *testing.T) string {
++	t.Helper()
++	root := t.TempDir()
++	manifest := filepath.Join(root, "go-backend", "embedfs", filepath.FromSlash(ManifestPath))
++	if err := os.MkdirAll(filepath.Dir(manifest), 0755); err != nil {
++		t.Fatal(err)
++	}
++	if err := os.WriteFile(manifest, fixtureManifest, 0644); err != nil {
++		t.Fatal(err)
++	}
++	if err := os.WriteFile(filepath.Join(root, "versions.lock.json"), fixtureLock, 0644); err != nil {
++		t.Fatal(err)
++	}
++	return root
++}
++
++func generatedMetadataPath(root, path string) string {
++	return filepath.Join(root, "go-backend", "embedfs", filepath.FromSlash(path))
++}
++
++func requireNoDescriptor(t *testing.T, root string) {
++	t.Helper()
++	_, err := os.Lstat(generatedMetadataPath(root, DescriptorPath))
++	if !os.IsNotExist(err) {
++		t.Fatalf("descriptor still present or inaccessible: %v", err)
++	}
++}
++
++func loadGenerated(t *testing.T, root string) {
++	t.Helper()
++	embedded := os.DirFS(filepath.Join(root, "go-backend", "embedfs"))
++	identity, err := Load(embedded, embedded)
++	expected := fixtureIdentity(fixtureManifest, fixtureLock)
++	if err != nil || identity == nil || *identity != expected {
++		t.Fatalf("generated identity=%#v, error=%v, want=%#v", identity, err, expected)
++	}
++}
++
++func TestGenerateCopiesExactLockBytesAndExplicitSourceBinding(t *testing.T) {
++	root := fixtureSourceTree(t)
++	// The source values are explicit build arguments, not environment fallbacks.
++	t.Setenv("GATE_SHA", strings.Repeat("a", 40))
++	t.Setenv("GATE_TREE_SHA256", strings.Repeat("b", 64))
++	t.Setenv("GATE_APP_IMAGE_ID", "sha256:"+strings.Repeat("c", 64))
++	if err := Generate(root, fixtureSHA, fixtureTree); err != nil {
++		t.Fatal(err)
++	}
++	copied, err := os.ReadFile(generatedMetadataPath(root, VersionsLockPath))
++	if err != nil {
++		t.Fatal(err)
++	}
++	if !bytes.Equal(copied, fixtureLock) {
++		t.Fatalf("lock bytes changed: got %q, want %q", copied, fixtureLock)
++	}
++	for _, path := range []string{DescriptorPath, VersionsLockPath} {
++		info, err := os.Lstat(generatedMetadataPath(root, path))
++		if err != nil || !info.Mode().IsRegular() {
++			t.Fatalf("generated %s is not regular: info=%v, error=%v", path, info, err)
++		}
++	}
++	loadGenerated(t, root)
++}
++
++func TestGenerateFailureRemovesEarlierDescriptor(t *testing.T) {
++	cases := []struct {
++		name string
++		sha string
++		tree string
++		change func(*testing.T, string)
++	}{
++		{"empty SHA", "", fixtureTree, nil},
++		{"zero SHA", strings.Repeat("0", 40), fixtureTree, nil},
++		{"uppercase SHA", strings.Repeat("A", 40), fixtureTree, nil},
++		{"empty tree", fixtureSHA, "", nil},
++		{"zero tree", fixtureSHA, strings.Repeat("0", 64), nil},
++		{"uppercase tree", fixtureSHA, strings.Repeat("A", 64), nil},
++		{"missing manifest", fixtureSHA, fixtureTree, func(t *testing.T, root string) {
++			if err := os.Remove(generatedMetadataPath(root, ManifestPath)); err != nil {
++				t.Fatal(err)
++			}
++		}},
++		{"missing lock", fixtureSHA, fixtureTree, func(t *testing.T, root string) {
++			if err := os.Remove(filepath.Join(root, "versions.lock.json")); err != nil {
++				t.Fatal(err)
++			}
++		}},
++		{"non-object manifest", fixtureSHA, fixtureTree, func(t *testing.T, root string) {
++			if err := os.WriteFile(generatedMetadataPath(root, ManifestPath), []byte(`[]`), 0644); err != nil {
++				t.Fatal(err)
++			}
++		}},
++		{"non-object lock", fixtureSHA, fixtureTree, func(t *testing.T, root string) {
++			if err := os.WriteFile(filepath.Join(root, "versions.lock.json"), []byte(`null`), 0644); err != nil {
++				t.Fatal(err)
++			}
++		}},
++		{"oversized manifest", fixtureSHA, fixtureTree, func(t *testing.T, root string) {
++			data := []byte(`{"pad":"` + strings.Repeat("x", 4*1024*1024) + `"}`)
++			if err := os.WriteFile(generatedMetadataPath(root, ManifestPath), data, 0644); err != nil {
++				t.Fatal(err)
++			}
++		}},
++		{"oversized lock", fixtureSHA, fixtureTree, func(t *testing.T, root string) {
++			data := []byte(`{"pad":"` + strings.Repeat("x", 2*1024*1024) + `"}`)
++			if err := os.WriteFile(filepath.Join(root, "versions.lock.json"), data, 0644); err != nil {
++				t.Fatal(err)
++			}
++		}},
++	}
++	for _, test := range cases {
++		t.Run(test.name, func(t *testing.T) {
++			root := fixtureSourceTree(t)
++			if err := Generate(root, fixtureSHA, fixtureTree); err != nil {
++				t.Fatal(err)
++			}
++			if test.change != nil {
++				test.change(t, root)
++			}
++			// Even plausible ambient claims must not repair invalid explicit input.
++			t.Setenv("GATE_SHA", fixtureSHA)
++			t.Setenv("GATE_TREE_SHA256", fixtureTree)
++			if err := Generate(root, test.sha, test.tree); err == nil {
++				t.Fatal("Generate accepted invalid input")
++			}
++			requireNoDescriptor(t, root)
++			embedded := os.DirFS(filepath.Join(root, "go-backend", "embedfs"))
++			requireLoadFailure(t, embedded, embedded)
++		})
++	}
++}
++
++func fixtureSymlink(t *testing.T, target, link string) {
++	t.Helper()
++	if err := os.Symlink(target, link); err != nil {
++		if runtime.GOOS == "windows" {
++			t.Skipf("Windows symlink creation is unavailable without the required local privilege: %v", err)
++		}
++		t.Fatalf("create symlink: %v", err)
++	}
++}
++
++func TestGenerateRejectsSymlinkedInputsAndClearsEarlierDescriptor(t *testing.T) {
++	for _, input := range []string{"manifest", "lock"} {
++		t.Run(input, func(t *testing.T) {
++			root := fixtureSourceTree(t)
++			if err := Generate(root, fixtureSHA, fixtureTree); err != nil {
++				t.Fatal(err)
++			}
++			path := filepath.Join(root, "versions.lock.json")
++			data := fixtureLock
++			if input == "manifest" {
++				path = generatedMetadataPath(root, ManifestPath)
++				data = fixtureManifest
++			}
++			outside := filepath.Join(t.TempDir(), "outside.json")
++			if err := os.WriteFile(outside, data, 0644); err != nil {
++				t.Fatal(err)
++			}
++			if err := os.Remove(path); err != nil {
++				t.Fatal(err)
++			}
++			fixtureSymlink(t, outside, path)
++			if err := Generate(root, fixtureSHA, fixtureTree); err == nil {
++				t.Fatal("Generate accepted a symlinked input")
++			}
++			requireNoDescriptor(t, root)
++			actual, err := os.ReadFile(outside)
++			if err != nil || !bytes.Equal(actual, data) {
++				t.Fatalf("outside input changed: error=%v", err)
++			}
++		})
++	}
++}
++
++func TestGenerateRejectsSymlinkedOutputAncestorWithoutOutsideWrites(t *testing.T) {
++	root := fixtureSourceTree(t)
++	outside := t.TempDir()
++	outsideDist := filepath.Join(outside, "dist")
++	if err := os.MkdirAll(outsideDist, 0755); err != nil {
++		t.Fatal(err)
++	}
++	outsideDescriptor := filepath.Join(outsideDist, ".gui-build.json")
++	marker := []byte("outside file must remain intact\n")
++	if err := os.WriteFile(outsideDescriptor, marker, 0644); err != nil {
++		t.Fatal(err)
++	}
++	fixtureSymlink(t, outside, filepath.Join(root, "go-backend", "embedfs", "build"))
++	if err := Generate(root, fixtureSHA, fixtureTree); err == nil {
++		t.Fatal("Generate accepted a symlinked output ancestor")
++	}
++	actual, err := os.ReadFile(outsideDescriptor)
++	if err != nil || !bytes.Equal(actual, marker) {
++		t.Fatalf("outside descriptor was changed: data=%q, error=%v", actual, err)
++	}
++	if _, err := os.Lstat(filepath.Join(outsideDist, "versions.lock.json")); !os.IsNotExist(err) {
++		t.Fatalf("generator wrote outside versions lock or inspection failed: %v", err)
++	}
++}
++
++func TestGenerateRejectsNonRegularInputAndClearsEarlierDescriptor(t *testing.T) {
++	root := fixtureSourceTree(t)
++	if err := Generate(root, fixtureSHA, fixtureTree); err != nil {
++		t.Fatal(err)
++	}
++	lock := filepath.Join(root, "versions.lock.json")
++	if err := os.Remove(lock); err != nil {
++		t.Fatal(err)
++	}
++	if err := os.Mkdir(lock, 0755); err != nil {
++		t.Fatal(err)
++	}
++	if err := Generate(root, fixtureSHA, fixtureTree); err == nil {
++		t.Fatal("Generate accepted a directory as the versions lock")
++	}
++	requireNoDescriptor(t, root)
++}
++
++func TestGenerateRejectsSymlinkedDescriptorWithoutRemovingOutsideFile(t *testing.T) {
++	root := fixtureSourceTree(t)
++	if err := Generate(root, fixtureSHA, fixtureTree); err != nil {
++		t.Fatal(err)
++	}
++	descriptor := generatedMetadataPath(root, DescriptorPath)
++	outside := filepath.Join(t.TempDir(), "outside.json")
++	marker := []byte("outside descriptor must remain intact\n")
++	if err := os.WriteFile(outside, marker, 0644); err != nil {
++		t.Fatal(err)
++	}
++	if err := os.Remove(descriptor); err != nil {
++		t.Fatal(err)
++	}
++	fixtureSymlink(t, outside, descriptor)
++	if err := Generate(root, fixtureSHA, fixtureTree); err == nil {
++		t.Fatal("Generate accepted a symlinked descriptor output")
++	}
++	actual, err := os.ReadFile(outside)
++	if err != nil || !bytes.Equal(actual, marker) {
++		t.Fatalf("outside descriptor changed: data=%q, error=%v", actual, err)
++	}
++	embedded := os.DirFS(filepath.Join(root, "go-backend", "embedfs"))
++	requireLoadFailure(t, embedded, embedded)
++}
++
++func TestGenerateRejectsRootAliasWithoutOutsideWrites(t *testing.T) {
++	root := fixtureSourceTree(t)
++	alias := filepath.Join(t.TempDir(), "source-alias")
++	fixtureSymlink(t, root, alias)
++	if err := Generate(alias, fixtureSHA, fixtureTree); err == nil {
++		t.Fatal("Generate accepted a root alias")
++	}
++	requireNoDescriptor(t, root)
++	actual, err := os.ReadFile(filepath.Join(root, "versions.lock.json"))
++	if err != nil || !bytes.Equal(actual, fixtureLock) {
++		t.Fatalf("aliased source changed: error=%v", err)
++	}
++}
+diff --git a/go-backend/internal/guibuild/identity.go b/go-backend/internal/guibuild/identity.go
+new file mode 100644
+index 0000000..21db90e
+--- /dev/null
++++ b/go-backend/internal/guibuild/identity.go
+@@ -0,0 +1,103 @@
++// Package guibuild verifies Cat's private compiled GUI identity.
++package guibuild
++
++import (
++	"bytes"
++	"encoding/json"
++	"fmt"
++	"io"
++	"io/fs"
++	"path"
++	"strings"
++
++	"github.com/DobosP/roedu-ui/web-kit/health"
++)
++
++const (
++	ManifestPath = "dist/.vite/manifest.json"
++	DescriptorPath = "build/dist/.gui-build.json"
++	VersionsLockPath = "build/dist/versions.lock.json"
++)
++
++// readRegular checks each directory entry, including symlink ancestors, and
++// bounds the bytes actually read. The production inputs are immutable embed.FS.
++func readRegular(files fs.FS, name string, limit int64) ([]byte, error) {
++	if !fs.ValidPath(name) { return nil, fmt.Errorf("invalid GUI build input path") }
++	parts := strings.Split(name, "/")
++	parent := "."
++	for index, part := range parts {
++		entries, err := fs.ReadDir(files, parent)
++		if err != nil { return nil, err }
++		var found fs.DirEntry
++		for _, entry := range entries {
++			if entry.Name() == part { found = entry; break }
++		}
++		if found == nil { return nil, fs.ErrNotExist }
++		info, err := found.Info()
++		if err != nil { return nil, err }
++		if info.Mode()&fs.ModeSymlink != 0 { return nil, fmt.Errorf("GUI build input symlink refused") }
++		if index < len(parts)-1 {
++			if !info.IsDir() { return nil, fmt.Errorf("GUI build input ancestor is not a directory") }
++		} else if !info.Mode().IsRegular() || info.Size() > limit {
++			return nil, fmt.Errorf("GUI build input is nonregular or too large")
++		}
++		parent = path.Join(parent, part)
++	}
++	file, err := files.Open(name)
++	if err != nil { return nil, err }
++	defer file.Close()
++	data, err := io.ReadAll(io.LimitReader(file, limit+1))
++	if err != nil { return nil, err }
++	if int64(len(data)) > limit { return nil, fmt.Errorf("GUI build input exceeds byte limit") }
++	return data, nil
++}
++
++// The private descriptor has exactly the four public identity fields. Token
++// decoding refuses duplicate and case-folded keys as well as extra values.
++func decodeDescriptor(data []byte) (*health.Identity, error) {
++	decoder := json.NewDecoder(bytes.NewReader(data))
++	token, err := decoder.Token()
++	if err != nil || token != json.Delim('{') { return nil, fmt.Errorf("GUI build descriptor must be an object") }
++	identity := &health.Identity{}
++	fields := map[string]*string{
++		"sha": &identity.SHA, "tree_sha256": &identity.TreeSHA256,
++		"manifest_sha256": &identity.ManifestSHA256, "versions_lock_sha256": &identity.VersionsLockSHA256,
++	}
++	seen := make(map[string]bool)
++	for decoder.More() {
++		token, err := decoder.Token()
++		if err != nil { return nil, err }
++		key, ok := token.(string)
++		destination, known := fields[key]
++		if !ok || !known || seen[key] { return nil, fmt.Errorf("GUI build descriptor field refused") }
++		value, err := decoder.Token()
++		if err != nil { return nil, err }
++		text, ok := value.(string)
++		if !ok { return nil, fmt.Errorf("GUI build descriptor field must be a string") }
++		*destination = text
++		seen[key] = true
++	}
++	if token, err = decoder.Token(); err != nil || token != json.Delim('}') || len(seen) != len(fields) {
++		return nil, fmt.Errorf("GUI build descriptor is incomplete")
++	}
++	if _, err := decoder.Token(); err != io.EOF { return nil, fmt.Errorf("GUI build descriptor has trailing data") }
++	if err := identity.Validate(); err != nil { return nil, err }
++	return identity, nil
++}
++
++// Load never reads runtime environment claims. The source identifiers must be
++// baked by the owning pre-image build; hashes are recomputed from compiled bytes.
++func Load(assets, metadata fs.FS) (*health.Identity, error) {
++	descriptor, err := readRegular(metadata, DescriptorPath, 4096)
++	if err != nil { return nil, err }
++	baked, err := decodeDescriptor(descriptor)
++	if err != nil { return nil, err }
++	manifest, err := readRegular(assets, ManifestPath, 4*1024*1024)
++	if err != nil { return nil, err }
++	lock, err := readRegular(metadata, VersionsLockPath, 2*1024*1024)
++	if err != nil { return nil, err }
++	actual, err := health.NewIdentity(baked.SHA, baked.TreeSHA256, manifest, lock)
++	if err != nil { return nil, err }
++	if *actual != *baked { return nil, fmt.Errorf("GUI build descriptor differs from embedded bytes") }
++	return actual, nil
++}
+diff --git a/go-backend/internal/guibuild/identity_test.go b/go-backend/internal/guibuild/identity_test.go
+new file mode 100644
+index 0000000..c9b5bfa
+--- /dev/null
++++ b/go-backend/internal/guibuild/identity_test.go
+@@ -0,0 +1,217 @@
++package guibuild
++
++import (
++	"bytes"
++	"crypto/sha256"
++	"encoding/hex"
++	"encoding/json"
++	"io/fs"
++	"strings"
++	"testing"
++	"testing/fstest"
++
++	"github.com/DobosP/roedu-ui/web-kit/health"
++)
++
++// These explicit synthetic values are test fixtures, never production defaults.
++const fixtureSHA = "1111111111111111111111111111111111111111"
++const fixtureTree = "2222222222222222222222222222222222222222222222222222222222222222"
++
++var fixtureManifest = []byte("{\n  \"index.html\": {\"file\": \"assets/app.js\", \"isEntry\": true}\n}\n")
++var fixtureLock = []byte(" {\n  \"schema\": 1, \"fixture\": \"synthetic\"\n}\n")
++
++func fixtureDigest(data []byte) string {
++	digest := sha256.Sum256(data)
++	return hex.EncodeToString(digest[:])
++}
++
++func fixtureIdentity(manifest, lock []byte) health.Identity {
++	return health.Identity{
++		SHA: fixtureSHA,
++		TreeSHA256: fixtureTree,
++		ManifestSHA256: fixtureDigest(manifest),
++		VersionsLockSHA256: fixtureDigest(lock),
++	}
++}
++
++func fixtureDescriptor(t *testing.T, identity health.Identity) []byte {
++	t.Helper()
++	data, err := json.Marshal(identity)
++	if err != nil {
++		t.Fatal(err)
++	}
++	return append(data, '\n')
++}
++
++func fixtureFiles(t *testing.T) (fstest.MapFS, fstest.MapFS, health.Identity) {
++	t.Helper()
++	identity := fixtureIdentity(fixtureManifest, fixtureLock)
++	assets := fstest.MapFS{
++		ManifestPath: &fstest.MapFile{Data: bytes.Clone(fixtureManifest), Mode: 0644},
++	}
++	metadata := fstest.MapFS{
++		DescriptorPath: &fstest.MapFile{Data: fixtureDescriptor(t, identity), Mode: 0644},
++		VersionsLockPath: &fstest.MapFile{Data: bytes.Clone(fixtureLock), Mode: 0644},
++	}
++	return assets, metadata, identity
++}
++
++func requireLoadFailure(t *testing.T, assets, metadata fs.FS) {
++	t.Helper()
++	identity, err := Load(assets, metadata)
++	if err == nil || identity != nil {
++		t.Fatalf("Load returned identity=%#v, error=%v; wanted no identity and an error", identity, err)
++	}
++}
++
++func TestLoadBindsExactEmbeddedBytes(t *testing.T) {
++	assets, metadata, expected := fixtureFiles(t)
++	identity, err := Load(assets, metadata)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if *identity != expected {
++		t.Fatalf("identity = %#v, want %#v", *identity, expected)
++	}
++
++	// Equivalent JSON with different bytes cannot reuse the earlier descriptor.
++	assets[ManifestPath].Data = []byte(`{"index.html":{"file":"assets/app.js","isEntry":true}}`)
++	requireLoadFailure(t, assets, metadata)
++	expected = fixtureIdentity(assets[ManifestPath].Data, metadata[VersionsLockPath].Data)
++	metadata[DescriptorPath].Data = fixtureDescriptor(t, expected)
++	identity, err = Load(assets, metadata)
++	if err != nil || identity == nil || *identity != expected {
++		t.Fatalf("rebound exact bytes: identity=%#v, error=%v", identity, err)
++	}
++
++	metadata[VersionsLockPath].Data = bytes.TrimSpace(fixtureLock)
++	requireLoadFailure(t, assets, metadata)
++}
++
++func TestLoadRejectsMissingInputs(t *testing.T) {
++	for _, path := range []string{ManifestPath, DescriptorPath, VersionsLockPath} {
++		t.Run(path, func(t *testing.T) {
++			assets, metadata, _ := fixtureFiles(t)
++			delete(assets, path)
++			delete(metadata, path)
++			requireLoadFailure(t, assets, metadata)
++		})
++	}
++}
++
++func TestLoadRejectsMalformedDescriptor(t *testing.T) {
++	cases := []struct {
++		name string
++		change func([]byte) []byte
++	}{
++		{"empty", func([]byte) []byte { return nil }},
++		{"malformed", func([]byte) []byte { return []byte(`{"sha":`) }},
++		{"array", func([]byte) []byte { return []byte(`[]`) }},
++		{"null", func([]byte) []byte { return []byte(`null`) }},
++		{"extra", func(data []byte) []byte { return append([]byte(`{"unexpected":"value",`), data[1:]...) }},
++		{"duplicate", func(data []byte) []byte { return append([]byte(`{"sha":"`+fixtureSHA+`",`), data[1:]...) }},
++		{"wrong case", func(data []byte) []byte { return bytes.Replace(data, []byte(`"sha"`), []byte(`"SHA"`), 1) }},
++		{"non-string", func(data []byte) []byte { return bytes.Replace(data, []byte(`"sha":"`+fixtureSHA+`"`), []byte(`"sha":42`), 1) }},
++		{"missing field", func(data []byte) []byte { return bytes.Replace(data, []byte(`"sha":"`+fixtureSHA+`",`), nil, 1) }},
++		{"trailing object", func(data []byte) []byte { return append(data, []byte(`{}`)...) }},
++		{"trailing scalar", func(data []byte) []byte { return append(data, []byte(`true`)...) }},
++	}
++	for _, test := range cases {
++		t.Run(test.name, func(t *testing.T) {
++			assets, metadata, _ := fixtureFiles(t)
++			metadata[DescriptorPath].Data = test.change(metadata[DescriptorPath].Data)
++			requireLoadFailure(t, assets, metadata)
++		})
++	}
++}
++
++func TestLoadRejectsInvalidOrMismatchedBindings(t *testing.T) {
++	cases := []struct {
++		name string
++		change func(*health.Identity)
++	}{
++		{"short SHA", func(i *health.Identity) { i.SHA = "1" }},
++		{"uppercase SHA", func(i *health.Identity) { i.SHA = strings.Repeat("A", 40) }},
++		{"zero SHA", func(i *health.Identity) { i.SHA = strings.Repeat("0", 40) }},
++		{"short tree", func(i *health.Identity) { i.TreeSHA256 = "2" }},
++		{"uppercase tree", func(i *health.Identity) { i.TreeSHA256 = strings.Repeat("A", 64) }},
++		{"zero tree", func(i *health.Identity) { i.TreeSHA256 = strings.Repeat("0", 64) }},
++		{"invalid manifest hash", func(i *health.Identity) { i.ManifestSHA256 = "not-a-hash" }},
++		{"zero manifest hash", func(i *health.Identity) { i.ManifestSHA256 = strings.Repeat("0", 64) }},
++		{"manifest mismatch", func(i *health.Identity) { i.ManifestSHA256 = strings.Repeat("3", 64) }},
++		{"zero lock hash", func(i *health.Identity) { i.VersionsLockSHA256 = strings.Repeat("0", 64) }},
++		{"lock mismatch", func(i *health.Identity) { i.VersionsLockSHA256 = strings.Repeat("4", 64) }},
++	}
++	for _, test := range cases {
++		t.Run(test.name, func(t *testing.T) {
++			assets, metadata, identity := fixtureFiles(t)
++			test.change(&identity)
++			metadata[DescriptorPath].Data = fixtureDescriptor(t, identity)
++			requireLoadFailure(t, assets, metadata)
++		})
++	}
++}
++
++func TestLoadRejectsNonObjectJSONInputs(t *testing.T) {
++	for _, path := range []string{ManifestPath, VersionsLockPath} {
++		for _, value := range []string{"", "[]", "null", "42", "{", "{} {}"} {
++			t.Run(path+"/"+value, func(t *testing.T) {
++				assets, metadata, _ := fixtureFiles(t)
++				if path == ManifestPath {
++					assets[path].Data = []byte(value)
++				} else {
++					metadata[path].Data = []byte(value)
++				}
++				identity := fixtureIdentity(assets[ManifestPath].Data, metadata[VersionsLockPath].Data)
++				metadata[DescriptorPath].Data = fixtureDescriptor(t, identity)
++				requireLoadFailure(t, assets, metadata)
++			})
++		}
++	}
++}
++
++func TestLoadRejectsOversizedAndNonRegularInputs(t *testing.T) {
++	for _, path := range []string{ManifestPath, DescriptorPath, VersionsLockPath} {
++		t.Run(path+"/oversized", func(t *testing.T) {
++			assets, metadata, _ := fixtureFiles(t)
++			file := metadata[path]
++			if path == ManifestPath {
++				file = assets[path]
++			}
++			// Exceeds all three documented input bounds without executing a build.
++			file.Data = []byte(`{"pad":"` + strings.Repeat("x", 8*1024*1024) + `"}`)
++			requireLoadFailure(t, assets, metadata)
++		})
++		for _, mode := range []fs.FileMode{fs.ModeDir, fs.ModeSymlink} {
++			t.Run(path+"/"+mode.String(), func(t *testing.T) {
++				assets, metadata, _ := fixtureFiles(t)
++				file := metadata[path]
++				if path == ManifestPath {
++					file = assets[path]
++				}
++				file.Mode = mode | 0644
++				requireLoadFailure(t, assets, metadata)
++			})
++		}
++	}
++}
++
++func TestLoadIgnoresRuntimeEnvironmentClaims(t *testing.T) {
++	assets, metadata, expected := fixtureFiles(t)
++	for name, value := range map[string]string{
++		"GATE_SHA": strings.Repeat("a", 40),
++		"GATE_TREE_SHA256": strings.Repeat("b", 64),
++		"GATE_APP_IMAGE_ID": "sha256:" + strings.Repeat("c", 64),
++		"GATE_MANIFEST_SHA256": strings.Repeat("d", 64),
++		"GATE_VERSIONS_LOCK_SHA256": strings.Repeat("e", 64),
++	} {
++		t.Setenv(name, value)
++	}
++	identity, err := Load(assets, metadata)
++	if err != nil || identity == nil || *identity != expected {
++		t.Fatalf("environment changed baked identity: identity=%#v, error=%v", identity, err)
++	}
++	delete(metadata, DescriptorPath)
++	requireLoadFailure(t, assets, metadata)
++}
++
+diff --git a/go-backend/internal/httpapi/gui_build.go b/go-backend/internal/httpapi/gui_build.go
+new file mode 100644
+index 0000000..25e0898
+--- /dev/null
++++ b/go-backend/internal/httpapi/gui_build.go
+@@ -0,0 +1,32 @@
++package httpapi
++
++import (
++	"io/fs"
++	"net/http"
++
++	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/guibuild"
++)
++
++func (s *Server) initGUIBuild(assets, metadata fs.FS, mode string) {
++	s.guiBuild = nil
++	if (mode != "" && mode != "current") || s.managedUI == nil || s.managedUIError != nil { return }
++	identity, err := guibuild.Load(assets, metadata)
++	if err == nil { s.guiBuild = identity }
++}
++
++func (s *Server) serveGUIBuild(w http.ResponseWriter, r *http.Request) {
++	w.Header().Set("Cache-Control", "no-store")
++	if r.Method != http.MethodGet && r.Method != http.MethodHead {
++		w.Header().Set("Allow", "GET, HEAD")
++		write(w, r, http.StatusMethodNotAllowed, map[string]any{"detail": "Method not allowed"})
++		return
++	}
++	if s.StaticRoot != "" || s.managedUI == nil || s.managedUIError != nil || s.guiBuild == nil || s.guiBuild.Validate() != nil {
++		write(w, r, http.StatusServiceUnavailable, map[string]any{"detail": "GUI build identity unavailable"})
++		return
++	}
++	w.Header().Set("X-Content-Type-Options", "nosniff")
++	w.Header().Set("Referrer-Policy", "same-origin")
++	w.Header().Set("Cross-Origin-Opener-Policy", "same-origin")
++	s.guiBuild.ServeHTTP(w, r)
++}
+diff --git a/go-backend/internal/httpapi/gui_build_test.go b/go-backend/internal/httpapi/gui_build_test.go
+new file mode 100644
+index 0000000..3b0ed85
+--- /dev/null
++++ b/go-backend/internal/httpapi/gui_build_test.go
+@@ -0,0 +1,148 @@
++package httpapi
++
++import (
++	"encoding/json"
++	"fmt"
++	"net/http"
++	"net/http/httptest"
++	"strings"
++	"testing"
++	"testing/fstest"
++
++	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/guibuild"
++	"github.com/DobosP/roedu-ui/web-kit/health"
++)
++
++// These are explicit synthetic fixtures, not a compiled-image qualification.
++func guiBuildFixture(t *testing.T) (fstest.MapFS, fstest.MapFS, *health.Identity) {
++	t.Helper()
++	assets := fstest.MapFS{
++		"dist/index.html": &fstest.MapFile{Data: []byte(`<!doctype html><html><head><script type="module" src="/assets/app-1234abcd.js"></script></head><body><div id="root"></div></body></html>`)},
++		guibuild.ManifestPath: &fstest.MapFile{Data: []byte(`{"index.html":{"file":"assets/app-1234abcd.js","isEntry":true}}`)},
++		"dist/assets/app-1234abcd.js": &fstest.MapFile{Data: []byte("console.log('fixture')")},
++	}
++	lock := []byte("{\n  \"schema\": 2, \"test_fixture\": true\n}\n")
++	identity, err := health.NewIdentity(strings.Repeat("a", 40), strings.Repeat("b", 64), assets[guibuild.ManifestPath].Data, lock)
++	if err != nil { t.Fatal(err) }
++	descriptor, err := json.Marshal(identity)
++	if err != nil { t.Fatal(err) }
++	metadata := fstest.MapFS{
++		guibuild.DescriptorPath: &fstest.MapFile{Data: descriptor},
++		guibuild.VersionsLockPath: &fstest.MapFile{Data: lock},
++	}
++	return assets, metadata, identity
++}
++
++func guiBuildServer(t *testing.T, assets, metadata fstest.MapFS, mode string) *Server {
++	t.Helper()
++	s := &Server{allowedHosts: []string{"localhost"}}
++	s.managedUI, s.managedUIError = newManagedSPA(assets, "current")
++	if s.managedUIError != nil { t.Fatal(s.managedUIError) }
++	s.initGUIBuild(assets, metadata, mode)
++	return s
++}
++
++func guiBuildRequest(s *Server, method, path string) *httptest.ResponseRecorder {
++	w := httptest.NewRecorder()
++	s.ServeHTTP(w, httptest.NewRequest(method, "http://localhost:8080"+path, nil))
++	return w
++}
++
++func TestGUIBuildEndpointUsesExactCompiledBinding(t *testing.T) {
++	assets, metadata, expected := guiBuildFixture(t)
++	s := guiBuildServer(t, assets, metadata, "current")
++	w := guiBuildRequest(s, http.MethodGet, "/api/gui-build")
++	if w.Code != http.StatusOK || w.Header().Get("Cache-Control") != "no-store" { t.Fatalf("identity response: %d %s", w.Code, w.Body.String()) }
++	var fields map[string]string
++	if err := json.Unmarshal(w.Body.Bytes(), &fields); err != nil { t.Fatal(err) }
++	if len(fields) != 4 || fields["sha"] != expected.SHA || fields["tree_sha256"] != expected.TreeSHA256 || fields["manifest_sha256"] != expected.ManifestSHA256 || fields["versions_lock_sha256"] != expected.VersionsLockSHA256 {
++		t.Fatalf("exact identity fields differ: %v", fields)
++	}
++	if w.Header().Get("Content-Type") != "application/json" { t.Fatal("identity must be JSON") }
++	for key, value := range map[string]string{"X-Content-Type-Options": "nosniff", "Referrer-Policy": "same-origin", "Cross-Origin-Opener-Policy": "same-origin"} {
++		if w.Header().Get(key) != value { t.Fatalf("missing identity header %s", key) }
++	}
++	head := guiBuildRequest(s, http.MethodHead, "/api/gui-build")
++	if head.Code != http.StatusOK || head.Body.Len() != 0 || head.Header().Get("Cache-Control") != "no-store" { t.Fatal("HEAD identity contract differs") }
++	for _, method := range []string{http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodOptions} {
++		w := guiBuildRequest(s, method, "/api/gui-build")
++		if w.Code != http.StatusMethodNotAllowed || w.Header().Get("Allow") != "GET, HEAD" || w.Header().Get("Cache-Control") != "no-store" { t.Fatalf("mutation accepted: %s %d", method, w.Code) }
++	}
++}
++
++func TestGUIBuildEndpointUnavailableBindings(t *testing.T) {
++	cases := []struct { name string; change func(fstest.MapFS, fstest.MapFS) }{
++		{"missing descriptor", func(_, metadata fstest.MapFS) { delete(metadata, guibuild.DescriptorPath) }},
++		{"missing lock", func(_, metadata fstest.MapFS) { delete(metadata, guibuild.VersionsLockPath) }},
++		{"invalid descriptor", func(_, metadata fstest.MapFS) { metadata[guibuild.DescriptorPath].Data = []byte(`{"sha":"placeholder"}`) }},
++		{"changed manifest", func(assets, _ fstest.MapFS) { assets[guibuild.ManifestPath].Data = append(assets[guibuild.ManifestPath].Data, '\n') }},
++		{"changed lock", func(_, metadata fstest.MapFS) { metadata[guibuild.VersionsLockPath].Data = []byte(`{"schema":2,"different":true}`) }},
++	}
++	for _, item := range cases {
++		t.Run(item.name, func(t *testing.T) {
++			assets, metadata, _ := guiBuildFixture(t)
++			item.change(assets, metadata)
++			s := guiBuildServer(t, assets, metadata, "current")
++			for _, method := range []string{http.MethodGet, http.MethodHead} {
++				w := guiBuildRequest(s, method, "/api/gui-build")
++				if w.Code != http.StatusServiceUnavailable || w.Header().Get("Cache-Control") != "no-store" { t.Fatalf("bad binding response: %d", w.Code) }
++				if method == http.MethodHead && w.Body.Len() != 0 { t.Fatal("unavailable HEAD has a body") }
++				if method == http.MethodGet && w.Body.String() != `{"detail":"GUI build identity unavailable"}` { t.Fatal("unavailable identity leaks metadata or internal error") }
++			}
++		})
++	}
++}
++
++func TestGUIBuildEndpointRejectsLegacyAndDiskOverride(t *testing.T) {
++	for _, mode := range []string{"legacy", "unsupported"} {
++		assets, metadata, _ := guiBuildFixture(t)
++		s := guiBuildServer(t, assets, metadata, mode)
++		if w := guiBuildRequest(s, "GET", "/api/gui-build"); w.Code != 503 { t.Fatalf("mode %s claimed current identity", mode) }
++	}
++	assets, metadata, _ := guiBuildFixture(t)
++	s := guiBuildServer(t, assets, metadata, "")
++	s.StaticRoot = "explicit-test-disk-override"
++	if w := guiBuildRequest(s, "GET", "/api/gui-build"); w.Code != 503 { t.Fatal("disk override claimed compiled current identity") }
++	s.StaticRoot = ""
++	s.guiBuild = &health.Identity{}
++	if w := guiBuildRequest(s, "GET", "/api/gui-build"); w.Code != 503 { t.Fatal("invalid identity did not fail closed") }
++	s.managedUI = nil
++	if w := guiBuildRequest(s, "GET", "/api/gui-build"); w.Code != 503 { t.Fatal("unavailable managed UI claimed identity") }
++}
++
++func TestGUIBuildEndpointIgnoresSpoofedRuntimeIdentity(t *testing.T) {
++	assets, metadata, expected := guiBuildFixture(t)
++	for _, stage := range []string{"before", "after"} {
++		t.Run(stage, func(t *testing.T) {
++			var s *Server
++			if stage == "after" { s = guiBuildServer(t, assets, metadata, "current") }
++			for _, key := range []string{"GATE_SHA", "GATE_TREE_SHA256", "GATE_MANIFEST_SHA256", "GATE_VERSIONS_LOCK_SHA256", "GATE_APP_IMAGE_ID"} { t.Setenv(key, strings.Repeat("c", 64)) }
++			if stage == "before" { s = guiBuildServer(t, assets, metadata, "current") }
++			w := guiBuildRequest(s, "GET", "/api/gui-build")
++			var actual health.Identity
++			if w.Code != 200 { t.Fatal("baked identity disappeared after env spoof") }
++			if err := json.Unmarshal(w.Body.Bytes(), &actual); err != nil { t.Fatal(err) }
++			if actual != *expected { t.Fatal("ambient runtime claims changed baked identity") }
++			missing := guiBuildServer(t, assets, fstest.MapFS{}, "current")
++			if w := guiBuildRequest(missing, "GET", "/api/gui-build"); w.Code != 503 { t.Fatal("environment filled absent embedded identity") }
++		})
++	}
++}
++
++func TestGUIBuildPrivateFilesAndHealthRemainBounded(t *testing.T) {
++	assets, metadata, _ := guiBuildFixture(t)
++	s := guiBuildServer(t, assets, metadata, "current")
++	for _, path := range []string{"/.gui-build.json", "/.vite/manifest.json", "/build/dist/.gui-build.json"} {
++		if w := guiBuildRequest(s, "GET", path); w.Code != 404 || strings.Contains(w.Body.String(), strings.Repeat("a", 40)) { t.Fatalf("private metadata response: %s %d", path, w.Code) }
++	}
++	if w := guiBuildRequest(s, "GET", "/healthz"); w.Code != 200 || w.Body.String() != `{"ok":true}` { t.Fatal("ordinary health changed") }
++	for _, shape := range []string{"oversize", "host"} {
++		r := httptest.NewRequest("GET", "http://localhost:8080/api/gui-build", nil)
++		if shape == "oversize" { r.ContentLength = MaxRequestBytes+1 } else { s.allowedHosts = []string{"allowed.test"}; r.Host = "refused.test" }
++		w := httptest.NewRecorder()
++		s.ServeHTTP(w, r)
++		want := 413
++		if shape == "host" { want = 400 }
++		if w.Code != want { t.Fatal(fmt.Sprintf("outer %s guard bypassed: %d", shape, w.Code)) }
++	}
++}
+diff --git a/go-backend/internal/httpapi/managed_nonce.go b/go-backend/internal/httpapi/managed_nonce.go
+new file mode 100644
+index 0000000..bfde246
+--- /dev/null
++++ b/go-backend/internal/httpapi/managed_nonce.go
+@@ -0,0 +1,227 @@
++package httpapi
++
++import (
++	"bytes"
++	"context"
++	"fmt"
++	stdhtml "html"
++	"io"
++	"net/http"
++	"os"
++	"strings"
++
++	"github.com/DobosP/roedu-ui/web-kit/assets"
++	"github.com/DobosP/roedu-ui/web-kit/csp"
++	"golang.org/x/net/html"
++)
++
++// Only current, trusted build bytes are admitted here. Tokenization records
++// insertion offsets; it never serializes HTML or rewrites existing attributes.
++// SDK Tags emits a replacement asset block. Cat instead retains its exact
++// metadata, crossorigin attributes and tag order, using the SDK's actual nonce.
++type managedNonceShell struct {
++	index []byte
++	metaOffset int
++	nonceOffsets []int
++}
++
++func managedTagInsertion(raw []byte, start int) (int, error) {
++	end := len(raw)-1
++	if end < 1 || raw[end] != '>' { return 0, fmt.Errorf("unfinished managed tag") }
++	for end > 0 && (raw[end-1] == ' ' || raw[end-1] == '\t' || raw[end-1] == '\r' || raw[end-1] == '\n') { end-- }
++	if end > 0 && raw[end-1] == '/' { end-- }
++	return start+end, nil
++}
++
++func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonceShell, error) {
++	if manifest == nil { return nil, fmt.Errorf("managed nonce shell requires manifest") }
++	entries := manifest.Entries()
++	entry, ok := entries["index.html"]
++	if !ok || !entry.IsEntry { return nil, fmt.Errorf("managed nonce shell requires index entry") }
++	css, preloads, visited := map[string]bool{}, map[string]bool{}, map[string]bool{}
++	var visit func(string) error
++	visit = func(key string) error {
++		if visited[key] { return nil }
++		visited[key] = true
++		item, ok := entries[key]
++		if !ok { return fmt.Errorf("unknown managed import") }
++		for _, dep := range item.Imports { if err := visit(dep); err != nil { return err } }
++		for _, file := range item.CSS { css[manifest.Static(file)] = false }
++		if key != "index.html" { preloads[manifest.Static(item.File)] = false }
++		return nil
++	}
++	if err := visit("index.html"); err != nil { return nil, err }
++	for url := range css { if url == "" { return nil, fmt.Errorf("unknown managed stylesheet") } }
++	for url := range preloads { if url == "" { return nil, fmt.Errorf("unknown managed preload") } }
++	entryURL := manifest.Static("index.html")
++	if entryURL == "" { return nil, fmt.Errorf("unknown managed module") }
++	shell := &managedNonceShell{index: append([]byte(nil), index...)}
++	z := html.NewTokenizer(bytes.NewReader(index))
++	position, htmls, htmlEnds, heads, headEnds, bodies, bodyEnds, modules, roots, rootEnds := 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
++	inHead, inScript := false, false
++	for {
++		kind := z.Next()
++		raw := z.Raw()
++		start := position
++		position += len(raw)
++		if kind == html.ErrorToken {
++			if z.Err() != io.EOF { return nil, fmt.Errorf("managed HTML tokenization: %w", z.Err()) }
++            if len(raw) != 0 { return nil, fmt.Errorf("unfinished managed HTML token") }
++			break
++		}
++		token := z.Token()
++		if inScript {
++			if kind == html.TextToken && strings.TrimSpace(token.Data) == "" { continue }
++			if kind == html.EndTagToken && token.Data == "script" {
++                if strings.ToLower(string(raw)) != "</script>" { return nil, fmt.Errorf("malformed managed script close") }
++                inScript = false; continue
++            }
++			return nil, fmt.Errorf("managed module contains inline or malformed content")
++		}
++		if kind == html.EndTagToken {
++            if strings.ToLower(string(raw)) != "</"+token.Data+">" { return nil, fmt.Errorf("unsupported managed closing tag") }
++			switch token.Data {
++			case "html":
++				if htmls != 1 || htmlEnds != 0 || bodyEnds != 1 { return nil, fmt.Errorf("malformed managed html") }; htmlEnds++
++			case "title":
++				if !inHead { return nil, fmt.Errorf("managed title outside head") }
++			case "head":
++				if !inHead || heads != 1 || headEnds != 0 { return nil, fmt.Errorf("malformed managed head") }
++				inHead = false; headEnds++
++			case "body":
++				if bodies != 1 || bodyEnds != 0 { return nil, fmt.Errorf("malformed managed body") }
++				bodyEnds++
++			case "div":
++				if roots != 1 || rootEnds != 0 { return nil, fmt.Errorf("malformed managed root") }; rootEnds++
++			case "script":
++				return nil, fmt.Errorf("unmatched managed script")
++			}
++			continue
++		}
++		if kind != html.StartTagToken && kind != html.SelfClosingTagToken { continue }
++		attrs := map[string]string{}
++		for _, attr := range token.Attr {
++			if _, duplicate := attrs[attr.Key]; duplicate { return nil, fmt.Errorf("duplicate managed attribute") }
++			if attr.Namespace != "" || attr.Key == "nonce" || attr.Key == "style" || strings.HasPrefix(attr.Key, "on") {
++				return nil, fmt.Errorf("unsupported managed attribute")
++			}
++			attrs[attr.Key] = attr.Val
++		}
++		switch token.Data {
++		case "html":
++			if kind != html.StartTagToken || htmls != 0 || heads != 0 { return nil, fmt.Errorf("unsupported managed html") }; htmls++
++		case "head":
++			if kind != html.StartTagToken || htmls != 1 || htmlEnds != 0 || heads != 0 || bodies != 0 || len(attrs) != 0 { return nil, fmt.Errorf("unsupported managed head") }
++			heads++; inHead = true; shell.metaOffset = position
++		case "body":
++			if kind != html.StartTagToken || inHead || headEnds != 1 || bodies != 0 { return nil, fmt.Errorf("unsupported managed body") }
++			bodies++
++		case "div":
++			if inHead || bodies != 1 || bodyEnds != 0 || roots != 0 || attrs["id"] != "root" || len(attrs) != 1 ||
++				kind != html.StartTagToken { return nil, fmt.Errorf("unsupported managed root") }
++			roots++
++		case "title", "meta", "script", "link":
++			// Individual supported tags are checked below.
++		default:
++			return nil, fmt.Errorf("unsupported managed shell tag")
++		}
++		switch token.Data {
++		case "base", "style":
++			return nil, fmt.Errorf("unsupported managed shell tag")
++		case "meta":
++			if strings.EqualFold(attrs["property"], "csp-nonce") || strings.EqualFold(attrs["name"], "csp-nonce") ||
++				strings.EqualFold(attrs["http-equiv"], "Content-Security-Policy") ||
++				strings.EqualFold(attrs["http-equiv"], "Content-Security-Policy-Report-Only") {
++				return nil, fmt.Errorf("duplicate managed nonce or policy bootstrap")
++			}
++		case "script":
++			if kind != html.StartTagToken || !inHead || modules != 0 || attrs["type"] != "module" || attrs["src"] != entryURL {
++				return nil, fmt.Errorf("unowned managed script")
++			}
++			for key, value := range attrs {
++				if key != "type" && key != "src" && (key != "crossorigin" || (value != "" && value != "anonymous")) {
++					return nil, fmt.Errorf("unsupported managed script attribute")
++				}
++			}
++			offset, err := managedTagInsertion(raw, start); if err != nil { return nil, err }
++			shell.nonceOffsets = append(shell.nonceOffsets, offset)
++			modules++; inScript = true
++		case "link":
++			rel := strings.Fields(strings.ToLower(attrs["rel"]))
++			assetRel := ""
++			for _, part := range rel { if part == "stylesheet" || part == "modulepreload" { assetRel = part } }
++			if assetRel == "" { continue }
++			if !inHead || len(rel) != 1 { return nil, fmt.Errorf("unsupported managed asset link") }
++			for key, value := range attrs {
++				if key != "rel" && key != "href" && (key != "crossorigin" || (value != "" && value != "anonymous")) {
++					return nil, fmt.Errorf("unsupported managed asset link attribute")
++				}
++			}
++			expected := css; if assetRel == "modulepreload" { expected = preloads }
++			seen, exists := expected[attrs["href"]]
++			if !exists || seen { return nil, fmt.Errorf("unowned or duplicate managed asset link") }
++			expected[attrs["href"]] = true
++			offset, err := managedTagInsertion(raw, start); if err != nil { return nil, err }
++			shell.nonceOffsets = append(shell.nonceOffsets, offset)
++		}
++	}
++	if position != len(index) || htmls != 1 || htmlEnds != 1 || heads != 1 || headEnds != 1 || bodies != 1 || bodyEnds != 1 || modules != 1 || roots != 1 || rootEnds != 1 || inScript {
++		return nil, fmt.Errorf("incomplete managed nonce shell")
++	}
++	for _, seen := range css { if !seen { return nil, fmt.Errorf("managed stylesheet omitted") } }
++	for _, seen := range preloads { if !seen { return nil, fmt.Errorf("managed preload omitted") } }
++	return shell, nil
++}
++
++func (s *managedNonceShell) render(ctx context.Context) ([]byte, error) {
++    if err := ctx.Err(); err != nil { return nil, err }
++	nonce := csp.Nonce(ctx)
++	if nonce == "" { return nil, fmt.Errorf("managed shell requires request nonce") }
++	escaped := stdhtml.EscapeString(nonce)
++	meta := []byte(`<meta property="csp-nonce" content="`+escaped+`" nonce="`+escaped+`">`)
++	attribute := []byte(` nonce="`+escaped+`"`)
++	var output bytes.Buffer
++	position := 0
++	output.Write(s.index[:s.metaOffset]); output.Write(meta); position = s.metaOffset
++	for _, offset := range s.nonceOffsets {
++		output.Write(s.index[position:offset]); output.Write(attribute); position = offset
++	}
++	output.Write(s.index[position:])
++	if err := ctx.Err(); err != nil { return nil, err }
++	return output.Bytes(), nil
++}
++
++func (s *managedSPA) serveIndex(w http.ResponseWriter, r *http.Request) {
++	if s.nonceShell == nil {
++		// Frozen legacy rollback retains its exact raw index and prior policy.
++		w.Header().Set("Cache-Control", "no-cache")
++		websiteBytes(w, r, 200, "text/html; charset=utf-8", s.index)
++		return
++	}
++	body, err := s.nonceShell.render(r.Context())
++	if err != nil { websiteBytes(w, r, 500, "text/html; charset=utf-8", nil); return }
++	// A nonce-bearing document must not be stored or replayed by a cache.
++	w.Header().Set("Cache-Control", "no-store")
++	websiteBytes(w, r, 200, "text/html; charset=utf-8", body)
++}
++
++func (s *managedSPA) installIndexHandler() error {
++	s.indexHandler = http.HandlerFunc(s.serveIndex)
++	if s.nonceShell != nil {
++		// This existing app flag selects actual stage B; no caller nonce, relaxed
++		// source list, inline exception or Trusted Types waiver is accepted.
++		flag := os.Getenv("CAT_CSP_ENFORCE")
++		if flag != "" && flag != "false" && flag != "true" { return fmt.Errorf("CAT_CSP_ENFORCE must be true or false") }
++		s.indexHandler = managedNonceNoStore(csp.Middleware(csp.Policy{ReportOnly: flag != "true"})(s.indexHandler))
++	}
++	return nil
++}
++
++// Keep the current document non-cacheable before SDK middleware can refuse
++// entropy/policy and before rendering can fail. Legacy/assets/APIs never use it.
++func managedNonceNoStore(next http.Handler) http.Handler {
++	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		w.Header().Set("Cache-Control", "no-store")
++		next.ServeHTTP(w, r)
++	})
++}
+diff --git a/go-backend/internal/httpapi/managed_nonce_test.go b/go-backend/internal/httpapi/managed_nonce_test.go
+new file mode 100644
+index 0000000..d04cce1
+--- /dev/null
++++ b/go-backend/internal/httpapi/managed_nonce_test.go
+@@ -0,0 +1,236 @@
++package httpapi
++
++import (
++	"bytes"
++	"context"
++    "errors"
++	"net/http"
++    "net/http/httptest"
++	"strconv"
++	"strings"
++	"testing"
++	"testing/fstest"
++
++	"github.com/DobosP/roedu-ui/web-kit/assets"
++	"github.com/DobosP/roedu-ui/web-kit/csp"
++)
++
++// Inert synthetic source data; authored NOT RUN. No image/browser/M1 proof.
++const nonceFixtureIndex = "<!doctype html>\r\n<html lang=\"ro\"><head>\r\n<title>Cât &amp; de român?</title><!--exact metadata-->\r\n<script type=\"module\" crossorigin src=\"/assets/app-1234abcd.js\"></script>\r\n<link rel=\"modulepreload\" crossorigin href=\"/assets/shared-87654321.js\" />\r\n<link rel=\"stylesheet\" crossorigin href=\"/assets/app-1234abcd.css\">\r\n</head><body><div id=\"root\"></div></body></html>\r\n"
++
++func nonceFixtureManifest(t *testing.T) *assets.Manifest {
++	t.Helper()
++	files := fstest.MapFS{
++		"dist/.vite/manifest.json": {Data: []byte(`{"index.html":{"file":"assets/app-1234abcd.js","isEntry":true,"imports":["_shared"],"dynamicImports":["lazy"],"css":["assets/app-1234abcd.css"]},"_shared":{"file":"assets/shared-87654321.js"},"lazy":{"file":"assets/lazy-1234abcd.js"}}`)},
++		"dist/assets/app-1234abcd.js": {Data: []byte("export {};")},
++		"dist/assets/shared-87654321.js": {Data: []byte("export {};")},
++		"dist/assets/lazy-1234abcd.js": {Data: []byte("export {};")},
++		"dist/assets/app-1234abcd.css": {Data: []byte("body{color:navy}")},
++	}
++	manifest, err := assets.Parse(files, "dist/.vite/manifest.json", "dist", "/")
++	if err != nil { t.Fatal(err) }
++	return manifest
++}
++
++func assertManagedCurrentIndex(t *testing.T, w *httptest.ResponseRecorder, original []byte) string {
++	t.Helper()
++	policy := w.Header().Get("Content-Security-Policy")
++	if policy == "" { policy = w.Header().Get("Content-Security-Policy-Report-Only") }
++	const marker = "'nonce-"
++	start := strings.Index(policy, marker)
++	if start < 0 { t.Fatalf("missing request nonce: %s", policy) }
++	tail := policy[start+len(marker):]
++	end := strings.IndexByte(tail, '\'')
++	if end < 0 { t.Fatal("unterminated header nonce") }
++	nonce := tail[:end]
++	if len(nonce) != 32 || !strings.Contains(policy, "script-src 'self' 'nonce-"+nonce+"' 'strict-dynamic'") ||
++		!strings.Contains(policy, "style-src 'self' 'nonce-"+nonce+"'") ||
++		!strings.Contains(policy, "script-src-attr 'none';") || !strings.Contains(policy, "style-src-attr 'none';") { t.Fatal("SDK policy changed") }
++	meta := `<meta property="csp-nonce" content="`+nonce+`" nonce="`+nonce+`">`
++	if bytes.Count(w.Body.Bytes(), []byte(meta)) != 1 { t.Fatal("header/bootstrap mismatch") }
++	unbridged := bytes.Replace(w.Body.Bytes(), []byte(meta), nil, 1)
++	unbridged = bytes.ReplaceAll(unbridged, []byte(` nonce="`+nonce+`"`), nil)
++	if !bytes.Equal(unbridged, original) { t.Fatal("nonce bridge changed original bytes") }
++	if w.Header().Get("Cache-Control") != "no-store" || w.Header().Get("Content-Length") != strconv.Itoa(w.Body.Len()) { t.Fatal("dynamic cache/length changed") }
++	for key, value := range map[string]string{"X-Content-Type-Options":"nosniff", "Referrer-Policy":"same-origin",
++		"Cross-Origin-Opener-Policy":"same-origin", "X-Frame-Options":"DENY", "Content-Type":"text/html; charset=utf-8"} {
++		if w.Header().Get(key) != value { t.Fatalf("privacy/security header changed: %s", key) }
++	}
++	return nonce
++}
++
++func TestManagedNonceShellBytePreservationAndSDKContext(t *testing.T) {
++	input := []byte(nonceFixtureIndex)
++	shell, err := newManagedNonceShell(input, nonceFixtureManifest(t)); if err != nil { t.Fatal(err) }
++	input[0] = 'X' // Admitted shell owns its immutable bytes.
++	const nonce = "synthetic-source-only-nonce"
++	body, err := shell.render(csp.WithNonce(context.Background(), nonce)); if err != nil { t.Fatal(err) }
++	meta := `<meta property="csp-nonce" content="`+nonce+`" nonce="`+nonce+`">`
++	stripped := bytes.Replace(body, []byte(meta), nil, 1)
++	stripped = bytes.ReplaceAll(stripped, []byte(` nonce="`+nonce+`"`), nil)
++	if !bytes.Equal(stripped, []byte(nonceFixtureIndex)) || bytes.Count(body, []byte(` nonce="`+nonce+`"`)) != 4 ||
++		bytes.Contains(body, []byte("lazy-1234abcd.js")) { t.Fatal("bytes/static graph/nonce count changed") }
++	if body, err := shell.render(context.Background()); err == nil || body != nil { t.Fatal("missing nonce leaked partial HTML") }
++	body, err = shell.render(csp.WithNonce(context.Background(), `"><script>alert(1)</script>`))
++	if err != nil || bytes.Contains(body, []byte(`<script>alert(1)</script>`)) { t.Fatal("nonce not escaped") }
++}
++
++func TestManagedNonceShellRefusals(t *testing.T) {
++	manifest := nonceFixtureManifest(t)
++	module := `<script type="module" crossorigin src="/assets/app-1234abcd.js"></script>`
++	style := `<link rel="stylesheet" crossorigin href="/assets/app-1234abcd.css">`
++	preload := `<link rel="modulepreload" crossorigin href="/assets/shared-87654321.js" />`
++	changes := []struct{name, old, next string}{
++		{"missing module",module,""}, {"duplicate module",module,module+module},
++		{"wrong module","/assets/app-1234abcd.js","/assets/lazy-1234abcd.js"},
++		{"external module","/assets/app-1234abcd.js","https://invalid.example/app.js"},
++		{"malformed script close","</script>","</script forged>"},
++        {"inline script","</script>","alert(1)</script>"}, {"unterminated script","</script>",""},
++		{"duplicate src"," crossorigin src=",` src="/assets/app-1234abcd.js" crossorigin src=`},
++		{"forged nonce"," crossorigin src=",` nonce="forged" crossorigin src=`},
++		{"unbound attribute"," crossorigin src=",` integrity="unbound" crossorigin src=`},
++		{"credentialed module"," crossorigin src=",` crossorigin="use-credentials" src=`},
++		{"wrong type",`type="module"`,`type="text/javascript"`},
++		{"missing style",style,""}, {"duplicate style",style,style+style},
++		{"unowned style","/assets/app-1234abcd.css","/assets/other.css"},
++		{"alternate style",`rel="stylesheet"`,`rel="alternate stylesheet"`},
++		{"missing preload",preload,""}, {"duplicate preload",preload,preload+preload},
++		{"dynamic preload","/assets/shared-87654321.js","/assets/lazy-1234abcd.js"},
++		{"duplicate html","<html lang=\"ro\">","<html lang=\"ro\"><html>"},
++		{"missing html close","</html>",""},
++		{"malformed head close","</head>","</head forged>"},
++		{"trailing unfinished script","</html>","</html><script"},
++		{"duplicate head","<head>","<head><head>"}, {"missing head close","</head>",""},
++		{"duplicate head attr","<head>",`<head id="a" id="b">`},
++		{"forged head nonce","<head>",`<head nonce="forged">`},
++		{"nonce meta property","<head>",`<head><meta property="csp-nonce" content="forged">`},
++		{"nonce meta name","<head>",`<head><meta name="CSP-NONCE" content="forged">`},
++		{"duplicate meta attr","<head>",`<head><meta property="x" property="csp-nonce">`},
++		{"policy meta","<head>",`<head><meta http-equiv="Content-Security-Policy" content="default-src *">`},
++		{"base URL","<head>",`<head><base href="https://invalid.example/">`},
++		{"inline style","<head>","<head><style>body{color:red}</style>"},
++		{"style attr","<body>",`<body style="color:red">`},
++		{"inline handler","<body>",`<body onload="alert(1)">`},
++		{"inert module",module,"<template>"+module+"</template>"},
++		{"missing root",`<div id="root"></div>`,""},
++		{"duplicate root",`<div id="root"></div>`,`<div id="root"></div><div id="root"></div>`},
++	}
++	for _, fixture := range changes {
++		t.Run(fixture.name, func(t *testing.T) {
++			source := strings.Replace(nonceFixtureIndex, fixture.old, fixture.next, 1)
++			if source == nonceFixtureIndex { t.Fatal("counterexample failed to mutate source") }
++			if shell, err := newManagedNonceShell([]byte(source), manifest); err == nil || shell != nil { t.Fatal("invalid shell admitted") }
++		})
++	}
++	bodyModule := strings.Replace(strings.Replace(nonceFixtureIndex,module,"",1),"<body>","<body>"+module,1)
++	if shell, err := newManagedNonceShell([]byte(bodyModule),manifest); err == nil || shell != nil { t.Fatal("module in body admitted") }
++	if shell, err := newManagedNonceShell([]byte(nonceFixtureIndex),nil); err == nil || shell != nil { t.Fatal("nil manifest admitted") }
++}
++
++func TestManagedNonceResponseFreshnessAndStages(t *testing.T) {
++	for _, enforce := range []string{"false","true"} {
++		t.Run(enforce,func(t *testing.T) {
++			t.Setenv("CAT_CSP_ENFORCE",enforce)
++			files := managedSPAFixture(); s := testServer(t)
++			var err error; s.managedUI,err = newManagedSPA(files,"current"); if err != nil { t.Fatal(err) }
++			seen := map[string]bool{}
++			for _,route := range []string{"/","/intrusul?challenge=daily","/alchimie?mode=explore","/"} {
++				r := httptest.NewRequest("GET",route,nil)
++				r.Header.Set("X-CSP-Nonce","attacker-controlled"); r.Header.Set("If-None-Match",`"stale-document"`)
++				w := httptest.NewRecorder(); s.ServeHTTP(w,r); if w.Code != 200 { t.Fatal(w.Code) }
++				nonce := assertManagedCurrentIndex(t,w,files["dist/index.html"].Data)
++				if seen[nonce] { t.Fatal("request/deep-link nonce reused") }; seen[nonce]=true
++				const tt = "require-trusted-types-for 'script'; trusted-types roedu roedu-hovercard roedu-islands; report-uri /csp-report"
++				if enforce=="true" {
++					if w.Header().Get("Content-Security-Policy")=="" || w.Header().Get("Content-Security-Policy-Report-Only")!=tt { t.Fatal("enforced/TT-only policy changed") }
++				} else if w.Header().Get("Content-Security-Policy")!="" || !strings.Contains(w.Header().Get("Content-Security-Policy-Report-Only"),"require-trusted-types-for 'script'") { t.Fatal("preliminary actual policy changed") }
++			}
++			w := managedSPARequest(s,"HEAD","/intrusul")
++			if w.Code!=200 || w.Body.Len()!=0 || w.Header().Get("Cache-Control")!="no-store" || w.Header().Get("Content-Length")=="" { t.Fatal("HEAD changed") }
++			for _,route := range []string{"/api/health","/assets/app-1234abcd.js"} {
++				w=managedSPARequest(s,"GET",route)
++				if w.Code!=200 || w.Header().Get("Content-Security-Policy")!="" { t.Fatal("nonce changed API/assets route") }
++				if strings.HasPrefix(route,"/assets/") && !bytes.Equal(w.Body.Bytes(),files["dist"+route].Data) { t.Fatal("asset bytes changed") }
++			}
++		})
++	}
++}
++
++func TestManagedNonceLegacyAndInvalidFlag(t *testing.T) {
++	t.Setenv("CAT_CSP_ENFORCE","true")
++	files:=managedSPAFixture(); s:=testServer(t)
++	var err error; s.managedUI,err=newManagedSPA(files,"legacy"); if err!=nil { t.Fatal(err) }
++	w:=managedSPARequest(s,"GET","/intrusul")
++	if w.Code!=200 || !bytes.Equal(w.Body.Bytes(),files["legacy/index.html"].Data) ||
++		w.Header().Get("Content-Security-Policy")!="" || w.Header().Get("Content-Security-Policy-Report-Only")!="" ||
++		w.Header().Get("Cache-Control")!="no-cache" { t.Fatal("legacy bytes/policy changed") }
++	t.Setenv("CAT_CSP_ENFORCE","TRUE")
++	if ui,err:=newManagedSPA(files,"current"); err==nil || ui!=nil { t.Fatal("invalid flag silently weakened policy") }
++	s.managedUI,s.managedUIError=newManagedSPA(files,"current")
++	if w:=managedSPARequest(s,"GET","/"); w.Code!=503 { t.Fatal("invalid admission returned raw HTML") }
++}
++
++func TestManagedCSPReportReceiverBoundsWithoutPersistence(t *testing.T) {
++	t.Setenv("CAT_CSP_ENFORCE","true")
++	s:=testServer(t)
++	s.allowedHosts=[]string{"example.com"}
++	var err error; s.managedUI,err=newManagedSPA(managedSPAFixture(),"current"); if err!=nil { t.Fatal(err) }
++	cases:=[]struct{name,method,media,body string; status int}{
++		{"legacy object","POST","application/csp-report",`{"csp-report":{"blocked-uri":"synthetic-private-path","script-sample":"synthetic-sample"}}`,204},
++		{"report array","POST","application/reports+json",`[{"type":"csp-violation","body":{"documentURL":"synthetic-private-query"}}]`,204},
++		{"json object","POST","application/json",`{"synthetic":true}`,204},
++		{"GET","GET","application/json","",405},
++		{"HEAD","HEAD","application/json","",405},
++		{"wrong media","POST","text/plain",`{"synthetic":true}`,415},
++		{"malformed","POST","application/json","{",400},
++		{"null","POST","application/json","null",400},
++		{"empty array","POST","application/json","[]",400},
++		{"null member","POST","application/json","[null]",400},
++		{"too many reports","POST","application/reports+json","["+strings.Repeat("{},",100)+"{}]",400},
++		{"oversize","POST","application/json",strings.Repeat("x",MaxRequestBytes+1),413},
++	}
++	for _,fixture:=range cases {
++		t.Run(fixture.name,func(t *testing.T){
++			r:=httptest.NewRequest(fixture.method,"/csp-report",strings.NewReader(fixture.body));r.Header.Set("Content-Type",fixture.media)
++			w:=httptest.NewRecorder();s.ServeHTTP(w,r)
++			if w.Code!=fixture.status || w.Header().Get("Referrer-Policy")!="same-origin" { t.Fatal("report contract changed",w.Code) }
++			if fixture.status==204 && (w.Body.Len()!=0 || w.Header().Get("Cache-Control")!="no-store") { t.Fatal("report echoed data or lost no-store") }
++			if strings.Contains(w.Body.String(),"synthetic-private") || strings.Contains(w.Body.String(),"synthetic-sample") { t.Fatal("report payload escaped") }
++			if fixture.status==405 && w.Header().Get("Allow")!="POST" { t.Fatal("report method boundary changed") }
++		})
++	}
++	r:=httptest.NewRequest("POST","/csp-report",strings.NewReader("{}"));r.Host="unadmitted.invalid";r.Header.Set("Content-Type","application/json")
++	w:=httptest.NewRecorder();s.ServeHTTP(w,r)
++	if w.Code!=400 { t.Fatal("report receiver bypassed host refusal") }
++}
++
++// Cancellation/error cases are authored NOT RUN. Actual SDK entropy failure is
++// not injected by changing crypto/rand.Reader or vendor source. The outer wrapper
++// precedes that same shipped middleware; the actual invalid-policy branch below
++// causally checks an SDK refusal before the renderer can be called.
++func TestManagedNonceCanceledContextAndRequestRefuseHTML(t *testing.T) {
++	shell,err:=newManagedNonceShell([]byte(nonceFixtureIndex),nonceFixtureManifest(t)); if err!=nil { t.Fatal(err) }
++	ctx,cancel:=context.WithCancel(csp.WithNonce(context.Background(),"synthetic-source-only-nonce"))
++	cancel()
++	if body,err:=shell.render(ctx); !errors.Is(err,context.Canceled) || body!=nil { t.Fatal("canceled context produced HTML") }
++	t.Setenv("CAT_CSP_ENFORCE","true")
++	s:=testServer(t);s.managedUI,err=newManagedSPA(managedSPAFixture(),"current");if err!=nil { t.Fatal(err) }
++	r:=httptest.NewRequest("GET","/intrusul",nil).WithContext(ctx)
++	w:=httptest.NewRecorder();s.ServeHTTP(w,r)
++	if w.Code!=500 || w.Body.Len()!=0 || w.Header().Get("Cache-Control")!="no-store" ||
++		w.Header().Get("Referrer-Policy")!="same-origin" { t.Fatal("canceled current document escaped refusal/no-store") }
++}
++
++func TestManagedNonceRenderAndSDKRefusalsAreNoStore(t *testing.T) {
++	shell,err:=newManagedNonceShell([]byte(nonceFixtureIndex),nonceFixtureManifest(t));if err!=nil { t.Fatal(err) }
++	ui:=&managedSPA{nonceShell:shell}
++	w:=httptest.NewRecorder()
++	managedNonceNoStore(http.HandlerFunc(ui.serveIndex)).ServeHTTP(w,httptest.NewRequest("GET","/",nil))
++	if w.Code!=500 || w.Body.Len()!=0 || w.Header().Get("Cache-Control")!="no-store" { t.Fatal("missing-nonce render refusal cacheable") }
++	called:=false
++	invalid:=csp.Middleware(csp.Policy{ReportPath:"//refused"})(http.HandlerFunc(func(http.ResponseWriter,*http.Request){called=true}))
++	w=httptest.NewRecorder()
++	managedNonceNoStore(invalid).ServeHTTP(w,httptest.NewRequest("GET","/",nil))
++	if w.Code!=500 || called || w.Body.String()!="CSP policy invalid\n" || w.Header().Get("Cache-Control")!="no-store" ||
++		strings.Contains(w.Body.String(),"<html") || w.Header().Get("Content-Security-Policy")!="" { t.Fatal("SDK pre-render refusal lost no-store") }
++}
+diff --git a/go-backend/internal/httpapi/managed_spa.go b/go-backend/internal/httpapi/managed_spa.go
+index c5b72dc..4a864cb 100644
+--- a/go-backend/internal/httpapi/managed_spa.go
++++ b/go-backend/internal/httpapi/managed_spa.go
+@@ -8,6 +8,7 @@ import (
+ 	"strings"
+ 
+ 	"github.com/DobosP/roedu-ui/web-kit/assets"
++    "github.com/DobosP/roedu-ui/web-kit/csp"
+ 	kitstatic "github.com/DobosP/roedu-ui/web-kit/static"
+ )
+ 
+@@ -15,6 +16,8 @@ type managedSPA struct {
+ 	files fs.FS
+ 	index []byte
+ 	static http.Handler
++	nonceShell *managedNonceShell
++	indexHandler http.Handler
+ }
+ 
+ // The SDK recognizes hexadecimal hashes. Cat's Vite hashes also contain other
+@@ -71,11 +74,24 @@ func newManagedSPA(files fs.ReadDirFS, mode string) (*managedSPA, error) {
+ 	if len(index) == 0 { return nil, fmt.Errorf("empty managed UI index") }
+ 	selected, err := fs.Sub(files, root)
+ 	if err != nil { return nil, err }
+-	return &managedSPA{files: selected, index: index, static: kitstatic.Handler(files, kitstatic.Options{Prefix: root})}, nil
++	ui := &managedSPA{files: selected, index: index, static: kitstatic.Handler(files, kitstatic.Options{Prefix: root})}
++	if root == "dist" {
++		ui.nonceShell, err = newManagedNonceShell(index, manifest)
++		if err != nil { return nil, err }
++	}
++	if err := ui.installIndexHandler(); err != nil { return nil, err }
++	return ui, nil
+ }
+ 
+ func (s *Server) managedWebsite(w http.ResponseWriter, r *http.Request) bool {
+ 	requestPath := r.URL.Path
++	if requestPath == "/csp-report" {
++		// Acknowledge bounded browser reports without retaining private URLs,
++		// samples or user data. Host/body/CORS/account ordering already ran.
++		websiteHeaders(w)
++		csp.ReportHandler(nil).ServeHTTP(w, r)
++		return true
++	}
+ 	if requestPath == "/api" || strings.HasPrefix(requestPath, "/api/") { return false }
+ 	// Embedded files have no disk escape; private manifests and scaffold are
+ 	// still refused rather than accidentally receiving the SPA fallback.
+@@ -119,7 +135,7 @@ func (s *Server) managedWebsite(w http.ResponseWriter, r *http.Request) bool {
+ 		websiteBytes(w, r, 404, "text/html; charset=utf-8", nil)
+ 		return true
+ 	}
+-	w.Header().Set("Cache-Control", "no-cache")
+-	websiteBytes(w, r, 200, "text/html; charset=utf-8", s.managedUI.index)
++	websiteHeaders(w)
++	s.managedUI.indexHandler.ServeHTTP(w, r)
+ 	return true
+ }
+diff --git a/go-backend/internal/httpapi/managed_spa_test.go b/go-backend/internal/httpapi/managed_spa_test.go
+index 689736e..a922bad 100644
+--- a/go-backend/internal/httpapi/managed_spa_test.go
++++ b/go-backend/internal/httpapi/managed_spa_test.go
+@@ -17,7 +17,7 @@ import (
+ func managedSPAFixture() fstest.MapFS {
+ 	files := fstest.MapFS{}
+ 	for _, root := range []string{"dist", "legacy"} {
+-		files[root+"/index.html"] = &fstest.MapFile{Data: []byte("<!doctype html><main>" + root + "</main>")}
++		files[root+"/index.html"] = &fstest.MapFile{Data: []byte("<!doctype html><html lang=\"ro\"><head><script type=\"module\" crossorigin src=\"/assets/app-1234abcd.js\"></script><link rel=\"stylesheet\" crossorigin href=\"/assets/app-1234abcd.css\"></head><body><div id=\"root\"></div><!--" + root + "--></body></html>")}
+ 		files[root+"/.vite/manifest.json"] = &fstest.MapFile{Data: []byte(`{"index.html":{"file":"assets/app-1234abcd.js","isEntry":true,"css":["assets/app-1234abcd.css"]}}`)}
+ 		files[root+"/assets/app-1234abcd.js"] = &fstest.MapFile{Data: []byte("console.log('" + root + "');")}
+ 		files[root+"/assets/app-1234abcd.css"] = &fstest.MapFile{Data: []byte("body{color:navy}")}
+@@ -47,9 +47,10 @@ func TestManagedSPACompiledCurrentAndFrozenLegacy(t *testing.T) {
+ 				t.Fatalf("default server did not admit compiled %s: %v", mode, s.managedUIError)
+ 			}
+ 			w := managedSPARequest(s, "GET", "/intrusul?challenge=daily")
+-			if w.Code != 200 || !bytes.Equal(w.Body.Bytes(), index) {
+-				t.Fatal("compiled selected tree was not the SPA deep-link response")
+-			}
++			if w.Code != 200 { t.Fatal("compiled selected tree was not the SPA deep-link response") }
++			if mode == "legacy" {
++				if !bytes.Equal(w.Body.Bytes(), index) { t.Fatal("compiled frozen legacy response changed bytes") }
++			} else { assertManagedCurrentIndex(t, w, index) }
+ 			if mode == "legacy" && fmt.Sprintf("%x", sha256.Sum256(index)) != "6ef9e2cd5334b0e89fe078f0bf2c3c9b3b94360ad013c7740db5cc205bd3feeb" {
+ 				t.Fatal("compiled rollback index differs from the sealed thirty-file original")
+ 			}
+@@ -74,9 +75,8 @@ func TestManagedSPADeepLinksAndAPIRouting(t *testing.T) {
+ 	s.managedUIError = nil
+ 	for _, path := range []string{"/", "/intrusul", "/alchimie?mode=explore", "/not-a-route"} {
+ 		w := managedSPARequest(s, "GET", path)
+-		if w.Code != 200 || !bytes.Equal(w.Body.Bytes(), s.managedUI.index) || w.Header().Get("Cache-Control") != "no-cache" {
+-			t.Fatalf("SPA fallback failed for %s: %d", path, w.Code)
+-		}
++		if w.Code != 200 { t.Fatalf("SPA fallback failed for %s: %d", path, w.Code) }
++		assertManagedCurrentIndex(t, w, s.managedUI.index)
+ 	}
+ 	for _, path := range []string{"/api", "/api/no-such-endpoint", "/api/wordgames/unknown/games"} {
+ 		w := managedSPARequest(s, "GET", path)
+@@ -152,7 +152,8 @@ func TestManagedSPANonHexViteCacheUsesActualSDKStatus(t *testing.T) {
+ 	files := managedSPAFixture()
+ 	asset := "/assets/AccountBar-B_1k6UL8.js"
+ 	files["dist"+asset] = &fstest.MapFile{Data: []byte("console.log('non-hex-vite-hash');")}
+-	files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"assets/AccountBar-B_1k6UL8.js","isEntry":true}}`)
++	files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"assets/AccountBar-B_1k6UL8.js","isEntry":true,"css":["assets/app-1234abcd.css"]}}`)
++	files["dist/index.html"].Data = bytes.Replace(files["dist/index.html"].Data, []byte("/assets/app-1234abcd.js"), []byte(asset), 1)
+ 	var err error
+ 	s.managedUI, err = newManagedSPA(files, "current")
+ 	if err != nil { t.Fatal(err) }
+diff --git a/go-backend/internal/httpapi/server.go b/go-backend/internal/httpapi/server.go
+index 6e0a650..24ad065 100644
+--- a/go-backend/internal/httpapi/server.go
++++ b/go-backend/internal/httpapi/server.go
+@@ -26,6 +26,7 @@ import (
+ 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/lant"
+ 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/perechi"
+ 	"github.com/DobosP/cat_de_roman_esti/shared-go/authcore"
++	"github.com/DobosP/roedu-ui/web-kit/health"
+ )
+ 
+ const prefix = "/api/wordgames/intrusul/games"
+@@ -45,6 +46,7 @@ type Server struct {
+ 	StaticRoot          string
+ 	managedUI           *managedSPA
+ 	managedUIError      error
++	guiBuild            *health.Identity
+ 	allowedHosts        []string
+ 	perechi             *perechi.Service
+ 	conexiuni           *conexiuni.Service
+@@ -56,7 +58,9 @@ type Server struct {
+ 
+ func New(c *content.Content) *Server {
+ 	s := &Server{game: intrusul.New(c), content: c, allowedHosts: configuredHosts()}
+-	s.managedUI, s.managedUIError = newManagedSPA(embedfs.Files, os.Getenv("CAT_UI"))
++	mode := os.Getenv("CAT_UI")
++	s.managedUI, s.managedUIError = newManagedSPA(embedfs.Files, mode)
++	s.initGUIBuild(embedfs.Files, embedfs.BuildIdentity, mode)
+ 	s.perechi = perechi.New(c)
+ 	s.conexiuni = conexiuni.New(c)
+ 	s.contexto = contexto.New(c)
+@@ -145,6 +149,10 @@ func (s *Server) serveHTTP(w http.ResponseWriter, r *http.Request) {
+ 		write(w, r, 200, map[string]any{"ok": true})
+ 		return
+ 	}
++	if r.URL.Path == "/api/gui-build" {
++		s.serveGUIBuild(w, r)
++		return
++	}
+ 	if !strings.HasPrefix(r.URL.Path, "/api/wordgames/intrusul") {
+ 		if s.arcade(w, r) {
+ 			return
+diff --git a/scripts/gui-full-browser.mjs b/scripts/gui-full-browser.mjs
+index 09990a6..b596cb7 100644
+--- a/scripts/gui-full-browser.mjs
++++ b/scripts/gui-full-browser.mjs
+@@ -216,23 +216,39 @@ try {
+   const routes = ["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie?mode=challenges", "/alchimie?mode=explore", "/cald-rece", "/lant", "/clasament"];
+   for (const route of routes) {
+     const page = await browser.newPage({ reducedMotion: "no-preference" });
+-    page.on("console", (message) => { if (/Content Security Policy|Refused to (?:execute|apply|load)/i.test(message.text())) violations.push({ route, message: message.text() }); });
++    page.on("console", (message) => { if (/Content Security Policy|Refused to (?:execute|apply|load)/i.test(message.text())) violations.push({ route, message: "CSP refusal observed (detail withheld)" }); });
+     await page.addInitScript(() => {
+       window.__cspViolations = [];
+-      document.addEventListener("securitypolicyviolation", (event) => window.__cspViolations.push({ directive: event.violatedDirective, blocked: event.blockedURI }));
++      document.addEventListener("securitypolicyviolation", (event) => window.__cspViolations.push({ directive: event.violatedDirective, effectiveDirective: event.effectiveDirective, disposition: event.disposition, blocked: ["inline", "eval", "wasm-eval", "trusted-types-policy", "trusted-types-sink"].includes(event.blockedURI) ? event.blockedURI : "[redacted]" }));
+     });
+     const html = await page.goto(new URL(route, process.env.GATE_APP_URL).href);
+     const header = process.env.CSP_STAGE === "enforced" ? "content-security-policy" : "content-security-policy-report-only";
+     assert.ok(html.headers()[header], `Actual ${header} required`);
+-    if (process.env.CSP_STAGE === "enforced") assert.equal(html.headers()["content-security-policy-report-only"], undefined);
++    if (process.env.CSP_STAGE === "enforced") {
++      // The shipped SDK deliberately inventories Trusted Types independently.
++      // Strict CSP stays enforced; no event or console failure is waived below.
++      assert.equal(html.headers()["content-security-policy-report-only"],
++        "require-trusted-types-for 'script'; trusted-types roedu roedu-hovercard roedu-islands; report-uri /csp-report");
++    }
++    const headerNonce = html.headers()[header].match(/script-src 'self' 'nonce-([^']+)' 'strict-dynamic'/)?.[1];
++    assert.match(headerNonce || "", /^[A-Za-z0-9+/]{32}$/);
++    assert.ok(html.headers()[header].includes("style-src 'self' 'nonce-" + headerNonce + "'"));
++    assert.ok(html.headers()[header].includes("script-src-attr 'none'"));
++    assert.ok(html.headers()[header].includes("style-src-attr 'none'"));
+     await page.locator(".screen").first().waitFor();
+     const observation = await page.evaluate(() => {
+       const scripts = [...document.querySelectorAll("script")], module = scripts.find((item) => item.type === "module");
+       const css = [...document.querySelectorAll('link[rel="stylesheet"]')].map((item) => item.href);
+       const preloads = [...document.querySelectorAll('link[rel="modulepreload"]')].map((item) => item.href);
+-      return { nonces: scripts.map((item) => item.nonce), module: module?.src, css, preloads, json: scripts.filter((item) => item.type === "application/json").length, violations: window.__cspViolations };
++      const metas = [...document.querySelectorAll('meta[property="csp-nonce"]')];
++      const assetNonces = [...document.querySelectorAll('link[rel="stylesheet"],link[rel="modulepreload"]')].map((item) => item.nonce);
++      return { nonces: scripts.map((item) => item.nonce), meta: metas.map((item) => ({ content: item.content, nonce: item.nonce })), assetNonces,
++        module: module?.src, css, preloads, json: scripts.filter((item) => item.type === "application/json").length, violations: window.__cspViolations };
+     });
+-    assert.ok(observation.nonces.length > 0 && observation.nonces.every((nonce) => nonce && nonce === observation.nonces[0]));
++    assert.ok(observation.nonces.length > 0 && observation.nonces.every((nonce) => nonce === headerNonce));
++    assert.deepEqual(observation.meta, [{ content: headerNonce, nonce: headerNonce }]);
++    assert.ok(observation.assetNonces.length > 0 && observation.assetNonces.every((nonce) => nonce === headerNonce));
++    assert.ok(!observations.some((item) => item.nonce_sha256 === hash(headerNonce)), "Actual document request reused a nonce");
+     assert.ok(observation.module); assert.ok(observation.css.length > 0);
+     violations.push(...observation.violations.map((item) => ({ route, ...item })));
+     observations.push({ page: route, nonce_sha256: hash(observation.nonces[0]), scripts: observation.nonces.length, json: observation.json,
+diff --git a/scripts/gui-gen-request.json b/scripts/gui-gen-request.json
+index 9ba802c..fe9fa97 100644
+--- a/scripts/gui-gen-request.json
++++ b/scripts/gui-gen-request.json
+@@ -1,5 +1,5 @@
+ {
+   "schema": 1,
+-  "operation": "plan-normalized-styles",
++  "operation": "replay-normalized-react",
+   "fixtures": "frontend/e2e/original/runtime.spec.mjs"
+ }

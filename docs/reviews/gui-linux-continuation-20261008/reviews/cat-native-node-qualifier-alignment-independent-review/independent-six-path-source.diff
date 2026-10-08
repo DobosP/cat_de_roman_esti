@@ -1,0 +1,150 @@
+diff --git a/README.md b/README.md
+index 5bc791a..1b1702d 100644
+--- a/README.md
++++ b/README.md
+@@ -83,8 +83,9 @@ and still checks the historical tracked SPA output. Its Node 24 messages and mis
+ managed-asset sync do not establish selected-toolchain qualification. Current managed
+ build/sync prerequisites follow [ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)
+ and [STATUS](docs/STATUS.md); their complete normalized qualification remains pending.
+-The standalone qualifier also needs source alignment (Node 24 precheck versus selected
+-Node 26/npm-ci); it is separate from the owning GUI wrapper.
++The separate standalone qualifier alignment prepares the exact Node 26.10.0 guard per ADR-0184;
++it is **UNAPPLIED, UNQUALIFIED and NOT RUN**, and separate from the owning GUI wrapper.
++Its retained checks and pending qualification are described in [NATIVE_TOOLCHAIN](docs/NATIVE_TOOLCHAIN.md).
+ `PORT=9000 ./run.sh` changes the listener; a busy port fails explicitly.
+ Native source/build/operator and qualification commands are in
+ [`docs/NATIVE_TOOLCHAIN.md`](docs/NATIVE_TOOLCHAIN.md); Python remains an optional oracle.
+@@ -143,9 +144,9 @@ go -C go-backend run ./cmd/cat-doc-check --root ..
+ Game/content tests use bundled fixtures and local fake providers, with no live upstream.
+ Native account and combined HTTP release gates also require an explicit disposable
+ PostgreSQL fixture; ordinary Go runs skip those contracts when no DSN is supplied.
+-The standalone native-only recipe `scripts/qualify_go_toolchain.sh` currently awaits
+-selected-toolchain source alignment; explicit task scratch/PG and independent native
+-obligations remain. Retained Python validators/Ruff/pytest are optional independent
++The separate source alignment of `scripts/qualify_go_toolchain.sh` follows the exact selected Node 26.10.0 pin
++([ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)); application, execution and complete qualification remain pending.
++Explicit task scratch/PG and all independent native obligations remain; see [NATIVE_TOOLCHAIN](docs/NATIVE_TOOLCHAIN.md). Retained Python validators/Ruff/pytest are optional independent
+ references; commands and the owning GUI context are in
+ [`docs/agent-testing.md`](docs/agent-testing.md). GitHub Actions use manual dispatch;
+ retained Python/Rust reference jobs are opt-in ([ADR-0164](docs/adr/0164-manual-github-actions.md)).
+diff --git a/docs/NATIVE_TOOLCHAIN.md b/docs/NATIVE_TOOLCHAIN.md
+index 144aa31..3cb71f6 100644
+--- a/docs/NATIVE_TOOLCHAIN.md
++++ b/docs/NATIVE_TOOLCHAIN.md
+@@ -1,11 +1,12 @@
+ # Native tooling qualification
+ 
+-Last verified: 2026-10-05
++Last verified: 2026-10-08 — source/documentation review only; qualifier alignment UNAPPLIED, UNQUALIFIED, NOT RUN.
+ 
+ The tooling boundaries and retention requirements are recorded in
+ [ADR-0169](adr/0169-native-terminal-and-rest-tools.md) and
+-[ADR-0165](adr/0165-native-source-build-and-qualification.md). Complete clean-source
+-qualification passes under [ADR-0168](adr/0168-qualify-complete-native-toolchain.md);
++[ADR-0165](adr/0165-native-source-build-and-qualification.md). [ADR-0168](adr/0168-qualify-complete-native-toolchain.md)
++retains the historical complete clean-source Node 24 qualification. Selected Node 26.10.0/npm 12.2.0
++follow [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md); the separate qualifier guard alignment is source-only and unqualified.
+ CI follows accepted manual policy (ADR-0164); native gates default, references opt-in. Current gates are in [STATUS](STATUS.md).
+ These local tools never add a public solution endpoint.
+ 
+@@ -87,16 +88,24 @@ products/cache stay in workspace scratch. A failed/unhealthy online health probe
+ offline fixture, matching the original terminal behavior. A healthy server's content,
+ availability or legal-provenance refusal remains a failure.
+ 
+-The complete integration entrypoint is `scripts/qualify_go_toolchain.sh`. It requires
+-`CDR_TOOLCHAIN_SCRATCH` under `~/work/_temp/`, an explicit disposable fixture in
+-`CDR_NATIVE_TEST_DSN`, qualified Go 1.27.1 and Node 24, and a `PATH` containing the native
+-build/Git/shell utilities with Python/Rust absent. It runs source/operator/builder checks,
++The standalone integration entrypoint is `scripts/qualify_go_toolchain.sh`. After guarded integration of
++this separate alignment, its prechecks require exact Go 1.27.1 linux/amd64 and selected Node 26.10.0 per ADR-0184.
++It retains `CDR_TOOLCHAIN_SCRATCH` under `~/work/_temp/`, an explicit disposable fixture in
++`CDR_NATIVE_TEST_DSN`, and a `PATH` containing native build/Git/shell utilities with Python/Rust absent.
++Its retained command sequence includes source/operator/builder checks,
+ native race/vet, both explicit PostgreSQL release lanes, native compiled HTTP parity,
+ synthetic HTTP smoke/benchmark, Node gates and all browser cases. Its exit status cannot
+ turn missing required infrastructure into a skip. Default hermetic Go runs retain their
+ optional-PG markers; the explicit release lanes execute those same tests against the
+ supplied disposable database. Provider mocks remain local; production flags are unchanged.
+ 
++The exact Node predicate/diagnostic alignment and dependent guide corrections are **SOURCE ONLY,
++UNAPPLIED, UNQUALIFIED and NOT RUN**. No new toolchain policy or qualification result is recorded.
++The standalone recipe is separate from the owning GUI wrapper. Genuine Linux version/selected-kit lint
++context, all native/PG/browser checks and managed current/legacy asset proof remain future obligations.
++Its existing command order and `--static-root cat_de_roman_esti/web/static` argument are unchanged;
++this guard correction supplies no managed-output, canonical GREEN unit/KIT_BUMP or device/phase proof.
++
+ Tagged app-pack input: native terminal `--offline --fixture <tagged.json>` auto-detects
+ public tagged envelopes. Bounded `internal/apppack` contracts preserve tags/facets and
+ filter app/layer/schema/kind/legal scope on detached records. Native release coupling
+diff --git a/docs/STATUS.md b/docs/STATUS.md
+index fd30795..1983569 100644
+--- a/docs/STATUS.md
++++ b/docs/STATUS.md
+@@ -2,7 +2,7 @@
+ 
+ Last verified: 2026-10-08 — Source6/Source7 facts remain below; GUI source-only Windows checkpoint is NOT newly runtime-qualified (no handover tests). [Historical pickup](GUI_MIGRATION_HANDOFF.md); [current plan](execplans/s1-cat.md). V1.7 [tocător R2 research](reviews/v1-7-recognizable-content/tocator-sense-and-migration-r2.md): manual-chopper sense excluded, bread-cutting evidence/migration cases added; pool1researched/4held/1selected, no installed growth. Loop paused; independent factual/quality research accepted, [source/JSON/whitespace/native docs PASS](reviews/v1-7-recognizable-content/tocator-verification-r2.json).
+ 
+-- **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md): Paul accepted entry+mandatory AccountBar static JS/CSS startup accounting; separate2-path source UNAPPLIED/UNQUALIFIED,4 retained+7 new tests(11) NOT RUN; current startup gzip UNACQUIRED. Frontend120KiB/canonical JS40960/30720 unchanged. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
++- **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md): Paul accepted entry+mandatory AccountBar static JS/CSS startup accounting; separate2-path source UNAPPLIED/UNQUALIFIED,4 retained+7 new tests(11) NOT RUN; current startup gzip UNACQUIRED. Frontend120KiB/canonical JS40960/30720 unchanged. Separate qualifier exactNode26.10.0 [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md)/[native guide](NATIVE_TOOLCHAIN.md) alignment SOURCE ONLY/UNAPPLIED/UNQUALIFIED/NOT RUN; Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
+ - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
+ 
+ ## Current state
+diff --git a/docs/agent-testing.md b/docs/agent-testing.md
+index 5abf19c..8c00269 100644
+--- a/docs/agent-testing.md
++++ b/docs/agent-testing.md
+@@ -73,6 +73,6 @@ Reference `tests/accounts/` collection requires `CAT_ACCOUNTS_ENABLED=1`.
+ Current content expectations: [ADR-0116](adr/0116-share-current-content-test-expectations.md),
+ `tests/current_content.py` and `tests/content_scenarios.py`; historical pins remain separate.
+ 
+-Standalone `scripts/qualify_go_toolchain.sh` still requires Node 24 before a later npm-ci step that needs selected Node 26; source alignment is pending.
+-It is separate from the owning GUI wrapper and cannot currently qualify ADR-0184 tooling; disposable PG/task scratch and all native/privacy/browser obligations remain.
+-[ADR-0168](adr/0168-qualify-complete-native-toolchain.md) retains historical Node 24 proof; [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md) describes the stale standalone recipe. No missing required gate becomes a skip.
++The separate `scripts/qualify_go_toolchain.sh` source alignment prepares exact Node 26.10.0 per [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md); **UNAPPLIED, UNQUALIFIED, NOT RUN**.
++It remains separate from the owning GUI wrapper; actual Linux/version/lint context, disposable PG/task scratch and all native/privacy/browser qualification obligations remain.
++[ADR-0168](adr/0168-qualify-complete-native-toolchain.md) retains historical Node 24 proof; [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md) records the pending aligned recipe. No missing required gate becomes a skip.
+diff --git a/docs/execplans/s1-cat.md b/docs/execplans/s1-cat.md
+index f48695e..43d45ee 100644
+--- a/docs/execplans/s1-cat.md
++++ b/docs/execplans/s1-cat.md
+@@ -58,6 +58,9 @@ Preserve the six server-authoritative Romanian games while moving the SPA from R
+ - [x] 2026-10-08 13:12 UTC — Paul accepted the startup calculation recorded in [ADR-0185](../adr/0185-accepted-eager-startup-bundle-accounting.md). The separate2-path source counts entry+mandatory immediately mounted AccountBar recursive static JS/CSS once; frontend120KiB and canonical JS40960/30720 stay unchanged. Four retained+seven new tests(11) are authored NOT RUN; code application/current startup gzip/Linux qualification remain pending. Original38-path source packet and separate calculator/doc packets are immutable, unapplied and unqualified; this is decision/source acceptance only.
+ - [ ] Accepted-calculation validation — after exact guarded source integration on Linux, acquire the current Vite manifest and actual mandatory AccountBar-inclusive file inventory/per-file gzip sum; run the amended11 contracts and all applicable existing lanes, retaining every real failure. No inferred savings or40KiB/120KiB pass.
+ 
++- [x] 2026-10-08 — prepared the separate six-path qualifier alignment under existing [ADR-0184](../adr/0184-native-spa-toolchain-and-managed-output.md): only the exact Node26.10.0 predicate/diagnostic changes in scripts/qualify_go_toolchain.sh, preserving100755 and every other byte. Two fresh main preimages plus four dependent CLOSED Cat9-doc afterimages are bound. Source application/execution/qualification remain UNAPPLIED/UNQUALIFIED/NOT RUN; [native guide](../NATIVE_TOOLCHAIN.md) records retained obligations.
++- [ ] Qualifier Linux validation — obtain genuine selected-version/owning-context evidence and all applicable native/PG/browser checks after guarded integration, preserving command order/static-root and every failure. The guard correction alone proves no managed assets, standalone GREEN result, canonical GUI unit/KIT_BUMP, device or phase qualification.
++
+ ## 3. Surprises & Discoveries
+ 
+ The installed public web-kit under tools/gui-bootstrap-webkit is a temporary pre-sync helper locator, not an adopted UI. Its bytes are parent-owned and immutable to this worker. At initial bootstrap, Taskfile.repo.yml starter hooks intentionally threw; no initial hook invocation can be treated as qualification. Original React19.2.7/ReactDOM19.2.7/UI0.3.0/Framer12.42.2 remain unchanged. The prior motion review contains preparation evidence only (29 preview, 69 focused preparation, 48 unexecuted future cases).
+@@ -94,7 +97,7 @@ AccountBar is imported with React lazy syntax but mounts unconditionally in the
+ 
+ ## 5. Outcomes & Retrospective
+ 
+-Current 2026-10-08 Windows continuation is **SOURCE ONLY**: original38-path source, separate2-path eager-accounting source and this documentation proposal are unapplied/unqualified. All product execution/tests/parsers/compilers/validators/generators/formatters/builds/Docker/setup/environment probes are NOT RUN in this continuation. Earlier Linux-active paragraphs below are historical context, not Windows execution authority. Core1.2 release identities remain unchanged; E3 budget-red, device/M2, S0b/teacher/social/live/soak and production holds remain.
++Current 2026-10-08 Windows continuation is **SOURCE ONLY**: original38-path source, separate2-path eager-accounting source and this documentation proposal are unapplied/unqualified. All product execution/tests/parsers/compilers/validators/generators/formatters/builds/Docker/setup/environment probes are NOT RUN in this continuation. The separately prepared exactNode26.10.0 standalone guard alignment and four dependent documentation corrections are also UNAPPLIED/UNQUALIFIED/NOT RUN; current managed-output and complete qualification remain pending. Earlier Linux-active paragraphs below are historical context, not Windows execution authority. Core1.2 release identities remain unchanged; E3 budget-red, device/M2, S0b/teacher/social/live/soak and production holds remain.
+ 
+ Implementation in progress. Completion requires actual clean native reports and physical prerequisite evidence; unavailable facts remain explicit constraints.
+ Original-runtime qualification now passed atb50ae14 with16 fixtures/78 assertions and closed receipt validation, before any product-source or frontend dependency change. Canonical unit/full, sync, device checkpoint, UI activation and M0 closure remain pending. Two failed generating attempts are retained honestly; their harness defects were fixed without weakening assertions.
+@@ -111,7 +114,7 @@ Preserve completed original16/78 runtime qualification, original30-file freeze a
+ 
+ Preserve the exact original30 freeze already captured. Preserve exact original Motion owners and package/lock/config inputs. Independently review narrow manual prerequisites such as the Lanț literal bag and two leaf import-preserving conversions. Execute the guarded style planner before selecting its generated whole-product conversion, then convert remaining styles through classes/CSSOM and normalize tooling/dependencies through sanctioned generating gates. Rerun the unchanged original assertions. Prepare a clean parent checkpoint for staged-react first sync/trust. M0 closes only after that handshake and canonical unit pass. M1 implements embedded delivery and proves full CSP enforcement. M2 requires the real device checkpoint and parent active UI sync; then port pilot screens, followed by remaining screens in M3 and full qualification in M4. Continue independent tests/docs when physical facts are unavailable, with unsafe production activation closed.
+ 
+-The future Linux integration order is original38-path source packet, separate2-path accepted startup-accounting amendment, then this separate documentation amendment. Verify each sealed packet and every exact beforeimage/mode or new-path absence; stop for owner sequencing on relevant drift. Preserve Source6/Source7 current truth and all old failures/receipts. After integration, acquire a fresh manifest and AccountBar-inclusive startup inventory/gzip measurement; the default helper and historical report fields stay static-only. No new HEAD/tree/image/qualified identity is assigned by these source proposals.
++The future Linux integration order is original38-path source packet, separate2-path accepted startup-accounting amendment, CLOSED Cat9-path documentation, separate core2-path documentation, then this six-path qualifier alignment. Its script/native-guide preimages are exact raw main59a9; README/agent-testing/STATUS/S1-plan preimages are exact prior Cat9-doc afterimages, not raw main files. Verify each sealed packet and every exact beforeimage/mode or new-path absence; stop for owner sequencing on relevant drift. Preserve Source6/Source7 current truth and all old failures/receipts. After integration, acquire a fresh manifest and AccountBar-inclusive startup inventory/gzip measurement; the default helper and historical report fields stay static-only. No new HEAD/tree/image/qualified identity is assigned by these source proposals.
+ 
+ ## 8. Concrete Steps
+ 
+diff --git a/scripts/qualify_go_toolchain.sh b/scripts/qualify_go_toolchain.sh
+index 48032f6..485ca13 100755
+--- a/scripts/qualify_go_toolchain.sh
++++ b/scripts/qualify_go_toolchain.sh
+@@ -9,7 +9,7 @@ CDR_TOOLCHAIN_SCRATCH="$(realpath -m "$CDR_TOOLCHAIN_SCRATCH")"
+ case "$CDR_TOOLCHAIN_SCRATCH" in "$(realpath -m "$HOME/work/_temp")/"*) ;; *) printf 'Scratch must be under ~/work/_temp/\n' >&2; exit 2;; esac
+ if command -v python python3 python3.12 python3.14 rustc cargo; then printf 'Qualification requires Python/Rust absent from PATH\n' >&2; exit 2; fi
+ [ "$(go version)" = 'go version go1.27.1 linux/amd64' ] || { printf 'Qualified Go 1.27.1 linux/amd64 is required\n' >&2; exit 2; }
+-[[ "$(node --version)" == v24.* ]] || { printf 'Qualified Node 24 is required\n' >&2; exit 2; }
++[[ "$(node --version)" == v26.10.0 ]] || { printf 'Selected Node 26.10.0 is required\n' >&2; exit 2; }
+ mkdir -p "$CDR_TOOLCHAIN_SCRATCH/bin" "$CDR_TOOLCHAIN_SCRATCH/go-cache" "$CDR_TOOLCHAIN_SCRATCH/go-tmp" "$CDR_TOOLCHAIN_SCRATCH/tmp" "$CDR_TOOLCHAIN_SCRATCH/receipts"
+ export GOMAXPROCS=2 GOFLAGS=-p=2 GOCACHE="$CDR_TOOLCHAIN_SCRATCH/go-cache" GOTMPDIR="$CDR_TOOLCHAIN_SCRATCH/go-tmp" TMPDIR="$CDR_TOOLCHAIN_SCRATCH/tmp"
+ [ -z "$(gofmt -l go-backend shared-go/authcore)" ]

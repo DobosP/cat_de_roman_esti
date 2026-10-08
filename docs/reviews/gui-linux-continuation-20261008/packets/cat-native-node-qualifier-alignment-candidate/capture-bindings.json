@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "state": "SOURCE ALIGNMENT CANDIDATE; UNAPPLIED; UNQUALIFIED; ALL RUNTIME NOT RUN",
+  "pin": "59a9a568c445654f69215d735091c9b3e0405831",
+  "pin_git_tree": "63a846a9974463ba360b4083cc53d0249f92fee7",
+  "observed_porcelain": "",
+  "fresh_main_targets": 2,
+  "dependent_prior_doc_targets": 4,
+  "target_count": 6,
+  "files": [
+    {
+      "path": "scripts/qualify_go_toolchain.sh",
+      "provenance": "FRESH exact raw main59a9 Git preimage",
+      "condition": "exact raw bytes/SHA/Git blob and declared mode; dependent source layer must already be integrated",
+      "before": {
+        "mode": "100755",
+        "blob": "48032f620f260148362d37a409353181b0ccd481",
+        "bytes": 4065,
+        "sha256": "c7e65ad67627e5060a154f3aef6091e46057562456a6d704d7d1e7a85d90ab11"
+      }
+    },
+    {
+      "path": "docs/NATIVE_TOOLCHAIN.md",
+      "provenance": "FRESH exact raw main59a9 Git preimage",
+      "condition": "exact raw bytes/SHA/Git blob and declared mode; dependent source layer must already be integrated",
+      "before": {
+        "mode": "100644",
+        "blob": "144aa318dd3648592a4fdd9c3695be22c76fee3d",
+        "bytes": 6470,
+        "sha256": "fd39105146e7c7a04449f230a763bb54da75b09094d0a021f548c4605cba70b3"
+      }
+    },
+    {
+      "path": "README.md",
+      "provenance": "EXACT CLOSED Cat9-doc afterimage; not raw main; apply after predecessor",
+      "condition": "exact raw bytes/SHA/Git blob and declared mode; dependent source layer must already be integrated",
+      "before": {
+        "mode": "100644",
+        "blob": "5bc791a90d9cd0e00e0f9f65ffdf730f034cd3b7",
+        "bytes": 12120,
+        "sha256": "5aafd3aab31a8d0476aff309d54e04bf3cf27e9861d02629fa6e61bca647fcef"
+      }
+    },
+    {
+      "path": "docs/agent-testing.md",
+      "provenance": "EXACT CLOSED Cat9-doc afterimage; not raw main; apply after predecessor",
+      "condition": "exact raw bytes/SHA/Git blob and declared mode; dependent source layer must already be integrated",
+      "before": {
+        "mode": "100644",
+        "blob": "5abf19caa809fbf2d057374f3d10f09c6db42ce6",
+        "bytes": 6597,
+        "sha256": "4f2551c1853f9c1cea4c1e07edf635466e586b6808c1758fc19717b32be1245d"
+      }
+    },
+    {
+      "path": "docs/STATUS.md",
+      "provenance": "EXACT CLOSED Cat9-doc afterimage; not raw main; apply after predecessor",
+      "condition": "exact raw bytes/SHA/Git blob and declared mode; dependent source layer must already be integrated",
+      "before": {
+        "mode": "100644",
+        "blob": "fd3079561dc8bf887415aa2ad4c275185b822ce7",
+        "bytes": 13493,
+        "sha256": "3605b9ca92227e11aab5210bae511f7ba2a242c3560412278e13ce7ce68cfa2e"
+      }
+    },
+    {
+      "path": "docs/execplans/s1-cat.md",
+      "provenance": "EXACT CLOSED Cat9-doc afterimage; not raw main; apply after predecessor",
+      "condition": "exact raw bytes/SHA/Git blob and declared mode; dependent source layer must already be integrated",
+      "before": {
+        "mode": "100644",
+        "blob": "f48695eadef6a47c781e6d591b659696fe311187",
+        "bytes": 38481,
+        "sha256": "84ec1dc6edba7670ef1a0b3225d4874c7f382dd9d42dde53f688aebb4a84effa"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": ".nvmrc",
+      "metadata": "100644 blob 8a94b991271a7ecdee0e28e418eef0b92b472a33\t.nvmrc",
+      "bytes": 8,
+      "sha256": "10e4e07fe7b63d3da1d899ea0f9a7a3d78c116051fae44b9f245a53d6f665a41",
+      "scope": "hash/literal source only; never modified"
+    },
+    {
+      "path": "frontend/.nvmrc",
+      "metadata": "100644 blob 8a94b991271a7ecdee0e28e418eef0b92b472a33\tfrontend/.nvmrc",
+      "bytes": 8,
+      "sha256": "10e4e07fe7b63d3da1d899ea0f9a7a3d78c116051fae44b9f245a53d6f665a41",
+      "scope": "hash/literal source only; never modified"
+    },
+    {
+      "path": "frontend/package.json",
+      "metadata": "100644 blob 808a611d368ea6152738bc023be530afcafad774\tfrontend/package.json",
+      "bytes": 1391,
+      "sha256": "43134fe8197aff7aa3ebd816b2e413591d5479de463d3e73f7ce5bf85e8b1b1a",
+      "scope": "hash/literal source only; never modified"
+    },
+    {
+      "path": "frontend/.npmrc",
+      "metadata": "100644 blob 145d3fa25b8c8cdd495ab40849109408792fee0d\tfrontend/.npmrc",
+      "bytes": 35,
+      "sha256": "cde76ca04e048c3eba070a2c0dfcf5b723cf6014eab177157096b924f24ec4ca",
+      "scope": "hash/literal source only; never modified"
+    },
+    {
+      "path": "docs/adr/0184-native-spa-toolchain-and-managed-output.md",
+      "metadata": "100644 blob 638963d1798f52349130d685a2a675bdef64c907\tdocs/adr/0184-native-spa-toolchain-and-managed-output.md",
+      "bytes": 2802,
+      "sha256": "f68c7bf0e60ef05f7f6f03b673a47bb5e0e97c12e81006737772c74e510af03f",
+      "scope": "hash/literal source only; never modified"
+    },
+    {
+      "path": "docs/adr/0168-qualify-complete-native-toolchain.md",
+      "metadata": "100644 blob e13218579f685b0b3af4b3f486a0eb38a38bba82\tdocs/adr/0168-qualify-complete-native-toolchain.md",
+      "bytes": 3923,
+      "sha256": "e7c2b97bfdd30b3f5dab54feb7f151799eb94ee55553d9e0598bf9d11a56c145",
+      "scope": "hash/literal source only; never modified"
+    },
+    {
+      "path": "docs/GUI_MIGRATION_HANDOFF.md",
+      "metadata": "100644 blob f354048d22ef758644d831203a3cee92ae1e7286\tdocs/GUI_MIGRATION_HANDOFF.md",
+      "bytes": 3983,
+      "sha256": "49dbccdec13d063326de5f55b0e023b7858d441e4e581d023f7cb7fc8fdae3fd",
+      "scope": "hash/literal source only; never modified"
+    }
+  ],
+  "predecessor": {
+    "SEAL.json": "a5e90bd370c1659a3164a011467a7bef396d129a9cf1b75293f535bd4ea9d57b",
+    "SHA256SUMS": "6fc8a9bfa8bb7d51686221bfe767196ae1d2e63e52b8715136368b4bc0603a71",
+    "source-bindings.json": "fa99393d5a653309600e5bca62637c53ee15fd043fa78e0be23ba85b179949d6"
+  },
+  "accepted_analysis_report_sha256": "a8c591e662ce824fb74975a5363543ff1bec259f6ac725432ba5e936c861bcc6",
+  "accepted_analysis_seal_sha256": "17230e995663e620545e621da625169189a41a7bdee2434f1ce001a1d99f0179"
+}

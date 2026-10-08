@@ -1,0 +1,931 @@
+// Conexiuni — NYT Connections over the Romanian KG. Text-only: a 4x4 grid of selectable
+// tile buttons. Pick exactly 4 and "Verifică"; the server says whether they share a
+// category (locks it as a coloured row) or not (one_away feedback + a lost life). Win when
+// all 4 groups are found; lose at 0 lives — then the full solution is revealed.
+//
+// Server-authoritative: the grouping + solution live on the server; this component renders
+// what it returns and surfaces a personal best + a shareable result on finish.
+
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, m } from "framer-motion";
+import { ApiError } from "../api/client";
+import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
+import {
+  conexiuniApi,
+  GROUP_SIZE,
+  type ConexiuniState,
+  type Difficulty,
+  type GuessResult,
+  type SolvedGroup,
+} from "../api/conexiuni";
+import { Button, type ToastKind } from "@roedu/ui";
+import { GameShell } from "../components/GameShell";
+import { GameIntro } from "../components/GameIntro";
+import { GameOptions } from "../components/GameOptions";
+import { GameSetupOptions } from "../components/GameSetupOptions";
+import "../styles/conexiuni.css";
+import { Hud, StatBadge } from "../components/Hud";
+import { ResultCard } from "../components/ResultCard";
+import { DifficultyPicker } from "../components/DifficultyPicker";
+import { NextMove } from "../components/PlayGuide";
+import { useActiveGame } from "../hooks/useActiveGame";
+import { useRecordScore } from "../hooks/useRecordScore";
+import { useSavedGameResume } from "../hooks/useSavedGameResume";
+import { sound } from "../sound";
+import { categoryColor, categoryLabel } from "../categories";
+import { selectionKey } from "../conexiuniSelectionKey";
+import { CategoryPicker } from "../components/CategoryPicker";
+import { bestScore } from "../scores";
+import { gameByKey } from "../games";
+import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
+
+const GAME_KEY = "conexiuni";
+const DEF = gameByKey("conexiuni");
+
+const isTerminalResume = (state: ConexiuniState) => state.won || state.lost;
+
+interface SelfProps {
+  onExit: () => void;
+  onToast: (message: string, kind?: ToastKind) => void;
+}
+
+const DIFF_LABEL: Record<Difficulty, string> = {
+  usor: "Ușor",
+  normal: "Normal",
+  greu: "Greu",
+};
+
+const DIFFICULTY_OPTIONS: { id: Difficulty; label: string; hint: string }[] = [
+  { id: "usor", label: DIFF_LABEL.usor, hint: "grupuri clare" },
+  { id: "normal", label: DIFF_LABEL.normal, hint: "mix echilibrat" },
+  { id: "greu", label: DIFF_LABEL.greu, hint: "legături subtile" },
+];
+
+const GROUP_COLORS = ["#f4c95d", "#70c1b3", "#5aa9e6", "#a78bfa"] as const;
+
+// Mirrors the server's ConexiuniSession clue economy (cat_de_roman_esti/wordgames/
+// conexiuni.py): up to two clues, unlocking at 2 then 3 mistakes.
+const MAX_CLUES = 2;
+const CLUE_MISTAKES_BASE = 2;
+
+type StartMode =
+  | { kind: "seed"; difficulty: Difficulty }
+  | { kind: "daily" };
+
+const ONE_AWAY_GUIDANCE =
+  "Aproape: 3 din 4. Schimbă o piesă.";
+type BlockedGuess = { key: string; oneAway: boolean };
+type DuplicateRecovery = { guess: string[]; message: string };
+type ActionSync = { gameId: string; kind: "failed" | "changed"; duplicate?: DuplicateRecovery };
+
+const unsolvedTileIds = (fresh: ConexiuniState) => {
+  const solved = new Set(
+    fresh.solved.flatMap((group) => group.tiles.map((tile) => tile.id)),
+  );
+  return new Set(
+    fresh.tiles.filter((tile) => !solved.has(tile.id)).map((tile) => tile.id),
+  );
+};
+
+export default function Conexiuni({ onExit, onToast }: SelfProps) {
+  const active = useActiveGame(GAME_KEY);
+  const [state, setState] = useState<ConexiuniState | null>(null);
+  const [startFailed, setStartFailed] = useState(false);
+  const startInFlight = useRef(false);
+  const [loading, setLoading] = useState(() => active.peek() !== null);
+  const [busy, setBusy] = useState(false);
+  const [actionSync, setActionSync] = useState<ActionSync | null>(null);
+  const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
+  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
+  const actionsLocked = busy || loading || actionSync !== null;
+  const [selected, setSelected] = useState<string[]>([]);
+  // A server-confirmed one-away or duplicate set that must change before resubmission.
+  // Only the oneAway flag may surface the stronger 3-of-4 guidance.
+  const [blockedGuess, setBlockedGuess] = useState<BlockedGuess | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
+  const [category, setCategory] = useState<string | null>(null);
+  const [recordHit, setRecordHit] = useState(false);
+  const [puzzleRecordHit, setPuzzleRecordHit] = useState(false);
+  const [shake, setShake] = useState(0);
+  // Client-only display order for the remaining tiles (the "shuffle" button reorders
+  // these; the authoritative grouping never changes). Keyed by tile id.
+  const [shuffleNonce, setShuffleNonce] = useState(0);
+  // Transient inline feedback shown beside the board. Recovery remains until
+  // the player makes the requested selection change, then clears immediately.
+  const [hint, setHint] = useState<string | null>(null);
+  const recordOnce = useRecordScore(GAME_KEY);
+
+  // Recompute the persisted best whenever the game state changes (e.g. after a
+  // finished round writes a new record and we return to the start screen).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const best = useMemo(() => bestScore(GAME_KEY), [state]);
+
+  // Solved-id set so solved tiles drop out of the grid.
+  const solvedIds = useMemo(() => {
+    const s = new Set<string>();
+    state?.solved.forEach((g) => g.tiles.forEach((t) => s.add(t.id)));
+    return s;
+  }, [state]);
+
+  const remainingTiles = useMemo(() => {
+    const base = state ? state.tiles.filter((t) => !solvedIds.has(t.id)) : [];
+    if (shuffleNonce === 0) return base;
+    // Deterministic-ish shuffle driven by the nonce so re-renders are stable until the
+    // player presses "Amestecă" again. Purely cosmetic — ids/grouping are untouched.
+    const arr = [...base];
+    let seed = shuffleNonce * 2654435761;
+    for (let i = arr.length - 1; i > 0; i--) {
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      const j = seed % (i + 1);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [state, solvedIds, shuffleNonce]);
+
+  const finished = (state?.won ?? false) || (state?.lost ?? false);
+  const exactBlockedRetry =
+    selected.length === GROUP_SIZE &&
+    blockedGuess !== null &&
+    selectionKey(selected) === blockedGuess.key;
+  const feedback = blockedGuess?.oneAway ? ONE_AWAY_GUIDANCE : hint;
+  const clueMessages = useMemo(
+    () => state?.clues.map((clue, index) => ({ key: `clue-${index}`, message: clue.message })) ?? [],
+    [state?.clues],
+  );
+  const cluesUsed = state?.clues_used ?? 0;
+  const clueMistakesNeeded = CLUE_MISTAKES_BASE + cluesUsed;
+  const clueMistakesRemaining = Math.max(0, clueMistakesNeeded - (state?.mistakes ?? 0));
+
+  const applyAuthoritativeState = useCallback((fresh: ConexiuniState) => {
+    const available = unsolvedTileIds(fresh);
+    setState(fresh);
+    setSelected((current) =>
+      fresh.won || fresh.lost ? [] : current.filter((id) => available.has(id)),
+    );
+    setBlockedGuess(null);
+    setHint(null);
+  }, []);
+
+  const applyResumedGame = useCallback(
+    (s: ConexiuniState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setBusy(false);
+      setStartFailed(false);
+      setState(s);
+      setDifficulty(s.difficulty);
+      setCategory(s.board_category ?? null);
+      setRecordHit(false);
+      setPuzzleRecordHit(false);
+      setSelected([]);
+      setBlockedGuess(null);
+      setHint(null);
+      setShuffleNonce(0);
+      setShake(0);
+      // The daily-bypass notice already says the round was resumed.
+      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
+    },
+    [actionOwner, onToast],
+  );
+
+  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+    active,
+    load: conexiuniApi.get,
+    isTerminal: isTerminalResume,
+    setPending: setLoading,
+    onResume: applyResumedGame,
+    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
+  });
+
+  const start = useCallback(
+    async (mode: StartMode) => {
+      if (startInFlight.current) return;
+      startInFlight.current = true;
+      actionOwner.invalidate();
+      cancelResume();
+      setStartFailed(false);
+      setLoading(true);
+      try {
+        const s =
+          mode.kind === "daily"
+            ? // Daily carries difficulty like the other games (shared board, no theme).
+              await conexiuniApi.create({ daily: todayLocal(), difficulty })
+            : await conexiuniApi.create({
+                difficulty: mode.difficulty,
+                category: category ?? undefined,
+              });
+        setState(s);
+        setActionSync(null);
+        setBusy(false);
+        active.remember(s.game_id);
+        dismissRecovery();
+        setRecordHit(false);
+        setPuzzleRecordHit(false);
+        setSelected([]);
+        setBlockedGuess(null);
+        setHint(null);
+        setShuffleNonce(0);
+        setShake(0);
+      } catch {
+        setStartFailed(true);
+      } finally {
+        startInFlight.current = false;
+        setLoading(false);
+      }
+    },
+    [active, actionOwner, cancelResume, dismissRecovery, category, difficulty],
+  );
+
+  const puzzleKey = useMemo(() => {
+    if (!state || !finished) return null;
+    const groups = state.solution ?? (state.won ? state.solved : []);
+    if (groups.length === 0) return null;
+    const groupKey = groups
+      .map((group) => `${group.key}=${group.tiles.map((tile) => tile.id).sort().join(",")}`)
+      .sort()
+      .join("|");
+    return stableKey([
+      GAME_KEY,
+      state.daily ? `daily-${state.daily}` : state.difficulty,
+      groupKey,
+      state.board_category,
+    ]);
+  }, [state, finished]);
+
+  const sharePayload = useMemo(() => {
+    if (!state || !finished || !state.share) return null;
+    return buildSharePayload({
+      gameTitle: DEF.title,
+      serverShare: state.share,
+      score: state.score,
+      puzzleKey,
+    });
+  }, [state, finished, puzzleKey]);
+
+  // Record the score + best once, on transition into a finished state.
+  useEffect(() => {
+    if (!state || !finished || state.score === undefined) return;
+    const detail = state.won
+      ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
+      : `pierdut · ${state.mistakes} greșeli`;
+    let current = true;
+    void recordOnce(state.game_id, state.score, detail, {
+      puzzleKey,
+      difficulty: state.difficulty,
+      daily: state.daily,
+      category: state.board_category,
+    }).then((outcome) => {
+      active.forgetIfCurrent(state.game_id);
+      if (!current || !outcome) return;
+      const { isBest, isPuzzleBest } = outcome;
+      if (state.won) sound.playWin();
+      else sound.playError();
+      if (isBest) {
+        setRecordHit(true);
+        sound.playRecord();
+      } else if (isPuzzleBest) {
+        sound.playRecord();
+      }
+      setPuzzleRecordHit(isPuzzleBest);
+    });
+    return () => {
+      current = false;
+    };
+  }, [active, finished, puzzleKey, recordOnce, state]);
+
+  const toggle = useCallback(
+    (id: string) => {
+      if (actionsLocked || finished || actionOwner.hasPending()) return;
+      // Decide outside the updater so the sound side-effect stays StrictMode-safe and
+      // fires only on a real change (selecting/deselecting, not a capped 5th click).
+      const wasSelected = selected.includes(id);
+      const changed = wasSelected || selected.length < 4;
+      if (changed) {
+        sound.playSelect();
+        setBlockedGuess(null);
+        setHint(null);
+      }
+      setSelected((prev) => {
+        if (prev.includes(id)) return prev.filter((x) => x !== id);
+        if (prev.length >= 4) return prev;
+        return [...prev, id];
+      });
+    },
+    [actionsLocked, actionOwner, finished, selected],
+  );
+
+  const clearSelection = useCallback(() => {
+    if (actionsLocked || finished || actionOwner.hasPending()) return;
+    setSelected([]);
+    setBlockedGuess(null);
+    setHint(null);
+  }, [actionsLocked, actionOwner, finished]);
+
+  const shuffle = useCallback(() => {
+    if (actionsLocked || finished || actionOwner.hasPending()) return;
+    sound.playSelect();
+    setShuffleNonce((n) => n + 1);
+  }, [actionsLocked, actionOwner, finished]);
+
+  const beginAction = useCallback((previous: ConexiuniState) => {
+    if (startInFlight.current) return null;
+    const ticket = actionOwner.begin(previous.game_id);
+    if (!ticket) return null;
+    if (!actionOwner.owns(ticket)) {
+      actionOwner.finish(ticket);
+      setBlockedGuess(null);
+      setHint(null);
+      setActionSync({ gameId: previous.game_id, kind: "changed" });
+      return null;
+    }
+    return ticket;
+  }, [actionOwner]);
+
+  const mayAdoptAction = useCallback((ticket: GameActionTicket) => {
+    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!actionOwner.owns(ticket)) {
+      setActionSync({ gameId: ticket.gameId, kind: "changed" });
+      return false;
+    }
+    return true;
+  }, [actionOwner]);
+
+  const reconcileAction = useCallback(async (ticket: GameActionTicket, duplicate?: DuplicateRecovery) => {
+    const outcome = await recoverOwnedGameAction(
+      actionOwner, ticket, conexiuniApi.get,
+      (error) => error instanceof ApiError && error.status === 404,
+    );
+    if (!mayAdoptAction(ticket)) return;
+    if (outcome.kind === "missing") {
+      if (ticket.savedId === ticket.gameId && !active.forgetIfCurrent(ticket.gameId)) {
+        setActionSync({ gameId: ticket.gameId, kind: "changed" });
+        return;
+      }
+      setActionSync(null);
+      setState(null);
+      setSelected([]);
+      setBlockedGuess(null);
+      setHint(null);
+      onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
+      return;
+    }
+    if (outcome.kind !== "recovered") {
+      setActionSync({ gameId: ticket.gameId, kind: outcome.kind === "changed" ? "changed" : "failed", duplicate });
+      return;
+    }
+    const fresh = outcome.state;
+    setActionSync(null);
+    applyAuthoritativeState(fresh);
+    // GET exposes earned groups/clues and terminal results, never the lost one-away verdict.
+    if (!fresh.won && !fresh.lost) {
+      const freshAvailable = unsolvedTileIds(fresh);
+      if (duplicate && duplicate.guess.every((id) => freshAvailable.has(id))) {
+        setSelected(duplicate.guess);
+        setBlockedGuess({ key: selectionKey(duplicate.guess), oneAway: false });
+        setHint(`${duplicate.message} Schimbă cel puțin o piesă înainte de o nouă verificare.`);
+      } else {
+        setHint("Joc sincronizat. Poți continua.");
+      }
+    }
+  }, [actionOwner, active, applyAuthoritativeState, mayAdoptAction, onToast]);
+
+  const retryActionSync = useCallback(async () => {
+    if (!state || busy || !actionSync) return;
+    if (actionSync.kind === "changed") {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setState(null);
+      setLoading(true);
+      retryResume();
+      return;
+    }
+    if (state.game_id !== actionSync.gameId) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    setBusy(true);
+    try {
+      await reconcileAction(ticket, actionSync.duplicate);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }, [state, busy, actionSync, actionOwner, beginAction, reconcileAction, retryResume]);
+
+  const submit = useCallback(async () => {
+    if (!state || finished || selected.length !== GROUP_SIZE || actionsLocked || exactBlockedRetry) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    const guess = [...selected];
+    const guessKey = selectionKey(guess);
+    setBusy(true);
+    try {
+      const res: GuessResult = await conexiuniApi.guess(state.game_id, guess);
+      if (!mayAdoptAction(ticket)) return;
+      setState(res);
+      if (res.correct) {
+        sound.playWin();
+        setSelected([]);
+        setBlockedGuess(null);
+        setHint(null);
+        if (!res.won && res.category) {
+          onToast(`Grup găsit: ${res.category.label}!`, "success");
+        }
+      } else {
+        sound.playError();
+        setShake((n) => n + 1);
+        const recoverableOneAway = Boolean(res.one_away && !res.lost);
+        if (res.one_away) {
+          setHint(
+            recoverableOneAway
+              ? ONE_AWAY_GUIDANCE
+              : "Aproape! 3 din 4 sunt din aceeași categorie.",
+          );
+        } else {
+          setHint("Niciun grup complet — încearcă altă combinație.");
+        }
+        if (recoverableOneAway) {
+          setSelected(guess);
+          setBlockedGuess({ key: guessKey, oneAway: true });
+        } else {
+          setSelected([]);
+          setBlockedGuess(null);
+        }
+      }
+    } catch (err) {
+      const duplicate = err instanceof ApiError && err.status === 409
+        ? { guess, message: err.message || "Combinația a fost deja verificată." }
+        : undefined;
+      await reconcileAction(ticket, duplicate);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }, [state, finished, selected, actionsLocked, exactBlockedRetry, beginAction,
+    mayAdoptAction, onToast, reconcileAction, actionOwner]);
+
+  const requestClue = useCallback(async () => {
+    if (!state || actionsLocked || finished || !state.clue_available) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    setBusy(true);
+    try {
+      const res = await conexiuniApi.clue(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
+      sound.playSelect();
+      applyAuthoritativeState(res);
+      // Render the earned clue once; retire invisible selected ids and stale feedback.
+    } catch {
+      await reconcileAction(ticket);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }, [state, actionsLocked, finished, beginAction, mayAdoptAction,
+    applyAuthoritativeState, reconcileAction, actionOwner]);
+
+  const copyShare = useCallback(async () => {
+    if (!sharePayload) return;
+    const ok = await copyResult(sharePayload);
+    if (ok) onToast("Copiat!", "info");
+    else onToast("Nu am putut copia.", "error");
+  }, [sharePayload, onToast]);
+
+  // An ordinary live-board exit is permanent. Uncertain actions preserve the pointer
+  // for resume; terminal score completion owns its conditional cleanup.
+  const handleExit = useCallback(() => {
+    if (startInFlight.current) return;
+    if (!finished && state && !busy && !actionSync && !actionOwner.hasPending()) {
+      active.forgetIfCurrent(state.game_id);
+    }
+    actionOwner.invalidate();
+    setSelected([]);
+    setBlockedGuess(null);
+    setHint(null);
+    onExit();
+  }, [active, state, busy, actionSync, actionOwner, finished, onExit]);
+
+  // Keyboard: Enter submits a full selection, Escape/Backspace clears it. Inert when
+  // no board is active, while a request is in flight, or once the game is finished.
+  useEffect(() => {
+    if (!state || finished) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (actionsLocked || actionOwner.hasPending()) return;
+      const target = e.target instanceof Element ? e.target : null;
+      if (
+        e.defaultPrevented ||
+        (e.key === "Enter" &&
+          target?.closest(
+            'button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"]',
+          ))
+      ) {
+        return;
+      }
+      if (e.key === "Enter" && selected.length === GROUP_SIZE && !exactBlockedRetry) {
+        e.preventDefault();
+        void submit();
+      } else if (e.key === "Escape" || e.key === "Backspace") {
+        if (selected.length > 0) {
+          e.preventDefault();
+          clearSelection();
+        }
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [state, finished, actionsLocked, actionOwner, selected, exactBlockedRetry, submit, clearSelection]);
+
+  // ----------------------------------------------------------------- INTRO
+  if (!state) {
+    return (
+      <div className="screen-pad fill connections-screen" style={{ overflowY: "auto" }}>
+        <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
+          <GameShell onExit={handleExit} accent={DEF.accent} busy={loading} />
+
+          <GameIntro
+            startFailed={startFailed}
+            resumeRecovery={resumeRecovery ? {
+              kind: resumeRecovery.kind,
+              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
+              onRetry: retryResume,
+            } : null}
+            icon={DEF.icon}
+            title={DEF.title}
+            tag={DEF.tag}
+            accent={DEF.accent}
+            glow={DEF.glow}
+            description={
+              <p style={{ margin: 0 }}>
+                Găsește patru grupuri ascunse printre cele 16 cuvinte.
+              </p>
+            }
+            steps={[
+              { icon: "👆", label: "Alege patru" },
+              { icon: "✓", label: "Verifică" },
+              { icon: "🧩", label: "Găsește grupul" },
+            ]}
+            best={best}
+            startLabel="Joacă"
+            onStart={() => void start({ kind: "seed", difficulty })}
+            onDaily={() => void start({ kind: "daily" })}
+            dailyLabel="Provocarea zilei"
+            starting={loading}
+          >
+            <GameSetupOptions>
+            <DifficultyPicker
+              options={DIFFICULTY_OPTIONS}
+              value={difficulty}
+              onChange={(d) => {
+                sound.playSelect();
+                setDifficulty(d);
+              }}
+            />
+            <CategoryPicker
+              game="conexiuni"
+              difficulty={difficulty}
+              value={category}
+              onChange={(key) => {
+                sound.playSelect();
+                setCategory(key);
+              }}
+              onInvalid={() => setCategory(null)}
+              accent={DEF.accent}
+            />
+            </GameSetupOptions>
+          </GameIntro>
+        </div>
+      </div>
+    );
+  }
+
+  // ----------------------------------------------------------------- BOARD
+  return (
+    <div className="screen-pad fill connections-screen" style={{ overflowY: "auto" }}>
+      <div className="container col game-container connections-game" style={{ gap: 12, paddingBottom: 24 }}>
+        {/* Header */}
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={loading}>
+          <Hud><StatBadge label="Grupuri" value={`${state.solved.length}/4`} accent={DEF.accent} /></Hud>
+        </GameShell>
+
+        {/* Solved groups as locked coloured rows */}
+        <AnimatePresence initial={false}>
+          {state.solved.map((g, index) => (
+            <SolvedRow key={g.key} group={g} color={GROUP_COLORS[index]} />
+          ))}
+        </AnimatePresence>
+
+        {!finished && (
+          <div className="connections-coach-stack">
+            <NextMove
+              icon={selected.length === GROUP_SIZE ? "✓" : "👆"}
+              title={
+                exactBlockedRetry
+                  ? "Schimbă o piesă"
+                  : selected.length === 0
+                    ? "Alege 4 care merg împreună"
+                    : selected.length < GROUP_SIZE
+                      ? `Încă ${GROUP_SIZE - selected.length}`
+                      : "Grup gata"
+              }
+              detail={exactBlockedRetry ? "Aceeași combinație a fost deja verificată." : undefined}
+              progress={`${selected.length}/${GROUP_SIZE}`}
+              accent={DEF.accent}
+              ready={selected.length === GROUP_SIZE && !exactBlockedRetry}
+              className="connections-coach"
+              action={
+                <span className="connections-coach-action">
+                  <span className="connections-lives-label">Greșeli disponibile</span>
+                  <span
+                    className="connections-lives"
+                    role="img"
+                    aria-label={`${state.lives} ${state.lives === 1 ? "greșeală disponibilă" : "greșeli disponibile"}`}
+                    title={`${state.lives} ${state.lives === 1 ? "greșeală disponibilă" : "greșeli disponibile"}`}
+                  >
+                    {Array.from({ length: 4 }, (_, index) => (
+                      <span
+                        key={index}
+                        className={`connections-life-dot${index < state.lives ? "" : " connections-life-dot--spent"}`}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </span>
+
+                </span>
+              }
+            />
+          </div>
+        )}
+
+        {!finished && actionSync ? (
+          <div className="card col connections-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+            <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+            <span>{actionSync.kind === "changed"
+              ? "Încarcă jocul curent pentru a continua."
+              : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă combinație sau un indiciu."}</span>
+            <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+              {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+            </Button>
+          </div>
+        ) : null}
+
+        {/* Feedback stays immediately before the board. */}
+        <AnimatePresence>
+          {!finished && (feedback || clueMessages.length > 0) && (
+            <m.div
+              key="connections-feedback"
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="card connections-feedback col"
+            >
+              <AnimatePresence mode="wait">
+                {feedback && (
+                  <m.span
+                    key={feedback}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <span aria-hidden="true">↻ </span>
+                    {feedback}
+                  </m.span>
+                )}
+              </AnimatePresence>
+              {clueMessages.map(({ key, message }) => (
+                <span key={key} role="status" aria-live="polite">
+                  <span aria-hidden="true">💡 </span>
+                  {message}
+                </span>
+              ))}
+            </m.div>
+          )}
+        </AnimatePresence>
+
+        {/* Active board */}
+        {!finished && (
+          <m.div
+            key={shake}
+            animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
+            transition={{ duration: 0.4 }}
+            className="connections-grid"
+            style={{
+              display: "grid",
+              gap: 8,
+            }}
+          >
+            <AnimatePresence initial={false}>
+              {remainingTiles.map((t) => {
+                const isSel = selected.includes(t.id);
+                return (
+                  <m.button
+                    key={t.id}
+                    type="button"
+                    layout
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{
+                      scale: 1,
+                      opacity: 1,
+                    }}
+                    exit={{ scale: 0.4, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 320, damping: 20 }}
+                    onClick={() => toggle(t.id)}
+                    disabled={actionsLocked}
+                    aria-pressed={isSel}
+                    title={t.label}
+                    className="card center connection-tile"
+                    style={{
+                      padding: "12px 6px",
+                      minHeight: 64,
+                      cursor: actionsLocked ? "default" : "pointer",
+                      textAlign: "center",
+                      fontSize: "0.82rem",
+                      lineHeight: 1.15,
+                      opacity: actionsLocked && !isSel ? 0.55 : 1,
+                      borderColor: isSel ? DEF.accent : "var(--surface-border)",
+                      background: isSel
+                        ? `color-mix(in srgb, var(--surface) 65%, ${DEF.accent})`
+                        : undefined,
+                      color: isSel ? "var(--text)" : undefined,
+                      fontWeight: isSel ? 700 : 500,
+                      boxShadow: isSel ? `0 0 18px -6px ${DEF.accent}` : undefined,
+                    }}
+                  >
+                    {t.label}
+                  </m.button>
+                );
+              })}
+            </AnimatePresence>
+          </m.div>
+        )}
+
+        {/* Controls */}
+        {!finished && (
+          <div className="col game-action-dock connections-actions" style={{ gap: 8 }}>
+            <div className="row center wrap game-action-buttons" style={{ gap: 12 }}>
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={actionsLocked || remainingTiles.length <= GROUP_SIZE}
+                onClick={shuffle}
+                title="Amestecă pozițiile pieselor"
+              >
+                Amestecă
+              </Button>
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={actionsLocked || selected.length === 0}
+                onClick={clearSelection}
+              >
+                Golește
+              </Button>
+                  <Button
+                    type="button"
+                    disabled={actionsLocked || selected.length !== GROUP_SIZE || exactBlockedRetry}
+                    onClick={submit}
+                    style={{ borderColor: DEF.accent }}
+                  >
+                    {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
+                  </Button>
+            </div>
+            {state.clue_available ? (
+              <div className="connections-hint-action">
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={actionsLocked || !state.clue_available}
+                onClick={() => void requestClue()}
+                title={
+                  state.clue_available
+                    ? "Arată începutul unei categorii"
+                    : cluesUsed >= MAX_CLUES
+                      ? "Indicii epuizate"
+                      : `Disponibil după ${clueMistakesNeeded} greșeli`
+                }
+                  >
+                    {cluesUsed >= MAX_CLUES ? "Indicii folosite" : "Indiciu"}<span className="conexiuni-clue-status"> · −100 pct</span>
+                    {!state.clue_available && cluesUsed < MAX_CLUES ? (
+                      <span className="conexiuni-clue-status">
+                        {" "}
+                        · încă {clueMistakesRemaining}{" "}
+                        {clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}
+                      </span>
+                    ) : cluesUsed === 1 ? (
+                      <span className="conexiuni-clue-status"> · 1 rămas</span>
+                    ) : null}
+                  </Button>
+              </div>
+            ) : (
+              <p className="connections-hint-status">
+                {cluesUsed >= MAX_CLUES ? "Indicii folosite" : `Indiciu disponibil după încă ${clueMistakesRemaining} ${clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}.`}
+              </p>
+            )}
+            <span className="faint center fine-only" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
+              Enter = verifică · Esc = golește
+            </span>
+          </div>
+        )}
+
+        <GameOptions game={GAME_KEY}>
+          <div className="row wrap" style={{ gap: 8 }}>
+            {state.daily && (
+              <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} title="Provocarea zilei" />
+            )}
+            <StatBadge label="DIFICULTATE" value={DIFF_LABEL[state.difficulty]} accent={DEF.accent} />
+            {state.board_category && (
+              <StatBadge
+                label="CATEGORIE"
+                value={categoryLabel(state.board_category)}
+                accent={categoryColor(state.board_category)}
+              />
+            )}
+          </div>
+        </GameOptions>
+
+        {/* Lose reveal */}
+        {state.lost && state.solution && (
+          <div className="col" style={{ gap: 8 }}>
+            <span className="faint" style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}>
+              GRUPURILE RĂMASE
+            </span>
+            {state.solution
+              .filter((group) => !state.solved.some((solved) => solved.key === group.key))
+              .map((g, index) => (
+                <SolvedRow
+                  key={g.key}
+                  group={g}
+                  color={GROUP_COLORS[state.solved.length + index]}
+                  dim
+                />
+              ))}
+          </div>
+        )}
+
+        {/* Finish banner */}
+        <AnimatePresence>
+          {finished && (
+            <ResultCard
+              startFailed={startFailed}
+              actionsBusy={loading}
+              icon={state.won ? "🎉" : "💔"}
+              title={state.won ? "Ai găsit toate grupurile!" : "Nu mai ai greșeli disponibile."}
+              accent={DEF.accent}
+              won={state.won}
+              score={state.score}
+              isRecord={recordHit}
+              isPuzzleRecord={puzzleRecordHit}
+              shareText={sharePayload}
+              onCopy={copyShare}
+              onReplay={() => void start({ kind: "seed", difficulty })}
+              onOptions={() => {
+                if (startInFlight.current) return;
+                actionOwner.invalidate();
+                setActionSync(null);
+                setBusy(false);
+                setState(null);
+              }}
+              onExit={handleExit}
+            >
+              {state.mistakes} {state.mistakes === 1 ? "greșeală" : "greșeli"}
+            </ResultCard>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+function SolvedRow({
+  group,
+  color,
+  dim,
+}: {
+  group: SolvedGroup;
+  color: string;
+  dim?: boolean;
+}) {
+  return (
+    <m.div
+      layout
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: dim ? 0.7 : 1 }}
+      transition={{ type: "spring", stiffness: 260, damping: 20 }}
+      className="card col"
+      style={{
+        padding: 12,
+        gap: 6,
+        borderColor: color,
+        background: `color-mix(in srgb, var(--surface) 78%, ${color})`,
+      }}
+    >
+      <span style={{ fontWeight: 700, color: "var(--text)", letterSpacing: "0.03em" }}>
+        {group.label}
+      </span>
+      <div className="row wrap" style={{ gap: 6 }}>
+        {group.tiles.map((t) => (
+          <span key={t.id} className="chip" style={{ borderColor: color }}>
+            {t.label}
+          </span>
+        ))}
+      </div>
+    </m.div>
+  );
+}

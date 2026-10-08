@@ -1,0 +1,32 @@
+Valid until: the selected Node/npm/toolchain pins, qualifier source or current qualification entrypoint references change — then treat as history.
+
+2026-10-08 — Cat retained Node qualification source analysis
+
+Verdict
+A concrete current-source incompatibility exists in the still-documented standalone qualifier. It is not a blocker proved in the canonical GUI wrapper dispatch and is not an observed runtime failure. No source changes or tests were authored or executed.
+
+Pinned source
+Cat HEAD 59a9a568c445654f69215d735091c9b3e0405831, tree63a846a9974463ba360b4083cc53d0249f92fee7; git status --porcelain empty. source-pins.tsv binds18 relevant actual Git object paths/modes/blob IDs/raw byte lengths/SHA256. No moving documentation candidate or prior source packet was read or changed.
+scripts/qualify_go_toolchain.sh:100755, blob48032f620f260148362d37a409353181b0ccd481,4065B, SHA256c7e65ad67627e5060a154f3aef6091e46057562456a6d704d7d1e7a85d90ab11.
+
+C1: selected Node conflicts with retained qualifier
+- scripts/qualify_go_toolchain.sh:12 requires node --version matching v24.* and says Qualified Node24 is required. With actual selected Node26 this source branch exits2 before mkdir or qualification commands; no actual execution is asserted.
+- docs/adr/0184-native-spa-toolchain-and-managed-output.md:13 selects Node26.10.0/npm12.2.0/TypeScript7.0.2/Vite8.3.3/Go1.27.1; lines15–23 preserve React/UI0.3 and actual normalized/gate obligations.
+- frontend/package.json:40–43 requires node>=26.10.0 and npm>=12.2.0; frontend/.nvmrc:1 is26.10.0; frontend/.npmrc:2 is engine-strict=true. versions.lock.json:519–543 records selected Node26.10.0/npm12.2.0 and actual runner version requirements.
+- The script later calls npm ci/test/lint/build/test:e2e at49–54. Selecting Node24 just to satisfy its early predicate conflicts with its selected frontend engine policy. This is a source-predicted incompatibility; package installation has NOT RUN.
+- Go check at script11 is exact go version go1.27.1 linux/amd64. Selected ADR0184:13 and current AGENTS/docs expect Go1.27.1, so no Go version mismatch was found. Its Linux/amd64 restriction is explicit; Windows execution is not admitted or suggested. No installed Go observation was made.
+
+Current invocation evidence and boundary
+README.md:139–143 calls this script the complete native-only gate. docs/agent-testing.md:74–76 calls it complete native-only qualification and still states Go1.27.1/Node24. docs/NATIVE_TOOLCHAIN.md:90–98 calls it the complete integration entrypoint and still requires Node24. These current guide references make a historical-only classification unsupported without a separately reviewed correction. README40/82 and agent-testing7/50 also retain stale Node24 wording.
+The bounded rg of README.md, Makefile, scripts and Taskfile.repo.yml found the README139 invocation reference, no automatic caller of this exact filename. Makefile14–24 wraps run.sh; no qualifier target exists there.
+Actual GUI Taskfile.repo.yml:7–24 invokes gui-repo-hook for setup/deps/gen/unit/full/build. gui-repo-hook:24–28 uses npm-ci/build under its installed selected SDK hook; Taskfile.yml:457–468 has gate:unit/full generic dispatch. scripts/gate.sh:437 maps unit/full to those targets; its qualify branch489 invokes scripts/qualify-native.sh only for the separate social path, not this Cat file. Neither the script name nor its old Node24 check is substituted for canonical GUI GREENunit/full, trust, KIT_BUMP or physical/device evidence.
+
+Bounded next source recommendation
+After the active documentation packets close, prepare a separate existing-decision alignment of this retained script's Node predicate/diagnostic with actual ADR0184 and selected Node26.10.0/npm12.2.0 source. Keep exact Go1.27.1 linux/amd64, explicit disposable PG/scratch, Python/Rust exclusion, required commands/failure behavior and no-skip contract. Review the current guide references above with that source change; do not claim the standalone script becomes a canonical GUI qualification receipt. No new policy, target, bypass, gate result, budget change or test is proposed here.
+The existing smoke --static-root at44 is the literal old cat_de_roman_esti/web/static; ADR0184:19's managed-output scope remains separately staged. Merely fixing Node cannot certify future applied managed output or M1. No broader qualifier rewrite is authorized by this analysis.
+
+Historical source exclusions
+Keep docs/adr/0168-qualify-complete-native-toolchain.md body and31–36 real Node24.21.0/Go1.27.1 qualification unchanged, with its historical proof/review receipts. docs/STATUS.md explicitly calls ADR0168 historical at its selected-backend section. No old result is rerun, relabeled or fabricated. Existing accounting amendment/portable packets, content/research and all repositories remain untouched.
+
+Actual checks and limits
+READ ONLY: relevant literal text/line spans, bounded rg invocation search, Git HEAD/tree/status and18 blob/mode/byte/hash captures. Raw Git identities distinguish object bytes from CRLF checkout representation. read-only-capture-diagnostic.txt retains corrected shell quoting/truncated text evidence. No code/parser/compiler/import/test/build/formatter/setup/environment probe/runtime/archive/config/trust/apply/stage/commit operation. No installed/version/qualification result or performance savings observed. Parent owns source-author dispatch and any later admitted Linux validation.

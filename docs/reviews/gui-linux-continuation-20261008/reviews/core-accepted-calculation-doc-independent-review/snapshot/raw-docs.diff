@@ -1,0 +1,41 @@
+diff --git a/before/README.md b/after/README.md
+index 6d1a03a3569206db3e2495221901d75b7bcdc563..2f9f225381ada239c83914c52926d76500b386a8 100644
+--- a/before/README.md
++++ b/after/README.md
+@@ -60,6 +60,13 @@ production and S0b templ migration remain pending.
+ preliminary acceptance ordering while keeping the budget red, the real device
+ checkpoint and the green M2 requirement before S0b unchanged.
+ 
++Paul accepted Cat's startup calculation on 2026-10-08: entry/static JS/CSS plus
++immediately mounted AccountBar and its recursive static closure, counted once.
++[Cat ADR-0185](../cat_de_roman_esti/docs/adr/0185-accepted-eager-startup-bundle-accounting.md)
++records the source decision. At the Windows checkpoint, code/docs are unapplied
++and unqualified; current Vite/startup gzip is unacquired and all 11 amended tests NOT RUN.
++Frontend 120 KiB JS/CSS and canonical 40,960/30,720-byte JS remain distinct and unchanged.
++
+ The Cat-only sealed staged-UI contract and confined same-repo Go audits from
+ [ADR-0009](docs/adr/0009-corrective-release-and-staged-sdk.md) remain enforced.
+ Staged UI is pending; M2 requires actual active installation proof. Bootstrap
+@@ -98,7 +105,8 @@ Qualification and published UI1.0.2/web-kit0.1.2/Go archive identities bind exac
+ the immutable 9e0a88e source, not this later documentation HEAD. README is packaged:
+ repacking changed metadata would change archive bytes; a subsequent product release
+ must bump affected package versions rather than replace these published archives.
+-This post-tag update runs documentation checks only. Full native captures remain
++Earlier post-tag documentation checks retain their recorded scope. This source-only
++amendment has no executed checks. Full native captures remain
+ parent-owned outside this transient docs worktree; earlier receipts retain scope.
+ 
+ Every product build/test runs through the pinned native wrapper. Full adds real
+diff --git a/before/docs/PROGRAM.md b/after/docs/PROGRAM.md
+index ee7f98a1e6569fa8d8a779702955f5ff1541197f..72ef9e84b140fe2d7bab3f0657f82952d6d0a920 100644
+--- a/before/docs/PROGRAM.md
++++ b/after/docs/PROGRAM.md
+@@ -318,6 +318,8 @@ This is the schema of the shipped `bootstrap/budgets.json` (`measured_at: null`,
+ 
+ **Where "budgets in CI" (Decision 8) runs.** `TestRouteBudgets` is part of `gate:unit`, which every milestone commit and every review runs on Linux through the wrapper; that WSL run **is** the program's CI for the apps. GitHub Actions wiring exists only in roedu-ui (`web-kit/templates/ci.yml`, S0a M5: `push`/`pull_request`/`workflow_dispatch` → toolchain build → `task gate:unit` incl. `TestRouteBudgets`). No app session edits its GitHub workflow: ro's is `workflow_dispatch`-only by ADR-0075, cat's and social's keep their current triggers; adopting the kit `ci.yml` in an app is Paul's own commit after the session (recorded as an ADR there), listed as deviation §0.4-6.
+ 
++**Cat startup accounting — accepted 2026-10-08, source amendment unapplied.** The frontend's 120 KiB (122,880-byte) combined JS/CSS check counts all entry/static closures plus the immediately mounted AccountBar and its recursive static JS/CSS dependencies, with shared files and cycles counted once. Mandatory manifest roots/imports and emitted JS/CSS assets must exist; game routes and further dynamic children stay excluded. Default helper callers and frozen historical per-key closures retain their static-only scope. This does not replace the canonical cat-initial 40,960-byte JavaScript ceiling/30,720-byte target or separate CSS policy. Fresh startup measurements and Linux qualification remain pending; no threshold, phase or device condition changes. Decision: cat_de_roman_esti/docs/adr/0185-accepted-eager-startup-bundle-accounting.md.
++
+ ### 4.7 Device checkpoint (hard stop)
+ After each app's M1 delivery milestone Paul measures LCP/INP on one real Samsung A-series phone over throttled 4G in Chrome and Samsung Internet, records `Device checkpoint: <date> LCP/INP per route` in the app's status doc, sets `budgets.json` defaults from it (`GATE-CHANGE:`), and writes `DEVICE CHECKPOINT DONE` in the ExecPlan Progress (or queues it). No M2 pilot starts without it; tests, fixtures, goldens, codemod prep and docs may continue while waiting. Today **no real-device or 4G measurement exists in any repo**.
+ 
