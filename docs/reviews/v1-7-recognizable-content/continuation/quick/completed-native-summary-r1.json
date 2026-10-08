@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "valid_until": "Current proposal/audit/runtime/source/readset or reviewer ownership changes; old failed campaign remains failed history.",
+  "scope": "Actual supported prospective Quick native outputs; failed outer ID postchecker retained; no native replay/installed transition/version qualification.",
+  "observed_utc": "2026-10-08T10:39:24.991582+00:00",
+  "proposal_sha256": "26b7dc0e7a4db0cd665c2593d86e55b2d5edff98f478374e0a8f3917e320512a",
+  "audit_sha256": "a2155ee72465c076238aa339abba3886ad1a684332063abf8f66b8cc79d9b516",
+  "candidate_sha256": "c93a2656f7794b51be20fd9e9a171fd976de63e8e3bec9bb6cdabdd490be32ef",
+  "overall_pipeline": "FAILED",
+  "native_commands_completed": 2,
+  "outer_completed_receipts": 1,
+  "failed_postcheck": {
+    "driver_sha256": "96f8a8e86360659244cd902016a65db45c15d6016d0cfff8213a15a18d0211b0",
+    "line": 118,
+    "expected_namespace": "authored id",
+    "actual_namespace": "rated catalogue id",
+    "minimal_correct_relation": "Exact game/source_id bijection candidate\u2192rated\u2192replay, rated.id==replay.id; do not compare authored.id directly."
+  },
+  "actual_result": {
+    "boards": 85,
+    "requests": 460,
+    "candidate_authored_exact": true,
+    "all_bijections_and_payloads_exact": true,
+    "privacy_terminal_score": true,
+    "runtime110_exact": true,
+    "source9_exact": true,
+    "all450_current_protected_inputs_exact": true
+  },
+  "native_events": {
+    "proposal": {
+      "completion": {
+        "kind": "complete",
+        "step": "proposal",
+        "returncode": 0,
+        "native_peak": 120406016,
+        "group_absent": true
+      },
+      "samples": 10,
+      "owned_go_pid_start_ticks": [
+        [
+          153821,
+          840910
+        ]
+      ]
+    },
+    "audit": {
+      "completion": {
+        "kind": "complete",
+        "step": "audit",
+        "returncode": 0,
+        "native_peak": 146546688,
+        "group_absent": true
+      },
+      "samples": 17,
+      "owned_go_pid_start_ticks": [
+        [
+          154021,
+          842086
+        ]
+      ]
+    }
+  },
+  "sampled_parent_inclusive_peak_bytes": 297537536,
+  "source_archival_RSS": "unmeasured; no whole source-worker/native-campaign PASS claim",
+  "old_native_started_epoch": 1791454758.2829328,
+  "old_native_deadline_epoch": 1791455958.2829328,
+  "source_preservation_admission_sha256": "2f59b849ed717c87bb458ea565edc11b44085310f4ad09f82d015659e578d69b",
+  "archive_sha256": "a88836d0b12c2965b64ed25620b868a49341687b5b04c41427615dce2d2bd9d1",
+  "archive_regular_members": 52,
+  "archive_raw_bytes": 2392385,
+  "archive_complete_lossless_verified": true,
+  "next": "Independent actual output acceptance and same-real-role finals, then separately reviewed/admitted one-target Quick transition; no repeated audit."
+}

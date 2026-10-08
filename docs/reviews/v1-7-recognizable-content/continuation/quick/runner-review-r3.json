@@ -1,0 +1,118 @@
+{
+  "schema": "v1-7-quick-runner-source-review-v1",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "ACCEPT_SOURCE_ONLY_FOR_EXACT_TWO_SUPPORTED_CALLS",
+  "substantive_completed_at_utc": "2026-10-08T10:17:03.8216460+00:00",
+  "narrow_source_admission_sha256": "6d6f8c256fad96ee260d821641160ebe0cf7e51ed626f51678755d86f93cef3e",
+  "original_narrow_start_utc": "2026-10-08T10:06:57.387934+00:00",
+  "original_narrow_cutoff_utc": "2026-10-08T10:23:57.387934+00:00",
+  "original_narrow_deadline_utc": "2026-10-08T10:26:57.387934+00:00",
+  "bindings": {
+    "linux_guard_r7": "0235cfb6fb2efe2810cf4f73ed59eb14f790f4a7f41ac7036b66fa76fa7e5129",
+    "windows_driver_r5": "96f8a8e86360659244cd902016a65db45c15d6016d0cfff8213a15a18d0211b0",
+    "template_r5": "b30d3fc651dbd557f2493a591154a8485397cac91139d11102958859a3bb4e86",
+    "bindings_packet_r1": "6a56bbbf733cf53cb5c904252b6158436908d2e9caa6cd85bc9089fab630623f",
+    "prior_rejection": "ecd9d75be1536b5d310de114a3df642c35e36f0d271a000f4cc07b7d62994378",
+    "quality_review": "a06050011e9296c3aa9f87bc9c37a4a1a64798c96f99cf3fb0624902470e01c7",
+    "quality_evidence": "325c4615ce8cd505d3e58eb7ad2209754a05dc6273efe035480bb01083bb8427"
+  },
+  "findings": [],
+  "accepted_repairs": [
+    {
+      "id": "F1",
+      "source": "linux-guard-r7.py",
+      "lines": [
+        26,
+        30,
+        33,
+        35,
+        37,
+        38,
+        52,
+        53,
+        54,
+        66,
+        69,
+        70,
+        74,
+        82
+      ],
+      "assessment": "TERM/INT only set the pending flag and cannot unwind Popen registration or cleanup. Ordinary guards refuse pending interruption. waitid WNOWAIT retains ownership before first cleanup. cleanup_attempted is set before any cleanup action; later calls never rescan/signal/reap an old PGID, returning confirmed absence or refusing uncertainty. Confirmation disarms child/group identity. Posthash failure preserves cleanup outcome without stale group action."
+    },
+    {
+      "id": "F2",
+      "source": "windows-driver-r5.py",
+      "lines": [
+        52,
+        53,
+        56,
+        57,
+        58,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        75,
+        127,
+        129,
+        142,
+        143,
+        144
+      ],
+      "assessment": "Initial admission and full pins precede first state publication. Each encoded state image is bounded65536 bytes; two images plus4096 reserve135168 bytes within unchanged1GiB growth and16GiB remaining disk. Fresh pre/post publication memory/disk/growth/original wall and monotonic deadline checks remain. Failed publication emits explicit FAILED/error/cleanup uncertainty and cannot reach PASS output."
+    }
+  ],
+  "unchanged_verified_contract": {
+    "owned_scope": "Whole exact R plus S; fresh failclosed scandir/stat enumeration, no exclusions/cached counts.",
+    "rss_scope": "Sampled aggregate Windows controller + native launcher + owned carrier + Linux supervisor/Go group; cap2147483648. Required live carrier sample; exited carrier counts zero only after owned Popen poll proves exit.",
+    "memory_floor_bytes": 17179869184,
+    "start_disk_floor_bytes": 18253611008,
+    "remaining_disk_floor_bytes": 17179869184,
+    "growth_cap_bytes": 1073741824,
+    "time": "Immutable1200-second wall deadline with local monotonic binding; launch195-second reserve, substantive180-second reserve, bounded failure metadata within original deadline.",
+    "optimization": "Explicit optimized interpreter/PYTHONOPTIMIZE refusal; ordinary Python3.14 launch required.",
+    "spec": "Single read/parse externally SHA-bound in both readers, fresh pre/post SHA checks; serial steps; no clock/baseline renewal.",
+    "readset": "All439 current Windows protected hashes personally checked and all439 exact Linux mapped digests checked; all416 stage files covered. Exact110 runtime LIST/9 source expectations match independently enumerated binding packet.",
+    "outputs": "Proposal exact85 unique IDs/actual two review role identities and hashes/excluded empty. Audit exact85 replays/460 requests/privacy/terminalGet/score1000/core preserved/all110+9 values."
+  },
+  "template_scope": {
+    "only_commands": [
+      "supported quick proposal with current candidate and actual factual/quality reviews",
+      "supported quick audit of that fresh proposal"
+    ],
+    "allowed_output_directory": "S/quick-refresh-r1",
+    "candidate": "c93a2656f7794b51be20fd9e9a171fd976de63e8e3bec9bb6cdabdd490be32ef",
+    "reviewers": [
+      "/root/qualification_ledger",
+      "/root/continuation_audit"
+    ],
+    "no_install_export_authority_or_World_call": true
+  },
+  "preserved_intermediate_sources": [
+    {
+      "linux_r5": "3c67775d17e153b198a1b21f70e811fddaead1b2a43e915146f1a8958d910a01",
+      "status": "UNEXECUTED_UNQUALIFIED",
+      "reason": "Successful cleanup did not disarm stale identity before posthash failure."
+    },
+    {
+      "linux_r6": "fedbdf10147218d90fb1e5025876438aad1af30954effdd519d9ce8ed943cae3",
+      "status": "UNEXECUTED_UNQUALIFIED",
+      "reason": "Post-reap group-verification I/O failure could still repeat cleanup on a stale PGID;R7 makes every attempt one-shot."
+    }
+  ],
+  "execution_preconditions": [
+    "Distinct fresh admitted immutable native spec requires independent predispatch review: actual finished factual/quality/evidence hashes, accepted method/template/admission/source pins, current wholeR/S baseline/disk/memory/launcherPID/start+1200 deadline and exact externally supplied specSHA.",
+    "Source workers quiesce during actual protected readsets/resource accounting. This template/source receipt alone does not admit native execution.",
+    "Capture driver exit and raw stdout/stderr with durable state/results. A passed state image alone is provisional if later publication/postcheck/exit reports failure. Cleanup uncertainty blocks further native work pending direct ownership/absence proof.",
+    "Reviewer executed no chmod, guard, rail, Go, test, audit, setup, gameplay or candidate command. Source acceptance is not tested signal/fault-handling evidence."
+  ],
+  "limits": {
+    "native_execution": false,
+    "source_peak_RSS": "unmeasured",
+    "installed_or_V1_7_gameplay_qualification": false,
+    "World_qualification": false,
+    "old_clocks_failures_or_reviews_reset": false
+  }
+}

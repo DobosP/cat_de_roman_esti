@@ -1,0 +1,136 @@
+{
+  "kind": "quick-independent-predispatch-review-v1",
+  "reviewer": "/root/qualification_ledger",
+  "verdict": "HOLD_DISPATCH_INDEPENDENT_SOURCE_CLOSURE_INCOMPLETE",
+  "spec": "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-7-qualification/probe/quick-native-spec-r1.json",
+  "spec_sha256": "97eaa21ee98f443f54f5be21516c0aadff3e0692d4cfa8315cadb9cc02835fa1",
+  "template_sha256": "b30d3fc651dbd557f2493a591154a8485397cac91139d11102958859a3bb4e86",
+  "published_at_utc": "2026-10-08T10:25:36.705903+00:00",
+  "native_execution_authorized_by_this_review": false,
+  "source_admission": {
+    "path": "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-7-qualification/quick-narrow-runner-source-admission-r1.json",
+    "sha256": "6d6f8c256fad96ee260d821641160ebe0cf7e51ed626f51678755d86f93cef3e",
+    "source_cutoff_utc": "2026-10-08T10:23:57.387934+00:00",
+    "metadata_deadline_utc": "2026-10-08T10:26:57.387934+00:00"
+  },
+  "time_boundary": {
+    "verified_findings_present_by_observed_utc": "2026-10-08T10:22:09+00:00",
+    "complete_substantive_verdict_frozen_before_cutoff": false,
+    "next_clock_after_compaction_utc": "2026-10-08T10:24:14+00:00",
+    "late_action": "Read the restored rail.go runtimePaths definition after the source cutoff. No further namespace assessment or native command was performed. This late read is retained and is not a timely completed source campaign."
+  },
+  "verified_before_cutoff": {
+    "windows_fresh_hashes": {
+      "count": 450,
+      "issues": 0,
+      "lstat_regular_nonsymlink_single_link": true
+    },
+    "linux_mappings": {
+      "count": 450,
+      "exact_windows_drive_mapping_and_hash_equality": true
+    },
+    "restored_stage": {
+      "actual_files": 416,
+      "protected_files": 416,
+      "extra": 0,
+      "missing": 0
+    },
+    "template_delta": {
+      "old_protected_paths": 439,
+      "new_protected_paths": 450,
+      "unchanged_old_pins": 439,
+      "removed_or_changed_old_pins": 0,
+      "added_paths": 11,
+      "changed_top_keys": [
+        "admission",
+        "deadline_epoch",
+        "full_R_S_baseline",
+        "host_launcher_pid",
+        "linux_protected",
+        "native_execution",
+        "review_hashes",
+        "started_epoch",
+        "windows_protected"
+      ],
+      "all_other_decoded_fields_unchanged": true
+    },
+    "raw_reviews": {
+      "candidate_sha256": "c93a2656f7794b51be20fd9e9a171fd976de63e8e3bec9bb6cdabdd490be32ef",
+      "factual": {
+        "reviewer": "/root/qualification_ledger",
+        "sha256": "9b3d993155f4a40381a26df31d8f6c749aefd333224c77053c5e84a813a3d975",
+        "evidence_sha256": "00b332db21d32ce458a4e1e3452c750fe568a2b4d78f104d2cf27d4d547dd9b8",
+        "unique_items": 85,
+        "accepted": 85
+      },
+      "quality": {
+        "reviewer": "/root/continuation_audit",
+        "sha256": "a06050011e9296c3aa9f87bc9c37a4a1a64798c96f99cf3fb0624902470e01c7",
+        "evidence_sha256": "325c4615ce8cd505d3e58eb7ad2209754a05dc6273efe035480bb01083bb8427",
+        "unique_items": 85,
+        "accepted": 85
+      }
+    },
+    "accepted_method_pins": {
+      "linux_r7": "0235cfb6fb2efe2810cf4f73ed59eb14f790f4a7f41ac7036b66fa76fa7e5129",
+      "windows_r5": "96f8a8e86360659244cd902016a65db45c15d6016d0cfff8213a15a18d0211b0",
+      "source_review": "bbc47460a6d1824410c285f616ea02678f4966a2918f440135270b24c24e7eb4"
+    },
+    "commands": {
+      "count": 2,
+      "first": "quick proposal with exact candidate and both fresh raw review paths",
+      "second": "quick audit of that proposal",
+      "output_root": "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-7-qualification/quick-refresh-r1",
+      "output_root_absent": true,
+      "only_supported_steps_equal_template": true,
+      "installed_live_main_mutation_in_steps": false
+    },
+    "current_content_bindings": {
+      "runtime_count": 110,
+      "source_count": 9,
+      "candidate": "c93a2656f7794b51be20fd9e9a171fd976de63e8e3bec9bb6cdabdd490be32ef",
+      "source7": "e95ebf937fb435700e6efb88737577b579975d1a3a7a63ab6e41b9a1c6a08ac4",
+      "world": "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+      "quick": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+      "namespace_function_assessment_complete_before_cutoff": false
+    },
+    "native_admission": {
+      "sha256": "479af88a5d51ff3336b90fcc14a77c78b90e93222144d9ebebaaad84273d91e3",
+      "started_epoch": 1791454758.2829328,
+      "deadline_epoch": 1791455958.2829328,
+      "duration_seconds": 1200.0,
+      "full_R_S_baseline_bytes": 877888477,
+      "host_launcher_pid": 40036,
+      "disk_free_bytes": 25896722432,
+      "memory_available_bytes": 29867352064,
+      "rss_cap_bytes": 2147483648,
+      "growth_cap_bytes": 1073741824,
+      "launch_reserve_seconds": 195,
+      "metadata_reserve_seconds": 180,
+      "spec_admission_steps_and_times_equal": true
+    },
+    "fresh_whole_root_measurement": {
+      "observed_utc": "2026-10-08T10:21:24.659153+00:00",
+      "regular_files": 7925,
+      "bytes": 878100531,
+      "growth_from_original_baseline": 212054,
+      "symlinks_or_nonregular_entries": 0,
+      "growth_exactly_spec_and_admission_images": true,
+      "spec_bytes": 209023,
+      "admission_bytes": 3031,
+      "baseline_not_reset": true
+    },
+    "external_frozen_spec_hash": {
+      "both_readers_require_external_sha_before_parse": true,
+      "windows_reader_forwards_same_external_sha_to_linux_reader": true,
+      "held_launcher_command_line_and_os_identity_personally_observed": false
+    }
+  },
+  "remaining_gate": "A separately authorized bounded source-only continuation must complete and freeze the runtime/source namespace and held-launcher binding assessment. Preserve this missed source closure and the original native deadline; this review does not authorize dispatch or a clock reset.",
+  "scope_limits": [
+    "No operator execution, dispatch marker, installed/live/main mutation, candidate edit or review edit occurred.",
+    "Method source acceptance is not tested native signal/fault evidence.",
+    "The native launcher is held according to the parent; this reviewer did not independently inventory its OS identity.",
+    "All reported exact hash and inventory checks were personally performed; no native qualification or completed original source campaign is claimed."
+  ]
+}

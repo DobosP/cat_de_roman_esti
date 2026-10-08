@@ -1,0 +1,92 @@
+{
+  "kind": "quick-independent-predispatch-review-v2",
+  "reviewer": "/root/qualification_ledger",
+  "verdict": "ACCEPT_EXACT_PREDISPATCH_TWO_SUPPORTED_CALLS",
+  "spec_sha256": "97eaa21ee98f443f54f5be21516c0aadff3e0692d4cfa8315cadb9cc02835fa1",
+  "prior_held_review_sha256": "bba4d87656788a1850145ddec9dd980b2e25bc0c857702bd99b8bd1ea6d22aa4",
+  "narrow_source_admission_sha256": "1e31a6da56819238e0f169cd7c31e4d62881861a680fc7859da7d3a0ceab0324",
+  "substantive_completion_utc": "2026-10-08T10:31:46.365096+00:00",
+  "change_since_prior_hold": "Completed the previously missing runtimePaths namespace assessment and rechecked current inputs under a fresh source-only admission. Source, candidate, raw reviews, runner and native spec bytes remain unchanged. The original missed source closure remains held history.",
+  "namespace_assessment": {
+    "rules_source": "source7-stage/go-backend/internal/contentrails/rail.go runtimePaths and RuntimeHashes; source.go bindings; contentbuild/build.go SourceNames/RubricSHA256; json.go TextSHA256",
+    "walk_roots": [
+      "go-backend",
+      "shared-go/authcore"
+    ],
+    "included": "Non-test .go; go.mod/go.sum; rules_unicode15.json/provenance.json/rules_provenance.json/bundled.json; JSON files within contentrails/sources.",
+    "excluded": "Directories named testdata or node_modules or beginning with dot; _test.go; exactly installed-authorities.json and installed_authorities_pin.go. Excluded authority files remain covered by the protected stage readset.",
+    "actual_runtime_rows": 110,
+    "expected_runtime_rows": 110,
+    "extra_runtime_rows": 0,
+    "missing_runtime_rows": 0,
+    "runtime_hash_mismatches": 0,
+    "runtime_namespace_sha256": "3591a381b18dc1dd4b1620684b1622115074d64b7a9bdb647f9b10039a378624",
+    "fresh_scan_completed_utc": "2026-10-08T10:29:44.770565+00:00",
+    "excluded_directory_count": 11,
+    "excluded_test_go_count": 64,
+    "excluded_authority_count": 2,
+    "other_nonruntime_files": 11,
+    "types": "Fresh Path.lstat proves every encountered included/file entry regular, nonsymlink and single-link, and every traversed directory nonsymlink; no enumeration or IO error suppressed.",
+    "source_binding_count": 9,
+    "source_name_set_matches_compiled_SourceNames_plus_rubric": true,
+    "source_hashes_match": true,
+    "source_hash_rule": "The eight fixture files and docs/CRITIQUE_RUBRIC.md are normalized CRLF then CR to LF exactly as contentbuild.TextSHA256. RuntimeHashes uses raw bytes.",
+    "world_sha256": "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+    "quick_sha256": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+    "source7_sha256": "e95ebf937fb435700e6efb88737577b579975d1a3a7a63ab6e41b9a1c6a08ac4"
+  },
+  "fresh_current_checks": {
+    "protected_hashes": 450,
+    "linux_path_hash_mappings": 450,
+    "stage_files": 416,
+    "extra_stage_files": 0,
+    "missing_stage_files": 0,
+    "protected_drift": 0,
+    "run_directory_absent": true,
+    "dispatch_marker_absent": true,
+    "whole_R_S_bytes_before_this_review": 878107704,
+    "regular_file_count_before_this_review": 7927,
+    "growth_from_original_native_baseline": 219227,
+    "original_native_baseline": 877888477,
+    "baseline_not_reset": true
+  },
+  "launcher_binding": {
+    "personally_observed_pid": 40036,
+    "name": "pwsh.exe",
+    "parent_pid": 27748,
+    "creation_utc": "2026-10-08T10:19:17.3288090Z",
+    "command_line_characters": 5192,
+    "command_literal_spec_sha_present": false,
+    "binding_verified_from_scoped_command_lines": "The launcher creates the immutable admission receipt with sha(p), retains its spec_sha256, waits for the owned marker, rejects marker content differing from that frozen spec_sha256, and invokes windows-driver-r5.py with spec path and that same external SHA. Windows source forwards the same expected SHA to Linux before parse/dispatch. No dispatch marker existed during this check.",
+    "launch_cutoff_guard_seconds": 195
+  },
+  "scope": {
+    "commands": 2,
+    "names": [
+      "proposal",
+      "audit"
+    ],
+    "only_exact_accepted_template_steps": true,
+    "outputs": [
+      "quick-refresh-r1/proposal.json",
+      "quick-refresh-r1/audit.json"
+    ],
+    "installed_live_main_mutation": false,
+    "native_deadline_epoch": 1791455958.2829328,
+    "native_start_epoch": 1791454758.2829328,
+    "duration_seconds": 1200.0,
+    "native_clock_renewed": false,
+    "source_review_is_not_native_result": true
+  },
+  "retained_diagnostics": [
+    "The first namespace script used Windows os.DirEntry.stat st_nlink, which returned zero for .gitignore. It stopped without output or mutation. Fresh Path.lstat returned one and the corrected full inventory passed; this is a reviewer metadata-access correction, not a source/spec repair.",
+    "The initial un-escalated CIM read was unavailable. No absence was inferred; a narrow authorized read-only escalation proved the held exact launcher identity and frozen-hash invocation."
+  ],
+  "dispatch_conditions": [
+    "Root alone may create the exact SHA marker and dispatch before the ORIGINAL deadline minus 195 seconds.",
+    "The accepted Linux r7/Windows r5 must retain their fresh pre/post readset, resource, process-ownership, signal cleanup and terminal-state checks.",
+    "This accepts only the two supported raw proposal/audit calls, not installation, tested fault cleanup, final factual/quality acceptance, native gates, landing or version completion."
+  ],
+  "issues": [],
+  "publication_utc": "2026-10-08T10:31:46.365096+00:00"
+}

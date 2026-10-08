@@ -1,0 +1,44 @@
+{
+  "schema": "v1-7-independent-quick-source-phase-stop-v1",
+  "reviewer": "/root/continuation_audit",
+  "stopped_at_utc": "2026-10-08T10:06:37.6347060+00:00",
+  "original_start_utc": "2026-10-08T09:48:41.471466+00:00",
+  "original_substantive_cutoff_utc": "2026-10-08T10:05:41.471466+00:00",
+  "original_metadata_deadline_utc": "2026-10-08T10:08:41.471466+00:00",
+  "quality_substantive_completed_utc": "2026-10-08T10:02:18.2474000+00:00",
+  "guard_substantive_completed_utc": "2026-10-08T10:05:19.6060634+00:00",
+  "terminal_decisions": {
+    "raw85_quick_quality": "ACCEPT_SEMANTICS_ONLY",
+    "proposed_guards_r2": "REQUEST_CHANGES",
+    "proposed_guards_linux_r4_windows_r4": "REQUEST_CHANGES",
+    "method_template_r2": "CONDITIONAL_TWO_SUPPORTED_COMMAND_SCOPE_ONLY",
+    "native": "NOT_EXECUTED_NOT_ADMITTED",
+    "installed_gameplay_or_World": "NOT_QUALIFIED"
+  },
+  "source_admission_sha256": "e56d6dbef06f431b68410b623f0228e6477acd765ae3bb83a15e0ac471594bd3",
+  "artifacts": [
+    {
+      "path": "quality-review-r1.json",
+      "sha256": "a06050011e9296c3aa9f87bc9c37a4a1a64798c96f99cf3fb0624902470e01c7",
+      "bytes": 88136
+    },
+    {
+      "path": "quality-evidence-r1.json",
+      "sha256": "325c4615ce8cd505d3e58eb7ad2209754a05dc6273efe035480bb01083bb8427",
+      "bytes": 186115
+    },
+    {
+      "path": "runner-review-r1.json",
+      "sha256": "fa95fc0ef24717ae2e4ee37d25e2d613a3749d8d1428d66752a9341d025d6dd8",
+      "bytes": 1408
+    },
+    {
+      "path": "runner-review-r2.json",
+      "sha256": "ecd9d75be1536b5d310de114a3df642c35e36f0d271a000f4cc07b7d62994378",
+      "bytes": 3759
+    }
+  ],
+  "metadata_verification": "Own artifacts parsed as UTF8/LF JSON;85 unique current candidate IDs and evidence hash exact. No substantive review after cutoff, no native/test/operator/setup or protected input mutations.",
+  "source_peak_RSS": "unmeasured; no source memory-cap qualification",
+  "clocks": "Original phase closed; no renewal, reset or reclassification of old failures. New narrow source-repair phase requires its own honest recorded scope/admission."
+}

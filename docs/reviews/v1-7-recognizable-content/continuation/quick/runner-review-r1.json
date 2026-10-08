@@ -1,0 +1,19 @@
+{
+  "schema": "v1-7-quick-runner-source-review-v1",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "REQUEST_CHANGES",
+  "reviewed_at_utc": "2026-10-08T10:02:18.2474000+00:00",
+  "scope": "Exact R2 source only; no operator execution",
+  "bindings": {
+    "linux_guard_r2": "90699246b8c82309f74560f83852ced9a8ac432e889337796eef2e0e39ba1b72",
+    "windows_driver_r2": "01cf9027fe8d016517204d8e043e6cdaf341377eea4e077024b91f425ee2b54c"
+  },
+  "findings": [
+    "Linux SIGTERM/INT lacks cooperative owned-group cleanup; initial=None Popen-acquisition gap refuses cleanup. Carrier-only Windows fallback cannot prove Linux absence.",
+    "Windows rglob/is_file counter suppresses enumeration/stat errors; final growth is recorded without an asserted terminal cap and publication reserve.",
+    "Assertions can disappear under optimization; reject optimized interpreter and PYTHONOPTIMIZE before side effects.",
+    "Admission checks precede full hash sweeps and need fresh immediate prelaunch and publication deadline/resource checks, including monotonic binding to original clock.",
+    "Driver and guard independently reread an unpinned mutable spec; bind exact externally supplied spec SHA and recheck before launch/after. Exact two-step allowlist requires separate final template/spec review."
+  ],
+  "repairs": "Parent appended new revisions, unexecuted and not accepted by this original R2 review."
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "v1-7-quick-runner-source-review-v1",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "REQUEST_CHANGES",
+  "substantive_completed_at_utc": "2026-10-08T10:05:19.6060634+00:00",
+  "original_cutoff_utc": "2026-10-08T10:05:41.471466+00:00",
+  "original_deadline_utc": "2026-10-08T10:08:41.471466+00:00",
+  "bindings": {
+    "linux_guard_r4": "608ea768c2ca1ce3144f62fac53b9aada9554671a99f907bfad837ba92e7dae0",
+    "windows_driver_r4": "4a668f7829c62a1550bb4098735e404982eec19e8bed8bbbf83e4396c71481c2",
+    "template_r2": "fa3ac34b21e6f90cd1c799faf1ffa0c2fd168fb895ca6641c51996b8dd9b57b2",
+    "bindings_packet_r1": "6a56bbbf733cf53cb5c904252b6158436908d2e9caa6cd85bc9089fab630623f"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": 1,
+      "file": "S/probe/linux-guard-r4.py",
+      "lines": [
+        26,
+        27,
+        57,
+        58,
+        30,
+        34,
+        42
+      ],
+      "problem": "Raising from async TERM/INT can interrupt a successful Popen before child or pgid registration. Cleanup then returns for child=None or cannot address the owned group for pgid=None. A further signal can interrupt cleanup itself.",
+      "required_change": "Flag-only catchable-signal handler. Check flag at ordinary prelaunch/loop/pre-completion guards; never raise inside async handler. Retain flags during bounded cleanup and publish confirmed or uncertain absence without a PASS on pending signal."
+    },
+    {
+      "id": "F2",
+      "priority": 1,
+      "file": "S/probe/windows-driver-r4.py",
+      "lines": [
+        52,
+        53,
+        55,
+        58,
+        60,
+        115,
+        117,
+        129
+      ],
+      "problem": "Fresh resources checks existing files only. Unbounded state and temporary-image publication can cross growth or disk caps before the post-check; initial RUNNING publication also precedes admission.",
+      "required_change": "Bound encoded state bytes and reserve peak new publication bytes against unchanged growth/disk floors before every owned publication, including retained temporary/failure images. Make initial admission precede publication; postchecks and failed/uncertain status remain mandatory."
+    }
+  ],
+  "accepted_repairs": [
+    "Exact spec read/parse binding and pre/post SHA checks; 1200-second original wall/monotonic clock and immediate prelaunch recheck.",
+    "Explicit ordinary nonoptimized interpreter refusal.",
+    "Failclosed whole R/S fresh scandir/stat accounting; required host carrier RSS while alive; parent-inclusive aggregate scope remains explicit.",
+    "Required all85 exact candidate IDs/role/hash identities and all110 runtime LIST/9 source bindings are checked."
+  ],
+  "template_scope": {
+    "verdict": "ACCEPT_TWO_STEP_SCOPE_ONLY_PENDING_METHOD_REPAIR_AND_FRESH_FINAL_SPEC",
+    "steps": 2,
+    "only_calls": "supported quick proposal then supported quick audit",
+    "all416_restored_stage_files_in_both439_protected_maps": true,
+    "all110_runtime_and9_source_expectations_match_exact_bindings_packet": true,
+    "fresh_outputs": "S/quick-refresh-r1/proposal.json and audit.json",
+    "actual_reviewers": [
+      "/root/qualification_ledger",
+      "/root/continuation_audit"
+    ],
+    "final_spec": "Still unadmitted. Actual finished-review hashes/current pins, accepted repaired-method receipt, fresh resource baseline/start/deadline/launcher PID and externally supplied exact spec SHA require final independent review."
+  },
+  "scope_limits": {
+    "source_only": true,
+    "native_execution": false,
+    "source_RSS": "unmeasured",
+    "installed_or_World_qualification": false,
+    "old_rejected_sources_preserved": true,
+    "quality_review_independent": "a06050011e9296c3aa9f87bc9c37a4a1a64798c96f99cf3fb0624902470e01c7"
+  }
+}
