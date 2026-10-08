@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-08 — GUI original React GEN16/78/build PASS; complete894=883PASS/11FAIL,0skip/retry (original654PASS). Reviewed Perechi focus/test repairs integrated, NOTRUN. Guarded202-site CSP proposal preserved UNAPPLIED; two-owner Motion regression PASS. [Proof](reviews/gui-original-prerequisites/README.md). Original114111gz>40960; M0/M1/device/UI adoption unqualified.
+Last verified: 2026-10-08 — GUI clean b63 original GEN: Node2/build/sealed16/78/receipt PASS;900 discovered, exact+6 reviewed. Complete900 NOTRUN. Prior894=883PASS/11FAIL,0skip/retry; original654PASS. Reviewed focus/helper fixes await full execution. [Proof](reviews/gui-original-prerequisites/README.md). Original114111gz>40960; M0/M1/device/UI adoption unqualified.
 
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
