@@ -3,7 +3,7 @@ silent: true
 tasks:
   kit-config:
     cmds:
-      - node --input-type=module -e 'process.stdout.write("{\"role\":\"consumer\",\"app\":\"cat_de_roman_esti\",\"npm_dir\":\"tools/gui-bootstrap-webkit\",\"vendor_dir\":\"frontend/vendor\",\"go_dirs\":[\"go-backend\"]}")'
+      - node --input-type=module -e 'process.stdout.write("{\"role\":\"consumer\",\"app\":\"cat_de_roman_esti\",\"npm_dir\":\"frontend/node_modules/@roedu/web-kit\",\"vendor_dir\":\"frontend/vendor\",\"go_dirs\":[\"go-backend\"],\"ui_adoption\":{\"mode\":\"staged-react\",\"until\":\"S1-M2\",\"legacy\":{\"version\":\"0.3.0\",\"archive_sha256\":\"1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244\",\"source_sha\":\"45edcf2ce170c112621c73609e6e169633eb38a8\",\"receipt\":\"docs/reviews/gui-original-react/receipt.json\",\"receipt_sha256\":\"5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58\"}}}")'
   setup:
     cmds:
       - node scripts/gui-repo-hook.mjs setup '{{.INVOCATION}}'
