@@ -1,0 +1,74 @@
+{
+  "scope": "Actual current independent Django1207 expected-response capture with pinned-built Go comparison; no TCP/browser/static/device/full release qualification",
+  "source": "b9ad2ed7351a3d96fe8abf50a3110fde2b374fe5",
+  "argv": [
+    "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+    "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/source6-independent-http-capture-20261009/capture_source6_gui.py",
+    "--binary",
+    "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/source6-native-operators-20261009/bin/cat-server-source6-gui-requalification",
+    "--runtime",
+    "go"
+  ],
+  "environmentFixedFlags": {
+    "PYTHONPATH": "/home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-prerequisites-linux",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "CAT_ACCOUNTS_ENABLED": "0",
+    "CAT_SUBMISSIONS_ENABLED": "0",
+    "CAT_DEBUG": "1",
+    "DJANGO_SETTINGS_MODULE": "cat_de_roman_esti.web.settings",
+    "CAT_ALLOWED_HOSTS": "testserver,example.com",
+    "CAT_SESSION_TTL_SECONDS": "7200",
+    "CAT_MAX_SESSIONS_PER_GAME": "1000",
+    "CAT_MAX_REQUEST_BYTES": "65536"
+  },
+  "inheritedEnvironmentNames": [
+    "HOME",
+    "PATH",
+    "LANG",
+    "LC_ALL"
+  ],
+  "noPythonOptimize": true,
+  "goMaxProcs": 2,
+  "cpuAffinity": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "started": "2026-10-08T22:27:26.877457+00:00",
+  "finished": "2026-10-08T22:27:30.673144+00:00",
+  "elapsedSeconds": 3.7956879459998163,
+  "producerExit": 0,
+  "nativeChildExit": "producer asserted actual exit0",
+  "failure": null,
+  "sampledProcessGroupPeakRSSBytes": 192925696,
+  "maxProcessGroupMembersObserved": 2,
+  "rssSampleSeconds": 0.1,
+  "rssLimitBytes": 2147483648,
+  "wallLimitSeconds": 1200,
+  "readsetRows": 7538,
+  "sourceByteModesUnchanged": true,
+  "sourceMutations": [],
+  "binaryBeforeAfterSha256": "d769ad01bc6ba268864b08946c7ee5840e4d4eadbc70953783398330a8df9adc",
+  "producerSha256": "a7a99163e6c1a7d81b3920d16ff748f129e48ee7046ff4560e1236561772e2d0",
+  "stdoutStderrSha256": "eb5b6b57a157d00faa8c63f67b96400d306c2d852d414b040ac8a7d1de2c30d0",
+  "corpus": {
+    "path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/source6-independent-http-capture-20261009/outputs/python-http-parity-source6-gui-requalification.json.gz",
+    "gzipSha256": "0437c53b91b07d7c4323a7c66753d7250d9304b6a32f94f03901285e64c21951",
+    "gzipBytes": 33969,
+    "rawBytes": 696410,
+    "cases": 1207,
+    "sources": {
+      "alchimie_discovery_world_v92.json": "572882a77dbdd8bac63ca69c64c6990a1601a49551693cf1b1b5fcb7a81861de",
+      "alchimie_recipe_extensions_v92.json": "eeb7eede9009f09a7d9df012c7addb9f26b1b484040eb31c44ba2e6f7f35cee8",
+      "board_rankings_v37.json": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+      "derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+      "games_pack.json": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "kg_sample.json": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+      "quick_games_v92.json": "234305a844033cff0914a5213f6c0b8dcd1b21918d57cc851780259c9e87ee59",
+      "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    },
+    "reference": "Independent current Django TestClient responses; Source6 GUI runtime metadata successor at source b9ad2ed7351a3d96fe8abf50a3110fde2b374fe5; authoredSource6 a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611 unchanged; actual native-export bundle a220c22ec948e0738fa34d614fa033d715aee10a9ebf18369691f1dbe1166a4a; compared with actual pinned-Go-built replay binary d769ad01bc6ba268864b08946c7ee5840e4d4eadbc70953783398330a8df9adc; original producer 76cbc80cbd9b93bfdd07dea6709e59371858fc936fd2539d3395fbc1c1633e5d retained; capture alone confers no current installed authority, frontend/image/device/full qualification or release approval"
+  }
+}

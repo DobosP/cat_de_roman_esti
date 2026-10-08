@@ -1,0 +1,69 @@
+import pathlib,json,hashlib,subprocess,datetime,time,os,signal,gzip
+b=pathlib.Path(__file__).resolve().parent
+r=pathlib.Path("/home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-prerequisites-linux")
+prep=json.loads((b/"current-preparation.json").read_text())
+def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+assert digest(b/"capture_source6_gui.py")==prep["adaptedProducerSha256"]
+assert digest(pathlib.Path(prep["binaryPath"]))==prep["binarySha256"]
+assert subprocess.check_output(["git","rev-parse","HEAD"],cwd=r,text=True).strip()==prep["sourceCommit"]
+assert subprocess.check_output(["git","status","--porcelain=v1"],cwd=r)==b""
+paths=[x for x in subprocess.check_output(["git","ls-files","-z"],cwd=r).decode().split("\0") if x]
+before={x:{"sha256":digest(r/x),"mode":(r/x).stat().st_mode&0o777} for x in paths}
+(b/"source-before.json").write_text(json.dumps(before,indent=2)+"\n")
+for rel,sha in prep["currentPythonSources"].items():assert digest(r/rel)==sha
+assert not pathlib.Path(prep["output"]).exists()
+env={k:os.environ[k] for k in ("HOME","PATH","LANG","LC_ALL","TZ") if k in os.environ}
+env.update(prep["plannedFlags"])
+env["GOMAXPROCS"]="2"
+assert "PYTHONOPTIMIZE" not in env and all(k not in env for k in ("DATABASE_URL","CAT_DATABASE_URL","CAT_KG_FIXTURE","CAT_GAMES_PACK","CAT_BOARD_RANKINGS"))
+args=[prep["documentedInterpreter"],str(b/"capture_source6_gui.py"),"--binary",prep["binaryPath"],"--runtime","go"]
+cores=sorted(os.sched_getaffinity(0))[:4]
+def bounded_child():os.sched_setaffinity(0,cores)
+start=datetime.datetime.now(datetime.timezone.utc).isoformat();clock=time.monotonic();peak=0;maxmembers=0;failure=None
+with (b/"capture.stdout-stderr.log").open("wb") as log:
+ proc=subprocess.Popen(args,cwd=r,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True,preexec_fn=bounded_child)
+ group=proc.pid
+ while proc.poll() is None:
+  rss=0;members=0
+  for q in pathlib.Path("/proc").iterdir():
+   if not q.name.isdigit():continue
+   try:
+    s=(q/"stat").read_text();f=s[s.rfind(")")+2:].split()
+    if int(f[2])==group:rss+=int(f[21])*os.sysconf("SC_PAGE_SIZE");members+=1
+   except (FileNotFoundError,ProcessLookupError,PermissionError,ValueError,IndexError):pass
+  peak=max(peak,rss);maxmembers=max(maxmembers,members)
+  if time.monotonic()-clock>1200:failure="nonrenewable wall limit"
+  if rss>2147483648:failure="sampled aggregate process-group RSS limit"
+  output=pathlib.Path(prep["output"])
+  if output.exists() and output.stat().st_size>33554432:failure="compressed corpus byte limit"
+  if failure:
+   os.killpg(group,signal.SIGTERM)
+   try:proc.wait(timeout=10)
+   except subprocess.TimeoutExpired:os.killpg(group,signal.SIGKILL);proc.wait(timeout=10)
+   break
+  time.sleep(.1)
+ rc=proc.wait()
+try:os.killpg(group,0)
+except ProcessLookupError:pass
+else:
+ failure=failure or "surviving process-group member"
+ os.killpg(group,signal.SIGKILL)
+mutations=[]
+for rel,row in before.items():
+ p=r/rel
+ if not p.is_file() or digest(p)!=row["sha256"] or p.stat().st_mode&0o777!=row["mode"]:mutations.append(rel)
+source_clean=subprocess.check_output(["git","status","--porcelain=v1"],cwd=r)==b"" and subprocess.check_output(["git","rev-parse","HEAD"],cwd=r,text=True).strip()==prep["sourceCommit"]
+if mutations or not source_clean:failure=failure or "source mutation"
+if digest(pathlib.Path(prep["binaryPath"]))!=prep["binarySha256"]:failure=failure or "binary mutation"
+corpus={}
+if rc==0 and not failure:
+ p=pathlib.Path(prep["output"])
+ with gzip.open(p,"rb") as z:raw=z.read(33554433)
+ assert len(raw)<=33554432
+ doc=json.loads(raw);assert doc["schema_version"]==1 and len(doc["cases"])==1207 and doc["sources"]==prep["source8"] and len(doc["sources"])==8
+ corpus={"path":str(p),"gzipSha256":digest(p),"gzipBytes":p.stat().st_size,"rawBytes":len(raw),"cases":len(doc["cases"]),"sources":doc["sources"],"reference":doc["reference"]}
+receipt={"scope":"Actual current independent Django1207 expected-response capture with pinned-built Go comparison; no TCP/browser/static/device/full release qualification","source":prep["sourceCommit"],"argv":args,"environmentFixedFlags":prep["plannedFlags"],"inheritedEnvironmentNames":[k for k in ("HOME","PATH","LANG","LC_ALL","TZ") if k in env],"noPythonOptimize":True,"goMaxProcs":2,"cpuAffinity":cores,"started":start,"finished":datetime.datetime.now(datetime.timezone.utc).isoformat(),"elapsedSeconds":time.monotonic()-clock,"producerExit":rc,"nativeChildExit":"producer asserted actual exit0" if rc==0 else "not accepted","failure":failure,"sampledProcessGroupPeakRSSBytes":peak,"maxProcessGroupMembersObserved":maxmembers,"rssSampleSeconds":.1,"rssLimitBytes":2147483648,"wallLimitSeconds":1200,"readsetRows":len(before),"sourceByteModesUnchanged":not mutations and source_clean,"sourceMutations":mutations,"binaryBeforeAfterSha256":prep["binarySha256"],"producerSha256":prep["adaptedProducerSha256"],"stdoutStderrSha256":digest(b/"capture.stdout-stderr.log"),"corpus":corpus}
+(b/"execution.json").write_text(json.dumps(receipt,indent=2)+"\n")
+print(json.dumps({k:v for k,v in receipt.items() if k not in ("corpus","environmentFixedFlags","argv")},indent=2))
+print(json.dumps(corpus,indent=2))
+raise SystemExit(0 if rc==0 and not failure and corpus else 1)
