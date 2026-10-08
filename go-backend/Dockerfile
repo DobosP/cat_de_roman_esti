@@ -1,8 +1,7 @@
 # syntax=docker/dockerfile:1
 # Standalone Go recipe, built from repository root with actual SHA/tree build arguments.
 # Fresh managed assets and identity are identical to the GUI build prerequisites.
-# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this selected Node tag's actual digest.
-FROM node:26.10.0-bookworm-slim AS frontend
+FROM node:26.10.0-bookworm-slim@sha256:cfa005801786b8e38fa220af518e43f5654c53b36af36b4ad5b3049225ee261e AS frontend
 WORKDIR /build
 COPY versions.lock.json /build/versions.lock.json
 RUN npm install --global npm@12.2.0
@@ -19,8 +18,7 @@ RUN cd frontend && npm run build
 # Owning sync verifies the actual manifest/assets and exact frozen original30.
 RUN node scripts/gui-assets.mjs sync
 
-# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this retained Go flavour's actual digest.
-FROM golang:1.27.1-bookworm AS backend
+FROM golang:1.27.1-bookworm@sha256:e114385c58e7280d2f56d6cf374219dda33fef8eb77f72e9f290ccae6160bd90 AS backend
 ARG GATE_SHA
 ARG GATE_TREE_SHA256
 ENV GOTOOLCHAIN=local
@@ -38,8 +36,7 @@ RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-content export --root .. --check
 RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-gui-build --root .. --sha "$GATE_SHA" --tree-sha256 "$GATE_TREE_SHA256" \
     && CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 go build -trimpath -ldflags="-s -w" -o /out/cat-server ./cmd/cat-server
 
-# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this retained runtime tag's actual digest.
-FROM debian:bookworm-slim AS runtime
+FROM debian:bookworm-slim@sha256:a4672c0cb26fbdde88e38fa2dfb6c681942306680e41e4378b28770b6e79ee91 AS runtime
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl libpcre2-8-0 \
     && rm -rf /var/lib/apt/lists/* \

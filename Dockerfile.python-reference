@@ -2,8 +2,7 @@
 # Optional Python 3.12 reference / dormant accounts staging only.
 # Keep its constrained Python dependencies and historical filesystem SPA boundary.
 # Source proposal only; reference runtime image digest/qualification remain parent-owned.
-# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this selected Node tag's actual digest.
-FROM node:26.10.0-bookworm-slim AS frontend
+FROM node:26.10.0-bookworm-slim@sha256:cfa005801786b8e38fa220af518e43f5654c53b36af36b4ad5b3049225ee261e AS frontend
 WORKDIR /build
 COPY versions.lock.json /build/versions.lock.json
 RUN npm install --global npm@12.2.0
@@ -18,8 +17,7 @@ RUN cd frontend && npm run build \
     && test -f /build/frontend/dist/.vite/manifest.json \
     && ls /build/frontend/dist/assets/*.js >/dev/null
 
-# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this reference tag's actual digest.
-FROM python:3.12-slim AS runtime
+FROM python:3.12-slim@sha256:2b4f19dae3a777dfc3b76730bda1e82e1f66ab2a2686fa93ca78edbfb4f04ffe AS runtime
 
 # - PYTHONDONTWRITEBYTECODE: no .pyc clutter in the image
 # - PYTHONUNBUFFERED: logs flush immediately (good for `docker logs`)

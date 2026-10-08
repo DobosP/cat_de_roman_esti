@@ -797,6 +797,76 @@
       "date": "2026-10-08",
       "notes": "existing owning authcore direct module pin; authcore unit race/vet earned separately, no auth behavior change; owner registration preserves actual existing selected source, no dependency downgrade or runtime/auth behavior change.",
       "source": "https://proxy.golang.org/golang.org/x/oauth2/@v/v0.37.0.info"
+    },
+    {
+      "tool": "cat-node-bookworm",
+      "kind": "image",
+      "scope": "app",
+      "apps": [
+        "cat_de_roman_esti"
+      ],
+      "version": "node:26.10.0-bookworm-slim",
+      "image": "node:26.10.0-bookworm-slim",
+      "digest": "sha256:cfa005801786b8e38fa220af518e43f5654c53b36af36b4ad5b3049225ee261e",
+      "date": "2026-10-08",
+      "source": "https://registry-1.docker.io/v2/library/node/manifests/sha256:cfa005801786b8e38fa220af518e43f5654c53b36af36b4ad5b3049225ee261e",
+      "notes": "Actual public linux/amd64 manifest resolved in pinned native owner shell; index/body hashes retained. Digest identity only, not runtime/deploy compatibility qualification."
+    },
+    {
+      "tool": "cat-golang-bookworm",
+      "kind": "image",
+      "scope": "app",
+      "apps": [
+        "cat_de_roman_esti"
+      ],
+      "version": "golang:1.27.1-bookworm",
+      "image": "golang:1.27.1-bookworm",
+      "digest": "sha256:e114385c58e7280d2f56d6cf374219dda33fef8eb77f72e9f290ccae6160bd90",
+      "date": "2026-10-08",
+      "source": "https://registry-1.docker.io/v2/library/golang/manifests/sha256:e114385c58e7280d2f56d6cf374219dda33fef8eb77f72e9f290ccae6160bd90",
+      "notes": "Actual public linux/amd64 manifest resolved in pinned native owner shell; index/body hashes retained. Digest identity only, not runtime/deploy compatibility qualification."
+    },
+    {
+      "tool": "cat-debian-bookworm",
+      "kind": "image",
+      "scope": "app",
+      "apps": [
+        "cat_de_roman_esti"
+      ],
+      "version": "debian:bookworm-slim",
+      "image": "debian:bookworm-slim",
+      "digest": "sha256:a4672c0cb26fbdde88e38fa2dfb6c681942306680e41e4378b28770b6e79ee91",
+      "date": "2026-10-08",
+      "source": "https://registry-1.docker.io/v2/library/debian/manifests/sha256:a4672c0cb26fbdde88e38fa2dfb6c681942306680e41e4378b28770b6e79ee91",
+      "notes": "Actual public linux/amd64 manifest resolved in pinned native owner shell; index/body hashes retained. Digest identity only, not runtime/deploy compatibility qualification."
+    },
+    {
+      "tool": "cat-python-reference",
+      "kind": "image",
+      "scope": "app",
+      "apps": [
+        "cat_de_roman_esti"
+      ],
+      "version": "python:3.12-slim",
+      "image": "python:3.12-slim",
+      "digest": "sha256:2b4f19dae3a777dfc3b76730bda1e82e1f66ab2a2686fa93ca78edbfb4f04ffe",
+      "date": "2026-10-08",
+      "source": "https://registry-1.docker.io/v2/library/python/manifests/sha256:2b4f19dae3a777dfc3b76730bda1e82e1f66ab2a2686fa93ca78edbfb4f04ffe",
+      "notes": "Actual public linux/amd64 manifest resolved in pinned native owner shell; index/body hashes retained. Digest identity only, not runtime/deploy compatibility qualification."
+    },
+    {
+      "tool": "cat-rust-bookworm",
+      "kind": "image",
+      "scope": "app",
+      "apps": [
+        "cat_de_roman_esti"
+      ],
+      "version": "rust:1.98.1-bookworm",
+      "image": "rust:1.98.1-bookworm",
+      "digest": "sha256:c49256cbe5ea0188bc658a689500d70c41eb51f009a7a7be209caf60a944f3ec",
+      "date": "2026-10-08",
+      "source": "https://registry-1.docker.io/v2/library/rust/manifests/sha256:c49256cbe5ea0188bc658a689500d70c41eb51f009a7a7be209caf60a944f3ec",
+      "notes": "Actual public linux/amd64 manifest resolved in pinned native owner shell; index/body hashes retained. Digest identity only, not runtime/deploy compatibility qualification."
     }
   ],
   "toolchain_image": {

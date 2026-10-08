@@ -1,8 +1,7 @@
 # syntax=docker/dockerfile:1
 # Optional Rust 1.98.1 reference, built from repository root.
 # Keep its locked Rust build and filesystem SPA boundary; do not activate it as default.
-# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this selected Node tag's actual digest.
-FROM node:26.10.0-bookworm-slim AS frontend
+FROM node:26.10.0-bookworm-slim@sha256:cfa005801786b8e38fa220af518e43f5654c53b36af36b4ad5b3049225ee261e AS frontend
 WORKDIR /build
 COPY versions.lock.json /build/versions.lock.json
 RUN npm install --global npm@12.2.0
@@ -17,8 +16,7 @@ RUN cd frontend && npm run build \
     && test -f /build/frontend/dist/.vite/manifest.json \
     && ls /build/frontend/dist/assets/*.js >/dev/null
 
-# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this reference tag's actual digest.
-FROM rust:1.98.1-bookworm AS build
+FROM rust:1.98.1-bookworm@sha256:c49256cbe5ea0188bc658a689500d70c41eb51f009a7a7be209caf60a944f3ec AS build
 WORKDIR /build
 # Rust embeds the same reviewed export and Unicode-decimal table as Go.
 COPY go-backend/ ./go-backend/
@@ -26,8 +24,7 @@ COPY rust-backend/ ./rust-backend/
 WORKDIR /build/rust-backend
 RUN cargo build --locked --release --bin cat-rust-server
 
-# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this retained runtime tag's actual digest.
-FROM debian:bookworm-slim AS runtime
+FROM debian:bookworm-slim@sha256:a4672c0cb26fbdde88e38fa2dfb6c681942306680e41e4378b28770b6e79ee91 AS runtime
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl \
     && rm -rf /var/lib/apt/lists/* \
