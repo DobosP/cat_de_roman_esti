@@ -1,0 +1,97 @@
+{
+  "kind": "v1-7-authority-pin-continuation-checkpoint-v1",
+  "publisher": "/root",
+  "utc": "2026-10-08T12:27:00.018356+00:00",
+  "parent_task_head": "000ca949ca6a53a888e4b06060473fbfccbbcdbd",
+  "main_head": "59a9a568c445654f69215d735091c9b3e0405831",
+  "version_status": "V1.7 UNINSTALLED; live R/P Source6",
+  "previous_checkpoint": {
+    "path": "checkpoint-r3.json",
+    "sha256": "2fccca537e2018b4c533e4a11f4d290f156ba70635602bd5efdf8412c4ff3496"
+  },
+  "proposal_sha256": "1b2886d697c19c43320d59f639084bb0d376b19a08aba765fbedacaa00889c11",
+  "actual_applied_receipt_sha256": "029663d167a9661e1913874d851e82529e1bea6ee8764c02e07b1b752452e8c5",
+  "actual_stage_go": {
+    "kind": "staged-go-authority-pin-apply-receipt-v1",
+    "publisher": "/root",
+    "utc": "2026-10-08T12:25:40.494709+00:00",
+    "proposal_sha256": "1b2886d697c19c43320d59f639084bb0d376b19a08aba765fbedacaa00889c11",
+    "method_sha256": "6065ac0bf266b1870d40fb8ba85a59d0aa0b7a01a0920445d8befd58fbec8314",
+    "reviews": [
+      {
+        "filename": "factual-pin-review-r1.json",
+        "sha256": "dc77e015a02ec7237206997c681ac6aa1cec23a48248e02d7ff734ec92fdb5d0",
+        "reviewer": "/root/qualification_ledger"
+      },
+      {
+        "filename": "quality-pin-review-r1.json",
+        "sha256": "2250bda962c913beb2c51c4693022fee98aec2c9cea4bbd5c49fc332f0843cdc",
+        "reviewer": "/root/continuation_audit"
+      }
+    ],
+    "target": "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7-qualification\\source7-stage\\go-backend\\internal\\contentbuild\\build.go",
+    "before_sha256": "209f99fcda54dc7f2af2affb8bd188605db4e738c32fb1330f8c1fc3216f6cd5",
+    "after_sha256": "ff37e94809457aefe515810122905ce91fd0c728204e2247a2c80b37bd8a71b3",
+    "stage_regular_files": 416,
+    "unchanged_other_stage_files": 415,
+    "complete_namespace_exact": true,
+    "protected_source_history_and_live_python_exact": true,
+    "live_R_P_Source6": true,
+    "Python_changes": "prospective only; not installed",
+    "native_executed": false,
+    "version_qualified": false,
+    "source_rss": "unmeasured"
+  },
+  "factual_review": {
+    "reviewer": "/root/qualification_ledger",
+    "sha256": "dc77e015a02ec7237206997c681ac6aa1cec23a48248e02d7ff734ec92fdb5d0"
+  },
+  "quality_review": {
+    "reviewer": "/root/continuation_audit",
+    "sha256": "2250bda962c913beb2c51c4693022fee98aec2c9cea4bbd5c49fc332f0843cdc"
+  },
+  "method": {
+    "r1": "UNEXECUTED_REQUEST_CHANGES: optimized Python disables assert guards; original bytes and genuine refusal preserved",
+    "r1_sha256": "b81628e6dde5efe15fbb8adb9c6fcdef93290de2781d149177e91fb3e146d088",
+    "r2_sha256": "6065ac0bf266b1870d40fb8ba85a59d0aa0b7a01a0920445d8befd58fbec8314",
+    "r2_repair": "Explicit optimization refusal before all side effects; post-validation cutoff. Exact atomic single-file replacement/full416namespace and protected guards unchanged."
+  },
+  "catalogues": {
+    "derived": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+    "derived_boards": 336,
+    "derived_board_payloads": "All336 preserved exactly from qualified Source6; only KG/rankings metadata changed; historical generator/archive provenance independently verified, not fresh qualification",
+    "quick": "26b7dc0e7a4db0cd665c2593d86e55b2d5edff98f478374e0a8f3917e320512a",
+    "quick_boards": 85,
+    "reserve": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+  },
+  "Python_source": {
+    "derived_before": "3852e468567e680d66258a5d1b326bac134c7fcc15ed14b8c4ce45e9e51fe7a0",
+    "derived_proposed": "f79956b0e88523e2d79b916daf7b04747d6310cb62291644feeb6bc1c0f44be1",
+    "quick_before": "00a5da384b74d856e16955dd02e515b23902aa754ea13bd673a46219843e4a2d",
+    "quick_proposed": "2611de390e31260e35d47d98d473a953ba8891e4e21486c675d2b931526334d4",
+    "applied": false,
+    "condition": "Install only consistently with reviewed supported Source7 live graph/catalogue transition; do not mix live Source6 data with proposed Source7 pins"
+  },
+  "native": {
+    "run_in_this_phase": false,
+    "old_cat_content_rail_sha256": "53c844a6dacb270803eaebd7bed831a229b630f309662b05ab8cbccb0e432915",
+    "old_binary": "Preserved; now compiled with predecessor Go source authority. Fresh affected tool build required for changed staged Go code, do not reuse old tool as current authority.",
+    "old_a215_audit": "Predecessor Quick and now predecessor Go source bound history, not current runtime/source acceptance",
+    "previous_failed_campaign": "FAILED remains; no clock reset or Quick/World replay"
+  },
+  "next_action": "Separately source/native admit reviewed fresh affected cat-content-rail/cat-content tool builds using preserved qualified Go1.27.1 SDK with owned cache/temp/module accounting and unchanged native caps, exact fresh stage readset. Then strict Extensions fresh honest proposal/audit/original-current-role finals/guarded transaction.",
+  "remaining": [
+    "Deferred consistent Go/Python live Source7 authority/fixture transaction",
+    "Source6 frozen tests need reviewed historical routing and Source7 current authority coverage; do not rewrite old expected tuples or claim green against current mixed inputs",
+    "Supported live graph/Source7 transaction, full byte inverse/history/current export/reference/corpus bindings",
+    "Freeze final runtime/source and fresh affected installed audits/finals",
+    "All required CLI/contentrails/native/shared race-vet/HTTP/TCP/docs/whitespace and exact assembled acceptance before green local landing",
+    "Begin V1.8 here only after real nonempty independently accepted installed V1.7 local landing"
+  ],
+  "resources": {
+    "source_rss": "unmeasured",
+    "native_clocks_reset": false,
+    "source_admission": "authority-pins/source-admission-r1.json",
+    "scope": "Source pin changes only; no native qualification/installation/landing"
+  }
+}
