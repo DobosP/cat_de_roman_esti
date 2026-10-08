@@ -25,8 +25,9 @@ type managedSPA struct {
 // SDK status is known, without changing SDK byte/range/conditional serving.
 type managedAssetResponse struct {
 	http.ResponseWriter
-	immutable   bool
-	wroteHeader bool
+	immutable           bool
+	wroteHeader         bool
+	deferredNotModified bool
 }
 
 func (w *managedAssetResponse) WriteHeader(status int) {
@@ -43,6 +44,12 @@ func (w *managedAssetResponse) WriteHeader(status int) {
 	} else {
 		w.Header().Set("Cache-Control", "no-cache")
 	}
+	if status == http.StatusNotModified && w.Header().Get("ETag") == "" {
+		// Resolve missing SDK metadata only after its handler returns, avoiding
+		// re-entry while it is committing this conditional response.
+		w.deferredNotModified = true
+		return
+	}
 	w.ResponseWriter.WriteHeader(status)
 }
 
@@ -50,10 +57,77 @@ func (w *managedAssetResponse) Write(data []byte) (int, error) {
 	if !w.wroteHeader {
 		w.WriteHeader(http.StatusOK)
 	}
+	if w.deferredNotModified {
+		return 0, http.ErrBodyNotAllowed
+	}
 	return w.ResponseWriter.Write(data)
 }
 
 func (w *managedAssetResponse) Unwrap() http.ResponseWriter { return w.ResponseWriter }
+
+// This observer records only SDK headers/status; it never stores a body or
+// makes a network request. A nonempty body disqualifies a metadata observation.
+type managedAssetMetadata struct {
+	header      http.Header
+	status      int
+	bodyWritten bool
+}
+
+func (w *managedAssetMetadata) Header() http.Header { return w.header }
+func (w *managedAssetMetadata) WriteHeader(status int) {
+	if w.status == 0 {
+		w.status = status
+	}
+}
+func (w *managedAssetMetadata) Write(data []byte) (int, error) {
+	if w.status == 0 {
+		w.status = http.StatusOK
+	}
+	if len(data) != 0 {
+		w.bodyWritten = true
+	}
+	return len(data), nil
+}
+
+func managedAssetETag(handler http.Handler, r *http.Request) string {
+	head := r.Clone(r.Context())
+	head.Header = r.Header.Clone()
+	head.Method, head.Body, head.ContentLength, head.GetBody = http.MethodHead, http.NoBody, 0, nil
+	head.TransferEncoding, head.Trailer = nil, nil
+	for key := range head.Header {
+		for _, condition := range []string{"If-Match", "If-None-Match", "If-Modified-Since", "If-Unmodified-Since", "Range", "If-Range"} {
+			if strings.EqualFold(key, condition) {
+				delete(head.Header, key)
+			}
+		}
+	}
+	metadata := &managedAssetMetadata{header: make(http.Header)}
+	handler.ServeHTTP(metadata, head)
+	if metadata.status == 0 {
+		metadata.status = http.StatusOK
+	}
+	etag := metadata.header.Get("ETag")
+	if metadata.status != http.StatusOK || metadata.bodyWritten || len(etag) > 1024 || strings.ContainsAny(etag, "\r\n") {
+		return ""
+	}
+	return etag
+}
+
+func (w *managedAssetResponse) finish(handler http.Handler, r *http.Request) {
+	if w.deferredNotModified {
+		if w.Header().Get("ETag") == "" {
+			if etag := managedAssetETag(handler, r); etag != "" {
+				w.Header().Set("ETag", etag)
+			}
+		}
+		w.ResponseWriter.WriteHeader(http.StatusNotModified)
+		return
+	}
+	// A successful SDK HEAD can return headers without writing a status or body.
+	if !w.wroteHeader {
+		w.WriteHeader(http.StatusOK)
+	}
+}
 
 // Selection is bounded to the two compiled trees. StaticRoot remains an
 // explicit disk override for existing independent qualification tools/tests.
@@ -160,11 +234,7 @@ func (s *Server) managedWebsite(w http.ResponseWriter, r *http.Request) bool {
 			websiteHeaders(w)
 			response := &managedAssetResponse{ResponseWriter: w, immutable: immutableViteAsset.MatchString(requestPath)}
 			s.managedUI.static.ServeHTTP(response, r)
-			// A successful SDK HEAD can return headers without writing a status
-			// or body. Finalize net/http's implicit 200 only after it returns.
-			if !response.wroteHeader {
-				response.WriteHeader(http.StatusOK)
-			}
+			response.finish(s.managedUI.static, r)
 			return true
 		}
 	}

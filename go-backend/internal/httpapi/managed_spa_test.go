@@ -249,6 +249,34 @@ func TestManagedSPANonHexViteCacheUsesActualSDKStatus(t *testing.T) {
 	if conditionalResponse.Code != 304 || conditionalResponse.Body.Len() != 0 || conditionalResponse.Header().Get("ETag") != validator || conditionalResponse.Header().Get("Content-Range") != "" || conditionalResponse.Header().Get("Cache-Control") != "max-age=315360000, public, immutable" {
 		t.Fatalf("matching actual SDK validator lost conditional cache contract: %d %v", conditionalResponse.Code, conditionalResponse.Header())
 	}
+	if conditionalRequest.Method != "GET" || conditionalRequest.Header.Get("If-None-Match") != validator {
+		t.Fatal("SDK metadata observation mutated the caller's conditional request")
+	}
+	conditionalHead := httptest.NewRequest("HEAD", asset, nil)
+	conditionalHead.Header.Set("If-None-Match", validator)
+	conditionalHeadResponse := httptest.NewRecorder()
+	s.ServeHTTP(conditionalHeadResponse, conditionalHead)
+	if conditionalHeadResponse.Code != 304 || conditionalHeadResponse.Body.Len() != 0 || conditionalHeadResponse.Header().Get("ETag") != validator || conditionalHeadResponse.Header().Get("Cache-Control") != "max-age=315360000, public, immutable" {
+		t.Fatal("conditional HEAD lost the actual SDK validator or gained a body")
+	}
+	metadataRequest := httptest.NewRequest("GET", asset, nil)
+	metadataConditions := map[string]string{"If-Match": `"client-unmatched"`, "If-None-Match": `"client-unmatched"`,
+		"If-Modified-Since": "Tue, 14 Nov 2023 22:13:20 GMT", "If-Unmodified-Since": "Tue, 14 Nov 2023 22:13:20 GMT",
+		"Range": "bytes=999999-", "If-Range": `"client-unmatched"`}
+	for key, value := range metadataConditions {
+		metadataRequest.Header.Set(key, value)
+	}
+	if etag := managedAssetETag(s.managedUI.static, metadataRequest); etag != validator {
+		t.Fatal("metadata observation echoed a caller validator instead of the SDK representation validator")
+	}
+	for key, value := range metadataConditions {
+		if metadataRequest.Header.Get(key) != value {
+			t.Fatal("metadata observation changed caller conditions")
+		}
+	}
+	if metadataRequest.Method != "GET" || metadataRequest.URL.Path != asset {
+		t.Fatal("metadata observation changed caller method or URL")
+	}
 	conditionalRequest = httptest.NewRequest("GET", asset, nil)
 	conditionalRequest.Header.Set("If-None-Match", `"cat-unmatched-validator"`)
 	conditionalResponse = httptest.NewRecorder()

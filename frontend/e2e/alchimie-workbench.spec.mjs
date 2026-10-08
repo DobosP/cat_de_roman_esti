@@ -292,6 +292,11 @@ test("the anchor cancels by tapping it or Escape and removal preserves keyboard 
   const posts = combineTraffic(page, initial.game_id);
   const first = initial.inventory.find((item) => item.useful && !item.depleted);
   await ingredient(page, first.label).click();
+  const selectedAnchor = slot(page, first.label);
+  await expect(selectedAnchor).toBeVisible();
+  const selectedAnchorBounds = await selectedAnchor.boundingBox();
+  expect(selectedAnchorBounds).not.toBeNull();
+  expect(selectedAnchorBounds.height).toBeGreaterThanOrEqual(44);
   await ingredient(page, first.label).click();
   await expect(slots(page)).toHaveCount(0);
   await ingredient(page, first.label).click();

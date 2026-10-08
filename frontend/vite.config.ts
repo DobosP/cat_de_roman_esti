@@ -1,9 +1,6 @@
-import path from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { guiSdkAllocationPlugin } from "./scripts/gui-sdk-allocation-plugin.mts";
-
-const accountBarModule = path.resolve("src/components/AccountBar.tsx");
 
 // Asset sync copies this managed build into the native server's embedded tree.
 // The development proxy keeps the SPA and API on the same browser origin.
@@ -19,24 +16,7 @@ export default defineConfig({
     rolldownOptions: {
       output: {
         codeSplitting: {
-          groups: [{
-            // Coalesce only the existing static entry graph and the mandatory
-            // AccountBar static closure. Dynamic game edges remain separate.
-            name(moduleId, context) {
-              const pending = [moduleId], seen = new Set<string>();
-              while (pending.length > 0) {
-                const current = pending.pop()!;
-                if (seen.has(current)) continue;
-                seen.add(current);
-                const info = context.getModuleInfo(current);
-                if (!info) continue;
-                if (info.isEntry || current === accountBarModule) return "startup";
-                pending.push(...info.importers);
-              }
-              return null;
-            },
-            includeDependenciesRecursively: true,
-          }],
+          groups: [{ name: "startup", tags: ["$initial"] }],
         },
       },
     },

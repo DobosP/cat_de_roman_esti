@@ -102,11 +102,11 @@ try {
     const outputs = Array.isArray(generated) ? generated.flatMap((item) => item.output) : generated.output;
     assert.equal(outputs.length, 1, "Isolated allocation bundle must be one actual chunk");
     assert.equal(outputs[0].type, "chunk");
-    const observedImports = [...outputs[0].imports].sort();
+    const observedImports = [...outputs[0].imports].sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
     const imports = retain(`${label}.imports.json`, JSON.stringify(observedImports, null, 2) + "\n");
     bundles[label] = { code: outputs[0].code, imports,
       output: retain(`${label}.mjs`, outputs[0].code), logs: retain(`${label}.logs.json`, JSON.stringify(logs) + "\n") };
-    assert.deepEqual(observedImports, [tracerPath, jsxPath].sort(), "Isolated bundle bypassed the bound React observer or production JSX external");
+    assert.deepEqual(observedImports, [tracerPath, jsxPath].sort((left, right) => left < right ? -1 : left > right ? 1 : 0), "Isolated bundle bypassed the bound React observer or production JSX external");
     assert.equal(logs.length, 0, "Isolated allocation bundle emitted diagnostics");
   }
   const tracer = await import(pathToFileURL(tracerPath).href);
