@@ -1,0 +1,68 @@
+{
+  "schema": "independent-exact-checksum-pass-and-offline-failure-review-v1",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T16:27:04.909604+00:00",
+  "decision": "ACCEPT_PASSED_TWO_LINE_MUTATION_IDENTITY_AND_FAILED_OFFLINE_EVIDENCE_ONLY",
+  "source_admission_sha256": "76886260508780b8efbda96dd0b61f536827deba24c797c36d45225c1dede8ed",
+  "bindings": {
+    "ownedcache-actual-review-source-admission-r1.json": "76886260508780b8efbda96dd0b61f536827deba24c797c36d45225c1dede8ed",
+    "root-sum-xnet59-mutation-admission-r1.json": "b23b466c052368e9052342ff812f87f3458f79a680c8eaf92171fa2e296d8940",
+    "root-sum-xnet59-mutation-results-r1.json": "cb0e1b3a18a2b73ca82dc42a9f8678e869f20ae8caf195c88b9a4ee496115a44",
+    "root-sum-xnet59-mutation-r1-result.json": "138a4084cfb7e25ef187eb45bcd61dde0311defc25a09dbe4500f14f27575776",
+    "root-sum-xnet59-mutation-r1-step-0-result.json": "5ef69f9e383144649a0baf91d5eaa41743cfcbac25403679be6ed4f394237f5f",
+    "root-sum-xnet59-mutation-stop-r1.json": "aea57487b24266bd3e62744e9ca09ca5f5949ec0b257f23d7e028972f6aeb31e",
+    "ownedcache-current-rail-offline-admission-r1.json": "ceb20f3ab9d8a62a36080bd9c2da2b371347cda59382095d0430bd7756a8273c",
+    "ownedcache-current-rail-offline-results-r1.json": "28a0d1fcdaa816e0bb87fc7cce379f20c55746949edbde32f3574bf25766dca3",
+    "ownedcache-current-rail-offline-r1-result.json": "7346bccc8d2e279b3dee3239f168eb3eef5c4c8077bf2f20fd9525320cf85b14",
+    "ownedcache-current-rail-offline-r1-step-0-result.json": "58e60470852df1712143dc18a4edef0af5865e13310ab21028097d5ffc82b13f",
+    "ownedcache-current-rail-offline-stop-r1.json": "5a45651f4daf2fdca403696c6f9bbf1f3f59e65f5a78f4e34b029ab69537bdda",
+    "owned-go-cache-offline-method-review-r2.json": "3a5c25713d6e12c37908646af4ea642c7b28073341d9ad0d771d6e29c2bb7d5b",
+    "pinned-public-go-acquisition-actual-review-r2.json": "384d431f8538b1a99e3354910dd32f0feb32c669b52f92f8478305d22bdbfed1"
+  },
+  "mutation": {
+    "passed": true,
+    "before_sha256": "4428f86b6da473a933255e8994a2625d4cab9961868d0ddc562925e00ef90bd6",
+    "after_sha256": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+    "added_exact_checksum_lines": 2,
+    "other_unchanged_pins": 223,
+    "sampled_group_RSS_bytes": 11366400,
+    "full_S_R_incremental_bytes": 1750,
+    "evidence": "Passed outer/native result, direct target afterhash and exact local receipt all agree. Current afterimage is the reviewed payload, with no version/go.mod/content/GUI mutation. Source lane closed before its original reserve; original preimage remains preserved."
+  },
+  "offline_failure": {
+    "passed": false,
+    "integrity_pass": false,
+    "exit_code": 1,
+    "guard": "step-failure",
+    "exact_error": "go: github.com/jackc/pgpassfile@v1.0.0 requires\n\tgithub.com/stretchr/testify@v1.3.0: module lookup disabled by GOPROXY=off\n",
+    "build_launched": false,
+    "build_output_present": false,
+    "state": "failed/next_index1/pendingnull",
+    "known_current_pins": 231,
+    "sampled_RSS_bytes": 0,
+    "RSS_interpretation": "No positive sample; not zero process memory or whole-process qualification.",
+    "evidence": "Exact argv/receipt/log/cumulative/state/admission/baseline/deadline and pre/post readsets match. Module graph loading failed before a successful integrity result; the second current rail build command never launched. Original failed clock/prefix remain immutable and cannot be resumed/retried."
+  },
+  "cache_identity": {
+    "files_checked": 5187,
+    "regular_bytes": 175909075,
+    "all_SHA_size_safe_path_membership_exact": true,
+    "mutation_detected": false,
+    "qualification": "Accepted acquisition byte inventory remains intact; this failure proves no new extracted h1 integrity/module-graph/full build pass."
+  },
+  "findings": [
+    "All mutation224 pre/post checks and223 non-target current pins match; all offline231 pre/post/current source/scratch pins match. The independently reviewed two-line checksum change remains exact and is not rolled back or falsely treated as broader module qualification.",
+    "No network fallback, hidden consumer, version downgrade, source/pin/fixture/provider/GUI/Source7 change was performed by the failed offline lane. Failure is precise missing legacy metadata rather than a resource-floor failure.",
+    "Both lane stops preserve original deadlines/reserves/baselines; no native consumer ran after failure. Separate root/source RSS is unmeasured and no old source timing37.47046s failure or earlier failed window is reclassified.",
+    "No redundant bulk archive was created; retained exact receipts/logs/current cache inventory and producer lineage preserve the necessary evidence."
+  ],
+  "next_required_scope": "Independently source-review and freshly admit a precise PUBLIC pinned legacy metadata acquisition for actual missing module graph requirements, with committed checksum provenance and no unreviewed versions/body downloads. Then a separately justified fresh offline scope; no unchanged failed-prefix continuation.",
+  "limits": {
+    "two_checksum_mutation_identity_accepted": true,
+    "offline_integrity_module_graph_or_rail_build_pass": false,
+    "new_network_or_retry_authorized": false,
+    "Source7_currentauthority_GUI_release_or_landing_approved": false,
+    "source_worker_RSS": "unmeasured",
+    "review_operations": "Static existing source/hash/local and outer receipts/log/state/cache inventory inspection only; no imports/Go/native/network/tests/consumer execution or docs edits."
+  }
+}

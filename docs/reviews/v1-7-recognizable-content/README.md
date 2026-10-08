@@ -2,7 +2,15 @@
 
 Valid until: selected inputs, qualified baseline or human steering change — recheck before installation.
 
-## Current bounded research continuation
+## Current Linux prerequisite checkpoint
+
+The content loop is active; V1.7 remains uninstalled. Main retains Windows59a9; only the task's root go.sum gained two independently verified x/net v0.59.0 entries. [Acquisition identity review](pinned-public-go-acquisition-actual-review-r2.json) verifies all30 exact public versions and all5,187 owned cache files. [Checksum/offline method review](owned-go-cache-offline-method-review-r2.json) accepts the exact two-line change and separate offline campaign; [actual result review](ownedcache-actual-review-r1.json) confirms the passed amendment and the subsequent failure.
+
+[Offline result](ownedcache-current-rail-offline-results-r1.json) records the precise pgpassfile→testify v1.3.0 missing-metadata error with GOPROXY=off. The operator build NEVER ran. All231 input pins and all5,187 cache files remained exact; failed campaign ceb20f3a is closed. Acquisition provenance is not an integrity or full-graph availability PASS. [Original source timing failure](pinned-go-dependencies-source-stop-r1.json) remains history; the later separately admitted review does not retroactively pass it.
+
+Next independently review/acquire the six existing legacy go.mod-only records in [the manifest](pinned-go-dependencies-modules-r1.json), then admit a new offline qualification campaign. Preserve current module versions/sums, the original cache and all producer identities; do not invent body checksums or retry the unchanged failed prefix. The accepted leafă candidate and every Source7/runtime/history/full-gate/assembled landing requirement remain pending. [ADR-0185](../../adr/0185-content-loop-current-state-and-evidence-reuse.md) governs exact evidence reuse and concise continuation.
+
+## Historical Windows research continuation
 
 Human steering on2026-10-08 prioritizes V1.7 vocabulary/content research and stops session/heartbeat loops. The isolated research branch starts at ff7fb05; installed Source6 and the archived leafă Source7 checkpoint remain exact. [Tocător R2](tocator-sense-and-migration-r2.md) and its [source analysis](tocator-source-analysis-r2.json) resolve the manual-chopper counter-sense, add explicit bread-cutting evidence and compare intentional projection migration options. Only that record advances to revision2/researched; all other records and selected snapshots remain unchanged. No native play/graph/target/adoption or GUI change is claimed. [Independent factual/quality reviews](tocator-independent-reviews-r2.json) accept research only, preserve the first factual correction request and retain route-value/material-link cautions before refinement. [Source/JSON/whitespace and native documentation gates](tocator-verification-r2.json) pass. Research remains uninstalled; no migration option or target is selected.
 
