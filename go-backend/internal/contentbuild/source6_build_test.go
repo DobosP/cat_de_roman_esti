@@ -7,10 +7,11 @@ import (
 	"testing"
 )
 
-// Current Source6 coverage is separate from the immutable Source4/Source5 tests.
-// This runs the real builder using production reviewed pins and installed inputs.
+// Original Source6 coverage is separate from current-source qualification.
+// This runs the real builder against immutable inputs and test-only reviewed pins.
 func TestRebuildSource6TwoAliasReviewedBundleAndPin(t *testing.T) {
-	root := repoRoot(t)
+	root := source6HistoricalRoot(t)
+	historicalSource6ReviewedPins(t)
 	built, err := Build(root)
 	if err != nil {
 		t.Fatal(err)
