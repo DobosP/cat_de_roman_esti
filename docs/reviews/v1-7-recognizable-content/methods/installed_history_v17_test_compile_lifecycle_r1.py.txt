@@ -1,0 +1,56 @@
+"""Exact post-staging contentbuild race compilation; source-only until fresh admission.
+No temporary source injection, product changes, fallback root or test filtering.
+Root freezes the produced binary/receipt in exclusive external keepers before probes.
+"""
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+R=Path("/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7")
+S=Path("/home/dobo/work/_temp/codex__content-v1-7")
+T=S/"resume-windows-20261008"
+I=T/"source7-current-stage-r1"
+O=T/"current-source7-installed-history-tests-r1"
+D=R/"docs/reviews/v1-7-recognizable-content"
+TARGETS={'tests/content_history.py': '93a64d024bb040f493a6a6e48badb37d92977d9f16e948c26e35dc1187466253', 'tests/current_content.py': 'e1a52db24dfced32bd3ed777ca44cd7cfba37a85ade41172456658a2922860fc', 'tests/test_v1_6_content_history.py': '47a80a519db75ec3da138ae8abf791ad3d7097fb174450c944c93efb7e5dffb8', 'tests/test_v1_7_content_history.py': '5881e7768e4396a11db16582e6586dcb05dd496241d94bd234abb6774c9fcd27', 'tests/test_v50_synonyms_basic_words.py': '4afdc9c2f1ae7fab8d7df24c88643770794d9f6547ed1fd62485e2dac26e9acd', 'go-backend/internal/contentbuild/source6_build_test.go': 'a286c160e056fd45d9d6b24a537b26f13805207a7d39859c34d97a2b5563efa9', 'go-backend/internal/contentbuild/source6_context_test.go': 'b1e86a146b03332c78e17666ab964f219a7fa4a3b5a1ee8e8852e27539210662', 'go-backend/internal/contentbuild/source7_build_test.go': '080273c51ccf9592baf98515cf42faaf96ecaffe955170f3f1db7019468fd3dc'}
+MANIFESTS=(("current-source7-candidate-history-evidence-copy-manifest-r1.json","f234da34f1b2ca82254eedb98e6eca4ec112458d0d433a8b047cad5ea23e4174"),("current-source7-installed-history-additional-test-closure-r1.json","5e7ebccebfd738f9967e1fac019f3f709ecf15fae2429e03ad72194a536b4c1c"))
+def digest(path):
+ if not path.is_file() or path.is_symlink():raise ValueError("regular file required: "+str(path))
+ return hashlib.sha256(path.read_bytes()).hexdigest()
+if sys.argv != [str(Path(__file__)),"build"]:raise ValueError("exact build invocation required")
+if I.resolve(strict=True)!=I or T.resolve(strict=True)!=T:raise ValueError("actual own stage ancestors differ")
+for relative,want in TARGETS.items():
+ if digest(I/relative)!=want:raise ValueError("staged afterimage differs: "+relative)
+for name,want in MANIFESTS:
+ path=D/name
+ if digest(path)!=want:raise ValueError("immutable prerequisite manifest differs")
+ for relative,row in json.loads(path.read_bytes())["entries"].items():
+  want=row.get("source_sha256",row.get("sha256"));dest=I/relative
+  if digest(dest)!=want or dest.stat().st_size!=row["bytes"]:raise ValueError("staged prerequisite differs: "+relative)
+if O.exists() or O.is_symlink():raise ValueError("fresh output namespace required; no clobber/retry")
+O.mkdir(mode=0o700)
+(O/"tmp").mkdir(mode=0o700)
+(O/"go-tmp").mkdir(mode=0o700)
+(O/"xdg-cache").mkdir(mode=0o700)
+for path in (S/"gocache",T/"public-module-complete-cache-r1",T/"public-module-legacy-gopath-r1"):
+ if path.resolve(strict=True)!=path or not path.is_dir():raise ValueError("explicit owned cache path required")
+binary=O/"contentbuild.test"
+command=["/usr/bin/env","--chdir="+str(I/"go-backend"),"GOCACHE="+str(S/"gocache"),"GOMODCACHE="+str(T/"public-module-complete-cache-r1"),"GOPATH="+str(T/"public-module-legacy-gopath-r1"),"GOTMPDIR="+str(O/"go-tmp"),"TMPDIR="+str(O/"tmp"),"GOPROXY=off","GOSUMDB=off","GOTOOLCHAIN=local","GOWORK=off","GOMAXPROCS=2","GOFLAGS=-p=2 -mod=readonly",str(S/"tools/go/bin/go"),"test","-c","-race","-buildvcs=false","-o",str(binary),"./internal/contentbuild"]
+code=None
+failure=None
+try:
+ code=subprocess.run(command,check=False).returncode
+ if code!=0:raise RuntimeError("contentbuild race compiler returned "+str(code))
+ if not binary.is_file() or binary.is_symlink() or binary.stat().st_size>128<<20:raise RuntimeError("compiled binary missing/notregular/excess size")
+ for relative,want in TARGETS.items():
+  if digest(I/relative)!=want:raise ValueError("afterimage changed during compiler")
+except BaseException as exc:
+ failure={"type":type(exc).__name__,"message":str(exc)}
+ raise
+finally:
+ receipt={"schema":"v1-7-actual-staged-contentbuild-race-compile-v1","argv":command,"compiler_exit_code":code,"failure":failure,"binary_path":str(binary),"binary_sha256":digest(binary) if binary.is_file() and not binary.is_symlink() else None,"binary_bytes":binary.stat().st_size if binary.is_file() else None,"temporary_source_injection":False,"product_or_staged_source_modified":False,"probe_or_test_run":False,"parent_exact_native_admission_required":True}
+ raw=(json.dumps(receipt,sort_keys=True,indent=2)+"\n").encode()
+ if len(raw)>16<<10:raise RuntimeError("compile receipt exceeds bound")
+ with (O/"compile.json").open("xb") as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
