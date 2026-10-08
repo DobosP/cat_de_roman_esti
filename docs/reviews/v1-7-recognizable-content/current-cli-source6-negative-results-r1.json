@@ -1,0 +1,95 @@
+{
+  "Source6_currentauthority_or_all4_or_Source7_PASS": false,
+  "actual_output_files": {
+    "help.json": {
+      "bytes": 2833,
+      "sha256": "088edbce346ecba22c429848f5c697ba548ffb22f53b0ccf9d32224a6fc6ec15"
+    },
+    "negative.json": {
+      "bytes": 670,
+      "sha256": "6fdcd2a1699104e72cc328f5765f22ec296d88550b677b775c28ba9d11a39b20"
+    },
+    "report.json": {
+      "bytes": 3838,
+      "sha256": "b16cbeb3fe30baf748e714e6ad0e96bbc75bafe94cd77e3778e1871aaba4a728"
+    }
+  },
+  "admission_sha256": "2c4e7ae48898215bfe5553aaa0f0ba68980991d4b138aeb35a228805e7705fcb",
+  "all_nonruntime_ConfirmFinal_clauses_and_Source8_rubric_match": true,
+  "completed_at_utc": "2026-10-08T17:45:34.788317+00:00",
+  "exact_negative_stderr": "cat-content-rail: final live audit incomplete/stale/unaccepted\n",
+  "full_Source1_to6_ancestry_unique_archives": 25,
+  "full_help_byte_equality": true,
+  "inner_help_exit": 1,
+  "inner_negative_exit": 1,
+  "native_full_S_R_incremental_bytes": 8452,
+  "negative_stdout": "",
+  "old_new_producers_and_keeper_logs_exact": true,
+  "outer_capture_and_resource_guard_PASS": true,
+  "output_keeper_sha256": "c7d4169c7be5209440e4b5871f486289ff8c51f01d88c0f64ef700d5cc1e32ec",
+  "peak_sampled_group_RSS_bytes": 110170112,
+  "root_all317_readset_pins_exact": 317,
+  "root_original5187_complete5436_GOPATH1_prepost_exact": true,
+  "runtime_operands": {
+    "added_paths": [
+      "go-backend/embedfs/assets.go",
+      "go-backend/internal/httpapi/managed_spa.go",
+      "go-backend/third_party/webkit/assets/assets.go",
+      "go-backend/third_party/webkit/budget/budget.go",
+      "go-backend/third_party/webkit/cmd/budget/main.go",
+      "go-backend/third_party/webkit/csp/csp.go",
+      "go-backend/third_party/webkit/engine/engine.go",
+      "go-backend/third_party/webkit/go.mod",
+      "go-backend/third_party/webkit/go.sum",
+      "go-backend/third_party/webkit/golden/normalize.go",
+      "go-backend/third_party/webkit/health/health.go",
+      "go-backend/third_party/webkit/health/identity.go",
+      "go-backend/third_party/webkit/island/island.go",
+      "go-backend/third_party/webkit/routes/routes.go",
+      "go-backend/third_party/webkit/sample/go.mod",
+      "go-backend/third_party/webkit/sample/go.sum",
+      "go-backend/third_party/webkit/sample/main.go",
+      "go-backend/third_party/webkit/sample/sample_templ.go",
+      "go-backend/third_party/webkit/static/static.go",
+      "go-backend/third_party/webkit/tokens/tokens.go"
+    ],
+    "changed_existing": [
+      {
+        "current_sha256": "98ea69356c008d5ed8c166c959e0e9f0db6180ce9c967582a9b6cef49e76be41",
+        "old_sha256": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50",
+        "path": "go-backend/go.mod"
+      },
+      {
+        "current_sha256": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+        "old_sha256": "af163d80d114418f5acec96c1e08659aa9a8acdf6b1822344309d07a4628a621",
+        "path": "go-backend/go.sum"
+      },
+      {
+        "current_sha256": "ae736b26a9f98667a9c623f985cdc7700ed01dd537cb1b5b74d893e713367913",
+        "old_sha256": "8786ad6d0d5781c19dcb34fe0c258310b033a3500217855f078deef9c15325e9",
+        "path": "go-backend/internal/httpapi/server.go"
+      },
+      {
+        "current_sha256": "5ade14a8f839f553d55846903d25b8f991b7d470b91c5f980a0c2805179e5154",
+        "old_sha256": "89b7eca3e8b332f5090463da0b2552b9d3cf6a52420e8a65d3f3a3494981fa54",
+        "path": "go-backend/internal/httpapi/website.go"
+      }
+    ],
+    "current_count": 129,
+    "current_entry": {
+      "path": "go-backend/embedfs/assets.go",
+      "sha256": "84c7518b0ff65e76b8a7379350fb4cc0187459e6e38dde983316421c6d06a827"
+    },
+    "first_ordered_difference_index": 12,
+    "old_count": 109,
+    "old_entry": {
+      "path": "go-backend/go.mod",
+      "sha256": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50"
+    },
+    "removed_paths": []
+  },
+  "schema": "v1-7-current-cli-one-source6-runtime-negative-results-v1",
+  "source_data_authority_pin_GUI_changed": false,
+  "source_root_RSS": "unmeasured",
+  "sourcechain_registered_archive_descriptors": 24
+}

@@ -1,0 +1,189 @@
+{
+  "schema": "v1-7-current-cli-source6-negative-method-review-v1",
+  "reviewer": "/root/v17_research_quality",
+  "role": "independent quality and source-method reviewer",
+  "reviewed_at_utc": "2026-10-08T17:40:57.942852+00:00",
+  "verdict": "accept_for_separately_admitted_exact_negative_capture_only",
+  "source_admission_sha256": "2d4336e25408fb2f831567da4b28ddf1f9589c9210846e78ec4787364b08a235",
+  "source_cutoff_utc": "2026-10-08T17:47:24.528174+00:00",
+  "source_deadline_utc": "2026-10-08T17:50:24.528174+00:00",
+  "source_worker_rss_measured": false,
+  "baseline_commit": "705c26819b60ff74d496aa9b5eedb016531a47ef",
+  "dependencies_sha256": {
+    "current-cli-source6-negative-source-admission-r1.json": "2d4336e25408fb2f831567da4b28ddf1f9589c9210846e78ec4787364b08a235",
+    "current-cli-source6-negative-plan-r1.json": "fc018283669502fbb850017eb0043824d5c4c56cbc0f5e7c30a9871fec6b97be",
+    "current-cli-source6-negative-readset-r1.json": "ef711003b5881622f677a489c4841e8fef205808dea9496c9b62991607fb5875",
+    "current-cli-source6-negative-method-r1.py.txt": "f974eca0628558d8d45048b5d592f5b489641a3c5241879bbe495cdc0c123125",
+    "current-cli-source6-negative-expected-help-r1.txt": "e7c37e4e1429a5738455f375aa0d51e877ea567989beb93afe887777c287237c"
+  },
+  "actual_scope": {
+    "method": "Two public CLI invocations within one fresh bounded capture: source-derived quick help and ONE quick Source6 stale-runtime negative control. No all-rail check, candidate generation, audit, write, authority refresh, Source7 or GUI activation.",
+    "argv": [
+      [
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/offline-rail-tools-r2/cat-content-rail",
+        "quick",
+        "--help"
+      ],
+      [
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/offline-rail-tools-r2/cat-content-rail",
+        "quick",
+        "--check",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/internal/contentrails/sources/authored-v6.json"
+      ]
+    ],
+    "future_capture_command": [
+      "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+      "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-cli-source6-negative-method-r1.py.txt"
+    ],
+    "execution_performed_by_reviewer": false
+  },
+  "current_metadata_ack": {
+    "old_commit": "a676ac894790b4f47c6b1ee677219ed79eee0ea9",
+    "current_commit": "705c26819b60ff74d496aa9b5eedb016531a47ef",
+    "changed_paths": 47,
+    "classification": "Only WORKLOG, STATUS and wave documentation/evidence records changed. No executable source, go.mod/go.sum, graph, fixture, bundle, authority or pin path changed in this commit interval.",
+    "ancillary_disclosures": [
+      {
+        "path": "docs/STATUS.md",
+        "a676_sha256": "317a06c0037399cc985cc88ae4a1693448fb7c770ac5ab8e2b53a19d2d2491e8",
+        "705_current_sha256": "2b426619481008e64cd6c59d541ac74e0c4dfa4d5d41fabcff8c2f26d28f2130",
+        "included_in_current_readset": true
+      },
+      {
+        "path": "WORKLOG.md",
+        "a676_sha256": "01d166f0615a58b9d2d4d960f062d7246fc8efdbce3043b63db19ba46522789d",
+        "705_current_sha256": "783f110c9c9206c4b78217ae58f1b3d920327a4736e67c986d527252311a7da2",
+        "included_in_current_readset": false
+      },
+      {
+        "path": "docs/reviews/v1-7-recognizable-content/README.md",
+        "a676_sha256": "970b8b51202fa8f8b640f749d9b082ca31d5a805ba223a8f2970ff8585f2f484",
+        "705_current_sha256": "8de9fe1dae6aa7626cd39f58180e0bd841e1e2346b8441334c3d47e47b558e3c",
+        "included_in_current_readset": false
+      }
+    ],
+    "limitation": "Only STATUS is an input to the present readset; WORKLOG and wave README changes are independently disclosed ancillary metadata. Old judgments remain bound to their original inputs. Existing cache inventories/keepers/producers are current byte-pinned here; full cache membership/readback is a required root pre/post execution check, not an additional acquisition/integrity result from this source review."
+  },
+  "static_prerequisite_checks": {
+    "normal_inputs_and_unchanged": 273,
+    "scratch_bindings": 40,
+    "every_current_pin_matches": true,
+    "authority_sha256": "e365d23ae9cfd2581e146dccc142818d56cdb90fa292b376378996fba78e9b21",
+    "pin_and_source6_preserved": true,
+    "registered_source_records": 5,
+    "registered_unique_archive_descriptors_verified": 24,
+    "quick_authority_document_descriptors_verified": 7,
+    "selected_source6_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+    "qualified_current_binary_sha256": "3589be2c90aabcc27894bd50c16c295f9458891cc795be25215f466fa0b58c59",
+    "binary_keeper_sha256": "06082fe1c16bef699173144f1e1d3f1927f733a8afde0b8da61bcfc63f72ef3b",
+    "binary_actual_review_sha256": "2799b27d85a7aa9a08ca981e1357d47d1df9d03ee005a47cd1cc41d612161dda",
+    "all_nine_source_bindings_match_saved_audit": true,
+    "saved_proposal_bytes_equal_installed_quick_artifact_and_explicit_pin": true,
+    "source6_reconstruction_functions_unchanged_from_published_v1_6": true,
+    "fresh_output_directory_absent": true
+  },
+  "exact_authority_refusal_derivation": {
+    "call_path": "main.run -> LoadSource(explicit authored-v6) -> Check(quick) -> installedAuthorities.rebuild -> current buildInstalledProposal -> ConfirmFinal. The prior manifest/pin/chain/archive/document/candidate/proposal prerequisites are present and exact.",
+    "audit_kind": "quick-content-live-audit-v1",
+    "passed": true,
+    "verdict": null,
+    "native_audit_version": 1,
+    "catalog_sha256": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
+    "candidate_sha256": "1950ad42444168c5fb3c1350dc53edde74198e3d9fc16db831fda2ebf17a3c6a",
+    "nonruntime_clauses_all_satisfied": true,
+    "only_failing_operand": "same(audit[\"runtime_sources\"], current RuntimeHashes) is false; consequently its negation is the TRUE rejection disjunct. RuntimeHashes is an ordered list of path/SHA rows, not a dictionary.",
+    "runtime_drift": {
+      "added_paths": [
+        "go-backend/embedfs/assets.go",
+        "go-backend/internal/httpapi/managed_spa.go",
+        "go-backend/third_party/webkit/assets/assets.go",
+        "go-backend/third_party/webkit/budget/budget.go",
+        "go-backend/third_party/webkit/cmd/budget/main.go",
+        "go-backend/third_party/webkit/csp/csp.go",
+        "go-backend/third_party/webkit/engine/engine.go",
+        "go-backend/third_party/webkit/go.mod",
+        "go-backend/third_party/webkit/go.sum",
+        "go-backend/third_party/webkit/golden/normalize.go",
+        "go-backend/third_party/webkit/health/health.go",
+        "go-backend/third_party/webkit/health/identity.go",
+        "go-backend/third_party/webkit/island/island.go",
+        "go-backend/third_party/webkit/routes/routes.go",
+        "go-backend/third_party/webkit/sample/go.mod",
+        "go-backend/third_party/webkit/sample/go.sum",
+        "go-backend/third_party/webkit/sample/main.go",
+        "go-backend/third_party/webkit/sample/sample_templ.go",
+        "go-backend/third_party/webkit/static/static.go",
+        "go-backend/third_party/webkit/tokens/tokens.go"
+      ],
+      "changed_existing": [
+        {
+          "current_sha256": "98ea69356c008d5ed8c166c959e0e9f0db6180ce9c967582a9b6cef49e76be41",
+          "old_sha256": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50",
+          "path": "go-backend/go.mod"
+        },
+        {
+          "current_sha256": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+          "old_sha256": "af163d80d114418f5acec96c1e08659aa9a8acdf6b1822344309d07a4628a621",
+          "path": "go-backend/go.sum"
+        },
+        {
+          "current_sha256": "ae736b26a9f98667a9c623f985cdc7700ed01dd537cb1b5b74d893e713367913",
+          "old_sha256": "8786ad6d0d5781c19dcb34fe0c258310b033a3500217855f078deef9c15325e9",
+          "path": "go-backend/internal/httpapi/server.go"
+        },
+        {
+          "current_sha256": "5ade14a8f839f553d55846903d25b8f991b7d470b91c5f980a0c2805179e5154",
+          "old_sha256": "89b7eca3e8b332f5090463da0b2552b9d3cf6a52420e8a65d3f3a3494981fa54",
+          "path": "go-backend/internal/httpapi/website.go"
+        }
+      ],
+      "current_count": 129,
+      "current_entry": {
+        "path": "go-backend/embedfs/assets.go",
+        "sha256": "84c7518b0ff65e76b8a7379350fb4cc0187459e6e38dde983316421c6d06a827"
+      },
+      "first_ordered_difference_index": 12,
+      "old_count": 109,
+      "old_entry": {
+        "path": "go-backend/go.mod",
+        "sha256": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50"
+      },
+      "removed_paths": []
+    },
+    "expected_child_outcome": {
+      "returncode": 1,
+      "stderr": "cat-content-rail: final live audit incomplete/stale/unaccepted\n",
+      "stdout": ""
+    },
+    "interpretation": "A precise preserved Source6 authority refusal caused by current runtime inventory drift. It is not a current-authority pass, a bad graph candidate, missing-file evidence or all-four qualification. Final role judgments are not reached on this refusal path."
+  },
+  "help_check": {
+    "flags": 16,
+    "source_derived_expected_bytes": 1212,
+    "expected_sha256": "e7c37e4e1429a5738455f375aa0d51e877ea567989beb93afe887777c287237c",
+    "derivation": "Independently reconstructed from the actual 16 flag declarations, sorted PrintDefaults formatting and qualified SDK flag.ErrHelp path; main adds its exact prefix/newline and exits 1. No executable help was run during preparation."
+  },
+  "capture_review": {
+    "source_syntax_valid": true,
+    "child_process_group": "subprocess.run introduces no new session/process group, so both children remain in the admitted outer process group.",
+    "timeout_seconds_per_child": 120,
+    "outcome_assertions": "Exact full exit code 1, empty stdout bytes and complete UTF-8 stderr equality for each case; any different error, success, missing file, substring-only match, timeout or exception fails.",
+    "finite_scope": "Two fixed source-bound commands; help has exactly 1212 expected bytes and the rejection path one exact error line. The wrapper captures PIPE output in memory; the outer sampled-RSS bound remains mandatory and no arbitrary command is admitted.",
+    "persistence": "Exclusive absent owned output directory and exclusive case/report files; finally preserves complete=false/test_failed=true until both assertions pass. An early guard failure or signal remains an outer failed lane with any partial outputs retained, never a retry/clock reset."
+  },
+  "mandatory_before_native_execution": [
+    "Create ONE fresh exact native admission only after this receipt freezes, binding this review, plan, readset, capture method, expected help, source code/authority documents, current binary/keeper/producers and SDK flag implementation as immutable inputs/protected outputs. The immutable admission itself uses the existing runner self-binding mechanism.",
+    "Freshly measure 17GiB start disk and 16GiB remaining disk plus MemAvailable floors; existing full S/R runner enforces 2GiB sampled process-group RSS, 1GiB total increment and one 20-minute deadline with 180-second metadata reserve. No failed earlier state or clock is resumed.",
+    "Root verifies all actual old5187/new5436 cache files and owned GOPATH state, plus all pinned producers/logs/keepers, before and after the new lane. Recheck binary and owned output ancestors as regular/non-symlinked and reject any preexisting output directory; no source, module, cache, authority or artifact mutation is authorized.",
+    "Require both raw child observations and complete report to match; publish a distinct actual-evidence receipt afterward. Expected native child exits 1 are observations, while the wrapper exits 0 only after exact assertions. Preserve all prior source/native failures."
+  ],
+  "withheld": [
+    "Actual CLI/help/negative-control result (not yet executed)",
+    "Current authority/all-four acceptance or reissued audits/finals",
+    "Serving/HTTP/backend/GUI/full native gate qualification",
+    "Source7 adoption, installed historical contexts, release, landing or remote action"
+  ]
+}

@@ -1,0 +1,26 @@
+"""Exact public CLI help and Source6 stale-runtime negative capture; no writes to source."""
+from pathlib import Path
+import json, hashlib, subprocess, datetime
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+T=Path('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008')
+B=T/'offline-rail-tools-r2/cat-content-rail'
+O=T/'current-cli-source6-negative-r1'
+D=R/'docs/reviews/v1-7-recognizable-content'
+assert T.resolve()==T and not T.is_symlink()
+assert not O.exists() and not O.is_symlink()
+assert hashlib.sha256(B.read_bytes()).hexdigest()=='3589be2c90aabcc27894bd50c16c295f9458891cc795be25215f466fa0b58c59'
+O.mkdir()
+report={'complete':False,'test_failed':True,'observations':[],'Source6_currentauthority_PASS':False,'Source7_or_GUI_changed':False}
+try:
+    cases=[('help',[str(B),'quick','--help'],(D/'current-cli-source6-negative-expected-help-r1.txt').read_text()),('negative',[str(B),'quick','--check','--root',str(R),'--source',str(R/'go-backend/internal/contentrails/sources/authored-v6.json')],'cat-content-rail: final live audit incomplete/stale/unaccepted\n')]
+    for name,argv,expected in cases:
+        p=subprocess.run(argv,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120,check=False)
+        row={'case':name,'argv':argv,'returncode':p.returncode,'stdout':p.stdout.decode('utf-8'),'stderr':p.stderr.decode('utf-8'),'expected_returncode':1,'expected_stdout':'','expected_stderr':expected}
+        report['observations'].append(row)
+        with (O/(name+'.json')).open('x') as f:json.dump(row,f,indent=2,sort_keys=True);f.write('\n')
+        assert p.returncode==1 and p.stdout==b'' and p.stderr==expected.encode('utf-8'), 'exact CLI outcome differs'
+    assert len(report['observations'])==2
+    report['complete']=True;report['test_failed']=False
+finally:
+    report['finished_at_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat()
+    with (O/'report.json').open('x') as f:json.dump(report,f,indent=2,sort_keys=True);f.write('\n')
