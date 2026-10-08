@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "command": "/opt/node/bin/node",
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "playwright.gui.config.mjs",
+    "--reporter=json",
+    "--list",
+    "--output",
+    "../.gate/gen/original/complete-browser/browser-output"
+  ],
+  "cwd": "frontend",
+  "started": "2026-10-08T02:55:28.358Z",
+  "finished": "2026-10-08T02:55:30.939Z",
+  "exit_code": 0,
+  "stdout": {
+    "path": ".gate/gen/original/complete-browser/discovery-stdout.log",
+    "sha256": "d0b2438cabd77b41f6b3e79d49480bdcfce8cc513c31ca92b03bf593d048ba1f"
+  },
+  "stderr": {
+    "path": ".gate/gen/original/complete-browser/discovery-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

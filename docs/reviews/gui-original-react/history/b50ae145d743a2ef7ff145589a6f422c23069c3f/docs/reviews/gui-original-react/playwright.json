@@ -1,0 +1,622 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "cases": [
+    {
+      "title": "original-intrusul-intro-single-flight",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-intrusul-leaving-actions",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-intrusul-leaving-earned-hint",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-intrusul-leaving-recovery-retry",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-intrusul-held-winning-mutation",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-intrusul-held-winning-read",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-intrusul-held-winning-unmounted",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-intrusul-private-upload-once-after-resume",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-perechi-intro-single-flight",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-perechi-leaving-actions",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-perechi-leaving-earned-hint",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-perechi-leaving-recovery-retry",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-perechi-held-winning-mutation",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-perechi-held-winning-read",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-perechi-held-winning-unmounted",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    },
+    {
+      "title": "original-perechi-private-upload-once-after-resume",
+      "status": "passed",
+      "retry": 0,
+      "expectedStatus": "passed",
+      "errors": []
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "original-intrusul-intro-single-flight",
+      "suite": "behavior",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "intro.inert-and-busy",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.all-actions-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.no-second-create-or-saved-pointer",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.authoritative-board-and-pointer",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-intrusul-leaving-actions",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.mounted-controls-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.no-requests-or-score-writes",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-intrusul-leaving-earned-hint",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-intrusul-leaving-recovery-retry",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-intrusul-held-winning-mutation",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-intrusul-held-winning-read",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-intrusul-held-winning-unmounted",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-intrusul-private-upload-once-after-resume",
+      "suite": "behavior",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "upload.stale-reply-sends-nothing",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.exactly-one-earned-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.repeat-resume-never-sends-second-row",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-perechi-intro-single-flight",
+      "suite": "behavior",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "intro.inert-and-busy",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.all-actions-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.no-second-create-or-saved-pointer",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.authoritative-board-and-pointer",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-perechi-leaving-actions",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.mounted-controls-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.no-requests-or-score-writes",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-perechi-leaving-earned-hint",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-perechi-leaving-recovery-retry",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-perechi-held-winning-mutation",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-perechi-held-winning-read",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-perechi-held-winning-unmounted",
+      "suite": "presence",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    },
+    {
+      "id": "original-perechi-private-upload-once-after-resume",
+      "suite": "behavior",
+      "executed": true,
+      "assertions": [
+        {
+          "id": "upload.stale-reply-sends-nothing",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.exactly-one-earned-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.repeat-resume-never-sends-second-row",
+          "status": "pass",
+          "executed": true
+        }
+      ]
+    }
+  ]
+}

@@ -2,58 +2,22 @@
 
 Valid until: S1 completion or a superseding qualification — then treat as history.
 
-The unchanged React19.2.7/ReactDOM19.2.7/Framer12.42.2/UI0.3.0 runtime passed
-16 motion-on Chromium fixtures and78 executed assertions. The native Go server
-and private browser planner were built in the pinned runner. Browser sessions
-used real authoritative game states, with held replies and a mocked consented
-adult account only for the private-upload fixture. No application source,
-frontend package/lock or original SDK bytes changed before this proof.
+The original React19.2.7/ReactDOM19.2.7/Framer12.42.2/UI0.3.0 graph passed clean qualification at45edcf2ce170c112621c73609e6e169633eb38a8, tree690902abac3228b7bb5733d23140e9403bb4cb974d37ab95281de8ab851089c4. All900 browser cases executed exactlyonce andpassed,450desktop/450mobile,0skips/retries/flaky/unexpected/globalerrors. All654 original and894 preceding identities remain preserved; every previously failed helper/focus/copy record and the6 added branch records passed. Two real compiler/transport Node contracts and the unchanged16 motion-on fixtures/78assertions also passed. Eleven actualgen checks passed.
 
 Actual command:
 
 ```text
-bash /home/dobo/work/_worktrees/cat_de_roman_esti/perf__gui-cat/scripts/gate.sh gen --sha b50ae145d743a2ef7ff145589a6f422c23069c3f
+bash /home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-prerequisites-linux/scripts/gate.sh gen --sha 45edcf2ce170c112621c73609e6e169633eb38a8 --parallel 2
 ```
 
-The clean generating result passed all9 named checks. This is original harness
-qualification through the unit-profile runner, not a canonical unit/full gate.
-Source tree SHA256: c447fd1841b801cab3a072157d687ac9b1671b4246bcea8af23aac53f59699af.
-Toolchain ID: sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9.
-Version-lock SHA256:028ab052097aa8ad497732bd9db32e30de9595a69155064d61a5b15d23e1bcbc.
-Execution ran2026-10-07T06:01:47.694Z through2026-10-07T06:03:17.857Z.
+The native Go server and browser planner were built in the pinned runner. This is original gen-built native-server proof, with `canonical_full:false` and `app_image_id:null`. It does not qualify an appimage, canonicalunit/full, physicaldevice, native privacy or formalM0/M1. The Node transport fixture substitutes fetch and deliberately makes no native API/session claim.
 
-The fixture IDs and assertion records cover both games' intro single-flight and
-real inert/busy controls, mounted exit motion and disabled tiles, earned hints
-and recovery retries, held winning mutation/read/unmounted replies, no transient
-terminal rendering during exit, no extra request/score/record, exactly one local
-record/receipt after resume, repeated-resume deduplication and exactly one private
-upload within a retained document. Original screens use Presence ownership and
-disabled controls; their leaving screen does not have a DOM inert attribute.
+[Promotion provenance](promotion.json) records every exact copied file and the parent keeper. The15 generated evidence files are copied unchanged from the successfully validated literal `docs/reviews/gui-original-react/` topology; no receipt/source/command path is rewritten. `playwright.json`, wrapper result/actions/bootstrap and `complete-browser-900/` commands/raw/structuredreports preserve actual bytes. Its context files retain the exact descriptor/config/inventory/lock bindings; command/report paths remain owning-build data, resolved through the preserved mirror and executedGit45ed.
 
-receipt.json conforms to core-v1.1's closed cat-original-ui-runtime validator.
-native-report.json and stdout.log are exact equal bytes from the actual command.
-stderr.log, playwright.json, package/lock/SDK snapshots, source hashes and the
-fixture/config/reporter/imported helper snapshots preserve the actual inputs.
-gate-gen-result.json and gate-execution.json preserve the wrapper outcome and
-actual command actions. The full-suite inventory was discovered as654 distinct
-project/file/full-title cases; that discovery is not654 executed cases.
+ResultSHA256:e0e96b7d976c5333ee94de921708f8d8915d9722814144477554952533c75d3c. Structured900report:247221d6cc7ba461ca10b1da6cd4261832f7570b51d3269fe0ef9a39754f219e. Raw900report:51dc691277475b5f1ab0ebaddf1f118d7b3e748fae1c92bc0609bab6f035948f. Parentwholekeeper `cat-original900-gen-full-pass-20261008` has manifestb3402f39f1788149702074b5853a970fd3d4fe03e878ba0cf5832863b8e38ae5. All166 artifact hashes and76 source/fixture bindings were verified. Toolchain:sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9; versions lock028ab052097aa8ad497732bd9db32e30de9595a69155064d61a5b15d23e1bcbc.
 
-The clean legacy:freeze target atf50715dcab3b69ba267c67c69cd95ce1b7f32ba7
-packed the exact30 committed files and verified each archive member byte-for-byte.
-Archive SHA256:742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65.
-Its native result/actions are preserved in legacy-freeze/; source-file hashes and
-the archive/sidecar are in the root legacy/ directory. No rebuild supplied fallback bytes.
+The SDK0.3 archive remains1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244, with actual package/entry hashes and exact original package/lock snapshots. Runtime fixture remains2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a. `source-hashes.json` binds79 source files to45ed. The earlier pristineb50 proof and alltop-level bytes are preserved under `history/b50ae145d743a2ef7ff145589a6f422c23069c3f/docs/reviews/gui-original-react/`; that history directory provides its original literal receipt resolution root. Baseline/dependency/freeze records remain in their original subdirectories.
 
-Original baseline capture passed through clean pinned gen atae9be5b5a0f891dd5d36d6bb18945e9dcd8102a5.
-It records9 loaded route screenshots, actual existing Axe fingerprints, verified
-import closures/CSS16093gz, and5 raw callback/action runs for each scripted interaction.
-Conexiuni medians: LCP2836ms/INP184ms/CLS0. Alchimie: LCP4228ms/INP200ms/CLS0.00057706.
-Actual interaction entries are retained separately; page INP also includes start.
-These are original throttled desktop measurements and runner-built-server proof.
-They establish neither physical device nor canonical full/image/performance acceptance.
-Original Home114086gz still fails the literal40960-byte budget. Native E3 keeps
-M0/M1 formally unqualified; budgets and failed reports remain preserved.
+The earlier freeze atf507 packed30 committedoriginalstatic files, archive742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65. The next authorized existinglegacy:freeze command must independently retain that exactsource30, not the freshly built900mirrorbundle. No originalfile/archive is deleted or normalized.
 
-CSP conversion, Motion/tooling normalization, source retirement,
-parent staged UI sync/trust and canonical unit/full
-qualification remain outstanding. No device or live/soak evidence is attested.
+The earlier9-route/five-run baseline remains historical: ConexiuniLCP2836/INP184/CLS0 andAlchimieLCP4228/INP200/CLS0.00057706; existingAxe findings andrealbudget failures are preserved. OriginalHome114111gz still exceeds40960. PROGRAM E3 keeps M0/M1 formallyunqualified. E1conversion/source retirement/normalization, parentprotectedstage/sync/trust andcanonicalgates remain outstanding; no physicalSamsung/device/activeUI/live/soak fact is attested.

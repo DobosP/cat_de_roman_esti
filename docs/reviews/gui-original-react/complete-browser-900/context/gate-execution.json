@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "invocation": "f497c5c6-2ff1-4412-b20a-22ff6fd7baa6",
+  "sha": "45edcf2ce170c112621c73609e6e169633eb38a8",
+  "tree_sha256": "690902abac3228b7bb5733d23140e9403bb4cb974d37ab95281de8ab851089c4",
+  "actions": [
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap reference is source/toolchain/invocation bound",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap receipt hash/identity matches actual bytes",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap log hash matches saved stream",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap log hash matches saved stream",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap log hash matches saved stream",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap log hash matches saved stream",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap command has actual successful bound streams",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Bootstrap command has actual successful bound streams",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "bootstrap-evidence",
+      "kind": "assertion",
+      "label": "Every bootstrap log belongs to exactly one actual command",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "cat-gen-request",
+      "kind": "assertion",
+      "label": "Explicit committed original qualification or style-plan request",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "cat-original-npm-ci",
+      "kind": "command",
+      "command": "npm",
+      "argument_count": 3,
+      "args_sha256": "6dde16d2bef3aa818d2ba9a5e422aa26881ad06f0fbe3f61cd5490ef66a1f3b9",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "duration_ms": 2739,
+      "stdout_sha256": "c68c92497cb5cdae7b24fd46a97858d34920e4c5d20899435d1e181c52c67ae9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-npm-ci-1.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-npm-ci-1.stderr.log"
+    },
+    {
+      "check": "cat-original-api-consumer-contract",
+      "kind": "command",
+      "command": "node",
+      "argument_count": 2,
+      "args_sha256": "bb0e57cb6f1c33278d5184ae5a9707ef6fa1482110f33c76264c73cc4aa1cd5c",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "duration_ms": 1242,
+      "stdout_sha256": "dd4653fe466dd258efc48a3df8e51fe850ef7be7cad2fca94ec8085f1a2938ae",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-api-consumer-contract-2.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-api-consumer-contract-2.stderr.log"
+    },
+    {
+      "check": "cat-original-frontend-build",
+      "kind": "command",
+      "command": "npm",
+      "argument_count": 2,
+      "args_sha256": "181eacc1e8a2ab6260924ce0032e94c3db46ac8f605698e1b201a18620eac7c9",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "duration_ms": 4770,
+      "stdout_sha256": "f71c8ef12dd35bcf36376c0242385e2be72aa64100e88826f7e5f555a098d7bc",
+      "stderr_sha256": "0052d970095c621adb14b97678461ce2ffc097e27b5c1e1b883ba7bd52bb94d4",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-frontend-build-3.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-frontend-build-3.stderr.log"
+    },
+    {
+      "check": "cat-original-build-cat-server",
+      "kind": "command",
+      "command": "go",
+      "argument_count": 4,
+      "args_sha256": "8132ba1232e0e0d953cb4908e47c1cb00e71000e72c7583cb1521ee6d5c524c1",
+      "cwd": "go-backend",
+      "exit_code": 0,
+      "duration_ms": 1244,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-build-cat-server-4.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-build-cat-server-4.stderr.log"
+    },
+    {
+      "check": "cat-original-build-cat-browser-plan",
+      "kind": "command",
+      "command": "go",
+      "argument_count": 4,
+      "args_sha256": "cd726a4b05dd265b7a6f4972fb89364b50ea8f9a803d83d512d3c97b925e66f8",
+      "cwd": "go-backend",
+      "exit_code": 0,
+      "duration_ms": 563,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-build-cat-browser-plan-5.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-build-cat-browser-plan-5.stderr.log"
+    },
+    {
+      "check": "cat-original-ui-runtime",
+      "kind": "assertion",
+      "label": "Prerequisite commands passed",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "cat-original-ui-runtime",
+      "kind": "command",
+      "command": "node",
+      "argument_count": 1,
+      "args_sha256": "68cbd44368bca2422c11b6051572d23eaa4765f4632ace438d198b5446e50ec0",
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_ms": 63844,
+      "stdout_sha256": "7f6eec025f63bf4f1bf4e54f1755ccff9b6ff2036fb8ebeb8e9849d312c39fb9",
+      "stderr_sha256": "705fe64504709fbe4226bd197c053c8d1b925d243bc3670dae97b82fd9f24f12",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-ui-runtime-7.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-ui-runtime-7.stderr.log"
+    },
+    {
+      "check": "cat-original-ui-runtime",
+      "kind": "assertion",
+      "label": "Actual original native browser outcome",
+      "passed": true,
+      "duration_ms": 0
+    },
+    {
+      "check": "cat-original-receipt-contract",
+      "kind": "command",
+      "command": "node",
+      "argument_count": 1,
+      "args_sha256": "04a7dd7cee04db186cd470b5cac86c108cfb01beecf21b947032c30b5f70af1e",
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_ms": 182,
+      "stdout_sha256": "27352b6d700b8c50219d6f8ff161686afdfb1f0cab1524721ce8abbf6729f12d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-receipt-contract-9.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-receipt-contract-9.stderr.log"
+    },
+    {
+      "check": "cat-browser-inventory",
+      "kind": "command",
+      "command": "node",
+      "argument_count": 2,
+      "args_sha256": "aedb0fcd3fa809b60597ad122e3166a7b3fc20b82e4607436b3e9b5666f7a6de",
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_ms": 3727,
+      "stdout_sha256": "a9757975ce2307dc3592ad32d3f2d9df8edcd07852afa557e579edcda2b055f2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-browser-inventory-10.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-browser-inventory-10.stderr.log"
+    },
+    {
+      "check": "cat-original-complete-browser",
+      "kind": "command",
+      "command": "node",
+      "argument_count": 2,
+      "args_sha256": "6290b0fa5e7e624b82043e266285782c756d7884e905d537c5aeb1a1e60ac875",
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_ms": 2221504,
+      "stdout_sha256": "2656895f45c8a13a0f1187b2210539bec3a3401c138e6aef6258dfb2b02c2718",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-complete-browser-11.stdout.log",
+      "stderr_log": ".gate/gen/logs/f497c5c6-2ff1-4412-b20a-22ff6fd7baa6-cat-original-complete-browser-11.stderr.log"
+    }
+  ]
+}
