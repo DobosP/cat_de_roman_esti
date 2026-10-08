@@ -1,5 +1,23 @@
 # syntax=docker/dockerfile:1
-# Build from the repository root: docker build -f rust-backend/Dockerfile .
+# Optional Rust 1.98.1 reference, built from repository root.
+# Keep its locked Rust build and filesystem SPA boundary; do not activate it as default.
+# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this selected Node tag's actual digest.
+FROM node:26.10.0-bookworm-slim AS frontend
+WORKDIR /build
+COPY versions.lock.json /build/versions.lock.json
+RUN npm install --global npm@12.2.0
+COPY frontend/package.json frontend/package-lock.json ./frontend/
+COPY frontend/vendor/ ./frontend/vendor/
+WORKDIR /build/frontend
+RUN npm ci
+WORKDIR /build
+COPY frontend/ ./frontend/
+RUN cd frontend && npm run build \
+    && test -f /build/frontend/dist/index.html \
+    && test -f /build/frontend/dist/.vite/manifest.json \
+    && ls /build/frontend/dist/assets/*.js >/dev/null
+
+# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this reference tag's actual digest.
 FROM rust:1.98.1-bookworm AS build
 WORKDIR /build
 # Rust embeds the same reviewed export and Unicode-decimal table as Go.
@@ -8,6 +26,7 @@ COPY rust-backend/ ./rust-backend/
 WORKDIR /build/rust-backend
 RUN cargo build --locked --release --bin cat-rust-server
 
+# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this retained runtime tag's actual digest.
 FROM debian:bookworm-slim AS runtime
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl \
@@ -16,7 +35,7 @@ RUN apt-get update \
     && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
 WORKDIR /app
 COPY --from=build /build/rust-backend/target/release/cat-rust-server /usr/local/bin/cat-rust-server
-COPY cat_de_roman_esti/web/static/ ./cat_de_roman_esti/web/static/
+COPY --from=frontend /build/frontend/dist/ ./cat_de_roman_esti/web/static/
 ENV CAT_ACCOUNTS_ENABLED=0
 USER 10001:10001
 EXPOSE 8080

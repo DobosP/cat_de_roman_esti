@@ -1,52 +1,24 @@
 # syntax=docker/dockerfile:1
-#
-# NONDEFAULT Python reference / dormant accounts-staging image.
-# Anonymous releases use the canonical Go Dockerfile. This image does not turn
-# on accounts; any staging activation still requires the existing consent gates.
-#
-# Multi-stage:
-#   stage 1 (node)   : npm ci/install + `npm run build` -> cat_de_roman_esti/web/static
-#   stage 2 (python) : pip install the package with its [web] extra, copy in the package
-#                      (fixtures + the built SPA from stage 1), run uvicorn as non-root.
-#
-# The runtime image needs ONLY: python 3.12 + the cat_de_roman_esti package + its
-# [web] extra (django + DRF + uvicorn) + the bundled fixtures + the built SPA static.
-# roedu_client is stdlib-only; romania_scraper is NOT needed at runtime.
-
-# ---------------------------------------------------------------------------
-# Stage 1: build the React/Vite SPA into cat_de_roman_esti/web/static
-# ---------------------------------------------------------------------------
-FROM node:24-slim AS frontend
-
+# Optional Python 3.12 reference / dormant accounts staging only.
+# Keep its constrained Python dependencies and historical filesystem SPA boundary.
+# Source proposal only; reference runtime image digest/qualification remain parent-owned.
+# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this selected Node tag's actual digest.
+FROM node:26.10.0-bookworm-slim AS frontend
 WORKDIR /build
-
-# Copy ONLY the manifests first so `npm ci` is cached unless deps change.
-# The vendored @roedu/ui tarball is a file: dependency, so it must exist before
-# `npm ci` (it rides with the manifests; bumping it busts this cache layer, correctly).
+COPY versions.lock.json /build/versions.lock.json
+RUN npm install --global npm@12.2.0
 COPY frontend/package.json frontend/package-lock.json ./frontend/
 COPY frontend/vendor/ ./frontend/vendor/
 WORKDIR /build/frontend
-# Prefer the reproducible `npm ci` (needs package-lock.json); fall back to install.
-RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
-
-# Now bring in the frontend source. vite.config.ts emits into
-# ../cat_de_roman_esti/web/static, so the package dir must exist relative to frontend/.
+RUN npm ci
 WORKDIR /build
 COPY frontend/ ./frontend/
-# Needed by vite.config.ts outDir ("../cat_de_roman_esti/web/static") and by the
-# package metadata read for the index.html; copying the package keeps paths identical
-# to the source tree layout.
-COPY cat_de_roman_esti/ ./cat_de_roman_esti/
+RUN cd frontend && npm run build \
+    && test -f /build/frontend/dist/index.html \
+    && test -f /build/frontend/dist/.vite/manifest.json \
+    && ls /build/frontend/dist/assets/*.js >/dev/null
 
-WORKDIR /build/frontend
-# `npm run build` = tsc --noEmit && vite build -> /build/cat_de_roman_esti/web/static
-RUN npm run build \
-    && test -f /build/cat_de_roman_esti/web/static/index.html \
-    && ls /build/cat_de_roman_esti/web/static/assets/*.js >/dev/null
-
-# ---------------------------------------------------------------------------
-# Stage 2: slim python runtime
-# ---------------------------------------------------------------------------
+# REQUIRED BEFORE QUALIFICATION: parent must resolve/register this reference tag's actual digest.
 FROM python:3.12-slim AS runtime
 
 # - PYTHONDONTWRITEBYTECODE: no .pyc clutter in the image
@@ -70,7 +42,7 @@ COPY cat_de_roman_esti/ ./cat_de_roman_esti/
 # first: Docker COPY merges directories and would otherwise retain a stale hashed asset.
 RUN rm -rf ./cat_de_roman_esti/web/static \
     && mkdir -p ./cat_de_roman_esti/web/static
-COPY --from=frontend /build/cat_de_roman_esti/web/static/ ./cat_de_roman_esti/web/static/
+COPY --from=frontend /build/frontend/dist/ ./cat_de_roman_esti/web/static/
 
 # Install the package WITH its web extra (django + DRF + uvicorn), PINNED via constraints.txt
 # for a reproducible build. Package-data in pyproject.toml ships fixtures/*.json and
