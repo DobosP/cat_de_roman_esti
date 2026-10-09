@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "scope": "APPLIED SOURCE ONLY; compiler/runtime NOT RUN at this successor",
+  "base": "3151a9d62061b3b5165d9653cb09910e1d14a147",
+  "path": "frontend/tests/fixtures/gui-hook-runtime-bootstrap.json",
+  "beforeSha256": "4eb50f0ab43806c50ce1d88506313d9b3d5465c8264e0b985e032ec2f3d88f84",
+  "afterSha256": "46f538b1ef12479a4b3185cc464c63fbc913e0cda3409cc1278dd04bc47c41d6",
+  "fullMode": 33188,
+  "replacements": [
+    [
+      "CORE-V1.5",
+      "CORE-V1.6"
+    ],
+    [
+      "5a66f70131d67a01f12ae9735da1923258019c17",
+      "b0ad658086a2745d1b3aea02659e6b644c89c680"
+    ],
+    [
+      "ccd6edeb980099aaa7de5bf74ea833849ff0523f1be62971dd4600a1b08677db",
+      "2e5a3634fccc61eef689b5e61ba77f1e2a6cda12ea3ff6044905ee1a23cf9d8d"
+    ]
+  ],
+  "exactInverse": true,
+  "all8ActualArchivePinsMatch": true,
+  "testAssertionsChanged": false,
+  "formalKIT_BUMP": "NOT ISSUED",
+  "sourceBase": "89db19d4a820a5adde52cada9c072adfb258cabf",
+  "sealSha256": "d4a809f2ae85cbb2881db53eebfd56d273218bb93ea117c6a11f5434f53f597e",
+  "independentReview": "program_pack SOURCE CLEAR; exactinverse/all8actualshippedpins/fullmodes, noassertionchange",
+  "reason": "Current actualbootstrap1.6 differs from historicaltestfixturepackagepin1.5; source correction does not prove test success"
+}
