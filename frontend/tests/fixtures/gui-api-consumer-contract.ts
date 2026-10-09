@@ -4,7 +4,7 @@
 // separately checks public payloads; this fixture does not validate JSON at runtime.
 import type {
   CategoryClue, ClueResult, ContextoState, Difficulty as ContextoDifficulty,
-  Guess, GuessRejected, NextClueKind, RevealedTarget, Temperature, WarmClue,
+  Guess, GuessAccepted, GuessFeedback, GuessFeedbackKind, GuessRejected, NextClueKind, RevealedTarget, Temperature, WarmClue,
 } from "../../src/api/contexto";
 import type {
   AlchimieState, CombineResult, Difficulty as AlchimieDifficulty, EarnedHint,
@@ -17,6 +17,7 @@ import type {
 import type {
   CategoryInfo, Difficulty as MetaDifficulty, GameKey as CategoryGameKey,
 } from "../../src/api/meta";
+import type { RankingRow } from "../../src/api/auth";
 
 type Equal<A, B> =
   (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2)
@@ -47,6 +48,11 @@ export type CategoryAvailabilityContract = AssertAll<[
   Required<CategoryInfo, "available_by_difficulty">,
 ]>;
 
+// v39-verified-ranking:16: the requester marker remains required boolean.
+export type RankingViewerIdentityContract = AssertAll<[
+  Equal<RankingRow["is_me"], boolean>, Required<RankingRow, "is_me">,
+]>;
+
 // contexto-api:7–30 and v42-caldrece-legend-confirm:10–15,45–53.
 export type TemperatureContract = Assert<Equal<Temperature, TemperatureTokens>>;
 export type ContextoClueKindsContract = Assert<Equal<NextClueKind, "category" | "warmer">>;
@@ -63,6 +69,24 @@ export type ContextoClueFieldsContract = AssertAll<[
   Optional<ContextoState, "next_clue_kind" | "warm_clue">,
   Equal<ClueResult["clue_kind"], NextClueKind>, Required<ClueResult, "clue_kind">,
   Equal<ClueResult["word"], WarmClue | undefined>, Optional<ClueResult, "word">,
+]>;
+// These field and optionality checks replace the remaining Contexto type
+// spelling assertions; known token presence does not claim a closed union.
+export type ContextoGuessFeedbackContract = AssertAll<[
+  Equal<Guess["attempt_number"], number>, Required<Guess, "attempt_number">,
+  Equal<GuessFeedback["rank_delta"], number | undefined>, Optional<GuessFeedback, "rank_delta">,
+  Equal<GuessAccepted["feedback"], GuessFeedback>, Required<GuessAccepted, "feedback">,
+  Equal<GuessRejected["suggestions"], string[]>, Required<GuessRejected, "suggestions">,
+  Equal<GuessAccepted["message"], string | undefined>, Optional<GuessAccepted, "message">,
+]>;
+export type ContextoKnownGuessFeedbackKindsContract = AssertAll<[
+  Equal<Extract<"first", GuessFeedbackKind>, "first">,
+  Equal<Extract<"new-best", GuessFeedbackKind>, "new-best">,
+  Equal<Extract<"warmer", GuessFeedbackKind>, "warmer">,
+  Equal<Extract<"colder", GuessFeedbackKind>, "colder">,
+  Equal<Extract<"same", GuessFeedbackKind>, "same">,
+  Equal<Extract<"repeat", GuessFeedbackKind>, "repeat">,
+  Equal<Extract<"found", GuessFeedbackKind>, "found">,
 ]>;
 export type ContextoConfirmationContract = AssertAll<[
   Equal<GuessRejected["needs_confirmation"], true | undefined>,
