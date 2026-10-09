@@ -30,7 +30,7 @@ function fixture(t) {
   assert.equal(process.platform, "linux");
   assert.equal(repo, "/work", "Actual owning runner required; no host test fallback");
   const current = JSON.parse(fs.readFileSync(path.join(repo, ".gate/wrapper-current.json")));
-  assert.ok(["unit", "full"].includes(current.target));
+  assert.ok(["unit", "full", "shell"].includes(current.target));
   for (const [key, env] of [["sha", "GATE_SHA"], ["tree_sha256", "GATE_TREE_SHA256"], ["toolchain_digest", "TOOLCHAIN_DIGEST"]]) {
     assert.equal(current[key], process.env[env]);
   }
