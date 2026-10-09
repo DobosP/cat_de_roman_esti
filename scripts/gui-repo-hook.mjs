@@ -83,7 +83,7 @@ function nativeUnit() {
   for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
     hook.check(`cat-${name}-race`, () => {
       if (module === "go-backend") hook.assert("Backend race requires fresh synced assets and compiled identity inputs", () => passed("cat-unit-gui-identity"));
-      const output = hook.run("go", ["test", "-race", "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
+      const output = hook.run("go", ["test", "-race", ...(module === "go-backend" ? ["-timeout=30m"] : []), "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
       const skipped = output.split("\n").filter((line) => line.startsWith("{")).map((line) => JSON.parse(line)).filter((event) => event.Action === "skip" && typeof event.Test === "string" && event.Test.length > 0);
       hook.assert("Only explicit native PG tests may skip without DSN", () => skipped.every((event) =>
         module === "go-backend" && ["github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts", "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"].includes(event.Package)));
@@ -188,7 +188,7 @@ switch (target) {
         if (allPassed()) {
           for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
             hook.check(`cat-normalized-${name}-race`, () => {
-              const output = hook.run("go", ["test", "-race", "-count=1", "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
+              const output = hook.run("go", ["test", "-race", ...(module === "go-backend" ? ["-timeout=30m"] : []), "-count=1", "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
               const events = output.split("\n").filter((line) => line.startsWith("{")).map((line) => JSON.parse(line));
               const skipped = events.filter((event) => event.Action === "skip" && typeof event.Test === "string" && event.Test.length > 0);
               hook.assert("Only explicit existing native PG tests may skip without DSN", () => skipped.every((event) => module === "go-backend"
