@@ -34,11 +34,19 @@ function fixture(t) {
   for (const [key, env] of [["sha", "GATE_SHA"], ["tree_sha256", "GATE_TREE_SHA256"], ["toolchain_digest", "TOOLCHAIN_DIGEST"]]) {
     assert.equal(current[key], process.env[env]);
   }
-  const base = path.join(repo, ".gate", current.target, "route-budget-tests");
-  fs.mkdirSync(base, { recursive: true, mode: 0o700 });
+  assert.match(current.invocation, /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/);
+  let base = path.join(repo, ".gate");
   assert.equal(fs.realpathSync(base), base);
-  const info = fs.lstatSync(base);
-  assert.ok(info.isDirectory() && !info.isSymbolicLink() && (info.mode & 0o077) === 0);
+  assert.ok(fs.lstatSync(base).isDirectory() && !fs.lstatSync(base).isSymbolicLink());
+  // Negative symlinks remain retained outside the target's receipt/artifact tree.
+  for (const part of ["_temp", "gui-route-budget-synthetic", current.target, current.invocation]) {
+    base = path.join(base, part);
+    if (!fs.existsSync(base)) fs.mkdirSync(base, { mode: 0o700 });
+    const info = fs.lstatSync(base);
+    assert.equal(fs.realpathSync(base), base);
+    assert.ok(info.isDirectory() && !info.isSymbolicLink()
+      && (info.mode & 0o777) === 0o700 && info.uid === process.getuid(), "Private owned fixture ancestor required");
+  }
   const root = fs.mkdtempSync(path.join(base, "NON-NATIVE-"));
   t.after(() => {
     // Retain every fixture, including failed/refused inputs. No snapshots or
@@ -147,7 +155,11 @@ void test("verified gzip bytes and separately bound active/frozen profiles remai
   assert.equal(second.report.routes.find((item) => item.name === "/").js.actual_gz
     - first.report.routes.find((item) => item.name === "/").js.actual_gz,
   compressed.length - gzipSync(fs.readFileSync(path.join(active.root, "assets/account-deep.js")), { level: 6 }).length);
-  write(frozen.root, "assets/account-deep.js", "changed after gzip");
+  const changed = Buffer.from(bytes);
+  changed[0] ^= 0xff;
+  assert.equal(changed.length, bytes.length);
+  assert.notDeepEqual(changed, bytes);
+  write(frozen.root, "assets/account-deep.js", changed);
   assert.throws(() => measured(frozen), /stale gzip/);
 });
 
