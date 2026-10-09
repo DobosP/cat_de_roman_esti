@@ -29,8 +29,8 @@ export const ORIGINAL_OWNERS = Object.freeze({
   "frontend/src/screens/Conexiuni.tsx": { opacity: 0.55, className: "csp-motion-opacity-55", source_sha256: "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338" },
 });
 export const NORMALIZED_INPUTS = Object.freeze({
-  "frontend/package.json": "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99",
-  "frontend/package-lock.json": "e430c87d566567f5a47160ff6bd3b327d875894769891c1d3bbcdcd035dd3aec",
+  "frontend/package.json": "d2fe548af9b8c097f2e067852332bdaed0daf319826892a6cb1c4e5bf92aa121",
+  "frontend/package-lock.json": "fa9800b9a39cf7d30f60bd5b85e1a2bd1edcc662e20b851f4b85b56e09749915",
   "frontend/tsconfig.json": "c71b02d67f1b304ffd49edbcc5a5dc4a57719176c9d1f83aabef9c5d36d17617",
   "frontend/tsconfig.tools.json": "3604ec127a7a5fbadbb007409f949230b57cd0ac937fd0e4b1aa7a1cd9ad7754",
   "frontend/scripts/compiler-runtime.mjs": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12",

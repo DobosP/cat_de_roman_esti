@@ -371,7 +371,7 @@ function publicationFixture(t, label, body) {
   }
   assert.equal(used.size, listed.size); assert.equal(listed.size, bootstrap.actions.length * 2); assert.ok(configCommands > 0);
   const sourceInputs = [
-    ["scripts/gui-style-plan.mjs", "0f4bea9c01245b1c0c48e163d960de2bfbbe5294744aa032b362c4f5d330ff49"],
+    ["scripts/gui-style-plan.mjs", "715d4f79f9aeca9d46052c0b08661cfdb5524d079d7d3070b282930bfe699a7b"],
     ["frontend/tests/fixtures/gui-style-plan.json", "24bdcb858dcc74878e99aca0de338bf335cf3b1b3c14e8b68820fca1be9ca8b9"],
     ["frontend/src/components/cssUnits.ts", "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873"],
     ["frontend/src/components/CspStyle.ts", "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320"],

@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "scope": "APPLIED SOURCE ONLY; normalized validation NOT RUN",
+  "base": "c0108d1948f204e4529c2b6c1596d5f6672d4078",
+  "owningActualSyncSource": "3151a9d62061b3b5165d9653cb09910e1d14a147",
+  "actualProtectedSYNCCommit": "89db19d4a820a5adde52cada9c072adfb258cabf",
+  "actualSyncResultSha256": "7d276286ca07fa36e7d3e864d528ee6d16c51faaa843f0bfb4fe8f79026b6365",
+  "actualSyncWholeCapture": "efc8e8806baf87c61a27d4fc397b46d1dbb600e5b307f280bdfa7d909b035922",
+  "qualifiedCore": "core-v1.6/sourceb0ad658/tag ec3f79a",
+  "rawInputs": {
+    "frontend/package.json": {
+      "beforeSha256": "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99",
+      "afterSha256": "d2fe548af9b8c097f2e067852332bdaed0daf319826892a6cb1c4e5bf92aa121"
+    },
+    "frontend/package-lock.json": {
+      "beforeSha256": "e430c87d566567f5a47160ff6bd3b327d875894769891c1d3bbcdcd035dd3aec",
+      "afterSha256": "fa9800b9a39cf7d30f60bd5b85e1a2bd1edcc662e20b851f4b85b56e09749915"
+    }
+  },
+  "exactSemanticDelta": {
+    "frontend/package.json": [
+      {
+        "path": [
+          "devDependencies",
+          "@roedu/web-kit"
+        ],
+        "before": "file:vendor/roedu-web-kit-0.1.5.tgz",
+        "after": "file:vendor/roedu-web-kit-0.1.6.tgz"
+      }
+    ],
+    "frontend/package-lock.json": [
+      {
+        "path": [
+          "packages",
+          "",
+          "devDependencies",
+          "@roedu/web-kit"
+        ],
+        "before": "file:vendor/roedu-web-kit-0.1.5.tgz",
+        "after": "file:vendor/roedu-web-kit-0.1.6.tgz"
+      },
+      {
+        "path": [
+          "packages",
+          "node_modules/@roedu/web-kit",
+          "version"
+        ],
+        "before": "0.1.5",
+        "after": "0.1.6"
+      },
+      {
+        "path": [
+          "packages",
+          "node_modules/@roedu/web-kit",
+          "resolved"
+        ],
+        "before": "file:vendor/roedu-web-kit-0.1.5.tgz",
+        "after": "file:vendor/roedu-web-kit-0.1.6.tgz"
+      },
+      {
+        "path": [
+          "packages",
+          "node_modules/@roedu/web-kit",
+          "integrity"
+        ],
+        "before": "sha512-CFAqyD3vu3QQ8XZns/DgNYYTY9KWWShXQwXslhRbIi5Tptr+KqyuKKkKngp67daPA2pDVxOjZ46obsMxaTRAwg==",
+        "after": "sha512-kjpj+O3TA4RSNihqas3ry2rJLvTFcCkp9bZ92m9ZsBKl/oy5VmNuBrpwZEqnsNLHAQgp804UCbUOpkZ7v2Of2g=="
+      }
+    ]
+  },
+  "sdkArchiveSha256": "1736b656a8650cee6fa4f0d033cdc3b14851d4e440dd7b7318ee621478999191",
+  "actualArchiveLockSriMatches": true,
+  "paths": [
+    {
+      "path": "scripts/gui-style-plan.mjs",
+      "beforeSha256": "0f4bea9c01245b1c0c48e163d960de2bfbbe5294744aa032b362c4f5d330ff49",
+      "afterSha256": "715d4f79f9aeca9d46052c0b08661cfdb5524d079d7d3070b282930bfe699a7b",
+      "fullMode": 33188,
+      "literalReplacements": [
+        [
+          "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99",
+          "d2fe548af9b8c097f2e067852332bdaed0daf319826892a6cb1c4e5bf92aa121"
+        ],
+        [
+          "e430c87d566567f5a47160ff6bd3b327d875894769891c1d3bbcdcd035dd3aec",
+          "fa9800b9a39cf7d30f60bd5b85e1a2bd1edcc662e20b851f4b85b56e09749915"
+        ]
+      ],
+      "exactWholeFileInverse": true
+    },
+    {
+      "path": "scripts/gui-style-operation.mjs",
+      "beforeSha256": "f89d82726d8048f09a0ff26d0083496592ee88a01ae137c8d89f689614dbbf55",
+      "afterSha256": "e73d0fe6713dbd9c51ad55431147efe7bbcfa62eeaae91b4894f2e5168d78bae",
+      "fullMode": 33188,
+      "literalReplacements": [
+        [
+          "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99",
+          "d2fe548af9b8c097f2e067852332bdaed0daf319826892a6cb1c4e5bf92aa121"
+        ],
+        [
+          "e430c87d566567f5a47160ff6bd3b327d875894769891c1d3bbcdcd035dd3aec",
+          "fa9800b9a39cf7d30f60bd5b85e1a2bd1edcc662e20b851f4b85b56e09749915"
+        ],
+        [
+          "0f4bea9c01245b1c0c48e163d960de2bfbbe5294744aa032b362c4f5d330ff49",
+          "715d4f79f9aeca9d46052c0b08661cfdb5524d079d7d3070b282930bfe699a7b"
+        ]
+      ],
+      "exactWholeFileInverse": true
+    },
+    {
+      "path": "frontend/tests/gui-style-plan.test.mjs",
+      "beforeSha256": "7a635f10da337b51112399abdb120b52b5cd7da3719595b434e3c431e5558903",
+      "afterSha256": "22961519b6c6b133cfe61af2206aba051a07492d2d6fddf4c2954ff5864e9d0b",
+      "fullMode": 33188,
+      "literalReplacements": [
+        [
+          "0f4bea9c01245b1c0c48e163d960de2bfbbe5294744aa032b362c4f5d330ff49",
+          "715d4f79f9aeca9d46052c0b08661cfdb5524d079d7d3070b282930bfe699a7b"
+        ]
+      ],
+      "exactWholeFileInverse": true
+    }
+  ],
+  "literalReplacementCount": 6,
+  "originalEfdeF726GuardsAndAllAssertionsRefusalsUnchanged": true,
+  "positiveFixtureGuiStyleOperationTestUnchanged": true,
+  "historicalC40_2dbAndD20Evidence": "UNCHANGED; current successor does not retroactively qualify new source",
+  "independentDiagnosis": "program_pack confirmed SDK-only1manifest/4lockfields; exact6literal3path successor required",
+  "formalKIT_BUMP": "NOT ISSUED"
+}
