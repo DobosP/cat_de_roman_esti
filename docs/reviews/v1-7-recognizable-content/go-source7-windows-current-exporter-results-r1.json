@@ -1,0 +1,210 @@
+{
+  "kind": "actual current exporter compilation evidence only",
+  "recorded_utc": "2026-10-09T16:45:05.800956+00:00",
+  "spec_sha256": "d409c893157a054db02e1388c735e05a125266fedd67d5fdc89fba2046cd435b",
+  "actual_state": {
+    "full_readset_checks": [
+      {
+        "boundary": "pre",
+        "started_epoch": 1791564085.4536576,
+        "finished_epoch": 1791564090.8436296,
+        "protected_files": 20950
+      },
+      {
+        "boundary": "post",
+        "started_epoch": 1791564247.6620946,
+        "finished_epoch": 1791564252.6142046,
+        "protected_files": 20950
+      }
+    ],
+    "kind": "passed",
+    "started_epoch": 1791563372.8543394,
+    "deadline_epoch": 1791564572.8543394,
+    "baseline": 3200845628,
+    "completed": [
+      {
+        "step": "current-exporter-build",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native_peak": 203767808,
+        "artifact_sha256": "28bc51550237fca7ca5c42c63d1bb9df3ab862015998ef8fa9006f2eb605597b",
+        "artifact_bytes": 6338301,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_bytes": 0,
+        "download_diagnostic_lines": 0,
+        "build_cache_sha256": "fae3f8557e7a5b67547526ecc03ece5eea310a150e0e8124ff3eb01f36064edd",
+        "build_cache_files": 0,
+        "build_cache_dirs": 1,
+        "build_cache_bytes": 0
+      }
+    ],
+    "rss_scope": "Windows Python controller + native exec PowerShell launcher + owned WSL carrier + Linux supervisor/owned Go process group; Codex source workers excluded.",
+    "cleanup": "owned Linux group confirmed absent",
+    "pending_step": "current-exporter-build",
+    "parent_inclusive_peak": 461623296,
+    "whole_R_S_bytes": 3236882152,
+    "finished_epoch": 1791564260.570261,
+    "final_growth": 36037556,
+    "all_non_target_protected_exact": true,
+    "full_stage_namespace_exact": true,
+    "target_before_sha256": "fefea7b90e85988838519b0a0a8a594ce61ba171d5556d6dcb554b2feb179d0b",
+    "target_after_sha256": "fefea7b90e85988838519b0a0a8a594ce61ba171d5556d6dcb554b2feb179d0b",
+    "scope": "One fixed current cat-content exporter compilation from sealed candidate through immutable offline file proxies only; no tool invocation/audit/content adoption/full release acceptance."
+  },
+  "telemetry_rows": 685,
+  "samples": 683,
+  "native_completion": {
+    "kind": "complete",
+    "step": "current-exporter-build",
+    "returncode": 0,
+    "native_peak": 203767808,
+    "group_absent": true
+  },
+  "build_output": {
+    "kind": "build-output",
+    "step": "current-exporter-build",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "output_bytes": 0,
+    "artifact_sha256": "28bc51550237fca7ca5c42c63d1bb9df3ab862015998ef8fa9006f2eb605597b",
+    "artifact_bytes": 6338301,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_bytes": 0,
+    "download_diagnostic_lines": 0,
+    "build_cache_sha256": "fae3f8557e7a5b67547526ecc03ece5eea310a150e0e8124ff3eb01f36064edd",
+    "build_cache_files": 0,
+    "build_cache_dirs": 1,
+    "build_cache_bytes": 0
+  },
+  "native_generations": [
+    [
+      345399,
+      3351812
+    ]
+  ],
+  "windows_live_generations": {
+    "rows": [
+      {
+        "parent_pid": 23380,
+        "creation_utc": "2026-10-09T16:29:29.6184340Z",
+        "owned_argv_match": true,
+        "pid": 47700,
+        "name": "pwsh.exe"
+      },
+      {
+        "parent_pid": 47700,
+        "creation_utc": "2026-10-09T16:41:19.0497750Z",
+        "owned_argv_match": true,
+        "pid": 15988,
+        "name": "python.exe"
+      },
+      {
+        "parent_pid": 15988,
+        "creation_utc": "2026-10-09T16:41:31.8458990Z",
+        "owned_argv_match": true,
+        "pid": 2396,
+        "name": "wsl.exe"
+      },
+      {
+        "parent_pid": 2396,
+        "creation_utc": "2026-10-09T16:41:31.8620300Z",
+        "owned_argv_match": true,
+        "pid": 13284,
+        "name": "wsl.exe"
+      }
+    ],
+    "recorded_utc": "2026-10-09T16:42:10.4122726Z",
+    "kind": "actual targeted Windows process-generation observation"
+  },
+  "linux_supervisor_observation": {
+    "kind": "root transcription of actual quality reviewer tool04b6c4",
+    "observed_epoch": 1791564123.139103,
+    "pid": 345248,
+    "start_ticks": 3344926,
+    "ppid": 345245,
+    "pgid": 345248,
+    "sid": 345248,
+    "owned_argv_exact": true
+  },
+  "file_readback": {
+    "probe/native-current-exporter-build-spec-r1.json": {
+      "sha256": "d409c893157a054db02e1388c735e05a125266fedd67d5fdc89fba2046cd435b",
+      "bytes": 10222747
+    },
+    "native-current-exporter-build-actual-admission-r1.json": {
+      "sha256": "4058a2566f1eb7ff1a19cc24da948f35a137bc41102f96e4ed4c6c6609faad0a",
+      "bytes": 2351
+    },
+    "probe/native-current-exporter-build-dispatch-approval-r1.json": {
+      "sha256": "7c455a758209a478d61d27176dd8b7555b30b3a3258c6e9ff7e446e9514a6041",
+      "bytes": 725
+    },
+    "current-exporter-actual-dispatch-reviews-r1.json": {
+      "sha256": "72b0ba165da9f7c9b00d82041775ec48f84e0de9be4e5da446f484ec6a93418e",
+      "bytes": 1655
+    },
+    "current-exporter-admission-review-harness-failure-r1.json": {
+      "sha256": "8c2611b2429f259663bb9092685d09c767b4f5f84b0d10a2571cfcc06277bbef",
+      "bytes": 864
+    },
+    "current-exporter-held-launcher-identity-r1.json": {
+      "sha256": "30fd221a4da4c53f58f5e5efa44d6fb22c25e3aa9ee765122e79cc2b68240941",
+      "bytes": 353
+    },
+    "current-exporter-held-observation-r1.json": {
+      "sha256": "e32ab76c803f506bd0b4b3b134bf3ad166e419dc99ee9b2aab961cf598075ba1",
+      "bytes": 785
+    },
+    "current-exporter-live-Windows-generations-r1.json": {
+      "sha256": "2dc3962d2affe4299f408e2d0d0eab114f4e48cef4017934c1c177aa57cc8efe",
+      "bytes": 852
+    },
+    "current-exporter-source-boundary-r1.json": {
+      "sha256": "e6e635f0ef6b819a9a773f02a86b12091b0f182d9a40087fc5dfef88032ef765",
+      "bytes": 6097
+    },
+    "current-exporter-source-evidence-r1.tar.gz": {
+      "sha256": "2cf06dccd90c41ee123c89894bf7ed0a89c6bffeb809d9dfe74f7a0a66076755",
+      "bytes": 2920213
+    },
+    "current-exporter-source-evidence-r1.json": {
+      "sha256": "5f48ea501225d91bf43f0b16d41d9010f6fa20f0fc3a774d5a0f480d2232b647",
+      "bytes": 6084
+    },
+    "current-exporter-source-archive-review-r1.json": {
+      "sha256": "4f280f4f522cc4f4a48954e93031e66a8ef3f906d0d8ecf3a938afa8ccdea1a5",
+      "bytes": 547
+    },
+    "native-current-exporter-build-r1/run/state.json": {
+      "sha256": "b8ed68669f2f24625b4cbd883854a021ffc3ecdc1f6f6965375cb1249fdf899b",
+      "bytes": 2004
+    },
+    "native-current-exporter-build-r1/tools/build.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "native-current-exporter-build-r1/run/current-exporter-build.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "native-current-exporter-build-r1/run/current-exporter-build.controller.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "native-current-exporter-build-r1/run/current-exporter-build.telemetry.jsonl": {
+      "sha256": "cae0302de774de48ac6b1638cf40af1d407cf15289624db2f02979276950afac",
+      "bytes": 60810
+    },
+    "native-current-exporter-build-r1/run/build-cache-manifest-windows.json": {
+      "sha256": "fae3f8557e7a5b67547526ecc03ece5eea310a150e0e8124ff3eb01f36064edd",
+      "bytes": 25
+    },
+    "native-current-exporter-build-r1/run/build-cache-manifest-linux.json": {
+      "sha256": "fae3f8557e7a5b67547526ecc03ece5eea310a150e0e8124ff3eb01f36064edd",
+      "bytes": 25
+    },
+    "native-current-exporter-build-r1/tools/cat-content": {
+      "sha256": "28bc51550237fca7ca5c42c63d1bb9df3ab862015998ef8fa9006f2eb605597b",
+      "bytes": 6338301
+    }
+  },
+  "scope": "ONE offline CGO1 current cat-content compilation, no exporter invocation, gameplay audit, installed adoption or V1.7 acceptance; sampledRSS/trustedOS compiler scope from accepted spec. Source/reviewer/metadata RSS unmeasured."
+}

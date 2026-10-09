@@ -1,0 +1,64 @@
+{
+  "schema": "owner-Windows-handover-transport-verification-v1",
+  "recorded_utc": "2026-10-09T17:47:20.778046+00:00",
+  "valid_until": "input/branch/platform changes; historical clocks remain immutable",
+  "scope": "docs/evidence checkpoint and origin transport only; no V1.7 installed acceptance, runtime install or new game qualification campaign",
+  "automation": "PAUSED by human request",
+  "main": "3d602215a50cd4d42c61c6af58275bb253498802",
+  "branch": "codex/content-v1-7",
+  "factual": {
+    "actual_reviewer": "/root/qualification_ledger",
+    "verdict": "ACCEPT_WINDOWS_HANDOVER_FACTUAL_SOURCE_ONLY",
+    "freeze_utc": "2026-10-09T17:45:57.668028Z",
+    "stage_delta": "exactly8 expected files differ from original1200;1192 exact/no paths added/removed;224dirs; pending3testassertionupdates unrun"
+  },
+  "quality": {
+    "actual_reviewer": "/root/continuation_audit",
+    "verdict": "ACCEPT_WINDOWS_HANDOVER_FINAL_DOCS_DELTA_SOURCE_ONLY",
+    "freeze_utc": "2026-10-09T17:45:32.270530Z",
+    "archive_verdict": "ACCEPT_WINDOWS_HANDOVER_ARCHIVES_METADATA_ONLY",
+    "archive_freeze_utc": "2026-10-09T17:41:45.703508Z",
+    "archive_checks": "all1200stage+111evidence members safeuniqueordinary exactsize/hash/mode/live; finalmanifest CRLF-to-LF only proved lossless"
+  },
+  "reviews_method": "root transcription of actual independent messages; no impersonation/preissued judgment",
+  "frozen_doc_sha256": {
+    "docs\\STATUS.md": "2a5e54e00a36dc90237d700363892fc6ff60ea45a57943f4b16d654990792129",
+    "docs\\reviews\\v1-7-recognizable-content\\README.md": "9e39d57eb60910cd53916726477bbce063d748306a108c94f206a6244ac82f06",
+    "docs\\reviews\\v1-7-recognizable-content\\windows-source-checkpoint-handoff-r1.json": "b661b9436c54be19cd781b15a6870ccf7c77922ac7baf1a156e2504238c221fa"
+  },
+  "native_docs": {
+    "outer_tool": "c71e32",
+    "genuine_exit_code": 0,
+    "raw_result_sha256": "7f1808400ab85c0efccaa2e81cc6bd31b81150da4f2a72e108db483159082821",
+    "spec_sha256": "628ec1fe5e6dd6ede1e1aafbe9f1adf61e1cecc30cfa4064b051c26ea6cd5ed5",
+    "protected": 586,
+    "report": {
+      "files": 59,
+      "dead_links": [],
+      "stale_terms": [],
+      "retired_verbs": [],
+      "orphans": [],
+      "budgets": []
+    },
+    "finished_epoch": 1791567908.6726377,
+    "parent_inclusive_sampled_peak": 108167168,
+    "samples": 3,
+    "growth": 62645640,
+    "cleanup": "checker46204 generation1791567907.0052202 absent; root ac8f9e no rows for checker/controller41244/PowerShell8676 (exit1 means no matching processes); controller/parent generations not durably recorded, no stronger claim",
+    "RSS_scope": "controller + actual PowerShell parent + observed native checker/Git descendants; short-lived processes may fall between samples; source Codex workers excluded"
+  },
+  "whitespace": {
+    "initial": "78c0eb FAILED owned text emitted CRLF; fixed canonicalLF before native docs/commit",
+    "corrected_unstaged": "a53066 and316b6d PASS",
+    "staged": "must pass before commit; final tool result separate"
+  },
+  "publication": {
+    "authorized": "main and unfinished feature for Windows",
+    "main_merge": "none; V1.7 stays unqualified on feature",
+    "push": "pending at this verification record; root must verify actual origin OIDs afterward",
+    "retained_older_branches": "content-v1-7-qualification,GUI docs,and V1.6 Windows session have zero commits absent from all origin refs; retained untouched"
+  },
+  "old_failures": "all old clocks/failure receipts preserved; boundary0eefcbbc closed originalnative17:38:18<17:40:28; no oldclock reset",
+  "source_metadata_reviewer_RSS": "unmeasured",
+  "handover_admission_sha256": "a7553c9254d67229931dec268802e67e8d96b7be6b131597e36b82d9ff3a2590"
+}

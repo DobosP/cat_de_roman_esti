@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-09 — content loop resumed in this chat. Source6 live; V1.7 uninstalled.
+Last verified: 2026-10-09 — loop paused for owner Windows handover/origin publication. Source6 live; V1.7 uninstalled.
 
 - **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
@@ -106,7 +106,7 @@ Historical verification receipts: [WORKLOG](../WORKLOG.md), [V1.0.1](reviews/v1-
 - [Five pinned web modules](reviews/v1-7-recognizable-content/go-source7-windows-five-module-acquisition-results-r1.json) genuinely acquired/Go-validated:1871files/23852260B, complete19023pre/post and both-host fingerprint, independently accepted. First offline rail build FAILED cumulative growth; exact failure/cleanup retained, no artifact. [Current rail build](reviews/v1-7-recognizable-content/go-source7-windows-current-rail-build-results-r3.json) independently accepted:e702a52c/34667895B, complete20915pre/post,800423936B peak/227532057B native growth/cleanup. Original growth/dispatch/collector failures retained; current producer reused for the fresh Quick audit.
 - [Isolated staged Quick transition](reviews/v1-7-recognizable-content/go-source7-windows-current-quick-transition-results-r1.json) independently accepted: only Quick34c→fef changed;1199other files/modes preserved. Prospective85boards/460requests and genuine finals are predecessor history. Six source-pin references updated across five staged files; fresh affected producer/installed audit/finals and full Source7 gates remain; V1.7 uninstalled.
 - Full native/shared/Webkit coverage, independent Source7HTTP1207 corpus/selector, current/frozen assets, installed source/history/inverse/authority and exact assembled acceptance remain required. [Current continuation](reviews/v1-7-recognizable-content/README.md).
-- Loop runs here, no new chats; GUI/perf separate, PG/provider/remote actions paused. No V1.8 before nonempty independently accepted all-green V1.7 local landing.
+- Loop **PAUSED** for owner Windows continuation. [Handover](reviews/v1-7-recognizable-content/windows-source-checkpoint-handoff-r1.json) preserves current1200-file stage and111-member compiler/export evidence; actual isolated export+check accepted, new bundle40147/digestddc182. No installed V1.7 or V1.8; GUI/PG/provider separate.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni

@@ -1,11 +1,103 @@
 {
-  "schema": "owner-immediate-Windows-source-handoff-v1",
-  "checked_at_utc": "2026-10-08T06:59:11.798364+00:00",
-  "source_checkpoint": "f495be63bd342c599b7727a591edec8cf8b246a5",
+  "schema": "owner-Windows-source-handoff-v2",
+  "valid_until": "owner resumes work or branch/input/platform state changes; prior native clocks remain immutable",
+  "checked_at_utc": "2026-10-09T17:42:12.109105+00:00",
+  "owner_authorized": "stop loop; documented handover; publish current main and unfinished feature branch to origin for Windows continuation",
+  "automation": {
+    "id": "romanian-game-serial-session-loop",
+    "status": "PAUSED",
+    "no_successor_sessions": true
+  },
+  "main": "3d602215a50cd4d42c61c6af58275bb253498802",
+  "branch": "codex/content-v1-7",
+  "pre_handover_checkpoint": "f3456a3a5ec0b6119ad23154271b652c7754e81a",
+  "handover_commit": "the commit containing this updated record; final origin OIDs verified separately",
   "installed_source": "Source6",
   "V1_7_installed": false,
-  "owner_authorized": "source-only origin/main publication and needed committed feature/WIP snapshot branches; no tests this handoff",
-  "tests_rerun": false,
-  "heartbeat": "PAUSED",
-  "next": "Read STATUS/currentreview; reuse archived exact Source7 candidates/Worldtransition. Reconstruct qualified ownplatform scratch/readsets without changing old receipts; fresh Quickaudit afterWorld1f thenoriginalrolefinals. FullSource7gates/assembledacceptance remain pending."
+  "V1_7_qualified": false,
+  "integrated_growth": 0,
+  "local_paths": {
+    "shared": "C:/Users/Paul Work/personal_repos/cat_de_roman_esti",
+    "task": "C:/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-7",
+    "scratch": "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-7",
+    "stage": "C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-7/source7-candidate-1200"
+  },
+  "portable_stage": {
+    "archive": "reference/source7-owner-Windows-current-stage-r1.tar.gz",
+    "sha256": "69a3c06dea021487cd8a6f550faee2c053055210444ac19d910de978ef850c34",
+    "bytes": 26414225,
+    "files": 1200,
+    "dirs": 224,
+    "manifest": "reference/source7-owner-Windows-current-stage-r1.manifest.json",
+    "manifest_sha256": "419876e75e494c99786fc915ace10bba659b0f883a5fbaab38faa33aab0a3dae"
+  },
+  "portable_new_evidence": {
+    "archive": "reference/source7-owner-Windows-export-evidence-r1.tar.gz",
+    "sha256": "fa3b90787056f993782a03f7cbecb3980a660d348e3389c4933fd0d72ea41588",
+    "bytes": 35629532,
+    "members": 111,
+    "manifest": "reference/source7-owner-Windows-export-evidence-r1.manifest.json",
+    "manifest_sha256": "23b5ebcf2ee4cb8c84533bdbe3865bcb7cac237be05c082bb9c5a9d7602ea117",
+    "includes": "current exporter binary/source/build results; original rejected drafts/clocks/source controls; serving export before/after/inverse/raw streams/receipts/telemetry/actual independent review transcription; no SDK or mutable caches"
+  },
+  "completed": [
+    "Linux Extensions49 and inputcontracts71 already complete; no replay.",
+    "Fresh honest85 Quick raw reviews, supported proposal/audit85boards460requests and original-role finals complete as prospective evidence only.",
+    "Isolated Quick transition34c-to-fef complete; five staged source files contain six reviewed pin replacements.",
+    "One offline current cat-content compile qualified:28bc51550237fca7ca5c42c63d1bb9df3ab862015998ef8fa9006f2eb605597b/6338301B. Official SDK/modules not rediscovered.",
+    "Actual supported serving export plus --check passed genuine outer53745exit0. Only bundled.json and digest.go changed; complete raw/private parsed bundle differs only in Quick source binding. Current installed repository remains Source6."
+  ],
+  "stage_pins": {
+    "Quick": "fefea7b90e85988838519b0a0a8a594ce61ba171d5556d6dcb554b2feb179d0b",
+    "World": "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+    "Extensions": "605690ec6b163ab3860fc57c53c21288b2781b85c77f93e414d63207340119bf",
+    "bundle": "40147ba67a0cbd428d0af6f35d719edc40521af9650e6c41b1cdf99ce664890d",
+    "digest_go": "ddc1824d818fdcba10c1475bd6b7a5a2290eeb4f244dd3721ac4d6650c1ef73b",
+    "bundle_bytes": 7272465
+  },
+  "actual_export": {
+    "result": "go-source7-windows-serving-export-results-r1.json",
+    "sha256": "e0ea83b9b8f6213923e9afa685c809c0793c0c66702630ad08424e9fc3394fd4",
+    "boundary": "go-source7-windows-serving-export-boundary-r1.json",
+    "boundary_sha256": "0eefcbbac3af0b987e5ad878156b7083144722beb670ae031cec7e0b39dd9eae",
+    "closed_utc": "2026-10-09T17:38:18.253117Z",
+    "deadline_utc": "2026-10-09T17:40:28.7493608Z",
+    "factual_freeze": "2026-10-09T17:36:07.665532Z",
+    "quality_freeze": "2026-10-09T17:36:49Z",
+    "scope": "isolated export and check only; sampled declared parent peak353759232B; growth26272230B; four complete1223 Windows pre/post proofs; both Linux group closures and known Windows identities absent; source/reviewer/metadata RSS unmeasured"
+  },
+  "exact_next_action": [
+    "Read STATUS, this record, wave README and serving-export-authority plan; verify fetched origin/main and origin/codex/content-v1-7. Keep main clean; reuse task local progress. If these local paths still exist, verify against manifests and reuse rather than restore again.",
+    "If moving to a fresh Windows checkout, verify both portable archive SHAs and all ordinary safe manifest members; reconstruct the isolated stage/evidence in NEW canonical scratch. Never extract this unqualified candidate over repository main or erase existing scratch/history. Old Linux/Windows paths and mode receipts are provenance; refresh actual host admission without altering historical receipts.",
+    "Separately source-review and update only the actual bundle/digest SHA assertions in staged contentbuild/source7_build_test.go and httpapi/source7_ordinary_inputs_test.go/source7_held_inputs_test.go. Bundle length7272465 unchanged. Preserve Source6 frozen history. This assertion update has NOT run.",
+    "Fresh affected cat-content-rail build against the frozen actual new bundle and source pins. Preserved e702 rail embeds the old bundle and is stale for installed proof; do not use it as fresh qualification.",
+    "Copy reviewed exact Quick evidence into eligible staged docs paths; obtain one fresh installed-binding Quick audit against current131runtime/source9,85boards460requests and same actual role finals. Existing1c6 audit/finals are predecessor history and cannot certify current installed binding.",
+    "Supported installed-authority draft; separately reviewed guarded authority manifest/pin transaction; rebuild affected producer/runtime; fresh affected installed audits/finals. Preserve other Source6 chain entries and current World/Extensions.",
+    "Complete required native/backend/shared/CLI/contentrails/race-vet, Source7HTTP1207 independent capture/selector,TCP151/assets28, exports/reference/corpus/history/full-byte inverse/current authority/docs/whitespace/exact assembled acceptance. Only then local V1.7 landing; no V1.8 until real accepted nonempty landing."
+  ],
+  "review_roles": {
+    "factual": "/root/qualification_ledger",
+    "quality": "/root/continuation_audit",
+    "restriction": "These are actual historical reviewers. Resume only if genuinely available; never impersonate names. If unavailable, get honest new raw reviews/new supported proposal as required."
+  },
+  "retained_tools": {
+    "SDK": "S/tools/go existing officialGo1.27.1; exact SDK hash/readset in prior committed evidence; do not rediscover/download each resume",
+    "exporter": "S/native-current-exporter-build-r1/tools/cat-content; exact bytes also inside new111-member evidence archive",
+    "old_rail": "S/native-current-rail-build-r2/tools/cat-content-rail e702a52c; stale after serving export",
+    "docs": "existing Windows cat-doc-check.exe ef10dd674639a612e95fb17446c20bd3c4bffd7d8c592c4849f195e8afc936af"
+  },
+  "preserve": [
+    "all unmerged old worktrees/branches and failed evidence",
+    "all original clocks and failure classifications, including late compiler archive quality ACK and refused deadline finalization",
+    "leafă singular employee-pay only; Tocător research and five other pool records separate",
+    "Drapel/Untdelemn/Source6, World/Extensions/Quick staged transactions already applied: never replay",
+    "graph floors4incident/2same-category and target5incoming; Alchimie256/512; bounded deterministic sessions; private answers/history",
+    "GUI/perf separate; no provider/account/liveDB/deployment changes"
+  ],
+  "stop_state": "no active native owner; peers stopped; automation paused; no next version started",
+  "handover_checks": "docs/whitespace and exact checkpoint source/archive reviews recorded in verification JSON; no new game qualification test campaign for transport",
+  "publication": "main unchanged Source6 checkpoint; feature contains unfinished source-only transport/evidence. No red/unqualified V1.7 merge.",
+  "handover_observer_failures": [
+    "Initial root docs write emitted CRLF; unstaged whitespace check78c0eb failed before any commit/native docs. Corrected owned text to canonical LF; unexecuted docs spec r1 retained and superseded by freshly pinned r2. Original archived source/raw evidence not rewritten."
+  ]
 }

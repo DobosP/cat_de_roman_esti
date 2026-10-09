@@ -1,0 +1,56 @@
+{
+  "kind": "PASS",
+  "scope": "ONE existing source-exact Windows documentation checker only",
+  "started_epoch": 1791567585.55188,
+  "deadline_epoch": 1791568785.55188,
+  "finished_epoch": 1791567908.6726377,
+  "before_bytes": 3341838854,
+  "after_bytes": 3341838945,
+  "anchor": 3279193305,
+  "growth": 62645640,
+  "parent_inclusive_sampled_peak": 108167168,
+  "rss_scope": "controller + actual PowerShell parent + observed native checker/Git descendants; short-lived processes may fall between samples; source Codex workers excluded",
+  "observed_owned_pids": {
+    "46204": 1791567907.0052202
+  },
+  "all_observed_owned_processes_absent": true,
+  "report": {
+    "files": 59,
+    "dead_links": [],
+    "stale_terms": [],
+    "retired_verbs": [],
+    "orphans": [],
+    "budgets": []
+  },
+  "tool_sha256": "ef10dd674639a612e95fb17446c20bd3c4bffd7d8c592c4849f195e8afc936af",
+  "spec_sha256": "628ec1fe5e6dd6ede1e1aafbe9f1adf61e1cecc30cfa4064b051c26ea6cd5ed5",
+  "stdout_sha256": "eb7cea2f02031d8e6d85ccd479143779f3ab0ab9a1c5901582a46ac6979b6ff3",
+  "samples": [
+    {
+      "epoch": 1791567907.0037951,
+      "rss": 100687872,
+      "pid_rss": {
+        "41244": 22589440,
+        "8676": 78098432
+      }
+    },
+    {
+      "epoch": 1791567907.0262895,
+      "rss": 108167168,
+      "pid_rss": {
+        "41244": 22790144,
+        "8676": 78098432,
+        "46204": 7278592
+      }
+    },
+    {
+      "epoch": 1791567908.6706386,
+      "rss": 101507072,
+      "pid_rss": {
+        "41244": 23408640,
+        "8676": 78098432
+      }
+    }
+  ],
+  "trusted_boundary": "existing Windows/Python/psutil/Git runtime DLLs, remaining repository-local Git config and OS; fsmonitor explicitly disabled; no whole-OS hermetic claim"
+}
