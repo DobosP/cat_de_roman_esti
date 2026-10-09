@@ -1,0 +1,979 @@
+{
+  "schema": 1,
+  "target": "full",
+  "status": "fail",
+  "sha": "2db4d3d222e72146e82a6a8acfa02556ceb5ffe2",
+  "dirty": false,
+  "tree_sha256": "c855f2bbb2971b1327797fdb5f9761eae20edf45a71a2a551f3a5eee8095957c",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "7ce6c385dde548aba1fc821f557179ef0fdb8d0b8147f1847bdd267e041100be",
+  "parallel": 2,
+  "started": "2026-10-09T06:12:26.885Z",
+  "finished": "2026-10-09T06:49:37.757Z",
+  "checks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 1
+    },
+    {
+      "name": "ui-adoption",
+      "status": "pass",
+      "reason": "ui-staged-pending",
+      "duration_ms": 29
+    },
+    {
+      "name": "cat-setup-npm-ci",
+      "status": "pass",
+      "duration_ms": 1250
+    },
+    {
+      "name": "versions-check",
+      "status": "pass",
+      "reason": "legacy-pending;ui-staged-pending",
+      "duration_ms": 297
+    },
+    {
+      "name": "toolchain-versions",
+      "status": "pass",
+      "reason": "legacy-pending;ui-staged-pending",
+      "duration_ms": 550
+    },
+    {
+      "name": "lint-scope",
+      "status": "pass",
+      "reason": "legacy-pending",
+      "duration_ms": 295
+    },
+    {
+      "name": "kit:check",
+      "status": "pass",
+      "reason": "ui-staged-pending",
+      "duration_ms": 159
+    },
+    {
+      "name": "cat-doccheck-source-contracts",
+      "status": "pass",
+      "duration_ms": 1514
+    },
+    {
+      "name": "cat-unit-fresh-build-output",
+      "status": "pass",
+      "duration_ms": 42
+    },
+    {
+      "name": "cat-unit-frontend-build",
+      "status": "pass",
+      "duration_ms": 1101
+    },
+    {
+      "name": "cat-unit-emitted-inventory",
+      "status": "pass",
+      "duration_ms": 52
+    },
+    {
+      "name": "cat-unit-assets",
+      "status": "pass",
+      "duration_ms": 62
+    },
+    {
+      "name": "cat-unit-gui-identity",
+      "status": "pass",
+      "duration_ms": 146
+    },
+    {
+      "name": "cat-route-budgets",
+      "status": "fail",
+      "reason": "node failed (1)",
+      "duration_ms": 355
+    },
+    {
+      "name": "cat-frontend-unit",
+      "status": "pass",
+      "duration_ms": 6849
+    },
+    {
+      "name": "cat-frontend-lint",
+      "status": "pass",
+      "duration_ms": 2569
+    },
+    {
+      "name": "cat-frontend-types",
+      "status": "pass",
+      "duration_ms": 658
+    },
+    {
+      "name": "cat-backend-race",
+      "status": "pass",
+      "duration_ms": 551954
+    },
+    {
+      "name": "cat-backend-vet",
+      "status": "pass",
+      "duration_ms": 662
+    },
+    {
+      "name": "cat-authcore-race",
+      "status": "pass",
+      "duration_ms": 107
+    },
+    {
+      "name": "cat-authcore-vet",
+      "status": "pass",
+      "duration_ms": 100
+    },
+    {
+      "name": "cat-doc-check",
+      "status": "pass",
+      "duration_ms": 244
+    },
+    {
+      "name": "cat-content-validate",
+      "status": "pass",
+      "duration_ms": 1264
+    },
+    {
+      "name": "cat-content-export",
+      "status": "pass",
+      "duration_ms": 1344
+    },
+    {
+      "name": "cat-docs-gate",
+      "status": "pass",
+      "duration_ms": 26
+    },
+    {
+      "name": "cat-full-build-cat-server",
+      "status": "pass",
+      "duration_ms": 821
+    },
+    {
+      "name": "cat-full-build-cat-browser-plan",
+      "status": "pass",
+      "duration_ms": 492
+    },
+    {
+      "name": "cat-pg-accounts",
+      "status": "pass",
+      "duration_ms": 1940
+    },
+    {
+      "name": "cat-pg-httpapi",
+      "status": "pass",
+      "duration_ms": 51471
+    },
+    {
+      "name": "cat-http-parity",
+      "status": "pass",
+      "duration_ms": 1583
+    },
+    {
+      "name": "cat-browser-full",
+      "status": "fail",
+      "reason": "node failed (1)",
+      "duration_ms": 1602327
+    },
+    {
+      "name": "repo-full-exit",
+      "status": "fail",
+      "reason": "Actual hook process exited 201",
+      "duration_ms": 2227935
+    },
+    {
+      "name": "ui-adoption-binding",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "name": "csp-measurement",
+      "status": "fail",
+      "reason": "ENOENT: no such file or directory, open '/work/.gate/full/csp-measurement.json'",
+      "duration_ms": 0
+    },
+    {
+      "name": "app-image-evidence",
+      "status": "pass",
+      "duration_ms": 1
+    },
+    {
+      "name": "browser-evidence",
+      "status": "fail",
+      "reason": "ENOENT: no such file or directory, lstat '/work/.gate/full/browser-pw-journeys.json'",
+      "duration_ms": 1
+    }
+  ],
+  "csp": {
+    "stage": "report-only",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {
+    "active:global-css:global": {
+      "limit": null,
+      "actual": 7754,
+      "status": "recorded"
+    },
+    "active:route-js:/": {
+      "limit": 40960,
+      "actual": 115181,
+      "status": "fail"
+    },
+    "active:route-css:/": {
+      "limit": null,
+      "actual": 7754,
+      "status": "recorded"
+    },
+    "active:route-js:/alchimie": {
+      "limit": 40960,
+      "actual": 138212,
+      "status": "fail"
+    },
+    "active:route-css:/alchimie": {
+      "limit": null,
+      "actual": 11930,
+      "status": "recorded"
+    },
+    "active:route-js:/alchimie?mode=challenges": {
+      "limit": 40960,
+      "actual": 138212,
+      "status": "fail"
+    },
+    "active:route-css:/alchimie?mode=challenges": {
+      "limit": null,
+      "actual": 11930,
+      "status": "recorded"
+    },
+    "active:route-js:/alchimie?mode=explore": {
+      "limit": 40960,
+      "actual": 138212,
+      "status": "fail"
+    },
+    "active:route-css:/alchimie?mode=explore": {
+      "limit": null,
+      "actual": 11930,
+      "status": "recorded"
+    },
+    "active:route-js:/cald-rece": {
+      "limit": 40960,
+      "actual": 131814,
+      "status": "fail"
+    },
+    "active:route-css:/cald-rece": {
+      "limit": null,
+      "actual": 9567,
+      "status": "recorded"
+    },
+    "active:route-js:/clasament": {
+      "limit": 40960,
+      "actual": 118169,
+      "status": "fail"
+    },
+    "active:route-css:/clasament": {
+      "limit": null,
+      "actual": 8189,
+      "status": "recorded"
+    },
+    "active:route-js:/conexiuni": {
+      "limit": 40960,
+      "actual": 131126,
+      "status": "fail"
+    },
+    "active:route-css:/conexiuni": {
+      "limit": null,
+      "actual": 9690,
+      "status": "recorded"
+    },
+    "active:route-js:/intrusul": {
+      "limit": 40960,
+      "actual": 128095,
+      "status": "fail"
+    },
+    "active:route-css:/intrusul": {
+      "limit": null,
+      "actual": 8931,
+      "status": "recorded"
+    },
+    "active:route-js:/lant": {
+      "limit": 40960,
+      "actual": 131642,
+      "status": "fail"
+    },
+    "active:route-css:/lant": {
+      "limit": null,
+      "actual": 9837,
+      "status": "recorded"
+    },
+    "active:route-js:/perechi": {
+      "limit": 40960,
+      "actual": 128927,
+      "status": "fail"
+    },
+    "active:route-css:/perechi": {
+      "limit": null,
+      "actual": 9126,
+      "status": "recorded"
+    },
+    "frozen-legacy:global-css:global": {
+      "limit": null,
+      "actual": 8770,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/": {
+      "limit": 40960,
+      "actual": 117271,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/": {
+      "limit": null,
+      "actual": 8770,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/alchimie": {
+      "limit": 40960,
+      "actual": 138596,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/alchimie": {
+      "limit": null,
+      "actual": 12244,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/alchimie?mode=challenges": {
+      "limit": 40960,
+      "actual": 138596,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/alchimie?mode=challenges": {
+      "limit": null,
+      "actual": 12244,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/alchimie?mode=explore": {
+      "limit": 40960,
+      "actual": 138596,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/alchimie?mode=explore": {
+      "limit": null,
+      "actual": 12244,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/cald-rece": {
+      "limit": 40960,
+      "actual": 132257,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/cald-rece": {
+      "limit": null,
+      "actual": 9634,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/clasament": {
+      "limit": 40960,
+      "actual": 118689,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/clasament": {
+      "limit": null,
+      "actual": 8770,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/conexiuni": {
+      "limit": 40960,
+      "actual": 131545,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/conexiuni": {
+      "limit": null,
+      "actual": 10040,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/intrusul": {
+      "limit": 40960,
+      "actual": 128603,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/intrusul": {
+      "limit": null,
+      "actual": 9926,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/lant": {
+      "limit": 40960,
+      "actual": 132047,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/lant": {
+      "limit": null,
+      "actual": 9758,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/perechi": {
+      "limit": 40960,
+      "actual": 129357,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/perechi": {
+      "limit": null,
+      "actual": 10121,
+      "status": "recorded"
+    }
+  },
+  "artifacts": [
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-bootstrap-config-0.stdout.log sha256:557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-bootstrap-setup-1.stdout.log sha256:ad96c4a3b7b2deab0909515d8d2b4db17d06622db39bde4d0c51b6fc49b6cad8",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-bootstrap-setup-1.stderr.log sha256:a2865d4aedb73524b85d08d891fd8bd081822e72d0e059bfbb0f41ecf0c5ae96",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-bootstrap-config-2.stdout.log sha256:557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-bootstrap-config-2.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/bootstrap-execution.json sha256:9ec7368e6ae495fb0e034e8a1fb1624600df19f3823b45468566577dccd41dd7",
+    ".gate/full/ui-adoption-evidence.json sha256:89320426f84bc69685d66ba935f52e704493a782f3a80b741e391806ac13596d",
+    ".gate/full/logs/setup-bd5f6234-000e-42c3-8625-d85e4f780f17-cat-setup-npm-ci-0.stdout.log sha256:27f1a45943bf0b43d06f3719e6dac44213d001841af986465e5cb344be0e19b1",
+    ".gate/full/logs/setup-bd5f6234-000e-42c3-8625-d85e4f780f17-cat-setup-npm-ci-0.stderr.log sha256:c211d12fa3e2f4c92b2151c523b2743bc220c1991e0de3797724e244bb411568",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-versions-check-14.stdout.log sha256:3d8ec75d9199e355b3fefe7b523099944a555f622df71d8ff61621af27551da7",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-versions-check-14.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/validation-versions-check.json sha256:fd116ee7f31b6a0a5ee88faf31e280e25acf4864d1aeb14556b1ec1403f15f62",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-toolchain-versions-16.stdout.log sha256:52531e871e8125f70ac5b6fff725cd3e3ff13537f6bd034038978c1aeb1aa5e8",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-toolchain-versions-16.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/validation-toolchain-versions.json sha256:faf3d5b5c0613ebaab7cfbc6249c99705035c20240720e070738448e6af219f3",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-lint-scope-18.stdout.log sha256:f9a514e6084467e914ab74a2b15bae15e3aed942d7d405c101d0f4b78a29685d",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-lint-scope-18.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/validation-lint-scope.json sha256:250ae6d4d52729b3ef4e3977822f8c3c1c319e3f805fa2ccad186f4b94f1a103",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-kit:check-20.stdout.log sha256:957e309862f49a6cafb26b13b6f095be60723f118307b94c79f676807fb36c5f",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-kit:check-20.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-repo-full-22.stdout.log sha256:03234850ebf582461922048fb8d14f60c8eb696f32484f4547db34d5db5a7cb0",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-repo-full-22.stderr.log sha256:cf110877b3cc1908e033dbd374d1bbf38bb93433de51c32968ce2b0e21d6d71c",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-doccheck-source-contracts-1.stdout.log sha256:039bde7d37133cc1488ff0d1328aee0750c293657e38bf422a6c49396f108d0b",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-doccheck-source-contracts-1.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/doccheck-contracts/report.json sha256:96bafb4c80cffdbebdde9ecd4a3945add87395284e1ad24edb9ff500473eebb5",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-fresh-build-output-3.stdout.log sha256:999380cf9ce3c53c211bb54b2da718020ad1da4d205efe4ca136e3eeb1814cfe",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-fresh-build-output-3.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-frontend-build-4.stdout.log sha256:ca007a78d94b918af742fd21ce687c4c8263173b8739cfa3f1414eb047ea0e11",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-frontend-build-4.stderr.log sha256:ee53b77219b80720b42476aa90f6b8a64d4e41e60ebb81c18d204edd804df309",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-emitted-inventory-5.stdout.log sha256:eedb62b455f0fe65c13fd0429e733b313f2089d240157c0bd074fd3bb5ca6c6a",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-emitted-inventory-5.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-assets-7.stdout.log sha256:37fed9c435604636ed5615fa8a305e7cfe53c2f04f1c23b58f1cf65228b853de",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-assets-7.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-gui-identity-9.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-unit-gui-identity-9.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "go-backend/embedfs/build/dist/.gui-build.json sha256:1e81e124ad67922f0bb9392ee9b8399b47c662fe86d1a8d34077d90cf1472454",
+    "go-backend/embedfs/build/dist/.keep sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "go-backend/embedfs/build/dist/versions.lock.json sha256:7ce6c385dde548aba1fc821f557179ef0fdb8d0b8147f1847bdd267e041100be",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-route-budgets-11.stdout.log sha256:b10a352e7c9f821bd9246482535dc7c578db66b595f2ac461b9c18b7e155bf83",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-route-budgets-11.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/route-budgets/active.json sha256:959e10bc431c9433fd540ccdce58c84d0a80b26161b6d9a15a70383a76a6f083",
+    ".gate/full/route-budgets/frozen-legacy.json sha256:835fc5c169bf688fe07a669ed3dd933c2cd754ea53ffb552832b44f075024c75",
+    ".gate/full/route-budgets/measurements.json sha256:20684ce83a7c3f5dacb87af9e382a76ee61e7bd59bd9b5610ac2092ced939b14",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-frontend-unit-13.stdout.log sha256:a0fb020d7d833d4d7367c6b514442809c7f6931422ece4a3b7f1f9cf441489c9",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-frontend-unit-13.stderr.log sha256:defa2240d1edf35e016987c90c45e4ddd315c93ed8c1a83c8d09cbb9a7b1a034",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-frontend-lint-14.stdout.log sha256:d49583300c366b487efd3d0433b8b96957b23223a01c88186148134e1b4e42eb",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-frontend-lint-14.stderr.log sha256:8ad3b7ac7704d3dcb0dea3335fce4b457554edd2df3ad202c4fc62a3f94c825f",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-frontend-types-15.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-frontend-types-15.stderr.log sha256:f29bc3e1fe96d9bdaf4bfff3ac9fac2885480c4241d841bac8546290fd3a04b6",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-backend-race-17.stdout.log sha256:982f5f247bbe98955378cb4ed165ecef0c34967f957e70ee028eab4fd99e1f6e",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-backend-race-17.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-backend-vet-20.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-backend-vet-20.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-authcore-race-21.stdout.log sha256:73f41e3b534e8ff0e1228373f8c863ef71e538b117608cdc4c781943c6f06929",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-authcore-race-21.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-authcore-vet-23.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-authcore-vet-23.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/managed-assets/inventory.json sha256:eedb62b455f0fe65c13fd0429e733b313f2089d240157c0bd074fd3bb5ca6c6a",
+    ".gate/full/managed-assets/prepare.json sha256:999380cf9ce3c53c211bb54b2da718020ad1da4d205efe4ca136e3eeb1814cfe",
+    ".gate/full/managed-assets/sync.json sha256:37fed9c435604636ed5615fa8a305e7cfe53c2f04f1c23b58f1cf65228b853de",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-doc-check-24.stdout.log sha256:eb7cea2f02031d8e6d85ccd479143779f3ab0ab9a1c5901582a46ac6979b6ff3",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-doc-check-24.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-content-validate-25.stdout.log sha256:1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-content-validate-25.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-content-export-26.stdout.log sha256:4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-content-export-26.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-docs-gate-27.stdout.log sha256:b0fe6cd615aa13e1f86c53da86f88fd28b31ca96b8b50f60b81e35471fafa22c",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-docs-gate-27.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-full-build-cat-server-28.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-full-build-cat-server-28.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/cat-server sha256:58d006e5a509888fbb87a14241b3213cd1b27b809542def0dd4dea5dc61a93c3",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-full-build-cat-browser-plan-29.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-full-build-cat-browser-plan-29.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/cat-browser-plan sha256:6f3d4cb79dc413b02210add1918ccb7d7e3260b8234947f723ec20ffee7eb916",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-pg-accounts-31.stdout.log sha256:0a20437cdff9bac6b2ffe125a9a07465118acaceea358416491b7d5fa1547c1e",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-pg-accounts-31.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-pg-httpapi-34.stdout.log sha256:fe82ab52f2155126a00ad518723d0384bb55be0241331c5f8067041c5f52394b",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-pg-httpapi-34.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-http-parity-36.stdout.log sha256:6a0be3a1ee9c0b0912ae90a56bbcbdf47a5652c6f005a787d35dee366bec93c3",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-http-parity-36.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-browser-full-37.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/bd5f6234-000e-42c3-8625-d85e4f780f17-cat-browser-full-37.stderr.log sha256:6d0054d4dcf16b166260efd7fc19344f795bd9985523c05485da0016f9ee192b",
+    "app-image roedu-app:gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc sha256:9161611dc92b52dcfe0a517ad85b462f70c1131e198e35cf0352decb37ef579d",
+    ".gate/full/execution.json sha256:ceef264398934fcfd2906662370e1bb42e1839e2c383cab3cd87925c0e331769"
+  ],
+  "legacy_pending": [
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-dom/client",
+      "paths": [
+        "frontend/src/main.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/App.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/components/AccountBarContents.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/components/AlchimieModes.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/components/RouteErrorBoundary.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/hooks/useDailyIntent.ts"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/main.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/screens/Alchimie.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/screens/Home.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/src/screens/Ranking.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/App.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/AccountBarContents.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/CategoryPicker.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/CspElements.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/GameIntro.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/GameOptions.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/GameSetupOptions.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/GameShell.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/Hud.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/OptionalChromeBoundary.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/PlayGuide.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/ResultCard.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/RouteErrorBoundary.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/SoundToggle.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/components/StartFailureNotice.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/hooks/useActiveGame.ts"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/hooks/useAuth.ts"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/hooks/useRecordScore.ts"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/hooks/useSavedGameResume.ts"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/main.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/Alchimie.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/AlchimieExplore.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/CaldRece.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/Conexiuni.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/Home.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/Intrusul.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/Lant.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/Perechi.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-imports",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/src/screens/Ranking.tsx"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "@types/react-dom",
+      "paths": [
+        "frontend/package-lock.json#node_modules/@types/react-dom"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "@types/react-dom",
+      "paths": [
+        "frontend/package.json"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "@types/react",
+      "paths": [
+        "frontend/package-lock.json#node_modules/@types/react"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "@types/react",
+      "paths": [
+        "frontend/package.json"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "react-dom",
+      "paths": [
+        "frontend/package-lock.json#node_modules/react-dom"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "react-dom",
+      "paths": [
+        "frontend/package.json"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/package-lock.json#node_modules/react-router-dom"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "react-router-dom",
+      "paths": [
+        "frontend/package.json"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "react-router",
+      "paths": [
+        "frontend/package-lock.json#node_modules/react-router"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/package-lock.json#node_modules/react"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    },
+    {
+      "rule": "banned-packages",
+      "tool_or_import": "react",
+      "paths": [
+        "frontend/package.json"
+      ],
+      "expires": "S1-M2",
+      "source": "lint/scope.json"
+    }
+  ],
+  "ui_adoption": {
+    "mode": "staged-react",
+    "status": "pending",
+    "until": "S1-M2",
+    "source": "repo:kit-config",
+    "config_sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    "legacy": {
+      "version": "0.3.0",
+      "archive_sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+      "source_sha": "45edcf2ce170c112621c73609e6e169633eb38a8",
+      "receipt": "docs/reviews/gui-original-react/receipt.json",
+      "receipt_sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58"
+    },
+    "selected_ui": {
+      "version": "1.0.5",
+      "archive_sha256": "36e539165791b7b6dfc853cfe0ac56faef9977cb9223d392301761917045a3be"
+    }
+  }
+}

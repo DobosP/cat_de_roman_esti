@@ -1,0 +1,2061 @@
+{
+  "schema": 1,
+  "check": "cat-route-budgets",
+  "target": "full",
+  "invocation": "bd5f6234-000e-42c3-8625-d85e4f780f17",
+  "wrapper_invocation": "1ae09be0-8152-4ca3-bc8e-381bc5b713e8",
+  "sha": "2db4d3d222e72146e82a6a8acfa02556ceb5ffe2",
+  "tree_sha256": "c855f2bbb2971b1327797fdb5f9761eae20edf45a71a2a551f3a5eee8095957c",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "status": "fail",
+  "scope": "actual active SPA routes and separately measured frozen-legacy journeys; no runtime/vitals qualification",
+  "method": "delivered public evaluate/gateBudgets; verified gzip sidecars or level-6 gzip; explicit entry/AccountBar/route static closures",
+  "budgets_sha256": "40f4fc9961a0276663791437417033b0589577ac65811f3863a0fde7a42f9fb4",
+  "route_source_paths": [
+    "/",
+    "/alchimie",
+    "/intrusul",
+    "/perechi",
+    "/cald-rece",
+    "/lant",
+    "/conexiuni",
+    "/clasament"
+  ],
+  "wildcard_redirect": "/",
+  "parser": {
+    "package": {
+      "name": "@typescript/typescript6",
+      "version": "6.0.2",
+      "path": "/work/frontend/node_modules/@typescript/typescript6/package.json",
+      "sha256": "d9b8fb53c67c947fece83bcb73fa8512227ea6a12b110e096fdab8ecdc02b655"
+    },
+    "implementation": {
+      "name": "typescript",
+      "version": "6.0.3",
+      "path": "/work/frontend/node_modules/@typescript/old/lib/typescript.js",
+      "manifest_sha256": "9332e97c30d3e53ed54910b89207ed657fb444066484df6e5b6965bf130865e9",
+      "entry_sha256": "569177652966bd528c319171c7dd22860dbf72bde116cbc4f644f1d02bb12e39"
+    },
+    "role": "AST/transpilation only; native7 is authoritative for typechecking"
+  },
+  "inputs": [
+    {
+      "path": "budgets.json",
+      "bytes": 794,
+      "sha256": "40f4fc9961a0276663791437417033b0589577ac65811f3863a0fde7a42f9fb4"
+    },
+    {
+      "path": "versions.lock.json",
+      "bytes": 47093,
+      "sha256": "7ce6c385dde548aba1fc821f557179ef0fdb8d0b8147f1847bdd267e041100be"
+    },
+    {
+      "path": "frontend/package.json",
+      "bytes": 1442,
+      "sha256": "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "bytes": 109956,
+      "sha256": "e430c87d566567f5a47160ff6bd3b327d875894769891c1d3bbcdcd035dd3aec"
+    },
+    {
+      "path": "frontend/index.html",
+      "bytes": 1064,
+      "sha256": "6d6ea537e403d5b72fbd8ad164e8175dd73d7b35f341359f5f0d934ecfd8679c"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "bytes": 716,
+      "sha256": "19397e62132ca9285f3aec0abe327eee936dc56593aceccecd10d150a9fa383c"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "bytes": 5573,
+      "sha256": "65a5f4dc10c168620a0b4e107bd72c2394e6821cb752ad0b41ce20f57e1ed3f3"
+    },
+    {
+      "path": "frontend/src/screens/Home.tsx",
+      "bytes": 17554,
+      "sha256": "1d081bda1472f0a5226116c98f94d1ee68a0c77ec726942670eb9ac15928c29a"
+    },
+    {
+      "path": "frontend/src/components/AccountBar.tsx",
+      "bytes": 205,
+      "sha256": "9531ce5789e1cea1407c2a3e35f6719241f68e4d0bd4b9a91924489eaf381c70"
+    },
+    {
+      "path": "frontend/src/screens/Alchimie.tsx",
+      "bytes": 51172,
+      "sha256": "e7bb9edc38e61aa4b8b6d558a95cbb7977be06d9175c4769fd0ccdfbf329d794"
+    },
+    {
+      "path": "frontend/src/screens/Intrusul.tsx",
+      "bytes": 22426,
+      "sha256": "d61ddefe57183439e7e74dadc681eb77e3eab44df6e231859ddc6dd92490056f"
+    },
+    {
+      "path": "frontend/src/screens/Perechi.tsx",
+      "bytes": 28331,
+      "sha256": "0f254e5ed80b2a17af523cae0c49dfe5c8b36ca8cd144315b3edee4c15ff5973"
+    },
+    {
+      "path": "frontend/src/screens/CaldRece.tsx",
+      "bytes": 42522,
+      "sha256": "17b0bdd90be92ed968b03650d0d3c0f9575770889246a245d5d8491c7a89f3c3"
+    },
+    {
+      "path": "frontend/src/screens/Lant.tsx",
+      "bytes": 37668,
+      "sha256": "9f1b8efe81a63c00ff659a9902d0626451af5732df72730a8cbba8d1d5be1dac"
+    },
+    {
+      "path": "frontend/src/screens/Conexiuni.tsx",
+      "bytes": 35961,
+      "sha256": "07d073c9afcba440fdf8edd9bb9c4cae65ca8d10d6f958e4c639b51e4c88127e"
+    },
+    {
+      "path": "frontend/src/screens/Ranking.tsx",
+      "bytes": 5856,
+      "sha256": "0aad3d8faa263e9c54e1539212a394dd7b14a4bc41c7e60bc0ce3bcf9a7ac116"
+    },
+    {
+      "path": "frontend/src/screens/AlchimieExplore.tsx",
+      "bytes": 26048,
+      "sha256": "af90894a6646eac7afa8e76b8daf7f293b83f199c58a5cb912ea84154d97ab5c"
+    },
+    {
+      "path": "baselines/cat/capture.json",
+      "bytes": 197448,
+      "sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68"
+    },
+    {
+      "path": "legacy/original-bundle.json",
+      "bytes": 5399,
+      "sha256": "5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984"
+    },
+    {
+      "path": "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz",
+      "bytes": 349389,
+      "sha256": "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65"
+    },
+    {
+      "path": "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz.sha256",
+      "bytes": 136,
+      "sha256": "0576814384f4013d8c628778a1e57b0a0e1c021642b41cc87253f907fe9d67d5"
+    },
+    {
+      "path": ".gate/full/managed-assets/sync.json",
+      "bytes": 11343,
+      "sha256": "37fed9c435604636ed5615fa8a305e7cfe53c2f04f1c23b58f1cf65228b853de"
+    },
+    {
+      "path": ".gate/full/bootstrap-execution.json",
+      "bytes": 4557,
+      "sha256": "9ec7368e6ae495fb0e034e8a1fb1624600df19f3823b45468566577dccd41dd7"
+    },
+    {
+      "path": ".gate/full/managed-assets/prepare.json",
+      "bytes": 14049,
+      "sha256": "999380cf9ce3c53c211bb54b2da718020ad1da4d205efe4ca136e3eeb1814cfe"
+    },
+    {
+      "path": ".gate/full/managed-assets/inventory.json",
+      "bytes": 7164,
+      "sha256": "eedb62b455f0fe65c13fd0429e733b313f2089d240157c0bd074fd3bb5ca6c6a"
+    },
+    {
+      "path": ".gate/wrapper-current.json",
+      "bytes": 526,
+      "sha256": "66a9757fdde4686cb3ab6a21cb5442549af1586a2ac36f839be084bd6f1e78d7"
+    },
+    {
+      "path": ".gate/full/wrapper-current.json",
+      "bytes": 526,
+      "sha256": "66a9757fdde4686cb3ab6a21cb5442549af1586a2ac36f839be084bd6f1e78d7"
+    },
+    {
+      "path": ".gate/full/wrapper-kit-config.json",
+      "bytes": 1123,
+      "sha256": "72b0b99f82c051326c3d7f80ce9f252f66f70a0e5c384370cafb77fb57456342"
+    },
+    {
+      "path": "Taskfile.repo.yml",
+      "bytes": 1606,
+      "sha256": "e58cd73433bcc412f97d77bdf321d6d053802ee1871d4df6656a8032966637de"
+    },
+    {
+      "path": "scripts/gui-route-budgets.mjs",
+      "bytes": 17507,
+      "sha256": "2bb4ba79eb79a965861a97757f8d4b18e2f2a4b5d76b059a93cac440139eb1d9"
+    },
+    {
+      "path": "scripts/gui-repo-hook.mjs",
+      "bytes": 25777,
+      "sha256": "66f94b30a9b510d969257d765747088811b78a2e6dfa734d7e28c8c99d04ccae"
+    },
+    {
+      "path": "frontend/scripts/check-bundle-budget.mjs",
+      "bytes": 6510,
+      "sha256": "8e6fdc34a6ec877ccde5e3a9cecaaadbf989c7b294c5ccfe796432e65348c9a3"
+    },
+    {
+      "path": "frontend/scripts/compiler-runtime.mjs",
+      "bytes": 3430,
+      "sha256": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12"
+    },
+    {
+      "path": "frontend/node_modules/@roedu/web-kit/budget/index.mjs",
+      "bytes": 7582,
+      "sha256": "50aac96679144819cbdd83ee8139376a36c84e088333e05e5c7e24797e48656f"
+    },
+    {
+      "path": "frontend/node_modules/@roedu/web-kit/schemas/budgets.schema.json",
+      "bytes": 3788,
+      "sha256": "ad106742c6817fa9192b5b9f2fab21e7b98a637fc9ae25b931de024376ceb439"
+    },
+    {
+      "path": "frontend/node_modules/@roedu/web-kit/schemas/validate.mjs",
+      "bytes": 5037,
+      "sha256": "32552ef83c2baf911f5412b7053bf70e832ac19e43ed611ebc522c50186f40f4"
+    },
+    {
+      "path": "frontend/node_modules/@roedu/web-kit/scripts/kit-sync.mjs",
+      "bytes": 125097,
+      "sha256": "0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300"
+    }
+  ],
+  "profiles": {
+    "active": {
+      "assets_root": "go-backend/embedfs/dist",
+      "assets": [
+        {
+          "path": ".vite/manifest.json",
+          "bytes": 7449,
+          "sha256": "8cd196f99932cc35027094855bbcd18d2ed2a2d1dd477a564adb611b79d9f971"
+        },
+        {
+          "path": "assets/AccountBar-C9YwTva-.js",
+          "bytes": 150,
+          "sha256": "47d1c9a1b8e5805604834f6ce06d20571e44bc51ff96f48e428584bef2004d7d"
+        },
+        {
+          "path": "assets/Alchimie-DWBTmhUZ.js",
+          "bytes": 44773,
+          "sha256": "9713dd3f4effdc2b063b90a161c45bdd3773830bdd3dccf614f49ba5293b6501"
+        },
+        {
+          "path": "assets/Alchimie-DxBkLLr5.css",
+          "bytes": 17007,
+          "sha256": "f0bb18dcc65de8ccd80c855742160761404932ed15ece4e31047966ae97c1810"
+        },
+        {
+          "path": "assets/CaldRece-0dIO_Auo.css",
+          "bytes": 3562,
+          "sha256": "1f4e2ed1fa186481467bb525af04fd616a0dd17b69938dd85549ce409af4a461"
+        },
+        {
+          "path": "assets/CaldRece-D0O7hLyt.js",
+          "bytes": 19999,
+          "sha256": "c639a6be93a323f21ed00116827dfa06233b88423d150196bb75f444032ff321"
+        },
+        {
+          "path": "assets/CategoryPicker-4pf-v9jW.css",
+          "bytes": 572,
+          "sha256": "25c5a797e2e8c86f1d77e8703627607a79fe2af67b194ddd87168e5284f9566e"
+        },
+        {
+          "path": "assets/CategoryPicker-BGUdDfG-.js",
+          "bytes": 3485,
+          "sha256": "ef5d3f4aed056ac186197053f69eaddbd06d71583ec091333753ee59c1b50315"
+        },
+        {
+          "path": "assets/Conexiuni-D2QJHejd.css",
+          "bytes": 4240,
+          "sha256": "d5d3759d3021e356f78592b9a1d7ce5a68435640696873f56d75d6fad502da95"
+        },
+        {
+          "path": "assets/Conexiuni-dv1j2-AJ.js",
+          "bytes": 16009,
+          "sha256": "35f45fb77c9bc7f1557fa43e1e548322a7893e47318746458c87f3c8f01f6d7f"
+        },
+        {
+          "path": "assets/CspStyle-B1RwaPM1.js",
+          "bytes": 3785,
+          "sha256": "67738e03364bbeb45877666ac8a5831c5d600ebcac5cba9afa0aa821e3d5188b"
+        },
+        {
+          "path": "assets/CspStyle-x1XGuNl0.css",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "assets/derivedReplay-Bor7pKb-.js",
+          "bytes": 956,
+          "sha256": "7acabbb67fc42676a114e688f8916863d55a23534247c3164c1027f1e2e1e114"
+        },
+        {
+          "path": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+          "bytes": 4576,
+          "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a"
+        },
+        {
+          "path": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+          "bytes": 29732,
+          "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2"
+        },
+        {
+          "path": "assets/GameOptions-CEWYWGsz.css",
+          "bytes": 1061,
+          "sha256": "cbe029df658db3187af13ffc55d388268d410c9483521d550222bc48d4240bbd"
+        },
+        {
+          "path": "assets/GameOptions-DNs5X9aU.js",
+          "bytes": 405,
+          "sha256": "949f94cdb4d987f72ba3c4c2e5f7b99e7c69eddaa324269ed92923d4ff48525a"
+        },
+        {
+          "path": "assets/GameSetupOptions-SfCDbO8j.js",
+          "bytes": 335,
+          "sha256": "1f61be97be7c65a70a580d876a6a346ba24a9e0eb44eecc0c2212cfe8867741a"
+        },
+        {
+          "path": "assets/index-BoCfe88_.js",
+          "bytes": 338,
+          "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05"
+        },
+        {
+          "path": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+          "bytes": 85068,
+          "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+        },
+        {
+          "path": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+          "bytes": 48256,
+          "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+        },
+        {
+          "path": "assets/Intrusul-BQp0TQAh.js",
+          "bytes": 11040,
+          "sha256": "349dc5efbbcb3e25aa6af511aa47d29347ce5d8363f2afef227415506c2e7889"
+        },
+        {
+          "path": "assets/Intrusul-D_KdYx8Y.css",
+          "bytes": 1995,
+          "sha256": "67d3f0b9f8a148fae80dd9f624fd2ac5177258946092ed60755c5e635685fd2b"
+        },
+        {
+          "path": "assets/Lant-B2xbfLDc.js",
+          "bytes": 18858,
+          "sha256": "83b06f1ce2665d39397bf940af46d150660241ae060016408d46305873ceb7f5"
+        },
+        {
+          "path": "assets/Lant-DhowxvTS.css",
+          "bytes": 3893,
+          "sha256": "3ee93b9a410d8eb8a9ea13d1191ac558c32920ff9800eebd884b574da5677cdc"
+        },
+        {
+          "path": "assets/Perechi-CVshKqJz.js",
+          "bytes": 13784,
+          "sha256": "80a5d0a8e58e347480b75130db161038639c89d81322436ae4acc0df7fe60455"
+        },
+        {
+          "path": "assets/Perechi-DUzfG4A6.css",
+          "bytes": 2809,
+          "sha256": "c71b5a78f5d94461029283f03515abf7bce1b898489f087b6d0b6d318d96e0d6"
+        },
+        {
+          "path": "assets/Ranking-CveSnMPN.css",
+          "bytes": 851,
+          "sha256": "5652e765c8213a30e17e668c2ee352cc90eedc536ccf8402ce065ad4947b71e7"
+        },
+        {
+          "path": "assets/Ranking-DyP8GGNY.js",
+          "bytes": 3535,
+          "sha256": "12de4499f7705857ab700073cc1abcb5cb088f563c3d3dd8b1e29593df3dd373"
+        },
+        {
+          "path": "assets/rolldown-runtime-CbXtAM7H.js",
+          "bytes": 589,
+          "sha256": "bbf7c5086ae414dc3f33777e3eebf16ea8631325b8bb4690d25091c03567f31a"
+        },
+        {
+          "path": "assets/startup-BP5Pvlg1.js",
+          "bytes": 352124,
+          "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74"
+        },
+        {
+          "path": "assets/startup-uZN142Lb.css",
+          "bytes": 33749,
+          "sha256": "4752a58557f189841588d863da548db2584f5e3c144b2dfa2df024bc70a8df06"
+        },
+        {
+          "path": "assets/useSavedGameResume-CLCJZjna.js",
+          "bytes": 15999,
+          "sha256": "845ca8d35b15967a357392c901e741986019f5e471ca14adb6a4863acf9f7411"
+        },
+        {
+          "path": "index.html",
+          "bytes": 1329,
+          "sha256": "ab080967fbf4546e4169cc5a2382993b5f34146fb70c8c4d1510598ec6f8bdd5"
+        }
+      ],
+      "manifest_sha256": "8cd196f99932cc35027094855bbcd18d2ed2a2d1dd477a564adb611b79d9f971",
+      "inventory": [
+        {
+          "name": "/",
+          "path": "/",
+          "template": "index.html"
+        },
+        {
+          "name": "/alchimie",
+          "path": "/alchimie",
+          "template": "index.html"
+        },
+        {
+          "name": "/intrusul",
+          "path": "/intrusul",
+          "template": "index.html"
+        },
+        {
+          "name": "/perechi",
+          "path": "/perechi",
+          "template": "index.html"
+        },
+        {
+          "name": "/cald-rece",
+          "path": "/cald-rece",
+          "template": "index.html"
+        },
+        {
+          "name": "/lant",
+          "path": "/lant",
+          "template": "index.html"
+        },
+        {
+          "name": "/conexiuni",
+          "path": "/conexiuni",
+          "template": "index.html"
+        },
+        {
+          "name": "/clasament",
+          "path": "/clasament",
+          "template": "index.html"
+        },
+        {
+          "name": "/alchimie?mode=challenges",
+          "path": "/alchimie?mode=challenges",
+          "template": "index.html"
+        },
+        {
+          "name": "/alchimie?mode=explore",
+          "path": "/alchimie?mode=explore",
+          "template": "index.html"
+        }
+      ],
+      "config": {
+        "schema": 1,
+        "routes": {
+          "/": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx"
+            ]
+          },
+          "/alchimie": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Alchimie.tsx"
+            ]
+          },
+          "/intrusul": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Intrusul.tsx"
+            ]
+          },
+          "/perechi": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Perechi.tsx"
+            ]
+          },
+          "/cald-rece": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/CaldRece.tsx"
+            ]
+          },
+          "/lant": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Lant.tsx"
+            ]
+          },
+          "/conexiuni": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Conexiuni.tsx"
+            ]
+          },
+          "/clasament": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Ranking.tsx"
+            ]
+          },
+          "/alchimie?mode=challenges": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Alchimie.tsx"
+            ]
+          },
+          "/alchimie?mode=explore": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Alchimie.tsx"
+            ]
+          }
+        },
+        "global_css": [
+          "assets/startup-uZN142Lb.css"
+        ],
+        "vendors": {}
+      },
+      "report": {
+        "schema": 1,
+        "status": "fail",
+        "global_css": {
+          "scope": "global-css",
+          "name": "global",
+          "actual_gz": 7754,
+          "limit_gz": null,
+          "status": "recorded",
+          "files": [
+            "assets/startup-uZN142Lb.css"
+          ]
+        },
+        "routes": [
+          {
+            "name": "/",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/",
+              "actual_gz": 115181,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/",
+              "actual_gz": 7754,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/alchimie",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/alchimie",
+              "actual_gz": 138212,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/Alchimie-DWBTmhUZ.js",
+                "assets/CategoryPicker-BGUdDfG-.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js",
+                "assets/useSavedGameResume-CLCJZjna.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/alchimie",
+              "actual_gz": 11930,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/Alchimie-DxBkLLr5.css",
+                "assets/CategoryPicker-4pf-v9jW.css",
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/alchimie?mode=challenges",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/alchimie?mode=challenges",
+              "actual_gz": 138212,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/Alchimie-DWBTmhUZ.js",
+                "assets/CategoryPicker-BGUdDfG-.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js",
+                "assets/useSavedGameResume-CLCJZjna.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/alchimie?mode=challenges",
+              "actual_gz": 11930,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/Alchimie-DxBkLLr5.css",
+                "assets/CategoryPicker-4pf-v9jW.css",
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/alchimie?mode=explore",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/alchimie?mode=explore",
+              "actual_gz": 138212,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/Alchimie-DWBTmhUZ.js",
+                "assets/CategoryPicker-BGUdDfG-.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js",
+                "assets/useSavedGameResume-CLCJZjna.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/alchimie?mode=explore",
+              "actual_gz": 11930,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/Alchimie-DxBkLLr5.css",
+                "assets/CategoryPicker-4pf-v9jW.css",
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/cald-rece",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/cald-rece",
+              "actual_gz": 131814,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/CaldRece-D0O7hLyt.js",
+                "assets/CategoryPicker-BGUdDfG-.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/GameOptions-DNs5X9aU.js",
+                "assets/GameSetupOptions-SfCDbO8j.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js",
+                "assets/useSavedGameResume-CLCJZjna.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/cald-rece",
+              "actual_gz": 9567,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/CaldRece-0dIO_Auo.css",
+                "assets/CategoryPicker-4pf-v9jW.css",
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/clasament",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/clasament",
+              "actual_gz": 118169,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/Ranking-DyP8GGNY.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/clasament",
+              "actual_gz": 8189,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/Ranking-CveSnMPN.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/conexiuni",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/conexiuni",
+              "actual_gz": 131126,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/CategoryPicker-BGUdDfG-.js",
+                "assets/Conexiuni-dv1j2-AJ.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/GameOptions-DNs5X9aU.js",
+                "assets/GameSetupOptions-SfCDbO8j.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js",
+                "assets/useSavedGameResume-CLCJZjna.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/conexiuni",
+              "actual_gz": 9690,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/CategoryPicker-4pf-v9jW.css",
+                "assets/Conexiuni-D2QJHejd.css",
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/intrusul",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/intrusul",
+              "actual_gz": 128095,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/GameOptions-DNs5X9aU.js",
+                "assets/Intrusul-BQp0TQAh.js",
+                "assets/derivedReplay-Bor7pKb-.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js",
+                "assets/useSavedGameResume-CLCJZjna.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/intrusul",
+              "actual_gz": 8931,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/Intrusul-D_KdYx8Y.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/lant",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/lant",
+              "actual_gz": 131642,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/CategoryPicker-BGUdDfG-.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/GameOptions-DNs5X9aU.js",
+                "assets/GameSetupOptions-SfCDbO8j.js",
+                "assets/Lant-B2xbfLDc.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js",
+                "assets/useSavedGameResume-CLCJZjna.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/lant",
+              "actual_gz": 9837,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/CategoryPicker-4pf-v9jW.css",
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/Lant-DhowxvTS.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          },
+          {
+            "name": "/perechi",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/perechi",
+              "actual_gz": 128927,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-C9YwTva-.js",
+                "assets/CspStyle-B1RwaPM1.js",
+                "assets/GameOptions-DNs5X9aU.js",
+                "assets/Perechi-CVshKqJz.js",
+                "assets/derivedReplay-Bor7pKb-.js",
+                "assets/index-BoCfe88_.js",
+                "assets/rolldown-runtime-CbXtAM7H.js",
+                "assets/startup-BP5Pvlg1.js",
+                "assets/useSavedGameResume-CLCJZjna.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/perechi",
+              "actual_gz": 9126,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/CspStyle-x1XGuNl0.css",
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/Perechi-DUzfG4A6.css",
+                "assets/startup-uZN142Lb.css"
+              ]
+            }
+          }
+        ],
+        "vendors": [],
+        "unused_limits": [
+          {
+            "name": "js.island-route",
+            "limit_gz": 35840,
+            "reason": "no route declares this class"
+          },
+          {
+            "name": "js.server-page",
+            "limit_gz": 10240,
+            "reason": "no route declares this class"
+          },
+          {
+            "name": "js.vendor-gated.maplibre",
+            "limit_gz": 317440,
+            "reason": "no vendor binding declares this asset"
+          }
+        ],
+        "non_page_routes": [],
+        "vitals_limits": {
+          "lcp_ms": 2500,
+          "inp_ms": 200,
+          "throttle": {
+            "cpu": 4,
+            "rtt_ms": 150,
+            "down_kbps": 1600
+          }
+        },
+        "unmeasured_metrics": [
+          "lcp_ms",
+          "inp_ms"
+        ]
+      },
+      "budgets": {
+        "global-css:global": {
+          "limit": null,
+          "actual": 7754,
+          "status": "recorded"
+        },
+        "route-js:/": {
+          "limit": 40960,
+          "actual": 115181,
+          "status": "fail"
+        },
+        "route-css:/": {
+          "limit": null,
+          "actual": 7754,
+          "status": "recorded"
+        },
+        "route-js:/alchimie": {
+          "limit": 40960,
+          "actual": 138212,
+          "status": "fail"
+        },
+        "route-css:/alchimie": {
+          "limit": null,
+          "actual": 11930,
+          "status": "recorded"
+        },
+        "route-js:/alchimie?mode=challenges": {
+          "limit": 40960,
+          "actual": 138212,
+          "status": "fail"
+        },
+        "route-css:/alchimie?mode=challenges": {
+          "limit": null,
+          "actual": 11930,
+          "status": "recorded"
+        },
+        "route-js:/alchimie?mode=explore": {
+          "limit": 40960,
+          "actual": 138212,
+          "status": "fail"
+        },
+        "route-css:/alchimie?mode=explore": {
+          "limit": null,
+          "actual": 11930,
+          "status": "recorded"
+        },
+        "route-js:/cald-rece": {
+          "limit": 40960,
+          "actual": 131814,
+          "status": "fail"
+        },
+        "route-css:/cald-rece": {
+          "limit": null,
+          "actual": 9567,
+          "status": "recorded"
+        },
+        "route-js:/clasament": {
+          "limit": 40960,
+          "actual": 118169,
+          "status": "fail"
+        },
+        "route-css:/clasament": {
+          "limit": null,
+          "actual": 8189,
+          "status": "recorded"
+        },
+        "route-js:/conexiuni": {
+          "limit": 40960,
+          "actual": 131126,
+          "status": "fail"
+        },
+        "route-css:/conexiuni": {
+          "limit": null,
+          "actual": 9690,
+          "status": "recorded"
+        },
+        "route-js:/intrusul": {
+          "limit": 40960,
+          "actual": 128095,
+          "status": "fail"
+        },
+        "route-css:/intrusul": {
+          "limit": null,
+          "actual": 8931,
+          "status": "recorded"
+        },
+        "route-js:/lant": {
+          "limit": 40960,
+          "actual": 131642,
+          "status": "fail"
+        },
+        "route-css:/lant": {
+          "limit": null,
+          "actual": 9837,
+          "status": "recorded"
+        },
+        "route-js:/perechi": {
+          "limit": 40960,
+          "actual": 128927,
+          "status": "fail"
+        },
+        "route-css:/perechi": {
+          "limit": null,
+          "actual": 9126,
+          "status": "recorded"
+        }
+      }
+    },
+    "frozen-legacy": {
+      "assets_root": "go-backend/embedfs/legacy",
+      "assets": [
+        {
+          "path": ".vite/manifest.json",
+          "bytes": 6000,
+          "sha256": "9ed68d3ff5f73bec7ced96e100ff5718043bcc7efc85cf3b3916df5c82867827"
+        },
+        {
+          "path": "assets/AccountBar-B_1k6UL8.js",
+          "bytes": 5988,
+          "sha256": "4267be72016b80a3487a211410942f1c537622d0e0c45ca7aee3184c34f09b03"
+        },
+        {
+          "path": "assets/Alchimie-BkN0hBpY.js",
+          "bytes": 44650,
+          "sha256": "e343df8b3e041d0e7d1486a640edc4d534ca9dae453822c63bf05c2aac295e0f"
+        },
+        {
+          "path": "assets/Alchimie-DdrzYmQc.css",
+          "bytes": 15358,
+          "sha256": "eb7b9a5d9a166ece8084db2ce0a58238702b93a3dc02fe17c3b6f652a6eb8ca4"
+        },
+        {
+          "path": "assets/auth-CnzO1y42.js",
+          "bytes": 1161,
+          "sha256": "2cbac30aaf27906dc7b0d97b95d62f2af7c920d382bc17bb50e857c2cee43db3"
+        },
+        {
+          "path": "assets/CaldRece-B885PE19.css",
+          "bytes": 1075,
+          "sha256": "b9713b5c0854630c4740d176340c7feae25cc55564bbffff06a1adcfe930679d"
+        },
+        {
+          "path": "assets/CaldRece-BeT20Ptx.js",
+          "bytes": 19846,
+          "sha256": "552b5da60fa7a3012310401d4c51986abab10c3fff154e2db152a354676fc21e"
+        },
+        {
+          "path": "assets/CategoryPicker-BdaaYRb5.js",
+          "bytes": 3396,
+          "sha256": "4c937dfaaf69417170c24262584604663cd04b4ae8ef3e0e0b7fc2386f7e9cc5"
+        },
+        {
+          "path": "assets/Conexiuni-Cpid-uuX.js",
+          "bytes": 15860,
+          "sha256": "9453a34066460d46ebc5823e934996117024ca011beeb04792098f26ba228b1d"
+        },
+        {
+          "path": "assets/Conexiuni-DfW6SbKo.css",
+          "bytes": 3019,
+          "sha256": "0fb208850c976f0cb1f0abd4aaa12373599772e66c7cc64f5ffdb91c3d662e8d"
+        },
+        {
+          "path": "assets/derivedReplay-Bor7pKb-.js",
+          "bytes": 956,
+          "sha256": "7acabbb67fc42676a114e688f8916863d55a23534247c3164c1027f1e2e1e114"
+        },
+        {
+          "path": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+          "bytes": 4576,
+          "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a"
+        },
+        {
+          "path": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+          "bytes": 29732,
+          "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2"
+        },
+        {
+          "path": "assets/GameOptions-CEWYWGsz.css",
+          "bytes": 1061,
+          "sha256": "cbe029df658db3187af13ffc55d388268d410c9483521d550222bc48d4240bbd"
+        },
+        {
+          "path": "assets/GameOptions-ia4sPKKo.js",
+          "bytes": 403,
+          "sha256": "5ebfaaea99122afbca33114a4c16c2c2f0a0b6d50f0d7475a440032357300ed8"
+        },
+        {
+          "path": "assets/GameSetupOptions-CMNeowgo.js",
+          "bytes": 333,
+          "sha256": "0d1c1745517aa951b04d13ace0231c0dbaaa68e7758b0ebb1650f5a31e1400b6"
+        },
+        {
+          "path": "assets/index-D9HNWgEs.css",
+          "bytes": 39521,
+          "sha256": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2"
+        },
+        {
+          "path": "assets/index-qYTSE3Vo.js",
+          "bytes": 350672,
+          "sha256": "3aeceaed54e6d8614fa85e68bcf2a5c6ab1a7619bf20f7184624d475259be93a"
+        },
+        {
+          "path": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+          "bytes": 85068,
+          "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+        },
+        {
+          "path": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+          "bytes": 48256,
+          "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+        },
+        {
+          "path": "assets/Intrusul-D_KdYx8Y.css",
+          "bytes": 1995,
+          "sha256": "67d3f0b9f8a148fae80dd9f624fd2ac5177258946092ed60755c5e635685fd2b"
+        },
+        {
+          "path": "assets/Intrusul-Ga_cb812.js",
+          "bytes": 10937,
+          "sha256": "d3b13807bd96619c0acea2461b91c11808135a2aa42219eade11cd06edc61243"
+        },
+        {
+          "path": "assets/Lant-BHivICVC.css",
+          "bytes": 1188,
+          "sha256": "193f470c63ac529f7ee3670a36ddd4d5577ebcb3c9fef9595d6b5dd2bec235d1"
+        },
+        {
+          "path": "assets/Lant-CNm6lAs4.js",
+          "bytes": 18691,
+          "sha256": "cc59c968bf21c5a5a8fbdaa01ea30c2d02b3277564c17f310f6d975aed6b03d4"
+        },
+        {
+          "path": "assets/Perechi-BmY0hozH.js",
+          "bytes": 13377,
+          "sha256": "0dff0b8edd36dc75ea104b516e32e784d6e1cb83c2146ef8b72f2147cc174ed5"
+        },
+        {
+          "path": "assets/Perechi-DUzfG4A6.css",
+          "bytes": 2809,
+          "sha256": "c71b5a78f5d94461029283f03515abf7bce1b898489f087b6d0b6d318d96e0d6"
+        },
+        {
+          "path": "assets/Ranking-m788lj7M.js",
+          "bytes": 3475,
+          "sha256": "db4c03b7bd1b20e54243fdc6db54aadc314a365a900c67ed2653c9a6cc20e40b"
+        },
+        {
+          "path": "assets/scoreSync-BVBILyAK.js",
+          "bytes": 636,
+          "sha256": "13df23077d550164a605e99c42f3fd5503c9290a77114b1b6805e6983647e9f1"
+        },
+        {
+          "path": "assets/useSavedGameResume-DPDD-JYv.js",
+          "bytes": 16041,
+          "sha256": "363bb2c4f2681c65a19f6aa3ed4c573d62d4cb9b7a64fb691545b4866f994448"
+        },
+        {
+          "path": "index.html",
+          "bytes": 1162,
+          "sha256": "6ef9e2cd5334b0e89fe078f0bf2c3c9b3b94360ad013c7740db5cc205bd3feeb"
+        }
+      ],
+      "manifest_sha256": "9ed68d3ff5f73bec7ced96e100ff5718043bcc7efc85cf3b3916df5c82867827",
+      "inventory": [
+        {
+          "name": "/",
+          "path": "/",
+          "template": "index.html"
+        },
+        {
+          "name": "/alchimie",
+          "path": "/alchimie",
+          "template": "index.html"
+        },
+        {
+          "name": "/intrusul",
+          "path": "/intrusul",
+          "template": "index.html"
+        },
+        {
+          "name": "/perechi",
+          "path": "/perechi",
+          "template": "index.html"
+        },
+        {
+          "name": "/cald-rece",
+          "path": "/cald-rece",
+          "template": "index.html"
+        },
+        {
+          "name": "/lant",
+          "path": "/lant",
+          "template": "index.html"
+        },
+        {
+          "name": "/conexiuni",
+          "path": "/conexiuni",
+          "template": "index.html"
+        },
+        {
+          "name": "/clasament",
+          "path": "/clasament",
+          "template": "index.html"
+        },
+        {
+          "name": "/alchimie?mode=challenges",
+          "path": "/alchimie?mode=challenges",
+          "template": "index.html"
+        },
+        {
+          "name": "/alchimie?mode=explore",
+          "path": "/alchimie?mode=explore",
+          "template": "index.html"
+        }
+      ],
+      "config": {
+        "schema": 1,
+        "routes": {
+          "/": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx"
+            ]
+          },
+          "/alchimie": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Alchimie.tsx"
+            ]
+          },
+          "/intrusul": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Intrusul.tsx"
+            ]
+          },
+          "/perechi": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Perechi.tsx"
+            ]
+          },
+          "/cald-rece": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/CaldRece.tsx"
+            ]
+          },
+          "/lant": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Lant.tsx"
+            ]
+          },
+          "/conexiuni": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Conexiuni.tsx"
+            ]
+          },
+          "/clasament": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Ranking.tsx"
+            ]
+          },
+          "/alchimie?mode=challenges": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Alchimie.tsx"
+            ]
+          },
+          "/alchimie?mode=explore": {
+            "class": "cat-initial",
+            "entries": [
+              "index.html",
+              "src/components/AccountBar.tsx",
+              "src/screens/Alchimie.tsx"
+            ]
+          }
+        },
+        "global_css": [
+          "assets/index-D9HNWgEs.css"
+        ],
+        "vendors": {}
+      },
+      "report": {
+        "schema": 1,
+        "status": "fail",
+        "global_css": {
+          "scope": "global-css",
+          "name": "global",
+          "actual_gz": 8770,
+          "limit_gz": null,
+          "status": "recorded",
+          "files": [
+            "assets/index-D9HNWgEs.css"
+          ]
+        },
+        "routes": [
+          {
+            "name": "/",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/",
+              "actual_gz": 117271,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/",
+              "actual_gz": 8770,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/alchimie",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/alchimie",
+              "actual_gz": 138596,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/Alchimie-BkN0hBpY.js",
+                "assets/CategoryPicker-BdaaYRb5.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js",
+                "assets/useSavedGameResume-DPDD-JYv.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/alchimie",
+              "actual_gz": 12244,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/Alchimie-DdrzYmQc.css",
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/alchimie?mode=challenges",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/alchimie?mode=challenges",
+              "actual_gz": 138596,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/Alchimie-BkN0hBpY.js",
+                "assets/CategoryPicker-BdaaYRb5.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js",
+                "assets/useSavedGameResume-DPDD-JYv.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/alchimie?mode=challenges",
+              "actual_gz": 12244,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/Alchimie-DdrzYmQc.css",
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/alchimie?mode=explore",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/alchimie?mode=explore",
+              "actual_gz": 138596,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/Alchimie-BkN0hBpY.js",
+                "assets/CategoryPicker-BdaaYRb5.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js",
+                "assets/useSavedGameResume-DPDD-JYv.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/alchimie?mode=explore",
+              "actual_gz": 12244,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/Alchimie-DdrzYmQc.css",
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/cald-rece",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/cald-rece",
+              "actual_gz": 132257,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/CaldRece-BeT20Ptx.js",
+                "assets/CategoryPicker-BdaaYRb5.js",
+                "assets/GameOptions-ia4sPKKo.js",
+                "assets/GameSetupOptions-CMNeowgo.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js",
+                "assets/useSavedGameResume-DPDD-JYv.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/cald-rece",
+              "actual_gz": 9634,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/CaldRece-B885PE19.css",
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/clasament",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/clasament",
+              "actual_gz": 118689,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/Ranking-m788lj7M.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/clasament",
+              "actual_gz": 8770,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/conexiuni",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/conexiuni",
+              "actual_gz": 131545,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/CategoryPicker-BdaaYRb5.js",
+                "assets/Conexiuni-Cpid-uuX.js",
+                "assets/GameOptions-ia4sPKKo.js",
+                "assets/GameSetupOptions-CMNeowgo.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js",
+                "assets/useSavedGameResume-DPDD-JYv.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/conexiuni",
+              "actual_gz": 10040,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/Conexiuni-DfW6SbKo.css",
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/intrusul",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/intrusul",
+              "actual_gz": 128603,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/GameOptions-ia4sPKKo.js",
+                "assets/Intrusul-Ga_cb812.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/derivedReplay-Bor7pKb-.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js",
+                "assets/useSavedGameResume-DPDD-JYv.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/intrusul",
+              "actual_gz": 9926,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/Intrusul-D_KdYx8Y.css",
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/lant",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/lant",
+              "actual_gz": 132047,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/CategoryPicker-BdaaYRb5.js",
+                "assets/GameOptions-ia4sPKKo.js",
+                "assets/GameSetupOptions-CMNeowgo.js",
+                "assets/Lant-CNm6lAs4.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js",
+                "assets/useSavedGameResume-DPDD-JYv.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/lant",
+              "actual_gz": 9758,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/Lant-BHivICVC.css",
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          },
+          {
+            "name": "/perechi",
+            "class": "cat-initial",
+            "js": {
+              "scope": "route-js",
+              "name": "/perechi",
+              "actual_gz": 129357,
+              "limit_gz": 40960,
+              "status": "fail",
+              "files": [
+                "assets/AccountBar-B_1k6UL8.js",
+                "assets/GameOptions-ia4sPKKo.js",
+                "assets/Perechi-BmY0hozH.js",
+                "assets/auth-CnzO1y42.js",
+                "assets/derivedReplay-Bor7pKb-.js",
+                "assets/index-qYTSE3Vo.js",
+                "assets/scoreSync-BVBILyAK.js",
+                "assets/useSavedGameResume-DPDD-JYv.js"
+              ],
+              "target_gz": 30720,
+              "target_status": "unmet"
+            },
+            "css": {
+              "scope": "route-css",
+              "name": "/perechi",
+              "actual_gz": 10121,
+              "limit_gz": null,
+              "status": "recorded",
+              "files": [
+                "assets/GameOptions-CEWYWGsz.css",
+                "assets/Perechi-DUzfG4A6.css",
+                "assets/index-D9HNWgEs.css"
+              ]
+            }
+          }
+        ],
+        "vendors": [],
+        "unused_limits": [
+          {
+            "name": "js.island-route",
+            "limit_gz": 35840,
+            "reason": "no route declares this class"
+          },
+          {
+            "name": "js.server-page",
+            "limit_gz": 10240,
+            "reason": "no route declares this class"
+          },
+          {
+            "name": "js.vendor-gated.maplibre",
+            "limit_gz": 317440,
+            "reason": "no vendor binding declares this asset"
+          }
+        ],
+        "non_page_routes": [],
+        "vitals_limits": {
+          "lcp_ms": 2500,
+          "inp_ms": 200,
+          "throttle": {
+            "cpu": 4,
+            "rtt_ms": 150,
+            "down_kbps": 1600
+          }
+        },
+        "unmeasured_metrics": [
+          "lcp_ms",
+          "inp_ms"
+        ]
+      },
+      "budgets": {
+        "global-css:global": {
+          "limit": null,
+          "actual": 8770,
+          "status": "recorded"
+        },
+        "route-js:/": {
+          "limit": 40960,
+          "actual": 117271,
+          "status": "fail"
+        },
+        "route-css:/": {
+          "limit": null,
+          "actual": 8770,
+          "status": "recorded"
+        },
+        "route-js:/alchimie": {
+          "limit": 40960,
+          "actual": 138596,
+          "status": "fail"
+        },
+        "route-css:/alchimie": {
+          "limit": null,
+          "actual": 12244,
+          "status": "recorded"
+        },
+        "route-js:/alchimie?mode=challenges": {
+          "limit": 40960,
+          "actual": 138596,
+          "status": "fail"
+        },
+        "route-css:/alchimie?mode=challenges": {
+          "limit": null,
+          "actual": 12244,
+          "status": "recorded"
+        },
+        "route-js:/alchimie?mode=explore": {
+          "limit": 40960,
+          "actual": 138596,
+          "status": "fail"
+        },
+        "route-css:/alchimie?mode=explore": {
+          "limit": null,
+          "actual": 12244,
+          "status": "recorded"
+        },
+        "route-js:/cald-rece": {
+          "limit": 40960,
+          "actual": 132257,
+          "status": "fail"
+        },
+        "route-css:/cald-rece": {
+          "limit": null,
+          "actual": 9634,
+          "status": "recorded"
+        },
+        "route-js:/clasament": {
+          "limit": 40960,
+          "actual": 118689,
+          "status": "fail"
+        },
+        "route-css:/clasament": {
+          "limit": null,
+          "actual": 8770,
+          "status": "recorded"
+        },
+        "route-js:/conexiuni": {
+          "limit": 40960,
+          "actual": 131545,
+          "status": "fail"
+        },
+        "route-css:/conexiuni": {
+          "limit": null,
+          "actual": 10040,
+          "status": "recorded"
+        },
+        "route-js:/intrusul": {
+          "limit": 40960,
+          "actual": 128603,
+          "status": "fail"
+        },
+        "route-css:/intrusul": {
+          "limit": null,
+          "actual": 9926,
+          "status": "recorded"
+        },
+        "route-js:/lant": {
+          "limit": 40960,
+          "actual": 132047,
+          "status": "fail"
+        },
+        "route-css:/lant": {
+          "limit": null,
+          "actual": 9758,
+          "status": "recorded"
+        },
+        "route-js:/perechi": {
+          "limit": 40960,
+          "actual": 129357,
+          "status": "fail"
+        },
+        "route-css:/perechi": {
+          "limit": null,
+          "actual": 10121,
+          "status": "recorded"
+        }
+      }
+    }
+  },
+  "budgets": {
+    "active:global-css:global": {
+      "limit": null,
+      "actual": 7754,
+      "status": "recorded"
+    },
+    "active:route-js:/": {
+      "limit": 40960,
+      "actual": 115181,
+      "status": "fail"
+    },
+    "active:route-css:/": {
+      "limit": null,
+      "actual": 7754,
+      "status": "recorded"
+    },
+    "active:route-js:/alchimie": {
+      "limit": 40960,
+      "actual": 138212,
+      "status": "fail"
+    },
+    "active:route-css:/alchimie": {
+      "limit": null,
+      "actual": 11930,
+      "status": "recorded"
+    },
+    "active:route-js:/alchimie?mode=challenges": {
+      "limit": 40960,
+      "actual": 138212,
+      "status": "fail"
+    },
+    "active:route-css:/alchimie?mode=challenges": {
+      "limit": null,
+      "actual": 11930,
+      "status": "recorded"
+    },
+    "active:route-js:/alchimie?mode=explore": {
+      "limit": 40960,
+      "actual": 138212,
+      "status": "fail"
+    },
+    "active:route-css:/alchimie?mode=explore": {
+      "limit": null,
+      "actual": 11930,
+      "status": "recorded"
+    },
+    "active:route-js:/cald-rece": {
+      "limit": 40960,
+      "actual": 131814,
+      "status": "fail"
+    },
+    "active:route-css:/cald-rece": {
+      "limit": null,
+      "actual": 9567,
+      "status": "recorded"
+    },
+    "active:route-js:/clasament": {
+      "limit": 40960,
+      "actual": 118169,
+      "status": "fail"
+    },
+    "active:route-css:/clasament": {
+      "limit": null,
+      "actual": 8189,
+      "status": "recorded"
+    },
+    "active:route-js:/conexiuni": {
+      "limit": 40960,
+      "actual": 131126,
+      "status": "fail"
+    },
+    "active:route-css:/conexiuni": {
+      "limit": null,
+      "actual": 9690,
+      "status": "recorded"
+    },
+    "active:route-js:/intrusul": {
+      "limit": 40960,
+      "actual": 128095,
+      "status": "fail"
+    },
+    "active:route-css:/intrusul": {
+      "limit": null,
+      "actual": 8931,
+      "status": "recorded"
+    },
+    "active:route-js:/lant": {
+      "limit": 40960,
+      "actual": 131642,
+      "status": "fail"
+    },
+    "active:route-css:/lant": {
+      "limit": null,
+      "actual": 9837,
+      "status": "recorded"
+    },
+    "active:route-js:/perechi": {
+      "limit": 40960,
+      "actual": 128927,
+      "status": "fail"
+    },
+    "active:route-css:/perechi": {
+      "limit": null,
+      "actual": 9126,
+      "status": "recorded"
+    },
+    "frozen-legacy:global-css:global": {
+      "limit": null,
+      "actual": 8770,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/": {
+      "limit": 40960,
+      "actual": 117271,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/": {
+      "limit": null,
+      "actual": 8770,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/alchimie": {
+      "limit": 40960,
+      "actual": 138596,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/alchimie": {
+      "limit": null,
+      "actual": 12244,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/alchimie?mode=challenges": {
+      "limit": 40960,
+      "actual": 138596,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/alchimie?mode=challenges": {
+      "limit": null,
+      "actual": 12244,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/alchimie?mode=explore": {
+      "limit": 40960,
+      "actual": 138596,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/alchimie?mode=explore": {
+      "limit": null,
+      "actual": 12244,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/cald-rece": {
+      "limit": 40960,
+      "actual": 132257,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/cald-rece": {
+      "limit": null,
+      "actual": 9634,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/clasament": {
+      "limit": 40960,
+      "actual": 118689,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/clasament": {
+      "limit": null,
+      "actual": 8770,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/conexiuni": {
+      "limit": 40960,
+      "actual": 131545,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/conexiuni": {
+      "limit": null,
+      "actual": 10040,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/intrusul": {
+      "limit": 40960,
+      "actual": 128603,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/intrusul": {
+      "limit": null,
+      "actual": 9926,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/lant": {
+      "limit": 40960,
+      "actual": 132047,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/lant": {
+      "limit": null,
+      "actual": 9758,
+      "status": "recorded"
+    },
+    "frozen-legacy:route-js:/perechi": {
+      "limit": 40960,
+      "actual": 129357,
+      "status": "fail"
+    },
+    "frozen-legacy:route-css:/perechi": {
+      "limit": null,
+      "actual": 10121,
+      "status": "recorded"
+    }
+  }
+}

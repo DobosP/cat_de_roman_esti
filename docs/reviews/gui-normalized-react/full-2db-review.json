@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "source": "2db4d3d222e72146e82a6a8acfa02556ceb5ffe2",
+  "tree": "c855f2bbb2971b1327797fdb5f9761eae20edf45a71a2a551f3a5eee8095957c",
+  "actualWrapperExit": 201,
+  "overallStatus": "FAIL",
+  "resultSha256": "05c74603082b3028dd3b5d72c7b3d73daeae4d1eed427540dad4039c61991039",
+  "wholeCaptureSha256": "229ce17f3e4f93db8720a3df3bda1c5682317d90a957a6507eeb152668cebc7f",
+  "regularRowsFullModesVerified": 9022,
+  "literalUnfollowedLinks": 22,
+  "registeredArtifacts": 85,
+  "sourceMirrorBoth": 82,
+  "actualMirrorOnlyBuildFiles": [
+    "go-backend/embedfs/build/dist/.gui-build.json",
+    "go-backend/embedfs/build/dist/versions.lock.json"
+  ],
+  "virtualImageArtifact": [
+    {
+      "name": "app-image roedu-app:gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc",
+      "immutableImageId": "sha256:9161611dc92b52dcfe0a517ad85b462f70c1131e198e35cf0352decb37ef579d",
+      "actualDockerInspectMatched": true
+    }
+  ],
+  "frontend": {
+    "tests": 319,
+    "pass": 319,
+    "fail": 0,
+    "skip": 0,
+    "repairedStylePositiveAndSixBudgetCases": "actuallyexecutedPASS"
+  },
+  "backend": {
+    "namedPass": 1302,
+    "fail": 0,
+    "explicitDefaultPgSkip": 17,
+    "packagesPass": 28
+  },
+  "explicitPgPackages": {
+    "accountsNamedPass": 12,
+    "httpapiNamedPass": 215,
+    "allSkipEvents": 0
+  },
+  "independentHttpParity": {
+    "requests": 1207,
+    "ok": true,
+    "accountsEnabled": false
+  },
+  "browser": {
+    "inventoryExact": true,
+    "unique": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "eachOnce": true,
+    "retry": 0,
+    "pass": 894,
+    "fail": 6,
+    "skip": 0,
+    "flaky": 0,
+    "globalErrors": 0,
+    "rawSha256": "2a2b47602fa78f9a6eef39c7e0e20cf6c0607b56b77bfe7a0e6fa8ca311f52ac"
+  },
+  "failedChecks": [
+    "cat-route-budgets",
+    "cat-browser-full",
+    "repo-full-exit",
+    "csp-measurement",
+    "browser-evidence"
+  ],
+  "budget": "20realJSrows red;Home115181active/117271frozen againstconfigured40960, no raised/null/hiddenlimit",
+  "originFinding": {
+    "actualBaseUrl": "http://roedu-gate.test:8080",
+    "direct": "Fourtestassertions confirmnativeWebLocks absent; tracesreportuntrustworthyorigin/ignoredCOOP",
+    "inference": "Twoconcurrentwhole-boardlostscoreupdatesconsistentwithdocumentedbest-effortfallbackwithoutWebLocks",
+    "minimalRepairScope": "Realcanonicalapp/browsertrustedoriginwhilepreservingimage/source/assetidentity andallassertions; no score/receipt behaviorchangejustified"
+  },
+  "laterEvidence": "CSPmeasurement/browserreceipt/appwitness/baselineverification notearned becausebrowserexecutionfailure stops beforelaterstages",
+  "stopAttempt": "FullfinishednaturallybeforeownedSIGINTattempt; runnergone, no signal sent",
+  "qualification": "No full/M0/M1/KIT_BUMP/image/device/releaseapproval; sourcehandoveronly",
+  "parentReviewPredecessorSha256": "0003cc39abd0294aff17134f69a383a5ca786a5dad1b41e6dbbb7bdf52286b1b",
+  "portableReportDisposition": {
+    "rawGzipRetainedLocally": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/handover-portable-full-2db/full-2db-browser.json.gz",
+    "rawGzipSha256": "e588597d9b792a6c359c025377d72d7790fd83743caa309d8f562c531a0a0ee3",
+    "rawSha256": "2a2b47602fa78f9a6eef39c7e0e20cf6c0607b56b77bfe7a0e6fa8ca311f52ac",
+    "attachmentMetadataAudit": [
+      {
+        "contentType": "application/json",
+        "inlineBody": true,
+        "pathReference": false,
+        "count": 256
+      },
+      {
+        "contentType": "image/png",
+        "inlineBody": true,
+        "pathReference": false,
+        "count": 36
+      },
+      {
+        "contentType": "image/png",
+        "inlineBody": false,
+        "pathReference": true,
+        "count": 10
+      },
+      {
+        "contentType": "text/markdown",
+        "inlineBody": false,
+        "pathReference": true,
+        "count": 6
+      },
+      {
+        "contentType": "application/zip",
+        "inlineBody": false,
+        "pathReference": true,
+        "count": 6
+      }
+    ],
+    "finding": "Raw JSON has 36 inline PNG bodies and 256 inline JSON bodies, plus path-only screenshot/context/trace references. No inline ZIP trace bodies. Compact derived index is published; large bodies and trace archives remain local.",
+    "projectionPath": "full-2db-browser-index.json",
+    "projectionSha256": "b396bc5bea9712b42a779623ce1a21873ec090377863344451773dcb8487f260",
+    "exactRawReportPublished": false
+  },
+  "independentReview": {
+    "reviewer": "/root/program_pack",
+    "scope": "Actual failed-full result, whole capture, artifact identities, browser counts and origin evidence; read-only, no execution or writes.",
+    "outcome": "Evidence consistent and suitable for handover; no aggregate or later-stage qualification.",
+    "corroborated": [
+      "85 artifacts = 82 both physical + 2 mirror-only + 1 image identity",
+      "900 unique once, 450 per project, 894 pass / 6 fail; no retries/skips/flaky/global errors",
+      "Four Web Locks availability assertion failures and two missing score rows",
+      "HTTP alias and untrustworthy-origin/ignored-COOP warnings direct; score fallback causality remains inference",
+      "CSP measurement/browser receipt/app-witness/baseline verification did not execute"
+    ]
+  },
+  "portableArtifacts": {
+    "full-2db-browser-index.json": "b396bc5bea9712b42a779623ce1a21873ec090377863344451773dcb8487f260",
+    "full-2db-budget-active.json": "959e10bc431c9433fd540ccdce58c84d0a80b26161b6d9a15a70383a76a6f083",
+    "full-2db-budget-frozen.json": "835fc5c169bf688fe07a669ed3dd933c2cd754ea53ffb552832b44f075024c75",
+    "full-2db-budget-measurements.json": "20684ce83a7c3f5dacb87af9e382a76ee61e7bd59bd9b5610ac2092ced939b14",
+    "full-2db-result.json": "05c74603082b3028dd3b5d72c7b3d73daeae4d1eed427540dad4039c61991039"
+  }
+}
