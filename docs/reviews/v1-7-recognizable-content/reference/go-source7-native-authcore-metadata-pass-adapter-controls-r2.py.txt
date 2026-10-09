@@ -1,0 +1,73 @@
+"""Controlled receipt-validator checks; no producer/parser/application execution."""
+import ast,copy,hashlib,json,pathlib,sys,unittest
+sys.dont_write_bytecode=True
+S=pathlib.Path(sys.argv.pop(1))
+P=S/"probe/native-authcore-metadata-pass-adapter-r2.py"
+tree=ast.parse(P.read_text())
+nodes=[n for n in tree.body if (isinstance(n,ast.FunctionDef) and n.name in {"require","validate","verify_frozen_evidence"}) or (isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name) and n.targets[0].id in {"SPEC_SHA","ADMISSION_SHA","RAW_PINS"})]
+E={"hashlib":hashlib};exec(compile(ast.Module(body=nodes,type_ignores=[]),str(P),"exec"),E)
+def document(p):return json.loads((S/p).read_text())
+BASE={
+ "spec":document("probe/native-authcore-metadata-spec-r2.json"),
+ "template":document("probe/native-authcore-metadata-template-r5.json"),
+ "admission":document("native-authcore-metadata-actual-admission-r2.json"),
+ "dispatch":document("probe/native-authcore-dispatch-approval-r2.json"),
+ "state":document("native-authcore-metadata-r2/run/state.json"),
+ "outer":document("native-authcore-metadata-r2/run/outer-tool-result-r1.json"),
+ "events":[json.loads(line) for line in (S/"native-authcore-metadata-r2/run/authcore-imported-metadata.telemetry.jsonl").read_text().splitlines()],
+ "output_sha":hashlib.sha256((S/"native-authcore-metadata-r2/tools/authcore-metadata.stdout.json").read_bytes()).hexdigest(),
+ "output_bytes":(S/"native-authcore-metadata-r2/tools/authcore-metadata.stdout.json").stat().st_size}
+class Controls(unittest.TestCase):
+ def frozen(self):
+  paths={"spec":"probe/native-authcore-metadata-spec-r2.json","template":"probe/native-authcore-metadata-template-r5.json",
+   "outer":"native-authcore-metadata-r2/run/outer-tool-result-r1.json","admission":"native-authcore-metadata-actual-admission-r2.json",
+   "source_review":"probe/native-authcore-source-approval-r2.json","dispatch":"probe/native-authcore-dispatch-approval-r2.json",
+   "state":"native-authcore-metadata-r2/run/state.json","events":"native-authcore-metadata-r2/run/authcore-imported-metadata.telemetry.jsonl",
+   "stdout":"native-authcore-metadata-r2/tools/authcore-metadata.stdout.json","windows_method":"probe/native-authcore-metadata-windows-r4.py",
+   "linux_method":"probe/native-authcore-metadata-linux-r8.py","stderr":"native-authcore-metadata-r2/run/authcore-imported-metadata.stderr.log",
+   "controller_stderr":"native-authcore-metadata-r2/run/authcore-imported-metadata.controller.stderr.log"}
+  raw={k:(S/p).read_bytes() for k,p in paths.items()}
+  raw["parser_source"]=(pathlib.Path(r"C:/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-7")/"docs/reviews/v1-7-recognizable-content/go-source7-native-coverage-parser-r2.py.txt").read_bytes()
+  return raw
+ def test_actual_all_raw_pins(self):E["verify_frozen_evidence"](self.frozen())
+ def test_method_and_mutable_review_change_both_refused(self):
+  raw=self.frozen();raw["windows_method"]+=b"changed";raw["source_review"]=b"changed"
+  with self.assertRaises(ValueError):E["verify_frozen_evidence"](raw)
+ def test_altered_frozen_state_refused(self):
+  raw=self.frozen();raw["state"]+=b" "
+  with self.assertRaises(ValueError):E["verify_frozen_evidence"](raw)
+ def test_altered_frozen_telemetry_refused(self):
+  raw=self.frozen();raw["events"]+=b"\n"
+  with self.assertRaises(ValueError):E["verify_frozen_evidence"](raw)
+ def test_altered_frozen_output_refused(self):
+  raw=self.frozen();raw["stdout"]+=b" "
+  with self.assertRaises(ValueError):E["verify_frozen_evidence"](raw)
+ def test_actual_complete_pass_evidence(self):
+  self.assertEqual(E["validate"](**BASE)["name"],"authcore-imported-metadata")
+ def test_failed_prior_campaign_refused(self):
+  v=dict(BASE,state=document("native-authcore-metadata-r1/run/state.json"))
+  with self.assertRaises(ValueError):E["validate"](**v)
+ def refuse(self,mutate):
+  v=copy.deepcopy(BASE);mutate(v)
+  with self.assertRaises(ValueError):E["validate"](**v)
+ def test_nonzero_outer_exit(self):self.refuse(lambda v:v["outer"].update(exit_code=1))
+ def test_boolean_outer_exit(self):self.refuse(lambda v:v["outer"].update(exit_code=False))
+ def test_failed_final_state(self):self.refuse(lambda v:v["state"].update(kind="failed"))
+ def test_failed_publication(self):self.refuse(lambda v:v["state"].update(failed_publication_error="injected"))
+ def test_missing_postproof(self):self.refuse(lambda v:v["state"]["full_readset_checks"].pop())
+ def test_postproof_in_reserve(self):self.refuse(lambda v:v["state"].update(finished_epoch=v["spec"]["deadline_epoch"]-179))
+ def test_peak_cap(self):self.refuse(lambda v:v["state"].update(parent_inclusive_peak=(2<<30)+1))
+ def test_growth_cap(self):self.refuse(lambda v:v["state"].update(final_growth=(1<<30)+1))
+ def test_template_scope_drift(self):self.refuse(lambda v:v["spec"].update(scope="changed"))
+ def test_changed_producer_argv(self):self.refuse(lambda v:v["spec"]["steps"][0]["argv"].append("-mall"))
+ def test_changed_caps(self):self.refuse(lambda v:v["spec"].update(rss_cap=3<<30))
+ def test_wrong_root_output_digest(self):self.refuse(lambda v:v.update(output_sha="a"*64))
+ def test_wrong_admission_binding(self):self.refuse(lambda v:v["dispatch"].update(admission_sha256="a"*64))
+ def test_native_group_present(self):
+  self.refuse(lambda v:next(e for e in v["events"] if e["kind"]=="complete").update(group_absent=False))
+ def test_boolean_native_exit(self):
+  self.refuse(lambda v:next(e for e in v["events"] if e["kind"]=="complete").update(returncode=False))
+ def test_native_failed_event(self):self.refuse(lambda v:v["events"].append({"kind":"failed","error":"injected"}))
+ def test_missing_native_completion(self):self.refuse(lambda v:v.update(events=[e for e in v["events"] if e["kind"]!="complete"]))
+ def test_wrong_actual_tool_terminal(self):self.refuse(lambda v:v["outer"]["terminal"].update(completed=0))
+if __name__=="__main__":unittest.main(verbosity=2)

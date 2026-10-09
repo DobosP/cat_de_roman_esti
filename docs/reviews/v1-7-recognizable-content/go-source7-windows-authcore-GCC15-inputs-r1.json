@@ -1,0 +1,148 @@
+{
+  "schema": "authcore-GCC15-source-inputs-v1",
+  "observed_epoch": 1791541086.899394,
+  "inputs": [
+    {
+      "path": "/usr/bin/gcc",
+      "resolved": "/usr/bin/x86_64-linux-gnu-gcc-15",
+      "chain": [
+        {
+          "path": "/usr/bin/gcc",
+          "target": "gcc-15"
+        },
+        {
+          "path": "/usr/bin/gcc-15",
+          "target": "x86_64-linux-gnu-gcc-15"
+        }
+      ],
+      "sha256": "b5f1b773a7c733738352000c92a077dc5852a1a2fc6d836b1e411be1e9ec5f88",
+      "bytes": 1305304,
+      "executable_required": true
+    },
+    {
+      "path": "/usr/bin/cc",
+      "resolved": "/usr/bin/x86_64-linux-gnu-gcc-15",
+      "chain": [
+        {
+          "path": "/usr/bin/cc",
+          "target": "/etc/alternatives/cc"
+        },
+        {
+          "path": "/etc/alternatives/cc",
+          "target": "/usr/bin/gcc"
+        },
+        {
+          "path": "/usr/bin/gcc",
+          "target": "gcc-15"
+        },
+        {
+          "path": "/usr/bin/gcc-15",
+          "target": "x86_64-linux-gnu-gcc-15"
+        }
+      ],
+      "sha256": "b5f1b773a7c733738352000c92a077dc5852a1a2fc6d836b1e411be1e9ec5f88",
+      "bytes": 1305304,
+      "executable_required": true
+    },
+    {
+      "path": "/usr/bin/as",
+      "resolved": "/usr/bin/x86_64-linux-gnu-as",
+      "chain": [
+        {
+          "path": "/usr/bin/as",
+          "target": "x86_64-linux-gnu-as"
+        }
+      ],
+      "sha256": "4e5fcaa3cdc160173cb5cfe7aa35dc39d7aa1f06ba8d75b8d923bbae5473991b",
+      "bytes": 826608,
+      "executable_required": true
+    },
+    {
+      "path": "/usr/bin/ld",
+      "resolved": "/usr/bin/x86_64-linux-gnu-ld.bfd",
+      "chain": [
+        {
+          "path": "/usr/bin/ld",
+          "target": "x86_64-linux-gnu-ld"
+        },
+        {
+          "path": "/usr/bin/x86_64-linux-gnu-ld",
+          "target": "x86_64-linux-gnu-ld.bfd"
+        }
+      ],
+      "sha256": "97f48d93b8b076a92d2809ec29dcb17f0f37c8827358f832255e2ed22fef6075",
+      "bytes": 1890472,
+      "executable_required": true
+    },
+    {
+      "path": "/usr/lib/gcc/x86_64-linux-gnu/15/libgcc.a",
+      "resolved": "/usr/lib/gcc/x86_64-linux-gnu/15/libgcc.a",
+      "chain": [],
+      "sha256": "d9c2e7a0c0f3dbfc0ff2dec153b0d044cf49d66d64d736b5d1db8ae25ca9c75e",
+      "bytes": 3237076,
+      "executable_required": false
+    },
+    {
+      "path": "/usr/lib/gcc/x86_64-linux-gnu/15/libgcc_s.so",
+      "resolved": "/usr/lib/gcc/x86_64-linux-gnu/15/libgcc_s.so",
+      "chain": [],
+      "sha256": "69a56a9993b7729b29b274e65016031c81f2397f176ed5ad44d59bd50425e0bd",
+      "bytes": 132,
+      "executable_required": false
+    },
+    {
+      "path": "/usr/lib/gcc/x86_64-linux-gnu/15/crtbegin.o",
+      "resolved": "/usr/lib/gcc/x86_64-linux-gnu/15/crtbegin.o",
+      "chain": [],
+      "sha256": "f179b9f114a7421f32f0de4a3e1a25790469047b34a621c5b9af652f14b04014",
+      "bytes": 2440,
+      "executable_required": false
+    },
+    {
+      "path": "/usr/lib/gcc/x86_64-linux-gnu/15/crtbeginS.o",
+      "resolved": "/usr/lib/gcc/x86_64-linux-gnu/15/crtbeginS.o",
+      "chain": [],
+      "sha256": "178f90d86c9bf8c3bf0746e288bed4af492c4b65397d54caf386a9b807d8e2c5",
+      "bytes": 2744,
+      "executable_required": false
+    },
+    {
+      "path": "/usr/lib/gcc/x86_64-linux-gnu/15/crtend.o",
+      "resolved": "/usr/lib/gcc/x86_64-linux-gnu/15/crtend.o",
+      "chain": [],
+      "sha256": "b4b7d9001893f0baf4ebfbe12df8d5cf0dd7f69643a5caae04d956d1a443b246",
+      "bytes": 1160,
+      "executable_required": false
+    },
+    {
+      "path": "/usr/lib/gcc/x86_64-linux-gnu/15/crtendS.o",
+      "resolved": "/usr/lib/gcc/x86_64-linux-gnu/15/crtendS.o",
+      "chain": [],
+      "sha256": "b4b7d9001893f0baf4ebfbe12df8d5cf0dd7f69643a5caae04d956d1a443b246",
+      "bytes": 1160,
+      "executable_required": false
+    },
+    {
+      "path": "/usr/libexec/gcc/x86_64-linux-gnu/15/cc1",
+      "resolved": "/usr/libexec/gcc/x86_64-linux-gnu/15/cc1",
+      "chain": [],
+      "sha256": "30510b346885152c4fce41d2b501751c95d3690b1c34eaa04ebb970e70eae620",
+      "bytes": 37475472,
+      "executable_required": true
+    },
+    {
+      "path": "/usr/libexec/gcc/x86_64-linux-gnu/15/collect2",
+      "resolved": "/usr/libexec/gcc/x86_64-linux-gnu/15/collect2",
+      "chain": [],
+      "sha256": "8ab5d946ba2c948e5ea5c91e25a104439302e0599a521785770d10690c565437",
+      "bytes": 479104,
+      "executable_required": true
+    }
+  ],
+  "trusted_OS_boundary": "Existing WSL OS headers, transitive shared libraries, linker plugin and configured system search directories remain trusted host inputs, not sealed or vendored by this finite selected executable/auxiliary proof. No concurrent system toolchain update is admitted.",
+  "owned_regular_PATH": [
+    "as",
+    "ld"
+  ],
+  "compiler_execution": false
+}

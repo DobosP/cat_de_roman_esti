@@ -1,0 +1,117 @@
+import ast,copy,json,pathlib,sys,unittest
+sys.dont_write_bytecode=True
+S=pathlib.Path(sys.argv.pop(1))
+W=S/'probe/native-authcore-metadata-windows-r4.py'
+L=S/'probe/native-authcore-metadata-linux-r8.py'
+T=json.loads((S/'probe/native-authcore-metadata-template-r5.json').read_text())
+def load_functions(path,names):
+    nodes=[]
+    for node in ast.parse(path.read_text()).body:
+        if isinstance(node,ast.FunctionDef) and node.name in names:nodes.append(node)
+        elif isinstance(node,ast.Assign) and isinstance(node.targets[0],ast.Name) and node.targets[0].id in ('REQUIRED_SPEC_KEYS','REQUIRED_STEP_KEYS','LATE_ADMISSION_KEYS'):nodes.append(node)
+    env={}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),str(path),'exec'),env)
+    return env
+WENV=load_functions(W,{'translated_windows_path','validate_contract','observe_linux_sample'})
+LENV=load_functions(L,{'sample_supervisor','stop_sampler'})
+class Event:
+    def __init__(self,limit=3):self.set_flag=False;self.calls=0;self.limit=limit
+    def is_set(self):return self.set_flag
+    def set(self):self.set_flag=True
+    def wait(self,seconds):
+        self.calls+=1
+        if self.calls>=self.limit:self.set()
+class Thread:
+    def __init__(self,alive=False):self.joined=False;self.alive=alive
+    def join(self,timeout):self.joined=True
+    def is_alive(self):return self.alive
+class Cancel:
+    def __init__(self):self.flag=False
+    def exists(self):return self.flag
+class Clock:
+    def time(self):return 0
+class Cases(unittest.TestCase):
+    def test_exact_contract(self):WENV['validate_contract'](T,clock=False)
+    def test_extra_producer_refused(self):
+        v=dict(T);v['steps']=T['steps']*2
+        with self.assertRaises(RuntimeError):WENV['validate_contract'](v,clock=False)
+    def test_changed_go_argv_refused(self):
+        v=dict(T);v['steps']=[dict(T['steps'][0],argv=['go','test','./...'])]
+        with self.assertRaises(RuntimeError):WENV['validate_contract'](v,clock=False)
+    def test_missing_contract_field_refused(self):
+        v=dict(T);del v['go_sha256']
+        with self.assertRaises(RuntimeError):WENV['validate_contract'](v,clock=False)
+    def test_high_then_low_retained(self):
+        f=WENV['observe_linux_sample']
+        self.assertEqual(f(f(0,{'rss':1000}),{'rss':2}),1000)
+    def test_recorded_peak_retained(self):
+        self.assertEqual(WENV['observe_linux_sample'](50,{'rss':1,'peak':700}),700)
+    def test_invalid_telemetry_types_refused(self):
+        for value in (-1,True,1.0):
+            with self.subTest(value=value),self.assertRaises(RuntimeError):WENV['observe_linux_sample'](0,{'rss':value})
+    def setup_sampler(self,values=(10,800,2)):
+        env=LENV
+        event=Event(len(values));cancel=Cancel();events=[];iterator=iter(values)
+        env.update(stopping=False,supervisor_peak=0,sampler_stop=event,cancel=cancel,time=Clock(),
+                   spec={'rss_cap':10000,'memory_floor':16,'deadline_epoch':1200},
+                   memory=lambda:100,emit=events.append,
+                   group=lambda:[(1,1,1,next(iterator),'S')],sampler=Thread())
+        return env,event,events
+    def test_pre_and_post_peak_retained(self):
+        env,event,events=self.setup_sampler()
+        env['sample_supervisor']()
+        self.assertEqual(env['supervisor_peak'],800)
+        self.assertEqual([x['peak'] for x in events],[10,800,800])
+        self.assertTrue(event.is_set())
+    def test_sampler_exception_stops(self):
+        env,event,events=self.setup_sampler()
+        env['group']=lambda:(_ for _ in ()).throw(RuntimeError('injected'))
+        env['sample_supervisor']()
+        self.assertTrue(env['stopping'])
+        self.assertEqual(events[-1]['kind'],'failed')
+        self.assertFalse(any(x['kind']=='complete' for x in events))
+    def test_stop_joins_sampler(self):
+        env,event,events=self.setup_sampler()
+        env['stop_sampler']()
+        self.assertTrue(event.is_set());self.assertTrue(env['sampler'].joined)
+    def test_join_timeout_is_uncertain_failure(self):
+        env,event,events=self.setup_sampler();env['sampler']=Thread(True)
+        with self.assertRaises(RuntimeError):env['stop_sampler']()
+    def terminal(self,injection):
+        tree=ast.parse(L.read_text())
+        outer=next(n for n in tree.body if isinstance(n,ast.Try) and any(isinstance(x,ast.Expr) and isinstance(x.value,ast.Call) and isinstance(x.value.func,ast.Name) and x.value.func.id=='spec_pin' for x in n.body))
+        start=next(i for i,n in enumerate(outer.body) if isinstance(n,ast.Expr) and isinstance(n.value,ast.Call) and isinstance(n.value.func,ast.Name) and n.value.func.id=='stop_sampler')
+        events=[];cancel=Cancel()
+        env={'stopping':False,'cancel':cancel,'spec':{'memory_floor':16,'deadline_epoch':1200,'rss_cap':10000},
+             'time':type('Time',(),{'time':lambda self:0,'monotonic':lambda self:0})(),
+             'mono_deadline':1200,'peak':10,'supervisor_peak':20,'step':{'name':'fixture'},
+             'stop_sampler':lambda:events.append({'kind':'joined'})}
+        def trip(where):
+            if injection==where:env['stopping']=True
+        def memory():trip('memory');return 100
+        def group():trip('group');return [(1,1,1,10,'S')]
+        def emit(value):events.append(value);trip('sample')
+        env.update(memory=memory,group=group,emit=emit)
+        code=compile(ast.Module(body=outer.body[start:],type_ignores=[]),str(L),'exec')
+        return code,env,events
+    def test_final_cancellation_never_completes(self):
+        for where in ('memory','group','sample'):
+            with self.subTest(where=where):
+                code,env,events=self.terminal(where)
+                with self.assertRaises(AssertionError):exec(code,env)
+                self.assertFalse(any(x.get('kind')=='complete' for x in events))
+    def test_terminal_joins_before_completion(self):
+        code,env,events=self.terminal(None);exec(code,env)
+        self.assertEqual(events[0]['kind'],'joined')
+        self.assertEqual(events[-1]['kind'],'complete')
+    def test_output_cap_predicate(self):
+        tree=ast.parse(L.read_text())
+        test=next(n.test for n in ast.walk(tree) if isinstance(n,ast.If) and any(isinstance(x,ast.Constant) and x.value=='metadata stdout/stderr bytecap' for x in ast.walk(n)))
+        class File:
+            def __init__(self,size):self.size=size
+            def stat(self):return type('Stat',(),{'st_size':self.size})()
+        for out,err,expected in ((16<<20,1<<20,False),((16<<20)+1,0,True),(0,(1<<20)+1,True)):
+            env={'pathlib':type('Paths',(),{'Path':lambda self,p:File(out)})(),'step':{'linux_output':'out','name':'x'},
+                 'run':type('Run',(),{'__truediv__':lambda self,p:File(err)})()}
+            self.assertEqual(eval(compile(ast.Expression(test),str(L),'eval'),env),expected)
+if __name__=='__main__':unittest.main(verbosity=2)

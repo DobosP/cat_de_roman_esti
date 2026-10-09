@@ -1,0 +1,207 @@
+{
+  "schema": "actual-authcore-full-race-and-vet-results-v1",
+  "valid_until": "Bounded current inputs/methods change, then history",
+  "scope": "Shared authcore only; Source6 live and V1.7 uninstalled.",
+  "review": {
+    "schema": "root-transcribed-actual-independent-authcore-test-review-v1",
+    "reviewer": "/root/continuation_audit",
+    "frozen_utc": "2026-10-09T11:34:38Z",
+    "decision": "ACCEPT_ACTUAL_AUTHCORE_TEST_LANE_EVIDENCE_ONLY",
+    "state_sha256": "362baec88692fca4aaf8ea942e8c3e724f3543d5477799affc6c6f4e420f2287",
+    "actual_steps": 3,
+    "full_proofs": {
+      "ordered_boundaries": [
+        "pre",
+        "post",
+        "pre",
+        "post",
+        "pre",
+        "post"
+      ],
+      "protected_files_each": 19013
+    },
+    "inventory_unique_top_cases": 15,
+    "execution_top_cases": 15,
+    "execution_subcases": 13,
+    "race_skips_failures": 0,
+    "vet_stdout_empty": true,
+    "all_stderr_empty": true,
+    "same_binary_sha256": "06e480bc67d1d166261c261d47980cb46745f922fb5c2c8bc946538af5edd013",
+    "same_binary_bytes": 16962965,
+    "parent_inclusive_peak": 1008447488,
+    "growth": 642126409,
+    "conservative_anchor": 1793580496,
+    "independent_linux_absence": {
+      "time_utc": "2026-10-09T11:34:27.279511Z",
+      "groups": [
+        "244148@1429485",
+        "245236@1443496",
+        "245949@1459362"
+      ],
+      "matching_owned_pid_group_session_or_commands": 0,
+      "observer_pid_excluded": 249708,
+      "mem_available": 40054050816
+    },
+    "independent_windows_absence": {
+      "time_utc": "2026-10-09T11:34:28.0189683Z",
+      "pid": 32424,
+      "matches": 0
+    },
+    "disk_free_at_113437": 19403194368,
+    "qualifications": [
+      "Actual root outer receipt independently corroborated with raw state/outputs/events, not relied on alone.",
+      "Full19013 proofs accepted from fresh guarded pre/post checks and exclusive unchanged inputs; peer did not rehash all19k after closure.",
+      "Original compileR1 remains FAILED.",
+      "No backend/content/PG/GUI/installed/release acceptance; no hermetic whole-OS claim."
+    ],
+    "reviewer_writes": false,
+    "native_replay": false,
+    "transcribed_epoch": 1791545731.1721063
+  },
+  "review_receipt_sha256": "ac8bb8936c8db8f3de1445f6a3fdc994dcccd5e1568bd0646ef86025289b8844",
+  "state": {
+    "full_readset_checks": [
+      {
+        "boundary": "pre",
+        "started_epoch": 1791544867.5447793,
+        "finished_epoch": 1791544873.4959533,
+        "protected_files": 19013
+      },
+      {
+        "boundary": "post",
+        "started_epoch": 1791544999.302685,
+        "finished_epoch": 1791545004.1696074,
+        "protected_files": 19013
+      },
+      {
+        "boundary": "pre",
+        "started_epoch": 1791545012.5085084,
+        "finished_epoch": 1791545017.6058197,
+        "protected_files": 19013
+      },
+      {
+        "boundary": "post",
+        "started_epoch": 1791545153.9943297,
+        "finished_epoch": 1791545158.8860447,
+        "protected_files": 19013
+      },
+      {
+        "boundary": "pre",
+        "started_epoch": 1791545168.8041208,
+        "finished_epoch": 1791545175.5269706,
+        "protected_files": 19013
+      },
+      {
+        "boundary": "post",
+        "started_epoch": 1791545373.8139958,
+        "finished_epoch": 1791545379.3196852,
+        "protected_files": 19013
+      }
+    ],
+    "kind": "passed",
+    "started_epoch": 1791544683.2804403,
+    "deadline_epoch": 1791545883.2804403,
+    "baseline": 1793580496,
+    "completed": [
+      {
+        "step": "authcore-case-list",
+        "output_sha256": "b1771fe2fcdde157083aecd3f2c9682a4f86daa4e8c1e675eb20d08a6c13bbe2",
+        "native_peak": 102084608,
+        "artifact_sha256": "06e480bc67d1d166261c261d47980cb46745f922fb5c2c8bc946538af5edd013",
+        "artifact_bytes": 16962965
+      },
+      {
+        "step": "authcore-race-tests",
+        "output_sha256": "7f1b83873b9c2bf3a1446ab1dd5a6605b73a0a105e0eedf1256b8f8476c5d668",
+        "native_peak": 836771840,
+        "artifact_sha256": "06e480bc67d1d166261c261d47980cb46745f922fb5c2c8bc946538af5edd013",
+        "artifact_bytes": 16962965
+      },
+      {
+        "step": "authcore-vet",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native_peak": 284913664,
+        "artifact_sha256": "06e480bc67d1d166261c261d47980cb46745f922fb5c2c8bc946538af5edd013",
+        "artifact_bytes": 16962965
+      }
+    ],
+    "rss_scope": "Windows Python controller + native exec PowerShell launcher + owned WSL carrier + Linux supervisor/owned Go process group; Codex source workers excluded.",
+    "cleanup": "owned Linux group confirmed absent",
+    "pending_step": "authcore-vet",
+    "parent_inclusive_peak": 1008447488,
+    "whole_R_S_bytes": 2435706296,
+    "finished_epoch": 1791545386.7571378,
+    "final_growth": 642126409,
+    "all_non_target_protected_exact": true,
+    "full_stage_namespace_exact": true,
+    "target_before_sha256": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+    "target_after_sha256": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+    "scope": "Same qualified binary full15case inventory,15top+13subtest race execution and full authcore standalone vet; no backend/all-content/release/adoption acceptance."
+  },
+  "state_sha256": "362baec88692fca4aaf8ea942e8c3e724f3543d5477799affc6c6f4e420f2287",
+  "root_outer_receipt_sha256": "30833580e8ef410afd4cc69ea632f45cd059ffe5fb31d81708a595ee310d3fcd",
+  "original_failure_retained": "go-source7-windows-authcore-race-compile-failure-r1.json",
+  "streams": [
+    {
+      "path": "native-authcore-tests-r1/run/authcore-case-list.controller.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-authcore-tests-r1/run/authcore-case-list.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-authcore-tests-r1/run/authcore-case-list.telemetry.jsonl",
+      "bytes": 42902,
+      "sha256": "69ef0013004b2023f75a9407a58b02b50b2fbb304164e6db932a1e113abc7215"
+    },
+    {
+      "path": "native-authcore-tests-r1/run/authcore-race-tests.controller.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-authcore-tests-r1/run/authcore-race-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-authcore-tests-r1/run/authcore-race-tests.telemetry.jsonl",
+      "bytes": 52312,
+      "sha256": "dbc5730928e8e0b381a57c8548fbf47c78b6f007fbb43cf133b5318c8f05aa06"
+    },
+    {
+      "path": "native-authcore-tests-r1/run/authcore-vet.controller.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-authcore-tests-r1/run/authcore-vet.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-authcore-tests-r1/run/authcore-vet.telemetry.jsonl",
+      "bytes": 92866,
+      "sha256": "7cf45708ef72c8b96a1a3dc49bfc3f744a0a4f739fa21bd6c9efbed129b2d2c1"
+    },
+    {
+      "path": "native-authcore-tests-r1/tools/authcore-case-list.stdout.log",
+      "bytes": 542,
+      "sha256": "b1771fe2fcdde157083aecd3f2c9682a4f86daa4e8c1e675eb20d08a6c13bbe2"
+    },
+    {
+      "path": "native-authcore-tests-r1/tools/authcore-race-tests.stdout.log",
+      "bytes": 3131,
+      "sha256": "7f1b83873b9c2bf3a1446ab1dd5a6605b73a0a105e0eedf1256b8f8476c5d668"
+    },
+    {
+      "path": "native-authcore-tests-r1/tools/authcore-vet.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "next": "Qualify one current cat-content-rail producer with specific pinned web dependencies; create new Quick proposal from actual current85 raw reviews, fresh audit and same-role finals."
+}

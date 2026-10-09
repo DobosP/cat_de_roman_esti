@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-09 — resumed latest Linux checkpoint3d602215; loop PAUSED on disk floor, Source6 live, V1.7 uninstalled.
+Last verified: 2026-10-09 — content loop resumed in this chat. Source6 live; V1.7 uninstalled.
 
 - **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
@@ -27,13 +27,7 @@ Last verified: 2026-10-09 — resumed latest Linux checkpoint3d602215; loop PAUS
 - [Content skill](../.agents/skills/romanian-game-content/SKILL.md): refinement/discovery with independent gates.
 - Decision/evidence: [ADR-0158](adr/0158-v1-testing-release.md),
   [release review](reviews/v1-testing-release/README.md), [Romanian tester guide](TESTARE_V1.md).
-- **V1.2 landed locally17f7da1:** four reviewed synonym families (ascensor, tomată, scripcă, prăvălie),
-  22 distinct forms and Cărare↔Potecă; zero new concepts/curated rounds. Old records,
-  recipe cores/histories/pools persist. [Review](reviews/v1-2-content-growth/README.md),
-  [ADR-0170](adr/0170-v1-2-reviewed-content-growth.md), [pool](content-pool/v1-2-synonyms-and-links/pool.json).
-- V1.2 baseline authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
-  independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
-  Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; content heartbeat renewed per ADR-0177.
+- Historical V1.2 growth and qualification: [review](reviews/v1-2-content-growth/README.md); exact prior status retained in WORKLOG.
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | New-round pool |
@@ -68,12 +62,7 @@ Unrevealed answers, recipe maps and routes stay private.
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
 - kg_sample.json: `63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf`
 - cat_mobile_app_pack_contract.json: `282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae`
-## Verification
-
-- 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
-  (119.78/120 KiB gzip), validators, reserve builder, docs and whitespace; **622/622** browser
-  cases (Edge desktop/Pixel 7, no retries), plus 200 repeated Lanț recovery cases pass.
-  V1 receipts: [1.0.0](reviews/v1-testing-release/verification.json), [1.0.1](reviews/v1-0-1-hardening/README.md).
+Historical verification receipts: [WORKLOG](../WORKLOG.md), [V1.0.1](reviews/v1-0-1-hardening/README.md), [V1.2](reviews/v1-2-content-growth/README.md).
 
 ## Selected Go backend
 
@@ -108,7 +97,16 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-- **Source6 remains live; V1.7 is uninstalled with zero integrated growth.** [ADR-0186](adr/0186-go-authoritative-content-validation.md) makes Go/native JSON authoritative; Python/Rust optional. [Permanent candidate input contracts](reviews/v1-7-recognizable-content/go-source7-input-contracts-results.json) are staged in I1200:2 new Go test files, all1198 prior members/data/history exact. Fresh race compile/list/run passed both parents+69 ordered subcases (71 executions), no failure/skip/race/omission; ordinary2sessions/32requests prove direct leafă→Salary/shared slot/privateGet/earned bank3 clue/4attempts1clue700/share/Progress. Held69 preserve9exact/1projection/2fuzzy/57unknown, frozen graph expectations plus current public confirmation/private/noncharge/advisory checks. Eight HTTP advice lists are new normative checks, not old goldens. [Projection reuse proof](reviews/v1-7-recognizable-content/go-source7-input-contracts-projection-reuse.json) binds unchanged private helper code/complete registry-normalization inputs to archived ordering evidence; no new private-function execution or69HTTP corpus claim. Peak sampledRSS419246080B/combinedgrowth51717329B+64MiB withinlimits. Root Go publication waits for supported Source7 adoption; new tests currently candidate-only. Prior ops840c/rail0724/check and backend389/38/27 metadata accepted, optional full-module inventory remains failed/unrun; do not fetch unused metadata. Next actual native package/case coverage and full tests/vet, fresh corpus/audits/finals/authority/assembled qualification. Runtime131 remains static expectation. Assetscope unanswered; GUI/frontend/PG/provider/remote paused. **Windows continuation:** owner resumed this chat; main and feature were verified at origin3d602215. ExactI1200 restored to new owned scratch (receipt2b20bc98), no native execution. [Coverage parser correction](reviews/v1-7-recognizable-content/go-source7-native-coverage-parser-r2-review.md) independently source-accepted;25 normal+25 optimized synthetic fixtures pass. Original drafts/failure history unchanged. Fresh producer environment/path/readset/resource admission and actual native inventories remain next; loop PAUSED on failed disk postcheck: later sample15.60GiB free/25.46GiB available memory; require17GiB start disk/16GiB remaining,16GiB memory before fresh admission. No unchanged retry/new chats/push. No V1.7 release or cleanup claim.
+- **Source6 live; V1.7 uninstalled, zero integrated growth.** [ADR-0186](adr/0186-go-authoritative-content-validation.md): Go/native JSON authoritative; Python/Rust optional.
+- Exact candidate I1200 preserves all1198 prior members and adds2 Go contract tests. [71 executions](reviews/v1-7-recognizable-content/go-source7-input-contracts-results.json) pass ordinary leafă→Salary/shared-slot/private-clue/Progress plus69 held-input cases; no new69-response HTTP corpus claim.
+- Linux Extensions49, sealed candidate, ops840c/rail0724/check and backend389objects/38packages/27testdirs metadata persist; never replay completed content work or failed optional full-module inventory.
+- Owner recovered disk/resumed this chat. Exact Go1.27.1 SDK restored once; [authcore inventory](reviews/v1-7-recognizable-content/go-source7-windows-authcore-metadata-inventory-r2.json) accepted242objects/1package/5source/3testfiles.
+- [Fresh authcore race compilation](reviews/v1-7-recognizable-content/go-source7-windows-authcore-race-compile-results-r2.json) independently accepted: complete19010pre/post pins, binary06e480bc/16962965B,459763712B sampled parent peak, owned-group closure. Original reserve/scanner failures remain FAILED.
+- [Authcore native gate](reviews/v1-7-recognizable-content/go-source7-windows-authcore-tests-results-r1.json) independently accepted: exact15-case listing, all15+13 race executions and full standalone vet; six19013pre/post checks,1008447488B parent peak, cleanup confirmed.
+- Next: one current rail build with the specifically pinned web dependencies, then new Quick proposal/audit/finals; current scratch lacks authenticated Linux0724, and older tools are stale.
+- All85 Quick boards freshly reassessed by actual current factual/quality roles using exact inherited stable evidence; fresh supported proposal/audit85boards/460requests/same-role finals remain required. Old runtime130/110 finals are stale; current runtime131 is static expectation.
+- Full native/shared/Webkit coverage, independent Source7HTTP1207 corpus/selector, current/frozen assets, installed source/history/inverse/authority and exact assembled acceptance remain required. [Current continuation](reviews/v1-7-recognizable-content/README.md).
+- Loop runs here, no new chats; GUI/perf separate, PG/provider/remote actions paused. No V1.8 before nonempty independently accepted all-green V1.7 local landing.
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni

@@ -1,0 +1,284 @@
+import json,os,pathlib,signal,subprocess,sys,time,hashlib,threading,stat as filemode
+spec_bytes=pathlib.Path(sys.argv[1]).read_bytes()
+expected_spec=sys.argv[2]
+if sys.flags.optimize or os.environ.get("PYTHONOPTIMIZE"): raise RuntimeError("optimized Python refused")
+if hashlib.sha256(spec_bytes).hexdigest()!=expected_spec: raise RuntimeError("spec SHA drift")
+spec=json.loads(spec_bytes.decode("utf-8"))
+REQUIRED_SPEC_KEYS = ["candidate_sha256","contract_required_spec_keys","contract_required_step_keys","deadline_epoch","full_R_S_baseline","go_sha256","growth_cap","host_launcher_pid","linux_artifact","linux_build_root","linux_c_proof","linux_compiler_inputs","linux_gocache","linux_gomodcache","linux_gopath","linux_goroot","linux_guard","linux_protected","linux_run","linux_spec","linux_stage","linux_target","memory_floor","module_source_dirs","module_source_files","python_sha256","review_hashes","reviewer_ids","rss_cap","sdk_dirs","sdk_files","stage_files","started_epoch","steps","target_after_sha256","target_before_sha256","windows_R","windows_S","windows_artifact","windows_build_root","windows_c_proof","windows_gomodcache","windows_goroot","windows_protected","windows_run","windows_spec","windows_stage","windows_target"]
+REQUIRED_STEP_KEYS = ['argv', 'linux_output', 'name', 'windows_output']
+LATE_ADMISSION_KEYS = ['deadline_epoch', 'full_R_S_baseline', 'host_launcher_pid', 'started_epoch']
+def translated_windows_path(value):
+ if not isinstance(value,str):raise RuntimeError("Windows path type")
+ q=value.replace(chr(92),"/")
+ if len(q)<3 or q[1:3]!=":/" or not q[0].isalpha() or "/../" in q or q.endswith("/.."):raise RuntimeError("Windows absolute path contract")
+ return "/mnt/"+q[0].lower()+q[2:]
+def validate_contract(v,clock=True):
+ if not isinstance(v,dict):raise RuntimeError("spec object required")
+ wanted=set(REQUIRED_SPEC_KEYS)-(set() if clock else set(LATE_ADMISSION_KEYS))
+ missing=sorted(wanted-set(v))
+ if missing:raise RuntimeError("required spec fields missing: "+repr(missing))
+ if v["contract_required_spec_keys"]!=REQUIRED_SPEC_KEYS or v["contract_required_step_keys"]!=REQUIRED_STEP_KEYS:raise RuntimeError("required-key contract drift")
+ for win,lin in [("windows_spec","linux_spec"),("windows_run","linux_run"),("windows_stage","linux_stage"),("windows_build_root","linux_build_root"),("windows_goroot","linux_goroot"),("windows_gomodcache","linux_gomodcache"),("windows_target","linux_target"),("windows_artifact","linux_artifact"),("windows_c_proof","linux_c_proof")]:
+  if translated_windows_path(v[win])!=v[lin]:raise RuntimeError("exact Windows/Linux path binding: "+win)
+ steps=v["steps"]
+ if not isinstance(steps,list) or len(steps)!=1 or [x.get("name") for x in steps]!=["authcore-race-compile"]:raise RuntimeError("one exact metadata producer contract")
+ for x in steps:
+  if not isinstance(x,dict) or set(REQUIRED_STEP_KEYS)-set(x):raise RuntimeError("required step fields missing")
+  if translated_windows_path(x["windows_output"])!=x["linux_output"]:raise RuntimeError("exact step output path binding")
+  if x["argv"]!=[v["linux_goroot"]+"/bin/go","-C",v["linux_stage"]+"/shared-go/authcore","test","-c","-race","-mod=readonly","-p=2","-o",v["linux_artifact"],"."]:raise RuntimeError("fixed metadata argv contract")
+
+validate_contract(spec)
+if str(pathlib.Path(sys.argv[1]))!=spec["linux_spec"]:raise RuntimeError("exact Linux actual-spec path mismatch")
+index=int(sys.argv[3]); step=spec["steps"][index]; run=pathlib.Path(spec["linux_run"])
+mono_deadline=time.monotonic()+spec["deadline_epoch"]-time.time()
+if spec["deadline_epoch"]-spec["started_epoch"]!=1200: raise RuntimeError("campaign duration drift")
+cancel=run/"cancel"; pgid=None; child=None; initial=None; peak=0; error=None; cleanup_attempted=False; cleanup_confirmed=False
+emit_lock=threading.Lock()
+def emit(v):
+ with emit_lock:print(json.dumps(v,separators=(",",":")),flush=True)
+def stat(pid):
+ try:
+  t=pathlib.Path("/proc",str(pid),"stat").read_text(); f=t[t.rfind(")")+2:].split()
+  return int(f[2]),int(f[19]),int(f[21])*os.sysconf("SC_PAGE_SIZE"),f[0]
+ except (FileNotFoundError,ProcessLookupError): return None
+def group():
+ rows=[]
+ for p in pathlib.Path("/proc").iterdir():
+  if not p.name.isdigit(): continue
+  v=stat(p.name)
+  if v and (int(p.name)==os.getpid() or v[0]==pgid): rows.append((int(p.name),*v))
+ return rows
+def memory():
+ return int(next(x.split()[1] for x in pathlib.Path("/proc/meminfo").read_text().splitlines() if x.startswith("MemAvailable:")))*1024
+stopping=False
+def interrupted(signum,frame):
+ global stopping
+ stopping=True
+signal.signal(signal.SIGTERM,interrupted);signal.signal(signal.SIGINT,interrupted)
+def spec_pin():
+ if hashlib.sha256(pathlib.Path(sys.argv[1]).read_bytes()).hexdigest()!=expected_spec: raise RuntimeError("spec SHA drift")
+def cleanup():
+ global child,pgid,initial,cleanup_attempted,cleanup_confirmed
+ if cleanup_attempted:
+  if cleanup_confirmed:return
+  raise RuntimeError("prior cleanup uncertain; refusing repeated process-group action")
+ cleanup_attempted=True
+ if child is None:
+  cleanup_confirmed=True
+  return
+ leader=stat(child.pid)
+ if leader is not None and initial is not None and leader[1]!=initial[1]: raise RuntimeError("owned leader generation changed")
+ if any(x[1]==pgid and x[4]!="Z" for x in group()):
+  try: os.killpg(pgid,signal.SIGTERM)
+  except ProcessLookupError: pass
+  end=time.monotonic()+2
+  while time.monotonic()<end and any(x[1]==pgid and x[4]!="Z" for x in group()): time.sleep(.05)
+  if any(x[1]==pgid and x[4]!="Z" for x in group()):
+   try: os.killpg(pgid,signal.SIGKILL)
+   except ProcessLookupError: pass
+ child.wait(timeout=5)
+ if any(x[1]==pgid for x in group()): raise RuntimeError("owned group still present")
+ cleanup_confirmed=True;child=None;pgid=None;initial=None
+
+NAMESPACE_FIELDS=[("linux_gomodcache","module_source_files","module_source_dirs")]
+def immutable_namespaces():
+ for root_key,files_key,dirs_key in NAMESPACE_FIELDS:
+  base=pathlib.Path(spec[root_key]);base_info=base.lstat()
+  if filemode.S_ISLNK(base_info.st_mode) or getattr(base_info,"st_file_attributes",0)&0x400 or not filemode.S_ISDIR(base_info.st_mode):raise RuntimeError("immutable source root reparse/type refused")
+  files=set();dirs={"."};pending=[base]
+  while pending:
+   assert not stopping and not cancel.exists(),"cancel during namespace scan"
+   with os.scandir(pending.pop()) as entries:
+    for entry in entries:
+     info=entry.stat(follow_symlinks=False);p=pathlib.Path(entry.path);rel=p.relative_to(base).as_posix()
+     if filemode.S_ISLNK(info.st_mode) or getattr(info,"st_file_attributes",0)&0x400:raise RuntimeError("immutable source reparse/symlink refused: "+entry.path)
+     if filemode.S_ISDIR(info.st_mode):dirs.add(rel);pending.append(p)
+     elif filemode.S_ISREG(info.st_mode):files.add(rel)
+     else:raise RuntimeError("immutable source nonregular refused: "+entry.path)
+  assert files==set(spec[files_key]) and dirs==set(spec[dirs_key]),"complete immutable source namespace drift: "+root_key
+
+def target_and_namespace(after=False):
+ root=pathlib.Path(spec["linux_stage"]);names=set();pending=[root]
+ while pending:
+  assert not stopping and not cancel.exists(),"cancel during namespace scan"
+  with os.scandir(pending.pop()) as entries:
+   for entry in entries:
+    info=entry.stat(follow_symlinks=False)
+    if filemode.S_ISLNK(info.st_mode):raise RuntimeError("stage symlink refused: "+entry.path)
+    if filemode.S_ISDIR(info.st_mode):pending.append(pathlib.Path(entry.path))
+    elif filemode.S_ISREG(info.st_mode):names.add(str(pathlib.Path(entry.path).relative_to(root)))
+    else:raise RuntimeError("stage nonregular refused: "+entry.path)
+ assert names==set(spec["stage_files"]),"full stage namespace drift"
+ immutable_namespaces()
+ assert not (root/".cat-content-ops.lock").exists(),"operator lock present"
+ target=pathlib.Path(spec["linux_target"])
+ assert target==root/"cat_de_roman_esti/fixtures/quick_games_v92.json"
+ expected=spec["target_after_sha256"] if after else spec["target_before_sha256"]
+ assert hashlib.sha256(target.read_bytes()).hexdigest()==expected,"Quick target pin drift"
+
+
+def sdk_skip_set():
+ base=spec["linux_goroot"]
+ expected={base+"/"+rel for rel in spec["sdk_files"]}
+ if len(expected)!=15639 or any(not isinstance(rel,str) or rel.startswith("/") or any(x in ("","..",".") for x in rel.split("/")) for rel in spec["sdk_files"]):raise RuntimeError("exact SDK skip-set contract")
+ actual={p for p in spec["linux_protected"] if p.startswith(base+"/")}
+ if actual!=expected:raise RuntimeError("exact SDK skip-set mismatch")
+ win={translated_windows_path(p):digest for p,digest in spec["windows_protected"].items()}
+ for p in expected:
+  if win.get(p)!=spec["linux_protected"][p]:raise RuntimeError("authoritative Windows SDK map mismatch")
+ return expected
+def mountinfo_path(value):
+ escapes={r"\040":" ",r"\011":"\t",r"\012":"\n",r"\134":"\\"}
+ out=[];i=0
+ while i<len(value):
+  if value[i]=="\\":
+   token=value[i:i+4]
+   if token not in escapes:raise RuntimeError("invalid mountinfo path escape")
+   out.append(escapes[token]);i+=4
+  else:out.append(value[i]);i+=1
+ return "".join(out)
+def validate_sdk_mount(lines,base):
+ rows=[]
+ for line in lines:
+  left,right=line.split(" - ",1);a=left.split();b=right.split()
+  rows.append((mountinfo_path(a[3]),mountinfo_path(a[4]),b[0],mountinfo_path(b[1]),b[2]))
+ if sum(x[1]=="/mnt/c" for x in rows)!=1:raise RuntimeError("stacked or missing C-drive mount refused")
+ enclosing=[x for x in rows if base==x[1] or base.startswith(x[1].rstrip("/")+"/")]
+ mount=max(enclosing,key=lambda x:len(x[1]))
+ if mount[:4]!=("/","/mnt/c","9p","C:\\") or "aname=drvfs;path=C:\\;" not in mount[4]:raise RuntimeError("SDK physical C-drive mount binding refused")
+ if any(x[1].startswith(base.rstrip("/")+"/") or (x[1]!="/mnt/c" and x[1].startswith("/mnt/c/") and (base==x[1] or base.startswith(x[1]+"/"))) for x in rows):raise RuntimeError("SDK alternate/descendant mount refused")
+ return mount
+def sdk_binding():
+ base=pathlib.Path(spec["linux_goroot"])
+ if str(base)!=translated_windows_path(spec["windows_goroot"]) or str(base.resolve(strict=True))!=str(base):raise RuntimeError("SDK canonical path mismatch")
+ for p in [base,*base.parents]:
+  info=p.lstat()
+  if not filemode.S_ISDIR(info.st_mode) or filemode.S_ISLNK(info.st_mode):raise RuntimeError("SDK symlink/type binding refused")
+ validate_sdk_mount(pathlib.Path("/proc/self/mountinfo").read_text().splitlines(),str(base))
+ for rel in ("bin/go","VERSION"):
+  p=base/rel
+  if not p.is_file() or p.is_symlink() or p.stat().st_nlink!=1 or hashlib.sha256(p.read_bytes()).hexdigest()!=spec["linux_protected"][str(p)]:raise RuntimeError("SDK executable/version binding pin drift")
+ if not os.access(base/"bin/go",os.X_OK):raise RuntimeError("SDK Go execute access absent")
+
+
+def compiler_command():
+ prefix=str(pathlib.Path(spec["linux_build_root"])/"native-path")+"/"
+ if "'" in prefix or "\n" in prefix:raise RuntimeError("fixed compiler prefix quoting")
+ return "/usr/bin/gcc '"+ "-B"+prefix+"'"
+def compiler_inputs():
+ expected={
+  "/usr/bin/gcc","/usr/bin/cc","/usr/bin/as","/usr/bin/ld",
+  "/usr/libexec/gcc/x86_64-linux-gnu/15/cc1","/usr/libexec/gcc/x86_64-linux-gnu/15/collect2",
+  *("/usr/lib/gcc/x86_64-linux-gnu/15/"+name for name in ("libgcc.a","libgcc_s.so","crtbegin.o","crtbeginS.o","crtend.o","crtendS.o"))}
+ rows=spec["linux_compiler_inputs"]
+ if len(rows)!=12 or {x["path"] for x in rows}!=expected:raise RuntimeError("exact selected GCC15 inputs")
+ proof=json.loads(pathlib.Path(spec["linux_c_proof"]).read_text())
+ if rows!=proof["inputs"] or proof["compiler_execution"] is not False:raise RuntimeError("compiler source proof binding")
+ for item in rows:
+  if stopping or cancel.exists():raise RuntimeError("cancel during compiler proof")
+  p=pathlib.Path(item["path"]);q=p;chain=[]
+  for _ in range(16):
+   if not q.is_symlink():break
+   link=os.readlink(q);chain.append({"path":str(q),"target":link})
+   q=pathlib.Path(os.path.normpath(str(pathlib.Path(link) if link.startswith("/") else q.parent/link)))
+  else:raise RuntimeError("compiler link-chain bound")
+  if chain!=item["chain"] or str(p.resolve(strict=True))!=item["resolved"] or str(q)!=item["resolved"]:raise RuntimeError("compiler link-chain/resolution drift")
+  for parent in q.parents:
+   if not parent.is_dir() or parent.is_symlink():raise RuntimeError("compiler parent binding")
+  info=q.lstat()
+  if not filemode.S_ISREG(info.st_mode) or info.st_size!=item["bytes"] or info.st_size>64*1024**2 or hashlib.sha256(q.read_bytes()).hexdigest()!=item["sha256"]:raise RuntimeError("compiler selected bytes drift")
+  if item["executable_required"] and not os.access(q,os.X_OK):raise RuntimeError("compiler execute access absent")
+ for name in ("as","ld"):
+  p=pathlib.Path(spec["linux_build_root"])/"native-path"/name
+  item=next(x for x in rows if x["path"]=="/usr/bin/"+name)
+  if p.is_symlink() or not p.is_file() or not os.access(p,os.X_OK) or hashlib.sha256(p.read_bytes()).hexdigest()!=item["sha256"]:raise RuntimeError("owned regular PATH tool binding")
+
+sampler_stop=threading.Event();supervisor_peak=0
+def sample_supervisor():
+ global stopping,supervisor_peak
+ try:
+  while not sampler_stop.is_set():
+   rows=group();rss=sum(x[3] for x in rows);supervisor_peak=max(supervisor_peak,rss)
+   emit({"kind":"sample","rss":rss,"peak":supervisor_peak,"phase":"supervisor-and-owned-session"})
+   if stopping or cancel.exists() or rss>spec["rss_cap"] or memory()<spec["memory_floor"] or time.time()>=spec["deadline_epoch"]-180:stopping=True
+   sampler_stop.wait(.25)
+ except BaseException as exc:
+  stopping=True;emit({"kind":"failed","error":"supervisor sampler: "+repr(exc),"group_absent":False})
+sampler=threading.Thread(target=sample_supervisor)
+sampler.start()
+def stop_sampler():
+ sampler_stop.set();sampler.join(timeout=3)
+ if sampler.is_alive():raise RuntimeError("sampler termination unconfirmed")
+try:
+ spec_pin()
+ skipped_sdk=sdk_skip_set();sdk_binding();compiler_inputs()
+ assert not stopping and not cancel.exists(),"pre-admission cooperative cancel"
+ target_and_namespace()
+ assert hashlib.sha256(pathlib.Path("/usr/bin/python3.14").read_bytes()).hexdigest()==spec["python_sha256"]
+ assert memory()>=spec["memory_floor"]
+ assert time.time()<spec["deadline_epoch"]-195
+ for path,digest in spec["linux_protected"].items():
+  if path in skipped_sdk:continue
+  assert not stopping and not cancel.exists(),"cancel during pre-readset"
+  assert hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()==digest,path
+ executable=pathlib.Path(step["argv"][0]); assert os.access(executable,os.X_OK),"preserved operator execute access absent"
+ assert hashlib.sha256(executable.read_bytes()).hexdigest()==spec["go_sha256"]
+ env={}
+ env.update({"GOMAXPROCS":"2","GOTOOLCHAIN":"local","GOPROXY":"off","GOSUMDB":"off","GOPRIVATE":"","GONOPROXY":"none","GONOSUMDB":"none","TEST_TELEMETRY_DIR":str(pathlib.Path(spec["linux_build_root"])/"telemetry"),"GOENV":"off","GOWORK":"off","CGO_ENABLED":"1","CC":compiler_command(),"CXX":compiler_command(),"CGO_CFLAGS":"-O2 -g","CGO_CPPFLAGS":"","CGO_CXXFLAGS":"-O2 -g","CGO_LDFLAGS":"-O2 -g","GOOS":"linux","GOARCH":"amd64","GOAMD64":"v1","GOEXPERIMENT":"","GOFLAGS":"-mod=readonly -p=2 -buildvcs=false","GOMEMLIMIT":"1536MiB","HOME":str(run/"tmp"),"PATH":str(pathlib.Path(spec["linux_build_root"])/"native-path"),"GOROOT":spec["linux_goroot"],"GOCACHE":spec["linux_gocache"],"GOMODCACHE":spec["linux_gomodcache"],"GOPATH":spec["linux_gopath"],"GOTMPDIR":str(run/"tmp"),"TMPDIR":str(run/"tmp")})
+ for key in ("linux_gocache","linux_gomodcache","linux_gopath"):
+  owned=pathlib.Path(spec[key]);base=pathlib.Path(spec["linux_build_root"]);assert owned.is_dir(),key
+  if key=="linux_gopath":assert owned==base/"gopath"
+  else:assert str(owned)=="/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-7-qualification/toolbuild-r1/"+("gocache" if key=="linux_gocache" else "gomodcache")
+ assert spec["target_before_sha256"]==spec["target_after_sha256"],"build cannot alter current Quick target"
+ assert (pathlib.Path(spec["linux_build_root"])/"telemetry/mode").read_bytes()==b"off 2026-10-09\n","owned Go telemetry off mode drift"
+ assert executable==pathlib.Path(spec["linux_goroot"])/"bin/go","only preserved qualified Go executable"
+ assert step["argv"]==[str(executable),"-C",str(pathlib.Path(spec["linux_stage"])/"shared-go/authcore"),"test","-c","-race","-mod=readonly","-p=2","-o",spec["linux_artifact"],"."]
+ assert step["name"]=="authcore-race-compile"
+ assert pathlib.Path(step["linux_output"]).parent==base/"tools" and not pathlib.Path(step["linux_output"]).exists(),"fresh owned build output"
+ artifact=pathlib.Path(spec["linux_artifact"]);assert artifact.parent==base/"tools" and not artifact.exists() and not artifact.is_symlink(),"fresh owned artifact"
+ with pathlib.Path(step["linux_output"]).open("xb") as out,(run/(step["name"]+".stderr.log")).open("wb") as err:
+  spec_pin();assert not stopping and not cancel.exists(),"cooperative signal/cancel before launch"
+  assert memory()>=spec["memory_floor"]
+  assert time.monotonic()<mono_deadline-195 and time.time()<spec["deadline_epoch"]-195
+  assert not stopping and not cancel.exists(),"immediate pre-Popen cancel"
+  child=subprocess.Popen(step["argv"],cwd=spec["linux_stage"],env=env,stdout=out,stderr=err,start_new_session=True)
+  pgid=child.pid; initial=stat(pgid); assert initial is not None
+  while True:
+   rows=group(); rss=sum(x[3] for x in rows); peak=max(peak,rss)
+   emit({"kind":"sample","rss":rss,"peak":peak,"pid":child.pid,"start_ticks":initial[1]})
+   if stopping or rss>spec["rss_cap"] or memory()<spec["memory_floor"] or cancel.exists() or (time.time()>=spec["deadline_epoch"]-180 or time.monotonic()>=mono_deadline-180): raise RuntimeError("native RSS/memory/cancel/reserve guard")
+   if pathlib.Path(step["linux_output"]).stat().st_size>1024**2 or (run/(step["name"]+".stderr.log")).stat().st_size>1024**2:raise RuntimeError("metadata stdout/stderr bytecap")
+   done=os.waitid(os.P_PID,child.pid,os.WEXITED|os.WNOHANG|os.WNOWAIT)
+   if done is not None: break
+   time.sleep(.25)
+  assert done.si_code==os.CLD_EXITED and done.si_status==0,("command exited",done.si_code,done.si_status)
+ cleanup();spec_pin();sdk_binding();compiler_inputs();target_and_namespace(after=True)
+ output=pathlib.Path(step["linux_output"]);assert output.is_file() and 0<=output.stat().st_size<=1024**2,"bounded compile stdout"
+ assert (run/(step["name"]+".stderr.log")).stat().st_size<=1024**2,"final retained Go stderr cap"
+ info=artifact.lstat();assert filemode.S_ISREG(info.st_mode) and info.st_nlink==1 and 0<info.st_size<=128*1024**2 and os.access(artifact,os.X_OK),"owned bounded executable artifact"
+ header=artifact.read_bytes()[:64];assert len(header)==64 and header[:6]==b"\x7fELF\x02\x01" and int.from_bytes(header[16:18],"little") in (2,3) and int.from_bytes(header[18:20],"little")==62,"Linux amd64 ELF"
+ emit({"kind":"build-output","step":step["name"],"output_sha256":hashlib.sha256(output.read_bytes()).hexdigest(),"output_bytes":output.stat().st_size,"artifact_sha256":hashlib.sha256(artifact.read_bytes()).hexdigest(),"artifact_bytes":info.st_size})
+ for path,digest in spec["linux_protected"].items():
+  if path in skipped_sdk:continue
+  assert not stopping and not cancel.exists(),"cancel during post-readset"
+  assert hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()==digest,path
+ assert hashlib.sha256(pathlib.Path("/usr/bin/python3.14").read_bytes()).hexdigest()==spec["python_sha256"]
+ sdk_binding();compiler_inputs()
+ stop_sampler()
+ assert not stopping and not cancel.exists(),"cooperative signal before completion"
+ assert memory()>=spec["memory_floor"] and time.time()<spec["deadline_epoch"]-180 and time.monotonic()<mono_deadline-180,"terminal resource/deadline guard"
+ peak=max(peak,supervisor_peak,sum(x[3] for x in group()))
+ assert peak<=spec["rss_cap"],"terminal native RSS guard"
+ emit({"kind":"sample","rss":sum(x[3] for x in group()),"peak":peak,"phase":"terminal"})
+ assert not stopping and not cancel.exists(),"terminal cancellation before completion decision"
+ emit({"kind":"complete","step":step["name"],"returncode":0,"native_peak":peak,"group_absent":True})
+except BaseException as exc:
+ error=repr(exc);absent=False
+ try: cleanup();absent=True
+ except BaseException as cleanup_error: error+=";cleanup="+repr(cleanup_error)
+ try:stop_sampler()
+ except BaseException as sampler_error:error+=";sampler="+repr(sampler_error)
+ emit({"kind":"failed","step":step["name"],"error":error,"native_peak":max(peak,supervisor_peak),"group_absent":absent})
+ sys.exit(1)
+
+

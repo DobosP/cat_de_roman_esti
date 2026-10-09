@@ -1,0 +1,113 @@
+import ast,pathlib,os,stat,tempfile,types,sys,unittest
+from unittest import mock
+sys.dont_write_bytecode=True
+S=pathlib.Path(sys.argv.pop(1));W=S/'probe/native-authcore-tests-windows-r2.py'
+node=next(x for x in ast.parse(W.read_text()).body if isinstance(x,ast.FunctionDef) and x.name=='count')
+class Scan:
+ def __init__(self,real,hook,entryhook):self.real=real;self.hook=hook;self.entryhook=entryhook
+ def __call__(self,p):
+  if self.hook:self.hook(pathlib.Path(p))
+  outer=self;inner=self.real(p)
+  class Context:
+   def __enter__(self):
+    entries=inner.__enter__()
+    class Entry:
+     def __init__(self,e):self.path=e.path;self.e=e
+     def stat(self,**kw):
+      if outer.entryhook:return outer.entryhook(self.e,kw)
+      return self.e.stat(**kw)
+    return (Entry(e) for e in entries)
+   def __exit__(self,*args):return inner.__exit__(*args)
+  return Context()
+class Cases(unittest.TestCase):
+ def setUp(self):
+  self.tmp=tempfile.TemporaryDirectory(dir=S/'probe');self.base=pathlib.Path(self.tmp.name)
+  self.root=self.base/'R';self.scratch=self.base/'S';self.cache=self.base/'cache';self.mod=self.base/'mod';self.run=self.scratch/'run'
+  for p in (self.root,self.run/'tmp',self.cache,self.mod):p.mkdir(parents=True,exist_ok=True)
+  for p,size in [(self.root/'source',7),(self.run/'tmp'/'temp',11),(self.cache/'cachefile',13),(self.mod/'module',17)]:p.write_bytes(b'x'*size)
+  self.env={'os':types.SimpleNamespace(scandir=os.scandir),'stat':stat,'pathlib':pathlib,'root':self.root,'scratch':self.scratch,'run':self.run,'spec':{'linux_gocache':str(self.cache).replace('C:\\','/mnt/c/').replace('\\','/'),'windows_gomodcache':str(self.mod)},'carrier':types.SimpleNamespace(poll=lambda:None)}
+  exec(compile(ast.Module(body=[node],type_ignores=[]),str(W),'exec'),self.env)
+ def tearDown(self):self.tmp.cleanup()
+ def count(self,hook=None,entryhook=None):
+  self.env['os'].scandir=Scan(os.scandir,hook,entryhook);return self.env['count']()
+ def disappearing_file(self,p):
+  def f(e,kw):
+   if pathlib.Path(e.path)==p:p.unlink();raise FileNotFoundError(str(p))
+   return e.stat(**kw)
+  return f
+ def test_normal(self):self.assertEqual(self.count(),48)
+ def test_vanished_temp_file(self):self.assertEqual(self.count(entryhook=self.disappearing_file(self.run/'tmp'/'temp')),37)
+ def test_vanished_cache_file(self):self.assertEqual(self.count(entryhook=self.disappearing_file(self.cache/'cachefile')),35)
+ def vanished_dir(self,parent):
+  d=parent/'gone';d.mkdir()
+  def hook(p):
+   if p==parent:d.rmdir()
+  # Inject directory removal only after its entry stat queued it.
+  def entry(e,kw):
+   info=e.stat(**kw)
+   if pathlib.Path(e.path)==d:d.rmdir()
+   return info
+  self.assertEqual(self.count(entryhook=entry),48)
+ def test_vanished_temp_directory(self):self.vanished_dir(self.run/'tmp')
+ def test_vanished_cache_directory(self):self.vanished_dir(self.cache)
+ def test_counted_bytes_retained(self):
+  p=self.cache/'cachefile'
+  def entry(e,kw):
+   info=e.stat(**kw)
+   if pathlib.Path(e.path)==p:p.unlink()
+   return info
+  self.assertEqual(self.count(entryhook=entry),48)
+ def test_immutable_source_missing_refused(self):
+  with self.assertRaises(FileNotFoundError):self.count(entryhook=self.disappearing_file(self.root/'source'))
+ def test_module_missing_refused(self):
+  with self.assertRaises(FileNotFoundError):self.count(entryhook=self.disappearing_file(self.mod/'module'))
+ def test_inactive_missing_refused(self):
+  self.env['carrier']=None
+  with self.assertRaises((FileNotFoundError,RuntimeError)):self.count(entryhook=self.disappearing_file(self.cache/'cachefile'))
+ def test_exited_missing_refused(self):
+  self.env['carrier']=types.SimpleNamespace(poll=lambda:0)
+  with self.assertRaises((FileNotFoundError,RuntimeError)):self.count(entryhook=self.disappearing_file(self.cache/'cachefile'))
+ def test_boundary_missing_refused(self):
+  (self.run/'tmp'/'temp').unlink();(self.run/'tmp').rmdir()
+  with self.assertRaises(FileNotFoundError):self.count()
+ def test_reappearance_refused(self):
+  p=self.cache/'cachefile'
+  def entry(e,kw):
+   if pathlib.Path(e.path)==p:raise FileNotFoundError(str(p))
+   return e.stat(**kw)
+  with self.assertRaisesRegex(RuntimeError,'reappeared'):self.count(entryhook=entry)
+ def test_scandir_permission_refused(self):
+  def hook(p):
+   if p==self.cache:raise PermissionError(str(p))
+  with self.assertRaises(PermissionError):self.count(hook=hook)
+ def test_stat_permission_refused(self):
+  def entry(e,kw):
+   if pathlib.Path(e.path)==self.cache/'cachefile':raise PermissionError(e.path)
+   return e.stat(**kw)
+  with self.assertRaises(PermissionError):self.count(entryhook=entry)
+ def test_other_io_refused(self):
+  def hook(p):
+   if p==self.cache:raise OSError('device error')
+  with self.assertRaises(OSError):self.count(hook=hook)
+ def test_reparse_entry_refused(self):
+  def entry(e,kw):
+   info=e.stat(**kw)
+   if pathlib.Path(e.path)==self.cache/'cachefile':
+    return types.SimpleNamespace(st_mode=info.st_mode,st_size=info.st_size,st_file_attributes=0x400)
+   return info
+  with self.assertRaisesRegex(RuntimeError,'reparse'):self.count(entryhook=entry)
+ def test_boundary_replacement_refused(self):
+  # Swap to an empty new directory after the before-snapshot, preserving the old one for cleanup.
+  done=[]
+  def hook(p):
+   if p==self.root and not done:
+    self.root.rename(self.base/'oldR');self.root.mkdir();done.append(1)
+  with self.assertRaisesRegex(RuntimeError,'identity drift'):self.count(hook=hook)
+ def test_missing_immutable_directory_refused(self):
+  d=self.mod/'gone';d.mkdir()
+  def entry(e,kw):
+   info=e.stat(**kw)
+   if pathlib.Path(e.path)==d:d.rmdir()
+   return info
+  with self.assertRaises(FileNotFoundError):self.count(entryhook=entry)
+if __name__=='__main__':unittest.main(verbosity=1)

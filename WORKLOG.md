@@ -2113,3 +2113,22 @@ Prior71pass candidate scope and all release blockers remain; Source6 live,
 V1.7 uninstalled/0integratedgrowth. Main+feature transport isexplicitlyauthorized,
 not a release or future push authorization. Preserve unfinishedscratch/worktree
 and featurebranch forcontinuation; no foreign or unfinishedcleanup.
+
+
+## 2026-10-09 — historical status overflow retained
+
+Valid until: superseded by the current STATUS — then treat as history. Exact prior V1.2 and V1.0.1 qualification text moved from STATUS for its120-line budget; no result changed.
+
+- **V1.2 landed locally17f7da1:** four reviewed synonym families (ascensor, tomată, scripcă, prăvălie),
+  22 distinct forms and Cărare↔Potecă; zero new concepts/curated rounds. Old records,
+  recipe cores/histories/pools persist. [Review](reviews/v1-2-content-growth/README.md),
+  [ADR-0170](adr/0170-v1-2-reviewed-content-growth.md), [pool](content-pool/v1-2-synonyms-and-links/pool.json).
+- V1.2 baseline authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
+  independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
+  Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; content heartbeat renewed per ADR-0177.
+## Verification
+
+- 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
+  (119.78/120 KiB gzip), validators, reserve builder, docs and whitespace; **622/622** browser
+  cases (Edge desktop/Pixel 7, no retries), plus 200 repeated Lanț recovery cases pass.
+  V1 receipts: [1.0.0](reviews/v1-testing-release/verification.json), [1.0.1](reviews/v1-0-1-hardening/README.md).

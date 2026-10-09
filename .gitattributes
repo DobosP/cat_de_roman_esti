@@ -18,3 +18,8 @@ tests/fixtures/release_reserve_v1.json text eol=lf
 # The private Go export has its own digest pin.
 /go-backend/internal/content/bundled.json text eol=lf
 /go-backend/internal/content/digest.go text eol=lf
+
+# V1.7 raw evidence keeps native CRLF bytes and original source EOF formatting.
+# JSON retains normal EOF checking; only archived Python source copies exempt it.
+docs/reviews/v1-7-recognizable-content/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/reviews/v1-7-recognizable-content/reference/go-source7-native-authcore-*.py.txt -text whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

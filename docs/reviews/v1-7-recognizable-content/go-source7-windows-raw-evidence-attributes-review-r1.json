@@ -1,0 +1,18 @@
+{
+  "schema": "raw-evidence-whitespace-attribute-review-v1",
+  "valid_until": "Evidence paths or attribute scope changes, then recheck",
+  "reviewer": "/root/continuation_audit",
+  "frozen_utc": "2026-10-09T11:43:03Z",
+  "decision": "ACCEPT_SOURCE_EVIDENCE_ATTRIBUTES_ONLY",
+  "files_inspected": 1248,
+  "all_matching_source_copies_SHA_equal_scratch": true,
+  "actual_trailing_space_tab_or_indentation_space_before_tab_defects": 0,
+  "policy_precedent": "Existing .gitattributes V1 release byte-pinned CRLF records",
+  "rules": [
+    "Root V1.7 *.json -text keeps raw CRLF, normal EOF checks and actual whitespace checks.",
+    "Only reference/go-source7-native-authcore-*.py.txt -text preserves historical EOFblanklines, while CR/trailing-space/space-before-tab are distinguished."
+  ],
+  "qualification": "Historical source copies retain original EOF format; this is not normal source-style compliance. Protected raw evidence and archives remain unchanged.",
+  "attribute_sha256": "5ea4b74109886def981d1c0fbc0b966ce929d595764fb2cc408da72f54dbf546",
+  "transcribed_epoch": 1791546305.0157118
+}

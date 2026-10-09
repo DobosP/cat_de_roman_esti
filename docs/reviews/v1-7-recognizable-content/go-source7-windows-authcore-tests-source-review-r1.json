@@ -1,0 +1,34 @@
+{
+  "authored_by": "root transcription of actual direct peer source judgments",
+  "decision": "ACCEPT_AUTHCORE_TEST_LANE_SOURCE_ONLY",
+  "expected_subcases": 13,
+  "expected_top_cases": 15,
+  "factual_source_peer": {
+    "decision": "ACCEPT_AUTHCORE_TEST_LANE_FACTUAL_SOURCE_ONLY",
+    "frozen_at_utc": "2026-10-09T11:16:37Z",
+    "reviewer": "/root/qualification_ledger"
+  },
+  "fixed_commands": [
+    "samebinary -test.list .",
+    "samebinary -test.v -test.count=1 -test.parallel=1 -test.timeout=8m -test.run=.",
+    "qualifiedGo -C I/shared-go/authcore vet -mod=readonly -p=2 ./..."
+  ],
+  "frozen_at_utc": "2026-10-09T11:16:25Z",
+  "linux_sha256": "522f248c9e166bf746776f5c27b9f9b373592926d8b781f2ba01f291170b337a",
+  "native_results": "none; fresh actual admission and independent dispatch pending",
+  "protected_files": 19013,
+  "publisher_sha256": "848d624a03b948b0633627e21c7660ee0fb5ebbc4dd1af33abbf80a8cd18f4f3",
+  "reported_control_pass_counts": [
+    14,
+    19,
+    18,
+    30
+  ],
+  "retained_review_gap": "initial quality T2/P1 acceptance missed inherited compile-only scope contradiction; factual peer identified it before admission; T4/P3 changes only scope and publisher binding, T2/T3/P1/P2 preserved unexecuted",
+  "reviewer": "/root/continuation_audit",
+  "schema": "root-transcribed-independent-test-method-review-v1",
+  "scope": "shared authcore only, no broader backend/content/adoption qualification; explicit trusted OS boundary and best-effort failure event drain remain",
+  "source_RSS": "unmeasured",
+  "template_sha256": "ba5c35062a955268aa8be12c02c06ad9c6d109a281cb6173d02eec51f3e7b7f8",
+  "windows_sha256": "0ee8acb794f95aaebfe8e44d2fe675ec7b6d01b9d08ebe0f5d88e182b246c7b2"
+}

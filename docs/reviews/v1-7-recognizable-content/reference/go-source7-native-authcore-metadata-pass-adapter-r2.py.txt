@@ -1,0 +1,105 @@
+"""Create only the exact passed authcore metadata receipt; execute no producer."""
+import sys
+sys.dont_write_bytecode=True
+if sys.flags.optimize:raise RuntimeError("optimized Python refused")
+import hashlib,json,pathlib,time
+R=pathlib.Path("/mnt/c/Users/Paul Work/personal_repos/_worktrees/cat_de_roman_esti/codex__content-v1-7")
+S=pathlib.Path("/mnt/c/Users/Paul Work/personal_repos/_temp/codex__content-v1-7")
+P=R/"docs/reviews/v1-7-recognizable-content/go-source7-native-coverage-parser-r2.py.txt"
+P_SHA="c00625cc691e51187b78580e82346e4e4734273bf2da7090f0ced5708e2cd4f1"
+SPEC_SHA="7b75bb445534d8041fac83881325969af6efab4516f6023e7387a775631a74f8"
+TEMPLATE_SHA="a46aee8bd09d303dc33b4e97f91e0fac78a7c0e72cb849b4eebe3f72824fa4af"
+OUTER_SHA="0c04188195273c2a64a2d58dfab24bc12f778c36296293c59310d9fc3cc934e6"
+ADMISSION_SHA="6f35f02c942544bf9df3a7c5d0aac5d9dcca16ba222848c2b3b8d65650ac2957"
+def require(v,message):
+ if not v:raise ValueError(message)
+RAW_PINS={
+ "spec": "7b75bb445534d8041fac83881325969af6efab4516f6023e7387a775631a74f8",
+ "template": "a46aee8bd09d303dc33b4e97f91e0fac78a7c0e72cb849b4eebe3f72824fa4af",
+ "outer": "0c04188195273c2a64a2d58dfab24bc12f778c36296293c59310d9fc3cc934e6",
+ "admission": "6f35f02c942544bf9df3a7c5d0aac5d9dcca16ba222848c2b3b8d65650ac2957",
+ "parser_source": "c00625cc691e51187b78580e82346e4e4734273bf2da7090f0ced5708e2cd4f1",
+ "source_review": "af3f59f95df87fda045cd219a6ca2a4cf123f1b822e30cf5e71b7d81fbd38b91",
+ "dispatch": "1e94d7883bc73cfb7b07e4e38e8386685df1dadd4eca0604dd1ad5a8260cda63",
+ "state": "d5f3f01e8504231b5cf79854e957948cfd866716ee1566f1ceecf2ddebf07043",
+ "events": "9338493892dc6793839caf0546d66e0dc8baba21036c3291ccab6692b6a1dd3f",
+ "stdout": "ecaaa0235785f72035e8eb4ea4357f72c7f3b76be862afdfd0e013cf8eca9615",
+ "windows_method": "3ae1fe72e0f654e031ebf268181ebf8322d630620552fb7e7a829a9fa64582f5",
+ "linux_method": "da0823d6def5e3c081064e394aafa35977430fbeccf1a68dc9a830785f5c1c91",
+ "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+ "controller_stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
+def verify_frozen_evidence(raw):
+ for key,pin in RAW_PINS.items():require(hashlib.sha256(raw[key]).hexdigest()==pin,key+" exact independently reviewed evidence pin")
+def validate(spec,template,admission,dispatch,state,outer,events,output_sha,output_bytes):
+ late={"deadline_epoch","full_R_S_baseline","host_launcher_pid","started_epoch"}
+ require({k:v for k,v in spec.items() if k not in late}==template,"only four reviewed late fields")
+ require(spec["deadline_epoch"]-spec["started_epoch"]==1200,"immutable clock")
+ cutoff=spec["deadline_epoch"]-180
+ require(admission["spec_sha256"]==SPEC_SHA and admission["started_epoch"]==spec["started_epoch"] and admission["deadline_epoch"]==spec["deadline_epoch"],"actual admission binding")
+ require(spec["full_R_S_baseline"]==admission["conservative_growth_anchor"]==1793580496,"conservative growth anchor")
+ require(spec["rss_cap"]==2<<30 and spec["growth_cap"]==1<<30 and spec["memory_floor"]==16<<30,"caps")
+ require(dispatch["decision"]=="ACCEPT_ACTUAL_DISPATCH" and dispatch["spec_sha256"]==SPEC_SHA and dispatch["admission_sha256"]==ADMISSION_SHA,"actual independent dispatch")
+ step=spec["steps"][0]
+ require(len(spec["steps"])==1 and step["name"]=="authcore-imported-metadata","one exact metadata step")
+ require(step["argv"]==[spec["linux_goroot"]+"/bin/go","-C",spec["linux_stage"]+"/shared-go/authcore","list","-deps","-test","-json","./..."],"exact metadata argv")
+ require(state["kind"]=="passed" and state["cleanup"]=="owned Linux group confirmed absent","outer durable success and cleanup")
+ require(all(state.get(k) is None for k in ("error","failure","failed_publication_error")),"failed outer evidence")
+ require(state["started_epoch"]==spec["started_epoch"] and state["deadline_epoch"]==spec["deadline_epoch"] and state["baseline"]==spec["full_R_S_baseline"],"state clock/baseline")
+ require(state["all_non_target_protected_exact"] is True and state["full_stage_namespace_exact"] is True,"full postchecks")
+ require(state["target_before_sha256"]==state["target_after_sha256"]==spec["target_before_sha256"]==spec["target_after_sha256"],"Quick unchanged")
+ require(len(state["completed"])==1 and state["completed"][0]["step"]==step["name"] and state["completed"][0]["output_sha256"]==output_sha,"complete exact output")
+ checks=state["full_readset_checks"]
+ require(len(checks)==2 and [x["boundary"] for x in checks]==["pre","post"] and all(x["protected_files"]==19007 for x in checks),"both complete Windows proofs")
+ require(spec["started_epoch"]<=checks[0]["started_epoch"]<=checks[0]["finished_epoch"]<=checks[1]["started_epoch"]<=checks[1]["finished_epoch"]<=state["finished_epoch"]<cutoff,"actual proof ordering and reserve")
+ require(type(state["parent_inclusive_peak"]) is int and 0<state["parent_inclusive_peak"]<=spec["rss_cap"],"sampled parent peak")
+ require(type(state["final_growth"]) is int and 0<=state["final_growth"]<=spec["growth_cap"],"full growth")
+ require(outer["spec_sha256"]==SPEC_SHA and type(outer["exit_code"]) is int and outer["exit_code"]==0 and outer["session_id"]==80941,"actual tool exit")
+ require(outer["terminal"]=={"kind":"PASS","completed":1,"parent_inclusive_peak":state["parent_inclusive_peak"],"growth":state["final_growth"]},"actual tool terminal agreement")
+ require(outer["observed_epoch"]>=state["finished_epoch"],"terminal observation ordering")
+ require(all(e["kind"]!="failed" for e in events),"failed native event")
+ complete=[e for e in events if e["kind"]=="complete"];output=[e for e in events if e["kind"]=="build-output"]
+ require(len(complete)==len(output)==1,"one terminal and output event")
+ c=complete[0];o=output[0]
+ require(type(c["returncode"]) is int and c["returncode"]==0 and c["group_absent"] is True and c["step"]==step["name"],"native terminal and owned group absence")
+ require(c["native_peak"]==state["completed"][0]["native_peak"]<=state["parent_inclusive_peak"],"peak bindings")
+ samples=[e for e in events if e["kind"]=="sample"]
+ require(samples and all(type(e["rss"]) is int and type(e.get("peak",0)) is int and 0<=e["rss"]<=c["native_peak"] and 0<=e.get("peak",0)<=c["native_peak"] for e in samples),"native samples")
+ require(o["step"]==step["name"] and o["output_sha256"]==output_sha and o["output_bytes"]==output_bytes and 0<output_bytes<=16<<20,"actual bounded output binding")
+ return step
+def main():
+ blob=P.read_bytes();require(hashlib.sha256(blob).hexdigest()==P_SHA,"accepted parser source pin")
+ env={"__name__":"_accepted_coverage_parser"};exec(compile(blob,str(P),"exec"),env)
+ snapshots=env["Snapshots"]((R,S));parse=env["parse_json"];sha=env["sha"]
+ paths={"spec":S/"probe/native-authcore-metadata-spec-r2.json","template":S/"probe/native-authcore-metadata-template-r5.json",
+  "admission":S/"native-authcore-metadata-actual-admission-r2.json","dispatch":S/"probe/native-authcore-dispatch-approval-r2.json",
+  "source_review":S/"probe/native-authcore-source-approval-r2.json","state":S/"native-authcore-metadata-r2/run/state.json",
+  "outer":S/"native-authcore-metadata-r2/run/outer-tool-result-r1.json","events":S/"native-authcore-metadata-r2/run/authcore-imported-metadata.telemetry.jsonl",
+  "stdout":S/"native-authcore-metadata-r2/tools/authcore-metadata.stdout.json","stderr":S/"native-authcore-metadata-r2/run/authcore-imported-metadata.stderr.log",
+  "controller_stderr":S/"native-authcore-metadata-r2/run/authcore-imported-metadata.controller.stderr.log",
+  "windows_method":S/"probe/native-authcore-metadata-windows-r4.py","linux_method":S/"probe/native-authcore-metadata-linux-r8.py",
+  "parser_source":P,"adapter_source":pathlib.Path(__file__)}
+ raw={k:snapshots.read(p,16<<20) for k,p in paths.items()}
+ verify_frozen_evidence(raw)
+ data={k:parse(raw[k]) for k in ("spec","template","admission","dispatch","source_review","state","outer")}
+ require(data["source_review"]["decision"]=="ACCEPT_SOURCE_METHOD_TEMPLATE_AND_CONTROL_SOURCE_ONLY" and data["source_review"]["template_sha256"]==TEMPLATE_SHA,"source approval")
+ for key in ("windows_method","linux_method"):require(sha(raw[key])==data["source_review"][key.replace("_method","")+"_sha256"],key+" source binding")
+ require(len(raw["stderr"])<=1<<20 and len(raw["controller_stderr"])<=1<<20,"bounded stderr")
+ events=[parse(line) for line in raw["events"].splitlines()]
+ step=validate(data["spec"],data["template"],data["admission"],data["dispatch"],data["state"],data["outer"],events,sha(raw["stdout"]),len(raw["stdout"]))
+ require(step["linux_output"]==str(paths["stdout"]),"exact Linux stdout path")
+ namespace=S/"native-authcore-metadata-r2/run/parser-r2";snapshots.owned(namespace);env["plain_path"](namespace.parent)
+ require(not namespace.exists() and not namespace.is_symlink(),"fresh parser namespace")
+ namespace.mkdir();env["plain_path"](namespace)
+ def write(name,value):
+  p=namespace/name;b=(json.dumps(value,indent=2,sort_keys=True)+"\n").encode();p.open("xb").write(b);return p,sha(b)
+ receipt={"name":step["name"],"status":"passed","exit_code":0,"argv":step["argv"],"log_path":str(paths["stdout"]),"log_sha256":sha(raw["stdout"]),"guard":None,"failure":None,"received_signal":None,"scope":"actual imported package metadata only; no actual binary cases, tests or release acceptance"}
+ receipt_path,receipt_sha=write("receipt.json",receipt)
+ plan={"fresh_namespace":str(namespace),"commands":[{"name":step["name"],"kind":"package_metadata","argv":step["argv"],"module_path":"github.com/DobosP/cat_de_roman_esti/shared-go/authcore","module_root":data["spec"]["linux_stage"]+"/shared-go/authcore","expected_owned_base_paths":["github.com/DobosP/cat_de_roman_esti/shared-go/authcore"],"max_output_bytes_root_post_producer":16<<20}]}
+ plan_path,plan_sha=write("plan.json",plan)
+ keeper={"files":{str(p):{"sha256":sha(raw[k])} for k,p in paths.items()}}
+ keeper["files"][str(receipt_path)]={"sha256":receipt_sha}
+ keeper_path,keeper_sha=write("keeper.json",keeper)
+ external_path,external_sha=write("external.json",{"keeper_path":str(keeper_path),"keeper_sha256":keeper_sha})
+ print(json.dumps({"plan":str(plan_path),"plan_sha256":plan_sha,"receipt":str(receipt_path),"keeper":str(keeper_path),"external":str(external_path),"external_sha256":external_sha,"out":str(namespace/"inventory.json"),"inventory_only":True}))
+if __name__=="__main__":main()

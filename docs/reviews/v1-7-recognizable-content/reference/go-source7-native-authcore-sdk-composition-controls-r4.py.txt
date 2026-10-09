@@ -1,0 +1,115 @@
+import ast,copy,hashlib,json,os,pathlib,stat,tempfile,time,unittest,sys
+sys.dont_write_bytecode=True
+S=pathlib.Path(sys.argv.pop(1))
+W=S/'probe/native-authcore-metadata-windows-r4.py'
+L=S/'probe/native-authcore-metadata-linux-r8.py'
+def functions(path,names):
+ tree=ast.parse(path.read_text());nodes=[n for n in tree.body if (isinstance(n,ast.FunctionDef) and n.name in names) or (isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name) and n.targets[0].id=='NAMESPACE_FIELDS')]
+ env={'pathlib':pathlib,'hashlib':hashlib,'os':os,'filemode':stat,'stat':stat,'time':time}
+ exec(compile(ast.Module(body=nodes,type_ignores=[]),str(path),'exec'),env);return env
+LE=functions(L,{'translated_windows_path','sdk_skip_set','validate_sdk_mount','mountinfo_path','sdk_binding'})
+WE=functions(W,{'full_pins','pins','immutable_namespaces'})
+class Controls(unittest.TestCase):
+ def setUp(self):
+  self.tmp=tempfile.TemporaryDirectory(dir=S/'probe');self.base=pathlib.Path(self.tmp.name)
+ def tearDown(self):self.tmp.cleanup()
+ def skip(self):
+  names=['bin/go','VERSION']+['src/file'+str(i) for i in range(15637)]
+  lp={'/mnt/c/sdk/'+p:'f'*64 for p in names};wp={'C:/sdk/'+p:'f'*64 for p in names}
+  return {'linux_goroot':'/mnt/c/sdk','sdk_files':names,'linux_protected':lp,'windows_protected':wp}
+ def test_exact_skipset(self):
+  LE['spec']=self.skip();self.assertEqual(len(LE['sdk_skip_set']()),15639)
+ def test_extra_sdk_map_entry_refused(self):
+  v=self.skip();v['linux_protected']['/mnt/c/sdk/extra']='f'*64;LE['spec']=v
+  with self.assertRaises(RuntimeError):LE['sdk_skip_set']()
+ def test_missing_sdk_map_entry_refused(self):
+  v=self.skip();del v['linux_protected']['/mnt/c/sdk/src/file2'];LE['spec']=v
+  with self.assertRaises(RuntimeError):LE['sdk_skip_set']()
+ def test_crosshost_digest_drift_refused(self):
+  v=self.skip();v['windows_protected']['C:/sdk/src/file3']='a'*64;LE['spec']=v
+  with self.assertRaises(RuntimeError):LE['sdk_skip_set']()
+ def mount(self):return r'613 459 0:84 / /mnt/c rw,noatime - 9p C:\134 rw,aname=drvfs;path=C:\;uid=1000;gid=1000'
+ def test_stacked_same_mountpoint_refused(self):
+  line='999 613 0:85 / /mnt/c rw - overlay overlay rw'
+  for rows in ([self.mount(),line],[line,self.mount()]):
+   with self.subTest(rows=rows),self.assertRaises(RuntimeError):LE['validate_sdk_mount'](rows,'/mnt/c/Users/Paul Work/task/tools/go')
+ def test_actual_mount_shape(self):
+  self.assertEqual(LE['validate_sdk_mount']([self.mount()],'/mnt/c/task/tools/go')[1],'/mnt/c')
+ def test_escaped_space_mount_refused(self):
+  base='/mnt/c/Users/Paul Work/task/tools/go'
+  for path in (r'/mnt/c/Users/Paul\040Work/task/tools',r'/mnt/c/Users/Paul\040Work/task/tools/go/src'):
+   line='999 613 0:85 / '+path+' rw - overlay overlay rw'
+   with self.subTest(path=path),self.assertRaises(RuntimeError):LE['validate_sdk_mount']([self.mount(),line],base)
+ def test_retained_actual_mount_observation(self):
+  observed=json.loads((S/'probe/SDK-C-drive-mount-observation-r1.json').read_text())
+  self.assertEqual(LE['validate_sdk_mount'](observed['mount_rows'],observed['sdk_real'])[1],'/mnt/c')
+ def test_mountinfo_decodes_once(self):
+  self.assertEqual(LE['mountinfo_path'](r'Paul\040Work'), 'Paul Work')
+  self.assertEqual(LE['mountinfo_path'](r'\134040'),r'\040')
+ def test_wrong_mount_source_refused(self):
+  with self.assertRaises(RuntimeError):LE['validate_sdk_mount']([self.mount().replace('C:\\134','D:\\134')],'/mnt/c/task/tools/go')
+ def test_overlay_or_sdk_submount_refused(self):
+  for mount in ('/mnt/c/task/tools','/mnt/c/task/tools/go/src'):
+   line='999 613 0:85 / '+mount+' rw - overlay overlay rw'
+   with self.subTest(mount=mount),self.assertRaises(RuntimeError):LE['validate_sdk_mount']([self.mount(),line],'/mnt/c/task/tools/go')
+ def test_canonical_symlink_binding_refused(self):
+  class Path:
+   def __init__(self,p):self.p=p
+   def __str__(self):return self.p
+   def resolve(self,strict):return Path('/mnt/c/alternate')
+  saved=LE['pathlib'];LE['pathlib']=type('P',(),{'Path':Path})
+  LE['spec']={'linux_goroot':'/mnt/c/task/tools/go','windows_goroot':'C:/task/tools/go'}
+  try:
+   with self.assertRaises(RuntimeError):LE['sdk_binding']()
+  finally:LE['pathlib']=saved
+ def windows(self):
+  sdk=self.base/'go';stage=self.base/'stage';cache=self.base/'modules';build=self.base/'build'
+  for p in (sdk/'bin',sdk/'src',stage/'cat_de_roman_esti/fixtures',cache,build/'telemetry'):p.mkdir(parents=True)
+  files={sdk/'bin/go':b'go',sdk/'VERSION':b'go1.27.1',sdk/'src/not-go-file':b'original',
+         stage/'cat_de_roman_esti/fixtures/quick_games_v92.json':b'quick',build/'telemetry/mode':b'off 2026-10-09\n'}
+  for i in range(5):files[self.base/('pin'+str(i))]=b'pin'
+  for p,b in files.items():p.write_bytes(b)
+  specpath=self.base/'spec.json';specpath.write_bytes(b'spec')
+  target=stage/'cat_de_roman_esti/fixtures/quick_games_v92.json';digest=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+  spec={'windows_protected':{str(p):digest(p) for p in files},'windows_goroot':str(sdk),'windows_stage':str(stage),'windows_gomodcache':str(cache),
+        'sdk_files':['bin/go','VERSION','src/not-go-file'],'sdk_dirs':['.','bin','src'],'module_source_files':[],'module_source_dirs':['.'],
+        'stage_files':['cat_de_roman_esti/fixtures/quick_games_v92.json'],'windows_target':str(target),'windows_build_root':str(build),
+        'target_before_sha256':digest(target),'target_after_sha256':digest(target)}
+  WE.update(spec=spec,spec_path=specpath,expected_spec=digest(specpath),hashfile=digest,full_readset_checks=[])
+  return spec,sdk,stage,cache,build
+ def test_full_pre_post_records_real_boundaries(self):
+  self.windows();WE['full_pins']();WE['full_pins'](True)
+  self.assertEqual([x['boundary'] for x in WE['full_readset_checks']],['pre','post'])
+  self.assertTrue(all(x['finished_epoch']>=x['started_epoch'] for x in WE['full_readset_checks']))
+ def test_non_go_sdk_byte_mutation_refused_full_post(self):
+  spec,sdk,*_=self.windows();WE['full_pins']();(sdk/'src/not-go-file').write_bytes(b'changed')
+  with self.assertRaises(AssertionError):WE['full_pins'](True)
+ def test_sdk_namespace_addition_refused_full_post(self):
+  spec,sdk,*_=self.windows();WE['full_pins']();(sdk/'src/extra').write_bytes(b'new')
+  with self.assertRaises(AssertionError):WE['full_pins'](True)
+ def test_stage_module_mutation_remains_in_full_map(self):
+  spec,sdk,stage,cache,build=self.windows()
+  p=cache/'dep';p.write_bytes(b'dep');spec['module_source_files']=['dep'];spec['windows_protected'][str(p)]=hashlib.sha256(p.read_bytes()).hexdigest()
+  WE['full_pins']();p.write_bytes(b'bad')
+  with self.assertRaises(AssertionError):WE['full_pins'](True)
+ def test_intermediate_quick_mutation_refused(self):
+  spec,*_=self.windows();WE['pins']();pathlib.Path(spec['windows_target']).write_bytes(b'changed')
+  with self.assertRaises(AssertionError):WE['pins']()
+ def test_intermediate_method_spec_mode_drift_refused(self):
+  spec,*_=self.windows()
+  for p in (self.base/'pin1',WE['spec_path'],pathlib.Path(spec['windows_build_root'])/'telemetry/mode'):
+   original=p.read_bytes();p.write_bytes(b'changed')
+   with self.subTest(p=str(p)),self.assertRaises(AssertionError):WE['pins']()
+   p.write_bytes(original)
+ def test_linux_candidate_cache_loops_retain_exact_non_sdk(self):
+  tree=ast.parse(L.read_text());loops=[n for n in ast.walk(tree) if isinstance(n,ast.For) and isinstance(n.target,ast.Tuple) and [x.id for x in n.target.elts]==['path','digest']]
+  self.assertEqual(len(loops),2)
+  for loop in loops:
+   self.assertIsInstance(loop.body[0],ast.If);self.assertIsInstance(loop.body[0].body[0],ast.Continue)
+   keep=[];env={'spec':{'linux_protected':{'sdk':'d','candidate':'d','module':'d'}},'skipped_sdk':{'sdk'},
+                'stopping':False,'cancel':type('C',(),{'exists':lambda self:False})(),
+                'hashlib':type('H',(),{'sha256':lambda self,b:type('D',(),{'hexdigest':lambda self:'d'})()})(),
+                'pathlib':type('P',(),{'Path':lambda self,p:type('F',(),{'read_bytes':lambda self:keep.append(p) or b'x'})()})()}
+   exec(compile(ast.Module(body=[loop],type_ignores=[]),str(L),'exec'),env)
+   self.assertEqual(keep,['candidate','module'])
+if __name__=='__main__':unittest.main(verbosity=2)

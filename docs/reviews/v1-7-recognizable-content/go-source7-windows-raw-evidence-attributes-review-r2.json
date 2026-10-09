@@ -1,0 +1,11 @@
+{
+  "schema": "raw-evidence-whitespace-attribute-correction-v1",
+  "reviewer": "/root/continuation_audit",
+  "initial_review": "go-source7-windows-raw-evidence-attributes-review-r1.json",
+  "retained_failure": "Actual default staged git diff --check found eight preserved source-copy EOFblanklines. Initial peer/root assumption that omission disables default blank-at-eof was wrong.",
+  "specific_repair": "Explicit -blank-at-eof only for reference/go-source7-native-authcore-*.py.txt; root JSON retains positive EOFcheck; exact archives/raw copies unchanged.",
+  "decision": "ACCEPT_CORRECTED_ATTRIBUTE_SEMANTICS_ONLY; actual Gitcheck required",
+  "scope": "Archival byte preservation, not normalization or normal source style",
+  "epoch": 1791546392.7513878,
+  "attribute_sha256": "b649a44badf5916089b85ad5e42f23f05a5a41dadbe49718f0bce63b0bc8108f"
+}

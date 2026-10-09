@@ -1,0 +1,311 @@
+import re
+import stat as filemode,stat,ctypes,hashlib,json,os,pathlib,queue,shutil,subprocess,sys,threading,time,datetime,signal
+if sys.flags.optimize or os.environ.get("PYTHONOPTIMIZE"): raise RuntimeError("optimized Python refused")
+stopping=False
+def interrupted(signum,frame):
+ global stopping
+ stopping=True
+signal.signal(signal.SIGINT,interrupted);signal.signal(signal.SIGTERM,interrupted)
+spec_path=pathlib.Path(sys.argv[1]);expected_spec=sys.argv[2]
+spec_bytes=spec_path.read_bytes()
+if hashlib.sha256(spec_bytes).hexdigest()!=expected_spec: raise RuntimeError("spec SHA drift")
+spec=json.loads(spec_bytes.decode("utf-8"))
+REQUIRED_SPEC_KEYS = ['artifact_bytes', 'artifact_sha256', 'candidate_sha256', 'compile_outer_sha256', 'compile_state_sha256', 'contract_required_spec_keys', 'contract_required_step_keys', 'deadline_epoch', 'full_R_S_baseline', 'go_sha256', 'growth_cap', 'host_launcher_pid', 'linux_artifact', 'linux_build_root', 'linux_c_proof', 'linux_compile_outer', 'linux_compile_state', 'linux_compiler_inputs', 'linux_gocache', 'linux_gomodcache', 'linux_gopath', 'linux_goroot', 'linux_guard', 'linux_protected', 'linux_run', 'linux_spec', 'linux_stage', 'linux_target', 'memory_floor', 'module_source_dirs', 'module_source_files', 'python_sha256', 'review_hashes', 'reviewer_ids', 'rss_cap', 'sdk_dirs', 'sdk_files', 'stage_files', 'started_epoch', 'steps', 'target_after_sha256', 'target_before_sha256', 'windows_R', 'windows_S', 'windows_artifact', 'windows_build_root', 'windows_c_proof', 'windows_compile_outer', 'windows_compile_state', 'windows_gomodcache', 'windows_goroot', 'windows_protected', 'windows_run', 'windows_spec', 'windows_stage', 'windows_target']
+REQUIRED_STEP_KEYS = ['argv', 'linux_output', 'name', 'windows_output']
+LATE_ADMISSION_KEYS = ['deadline_epoch', 'full_R_S_baseline', 'host_launcher_pid', 'started_epoch']
+def translated_windows_path(value):
+ if not isinstance(value,str):raise RuntimeError("Windows path type")
+ q=value.replace(chr(92),"/")
+ if len(q)<3 or q[1:3]!=":/" or not q[0].isalpha() or "/../" in q or q.endswith("/.."):raise RuntimeError("Windows absolute path contract")
+ return "/mnt/"+q[0].lower()+q[2:]
+def validate_contract(v,clock=True):
+ if not isinstance(v,dict):raise RuntimeError("spec object required")
+ wanted=set(REQUIRED_SPEC_KEYS)-(set() if clock else set(LATE_ADMISSION_KEYS))
+ if wanted-set(v):raise RuntimeError("required test spec fields missing")
+ if v["contract_required_spec_keys"]!=REQUIRED_SPEC_KEYS or v["contract_required_step_keys"]!=REQUIRED_STEP_KEYS:raise RuntimeError("required-key contract drift")
+ for win,lin in [("windows_spec","linux_spec"),("windows_run","linux_run"),("windows_stage","linux_stage"),("windows_build_root","linux_build_root"),("windows_goroot","linux_goroot"),("windows_gomodcache","linux_gomodcache"),("windows_target","linux_target"),("windows_artifact","linux_artifact"),("windows_c_proof","linux_c_proof"),("windows_compile_state","linux_compile_state"),("windows_compile_outer","linux_compile_outer")]:
+  if translated_windows_path(v[win])!=v[lin]:raise RuntimeError("exact Windows/Linux path binding: "+win)
+ steps=v["steps"]
+ if not isinstance(steps,list) or len(steps)!=3 or [x.get("name") for x in steps]!=["authcore-case-list","authcore-race-tests","authcore-vet"]:raise RuntimeError("one fixed complete list/body/vet sequence required")
+ expected=[[v["linux_artifact"],"-test.list","."],[v["linux_artifact"],"-test.v","-test.count=1","-test.parallel=1","-test.timeout=8m","-test.run=."],[v["linux_goroot"]+"/bin/go","-C",v["linux_stage"]+"/shared-go/authcore","vet","-mod=readonly","-p=2","./..."]]
+ for x,argv in zip(steps,expected):
+  if not isinstance(x,dict) or set(REQUIRED_STEP_KEYS)-set(x):raise RuntimeError("required step fields missing")
+  if translated_windows_path(x["windows_output"])!=x["linux_output"]:raise RuntimeError("exact step output path binding")
+  if x["argv"]!=argv:raise RuntimeError("fixed test argv contract")
+
+TOP_TESTS=["TestDjangoDefaultLegacyHashers","TestOIDCSignedIdentityPKCEAndSingleUse","TestOIDCRejectsInvalidClaims","TestOAuthRejectsUnboundAndExpiredState","TestFacebookAppScopedTokenValidation","TestReturnPathRejectsExternalRedirect","TestProviderTransportBoundsResponses","TestConfigRequiresHTTPSAndPersistentStore","TestSignupLoginRotationAndLogout","TestCSRFFailsBeforeStoreOrHash","TestSessionExpiryAndUnknownToken","TestProvidersFailClosedWithoutCredentials","TestBoundedBodiesAndRateLimit","TestPasswordDjangoCompatibilityAndWorkBounds","TestExternalIdentityNeverLinksEmail"]
+SUB_TESTS=["TestOIDCRejectsInvalidClaims/nonce","TestOIDCRejectsInvalidClaims/issuer","TestOIDCRejectsInvalidClaims/audience","TestOIDCRejectsInvalidClaims/expired","TestOIDCRejectsInvalidClaims/missing_subject","TestOAuthRejectsUnboundAndExpiredState/missing_cookie","TestOAuthRejectsUnboundAndExpiredState/different_browser","TestOAuthRejectsUnboundAndExpiredState/expired","TestOAuthRejectsUnboundAndExpiredState/wrong_provider","TestFacebookAppScopedTokenValidation/success","TestFacebookAppScopedTokenValidation/other_application","TestFacebookAppScopedTokenValidation/different_subject","TestFacebookAppScopedTokenValidation/expired"]
+def verify_test_output(name,raw):
+ if not isinstance(raw,bytes) or len(raw)>1024**2:raise RuntimeError("bounded raw test stdout required")
+ text=raw.decode("utf-8",errors="strict")
+ if raw and not raw.endswith(b"\n"):raise RuntimeError("truncated stdout terminal newline")
+ lines=text.splitlines()
+ if name=="authcore-case-list":
+  if len(lines)!=15 or sorted(lines)!=sorted(TOP_TESTS):raise RuntimeError("exact complete15 binary test inventory required")
+  return
+ if name=="authcore-vet":
+  if raw!=b"":raise RuntimeError("vet stdout must be empty")
+  return
+ if name!="authcore-race-tests":raise RuntimeError("unknown output step")
+ if not lines or lines[-1]!="PASS" or lines.count("PASS")!=1:raise RuntimeError("complete standalone binary PASS required")
+ started=[];passed=[]
+ for line in lines[:-1]:
+  if line.startswith("=== RUN   "):started.append(line[len("=== RUN   "):])
+  else:
+   match=re.fullmatch(r"\s*--- PASS: (\S+) \([0-9]+(?:\.[0-9]+)?s\)",line)
+   if match:passed.append(match.group(1))
+   else:raise RuntimeError("unexpected/nonpassing/race test output: "+line[:160])
+ expected=TOP_TESTS+SUB_TESTS
+ if len(started)!=28 or sorted(started)!=sorted(expected) or len(passed)!=28 or sorted(passed)!=sorted(expected):raise RuntimeError("exact15+13 full execution coverage required")
+
+def verify_compiled_input(host):
+ state_path=pathlib.Path(spec[host+"_compile_state"]);outer_path=pathlib.Path(spec[host+"_compile_outer"])
+ raw=state_path.read_bytes();outer_raw=outer_path.read_bytes()
+ if hashlib.sha256(raw).hexdigest()!=spec["compile_state_sha256"] or hashlib.sha256(outer_raw).hexdigest()!=spec["compile_outer_sha256"]:raise RuntimeError("qualified compile receipt drift")
+ d=json.loads(raw);o=json.loads(outer_raw)
+ if d["kind"]!="passed" or d["cleanup"]!="owned Linux group confirmed absent" or [x["boundary"] for x in d["full_readset_checks"]]!=["pre","post"] or any(x["protected_files"]!=19010 for x in d["full_readset_checks"]):raise RuntimeError("genuine complete compile proof required")
+ if d.get("all_non_target_protected_exact") is not True or d.get("full_stage_namespace_exact") is not True or d["target_before_sha256"]!=spec["target_before_sha256"] or d["target_after_sha256"]!=spec["target_after_sha256"] or d["parent_inclusive_peak"]>spec["rss_cap"] or d["final_growth"]>spec["growth_cap"]:raise RuntimeError("complete preserved compile protection/cap proof required")
+ if len(d["completed"])!=1 or d["completed"][0]["step"]!="authcore-race-compile" or d["finished_epoch"]>=d["deadline_epoch"]-180:raise RuntimeError("qualified compile completion boundary")
+ c=d["completed"][0]
+ if c["artifact_sha256"]!=spec["artifact_sha256"] or c["artifact_bytes"]!=spec["artifact_bytes"] or o["exit_code"]!=0 or o["state_sha256"]!=spec["compile_state_sha256"] or o["stdout_json"]["kind"]!="PASS" or o["stdout_json"]["completed"]!=1:raise RuntimeError("qualified artifact/outer binding")
+ p=pathlib.Path(spec[host+"_artifact"]);info=p.lstat()
+ if not filemode.S_ISREG(info.st_mode) or info.st_nlink!=1 or getattr(info,"st_file_attributes",0)&0x400 or info.st_size!=spec["artifact_bytes"] or hashlib.sha256(p.read_bytes()).hexdigest()!=spec["artifact_sha256"]:raise RuntimeError("exact original regular compiled binary required")
+ header=p.read_bytes()[:64]
+ if len(header)!=64 or header[:6]!=b"\x7fELF\x02\x01" or int.from_bytes(header[16:18],"little") not in (2,3) or int.from_bytes(header[18:20],"little")!=62:raise RuntimeError("compiled Linux amd64 ELF required")
+
+
+validate_contract(spec)
+if pathlib.Path(spec_path).resolve()!=pathlib.Path(spec["windows_spec"]).resolve():raise RuntimeError("exact Windows actual-spec path mismatch")
+run=pathlib.Path(spec["windows_run"])
+assert not run.exists(),"fresh campaign output exists"
+run.mkdir();(run/"tmp").mkdir();cancel=run/"cancel"
+root=pathlib.Path(spec["windows_R"]); scratch=pathlib.Path(spec["windows_S"])
+GiB=1024**3
+mono_deadline=time.monotonic()+spec["deadline_epoch"]-time.time()
+if spec["deadline_epoch"]-spec["started_epoch"]!=1200: raise RuntimeError("campaign duration drift")
+class MEM(ctypes.Structure):
+ _fields_=[("length",ctypes.c_ulong),("load",ctypes.c_ulong)]+[(x,ctypes.c_ulonglong) for x in ["total","available","totalPage","availablePage","totalVirtual","availableVirtual","extra"]]
+class PMC(ctypes.Structure):
+ _fields_=[("cb",ctypes.c_ulong),("faults",ctypes.c_ulong)]+[(x,ctypes.c_size_t) for x in ["peakWS","WS","peakPaged","paged","peakNonpaged","nonpaged","pagefile","peakPagefile"]]
+kernel=ctypes.WinDLL("kernel32",use_last_error=True);psapi=ctypes.WinDLL("psapi",use_last_error=True)
+kernel.OpenProcess.argtypes=[ctypes.c_ulong,ctypes.c_int,ctypes.c_ulong];kernel.OpenProcess.restype=ctypes.c_void_p
+kernel.CloseHandle.argtypes=[ctypes.c_void_p];psapi.GetProcessMemoryInfo.argtypes=[ctypes.c_void_p,ctypes.POINTER(PMC),ctypes.c_ulong]
+def host_rss(pid,required=True):
+ h=kernel.OpenProcess(0x410,False,pid)
+ if not h:
+  if not required: return 0
+  raise RuntimeError("host RSS process unavailable")
+ try:
+  m=PMC();m.cb=ctypes.sizeof(m);assert psapi.GetProcessMemoryInfo(h,ctypes.byref(m),m.cb)
+  return m.WS
+ finally: kernel.CloseHandle(h)
+def observe_linux_sample(prior,event):
+ values=[event["rss"],event.get("peak",0)]
+ if any(type(x) is not int or x<0 for x in values):raise RuntimeError("invalid Linux RSS telemetry")
+ return max(prior,*values)
+
+def carrier_rss():
+ try: return host_rss(carrier.pid)
+ except (RuntimeError,AssertionError):
+  if carrier.poll() is not None: return 0
+  raise
+def available():
+ m=MEM();m.length=ctypes.sizeof(m);assert kernel.GlobalMemoryStatusEx(ctypes.byref(m));return m.available
+def count():
+ total=0
+ cache=pathlib.Path(spec["linux_gocache"].replace("/mnt/c/","C:/"))
+ mutable=(run/"tmp",cache)
+ boundaries=(root,scratch,cache,pathlib.Path(spec["windows_gomodcache"]),run/"tmp")
+ def directory_type(p):
+  info=p.lstat()
+  if getattr(info,"st_file_attributes",0)&0x400 or stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):raise RuntimeError("accounting directory type/reparse refused: "+str(p))
+ def vanished_transient(p):
+  p=pathlib.Path(p)
+  if carrier is None or carrier.poll() is not None:return False
+  if not any(p!=base and p.is_relative_to(base) for base in mutable):return False
+  try:p.lstat()
+  except FileNotFoundError:return True
+  raise RuntimeError("transient path reappeared during accounting: "+str(p))
+ identities={p:(p.lstat().st_dev,p.lstat().st_ino) for p in boundaries}
+ for p in boundaries:directory_type(p)
+ pending=[root,scratch,cache,pathlib.Path(spec["windows_gomodcache"])]
+ while pending:
+  directory=pathlib.Path(pending.pop())
+  try:
+   directory_type(directory)
+   with os.scandir(directory) as entries:
+    for entry in entries:
+     try:info=entry.stat(follow_symlinks=False)
+     except FileNotFoundError:
+      if vanished_transient(entry.path):continue
+      raise
+     if getattr(info,"st_file_attributes",0)&0x400 or stat.S_ISLNK(info.st_mode):raise RuntimeError("owned reparse input refused: "+entry.path)
+     if stat.S_ISDIR(info.st_mode):pending.append(pathlib.Path(entry.path))
+     elif stat.S_ISREG(info.st_mode):total+=info.st_size
+     else:raise RuntimeError("owned nonregular input refused: "+entry.path)
+  except FileNotFoundError:
+   if vanished_transient(directory):continue
+   raise
+ for p in boundaries:
+  directory_type(p)
+  info=p.lstat()
+  if (info.st_dev,info.st_ino)!=identities[p]:raise RuntimeError("accounting boundary identity drift: "+str(p))
+ return total
+
+def hashfile(p):return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+NAMESPACE_FIELDS=[("windows_goroot","sdk_files","sdk_dirs"),("windows_gomodcache","module_source_files","module_source_dirs")]
+def immutable_namespaces():
+ for root_key,files_key,dirs_key in NAMESPACE_FIELDS:
+  base=pathlib.Path(spec[root_key]);base_info=base.lstat()
+  if filemode.S_ISLNK(base_info.st_mode) or getattr(base_info,"st_file_attributes",0)&0x400 or not filemode.S_ISDIR(base_info.st_mode):raise RuntimeError("immutable source root reparse/type refused")
+  files=set();dirs={"."};pending=[base]
+  while pending:
+   with os.scandir(pending.pop()) as entries:
+    for entry in entries:
+     info=entry.stat(follow_symlinks=False);p=pathlib.Path(entry.path);rel=p.relative_to(base).as_posix()
+     if filemode.S_ISLNK(info.st_mode) or getattr(info,"st_file_attributes",0)&0x400:raise RuntimeError("immutable source reparse/symlink refused: "+entry.path)
+     if filemode.S_ISDIR(info.st_mode):dirs.add(rel);pending.append(p)
+     elif filemode.S_ISREG(info.st_mode):files.add(rel)
+     else:raise RuntimeError("immutable source nonregular refused: "+entry.path)
+  assert files==set(spec[files_key]) and dirs==set(spec[dirs_key]),"complete immutable source namespace drift: "+root_key
+
+full_readset_checks=[]
+def full_pins(after=False):
+ checked_start=time.time()
+ assert hashfile(spec_path)==expected_spec,"spec SHA drift"
+ for path,digest in spec["windows_protected"].items():assert hashfile(path)==digest,path
+ names=set();pending=[pathlib.Path(spec["windows_stage"])]
+ while pending:
+  directory=pending.pop()
+  with os.scandir(directory) as entries:
+   for entry in entries:
+    info=entry.stat(follow_symlinks=False)
+    if getattr(info,"st_file_attributes",0)&0x400 or stat.S_ISLNK(info.st_mode):raise RuntimeError("stage reparse input refused: "+entry.path)
+    if stat.S_ISDIR(info.st_mode):pending.append(pathlib.Path(entry.path))
+    elif stat.S_ISREG(info.st_mode):names.add(str(pathlib.Path(entry.path).relative_to(spec["windows_stage"])).replace("\\","/"))
+    else:raise RuntimeError("stage nonregular refused: "+entry.path)
+ assert names==set(spec["stage_files"]),"full stage namespace drift"
+ immutable_namespaces()
+ assert not (pathlib.Path(spec["windows_stage"])/".cat-content-ops.lock").exists(),"operator lock present"
+ target=pathlib.Path(spec["windows_target"])
+ assert target==pathlib.Path(spec["windows_stage"])/"cat_de_roman_esti/fixtures/quick_games_v92.json"
+ assert hashfile(target)==(spec["target_after_sha256"] if after else spec["target_before_sha256"]),"Quick target pin drift"
+ full_readset_checks.append({"boundary":"post" if after else "pre","started_epoch":checked_start,"finished_epoch":time.time(),"protected_files":len(spec["windows_protected"])})
+def pins(after=False):
+ assert hashfile(spec_path)==expected_spec,"spec SHA drift"
+ excluded=[pathlib.Path(spec[k]) for k in ("windows_goroot","windows_stage","windows_gomodcache")]
+ short={p:d for p,d in spec["windows_protected"].items() if not any(pathlib.Path(p).is_relative_to(base) for base in excluded)}
+ assert len(short)==12,"fixed short protected set"
+ for p,d in short.items():assert hashfile(p)==d,p
+ for rel in ("bin/go","VERSION"):
+  p=pathlib.Path(spec["windows_goroot"])/rel
+  assert hashfile(p)==spec["windows_protected"][str(p)],"short SDK binding pin drift"
+ target=pathlib.Path(spec["windows_target"])
+ assert hashfile(target)==spec["target_after_sha256"]==spec["target_before_sha256"],"Quick target pin drift"
+ assert (pathlib.Path(spec["windows_build_root"])/"telemetry/mode").read_bytes()==b"off 2026-10-09\n","owned telemetry mode drift"
+ assert not (pathlib.Path(spec["windows_stage"])/".cat-content-ops.lock").exists(),"operator lock present"
+MAX_STATE=65536
+STATE_RESERVE=MAX_STATE*2+4096
+def publish(v,failed=False):
+ b=(json.dumps(v,ensure_ascii=False,indent=2)+"\n").encode("utf-8")
+ assert len(b)<=MAX_STATE,"state publication size guard"
+ assert count()-spec["full_R_S_baseline"]+STATE_RESERVE<=spec["growth_cap"],"reserved publication growth guard"
+ assert shutil.disk_usage(root).free-STATE_RESERVE>=16*GiB,"reserved publication disk guard"
+ assert available()>=spec["memory_floor"],"publication memory guard"
+ reserve=0 if failed else 180
+ assert time.time()<spec["deadline_epoch"]-reserve and time.monotonic()<mono_deadline-reserve,"publication deadline guard"
+ p=run/"state.json";tmp=run/"state.part";tmp.write_bytes(b);os.replace(tmp,p)
+ assert count()-spec["full_R_S_baseline"]<=spec["growth_cap"],"post-publication growth guard"
+ assert shutil.disk_usage(root).free>=16*GiB and available()>=spec["memory_floor"],"post-publication resource guard"
+ assert time.time()<spec["deadline_epoch"]-reserve and time.monotonic()<mono_deadline-reserve,"post-publication deadline guard"
+expected_cache="C:/Users/Paul Work/personal_repos/_temp/codex__content-v1-7-qualification/toolbuild-r1"
+if spec["linux_gocache"]!=translated_windows_path(expected_cache+"/gocache") or spec["windows_gomodcache"]!=expected_cache+"/gomodcache":raise RuntimeError("exact additional owned cache roots")
+baseline=spec["full_R_S_baseline"];peak=0;completed=[];carrier=None;events=None;cleanup_status="no child launched"
+def resources(reserve=180,disk_floor=16*GiB):
+ assert not stopping,"cooperative signal"
+ assert time.time()<spec["deadline_epoch"]-reserve and time.monotonic()<mono_deadline-reserve,"immutable metadata reserve guard"
+ assert shutil.disk_usage(root).free>=disk_floor and (disk_floor>16*GiB or shutil.disk_usage(root).free-STATE_RESERVE>=disk_floor) and available()>=spec["memory_floor"],"disk/memory/metadata reserve guard"
+ measured=count();assert measured-baseline+STATE_RESERVE<=spec["growth_cap"],"whole R/S growth/metadata reserve guard"
+ assert not stopping,"cooperative signal after resource count"
+ return measured
+state={"full_readset_checks":full_readset_checks,"kind":"running","started_epoch":spec["started_epoch"],"deadline_epoch":spec["deadline_epoch"],"baseline":baseline,"completed":completed,"rss_scope":"Windows Python controller + native exec PowerShell launcher + owned WSL carrier + Linux supervisor/owned Go process group; Codex source workers excluded."}
+try:
+ assert spec["started_epoch"]<=time.time()
+ resources(195,17*GiB);pins();resources(195,17*GiB);publish(state);resources(195)
+ for index,step in enumerate(spec["steps"]):
+  verify_compiled_input("windows")
+  pins();resources(195);assert pathlib.Path(step["windows_output"]).parent==pathlib.Path(spec["windows_build_root"])/"tools" and not pathlib.Path(step["windows_output"]).exists(),"fresh owned output"
+  assert spec["target_before_sha256"]==spec["target_after_sha256"],"build cannot mutate Quick target"
+  events=queue.Queue(); complete=None;build_output=None;latest=0;last_count=0
+  cleanup_status="owned Linux launch unconfirmed"
+  state.update({"cleanup":cleanup_status,"pending_step":step["name"]});publish(state);full_pins();resources(195)
+  carrier=subprocess.Popen(["wsl.exe","--exec","/usr/bin/python3.14",spec["linux_guard"],spec["linux_spec"],expected_spec,str(index)],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding="utf-8")
+  def read(owned_carrier=carrier):
+   try:
+    for line in owned_carrier.stdout: events.put(json.loads(line))
+   except BaseException as exc: events.put({"kind":"failed","error":"telemetry reader: "+repr(exc)})
+  cleanup_status="owned Linux group unconfirmed";reader=threading.Thread(target=read);reader.start()
+  with (run/(step["name"]+".telemetry.jsonl")).open("w",encoding="utf-8",newline="\n") as stream:
+   while True:
+    assert not stopping,"cooperative signal"
+    while True:
+     try: event=events.get_nowait()
+     except queue.Empty: break
+     stream.write(json.dumps(event,separators=(",",":"))+"\n");stream.flush()
+     if event["kind"]=="sample":latest=observe_linux_sample(latest,event)
+     elif event["kind"]=="complete":complete=event
+     elif event["kind"]=="build-output":build_output=event
+     elif event["kind"]=="failed":raise RuntimeError(event["error"])
+    total=latest+host_rss(os.getpid())+host_rss(spec["host_launcher_pid"])+carrier_rss()
+    peak=max(peak,total)
+    assert total<=spec["rss_cap"] and available()>=spec["memory_floor"],"parent-inclusive RSS or host memory guard"
+    assert time.time()<spec["deadline_epoch"]-180 and time.monotonic()<mono_deadline-180,"metadata reserve guard"
+    if time.monotonic()-last_count>=2:
+     assert shutil.disk_usage(root).free>=16*GiB and count()-baseline<=spec["growth_cap"],"wholeR/S disk/growth guard";last_count=time.monotonic()
+    if carrier.poll() is not None and not reader.is_alive() and events.empty():break
+    time.sleep(.25)
+  reader.join(timeout=3);assert not reader.is_alive();assert carrier.wait()==0 and complete and complete["group_absent"]
+  cleanup_status="owned Linux group confirmed absent"
+  stderr=carrier.stderr.read();(run/(step["name"]+".controller.stderr.log")).write_bytes(stderr.encode("utf-8"))
+  verify_compiled_input("windows");pins(after=True);output=pathlib.Path(step["windows_output"]);assert output.is_file() and 0<=output.stat().st_size<=1024**2,"bounded compile stdout"
+  verify_test_output(step["name"],output.read_bytes())
+  assert (run/(step["name"]+".stderr.log")).read_bytes()==b"" and (run/(step["name"]+".controller.stderr.log")).read_bytes()==b"","no race/test/vet stderr"
+  assert build_output and build_output["step"]==step["name"] and build_output["output_sha256"]==hashfile(output) and build_output["output_bytes"]==output.stat().st_size,"independent Windows/Linux build-output identity"
+  artifact=pathlib.Path(spec["windows_artifact"]);info=artifact.lstat()
+  assert filemode.S_ISREG(info.st_mode) and not getattr(info,"st_file_attributes",0)&0x400 and info.st_nlink==1 and 0<info.st_size<=128*1024**2,"owned bounded binary"
+  header=artifact.read_bytes()[:64];assert len(header)==64 and header[:6]==b"\x7fELF\x02\x01" and int.from_bytes(header[16:18],"little") in (2,3) and int.from_bytes(header[18:20],"little")==62,"Linux amd64 ELF"
+  assert build_output["artifact_sha256"]==hashfile(artifact) and build_output["artifact_bytes"]==info.st_size,"independent artifact identity"
+  data=json.loads(pathlib.Path(spec["windows_target"]).read_text(encoding="utf-8"))
+  assert hashfile(spec["windows_target"])==spec["target_after_sha256"]
+  assert data["kind"]=="quick-content-catalog-v1" and data["candidate_sha256"]==spec["candidate_sha256"]
+  assert len(data["authored"])==85 and data["excluded"]==[]
+  assert {x["role"]:x["reviewer"] for x in data["reviews"]}==spec["reviewer_ids"]
+  assert {x["role"]:x["sha256"] for x in data["reviews"]}==spec["review_hashes"]
+  resources();full_pins(after=True);resources()
+  completed.append({"step":step["name"],"output_sha256":hashfile(step["windows_output"]),"native_peak":complete["native_peak"],"artifact_sha256":hashfile(spec["windows_artifact"]),"artifact_bytes":pathlib.Path(spec["windows_artifact"]).stat().st_size})
+  carrier=None;state.update({"completed":completed,"parent_inclusive_peak":peak,"whole_R_S_bytes":resources(),"cleanup":cleanup_status});publish(state);resources();pins(after=True)
+ resources();pins(after=True)
+ assert [x["boundary"] for x in full_readset_checks]==["pre","post"]*3,"complete readset boundary proof"
+ state.update({"kind":"passed","finished_epoch":time.time(),"parent_inclusive_peak":peak,"final_growth":count()-baseline,"all_non_target_protected_exact":True,"full_stage_namespace_exact":True,"target_before_sha256":spec["target_before_sha256"],"target_after_sha256":spec["target_after_sha256"],"scope":"Same qualified binary full15case inventory,15top+13subtest race execution and full authcore standalone vet; no backend/all-content/release/adoption acceptance.","cleanup":cleanup_status});publish(state);resources();pins(after=True);resources()
+ assert not stopping,"cooperative signal before PASS"
+ print(json.dumps({"kind":"PASS","completed":len(completed),"parent_inclusive_peak":peak,"growth":state["final_growth"]}))
+except BaseException as exc:
+ cancel.write_text("cancel",encoding="utf-8")
+ if carrier is not None and carrier.poll() is None:
+  try:carrier.wait(timeout=12)
+  except subprocess.TimeoutExpired:
+   carrier.terminate();carrier.wait(timeout=5)
+ if events is not None:
+  while not events.empty():
+   event=events.get_nowait()
+   if event.get("kind")!="sample":
+    raw=(json.dumps(event,separators=(",",":"))+"\n").encode("utf-8");cleanup_path=run/"cleanup-events.jsonl"
+    if len(raw)>65536 or (cleanup_path.stat().st_size if cleanup_path.exists() else 0)+len(raw)>1024**2:raise RuntimeError("cleanup event cap")
+    with cleanup_path.open("ab") as cleanup_stream:cleanup_stream.write(raw)
+   if event.get("group_absent") is True:cleanup_status="owned Linux group confirmed absent"
+ state.update({"cleanup":cleanup_status,"kind":"failed","error":repr(exc),"finished_epoch":time.time(),"parent_inclusive_peak":peak,"completed":completed})
+ try:publish(state,failed=True)
+ except BaseException as publication_error:state["failed_publication_error"]=repr(publication_error)
+ print(json.dumps({"kind":"FAILED","error":repr(exc),"completed":len(completed),"cleanup":cleanup_status,"failed_publication_error":state.get("failed_publication_error")}));raise
+
+

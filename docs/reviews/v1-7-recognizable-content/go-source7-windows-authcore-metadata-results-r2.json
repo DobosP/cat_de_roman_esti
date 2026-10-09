@@ -1,0 +1,38 @@
+{
+  "schema": "authcore-metadata-consumer-results-v1",
+  "authored_by": "root transcription of actual tools and direct peer judgments",
+  "producer_review": {
+    "reviewer": "/root/continuation_audit",
+    "decision": "ACCEPT_ACTUAL_PRODUCER_EVIDENCE_ONLY",
+    "frozen_utc": "2026-10-09T10:03:12Z"
+  },
+  "adapter_review": {
+    "reviewer": "/root/continuation_audit",
+    "decision": "ACCEPT_SOURCE_ADAPTER_AND_CONTROL_SOURCE_ONLY",
+    "frozen_utc": "2026-10-09T10:06:23Z",
+    "sha256": "de75d9d69bcb2bb543a9d8fbb2d543a8b1e7c5fbe27a18d22114c5cdfb5d20a8"
+  },
+  "consumer_review": {
+    "reviewer": "/root/continuation_audit",
+    "decision": "ACCEPT_ACTUAL_CONSUMER_INVENTORY_ONLY",
+    "frozen_utc": "2026-10-09T10:08:11Z"
+  },
+  "actual_adapter_tool": "7a931b exit0",
+  "actual_parser_tool": "8f82d2 exit0 observed10:07:41UTC",
+  "inventory_sha256": "7420cde6a9f84b1d4ebe2b7aa1b35b6be83cd1cf203eb5fd28681b6b902c36b6",
+  "objects": 242,
+  "owned_packages": 1,
+  "source_files": 5,
+  "test_files": 3,
+  "actual_binary_cases": null,
+  "test_bodies_executed": false,
+  "V1_7_qualified": false,
+  "original_failed_R1": "unchanged FAILED",
+  "metadata_recorder_failure": {
+    "tool": "ce09ca",
+    "at_utc": "2026-10-09T10:08:53Z",
+    "error": "initial assert current metadata-recording time < substantive cutoff; no output/count before refusal",
+    "disposition": "retain failure, do not claim this recorder passed; successful native producer and independently accepted inventory are separately frozen before cutoff. No source authoring/consumer rerun after cutoff; this is later metadata finalization."
+  },
+  "metadata_recorded_epoch": 1791540620.533998
+}

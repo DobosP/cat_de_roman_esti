@@ -1,0 +1,66 @@
+{
+  "actual_cases_listed": false,
+  "artifact_accepted": false,
+  "error": "Windows count scandir FileNotFoundError at run/tmp/go-build2999242872/b005 after Go removed its transient directory",
+  "next_action": "independently review narrow mutable-Go-accounting repair before a genuinely fresh compile campaign; never rerun unchanged failed controller",
+  "outer_exec_session": 76619,
+  "outer_exit_code": 1,
+  "owned_group_confirmed_absent": true,
+  "post_readset_completed": false,
+  "raw_files": {
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7\\native-authcore-race-compile-actual-admission-r1.json": {
+      "bytes": 2924,
+      "sha256": "825edb5602e2e3171ef5ece40e0cda5e1cb35a09e1995eb84967e4d93e133267"
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7\\native-authcore-race-compile-r1\\run\\authcore-race-compile.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7\\native-authcore-race-compile-r1\\run\\authcore-race-compile.telemetry.jsonl": {
+      "bytes": 63282,
+      "sha256": "2d9a98a71dad14ebd5c6a2c0b4fce1a77d4c6fa0a0a19f89c039137ed32ef319"
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7\\native-authcore-race-compile-r1\\run\\state.json": {
+      "bytes": 758,
+      "sha256": "f90f95f14723609f1561b63183440d93612b0cb661b94ba2add14f7d35cef728"
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7\\native-authcore-race-compile-r1\\tools\\authcore-race.test": {
+      "bytes": 16962965,
+      "sha256": "06e480bc67d1d166261c261d47980cb46745f922fb5c2c8bc946538af5edd013"
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7\\native-authcore-race-compile-r1\\tools\\compile.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7\\probe\\native-authcore-race-compile-spec-r1.json": {
+      "bytes": 8568482,
+      "sha256": "8be631391fa742782686a2d6f6c2f92d23829bc5f9ed458dc93a868ab63668fc"
+    }
+  },
+  "recorded_epoch": 1791542441.499353,
+  "schema": "native-authcore-race-compile-failure-v1",
+  "source_RSS": "unmeasured",
+  "state": {
+    "baseline": 1793580496,
+    "cleanup": "owned Linux group confirmed absent",
+    "completed": [],
+    "deadline_epoch": 1791543077.4991403,
+    "error": "FileNotFoundError(2, 'The system cannot find the path specified')",
+    "finished_epoch": 1791542169.8297935,
+    "full_readset_checks": [
+      {
+        "boundary": "pre",
+        "finished_epoch": 1791542040.2672186,
+        "protected_files": 19010,
+        "started_epoch": 1791542032.1983142
+      }
+    ],
+    "kind": "failed",
+    "parent_inclusive_peak": 464265216,
+    "pending_step": "authcore-race-compile",
+    "rss_scope": "Windows Python controller + native exec PowerShell launcher + owned WSL carrier + Linux supervisor/owned Go process group; Codex source workers excluded.",
+    "started_epoch": 1791541877.4991403
+  },
+  "test_bodies_executed": false,
+  "valid_until": "permanent failed history, never promote"
+}

@@ -1,0 +1,151 @@
+{
+  "schema": "native-documentation-checkpoint-evidence-v1",
+  "valid_until": "Bounded tool/docs/method/input change, then history",
+  "scope": "Documentation/checkpoint only; no backend/content/release/adoption acceptance",
+  "source_review": {
+    "reviewer": "/root/continuation_audit",
+    "decision": "ACCEPT_SINGLE_DOCS_GUARD_SOURCE_ONLY",
+    "frozen_utc": "2026-10-09T11:51:31Z"
+  },
+  "actual_review": {
+    "reviewer": "/root/continuation_audit",
+    "decision": "ACCEPT_ACTUAL_SINGLE_DOCS_GATE_EVIDENCE_ONLY",
+    "frozen_utc": "2026-10-09T11:53:02Z",
+    "all531pins_freshly_rehashed_exact": true,
+    "independent_cim_absence_utc": "2026-10-09T11:52:49.793Z",
+    "absent_pids": [
+      42472,
+      32436,
+      44204
+    ],
+    "fresh_total": 2445495487,
+    "fresh_growth": 651914991,
+    "anchor": 1793580496,
+    "free_disk": 19337584640,
+    "available_windows": 25766875136
+  },
+  "native_result": {
+    "kind": "PASS",
+    "scope": "ONE existing source-exact Windows documentation checker only",
+    "started_epoch": 1791545958.0173743,
+    "deadline_epoch": 1791547158.0173743,
+    "finished_epoch": 1791546715.593386,
+    "before_bytes": 2445493671,
+    "after_bytes": 2445493762,
+    "anchor": 1793580496,
+    "growth": 651913266,
+    "parent_inclusive_sampled_peak": 31375360,
+    "rss_scope": "controller + actual PowerShell parent + observed native checker/Git descendants; short-lived processes may fall between samples; source Codex workers excluded",
+    "observed_owned_pids": {
+      "42472": 1791546714.3078337
+    },
+    "all_observed_owned_processes_absent": true,
+    "report": {
+      "files": 59,
+      "dead_links": [],
+      "stale_terms": [],
+      "retired_verbs": [],
+      "orphans": [],
+      "budgets": []
+    },
+    "tool_sha256": "ef10dd674639a612e95fb17446c20bd3c4bffd7d8c592c4849f195e8afc936af",
+    "spec_sha256": "5c596884bc9c4dea689d874b2b09d7d84676106fd0b0a4154003f4f53577bba1",
+    "stdout_sha256": "eb7cea2f02031d8e6d85ccd479143779f3ab0ab9a1c5901582a46ac6979b6ff3",
+    "samples": [
+      {
+        "epoch": 1791546714.015304,
+        "rss": 28659712,
+        "pid_rss": {
+          "32436": 22790144,
+          "44204": 5869568
+        }
+      },
+      {
+        "epoch": 1791546714.3408206,
+        "rss": 31375360,
+        "pid_rss": {
+          "32436": 22970368,
+          "44204": 5869568,
+          "42472": 2535424
+        }
+      },
+      {
+        "epoch": 1791546715.5898573,
+        "rss": 29736960,
+        "pid_rss": {
+          "32436": 23867392,
+          "44204": 5869568
+        }
+      }
+    ],
+    "trusted_boundary": "existing Windows/Python/psutil/Git runtime DLLs, remaining repository-local Git config and OS; fsmonitor explicitly disabled; no whole-OS hermetic claim"
+  },
+  "root_observed_outer_exit_code": 0,
+  "rejected_drafts_retained": {
+    "R1": "Optimization/signal/publication/bounds/timeout/identity/boundary/localfsmonitor gaps; never executed.",
+    "R2": "Separate spec hash/parse reads, missing pending-signal check after publish, terminal file collisions; never executed."
+  },
+  "negative_source_fixture": "R2 -O invocation refused before fake-spec lookup or mutation; observed exit1 expected optimization refusal.",
+  "archive_sha256": "6194ae642d77df596228c960f832ad782044ec392c60f9dfa9192ddb09d63a8a",
+  "archive_bytes": 94337,
+  "archive_all_members_readback_exact": true,
+  "members": [
+    {
+      "path": "probe/native-docs-windows-r1.py",
+      "bytes": 5440,
+      "sha256": "6a4c5cb8a7d087f598a0a723f588741c39d9488372e2c9fa0b31885f2d6c04ef"
+    },
+    {
+      "path": "probe/native-docs-windows-r2.py",
+      "bytes": 7331,
+      "sha256": "b8554b1847c5f6b7e1614e971e5ef7bc87c8b7963e4ef9a965f128eaa3dfe615"
+    },
+    {
+      "path": "probe/native-docs-windows-r3.py",
+      "bytes": 7873,
+      "sha256": "73502f5b0ed9fbe40d34f258e793b22dc709b93d77562755422364c22663d8ee"
+    },
+    {
+      "path": "probe/native-docs-spec-r1.json",
+      "bytes": 118481,
+      "sha256": "498b53c1ca459ac7d248a4343383b372a1b1f4b6f578b9394fcf7d1ba7a063ea"
+    },
+    {
+      "path": "probe/native-docs-spec-r2.json",
+      "bytes": 118835,
+      "sha256": "844e9740f39261ad9703153273fc158d572b0e4e688593866abc2ea16547eb87"
+    },
+    {
+      "path": "probe/native-docs-spec-r3.json",
+      "bytes": 119009,
+      "sha256": "5c596884bc9c4dea689d874b2b09d7d84676106fd0b0a4154003f4f53577bba1"
+    },
+    {
+      "path": "current-rail-source-admission-r1.json",
+      "bytes": 1187,
+      "sha256": "3c1dbeb19324514b4d892abb0ec2ef08553619738edbfed0e0de80431936e6da"
+    },
+    {
+      "path": "native-docs-checkpoint-r1/result.json",
+      "bytes": 1725,
+      "sha256": "0bec76651c4c41c69fc8720983a6f27f82ccd556cbccfb1e0d7b1828c1c64c32"
+    },
+    {
+      "path": "native-docs-checkpoint-r1/stdout.json",
+      "bytes": 91,
+      "sha256": "eb7cea2f02031d8e6d85ccd479143779f3ab0ab9a1c5901582a46ac6979b6ff3"
+    },
+    {
+      "path": "native-docs-checkpoint-r1/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "metadata_finished_epoch": 1791546851.7897363,
+  "qualifications": [
+    "Sampled RSS can miss short-lived processes/true peaks; absence covers observed identities only.",
+    "Source Codex worker RSS unmeasured; Windows/Python/psutil/Git DLLs and remaining local Git config trusted.",
+    "Native result pre-publication growth excludes its1725B; independent post-publication accounting includes it within192KiB reserve.",
+    "No failed history rewritten; no tool rebuild/download occurred."
+  ]
+}
